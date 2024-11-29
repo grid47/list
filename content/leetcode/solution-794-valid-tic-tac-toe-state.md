@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "5IGbZyPgjP0"
 youtube_upload_date="2024-07-10"
 youtube_thumbnail="https://i.ytimg.com/vi/5IGbZyPgjP0/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,82 +28,70 @@ youtube_thumbnail="https://i.ytimg.com/vi/5IGbZyPgjP0/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a Tic-Tac-Toe board represented as a 3x3 string array, return true if and only if this board could have been reached during a valid Tic-Tac-Toe game. In a valid game, players alternate placing 'X' and 'O' characters into empty spaces. 'X' always goes first, and no player can move after the game has ended.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 3x3 Tic-Tac-Toe board represented as a string array where each element in the array is a string of length 3.
+- **Example:** `board = ['XOX', ' O ', '   ']`
+- **Constraints:**
+	- board.length == 3
+	- board[i].length == 3
+	- board[i][j] is either 'X', 'O', or ' ' (empty space).
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool validTicTacToe(vector<string>& board) {
-        bool xwin = false, owin = false;
-        vector<int> rows(3, 0), cols(3, 0);
-        int diag = 0, antidiag = 0, turns = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a boolean value indicating whether the given board configuration could be reached during a valid game.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be either true or false.
 
-        for(int i = 0; i < 3; i++)
-        for(int j = 0; j < 3; j++) {
-            if(board[i][j] == 'X') {
-                turns++, cols[j]++, rows[i]++;
-                if(i == j) diag++;
-                if(i + j == 2) antidiag++;
-            } else if(board[i][j] == 'O') {
-                turns--, cols[j]--, rows[i]--;
-                if(i == j) diag--;
-                if(i + j == 2) antidiag--;
-            }      
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if the given Tic-Tac-Toe board is a valid position during a game, respecting the rules of turn order and winning conditions.
 
-        xwin =  rows[0] == 3 || cols[0] == 3 || 
-                rows[1] == 3 || cols[1] == 3 ||
-                rows[2] == 3 || cols[2] == 3 ||
-                diag == 3 || antidiag == 3;
-        owin =  rows[0] == -3 || cols[0] == -3 || 
-                rows[1] == -3 || cols[1] == -3 ||
-                rows[2] == -3 || cols[2] == -3 ||
-                diag == -3 || antidiag == -3;
+- Count the number of 'X' and 'O' characters on the board.
+- Check if a player has won. A player wins if they have three of their symbols in a row, column, or diagonal.
+- Ensure that the number of 'X's is either equal to or one more than the number of 'O's.
+- If a player has won, check that the game is consistent with turn order (i.e., 'X' should not have won before 'O' had a chance to play).
+{{< dots >}}
+### Problem Assumptions ✅
+- The board is a 3x3 grid.
+- Players alternate placing 'X' and 'O' with 'X' going first.
+- No more moves can be made after the game has ended.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: board = ['XOX', ' O ', '   ']`  \
+  **Explanation:** This board configuration is invalid because 'O' should not have played after 'X' placed their 'X'. 'X' should always play first.
 
-        if(xwin && turns == 0 || owin && turns == 1)
-            return false;
-        
-        return (turns == 0 || turns == 1) && (!xwin || !owin);
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `Input: board = ['XOX', ' X ', '   ']`  \
+  **Explanation:** This board configuration is valid because the count of 'X' is one more than the count of 'O', and no one has won yet.
 
-### Problem Statement
-In this problem, we are given a Tic-Tac-Toe board represented by a 3x3 grid of characters. The objective is to determine whether the given board configuration is valid according to the rules of Tic-Tac-Toe. In a valid board, 'X' and 'O' alternately mark their moves, with the following rules:
+- **Input:** `Input: board = ['XOX', 'O O', 'XOX']`  \
+  **Explanation:** This board configuration is valid because the game ended with no inconsistencies between turn order and the game status.
 
-1. The game starts with player 'X' making the first move.
-2. A player wins by having three of their marks in a row, column, or diagonal.
-3. The game can end in a draw if all squares are filled without any player winning.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to simulate the sequence of moves and verify the rules governing the game, including turn order and the winning condition.
 
-We need to validate whether the given board represents a possible configuration of a Tic-Tac-Toe game. The board may not necessarily represent a completed game, so we also need to consider whether the number of moves made is consistent with the game's rules.
-
-### Approach
-To solve this problem, we need to validate the board using the following observations:
-
-1. The number of 'X's should always be equal to or one greater than the number of 'O's. This is because 'X' always goes first.
-2. If a player wins, the other player should not have made their move after the win.
-3. Both players cannot win simultaneously, as only one player can win the game.
-
-### Code Breakdown (Step by Step)
-The code provided uses a few key components to check the board's validity. Let's break it down step by step.
-
-#### Step 1: Initialize Variables
-We begin by initializing a few boolean flags, arrays, and counters:
+### Initial Thoughts 💭
+- We need to check both the count of 'X' and 'O' characters and ensure that a player can only win if it's their turn.
+- It's important to ensure that the board configuration is consistent with the rules of the game before determining if it's valid.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty board should not be considered a valid configuration.
+- Since the board is always a 3x3 grid, no consideration for large inputs is needed.
+- Check if the board configuration includes a winning state and that no further moves are possible after that.
+- Ensure the input follows the constraint that the board is a 3x3 grid.
+{{< dots >}}
+## Code 💻
 ```cpp
-bool xwin = false, owin = false;
-vector<int> rows(3, 0), cols(3, 0);
-int diag = 0, antidiag = 0, turns = 0;
-```
-- `xwin` and `owin`: These flags keep track of whether 'X' or 'O' has won the game.
-- `rows` and `cols`: These vectors hold the count of 'X's and 'O's in each row and column, respectively.
-- `diag` and `antidiag`: These counters track the diagonals (from top-left to bottom-right and top-right to bottom-left).
-- `turns`: This counter keeps track of how many 'X' and 'O' moves have been made.
+bool validTicTacToe(vector<string>& board) {
+    bool xwin = false, owin = false;
+    vector<int> rows(3, 0), cols(3, 0);
+    int diag = 0, antidiag = 0, turns = 0;
 
-#### Step 2: Iterate Through the Board
-Next, we loop over each position on the board:
-```cpp
-for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 3; i++)
     for(int j = 0; j < 3; j++) {
         if(board[i][j] == 'X') {
             turns++, cols[j]++, rows[i]++;
@@ -112,54 +101,196 @@ for(int i = 0; i < 3; i++)
             turns--, cols[j]--, rows[i]--;
             if(i == j) diag--;
             if(i + j == 2) antidiag--;
-        }
+        }      
     }
-```
-- We iterate over the 3x3 grid and check each cell to determine whether it is 'X' or 'O'.
-- For each 'X', we increment `turns` and update the row, column, diagonal, and anti-diagonal counters.
-- For each 'O', we decrement `turns` and update the counters similarly.
 
-#### Step 3: Check for Wins
-After updating the counters, we check if either 'X' or 'O' has won the game. A win is determined if any row, column, or diagonal contains three of the same marks (either 'X' or 'O').
-```cpp
-xwin =  rows[0] == 3 || cols[0] == 3 || 
-        rows[1] == 3 || cols[1] == 3 ||
-        rows[2] == 3 || cols[2] == 3 ||
-        diag == 3 || antidiag == 3;
-owin =  rows[0] == -3 || cols[0] == -3 || 
-        rows[1] == -3 || cols[1] == -3 ||
-        rows[2] == -3 || cols[2] == -3 ||
-        diag == -3 || antidiag == -3;
-```
-- `xwin`: Set to `true` if any row, column, or diagonal contains three 'X's.
-- `owin`: Set to `true` if any row, column, or diagonal contains three 'O's.
+    xwin =  rows[0] == 3 || cols[0] == 3 || 
+            rows[1] == 3 || cols[1] == 3 ||
+            rows[2] == 3 || cols[2] == 3 ||
+            diag == 3 || antidiag == 3;
+    owin =  rows[0] == -3 || cols[0] == -3 || 
+            rows[1] == -3 || cols[1] == -3 ||
+            rows[2] == -3 || cols[2] == -3 ||
+            diag == -3 || antidiag == -3;
 
-#### Step 4: Validate the Game Rules
-Now that we know whether either player has won, we validate the board based on the following conditions:
-
-1. If 'X' wins, the number of 'X's must be one more than the number of 'O's (since 'X' moves first).
-2. If 'O' wins, the number of 'X's must be equal to the number of 'O's.
-3. Both players cannot win simultaneously.
-4. The game must not have too many or too few moves for the players.
-
-The following checks ensure that these conditions are met:
-```cpp
-if(xwin && turns == 0 || owin && turns == 1)
-    return false;
+    if(xwin && turns == 0 || owin && turns == 1)
+        return false;
     
-return (turns == 0 || turns == 1) && (!xwin || !owin);
+    return (turns == 0 || turns == 1) && (!xwin || !owin);
+}
 ```
-- If 'X' has won but the number of 'X' moves is not exactly one greater than the number of 'O' moves, or if 'O' has won but the number of 'X' moves is not equal to the number of 'O' moves, we return `false`.
-- Finally, we ensure that the number of moves is valid (either 0 or 1 turn difference between 'X' and 'O'), and that only one player has won (or neither).
 
-### Complexity
-The time complexity of this solution is O(1) because we are simply iterating over a fixed-size 3x3 board, which takes constant time. Therefore, the solution is highly efficient and operates in constant time.
+This function checks if a given Tic-Tac-Toe board configuration is valid based on the game rules, considering the number of turns and possible winning conditions for both players (X and O).
 
-- **Time Complexity**: O(1), as we always process 9 cells regardless of the input.
-- **Space Complexity**: O(1), as we are using a constant amount of extra space to store the counters and flags.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool validTicTacToe(vector<string>& board) {
+	```
+	This line defines the function 'validTicTacToe', which takes a 3x3 board as input and returns a boolean indicating whether the board configuration is valid.
 
-### Conclusion
-This code provides an efficient solution for validating the state of a Tic-Tac-Toe board. By using counters for rows, columns, and diagonals, we can easily determine if the board configuration is valid, whether one player has won, and if the number of moves is correct. The solution adheres to the rules of the game and ensures that no invalid configurations are accepted, making it both concise and efficient.
+2. **Variable Initialization**
+	```cpp
+	    bool xwin = false, owin = false;
+	```
+	This line initializes two boolean variables, 'xwin' and 'owin', which will track whether player X or player O has won the game.
+
+3. **Variable Initialization**
+	```cpp
+	    vector<int> rows(3, 0), cols(3, 0);
+	```
+	This initializes two vectors of size 3, 'rows' and 'cols', both set to 0. These vectors will track the sum of marks (X or O) in each row and column.
+
+4. **Variable Initialization**
+	```cpp
+	    int diag = 0, antidiag = 0, turns = 0;
+	```
+	This initializes three variables: 'diag' for tracking the diagonal sum, 'antidiag' for the anti-diagonal sum, and 'turns' for counting the number of turns taken.
+
+5. **Looping through Board**
+	```cpp
+	    for(int i = 0; i < 3; i++)
+	```
+	This outer loop iterates over the rows of the board.
+
+6. **Looping through Board**
+	```cpp
+	    for(int j = 0; j < 3; j++) {
+	```
+	This inner loop iterates over the columns of the board.
+
+7. **Condition Check (X)**
+	```cpp
+	        if(board[i][j] == 'X') {
+	```
+	This checks if the current cell contains the 'X' symbol.
+
+8. **Update Counters (X)**
+	```cpp
+	            turns++, cols[j]++, rows[i]++;
+	```
+	This increments the turn count and updates the row and column counters for player X.
+
+9. **Update Counters (Diagonal)**
+	```cpp
+	            if(i == j) diag++;
+	```
+	This checks if the current cell is on the main diagonal (i == j) and increments the 'diag' counter if true.
+
+10. **Update Counters (Anti-Diagonal)**
+	```cpp
+	            if(i + j == 2) antidiag++;
+	```
+	This checks if the current cell is on the anti-diagonal (i + j == 2) and increments the 'antidiag' counter if true.
+
+11. **Condition Check (O)**
+	```cpp
+	        } else if(board[i][j] == 'O') {
+	```
+	This checks if the current cell contains the 'O' symbol.
+
+12. **Update Counters (O)**
+	```cpp
+	            turns--, cols[j]--, rows[i]--;
+	```
+	This decrements the turn count and updates the row and column counters for player O.
+
+13. **Update Counters (Diagonal)**
+	```cpp
+	            if(i == j) diag--;
+	```
+	This checks if the current cell is on the main diagonal (i == j) and decrements the 'diag' counter if true.
+
+14. **Update Counters (Anti-Diagonal)**
+	```cpp
+	            if(i + j == 2) antidiag--;
+	```
+	This checks if the current cell is on the anti-diagonal (i + j == 2) and decrements the 'antidiag' counter if true.
+
+15. **Check for X Win**
+	```cpp
+	    xwin =  rows[0] == 3 || cols[0] == 3 || 
+	```
+	This checks if player X has won by checking if any row, column, or diagonal has a sum of 3.
+
+16. **Check for X Win**
+	```cpp
+	            rows[1] == 3 || cols[1] == 3 ||
+	```
+	Continues checking for player X's win.
+
+17. **Check for X Win**
+	```cpp
+	            rows[2] == 3 || cols[2] == 3 ||
+	```
+	Continues checking for player X's win.
+
+18. **Check for X Win**
+	```cpp
+	            diag == 3 || antidiag == 3;
+	```
+	Final check for player X's win.
+
+19. **Check for O Win**
+	```cpp
+	    owin =  rows[0] == -3 || cols[0] == -3 || 
+	```
+	This checks if player O has won by checking if any row, column, or diagonal has a sum of -3.
+
+20. **Check for O Win**
+	```cpp
+	            rows[1] == -3 || cols[1] == -3 ||
+	```
+	Continues checking for player O's win.
+
+21. **Check for O Win**
+	```cpp
+	            rows[2] == -3 || cols[2] == -3 ||
+	```
+	Continues checking for player O's win.
+
+22. **Check for O Win**
+	```cpp
+	            diag == -3 || antidiag == -3;
+	```
+	Final check for player O's win.
+
+23. **Return Invalid Game Configuration**
+	```cpp
+	    if(xwin && turns == 0 || owin && turns == 1)
+	```
+	This checks if there is an invalid game configuration, where both players win or the number of turns is incorrect.
+
+24. **Return Validity**
+	```cpp
+	        return false;
+	```
+	If the game configuration is invalid, return false.
+
+25. **Return Validity**
+	```cpp
+	    return (turns == 0 || turns == 1) && (!xwin || !owin);
+	```
+	This ensures the game configuration is valid by verifying the correct number of turns and no simultaneous wins.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), as the board size is fixed and we only need to make a few checks.
+- **Average Case:** O(1), since we always process the same fixed-size 3x3 grid.
+- **Worst Case:** O(1), as the problem always involves a fixed-size board and does not scale with input size.
+
+The time complexity is constant because the board size is always 3x3.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as the space required does not depend on input size.
+- **Worst Case:** O(1), as we are using a fixed amount of space to store counts and flags.
+
+The space complexity is constant because we only need a small, fixed amount of space for variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-tic-tac-toe-state/description/)
 

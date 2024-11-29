@@ -14,139 +14,213 @@ img_src = ""
 youtube = "ksN__viaDFs"
 youtube_upload_date="2021-05-09"
 youtube_thumbnail="https://i.ytimg.com/vi/ksN__viaDFs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two non-increasing 0-indexed integer arrays `nums1` and `nums2`. A pair of indices `(i, j)` is valid if both `i <= j` and `nums1[i] <= nums2[j]`. The distance of the pair is `j - i`. You need to return the maximum distance of any valid pair `(i, j)`. If there are no valid pairs, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two non-increasing 0-indexed integer arrays `nums1` and `nums2`.
+- **Example:** `[50,30,5,4,1], [100,20,10,10,5]`
+- **Constraints:**
+	- 1 <= nums1.length, nums2.length <= 10^5
+	- 1 <= nums1[i], nums2[j] <= 10^5
+	- Both nums1 and nums2 are non-increasing arrays.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxDistance(vector<int>& nums1, vector<int>& nums2) {
-        int ans = 0;
-        for(int i = 0; i < nums1.size(); i++) {
-                
-                int l = i, r = nums2.size() - 1, j = i;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum distance of any valid pair `(i, j)`.
+- **Example:** `2`
+- **Constraints:**
 
-                int target = nums1[i]; // find larget index which satisfies target <= nums[i]
-            
-                while(l <= r) {
-                    int mid = l + (r - l + 1) / 2;
-                    
-                    if(target < nums2[mid]) {
-                        j = mid;
-                        l = mid + 1;
-                    } else if(target > nums2[mid]) {
-                        r = mid - 1;
-                    } else if(target == nums2[mid]) {
-                        j = mid;
-                        l = mid + 1;
-                    }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum distance between valid pairs where `i <= j` and `nums1[i] <= nums2[j]`.
 
-                }
-                // cout << j - i;
-                
-                ans = max(ans, j - i);
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+- Use a two-pointer or binary search approach to efficiently find the maximum distance.
+- For each element in `nums1`, use binary search or a pointer to find the largest index `j` where `nums2[j]` is greater than or equal to `nums1[i]`.
+- Track the maximum distance `j - i`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays will always follow the given constraints of being non-increasing.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[50,30,5,4,1], [100,20,10,10,5]`  \
+  **Explanation:** The valid pairs are `(0,0)`, `(2,2)`, `(2,3)`, `(2,4)`, `(3,3)`, `(3,4)`, and `(4,4)`. The pair `(2,4)` has the maximum distance, which is `2`.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+To solve this problem, a binary search or two-pointer technique can be used to find the largest valid distance between pairs from `nums1` and `nums2`.
 
-The problem at hand is to find the maximum distance between two indices \(i\) and \(j\) such that \(i\) is from the first array `nums1` and \(j\) is from the second array `nums2`, given the condition that the element at `nums1[i]` must be less than or equal to the element at `nums2[j]`. The goal is to determine the largest possible value of \(j - i\).
-
-### Approach
-
-To tackle this problem efficiently, we will leverage a binary search technique. The idea is to iterate through each element in `nums1`, and for each element, we will use binary search on `nums2` to find the largest index \(j\) such that `nums1[i] <= nums2[j]`. By maintaining a record of the maximum distance \(j - i\), we can arrive at the solution without having to resort to a brute-force method that would be less efficient.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: We start by defining a class named `Solution`, which contains our main method.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: The method `maxDistance` takes two vectors of integers as input and returns an integer representing the maximum distance found.
-
-    ```cpp
-    int maxDistance(vector<int>& nums1, vector<int>& nums2) {
-    ```
-
-3. **Initialization**: We initialize a variable `ans` to store the maximum distance found throughout the iterations.
-
-    ```cpp
+### Initial Thoughts 💭
+- We need to find a valid pair `(i, j)` where `nums1[i] <= nums2[j]` and `i <= j`.
+- The problem can be solved efficiently using binary search or a two-pointer technique to avoid checking each pair explicitly.
+{{< dots >}}
+### Edge Cases 🌐
+- The input arrays will always contain at least one element.
+- The solution must handle large inputs efficiently, as `nums1.length` and `nums2.length` can go up to 10^5.
+- Consider cases where the arrays have only one element.
+- Ensure that the solution can handle the non-increasing nature of the arrays.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxDistance(vector<int>& nums1, vector<int>& nums2) {
     int ans = 0;
-    ```
-
-4. **Iterate Through `nums1`**: We use a for loop to iterate through each index \(i\) of `nums1`.
-
-    ```cpp
     for(int i = 0; i < nums1.size(); i++) {
-    ```
+            
+            int l = i, r = nums2.size() - 1, j = i;
 
-5. **Binary Search Setup**: For each index \(i\), we set up variables for a binary search. Here, `l` is initialized to the current index \(i\), `r` is set to the last index of `nums2`, and `j` is also initialized to \(i\).
+            int target = nums1[i]; // find largest index which satisfies target <= nums[i]
+        
+            while(l <= r) {
+                int mid = l + (r - l + 1) / 2;
+                
+                if(target < nums2[mid]) {
+                    j = mid;
+                    l = mid + 1;
+                } else if(target > nums2[mid]) {
+                    r = mid - 1;
+                } else if(target == nums2[mid]) {
+                    j = mid;
+                    l = mid + 1;
+                }
 
-    ```cpp
-    int l = i, r = nums2.size() - 1, j = i;
-    ```
-
-6. **Target Element**: We define a variable `target` that holds the value of the current element in `nums1` that we want to compare against the elements in `nums2`.
-
-    ```cpp
-    int target = nums1[i]; // Find the largest index which satisfies target <= nums2[j]
-    ```
-
-7. **Binary Search Logic**: We perform a binary search within the bounds of `l` and `r`. The goal is to find the largest index \(j\) where `nums2[j]` is greater than or equal to `target`.
-
-    ```cpp
-    while(l <= r) {
-        int mid = l + (r - l + 1) / 2; // Calculate mid index
-    ```
-
-8. **Comparison Conditions**: Inside the binary search, we compare `target` with `nums2[mid]`:
-    - If `target < nums2[mid]`, it means we might have a valid \(j\), so we update `j` to `mid` and move the left bound up.
-    - If `target > nums2[mid]`, we move the right bound down, since we need a larger element.
-    - If they are equal, we still update `j` to `mid` and move the left bound up, searching for a potentially larger index.
-
-    ```cpp
-    if(target < nums2[mid]) {
-        j = mid; // Update j to mid
-        l = mid + 1; // Move left bound up
-    } else if(target > nums2[mid]) {
-        r = mid - 1; // Move right bound down
-    } else if(target == nums2[mid]) {
-        j = mid; // Update j to mid
-        l = mid + 1; // Move left bound up
+            }
+            // cout << j - i;
+            
+            ans = max(ans, j - i);
     }
-    ```
-
-9. **Update Maximum Distance**: After exiting the binary search, we calculate the distance \(j - i\) and update `ans` if this new distance is greater than the current maximum.
-
-    ```cpp
-    ans = max(ans, j - i);
-    ```
-
-10. **Return Result**: After iterating through all indices of `nums1`, we return the maximum distance found.
-
-    ```cpp
     return ans;
-    }
-    ```
+}
+```
 
-### Complexity
+This function finds the maximum distance between indices i and j of two arrays, `nums1` and `nums2`, where `nums1[i] <= nums2[j]`. The approach uses binary search to find the largest valid `j` for each `i` in `nums1`.
 
-The time complexity of this solution is \(O(n \log m)\), where \(n\) is the length of `nums1` and \(m\) is the length of `nums2`. This complexity arises from iterating through each element of `nums1` and performing a binary search on `nums2`. The space complexity is \(O(1)\) since we are using a fixed number of additional variables regardless of the input size.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxDistance(vector<int>& nums1, vector<int>& nums2) {
+	```
+	Defines the function `maxDistance` which takes two input vectors `nums1` and `nums2`.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes the variable `ans` to store the maximum distance found, starting with a value of 0.
 
-In conclusion, this implementation efficiently finds the maximum distance between indices in two arrays under a specific condition using a combination of a for loop and binary search. By ensuring that we only check relevant elements in `nums2` for each element in `nums1`, we optimize the process and avoid unnecessary comparisons. This method demonstrates the effectiveness of binary search in solving problems involving sorted data, yielding a solution that is both optimal and elegant. As a result, this code is a practical example of algorithm design that leverages efficient searching techniques to achieve a desired outcome in a computationally feasible manner.
+3. **Looping**
+	```cpp
+	    for(int i = 0; i < nums1.size(); i++) {
+	```
+	Starts a loop to iterate through each element `i` of the `nums1` array.
+
+4. **Variable Initialization**
+	```cpp
+	            int l = i, r = nums2.size() - 1, j = i;
+	```
+	Initializes variables `l` (left pointer) to `i`, `r` (right pointer) to the last index of `nums2`, and `j` (the index of the largest valid `nums2` element) to `i`.
+
+5. **Variable Assignment**
+	```cpp
+	            int target = nums1[i]; // find largest index which satisfies target <= nums1[i]
+	```
+	Sets `target` to `nums1[i]`, which is the current element from `nums1` that we need to find a match for in `nums2`.
+
+6. **Looping**
+	```cpp
+	            while(l <= r) {
+	```
+	Starts a while loop to perform binary search on `nums2`.
+
+7. **Variable Calculation**
+	```cpp
+	                int mid = l + (r - l + 1) / 2;
+	```
+	Calculates the middle index `mid` for the binary search range [l, r].
+
+8. **Conditional Check**
+	```cpp
+	                if(target < nums2[mid]) {
+	```
+	Checks if the current target from `nums1` is less than the value at `nums2[mid]`.
+
+9. **Variable Update**
+	```cpp
+	                    j = mid;
+	```
+	Updates `j` to `mid` because we found a larger value that satisfies `target <= nums2[mid]`.
+
+10. **Variable Update**
+	```cpp
+	                    l = mid + 1;
+	```
+	Moves the left pointer `l` to the right of `mid` to continue searching for a larger index.
+
+11. **Conditional Check**
+	```cpp
+	                } else if(target > nums2[mid]) {
+	```
+	Checks if the current target is greater than `nums2[mid]`.
+
+12. **Variable Update**
+	```cpp
+	                    r = mid - 1;
+	```
+	Moves the right pointer `r` to the left of `mid` since `nums2[mid]` is too large.
+
+13. **Conditional Check**
+	```cpp
+	                } else if(target == nums2[mid]) {
+	```
+	Checks if the current target is equal to `nums2[mid]`.
+
+14. **Variable Update**
+	```cpp
+	                    j = mid;
+	```
+	Updates `j` to `mid` since we found an exact match for `target`.
+
+15. **Variable Update**
+	```cpp
+	                    l = mid + 1;
+	```
+	Moves the left pointer `l` to the right to continue searching for larger valid indices.
+
+16. **Variable Update**
+	```cpp
+	            ans = max(ans, j - i);
+	```
+	Updates `ans` with the maximum distance found between `i` and `j`.
+
+17. **Return**
+	```cpp
+	    return ans;
+	```
+	Returns the maximum distance found between indices from `nums1` and `nums2`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) in the worst case, where n is the length of the input arrays, due to binary search or two-pointer traversal.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we are using a constant amount of extra space apart from the input arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/description/)
 

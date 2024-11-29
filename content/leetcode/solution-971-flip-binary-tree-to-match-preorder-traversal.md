@@ -14,134 +14,195 @@ img_src = ""
 youtube = "6L25Q-42OXA"
 youtube_upload_date="2021-03-29"
 youtube_thumbnail="https://i.ytimg.com/vi/6L25Q-42OXA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary tree with n nodes, where each node has a unique value from 1 to n. You are also given a sequence of n integers, voyage, representing the desired pre-order traversal of the tree. A node in the tree can be flipped by swapping its left and right children. Your task is to find the smallest set of nodes to flip such that the pre-order traversal matches voyage. If it is impossible to achieve this traversal, return [-1].
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The root of a binary tree and an array voyage of n integers.
+- **Example:** `Input: root = [1,2,3], voyage = [1,3,2]`
+- **Constraints:**
+	- The binary tree has n nodes.
+	- n == voyage.length
+	- 1 <= n <= 100
+	- 1 <= Node.val, voyage[i] <= n
+	- All node values and voyage elements are unique.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-    vector<int> res;
-    int i = 0;
-public:
-    vector<int> flipMatchVoyage(TreeNode* root, vector<int>& voyage) {
-        vector<int> fail = {-1};
-        return dfs(root, voyage)? res: fail;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** A list of nodes that need to be flipped to achieve the pre-order traversal defined by voyage.
+- **Example:** `Output: [1]`
+- **Constraints:**
+	- If flipping nodes is impossible, return [-1].
+	- The output list may be in any order.
 
-    bool dfs(TreeNode* node, vector<int> &voyage) {
-        if(node == NULL) return true;
-        if(node->val != voyage[i++]) return false;
-        if(node->left != NULL && node->left->val != voyage[i]) {
-            res.push_back(node->val);
-            return  dfs(node->right, voyage) && dfs(node->left, voyage);
-        }
-        return  dfs(node->left, voyage) && dfs(node->right, voyage);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the minimum set of nodes to flip so that the binary tree's pre-order traversal matches voyage.
 
-### Problem Statement
+- Perform a recursive depth-first traversal of the tree.
+- Match the current node's value with the current index in voyage.
+- If the left child's value does not match the next value in voyage, flip the current node.
+- Continue traversing the left and right subtrees, updating the traversal index.
+- If any mismatch occurs that cannot be resolved by flipping, return [-1].
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree is correctly structured.
+- All node values are unique and match the elements in voyage.
+- The voyage array defines a valid pre-order traversal for some arrangement of the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1,2,4,null,null,3], voyage = [1,3,2,4]`  \
+  **Explanation:** Flipping node 1 swaps the left and right children, resulting in a traversal of [1,3,2,4]. Output: [1].
 
-The problem asks us to determine whether we can flip some of the nodes of a binary tree so that the tree’s preorder traversal matches a given voyage array. If it is possible, the task is to return the list of nodes that need to be flipped to achieve this. If it is not possible, we need to return `[-1]`. The tree is represented as a binary tree, and the voyage is an array of integers representing the desired preorder traversal of the tree. The flip operation allows us to swap the left and right child nodes of any tree node.
+- **Input:** `Input: root = [1,2,3,4], voyage = [1,2,4,3]`  \
+  **Explanation:** The pre-order traversal already matches voyage. Output: [].
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+Use a recursive depth-first search to traverse the binary tree and match its pre-order traversal to voyage.
 
-The solution to this problem involves a depth-first search (DFS) approach to traverse the binary tree and check whether we can match the preorder traversal `voyage` while keeping track of the nodes that need to be flipped to achieve the desired traversal. The steps to approach this problem are as follows:
-
-1. **Start from the root of the tree**: We initiate a DFS traversal starting from the root of the binary tree.
-2. **Matching node values with the voyage**: During the DFS, at each node, we check if the current node’s value matches the value in the `voyage` array. If the value matches, we proceed to the next node in the `voyage`. If not, we return `false`.
-3. **Identifying a required flip**: If the left child node exists and its value does not match the next value in the `voyage`, we recognize that a flip is needed. We then swap the left and right children for the current node, record the node as flipped in the result list, and continue the DFS.
-4. **Return the result**: Once the traversal is complete, we check if we successfully matched the entire `voyage`. If so, we return the list of flipped nodes. If any mismatch occurs during the traversal, we return `[-1]`.
-
-The problem is solved in a recursive manner by using the DFS technique, making use of an auxiliary variable `i` to keep track of the current position in the `voyage`.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Pre-order traversal visits nodes in root-left-right order.
+- A mismatch between the current node's left child and voyage implies a flip may be needed.
+- Flipping is only necessary when voyage cannot otherwise be matched.
+- Start from the root and traverse the tree recursively.
+- Keep track of the current position in voyage.
+- If a mismatch occurs, check if flipping can resolve it.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty tree or empty voyage should return [].
+- For a tree with 100 nodes, ensure the traversal does not exceed the recursion limit.
+- If voyage is not a valid pre-order traversal of the tree, return [-1].
+- If flipping the root resolves all mismatches, include the root's value in the output.
+- Ensure the input tree is valid and matches the size of voyage.
+{{< dots >}}
+## Code 💻
 ```cpp
 class Solution {
-    vector<int> res;
-    int i = 0;
+vector<int> res;
+int i = 0;
 public:
-    vector<int> flipMatchVoyage(TreeNode* root, vector<int>& voyage) {
-        vector<int> fail = {-1};
-        return dfs(root, voyage) ? res : fail;
+vector<int> flipMatchVoyage(TreeNode* root, vector<int>& voyage) {
+    vector<int> fail = {-1};
+    return dfs(root, voyage)? res: fail;
+}
+
+bool dfs(TreeNode* node, vector<int> &voyage) {
+    if(node == NULL) return true;
+    if(node->val != voyage[i++]) return false;
+    if(node->left != NULL && node->left->val != voyage[i]) {
+        res.push_back(node->val);
+        return  dfs(node->right, voyage) && dfs(node->left, voyage);
     }
+    return  dfs(node->left, voyage) && dfs(node->right, voyage);
+}
 ```
-1. **Function Declaration**:
-   - The function `flipMatchVoyage` is declared with two arguments: `root` (the root node of the binary tree) and `voyage` (the array representing the desired preorder traversal).
-   - We initialize an empty vector `res` to store the flipped nodes. We also initialize `i = 0`, which will serve as an index to track the current position in the `voyage`.
-   - If the DFS traversal returns `true`, meaning the `voyage` is successfully matched with the tree’s preorder traversal, the function returns the `res` vector containing the flipped nodes. If not, it returns `[-1]`, indicating that it is not possible to achieve the desired traversal.
 
-```cpp
-    bool dfs(TreeNode* node, vector<int> &voyage) {
-        if(node == NULL) return true;
-```
-2. **DFS Traversal**:
-   - The DFS function is defined to traverse the binary tree.
-   - The base case checks if the current node is `NULL`. If it is, it returns `true` since there is nothing to flip or match at a `NULL` node.
+This is the solution that flips the binary tree nodes to match the given voyage sequence. It uses depth-first search (DFS) to traverse the tree and recursively checks whether the nodes match the voyage or need to be flipped.
 
-```cpp
-        if(node->val != voyage[i++]) return false;
-```
-3. **Matching Node Value with Voyage**:
-   - For each node in the tree, we compare its value (`node->val`) with the value in the `voyage` at index `i`. 
-   - If the value does not match, we return `false`, as this means the tree cannot match the desired preorder traversal. 
-   - We also increment `i` after the comparison to move to the next index in the `voyage`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<int> res;
+	```
+	A vector to store the nodes where a flip is required in the tree.
 
-```cpp
-        if(node->left != NULL && node->left->val != voyage[i]) {
-```
-4. **Check for Flip Requirement**:
-   - If the left child of the current node exists (`node->left != NULL`), we check whether the left child’s value matches the next value in the `voyage` at index `i`. If it does not match, we need to flip the left and right children to continue matching the `voyage`.
-   - If a flip is required, we enter the block of code that swaps the left and right children and adds the current node’s value to the `res` vector.
+2. **Variable Initialization**
+	```cpp
+	int i = 0;
+	```
+	A variable `i` used to keep track of the current index in the `voyage` vector during the DFS traversal.
 
-```cpp
-            res.push_back(node->val);
-            return dfs(node->right, voyage) && dfs(node->left, voyage);
-```
-5. **Flip the Node**:
-   - We push the current node’s value into the result vector `res`, indicating that this node needs to be flipped.
-   - After the flip, we recursively call `dfs` on the right child first (`node->right`), followed by the left child (`node->left`). This ensures that we are flipping the children nodes and then continuing the DFS traversal for both sides.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Access modifier that indicates the following methods and members are public and can be accessed from outside the class.
 
-```cpp
-        return dfs(node->left, voyage) && dfs(node->right, voyage);
-    }
-```
-6. **Recursive DFS Without Flip**:
-   - If no flip is needed (i.e., the left child’s value matches the next value in the `voyage`), we recursively call `dfs` on the left child (`node->left`) first, and then the right child (`node->right`). This is the standard preorder traversal (left, right).
+4. **Function Definition**
+	```cpp
+	vector<int> flipMatchVoyage(TreeNode* root, vector<int>& voyage) {
+	```
+	Function that accepts a root of a tree and a `voyage` vector, and returns a vector of nodes that need to be flipped to match the voyage.
 
-```cpp
-};
-```
-7. **End of Function**:
-   - The DFS function ends, and control is returned to the main function `flipMatchVoyage`.
+5. **Vector Initialization**
+	```cpp
+	    vector<int> fail = {-1};
+	```
+	Initializes a fail vector that is returned when the voyage cannot be matched.
 
-### Complexity
+6. **Return Statement**
+	```cpp
+	    return dfs(root, voyage)? res: fail;
+	```
+	Checks if the tree can be matched with the voyage using DFS, returning the result vector or the fail vector if matching is impossible.
 
-- **Time Complexity**: 
-  - The time complexity of this algorithm is **O(n)**, where `n` is the number of nodes in the binary tree. In the worst case, the algorithm performs a DFS traversal of all the nodes in the tree, visiting each node once. Each comparison and operation inside the DFS function takes constant time.
+7. **DFS Function Definition**
+	```cpp
+	bool dfs(TreeNode* node, vector<int> &voyage) {
+	```
+	The DFS helper function that performs a depth-first search on the tree to check if the nodes match the voyage sequence and handles flips where necessary.
 
-- **Space Complexity**:
-  - The space complexity is **O(h)**, where `h` is the height of the tree. This is because the recursive DFS function uses a call stack that can grow up to the height of the tree in the worst case. The additional space used by the result vector `res` is proportional to the number of flipped nodes, but this is at most `n`, where `n` is the number of nodes.
+8. **Base Case**
+	```cpp
+	    if(node == NULL) return true;
+	```
+	Base case: if the node is null, return true as there's nothing to process.
 
-### Conclusion
+9. **Voyage Check**
+	```cpp
+	    if(node->val != voyage[i++]) return false;
+	```
+	Checks if the current node's value matches the current value in the voyage sequence. If not, the function returns false.
 
-This solution effectively solves the problem by performing a depth-first search (DFS) on the binary tree while keeping track of the nodes that need to be flipped in order to match the desired preorder traversal given in the `voyage`. The approach ensures that only the necessary nodes are flipped, and it efficiently checks whether the tree’s preorder traversal can be transformed to match the `voyage`. The solution uses recursion, a common technique for tree traversal problems, and ensures the result is returned in the form of a vector containing the flipped nodes. If the transformation is not possible, it correctly returns `[-1]`.
+10. **Flip Check**
+	```cpp
+	    if(node->left != NULL && node->left->val != voyage[i]) {
+	```
+	Checks if the left child exists and its value does not match the current value in the voyage sequence, indicating that a flip might be needed.
+
+11. **Recording the Flip**
+	```cpp
+	        res.push_back(node->val);
+	```
+	Records the current node's value in the `res` vector as a node where a flip occurred.
+
+12. **DFS Recursion with Flip**
+	```cpp
+	        return  dfs(node->right, voyage) && dfs(node->left, voyage);
+	```
+	Recursively checks the right and left subtrees after flipping them to match the voyage.
+
+13. **DFS Recursion without Flip**
+	```cpp
+	    return  dfs(node->left, voyage) && dfs(node->right, voyage);
+	```
+	Recursively checks the left and right subtrees without flipping them.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Each node is visited once during the traversal, making the time complexity linear in the number of nodes.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(n)
+
+The space complexity depends on the depth of the recursion stack, which is equal to the height h of the tree.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal/description/)
 

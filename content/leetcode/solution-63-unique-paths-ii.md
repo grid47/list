@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "d3UOz7zdE4I"
 youtube_upload_date="2023-02-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/d3UOz7zdE4I/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,115 +28,186 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/d3UOz7zdE4I/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+A robot starts at the top-left corner of an m x n grid and needs to reach the bottom-right corner. The grid contains obstacles (marked as 1) and empty cells (marked as 0). The robot can only move down or right and cannot pass through cells with obstacles. Determine the number of unique paths to the destination.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer 2D array grid where grid[i][j] is either 0 (empty) or 1 (obstacle).
+- **Example:** `Input: obstacleGrid = [[0,0,1],[0,0,0],[1,0,0]]`
+- **Constraints:**
+	- m == obstacleGrid.length
+	- n == obstacleGrid[i].length
+	- 1 <= m, n <= 100
+	- obstacleGrid[i][j] is 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int uniquePathsWithObstacles(vector<vector<int>>& grid) {
-        
-        int m = grid.size(), n = grid[0].size();
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        
-        dp[0][0] = grid[0][0] == 1? 0: 1;
-        
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            
-            if(grid[i][j] != 1) {
-                dp[i][j] += ((i > 0 && grid[i - 1][j] == 0)? dp[i - 1][j]: 0) +
-                        ((j > 0 && grid[i][j - 1] == 0)? dp[i][j - 1]: 0);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of unique paths from the top-left to the bottom-right corner while avoiding obstacles.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result will always be less than or equal to 2 * 10^9.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the total number of unique paths from start to destination while avoiding obstacles using dynamic programming.
+
+- Initialize a DP table with dimensions m x n to store the number of ways to reach each cell.
+- Set dp[0][0] = 1 if grid[0][0] == 0; otherwise set dp[0][0] = 0.
+- For each cell (i, j), if grid[i][j] == 0, calculate dp[i][j] as the sum of paths from the top and left neighbors.
+- If grid[i][j] == 1, set dp[i][j] = 0 as it is an obstacle.
+- Return dp[m-1][n-1] as the final result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The robot starts at grid[0][0] and ends at grid[m-1][n-1].
+- A cell marked with 1 is an obstacle and cannot be part of any path.
+- The robot can only move down or right.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: obstacleGrid = [[0,0,1],[0,0,0],[1,0,0]]`  \
+  **Explanation:** There are three unique paths from the top-left to the bottom-right corner avoiding obstacles.
+
+- **Input:** `Input: obstacleGrid = [[0,0,0],[0,1,0],[0,1,0]]`  \
+  **Explanation:** There is only one unique path that avoids obstacles.
+
+{{< dots >}}
+## Approach 🚀
+Use a dynamic programming approach to calculate the total paths, where cells with obstacles are marked as 0.
+
+### Initial Thoughts 💭
+- The problem requires handling obstacles, making it different from the regular unique paths problem.
+- Cells with obstacles contribute 0 paths and block traversal.
+- Dynamic programming can be adapted by marking obstacle cells as 0.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as input is guaranteed.
+- Maximum grid size with m = 100 and n = 100, with scattered obstacles.
+- A grid where the start or end cell is blocked (grid[0][0] or grid[m-1][n-1] = 1).
+- Ensure the algorithm handles all obstacles efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+    int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+    vector<vector<int>> dp(m, vector<int>(n, 0));
+
+    // Handle the case where the starting cell is an obstacle
+    if (obstacleGrid[0][0] == 1) {
+        return 0;
+    }
+
+    // Initialize the first cell as 1, as there's only one way to reach it
+    dp[0][0] = 1;
+
+    // Fill the first row
+    for (int j = 1; j < n; j++) {
+        dp[0][j] = obstacleGrid[0][j] == 0 ? dp[0][j - 1] : 0;
+    }
+
+    // Fill the first column
+    for (int i = 1; i < m; i++) {
+        dp[i][0] = obstacleGrid[i][0] == 0 ? dp[i - 1][0] : 0;
+    }
+
+    // Fill the rest of the DP table
+    for (int i = 1; i < m; i++) {
+        for (int j = 1; j < n; j++) {
+            if (obstacleGrid[i][j] == 0) {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
             }
-            
-        }
-        return dp[m - 1][n - 1];
-    }
-};
-{{< /highlight >}}
----
-
-### 🚶‍♂️ **Unique Paths with Obstacles**
-
-The problem is to find the total number of unique paths in an `m x n` grid from the top-left corner `(0, 0)` to the bottom-right corner `(m-1, n-1)`, while avoiding obstacles. In this grid:
-- Cells with obstacles are represented by `1`s and cannot be traversed.
-- Cells without obstacles are represented by `0`s and are free to move through.
-- Movement is restricted to either moving down or right at each step.
-
-### 🧠 **Approach**
-
-This problem is solved using **dynamic programming (DP)** while considering obstacles in the grid.
-
-#### Key Observations:
-
-1. **Starting Point**:
-   - If the starting cell `(0, 0)` contains an obstacle, there are `0` ways to reach any destination, so the function immediately returns `0` paths.
-
-2. **DP Initialization**:
-   - We create a `dp` table where `dp[i][j]` represents the number of unique ways to reach cell `(i, j)` from the starting point `(0, 0)`.
-
-3. **Base Cases**:
-   - If the starting cell `(0, 0)` is free of obstacles, initialize it to `1` in `dp`, indicating one way to start at that position.
-   - For cells in the first row and the first column, they can only be reached if there are no obstacles in their respective rows or columns. If any cell has an obstacle, all subsequent cells in that row or column will have `0` paths.
-
-4. **Filling the DP Table**:
-   - For each cell `(i, j)`, if it is free of obstacles (i.e., `grid[i][j] == 0`), the value of `dp[i][j]` is the sum of the values from the top cell `(i-1, j)` and the left cell `(i, j-1)`, as these are the only two directions from which you can arrive.
-   - If a cell contains an obstacle (`grid[i][j] == 1`), then `dp[i][j]` is set to `0` since it is not reachable.
-
-### 🔍 **Code Breakdown**
-
-#### Step 1: Initialize DP Table
-
-```cpp
-vector<vector<int>> dp(m, vector<int>(n, 0));
-```
-
-- A 2D `dp` table of size `m x n` is initialized with `0`s, representing the paths to each cell.
-
-#### Step 2: Set the Starting Point
-
-```cpp
-dp[0][0] = grid[0][0] == 1 ? 0 : 1;
-```
-
-- The top-left corner `dp[0][0]` is set to `1` if there’s no obstacle; otherwise, it is set to `0`, as no paths are possible.
-
-#### Step 3: Fill the DP Table
-
-```cpp
-for(int i = 0; i < m; i++)
-    for(int j = 0; j < n; j++) {
-        if(grid[i][j] != 1) {
-            dp[i][j] += ((i > 0 && grid[i - 1][j] == 0) ? dp[i - 1][j] : 0) +
-                        ((j > 0 && grid[i][j - 1] == 0) ? dp[i][j - 1] : 0);
         }
     }
+
+    return dp[m - 1][n - 1];
+}
 ```
 
-- For each cell `(i, j)`:
-  - If there is no obstacle, the number of ways to reach that cell is the sum of the ways from the top (`dp[i - 1][j]`) and from the left (`dp[i][j - 1]`), if those cells are also free of obstacles.
-  - If a cell contains an obstacle (`grid[i][j] == 1`), the value for that cell in the DP table is set to `0`, indicating it is not reachable.
+This code calculates the number of unique paths from the top-left corner to the bottom-right corner of a grid with obstacles, where you can only move right or down.
 
-#### Step 4: Return the Final Answer
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+	```
+	This line declares a function named `uniquePathsWithObstacles` that takes a 2D vector `obstacleGrid` representing the grid with obstacles as input and returns the number of unique paths.
 
-```cpp
-return dp[m - 1][n - 1];
-```
+2. **Get Grid Dimensions**
+	```cpp
+	    int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+	```
+	This line gets the dimensions of the grid, `m` for rows and `n` for columns.
 
-- The final result at `dp[m-1][n-1]` contains the total number of unique paths to the destination, considering any obstacles in the grid.
+3. **Initialize DP Table**
+	```cpp
+	    vector<vector<int>> dp(m, vector<int>(n, 0));
+	```
+	This line initializes a 2D DP table `dp` of size `m x n` to store the number of unique paths to reach each cell. All elements are initially set to 0.
 
-### 📊 **Complexity Analysis**
+4. **Handle Starting Obstacle**
+	```cpp
+	    if (obstacleGrid[0][0] == 1) {
+	        return 0;
+	    }
+	```
+	This condition checks if the starting cell is an obstacle. If so, there are no possible paths, so the function returns 0.
 
-#### Time Complexity:
-- **O(m * n):** We iterate through every cell in the `m x n` grid once, resulting in a time complexity of `O(m * n)`.
+5. **Initialize Starting Cell**
+	```cpp
+	    dp[0][0] = 1;
+	```
+	If the starting cell is not an obstacle, it's initialized with 1, as there's only one way to reach it.
 
-#### Space Complexity:
-- **O(m * n):** The `dp` table requires `O(m * n)` space to store the number of unique paths for each cell.
+6. **Fill First Row**
+	```cpp
+	    for (int j = 1; j < n; j++) {
+	        dp[0][j] = obstacleGrid[0][j] == 0 ? dp[0][j - 1] : 0;
+	    }
+	```
+	This loop fills the first row of the DP table. For each cell, if it's not an obstacle, the number of paths to reach it is the same as the number of paths to reach the cell to its left. Otherwise, it's 0.
 
-### 🌟 **Conclusion**
+7. **Fill First Column**
+	```cpp
+	    for (int i = 1; i < m; i++) {
+	        dp[i][0] = obstacleGrid[i][0] == 0 ? dp[i - 1][0] : 0;
+	    }
+	```
+	This loop fills the first column of the DP table. For each cell, if it's not an obstacle, the number of paths to reach it is the same as the number of paths to reach the cell above it. Otherwise, it's 0.
 
-This dynamic programming solution efficiently calculates the number of unique paths from the top-left to the bottom-right of a grid, while considering obstacles. By using previously computed paths, the solution avoids redundant calculations, ensuring optimal performance even for grids with obstacles. This approach dynamically adapts based on obstacle positions, providing a robust solution for pathfinding in grid-based problems.
+8. **Fill the Rest of the DP Table**
+	```cpp
+	    for (int i = 1; i < m; i++) {
+	        for (int j = 1; j < n; j++) {
+	            if (obstacleGrid[i][j] == 0) {
+	                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+	            }
+	        }
+	    }
+	```
+	This nested loop fills the rest of the DP table. For each cell `(i, j)` that is not an obstacle, the number of paths to reach it is the sum of the number of paths to reach the cell above it and the cell to its left.
 
----
+9. **Return the Bottom-Right Corner Value**
+	```cpp
+	    return dp[m - 1][n - 1];
+	```
+	After filling the DP table, the function returns the value at the bottom-right corner `dp[m - 1][n - 1]`, which represents the total number of unique paths from the top-left to the bottom-right corner.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+Each cell is visited exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The DP table requires O(m * n) space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-paths-ii/description/)
 

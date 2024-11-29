@@ -14,122 +14,156 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string croakOfFrogs, which represents a mix of sounds from multiple frogs croaking the word 'croak'. Each frog croaks the sequence of letters: 'c', 'r', 'o', 'a', 'k'. Your task is to determine the minimum number of frogs needed to croak all the sounds in the string, while following the correct letter sequence. If the string is not a valid combination of croaks, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single string croakOfFrogs that contains characters 'c', 'r', 'o', 'a', and 'k'.
+- **Example:** `"croakcroak"`
+- **Constraints:**
+	- 1 <= croakOfFrogs.length <= 10^5
+	- The string contains only the characters 'c', 'r', 'o', 'a', 'k'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minNumberOfFrogs(string croakOfFrogs) {
-        int cnt[5] = {}, frogs = 0, max_frog = 0;
-        for(auto ch : croakOfFrogs) {
-            auto n = string("croak").find(ch);
-            ++cnt[n];
-            if(n == 0) max_frog = max(max_frog, ++frogs);
-            else if(--cnt[n - 1] < 0)   return -1;
-            else if(n == 4)             --frogs;
-        }
-        return frogs == 0? max_frog : -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the minimum number of frogs required to croak all the sounds. If the string is not valid, return -1.
+- **Example:** `1`
+- **Constraints:**
+	- If the string is valid, return the number of frogs required.
+	- If the string is not a valid combination, return -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count how many frogs are needed to croak all the sounds while ensuring the proper order of letters in each croak.
+
+- Count the occurrences of each letter 'c', 'r', 'o', 'a', 'k'.
+- Ensure that the letters follow the correct sequence. For example, the count of 'r' cannot exceed the count of 'c', and the same for 'o', 'a', and 'k'.
+- Track the maximum number of frogs needed at any point during the croaking process.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string may contain scrambled sequences of the letters 'c', 'r', 'o', 'a', 'k'.
+- A valid croak must follow the exact sequence of letters 'c', 'r', 'o', 'a', and 'k'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"croakcroak"`  \
+  **Explanation:** In this example, one frog croaks 'croak' twice, so the minimum number of frogs needed is 1.
+
+- **Input:** `"crcoakroak"`  \
+  **Explanation:** Here, the minimum number of frogs is 2: the first frog croaks 'crcoakroak', and the second frog croaks 'crcoakroak'.
+
+- **Input:** `"croakcrook"`  \
+  **Explanation:** This is an invalid combination because it doesn't form a valid sequence of croaks, so the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to count the occurrences of each letter, ensure they follow the correct sequence, and track the maximum number of frogs needed.
+
+### Initial Thoughts 💭
+- The order of the letters is crucial, so we need to track each frog's croak in sequence.
+- We can use counters to ensure that the sequence 'c', 'r', 'o', 'a', 'k' is followed properly and track the maximum number of frogs needed at any point.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string should return -1 because no croaks are made.
+- Ensure that the solution works efficiently even with strings up to 100,000 characters long.
+- Handle cases where characters are out of order, such as 'crak', which should return -1.
+- Ensure that the solution adheres to the constraint that the string can only contain 'c', 'r', 'o', 'a', and 'k'.
+{{< dots >}}
+## Code 💻
+```cpp
+int minNumberOfFrogs(string croakOfFrogs) {
+    int cnt[5] = {}, frogs = 0, max_frog = 0;
+    for(auto ch : croakOfFrogs) {
+        auto n = string("croak").find(ch);
+        ++cnt[n];
+        if(n == 0) max_frog = max(max_frog, ++frogs);
+        else if(--cnt[n - 1] < 0)   return -1;
+        else if(n == 4)             --frogs;
     }
-};
-{{< /highlight >}}
----
+    return frogs == 0? max_frog : -1;
+}
+```
 
-### Problem Statement
+The function `minNumberOfFrogs` determines the minimum number of frogs needed to form the given string `croakOfFrogs`. It tracks the counts of each character in the word 'croak' and ensures they are correctly ordered and balanced. If there are inconsistencies, the function returns -1.
 
-The problem at hand is to determine the minimum number of frogs needed to produce a given sequence of croaks, represented by the string `croakOfFrogs`. Each frog can only croak in the sequence "croak", meaning it must croak the letters 'c', 'r', 'o', 'a', and 'k' in that order. The goal is to find the minimum number of frogs that are simultaneously croaking to produce the entire string without any interruptions or violations of the sequence.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minNumberOfFrogs(string croakOfFrogs) {
+	```
+	Defines the function `minNumberOfFrogs` that takes a string `croakOfFrogs` and returns the minimum number of frogs that could have made those croaks.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int cnt[5] = {}, frogs = 0, max_frog = 0;
+	```
+	Initializes an array `cnt` of size 5 to track the counts of each character ('c', 'r', 'o', 'a', 'k'). Initializes variables `frogs` to track the number of active frogs and `max_frog` to track the maximum number of frogs needed.
 
-To solve this problem, we will maintain a count of how many frogs are in different stages of the croaking sequence at any given time. The approach can be summarized as follows:
+3. **Loop Constructs**
+	```cpp
+	    for(auto ch : croakOfFrogs) {
+	```
+	Begins a loop that iterates through each character in the input string `croakOfFrogs`.
 
-1. **Counting Stages**: Use an array to count how many frogs are currently croaking each letter of the word "croak". Each index in the array corresponds to a letter in the sequence.
+4. **String Manipulations**
+	```cpp
+	        auto n = string("croak").find(ch);
+	```
+	Finds the position of the character `ch` in the string 'croak'. The position corresponds to the order of the letters in the word.
 
-2. **Tracking Frogs**: Maintain a variable to track the number of frogs currently croaking and another variable to track the maximum number of frogs needed at any point in time.
+5. **Array Manipulation**
+	```cpp
+	        ++cnt[n];
+	```
+	Increments the count for the current character (`ch`) in the `cnt` array.
 
-3. **Processing the String**: Iterate through each character in the input string:
-   - Increase the count for 'c' and increase the frog count.
-   - For subsequent characters ('r', 'o', 'a'), check if there are frogs in the previous stage of the sequence. If there are none when needed, it means an error has occurred, and the function should return -1.
-   - For 'k', decrease the current frog count as this indicates the frog has finished croaking.
+6. **Conditionals**
+	```cpp
+	        if(n == 0) max_frog = max(max_frog, ++frogs);
+	```
+	If the character is 'c' (the first character of 'croak'), it increments the number of frogs and updates the `max_frog` variable to track the maximum number of active frogs.
 
-4. **Final Check**: At the end of the iteration, ensure that all frogs have completed their croaking sequence. If any frogs are still active (i.e., not completed the sequence), return -1.
+7. **Conditional Check**
+	```cpp
+	        else if(--cnt[n - 1] < 0)   return -1;
+	```
+	If the current character isn't the first one in 'croak', it checks if the previous character count (from `cnt`) is valid. If negative, it indicates an invalid order, so the function returns -1.
 
-### Code Breakdown (Step by Step)
+8. **Conditional Check**
+	```cpp
+	        else if(n == 4)             --frogs;
+	```
+	If the current character is 'k' (the last character in 'croak'), it means a frog has finished its croak, so the frog count is decremented.
 
-Let’s break down the code to understand each part of the implementation:
+9. **Return Statement**
+	```cpp
+	    return frogs == 0? max_frog : -1;
+	```
+	At the end of the loop, the function checks if there are any active frogs left. If no frogs are left and the characters followed the proper order, it returns `max_frog` (the maximum number of frogs needed). Otherwise, it returns -1 for an invalid input.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the input string.
+- **Average Case:** O(n), as we need to process each character in the string once.
+- **Worst Case:** O(n), where n is the length of the input string.
 
-   - This line defines the class `Solution`, which encapsulates the function to solve the problem.
+We only need to traverse the input string once to count the letters and verify the sequence.
 
-2. **Function Definition**:
-   ```cpp
-   int minNumberOfFrogs(string croakOfFrogs) {
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1), when the string is valid and processed efficiently.
+- **Worst Case:** O(1), since we only need a fixed number of counters (5 for 'c', 'r', 'o', 'a', 'k').
 
-   - The `minNumberOfFrogs` function takes a string `croakOfFrogs` as input and returns an integer representing the minimum number of frogs required.
+The space complexity is constant, as we only need a fixed amount of space to store the counters for each letter.
 
-3. **Variable Initialization**:
-   ```cpp
-   int cnt[5] = {}, frogs = 0, max_frog = 0;
-   ```
+**Happy Coding! 🎉**
 
-   - An array `cnt` of size 5 is initialized to count the frogs at each stage of the croaking sequence ('c', 'r', 'o', 'a', 'k').
-   - The variable `frogs` tracks the current number of frogs croaking, and `max_frog` tracks the maximum number of frogs needed at any point.
-
-4. **Iterating Through the Input**:
-   ```cpp
-   for(auto ch : croakOfFrogs) {
-       auto n = string("croak").find(ch);
-       ++cnt[n];
-   ```
-
-   - A for-each loop iterates through each character `ch` in the input string `croakOfFrogs`.
-   - The variable `n` is set to the index of `ch` in the string "croak". This determines which stage of the croaking sequence the character represents.
-
-5. **Processing Each Character**:
-   ```cpp
-   if(n == 0) max_frog = max(max_frog, ++frogs);
-   else if(--cnt[n - 1] < 0)   return -1;
-   else if(n == 4)             --frogs;
-   ```
-
-   - If the character is 'c' (index 0), increase the `frogs` count and update `max_frog` if this count exceeds the previous maximum.
-   - If the character is not 'c', decrement the count of the previous stage (`cnt[n - 1]`). If this count goes below zero, it means there are no frogs available to transition to the current stage, so return -1.
-   - If the character is 'k' (index 4), decrement the `frogs` count, indicating a frog has finished croaking.
-
-6. **Final Check**:
-   ```cpp
-   return frogs == 0 ? max_frog : -1;
-   ```
-
-   - After processing all characters, check if `frogs` is zero. If it is, return the maximum number of frogs used at any point; otherwise, return -1 if some frogs are still in the croaking process.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of the solution is \(O(n)\), where \(n\) is the length of the input string `croakOfFrogs`. This is due to the single pass through the string to count the stages of croaking.
-
-- **Space Complexity**: The space complexity is \(O(1)\) since the array `cnt` is of fixed size (5) and does not depend on the input size.
-
-### Conclusion
-
-The `minNumberOfFrogs` function efficiently determines the minimum number of frogs required to produce a given sequence of croaks. By keeping track of the stages of the croaking sequence using a simple counting array and two variables to monitor active frogs and maximum frogs needed, the solution operates in linear time and constant space. 
-
-#### Key Takeaways:
-
-- **Stage Tracking**: Using an array to keep track of different stages in a sequence can simplify complex counting problems.
-- **Error Handling**: The approach incorporates robust error checking to ensure that the croaking sequence is valid, returning early if any inconsistencies are found.
-- **Performance**: The solution is optimized for performance with linear time complexity and minimal space usage, making it suitable for processing large inputs efficiently.
-
-Overall, this implementation demonstrates the power of structured counting and careful condition checking to solve real-world problems involving sequences and states, specifically in the context of the frog croaking challenge.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-frogs-croaking/description/)
 

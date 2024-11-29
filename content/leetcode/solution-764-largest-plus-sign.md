@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "dOSQVrCtO9w"
 youtube_upload_date="2021-09-09"
 youtube_thumbnail="https://i.ytimg.com/vi/dOSQVrCtO9w/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,142 +28,193 @@ youtube_thumbnail="https://i.ytimg.com/vi/dOSQVrCtO9w/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer n, which represents the size of an n x n binary grid. Initially, all the values in the grid are set to 1, except for some indices that are specified in the array mines. Your task is to find the order of the largest axis-aligned plus sign of 1's in the grid. A plus sign of order k has a center grid[r][c] == 1 with arms extending in all four directions (up, down, left, right) of length k - 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer n and an array mines where each element is a pair of integers [xi, yi] indicating the grid coordinates that are 0.
+- **Example:** `Input: n = 6, mines = [[3, 2], [1, 3]]`
+- **Constraints:**
+	- 1 <= n <= 500
+	- 1 <= mines.length <= 5000
+	- 0 <= xi, yi < n
+	- All the pairs (xi, yi) are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int orderOfLargestPlusSign(int n, vector<vector<int>>& mines) {
-        vector<vector<int>> grid(n, vector<int>(n, n));
-        for(auto &m: mines)
-        grid[m[0]][m[1]] = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the order of the largest plus sign of 1's contained in the grid. If there is no such plus sign, return 0.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The returned order will be an integer representing the largest possible order of the plus sign.
 
-        for(int i = 0; i < n; i++)
-        for(int j = 0, k = n - 1, l = 0, r = 0, u = 0, d = 0; j < n; j++, k--) {
-            grid[i][j] = min(grid[i][j], l = (grid[i][j] == 0? 0: l + 1));
-            grid[i][k] = min(grid[i][k], r = (grid[i][k] == 0? 0: r + 1));
-            grid[j][i] = min(grid[j][i], u = (grid[j][i] == 0? 0: u + 1));
-            grid[k][i] = min(grid[k][i], d = (grid[k][i] == 0? 0: d + 1));
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the largest order of a plus sign in the binary grid considering the mines at the specified positions.
 
-        int res = 0;
+- Initialize a grid of size n x n with all 1's.
+- Set the specified mines in the grid to 0.
+- For each cell, compute the maximum length of the plus sign arms in all four directions.
+- Track the maximum possible order of the plus sign.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid initially contains all 1's, and mines are specified as 0's.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: n = 6, mines = [[3, 2], [1, 3]]`  \
+  **Explanation:** In this case, the grid can form a plus sign of order 2, with arms extending in all four directions.
 
-        for(int i = 0; i < n; i++)
-        for(int j = 0; j < n; j++)
-            res = max(grid[i][j], res);
+{{< dots >}}
+## Approach 🚀
+We can solve the problem by first marking the positions of the mines and then calculating the largest possible plus sign by examining the grid's arms in each direction.
 
-        return res;
-
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the order of the largest "plus sign" in an `n x n` grid, given a set of "mines" that block certain positions in the grid. A plus sign consists of a central cell with arms extending in four cardinal directions (up, down, left, right) such that all cells in the arms are connected, and the length of each arm is equal. The goal is to determine the order of the largest plus sign that can be formed in the grid, where the order is defined as the length of the arms of the plus sign.
-
-A plus sign can only extend in the four directions as long as there are no mines in its path. The grid is filled with `1`s except where mines are located, in which case those cells are marked as `0`.
-
-#### Example:
-
-For `n = 5` and mines located at `[[4, 2], [3, 2], [2, 2]]`, the grid looks like:
-
-```
-1 1 1 1 1
-1 1 1 1 1
-1 1 0 1 1
-1 1 0 1 1
-1 0 0 0 1
-```
-
-We need to determine the order of the largest plus sign that can be formed. The largest plus sign in this case has order 1, as the largest arm length is 1 (from the center of the plus).
-
-### Approach
-
-To solve this problem, we can use dynamic programming (DP) to compute the possible arm lengths for each cell in the grid in four directions: up, down, left, and right. The key idea is that for each cell, we calculate how far we can extend in each direction without hitting a mine. The minimum value from the four directions at each cell gives the arm length, and thus, the size of the plus sign that can be formed at that cell.
-
-#### Steps:
-
-1. **Initialization**: Start by creating a `grid` where each cell is initialized to `n`, representing the maximum possible arm length for that cell if there are no mines. Cells that contain mines are immediately set to 0.
-
-2. **Filling the grid**: Iterate through the grid and compute the arm lengths for each cell. This involves:
-   - For each row, compute the left and right arm lengths for each cell.
-   - For each column, compute the up and down arm lengths for each cell.
-
-3. **Finding the maximum order**: After calculating the arm lengths, iterate through the grid and find the minimum arm length for each cell. The largest of these values will give the order of the largest plus sign.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the grid
-
+### Initial Thoughts 💭
+- The size of the grid is manageable, but we need to handle up to 5000 mines.
+- The plus sign is formed from the center, so we need to compute the possible length of arms in each direction.
+- A dynamic approach can help by computing the maximum arm lengths as we iterate over the grid.
+{{< dots >}}
+### Edge Cases 🌐
+- If n is 1 and the only cell is a mine, return 0.
+- Ensure that the solution works efficiently for the largest possible grid size and number of mines.
+- If no mines are specified, the entire grid may form a plus sign.
+- Handle edge cases like small grid sizes and grids with multiple mines.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<vector<int>> grid(n, vector<int>(n, n));
-for (auto &m: mines)
+int orderOfLargestPlusSign(int n, vector<vector<int>>& mines) {
+    vector<vector<int>> grid(n, vector<int>(n, n));
+    for(auto &m: mines)
     grid[m[0]][m[1]] = 0;
-```
 
-- We start by creating a grid of size `n x n` and initializing each cell to `n` because, in the worst case (no mines), a plus sign can have an arm length of `n-1`. We then mark the positions of the mines as `0` in the grid.
-
-#### Step 2: Compute arm lengths in all four directions
-
-```cpp
-for (int i = 0; i < n; i++)
-    for (int j = 0, k = n - 1, l = 0, r = 0, u = 0, d = 0; j < n; j++, k--) {
+    for(int i = 0; i < n; i++)
+    for(int j = 0, k = n - 1, l = 0, r = 0, u = 0, d = 0; j < n; j++, k--) {
         grid[i][j] = min(grid[i][j], l = (grid[i][j] == 0? 0: l + 1));
         grid[i][k] = min(grid[i][k], r = (grid[i][k] == 0? 0: r + 1));
         grid[j][i] = min(grid[j][i], u = (grid[j][i] == 0? 0: u + 1));
         grid[k][i] = min(grid[k][i], d = (grid[k][i] == 0? 0: d + 1));
     }
-```
 
-- The nested loop iterates over each row and column of the grid.
-  - For each row, it calculates the arm lengths extending to the left (`l`) and right (`r`).
-  - For each column, it calculates the arm lengths extending upwards (`u`) and downwards (`d`).
-  
-- For each direction, if the current cell is a mine (`grid[i][j] == 0`), we reset the corresponding arm length to `0`. Otherwise, we increment the arm length.
+    int res = 0;
 
-- The `min()` function ensures that for each cell, the arm length in any direction is limited by the shortest arm among the four directions.
-
-#### Step 3: Compute the largest plus sign
-
-```cpp
-int res = 0;
-for (int i = 0; i < n; i++)
-    for (int j = 0; j < n; j++)
+    for(int i = 0; i < n; i++)
+    for(int j = 0; j < n; j++)
         res = max(grid[i][j], res);
+
+    return res;
+
+}
 ```
 
-- After computing the arm lengths for all cells, we simply iterate over the grid to find the maximum value. This value represents the largest arm length, which corresponds to the largest plus sign that can be formed.
+This code implements the algorithm to find the largest plus sign that can be formed on a grid after marking certain cells as blocked, where the blocked cells are provided by the input mines. It iterates through each cell, updating values based on the nearest blocked cells in all four directions.
 
-#### Step 4: Return the result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int orderOfLargestPlusSign(int n, vector<vector<int>>& mines) {
+	```
+	This line declares the function `orderOfLargestPlusSign`, which takes the size of the grid (`n`) and a list of mines as inputs, and returns an integer representing the order of the largest plus sign.
 
-```cpp
-return res;
-```
+2. **Grid Initialization**
+	```cpp
+	    vector<vector<int>> grid(n, vector<int>(n, n));
+	```
+	This line initializes a 2D grid of size `n x n` with all values set to `n`, indicating the largest possible size of a plus sign at each point initially.
 
-- Finally, we return the result, which is the order of the largest plus sign.
+3. **Mines Loop**
+	```cpp
+	    for(auto &m: mines)
+	```
+	This loop iterates over the list of `mines`, where each mine represents a blocked cell in the grid.
 
-### Complexity
+4. **Marking Mines**
+	```cpp
+	    grid[m[0]][m[1]] = 0;
+	```
+	For each mine, this line sets the corresponding grid cell to 0, marking it as a blocked cell.
 
-#### Time Complexity:
+5. **Grid Processing Start**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	This outer loop iterates through each row of the grid.
 
-- The time complexity of this solution is **O(n^2)**, where `n` is the size of the grid. This is because:
-  - We iterate through the grid multiple times: once to set the initial mine locations, and then twice to compute the arm lengths in all four directions for each cell.
-  - Each iteration involves constant time operations, and thus, the time complexity is quadratic in terms of the grid size.
+6. **Grid Processing Inner Loop**
+	```cpp
+	    for(int j = 0, k = n - 1, l = 0, r = 0, u = 0, d = 0; j < n; j++, k--) {
+	```
+	This inner loop processes each column of the grid. It also initializes variables for left, right, up, and down direction counts.
 
-#### Space Complexity:
+7. **Left Direction Calculation**
+	```cpp
+	        grid[i][j] = min(grid[i][j], l = (grid[i][j] == 0? 0: l + 1));
+	```
+	This line updates the grid value in the left direction, setting the number of consecutive non-zero cells.
 
-- The space complexity is **O(n^2)** because we are using a 2D grid to store the arm lengths for each cell. Additionally, we store the positions of the mines, which is also a 2D array.
+8. **Right Direction Calculation**
+	```cpp
+	        grid[i][k] = min(grid[i][k], r = (grid[i][k] == 0? 0: r + 1));
+	```
+	This line updates the grid value in the right direction, counting consecutive non-zero cells.
 
-### Conclusion
+9. **Up Direction Calculation**
+	```cpp
+	        grid[j][i] = min(grid[j][i], u = (grid[j][i] == 0? 0: u + 1));
+	```
+	This line updates the grid value in the upward direction, counting consecutive non-zero cells.
 
-This solution efficiently computes the order of the largest plus sign that can be formed in a grid, even with the presence of mines. By using dynamic programming to compute the arm lengths in all four directions for each cell, we ensure that we calculate the correct plus sign order in an optimized manner.
+10. **Down Direction Calculation**
+	```cpp
+	        grid[k][i] = min(grid[k][i], d = (grid[k][i] == 0? 0: d + 1));
+	```
+	This line updates the grid value in the downward direction, counting consecutive non-zero cells.
 
-- **Time Complexity**: **O(n^2)**, where `n` is the size of the grid.
-- **Space Complexity**: **O(n^2)**, as we store the grid and mine locations in 2D arrays.
+11. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	This line initializes a variable `res` to keep track of the maximum order of the plus sign.
 
-The approach ensures that we can handle large grids efficiently while also accounting for the positions of mines that block the formation of plus signs.
+12. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	This outer loop iterates through each row of the grid again.
+
+13. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	This inner loop iterates through each column of the grid.
+
+14. **Finding Maximum**
+	```cpp
+	        res = max(grid[i][j], res);
+	```
+	This line updates `res` with the maximum value from the grid, which represents the largest order of the plus sign.
+
+15. **Return Result**
+	```cpp
+	    return res;
+	```
+	This line returns the result, which is the order of the largest plus sign found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2) where n is the size of the grid, as we need to process each cell in the grid.
+- **Average Case:** O(n^2) for grids of typical size with up to 5000 mines.
+- **Worst Case:** O(n^2) in the worst case, as we need to check every cell for the largest plus sign.
+
+Time complexity is quadratic due to the two nested loops required to process each cell.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2) as we store the grid and the arms information for each cell.
+- **Worst Case:** O(n^2) due to the space used by the grid.
+
+Space complexity is quadratic because we maintain an n x n grid and additional variables for calculating arm lengths.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-plus-sign/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "1JfdvPk-iHg"
 youtube_upload_date="2024-08-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/1JfdvPk-iHg/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,110 +28,120 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/1JfdvPk-iHg/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a positive integer n, return the number of set bits (1s) in its binary representation, also known as the Hamming weight.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a positive integer n.
+- **Example:** `n = 9`
+- **Constraints:**
+	- The integer n is between 1 and 2^31 - 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int hammingWeight(uint32_t n) {
-        int key = 0;
-        while(n) {
-            n = n & (n - 1);
-            key++;
-        }
-        return key;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the number of set bits (1s) in the binary representation of the integer n.
+- **Example:** `Output = 2`
+- **Constraints:**
+	- The output is a single integer representing the number of set bits.
 
-### 🌟 Hamming Weight (Population Count) of a 32-bit Unsigned Integer
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of set bits in the binary representation of the integer n.
 
-The problem is to calculate the **Hamming weight** (or **population count**) of a given 32-bit unsigned integer. The Hamming weight is the number of `1` bits (set bits) in the binary representation of the number.
+- Step 1: Use bitwise operations to efficiently count the number of set bits.
+- Step 2: Continuously remove the lowest set bit from n and increment the count until n becomes zero.
+- Step 3: Return the count of set bits.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input integer is always a positive number within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 9`  \
+  **Explanation:** The binary representation of 9 is 1001, which has two set bits, so the output is 2.
 
-#### Example:
-- For the number `11` in binary (`1011`), the Hamming weight is `3` because there are three `1` bits.
-- For the number `128` in binary (`10000000`), the Hamming weight is `1` because there is one `1` bit.
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using bitwise operations to count the number of set bits in the integer's binary representation.
 
-Given an integer `n`, we need to return the number of set bits (`1` bits) in its binary representation.
-
-### 💡 Approach
-
-To solve this problem, we can efficiently count the number of `1` bits using **Brian Kernighan's Algorithm**, which minimizes the number of operations needed. The key idea is that each time we encounter a `1` bit, we can remove it and reduce the number of `1` bits until all of them are processed.
-
-**Key Observations:**
-- Each time we encounter a `1` bit, we can use the operation `n = n & (n - 1)` to clear the lowest set bit.
-- This operation removes the least significant `1` bit, and the number of iterations corresponds to the number of set bits in the binary representation of `n`.
-
-### 🛠 Code Breakdown
-
-Here’s the implementation using Brian Kernighan's Algorithm:
-
+### Initial Thoughts 💭
+- We can use a bitwise trick to remove the lowest set bit of the number and count how many times this operation can be performed.
+- By using n = n & (n - 1), we can eliminate the rightmost set bit in each iteration until all bits are processed.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is always a valid positive integer, so there are no empty inputs.
+- Since n is constrained between 1 and 2^31 - 1, large inputs are not an issue.
+- If n is a power of 2 (e.g., 1, 2, 4, 8, 16, ...), the binary representation will have only one set bit.
+- The input is always a positive integer.
+{{< dots >}}
+## Code 💻
 ```cpp
 int hammingWeight(uint32_t n) {
-    int key = 0; // Counter for set bits
-    
-    while (n) {  // Loop until all bits are processed
-        n = n & (n - 1);  // Clear the least significant 1-bit
-        key++;  // Increment the count of set bits
+    int key = 0;
+    while(n) {
+        n = n & (n - 1);
+        key++;
     }
-    
-    return key;  // Return the number of set bits
+    return key;
 }
 ```
 
-### Explanation of Each Step:
+This function calculates the Hamming Weight (the number of 1 bits) in the binary representation of an unsigned integer 'n'. The approach uses a bit manipulation technique where the least significant 1 bit is cleared in each iteration until 'n' becomes zero.
 
-#### 1. **Initialize the Counter**:
-```cpp
-int key = 0;
-```
-We start by initializing a counter `key` to `0`. This will keep track of the number of `1` bits in the binary representation of `n`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int hammingWeight(uint32_t n) {
+	```
+	Define the function 'hammingWeight' that takes a 32-bit unsigned integer 'n' and returns the count of 1 bits in its binary representation.
 
-#### 2. **While Loop to Process Each Bit**:
-```cpp
-while (n) {
-```
-We use a `while` loop that runs as long as `n` is not `0`. Each time we find a `1` bit, we remove it, and the loop continues until there are no `1` bits left in `n`.
+2. **Variable Initialization**
+	```cpp
+	    int key = 0;
+	```
+	Initialize a variable 'key' to zero, which will be used to count the number of 1 bits in the binary representation of 'n'.
 
-#### 3. **Clear the Lowest Set Bit**:
-```cpp
-n = n & (n - 1);
-```
-This step uses the bitwise operation `n = n & (n - 1)` to clear the least significant `1` bit in `n`. This operation works as follows:
-- Subtracting `1` from `n` flips the bits after the least significant `1` bit, and performing the `AND` operation with `n` clears this `1` bit while leaving the rest unchanged.
+3. **Loop Iteration**
+	```cpp
+	    while(n) {
+	```
+	Start a while loop that continues until 'n' becomes zero. The loop iterates through each 1 bit in 'n'.
 
-For example, if `n = 11010` (binary), `n - 1 = 11001`, and `n & (n - 1)` results in `11000`. This operation reduces the number of `1` bits by one in each iteration.
+4. **Bitwise Operation**
+	```cpp
+	        n = n & (n - 1);
+	```
+	Apply the bitwise AND operation between 'n' and 'n-1'. This operation clears the least significant 1 bit in 'n'.
 
-#### 4. **Increment the Counter**:
-```cpp
-key++;
-```
-Each time we clear a `1` bit, we increment the `key` counter. This keeps track of how many `1` bits have been processed.
+5. **Count Increment**
+	```cpp
+	        key++;
+	```
+	Increment the 'key' variable to count the number of 1 bits encountered so far.
 
-#### 5. **Return the Result**:
-```cpp
-return key;
-```
-Once all `1` bits are processed and `n` becomes `0`, the loop terminates, and we return the value of `key`, which contains the number of `1` bits in the binary representation of `n`.
+6. **Return Statement**
+	```cpp
+	    return key;
+	```
+	Return the final count of 1 bits stored in 'key'.
 
-### 📊 Complexity Analysis
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(k), where k is the number of set bits in n.
+- **Worst Case:** O(32), in the worst case when all bits are set to 1.
 
-#### Time Complexity:
-- **O(k)**, where `k` is the number of set bits (the number of `1` bits) in `n`. Each iteration removes one `1` bit from `n`, so the number of iterations is proportional to the number of set bits.
-- In the worst case, `n` can have 32 `1` bits (for the number `11111111111111111111111111111111`), which would require 32 iterations, but in practice, the algorithm runs much faster because it only focuses on the set bits.
+The time complexity is O(k), where k is the number of set bits, because we process each set bit individually. In the worst case, k is at most 32.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because we only need a fixed amount of extra space for the counter variable (`key`), regardless of the input size.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### ✅ Conclusion
+The space complexity is O(1), as we only need a constant amount of space for the count variable.
 
-Brian Kernighan's Algorithm is an efficient way to count the number of `1` bits (Hamming weight) in a 32-bit unsigned integer. This method reduces the number of operations by focusing only on the set bits, making it faster than iterating through all 32 bits.
+**Happy Coding! 🎉**
 
-- **Time Complexity**: **O(k)**, where `k` is the number of set bits in `n`.
-- **Space Complexity**: **O(1)**, as the algorithm uses only a fixed amount of extra space.
-
-This solution is highly optimized and works efficiently even for large numbers with sparse `1` bits. It is a great choice for problems that involve bit manipulation and population counts.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-1-bits/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,204 +28,236 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string s representing a serialized nested list, implement a parser to deserialize it and return the deserialized NestedInteger.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string s representing the serialized nested list.
+- **Example:** `s = '[789, [1011, 1213], 1415]'`
+- **Constraints:**
+	- 1 <= s.length <= 50,000
+	- s consists of digits, square brackets '[]', negative sign '-', and commas ','
+	- The string s is the serialization of a valid NestedInteger
+	- All values are within the range [-10^6, 10^6]
 
-{{< highlight cpp >}}
-/**
- * // This is the interface that allows for creating nested lists.
- * // You should not implement it, or speculate about its implementation
- * class NestedInteger {
- *   public:
- *     // Constructor initializes an empty nested list.
- *     NestedInteger();
- *
- *     // Constructor initializes a single integer.
- *     NestedInteger(int value);
- *
- *     // Return true if this NestedInteger holds a single integer, rather than a nested list.
- *     bool isInteger() const;
- *
- *     // Return the single integer that this NestedInteger holds, if it holds a single integer
- *     // The result is undefined if this NestedInteger holds a nested list
- *     int getInteger() const;
- *
- *     // Set this NestedInteger to hold a single integer.
- *     void setInteger(int value);
- *
- *     // Set this NestedInteger to hold a nested list and adds a nested integer to it.
- *     void add(const NestedInteger &ni);
- *
- *     // Return the nested list that this NestedInteger holds, if it holds a nested list
- *     // The result is undefined if this NestedInteger holds a single integer
- *     const vector<NestedInteger> &getList() const;
- * };
- */
-class Solution {
-public:
-    NestedInteger deserialize(string s) {
-        
-        function<bool(char)> isnumber = [](char c) { return (c == '-') || isdigit(c); };
-        
-        stack<NestedInteger> stk;
-        stk.push(NestedInteger());
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a NestedInteger object representing the deserialized nested list.
+- **Example:** `Output: [789, [1011, 1213], 1415]`
+- **Constraints:**
+	- The deserialized object should match the nested list structure.
 
-        for(auto it = s.begin(); it != s.end();) {
-            const char &c = *it;
-            if(isnumber(c)) {
-                auto it2 = find_if_not(it, s.end(), isnumber);
-                int val = stoi(string(it, it2));
-                stk.top().add(NestedInteger(val));
-                it = it2;
-            }
-            else {
-                if(c == '[') {
-                    stk.push(NestedInteger());
-                } else if (c == ']') {
-                    NestedInteger ni = stk.top();
-                    stk.pop();
-                    stk.top().add(ni);
-                }
-                it++;
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to parse the serialized string and reconstruct the correct NestedInteger object.
+
+- Traverse the string character by character.
+- Identify numbers and handle their potential negative signs.
+- Identify opening brackets '[' and create new NestedInteger objects for lists.
+- Identify closing brackets ']' and complete the current list.
+- Use a stack to maintain the current state while parsing nested lists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is a valid serialized NestedInteger and will not contain malformed lists.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: '[789, [1011, 1213], 1415]'`  \
+  **Explanation:** The string represents a list with three elements: 789, a nested list [1011, 1213], and 1415.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves parsing the string to correctly build a NestedInteger object, using a stack to handle nested lists and ensuring that each element is correctly identified as an integer or list.
+
+### Initial Thoughts 💭
+- We need to distinguish between integers and lists while parsing the string.
+- A stack will be useful to manage the nesting of lists during parsing.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure that input strings are non-empty and valid.
+- Handle input strings as large as 50,000 characters efficiently.
+- Ensure the solution handles negative numbers and deep nesting correctly.
+- The solution must parse the string in linear time relative to its length.
+{{< dots >}}
+## Code 💻
+```cpp
+NestedInteger deserialize(string s) {
+    
+    function<bool(char)> isnumber = [](char c) { return (c == '-') || isdigit(c); };
+    
+    stack<NestedInteger> stk;
+    stk.push(NestedInteger());
+
+    for(auto it = s.begin(); it != s.end();) {
+        const char &c = *it;
+        if(isnumber(c)) {
+            auto it2 = find_if_not(it, s.end(), isnumber);
+            int val = stoi(string(it, it2));
+            stk.top().add(NestedInteger(val));
+            it = it2;
         }
-        NestedInteger res = stk.top().getList().front();
-        return res;
+        else {
+            if(c == '[') {
+                stk.push(NestedInteger());
+            } else if (c == ']') {
+                NestedInteger ni = stk.top();
+                stk.pop();
+                stk.top().add(ni);
+            }
+            it++;
+        }
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-We’re given a string that represents a nested list of integers. This string can include numbers and lists of numbers, and those lists can be nested to any depth. Your task is to **deserialize** the string into a `NestedInteger` object.
-
-A `NestedInteger` can either hold:
-- A single integer.
-- A list of other `NestedInteger` objects.
-
-The goal is to parse the string and construct a `NestedInteger` object that reflects the structure of the input string. The string can contain nested lists, and your challenge is to ensure that the parsing handles these lists correctly and maintains the proper hierarchy.
-
----
-
-### 🧠 Approach
-
-To solve this problem, we’ll use a **stack-based parsing algorithm** that processes the string character by character. Here’s the step-by-step breakdown of the approach:
-
-1. **Identify Nested Integer Types**:
-   - A `NestedInteger` can either hold a single integer or a list of `NestedInteger` objects. We’ll recursively build this structure while parsing the string.
-
-2. **Use a Stack**:
-   - We’ll use a stack (`stack<NestedInteger>`) to keep track of the current state of the list as we parse the string.
-   - When we encounter an opening bracket `[` it means we are starting a new list, so we push a new `NestedInteger` onto the stack.
-   - When we encounter a closing bracket `]`, we pop the current `NestedInteger` from the stack (representing the completed list) and add it to the `NestedInteger` on top of the stack.
-
-3. **Handle Integers**:
-   - When we encounter a number, we parse it, create a new `NestedInteger` holding that number, and add it to the current `NestedInteger` on the stack.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's dive into the code to see how we implement this approach:
-
-#### 1. **Helper Function to Check for Numbers**
-```cpp
-function<bool(char)> isnumber = [](char c) { return (c == '-') || isdigit(c); };
-```
-- This helper function checks if a character is part of a number (either a minus sign or a digit).
-- It helps us identify and parse integer values as we read through the string.
-
-#### 2. **Initialize the Stack**
-```cpp
-stack<NestedInteger> stk;
-stk.push(NestedInteger());
-```
-- We initialize a stack of `NestedInteger` objects.
-- Initially, we push an empty `NestedInteger` onto the stack, which represents the root of the nested list.
-
-#### 3. **Iterate Through the String**
-```cpp
-for(auto it = s.begin(); it != s.end();) {
-    const char &c = *it;
-```
-- We use an iterator to traverse through the string `s`. The loop continues until we reach the end of the string.
-- `c` represents the current character being processed.
-
-#### 4. **Parsing Numbers**
-```cpp
-if(isnumber(c)) {
-    auto it2 = find_if_not(it, s.end(), isnumber);
-    int val = stoi(string(it, it2));
-    stk.top().add(NestedInteger(val));
-    it = it2;
+    NestedInteger res = stk.top().getList().front();
+    return res;
 }
 ```
-- When we encounter a number, we use `find_if_not` to find the point where the number ends.
-- We convert the substring representing the number into an integer using `stoi` and create a new `NestedInteger` holding that value.
-- We then add this `NestedInteger` to the current list represented by the `NestedInteger` on top of the stack.
 
-#### 5. **Handling Opening Bracket (`[`)**
-```cpp
-else {
-    if(c == '[') {
-        stk.push(NestedInteger());
-    }
-```
-- If we encounter an opening bracket `[`, it indicates that we are starting a new list.
-- We push a new empty `NestedInteger` onto the stack, representing the start of the new list.
+This function deserializes a string representing a nested integer list structure and returns the corresponding NestedInteger object.
 
-#### 6. **Handling Closing Bracket (`]`)**
-```cpp
-else if (c == ']') {
-    NestedInteger ni = stk.top();
-    stk.pop();
-    stk.top().add(ni);
-}
-```
-- When we encounter a closing bracket `]`, it means we’ve completed a list.
-- We pop the `NestedInteger` from the stack, which represents the completed list, and add it to the `NestedInteger` on top of the stack (which is its parent).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	NestedInteger deserialize(string s) {
+	```
+	This is the function definition of 'deserialize' which takes a string 's' as input and returns a NestedInteger object.
 
-#### 7. **Increment the Iterator**
-```cpp
-it++;
-```
-- After processing the current character, we move the iterator to the next character in the string.
+2. **Lambda Function**
+	```cpp
+	    function<bool(char)> isnumber = [](char c) { return (c == '-') || isdigit(c); };
+	```
+	This lambda function checks if a character is a number (including negative sign).
 
-#### 8. **Return the Final Result**
-```cpp
-NestedInteger res = stk.top().getList().front();
-return res;
-```
-- After the loop finishes, the stack will contain a single `NestedInteger` object, which represents the entire deserialized structure.
-- We return the first element of the list from the top `NestedInteger` object on the stack as the result.
+3. **Stack Initialization**
+	```cpp
+	    stack<NestedInteger> stk;
+	```
+	A stack to store NestedInteger objects which will help in building the deserialized structure.
 
----
+4. **Push Operation**
+	```cpp
+	    stk.push(NestedInteger());
+	```
+	Push an empty NestedInteger to the stack as the starting point for building the structure.
 
-### 📈 Complexity Analysis
+5. **Iterator**
+	```cpp
+	    for(auto it = s.begin(); it != s.end();) {
+	```
+	A for-loop to iterate through each character in the string 's'.
 
-#### Time Complexity:
-- **Time Complexity**: The time complexity of this algorithm is **O(n)**, where `n` is the length of the input string `s`. 
-  - Each character in the string is processed exactly once.
-  - For each character, we either push or pop elements from the stack, which takes constant time.
-  - The `stoi` operation and other string manipulations inside the loop also run in constant time.
+6. **Character Access**
+	```cpp
+	        const char &c = *it;
+	```
+	Access the current character of the string 's'.
 
-#### Space Complexity:
-- **Space Complexity**: The space complexity is **O(n)**, where `n` is the length of the string.
-  - In the worst case, all elements in the string could form separate nested lists, requiring space proportional to the input string size.
-  - The stack stores the nested integer objects, and the space required for these objects is proportional to the number of elements being stored.
+7. **Check for Number**
+	```cpp
+	        if(isnumber(c)) {
+	```
+	Check if the current character is a number (either positive or negative).
 
----
+8. **Find Non-Number**
+	```cpp
+	            auto it2 = find_if_not(it, s.end(), isnumber);
+	```
+	Find the first character in the string 's' that is not a number.
 
-### 🏁 Conclusion
+9. **Integer Conversion**
+	```cpp
+	            int val = stoi(string(it, it2));
+	```
+	Convert the substring representing a number into an integer.
 
-This algorithm efficiently deserializes a string into a nested list structure using a stack-based approach. By iterating through the string once and managing the parsing with a stack, we can handle both numbers and nested lists in a way that maintains the correct hierarchy.
+10. **Add to Stack**
+	```cpp
+	            stk.top().add(NestedInteger(val));
+	```
+	Add the integer value as a NestedInteger object to the top of the stack.
 
-**Key Points**:
-- **Time Complexity**: **O(n)** – Linear in the size of the input string.
-- **Space Complexity**: **O(n)** – Linear space required for storing the nested structure.
-- **Efficient Parsing**: We use a stack to track the current state of the list and ensure that each element is correctly nested.
+11. **Update Iterator**
+	```cpp
+	            it = it2;
+	```
+	Update the iterator to the next non-number character.
 
-With this approach, you can efficiently deserialize any valid string representation of a nested list! Happy coding! 🎉
+12. **Else Block**
+	```cpp
+	        else {
+	```
+	If the character is not a number, check for the special characters '[' or ']'.
+
+13. **Opening Bracket Check**
+	```cpp
+	            if(c == '[') {
+	```
+	Check if the character is an opening bracket '[' which indicates the start of a new list.
+
+14. **Push New NestedInteger**
+	```cpp
+	                stk.push(NestedInteger());
+	```
+	Push a new empty NestedInteger to the stack to represent the new list.
+
+15. **Closing Bracket Check**
+	```cpp
+	            } else if (c == ']') {
+	```
+	Check if the character is a closing bracket ']' which indicates the end of a list.
+
+16. **Pop and Add to Parent**
+	```cpp
+	                NestedInteger ni = stk.top();
+	```
+	Pop the top NestedInteger object from the stack.
+
+17. **Pop Stack**
+	```cpp
+	                stk.pop();
+	```
+	Pop the top element from the stack after storing it in 'ni'.
+
+18. **Add to Parent List**
+	```cpp
+	                stk.top().add(ni);
+	```
+	Add the popped NestedInteger object to the top NestedInteger in the stack.
+
+19. **Increment Iterator**
+	```cpp
+	            it++;
+	```
+	Increment the iterator to move to the next character in the string.
+
+20. **Return Result**
+	```cpp
+	    NestedInteger res = stk.top().getList().front();
+	```
+	Get the first element from the list in the top NestedInteger object in the stack.
+
+21. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the deserialized NestedInteger object.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear with respect to the length of the input string.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for the stack and NestedInteger objects.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/mini-parser/description/)
 

@@ -14,115 +14,196 @@ img_src = ""
 youtube = "Q0WKzdpR74o"
 youtube_upload_date="2020-04-27"
 youtube_thumbnail="https://i.ytimg.com/vi/Q0WKzdpR74o/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array of even length, determine if it is possible to reorder the array such that for every index i, arr[2 * i + 1] = 2 * arr[2 * i] holds true. If it is possible to reorder the array in this way, return true, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers, arr, with even length.
+- **Example:** `Input: arr = [6, 3, 4, 8]`
+- **Constraints:**
+	- 2 <= arr.length <= 30000
+	- arr.length is even.
+	- -105 <= arr[i] <= 105
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canReorderDoubled(vector<int>& arr) {
-        
-        unordered_map<int, int> c;
-        for(int i : arr)
-            c[i]++;
-        
-        vector<int> keys;
-        for(auto it: c)
-            keys.push_back(it.first);
-        
-        sort(keys.begin(), keys.end(), [&](int a, int b){
-            return abs(a) < abs(b);
-        });
-        
-        for(int x: keys) {
-            if(c[x] > c[2 * x])
-                return false;
-            c[2 * x] -= c[x];
-        }
-        
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a boolean value: true if the array can be reordered as described, false otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output will be a boolean indicating if the array can be reordered accordingly.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check whether we can reorder the elements in pairs such that each second element is twice the first element.
+
+- 1. Create a frequency map to count occurrences of each element.
+- 2. Sort the unique elements by their absolute values.
+- 3. For each element, check if the frequency of its double exists. If not, return false.
+- 4. Adjust the frequencies accordingly after each pair is formed.
+- 5. If all elements are successfully paired, return true; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always have an even number of elements.
+- We assume the input array is non-empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [6, 3, 4, 8]`  \
+  **Explanation:** In this case, we cannot reorder the array such that for every i, arr[2 * i + 1] = 2 * arr[2 * i] because the elements do not form valid pairs.
+
+- **Input:** `Input: arr = [4, -2, 2, -4]`  \
+  **Explanation:** Here, we can form pairs [-2, -4] and [2, 4], so the array can be reordered to form a valid sequence.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the elements of the array based on their absolute values and then checking if we can pair each element with its double while adjusting frequencies.
+
+### Initial Thoughts 💭
+- The key observation is that we need to pair each element with its double, so sorting the elements will allow us to efficiently check this condition.
+- Using a frequency map to track the occurrences of elements is an efficient way to ensure we can match each element with its double.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will not be empty as the length of the array is guaranteed to be at least 2.
+- For large arrays up to the size limit of 30000, the solution should run in linearithmic time due to sorting, followed by linear passes for pairing.
+- Special values like 0 and negative numbers are valid as long as they satisfy the pairing condition.
+- The algorithm must run efficiently for large input sizes, particularly for arrays of length up to 30000.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canReorderDoubled(vector<int>& arr) {
+    
+    unordered_map<int, int> c;
+    for(int i : arr)
+        c[i]++;
+    
+    vector<int> keys;
+    for(auto it: c)
+        keys.push_back(it.first);
+    
+    sort(keys.begin(), keys.end(), [&](int a, int b){
+        return abs(a) < abs(b);
+    });
+    
+    for(int x: keys) {
+        if(c[x] > c[2 * x])
+            return false;
+        c[2 * x] -= c[x];
     }
-};
-{{< /highlight >}}
----
+    
+    return true;
+}
+```
 
-### Problem Statement
+This function checks if the given array can be reordered to form pairs such that every pair consists of one element and its double. It uses a frequency map and sorts keys by absolute value for correct pairing.
 
-Given an array of integers `arr`, the task is to determine if it is possible to reorder the elements such that each element `x` has a corresponding `2 * x` in the array. More specifically, for every element `x` in the array, we need to check if there exists a `2 * x` in the array, and if so, we need to "pair" them. The goal is to return `true` if the array can be rearranged in such a way, and `false` otherwise. This problem is commonly encountered when dealing with pairing elements with double relationships in a dataset.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool canReorderDoubled(vector<int>& arr) {
+	```
+	The function `canReorderDoubled` takes an array and determines if it can be reordered to form valid (x, 2x) pairs.
 
-### Approach
+2. **Map Initialization**
+	```cpp
+	    unordered_map<int, int> c;
+	```
+	Create a hash map `c` to count the frequency of each element in the array.
 
-To solve this problem, we can follow a greedy approach. We need to ensure that for each element `x` in the array, there is a corresponding `2 * x` that can be paired with it. The approach involves:
+3. **Frequency Calculation**
+	```cpp
+	    for(int i : arr)
+	```
+	Iterate through the array to populate the frequency map `c`.
 
-1. **Counting Elements**: We first count the occurrences of each element in the array using a hash map (unordered map).
-  
-2. **Sorting by Absolute Value**: Since the problem involves pairs of numbers where one is double the other, we need to consider numbers based on their absolute values. Sorting the keys (unique values of the array) based on their absolute values allows us to process smaller values first. This helps to handle potential conflicts when larger elements depend on smaller elements to form pairs.
+4. **Increment Frequency**
+	```cpp
+	        c[i]++;
+	```
+	Increase the count of the current element in the frequency map.
 
-3. **Greedy Pairing**: We attempt to pair each element `x` with its double `2 * x`. If there are more occurrences of `x` than `2 * x`, then it is impossible to form valid pairs, so we return `false`. We decrement the count of `2 * x` as we successfully pair it with `x`.
+5. **Key Extraction**
+	```cpp
+	    vector<int> keys;
+	```
+	Create a vector `keys` to store unique elements from the frequency map.
 
-4. **Final Check**: After attempting to pair all elements, if any unpaired elements are left, we return `false`. If all elements can be paired successfully, we return `true`.
+6. **Iterate Map**
+	```cpp
+	    for(auto it: c)
+	```
+	Iterate through the frequency map to extract unique keys.
 
-### Code Breakdown (Step by Step)
+7. **Push Keys**
+	```cpp
+	        keys.push_back(it.first);
+	```
+	Push each unique key into the `keys` vector for further processing.
 
-1. **Counting Element Occurrences**:
-   ```cpp
-   unordered_map<int, int> c;
-   for(int i : arr)
-       c[i]++;
-   ```
-   - We use an unordered map `c` to store the count of each element in the array `arr`. The key is the element, and the value is its frequency in the array.
+8. **Sort Keys**
+	```cpp
+	    sort(keys.begin(), keys.end(), [&](int a, int b){
+	```
+	Sort the keys in ascending order of their absolute values using a lambda function.
 
-2. **Storing Unique Keys**:
-   ```cpp
-   vector<int> keys;
-   for(auto it: c)
-       keys.push_back(it.first);
-   ```
-   - We extract all the unique keys (elements) from the map into the vector `keys`.
+9. **Absolute Value Comparison**
+	```cpp
+	        return abs(a) < abs(b);
+	```
+	Compare the absolute values of two elements to determine their order.
 
-3. **Sorting the Keys by Absolute Value**:
-   ```cpp
-   sort(keys.begin(), keys.end(), [&](int a, int b){
-       return abs(a) < abs(b);
-   });
-   ```
-   - We sort the keys by their absolute values in ascending order. This ensures that we handle smaller values first, which is important because we need to find and pair each element `x` with `2 * x`.
+10. **Iterate Keys**
+	```cpp
+	    for(int x: keys) {
+	```
+	Iterate through the sorted keys to verify the (x, 2x) pairs.
 
-4. **Greedy Pairing Process**:
-   ```cpp
-   for(int x: keys) {
-       if(c[x] > c[2 * x])
-           return false;
-       c[2 * x] -= c[x];
-   }
-   ```
-   - For each element `x` in the sorted list, we check if there are more occurrences of `x` than its double `2 * x`. If so, it’s impossible to form pairs, and we return `false`.
-   - If we can form valid pairs, we decrement the count of `2 * x` by the number of occurrences of `x` because those occurrences of `x` are now paired with `2 * x`.
+11. **Pair Check**
+	```cpp
+	        if(c[x] > c[2 * x])
+	```
+	If there are more occurrences of `x` than `2x`, the pairing is invalid.
 
-5. **Final Result**:
-   ```cpp
-   return true;
-   ```
-   - If the entire process completes without encountering any issues, we return `true`, indicating that the array can be rearranged to satisfy the condition.
+12. **Return False**
+	```cpp
+	            return false;
+	```
+	Return `false` immediately if a valid pair cannot be formed for the current key.
 
-### Complexity
+13. **Adjust Frequency**
+	```cpp
+	        c[2 * x] -= c[x];
+	```
+	Adjust the frequency of `2x` by subtracting the count of `x` after pairing.
 
-1. **Time Complexity**:
-   - Counting the occurrences of each element takes O(n), where `n` is the size of the array `arr`.
-   - Sorting the unique keys based on their absolute values takes O(k log k), where `k` is the number of unique elements in `arr`.
-   - The final loop where we pair elements takes O(k), as we process each unique element once.
-   - Overall, the time complexity is dominated by the sorting step, so it is O(k log k). Since `k` is at most `n`, the total time complexity is O(n log n).
+14. **Return True**
+	```cpp
+	    return true;
+	```
+	Return `true` indicating the array can be reordered to form valid pairs.
 
-2. **Space Complexity**:
-   - The space complexity is O(n), as we store the counts of each element in the unordered map, and the list of unique keys requires space proportional to the number of distinct elements in the array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-### Conclusion
+The time complexity is O(n log n) due to the sorting step, followed by linear scans to check the pairing conditions.
 
-This solution efficiently solves the problem by using a greedy approach with a hash map to count element occurrences and a sorting step to ensure that smaller elements are processed first. By sorting the array based on absolute values and processing each element in increasing order, we ensure that the pairing is done optimally. The overall time complexity of O(n log n) is efficient enough for large inputs, and the space complexity of O(n) is also manageable. The solution is both intuitive and effective for solving the problem of pairing elements with their doubles in an array.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the frequency map and the sorted keys.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/array-of-doubled-pairs/description/)
 

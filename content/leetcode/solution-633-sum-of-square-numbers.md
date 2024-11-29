@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "B0UrG_X2faA"
 youtube_upload_date="2024-06-17"
 youtube_thumbnail="https://i.ytimg.com/vi/B0UrG_X2faA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,98 +28,147 @@ youtube_thumbnail="https://i.ytimg.com/vi/B0UrG_X2faA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a non-negative integer c, determine if there exist two non-negative integers a and b such that a^2 + b^2 = c.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a non-negative integer c.
+- **Example:** `c = 5`
+- **Constraints:**
+	- 0 <= c <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool judgeSquareSum(int c) {
-        long left = 0, right = sqrt(c);
-        while(left <= right) {
-            long res = left * left + right * right;
-            if(res < c)
-            left++;
-            else if(res > c) 
-            right--;
-            else return true;
-        }
-        return false;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if such integers a and b exist, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The output is either true or false.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if there are two integers a and b such that their squares sum up to the given number c.
+
+- Start with two pointers: one at 0 (left) and the other at the square root of c (right).
+- Check the sum of their squares: if the sum is less than c, move the left pointer to the right; if it's greater, move the right pointer to the left; if it's equal, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be a valid non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `c = 5`  \
+  **Explanation:** In this case, the integers 1 and 2 satisfy the equation 1^2 + 2^2 = 5, so the output is true.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses two pointers to check if there exist two integers whose squares sum up to c.
+
+### Initial Thoughts 💭
+- We need an efficient way to check for the existence of such integers, especially given the large constraint for c.
+- Using the two-pointer technique allows us to efficiently check possible pairs of squares without checking every single pair.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is always a non-negative integer, so no empty inputs to handle.
+- Ensure the solution works efficiently even for the largest values of c, up to 2^31 - 1.
+- For c = 0, the answer should be true since 0^2 + 0^2 = 0.
+- The solution must handle values of c from 0 to 2^31 - 1.
+{{< dots >}}
+## Code 💻
+```cpp
+bool judgeSquareSum(int c) {
+    long left = 0, right = sqrt(c);
+    while(left <= right) {
+        long res = left * left + right * right;
+        if(res < c)
+        left++;
+        else if(res > c) 
+        right--;
+        else return true;
     }
-};
-{{< /highlight >}}
----
+    return false;
+}
+```
 
-### Problem Statement
+This code defines the function `judgeSquareSum` that checks whether a number `c` can be expressed as the sum of two squares. It uses two pointers, `left` and `right`, to iterate over possible values of squares and check if their sum equals `c`.
 
-The problem asks us to determine whether a given integer `c` can be expressed as the sum of the squares of two non-negative integers. Specifically, the task is to check if there exist two integers `a` and `b` such that:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool judgeSquareSum(int c) {
+	```
+	This line declares the function `judgeSquareSum`, which takes an integer `c` and returns a boolean value indicating whether `c` can be written as the sum of two squares.
 
-\[
-a^2 + b^2 = c
-\]
+2. **Variable Initialization**
+	```cpp
+	    long left = 0, right = sqrt(c);
+	```
+	Two variables `left` and `right` are initialized. `left` starts at 0, and `right` is set to the square root of `c` (converted to a `long`). These variables will be used to represent the two numbers whose squares are being summed.
 
-For example:
-- For `c = 5`, the answer is `true` because \( 1^2 + 2^2 = 5 \).
-- For `c = 3`, the answer is `false` because no two squares sum up to 3.
+3. **Loop**
+	```cpp
+	    while(left <= right) {
+	```
+	A `while` loop starts, running as long as `left` is less than or equal to `right`. This loop will check different combinations of squares of `left` and `right`.
 
-### Approach
+4. **Sum of Squares Calculation**
+	```cpp
+	        long res = left * left + right * right;
+	```
+	The sum of squares of `left` and `right` is calculated and stored in the variable `res`.
 
-The approach to solving this problem revolves around using two pointers to search for pairs of numbers whose squares sum up to `c`. The basic idea is to check all possible pairs of numbers `a` and `b`, where `a` is incremented and `b` is decremented as needed to find a valid pair. This method is efficient due to the use of a two-pointer technique, which avoids checking all possible pairs exhaustively and helps reduce time complexity.
+5. **If Condition for res < c**
+	```cpp
+	        if(res < c)
+	```
+	If the sum of squares `res` is less than `c`, the left pointer `left` needs to be incremented to increase the sum.
 
-### Code Breakdown (Step by Step)
+6. **Increment left**
+	```cpp
+	        left++;
+	```
+	If the sum is less than `c`, the left pointer is incremented to explore larger squares.
 
-Let’s break down the code step by step to understand how it works:
+7. **Else If Condition for res > c**
+	```cpp
+	        else if(res > c) 
+	```
+	If the sum of squares `res` is greater than `c`, the right pointer `right` needs to be decremented to reduce the sum.
 
-#### 1. **Initial Setup:**
-   ```cpp
-   long left = 0, right = sqrt(c);
-   ```
-   - We initialize two variables, `left` and `right`. The `left` pointer starts at `0`, and the `right` pointer starts at the integer square root of `c`, i.e., \( \text{sqrt}(c) \). 
-   - The reason we start with `right = sqrt(c)` is that if the square of any number exceeds `c`, then it can no longer be part of the sum \( a^2 + b^2 = c \). Thus, the maximum possible value for `b` would be `sqrt(c)`.
+8. **Decrement right**
+	```cpp
+	        right--;
+	```
+	If the sum is greater than `c`, the right pointer is decremented to explore smaller squares.
 
-#### 2. **The While Loop:**
-   ```cpp
-   while(left <= right) {
-       long res = left * left + right * right;
-   ```
-   - We enter a while loop that continues as long as the `left` pointer is less than or equal to the `right` pointer.
-   - Inside the loop, we compute the sum of squares of `left` and `right` as `res = left * left + right * right`.
+9. **Found Solution**
+	```cpp
+	        else return true;
+	```
+	If the sum of squares equals `c`, the function returns `true`, indicating that `c` can be expressed as the sum of two squares.
 
-#### 3. **Comparing the Sum of Squares:**
-   ```cpp
-   if(res < c)
-       left++;
-   else if(res > c) 
-       right--;
-   else return true;
-   ```
-   - If `res < c`, it means that the sum of squares is too small, and we need to increase the value of `left` to try and get closer to `c`. Therefore, we increment `left`.
-   - If `res > c`, the sum of squares is too large, and we need to decrease the value of `right` to try and get closer to `c`. Therefore, we decrement `right`.
-   - If `res == c`, we have found a valid pair where \( a^2 + b^2 = c \), and we return `true`.
+10. **Return False**
+	```cpp
+	    return false;
+	```
+	If the loop completes without finding a valid sum of squares, the function returns `false`.
 
-#### 4. **Return Statement:**
-   ```cpp
-   return false;
-   ```
-   - If we exit the while loop without finding a valid pair, it means that no such pair of integers exists that satisfy the condition \( a^2 + b^2 = c \), so we return `false`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(sqrt(c))
+- **Average Case:** O(sqrt(c))
+- **Worst Case:** O(sqrt(c))
 
-### Complexity
+The time complexity is O(sqrt(c)) because we only need to iterate over the possible values of left and right, which is proportional to the square root of c.
 
-#### Time Complexity:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The time complexity of the solution is **O(sqrt(c))**, where `c` is the given integer. This is because the `left` pointer starts at 0 and increments until it reaches \( \sqrt{c} \), and the `right` pointer starts at \( \sqrt{c} \) and decrements until it reaches `left`. The total number of iterations is proportional to the square root of `c`.
+The space complexity is constant, as we only use a few variables for the pointers and calculation.
 
-- The loop runs at most \( \sqrt{c} \) iterations because both the `left` and `right` pointers move towards each other from opposite ends of the possible range. Each iteration involves constant-time operations such as calculating the sum of squares, comparison, and pointer adjustments.
-- Therefore, the time complexity is **O(sqrt(c))**.
+**Happy Coding! 🎉**
 
-#### Space Complexity:
-
-The space complexity of this solution is **O(1)**. The algorithm uses only a constant amount of extra space for storing the variables `left`, `right`, and `res`. No additional data structures are used that would grow with the size of the input.
-
-### Conclusion
-
-This solution efficiently checks if a given integer `c` can be represented as the sum of two squares by using the two-pointer technique. The two pointers (`left` and `right`) are adjusted based on the sum of their squares, effectively narrowing down the search space for a valid pair. By starting from the smallest and largest possible values for `a` and `b`, we ensure that we check only valid pairs, and the algorithm runs in **O(sqrt(c))** time, which is optimal for this problem.
-
-The solution is both time-efficient and space-efficient, making it a great choice for large values of `c`. The key takeaway is the use of the two-pointer technique, which reduces unnecessary computations and ensures that the algorithm works efficiently.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-square-numbers/description/)
 

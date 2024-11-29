@@ -14,169 +14,160 @@ img_src = ""
 youtube = "u4dYdiBXAjI"
 youtube_upload_date="2022-10-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/u4dYdiBXAjI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix of integers. An hourglass is defined as a pattern of elements in the matrix where the middle element is surrounded by 3 elements above it and 3 elements below it, forming the shape of an hourglass. Your task is to find the maximum sum of all hourglasses that can be formed within the matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an m x n matrix of integers.
+- **Example:** `grid = [[4, 1, 2, 3], [5, 2, 1, 4], [9, 7, 1, 6], [2, 5, 8, 3]]`
+- **Constraints:**
+	- 3 <= m, n <= 150
+	- 0 <= grid[i][j] <= 106
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxSum(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        int ans = 0;
-        
-        for(int i = 1; i < m - 1; i++)
-        for(int j = 1; j < n - 1; j++) {
-            
-            int sum = grid[i][j] + grid[i - 1][j] + grid[i + 1][j] +
-                grid[i - 1][j - 1] + grid[i - 1][j + 1] +
-                grid[i + 1][j - 1] + grid[i + 1][j + 1];
-            
-            ans = max(ans, sum);
-            
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum of the elements of an hourglass in the matrix.
+- **Example:** `Output: 30`
+- **Constraints:**
+	- The matrix will always have at least one hourglass.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the maximum sum of an hourglass in the given matrix.
 
-The problem asks us to find the maximum sum of an hourglass shape within a 2D grid. An hourglass shape in the grid consists of seven elements: the center element, the two elements directly above and below it, and the two diagonal elements surrounding it. The task is to calculate the sum of these seven elements for all possible hourglasses in the grid and return the maximum sum encountered.
+- 1. Iterate over all possible positions in the matrix where an hourglass can be formed.
+- 2. For each valid position, calculate the sum of the hourglass and track the maximum sum.
+- 3. Return the maximum sum found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix will always have dimensions where an hourglass can be formed (at least 3x3).
+- All elements in the matrix are non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[6, 2, 1, 3], [4, 2, 1, 5], [9, 2, 8, 7], [4, 1, 2, 9]]`  \
+  **Explanation:** The hourglass with the maximum sum is formed by the cells 6, 2, 1, 2, 9, 2, 8. The sum is 30.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The goal is to find all possible hourglasses in the matrix and calculate the sum of each, keeping track of the maximum sum encountered.
 
-We can break the problem into two main components: 
-
-1. **Understanding the Hourglass Shape**:
-   - In a given 2D grid, an hourglass shape is formed by selecting one center element and then picking its adjacent elements (both vertically and diagonally). 
-   - For a grid element `grid[i][j]`, the hourglass elements are:
-     - The center: `grid[i][j]`
-     - The top: `grid[i-1][j-1]`, `grid[i-1][j]`, `grid[i-1][j+1]`
-     - The bottom: `grid[i+1][j-1]`, `grid[i+1][j]`, `grid[i+1][j+1]`
-   
-   The sum of these seven elements is what we need to compute for each possible hourglass.
-
-2. **Traversing the Grid**:
-   - We need to traverse the grid and compute the sum for each possible hourglass. An hourglass can only start at positions where the center is not at the boundary of the grid. Hence, the valid indices for the center element are `i` ranging from `1` to `m-2` and `j` ranging from `1` to `n-2`, where `m` is the number of rows and `n` is the number of columns of the grid.
-   - For each valid center, we compute the sum of the seven elements and track the maximum sum encountered.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- An hourglass requires a 3x3 area of the matrix to form.
+- The problem can be solved by iterating through the matrix and calculating the sum of each hourglass formed by a center element.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable since m, n >= 3.
+- Ensure the solution handles large matrices (up to 150x150) efficiently.
+- If all elements are the same, the maximum hourglass sum will be the sum of a typical hourglass.
+- The matrix will always have dimensions sufficient to form at least one hourglass.
+{{< dots >}}
+## Code 💻
 ```cpp
-int m = grid.size(), n = grid[0].size();
-int ans = 0;
-```
-
-- We first get the number of rows `m` and columns `n` of the grid using `grid.size()` and `grid[0].size()`, respectively.
-- We initialize a variable `ans` to store the maximum hourglass sum. Initially, we set `ans` to 0.
-
-#### Step 2: Loop Over the Valid Centers
-
-```cpp
-for(int i = 1; i < m - 1; i++) 
+int maxSum(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    int ans = 0;
+    
+    for(int i = 1; i < m - 1; i++)
     for(int j = 1; j < n - 1; j++) {
+        
+        int sum = grid[i][j] + grid[i - 1][j] + grid[i + 1][j] +
+            grid[i - 1][j - 1] + grid[i - 1][j + 1] +
+            grid[i + 1][j - 1] + grid[i + 1][j + 1];
+        
+        ans = max(ans, sum);
+        
+    }
+    return ans;
+}
 ```
 
-- We use two nested loops to iterate over all potential valid centers for the hourglasses. The outer loop iterates over `i` from `1` to `m-2` (to avoid the first and last rows), and the inner loop iterates over `j` from `1` to `n-2` (to avoid the first and last columns). 
-- This ensures that we are only considering the valid centers for the hourglasses and not at the grid boundaries.
+This function calculates the maximum sum of a 3x3 subgrid in a given grid, including the center element and its surrounding neighbors.
 
-#### Step 3: Calculate the Hourglass Sum
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxSum(vector<vector<int>>& grid) {
+	```
+	This line defines the function 'maxSum' which takes a 2D vector grid as input and returns the maximum sum of a 3x3 subgrid.
 
-```cpp
-int sum = grid[i][j] + grid[i - 1][j] + grid[i + 1][j] +
-          grid[i - 1][j - 1] + grid[i - 1][j + 1] +
-          grid[i + 1][j - 1] + grid[i + 1][j + 1];
-```
+2. **Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Here, 'm' and 'n' are initialized to represent the number of rows and columns of the grid.
 
-- For each valid center element `grid[i][j]`, we compute the sum of the seven elements that form the hourglass:
-  - The center: `grid[i][j]`
-  - The top: `grid[i - 1][j - 1]`, `grid[i - 1][j]`, `grid[i - 1][j + 1]`
-  - The bottom: `grid[i + 1][j - 1]`, `grid[i + 1][j]`, `grid[i + 1][j + 1]`
+3. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	The variable 'ans' is initialized to 0 to store the maximum sum found during the iteration.
 
-#### Step 4: Update Maximum Sum
+4. **Outer Loop Setup**
+	```cpp
+	    for(int i = 1; i < m - 1; i++)
+	```
+	This is the outer loop, starting at index 1 and ending at m-2, to avoid out-of-bounds access while checking neighboring cells.
 
-```cpp
-ans = max(ans, sum);
-```
+5. **Inner Loop Setup**
+	```cpp
+	    for(int j = 1; j < n - 1; j++) {
+	```
+	This is the inner loop, starting at index 1 and ending at n-2, ensuring we do not go out of bounds while checking the grid elements.
 
-- After computing the sum of the hourglass at the current center, we update `ans` to store the maximum of the current `ans` and the calculated `sum`.
+6. **Sum Calculation**
+	```cpp
+	        int sum = grid[i][j] + grid[i - 1][j] + grid[i + 1][j] +
+	```
+	Here, the sum of the center element (grid[i][j]) and its vertical neighbors (top and bottom) is calculated.
 
-#### Step 5: Return the Result
+7. **Sum Calculation Continued**
+	```cpp
+	            grid[i - 1][j - 1] + grid[i - 1][j + 1] +
+	```
+	The sum is extended to include the diagonal neighbors (top-left and top-right).
 
-```cpp
-return ans;
-```
+8. **Sum Calculation Continued**
+	```cpp
+	            grid[i + 1][j - 1] + grid[i + 1][j + 1];
+	```
+	The sum is completed by adding the diagonal neighbors (bottom-left and bottom-right).
 
-- After traversing the entire grid and calculating the sum for all possible hourglasses, we return `ans`, which holds the maximum hourglass sum.
+9. **Max Sum Update**
+	```cpp
+	        ans = max(ans, sum);
+	```
+	Here, the maximum of the current 'ans' and the newly calculated 'sum' is stored back in 'ans'.
 
-### Complexity Analysis
+10. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	After all iterations, the function returns the maximum sum found.
 
-#### Time Complexity:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-- **Outer Loops**: The two nested loops iterate over all valid centers in the grid. The valid centers range from `1` to `m-2` for rows and `1` to `n-2` for columns. Thus, the number of valid centers is approximately `(m - 2) * (n - 2)`. 
-- **Computing the Hourglass Sum**: For each valid center, we compute the sum of the seven elements in constant time (`O(1)`), since accessing the elements in the grid takes constant time.
+The time complexity is O(m * n) as we need to iterate through the matrix and calculate the sum of hourglasses at each valid position.
 
-Thus, the overall time complexity is:
-\[
-O((m - 2) \times (n - 2)) = O(m \times n)
-\]
-In the worst case, where we consider all elements of the grid, the time complexity is proportional to the size of the grid.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
+The space complexity is O(1) as we only store a few variables for the maximum sum and do not use extra space proportional to the matrix size.
 
-- The solution uses only a few variables (`m`, `n`, `ans`, and `sum`) and does not require additional data structures that grow with the input size. Therefore, the space complexity is constant:
-\[
-O(1)
-\]
+**Happy Coding! 🎉**
 
-### Example Walkthrough
-
-Let's walk through a simple example to see how the algorithm works.
-
-#### Example 1: `grid = [[1, 1, 1], [1, 9, 1], [1, 1, 1]]`
-
-1. **Initialization**:
-   - The grid has dimensions `3 x 3`, so `m = 3` and `n = 3`.
-   - We initialize `ans = 0`.
-
-2. **First (and only) Hourglass**:
-   - The only valid center is `grid[1][1]`, with value `9`.
-   - The sum of the hourglass centered at `(1, 1)` is:
-     ```
-     9 + 1 + 1 + 1 + 1 + 1 + 1 = 15
-     ```
-   - We update `ans` to `15`.
-
-3. **Result**:
-   - The maximum hourglass sum is `15`.
-
-#### Example 2: `grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`
-
-1. **Initialization**:
-   - The grid has dimensions `3 x 3`, so `m = 3` and `n = 3`.
-   - We initialize `ans = 0`.
-
-2. **First (and only) Hourglass**:
-   - The only valid center is `grid[1][1]`, with value `5`.
-   - The sum of the hourglass centered at `(1, 1)` is:
-     ```
-     5 + 2 + 8 + 4 + 6 + 7 + 9 = 41
-     ```
-   - We update `ans` to `41`.
-
-3. **Result**:
-   - The maximum hourglass sum is `41`.
-
-### Conclusion
-
-This solution efficiently calculates the maximum sum of an hourglass in a 2D grid by iterating over valid centers and summing the elements of the hourglass shape for each valid center. The time complexity is proportional to the size of the grid, and the space complexity is constant. This approach is optimal for the given problem constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-of-an-hourglass/description/)
 

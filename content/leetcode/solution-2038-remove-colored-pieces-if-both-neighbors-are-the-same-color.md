@@ -14,91 +14,142 @@ img_src = ""
 youtube = "03zIcb12PKo"
 youtube_upload_date="2023-10-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/03zIcb12PKo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `colors` consisting of two types of pieces, 'X' and 'Y', arranged in a line. Two players, Alex and Brian, play a game where they take turns removing pieces from the string. Alex moves first and can only remove a piece 'X' if both its neighbors are also 'X'. Similarly, Brian can only remove a piece 'Y' if both its neighbors are also 'Y'. Neither player can remove edge pieces. If a player cannot make a move, they lose. Determine whether Alex wins the game if both players play optimally.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a single string `colors` of length `n`, where `colors[i]` is either 'X' or 'Y', representing the pieces.
+- **Example:** `"XXYXXY"`
+- **Constraints:**
+	- 1 <= colors.length <= 100000
+	- colors consists only of the characters 'X' and 'Y'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool winnerOfGame(string colors) {
-        int a = 0, b = 0;
-        for(int i = 1; i < colors.size() - 1; i++) {
-            if(colors[i - 1] == colors[i] && colors[i] == colors[i+1]) {
-                if(colors[i] == 'A') a++;
-                else b++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if Alex wins the game, or `false` if Brian wins the game.
+- **Example:** `true`
+- **Constraints:**
+	- The result must be computed efficiently due to the constraints on input size.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the winner by counting the number of valid moves for each player and checking if Alex has more valid moves than Brian.
+
+- 1. Iterate through the string `colors`.
+- 2. Count all segments of three consecutive 'X's (valid moves for Alex).
+- 3. Count all segments of three consecutive 'Y's (valid moves for Brian).
+- 4. Compare the counts: if Alex's count is greater than Brian's, return `true`; otherwise, return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- Players play optimally.
+- The string always contains at least one 'X' or 'Y'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"XXYXYXX"`  \
+  **Explanation:** Alex removes the middle 'X' from "XXYXYXX" to get "XYXYXX". Brian has no valid moves, so Alex wins. The function returns `true`.
+
+- **Input:** `"YYXXYY"`  \
+  **Explanation:** Neither Alex nor Brian has a valid move, so Brian wins because Alex cannot make the first move. The function returns `false`.
+
+{{< dots >}}
+## Approach 🚀
+Count the number of valid moves for each player and determine the winner by comparing the counts.
+
+### Initial Thoughts 💭
+- A player can only remove a piece surrounded by identical neighbors.
+- The game ends when neither player can make a valid move.
+- Counting valid moves for each player provides a direct way to determine the winner.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable due to constraints.
+- Strings with length close to the upper limit (100000).
+- Strings where all characters are the same ('XXXXXX' or 'YYYYYY').
+- Strings with no valid moves for either player ('XYXYXY').
+- Must handle strings with maximum length efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+bool winnerOfGame(string colors) {
+    int a = 0, b = 0;
+    for(int i = 1; i < colors.size() - 1; i++) {
+        if(colors[i - 1] == colors[i] && colors[i] == colors[i+1]) {
+            if(colors[i] == 'A') a++;
+            else b++;
         }
-        return a > b;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given a string `colors`, where each character is either 'A' or 'B'. The characters represent colored stones arranged in a line. Two players, Alice and Bob, play a game in which they can remove stones based on the following rule:
-- A player can only remove a stone if there are three consecutive stones of their color (e.g., "AAA" or "BBB").
-- Alice can only remove stones of color 'A', and Bob can only remove stones of color 'B'.
-
-The players alternate turns, starting with Alice. The game continues until neither player can make a move. The objective is to determine if Alice wins, i.e., if she can make more moves than Bob.
-
-### Approach
-
-To solve this problem, we:
-1. **Count Possible Moves for Each Player**: Traverse through the string and count how many segments of three consecutive 'A's exist, which represent potential moves for Alice, and count segments of three consecutive 'B's, representing moves for Bob.
-2. **Compare Moves**: After counting, compare Alice's moves (`a`) with Bob's moves (`b`). If Alice has more moves than Bob, she will win; otherwise, Bob will win or it will be a draw if Alice cannot win.
-
-The game can only proceed when there are segments of three consecutive 'A's or 'B's. Since the problem asks us to return `true` if Alice has more moves and wins, and `false` otherwise, the approach simply involves counting and comparison.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool winnerOfGame(string colors) {
-        int a = 0, b = 0;
+    return a > b;
+}
 ```
 
-- We initialize two variables, `a` and `b`, to keep track of the moves Alice and Bob can make, respectively.
+This function evaluates a game where two players, 'A' and 'B', are competing by marking a string of colors. The function counts the occurrences of consecutive matching colors and determines the winner based on who has more of such consecutive markings.
 
-```cpp
-        for(int i = 1; i < colors.size() - 1; i++) {
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool winnerOfGame(string colors) {
+	```
+	This line defines the function `winnerOfGame` which takes a string `colors` as input. The function determines if player 'A' wins the game by counting consecutive matching colors.
 
-- We start iterating from index `1` and go up to `colors.size() - 2` because we need to check triplets (`colors[i - 1], colors[i], colors[i + 1]`).
+2. **Variable Initialization**
+	```cpp
+	    int a = 0, b = 0;
+	```
+	Here, two variables `a` and `b` are initialized to zero. They will be used to count the number of consecutive matching color pairs for players 'A' and 'B' respectively.
 
-```cpp
-            if(colors[i - 1] == colors[i] && colors[i] == colors[i+1]) {
-                if(colors[i] == 'A') a++;
-                else b++;
-            }
-        }
-```
+3. **Loop**
+	```cpp
+	    for(int i = 1; i < colors.size() - 1; i++) {
+	```
+	This `for` loop iterates over the `colors` string, starting from the second character and stopping at the second-to-last character to check for consecutive matching colors.
 
-- For each position `i`, we check if it forms a triplet of the same color as `colors[i-1]`, `colors[i]`, and `colors[i+1]`.
-  - If the triplet is "AAA", we increment `a`, indicating a move for Alice.
-  - If the triplet is "BBB", we increment `b`, indicating a move for Bob.
+4. **Condition Check**
+	```cpp
+	        if(colors[i - 1] == colors[i] && colors[i] == colors[i+1]) {
+	```
+	This `if` statement checks if the current character and its adjacent characters (previous and next) are the same. If true, it means there is a consecutive match of three identical colors.
 
-```cpp
-        return a > b;
-    }
-};
-```
+5. **Increment Counter**
+	```cpp
+	            if(colors[i] == 'A') a++;
+	```
+	If the consecutive matching colors belong to player 'A' (i.e., the character is 'A'), the counter `a` is incremented by 1.
 
-- After the loop, we simply compare `a` and `b`. If Alice has more moves (`a > b`), the function returns `true`, meaning Alice wins. If `a <= b`, Bob either wins or they tie, in which case the function returns `false`.
+6. **Increment Counter**
+	```cpp
+	            else b++;
+	```
+	If the consecutive matching colors belong to player 'B' (i.e., the character is 'B'), the counter `b` is incremented by 1.
 
-### Complexity
+7. **Return Statement**
+	```cpp
+	    return a > b;
+	```
+	The function returns `true` if player 'A' has more consecutive matching colors than player 'B'. Otherwise, it returns `false`.
 
-- **Time Complexity**: O(n), where `n` is the length of the `colors` string. We iterate through `colors` once, checking each character for potential moves.
-- **Space Complexity**: O(1), as we only use a few integer variables to track counts.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The algorithm processes each character of the string once.
 
-This solution efficiently determines the winner by counting the number of possible moves for Alice and Bob. Since moves can only be made from groups of three consecutive 'A's or 'B's, we simply check and count these patterns. The solution is optimal in both time and space, providing a clear and efficient way to determine the game's outcome based on the conditions given.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The algorithm uses constant extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-colored-pieces-if-both-neighbors-are-the-same-color/description/)
 

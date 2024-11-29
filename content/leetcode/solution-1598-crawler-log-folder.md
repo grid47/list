@@ -14,103 +14,151 @@ img_src = ""
 youtube = "Ur3saIXP7ro"
 youtube_upload_date="2024-07-10"
 youtube_thumbnail="https://i.ytimg.com/vi/Ur3saIXP7ro/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are working with a file system that logs folder change operations. The file system starts in the main folder, and the operations allow the user to move to a parent folder, remain in the current folder, or navigate to a child folder. Given a list of operations, your task is to determine the minimum number of operations required to return to the main folder after performing all the operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of strings where each string represents a folder operation. Operations include moving to a parent folder ('../'), staying in the current folder ('./'), or moving to a child folder ('x/').
+- **Example:** `Input: logs = ['folder1/', 'folder2/', '../', 'folder21/', './']`
+- **Constraints:**
+	- 1 <= logs.length <= 1000
+	- 2 <= logs[i].length <= 10
+	- logs[i] contains lowercase English letters, digits, '.', and '/'
+	- logs[i] follows the described format
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    static int minOperations(vector<string>& logs) {
-        int level=0;
-        for(auto& dir: logs){
-            if (dir=="../") 
-                level-=(level>0);
-            else if (dir!="./")
-                level++;
-        //    cout<<level<<endl;
-        }
-        return level;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to return to the main folder after the changes are applied.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The returned number is a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of operations to go back to the main folder.
+
+- 1. Initialize a counter to keep track of the current folder level, starting at 0 (main folder).
+- 2. For each operation, adjust the counter based on the operation type ('../' decreases level, 'x/' increases level, './' leaves the level unchanged).
+- 3. After processing all operations, the counter will indicate the number of operations needed to return to the main folder.
+{{< dots >}}
+### Problem Assumptions ✅
+- The folder operations are guaranteed to follow the specified format.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: logs = ['folder1/', 'folder2/', '../', 'folder21/', './']`  \
+  **Explanation:** In this case, we move to 'folder1', then to 'folder2', go back to the main folder using '../', move to 'folder21', and stay in the current folder. To return to the main folder, we need to move back twice using '../', hence the output is 2.
+
+- **Input:** `Input: logs = ['folder1/', 'folder2/', './', 'folder3/', '../', 'folder31/']`  \
+  **Explanation:** After moving through various folders, we must return 3 levels up to get back to the main folder. Thus, the output is 3.
+
+- **Input:** `Input: logs = ['folder1/', '../', '../', '../']`  \
+  **Explanation:** In this case, after moving to 'folder1', we use '../' three times to get back to the main folder, and since we're already in the main folder, the output is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves simulating the folder change operations, adjusting the folder level accordingly. We use a simple counter to track the number of steps required to return to the main folder.
+
+### Initial Thoughts 💭
+- Each operation can either increase, decrease, or leave the folder level unchanged.
+- We don't need to simulate every individual operation, but rather just track the folder depth.
+- By keeping track of the folder level, we can directly compute the minimum number of operations to return to the main folder.
+{{< dots >}}
+### Edge Cases 🌐
+- If no operations are provided, return 0.
+- The problem can handle up to 1000 operations, so the solution should efficiently handle large input sizes.
+- Consider cases where all operations are './', which would mean no movement and thus 0 operations to return.
+- Ensure the solution works within the constraints, especially the maximum size of the input list.
+{{< dots >}}
+## Code 💻
+```cpp
+static int minOperations(vector<string>& logs) {
+    int level=0;
+    for(auto& dir: logs){
+        if (dir=="../") 
+            level-=(level>0);
+        else if (dir!="./")
+            level++;
+    //    cout<<level<<endl;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to analyze a list of directory operations represented as strings and determine the minimum number of operations required to return to the root directory. Each operation in the list can represent moving up to the parent directory, staying in the current directory, or entering a new subdirectory. The goal is to efficiently compute the final depth level after processing all operations.
-
-### Approach
-
-To solve this problem, we can use a simple counter to track the current directory depth based on the operations described in the logs. The following steps outline the approach:
-
-1. **Initialization**: Start with a depth level of zero, representing the root directory.
-
-2. **Iterate Through Logs**: For each operation in the logs:
-   - If the operation is `"../"`, decrease the depth level by one, ensuring that it doesn't go below zero (i.e., it cannot go above the root).
-   - If the operation is `"./"`, do nothing as it represents staying in the current directory.
-   - If the operation is any other directory name (indicating entering a new subdirectory), increase the depth level by one.
-
-3. **Return Final Level**: After processing all operations, return the final depth level as the result.
-
-### Code Breakdown (Step by Step)
-
-The provided code implements the above approach using the following steps:
-
-```cpp
-class Solution {
-public:
-    static int minOperations(vector<string>& logs) {
+    return level;
+}
 ```
-- **Class Definition**: The `Solution` class contains a public static method `minOperations` that takes a vector of strings representing directory operations as input.
 
-```cpp
-        int level=0; // Initialize the depth level to zero
-```
-- **Initialization**: The variable `level` is initialized to zero, which represents the current depth of the directory.
+This function calculates the minimum number of operations required to navigate through a list of directory logs, which can be of three types: going up a directory ('../'), staying in the current directory ('./'), or entering a new directory. The function keeps track of the 'level' in the directory structure, returning the final level after processing all operations.
 
-```cpp
-        for(auto& dir: logs){ // Iterate through each operation in the logs
-```
-- **Iteration**: A for loop iterates over each directory operation contained in the `logs` vector.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	static int minOperations(vector<string>& logs) {
+	```
+	This is the function signature. It defines a static function 'minOperations' that takes a reference to a vector of strings, 'logs', representing the directory operations.
 
-```cpp
-            if (dir=="../") 
-                level-=(level>0); // Decrease level by 1 if not at root
-```
-- **Parent Directory Operation**: If the current operation is `"../"`, the level is decreased by one, but only if it is greater than zero (to prevent going below the root directory). The expression `level-=(level>0)` effectively reduces the level by one if the condition `level > 0` evaluates to true (which returns 1), otherwise, it reduces it by 0.
+2. **Variable Initialization**
+	```cpp
+	    int level=0;
+	```
+	Here, a variable 'level' is initialized to 0. This variable will be used to track the current level in the directory structure.
 
-```cpp
-            else if (dir!="./") // Check if the operation is not staying in the current directory
-                level++; // Increase level by 1 for a new subdirectory
-```
-- **Subdirectory Operation**: If the operation is not `"./"` (which signifies staying in the current directory), the level is increased by one, indicating that the user has entered a new subdirectory.
+3. **Loop**
+	```cpp
+	    for(auto& dir: logs){
+	```
+	This 'for' loop iterates over each directory operation in the 'logs' vector.
 
-```cpp
-        return level; // Return the final depth level
-    }
-};
-```
-- **Returning Result**: After processing all operations, the final depth level is returned as the result of the method.
+4. **Condition Check**
+	```cpp
+	        if (dir=="../") 
+	```
+	This condition checks if the current operation is moving up one directory ('../').
 
-### Complexity
+5. **Level Adjustment**
+	```cpp
+	            level-=(level>0);
+	```
+	If the 'dir' is '../', the level is decremented by 1, but only if the current level is greater than 0, ensuring that it doesn't go below 0.
 
-- **Time Complexity**: The time complexity of this approach is \(O(n)\), where \(n\) is the number of operations in the `logs` vector. This is because we need to iterate through each log entry exactly once.
+6. **Condition Check**
+	```cpp
+	        else if (dir!="./")
+	```
+	This condition checks if the directory operation is not './', i.e., the operation is a valid directory movement (entering a new directory).
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we are only using a constant amount of extra space for the `level` variable, regardless of the size of the input.
+7. **Level Adjustment**
+	```cpp
+	            level++;
+	```
+	If the directory operation is not './' (i.e., a new directory is entered), the level is incremented by 1.
 
-### Conclusion
+8. **Return Statement**
+	```cpp
+	    return level;
+	```
+	After all operations have been processed, the final 'level' is returned, indicating the final position in the directory structure.
 
-This solution efficiently determines the minimum number of directory operations required to return to the root directory by leveraging a simple counter. The main features of the approach include:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - If all operations are './', no level changes are needed.
+- **Average Case:** O(n) - We always iterate over the input list once.
+- **Worst Case:** O(n) - In the worst case, we may need to process all operations.
 
-1. **Efficient Tracking**: The use of an integer variable to track the depth level allows for constant-time operations for each log entry.
-2. **Boundary Handling**: Careful checks ensure that the depth level does not go below zero, which maintains the integrity of directory navigation.
-3. **Clarity and Simplicity**: The code is straightforward, making it easy to understand and maintain.
+The time complexity is O(n), where n is the length of the logs list.
 
-Overall, this method is optimal for the problem at hand and effectively addresses the requirements with minimal overhead. The solution can be readily adapted or extended for similar problems involving directory navigation or path manipulation, making it a versatile approach in programming challenges.
+### Space Complexity 💾
+- **Best Case:** O(1) - The space complexity remains constant regardless of the input size.
+- **Worst Case:** O(1) - We only need a few variables to track the current folder level.
+
+The space complexity is O(1), as we are only using a fixed amount of memory to store the folder level.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/crawler-log-folder/description/)
 

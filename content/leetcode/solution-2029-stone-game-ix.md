@@ -14,87 +14,139 @@ img_src = ""
 youtube = "7r34JD5ud-c"
 youtube_upload_date="2021-10-03"
 youtube_thumbnail="https://i.ytimg.com/vi/7r34JD5ud-c/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice and Bob are playing a game with stones. The sequence of `n` stones has values given in an array `stones`. Players take turns to remove a stone. The player who removes a stone, making the sum of all removed stones divisible by 3, loses. If all stones are removed, Bob wins automatically. Determine if Alice wins or Bob wins, assuming both play optimally.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `stones` representing the values of the stones. Alice and Bob alternate turns, starting with Alice. On each turn, one stone is removed.
+- **Example:** `stones = [3, 2]`
+- **Constraints:**
+	- 1 <= stones.length <= 10^5
+	- 1 <= stones[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool stoneGameIX(vector<int>& stones) {
-        vector<int> m(3, 0);
-        for(int a: stones)
-        m[a % 3]++;
-        if(min(m[2], m[1]) == 0)
-        return max(m[1], m[2]) > 2 && m[0] % 2 >0;
-        return abs(m[1] - m[2]) > 2 || m[0] % 2 == 0;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if Alice wins and `false` if Bob wins.
+- **Example:** ``
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the winner of the game based on the values of the stones and the optimal moves by both players.
 
-The problem revolves around a two-player game involving a pile of stones. Players take turns removing stones from the pile, and the game rules specify that players can remove stones with specific properties. The objective is to determine whether the first player has a winning strategy given an array of stone values. Each stone value can be categorized based on its modulo 3 value, which influences the game's outcome.
+- 1. Count the number of stones with values that leave remainders of 0, 1, and 2 when divided by 3.
+- 2. Use the counts of stones with each remainder to decide the optimal moves for Alice and Bob.
+- 3. Check if the sum of the removed stones after each turn is divisible by 3 to determine the winner.
+{{< dots >}}
+### Problem Assumptions ✅
+- Players will always play optimally and aim to avoid the sum of removed stones being divisible by 3.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `stones = [3, 2]`  \
+  **Explanation:** Alice removes the stone with value 2, and Bob removes the stone with value 3. The sum of the removed stones is 5, which is not divisible by 3, so Alice wins.
 
-### Approach
+- **Input:** `stones = [1, 1, 1]`  \
+  **Explanation:** Alice removes one stone (value 1), Bob removes another (value 1), and Alice removes the last one (value 1). The sum is 3, divisible by 3, so Alice loses and Bob wins.
 
-To determine if the first player can always win, we can break down the game using the properties of the stones based on their modulo values. The key steps in our approach include:
+- **Input:** `stones = [4, 6, 2]`  \
+  **Explanation:** Alice removes the stone with value 2, Bob removes the stone with value 4, and Alice removes the last stone with value 6. The sum is 12, divisible by 3, so Alice wins.
 
-1. **Counting Stones by Remainder**: We will categorize stones into three groups based on their values when divided by 3:
-   - Stones with a remainder of 0 (i.e., `value % 3 == 0`)
-   - Stones with a remainder of 1 (i.e., `value % 3 == 1`)
-   - Stones with a remainder of 2 (i.e., `value % 3 == 2`)
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to simulate the game and determine who will win given the sequence of stones and the optimal play strategy.
 
-2. **Analyzing Game Conditions**: The winning conditions depend on the counts of these stones. The first player's strategy will rely on how many stones are present in each category:
-   - If there are no stones with a remainder of 1 or 2, the first player can only take stones with a remainder of 0. In this case, if there is more than one stone, the second player will always win.
-   - If there are stones with either remainder, we analyze their counts to determine if the first player can manipulate the game toward their advantage.
-
-3. **Establishing Winning Conditions**: The game's outcome is determined by the following conditions:
-   - If one type of remainder (either 1 or 2) has zero stones, the first player can only win if they can ensure that there are more than two stones of the other type and an odd count of stones with a remainder of 0.
-   - If both types of remainders are present, the first player wins if the absolute difference in counts of the stones with remainders of 1 and 2 is greater than 2 or if the count of stones with remainder 0 is even.
-
-### Code Breakdown (Step by Step)
-
-Now, let's delve into the provided code to understand its functionality:
-
+### Initial Thoughts 💭
+- The game is primarily determined by the number of stones that leave remainders of 0, 1, and 2 when divided by 3.
+- The game ends when one player causes the sum of the removed stones to be divisible by 3.
+- By analyzing the remainders of the stone values modulo 3, we can determine the optimal strategy for both Alice and Bob.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable since there will always be at least one stone.
+- Ensure the solution is optimized for large inputs (up to 10^5 stones).
+- If all stones are divisible by 3, Bob will always win.
+- Ensure the algorithm is efficient enough to handle the maximum input size within the time limits.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool stoneGameIX(vector<int>& stones) {
+bool stoneGameIX(vector<int>& stones) {
+    vector<int> m(3, 0);
+    for(int a: stones)
+    m[a % 3]++;
+    if(min(m[2], m[1]) == 0)
+    return max(m[1], m[2]) > 2 && m[0] % 2 >0;
+    return abs(m[1] - m[2]) > 2 || m[0] % 2 == 0;
+}
 ```
-- Here, we define the `Solution` class and the method `stoneGameIX`, which accepts a vector of integers representing the stones.
 
-```cpp
-        vector<int> m(3, 0);
-        for(int a: stones)
-            m[a % 3]++;
-```
-- We initialize a vector `m` of size 3 to count the stones based on their modulo 3 values. The loop iterates through the `stones` vector and increments the appropriate index of `m` based on the modulo result.
+This function determines the winner of the Stone Game IX based on the division of stones into three groups (modulo 3). It uses counters to track the number of stones in each group and applies game logic to decide the winner.
 
-```cpp
-        if(min(m[2], m[1]) == 0)
-            return max(m[1], m[2]) > 2 && m[0] % 2 > 0;
-```
-- This condition checks if there are no stones of one of the remainders (either 1 or 2). If so, it checks if there are more than two stones of the other type and if the count of stones with remainder 0 is odd. If both conditions are true, the first player can win.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool stoneGameIX(vector<int>& stones) {
+	```
+	This defines the 'stoneGameIX' function, which accepts a vector of stones and returns a boolean indicating whether the current player wins the game.
 
-```cpp
-        return abs(m[1] - m[2]) > 2 || m[0] % 2 == 0;
-```
-- If both types of stones are present, the method checks whether the absolute difference between the counts of stones with remainders 1 and 2 is greater than 2 or if the count of stones with remainder 0 is even. If either condition holds, the first player has a winning strategy.
+2. **Array Initialization**
+	```cpp
+	    vector<int> m(3, 0);
+	```
+	This initializes a vector 'm' of size 3, used to store the counts of stones divided into 3 groups based on their remainder when divided by 3.
 
-### Complexity
+3. **Loop Start**
+	```cpp
+	    for(int a: stones)
+	```
+	This loop iterates through each stone in the 'stones' vector, performing the modulo operation to categorize the stones into one of three groups.
 
-- **Time Complexity**: The time complexity is O(n), where n is the number of stones. This is because we need to iterate through the `stones` array once to populate the counts.
+4. **Update Counter**
+	```cpp
+	    m[a % 3]++;
+	```
+	For each stone 'a', this increments the corresponding counter in the 'm' vector based on the result of 'a % 3'.
 
-- **Space Complexity**: The space complexity is O(1) since we only use a fixed-size array of size 3 to store the counts of the stones based on their remainders.
+5. **Condition Check**
+	```cpp
+	    if(min(m[2], m[1]) == 0)
+	```
+	This checks whether one of the groups (1 or 2 modulo 3) has zero stones, which will influence the game's outcome.
 
-### Conclusion
+6. **Return Condition 1**
+	```cpp
+	    return max(m[1], m[2]) > 2 && m[0] % 2 >0;
+	```
+	This checks if the maximum count between groups 1 and 2 is greater than 2 and if the count of group 0 is odd, deciding the winner.
 
-In conclusion, the `stoneGameIX` method effectively determines if the first player has a winning strategy based on the modulo classification of the stones. By leveraging simple counting and logical conditions, we can derive the outcome of the game efficiently. The implementation is straightforward, relying on basic properties of numbers, which makes it not only effective but also easy to understand. This solution illustrates how game theory can be applied to seemingly simple problems, providing insights into strategic decision-making based on available resources.
+7. **Return Condition 2**
+	```cpp
+	    return abs(m[1] - m[2]) > 2 || m[0] % 2 == 0;
+	```
+	If the first condition is not met, this checks if the absolute difference between groups 1 and 2 is greater than 2 or if the count of group 0 is even, deciding the winner.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The algorithm runs in linear time relative to the number of stones.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant because we only need to track the counts of stones with different remainders modulo 3.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stone-game-ix/description/)
 

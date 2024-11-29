@@ -14,46 +14,106 @@ img_src = ""
 youtube = "ouflA0KmCnI"
 youtube_upload_date="2021-10-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ouflA0KmCnI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are required to build a system for a bank that automates various account transactions, including deposits, withdrawals, and transfers. The bank has multiple accounts, and each transaction must adhere to specific rules to be considered valid. Implement a class that handles these operations efficiently while ensuring transactional integrity.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The system receives an initial array of balances and multiple commands for transactions. Each command specifies the type of transaction, the involved account(s), and the amount.
+- **Example:** `Input:
+['Bank', 'withdraw', 'transfer', 'deposit', 'transfer', 'withdraw']
+[[[50, 200, 75]], [2, 20], [3, 1, 50], [2, 30], [3, 1, 100], [4, 40]]`
+- **Constraints:**
+	- The number of accounts, n, is between 1 and 10^5.
+	- Account indices are between 1 and n.
+	- Transaction amounts and balances are non-negative and can go up to 10^12.
+	- A maximum of 10^4 operations are supported.
 
-{{< highlight cpp >}}
-class Bank {
-public:
-    int n;
-    vector<long long> bal;
-    Bank(vector<long long>& balance) {
-        bal = balance;
-        n = bal.size();
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The system outputs the success or failure of each transaction as a boolean result.
+- **Example:** `Output:
+[null, true, true, true, false, false]`
+- **Constraints:**
+	- The output matches the order of operations, indicating success or failure for each transaction type.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Process transactions while maintaining the validity of account balances and ensuring the integrity of operations.
+
+- Initialize the bank with an array representing account balances.
+- For 'withdraw', check if the account exists and has sufficient balance. Deduct the amount if valid.
+- For 'deposit', validate the account number and add the specified amount to the account balance.
+- For 'transfer', validate both account numbers and check if the source account has sufficient balance. Transfer the funds if valid.
+- Return true for successful operations and false for invalid transactions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The initial balances are non-negative.
+- All accounts are valid at initialization.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input:
+['Bank', 'deposit', 'withdraw', 'transfer']
+[[[100, 50]], [1, 50], [2, 60], [1, 2, 30]]`  \
+  **Explanation:** The initial balances are [100, 50].
+- 'deposit': Account 1 receives $50, new balance is $150. Return true.
+- 'withdraw': Account 2 tries to withdraw $60 but has insufficient funds. Return false.
+- 'transfer': Account 1 transfers $30 to Account 2. Updated balances are [120, 80]. Return true.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses a direct mapping of account numbers to indices in the balance array for efficient lookups and updates. All operations are performed in constant time by validating inputs and applying changes directly to the array.
+
+### Initial Thoughts 💭
+- The key challenge is validating account numbers and ensuring sufficient balance for transactions.
+- Since accounts are indexed and contiguous, they can be efficiently mapped to array indices.
+- Use a straightforward array representation for account balances.
+- Perform validation checks before applying any transaction to ensure data consistency.
+{{< dots >}}
+### Edge Cases 🌐
+- Input with no accounts should return false for all operations.
+- Processes a maximum-sized balance array with 10^5 accounts and 10^4 transactions without exceeding limits.
+- Handle cases where transaction amounts are zero or equal to account balances.
+- Ensure invalid account numbers return false.
+- Check operations with edge case values like maximum balance and transaction amounts.
+{{< dots >}}
+## Code 💻
+```cpp
+int n;
+vector<long long> bal;
+Bank(vector<long long>& balance) {
+    bal = balance;
+    n = bal.size();
+}
+
+bool transfer(int acc1, int acc2, long long money) {
+    int ac1 = acc1 - 1 , ac2 = acc2 - 1;
+    if(ac1 < 0 || ac1 >= n || ac2 < 0 || ac2 >= n || bal[ac1] < money)
+        return false;
     
-    bool transfer(int acc1, int acc2, long long money) {
-        int ac1 = acc1 - 1 , ac2 = acc2 - 1;
-        if(ac1 < 0 || ac1 >= n || ac2 < 0 || ac2 >= n || bal[ac1] < money)
-            return false;
-        
-        bal[ac1] -= money;
-        bal[ac2] += money;
-        return true;
-    }
+    bal[ac1] -= money;
+    bal[ac2] += money;
+    return true;
+}
+
+bool deposit(int acc, long long money) {
     
-    bool deposit(int acc, long long money) {
-        
-        if(acc < 1 || acc > n) return false;
-        
-        bal[acc - 1] += money;
-        return true;
-    }
+    if(acc < 1 || acc > n) return false;
     
-    bool withdraw(int acc, long long money) {
-        if(acc < 1 || acc > n || bal[acc - 1] < money) return false;        
-        bal[acc - 1] -= money;
-        return true;
-    }
+    bal[acc - 1] += money;
+    return true;
+}
+
+bool withdraw(int acc, long long money) {
+    if(acc < 1 || acc > n || bal[acc - 1] < money) return false;        
+    bal[acc - 1] -= money;
+    return true;
+}
 };
 
 /**
@@ -62,104 +122,149 @@ public:
  * bool param_1 = obj->transfer(account1,account2,money);
  * bool param_2 = obj->deposit(account,money);
  * bool param_3 = obj->withdraw(account,money);
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This code defines a Bank class that handles operations like transfer, deposit, and withdraw, managing user account balances.
 
-This code represents a simple banking system that supports common bank account operations, including transferring funds between accounts, depositing funds into an account, and withdrawing funds from an account. The banking system is designed to work with a specified list of account balances, and each operation is validated to ensure that it meets certain conditions (e.g., checking if an account exists or if sufficient funds are available).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int n;
+	```
+	Declares the integer variable `n`, which will store the number of accounts.
 
-The objective of this banking system is to efficiently manage balances and validate transactions, returning `true` for successful operations and `false` if any conditions are violated. The functionality allows multiple accounts to interact with each other through deposits, withdrawals, and transfers.
+2. **Vector Initialization**
+	```cpp
+	vector<long long> bal;
+	```
+	Declares a vector `bal` of type `long long` to hold the balances of the accounts.
 
-### Approach
+3. **Constructor Definition**
+	```cpp
+	Bank(vector<long long>& balance) {
+	```
+	Constructor to initialize the bank with an account balance vector.
 
-To implement this system, we use an object-oriented approach where each bank account is managed within a class called `Bank`. The class contains several key methods for handling the transfer, deposit, and withdrawal functionalities.
+4. **Assign Balance to Bank**
+	```cpp
+	    bal = balance;
+	```
+	Assigns the passed `balance` vector to the `bal` member variable.
 
-The approach for each operation can be broken down as follows:
+5. **Account Size Assignment**
+	```cpp
+	    n = bal.size();
+	```
+	Sets the number of accounts `n` by determining the size of the balance vector.
 
-1. **Account Validation**: For each operation, the code first checks if the account(s) in question exist and meet the requirements (such as having enough balance for a withdrawal or transfer). 
-2. **Balance Adjustment**: Once validated, the balance is adjusted accordingly. 
-3. **Return Status**: Each operation returns a boolean value (`true` or `false`) to indicate whether the operation was successful or not.
+6. **Function Declaration**
+	```cpp
+	bool transfer(int acc1, int acc2, long long money) {
+	```
+	Declares the `transfer` function that allows transferring money between two accounts.
 
-### Code Breakdown (Step by Step)
+7. **Account Index Adjustments**
+	```cpp
+	    int ac1 = acc1 - 1 , ac2 = acc2 - 1;
+	```
+	Adjusts the account numbers (1-based to 0-based index) for `ac1` and `ac2`.
 
-Let’s go through the code step by step to understand each part of the implementation.
+8. **Transfer Validation**
+	```cpp
+	    if(ac1 < 0 || ac1 >= n || ac2 < 0 || ac2 >= n || bal[ac1] < money)
+	```
+	Checks if the account numbers are valid and if the balance in `ac1` is sufficient to cover the transfer.
 
-1. **Class and Member Variable Definition**: We define a class named `Bank`. The class contains two member variables: 
-   - `n`: An integer representing the number of accounts in the bank.
-   - `bal`: A vector of long long integers representing the balance of each account.
+9. **Return False on Invalid Transfer**
+	```cpp
+	        return false;
+	```
+	Returns `false` if the transfer is invalid due to insufficient funds or invalid account numbers.
 
-    ```cpp
-    class Bank {
-    public:
-        int n;
-        vector<long long> bal;
-    ```
+10. **Transfer Logic**
+	```cpp
+	    bal[ac1] -= money;
+	```
+	Deducts the specified amount from account `ac1`.
 
-2. **Constructor**: The constructor initializes the `Bank` object. It takes a vector `balance` as input, which contains the initial balance of each account. The constructor assigns this vector to `bal` and sets `n` to the number of accounts.
+11. **Transfer Logic**
+	```cpp
+	    bal[ac2] += money;
+	```
+	Adds the specified amount to account `ac2`.
 
-    ```cpp
-    Bank(vector<long long>& balance) {
-        bal = balance;
-        n = bal.size();
-    }
-    ```
+12. **Return True on Successful Transfer**
+	```cpp
+	    return true;
+	```
+	Returns `true` if the transfer is successful.
 
-3. **Transfer Method**: This method transfers a specified amount (`money`) from one account (`acc1`) to another (`acc2`). It first adjusts `acc1` and `acc2` to 0-based indexing. The method checks if both accounts exist and if the source account has sufficient funds. If these conditions are met, the balance is updated, deducting `money` from `acc1` and adding it to `acc2`. If successful, it returns `true`; otherwise, `false`.
+13. **Function Declaration**
+	```cpp
+	bool deposit(int acc, long long money) {
+	```
+	Declares the `deposit` function that allows depositing money into an account.
 
-    ```cpp
-    bool transfer(int acc1, int acc2, long long money) {
-        int ac1 = acc1 - 1 , ac2 = acc2 - 1;
-        if(ac1 < 0 || ac1 >= n || ac2 < 0 || ac2 >= n || bal[ac1] < money)
-            return false;
-        
-        bal[ac1] -= money;
-        bal[ac2] += money;
-        return true;
-    }
-    ```
+14. **Deposit Validation**
+	```cpp
+	    if(acc < 1 || acc > n) return false;
+	```
+	Checks if the account number `acc` is valid.
 
-4. **Deposit Method**: This method deposits a specified amount (`money`) into an account (`acc`). The method checks if the account number is valid (between 1 and n). If valid, it adds `money` to the account’s balance and returns `true`; otherwise, `false`.
+15. **Deposit Logic**
+	```cpp
+	    bal[acc - 1] += money;
+	```
+	Adds the specified amount to the balance of the given account.
 
-    ```cpp
-    bool deposit(int acc, long long money) {
-        if(acc < 1 || acc > n) return false;
-        bal[acc - 1] += money;
-        return true;
-    }
-    ```
+16. **Return True on Successful Deposit**
+	```cpp
+	    return true;
+	```
+	Returns `true` if the deposit is successful.
 
-5. **Withdraw Method**: This method withdraws a specified amount (`money`) from an account (`acc`). The method checks if the account exists and has enough funds. If the conditions are met, it deducts `money` from the account’s balance and returns `true`; otherwise, `false`.
+17. **Function Declaration**
+	```cpp
+	bool withdraw(int acc, long long money) {
+	```
+	Declares the `withdraw` function that allows withdrawing money from an account.
 
-    ```cpp
-    bool withdraw(int acc, long long money) {
-        if(acc < 1 || acc > n || bal[acc - 1] < money) return false;        
-        bal[acc - 1] -= money;
-        return true;
-    }
-    ```
+18. **Withdraw Validation**
+	```cpp
+	    if(acc < 1 || acc > n || bal[acc - 1] < money) return false;
+	```
+	Checks if the account number is valid and if the account has enough balance for the withdrawal.
 
-6. **Example Usage**: The comment block at the end shows how this `Bank` object might be used. After creating a `Bank` object, we can call its methods to transfer, deposit, or withdraw funds.
+19. **Withdraw Logic**
+	```cpp
+	    bal[acc - 1] -= money;
+	```
+	Deducts the specified amount from the account balance.
 
-    ```cpp
-    /**
-     * Your Bank object will be instantiated and called as such:
-     * Bank* obj = new Bank(balance);
-     * bool param_1 = obj->transfer(account1,account2,money);
-     * bool param_2 = obj->deposit(account,money);
-     * bool param_3 = obj->withdraw(account,money);
-     */
-    ```
+20. **Return True on Successful Withdrawal**
+	```cpp
+	    return true;
+	```
+	Returns `true` if the withdrawal is successful.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) per transaction.
+- **Average Case:** O(1) per transaction.
+- **Worst Case:** O(1) per transaction.
 
-- **Time Complexity**: Each operation (transfer, deposit, and withdrawal) is performed in constant time, or O(1). This makes the code highly efficient, as each method only involves direct balance adjustments and simple condition checks.
-- **Space Complexity**: The space complexity is O(n), where n is the number of accounts, because we store the balance of each account in the `bal` vector.
+Each operation involves constant-time array access and validation.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n) for storing balances.
+- **Worst Case:** O(n) for storing balances.
 
-In summary, this code provides a simple yet efficient solution to simulate a basic banking system with multiple accounts. By using O(1) time complexity for each transaction, the code ensures high performance, even with a large number of accounts and transactions. The `Bank` class encapsulates the functionality for transferring, depositing, and withdrawing funds, allowing for easy extensions or modifications. This approach, with clear validation checks, makes the system secure and user-friendly, providing reliable banking operations while maintaining optimal performance.
+The balance array is the only significant space usage.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/simple-bank-system/description/)
 

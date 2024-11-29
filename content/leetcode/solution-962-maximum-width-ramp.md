@@ -14,119 +14,163 @@ img_src = ""
 youtube = "3pTEJ1vzgSI"
 youtube_upload_date="2024-10-10"
 youtube_thumbnail="https://i.ytimg.com/vi/3pTEJ1vzgSI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums. A ramp in the array is a pair of indices (i, j) where i < j and nums[i] <= nums[j]. The width of the ramp is calculated as the difference between j and i (i.e., j - i). Your task is to find the maximum width of a ramp in the given array. If no such ramp exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a single integer array nums of size n (2 <= n <= 50,000), where each element nums[i] (0 <= nums[i] <= 50,000) represents an integer value in the array.
+- **Example:** `Input: nums = [3, 5, 7, 1, 4, 2, 6]`
+- **Constraints:**
+	- 2 <= nums.length <= 50,000
+	- 0 <= nums[i] <= 50,000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxWidthRamp(vector<int>& nums) {
-        stack<int> s;
-        for(int i = 0; i < nums.size(); i++)
-            if(s.empty() || nums[s.top()] > nums[i])
-                s.push(i);
-        
-        int res = 0;
-        for(int i = nums.size() - 1; i >= 0; i--)
-            while(!s.empty() && nums[s.top()] <= nums[i])
-                res = max(res, i - s.top()), s.pop();
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum width of a ramp in the array. If no ramp exists, return 0.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The result must be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum width of a ramp by iterating over the array, checking pairs (i, j) where nums[i] <= nums[j], and computing the width (j - i) for each valid pair.
 
-The problem asks to find the **maximum width ramp** in an array `nums`. A ramp is defined as a pair of indices `(i, j)` such that `i < j` and `nums[i] <= nums[j]`. The goal is to return the maximum difference `j - i` for which the above condition holds. This essentially involves finding the widest subarray where the value at the start of the subarray is smaller than or equal to the value at the end.
+- 1. Traverse the array while maintaining a stack to store the indices of elements in a way that ensures nums[i] <= nums[j] for valid pairs.
+- 2. For each element in the array, try to find a corresponding j index that results in a larger width.
+- 3. Track the maximum width encountered during the traversal.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums will always have at least two elements, and all elements will be integers within the given range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 5, 7, 1, 4, 2, 6]`  \
+  **Explanation:** In this case, the maximum width ramp is found between indices (1, 5) where nums[1] = 5 and nums[5] = 2. The width is 5 - 1 = 4.
 
-### Approach
+- **Input:** `Input: nums = [9, 8, 7, 6, 5]`  \
+  **Explanation:** Here, no valid ramp can be formed because every pair of elements nums[i] and nums[j] with i < j violates the condition nums[i] <= nums[j]. Thus, the result is 0.
 
-To solve this problem efficiently, we can use the **monotonic stack** technique. Here's a step-by-step breakdown of the approach:
+- **Input:** `Input: nums = [1, 2, 3, 4, 5]`  \
+  **Explanation:** In this case, the ramp can be formed between the first and the last index, with a width of 4 - 0 = 4.
 
-1. **Initial Observations**:
-   - The problem asks to find pairs of indices `(i, j)` such that `nums[i] <= nums[j]` and `i < j`. 
-   - We want to maximize `j - i`, meaning we need to find the farthest pair of indices where the condition `nums[i] <= nums[j]` holds.
-   
-2. **Using a Stack**:
-   - A **monotonic stack** helps efficiently track indices of the array in a way that we can always find the smallest value in the stack. 
-   - We can use the stack to store indices of the array in increasing order of values (so that `nums[s.top()] <= nums[i]` when comparing).
-   
-3. **First Pass** (Populate the Stack):
-   - Traverse the array from left to right. For each element, push its index into the stack if it is smaller than the element at the top of the stack. This ensures the stack only contains indices of values that are in increasing order.
-   - This first pass helps us store indices of potential starting points (`i`) of valid ramps, as those indices are smaller than the elements that come after them.
-   
-4. **Second Pass** (Find the Maximum Ramp Width):
-   - Traverse the array from right to left. For each element, check if the value at the current index `nums[i]` can form a valid ramp with an element from the stack (`nums[s.top()]`).
-   - If `nums[s.top()] <= nums[i]`, pop the stack and calculate the width `i - s.top()`. Track the maximum width of all valid ramps.
-   
-5. **Efficiency**:
-   - This approach ensures that we process each index exactly once, with stack operations (push and pop) taking constant time. Thus, the overall time complexity is **O(n)**, where `n` is the size of the array.
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we can use a stack to help keep track of indices that could form valid ramps. The stack will ensure that we can find a pair of indices i and j such that nums[i] <= nums[j], and we can calculate the width j - i.
 
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The problem can be reduced to finding a pair of indices i and j such that nums[i] <= nums[j], and maximizing j - i.
+- A brute force solution would require checking all pairs, which could be inefficient for large arrays.
+- Using a stack to store indices and then traversing the array backwards allows us to efficiently find the maximum width without explicitly checking every pair.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least two elements, so this case is not possible.
+- For large arrays with 50,000 elements, the solution must be efficient enough to handle the constraints.
+- When the array elements are all the same, any pair of indices (i, j) will form a valid ramp with the maximum width being j - i.
+- The input array will always have at least two elements, and each element will be within the range 0 <= nums[i] <= 50,000.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int maxWidthRamp(vector<int>& nums) {
-        stack<int> s;  // Initialize an empty stack to store indices
-        
-        // First pass: Fill the stack with indices of elements in increasing order
-        for(int i = 0; i < nums.size(); i++) {
-            // If the stack is empty or nums[s.top()] > nums[i], push the current index
-            if(s.empty() || nums[s.top()] > nums[i]) {
-                s.push(i);  // Add the index to the stack
-            }
-        }
-        
-        int res = 0;  // Variable to store the maximum ramp width
-        
-        // Second pass: Traverse the array from right to left
-        for(int i = nums.size() - 1; i >= 0; i--) {
-            // While there are indices in the stack and nums[s.top()] <= nums[i]
-            while(!s.empty() && nums[s.top()] <= nums[i]) {
-                // Calculate the ramp width and update the maximum result
-                res = max(res, i - s.top());
-                s.pop();  // Pop the stack as we've found a valid ramp
-            }
-        }
-        
-        return res;  // Return the maximum width of the ramp found
-    }
-};
+int maxWidthRamp(vector<int>& nums) {
+    stack<int> s;
+    for(int i = 0; i < nums.size(); i++)
+        if(s.empty() || nums[s.top()] > nums[i])
+            s.push(i);
+    
+    int res = 0;
+    for(int i = nums.size() - 1; i >= 0; i--)
+        while(!s.empty() && nums[s.top()] <= nums[i])
+            res = max(res, i - s.top()), s.pop();
+    
+    return res;
+}
 ```
 
-1. **Initialization**:
-   - We begin by initializing an empty stack `s` and a variable `res` to store the maximum width of the ramp found.
+This function finds the maximum width ramp in an array. A ramp is a pair (i, j) such that i < j and nums[i] <= nums[j]. The function uses a stack to track potential starting indices and iterates from the end to compute the widest ramp.
 
-2. **First Pass**:
-   - We loop through the array from left to right (i.e., from index `0` to `n-1`). For each element `nums[i]`, we check if the stack is empty or if the element at the top of the stack (`nums[s.top()]`) is greater than `nums[i]`. If so, we push the index `i` onto the stack. This ensures that the stack always contains indices of values in increasing order, which will be useful when looking for valid ramps later.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxWidthRamp(vector<int>& nums) {
+	```
+	Declares the function to compute the maximum width ramp in an array.
 
-3. **Second Pass**:
-   - After filling the stack with the indices, we then start another loop from right to left (i.e., from index `n-1` to `0`). For each element `nums[i]`, we check if the element at the top of the stack (`nums[s.top()]`) is less than or equal to `nums[i]`. If this condition is met, it means we've found a valid ramp (because `nums[s.top()] <= nums[i]` and `s.top()` is less than `i`), so we calculate the width of the ramp as `i - s.top()`. We then update `res` to be the maximum of the current value of `res` and the newly calculated width. Finally, we pop the top of the stack since we have already used that index for this ramp.
+2. **Stack Initialization**
+	```cpp
+	    stack<int> s;
+	```
+	Initializes an empty stack to store indices of potential starting points for the ramp.
 
-4. **Return Result**:
-   - After completing both passes, `res` will contain the maximum ramp width. We return this value as the result.
+3. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++)
+	```
+	Iterates through the array to populate the stack with indices of decreasing elements.
 
-### Complexity
+4. **Stack Condition**
+	```cpp
+	        if(s.empty() || nums[s.top()] > nums[i])
+	```
+	Checks if the stack is empty or if the current element is smaller than the element at the top of the stack.
 
-- **Time Complexity**:
-  - The time complexity is **O(n)**, where `n` is the size of the input array `nums`. This is because:
-    - In the first pass, each index is pushed onto the stack at most once.
-    - In the second pass, each index is popped from the stack at most once.
-    - Hence, the total number of operations is proportional to the number of elements in the array, resulting in **O(n)** time complexity.
+5. **Push Index**
+	```cpp
+	            s.push(i);
+	```
+	Pushes the current index onto the stack as a potential starting point for a ramp.
 
-- **Space Complexity**:
-  - The space complexity is **O(n)** due to the stack used to store indices. In the worst case, the stack can hold all `n` indices if the elements are strictly decreasing.
+6. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the variable `res` to store the maximum width of the ramp.
 
-### Conclusion
+7. **Reverse Loop**
+	```cpp
+	    for(int i = nums.size() - 1; i >= 0; i--)
+	```
+	Iterates through the array in reverse to calculate the widest ramp.
 
-This solution provides an efficient way to calculate the maximum width ramp in an array by using a monotonic stack. The key idea is to use two passes: one to store indices in increasing order and another to find the widest ramp possible by comparing the current element with the stack's top. This approach has a linear time complexity of **O(n)**, making it highly efficient for large input sizes. By utilizing a stack for optimal storage and comparisons, the solution avoids unnecessary comparisons and redundant calculations, ensuring that the solution works effectively for a variety of input scenarios.
+8. **While Loop Condition**
+	```cpp
+	        while(!s.empty() && nums[s.top()] <= nums[i])
+	```
+	Checks if the current element can form a ramp with the index at the top of the stack.
+
+9. **Calculate Ramp**
+	```cpp
+	            res = max(res, i - s.top()), s.pop();
+	```
+	Calculates the width of the ramp, updates the result, and pops the stack.
+
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the maximum width of the ramp found in the array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we traverse the array twice: once to fill the stack and once to calculate the maximum width.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the stack used to store indices.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-width-ramp/description/)
 

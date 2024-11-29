@@ -14,129 +14,226 @@ img_src = ""
 youtube = "mQQp6I985bw"
 youtube_upload_date="2020-11-09"
 youtube_thumbnail="https://i.ytimg.com/vi/mQQp6I985bw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a row of 8 prison cells, where each cell is either occupied or vacant. The state of the cells changes every day according to the following rules: If a cell has two adjacent neighbors that are either both occupied or both vacant, the cell becomes occupied; otherwise, it becomes vacant. The first and last cells don't have two neighbors, so they are excluded from the rule. You need to determine the state of the cells after 'n' days of changes.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of 8 integers representing the state of the prison cells, where 1 indicates an occupied cell and 0 indicates a vacant cell, followed by an integer n representing the number of days.
+- **Example:** `Input: cells = [1,0,0,1,0,0,1,0], n = 4`
+- **Constraints:**
+	- The number of cells is always 8.
+	- Each cell is represented as 0 or 1.
+	- 1 <= n <= 10^9.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> prisonAfterNDays(vector<int>& cells, int n) {
-        set<vector<int>> seen;
-        int i = 0, flag = 0;
-        vector<int> c;
-        for(i = 0; i < n; i++) {
-            vector<int> v = getNext(cells);
-            if(!seen.count(v)) {
-                seen.insert(v);
-                cells = v;
-            } else {
-                for(int j = 0; j < n % i; j++) {
-                    cells = getNext(cells);
-                }
-                return cells;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an array of 8 integers representing the state of the prison cells after 'n' days of changes.
+- **Example:** `Output: [0,0,1,1,0,0,1,0]`
+- **Constraints:**
+	- The output will always contain 8 integers.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to simulate the state changes for 'n' days, but since the state can repeat after a certain number of days, we need to optimize the solution.
+
+- 1. Track the states of the cells on each day.
+- 2. Use a set to detect repeating cell configurations to optimize the simulation process.
+- 3. If a state repeats, the simulation enters a cycle. Thus, we can skip unnecessary days by calculating the effective number of days based on the cycle length.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always have 8 cells, and each cell is either 0 or 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: cells = [1,0,0,1,0,0,1,0], n = 4`  \
+  **Explanation:** In this case, the prison cells will go through a series of changes, but after 4 days, the state of the cells will be [0,0,1,1,0,0,1,0].
+
+- **Input:** `Input: cells = [0,1,0,1,0,1,0,1], n = 2`  \
+  **Explanation:** After 2 days, the prison cells will change according to the rules and reach the final state [1,0,1,1,0,1,0,1].
+
+{{< dots >}}
+## Approach 🚀
+The key to solving this problem efficiently is to detect repeating states, which would indicate the start of a cycle. Once a cycle is detected, we can skip unnecessary steps.
+
+### Initial Thoughts 💭
+- The number of cells is fixed at 8, so the possible states are limited. This makes it possible to track and detect cycles.
+- To optimize the solution, we can use a set to track previously seen states. If a state repeats, we can calculate the effective number of days and avoid unnecessary computations.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as the number of cells is always 8.
+- For large values of n (up to 10^9), we must avoid iterating over each day by detecting cycles early.
+- The input will always contain exactly 8 cells, and the values will be binary (0 or 1).
+- The simulation must be optimized to handle the upper constraint of n (up to 10^9).
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> prisonAfterNDays(vector<int>& cells, int n) {
+    set<vector<int>> seen;
+    int i = 0, flag = 0;
+    vector<int> c;
+    for(i = 0; i < n; i++) {
+        vector<int> v = getNext(cells);
+        if(!seen.count(v)) {
+            seen.insert(v);
+            cells = v;
+        } else {
+            for(int j = 0; j < n % i; j++) {
+                cells = getNext(cells);
             }
+            return cells;
         }
-        return cells;
     }
-    
-    vector<int> getNext(vector<int> &cells) {
-        vector<int> n(cells.size(), 0);
-        for(int i = 1; i < cells.size() -1; i++)
-            n[i] = cells[i-1] == cells[i+1]?1:0;
-        return n;
-    }
-};
-{{< /highlight >}}
----
+    return cells;
+}
 
-### Problem Statement
+vector<int> getNext(vector<int> &cells) {
+    vector<int> n(cells.size(), 0);
+    for(int i = 1; i < cells.size() -1; i++)
+        n[i] = cells[i-1] == cells[i+1]?1:0;
+    return n;
+}
+```
 
-In this problem, we are tasked with simulating a prison cell system for `n` days. Each prison cell can either be open or closed. Initially, the state of each cell is given in the form of a binary vector `cells`. After each day, the state of each cell changes based on the following rules:
+This function simulates the state of prison cells over `n` days. It identifies cycles using a set and computes the final state based on modular arithmetic to optimize computation for large `n` values.
 
-1. A cell becomes open (represented by 1) if both of its neighbors are in the same state (either both open or both closed).
-2. A cell becomes closed (represented by 0) otherwise (i.e., if the neighbors are in different states).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> prisonAfterNDays(vector<int>& cells, int n) {
+	```
+	Function declaration for `prisonAfterNDays` which takes the initial state of cells and the number of days as input.
 
-The challenge is to determine the state of the prison cells after `n` days. However, since the transformation could repeat in cycles after a certain number of days, the problem asks for an optimized solution to handle cases where `n` is large.
+2. **Data Structure Initialization**
+	```cpp
+	    set<vector<int>> seen;
+	```
+	Initialize a set to keep track of previously seen states of the cells, used for detecting cycles.
 
-### Approach
+3. **Variable Initialization**
+	```cpp
+	    int i = 0, flag = 0;
+	```
+	Initialize variables `i` for iteration and `flag` for condition tracking (not used here).
 
-To solve the problem efficiently, we need to avoid simulating all `n` days directly. Since the sequence of prison cell configurations may repeat periodically, we can leverage this periodicity to minimize the number of steps we need to take.
+4. **Temporary Vector**
+	```cpp
+	    vector<int> c;
+	```
+	Declare a temporary vector `c` (not used in this implementation).
 
-The solution follows these main steps:
+5. **Outer Loop**
+	```cpp
+	    for(i = 0; i < n; i++) {
+	```
+	Iterate over each day up to `n` to compute the state transitions of the cells.
 
-1. **Cycle Detection**: Instead of simulating all `n` days, we detect cycles in the transformations. If a configuration repeats, we know the cycle has started over. Once a cycle is detected, we can skip the unnecessary steps by reducing the problem to just a few days (the remainder when `n` is divided by the cycle length).
-  
-2. **Simulating the Transition**: We simulate the transition of the cells for each day. A helper function `getNext` is used to calculate the state of the next day based on the current state of the cells. This function checks each cell's neighbors and updates its state accordingly.
+6. **Get Next State**
+	```cpp
+	        vector<int> v = getNext(cells);
+	```
+	Calculate the next state of the cells using the `getNext` helper function.
 
-3. **Efficient Calculation**: The solution uses a set to store previously seen configurations of cells. If a configuration repeats, we can break out of the loop and handle the remaining days by taking advantage of the cycle length.
+7. **Cycle Detection**
+	```cpp
+	        if(!seen.count(v)) {
+	```
+	Check if the current state has been seen before to detect a cycle.
 
-### Code Breakdown (Step by Step)
+8. **Insert State**
+	```cpp
+	            seen.insert(v);
+	```
+	Insert the current state into the set of seen states to keep track of cycles.
 
-1. **Initialization**:
-   ```cpp
-   set<vector<int>> seen;
-   int i = 0, flag = 0;
-   vector<int> c;
-   ```
-   - A `set` called `seen` is used to store unique configurations of the prison cells. A set is chosen because it allows fast membership checks and ensures that we only store unique configurations.
-   - The variable `i` is used to iterate through the days, and `flag` is a placeholder to control the cycle detection logic.
-   - `vector<int> c` is used as a temporary storage to hold the current configuration of cells.
+9. **Update State**
+	```cpp
+	            cells = v;
+	```
+	Update the cells to the next state.
 
-2. **Simulating the Days**:
-   ```cpp
-   for(i = 0; i < n; i++) {
-       vector<int> v = getNext(cells);
-       if(!seen.count(v)) {
-           seen.insert(v);
-           cells = v;
-       } else {
-           for(int j = 0; j < n % i; j++) {
-               cells = getNext(cells);
-           }
-           return cells;
-       }
-   }
-   return cells;
-   ```
-   - The loop iterates over `n` days. In each iteration:
-     - The `getNext` function is called to compute the state of the cells for the next day.
-     - If the configuration of cells `v` has not been seen before, it is inserted into the `seen` set, and `cells` is updated to the new configuration.
-     - If the configuration has been seen before (i.e., a cycle is detected), the loop exits. To handle the remaining days efficiently, the program calculates how many days are left to simulate using `n % i`. This allows the program to skip over repeated cycles and directly compute the final state of the cells.
+10. **Cycle Found**
+	```cpp
+	        } else {
+	```
+	If a cycle is detected, exit the main loop and compute the state based on the cycle length.
 
-3. **Transition Function (getNext)**:
-   ```cpp
-   vector<int> getNext(vector<int> &cells) {
-       vector<int> n(cells.size(), 0);
-       for(int i = 1; i < cells.size() - 1; i++)
-           n[i] = cells[i-1] == cells[i+1] ? 1 : 0;
-       return n;
-   }
-   ```
-   - This function computes the next configuration of the cells based on the rules.
-   - A new vector `n` is created to store the next state of the cells. Initially, all cells in `n` are set to 0.
-   - The loop goes through each cell (except the first and last ones, since they have no neighbors on both sides). For each cell, it checks if its two neighbors have the same state (either both open or both closed). If they do, the cell in the next configuration is set to 1 (open); otherwise, it is set to 0 (closed).
-   - The function returns the new configuration `n`.
+11. **Cycle Optimization**
+	```cpp
+	            for(int j = 0; j < n % i; j++) {
+	```
+	Iterate only the remaining days modulo the cycle length to compute the final state.
 
-4. **Cycle Detection**:
-   - The key optimization in this solution is the use of a set to track previously seen configurations of the cells. If a configuration is encountered more than once, we know that the system has started repeating itself, and we can calculate how many remaining steps need to be simulated using the modulus of the cycle length.
+12. **Get Next in Cycle**
+	```cpp
+	                cells = getNext(cells);
+	```
+	Update the cells state iteratively within the cycle to find the final state.
 
-### Complexity
+13. **Return State Early**
+	```cpp
+	            return cells;
+	```
+	Return the cells' state once the final state within the cycle is computed.
 
-1. **Time Complexity**:
-   - The time complexity of the solution depends on the number of unique cell configurations and the number of steps required to simulate the prison system.
-   - In the worst case, the number of unique configurations is bounded by the number of possible combinations of the 8 cells, which is `2^8 = 256` (since each cell can either be open or closed). Therefore, we can detect cycles after at most 256 steps.
-   - The total time complexity is `O(min(n, C))`, where `C` is the number of unique configurations (256 in this case). Each step involves computing the next state, which is `O(k)`, where `k` is the number of cells (fixed at 8).
-   
-2. **Space Complexity**:
-   - The space complexity is dominated by the `set` used to store the unique configurations of the cells. In the worst case, we store all possible configurations, which is `O(256)`.
+14. **Return Final State**
+	```cpp
+	    return cells;
+	```
+	Return the final state of the cells after `n` days.
 
-### Conclusion
+15. **Helper Function Declaration**
+	```cpp
+	vector<int> getNext(vector<int> &cells) {
+	```
+	Helper function declaration for `getNext` which calculates the next state of the cells.
 
-The solution efficiently simulates the prison cell system by detecting cycles in the transformations of the cells. By using a set to store previously seen configurations, we avoid unnecessary computations for repeated states, significantly reducing the number of steps required when `n` is large. This approach allows us to handle even large values of `n` while ensuring that the program runs efficiently. The solution leverages cycle detection to optimize the simulation and guarantees that the final state of the prison cells is computed in an optimal time complexity.
+16. **Initialize Next State**
+	```cpp
+	    vector<int> n(cells.size(), 0);
+	```
+	Initialize a vector `n` with the same size as `cells` to store the next state.
+
+17. **Inner Loop**
+	```cpp
+	    for(int i = 1; i < cells.size() -1; i++)
+	```
+	Iterate through the cells, skipping the first and last ones, to calculate the next state.
+
+18. **Update Cell State**
+	```cpp
+	        n[i] = cells[i-1] == cells[i+1]?1:0;
+	```
+	Update the state of each cell based on the parity of its neighbors.
+
+19. **Return Next State**
+	```cpp
+	    return n;
+	```
+	Return the computed next state of the cells.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(k + m)
+- **Worst Case:** O(k + m)
+
+Where k is the length of the cycle and m is the maximum number of iterations before detecting a cycle. In the worst case, the cycle detection is a constant-time operation after some iterations.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(k)
+
+The space complexity is O(k), where k is the number of distinct states that can occur before the system cycles.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prison-cells-after-n-days/description/)
 

@@ -14,217 +14,245 @@ img_src = ""
 youtube = "eQvsVEt_j8M"
 youtube_upload_date="2020-08-22"
 youtube_thumbnail="https://i.ytimg.com/vi/eQvsVEt_j8M/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 2D grid of characters, find if there exists a cycle where the same character repeats in the grid. A cycle is defined as a path where a character appears 4 or more times, forming a loop that starts and ends at the same cell. The cycle must consist of adjacent cells, and you are not allowed to revisit the previous cell.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array of characters representing the grid, where the size of the grid is m x n. The grid only contains lowercase English letters.
+- **Example:** `Input: grid = [['a', 'b', 'a'], ['b', 'a', 'b'], ['a', 'b', 'a']]`
+- **Constraints:**
+	- 1 <= m, n <= 500
+	- grid consists only of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool containsCycle(vector<vector<char>>& grid) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if there is a cycle of the same character in the grid, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-        int m = grid.size(), n = grid[0].size();
-        
-        vector<vector<bool>> vis(m, vector<bool>(n, false));
-        
-        for(int i = 0; i < m; i++) 
-        for(int j = 0; j < n; j++) 
-        if(!vis[i][j] && dfs(grid, vis, i, j, -1, -1, grid[i][j])) return true;
-        
-        return false;
-        
-    }
-    
-    int dir[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-    
-    bool dfs(vector<vector<char>> &grid, vector<vector<bool>> &vis, int i, int j, int pi, int pj, char node) {
-        
-        if(vis[i][j]) return true;
-        
-        vis[i][j] = true;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to identify if there exists a cycle in the grid where a character repeats in a loop of 4 or more cells.
 
-        for(auto d: dir) {
-            int ni = i + d[0];
-            int nj = j + d[1];
-            
-            if(min(ni, nj) < 0 || 
-               ni > grid.size() - 1 || 
-               nj > grid[0].size() - 1 ||
-               grid[ni][nj] != node)
-                continue;
-            if((ni == pi) && (nj == pj)) continue;
-            
-            if(dfs(grid, vis, ni, nj, i, j, node))
-                return true;
-            
-        }
-        
-        return false;
-        
-    }
-    
-};
-{{< /highlight >}}
----
+- Iterate through all cells in the grid.
+- For each unvisited cell, perform a depth-first search (DFS) to find a cycle of the same character.
+- Keep track of the previous cell to avoid revisiting it in the next step.
+- If a cycle is found, return true, else continue to the next cell.
+- Return false if no cycle is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- A cycle must consist of at least 4 cells.
+- The cycle must only consist of adjacent cells in one of four directions (up, down, left, right).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: grid = [['a', 'a', 'a', 'a'], ['a', 'b', 'b', 'a'], ['a', 'b', 'b', 'a'], ['a', 'a', 'a', 'a']]`  \
+  **Explanation:** There are two valid cycles in the grid: one cycle in the top-left corner and another one in the bottom-right corner.
 
-### Problem Statement
+- **Input:** `Example 2: grid = [['a', 'b', 'a'], ['b', 'a', 'b'], ['a', 'b', 'a']]`  \
+  **Explanation:** There is no valid cycle in this grid as the characters don't form a loop of length 4 or more.
 
-The problem at hand is to determine whether there exists a cycle in a 2D grid composed of characters. A cycle is defined as a path that begins and ends at the same character, and the path can only move in four directions (up, down, left, right). The cycle must consist of adjacent cells that contain the same character. The objective is to find an efficient solution to identify the presence of such cycles within the grid.
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using depth-first search (DFS) to detect cycles in the grid. During the DFS, we keep track of the path to ensure we don't revisit the last cell in the cycle.
 
-### Approach
-
-The approach utilized in this solution employs Depth First Search (DFS) to explore the grid while keeping track of visited cells to avoid revisiting them. The key components of the approach are as follows:
-
-1. **Grid Dimensions**: First, the dimensions of the grid are obtained to facilitate boundary checks during traversal.
-
-2. **Visited Cells**: A 2D vector `vis` is initialized to keep track of which cells have already been explored. This prevents infinite loops in the case of cycles.
-
-3. **Iterating Through the Grid**: The algorithm iterates through each cell in the grid. If a cell has not been visited, it triggers a DFS starting from that cell.
-
-4. **DFS Function**: The `dfs` function recursively explores neighboring cells. It checks if a neighboring cell is within bounds, has not been visited, and contains the same character as the current cell.
-
-5. **Cycle Detection**: During the DFS, if a neighboring cell has already been visited and is not the parent of the current cell (the one from which we came), a cycle is detected.
-
-6. **Return Value**: If a cycle is found during any of the DFS calls, the function returns true. If all cells are processed without detecting a cycle, it returns false.
-
-### Code Breakdown (Step by Step)
-
-Let’s analyze the provided code step-by-step:
-
-- **Class Declaration**:
-    The solution is encapsulated in a class named `Solution`.
-
-```cpp
-class Solution {
-public:
-```
-
-- **Main Function**:
-    The `containsCycle` function takes a 2D vector of characters as input and returns a boolean indicating whether a cycle exists.
-
+### Initial Thoughts 💭
+- The grid can have up to 500 x 500 cells, so an efficient search is needed.
+- The DFS will be used to explore each unvisited cell and check for cycles.
+- A DFS approach ensures we can explore all possible cycles starting from each cell.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty grid would return false since there are no cells to form a cycle.
+- For large grids (500 x 500), ensure the DFS is optimized to prevent time limit exceeded errors.
+- A grid with only one character may form a valid cycle if the path length is sufficient.
+- Ensure that the grid size does not exceed the maximum constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool containsCycle(vector<vector<char>>& grid) {
-```
 
-- **Grid Dimensions**:
-    The dimensions of the grid are stored in `m` and `n`.
-
-```cpp
-int m = grid.size(), n = grid[0].size();
-```
-
-- **Visited Array Initialization**:
-    A 2D vector `vis` is initialized to keep track of visited cells.
-
-```cpp
-vector<vector<bool>> vis(m, vector<bool>(n, false));
-```
-
-- **Iterating Through Each Cell**:
-    The outer loops iterate through all the cells in the grid.
-
-```cpp
-for(int i = 0; i < m; i++) 
-for(int j = 0; j < n; j++) 
-```
-
-- **Trigger DFS**:
-    If a cell has not been visited, initiate a DFS.
-
-```cpp
-if(!vis[i][j] && dfs(grid, vis, i, j, -1, -1, grid[i][j])) return true;
-```
-
-- **Return Statement**:
-    If no cycles are detected, return false.
-
-```cpp
-return false;
-```
-
-- **Direction Array**:
-    An array `dir` is defined to facilitate movement in four directions.
-
-```cpp
-int dir[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-```
-
-- **DFS Function Definition**:
-    The `dfs` function is defined, which takes the grid, visited vector, current cell indices, previous cell indices, and the character being checked.
-
-```cpp
-bool dfs(vector<vector<char>> &grid, vector<vector<bool>> &vis, int i, int j, int pi, int pj, char node) {
-```
-
-- **Cycle Check**:
-    If the current cell has been visited, it indicates a cycle.
-
-```cpp
-if(vis[i][j]) return true;
-```
-
-- **Mark Cell as Visited**:
-    Mark the current cell as visited.
-
-```cpp
-vis[i][j] = true;
-```
-
-- **Explore Neighbors**:
-    The loop explores neighboring cells using the direction array.
-
-```cpp
-for(auto d: dir) {
-    int ni = i + d[0];
-    int nj = j + d[1];
-```
-
-- **Boundary and Character Check**:
-    Check for boundaries and ensure the character matches.
-
-```cpp
-if(min(ni, nj) < 0 || 
-   ni > grid.size() - 1 || 
-   nj > grid[0].size() - 1 ||
-   grid[ni][nj] != node)
-    continue;
-```
-
-- **Skip Parent Check**:
-    Ensure we do not revisit the cell from which we came.
-
-```cpp
-if((ni == pi) && (nj == pj)) continue;
-```
-
-- **Recursive DFS Call**:
-    Perform DFS on the valid neighboring cell.
-
-```cpp
-if(dfs(grid, vis, ni, nj, i, j, node))
-    return true;
-```
-
-- **Return False**:
-    If no cycle is found in the current path, return false.
-
-```cpp
-return false;
+    int m = grid.size(), n = grid[0].size();
+    
+    vector<vector<bool>> vis(m, vector<bool>(n, false));
+    
+    for(int i = 0; i < m; i++) 
+    for(int j = 0; j < n; j++) 
+    if(!vis[i][j] && dfs(grid, vis, i, j, -1, -1, grid[i][j])) return true;
+    
+    return false;
+    
 }
+
+int dir[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+bool dfs(vector<vector<char>> &grid, vector<vector<bool>> &vis, int i, int j, int pi, int pj, char node) {
+    
+    if(vis[i][j]) return true;
+    
+    vis[i][j] = true;
+
+    for(auto d: dir) {
+        int ni = i + d[0];
+        int nj = j + d[1];
+        
+        if(min(ni, nj) < 0 || 
+           ni > grid.size() - 1 || 
+           nj > grid[0].size() - 1 ||
+           grid[ni][nj] != node)
+            continue;
+        if((ni == pi) && (nj == pj)) continue;
+        
+        if(dfs(grid, vis, ni, nj, i, j, node))
+            return true;
+        
+    }
+    
+    return false;
+    
+}
+
 ```
 
-### Complexity
+The function `containsCycle` checks if a grid contains a cycle. It uses DFS (Depth-First Search) to traverse through the grid and track whether a cycle exists based on the movement directions. The function also utilizes a `vis` array to mark visited cells and avoid revisiting them.
 
-- **Time Complexity**: The time complexity of the solution is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. Each cell is processed at most once due to the visited check, leading to a linear traversal of the grid.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool containsCycle(vector<vector<char>>& grid) {
+	```
+	This is the function definition for `containsCycle`. It takes a 2D grid of characters (`grid`) and checks if there exists a cycle in the grid. The function returns a boolean value indicating whether a cycle is detected.
 
-- **Space Complexity**: The space complexity is also \(O(m \times n)\) due to the additional space used for the `vis` vector that tracks visited cells.
+2. **Variable Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	This line calculates the number of rows `m` and columns `n` of the grid.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    vector<vector<bool>> vis(m, vector<bool>(n, false));
+	```
+	This line initializes a 2D vector `vis` of size `m x n` to track visited cells. All elements are initially set to `false`.
 
-The provided solution effectively determines the presence of cycles in a 2D character grid using Depth First Search (DFS). By exploring the grid while keeping track of visited cells, the algorithm can efficiently detect cycles formed by adjacent cells containing the same character. This approach not only simplifies the problem-solving process but also demonstrates the power of recursive techniques in handling grid-based challenges. The solution's time and space complexities make it suitable for practical applications, ensuring optimal performance even with larger grids. Understanding this implementation provides valuable insights into cycle detection algorithms and enhances problem-solving skills related to graph traversal techniques.
+4. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < m; i++) 
+	```
+	The outer for loop iterates through all rows in the grid, represented by the variable `i`.
+
+5. **Loop Iteration**
+	```cpp
+	    for(int j = 0; j < n; j++) 
+	```
+	The inner for loop iterates through all columns in the current row, represented by the variable `j`.
+
+6. **Condition Check**
+	```cpp
+	    if(!vis[i][j] && dfs(grid, vis, i, j, -1, -1, grid[i][j])) return true;
+	```
+	If the current cell has not been visited and a cycle is detected using DFS starting from that cell, the function immediately returns `true`.
+
+7. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If no cycle is found in the grid after traversing all cells, the function returns `false`.
+
+8. **Global Variable**
+	```cpp
+	int dir[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+	```
+	This line defines a global variable `dir` that holds the possible movement directions (right, left, down, up) for DFS traversal in the grid.
+
+9. **Function Declaration**
+	```cpp
+	bool dfs(vector<vector<char>> &grid, vector<vector<bool>> &vis, int i, int j, int pi, int pj, char node) {
+	```
+	This is the DFS function declaration. It checks for cycles by recursively visiting neighboring cells and marking cells as visited.
+
+10. **Condition Check**
+	```cpp
+	    if(vis[i][j]) return true;
+	```
+	If the current cell has already been visited, it means a cycle has been detected, so the function returns `true`.
+
+11. **Mark Visited**
+	```cpp
+	    vis[i][j] = true;
+	```
+	The current cell is marked as visited in the `vis` array to avoid revisiting it in future iterations.
+
+12. **Loop Iteration**
+	```cpp
+	    for(auto d: dir) {
+	```
+	This loop iterates over each of the four possible movement directions (right, left, down, up) defined in `dir`.
+
+13. **Variable Update**
+	```cpp
+	        int ni = i + d[0];
+	```
+	This calculates the new row index `ni` based on the current direction `d[0]`.
+
+14. **Variable Update**
+	```cpp
+	        int nj = j + d[1];
+	```
+	This calculates the new column index `nj` based on the current direction `d[1]`.
+
+15. **Bounds Check**
+	```cpp
+	        if(min(ni, nj) < 0 || ni > grid.size() - 1 || nj > grid[0].size() - 1 || grid[ni][nj] != node)
+	```
+	This checks if the new position `(ni, nj)` is out of bounds or if the character in the grid at that position does not match the current node.
+
+16. **Skip Invalid Move**
+	```cpp
+	            continue;
+	```
+	If the new position is invalid or does not match the current node, the loop continues to the next direction.
+
+17. **Skip Parent**
+	```cpp
+	        if((ni == pi) && (nj == pj)) continue;
+	```
+	If the new position is the parent of the current cell (i.e., the cell from which the current DFS call originated), the loop continues to avoid revisiting the parent.
+
+18. **Recursive Call**
+	```cpp
+	        if(dfs(grid, vis, ni, nj, i, j, node))
+	```
+	If the DFS call to the neighboring cell returns `true`, it indicates that a cycle has been found, so `true` is returned.
+
+19. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If no cycle is found during the DFS, `false` is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+In the worst case, we visit every cell and perform a DFS from each unvisited cell.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is proportional to the size of the grid due to the visited array and the DFS stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/detect-cycles-in-2d-grid/description/)
 

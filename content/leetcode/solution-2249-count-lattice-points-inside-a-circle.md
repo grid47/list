@@ -14,121 +14,151 @@ img_src = ""
 youtube = "HCLinlC-JWY"
 youtube_upload_date="2022-04-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/HCLinlC-JWY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D integer array `circles`, where each element `circles[i] = [xi, yi, ri]` represents a circle with center at `(xi, yi)` and radius `ri`. The task is to find the number of lattice points that lie inside at least one of the given circles. A lattice point is defined as a point with integer coordinates, and points lying on the circumference of a circle are also considered inside.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of circles, where each circle is defined by its center coordinates and radius.
+- **Example:** `circles = [[3, 4, 2], [6, 7, 1]]`
+- **Constraints:**
+	- 1 <= circles.length <= 200
+	- circles[i].length == 3
+	- 1 <= xi, yi <= 100
+	- 1 <= ri <= min(xi, yi)
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countLatticePoints(vector<vector<int>>& cir) {
-        set<int> cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the number of distinct lattice points inside at least one circle.
+- **Example:** `Output: 14`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the distinct lattice points that are inside or on the circumference of at least one of the given circles.
+
+- Iterate through each circle in the input.
+- For each circle, iterate through all points in the bounding square defined by the circle's radius.
+- Check whether each point lies inside or on the circle using the distance formula.
+- Use a data structure like a set to keep track of unique lattice points.
+{{< dots >}}
+### Problem Assumptions ✅
+- Circle centers and radii are positive integers.
+- The grid is large enough to accommodate all specified circles.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `circles = [[3, 3, 2]]`  \
+  **Explanation:** The circle with center (3, 3) and radius 2 includes lattice points (1, 3), (2, 2), (2, 3), (2, 4), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (4, 2), (4, 3), (4, 4), (5, 3). The total count is 13.
+
+- **Input:** `circles = [[2, 2, 1], [4, 4, 1]]`  \
+  **Explanation:** The circles include lattice points (1, 2), (2, 1), (2, 2), (2, 3), (3, 2), (3, 4), (4, 3), (4, 4), (4, 5), (5, 4). After merging overlapping points, the total count is 10.
+
+{{< dots >}}
+## Approach 🚀
+Use brute-force bounding box iteration for each circle and a set to ensure unique points.
+
+### Initial Thoughts 💭
+- A lattice point inside or on a circle satisfies the equation (x - xi)^2 + (y - yi)^2 <= ri^2.
+- Overlap between circles requires merging results to avoid duplicate counts.
+- Using a set data structure ensures that duplicate lattice points are not counted multiple times.
+{{< dots >}}
+### Edge Cases 🌐
+- No circles are provided; return 0.
+- Handle up to 200 circles with maximum radius efficiently.
+- Circles with a radius of 1 will include only the center and nearby lattice points.
+- Bounding box iteration should remain within computational limits for given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int countLatticePoints(vector<vector<int>>& cir) {
+    set<int> cnt;
+    
+    for(auto it: cir) {
         
-        for(auto it: cir) {
-            
-            for(int i = it[0] - it[2]; i <= it[0] + it[2]; i++)
-            for(int j = it[1] - it[2]; j <= it[1] + it[2]; j++)                
-                if((i - it[0]) * (i - it[0]) + (j - it[1]) * (j - it[1]) <= (it[2] * it[2]))
-                    cnt.insert(i * 1000 + j);
-            
-        }
-        return cnt.size();
+        for(int i = it[0] - it[2]; i <= it[0] + it[2]; i++)
+        for(int j = it[1] - it[2]; j <= it[1] + it[2]; j++)                
+            if((i - it[0]) * (i - it[0]) + (j - it[1]) * (j - it[1]) <= (it[2] * it[2]))
+                cnt.insert(i * 1000 + j);
+        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to count the number of lattice points (points with integer coordinates) that lie inside or on the boundary of a set of circles. Each circle is defined by its center `(x, y)` and its radius `r`. You are given a list of circles, and for each circle, you need to count how many lattice points lie within the circle.
-
-### Approach
-
-To solve this problem, the key steps involve iterating over each circle and checking the grid points (lattice points) that fall within or on the boundary of the circle. The circle's equation is:
-\[
-(x - x_0)^2 + (y - y_0)^2 \leq r^2
-\]
-Where:
-- \((x_0, y_0)\) is the center of the circle.
-- \(r\) is the radius of the circle.
-- The inequality ensures that a point is inside or on the boundary of the circle.
-
-The goal is to determine how many distinct lattice points satisfy this condition for any of the circles.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initializing a Set for Distinct Points
-
-```cpp
-set<int> cnt;
+    return cnt.size();
+}
 ```
 
-- We use a set to store the lattice points. The reason we use a set is that it automatically handles duplicates. If a lattice point lies inside multiple circles, the set ensures that the point is counted only once.
+This function counts the number of distinct lattice points within multiple circles. Each circle is defined by its center and radius, and the function checks if points fall inside any of the circles using the equation for a circle.
 
-#### Step 2: Iterating Over Each Circle
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countLatticePoints(vector<vector<int>>& cir) {
+	```
+	This is the start of the 'countLatticePoints' function, which takes a vector of circles (defined by their center coordinates and radius) and calculates the number of unique lattice points contained within these circles.
 
-```cpp
-for(auto it: cir) {
-```
+2. **Variable Initialization**
+	```cpp
+	    set<int> cnt;
+	```
+	A set 'cnt' is declared to store unique lattice points. The set ensures that duplicate points are automatically handled.
 
-- We iterate over each circle in the input `cir`, where each circle is represented by an array of three integers: `[x, y, r]`, where:
-  - `x` is the x-coordinate of the circle's center.
-  - `y` is the y-coordinate of the circle's center.
-  - `r` is the radius of the circle.
+3. **Loop Through Circles**
+	```cpp
+	    for(auto it: cir) {
+	```
+	This loop iterates over each circle in the 'cir' vector. Each circle is represented by a vector with its center (x, y) and radius.
 
-#### Step 3: Checking Points Within the Circle
+4. **Loop Through x-coordinates**
+	```cpp
+	        for(int i = it[0] - it[2]; i <= it[0] + it[2]; i++)
+	```
+	This loop iterates over the x-coordinates that might lie within the circle, considering the range from the leftmost to the rightmost points based on the center's x-coordinate and radius.
 
-```cpp
-for(int i = it[0] - it[2]; i <= it[0] + it[2]; i++)
-for(int j = it[1] - it[2]; j <= it[1] + it[2]; j++)                
-    if((i - it[0]) * (i - it[0]) + (j - it[1]) * (j - it[1]) <= (it[2] * it[2]))
-        cnt.insert(i * 1000 + j);
-```
+5. **Loop Through y-coordinates**
+	```cpp
+	        for(int j = it[1] - it[2]; j <= it[1] + it[2]; j++)                
+	```
+	This loop iterates over the y-coordinates that might lie within the circle, considering the range from the bottommost to the topmost points based on the center's y-coordinate and radius.
 
-- **Nested Loops for x and y**: The two nested `for` loops iterate over the possible integer values of `i` and `j` that could lie within the bounding box of the circle. 
-  - For the x-coordinate, `i` ranges from `it[0] - it[2]` to `it[0] + it[2]`, which covers all integer values within the horizontal span of the circle.
-  - Similarly, for the y-coordinate, `j` ranges from `it[1] - it[2]` to `it[1] + it[2]`, covering all integer values within the vertical span of the circle.
+6. **Point Inside Circle Check**
+	```cpp
+	            if((i - it[0]) * (i - it[0]) + (j - it[1]) * (j - it[1]) <= (it[2] * it[2]))
+	```
+	This line checks whether the point (i, j) lies inside the circle. The condition is derived from the equation of a circle, where the sum of the squares of the differences in coordinates must be less than or equal to the square of the radius.
 
-- **Check if the Point is Inside the Circle**: 
-  - The condition:
-  ```cpp
-  if((i - it[0]) * (i - it[0]) + (j - it[1]) * (j - it[1]) <= (it[2] * it[2]))
-  ```
-  checks if the point `(i, j)` lies within or on the circle. The equation calculates the square of the distance from the point `(i, j)` to the circle's center `(it[0], it[1])`. If this distance is less than or equal to the square of the radius `r^2`, the point is inside the circle.
+7. **Insert Point**
+	```cpp
+	                cnt.insert(i * 1000 + j);
+	```
+	If the point (i, j) lies inside the circle, it is inserted into the 'cnt' set. The points are stored as a unique identifier by combining the x and y coordinates.
 
-- **Store Points in the Set**: 
-  - If the point lies within the circle, it is inserted into the set using:
-  ```cpp
-  cnt.insert(i * 1000 + j);
-  ```
-  - We use `i * 1000 + j` to store each point as a unique integer key in the set. The multiplication by `1000` ensures that the x-coordinate and y-coordinate are combined into a unique value. Since x and y values are typically integers, this ensures that the combination of `(i, j)` is unique in the set.
+8. **Return Unique Count**
+	```cpp
+	    return cnt.size();
+	```
+	Returns the size of the set 'cnt', which represents the number of unique lattice points that lie within the given circles.
 
-#### Step 4: Return the Count of Distinct Points
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * r^2)
+- **Average Case:** O(n * r^2)
+- **Worst Case:** O(n * r^2)
 
-```cpp
-return cnt.size();
-```
+Each circle's bounding box involves iterating over r^2 points, where n is the number of circles.
 
-- Finally, the size of the set `cnt` is returned, which represents the total number of distinct lattice points that lie inside or on the boundary of the circles.
+### Space Complexity 💾
+- **Best Case:** O(m)
+- **Worst Case:** O(m)
 
-### Complexity
+The space complexity is determined by the number of unique lattice points m.
 
-#### Time Complexity
+**Happy Coding! 🎉**
 
-- **Iterating Over Circles**: There are `m` circles, where `m` is the size of the `cir` array. 
-- **Checking Lattice Points for Each Circle**: For each circle, we iterate over all integer points in its bounding box. The bounding box of a circle with radius `r` contains roughly a square of size `(2r+1) x (2r+1)` grid points. Thus, for each circle, we perform \( O((2r+1)^2) \) operations, where `r` is the radius of the circle.
-- Therefore, the overall time complexity is \( O(m \times (2r+1)^2) \), where `m` is the number of circles and `r` is the average radius of the circles.
-
-#### Space Complexity
-
-- **Set for Distinct Points**: The space complexity is dominated by the size of the set `cnt`, which stores the distinct lattice points. In the worst case, the number of distinct lattice points could be proportional to the total number of points inside all circles. Therefore, the space complexity is \( O(n) \), where `n` is the total number of distinct lattice points.
-
-### Conclusion
-
-The solution efficiently counts the number of distinct lattice points within or on the boundary of multiple circles using a set for storing unique points. By iterating over all potential grid points within the bounding box of each circle and checking if the points satisfy the circle's equation, the algorithm ensures accurate counting while leveraging the properties of a set to handle duplicates. The approach is clear, leveraging geometric properties to solve the problem in a manageable time complexity, given the constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-lattice-points-inside-a-circle/description/)
 

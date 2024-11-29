@@ -14,88 +14,141 @@ img_src = ""
 youtube = "b46PWRWHFp4"
 youtube_upload_date="2023-09-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/b46PWRWHFp4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings s1 and s2, each consisting of 4 lowercase English letters. You can perform a specific operation multiple times, where you swap two characters at indices i and j such that j - i = 2. The task is to determine if it's possible to make s1 equal to s2 after performing any number of such operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings, s1 and s2, each containing 4 lowercase English letters.
+- **Example:** `s1 = 'abcd', s2 = 'cdab'`
+- **Constraints:**
+	- Both s1 and s2 have a length of 4.
+	- Both strings consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canBeEqual(string s1, string s2) {
-        if(s1 == s2) return true;
-        
-        if(s1[0] != s2[0]) swap(s1[0],s1[2]);
-        if(s1 == s2) return true;
-        
-        if(s1[1] != s2[1]) swap(s1[1],s1[3]);
-        if(s1 == s2) return true;
-        
-        return false;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it's possible to make the two strings equal using the described operations, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The output should be a boolean value indicating whether the strings can be made equal or not.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if it's possible to transform s1 into s2 using the allowed operations.
 
-The problem requires us to determine if two strings `s1` and `s2` can be made equal by performing a specific set of swap operations. You are allowed to swap two characters within each string under the following conditions:
-1. Swap the first and third characters of `s1`.
-2. Swap the second and fourth characters of `s1`.
+- Check if s1 is already equal to s2.
+- If not, attempt to swap characters at indices (0, 2) and (1, 3).
+- If the resulting string matches s2 after any number of swaps, return true.
+- If no such transformation is possible, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- Only the swap operation between indices (i, j) where j - i = 2 is allowed.
+- Both input strings are of the same length (4).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s1 = 'abcd', s2 = 'cdab'`  \
+  **Explanation:** We can swap characters at indices (0, 2) and (1, 3) to transform s1 into s2.
 
-The goal is to check if after these operations (or no operation at all), the two strings `s1` and `s2` can become equal.
+- **Input:** `s1 = 'abcd', s2 = 'dacb'`  \
+  **Explanation:** No number of swaps can make s1 equal to s2.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by checking if it's possible to transform s1 into s2 by performing the allowed swap operations.
 
-The solution revolves around checking if the strings `s1` and `s2` can be made equal through a series of swaps. There are a few considerations to keep in mind:
-1. **Direct Equality**: If `s1` is already equal to `s2`, no swaps are needed.
-2. **First Swap Check**: If the first and third characters of `s1` are not equal to the corresponding characters of `s2`, we attempt to swap these characters in `s1` and then check for equality.
-3. **Second Swap Check**: If the second and fourth characters are different between the two strings, we attempt to swap these and again check for equality.
-4. **Final Check**: After attempting the necessary swaps, if the two strings are still not equal, then it is impossible to make them equal through the allowed swap operations.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initial Equality Check
+### Initial Thoughts 💭
+- We are given that both strings are of length 4, so there are only a limited number of swap operations to check.
+- By swapping characters at indices (0, 2) and (1, 3), we should be able to check if the strings can be made equal.
+{{< dots >}}
+### Edge Cases 🌐
+- Since the strings always have a length of 4, empty inputs are not possible.
+- The problem has a fixed size input (length of 4), so large inputs are not a concern.
+- The strings may consist of identical characters or all different characters.
+- Ensure that the logic works within the fixed input size.
+{{< dots >}}
+## Code 💻
 ```cpp
-if(s1 == s2) return true;
+bool canBeEqual(string s1, string s2) {
+    if(s1 == s2) return true;
+    
+    if(s1[0] != s2[0]) swap(s1[0],s1[2]);
+    if(s1 == s2) return true;
+    
+    if(s1[1] != s2[1]) swap(s1[1],s1[3]);
+    if(s1 == s2) return true;
+    
+    return false;
+}
 ```
-- The first step is to check if the strings `s1` and `s2` are already equal. If they are, no swaps are necessary, so we immediately return `true`.
 
-#### Step 2: Swap the First and Third Characters
-```cpp
-if(s1[0] != s2[0]) swap(s1[0], s1[2]);
-if(s1 == s2) return true;
-```
-- If the first character of `s1` is not equal to the first character of `s2`, we perform the first swap: swapping the first and third characters of `s1`.
-- After the swap, we check if the two strings are equal. If they are, we return `true`.
+The provided code compares two strings by swapping characters and checking if they become equal.
 
-#### Step 3: Swap the Second and Fourth Characters
-```cpp
-if(s1[1] != s2[1]) swap(s1[1], s1[3]);
-if(s1 == s2) return true;
-```
-- If the second character of `s1` is not equal to the second character of `s2`, we perform the second swap: swapping the second and fourth characters of `s1`.
-- Again, after performing this swap, we check if the strings are now equal. If they are, we return `true`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	bool canBeEqual(string s1, string s2) {
+	```
+	Function definition to check if two strings can be made equal by swapping characters.
 
-#### Step 4: Final Check
-```cpp
-return false;
-```
-- If none of the conditions above resulted in the strings becoming equal, we return `false`, as it means the two strings cannot be made equal through the allowed swap operations.
+2. **Base Case**
+	```cpp
+	    if(s1 == s2) return true;
+	```
+	Base case check if both strings are already equal.
 
-### Complexity
+3. **Swap Step 1**
+	```cpp
+	    if(s1[0] != s2[0]) swap(s1[0],s1[2]);
+	```
+	Checks if the first characters are unequal, swaps the first and third characters of s1.
 
-#### Time Complexity:
-- **O(1)**, because we are only performing a constant number of comparisons and swaps. The strings `s1` and `s2` are assumed to have a fixed length of 4 characters, so the operations do not depend on the size of the input.
+4. **Base Case**
+	```cpp
+	    if(s1 == s2) return true;
+	```
+	Checks again if the strings are now equal after the first swap.
 
-#### Space Complexity:
-- **O(1)**, because we are using only a fixed amount of extra space to perform the swaps and comparisons.
+5. **Swap Step 2**
+	```cpp
+	    if(s1[1] != s2[1]) swap(s1[1],s1[3]);
+	```
+	Checks if the second characters are unequal, swaps the second and fourth characters of s1.
 
-### Conclusion
+6. **Base Case**
+	```cpp
+	    if(s1 == s2) return true;
+	```
+	Checks again if the strings are now equal after the second swap.
 
-This solution solves the problem in constant time and space, making it highly efficient. The algorithm performs a few key swap checks and equality comparisons to determine if the two strings can be made equal using the allowed swap operations. If neither of the two swaps results in equality, it returns `false`, indicating that the two strings cannot be made identical. This approach is optimal for small-sized strings like the ones in this problem, where the length is limited to 4 characters.
+7. **Return**
+	```cpp
+	    return false;
+	```
+	Returns false if the strings are still not equal after the swaps.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+The time complexity is constant as the input size is fixed at 4.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only need a few variables to store the strings.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-i/description/)
 

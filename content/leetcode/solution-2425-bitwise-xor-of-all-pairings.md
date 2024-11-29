@@ -14,153 +14,218 @@ img_src = ""
 youtube = "mFFtmUdq2jI"
 youtube_upload_date="2022-10-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mFFtmUdq2jI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays, nums1 and nums2, each consisting of non-negative integers. You need to calculate the XOR of all possible pairings between the integers in nums1 and nums2. The result should be the XOR of all the numbers from this new array formed by XORing every integer in nums1 with every integer in nums2.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays nums1 and nums2. Each integer in nums1 will be paired with every integer in nums2 exactly once.
+- **Example:** `nums1 = [5, 2], nums2 = [3, 4, 6]`
+- **Constraints:**
+	- 1 <= nums1.length, nums2.length <= 10^5
+	- 0 <= nums1[i], nums2[j] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
-        int m = nums1.size(), n = nums2.size();
-        
-        int xr1 = nums1[0], xr2 = nums2[0];
-        
-        for(int i = 1; i < m; i++)
-            xr1 ^= nums1[i];
-        
-        for(int i = 1; i < n; i++)
-            xr2 ^= nums2[i];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the XOR of all the integers in the array formed by XORing each integer from nums1 with each integer from nums2.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output will be an integer, which is the result of XORing all elements from the resulting array.
 
-        if((n % 2) == 0) {
-            if((m % 2) == 0) {
-                return 0;
-            } else {
-                return xr2;
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the XOR of all pairings of elements from nums1 and nums2 efficiently.
+
+- 1. Iterate over all elements in nums1 and nums2.
+- 2. For each pair, XOR the elements and accumulate the result.
+- 3. After processing all pairs, return the XOR of all the results.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays nums1 and nums2 are non-empty and contain non-negative integers.
+- The XOR operation will be applied to all pairings of elements from nums1 and nums2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums1 = [5, 2], nums2 = [3, 4, 6]`  \
+  **Explanation:** We first calculate the pairwise XOR results: 5^3, 5^4, 5^6, 2^3, 2^4, 2^6. These results are then XORed together to get the final result.
+
+{{< dots >}}
+## Approach 🚀
+We need to calculate the XOR of all pairings efficiently. Instead of explicitly creating the array, we can optimize the calculation by leveraging properties of XOR.
+
+### Initial Thoughts 💭
+- The XOR operation has the property that it is both commutative and associative, meaning the order of operations does not matter.
+- We can avoid explicitly building the nums3 array by directly calculating the XOR as we process the pairings of nums1 and nums2.
+{{< dots >}}
+### Edge Cases 🌐
+- Since nums1 and nums2 are non-empty as per the problem constraints, no need to handle empty arrays.
+- The solution should handle the case where nums1 and nums2 contain up to 10^5 elements.
+- The solution must handle large values in nums1 and nums2, which can go up to 10^9.
+- Make sure the solution is optimized for time complexity, especially when handling large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
+    int m = nums1.size(), n = nums2.size();
+    
+    int xr1 = nums1[0], xr2 = nums2[0];
+    
+    for(int i = 1; i < m; i++)
+        xr1 ^= nums1[i];
+    
+    for(int i = 1; i < n; i++)
+        xr2 ^= nums2[i];
+
+    if((n % 2) == 0) {
+        if((m % 2) == 0) {
+            return 0;
         } else {
-            if((m % 2) == 0) {
-                return xr1;
-            } else {
-                return xr1 ^ xr2;
-            }            
+            return xr2;
         }
-        return -1;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to compute the result of applying the XOR operation to all elements of two arrays (`nums1` and `nums2`), but the XOR operation must be performed differently depending on the sizes of these arrays. The goal is to figure out how the sizes of `nums1` and `nums2` impact the final result.
-
-To solve this problem, we need to determine the XOR of all elements in `nums1` and `nums2`, but the challenge lies in the fact that the final XOR will depend on whether the sizes of the arrays are even or odd.
-
-### Approach
-
-The core of this problem revolves around understanding how XOR works and how it interacts with the size of the arrays. Let's break down the approach:
-
-#### Key Observations:
-
-1. **XOR Properties**:
-   - XOR is a bitwise operation that has the following important properties:
-     - \( a \oplus a = 0 \) for any integer \( a \).
-     - \( a \oplus 0 = a \) for any integer \( a \).
-     - XOR is both commutative and associative, which means the order of applying XOR doesn't matter.
-
-2. **Effect of Even and Odd Array Sizes**:
-   - If we XOR an even number of identical values, the result will be `0`. 
-   - If we XOR an odd number of identical values, the result will be the value itself.
-
-   This means:
-   - If the size of `nums1` is even, XORing all elements in `nums1` will result in `0`.
-   - If the size of `nums2` is even, XORing all elements in `nums2` will result in `0`.
-   - Therefore, the final result of the XOR operation will depend on the parity (odd or even) of the sizes of `nums1` and `nums2`.
-
-#### Steps to Solve the Problem:
-
-1. **XOR all elements of `nums1` and `nums2`**:
-   - First, calculate the XOR of all elements in both `nums1` and `nums2`. This gives us two values, `xr1` (for `nums1`) and `xr2` (for `nums2`).
-
-2. **Determine the final result based on array sizes**:
-   - If both arrays have even sizes, the result will be `0`.
-   - If `nums1` is even and `nums2` is odd, the result will be `xr2`.
-   - If `nums1` is odd and `nums2` is even, the result will be `xr1`.
-   - If both arrays have odd sizes, the result will be the XOR of `xr1` and `xr2`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the XOR values for both arrays
-
-```cpp
-int m = nums1.size(), n = nums2.size();
-int xr1 = nums1[0], xr2 = nums2[0];
-```
-
-- We first obtain the sizes of both `nums1` (`m`) and `nums2` (`n`).
-- Then, initialize `xr1` to the first element of `nums1` and `xr2` to the first element of `nums2`. This will allow us to accumulate the XOR of all elements in the arrays.
-
-#### Step 2: Calculate the XOR for all elements in `nums1` and `nums2`
-
-```cpp
-for(int i = 1; i < m; i++)
-    xr1 ^= nums1[i];
-
-for(int i = 1; i < n; i++)
-    xr2 ^= nums2[i];
-```
-
-- We loop over the remaining elements of `nums1` and `nums2` and apply XOR to each element. This results in `xr1` being the XOR of all elements in `nums1` and `xr2` being the XOR of all elements in `nums2`.
-
-#### Step 3: Handle the parity of the sizes of `nums1` and `nums2`
-
-```cpp
-if((n % 2) == 0) {
-    if((m % 2) == 0) {
-        return 0;
     } else {
-        return xr2;
+        if((m % 2) == 0) {
+            return xr1;
+        } else {
+            return xr1 ^ xr2;
+        }            
     }
-} else {
-    if((m % 2) == 0) {
-        return xr1;
-    } else {
-        return xr1 ^ xr2;
-    }            
+    return -1;
 }
 ```
 
-- The core logic of the solution is here. We check the parity (even or odd) of `n` (size of `nums2`) and `m` (size of `nums1`).
-  - If `n` is even:
-    - If `m` is also even, return `0` because the XOR of an even number of elements will cancel out.
-    - If `m` is odd, return `xr2`, the XOR of all elements in `nums2`, because only the elements from `nums2` matter.
-  - If `n` is odd:
-    - If `m` is even, return `xr1`, the XOR of all elements in `nums1`, because only the elements from `nums1` matter.
-    - If both `m` and `n` are odd, return the XOR of `xr1` and `xr2`.
+This function calculates the XOR of numbers from two vectors `nums1` and `nums2` and handles different scenarios based on the parity of the vector sizes.
 
-#### Step 4: Return the final result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Code Initialization**
+	```cpp
+	int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
+	```
+	Defines the function that will calculate the XOR of two integer vectors.
 
-```cpp
-return -1;
-```
+2. **Variable Declaration**
+	```cpp
+	    int m = nums1.size(), n = nums2.size();
+	```
+	Declares and initializes variables `m` and `n` to store the sizes of `nums1` and `nums2`.
 
-- This line is technically unnecessary, because all the return conditions above will exit the function, but it is a safety net in case something goes wrong.
+3. **XOR Initialization**
+	```cpp
+	    int xr1 = nums1[0], xr2 = nums2[0];
+	```
+	Initializes `xr1` and `xr2` to the first elements of `nums1` and `nums2`, respectively, to begin the XOR operation.
 
-### Complexity
+4. **XOR Operation 1**
+	```cpp
+	    for(int i = 1; i < m; i++)
+	```
+	Loop through the rest of `nums1` starting from index 1.
 
-#### Time Complexity:
-- **O(m + n)**: We perform two loops: one to compute the XOR for `nums1` and one for `nums2`. Each loop iterates through the entire array, so the overall time complexity is linear with respect to the sizes of `nums1` and `nums2`.
+5. **XOR Operation 2**
+	```cpp
+	        xr1 ^= nums1[i];
+	```
+	XORs each element of `nums1` with `xr1` to accumulate the result.
 
-#### Space Complexity:
-- **O(1)**: We only use a few integer variables to store the XOR results (`xr1` and `xr2`) and the sizes of the arrays, so the space complexity is constant.
+6. **XOR Operation 3**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	Loop through the rest of `nums2` starting from index 1.
 
-### Conclusion
+7. **XOR Operation 4**
+	```cpp
+	        xr2 ^= nums2[i];
+	```
+	XORs each element of `nums2` with `xr2` to accumulate the result.
 
-This solution efficiently computes the XOR of all elements in two arrays based on the sizes of those arrays. The XOR operation's properties allow us to quickly determine the result without performing the XOR on all elements multiple times. The solution is optimal in both time and space, making it suitable for large input sizes. The main insight is that the parity of the array sizes determines the final result, allowing us to reduce the problem to simple condition checks after calculating the XORs.
+8. **Condition 1**
+	```cpp
+	    if((n % 2) == 0) {
+	```
+	Checks if the size of `nums2` is even.
+
+9. **Condition 2**
+	```cpp
+	        if((m % 2) == 0) {
+	```
+	Checks if the size of `nums1` is even, when `nums2` is even.
+
+10. **Return 0**
+	```cpp
+	            return 0;
+	```
+	If both `nums1` and `nums2` are of even size, return 0.
+
+11. **Return 1**
+	```cpp
+	        } else {
+	```
+	If `nums1` is of odd size and `nums2` is of even size.
+
+12. **Return 2**
+	```cpp
+	            return xr2;
+	```
+	Returns the XOR of `nums2` if `nums1` is of odd size and `nums2` is even.
+
+13. **Else Condition 1**
+	```cpp
+	    } else {
+	```
+	Else part when `nums2` has odd size.
+
+14. **Condition 4**
+	```cpp
+	        if((m % 2) == 0) {
+	```
+	Checks if the size of `nums1` is even, when `nums2` is odd.
+
+15. **Return 3**
+	```cpp
+	            return xr1;
+	```
+	Returns `xr1` if `nums1` is even and `nums2` is odd.
+
+16. **Condition 5**
+	```cpp
+	        } else {
+	```
+	If both `nums1` and `nums2` are of odd size.
+
+17. **Return 4**
+	```cpp
+	            return xr1 ^ xr2;
+	```
+	Returns the XOR of both `xr1` and `xr2` if both vectors have odd sizes.
+
+18. **Final Return**
+	```cpp
+	    return -1;
+	```
+	Return -1 as a fallback if none of the conditions match.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only need to iterate through nums1 and nums2 once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only need a few variables to store intermediate results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bitwise-xor-of-all-pairings/description/)
 

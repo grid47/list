@@ -14,161 +14,246 @@ img_src = ""
 youtube = "Aqhrp1nYMqo"
 youtube_upload_date="2023-04-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Aqhrp1nYMqo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays, 'nums' and 'divisors'. For each element in 'divisors', you need to calculate the divisibility score, which is the number of elements in 'nums' divisible by that divisor. Your goal is to return the divisor with the highest divisibility score. If multiple divisors have the same score, return the smallest one.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: 'nums', an array of integers, and 'divisors', another array of integers representing the divisors.
+- **Example:** `nums = [12, 18, 24, 36], divisors = [3, 4, 6]`
+- **Constraints:**
+	- 1 <= nums.length, divisors.length <= 1000
+	- 1 <= nums[i], divisors[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxDivScore(vector<int>& nums, vector<int>& div) {
-        int n = div.size();
-        int m = nums.size();
-        vector<int> cnt(n, 0);
-        int mx = 0, idx = *min_element(div.begin(), div.end());
-        map<int, vector<int>> mp;
-        for(int i = 0; i < m; i++) {
-            if(mp.count(nums[i])) {
-                for(int x: mp[nums[i]]) {
-                    cnt[x]++;
-                    if(cnt[x] > mx || (cnt[x] == mx && div[x] < div[idx])) {
-                        mx = cnt[x];
-                        idx = x;
-                    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the integer from 'divisors' with the highest divisibility score, or the smallest one if multiple divisors have the same score.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The output must be the divisor with the highest divisibility score.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the divisor with the maximum divisibility score from the 'divisors' array.
+
+- Step 1: Initialize a count array to track divisibility scores for each divisor.
+- Step 2: Iterate through each number in 'nums' and check if it is divisible by each divisor in 'divisors'.
+- Step 3: For each divisor, increment its count if the number is divisible by it.
+- Step 4: After processing all numbers, find the divisor with the highest divisibility score, breaking ties by choosing the smallest divisor.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each number in 'nums' can be divisible by one or more divisors.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [12, 18, 24, 36], divisors = [3, 4, 6]`  \
+  **Explanation:** The divisibility scores are: 3 -> 4 numbers divisible, 4 -> 3 numbers divisible, 6 -> 3 numbers divisible. The highest score is 4, and the smallest divisor with that score is 3.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through each number in 'nums' and for each divisor, count how many numbers in 'nums' are divisible by that divisor. Then, we return the divisor with the highest count.
+
+### Initial Thoughts 💭
+- We need to calculate the divisibility score for each divisor, so iterating over 'nums' and 'divisors' is a natural approach.
+- Efficiency is key due to the constraints on the size of the arrays.
+{{< dots >}}
+### Edge Cases 🌐
+- If either 'nums' or 'divisors' is empty, return a default value indicating no divisibility score.
+- For large inputs, the solution must be optimized to handle large values in 'nums' and 'divisors'.
+- If no numbers are divisible by any divisor, return the smallest divisor with score 0.
+- Ensure the solution runs efficiently for arrays of up to 1000 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxDivScore(vector<int>& nums, vector<int>& div) {
+    int n = div.size();
+    int m = nums.size();
+    vector<int> cnt(n, 0);
+    int mx = 0, idx = *min_element(div.begin(), div.end());
+    map<int, vector<int>> mp;
+    for(int i = 0; i < m; i++) {
+        if(mp.count(nums[i])) {
+            for(int x: mp[nums[i]]) {
+                cnt[x]++;
+                if(cnt[x] > mx || (cnt[x] == mx && div[x] < div[idx])) {
+                    mx = cnt[x];
+                    idx = x;
                 }
-            } else {
-                for(int j = 0; j < n; j++) {
-                    if(nums[i] % div[j] == 0) {
-                        mp[nums[i]].push_back(j);
-                        cnt[j]++;
-                        if(cnt[j] > mx || (cnt[j] == mx && div[j] < div[idx])) {
-                            mx = cnt[j];
-                            idx = j;
-                        }                        
-                    }
+            }
+        } else {
+            for(int j = 0; j < n; j++) {
+                if(nums[i] % div[j] == 0) {
+                    mp[nums[i]].push_back(j);
+                    cnt[j]++;
+                    if(cnt[j] > mx || (cnt[j] == mx && div[j] < div[idx])) {
+                        mx = cnt[j];
+                        idx = j;
+                    }                        
                 }
             }
         }
-        return mx == 0? idx:div[idx];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the divisor from a list `div` that has the maximum score based on the divisibility of elements in the list `nums`. The score of a divisor `d` is defined as the count of numbers in `nums` that are divisible by `d`. If there are multiple divisors with the same maximum score, the smallest divisor should be selected.
-
-### Approach
-
-We can break down the approach into several steps:
-
-1. **Understanding the score**: For each element in `nums`, we check which divisors in `div` divide it evenly (i.e., without a remainder). For each divisor that divides a number, the count for that divisor increases. The goal is to maximize this count for the divisors in `div`.
-
-2. **Tracking counts efficiently**: We use an array `cnt` to keep track of how many times each divisor has divided an element in `nums`. We also maintain a variable `mx` to store the current maximum score and an `idx` to store the index of the divisor with the maximum score.
-
-3. **Handling divisibility efficiently**: Instead of checking divisibility for each element in `nums` and each divisor in `div` independently, we use a map `mp` to store for each number in `nums`, the divisors that divide it. This helps to avoid redundant checks.
-
-4. **Handling ties**: If two divisors have the same score, we choose the smallest divisor. This is handled by checking the value of `div[x]` for tie-breaking, ensuring that we prefer smaller divisors when scores are equal.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code line by line:
-
-1. **Initial Setup**:
-   ```cpp
-   int n = div.size();
-   int m = nums.size();
-   vector<int> cnt(n, 0);
-   int mx = 0, idx = *min_element(div.begin(), div.end());
-   map<int, vector<int>> mp;
-   ```
-   - We initialize variables `n` and `m` to store the sizes of `div` and `nums`, respectively.
-   - We create a vector `cnt` of size `n` initialized to 0, which will store the count of divisors that divide elements in `nums`.
-   - We initialize `mx` to 0 and `idx` to the smallest element in `div` using `min_element`. This ensures that in case no divisor is found for any number, the smallest divisor is returned as the default.
-   - We use a map `mp` to store a mapping between numbers in `nums` and the divisors in `div` that divide them.
-
-2. **Loop Through `nums`**:
-   ```cpp
-   for(int i = 0; i < m; i++) {
-       if(mp.count(nums[i])) {
-           for(int x: mp[nums[i]]) {
-               cnt[x]++;
-               if(cnt[x] > mx || (cnt[x] == mx && div[x] < div[idx])) {
-                   mx = cnt[x];
-                   idx = x;
-               }
-           }
-       } else {
-           for(int j = 0; j < n; j++) {
-               if(nums[i] % div[j] == 0) {
-                   mp[nums[i]].push_back(j);
-                   cnt[j]++;
-                   if(cnt[j] > mx || (cnt[j] == mx && div[j] < div[idx])) {
-                       mx = cnt[j];
-                       idx = j;
-                   }
-               }
-           }
-       }
-   }
-   ```
-   - The outer loop iterates over each number `nums[i]` in the `nums` list.
-   - We first check if the number `nums[i]` has been processed already by looking it up in `mp`. If it is already processed, we directly update the counts for the divisors that divide this number.
-     - If `mp.count(nums[i])` is true, we loop over all the divisors of this number (stored in `mp[nums[i]]`). For each divisor `x`, we increment `cnt[x]` and check if the current count `cnt[x]` exceeds `mx`. If it does, we update `mx` and `idx`.
-   - If the number has not been processed before (i.e., `mp.count(nums[i])` is false), we loop over each divisor `div[j]` in `div` and check if `nums[i] % div[j] == 0` (i.e., `div[j]` divides `nums[i]`).
-     - If the condition is true, we add the index `j` to `mp[nums[i]]`, increment the count for that divisor in `cnt[j]`, and then update `mx` and `idx` if necessary.
-
-3. **Return the Result**:
-   ```cpp
-   return mx == 0 ? idx : div[idx];
-   ```
-   - After processing all numbers in `nums`, we check if the maximum count `mx` is still `0`. If it is, it means no divisor was able to divide any number in `nums`, so we return `idx`, the smallest divisor.
-   - Otherwise, we return the divisor `div[idx]` that has the maximum count of divisibility.
-
-### Example Walkthrough
-
-Consider the input:
-```cpp
-nums = [2, 3, 4, 6]
-div = [1, 2, 3]
+    return mx == 0? idx:div[idx];
+}
 ```
 
-1. **First Iteration (i = 0, nums[i] = 2)**:
-   - For `nums[0] = 2`, we check each divisor in `div`.
-     - `2 % 1 == 0`: Divisor `1` divides `2`. Increment `cnt[0]` (count for divisor `1`).
-     - `2 % 2 == 0`: Divisor `2` divides `2`. Increment `cnt[1]` (count for divisor `2`).
-   - We update `mx` and `idx` accordingly.
+This function calculates the maximum division score based on two input arrays: nums and div. It tracks the frequency of divisors and returns the optimal value that satisfies the given conditions.
 
-2. **Second Iteration (i = 1, nums[i] = 3)**:
-   - For `nums[1] = 3`, we check each divisor in `div`.
-     - `3 % 1 == 0`: Divisor `1` divides `3`. Increment `cnt[0]` (count for divisor `1`).
-     - `3 % 3 == 0`: Divisor `3` divides `3`. Increment `cnt[2]` (count for divisor `3`).
-   - We update `mx` and `idx` accordingly.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxDivScore(vector<int>& nums, vector<int>& div) {
+	```
+	Defines the function 'maxDivScore' that takes two vectors as input: nums (numbers to divide) and div (divisors). The goal is to find the division score.
 
-3. **Subsequent Iterations**:
-   - The same steps are repeated for `nums[2] = 4` and `nums[3] = 6`. The counts for divisors are updated based on divisibility.
+2. **Variable Initialization**
+	```cpp
+	    int n = div.size();
+	```
+	Initializes 'n' to store the size of the 'div' vector, representing the number of divisors.
 
-After processing all the numbers, the function will return the divisor with the maximum count, breaking ties with the smallest divisor.
+3. **Variable Initialization**
+	```cpp
+	    int m = nums.size();
+	```
+	Initializes 'm' to store the size of the 'nums' vector, representing the number of elements to check against divisors.
 
-### Complexity Analysis
+4. **Array Initialization**
+	```cpp
+	    vector<int> cnt(n, 0);
+	```
+	Initializes 'cnt', a vector of size 'n', to keep track of the count of each divisor's occurrence.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(m * n)**, where `m` is the number of elements in `nums` and `n` is the number of elements in `div`.
-  - For each element in `nums`, we may check each divisor in `div` to see if it divides the element.
-  - Thus, the total number of operations is proportional to the product of the sizes of `nums` and `div`.
+5. **Variable Initialization**
+	```cpp
+	    int mx = 0, idx = *min_element(div.begin(), div.end());
+	```
+	Initializes 'mx' to 0 and 'idx' to the minimum element in the 'div' vector, which will serve as an index for the divisor with the highest score.
 
-#### Space Complexity:
-- The space complexity is **O(m + n)**, where `m` is the size of `nums` and `n` is the size of `div`.
-  - We store the counts of divisors in the `cnt` array, which has a size of `n`.
-  - We also use a map `mp` to store which divisors divide each number in `nums`, which can have at most `m` entries.
+6. **Data Structure Initialization**
+	```cpp
+	    map<int, vector<int>> mp;
+	```
+	Initializes a map 'mp' to associate each number in 'nums' with its respective divisors from 'div'.
 
-### Conclusion
+7. **Loop**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Starts a loop that iterates through each element of the 'nums' vector.
 
-This solution efficiently computes the divisor with the maximum divisibility score by leveraging maps to avoid redundant calculations and updating counts only when necessary. The time complexity of **O(m * n)** ensures that it handles even larger inputs effectively. The algorithm also ensures that in case of ties, the smallest divisor is selected, making it optimal for a variety of inputs.
+8. **Condition Check**
+	```cpp
+	        if(mp.count(nums[i])) {
+	```
+	Checks if the current number in 'nums' already has associated divisors in the map 'mp'.
+
+9. **Nested Loop**
+	```cpp
+	            for(int x: mp[nums[i]]) {
+	```
+	Iterates through the divisors associated with the current number 'nums[i]' in the map 'mp'.
+
+10. **Array Update**
+	```cpp
+	                cnt[x]++;
+	```
+	Increments the count of the current divisor 'x'.
+
+11. **Condition Check**
+	```cpp
+	                if(cnt[x] > mx || (cnt[x] == mx && div[x] < div[idx])) {
+	```
+	Checks if the count of the current divisor exceeds 'mx' or if it ties with 'mx' but has a smaller value in 'div'.
+
+12. **Variable Update**
+	```cpp
+	                    mx = cnt[x];
+	```
+	Updates 'mx' to the new maximum count of divisors.
+
+13. **Variable Update**
+	```cpp
+	                    idx = x;
+	```
+	Updates 'idx' to the current divisor with the maximum count.
+
+14. **Else Block**
+	```cpp
+	        } else {
+	```
+	If no divisors are found for the current number, the else block executes.
+
+15. **Loop**
+	```cpp
+	            for(int j = 0; j < n; j++) {
+	```
+	Starts a loop iterating through each element in the 'div' vector.
+
+16. **Condition Check**
+	```cpp
+	                if(nums[i] % div[j] == 0) {
+	```
+	Checks if the current number 'nums[i]' is divisible by 'div[j]'.
+
+17. **Data Structure Update**
+	```cpp
+	                    mp[nums[i]].push_back(j);
+	```
+	Adds 'j' to the map 'mp' for the current number 'nums[i]' to associate it with its divisors.
+
+18. **Array Update**
+	```cpp
+	                    cnt[j]++;
+	```
+	Increments the count of the divisor 'div[j]'.
+
+19. **Condition Check**
+	```cpp
+	                    if(cnt[j] > mx || (cnt[j] == mx && div[j] < div[idx])) {
+	```
+	Checks if the current divisor 'div[j]' has a higher count than 'mx', or if it ties but has a smaller value in 'div'.
+
+20. **Variable Update**
+	```cpp
+	                        mx = cnt[j];
+	```
+	Updates 'mx' to the count of the current divisor.
+
+21. **Variable Update**
+	```cpp
+	                        idx = j;
+	```
+	Updates 'idx' to the current divisor's index.
+
+22. **Return Statement**
+	```cpp
+	    return mx == 0? idx:div[idx];
+	```
+	Returns the divisor corresponding to the highest count. If no valid divisor is found, returns the minimum divisor.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n), where m is the number of elements in 'nums' and n is the number of divisors.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the divisibility scores.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-maximum-divisibility-score/description/)
 

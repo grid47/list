@@ -14,92 +14,147 @@ img_src = ""
 youtube = "HhsyccqLHDw"
 youtube_upload_date="2021-12-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/HhsyccqLHDw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s and an array spaces. The array contains indices where spaces need to be inserted into the string. Each space should be added before the character at the respective index. Return the modified string with the spaces inserted.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string s consisting of lowercase and uppercase English letters and an array spaces where each element is an index at which a space should be inserted.
+- **Example:** `s = "HelloWorld", spaces = [5]`
+- **Constraints:**
+	- 1 <= s.length <= 3 * 10^5
+	- 1 <= spaces.length <= 3 * 10^5
+	- 0 <= spaces[i] <= s.length - 1
+	- The values in spaces are strictly increasing
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string addSpaces(string s, vector<int>& spaces) {
-        int i = 0;
-        string res = "";
-        for(int idx : spaces) {
-            while(i < idx) res += s[i++];
-            if(i == idx) res += ' ';
-        }
-        while(i < s.size()) res += s[i++];        
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the string with spaces inserted before the characters at the indices specified in the array spaces.
+- **Example:** `For s = "HelloWorld", spaces = [5], the output should be "Hello World".`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to modify the string by inserting spaces at the specified indices.
+
+- Iterate through the string and check if the current index matches an index from the spaces array.
+- If the index matches, insert a space before the current character.
+- Continue processing the remaining characters in the string after inserting the spaces.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string s only contains English letters.
+- The array spaces is sorted and does not contain duplicate values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: s = "ProgrammingIsFun", spaces = [11, 14]`  \
+  **Explanation:** We insert spaces before 'I' at index 11 and before 'F' at index 14 to obtain the string: "Programming Is Fun".
+
+- **Input:** `Example 2: s = "CodingChallenges", spaces = [6, 11]`  \
+  **Explanation:** We insert spaces before 'C' at index 6 and before 'C' at index 11 to obtain the string: "Coding Challenges".
+
+{{< dots >}}
+## Approach 🚀
+The approach is to process the string by adding spaces at the specified indices while maintaining the order of the original characters.
+
+### Initial Thoughts 💭
+- We can keep track of the current index and compare it to the indices in the spaces array.
+- After each insertion, we can continue from the next character.
+- This can be done in a single pass through the string with efficient space management.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, the output should also be an empty string.
+- The solution should efficiently handle the maximum input size of 300,000 characters and indices.
+- If the spaces array contains all indices of the string, spaces will be inserted before every character.
+- The solution should handle up to 300,000 spaces efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+string addSpaces(string s, vector<int>& spaces) {
+    int i = 0;
+    string res = "";
+    for(int idx : spaces) {
+        while(i < idx) res += s[i++];
+        if(i == idx) res += ' ';
     }
-};
-{{< /highlight >}}
----
+    while(i < s.size()) res += s[i++];        
+    return res;
+}
+```
 
-### Problem Statement
+This function adds spaces to a string `s` at specified indices provided in the `spaces` vector.
 
-The problem requires inserting spaces into a given string `s` at specified indices provided in the `spaces` vector. The goal is to return a new string with the appropriate spaces added while retaining the original characters of `s`. If there are multiple spaces specified at the same index, only one space should be added.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string addSpaces(string s, vector<int>& spaces) {
+	```
+	Define the function `addSpaces` that takes a string `s` and a vector of integers `spaces` to insert spaces at specified positions in `s`.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	Initialize the index `i` to keep track of the position in the string `s`.
 
-The approach to solve this problem is straightforward:
+3. **Variable Initialization**
+	```cpp
+	    string res = "";
+	```
+	Initialize the result string `res` to store the modified string with spaces inserted.
 
-1. **Iterate Over Space Indices**: Loop through the indices in the `spaces` vector, inserting spaces at the correct positions in the output string.
-2. **Build the Result String**: Maintain a result string (`res`) to which the characters from `s` and the spaces will be appended.
-3. **Handle Remaining Characters**: After inserting all specified spaces, append any remaining characters from the original string `s` to the result string.
+4. **Loop Start**
+	```cpp
+	    for(int idx : spaces) {
+	```
+	Start a loop to iterate over each index in the `spaces` vector.
 
-### Code Breakdown (Step by Step)
+5. **Loop Body**
+	```cpp
+	        while(i < idx) res += s[i++];
+	```
+	Copy characters from the string `s` to `res` until the current index `idx` is reached.
 
-1. **Initialize Variables**:
-   ```cpp
-   int i = 0;
-   string res = "";
-   ```
-   - The variable `i` is used to track the current index in the original string `s`, and `res` is initialized as an empty string to build the resulting string.
+6. **Condition Check**
+	```cpp
+	        if(i == idx) res += ' ';
+	```
+	When the current index `i` matches the index in `spaces`, add a space to `res`.
 
-2. **Loop Through Space Indices**:
-   ```cpp
-   for(int idx : spaces) {
-   ```
-   - This loop iterates over each index specified in the `spaces` vector.
+7. **Final Copy**
+	```cpp
+	    while(i < s.size()) res += s[i++];
+	```
+	Copy any remaining characters from `s` to `res` after the last specified space position.
 
-3. **Add Characters Until the Current Space Index**:
-   ```cpp
-   while(i < idx) res += s[i++];
-   ```
-   - The inner `while` loop continues to append characters from `s` to `res` until the current index `i` reaches the specified space index `idx`.
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the modified string `res` which now includes the spaces.
 
-4. **Add Space at the Specified Index**:
-   ```cpp
-   if(i == idx) res += ' ';
-   ```
-   - Once the loop reaches the index `idx`, a space is appended to the result string.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Handle Remaining Characters After Last Space**:
-   ```cpp
-   while(i < s.size()) res += s[i++];
-   ```
-   - After all space indices have been processed, this final `while` loop appends any remaining characters from the original string `s` to `res`.
+The time complexity is O(n), where n is the length of the string, as we process each character once.
 
-6. **Return the Result String**:
-   ```cpp
-   return res;
-   ```
-   - Finally, the constructed string `res`, which now contains the original characters and the added spaces, is returned.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity Analysis
+The space complexity is O(n) as we construct the result string, which can be at most the length of the input string plus the number of spaces.
 
-- **Time Complexity**: \(O(n + m)\), where \(n\) is the length of the string `s` and \(m\) is the number of space indices provided in `spaces`.
-  - The algorithm traverses the original string and the space indices list once, leading to linear time complexity.
+**Happy Coding! 🎉**
 
-- **Space Complexity**: \(O(n)\) for storing the resulting string.
-  - The space required for the result string is proportional to the size of the input string, as a new string is constructed based on it.
-
-### Conclusion
-
-This solution effectively inserts spaces into the string `s` at the specified indices, preserving the order of characters while maintaining efficiency. The approach is both clear and concise, making it easy to understand and implement. It handles edge cases, such as when no spaces need to be added or when all spaces are at the end of the string, ensuring robustness in different scenarios. By utilizing simple loops and string concatenation, the solution demonstrates an efficient way to manipulate strings in C++.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/adding-spaces-to-a-string/description/)
 

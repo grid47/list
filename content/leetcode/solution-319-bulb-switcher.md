@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,92 +28,93 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+There are n bulbs initially off. You toggle every ith bulb in the ith round, and at the end, you need to return how many bulbs remain on.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a single integer n, representing the number of bulbs.
+- **Example:** `n = 4`
+- **Constraints:**
+	- 0 <= n <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int bulbSwitch(int n) {
-        return sqrt(n);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of bulbs that are still on after performing n rounds.
+- **Example:** `2`
+- **Constraints:**
+	- The solution should handle large values of n efficiently.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine how many bulbs remain on after n rounds of toggling.
 
-Imagine a set of bulbs, all initially turned off. After `n` rounds of flipping, we need to determine how many bulbs remain **on**. In each round `i`, every `i`-th bulb is flipped (so round 1 flips all bulbs, round 2 flips every second bulb, and so on). By the end of all `n` rounds, how many bulbs are on? Let’s break it down and uncover a super efficient way to solve this!
+- For each round i (1 to n), toggle every i-th bulb.
+- A bulb remains on if it is toggled an odd number of times.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number of bulbs can be very large (up to 10^9), so a direct simulation approach is impractical.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 4`  \
+  **Explanation:** The bulbs at positions 1 and 4 remain on after all rounds.
 
----
+- **Input:** `n = 9`  \
+  **Explanation:** The bulbs at positions 1, 4, and 9 remain on after all rounds.
 
-### 🧠 Approach
+{{< dots >}}
+## Approach 🚀
+Instead of simulating each round, we recognize that bulbs that are toggled an odd number of times will remain on. A bulb is toggled an odd number of times if its position is a perfect square.
 
-At first glance, this might seem like a tricky problem, but there’s a neat mathematical trick that makes this much easier. Here's how we can think through the problem:
-
-1. **Initial Setup**: All bulbs start **off**.
-2. **Flipping Rule**: In round `i`, we flip every `i`-th bulb. So, in round 1, every bulb gets flipped (since every number is divisible by 1). In round 2, every second bulb gets flipped, and so on.
-3. **Flipping Pattern**: A bulb gets flipped each time its index is divisible by a round number. For example, bulb 6 is flipped in rounds 1, 2, 3, and 6 (since those are the divisors of 6).
-4. **Final Bulb State**: A bulb is **on** if it’s flipped an odd number of times. This only happens if its index is a **perfect square** because perfect squares have an odd number of divisors (1, 3, 5... etc.). For instance:
-   - Bulb 1 is flipped once (perfect square).
-   - Bulb 4 is flipped three times (perfect square).
-   - Bulb 9 is flipped five times (perfect square).
-5. **Result**: The number of bulbs left **on** is simply the number of perfect squares less than or equal to `n`. That’s the integer part of the square root of `n`!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's walk through the code for this solution:
-
+### Initial Thoughts 💭
+- Each bulb is toggled an odd number of times if and only if its position is a perfect square.
+- The problem boils down to counting the number of perfect squares less than or equal to n.
+{{< dots >}}
+### Edge Cases 🌐
+- If n is 0, return 0.
+- For large values of n, the solution must efficiently compute the integer square root without iterating through all bulbs.
+- When n is a perfect square, ensure the count includes that square.
+- The solution must efficiently handle up to 10^9 using the mathematical property of perfect squares.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int bulbSwitch(int n) {
-        return sqrt(n);
-    }
-};
+int bulbSwitch(int n) {
+    return sqrt(n);
+}
 ```
 
-1. **Function Signature**:
-   - `bulbSwitch(int n)` takes an integer `n` (the number of bulbs) and returns the count of bulbs that are **on** after all rounds.
+This function returns the number of bulbs that remain on after n bulbs are toggled in a particular pattern, using the mathematical property of perfect squares.
 
-2. **Using `sqrt`**:
-   - The key insight here is that only perfect squares will remain **on**.
-   - The function `sqrt(n)` computes the square root of `n` and gives us the largest integer less than or equal to `sqrt(n)`. This integer represents the count of perfect squares (and hence, the number of bulbs **on**).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int bulbSwitch(int n) {
+	```
+	The function `bulbSwitch` takes an integer `n` as input, representing the number of bulbs, and returns an integer indicating the number of bulbs that remain on after the toggling process.
 
-3. **Why Perfect Squares?**:
-   - Bulbs at perfect square indices (1, 4, 9, 16, etc.) are the only ones flipped an odd number of times.
-   - For example:
-     - `1` has divisors 1 → flipped once.
-     - `4` has divisors 1, 2, 4 → flipped three times.
-     - `9` has divisors 1, 3, 9 → flipped five times.
-   - Thus, the number of bulbs **on** is equal to the count of perfect squares less than or equal to `n`, which is simply `floor(sqrt(n))`.
+2. **Mathematical Operation**
+	```cpp
+	    return sqrt(n);
+	```
+	The function returns the square root of `n`, which represents the number of bulbs that remain on. This is based on the fact that only bulbs in positions that are perfect squares will remain on after toggling.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-### 📈 Complexity Analysis
+The time complexity is constant because we only need to compute the integer square root of n.
 
-- **Time Complexity**: **O(1)**  
-  The core operation is computing the square root of `n`, which is a constant-time operation. There are no loops or complex operations involved.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Space Complexity**: **O(1)**  
-  We only need space for the input `n` and the result (an integer). No additional space is required.
+The space complexity is constant as we only store a few variables.
 
----
+**Happy Coding! 🎉**
 
-### 🏁 Conclusion
-
-This is a **super efficient** solution that leverages the mathematical properties of perfect squares. By calculating the square root of `n`, we can instantly determine how many bulbs are **on** without needing to simulate the flipping rounds. It’s a constant-time solution, making it perfect for large values of `n`!
-
----
-
-### 🔑 Key Takeaways
-
-1. **Perfect Squares Rule**: Only bulbs at perfect square indices will remain **on**.
-2. **Optimal Solution**: By calculating `sqrt(n)`, we can find the answer in **constant time**.
-3. **Efficiency**: The solution is both **time-efficient** and **space-efficient**, making it scalable for large inputs.
-
-Remember, sometimes the best solutions come from recognizing patterns or mathematical properties—this one is a great example of that! Keep up the great work, and let’s continue solving problems in clever ways! 🎉
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bulb-switcher/description/)
 

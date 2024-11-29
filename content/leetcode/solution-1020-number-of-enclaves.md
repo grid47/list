@@ -14,90 +14,229 @@ img_src = ""
 youtube = "BcrKHwawGb8"
 youtube_upload_date="2023-04-07"
 youtube_thumbnail="https://i.ytimg.com/vi/BcrKHwawGb8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a grid of size m x n where each cell is either land (1) or sea (0). Your task is to determine the number of land cells that are completely enclosed by sea cells. A land cell is considered enclosed if it cannot reach the boundary of the grid via other land cells.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an m x n grid, where grid[i][j] is either 1 (land) or 0 (sea).
+- **Example:** `grid = [[0, 0, 0, 0], [1, 0, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]`
+- **Constraints:**
+	- 1 <= m, n <= 500
+	- grid[i][j] is either 0 or 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numEnclaves(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
-                if(grid[i][j] == 1)
-                    dfs(grid, i, j);
-        int cnt = 0;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 1) cnt++;
-        
-        return cnt;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of land cells that are completely enclosed by sea cells, i.e., they cannot reach the boundary of the grid.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The returned number should be an integer representing the count of enclosed land cells.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine which land cells are enclosed, we need to find and mark all the land cells connected to the boundary of the grid, and then count the remaining land cells.
+
+- 1. Traverse the boundary of the grid and mark all land cells connected to it using depth-first search (DFS).
+- 2. After marking the reachable land cells, the remaining unmarked land cells are enclosed.
+- 3. Count and return the number of enclosed land cells.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input grid is valid and contains only 0s and 1s.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[0, 0, 0, 0], [1, 0, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]`  \
+  **Explanation:** In this case, the 1s in positions (1, 0), (1, 2), and (2, 1) are enclosed by 0s. The land cell at position (2, 2) is not enclosed because it is connected to the boundary. Thus, the output is 3.
+
+- **Input:** `Input: grid = [[0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 0, 0]]`  \
+  **Explanation:** In this case, all the 1s are either connected to the boundary or can reach the boundary through other land cells. Therefore, no land cells are enclosed, and the output is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses depth-first search (DFS) to mark all land cells connected to the boundary, then counts the remaining unmarked land cells.
+
+### Initial Thoughts 💭
+- Boundary cells can directly or indirectly reach the edge, so any land cell connected to the boundary is not enclosed.
+- The problem requires marking the land cells that are connected to the boundary using DFS and then counting the unmarked ones.
+{{< dots >}}
+### Edge Cases 🌐
+- If the grid is empty or contains no land cells, the output should be 0.
+- For large grids (e.g., 500 x 500), the algorithm should still run within time limits.
+- Handle cases where all cells are sea cells (0) or all cells are land cells (1).
+- Ensure the solution handles the maximum grid size efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int numEnclaves(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
+            if(grid[i][j] == 1)
+                dfs(grid, i, j);
+    int cnt = 0;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] == 1) cnt++;
     
-    void dfs(vector<vector<int>>& grid, int i, int j) {
-        if(i < 0 || j < 0 || i == grid.size() || j == grid[0].size() || grid[i][j] != 1)
-            return;
-        grid[i][j] = 2;
-        dfs(grid, i + 1, j);
-        dfs(grid, i, j + 1);
-        dfs(grid, i - 1, j);
-        dfs(grid, i, j - 1);
-    }
-};
-{{< /highlight >}}
----
+    return cnt;
+}
 
+void dfs(vector<vector<int>>& grid, int i, int j) {
+    if(i < 0 || j < 0 || i == grid.size() || j == grid[0].size() || grid[i][j] != 1)
+        return;
+    grid[i][j] = 2;
+    dfs(grid, i + 1, j);
+    dfs(grid, i, j + 1);
+    dfs(grid, i - 1, j);
+    dfs(grid, i, j - 1);
+}
+```
 
+The function `numEnclaves` counts the number of enclaves (connected cells of 1's) in a grid. The grid's boundary is checked first, marking cells connected to the boundary using DFS. Then it counts the remaining cells that are completely enclosed by 0's.
 
-### Problem Statement
-The objective is to count the number of enclaves in a 2D grid, where an enclave is defined as a land cell (`1`) that is completely surrounded by water cells (`0`). The grid is represented as a binary matrix, where `1` represents land and `0` represents water. Land cells that are connected to the border of the grid are not considered enclaves. For example, in a grid where the border land cells are connected to other land cells, those cells do not count towards the enclave total.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numEnclaves(vector<vector<int>>& grid) {
+	```
+	Defines the function `numEnclaves`, which takes a 2D grid as input and returns the number of enclaves (connected regions of 1's that are not connected to the boundary).
 
-### Approach
-To solve the problem, we can utilize Depth-First Search (DFS) to mark all land cells that are connected to the borders. By doing this, we effectively identify and exclude any land cells that cannot be considered as enclaves. The steps to achieve this are as follows:
-1. **Boundary Traversal**: Iterate through the grid and start a DFS from every land cell that is located on the border of the grid. This will mark all reachable land cells as non-enclave (by changing their value).
-2. **Counting Remaining Land Cells**: After marking the non-enclave land cells, traverse the grid again to count the remaining land cells, which represent the enclaves.
+2. **Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Stores the number of rows `m` and columns `n` in the grid, which are used to iterate over the grid.
 
-### Code Breakdown (Step by Step)
+3. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Starts the first loop to iterate through each row of the grid.
 
-1. **Function Declaration**:
-   - The function `numEnclaves` is defined as a public member of the `Solution` class, which takes a reference to a 2D vector of integers (`grid`) as its parameter.
+4. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Starts the inner loop to iterate through each column of the current row.
 
-2. **Grid Dimensions**:
-   - The dimensions of the grid are obtained using `m = grid.size()` and `n = grid[0].size()`, where `m` is the number of rows and `n` is the number of columns in the grid.
+5. **Boundary Check**
+	```cpp
+	        if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
+	```
+	Checks if the current cell is on the boundary of the grid (first row, first column, last row, or last column).
 
-3. **Boundary DFS**:
-   - A nested loop iterates through each cell in the grid. For cells located on the border (i.e., when `i == 0`, `j == 0`, `i == m - 1`, or `j == n - 1`), the algorithm checks if the cell contains land (`grid[i][j] == 1`).
-   - If a border land cell is found, the `dfs` function is called to start marking the connected land cells.
+6. **Condition for DFS**
+	```cpp
+	            if(grid[i][j] == 1)
+	```
+	If the current boundary cell contains a 1 (representing land), it calls the `dfs` function to mark all connected land cells.
 
-4. **Counting Enclaves**:
-   - After marking the border-connected land cells, another nested loop iterates through the grid to count the remaining land cells. A variable `cnt` is initialized to zero and is incremented for each land cell found in the grid.
+7. **DFS Call**
+	```cpp
+	                dfs(grid, i, j);
+	```
+	Calls the helper function `dfs` to mark all connected 1's from the current cell as visited (by setting them to 2).
 
-5. **Return Statement**:
-   - Finally, the function returns the count of the enclaves.
+8. **Count Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes a counter `cnt` to store the number of remaining land cells that are not connected to the boundary.
 
-6. **DFS Function**:
-   - The `dfs` function is a private helper function that performs the depth-first search to mark land cells.
-   - The function checks boundary conditions to prevent out-of-bounds access. If the current cell is out of the grid's bounds or not a land cell (`grid[i][j] != 1`), the function returns.
-   - If a land cell is found, it is marked as visited by changing its value to `2`.
-   - The `dfs` function is then recursively called for the four adjacent cells (down, right, up, left) to continue marking connected land cells.
+9. **Count Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Starts a loop to iterate through each row again to count the remaining land cells.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this algorithm is \( O(m \times n) \), where \( m \) is the number of rows and \( n \) is the number of columns in the grid. In the worst case, we visit each cell once.
-- **Space Complexity**: The space complexity is \( O(h) \), where \( h \) is the depth of the recursion stack used by the DFS. In the worst case (e.g., for a completely filled grid), the depth can be \( O(m \times n) \), but this is generally considered \( O(h) \) in practice, where \( h \) is the maximum possible recursion depth.
+10. **Count Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Starts an inner loop to iterate through each column of the current row.
 
-### Conclusion
-The `numEnclaves` function effectively counts the number of enclaves in a given grid using a combination of depth-first search and systematic marking of cells. This approach ensures that we only consider land cells that are truly surrounded by water, providing an accurate count of enclaves.
+11. **Count Update**
+	```cpp
+	        if(grid[i][j] == 1) cnt++;
+	```
+	Increments the counter `cnt` whenever a land cell (1) is found that is not connected to the boundary.
 
-This solution highlights the efficiency of using DFS to explore connected components in a grid, making it a valuable technique for similar problems in graph theory and matrix manipulation. By understanding this approach, one can apply similar methods to various grid-related challenges, such as island counting, pathfinding, and connectivity analysis.
+12. **Return Count**
+	```cpp
+	    return cnt;
+	```
+	Returns the final count of the enclaves (land cells not connected to the boundary).
 
-In summary, the `numEnclaves` function is an elegant example of how to manage and manipulate 2D arrays in C++ using depth-first search techniques. It demonstrates a clear and logical approach to solving the problem while maintaining optimal performance. This method not only showcases the ability to tackle specific grid-related problems but also offers insights into broader algorithmic strategies that can be applied to more complex scenarios involving connectivity and traversal.
+13. **Helper Function Declaration**
+	```cpp
+	void dfs(vector<vector<int>>& grid, int i, int j) {
+	```
+	Defines the helper function `dfs` that uses Depth-First Search to mark connected land cells starting from position `(i, j)`. It modifies the grid to mark visited cells.
 
-Overall, the function serves as a practical reference for anyone looking to understand how to count surrounded regions in a grid, making it a valuable addition to a programmer’s skill set. Its efficiency and clarity make it suitable for implementation in real-world applications, particularly in areas related to geographical mapping, network analysis, and spatial data representation.
+14. **DFS Base Case**
+	```cpp
+	    if(i < 0 || j < 0 || i == grid.size() || j == grid[0].size() || grid[i][j] != 1)
+	```
+	Checks for out-of-bounds conditions or if the current cell is not land (value is not 1). If any of these conditions are true, the function exits.
+
+15. **Exit DFS**
+	```cpp
+	        return;
+	```
+	Exits the DFS function if the cell is invalid or already visited.
+
+16. **Mark Visited Cell**
+	```cpp
+	    grid[i][j] = 2;
+	```
+	Marks the current cell as visited by setting its value to 2.
+
+17. **DFS Recursive Calls**
+	```cpp
+	    dfs(grid, i + 1, j);
+	```
+	Recursively calls `dfs` on the cell below the current cell.
+
+18. **DFS Recursive Call**
+	```cpp
+	    dfs(grid, i, j + 1);
+	```
+	Recursively calls `dfs` on the cell to the right of the current cell.
+
+19. **DFS Recursive Call**
+	```cpp
+	    dfs(grid, i - 1, j);
+	```
+	Recursively calls `dfs` on the cell above the current cell.
+
+20. **DFS Recursive Call**
+	```cpp
+	    dfs(grid, i, j - 1);
+	```
+	Recursively calls `dfs` on the cell to the left of the current cell.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n) because we are iterating over every cell in the grid, performing a DFS traversal for each boundary land cell.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the recursion stack used by DFS.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-enclaves/description/)

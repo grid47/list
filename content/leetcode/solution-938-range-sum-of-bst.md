@@ -14,123 +14,147 @@ img_src = ""
 youtube = "ISUXXRnKmx0"
 youtube_upload_date="2020-04-30"
 youtube_thumbnail="https://i.ytimg.com/vi/ISUXXRnKmx0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a binary search tree and two integers, low and high, return the sum of values of all nodes whose values are within the inclusive range [low, high]. You can assume that all nodes in the tree have distinct values.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary search tree and two integers, low and high.
+- **Example:** `Input: root = [12,8,15,6,10,14,18], low = 8, high = 15`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [1, 2 * 10^4].
+	- 1 <= Node.val <= 10^5
+	- 1 <= low <= high <= 10^5
+	- All Node.val are unique.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of all node values within the range [low, high].
+- **Example:** `Output: 35`
+- **Constraints:**
+	- The sum should be within the range of integer values.
 
-    int rangeSumBST(TreeNode* root, int low, int high) {
-        if(!root) return 0;
-        int sum = 0;
-        sum += rangeSumBST(root->left, low, high);
-        if(root->val >= low && root->val <= high)
-            sum += root->val;
-        sum += rangeSumBST(root->right, low, high);
-        return sum;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Traverse the binary search tree and calculate the sum of all nodes with values in the range [low, high]. Use a recursive or iterative approach to explore the tree and accumulate the sum.
 
-### Problem Statement
+- 1. Perform an in-order traversal of the tree.
+- 2. For each node, check if its value is within the given range [low, high].
+- 3. If the value is within range, add it to the sum.
+- 4. Return the accumulated sum after traversing all the nodes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a binary search tree, so the nodes follow the binary search property: left child < root < right child.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [12,8,15,6,10,14,18], low = 8, high = 15`  \
+  **Explanation:** In this case, the nodes in the range [8, 15] are 8, 10, 12, and 15. The sum of these values is 35.
 
-The problem at hand is to find the sum of values of all nodes within a Binary Search Tree (BST) that lie within a given range `[low, high]`. Given a BST, you are asked to return the sum of the node values that are within this specified range.
+- **Input:** `Input: root = [12,8,15,6,10,14,18], low = 10, high = 18`  \
+  **Explanation:** The nodes in the range [10, 18] are 10, 12, 15, and 14. The sum of these values is 51.
 
-A Binary Search Tree (BST) is a tree data structure where for each node:
-- The value of the left subtree node is less than the node’s value.
-- The value of the right subtree node is greater than the node’s value.
+{{< dots >}}
+## Approach 🚀
+The approach to solve this problem is to traverse the tree in a depth-first manner (in-order traversal) and accumulate the values of the nodes that lie within the given range. Since it's a binary search tree, we can optimize the traversal by pruning branches that are outside the given range.
 
-You are provided with the root of the tree and the range `[low, high]`. The task is to compute the sum of all node values in the tree that lie within this range.
+### Initial Thoughts 💭
+- The problem can be efficiently solved using a recursive depth-first traversal of the binary search tree.
+- By leveraging the binary search tree properties, we can prune unnecessary branches of the tree (e.g., if a node's value is smaller than low, we don't need to visit its left subtree).
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty (root is null), return 0.
+- Ensure the solution handles large trees with up to 20,000 nodes efficiently.
+- If low equals high, we are looking for nodes with a single value.
+- All node values are unique, so we don't need to handle duplicates.
+{{< dots >}}
+## Code 💻
+```cpp
 
-### Approach
+int rangeSumBST(TreeNode* root, int low, int high) {
+    if(!root) return 0;
+    int sum = 0;
+    sum += rangeSumBST(root->left, low, high);
+    if(root->val >= low && root->val <= high)
+        sum += root->val;
+    sum += rangeSumBST(root->right, low, high);
+    return sum;
+}
+```
 
-To solve this problem, we can take advantage of the properties of a Binary Search Tree. Specifically, we can avoid traversing parts of the tree that are outside the range `[low, high]` to make the algorithm more efficient.
+This code implements the `rangeSumBST` function that calculates the sum of values within a specified range [low, high] in a binary search tree. It uses a recursive approach to traverse the tree and accumulate the sum of the nodes' values within the range.
 
-1. **Traversal Strategy**: Since the problem involves summing nodes within a certain range, an in-order traversal is suitable. In-order traversal ensures that the nodes of the tree are visited in ascending order of their values, which matches the nature of the Binary Search Tree.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int rangeSumBST(TreeNode* root, int low, int high) {
+	```
+	Define the function `rangeSumBST`, which takes a binary search tree root node and a range [low, high] as input and returns the sum of all node values within this range.
 
-2. **Pruning the Search Space**: 
-    - If the current node’s value is less than `low`, then all values in the left subtree are also less than `low`. Therefore, we can skip the entire left subtree and only recurse into the right subtree.
-    - Similarly, if the current node’s value is greater than `high`, all values in the right subtree are also greater than `high`, and we can skip the right subtree and only recurse into the left subtree.
-    - If the current node's value lies within the range `[low, high]`, we should add this value to the sum and continue searching both the left and right subtrees.
+2. **Base Case**
+	```cpp
+	    if(!root) return 0;
+	```
+	Check if the root is null. If so, return 0, as there are no values to sum.
 
-3. **Base Case**: The base case for recursion is when the current node is null, in which case we return 0 as there is nothing to sum.
+3. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initialize a variable `sum` to 0. This will store the cumulative sum of values within the range [low, high].
 
-This approach ensures that we only traverse the relevant parts of the tree, making it more efficient than a simple brute-force traversal.
+4. **Left Subtree Traversal**
+	```cpp
+	    sum += rangeSumBST(root->left, low, high);
+	```
+	Recursively traverse the left subtree of the current root, adding the sum of values within the range to `sum`.
 
-### Code Breakdown (Step by Step)
+5. **Range Check**
+	```cpp
+	    if(root->val >= low && root->val <= high)
+	```
+	Check if the current node's value is within the specified range [low, high]. If so, include it in the sum.
 
-1. **TreeNode Definition**:
-   The problem assumes the following structure for the tree node:
-   ```cpp
-   struct TreeNode {
-       int val;
-       TreeNode *left;
-       TreeNode *right;
-       TreeNode() : val(0), left(nullptr), right(nullptr) {}
-       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-       TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-   };
-   ```
-   This is a standard definition for a binary tree node. Each node contains an integer value (`val`), and pointers to its left and right children.
+6. **Value Addition**
+	```cpp
+	        sum += root->val;
+	```
+	If the current node's value is within the range, add it to the cumulative `sum`.
 
-2. **Recursive Function - `rangeSumBST`**:
-   ```cpp
-   int rangeSumBST(TreeNode* root, int low, int high) {
-       if(!root) return 0;
-       int sum = 0;
-       sum += rangeSumBST(root->left, low, high);
-       if(root->val >= low && root->val <= high)
-           sum += root->val;
-       sum += rangeSumBST(root->right, low, high);
-       return sum;
-   }
-   ```
-   - **Base Case**: `if(!root) return 0;`
-     - If the current node is `null`, we return 0, as there are no nodes to sum in this part of the tree.
-   
-   - **Recursive Traversal**:
-     - We first call `rangeSumBST(root->left, low, high)` to process the left subtree. The sum of the left subtree nodes will be added to `sum`.
-     - We then check if the current node’s value is within the specified range `[low, high]`. If it is, we add `root->val` to `sum`.
-     - We finally call `rangeSumBST(root->right, low, high)` to process the right subtree and add its result to `sum`.
+7. **Right Subtree Traversal**
+	```cpp
+	    sum += rangeSumBST(root->right, low, high);
+	```
+	Recursively traverse the right subtree of the current root, adding the sum of values within the range to `sum`.
 
-   - **Return Value**: After recursively summing the values in the left subtree, adding the value of the current node (if it is within the range), and summing the right subtree, we return the total sum for this subtree.
+8. **Return Result**
+	```cpp
+	    return sum;
+	```
+	Return the final accumulated sum of all node values within the specified range.
 
-3. **Efficiency**:
-   - The function performs an in-order traversal of the tree, but with pruning: we only visit parts of the tree that might contain values within the given range. This pruning helps to skip unnecessary nodes, making the traversal more efficient than a full in-order traversal.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Final Sum**: After the recursion finishes, the function returns the sum of all values in the range `[low, high]` in the tree.
+In the worst case, we need to visit every node in the tree. The time complexity is linear with respect to the number of nodes in the tree.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
 
-1. **Time Complexity**:
-   - In the worst case, the algorithm needs to visit every node in the tree. However, due to the pruning technique, we can avoid traversing subtrees that are outside the range. Therefore, in the worst case, the time complexity is proportional to the number of nodes in the tree, `O(N)`, where `N` is the number of nodes in the tree.
-   - In the best case, when the entire tree or large parts of it can be skipped due to pruning, the time complexity can be much less than `O(N)`.
+The space complexity is O(h) in the worst case due to the recursion stack, where h is the height of the tree. In the best case, the tree is balanced, and the space complexity is O(log n).
 
-2. **Space Complexity**:
-   - The space complexity is determined by the depth of the recursion stack. In the worst case, the depth of the recursion stack is equal to the height of the tree, which is `O(H)`, where `H` is the height of the tree.
-   - For a balanced tree, the height is `O(log N)`, but in the worst case (for an unbalanced tree), the height can be `O(N)`.
-   - Therefore, the space complexity is `O(H)`.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution efficiently computes the sum of values within a given range in a Binary Search Tree using a recursive approach with pruning. By leveraging the properties of a BST, we avoid unnecessary traversal of subtrees that are outside the specified range, making the algorithm both efficient and elegant. The time complexity is `O(N)` in the worst case, where `N` is the number of nodes in the tree, and the space complexity is `O(H)`, where `H` is the height of the tree. This approach ensures that the solution is optimal for large trees and scales well with the size of the input.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/range-sum-of-bst/description/)
 

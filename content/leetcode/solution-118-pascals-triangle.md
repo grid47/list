@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "nPVEaB3AjUM"
 youtube_upload_date="2021-08-10"
 youtube_thumbnail="https://i.ytimg.com/vi/nPVEaB3AjUM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,152 +28,141 @@ youtube_thumbnail="https://i.ytimg.com/vi/nPVEaB3AjUM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer numRows, return the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it. Your task is to generate and return the first 'numRows' of the triangle.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer, numRows, which represents the number of rows to be generated from Pascal's triangle.
+- **Example:** `Input: numRows = 4`
+- **Constraints:**
+	- 1 <= numRows <= 30
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> generate(int numRows) {
-          vector<vector<int>> r(numRows);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a 2D array, where each row represents the corresponding row of Pascal's triangle, starting from the top.
+- **Example:** `Output: [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1]]`
+- **Constraints:**
+	- The number of rows in the output should not exceed 'numRows'.
 
-        for (int i = 0; i < numRows; i++) {
-            r[i].resize(i + 1);
-            r[i][0] = r[i][i] = 1;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate Pascal's triangle row by row, where each row can be constructed by adding the elements directly above it from the previous row.
+
+- Start with the first row, which is always [1].
+- For each subsequent row, initialize the row with 1 at the start and end.
+- For each intermediate position in the row, calculate the value by adding the two numbers directly above it from the previous row.
+- Repeat this process for 'numRows' rows.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input value numRows is always valid and within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: numRows = 4`  \
+  **Explanation:** For the input numRows = 4, Pascal's triangle is generated as follows: the first row is [1], the second row is [1, 1], the third row is [1, 2, 1], and the fourth row is [1, 3, 3, 1].
+
+- **Input:** `Input: numRows = 2`  \
+  **Explanation:** For the input numRows = 2, the output will be [[1], [1, 1]].
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved iteratively by constructing each row based on the previous one. Each new row is initialized with 1 at the boundaries, and the intermediate values are calculated by summing the two values directly above.
+
+### Initial Thoughts 💭
+- We can generate each row by leveraging the values of the previous row.
+- A direct approach will involve iterating through each row and filling in the values based on the previous row.
+{{< dots >}}
+### Edge Cases 🌐
+- If numRows is 1, the output will just be [[1]].
+- The solution should handle up to 30 rows efficiently.
+- For numRows = 1, the output is [[1]].
+- The input will always satisfy 1 <= numRows <= 30.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> generate(int numRows) {
+      vector<vector<int>> r(numRows);
+
+    for (int i = 0; i < numRows; i++) {
+        r[i].resize(i + 1);
+        r[i][0] = r[i][i] = 1;
   
-            for (int j = 1; j < i; j++)
-                r[i][j] = r[i - 1][j - 1] + r[i - 1][j];
-        }
-        
-        return r;      
+        for (int j = 1; j < i; j++)
+            r[i][j] = r[i - 1][j - 1] + r[i - 1][j];
     }
-};
-{{< /highlight >}}
----
-
-### 🌟 **Problem Statement: Generating Pascal's Triangle**
-
-We are tasked with generating the first `numRows` of **Pascal's Triangle**. Pascal’s Triangle is a triangular array where each number is the sum of the two numbers directly above it. The first few rows of Pascal’s Triangle look like this:
-
-```
-     1
-    1 1
-   1 2 1
-  1 3 3 1
- 1 4 6 4 1
+    
+    return r;      
+}
 ```
 
-Given an integer `numRows`, we need to return a 2D list representing the first `numRows` rows of Pascal’s Triangle.
+This function generates Pascal's Triangle up to the specified number of rows using a nested loop and dynamic programming approach.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> generate(int numRows) {
+	```
+	Declare a function to generate Pascal's Triangle for a given number of rows.
 
-### 🧠 **Approach: Building Pascal's Triangle**
+2. **Vector Initialization**
+	```cpp
+	      vector<vector<int>> r(numRows);
+	```
+	Initialize a 2D vector to store the rows of Pascal's Triangle.
 
-Pascal’s Triangle has a few defining characteristics:
-1. The first and last elements of each row are always `1`.
-2. Each interior element in row `i` is the sum of the two elements directly above it from row `i-1`.
+3. **Outer Loop**
+	```cpp
+	    for (int i = 0; i < numRows; i++) {
+	```
+	Iterate over each row to populate Pascal's Triangle.
 
-We can build the triangle row by row, using the following steps:
-- Start with the first row as `[1]`.
-- For each subsequent row, the first and last elements are `1`. The middle elements are the sum of two elements from the row above.
-  
-By following these properties, we can iteratively build each row and add it to our result.
+4. **Row Resize**
+	```cpp
+	        r[i].resize(i + 1);
+	```
+	Resize the current row to accommodate the required number of elements.
 
----
+5. **Row Boundaries**
+	```cpp
+	        r[i][0] = r[i][i] = 1;
+	```
+	Set the first and last elements of the row to 1, as they are boundaries in Pascal's Triangle.
 
-### 🚀 **Code Walkthrough: Step-by-Step**
+6. **Inner Loop**
+	```cpp
+	        for (int j = 1; j < i; j++)
+	```
+	Iterate over the internal elements of the current row.
 
-#### 1. **Function Signature**
-```cpp
-vector<vector<int>> generate(int numRows)
-```
-This function generates the first `numRows` rows of Pascal’s Triangle and returns it as a 2D vector of integers.
+7. **Dynamic Calculation**
+	```cpp
+	            r[i][j] = r[i - 1][j - 1] + r[i - 1][j];
+	```
+	Compute each internal element as the sum of two elements directly above it in the triangle.
 
-#### 2. **Initialize the Result Storage**
-```cpp
-vector<vector<int>> r(numRows);
-```
-We initialize a 2D vector `r` to store the rows of Pascal’s Triangle. The vector has `numRows` rows, each of which will be filled as we generate the triangle.
+8. **Return Statement**
+	```cpp
+	    return r;      
+	```
+	Return the completed Pascal's Triangle as a 2D vector.
 
-#### 3. **Iterate Through Each Row**
-```cpp
-for (int i = 0; i < numRows; i++) {
-    r[i].resize(i + 1);  // Resize to hold 'i+1' elements for the current row
-    r[i][0] = r[i][i] = 1;  // The first and last elements of each row are always 1
-```
-- We loop through each row `i` from `0` to `numRows - 1`.
-- For each row, we resize the vector `r[i]` to hold `i + 1` elements (because the `i`-th row has `i + 1` elements).
-- We then set the first and last elements of the row to `1`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(numRows^2)
+- **Average Case:** O(numRows^2)
+- **Worst Case:** O(numRows^2)
 
-#### 4. **Fill the Interior Elements**
-```cpp
-for (int j = 1; j < i; j++)
-    r[i][j] = r[i - 1][j - 1] + r[i - 1][j];
-```
-- For each row `i`, we start filling in the interior elements, starting from index `1` up to `i - 1`.
-- Each interior element is the sum of two elements from the previous row: `r[i-1][j-1] + r[i-1][j]`.
+The time complexity is O(numRows^2) because we process each element in the triangle once.
 
-#### 5. **Return the Result**
-```cpp
-return r;
-```
-Once all rows have been generated and filled with the correct values, we return the 2D vector `r`, which contains the complete Pascal’s Triangle.
+### Space Complexity 💾
+- **Best Case:** O(numRows^2)
+- **Worst Case:** O(numRows^2)
 
----
+The space complexity is O(numRows^2) because the result contains a 2D array of size numRows x numRows in the worst case.
 
-### 🔍 **Example Walkthrough**
+**Happy Coding! 🎉**
 
-Let’s walk through an example where `numRows = 5`:
-
-1. **Initial Setup**:
-   We initialize a 2D vector `r` with 5 empty rows: `r = { {}, {}, {}, {}, {} }`.
-
-2. **Building Each Row**:
-
-   - **Row 0 (i = 0)**: 
-     - Resize to 1 element: `r[0] = { 1 }`.
-   
-   - **Row 1 (i = 1)**:
-     - Resize to 2 elements: `r[1] = { 1, 1 }`.
-   
-   - **Row 2 (i = 2)**:
-     - Resize to 3 elements: `r[2] = { 1, _, 1 }`.
-     - The middle element is `r[1][0] + r[1][1] = 1 + 1 = 2`, so `r[2] = { 1, 2, 1 }`.
-   
-   - **Row 3 (i = 3)**:
-     - Resize to 4 elements: `r[3] = { 1, _, _, 1 }`.
-     - The second element is `r[2][0] + r[2][1] = 1 + 2 = 3`, and the third element is `r[2][1] + r[2][2] = 2 + 1 = 3`, so `r[3] = { 1, 3, 3, 1 }`.
-   
-   - **Row 4 (i = 4)**:
-     - Resize to 5 elements: `r[4] = { 1, _, _, _, 1 }`.
-     - The second element is `r[3][0] + r[3][1] = 1 + 3 = 4`, the third element is `r[3][1] + r[3][2] = 3 + 3 = 6`, and the fourth element is `r[3][2] + r[3][3] = 3 + 1 = 4`, so `r[4] = { 1, 4, 6, 4, 1 }`.
-
-3. **Final Output**:
-   After completing the loops, the 2D vector `r` becomes:
-   ```
-   [
-       [1],
-      [1, 1],
-     [1, 2, 1],
-    [1, 3, 3, 1],
-   [1, 4, 6, 4, 1]
-   ]
-   ```
-
----
-
-### ⏱️ **Time Complexity**
-
-- **Time Complexity**: `O(numRows^2)`
-  - Each row `i` has `i + 1` elements. Summing the number of elements across all rows results in `numRows * (numRows + 1) / 2`, which is approximately `O(numRows^2)`.
-
-- **Space Complexity**: `O(numRows^2)`
-  - We need to store all the rows of Pascal’s Triangle, and the total number of elements is proportional to `numRows^2`.
-
----
-
-### 💡 **Conclusion**
-
-This approach efficiently generates Pascal’s Triangle by leveraging its properties and building each row iteratively. We use dynamic resizing of vectors to build each row and the sum of elements from the previous row to fill in the interior elements. With a time complexity of **O(numRows^2)** and a space complexity of **O(numRows^2)**, this solution is optimal and works well even for large values of `numRows`.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pascals-triangle/description/)
 

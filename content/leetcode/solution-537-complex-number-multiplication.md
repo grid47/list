@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,141 +28,214 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two complex numbers represented as strings, multiply them and return the result as a string in the format 'real+imaginaryi'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Each input consists of two strings representing complex numbers. Each complex number is represented in the form 'real+imaginaryi', where both real and imaginary are integers within the range [-100, 100].
+- **Example:** `Input: num1 = "2+3i", num2 = "4+5i"`
+- **Constraints:**
+	- num1 and num2 are valid complex numbers, with real and imaginary parts being integers in the range [-100, 100].
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string complexNumberMultiply(string num1, string num2) {
-        string r1, img1, r2, img2;
-        int i = 0;
-        while(num1[i] != '+') {
-            r1 += num1[i];
-            i++;
-        }
-        img1 = num1.substr(i + 1, num1.size() -1);
-        i = 0;
-        while(num2[i] != '+') {
-            r2 += num2[i];
-            i++;
-        }
-        img2 = num2.substr(i + 1, num2.size() -1);
-        int re1 = stoi(r1);
-        int re2 = stoi(r2);
-        int ig1 = stoi(img1);
-        int ig2 = stoi(img2);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a string representing the product of the two complex numbers in the format 'real+imaginaryi'.
+- **Example:** `Output: "-7+22i"`
+- **Constraints:**
+	- The output should follow the exact format 'real+imaginaryi', where real and imaginary are integers.
 
-        i = re1 * re2 - ig1 * ig2;
-        int g = re1 * ig2 + re2 * ig1;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To multiply two complex numbers and return the result in the appropriate format.
 
-        return to_string(i) + "+" + to_string(g) + "i";
+- Parse the real and imaginary parts of both complex numbers from the input strings.
+- Apply the formula for multiplying complex numbers: (a + bi) * (c + di) = (ac - bd) + (ad + bc)i.
+- Construct the result string by formatting the real and imaginary parts into the 'real+imaginaryi' format.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input complex numbers are valid and conform to the given format.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num1 = "2+3i", num2 = "4+5i"`  \
+  **Explanation:** Multiplying (2 + 3i) by (4 + 5i) using the formula (a + bi) * (c + di) = (ac - bd) + (ad + bc)i results in -7 + 22i.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we need to parse the input strings, apply the complex number multiplication formula, and then return the result in the correct format.
+
+### Initial Thoughts 💭
+- We need to parse the complex numbers into their real and imaginary components and then perform the multiplication.
+- The formula for multiplying complex numbers is straightforward, and we need to format the result properly.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees valid input, so no need to handle empty input cases.
+- The solution needs to handle all valid inputs as specified within the constraints.
+- Ensure that negative values in the real or imaginary parts are correctly handled in the result.
+- The solution must handle all inputs within the range [-100, 100] for both real and imaginary parts.
+{{< dots >}}
+## Code 💻
+```cpp
+string complexNumberMultiply(string num1, string num2) {
+    string r1, img1, r2, img2;
+    int i = 0;
+    while(num1[i] != '+') {
+        r1 += num1[i];
+        i++;
     }
-};
-{{< /highlight >}}
----
+    img1 = num1.substr(i + 1, num1.size() -1);
+    i = 0;
+    while(num2[i] != '+') {
+        r2 += num2[i];
+        i++;
+    }
+    img2 = num2.substr(i + 1, num2.size() -1);
+    int re1 = stoi(r1);
+    int re2 = stoi(r2);
+    int ig1 = stoi(img1);
+    int ig2 = stoi(img2);
 
-### Problem Statement
+    i = re1 * re2 - ig1 * ig2;
+    int g = re1 * ig2 + re2 * ig1;
 
-Given two complex numbers as strings in the format `"a+bi"`, where `a` and `b` are integers, the task is to multiply them and return the result as a string in the same format. A complex number has two parts: the real part and the imaginary part. For example, in `3+2i`, `3` is the real part and `2` is the imaginary part.
-
-### Approach
-
-To solve this problem, we break down the multiplication of complex numbers and implement it step-by-step:
-
-1. **Extract Real and Imaginary Parts**:
-   - We first need to separate the real and imaginary components of each complex number.
-   - For a given complex number like `"a+bi"`, we split around the `'+'` symbol to isolate the real part (`a`) and the imaginary part (`b`).
-
-2. **Convert Parts to Integers**:
-   - Once separated, we convert both the real and imaginary parts from strings to integers for numerical computation.
-
-3. **Multiply Using Complex Number Multiplication Formula**:
-   - For two complex numbers, `(a + bi)` and `(c + di)`, the formula for their product is:
-     \[
-     (a + bi) \times (c + di) = (a \times c - b \times d) + (a \times d + b \times c)i
-     \]
-   - Here, the result consists of a new real part calculated as `(a * c - b * d)` and a new imaginary part calculated as `(a * d + b * c)`.
-
-4. **Format the Result**:
-   - We then convert the calculated real and imaginary parts back into a string in the format `"a+bi"` and return it.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Parse `num1` and `num2`
-
-```cpp
-string r1, img1, r2, img2;
-int i = 0;
-while(num1[i] != '+') {
-    r1 += num1[i];
-    i++;
+    return to_string(i) + "+" + to_string(g) + "i";
 }
-img1 = num1.substr(i + 1, num1.size() - 1);
 ```
 
-- We initialize `r1` and `img1` to store the real and imaginary parts of `num1`.
-- We iterate over `num1` until we reach the `'+'` symbol, appending each character to `r1` to build the real part.
-- After reaching `'+'`, we extract the imaginary part (`img1`) using `substr(i + 1)` to get the portion of `num1` starting after `'+'` up to the last character (ignoring the trailing `'i'`).
+This function multiplies two complex numbers represented as strings. It splits the real and imaginary parts of the numbers, performs the multiplication, and returns the result as a string.
 
-#### Step 2: Parse `num2` Similarly
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string complexNumberMultiply(string num1, string num2) {
+	```
+	Defines the `complexNumberMultiply` function that accepts two complex numbers as strings and returns their product as a string.
 
-```cpp
-i = 0;
-while(num2[i] != '+') {
-    r2 += num2[i];
-    i++;
-}
-img2 = num2.substr(i + 1, num2.size() - 1);
-```
+2. **Variable Initialization**
+	```cpp
+	    string r1, img1, r2, img2;
+	```
+	Initializes strings to store the real and imaginary parts of the two complex numbers.
 
-- We repeat the parsing for `num2`, storing its real and imaginary parts in `r2` and `img2`, respectively.
+3. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	Initializes an integer variable `i` to be used as an index for parsing the input strings.
 
-#### Step 3: Convert Parts to Integers
+4. **First While Loop**
+	```cpp
+	    while(num1[i] != '+') {
+	```
+	Starts a loop to extract the real part of the first complex number by iterating until the '+' sign.
 
-```cpp
-int re1 = stoi(r1);
-int re2 = stoi(r2);
-int ig1 = stoi(img1);
-int ig2 = stoi(img2);
-```
+5. **String Manipulation**
+	```cpp
+	        r1 += num1[i];
+	```
+	Appends each character of the real part of `num1` to the string `r1`.
 
-- Using `stoi`, we convert the string representations of the real and imaginary parts into integers for numerical calculations.
+6. **Increment Index**
+	```cpp
+	        i++;
+	```
+	Increments the index `i` to move through the string.
 
-#### Step 4: Apply Complex Number Multiplication Formula
+7. **Extract Imaginary Part**
+	```cpp
+	    img1 = num1.substr(i + 1, num1.size() -1);
+	```
+	Extracts the imaginary part of `num1` by getting the substring after the '+' sign.
 
-```cpp
-i = re1 * re2 - ig1 * ig2;
-int g = re1 * ig2 + re2 * ig1;
-```
+8. **Variable Initialization**
+	```cpp
+	    i = 0;
+	```
+	Resets the index `i` to 0 to parse the second complex number `num2`.
 
-- We calculate the new real part as `re1 * re2 - ig1 * ig2` and store it in `i`.
-- The new imaginary part is `re1 * ig2 + re2 * ig1`, stored in `g`.
+9. **Second While Loop**
+	```cpp
+	    while(num2[i] != '+') {
+	```
+	Starts a loop to extract the real part of the second complex number `num2`.
 
-#### Step 5: Format and Return the Result
+10. **String Manipulation**
+	```cpp
+	        r2 += num2[i];
+	```
+	Appends each character of the real part of `num2` to the string `r2`.
 
-```cpp
-return to_string(i) + "+" + to_string(g) + "i";
-```
+11. **Increment Index**
+	```cpp
+	        i++;
+	```
+	Increments the index `i` to move through the string.
 
-- Finally, we convert the calculated real and imaginary parts back into a string in the desired format `"a+bi"` and return it.
+12. **Extract Imaginary Part**
+	```cpp
+	    img2 = num2.substr(i + 1, num2.size() -1);
+	```
+	Extracts the imaginary part of `num2` by getting the substring after the '+' sign.
 
-### Complexity
+13. **Integer Conversion**
+	```cpp
+	    int re1 = stoi(r1);
+	```
+	Converts the real part of `num1` from string to integer.
 
-#### Time Complexity
-- Parsing each complex number takes `O(n)`, where `n` is the length of each input string (since each character is checked once). The calculations are done in constant time.
-- **Overall Time Complexity**: `O(n)`.
+14. **Integer Conversion**
+	```cpp
+	    int re2 = stoi(r2);
+	```
+	Converts the real part of `num2` from string to integer.
 
-#### Space Complexity
-- The space complexity is `O(1)` since we are only using a fixed amount of additional space for storing intermediate values.
+15. **Integer Conversion**
+	```cpp
+	    int ig1 = stoi(img1);
+	```
+	Converts the imaginary part of `num1` from string to integer.
 
-### Conclusion
+16. **Integer Conversion**
+	```cpp
+	    int ig2 = stoi(img2);
+	```
+	Converts the imaginary part of `num2` from string to integer.
 
-This solution effectively multiplies two complex numbers by:
-1. Parsing the input strings to extract the real and imaginary parts.
-2. Using the complex number multiplication formula to compute the product.
-3. Formatting the result into the required format.
+17. **Complex Number Multiplication**
+	```cpp
+	    i = re1 * re2 - ig1 * ig2;
+	```
+	Calculates the real part of the product of the two complex numbers using the formula: (a * c - b * d).
 
-The solution is efficient, with a linear time complexity in terms of the length of the input strings, making it suitable for larger inputs as well. This method provides a straightforward, structured approach to multiplying complex numbers in C++.
+18. **Complex Number Multiplication**
+	```cpp
+	    int g = re1 * ig2 + re2 * ig1;
+	```
+	Calculates the imaginary part of the product of the two complex numbers using the formula: (a * d + b * c).
+
+19. **Return Result**
+	```cpp
+	    return to_string(i) + "+" + to_string(g) + "i";
+	```
+	Returns the result as a string, combining the real and imaginary parts with a '+' sign.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+Both parsing the complex numbers and performing the multiplication take constant time, O(1).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as only a few integer variables are used to store the real and imaginary parts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/complex-number-multiplication/description/)
 

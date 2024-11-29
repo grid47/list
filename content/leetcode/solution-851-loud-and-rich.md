@@ -14,134 +14,186 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a group of `n` people, each with a unique amount of money and quietness. An array `richer` specifies the relationships between people where `richer[i] = [ai, bi]` indicates that person `ai` has more money than person `bi`. You are also given an array `quiet` where `quiet[i]` represents the quietness of person `i`. Your task is to return an array `answer` where `answer[x]` is the person `y` who has the least quietness among all people who have equal or more money than person `x`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `richer`, where each element `richer[i] = [ai, bi]` represents a richer relationship between two people, and an array `quiet` where `quiet[i]` gives the quietness level of person `i`.
+- **Example:** `Input: richer = [[2, 1], [3, 0], [4, 2]], quiet = [2, 3, 1, 0]`
+- **Constraints:**
+	- 1 <= n <= 500
+	- quiet.length == n
+	- All values of quiet are unique.
+	- 0 <= richer.length <= n * (n - 1) / 2
+	- 0 <= ai, bi < n
+	- ai != bi
+	- All pairs in richer are unique and logically consistent.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    unordered_map<int, vector<int>> richer2;
-    vector<int> res;
-    vector<int> loudAndRich(vector<vector<int>>& richer, vector<int>& quiet) {
-        for(auto v: richer) richer2[v[1]].push_back(v[0]);
-        res = vector<int> (quiet.size(), -1);
-        for(int i = 0; i < quiet.size(); i++) dfs(i, quiet);
-        return res;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array `answer` where each `answer[x]` represents the person with the least quietness among all people who have equal or more money than person `x`.
+- **Example:** `Output: [3, 3, 2, 3]`
+- **Constraints:**
+	- The array `answer` must be of the same length as the input `quiet` array.
 
-    int dfs(int i, vector<int> &quiet) {
-        if(res[i] >= 0) return res[i];
-        res[i] = i;
-        for(int j : richer2[i])
-            if(quiet[res[i]] > quiet[dfs(j, quiet)]) res[i] = res[j];
-        return res[i];
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine, for each person, the least quiet person who is either richer or equally rich.
 
-### Problem Statement
+- Step 1: Build a graph of richer relationships, where each person points to those they are richer than.
+- Step 2: Use Depth First Search (DFS) to find the least quiet person among all people who have more money or are equally rich as the current person.
+- Step 3: Fill the result array with the index of the quietest person for each person in the group.
+{{< dots >}}
+### Problem Assumptions ✅
+- All relationships in `richer` are logically consistent.
+- The input arrays `quiet` contain unique quietness values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: richer = [[2, 1], [3, 0], [4, 2]], quiet = [2, 3, 1, 0]`  \
+  **Explanation:** Here, person 0 is richer than 1, person 1 is richer than 2, and person 2 is richer than 3. By following the richer relationships and quietness values, we determine that for each person, the person with the least quietness among those richer or equally rich is as follows: [3, 3, 2, 3].
 
-The problem requires determining the quietest person in a society, where individuals can be classified as richer than others, and the quietness is represented by an array. We need to identify, for each person, the wealthiest person in their social hierarchy who is less quiet. This requires us to use the richer relationships between individuals and quietness values to compute the result.
+- **Input:** `Input: richer = [], quiet = [0]`  \
+  **Explanation:** In this case, there is only one person. Since there are no richer relationships, the only answer is person 0 themselves. The output is [0].
 
-**Given:**
-1. A list of relationships `richer` where `richer[i] = [a, b]` means person `a` is richer than person `b`.
-2. An array `quiet` where `quiet[i]` represents the quietness of person `i` (lower value means quieter).
-   
-**Goal:**
-For each person `i`, find the richest person in their social group whose quietness is the least (the quietest) — either that person themselves or someone in their social hierarchy.
+{{< dots >}}
+## Approach 🚀
+The solution leverages a depth-first search (DFS) approach to explore the richer relationships and determine the quietest person who is richer or equally rich.
 
-**Example:**
-- **Input**: `richer = [[1, 0], [2, 1], [3, 2], [3, 0]]`, `quiet = [3, 2, 5, 4]`
-- **Output**: `[3, 2, 5, 4]`
+### Initial Thoughts 💭
+- We need to efficiently search for the quietest person who is richer or equally rich.
+- Using DFS will allow us to traverse the graph of relationships and propagate the quietest person for each person based on their richer relationships.
+{{< dots >}}
+### Edge Cases 🌐
+- When there are no richer relationships, each person is only compared to themselves.
+- Ensure the solution handles the case where `n` is large (up to 500) and all possible richer relationships are included.
+- If a person is the richest (or tied for the richest), their answer will be themselves.
+- The function must handle cases where no richer relationships exist.
+{{< dots >}}
+## Code 💻
+```cpp
+unordered_map<int, vector<int>> richer2;
+vector<int> res;
+vector<int> loudAndRich(vector<vector<int>>& richer, vector<int>& quiet) {
+    for(auto v: richer) richer2[v[1]].push_back(v[0]);
+    res = vector<int> (quiet.size(), -1);
+    for(int i = 0; i < quiet.size(); i++) dfs(i, quiet);
+    return res;
+}
 
-Here, person 0 is richer than person 1, and person 1 is richer than person 2. Thus, we need to determine the quietest person in each person's group.
+int dfs(int i, vector<int> &quiet) {
+    if(res[i] >= 0) return res[i];
+    res[i] = i;
+    for(int j : richer2[i])
+        if(quiet[res[i]] > quiet[dfs(j, quiet)]) res[i] = res[j];
+    return res[i];
+}
+```
 
-### Approach
+This function `loudAndRich` determines the richest and least quiet person for each individual in the `quiet` array, based on the relationships in the `richer` matrix. The helper function `dfs` is used to perform a depth-first search and update the result.
 
-To solve this problem efficiently, we must traverse the social hierarchy using a depth-first search (DFS) approach and keep track of the quietest person in each hierarchy. The strategy involves the following steps:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	unordered_map<int, vector<int>> richer2;
+	```
+	Declare a hash map `richer2` to store relationships of richer individuals for each person.
 
-1. **Build the graph of richer relationships**:
-   - Create a graph where each node represents a person and each directed edge represents a "richer than" relationship.
-   - This helps establish the social hierarchy where for each person `a`, we know which other people `b` are poorer.
+2. **Variable Initialization**
+	```cpp
+	vector<int> res;
+	```
+	Declare a vector `res` to store the final results for each person.
 
-2. **Depth-First Search (DFS)**:
-   - Use DFS to explore the social hierarchy starting from each person. As we explore, we will keep track of the quietest person in the social group, considering the relationships (edges) that point from richer to poorer people.
-   - The DFS function will recursively explore each person’s social group and return the index of the quietest person in that group.
+3. **Function Declaration**
+	```cpp
+	vector<int> loudAndRich(vector<vector<int>>& richer, vector<int>& quiet) {
+	```
+	Declare the function `loudAndRich`, which accepts the `richer` matrix and `quiet` vector to determine the least quiet richest person for each individual.
 
-3. **Memoization**:
-   - Since there could be many overlapping subproblems (i.e., we may encounter the same person multiple times during different DFS calls), we will use memoization to store the results for each person in a `res` array to avoid recomputation.
-   
-4. **Update the quietest person**:
-   - For each person, we compare their quietness with the quietest person in their hierarchy and update accordingly.
+4. **Populate Richer Relationships**
+	```cpp
+	    for(auto v: richer) richer2[v[1]].push_back(v[0]);
+	```
+	Populate the `richer2` map where for each person, the list of people they are richer than is stored.
 
-### Code Breakdown (Step by Step)
+5. **Initialize Result Vector**
+	```cpp
+	    res = vector<int> (quiet.size(), -1);
+	```
+	Initialize the `res` vector with the same size as the `quiet` vector, filled with -1.
 
-1. **Graph Construction**:
-   The `richer2` map is used to store the relationship between richer and poorer individuals. For every pair `[a, b]` in `richer`, we add `a` to the list of people richer than `b`.
+6. **Iterate Over Quiet Array**
+	```cpp
+	    for(int i = 0; i < quiet.size(); i++) dfs(i, quiet);
+	```
+	Iterate through each person in the `quiet` array and call the `dfs` function to calculate the least quiet richest person for each.
 
-   ```cpp
-   unordered_map<int, vector<int>> richer2;
-   for(auto v: richer) richer2[v[1]].push_back(v[0]);
-   ```
+7. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the populated `res` vector containing the answers for each individual.
 
-2. **Initialization**:
-   - The result vector `res` is initialized with `-1` for each person. This is because we are initially unaware of the quietest person for each individual.
-   - The size of the `res` vector is the same as the size of the `quiet` vector, as we need to compute one result for each person.
+8. **Helper Function Declaration**
+	```cpp
+	int dfs(int i, vector<int> &quiet) {
+	```
+	Declare the helper function `dfs`, which performs a depth-first search to find the quietest and richest individual for person `i`.
 
-   ```cpp
-   res = vector<int>(quiet.size(), -1);
-   ```
+9. **Base Case Check**
+	```cpp
+	    if(res[i] >= 0) return res[i];
+	```
+	Check if the result for person `i` has already been calculated. If so, return the result.
 
-3. **DFS Function**:
-   - The `dfs` function recursively explores each person’s social group. It returns the index of the quietest person in the group.
-   - For each person `i`, the function first checks if the result has already been computed (i.e., `res[i] >= 0`). If the result is computed, we simply return it to avoid redundant calculations.
-   - If the result has not been computed, we initialize `res[i] = i` (assuming the person is the quietest in their group initially).
-   - We then explore all the people who are richer than `i` by traversing the graph. For each person `j` that is richer than `i`, we compute the quietest person in `j`'s social group using a recursive call to `dfs`.
-   - After exploring all richer individuals, we update `res[i]` to reflect the quietest person in the group.
+10. **Initialize Current Person**
+	```cpp
+	    res[i] = i;
+	```
+	Initially, assume that the least quiet richest person for `i` is themselves.
 
-   ```cpp
-   int dfs(int i, vector<int> &quiet) {
-       if(res[i] >= 0) return res[i];
-       res[i] = i;
-       for(int j : richer2[i])
-           if(quiet[res[i]] > quiet[dfs(j, quiet)]) res[i] = res[j];
-       return res[i];
-   }
-   ```
+11. **Depth-First Search**
+	```cpp
+	    for(int j : richer2[i])
+	```
+	For each person `j` who is richer than `i`, perform a depth-first search to find their least quiet richest person.
 
-4. **Final Result**:
-   - The `loudAndRich` function invokes the `dfs` function for each person in the `quiet` list to compute the quietest person in their group and stores the result in `res`.
-   - Finally, the function returns the `res` vector containing the quietest person for each individual.
+12. **Update Result**
+	```cpp
+	        if(quiet[res[i]] > quiet[dfs(j, quiet)]) res[i] = res[j];
+	```
+	If the quietness of the current person is greater than the quietness of the person found through DFS, update the result to the quieter person.
 
-   ```cpp
-   for(int i = 0; i < quiet.size(); i++) dfs(i, quiet);
-   return res;
-   ```
+13. **Return Result**
+	```cpp
+	    return res[i];
+	```
+	Return the result for person `i`.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n + r)
+- **Worst Case:** O(n + r)
 
-#### Time Complexity:
-- **Graph construction**: Building the graph takes **O(m)** time, where `m` is the number of relationships in `richer`.
-- **DFS**: Each DFS call visits each node (person) at most once, and since there are `n` persons, the DFS time complexity is **O(n)** for each call.
-- **Memoization**: Memoization ensures that each person is visited only once, so the total time complexity is **O(n + m)**.
+The time complexity is O(n + r), where `n` is the number of people and `r` is the number of richer relationships. Each person is processed once, and we perform a DFS to explore all relationships.
 
-Thus, the total time complexity of this solution is **O(n + m)**, where `n` is the number of persons and `m` is the number of relationships.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n + r)
 
-#### Space Complexity:
-- **Graph construction**: The space required to store the graph is **O(m)**, where `m` is the number of relationships.
-- **Result storage**: The `res` vector has a space complexity of **O(n)** to store the quietest person for each individual.
-- **DFS recursion stack**: The maximum depth of the recursion stack is **O(n)** in the worst case.
+The space complexity is O(n + r), which accounts for the graph of richer relationships and the storage for the result array.
 
-Thus, the total space complexity is **O(n + m)**.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution efficiently solves the problem of finding the quietest person in each person’s social hierarchy by leveraging depth-first search and memoization. By constructing the graph of richer relationships, the DFS function computes the result in an optimal manner, avoiding redundant calculations. The time complexity of **O(n + m)** ensures that the solution is scalable for larger inputs, making it suitable for practical use cases involving social hierarchies and quietness.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/loud-and-rich/description/)
 

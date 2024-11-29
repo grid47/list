@@ -14,122 +14,174 @@ img_src = ""
 youtube = "amnrMCVd2YI"
 youtube_upload_date="2021-05-21"
 youtube_thumbnail="https://i.ytimg.com/vi/amnrMCVd2YI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice has a set of cards, each with a value written on it. She wants to rearrange these cards into groups, where each group consists of `groupSize` consecutive cards. Given an integer array `hand` where `hand[i]` represents the value on the ith card, and an integer `groupSize`, return `true` if she can rearrange the cards into groups of consecutive numbers, or `false` otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `hand` representing the values on the cards and an integer `groupSize` that denotes the required group size.
+- **Example:** `Input: hand = [10, 12, 13, 11, 14, 15, 16], groupSize = 3`
+- **Constraints:**
+	- 1 <= hand.length <= 10^4
+	- 0 <= hand[i] <= 10^9
+	- 1 <= groupSize <= hand.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isNStraightHand(vector<int>& hand, int groupSize) {
-        map<int, int> mp;
-        for(int x: hand) mp[x]++;
-        
-        for(auto it: mp) {
-            if(mp[it.first] > 0)
-            for(int i = 1; i < groupSize; i++){
-                mp[it.first + i] -= mp[it.first];
-                if(mp[it.first + i] < 0)
-                    return false;
-            }
-            mp[it.first] = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if it is possible to rearrange the cards into consecutive groups of size `groupSize`. Otherwise, return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- If the length of `hand` is not divisible by `groupSize`, return `false`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if we can group the cards into valid groups of consecutive numbers of size `groupSize`.
+
+- Step 1: Count the frequency of each card in the hand using a map.
+- Step 2: For each unique card, attempt to form a group by selecting consecutive cards. Decrease their frequencies as you form groups.
+- Step 3: If at any point, forming a group is not possible (e.g., not enough consecutive cards), return false.
+- Step 4: If all cards are grouped successfully, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The hand contains at least one card.
+- The values on the cards are non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: hand = [10, 12, 13, 11, 14, 15, 16], groupSize = 3`  \
+  **Explanation:** The hand can be rearranged into three groups: [10, 11, 12], [13, 14, 15], and [16]. Therefore, the answer is `true`.
+
+- **Input:** `Input: hand = [1, 2, 3, 4, 5], groupSize = 4`  \
+  **Explanation:** The length of the hand is 5, which is not divisible by 4, so it's impossible to divide the cards into groups of 4. Therefore, the answer is `false`.
+
+- **Input:** `Input: hand = [1, 2, 3, 4, 6, 7], groupSize = 3`  \
+  **Explanation:** It's not possible to form the required groups because the card with value 5 is missing, which breaks the sequence. Therefore, the answer is `false`.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we first count the frequency of each card and attempt to group consecutive cards by checking if each value can form a valid group with its consecutive numbers.
+
+### Initial Thoughts 💭
+- If the length of the hand is not divisible by `groupSize`, it's impossible to form valid groups.
+- We need to efficiently manage card frequencies and check for possible consecutive sequences.
+- This problem can be tackled using a greedy approach by starting from the smallest card value and trying to form groups of consecutive numbers.
+{{< dots >}}
+### Edge Cases 🌐
+- The input cannot be empty as there must be at least one card.
+- Ensure that the solution can handle large input sizes (up to 10^4 cards).
+- If the length of the hand is not divisible by `groupSize`, return `false`.
+- The solution must handle arrays where `groupSize` is larger than the number of unique cards efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isNStraightHand(vector<int>& hand, int groupSize) {
+    map<int, int> mp;
+    for(int x: hand) mp[x]++;
+    
+    for(auto it: mp) {
+        if(mp[it.first] > 0)
+        for(int i = 1; i < groupSize; i++){
+            mp[it.first + i] -= mp[it.first];
+            if(mp[it.first + i] < 0)
+                return false;
         }
-        return true;
+        mp[it.first] = 0;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand requires us to determine if a given hand of cards can be divided into groups of a specified size, where each group is a consecutive sequence of cards. The cards are represented by integers, and the task is to verify if the hand can be partitioned into groups of consecutive integers of the given size, without any leftovers.
-
-### Example:
-- **Input**: `hand = [1,2,3,6,2,3,4,7,8]`, `groupSize = 3`
-- **Output**: `True`
-- **Explanation**: The cards can be divided into the following groups: `[1,2,3]`, `[2,3,4]`, and `[6,7,8]`.
-
-- **Input**: `hand = [1,2,3,4,5]`, `groupSize = 4`
-- **Output**: `False`
-- **Explanation**: It is impossible to divide the cards into groups of size 4.
-
-The problem ensures that the cards in the hand can be used to form multiple consecutive groups, where each group must consist of exactly `groupSize` consecutive numbers.
-
-### Approach
-
-To solve this problem, we can use a **greedy algorithm** that iteratively checks if it is possible to form a group starting from the smallest available card. The steps for the solution are as follows:
-
-1. **Frequency Counting**: The first step is to count the frequency of each card in the hand using a **map** (or hash map). This helps us quickly access the number of available cards of each value.
-
-2. **Forming Consecutive Groups**: 
-   - Starting with the smallest card, we attempt to form a consecutive sequence of length `groupSize`. This involves checking if there are enough cards to form a complete group.
-   - If a group can be formed, we decrement the frequency of those cards and move on to the next group.
-   - If at any point we cannot form a group of size `groupSize`, we return `false`.
-
-3. **Edge Case Handling**: If at any point the group formation fails (i.e., a card is needed to form a consecutive sequence but is not available), the function should immediately return `false`.
-
-4. **Return Result**: If all groups can be formed, return `true`.
-
-The algorithm operates greedily by always trying to use the smallest available card to start a sequence, ensuring that the number of groups formed is maximized with the smallest values first.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Count the Frequency of Each Card
-The first operation in the code is to create a map that counts how many times each card appears in the hand.
-
-```cpp
-map<int, int> mp;
-for(int x: hand) mp[x]++;
-```
-
-This map will allow us to efficiently check how many times each card appears, so we can decide whether we can form a valid group starting from a particular card.
-
-#### Step 2: Iterate Over the Map to Form Groups
-After counting the frequency of each card, we iterate over the keys in the map (the card values). The algorithm works by starting with the smallest available card and attempting to create a sequence of consecutive cards. For each card, it checks if there are enough cards to form a complete group of size `groupSize`.
-
-```cpp
-for(auto it: mp) {
-    if(mp[it.first] > 0) // Only process cards that still have remaining frequency
-    for(int i = 1; i < groupSize; i++) {
-        mp[it.first + i] -= mp[it.first];
-        if(mp[it.first + i] < 0)
-            return false;
-    }
-    mp[it.first] = 0; // Mark this card as fully used
+    return true;
 }
 ```
 
-- `mp[it.first] > 0`: We check if the current card (i.e., `it.first`) is still available to be used in a group.
-- We then attempt to form a group by checking the next `groupSize - 1` consecutive cards (`it.first + 1`, `it.first + 2`, ..., `it.first + groupSize - 1`).
-- For each of these cards, we decrement their count in the map (`mp[it.first + i] -= mp[it.first]`).
-- If at any point we find that a card cannot be used (i.e., `mp[it.first + i] < 0`), we immediately return `false`.
-- Finally, after using the current card to form a group, we set its frequency to zero (`mp[it.first] = 0`), indicating it has been used up.
+This function checks if a given hand of cards can be rearranged into groups of consecutive cards.
 
-#### Step 3: Return the Result
-If the function has not returned `false` during the loop, then all cards have been successfully used to form consecutive groups. Therefore, the function returns `true` to indicate that the hand can be divided into valid groups.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isNStraightHand(vector<int>& hand, int groupSize) {
+	```
+	The function `isNStraightHand` takes a hand of cards and checks whether the cards can be grouped into valid straight sequences of the specified size.
 
-```cpp
-return true;
-```
+2. **Variable Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map `mp` is initialized to store the count of each card in the hand.
 
-### Complexity
+3. **Counting Elements**
+	```cpp
+	    for(int x: hand) mp[x]++;
+	```
+	For each card in the hand, increment its count in the map `mp`.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(n log n)**, where `n` is the number of cards in the hand. This complexity arises from:
-  - Building the map, which takes O(n) time.
-  - Iterating through the map, where the map keys (card values) are sorted in ascending order. Thus, each operation involves iterating over the map and performing constant time updates, leading to a total time complexity of O(n log n) due to the sorting step inherent in the map's implementation.
+4. **Loop Through Map**
+	```cpp
+	    for(auto it: mp) {
+	```
+	Iterate over each card in the map `mp`.
 
-#### Space Complexity:
-- The space complexity of this solution is **O(n)**, as we use a map to store the frequency of each card in the hand. The size of the map will be proportional to the number of unique cards in the hand.
+5. **Condition Check**
+	```cpp
+	        if(mp[it.first] > 0)
+	```
+	Check if the current card has not been used already.
 
-### Conclusion
+6. **Inner Loop**
+	```cpp
+	        for(int i = 1; i < groupSize; i++){
+	```
+	Loop through the group size and check if the following cards can form a valid group.
 
-This solution is an efficient way to determine if a hand of cards can be split into consecutive groups of a specified size. By leveraging a map to count the frequency of each card, and then applying a greedy approach to form groups starting from the smallest card, we can solve the problem in `O(n log n)` time and `O(n)` space. This approach ensures that we can handle large input sizes effectively, making it a suitable solution for this problem.
+7. **Card Deduction**
+	```cpp
+	            mp[it.first + i] -= mp[it.first];
+	```
+	Decrease the count of the card in the map for each card that should be part of the current group.
 
-The algorithm is easy to understand and implements a clear strategy for forming consecutive sequences of cards. By utilizing the properties of maps (sorted keys and efficient lookups), it ensures that the process of checking for valid groups is optimized.
+8. **Negative Count Check**
+	```cpp
+	            if(mp[it.first + i] < 0)
+	```
+	If any card required for the group has a negative count, it means the group cannot be formed, so return false.
+
+9. **Return False**
+	```cpp
+	                return false;
+	```
+	Return false if the cards cannot form a valid straight hand.
+
+10. **Reset Card Count**
+	```cpp
+	        mp[it.first] = 0;
+	```
+	Set the current card count to 0 after processing it.
+
+11. **Return True**
+	```cpp
+	    return true;
+	```
+	Return true if all cards can be grouped into valid straight hands.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting of cards, which is O(n log n), followed by the greedy approach to form groups in O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the frequency map storing the count of each unique card.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/hand-of-straights/description/)
 

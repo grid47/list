@@ -14,124 +14,175 @@ img_src = ""
 youtube = "lRVpVUC5mQ4"
 youtube_upload_date="2020-09-14"
 youtube_thumbnail="https://i.ytimg.com/vi/lRVpVUC5mQ4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s`. You need to determine the number of valid ways to split `s` into two non-empty substrings such that the number of distinct letters in the left and right substrings is the same.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string `s` consisting of lowercase English letters.
+- **Example:** `s = 'abacb'`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numSplits(string s) {
-        map<char, int> left, right;
-        
-        int n = s.size();
-        for(int i = 0; i < n; i++)
-            right[s[i]]++;
-        
-        int cnt = 0;
-        for(int i = 0; i < n; i++) {
-            left[s[i]]++;
-            right[s[i]]--;
-            if(right[s[i]] == 0) right.erase(s[i]);
-            if(left.size() == right.size()) cnt++;
-        }
-        
-        return cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of valid splits where the number of distinct letters in both substrings is equal.
+- **Example:** `For s = 'abacb', the output is 3.`
+- **Constraints:**
+	- The output is the number of valid splits.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of valid splits based on distinct letters in both substrings.
+
+- Track the distinct letters in the left and right parts of the string.
+- For each possible split of the string, compare the distinct letters in the two parts.
+- If the distinct letters in both parts are equal, increment the count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string is not empty and contains at least one character.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abacb'`  \
+  **Explanation:** The valid splits are ('aba', 'cb'). Both have 2 distinct letters.
+
+- **Input:** `s = 'abcd'`  \
+  **Explanation:** The valid split is ('ab', 'cd'), both having 2 distinct letters.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, track the number of distinct letters in both left and right substrings at each split.
+
+### Initial Thoughts 💭
+- A split is valid if the distinct letters in both parts are the same.
+- We can use two counters to track distinct letters on both sides of the split as we iterate through the string.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty strings are allowed, as the string must have at least one character.
+- The solution needs to efficiently handle large inputs up to 10^5 characters.
+- All characters in the string are the same.
+- The solution should run in linear time relative to the length of the string.
+{{< dots >}}
+## Code 💻
+```cpp
+int numSplits(string s) {
+    map<char, int> left, right;
+    
+    int n = s.size();
+    for(int i = 0; i < n; i++)
+        right[s[i]]++;
+    
+    int cnt = 0;
+    for(int i = 0; i < n; i++) {
+        left[s[i]]++;
+        right[s[i]]--;
+        if(right[s[i]] == 0) right.erase(s[i]);
+        if(left.size() == right.size()) cnt++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine the number of ways to split a given string into two non-empty substrings such that both substrings have the same number of distinct characters. For example, for the string "aacaba", it can be split into "a" | "acaba", "aa" | "caba", "aac" | "aba", and so on. We need to count all such valid splits.
-
-### Approach
-
-To solve this problem, we will utilize a two-pointer technique along with hash maps to keep track of the distinct characters on both sides of the split.
-
-1. **Character Count**: We will maintain two maps (or hash maps) to count the frequency of characters in the left and right substrings.
-  
-2. **Initialize the Right Map**: Initially, populate the right map with the frequency of all characters in the string. This allows us to keep track of characters that are yet to be considered in the left substring.
-
-3. **Iterate and Update**: As we iterate through the string:
-   - Move the current character from the right map to the left map.
-   - Update the counts accordingly.
-   - Check if the number of distinct characters in both maps is equal.
-
-4. **Count Valid Splits**: Each time the number of distinct characters in both substrings is equal, increment the count.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int numSplits(string s) {
-        map<char, int> left, right;
+    
+    return cnt;
+}
 ```
-- We define the `Solution` class and the public method `numSplits` which takes a string `s` as input.
-- We declare two maps, `left` and `right`, to keep track of the frequency of characters on the left and right sides of the split.
 
-```cpp
-        int n = s.size();
-        for(int i = 0; i < n; i++)
-            right[s[i]]++;
-```
-- We retrieve the size of the string `n`.
-- We populate the `right` map with the frequency of each character in the string by iterating through `s`.
+The function `numSplits` counts how many times a string can be split into two non-empty parts such that the number of unique characters in the left and right parts is the same. It uses two maps `left` and `right` to track the frequency of characters in the left and right parts of the split.
 
-```cpp
-        int cnt = 0;
-        for(int i = 0; i < n; i++) {
-            left[s[i]]++;
-            right[s[i]]--;
-```
-- We initialize a counter `cnt` to count the valid splits.
-- We begin another loop to iterate through the string again:
-  - For each character `s[i]`, we increment its count in the `left` map.
-  - We decrement its count in the `right` map.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numSplits(string s) {
+	```
+	This line defines the function `numSplits` which takes a string `s` as input and returns an integer, representing the number of valid splits where the number of unique characters in both parts is the same.
 
-```cpp
-            if(right[s[i]] == 0) right.erase(s[i]);
-```
-- If the count of `s[i]` in the `right` map becomes zero, we erase it from the map. This helps in keeping track of distinct characters effectively.
+2. **Map Initialization**
+	```cpp
+	    map<char, int> left, right;
+	```
+	Two maps `left` and `right` are initialized to store the frequency of characters in the left and right parts of the string during the iterations.
 
-```cpp
-            if(left.size() == right.size()) cnt++;
-        }
-```
-- We then check if the sizes of the `left` and `right` maps are equal. If they are, it indicates that we have found a valid split, and we increment the counter `cnt`.
+3. **Size Calculation**
+	```cpp
+	    int n = s.size();
+	```
+	This line calculates the size of the string `s` and stores it in variable `n`.
 
-```cpp
-        return cnt;
-    }
-};
-```
-- Finally, we return the count of valid splits found.
+4. **Populate Right Map**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	This loop iterates through the string `s`, and in each iteration, it increments the frequency of the character `s[i]` in the `right` map, representing the frequency of characters in the right part.
 
-### Complexity
+5. **Increment Right Map**
+	```cpp
+	        right[s[i]]++;
+	```
+	Increments the count of character `s[i]` in the `right` map.
 
-#### Time Complexity
-- The time complexity of this solution is \(O(n)\), where \(n\) is the length of the string. This is because we perform a single pass through the string to populate the right map and another pass to compute the valid splits.
+6. **Counter Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	The counter `cnt` is initialized to zero. It will store the number of valid splits where the number of unique characters in both left and right parts is the same.
 
-#### Space Complexity
-- The space complexity is \(O(k)\), where \(k\) is the number of distinct characters in the string. In the worst case, if all characters are distinct, the space used by the hash maps could be equal to the length of the string.
+7. **Iterate for Splits**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This loop iterates through the string again. In each iteration, it updates the `left` and `right` maps to reflect the changes as characters are moved from the right to the left part of the string.
 
-### Conclusion
+8. **Increment Left Map**
+	```cpp
+	        left[s[i]]++;
+	```
+	Increments the frequency of character `s[i]` in the `left` map as the character is considered part of the left substring.
 
-This solution efficiently counts the number of ways to split a string into two parts with the same number of distinct characters using a combination of hash maps and a linear traversal of the string.
+9. **Decrement Right Map**
+	```cpp
+	        right[s[i]]--;
+	```
+	Decrements the frequency of character `s[i]` in the `right` map as the character is now considered part of the left substring.
 
-**Key Insights**:
-- **Two-pointer Technique**: By maintaining character counts on both sides of the split, we can efficiently check the condition without needing nested loops.
-- **Hash Map Usage**: Using maps allows us to dynamically update counts and check sizes in constant time, which is crucial for maintaining performance.
-- **Distinct Character Counting**: The solution effectively leverages the properties of distinct character counting to quickly find valid splits.
+10. **Remove Zero Count from Right**
+	```cpp
+	        if(right[s[i]] == 0) right.erase(s[i]);
+	```
+	If the frequency of character `s[i]` in the `right` map becomes zero, it is removed from the map.
 
-In summary, this approach demonstrates a clear and efficient method to solve the problem of counting valid splits in a string based on character distinctness, which can be applied to various similar string manipulation problems in competitive programming.
+11. **Check for Equal Map Sizes**
+	```cpp
+	        if(left.size() == right.size()) cnt++;
+	```
+	If the number of unique characters in the left and right parts (i.e., the size of the `left` and `right` maps) is equal, it means this split is valid, and the counter `cnt` is incremented.
+
+12. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the final value of `cnt`, which represents the number of valid splits where the number of unique characters in both parts is equal.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution processes each character once, thus the time complexity is O(n), where n is the length of the string.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the distinct letters for each split.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-good-ways-to-split-a-string/description/)
 

@@ -14,123 +14,171 @@ img_src = ""
 youtube = "_Zt6ADHF8nE"
 youtube_upload_date="2023-11-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/_Zt6ADHF8nE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of integers 'prices', where each element 'prices[i]' represents the cost to purchase the 'i'-th fruit. If you buy the 'i'-th fruit at prices[i] coins, you get all subsequent fruits for free. Your task is to determine the minimum number of coins required to purchase all the fruits.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers, 'prices', where each element represents the price to purchase that fruit.
+- **Example:** `prices = [2, 5, 3]`
+- **Constraints:**
+	- 1 <= prices.length <= 1000
+	- 1 <= prices[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumCoins(vector<int>& A) {
-        int n = A.size();
-        vector<int> dp(n + 1, 0);
-        deque<int> q;
-        for (int i = 0; i < n; i++) {
-            while (!q.empty() && (q.front() + 1) * 2 < i + 1)
-                q.pop_front();
-            while (!q.empty() && dp[q.back()] + A[q.back()] >= dp[i] + A[i])
-                q.pop_back();
-            q.push_back(i);
-            dp[i + 1] = dp[q.front()] + A[q.front()];
-        }
-        return dp[n];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of coins required to purchase all the fruits.
+- **Example:** `For prices = [2, 5, 3], the output is 5.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of coins required to buy all the fruits while maximizing the rewards from purchasing fruits.
+
+- Use dynamic programming (dp) to track the minimum coins needed to buy all the fruits.
+- At each fruit, determine whether to buy it to get all subsequent fruits for free or skip it based on the cost of purchasing it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The prices array always has at least one element.
+- Each price in the array is distinct and positive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `prices = [2, 5, 3]`  \
+  **Explanation:** The optimal strategy is to buy the first fruit for 2 coins and the second fruit for 5 coins, getting the third fruit for free. The total cost is 2 + 5 = 7.
+
+- **Input:** `prices = [1, 8, 2, 3]`  \
+  **Explanation:** By buying the first fruit for 1 coin and the third fruit for 2 coins, you get the second and fourth fruits for free, resulting in a total cost of 3.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using dynamic programming, where at each fruit you decide whether to buy it based on the rewards it provides for subsequent fruits.
+
+### Initial Thoughts 💭
+- The dynamic programming approach tracks the cost of buying all fruits considering whether you buy a fruit or use a reward from a previous purchase.
+- This problem is optimized by considering the cost at each fruit and how buying it minimizes the overall cost, including rewards from purchasing subsequent fruits.
+{{< dots >}}
+### Edge Cases 🌐
+- The input prices array cannot be empty since the problem guarantees at least one fruit.
+- Even though the prices array can be as large as 1000 elements, the problem is still manageable with dynamic programming.
+- If all prices are equal, the optimal strategy may involve purchasing fruits based on their position in the array.
+- The length of prices is manageable, but the size of individual prices can be quite large, so efficient algorithms are necessary.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumCoins(vector<int>& A) {
+    int n = A.size();
+    vector<int> dp(n + 1, 0);
+    deque<int> q;
+    for (int i = 0; i < n; i++) {
+        while (!q.empty() && (q.front() + 1) * 2 < i + 1)
+            q.pop_front();
+        while (!q.empty() && dp[q.back()] + A[q.back()] >= dp[i] + A[i])
+            q.pop_back();
+        q.push_back(i);
+        dp[i + 1] = dp[q.front()] + A[q.front()];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-The problem is to determine the minimum number of coins needed to reach a particular amount. Given a list `A`, where each element represents a coin's value, the task is to find the minimum number of coins needed to achieve a sum represented by the elements of the list. The list may have values that can be reused multiple times to form combinations.
-
-### Approach:
-To solve this problem efficiently, we will use **dynamic programming** combined with a **sliding window approach** leveraging a deque (double-ended queue) for optimization. Here's the breakdown of the solution:
-
-1. **Dynamic Programming (DP)**: We use an array `dp` where `dp[i]` represents the minimum sum of coins needed to form a sum of `i`. The value of `dp[i]` is computed based on previously computed values, ensuring that the minimum number of coins is used.
-
-2. **Sliding Window**: To optimize the transition from one state to another, a sliding window is used. The deque helps in maintaining the valid window of states efficiently, ensuring that we are always considering the optimal solution.
-
-3. **Transition**: The state transitions from `dp[i]` to `dp[i+1]` by considering the element `A[i]` and ensuring that the minimum number of coins is maintained through each iteration.
-
-### Code Breakdown (Step by Step):
-
-#### 1. **Initialize DP Array**:
-The DP array `dp` is initialized to store the minimum number of coins required to achieve each value from 0 to `n`, where `n` is the size of the input list `A`. The deque `q` is used to keep track of the most promising candidates for the minimum coin calculations.
-
-```cpp
-int n = A.size();
-vector<int> dp(n + 1, 0);
-deque<int> q;
+    return dp[n];
+}
 ```
 
-Here, `dp[i]` will eventually hold the minimum number of coins needed for `i`. We initialize `dp[0] = 0`, as zero coins are needed to achieve a sum of 0.
+This function solves the minimum coin problem by dynamically computing the minimal number of coins needed to reach each index, using a deque to optimize the solution. It keeps track of a dynamic programming array 'dp' and efficiently updates the result by popping and pushing indices into the deque based on conditions.
 
-#### 2. **Iterate Over the List**:
-We start iterating through the array `A`. For each index `i`, we adjust the sliding window by popping out elements from the deque that no longer form valid combinations (based on the condition `(q.front() + 1) * 2 < i + 1`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumCoins(vector<int>& A) {
+	```
+	Defines the function 'minimumCoins' that takes a vector 'A' of coin values and returns the minimum number of coins needed to achieve the desired total.
 
-```cpp
-for (int i = 0; i < n; i++) {
-    while (!q.empty() && (q.front() + 1) * 2 < i + 1)
-        q.pop_front();
-```
-This ensures that the deque always contains the most recent valid indices that can contribute to the computation.
+2. **Initialize Variables**
+	```cpp
+	    int n = A.size();
+	```
+	Initializes the variable 'n' to store the size of the input vector 'A', representing the number of available coins.
 
-#### 3. **Maintaining the Deque**:
-Next, we perform another while loop to maintain the deque such that the element in `dp[q.back()] + A[q.back()]` is greater than or equal to `dp[i] + A[i]`. This ensures that the deque holds the indices of the smallest values that can help form the current result.
+3. **Vector Initialization**
+	```cpp
+	    vector<int> dp(n + 1, 0);
+	```
+	Creates a dynamic programming array 'dp' with 'n + 1' elements, initialized to zero. 'dp[i]' will store the minimum number of coins needed for the amount 'i'.
 
-```cpp
-while (!q.empty() && dp[q.back()] + A[q.back()] >= dp[i] + A[i])
-    q.pop_back();
-q.push_back(i);
-```
+4. **Deque Initialization**
+	```cpp
+	    deque<int> q;
+	```
+	Initializes a deque 'q' that will be used to efficiently manage indices of the 'dp' array during the dynamic programming process.
 
-We then push the current index `i` into the deque, ensuring that it is always in the correct order for future calculations.
+5. **Loop Initialization**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	Starts a loop that iterates over each coin in the vector 'A'.
 
-#### 4. **Updating DP Array**:
-Now, we update the `dp[i+1]` value by adding the coin at `q.front()` to the current result. This ensures that we are calculating the minimum number of coins required at each state.
+6. **Pop Front of Deque**
+	```cpp
+	        while (!q.empty() && (q.front() + 1) * 2 < i + 1)
+	```
+	Checks if the front of the deque represents an index that is no longer relevant for computing the minimum number of coins. If so, it removes that index from the front.
 
-```cpp
-dp[i + 1] = dp[q.front()] + A[q.front()];
-```
+7. **Pop Back of Deque**
+	```cpp
+	            q.pop_front();
+	```
+	Removes the front element from the deque, ensuring only relevant indices remain for the computation.
 
-#### 5. **Return the Result**:
-Finally, the answer to the problem is stored in `dp[n]`, which will contain the minimum number of coins needed for the sum represented by the list `A`.
+8. **Pop Back of Deque (Condition)**
+	```cpp
+	        while (!q.empty() && dp[q.back()] + A[q.back()] >= dp[i] + A[i])
+	```
+	Checks if the current coin value, combined with the previous best solution (stored in 'dp'), is better or worse than the existing solution. If the current solution is better, it pops elements from the back of the deque.
 
-```cpp
-return dp[n];
-```
+9. **Pop Back of Deque**
+	```cpp
+	            q.pop_back();
+	```
+	Removes the back element from the deque, as it represents a suboptimal solution compared to the current coin.
 
-### Complexity:
+10. **Push Current Index to Deque**
+	```cpp
+	        q.push_back(i);
+	```
+	Adds the current index 'i' to the back of the deque to be considered for future iterations.
 
-#### Time Complexity:
-- **Main Iteration**: The outer loop iterates over the list `A`, which has a size of `n`. 
-- **Deque Operations**: The operations on the deque (pop_front, pop_back, and push_back) are each \(O(1)\). In the worst case, each index of `A` is added and removed from the deque only once, meaning the total operations on the deque are linear with respect to `n`.
+11. **Update DP Array**
+	```cpp
+	        dp[i + 1] = dp[q.front()] + A[q.front()];
+	```
+	Updates the dynamic programming array 'dp' by setting 'dp[i + 1]' to the minimum number of coins needed by taking the value from the front of the deque.
 
-Thus, the overall time complexity is:
-\[
-O(n)
-\]
+12. **Return Result**
+	```cpp
+	    return dp[n];
+	```
+	Returns the final result, which is the minimum number of coins needed to make the value 'n', stored in 'dp[n]'.
 
-#### Space Complexity:
-- **DP Array**: The `dp` array has a size of \(n + 1\), which requires \(O(n)\) space.
-- **Deque**: The deque stores indices of the elements of `A`, so it requires \(O(n)\) space in the worst case.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-Therefore, the space complexity is:
-\[
-O(n)
-\]
+The time complexity is linear since we only iterate over the fruits once while updating the dynamic programming array.
 
-### Conclusion:
-The solution efficiently computes the minimum number of coins needed to form a sum using a dynamic programming approach enhanced by a sliding window technique implemented with a deque. This reduces the time complexity from a naive \(O(n^2)\) solution to a more efficient \(O(n)\), making it suitable for larger inputs.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-#### Key Insights:
-- **Sliding Window**: The sliding window ensures that we only consider the most promising candidates for each state, reducing unnecessary calculations.
-- **Deque for Efficiency**: The deque helps to maintain the optimal subproblem solutions and avoid redundant recalculations.
-- **Dynamic Programming**: The DP approach ensures that we solve the problem optimally by building upon smaller subproblems.
+The space complexity is O(n) due to the storage of the dp array that tracks the minimum coins for each fruit.
 
-This combination of dynamic programming with an efficient sliding window using a deque provides an elegant solution to this problem, improving both the time and space complexity.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-coins-for-fruits/description/)
 

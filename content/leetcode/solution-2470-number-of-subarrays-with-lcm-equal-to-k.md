@@ -14,119 +14,135 @@ img_src = ""
 youtube = "xT-O9YJrwh4"
 youtube_upload_date="2022-11-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/xT-O9YJrwh4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `nums` and an integer `k`, return the number of subarrays where the Least Common Multiple (LCM) of all the elements in the subarray equals `k`. A subarray is a contiguous subsequence of elements in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `nums` and an integer `k`. The array contains integers and `k` is the target LCM value.
+- **Example:** `nums = [2, 3, 6, 4, 1], k = 6`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i], k <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int subarrayLCM(vector<int>& nums, int k) {
-        int n = nums.size(), cnt = 0;
-        for(int i = 0; i < n; i++) {
-            for(int j = i; j < n && k % nums[j] == 0; j++) {
-                nums[i] = (nums[i] * nums[j] / __gcd(nums[i], nums[j]));
-                cnt += nums[i] == k;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of subarrays where the LCM of the elements is equal to `k`.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be an integer count.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find subarrays where the LCM of the elements is exactly equal to `k`.
+
+- Iterate over all possible subarrays of `nums`.
+- For each subarray, calculate the LCM of its elements.
+- If the LCM equals `k`, increase the count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array `nums` will not be empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2, 3, 6, 4, 1], k = 6`  \
+  **Explanation:** In this case, there are three subarrays where the LCM equals 6: [2, 3, 6], [3, 6], and [6].
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, iterate through all possible subarrays and compute the LCM for each one, checking if it matches `k`.
+
+### Initial Thoughts 💭
+- We need to efficiently calculate the LCM of subarrays and check if it equals `k`.
+- The LCM calculation for each subarray should be optimized to avoid redundant computations.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array `nums` will not be empty as per the problem constraints.
+- For large input arrays, the solution should be efficient enough to avoid timeouts.
+- If `k` is smaller than the smallest element in `nums`, the result should be 0.
+- The solution should handle cases where `nums` contains a mix of large and small numbers efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int subarrayLCM(vector<int>& nums, int k) {
+    int n = nums.size(), cnt = 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = i; j < n && k % nums[j] == 0; j++) {
+            nums[i] = (nums[i] * nums[j] / __gcd(nums[i], nums[j]));
+            cnt += nums[i] == k;
         }
-        return cnt;
     }
-};
-{{< /highlight >}}
----
+    return cnt;
+}
+```
 
-### Problem Statement:
-The task is to find the number of subarrays in a given integer array where the Least Common Multiple (LCM) of the elements in each subarray is equal to a specified value `k`. The goal is to identify all subarrays in which the LCM of their elements matches `k`.
+This function calculates the number of subarrays whose least common multiple (LCM) equals the given integer `k`. It iterates through pairs of numbers, updating the LCM and counting when it matches `k`.
 
-### Approach:
-To solve this problem, we need to examine all possible subarrays of the given array `nums` and compute the LCM for each subarray. If the LCM of the subarray is equal to `k`, we count that subarray as valid.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int subarrayLCM(vector<int>& nums, int k) {
+	```
+	The function `subarrayLCM` is declared, taking a reference to a vector of integers `nums` and an integer `k`. It will return an integer representing the count of subarrays whose LCM equals `k`.
 
-- **Subarrays**: A subarray is a contiguous portion of the array. For example, the subarrays of `[1, 2, 3]` are `[1]`, `[2]`, `[3]`, `[1, 2]`, `[2, 3]`, and `[1, 2, 3]`.
-  
-- **LCM**: The Least Common Multiple (LCM) of two or more numbers is the smallest number that is a multiple of all the numbers. The LCM can be calculated using the relationship between LCM and GCD (Greatest Common Divisor):
-  \[
-  LCM(a, b) = \frac{|a \times b|}{GCD(a, b)}
-  \]
-  
-- **Solution**: We will iterate over all possible subarrays in the array `nums` and compute the LCM of the elements in each subarray. For each subarray, if the LCM is equal to `k`, we increment the count. To make this more efficient:
-  - We check if the current number in the subarray divides `k` (i.e., `k % nums[j] == 0`).
-  - We update the LCM progressively for each new element added to the subarray using the formula mentioned above.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size(), cnt = 0;
+	```
+	The variable `n` stores the size of the `nums` vector, and `cnt` is initialized to zero to track the number of valid subarrays where the LCM equals `k`.
 
-### Code Breakdown (Step by Step):
-Now let’s break down the code step by step to understand the process in detail:
+3. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	The outer loop starts, iterating through each element of the `nums` vector. The variable `i` represents the starting index of the subarray.
 
-1. **Function Declaration**:
-   ```cpp
-   int subarrayLCM(vector<int>& nums, int k)
-   ```
-   This function, `subarrayLCM`, takes two parameters:
-   - `nums`: A vector of integers representing the array for which we are to find subarrays with LCM equal to `k`.
-   - `k`: An integer representing the target value for the LCM of subarrays.
-   
-   The function returns an integer representing the count of subarrays where the LCM of the elements equals `k`.
+4. **Inner Loop**
+	```cpp
+	        for(int j = i; j < n && k % nums[j] == 0; j++) {
+	```
+	The inner loop starts at index `i` and continues as long as the condition `k % nums[j] == 0` is true, meaning the current number divides `k`. The variable `j` represents the ending index of the subarray.
 
-2. **Initializations**:
-   ```cpp
-   int n = nums.size(), cnt = 0;
-   ```
-   - `n` stores the size of the `nums` array, which will be used to determine the bounds for the loops.
-   - `cnt` is initialized to zero and will be used to store the count of subarrays whose LCM equals `k`.
+5. **LCM Update**
+	```cpp
+	            nums[i] = (nums[i] * nums[j] / __gcd(nums[i], nums[j]));
+	```
+	This line calculates the LCM of `nums[i]` and `nums[j]` using the formula `LCM(a, b) = (a * b) / GCD(a, b)` and stores the result back in `nums[i]`.
 
-3. **Outer Loop (Iterating Over Subarrays)**:
-   ```cpp
-   for (int i = 0; i < n; i++) {
-   ```
-   The outer loop iterates over each element of the array `nums`. Each iteration starts a new subarray from index `i`. The goal is to consider all subarrays starting at index `i`.
+6. **Count Match**
+	```cpp
+	            cnt += nums[i] == k;
+	```
+	If the LCM of the current subarray is equal to `k`, `cnt` is incremented by 1.
 
-4. **Inner Loop (Expanding Subarrays)**:
-   ```cpp
-   for (int j = i; j < n && k % nums[j] == 0; j++) {
-   ```
-   The inner loop iterates over the elements starting from the `i`th index. For each element `nums[j]`, the condition `k % nums[j] == 0` ensures that we only consider subarrays where the current element `nums[j]` divides `k`. If this condition is not met, we stop expanding the subarray because further elements will not produce a valid subarray with an LCM that could equal `k`.
+7. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	The function returns the final count `cnt`, which represents the number of subarrays whose LCM equals `k`.
 
-5. **Updating the LCM of the Current Subarray**:
-   ```cpp
-   nums[i] = (nums[i] * nums[j] / __gcd(nums[i], nums[j]));
-   ```
-   - We calculate the new LCM of the current subarray by updating `nums[i]`. 
-   - This is done by taking the product of `nums[i]` and `nums[j]` and dividing it by their greatest common divisor (`GCD`), which is computed using the `__gcd` function provided by C++.
-   
-   This formula ensures that `nums[i]` holds the LCM of the subarray starting at index `i` and ending at index `j`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-6. **Checking if the LCM Equals `k`**:
-   ```cpp
-   cnt += nums[i] == k;
-   ```
-   After updating the LCM of the current subarray, we check if it is equal to `k`. If it is, we increment the count `cnt` by 1.
+The time complexity is O(n^2) because we check all subarrays, and for each subarray, we compute the LCM, which can take linear time.
 
-7. **Return the Result**:
-   ```cpp
-   return cnt;
-   ```
-   After both loops have completed, the function returns the total count of subarrays whose LCM equals `k`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Complexity:
-Let’s analyze the time complexity and space complexity of this solution:
+The space complexity is constant, as we only need a few variables to store intermediate results.
 
-- **Time Complexity**:
-  - The outer loop runs for each index `i` in the array `nums`. Hence, it iterates `n` times.
-  - The inner loop iterates for each element `nums[j]` starting from index `i`. In the worst case, this can go up to `n` iterations for each `i`.
-  - Inside the inner loop, calculating the LCM involves computing the GCD, which is done in \( O(\log \min(a, b)) \) time for two numbers `a` and `b`. Since the GCD operation is quite efficient, the overall complexity for the GCD operation can be considered constant in practice for typical integer sizes.
+**Happy Coding! 🎉**
 
-  Therefore, the worst-case time complexity is \( O(n^2) \), because for each `i`, we may iterate over all subsequent elements `j`, leading to a quadratic number of subarrays being considered.
-
-- **Space Complexity**:
-  - The space complexity is \( O(1) \) if we disregard the input and output space. We only use a few integer variables (`n` and `cnt`), and the space for storing the LCM is reused in place in the `nums` vector.
-
-### Conclusion:
-The `subarrayLCM` function is designed to efficiently count subarrays of the given array `nums` whose LCM is equal to the target value `k`. The solution works by iterating over all subarrays, updating the LCM progressively, and checking if the LCM equals `k`. The solution leverages the GCD to calculate the LCM and ensures that only valid subarrays are considered by checking divisibility by `k`.
-
-While the algorithm has a time complexity of \( O(n^2) \), it performs efficiently for smaller arrays, as each GCD operation is relatively fast. The solution also uses constant space, making it space-efficient. This approach is well-suited for moderately sized arrays and target values where the quadratic time complexity is manageable. 
-
-Overall, this solution is clear and effective, offering an optimal approach for solving the problem of counting subarrays with a specific LCM.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-subarrays-with-lcm-equal-to-k/description/)
 

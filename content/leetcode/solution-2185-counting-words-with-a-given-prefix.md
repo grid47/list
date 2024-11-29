@@ -14,114 +14,169 @@ img_src = ""
 youtube = "8yMcHvAw2Q8"
 youtube_upload_date="2022-02-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/8yMcHvAw2Q8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of strings and a target prefix. Your task is to count how many strings in the array start with this target prefix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of strings and a string prefix.
+- **Example:** `Input: words = ['train', 'truck', 'trip', 'track'], pref = 'tr'`
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length, pref.length <= 100
+	- words[i] and pref consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int prefixCount(vector<string>& words, string s) {
-        int cnt = 0;
-        for(string x: words) {
-            if(x.size() < s.size()) continue;
-            bool flag = true;
-            for(int i = 0; i < s.size(); i++) {
-                if(x[i] != s[i]) {
-                    flag = false;
-                    break;
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of strings in the array that start with the given prefix.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The prefix must match the beginning of the string exactly.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the strings in the array that begin with the specified prefix.
+
+- Loop through each word in the array.
+- For each word, check if it starts with the given prefix.
+- Increment the count for each word that matches the condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is not empty.
+- The input strings are valid lowercase words.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: words = ['apple', 'april', 'banana', 'appreciate'], pref = 'ap'`  \
+  **Explanation:** The words that start with 'ap' are 'apple', 'april', and 'appreciate'. Hence, the result is 3.
+
+- **Input:** `Input: words = ['dog', 'cat', 'doe', 'dong'], pref = 'do'`  \
+  **Explanation:** The words that start with 'do' are 'dog', 'doe', and 'dong'. Hence, the result is 3.
+
+{{< dots >}}
+## Approach 🚀
+We will use a simple approach to iterate through the list of words and check if each word starts with the given prefix.
+
+### Initial Thoughts 💭
+- The check for prefix can be easily done using string comparison methods.
+- A simple iteration through the list of words and checking if each word starts with the prefix is sufficient.
+{{< dots >}}
+### Edge Cases 🌐
+- If the words array is empty, the output should be 0.
+- Handle cases with large arrays or long strings efficiently.
+- The prefix length could be equal to or greater than the length of some words.
+- Ensure that the prefix check works even if the prefix is longer than the word.
+{{< dots >}}
+## Code 💻
+```cpp
+int prefixCount(vector<string>& words, string s) {
+    int cnt = 0;
+    for(string x: words) {
+        if(x.size() < s.size()) continue;
+        bool flag = true;
+        for(int i = 0; i < s.size(); i++) {
+            if(x[i] != s[i]) {
+                flag = false;
+                break;
             }
-            if(flag) cnt++;
         }
-        return cnt;        
+        if(flag) cnt++;
     }
-};
-{{< /highlight >}}
----
+    return cnt;        
+}
+```
 
-### Problem Statement
-Given a list of strings `words` and a string `s`, the goal is to count how many strings in `words` start with the given string `s`. The prefix of a string is a substring that begins at the start of the string and may be as long as the full string itself. The task is to implement a function that returns the number of words in `words` that have `s` as their prefix.
+This function counts how many strings in the `words` vector start with the prefix `s`. It iterates through the list of words and checks each word's prefix against the provided string `s`. If a match is found, it increments the counter.
 
-### Approach
-To solve this problem, the idea is straightforward:
-1. For each word in the list `words`, check if the word's length is greater than or equal to the length of `s`. This ensures that the word is long enough to potentially have `s` as a prefix.
-2. For each valid word, compare its first `s.size()` characters with the string `s`.
-3. If all characters match, increment the count of words that have `s` as a prefix.
-4. Finally, return the count.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int prefixCount(vector<string>& words, string s) {
+	```
+	This defines the function `prefixCount` which takes a vector of strings `words` and a string `s` as arguments. It returns an integer count of how many words in `words` start with the string `s`.
 
-The solution iterates through each word in the list and performs a comparison for each, making this a relatively simple problem with an intuitive brute-force solution.
+2. **Variable Declaration**
+	```cpp
+	    int cnt = 0;
+	```
+	The variable `cnt` is initialized to zero. This will hold the count of words in `words` that start with the prefix `s`.
 
-### Code Breakdown (Step by Step)
-1. **Function Signature:**
-   ```cpp
-   int prefixCount(vector<string>& words, string s)
-   ```
-   - The function takes a list of words (`vector<string>& words`) and a target prefix (`string s`). It returns an integer representing the number of words in `words` that start with the prefix `s`.
+3. **Loop**
+	```cpp
+	    for(string x: words) {
+	```
+	A for-loop is initiated to iterate through each string `x` in the vector `words`.
 
-2. **Initialize Count Variable:**
-   ```cpp
-   int cnt = 0;
-   ```
-   - The variable `cnt` is used to keep track of how many words in `words` start with the prefix `s`.
+4. **Conditional Check**
+	```cpp
+	        if(x.size() < s.size()) continue;
+	```
+	This checks if the length of the current word `x` is shorter than the length of the prefix `s`. If so, it skips the current word as it cannot match the prefix.
 
-3. **Iterate Over Each Word in the List:**
-   ```cpp
-   for (string x: words) {
-   ```
-   - We loop through each word `x` in the `words` vector to check whether it starts with the given prefix `s`.
+5. **Flag Initialization**
+	```cpp
+	        bool flag = true;
+	```
+	A boolean flag `flag` is initialized to `true`. It will be used to track whether the current word `x` starts with the prefix `s`.
 
-4. **Check Word Length:**
-   ```cpp
-   if (x.size() < s.size()) continue;
-   ```
-   - If the word `x` is shorter than `s`, it is impossible for `x` to have `s` as a prefix. We skip checking that word and move on to the next.
+6. **Inner Loop**
+	```cpp
+	        for(int i = 0; i < s.size(); i++) {
+	```
+	An inner loop is used to iterate over each character of the string `s` (the prefix).
 
-5. **Flag for Prefix Match:**
-   ```cpp
-   bool flag = true;
-   ```
-   - The `flag` variable is used to track whether the word `x` matches the prefix `s` character by character.
+7. **Character Comparison**
+	```cpp
+	            if(x[i] != s[i]) {
+	```
+	This compares the `i`-th character of `x` with the `i`-th character of the prefix `s`. If they don't match, the flag is set to `false`.
 
-6. **Compare Characters in Word and Prefix:**
-   ```cpp
-   for (int i = 0; i < s.size(); i++) {
-       if (x[i] != s[i]) {
-           flag = false;
-           break;
-       }
-   }
-   ```
-   - We loop through the characters of the string `s` and compare them with the corresponding characters in `x`. If any character doesn't match, we set `flag` to `false` and break out of the loop early to avoid unnecessary comparisons.
+8. **Flag Update**
+	```cpp
+	                flag = false;
+	```
+	If a mismatch is found, `flag` is set to `false`, indicating that the current word `x` does not start with the prefix `s`.
 
-7. **Update Count if Prefix Matches:**
-   ```cpp
-   if (flag) cnt++;
-   ```
-   - If `flag` remains `true` after comparing all characters, it means `x` starts with `s`, so we increment the count `cnt`.
+9. **Loop Break**
+	```cpp
+	                break;
+	```
+	This breaks the inner loop, as there's no need to check further characters in the current word `x`.
 
-8. **Return the Result:**
-   ```cpp
-   return cnt;
-   ```
-   - Finally, after processing all words, the function returns the total count of words that start with the prefix `s`.
+10. **Increment Count**
+	```cpp
+	        if(flag) cnt++;
+	```
+	If the flag is still `true` (i.e., the word starts with the prefix `s`), the counter `cnt` is incremented.
 
-### Complexity
-- **Time Complexity**: 
-  - The time complexity of the solution is O(m * n), where `m` is the number of words in `words` and `n` is the length of the string `s`. For each word, we check its characters up to the length of `s`. In the worst case, we iterate over all words, and for each word, we compare its first `n` characters with `s`.
-  
-  - In cases where `m` and `n` are large, this complexity ensures that we are performing a manageable number of operations.
+11. **Return Result**
+	```cpp
+	    return cnt;        
+	```
+	After iterating through all the words, the function returns the total count of words that start with the prefix `s`.
 
-- **Space Complexity**: 
-  - The space complexity is O(1) in terms of additional space, as we only use a few integer variables (`cnt` and `flag`) for tracking the count and the status of the prefix check. The input `words` and `s` are provided as arguments, so we do not allocate additional memory based on the size of the input.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
-This code provides a clear and efficient solution to the problem of counting words with a given prefix. By iterating through each word in the list and comparing the prefix character by character, we ensure that the solution is easy to understand and implement. Although this approach may not be the most optimized for very large inputs, it offers a simple and intuitive brute-force method with a time complexity of O(m * n), where `m` is the number of words and `n` is the length of the string `s`. This solution is well-suited for scenarios where the input size is reasonable, and the problem does not require excessive optimization.
+The time complexity is O(n) where n is the number of words, since we are iterating through each word and checking if it starts with the prefix.
 
-In practical applications, this approach is effective for checking string prefixes in relatively small datasets or in situations where simplicity and readability are prioritized over advanced performance considerations.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we only need a counter variable to track the number of valid words.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/counting-words-with-a-given-prefix/description/)
 

@@ -14,97 +14,130 @@ img_src = ""
 youtube = "A1BNPgQSHz8"
 youtube_upload_date="2023-04-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/A1BNPgQSHz8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer 'n', find the sum of all integers between 1 and 'n' (inclusive) that are divisible by 3, 5, or 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer 'n' where 1 <= n <= 1000.
+- **Example:** `Input: n = 12`
+- **Constraints:**
+	- 1 <= n <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sumOfMultiples(int n) {
-        int sum = 0;
-        for(int i = 1; i <= n; i++)
-            if((i % 3 == 0) || (i% 5 == 0) || (i % 7 == 0))
-                sum += i;
-        return sum;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of all numbers in the range [1, n] that are divisible by 3, 5, or 7.
+- **Example:** `Output: 45`
+- **Constraints:**
+	- The sum will always be an integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to sum all numbers divisible by 3, 5, or 7 from 1 to n.
 
-The problem asks to find the sum of all integers from `1` to `n` that are divisible by either `3`, `5`, or `7`. Given a positive integer `n`, we need to iterate through the integers from `1` to `n` and check if any of these numbers are divisible by `3`, `5`, or `7`. If so, they should be added to the sum. Finally, the program should return this sum.
+- Step 1: Iterate over all integers from 1 to n.
+- Step 2: For each number, check if it is divisible by 3, 5, or 7.
+- Step 3: If divisible, add it to the sum.
+- Step 4: Return the total sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input 'n' is a valid positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 7`  \
+  **Explanation:** The numbers divisible by 3, 5, or 7 in the range [1, 7] are 3, 5, 6, and 7. The sum is 3 + 5 + 6 + 7 = 21.
 
-### Approach
+- **Input:** `Input: n = 10`  \
+  **Explanation:** The numbers divisible by 3, 5, or 7 in the range [1, 10] are 3, 5, 6, 7, 9, and 10. The sum is 3 + 5 + 6 + 7 + 9 + 10 = 40.
 
-To solve this problem, we need to identify all integers from `1` to `n` that are divisible by `3`, `5`, or `7`. To do this efficiently:
-1. **Iterate through the numbers**: We need to check each integer from `1` to `n` and determine if it's divisible by `3`, `5`, or `7`.
-2. **Check divisibility**: For each number, check if the number is divisible by `3`, `5`, or `7`. If any of these conditions hold true, add that number to the sum.
-3. **Return the sum**: After iterating through all numbers, return the accumulated sum.
+{{< dots >}}
+## Approach 🚀
+The approach is straightforward: Iterate over the numbers from 1 to n, checking divisibility, and adding the valid numbers to the sum.
 
-This approach ensures that all numbers divisible by any of `3`, `5`, or `7` are included in the final sum.
+### Initial Thoughts 💭
+- We need to check divisibility for three numbers (3, 5, 7).
+- This can be done by checking each number in the range [1, n].
+- An efficient approach would involve iterating through the numbers, checking divisibility, and keeping a running total.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that n will always be at least 1, so there are no empty inputs.
+- The input n can go up to 1000, which requires handling a larger range efficiently.
+- Consider the case where n is a small value like 1, where no numbers are divisible by 3, 5, or 7.
+- Ensure the solution works efficiently for the upper limit of n = 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+int sumOfMultiples(int n) {
+    int sum = 0;
+    for(int i = 1; i <= n; i++)
+        if((i % 3 == 0) || (i% 5 == 0) || (i % 7 == 0))
+            sum += i;
+    return sum;
+}
+```
 
-### Code Breakdown
+This function calculates the sum of all numbers from 1 to 'n' that are divisible by 3, 5, or 7.
 
-1. **Function Definition**:
-   ```cpp
-   int sumOfMultiples(int n) {
-       int sum = 0;
-       for(int i = 1; i <= n; i++)
-           if((i % 3 == 0) || (i % 5 == 0) || (i % 7 == 0))
-               sum += i;
-       return sum;
-   }
-   ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sumOfMultiples(int n) {
+	```
+	This line defines the function 'sumOfMultiples', which takes an integer parameter 'n' and will return the sum of multiples of 3, 5, or 7.
 
-2. **Initialization**:
-   - `int sum = 0;`: Initializes a variable `sum` to store the cumulative sum of numbers divisible by `3`, `5`, or `7`.
+2. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	This initializes the 'sum' variable to 0, which will be used to accumulate the sum of the multiples.
 
-3. **Loop through the numbers**:
-   ```cpp
-   for(int i = 1; i <= n; i++)
-   ```
-   - The loop iterates over all integers from `1` to `n`. The variable `i` represents each integer being checked.
+3. **Loop Setup**
+	```cpp
+	    for(int i = 1; i <= n; i++)
+	```
+	This starts a loop from 1 to 'n', iterating through each number in this range.
 
-4. **Condition check**:
-   ```cpp
-   if((i % 3 == 0) || (i % 5 == 0) || (i % 7 == 0))
-   ```
-   - For each number `i`, the condition checks if `i` is divisible by `3`, `5`, or `7`.
-     - `i % 3 == 0`: Checks if the number is divisible by `3`.
-     - `i % 5 == 0`: Checks if the number is divisible by `5`.
-     - `i % 7 == 0`: Checks if the number is divisible by `7`.
-   - If any of these conditions are true, the number `i` is added to the sum.
+4. **Conditional Check**
+	```cpp
+	        if((i % 3 == 0) || (i% 5 == 0) || (i % 7 == 0))
+	```
+	This condition checks if 'i' is divisible by 3, 5, or 7. If true, the number is added to the sum.
 
-5. **Updating the sum**:
-   ```cpp
-   sum += i;
-   ```
-   - If the number `i` meets the divisibility condition, it's added to `sum`.
+5. **Summation**
+	```cpp
+	            sum += i;
+	```
+	If the condition is met, this adds 'i' to the 'sum'.
 
-6. **Return the result**:
-   ```cpp
-   return sum;
-   ```
-   - After the loop finishes, the function returns the `sum` variable, which now contains the sum of all numbers divisible by `3`, `5`, or `7`.
+6. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	This line returns the calculated sum of the multiples.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- **Time Complexity**:  
-  The time complexity is **O(n)** because we are iterating through all numbers from `1` to `n`. For each number, we perform a constant number of operations (the modulus check and conditional check). Therefore, the time complexity is directly proportional to the size of `n`.
-  
-- **Space Complexity**:  
-  The space complexity is **O(1)** since we only use a few variables (`sum` and `i`) that occupy constant space, regardless of the input size.
+The time complexity is linear, as we check each number for divisibility.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution effectively finds the sum of all multiples of `3`, `5`, or `7` between `1` and `n` using a straightforward approach that checks each number for divisibility. The time complexity of **O(n)** makes it efficient for small to moderate values of `n`. The space complexity is **O(1)**, as the algorithm uses a constant amount of space, making it space-efficient as well. 
+The space complexity is constant because we only need a few extra variables to store the sum and loop index.
 
-The logic is simple, and the approach works well for a wide range of input sizes. If optimization is required for very large values of `n`, more advanced methods such as the inclusion-exclusion principle could be used, but for most practical purposes, this solution provides an optimal balance of simplicity and performance.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-multiples/description/)
 

@@ -14,100 +14,111 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers. Sort the array based on the number of 1's in the binary representation of each integer. If two integers have the same number of 1's, sort them in ascending order of the integer value.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers.
+- **Example:** `For example, [5, 3, 9, 8, 6, 7, 2, 4, 1] where each integer is sorted based on the number of 1's in their binary form.`
+- **Constraints:**
+	- 1 <= arr.length <= 500
+	- 0 <= arr[i] <= 10^4
 
-{{< highlight cpp >}}
-// class cmp {
-//     public:
-//     bool operator() (int a, int b) {
-//         int x = __builtin_popcount(a);
-//         int y = __builtin_popcount(b);
-//         if(x == y) return a < b;
-//         return x < y;
-//     }
-// };
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a sorted array of integers based on the number of 1's in their binary representation. If two integers have the same number of 1's, they are sorted in ascending order of value.
+- **Example:** `For input [5, 3, 9, 8, 6, 7, 2, 4, 1], the output is [1, 2, 4, 8, 3, 5, 6, 7, 9].`
+- **Constraints:**
+	- The result should be a non-empty array with integers in the sorted order.
 
-bool cmp(int a, int b) {
-        int x = __builtin_popcount(a);
-        int y = __builtin_popcount(b);
-        if(x == y) return a < b;
-        return x < y;
-}
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to sort the array of integers first by the number of 1's in their binary representation, and second by their integer value in case of ties.
 
-class Solution {
-public:
-    vector<int> sortByBits(vector<int>& arr) {
-        
-        sort(arr.begin(), arr.end(), cmp);
+- 1. For each number in the array, calculate the number of 1's in its binary representation.
+- 2. Sort the array using a custom comparator: first by the count of 1's in the binary representation, and then by the integer value for numbers with the same number of 1's.
+- 3. Return the sorted array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is not empty.
+- We assume the input array will always contain integers within the specified constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: [5, 3, 9, 8, 6, 7, 2, 4, 1]`  \
+  **Explanation:** We first count the number of 1's in the binary representation of each number. Then we sort by the number of 1's, and for numbers with the same count, we sort them by value.
 
-        return arr;
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `Example 2: [1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1]`  \
+  **Explanation:** All numbers have exactly 1 bit in their binary representation, so we sort them in ascending order.
 
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we calculate the number of 1's in the binary representation of each number and then sort the array based on this number and the integer value.
 
-
-### Problem Statement
-The problem requires sorting an array of integers based on two criteria:
-1. The number of `1` bits (also known as the population count or Hamming weight) in the binary representation of each integer.
-2. If two integers have the same number of `1` bits, they should be sorted in ascending order.
-
-For example, given an array like `[0, 1, 2, 3, 4, 5, 6, 7, 8]`, the sorted order based on the above criteria would be `[0, 1, 2, 4, 3, 5, 6, 7, 8]` because:
-- `0` has 0 bits set.
-- `1` has 1 bit set.
-- `2` has 1 bit set but comes after `1`.
-- `3` has 2 bits set and comes before `4` (which has 1 bit set).
-
-### Approach
-To solve this problem, we can leverage the C++ standard library's `sort` function along with a custom comparator. The custom comparator will determine the order of the integers based on the number of `1` bits in their binary representation, and if they have the same number of `1` bits, it will sort them by their natural order.
-
-1. **Counting `1` Bits**: The function `__builtin_popcount` is used to efficiently count the number of `1` bits in the binary representation of an integer.
-2. **Custom Comparator**: The comparator function will compare two integers based on the number of `1` bits and return the appropriate order based on the criteria mentioned.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Sorting by binary 1's is a unique way to order the numbers.
+- The number of bits for each integer is easy to calculate using built-in functions.
+- The sorting approach should be efficient enough for the problem's constraints.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one element, so we don't need to handle empty arrays.
+- For large arrays, the sorting algorithm should efficiently handle up to 500 elements.
+- All elements could be the same, or all could have the same number of 1's in their binary representation.
+- The solution should sort the array efficiently within the given input size.
+{{< dots >}}
+## Code 💻
 ```cpp
-// Custom comparator function
-bool cmp(int a, int b) {
-    int x = __builtin_popcount(a); // Count of 1 bits in 'a'
-    int y = __builtin_popcount(b); // Count of 1 bits in 'b'
-    if(x == y) return a < b; // If counts are equal, sort by value
-    return x < y; // Otherwise, sort by count of 1 bits
+vector<int> sortByBits(vector<int>& arr) {
+    
+    sort(arr.begin(), arr.end(), cmp);
+
+    return arr;
 }
 ```
-- The `cmp` function takes two integers `a` and `b`. It first calculates the number of `1` bits in both numbers using `__builtin_popcount`.
-- If both integers have the same count of `1` bits (`x` equals `y`), it sorts them in ascending order based on their natural values.
-- If they differ in the number of `1` bits, it sorts them by the count, placing integers with fewer `1` bits first.
 
-```cpp
-class Solution {
-public:
-    vector<int> sortByBits(vector<int>& arr) {
-        sort(arr.begin(), arr.end(), cmp); // Sort using the custom comparator
-        return arr; // Return the sorted array
-    }
-};
-```
-- The `sortByBits` method of the `Solution` class takes a reference to a vector of integers `arr`.
-- It calls the `sort` function on `arr`, passing the custom comparator `cmp`.
-- Finally, it returns the sorted vector.
+This function sorts an array of integers based on the number of set bits (1's) in their binary representation, using a custom comparator 'cmp'.
 
-### Complexity Analysis
-- **Time Complexity**: The sorting operation has a time complexity of \(O(n \log n)\), where \(n\) is the number of elements in the array. The custom comparator runs in \(O(1)\) time for each comparison, resulting in an overall complexity dominated by the sort operation.
-- **Space Complexity**: The space complexity is \(O(1)\) for the sorting algorithm since it operates in-place. However, if we consider the space used by the vector, it is \(O(n)\) to hold the input data.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> sortByBits(vector<int>& arr) {
+	```
+	This line declares the 'sortByBits' function, which takes a reference to a vector of integers as input and returns a sorted vector of integers.
 
-### Conclusion
-The `sortByBits` function effectively sorts an array of integers based on the number of `1` bits in their binary representation, utilizing the efficiency of the C++ standard library's sorting capabilities. The use of `__builtin_popcount` allows for quick population counting, ensuring the solution is both efficient and concise.
+2. **Sort Function**
+	```cpp
+	    sort(arr.begin(), arr.end(), cmp);
+	```
+	Here, the standard 'sort' function is used to sort the input vector 'arr'. The custom comparator 'cmp' is applied to determine the sorting order, which is based on the number of set bits in the binary representation of each integer.
 
-This implementation demonstrates the use of custom sorting algorithms and bit manipulation techniques, which are valuable skills in competitive programming and technical interviews. Understanding how to combine these concepts can lead to more optimized and elegant solutions for problems involving data organization based on specific criteria.
+3. **Return Statement**
+	```cpp
+	    return arr;
+	```
+	The sorted array 'arr' is returned after the sorting operation.
 
-By breaking down the code and explaining each component, this overview serves as a comprehensive educational resource, allowing readers to grasp the underlying logic and techniques used in this solution.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) for sorting the array where n is the length of the array.
+- **Average Case:** O(n log n) for sorting with custom comparison.
+- **Worst Case:** O(n log n), where n is the number of elements in the array.
+
+The time complexity is dominated by the sorting step.
+
+### Space Complexity 💾
+- **Best Case:** O(1) if no additional space is required outside the input.
+- **Worst Case:** O(n) for the space used by the input array and sorting process.
+
+The space complexity is mainly determined by the size of the input array.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/)

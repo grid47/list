@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "3ZFvBlynmls"
 youtube_upload_date="2024-06-09"
 youtube_thumbnail="https://i.ytimg.com/vi/3ZFvBlynmls/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,110 +28,136 @@ youtube_thumbnail="https://i.ytimg.com/vi/3ZFvBlynmls/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+A robot starts at the top-left corner of an m x n grid and can only move right or down. Determine the total number of unique paths it can take to reach the bottom-right corner.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two integers, m and n, representing the number of rows and columns of the grid.
+- **Example:** `Input: m = 4, n = 5`
+- **Constraints:**
+	- 1 <= m, n <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m, vector<int> (n, 0));
-        dp[0][0] = 1;
-        for(int i = 0; i < n; i++)
-            dp[0][i] = 1;
-        for(int i = 0; i < m; i++)
-            dp[i][0] = 1;
-        
-        for(int i = 1; i < m; i++)
-        for(int j = 1; j < n; j++)
-            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-        
-        return dp[m - 1][n - 1];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of unique paths from the top-left to the bottom-right corner of the grid.
+- **Example:** `Output: 35`
+- **Constraints:**
+	- The result will always be less than or equal to 2 * 10^9.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the total number of unique paths using dynamic programming or combinatorics.
+
+- Define a 2D DP table where dp[i][j] represents the number of ways to reach cell (i, j).
+- Initialize dp[0][j] = 1 for all columns and dp[i][0] = 1 for all rows.
+- For each cell dp[i][j], calculate the value as dp[i][j] = dp[i-1][j] + dp[i][j-1].
+- Return dp[m-1][n-1] as the final answer.
+{{< dots >}}
+### Problem Assumptions ✅
+- The robot always starts at the top-left corner and ends at the bottom-right corner.
+- The robot can only move either down or right.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: m = 4, n = 5`  \
+  **Explanation:** There are 35 unique paths from the top-left to the bottom-right corner for a 4x5 grid.
+
+- **Input:** `Input: m = 2, n = 2`  \
+  **Explanation:** There are 2 unique paths for a 2x2 grid: Right -> Down and Down -> Right.
+
+- **Input:** `Input: m = 3, n = 4`  \
+  **Explanation:** There are 10 unique paths from the top-left to the bottom-right corner for a 3x4 grid.
+
+{{< dots >}}
+## Approach 🚀
+Use dynamic programming to calculate the number of unique paths, or combinatorics for an optimized solution.
+
+### Initial Thoughts 💭
+- The problem can be solved by considering all paths that move exactly m-1 steps down and n-1 steps right.
+- A grid cell depends only on the cell above and to the left of it.
+- Dynamic programming efficiently calculates the total paths, avoiding repeated calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as input is guaranteed.
+- Grid dimensions m = 100, n = 100, which is the maximum size.
+- Minimum grid dimensions m = 1, n = 1.
+- Ensure the algorithm handles maximum grid dimensions efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int uniquePaths(int m, int n) {
+    vector<vector<int>> dp(m, vector<int>(n, 0));
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == 0 || j == 0) {
+                dp[i][j] = 1;
+            } else {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
     }
-};
-{{< /highlight >}}
----
-
-### 🚶‍♂️ **Unique Paths in a Grid**
-
-The problem is to calculate the total number of unique paths in an `m x n` grid, where you can only move down or right at each step, starting from the top-left corner `(0, 0)` and ending at the bottom-right corner `(m-1, n-1)`.
-
-### 🧠 **Approach**
-
-This problem is efficiently solved using **dynamic programming (DP)**. We will create a 2D table `dp` where each cell `dp[i][j]` represents the number of unique ways to reach cell `(i, j)` from the starting position `(0, 0)`.
-
-#### Key Observations:
-
-1. **Base Cases**:
-   - For the first row (`i = 0`), you can only move right, so every cell in the first row has exactly one way to be reached (from the left).
-   - Similarly, for the first column (`j = 0`), you can only move down, so every cell in the first column has exactly one way to be reached (from above).
-
-2. **DP Transition**:
-   - For any other cell `(i, j)`, the number of ways to reach that cell is the sum of the ways to reach the cell directly above it `(i-1, j)` and the cell to its left `(i, j-1)`. This leads to the recurrence relation:
-     \[
-     dp[i][j] = dp[i-1][j] + dp[i][j-1]
-     \]
-
-### 🔍 **Code Breakdown**
-
-#### Step 1: Initialize DP Table
-
-```cpp
-vector<vector<int>> dp(m, vector<int> (n, 0));
+    return dp[m - 1][n - 1];
+}
 ```
 
-- We initialize a `dp` table of size `m x n`, where all cells are initially set to `0`. This table will store the number of unique paths to each cell.
+This code calculates the number of unique paths from the top-left corner to the bottom-right corner of an m x n grid, where you can only move right or down.
 
-#### Step 2: Set the Starting Point
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int uniquePaths(int m, int n) {
+	```
+	This line declares a function named `uniquePaths` that takes two integers `m` and `n` as input, representing the dimensions of the grid, and returns the number of unique paths.
 
-```cpp
-dp[0][0] = 1;
-```
+2. **DP Table Initialization**
+	```cpp
+	    vector<vector<int>> dp(m, vector<int>(n, 0));
+	```
+	This line initializes a 2D DP table `dp` of size `m x n` to store the number of unique paths to reach each cell. All elements are initially set to 0.
 
-- The starting position `(0, 0)` is set to `1`, as there is only one way to be at the starting position (by starting there).
+3. **Base Cases: First Row and Column**
+	```cpp
+	    for (int i = 0; i < m; i++) {
+	        for (int j = 0; j < n; j++) {
+	            if (i == 0 || j == 0) {
+	                dp[i][j] = 1;
+	            }
+	```
+	This nested loop iterates over the first row and first column of the grid. For cells in the first row or first column, there is only one way to reach them, so the corresponding value in the DP table is set to 1.
 
-#### Step 3: Initialize the First Row and First Column
+4. **Calculate Paths for Other Cells**
+	```cpp
+	else {
+	                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+	            }
+	        }
+	    }
+	```
+	This part of the nested loop iterates over the remaining cells of the grid. For each cell `(i, j)`, the number of unique paths to reach it is the sum of the number of paths to reach the cell above it (`dp[i - 1][j]`) and the number of paths to reach the cell to its left (`dp[i][j - 1]`). This is because we can only move right or down.
 
-```cpp
-for(int i = 0; i < n; i++)
-    dp[0][i] = 1;
-for(int i = 0; i < m; i++)
-    dp[i][0] = 1;
-```
+5. **Return the Bottom-Right Corner Value**
+	```cpp
+	    return dp[m - 1][n - 1];
+	```
+	After filling the DP table, the function returns the value at the bottom-right corner `dp[m - 1][n - 1]`, which represents the total number of unique paths from the top-left to the bottom-right corner.
 
-- We set all cells in the first row to `1` because each cell can only be reached from the cell to its left.
-- Similarly, all cells in the first column are set to `1` because each can only be reached from the cell directly above.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-#### Step 4: Fill the DP Table
+Each cell in the grid is visited exactly once to calculate the total paths.
 
-```cpp
-for(int i = 1; i < m; i++)
-    for(int j = 1; j < n; j++)
-        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-```
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-- For cells that are not in the first row or column, the number of unique paths is the sum of the paths from the top (`dp[i - 1][j]`) and from the left (`dp[i][j - 1]`).
+The DP table requires O(m * n) space.
 
-#### Step 5: Return the Final Answer
+**Happy Coding! 🎉**
 
-```cpp
-return dp[m - 1][n - 1];
-```
-
-- The final answer is stored in `dp[m-1][n-1]`, which contains the total number of unique paths from the top-left to the bottom-right corner.
-
-### 📊 **Complexity Analysis**
-
-#### Time Complexity:
-- **O(m * n):** We iterate through each cell of the `m x n` grid once. Therefore, the time complexity is proportional to the number of cells in the grid, which is `O(m * n)`.
-
-#### Space Complexity:
-- **O(m * n):** The `dp` table requires `O(m * n)` space to store the number of unique paths for each cell. The space complexity is dominated by the size of the `dp` table.
-
-### 🌟 **Conclusion**
-
-This dynamic programming approach efficiently calculates the number of unique paths in an `m x n` grid. By breaking down the problem into overlapping subproblems and building up the solution using a DP table, we ensure an optimal solution with both time and space complexities of `O(m * n)`. This approach is ideal for solving pathfinding problems in grids of any size.
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-paths/description/)
 

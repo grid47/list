@@ -14,113 +14,156 @@ img_src = ""
 youtube = "E93-thIrUgA"
 youtube_upload_date="2022-07-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/E93-thIrUgA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list `nums` where each string contains digits of the same length. Additionally, you are provided a list of queries, where each query is represented by two integers `[ki, trimi]`. For each query, trim each number in `nums` to its rightmost `trimi` digits, then find the index of the `ki`th smallest trimmed number. If two numbers are identical after trimming, the one with the lower index is considered smaller. Reset the numbers in `nums` for the next query.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` of strings and an array `queries` of queries, where each query is a pair `[ki, trimi]`.
+- **Example:** `nums = ["203", "102", "114", "319"], queries = [[2, 1], [1, 3], [3, 2]]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i].length <= 100
+	- 1 <= queries.length <= 100
+	- 1 <= ki <= nums.length
+	- 1 <= trimi <= nums[i].length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> smallestTrimmedNumbers(vector<string>& nums, vector<vector<int>>& q) {
-        vector<int> res;
-        for(auto &v : q) {
-            
-            vector<pair<string, int>> fk;
-            for(int i = 0; i < nums.size(); i++) {
-                fk.push_back({nums[i].substr(nums[i].size() - v[1]), i});
-            }
-            sort(fk.begin(), fk.end());
-            res.push_back(fk[v[0] - 1].second);
-            
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array `answer` where each element corresponds to the answer of the respective query. Each answer should be the index of the `ki`th smallest number in the trimmed list.
+- **Example:** `[1, 2, 0]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to trim the numbers in `nums` according to the query's specification, sort the trimmed numbers, and return the index of the `ki`th smallest number.
+
+- For each query, trim all numbers in `nums` to the rightmost `trimi` digits.
+- Sort the numbers based on the trimmed version, with ties broken by the original index.
+- Find the index of the `ki`th smallest number in the sorted list and add it to the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input `nums` consists of valid strings representing numbers.
+- Each query consists of two integers: `ki` and `trimi`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = ["203", "102", "114", "319"], queries = [[2, 1], [1, 3], [3, 2]]`  \
+  **Explanation:** For the first query, after trimming the numbers to the last digit, we get ["3", "2", "4", "9"]. The second smallest number is 2, which is at index 1.
+
+{{< dots >}}
+## Approach 🚀
+We trim each number based on the `trimi` value, sort the trimmed numbers along with their original indices, and then return the index of the `ki`th smallest number.
+
+### Initial Thoughts 💭
+- Trimming the numbers to the rightmost digits involves string manipulation.
+- Sorting the trimmed numbers requires careful handling of ties based on the original indices.
+- The problem can be solved efficiently by trimming, sorting, and then mapping the smallest `ki`th values to their original indices.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem does not allow empty inputs for `nums` or `queries`.
+- The solution must handle the upper limit of inputs efficiently.
+- Consider cases where trimmed numbers may have leading zeros or be equal to other numbers.
+- The solution must handle arrays of numbers with varying digit lengths and ensure correctness under all constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> smallestTrimmedNumbers(vector<string>& nums, vector<vector<int>>& q) {
+    vector<int> res;
+    for(auto &v : q) {
         
-        return res;
+        vector<pair<string, int>> fk;
+        for(int i = 0; i < nums.size(); i++) {
+            fk.push_back({nums[i].substr(nums[i].size() - v[1]), i});
+        }
+        sort(fk.begin(), fk.end());
+        res.push_back(fk[v[0] - 1].second);
+        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given a list of numbers in the form of strings (`nums`), and several queries (`q`). Each query consists of two integers:
-1. The **k-th smallest** trimmed number's index in the result after trimming the last `k` digits of the numbers.
-2. A **trim length** `k` that determines how many digits from the end of the string should be retained.
-
-The goal is to determine the index of the `k`-th smallest number from the list after trimming each number according to the query and sorting the trimmed numbers lexicographically.
-
-### Approach
-
-To solve this problem efficiently, the approach involves the following key steps:
-1. **Trimming the Numbers**: For each query, we need to trim each number by keeping only the last `k` digits.
-2. **Sorting the Trimmed Numbers**: Once we have trimmed the numbers, we sort them lexicographically.
-3. **Selecting the k-th Smallest**: After sorting, we select the index of the `k`-th smallest trimmed number.
-4. **Returning the Result**: The answer for each query is the index of the `k`-th smallest trimmed number.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Defining the Result Vector**
-```cpp
-vector<int> res;
-```
-- The `res` vector is used to store the results for each query. For each query, we will store the index of the `k`-th smallest trimmed number.
-
-#### 2. **Iterating Through Queries**
-```cpp
-for(auto &v : q) {
-```
-- The `for` loop iterates over each query `v` in the list `q`.
-- Each query `v` is a vector of two integers: `v[0]` (the `k`-th smallest number to find) and `v[1]` (the number of digits to trim).
-
-#### 3. **Preparing the Trimmed Numbers**
-```cpp
-vector<pair<string, int>> fk;
-for(int i = 0; i < nums.size(); i++) {
-    fk.push_back({nums[i].substr(nums[i].size() - v[1]), i});
+    
+    return res;
 }
 ```
-- **`vector<pair<string, int>> fk;`**: A vector `fk` of pairs is created to store each number's trimmed version along with its original index.
-- **`nums[i].substr(nums[i].size() - v[1])`**: For each number `nums[i]`, the `substr` function is used to extract the last `v[1]` digits. This gives us the "trimmed" version of the number.
-- **`i`**: We store the index `i` of the number along with the trimmed string to preserve the original index after sorting.
 
-#### 4. **Sorting the Trimmed Numbers**
-```cpp
-sort(fk.begin(), fk.end());
-```
-- The vector `fk` is sorted in lexicographical order based on the trimmed numbers (the first part of each pair). The sorting is done in ascending order, so the smallest trimmed numbers come first.
+This function takes a list of strings and a list of queries. Each query specifies a trim length and an index. The function trims each string based on the length, sorts them, and returns the index of the specified smallest trimmed number from each query.
 
-#### 5. **Selecting the k-th Smallest Trimmed Number**
-```cpp
-res.push_back(fk[v[0] - 1].second);
-```
-- After sorting, the `v[0] - 1`-th element (i.e., the `k`-th smallest trimmed number) is selected from the sorted vector `fk`. We then push the index (`second` part of the pair) of this trimmed number into the `res` vector.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> smallestTrimmedNumbers(vector<string>& nums, vector<vector<int>>& q) {
+	```
+	Function definition begins, where 'nums' is a list of strings and 'q' contains multiple queries.
 
-#### 6. **Returning the Result**
-```cpp
-return res;
-```
-- Once all queries have been processed, the `res` vector containing the indices of the k-th smallest trimmed numbers for each query is returned.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	Initialize an empty vector 'res' that will store the results for each query.
 
-### Complexity
+3. **For Loop**
+	```cpp
+	    for(auto &v : q) {
+	```
+	Start a loop over each query in 'q'. Each query is a vector containing two integers: the trim length and the index.
 
-#### Time Complexity:
-- **Sorting Step**: For each query, we are sorting the list of `nums` based on their trimmed versions. Sorting `n` elements takes **O(n log n)** time, where `n` is the size of the `nums` array.
-- **Trimming Step**: For each number, we are performing the `substr` operation, which takes **O(m)** time where `m` is the length of each number (assuming all numbers have the same length).
-- Therefore, for each query, the total time complexity is **O(n log n + n * m)**, where:
-  - `n` is the number of numbers in `nums`.
-  - `m` is the maximum length of the numbers in `nums`.
+4. **Vector of Pairs**
+	```cpp
+	        vector<pair<string, int>> fk;
+	```
+	Initialize a vector of pairs 'fk' to store pairs of trimmed string and original index.
 
-Since the query count `q` is processed independently, the overall time complexity for all queries is:
-- **O(q * (n log n + n * m))**.
+5. **For Loop**
+	```cpp
+	        for(int i = 0; i < nums.size(); i++) {
+	```
+	Start a loop to iterate over all strings in 'nums'.
 
-#### Space Complexity:
-- **O(n)**: The space complexity is **O(n)** because we store the `n` trimmed numbers along with their indices in the vector `fk` for each query.
+6. **String Manipulation**
+	```cpp
+	            fk.push_back({nums[i].substr(nums[i].size() - v[1]), i});
+	```
+	For each string in 'nums', take a substring starting from the end, based on the trim length 'v[1]', and store the pair of substring and its index.
 
-### Conclusion
+7. **Sorting**
+	```cpp
+	        sort(fk.begin(), fk.end());
+	```
+	Sort the vector of pairs 'fk' based on the trimmed strings.
 
-The algorithm efficiently handles each query by trimming the numbers, sorting them, and selecting the k-th smallest value. By using a combination of vector and map data structures, we ensure that the solution is both time and space efficient, even for large inputs. With a time complexity of **O(q * (n log n + n * m))**, the approach handles multiple queries efficiently, making it suitable for a variety of problem sizes. The solution is robust and correctly handles edge cases, returning the correct index of the k-th smallest trimmed number for each query.
+8. **Result Assignment**
+	```cpp
+	        res.push_back(fk[v[0] - 1].second);
+	```
+	Add the index of the smallest trimmed number from the sorted list to the 'res' vector. The index is based on the query value 'v[0]'.
+
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the vector 'res', which contains the result for each query.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, where n is the length of the array `nums`.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the trimmed numbers and their indices.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/query-kth-smallest-trimmed-number/description/)
 

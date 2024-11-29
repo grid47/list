@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "sW8ZaOTtvgI"
 youtube_upload_date="2020-02-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/sW8ZaOTtvgI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,122 +28,112 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/sW8ZaOTtvgI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a node in a singly linked list, and you are asked to delete this node from the list. The node is guaranteed to be not the last node in the list. After the deletion, the values before the node should remain in the same order, and the values after the node should also remain in the same order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with the head of the linked list and a specific node to delete. The node will not be the last node in the list.
+- **Example:** `Input: head = [1,2,3,4,5], node = 3`
+- **Constraints:**
+	- The linked list will have at least two nodes.
+	- The value of each node is unique.
+	- The node to be deleted is guaranteed to not be the tail node.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-class Solution {
-public:
-    void deleteNode(ListNode* node) {
-        
-        auto nxt = node->next;
-        *node = *nxt;
-        delete nxt;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** After deleting the given node, return the modified linked list with the node removed.
+- **Example:** `Output: [1,2,4,5]`
+- **Constraints:**
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To delete the given node, we will copy the value of the next node into the current node and then delete the next node.
 
-In this problem, you're given a **singly linked list**, and your task is to delete a specific node, but there’s a twist: you're only given access to the node to be deleted. Normally, to delete a node, you'd need access to the previous node to adjust its `next` pointer. But here, you're restricted to working with just the node you're given, and you need to figure out how to delete it.
+- Copy the value of the next node into the current node.
+- Point the current node's next to the node after the next node.
+- Delete the next node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The list is not empty.
+- The node to be deleted is not the last node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [1,2,3,4,5], node = 3`  \
+  **Explanation:** The node to be deleted is 3. After deleting 3, the list becomes [1,2,4,5].
 
-Each node in the list is represented by the following structure:
+- **Input:** `Input: head = [10,20,30,40], node = 20`  \
+  **Explanation:** The node to be deleted is 20. After deleting 20, the list becomes [10,30,40].
 
+{{< dots >}}
+## Approach 🚀
+We can delete the given node by copying the value of the next node into the current node and adjusting the next pointer. This avoids the need for traversing the list from the start.
+
+### Initial Thoughts 💭
+- Since we are not given access to the head of the list, we cannot traverse the list from the start.
+- The next node must exist, so we can safely copy its value into the current node.
+- By copying the next node's value into the current node and removing the next node, the list remains in the correct order.
+{{< dots >}}
+### Edge Cases 🌐
+- The list will always have at least two nodes, so there are no empty list cases.
+- The solution should work efficiently even for lists with up to 1000 nodes.
+- The node to be deleted is guaranteed not to be the last node in the list.
+- The problem guarantees that the node is not the last node, so no need to check for that.
+{{< dots >}}
+## Code 💻
 ```cpp
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(nullptr) {}
-};
-```
-
-Your goal is to delete the node without having access to the previous node. Let’s dive into the approach to tackle this!
-
----
-
-### 🧠 Approach
-
-So, how can we delete a node if we don’t have the luxury of modifying the previous node's `next` pointer? 🤔 Here’s a clever solution:
-
-1. **Node Copying**:
-    - Instead of trying to remove the node directly, we can *copy the value* from the next node into the current node. This effectively "overwrites" the current node, making it the next node, so it’s as if the current node has been deleted.
+void deleteNode(ListNode* node) {
     
-2. **Update the Next Pointer**:
-    - After copying the value, we need to make sure the `next` pointer of the current node skips the next node.
-    - So, we update the `next` pointer to point to the node after the next one, effectively removing the next node from the list.
-
-3. **Delete the Next Node**:
-    - Once the current node has taken the place of the next node, we delete the next node. The job is done, and the node has been removed!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s look at how this approach works in code!
-
-```cpp
-class Solution {
-public:
-    void deleteNode(ListNode* node) {
+    auto nxt = node->next;
+    *node = *nxt;
+    delete nxt;
+}
 ```
-- Here we define the function `deleteNode` in the `Solution` class, taking a pointer to the node that needs to be deleted.
 
-```cpp
-        auto nxt = node->next;
-```
-- First, we store the pointer to the next node (`nxt`). This helps us manipulate the next node while working on the current one.
+This function deletes the node from a singly linked list. It performs the deletion by copying the data from the next node into the current node and then deleting the next node.
 
-```cpp
-        *node = *nxt;
-```
-- We copy the entire contents (value and `next` pointer) of the next node into the current node. This effectively "moves" the next node into the current position, as if the current node has been deleted.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	void deleteNode(ListNode* node) {
+	```
+	Defines the `deleteNode` function which takes a pointer to a node (`node`) in a singly linked list as input and deletes it.
 
-```cpp
-        delete nxt;
-```
-- Finally, we delete the next node (which is now redundant because its value has already been copied into the current node). This cleans up the memory.
+2. **Next Node Assignment**
+	```cpp
+	    auto nxt = node->next;
+	```
+	Assigns the next node (`node->next`) to a temporary variable `nxt`.
 
-```cpp
-    }
-};
-```
-- The function ends here, and the node has been deleted successfully!
+3. **Copy Data from Next Node**
+	```cpp
+	    *node = *nxt;
+	```
+	Copies the data and the next pointer of the next node (`nxt`) into the current node (`node`). This effectively overwrites the current node with the next node's data.
 
----
+4. **Delete Next Node**
+	```cpp
+	    delete nxt;
+	```
+	Deletes the next node (`nxt`). Since its data has already been copied to the current node, the node is effectively removed from the list.
 
-### 📈 Complexity Analysis
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Time Complexity:
-- **O(1)** — The solution works in constant time! We’re only copying values and deleting a node, no matter how large the list is. These operations don’t depend on the size of the list, so we get a **constant time** complexity.
+Since we are only modifying the node and its next pointer, the time complexity is constant.
 
-#### Space Complexity:
-- **O(1)** — We’re using a fixed amount of extra space, which doesn’t grow with the size of the input. Just a couple of pointers are used, so the space complexity is constant.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
----
+We are only modifying the linked list in place, so the space complexity is constant.
 
-### 🏁 Conclusion
+**Happy Coding! 🎉**
 
-This solution is efficient and clever! 🎉 By copying the value from the next node and adjusting the `next` pointer, we can "delete" a node without needing access to the previous one. Here’s a quick recap:
-
-1. **Node Copying**: Copy the value from the next node into the current node.
-2. **Next Pointer Update**: Adjust the `next` pointer to skip the next node.
-3. **Delete the Next Node**: Delete the next node since its value is now in the current node.
-
-It’s an elegant solution that works in **constant time** and **constant space**, making it a fantastic approach for this problem. 🚀
-
-#### Key Takeaways:
-- This approach works even when you don’t have access to the previous node, which is a tricky situation in a singly linked list.
-- The solution is efficient with **O(1)** time and **O(1)** space complexity, making it optimal for this problem.
-
-Now you’re all set to tackle similar problems with confidence! Keep coding and keep learning! ✨
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-node-in-a-linked-list/description/)
 

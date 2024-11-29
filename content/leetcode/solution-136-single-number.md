@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "mriHA5vEh0A"
 youtube_upload_date="2024-08-22"
 youtube_thumbnail="https://i.ytimg.com/vi/mriHA5vEh0A/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,113 +28,119 @@ youtube_thumbnail="https://i.ytimg.com/vi/mriHA5vEh0A/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a non-empty array of integers where every element appears twice except for one element that appears once, find the single element that appears only once. The solution must have linear time complexity and use only constant space.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers where all but one element appear twice. The array is non-empty and contains at least one element.
+- **Example:** `nums = [5, 5, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 3 * 10^4
+	- -3 * 10^4 <= nums[i] <= 3 * 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int singleNumber(vector<int>& nums) {
-        int x = 0;
-        for(int y: nums)
-            x ^= y;
-        return x;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the element that appears only once in the array.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The array contains exactly one element that appears once.
 
-### 🔍 **Problem: Single Number**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the element that appears once by using XOR.
 
-You are given an integer array `nums[]`, where every element appears **exactly twice** except for one element, which appears **once**. The task is to determine the element that appears only once, using the most efficient solution possible.
+- 1. Use the XOR operation to find the element that appears once. XORing the same number twice cancels it out, leaving only the unique element.
+- 2. Initialize a variable to 0 and XOR it with each element in the array.
+- 3. Return the result after the final XOR operation, which will be the single number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is guaranteed to contain one unique element and all other elements appear exactly twice.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [5, 5, 3]`  \
+  **Explanation:** In this example, the number 3 appears once while 5 appears twice. The result is 3.
 
----
+- **Input:** `nums = [7, 9, 7, 3, 9]`  \
+  **Explanation:** In this case, 3 appears once, and all other numbers appear twice. The result is 3.
 
-### 🧠 **Approach:**
+- **Input:** `nums = [4]`  \
+  **Explanation:** Since there is only one number in the array, the result is that number itself, 4.
 
-To solve this problem efficiently, we can leverage the **XOR** (exclusive OR) operation. The XOR operation has the following useful properties:
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem is based on using XOR operation to find the unique element, which guarantees a linear time solution with constant space.
 
-1. **a ^ a = 0**: XOR-ing a number with itself results in zero.
-2. **a ^ 0 = a**: XOR-ing a number with zero results in the number itself.
-3. XOR is **commutative** and **associative**, which means the order of applying XOR does not matter.
-
-By using these properties, we can XOR all the elements of the array. Here’s how this works:
-- **Duplicate elements**: When two identical numbers are XOR-ed, they cancel each other out (because **a ^ a = 0**).
-- **The unique element**: The single number that doesn’t have a pair will be left out after all XOR operations, as it won’t cancel out with any other number.
-
----
-
-### 🔧 **Code Walkthrough:**
-
-#### Step 1: **Initialize the variable**
-We start by initializing a variable `x` to `0`, which will hold the result after performing XOR on all elements.
-
+### Initial Thoughts 💭
+- XOR can be used efficiently to identify the unique element, as XORing the same number twice cancels it out.
+- We need to ensure that we process the array in linear time while using constant space.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, return an error or handle it as a constraint violation.
+- The solution must handle arrays with up to 30,000 elements efficiently.
+- Handle cases where the only element in the array is the unique element.
+- Ensure that the solution works efficiently even for large input sizes and adheres to the time and space complexity requirements.
+{{< dots >}}
+## Code 💻
 ```cpp
-int x = 0;
+int singleNumber(vector<int>& nums) {
+    int x = 0;
+    for(int y: nums)
+        x ^= y;
+    return x;
+}
 ```
 
-Starting with `0` is important because XOR-ing any number with `0` leaves the number unchanged.
+The function `singleNumber` finds the number that appears only once in a list of integers where every other number appears twice. It uses XOR to isolate that single number.
 
-#### Step 2: **Iterate through the array**
-We then loop through each element in the array and XOR it with `x`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int singleNumber(vector<int>& nums) {
+	```
+	This is the function definition of `singleNumber`, which takes a vector of integers and returns the number that appears only once.
 
-```cpp
-for(int y: nums)
-    x ^= y;
-```
+2. **Variable Initialization**
+	```cpp
+	    int x = 0;
+	```
+	Initialize a variable `x` to 0. This will hold the result of XOR operations and ultimately the number that appears only once.
 
-- If `y` is a number that appears twice, XOR-ing it with `x` will cancel it out (i.e., set it to `0`).
-- If `y` is the single number that appears only once, it will accumulate in `x` because it doesn’t have a duplicate to cancel it out.
+3. **Loop Iteration**
+	```cpp
+	    for(int y: nums)
+	```
+	Start a loop to iterate through each element `y` in the `nums` array.
 
-#### Step 3: **Return the result**
-After completing the loop, the variable `x` will hold the value of the number that appears only once.
+4. **Bitwise Operation**
+	```cpp
+	        x ^= y;
+	```
+	Apply the XOR operation between `x` and the current element `y`. This operation ensures that pairs of the same number cancel each other out.
 
-```cpp
-return x;
-```
+5. **Return Statement**
+	```cpp
+	    return x;
+	```
+	Return the value of `x`, which holds the number that appeared only once after all XOR operations.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### ⏱️ **Complexity Analysis:**
+The time complexity is O(n) as we traverse the array once to find the unique element.
 
-#### Time Complexity:
-- **O(n)**: We iterate over the array once, and each XOR operation is constant time (O(1)). Therefore, the time complexity is **O(n)**, where `n` is the length of the array.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
-- **O(1)**: We only use a constant amount of extra space. The only variable used is `x`, so the space complexity is **O(1)**.
+The space complexity is O(1) as we use only a constant amount of space for calculations.
 
----
+**Happy Coding! 🎉**
 
-### 🚀 **Conclusion:**
-
-This solution is optimal both in terms of time and space:
-
-- **Time Efficiency**: It runs in **O(n)** time, making it suitable for large arrays.
-- **Space Efficiency**: It uses **O(1)** space, meaning no extra storage is required except for the result.
-
-By exploiting the XOR properties, this solution efficiently cancels out pairs of identical elements and leaves the single unique element.
-
----
-
-### 🧑‍🏫 **Example Walkthrough:**
-
-Let’s take an example to see how this works:
-
-```cpp
-nums = [4, 1, 2, 1, 2]
-```
-
-1. Initialize `x = 0`.
-2. XOR-ing through the array:
-   - `x = 0 ^ 4 = 4`
-   - `x = 4 ^ 1 = 5`
-   - `x = 5 ^ 2 = 7`
-   - `x = 7 ^ 1 = 6`
-   - `x = 6 ^ 2 = 4`
-3. At the end of the iteration, `x = 4`, which is the number that appears only once.
-
-This approach is simple, efficient, and elegant!
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/single-number/description/)
 

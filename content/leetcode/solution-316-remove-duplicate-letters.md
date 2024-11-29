@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "HjvMWNHZBNI"
 youtube_upload_date="2023-09-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/HjvMWNHZBNI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,166 +28,247 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/HjvMWNHZBNI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string 's', remove duplicate letters so that every letter appears once and only once. The result should be the smallest lexicographical order among all possible results.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string 's' that contains lowercase English letters.
+- **Example:** `s = 'acdbac'`
+- **Constraints:**
+	- 1 <= s.length <= 10^4
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string removeDuplicateLetters(string s) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a string with no duplicate letters, and the smallest lexicographical order.
+- **Example:** `'abcd'`
+- **Constraints:**
+	- The string should contain unique characters in lexicographical order.
 
-        vector<int> frq(26, 0), lidx(26, 0);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To remove duplicate characters while ensuring the resulting string is lexicographically smallest.
 
-        for (int i = 0; i < s.size(); i++) {
-            char x = s[i];
-            frq[x - 'a']++;
-            lidx[x - 'a'] = i;
-        }
+- Traverse the string and count the frequency of each character.
+- Maintain a stack to build the result string, ensuring lexicographical order by popping characters from the stack when necessary.
+- Ensure that each character is only added once to the result string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string 's' is guaranteed to contain only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'acdbac'`  \
+  **Explanation:** Removing the duplicate 'a', 'c', and 'b' results in the lexicographically smallest string 'abcd'.
 
-        vector<bool> seen(26, false);
-        stack<char> st;
+- **Input:** `s = 'zxyzyx'`  \
+  **Explanation:** The lexicographically smallest string without duplicates is 'xyz'.
 
-        for(int i = 0; i < s.size(); i++) {
+{{< dots >}}
+## Approach 🚀
+To solve this problem, use a greedy algorithm with a stack to ensure that the string is both unique and lexicographically smallest.
 
-            int cur = s[i] - 'a';            
-            if(seen[cur]) continue;
+### Initial Thoughts 💭
+- The string needs to maintain its smallest lexicographical order while removing duplicates.
+- We can use a stack to build the result string, popping elements from the stack when a smaller element appears and is guaranteed to appear later.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty, as the length of the string is at least 1.
+- The solution must efficiently handle strings with lengths up to 10^4.
+- If the string is already unique, it should be returned unchanged.
+- Ensure that the algorithm works in O(n) time to handle the upper constraint.
+{{< dots >}}
+## Code 💻
+```cpp
+string removeDuplicateLetters(string s) {
 
-            while(st.size() > 0 && st.top() > s[i] && i < lidx[st.top() - 'a']) {
-                seen[st.top() - 'a'] = false;
-                st.pop();
-            }
+    vector<int> frq(26, 0), lidx(26, 0);
 
-            st.push(s[i]);
-            seen[cur] = true;
-        }
+    for (int i = 0; i < s.size(); i++) {
+        char x = s[i];
+        frq[x - 'a']++;
+        lidx[x - 'a'] = i;
+    }
 
-        string ans = "";
-        while(st.size() > 0) {
-            ans += st.top();
+    vector<bool> seen(26, false);
+    stack<char> st;
+
+    for(int i = 0; i < s.size(); i++) {
+
+        int cur = s[i] - 'a';            
+        if(seen[cur]) continue;
+
+        while(st.size() > 0 && st.top() > s[i] && i < lidx[st.top() - 'a']) {
+            seen[st.top() - 'a'] = false;
             st.pop();
         }
-        reverse(ans.begin(), ans.end());
-        return ans;
+
+        st.push(s[i]);
+        seen[cur] = true;
     }
-};
-{{< /highlight >}}
----
 
-### 🚀 Problem Statement
-
-The goal here is to remove duplicate letters from a string `s` such that:
-1. Every letter appears only once in the final string.
-2. The result is the **smallest possible lexicographical order**.
-
-In simple terms, we’re aiming for a unique set of letters from `s`, ordered as early in the alphabet as possible.
-
----
-
-### 🧠 Approach
-
-Let's break down how we can tackle this with a **greedy algorithm** and a **stack**! The main idea is to:
-- Build our result string in alphabetical order.
-- Use a stack to ensure only one of each letter, removing larger letters if they can still appear later.
-
-This way, we avoid having to reprocess sections of the string and get the optimal result efficiently.
-
----
-
-### 🔍 Key Steps
-
-1. **Count Each Character's Occurrences**: We need to know how many times each character appears to keep or remove it appropriately.
-   
-2. **Lexicographical Order with a Stack**: The stack allows us to build a solution in order while removing any larger letters if they’re not required.
-
-3. **Track Presence with a Boolean Array**: An array helps us know if a letter is already in the result, so we avoid duplicates.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s walk through each part of the code and see how it builds the solution!
-
-#### Step 1: Calculate Frequency and Last Index of Each Character
-
-```cpp
-vector<int> frq(26, 0), lidx(26, 0);
-
-for (int i = 0; i < s.size(); i++) {
-    char x = s[i];
-    frq[x - 'a']++;
-    lidx[x - 'a'] = i;
-}
-```
-
-- **`frq` Array**: Counts each character's occurrences.
-- **`lidx` Array**: Tracks the last position where each character appears, so we know if it can be removed and appear later.
-
-#### Step 2: Set Up for the Stack and Track Seen Letters
-
-```cpp
-vector<bool> seen(26, false);
-stack<char> st;
-```
-
-- **`seen` Array**: Prevents adding a letter to the stack more than once.
-- **`st` Stack**: Builds the result letter-by-letter, keeping the smallest possible order.
-
-#### Step 3: Process Each Character
-
-```cpp
-for(int i = 0; i < s.size(); i++) {
-    int cur = s[i] - 'a';            
-    if(seen[cur]) continue;
-
-    while(st.size() > 0 && st.top() > s[i] && i < lidx[st.top() - 'a']) {
-        seen[st.top() - 'a'] = false;
+    string ans = "";
+    while(st.size() > 0) {
+        ans += st.top();
         st.pop();
     }
-
-    st.push(s[i]);
-    seen[cur] = true;
+    reverse(ans.begin(), ans.end());
+    return ans;
 }
 ```
 
-- **Skip Seen Characters**: If a letter is already in the stack, skip it to prevent duplicates.
-- **Remove Larger Characters**: If the current character is smaller and any top stack letter can appear later, remove that larger letter.
-- **Push and Mark as Seen**: Add the current character to the stack and mark it in the `seen` array.
+The function removes duplicate letters from a string while maintaining the order of characters.
 
-#### Step 4: Create the Final Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string removeDuplicateLetters(string s) {
+	```
+	This is the function definition, where a string `s` is passed as input.
 
-```cpp
-string ans = "";
-while(st.size() > 0) {
-    ans += st.top();
-    st.pop();
-}
-reverse(ans.begin(), ans.end());
-return ans;
-```
+2. **Initialization**
+	```cpp
+	    vector<int> frq(26, 0), lidx(26, 0);
+	```
+	Initialize two vectors: `frq` for character frequency and `lidx` for the last index of each character.
 
-- **Build the Final String**: The stack holds the letters in reverse order, so we reverse them for the final answer!
+3. **Loop**
+	```cpp
+	    for (int i = 0; i < s.size(); i++) {
+	```
+	Iterate through the string `s` to populate the frequency and last index vectors.
 
----
+4. **Character Processing**
+	```cpp
+	        char x = s[i];
+	```
+	Extract each character from the string during the iteration.
 
-### 📈 Complexity Analysis
+5. **Frequency Update**
+	```cpp
+	        frq[x - 'a']++;
+	```
+	Increment the frequency of the current character in the `frq` vector.
 
-- **Time Complexity**: **O(n)** because we process each character only once.
-- **Space Complexity**: **O(n)** to store the stack, plus `seen` and `lidx` arrays (26 fixed size).
+6. **Last Index Update**
+	```cpp
+	        lidx[x - 'a'] = i;
+	```
+	Update the last index of the current character in the `lidx` vector.
 
----
+7. **Seen Initialization**
+	```cpp
+	    vector<bool> seen(26, false);
+	```
+	Initialize a `seen` vector to track whether a character has been added to the result.
 
-### 🏁 Conclusion
+8. **Stack Initialization**
+	```cpp
+	    stack<char> st;
+	```
+	Initialize a stack to build the result string by storing characters.
 
-Using a stack to build a minimal lexicographical order while tracking each character’s frequency is efficient and elegant. By removing unnecessary duplicates and ordering the result, we get the lexicographically smallest string in **O(n)** time.
+9. **Loop**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Loop through the string `s` again to build the result string.
 
----
+10. **Character Conversion**
+	```cpp
+	        int cur = s[i] - 'a';
+	```
+	Convert the current character to its respective index based on the alphabet.
 
-### 🎯 Takeaways
+11. **Check if Seen**
+	```cpp
+	        if(seen[cur]) continue;
+	```
+	If the character has already been added to the result, skip it.
 
-1. **Greedy Method for Lexicographical Order**: The stack and removal strategy ensure we get the smallest possible order.
-2. **Tracking for Efficiency**: Arrays for frequency and last index help avoid unnecessary reprocessing.
-3. **Optimized for Large Inputs**: This approach scales well with a time complexity of **O(n)**.
+12. **Stack Processing**
+	```cpp
+	        while(st.size() > 0 && st.top() > s[i] && i < lidx[st.top() - 'a']) {
+	```
+	Check if the top character in the stack can be removed while maintaining the order.
 
-Good luck implementing this one! 🎉
+13. **Pop Stack**
+	```cpp
+	            seen[st.top() - 'a'] = false;
+	```
+	Mark the character being removed from the stack as unseen.
+
+14. **Pop Stack**
+	```cpp
+	            st.pop();
+	```
+	Remove the character from the stack.
+
+15. **Add to Stack**
+	```cpp
+	        st.push(s[i]);
+	```
+	Push the current character onto the stack.
+
+16. **Mark Seen**
+	```cpp
+	        seen[cur] = true;
+	```
+	Mark the current character as seen.
+
+17. **String Construction**
+	```cpp
+	    string ans = "";
+	```
+	Initialize an empty string to hold the final result.
+
+18. **Result Construction**
+	```cpp
+	    while(st.size() > 0) {
+	```
+	Pop characters from the stack and append them to the result string.
+
+19. **Append to Result**
+	```cpp
+	        ans += st.top();
+	```
+	Append the top character from the stack to the result string.
+
+20. **Pop Stack**
+	```cpp
+	        st.pop();
+	```
+	Remove the top character from the stack.
+
+21. **Reverse Result**
+	```cpp
+	    reverse(ans.begin(), ans.end());
+	```
+	Reverse the result string as the characters were added in reverse order.
+
+22. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the final result string with no duplicate letters.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the length of the string, as each character is processed once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the stack and character frequency counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-duplicate-letters/description/)
 

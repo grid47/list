@@ -14,147 +14,253 @@ img_src = ""
 youtube = "L8BHtlpLCQw"
 youtube_upload_date="2023-09-02"
 youtube_thumbnail="https://i.ytimg.com/vi/L8BHtlpLCQw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums and two positive integers m and k. Return the maximum sum out of all almost unique subarrays of length k in nums. A subarray is almost unique if it contains at least m distinct elements. If no such subarray exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums and two integers m and k.
+- **Example:** `nums = [1, 3, 5, 7, 1, 8], m = 2, k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 2 * 10^4
+	- 1 <= m <= k <= nums.length
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maxSum(vector<int>& nums, int size, int k) {
-        unordered_map<int,int> m;
-        long long sum=0;
-        long long maxi=0;
-        int i=0;
-        int j=0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum of any almost unique subarray of length k, or return 0 if no such subarray exists.
+- **Example:** `16`
+- **Constraints:**
+	- The output should be the maximum sum of a valid subarray or 0 if no valid subarray is found.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum sum of subarrays of length k with at least m distinct elements.
+
+- Initialize a sliding window of size k and a map to track the frequency of elements in the window.
+- Iterate through the array, adjusting the window to include k elements while maintaining the condition of having at least m distinct elements.
+- Track the sum of the elements in the window and update the maximum sum when the window contains at least m distinct elements.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains only positive integers.
+- The solution should be efficient enough to handle arrays up to the length of 2 * 10^4.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 3, 5, 7, 1, 8], m = 2, k = 3`  \
+  **Explanation:** We can form the following subarrays of length 3: [1, 3, 5], [3, 5, 7], [5, 7, 1], [7, 1, 8]. The maximum sum of the valid subarray with at least 2 distinct elements is 16, from the subarray [7, 1, 8].
+
+- **Input:** `nums = [9, 9, 1, 5, 6, 6], m = 2, k = 3`  \
+  **Explanation:** The subarray [9, 9, 1] has a sum of 19 and contains at least 2 distinct elements, so it is valid. The maximum sum is 20, as no other valid subarray has a greater sum.
+
+- **Input:** `nums = [1, 1, 1, 1], m = 2, k = 2`  \
+  **Explanation:** No subarrays of length 2 contain at least 2 distinct elements, so the result is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a sliding window to efficiently find subarrays of size k and check if they contain at least m distinct elements.
+
+### Initial Thoughts 💭
+- We need to efficiently find subarrays of length k with at least m distinct elements.
+- A sliding window approach with a hashmap can help track distinct elements and their frequencies.
+- By iterating through the array and maintaining a window of size k, we can ensure that the solution works in linear time.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will not be empty, as nums.length >= 1.
+- The algorithm should efficiently handle arrays with up to 20,000 elements.
+- All elements in nums could be the same, leading to no valid subarray if m > 1.
+- Ensure the sliding window is implemented efficiently to handle the largest input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
+long long maxSum(vector<int>& nums, int size, int k) {
+    unordered_map<int,int> m;
+    long long sum=0;
+    long long maxi=0;
+    int i=0;
+    int j=0;
+    
+    while(j<nums.size())
+    {
+        m[nums[j]]++;
+        sum+=nums[j];
         
-        while(j<nums.size())
+        if(j-i+1>k)
         {
-            m[nums[j]]++;
-            sum+=nums[j];
-            
-            if(j-i+1>k)
-            {
-                m[nums[i]]--;
-                sum-=nums[i];
-                    
-                if(m[nums[i]]==0)
-                {
-                    m.erase(nums[i]);    
-                }
+            m[nums[i]]--;
+            sum-=nums[i];
                 
-                i++;
-            }
-            
-            
-            
-            if(j-i+1==k)
+            if(m[nums[i]]==0)
             {
-                if(m.size() >= size)
-                {
-                    maxi=max(sum , maxi);
-                    // cout<<maxi<<endl;
-                }
+                m.erase(nums[i]);    
             }
             
-            j++;
+            i++;
         }
         
-        return maxi;
+        
+        
+        if(j-i+1==k)
+        {
+            if(m.size() >= size)
+            {
+                maxi=max(sum , maxi);
+                // cout<<maxi<<endl;
+            }
+        }
+        
+        j++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-We are given an array of integers `nums`, and we need to find the maximum sum of any subarray of size `k` such that the subarray contains at least `size` distinct elements. The goal is to identify the subarray with the highest sum that meets this condition.
-
-### Approach
-
-This problem involves finding the maximum sum of a subarray of fixed size `k`, with the additional constraint that the subarray must contain at least `size` distinct elements. To solve this problem efficiently, we can use the **sliding window technique** in combination with a **hash map** to keep track of the frequency of elements within the window. Here's how we can break down the approach:
-
-1. **Sliding Window**: The idea is to maintain a sliding window of size `k` that moves across the array, updating the sum of the window and the count of distinct elements as we go. The window starts at the first element and expands to the right until it reaches size `k`. If the window exceeds size `k`, we shrink it from the left.
-
-2. **Hash Map for Frequency Count**: A hash map is used to store the frequency of each element in the current window. This helps us quickly track how many distinct elements are present in the window. As the window expands and contracts, we update the hash map by adding or removing elements.
-
-3. **Check for Valid Window**: Once the window reaches size `k`, we check if the number of distinct elements in the window is greater than or equal to `size`. If so, we update the maximum sum encountered.
-
-4. **Efficiency Considerations**: Since the sliding window moves one step at a time, and we only perform constant-time operations for each element (updating the sum and the hash map), the time complexity of this approach is linear, O(n), where `n` is the length of the input array.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-```cpp
-unordered_map<int, int> m; // Hash map to store the frequency of elements in the current window
-long long sum = 0; // To store the sum of the current window
-long long maxi = 0; // To store the maximum sum encountered
-int i = 0, j = 0; // Two pointers to define the sliding window
-```
-- We use an unordered map `m` to track the frequency of elements in the current window.
-- `sum` holds the sum of the elements in the current window.
-- `maxi` keeps track of the maximum sum of subarrays that have at least `size` distinct elements.
-- `i` and `j` are the pointers that define the boundaries of the sliding window.
-
-#### Step 2: Expand the Window
-```cpp
-while(j < nums.size()) {
-    m[nums[j]]++; // Add the element at position j to the window
-    sum += nums[j]; // Add the element to the current sum
-```
-- We expand the window by moving the `j` pointer to the right. Each time we add a new element to the window, we update the frequency map and the sum of the window.
-
-#### Step 3: Shrink the Window if It Exceeds Size `k`
-```cpp
-if(j - i + 1 > k) {
-    m[nums[i]]--; // Remove the element at position i from the window
-    sum -= nums[i]; // Subtract the element from the current sum
-    if(m[nums[i]] == 0) {
-        m.erase(nums[i]); // If the frequency becomes zero, remove the element from the map
-    }
-    i++; // Move the left pointer to shrink the window
+    
+    return maxi;
 }
 ```
-- If the window size exceeds `k`, we shrink the window by moving the `i` pointer to the right.
-- We update the sum and frequency map by removing the element at index `i` from the window.
-- If the frequency of an element becomes zero after removal, we delete it from the map.
 
-#### Step 4: Check for Valid Subarray and Update Maximum Sum
-```cpp
-if(j - i + 1 == k) {
-    if(m.size() >= size) { // Check if the number of distinct elements is at least 'size'
-        maxi = max(sum, maxi); // Update the maximum sum if the current window is valid
-    }
-}
-```
-- When the window size is exactly `k`, we check if the number of distinct elements in the window is at least `size`. If the condition is satisfied, we update `maxi` with the maximum sum encountered so far.
+This function calculates the maximum sum of a subarray of size k, ensuring that the subarray contains at least a given number of distinct elements (size). It iterates over the array while maintaining the sum of the current window and adjusting it when necessary.
 
-#### Step 5: Move the Right Pointer
-```cpp
-j++; // Move the right pointer to expand the window
-```
-- After processing the current window, we move the right pointer `j` to expand the window further.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	long long maxSum(vector<int>& nums, int size, int k) {
+	```
+	Function definition to find the maximum sum of subarray with at least 'size' distinct elements and subarray length 'k'.
 
-#### Step 6: Return the Maximum Sum
-```cpp
-return maxi; // Return the maximum sum of subarrays with at least 'size' distinct elements
-```
-- After processing all possible subarrays, we return the maximum sum found that meets the condition of having at least `size` distinct elements.
+2. **Initialization**
+	```cpp
+	    unordered_map<int,int> m;
+	```
+	Create a map to track the frequency of elements within the sliding window.
 
-### Complexity
+3. **Initialization**
+	```cpp
+	    long long sum=0;
+	```
+	Variable to store the sum of elements within the current sliding window.
 
-#### Time Complexity:
-- **O(n)**: The algorithm iterates through the array once with the sliding window technique. Each element is processed once when added to the window and potentially once when removed from the window. The operations on the hash map (insertion, deletion, and lookup) are O(1) on average. Therefore, the overall time complexity is O(n), where `n` is the length of the input array.
+4. **Initialization**
+	```cpp
+	    long long maxi=0;
+	```
+	Variable to store the maximum sum found during the iteration.
 
-#### Space Complexity:
-- **O(n)**: The space complexity is O(n) due to the use of the hash map, which may store up to `n` distinct elements in the worst case. The space used for the sum and `maxi` variables is constant, O(1).
+5. **Initialization**
+	```cpp
+	    int i=0;
+	```
+	Left pointer of the sliding window, used to maintain the window size.
 
-### Conclusion
+6. **Initialization**
+	```cpp
+	    int j=0;
+	```
+	Right pointer of the sliding window, used to iterate through the array.
 
-This solution efficiently solves the problem of finding the maximum sum of a subarray of size `k` with at least `size` distinct elements using the sliding window technique and a hash map. By maintaining a sliding window of fixed size `k` and dynamically adjusting the frequency of elements within the window, we ensure that the algorithm runs in linear time, making it well-suited for large input arrays. This approach ensures that the problem is solved optimally both in terms of time and space complexity.
+7. **Loop**
+	```cpp
+	    while(j<nums.size())
+	```
+	Start the sliding window loop over the array.
+
+8. **Window Expansion**
+	```cpp
+	        m[nums[j]]++;
+	```
+	Increase the count of the current element in the map.
+
+9. **Window Expansion**
+	```cpp
+	        sum+=nums[j];
+	```
+	Add the current element to the sum of the sliding window.
+
+10. **Check Window Size**
+	```cpp
+	        if(j-i+1>k)
+	```
+	Check if the window size exceeds 'k'. If true, adjust the window by moving the left pointer.
+
+11. **Window Shrinking**
+	```cpp
+	            m[nums[i]]--;
+	```
+	Decrease the count of the element at the left pointer.
+
+12. **Window Shrinking**
+	```cpp
+	            sum-=nums[i];
+	```
+	Subtract the element at the left pointer from the sum.
+
+13. **Window Shrinking**
+	```cpp
+	            if(m[nums[i]]==0)
+	```
+	If the element at the left pointer has no more occurrences in the map, remove it.
+
+14. **Window Shrinking**
+	```cpp
+	                m.erase(nums[i]);
+	```
+	Erase the element from the map if its count reaches zero.
+
+15. **Update Left Pointer**
+	```cpp
+	            i++;
+	```
+	Move the left pointer to shrink the window.
+
+16. **Window Validation**
+	```cpp
+	        if(j-i+1==k)
+	```
+	Check if the current window size matches 'k'.
+
+17. **Max Sum Check**
+	```cpp
+	            if(m.size() >= size)
+	```
+	If the window contains at least 'size' distinct elements, check if the sum is a new maximum.
+
+18. **Max Sum Update**
+	```cpp
+	                maxi=max(sum , maxi);
+	```
+	Update the maximum sum if the current sum is larger.
+
+19. **Window Expansion**
+	```cpp
+	            j++;
+	```
+	Move the right pointer to expand the window.
+
+20. **Return Result**
+	```cpp
+	    return maxi;
+	```
+	Return the maximum sum found during the loop.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, O(n), because we only pass through the array once, adjusting the sliding window.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is O(k) due to the storage required for the sliding window and the hashmap of size k.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-of-almost-unique-subarray/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,91 +28,151 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of integers nums and an integer k, return the number of unique k-diff pairs in the array. A k-diff pair is a pair of integers (nums[i], nums[j]) where the absolute difference between the values of the pair is k, and i != j.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers nums and an integer k. The array can have up to 10^4 elements, and k is a non-negative integer.
+- **Example:** `Input: nums = [5, 1, 6, 1, 8], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -10^7 <= nums[i] <= 10^7
+	- 0 <= k <= 10^7
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findPairs(vector<int>& nums, int k) {
-        map<int, int> mp;
-        for(int i : nums)
-            mp[i]++;
-        int res = 0;
-        for(auto const &[i, j] : mp)
-            if((k > 0 && mp.count(i - k)) ||
-              (k == 0 && (j > 1)) )
-                res++;
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of unique k-diff pairs in the array.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output should be the number of unique pairs with the specified absolute difference.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find all unique pairs (i, j) such that the absolute difference between nums[i] and nums[j] equals k.
 
-The task is to count unique pairs in an array such that the absolute difference between the two numbers in each pair equals a given integer \( k \). This means we need to find how many unique pairs \((a, b)\) exist in the array where \( |a - b| = k \). The array can have duplicate elements, and \( k \) can be zero.
+- Count the occurrences of each number in the array using a hashmap.
+- For each number in the hashmap, check if a pair exists that satisfies the absolute difference of k.
+- If k is greater than 0, check if nums[i] - k exists in the map.
+- If k is equal to 0, check if a number appears more than once in the map.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least one number.
+- The input value k is a valid non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [5, 1, 6, 1, 8], k = 3`  \
+  **Explanation:** There are two pairs with a difference of 3: (1, 4) and (5, 8). Since the pairs are unique, the output is 2.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we will use a hashmap to store the frequency of each element in the array and check for the existence of the required pairs.
 
-To solve this problem efficiently, we utilize a frequency map (or hash map) that tracks the occurrences of each number in the array. The approach leverages this map to check for each number if there exists another number that would form a valid pair according to the given condition \( |a - b| = k \).
-
-1. **Building the Frequency Map**: First, we create a map to store each unique number in the array as a key, along with the frequency of that number as the value.
-
-2. **Finding Pairs Based on k**:
-   - If \( k > 0 \): For each unique number \( i \) in the map, we check if \( i - k \) also exists in the map. This condition ensures that the pair \((i, i - k)\) has the required absolute difference of \( k \).
-   - If \( k == 0 \): We are looking for pairs where both elements are the same, so we simply check if any number appears more than once in the array. If a number's frequency is greater than 1, it forms a valid pair with itself.
-
-3. **Counting Pairs**: For each valid condition met, we increment our result counter.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Create a Frequency Map
-
+### Initial Thoughts 💭
+- Using a hashmap to count occurrences of numbers allows for efficient lookups when checking for pairs.
+- If k is 0, we need to check for duplicates, while for k > 0, we need to find numbers that differ by k.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return 0.
+- Handle cases with the maximum number of elements efficiently using a hashmap.
+- Consider the case when k = 0, where the only valid pairs are those that have duplicates.
+- Ensure that pairs are counted uniquely and that duplicates are handled correctly.
+{{< dots >}}
+## Code 💻
 ```cpp
-map<int, int> mp;
-for(int i : nums)
-    mp[i]++;
+int findPairs(vector<int>& nums, int k) {
+    map<int, int> mp;
+    for(int i : nums)
+        mp[i]++;
+    int res = 0;
+    for(auto const &[i, j] : mp)
+        if((k > 0 && mp.count(i - k)) ||
+          (k == 0 && (j > 1)) )
+            res++;
+    return res;
+}
 ```
 
-- We iterate over the `nums` array, populating a map (`mp`) where each key is a number from the array, and its corresponding value is the count of occurrences.
-- This frequency map allows us to check the existence and frequency of any number in constant time.
+This function counts the number of unique pairs in the array `nums` such that their absolute difference is equal to `k`. It uses a hash map to store the frequency of each element and checks the conditions based on the value of `k`.
 
-#### Step 2: Count Valid Pairs
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition, Hash Map Usage**
+	```cpp
+	int findPairs(vector<int>& nums, int k) {
+	```
+	Defines the `findPairs` function, which takes an integer array `nums` and an integer `k` as input and returns the number of unique pairs with the absolute difference equal to `k`.
 
-```cpp
-int res = 0;
-for(auto const &[i, j] : mp)
-    if((k > 0 && mp.count(i - k)) ||
-      (k == 0 && (j > 1)) )
-        res++;
-```
+2. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a hash map `mp` where the keys are the elements of the array `nums`, and the values are the frequency of those elements.
 
-- We initialize `res` to store the count of valid pairs.
-- For each entry `[i, j]` in the map (`i` represents the number, and `j` represents its frequency):
-  - If \( k > 0 \): We check if `i - k` exists in the map. If it does, it means \((i, i - k)\) is a valid pair with the difference \( k \), and we increment `res`.
-  - If \( k == 0 \): We look for numbers that appear more than once, as they can form pairs with themselves. If `j > 1`, we increment `res`.
+3. **Loop, Array Traversal**
+	```cpp
+	    for(int i : nums)
+	```
+	Iterates through each element `i` in the array `nums`.
 
-#### Step 3: Return the Result
+4. **Count Elements**
+	```cpp
+	        mp[i]++;
+	```
+	Increments the count of the current element `i` in the map `mp`. This stores the frequency of each element in the array.
 
-```cpp
-return res;
-```
+5. **Initialize Result**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the variable `res` to store the result, i.e., the number of pairs with the required absolute difference.
 
-- Finally, we return `res`, which holds the total count of unique pairs with the given difference \( k \).
+6. **Iterate over Map**
+	```cpp
+	    for(auto const &[i, j] : mp)
+	```
+	Iterates through the map `mp`, where `i` is the key (the element of the array) and `j` is the value (the frequency of that element).
 
-### Complexity
+7. **Condition for k > 0**
+	```cpp
+	        if((k > 0 && mp.count(i - k)) ||
+	```
+	Checks if `k > 0` and if the map contains an element `i - k` (the complement of the current element `i` that would form a pair with the absolute difference `k`).
 
-#### Time Complexity
-- **Building the Frequency Map**: This requires `O(n)` time, where `n` is the size of the array.
-- **Counting Valid Pairs**: We iterate over the map, which has a maximum of `n` unique entries in the worst case. Thus, this step takes `O(n)` time as well.
-- **Overall Time Complexity**: `O(n)`, which is efficient for large arrays.
+8. **Condition for k == 0**
+	```cpp
+	          (k == 0 && (j > 1)) )
+	```
+	Checks if `k == 0` and the frequency of the current element `i` is greater than 1, indicating that there is at least one duplicate, forming a valid pair.
 
-#### Space Complexity
-- We use a map to store the frequency of each number, which requires `O(n)` space in the worst case.
+9. **Increment Result**
+	```cpp
+	            res++;
+	```
+	Increments the result `res` if the conditions for a valid pair are met.
 
-### Conclusion
+10. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the final count of valid pairs.
 
-This solution efficiently counts unique pairs in an array that have a specific difference. By leveraging a frequency map, we avoid the need for nested loops, reducing the time complexity from `O(n^2)` to `O(n)`. This approach is both optimal and intuitive, as it simplifies the process of finding pairs through straightforward conditions based on the difference \( k \). The code is also compact and highly readable, making it a practical solution for real-world applications where performance is critical.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of elements in the input array. This is due to the hashmap creation and lookups.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), as we use a hashmap to store the frequency of each element in the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-diff-pairs-in-an-array/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "RvLrWFBJ9fM"
 youtube_upload_date="2023-05-10"
 youtube_thumbnail="https://i.ytimg.com/vi/RvLrWFBJ9fM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,147 +28,219 @@ youtube_thumbnail="https://i.ytimg.com/vi/RvLrWFBJ9fM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Create an n x n matrix where numbers from 1 to n^2 are arranged in a spiral order starting from the top-left corner.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A single integer n representing the size of the square matrix.
+- **Example:** `Input: n = 4`
+- **Constraints:**
+	- 1 <= n <= 20
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> generateMatrix(int n) {
-        
-        vector<vector<int>> mtx(n, vector<int>(n, 0));
-        int cBgn = 0, cEnd = n - 1, rBgn = 0, rEnd = n - 1;
-        
-        int num = 1;
-        while(cBgn <= cEnd && rBgn <= rEnd) {
-            for(int i = cBgn; i <= cEnd; i++)
-                mtx[rBgn][i] = num++;
-            rBgn++;
-            for(int i = rBgn; i <= rEnd; i++)
-                mtx[i][cEnd] = num++;
-            cEnd--;
-            if(rBgn <= rEnd)
-            for(int i = cEnd; i >= cBgn; i--)
-                mtx[rEnd][i] = num++;
-            rEnd--;
-            if(cBgn <= cEnd)
-            for(int i = rEnd; i >= rBgn; i--)
-                mtx[i][cBgn] = num++;
-            cBgn++;            
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An n x n matrix filled with numbers from 1 to n^2 in a spiral order.
+- **Example:** `Output: [[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]]`
+- **Constraints:**
+	- Output matrix should always have dimensions n x n.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate the matrix by placing numbers sequentially in a spiral pattern.
+
+- Initialize an n x n matrix with zeros.
+- Set boundaries for rows and columns: top, bottom, left, and right.
+- Iteratively fill the matrix: move right, down, left, and up while updating the boundaries.
+- Stop when all numbers from 1 to n^2 have been placed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always a positive integer within the valid range.
+- The matrix is square (n x n).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 4`  \
+  **Explanation:** The numbers from 1 to 16 are filled in a 4x4 matrix in a clockwise spiral order.
+
+- **Input:** `Input: n = 2`  \
+  **Explanation:** A 2x2 matrix is filled with numbers from 1 to 4 in a spiral order.
+
+- **Input:** `Input: n = 1`  \
+  **Explanation:** A single number 1 fills the 1x1 matrix.
+
+{{< dots >}}
+## Approach 🚀
+Use iterative boundary-based traversal to fill the matrix in a spiral order.
+
+### Initial Thoughts 💭
+- The spiral traversal involves updating the boundaries after each pass.
+- The pattern follows clockwise movement: right, down, left, up.
+- Boundaries shrink after each traversal, ensuring the spiral pattern.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as input is guaranteed.
+- Maximum n value, such as n = 20.
+- Minimum n value, n = 1.
+- Ensure the matrix dimensions are correct for edge cases.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> generateMatrix(int n) {
+    vector<vector<int>> matrix(n, vector<int>(n));
+    int num = 1, rowStart = 0, rowEnd = n - 1, colStart = 0, colEnd = n - 1;
+
+    while (rowStart <= rowEnd && colStart <= colEnd) {
+        // Top row
+        for (int col = colStart; col <= colEnd; col++) {
+            matrix[rowStart][col] = num++;
         }
-        return mtx;
+        rowStart++;
+
+        // Right column
+        for (int row = rowStart; row <= rowEnd; row++) {
+            matrix[row][colEnd] = num++;
+        }
+        colEnd--;
+
+        // Bottom row
+        if (rowStart <= rowEnd) {
+            for (int col = colEnd; col >= colStart; col--) {
+                matrix[rowEnd][col] = num++;
+            }
+            rowEnd--;
+        }
+
+        // Left column
+        if (colStart <= colEnd) {
+            for (int row = rowEnd; row >= rowStart; row--) {
+                matrix[row][colStart] = num++;
+            }
+            colStart++;
+        }
     }
-};
-{{< /highlight >}}
----
 
-### 🌀 **Generate Spiral Matrix**
-
-The problem requires generating an `n x n` matrix filled with elements from 1 to `n^2` in a spiral order, starting from the top-left corner. The matrix should be filled in a clockwise spiral pattern.
-
-For example, for `n = 3`, the output should be:
-```
-[[1, 2, 3],
- [8, 9, 4],
- [7, 6, 5]]
+    return matrix;
+}
 ```
 
-### 🧠 **Approach**
+This code generates a spiral matrix of size n x n, filling it with numbers from 1 to n^2 in a spiral pattern.
 
-To solve this, we simulate the process of filling a matrix in a spiral pattern by traversing the matrix layer by layer. We use four variables representing the boundaries of the matrix: the top row, bottom row, left column, and right column. As we fill the matrix, these boundaries shrink until all elements are placed.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> generateMatrix(int n) {
+	```
+	This line declares a function named `generateMatrix` that takes an integer `n` as input and returns a 2D vector representing the spiral matrix.
 
-The filling sequence for each layer is as follows:
-1. Move from left to right across the top row.
-2. Move from top to bottom along the right column.
-3. Move from right to left across the bottom row (if rows are still remaining).
-4. Move from bottom to top along the left column (if columns are still remaining).
+2. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> matrix(n, vector<int>(n));
+	```
+	This line initializes a 2D vector `matrix` of size `n x n` with all elements set to 0.
 
-These steps repeat until the entire matrix is filled.
+3. **Variable Initialization**
+	```cpp
+	    int num = 1, rowStart = 0, rowEnd = n - 1, colStart = 0, colEnd = n - 1;
+	```
+	This line initializes variables to keep track of the current number to be filled, the starting and ending row and column indices.
 
-### 🔍 **Code Breakdown**
+4. **Spiral Filling Loop**
+	```cpp
+	    while (rowStart <= rowEnd && colStart <= colEnd) {
+	```
+	This loop continues as long as there are elements to be filled in the spiral pattern.
 
-#### Step 1: Initialize Matrix and Boundaries
+5. **Fill Top Row**
+	```cpp
+	        for (int col = colStart; col <= colEnd; col++) {
+	            matrix[rowStart][col] = num++;
+	        }
+	```
+	This loop fills the top row of the current spiral layer, starting from the `colStart` column and moving to the `colEnd` column.
 
-```cpp
-vector<vector<int>> mtx(n, vector<int>(n, 0));
-int cBgn = 0, cEnd = n - 1, rBgn = 0, rEnd = n - 1;
-```
+6. **Update Row Start**
+	```cpp
+	        rowStart++;
+	```
+	The `rowStart` is incremented to move to the next row.
 
-- **`mtx`:** We initialize a matrix of size `n x n` with all elements set to `0`.
-- **Boundaries:** The variables `cBgn`, `cEnd`, `rBgn`, and `rEnd` represent the current unfilled region of the matrix, starting from the outermost layer. These boundaries will gradually shrink as we fill the matrix in a spiral order.
+7. **Fill Right Column**
+	```cpp
+	        for (int row = rowStart; row <= rowEnd; row++) {
+	            matrix[row][colEnd] = num++;
+	        }
+	```
+	This loop fills the right column of the current spiral layer, starting from the new `rowStart` and moving to the `rowEnd` row.
 
-#### Step 2: Start Filling the Matrix
+8. **Update Column End**
+	```cpp
+	        colEnd--;
+	```
+	The `colEnd` is decremented to move to the previous column.
 
-```cpp
-int num = 1;
-while(cBgn <= cEnd && rBgn <= rEnd) {
-```
+9. **Fill Bottom Row (Conditional)**
+	```cpp
+	        if (rowStart <= rowEnd) {
+	```
+	This condition checks if there are still rows to be filled from the bottom.
 
-- **`num`:** This variable starts at 1 and will increment as we fill each cell in the matrix, from 1 to `n^2`.
-- The `while` loop continues as long as there are rows and columns to fill, i.e., while `rBgn <= rEnd` and `cBgn <= cEnd`.
+10. **Fill Bottom Row**
+	```cpp
+	            for (int col = colEnd; col >= colStart; col--) {
+	                matrix[rowEnd][col] = num++;
+	            }
+	```
+	This loop fills the bottom row of the current spiral layer, starting from the `colEnd` column and moving to the `colStart` column.
 
-#### Step 3: Fill the Top Row
+11. **Update Row End**
+	```cpp
+	            rowEnd--;
+	```
+	The `rowEnd` is decremented to move to the previous row.
 
-```cpp
-for(int i = cBgn; i <= cEnd; i++)
-    mtx[rBgn][i] = num++;
-rBgn++;
-```
+12. **Fill Left Column (Conditional)**
+	```cpp
+	        if (colStart <= colEnd) {
+	```
+	This condition checks if there are still columns to be filled from the left.
 
-- We fill the top row by moving from left to right (i.e., across columns from `cBgn` to `cEnd`). After filling each cell, we increment `num` and move the top boundary (`rBgn`) down by one.
+13. **Fill Left Column**
+	```cpp
+	            for (int row = rowEnd; row >= rowStart; row--) {
+	                matrix[row][colStart] = num++;
+	            }
+	```
+	This loop fills the left column of the current spiral layer, starting from the `rowEnd` row and moving to the `rowStart` row.
 
-#### Step 4: Fill the Right Column
+14. **Update Column Start**
+	```cpp
+	            colStart++;
+	```
+	The `colStart` is incremented to move to the next column.
 
-```cpp
-for(int i = rBgn; i <= rEnd; i++)
-    mtx[i][cEnd] = num++;
-cEnd--;
-```
+15. **Return the Matrix**
+	```cpp
+	    return matrix;
+	```
+	The function returns the completed spiral matrix.
 
-- We then move down the rightmost column (i.e., across rows from `rBgn` to `rEnd`), filling each cell with the current value of `num` and then incrementing `num`. Afterward, we move the right boundary (`cEnd`) left by one.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-#### Step 5: Fill the Bottom Row (if necessary)
+Each number from 1 to n^2 is placed exactly once in the matrix.
 
-```cpp
-if(rBgn <= rEnd)
-    for(int i = cEnd; i >= cBgn; i--)
-        mtx[rEnd][i] = num++;
-rEnd--;
-```
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-- If there are still rows remaining (`rBgn <= rEnd`), we traverse the bottom row from right to left (i.e., across columns from `cEnd` to `cBgn`), filling each cell with the current value of `num` and incrementing `num`. Afterward, we move the bottom boundary (`rEnd`) up by one.
+The matrix itself requires O(n^2) space.
 
-#### Step 6: Fill the Left Column (if necessary)
+**Happy Coding! 🎉**
 
-```cpp
-if(cBgn <= cEnd)
-    for(int i = rEnd; i >= rBgn; i--)
-        mtx[i][cBgn] = num++;
-cBgn++;
-```
-
-- If there are still columns remaining (`cBgn <= cEnd`), we move up the leftmost column (i.e., across rows from `rEnd` to `rBgn`), filling each cell with the current value of `num` and incrementing `num`. Afterward, we move the left boundary (`cBgn`) right by one.
-
-#### Step 7: Return the Matrix
-
-```cpp
-return mtx;
-```
-
-- After all layers are filled, we return the completed matrix `mtx` containing the numbers in spiral order.
-
-### 📊 **Complexity Analysis**
-
-#### Time Complexity:
-- **O(n^2):** The time complexity is O(n^2), where `n^2` is the number of cells in the `n x n` matrix. Each cell is visited exactly once during the filling process, so the time complexity is proportional to the total number of elements.
-
-#### Space Complexity:
-- **O(n^2):** The space complexity is O(n^2) because we need to store the matrix. The auxiliary space used by the algorithm (variables and indices) is constant, but the matrix itself takes up O(n^2) space.
-
-### 🌟 **Conclusion**
-
-This solution to generating a matrix in spiral order uses an intuitive approach of filling the matrix layer by layer. By maintaining boundaries for the rows and columns, we can efficiently traverse the matrix in a clockwise spiral pattern. Both the time and space complexities are O(n^2), which is optimal for matrix-related problems. This solution is straightforward, efficient, and provides the correct result in an easy-to-understand manner.
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix-ii/description/)
 

@@ -14,116 +14,152 @@ img_src = ""
 youtube = "GBJFxSD3B_s"
 youtube_upload_date="2021-02-22"
 youtube_thumbnail="https://i.ytimg.com/vi/GBJFxSD3B_s/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `nums` and a positive integer `k`, return the most competitive subsequence of `nums` of size `k`. A subsequence is more competitive than another if at the first position where they differ, the subsequence has a smaller number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers `nums` and an integer `k` which is the size of the subsequence.
+- **Example:** `nums = [6, 3, 4, 5], k = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^9
+	- 1 <= k <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> mostCompetitive(vector<int>& nums, int k) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the most competitive subsequence of size `k`.
+- **Example:** `Output: [3, 5]`
+- **Constraints:**
 
-        vector<int> stk;
-        for(int i = 0; i < nums.size(); i++) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the most competitive subsequence by maintaining a stack and ensuring that subsequences are in increasing order.
 
-            while (!stk.empty()          &&
-                 stk.back() > nums[i] &&
-                (stk.size() + nums.size() - (i + 1)) >= k )
-                stk.pop_back();
+- Initialize an empty stack.
+- Iterate through each element of the array `nums`.
+- For each element, pop elements from the stack if they are greater than the current element and if there are enough remaining elements to form a subsequence of size `k`.
+- Push the current element to the stack if the size of the stack is less than `k`.
+- After iterating through all elements, return the stack as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array `nums` will have at least one element.
+- The value of `k` will be a valid integer between 1 and the length of `nums`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [6, 3, 4, 5], k = 2`  \
+  **Explanation:** Among all possible subsequences of size 2, [3, 5] is the most competitive because the first position where the subsequences differ is at the second position, and 3 is smaller than 4 and 5.
 
-            if(stk.size() < k)
-                stk.push_back(nums[i]);
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a greedy approach with a stack. As we iterate through the array, we ensure that the stack contains the most competitive subsequence by removing larger elements when necessary.
 
-        }
-        
-        return stk;
-        
+### Initial Thoughts 💭
+- We need to select `k` elements that form the most competitive subsequence.
+- Using a stack allows us to efficiently maintain the subsequence in increasing order.
+- We need to ensure that at each point we are maintaining the smallest possible elements in the subsequence, using the stack to enforce this.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one element.
+- The algorithm should handle inputs up to 100,000 elements efficiently.
+- The array elements can be as large as 1 billion.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> mostCompetitive(vector<int>& nums, int k) {
+
+    vector<int> stk;
+    for(int i = 0; i < nums.size(); i++) {
+
+        while (!stk.empty()          &&
+             stk.back() > nums[i] &&
+            (stk.size() + nums.size() - (i + 1)) >= k )
+            stk.pop_back();
+
+        if(stk.size() < k)
+            stk.push_back(nums[i]);
+
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to determine the most competitive subsequence of a given length \( k \) from an array of integers \( nums \). A subsequence is considered more competitive if it appears in the order of elements in the original array while being lexicographically smaller than any other subsequence of the same length. The goal is to return a subsequence of size \( k \) that meets these criteria.
-
-### Approach
-
-To solve this problem efficiently, we can use a greedy algorithm with a stack to maintain the most competitive subsequence. The core idea is to iteratively add elements from the array \( nums \) to the stack while ensuring that we maintain the required length \( k \) and the lexicographical order. Here’s a step-by-step outline of the approach:
-
-1. **Stack Usage**: We use a stack (`stk`) to build our subsequence. The stack helps us maintain the order and allow easy removal of elements that would lead to a less competitive subsequence.
-  
-2. **Iterate through `nums`**: We go through each element of the `nums` array, deciding whether to include it in the stack or to discard some elements already in the stack.
-
-3. **Pop Conditions**:
-   - We will pop elements from the stack while the current element (`nums[i]`) is smaller than the top of the stack (`stk.back()`). This ensures we keep smaller elements at the top.
-   - We also need to ensure that after popping, we can still achieve a subsequence of length \( k \) with the remaining elements. This is checked using the condition:
-     \[
-     \text{(size of stk)} + \text{(remaining elements in nums)} - \text{(current index + 1)} \geq k
-     \]
-   This condition ensures that even after popping elements, we have enough remaining elements to fill up to \( k \).
-
-4. **Push Current Element**: If the size of the stack is less than \( k \), we push the current element onto the stack.
-
-5. **Return the Stack**: Finally, we return the stack as the most competitive subsequence of length \( k \).
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<int> mostCompetitive(vector<int>& nums, int k) {
+    
+    return stk;
+    
+}
 ```
-- **Class and Method Definition**: We define a class `Solution` and declare the public method `mostCompetitive`, which takes a vector of integers `nums` and an integer `k`.
 
-```cpp
-        vector<int> stk;
-```
-- **Stack Initialization**: We initialize a vector `stk` to use as our stack for building the subsequence.
+This is the complete code for solving the problem of finding the most competitive subsequence of length 'k' from the given list of integers 'nums'. The code uses a stack-based approach to maintain the most competitive elements in the subsequence.
 
-```cpp
-        for(int i = 0; i < nums.size(); i++) {
-```
-- **Iterate Through `nums`**: We start a loop to iterate through each element in `nums`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<int> mostCompetitive(vector<int>& nums, int k) {
+	```
+	Define the function mostCompetitive that takes a reference to a vector of integers 'nums' and an integer 'k' as input. The function will return a vector of integers representing the most competitive subsequence.
 
-```cpp
-            while (!stk.empty() &&
-                 stk.back() > nums[i] &&
-                (stk.size() + nums.size() - (i + 1)) >= k )
-                stk.pop_back();
-```
-- **Pop Condition**: This while loop checks if the top element of the stack is greater than the current element (`nums[i]`). If it is, we pop the stack while also ensuring we can still form a valid subsequence of length \( k \).
+2. **Stack Initialization**
+	```cpp
+	    vector<int> stk;
+	```
+	Initialize an empty vector 'stk' that will be used as a stack to store elements from 'nums' in the most competitive order.
 
-```cpp
-            if(stk.size() < k)
-                stk.push_back(nums[i]);
-```
-- **Push Condition**: If the size of the stack is less than \( k \), we push the current number onto the stack.
+3. **Looping Through Elements**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Start a loop to iterate through each element in the 'nums' array.
 
-```cpp
-        return stk;
-```
-- **Return the Result**: Finally, we return the stack containing the most competitive subsequence.
+4. **Stack Operations**
+	```cpp
+	        while (!stk.empty() && stk.back() > nums[i] && (stk.size() + nums.size() - (i + 1)) >= k )
+	```
+	Inside the loop, use a while loop to check if the stack is not empty, the top element of the stack is greater than the current element, and there are enough remaining elements to form a valid subsequence of length 'k'.
 
-### Complexity
+5. **Pop Operation**
+	```cpp
+	            stk.pop_back();
+	```
+	If the above conditions are true, pop the top element from the stack to make room for potentially smaller and more competitive elements.
 
-- **Time Complexity**: The time complexity of this algorithm is \( O(n) \), where \( n \) is the number of elements in `nums`. Each element is pushed and popped from the stack at most once.
+6. **Conditional Insertion**
+	```cpp
+	        if(stk.size() < k)
+	```
+	Check if the current size of the stack is less than 'k', meaning there is space to add more elements.
 
-- **Space Complexity**: The space complexity is \( O(k) \) for the stack, which holds the result of length \( k \).
+7. **Push Operation**
+	```cpp
+	            stk.push_back(nums[i]);
+	```
+	If there is space in the stack (i.e., the stack's size is less than 'k'), push the current element onto the stack.
 
-### Conclusion
+8. **Return Statement**
+	```cpp
+	    return stk;
+	```
+	After the loop finishes, return the stack, which now contains the most competitive subsequence of length 'k'.
 
-The provided solution efficiently finds the most competitive subsequence of length \( k \) from the given array using a greedy approach with a stack. This algorithm ensures that we maintain the desired order and competitiveness of the subsequence through careful element management.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-**Key Insights**:
-1. **Greedy Approach**: The greedy nature of the algorithm allows for quick decisions on which elements to keep in the stack.
-2. **Stack Utilization**: The stack not only helps manage the current subsequence but also simplifies the logic of maintaining the lexicographical order.
-3. **Efficiency**: The algorithm's linear time complexity makes it suitable for large inputs, ensuring performance is not compromised.
+We iterate through the list once, and each element is pushed and popped from the stack at most once.
 
-Overall, this solution is a good example of applying a stack data structure to maintain order and achieve optimal results in competitive subsequence problems. The clarity and conciseness of the implementation contribute to its effectiveness.
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is proportional to the size of the subsequence `k`.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-most-competitive-subsequence/description/)
 

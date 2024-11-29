@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "4QAGxDIVpdM"
 youtube_upload_date="2020-07-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/4QAGxDIVpdM/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,140 +28,168 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/4QAGxDIVpdM/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a positive integer n. Your task is to find the nth digit in an infinite sequence of consecutive integers starting from 1. The sequence starts as [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...].
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You will be given an integer n, where 1 <= n <= 2^31 - 1.
+- **Example:** `For n = 12, the sequence up to the 12th digit is: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], and the 12th digit is 1.`
+- **Constraints:**
+	- 1 <= n <= 2^31 - 1
 
-{{< highlight cpp >}}
-typedef long long int lli;
-class Solution {
-public:
-    int findNthDigit(int n) {
-        lli len = 1;
-        lli cnt = 9;
-        lli start = 1;
-        while(n > len * cnt) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the nth digit in the infinite sequence of consecutive integers.
+- **Example:** `For n = 5, the output should be 5.`
+- **Constraints:**
 
-            n -= len * cnt;
-            
-            len++;
-            cnt *= 10;
-            start *= 10;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the nth digit in the infinite sequence efficiently.
 
-        }
-        start += (n - 1) / len;
-        string s = to_string(start);     
-        return s[(n - 1) % len] - '0';
-    }
-};
-{{< /highlight >}}
----
+- 1. Determine the length of the digits for the current number range.
+- 2. Identify the range where the nth digit falls.
+- 3. Calculate the specific number and digit within that range.
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of n is always valid and within the given constraints.
+- The sequence of integers is unbounded.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For n = 12, the sequence is [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]. The 12th digit is part of the number 12, which is 1.`  \
+  **Explanation:** By breaking the sequence into ranges based on the number of digits, we can pinpoint that the 12th digit lies in the 10-99 range.
 
-### 🚀 Problem Statement
+{{< dots >}}
+## Approach 🚀
+The approach is to break down the sequence into chunks of numbers with the same number of digits and locate the range containing the nth digit.
 
-Given a positive integer `n`, you are tasked with finding the nth digit in the sequence of positive integers. The sequence starts from `1` and goes on indefinitely, like `123456789101112...`. For example, if `n = 11`, the sequence looks like `123456789101112...`, and the 11th digit is `0`. The challenge is to determine the nth digit efficiently without explicitly constructing the entire sequence. 
-
----
-
-### 🧠 Approach
-
-This problem can be solved without constructing the full sequence by leveraging the following insights:
-
-#### Key Observations:
-
-1. **Increasing Number Lengths**: 
-   - The numbers in the sequence consist of different lengths:
-     - 1-digit numbers: `1 to 9` (9 numbers)
-     - 2-digit numbers: `10 to 99` (90 numbers)
-     - 3-digit numbers: `100 to 999` (900 numbers)
-     - And so on.
-   - Each group of numbers contributes a specific number of digits:
-     - `1-digit numbers` contribute `9` digits (`1-9`).
-     - `2-digit numbers` contribute `90 * 2 = 180` digits (`10-99`).
-     - `3-digit numbers` contribute `900 * 3 = 2700` digits (`100-999`).
-
-2. **Breaking Down the Problem**: 
-   - We need to identify which group of numbers contains the nth digit. 
-   - Once we identify the group, we can calculate the exact number and the specific digit within that number.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's walk through the solution step by step:
-
+### Initial Thoughts 💭
+- The sequence starts with single-digit numbers, then transitions to two-digit numbers, and so on.
+- Each range of numbers contributes a different number of digits.
+- We need to calculate which range the nth digit lies in and then pinpoint the exact number and digit.
+{{< dots >}}
+### Edge Cases 🌐
+{{< dots >}}
+## Code 💻
 ```cpp
-typedef long long int lli;
-class Solution {
-public:
-    int findNthDigit(int n) {
-        lli len = 1;  // Start with 1-digit numbers
-        lli cnt = 9;  // 9 numbers (1 to 9)
-        lli start = 1;  // Start from the number 1
+int findNthDigit(int n) {
+    lli len = 1;
+    lli cnt = 9;
+    lli start = 1;
+    while(n > len * cnt) {
+
+        n -= len * cnt;
         
-        // Step 1: Find the range that contains the nth digit
-        while (n > len * cnt) {
-            n -= len * cnt;  // Reduce n by the number of digits in the current range
-            len++;  // Move to the next length of numbers (2-digit, 3-digit, etc.)
-            cnt *= 10;  // Increase the count of numbers in the current range (10, 100, 1000, etc.)
-            start *= 10;  // Adjust the start number (10, 100, 1000, etc.)
-        }
-        
-        // Step 2: Find the number that contains the nth digit
-        start += (n - 1) / len;  // Determine the exact number by calculating the position
-        string s = to_string(start);  // Convert the number to a string to access digits
-        return s[(n - 1) % len] - '0';  // Return the nth digit (converted to an integer)
+        len++;
+        cnt *= 10;
+        start *= 10;
+
     }
-};
+    start += (n - 1) / len;
+    string s = to_string(start);     
+    return s[(n - 1) % len] - '0';
+}
 ```
 
-#### Code Explanation:
+This function calculates the nth digit of a number in a sequence formed by concatenating integers starting from 1. It iteratively reduces the value of n by the length and count of the current digit group (1-digit, 2-digit, etc.) until it finds the target digit.
 
-1. **Initialization**:
-   - We start with `len = 1` (representing 1-digit numbers), `cnt = 9` (the count of 1-digit numbers), and `start = 1` (the first 1-digit number).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findNthDigit(int n) {
+	```
+	Define the function `findNthDigit` that takes an integer `n` as input, which represents the position of the digit to find.
 
-2. **Identifying the Range**:
-   - The `while` loop subtracts the total number of digits in each range from `n` until we find the correct range that contains the nth digit.
-   - For each range, we update `len`, `cnt`, and `start` to reflect the next group of numbers (2-digit, 3-digit, etc.).
+2. **Variable Initialization**
+	```cpp
+	    lli len = 1;
+	```
+	Initialize `len` to 1, which represents the number of digits in the current group (starting with 1-digit numbers).
 
-3. **Finding the Exact Number**:
-   - Once the correct range is found, we calculate the exact number that contains the nth digit by adjusting `start` and adding `(n - 1) / len`.
+3. **Variable Initialization**
+	```cpp
+	    lli cnt = 9;
+	```
+	Initialize `cnt` to 9, representing the number of 1-digit numbers (1 to 9).
 
-4. **Extracting the Digit**:
-   - We convert the number to a string and return the `(n-1) % len`th digit from it (since string indexing is 0-based).
+4. **Variable Initialization**
+	```cpp
+	    lli start = 1;
+	```
+	Initialize `start` to 1, representing the first number in the current digit group (starting with 1).
 
----
+5. **While Loop**
+	```cpp
+	    while(n > len * cnt) {
+	```
+	Enter a while loop that continues until `n` is less than or equal to the total number of digits in the current group.
 
-### 📈 Complexity Analysis
+6. **While Loop End**
+	```cpp
+	
+	```
+	End of the while loop that processes the current group of numbers based on their digit length.
 
-#### Time Complexity:
-1. **Finding the Range**: The `while` loop runs as long as `n` is greater than the total number of digits in the current range. Each iteration reduces `n` by a factor of 10, making the number of iterations proportional to `log n`. Therefore, the time complexity of this part is `O(log n)`.
-   
-2. **Finding the nth Digit**: Once we find the range, extracting the digit is a constant time operation. So, this part has a time complexity of `O(1)`.
+7. **Update n**
+	```cpp
+	        n -= len * cnt;
+	```
+	Subtract the total number of digits in the current group from `n` to shift to the next group of numbers.
 
-Overall, the time complexity of the solution is **O(log n)**.
+8. **Increment Length**
+	```cpp
+	        len++;
+	```
+	Increase the digit length `len` to move to the next group of numbers (e.g., from 1-digit to 2-digit numbers).
 
-#### Space Complexity:
-- The space complexity is dominated by the need to store the number as a string in the worst case. The maximum number of digits needed is proportional to `log n`. Therefore, the space complexity is **O(log n)**.
+9. **Update Count**
+	```cpp
+	        cnt *= 10;
+	```
+	Multiply `cnt` by 10 to account for the next group of numbers (e.g., from 9 one-digit numbers to 90 two-digit numbers).
 
----
+10. **Update Start**
+	```cpp
+	        start *= 10;
+	```
+	Multiply `start` by 10 to move to the first number of the next group (e.g., from 1 to 10).
 
-### 🏁 Conclusion
+11. **Find Target Digit**
+	```cpp
+	    start += (n - 1) / len;
+	```
+	Calculate the starting number in the group that contains the target digit.
 
-This approach efficiently finds the nth digit in the infinitely growing sequence of positive integers by:
-- Identifying which range (1-digit, 2-digit, etc.) the nth digit lies in.
-- Reducing the problem size step by step until we narrow down the exact number.
-- Extracting the nth digit without generating the entire sequence.
+12. **Convert to String**
+	```cpp
+	    string s = to_string(start);     
+	```
+	Convert the calculated starting number `start` to a string for easy indexing.
 
-With a time complexity of **O(log n)** and space complexity of **O(log n)**, this solution is highly efficient and scales well for large values of `n`. So, no matter how large `n` gets, this method ensures that we can find the answer quickly!
+13. **Return Result**
+	```cpp
+	    return s[(n - 1) % len] - '0';
+	```
+	Return the digit at the target position by converting it from a character to an integer.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-### ✨ Quick Recap
+The time complexity is logarithmic in terms of n, as we reduce the number of possible ranges by orders of magnitude with each iteration.
 
-- **Problem**: Find the nth digit in a sequence of positive integers.
-- **Solution**: Identify which group of numbers (1-digit, 2-digit, etc.) contains the nth digit and calculate the exact digit.
-- **Efficiency**: This solution works in **O(log n)** time and **O(log n)** space, making it optimal for large values of `n`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-Keep practicing and mastering these types of problems – you're on your way to becoming a problem-solving pro! 😊💪
+The space complexity is constant, as the solution only requires a fixed amount of space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/nth-digit/description/)
 

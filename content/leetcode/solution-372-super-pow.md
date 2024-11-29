@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,134 +28,174 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer `a` and an array `b`, where `b` represents a very large number, compute ( a^b % 1337 ). The array `b` stores the digits of `b` from most significant to least significant. You must handle extremely large values of `b` efficiently.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `a` and an array `b`, where `b[i]` is a digit of the large number `b`.
+- **Example:** `Input: a = 3, b = [2]`
+- **Constraints:**
+	- 1 <= a <= 231 - 1
+	- 1 <= b.length <= 2000
+	- 0 <= b[i] <= 9
+	- b does not contain leading zeros.
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the value of ( a^b % 1337 ).
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The result should be computed modulo 1337.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute ( a^b % 1337 ) efficiently, even for extremely large values of `b`.
+
+- 1. Reduce `a` modulo 1337 to prevent overflow.
+- 2. Use recursion to handle the large exponent, breaking the problem into smaller parts.
+- 3. Use the principle of modular arithmetic to compute the result using smaller powers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The integer `a` is a positive integer.
+- The array `b` represents a valid large integer without leading zeros.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: a = 3, b = [2]
+Output: 9`  \
+  **Explanation:** The result is ( 3^2 % 1337 = 9 ), which is the expected output.
+
+- **Input:** `Input: a = 5, b = [1, 2]
+Output: 25`  \
+  **Explanation:** The result is ( 5^{12} % 1337 = 25 ), which is computed using the recursive approach.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses recursion to break down the large exponent `b` and calculates the result using modular arithmetic.
+
+### Initial Thoughts 💭
+- Direct computation of large exponents is inefficient.
+- Recursive solutions and modular arithmetic can break down the problem.
+- By recursively calculating smaller powers, we can avoid overflow and handle the large size of `b`.
+{{< dots >}}
+### Edge Cases 🌐
+- The array `b` will always have at least one digit.
+- The array `b` can be up to 2000 digits long, so efficient handling of large numbers is necessary.
+- If `a = 1`, the result is always 1, regardless of `b`.
+- Ensure the solution handles the maximum and minimum values for `a` and handles large `b` values.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    int base = 1337;
-    int powmod(int a, int k) {
-        a %= base;
-        int res = 1;
-        for(int i = 0; i < k; i++)
-        res = (res * a) % base;
-        return res;
-    }
-public:
-    int superPow(int a, vector<int>& b) {
-        if(b.empty()) return 1;
-        int last_digit = b.back();
-        b.pop_back();
-        return powmod(superPow(a, b), 10) * powmod(a, last_digit) % base;
-    }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-The goal here is to calculate `a^b % 1337`, where `a` is an integer and `b` is an array of digits that represent a very large exponent. The challenge is to efficiently compute this modular exponentiation, especially since `b` can have a large number of digits. We're tasked with calculating this without directly manipulating the large number `b`, and to do this, we’ll leverage some clever mathematical techniques!
-
----
-
-### 🧠 Approach
-
-To solve this problem efficiently, we’ll break it down into a series of steps that involve **modular arithmetic** and **recursive power reduction**. Here are the key ideas:
-
-1. **Modular Arithmetic**: By taking advantage of the modulus (`1337`), we can simplify each step of the calculation, ensuring we never have to deal with numbers too large to handle. At each recursive step, we compute the modular exponentiation, which avoids overflow and helps us manage big numbers.
-
-2. **Recursive Decomposition**: Since `b` is an array of digits, we don’t need to calculate the entire exponent `a^b` directly. Instead, we recursively reduce `b` by removing one digit at a time, breaking the problem into smaller subproblems that are easier to solve.
-
-3. **Efficient Modular Exponentiation**: Using **exponentiation by squaring**, we can compute `a^k % base` efficiently, which significantly reduces the number of operations required.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Now, let’s dive into the code and break it down step by step!
-
-#### 1. `powmod` Function (Efficient Modular Exponentiation)
-
-The `powmod` function computes `a^k % base` efficiently. Here’s how it works:
-
-```cpp
+int base = 1337;
 int powmod(int a, int k) {
-    a %= base;  // Reduce 'a' modulo base to avoid large numbers
-    int res = 1;  // Start with result = 1 (multiplicative identity)
-    for (int i = 0; i < k; i++) {  // Loop 'k' times
-        res = (res * a) % base;  // Multiply and take modulo
-    }
-    return res;  // Return the result
+    a %= base;
+    int res = 1;
+    for(int i = 0; i < k; i++)
+    res = (res * a) % base;
+    return res;
 }
-```
-
-- **Line 1**: We reduce `a` modulo `base` to avoid handling large numbers.
-- **Line 2**: We start with `res = 1`, which is the identity for multiplication.
-- **Lines 3-4**: We loop `k` times, multiplying the result by `a` and taking modulo `base`.
-- **Line 5**: Finally, we return the result, which is `a^k % base`.
-
-This function is crucial for efficiently calculating powers modulo `1337`!
-
-#### 2. `superPow` Function (Recursive Decomposition)
-
-The `superPow` function breaks down the problem of computing `a^b % 1337` (where `b` is an array of digits) using recursion:
-
-```cpp
+public:
 int superPow(int a, vector<int>& b) {
-    if(b.empty()) return 1;  // Base case: if 'b' is empty, return 1
-    int last_digit = b.back();  // Get the last digit of 'b'
-    b.pop_back();  // Remove the last digit from 'b'
-    
-    // Recursively calculate the result and reduce the problem
+    if(b.empty()) return 1;
+    int last_digit = b.back();
+    b.pop_back();
     return powmod(superPow(a, b), 10) * powmod(a, last_digit) % base;
 }
 ```
 
-- **Line 1**: If `b` is empty, we return `1` because any number raised to the power of `0` is `1`.
-- **Line 2**: Extract the last digit of `b` (this is the least significant digit of the exponent).
-- **Line 3**: Remove the last digit from `b`, reducing the problem size for the next recursive step.
-- **Line 4**: We recursively calculate `superPow(a, b)`, then raise it to the power of 10 using `powmod`. This is crucial for breaking down large powers efficiently.
-- **Line 5**: We also compute `powmod(a, last_digit)` to handle the effect of the current digit on the exponent. We multiply the results and take modulo `base`.
+This solution defines a class `Solution` with a method `superPow`, which calculates the value of a raised to the power of a number represented by a list of digits `b` modulo 1337. The helper function `powmod` computes a^k % base using an iterative approach to efficiently calculate powers.
 
-This recursive approach reduces the problem step by step, making it manageable and efficient!
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int base = 1337;
+	```
+	The `base` variable is initialized to 1337. This is the modulus used in the calculation to keep the result within manageable limits.
 
-#### 3. Base Variable
+2. **Method Declaration**
+	```cpp
+	int powmod(int a, int k) {
+	```
+	This line declares the helper method `powmod`, which calculates `a^k % base`. It takes two arguments: `a`, the base, and `k`, the exponent.
 
-```cpp
-int base = 1337;
-```
+3. **Modulo Operation**
+	```cpp
+	    a %= base;
+	```
+	This line reduces `a` modulo `base`, ensuring that the base remains within the modulus before performing exponentiation.
 
-The modulus `1337` is predefined in the problem, and we use it to ensure the result stays within bounds while preventing overflow.
+4. **Variable Initialization**
+	```cpp
+	    int res = 1;
+	```
+	The variable `res` is initialized to 1, which will hold the result of the power calculation.
 
----
+5. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < k; i++)
+	```
+	This loop runs `k` times, each time multiplying `res` by `a` and reducing it modulo `base`.
 
-### 📈 Time and Space Complexity
+6. **Multiplication**
+	```cpp
+	    res = (res * a) % base;
+	```
+	In each iteration of the loop, `res` is updated to be the result of `res * a % base`, effectively calculating `a^k % base`.
 
-#### Time Complexity
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The final result of the modular exponentiation is returned as the output of the `powmod` method.
 
-The `superPow` function is called recursively for each digit of `b`. If `n` is the number of digits in `b`, the recursion depth is `O(n)`. For each recursive call, we perform two `powmod` calls, each with an exponent of at most `10`. The time complexity for `powmod` is constant (`O(1)`), so the overall time complexity is **O(n)**, where `n` is the number of digits in `b`.
+8. **Method Declaration**
+	```cpp
+	int superPow(int a, vector<int>& b) {
+	```
+	The method `superPow` is declared. This method calculates `a` raised to the power represented by the list of digits `b`.
 
-#### Space Complexity
+9. **Base Case**
+	```cpp
+	    if(b.empty()) return 1;
+	```
+	If the vector `b` is empty, the result is `1`, as any number raised to the power of zero is 1.
 
-The space complexity is **O(n)**, where `n` is the number of digits in `b`, because the recursion depth grows with the number of digits.
+10. **Pop Last Digit**
+	```cpp
+	    int last_digit = b.back();
+	```
+	The last digit of the vector `b` is retrieved and stored in `last_digit`, representing the current power to apply.
 
----
+11. **Pop Last Digit**
+	```cpp
+	    b.pop_back();
+	```
+	The last digit is removed from the vector `b` to reduce the problem size for the recursive call.
 
-### 🏁 Conclusion
+12. **Recursive Call**
+	```cpp
+	    return powmod(superPow(a, b), 10) * powmod(a, last_digit) % base;
+	```
+	The method uses recursion to calculate the result. It calls `superPow` recursively to calculate the power of `a` raised to the value represented by `b`. It then combines the result with the power of `a` raised to `last_digit`, applying the modulus operation at each step.
 
-In this problem, we tackled the challenge of computing `a^b % 1337`, where `b` is represented as an array of digits. By using modular exponentiation and recursive decomposition, we efficiently computed the result without dealing directly with the large exponent. The approach is both time and space efficient, with a linear complexity relative to the number of digits in `b`. 
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(b.length)) where `b.length` is the number of digits in `b`.
+- **Average Case:** O(log(b.length)) due to the recursive approach.
+- **Worst Case:** O(log(b.length)) as the recursion depth is determined by the length of `b`.
 
-This technique is perfect for handling large numbers and ensures that we can work with numbers that are too large to handle traditionally. Keep practicing, and you’ll soon master these advanced mathematical concepts!
+The time complexity is logarithmic in relation to the length of `b`, as the problem is divided in each recursive step.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1) if the recursion depth is minimal.
+- **Worst Case:** O(log(b.length)) due to the recursion stack.
 
-### 🌟 Quick Summary
+The space complexity is proportional to the recursion depth, which is logarithmic in relation to the number of digits in `b`.
 
-- We used **modular exponentiation** to compute `a^b % 1337` efficiently.
-- We broke the problem down recursively by removing one digit from `b` at a time.
-- **Time Complexity**: **O(n)** (where `n` is the number of digits in `b`).
-- **Space Complexity**: **O(n)** due to recursion depth.
-  
-Now you’re ready to solve similar problems and tackle even bigger challenges! 🚀
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/super-pow/description/)
 

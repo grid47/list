@@ -14,105 +14,139 @@ img_src = ""
 youtube = "f37BCBHGFGA"
 youtube_upload_date="2020-07-07"
 youtube_thumbnail="https://i.ytimg.com/vi/f37BCBHGFGA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary tree. Your task is to find the maximum absolute difference between the values of two nodes, where one node is an ancestor of the other. Specifically, you need to find the largest value of |a.val - b.val|, where node a is an ancestor of node b.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary tree, where each node contains a value representing an integer.
+- **Example:** `root = [5, 3, 8, 1, 4, null, 9]`
+- **Constraints:**
+	- 2 <= number of nodes <= 5000
+	- 0 <= Node.val <= 105
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int maxAncestorDiff(TreeNode* root) {
-        return helper(root, root->val, root->val);
-    }
-    int helper(TreeNode* node, int mx, int mn) {
-        if(!node) return mx - mn;
-        mx = max(mx, node->val);
-        mn = min(mn, node->val);
-        
-        return max(helper(node->left, mx, mn), helper(node->right, mx, mn));
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the maximum absolute difference between the values of two nodes, where one is an ancestor of the other.
+- **Example:** `Output: 8`
+- **Constraints:**
+	- The absolute difference is calculated between two nodes, where one node is an ancestor of the other.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum difference between values of two nodes in a binary tree where one is an ancestor of the other. This can be done by recursively traversing the tree and tracking the minimum and maximum values encountered along the path.
 
+- 1. Start by recursively visiting each node of the tree.
+- 2. Track the minimum and maximum values encountered on the path from the root to the current node.
+- 3. Calculate the difference between the current node's value and the tracked minimum and maximum values.
+- 4. Return the maximum difference found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a valid binary tree with at least two nodes.
+- Each node has a value between 0 and 105.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [5, 3, 8, 1, 4, null, 9]`  \
+  **Explanation:** In this example, the maximum difference occurs between nodes 5 and 1, yielding a difference of 8. Hence, the output is 8.
 
-### Problem Statement
-The task is to find the maximum difference between the values of any ancestor node and any descendant node in a binary tree. An ancestor of a node is any predecessor node on the path from the root to that node, while a descendant is any node that is reachable from that node. For example, in the following tree:
+- **Input:** `Input: root = [10, 5, 15, 3, 7, null, 20]`  \
+  **Explanation:** In this case, the maximum difference is between nodes 10 and 3, yielding a difference of 7. Thus, the output is 7.
 
+{{< dots >}}
+## Approach 🚀
+The approach uses a depth-first search (DFS) strategy to traverse the tree while keeping track of the maximum and minimum values encountered along the path from the root to each node.
+
+### Initial Thoughts 💭
+- The problem involves traversing a binary tree and calculating the maximum and minimum differences for every path.
+- A depth-first search approach is appropriate because it allows us to visit all nodes while keeping track of necessary values (min and max).
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree has fewer than two nodes, return 0 (this case is assumed to be invalid per problem constraints).
+- The algorithm should efficiently handle trees with up to 5000 nodes.
+- Ensure that the solution handles cases where all node values are the same (resulting in a difference of 0).
+- The tree must be valid, and each node must have a value between 0 and 105.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxAncestorDiff(TreeNode* root) {
+    return helper(root, root->val, root->val);
+}
+int helper(TreeNode* node, int mx, int mn) {
+    if(!node) return mx - mn;
+    mx = max(mx, node->val);
+    mn = min(mn, node->val);
+    
+    return max(helper(node->left, mx, mn), helper(node->right, mx, mn));
+}
 ```
-       8
-      / \
-     3   10
-    / \
-   1   6
-      / \
-     4   7
-```
 
-The maximum ancestor-descendant difference is between the node `8` (ancestor) and `1` (descendant), resulting in a difference of `7`.
+This function calculates the maximum difference between the values of any ancestor node and descendant node in a binary tree. It uses a helper function to traverse the tree while keeping track of the maximum and minimum values along the path.
 
-### Approach
-To solve the problem of finding the maximum ancestor-descendant difference:
-1. **Recursive Traversal**: The solution employs a recursive depth-first search (DFS) to traverse the tree. During traversal, it keeps track of the maximum and minimum values encountered along the path from the root to the current node.
-2. **Base Case**: When a leaf node (or a null node) is reached, the difference between the maximum and minimum values encountered along the path is calculated and returned.
-3. **Maximizing the Difference**: At each node, the algorithm compares the current node's value against the current maximum and minimum values and updates them accordingly. The maximum difference from the left and right subtrees is then compared to find the overall maximum difference.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxAncestorDiff(TreeNode* root) {
+	```
+	Define the function `maxAncestorDiff` which takes the root of the tree and calculates the maximum ancestor-descendant difference.
 
-### Code Breakdown (Step by Step)
+2. **Function Call**
+	```cpp
+	    return helper(root, root->val, root->val);
+	```
+	Call the helper function with the root node and initialize both the maximum (`mx`) and minimum (`mn`) values to the root's value.
 
-1. **Function Declaration**:
-   - The `maxAncestorDiff` function is defined in the `Solution` class. It takes a pointer to the root node of the binary tree (`TreeNode* root`) as its parameter.
+3. **Helper Function Definition**
+	```cpp
+	int helper(TreeNode* node, int mx, int mn) {
+	```
+	Define the helper function which recursively traverses the tree, updating the maximum and minimum values and computing the maximum difference.
 
-2. **Initial Call to Helper Function**:
-   - The function invokes a helper function named `helper`, passing the root node and initializing both the maximum and minimum values to the value of the root node.
+4. **Base Case**
+	```cpp
+	    if(!node) return mx - mn;
+	```
+	If the current node is null, return the difference between the maximum and minimum values encountered so far.
 
-3. **Helper Function Definition**:
-   - The `helper` function is a recursive function that takes three parameters:
-     - `node`: the current node being visited.
-     - `mx`: the maximum value encountered so far along the path from the root to the current node.
-     - `mn`: the minimum value encountered so far along the same path.
+5. **Update Maximum**
+	```cpp
+	    mx = max(mx, node->val);
+	```
+	Update the maximum value (`mx`) with the current node's value if it is larger.
 
-4. **Base Case**:
-   - The first line inside the `helper` function checks if the `node` is `nullptr`. If it is, it indicates that a leaf node has been reached, and the function returns the difference between the maximum and minimum values encountered on that path (`mx - mn`).
+6. **Update Minimum**
+	```cpp
+	    mn = min(mn, node->val);
+	```
+	Update the minimum value (`mn`) with the current node's value if it is smaller.
 
-5. **Updating Maximum and Minimum**:
-   - The next two lines update the `mx` and `mn` values:
-     - `mx` is updated to the maximum of its current value and the value of the current node (`node->val`).
-     - `mn` is updated to the minimum of its current value and the value of the current node.
+7. **Recursive Traversal**
+	```cpp
+	    return max(helper(node->left, mx, mn), helper(node->right, mx, mn));
+	```
+	Recursively calculate the maximum difference for the left and right subtrees, and return the maximum of the two results.
 
-6. **Recursive Calls**:
-   - The function then recursively calls itself for the left and right child nodes of the current node:
-     - `helper(node->left, mx, mn)` to process the left subtree.
-     - `helper(node->right, mx, mn)` to process the right subtree.
-   - It returns the maximum value obtained from both subtrees using `max(...)`, thus capturing the maximum ancestor-descendant difference found at any point in the tree.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-7. **Final Return**:
-   - The `maxAncestorDiff` function ultimately returns the result from the `helper` function, which contains the maximum ancestor-descendant difference across the entire binary tree.
+The time complexity is O(n), where n is the number of nodes in the tree, since we visit each node once during the DFS traversal.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of the solution is \(O(n)\), where \(n\) is the number of nodes in the binary tree. This is because each node is visited exactly once during the traversal.
-- **Space Complexity**: The space complexity is \(O(h)\), where \(h\) is the height of the tree. This space is used by the recursion stack during the depth-first search traversal. In the worst case (for a skewed tree), this can become \(O(n)\), but for balanced trees, it will be \(O(\log n)\).
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
 
-### Conclusion
-The `maxAncestorDiff` function effectively computes the maximum difference between an ancestor and a descendant in a binary tree using a recursive approach. By maintaining the maximum and minimum values encountered along each path from the root to the leaves, it ensures that the solution is both efficient and straightforward.
+The space complexity is O(h), where h is the height of the tree, due to the space used by the recursion stack. In the worst case (unbalanced tree), h can be O(n).
 
-This solution is useful in various scenarios where binary tree structures are involved, such as in data organization, hierarchical data representation, and computational biology where tree-like structures often appear. The approach exemplifies the power of recursion and depth-first traversal in tree-based problems, making it a valuable addition to any algorithm enthusiast's toolkit.
-
-In summary, this implementation demonstrates how to leverage recursion for problem-solving in binary trees, showcasing an efficient method to calculate differences based on hierarchical relationships within the data structure. The focus on clarity and structured problem-solving is key in algorithm design, making this solution a robust reference for similar challenges in coding interviews and competitive programming.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/description/)

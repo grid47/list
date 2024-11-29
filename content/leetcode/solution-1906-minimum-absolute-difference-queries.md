@@ -14,164 +14,221 @@ img_src = ""
 youtube = "H_Nrt9dOwLM"
 youtube_upload_date="2021-06-20"
 youtube_thumbnail="https://i.ytimg.com/vi/H_Nrt9dOwLM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers `nums` and a list of queries, where each query is defined as a subarray `nums[li...ri]`, compute the minimum absolute difference between any two distinct elements in that subarray. If all elements in the subarray are the same, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array `nums` of integers and an array of queries where each query is represented as a pair of integers `[li, ri]`.
+- **Example:** `nums = [1, 3, 4, 8], queries = [[0,1], [1,2], [2,3], [0,3]]`
+- **Constraints:**
+	- 2 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 100
+	- 1 <= queries.length <= 2 * 10^4
+	- 0 <= li < ri < nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> minDifference(vector<int>& nums, vector<vector<int>>& q) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of integers where each element corresponds to the minimum absolute difference for the respective query.
+- **Example:** `[2, 1, 4, 1]`
+- **Constraints:**
+	- Each element of the output should be the minimum absolute difference for the respective subarray from the queries list.
 
-        int prefix[100001][101] = {}, cnt[101] = {};
-        
-        int n = nums.size(), m = q.size();
-        
-        for(int i = 0; i < n; i++) {
-            cnt[nums[i]]++;
-            for(int j = 1; j < 101; j++) prefix[i + 1][j] = cnt[j];
-        }
-        vector<int> ans;
-        for(int i = 0; i < m; i++) {
-            int l = q[i][0], r = q[i][1];
-            int frq[101] = {};
-            for(int j = 1; j < 101; j++) frq[j] = prefix[r + 1][j] - prefix[l][j];
-            int prv = -1, mn = INT_MAX;
-            for(int j = 1; j < 101; j++) {
-                if(frq[j] == 0) continue;
-                if(prv != -1 && j - prv < mn) mn = j - prv;
-                prv = j;
-            }
-            ans.push_back(mn == INT_MAX? -1: mn);
-        }
-        
-        return ans;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** For each query, extract the subarray and compute the minimum absolute difference by comparing all unique pairs of elements.
+
+- For each query, slice the array from index li to ri.
+- Find the minimum absolute difference between distinct elements in that subarray.
+- If all elements are the same, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- All numbers in `nums` are positive integers.
+- The query indices are valid within the bounds of the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 4, 8], queries = [[0,1], [1,2], [2,3], [0,3]]`  \
+  **Explanation:** The subarrays for each query are processed to calculate the minimum absolute difference for distinct elements.
+
+{{< dots >}}
+## Approach 🚀
+We can efficiently calculate the minimum absolute difference for each query by leveraging the frequency of each element within the subarrays.
+
+### Initial Thoughts 💭
+- Iterating through each query and calculating the minimum difference might take time for large arrays.
+- We need a strategy to process the queries efficiently.
+- Precomputing frequency counts of numbers within subarrays can help optimize the solution.
+{{< dots >}}
+### Edge Cases 🌐
+- Queries with no valid subarrays or an empty array.
+- Handling cases with the maximum array size and query count.
+- When all elements in a subarray are the same, the answer should be -1.
+- Ensure the solution runs efficiently with the upper limits of constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> minDifference(vector<int>& nums, vector<vector<int>>& q) {
+
+    int prefix[100001][101] = {}, cnt[101] = {};
+    
+    int n = nums.size(), m = q.size();
+    
+    for(int i = 0; i < n; i++) {
+        cnt[nums[i]]++;
+        for(int j = 1; j < 101; j++) prefix[i + 1][j] = cnt[j];
     }
-};
-{{< /highlight >}}
----
+    vector<int> ans;
+    for(int i = 0; i < m; i++) {
+        int l = q[i][0], r = q[i][1];
+        int frq[101] = {};
+        for(int j = 1; j < 101; j++) frq[j] = prefix[r + 1][j] - prefix[l][j];
+        int prv = -1, mn = INT_MAX;
+        for(int j = 1; j < 101; j++) {
+            if(frq[j] == 0) continue;
+            if(prv != -1 && j - prv < mn) mn = j - prv;
+            prv = j;
+        }
+        ans.push_back(mn == INT_MAX? -1: mn);
+    }
+    
+    return ans;
+}
+```
 
-### Problem Statement
+This function calculates the minimum difference between any two elements in different ranges defined by the query array 'q'. It uses a prefix sum approach to store frequency of numbers and finds the smallest difference between consecutive non-zero frequencies for each query.
 
-The problem requires finding the minimum absolute difference between any two distinct elements within specified subarrays of a given array. Each query provides two indices, and the goal is to compute the minimum difference between unique elements in the specified range.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> minDifference(vector<int>& nums, vector<vector<int>>& q) {
+	```
+	Declares the function 'minDifference', which takes a vector of integers 'nums' and a 2D vector 'q' representing multiple queries.
 
-### Approach
+2. **Prefix Array Initialization**
+	```cpp
+	    int prefix[100001][101] = {}, cnt[101] = {};
+	```
+	Initializes a 2D prefix sum array 'prefix' to store frequencies up to index 'i', and an array 'cnt' to count occurrences of each number.
 
-The solution employs a prefix sum technique to preprocess the input data and efficiently answer multiple queries. The following steps outline the approach:
+3. **Size Determination**
+	```cpp
+	    int n = nums.size(), m = q.size();
+	```
+	Stores the sizes of the 'nums' and 'q' arrays, where 'n' is the length of 'nums' and 'm' is the number of queries.
 
-1. **Preprocessing the Input**: We maintain a frequency count of numbers in the input array using a 2D prefix sum array. The prefix array allows us to quickly determine the counts of numbers in any subarray defined by the queries.
+4. **Prefix Calculation**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterates through the 'nums' array to calculate the frequency of each number.
 
-2. **Processing Queries**: For each query, we compute the frequency of each number in the specified subarray range. Then, we iterate through the frequency counts to find the minimum absolute difference between any two distinct numbers.
+5. **Count Update**
+	```cpp
+	        cnt[nums[i]]++;
+	```
+	Increments the count of the number at index 'i' in the 'nums' array.
 
-3. **Returning Results**: Finally, we collect and return the results for each query.
+6. **Prefix Update**
+	```cpp
+	        for(int j = 1; j < 101; j++) prefix[i + 1][j] = cnt[j];
+	```
+	Updates the 'prefix' array to store the cumulative frequency counts for each number up to index 'i'.
 
-### Code Breakdown (Step by Step)
+7. **Query Processing**
+	```cpp
+	    vector<int> ans;
+	```
+	Initializes a vector 'ans' to store the results for each query.
 
-Let’s analyze the provided code in detail to understand how the solution is implemented:
+8. **Query Iteration**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Iterates through each query in the 2D array 'q'.
 
-1. **Class Definition**: The solution is encapsulated within a class named `Solution`.
+9. **Range Initialization**
+	```cpp
+	        int l = q[i][0], r = q[i][1];
+	```
+	Extracts the left and right range indices for the current query.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+10. **Frequency Calculation**
+	```cpp
+	        int frq[101] = {};
+	```
+	Initializes an array 'frq' to store the frequency of each number within the current query range.
 
-2. **Function Signature**: The primary function `minDifference` takes two parameters: a vector of integers `nums` and a 2D vector of queries `q`. The function returns a vector of integers representing the results for each query.
+11. **Frequency Update**
+	```cpp
+	        for(int j = 1; j < 101; j++) frq[j] = prefix[r + 1][j] - prefix[l][j];
+	```
+	Calculates the frequency of each number in the range [l, r] by using the 'prefix' sum array.
 
-   ```cpp
-       vector<int> minDifference(vector<int>& nums, vector<vector<int>>& q) {
-   ```
+12. **Variable Initialization**
+	```cpp
+	        int prv = -1, mn = INT_MAX;
+	```
+	Initializes variables 'prv' to track the previous number and 'mn' to store the minimum difference between two numbers.
 
-3. **Variable Initialization**: We initialize a 2D prefix array `prefix` to hold the frequency counts for numbers ranging from 1 to 100. We also initialize a `cnt` array to keep track of counts of each number.
+13. **Finding Minimum Difference**
+	```cpp
+	        for(int j = 1; j < 101; j++) {
+	```
+	Iterates through the frequency array 'frq' to find the minimum difference between non-zero frequencies.
 
-   ```cpp
-           int prefix[100001][101] = {}, cnt[101] = {};
-   ```
+14. **Skip Zero Frequencies**
+	```cpp
+	            if(frq[j] == 0) continue;
+	```
+	Skips the number if its frequency is zero.
 
-4. **Input Size**: We store the sizes of `nums` (n) and `q` (m) for later use.
+15. **Minimum Difference Update**
+	```cpp
+	            if(prv != -1 && j - prv < mn) mn = j - prv;
+	```
+	Updates the minimum difference 'mn' if the difference between 'j' and 'prv' is smaller than the current 'mn'.
 
-   ```cpp
-           int n = nums.size(), m = q.size();
-   ```
+16. **Update Previous Value**
+	```cpp
+	            prv = j;
+	```
+	Updates the previous number to the current number 'j'.
 
-5. **Building the Prefix Array**: We iterate through the `nums` array, updating the `cnt` array with the count of each number. For each number encountered, we update the prefix array to reflect the counts up to the current index.
+17. **Result Handling**
+	```cpp
+	        ans.push_back(mn == INT_MAX? -1: mn);
+	```
+	Pushes the result of the current query into the 'ans' vector. If no valid difference is found, it pushes -1.
 
-   ```cpp
-           for(int i = 0; i < n; i++) {
-               cnt[nums[i]]++;
-               for(int j = 1; j < 101; j++) prefix[i + 1][j] = cnt[j];
-           }
-   ```
+18. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the vector 'ans' containing the results for all queries.
 
-6. **Result Vector**: We initialize a vector `ans` to store the results of each query.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) when there is only one query and the subarray has all identical elements.
+- **Average Case:** O(n + m), where n is the length of the array and m is the number of queries.
+- **Worst Case:** O(n * m), considering the worst-case scenario for large input sizes.
 
-   ```cpp
-           vector<int> ans;
-   ```
+The solution processes each query independently after preprocessing the frequency data.
 
-7. **Processing Each Query**: For each query, we extract the left (`l`) and right (`r`) indices and compute the frequency of each number in the range specified by the query using the prefix array.
+### Space Complexity 💾
+- **Best Case:** O(1) when queries and subarrays are minimal.
+- **Worst Case:** O(n + 100) for the prefix frequency array and the result storage.
 
-   ```cpp
-           for(int i = 0; i < m; i++) {
-               int l = q[i][0], r = q[i][1];
-               int frq[101] = {};
-               for(int j = 1; j < 101; j++) frq[j] = prefix[r + 1][j] - prefix[l][j];
-   ```
+The space complexity is primarily driven by the frequency array used for storing the counts of the elements.
 
-8. **Finding Minimum Difference**: We use a loop to check the frequency counts. If the frequency of a number is greater than zero, we check if it forms a pair with the previous distinct number to find the minimum difference.
+**Happy Coding! 🎉**
 
-   ```cpp
-               int prv = -1, mn = INT_MAX;
-               for(int j = 1; j < 101; j++) {
-                   if(frq[j] == 0) continue;
-                   if(prv != -1 && j - prv < mn) mn = j - prv;
-                   prv = j;
-               }
-   ```
-
-9. **Handling No Valid Pair**: If no valid pair is found (mn remains INT_MAX), we push -1 to indicate the absence of such a pair.
-
-   ```cpp
-               ans.push_back(mn == INT_MAX? -1: mn);
-           }
-   ```
-
-10. **Returning Results**: Finally, we return the result vector containing the minimum differences for each query.
-
-    ```cpp
-           return ans;
-       }
-   ```
-
-### Complexity
-
-- **Time Complexity**: 
-   - **Preprocessing**: O(n) where n is the size of `nums`, as we traverse through the array once to fill the prefix sum array.
-   - **Query Processing**: O(m * 100) where m is the number of queries. We iterate over each query and check the frequency of each number (up to 100).
-   - Overall, the time complexity is O(n + m * 100).
-
-- **Space Complexity**: O(n) for the prefix array, which has dimensions (n+1) x 101. Additionally, we have the `cnt` and `frq` arrays that are constant in size (101), so the total space complexity is O(n).
-
-### Conclusion
-
-The `minDifference` function efficiently computes the minimum absolute difference between any two distinct elements in specified subarrays of the input array `nums`. By leveraging a prefix sum approach, the solution optimizes the query response time, allowing for quick lookups of frequency counts for each range. This makes it well-suited for scenarios involving multiple queries on the same dataset.
-
-### Use Cases
-
-This algorithm can be useful in various scenarios, including:
-
-1. **Data Analysis**: Analyzing frequency distributions within subsets of data to derive meaningful insights.
-  
-2. **Statistical Queries**: Applications that require efficient computation of statistics (like minimum difference) across multiple ranges.
-
-3. **Game Development**: In games where players can select items or numbers, finding the closest pair can enhance gameplay mechanics.
-
-4. **Financial Analysis**: Analyzing price fluctuations within defined time frames can assist in making informed investment decisions.
-
-By integrating such functionality, applications can efficiently handle large datasets and respond promptly to user queries while providing accurate results.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-difference-queries/description/)
 

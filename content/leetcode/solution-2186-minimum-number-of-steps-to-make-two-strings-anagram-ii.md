@@ -14,103 +14,152 @@ img_src = ""
 youtube = "U7tKTEdd0Lw"
 youtube_upload_date="2022-02-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/U7tKTEdd0Lw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, s and t. In each step, you can append any character to either s or t. Your task is to determine the minimum number of steps required to make s and t anagrams of each other.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings s and t.
+- **Example:** `Input: s = 'listen', t = 'silent'`
+- **Constraints:**
+	- 1 <= s.length, t.length <= 2 * 10^5
+	- s and t consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minSteps(string s, string t) {
-        vector<int> tsk(26, 0);
-        for(char c: s)
-        tsk[c - 'a']++;
-        for(char c: t)
-        tsk[c - 'a']--;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of steps required to make s and t anagrams of each other.
+- **Example:** `Output: 0`
+- **Constraints:**
+	- Both s and t consist only of lowercase English letters.
 
-        int ans = 0;
-        for(int a: tsk) ans += abs(a);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the number of steps to make s and t anagrams by appending characters.
 
-### Problem Statement
-The problem asks us to determine the minimum number of steps required to make two strings `s` and `t` anagrams of each other. An anagram of a string is another string that contains the same characters, with the same frequencies, but possibly in a different order. The allowed operation to transform one string into another is to replace any character in one string with another character.
+- Count the frequency of each character in s and t.
+- Calculate the difference in frequencies for each character.
+- Sum up the absolute differences in frequencies to determine the minimum steps.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both strings contain only lowercase letters.
+- The strings s and t are not empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'listen', t = 'silent'`  \
+  **Explanation:** The two strings are already anagrams, so no additional steps are required. Thus, the output is 0.
 
-Given two strings `s` and `t`, the goal is to find the minimum number of character replacements needed to make the two strings anagrams. 
+- **Input:** `Input: s = 'abc', t = 'def'`  \
+  **Explanation:** The characters 'a', 'b', 'c' need to be removed from s and 'd', 'e', 'f' need to be removed from t. Thus, 6 steps (3 from each string) are required.
 
-### Approach
-To solve this problem efficiently, the approach focuses on comparing the character counts of both strings. If the character counts of the two strings differ, then the number of steps required will be the sum of the absolute differences between their respective character counts.
+{{< dots >}}
+## Approach 🚀
+We will count the frequency of characters in both strings, then compare these frequencies to calculate how many characters need to be added or removed to balance them.
 
-Here’s a step-by-step breakdown of the approach:
-1. Count the frequency of each character in both strings `s` and `t`.
-2. Compare the character frequencies of both strings. If the frequency of a character in `s` is greater than that in `t`, we need to "remove" the extra characters, and if the frequency is less, we need to "add" the missing characters.
-3. The number of operations needed will be the total number of characters that need to be added or removed to balance the two strings’ character counts.
+### Initial Thoughts 💭
+- If the strings are already anagrams, no steps are needed.
+- The key idea is to count character occurrences and calculate the differences to figure out how many operations are required.
+{{< dots >}}
+### Edge Cases 🌐
+- If either string is empty, the result is the length of the other string, since we need to add all its characters.
+- The solution must efficiently handle strings with lengths up to 200,000.
+- Strings that are already anagrams will require 0 steps.
+- The solution should efficiently compute the result without excessive time complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+int minSteps(string s, string t) {
+    vector<int> tsk(26, 0);
+    for(char c: s)
+    tsk[c - 'a']++;
+    for(char c: t)
+    tsk[c - 'a']--;
 
-The algorithm works by calculating the difference in character frequencies for each of the 26 lowercase letters (assuming that the strings consist only of lowercase English letters). The sum of the absolute differences in frequencies gives the minimum number of steps required.
+    int ans = 0;
+    for(int a: tsk) ans += abs(a);
+    return ans;
+}
+```
 
-### Code Breakdown (Step by Step)
-1. **Function Signature:**
-   ```cpp
-   int minSteps(string s, string t)
-   ```
-   - The function `minSteps` takes two strings, `s` and `t`, and returns an integer representing the minimum number of steps needed to make `s` and `t` anagrams.
+This function calculates the minimum number of steps required to transform string `s` into string `t`. The steps involve modifying characters in `s` to match those in `t`, counting the total number of changes needed.
 
-2. **Initialize the Frequency Vector:**
-   ```cpp
-   vector<int> tsk(26, 0);
-   ```
-   - A vector `tsk` of size 26 is initialized to zero. Each index in the vector corresponds to one of the 26 lowercase letters (`'a'` to `'z'`), where `tsk[0]` represents the count of 'a', `tsk[1]` represents the count of 'b', and so on.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minSteps(string s, string t) {
+	```
+	This defines the function `minSteps`, which takes two input strings, `s` and `t`, and calculates the minimum steps to convert `s` into `t` by modifying the characters.
 
-3. **Count Characters in String `s`:**
-   ```cpp
-   for(char c: s)
-       tsk[c - 'a']++;
-   ```
-   - Loop through each character `c` in string `s`, and increment the corresponding index in the `tsk` vector. The expression `c - 'a'` converts the character to an index in the range 0-25, corresponding to the position of the letter in the alphabet.
+2. **Vector Initialization**
+	```cpp
+	    vector<int> tsk(26, 0);
+	```
+	A vector `tsk` of size 26 is initialized to store the frequency difference of each character between the two strings. Each index corresponds to a letter from 'a' to 'z'.
 
-4. **Count Characters in String `t`:**
-   ```cpp
-   for(char c: t)
-       tsk[c - 'a']--;
-   ```
-   - Loop through each character `c` in string `t`, and decrement the corresponding index in the `tsk` vector. This step ensures that the `tsk` vector reflects the difference in frequencies between the characters in `s` and `t`.
+3. **Loop through String `s`**
+	```cpp
+	    for(char c: s)
+	```
+	This loop iterates through each character `c` in the string `s`.
 
-5. **Calculate the Total Steps Needed:**
-   ```cpp
-   int ans = 0;
-   for(int a: tsk)
-       ans += abs(a);
-   ```
-   - Initialize a variable `ans` to 0, which will hold the final result (the minimum number of steps required).
-   - Loop through each element `a` in the `tsk` vector, which represents the difference in frequency for each letter. Add the absolute value of each difference to `ans`. The absolute value is used because we care about the number of characters that need to be added or removed, regardless of whether they appear more in `s` or `t`.
+4. **Update Frequency for `s`**
+	```cpp
+	    tsk[c - 'a']++;
+	```
+	For each character `c` in `s`, the corresponding frequency count in the `tsk` vector is incremented, where the index is calculated by subtracting 'a' from `c`.
 
-6. **Return the Result:**
-   ```cpp
-   return ans;
-   ```
-   - After calculating the total number of operations required, return the value of `ans`.
+5. **Loop through String `t`**
+	```cpp
+	    for(char c: t)
+	```
+	This loop iterates through each character `c` in the string `t`.
 
-### Complexity
-- **Time Complexity**: 
-  - The time complexity of this solution is O(n + m), where `n` is the length of string `s` and `m` is the length of string `t`. This is because we need to loop through each string once to count the character frequencies. The final loop through the `tsk` vector has constant time complexity O(26), which can be considered O(1) since 26 is a fixed constant.
-  
-  - Hence, the time complexity is linear in terms of the total number of characters in both strings, which makes the algorithm very efficient for large inputs.
+6. **Update Frequency for `t`**
+	```cpp
+	    tsk[c - 'a']--;
+	```
+	For each character `c` in `t`, the corresponding frequency count in the `tsk` vector is decremented.
 
-- **Space Complexity**: 
-  - The space complexity is O(1), since the `tsk` vector always has a fixed size of 26, regardless of the size of the input strings. Other than that, only a few integer variables (`ans`) are used, which do not depend on the size of the input.
+7. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	The variable `ans` is initialized to 0. It will hold the total number of character modifications needed to transform string `s` into string `t`.
 
-### Conclusion
-The provided solution efficiently solves the problem of determining the minimum number of steps to convert two strings into anagrams of each other. By focusing on character frequency differences, the algorithm avoids unnecessary operations and achieves a time complexity of O(n + m), which is optimal for this problem.
+8. **Summing Absolute Differences**
+	```cpp
+	    for(int a: tsk) ans += abs(a);
+	```
+	This loop sums the absolute values of the differences in character frequencies stored in the `tsk` vector. Each non-zero value in `tsk` indicates the number of steps needed for that character.
 
-The solution works by maintaining a fixed-size vector to store the frequency differences of each character, making it both space-efficient and simple to implement. With its linear time complexity and constant space usage, this solution is well-suited for handling large strings, providing a fast and efficient way to calculate the minimum number of character replacements needed to make two strings anagrams.
+9. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The function returns the total number of modifications (`ans`) required to convert string `s` into string `t`.
 
-This approach also showcases how simple data structures, such as arrays or vectors, can be leveraged to solve common string manipulation problems efficiently, while also making the code easy to understand and maintain.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the strings, since we are counting characters in each string and then summing the differences.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we only need a constant amount of extra space to store character frequencies.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram-ii/description/)
 

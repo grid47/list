@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "leiSa1i-QrI"
 youtube_upload_date="2021-01-11"
 youtube_thumbnail="https://i.ytimg.com/vi/leiSa1i-QrI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,95 +28,130 @@ youtube_thumbnail="https://i.ytimg.com/vi/leiSa1i-QrI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+In a forest, there are an unknown number of rabbits. We ask n rabbits, 'How many rabbits of the same color as you are there?' and collect their answers in an integer array answers, where answers[i] is the answer of the i-th rabbit. The task is to determine the minimum number of rabbits that could be in the forest.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array answers where each element answers[i] represents the number of rabbits that the i-th rabbit believes share the same color.
+- **Example:** `Input: answers = [2, 2, 1]`
+- **Constraints:**
+	- 1 <= answers.length <= 1000
+	- 0 <= answers[i] < 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numRabbits(vector<int>& answers) {
-        unordered_map<int, int> c;
-        for(int i: answers)
-        c[i]++;
-        int res = 0;
-        for(auto i : c) res += (i.second + i.first) / (i.first + 1) * (i.first + 1);
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the minimum number of rabbits that could be in the forest.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The minimum number of rabbits must satisfy the answers given by the rabbits.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the minimum number of rabbits in the forest that could explain the given answers.
 
-The problem involves determining the minimum number of rabbits that could be in a forest, given a list of answers to a question. Each rabbit in the forest is asked how many rabbits have the same color as them, and the number of rabbits that have the same color is known for each rabbit. The task is to find the minimum number of rabbits required to satisfy all the answers.
+- Count the frequency of each answer.
+- For each answer, calculate the minimum number of rabbits required to satisfy that answer. If there are X rabbits answering the same number Y, then the minimum number of rabbits for that answer group is ceil(X / (Y+1)) * (Y+1).
+- Sum up the required rabbits for all answer groups to find the total minimum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array of answers is valid, and each answer is a non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: answers = [2, 2, 1]`  \
+  **Explanation:** The two rabbits that answered '2' need to be in a group of at least 3 rabbits, and the one rabbit that answered '1' needs to be in a group of at least 2 rabbits. Therefore, the minimum number of rabbits in the forest is 6.
 
-In essence, for each rabbit's answer `x`, the rabbit claims that there are exactly `x` other rabbits with the same color. Therefore, a rabbit's answer tells you how many other rabbits share the same color. The goal is to calculate the smallest number of rabbits that satisfies all the answers, taking into account the fact that multiple rabbits may give the same answer.
+- **Input:** `Example 2: Input: answers = [5, 5, 5]`  \
+  **Explanation:** The three rabbits that answered '5' need to be in a group of at least 6 rabbits, so the minimum number of rabbits in the forest is 6.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach is to count how many rabbits give the same answer, then compute the minimum number of rabbits required to form complete groups that match those answers.
 
-The approach to solving this problem is based on understanding how the answers can be grouped to minimize the number of rabbits. The idea is to consider that each rabbit's answer `x` tells us how many rabbits with the same color they expect to see. This leads to the conclusion that the number of rabbits with the same color must be at least `x + 1` (since the rabbit itself is also counted in the total number of rabbits with the same color).
-
-We can think of it as a process of grouping rabbits with the same answer. For each unique answer `x`, we need to calculate how many groups of `x + 1` rabbits we would need to satisfy the answer `x`.
-
-To do this, we will count how many times each answer occurs and then, for each answer `x`, calculate the number of full groups of size `x + 1` required to accommodate all rabbits who gave that answer. The minimum number of rabbits is the sum of the rabbits in all such groups.
-
-### Code Breakdown (Step by Step)
-
-The code below implements the approach described:
-
+### Initial Thoughts 💭
+- The answers represent groups of rabbits with the same color, and the answers must form groups that fit within those constraints.
+- To minimize the total number of rabbits, each group should be as small as possible while still matching the answers given by the rabbits.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least one element.
+- Ensure the solution handles arrays with a length up to 1000.
+- When all rabbits answer '0', only one rabbit is needed in the forest.
+- The solution should handle all possible values of answers correctly, considering edge cases like answers with high values near 999.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int numRabbits(vector<int>& answers) {
-        unordered_map<int, int> c;
-        for (int i : answers)
-            c[i]++;  // Count how many times each answer appears
-        
-        int res = 0;
-        for (auto i : c) {
-            // For each unique answer x, calculate how many groups of size x + 1 we need
-            res += (i.second + i.first) / (i.first + 1) * (i.first + 1);
-        }
-        return res;
-    }
-};
+int numRabbits(vector<int>& answers) {
+    unordered_map<int, int> c;
+    for(int i: answers)
+    c[i]++;
+    int res = 0;
+    for(auto i : c) res += (i.second + i.first) / (i.first + 1) * (i.first + 1);
+    return res;
+}
 ```
 
-#### Step-by-Step Explanation
+The function computes the total number of rabbits based on the answers to the question 'How many other rabbits have the same color as you?'.
 
-1. **Count the Frequency of Answers**:
-   - The `unordered_map<int, int> c;` is used to store the frequency of each unique answer in the `answers` array.
-   - The loop `for (int i : answers) c[i]++;` iterates through the `answers` array and counts how many times each answer appears. The key `i` in the map represents an answer, and the value `c[i]` represents how many times that answer appears.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numRabbits(vector<int>& answers) {
+	```
+	Defines the function `numRabbits`, which takes a vector of integers `answers` representing the answers to the rabbit color question.
 
-2. **Calculating the Minimum Number of Rabbits**:
-   - After counting the frequencies, the algorithm needs to calculate the total number of rabbits.
-   - The loop `for (auto i : c)` iterates over each unique answer (the key `i.first`) and its frequency (the value `i.second`).
-   - For each answer `x`, we need to calculate the number of full groups of size `x + 1` (since each group must consist of at least `x + 1` rabbits).
-   - The formula `(i.second + i.first) / (i.first + 1) * (i.first + 1)` computes how many full groups of size `x + 1` are required for `i.second` rabbits who gave answer `x`.
-     - `(i.second + i.first) / (i.first + 1)` gives the number of full groups needed to fit all rabbits that gave the answer `x`.
-     - Multiplying by `(i.first + 1)` gives the total number of rabbits in those full groups.
+2. **Map Initialization**
+	```cpp
+	    unordered_map<int, int> c;
+	```
+	Initializes an unordered map `c` to count the frequency of each answer (representing the number of rabbits with the same color).
 
-3. **Summing the Results**:
-   - The total number of rabbits is accumulated in the variable `res`, which is initialized to 0.
-   - For each unique answer, the number of rabbits required is added to `res`.
+3. **Loop Through Answers**
+	```cpp
+	    for(int i: answers)
+	```
+	Loops through each element in the `answers` vector to count how many times each answer appears.
 
-4. **Return the Result**:
-   - After processing all answers, the value of `res` is returned, which represents the minimum number of rabbits that could satisfy the given answers.
+4. **Count Answers**
+	```cpp
+	    c[i]++;
+	```
+	Increments the count for the current answer `i` in the map `c`.
 
-### Complexity Analysis
+5. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes a variable `res` to store the final result, which is the total number of rabbits.
 
-#### Time Complexity:
-- **O(n)**: The algorithm involves iterating through the `answers` array once to count the frequencies, which takes O(n) time, where `n` is the number of elements in the array. Then, the second loop iterates over the distinct answers (which can be at most `n` distinct answers), and for each answer, it performs a constant amount of work (a few arithmetic operations). Therefore, the overall time complexity is O(n), where `n` is the size of the `answers` array.
+6. **Calculate Total Rabbits**
+	```cpp
+	    for(auto i : c) res += (i.second + i.first) / (i.first + 1) * (i.first + 1);
+	```
+	Iterates through the map `c` and calculates the total number of rabbits based on the frequency of each answer. The formula ensures that if there are `x` rabbits with the same answer, they will all be grouped together.
 
-#### Space Complexity:
-- **O(m)**: The space complexity is determined by the space used to store the frequencies of each answer. In the worst case, all the answers could be distinct, requiring O(n) space to store them in the `unordered_map`. Therefore, the space complexity is O(m), where `m` is the number of distinct answers.
+7. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the calculated total number of rabbits.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of rabbits, because we only need to count the frequency of answers.
+- **Average Case:** O(n), as the process of counting and grouping is linear with respect to the number of answers.
+- **Worst Case:** O(n), as the worst case also involves counting frequencies and calculating the group sizes.
 
-The problem asks us to compute the minimum number of rabbits that could satisfy the given answers based on certain constraints. The approach described efficiently solves the problem using a hash map to count the frequencies of each answer, followed by calculating the number of full groups of size `x + 1` needed to accommodate all rabbits for each answer `x`.
+The time complexity is linear in the size of the input array.
 
-The solution operates in linear time, O(n), making it well-suited for large inputs, as it processes the answers array in a single pass. The space complexity is O(m), where `m` is the number of distinct answers, which is efficient and scalable.
+### Space Complexity 💾
+- **Best Case:** O(n), when all rabbits have unique answers.
+- **Worst Case:** O(n), where n is the number of unique answers, since we need to store the frequency of each answer.
 
-By understanding how to group rabbits based on their answers and ensuring that each group consists of at least `x + 1` rabbits, we can derive the minimum number of rabbits required. This approach guarantees an optimal solution to the problem.
+Space complexity is linear with respect to the number of unique answers in the input.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rabbits-in-forest/description/)
 

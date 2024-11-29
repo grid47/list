@@ -14,88 +14,112 @@ img_src = ""
 youtube = "L5P6zYBLP3s"
 youtube_upload_date="2021-05-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/L5P6zYBLP3s/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s with lowercase English letters at even indices and digits at odd indices. For each odd index i, replace the digit s[i] with the result of the operation shift(s[i-1], s[i]), where shift(c, x) returns the xth character after c. Return the modified string after replacing all digits.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string where even indices contain lowercase English letters and odd indices contain digits.
+- **Example:** `s = 'a1c1e1'`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- s consists only of lowercase English letters and digits.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string replaceDigits(string s) {
-    for (auto i = 1; i < s.size(); i += 2)
-        s[i] += s[i - 1] - '0';
-        return s;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the modified string where the digits at odd indices are replaced with the result of the shift operation.
+- **Example:** `abcdef`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Replace digits at odd indices with the result of the shift operation based on the character at the previous even index.
 
-The problem requires us to manipulate a given string \( s \) consisting of lowercase letters and digits. The goal is to replace each digit in the string with a character that is determined by adding the digit's value to the preceding character (the letter immediately before it). This operation must be applied to all digits at odd indices in the string. For instance, in the string "a1c1e1", the transformations would be:
+- Iterate through the string, starting from index 1 (odd indices).
+- For each odd index i, calculate the result of shift(s[i-1], s[i]) and replace s[i] with the result.
+- Return the modified string after processing all odd indices.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always have characters at even indices that are lowercase English letters, and digits at odd indices.
+- The shift will not exceed the character 'z'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'a1c1e1'`  \
+  **Explanation:** The digits are replaced by applying the shift function to the characters at the even indices. 'a' becomes 'b', 'c' becomes 'd', and 'e' becomes 'f'.
 
-- The digit '1' at index 1 (preceded by 'a') should be replaced by 'b' (i.e., 'a' + 1).
-- The digit '1' at index 3 (preceded by 'c') should be replaced by 'd' (i.e., 'c' + 1).
-- The digit '1' at index 5 (preceded by 'e') should be replaced by 'f' (i.e., 'e' + 1).
+{{< dots >}}
+## Approach 🚀
+The solution iterates through the string and applies the shift operation for each digit at an odd index, using the character at the previous even index.
 
-After all transformations, the resultant string for "a1c1e1" would be "abcde".
-
-### Approach
-
-To solve this problem, we can follow a straightforward approach:
-
-1. **Iterate Through the String**: Start iterating from index 1 and step through the string in increments of 2 to target only the digits.
-
-2. **Replace Digits**: For each digit encountered, convert it into its corresponding integer value and add it to the ASCII value of the preceding character. The result will be a new character that replaces the digit in the string.
-
-3. **Return the Result**: After processing all relevant indices, return the modified string.
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed breakdown of the code implementation:
-
+### Initial Thoughts 💭
+- The operation shift(c, x) is simple and can be computed easily for each odd index.
+- We can modify the string in a single pass through the input string.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always contain at least one character, so empty input is not a valid case.
+- The solution must handle inputs with a length of up to 100 characters efficiently.
+- Strings with digits that do not change the characters (e.g., 'z9y8x7w6') should be handled correctly.
+- The string will always be valid according to the input constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    string replaceDigits(string s) {
+string replaceDigits(string s) {
+for (auto i = 1; i < s.size(); i += 2)
+    s[i] += s[i - 1] - '0';
+    return s;
+}
 ```
-- A class named `Solution` is defined, containing a public method called `replaceDigits` that takes a string \( s \) as its parameter.
 
-```cpp
-        for (auto i = 1; i < s.size(); i += 2)
-```
-- A `for` loop is initiated, starting from index 1 and iterating through the string while incrementing by 2. This ensures we are only examining odd indices, where digits are located.
+This function replaces digits in the string `s` by adding the value of the previous character (assumed to be a letter) to the digit, effectively transforming characters at even indices.
 
-```cpp
-            s[i] += s[i - 1] - '0';
-```
-- Inside the loop, we replace the digit at index \( i \) with the sum of the character at index \( i-1 \) (the preceding letter) and the integer value of the digit. The expression `s[i - 1] - '0'` converts the character representing a digit into its integer form (for example, '1' becomes 1). The result of this addition is a new character which will replace the digit at index \( i \).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string replaceDigits(string s) {
+	```
+	Defines the function `replaceDigits`, which takes a string `s` and modifies it by adjusting its characters based on their neighbors.
 
-```cpp
-        return s;
-    }
-};
-```
-- After processing all relevant indices in the string, the modified string \( s \) is returned.
+2. **For Loop**
+	```cpp
+	for (auto i = 1; i < s.size(); i += 2)
+	```
+	Starts a loop that iterates over the string `s`, specifically at the odd indices (1, 3, 5, ...).
 
-### Complexity
+3. **String Modification**
+	```cpp
+	    s[i] += s[i - 1] - '0';
+	```
+	For each character at an odd index `i`, adds the value of the previous character (at index `i - 1`) to it. This is done by subtracting the character '0' to convert the digit into an integer.
 
-- **Time Complexity**: The time complexity of this approach is \( O(n) \), where \( n \) is the length of the input string \( s \). This is because we traverse the string once, modifying characters in place.
+4. **Return Statement**
+	```cpp
+	    return s;
+	```
+	Returns the modified string `s` after processing all the relevant characters.
 
-- **Space Complexity**: The space complexity is \( O(1) \) for the operations conducted, as the modifications are made directly on the original string without the need for additional data structures that grow with input size.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The time complexity is O(n) because we iterate through the string once, where n is the length of the string.
 
-The `replaceDigits` function provides a concise and efficient way to transform a string by replacing specific digits based on their preceding characters. This solution is optimal for the problem constraints and demonstrates an effective application of basic string manipulation techniques in C++.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This code effectively showcases the use of character arithmetic and how ASCII values can be manipulated to achieve desired transformations. The approach is straightforward, making it easy to understand and implement, especially for those learning about string handling in programming.
+The space complexity is O(1) as we only modify the string in place and do not require additional space.
 
-In practical applications, such a function could be beneficial in scenarios where encoding or decoding string data is necessary, or in any case where character transformation is required based on adjacent characters. The clarity and efficiency of the code also contribute to its usability in larger systems, emphasizing good coding practices.
+**Happy Coding! 🎉**
 
-This solution not only solves the problem efficiently but also demonstrates the importance of understanding data types and character representations in programming, which is fundamental for effective software development.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-all-digits-with-characters/description/)
 

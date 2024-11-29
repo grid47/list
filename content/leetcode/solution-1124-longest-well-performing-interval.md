@@ -14,135 +14,174 @@ img_src = ""
 youtube = "1Cu21ILZBx8"
 youtube_upload_date="2024-03-19"
 youtube_thumbnail="https://i.ytimg.com/vi/1Cu21ILZBx8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of integers representing the number of hours worked each day. A day is considered tiring if the number of hours worked is strictly greater than 8. A well-performing interval is an interval of days where the number of tiring days is strictly larger than the number of non-tiring days. Your task is to return the length of the longest well-performing interval.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of integers representing the number of hours worked per day. The length of the list is between 1 and 10,000.
+- **Example:** `Input: hours = [9,9,6,0,6,6,9]`
+- **Constraints:**
+	- The number of elements in hours is between 1 and 10,000.
+	- Each integer in hours is between 0 and 16.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestWPI(vector<int>& hours) {
-        
-        int n = hours.size(), res = 0, score = 0;
-        map<int, int> mp;
-        
-        for(int i = 0; i < n; i++) {
-            
-            score += (hours[i] > 8) ? 1 : -1;
-            
-            if(score > 0)res = i + 1;
-            else {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest well-performing interval.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be an integer representing the length of the longest well-performing interval.
 
-                if  (!mp.count(score))    mp[score] = i;
-                if  (mp.count(score - 1)) res = max(res, i - mp[score -1]);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the longest interval where the number of tiring days is greater than the number of non-tiring days.
 
-            }
+- Traverse the list and calculate a score where tiring days are scored as +1 and non-tiring days as -1.
+- Track the cumulative score and use a map to store the earliest index for each score.
+- For each score, check if a previous score exists that satisfies the condition of a well-performing interval, and update the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is non-empty.
+- The length of the list will be between 1 and 10,000.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: hours = [9,9,6,0,6,6,9]`  \
+  **Explanation:** In this case, the longest well-performing interval is [9,9,6], as there are 2 tiring days (9,9) and 1 non-tiring day (6).
+
+- **Input:** `Input: hours = [6,6,6]`  \
+  **Explanation:** There are no tiring days in this list, so there is no well-performing interval.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will traverse the list and calculate a running score, updating the result whenever we encounter a well-performing interval. We will use a map to track the first occurrence of each cumulative score.
+
+### Initial Thoughts 💭
+- We can track the number of tiring and non-tiring days using a cumulative score.
+- By using a map to store the first occurrence of each cumulative score, we can efficiently calculate the length of well-performing intervals.
+- We can optimize the solution by processing the list in a single pass and using the map to keep track of the earliest index for each score.
+{{< dots >}}
+### Edge Cases 🌐
+- If the list is empty, return 0.
+- Ensure the solution efficiently handles large inputs, up to 10,000 elements.
+- If all days are non-tiring, return 0.
+- The solution should be able to handle lists with a maximum length of 10,000.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestWPI(vector<int>& hours) {
+    
+    int n = hours.size(), res = 0, score = 0;
+    map<int, int> mp;
+    
+    for(int i = 0; i < n; i++) {
         
+        score += (hours[i] > 8) ? 1 : -1;
+        
+        if(score > 0)res = i + 1;
+        else {
+
+            if  (!mp.count(score))    mp[score] = i;
+            if  (mp.count(score - 1)) res = max(res, i - mp[score -1]);
+
         }
-        
-        return res;
+    
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The task is to determine the length of the longest contiguous subarray in which the number of days with working hours greater than 8 exceeds the number of days with working hours less than or equal to 8. In simpler terms, we are to find the longest period during which the employee is more productive than not.
-
-Given an array `hours` where each element represents the number of hours worked on a particular day, our objective is to find the length of the longest well-performing interval. 
-
-For example, if the input is:
+    
+    return res;
+}
 ```
-hours = [9, 7, 9, 7, 9, 9, 6]
-```
-The expected output would be `6`, as the longest subarray `[9, 7, 9, 9, 6]` has more days where hours worked exceeded 8.
 
-### Approach
-To tackle this problem, we can utilize a combination of prefix sums and a hash map to keep track of the earliest occurrences of each score. The algorithm follows these steps:
-1. **Score Calculation**: Convert the hours worked into a score where:
-   - A day with more than 8 hours contributes `+1` to the score.
-   - A day with 8 hours or fewer contributes `-1` to the score.
-   
-2. **Tracking Prefix Sums**: As we traverse the `hours` array, we keep a running score. If the score is greater than `0`, it indicates that we have a valid well-performing interval from the start to the current index.
+This code defines the `longestWPI` function, which calculates the longest well-performing interval (WPI) based on working hours. The function computes a score for each day, where days with hours greater than 8 are positive and others are negative. It tracks the first occurrence of each score in a map and calculates the maximum interval where the score is positive.
 
-3. **Using a Map**: For scores that are not greater than `0`, we use a hash map to store the earliest index where each score occurred. This allows us to check if there exists an earlier score that could help extend our well-performing interval.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int longestWPI(vector<int>& hours) {
+	```
+	This function `longestWPI` takes a vector of integers representing working hours for each day and returns the length of the longest well-performing interval (WPI).
 
-4. **Max Length Calculation**: Finally, we compare the current length of the well-performing interval with the maximum length found so far and update it accordingly.
+2. **Variable Initialization**
+	```cpp
+	    
+	```
+	This line is for initialization and spacing in the code.
 
-### Code Breakdown (Step by Step)
+3. **Variable Initialization**
+	```cpp
+	    int n = hours.size(), res = 0, score = 0;
+	```
+	This line initializes the size of the `hours` array (`n`), the result variable `res` to store the length of the longest WPI, and the `score` to track the cumulative score as the loop progresses.
 
-1. **Class Definition**: The `Solution` class is defined to encapsulate the function `longestWPI`.
+4. **Data Structure**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declares a map `mp` to store the first occurrence of each score value and its corresponding index.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+5. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins the loop to iterate through each element of the `hours` vector.
 
-2. **Function Declaration**: The public function `longestWPI` takes a reference to a vector of integers, `hours`, and returns an integer.
+6. **Score Update**
+	```cpp
+	        score += (hours[i] > 8) ? 1 : -1;
+	```
+	This line updates the cumulative `score`. If the working hours for the day are greater than 8, the score is incremented by 1, otherwise, it is decremented by 1.
 
-   ```cpp
-       int longestWPI(vector<int>& hours) {
-   ```
+7. **Result Update (Positive Score)**
+	```cpp
+	        if(score > 0)res = i + 1;
+	```
+	If the cumulative score is greater than 0, the result `res` is updated to the length of the current interval (`i + 1`).
 
-3. **Variable Initialization**: Inside the function, variables for length, result, and score are initialized. A map to track scores is also defined.
+8. **Else Condition**
+	```cpp
+	        else {
+	```
+	If the cumulative score is not greater than 0, the code enters the else block to process the map of scores.
 
-   ```cpp
-           int n = hours.size(), res = 0, score = 0;
-           map<int, int> mp; // Map to store the first occurrence of each score
-   ```
+9. **Map Update**
+	```cpp
+	            if  (!mp.count(score))    mp[score] = i;
+	```
+	If the map doesn't already contain the current score, the score and its corresponding index are added to the map.
 
-4. **Main Loop**: A loop iterates over each element in the `hours` vector to calculate the score based on working hours.
+10. **Result Update (Negative Score)**
+	```cpp
+	            if  (mp.count(score - 1)) res = max(res, i - mp[score -1]);
+	```
+	If the map contains the previous score (`score - 1`), the result `res` is updated to the maximum value between the current result and the length of the interval between the current index and the index stored in the map.
 
-   ```cpp
-           for(int i = 0; i < n; i++) {
-               score += (hours[i] > 8) ? 1 : -1; // Calculate score
-   ```
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the result, which is the length of the longest well-performing interval (WPI).
 
-5. **Immediate Check for Positive Score**: If the score becomes positive, it means all days up to index `i` are part of a well-performing interval.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-               if(score > 0) res = i + 1; // Update result if score is positive
-   ```
+The time complexity is O(n), where n is the length of the input list, as we only make a single pass through the list.
 
-6. **Handling Non-Positive Scores**: If the score is not positive, we check the map. If the score does not exist in the map, we store the current index.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-               else {
-                   if (!mp.count(score)) mp[score] = i; // Store first occurrence of score
-   ```
+The space complexity is O(n) due to the storage required for the map to track the first occurrence of each cumulative score.
 
-7. **Checking for Previous Scores**: We check if there is a score one less than the current score in the map. If it exists, we calculate the possible interval length.
-
-   ```cpp
-                   if (mp.count(score - 1)) 
-                       res = max(res, i - mp[score - 1]); // Update result based on the found score
-               }
-           }
-   ```
-
-8. **Return Statement**: Finally, the function returns the maximum length of the well-performing interval found.
-
-   ```cpp
-           return res;        
-       }
-   };
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this algorithm is \(O(N)\), where \(N\) is the number of days (or length of the `hours` array). This is because we are only making a single pass through the array.
-  
-- **Space Complexity**: The space complexity is \(O(N)\) in the worst case for the hash map that stores scores and their indices.
-
-### Conclusion
-The `longestWPI` function effectively finds the length of the longest well-performing interval of working hours using a straightforward and efficient algorithm. By transforming the problem into one of score accumulation and leveraging a hash map for quick lookups, the solution maintains optimal performance.
-
-This approach illustrates how combining different programming techniques, such as prefix sums and hash maps, can yield efficient solutions to problems involving subarrays and conditions on their elements. Developers can apply similar techniques to a variety of problems in competitive programming and real-world applications.
-
-In summary, this solution not only provides the correct result but does so with a time-efficient approach, making it a practical choice for similar tasks involving performance intervals in arrays.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-well-performing-interval/description/)

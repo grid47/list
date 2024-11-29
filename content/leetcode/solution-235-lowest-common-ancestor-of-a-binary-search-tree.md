@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ML6vGnziUaI"
 youtube_upload_date="2023-02-11"
 youtube_thumbnail="https://i.ytimg.com/vi/ML6vGnziUaI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,131 +28,125 @@ youtube_thumbnail="https://i.ytimg.com/vi/ML6vGnziUaI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a Binary Search Tree (BST), find the lowest common ancestor (LCA) of two given nodes. The lowest common ancestor is the deepest node that is an ancestor of both nodes. An ancestor of a node is a node itself or any node in its path up to the root.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root node of the binary search tree and two target nodes p and q.
+- **Example:** `Input: root = [5, 3, 8, 2, 4, 7, 9], p = 3, q = 4`
+- **Constraints:**
+	- The number of nodes in the tree is between 2 and 10^5.
+	- Node values are unique.
+	- The values of p and q are distinct, and both p and q are guaranteed to exist in the tree.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the node that represents the lowest common ancestor of nodes p and q.
+- **Example:** `Output: 3`
+- **Constraints:**
 
-class Solution {
-public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root->val < p->val && root->val < q->val)
-            return lowestCommonAncestor(root->right, p, q);
-        if(root->val > p->val && root->val > q->val)
-            return lowestCommonAncestor(root->left, p, q);
-        return root;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the lowest common ancestor (LCA) in a binary search tree by leveraging the BST property that the left child is smaller and the right child is greater.
 
-### 🌟 Problem Statement
+- If the current node's value is less than both p and q, move to the right subtree.
+- If the current node's value is greater than both p and q, move to the left subtree.
+- If one of the nodes is smaller and the other is larger, the current node is the LCA.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a valid binary search tree.
+- The nodes p and q are distinct and guaranteed to exist in the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [5, 3, 8, 2, 4, 7, 9], p = 3, q = 4`  \
+  **Explanation:** In this tree, the LCA of nodes 3 and 4 is 3 because node 3 is an ancestor of node 4.
 
-In this problem, we are tasked with finding the **Lowest Common Ancestor (LCA)** of two nodes in a **Binary Search Tree (BST)**. The **LCA** of two nodes `p` and `q` is the deepest node in the tree that is an ancestor of both `p` and `q`. Simply put, it's the most recent common node on the path from `p` to the root and from `q` to the root.
+- **Input:** `Input: root = [6, 2, 8, 0, 4, 7, 9], p = 2, q = 8`  \
+  **Explanation:** In this tree, the LCA of nodes 2 and 8 is 6, as 6 is the ancestor of both 2 and 8.
 
-In a **Binary Search Tree**, the key property to remember is:
-- The **left subtree** contains nodes with values less than the root node.
-- The **right subtree** contains nodes with values greater than the root node.
+{{< dots >}}
+## Approach 🚀
+We can solve this problem efficiently using the properties of the Binary Search Tree. Starting from the root, we compare the values of the nodes p and q with the current node's value and decide whether to move left or right.
 
-With this in mind, we can traverse the BST in a smart way to locate the **LCA** of `p` and `q`.
-
----
-
-### 🧠 Approach
-
-To solve this problem efficiently, we can leverage the properties of the **Binary Search Tree (BST)**. The observation here is:
-- If both `p` and `q` are smaller than the current node’s value, then both nodes must lie in the **left subtree**.
-- If both `p` and `q` are greater than the current node’s value, then both nodes must lie in the **right subtree**.
-- If one node is smaller and the other is greater (or one of them is equal to the current node), we have found the **Lowest Common Ancestor**.
-
-Here’s the plan:
-1. Start at the **root** of the tree.
-2. If both `p` and `q` are on the right side of the current node, move to the **right child**.
-3. If both `p` and `q` are on the left side of the current node, move to the **left child**.
-4. If one of `p` or `q` is on one side and the other is on the opposite side (or one of them is equal to the current node), the current node is the **LCA**.
-
-This approach is efficient and works in **O(log n)** time for **balanced trees**.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's walk through the code implementation step-by-step.
-
+### Initial Thoughts 💭
+- A Binary Search Tree (BST) allows us to quickly decide whether to move to the left or right subtree based on the node values.
+- The problem becomes easier because we know that for any node, all values in its left subtree are smaller, and all values in its right subtree are larger.
+- We need to find the first node that satisfies the condition where one of the nodes is smaller and the other is larger, or if one of the nodes is the current node itself.
+{{< dots >}}
+### Edge Cases 🌐
+- The tree will not be empty, as p and q are guaranteed to exist.
+- Ensure that the solution efficiently handles trees with up to 10^5 nodes.
+- If one of the nodes is the root, it will be the LCA if the other node is its descendant.
+- The solution must be efficient, ideally with a time complexity of O(log n) in a balanced BST.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if(root->val < p->val && root->val < q->val)
+        return lowestCommonAncestor(root->right, p, q);
+    if(root->val > p->val && root->val > q->val)
+        return lowestCommonAncestor(root->left, p, q);
+    return root;
+}
 ```
-- We define a `Solution` class and create the `lowestCommonAncestor` function. This function takes the `root` node of the tree, and two nodes `p` and `q` as input, and returns their **LCA**.
 
-```cpp
-        if(root->val < p->val && root->val < q->val)
-            return lowestCommonAncestor(root->right, p, q);
-```
-- First, we check if both `p` and `q` are larger than the current `root` node. If they are, it means both nodes are in the **right subtree**. Therefore, we move to the **right child** (`root->right`).
+This function finds the lowest common ancestor of two nodes in a binary search tree (BST). It recursively traverses the tree, comparing node values to determine whether to move to the left or right subtree, and returns the root node when the common ancestor is found.
 
-```cpp
-        if(root->val > p->val && root->val > q->val)
-            return lowestCommonAncestor(root->left, p, q);
-```
-- If both `p` and `q` are smaller than the current `root` node, then both nodes lie in the **left subtree**. Thus, we recursively call the function on the **left child** (`root->left`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+	```
+	Defines the `lowestCommonAncestor` function, which takes the root node of the BST and two target nodes (`p` and `q`) as input and returns the lowest common ancestor.
 
-```cpp
-        return root;
-```
-- If neither of the above conditions is true, then one of the following must be true:
-  - One of `p` or `q` is smaller and the other is larger.
-  - Or one of them is equal to the current `root` node.
-  
-  In either case, the current node is the **LCA** of `p` and `q`, and we return it.
+2. **Left Subtree Check**
+	```cpp
+	    if(root->val < p->val && root->val < q->val)
+	```
+	Checks if both target nodes (`p` and `q`) are located in the right subtree of the current node (`root`). If so, the function recursively calls itself on the right child of `root`.
 
----
+3. **Right Subtree Check**
+	```cpp
+	        return lowestCommonAncestor(root->right, p, q);
+	```
+	Recursively calls `lowestCommonAncestor` on the right subtree of `root` if both `p` and `q` are greater than `root`.
 
-### 📈 Complexity Analysis
+4. **Right Subtree Check (Alternative)**
+	```cpp
+	    if(root->val > p->val && root->val > q->val)
+	```
+	Checks if both target nodes (`p` and `q`) are located in the left subtree of the current node (`root`). If so, the function recursively calls itself on the left child of `root`.
 
-#### ⏱️ Time Complexity:
-- The time complexity is **O(h)**, where `h` is the height of the tree.
-  - For a **balanced BST**, the height is **O(log n)**, where `n` is the number of nodes in the tree.
-  - For an **unbalanced BST**, the height could be as large as **O(n)** in the worst case (like a linked list).
+5. **Left Subtree Check (Alternative)**
+	```cpp
+	        return lowestCommonAncestor(root->left, p, q);
+	```
+	Recursively calls `lowestCommonAncestor` on the left subtree of `root` if both `p` and `q` are smaller than `root`.
 
-Thus, the time complexity is:
-- **O(log n)** for balanced trees.
-- **O(n)** for unbalanced trees.
+6. **Ancestor Return**
+	```cpp
+	    return root;
+	```
+	Returns `root` when the current node is the lowest common ancestor, meaning one node is in the left subtree and the other is in the right, or one of the nodes is `root` itself.
 
-#### 💾 Space Complexity:
-- The space complexity is **O(1)** since we are only using a constant amount of extra space for the recursion.
-- However, considering the recursive call stack, the space complexity is **O(h)**, where `h` is the height of the tree (the deepest recursion level).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n) in a balanced BST, where n is the number of nodes.
+- **Average Case:** O(log n), assuming the tree is balanced.
+- **Worst Case:** O(n) in the case of a skewed tree (e.g., a degenerate tree resembling a linked list).
 
----
+The time complexity depends on the height of the tree, which can be log n for a balanced BST.
 
-### 🏁 Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1), if we use an iterative approach instead of recursion.
+- **Worst Case:** O(h), where h is the height of the tree (due to recursion).
 
-This solution provides an efficient way to find the **Lowest Common Ancestor (LCA)** in a **Binary Search Tree (BST)** by utilizing its inherent properties:
-- Nodes smaller than the current node lie in the **left subtree**.
-- Nodes greater than the current node lie in the **right subtree**.
-- The **LCA** is found when `p` and `q` are on either side of the current node or one of them is equal to the node itself.
+The space complexity is proportional to the height of the tree due to the recursion stack.
 
-With a **time complexity of O(log n)** for balanced trees and **space complexity of O(1)**, this solution is both **time and space efficient**, making it ideal for **coding interviews** and **algorithm challenges**.
+**Happy Coding! 🎉**
 
-#### Key Highlights:
-- **Efficient for BSTs**: This solution is optimal for binary search trees due to the logarithmic time complexity.
-- **Simple and Elegant**: The approach is straightforward and involves a simple recursive strategy with conditions to navigate the tree.
-- **Space Efficient**: Only a constant amount of space is used, making the solution space efficient.
-
-This method is an ideal way to find the **LCA** in a **BST**, and its simplicity makes it a go-to solution for many algorithmic problems.
-
---- 
-
-💡 **Remember**: The power of BST lies in its structure, and by utilizing this structure wisely, we can efficiently solve many problems like finding the **LCA**! Keep practicing! 😎
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)
 

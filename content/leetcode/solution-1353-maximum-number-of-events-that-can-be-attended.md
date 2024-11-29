@@ -14,131 +14,218 @@ img_src = ""
 youtube = "EKZhEN9P2-I"
 youtube_upload_date="2020-07-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/EKZhEN9P2-I/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of events where each event is represented by a pair [startDay, endDay]. Your task is to find the maximum number of events you can attend, ensuring that you attend only one event per day.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of events, where each event is represented by a pair of integers indicating the start and end day of the event.
+- **Example:** `For example, [[1, 2], [2, 3], [3, 4]] where each pair represents an event that lasts from start to end day.`
+- **Constraints:**
+	- 1 <= events.length <= 10^5
+	- events[i].length == 2
+	- 1 <= startDay[i] <= endDay[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    static bool cmp(vector<int> &a, vector<int> &b) {
-        if(a[0] == b[0]) return a[1] < b[1];
-        else return a[0] < b[0];
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the maximum number of events you can attend.
+- **Example:** `For the input [[1, 2], [2, 3], [3, 4]], the output should be 3.`
+- **Constraints:**
+	- The result will always be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the number of events that can be attended by scheduling them on non-overlapping days.
+
+- 1. Sort the events based on their start day. If two events start on the same day, sort by the end day.
+- 2. Use a priority queue (min-heap) to keep track of the end days of events that are currently active.
+- 3. Iterate through the days and for each day, add any events that start on that day and remove events that have ended.
+- 4. Track the maximum number of events that can be attended at any point in time.
+{{< dots >}}
+### Problem Assumptions ✅
+- Events do not overlap by default, but they may share common days.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: [[1, 2], [2, 3], [3, 4]]`  \
+  **Explanation:** In this case, you can attend all three events by selecting one event per day.
+
+- **Input:** `Example 2: [[1, 2], [2, 3], [3, 4], [1, 2]]`  \
+  **Explanation:** In this case, you can attend all four events by choosing the best days.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the events and using a priority queue to keep track of the events and manage overlaps efficiently.
+
+### Initial Thoughts 💭
+- Sorting the events by start day helps in managing overlaps.
+- Using a priority queue allows us to quickly remove events that have ended.
+- We should aim to minimize the number of overlapping events while maximizing the number of events we can attend.
+{{< dots >}}
+### Edge Cases 🌐
+- No events: The result should be 0.
+- Handling up to 10^5 events efficiently without performance degradation.
+- Events that start and end on the same day: Handle these events appropriately.
+- The solution should run in O(n log n) time due to sorting.
+{{< dots >}}
+## Code 💻
+```cpp
+static bool cmp(vector<int> &a, vector<int> &b) {
+    if(a[0] == b[0]) return a[1] < b[1];
+    else return a[0] < b[0];
+}
+
+int maxEvents(vector<vector<int>>& e) {
     
-    int maxEvents(vector<vector<int>>& e) {
-        
-        int n = e.size();
-        sort(e.begin(), e.end(), cmp);
-        
-        priority_queue<int, vector<int>, greater<int>> pq;
-        
-        int i = 0, cnt = 0;
-        for(int d = 1; d <= 100000; d++) {
-            while(!pq.empty() && pq.top() < d) {
-                pq.pop();
-            }
-            while(i < n && e[i][0] == d) {
-                pq.push(e[i++][1]);
-            }
-            if(!pq.empty()) {
-                pq.pop();
-                cnt++;
-            }
+    int n = e.size();
+    sort(e.begin(), e.end(), cmp);
+    
+    priority_queue<int, vector<int>, greater<int>> pq;
+    
+    int i = 0, cnt = 0;
+    for(int d = 1; d <= 100000; d++) {
+        while(!pq.empty() && pq.top() < d) {
+            pq.pop();
         }
-
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The goal of this problem is to maximize the number of events that can be attended given a list of events, where each event has a start and an end date. You can attend one event per day, and your objective is to find out how many events you can attend in total. Each event is represented as a pair of integers `[start, end]`, where `start` is the starting day of the event, and `end` is the ending day of the event.
-
-### Approach
-To solve the problem effectively, the approach is as follows:
-
-1. **Sorting Events**: First, sort the events based on their start time. If two events start on the same day, sort them by their end time. This allows for efficient processing of events as we iterate through each day.
-   
-2. **Using a Min-Heap (Priority Queue)**: A priority queue (min-heap) is employed to keep track of the end times of events that are available to be attended on a given day. This allows for quick access to the event that finishes the earliest, maximizing the potential to attend subsequent events.
-
-3. **Iterating Through Days**: Iterate through each day from `1` to `100,000` (as specified in the problem constraints). For each day:
-   - Remove events from the heap that have already ended.
-   - Add new events starting on that day to the heap.
-   - If there are any events available to attend, select the one that ends the earliest (using the priority queue), thus allowing room for more future events.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    static bool cmp(vector<int> &a, vector<int> &b) {
-        if(a[0] == b[0]) return a[1] < b[1];
-        else return a[0] < b[0];
-    }
-```
-- The `cmp` function is a comparator for sorting events. It sorts events first by their start day. If two events start on the same day, it sorts them by their end day to facilitate easy management of the events in the priority queue.
-
-```cpp
-    int maxEvents(vector<vector<int>>& e) {
-        int n = e.size();
-        sort(e.begin(), e.end(), cmp); // Sort the events based on start and end times
-```
-- The `maxEvents` function starts by determining the number of events `n` and sorts the events using the previously defined comparator.
-
-```cpp
-        priority_queue<int, vector<int>, greater<int>> pq;
-        int i = 0, cnt = 0; // `i` tracks the current event and `cnt` counts attended events
-```
-- A priority queue `pq` is initialized to store the end times of the events that can be attended. The variables `i` and `cnt` track the index of the current event being processed and the count of events attended, respectively.
-
-```cpp
-        for(int d = 1; d <= 100000; d++) {
-            while(!pq.empty() && pq.top() < d) {
-                pq.pop(); // Remove events that have already ended
-            }
-            while(i < n && e[i][0] == d) {
-                pq.push(e[i++][1]); // Add events starting on day `d`
-            }
-```
-- The loop iterates through each day from `1` to `100,000`. The inner loop first removes any events from the priority queue that have ended before the current day. Then, it adds all events that start on the current day to the priority queue.
-
-```cpp
-            if(!pq.empty()) {
-                pq.pop(); // Attend the event that ends the earliest
-                cnt++; // Increment the count of attended events
-            }
+        while(i < n && e[i][0] == d) {
+            pq.push(e[i++][1]);
         }
-```
-- After processing the events for the current day, if the priority queue is not empty, it pops the event that ends first, indicating that one event has been attended, and the count is incremented.
-
-```cpp
-        return cnt; // Return the total count of attended events
+        if(!pq.empty()) {
+            pq.pop();
+            cnt++;
+        }
     }
-};
+
+    return cnt;
+}
 ```
-- Finally, the total count of attended events `cnt` is returned.
 
-### Complexity Analysis
-- **Time Complexity**: 
-  - Sorting the events takes \(O(n \log n)\).
-  - The overall processing involves iterating through `100,000` days. Each day can involve operations with the priority queue, which takes \(O(\log n)\). Therefore, the total time complexity is \(O(n \log n + d \log n)\), where \(d\) is `100,000`. Given that \(n\) is generally smaller than `d`, we can simplify this to \(O(n \log n)\).
+This code defines a function that finds the maximum number of events that can be attended, where each event has a start and end day. It sorts the events by their start day and uses a priority queue to track the end days of events to optimize the attendance calculation.
 
-- **Space Complexity**: 
-  - The space complexity is \(O(n)\) for storing the events in the priority queue and any additional space used by the vector of events.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Comparator Function**
+	```cpp
+	static bool cmp(vector<int> &a, vector<int> &b) {
+	```
+	We define a comparator function to sort the events. If two events have the same start day, they are sorted by their end day in ascending order.
 
-### Conclusion
-The `maxEvents` function efficiently determines the maximum number of events that can be attended given their start and end days. By utilizing a combination of sorting and a priority queue, the algorithm ensures optimal event management, allowing for quick access to the next available event to attend.
+2. **Comparator Logic**
+	```cpp
+	    if(a[0] == b[0]) return a[1] < b[1];
+	```
+	If two events start on the same day, we return true if the first event ends earlier than the second.
 
-This approach demonstrates a solid understanding of greedy algorithms and data structures, particularly how priority queues can optimize decision-making processes in time-based problems. The clear structure and efficiency of this implementation make it a strong solution to the problem, suitable for competitive programming and interview settings.
+3. **Comparator Logic**
+	```cpp
+	    else return a[0] < b[0];
+	```
+	If the start days are different, we return true if the first event starts earlier than the second.
 
-By breaking down each part of the code and the overall logic, this explanation serves as a valuable resource for those learning about algorithms related to scheduling and event management, providing insights that can be applied to similar problems in various contexts.
+4. **Function Declaration**
+	```cpp
+	int maxEvents(vector<vector<int>>& e) {
+	```
+	The 'maxEvents' function is declared, which takes a vector of events, each represented as a pair of start and end days.
+
+5. **Event Count Initialization**
+	```cpp
+	    int n = e.size();
+	```
+	We initialize 'n' to the number of events, which is the size of the vector 'e'.
+
+6. **Sort Events**
+	```cpp
+	    sort(e.begin(), e.end(), cmp);
+	```
+	We sort the events by their start day (and end day if the start days are equal) using the 'cmp' comparator.
+
+7. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<int, vector<int>, greater<int>> pq;
+	```
+	We declare a priority queue to store the end days of events, sorted in ascending order.
+
+8. **Counter Initialization**
+	```cpp
+	    int i = 0, cnt = 0;
+	```
+	We initialize two variables: 'i' to track the index of events and 'cnt' to count the number of events that can be attended.
+
+9. **Day Loop**
+	```cpp
+	    for(int d = 1; d <= 100000; d++) {
+	```
+	We loop over each day from 1 to 100000, representing the possible days on which an event can take place.
+
+10. **Pop Expired Events**
+	```cpp
+	        while(!pq.empty() && pq.top() < d) {
+	```
+	We remove events from the priority queue that have already ended before the current day 'd'.
+
+11. **Pop Expired Event**
+	```cpp
+	            pq.pop();
+	```
+	We remove the event with the earliest end day from the priority queue.
+
+12. **Add New Events**
+	```cpp
+	        while(i < n && e[i][0] == d) {
+	```
+	We add all events starting on the current day 'd' to the priority queue.
+
+13. **Push Event to Queue**
+	```cpp
+	            pq.push(e[i++][1]);
+	```
+	We push the end day of the current event into the priority queue and move to the next event.
+
+14. **Attend Event**
+	```cpp
+	        if(!pq.empty()) {
+	```
+	If there are events available to attend, we proceed to attend one.
+
+15. **Pop Attended Event**
+	```cpp
+	            pq.pop();
+	```
+	We pop the event with the earliest end day from the priority queue, as it is the event we will attend.
+
+16. **Increment Event Count**
+	```cpp
+	            cnt++;
+	```
+	We increment the event count as we have successfully attended an event.
+
+17. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	We return the total count of events that can be attended.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) for sorting the events.
+- **Average Case:** O(n log n) due to sorting and priority queue operations.
+- **Worst Case:** O(n log n), where n is the number of events.
+
+The time complexity is dominated by sorting the events.
+
+### Space Complexity 💾
+- **Best Case:** O(1) if there are no events.
+- **Worst Case:** O(n) for the priority queue and input storage.
+
+The space complexity is O(n) due to the storage of events and the priority queue.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/description/)

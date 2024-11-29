@@ -14,177 +14,287 @@ img_src = ""
 youtube = "Twas2VoFXW4"
 youtube_upload_date="2021-01-02"
 youtube_thumbnail="https://i.ytimg.com/vi/Twas2VoFXW4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design a spellchecker that corrects a given word from a query based on specific rules. For each query, find a matching word from the given wordlist by applying exact matches, case-insensitive matches, or vowel error corrections. Return the corrected word, or an empty string if no match is found.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The problem takes in a wordlist of valid words and a set of query words to check against the wordlist.
+- **Example:** ` "wordlist": ["Orange", "blue", "Red", "green"], "queries": ["orange", "BLUE", "rEd", "grane", "yellow"] `
+- **Constraints:**
+	- 1 <= wordlist.length, queries.length <= 5000
+	- 1 <= wordlist[i].length, queries[i].length <= 7
+	- Each word in wordlist and queries consists only of English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
-        unordered_set words(wordlist.begin(), wordlist.end());
-        unordered_map<string, string> cap, vowel;
-        for(string w : wordlist) {
-            string lower = tolow(w), devvowel = todev(w);
-            cap.insert({lower, w});
-            vowel.insert({devvowel, w});
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of corrected words for the queries based on the rules, or an empty string for unmatched queries.
+- **Example:** `["Orange", "blue", "Red", "", ""]`
+- **Constraints:**
+	- The output list must have the same length as the queries.
+	- Each output corresponds to the corrected word for the respective query.
 
-        for(int i = 0; i < queries.size(); i++) {
-            
-            if (words.count(queries[i])) continue;
-            
-            string lower = tolow(queries[i]), devvowel = todev(queries[i]);
-            
-            if(cap.count(lower))
-                 queries[i] = cap[lower];
-            else if(vowel.count(devvowel))
-                 queries[i] = vowel[devvowel];
-            else queries[i] = "";
-        }
-        return queries;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the best match for each query using exact matching, case-insensitive matching, or vowel-error correction.
 
-    }
+- Convert the wordlist into sets and maps for fast lookups.
+- Check if the query matches a word exactly in the wordlist.
+- If no exact match, check for case-insensitive matches.
+- If no case-insensitive match, replace vowels in the query and check for vowel-error matches.
+- Return the first match for each query based on precedence or an empty string if no match is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- All queries will be processed independently.
+- The wordlist and queries contain only valid English words.
+{{< dots >}}
+## Examples 🧩
+- **Input:** ` "wordlist": ["Orange", "blue", "Red", "green"], "queries": ["orange", "BLUE", "rEd", "grane", "yellow"] `  \
+  **Explanation:** Query 'orange' matches 'Orange' exactly ignoring case, 'BLUE' matches 'blue', 'rEd' matches 'Red'. Query 'grane' has a vowel error but doesn't match any word. 'yellow' has no match in the wordlist. Output: ['Orange', 'blue', 'Red', '', ''].
 
-    string tolow(string w) {
-        for(char &c : w)
-        c = tolower(c);
-        return w;
-    }
+{{< dots >}}
+## Approach 🚀
+Use sets and hashmaps to efficiently check for matches based on the precedence rules. Iterate through queries and match each using exact, case-insensitive, and vowel-error rules in order.
 
-    string todev(string w) {
-        w = tolow(w);
-        for(char &c:w)
-        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c=='u')
-            c = '#';
-        return w;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand involves performing a spellchecking operation on a list of queries, using a provided wordlist of correctly spelled words. For each query, we need to return the correct word from the wordlist if it exists, or return an empty string if no match is found.
-
-In addition to exact matches, we are asked to handle two special cases:
-1. **Case-insensitivity**: If the query is an exact match but with different casing (e.g., "hello" vs "HELLO"), it should still be considered a match.
-2. **Vowel-insensitivity**: If the query is almost correct except for differences in vowels (i.e., vowels can be replaced with a special character like `#`), it should still be considered a match. For example, "hello" and "h#ll#" should be treated as equivalent, since only vowels differ.
-
-We are required to return the correct word for each query or an empty string if no match is found.
-
-### Approach
-
-To solve this problem efficiently, we can break it down into the following steps:
-
-1. **Exact Matching**: First, we check if a query exactly matches any word in the wordlist. This can be achieved using a set for fast lookups.
-
-2. **Case-insensitive Matching**: We handle case-insensitive matches by converting both the query and the words in the wordlist to lowercase before comparing them. This ensures that "hello", "Hello", and "HELLO" are treated as identical.
-
-3. **Vowel-insensitive Matching**: We replace vowels (`a`, `e`, `i`, `o`, `u`) in the query and the words with a special character (e.g., `#`) to ignore vowel differences. This allows queries like "h#ll#" to match "hello".
-
-4. **Data Structures**: We use the following data structures:
-   - A set (`unordered_set`) to store the words in the wordlist for fast exact match lookups.
-   - Two maps (`unordered_map`): one for case-insensitive mappings and another for vowel-insensitive mappings.
-   
-   The maps will help us retrieve the correct word from the wordlist if we encounter a query that matches in case or vowel-insensitivity.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Exact matches are straightforward using a set.
+- Case-insensitive matches require storing lowercase versions of the wordlist.
+- Vowel-error matching needs normalization of vowels to a common character for easy comparison.
+- The precedence of rules ensures a clear order of checks for each query.
+- Preprocessing the wordlist into maps will significantly improve lookup efficiency.
+{{< dots >}}
+### Edge Cases 🌐
+- Queries or wordlist is empty. Output should be an empty list.
+- Maximum allowable length of wordlist and queries. Ensure performance scales.
+- All queries fail to match any word. Output should be all empty strings.
+- Queries differ only by case or vowels from wordlist entries.
+- Queries with completely mismatched characters have no valid output.
+- Wordlist with duplicate words should behave as if the duplicates are removed.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
-        unordered_set words(wordlist.begin(), wordlist.end());
-        unordered_map<string, string> cap, vowel;
+vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
+    unordered_set words(wordlist.begin(), wordlist.end());
+    unordered_map<string, string> cap, vowel;
+    for(string w : wordlist) {
+        string lower = tolow(w), devvowel = todev(w);
+        cap.insert({lower, w});
+        vowel.insert({devvowel, w});
+    }
+
+    for(int i = 0; i < queries.size(); i++) {
+        
+        if (words.count(queries[i])) continue;
+        
+        string lower = tolow(queries[i]), devvowel = todev(queries[i]);
+        
+        if(cap.count(lower))
+             queries[i] = cap[lower];
+        else if(vowel.count(devvowel))
+             queries[i] = vowel[devvowel];
+        else queries[i] = "";
+    }
+    return queries;
+
+}
+
+string tolow(string w) {
+    for(char &c : w)
+    c = tolower(c);
+    return w;
+}
+
+string todev(string w) {
+    w = tolow(w);
+    for(char &c:w)
+    if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c=='u')
+        c = '#';
+    return w;
+}
 ```
 
-1. **Initialization**:
-   - We start by creating an `unordered_set` called `words` to store all the words in the `wordlist` for quick exact lookups.
-   - We also initialize two `unordered_map` objects:
-     - `cap` will store mappings of lowercase words to their original word (to handle case-insensitive matching).
-     - `vowel` will store mappings of vowel-insensitive versions of words to their original word.
+The function handles spellchecking with three approaches: exact matches, capitalization-insensitive matches, and vowel-insensitive matches. Helper functions convert strings for case normalization and vowel masking.
 
-```cpp
-        for(string w : wordlist) {
-            string lower = tolow(w), devvowel = todev(w);
-            cap.insert({lower, w});
-            vowel.insert({devvowel, w});
-        }
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
+	```
+	The main function takes a word list and a list of queries, returning corrected spellings based on specific rules.
 
-2. **Populating Maps**:
-   - We iterate over each word in the `wordlist`. For each word `w`:
-     - We generate a lowercase version of the word using the `tolow` function.
-     - We generate a vowel-insensitive version of the word using the `todev` function.
-     - We store the original word in the `cap` map, using the lowercase version as the key.
-     - We store the original word in the `vowel` map, using the vowel-insensitive version as the key.
+2. **Data Structure Initialization**
+	```cpp
+	    unordered_set words(wordlist.begin(), wordlist.end());
+	```
+	Stores the words from the word list in a set for fast lookups.
 
-```cpp
-        for(int i = 0; i < queries.size(); i++) {
-            
-            if (words.count(queries[i])) continue;
-            
-            string lower = tolow(queries[i]), devvowel = todev(queries[i]);
-            
-            if(cap.count(lower))
-                 queries[i] = cap[lower];
-            else if(vowel.count(devvowel))
-                 queries[i] = vowel[devvowel];
-            else queries[i] = "";
-        }
-        return queries;
-    }
-```
+3. **Data Structure Initialization**
+	```cpp
+	    unordered_map<string, string> cap, vowel;
+	```
+	Maps to store the first occurrence of words based on capitalization and vowel masking.
 
-3. **Query Processing**:
-   - For each query in `queries`, we:
-     - First check if the query exists exactly in the `words` set. If it does, we leave the query unchanged.
-     - If no exact match is found, we convert the query to lowercase and check if it matches any word in the `cap` map. If a match is found, we update the query to the correct word.
-     - If no match is found in `cap`, we check if the vowel-insensitive version of the query matches any word in the `vowel` map. If a match is found, we update the query to the correct word.
-     - If no match is found in either map, we set the query to an empty string.
+4. **Loop**
+	```cpp
+	    for(string w : wordlist) {
+	```
+	Iterates through the word list to populate maps for transformations.
 
-4. **Helper Functions**:
-```cpp
-    string tolow(string w) {
-        for(char &c : w)
-        c = tolower(c);
-        return w;
-    }
+5. **String Manipulations**
+	```cpp
+	        string lower = tolow(w), devvowel = todev(w);
+	```
+	Transforms the word into lowercase and a vowel-masked version.
 
-    string todev(string w) {
-        w = tolow(w);
-        for(char &c:w)
-        if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c=='u')
-            c = '#';
-        return w;
-    }
-```
+6. **Map Insertion**
+	```cpp
+	        cap.insert({lower, w});
+	```
+	Inserts the lowercase version into the capitalization map.
 
-- **`tolow` Function**:
-  - The `tolow` function converts a string to lowercase by iterating over each character and using the `tolower` function.
-  
-- **`todev` Function**:
-  - The `todev` function first converts the word to lowercase using `tolow`. Then, it replaces all vowels (`a`, `e`, `i`, `o`, `u`) with the special character `#`. This ensures that vowel differences are ignored when comparing words.
+7. **Map Insertion**
+	```cpp
+	        vowel.insert({devvowel, w});
+	```
+	Inserts the vowel-masked version into the vowel map.
 
-### Complexity
+8. **Loop**
+	```cpp
+	    for(int i = 0; i < queries.size(); i++) {
+	```
+	Iterates through the queries to apply spellchecking.
 
-- **Time Complexity**: 
-  - The time complexity is **O(N + Q)**, where:
-    - `N` is the number of words in the `wordlist`.
-    - `Q` is the number of queries.
-  - We build the `unordered_set` and `unordered_map` in **O(N)** time.
-  - For each query, we perform at most two lookups in the maps (`cap` and `vowel`), both of which are **O(1)** on average due to the properties of hashmaps. Therefore, checking all `Q` queries takes **O(Q)** time.
+9. **Conditional Check**
+	```cpp
+	        if (words.count(queries[i])) continue;
+	```
+	Skips processing if the query matches exactly in the word set.
 
-- **Space Complexity**:
-  - The space complexity is **O(N)**, where `N` is the number of words in the `wordlist`. This is because we store all the words in the `unordered_set` and `unordered_map` objects.
+10. **String Manipulations**
+	```cpp
+	        string lower = tolow(queries[i]), devvowel = todev(queries[i]);
+	```
+	Generates lowercase and vowel-masked versions of the query.
 
-### Conclusion
+11. **Conditional Check**
+	```cpp
+	        if(cap.count(lower))
+	```
+	Checks for a capitalization-insensitive match.
 
-This solution efficiently solves the problem of spellchecking with case-insensitivity and vowel-insensitivity. By leveraging hashmaps and sets, the solution ensures fast lookups for exact matches, case-insensitive matches, and vowel-insensitive matches. The approach is highly optimized for both time and space, with a linear time complexity relative to the number of words and queries. This makes the solution scalable for larger inputs and ensures quick responses even for a large number of queries.
+12. **Map Access**
+	```cpp
+	             queries[i] = cap[lower];
+	```
+	Replaces the query with the matched word from the capitalization map.
+
+13. **Conditional Check**
+	```cpp
+	        else if(vowel.count(devvowel))
+	```
+	Checks for a vowel-insensitive match.
+
+14. **Map Access**
+	```cpp
+	             queries[i] = vowel[devvowel];
+	```
+	Replaces the query with the matched word from the vowel map.
+
+15. **Default Assignment**
+	```cpp
+	        else queries[i] = "";
+	```
+	Sets the query to an empty string if no match is found.
+
+16. **Return Statement**
+	```cpp
+	    return queries;
+	```
+	Returns the modified list of queries.
+
+17. **Function Declaration**
+	```cpp
+	string tolow(string w) {
+	```
+	Helper function to convert a string to lowercase.
+
+18. **Loop**
+	```cpp
+	    for(char &c : w)
+	```
+	Iterates through the characters of the string.
+
+19. **Character Conversion**
+	```cpp
+	    c = tolower(c);
+	```
+	Converts each character to lowercase.
+
+20. **Return Statement**
+	```cpp
+	    return w;
+	```
+	Returns the transformed lowercase string.
+
+21. **Function Declaration**
+	```cpp
+	string todev(string w) {
+	```
+	Helper function to convert a string to its vowel-masked version.
+
+22. **String Manipulations**
+	```cpp
+	    w = tolow(w);
+	```
+	Converts the string to lowercase for uniformity.
+
+23. **Loop**
+	```cpp
+	    for(char &c:w)
+	```
+	Iterates through the characters of the string.
+
+24. **Conditional Check**
+	```cpp
+	    if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c=='u')
+	```
+	Checks if the character is a vowel.
+
+25. **Character Conversion**
+	```cpp
+	        c = '#';
+	```
+	Replaces vowels with the '#' symbol.
+
+26. **Return Statement**
+	```cpp
+	    return w;
+	```
+	Returns the transformed vowel-masked string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(Q)
+- **Average Case:** O(Q + W)
+- **Worst Case:** O(Q * L)
+
+Q = number of queries, W = number of words in wordlist, L = length of the longest word.
+
+### Space Complexity 💾
+- **Best Case:** O(W)
+- **Worst Case:** O(W * L)
+
+Space used for storing preprocessed wordlist mappings and queries.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/vowel-spellchecker/description/)
 

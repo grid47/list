@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "T41rL0L3Pnw"
 youtube_upload_date="2021-01-13"
 youtube_thumbnail="https://i.ytimg.com/vi/T41rL0L3Pnw/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,150 +28,219 @@ youtube_thumbnail="https://i.ytimg.com/vi/T41rL0L3Pnw/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an m x n matrix of integers. Whenever an element in the matrix is 0, you need to set all elements in the corresponding row and column to 0, but the operation must be done in place. This means you cannot use extra space for another matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a matrix of size m x n containing integers.
+- **Example:** `matrix = [[3, 5, 1], [4, 0, 2], [7, 8, 9]]`
+- **Constraints:**
+	- 1 <= m, n <= 200
+	- -231 <= matrix[i][j] <= 231 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void setZeroes(vector<vector<int>>& mtx) {
-        int m = mtx.size(), n = mtx[0].size();
-        int zr = 0, zc = 0;
-        for(int i = 0; i < n; i++)
-            if(mtx[0][i] == 0) zr = 1;
-        for(int i = 0; i < m; i++)
-            if(mtx[i][0] == 0) zc = 1;        
-        
-        for(int i = 1; i < m; i++)
-        for(int j = 1; j < n; j++)
-            if(mtx[i][j] == 0) {
-                mtx[i][0] = 0;
-                mtx[0][j] = 0;
-            }
-        
-        for(int i = 1; i < m; i++)
-        for(int j = 1; j < n; j++)
-            if(mtx[i][0] == 0 || mtx[0][j] == 0)
-                mtx[i][j] = 0;
-        
-        if(zr == 1)
-        for(int i = 0; i < n; i++)
-            mtx[0][i] = 0;
-        if(zc == 1)
-        for(int i = 0; i < m; i++)
-            mtx[i][0] = 0;        
-            
-        
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the transformed matrix where rows and columns containing zeros are set to zero in place.
+- **Example:** `[[3, 0, 1], [0, 0, 0], [7, 0, 9]]`
+- **Constraints:**
+	- The output should be the matrix itself, modified in place.
 
-### 🧩 **Set Matrix Zeros (In-Place Transformation)**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Transform the matrix in place by setting entire rows and columns to 0 whenever a zero is encountered.
 
-In this problem, you are tasked with modifying a given **m x n matrix** such that if any element is `0`, the entire row and column containing that element should be set to `0`. This operation must be done **in-place**, meaning you cannot use extra space for another matrix, and the goal is to achieve this with **O(1) additional space** (aside from the input matrix).
+- Identify if the first row or column contains a zero, and mark these as flags.
+- Use the first row and column to mark which rows and columns need to be zeroed.
+- Iterate through the rest of the matrix and use the flags to set the corresponding rows and columns to zero.
+- Handle the first row and column separately if necessary.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is a 2D array with at least one element.
+- All elements in the matrix are integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `matrix = [[3, 5, 1], [4, 0, 2], [7, 8, 9]]`  \
+  **Explanation:** The second row has a 0 at (1,1). Hence, the entire second row and the second column are set to 0.
 
-### 📝 **Problem Breakdown**
+- **Input:** `matrix = [[1, 2, 3], [4, 0, 6], [7, 8, 9]]`  \
+  **Explanation:** The second row has a 0 at (1,1). Hence, the entire second row and the second column are set to 0.
 
-You are given:
-- A matrix `mtx` with dimensions **m x n**.
-- The task is to set rows and columns to zero if any element in the matrix is zero.
+{{< dots >}}
+## Approach 🚀
+The solution involves using the first row and column to store the state of rows and columns that need to be zeroed. This allows the matrix to be modified in place without using additional space.
 
-The solution must modify the matrix in-place, using **O(1) extra space** (i.e., no additional matrices or data structures except for a couple of flags).
-
-### 💡 **Approach**
-
-The core idea is to **use the input matrix itself** to track which rows and columns should be zeroed out. The first row and first column can act as markers to indicate which rows and columns contain zeros, without requiring extra space.
-
-#### Key Insights:
-1. **Mark Rows and Columns Using the First Row and Column**:
-   - Use the first row to mark which columns should be zeroed.
-   - Use the first column to mark which rows should be zeroed.
-
-2. **Handling the First Row and Column**:
-   - Since the first row and first column are being used for marking, we need special handling to check if they contain any zeros themselves.
-
-3. **In-place Zeroing**:
-   - After marking the rows and columns, we can update the matrix by zeroing out the appropriate rows and columns.
-
-4. **Restoring the First Row and Column**:
-   - Finally, we handle the first row and first column separately, using the flags set earlier.
-
-### 🚀 **Code Breakdown**
-
-#### Step 1: Initialize Flags for the First Row and Column
-
+### Initial Thoughts 💭
+- The matrix needs to be transformed in place without extra space.
+- We can use the first row and column to store flags for marking rows and columns that need to be zeroed.
+- Using a flag system for the first row and column will prevent overwriting important data during the transformation.
+{{< dots >}}
+### Edge Cases 🌐
+- If the matrix has only one row or one column, it must be handled appropriately.
+- Consider cases where the matrix size is at the upper limit (200x200).
+- Ensure that negative numbers and boundary values are handled correctly.
+- The solution must be implemented in-place and must not use additional matrices for storage.
+{{< dots >}}
+## Code 💻
 ```cpp
-int m = mtx.size(), n = mtx[0].size();
-int zr = 0, zc = 0;
-for(int i = 0; i < n; i++)
-    if(mtx[0][i] == 0) zr = 1;
-for(int i = 0; i < m; i++)
-    if(mtx[i][0] == 0) zc = 1;
-```
+void setZeroes(vector<vector<int>>& matrix) {
+    int m = matrix.size(), n = matrix[0].size();
+    bool firstRowZero = false, firstColZero = false;
 
-- We initialize two flags: `zr` for the first row and `zc` for the first column. 
-- We check if there are any zeros in the first row (`zr`) and the first column (`zc`). If a zero is found, we set the corresponding flag to `1`.
-
-#### Step 2: Mark Zeros in the Matrix Using the First Row and Column
-
-```cpp
-for(int i = 1; i < m; i++)
-    for(int j = 1; j < n; j++)
-        if(mtx[i][j] == 0) {
-            mtx[i][0] = 0;
-            mtx[0][j] = 0;
+    // Check if first row has a zero
+    for (int j = 0; j < n; j++) {
+        if (matrix[0][j] == 0) {
+            firstRowZero = true;
+            break;
         }
+    }
+
+    // Check if first column has a zero
+    for (int i = 0; i < m; i++) {
+        if (matrix[i][0] == 0) {
+            firstColZero = true;
+            break;
+        }
+    }
+
+    // Mark the rows and columns with zeros using the first row and column
+    for (int i = 1; i < m; i++) {
+        for (int j = 1; j < n; j++) {
+            if (matrix[i][j] == 0) {
+                matrix[i][0] = matrix[0][j] = 0;
+            }
+        }
+    }
+
+    // Set the rows and columns marked as zero to zero
+    for (int i = 1; i < m; i++) {
+        for (int j = 1; j < n; j++) {
+            if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    // Set the first row to zero if necessary
+    if (firstRowZero) {
+        for (int j = 0; j < n; j++) {
+            matrix[0][j] = 0;
+        }
+    }
+
+    // Set the first column to zero if necessary
+    if (firstColZero) {
+        for (int i = 0; i < m; i++) {
+            matrix[i][0] = 0;
+        }
+    }
+}
 ```
 
-- Now, we iterate through the matrix starting from the second row and second column. 
-- If any element `mtx[i][j]` is `0`, we mark the corresponding first row (`mtx[i][0]`) and first column (`mtx[0][j]`) as `0`.
+This code sets all elements in a matrix to zero if their corresponding row or column contains a zero.
 
-#### Step 3: Zero Out the Rows and Columns Based on the Markers
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	void setZeroes(vector<vector<int>>& matrix) {
+	```
+	Declares a function `setZeroes` that takes a 2D vector `matrix` as input and modifies it in-place.
 
-```cpp
-for(int i = 1; i < m; i++)
-    for(int j = 1; j < n; j++)
-        if(mtx[i][0] == 0 || mtx[0][j] == 0)
-            mtx[i][j] = 0;
-```
+2. **Variable Initialization**
+	```cpp
+	    int m = matrix.size(), n = matrix[0].size();
+	```
+	Initializes variables `m` and `n` to store the number of rows and columns in the matrix.
 
-- After marking the rows and columns, we iterate over the entire matrix again (excluding the first row and first column).
-- If the first column or the first row for any element `mtx[i][j]` is `0`, we set that element to `0`.
+3. **Variable Initialization**
+	```cpp
+	    bool firstRowZero = false, firstColZero = false;
+	```
+	Initializes boolean flags `firstRowZero` and `firstColZero` to track if the first row and column contain zeros.
 
-#### Step 4: Handle the First Row and First Column
+4. **Loop Iteration**
+	```cpp
+	    for (int j = 0; j < n; j++) {
+	        if (matrix[0][j] == 0) {
+	            firstRowZero = true;
+	            break;
+	        }
+	    }
+	```
+	Iterates through the first row of the matrix and sets `firstRowZero` to `true` if a zero is found.
 
-```cpp
-if(zr == 1)
-    for(int i = 0; i < n; i++)
-        mtx[0][i] = 0;
-if(zc == 1)
-    for(int i = 0; i < m; i++)
-        mtx[i][0] = 0;
-```
+5. **Loop Iteration**
+	```cpp
+	    for (int i = 0; i < m; i++) {
+	        if (matrix[i][0] == 0) {
+	            firstColZero = true;
+	            break;
+	        }
+	    }
+	```
+	Iterates through the first column of the matrix and sets `firstColZero` to `true` if a zero is found.
 
-- Finally, we handle the first row and first column.
-- If the first row contains a zero (indicated by `zr`), we set all elements in the first row to `0`.
-- If the first column contains a zero (indicated by `zc`), we set all elements in the first column to `0`.
+6. **Nested Loops**
+	```cpp
+	    for (int i = 1; i < m; i++) {
+	        for (int j = 1; j < n; j++) {
+	            if (matrix[i][j] == 0) {
+	                matrix[i][0] = matrix[0][j] = 0;
+	            }
+	        }
+	    }
+	```
+	Iterates through the matrix, excluding the first row and column. If a zero is found, marks the corresponding row and column using the first row and column as markers.
 
-### ⏱️ **Complexity Analysis**
+7. **Nested Loops**
+	```cpp
+	    for (int i = 1; i < m; i++) {
+	        for (int j = 1; j < n; j++) {
+	            if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+	                matrix[i][j] = 0;
+	            }
+	        }
+	    }
+	```
+	Iterates through the matrix again, setting elements to zero based on the markers in the first row and column.
 
-#### Time Complexity:
-- **O(m * n)** — We iterate over the matrix multiple times. Each element is processed a constant number of times, resulting in **O(m * n)** time complexity, where `m` is the number of rows and `n` is the number of columns.
+8. **Conditional**
+	```cpp
+	    if (firstRowZero) {
+	        for (int j = 0; j < n; j++) {
+	            matrix[0][j] = 0;
+	        }
+	    }
+	```
+	If the first row was originally zero, set all elements in the first row to zero.
 
-#### Space Complexity:
-- **O(1)** — We use only a few integer variables (`zr`, `zc`) for the flags. The matrix is modified in-place, and no additional space is used.
+9. **Conditional**
+	```cpp
+	    if (firstColZero) {
+	        for (int i = 0; i < m; i++) {
+	            matrix[i][0] = 0;
+	        }
+	    }
+	```
+	If the first column was originally zero, set all elements in the first column to zero.
 
-### 🎯 **Conclusion**
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-This solution efficiently modifies the matrix in-place to set the entire row and column to zero when any element is zero. By utilizing the first row and column as markers, we achieve **O(1) space complexity** and **O(m * n)** time complexity, making this approach both space and time-efficient.
+The time complexity is O(m * n) because we iterate through the entire matrix twice.
 
-This method is particularly useful for problems that require **in-place transformations** while maintaining **optimal space usage**. The clever use of the first row and column as markers is a classic technique for reducing space complexity in matrix manipulation problems.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
----
+The space complexity is O(1) because the solution is implemented in-place without additional storage.
 
-### 🌟 **Final Thoughts**
-Matrix manipulation problems like this one are excellent for testing your understanding of space complexity and in-place transformations. Keep practicing, and you’ll find ways to solve increasingly complex problems with optimal space and time efficiency! 🚀
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/set-matrix-zeroes/description/)
 

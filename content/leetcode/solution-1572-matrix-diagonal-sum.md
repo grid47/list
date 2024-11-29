@@ -14,115 +14,131 @@ img_src = ""
 youtube = "5TLlr3y3Iww"
 youtube_upload_date="2023-05-09"
 youtube_thumbnail="https://i.ytimg.com/vi/5TLlr3y3Iww/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a square matrix of integers. Your task is to calculate the sum of all the elements located on the primary diagonal and the secondary diagonal, excluding the element that appears on both diagonals (i.e., the center element in an odd-sized matrix).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a square matrix, where each element is an integer. The matrix has equal number of rows and columns.
+- **Example:** `Input: mat = [[3, 1, 2], [4, 5, 6], [7, 8, 9]]`
+- **Constraints:**
+	- 1 <= n <= 100
+	- 1 <= mat[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int diagonalSum(vector<vector<int>>& mat) {
-        int n = mat.size(), sum = 0;
-        for(int i = 0; i < n; i++)
-            sum += mat[i][i] + mat[n - 1 - i][i];
-        if(n % 2) sum -= mat[n/2][n/2];
-        return sum;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of the elements on both the primary and secondary diagonals. If the matrix size is odd, subtract the center element once to avoid double-counting.
+- **Example:** `Output: 25`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the sum of the diagonal elements efficiently without counting the center element twice.
 
-The problem involves calculating the sum of the diagonal elements in a square matrix. A square matrix is defined as a matrix with an equal number of rows and columns. In this context, we are specifically interested in two diagonals:
-1. **Primary Diagonal**: The diagonal that runs from the top left to the bottom right of the matrix.
-2. **Secondary Diagonal**: The diagonal that runs from the top right to the bottom left.
+- Iterate through the matrix and sum the elements on the primary diagonal (mat[i][i]) and secondary diagonal (mat[i][n-i-1]).
+- If the matrix size is odd, subtract the center element (mat[n//2][n//2]) once as it's counted in both diagonals.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is square, meaning the number of rows is equal to the number of columns.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: mat = [[3, 1, 2], [4, 5, 6], [7, 8, 9]]`  \
+  **Explanation:** The diagonals sum: 3 + 5 + 9 + 2 + 7 = 25. No element is counted twice.
 
-Given an `n x n` matrix, the objective is to compute the total sum of the elements located on both diagonals. However, when the matrix size is odd, the center element (which lies on both diagonals) should only be counted once. 
+- **Input:** `Example 2: mat = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]`  \
+  **Explanation:** The diagonals sum: 1 + 1 + 1 + 1 + 1 = 5. The center element is counted only once.
 
-### Approach
+- **Input:** `Example 3: mat = [[5]]`  \
+  **Explanation:** Only one element exists, and that is the center element. The sum is 5.
 
-To solve this problem, we can take the following steps:
+{{< dots >}}
+## Approach 🚀
+The goal is to sum the elements along both diagonals and avoid double-counting the center element for odd-sized matrices. This can be achieved by iterating through the matrix and updating the sum accordingly.
 
-1. **Iterate through the matrix**: Loop through each row of the matrix. For each row `i`, we can identify the following elements:
-   - The element at the primary diagonal, which is located at the coordinates `(i, i)`.
-   - The element at the secondary diagonal, which is located at the coordinates `(i, n - 1 - i)`.
-
-2. **Sum the diagonal elements**: As we iterate through the rows, we add the values of both diagonal elements to a cumulative sum. 
-
-3. **Handle the center element**: If the size of the matrix `n` is odd, we need to subtract the center element from the sum to avoid double-counting. The center element is located at `(n/2, n/2)`.
-
-4. **Return the final sum**: Finally, we return the calculated sum.
-
-### Code Breakdown (Step by Step)
-
-Now, let’s break down the provided code to see how it implements the above approach.
-
-- **Class Declaration**: The solution is encapsulated within a class named `Solution`.
-
-```cpp
-class Solution {
-public:
-```
-
-- **Function Definition**: The `diagonalSum` function is defined to take a 2D vector (matrix) as input and returns an integer representing the sum of the diagonal elements.
-
+### Initial Thoughts 💭
+- We need to calculate the sum of two diagonals of a square matrix.
+- In case of an odd-sized matrix, the center element is part of both diagonals, so it should be counted once.
+- By iterating through the matrix, we can directly access the elements on both diagonals using indices.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will always have at least one row and one column.
+- The solution should handle the maximum size matrix efficiently, i.e., 100x100.
+- In a 1x1 matrix, the single element is both on the primary and secondary diagonal.
+- Ensure that the solution works within the time limits for large matrices (100x100).
+{{< dots >}}
+## Code 💻
 ```cpp
 int diagonalSum(vector<vector<int>>& mat) {
-```
-
-- **Matrix Size Calculation**: We determine the size of the matrix `n` by using `mat.size()`, which gives the number of rows (and columns, since it’s square).
-
-```cpp
-int n = mat.size(), sum = 0;
-```
-
-- **Iterate Through Each Row**: A for loop is initiated to iterate through the range of `n`. For each iteration, the current index `i` corresponds to the current row being processed.
-
-```cpp
-for(int i = 0; i < n; i++)
-```
-
-- **Sum the Diagonal Elements**:
-   - The element at the primary diagonal is accessed with `mat[i][i]`.
-   - The element at the secondary diagonal is accessed with `mat[n - 1 - i][i]`.
-   - Both elements are added to the cumulative sum.
-
-```cpp
-sum += mat[i][i] + mat[n - 1 - i][i];
-```
-
-- **Adjust for Odd Matrix Size**: After summing the diagonal elements, we check if `n` is odd. If it is, we subtract the value of the center element from the sum. The center element can be accessed using the expression `mat[n/2][n/2]`.
-
-```cpp
-if(n % 2) sum -= mat[n/2][n/2];
-```
-
-- **Return the Final Sum**: Finally, the computed sum is returned as the result of the function.
-
-```cpp
-return sum;
+    int n = mat.size(), sum = 0;
+    for(int i = 0; i < n; i++)
+        sum += mat[i][i] + mat[n - 1 - i][i];
+    if(n % 2) sum -= mat[n/2][n/2];
+    return sum;
 }
 ```
 
-### Complexity
+This function calculates the sum of the diagonals of a square matrix. If the matrix has an odd size, it subtracts the middle element to avoid counting it twice.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of rows (or columns) in the square matrix. This is because we perform a single loop that iterates through each row exactly once.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int diagonalSum(vector<vector<int>>& mat) {
+	```
+	Defines the function `diagonalSum` that takes a square matrix `mat` and calculates the sum of its diagonals.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we are only using a fixed number of variables (for the sum and indices) regardless of the size of the input matrix. We do not use any additional data structures that grow with input size.
+2. **Variable Initialization**
+	```cpp
+	    int n = mat.size(), sum = 0;
+	```
+	Initializes the variable `n` to the size of the matrix and `sum` to zero, which will hold the sum of the diagonal elements.
 
-### Conclusion
+3. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts a loop that iterates over the indices of the matrix, from `i = 0` to `i = n-1`.
 
-The `diagonalSum` function effectively calculates the sum of the diagonal elements in a square matrix by utilizing a straightforward iterative approach. By leveraging the properties of matrix indices, the function efficiently accesses the necessary elements and handles the case of odd-sized matrices by adjusting the sum accordingly.
+4. **Sum Diagonal Elements**
+	```cpp
+	        sum += mat[i][i] + mat[n - 1 - i][i];
+	```
+	Adds the elements from both diagonals of the matrix: `mat[i][i]` (primary diagonal) and `mat[n - 1 - i][i]` (secondary diagonal).
 
-This implementation highlights the utility of direct access in 2D arrays, showcasing how mathematical properties can simplify programming tasks. Additionally, the solution is both efficient and elegant, adhering to best practices for algorithm design by minimizing complexity while maximizing clarity.
+5. **Odd Size Check**
+	```cpp
+	    if(n % 2) sum -= mat[n/2][n/2];
+	```
+	Checks if the matrix size `n` is odd. If so, it subtracts the center element to avoid double-counting it (as it appears in both diagonals).
 
-Understanding this solution equips developers with the necessary tools to tackle similar problems involving matrices and array manipulations. The simplicity of the approach makes it a valuable reference for educational purposes, competitive programming, or technical interviews where such problems are commonly presented.
+6. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	Returns the calculated sum of the diagonals after the loop finishes and adjustment for odd-sized matrices is done.
 
-In summary, this algorithm serves as an excellent example of how to approach problems involving matrix diagonal sums, emphasizing clarity, efficiency, and correctness. The `diagonalSum` function stands as a practical solution for real-world applications and serves as a reminder of the beauty of mathematical problem-solving through programming.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only iterate once through the matrix to calculate the sum of diagonal elements.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only need a constant amount of space for the sum and a few variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/matrix-diagonal-sum/description/)
 

@@ -14,136 +14,161 @@ img_src = ""
 youtube = "ceYZ5RgwQwQ"
 youtube_upload_date="2024-02-29"
 youtube_thumbnail="https://i.ytimg.com/vi/ceYZ5RgwQwQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Koko loves to eat bananas and there are multiple piles of bananas. Each pile has a certain number of bananas. Koko can decide how many bananas she wants to eat per hour, and each hour she can choose any pile to eat from. If the pile contains fewer bananas than her chosen rate, she finishes that pile and moves to another pile. Koko needs to finish all the bananas before the guards return in h hours. You need to determine the minimum number of bananas per hour Koko should eat in order to finish all piles within the given time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers where each integer represents the number of bananas in a pile, and an integer h representing the total hours Koko has to finish the bananas.
+- **Example:** `Input: piles = [4, 10, 7, 13], h = 6`
+- **Constraints:**
+	- 1 <= piles.length <= 10^4
+	- piles.length <= h <= 10^9
+	- 1 <= piles[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minEatingSpeed(vector<int>& piles, int H) {
-        int l = 0, r = 1000000000;
-        while(l <= r) {
-            int k = l + (r - l) / 2;
-            double h = 0;
-            for(int x: piles)
-                h += ceil((double) x / k);
-            
-            if(h > H)   l = k + 1;
-            else        r = k - 1;
-        }
-        return l;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum integer k such that Koko can eat all the bananas within h hours. If no such integer exists, return 0.
+- **Example:** `Output: 8`
+- **Constraints:**
+	- The output should be a single integer representing the minimum speed Koko needs to eat the bananas.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of bananas per hour, k, that allows Koko to eat all the bananas within h hours.
+
+- Perform a binary search on the possible eating speeds from 1 to the maximum number of bananas in any pile.
+- For each candidate eating speed k, calculate the total number of hours Koko would take to eat all piles at that speed.
+- If the total hours exceed h, increase the speed; otherwise, try a smaller speed until you find the minimum k.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array piles is non-empty and contains positive integers.
+- Koko's eating speed is adjustable and the goal is to minimize it while ensuring all bananas are eaten within h hours.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: piles = [4, 10, 7, 13], h = 6`  \
+  **Explanation:** The minimum speed Koko needs to eat all bananas in 6 hours is 8 bananas per hour, as at this speed she can finish all piles within the given time.
+
+- **Input:** `Input: piles = [5, 15, 12, 30], h = 4`  \
+  **Explanation:** The minimum speed Koko needs to eat all bananas in 4 hours is 15 bananas per hour.
+
+{{< dots >}}
+## Approach 🚀
+We will use binary search to find the optimal eating speed. This allows us to efficiently find the minimum speed that allows Koko to finish eating within the given time limit.
+
+### Initial Thoughts 💭
+- The problem can be solved efficiently with binary search since the relationship between speed and time is monotonic (higher speed leads to fewer hours).
+- We need to carefully calculate the total time for each speed and adjust the search range based on whether it is sufficient to eat all bananas.
+{{< dots >}}
+### Edge Cases 🌐
+- If piles is empty, return 0 since there are no bananas to eat.
+- The algorithm should efficiently handle large inputs, with pile sizes and hours potentially reaching up to 10^9.
+- If piles has only one element, the answer will simply be that element divided by the hours.
+- The solution must handle inputs with up to 10^4 piles and large integer values within the specified range.
+{{< dots >}}
+## Code 💻
+```cpp
+int minEatingSpeed(vector<int>& piles, int H) {
+    int l = 0, r = 1000000000;
+    while(l <= r) {
+        int k = l + (r - l) / 2;
+        double h = 0;
+        for(int x: piles)
+            h += ceil((double) x / k);
+        
+        if(h > H)   l = k + 1;
+        else        r = k - 1;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to determine the minimum eating speed of a monkey such that it can eat all the bananas in a given list of piles within a specified number of hours. The monkey can eat a certain number of bananas per hour, and it is constrained by the maximum number of hours it can work, denoted by `H`.
-
-- **Input**:
-  - `piles`: A list of integers representing the number of bananas in each pile.
-  - `H`: The total number of hours available for the monkey to finish eating.
-
-- **Output**:
-  - The minimum speed (bananas per hour) at which the monkey should eat to finish eating all the piles within `H` hours.
-
-The challenge lies in determining the optimal eating speed such that the time taken to eat all piles does not exceed the given `H` hours.
-
-### Example:
-- **Input**: `piles = [3, 6, 7, 11]`, `H = 8`
-- **Output**: `4`
-- **Explanation**: The optimal speed is 4 bananas per hour. With this speed, the monkey can finish all piles in exactly 8 hours:
-  - Pile 1: 3 bananas → 1 hour
-  - Pile 2: 6 bananas → 2 hours
-  - Pile 3: 7 bananas → 2 hours
-  - Pile 4: 11 bananas → 3 hours
-  - Total = 1 + 2 + 2 + 3 = 8 hours.
-
-### Approach
-
-The problem involves finding the minimum eating speed, which is the lowest possible integer `k` such that the monkey can eat all the bananas in `H` hours. This is a typical example of a **binary search problem**, where we aim to optimize a value (in this case, the eating speed).
-
-The general approach is as follows:
-
-1. **Binary Search for Eating Speed**:
-   - We are looking for the smallest possible eating speed that allows the monkey to finish all the piles in `H` hours.
-   - The lower bound of the binary search (`l`) starts at 1, as the minimum speed cannot be less than 1.
-   - The upper bound (`r`) starts at the largest number of bananas in any pile, since eating faster than this value is unnecessary (the monkey could finish any pile in one hour).
-
-2. **Check Feasibility of Eating Speed**:
-   - For each possible eating speed `k` (represented by the mid-point in the binary search), we need to calculate how long it would take the monkey to eat all the piles.
-   - For each pile of bananas, the time taken is calculated as the ceiling of the division of the pile size by `k` (since the monkey can only eat whole bananas per hour, and any remaining bananas would take an extra hour).
-   - If the total time exceeds `H`, then the current speed is too slow, and we need to increase the speed. Otherwise, we check if a slower speed can also satisfy the constraint.
-
-3. **Binary Search Logic**:
-   - If the total time to eat all the piles at a given speed `k` exceeds `H`, it means the speed is too slow, and we need to increase the speed (`l = k + 1`).
-   - If the total time is within the limit `H`, we try to find a smaller speed by adjusting the upper bound (`r = k - 1`).
-
-By performing this binary search, we will efficiently find the minimum speed.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Binary Search Bounds
-We start by initializing the binary search bounds:
-- `l = 1`: The minimum possible eating speed (the monkey must eat at least one banana per hour).
-- `r = 1000000000`: A large upper bound that is guaranteed to encompass any valid speed. We are using an upper bound larger than any pile size, ensuring that we can always find a valid solution.
-
-```cpp
-int l = 1, r = 1000000000;
+    return l;
+}
 ```
 
-#### Step 2: Binary Search Loop
-We use a `while` loop to perform binary search, with the condition `l <= r`. In each iteration, we calculate the midpoint `k` and check if it is a valid eating speed.
+This code implements a binary search solution to determine the minimum eating speed for an array of piles of bananas to be eaten in `H` hours.
 
-```cpp
-while(l <= r) {
-    int k = l + (r - l) / 2;  // Calculate the middle speed to test
-    double h = 0;  // Total time to eat all piles at speed k
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minEatingSpeed(vector<int>& piles, int H) {
+	```
+	The function `minEatingSpeed` takes two inputs: a vector of integers `piles` representing the number of bananas in each pile, and an integer `H` representing the total number of hours available.
 
-#### Step 3: Calculate Time to Eat All Piles
-For the given speed `k`, we calculate the total time required for the monkey to eat all piles. The time to eat a pile is `ceil(x / k)`, where `x` is the number of bananas in the current pile. We sum up the time for all piles.
+2. **Variable Initialization**
+	```cpp
+	    int l = 0, r = 1000000000;
+	```
+	The variables `l` and `r` represent the lower and upper bounds for the possible eating speeds. `l` starts at 0 and `r` is set to a very large number.
 
-```cpp
-for(int x: piles)
-    h += ceil((double) x / k);
-```
+3. **While Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	A `while` loop is used to perform the binary search, which continues as long as the lower bound is less than or equal to the upper bound.
 
-- We use `ceil((double) x / k)` to round up the time for each pile, ensuring that the monkey finishes eating each pile in the smallest integer number of hours.
+4. **Binary Search Step**
+	```cpp
+	        int k = l + (r - l) / 2;
+	```
+	The midpoint `k` is calculated as the average of `l` and `r` (the current lower and upper bounds of the eating speed). This is the candidate eating speed to check.
 
-#### Step 4: Adjust Binary Search Bounds
-If the total time `h` exceeds `H`, the eating speed `k` is too slow, and we need to increase the speed. We do this by setting the lower bound to `k + 1`. If `h` is less than or equal to `H`, we try a smaller speed by adjusting the upper bound to `k - 1`.
+5. **Variable Initialization**
+	```cpp
+	        double h = 0;
+	```
+	A variable `h` is initialized to 0. This will track the total number of hours required to eat all the piles at the current speed `k`.
 
-```cpp
-if(h > H)   l = k + 1;
-else        r = k - 1;
-```
+6. **For Loop**
+	```cpp
+	        for(int x: piles)
+	```
+	A `for` loop iterates over each pile `x` in the `piles` array, calculating how many hours it would take to eat that pile at speed `k`.
 
-#### Step 5: Return the Minimum Speed
-Once the binary search concludes, the lower bound `l` will hold the minimum speed that satisfies the condition. We return `l`.
+7. **Calculation**
+	```cpp
+	            h += ceil((double) x / k);
+	```
+	For each pile `x`, the number of hours required to eat the pile at speed `k` is calculated using `ceil((double) x / k)`, and the result is added to `h`.
 
-```cpp
-return l;
-```
+8. **Condition Check**
+	```cpp
+	        if(h > H)   l = k + 1;
+	```
+	If the total number of hours `h` exceeds the available hours `H`, it means the speed `k` is too slow, so the lower bound `l` is increased to `k + 1`.
 
-### Complexity
+9. **Condition Check**
+	```cpp
+	        else        r = k - 1;
+	```
+	If the total number of hours `h` is within the allowed limit `H`, it means the speed `k` may be valid, so the upper bound `r` is decreased to `k - 1`.
 
-#### Time Complexity:
-- The binary search loop runs in **O(log(max pile size))** time, where `max pile size` is the largest pile of bananas.
-- Inside each iteration of the binary search, we need to check each pile to calculate the total time, which takes **O(n)** time, where `n` is the number of piles.
-- Thus, the overall time complexity is **O(n log(max pile size))**.
+10. **Return Statement**
+	```cpp
+	    return l;
+	```
+	Once the binary search loop finishes, the variable `l` contains the minimum eating speed that allows all piles to be eaten within `H` hours. This value is returned.
 
-#### Space Complexity:
-- The space complexity is **O(1)** because we only use a few extra variables (such as `h`, `k`, and the binary search bounds) and do not require additional space that grows with the input size.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log M)
+- **Average Case:** O(n log M)
+- **Worst Case:** O(n log M)
 
-### Conclusion
+The time complexity is O(n log M), where n is the number of piles and M is the maximum number of bananas in any pile.
 
-This solution efficiently calculates the minimum eating speed required for the monkey to finish all the piles within the given number of hours using binary search. The approach ensures that we explore all possible speeds while minimizing the number of iterations needed. With a time complexity of **O(n log(max pile size))**, it is well-suited for large inputs, ensuring an optimal solution in a reasonable amount of time.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant since only a few variables are used to track the process.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/koko-eating-bananas/description/)
 

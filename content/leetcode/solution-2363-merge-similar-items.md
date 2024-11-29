@@ -14,136 +14,192 @@ img_src = ""
 youtube = "KjqRqf4KZxE"
 youtube_upload_date="2022-08-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/KjqRqf4KZxE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two 2D integer arrays, items1 and items2, each representing a set of items. Each item has a value and a weight. You need to combine both arrays by summing the weights of items with the same value, and return the result as a 2D array, sorted by the item values in ascending order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two 2D arrays, items1 and items2. Each array contains pairs of integers where the first integer is the item's value and the second integer is the item's weight.
+- **Example:** `items1 = [[2,3],[5,7],[4,1]], items2 = [[4,2],[2,4]]`
+- **Constraints:**
+	- 1 <= items1.length, items2.length <= 1000
+	- items1[i].length == items2[i].length == 2
+	- 1 <= valuei, weighti <= 1000
+	- Each valuei in items1 is unique.
+	- Each valuei in items2 is unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> mergeSimilarItems(vector<vector<int>>& items1, vector<vector<int>>& items2) 
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a 2D array where each element is a pair [value, weight], where the weight is the sum of weights of all items with the same value. The result should be sorted by value in ascending order.
+- **Example:** `[[2,7],[4,3],[5,7]]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to combine the items from both arrays and sum the weights for the same values, then return the sorted result.
+
+- Create a map to store the value and weight pairs.
+- Iterate through the items of the first array and add the value-weight pairs to the map.
+- For each item in the second array, check if the value already exists in the map. If it does, add the weight; if it doesn't, create a new entry.
+- Convert the map to a 2D array and sort it by the value.
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of each item is unique within the respective arrays.
+- Each array contains at least one item.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: items1 = [[2,3],[5,7],[4,1]], items2 = [[4,2],[2,4]]`  \
+  **Explanation:** Here, the item with value 2 has a weight of 3 in items1 and a weight of 4 in items2, so the total weight becomes 7. Similarly, for value 4, the total weight is 3 (1 from items1 and 2 from items2). After merging, the result is sorted by the values: [[2,7],[4,3],[5,7]].
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using a hashmap to track the sum of weights for each unique value. This allows us to efficiently combine the arrays and sort the results.
+
+### Initial Thoughts 💭
+- We need to efficiently combine the weights of matching items from two arrays.
+- The output should be sorted by value.
+- Using a hashmap is an efficient way to accumulate the total weight for each unique value.
+{{< dots >}}
+### Edge Cases 🌐
+- If either items1 or items2 is empty, the result should be the other array sorted by values.
+- If the input arrays are large, the hashmap approach will still work efficiently.
+- If two arrays contain the same value but different weights, the result should reflect the sum of the weights.
+- Ensure that the input arrays follow the specified constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> mergeSimilarItems(vector<vector<int>>& items1, vector<vector<int>>& items2) 
+{
+    map<int,int> m;
+    for(int i=0;i<items1.size();i++)
     {
-        map<int,int> m;
-        for(int i=0;i<items1.size();i++)
-        {
-            m[items1[i][0]]=items1[i][1];
-        }
-        for(int i=0;i<items2.size();i++)
-        {
-            if(m.find(items2[i][0])!=m.end())
-            {
-                m[items2[i][0]]+=items2[i][1];
-            }
-            else
-            {
-                m[items2[i][0]]=items2[i][1];
-            }
-        }
-        vector<vector<int>> ans;
-        for(auto it : m)
-        {
-            ans.push_back({it.first,it.second});
-        }
-        return ans;
-        
+        m[items1[i][0]]=items1[i][1];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task here is to merge two lists of items, each represented by a 2D vector where each element is a pair of integers: the item ID and its weight. The objective is to combine items from both lists that have the same ID by summing up their weights. The result should be a single list of items sorted by their ID, with each item appearing only once and showing the combined weight.
-
-### Approach
-
-The solution leverages a `map` data structure to efficiently store and update item weights by their IDs, ensuring that each item appears only once in the final list. Here's the approach broken down into steps:
-
-1. **Map Initialization with Items from the First List:**
-   First, we loop through the items in `items1` and store each item in a map (`m`) where the key is the item ID, and the value is the item weight. This allows us to initialize the map with all items from the first list.
-
-2. **Merging Weights for Items in the Second List:**
-   Next, we iterate over `items2`. For each item in this list, we check if its ID already exists in the map:
-   - If it does, we add the item's weight from `items2` to the weight already present in the map for that ID, effectively merging the weights.
-   - If it doesn’t exist, we add a new entry to the map with the item's ID and weight.
-
-3. **Building the Result Vector:**
-   After processing both lists, the map contains each unique item ID with its total weight. We then iterate over the map and add each entry as a vector (ID and weight) to a result vector `ans`. Since `map` in C++ is naturally sorted by key, the items in `ans` will be in ascending order of IDs, as required.
-
-4. **Returning the Result:**
-   Finally, the result vector `ans` is returned, containing the merged items with combined weights.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initializing the Map with Items from the First List
-
-```cpp
-map<int, int> m;
-for (int i = 0; i < items1.size(); i++) {
-    m[items1[i][0]] = items1[i][1];
-}
-```
-
-In this section, we initialize an empty map `m`. We then iterate over `items1`, and for each item, we insert it into the map with its ID as the key and its weight as the value. After this loop, `m` contains all items from `items1`, with each ID mapped to its corresponding weight.
-
-#### Step 2: Merging Weights for Items in the Second List
-
-```cpp
-for (int i = 0; i < items2.size(); i++) {
-    if (m.find(items2[i][0]) != m.end()) {
-        m[items2[i][0]] += items2[i][1];
-    } else {
-        m[items2[i][0]] = items2[i][1];
+    for(int i=0;i<items2.size();i++)
+    {
+        if(m.find(items2[i][0])!=m.end())
+        {
+            m[items2[i][0]]+=items2[i][1];
+        }
+        else
+        {
+            m[items2[i][0]]=items2[i][1];
+        }
     }
+    vector<vector<int>> ans;
+    for(auto it : m)
+    {
+        ans.push_back({it.first,it.second});
+    }
+    return ans;
+    
 }
 ```
 
-We now process `items2`. For each item in `items2`, we check if its ID is already present in the map `m`:
-- If it is (`m.find(items2[i][0]) != m.end()`), we add the item’s weight from `items2` to the current weight stored in `m` for that ID.
-- If it is not, we add a new entry to `m` with the item’s ID and weight from `items2`.
+This function merges two lists of items, where each item is represented by a pair (ID, value). It sums the values of items with the same ID from both lists and returns the merged list.
 
-After this loop, `m` contains all unique IDs from both lists, with weights appropriately merged.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> mergeSimilarItems(vector<vector<int>>& items1, vector<vector<int>>& items2) 
+	```
+	Define a function that takes two vectors of pairs as input: `items1` and `items2`. The function returns a vector of pairs where each pair contains an ID and its corresponding total value.
 
-#### Step 3: Building the Result Vector
+2. **Data Structures**
+	```cpp
+	    map<int,int> m;
+	```
+	Declare a map `m` that will store each item's ID as the key and its value as the associated value.
 
-```cpp
-vector<vector<int>> ans;
-for (auto it : m) {
-    ans.push_back({it.first, it.second});
-}
-```
+3. **Iteration**
+	```cpp
+	    for(int i=0;i<items1.size();i++)
+	```
+	Start iterating over the first input list `items1`.
 
-Here, we create an empty vector `ans` to store the result. We iterate over the map `m`, where each element is a pair (item ID and combined weight). For each pair, we add a vector of two elements (the ID and weight) to `ans`. Since `map` maintains elements in sorted order by key, `ans` will also be sorted by ID.
+4. **Map Update**
+	```cpp
+	        m[items1[i][0]]=items1[i][1];
+	```
+	Insert the item ID and value from `items1` into the map `m`. If the ID is already present, it will be overwritten.
 
-#### Step 4: Returning the Result
+5. **Iteration**
+	```cpp
+	    for(int i=0;i<items2.size();i++)
+	```
+	Start iterating over the second input list `items2`.
 
-```cpp
-return ans;
-```
+6. **Condition Check**
+	```cpp
+	        if(m.find(items2[i][0])!=m.end())
+	```
+	Check if the item ID from `items2` already exists in the map `m`.
 
-The result vector `ans` is now complete, containing each unique item ID along with its merged weight in ascending order of IDs. We return `ans` as the output of the function.
+7. **Map Update**
+	```cpp
+	            m[items2[i][0]]+=items2[i][1];
+	```
+	Add the value from `items2` to the existing value for that item ID in the map `m`.
 
-### Complexity
+8. **Add New Entry**
+	```cpp
+	        else
+	```
+	If the item ID is not found in the map, insert a new entry.
 
-#### Time Complexity:
-- **Inserting Items in the Map:** For both `items1` and `items2`, we perform insertions and updates in the map `m`, which takes `O(log k)` time per operation (where `k` is the number of unique IDs) due to the balanced tree structure of the map. Since we process each item exactly once, this results in a total time complexity of `O((n + m) * log k)`, where `n` and `m` are the sizes of `items1` and `items2`, respectively.
-  
-- **Building the Result Vector:** We iterate over all entries in the map to build the result vector, which takes `O(k)` time, where `k` is the number of unique item IDs.
+9. **Map Update**
+	```cpp
+	            m[items2[i][0]]=items2[i][1];
+	```
+	Insert the new item ID and its value from `items2` into the map `m`.
 
-Therefore, the total time complexity is `O((n + m) * log k)`.
+10. **Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	Declare a vector `ans` to store the final merged and summed items.
 
-#### Space Complexity:
-- **Map Storage:** We store up to `k` unique item IDs in the map, so the space complexity for the map is `O(k)`.
-- **Result Vector:** We also store the merged items in the result vector `ans`, which has a space complexity of `O(k)`.
+11. **Iteration**
+	```cpp
+	    for(auto it : m)
+	```
+	Iterate over the map `m` to extract the summed items.
 
-Thus, the overall space complexity is `O(k)`.
+12. **Vector Update**
+	```cpp
+	        ans.push_back({it.first,it.second});
+	```
+	Push each item (ID and value) from the map `m` into the result vector `ans`.
 
-### Conclusion
+13. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the final result vector `ans` containing the merged items.
 
-The code efficiently merges two lists of items with weights using a map, which allows us to keep track of the items by their IDs and sum up weights for items with the same ID. By leveraging the sorted nature of maps in C++, the solution automatically arranges items by ascending order of IDs. This makes the solution both efficient and straightforward, with an overall time complexity of `O((n + m) * log k)` and a space complexity of `O(k)`. The solution is suitable for handling large lists with potentially overlapping items, providing an optimized way to combine item weights based on IDs.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step after populating the hashmap.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the hashmap.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-similar-items/description/)
 

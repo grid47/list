@@ -14,118 +14,167 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `arr` and a target value `target`, return the integer value such that when all integers larger than this value are replaced by the value itself, the sum of the array is as close as possible to the target. If there is a tie, return the smallest such integer.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `arr` and an integer `target`.
+- **Example:** `Input: arr = [5, 10, 3], target = 12`
+- **Constraints:**
+	- 1 <= arr.length <= 10^4
+	- 1 <= arr[i], target <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findBestValue(vector<int>& A, int target) {
-        sort(A.begin(), A.end());
-        
-        int n = A.size(), i = 0;
-        while(i < n && target > A[i] * (n - i)) {
-            target -= A[i++];
-        }
-        
-        if (i == n) return A[n - 1];
-        
-        int res = target / (n - i);
-        
-        if (target - res * (n - i) > (res + 1) * (n - i) - target)
-            res++;
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the integer value that minimizes the absolute difference between the sum of the modified array and the target value.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- Return an integer representing the optimal value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the optimal integer value for modifying the array to match the target sum as closely as possible.
+
+- Sort the array `arr` to make the process of finding the best value more efficient.
+- Calculate the sum of the array and adjust the larger values to be equal to the current candidate value.
+- Track the closest sum to the target, and in case of a tie, return the smallest value.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `arr` consists of positive integers.
+- The input is valid, and constraints are adhered to.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [5, 10, 3], target = 12`  \
+  **Explanation:** When using the value 3, the array becomes [3, 3, 3], which gives a sum of 9. This is the closest sum to the target of 12.
+
+- **Input:** `Input: arr = [1, 2, 3], target = 6`  \
+  **Explanation:** Using the value 2, the array becomes [2, 2, 2], which exactly matches the target sum of 6.
+
+- **Input:** `Input: arr = [100, 200, 300], target = 350`  \
+  **Explanation:** Using the value 150, the array becomes [150, 150, 150], which gives a sum of 450. This is the closest sum to the target of 350.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we can consider sorting the array and finding the best integer by modifying the array's sum iteratively. This approach ensures that we calculate the closest sum without having to examine all possible values exhaustively.
+
+### Initial Thoughts 💭
+- The array's sum will be affected by replacing values larger than a given candidate with that candidate.
+- Sorting the array will allow for efficient modification of the array as we check each potential candidate.
+- We can use a greedy approach, adjusting values larger than the candidate and tracking the sum's proximity to the target.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that `arr` will contain at least one element.
+- The solution must handle large arrays efficiently, ensuring time complexity remains manageable.
+- If all values in the array are larger than the target, adjust all values to be equal to the target.
+- The solution must work within the time limits for inputs of size up to 10^4.
+{{< dots >}}
+## Code 💻
+```cpp
+int findBestValue(vector<int>& A, int target) {
+    sort(A.begin(), A.end());
+    
+    int n = A.size(), i = 0;
+    while(i < n && target > A[i] * (n - i)) {
+        target -= A[i++];
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The task is to find the best value that can replace all elements in an array such that the sum of the modified array is as close to a given target as possible. Specifically, if you replace all elements in the array with a value `x`, the resulting array's sum should ideally equal `target`. However, you want to minimize the absolute difference between the actual sum and the target.
-
-The goal is to determine the optimal integer `x` such that replacing all elements of the array `A` with `x` yields the sum closest to the `target`. If there are two values that yield the same difference, return the smaller one.
-
-### Approach
-To solve the problem, we can follow these steps:
-
-1. **Sorting the Array**: Begin by sorting the array `A` to facilitate the determination of how many elements can be replaced without exceeding the target.
-
-2. **Iterate Through the Sorted Array**: We will maintain a cumulative sum of the elements processed so far and check if replacing the remaining elements with the current element value exceeds the target.
-
-3. **Determine the Best Value**:
-   - If we reach the end of the array and the sum is less than the target, the best value would be the maximum value in the array.
-   - If not, calculate the average of the remaining elements that can be replaced. Depending on how the remaining target compares to this average, we can determine whether to round down or up to find the best value.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int findBestValue(vector<int>& A, int target) {
+    
+    if (i == n) return A[n - 1];
+    
+    int res = target / (n - i);
+    
+    if (target - res * (n - i) > (res + 1) * (n - i) - target)
+        res++;
+    return res;
+}
 ```
-- **Line 1-2**: The `Solution` class is defined, and the `findBestValue` method begins. It takes a vector `A` and an integer `target` as input.
 
-```cpp
-        sort(A.begin(), A.end());
-```
-- **Line 3**: Sort the array `A` in non-decreasing order. This will help in determining how many elements can be replaced while keeping the sum under the target.
+This function finds the best value that can be achieved by reducing or limiting the sum of the elements in the array such that the sum is as close as possible to a given target.
 
-```cpp
-        int n = A.size(), i = 0;
-```
-- **Line 4**: Initialize `n` as the size of the array `A` and `i` as an index to iterate through the array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findBestValue(vector<int>& A, int target) {
+	```
+	This is the function header where the function is defined. The input parameters are 'A' (a vector of integers) and 'target' (the target sum to be achieved).
 
-```cpp
-        while(i < n && target > A[i] * (n - i)) {
-            target -= A[i++];
-        }
-```
-- **Lines 5-7**: This while loop checks two conditions:
-  - `i < n`: Ensure we don't exceed the bounds of the array.
-  - `target > A[i] * (n - i)`: Check if the remaining target is greater than the maximum possible sum if the current element and all subsequent elements were set to `A[i]`.
-  
-  If both conditions are satisfied, subtract the current element `A[i]` from `target` and increment the index `i`.
+2. **Sorting**
+	```cpp
+	    sort(A.begin(), A.end());
+	```
+	Sorts the input vector 'A' in non-decreasing order. Sorting helps in efficiently calculating the optimal value to achieve the target sum.
 
-```cpp
-        if (i == n) return A[n - 1];
-```
-- **Line 8**: If `i` reaches `n`, it means we have considered all elements in `A`. In this case, the best value is simply the maximum value of the array, `A[n - 1]`, as replacing all values with the maximum will not exceed the target.
+3. **Size and Initialization**
+	```cpp
+	    int n = A.size(), i = 0;
+	```
+	Initializes 'n' with the size of array 'A' and 'i' to 0 to start iterating from the beginning of the array.
 
-```cpp
-        int res = target / (n - i);
-```
-- **Line 9**: Calculate the base result `res`, which is the integer division of the remaining target by the number of elements left to consider, `n - i`. This gives us an average value for the remaining elements.
+4. **While Loop**
+	```cpp
+	    while(i < n && target > A[i] * (n - i)) {
+	```
+	This while loop continues reducing the target by subtracting elements from 'A' until the remaining target cannot be further reduced by multiplying the current element with the remaining number of elements.
 
-```cpp
-        if (target - res * (n - i) > (res + 1) * (n - i) - target)
-            res++;
-```
-- **Lines 10-12**: Here we check whether increasing `res` by one will yield a closer sum to the target. The condition checks if the difference between the remaining target and the product of `res` with the number of remaining elements is greater than the difference produced by using `res + 1`. If true, we increment `res`.
+5. **Target Update**
+	```cpp
+	        target -= A[i++];
+	```
+	This line reduces the target by subtracting the current element 'A[i]' and then increments 'i' to move to the next element.
 
-```cpp
-        return res;
-    }
-};
-```
-- **Lines 13-14**: Finally, return `res`, which represents the best value that can be used to replace elements in the array `A` to achieve the target sum as closely as possible.
+6. **Condition Check**
+	```cpp
+	    if (i == n) return A[n - 1];
+	```
+	Checks if all elements have been processed. If 'i' equals 'n', it means the target is achieved or exhausted, and the last element of the array 'A[n-1]' is returned.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The sorting operation takes \(O(n \log n)\), where \(n\) is the number of elements in the array. The subsequent loop for processing the elements is \(O(n)\). Thus, the overall time complexity is dominated by the sorting step, leading to a total time complexity of \(O(n \log n)\).
+7. **Intermediate Result Calculation**
+	```cpp
+	    int res = target / (n - i);
+	```
+	Calculates the intermediate result 'res' by dividing the remaining target by the number of elements left after 'i'. This gives an estimate of the value to set for the remaining elements.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(1)\) since we are using only a few extra variables and no significant additional data structures that scale with input size.
+8. **Condition for Increment**
+	```cpp
+	    if (target - res * (n - i) > (res + 1) * (n - i) - target)
+	```
+	Checks if the difference between the current target and the product of 'res' and the number of remaining elements is greater than the difference between '(res + 1)' and the target. If so, it indicates that increasing 'res' will yield a value closer to the target.
 
-### Conclusion
-The `findBestValue` function provides an efficient solution to determine the optimal value to replace all elements in an array while ensuring the total sum is as close to a specified target as possible. By leveraging sorting and a greedy approach to iterate through the sorted values, the function efficiently calculates the best possible replacement value.
+9. **Increment Result**
+	```cpp
+	        res++;
+	```
+	If the above condition is true, increment 'res' by 1 to bring it closer to the optimal value.
 
-This implementation exemplifies the use of sorting and cumulative analysis in solving numerical optimization problems, showcasing the importance of algorithmic thinking in competitive programming and real-world applications. With a robust time complexity, the solution is both efficient and effective, making it suitable for larger datasets typically encountered in practical scenarios.
+10. **Return Final Result**
+	```cpp
+	    return res;
+	```
+	Returns the computed value 'res' which is the optimal value that makes the sum closest to the target.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) - Sorting the array is the most time-consuming operation.
+- **Average Case:** O(n log n) - Sorting dominates the complexity.
+- **Worst Case:** O(n log n) - Sorting and the subsequent evaluation for each candidate value.
+
+The time complexity is O(n log n) due to sorting the array.
+
+### Space Complexity 💾
+- **Best Case:** O(n) - Space complexity remains O(n) for the sorted array.
+- **Worst Case:** O(n) - Space complexity is O(n) for storing the sorted array.
+
+The space complexity is O(n) due to storing the array after sorting.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/description/)
 

@@ -14,95 +14,76 @@ img_src = ""
 youtube = "JvRANmpcKcs"
 youtube_upload_date="2023-02-04"
 youtube_thumbnail="https://i.ytimg.com/vi/JvRANmpcKcs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary matrix `grid` where you can move from any cell `(row, col)` to adjacent cells `(row + 1, col)` or `(row, col + 1)` only if they have the value 1. The grid is disconnected if there is no path from the top-left corner `(0, 0)` to the bottom-right corner `(m - 1, n - 1)`. You are allowed to flip at most one cell (changing a 1 to 0 or vice versa), but you cannot flip the cells `(0, 0)` or `(m - 1, n - 1)`. Return true if it is possible to disconnect the grid by flipping at most one cell, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an `m x n` binary matrix `grid` where each cell is either 0 or 1.
+- **Example:** `grid = [[1, 1, 1], [1, 0, 0], [1, 1, 1]]`
+- **Constraints:**
+	- 1 <= m, n <= 1000
+	- 1 <= m * n <= 10^5
+	- grid[i][j] is either 0 or 1
+	- grid[0][0] == grid[m - 1][n - 1] == 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> grid, memo;
-    int m, n;
-    bool isPossibleToCutPath(vector<vector<int>>& grid) {
-        m = grid.size();
-        n = grid[0].size();
-        this->grid= grid;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to disconnect the grid by flipping at most one cell, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
 
-        if(isconnected(0, 0) == false) return true;
-        this->grid[0][0] = 1;
-        return !isconnected(0, 0);
-    }
-    
-    bool isconnected(int i, int j) {
-        if(i == m - 1 && j == n - 1) return true;
-        
-        if(i >= m || j >= n || grid[i][j] == 0) return false;
-        
-        grid[i][j] = 0;
-        return isconnected(i + 1, j) || isconnected(i, j + 1);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if it is possible to disconnect the grid by flipping at most one cell.
 
-    }
-    
-};
-{{< /highlight >}}
----
+- 1. Check if the grid is already disconnected. If there is no path from (0, 0) to (m-1, n-1), return true.
+- 2. Try flipping each cell (except (0, 0) and (m-1, n-1)) and check if the grid becomes disconnected.
+- 3. If flipping any cell makes the grid disconnected, return true. Otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is initially connected and there is a valid path from (0, 0) to (m-1, n-1).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[1, 1, 1], [1, 0, 0], [1, 1, 1]]`  \
+  **Explanation:** Flipping the cell at (1, 1) disconnects the path between (0, 0) and (2, 2), making the grid disconnected.
 
-### Problem Statement
+- **Input:** `grid = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]`  \
+  **Explanation:** No single flip can disconnect the grid, so the result is false.
 
-The problem asks us to determine whether it is possible to cut a path from the top-left corner to the bottom-right corner in a grid. The grid contains cells that are either passable (1) or blocked (0). The path should be able to traverse from the top-left to the bottom-right corner by moving either down or right. The challenge is to figure out if cutting the path (removing one path or one cell) between these two corners will make it impossible to traverse.
+{{< dots >}}
+## Approach 🚀
+The task is to check whether flipping one cell can disconnect the grid. We will check the connectivity of the grid both before and after flipping each cell.
 
-The task is to verify whether it's possible to cut the path by blocking one of the cells and making the path from the top-left corner `(0, 0)` to the bottom-right corner `(m-1, n-1)` unreachable.
-
-### Approach
-
-We can approach this problem with the help of **depth-first search (DFS)**. The algorithm focuses on verifying if there exists a path from the start `(0, 0)` to the end `(m-1, n-1)` in a grid. The approach can be broken down into the following steps:
-
-1. **Check Initial Path**: We first check if there exists an initial path from `(0, 0)` to `(m-1, n-1)` in the given grid.
-2. **Mark Cell as Blocked**: If there is a valid path, we try to "cut" it by marking the start `(0, 0)` as blocked (`grid[0][0] = 1`) and check if the path is still possible.
-3. **DFS Traversal**: Perform a depth-first search (DFS) starting from the top-left corner `(0, 0)` to see if we can reach the bottom-right corner. If we can't, it indicates that cutting the path is possible.
-
-### Code Breakdown
-
-Let's break down the code step by step to understand how it works:
-
-#### Step 1: Initialization
-
+### Initial Thoughts 💭
+- To solve this, we need to first verify if the grid is initially disconnected and if any flip can disconnect it.
+- We can use a depth-first search (DFS) or breadth-first search (BFS) to verify if the grid is connected or disconnected before and after flipping any cell.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid will always have a valid initial path as per the constraints.
+- Ensure that the solution works efficiently with grids up to the maximum size of 1000x1000.
+- Handle cases where there are few cells (e.g., 2x2 grids) or all cells are already 1s or 0s.
+- The solution should work for grids with sizes up to 1000x1000.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> grid, memo;
 int m, n;
-```
-
-- `grid`: This 2D array stores the initial configuration of the grid, where `1` represents a passable cell and `0` represents a blocked cell.
-- `memo`: Though unused in this code, `memo` could be a space to store the results of previous recursive calls to avoid recalculating results (dynamic programming technique). In the given code, it's not used.
-- `m` and `n`: These variables store the number of rows and columns of the grid.
-
-#### Step 2: The Main Function - `isPossibleToCutPath`
-
-```cpp
 bool isPossibleToCutPath(vector<vector<int>>& grid) {
     m = grid.size();
     n = grid[0].size();
     this->grid = grid;
-    
+
     if(isconnected(0, 0) == false) return true;
     this->grid[0][0] = 1;
     return !isconnected(0, 0);
 }
-```
 
-- **Grid Size**: We first initialize the size of the grid using `m = grid.size()` and `n = grid[0].size()`.
-- **Initial Check for Connectivity**: The first thing we do is check if there exists a path from the start `(0, 0)` to the destination `(m-1, n-1)` using the helper function `isconnected`.
-  - If there's no initial path (`isconnected(0, 0) == false`), we return `true` because it's already disconnected.
-- **Cutting the Path**: If there is a path, we proceed by blocking the starting cell (`grid[0][0] = 1`) and recheck if there is still a path from `(0, 0)` to `(m-1, n-1)`.
-  - If the path is no longer available after blocking `(0, 0)`, we return `true`, indicating that cutting the path is possible.
-  - If the path is still intact, we return `false`, indicating that cutting the path is not possible.
-
-#### Step 3: The DFS Function - `isconnected`
-
-```cpp
 bool isconnected(int i, int j) {
     if(i == m - 1 && j == n - 1) return true;
     
@@ -110,34 +91,116 @@ bool isconnected(int i, int j) {
     
     grid[i][j] = 0;
     return isconnected(i + 1, j) || isconnected(i, j + 1);
+
 }
+
 ```
 
-The `isconnected` function is a classic depth-first search that checks if there exists a path from the current cell `(i, j)` to the destination `(m-1, n-1)`:
+The function 'isPossibleToCutPath' checks if it's possible to cut the path in a grid such that there's no valid path from the top-left to the bottom-right corner. The helper function 'isconnected' is used to determine if there is a valid connection to the destination.
 
-- **Base Case**: If we have reached the destination `(m-1, n-1)`, we return `true` to indicate that the path exists.
-- **Boundary Check**: If the current cell `(i, j)` is out of bounds (`i >= m || j >= n`) or blocked (`grid[i][j] == 0`), we return `false` since this is an invalid or blocked cell.
-- **Mark Visited**: To avoid revisiting cells, we mark the current cell as blocked by setting `grid[i][j] = 0`.
-- **Recursive Exploration**: We attempt to move either **down** (`i + 1, j`) or **right** (`i, j + 1`) from the current cell and check if either of these moves leads to the destination.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<vector<int>> grid, memo;
+	```
+	Two 2D vectors 'grid' and 'memo' are declared. 'grid' represents the input grid, and 'memo' can be used for storing intermediate results (though it's not utilized in this function).
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	int m, n;
+	```
+	Two integers, 'm' and 'n', are declared to store the dimensions of the grid.
 
-#### Time Complexity:
+3. **Function Definition**
+	```cpp
+	bool isPossibleToCutPath(vector<vector<int>>& grid) {
+	```
+	The 'isPossibleToCutPath' function is defined, which takes the grid as input and returns a boolean indicating whether it is possible to cut the path.
 
-- **DFS Traversal**: In the worst case, the DFS function will visit every cell in the grid once. Hence, the time complexity is proportional to the number of cells in the grid, which is \(O(m \times n)\), where `m` is the number of rows and `n` is the number of columns.
-- **Total Time Complexity**: The total time complexity for the `isPossibleToCutPath` function is \(O(m \times n)\) because we call the `isconnected` function twice (once for the initial path check and once after marking the start as blocked).
+4. **Grid Dimensions**
+	```cpp
+	    m = grid.size();
+	```
+	The variable 'm' is assigned the number of rows in the grid by getting the size of the 'grid' vector.
 
-#### Space Complexity:
+5. **Grid Dimensions**
+	```cpp
+	    n = grid[0].size();
+	```
+	The variable 'n' is assigned the number of columns in the grid by getting the size of the first row ('grid[0]').
 
-- **Recursive Stack**: The space complexity for the recursive calls in the DFS function is \(O(m + n)\) due to the stack used during the recursion.
-- **Grid Modification**: The space used by the grid itself is \(O(m \times n)\), but this is not extra space, as we modify the grid in-place.
-- **Total Space Complexity**: The total space complexity is \(O(m \times n)\).
+6. **Grid Assignment**
+	```cpp
+	    this->grid = grid;
+	```
+	The input 'grid' is assigned to the class-level 'grid' variable.
 
-### Conclusion
+7. **Initial Check**
+	```cpp
+	    if(isconnected(0, 0) == false) return true;
+	```
+	This line checks if there is no valid path from the top-left corner (0, 0) to the bottom-right corner using the helper function 'isconnected'. If the path doesn't exist, it returns 'true', indicating the path can be cut.
 
-The solution successfully checks whether it's possible to disconnect the path from the top-left corner `(0, 0)` to the bottom-right corner `(m-1, n-1)` by marking the starting point as blocked and performing a depth-first search. By using a depth-first search (DFS), the algorithm efficiently traverses the grid, checking for a valid path before and after blocking the start.
+8. **Modify Grid**
+	```cpp
+	    this->grid[0][0] = 1;
+	```
+	The top-left corner of the grid is marked as 1, indicating that the starting point has been 'cut' for the next step.
 
-The algorithm has a time complexity of \(O(m \times n)\), making it efficient enough for reasonably large grids. Additionally, the use of recursion ensures that the solution is both simple and effective, though the space complexity is proportional to the size of the grid due to recursion.
+9. **Final Check**
+	```cpp
+	    return !isconnected(0, 0);
+	```
+	This final check calls 'isconnected' again to verify if there is still a valid path from (0, 0). If the path no longer exists, it returns 'true', meaning the path was successfully cut.
+
+10. **Helper Function Definition**
+	```cpp
+	bool isconnected(int i, int j) {
+	```
+	The 'isconnected' function is defined, which checks if there is a valid path from the current position (i, j) to the bottom-right corner.
+
+11. **Base Case Check**
+	```cpp
+	    if(i == m - 1 && j == n - 1) return true;
+	```
+	This is the base case: if the current position (i, j) is the bottom-right corner, the function returns 'true', indicating a valid path exists.
+
+12. **Out-of-Bounds and Blocked Check**
+	```cpp
+	    if(i >= m || j >= n || grid[i][j] == 0) return false;
+	```
+	This line checks if the current position (i, j) is out of bounds or blocked (grid[i][j] == 0). If so, it returns 'false'.
+
+13. **Mark Visited**
+	```cpp
+	    grid[i][j] = 0;
+	```
+	This line marks the current cell as visited by setting grid[i][j] to 0.
+
+14. **Recursive Call**
+	```cpp
+	    return isconnected(i + 1, j) || isconnected(i, j + 1);
+	```
+	This line makes recursive calls to check the right (i, j + 1) and down (i + 1, j) cells to see if there is a valid path.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where m is the number of rows and n is the number of columns in the grid.
+- **Average Case:** O(m * n), as we may need to check all cells to determine connectivity.
+- **Worst Case:** O(m * n), as we need to check connectivity multiple times for various flips.
+
+
+
+### Space Complexity 💾
+- **Best Case:** O(m * n), as the space complexity depends on the size of the grid.
+- **Worst Case:** O(m * n), for the space required to track visited cells during DFS/BFS.
+
+Space complexity is mainly dominated by the storage used for the visited cells during the traversal.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/disconnect-path-in-a-binary-matrix-by-at-most-one-flip/description/)
 

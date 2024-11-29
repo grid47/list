@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "QOQL3S2BHPs"
 youtube_upload_date="2020-02-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QOQL3S2BHPs/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,112 +28,162 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/QOQL3S2BHPs/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, find how many integers in the range [1, n] are 'good' integers. A number is considered 'good' if after rotating each of its digits by 180 degrees, it becomes a valid different number. The rotation rules for digits are as follows: 0, 1, and 8 stay the same, 2 and 5 swap places, 6 and 9 swap places, and other digits are not valid when rotated.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer n representing the upper bound of the range. You need to check for all integers from 1 to n which are 'good'.
+- **Example:** `n = 15`
+- **Constraints:**
+	- 1 <= n <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int rotatedDigits(int n) {
-        int f[] = {1,1,2,0,0,2,2,0,1,2};
-        int res = 0;
-        for(int i = 0; i <= n; i++) {
-            int p = i;
-            int s = 1;
-            while(p) {
-                s *= f[p%10];
-                p /= 10;
-            }
-            if (s >= 2) res +=1;
-        }        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the count of 'good' integers between 1 and n, inclusive.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The output will be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine how many integers in the range [1, n] are 'good' by rotating their digits and ensuring the result is a valid, different number.
 
-The task is to determine how many **good integers** exist from `1` to `n`. A **good integer** is defined as an integer that, when rotated 180 degrees, still forms a valid integer. For example, the integer `69` becomes `96` when rotated, and both of these are valid integers. However, integers like `3`, `4`, `7`, and others that don't form valid digits after rotation are considered invalid. We are asked to count how many such valid, rotatable integers exist between `1` and `n` (inclusive).
+- For each number in the range [1, n], break the number into its individual digits.
+- For each digit, check if its rotation results in a valid number (refer to the rotation rules).
+- If the number becomes valid and different from the original, count it as 'good'.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is assumed that the input number is valid and within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 10`  \
+  **Explanation:** The integers from 1 to 10 include 2, 5, 6, and 9, which are the 'good' numbers. Other numbers remain unchanged after rotation.
 
-### Approach
+- **Input:** `Input: n = 1`  \
+  **Explanation:** The only integer in the range is 1, which remains unchanged after rotation. Therefore, the count of 'good' integers is 0.
 
-To solve this problem, we need to check each integer from `1` to `n` to see if it can be rotated and still result in a valid integer. The basic idea is to examine each digit of a number, and ensure that when rotated, each digit transforms into another valid digit. Some digits remain unchanged when rotated (such as `0`, `1`, and `8`), while others change into different digits (for example, `6` becomes `9` and vice versa).
+- **Input:** `Input: n = 15`  \
+  **Explanation:** The 'good' integers in this range are 2, 5, 6, 9, 10, 11, 12, 15. Therefore, the output will be 6.
 
-The key observation is that the following digits are **valid** when rotated 180 degrees:
-- `0`, `1`, `8` stay the same.
-- `6` becomes `9`.
-- `9` becomes `6`.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can iterate through each integer from 1 to n and check if rotating its digits results in a valid and different number. We can map each digit to its rotated counterpart and verify whether the number changes or not.
 
-On the other hand, the digits `2`, `3`, `4`, `5`, and `7` are **invalid**, meaning if any of these digits appear in a number, it will be an invalid integer after rotation.
+### Initial Thoughts 💭
+- We need to check each digit of the number and ensure it can be rotated into another valid digit.
+- The main challenge is checking each digit of the number and ensuring that the rotated version is different from the original number.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since n is always a valid integer.
+- For large inputs up to 10^4, ensure the algorithm runs efficiently by iterating through all numbers from 1 to n.
+- If n is very small (like 1 or 2), check that the edge cases are handled correctly.
+- Ensure the solution works within the provided constraints (1 <= n <= 10^4).
+{{< dots >}}
+## Code 💻
+```cpp
+int rotatedDigits(int n) {
+    int f[] = {1,1,2,0,0,2,2,0,1,2};
+    int res = 0;
+    for(int i = 0; i <= n; i++) {
+        int p = i;
+        int s = 1;
+        while(p) {
+            s *= f[p%10];
+            p /= 10;
+        }
+        if (s >= 2) res +=1;
+    }        
+    return res;
+}
+```
 
-### Code Breakdown (Step by Step)
+This function counts the numbers between 1 and n whose digits, when rotated 180 degrees, are valid digits. It uses a predefined mapping for each digit to determine if the rotated number is valid.
 
-Let's break down the code and understand how it works to solve the problem:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int rotatedDigits(int n) {
+	```
+	This is the function definition for 'rotatedDigits', where 'n' is the upper limit for the range of numbers to check.
 
-1. **Initialization**:
-   - First, we define an array `f` of size 10, where each index represents a digit from `0` to `9`. The value at each index indicates how the digit behaves when rotated:
-     - `0`, `1`, and `8` remain unchanged (`f[0] = 1`, `f[1] = 1`, `f[8] = 1`).
-     - `6` becomes `9` (`f[6] = 2`).
-     - `9` becomes `6` (`f[9] = 2`).
-     - `2`, `3`, `4`, `5`, and `7` are invalid and marked as `0` in the array (`f[2] = 0`, `f[3] = 0`, etc.).
-   
-   ```cpp
-   int f[] = {1, 1, 2, 0, 0, 2, 2, 0, 1, 2};
-   int res = 0;
-   ```
+2. **Array Initialization**
+	```cpp
+	    int f[] = {1,1,2,0,0,2,2,0,1,2};
+	```
+	An array 'f' is initialized to represent the valid transformations for each digit. Digits 0, 1, 8 are valid and map to themselves, while digits 2, 5, 6, 9 are valid and map to each other.
 
-2. **Iterate Over All Numbers from 1 to n**:
-   - We then loop through all integers `i` from `1` to `n` (inclusive).
-   - For each integer `i`, we initialize a variable `p` to the current number and a variable `s` to 1. This variable `s` will keep track of the status of the number — whether it's a valid or invalid number when rotated.
+3. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	The variable 'res' is initialized to count the number of valid numbers.
 
-   ```cpp
-   for(int i = 0; i <= n; i++) {
-       int p = i;
-       int s = 1;
-   ```
+4. **Loop**
+	```cpp
+	    for(int i = 0; i <= n; i++) {
+	```
+	A loop is set to iterate from 0 to 'n' to check all numbers in this range.
 
-3. **Check the Digits of the Current Number**:
-   - Inside the loop, we check each digit of the number `i` to see if it is valid after rotation. We do this by repeatedly extracting the last digit of the number (`p % 10`) and checking its value using the array `f`. If any digit is invalid (`f[digit] == 0`), we set `s` to `0`, indicating that the number cannot be rotated to form a valid integer.
-   - We multiply `s` by `f[p % 10]`, so if any digit is invalid, `s` becomes `0` and the number is considered invalid.
-   
-   ```cpp
-   while(p) {
-       s *= f[p % 10];
-       p /= 10;
-   }
-   ```
+5. **Variable Assignment**
+	```cpp
+	        int p = i;
+	```
+	The current number 'i' is stored in variable 'p' to process its digits.
 
-4. **Update the Result**:
-   - After checking all the digits of the number, if `s` is greater than or equal to 2, it means the number is a "good" integer (it forms a valid integer after rotation), and we increment the result `res` by 1.
-   
-   ```cpp
-   if (s >= 2) res += 1;
-   ```
+6. **Variable Initialization**
+	```cpp
+	        int s = 1;
+	```
+	The variable 's' is initialized to 1. This will track the validity of the digits as they are processed.
 
-5. **Return the Result**:
-   - Finally, the function returns the result `res`, which contains the count of good integers between `1` and `n`.
+7. **Loop**
+	```cpp
+	        while(p) {
+	```
+	This while loop processes each digit of the number 'p' one by one.
 
-   ```cpp
-   return res;
-   ```
+8. **Digit Processing**
+	```cpp
+	            s *= f[p%10];
+	```
+	This line checks the validity of the current digit by looking it up in the array 'f'. If the digit is invalid, 's' will become 0, marking the number as invalid.
 
-### Complexity Analysis
+9. **Digit Reduction**
+	```cpp
+	            p /= 10;
+	```
+	The number 'p' is reduced by removing its last digit, preparing for the next iteration.
 
-- **Time Complexity**:
-  - The time complexity of this solution is **O(n * m)**, where `n` is the input number and `m` is the average number of digits in the integers from `1` to `n`.
-  - For each number `i`, we extract each digit and check if it is a valid digit after rotation. In the worst case, this takes `O(m)` time, where `m` is the number of digits in `i` (which is logarithmic with respect to `n`).
-  - Therefore, the overall time complexity is **O(n * log n)**, where `log n` represents the number of digits in the largest number `n`.
+10. **Condition Check**
+	```cpp
+	        if (s >= 2) res +=1;
+	```
+	If 's' is greater than or equal to 2, it means the number is valid after rotation, and the result counter 'res' is incremented.
 
-- **Space Complexity**:
-  - The space complexity is **O(1)** since we only use a fixed amount of extra space (the array `f` and a few integer variables), regardless of the size of the input `n`.
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the total count of valid numbers after checking all numbers from 0 to 'n'.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the input number.
+- **Average Case:** O(n * d), where d is the average number of digits in the numbers from 1 to n.
+- **Worst Case:** O(n * d), where n is up to 10^4 and d is the number of digits in the largest number.
 
-This solution provides an efficient way to count the number of **good integers** from `1` to `n`. By examining each integer digit by digit and ensuring that all digits are valid when rotated, the solution can quickly identify valid integers and count them. The use of a simple lookup array `f` to determine how each digit behaves when rotated allows the solution to efficiently process each number.
+The time complexity is linear in terms of the number of integers to check, with an additional factor of d for processing each digit.
 
-The algorithm is optimized for performance, achieving a time complexity of **O(n * log n)**, which is suitable for large inputs, and the space complexity is constant, **O(1)**. This makes the solution both time and space-efficient.
+### Space Complexity 💾
+- **Best Case:** O(1), if no additional space is required beyond the iteration.
+- **Worst Case:** O(d), where d is the number of digits in the largest number (since we store the digits of the number).
 
-In summary, this approach leverages digit manipulation and rotation validation using a simple lookup table to efficiently solve the problem of counting good integers. The solution works well for a wide range of input sizes and ensures that we can easily determine the count of valid numbers without performing unnecessary operations.
+The space complexity is constant for each number, only requiring space for storing its digits during the check.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotated-digits/description/)
 

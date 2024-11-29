@@ -14,106 +14,128 @@ img_src = ""
 youtube = "Xe1teNERwSY"
 youtube_upload_date="2023-08-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Xe1teNERwSY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array nums and an integer target. Return the number of distinct pairs (i, j) such that 0 <= i < j < n and nums[i] + nums[j] < target.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer target. The array nums has length n, and the integer target is a threshold value.
+- **Example:** `nums = [2, -1, 3, 5, -2], target = 4`
+- **Constraints:**
+	- 1 <= nums.length == n <= 50
+	- -50 <= nums[i], target <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct pairs (i, j) where 0 <= i < j < n such that nums[i] + nums[j] < target.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output should be a single integer representing the number of valid pairs.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of pairs of indices (i, j) that satisfy the condition nums[i] + nums[j] < target.
+
+- 1. Iterate over all pairs of indices (i, j) where i < j.
+- 2. For each pair, check if nums[i] + nums[j] is less than the target.
+- 3. Keep a count of the valid pairs.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array nums is not empty, and there is always at least one valid pair when the input is valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [2, -1, 3, 5, -2], target = 4`  \
+  **Explanation:** The valid pairs are (0, 1), (0, 2), (0, 4), and (1, 4), all of which have a sum less than the target.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we can use a brute-force approach by checking all pairs of indices.
+
+### Initial Thoughts 💭
+- We are required to check all pairs of indices (i, j) where i < j.
+- A brute-force solution works well for the constraints, as n is small (<= 50).
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty as per the constraints.
+- The solution should efficiently handle the maximum array size of 50.
+- When all elements in the array are the same, the number of valid pairs depends on the target.
+- Since n is small (<= 50), a brute-force solution is acceptable.
+{{< dots >}}
+## Code 💻
+```cpp
   int countPairs(vector<int>& nums, int target) {
-      int ans = 0;
-      for(int i = 0; i < nums.size(); ++i){
-          for(int j = i + 1; j < nums.size(); ++j){
-              if(nums[i] + nums[j] < target) ans++;
-          }
+  int ans = 0;
+  for(int i = 0; i < nums.size(); ++i){
+      for(int j = i + 1; j < nums.size(); ++j){
+          if(nums[i] + nums[j] < target) ans++;
       }
-      return ans;
   }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an array `nums` of integers, the task is to count how many pairs of indices `(i, j)` exist such that `i < j` and the sum of the elements at these indices, i.e., `nums[i] + nums[j]`, is strictly less than a given target value. Specifically, the goal is to return the total number of such pairs in the array where the sum of the pair is less than the target.
-
-For example, consider the array `nums = [1, 2, 3, 4]` and `target = 5`. The valid pairs where the sum of the elements is less than 5 are:
-- `nums[0] + nums[1] = 1 + 2 = 3` (valid)
-- `nums[0] + nums[2] = 1 + 3 = 4` (valid)
-- `nums[1] + nums[2] = 2 + 3 = 5` (not valid, because it's equal to the target)
-- `nums[0] + nums[3] = 1 + 4 = 5` (not valid)
-- `nums[1] + nums[3] = 2 + 4 = 6` (not valid)
-- `nums[2] + nums[3] = 3 + 4 = 7` (not valid)
-
-In this case, there are two valid pairs: `(1, 2)` and `(1, 3)`, so the function should return `2`.
-
-### Approach
-
-To solve this problem, we need to check all possible pairs of elements in the array and count how many of them satisfy the condition that their sum is less than the target. The array contains `n` elements, and for each element, we want to compare it with every other element that comes after it to see if their sum is less than the target.
-
-A **brute force approach** is suitable here:
-1. We iterate through the array with two nested loops: the outer loop will go through each element of the array, and the inner loop will compare the current element with every other element that comes after it.
-2. If the sum of the pair is less than the target, we increment the count.
-3. The result is the count of such valid pairs.
-
-While this method has a time complexity of O(n²), it’s simple and works well for small input sizes.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-int countPairs(vector<int>& nums, int target) {
-    int ans = 0; // Variable to store the number of valid pairs
+  return ans;
+  }
 ```
 
-1. **Initialization**:
-   - `int ans = 0;`: This variable will store the count of valid pairs where the sum of the two elements is less than the given target. We initialize it to zero since no pairs have been found yet.
+This function counts the number of pairs in the array 'nums' whose sum is less than a given 'target'. It uses two nested loops to check every pair.
 
-```cpp
-    for(int i = 0; i < nums.size(); ++i){ 
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	  int countPairs(vector<int>& nums, int target) {
+	```
+	The function 'countPairs' is defined, accepting a vector of integers 'nums' and an integer 'target' as parameters.
 
-2. **Outer Loop**:
-   - The outer loop starts with the variable `i`, which iterates through each index of the `nums` array. It starts from `i = 0` and goes up to `nums.size() - 1`.
+2. **Variable Initialization**
+	```cpp
+	  int ans = 0;
+	```
+	A variable 'ans' is initialized to 0, which will be used to keep track of the number of pairs whose sum is less than 'target'.
 
-```cpp
-        for(int j = i + 1; j < nums.size(); ++j){ 
-```
+3. **Outer Loop**
+	```cpp
+	  for(int i = 0; i < nums.size(); ++i){
+	```
+	The outer loop begins, iterating over each element of the vector 'nums' from index 0 to the last element.
 
-3. **Inner Loop**:
-   - The inner loop runs from `i + 1` to `nums.size() - 1`, meaning it will only consider elements that come after the element at index `i`. This ensures that we are always checking pairs `(i, j)` where `i < j`.
+4. **Inner Loop**
+	```cpp
+	      for(int j = i + 1; j < nums.size(); ++j){
+	```
+	The inner loop starts from index 'i + 1' and iterates through the elements after the current element of the outer loop, ensuring all pairs are checked.
 
-```cpp
-            if(nums[i] + nums[j] < target) ans++; 
-```
+5. **Condition Check**
+	```cpp
+	          if(nums[i] + nums[j] < target) ans++;
+	```
+	Check if the sum of the pair 'nums[i]' and 'nums[j]' is less than the 'target'. If true, increment the 'ans' counter.
 
-4. **Condition Check**:
-   - The `if` statement checks if the sum of `nums[i]` and `nums[j]` is less than the given target. If the condition is true, we increment the `ans` variable, which keeps track of the number of valid pairs.
-   
-```cpp
-    }
-    return ans; 
-```
+6. **Return Statement**
+	```cpp
+	  return ans;
+	```
+	Return the final count of pairs that satisfy the condition.
 
-5. **Return the Result**:
-   - After all iterations of the loops are completed, the variable `ans` contains the total number of valid pairs where the sum of the pair is less than the target. The function then returns `ans` as the result.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-### Complexity
+Since we need to check all pairs of indices (i, j), the time complexity is O(n^2).
 
-1. **Time Complexity**:
-   - The time complexity of the algorithm is O(n²), where `n` is the size of the `nums` array. This is because we are using two nested loops to compare each pair of elements in the array. The outer loop runs `n` times, and for each iteration of the outer loop, the inner loop runs `n-1`, `n-2`, ..., `1` times. Therefore, the total number of comparisons is proportional to the square of the number of elements, resulting in a time complexity of O(n²).
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   - For example, if `nums` has 5 elements, the outer loop will run 5 times, and for each iteration of the outer loop, the inner loop will run 4, 3, 2, 1 times respectively, leading to 10 total comparisons, which is O(5²) = O(n²).
+The space complexity is O(1), as we only need a few variables to track the count.
 
-2. **Space Complexity**:
-   - The space complexity is O(1) because we only use a constant amount of extra space. We are not using any additional data structures that grow with the size of the input, except for the `ans` variable to store the result. The input array `nums` is passed by reference, so no additional space is used for storing it.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution provides a straightforward way to count the number of valid pairs whose sum is less than a given target. The brute force approach is easy to implement and understand but has a time complexity of O(n²). For small to medium input sizes, this approach will work efficiently. However, for large input sizes, this approach might become inefficient due to the quadratic time complexity. If optimization is required, one could explore more advanced algorithms or data structures to reduce the time complexity, such as using sorting or binary search.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/)
 

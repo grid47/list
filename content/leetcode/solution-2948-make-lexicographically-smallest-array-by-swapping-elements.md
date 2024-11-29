@@ -14,161 +14,246 @@ img_src = ""
 youtube = "r0981xS7CjY"
 youtube_upload_date="2023-11-26"
 youtube_thumbnail="https://i.ytimg.com/vi/r0981xS7CjY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of integers, `nums`, and a positive integer `limit`. In each operation, you can choose two indices `i` and `j` and swap the elements at these indices if the absolute difference between `nums[i]` and `nums[j]` is less than or equal to the given `limit`. Your task is to return the lexicographically smallest array that can be obtained after applying the operation as many times as needed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `nums` of size `n` and an integer `limit`.
+- **Example:** `nums = [1,5,3,9,8], limit = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 1 <= limit <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
-        vector<pair<int, int>> b;
-        int n = nums.size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically smallest array that can be obtained.
+- **Example:** `Output: [1,3,5,8,9]`
+- **Constraints:**
+	- The output array must be lexicographically smallest.
 
-        for (int i = 0; i < n; ++i)
-            b.push_back(make_pair(nums[i], i));
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to determine the lexicographically smallest array by swapping elements based on the given limit.
 
-        sort(b.begin(), b.end(), [](const auto& x, const auto& y) {
-            return x.first < y.first;
-        });
-        vector<vector<pair<int, int>>> c = {{b[0]}};
+- Sort the elements of the array along with their indices.
+- Group the elements that can be swapped (i.e., those whose absolute difference is less than or equal to the limit).
+- Sort each group of swappable elements and place them back into their original indices.
+{{< dots >}}
+### Problem Assumptions ✅
+- The operation is performed as many times as possible.
+- The operation only applies when the absolute difference between two numbers is less than or equal to `limit`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 5, 3, 9, 8], limit = 2`  \
+  **Explanation:** After sorting and applying the allowed swaps, we achieve the lexicographically smallest array [1, 3, 5, 8, 9].
 
-        for (int i = 1; i < n; ++i) {
-            if (b[i].first - b[i - 1].first <= limit)
-                c.back().push_back(b[i]);
-            else
-                c.push_back({b[i]});
-        }
+- **Input:** `nums = [1, 7, 6, 18, 2, 1], limit = 3`  \
+  **Explanation:** By swapping elements where the difference is within the limit, the array becomes [1, 6, 7, 18, 1, 2].
 
-        // internal sorting
-        for (const auto& t : c) {
-            vector<int> ind;
-            for (const auto& p : t)
-                ind.push_back(p.second);
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the array, identifying groups of elements that can be swapped, and then sorting those groups individually to achieve the lexicographically smallest array.
 
-            sort(ind.begin(), ind.end());
+### Initial Thoughts 💭
+- Sorting the array will help us group the elements that can be swapped.
+- We need to identify swappable groups and ensure the elements within each group are sorted to achieve the lexicographically smallest result.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array (nums.length == 0) should return an empty array.
+- For very large inputs, the algorithm should run efficiently within the time limits.
+- When all elements are equal, no swaps can be performed, and the input is already the lexicographically smallest array.
+- Ensure the algorithm works within the problem's constraints (time complexity must be O(n log n) or better).
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
+    vector<pair<int, int>> b;
+    int n = nums.size();
 
-            for (int i = 0; i < ind.size(); ++i)
-                nums[ind[i]] = t[i].first;
-        }
-        return nums;
+    for (int i = 0; i < n; ++i)
+        b.push_back(make_pair(nums[i], i));
+
+    sort(b.begin(), b.end(), [](const auto& x, const auto& y) {
+        return x.first < y.first;
+    });
+    vector<vector<pair<int, int>>> c = {{b[0]}};
+
+    for (int i = 1; i < n; ++i) {
+        if (b[i].first - b[i - 1].first <= limit)
+            c.back().push_back(b[i]);
+        else
+            c.push_back({b[i]});
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement:
-The problem asks to lexicographically rearrange the array `nums` such that elements are as small as possible, with the condition that two adjacent elements in the rearranged array can only differ by a value less than or equal to a given limit. The goal is to return the lexicographically smallest array possible under this constraint.
+    // internal sorting
+    for (const auto& t : c) {
+        vector<int> ind;
+        for (const auto& p : t)
+            ind.push_back(p.second);
 
-### Approach:
-The problem can be approached by sorting and grouping adjacent elements whose differences do not exceed the given `limit`. After grouping such elements, each group is sorted individually, and the final array is reconstructed based on these sorted groups.
+        sort(ind.begin(), ind.end());
 
-#### Step-by-Step Approach:
-1. **Pairing Elements with Indices**: 
-   - We first pair each element in the input array with its original index. This allows us to later reconstruct the original positions after sorting and transforming the array.
-   
-2. **Sorting the Pairs**: 
-   - We sort the pairs primarily by the value of the elements. This ensures that the elements are processed in ascending order, allowing us to find adjacent groups of elements that can be rearranged.
-
-3. **Grouping Elements by Differences**:
-   - We iterate through the sorted array and group elements where the difference between consecutive elements is less than or equal to the given `limit`. Each group represents a contiguous subsequence of numbers that can be sorted individually without violating the constraint.
-   
-4. **Sorting Groups Individually**:
-   - Once the elements are grouped, each group is sorted based on their values. Sorting each group ensures that the elements within the group are as lexicographically small as possible.
-   
-5. **Reconstructing the Final Array**:
-   - Finally, we reconstruct the original array by placing the sorted values back into their original positions based on the indices stored during the pairing process.
-
-### Code Breakdown:
-
-#### 1. **Pairing Elements with Indices**:
-In the beginning, we create an array of pairs, where each pair consists of an element from `nums` and its original index. This allows us to keep track of the original positions when sorting and rearranging the elements later.
-
-```cpp
-vector<pair<int, int>> b;
-int n = nums.size();
-for (int i = 0; i < n; ++i)
-    b.push_back(make_pair(nums[i], i));
-```
-
-Here, `b` is a vector of pairs where each pair contains:
-- `nums[i]`: The element from the input array.
-- `i`: The original index of the element in the array.
-
-#### 2. **Sorting the Array by Element Values**:
-The next step is to sort the array of pairs. The sorting criterion is the value of the elements, not the indices. This step ensures that we can process the elements in ascending order.
-
-```cpp
-sort(b.begin(), b.end(), [](const auto& x, const auto& y) {
-    return x.first < y.first;
-});
-```
-
-The lambda function `[](const auto& x, const auto& y)` sorts the pairs based on the element values (`x.first < y.first`).
-
-#### 3. **Grouping Elements**:
-Next, we group elements whose values differ by no more than `limit`. We start with the first element as the first group. As we iterate through the sorted list, if the difference between the current element and the previous one is less than or equal to `limit`, we add the element to the current group. Otherwise, we start a new group.
-
-```cpp
-vector<vector<pair<int, int>>> c = {{b[0]}};
-for (int i = 1; i < n; ++i) {
-    if (b[i].first - b[i - 1].first <= limit)
-        c.back().push_back(b[i]);
-    else
-        c.push_back({b[i]});
+        for (int i = 0; i < ind.size(); ++i)
+            nums[ind[i]] = t[i].first;
+    }
+    return nums;
 }
 ```
 
-Here, `c` is a 2D vector where each sub-vector represents a group of elements that can be rearranged without violating the `limit` constraint. We check if the difference between consecutive elements in the sorted list is less than or equal to `limit`. If so, we add the element to the current group; otherwise, we start a new group.
+This function sorts the array 'nums' in lexicographically smallest order based on the given limit between adjacent elements. It groups elements with a difference less than or equal to the limit and then sorts the elements within those groups to achieve the final result.
 
-#### 4. **Sorting Each Group**:
-After grouping the elements, we need to sort each group individually to make them lexicographically as small as possible. This is achieved by sorting the indices of the elements in each group.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
+	```
+	Defines the function 'lexicographicallySmallestArray' which takes a reference to a vector 'nums' and an integer 'limit'. The function will return the lexicographically smallest array with specific sorting conditions.
 
-```cpp
-for (const auto& t : c) {
-    vector<int> ind;
-    for (const auto& p : t)
-        ind.push_back(p.second);
-    
-    sort(ind.begin(), ind.end());
-    
-    for (int i = 0; i < ind.size(); ++i)
-        nums[ind[i]] = t[i].first;
-}
-```
+2. **Pair Initialization**
+	```cpp
+	    vector<pair<int, int>> b;
+	```
+	Initializes a vector 'b' of pairs where each pair will store an integer from the 'nums' array and its corresponding index. This helps track the original positions of elements after sorting.
 
-Here:
-- `t` is a group of pairs representing a group of elements.
-- We extract the indices of the elements in the group and store them in `ind`.
-- We sort `ind`, which ensures that the elements in each group are placed in the lexicographically smallest order.
-- Finally, we use these sorted indices to place the sorted elements back into their original positions in the `nums` array.
+3. **Array Size**
+	```cpp
+	    int n = nums.size();
+	```
+	Stores the size of the 'nums' array in variable 'n'. This value will be used to control loop iterations.
 
-#### 5. **Returning the Final Array**:
-Once all the groups are sorted and the original array is reconstructed, we return the modified array `nums`.
+4. **Push Elements into Pair Vector**
+	```cpp
+	    for (int i = 0; i < n; ++i)
+	```
+	Starts a loop to iterate through the 'nums' array and creates pairs of each element along with its index, storing them in the 'b' vector.
 
-```cpp
-return nums;
-```
+5. **Pair Push Back**
+	```cpp
+	        b.push_back(make_pair(nums[i], i));
+	```
+	Creates a pair consisting of the current element from 'nums' and its index, then adds the pair to the 'b' vector.
 
-### Complexity:
+6. **Sorting Step 1**
+	```cpp
+	    sort(b.begin(), b.end(), [](const auto& x, const auto& y) {
+	```
+	Sorts the vector 'b' of pairs based on the first element of each pair (the number in 'nums'). The sorting is done in ascending order.
 
-#### Time Complexity:
-1. **Sorting the Pairs**: Sorting the pairs based on the values takes `O(n log n)`, where `n` is the size of the array `nums`.
-2. **Grouping Elements**: The grouping step involves iterating over the array once, so it takes `O(n)`.
-3. **Sorting Each Group**: Sorting each group takes `O(n log n)` in the worst case if all elements are in one group. The total time for sorting all groups is at most `O(n log n)`.
-4. **Final Array Reconstruction**: Reconstructing the final array by sorting the indices and placing elements back into their original positions takes `O(n log n)`.
+7. **Sorting Condition**
+	```cpp
+	        return x.first < y.first;
+	```
+	Defines the sorting condition for the lambda function: sort pairs in 'b' by the integer values (the first element of the pair).
 
-Thus, the overall time complexity is dominated by the sorting step, resulting in **O(n log n)**.
+8. **Group Initialization**
+	```cpp
+	    vector<vector<pair<int, int>>> c = {{b[0]}};
+	```
+	Initializes a 2D vector 'c' to store groups of elements. The first group is initialized with the first pair from 'b'. Each group will hold elements that are close enough (difference less than or equal to 'limit').
 
-#### Space Complexity:
-- The space complexity is `O(n)` due to the additional storage used for the vector `b` (pairs of elements and their indices) and the vector `c` (groups of pairs). 
-- The space complexity is linear because we store all elements and their indices at different stages.
+9. **Group Formation Loop**
+	```cpp
+	    for (int i = 1; i < n; ++i) {
+	```
+	Starts a loop to iterate through the sorted pairs in 'b' and groups them based on the difference between adjacent elements.
 
-### Conclusion:
-This solution efficiently finds the lexicographically smallest rearranged array by grouping elements that can be swapped without violating the `limit` constraint and sorting those groups individually. It leverages sorting and grouping techniques to maintain the necessary constraints while ensuring optimal performance. The solution's time complexity of `O(n log n)` is efficient for typical input sizes, and its space complexity is linear in the size of the input.
+10. **Group Condition**
+	```cpp
+	        if (b[i].first - b[i - 1].first <= limit)
+	```
+	Checks if the difference between the current element 'b[i]' and the previous one 'b[i-1]' is less than or equal to the 'limit'. If true, the current element is added to the last group.
+
+11. **Add to Last Group**
+	```cpp
+	            c.back().push_back(b[i]);
+	```
+	Adds the current element 'b[i]' to the last group in 'c' (the most recent group formed).
+
+12. **Start New Group**
+	```cpp
+	        else
+	```
+	If the difference between elements exceeds the 'limit', start a new group.
+
+13. **Push New Group**
+	```cpp
+	            c.push_back({b[i]});
+	```
+	Starts a new group by adding the current pair 'b[i]' as the first element of the new group in 'c'.
+
+14. **Sort Groups by Indices**
+	```cpp
+	    for (const auto& t : c) {
+	```
+	Iterates through each group 't' in 'c' to perform internal sorting.
+
+15. **Index Extraction**
+	```cpp
+	        vector<int> ind;
+	```
+	Initializes a vector 'ind' to store the indices of the elements in the current group.
+
+16. **Index Extraction Loop**
+	```cpp
+	        for (const auto& p : t)
+	```
+	Iterates through each pair 'p' in the group 't' to extract the indices and store them in 'ind'.
+
+17. **Push Index to Vector**
+	```cpp
+	            ind.push_back(p.second);
+	```
+	Pushes the index from the current pair 'p' into the 'ind' vector.
+
+18. **Sort Indices**
+	```cpp
+	        sort(ind.begin(), ind.end());
+	```
+	Sorts the indices in 'ind' in ascending order, so the elements can be rearranged back in their lexicographically smallest order.
+
+19. **Rearrange Elements**
+	```cpp
+	        for (int i = 0; i < ind.size(); ++i)
+	```
+	Starts a loop to rearrange elements in 'nums' based on the sorted indices in 'ind'.
+
+20. **Update Original Array**
+	```cpp
+	            nums[ind[i]] = t[i].first;
+	```
+	Updates the 'nums' array at index 'ind[i]' with the corresponding value from the sorted group 't'.
+
+21. **Return Sorted Array**
+	```cpp
+	    return nums;
+	```
+	Returns the final sorted array 'nums' after rearranging all the elements.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) for sorting the array and processing groups.
+- **Average Case:** O(n log n), the time complexity of sorting and grouping.
+- **Worst Case:** O(n log n), when sorting and processing all elements.
+
+The time complexity is dominated by the sorting steps.
+
+### Space Complexity 💾
+- **Best Case:** O(n) when no swaps are needed and we just return the sorted array.
+- **Worst Case:** O(n) for storing the groups of elements.
+
+The space complexity is primarily due to storing the array and its indices.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/description/)
 

@@ -14,91 +14,128 @@ img_src = ""
 youtube = "ItimQQYIHEw"
 youtube_upload_date="2024-02-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ItimQQYIHEw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums' of even length. Your task is to determine whether it is possible to divide the array into two subarrays, 'nums1' and 'nums2', such that both subarrays have distinct elements and the same length. Each subarray must contain half of the total elements from the original array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers nums.
+- **Example:** `nums = [5, 6, 7, 7, 8, 8]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- nums.length % 2 == 0
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPossibleToSplit(vector<int>& nums) {
-        map<int, int> mp;
-        for(int x: nums) {
-            mp[x]++;
-            if(mp[x] > 2) return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it's possible to split the array into two subarrays with distinct elements, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if it's possible to split the given array into two subarrays with distinct elements.
+
+- Count the frequency of each number in the array.
+- If any number appears more than twice, return false.
+- If all numbers appear at most twice, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array has an even number of elements.
+- The array elements are within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [5, 6, 7, 7, 8, 8]`  \
+  **Explanation:** In this case, we can split the array into nums1 = [5, 6, 7] and nums2 = [7, 8, 8]. Both subarrays have distinct elements, so the result is true.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to check if it's possible to split the array into two subarrays with distinct elements.
+
+### Initial Thoughts 💭
+- We need to check the frequency of each number in the array.
+- If a number appears more than twice, it would be impossible to split the array.
+{{< dots >}}
+### Edge Cases 🌐
+- If nums is empty, we can return false.
+- If nums has 100 elements, we need to handle it efficiently.
+- Arrays where all numbers are the same will return false.
+- The array must have an even length.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isPossibleToSplit(vector<int>& nums) {
+    map<int, int> mp;
+    for(int x: nums) {
+        mp[x]++;
+        if(mp[x] > 2) return false;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-
-The problem asks us to determine whether it is possible to split an array into subarrays, with the condition that no number in the array appears more than twice. If a number appears more than twice, it's not possible to split the array according to the given rule. The task is to return a boolean value, `true` if it is possible to split the array and `false` otherwise.
-
-### Approach:
-
-To solve this problem efficiently, we can leverage a **map (hashmap)** to keep track of the frequency of each element in the input array. The basic idea is to iterate through the array, and for each element, check if it appears more than twice. If any element appears more than twice, we immediately return `false`. If we reach the end of the array without encountering any element that appears more than twice, then we can return `true`.
-
-The problem can be solved in a single pass through the array, making the solution efficient. The key operation involves checking the frequency of each element, and if any element exceeds the allowed frequency (which is two), we terminate the process early.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Declare a Map to Track Frequencies
-
-```cpp
-map<int, int> mp;
-```
-
-- We define a `map` called `mp` where the keys are the elements from the `nums` array, and the values are their corresponding frequencies. The map will help us count how many times each number appears in the array.
-
-#### Step 2: Iterate Over the Array
-
-```cpp
-for(int x: nums) {
-    mp[x]++;
-    if(mp[x] > 2) return false;
+    return true;
 }
 ```
 
-- We iterate over each element `x` in the `nums` array.
-- For each element `x`, we increment its count in the `map` (`mp[x]++`).
-- After incrementing the count, we check if the frequency of `x` has exceeded 2. If it has, we immediately return `false`. This means that the number `x` has appeared more than twice, which violates the problem's constraints. Thus, splitting the array into valid subarrays is not possible.
+This function checks if it's possible to split the given `nums` array such that no element appears more than twice. It uses a map to count the occurrences of each element in the array.
 
-#### Step 3: Return True If No Element Appears More Than Twice
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isPossibleToSplit(vector<int>& nums) {
+	```
+	Defines the function `isPossibleToSplit` which accepts a vector of integers `nums` and returns a boolean indicating whether the array can be split with the restriction that no number appears more than twice.
 
-```cpp
-return true;
-```
+2. **Variable Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declares a map `mp` to track the frequency of each element in the `nums` array.
 
-- If we reach the end of the loop without finding any element that appears more than twice, it means that all elements in the array appear at most twice. Hence, it is possible to split the array, and we return `true`.
+3. **Loop**
+	```cpp
+	    for(int x: nums) {
+	```
+	Iterates through each element `x` in the `nums` array.
 
-### Complexity:
+4. **Map Update**
+	```cpp
+	        mp[x]++;
+	```
+	Increments the count of the element `x` in the map `mp`.
 
-#### Time Complexity:
+5. **Condition Check**
+	```cpp
+	        if(mp[x] > 2) return false;
+	```
+	Checks if any element in the array appears more than twice by comparing its count in `mp`. If true, returns `false`.
 
-- **O(n)**, where `n` is the number of elements in the `nums` array.
-  - We only need to iterate over the array once. For each element, the operations of updating the map and checking the frequency are constant time operations (amortized constant time due to the properties of the map).
-  - Therefore, the total time complexity is proportional to the size of the array.
+6. **Return Statement**
+	```cpp
+	    return true;
+	```
+	If no element appears more than twice, returns `true` indicating the array can be split as required.
 
-#### Space Complexity:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- **O(n)**, where `n` is the number of unique elements in the `nums` array.
-  - The space complexity is determined by the number of unique elements in the map. In the worst case, where all elements are distinct, the space complexity will be proportional to `n`. 
-  - This is because we store each unique element and its frequency in the map.
+The time complexity is O(n) where n is the length of the array, as we are iterating over the array once.
 
-### Conclusion:
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution effectively solves the problem by using a map to track the frequency of each element in the array. By doing so, we can quickly detect if any element appears more than twice, which would prevent us from splitting the array into valid subarrays. 
+The space complexity is O(n) due to the storage required for counting the frequency of elements.
 
-- The time complexity is linear, O(n), which is optimal for problems involving checking conditions across all elements of the array.
-- The space complexity is O(n), which is manageable given the constraints, as we only store the frequency of each unique element.
+**Happy Coding! 🎉**
 
-The approach is efficient and handles edge cases (such as arrays with repeated elements or arrays with only one element) effectively. This method ensures that we solve the problem in a single pass through the array, making it suitable for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-the-array/description/)
 

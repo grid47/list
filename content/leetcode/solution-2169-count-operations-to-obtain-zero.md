@@ -14,68 +14,147 @@ img_src = ""
 youtube = "yPqe3KshvVo"
 youtube_upload_date="2022-02-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/yPqe3KshvVo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two non-negative integers, num1 and num2. In each operation, subtract the smaller number from the larger one. Continue until one of the numbers becomes zero and return the number of operations performed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, num1 and num2, which represent the two numbers for which the operations are to be performed.
+- **Example:** `[4, 5]`
+- **Constraints:**
+	- 0 <= num1, num2 <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countOperations(int num1, int num2) {
-        int ans = 0;
-        while(num1 > 0 && num2 > 0) {
-            if(num1 > num2) {
-                num1 -= num2;
-            } else {
-                num2 -= num1;
-            }
-            ans++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer, representing the total number of operations needed to make either num1 or num2 equal to zero.
+- **Example:** `4`
+- **Constraints:**
+	- At least one of num1 or num2 will become zero after performing the operations.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to keep performing the subtraction operation on the two numbers until one of them becomes zero.
+
+- Perform subtraction on the two numbers until either num1 or num2 becomes zero.
+- Count the number of operations required.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both num1 and num2 are non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[4, 5]`  \
+  **Explanation:** In this example, the subtraction process is performed step by step until num1 becomes zero. The total number of steps is 4.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to repeatedly subtract the smaller number from the larger one and keep track of the number of operations. The process continues until one number becomes zero.
+
+### Initial Thoughts 💭
+- The subtraction operation is straightforward, and the number of operations depends on the difference between the two numbers.
+- We need to keep track of how many times the subtraction operation is performed until one of the numbers reaches zero.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will not be empty as both num1 and num2 must be non-negative integers.
+- The solution must handle cases where num1 and num2 are large, up to 100,000.
+- If num1 or num2 is zero at the start, the number of operations is zero.
+- Ensure the solution works efficiently for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int countOperations(int num1, int num2) {
+    int ans = 0;
+    while(num1 > 0 && num2 > 0) {
+        if(num1 > num2) {
+            num1 -= num2;
+        } else {
+            num2 -= num1;
         }
-        return ans;
+        ans++;
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
-The problem is to find the number of operations needed to reduce two given positive integers, `num1` and `num2`, to zero using a specific operation. The operation allows repeatedly subtracting the smaller number from the larger one until at least one of the numbers becomes zero. The task is to return the total count of these operations.
+This code defines the `countOperations` method that calculates the number of operations needed to reduce two integers to zero using the subtractive method.
 
-### Approach
-The approach leverages a simple iterative process:
-- Continue as long as both `num1` and `num2` are greater than zero.
-- In each iteration, check which number is larger:
-  - Subtract the smaller number from the larger one.
-  - Increment the operation count (`ans`).
-- The loop stops when one of the numbers becomes zero, at which point the total count of operations is returned.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int countOperations(int num1, int num2) {
+	```
+	This is the method definition for `countOperations`, which takes two integer arguments `num1` and `num2`.
 
-### Code Breakdown (Step by Step)
-1. **Initialization**:
-   - An integer `ans` is initialized to `0` to keep track of the number of operations performed.
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	The variable `ans` is initialized to 0. It will store the number of operations performed.
 
-2. **While Loop**:
-   - The condition `while(num1 > 0 && num2 > 0)` ensures that the loop continues until at least one of the numbers becomes zero.
-   
-3. **Conditional Check**:
-   - Inside the loop, a check is made:
-     - If `num1 > num2`, subtract `num2` from `num1`.
-     - Otherwise, subtract `num1` from `num2`.
-   - This step effectively reduces the larger of the two numbers by the smaller one.
-   
-4. **Increment Operation Counter**:
-   - After each subtraction operation, increment `ans` to count the operation.
+3. **While Loop**
+	```cpp
+	    while(num1 > 0 && num2 > 0) {
+	```
+	The `while` loop continues as long as both `num1` and `num2` are greater than 0.
 
-5. **Return Statement**:
-   - Once the loop terminates, the function returns `ans`, which holds the total number of operations.
+4. **If Condition**
+	```cpp
+	        if(num1 > num2) {
+	```
+	If `num1` is greater than `num2`, the following operation is executed.
 
-### Complexity
-- **Time Complexity**: The time complexity of this approach is O(max(num1, num2)), as the number of operations depends on the size of the input values. The loop iterates as long as the larger number can be reduced by the smaller one.
-- **Space Complexity**: The space complexity is O(1) since no additional space is used other than a few variables for tracking the operation count and performing calculations.
+5. **Subtraction Operation**
+	```cpp
+	            num1 -= num2;
+	```
+	This operation subtracts `num2` from `num1`.
 
-### Conclusion
-This solution is an efficient way to count the number of operations required to make two positive integers zero through iterative subtraction. It highlights the simplicity of a greedy approach that ensures each step moves towards the goal by removing the smaller value from the larger one. The problem is effectively reduced using basic arithmetic and logical conditions, achieving an optimal solution for scenarios where both numbers can be manipulated through iterative subtraction.
+6. **Else Condition**
+	```cpp
+	        } else {
+	```
+	If the `if` condition is not met, the following `else` block is executed.
+
+7. **Subtraction Operation**
+	```cpp
+	            num2 -= num1;
+	```
+	This operation subtracts `num1` from `num2`.
+
+8. **Increment Operation**
+	```cpp
+	        ans++;
+	```
+	The `ans` variable is incremented by 1, representing one operation completed.
+
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The method returns the value of `ans`, which is the number of operations performed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(log(max(num1, num2)))
+- **Worst Case:** O(max(num1, num2))
+
+Each operation reduces one of the numbers, and the time complexity is logarithmic in the best case, linear in the worst case.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we are only storing a few variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-operations-to-obtain-zero/description/)
 

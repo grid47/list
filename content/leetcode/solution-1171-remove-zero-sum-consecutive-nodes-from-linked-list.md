@@ -14,132 +14,226 @@ img_src = ""
 youtube = "xZRozZEjizg"
 youtube_upload_date="2022-11-10"
 youtube_thumbnail="https://i.ytimg.com/vi/xZRozZEjizg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the head of a linked list, iteratively remove all consecutive subsequences of nodes whose sum is 0. Return the modified linked list after all such subsequences have been removed. You may return any valid result.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the head of a singly linked list.
+- **Example:** `Input: head = [2,-2,3,1,-1,4,-4,5]`
+- **Constraints:**
+	- 1 <= length of linked list <= 1000
+	- -1000 <= node.val <= 1000
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* removeZeroSumSublists(ListNode* head) {
-        ListNode* dummy = new ListNode(0), *cur = dummy;
-        dummy->next= head;
-        int prefix = 0;
-        map<int, ListNode*> mp;
-        while(cur) {
-            prefix += cur->val;
-            if(mp.count(prefix)) {
-                cur = mp[prefix]->next;
-                int p = prefix + cur->val;
-                while(p != prefix) {
-                    mp.erase(p);
-                    cur = cur->next;
-                    p += cur->val;
-                }
-                mp[prefix]->next = cur->next;
-            } else mp[prefix]  = cur;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the head of the modified linked list with all zero-sum subsequences removed.
+- **Example:** `Output: [5]`
+- **Constraints:**
+	- The output linked list should not contain any zero-sum consecutive subsequences.
 
-            cur = cur->next;
-        }
-        return dummy->next;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Iteratively remove zero-sum consecutive subsequences from the linked list.
+
+- 1. Create a dummy node and link it to the head of the list.
+- 2. Traverse the list while maintaining a prefix sum.
+- 3. Use a hash map to track nodes corresponding to each prefix sum.
+- 4. When a prefix sum is encountered again, remove all nodes in the subsequence between the two occurrences.
+- 5. Return the updated list starting from the dummy node’s next pointer.
+{{< dots >}}
+### Problem Assumptions ✅
+- Input is always a valid singly linked list.
+- Zero-sum subsequences can span multiple nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [1,3,-3,4,5,-4]`  \
+  **Explanation:** The sequence [3,-3] sums to 0 and is removed. Then [4,5,-4] sums to 0 and is also removed. The final list is [1].
+
+- **Input:** `Input: head = [2,3,-5,5,-2,1]`  \
+  **Explanation:** The sequence [2,3,-5] sums to 0. Removing it leaves [5,-2,1]. No further zero-sum sequences exist. The result is [5,-2,1].
+
+{{< dots >}}
+## Approach 🚀
+Use a prefix sum and a hash map to efficiently detect and remove zero-sum subsequences in a single traversal.
+
+### Initial Thoughts 💭
+- Using prefix sums allows quick identification of zero-sum subsequences.
+- A hash map can store references to nodes corresponding to each prefix sum.
+- Removing nodes in-place avoids unnecessary space usage and preserves the list structure.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty list returns an empty list.
+- A list with 1000 nodes processes efficiently using prefix sums.
+- Lists with all nodes summing to 0 should return an empty list.
+- Negative and positive values should be handled correctly.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* removeZeroSumSublists(ListNode* head) {
+    ListNode* dummy = new ListNode(0), *cur = dummy;
+    dummy->next= head;
+    int prefix = 0;
+    map<int, ListNode*> mp;
+    while(cur) {
+        prefix += cur->val;
+        if(mp.count(prefix)) {
+            cur = mp[prefix]->next;
+            int p = prefix + cur->val;
+            while(p != prefix) {
+                mp.erase(p);
+                cur = cur->next;
+                p += cur->val;
+            }
+            mp[prefix]->next = cur->next;
+        } else mp[prefix]  = cur;
+
+        cur = cur->next;
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The task is to remove consecutive nodes in a singly-linked list that sum up to zero. Given a linked list represented by its head node, we need to modify the list such that any contiguous sequence of nodes that sums to zero is removed. The modified list should preserve the order of remaining nodes.
-
-### Approach
-To solve this problem, we can use a hashmap (or an unordered map) to keep track of the cumulative sums (prefix sums) encountered while traversing the linked list. The main steps of the approach are:
-
-1. **Cumulative Sum Calculation**: As we traverse the linked list, we calculate the cumulative sum of the nodes.
-2. **Map to Track Prefix Sums**: Store each prefix sum along with the corresponding node in a map. If we encounter the same prefix sum again, it indicates that the sum of the nodes between these two nodes equals zero.
-3. **Removing Zero-Sum Sublists**: When we find a duplicate prefix sum, we remove all nodes between the previous occurrence of that prefix sum and the current node.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the implementation step by step:
-
-```cpp
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* removeZeroSumSublists(ListNode* head) {
-        ListNode* dummy = new ListNode(0), *cur = dummy;
-        dummy->next = head;
-        int prefix = 0;
-        map<int, ListNode*> mp;
+    return dummy->next;
+}
 ```
 
-- **Lines 1-9**: The `ListNode` struct defines a node in a singly linked list. The `Solution` class contains the method `removeZeroSumSublists`, which takes the head of the linked list as input.
-- A dummy node is created to simplify operations on the linked list, especially for cases where the head node might be part of a zero-sum sequence. The current pointer (`cur`) starts at the dummy node.
-- The variable `prefix` is initialized to store cumulative sums as we traverse the list. The map `mp` is used to track the prefix sums and their corresponding nodes.
+This code defines the function `removeZeroSumSublists` that removes any sublist of consecutive nodes in a linked list where the sum of the node values is zero. The function uses a prefix sum approach combined with a hash map to efficiently find and remove such sublists.
 
-```cpp
-        while(cur) {
-            prefix += cur->val;
-            if(mp.count(prefix)) {
-                cur = mp[prefix]->next;
-                int p = prefix + cur->val;
-                while(p != prefix) {
-                    mp.erase(p);
-                    cur = cur->next;
-                    p += cur->val;
-                }
-                mp[prefix]->next = cur->next;
-            } else mp[prefix]  = cur;
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	ListNode* removeZeroSumSublists(ListNode* head) {
+	```
+	Define the function `removeZeroSumSublists`, which takes a `ListNode* head` as input and returns a `ListNode*` after removing any sublist with a sum of zero.
 
-            cur = cur->next;
-        }
-```
+2. **Variable Initialization**
+	```cpp
+	    ListNode* dummy = new ListNode(0), *cur = dummy;
+	```
+	Initialize a dummy node to simplify list manipulation and set `cur` to point to the dummy node.
 
-- **Lines 11-29**: This `while` loop continues as long as the current node (`cur`) is not null.
-- The cumulative sum `prefix` is updated by adding the value of the current node (`cur->val`).
-- If the prefix sum already exists in the map (`mp`), it means there is a zero-sum sublist. The next steps involve:
-  - **Moving Current Pointer**: Set `cur` to the next node of the node corresponding to the last occurrence of this prefix sum.
-  - **Erasing Intermediate Prefix Sums**: A new sum `p` is calculated by adding the value of the node at the new `cur`. We then enter a loop that continues until `p` equals the current `prefix`, erasing entries in the map for each prefix sum encountered during this process.
-  - After removing the zero-sum nodes, the next pointer of the node where the duplicate prefix sum was found is updated to skip over the removed nodes.
-- If the prefix sum is not in the map, we simply add the current prefix sum and its corresponding node to the map.
+3. **Variable Initialization**
+	```cpp
+	    dummy->next = head;
+	```
+	Set the `next` pointer of the dummy node to point to the head of the input linked list.
 
-```cpp
-        return dummy->next;
-    }
-};
-```
+4. **Variable Initialization**
+	```cpp
+	    int prefix = 0;
+	```
+	Initialize the variable `prefix` to 0 to keep track of the prefix sum of node values.
 
-- **Line 31**: Finally, the method returns the modified linked list, starting from the node following the dummy node, effectively skipping any zero-sum sublists.
+5. **Variable Initialization**
+	```cpp
+	    map<int, ListNode*> mp;
+	```
+	Initialize a map `mp` to store the first occurrence of each prefix sum and its corresponding node.
 
-### Complexity
-1. **Time Complexity**: \(O(n)\), where \(n\) is the number of nodes in the linked list. Each node is processed once, and operations with the map (insertions and deletions) are average \(O(1)\).
-2. **Space Complexity**: \(O(n)\) in the worst case, where every prefix sum is unique and stored in the map.
+6. **Loop**
+	```cpp
+	    while(cur) {
+	```
+	Start a while loop that iterates through the linked list until `cur` is null.
 
-### Conclusion
-The `removeZeroSumSublists` function efficiently identifies and removes zero-sum sublists from a singly-linked list using prefix sums and a hashmap. This method is optimal for the problem, leveraging the properties of cumulative sums to streamline the process. The result is a modified linked list that maintains the order of nodes while excluding any contiguous nodes that sum to zero, making it a practical solution for similar linked list manipulation problems.
+7. **Prefix Sum Calculation**
+	```cpp
+	        prefix += cur->val;
+	```
+	Update the prefix sum by adding the value of the current node.
+
+8. **Conditional**
+	```cpp
+	        if(mp.count(prefix)) {
+	```
+	Check if the prefix sum has already been encountered in the map `mp`.
+
+9. **Pointer Update**
+	```cpp
+	            cur = mp[prefix]->next;
+	```
+	Set `cur` to the node right after the node corresponding to the previous occurrence of the same prefix sum.
+
+10. **Variable Initialization**
+	```cpp
+	            int p = prefix + cur->val;
+	```
+	Initialize `p` with the sum of `prefix` and the value of the current node.
+
+11. **Loop**
+	```cpp
+	            while(p != prefix) {
+	```
+	Start a loop to erase any prefix sums between the first occurrence and the current node, effectively removing the nodes in the zero-sum sublist.
+
+12. **Map Operation**
+	```cpp
+	                mp.erase(p);
+	```
+	Erase the prefix sum `p` from the map `mp`.
+
+13. **Pointer Update**
+	```cpp
+	                cur = cur->next;
+	```
+	Move the `cur` pointer to the next node in the list.
+
+14. **Prefix Sum Calculation**
+	```cpp
+	                p += cur->val;
+	```
+	Update the value of `p` by adding the value of the current node.
+
+15. **Loop**
+	```cpp
+	            }
+	```
+	End the loop for erasing nodes between the two prefix sums.
+
+16. **Pointer Update**
+	```cpp
+	            mp[prefix]->next = cur->next;
+	```
+	Update the `next` pointer of the node corresponding to the previous prefix sum to skip over the zero-sum sublist.
+
+17. **Map Operation**
+	```cpp
+	        } else mp[prefix] = cur;
+	```
+	If the prefix sum is not found in the map, store the current node in the map with the prefix sum as the key.
+
+18. **Pointer Update**
+	```cpp
+	        cur = cur->next;
+	```
+	Move the `cur` pointer to the next node.
+
+19. **Return Statement**
+	```cpp
+	    return dummy->next;
+	```
+	Return the next node after the dummy node, which represents the head of the modified linked list.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N)
+- **Average Case:** O(N)
+- **Worst Case:** O(N)
+
+Each node is processed once, with hash map operations taking constant time.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(N)
+
+Space complexity is proportional to the number of unique prefix sums in the worst case.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/description/)
 

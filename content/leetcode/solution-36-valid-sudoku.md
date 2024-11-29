@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "TjFXEUCMqI8"
 youtube_upload_date="2021-07-05"
 youtube_thumbnail="https://i.ytimg.com/vi/TjFXEUCMqI8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,117 +28,187 @@ youtube_thumbnail="https://i.ytimg.com/vi/TjFXEUCMqI8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Determine if a 9x9 Sudoku board is valid. A valid Sudoku board follows three rules: Each row, column, and 3x3 sub-box must contain the digits 1-9 without repetition. Only the filled cells need to be validated.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A 9x9 grid representing the Sudoku board. Cells contain digits '1'-'9' or '.' for empty cells.
+- **Example:** `Input: board = [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], ...]`
+- **Constraints:**
+	- board.length == 9
+	- board[i].length == 9
+	- Each cell is a digit from '1' to '9' or '.'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isValidSudoku(vector<vector<char>>& board) {
-        map<string, bool> ma;
-        
-        for(int i = 0; i < 9; i++)
-        for(int j = 0; j < 9; j++) {
-            if(board[i][j] != '.') {
-                string key = "(";
-                    key+=board[i][j];
-                key+=")";
-                if(ma.count(to_string(i)+key)) return false;
-                else ma[to_string(i)+key] = true;
-                // cout << to_string(i)+key;
-                if(ma.count(key+to_string(j))) return false;
-                else ma[key+to_string(j)] = true;
-                // cout << key+to_string(j);
-                int x = i / 3, y = j / 3;
-                if(ma.count(to_string(x)+ key+ to_string(y))) return false;
-                else ma[to_string(x)+ key+ to_string(y)] = true;
-                // cout<< to_string(i)+ key+ to_string(j);
-            }
-        }
-            return true;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return 'true' if the board is valid according to Sudoku rules, otherwise return 'false'.
+- **Example:** `Output: true`
+- **Constraints:**
+	- Return a boolean value indicating whether the board is valid or not.
 
-### 🏷️ **Problem Statement**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To validate the Sudoku board based on the three conditions: unique digits in rows, columns, and sub-boxes.
 
-Given a **9x9 Sudoku board**, the task is to determine whether the board is valid according to the following rules:
-1. Each row must contain the digits 1-9 without repetition.
-2. Each column must contain the digits 1-9 without repetition.
-3. Each of the nine 3x3 subgrids must contain the digits 1-9 without repetition.
+- Iterate through each cell of the board.
+- For each non-empty cell, check if the value already appears in the same row, column, or 3x3 sub-box.
+- Use a set or map to track previously encountered numbers in each row, column, and sub-box.
+- Return 'false' if a repeated number is found, otherwise return 'true' after checking all cells.
+{{< dots >}}
+### Problem Assumptions ✅
+- The board is a valid 9x9 grid.
+- Only the filled cells are validated.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: board = [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], ...]`  \
+  **Explanation:** The board is valid as no rows, columns, or sub-boxes have repeating digits. All filled cells follow Sudoku rules.
 
-The task is to return `true` if the given board is valid, and `false` otherwise.
+- **Input:** `Input: board = [["8", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], ...]`  \
+  **Explanation:** The board is invalid because there are two '8's in the top-left 3x3 sub-box.
 
-### 🧠 **Approach**
+{{< dots >}}
+## Approach 🚀
+Use a set or map to track the digits that have appeared in each row, column, and 3x3 sub-box to ensure there are no duplicates.
 
-To check the validity of the Sudoku board, we can utilize a **hash map** (`map<string, bool>`) to keep track of digits encountered in the rows, columns, and subgrids. Here's how the algorithm works:
-
-#### Key Observations:
-1. A **row** is valid if no digit is repeated in that row.
-2. A **column** is valid if no digit is repeated in that column.
-3. A **subgrid (3x3 box)** is valid if no digit is repeated in that subgrid.
-
-The solution will:
-- Traverse the entire board and for each non-empty cell, check whether it violates the Sudoku rules.
-- The validity is checked by ensuring that a digit has not already been encountered in the same row, column, or 3x3 subgrid.
-  
-We will use a hash map to track occurrences:
-- Row: `(i, digit)`
-- Column: `(digit, j)`
-- Subgrid: `(x, digit, y)`, where `x` and `y` are the subgrid indices.
-
-### 💻 **Code Breakdown**
-
+### Initial Thoughts 💭
+- We can use sets or maps to efficiently track the digits we encounter in rows, columns, and sub-boxes.
+- Using a single iteration through the board and checking each non-empty cell will ensure an efficient solution.
+{{< dots >}}
+### Edge Cases 🌐
+- The board may contain empty cells represented by '.' which should be ignored during validation.
+- N/A, as the board size is fixed at 9x9.
+- Consider cases where all rows, columns, and sub-boxes have exactly one number or are filled with duplicates.
+- Ensure the board is always 9x9 as per the constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-map<string, bool> ma;
-```
-- **Step 1:** Initialize a map `ma` to track digits in rows, columns, and subgrids. The key is a string representing a unique combination of the current cell's row, column, or subgrid information, and the value is a boolean indicating whether that combination has been encountered.
-
-```cpp
-for(int i = 0; i < 9; i++)
+bool isValidSudoku(vector<vector<char>>& board) {
+    map<string, bool> ma;
+    
+    for(int i = 0; i < 9; i++)
     for(int j = 0; j < 9; j++) {
         if(board[i][j] != '.') {
+            string key = "(";
+                key+=board[i][j];
+            key+=")";
+            if(ma.count(to_string(i)+key)) return false;
+            else ma[to_string(i)+key] = true;
+            // cout << to_string(i)+key;
+            if(ma.count(key+to_string(j))) return false;
+            else ma[key+to_string(j)] = true;
+            // cout << key+to_string(j);
+            int x = i / 3, y = j / 3;
+            if(ma.count(to_string(x)+ key+ to_string(y))) return false;
+            else ma[to_string(x)+ key+ to_string(y)] = true;
+            // cout<< to_string(i)+ key+ to_string(j);
+        }
+    }
+        return true;
+}
 ```
-- **Step 2:** Loop through the entire 9x9 board. The outer loop iterates over rows, and the inner loop iterates over columns. For each non-empty cell (`board[i][j] != '.'`), we proceed to check for validity.
 
-```cpp
-string key = "(";
-key += board[i][j];
-key += ")";
-if(ma.count(to_string(i) + key)) return false;
-else ma[to_string(i) + key] = true;
-```
-- **Step 3:** For a non-empty cell, we construct a key that uniquely identifies the digit in the current row. The key format is `"(digit)"`. We then check if this key has already been encountered for the current row. If so, we return `false` (duplicate found). Otherwise, we add the key to the map.
+This code checks if a given Sudoku board is valid.
 
-```cpp
-if(ma.count(key + to_string(j))) return false;
-else ma[key + to_string(j)] = true;
-```
-- **Step 4:** We repeat the same process for the column. The key is formed by appending the column index (`to_string(j)`) to the digit key. If a duplicate is found in the column, we return `false`. If no duplicates are found, we add the key to the map.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isValidSudoku(vector<vector<char>>& board) {
+	```
+	This line declares a function named 'isValidSudoku' that takes a 2D vector 'board' representing the Sudoku board as input and returns a boolean indicating whether the board is valid.
 
-```cpp
-int x = i / 3, y = j / 3;
-if(ma.count(to_string(x) + key + to_string(y))) return false;
-else ma[to_string(x) + key + to_string(y)] = true;
-```
-- **Step 5:** We now check the validity of the digit in the **3x3 subgrid**. We calculate the subgrid's indices `x = i / 3` and `y = j / 3` to identify the subgrid. The key is formed by appending `x`, the digit, and `y`. If this key is found in the map, it indicates a violation, and we return `false`. Otherwise, we add the key to the map to mark it as visited.
+2. **Map Initialization**
+	```cpp
+	    map<string, bool> ma;
+	```
+	This line initializes an empty map 'ma' to store information about the numbers seen in each row, column, and 3x3 sub-grid.
 
-```cpp
-return true;
-```
-- **Step 6:** After traversing the entire board and checking all rows, columns, and subgrids for duplicates, we return `true` to indicate that the board is valid.
+3. **Nested Loops**
+	```cpp
+	    for(int i = 0; i < 9; i++)
+	    for(int j = 0; j < 9; j++) {
+	```
+	This nested loop iterates over each cell of the Sudoku board.
 
-### 📊 **Time and Space Complexity**
+4. **Conditional Check**
+	```cpp
+	        if(board[i][j] != '.') {
+	```
+	This line checks if the current cell is not empty.
 
-#### Time Complexity:
-- **O(1):** The time complexity is constant because we are always working with a fixed-size 9x9 board. Each operation (checking and inserting into the map) is done in constant time, and we process a fixed number of cells (81 cells). Therefore, the overall time complexity is **O(1)**.
+5. **String Manipulation**
+	```cpp
+	            string key = "(";
+	                key+=board[i][j];
+	            key+=")";
+	```
+	This block creates a unique key for the current number, row, or column by concatenating the number with the row or column index enclosed in parentheses.
 
-#### Space Complexity:
-- **O(1):** The space complexity is also constant because the size of the map is limited to a fixed number of keys. The map can hold at most 81 cells * 3 (for row, column, and subgrid), resulting in a maximum of 243 entries. Thus, the space complexity is **O(1)**.
+6. **Map Operations**
+	```cpp
+	            if(ma.count(to_string(i)+key)) return false;
+	```
+	This line checks if the current number has already been seen in the current row. If so, it means the Sudoku is invalid, and the function returns false.
 
-### 🚀 **Conclusion**
+7. **Map Operations**
+	```cpp
+	            else ma[to_string(i)+key] = true;
+	```
+	If the number hasn't been seen in the current row, it's added to the map with a key representing the row and number.
 
-The `isValidSudoku` function efficiently checks the validity of a 9x9 Sudoku board using a hash map to track the occurrence of digits in rows, columns, and subgrids. The approach guarantees a constant-time solution due to the fixed size of the board. The space complexity remains constant, making the algorithm both time and space efficient. This solution provides a scalable and optimal method for verifying a valid Sudoku board.
+8. **Map Operations**
+	```cpp
+	            if(ma.count(key+to_string(j))) return false;
+	```
+	This line checks if the current number has already been seen in the current column. If so, it means the Sudoku is invalid, and the function returns false.
+
+9. **Map Operations**
+	```cpp
+	            else ma[key+to_string(j)] = true;
+	```
+	If the number hasn't been seen in the current column, it's added to the map with a key representing the column and number.
+
+10. **Calculation**
+	```cpp
+	            int x = i / 3, y = j / 3;
+	```
+	This line calculates the indices of the 3x3 sub-grid to which the current cell belongs.
+
+11. **Map Operations**
+	```cpp
+	            if(ma.count(to_string(x)+ key+ to_string(y))) return false;
+	```
+	This line checks if the current number has already been seen in the current 3x3 sub-grid. If so, it means the Sudoku is invalid, and the function returns false.
+
+12. **Map Operations**
+	```cpp
+	            else ma[to_string(x)+ key+ to_string(y)] = true;
+	```
+	If the number hasn't been seen in the current 3x3 sub-grid, it's added to the map with a key representing the sub-grid indices and number.
+
+13. **Return**
+	```cpp
+	        return true;
+	```
+	If the loop completes without finding any violations, the function returns true, indicating that the Sudoku board is valid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+Time complexity is O(n^2) because we are iterating through a 9x9 grid.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the use of sets to track digits for rows, columns, and sub-boxes.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-sudoku/description/)
 

@@ -14,172 +14,211 @@ img_src = ""
 youtube = "LqhxcaCctCc"
 youtube_upload_date="2024-10-11"
 youtube_thumbnail="https://i.ytimg.com/vi/LqhxcaCctCc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a party, there are n friends with distinct arrival and departure times. Each friend chooses the smallest available chair. The task is to determine the chair number where the friend numbered targetFriend will sit.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A 2D array times where times[i] = [arrivali, leavingi] indicates the arrival and leaving times of the ith friend, and an integer targetFriend representing the index of the target friend.
+- **Example:** `times = [[1,5],[2,6],[3,8]], targetFriend = 1`
+- **Constraints:**
+	- 2 <= n <= 10^4
+	- 1 <= arrivali < leavingi <= 10^5
+	- Each arrival time is distinct
+	- 0 <= targetFriend < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int smallestChair(vector<vector<int>>& a, int t) {
-        int tt = a[t][0];
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> reserve;
-        priority_queue<int, vector<int>, greater<int>> avail;
-        sort(a.begin(), a.end());
-        for(auto &t : a) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the chair number that the target friend will sit on.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The output is an integer representing the chair number.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the chair number occupied by the target friend.
+
+- Sort the friends based on their arrival times.
+- Use two priority queues: one for keeping track of the available chairs and another for tracking the chairs occupied by friends based on their leaving times.
+- Assign the smallest available chair to each arriving friend and release the chair when a friend leaves.
+- Check when the target friend arrives and assign their chair number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrival and departure times for each friend are unique and provided in a correct format.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: times = [[1, 5], [2, 6], [3, 8]], targetFriend = 1`  \
+  **Explanation:** Friend 0 arrives at time 1 and sits on chair 0. Friend 1 arrives at time 2 and sits on chair 1. Friend 2 arrives at time 3 and sits on chair 2. At time 5, Friend 0 leaves and Friend 1 sits back in chair 0. Friend 2 stays until time 8. Since Friend 1 sits on chair 1, the answer is 1.
+
+- **Input:** `Example 2: times = [[1, 3], [2, 5], [3, 7], [4, 6]], targetFriend = 2`  \
+  **Explanation:** Friend 0 arrives at time 1 and sits on chair 0. Friend 1 arrives at time 2 and sits on chair 1. Friend 2 arrives at time 3 and sits on chair 2. Friend 1 leaves at time 5, Friend 2 leaves at time 7, and Friend 3 arrives at time 4. The target friend 2 sits on chair 2.
+
+{{< dots >}}
+## Approach 🚀
+To determine the chair number for the target friend, we will manage chair availability using priority queues and ensure the correct allocation of chairs as friends arrive and leave.
+
+### Initial Thoughts 💭
+- We need to efficiently track both the arrival and departure times of friends.
+- Using priority queues allows us to quickly find the smallest available chair and to manage which chairs are being occupied or released.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem ensures that there are no empty inputs.
+- Handle scenarios with the maximum number of friends and their respective times efficiently.
+- When only two friends are involved, the solution should still correctly track the chairs.
+- Ensure that all times are within the provided limits and that the chair assignment is accurate.
+{{< dots >}}
+## Code 💻
+```cpp
+int smallestChair(vector<vector<int>>& a, int t) {
+    int tt = a[t][0];
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> reserve;
+    priority_queue<int, vector<int>, greater<int>> avail;
+    sort(a.begin(), a.end());
+    for(auto &t : a) {
+        
+        while(!reserve.empty() && reserve.top().first <= t[0]) {
             
-            while(!reserve.empty() && reserve.top().first <= t[0]) {
-                
-                avail.push(reserve.top().second);
-                reserve.pop();
-                
-            }
-            
-            if(t[0] == tt) break;
-            if (!avail.empty()) {
-                
-                reserve.push({t[1], avail.top()});
-                             
-               avail.pop();
-                
-            } else {
-                
-                reserve.push({t[1], reserve.size()});
-                
-            }
+            avail.push(reserve.top().second);
+            reserve.pop();
             
         }
         
-        return avail.empty()? reserve.size() : avail.top();
+        if(t[0] == tt) break;
+        if (!avail.empty()) {
+            
+            reserve.push({t[1], avail.top()});
+                         
+           avail.pop();
+            
+        } else {
+            
+            reserve.push({t[1], reserve.size()});
+            
+        }
         
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine the smallest numbered chair available for a person arriving at a given time `t` in a sequence of events defined by their arrival and departure times. Each person has a designated arrival time and a departure time, and once they leave, their chair becomes available for someone else. The goal is to ensure that each arriving person sits in the smallest numbered chair that is available when they arrive.
-
-### Approach
-
-To solve this problem, we can utilize a priority queue (min-heap) to efficiently manage the availability of chairs. The approach consists of the following steps:
-
-1. **Sorting Events**: First, we sort the events based on their arrival times. This allows us to process each arrival in the order they occur.
-
-2. **Using Priority Queues**: We will maintain two priority queues:
-   - One for reserving chairs (`reserve`), which stores the departure time along with the chair number.
-   - Another for available chairs (`avail`), which keeps track of the chair numbers that have become available.
-
-3. **Processing Each Event**: For each person:
-   - We check if any chairs have become available by comparing their departure times with the current arrival time. If so, we add those chairs to the available queue.
-   - If the current person is the one we are interested in (based on their arrival time), we stop processing further since we want to find the chair for this specific person.
-   - We assign a chair to the current person, either from the available chairs or a new chair if none are available.
-
-4. **Returning the Result**: Finally, we return the chair number assigned to the person arriving at time `t`.
-
-### Code Breakdown (Step by Step)
-
-Let's analyze the provided code in detail:
-
-```cpp
-class Solution {
-public:
-    int smallestChair(vector<vector<int>>& a, int t) {
+    
+    return avail.empty()? reserve.size() : avail.top();
+    
+}
 ```
-We define a class named `Solution` and a public method called `smallestChair` that takes a 2D vector `a` representing the arrival and departure times of people and an integer `t`, which is the index of the person we are interested in.
 
-```cpp
-        int tt = a[t][0];
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> reserve;
-        priority_queue<int, vector<int>, greater<int>> avail;
-```
-We extract the arrival time `tt` of the target person (the one indexed by `t`). We then initialize two priority queues:
-- `reserve`: This will store pairs of departure times and chair numbers.
-- `avail`: This will keep track of the chair numbers that are available for use.
+This function finds the smallest chair index at a given time `t` for a set of events, using priority queues to manage the reservations and available chairs.
 
-```cpp
-        sort(a.begin(), a.end());
-```
-Next, we sort the vector `a` based on the arrival times. This ensures that we process each person in the correct order.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int smallestChair(vector<vector<int>>& a, int t) {
+	```
+	Declare the function `smallestChair`, which accepts a 2D vector `a` representing event start and end times, and an integer `t` indicating the target time.
 
-```cpp
-        for(auto &t : a) {
-```
-We start iterating over each person's arrival and departure times.
+2. **Time Extraction**
+	```cpp
+	    int tt = a[t][0];
+	```
+	Extract the start time `tt` of the event at index `t`.
 
-```cpp
-            while(!reserve.empty() && reserve.top().first <= t[0]) {
-                avail.push(reserve.top().second);
-                reserve.pop();
-            }
-```
-In this loop, we check if there are any chairs that have become available due to people leaving. If the earliest departure time (the top of the `reserve` queue) is less than or equal to the current person's arrival time `t[0]`, we add that chair number to the `avail` queue and remove it from the `reserve` queue.
+3. **Priority Queue Initialization (Reservation)**
+	```cpp
+	    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> reserve;
+	```
+	Initialize a priority queue `reserve` to store pairs of end times and chair indices, sorted by the end time.
 
-```cpp
-            if(t[0] == tt) break;
-```
-We check if the current person's arrival time is the same as our target person's arrival time. If it is, we break out of the loop since we only need the chair number for this specific person.
+4. **Priority Queue Initialization (Available Chairs)**
+	```cpp
+	    priority_queue<int, vector<int>, greater<int>> avail;
+	```
+	Initialize a priority queue `avail` to manage the available chair indices, sorted in ascending order.
 
-```cpp
-            if (!avail.empty()) {
-                reserve.push({t[1], avail.top()});
-                avail.pop();
-            } else {
-                reserve.push({t[1], reserve.size()});
-            }
-```
-Here, we determine which chair to assign to the current person:
-- If there are available chairs, we assign the smallest available chair (top of the `avail` queue) to the current person and push their departure time along with the chair number into the `reserve` queue.
-- If no chairs are available, we allocate a new chair (which is simply the current size of the `reserve` queue) and push its departure time into the `reserve` queue.
+5. **Sorting Events**
+	```cpp
+	    sort(a.begin(), a.end());
+	```
+	Sort the events in `a` by their start times.
 
-```cpp
-        return avail.empty()? reserve.size() : avail.top();
-    }
-};
-```
-Finally, after processing all people, we check if there are any chairs available. If not, we return the total number of chairs (which is the same as the size of the `reserve` queue). Otherwise, we return the smallest available chair from the `avail` queue.
+6. **Event Iteration**
+	```cpp
+	    for(auto &t : a) {
+	```
+	Loop through each event `t` in the sorted list of events.
 
-### Complexity
+7. **While Loop (Check Expired Reservations)**
+	```cpp
+	        while(!reserve.empty() && reserve.top().first <= t[0]) {
+	```
+	Check if there are any expired reservations (those whose end time is less than or equal to the current event's start time).
 
-- **Time Complexity**: The time complexity of this solution is \(O(n \log n)\) due to the sorting of the array `a` and the use of priority queues, where \(n\) is the number of people.
+8. **Push to Available Chairs**
+	```cpp
+	            avail.push(reserve.top().second);
+	```
+	Push the chair index from the top reservation (expired) into the `avail` queue to make it available.
 
-- **Space Complexity**: The space complexity is \(O(n)\) to store the chairs and the events in the priority queues.
+9. **Pop Expired Reservation**
+	```cpp
+	            reserve.pop();
+	```
+	Pop the top reservation from the `reserve` queue as it is now expired.
 
-### Conclusion
+10. **Check Target Time**
+	```cpp
+	        if(t[0] == tt) break;
+	```
+	If the current event's start time is equal to the target time `tt`, break the loop.
 
-The provided solution efficiently determines the smallest numbered chair for a specified person arriving at a given time using priority queues to manage the availability of chairs. By leveraging sorting and heap operations, this approach ensures that the assignment of chairs is optimal and meets the problem's requirements.
+11. **Check Available Chairs**
+	```cpp
+	        if (!avail.empty()) {
+	```
+	If there are available chairs, proceed to assign one.
 
-### Key Features
+12. **Push to Reserve (Available Chair)**
+	```cpp
+	            reserve.push({t[1], avail.top()});
+	```
+	Assign an available chair (from the `avail` queue) to the current event and add the reservation to the `reserve` queue.
 
-1. **Dynamic Chair Management**: The use of priority queues allows for dynamic management of chair availability based on real-time events (arrival and departure).
+13. **Else (No Available Chair)**
+	```cpp
+	        } else {
+	```
+	If there are no available chairs, assign a new one.
 
-2. **Efficient Sorting**: Sorting the input array simplifies the logic for managing arrivals and departures, allowing for a straightforward implementation of the chair assignment logic.
+14. **Push to Reserve (New Chair)**
+	```cpp
+	            reserve.push({t[1], reserve.size()});
+	```
+	Assign a new chair index (based on the size of `reserve` queue) to the current event and add the reservation to the `reserve` queue.
 
-3. **Optimal Chair Assignment**: By always selecting the smallest available chair, the solution adheres to the problem's requirements and maintains fairness in chair allocation.
+15. **Return Statement**
+	```cpp
+	    return avail.empty()? reserve.size() : avail.top();
+	```
+	Return the index of the smallest available chair, or the total number of reservations if no chairs are available.
 
-### Use Cases
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n), due to sorting the arrival times and managing the queues.
+- **Average Case:** O(n log n), for each friend's arrival and departure time management.
+- **Worst Case:** O(n log n), as each friend's event needs to be processed and sorted.
 
-This algorithm can be applied in various scenarios, including:
+The time complexity is dominated by the sorting of the arrival times and the operations on the priority queues.
 
-- **Event Management Systems**: Where chairs or seats need to be allocated dynamically based on arrival and departure times (e.g., for concerts, theaters, or conferences).
+### Space Complexity 💾
+- **Best Case:** O(n), as we may need to track up to n chairs at once.
+- **Worst Case:** O(n), for storing the event times and the state of each chair.
 
-- **Resource Allocation**: In systems where limited resources (like meeting rooms, equipment, etc.) need to be assigned to users based on their schedules.
+The space complexity is linear with respect to the number of friends, as we need to track their arrival and departure times along with the chairs.
 
-### Implementation Considerations
+**Happy Coding! 🎉**
 
-When implementing this solution, consider the following:
-
-- **Input Validations**: Ensure that the input is well-formed, with valid arrival and departure times.
-
-- **Concurrency**: If this system is to be used in a multi-threaded environment, ensure that the access to shared data structures is properly synchronized to avoid race conditions.
-
-- **Scalability**: Test the implementation with a large number of events to ensure that the performance remains acceptable under heavy load.
-
-This detailed explanation provides a comprehensive understanding of the code, its functioning, and its potential applications, making it an excellent resource for anyone interested in implementing similar functionality.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/description/)
 

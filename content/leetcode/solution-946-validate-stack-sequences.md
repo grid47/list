@@ -14,109 +14,195 @@ img_src = ""
 youtube = "YF5ZWSWvMT0"
 youtube_upload_date="2023-04-13"
 youtube_thumbnail="https://i.ytimg.com/vi/YF5ZWSWvMT0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays, `pushed` and `popped`, each containing distinct values. The arrays represent the order of elements being pushed onto and popped from an initially empty stack. Your task is to determine if it is possible to obtain the `popped` sequence from the `pushed` sequence through a series of valid stack push and pop operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integer arrays: `pushed` and `popped`. Both arrays contain distinct values, and the length of both arrays is the same.
+- **Example:** `Input: pushed = [1, 2, 3, 4, 5], popped = [5, 4, 3, 2, 1]`
+- **Constraints:**
+	- 1 <= pushed.length <= 1000
+	- 0 <= pushed[i] <= 1000
+	- All elements in pushed and popped are unique.
+	- popped.length == pushed.length
+	- popped is a permutation of pushed.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
-        stack<int> stk;
-        int i = 1, j = 0;
-        stk.push(pushed[0]);
-        int n = pushed.size();
-        while(i < n) {
-            while(j < n && !stk.empty() && stk.top() == popped[j]) {
-                j++;
-                stk.pop();
-            }
-            stk.push(pushed[i++]);
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the sequence `popped` can be obtained by performing a sequence of push and pop operations on an initially empty stack, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The input arrays are always valid, and the answer will fit in a boolean value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to verify if the `popped` array can be formed by performing valid stack operations on the `pushed` array.
+
+- 1. Initialize an empty stack to simulate the stack operations.
+- 2. Use two pointers, one for traversing `pushed` and another for traversing `popped`.
+- 3. For each element in `pushed`, push it onto the stack.
+- 4. While the stack is not empty and the top of the stack matches the current element in `popped`, pop the top element from the stack and move the pointer in `popped`.
+- 5. Repeat the process until all elements from `pushed` are processed and the stack is empty.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays `pushed` and `popped` contain only unique values.
+- The arrays are permutations of each other, meaning that `popped` can be re-arranged into `pushed`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: pushed = [1, 2, 3, 4, 5], popped = [5, 4, 3, 2, 1]`  \
+  **Explanation:** In this example, we can simulate the stack operations as follows: push(1), push(2), push(3), push(4), push(5), then pop elements in reverse order: pop() -> 5, pop() -> 4, pop() -> 3, pop() -> 2, pop() -> 1. Since the stack operations produce the same order as `popped`, the output is true.
+
+- **Input:** `Input: pushed = [1, 2, 3, 4, 5], popped = [5, 3, 4, 1, 2]`  \
+  **Explanation:** In this example, the element 1 cannot be popped before 2. It is not possible to obtain the sequence `popped` by performing valid stack operations on `pushed`, so the output is false.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to simulate stack operations by iterating over the `pushed` array and checking if the elements can be popped from the stack in the order specified by `popped`.
+
+### Initial Thoughts 💭
+- The task involves simulating stack operations and ensuring that the order of pops matches the given sequence.
+- The problem can be solved efficiently with a single pass through the arrays.
+- Using a stack to simulate the push and pop operations is a straightforward approach.
+{{< dots >}}
+### Edge Cases 🌐
+- If both arrays are empty, the result is true because no operations are needed.
+- For large inputs, ensure the solution handles up to 1000 elements efficiently.
+- If the arrays are already in the correct order, no operations are needed, and the result is true.
+- Make sure that the solution works within the problem constraints, particularly with array lengths up to 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+    stack<int> stk;
+    int i = 1, j = 0;
+    stk.push(pushed[0]);
+    int n = pushed.size();
+    while(i < n) {
         while(j < n && !stk.empty() && stk.top() == popped[j]) {
             j++;
             stk.pop();
-        }        
-        
-        return stk.empty();
+        }
+        stk.push(pushed[i++]);
     }
-};
-{{< /highlight >}}
----
+    while(j < n && !stk.empty() && stk.top() == popped[j]) {
+        j++;
+        stk.pop();
+    }        
+    return stk.empty();
+}
+```
 
-### Problem Statement
+This function checks if a sequence of stack operations can produce the sequence `popped` from the sequence `pushed`. It uses a stack to simulate pushing and popping, and ensures that the elements are popped in the correct order.
 
-The problem asks to determine whether a sequence of operations is possible given two sequences, `pushed` and `popped`, representing a stack's push and pop operations. The `pushed` sequence represents the order in which elements are pushed onto the stack, while the `popped` sequence represents the order in which they are popped from the stack. The task is to verify whether it's possible to achieve the `popped` sequence using the `pushed` sequence while respecting the rules of a stack (i.e., LIFO order).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+	```
+	This line declares the function `validateStackSequences`, which takes two vectors: `pushed` (the order in which elements are pushed onto the stack) and `popped` (the desired popping sequence). The function returns a boolean value indicating whether the sequence is valid.
 
-### Approach
+2. **Stack Initialization**
+	```cpp
+	    stack<int> stk;
+	```
+	Declare a stack `stk` to simulate the push and pop operations.
 
-To solve this problem, we need to simulate the stack operations based on the given `pushed` and `popped` sequences. The basic idea is to push elements onto a stack as per the `pushed` sequence and pop elements from the stack when they match the current element in the `popped` sequence. We need to ensure that the operations adhere to the LIFO (Last In, First Out) property of stacks. If, after processing both sequences, we have successfully matched the entire `popped` sequence, the result is `true`. Otherwise, it’s `false`.
+3. **Variable Initialization**
+	```cpp
+	    int i = 1, j = 0;
+	```
+	Initialize two integer variables: `i` (used to iterate through the `pushed` vector) and `j` (used to iterate through the `popped` vector).
 
-Here’s how we can break down the approach:
+4. **Initial Push**
+	```cpp
+	    stk.push(pushed[0]);
+	```
+	Push the first element of the `pushed` vector onto the stack.
 
-1. **Simulate Stack Operations**: We will iterate through the `pushed` sequence, pushing elements onto the stack. At each step, we will check if the top of the stack matches the current element in the `popped` sequence. If they match, we pop the stack and move to the next element in `popped`. This simulates the operation of the stack as we process the elements.
-  
-2. **Ensure Stack Validity**: At the end of the process, if the stack is empty, then the operations were valid and we return `true`. If there are still elements in the stack that haven’t been popped in the correct order, we return `false`.
+5. **Size Calculation**
+	```cpp
+	    int n = pushed.size();
+	```
+	Calculate the size of the `pushed` vector and store it in `n`.
 
-3. **Edge Case Handling**: We ensure that the process stops once all elements are processed, and the final stack check ensures that all pops have occurred in the correct order.
+6. **Main Loop**
+	```cpp
+	    while(i < n) {
+	```
+	Start a loop that continues until `i` reaches the size of the `pushed` vector.
 
-### Code Breakdown (Step by Step)
+7. **Inner Loop**
+	```cpp
+	        while(j < n && !stk.empty() && stk.top() == popped[j]) {
+	```
+	This inner loop checks if the current stack's top matches the current element in `popped` and pops from the stack accordingly.
 
-1. **Initial Setup**:
-   ```cpp
-   stack<int> stk;
-   int i = 1, j = 0;
-   stk.push(pushed[0]);
-   int n = pushed.size();
-   ```
-   - We initialize a stack `stk` to simulate the stack operations.
-   - We start with `i = 1` because we’ve already pushed the first element from `pushed` onto the stack. `j = 0` is the pointer for iterating through the `popped` sequence.
-   - `n` holds the size of the `pushed` sequence to control the iteration.
+8. **Increment `j`**
+	```cpp
+	            j++;
+	```
+	Increment `j` to check the next element in the `popped` vector after popping the current top element from the stack.
 
-2. **Push Elements and Pop When Possible**:
-   ```cpp
-   while(i < n) {
-       while(j < n && !stk.empty() && stk.top() == popped[j]) {
-           j++;
-           stk.pop();
-       }
-       stk.push(pushed[i++]);
-   }
-   ```
-   - The outer `while(i < n)` loop ensures that we keep pushing elements from `pushed` onto the stack.
-   - The inner `while(j < n && !stk.empty() && stk.top() == popped[j])` loop checks if the top of the stack matches the current element in `popped`. If they match, we pop the stack and move to the next element in `popped`.
-   - After checking for possible pops, we push the next element from `pushed` into the stack (`stk.push(pushed[i++])`).
+9. **Pop Operation**
+	```cpp
+	            stk.pop();
+	```
+	Pop the top element from the stack if it matches the current element in `popped`.
 
-3. **Final Check After the Loop**:
-   ```cpp
-   while(j < n && !stk.empty() && stk.top() == popped[j]) {
-       j++;
-       stk.pop();
-   }
-   ```
-   - After we’ve pushed all elements from `pushed` to the stack, there might still be some elements in the stack that need to be popped. We check if the stack’s top matches the current element in `popped`. If they do, we pop the stack and move to the next element in `popped`.
+10. **Push Next Element**
+	```cpp
+	        stk.push(pushed[i++]);
+	```
+	Push the next element from the `pushed` vector onto the stack and increment `i`.
 
-4. **Final Return**:
-   ```cpp
-   return stk.empty();
-   ```
-   - If the stack is empty after processing both sequences, it means all elements were popped in the correct order as per the `popped` sequence, and we return `true`.
-   - If the stack is not empty, it indicates that some elements were not popped in the expected order, so we return `false`.
+11. **Final Check**
+	```cpp
+	    while(j < n && !stk.empty() && stk.top() == popped[j]) {
+	```
+	After the main loop, check if there are still elements in the stack that match the remaining elements in the `popped` vector.
 
-### Complexity
+12. **Increment `j` Again**
+	```cpp
+	        j++;
+	```
+	Increment `j` to check the next element in `popped` after popping the current top element from the stack.
 
-1. **Time Complexity**:
-   - The time complexity of this solution is O(n), where `n` is the number of elements in the `pushed` sequence. Each element is pushed and popped at most once from the stack, making the total number of operations proportional to the length of the sequences.
-   
-2. **Space Complexity**:
-   - The space complexity is O(n), where `n` is the number of elements in the `pushed` sequence. We use a stack to store the elements temporarily, and in the worst case, the stack could hold all `n` elements.
+13. **Pop Operation Again**
+	```cpp
+	        stk.pop();
+	```
+	Pop the top element from the stack if it matches the current element in `popped`.
 
-### Conclusion
+14. **Return Result**
+	```cpp
+	    return stk.empty();
+	```
+	Return true if the stack is empty (all elements have been popped correctly), otherwise return false.
 
-The solution efficiently simulates the stack operations using two pointers to track the `pushed` and `popped` sequences. By iterating through the `pushed` sequence and popping elements from the stack when they match the current element in `popped`, we can verify if the sequences can represent valid stack operations. The solution is optimal with a time complexity of O(n) and a space complexity of O(n), making it suitable for handling large inputs within reasonable limits.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) since we process each element in the arrays once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case when the stack stores all elements, and O(1) in the best case when the stack is empty.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/validate-stack-sequences/description/)
 

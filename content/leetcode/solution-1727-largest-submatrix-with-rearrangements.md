@@ -14,142 +14,217 @@ img_src = ""
 youtube = "NYyIVuSCfOA"
 youtube_upload_date="2023-11-26"
 youtube_thumbnail="https://i.ytimg.com/vi/NYyIVuSCfOA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary matrix with dimensions `m x n` consisting of 0's and 1's. You can rearrange the columns of the matrix in any order. The task is to find the area of the largest submatrix within the matrix where every element is 1 after optimally reordering the columns.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a matrix of size `m x n` where each element is either 0 or 1.
+- **Example:** `Input: matrix = [[0,0,1],[1,1,1],[1,0,1]]`
+- **Constraints:**
+	- m == matrix.length
+	- n == matrix[i].length
+	- 1 <= m * n <= 10^5
+	- matrix[i][j] is either 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int largestSubmatrix(vector<vector<int>>& mtx) {
-        int n = mtx[0].size(), m = mtx.size();
-        vector<vector<int>> one(m, vector<int>(n, 0));
-        int res = 0;
-        for(int i = 0; i < n; i++) {
-            int cnt = 0;
-            for(int j = 0; j < m; j++) {
-                if (mtx[j][i] == 1) { cnt++; } 
-                else { cnt = 0; }
-                one[j][i] = cnt;
-            }
-        }
-        
-        for(int i = 0; i < m; i++)
-        sort(one[i].rbegin(), one[i].rend());
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the area of the largest submatrix consisting entirely of 1's after rearranging the columns optimally.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output should be a single integer representing the area of the largest submatrix.
 
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                
-                res = max(res, one[i][j] * (j + 1));
-                
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the largest submatrix of 1's after rearranging the columns of the binary matrix optimally.
+
+- 1. For each column, compute how many consecutive 1's are there for each row. Store this information in a new matrix.
+- 2. For each row, sort the column values in descending order to group larger submatrices of 1's together.
+- 3. For each row, compute the maximum area of submatrix of 1's by multiplying the number of consecutive 1's by the number of columns.
+- 4. Return the maximum area found.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in the matrix are either 0 or 1.
+- Reordering the columns means you can rearrange the entire matrix as you wish.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: matrix = [[0,0,1],[1,1,1],[1,0,1]]`  \
+  **Explanation:** By rearranging the columns optimally, we can form a 2x2 submatrix of 1's. Therefore, the output is 4.
+
+- **Input:** `Input: matrix = [[1,0,1,0,1]]`  \
+  **Explanation:** After rearranging the columns, we can form a submatrix with three 1's in a row, resulting in an area of 3.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by counting consecutive 1's in each column and sorting them to form the largest submatrices of 1's. We can then calculate the maximum area of submatrices by considering different rows and column orders.
+
+### Initial Thoughts 💭
+- We need to calculate the number of consecutive 1's in each column, then rearrange the columns to maximize the area of 1's submatrix.
+- Sorting the column values by descending order helps to group larger 1's together, making it easier to compute the largest submatrix.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty matrices are not a valid input, as the matrix must contain at least one element.
+- Ensure that the solution can handle large matrices efficiently.
+- The matrix may contain a row or column of all 0's, which should be handled appropriately.
+- The solution must be able to handle up to 100,000 elements in the matrix.
+{{< dots >}}
+## Code 💻
+```cpp
+int largestSubmatrix(vector<vector<int>>& mtx) {
+    int n = mtx[0].size(), m = mtx.size();
+    vector<vector<int>> one(m, vector<int>(n, 0));
+    int res = 0;
+    for(int i = 0; i < n; i++) {
+        int cnt = 0;
+        for(int j = 0; j < m; j++) {
+            if (mtx[j][i] == 1) { cnt++; } 
+            else { cnt = 0; }
+            one[j][i] = cnt;
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    
+    for(int i = 0; i < m; i++)
+    sort(one[i].rbegin(), one[i].rend());
 
-### Problem Statement
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            
+            res = max(res, one[i][j] * (j + 1));
+            
+        }
+    }
+    return res;
+}
+```
 
-The task is to find the area of the largest rectangle containing only 1's in a binary matrix. Each cell in the matrix is either 0 or 1, where 1 represents part of a rectangle. The goal is to identify the dimensions of the largest contiguous rectangle made entirely of 1's and return its area.
+This function finds the area of the largest submatrix in a binary matrix `mtx`, where each cell has a value of either 0 or 1. The algorithm computes the largest rectangle formed by consecutive 1s in each column, and for each row, it sorts the heights in decreasing order to maximize the area.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int largestSubmatrix(vector<vector<int>>& mtx) {
+	```
+	The function `largestSubmatrix` is defined, taking a 2D vector `mtx` as input, which represents a binary matrix. The goal is to calculate the largest area of a submatrix consisting only of 1s.
 
-To solve this problem efficiently, we can utilize a method that transforms the problem into a histogram problem. Here's the step-by-step approach:
+2. **Matrix Dimensions**
+	```cpp
+	    int n = mtx[0].size(), m = mtx.size();
+	```
+	The dimensions of the matrix are extracted: `n` is the number of columns, and `m` is the number of rows.
 
-1. **Convert to Histogram Heights**: For each column in the matrix, maintain a count of consecutive 1's above each cell. This transforms each row into a representation of histogram heights.
+3. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> one(m, vector<int>(n, 0));
+	```
+	A 2D vector `one` is initialized with the same dimensions as `mtx`, where each element is set to 0. This will store the heights of 1s in each column for each row.
 
-2. **Sort Rows**: For each row, sort the histogram heights in descending order. This allows us to easily calculate the maximum rectangle area that can be formed using those heights.
+4. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	The variable `res` is initialized to 0. This will keep track of the maximum area found.
 
-3. **Calculate Area**: For each height in the sorted histogram, calculate the area of rectangles that can be formed using that height and update the maximum area found.
+5. **Outer Loop - Columns**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	The outer loop starts to iterate over each column `i` in the matrix `mtx`.
 
-### Code Breakdown (Step by Step)
+6. **Count Initialization**
+	```cpp
+	        int cnt = 0;
+	```
+	The variable `cnt` is initialized to 0. It will be used to count the consecutive 1s in each column.
 
-The implementation follows these steps in a structured manner:
+7. **Inner Loop - Rows**
+	```cpp
+	        for(int j = 0; j < m; j++) {
+	```
+	The inner loop starts to iterate over each row `j` in the matrix `mtx`.
 
-1. **Class Definition**: The solution is encapsulated in a class named `Solution`.
+8. **Count Update**
+	```cpp
+	            if (mtx[j][i] == 1) { cnt++; } 
+	```
+	If the current element `mtx[j][i]` is 1, `cnt` is incremented to keep track of consecutive 1s.
 
-   ```cpp
-   class Solution {
-   ```
+9. **Count Reset**
+	```cpp
+	            else { cnt = 0; }
+	```
+	If the current element is 0, `cnt` is reset to 0 as the consecutive 1s are broken.
 
-2. **Public Method**: The method `largestSubmatrix` takes a 2D vector `mtx` as input and returns an integer representing the area of the largest rectangle.
+10. **Store Heights**
+	```cpp
+	            one[j][i] = cnt;
+	```
+	The height of consecutive 1s for row `j` and column `i` is stored in the `one` matrix at position `one[j][i]`.
 
-   ```cpp
-   public:
-       int largestSubmatrix(vector<vector<int>>& mtx) {
-   ```
+11. **Inner Loop End**
+	```cpp
+	        }
+	```
+	End of the inner loop for iterating through rows.
 
-3. **Matrix Dimensions**: Extract the dimensions of the matrix, `n` for columns and `m` for rows.
+12. **Sort Heights**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	A loop iterates through each row `i` of the matrix `one`.
 
-   ```cpp
-   int n = mtx[0].size(), m = mtx.size();
-   ```
+13. **Sort Row**
+	```cpp
+	    sort(one[i].rbegin(), one[i].rend());
+	```
+	Each row of `one` is sorted in reverse order to maximize the area of the submatrix formed by the heights.
 
-4. **Histogram Initialization**: Create a 2D vector `one` to store the heights of the histogram for each column, initialized to zero.
+14. **Second Loop Start**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	The second loop starts again to iterate through the rows of the matrix `one`.
 
-   ```cpp
-   vector<vector<int>> one(m, vector<int>(n, 0));
-   ```
+15. **Third Loop Start**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	The third loop starts to iterate through the columns of the matrix `one`.
 
-5. **Count Consecutive 1's**: Iterate over each column to populate the `one` matrix with the counts of consecutive 1's.
+16. **Area Calculation**
+	```cpp
+	            res = max(res, one[i][j] * (j + 1));
+	```
+	For each position `one[i][j]`, the area of the rectangle is calculated by multiplying the height `one[i][j]` by its width `(j + 1)`. The maximum area found is stored in `res`.
 
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       int cnt = 0;
-       for(int j = 0; j < m; j++) {
-           if (mtx[j][i] == 1) { cnt++; } 
-           else { cnt = 0; }
-           one[j][i] = cnt;
-       }
-   }
-   ```
+17. **Return Result**
+	```cpp
+	    return res;
+	```
+	The result `res`, which contains the maximum area of the largest submatrix, is returned.
 
-   - In this nested loop, for each column `i`, we maintain a counter `cnt`. If the current cell is 1, we increment `cnt`, and if it's 0, we reset `cnt` to 0. This way, `one[j][i]` keeps track of the height of consecutive 1's up to row `j` in column `i`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n log n), since sorting the columns for each row takes log n time.
+- **Average Case:** O(m * n log n), as sorting will take O(log n) for each row.
+- **Worst Case:** O(m * n log n), the worst case where all rows need to be processed and sorted.
 
-6. **Sort Rows of Heights**: After populating the heights, sort each row of the `one` matrix in descending order.
+The time complexity is dominated by the sorting step for each row.
 
-   ```cpp
-   for(int i = 0; i < m; i++)
-       sort(one[i].rbegin(), one[i].rend());
-   ```
+### Space Complexity 💾
+- **Best Case:** O(m * n), due to the space required for the new matrix and the input matrix.
+- **Worst Case:** O(m * n), as we need additional space for storing the consecutive 1's matrix.
 
-   - Sorting helps us to easily determine how many rectangles can be formed with the heights available in the histogram.
+The space complexity is linear in terms of the number of elements in the matrix.
 
-7. **Calculate Maximum Area**: Iterate through the sorted heights and calculate the maximum area for each height.
+**Happy Coding! 🎉**
 
-   ```cpp
-   for(int i = 0; i < m; i++) {
-       for(int j = 0; j < n; j++) {
-           res = max(res, one[i][j] * (j + 1));
-       }
-   }
-   ```
-
-   - For each height `one[i][j]`, the maximum rectangle that can be formed is `one[i][j] * (j + 1)`, where `(j + 1)` represents the width. The outer loop iterates through the rows, while the inner loop iterates through the sorted heights in that row.
-
-8. **Return Result**: Finally, return the result, which contains the area of the largest rectangle found.
-
-   ```cpp
-   return res;
-   }
-   ```
-
-### Complexity
-
-- **Time Complexity**: The overall time complexity of this algorithm is \(O(m \cdot n \cdot \log n)\). This comes from iterating through all elements to compute the histogram heights (\(O(m \cdot n)\)), and sorting each row of heights (\(O(n \cdot \log n)\)).
-
-- **Space Complexity**: The space complexity is \(O(m \cdot n)\) due to the additional storage required for the `one` matrix that maintains the histogram heights.
-
-### Conclusion
-
-In conclusion, the provided solution efficiently calculates the area of the largest rectangle of 1's in a binary matrix by transforming the problem into a histogram representation. By keeping track of the heights of 1's in each column and sorting these heights, we can quickly calculate the potential maximum areas for rectangles.
-
-This method ensures that we consider all possible rectangles while optimizing the search using sorting, leading to a clear and efficient solution. The implementation is straightforward and follows a logical flow that leverages fundamental data structures, making it an excellent example of applying combinatorial techniques to solve a geometric problem in a matrix. Overall, this solution is effective for a variety of matrix sizes typically encountered in algorithm challenges.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-submatrix-with-rearrangements/description/)
 

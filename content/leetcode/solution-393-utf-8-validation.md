@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,142 +28,169 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of integers `data`, where each integer represents one byte of data. Your task is to check whether this sequence of bytes forms a valid UTF-8 encoded string based on the UTF-8 encoding rules for 1 to 4 bytes characters.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `data` where each integer represents one byte of data.
+- **Example:** `Input: [197, 130, 1]`
+- **Constraints:**
+	- 1 <= data.length <= 2 * 10^4
+	- 0 <= data[i] <= 255
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool validUtf8(vector<int>& data) {
-        int count = 0;
-        for(auto c : data) {
-            if(count == 0) {
-                if((c >> 5) == 0b110) count = 1;
-                else if ((c >> 4) == 0b1110) count = 2;
-                else if ((c >> 3) == 0b11110) count = 3;
-                else if (c >> 7) return false;
-            } else {
-                if ((c >> 6) != 0b10) return false;
-                count--;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean indicating whether the input array `data` represents a valid UTF-8 encoding.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be true if the byte sequence represents a valid UTF-8 encoding, otherwise false.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to validate if the given byte sequence adheres to the rules of UTF-8 encoding.
+
+- Iterate through the array of bytes in `data`.
+- Check the first bits of each byte to determine whether it's the start of a 1, 2, 3, or 4-byte character.
+- For continuation bytes (those starting with `10`), ensure that the correct number of continuation bytes follows.
+- Return true if the entire sequence is valid; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each integer in `data` represents one byte of data, and the byte values range from 0 to 255.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [197, 130, 1]`  \
+  **Explanation:** The byte sequence '11000101 10000010 00000001' represents a valid UTF-8 encoding: a 2-byte character followed by a 1-byte character.
+
+- **Input:** `Input: [235, 140, 4]`  \
+  **Explanation:** The byte sequence '11101011 10001100 00000100' represents an invalid UTF-8 encoding because the second byte does not start with '10' as required for a continuation byte.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the byte array and validating each byte according to the rules for UTF-8 encoding.
+
+### Initial Thoughts 💭
+- We need to check the starting bits of each byte to determine the number of bytes that form a character.
+- For each continuation byte, we need to ensure it starts with '10'.
+- The solution involves a simple traversal of the byte array and checking the bits, ensuring that the sequence follows the UTF-8 encoding rules.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is guaranteed to be non-empty, so no need to handle empty arrays.
+- The solution must be optimized to handle large inputs with up to 2 * 10^4 elements.
+- A sequence with an invalid continuation byte (not starting with '10') should return false.
+- The solution should efficiently check the validity of the UTF-8 encoding even for the largest inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+bool validUtf8(vector<int>& data) {
+    int count = 0;
+    for(auto c : data) {
+        if(count == 0) {
+            if((c >> 5) == 0b110) count = 1;
+            else if ((c >> 4) == 0b1110) count = 2;
+            else if ((c >> 3) == 0b11110) count = 3;
+            else if (c >> 7) return false;
+        } else {
+            if ((c >> 6) != 0b10) return false;
+            count--;
         }
-        return count == 0;
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-The task is to determine whether a given list of integers represents valid UTF-8 encoded data. UTF-8 is a variable-length encoding used to represent all characters in Unicode. Here's how it works:
-
-- A 1-byte character (ASCII) is represented as `0xxxxxxx`.
-- A 2-byte character is represented as `110xxxxx 10xxxxxx`.
-- A 3-byte character is represented as `1110xxxx 10xxxxxx 10xxxxxx`.
-- A 4-byte character is represented as `11110xxx 10xxxxxx 10xxxxxx 10xxxxxx`.
-
-We need to check if a given sequence of bytes follows these rules and is a valid UTF-8 encoded string.
-
----
-
-### 🧠 Approach
-
-To solve this, we need to parse the list of integers (which represent the bytes) and validate each byte according to the UTF-8 format. The steps are straightforward and can be broken down as follows:
-
-1. **Check the Leading Byte**: The first byte in the sequence determines how many continuation bytes follow it.
-2. **Validate Continuation Bytes**: Each continuation byte must start with `10xxxxxx`.
-3. **End of Sequence**: Ensure that after parsing all the bytes, we haven't left any incomplete characters (i.e., no more continuation bytes should be expected).
-
-Let's dive deeper into how this approach works step-by-step!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-#### Step 1: Initialize the Count of Continuation Bytes
-
-```cpp
-int count = 0;
-```
-
-- `count` keeps track of how many continuation bytes we expect for the current character. Initially, it’s set to 0 because no continuation bytes are expected at the beginning.
-
-#### Step 2: Iterate Over the Data
-
-```cpp
-for(auto c : data) {
-```
-
-- We loop through each byte `c` in the input array `data`, checking each byte to ensure it's in compliance with the UTF-8 standard.
-
-#### Step 3: Handle the First Byte of a Character
-
-```cpp
-if(count == 0) {
-    if((c >> 5) == 0b110) count = 1;  // 2-byte character
-    else if ((c >> 4) == 0b1110) count = 2;  // 3-byte character
-    else if ((c >> 3) == 0b11110) count = 3;  // 4-byte character
-    else if (c >> 7) return false;  // Invalid starting byte
+    return count == 0;
 }
 ```
 
-- When `count == 0`, we're starting a new character:
-  - We use bitwise shifts to check the first bits of `c`.
-  - If `c` starts with `110`, we know it's the start of a 2-byte character (expecting 1 continuation byte).
-  - If `c` starts with `1110`, it’s a 3-byte character (expecting 2 continuation bytes).
-  - If `c` starts with `11110`, it’s a 4-byte character (expecting 3 continuation bytes).
-  - If `c` doesn’t match any of these, it’s an invalid byte, and we return `false`.
+This function checks whether a given sequence of integers represents a valid UTF-8 encoding. It processes each byte and verifies if the sequences follow the correct number of continuation bytes according to UTF-8 encoding rules.
 
-#### Step 4: Handle Continuation Bytes
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool validUtf8(vector<int>& data) {
+	```
+	Define the function 'validUtf8' that takes a vector of integers, 'data', representing a sequence of bytes. It will return a boolean value indicating whether the sequence is a valid UTF-8 encoding.
 
-```cpp
-else {
-    if ((c >> 6) != 0b10) return false;  // Continuation byte should start with 10
-    count--;
-}
-```
+2. **Variable Initialization**
+	```cpp
+	    int count = 0;
+	```
+	Initialize a variable 'count' to track the number of continuation bytes remaining for a valid UTF-8 sequence.
 
-- If `count` is greater than 0, we expect a continuation byte:
-  - A continuation byte must start with `10`, so we use `(c >> 6)` to check if the first two bits are `10`. If not, we return `false`.
-  - After validating the continuation byte, we decrease `count` to track the processed continuation byte.
+3. **For Loop**
+	```cpp
+	    for(auto c : data) {
+	```
+	Start a loop to iterate through each byte 'c' in the 'data' vector.
 
-#### Step 5: Check for Unfinished Characters
+4. **Main If Condition**
+	```cpp
+	        if(count == 0) {
+	```
+	Check if no continuation bytes are expected, meaning we are starting a new character in the UTF-8 sequence.
 
-```cpp
-return count == 0;
-```
+5. **UTF-8 First Byte Check**
+	```cpp
+	            if((c >> 5) == 0b110) count = 1;
+	```
+	Check if the byte 'c' represents a valid starting byte for a 2-byte UTF-8 character. The condition checks the first 3 bits to determine if it matches the '110' prefix.
 
-- After processing all bytes, if `count` is 0, it means all characters were fully processed with the correct number of continuation bytes.
-- If `count` is not 0, it means some characters were incomplete, so we return `false`.
+6. **UTF-8 First Byte Check**
+	```cpp
+	            else if ((c >> 4) == 0b1110) count = 2;
+	```
+	Check if the byte 'c' represents a valid starting byte for a 3-byte UTF-8 character. The condition checks the first 4 bits to determine if it matches the '1110' prefix.
 
----
+7. **UTF-8 First Byte Check**
+	```cpp
+	            else if ((c >> 3) == 0b11110) count = 3;
+	```
+	Check if the byte 'c' represents a valid starting byte for a 4-byte UTF-8 character. The condition checks the first 5 bits to determine if it matches the '11110' prefix.
 
-### 📊 Complexity Analysis
+8. **Invalid First Byte Check**
+	```cpp
+	            else if (c >> 7) return false;
+	```
+	If the byte does not match any valid starting byte prefix (i.e., the first bit is 1 but does not match any of the expected patterns), return false, indicating an invalid UTF-8 sequence.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the number of bytes in the input array. We go through each byte once, performing constant-time bitwise operations for each byte.
+9. **Else Block for Continuation Bytes**
+	```cpp
+	        } else {
+	```
+	If we are expecting continuation bytes (i.e., 'count' is not 0), we check if the current byte follows the continuation pattern.
 
-#### Space Complexity:
-- **O(1)**. We only use a constant amount of extra space (the `count` variable), regardless of the input size.
+10. **UTF-8 Continuation Byte Check**
+	```cpp
+	            if ((c >> 6) != 0b10) return false;
+	```
+	Check if the byte 'c' is a valid continuation byte. A continuation byte in UTF-8 should start with '10' in its most significant bits.
 
----
+11. **Decrement Continuation Byte Count**
+	```cpp
+	            count--;
+	```
+	Decrement the 'count' variable to indicate that one continuation byte has been successfully processed.
 
-### 🏁 Conclusion
+12. **Return Statement**
+	```cpp
+	    return count == 0;
+	```
+	If 'count' is 0 at the end of the loop, it means all continuation bytes were matched correctly, and the UTF-8 sequence is valid. Otherwise, return false.
 
-In this solution, we've used a **bitwise approach** to efficiently verify if a sequence of bytes is valid UTF-8 encoded data. By checking the first byte and the continuation bytes for proper structure, we ensure that the encoding is correct and that there are no incomplete characters.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-With a linear time complexity of `O(n)` and constant space complexity, this approach is both **time-efficient** and **space-efficient**, making it perfect for large inputs.
+The time complexity is O(n) because we iterate through each byte in the array once.
 
-So, if you’re ever working with UTF-8 encoded data and need to validate its correctness, this is the way to go! 👍 
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
----
+The space complexity is O(1) as we only use a constant amount of extra space.
 
-### ✨ Summary
-To recap, the key steps involve:
-- Validating the first byte to determine how many continuation bytes follow.
-- Ensuring each continuation byte starts with `10`.
-- Ensuring that all characters are fully completed by the end of the sequence.
+**Happy Coding! 🎉**
 
-This solution will ensure that your UTF-8 data is correct and can handle all valid (and invalid) cases effectively!
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/utf-8-validation/description/)
 

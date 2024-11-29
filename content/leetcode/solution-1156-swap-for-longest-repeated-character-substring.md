@@ -14,117 +14,187 @@ img_src = ""
 youtube = "0kfkOm4b-8I"
 youtube_upload_date="2023-01-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/0kfkOm4b-8I/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `text`. You can swap two characters in the string. The task is to find the length of the longest substring with repeated characters after the swap.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `text` containing lowercase English characters.
+- **Example:** `Input: text = "abcba"`
+- **Constraints:**
+	- 1 <= text.length <= 20,000
+	- text consists of lowercase English characters only
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxRepOpt1(string text, int res = 1) {
-        vector<vector<int>> idx(26);
-        for(int i = 0; i < text.size(); i++)
-            idx[text[i] - 'a'].push_back(i);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the length of the longest substring with repeated characters after one swap.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be the maximum length of a substring with repeated characters after one swap.
 
-        for(int n = 0; n < 26; n++) {
-            auto cnt = 1, cnt1 = 0, mx = 0;
-            for(auto i = 1; i < idx[n].size(); i++) {
-                if(idx[n][i] == idx[n][i - 1]+ 1) ++cnt;
-                else {
-                    cnt1 = idx[n][i] == idx[n][i-1] + 2? cnt:0;
-                    cnt = 1;
-                }
-                mx = max(mx, cnt + cnt1);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the longest substring of repeated characters after performing one swap of any two characters in the string.
+
+- Create an array to track the indices of each character in the string.
+- Iterate through each character and calculate the longest repeated substring that can be achieved by swapping characters.
+- Consider the best result by swapping any two characters and return the maximum length of the substring.
+{{< dots >}}
+### Problem Assumptions ✅
+- We are allowed to swap exactly two characters in the string.
+- Only lowercase English characters are involved.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: text = "abcba"`  \
+  **Explanation:** By swapping the first 'b' with the last 'a', we get the string 'ababc'. The longest substring of repeated characters is 'aaa', with a length of 3.
+
+{{< dots >}}
+## Approach 🚀
+We will use a greedy approach to check for possible swaps and calculate the longest repeated substring in each case.
+
+### Initial Thoughts 💭
+- We need to check the effect of swapping characters and calculate the resulting longest repeated substring for each swap.
+- A greedy approach might work well here, iterating over possible swaps and computing the result in each case.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string length is 1, the longest repeated substring is the entire string.
+- Ensure the solution can handle the largest possible string size efficiently.
+- Consider cases where the string is already a substring of repeated characters, so no swap is needed.
+- Handle strings with both small and large lengths efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxRepOpt1(string text, int res = 1) {
+    vector<vector<int>> idx(26);
+    for(int i = 0; i < text.size(); i++)
+        idx[text[i] - 'a'].push_back(i);
+
+    for(int n = 0; n < 26; n++) {
+        auto cnt = 1, cnt1 = 0, mx = 0;
+        for(auto i = 1; i < idx[n].size(); i++) {
+            if(idx[n][i] == idx[n][i - 1]+ 1) ++cnt;
+            else {
+                cnt1 = idx[n][i] == idx[n][i-1] + 2? cnt:0;
+                cnt = 1;
             }
-            res = max(res, mx + ( idx[n].size() > mx ? 1 : 0) );
+            mx = max(mx, cnt + cnt1);
         }
-        return res;
+        res = max(res, mx + ( idx[n].size() > mx ? 1 : 0) );
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The function `maxRepOpt1` is designed to find the longest contiguous block of identical characters in a given string `text`, with the option of swapping two identical characters at most once to achieve the longest possible block. The task is to maximize the length of this block, utilizing up to one swap, if needed. This is useful for applications like text pattern matching, substring analysis, and optimal grouping of similar items.
-
-The function has the signature:
-```cpp
-int maxRepOpt1(string text)
+    return res;
+}
 ```
-where `text` is a non-empty string containing only lowercase English letters. The function returns the maximum number of repeated characters in a contiguous block with the optimal arrangement.
 
-### Approach
-This function uses an **index tracking approach** combined with **two-pointer sliding window** logic to identify the longest contiguous block of identical characters. The goal is to take advantage of any potential swap to further extend contiguous blocks. The approach is broken down as follows:
+This function implements a solution for the problem 'Maximize the Length of a Repeated Substring After One Operation'. It uses a greedy strategy combined with dynamic tracking of consecutive characters to compute the maximum possible length of a substring that can be achieved by performing at most one operation of swapping a single character.
 
-1. **Index Tracking**: Each character's index positions are stored in a vector of vectors, `idx`. This allows us to efficiently locate positions of each character in `text` and assess the potential for extending contiguous blocks by checking adjacent positions.
-  
-2. **Looping Through Character Indices**:
-   - For each character in the alphabet (26 letters), the code iterates through its occurrence positions in the string, aiming to find the maximum contiguous segment of that character.
-   - It maintains two counters:
-     - `cnt`: Counts consecutive occurrences in a segment.
-     - `cnt1`: Tracks if a single character gap can be filled by a swap to extend the block.
-   - If consecutive characters are interrupted by a single character, the code checks if this gap can be filled by a swap. This allows the function to consider the potential of a longer contiguous block with only one swap.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int maxRepOpt1(string text, int res = 1) {
+	```
+	Define the function `maxRepOpt1` which calculates the maximum length of a repeated substring that can be obtained by changing at most one character in the string.
 
-3. **Update Maximum Block Length**:
-   - The maximum block length (`mx`) is updated as each segment is analyzed, taking into account potential swaps.
-   - The result (`res`) is updated for each character to keep track of the largest contiguous block found for any character.
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> idx(26);
+	```
+	Declare a 2D vector `idx` with 26 inner vectors, each corresponding to one letter of the alphabet. This will store the indices of occurrences of each letter in the input string.
 
-4. **Result Adjustment**: Finally, if the maximum block for any character (`mx`) is smaller than the total occurrences of that character, the result is incremented by 1. This adjustment accounts for the possibility of extending the block by swapping one character occurrence from elsewhere.
+3. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < text.size(); i++)
+	```
+	Loop through each character of the string `text` to record the indices of each character's occurrence in the corresponding subvector of `idx`.
 
-### Code Breakdown (Step by Step)
-Let’s walk through the code line by line for a clearer understanding.
+4. **Index Tracking**
+	```cpp
+	        idx[text[i] - 'a'].push_back(i);
+	```
+	For each character in the string, subtract the ASCII value of 'a' to get the index of the character (0 for 'a', 1 for 'b', etc.), and append the current index `i` to the corresponding subvector in `idx`.
 
-```cpp
-class Solution {
-public:
-    int maxRepOpt1(string text, int res = 1) {
-        vector<vector<int>> idx(26);
-        for(int i = 0; i < text.size(); i++)
-            idx[text[i] - 'a'].push_back(i);
-```
-- **Lines 3-6**: The function begins by initializing `idx`, a vector of vectors to store the positions of each character in `text`. Each character’s occurrences are indexed by subtracting 'a' from the character to map it to an array index (0-25).
+5. **Main Loop**
+	```cpp
+	    for(int n = 0; n < 26; n++) {
+	```
+	Loop through all 26 possible characters (from 'a' to 'z') to analyze the occurrences of each character in the string.
 
-```cpp
-        for(int n = 0; n < 26; n++) {
-            auto cnt = 1, cnt1 = 0, mx = 0;
-            for(auto i = 1; i < idx[n].size(); i++) {
-                if(idx[n][i] == idx[n][i - 1]+ 1) ++cnt;
-                else {
-                    cnt1 = idx[n][i] == idx[n][i-1] + 2? cnt:0;
-                    cnt = 1;
-                }
-                mx = max(mx, cnt + cnt1);
-            }
-```
-- **Outer Loop (Lines 7-9)**: For each character (represented by `n`), the function initializes `cnt` to 1 (tracking consecutive characters), `cnt1` to 0 (for counting the gap potential), and `mx` to track the maximum segment length for the current character.
-- **Inner Loop (Lines 10-18)**: Iterates through all occurrences of the character in `text`:
-  - If consecutive occurrences are found (distance of 1), it increments `cnt`.
-  - Otherwise, if there is a gap of exactly one character, it checks if this gap can be filled (updating `cnt1`), and resets `cnt`.
-  - After each segment, `mx` is updated to reflect the maximum contiguous block length with a potential swap.
+6. **Variable Initialization**
+	```cpp
+	        auto cnt = 1, cnt1 = 0, mx = 0;
+	```
+	Initialize variables: `cnt` to track the length of consecutive occurrences of a character, `cnt1` to track the length of possible gaps, and `mx` to store the maximum length found for the current character.
 
-```cpp
-            res = max(res, mx + ( idx[n].size() > mx ? 1 : 0) );
-        }
-        return res;
-    }
-};
-```
-- **Result Update (Line 19-21)**:
-  - For each character, `res` is updated by comparing it with the calculated maximum segment `mx` and adding 1 if additional occurrences are available for potential swapping.
-  - Finally, the function returns `res`, the length of the longest contiguous block found.
+7. **Loop Through Indices**
+	```cpp
+	        for(auto i = 1; i < idx[n].size(); i++) {
+	```
+	Loop through the list of indices for the current character to identify consecutive occurrences and handle potential gaps between occurrences.
 
-### Complexity
-- **Time Complexity**: \(O(N)\), where \(N\) is the length of `text`. The code loops through the string once to build `idx`, and each character’s occurrences are processed individually. The operations within each loop are efficient, making this solution optimized.
-  
-- **Space Complexity**: \(O(26 + N) = O(N)\) for storing the occurrences of each character. Given that there are only 26 lowercase letters, the space complexity depends mainly on the size of `text`.
+8. **Consecutive Check**
+	```cpp
+	            if(idx[n][i] == idx[n][i - 1]+ 1) ++cnt;
+	```
+	Check if the current index is exactly one greater than the previous index, indicating a consecutive occurrence. If true, increment the `cnt` variable.
 
-### Conclusion
-The `maxRepOpt1` function is an efficient and optimized solution for finding the maximum contiguous block of identical characters in a string with an optional swap. Using an index-based approach to track positions and two-pointer logic for gap-checking, it efficiently identifies the best possible arrangement for each character’s occurrences, ensuring the optimal result. The algorithm is well-suited for handling longer strings and provides quick, reliable results with minimal space complexity. This approach is ideal for applications where optimizing grouping and arranging similar items is essential, such as data segmentation or text pattern analysis.
+9. **Non-Consecutive Check**
+	```cpp
+	            else {
+	```
+	If the current index is not consecutive with the previous one, enter this branch to handle non-consecutive occurrences.
+
+10. **Gap Handling**
+	```cpp
+	                cnt1 = idx[n][i] == idx[n][i-1] + 2? cnt:0;
+	```
+	Check if the gap between the current index and the previous one is exactly 1 (indicating one character is missing). If true, set `cnt1` to the value of `cnt` to allow for a potential swap, otherwise reset `cnt1`.
+
+11. **Reset Counter**
+	```cpp
+	                cnt = 1;
+	```
+	Reset the `cnt` variable to 1 as the consecutive sequence has been broken.
+
+12. **Max Length Update**
+	```cpp
+	            mx = max(mx, cnt + cnt1);
+	```
+	Update the maximum length `mx` by considering the sum of the consecutive length `cnt` and the possible gap length `cnt1`.
+
+13. **Result Update**
+	```cpp
+	        res = max(res, mx + ( idx[n].size() > mx ? 1 : 0) );
+	```
+	Update the result `res` by considering the maximum length found for the current character, and if there is one more occurrence of the character, add 1 to the result.
+
+14. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the result `res`, which is the maximum length of the repeated substring that can be obtained with at most one character change.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+In the worst case, we may need to check all possible swaps, which could involve iterating over all pairs of characters.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is determined by the storage of indices for each character.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/swap-for-longest-repeated-character-substring/description/)
 

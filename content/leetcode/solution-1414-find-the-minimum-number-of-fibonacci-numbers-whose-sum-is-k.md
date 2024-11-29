@@ -14,134 +14,170 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer k, and you need to determine the minimum number of Fibonacci numbers whose sum equals k. Note that the same Fibonacci number can be used multiple times. The Fibonacci sequence is defined as F1 = 1, F2 = 1, and Fn = Fn-1 + Fn-2 for n > 2.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer k.
+- **Example:** `k = 8`
+- **Constraints:**
+	- 1 <= k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findMinFibonacciNumbers(int k) {
-        vector<int> arr = {1, 1};
-        while(arr[arr.size() - 1] + arr[arr.size() - 2] <= k) {
-            arr.push_back(arr[arr.size() - 1] + arr[arr.size() - 2]);
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of Fibonacci numbers whose sum is equal to k.
+- **Example:** `For k = 8, output 1 as only one Fibonacci number is needed.`
+- **Constraints:**
 
-        set<int> cnt;
-        int i = arr.size() -1;
-        while(k > 0) {
-            while(i >= 0 && arr[i] > k) i--;
-            if(i == -1) break;
-            k -= arr[i];
-            cnt.insert(arr[i]);
-        }
-        return cnt.size();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the minimum number of Fibonacci numbers that sum to k.
+
+- Generate all Fibonacci numbers less than or equal to k.
+- Greedily subtract the largest Fibonacci numbers from k until k becomes 0.
+- Count the number of Fibonacci numbers used.
+{{< dots >}}
+### Problem Assumptions ✅
+- The given number k is always solvable with Fibonacci numbers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: k = 8`  \
+  **Explanation:** The Fibonacci sequence is [1, 1, 2, 3, 5, 8]. For k = 8, we can directly use the Fibonacci number 8, so the answer is 1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, generate all Fibonacci numbers less than or equal to k and greedily select the largest Fibonacci numbers that sum to k.
+
+### Initial Thoughts 💭
+- The Fibonacci numbers grow exponentially, so we can limit the number of Fibonacci numbers we need to check.
+- Greedy selection from the largest Fibonacci numbers should work well here.
+- We can generate Fibonacci numbers up to k, then iteratively subtract the largest Fibonacci numbers from k until we reach 0.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since k is always a positive integer.
+- For large values of k near 10^9, ensure the Fibonacci sequence is generated efficiently.
+- When k is a Fibonacci number itself, the solution should return 1.
+- Ensure the correct implementation for all valid inputs within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int findMinFibonacciNumbers(int k) {
+    vector<int> arr = {1, 1};
+    while(arr[arr.size() - 1] + arr[arr.size() - 2] <= k) {
+        arr.push_back(arr[arr.size() - 1] + arr[arr.size() - 2]);
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    set<int> cnt;
+    int i = arr.size() -1;
+    while(k > 0) {
+        while(i >= 0 && arr[i] > k) i--;
+        if(i == -1) break;
+        k -= arr[i];
+        cnt.insert(arr[i]);
+    }
+    return cnt.size();
+}
+```
 
-The problem requires finding the minimum number of Fibonacci numbers whose sum equals a given integer \( k \). Fibonacci numbers are defined as a sequence where each number is the sum of the two preceding ones, typically starting with \( 1, 1, 2, 3, 5, \ldots \). The objective is to determine how many distinct Fibonacci numbers can be combined to sum up to \( k \).
+The function `findMinFibonacciNumbers` calculates the minimum number of Fibonacci numbers whose sum equals `k` by iterating over Fibonacci numbers until the sum reaches `k`.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findMinFibonacciNumbers(int k) {
+	```
+	This line defines the function `findMinFibonacciNumbers`, which takes an integer `k` as input and returns an integer representing the minimum number of Fibonacci numbers whose sum equals `k`.
 
-To solve this problem, we can use a greedy algorithm. The idea is to generate all Fibonacci numbers that are less than or equal to \( k \) and then iteratively subtract the largest Fibonacci number from \( k \) until \( k \) reaches zero. This way, we minimize the number of Fibonacci numbers needed.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> arr = {1, 1};
+	```
+	Initializes a vector `arr` containing the first two Fibonacci numbers, `1` and `1`.
 
-1. **Generate Fibonacci Numbers**: Create a list of Fibonacci numbers that are less than or equal to \( k \).
+3. **Loop Constructs**
+	```cpp
+	    while(arr[arr.size() - 1] + arr[arr.size() - 2] <= k) {
+	```
+	This while loop continues to generate Fibonacci numbers and adds them to `arr` as long as the sum of the last two Fibonacci numbers is less than or equal to `k`.
 
-2. **Greedy Selection**: Starting from the largest Fibonacci number, repeatedly subtract it from \( k \) while \( k \) remains greater than zero. Keep track of the Fibonacci numbers used.
+4. **Vector Operations**
+	```cpp
+	        arr.push_back(arr[arr.size() - 1] + arr[arr.size() - 2]);
+	```
+	Adds the next Fibonacci number to the vector `arr` by summing the last two numbers in the vector.
 
-3. **Count Distinct Fibonacci Numbers**: Since we need distinct Fibonacci numbers, we can use a set to automatically handle duplicates.
+5. **Set Operations**
+	```cpp
+	    set<int> cnt;
+	```
+	Initializes a set `cnt` to store unique Fibonacci numbers that contribute to the sum `k`.
 
-### Code Breakdown (Step by Step)
+6. **Variable Initialization**
+	```cpp
+	    int i = arr.size() -1;
+	```
+	Initializes the variable `i` to the index of the last element in the `arr` vector, representing the largest Fibonacci number.
 
-Here's a step-by-step breakdown of the provided C++ code:
+7. **Loop Constructs**
+	```cpp
+	    while(k > 0) {
+	```
+	Begins a while loop that runs until `k` becomes 0, indicating that the sum of selected Fibonacci numbers has been achieved.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+8. **Loop Constructs**
+	```cpp
+	        while(i >= 0 && arr[i] > k) i--;
+	```
+	In this inner while loop, the index `i` is decremented until a Fibonacci number less than or equal to `k` is found.
 
-   - A class named `Solution` is defined to encapsulate the solution method.
+9. **Control Flow**
+	```cpp
+	        if(i == -1) break;
+	```
+	If no suitable Fibonacci number is found (i.e., `i` becomes -1), the loop is exited.
 
-2. **Function Declaration**:
-   ```cpp
-       int findMinFibonacciNumbers(int k) {
-   ```
+10. **Arithmetic Operations**
+	```cpp
+	        k -= arr[i];
+	```
+	Decreases `k` by the current Fibonacci number `arr[i]`.
 
-   - The method `findMinFibonacciNumbers` takes an integer \( k \) as input and returns the minimum number of distinct Fibonacci numbers that sum to \( k \).
+11. **Set Operations**
+	```cpp
+	        cnt.insert(arr[i]);
+	```
+	Inserts the selected Fibonacci number `arr[i]` into the set `cnt` to ensure each number is counted only once.
 
-3. **Fibonacci Number Generation**:
-   ```cpp
-           vector<int> arr = {1, 1};
-           while(arr[arr.size() - 1] + arr[arr.size() - 2] <= k) {
-               arr.push_back(arr[arr.size() - 1] + arr[arr.size() - 2]);
-           }
-   ```
+12. **Return Statement**
+	```cpp
+	    return cnt.size();
+	```
+	Returns the size of the set `cnt`, which represents the minimum number of Fibonacci numbers required to sum up to `k`.
 
-   - A vector `arr` is initialized with the first two Fibonacci numbers, \( 1 \) and \( 1 \).
-   - A while loop generates Fibonacci numbers until the next number exceeds \( k \). The next Fibonacci number is calculated by adding the last two numbers in the vector.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log k), due to the exponential growth of Fibonacci numbers.
+- **Average Case:** O(log k), since we need to process Fibonacci numbers up to k.
+- **Worst Case:** O(log k), as the number of Fibonacci numbers required is small relative to k.
 
-4. **Set for Distinct Count**:
-   ```cpp
-           set<int> cnt;
-           int i = arr.size() - 1;
-   ```
+The time complexity is logarithmic relative to k due to the fast growth of the Fibonacci sequence.
 
-   - A set `cnt` is created to store the distinct Fibonacci numbers used in the sum.
-   - An integer `i` is initialized to point to the last element of the Fibonacci array.
+### Space Complexity 💾
+- **Best Case:** O(log k), as the space for the Fibonacci numbers is proportional to the logarithm of k.
+- **Worst Case:** O(log k), for storing the Fibonacci numbers up to k.
 
-5. **Greedy Selection**:
-   ```cpp
-           while(k > 0) {
-               while(i >= 0 && arr[i] > k) i--;
-               if(i == -1) break;
-               k -= arr[i];
-               cnt.insert(arr[i]);
-           }
-   ```
+The space complexity is also logarithmic because we only need to store a small number of Fibonacci numbers.
 
-   - A while loop continues until \( k \) is greater than zero.
-   - A nested loop checks if the current Fibonacci number (pointed by `i`) is greater than \( k \). If it is, the index `i` is decremented.
-   - If `i` becomes \(-1\), it indicates that there are no Fibonacci numbers left to consider, and the loop breaks.
-   - The largest valid Fibonacci number is subtracted from \( k \), and this number is added to the set `cnt`.
+**Happy Coding! 🎉**
 
-6. **Return Result**:
-   ```cpp
-           return cnt.size();
-       }
-   };
-   ```
-
-   - Finally, the size of the set `cnt`, which represents the number of distinct Fibonacci numbers used to sum to \( k \), is returned.
-
-### Complexity
-
-- **Time Complexity**:
-  - The time complexity of this solution is \( O(\log k) \) for generating Fibonacci numbers, as the Fibonacci sequence grows exponentially. The subsequent processing of \( k \) requires iterating through the Fibonacci numbers, leading to an overall complexity of \( O(m) \), where \( m \) is the number of Fibonacci numbers up to \( k \). In practice, \( m \) is a constant since Fibonacci numbers grow rapidly.
-
-- **Space Complexity**:
-  - The space complexity is \( O(m) \) for storing the Fibonacci numbers in a vector and the set to keep track of distinct numbers. However, since the number of Fibonacci numbers is limited, this can be considered a small overhead.
-
-### Conclusion
-
-The `findMinFibonacciNumbers` function efficiently calculates the minimum number of distinct Fibonacci numbers required to sum to a given integer \( k \) using a greedy approach. This method leverages the properties of Fibonacci numbers to ensure the solution is optimal while maintaining simplicity.
-
-#### Key Takeaways:
-
-- **Greedy Algorithms**: This problem illustrates how greedy algorithms can be effective in finding optimal solutions by making local optimal choices—in this case, choosing the largest possible Fibonacci number at each step.
-
-- **Fibonacci Sequence Properties**: Understanding the growth and properties of the Fibonacci sequence is crucial in problems involving sums and combinations of these numbers.
-
-- **Use of Data Structures**: The use of a set for tracking distinct elements ensures that we can easily count the number of unique Fibonacci numbers used without additional checks for duplicates.
-
-Overall, this solution is an excellent example of leveraging mathematical properties and greedy strategies to tackle a computational problem efficiently.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/description/)
 

@@ -14,111 +14,153 @@ img_src = ""
 youtube = "Ks6fGnXkHPg"
 youtube_upload_date="2024-07-20"
 youtube_thumbnail="https://i.ytimg.com/vi/Ks6fGnXkHPg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays representing the sum of elements in each row and each column of a 2D matrix. The rowSum[i] represents the sum of the elements in the i-th row, and colSum[j] represents the sum of the elements in the j-th column. Your task is to find a matrix of non-negative integers that satisfies these row and column sum requirements.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with two arrays, rowSum and colSum, where rowSum[i] is the sum of the i-th row of a matrix and colSum[j] is the sum of the j-th column. The dimensions of the matrix are rowSum.length x colSum.length.
+- **Example:** `rowSum = [5, 7], colSum = [7, 5]`
+- **Constraints:**
+	- 1 <= rowSum.length, colSum.length <= 500
+	- 0 <= rowSum[i], colSum[i] <= 10^8
+	- sum(rowSum) == sum(colSum)
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum) {
-        int m = rowSum.size(), n = colSum.size();
-        vector<vector<int>> ans(m, vector<int>(n, 0));
-        for(int i = 0; i < m ;i++)
-        for(int j = 0; j < n; j++) {
-            ans[i][j] = min(rowSum[i], colSum[j]);
-            rowSum[i]-= ans[i][j];
-            colSum[j]-= ans[i][j];
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a 2D matrix where the sum of the elements in each row equals the corresponding value in rowSum, and the sum of the elements in each column equals the corresponding value in colSum.
+- **Example:** `For rowSum = [5, 7], colSum = [7, 5], one possible output could be [[0,5], [7, 0]]`
+- **Constraints:**
+	- The matrix must be filled with non-negative integers.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To construct a matrix that satisfies both row and column sum constraints.
+
+- Start by initializing a 2D matrix of size rowSum.length x colSum.length, filled with zeros.
+- Iterate over each element in the matrix, choosing the minimum of the remaining row sum and column sum at that position.
+- Reduce the corresponding row sum and column sum by the value chosen for the matrix element.
+- Repeat this process until all row and column sums are satisfied.
+{{< dots >}}
+### Problem Assumptions ✅
+- The sum of elements in rowSum will always equal the sum of elements in colSum.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: rowSum = [3,8], colSum = [4,7]`  \
+  **Explanation:** In this case, the matrix should be such that the sum of the first row is 3 and the second row is 8. Similarly, the sum of the first column is 4 and the second column is 7. One possible solution is [[3, 0], [1, 7]].
+
+- **Input:** `Input: rowSum = [5,7,10], colSum = [8,6,8]`  \
+  **Explanation:** For this case, the matrix should be constructed such that each row sum is satisfied and each column sum is also satisfied. One possible solution is [[0,5,0], [6,1,0], [2,0,8]].
+
+{{< dots >}}
+## Approach 🚀
+This approach leverages a greedy method where we fill the matrix by choosing the minimum value between the remaining row sum and column sum at each position. This ensures that we can satisfy the constraints while maintaining non-negative integer values in the matrix.
+
+### Initial Thoughts 💭
+- The total sum of rowSum must equal the total sum of colSum, ensuring that a solution is always possible.
+- The solution requires filling each cell with the minimum value between the corresponding row and column sums, which guarantees that both constraints are met.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure that the input arrays are non-empty as per the problem constraints.
+- The solution should handle large inputs efficiently, given the constraints on rowSum and colSum.
+- Consider cases where rowSum or colSum elements are zero, ensuring the matrix remains valid.
+- Ensure that the sum of rowSum equals the sum of colSum to guarantee that a valid matrix exists.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum) {
+    int m = rowSum.size(), n = colSum.size();
+    vector<vector<int>> ans(m, vector<int>(n, 0));
+    for(int i = 0; i < m ;i++)
+    for(int j = 0; j < n; j++) {
+        ans[i][j] = min(rowSum[i], colSum[j]);
+        rowSum[i]-= ans[i][j];
+        colSum[j]-= ans[i][j];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to reconstruct a non-negative integer matrix given the sums of its rows and columns. Specifically, we are provided with two arrays: `rowSum` and `colSum`, where each element in `rowSum` represents the total of the corresponding row in the matrix, and each element in `colSum` represents the total of the corresponding column. Our goal is to create a matrix such that:
-- The sum of each row matches the respective entry in `rowSum`.
-- The sum of each column matches the respective entry in `colSum`.
-
-### Approach
-
-To solve this problem, we can employ a straightforward greedy algorithm. The idea is to iterate through each cell of the matrix and fill it with the minimum of the available sums from `rowSum` and `colSum`. After assigning a value to a cell, we update the corresponding row and column sums to reflect the remaining values.
-
-The approach can be summarized in the following steps:
-
-1. **Initialize the Matrix**: Create a matrix of size `m x n` (where `m` is the length of `rowSum` and `n` is the length of `colSum`) filled with zeros.
-
-2. **Iterate Over Each Cell**: For each cell in the matrix:
-   - Assign it the minimum of the corresponding row and column sums.
-   - Update the row and column sums to reflect the remaining values after assigning the cell.
-
-3. **Return the Result**: Finally, return the constructed matrix.
-
-### Code Breakdown (Step by Step)
-
-Here’s the detailed explanation of the provided code:
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum) {
+    return ans;
+}
 ```
-- The `Solution` class contains a public method `restoreMatrix`, which accepts two vectors, `rowSum` and `colSum`, representing the sums of the rows and columns, respectively. The function returns a 2D vector representing the reconstructed matrix.
 
-```cpp
-        int m = rowSum.size(), n = colSum.size();
-        vector<vector<int>> ans(m, vector<int>(n, 0));
-```
-- We first determine the sizes of the row and column sums (`m` and `n`). Next, we initialize a 2D vector `ans` of size `m x n`, filled with zeros to hold the values of our matrix.
+This code defines a function `restoreMatrix` that takes two vectors, `rowSum` and `colSum`, and returns a matrix where each element is filled such that the row and column sums are maintained. The values are filled by taking the minimum of the available row and column sums.
 
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-```
-- We use nested loops to iterate through each element of the matrix. The outer loop iterates over the rows, while the inner loop iterates over the columns.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum) {
+	```
+	This is the function definition of `restoreMatrix`, which takes two vectors, `rowSum` and `colSum`, and returns a 2D vector (matrix) of integers.
 
-```cpp
-            ans[i][j] = min(rowSum[i], colSum[j]);
-```
-- For each cell at position `(i, j)`, we assign it the minimum value between `rowSum[i]` and `colSum[j]`. This ensures that we do not exceed the available sums when populating the matrix.
+2. **Variable Initialization**
+	```cpp
+	    int m = rowSum.size(), n = colSum.size();
+	```
+	Initialize variables `m` and `n` to store the sizes of the `rowSum` and `colSum` vectors, respectively. These values will be used to determine the number of rows and columns of the resulting matrix.
 
-```cpp
-            rowSum[i] -= ans[i][j];
-            colSum[j] -= ans[i][j];
-```
-- After assigning a value to `ans[i][j]`, we update the `rowSum` and `colSum` by subtracting the assigned value. This effectively reduces the remaining sum available for that particular row and column.
+3. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> ans(m, vector<int>(n, 0));
+	```
+	Create a 2D vector `ans` initialized with zeros. This matrix will eventually hold the values where the row and column sums are satisfied.
 
-```cpp
-        }
-        return ans;
-    }
-};
-```
-- The loops continue until all cells in the matrix are filled. Finally, we return the completed matrix `ans`.
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < m ;i++)
+	```
+	Start a loop over the rows of the matrix. The loop runs from `i = 0` to `i = m-1`.
 
-### Complexity
+5. **Loop**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Start a nested loop over the columns of the matrix. The loop runs from `j = 0` to `j = n-1`.
 
-- **Time Complexity**: 
-  - The overall time complexity is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns. This is because we need to visit each cell in the matrix once to fill it.
+6. **Matrix Assignment**
+	```cpp
+	        ans[i][j] = min(rowSum[i], colSum[j]);
+	```
+	At each position `ans[i][j]`, assign the minimum of the remaining values in `rowSum[i]` and `colSum[j]`. This ensures that the values placed in the matrix maintain the row and column sum constraints.
 
-- **Space Complexity**: 
-  - The space complexity is \(O(m \times n)\) due to the space required to store the resulting matrix.
+7. **Update**
+	```cpp
+	        rowSum[i]-= ans[i][j];
+	```
+	After assigning a value to `ans[i][j]`, decrement the corresponding row sum (`rowSum[i]`) by the assigned value.
 
-### Conclusion
+8. **Update**
+	```cpp
+	        colSum[j]-= ans[i][j];
+	```
+	Similarly, decrement the corresponding column sum (`colSum[j]`) by the assigned value in `ans[i][j]`.
 
-The provided implementation of the `restoreMatrix` function successfully reconstructs a non-negative integer matrix that satisfies the given row and column sums. The algorithm is efficient and straightforward, employing a greedy approach to ensure that the values assigned to the matrix do not exceed the available sums. 
+9. **Return**
+	```cpp
+	    return ans;
+	```
+	After the matrix is filled with appropriate values, return the resulting matrix `ans`.
 
-**Key Aspects of the Solution**:
-1. **Greedy Strategy**: The method relies on a greedy approach to fill the matrix, ensuring that we always assign the minimum possible value while respecting the constraints of the row and column sums.
-2. **Efficiency**: The solution is efficient with a time complexity of \(O(m \times n)\), making it suitable for reasonably sized inputs.
-3. **Clarity**: The code is easy to read and understand, with clear variable names and a logical flow.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-In summary, this implementation effectively demonstrates how to reconstruct a matrix based on given constraints, providing an elegant solution to the problem. The approach is applicable in various scenarios where matrix construction based on constraints is required.
+The best, average, and worst case all involve iterating over the entire matrix, resulting in O(m * n) time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+We need to store the matrix, so the space complexity is O(m * n), where m and n are the dimensions of the matrix.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/description/)
 

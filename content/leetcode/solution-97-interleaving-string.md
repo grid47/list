@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "3Rw3p9LrgvE"
 youtube_upload_date="2021-06-22"
 youtube_thumbnail="https://i.ytimg.com/vi/3Rw3p9LrgvE/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,172 +28,216 @@ youtube_thumbnail="https://i.ytimg.com/vi/3Rw3p9LrgvE/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given three strings s1, s2, and s3, determine whether s3 can be formed by interleaving s1 and s2. An interleaving is a way of combining s1 and s2 such that the characters of s1 and s2 maintain their relative order in the final string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three strings s1, s2, and s3.
+- **Example:** `Input: s1 = 'abc', s2 = 'def', s3 = 'adbcef'`
+- **Constraints:**
+	- 0 <= s1.length, s2.length <= 100
+	- 0 <= s3.length <= 200
+	- s1, s2, and s3 consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string s1, s2, s3;
-    vector<vector<int>> memo;
-    bool dp(int i, int j) {
-        if(i == s1.size() && j == s2.size()) return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if s3 is formed by interleaving s1 and s2. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- Return true if s3 is an interleaving of s1 and s2, otherwise false.
 
-        if(memo[i][j] != -1) return memo[i][j];
-        int ans = 0;
-        int k = i + j;
-        if(i < s1.size() && s1[i] == s3[k])
-            ans |= dp(i + 1, j);
-        
-        if(j < s2.size() && s2[j] == s3[k])
-            ans |= dp(i, j + 1);
-        
-        return memo[i][j] = ans;
-    }
-    
-    bool isInterleave(string s1, string s2, string s3) {
-        this->s1 = s1;
-        this->s2 = s2;
-        this->s3 = s3;
-        if(s1.size() + s2.size() != s3.size()) return false;
-        memo.resize(s1.size() + 1, vector<int>(s2.size() + 1, -1));
-        return dp(0, 0);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if s3 can be formed by interleaving s1 and s2 while maintaining the relative order of characters in both strings.
 
-Here’s a beautified version of your explanation with improved formatting and a more structured flow:
+- Start from the beginning of s1, s2, and s3.
+- Check if the current character of s1 or s2 matches the current character of s3.
+- Recursively verify the remaining characters in s1 and s2 to see if they can form the rest of s3.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings s1, s2, and s3 are valid and follow the given constraints.
+- The function should efficiently handle the interleaving check for strings with lengths up to the maximum limits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s1 = 'abc', s2 = 'def', s3 = 'adbcef'`  \
+  **Explanation:** In this case, s3 is an interleaving of s1 and s2 because we can alternate characters from s1 and s2 while maintaining their order to form s3.
 
----
+- **Input:** `Input: s1 = 'abc', s2 = 'def', s3 = 'abcdef'`  \
+  **Explanation:** In this case, it is not possible to form s3 by interleaving s1 and s2, as the characters from s2 need to maintain their order after s1's characters.
 
-### 💡 **Interleaving String Problem** – Let’s Solve It Together!
+{{< dots >}}
+## Approach 🚀
+The approach uses dynamic programming to check if s3 can be formed by interleaving s1 and s2 while preserving their order. A 2D table is used to store intermediate results, which helps in efficiently checking all combinations.
 
-The **Interleaving String** problem asks whether a given string `s3` can be formed by the interleaving of two strings `s1` and `s2`. The challenge is to determine if `s3` can be created by alternating characters from `s1` and `s2` while maintaining the relative order of characters from each string.
-
-#### **Example:**
-- **Input:**  
-  `s1 = "abc"`,  
-  `s2 = "def"`,  
-  `s3 = "adbcef"`  
-  **Output:** `true`  
-  **Explanation:** `s3` can be formed by interleaving `s1` and `s2` while maintaining the order.
-
-- **Input:**  
-  `s3 = "abdecf"`  
-  **Output:** `false`  
-  **Explanation:** The order of characters in `s1` and `s2` is violated, making `s3` not a valid interleaving.
-
----
-
-### 📝 **Problem Breakdown**
-
-You are given:
-- **String `s1`**: The first string.
-- **String `s2`**: The second string.
-- **String `s3`**: The target string that might be formed by interleaving `s1` and `s2`.
-
-The goal is to **return true** if `s3` can be formed by interleaving `s1` and `s2` while maintaining their relative order.
-
----
-
-### 🔍 **Approach: Dynamic Programming**
-
-We’ll solve this problem using **dynamic programming (DP)**. The idea is to break down the problem into smaller subproblems and store intermediate results to avoid redundant computations.
-
-#### **Steps:**
-
-1. **Base Case Check**:  
-   If the sum of the lengths of `s1` and `s2` doesn't match the length of `s3`, return `false`. If the lengths don’t match, `s3` can’t be an interleaving of `s1` and `s2`.
-
-2. **Memoization**:  
-   Use a 2D table `memo` to store the results of subproblems. `memo[i][j]` will indicate whether the first `i` characters of `s1` and the first `j` characters of `s2` can form the first `i + j` characters of `s3`.
-
-3. **Recursive Function**:  
-   Define a function `dp(i, j)` to check whether the substring `s3[i + j:]` can be formed by interleaving the substrings `s1[i:]` and `s2[j:]`.
-
-4. **Final Check**:  
-   The recursion starts at `dp(0, 0)`, and the result will be stored in `memo[0][0]` after evaluating all possibilities.
-
----
-
-### 🧑‍💻 **Code Implementation**
-
-Here’s how we can implement the solution in C++:
-
+### Initial Thoughts 💭
+- Both s1 and s2 must be used entirely to form s3.
+- We need to check the characters from both s1 and s2 one by one to form s3, while preserving their order.
+- We can use dynamic programming to break down the problem into smaller subproblems, checking whether each prefix of s1 and s2 can form a corresponding prefix of s3.
+{{< dots >}}
+### Edge Cases 🌐
+- If all strings are empty (s1 = '', s2 = '', s3 = ''), the answer is true.
+- When the lengths of s1 and s2 are near the upper limit (100), the algorithm should handle it efficiently using dynamic programming.
+- If s1 or s2 is empty, the solution depends solely on whether s3 matches the other string.
+- Ensure the solution works within the provided constraints (maximum length of 100 for s1 and s2, 200 for s3).
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    string s1, s2, s3;
-    vector<vector<int>> memo;
+string s1, s2, s3;
+vector<vector<int>> memo;
+bool dp(int i, int j) {
+    if(i == s1.size() && j == s2.size()) return true;
 
-    bool dp(int i, int j) {
-        // Base case: both strings are exhausted
-        if (i == s1.size() && j == s2.size()) return true;
-        
-        // Check if the result is already memoized
-        if (memo[i][j] != -1) return memo[i][j];
-        
-        int ans = 0;
-        int k = i + j;  // Current index in s3
-        
-        // Check if the character in s1 matches the current character in s3
-        if (i < s1.size() && s1[i] == s3[k])
-            ans |= dp(i + 1, j);
-        
-        // Check if the character in s2 matches the current character in s3
-        if (j < s2.size() && s2[j] == s3[k])
-            ans |= dp(i, j + 1);
-        
-        // Memoize the result
-        return memo[i][j] = ans;
-    }
+    if(memo[i][j] != -1) return memo[i][j];
+    int ans = 0;
+    int k = i + j;
+    if(i < s1.size() && s1[i] == s3[k])
+        ans |= dp(i + 1, j);
+    
+    if(j < s2.size() && s2[j] == s3[k])
+        ans |= dp(i, j + 1);
+    
+    return memo[i][j] = ans;
+}
 
-    bool isInterleave(string s1, string s2, string s3) {
-        this->s1 = s1;
-        this->s2 = s2;
-        this->s3 = s3;
-        
-        // Base case: If lengths don't match, return false
-        if (s1.size() + s2.size() != s3.size()) return false;
-        
-        // Initialize memo table with -1 (indicating uncomputed values)
-        memo.resize(s1.size() + 1, vector<int>(s2.size() + 1, -1));
-        
-        // Start the recursion from the beginning of both strings
-        return dp(0, 0);
-    }
-};
+bool isInterleave(string s1, string s2, string s3) {
+    this->s1 = s1;
+    this->s2 = s2;
+    this->s3 = s3;
+    if(s1.size() + s2.size() != s3.size()) return false;
+    memo.resize(s1.size() + 1, vector<int>(s2.size() + 1, -1));
+    return dp(0, 0);
+}
 ```
 
----
+This code determines if a string s3 is an interleaving of two other strings s1 and s2 using a dynamic programming approach.
 
-### 🌟 **Key Concepts:**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	string s1, s2, s3;
+	```
+	Declares three string variables to store the input strings.
 
-1. **Memoization**:  
-   By storing the results of previously computed subproblems in the `memo` table, we avoid recalculating the same results multiple times, leading to an optimized solution.
+2. **Array Initialization**
+	```cpp
+	vector<vector<int>> memo;
+	```
+	Initializes a 2D vector `memo` to store the results of subproblems, using memoization to avoid redundant calculations.
 
-2. **Recursive Approach**:  
-   We break down the problem into smaller subproblems by considering each character of `s1`, `s2`, and `s3` and deciding whether to move forward in `s1` or `s2` based on matches.
+3. **Function Declaration**
+	```cpp
+	bool dp(int i, int j) {
+	```
+	Declares a recursive function `dp` to check if the substring `s1[i:]` and `s2[j:]` can interleave to form `s3[i+j:]`.
 
-3. **Time Complexity**:  
-   The time complexity of the solution is **O(m * n)**, where `m` is the length of `s1` and `n` is the length of `s2`. This is because we solve each subproblem once, and the total number of subproblems is proportional to the product of the lengths of `s1` and `s2`.
+4. **Base Case**
+	```cpp
+	    if(i == s1.size() && j == s2.size()) return true;
+	```
+	If we've reached the end of both `s1` and `s2`, it means we've successfully interleaved them, so return `true`.
 
-4. **Space Complexity**:  
-   The space complexity is **O(m * n)** due to the `memo` table used to store the results of the subproblems.
+5. **Memoization**
+	```cpp
+	    if(memo[i][j] != -1) return memo[i][j];
+	```
+	Checks if the result for the current `i` and `j` is already stored in the memoization table. If so, return the stored value.
 
----
+6. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes a variable `ans` to store the result of the current subproblem.
 
-### 💡 **Why This Approach Works Well:**
+7. **Calculation**
+	```cpp
+	    int k = i + j;
+	```
+	Calculates the index `k` in `s3` corresponding to the current positions in `s1` and `s2`.
 
-This dynamic programming solution efficiently checks if a string `s3` can be formed by interleaving two strings `s1` and `s2`. The memoization ensures that we don’t redo calculations for the same subproblems, making the algorithm highly efficient. The time and space complexities of **O(m * n)** are optimal for this problem.
+8. **Conditional Check**
+	```cpp
+	    if(i < s1.size() && s1[i] == s3[k])
+	```
+	Checks if the current character in `s1` matches the corresponding character in `s3`.
 
----
+9. **Recursive Call**
+	```cpp
+	        ans |= dp(i + 1, j);
+	```
+	Recursively checks if the remaining substrings of `s1` and `s2` can interleave to form the remaining part of `s3`.
 
-### 🏁 **Final Thoughts**: Keep Coding, Keep Growing!
+10. **Conditional Check**
+	```cpp
+	    if(j < s2.size() && s2[j] == s3[k])
+	```
+	Checks if the current character in `s2` matches the corresponding character in `s3`.
 
-By tackling this problem using dynamic programming, you not only learned how to solve a complex interleaving problem, but also reinforced key concepts like recursion, memoization, and optimal problem-solving techniques. Keep coding, and with each challenge, you'll become a more proficient developer! 💪✨
+11. **Recursive Call**
+	```cpp
+	        ans |= dp(i, j + 1);
+	```
+	Recursively checks if the remaining substrings of `s1` and `s2` can interleave to form the remaining part of `s3`.
 
-Happy coding!
+12. **Memoization Update**
+	```cpp
+	    return memo[i][j] = ans;
+	```
+	Stores the result of the current subproblem in the memoization table and returns it.
+
+13. **Variable Assignment**
+	```cpp
+	    this->s1 = s1;
+	```
+	Assigns the input string `s1` to the class member variable `s1`.
+
+14. **Variable Assignment**
+	```cpp
+	    this->s2 = s2;
+	```
+	Assigns the input string `s2` to the class member variable `s2`.
+
+15. **Variable Assignment**
+	```cpp
+	    this->s3 = s3;
+	```
+	Assigns the input string `s3` to the class member variable `s3`.
+
+16. **Condition Check**
+	```cpp
+	    if(s1.size() + s2.size() != s3.size()) return false;
+	```
+	Checks if the sum of lengths of `s1` and `s2` is equal to the length of `s3`. If not, it's impossible to interleave, so return `false`.
+
+17. **Array Initialization**
+	```cpp
+	    memo.resize(s1.size() + 1, vector<int>(s2.size() + 1, -1));
+	```
+	Resizes the `memo` vector to store results for all possible substrings of `s1` and `s2`.
+
+18. **Function Call**
+	```cpp
+	    return dp(0, 0);
+	```
+	Calls the `dp` function to check if the entire `s1` and `s2` can interleave to form `s3`, starting from the beginning of each string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m)
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
+
+Where n is the length of s1 and m is the length of s2. The worst-case time complexity occurs when we need to fill the entire memo table.
+
+### Space Complexity 💾
+- **Best Case:** O(n * m)
+- **Worst Case:** O(n * m)
+
+The space complexity is O(n * m) due to the memo table storing the results for subproblems.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/interleaving-string/description/)
 

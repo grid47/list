@@ -14,201 +14,321 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n grid where each cell represents a street. The streets have different connections between neighboring cells. Starting from the top-left corner of the grid, you need to find if there exists a valid path to the bottom-right corner, following the direction of the streets.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an m x n grid where grid[i][j] is an integer between 1 and 6 that represents the type of street connecting cells.
+- **Example:** `For grid = [[1,2,3],[6,5,4]], the output is true.`
+- **Constraints:**
+	- 1 <= m, n <= 300
+	- 1 <= grid[i][j] <= 6
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if there is a valid path from the top-left corner to the bottom-right corner, otherwise return false.
+- **Example:** `For grid = [[1,2,3],[6,5,4]], the output is true.`
+- **Constraints:**
+	- Return false if no valid path exists.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if there is a valid path from the top-left to the bottom-right corner of the grid by moving only through the valid streets.
+
+- 1. Initialize a queue to perform BFS starting from (0, 0).
+- 2. For each cell, check its possible directions based on the street type.
+- 3. If a direction leads to an unvisited cell and the connection is valid, add it to the queue.
+- 4. Continue until the queue is empty or the bottom-right corner is reached.
+- 5. If you reach (m-1, n-1), return true. If not, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- You can assume that the input grid will always be valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For grid = [[1,2,3],[6,5,4]], starting from (0, 0) leads to (1, 2), which connects to (1, 1), and from there, you can reach the bottom-right corner.`  \
+  **Explanation:** Each cell has specific street types that define its possible connections. By carefully following these, you can determine if a path exists.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a breadth-first search (BFS) to explore the grid and check if a valid path exists between the top-left and bottom-right corners.
+
+### Initial Thoughts 💭
+- The grid represents a directional graph where cells have specific connections.
+- BFS is a suitable approach as it ensures we explore all possible valid paths in an orderly manner.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid will never be empty.
+- The BFS approach is designed to handle grids up to size 300x300.
+- If the grid is filled with streets that do not connect in a valid way, the function should return false.
+- Make sure that all the directions are properly checked for valid connections before proceeding.
+{{< dots >}}
+## Code 💻
+```cpp
+
+vector<vector<vector<int>>> dir{    { { 0, 1}, { 0, -1} },
+                   { { 1, 0}, {-1,  0} },
+                   { { 0,-1}, { 1,  0} },
+                   { { 0, 1}, { 1,  0} },
+                   { {0, -1}, {-1,  0} },
+                   { { 0, 1}, {-1,  0} },
+              };
+
+bool hasValidPath(vector<vector<int>>& grid) {
     
-    vector<vector<vector<int>>> dir{    { { 0, 1}, { 0, -1} },
-                       { { 1, 0}, {-1,  0} },
-                       { { 0,-1}, { 1,  0} },
-                       { { 0, 1}, { 1,  0} },
-                       { {0, -1}, {-1,  0} },
-                       { { 0, 1}, {-1,  0} },
-                  };
+    int m = grid.size(), n = grid[0].size();
     
-    bool hasValidPath(vector<vector<int>>& grid) {
-        
-        int m = grid.size(), n = grid[0].size();
-        
-        vector<vector<bool>> visited(m, vector(n, false));
-        
-        queue<vector<int>> q;
-        q.push(vector<int>{0, 0});
-        visited[0][0] = true;
-        
-        while(!q.empty()) {
-            int sz = q.size();
-            for(int i = 0; i < sz; i++) {
-                vector<int> cur = q.front();
-                q.pop();
-                
-                if(cur[0] == m - 1 && cur[1] == n - 1) return true;
-                
-                int num = grid[cur[0]][cur[1]];
-                
-                for(vector<int> go : dir[num - 1]) {
-                    int x = cur[0] + go[0], y = cur[1] + go[1];
-                    
-                    if (x <  0 || y <  0 ||
-                        x >= m || y >= n || visited[x][y])
-                        continue;
-                    
-                    int ret = grid[x][y];
-                    for(vector<int> rev : dir[ret - 1]) {
-                        if((cur[0] == x + rev[0] && cur[1] == y + rev[1]) ||
-                           (cur[1] == x + rev[0] && cur[0] == y + rev[1])) {
-                            q.push(vector<int>{x, y});
-                            visited[x][y] = true;
-                        }
-                    }   
-                }
-            }
+    vector<vector<bool>> visited(m, vector(n, false));
+    
+    queue<vector<int>> q;
+    q.push(vector<int>{0, 0});
+    visited[0][0] = true;
+    
+    while(!q.empty()) {
+        int sz = q.size();
+        for(int i = 0; i < sz; i++) {
+            vector<int> cur = q.front();
+            q.pop();
             
+            if(cur[0] == m - 1 && cur[1] == n - 1) return true;
+            
+            int num = grid[cur[0]][cur[1]];
+            
+            for(vector<int> go : dir[num - 1]) {
+                int x = cur[0] + go[0], y = cur[1] + go[1];
+                
+                if (x <  0 || y <  0 ||
+                    x >= m || y >= n || visited[x][y])
+                    continue;
+                
+                int ret = grid[x][y];
+                for(vector<int> rev : dir[ret - 1]) {
+                    if((cur[0] == x + rev[0] && cur[1] == y + rev[1]) ||
+                       (cur[1] == x + rev[0] && cur[0] == y + rev[1])) {
+                        q.push(vector<int>{x, y});
+                        visited[x][y] = true;
+                    }
+                }   
+            }
         }
-        return false;
+        
     }
-};
-{{< /highlight >}}
----
+    return false;
+}
+```
 
-### Problem Statement
+This is the solution for checking if a valid path exists in a grid using a breadth-first search approach. The grid is traversed based on specific direction pairs for each grid cell value.
 
-The problem requires us to determine if there exists a valid path from the top-left corner to the bottom-right corner of a grid. Each cell in the grid contains a number representing a type of tunnel that can connect to adjacent cells in specific directions. Our goal is to check if we can move from the starting cell (0,0) to the destination cell (m-1,n-1) by following the rules defined by the numbers in the cells.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Direction Setup**
+	```cpp
+	vector<vector<vector<int>>> dir{    { { 0, 1}, { 0, -1} },
+	```
+	This defines the direction pairs for each type of grid cell. The direction pairs represent possible moves in the grid (right, left, down, up).
 
-### Approach
+2. **Direction Setup**
+	```cpp
+	                   { { 1, 0}, {-1,  0} },
+	```
+	The next direction set represents down and up movements, corresponding to the grid's vertical direction.
 
-To solve this problem, we can use a breadth-first search (BFS) algorithm. The BFS will help us explore all possible paths from the starting position while checking if we can reach the destination. The key steps in our approach are:
+3. **Direction Setup**
+	```cpp
+	                   { { 0,-1}, { 1,  0} },
+	```
+	This direction pair represents left and down movements.
 
-1. **Define Directional Movement**: For each number in the grid, we define the possible movements it allows, as well as the movements required for the adjacent cell's type to connect properly.
-2. **Initialize BFS**: We will use a queue to facilitate the BFS and a 2D vector to track visited cells.
-3. **Explore the Grid**: As we dequeue the current position, we check all valid moves based on the current cell's value and see if we can continue to unvisited cells.
-4. **Check Destination**: If we reach the bottom-right corner, we return true. If the queue is exhausted without finding a path, we return false.
+4. **Direction Setup**
+	```cpp
+	                   { { 0, 1}, { 1,  0} },
+	```
+	Another set of directions: right and down.
 
-### Code Breakdown (Step by Step)
+5. **Direction Setup**
+	```cpp
+	                   { {0, -1}, {-1,  0} },
+	```
+	Direction pairs for left and up movements.
 
-Here's a detailed breakdown of the provided C++ code:
+6. **Direction Setup**
+	```cpp
+	                   { { 0, 1}, {-1,  0} },
+	```
+	A direction pair for right and up movements.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class is defined, which encapsulates the solution method.
+7. **Direction Setup**
+	```cpp
+	              };
+	```
+	End of direction setup.
 
-2. **Direction Initialization**:
-   ```cpp
-       vector<vector<vector<int>>> dir{    
-           { { 0, 1}, { 0, -1} },
-           { { 1, 0}, {-1,  0} },
-           { { 0,-1}, { 1,  0} },
-           { { 0, 1}, { 1,  0} },
-           { {0, -1}, {-1,  0} },
-           { { 0, 1}, {-1,  0} },
-       };
-   ```
-   - A 3D vector `dir` is initialized, which maps each cell type to its possible movement directions. Each inner vector corresponds to the directions for a specific cell type (1 through 6).
+8. **Variable Initialization**
+	```cpp
+	bool hasValidPath(vector<vector<int>>& grid) {
+	```
+	Starting the function definition, taking a grid as input.
 
-3. **Main Function Definition**:
-   ```cpp
-       bool hasValidPath(vector<vector<int>>& grid) {
-   ```
-   - The method `hasValidPath` takes a 2D vector `grid` as input and returns a boolean indicating if a valid path exists.
+9. **Grid Size**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	We determine the size of the grid (rows `m` and columns `n`).
 
-4. **Variable Initialization**:
-   ```cpp
-           int m = grid.size(), n = grid[0].size();
-           vector<vector<bool>> visited(m, vector(n, false));
-           queue<vector<int>> q;
-           q.push(vector<int>{0, 0});
-           visited[0][0] = true;
-   ```
-   - The dimensions of the grid are stored in `m` and `n`.
-   - A 2D vector `visited` is initialized to track whether each cell has been visited.
-   - A queue `q` is initialized for BFS, starting with the top-left cell (0, 0).
+10. **Variable Initialization**
+	```cpp
+	    
+	```
+	Preparing variables for the queue and visited grid.
 
-5. **BFS Loop**:
-   ```cpp
-           while(!q.empty()) {
-               int sz = q.size();
-               for(int i = 0; i < sz; i++) {
-                   vector<int> cur = q.front();
-                   q.pop();
-   ```
-   - The BFS continues until there are no more cells to explore.
-   - The size of the queue `sz` is stored to process all current cells before moving to the next level.
+11. **Array Initialization**
+	```cpp
+	    vector<vector<bool>> visited(m, vector(n, false));
+	```
+	A `visited` array is initialized to keep track of the visited cells during traversal.
 
-6. **Destination Check**:
-   ```cpp
-                   if(cur[0] == m - 1 && cur[1] == n - 1) return true;
-   ```
-   - If the current cell is the bottom-right corner, we return `true`, indicating a valid path is found.
+12. **Queue Operation**
+	```cpp
+	    queue<vector<int>> q;
+	```
+	Initializing the BFS queue to store the current cell positions.
 
-7. **Processing Current Cell**:
-   ```cpp
-                   int num = grid[cur[0]][cur[1]];
-   ```
-   - The current cell's type is stored in `num`, which is used to determine possible movements.
+13. **Queue Operation**
+	```cpp
+	    q.push(vector<int>{0, 0});
+	```
+	We add the starting cell (0, 0) to the queue.
 
-8. **Exploring Neighbors**:
-   ```cpp
-                   for(vector<int> go : dir[num - 1]) {
-                       int x = cur[0] + go[0], y = cur[1] + go[1];
-                       
-                       if (x <  0 || y < 0 || x >= m || y >= n || visited[x][y])
-                           continue;
-   ```
-   - For each possible move defined in `dir`, the next cell `(x, y)` is calculated.
-   - We check if `(x, y)` is within bounds and has not been visited.
+14. **Variable Assignment**
+	```cpp
+	    visited[0][0] = true;
+	```
+	Marking the starting cell as visited.
 
-9. **Validating Movement**:
-   ```cpp
-                       int ret = grid[x][y];
-                       for(vector<int> rev : dir[ret - 1]) {
-                           if((cur[0] == x + rev[0] && cur[1] == y + rev[1]) ||
-                              (cur[1] == x + rev[0] && cur[0] == y + rev[1])) {
-                               q.push(vector<int>{x, y});
-                               visited[x][y] = true;
-                           }
-                       }   
-                   }
-   ```
-   - If the next cell `(x, y)` is valid, we retrieve its type `ret` and check if the movement is valid in reverse.
-   - If the reverse movement is possible, we enqueue the cell and mark it as visited.
+15. **BFS Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start the BFS loop while the queue is not empty.
 
-10. **Returning Result**:
-    ```cpp
-           }
-           return false;
-       }
-   };
-   ```
-    - If the BFS completes without finding the destination, `false` is returned.
+16. **Queue Operation**
+	```cpp
+	        int sz = q.size();
+	```
+	Get the current size of the queue (number of elements to process in this iteration).
 
-### Complexity
+17. **For Loop**
+	```cpp
+	        for(int i = 0; i < sz; i++) {
+	```
+	Loop through each element in the queue.
 
-- **Time Complexity**:
-  - The time complexity is \( O(m \times n) \) since each cell can be visited once and we explore all possible movements.
+18. **Queue Operation**
+	```cpp
+	            vector<int> cur = q.front();
+	```
+	Get the current cell from the queue.
 
-- **Space Complexity**:
-  - The space complexity is also \( O(m \times n) \) for the `visited` vector and the queue used in BFS.
+19. **Queue Operation**
+	```cpp
+	            q.pop();
+	```
+	Remove the current cell from the queue.
 
-### Conclusion
+20. **Condition Check**
+	```cpp
+	            
+	```
+	Checking the position of the current cell.
 
-This code provides a clear and efficient solution to the problem of finding a valid path in a grid defined by tunnel types. The use of BFS ensures that all possible paths are explored systematically, and the pre-defined directional movements based on cell types allow for flexible navigation through the grid.
+21. **Exit Condition**
+	```cpp
+	            if(cur[0] == m - 1 && cur[1] == n - 1) return true;
+	```
+	If the current cell is at the bottom-right corner, return true.
 
-Key points include:
-- Understanding how to model the problem using BFS.
-- Efficiently handling cell movements by mapping cell types to their possible directions.
-- Properly tracking visited cells to avoid infinite loops.
+22. **Cell Value**
+	```cpp
+	            int num = grid[cur[0]][cur[1]];
+	```
+	Retrieve the value of the current cell.
 
-By mastering such techniques, developers can tackle various pathfinding and grid traversal problems, a common requirement in algorithmic challenges and real-world applications.
+23. **Direction Check**
+	```cpp
+	            for(vector<int> go : dir[num - 1]) {
+	```
+	Loop through possible directions based on the current cell's value.
+
+24. **Boundary Check**
+	```cpp
+	                int x = cur[0] + go[0], y = cur[1] + go[1];
+	```
+	Calculate the new position based on the direction.
+
+25. **Boundary Check**
+	```cpp
+	                if (x <  0 || y <  0 || x >= m || y >= n || visited[x][y]) continue;
+	```
+	Check if the new position is within bounds and hasn't been visited.
+
+26. **Direction Validation**
+	```cpp
+	                int ret = grid[x][y];
+	```
+	Get the value of the cell at the new position.
+
+27. **Direction Validation**
+	```cpp
+	                for(vector<int> rev : dir[ret - 1]) {
+	```
+	Check for a valid reverse direction.
+
+28. **Push to Queue**
+	```cpp
+	                    if((cur[0] == x + rev[0] && cur[1] == y + rev[1]) || (cur[1] == x + rev[0] && cur[0] == y + rev[1])) {
+	```
+	If the reverse direction matches the previous cell's direction, add the new cell to the queue.
+
+29. **Push to Queue**
+	```cpp
+	                        q.push(vector<int>{x, y});
+	```
+	Add the new cell to the queue.
+
+30. **Visited Update**
+	```cpp
+	                        visited[x][y] = true;
+	```
+	Mark the new cell as visited.
+
+31. **Final Return**
+	```cpp
+	        return false;
+	```
+	If no valid path is found, return false.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n) where m and n are the number of rows and columns in the grid, respectively.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the BFS queue and visited cells.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/description/)
 

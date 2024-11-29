@@ -14,113 +14,157 @@ img_src = ""
 youtube = "XdgS7eqwF2M"
 youtube_upload_date="2021-05-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/XdgS7eqwF2M/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given three strings: 'firstWord', 'secondWord', and 'targetWord'. Each string contains only lowercase English letters from 'a' to 'j'. The value of each letter corresponds to its position in the alphabet starting from 'a' as 0 ('a' -> 0, 'b' -> 1, ..., 'j' -> 9). The value of a string is the concatenation of the values of its letters, which is then interpreted as an integer. Your task is to check if the sum of the values of 'firstWord' and 'secondWord' equals the value of 'targetWord'. Return true if it does, and false otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three strings 'firstWord', 'secondWord', and 'targetWord'. Each string consists of lowercase letters from 'a' to 'j'.
+- **Example:** `firstWord = 'acb', secondWord = 'cba', targetWord = 'cdb'`
+- **Constraints:**
+	- 1 <= firstWord.length, secondWord.length, targetWord.length <= 8
+	- firstWord, secondWord, and targetWord consist of lowercase English letters from 'a' to 'j' inclusive.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isSumEqual(string firstWord, string secondWord, string targetWord) {
-        int first=0,second=0,target=0;
-        for(int i=0;i<firstWord.size();i++)
-            first=first*10 + (firstWord[i]-'a');
-        
-        for(int i=0;i<secondWord.size();i++)
-            second=second*10 +(secondWord[i]-'a');
-        
-        for(int i=0;i<targetWord.size();i++)
-            target=target*10 +(targetWord[i]-'a');
-        
-        
-        return first+second == target;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the sum of the numerical values of 'firstWord' and 'secondWord' equals the numerical value of 'targetWord'. Otherwise, return false.
+- **Example:** `true`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Convert each word to its numerical value and check if the sum of the values of 'firstWord' and 'secondWord' equals 'targetWord'.
 
-The problem requires determining if the sum of two words represented by lowercase letters can equal a target word. Each letter from 'a' to 'z' corresponds to a digit from 0 to 25, respectively. Therefore, the goal is to convert the words into their numerical representations based on this mapping, then check if the sum of the first two words equals the third word (the target).
+- For each word, convert each character to its corresponding value and concatenate them to form an integer.
+- Check if the sum of the first and second word values equals the target word value.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings contain only lowercase English letters from 'a' to 'j'.
+- The values of the words are formed by concatenating the positions of the characters in the alphabet.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: firstWord = 'acb', secondWord = 'cba', targetWord = 'cdb'`  \
+  **Explanation:** The numerical value of 'acb' is 21, the value of 'cba' is 210, and the value of 'cdb' is 231. The sum of 21 and 210 equals 231, so the result is true.
 
-### Approach
+- **Input:** `Example 2: firstWord = 'aaa', secondWord = 'a', targetWord = 'aab'`  \
+  **Explanation:** The numerical value of 'aaa' is 0, the value of 'a' is 0, and the value of 'aab' is 1. The sum of 0 and 0 does not equal 1, so the result is false.
 
-To solve this problem, we will follow these steps:
+- **Input:** `Example 3: firstWord = 'aaa', secondWord = 'a', targetWord = 'aaaa'`  \
+  **Explanation:** The numerical value of 'aaa' is 0, the value of 'a' is 0, and the value of 'aaaa' is 0. The sum of 0 and 0 equals 0, so the result is true.
 
-1. **Mapping Characters to Numbers**: Each character in the given words will be converted to a corresponding numerical value based on its position in the alphabet. Specifically, 'a' will be mapped to 0, 'b' to 1, up to 'z', which will be mapped to 25.
+{{< dots >}}
+## Approach 🚀
+Convert each word to its numerical value by iterating over each character and using its position in the alphabet to form the corresponding number. Then, compare the sum of the first two words' values with the value of the target word.
 
-2. **Constructing the Numerical Values**: We will iterate through each word, constructing its numerical value as we process each character. This is done by multiplying the current total by 10 (to shift the digits) and adding the numerical value of the current character.
+### Initial Thoughts 💭
+- Each word can be transformed into an integer by processing each letter and using its alphabetical value.
+- The solution requires simple arithmetic comparison after converting the words to their numerical values.
+- This approach works efficiently given the constraints, as the maximum length of the strings is 8.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty, as the length is guaranteed to be at least 1.
+- Input strings will be of length at most 8, which ensures the operations are fast.
+- If all words are 'a', the sum will be 0.
+- Handle cases where the sum of two words equals or does not equal the third word.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isSumEqual(string firstWord, string secondWord, string targetWord) {
+    int first=0,second=0,target=0;
+    for(int i=0;i<firstWord.size();i++)
+        first=first*10 + (firstWord[i]-'a');
+    
+    for(int i=0;i<secondWord.size();i++)
+        second=second*10 +(secondWord[i]-'a');
+    
+    for(int i=0;i<targetWord.size();i++)
+        target=target*10 +(targetWord[i]-'a');
+    
+    
+    return first+second == target;
+}
+```
 
-3. **Checking the Equality**: After converting all three words into their numerical forms, we simply check if the sum of the first two equals the value of the third.
+This function converts string representations of numbers (using letters as digits) into integers and checks if the sum of two integers equals the third.
 
-### Code Breakdown (Step by Step)
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isSumEqual(string firstWord, string secondWord, string targetWord) {
+	```
+	Defines a function to check if the sum of two word-based integers equals the third.
 
-1. **Class Declaration**: The solution is encapsulated in a class named `Solution`.
+2. **Variable Initialization**
+	```cpp
+	    int first=0,second=0,target=0;
+	```
+	Initializes integers to store numerical representations of the input strings.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+3. **Loop and Conversion**
+	```cpp
+	    for(int i=0;i<firstWord.size();i++)
+	```
+	Iterates through the firstWord to convert it into a numeric value.
 
-2. **Function Definition**: The main function `isSumEqual` is defined, taking three strings as parameters.
+4. **Conversion**
+	```cpp
+	        first=first*10 + (firstWord[i]-'a');
+	```
+	Converts each character of firstWord into a digit and appends it to the numeric value.
 
-   ```cpp
-       bool isSumEqual(string firstWord, string secondWord, string targetWord) {
-   ```
+5. **Loop and Conversion**
+	```cpp
+	    for(int i=0;i<secondWord.size();i++)
+	```
+	Iterates through the secondWord to convert it into a numeric value.
 
-3. **Initialization of Variables**: We initialize three integer variables `first`, `second`, and `target` to hold the numerical values of the first word, second word, and target word, respectively.
+6. **Conversion**
+	```cpp
+	        second=second*10 +(secondWord[i]-'a');
+	```
+	Converts each character of secondWord into a digit and appends it to the numeric value.
 
-   ```cpp
-           int first = 0, second = 0, target = 0;
-   ```
+7. **Loop and Conversion**
+	```cpp
+	    for(int i=0;i<targetWord.size();i++)
+	```
+	Iterates through the targetWord to convert it into a numeric value.
 
-4. **Converting the First Word**: We loop through each character in `firstWord`, converting it to a number and building its total value.
+8. **Conversion**
+	```cpp
+	        target=target*10 +(targetWord[i]-'a');
+	```
+	Converts each character of targetWord into a digit and appends it to the numeric value.
 
-   ```cpp
-           for(int i = 0; i < firstWord.size(); i++)
-               first = first * 10 + (firstWord[i] - 'a');
-   ```
+9. **Validation**
+	```cpp
+	    return first+second == target;
+	```
+	Checks if the sum of the first and second integers equals the target integer.
 
-5. **Converting the Second Word**: We repeat the process for `secondWord`, building its numerical representation.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the longest string.
+- **Average Case:** O(n), where n is the length of the longest string.
+- **Worst Case:** O(n), where n is the length of the longest string.
 
-   ```cpp
-           for(int i = 0; i < secondWord.size(); i++)
-               second = second * 10 + (secondWord[i] - 'a');
-   ```
+In the worst case, we iterate over each string once, processing each character.
 
-6. **Converting the Target Word**: The same conversion process is applied to `targetWord`.
+### Space Complexity 💾
+- **Best Case:** O(1), as no extra space is needed apart from storing intermediate results.
+- **Worst Case:** O(1), as we use a constant amount of extra space.
 
-   ```cpp
-           for(int i = 0; i < targetWord.size(); i++)
-               target = target * 10 + (targetWord[i] - 'a');
-   ```
+The space complexity is constant since we only need to store a few integer variables.
 
-7. **Return the Result**: Finally, we return whether the sum of the first two words equals the third word.
+**Happy Coding! 🎉**
 
-   ```cpp
-           return first + second == target;
-       }
-   };
-   ```
-
-### Complexity
-
-The time complexity of this algorithm is \( O(n) \), where \( n \) is the length of the longest word among `firstWord`, `secondWord`, and `targetWord`. This is because we are processing each character of the strings once to build their numerical values.
-
-The space complexity is \( O(1) \) as we are using a fixed amount of space (three integers) regardless of the input size.
-
-### Conclusion
-
-In conclusion, the `isSumEqual` function provides an efficient solution to the problem of checking if two words sum up to a target word using a specific character-to-number mapping. The approach is straightforward, relying on basic arithmetic operations and character manipulations.
-
-By converting each word into its numerical equivalent based on its characters, we can directly perform the required addition and equality check. This solution illustrates how to handle string manipulation and numerical conversion in a concise manner.
-
-This method not only highlights the ability to represent complex problems using simple mathematical representations but also demonstrates how to efficiently process strings in competitive programming scenarios. By mastering such techniques, developers can tackle various problems that involve similar transformations, thereby enhancing their problem-solving capabilities in algorithm design.
-
-Overall, the `isSumEqual` function exemplifies a clear and efficient approach to a character mapping problem, reinforcing the importance of understanding both string handling and basic arithmetic in algorithm development.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,148 +28,182 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a singly linked list, implement a class that supports the initialization of the list and the ability to return a random node's value with equal probability.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the initialization of a linked list followed by multiple calls to the getRandom method.
+- **Example:** `Example input: [[1, 2, 3]] for initialization followed by calls to getRandom.`
+- **Constraints:**
+	- 1 <= Number of nodes <= 10^4
+	- -10^4 <= Node.val <= 10^4
+	- At most 10^4 calls to getRandom.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a sequence of results from each getRandom() call, where each result corresponds to a random node's value from the list.
+- **Example:** `Example output: [null, 2, 3, 1, 2, 3]`
+- **Constraints:**
+	- Each getRandom() call returns one node's value randomly chosen from the linked list.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to implement getRandom in such a way that each node in the list has an equal probability of being chosen.
+
+- Initialize the linked list with the given nodes.
+- Iterate through the linked list, maintaining a count of the nodes encountered.
+- At each node, decide randomly whether to select that node or not using a probability of 1/i, where i is the number of nodes visited so far.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list is not empty.
+- The list can contain a maximum of 10^4 nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: [[], [1], [2], [2], [], [1], [2], []]`  \
+  **Explanation:** For each call to getRandom, one of the nodes (1, 2, or 3) should be selected randomly with equal probability.
+
+- **Input:** `Example 2: [[], [5], [10], [15], [], [5], [10], [15]]`  \
+  **Explanation:** Here, 5, 10, or 15 is selected randomly on each call to getRandom.
+
+{{< dots >}}
+## Approach 🚀
+We will use the Reservoir Sampling algorithm to randomly select a node from the linked list, ensuring each node has an equal chance of being chosen.
+
+### Initial Thoughts 💭
+- We need to ensure that each node is equally likely to be chosen, which suggests using a random selection approach while traversing the list.
+- The linked list is traversed once, and a random value is chosen during each iteration with a decreasing probability, ensuring each node has equal selection chance.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty linked list is not possible in this problem as the number of nodes will always be at least 1.
+- The solution must handle linked lists with up to 10^4 nodes efficiently.
+- Ensure that the solution handles edge values such as -10^4 and 10^4.
+- The getRandom method must return a value from the linked list in constant space and linear time.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    ListNode* head;
+ListNode* head;
 public:
-    Solution(ListNode* head) {
-        this->head = head;
+Solution(ListNode* head) {
+    this->head = head;
+}
+
+int getRandom() {
+    int ans = 0, i = 1;
+    ListNode* p = this->head;
+    while(p) {
+        if(rand() % i == 0) ans = p->val;
+        i++;
+        p = p->next;
     }
-    
-    int getRandom() {
-        int ans = 0, i = 1;
-        ListNode* p = this->head;
-        while(p) {
-            if(rand() % i == 0) ans = p->val;
-            i++;
-            p = p->next;
-        }
-        return ans;
-    }
+    return ans;
+}
 };
 
 /**
  * Your Solution object will be instantiated and called as such:
  * Solution* obj = new Solution(head);
  * int param_1 = obj->getRandom();
- */
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, we're tasked with implementing a `Solution` class for a **singly linked list**. The class should have a method called `getRandom()` that returns the value of a random node from the list. The catch? We need to ensure that each node has **equal probability** of being selected, and we can't use extra space proportional to the size of the list.
-
----
-
-### 🧠 Approach
-
-To solve this challenge, we will use an algorithm called **Reservoir Sampling**. This technique allows us to pick a random element from a stream (in this case, the linked list) while maintaining **uniform probability**.
-
-#### Key Idea:
-1. **Traverse the List**: We'll go through the list node by node.
-2. **Maintain a Running Random Value**: At each node, we have a chance to replace the current selected value with the value of the current node. The probability of replacing the value decreases as we move through the list.
-3. **End of List**: Once we reach the end, we'll have our random selection.
-
-By applying this approach, we ensure that each node has the same probability of being selected, and it only takes one pass through the list. This results in a time complexity of **O(n)**, where n is the length of the list, and a space complexity of **O(1)**.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's break down the implementation in a step-by-step manner:
-
-#### Step 1: Definition of `ListNode`
-```cpp
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* next) : val(x), next(next) {}
-};
 ```
-- The `ListNode` structure defines the linked list node. Each node holds a `val` (its value) and a pointer `next` to the next node in the list.
-- We provide multiple constructors to easily create nodes with or without a `next` pointer.
 
-#### Step 2: `Solution` Class and Constructor
-```cpp
-class Solution {
-    ListNode* head;
-public:
-    Solution(ListNode* head) {
-        this->head = head;
-    }
-};
-```
-- The `Solution` class has a member `head`, which holds a reference to the head of the linked list.
-- The constructor initializes the `head` from the passed argument, linking the list to the solution object.
+This code defines a Solution class that takes the head of a linked list. The `getRandom` method returns a random node's value using a reservoir sampling algorithm.
 
-#### Step 3: `getRandom` Method
-```cpp
-    int getRandom() {
-        int ans = 0, i = 1;
-        ListNode* p = this->head;
-        while(p) {
-            if(rand() % i == 0) ans = p->val;
-            i++;
-            p = p->next;
-        }
-        return ans;
-    }
-};
-```
-- **Random Selection Process**: 
-    - We initialize `ans` to store the current random selection and `i` to keep track of the current node's index.
-    - For each node, we calculate `rand() % i`. If the result is 0, we replace the current `ans` with the value of the current node. This gives each node a 1/i chance of being selected.
-    - As we move to the next node, the probability of selecting it adjusts, but the overall probability remains uniform across the list.
-- At the end of the traversal, `ans` holds the value of the randomly selected node.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	This line begins the declaration of the `Solution` class.
 
-#### Step 4: Instantiating the `Solution` Class
-```cpp
-/**
- * Your Solution object will be instantiated and called as such:
- * Solution* obj = new Solution(head);
- * int param_1 = obj->getRandom();
- */
-```
-- We create a `Solution` object by passing the head of the linked list.
-- Then, we call the `getRandom()` method to fetch a random node’s value.
+2. **Variable Declaration**
+	```cpp
+	ListNode* head;
+	```
+	A pointer `head` to the first node in a linked list is declared.
 
----
+3. **Access Modifiers**
+	```cpp
+	public:
+	```
+	The `public:` keyword denotes the start of the public section of the class, where the methods will be defined.
 
-### 📈 Complexity Analysis
+4. **Constructor**
+	```cpp
+	Solution(ListNode* head) {
+	```
+	This is the constructor for the `Solution` class that initializes the `head` pointer with the provided argument.
 
-#### Time Complexity:
-- **O(n)** where n is the number of nodes in the linked list. We traverse each node exactly once and perform a constant amount of work at each step (generating a random number and potentially updating the selection).
+5. **Variable Assignment**
+	```cpp
+	    this->head = head;
+	```
+	The constructor assigns the provided `head` to the class's `head` variable.
 
-#### Space Complexity:
-- **O(1)**. We use only a few variables (`ans`, `i`, and `p`), regardless of the size of the linked list. No extra space proportional to the list is used.
+6. **Method Definition**
+	```cpp
+	int getRandom() {
+	```
+	This defines the `getRandom` method which will return a random node's value from the linked list.
 
----
+7. **Variable Initialization**
+	```cpp
+	    int ans = 0, i = 1;
+	```
+	Two variables, `ans` and `i`, are initialized. `ans` stores the random node's value, and `i` is used to determine the probability of selecting each node.
 
-### 🏁 Conclusion
+8. **Pointer Initialization**
+	```cpp
+	    ListNode* p = this->head;
+	```
+	A pointer `p` is initialized to the `head` of the linked list.
 
-This solution leverages **Reservoir Sampling** to efficiently select a random node from a singly linked list with **uniform probability**. By doing so, we achieve optimal time and space complexities:
+9. **Loop Structure**
+	```cpp
+	    while(p) {
+	```
+	The `while` loop iterates over each node in the linked list until `p` becomes `NULL`.
 
-- **Time Complexity**: **O(n)**, as we traverse the list once.
-- **Space Complexity**: **O(1)**, since we only use a few variables for the process.
+10. **Reservoir Sampling**
+	```cpp
+	        if(rand() % i == 0) ans = p->val;
+	```
+	This line implements the reservoir sampling algorithm to randomly select a node's value. The probability of selecting each node decreases with each additional node.
 
-The beauty of this solution lies in its simplicity: by adjusting the probability at each node and using just a single traversal, we ensure that each node has an equal chance of being selected. This makes the approach both **time-efficient** and **space-efficient**, making it ideal for situations where the list might be large.
+11. **Incrementing Counter**
+	```cpp
+	        i++;
+	```
+	The counter `i` is incremented to reflect the number of nodes encountered so far.
 
----
+12. **Pointer Advancement**
+	```cpp
+	        p = p->next;
+	```
+	The pointer `p` moves to the next node in the linked list.
+
+13. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The method returns the value of the randomly selected node.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The getRandom method requires a full traversal of the linked list, which takes O(n) time.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because the algorithm uses no extra space other than for the iteration variable.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/linked-list-random-node/description/)

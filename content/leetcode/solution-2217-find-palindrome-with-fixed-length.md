@@ -14,91 +14,75 @@ img_src = ""
 youtube = "yHa83HDgTdk"
 youtube_upload_date="2022-03-27"
 youtube_thumbnail="https://i.ytimg.com/vi/yHa83HDgTdk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of queries and a positive integer intLength. For each query, you need to find the query-th smallest palindrome of length intLength. A palindrome is a number that reads the same backward and forward, and it cannot have leading zeros. If no such palindrome exists for a query, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of queries and an integer intLength that specifies the desired length of the palindrome.
+- **Example:** `queries = [1,2,3,4,5], intLength = 3`
+- **Constraints:**
+	- 1 <= queries.length <= 5 * 10^4
+	- 1 <= queries[i] <= 10^9
+	- 1 <= intLength <= 15
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long reverse(long long n, int skip) {
-        long long res = 0;
-        for(n = skip?n/10: n; n > 0; n/=10)
-            res = res * 10 + n % 10;
-        return res;
-    }
-    
-    vector<long long> kthPalindrome(vector<int>& queries, int sz) {
-        vector<long long> ans;
-        long long start = pow(10, (sz + 1)/2-1), end = pow(10, (sz + 1)/2), mul= pow(10, sz/2);
-        for(auto q: queries)
-            if(start + q > end)
-                ans.push_back(-1);
-            else {
-                long long res = (start + q - 1) * mul + reverse(start + q - 1, sz % 2);
-                ans.push_back(res);
-            }
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each query, return the query-th smallest palindrome of the specified length, or -1 if it doesn't exist.
+- **Example:** `Output: [101, 111, 121, 131, 141]`
+- **Constraints:**
+	- Palindromes cannot have leading zeros.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To generate palindromes of a specified length and determine the query-th smallest palindrome.
 
-The problem requires us to find the `k`-th palindrome number with a specified number of digits `sz` for each query in the input list. A palindrome is a number that reads the same backward as forward, and the task is to return the `k`-th palindrome of a given size or return `-1` if the `k`-th palindrome does not exist.
+- Calculate the start and end bounds for the first half of the palindrome.
+- For each query, check if it corresponds to a valid palindrome within the bounds.
+- If valid, generate the palindrome by mirroring the first half; otherwise, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- Queries can be as large as 1 billion, and intLength can be as large as 15.
+- All queries are valid non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: queries = [1,2,3,4,5], intLength = 3`  \
+  **Explanation:** The first five palindromes of length 3 are 101, 111, 121, 131, and 141. The queries ask for the 1st, 2nd, 3rd, 4th, and 5th smallest palindromes, so the result is [101, 111, 121, 131, 141].
 
-We are given an array `queries`, where each query `q` asks for the `q`-th palindrome with exactly `sz` digits. If the query exceeds the number of possible palindromes of that size, return `-1`.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, the key is to generate palindromes of a given length and efficiently find the query-th smallest palindrome.
 
-### Approach
-
-To solve this problem efficiently, we need to generate palindromes for a given size `sz` and identify the `q`-th palindrome for each query. The key observation is that a palindrome number can be constructed by using its first half digits, and the second half is a mirror of the first half.
-
-#### Steps to Solve:
-1. **Understanding Palindromes**:
-   - For a given size `sz`, the number of possible palindromes depends on whether the size is even or odd.
-   - If `sz` is even, a palindrome consists of two equal halves. For example, a 4-digit palindrome looks like `ABBA`, where `AB` is the first half, and the second half mirrors `AB`.
-   - If `sz` is odd, the middle digit is independent, and the palindrome looks like `ABA`, where `AB` is the first half, and `A` is mirrored as the last digit.
-
-2. **Constructing Palindromes**:
-   - For each query, calculate the possible range of numbers that can form palindromes with the given size `sz`.
-   - Find the first half of the palindrome, and then mirror it to form the full palindrome.
-   - For odd-sized palindromes, exclude the middle digit from the mirrored portion.
-
-3. **Efficient Query Resolution**:
-   - For each query, determine if the requested palindrome index `q` lies within the valid range of palindromes. If not, return `-1`.
-   - Construct the palindrome by manipulating the first half digits and mirroring them.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Helper Function `reverse`
-
+### Initial Thoughts 💭
+- Palindromes of length intLength are formed by the first half mirrored to create the second half.
+- If the query is too large, there may not be enough palindromes of the given length.
+- We need to compute the range of valid numbers and reverse the first half to form the palindrome. If the query exceeds the possible range, return -1.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty query array should return an empty result.
+- The solution must handle large queries efficiently, up to 1 billion.
+- When intLength is 1, the palindromes are simply the numbers 1, 2, 3, etc.
+- Ensure that the solution can handle large queries efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 long long reverse(long long n, int skip) {
     long long res = 0;
-    for(n = skip ? n / 10 : n; n > 0; n /= 10)
+    for(n = skip?n/10: n; n > 0; n/=10)
         res = res * 10 + n % 10;
     return res;
 }
-```
 
-- This helper function reverses the digits of a number `n`.
-- If the `skip` flag is set, it removes the last digit of `n` before starting the reversal process. This is useful for palindromes where we only want to mirror the first half.
-
-#### Step 2: Main Function `kthPalindrome`
-
-```cpp
 vector<long long> kthPalindrome(vector<int>& queries, int sz) {
     vector<long long> ans;
-    long long start = pow(10, (sz + 1) / 2 - 1), 
-              end = pow(10, (sz + 1) / 2), 
-              mul = pow(10, sz / 2);
-    for (auto q : queries)
-        if (start + q > end)
+    long long start = pow(10, (sz + 1)/2-1), end = pow(10, (sz + 1)/2), mul= pow(10, sz/2);
+    for(auto q: queries)
+        if(start + q > end)
             ans.push_back(-1);
         else {
             long long res = (start + q - 1) * mul + reverse(start + q - 1, sz % 2);
@@ -109,38 +93,117 @@ vector<long long> kthPalindrome(vector<int>& queries, int sz) {
 }
 ```
 
-- **Variables**:
-  - `start`: The smallest possible number for the first half of a palindrome. This is calculated as `pow(10, (sz + 1) / 2 - 1)`.
-  - `end`: The largest possible number for the first half of a palindrome. This is calculated as `pow(10, (sz + 1) / 2)`.
-  - `mul`: This is a multiplier used to combine the first half of the palindrome with its mirrored second half. It is calculated as `pow(10, sz / 2)`.
+The function `reverse` reverses the digits of a number `n` while skipping a specific number of digits based on the value of `skip`. The `kthPalindrome` function generates a list of palindrome numbers of a given size `sz` based on queries, where each query corresponds to a specific palindrome in the range.
 
-- **Query Processing**:
-  - For each query `q`, the code checks if the `q`-th palindrome is within the range of possible palindromes. If `q` exceeds the number of palindromes of size `sz`, it appends `-1` to the result.
-  - Otherwise, it calculates the palindrome by:
-    - Using the first half of the palindrome, which is `(start + q - 1)`.
-    - Mirroring the first half by calling the `reverse` function (if the palindrome size `sz` is odd, it skips the middle digit during mirroring).
-    - Combining the first half and mirrored second half to form the palindrome.
-  
-- **Return Result**:
-  - After processing all queries, the function returns the result vector `ans`, which contains the palindromes or `-1` for invalid queries.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long reverse(long long n, int skip) {
+	```
+	This is the function declaration for `reverse`, which takes two parameters: `n` (the number to be reversed) and `skip` (a flag that determines whether to skip a digit when reversing).
 
-### Complexity Analysis
+2. **Variable Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	A variable `res` is initialized to 0. This will hold the result of the reversed number as we process the digits of `n`.
 
-#### Time Complexity:
-- **O(m)**, where `m` is the number of queries in the input `queries` array.
-  - For each query, we perform constant-time operations, such as checking if the query is valid and reversing the first half of the palindrome. These operations take constant time relative to the size of the palindrome (`sz`), which is a constant value in this case.
+3. **For Loop**
+	```cpp
+	    for(n = skip?n/10: n; n > 0; n/=10)
+	```
+	The `for` loop iterates over the digits of `n`. If `skip` is true, the first digit of `n` is skipped by dividing `n` by 10. Otherwise, the loop proceeds with the entire number.
 
-#### Space Complexity:
-- **O(m)**, where `m` is the number of queries in the input `queries` array.
-  - The space complexity is linear in the number of queries because we store the result for each query in the output vector `ans`.
+4. **Digit Processing**
+	```cpp
+	        res = res * 10 + n % 10;
+	```
+	Each digit of `n` is extracted using the modulus operation `n % 10` and added to `res` after shifting the current digits of `res` one place to the left (multiplying by 10).
 
-### Conclusion
+5. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the reversed number stored in `res` after the loop completes.
 
-This solution efficiently handles the task of finding the `k`-th palindrome for various queries with a given number of digits. By leveraging mathematical properties of palindromes, it calculates the palindrome directly from the first half and mirrors it to form the full palindrome, ensuring that the solution runs in optimal time for each query. 
+6. **Function Declaration**
+	```cpp
+	vector<long long> kthPalindrome(vector<int>& queries, int sz) {
+	```
+	This is the function declaration for `kthPalindrome`, which takes a vector of queries and a size `sz`, and returns a vector of long long integers representing the palindromes corresponding to each query.
 
-With a time complexity of **O(m)** and space complexity of **O(m)**, this approach is well-suited for handling large input sizes, making it both time and space-efficient.
+7. **Variable Initialization**
+	```cpp
+	    vector<long long> ans;
+	```
+	An empty vector `ans` is initialized to store the results (palindromes) corresponding to each query.
 
-Overall, the solution is elegant, simple, and performs the task optimally for all valid inputs.
+8. **Variable Initialization**
+	```cpp
+	    long long start = pow(10, (sz + 1)/2-1), end = pow(10, (sz + 1)/2), mul= pow(10, sz/2);
+	```
+	The variables `start`, `end`, and `mul` are initialized. `start` and `end` define the range of numbers that will be used to form the palindromes, and `mul` is a multiplier used to construct the palindrome number.
+
+9. **For Loop**
+	```cpp
+	    for(auto q: queries)
+	```
+	This loop iterates over each query in the `queries` vector. Each query `q` represents a request for a specific palindrome.
+
+10. **Condition Check**
+	```cpp
+	        if(start + q > end)
+	```
+	The condition checks whether the sum of `start` and the query `q` exceeds `end`. If it does, it means the palindrome number corresponding to the query does not exist within the range.
+
+11. **Push Back - Invalid Query**
+	```cpp
+	            ans.push_back(-1);
+	```
+	If the condition is true (no palindrome exists for the query), `-1` is added to the result vector `ans` to indicate an invalid query.
+
+12. **Else Block**
+	```cpp
+	        else {
+	```
+	If the condition is false (a valid palindrome exists), the code proceeds to construct the palindrome.
+
+13. **Palindrome Construction**
+	```cpp
+	            long long res = (start + q - 1) * mul + reverse(start + q - 1, sz % 2);
+	```
+	The palindrome is constructed by first calculating the base number (`start + q - 1`) and multiplying it by `mul`. Then, the reverse function is called to mirror the digits to form a complete palindrome.
+
+14. **Push Back - Valid Query**
+	```cpp
+	            ans.push_back(res);
+	```
+	The resulting palindrome is added to the `ans` vector.
+
+15. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	After processing all queries, the function returns the `ans` vector containing the resulting palindromes for each query.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for each query if the query is small enough to directly calculate the palindrome.
+- **Average Case:** O(1) for each query, as the palindrome generation involves basic arithmetic operations.
+- **Worst Case:** O(1) for each query, as the complexity is determined by simple arithmetic and digit reversal.
+
+Each query requires constant time to check if the palindrome exists and to compute it.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as no extra space is required aside from the result storage.
+- **Worst Case:** O(1), as the space used is constant for each query.
+
+The solution uses a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-palindrome-with-fixed-length/description/)
 

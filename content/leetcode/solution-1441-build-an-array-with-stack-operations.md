@@ -14,130 +14,170 @@ img_src = ""
 youtube = "uK6JvnLUcck"
 youtube_upload_date="2020-05-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/uK6JvnLUcck/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a strictly increasing integer array `target` and an integer `n`. Starting with an empty stack, you can perform two operations: 'Push' to add an integer to the stack and 'Pop' to remove the top element from the stack. A stream of integers from 1 to `n` is provided. Use the stack operations to build the stack so that it contains the elements of `target` in order (from bottom to top). Return the sequence of operations required. Stop processing once the stack equals the `target` array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of integers `target` and an integer `n`.
+- **Example:** `Input: target = [2,4,5], n = 6`
+- **Constraints:**
+	- 1 <= target.length <= 100
+	- 1 <= n <= 100
+	- 1 <= target[i] <= n
+	- target is strictly increasing.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> buildArray(vector<int>& target, int n) {
-        vector<string> ans;
-        int currElem=1;
-        for(int i=0;i<target.size();i++){
-            while(currElem!=target[i]){
-                ans.push_back("Push");
-                ans.push_back("Pop");
-                currElem++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** A list of strings representing the stack operations required to build `target`.
+- **Example:** `Output: ["Push", "Pop", "Push", "Push", "Push"]`
+- **Constraints:**
+	- The operations should correctly build the stack to match `target`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate the sequence of operations ('Push' and 'Pop') to transform the stack to match `target`.
+
+- Initialize an empty list `ans` to store the operations.
+- Iterate through the stream of integers from 1 to `n`.
+- For each integer, check if it is in `target`.
+- If it is in `target`, perform a 'Push' operation.
+- If it is not in `target`, perform both a 'Push' and a 'Pop' operation to remove it immediately.
+- Stop processing once all elements of `target` are pushed into the stack.
+{{< dots >}}
+### Problem Assumptions ✅
+- `target` is strictly increasing.
+- `n` is large enough to cover all elements in `target`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: target = [2,4,6], n = 6`  \
+  **Explanation:** Operations: Push 1 and Pop it (not in target), Push 2 (in target), Push 3 and Pop it (not in target), Push 4 (in target), Push 5 and Pop it (not in target), Push 6 (in target). Output: ["Push", "Pop", "Push", "Push", "Pop", "Push", "Push", "Pop", "Push"].
+
+{{< dots >}}
+## Approach 🚀
+Use a single loop to traverse integers from 1 to `n` and simulate stack operations based on whether each integer is in `target`.
+
+### Initial Thoughts 💭
+- The stack operations must maintain the order of `target`.
+- Extra integers not in `target` should be handled with a 'Push' followed by a 'Pop'.
+- Simulating operations sequentially ensures that the stack matches `target` without skipping any integers in the stream.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: target = [], n = 5 -> Output: []
+- Input: target = [1, 2, ..., 100], n = 100 -> Operations would be ['Push'] repeated 100 times.
+- Input: target = [1], n = 1 -> Output: ["Push"]
+- target must be strictly increasing.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> buildArray(vector<int>& target, int n) {
+    vector<string> ans;
+    int currElem=1;
+    for(int i=0;i<target.size();i++){
+        while(currElem!=target[i]){
             ans.push_back("Push");
+            ans.push_back("Pop");
             currElem++;
         }
-        return ans;        
+        ans.push_back("Push");
+        currElem++;
     }
-};
-{{< /highlight >}}
----
+    return ans;        
+}
+```
 
-### Problem Statement
+The `buildArray` function generates a sequence of operations to form the target array from an initial array of 1 to `n`. It uses the operations 'Push' and 'Pop' to simulate a stack-based approach, where elements are pushed into the stack and popped out as needed to match the target array.
 
-The objective of this problem is to construct an array using a sequence of operations defined as "Push" and "Pop". You are given a target array, and you need to build this array from the empty state using integers from 1 to `n` sequentially. The operations "Push" and "Pop" correspond to pushing an integer onto a stack and removing the last pushed integer, respectively. The goal is to determine the exact sequence of operations needed to achieve the target array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> buildArray(vector<int>& target, int n) {
+	```
+	Defines the function `buildArray`, which takes a vector `target` (the target array to match) and an integer `n` (the upper limit for the array) as input. It returns a vector of strings representing the operations ('Push' and 'Pop') required to form the target array.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    vector<string> ans;
+	```
+	Initializes an empty vector `ans` to store the sequence of operations ('Push' and 'Pop') that will form the target array.
 
-To tackle this problem, we need to simulate the process of building the target array step by step. We can do this by iterating through the elements of the target array and performing the necessary operations. The approach can be summarized in the following steps:
+3. **Variable Initialization**
+	```cpp
+	    int currElem=1;
+	```
+	Initializes the variable `currElem` to 1, which represents the current element being processed in the stack-based approach.
 
-1. **Initialize Variables**: We will maintain a result vector to store the operations and a variable to track the current integer being considered.
+4. **Loop**
+	```cpp
+	    for(int i=0;i<target.size();i++){
+	```
+	Starts a loop to iterate through each element in the `target` array. The goal is to simulate the stack operations to match each element in the target array.
 
-2. **Iterate Through Target Elements**: For each element in the target array:
-   - If the current integer is less than the target element, we perform "Push" for the current integer and "Pop" for all integers up to but not including the target element.
-   - Once the current integer matches the target element, we perform a "Push" to add the current integer to the result.
+5. **Condition Check**
+	```cpp
+	        while(currElem!=target[i]){
+	```
+	Checks if the current element (`currElem`) is not equal to the current target element (`target[i]`). If they are not equal, additional 'Push' and 'Pop' operations are needed.
 
-3. **Return the Result**: After processing all elements in the target array, we will return the sequence of operations stored in the result vector.
+6. **Push Operation**
+	```cpp
+	            ans.push_back("Push");
+	```
+	Adds a 'Push' operation to the result vector `ans`, simulating pushing the current element (`currElem`) onto the stack.
 
-### Code Breakdown (Step by Step)
+7. **Pop Operation**
+	```cpp
+	            ans.push_back("Pop");
+	```
+	Adds a 'Pop' operation to the result vector `ans`, simulating popping the element off the stack after it has been pushed.
 
-Let’s analyze the provided code in detail:
+8. **Increment**
+	```cpp
+	            currElem++;
+	```
+	Increments `currElem` to represent the next element to be processed in the stack-based approach.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+9. **Push Operation**
+	```cpp
+	        ans.push_back("Push");
+	```
+	Adds a final 'Push' operation to the result vector `ans` to push the current target element onto the stack.
 
-   - We define a class named `Solution`, which encapsulates the method to generate the required operation sequence.
+10. **Increment**
+	```cpp
+	        currElem++;
+	```
+	Increments `currElem` to represent the next element after pushing the current target element.
 
-2. **Function Declaration**:
-   ```cpp
-   vector<string> buildArray(vector<int>& target, int n) {
-   ```
+11. **Return Statement**
+	```cpp
+	    return ans;        
+	```
+	Returns the result vector `ans`, which contains the sequence of operations ('Push' and 'Pop') needed to build the target array.
 
-   - The function `buildArray` accepts two parameters: a vector of integers `target`, representing the desired array, and an integer `n`, representing the range of numbers that can be used (from 1 to `n`).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-3. **Variable Initialization**:
-   ```cpp
-   vector<string> ans;
-   int currElem = 1;
-   ```
+Each integer from the stream is processed exactly once, leading to a linear time complexity.
 
-   - We declare a vector of strings `ans` to store the sequence of operations. The integer `currElem` is initialized to 1, indicating the next integer to consider for pushing onto the stack.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-4. **Iterate Through Target Elements**:
-   ```cpp
-   for(int i = 0; i < target.size(); i++) {
-   ```
+No additional data structures are used beyond the result list.
 
-   - A loop iterates through each element in the target array using the index `i`.
+**Happy Coding! 🎉**
 
-5. **Inner While Loop for Non-Matching Elements**:
-   ```cpp
-   while(currElem != target[i]) {
-       ans.push_back("Push");
-       ans.push_back("Pop");
-       currElem++;
-   }
-   ```
-
-   - Inside the loop, we check if the current element (`currElem`) is not equal to the target element at index `i`. If they are not equal, we perform the "Push" operation followed by the "Pop" operation. This is repeated until `currElem` matches the target element.
-
-6. **Push the Current Element**:
-   ```cpp
-   ans.push_back("Push");
-   currElem++;
-   ```
-
-   - Once `currElem` matches the target element, we perform a final "Push" operation to add this element to the sequence and increment `currElem` for the next iteration.
-
-7. **Return the Result**:
-   ```cpp
-   return ans;        
-   }
-   ```
-
-   - After processing all elements in the target array, we return the vector `ans`, which contains the complete sequence of operations.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \(O(m)\), where \(m\) is the length of the target array. In the worst-case scenario, the number of operations performed may approach \(2m\) (when each target element requires pushing and popping for all preceding elements). However, since we are effectively processing each element in the target once, the overall complexity remains linear with respect to the length of the target array.
-
-- **Space Complexity**: The space complexity is also \(O(m)\) due to the space required to store the output operations in the result vector.
-
-### Conclusion
-
-This solution efficiently constructs the desired array from a sequence of "Push" and "Pop" operations using a straightforward approach. By maintaining a counter for the current integer and iterating through the target elements, we ensure that the operations are performed in a manner that accurately reflects the rules of stack manipulation.
-
-#### Key Takeaways:
-
-1. **Stack Operations**: Understanding the operations of a stack (LIFO - Last In First Out) is crucial in solving problems involving dynamic construction of arrays or sequences.
-
-2. **Simulation Approach**: The approach taken in this solution is a simulation of the desired process, highlighting how simple algorithms can effectively solve complex problems.
-
-3. **Efficiency Considerations**: The solution is optimized to operate in linear time and space relative to the input size, making it suitable for scenarios where performance is critical.
-
-Overall, this implementation serves as a solid example of how to model array construction using stack operations, and it can be extended or modified for similar problems in competitive programming or software development tasks.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/build-an-array-with-stack-operations/description/)
 

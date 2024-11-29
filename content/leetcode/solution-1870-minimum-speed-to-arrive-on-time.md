@@ -14,163 +14,221 @@ img_src = ""
 youtube = "XtwJqb1HI-o"
 youtube_upload_date="2021-05-23"
 youtube_thumbnail="https://i.ytimg.com/vi/XtwJqb1HI-o/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of n train ride distances and a floating-point number hour which indicates the total time you have to reach your destination. You need to determine the minimum integer speed (in kilometers per hour) at which all the trains must travel to reach the office on time. If it is impossible, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array dist representing the distances for each train ride, and a floating-point number hour representing the total time to reach the office.
+- **Example:** `[2, 5, 3], hour = 8`
+- **Constraints:**
+	- 1 <= dist.length <= 10^5
+	- 1 <= dist[i] <= 10^5
+	- 1 <= hour <= 10^9
+	- hour has at most two decimal places.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum integer speed (in km/h) that all trains must travel to reach on time, or return -1 if it is impossible.
+- **Example:** `2`
+- **Constraints:**
+	- The result should be an integer speed or -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum integer speed that satisfies the given time constraint for all train rides.
+
+- Start with the smallest possible speed and calculate the time taken for each train ride.
+- For each train ride, calculate the time based on the speed, and determine if you need to wait to depart at an integer hour.
+- Use binary search to find the minimum speed that allows you to arrive at the office on time.
+{{< dots >}}
+### Problem Assumptions ✅
+- All the train distances are positive integers.
+- The total time must be greater than or equal to the time required for each train ride.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[2, 5, 3], hour = 8`  \
+  **Explanation:** At speed 2, the time taken for each train ride ensures that you arrive exactly on time (8 hours).
+
+- **Input:** `[1, 5, 3], hour = 3.4`  \
+  **Explanation:** At speed 3, the total time is less than 3.4 hours, but it is impossible to make it on time as the total time is 3 hours.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using binary search to find the minimum integer speed and ensuring the total travel time is within the given hour limit.
+
+### Initial Thoughts 💭
+- We need to handle the fractional times and wait for the next integer hour to depart for each train.
+- Binary search on speed can help find the smallest feasible speed in an efficient manner.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as dist has at least one element.
+- For large inputs, the binary search approach ensures efficiency within the constraints.
+- Handle cases where hour is very small or very large, especially when it's impossible to make it on time.
+- Ensure correct handling of fractional times due to non-integer hours.
+{{< dots >}}
+## Code 💻
+```cpp
+
+bool canReach(int speed, vector<int>& dist, double hour) {
     
-    bool canReach(int speed, vector<int>& dist, double hour) {
-        
-        double est = 0;
-        
-        for(int i = 0; i < dist.size(); i++) {
-            if(i == (dist.size() - 1)) est += (double)dist[i]/ speed; 
-            else est = ceil(est + (double)dist[i]/ speed);
-        }
-        // cout << speed << " " << est << " " << (est <= hour) << "\n";
-        return est <= hour;
-    }
-    
-    int minSpeedOnTime(vector<int>& dist, double hour) {
-        int l = 0, r = INT_MAX - 1;
-        
-        int ans = INT_MAX;
-        
-        while(l <= r) {
-            int speed = l + (r - l + 1)/2;
-            
-            if(canReach(speed, dist, hour)) {
-                ans = speed;
-                r = speed - 1;
-            } else {
-                l = speed + 1;
-            }
-        }
-        return ans == INT_MAX? -1: ans;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The goal of this problem is to determine the minimum speed required to travel through a series of distances within a given time limit. Given an array of distances and a maximum time in hours, the task is to find the minimum speed (in units of distance per hour) that allows the traveler to reach the destination without exceeding the specified time limit. If it is impossible to reach the destination within the given time, the function should return -1.
-
-### Approach
-
-To solve this problem, we can utilize a binary search strategy combined with a helper function that checks if a given speed allows reaching the destination within the specified time. The approach involves the following key steps:
-
-1. **Binary Search Setup**: Define a search space for the speed, starting from 1 (the minimum speed) to a very large value (e.g., `INT_MAX`), as we are looking for the minimum speed that allows us to reach the destination.
-
-2. **Helper Function**: Create a helper function `canReach` that takes a speed, distances, and time as parameters. This function will calculate the estimated time required to complete the journey with the given speed and return whether this time is within the specified limit.
-
-3. **Estimate Time Calculation**:
-   - Iterate through each distance.
-   - For each distance, calculate the time taken to cover it at the current speed.
-   - Use the `ceil` function to ensure that any partial distance incurs a full hour of travel time, except for the last distance, which can be a fraction.
-   - Accumulate the total estimated time and compare it with the given hour.
-
-4. **Binary Search Execution**: 
-   - Perform binary search by repeatedly adjusting the speed based on whether the current speed can successfully complete the journey within the allowed time.
-   - If the speed works, try to find a lower speed (move left); otherwise, increase the speed (move right).
-
-5. **Final Result**: If the minimum speed is found, return it; if not, return -1 to indicate that it's impossible to complete the journey within the given time.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: Start by defining the `Solution` class, which will contain the method to solve the problem.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Helper Function Declaration**: The `canReach` function is declared, which checks if the destination can be reached within the specified hour at a given speed.
-
-    ```cpp
-    bool canReach(int speed, vector<int>& dist, double hour) {
-    ```
-
-3. **Estimate Time Calculation**: Inside the `canReach` function, initialize a variable to accumulate the estimated time.
-
-    ```cpp
     double est = 0;
-    ```
-
-4. **Iterating Through Distances**: Use a loop to iterate through each distance in the `dist` array.
-
-    ```cpp
+    
     for(int i = 0; i < dist.size(); i++) {
-    ```
-
-5. **Calculating Time for Each Distance**: For each distance, calculate the time required to travel that distance at the given speed:
-   - If it's the last distance, directly add the time to the estimate.
-   - For other distances, add the time and apply the `ceil` function to account for any partial time.
-
-    ```cpp
-    if(i == (dist.size() - 1)) est += (double)dist[i] / speed; 
-    else est = ceil(est + (double)dist[i] / speed);
-    ```
-
-6. **Returning the Result from Helper Function**: After iterating through all distances, check if the estimated time is within the allowed hour and return the result.
-
-    ```cpp
-    return est <= hour;
+        if(i == (dist.size() - 1)) est += (double)dist[i]/ speed; 
+        else est = ceil(est + (double)dist[i]/ speed);
     }
-    ```
+    // cout << speed << " " << est << " " << (est <= hour) << "\n";
+    return est <= hour;
+}
 
-7. **Main Function Declaration**: Now, define the main function `minSpeedOnTime`, which implements the binary search logic.
-
-    ```cpp
-    int minSpeedOnTime(vector<int>& dist, double hour) {
-    ```
-
-8. **Binary Search Initialization**: Set the initial bounds for the binary search.
-
-    ```cpp
+int minSpeedOnTime(vector<int>& dist, double hour) {
     int l = 0, r = INT_MAX - 1;
+    
     int ans = INT_MAX;
-    ```
-
-9. **Binary Search Loop**: Implement the binary search loop, calculating the midpoint speed and checking if it is sufficient.
-
-    ```cpp
+    
     while(l <= r) {
-        int speed = l + (r - l + 1) / 2;
+        int speed = l + (r - l + 1)/2;
         
         if(canReach(speed, dist, hour)) {
-            ans = speed; // If it works, update the answer
-            r = speed - 1; // Try for a lower speed
+            ans = speed;
+            r = speed - 1;
         } else {
-            l = speed + 1; // Increase speed
+            l = speed + 1;
         }
     }
-    ```
+    return ans == INT_MAX? -1: ans;
+}
+```
 
-10. **Final Result Check**: After completing the search, check if a valid speed was found and return the appropriate result.
+Implements a binary search approach to determine the minimum speed required to reach on time, using helper function `canReach` to validate speed.
 
-    ```cpp
-    return ans == INT_MAX ? -1 : ans;
-    }
-    ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Helper Function**
+	```cpp
+	bool canReach(int speed, vector<int>& dist, double hour) {
+	```
+	Defines a helper function to check if the given speed allows reaching within the specified hour.
 
-### Complexity
+2. **Calculation**
+	```cpp
+	    double est = 0;
+	```
+	Declares and initializes a variable to store the estimated time.
 
-The time complexity of this solution can be broken down into two parts:
-- The binary search operates in \(O(\log(\text{MAX\_SPEED}))\), where `MAX_SPEED` is `INT_MAX`, which is a constant.
-- For each speed checked, the `canReach` function processes the distances in \(O(n)\), where \(n\) is the length of the `dist` array.
+3. **For Loop**
+	```cpp
+	    for(int i = 0; i < dist.size(); i++) {
+	```
+	Iterates through each distance segment to calculate time based on speed.
 
-Thus, the overall time complexity is \(O(n \log(\text{MAX\_SPEED}))\). The space complexity is \(O(1)\) as we are using a fixed amount of extra space for variables.
+4. **Condition Check**
+	```cpp
+	        if(i == (dist.size() - 1)) est += (double)dist[i]/ speed; 
+	```
+	Checks if it's the last segment to compute exact travel time.
 
-### Conclusion
+5. **Ceiling Calculation**
+	```cpp
+	        else est = ceil(est + (double)dist[i]/ speed);
+	```
+	Adds the ceiling of travel time for intermediate segments.
 
-In summary, the `minSpeedOnTime` function provides an efficient means to calculate the minimum speed required to reach a destination within a specified time, utilizing binary search and careful time estimation. The algorithm effectively balances speed and accuracy, ensuring that it can handle large input sizes due to its logarithmic nature in searching for the minimum speed. By leveraging the `canReach` helper function, we maintain clarity in the code while addressing the complexity of calculating time across multiple distances. This implementation serves as a robust solution for problems involving optimization and timing constraints in journey planning and can be adapted for various related challenges in algorithm design and competitive programming. Overall, this code exemplifies an efficient approach to solving a practical problem with clear logic and structure.
+6. **Return Statement**
+	```cpp
+	    return est <= hour;
+	```
+	Returns true if the estimated time is within the allowed hour.
+
+7. **Binary Search Initialization**
+	```cpp
+	int minSpeedOnTime(vector<int>& dist, double hour) {
+	```
+	Starts the function and initializes binary search bounds.
+
+8. **Binary Search Initialization**
+	```cpp
+	    int l = 0, r = INT_MAX - 1;
+	```
+	Defines the left and right bounds for binary search.
+
+9. **Result Variable**
+	```cpp
+	    int ans = INT_MAX;
+	```
+	Sets the result variable to track the minimum speed.
+
+10. **While Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	Performs binary search to find the optimal speed.
+
+11. **Midpoint Calculation**
+	```cpp
+	        int speed = l + (r - l + 1)/2;
+	```
+	Calculates the midpoint speed for binary search.
+
+12. **Valid Speed**
+	```cpp
+	        if(canReach(speed, dist, hour)) {
+	```
+	Updates the result if the speed is valid.
+
+13. **Update Right**
+	```cpp
+	            ans = speed;
+	```
+	Updates the answer and adjusts the binary search bound.
+
+14. **Update Right**
+	```cpp
+	            r = speed - 1;
+	```
+	Adjusts the upper bound to refine the search.
+
+15. **Else Block**
+	```cpp
+	        } else {
+	```
+	Handles the case where speed is too low.
+
+16. **Update Left**
+	```cpp
+	            l = speed + 1;
+	```
+	Adjusts the lower bound to refine the search.
+
+17. **Return Result**
+	```cpp
+	    return ans == INT_MAX? -1: ans;
+	```
+	Returns the minimum speed or -1 if no valid speed exists.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log M), where M is the maximum possible speed (10^7).
+- **Average Case:** O(n log M), with n being the number of trains.
+- **Worst Case:** O(n log M), due to the binary search on speed and iterating over all train rides.
+
+The time complexity is logarithmic in terms of speed, with a linear scan of the train rides.
+
+### Space Complexity 💾
+- **Best Case:** O(1), no additional space is used beyond input and variables.
+- **Worst Case:** O(1), as we only use a few extra variables.
+
+The space complexity is constant.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-speed-to-arrive-on-time/description/)
 

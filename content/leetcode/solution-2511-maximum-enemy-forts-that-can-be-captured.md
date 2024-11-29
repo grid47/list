@@ -14,144 +14,147 @@ img_src = ""
 youtube = "y7BwYY4UFak"
 youtube_upload_date="2022-12-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/y7BwYY4UFak/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array forts representing the positions of several forts. Your goal is to move your army from one of your forts to an empty position and capture enemy forts along the way. The army captures all enemy forts that lie between the starting and destination points, and you want to maximize the number of enemy forts captured.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers where each integer represents a fort at that position. The value can be -1 (no fort), 0 (enemy fort), or 1 (fort under your command).
+- **Example:** `forts = [1, 0, 0, -1, 0, 0, 0, 0, 1]`
+- **Constraints:**
+	- 1 <= forts.length <= 1000
+	- -1 <= forts[i] <= 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the maximum number of enemy forts that can be captured by moving the army from one of your forts to an empty position.
+- **Example:** `4`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the maximum number of enemy forts that can be captured in one move.
+
+- Iterate through the array to identify all forts under your command (value 1).
+- For each fort, check all possible moves to the right and left to find enemy forts (value 0) between the starting and destination points.
+- Calculate the number of enemy forts that will be captured during the move and keep track of the maximum value.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will always be at least one fort or enemy fort in the input.
+- The army cannot move over non-empty positions, meaning no valid move exists if no enemy forts lie between two forts under your command.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `forts = [1, 0, 0, -1, 0, 0, 0, 0, 1]`  \
+  **Explanation:** In this example, the army can move from position 0 to position 3, capturing 2 enemy forts. The best move is from position 8 to position 3, capturing 4 enemy forts.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over the forts array to check the possible moves and counting the enemy forts that can be captured in each move.
+
+### Initial Thoughts 💭
+- A valid move requires the army to travel over only enemy forts, meaning the path between the start and end point must contain only 0s.
+- If no enemy forts are in the path or if no forts are under our command, the result is 0.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one fort or enemy fort in the input.
+- The solution should handle arrays of length up to 1000 efficiently.
+- If there are no enemy forts in the path, no forts will be captured.
+- Ensure the solution handles cases with no valid moves (e.g., when no forts are under your command).
+{{< dots >}}
+## Code 💻
+```cpp
 int captureForts(vector<int>& forts) {
-    int res = 0;
-    for (int i = 0, j = 0; i < forts.size(); ++i)
-        if (forts[i] != 0) {
-            if (forts[j] == -forts[i])
-                res = max(res, i - j - 1);
-            j = i;
-        }
-    return res;
-}
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the maximum number of forts that can be captured in a sequence of forts. A fort is represented as an array of integers where:
-
-- `1` represents a fort held by one side.
-- `-1` represents a fort held by the opposite side.
-- `0` represents an empty fort.
-
-Our goal is to calculate the maximum number of forts that can be captured. A fort can be captured if it's located between two forts held by opposing sides (`1` and `-1`). Therefore, for each pair of opposing forts, the forts between them can be captured. We are asked to return the maximum number of forts that can be captured in such pairs.
-
-### Approach
-
-To solve this problem, we need to:
-1. Traverse the `forts` array and find positions where a fort is held by one side (either `1` or `-1`).
-2. For each such fort, check if there exists an opposing fort on the other side. If such a pair exists, calculate the number of empty forts (`0`s) between them.
-3. Track the maximum number of forts that can be captured.
-
-#### Key Observations:
-1. A fort held by side `1` can only be captured by a fort held by side `-1` (or vice versa).
-2. The forts between any two opposing forts can be captured. Hence, the goal is to maximize the distance between two opposing forts.
-3. We only need to compute this for each pair of opposing forts as we traverse through the array.
-
-The solution follows these steps:
-1. Traverse through the array from left to right.
-2. Keep track of the most recent fort held by either side (`1` or `-1`).
-3. Whenever we encounter an opposing fort, calculate how many forts lie between them.
-4. Update the maximum result.
-
-### Code Breakdown (Step by Step)
-
-The code is broken down into two main sections:
-
-1. **Initialization**:
-   - We initialize a variable `res` to store the result. This will keep track of the maximum number of forts that can be captured.
-   - We also initialize a variable `j` to keep track of the index of the last encountered fort that was held by either `1` or `-1`.
-
-2. **Iterating through the `forts` array**:
-   - The loop runs through each fort in the array. For each fort, if it's not empty (`forts[i] != 0`), we check if it's held by one side and the previous fort was held by the opposing side.
-   - If the fort held by `forts[j]` is the opposite of `forts[i]` (i.e., `forts[j] == -forts[i]`), we calculate how many forts lie between `j` and `i` by using the formula `i - j - 1`. This gives the number of `0`s between these two forts.
-   - We then update `res` to be the maximum of `res` and the calculated number of forts between the two opposing forts.
-   - Finally, we set `j = i`, meaning the current fort now becomes the last encountered fort for the next iteration.
-
-3. **Return Result**:
-   - After completing the loop, we return `res`, which contains the maximum number of forts that can be captured between two opposing forts.
-
-### Code Implementation
-
-```cpp
-class Solution {
-public:
-    int captureForts(vector<int>& forts) {
-        int res = 0;
-        for (int i = 0, j = 0; i < forts.size(); ++i)
-            if (forts[i] != 0) {
-                if (forts[j] == -forts[i])
-                    res = max(res, i - j - 1);
-                j = i;
-            }
-        return res;
+int res = 0;
+for (int i = 0, j = 0; i < forts.size(); ++i)
+    if (forts[i] != 0) {
+        if (forts[j] == -forts[i])
+            res = max(res, i - j - 1);
+        j = i;
     }
-};
+return res;
+}
 ```
 
-### Detailed Explanation
+The `captureForts` function calculates the maximum distance between two forts of opposing sides (denoted as 1 and -1) in a given array. It iterates through the array, checks for opposing forts, and computes the maximum distance between them.
 
-- **Line 1**: The function `captureForts` is defined, which accepts a vector of integers `forts`.
-  
-- **Line 2**: We initialize `res` to zero, which will keep track of the maximum number of forts that can be captured.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int captureForts(vector<int>& forts) {
+	```
+	Defines the `captureForts` function that takes a vector `forts` as input and returns an integer representing the maximum distance between two opposing forts.
 
-- **Line 3**: We start a `for` loop with two variables:
-  - `i` is the current index that we are iterating over in the `forts` array.
-  - `j` is the index of the most recent non-empty fort we encountered (i.e., `forts[j]` is either `1` or `-1`).
+2. **Variable Initialization**
+	```cpp
+	int res = 0;
+	```
+	Initializes the variable `res` to store the maximum distance between opposing forts. It is initially set to 0.
 
-- **Line 4-7**: Inside the loop, we check if `forts[i]` is not zero, meaning we've encountered a fort (either `1` or `-1`).
-  - If `forts[j] == -forts[i]`, meaning `forts[i]` and `forts[j]` are opposing forts, we compute the number of forts between them by calculating `i - j - 1`.
-  - We update `res` to be the maximum of the current `res` and the number of forts between `j` and `i`.
+3. **Loop Structure**
+	```cpp
+	for (int i = 0, j = 0; i < forts.size(); ++i)
+	```
+	Starts a for loop that iterates through the `forts` array, using `i` as the index for the current fort and `j` as the index of the previous fort with a non-zero value.
 
-- **Line 8**: After processing `forts[i]`, we set `j = i`, so that the current fort becomes the new reference fort for the next iteration.
+4. **Condition Check**
+	```cpp
+	    if (forts[i] != 0) {
+	```
+	Checks if the current fort at index `i` is non-zero (i.e., it is either a 1 or -1, representing a fort of one side).
 
-- **Line 9**: Finally, after completing the loop, we return `res` as the maximum number of forts that can be captured.
+5. **Condition Check**
+	```cpp
+	        if (forts[j] == -forts[i])
+	```
+	Checks if the fort at index `j` is of the opposite side compared to the current fort at index `i`.
 
-### Example Walkthrough
+6. **Max Calculation**
+	```cpp
+	            res = max(res, i - j - 1);
+	```
+	If two opposing forts are found, it calculates the distance between them and updates `res` to the maximum of the current `res` and the new distance (`i - j - 1`).
 
-Let’s walk through an example to see how this works:
+7. **Variable Update**
+	```cpp
+	        j = i;
+	```
+	Updates `j` to the current index `i` to track the position of the last non-zero fort.
 
-For the input:
-```cpp
-forts = {0, 1, 0, -1, 0, 0, 1, 0, -1}
-```
+8. **Loop Structure**
+	```cpp
+	    }
+	```
+	Ends the if block checking for non-zero forts.
 
-1. Start with `i = 0` and `j = 0`. `forts[i] == 0`, so we skip.
-2. At `i = 1`, `forts[i] = 1`, so `j = 1`. No result yet, continue.
-3. At `i = 2`, `forts[i] == 0`, so we skip.
-4. At `i = 3`, `forts[i] = -1`. Now, `forts[j] = 1` and `forts[i] = -1`. We compute the number of forts between `j` and `i`, which is `3 - 1 - 1 = 1`. Thus, `res = 1`.
-5. Continue iterating through the array. At `i = 8`, `forts[i] = -1`, and `forts[j] = 1` again. Compute the number of forts between them, which is `8 - 6 - 1 = 1`.
+9. **Return Statement**
+	```cpp
+	return res;
+	```
+	Returns the value of `res`, which represents the maximum distance between two opposing forts.
 
-Thus, the maximum number of forts that can be captured is `2`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) when no valid moves are possible.
+- **Average Case:** O(n) as we iterate through the array once to check each position.
+- **Worst Case:** O(n) in the worst case when we check all possible moves between forts.
 
-### Complexity Analysis
+Time complexity is linear because we only need to scan the array once for each move.
 
-#### Time Complexity:
-- We traverse the `forts` array once, so the time complexity is \(O(n)\), where `n` is the length of the `forts` array.
+### Space Complexity 💾
+- **Best Case:** O(1), as we are not storing additional data structures.
+- **Worst Case:** O(1), as we only store variables for the maximum number of captured forts.
 
-#### Space Complexity:
-- The space complexity is \(O(1)\), as we only use a few integer variables (`res` and `j`) for computation, and the space used does not grow with the size of `n`.
+The space complexity is constant since no extra space is required except for a few variables.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-The solution efficiently solves the problem by iterating through the `forts` array once, checking for pairs of opposing forts, and calculating the number of forts between them. By maintaining a reference to the most recent fort, the algorithm avoids unnecessary recalculations and performs the task optimally.
-
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-
-This approach ensures that we can quickly and effectively find the maximum number of forts that can be captured in a sequence of forts.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-enemy-forts-that-can-be-captured/description/)
 

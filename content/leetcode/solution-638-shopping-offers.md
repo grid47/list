@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "t6atP4Yv7_4"
 youtube_upload_date="2021-06-05"
 youtube_thumbnail="https://i.ytimg.com/vi/t6atP4Yv7_4/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,171 +28,268 @@ youtube_thumbnail="https://i.ytimg.com/vi/t6atP4Yv7_4/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+In a store, there are n items available for sale, each with a given price. You are also given a list of special offers where you can buy multiple items at a discounted price. Your task is to determine the minimum total price to purchase the required quantities of each item, while utilizing the special offers optimally. You can use any offer as many times as you like, but cannot buy more items than you need.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of prices, a list of special offers, and a list of the items you need to buy. Each offer consists of quantities of different items and the price for that offer.
+- **Example:** `price = [3, 6], special = [[4, 0, 8], [2, 3, 10]], needs = [5, 6]`
+- **Constraints:**
+	- 1 <= n <= 6
+	- 0 <= price[i], needs[i] <= 10
+	- 1 <= special.length <= 100
+	- special[i].length == n + 1
+	- 0 <= special[i][j] <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    map<vector<int>, int> mp;
-    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
-        if(mp[needs]) return mp[needs];
-        int best = calculate(price, needs);
-        for(auto &sp: special) {
-            sub(needs, sp);
-            if(noneg(needs)) {
-                int woffer = sp.back() + shoppingOffers(price, special, needs);
-                best = min(best, woffer);
-            }
-            add(needs, sp);
-        }        
-        return mp[needs] = best;
-    }
-    
-    int calculate(vector<int> &prices, vector<int> &needs) {
-        int res = 0;
-        for(int i = 0; i < needs.size(); i++) {
-            res += (needs[i] * prices[i]);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum cost to purchase exactly the required items, taking into account the special offers.
+- **Example:** `26`
+- **Constraints:**
+	- The result must be the minimum total cost to satisfy the item needs.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the lowest total price while considering all available special offers.
+
+- Iterate through each offer and decide whether to use it based on the remaining needs.
+- Track the total cost as you use the optimal combination of offers.
+{{< dots >}}
+### Problem Assumptions ✅
+- At least one of the special offers includes non-zero quantities of the items.
+- The input will always be valid and satisfies the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `price = [3, 6], special = [[4, 0, 8], [2, 3, 10]], needs = [5, 6]`  \
+  **Explanation:** You need 5 units of Item 0 and 6 units of Item 1. The best option is to buy the second offer twice and 1 more unit of Item 0 for a total cost of 26.
+
+{{< dots >}}
+## Approach 🚀
+The optimal strategy involves recursively trying each special offer and calculating the total cost. Use memoization to store previously computed results to avoid redundant calculations.
+
+### Initial Thoughts 💭
+- We should take advantage of special offers that reduce the price for multiple items.
+- We can recursively try each offer and compute the cost after applying the offer, then memoize the results to avoid recalculations.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem will always have valid inputs, so there will never be an empty list for 'price', 'needs', or 'special'.
+- The input sizes are manageable (n <= 6, special.length <= 100), so a solution with time complexity up to O(n^2) is feasible.
+- Special cases include when all offers result in the same cost or when no offer provides any savings.
+- The solution should handle up to 100 offers and 6 items efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+map<vector<int>, int> mp;
+int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+    if(mp[needs]) return mp[needs];
+    int best = calculate(price, needs);
+    for(auto &sp: special) {
+        sub(needs, sp);
+        if(noneg(needs)) {
+            int woffer = sp.back() + shoppingOffers(price, special, needs);
+            best = min(best, woffer);
         }
-        return res;        
+        add(needs, sp);
+    }        
+    return mp[needs] = best;
+}
+
+int calculate(vector<int> &prices, vector<int> &needs) {
+    int res = 0;
+    for(int i = 0; i < needs.size(); i++) {
+        res += (needs[i] * prices[i]);
     }
-    void add(vector<int> &needs, vector<int> &sp) {
-        for(int i = 0; i < needs.size(); i++) {
-            needs[i] += sp[i];
-        }     
-    }    
-    void sub(vector<int> &needs, vector<int> &sp) {
-        for(int i = 0; i < needs.size(); i++) {
-            needs[i] -= sp[i];
-        }
+    return res;        
+}
+void add(vector<int> &needs, vector<int> &sp) {
+    for(int i = 0; i < needs.size(); i++) {
+        needs[i] += sp[i];
+    }     
+}    
+void sub(vector<int> &needs, vector<int> &sp) {
+    for(int i = 0; i < needs.size(); i++) {
+        needs[i] -= sp[i];
     }
-    bool noneg(vector<int> &needs) {
-        for(int i = 0; i < needs.size(); i++) {
-            if(needs[i] < 0) return false;
-        }
-        return true;
+}
+bool noneg(vector<int> &needs) {
+    for(int i = 0; i < needs.size(); i++) {
+        if(needs[i] < 0) return false;
     }
-};
-{{< /highlight >}}
----
+    return true;
+}
+```
 
-### Problem Statement
+This code defines a solution to the shopping offers problem, using dynamic programming to calculate the minimum cost of purchasing a list of items, considering available special offers. It makes use of memoization to avoid redundant calculations, optimizing the process of finding the best combination of offers.
 
-The problem asks us to find the minimum cost of buying products given the prices for each item and a list of special offers. Each special offer provides a discount if certain quantities of items are bought together. We need to calculate the minimum cost to satisfy a set of product needs using the given prices and special offers.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	map<vector<int>, int> mp;
+	```
+	This line initializes a map, 'mp', which stores the minimum cost for each combination of item quantities (represented as a vector). The key is a vector of integers representing the current needs, and the value is the minimum cost for fulfilling that set of needs.
 
-We are given:
-1. `price`: A list of prices for each product.
-2. `special`: A list of special offers, where each offer contains a set of quantities of products and the corresponding price for that set.
-3. `needs`: A list of quantities of products needed.
+2. **Function Definition**
+	```cpp
+	int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+	```
+	This is the function signature of 'shoppingOffers'. It takes in the prices of items, the special offers, and the current needs (quantities of items to buy) as input. It returns the minimum cost to fulfill the needs considering the special offers.
 
-Our goal is to find the minimum cost to fulfill the needs, utilizing the special offers optimally, without purchasing more than required.
+3. **Memoization**
+	```cpp
+	    if(mp[needs]) return mp[needs];
+	```
+	This line checks if the result for the current set of needs has already been computed. If so, it returns the cached result from the map 'mp' to avoid redundant calculations.
 
-### Approach
+4. **Initial Calculation**
+	```cpp
+	    int best = calculate(price, needs);
+	```
+	This line initializes the best cost as the result of the 'calculate' function, which computes the cost of fulfilling the needs without considering any special offers.
 
-The key challenge in solving this problem is efficiently deciding whether to buy individual products at full price or utilize the special offers. We need to recursively explore both options while ensuring that we minimize the total cost. The approach uses **memoization** (dynamic programming) to avoid recomputation of previously solved subproblems.
+5. **Iterating over Offers**
+	```cpp
+	    for(auto &sp: special) {
+	```
+	This loop iterates through each special offer in the 'special' vector. Each special offer contains a vector of item quantities and the price for that offer.
 
-We use a **depth-first search (DFS)** with memoization to explore all possible ways to fulfill the needs:
-1. **Base case**: If we reach a state where no more products are needed, the cost is 0.
-2. **Recursive case**: For each special offer, we check if we can apply it and then recursively calculate the cost for the remaining needs. We keep track of the minimum cost found.
+6. **Subtraction of Items**
+	```cpp
+	        sub(needs, sp);
+	```
+	The 'sub' function subtracts the quantities of items in the special offer from the current 'needs' vector, simulating the purchase of the offer.
 
-In addition, we calculate the cost of buying products at the full price for the current needs and compare it with the costs obtained by applying the special offers.
+7. **Check for Valid Needs**
+	```cpp
+	        if(noneg(needs)) {
+	```
+	This checks whether the remaining needs are all non-negative. If any need is negative, it means the current offer is invalid (i.e., the special offer cannot be used to fulfill the needs).
 
-### Code Breakdown (Step by Step)
+8. **Recursive Call with Special Offer**
+	```cpp
+	            int woffer = sp.back() + shoppingOffers(price, special, needs);
+	```
+	This line recursively calculates the cost if the current special offer is used, adding the cost of the offer (sp.back()) to the result of fulfilling the updated needs.
 
-Let's break down the code and understand how it works:
+9. **Update Best Cost**
+	```cpp
+	            best = min(best, woffer);
+	```
+	This updates the 'best' variable to the minimum of the current 'best' and the new cost ('woffer') obtained from using the current special offer.
 
-#### 1. **Data Structures and Initialization**
-   ```cpp
-   map<vector<int>, int> mp;
-   ```
-   - `mp` is a memoization map that stores the minimum cost for a given state of `needs`. This map helps avoid redundant calculations for the same needs.
+10. **Restore Needs**
+	```cpp
+	        add(needs, sp);
+	```
+	The 'add' function restores the quantities of items in 'needs' by adding back the quantities subtracted by the special offer.
 
-#### 2. **Recursive Function `shoppingOffers`**
-   ```cpp
-   int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
-       if(mp[needs]) return mp[needs];
-       int best = calculate(price, needs);
-   ```
-   - The function `shoppingOffers` is the main entry point. It checks if the current `needs` have been computed previously using the `mp` map. If yes, it returns the stored result.
-   - Otherwise, it calculates the cost of fulfilling the current `needs` without any offers using the `calculate` function and stores it in `best`.
+11. **Memoization Store**
+	```cpp
+	    return mp[needs] = best;
+	```
+	This stores the computed 'best' result in the map 'mp' for the current set of needs, ensuring it can be reused in future calculations.
 
-#### 3. **Processing Special Offers**
-   ```cpp
-   for(auto &sp: special) {
-       sub(needs, sp);
-       if(noneg(needs)) {
-           int woffer = sp.back() + shoppingOffers(price, special, needs);
-           best = min(best, woffer);
-       }
-       add(needs, sp);
-   }
-   ```
-   - The function then iterates through each special offer in `special`. For each offer, it first attempts to apply the offer by subtracting the quantities of the items in the offer from the current `needs` using the `sub` function.
-   - If the result is valid (i.e., no negative needs remain), it recursively calculates the total cost of using the special offer (which is the offer's cost plus the cost of the remaining needs).
-   - The `best` variable is updated to store the minimum cost encountered.
+12. **Helper Function**
+	```cpp
+	int calculate(vector<int> &prices, vector<int> &needs) {
+	```
+	This is the helper function 'calculate', which calculates the total cost of fulfilling the needs without considering special offers.
 
-#### 4. **Calculate Full Price for Current Needs**
-   ```cpp
-   return mp[needs] = best;
-   ```
-   - After considering all possible special offers, the function stores the minimum cost found for the current `needs` in the memoization map `mp`.
+13. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	This initializes the result variable 'res' to 0. It will accumulate the total cost of fulfilling the needs.
 
-#### 5. **Helper Functions**
-   - **`calculate`**: This function calculates the cost of fulfilling the current `needs` without any offers.
-   ```cpp
-   int calculate(vector<int> &prices, vector<int> &needs) {
-       int res = 0;
-       for(int i = 0; i < needs.size(); i++) {
-           res += (needs[i] * prices[i]);
-       }
-       return res;
-   }
-   ```
-   - **`add`**: This function adds the quantities from a special offer to the `needs` vector.
-   ```cpp
-   void add(vector<int> &needs, vector<int> &sp) {
-       for(int i = 0; i < needs.size(); i++) {
-           needs[i] += sp[i];
-       }
-   }
-   ```
-   - **`sub`**: This function subtracts the quantities from a special offer from the `needs` vector.
-   ```cpp
-   void sub(vector<int> &needs, vector<int> &sp) {
-       for(int i = 0; i < needs.size(); i++) {
-           needs[i] -= sp[i];
-       }
-   }
-   ```
-   - **`noneg`**: This function checks if any of the values in the `needs` vector are negative. If any value is negative, it means the offer cannot be applied, so the function returns false.
-   ```cpp
-   bool noneg(vector<int> &needs) {
-       for(int i = 0; i < needs.size(); i++) {
-           if(needs[i] < 0) return false;
-       }
-       return true;
-   }
-   ```
+14. **Cost Calculation Loop**
+	```cpp
+	    for(int i = 0; i < needs.size(); i++) {
+	```
+	This loop iterates through each item in the 'needs' vector, calculating the total cost based on the price and the quantity needed.
 
-### Complexity
+15. **Accumulating Cost**
+	```cpp
+	        res += (needs[i] * prices[i]);
+	```
+	This line adds the cost for the current item to the total cost 'res'. It multiplies the price of the item by the quantity needed.
 
-#### Time Complexity:
-- **O(n * m * k)**, where:
-  - `n` is the number of products (size of `needs` and `price`),
-  - `m` is the number of special offers (size of `special`),
-  - `k` is the size of the state vector (size of `needs`).
-  
-  The algorithm explores all possible ways to fulfill the `needs` recursively, while memoizing the results to avoid redundant calculations.
+16. **Return Calculation**
+	```cpp
+	    return res;        
+	```
+	This returns the total cost calculated by the 'calculate' function.
 
-#### Space Complexity:
-- **O(n * k)**, where:
-  - `n` is the number of products,
-  - `k` is the size of the state vector (size of `needs`).
+17. **Helper Function**
+	```cpp
+	void add(vector<int> &needs, vector<int> &sp) {
+	```
+	This is the 'add' function, which restores the quantities of items in 'needs' by adding the quantities in the special offer 'sp'.
 
-  The space complexity is determined by the memoization map `mp`, which stores the minimum cost for each unique state of `needs`.
+18. **Loop through Items**
+	```cpp
+	    for(int i = 0; i < needs.size(); i++) {
+	```
+	This loop iterates through the items in the 'needs' vector.
 
-### Conclusion
+19. **Add Item Quantities**
+	```cpp
+	        needs[i] += sp[i];
+	```
+	This adds the quantity of the current item in the special offer 'sp' to the 'needs' vector.
 
-This solution efficiently calculates the minimum cost to fulfill the shopping needs using dynamic programming and memoization. By recursively exploring all combinations of full price and special offers, we ensure that the minimum cost is obtained. The use of helper functions like `sub`, `add`, and `noneg` ensures that the state transitions (i.e., applying and removing special offers) are correctly handled. This approach allows the solution to scale well even with a large number of products and special offers.
+20. **Helper Function**
+	```cpp
+	void sub(vector<int> &needs, vector<int> &sp) {
+	```
+	This is the 'sub' function, which subtracts the quantities of items in the special offer 'sp' from the 'needs' vector.
+
+21. **Loop through Items**
+	```cpp
+	    for(int i = 0; i < needs.size(); i++) {
+	```
+	This loop iterates through the items in the 'needs' vector.
+
+22. **Subtract Item Quantities**
+	```cpp
+	        needs[i] -= sp[i];
+	```
+	This subtracts the quantity of the current item in the special offer 'sp' from the 'needs' vector.
+
+23. **Helper Function**
+	```cpp
+	bool noneg(vector<int> &needs) {
+	```
+	This is the 'noneg' function, which checks if all the values in the 'needs' vector are non-negative.
+
+24. **Loop through Needs**
+	```cpp
+	    for(int i = 0; i < needs.size(); i++) {
+	```
+	This loop iterates through the 'needs' vector to check if any value is negative.
+
+25. **Check for Negative Values**
+	```cpp
+	        if(needs[i] < 0) return false;
+	```
+	This checks if any value in the 'needs' vector is negative. If it finds a negative value, it returns false.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * special.length)
+- **Average Case:** O(n * special.length)
+- **Worst Case:** O(n^2 * special.length)
+
+The time complexity is primarily determined by the number of special offers and the number of items.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n * special.length)
+
+The space complexity is influenced by the memoization and the need to track the 'needs' array for each recursive call.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shopping-offers/description/)
 

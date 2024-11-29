@@ -14,121 +14,170 @@ img_src = ""
 youtube = "JwuTsHDJVdI"
 youtube_upload_date="2023-05-30"
 youtube_thumbnail="https://i.ytimg.com/vi/JwuTsHDJVdI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n binary matrix grid. You need to create a difference matrix diff where each element diff[i][j] is calculated by summing the number of ones and subtracting the number of zeros in the respective row and column.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary matrix of size m x n, where each element is either 0 or 1.
+- **Example:** `grid = [[1,0,1],[0,1,1],[1,1,0]]`
+- **Constraints:**
+	- 1 <= m, n <= 10^5
+	- 1 <= m * n <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        vector<int> row(m), col(n);
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            row[i] += grid[i][j];
-            col[j] += grid[i][j];
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the difference matrix diff, which is of the same size as the input matrix grid.
+- **Example:** `Output: [[4, 4, 2], [2, 2, 4], [4, 4, 2]]`
+- **Constraints:**
+	- The output should be a matrix of integers with the same dimensions as the input.
 
-        vector<vector<int>> g(m, vector<int>(n, 0));
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            g[i][j] = 2 * row[i] + 2 * col[j] - m - n;
-        }
-        return g;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the difference matrix based on the number of ones and zeros in each row and column.
 
-### Problem Statement:
-The problem asks us to calculate a new grid where each element at position `(i, j)` is the result of a mathematical operation involving the sum of ones and zeros in the corresponding row and column of the original grid. Specifically, for each element, the value should be the result of the formula:
+- 1. First, calculate the number of ones and zeros in each row and column.
+- 2. Use the formula for diff[i][j] = onesRow_i + onesCol_j - zerosRow_i - zerosCol_j to calculate each value of the matrix diff.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will always contain binary values (0 or 1).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: grid = [[1,0,1],[0,1,1],[1,1,0]]`  \
+  **Explanation:** For each position in the grid, the number of ones and zeros in its respective row and column are used to calculate the difference matrix. The result will depend on how the number of ones and zeros are distributed.
 
-\[ \text{result}(i, j) = 2 \times (\text{number of ones in row } i) + 2 \times (\text{number of ones in column } j) - m - n \]
+{{< dots >}}
+## Approach 🚀
+We can approach this problem by first calculating the number of ones and zeros in each row and column, then using that data to calculate the difference matrix.
 
-Where:
-- `m` is the number of rows in the grid.
-- `n` is the number of columns in the grid.
-- The grid consists of ones and zeros.
-
-The task is to compute this new grid for a given input `grid`.
-
-### Approach:
-The problem can be solved in an efficient manner by breaking the task into two steps:
-1. **Precompute row and column sums**:
-   - The first step is to calculate the number of ones in each row and each column. This can be done using two arrays: one to store the sum of ones for each row and another for each column.
-   - This will help in reducing the redundant computations for each element of the new grid.
-
-2. **Construct the result grid**:
-   - For each element in the grid, the result can be computed by using the precomputed row and column sums. This way, we avoid counting the ones in the row and column repeatedly for every element of the grid.
-
-### Code Breakdown (Step by Step):
-Let’s break down the code and explain each part in detail:
-
+### Initial Thoughts 💭
+- We need to efficiently calculate the number of ones and zeros in each row and column, which can be done in O(m*n) time.
+- Once we have the row and column sums, calculating the diff matrix is straightforward.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one element in the grid, as m and n are guaranteed to be at least 1.
+- The maximum size of m*n is 10^5, which is feasible for a solution with O(m*n) time complexity.
+- If the grid is filled entirely with zeros, the diff matrix will be filled with zeros.
+- The problem guarantees that m and n are within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        vector<int> row(m), col(n);
-        for(int i = 0; i < m; i++)
-            for(int j = 0; j < n; j++) {
-                row[i] += grid[i][j];
-                col[j] += grid[i][j];
-            }
+vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    vector<int> row(m), col(n);
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++) {
+        row[i] += grid[i][j];
+        col[j] += grid[i][j];
+    }
+
+    vector<vector<int>> g(m, vector<int>(n, 0));
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++) {
+        g[i][j] = 2 * row[i] + 2 * col[j] - m - n;
+    }
+    return g;
+}
 ```
 
-1. **Initialization**:
-   - The function `onesMinusZeros` takes the input `grid`, which is a 2D vector of integers representing a grid of zeros and ones.
-   - `m` stores the number of rows in the grid (`grid.size()`), and `n` stores the number of columns in the grid (`grid[0].size()`).
-   - Two vectors, `row` and `col`, are initialized to store the count of ones in each row and column, respectively. These vectors are of size `m` and `n`, initialized with zeros.
+This function calculates a matrix `g` where each element is derived from the number of 1's in the respective row and column of the input `grid`. The transformation computes a new value for each cell based on the formula `2 * row[i] + 2 * col[j] - m - n`, where `row[i]` and `col[j]` represent the count of 1's in the respective row and column.
 
-2. **Precomputing Row and Column Sums**:
-   - The two nested loops iterate over each element of the grid. For each element `grid[i][j]`, the value is added to the corresponding row and column count:
-     - `row[i] += grid[i][j]` increments the count of ones in the `i`-th row.
-     - `col[j] += grid[i][j]` increments the count of ones in the `j`-th column.
-   - This step ensures that after the loops, `row[i]` contains the total number of ones in row `i`, and `col[j]` contains the total number of ones in column `j`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
+	```
+	This line defines the function `onesMinusZeros`, which takes a 2D vector `grid` as input and returns a 2D vector `g` as the output.
 
-```cpp
-        vector<vector<int>> g(m, vector<int>(n, 0));
-        for(int i = 0; i < m; i++)
-            for(int j = 0; j < n; j++) {
-                g[i][j] = 2 * row[i] + 2 * col[j] - m - n;
-            }
-        return g;
-    }
-};
-```
+2. **Variable Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	The dimensions of the grid are stored in `m` (number of rows) and `n` (number of columns).
 
-3. **Constructing the Result Grid**:
-   - A new grid `g` is created to store the result. This grid has the same dimensions as the input grid (`m` rows and `n` columns). Initially, all elements of `g` are set to 0.
-   - The nested loops again iterate through each element `g[i][j]` of the result grid.
-   - For each element, the formula `g[i][j] = 2 * row[i] + 2 * col[j] - m - n` is applied:
-     - `2 * row[i]` is twice the number of ones in the `i`-th row.
-     - `2 * col[j]` is twice the number of ones in the `j`-th column.
-     - Subtracting `m` and `n` adjusts the value as per the problem's requirements.
+3. **Vector Initialization**
+	```cpp
+	    vector<int> row(m), col(n);
+	```
+	Two vectors, `row` and `col`, are initialized to store the counts of 1's in each row and column of the grid.
 
-4. **Return the Result**:
-   - After filling in the entire result grid `g`, it is returned as the final output.
+4. **Row and Column Counting**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Loop through each row of the grid.
 
-### Complexity:
-Let’s analyze the time and space complexity of the solution:
+5. **Nested Loop**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Nested loop to iterate over each column of the grid.
 
-- **Time Complexity**:
-   - The first loop that computes the row and column sums takes \(O(m \times n)\), where `m` is the number of rows and `n` is the number of columns. This is because we are iterating over every element in the grid once to compute the row and column sums.
-   - The second loop that constructs the result grid also takes \(O(m \times n)\) as we are iterating over every element of the grid once to apply the formula.
-   - Therefore, the overall time complexity is \(O(m \times n)\).
+6. **Row Counting**
+	```cpp
+	        row[i] += grid[i][j];
+	```
+	Increment the count for the current row `i` based on the value of the cell `grid[i][j]`.
 
-- **Space Complexity**:
-   - The space complexity is \(O(m + n)\) due to the two auxiliary vectors `row` and `col` that store the counts of ones in each row and column, respectively.
-   - The result grid `g` takes \(O(m \times n)\) space, which dominates the overall space complexity.
-   - Hence, the overall space complexity is \(O(m \times n)\).
+7. **Column Counting**
+	```cpp
+	        col[j] += grid[i][j];
+	```
+	Increment the count for the current column `j` based on the value of the cell `grid[i][j]`.
 
-### Conclusion:
-The solution efficiently computes the new grid by first precomputing the number of ones in each row and column. This reduces redundant calculations and allows us to compute the result in a second pass through the grid. The time complexity of \(O(m \times n)\) and space complexity of \(O(m \times n)\) ensure that the solution scales well with large grids. This approach is optimal for problems of this nature where we need to compute values based on row and column aggregates, and it avoids recalculating these sums multiple times, ensuring efficient performance.
+8. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> g(m, vector<int>(n, 0));
+	```
+	Initialize a new matrix `g` of size `m x n` with all elements set to 0.
+
+9. **Matrix Calculation Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Loop through each row of the result matrix `g`.
+
+10. **Nested Matrix Calculation Loop**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Nested loop to iterate through each column of the result matrix `g`.
+
+11. **Matrix Calculation**
+	```cpp
+	        g[i][j] = 2 * row[i] + 2 * col[j] - m - n;
+	```
+	Each element of the result matrix `g[i][j]` is computed using the formula `2 * row[i] + 2 * col[j] - m - n`, where `row[i]` and `col[j]` represent the count of 1's in the respective row and column.
+
+12. **Return Statement**
+	```cpp
+	    return g;
+	```
+	Return the resulting matrix `g` which has been calculated based on the counts of 1's in the respective rows and columns.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m*n)
+- **Average Case:** O(m*n)
+- **Worst Case:** O(m*n)
+
+The time complexity is O(m*n) as we need to traverse the grid to compute row and column sums and then calculate the diff matrix.
+
+### Space Complexity 💾
+- **Best Case:** O(m*n)
+- **Worst Case:** O(m*n)
+
+The space complexity is O(m*n) due to the storage of the input grid and the result matrix.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column/description/)
 

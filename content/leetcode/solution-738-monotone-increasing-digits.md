@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,107 +28,153 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, return the largest number less than or equal to n with digits in monotone increasing order, meaning each digit is less than or equal to the next one.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer n where 0 <= n <= 10^9.
+- **Example:** `n = 1234`
+- **Constraints:**
+	- 0 <= n <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int monotoneIncreasingDigits(int n) {
-        string n_str = to_string(n);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest number less than or equal to n with monotone increasing digits.
+- **Example:** `For the input n = 1234, the output should be 1234.`
+- **Constraints:**
 
-        int marker = n_str.size();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the largest number less than or equal to n that has digits in increasing order.
 
-        for(int i = n_str.size() - 1; i > 0; i--) {
-            if(n_str[i] < n_str[i - 1]) {
-                marker = i;
-                n_str[i-1] = n_str[i - 1] - 1;
-            }
+- Convert the number to a string to process the digits.
+- Iterate through the digits from right to left to find the point where the digits stop increasing.
+- Decrease the previous digit and set all subsequent digits to 9 to ensure the largest possible number.
+- Convert the result back to an integer.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number n is a valid non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Starting with n = 211, the number 211 is not monotone increasing. By reducing the last digit and making the others 9, we get 199.`  \
+  **Explanation:** 211 is not a valid number with increasing digits, so the largest number that is less than or equal to 211 with increasing digits is 199.
+
+{{< dots >}}
+## Approach 🚀
+Use a greedy approach to find the largest number with monotone increasing digits less than or equal to n.
+
+### Initial Thoughts 💭
+- We need to adjust the number by reducing digits where necessary and ensuring the largest possible value for each adjustment.
+- A greedy approach can solve this problem by looking for the first violation of monotonicity and adjusting the digits accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty, as n is a valid integer between 0 and 10^9.
+- The algorithm should handle the largest possible input, which is 10^9.
+- The input n = 0 should return 0, as 0 is trivially a number with monotone increasing digits.
+- The solution should handle up to the largest input size efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int monotoneIncreasingDigits(int n) {
+    string n_str = to_string(n);
+
+    int marker = n_str.size();
+
+    for(int i = n_str.size() - 1; i > 0; i--) {
+        if(n_str[i] < n_str[i - 1]) {
+            marker = i;
+            n_str[i-1] = n_str[i - 1] - 1;
         }
-
-        for(int i = marker; i < n_str.size(); i++)
-            n_str[i]= '9';
-
-        return stoi(n_str);
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    for(int i = marker; i < n_str.size(); i++)
+        n_str[i]= '9';
 
-The problem requires finding the largest **monotone increasing number** less than or equal to a given number `n`. A number is called **monotone increasing** if its digits are in non-decreasing order from left to right. For example, 1234 is a monotone increasing number, whereas 5432 is not.
+    return stoi(n_str);
+}
+```
 
-Given an integer `n`, we need to modify its digits to form the largest number that satisfies the condition of being monotone increasing while being less than or equal to `n`. The solution should return this modified number.
+This function modifies the input integer `n` to its largest monotonic increasing number. It iterates through the digits, adjusting as necessary to ensure all digits after a decrease are set to 9.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int monotoneIncreasingDigits(int n) {
+	```
+	Define the function that takes an integer `n` as input.
 
-The approach to solving this problem is based on **greedy algorithms** and **digit manipulation**:
-1. Convert the number `n` to a string to process each digit individually.
-2. Start from the least significant digit (the rightmost one) and move towards the most significant digit.
-3. If we find that a digit is smaller than the digit before it (i.e., it violates the monotone increasing property), we backtrack to the point of violation and adjust the digits to ensure they form a valid monotone increasing number.
-4. Once the violation is handled, change all digits after the violation to `9` to maximize the number while maintaining the monotone increasing property.
+2. **Variable Initialization**
+	```cpp
+	    string n_str = to_string(n);
+	```
+	Convert the integer `n` into a string `n_str` for easier manipulation of individual digits.
 
-### Code Breakdown (Step by Step)
+3. **Variable Initialization**
+	```cpp
+	    int marker = n_str.size();
+	```
+	Initialize the `marker` variable to the size of `n_str`, which will track the point where digits need modification.
 
-1. **Convert the integer to a string**:
-   We begin by converting the number `n` into a string (`n_str`) to simplify the process of comparing and modifying the digits.
+4. **Loop Setup**
+	```cpp
+	    for(int i = n_str.size() - 1; i > 0; i--) {
+	```
+	Start a loop that traverses the digits of `n_str` from the last digit to the first, excluding the most significant digit.
 
-   ```cpp
-   string n_str = to_string(n);
-   ```
+5. **Condition Check**
+	```cpp
+	        if(n_str[i] < n_str[i - 1]) {
+	```
+	Check if the current digit is smaller than the previous one, indicating the need for modification.
 
-2. **Initialize a marker**:
-   The `marker` variable is used to track the position at which the number starts violating the monotone increasing property. Initially, it is set to the size of the number string, meaning that we assume the number is monotone increasing.
+6. **Modification**
+	```cpp
+	            marker = i;
+	```
+	Set `marker` to the current position `i`, marking where adjustments to digits need to occur.
 
-   ```cpp
-   int marker = n_str.size();
-   ```
+7. **Modification**
+	```cpp
+	            n_str[i-1] = n_str[i - 1] - 1;
+	```
+	Decrement the previous digit by 1, as we are attempting to create the largest possible monotonic increasing number.
 
-3. **Traverse the number from right to left**:
-   The loop starts from the second-to-last digit and moves towards the leftmost digit. This helps to identify the point where a digit is smaller than the one before it.
+8. **Digit Update**
+	```cpp
+	    for(int i = marker; i < n_str.size(); i++)
+	```
+	Start a second loop to set all digits after the `marker` position to '9'.
 
-   ```cpp
-   for (int i = n_str.size() - 1; i > 0; i--) {
-       if (n_str[i] < n_str[i - 1]) {
-           marker = i;
-           n_str[i - 1] = n_str[i - 1] - 1;
-       }
-   }
-   ```
+9. **Digit Update**
+	```cpp
+	        n_str[i]= '9';
+	```
+	Set each digit starting from the `marker` position to '9', ensuring the number is as large as possible while still being monotonic increasing.
 
-   - If the current digit (`n_str[i]`) is smaller than the digit before it (`n_str[i - 1]`), we have found a violation of the monotone increasing condition.
-   - To correct this, we reduce the previous digit (`n_str[i - 1]`) by 1 and update the `marker` to `i`. This ensures that we have a valid monotone increasing sequence up to the digit at position `i - 1`.
+10. **Return Statement**
+	```cpp
+	    return stoi(n_str);
+	```
+	Convert the modified string `n_str` back into an integer and return it.
 
-4. **Set digits after the violation to 9**:
-   After adjusting the digits up to the point of violation, we set all digits after the violation to `9`. This ensures the largest possible value for the number that still satisfies the monotone increasing condition.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of digits in the number. This happens when no adjustment is needed.
+- **Average Case:** O(n), as we need to iterate through the digits at most twice.
+- **Worst Case:** O(n), where n is the number of digits in the number, as we traverse the number from right to left.
 
-   ```cpp
-   for (int i = marker; i < n_str.size(); i++)
-       n_str[i] = '9';
-   ```
+The time complexity is O(n) because we iterate through the digits of the number once.
 
-5. **Convert the string back to an integer**:
-   After adjusting the digits, we convert the string back to an integer using `stoi` and return the result.
+### Space Complexity 💾
+- **Best Case:** O(1), as no extra space is needed if the solution does not require copying the digits.
+- **Worst Case:** O(n), where n is the number of digits in the number, as we need to store the digits in a string.
 
-   ```cpp
-   return stoi(n_str);
-   ```
+The space complexity is O(n) due to the storage of the digits in a string.
 
-### Complexity
+**Happy Coding! 🎉**
 
-#### Time Complexity:
-- **O(d)**, where `d` is the number of digits in the number `n`. We perform a linear scan of the digits of the number twice (once for finding the violation and once for updating digits after the violation). Therefore, the time complexity is proportional to the number of digits in the number, making it efficient even for large numbers.
-
-#### Space Complexity:
-- **O(d)**, where `d` is the number of digits in `n`. We store the digits of the number in a string (`n_str`), which requires space proportional to the number of digits in `n`.
-
-Thus, the space complexity is linear with respect to the number of digits in the input number.
-
-### Conclusion
-
-This approach efficiently handles the problem of finding the largest monotone increasing number less than or equal to a given number `n`. By iterating over the digits of the number from right to left, we can identify the point of violation and adjust the digits accordingly. Setting digits after the violation to `9` maximizes the result while preserving the monotone increasing property. The solution runs in linear time relative to the number of digits, making it suitable for large numbers.
-
-The code is simple and uses a greedy strategy to ensure the largest possible result. This makes it an optimal solution to the problem, as it processes the digits efficiently while maintaining correctness in terms of both time and space complexity.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/monotone-increasing-digits/description/)
 

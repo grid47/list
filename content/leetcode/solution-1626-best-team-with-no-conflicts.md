@@ -14,126 +14,208 @@ img_src = ""
 youtube = "7kURH3btcV4"
 youtube_upload_date="2023-01-31"
 youtube_thumbnail="https://i.ytimg.com/vi/7kURH3btcV4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are the manager of a basketball team, and you are tasked with selecting a team that maximizes the overall score. The score of the team is calculated by summing the individual scores of all the selected players. However, there is a rule: a conflict arises if a younger player has a strictly higher score than an older player. There is no conflict if players have the same age.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two lists are given, `scores` and `ages`, where each element in `scores` corresponds to the score of a player and each element in `ages` corresponds to the age of that player.
+- **Example:** `scores = [2, 4, 8, 10, 12], ages = [1, 2, 3, 4, 5]`
+- **Constraints:**
+	- 1 <= scores.length, ages.length <= 1000
+	- scores.length == ages.length
+	- 1 <= scores[i] <= 106
+	- 1 <= ages[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int bestTeamScore(vector<int>& scores, vector<int>& ages) {
-        int n = ages.size();
-        vector<pair<int, int>> palyer;
-        for(int i = 0; i < n; i++)
-        palyer.push_back({ages[i], scores[i]});
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum possible score of a valid team, where the team has no conflicts.
+- **Example:** `Output: 36`
+- **Constraints:**
+	- The result is an integer representing the maximum score.
 
-        sort(palyer.begin(), palyer.end(), greater<>());
-        int ans = 0;
-        vector<int> dp(n);
-        for(int i = 0; i < n; i++) {
-            pair<int, int> young = palyer[i];
-            dp[i] = young.second;
-            for(int j = 0; j < i; j++) {
-                pair<int, int> elder = palyer[j];
-                if(young.second <= elder.second)
-                dp[i] = max(dp[i], dp[j] + young.second);
-            }
-            ans = max(ans, dp[i]);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the total score of a valid team.
+
+- 1. Pair each player's age with their score.
+- 2. Sort the list of players based on their age in descending order.
+- 3. Use dynamic programming to find the best possible score by avoiding conflicts.
+{{< dots >}}
+### Problem Assumptions ✅
+- All players have a unique age or the same age, but the score is distinct for each player.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: scores = [2, 4, 8, 10, 12], ages = [1, 2, 3, 4, 5]`  \
+  **Explanation:** You can select all the players without any conflicts, resulting in a total score of 36.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to use dynamic programming to maximize the score while avoiding conflicts between players.
+
+### Initial Thoughts 💭
+- Sorting players by age ensures that the condition of having no conflicts between players can be easily handled.
+- The idea is to use a dynamic programming approach to compute the maximum score for each player while ensuring no conflicts.
+{{< dots >}}
+### Edge Cases 🌐
+- If either the scores or ages list is empty, the output will be 0.
+- For large inputs with the maximum number of players (1000), the algorithm should still perform efficiently.
+- All players having the same score or age might result in different team configurations.
+- Ensure the solution handles the upper bounds of input size and constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int bestTeamScore(vector<int>& scores, vector<int>& ages) {
+    int n = ages.size();
+    vector<pair<int, int>> palyer;
+    for(int i = 0; i < n; i++)
+    palyer.push_back({ages[i], scores[i]});
+
+    sort(palyer.begin(), palyer.end(), greater<>());
+    int ans = 0;
+    vector<int> dp(n);
+    for(int i = 0; i < n; i++) {
+        pair<int, int> young = palyer[i];
+        dp[i] = young.second;
+        for(int j = 0; j < i; j++) {
+            pair<int, int> elder = palyer[j];
+            if(young.second <= elder.second)
+            dp[i] = max(dp[i], dp[j] + young.second);
         }
-        return ans;
+        ans = max(ans, dp[i]);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the maximum score of a team of players based on their individual scores and ages. Players can only be selected if they are of the same age or younger than the previously selected player. The goal is to maximize the total score while adhering to this selection rule.
-
-### Approach
-
-To solve the problem, we can use a dynamic programming (DP) approach. The key steps in our approach include:
-
-1. **Data Structuring**: Pair each player's age with their score and store them in a list.
-2. **Sorting**: Sort the players primarily by age (descending) and secondarily by score (ascending) to ensure that when we evaluate scores, we are considering the appropriate relationships in terms of player eligibility.
-3. **Dynamic Programming Initialization**: Use a DP array where `dp[i]` will hold the maximum score possible using the first `i` players, considering the constraints of the problem.
-4. **Score Calculation**: Iterate through the players, and for each player, check all previously considered players to determine if the current player can be included in the team based on their score.
-5. **Maximization**: Continuously track the maximum score throughout the iterations.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int bestTeamScore(vector<int>& scores, vector<int>& ages) {
+    return ans;
+}
 ```
-- We define a class `Solution` with a public method `bestTeamScore` that accepts two vectors: `scores` and `ages`.
 
-```cpp
-        int n = ages.size();
-        vector<pair<int, int>> palyer;
-        for(int i = 0; i < n; i++)
-            palyer.push_back({ages[i], scores[i]});
-```
-- We determine the number of players, \( n \), from the size of the `ages` vector. We then create a vector of pairs called `palyer` to store each player's age and score.
+This solution calculates the best possible team score where a team member’s score is strictly less than or equal to the previous member’s score. The solution uses dynamic programming to store the maximum possible score at each step.
 
-```cpp
-        sort(palyer.begin(), palyer.end(), greater<>());
-```
-- The players are sorted in descending order by age and, in the case of ties, by score in ascending order. This ensures that when we consider younger players, we are doing so after considering older players.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int bestTeamScore(vector<int>& scores, vector<int>& ages) {
+	```
+	Define the main method 'bestTeamScore' which takes in two vectors: scores and ages.
 
-```cpp
-        int ans = 0;
-        vector<int> dp(n);
-```
-- We initialize a variable `ans` to track the maximum score. We also create a DP array `dp` of size \( n \) to store the maximum score achievable at each player index.
+2. **Variable Initialization**
+	```cpp
+	    int n = ages.size();
+	```
+	Initialize 'n' to be the size of the 'ages' vector, which is the total number of players.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-            pair<int, int> young = palyer[i];
-            dp[i] = young.second;
-```
-- We iterate through each player in the sorted list. For each player, we set `dp[i]` to the player's score since, at minimum, their individual score is part of the team score.
+3. **Variable Initialization**
+	```cpp
+	    vector<pair<int, int>> palyer;
+	```
+	Initialize a vector of pairs 'palyer' where each pair stores the age and score of a player.
 
-```cpp
-            for(int j = 0; j < i; j++) {
-                pair<int, int> elder = palyer[j];
-                if(young.second <= elder.second)
-                    dp[i] = max(dp[i], dp[j] + young.second);
-            }
-```
-- For each player, we check all previously considered players (from `j = 0` to `i-1`). If the current player's score is less than or equal to the elder player's score, we can add this player's score to the elder's maximum score (`dp[j]`), updating `dp[i]` with the maximum possible value.
+4. **Loop Constructs**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Iterate through each player to add their age and score to the 'palyer' vector.
 
-```cpp
-            ans = max(ans, dp[i]);
-        }
-        return ans;
-    }
-};
-```
-- After evaluating all possible previous players for the current player, we update the `ans` variable with the maximum value found in the `dp` array. Finally, we return the maximum score.
+5. **Vector Manipulations**
+	```cpp
+	    palyer.push_back({ages[i], scores[i]});
+	```
+	Push a new pair containing the current player's age and score into the 'palyer' vector.
 
-### Complexity
+6. **Sorting**
+	```cpp
+	    sort(palyer.begin(), palyer.end(), greater<>());
+	```
+	Sort the 'palyer' vector in descending order based on age first, and score second (if ages are equal).
 
-- **Time Complexity**: The overall time complexity is \( O(n^2) \) due to the nested loops where we compare each player with all previous players. The sorting step takes \( O(n \log n) \), but it is dominated by the \( O(n^2) \) from the DP step.
+7. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize 'ans' to store the maximum score found during the process.
 
-- **Space Complexity**: The space complexity is \( O(n) \) for the DP array and the vector of pairs used to store the players.
+8. **Vector Initialization**
+	```cpp
+	    vector<int> dp(n);
+	```
+	Initialize a dynamic programming vector 'dp' to store the best scores at each player position.
 
-### Conclusion
+9. **Loop Constructs**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start an outer loop to go through each player in the sorted 'palyer' vector.
 
-The solution effectively maximizes the score of a team of players while adhering to the selection constraints based on ages and scores. By employing a dynamic programming approach and careful data structuring, we ensure that all possible configurations of players are considered while maintaining optimal performance.
+10. **Variable Initialization**
+	```cpp
+	        pair<int, int> young = palyer[i];
+	```
+	Assign the current player (sorted by age and score) to the variable 'young'.
 
-**Key Takeaways**:
-1. **Dynamic Programming**: This problem showcases the power of DP in optimizing selections based on constraints.
-2. **Data Structuring**: Organizing the data into pairs for easier handling and sorting facilitates clearer logic in subsequent steps.
-3. **Sorting**: Sorting players by age and score simplifies the process of determining valid team compositions.
+11. **Vector Operations**
+	```cpp
+	        dp[i] = young.second;
+	```
+	Initialize 'dp[i]' with the score of the current player ('young').
 
-This method can be adapted for similar problems that involve maximizing values under specific constraints, demonstrating the effectiveness of dynamic programming in competitive programming and algorithmic challenges.
+12. **Loop Constructs**
+	```cpp
+	        for(int j = 0; j < i; j++) {
+	```
+	Start an inner loop to check previous players for a valid team formation.
+
+13. **Variable Initialization**
+	```cpp
+	            pair<int, int> elder = palyer[j];
+	```
+	Assign the previous player to 'elder' to compare their score with 'young'.
+
+14. **Conditional Statements**
+	```cpp
+	            if(young.second <= elder.second)
+	```
+	Check if the score of the current player ('young') is less than or equal to the score of the previous player ('elder').
+
+15. **Mathematical Operations**
+	```cpp
+	            dp[i] = max(dp[i], dp[j] + young.second);
+	```
+	If valid, update 'dp[i]' by considering the best score combination of the current and previous player.
+
+16. **Mathematical Operations**
+	```cpp
+	        ans = max(ans, dp[i]);
+	```
+	Update the maximum score 'ans' by considering the current best score at 'dp[i]'.
+
+17. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the maximum score 'ans' which is the best team score.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) due to sorting.
+- **Average Case:** O(n^2) due to dynamic programming.
+- **Worst Case:** O(n^2) due to dynamic programming and sorting.
+
+The time complexity is dominated by the sorting step followed by the dynamic programming evaluation.
+
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the dynamic programming table.
+- **Worst Case:** O(n) for storing the dynamic programming table.
+
+The space complexity is linear as we store the dynamic programming table.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-team-with-no-conflicts/description/)
 

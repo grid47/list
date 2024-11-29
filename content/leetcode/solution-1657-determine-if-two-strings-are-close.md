@@ -14,146 +14,232 @@ img_src = ""
 youtube = "-jXQK-UeChU"
 youtube_upload_date="2020-12-14"
 youtube_thumbnail="https://i.ytimg.com/vi/-jXQK-UeChU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Two strings are considered transformable into each other if you can convert one into the other by performing a series of operations. These operations include swapping any two characters or transforming all occurrences of one character into another.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings, `word1` and `word2`. Each string consists of lowercase English letters.
+- **Example:** `word1 = "abc", word2 = "bca"`
+- **Constraints:**
+	- 1 <= word1.length, word2.length <= 10^5
+	- word1 and word2 contain only lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool closeStrings(string w1, string w2) {
-        if(w1.size() != w2.size()) return false;
-        int n = w1.size();
-        map<char, int> m1, m2;
-        int mask1 = 0, mask2 = 0;
-        for(int i = 0; i < n; i++) {
-            m1[w1[i]]++;
-            m2[w2[i]]++;
-            mask1 |= (1 << (w1[i] - 'a'));
-            mask2 |= (1 << (w2[i] - 'a'));          
-        }
-        if(mask1 != mask2) return false;
-        vector<int> arr, nums;
-        for(auto it: m1) {
-            arr.push_back(it.second);
-        }
-        sort(arr.begin(), arr.end());
-        // for(int x: arr)
-        //     cout << x << " ";
-        // cout << "\n";
-        for(auto it: m2) {
-            nums.push_back(it.second);
-        }
-        sort(nums.begin(), nums.end());        
-        // for(int x: nums)
-        //     cout << x << " ";
-        cout << "\n";        
-        return nums == arr;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if `word1` and `word2` can be transformed into each other through the specified operations, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The result will be either true or false.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if `word1` and `word2` can be transformed into each other through a sequence of swaps and character transformations.
+
+- Check if the lengths of both strings are the same. If not, return false.
+- Check if both strings contain the same set of unique characters. If they do not, return false.
+- Compare the frequencies of characters in both strings. If the frequency distribution matches, return true, otherwise return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both strings are valid lowercase English strings.
+- The strings may have different lengths, but you must check their transformation potential.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word1 = "abc", word2 = "bca"`  \
+  **Explanation:** In this case, it is possible to transform `word1` into `word2` by swapping characters. After applying two swap operations, we get the string `bca`.
+
+- **Input:** `word1 = "a", word2 = "aa"`  \
+  **Explanation:** In this case, it's impossible to convert `word1` into `word2` since `word2` has more characters than `word1`, making it impossible to apply the given operations.
+
+{{< dots >}}
+## Approach 🚀
+We will compare the character distributions and sets of the two strings to determine if they can be transformed into each other.
+
+### Initial Thoughts 💭
+- If two strings contain different characters, they can never be transformed into each other.
+- The operations only allow swaps and transformations, which means the structure of the strings' characters must be identical.
+- Start by checking if the lengths of the strings are the same. If not, return false immediately.
+- Then, check the frequency of characters in both strings. If the frequencies match, they can be transformed into each other.
+{{< dots >}}
+### Edge Cases 🌐
+- If one string is empty and the other is not, return false.
+- For large input strings, ensure that the solution efficiently compares characters without redundant operations.
+- If both strings consist of the same repeated character, they should be transformable into each other.
+- Be mindful of time complexity when processing large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+bool closeStrings(string w1, string w2) {
+    if(w1.size() != w2.size()) return false;
+    int n = w1.size();
+    map<char, int> m1, m2;
+    int mask1 = 0, mask2 = 0;
+    for(int i = 0; i < n; i++) {
+        m1[w1[i]]++;
+        m2[w2[i]]++;
+        mask1 |= (1 << (w1[i] - 'a'));
+        mask2 |= (1 << (w2[i] - 'a'));          
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves determining whether two strings, `w1` and `w2`, are "close." According to the problem's criteria, two strings are considered close if:
-1. They have the same length.
-2. They contain the same unique characters (regardless of order).
-3. The frequency of characters in both strings can be rearranged to match each other. This means that the frequency of each character in one string can be transformed into the frequency of characters in the other string through reordering.
-
-The goal is to implement a function that checks if the two given strings meet these criteria.
-
-### Approach
-
-To check if the two strings are close, the algorithm follows these steps:
-
-1. **Length Check**: Verify if both strings have the same length.
-2. **Frequency Count**: Count the frequency of each character in both strings.
-3. **Unique Character Check**: Use bitwise operations to create a mask representing which characters are present in each string.
-4. **Frequency Comparison**: Compare the frequency distributions of both strings to ensure they can be rearranged to match each other.
-5. **Final Check**: Return true if all conditions are satisfied, otherwise return false.
-
-This approach efficiently handles the requirements of the problem using character counting and sorting techniques.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool closeStrings(string w1, string w2) {
-        if(w1.size() != w2.size()) return false; // Step 1: Length check
-        int n = w1.size();
-        map<char, int> m1, m2; // Step 2: Frequency maps
-        int mask1 = 0, mask2 = 0; // Step 3: Character presence masks
-```
-- We begin by defining a class `Solution` and a public method `closeStrings`. 
-- The first step checks if the lengths of `w1` and `w2` are equal. If not, the function immediately returns false.
-- Two frequency maps, `m1` and `m2`, are created to store the character counts for each string.
-- Two integer variables `mask1` and `mask2` are initialized to zero. These will be used to track the presence of characters.
-
-```cpp
-        for(int i = 0; i < n; i++) {
-            m1[w1[i]]++; // Count frequency in w1
-            m2[w2[i]]++; // Count frequency in w2
-            mask1 |= (1 << (w1[i] - 'a')); // Update mask1 for w1
-            mask2 |= (1 << (w2[i] - 'a')); // Update mask2 for w2
-        }
-```
-- A loop iterates through each character in the strings `w1` and `w2`. 
-- The character counts for each string are updated in their respective frequency maps.
-- The bitwise operation updates the masks to reflect which characters are present in each string (using the positions of letters from 'a' to 'z').
-
-```cpp
-        if(mask1 != mask2) return false; // Step 4: Check if both strings have the same unique characters
-```
-- After populating the masks, we check if `mask1` and `mask2` are equal. If they are not, the strings do not have the same unique characters, and the function returns false.
-
-```cpp
-        vector<int> arr, nums; // Step 5: Prepare to compare frequency distributions
-        for(auto it: m1) {
-            arr.push_back(it.second); // Collect frequencies from w1
-        }
-        sort(arr.begin(), arr.end()); // Sort frequencies for w1
-```
-- We create two vectors, `arr` and `nums`, to hold the sorted frequency counts.
-- The frequency values from `m1` are collected into `arr`, which is then sorted.
-
-```cpp
-        for(auto it: m2) {
-            nums.push_back(it.second); // Collect frequencies from w2
-        }
-        sort(nums.begin(), nums.end()); // Sort frequencies for w2
-```
-- Similarly, we collect frequency values from `m2` into `nums`, which is then sorted.
-
-```cpp
-        return nums == arr; // Step 6: Compare sorted frequency distributions
+    if(mask1 != mask2) return false;
+    vector<int> arr, nums;
+    for(auto it: m1) {
+        arr.push_back(it.second);
     }
-};
+    sort(arr.begin(), arr.end());
+    // for(int x: arr)
+    //     cout << x << " ";
+    // cout << "\n";
+    for(auto it: m2) {
+        nums.push_back(it.second);
+    }
+    sort(nums.begin(), nums.end());        
+    // for(int x: nums)
+    //     cout << x << " ";
+    cout << "\n";        
+    return nums == arr;
+}
 ```
-- Finally, we compare the two sorted frequency vectors. If they are equal, it indicates that the frequencies can be rearranged to match each other, and the function returns true. If they are not equal, the function returns false.
 
-### Complexity
+This function determines if two strings are close, meaning they can be transformed into each other by reordering characters and replacing characters while maintaining character frequencies.
 
-- **Time Complexity**:
-  - The function runs in \( O(n + k \log k) \), where \( n \) is the length of the strings and \( k \) is the number of unique characters (maximum of 26 for lowercase letters). The linear scans for counting characters and the sorting of frequencies dominate the complexity.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool closeStrings(string w1, string w2) {
+	```
+	Defines the function `closeStrings` that takes two strings as input and returns a boolean.
 
-- **Space Complexity**:
-  - The space complexity is \( O(k) \) due to the storage of frequency maps and sorted frequency vectors, where \( k \) is the number of unique characters.
+2. **Size Check**
+	```cpp
+	    if(w1.size() != w2.size()) return false;
+	```
+	Checks if the two strings have the same length. If not, they cannot be close.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    int n = w1.size();
+	```
+	Initializes the variable `n` to store the size of the strings for later use.
 
-The `closeStrings` method effectively checks whether two strings are close based on the defined criteria. It utilizes character counting and bit manipulation to ensure an efficient comparison of the strings. 
+4. **Map Initialization**
+	```cpp
+	    map<char, int> m1, m2;
+	```
+	Initializes two maps to count the frequency of characters in each string.
 
-**Key Takeaways**:
-1. **Efficiency**: The approach is efficient, with linear complexity regarding the size of the input strings.
-2. **Bit Manipulation**: Using bit masks is an effective way to track the presence of characters without using additional data structures.
-3. **Sorting for Comparison**: Sorting the frequency counts allows for a straightforward comparison to ensure the rearrangement condition is met.
+5. **Variable Initialization**
+	```cpp
+	    int mask1 = 0, mask2 = 0;
+	```
+	Initializes two integer masks to track the unique characters in the strings.
 
-Overall, this solution is a clear demonstration of how to approach string comparison problems using fundamental programming concepts such as hashing, sorting, and bitwise operations. The algorithm is robust, handling edge cases such as differing lengths gracefully, and efficiently verifies the closeness of two strings.
+6. **Looping**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Loops through each character of the strings to update the maps and masks.
+
+7. **Map Update**
+	```cpp
+	        m1[w1[i]]++;
+	```
+	Increments the frequency of the current character in the first map.
+
+8. **Map Update**
+	```cpp
+	        m2[w2[i]]++;
+	```
+	Increments the frequency of the current character in the second map.
+
+9. **Bit Manipulation**
+	```cpp
+	        mask1 |= (1 << (w1[i] - 'a'));
+	```
+	Updates the bitmask for the first string to track its unique characters.
+
+10. **Bit Manipulation**
+	```cpp
+	        mask2 |= (1 << (w2[i] - 'a'));          
+	```
+	Updates the bitmask for the second string to track its unique characters.
+
+11. **Condition Check**
+	```cpp
+	    if(mask1 != mask2) return false;
+	```
+	Checks if the sets of unique characters in the two strings are different. If so, they cannot be close.
+
+12. **Vector Initialization**
+	```cpp
+	    vector<int> arr, nums;
+	```
+	Initializes two vectors to store the frequency counts from the maps.
+
+13. **Map Iteration**
+	```cpp
+	    for(auto it: m1) {
+	```
+	Iterates through the first map to extract character frequencies.
+
+14. **Vector Update**
+	```cpp
+	        arr.push_back(it.second);
+	```
+	Appends the frequency of a character from the first map to the first vector.
+
+15. **Sorting**
+	```cpp
+	    sort(arr.begin(), arr.end());
+	```
+	Sorts the frequencies in the first vector to prepare for comparison.
+
+16. **Map Iteration**
+	```cpp
+	    for(auto it: m2) {
+	```
+	Iterates through the second map to extract character frequencies.
+
+17. **Vector Update**
+	```cpp
+	        nums.push_back(it.second);
+	```
+	Appends the frequency of a character from the second map to the second vector.
+
+18. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());        
+	```
+	Sorts the frequencies in the second vector to prepare for comparison.
+
+19. **Return**
+	```cpp
+	    return nums == arr;
+	```
+	Compares the sorted frequency vectors. If they are equal, the strings are close.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The best-case time complexity occurs when the strings are already identical or trivially transformable. The worst case arises from sorting the frequency distributions of characters.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of character frequencies and other intermediate data structures.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-if-two-strings-are-close/description/)
 

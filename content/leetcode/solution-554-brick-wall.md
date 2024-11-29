@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Kkmv2h48ekw"
 youtube_upload_date="2021-04-24"
 youtube_thumbnail="https://i.ytimg.com/vi/Kkmv2h48ekw/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,113 +28,161 @@ youtube_thumbnail="https://i.ytimg.com/vi/Kkmv2h48ekw/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a rectangular wall made up of bricks with varying widths, your task is to determine the minimum number of bricks that a vertical line crosses. The line should be drawn such that it does not cross any brick's edge, and you cannot place the line at the edges of the wall.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 2D array 'wall' where each row represents a row of bricks. Each brick in a row is represented by its width.
+- **Example:** `Input: wall = [[2, 3, 1], [4, 2], [1, 3, 1], [3, 2, 1]]`
+- **Constraints:**
+	- 1 <= n <= 104
+	- 1 <= wall[i].length <= 104
+	- 1 <= sum(wall[i].length) <= 2 * 104
+	- sum(wall[i]) is the same for each row i.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int leastBricks(vector<vector<int>>& wall) {
-        unordered_map<int, int> edge_freq;
-        int max_freq = 0;
-        for(int row = 0; row < wall.size(); row++) {
-            int edge_pos = 0;
-            for(int brick_no = 0; brick_no < wall[row].size() - 1; brick_no++) {
-                int curr_brick_length = wall[row][brick_no];
-                edge_pos = edge_pos + curr_brick_length;
-                edge_freq[edge_pos]++;
-                max_freq = max(edge_freq[edge_pos], max_freq);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the minimum number of bricks that a vertical line crosses.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The returned value should be an integer representing the minimum number of crossed bricks.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the vertical line position that crosses the fewest bricks.
+
+- For each row, calculate the position of the brick edges as you iterate through the row.
+- Track the frequency of these positions across all rows using a map or hash table.
+- The most frequent position indicates where the fewest bricks are crossed, and the answer is the number of rows minus the maximum frequency.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input wall will always have at least one row.
+- The number of bricks in each row is guaranteed to be consistent in terms of total width.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: wall = [[2, 3, 1], [4, 2], [1, 3, 1], [3, 2, 1]]`  \
+  **Explanation:** The vertical line crossing the edge between the second and third bricks of the first row results in crossing only 2 bricks across all rows.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves tracking the positions of the edges of the bricks in each row and counting the frequency of these positions across all rows. The position that occurs most frequently is where the least number of bricks are crossed.
+
+### Initial Thoughts 💭
+- If the vertical line is placed at the edges where the most bricks align, fewer bricks will be crossed.
+- We need to avoid crossing any edges of the bricks and aim for positions where the least number of bricks will be affected.
+- This can be done efficiently by tracking the frequency of edge positions and selecting the one that minimizes the number of crossed bricks.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as the number of rows is guaranteed to be at least 1.
+- The solution should efficiently handle up to 10^4 rows and total brick widths up to 2 * 10^4.
+- If the wall has only one column, the vertical line will cross all bricks, and the answer is equal to the number of rows.
+- The algorithm should work efficiently within the problem's constraints, particularly with large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int leastBricks(vector<vector<int>>& wall) {
+    unordered_map<int, int> edge_freq;
+    int max_freq = 0;
+    for(int row = 0; row < wall.size(); row++) {
+        int edge_pos = 0;
+        for(int brick_no = 0; brick_no < wall[row].size() - 1; brick_no++) {
+            int curr_brick_length = wall[row][brick_no];
+            edge_pos = edge_pos + curr_brick_length;
+            edge_freq[edge_pos]++;
+            max_freq = max(edge_freq[edge_pos], max_freq);
         }
-        return wall.size() - max_freq;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves a wall made up of bricks, where each brick has a certain length. The goal is to find the least number of bricks that a vertical line can intersect. In other words, a vertical line can be drawn through the wall, and we want to minimize the number of bricks it crosses. The optimal solution minimizes the intersections by finding the positions where the vertical line crosses through the least number of bricks.
-
-For example:
-- A wall of size `[[1, 2, 2], [3, 1, 2], [2, 3], [2, 2, 3]]` would have the least number of bricks intersected by drawing a vertical line at the position where the most brick edges align.
-
-### Approach
-
-To solve this problem efficiently, we can use the following approach:
-
-1. **Identify Brick Edges**: Each brick in the wall has an edge that defines its position. A vertical line will intersect a brick if it crosses its boundary (an edge).
-2. **Track Edge Frequencies**: For each row in the wall, calculate the cumulative position of the brick edges, and keep a frequency count of how many rows share the same edge position. The more rows that share the same edge, the fewer bricks a vertical line will intersect at that position.
-3. **Maximize Edge Alignment**: The position with the highest frequency of edges indicates the optimal place to draw the vertical line, as it minimizes the number of bricks intersected. The fewer the edges crossed, the fewer the bricks intersected.
-4. **Calculate the Result**: The minimum number of bricks crossed is equal to the total number of rows minus the maximum frequency of edge alignments. This is because the vertical line intersects all rows except the ones where the edges align perfectly.
-
-By following this approach, we can efficiently determine the optimal position for the vertical line.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Class and Function Definition**
-```cpp
-class Solution {
-public:
-    int leastBricks(vector<vector<int>>& wall) {
+    return wall.size() - max_freq;
+}
 ```
-- The solution is encapsulated in the `Solution` class, and the main function `leastBricks` is defined.
-- The function takes `wall`, a vector of vectors of integers, which represents the dimensions of the bricks in the wall.
 
-#### 2. **Initialize Edge Frequency Map**
-```cpp
-        unordered_map<int, int> edge_freq;
-        int max_freq = 0;
-```
-- `edge_freq` is an unordered map (hash table) that will store the frequency of each edge position (the cumulative position where a brick edge occurs).
-- `max_freq` keeps track of the maximum frequency of edges at any given position.
+This function calculates the least number of bricks that a vertical line would intersect when passed through a wall represented as a 2D grid. It uses a frequency map to track the most common brick edge positions and minimizes the number of intersected bricks by finding the most frequent edge.
 
-#### 3. **Iterating Over Rows and Calculating Edge Positions**
-```cpp
-        for(int row = 0; row < wall.size(); row++) {
-            int edge_pos = 0;
-            for(int brick_no = 0; brick_no < wall[row].size() - 1; brick_no++) {
-                int curr_brick_length = wall[row][brick_no];
-                edge_pos = edge_pos + curr_brick_length;
-                edge_freq[edge_pos]++;
-                max_freq = max(edge_freq[edge_pos], max_freq);
-            }
-        }
-```
-- The outer loop iterates through each row of the wall.
-- The `edge_pos` variable tracks the cumulative position of brick edges along the row.
-- The inner loop iterates through each brick in the row, but skips the last brick (`wall[row].size() - 1`), as we only care about the edges between bricks.
-- For each brick, we update `edge_pos` by adding the current brick's length, then we increment the frequency of the `edge_pos` in the `edge_freq` map.
-- We also update `max_freq` to reflect the maximum frequency of edge alignments, which tells us the most optimal vertical line position (where the least number of bricks will be intersected).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int leastBricks(vector<vector<int>>& wall) {
+	```
+	Defines the function `leastBricks`, which takes a 2D vector `wall` representing the brick wall and returns the minimum number of bricks that a vertical line intersects.
 
-#### 4. **Calculate the Result**
-```cpp
-        return wall.size() - max_freq;
-    }
-};
-```
-- Finally, the result is calculated by subtracting `max_freq` from the total number of rows in the wall (`wall.size()`).
-- The reason we subtract `max_freq` is that the rows where the edges align perfectly with the vertical line will not have any bricks intersected. Thus, the fewer the number of rows that intersect with the line, the fewer the bricks that will be crossed.
-- The function returns this value as the result.
+2. **Hash Map Initialization**
+	```cpp
+	    unordered_map<int, int> edge_freq;
+	```
+	Initializes an unordered map `edge_freq` to store the frequency of each edge position encountered while iterating over the wall.
 
-### Complexity
+3. **Variable Initialization**
+	```cpp
+	    int max_freq = 0;
+	```
+	Initializes a variable `max_freq` to track the highest frequency of any edge position encountered.
 
-#### Time Complexity:
-- The time complexity of the algorithm is **O(N * M)**, where `N` is the number of rows in the wall (`wall.size()`) and `M` is the average number of bricks in each row (`wall[i].size()`). This is because we iterate through each brick in the wall once.
-- The operations within the loops (updating the `edge_freq` map and calculating the cumulative positions) are constant-time operations on average, due to the efficient lookup and update times of an unordered map (hash table).
-  
-#### Space Complexity:
-- The space complexity is **O(K)**, where `K` is the number of unique edge positions encountered during the iterations. This corresponds to the number of different cumulative positions of the brick edges across all rows. Since in the worst case, each brick could have a different edge position, this is proportional to the number of bricks in the wall.
+4. **Outer Loop (Row Traversal)**
+	```cpp
+	    for(int row = 0; row < wall.size(); row++) {
+	```
+	Begins a loop to traverse each row of the wall.
 
-### Conclusion
+5. **Edge Position Initialization**
+	```cpp
+	        int edge_pos = 0;
+	```
+	Initializes `edge_pos` to keep track of the current edge position as we iterate through the bricks in a row.
 
-This solution efficiently computes the least number of bricks a vertical line intersects by focusing on the cumulative positions of brick edges across the rows. By tracking these positions and their frequencies, the algorithm determines the optimal line placement that minimizes intersections.
+6. **Inner Loop (Brick Traversal)**
+	```cpp
+	        for(int brick_no = 0; brick_no < wall[row].size() - 1; brick_no++) {
+	```
+	Starts a loop to traverse each brick in the current row, excluding the last brick, to avoid counting the edge of the last brick.
 
-**Key Points:**
-- The problem is solved by analyzing brick edges and finding the optimal vertical line placement.
-- The frequency of edge positions helps identify the best position for the vertical line.
-- The solution is both time and space efficient, with a time complexity of **O(N * M)** and space complexity of **O(K)**.
+7. **Brick Length Extraction**
+	```cpp
+	            int curr_brick_length = wall[row][brick_no];
+	```
+	Extracts the length of the current brick in the row.
 
-This approach provides a clear, optimal, and efficient way to solve the problem by leveraging hash maps and frequency counting, making it a great example of how to optimize problems involving spatial arrangements.
+8. **Edge Position Update**
+	```cpp
+	            edge_pos = edge_pos + curr_brick_length;
+	```
+	Updates the current edge position by adding the length of the current brick.
+
+9. **Edge Frequency Update**
+	```cpp
+	            edge_freq[edge_pos]++;
+	```
+	Increments the frequency count for the current edge position in the `edge_freq` map.
+
+10. **Max Frequency Update**
+	```cpp
+	            max_freq = max(edge_freq[edge_pos], max_freq);
+	```
+	Updates the `max_freq` variable to track the highest frequency of any edge position encountered so far.
+
+11. **Return Statement**
+	```cpp
+	    return wall.size() - max_freq;
+	```
+	Returns the minimum number of bricks intersected by a vertical line, which is the total number of rows minus the maximum frequency of edge positions.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear with respect to the total number of bricks, as we are iterating through the entire wall once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the frequency map that tracks the edge positions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/brick-wall/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "lTHTR_jsqAQ"
 youtube_upload_date="2020-01-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/lTHTR_jsqAQ/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,82 +28,64 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/lTHTR_jsqAQ/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array nums. Your task is to rotate the array to the right by k steps, where k is a non-negative integer.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers nums and an integer k.
+- **Example:** `nums = [10, 20, 30, 40, 50, 60, 70], k = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -231 <= nums[i] <= 231 - 1
+	- 0 <= k <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void rotate(vector<int>& nums, int k) {
-        k = k % nums.size();
-        rev(nums, 0, nums.size() - 1);
-        rev(nums, 0, k - 1);
-        rev(nums, k, nums.size() - 1);
-        
-    }
-    
-    void rev(vector<int>& nums, int i, int j) {
-        while(i <= j) {
-            int tmp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = tmp;
-            i++;
-            j--;
-        }
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the rotated array after shifting its elements k steps to the right.
+- **Example:** `[60, 70, 10, 20, 30, 40, 50]`
+- **Constraints:**
+	- The output array should be the result of rotating the input array by k steps.
 
-### 🌟 Rotate Array by `k` Steps
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to rotate the array in-place by shifting its elements to the right by k steps.
 
-The problem requires us to rotate an array of integers to the right by `k` steps, meaning that we shift every element of the array to the right by `k` positions, with the last elements wrapping around to the beginning.
+- Step 1: Calculate k modulo the length of the array to handle cases where k is larger than the array size.
+- Step 2: Reverse the entire array.
+- Step 3: Reverse the first k elements of the array.
+- Step 4: Reverse the remaining elements from k to the end of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [10, 20, 30, 40, 50, 60, 70], k = 2`  \
+  **Explanation:** The list is [10, 20, 30, 40, 50, 60, 70]. After rotating 2 steps to the right, the array becomes [60, 70, 10, 20, 30, 40, 50].
 
-#### Example:
-- **Input**: `nums = [1, 2, 3, 4, 5, 6, 7]`, `k = 3`
-- **Output**: `[5, 6, 7, 1, 2, 3, 4]`
-  
-- **Input**: `nums = [-1, -100, 3, 99]`, `k = 2`
-- **Output**: `[3, 99, -1, -100]`
+{{< dots >}}
+## Approach 🚀
+The approach involves rotating the array using an in-place algorithm by reversing the array in segments.
 
-### 💡 Approach
-
-To solve this efficiently, we can use the **Reverse Subarray Approach**. The idea is to rotate the array in-place by reversing parts of the array to achieve the desired rotation.
-
-#### Key Steps:
-1. **Modulo Operation**: Since rotating an array of length `n` by `k` steps is the same as rotating it by `k % n` steps, we first reduce `k` if it's larger than the array size. This avoids unnecessary rotations.
-   
-2. **Reverse the Entire Array**: By reversing the entire array, the elements that should be moved to the front are placed at the end.
-
-3. **Reverse the First `k` Elements**: After reversing the entire array, reverse the first `k` elements to place them in the correct order at the beginning.
-
-4. **Reverse the Remaining Elements**: Finally, reverse the rest of the array (from index `k` to the end) to restore their original order.
-
-This method ensures that we rotate the array in-place with a time complexity of **O(n)** and a space complexity of **O(1)**.
-
-### 🛠 Code Breakdown
-
-#### 1. The `rotate` Function:
-
+### Initial Thoughts 💭
+- The key observation is that rotating the array can be efficiently done by reversing sections of the array.
+- Reversing the entire array and then reversing parts of it is an effective approach to achieve the desired rotation.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, no rotation is needed.
+- For large input arrays, ensure that the solution handles up to 10^5 elements efficiently.
+- If k is zero, the array remains unchanged.
+- The array will always contain at least one element.
+{{< dots >}}
+## Code 💻
 ```cpp
 void rotate(vector<int>& nums, int k) {
-    k = k % nums.size();  // Step 1: Adjust k to be within the array size
-    rev(nums, 0, nums.size() - 1);  // Step 2: Reverse the entire array
-    rev(nums, 0, k - 1);  // Step 3: Reverse the first k elements
-    rev(nums, k, nums.size() - 1);  // Step 4: Reverse the remaining elements
+    k = k % nums.size();
+    rev(nums, 0, nums.size() - 1);
+    rev(nums, 0, k - 1);
+    rev(nums, k, nums.size() - 1);
+    
 }
-```
 
-- **Step 1**: `k = k % nums.size()` ensures that `k` is within the range of the array size. For example, rotating an array of length 5 by 7 positions is equivalent to rotating it by 2 positions.
-
-- **Step 2**: Reverse the entire array using the helper function `rev`.
-
-- **Step 3**: Reverse the first `k` elements to place them at the front.
-
-- **Step 4**: Reverse the remaining elements from index `k` to the end of the array to restore their original order.
-
-#### 2. The `rev` Helper Function:
-
-```cpp
 void rev(vector<int>& nums, int i, int j) {
     while(i <= j) {
         int tmp = nums[i];
@@ -113,26 +96,100 @@ void rev(vector<int>& nums, int i, int j) {
     }
 }
 ```
-- This helper function reverses the elements of the array from index `i` to index `j`. It swaps the elements at the two ends (`i` and `j`) and moves towards the center until all elements are reversed.
 
-### 📊 Complexity Analysis
+This code defines a solution for rotating an array to the right by 'k' steps using a reversal algorithm. The 'rev' helper function reverses parts of the array to achieve the final rotated order.
 
-#### Time Complexity:
-- **O(n)**: The time complexity is **O(n)**, where `n` is the length of the array. The total number of operations is proportional to the array size since each reverse operation takes linear time.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	void rotate(vector<int>& nums, int k) {
+	```
+	Define the function 'rotate' which takes a vector of integers 'nums' and an integer 'k', and rotates the array to the right by 'k' steps.
 
-#### Space Complexity:
-- **O(1)**: The solution uses constant space since we only need a few variables for the indices and no additional data structures. The reversal is done in-place.
+2. **Modulo Operation**
+	```cpp
+	    k = k % nums.size();
+	```
+	Adjust 'k' by taking the modulo with the size of the array. This ensures that if 'k' is larger than the array size, it will rotate the array the correct number of times.
 
-### ✅ Conclusion
+3. **Reverse Array**
+	```cpp
+	    rev(nums, 0, nums.size() - 1);
+	```
+	Reverse the entire array to facilitate the rotating process. This step prepares the array for further segment reversals.
 
-The **Reverse Subarray Approach** is an elegant and efficient solution for rotating an array in-place. By reversing parts of the array, we can achieve the rotation with a time complexity of **O(n)** and constant space **O(1)**.
+4. **Reverse First Segment**
+	```cpp
+	    rev(nums, 0, k - 1);
+	```
+	Reverse the first 'k' elements of the array. This step begins the transformation toward the rotated array.
 
-#### Key Insights:
-- **Efficient In-place Operation**: The solution avoids additional space usage by modifying the array in place.
-- **Modulo Optimization**: The modulo operation ensures we handle cases where `k` is larger than the array size effectively.
-- **Reversal Trick**: By performing three reversal operations, we achieve the desired rotation in an intuitive and efficient way.
+5. **Reverse Second Segment**
+	```cpp
+	    rev(nums, k, nums.size() - 1);
+	```
+	Reverse the remaining elements from index 'k' to the end of the array. This completes the rotation process.
 
-This approach is optimal for rotating arrays in competitive programming and technical interviews due to its simplicity and efficiency.
+6. **Helper Function Definition**
+	```cpp
+	void rev(vector<int>& nums, int i, int j) {
+	```
+	Define the helper function 'rev' which reverses a segment of the array between indices 'i' and 'j'.
+
+7. **While Loop**
+	```cpp
+	    while(i <= j) {
+	```
+	Start a while loop that runs until the indices 'i' and 'j' meet, which will swap elements in the array.
+
+8. **Swap Elements**
+	```cpp
+	        int tmp = nums[i];
+	```
+	Store the element at index 'i' in a temporary variable 'tmp' to prepare for the swap.
+
+9. **Swap Elements**
+	```cpp
+	        nums[i] = nums[j];
+	```
+	Replace the element at index 'i' with the element at index 'j'.
+
+10. **Swap Elements**
+	```cpp
+	        nums[j] = tmp;
+	```
+	Replace the element at index 'j' with the value stored in 'tmp', completing the swap.
+
+11. **Update Indices**
+	```cpp
+	        i++;
+	```
+	Increment the index 'i' to move towards the middle of the segment.
+
+12. **Update Indices**
+	```cpp
+	        j--;
+	```
+	Decrement the index 'j' to move towards the middle of the segment.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the array, as each reversal operation involves iterating through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as the solution only requires a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotate-array/description/)
 

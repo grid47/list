@@ -14,116 +14,176 @@ img_src = ""
 youtube = "wbXDrozEtOs"
 youtube_upload_date="2023-07-23"
 youtube_thumbnail="https://i.ytimg.com/vi/wbXDrozEtOs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array 'nums' consisting of positive integers. You can repeatedly perform an operation where you choose an index 'i' such that 'nums[i] <= nums[i + 1]', replace 'nums[i + 1]' with 'nums[i] + nums[i + 1]', and remove 'nums[i]'. Your task is to determine the largest possible value that can remain in the array after performing any number of operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 0-indexed array of positive integers, 'nums'.
+- **Example:** `Input: nums = [2, 5, 7, 9, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maxArrayValue(vector<int>& in) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest possible value that can remain in the array after performing the operations.
+- **Example:** `Output: 21`
+- **Constraints:**
 
-        int n = in.size();        
-        vector<long long> nums(n, 0);
-        
-        for(int i = 0; i < n; i++)
-            nums[i] = in[i];
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the largest element that can be obtained after performing the operations.
 
-        long long res = nums[n - 1];
-        
-        for(int i = n - 1; i >= 0; i--) {
-            res = max(res, (long long)nums[i]);
-            if(i > 0 && nums[i] >= nums[i - 1]) {
-                nums[i - 1] += nums[i];
-            }
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+- Iterate through the array from the last element to the first.
+- For each element, check if it's greater than or equal to the previous element.
+- If so, add the current element to the previous element, remove the current element, and continue.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in the input array are positive integers.
+- The input array may contain a variety of sizes, ranging from 1 to 10^5 elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2, 5, 7, 9, 3]`  \
+  **Explanation:** Starting with [2, 5, 7, 9, 3], we perform the operations: [7, 7, 9, 3] -> [7, 16, 3] -> [23, 3]. The largest possible element is 21.
 
-### Problem Statement
+- **Input:** `Input: nums = [4, 1, 3]`  \
+  **Explanation:** After performing the operations [5, 3] -> [8], the largest value is 8.
 
-The problem asks to find the maximum possible value that can be obtained from an array, given the operation where adjacent elements of the array can be merged if the current element is greater than or equal to the previous element. When two adjacent elements are merged, the first element of the pair is updated by adding the value of the second element. The task is to compute the maximum possible value that can be obtained after applying this operation optimally.
+{{< dots >}}
+## Approach 🚀
+To maximize the largest element in the array, we will combine adjacent elements based on the condition that the current element is less than or equal to the next.
 
-### Approach
-
-The goal is to find the maximum possible value in the array after applying the merge operation optimally. The algorithm needs to efficiently compute this value by traversing the array and merging adjacent elements wherever it is valid (i.e., when the current element is greater than or equal to the previous element).
-
-To solve this problem, we can take the following approach:
-
-1. **Initialization:**
-   - We need to initialize an array `nums` that holds the same values as the input array `in`, so that we can modify it during the merging process without affecting the original input.
-   - A variable `res` will keep track of the maximum value encountered during the process.
-
-2. **Traverse the Array from Right to Left:**
-   - We start from the last element of the array and iterate backward. This ensures that we are processing possible merges from the end of the array to the beginning.
-   - While iterating, we check if the current element is greater than or equal to the previous element. If it is, we merge the two elements by adding the current element's value to the previous element.
-   - After merging, we update the array accordingly and continue checking the remaining elements.
-
-3. **Maximize the Result:**
-   - During each iteration, we keep track of the maximum value encountered so far by comparing the current element (`nums[i]`) with the previously stored maximum (`res`).
-
-4. **Return the Maximum Value:**
-   - After completing the traversal and merging operations, the `res` variable will hold the maximum possible value that can be obtained.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The process can be viewed as accumulating values into the largest possible element while traversing from the end of the array.
+- I need to efficiently combine values when possible and keep track of the largest value in the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is guaranteed to have at least one element, so no need to handle empty inputs.
+- Ensure the solution is optimized for arrays with a length of up to 10^5.
+- If all elements are already in decreasing order, no operation will be possible, and the largest value is the last element.
+- Handle arrays with up to 10^5 elements efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 long long maxArrayValue(vector<int>& in) {
-    int n = in.size();  // Get the size of the input array
-    vector<long long> nums(n, 0);  // Create a new array to store the elements of the input
 
-    // Copy elements from the input array to nums
-    for(int i = 0; i < n; i++) 
+    int n = in.size();        
+    vector<long long> nums(n, 0);
+    
+    for(int i = 0; i < n; i++)
         nums[i] = in[i];
 
-    long long res = nums[n - 1];  // Initialize the result with the last element of the array
-```
-
-- The code starts by calculating the size of the input array (`n`) and creating a `nums` array to store the elements. We initialize `res` with the last element of the array since it will serve as the starting point for our maximum value.
-
-```cpp
-    // Traverse the array from right to left
+    long long res = nums[n - 1];
+    
     for(int i = n - 1; i >= 0; i--) {
-        res = max(res, (long long)nums[i]);  // Keep track of the maximum value encountered so far
-
-        // If the current element is greater than or equal to the previous element, merge them
+        res = max(res, (long long)nums[i]);
         if(i > 0 && nums[i] >= nums[i - 1]) {
-            nums[i - 1] += nums[i];  // Merge nums[i] into nums[i - 1]
+            nums[i - 1] += nums[i];
         }
     }
-```
-
-- The core logic of the solution is contained in this loop. We iterate backward through the `nums` array, checking for valid merges. If `nums[i]` is greater than or equal to `nums[i - 1]`, we merge the two elements by adding `nums[i]` to `nums[i - 1]`.
-- We also update the `res` variable on each iteration to ensure it holds the maximum value encountered.
-
-```cpp
-    return res;  // Return the maximum value found
+    return res;
 }
 ```
 
-- Finally, after completing the backward traversal and possible merges, we return the maximum value stored in `res`.
+This function computes the maximum possible value from a given array of integers by applying a specific transformation. It iterates over the array from the last element, updating the result if a larger value is found and adjusting the previous elements when certain conditions are met.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long maxArrayValue(vector<int>& in) {
+	```
+	The function `maxArrayValue` is declared, accepting a reference to a vector of integers `in` and returning a long long value, which is the maximum possible value after applying transformations.
 
-#### Time Complexity:
+2. **Empty Line**
+	```cpp
+	
+	```
+	An empty line to separate sections of code for better readability.
 
-- The time complexity of this algorithm is **O(n)**, where `n` is the size of the input array. This is because the algorithm iterates through the array exactly once (from the last element to the first), performing constant-time operations inside the loop.
+3. **Variable Initialization**
+	```cpp
+	    int n = in.size();        
+	```
+	The variable `n` is initialized to store the size of the input vector `in`, which is used to iterate over the array.
 
-#### Space Complexity:
+4. **Vector Initialization**
+	```cpp
+	    vector<long long> nums(n, 0);
+	```
+	A vector `nums` of type long long is initialized with `n` elements, all set to 0. This vector will store the transformed values of the input array.
 
-- The space complexity is **O(n)**, where `n` is the size of the input array. This is because we create an auxiliary array `nums` to store the elements of the input array. The space used by this array is proportional to the size of the input.
+5. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	A for loop is initiated to iterate through the entire input vector `in`. Each element will be copied to the corresponding index in `nums`.
 
-### Conclusion
+6. **Value Assignment**
+	```cpp
+	        nums[i] = in[i];
+	```
+	Inside the loop, each element of the input array `in` is copied into the `nums` array.
 
-This solution provides an efficient way to solve the problem of finding the maximum possible value in the array after applying the merge operation. By iterating backward through the array and merging elements wherever applicable, the algorithm ensures that the array is processed in an optimal manner. The time complexity of **O(n)** ensures that this approach will work efficiently even for large input sizes. The space complexity of **O(n)** is manageable and required to store the intermediate results during the merging process.
+7. **Variable Initialization**
+	```cpp
+	    long long res = nums[n - 1];
+	```
+	The variable `res` is initialized with the last element of the `nums` array. This will track the maximum value during the iteration.
 
-This approach effectively solves the problem while maintaining a clear and efficient implementation.
+8. **Loop Initialization**
+	```cpp
+	    for(int i = n - 1; i >= 0; i--) {
+	```
+	A for loop is initiated to iterate through the `nums` array in reverse order, from the last element to the first.
+
+9. **Maximum Update**
+	```cpp
+	        res = max(res, (long long)nums[i]);
+	```
+	The `res` variable is updated to the maximum of its current value and the current element in `nums`. This ensures `res` holds the largest value encountered.
+
+10. **Condition Check**
+	```cpp
+	        if(i > 0 && nums[i] >= nums[i - 1]) {
+	```
+	An if statement checks if the current element `nums[i]` is greater than or equal to the previous element `nums[i - 1]` and if the index is greater than 0.
+
+11. **Value Update**
+	```cpp
+	            nums[i - 1] += nums[i];
+	```
+	If the condition is true, the previous element `nums[i - 1]` is incremented by the current element `nums[i]`. This transformation ensures that larger values accumulate towards the start of the array.
+
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the value of `res`, which now holds the maximum possible value obtained after processing all elements of the input array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, O(n), as we traverse the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case when storing a copy of the array, but it can be optimized to O(1) if done in-place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-element-in-an-array-after-merge-operations/description/)
 

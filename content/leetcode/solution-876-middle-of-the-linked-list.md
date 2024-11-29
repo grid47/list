@@ -14,146 +14,133 @@ img_src = ""
 youtube = "-WV-G-QwB38"
 youtube_upload_date="2023-02-19"
 youtube_thumbnail="https://i.ytimg.com/vi/-WV-G-QwB38/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the head of a singly linked list. Your task is to find and return the middle node of the list. If there are two middle nodes, return the second one.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a singly linked list with nodes containing integer values.
+- **Example:** `Input: head = [1, 2, 3, 4, 5]`
+- **Constraints:**
+	- 1 <= number of nodes <= 100
+	- 1 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* middleNode(ListNode* head) {
-        ListNode* slow = head, *fast = head;
-        while(fast && fast->next) {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        // if(!fast)
-            // return slow->next;
-        return slow;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the middle node of the linked list. If the list has two middle nodes, return the second one.
+- **Example:** `Output: [3, 4, 5]`
+- **Constraints:**
+	- The output should be the list starting from the middle node.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the middle node of the linked list using a two-pointer approach.
 
-The problem asks us to find the middle node of a singly linked list. A singly linked list consists of nodes where each node has a value (`val`) and a pointer (`next`) to the next node in the list. The task is to return the middle node of the linked list.
+- Use two pointers, 'slow' and 'fast'. Initialize both to the head of the list.
+- Move the 'slow' pointer one step at a time, and the 'fast' pointer two steps at a time.
+- When the 'fast' pointer reaches the end of the list, the 'slow' pointer will be at the middle node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list is non-empty and contains at least one node.
+- The linked list may have an even or odd number of nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [1, 2, 3, 4, 5]`  \
+  **Explanation:** The list has 5 nodes. The middle node is 3, so the output will be the sublist starting from node 3: [3, 4, 5].
 
-If there are two middle nodes (in case of an even number of nodes), the second one should be returned.
+- **Input:** `Input: head = [1, 2, 3, 4, 5, 6]`  \
+  **Explanation:** The list has 6 nodes. The two middle nodes are 3 and 4, and since the second middle node should be returned, the output will be the sublist starting from node 4: [4, 5, 6].
 
-### Example:
+{{< dots >}}
+## Approach 🚀
+We can use the two-pointer technique to efficiently find the middle node of the linked list. The 'slow' pointer will move one step at a time, while the 'fast' pointer will move two steps at a time. When the fast pointer reaches the end, the slow pointer will be at the middle node.
 
-Given the linked list:
-
-`1 -> 2 -> 3 -> 4 -> 5`
-
-- **Input**: `head = [1, 2, 3, 4, 5]`
-- **Output**: `[3, 4, 5]` (The middle node is `3` in this case)
-
-For another linked list with an even number of nodes:
-
-`1 -> 2 -> 3 -> 4 -> 5 -> 6`
-
-- **Input**: `head = [1, 2, 3, 4, 5, 6]`
-- **Output**: `[4, 5, 6]` (The middle node is `4`, the second of the two middle nodes)
-
-### Approach
-
-To solve this problem, we will use a **two-pointer technique** commonly referred to as the **Tortoise and Hare algorithm**. The idea is to use two pointers that traverse the linked list at different speeds. By the time the fast pointer reaches the end of the list, the slow pointer will be at the middle.
-
-- **Fast Pointer (Hare)**: This pointer will move two steps at a time. It traverses the linked list at a faster pace.
-- **Slow Pointer (Tortoise)**: This pointer will move one step at a time. It traverses the linked list at a slower pace.
-
-### Key Insights:
-1. The fast pointer moves twice as fast as the slow pointer. This means that when the fast pointer reaches the end of the list, the slow pointer will be positioned at the middle.
-2. The approach works even for linked lists with an even number of nodes. If the list has an even length, the slow pointer will point to the second of the two middle nodes.
-
-### Algorithm:
-1. Initialize two pointers, `slow` and `fast`, both pointing to the head of the linked list.
-2. Traverse the list with the `slow` pointer moving one step at a time and the `fast` pointer moving two steps at a time.
-3. If the `fast` pointer reaches the end of the list (`fast == nullptr`), the `slow` pointer will be pointing at the middle node.
-4. The algorithm terminates when the `fast` pointer cannot proceed further (i.e., when `fast` or `fast->next` is `nullptr`).
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The two-pointer technique is optimal for this problem as it allows us to traverse the list in a single pass while keeping track of the middle node.
+- The method ensures that we can handle lists with both even and odd numbers of nodes.
+{{< dots >}}
+### Edge Cases 🌐
+- If the list is empty (no nodes), return null or handle as an edge case.
+- The solution should efficiently handle up to 100 nodes.
+- If the list has only one node, the middle node is that node itself.
+- Ensure that the solution works for both even and odd-length lists.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    ListNode* middleNode(ListNode* head) {
-        // Step 1: Initialize the slow and fast pointers.
-        ListNode* slow = head, *fast = head;
-        
-        // Step 2: Traverse the list with the slow and fast pointers.
-        // The slow pointer moves one step, and the fast pointer moves two steps.
-        while (fast && fast->next) {
-            slow = slow->next; // Move slow pointer by 1 step
-            fast = fast->next->next; // Move fast pointer by 2 steps
-        }
-        
-        // Step 3: Return the slow pointer when the fast pointer reaches the end.
-        return slow;
+ListNode* middleNode(ListNode* head) {
+    ListNode* slow = head, *fast = head;
+    while(fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
     }
-};
+    // if(!fast)
+        // return slow->next;
+    return slow;
+}
 ```
 
-### Step-by-Step Explanation:
+This code implements an algorithm to find the middle node of a singly linked list using the two-pointer technique. It uses one slow pointer that advances one step at a time, and one fast pointer that advances two steps at a time. When the fast pointer reaches the end, the slow pointer is at the middle.
 
-1. **Pointer Initialization**:
-   - We initialize two pointers: `slow` and `fast`. Both are set to the head of the linked list.
-   
-   ```cpp
-   ListNode* slow = head, *fast = head;
-   ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	ListNode* middleNode(ListNode* head) {
+	```
+	The function `middleNode` takes a pointer to the head of a singly linked list and returns a pointer to the middle node of the list.
 
-2. **Traversing the Linked List**:
-   - We use a `while` loop to traverse the list. The loop continues until the `fast` pointer reaches the end of the list (i.e., `fast == nullptr`) or the `fast->next` pointer is `nullptr` (for the case when the number of nodes is odd).
-   - Inside the loop:
-     - The `slow` pointer moves one step forward by pointing to `slow->next`.
-     - The `fast` pointer moves two steps forward by pointing to `fast->next->next`.
-     
-   ```cpp
-   while (fast && fast->next) {
-       slow = slow->next; // Move slow pointer by 1 step
-       fast = fast->next->next; // Move fast pointer by 2 steps
-   }
-   ```
+2. **Pointer Initialization**
+	```cpp
+	    ListNode* slow = head, *fast = head;
+	```
+	Two pointers, `slow` and `fast`, are initialized to the head of the list. The `slow` pointer moves one node at a time, while the `fast` pointer moves two nodes at a time.
 
-3. **Return the Middle Node**:
-   - When the loop terminates, the `slow` pointer will be pointing to the middle node of the list. This is because the `fast` pointer has traversed the list twice as fast as the `slow` pointer, ensuring that when `fast` reaches the end, `slow` is at the middle.
-   
-   ```cpp
-   return slow;
-   ```
+3. **While Loop**
+	```cpp
+	    while(fast && fast->next) {
+	```
+	A `while` loop is used to traverse the list. The loop continues as long as the `fast` pointer and the `fast->next` pointer are not null.
 
-### Complexity Analysis
+4. **Pointer Movement**
+	```cpp
+	        slow = slow->next;
+	```
+	The `slow` pointer moves one step forward by advancing to the next node in the list.
 
-#### Time Complexity:
-- **O(n)**: Both the `slow` and `fast` pointers traverse the list only once. Since the `fast` pointer moves twice as fast as the `slow` pointer, the total number of iterations is proportional to the length of the list, `n`. Hence, the time complexity is O(n), where `n` is the number of nodes in the linked list.
+5. **Pointer Movement**
+	```cpp
+	        fast = fast->next->next;
+	```
+	The `fast` pointer moves two steps forward by advancing to the next node twice, skipping one node in between.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is O(1) because we are using only two additional pointers (`slow` and `fast`) to traverse the list. No additional space is used that depends on the size of the input.
+6. **Return Statement**
+	```cpp
+	    return slow;
+	```
+	After the loop finishes, the `slow` pointer is returned, which points to the middle node of the list.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution provides an efficient way to find the middle node of a singly linked list using the **Tortoise and Hare algorithm**, which operates in linear time and constant space. The two-pointer approach ensures that we traverse the list only once, making the algorithm highly efficient, even for large linked lists. 
+The time complexity is O(n), where n is the number of nodes in the list, as we need to traverse the list once.
 
-- **Time Complexity**: O(n), where `n` is the number of nodes in the list.
-- **Space Complexity**: O(1), as we use a constant amount of extra space.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This approach works perfectly for both odd and even length lists, making it a versatile solution for finding the middle node.
+The space complexity is O(1), as we only use a constant amount of extra space for the two pointers.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/middle-of-the-linked-list/description/)
 

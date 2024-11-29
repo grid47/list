@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "7aSAbqCWhwE"
 youtube_upload_date="2024-03-11"
 youtube_thumbnail="https://i.ytimg.com/vi/7aSAbqCWhwE/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,148 +28,181 @@ youtube_thumbnail="https://i.ytimg.com/vi/7aSAbqCWhwE/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a number 'n', find all possible combinations of 'n' pairs of parentheses that are balanced and well-formed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer 'n', representing the number of pairs of parentheses.
+- **Example:** `Input: n = 2`
+- **Constraints:**
+	- 1 <= n <= 8
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    void gen(string op, vector<string> &ans, int open, int closed, int n, int i) {
-        if(i== 2*n) {
-            ans.push_back(op);
-            return;
-        }
-        
-        if(open < n) {
-            gen(op + "(", ans, open + 1, closed,n, i + 1);
-        }
-        if(open > closed) {
-            gen(op + ")", ans, open, closed + 1,n, i + 1);
-        }
-    }
-    
-    vector<string> generateParenthesis(int n) {
-        vector<string> ans;
-        gen("", ans, 0, 0, n, 0);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Output a list of strings where each string is a unique combination of 'n' pairs of balanced parentheses.
+- **Example:** `Output: ["(())", "()()"]`
+- **Constraints:**
+	- The output strings must be well-formed parentheses.
 
-### 🌟 **Generating Valid Parentheses Combinations** – A Step-by-Step Guide!
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To generate all valid combinations of balanced parentheses for a given 'n'.
 
-Let’s walk through how to generate all possible valid combinations of parentheses for a given number `n` pairs of parentheses. With a little bit of **backtracking**, we can efficiently explore the possibilities and generate all valid combinations! 🚀
+- Use a recursive function to explore all possibilities.
+- Track the count of open and closed parentheses to maintain balance.
+- Append a combination to the result when it reaches the required length.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input 'n' is always a positive integer within the given constraints.
+- Output strings are sorted in the order they are generated.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 3`  \
+  **Explanation:** The output will be ["((()))", "(()())", "(())()", "()(())", "()()()"]. These are all the valid combinations for 3 pairs of parentheses.
 
----
+- **Input:** `Input: n = 1`  \
+  **Explanation:** The output will be ["()"]. There is only one valid combination for 1 pair of parentheses.
 
-#### 📝 **The Problem**
+{{< dots >}}
+## Approach 🚀
+A recursive backtracking approach is used to generate all valid combinations of parentheses.
 
-Given an integer `n`, the task is to generate **all valid combinations** of well-formed parentheses. Each combination should have exactly `n` opening parentheses `(` and `n` closing parentheses `)`, and the parentheses must be balanced.
-
----
-
-#### 🧠 **Backtracking: The Key to Success**
-
-Backtracking is the technique we'll use to explore all possible combinations. Here's how it works:
-
-1. We can **add an opening parenthesis** `(` as long as the number of opening parentheses used is less than `n`.
-2. We can **add a closing parenthesis** `)` only if the number of closing parentheses used is less than the number of opening parentheses used. This ensures that the parentheses are balanced.
-
-By recursively exploring all possibilities and adhering to these rules, we can generate all valid combinations.
-
----
-
-#### 🔑 **Code Breakdown: Backtracking in Action**
-
-Let’s break down the code to see how the magic happens!
-
-**Step 1: The `generateParenthesis` Function**
-
+### Initial Thoughts 💭
+- The problem involves generating all valid combinations, so recursion is suitable.
+- The length of the string for a valid combination will always be 2 * n.
+- Each step adds either an open or a closed parenthesis.
+- The count of open parentheses should not exceed 'n'.
+- The count of closed parentheses should not exceed the count of open ones.
+{{< dots >}}
+### Edge Cases 🌐
+- n = 0 (though this is outside constraints).
+- n = 8 (the maximum constraint).
+- n = 1, where there is only one possible output.
+- Ensure parentheses are well-formed even at maximum input size.
+{{< dots >}}
+## Code 💻
 ```cpp
+
+void gen(string op, vector<string> &ans, int open, int closed, int n, int i) {
+    if(i== 2*n) {
+        ans.push_back(op);
+        return;
+    }
+    
+    if(open < n) {
+        gen(op + "(", ans, open + 1, closed,n, i + 1);
+    }
+    if(open > closed) {
+        gen(op + ")", ans, open, closed + 1,n, i + 1);
+    }
+}
+
 vector<string> generateParenthesis(int n) {
     vector<string> ans;
     gen("", ans, 0, 0, n, 0);
     return ans;
 }
 ```
-- This is the starting point! We initialize an empty result vector `ans` to hold our valid combinations and call the helper function `gen` to start generating the strings.
 
----
+This code generates all possible valid combinations of n pairs of parentheses using a backtracking approach.
 
-**Step 2: The Recursive `gen` Function**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	void gen(string op, vector<string> &ans, int open, int closed, int n, int i) {
+	```
+	This line declares a recursive helper function 'gen' to generate valid parentheses combinations.
 
-```cpp
-void gen(string op, vector<string> &ans, int open, int closed, int n, int i) {
-    if(i == 2 * n) {
-        ans.push_back(op);
-        return;
-    }
-    
-    if(open < n) {
-        gen(op + "(", ans, open + 1, closed, n, i + 1);
-    }
-    if(open > closed) {
-        gen(op + ")", ans, open, closed + 1, n, i + 1);
-    }
-}
-```
-- **Base Case**:  
-    Once we’ve generated a string of length `2 * n` (because each valid string must have `n` opening and `n` closing parentheses), we add that string to our result list.
+2. **Base Case**
+	```cpp
+	    if(i== 2*n) {
+	```
+	This line checks if the current string 'op' has reached the desired length of 2*n. If so, it's a valid combination, so it's added to the 'ans' vector.
 
-    ```cpp
-    if(i == 2 * n) {
-        ans.push_back(op);
-        return;
-    }
-    ```
+3. **Vector Operation**
+	```cpp
+	        ans.push_back(op);
+	```
+	Adds the current valid parenthesis combination 'op' to the 'ans' vector.
 
-- **Recursive Case**:
-    - **Adding an Opening Parenthesis**:  
-        If we haven't yet used all `n` opening parentheses, we add one more and recurse to generate the rest of the string.
-        
-        ```cpp
-        if(open < n) {
-            gen(op + "(", ans, open + 1, closed, n, i + 1);
-        }
-        ```
-    
-    - **Adding a Closing Parenthesis**:  
-        We can add a closing parenthesis if the number of closing parentheses used is less than the number of opening parentheses. This keeps the string balanced.
-        
-        ```cpp
-        if(open > closed) {
-            gen(op + ")", ans, open, closed + 1, n, i + 1);
-        }
-        ```
+4. **Return**
+	```cpp
+	        return;
+	```
+	Returns from the recursive call.
 
----
+5. **Conditional Check**
+	```cpp
+	    if(open < n) {
+	```
+	Checks if we can add an opening parenthesis. This is possible only if the number of open parentheses is less than 'n'.
 
-#### ⏳ **Time and Space Complexity**
+6. **Recursive Call**
+	```cpp
+	        gen(op + "(", ans, open + 1, closed,n, i + 1);
+	```
+	Recursively calls the 'gen' function with an additional opening parenthesis added to the current string 'op'.
 
-- **Time Complexity**:  
-  **O(4^n / √n)**, where `n` is the number of pairs of parentheses. The recursive backtracking approach explores all possible valid combinations, and the number of valid combinations is asymptotically given by the Catalan number.
+7. **Conditional Check**
+	```cpp
+	    if(open > closed) {
+	```
+	Checks if we can add a closing parenthesis. This is possible only if the number of open parentheses is greater than the number of closed parentheses.
 
-- **Space Complexity**:  
-  **O(n)**, where `n` is the number of pairs. The recursion depth is at most `2 * n` (the length of the string we’re building), making the space complexity proportional to `n`.
+8. **Recursive Call**
+	```cpp
+	        gen(op + ")", ans, open, closed + 1,n, i + 1);
+	```
+	Recursively calls the 'gen' function with an additional closing parenthesis added to the current string 'op'.
 
----
+9. **Function End**
+	```cpp
+	}
+	```
+	End of the recursive 'gen' function.
 
-#### 💡 **Why This Approach Works!**
+10. **Function Declaration**
+	```cpp
+	vector<string> generateParenthesis(int n) {
+	```
+	This line declares the main function 'generateParenthesis' that takes the number of pairs 'n' as input and returns a vector of all valid parentheses combinations.
 
-- **Elegant and Simple**:  
-    The backtracking approach elegantly handles the constraints of the problem. Each recursive call explores adding an opening or closing parenthesis, ensuring the parentheses remain balanced.
+11. **Vector Initialization**
+	```cpp
+	    vector<string> ans;
+	```
+	Initializes an empty vector 'ans' to store the generated valid parentheses combinations.
 
-- **Efficiency**:  
-    Instead of generating all possible combinations and then filtering out invalid ones, this approach directly generates only valid combinations, saving computation time.
+12. **Function Call**
+	```cpp
+	    gen("", ans, 0, 0, n, 0);
+	```
+	Calls the recursive 'gen' function with an empty string, initial open and closed parentheses count as 0, and the target number of pairs 'n'.
 
----
+13. **Return**
+	```cpp
+	    return ans;
+	```
+	Returns the 'ans' vector containing all valid parentheses combinations.
 
-#### 🌱 **Keep Practicing!**
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(4^n / sqrt(n))
+- **Average Case:** O(4^n / sqrt(n))
+- **Worst Case:** O(4^n / sqrt(n))
 
-Backtracking is a powerful technique, and the more you practice it, the more natural it will become. This problem is a great exercise to understand recursion and constraints handling.
+Catalan number Cn gives the count of valid combinations, and generating each combination takes O(n).
 
-You’re doing awesome, and with each problem you solve, you’re getting closer to mastering these techniques! 💪
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The recursive stack depth is proportional to the length of the combination being generated.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/generate-parentheses/description/)
 

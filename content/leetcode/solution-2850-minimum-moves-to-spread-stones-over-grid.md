@@ -14,140 +14,263 @@ img_src = ""
 youtube = "__h7BgcH_Cs"
 youtube_upload_date="2023-09-10"
 youtube_thumbnail="https://i.ytimg.com/vi/__h7BgcH_Cs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 3x3 grid representing stones placed in each cell. In one move, you can move a stone from its current cell to an adjacent cell. The goal is to place one stone in each cell, minimizing the number of moves.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 3x3 grid where each cell contains an integer representing the number of stones in that cell.
+- **Example:** `grid = [[1, 1, 0], [1, 1, 1], [1, 2, 1]]`
+- **Constraints:**
+	- grid.length == grid[i].length == 3
+	- 0 <= grid[i][j] <= 9
+	- Sum of all grid[i][j] values is equal to 9.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumMoves(vector<vector<int>>& grid) {
-        // Base Case
-        int t = 0;
-        for (int i = 0; i < 3; ++i)
-            for (int j = 0; j < 3; ++j)
-                if (grid[i][j] == 0)
-                    t++;
-        if (t == 0)
-            return 0;
-        
-        int ans = INT_MAX;
-        for (int i = 0; i < 3; ++i)
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of moves required to place exactly one stone in each cell of the grid.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output is an integer indicating the minimum number of moves.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the minimum number of moves to place exactly one stone in each cell.
+
+- Identify cells that are empty (i.e., containing zero stones).
+- Determine the shortest move distance to transfer stones from cells containing more than one stone to empty cells.
+- Repeat until all cells contain exactly one stone.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is always 3x3 and contains exactly 9 stones.
+- Stones can be moved to any adjacent cell.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[1, 1, 0], [1, 1, 1], [1, 2, 1]]`  \
+  **Explanation:** Starting with stones placed as shown in the grid, it takes 3 moves to move the stones around so that each cell contains exactly one stone.
+
+- **Input:** `grid = [[1, 3, 0], [1, 0, 0], [1, 0, 3]]`  \
+  **Explanation:** In this case, it takes 4 moves to rearrange the stones and place exactly one in each cell.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves moving stones from cells with excess stones to empty cells while minimizing the number of moves required to distribute the stones evenly.
+
+### Initial Thoughts 💭
+- We need to consider the cells that already contain stones and find the nearest empty cells to move stones into.
+- A greedy approach can be employed to always move stones to the closest empty cell, minimizing the distance traveled.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty grid inputs since the grid is always 3x3.
+- The algorithm should efficiently handle the grid size, which is always fixed at 3x3.
+- When a grid has already one stone in each cell, no moves are needed.
+- The solution needs to be efficient enough to handle up to 9 stones in the grid.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumMoves(vector<vector<int>>& grid) {
+    // Base Case
+    int t = 0;
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 3; ++j)
+            if (grid[i][j] == 0)
+                t++;
+    if (t == 0)
+        return 0;
+    
+    int ans = INT_MAX;
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
         {
-            for (int j = 0; j < 3; ++j)
+            if (grid[i][j] == 0)
             {
-                if (grid[i][j] == 0)
+                for (int ni = 0; ni < 3; ++ni)
                 {
-                    for (int ni = 0; ni < 3; ++ni)
+                    for (int nj = 0; nj < 3; ++nj)
                     {
-                        for (int nj = 0; nj < 3; ++nj)
+                        int d = abs(ni - i) + abs(nj - j);
+                        if (grid[ni][nj] > 1)
                         {
-                            int d = abs(ni - i) + abs(nj - j);
-                            if (grid[ni][nj] > 1)
-                            {
-                                grid[ni][nj]--;
-                                grid[i][j]++;
-                                ans = min(ans, d + minimumMoves(grid));
-                                grid[ni][nj]++;
-                                grid[i][j]--;
-                            }
+                            grid[ni][nj]--;
+                            grid[i][j]++;
+                            ans = min(ans, d + minimumMoves(grid));
+                            grid[ni][nj]++;
+                            grid[i][j]--;
                         }
                     }
                 }
             }
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding the minimum number of moves to arrange the values in a 3x3 grid such that all cells in the grid contain the number `1`. Each move consists of transferring one unit from a cell with a value greater than `1` to a neighboring cell with a value of `0`. The goal is to determine the minimum number of moves needed to achieve this configuration, or to return `0` if the grid already satisfies the condition where all cells contain `1`.
-
-### Approach
-
-The solution to this problem is a recursive backtracking approach, where the algorithm explores different possibilities by attempting to move values between neighboring cells. The goal is to reduce the number of moves required to convert the grid into a state where every cell contains the value `1`. Since the grid size is small (3x3), we can afford to use a brute-force approach with backtracking to explore all possible moves.
-
-The key insight is to find an empty cell (a cell with the value `0`) and then attempt to move values from neighboring cells (cells that have values greater than `1`) into this empty cell. This continues recursively, and at each step, we check how many moves are needed to achieve the desired configuration. The recursion will continue until the grid is fully populated with `1`s, and the minimum number of moves is returned.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Base Case - Check if Grid is Already Solved
-```cpp
-int t = 0;
-for (int i = 0; i < 3; ++i)
-    for (int j = 0; j < 3; ++j)
-        if (grid[i][j] == 0)
-            t++;
-if (t == 0)
-    return 0;
-```
-- The function starts by checking if the grid is already solved, meaning all cells are filled with `1`s. The variable `t` counts the number of `0`s in the grid.
-- If `t` is `0`, meaning there are no `0`s left in the grid, it means the grid is already in the desired configuration, so the function returns `0`, indicating that no moves are required.
-
-#### Step 2: Initialize Variables for Recursive Search
-```cpp
-int ans = INT_MAX;
-```
-- The variable `ans` is initialized to the maximum possible integer value (`INT_MAX`). This will be used to store the minimum number of moves found during the recursive search.
-
-#### Step 3: Loop Over Each Cell to Find Empty Cells
-```cpp
-for (int i = 0; i < 3; ++i)
-{
-    for (int j = 0; j < 3; ++j)
-    {
-        if (grid[i][j] == 0)
-        {
-```
-- The algorithm loops over each cell in the grid to find an empty cell (`0`), which is where we will try to move values into. If an empty cell is found, the algorithm proceeds to explore the neighboring cells.
-
-#### Step 4: Loop Over Neighboring Cells to Transfer Values
-```cpp
-for (int ni = 0; ni < 3; ++ni)
-{
-    for (int nj = 0; nj < 3; ++nj)
-    {
-        int d = abs(ni - i) + abs(nj - j);
-        if (grid[ni][nj] > 1)
-        {
-            grid[ni][nj]--;
-            grid[i][j]++;
-            ans = min(ans, d + minimumMoves(grid));
-            grid[ni][nj]++;
-            grid[i][j]--;
-        }
-    }
+    return ans;
 }
 ```
-- After finding an empty cell `(i, j)`, the algorithm loops over all possible neighboring cells `(ni, nj)`. 
-- For each neighboring cell, the algorithm checks if it contains a value greater than `1` (since we can only move values from cells containing more than `1`).
-- If a valid move is possible, the algorithm decreases the value of the neighboring cell `grid[ni][nj]--`, increases the value of the empty cell `grid[i][j]++`, and then recursively calls the `minimumMoves` function to calculate the number of moves required to solve the grid from this new configuration.
-- After the recursive call, the algorithm backtracks by restoring the values of the grid (`grid[ni][nj]++` and `grid[i][j]--`).
 
-#### Step 5: Return the Minimum Moves
-```cpp
-return ans;
-```
-- Once all possible moves have been explored, the function returns the minimum number of moves required to reach the solved configuration.
+This function computes the minimum number of moves required to rearrange the elements in the grid such that a specific condition is met. It recursively moves elements around and tracks the number of moves.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumMoves(vector<vector<int>>& grid) {
+	```
+	This line defines the function 'minimumMoves' which takes a 2D vector 'grid' as input, representing the current state of the grid.
 
-#### Time Complexity:
-- The time complexity of this approach is exponential in nature because of the recursive exploration of the grid's state. In the worst case, the algorithm explores all possible grid configurations, leading to a time complexity of O(2^(3x3)) or O(2^9). However, since the grid size is fixed and small (3x3), this is manageable in practice, and the algorithm will run efficiently for the problem's constraints.
-- The algorithm also uses a brute-force approach with backtracking, which explores all combinations of moves. The number of recursive calls grows exponentially with each empty cell, and each call explores the grid's state by modifying the values.
+2. **Variable Declaration**
+	```cpp
+	    int t = 0;
+	```
+	This initializes a variable 't' to zero, which will be used to count the number of zeroes in the grid.
 
-#### Space Complexity:
-- The space complexity is primarily driven by the recursion depth, which depends on the number of empty cells in the grid. In the worst case, the recursion depth will be proportional to the number of empty cells, which is at most 9 (since the grid is 3x3). Therefore, the space complexity is O(9) in the worst case, but since the grid size is small, this is also efficient.
+3. **Loop**
+	```cpp
+	    for (int i = 0; i < 3; ++i)
+	```
+	This is the outer loop that iterates over the rows of the grid.
 
-### Conclusion
+4. **Loop**
+	```cpp
+	        for (int j = 0; j < 3; ++j)
+	```
+	This inner loop iterates over the columns of the grid.
 
-This solution employs a recursive backtracking approach to explore all possible configurations of the grid, calculating the minimum number of moves required to make all cells contain the value `1`. Despite the brute-force nature of the algorithm, it is efficient enough for the problem's constraints due to the small grid size (3x3). The recursive approach explores every possible move and backtracks to find the optimal solution, ensuring that the minimum number of moves is found.
+5. **Condition**
+	```cpp
+	            if (grid[i][j] == 0)
+	```
+	This condition checks if the current cell in the grid contains zero.
+
+6. **Action**
+	```cpp
+	                t++;
+	```
+	If a zero is found, increment the variable 't' to track the number of zeroes.
+
+7. **Condition**
+	```cpp
+	    if (t == 0)
+	```
+	This condition checks if there are no zeroes in the grid, in which case no moves are needed.
+
+8. **Return Statement**
+	```cpp
+	        return 0;
+	```
+	If there are no zeroes in the grid, the function returns 0, indicating no moves are required.
+
+9. **Variable Declaration**
+	```cpp
+	    int ans = INT_MAX;
+	```
+	This initializes a variable 'ans' to the maximum possible integer value, which will hold the minimum number of moves.
+
+10. **Loop**
+	```cpp
+	    for (int i = 0; i < 3; ++i)
+	```
+	This loop iterates over the rows of the grid again for checking possible moves.
+
+11. **Loop**
+	```cpp
+	        for (int j = 0; j < 3; ++j)
+	```
+	Inner loop to check each column within the current row.
+
+12. **Condition**
+	```cpp
+	            if (grid[i][j] == 0)
+	```
+	This condition checks again for the presence of a zero in the current grid cell.
+
+13. **Loop**
+	```cpp
+	                for (int ni = 0; ni < 3; ++ni)
+	```
+	This loop iterates over the rows to check for possible movements.
+
+14. **Loop**
+	```cpp
+	                    for (int nj = 0; nj < 3; ++nj)
+	```
+	Inner loop iterating over the columns to check each grid element for possible moves.
+
+15. **Block Start**
+	```cpp
+	                    {
+	```
+	Start of the block where the distance calculation and move checking occurs.
+
+16. **Distance Calculation**
+	```cpp
+	                        int d = abs(ni - i) + abs(nj - j);
+	```
+	This calculates the Manhattan distance between the current cell and the target cell.
+
+17. **Condition**
+	```cpp
+	                        if (grid[ni][nj] > 1)
+	```
+	This condition checks if the current target cell is eligible for a move (greater than 1).
+
+18. **Action**
+	```cpp
+	                            grid[ni][nj]--;
+	```
+	Decrement the value of the target cell.
+
+19. **Action**
+	```cpp
+	                            grid[i][j]++;
+	```
+	Increment the value of the current zero cell.
+
+20. **Recursive Call**
+	```cpp
+	                            ans = min(ans, d + minimumMoves(grid));
+	```
+	Make a recursive call to calculate the minimum number of moves after the current swap.
+
+21. **Action**
+	```cpp
+	                            grid[ni][nj]++;
+	```
+	Restore the value of the target cell after the recursive call.
+
+22. **Action**
+	```cpp
+	                            grid[i][j]--;
+	```
+	Restore the value of the current zero cell after the recursive call.
+
+23. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the minimum number of moves found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+The time complexity is O(1) because the grid size is fixed and the solution involves a fixed number of operations for a 3x3 grid.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only use a fixed amount of space to store the grid and perform calculations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/description/)
 

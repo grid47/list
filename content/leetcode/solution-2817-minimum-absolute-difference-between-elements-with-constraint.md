@@ -14,121 +14,164 @@ img_src = ""
 youtube = "iZkBnYIJ9Qc"
 youtube_upload_date="2023-08-13"
 youtube_thumbnail="https://i.ytimg.com/vi/iZkBnYIJ9Qc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array nums and an integer x. Find the minimum absolute difference between two elements in the array such that their indices are at least x apart.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer x. The array nums has length n, and the integer x satisfies 0 <= x < n.
+- **Example:** `nums = [7, 9, 5, 3], x = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 0 <= x < nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minAbsoluteDifference(vector<int>& nums, int x) {
-    set<int> s;
-    int res = INT_MAX;
-    for (int i = x; i < nums.size() && res > 0; ++i) {
-        s.insert(nums[i - x]);
-        auto it = s.upper_bound(nums[i]);
-        if (it != begin(s))
-            res = min(res, nums[i] - *prev(it));
-        if (it != end(s))
-            res = min(res, *it - nums[i]);
-    }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum absolute difference between two elements that are at least x indices apart.
+- **Example:** `Output: 0`
+- **Constraints:**
+	- The output should be a single integer representing the minimum absolute difference.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find two elements in the array that are at least x indices apart and minimize the absolute difference between them.
 
-The task requires finding the minimum absolute difference between two elements in the array `nums` such that the two elements are at least `x` indices apart. More formally, we are to return the minimum value of `|nums[i] - nums[j]|` for all pairs `(i, j)` where `|i - j| >= x`.
+- 1. Iterate through the array starting from index x.
+- 2. Maintain a sorted set of elements within the range of x indices apart.
+- 3. For each new element, calculate the absolute difference with the closest elements in the sorted set.
+- 4. Keep track of the minimum absolute difference.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is not empty, and the integer x is valid as per the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [7, 9, 5, 3], x = 2`  \
+  **Explanation:** The minimum absolute difference occurs between nums[0] = 7 and nums[3] = 7, both of which are at least 2 indices apart. The absolute difference is 0, which is the minimum.
 
-For example, given the array `nums = [1, 3, 6, 19, 20]` and `x = 2`, the function should find the minimum absolute difference between two numbers in `nums` where the difference in their indices is at least `x`. In this case, the smallest absolute difference is `1` (between `19` and `20`).
+{{< dots >}}
+## Approach 🚀
+We can use a sorted set to efficiently compute the minimum absolute difference between elements that are at least x indices apart.
 
-### Approach
-
-This problem is a variant of the classical "minimum absolute difference" problem, but with an added constraint that the indices of the two numbers must differ by at least `x`. A brute force solution would involve checking all possible pairs of elements with the given constraint, but that would lead to a time complexity of O(n^2), which is inefficient for large input sizes.
-
-A more efficient approach utilizes a **sorted data structure** (like a `set` in C++) to maintain a dynamically changing list of elements while iterating through the array. This allows us to quickly find the closest numbers to the current number as we move through the list, reducing the time complexity of the solution to O(n log n).
-
-The plan is to:
-1. Use a `set` to store the elements that are at least `x` indices apart.
-2. For each element in the array, use binary search (`upper_bound`) to quickly find the closest elements in the `set`.
-3. Track the minimum absolute difference found.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code:
-
+### Initial Thoughts 💭
+- The problem requires checking the difference between elements that are at least x indices apart.
+- A sorted set or tree can help efficiently find the minimum difference.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as per the constraints.
+- For large arrays, the algorithm should efficiently handle up to 10^5 elements.
+- When all elements in the array are identical, the minimum difference is 0.
+- The algorithm should handle arrays with up to 10^5 elements efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 int minAbsoluteDifference(vector<int>& nums, int x) {
-    set<int> s; // Set to store the numbers that are at least x indices apart
-    int res = INT_MAX; // Initialize the result to the maximum possible value
-```
-
-1. **Initialization**: 
-   - `set<int> s`: This `set` will store the elements of the array that are at least `x` indices apart. The `set` allows efficient binary search-like operations (`upper_bound`).
-   - `int res = INT_MAX`: The variable `res` will hold the minimum absolute difference found. We initialize it to the largest possible value to ensure that any valid difference will be smaller.
-
-```cpp
-    for (int i = x; i < nums.size() && res > 0; ++i) {
-        s.insert(nums[i - x]); // Insert the element nums[i - x] into the set
-```
-
-2. **Iteration**:
-   - The `for` loop starts at `i = x` because the first valid pair of indices should have a difference of at least `x`.
-   - In each iteration, the element at `nums[i - x]` is inserted into the set `s`. This ensures that we maintain the constraint that the elements in the set are at least `x` indices apart from the current element.
-
-```cpp
-        auto it = s.upper_bound(nums[i]); // Find the first element in the set that is greater than nums[i]
-```
-
-3. **Finding Closest Greater Element**:
-   - The `upper_bound(nums[i])` function returns an iterator pointing to the first element in the set that is greater than `nums[i]`. This allows us to efficiently search for the closest element that is larger than the current element `nums[i]`.
-
-```cpp
-        if (it != begin(s))
-            res = min(res, nums[i] - *prev(it)); // Check the previous element for the closest smaller value
-```
-
-4. **Finding Closest Smaller Element**:
-   - If `it != begin(s)`, this means there is a valid element before `it` in the set. We calculate the absolute difference `nums[i] - *prev(it)` (the difference between the current number and the largest number smaller than it in the set).
-   - We update `res` to the minimum of its current value and this difference.
-
-```cpp
-        if (it != end(s))
-            res = min(res, *it - nums[i]); // Check the current element for the closest larger value
-```
-
-5. **Finding Closest Larger Element**:
-   - If `it != end(s)`, there is a valid element after `it` in the set. We calculate the absolute difference `*it - nums[i]` (the difference between the closest larger number and the current number).
-   - We again update `res` to the minimum of its current value and this difference.
-
-```cpp
-    }
-    return res; // Return the minimum absolute difference found
+set<int> s;
+int res = INT_MAX;
+for (int i = x; i < nums.size() && res > 0; ++i) {
+    s.insert(nums[i - x]);
+    auto it = s.upper_bound(nums[i]);
+    if (it != begin(s))
+        res = min(res, nums[i] - *prev(it));
+    if (it != end(s))
+        res = min(res, *it - nums[i]);
+}
+    return res;
 }
 ```
 
-6. **Return the Result**:
-   - After iterating through the array, the value of `res` will be the minimum absolute difference found that satisfies the condition `|i - j| >= x`. We return this value.
+This function calculates the minimum absolute difference between an element at index 'i' in the array 'nums' and any element at index 'i-x' to 'i'. It utilizes a set to find the closest values efficiently.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Code Block**
+	```cpp
+	int minAbsoluteDifference(vector<int>& nums, int x) {
+	```
+	The function definition begins, accepting a vector of integers and an integer 'x' as parameters.
 
-1. **Time Complexity**:
-   - The time complexity of the loop is O(n), where `n` is the size of the input array `nums`. In each iteration, we perform two operations:
-     - **Insert operation** (`s.insert(nums[i - x])`): Insertion into a `set` takes O(log n) time due to the balanced tree structure used in the underlying implementation.
-     - **Binary search** (`s.upper_bound(nums[i])`): The `upper_bound` function takes O(log n) time.
-   - Therefore, for each iteration, the total time complexity is O(log n). Since the loop runs `n` times, the overall time complexity is **O(n log n)**.
+2. **Variable Declaration**
+	```cpp
+	set<int> s;
+	```
+	A set 's' is declared to store unique integers encountered during the loop, which will help in efficiently finding the closest values.
 
-2. **Space Complexity**:
-   - The space complexity is **O(n)** because we are storing up to `n` elements in the `set`. The size of the `set` grows with the input size `n`.
+3. **Variable Initialization**
+	```cpp
+	int res = INT_MAX;
+	```
+	The variable 'res' is initialized to the maximum integer value to track the minimum absolute difference found during the loop.
 
-### Conclusion
+4. **Loop**
+	```cpp
+	for (int i = x; i < nums.size() && res > 0; ++i) {
+	```
+	A loop starts from index 'x' to the end of the 'nums' vector. The loop continues as long as the 'res' is greater than 0, ensuring that the minimum difference will always decrease.
 
-The solution efficiently finds the minimum absolute difference between any two elements in an array such that their indices differ by at least `x`. By leveraging the properties of a `set` for binary search operations, the algorithm reduces the time complexity to **O(n log n)**, making it suitable for large input sizes. This approach avoids the inefficiencies of brute-force solutions, providing a clear and optimized solution to the problem.
+5. **Set Insertion**
+	```cpp
+	    s.insert(nums[i - x]);
+	```
+	Insert the element at index 'i-x' into the set 's' to keep track of previous elements within the range of 'x'.
+
+6. **Upper Bound Search**
+	```cpp
+	    auto it = s.upper_bound(nums[i]);
+	```
+	The function 'upper_bound' is used to find the first element in the set 's' that is greater than 'nums[i]'.
+
+7. **Condition Check**
+	```cpp
+	    if (it != begin(s))
+	```
+	Check if the iterator 'it' is not pointing to the first element in the set, indicating that a smaller element exists.
+
+8. **Minimum Difference Update**
+	```cpp
+	        res = min(res, nums[i] - *prev(it));
+	```
+	If a smaller element exists, update 'res' with the minimum of the current 'res' and the absolute difference between 'nums[i]' and the largest smaller element.
+
+9. **Condition Check**
+	```cpp
+	    if (it != end(s))
+	```
+	Check if 'it' is not pointing to the end of the set, indicating that a larger element exists.
+
+10. **Minimum Difference Update**
+	```cpp
+	        res = min(res, *it - nums[i]);
+	```
+	If a larger element exists, update 'res' with the minimum of the current 'res' and the absolute difference between the larger element and 'nums[i]'.
+
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the final minimum absolute difference found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The algorithm requires sorting and binary search, making the time complexity O(n log n), where n is the size of the input array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the elements in the set or map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint/description/)
 

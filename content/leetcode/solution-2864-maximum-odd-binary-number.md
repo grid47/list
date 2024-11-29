@@ -14,113 +14,150 @@ img_src = ""
 youtube = "EUKLOAv4-IQ"
 youtube_upload_date="2024-03-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/EUKLOAv4-IQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string s containing at least one '1'. Your task is to rearrange the bits in such a way that the resulting binary number is the largest possible odd binary number that can be formed from the given bits. A binary number is odd if its least significant bit (last bit) is '1'. The resulting binary number may contain leading zeros.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary string s containing only '0' and '1' characters. The string will contain at least one '1'.
+- **Example:** `s = "100"`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- s contains only '0' and '1'.
+	- s contains at least one '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string maximumOddBinaryNumber(string s) {
-    int i = 0, sz = s.size();
-    for(int j = 0;j < sz - 1; ++j) {
-        if(s[j] == '1') {
-            swap(s[j], s[i]);
-            ++i;
-        } 
-    }
-    
-    if(s.back() != '1') 
-        swap(s[sz - 1], s[i - 1]);
-    return s;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string representing the largest odd binary number that can be created from the given binary string.
+- **Example:** `For input s = "100", the output is "010".`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to rearrange the bits in such a way that the resulting binary number is the largest odd binary number possible.
 
-The problem asks us to rearrange the bits of a given binary string in such a way that the result is the largest possible odd binary number that can be formed from the original string. A binary number is odd if its last bit is `1`. The task is to rearrange the bits of the string to ensure the largest number possible while ensuring the last bit is `1` (so it remains odd).
+- Identify and place the '1' in the last position to ensure the binary number is odd.
+- Sort the remaining bits in descending order to form the largest possible binary number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary string contains at least one '1', ensuring that a valid odd binary number can be created.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For input s = "100", the output is "010".`  \
+  **Explanation:** To create the largest odd binary number, the '1' must be placed in the last position. The remaining bits '10' can be rearranged as "01", resulting in the binary number "010".
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves rearranging the bits of the binary string to maximize the resulting odd binary number by ensuring the last bit is '1' and sorting the remaining bits in descending order.
 
-The approach to solving this problem involves:
-1. **Rearranging the bits**: We need to make sure that all `1`s come first in the string, followed by all `0`s. This is to maximize the value of the binary number.
-2. **Ensure the odd property**: Since the binary number needs to be odd, the last bit of the resulting binary string should be `1`. If the number of `1`s in the string is at least one, we can always arrange them to ensure that the last bit is `1`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- The last bit must always be '1' for the binary number to be odd.
+- The remaining bits should be sorted to form the largest possible number.
+- If the binary string has more than one '1', we need to place one '1' at the end and arrange the rest of the bits in descending order.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string is guaranteed to contain at least one '1', so no need to handle empty inputs.
+- The solution must handle input strings of length up to 100 characters efficiently.
+- If the string already ends with '1', only sorting the remaining bits is necessary.
+- The algorithm must ensure that the result is the largest odd binary number possible.
+{{< dots >}}
+## Code 💻
 ```cpp
+string maximumOddBinaryNumber(string s) {
 int i = 0, sz = s.size();
-```
-- The variable `i` will keep track of where the next `1` should be placed. We will start placing `1`s at the beginning of the string.
-- The variable `sz` is the length of the input string `s`, which helps to avoid repeated calls to `s.size()`.
-
-#### Step 2: Rearranging the `1`s to the Front
-
-```cpp
 for(int j = 0;j < sz - 1; ++j) {
     if(s[j] == '1') {
         swap(s[j], s[i]);
         ++i;
     } 
 }
-```
-- This loop iterates through the string `s` from the beginning to the second-to-last character (`sz - 1`). 
-- For each character `s[j]`, if the character is `1`, it swaps the character `s[j]` with the character at position `i`. 
-- After the swap, `i` is incremented to point to the next position where a `1` should be placed.
-- This loop effectively moves all `1`s in the string to the front, while maintaining their relative order.
 
-#### Step 3: Ensure the Last Bit is `1` to Keep the Number Odd
-
-```cpp
 if(s.back() != '1') 
     swap(s[sz - 1], s[i - 1]);
-```
-- After the loop completes, the string `s` should have all `1`s at the front followed by `0`s, but the last `1` may not necessarily be in the last position.
-- The `if` condition checks if the last bit (`s.back()`) is `1`. If it's not, we need to swap the last bit with the last `1` in the string, which is at position `i - 1`. This ensures that the last bit of the string is `1`, making the number odd.
-
-#### Step 4: Return the Result
-
-```cpp
 return s;
+}
 ```
-- Finally, the modified string `s` is returned. This string represents the largest odd binary number that can be formed from the original input string `s`.
 
-### Example Walkthrough
+This function rearranges the binary string to form the largest odd binary number possible by swapping the positions of '1's and '0's.
 
-Let's walk through an example to better understand how this algorithm works.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Start**
+	```cpp
+	string maximumOddBinaryNumber(string s) {
+	```
+	Start of the function definition for maximumOddBinaryNumber.
 
-**Example 1**: 
-Input: `s = "1010101"`
+2. **Variable Initialization**
+	```cpp
+	int i = 0, sz = s.size();
+	```
+	Initialize index 'i' to 0 and calculate the size of the string 's'.
 
-1. In the first step, the loop places all `1`s at the front. After the loop, `s` becomes `1110000`.
-2. Since the last bit of `s` is `0`, we swap the last `0` with the last `1`. The final string is `1110001`.
-3. The result is the largest odd binary number `1110001`.
+3. **Loop Start**
+	```cpp
+	for(int j = 0;j < sz - 1; ++j) {
+	```
+	Start a loop that iterates over each character of the string, except the last one.
 
-**Example 2**:
-Input: `s = "0001001"`
+4. **Condition Check**
+	```cpp
+	    if(s[j] == '1') {
+	```
+	Check if the current character at position 'j' is '1'.
 
-1. In the first step, the loop places all `1`s at the front. After the loop, `s` becomes `1000000`.
-2. The last bit of `s` is `0`, so we swap it with the last `1` at position `i - 1`. The final string becomes `1000001`.
-3. The result is the largest odd binary number `1000001`.
+5. **Swap Operation**
+	```cpp
+	        swap(s[j], s[i]);
+	```
+	If the current character is '1', swap it with the character at index 'i'.
 
-### Complexity
+6. **Increment Index**
+	```cpp
+	        ++i;
+	```
+	Increment the index 'i' after swapping.
 
-#### Time Complexity:
-- The main work is done inside the `for` loop, which runs through each character of the input string exactly once. Therefore, the time complexity of the solution is **O(n)**, where `n` is the length of the string `s`. The swap operation is constant time, so it does not affect the overall complexity.
+7. **Condition Check for Last Character**
+	```cpp
+	if(s.back() != '1') 
+	```
+	Check if the last character of the string is not '1'.
 
-#### Space Complexity:
-- The space complexity is **O(1)**, since we are only using a few additional variables (`i`, `sz`) to manipulate the string in place. No additional data structures are used, and we are modifying the string directly.
+8. **Final Swap**
+	```cpp
+	    swap(s[sz - 1], s[i - 1]);
+	```
+	If the last character is not '1', swap it with the character at index 'i - 1'.
 
-### Conclusion
+9. **Return Statement**
+	```cpp
+	return s;
+	```
+	Return the modified string which now represents the maximum odd binary number.
 
-This algorithm effectively and efficiently rearranges the binary string to produce the largest odd binary number. The key insight is to first move all the `1`s to the front of the string to maximize the value, then ensure that the last bit is `1` to satisfy the requirement for an odd number. The solution works in linear time with constant space, making it both time-efficient and space-efficient.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+Sorting the bits requires O(n log n) time where n is the length of the string.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the need for sorting the string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-odd-binary-number/description/)
 

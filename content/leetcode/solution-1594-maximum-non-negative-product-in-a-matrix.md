@@ -14,159 +14,237 @@ img_src = ""
 youtube = "zGDdmRr1YIQ"
 youtube_upload_date="2020-09-20"
 youtube_thumbnail="https://i.ytimg.com/vi/zGDdmRr1YIQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a m x n matrix grid. Starting at the top-left corner (0, 0), you can only move right or down. Your task is to find the path from the top-left to the bottom-right corner that results in the maximum non-negative product of the grid values along the path. If such a path results in a negative product, return -1. The product is calculated by multiplying all grid values visited along the path. You should return the maximum non-negative product modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a matrix grid of size m x n where each element is an integer between -4 and 4, inclusive.
+- **Example:** `Input: grid = [[1,-2,1],[1,-2,1],[3,-4,1]]`
+- **Constraints:**
+	- 1 <= m, n <= 15
+	- -4 <= grid[i][j] <= 4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int m, n;
-    vector<vector<int>> grid;
-    vector<vector<long long>> memo;
-    int mod = (int) 1e9 + 7;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum non-negative product modulo 10^9 + 7. If the maximum product is negative, return -1.
+- **Example:** `Output: 8`
+- **Constraints:**
+	- The answer should be modulo 10^9 + 7.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the path from the top-left to the bottom-right corner that results in the maximum non-negative product.
+
+- 1. Use depth-first search (DFS) to explore all possible paths from (0, 0) to (m - 1, n - 1).
+- 2. At each position, compute the product of the path visited so far and update the result if a higher non-negative product is found.
+- 3. Use memoization to store intermediate results and avoid redundant calculations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is not empty and has at least one element.
+- You can only move right or down from any cell.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[1,-2,1],[1,-2,1],[3,-4,1]]`  \
+  **Explanation:** The path that yields the maximum non-negative product is (1 -> 1 -> -2 -> -4 -> 1), resulting in a product of 8. Hence, the output is 8.
+
+- **Input:** `Input: grid = [[1,3],[0,-4]]`  \
+  **Explanation:** The path yielding the maximum non-negative product is (1 -> 0 -> -4), which results in a product of 0. Hence, the output is 0.
+
+- **Input:** `Input: grid = [[-1,-2,-3],[-2,-3,-3],[-3,-3,-2]]`  \
+  **Explanation:** In this case, all possible paths result in a negative product. Therefore, the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses depth-first search (DFS) to explore all possible paths from the top-left to the bottom-right of the grid, while tracking the product of the elements along the path. Memoization is used to store intermediate results and avoid redundant calculations.
+
+### Initial Thoughts 💭
+- We need to explore all possible paths, but it is computationally expensive to do so without memoization.
+- Since the product may grow large or negative, we need to ensure we are working with modulo 10^9 + 7 to prevent overflow.
+- DFS with memoization is an ideal choice because it allows us to efficiently explore paths while reducing repeated calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- If the grid is empty, return 0.
+- The grid size is relatively small (maximum 15x15), but we should ensure the solution is efficient enough to handle the worst-case scenario.
+- If all values in the grid are negative or zero, it may be impossible to find a non-negative product path.
+- Ensure the solution works for all input grids within the given constraints, especially ensuring the result is modulo 10^9 + 7.
+{{< dots >}}
+## Code 💻
+```cpp
+int m, n;
+vector<vector<int>> grid;
+vector<vector<long long>> memo;
+int mod = (int) 1e9 + 7;
+
+int maxProductPath(vector<vector<int>>& grid) {
     
-    int maxProductPath(vector<vector<int>>& grid) {
-        
-        this->m = grid.size();
-        this->n = grid[0].size();
-        this->grid = grid;
-        
-        memo.resize(m, vector<long long>(n, LLONG_MIN));
-        
-        int ans = dfs(0, 0, 1) % mod;
-        
-        return ans < 0? -1: ans;
-        
-    }
+    this->m = grid.size();
+    this->n = grid[0].size();
+    this->grid = grid;
     
-    long long dfs(int i, int j, long long val) {
-        
-        if(i == m - 1 && j == n - 1) return (val * grid[i][j]);
-
-        // if(memo[i][j] != LLONG_MIN) return memo[i][j];
-        long long ans = LLONG_MIN;
-        
-        if(grid[i][j] == 0) return 0;
-        
-        if(i + 1 < m)
-        ans = max(ans, dfs(i + 1, j, val * grid[i][j]));
-
-        if(j + 1 < n)            
-        ans = max(ans, dfs(i, j + 1, val * grid[i][j]));
-        
-        // return memo[i][j] = ans;
-        return ans;
-    }
+    memo.resize(m, vector<long long>(n, LLONG_MIN));
     
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding the maximum product of values along a path from the top-left corner to the bottom-right corner of a grid. The grid can contain positive, negative, or zero values. The goal is to traverse from the starting cell (0, 0) to the target cell (m-1, n-1) while maximizing the product of the cell values along the path. If the maximum product is negative, the function should return -1. The path can only move right or down.
-
-### Approach
-
-To tackle this problem, we can use a depth-first search (DFS) strategy to explore all potential paths through the grid while keeping track of the cumulative product. The approach involves the following steps:
-
-1. **Initialization**: Set up necessary variables including the dimensions of the grid, a memoization table to store intermediate results, and a modulo constant to ensure results fit within limits.
-
-2. **DFS Function**: Create a recursive function that:
-   - Takes the current position in the grid and the accumulated product as parameters.
-   - Checks if the current position is the bottom-right corner. If so, it returns the product multiplied by the value of the current cell.
-   - Handles the case where the cell value is zero, returning zero immediately since any product involving zero is zero.
-   - Recursively explores possible moves to the right and down, updating the maximum product found along those paths.
-
-3. **Handling Results**: After the DFS completes, check the final result. If the maximum product is negative, return -1; otherwise, return the maximum product modulo \(10^9 + 7\).
-
-### Code Breakdown (Step by Step)
-
-Here's a detailed breakdown of the code:
-
-```cpp
-class Solution {
-public:
-    int m, n; // Dimensions of the grid
-    vector<vector<int>> grid; // The input grid
-    vector<vector<long long>> memo; // Memoization table
-    int mod = (int) 1e9 + 7; // Modulo constant
+    int ans = dfs(0, 0, 1) % mod;
     
-    int maxProductPath(vector<vector<int>>& grid) {
+    return ans < 0? -1: ans;
+    
+}
+
+long long dfs(int i, int j, long long val) {
+    
+    if(i == m - 1 && j == n - 1) return (val * grid[i][j]);
+
+    // if(memo[i][j] != LLONG_MIN) return memo[i][j];
+    long long ans = LLONG_MIN;
+    
+    if(grid[i][j] == 0) return 0;
+    
+    if(i + 1 < m)
+    ans = max(ans, dfs(i + 1, j, val * grid[i][j]));
+
+    if(j + 1 < n)            
+    ans = max(ans, dfs(i, j + 1, val * grid[i][j]));
+    
+    // return memo[i][j] = ans;
+    return ans;
+}
+
 ```
-- **Class Definition**: The `Solution` class defines the public members necessary for solving the problem. The members include the dimensions of the grid (`m`, `n`), the grid itself, a memoization table, and a modulo constant for returning results.
 
-```cpp
-        this->m = grid.size(); // Set number of rows
-        this->n = grid[0].size(); // Set number of columns
-        this->grid = grid; // Store the input grid
-        
-        memo.resize(m, vector<long long>(n, LLONG_MIN)); // Initialize memoization table with minimum values
-        
-        int ans = dfs(0, 0, 1) % mod; // Start DFS from the top-left corner with an initial product of 1
-        
-        return ans < 0? -1: ans; // Return -1 if product is negative, otherwise return the product
-    }
-```
-- **Initialization**: The `maxProductPath` function initializes the dimensions and stores the grid. It sets up the memoization table to store results for each cell and starts the DFS from the top-left corner of the grid. The initial product is set to 1 because multiplying by 1 does not change the value.
+The provided solution calculates the maximum product path in a grid where each cell contains an integer. The function `maxProductPath` utilizes Depth-First Search (DFS) to explore all possible paths and find the path with the highest product, while avoiding overflow or negative results. The recursive DFS function ensures that all possible movements (down or right) are explored to compute the maximum possible product.
 
-```cpp
-    long long dfs(int i, int j, long long val) {
-```
-- **DFS Function**: The `dfs` function is defined to take the current indices and the accumulated product value as parameters.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int m, n;
+	```
+	These are the integer variables that store the number of rows (`m`) and columns (`n`) of the grid, respectively.
 
-```cpp
-        if(i == m - 1 && j == n - 1) return (val * grid[i][j]); // Check if reached the bottom-right corner
-```
-- **Base Case**: If the current position is the bottom-right corner, it multiplies the current accumulated product (`val`) by the value of the current cell and returns this result.
+2. **Grid Initialization**
+	```cpp
+	vector<vector<int>> grid;
+	```
+	A 2D vector that represents the grid of integers which stores the values used for calculating the maximum product path.
 
-```cpp
-        long long ans = LLONG_MIN; // Initialize the answer to a very low value
-```
-- **Answer Initialization**: The variable `ans` is initialized to the minimum possible value to ensure that any product found will be greater.
+3. **Memoization**
+	```cpp
+	vector<vector<long long>> memo;
+	```
+	A 2D vector used for memoization, which stores intermediate results to avoid recalculating values for already visited grid cells.
 
-```cpp
-        if(grid[i][j] == 0) return 0; // If current cell value is zero, return zero immediately
-```
-- **Zero Handling**: If the current cell's value is zero, the function returns zero because any product including zero is zero.
+4. **Constant Definition**
+	```cpp
+	int mod = (int) 1e9 + 7;
+	```
+	This defines a constant `mod` used to return the result modulo (10^9 + 7) to prevent overflow.
 
-```cpp
-        if(i + 1 < m) // Check if moving down is within bounds
-            ans = max(ans, dfs(i + 1, j, val * grid[i][j])); // Move down
+5. **Function Definition**
+	```cpp
+	int maxProductPath(vector<vector<int>>& grid) {
+	```
+	This is the main function where the grid is passed as an argument. It initializes the grid dimensions and calls the DFS function to find the maximum product path.
 
-        if(j + 1 < n) // Check if moving right is within bounds
-            ans = max(ans, dfs(i, j + 1, val * grid[i][j])); // Move right
-```
-- **Recursive Exploration**: The function checks if it can move down or right:
-  - If moving down is valid, it recursively calls `dfs` for the cell below and updates `ans` with the maximum product found.
-  - If moving right is valid, it does the same for the cell to the right.
+6. **Grid Initialization**
+	```cpp
+	this->m = grid.size();
+	```
+	Assigns the number of rows in the grid to the variable `m`.
 
-```cpp
-        return ans; // Return the maximum product found along this path
-    }
-};
-```
-- **Returning the Result**: The function returns the maximum product found from the current cell.
+7. **Grid Initialization**
+	```cpp
+	this->n = grid[0].size();
+	```
+	Assigns the number of columns in the grid to the variable `n`.
 
-### Complexity
+8. **Grid Assignment**
+	```cpp
+	this->grid = grid;
+	```
+	Assigns the input grid to the member variable `grid`.
 
-- **Time Complexity**: The time complexity of this approach is \(O(2^{m+n})\) in the worst case, where `m` is the number of rows and `n` is the number of columns in the grid. This is because the algorithm explores all possible paths from the top-left to the bottom-right corner.
+9. **Memoization**
+	```cpp
+	memo.resize(m, vector<long long>(n, LLONG_MIN));
+	```
+	Resizes the memoization table `memo` to match the dimensions of the grid and initializes all cells to `LLONG_MIN` (a very small value).
 
-- **Space Complexity**: The space complexity is \(O(m \times n)\) due to the memoization table storing results for each cell. Additionally, the call stack of the recursion may also consume space proportional to the depth of the recursion (which can be at most \(m+n\)).
+10. **Recursive Function Call**
+	```cpp
+	int ans = dfs(0, 0, 1) % mod;
+	```
+	Calls the DFS function to explore the grid starting from the top-left corner (0,0), with an initial product value of 1.
 
-### Conclusion
+11. **Return Statement**
+	```cpp
+	return ans < 0? -1: ans;
+	```
+	Returns the computed result. If the result is negative (meaning no valid path was found), it returns -1, otherwise, it returns the computed maximum product path modulo (10^9 + 7).
 
-The approach effectively uses a recursive DFS to explore all paths through the grid while keeping track of the product of cell values. The key steps involve:
+12. **Recursive Function Definition**
+	```cpp
+	long long dfs(int i, int j, long long val) {
+	```
+	Defines the DFS function that explores the grid recursively. It calculates the product of the path from position `(i, j)` to the bottom-right corner.
 
-1. **Recursive Exploration**: The use of recursion allows a comprehensive search of all potential paths while accumulating the product.
-2. **Edge Case Handling**: Immediate handling of zero values ensures that the algorithm avoids unnecessary calculations that would yield zero products.
-3. **Final Result Processing**: The modulo operation ensures that the results stay within manageable limits as required by the problem constraints.
+13. **Base Case**
+	```cpp
+	if(i == m - 1 && j == n - 1) return (val * grid[i][j]);
+	```
+	Base case for the DFS function. If the current position is the bottom-right corner of the grid, it returns the accumulated product.
 
-This method provides a clear and systematic way to tackle the problem of finding the maximum product path in a grid, balancing both clarity and efficiency. Further optimizations, such as memoization, could be explored to enhance performance in larger grids.
+14. **Variable Initialization**
+	```cpp
+	long long ans = LLONG_MIN;
+	```
+	Initializes the variable `ans` to the smallest possible value (`LLONG_MIN`) to ensure that the maximum value is found during the recursion.
+
+15. **Edge Case Handling**
+	```cpp
+	if(grid[i][j] == 0) return 0;
+	```
+	If the current cell in the grid contains 0, the function immediately returns 0 as multiplying by 0 would lead to a product of 0.
+
+16. **Recursive Exploration**
+	```cpp
+	if(i + 1 < m) ans = max(ans, dfs(i + 1, j, val * grid[i][j]));
+	```
+	Recursively explores the cell below the current one, updating the `ans` if a better product path is found.
+
+17. **Recursive Exploration**
+	```cpp
+	if(j + 1 < n) ans = max(ans, dfs(i, j + 1, val * grid[i][j]));
+	```
+	Recursively explores the cell to the right of the current one, updating the `ans` if a better product path is found.
+
+18. **Return Statement**
+	```cpp
+	return ans;
+	```
+	Returns the maximum product path found for the current cell `(i, j)`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n) - If the grid is very small or the solution is quickly found.
+- **Average Case:** O(m * n) - On average, we explore all grid cells once due to memoization.
+- **Worst Case:** O(m * n) - In the worst case, we need to explore all paths in the grid.
+
+The time complexity is proportional to the size of the grid, i.e., O(m * n), since memoization ensures each cell is processed only once.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n) - Space complexity remains the same even for small grids.
+- **Worst Case:** O(m * n) - Space is required for the memoization table and the recursion stack.
+
+The space complexity is proportional to the size of the grid, due to the memoization table and the recursive call stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/description/)
 

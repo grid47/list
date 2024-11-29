@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "jFZx4Q7UL5c"
 youtube_upload_date="2023-05-22"
 youtube_thumbnail="https://i.ytimg.com/vi/jFZx4Q7UL5c/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,124 +28,171 @@ youtube_thumbnail="https://i.ytimg.com/vi/jFZx4Q7UL5c/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array nums and an integer k, return the k most frequent elements from the array. The answer may be returned in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer k.
+- **Example:** `nums = [4,4,4,5,5,6], k = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^4 <= nums[i] <= 10^4
+	- k is in the range [1, the number of unique elements in the array]
+	- It is guaranteed that the answer is unique
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> topKFrequent(vector<int>& nums, int k) {
-        map<int, int> ma;
-        for(int x: nums)
-            ma[x]++;
-        
-        priority_queue<pair<int, int>> pq;
-        
-        for(auto [key, val]: ma)
-            pq.push(make_pair(val, key));
-        
-        vector<int> ans;
-        while(k--) {
-            ans.push_back(pq.top().second);
-            pq.pop();
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array containing the k most frequent elements from the input array nums.
+- **Example:** `[4, 5]`
+- **Constraints:**
+	- The answer can be returned in any order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find and return the k most frequent elements from the input array.
+
+- Count the frequency of each element in the array using a map or hash table.
+- Use a priority queue (max heap) to store the elements sorted by their frequency.
+- Pop the k most frequent elements from the priority queue.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is a valid array of integers, and the value of k is within the expected range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4,4,4,5,5,6], k = 2`  \
+  **Explanation:** The most frequent elements are 4 and 5, with 4 appearing 3 times and 5 appearing 2 times. Thus, the output is [4, 5].
+
+- **Input:** `nums = [7], k = 1`  \
+  **Explanation:** Since there is only one element, the most frequent element is 7, and the output is [7].
+
+{{< dots >}}
+## Approach 🚀
+The solution involves counting the frequency of each element and retrieving the k most frequent elements using a heap.
+
+### Initial Thoughts 💭
+- We need to count the frequency of each element efficiently and then select the k most frequent ones.
+- A priority queue can be used to store the elements by frequency, ensuring that we can extract the top k most frequent ones efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array would not be a valid input as per the constraints.
+- The solution should handle arrays with a length up to 100,000 efficiently.
+- If the array has only one unique element, that element should be returned as the most frequent.
+- The solution must be efficient enough to handle the upper bounds of the input size.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> topKFrequent(vector<int>& nums, int k) {
+    map<int, int> ma;
+    for(int x: nums)
+        ma[x]++;
+    
+    priority_queue<pair<int, int>> pq;
+    
+    for(auto [key, val]: ma)
+        pq.push(make_pair(val, key));
+    
+    vector<int> ans;
+    while(k--) {
+        ans.push_back(pq.top().second);
+        pq.pop();
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, you're asked to return the **k most frequent elements** from a list of integers. Given an array of integers, your task is to identify and return the elements that appear most frequently. The order of the elements doesn't matter — just make sure to return the top **k** elements with the highest frequency!
-
-Can you think of an efficient way to find the **top k frequent elements** without running into performance issues? Let’s break it down!
-
----
-
-### 🧠 Approach
-
-To solve this problem efficiently, we can use a combination of a **frequency map** and a **priority queue** (or **max heap**) to help us retrieve the top k frequent elements. Here’s a step-by-step breakdown:
-
-1. **Count the Frequencies**: Start by counting how many times each element appears in the array.
-2. **Use a Priority Queue**: Push the frequency-element pairs into a priority queue. This will allow us to quickly access the elements with the highest frequencies.
-3. **Extract the Top k Elements**: Once the elements are sorted by frequency, we can pop the top k elements from the queue.
-
-This approach ensures that we can efficiently retrieve the most frequent elements with minimal complexity. 💪
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s go over the code to see how each part works!
-
-#### Step 1: Count the Frequency of Elements
-```cpp
-map<int, int> ma;
-for(int x: nums)
-    ma[x]++;
-```
-- We start by using a `map<int, int>` to count the frequency of each element in the array `nums`. The key is the element, and the value is its frequency.
-- The loop iterates through `nums` and increments the count of each element in the map.
-
-#### Step 2: Push the Frequency-Pair into a Priority Queue
-```cpp
-priority_queue<pair<int, int>> pq;
-
-for(auto [key, val]: ma)
-    pq.push(make_pair(val, key));
-```
-- Next, we create a **priority queue** called `pq` to store the pairs of (frequency, element). 
-- The priority queue sorts the pairs in descending order based on frequency, meaning that the element with the highest frequency will always be at the top.
-- We iterate through the `map` and push each `(frequency, element)` pair into the queue.
-
-#### Step 3: Extract the Top k Frequent Elements
-```cpp
-vector<int> ans;
-while(k--) {
-    ans.push_back(pq.top().second);
-    pq.pop();
+    return ans;
 }
 ```
-- Now, we initialize a `vector<int>` called `ans` to store the final result.
-- The `while` loop runs `k` times, each time extracting the top element from the priority queue. We push the **element** (not the frequency) from the pair into `ans`.
-- After each extraction, we remove the top element from the queue using `pq.pop()`.
 
-#### Step 4: Return the Result
-```cpp
-return ans;
-```
-- Finally, we return the `ans` vector, which contains the top k frequent elements.
+This function returns the k most frequent elements in the input list `nums`. It counts the frequency of each element using a map, then uses a priority queue to order elements by frequency and returns the top k elements.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> topKFrequent(vector<int>& nums, int k) {
+	```
+	The function `topKFrequent` takes a reference to a vector of integers `nums` and an integer `k`, and returns a vector of the `k` most frequent elements from `nums`.
 
-### 📈 Complexity Analysis
+2. **Map Declaration**
+	```cpp
+	    map<int, int> ma;
+	```
+	Declare a map `ma` where the key is an integer from `nums` and the value is its frequency count.
 
-Let’s analyze the time and space complexity to ensure our solution is optimal.
+3. **Loop Over Input**
+	```cpp
+	    for(int x: nums)
+	```
+	Iterate over each element `x` in the input vector `nums`.
 
-#### Time Complexity:
-- **O(n log n)**: Here’s the breakdown:
-  1. **Counting the frequencies**: We iterate over the array once, so this step takes **O(n)**.
-  2. **Inserting into the priority queue**: We insert each element into the queue. Each insertion takes **O(log m)**, where `m` is the number of unique elements in the map. In the worst case, `m` is equal to `n`, so the complexity for this step is **O(n log n)**.
-  3. **Extracting the top k elements**: Extracting `k` elements from the queue takes **O(k log n)** time. Since `k` is often much smaller than `n`, this step is dominated by the previous steps.
+4. **Frequency Count**
+	```cpp
+	        ma[x]++;
+	```
+	For each element `x`, increment its frequency count in the map `ma`.
 
-Thus, the overall time complexity is **O(n log n)**.
+5. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<pair<int, int>> pq;
+	```
+	Declare a priority queue `pq` of pairs where each pair consists of an integer (frequency) and an integer (element). This will be used to sort the elements by their frequencies.
 
-#### Space Complexity:
-- **O(n)**: We use a map to store the frequencies of the elements, and the priority queue holds up to `n` pairs in the worst case. So, the space complexity is proportional to the size of the input array.
+6. **Map Iteration**
+	```cpp
+	    for(auto [key, val]: ma)
+	```
+	Iterate through the map `ma`, where `key` is the element and `val` is its frequency.
 
----
+7. **Push to Priority Queue**
+	```cpp
+	        pq.push(make_pair(val, key));
+	```
+	Push each element-frequency pair to the priority queue. Elements with higher frequencies will be prioritized.
 
-### 🏁 Conclusion
+8. **Result Vector Declaration**
+	```cpp
+	    vector<int> ans;
+	```
+	Declare an empty vector `ans` to store the top `k` frequent elements.
 
-We’ve successfully solved the problem of finding the **k most frequent elements** in an array with an optimal approach using a frequency map and a priority queue. 🎉
+9. **While Loop**
+	```cpp
+	    while(k--) {
+	```
+	The loop runs `k` times, extracting the top `k` frequent elements from the priority queue.
 
-#### Recap:
-- **Time Complexity**: **O(n log n)**, where `n` is the number of elements in the array.
-- **Space Complexity**: **O(n)**, where `n` is the number of elements.
-- The solution efficiently handles large arrays and varying frequencies of elements.
-- By using a priority queue, we can quickly retrieve the **top k frequent elements**.
+10. **Push Top Element to Result**
+	```cpp
+	        ans.push_back(pq.top().second);
+	```
+	Push the element (second value of the top pair) from the priority queue to the result vector `ans`.
 
-This approach is easy to understand, efficient, and works well for this type of problem. Keep practicing to sharpen your skills in working with heaps and frequency counting — they are powerful tools in algorithm design! 🌟
+11. **Pop Top Element from Queue**
+	```cpp
+	        pq.pop();
+	```
+	Remove the top element from the priority queue.
+
+12. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the vector `ans` containing the `k` most frequent elements.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log k)
+- **Worst Case:** O(n log k)
+
+The time complexity is O(n) for counting the frequencies, and O(log k) for each insertion and extraction from the priority queue, resulting in a total time complexity of O(n log k).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the frequency count of each element in the map and the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/top-k-frequent-elements/description/)
 

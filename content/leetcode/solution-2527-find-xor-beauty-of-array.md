@@ -14,111 +14,125 @@ img_src = ""
 youtube = "V12dkKaSdnw"
 youtube_upload_date="2023-01-07"
 youtube_thumbnail="https://i.ytimg.com/vi/V12dkKaSdnw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums. The xor-beauty of the array is the XOR of the effective values of all possible triplets of indices (i, j, k) where 0 <= i, j, k < n. The effective value for each triplet is calculated as ((nums[i] | nums[j]) & nums[k]).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers nums.
+- **Example:** `[3, 7]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int xorBeauty(vector<int>& nums) {
-        
-        int tmp = 0;
-        for(int it: nums)
-            tmp ^= it;
-        return tmp;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the xor-beauty of the array, which is the XOR of the effective values for all triplets of indices (i, j, k).
+- **Example:** `4`
+- **Constraints:**
+	- The output will be a single integer representing the xor-beauty of the array.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the xor-beauty by XORing all the effective values of triplets of indices in the array.
 
-The problem asks to compute the **XOR beauty** of a given array of integers. The XOR beauty of an array is defined as the result of performing a bitwise XOR operation on all the elements in the array. More specifically:
+- Iterate through all possible triplets (i, j, k).
+- For each triplet, compute the effective value ((nums[i] | nums[j]) & nums[k]).
+- XOR all the computed effective values to obtain the final result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The length of the array and the size of the numbers will fit within the given constraints.
+- The solution should handle large inputs efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[3, 7]`  \
+  **Explanation:** The xor-beauty is calculated by XORing the effective values of all the triplets of indices in the array, resulting in the final value of 4.
 
-- We are given an array of integers `nums`, and the task is to compute the XOR of all elements in the array and return the result.
+- **Input:** `[15, 22, 11, 8, 40]`  \
+  **Explanation:** The xor-beauty of the array is calculated by XORing the effective values of all possible triplets, and the result is 22.
 
-In this task, we are simply required to apply the XOR operation to each number in the array in sequence and return the result.
+{{< dots >}}
+## Approach 🚀
+The solution involves iterating over all possible triplets and calculating the effective values by applying bitwise OR and AND operations. The final result is obtained by XORing all the effective values.
 
-### Approach
-
-The XOR operation is a bitwise operation that has several important properties:
-1. **Commutativity**: The order in which you apply XOR does not matter. For example:
-   - `a ^ b ^ c == c ^ a ^ b`
-2. **Associativity**: You can group the terms in any way:
-   - `(a ^ b) ^ c == a ^ (b ^ c)`
-3. **Identity**: XOR with 0 leaves the number unchanged:
-   - `a ^ 0 == a`
-4. **Self-Inverse**: XOR of a number with itself results in 0:
-   - `a ^ a == 0`
-
-In the context of the problem, to find the XOR beauty of the array, we iterate over the array and apply the XOR operation between all the elements.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Function Definition
-
+### Initial Thoughts 💭
+- This problem involves iterating over all triplets and performing bitwise operations, which can be optimized by reducing the number of calculations.
+- Given the constraints, a direct approach that computes the XOR for each possible triplet will be inefficient. We need to explore optimizations or mathematical insights for faster computation.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the length of nums is always at least 1.
+- Ensure that the solution can handle large arrays efficiently, especially when nums.length is close to 10^5.
+- Handle cases where all numbers in nums are the same.
+- Ensure that the time complexity is optimized for large inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
 int xorBeauty(vector<int>& nums) {
+    
+    int tmp = 0;
+    for(int it: nums)
+        tmp ^= it;
+    return tmp;
+    
+}
 ```
 
-- The function `xorBeauty` is defined to take a vector of integers `nums` as input.
-- The return type of the function is an integer, which will represent the result of the XOR operation on all elements of the array.
+The 'xorBeauty' function calculates the XOR of all the elements in the input vector 'nums' and returns the result.
 
-#### 2. Initialize a Temporary Variable
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int xorBeauty(vector<int>& nums) {
+	```
+	This is the definition of the 'xorBeauty' function which takes a reference to a vector of integers 'nums' and returns an integer result.
 
-```cpp
-int tmp = 0;
-```
+2. **Variable Initialization**
+	```cpp
+	    int tmp = 0;
+	```
+	Here, a temporary variable 'tmp' is initialized to 0. This variable will store the result of the cumulative XOR operation.
 
-- We initialize an integer variable `tmp` to 0. This will store the result of the cumulative XOR operation as we iterate through the array.
-- Initially, `tmp` is 0 because XORing any number with 0 leaves the number unchanged (i.e., `a ^ 0 = a`).
+3. **Loop**
+	```cpp
+	    for(int it: nums)
+	```
+	This is a range-based for loop that iterates through each element 'it' in the 'nums' vector.
 
-#### 3. XOR All Elements in the Array
+4. **XOR Operation**
+	```cpp
+	        tmp ^= it;
+	```
+	In each iteration of the loop, the XOR operation is performed between the current value of 'tmp' and the element 'it'. This accumulates the XOR of all elements in the vector.
 
-```cpp
-for(int it: nums)
-    tmp ^= it;
-```
+5. **Return Statement**
+	```cpp
+	    return tmp;
+	```
+	After completing the loop, the function returns the final value of 'tmp', which is the cumulative XOR of all elements in the 'nums' vector.
 
-- We loop through each element `it` in the vector `nums`. For every element, we update the `tmp` variable by performing a bitwise XOR between the current value of `tmp` and the element `it`.
-- The XOR operation is performed using the `^` operator in C++.
-- As we loop through the array, `tmp` accumulates the XOR of all elements in the array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^3)
+- **Average Case:** O(n^3)
+- **Worst Case:** O(n^3)
 
-#### 4. Return the Final Result
+The time complexity is O(n^3) because we need to consider every triplet in the array for calculating the effective values.
 
-```cpp
-return tmp;
-```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- Once we have iterated through all the elements of the array, `tmp` holds the final result of XORing all the elements together.
-- We then return `tmp`, which represents the XOR beauty of the array.
+The space complexity is O(1) as we only need a constant amount of extra space for the XOR calculation.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-#### Time Complexity
-
-The time complexity of this solution is determined by the number of elements in the array. Specifically:
-
-- The loop iterates over all `n` elements in the array, and for each element, a constant-time XOR operation is performed.
-- Hence, the time complexity is \( O(n) \), where `n` is the number of elements in the array.
-
-#### Space Complexity
-
-The space complexity is determined by the amount of extra space used by the algorithm:
-
-- We use only a constant amount of extra space: a single integer variable `tmp` to store the cumulative XOR result.
-- Therefore, the space complexity is \( O(1) \), which means the algorithm uses constant space.
-
-### Conclusion
-
-This solution efficiently computes the XOR beauty of an array of integers. By leveraging the properties of the XOR operation, we are able to compute the result in linear time \( O(n) \) and constant space \( O(1) \). The XOR operation is fast and provides an elegant way to solve this problem. 
-
-This approach is optimal and works well even for large arrays, as it processes each element exactly once and only requires a minimal amount of additional memory.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-xor-beauty-of-array/description/)
 

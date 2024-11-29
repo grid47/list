@@ -14,139 +14,221 @@ img_src = ""
 youtube = "h8AZEN49gTc"
 youtube_upload_date="2023-09-12"
 youtube_thumbnail="https://i.ytimg.com/vi/h8AZEN49gTc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string s, determine the minimum number of deletions needed to make s 'good'. A string is 'good' if no two characters have the same frequency.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string s.
+- **Example:** `s = 'abc'`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s contains only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minDeletions(string s) {
-        map<char, int> mp;
-        int n= s.size();
-        for(char x: s)
-            mp[x]++;
-        vector<pair<int, char>> arr;
-        for(auto it: mp) {
-            arr.push_back({it.second, it.first});
-        }
-        sort(arr.begin(), arr.end());
-        n = arr.size();
-        set<int> cnt;
-        int del = 0;
-        for(int i = 0; i < n; i++) {
-            int tmp = arr[i].first;
-            while(tmp > 0 && cnt.count(tmp)) {
-                tmp--;
-                del++;
-            }
-            if(tmp > 0) cnt.insert(tmp);
-        }
-        return del;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of deletions needed to make the string good.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the minimum number of deletions needed, first calculate the frequency of each character in the string. Then, identify and delete characters with duplicate frequencies.
+
+- Count the frequency of each character in the string.
+- Use a set to track the frequencies that have already been used.
+- If a frequency is repeated, decrement it and count the deletion.
+- Return the total number of deletions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always be a valid non-empty string containing lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abc'`  \
+  **Explanation:** Each character in the string 'abc' appears once, so no deletions are needed.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves counting the frequency of each character in the string and ensuring that no two characters have the same frequency by removing characters where necessary.
+
+### Initial Thoughts 💭
+- We can use a frequency map to track how many times each character appears.
+- We need to track the frequencies that have already been used to avoid duplicates.
+- To solve this, we need to use a set to keep track of the frequencies we've seen so far and ensure no duplicates.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string is not empty as per the constraints.
+- The solution should efficiently handle strings with lengths up to 100,000.
+- When all characters in the string are the same, the only possible deletion is reducing the frequency to 1.
+- Ensure the solution handles the upper constraint where s.length is up to 100,000.
+{{< dots >}}
+## Code 💻
+```cpp
+int minDeletions(string s) {
+    map<char, int> mp;
+    int n= s.size();
+    for(char x: s)
+        mp[x]++;
+    vector<pair<int, char>> arr;
+    for(auto it: mp) {
+        arr.push_back({it.second, it.first});
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The goal is to determine the minimum number of deletions needed from a string \( s \) such that the frequencies of all characters in the string become unique. This problem is particularly relevant in scenarios where unique frequency distributions are required, such as in cryptography or data compression.
-
-### Approach
-
-To solve this problem, the following steps are taken:
-
-1. **Count Character Frequencies**: Use a map to count the frequency of each character in the string.
-2. **Create a Frequency List**: Store the frequencies in a vector along with their corresponding characters for further processing.
-3. **Sort Frequencies**: Sort the frequency list in ascending order to facilitate the identification of duplicates.
-4. **Track Unique Frequencies**: Use a set to track the frequencies that have already been used. Iterate through the sorted frequency list and decrement the frequency as needed until a unique frequency is found or it reaches zero.
-5. **Count Deletions**: Keep a count of how many deletions are made to achieve unique frequencies.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the provided code:
-
-```cpp
-class Solution {
-public:
-    int minDeletions(string s) {
-```
-- We define a class `Solution` and a public method `minDeletions` that accepts a string \( s \) as input.
-
-```cpp
-        map<char, int> mp;
-        int n = s.size();
-        for (char x : s)
-            mp[x]++;
-```
-- We initialize a map `mp` to store the frequency of each character. We iterate through the string \( s \), incrementing the count for each character encountered.
-
-```cpp
-        vector<pair<int, char>> arr;
-        for (auto it : mp) {
-            arr.push_back({it.second, it.first});
+    sort(arr.begin(), arr.end());
+    n = arr.size();
+    set<int> cnt;
+    int del = 0;
+    for(int i = 0; i < n; i++) {
+        int tmp = arr[i].first;
+        while(tmp > 0 && cnt.count(tmp)) {
+            tmp--;
+            del++;
         }
-```
-- We create a vector `arr` to hold pairs of frequencies and their corresponding characters. We iterate through the map `mp` and populate the vector with frequency-character pairs.
-
-```cpp
-        sort(arr.begin(), arr.end());
-```
-- We sort the vector `arr` based on frequencies in ascending order. This allows us to efficiently manage the deletion of duplicate frequencies.
-
-```cpp
-        n = arr.size();
-        set<int> cnt;
-        int del = 0;
-```
-- We store the size of the sorted frequency list in \( n \), initialize an empty set `cnt` to keep track of used frequencies, and a variable `del` to count the total deletions needed.
-
-```cpp
-        for (int i = 0; i < n; i++) {
-            int tmp = arr[i].first;
-            while (tmp > 0 && cnt.count(tmp)) {
-                tmp--;
-                del++;
-            }
-```
-- We iterate through the sorted frequency list. For each frequency, we temporarily store it in `tmp`. A `while` loop is employed to decrement `tmp` as long as it is greater than zero and exists in the set `cnt`. Each time we decrement `tmp`, we increment the deletion count `del`.
-
-```cpp
-            if (tmp > 0) cnt.insert(tmp);
-        }
-```
-- If after the loop `tmp` is still greater than zero, it means we found a unique frequency. We insert this unique frequency into the set `cnt`.
-
-```cpp
-        return del;
+        if(tmp > 0) cnt.insert(tmp);
     }
-};
+    return del;
+}
 ```
-- Finally, we return the total count of deletions required to make all character frequencies unique.
 
-### Complexity
+This function finds the minimum number of deletions required to make the frequency of each character in the string unique. It uses a frequency map, sorts the characters by frequency, and then iterates through them, reducing duplicate frequencies by deletion while keeping track of the number of deletions.
 
-- **Time Complexity**: 
-  - Counting character frequencies takes \( O(n) \) time, where \( n \) is the length of the string \( s \).
-  - Storing frequencies in a vector and sorting it takes \( O(k \log k) \), where \( k \) is the number of unique characters in the string (at most 26 for lowercase English letters).
-  - The overall complexity is \( O(n + k \log k) \).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minDeletions(string s) {
+	```
+	This line defines the function `minDeletions` that takes a string `s` and returns the minimum number of deletions required to make the frequency of each character in `s` unique.
 
-- **Space Complexity**: 
-  - The space complexity is \( O(k) \) due to the storage of the frequency map and the vector that holds frequency-character pairs.
+2. **Map Initialization**
+	```cpp
+	    map<char, int> mp;
+	```
+	A map `mp` is declared to store the frequency of each character in the string `s`.
 
-### Conclusion
+3. **Size Calculation**
+	```cpp
+	    int n = s.size();
+	```
+	The variable `n` is initialized to the size of the string `s` to track the length of the string.
 
-The `minDeletions` method efficiently calculates the minimum number of deletions required to ensure all character frequencies in a string are unique. By utilizing a combination of frequency counting, sorting, and unique frequency tracking, the solution effectively addresses the problem while maintaining optimal performance.
+4. **Frequency Calculation**
+	```cpp
+	    for(char x: s)
+	```
+	A loop is used to iterate over each character `x` in the string `s`.
 
-**Key Takeaways**:
-1. **Utilization of Maps and Sets**: This solution demonstrates effective use of maps for counting and sets for tracking unique elements, which is a common strategy in algorithmic challenges.
-2. **Sorting for Efficient Comparison**: Sorting the frequencies simplifies the process of checking for duplicates and managing deletions, showcasing a typical approach in greedy algorithms.
-3. **Efficiency Considerations**: The approach is efficient in both time and space, making it suitable for handling large input strings within reasonable limits.
+5. **Frequency Update**
+	```cpp
+	        mp[x]++;
+	```
+	For each character `x`, its frequency is incremented in the map `mp`.
 
-This method can be adapted for various applications where unique constraints are needed on collections of items, making it a versatile technique in the programmer's toolkit.
+6. **Array Initialization**
+	```cpp
+	    vector<pair<int, char>> arr;
+	```
+	A vector `arr` is declared to store pairs of frequency and corresponding character.
+
+7. **Map Iteration**
+	```cpp
+	    for(auto it: mp) {
+	```
+	A loop is used to iterate over each element `it` in the frequency map `mp`.
+
+8. **Array Population**
+	```cpp
+	        arr.push_back({it.second, it.first});
+	```
+	Each frequency and character pair from the map `mp` is added to the vector `arr`, where `it.second` is the frequency and `it.first` is the character.
+
+9. **Sorting**
+	```cpp
+	    sort(arr.begin(), arr.end());
+	```
+	The vector `arr` is sorted based on the frequencies of the characters in ascending order.
+
+10. **Array Size Update**
+	```cpp
+	    n = arr.size();
+	```
+	The variable `n` is updated to the size of the vector `arr`.
+
+11. **Set Initialization**
+	```cpp
+	    set<int> cnt;
+	```
+	A set `cnt` is declared to track the unique frequencies that have been assigned.
+
+12. **Deletion Count Initialization**
+	```cpp
+	    int del = 0;
+	```
+	The variable `del` is initialized to 0, which will keep track of the number of deletions made.
+
+13. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is used to iterate over the sorted array `arr`.
+
+14. **Frequency Access**
+	```cpp
+	        int tmp = arr[i].first;
+	```
+	The frequency of the current character is accessed from the first element of the pair in `arr`.
+
+15. **Check for Duplicates**
+	```cpp
+	        while(tmp > 0 && cnt.count(tmp)) {
+	```
+	A while loop checks if the frequency `tmp` already exists in the set `cnt`. If it does, the frequency is reduced.
+
+16. **Frequency Reduction**
+	```cpp
+	            tmp--;
+	```
+	If a duplicate frequency is found, the frequency `tmp` is reduced by 1.
+
+17. **Deletion Increment**
+	```cpp
+	            del++;
+	```
+	Each time a frequency is reduced to avoid duplicates, the deletion count `del` is incremented.
+
+18. **Insert Frequency**
+	```cpp
+	        if(tmp > 0) cnt.insert(tmp);
+	```
+	If the frequency `tmp` is still greater than 0 after the while loop, it is inserted into the set `cnt` to ensure it is unique.
+
+19. **Return Statement**
+	```cpp
+	    return del;
+	```
+	The function returns the total number of deletions `del` made to ensure all frequencies are unique.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) because we need to sort the frequencies of the characters.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space used for storing the character frequencies and the set of frequencies.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/description/)
 

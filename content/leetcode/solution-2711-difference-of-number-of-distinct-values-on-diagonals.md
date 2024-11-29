@@ -14,87 +14,69 @@ img_src = ""
 youtube = "i166oIOHaPE"
 youtube_upload_date="2023-05-28"
 youtube_thumbnail="https://i.ytimg.com/vi/i166oIOHaPE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 2D grid of size m x n, you are tasked with finding a new matrix where each cell value is the absolute difference between the count of distinct values in the diagonal cells to the left and above it, and the count of distinct values in the diagonal cells to the right and below it.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D grid (matrix) with m rows and n columns, where each cell contains an integer.
+- **Example:** `Input: grid = [[4, 2, 7], [1, 5, 8], [9, 6, 3]]`
+- **Constraints:**
+	- 1 <= m, n <= 50
+	- 1 <= grid[i][j] <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> differenceOfDistinctValues(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        vector<vector<int>> ans(m, vector<int>(n, 0));
-        set<int> ls, rs;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            int r = i - 1, c = j - 1;
-            
-            while(r >= 0 && c >= 0) {
-                ls.insert(grid[r][c]);
-                r--;
-                c--;
-            }
-            
-            r = i + 1, c = j + 1;
-            
-            while(r < m && c < n) {
-                rs.insert(grid[r][c]);
-                r++;
-                c++;
-            }
-            int res = ls.size() - rs.size();
-            ans[i][j] = abs(res);
-            ls.clear();
-            rs.clear();
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a new matrix where each element at position [r][c] is the absolute difference between the number of distinct values on the diagonal to the left and above the cell and the number of distinct values on the diagonal to the right and below the cell.
+- **Example:** `Output: [[0, 0, 1], [0, 0, 1], [1, 0, 0]]`
+- **Constraints:**
+	- The result should be an m x n matrix.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the difference between the number of distinct values on diagonals of the matrix for each cell.
 
-Given a 2D grid of integers, the task is to calculate the difference of distinct values between the upper-left diagonal (from top-left to bottom-right) and lower-right diagonal (from bottom-left to top-right) for each cell. Specifically, for each cell in the grid, you need to compute the absolute difference between the number of distinct values in its upper-left diagonal and the number of distinct values in its lower-right diagonal. The result should be returned as a 2D grid of the same dimensions, where each cell contains this computed difference.
+- Step 1: For each cell in the matrix, compute the distinct values on the diagonal above and to the left (leftAbove).
+- Step 2: For each cell in the matrix, compute the distinct values on the diagonal below and to the right (rightBelow).
+- Step 3: For each cell, compute the absolute difference between the sizes of the distinct values in leftAbove and rightBelow, and store this in the result matrix.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input grid is non-empty and contains valid integers within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[4, 2, 7], [1, 5, 8], [9, 6, 3]]`  \
+  **Explanation:** The output matrix is calculated as follows:
+For cell [0][0], leftAbove is empty and rightBelow contains distinct values {5, 6, 3}, so the result is |0 - 3| = 3. Repeat this for all cells.
 
-### Approach
+- **Input:** `Input: grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`  \
+  **Explanation:** For each cell, we calculate the leftAbove and rightBelow diagonals and their distinct values, then compute the absolute difference.
 
-To solve this problem, we need to perform the following steps:
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over the grid and for each element, finding the distinct values in the diagonals above-left and below-right, then calculating the absolute difference.
 
-1. **Understand the grid structure**:
-   - Each element in the grid has two diagonals:
-     - **Upper-left diagonal**: This diagonal moves from the current cell towards the top-left direction. We need to traverse this diagonal and track the distinct values.
-     - **Lower-right diagonal**: This diagonal moves from the current cell towards the bottom-right direction. Similarly, we need to traverse this diagonal and track the distinct values.
-   
-2. **Iterate over the grid**:
-   - For each cell `(i, j)` in the grid, compute the distinct values in the upper-left and lower-right diagonals.
-   - Use sets to store the distinct values encountered along the diagonals since sets automatically handle duplicate values.
-
-3. **Compute the difference**:
-   - For each cell, compute the difference between the number of distinct values in the upper-left diagonal and the lower-right diagonal.
-   - Store the absolute difference in the result grid.
-
-4. **Return the result**:
-   - After processing all the cells in the grid, return the resulting grid.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize variables
+### Initial Thoughts 💭
+- Each element's value is determined by its position in the grid and the diagonals to the left and above, and to the right and below.
+- Using sets will help in counting distinct values on each diagonal.
+{{< dots >}}
+### Edge Cases 🌐
+- The input grid will not be empty as per the constraints.
+- For large grids (50x50), ensure that the solution is optimized for performance.
+- For grids where all values are the same, the result matrix will be all zeros.
+- Ensure that the solution works for both square and rectangular matrices.
+{{< dots >}}
+## Code 💻
 ```cpp
-int m = grid.size(), n = grid[0].size();
-vector<vector<int>> ans(m, vector<int>(n, 0));
-set<int> ls, rs;
-```
-- `m` and `n` represent the dimensions of the grid (rows and columns, respectively).
-- `ans` is a 2D vector initialized to store the result of the computations for each cell in the grid.
-- `ls` and `rs` are sets used to store the distinct values along the upper-left and lower-right diagonals, respectively.
-
-#### Step 2: Traverse the grid and compute diagonals for each cell
-```cpp
-for(int i = 0; i < m; i++)
+vector<vector<int>> differenceOfDistinctValues(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    vector<vector<int>> ans(m, vector<int>(n, 0));
+    set<int> ls, rs;
+    for(int i = 0; i < m; i++)
     for(int j = 0; j < n; j++) {
         int r = i - 1, c = j - 1;
         
@@ -111,42 +93,162 @@ for(int i = 0; i < m; i++)
             r++;
             c++;
         }
+        int res = ls.size() - rs.size();
+        ans[i][j] = abs(res);
+        ls.clear();
+        rs.clear();
+    }
+    return ans;
+}
 ```
-- We loop through each cell in the grid using two nested loops: one for the rows (`i`) and one for the columns (`j`).
-- For each cell, we initialize the row (`r`) and column (`c`) pointers for the upper-left diagonal to be one cell above and one cell to the left of the current cell (`i - 1`, `j - 1`).
-- We then traverse the upper-left diagonal by moving up and left, inserting the elements into the `ls` set until we hit the top or left boundary of the grid.
-- After processing the upper-left diagonal, we reset the row (`r`) and column (`c`) pointers for the lower-right diagonal to be one cell below and one cell to the right of the current cell (`i + 1`, `j + 1`).
-- We traverse the lower-right diagonal by moving down and right, inserting the elements into the `rs` set until we hit the bottom or right boundary of the grid.
 
-#### Step 3: Compute the difference of distinct values and store it
-```cpp
-int res = ls.size() - rs.size();
-ans[i][j] = abs(res);
-ls.clear();
-rs.clear();
-```
-- After traversing both diagonals for the current cell, we calculate the difference between the sizes of the `ls` and `rs` sets, which represent the number of distinct values in the upper-left and lower-right diagonals, respectively.
-- We store the absolute value of the difference in the `ans` matrix at the corresponding position `ans[i][j]`.
-- We clear the sets `ls` and `rs` to prepare them for the next cell's diagonal computations.
+The `differenceOfDistinctValues` function calculates the difference between the number of distinct values in the upper-left and bottom-right diagonals for each element in a given 2D grid.
 
-#### Step 4: Return the result
-```cpp
-return ans;
-```
-- After all cells have been processed, we return the `ans` matrix, which contains the computed differences of distinct values for each cell in the grid.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> differenceOfDistinctValues(vector<vector<int>>& grid) {
+	```
+	The function `differenceOfDistinctValues` is declared, which takes a reference to a 2D vector `grid` and returns a 2D vector of integers representing the difference in distinct values for each grid element.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Initialize variables `m` and `n` to store the number of rows and columns of the grid, respectively.
 
-#### Time Complexity
-- The time complexity of this solution is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the grid. This is because:
-  - For each cell, we traverse both its upper-left and lower-right diagonals, which takes **O(m + n)** time in the worst case. However, since the size of each diagonal is bounded by the grid dimensions, the time complexity is proportional to the total number of cells in the grid, i.e., **O(m * n)**.
+3. **2D Vector Initialization**
+	```cpp
+	    vector<vector<int>> ans(m, vector<int>(n, 0));
+	```
+	Initialize the 2D vector `ans` with the same dimensions as the grid and fill it with zeros. This will store the result of the distinct value differences.
 
-#### Space Complexity
-- The space complexity is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the grid. This is because the `ans` matrix has a size of **O(m * n)**, and the sets `ls` and `rs` are used temporarily for each cell to store distinct values along the diagonals, which can hold at most `min(m, n)` elements. Thus, the space complexity is dominated by the size of the `ans` matrix.
+4. **Set Declaration**
+	```cpp
+	    set<int> ls, rs;
+	```
+	Declare two sets, `ls` and `rs`, to store the distinct values found in the upper-left and bottom-right diagonals, respectively.
 
-### Conclusion
+5. **Outer Loop (Rows)**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Iterate through each row of the grid using the index `i`.
 
-This solution efficiently computes the difference of distinct values between the upper-left and lower-right diagonals for each cell in the grid. By using sets to track distinct values and iterating through the grid with two nested loops, we ensure an optimal approach that operates in **O(m * n)** time. The space complexity is also **O(m * n)**, which is efficient given the problem constraints. This approach provides a clean and scalable solution to the problem.
+6. **Inner Loop (Columns)**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Iterate through each column of the grid using the index `j`.
+
+7. **Diagonal Calculation**
+	```cpp
+	        int r = i - 1, c = j - 1;
+	```
+	Initialize variables `r` and `c` to traverse the upper-left diagonal from the current position `(i, j)`. The initial values set the pointers to the position just above and to the left of the current element.
+
+8. **Diagonal Traversal (Left-Up)**
+	```cpp
+	        while(r >= 0 && c >= 0) {
+	```
+	Begin a loop to traverse the upper-left diagonal, stopping when we reach the boundary of the grid.
+
+9. **Set Insertion (Left-Up)**
+	```cpp
+	            ls.insert(grid[r][c]);
+	```
+	Insert the current element from the upper-left diagonal into the set `ls`, ensuring only distinct values are stored.
+
+10. **Pointer Update (Left-Up)**
+	```cpp
+	            r--;
+	```
+	Move the pointer `r` upwards to continue traversing the diagonal.
+
+11. **Pointer Update (Left-Up)**
+	```cpp
+	            c--;
+	```
+	Move the pointer `c` leftwards to continue traversing the diagonal.
+
+12. **Diagonal Setup (Right-Down)**
+	```cpp
+	        r = i + 1, c = j + 1;
+	```
+	Reinitialize `r` and `c` to point to the position just below and to the right of the current element `(i, j)` for the bottom-right diagonal traversal.
+
+13. **Diagonal Traversal (Right-Down)**
+	```cpp
+	        while(r < m && c < n) {
+	```
+	Begin a loop to traverse the bottom-right diagonal, stopping when we reach the boundary of the grid.
+
+14. **Set Insertion (Right-Down)**
+	```cpp
+	            rs.insert(grid[r][c]);
+	```
+	Insert the current element from the bottom-right diagonal into the set `rs`, ensuring only distinct values are stored.
+
+15. **Pointer Update (Right-Down)**
+	```cpp
+	            r++;
+	```
+	Move the pointer `r` downwards to continue traversing the diagonal.
+
+16. **Pointer Update (Right-Down)**
+	```cpp
+	            c++;
+	```
+	Move the pointer `c` rightwards to continue traversing the diagonal.
+
+17. **Difference Calculation**
+	```cpp
+	        int res = ls.size() - rs.size();
+	```
+	Calculate the difference between the number of distinct elements in the upper-left (`ls`) and bottom-right (`rs`) diagonals.
+
+18. **Store Result**
+	```cpp
+	        ans[i][j] = abs(res);
+	```
+	Store the absolute value of the difference in the result matrix `ans` at position `(i, j)`.
+
+19. **Clear Sets**
+	```cpp
+	        ls.clear();
+	```
+	Clear the `ls` set in preparation for the next iteration.
+
+20. **Clear Sets**
+	```cpp
+	        rs.clear();
+	```
+	Clear the `rs` set in preparation for the next iteration.
+
+21. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the `ans` matrix, which contains the differences of distinct values for each element in the grid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n) because we need to process each cell and its diagonals, where m is the number of rows and n is the number of columns.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) for storing the result matrix, and additional space is used for the sets storing distinct values in the diagonals.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/difference-of-number-of-distinct-values-on-diagonals/description/)
 

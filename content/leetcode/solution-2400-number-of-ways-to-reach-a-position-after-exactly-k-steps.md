@@ -14,155 +14,139 @@ img_src = ""
 youtube = "gFsI5OR-GfQ"
 youtube_upload_date="2022-09-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gFsI5OR-GfQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are standing at a starting position `startPos` on an infinite number line, and you need to reach a destination `endPos` in exactly `k` steps. In each step, you can move either one position to the left or one position to the right. Your task is to find the number of different ways to reach `endPos` from `startPos` in exactly `k` steps. Since the number of ways can be very large, return the result modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the integers `startPos`, `endPos`, and `k`. These represent the starting position, the destination, and the number of steps respectively.
+- **Example:** `startPos = 3, endPos = 5, k = 4`
+- **Constraints:**
+	- 1 <= startPos, endPos, k <= 1000
 
-{{< highlight cpp >}}
-int dp[1001][1001] = {};
-int mod = 1000000007;
-class Solution {
-public:
-    int numberOfWays(int start, int end, int k) {
-        return dfs(k, abs(start - end));
-    }
-    
-    int dfs(int k, int d) {
-        if (d >= k) return d == k;
-        if(dp[k][d] == 0)
-            dp[k][d] = (1 + dfs(k-1, d + 1) + dfs(k -1, abs(d -1))) % mod;
-        
-        return dp[k][d] -1;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of ways to reach `endPos` from `startPos` in exactly `k` steps, modulo 10^9 + 7.
+- **Example:** `Output: 4`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the number of valid ways to move from `startPos` to `endPos` in exactly `k` steps, adhering to the movement rules (left or right in each step).
 
-We are tasked with determining the number of ways to reach a target position from a starting position with exactly `k` moves, where each move can either increase, decrease, or keep the current position unchanged. The positions are considered on a one-dimensional number line, and we are given two integers: `start` and `end`, which represent the initial and target positions, respectively.
+- 1. Calculate the absolute difference `d` between `startPos` and `endPos`.
+- 2. Use dynamic programming or recursion with memoization to count the number of ways to reach the target by moving either left or right.
+- 3. Return the count modulo 10^9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values are valid and within the specified range.
+- The number of ways can be very large, so modulo operation must be used.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `startPos = 1, endPos = 2, k = 3`  \
+  **Explanation:** We can reach position 2 from 1 in exactly 3 steps in three distinct ways: 1 -> 2 -> 3 -> 2, 1 -> 2 -> 1 -> 2, and 1 -> 0 -> 1 -> 2. Therefore, the output is 3.
 
-Given the constraints:
-- We need to calculate how many different ways we can move from `start` to `end` using exactly `k` moves.
+- **Input:** `startPos = 2, endPos = 5, k = 10`  \
+  **Explanation:** It is impossible to reach position 5 from position 2 in exactly 10 steps. Hence, the output is 0.
 
-For example:
-- **Input**: `start = 1, end = 3, k = 2`
-- **Output**: `1`
-  - Explanation: The only valid sequence of moves is: 1 → 2 → 3.
+{{< dots >}}
+## Approach 🚀
+The approach involves using a dynamic programming technique or recursion with memoization to count the number of valid ways to move from `startPos` to `endPos` in `k` steps.
 
-### Approach
-
-This problem can be viewed as a dynamic programming problem where we want to count the number of valid sequences of moves that bring us from the `start` position to the `end` position in exactly `k` moves. Here's the step-by-step approach to solving the problem:
-
-1. **Recursive Exploration**:
-   - At each step, we can either:
-     - Increase the current position.
-     - Decrease the current position.
-     - Stay at the current position.
-   - Given that we are allowed exactly `k` moves, we need to explore all possible paths from `start` to `end` using these three types of moves.
-
-2. **Dynamic Programming to Avoid Redundant Calculations**:
-   - Instead of recalculating the number of ways for the same state multiple times, we use a **memoization** technique with a dynamic programming table (`dp`). This table will store the results for subproblems to avoid redundant calculations.
-   - The `dp[k][d]` entry represents the number of ways to move from `start` to `end` with exactly `k` moves, where the current distance is `d` (distance between the current position and the target position).
-
-3. **Base Case**:
-   - If the current distance is greater than the number of remaining moves, then there are no valid paths to the target. Thus, the result is `0` in such cases.
-   - If the distance is equal to the number of remaining moves (`d == k`), it means we have exactly reached the target in the given number of moves. This is the base case of our recursion.
-
-4. **Memoization**:
-   - We will use memoization to store already computed results for a given `k` and `d` in the `dp` table. If a state has been computed before, we can simply return the stored result.
-
-5. **Modular Arithmetic**:
-   - Since the result can be very large, the solution uses a modulus operation with `1000000007` to keep the numbers manageable and to avoid overflow.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize DP Table
-
-The `dp` table is initialized globally with all entries set to `0`. The size of the table is `1001 x 1001` because the maximum number of moves (`k`) is `1000` and the maximum distance (`d`) between the starting and target positions is also bounded by `1000`.
-
-```cpp
-int dp[1001][1001] = {};
-int mod = 1000000007;
-```
-
-#### Step 2: Main Function
-
-The main function `numberOfWays` is called with `start`, `end`, and `k` as input parameters. It computes the absolute difference between the start and end positions (`d = abs(start - end)`) and calls the `dfs` (depth-first search) function to compute the result.
-
+### Initial Thoughts 💭
+- The problem can be reduced to finding paths with exactly `k` steps on a number line, which can be modeled as a dynamic programming problem.
+- We need to calculate the number of paths efficiently, considering both left and right moves at each step.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not have an empty input case since the input size is guaranteed to be within the range 1 to 1000.
+- For large values of `k`, the recursive approach should be optimized using dynamic programming or memoization to avoid recalculating results for the same subproblems.
+- If `startPos` and `endPos` are the same, we must ensure that we move in such a way that we still perform exactly `k` steps.
+- Dynamic programming or memoization should be used to efficiently handle inputs close to the upper limit.
+{{< dots >}}
+## Code 💻
 ```cpp
 int numberOfWays(int start, int end, int k) {
     return dfs(k, abs(start - end));
 }
+
+int dfs(int k, int d) {
+    if (d >= k) return d == k;
+    if(dp[k][d] == 0)
+        dp[k][d] = (1 + dfs(k-1, d + 1) + dfs(k -1, abs(d -1))) % mod;
+    
+    return dp[k][d] -1;
+    
+}
 ```
 
-#### Step 3: Depth-First Search (DFS) with Memoization
+This code implements a recursive approach to finding the number of ways to reach a destination by using dynamic programming and depth-first search (DFS). The `numberOfWays` function calculates the number of possible ways given `start`, `end`, and `k`, using the helper function `dfs`.
 
-The `dfs` function performs the recursive computation. It takes two parameters:
-- `k`: The number of remaining moves.
-- `d`: The current distance between the `start` and `end` positions.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfWays(int start, int end, int k) {
+	```
+	Defines the function `numberOfWays` which takes three parameters: `start`, `end`, and `k`. The function will return the number of ways to reach from `start` to `end` with `k` steps.
 
-The function first checks if the current distance is greater than or equal to the remaining moves (`d >= k`). If it is, the function checks whether `d == k`. If the distance equals `k`, it returns `1`, indicating a valid path. Otherwise, it returns `0`.
+2. **Recursive Call**
+	```cpp
+	    return dfs(k, abs(start - end));
+	```
+	This line calls the helper function `dfs`, passing `k` and the absolute difference between `start` and `end` as arguments.
 
-```cpp
-if (d >= k) return d == k;
-```
+3. **Helper Function Definition**
+	```cpp
+	int dfs(int k, int d) {
+	```
+	Defines the helper function `dfs`, which takes two parameters: `k` (number of steps remaining) and `d` (the current distance to cover). It will return the number of ways to complete the journey recursively.
 
-If the state `(k, d)` has already been computed (i.e., `dp[k][d] > 0`), the function returns the stored value from the `dp` table.
+4. **Base Case Check**
+	```cpp
+	    if (d >= k) return d == k;
+	```
+	Checks if the distance `d` is greater than or equal to `k`. If it is, it checks if `d` is exactly equal to `k` and returns 1 if true (base case), otherwise returns 0.
 
-```cpp
-if(dp[k][d] == 0)
-```
+5. **Memoization Check**
+	```cpp
+	    if(dp[k][d] == 0)
+	```
+	Checks if the value of `dp[k][d]` has been previously computed. If it hasn't been computed (i.e., it is 0), the code proceeds to calculate it.
 
-If the value is not already computed, we recursively calculate the result by considering three possibilities:
-1. We can increase the distance by 1 (`dfs(k - 1, d + 1)`).
-2. We can decrease the distance by 1 (`dfs(k - 1, abs(d - 1))`).
-3. We can keep the distance unchanged (`dfs(k - 1, d)`).
+6. **Recursion and Memoization**
+	```cpp
+	        dp[k][d] = (1 + dfs(k-1, d + 1) + dfs(k -1, abs(d -1))) % mod;
+	```
+	Calculates the number of ways recursively by making two recursive calls to `dfs`: one where the distance increases by 1 (`d + 1`) and another where the distance decreases by 1 (`abs(d - 1)`). The result is stored in `dp[k][d]` and taken modulo `mod`.
 
-The result is the sum of these three possibilities, plus 1 to account for the current move.
+7. **Return Value**
+	```cpp
+	    return dp[k][d] -1;
+	```
+	Returns the computed result from the `dp` array, decrementing it by 1 (to account for the last unnecessary computation step).
 
-```cpp
-dp[k][d] = (1 + dfs(k-1, d + 1) + dfs(k - 1, abs(d - 1))) % mod;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k), where k is the number of steps. This is when the number of recursive calls is minimized due to memoization.
+- **Average Case:** O(k * d), where d is the distance between `startPos` and `endPos`. This depends on the recursive branching.
+- **Worst Case:** O(k * d), where d is the maximum possible distance. Memoization ensures that redundant calculations are avoided.
 
-Finally, the function returns `dp[k][d] - 1` because we started with an initial move that doesn't count in the recursive calculations.
+The time complexity is determined by the number of recursive calls and the distance between `startPos` and `endPos`.
 
-```cpp
-return dp[k][d] - 1;
-```
+### Space Complexity 💾
+- **Best Case:** O(1), if no memoization is used and the problem is solved directly.
+- **Worst Case:** O(k * d), where d is the distance between `startPos` and `endPos`. This is the space used by the memoization table.
 
-#### Step 4: Return the Result
+The space complexity is primarily determined by the size of the memoization table.
 
-After all recursive calls and memoization, the result is stored in `dp[k][d]`, and we return the number of ways to reach the target position in exactly `k` moves.
+**Happy Coding! 🎉**
 
-```cpp
-return dp[k][d] - 1;
-```
-
-### Complexity
-
-#### Time Complexity
-
-- The function `dfs` is called recursively, and for each state `(k, d)`, we are computing the result at most once due to memoization.
-- The `dp` table has `1001 x 1001` entries, and each entry is computed once.
-- The overall time complexity is therefore **O(k * d)**, where `k` is the number of moves and `d` is the maximum possible distance between `start` and `end`.
-
-#### Space Complexity
-
-- The space complexity is determined by the size of the `dp` table, which is **O(k * d)**. Given that the maximum values of `k` and `d` are both `1000`, the space complexity is **O(1001 * 1001)**.
-
-### Conclusion
-
-This solution uses dynamic programming to efficiently compute the number of ways to reach a target position from a starting position in exactly `k` moves. The approach involves memoization to avoid redundant calculations, and the modular arithmetic ensures the result remains within the bounds of standard data types. The time and space complexities are manageable, making this solution suitable for large inputs.
-
-Key Takeaways:
-- The problem is solved using a recursive approach with memoization to track the number of ways to reach the target position.
-- The use of dynamic programming ensures that subproblems are solved only once, improving efficiency.
-- The modular arithmetic ensures that the result remains within bounds and prevents overflow.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/description/)
 

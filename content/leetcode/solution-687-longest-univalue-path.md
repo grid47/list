@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ZeBr9JMcjrU"
 youtube_upload_date="2020-06-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ZeBr9JMcjrU/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,138 +28,225 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/ZeBr9JMcjrU/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary tree. The task is to find the length of the longest path in the tree where all the nodes in the path have the same value. The path can be anywhere in the tree, not necessarily passing through the root. The path length is determined by the number of edges between the nodes.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by its root node.
+- **Example:** `root = [3, 2, 3, 1, 3, null, 3]`
+- **Constraints:**
+	- 0 <= Number of nodes <= 10^4
+	- -1000 <= Node.val <= 1000
+	- Tree depth will not exceed 1000
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-    int maxi;
-public:
-    int longestUnivaluePath(TreeNode* root) {
-        maxi = 0;
-        if((root == NULL) || (root->left == NULL && root->right == NULL)  )
-        return 0;
-        dfs(root);
-        return maxi;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest path in the binary tree where all nodes in the path have the same value. The path length is measured by the number of edges.
+- **Example:** `For root = [3, 2, 3, 1, 3, null, 3], the output is 3.`
+- **Constraints:**
+	- The output should be an integer representing the length of the longest path.
 
-    int dfs(TreeNode *root) {
-        if(root == NULL) return 0;
-        int l = 0, r = 0;
-        int lft = dfs(root->left);
-        int rgt = dfs(root->right);
-        if((root->left != NULL) && (root->left->val == root->val))
-        l = lft;
-        if((root->right != NULL) && (root->right->val == root->val))
-        r = rgt;        
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the longest path where all nodes have the same value in the binary tree.
 
-        maxi = max(maxi, l + r);
-        return 1 + max(l, r);
-    }
-};
-{{< /highlight >}}
----
+- 1. Traverse the tree using DFS to explore the longest path for each node.
+- 2. For each node, check if its left and right child nodes have the same value as itself.
+- 3. Update the maximum path length encountered during the DFS traversal.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree may have a depth of up to 1000 nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [3, 2, 3, 1, 3, null, 3]`  \
+  **Explanation:** The longest path with the same value (i.e., 3) is 3 -> 3 -> 3, which has a length of 3.
 
-### Problem Statement:
-The problem at hand involves finding the longest univalue path in a binary tree. A univalue path is defined as a path where all nodes along the path have the same value. The task is to return the length of the longest path where the nodes have the same value. The path does not necessarily have to pass through the root, but it can go through any node in the tree.
+- **Input:** `root = [4, 4, 4, 1, 1, null, 4]`  \
+  **Explanation:** The longest path with the same value (i.e., 4) is 4 -> 4 -> 4, which has a length of 2.
 
-### Approach:
-To solve this problem, we use a **Depth-First Search (DFS)** approach. The main idea is to traverse the tree and calculate, for each node, the longest path that starts from that node and extends along its left and right subtrees while maintaining the same value. During this traversal, we also keep track of the maximum univalue path encountered so far.
+{{< dots >}}
+## Approach 🚀
+The approach is to use depth-first search (DFS) to traverse the tree and calculate the longest path where all nodes have the same value. We need to explore both left and right subtrees and ensure that the path continues as long as the nodes have the same value.
 
-We need to focus on two main things:
-1. **DFS Traversal**: Recursively explore both left and right subtrees for each node.
-2. **Path Calculation**: For each node, calculate the longest univalue path starting from the current node and extending through its left and right children.
-
-### Code Breakdown (Step by Step):
-
-#### 1. **TreeNode Definition**
-The problem statement includes a predefined `TreeNode` structure:
-```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-```
-Each `TreeNode` contains:
-- `val`: The value of the node.
-- `left`: A pointer to the left child of the node.
-- `right`: A pointer to the right child of the node.
-
-#### 2. **Main Solution Class**
+### Initial Thoughts 💭
+- We need to explore both left and right subtrees for each node to find the longest path where all nodes have the same value.
+- DFS is an ideal choice for this problem since we are required to explore all possible paths in the binary tree.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty, return 0.
+- The solution should handle large trees efficiently with up to 10^4 nodes.
+- If all nodes have the same value, the path length will be the depth of the tree.
+- Ensure the solution works within the constraint that the tree depth will not exceed 1000.
+{{< dots >}}
+## Code 💻
 ```cpp
 class Solution {
-    int maxi;  // To store the maximum length of univalue path found.
+int maxi;
 public:
-    int longestUnivaluePath(TreeNode* root) {
-        maxi = 0;  // Initialize maxi to 0.
-        if ((root == NULL) || (root->left == NULL && root->right == NULL))
-            return 0;  // If the root is null or the tree has no child, return 0.
-        dfs(root);  // Start DFS traversal to calculate the univalue paths.
-        return maxi;  // Return the longest univalue path found.
-    }
+int longestUnivaluePath(TreeNode* root) {
+    maxi = 0;
+    if((root == NULL) || (root->left == NULL && root->right == NULL)  )
+    return 0;
+    dfs(root);
+    return maxi;
+}
+
+int dfs(TreeNode *root) {
+    if(root == NULL) return 0;
+    int l = 0, r = 0;
+    int lft = dfs(root->left);
+    int rgt = dfs(root->right);
+    if((root->left != NULL) && (root->left->val == root->val))
+    l = lft;
+    if((root->right != NULL) && (root->right->val == root->val))
+    r = rgt;        
+
+    maxi = max(maxi, l + r);
+    return 1 + max(l, r);
+}
 ```
-The function `longestUnivaluePath` initializes the `maxi` variable to track the longest path found. If the root is `NULL` or a leaf node (no children), the function returns `0` as there are no paths to explore. Otherwise, it calls the `dfs` function to start the depth-first search from the root and returns the result stored in `maxi`.
 
-#### 3. **DFS Function**
-```cpp
-    int dfs(TreeNode *root) {
-        if (root == NULL) return 0;  // Base case: if the node is NULL, return 0.
-        int l = 0, r = 0;  // Initialize the lengths of the left and right paths.
-        int lft = dfs(root->left);  // Recursive DFS for the left child.
-        int rgt = dfs(root->right);  // Recursive DFS for the right child.
-        
-        // If the left child has the same value as the current node, extend the left path.
-        if ((root->left != NULL) && (root->left->val == root->val))
-            l = lft;  
-        
-        // If the right child has the same value as the current node, extend the right path.
-        if ((root->right != NULL) && (root->right->val == root->val))
-            r = rgt;
+This solution defines a method to find the longest univalue path in a binary tree, where the path consists of nodes with the same value. The method uses depth-first search (DFS) to calculate the longest path, updating the maximum length when necessary.
 
-        // Update the maxi variable to store the maximum length of the univalue path.
-        maxi = max(maxi, l + r);  
-        
-        // Return the longest univalue path starting from the current node.
-        return 1 + max(l, r);  
-    }
-};
-```
-The `dfs` function works recursively to explore the tree. It computes the longest univalue path that starts from the current node and extends to its left or right subtree. Here’s how it works:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Define the Solution class where the main logic for finding the longest univalue path will be implemented.
 
-- **Base Case**: If the current node is `NULL`, return `0` as there’s no path to explore.
-- **Recursive Case**: 
-  - Call `dfs(root->left)` and `dfs(root->right)` to get the longest univalue paths starting from the left and right subtrees, respectively.
-  - Check if the left or right children have the same value as the current node. If they do, extend the path from that child.
-- **Update `maxi`**: After checking both left and right subtrees, calculate the total univalue path that passes through the current node by summing the lengths of the left and right paths (`l + r`), and update `maxi` with the maximum of its current value and the new path length.
-- **Return the Length**: Return the length of the longest univalue path starting from the current node. Since the current node is part of the path, add `1` to the maximum of the left and right path lengths.
+2. **Variable Declaration**
+	```cpp
+	int maxi;
+	```
+	Declare the variable 'maxi' to store the maximum length of the univalue path found during the DFS traversal.
 
-#### 4. **Final Output**
-Once the DFS is complete, the longest univalue path will be stored in `maxi`, which is then returned by the `longestUnivaluePath` function.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	The 'public' access modifier indicates that the following methods and variables are accessible from outside the class.
 
-### Complexity:
+4. **Method Definition**
+	```cpp
+	int longestUnivaluePath(TreeNode* root) {
+	```
+	Define the 'longestUnivaluePath' method, which accepts a TreeNode 'root' and returns the length of the longest path of nodes with the same value.
 
-#### Time Complexity:
-The time complexity of this solution is **O(N)**, where `N` is the number of nodes in the binary tree. The reason for this is that the DFS function visits each node exactly once, performing a constant amount of work per node.
+5. **Initialize maxi**
+	```cpp
+	    maxi = 0;
+	```
+	Initialize 'maxi' to zero before starting the DFS traversal.
 
-#### Space Complexity:
-The space complexity is **O(H)**, where `H` is the height of the tree. This is due to the recursive nature of DFS, where the maximum number of recursive calls that can be stacked is equal to the height of the tree. In the worst case (a skewed tree), this could be `O(N)`.
+6. **Base Case Check**
+	```cpp
+	    if((root == NULL) || (root->left == NULL && root->right == NULL)  )
+	```
+	Check if the root is NULL or if the root has no children. If either condition is true, return 0 as no univalue path can exist.
 
-### Conclusion:
-This solution effectively solves the problem of finding the longest univalue path in a binary tree using a depth-first search (DFS) approach. It efficiently computes the longest path where all nodes have the same value by recursively exploring the left and right subtrees of each node while keeping track of the maximum path length found. The time and space complexity are optimal for a tree traversal algorithm, making this solution both time-efficient and space-efficient.
+7. **Return 0**
+	```cpp
+	    return 0;
+	```
+	Return 0 if the root node is NULL or a leaf node, as no path is possible.
+
+8. **DFS Call**
+	```cpp
+	    dfs(root);
+	```
+	Call the DFS helper function to start the depth-first search on the tree.
+
+9. **Return Maxi**
+	```cpp
+	    return maxi;
+	```
+	After completing the DFS traversal, return the value of 'maxi', which holds the longest univalue path.
+
+10. **Helper Method Definition**
+	```cpp
+	int dfs(TreeNode *root) {
+	```
+	Define the 'dfs' method that performs a depth-first search on the tree and returns the length of the longest univalue path starting from the current node.
+
+11. **Base Case Check**
+	```cpp
+	    if(root == NULL) return 0;
+	```
+	Check if the current node is NULL. If it is, return 0 since there's no univalue path from a NULL node.
+
+12. **Initialize Left and Right**
+	```cpp
+	    int l = 0, r = 0;
+	```
+	Initialize two variables, 'l' and 'r', to store the lengths of univalue paths in the left and right subtrees, respectively.
+
+13. **Recursive DFS for Left Subtree**
+	```cpp
+	    int lft = dfs(root->left);
+	```
+	Recursively call 'dfs' on the left child of the current node and store the result in 'lft'.
+
+14. **Recursive DFS for Right Subtree**
+	```cpp
+	    int rgt = dfs(root->right);
+	```
+	Recursively call 'dfs' on the right child of the current node and store the result in 'rgt'.
+
+15. **Left Child Univalue Path Check**
+	```cpp
+	    if((root->left != NULL) && (root->left->val == root->val))
+	```
+	If the left child exists and has the same value as the current node, add the length of the left univalue path ('lft') to 'l'.
+
+16. **Update Left Path Length**
+	```cpp
+	    l = lft;
+	```
+	Update 'l' with the value of 'lft', which represents the length of the univalue path on the left side.
+
+17. **Right Child Univalue Path Check**
+	```cpp
+	    if((root->right != NULL) && (root->right->val == root->val))
+	```
+	If the right child exists and has the same value as the current node, add the length of the right univalue path ('rgt') to 'r'.
+
+18. **Update Right Path Length**
+	```cpp
+	    r = rgt;        
+	```
+	Update 'r' with the value of 'rgt', which represents the length of the univalue path on the right side.
+
+19. **Max Path Calculation**
+	```cpp
+	    maxi = max(maxi, l + r);
+	```
+	Update 'maxi' to be the maximum of the current value of 'maxi' and the sum of 'l' and 'r', which represents the longest univalue path found so far.
+
+20. **Return Path Length**
+	```cpp
+	    return 1 + max(l, r);
+	```
+	Return the length of the longest univalue path that includes the current node. This is done by adding 1 to the maximum of 'l' and 'r'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of nodes in the tree
+- **Average Case:** O(n), since we visit each node once during the DFS
+- **Worst Case:** O(n), where n is the number of nodes in the tree
+
+The time complexity is linear in terms of the number of nodes, as each node is visited once.
+
+### Space Complexity 💾
+- **Best Case:** O(h), where h is the height of the tree
+- **Worst Case:** O(h), where h is the height of the tree (which can be up to 1000 in the worst case)
+
+The space complexity is proportional to the height of the tree, as the DFS function uses the system call stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-univalue-path/description/)
 

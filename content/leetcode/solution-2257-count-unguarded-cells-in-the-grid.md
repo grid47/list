@@ -14,195 +14,260 @@ img_src = ""
 youtube = "V4jbxAhIHJw"
 youtube_upload_date="2022-04-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/V4jbxAhIHJw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed grid of size `m x n`. Some cells in the grid are occupied by guards, and some by walls. A guard can observe all cells in the four cardinal directions (north, east, south, and west) from its position unless blocked by a wall or another guard. A cell is considered guarded if at least one guard can see it. Your task is to determine the number of cells that are unoccupied and are not guarded.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the grid dimensions `m` and `n`, followed by two lists: `guards` and `walls`. The `guards` list contains the positions of guards, and the `walls` list contains the positions of walls in the grid.
+- **Example:** `m = 5, n = 5, guards = [[0,0],[2,2],[4,4]], walls = [[1,1],[3,3]]`
+- **Constraints:**
+	- 1 <= m, n <= 10^5
+	- 2 <= m * n <= 10^5
+	- 1 <= guards.length, walls.length <= 5 * 10^4
+	- 2 <= guards.length + walls.length <= m * n
+	- guards[i].length == walls[j].length == 2
+	- 0 <= rowi, rowj < m
+	- 0 <= coli, colj < n
+	- All positions in guards and walls are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countUnguarded(int m, int n, vector<vector<int>>& guards, vector<vector<int>>& walls) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of unoccupied and unguarded cells in the grid.
+- **Example:** `Output: 12`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To count the number of cells that are neither occupied by walls nor guarded by any guard.
+
+- Initialize a grid of size `m x n` with all values set to 0 (indicating unoccupied and unguarded cells).
+- Mark the cells occupied by walls with a 1.
+- Mark the cells occupied by guards with a 3.
+- For each guard, mark the cells in the four cardinal directions (north, south, east, and west) as guarded, until a wall or another guard is encountered.
+- After processing all guards, count the number of cells that are neither occupied by walls nor guarded.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each guard can only guard cells in the four cardinal directions, and no diagonal observation is allowed.
+- If a guard is at a position, it is not considered unguarded by itself.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `m = 5, n = 5, guards = [[0,0],[2,2],[4,4]], walls = [[1,1],[3,3]]`  \
+  **Explanation:** The guards will guard cells in the four cardinal directions unless blocked by a wall. After processing the guards and walls, the remaining unguarded and unoccupied cells are counted.
+
+- **Input:** `m = 4, n = 4, guards = [[0,0]], walls = [[1,1], [3,3]]`  \
+  **Explanation:** The grid has walls at (1,1) and (3,3), and a guard at (0,0). After marking the guarded cells, we count the unguarded ones.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved efficiently by using a grid to keep track of the state of each cell and iterating through each guard to mark the cells they can observe.
+
+### Initial Thoughts 💭
+- Each guard can influence a significant number of cells, so the solution needs to efficiently track the influence of each guard.
+- Walls block the guard's vision, so they need to be taken into account while marking guarded cells.
+- We can use a grid to represent the state of each cell and iteratively mark the cells guarded by each guard. We can then count the unguarded cells.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no guards, all cells except walls are unguarded.
+- Ensure that the solution can handle grids with a large number of cells (up to 10^5) efficiently.
+- If the grid is completely surrounded by walls or contains no guards, the number of unguarded cells is easy to determine.
+- Handle large inputs efficiently by processing guards and walls in an optimized manner.
+{{< dots >}}
+## Code 💻
+```cpp
+int countUnguarded(int m, int n, vector<vector<int>>& guards, vector<vector<int>>& walls) {
+    
+    vector<vector<int>> grid(m, vector<int>(n, 0));
+    
+    for(auto it: walls) {
+        grid[it[0]][it[1]] = 1;
+    }
+    
+    for(auto it: guards) {
+        grid[it[0]][it[1]] = 3;
+    }        
+    
+    for(auto it: guards) {
+        int x = it[0], y = it[1];
         
-        vector<vector<int>> grid(m, vector<int>(n, 0));
-        
-        for(auto it: walls) {
-            grid[it[0]][it[1]] = 1;
+        for(int i = y + 1; i < n && grid[x][i] != 1 && grid[x][i] != 3; i++) {
+            grid[x][i] = 2;
         }
         
-        for(auto it: guards) {
-            grid[it[0]][it[1]] = 3;
-        }        
+        for(int i = y - 1; i >=0 && grid[x][i] != 1 && grid[x][i] != 3; i--) {
+            grid[x][i] = 2;
+        }            
         
-        for(auto it: guards) {
-            int x = it[0], y = it[1];
-            
-            for(int i = y + 1; i < n && grid[x][i] != 1 && grid[x][i] != 3; i++) {
-                grid[x][i] = 2;
-            }
-            
-            for(int i = y - 1; i >=0 && grid[x][i] != 1 && grid[x][i] != 3; i--) {
-                grid[x][i] = 2;
-            }            
-            
-            for(int i = x + 1; i < m && grid[i][y] != 1 && grid[i][y] != 3; i++) {
-                grid[i][y] = 2;
-            }
-            
-            for(int i = x - 1; i >= 0 && grid[i][y] != 1 && grid[i][y] != 3; i--) {
-                grid[i][y] = 2;
-            }
-            // grid[x][y] = 3;
+        for(int i = x + 1; i < m && grid[i][y] != 1 && grid[i][y] != 3; i++) {
+            grid[i][y] = 2;
         }
-        int cnt = 0;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 0) cnt++;
         
-        return cnt;
+        for(int i = x - 1; i >= 0 && grid[i][y] != 1 && grid[i][y] != 3; i--) {
+            grid[i][y] = 2;
+        }
+        // grid[x][y] = 3;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to determine how many grid cells in an \(m \times n\) grid are **unguarded**. A grid can contain **walls**, **guards**, and **unguarded spaces**. We are given the dimensions of the grid and two lists: one for the positions of the walls and one for the positions of the guards. The challenge is to calculate how many cells are not guarded by any guard and are not blocked by any wall.
-
-### Approach
-
-To solve this problem, we can approach it by simulating the process of marking cells in the grid as guarded or blocked:
-
-1. **Initial Setup**:
-   - We'll represent the grid as a 2D array where each cell can either be empty, contain a wall, or contain a guard. We'll mark the cells as:
-     - `0`: Empty space
-     - `1`: Wall
-     - `2`: Guarded space
-     - `3`: Guard (we'll mark the guards explicitly)
-
-2. **Place Walls and Guards**:
-   - Start by placing walls and guards in the grid. This step simply assigns the value `1` for walls and `3` for guards at their respective positions.
-
-3. **Mark Guarded Spaces**:
-   - A guard can "see" in four directions: up, down, left, and right, until it hits a wall or another guard.
-   - For each guard, we will mark all cells it can reach (in the four directions) as **guarded**, denoted by the value `2`.
-
-4. **Count Unguarded Spaces**:
-   - After marking all guarded and blocked spaces, the unguarded spaces will be the cells that remain with a value of `0`.
-
-5. **Edge Cases**:
-   - We need to consider scenarios where:
-     - There are no guards or walls.
-     - The entire grid is blocked by walls.
-     - Guards cannot see beyond walls or other guards.
-     - All cells are guarded.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Grid
-
-```cpp
-vector<vector<int>> grid(m, vector<int>(n, 0));
-```
-
-- We initialize a 2D grid of size \(m \times n\), where all cells are initially set to `0`, indicating that they are empty (unguarded).
-
-#### Step 2: Place Walls
-
-```cpp
-for(auto it: walls) {
-    grid[it[0]][it[1]] = 1;
-}
-```
-
-- For each position in the `walls` array, we mark the corresponding cell in the grid as `1` (wall).
-
-#### Step 3: Place Guards
-
-```cpp
-for(auto it: guards) {
-    grid[it[0]][it[1]] = 3;
-}
-```
-
-- Similarly, for each position in the `guards` array, we mark the corresponding cell as `3` (guard).
-
-#### Step 4: Mark Guarded Spaces
-
-```cpp
-for(auto it: guards) {
-    int x = it[0], y = it[1];
-
-    // Mark right direction
-    for(int i = y + 1; i < n && grid[x][i] != 1 && grid[x][i] != 3; i++) {
-        grid[x][i] = 2;
-    }
-
-    // Mark left direction
-    for(int i = y - 1; i >= 0 && grid[x][i] != 1 && grid[x][i] != 3; i--) {
-        grid[x][i] = 2;
-    }
-
-    // Mark down direction
-    for(int i = x + 1; i < m && grid[i][y] != 1 && grid[i][y] != 3; i++) {
-        grid[i][y] = 2;
-    }
-
-    // Mark up direction
-    for(int i = x - 1; i >= 0 && grid[i][y] != 1 && grid[i][y] != 3; i--) {
-        grid[i][y] = 2;
-    }
-}
-```
-
-- For each guard:
-  - We iterate over the four directions (right, left, down, up).
-  - For each direction, we check if the current cell is a wall (`1`) or another guard (`3`). If it's neither, we mark it as guarded (`2`).
-  - The guard stops marking spaces as guarded once it hits a wall or another guard.
-
-#### Step 5: Count Unguarded Spaces
-
-```cpp
-int cnt = 0;
-for(int i = 0; i < m; i++)
+    int cnt = 0;
+    for(int i = 0; i < m; i++)
     for(int j = 0; j < n; j++)
         if(grid[i][j] == 0) cnt++;
+    
+    return cnt;
+}
 ```
 
-- After all guards have marked their reachable spaces, we iterate through the grid again to count the number of unguarded spaces (cells with value `0`).
+This function counts the number of unguarded cells in a grid given the positions of guards and walls. The grid is marked with various values to represent walls, guards, and cells that are under the guards' influence.
 
-#### Step 6: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int countUnguarded(int m, int n, vector<vector<int>>& guards, vector<vector<int>>& walls) {
+	```
+	This is the function signature where the input parameters `m` and `n` represent the dimensions of the grid, while `guards` and `walls` represent the locations of the guards and walls, respectively.
 
-```cpp
-return cnt;
-```
+2. **Grid Initialization**
+	```cpp
+	    vector<vector<int>> grid(m, vector<int>(n, 0));
+	```
+	Here, we create a grid with `m` rows and `n` columns, initializing all values to 0, representing empty cells.
 
-- Finally, we return the count of unguarded cells.
+3. **Walls Placement**
+	```cpp
+	    for(auto it: walls) {
+	```
+	This loop iterates through the walls' positions and marks them on the grid.
 
-### Complexity
+4. **Mark Walls**
+	```cpp
+	        grid[it[0]][it[1]] = 1;
+	```
+	Each wall's position is marked with a value of 1 on the grid, indicating that the cell is blocked.
 
-#### Time Complexity
+5. **Guards Placement**
+	```cpp
+	    for(auto it: guards) {
+	```
+	This loop iterates through the guards' positions and places them on the grid.
 
-- **Placing Walls**: We iterate over the `walls` list, which contains at most `O(m \times n)` elements (in the worst case where all cells are walls).
-  - Time complexity: \( O(w) \), where `w` is the number of walls.
-  
-- **Placing Guards**: Similarly, for each guard, we mark cells in four directions. In the worst case, we might iterate through the entire row or column, so this operation takes \( O(m \times n) \) time for each guard.
-  - Time complexity: \( O(g \times (m + n)) \), where `g` is the number of guards.
+6. **Mark Guards**
+	```cpp
+	        grid[it[0]][it[1]] = 3;
+	```
+	Each guard's position is marked with a value of 3 on the grid.
 
-- **Counting Unguarded Spaces**: We iterate through the entire grid once, which takes \( O(m \times n) \).
+7. **Guard Influence Calculation**
+	```cpp
+	    for(auto it: guards) {
+	```
+	This loop processes each guard's position to mark all cells in its line of sight as guarded.
 
-Therefore, the overall time complexity is \( O(m \times n + g \times (m + n)) \), where `m` and `n` are the grid dimensions, and `g` is the number of guards.
+8. **Get Guard Coordinates**
+	```cpp
+	        int x = it[0], y = it[1];
+	```
+	Here, we extract the coordinates `x` and `y` of the current guard.
 
-#### Space Complexity
+9. **Guard Influence Right**
+	```cpp
+	        for(int i = y + 1; i < n && grid[x][i] != 1 && grid[x][i] != 3; i++) {
+	```
+	This loop marks cells to the right of the guard as being in its line of sight, stopping at walls or other guards.
 
-The space complexity is dominated by the space required to store the grid:
-- Space complexity: \( O(m \times n) \).
+10. **Mark Right Influence**
+	```cpp
+	            grid[x][i] = 2;
+	```
+	Each cell in the guard's rightward line of sight is marked with a 2 to indicate it is under guard surveillance.
 
-### Conclusion
+11. **Guard Influence Left**
+	```cpp
+	        for(int i = y - 1; i >= 0 && grid[x][i] != 1 && grid[x][i] != 3; i--) {
+	```
+	This loop marks cells to the left of the guard as being in its line of sight.
 
-This solution efficiently calculates the number of unguarded spaces in a grid by marking the regions each guard can reach and counting the remaining unmarked spaces. Using a 2D grid, we can easily track walls, guards, and guarded spaces. The approach ensures that the time complexity remains manageable, even for large grids, by leveraging efficient marking and iteration techniques.
+12. **Mark Left Influence**
+	```cpp
+	            grid[x][i] = 2;
+	```
+	Each cell in the guard's leftward line of sight is marked with a 2 to indicate it is under guard surveillance.
+
+13. **Guard Influence Down**
+	```cpp
+	        for(int i = x + 1; i < m && grid[i][y] != 1 && grid[i][y] != 3; i++) {
+	```
+	This loop marks cells below the guard as being in its line of sight.
+
+14. **Mark Down Influence**
+	```cpp
+	            grid[i][y] = 2;
+	```
+	Each cell in the guard's downward line of sight is marked with a 2.
+
+15. **Guard Influence Up**
+	```cpp
+	        for(int i = x - 1; i >= 0 && grid[i][y] != 1 && grid[i][y] != 3; i--) {
+	```
+	This loop marks cells above the guard as being in its line of sight.
+
+16. **Mark Up Influence**
+	```cpp
+	            grid[i][y] = 2;
+	```
+	Each cell in the guard's upward line of sight is marked with a 2.
+
+17. **Count Unguarded Cells**
+	```cpp
+	    int cnt = 0;
+	```
+	We initialize a counter `cnt` to track the number of unguarded cells.
+
+18. **Iterate Grid**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	This loop iterates through each row of the grid.
+
+19. **Iterate Grid Columns**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	This loop iterates through each column of the grid.
+
+20. **Count Unguarded Cells**
+	```cpp
+	        if(grid[i][j] == 0) cnt++;
+	```
+	If the cell is not a wall (1) or a guard (3), we increment the counter for unguarded cells.
+
+21. **Return Count**
+	```cpp
+	    return cnt;
+	```
+	Finally, the function returns the count of unguarded cells.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is linear in terms of the number of cells in the grid, as we process each guard and wall individually.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is proportional to the size of the grid, as we store the state of each cell.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-unguarded-cells-in-the-grid/description/)
 

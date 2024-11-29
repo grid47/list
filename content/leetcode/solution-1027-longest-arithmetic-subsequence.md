@@ -14,88 +14,174 @@ img_src = ""
 youtube = "-NIlLdVKBFs"
 youtube_upload_date="2020-10-10"
 youtube_thumbnail="https://i.ytimg.com/vi/-NIlLdVKBFs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers, you need to return the length of the longest subsequence where the difference between consecutive elements is constant. A subsequence is derived by deleting some elements without changing the order of the remaining elements. A sequence is considered arithmetic if the difference between consecutive elements remains the same.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array of integers.
+- **Example:** `nums = [5,10,15,20]`
+- **Constraints:**
+	- 2 <= nums.length <= 1000
+	- 0 <= nums[i] <= 500
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestArithSeqLength(vector<int>& nums) {
-        
-        int n = nums.size();
-        vector<unordered_map<int, int>> mp;
-        mp.resize(n);
-        int res = 1;
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < i; j++) {
-                int d = nums[j] - nums[i];
-                if(mp[j].count(d)) mp[i][d] = max(mp[i][d], mp[j][d] + 1);
-                else mp[i][d] = max(mp[i][d], 2);
-                res = max(mp[i][d], res);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the length of the longest arithmetic subsequence in the given array.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The arithmetic subsequence is derived by deleting some elements without changing the order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the length of the longest subsequence with a constant difference between consecutive elements. This can be done using dynamic programming.
+
+- 1. Use dynamic programming with a hash map to track the longest arithmetic subsequences for each difference between pairs of elements.
+- 2. Iterate through each pair of elements in the array and compute the difference.
+- 3. Update the hash map with the longest subsequence length for the calculated difference.
+- 4. Keep track of the longest subsequence found during the iteration.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array has at least 2 elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [5,10,15,20]`  \
+  **Explanation:** In this example, the difference between each consecutive pair of elements is 5. The entire array forms an arithmetic subsequence with length 4.
+
+- **Input:** `Input: nums = [10, 5, 15, 25, 30]`  \
+  **Explanation:** Here, the longest arithmetic subsequence is [5, 15, 25] with a difference of 10, so the output is 3.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using dynamic programming (DP) where we maintain a hash map for each element to store the length of the longest subsequence for each difference encountered.
+
+### Initial Thoughts 💭
+- The problem involves finding subsequences, which suggests a dynamic programming approach.
+- The use of hash maps allows us to efficiently track the longest subsequences for each difference, reducing redundant calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- An array with fewer than 2 elements should not be given (based on the constraints).
+- The solution must efficiently handle arrays with up to 1000 elements.
+- If all elements are the same, the longest arithmetic subsequence is the entire array, since the difference is 0.
+- The array will not contain values outside the range 0 to 500.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestArithSeqLength(vector<int>& nums) {
+    
+    int n = nums.size();
+    vector<unordered_map<int, int>> mp;
+    mp.resize(n);
+    int res = 1;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < i; j++) {
+            int d = nums[j] - nums[i];
+            if(mp[j].count(d)) mp[i][d] = max(mp[i][d], mp[j][d] + 1);
+            else mp[i][d] = max(mp[i][d], 2);
+            res = max(mp[i][d], res);
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
+This function computes the length of the longest arithmetic subsequence in the array using dynamic programming with a difference-based map for efficient tracking.
 
-### Problem Statement
-The task is to find the length of the longest arithmetic subsequence in a given array of integers. An arithmetic subsequence is a sequence of numbers such that the difference between consecutive elements is constant. For example, in the array `[3, 6, 9, 12]`, the longest arithmetic subsequence is the entire array itself, with a common difference of `3`. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestArithSeqLength(vector<int>& nums) {
+	```
+	Define the function `longestArithSeqLength` which calculates the length of the longest arithmetic subsequence in the given array.
 
-### Approach
-To solve the problem of finding the longest arithmetic subsequence:
-1. **Dynamic Programming with Hash Maps**: The solution utilizes a dynamic programming approach where a vector of hash maps is employed to track the lengths of arithmetic subsequences for each pair of indices in the array.
-2. **Calculate Differences**: For every pair of indices `(i, j)` where `j < i`, the difference `d = nums[j] - nums[i]` is calculated. This difference represents the common difference of the arithmetic sequence formed by `nums[j]` and `nums[i]`.
-3. **Update Lengths**: The lengths of the arithmetic subsequences are updated based on whether the difference `d` has been seen before for the index `j`. If it has, the length of the arithmetic sequence ending at `i` can be extended from that of `j`. Otherwise, a new sequence of length `2` is started from this pair.
-4. **Track Maximum Length**: Throughout the iteration, the maximum length of any arithmetic subsequence found is updated.
+2. **Initialize Size**
+	```cpp
+	    int n = nums.size();
+	```
+	Store the size of the input array `nums` into the variable `n`.
 
-### Code Breakdown (Step by Step)
+3. **Data Structure Initialization**
+	```cpp
+	    vector<unordered_map<int, int>> mp;
+	```
+	Declare a vector of unordered maps to store the difference and its count for each element in the array.
 
-1. **Function Declaration**:
-   - The `longestArithSeqLength` function is defined in the `Solution` class. It takes a vector of integers (`vector<int>& nums`) as its parameter.
+4. **Resize Vector**
+	```cpp
+	    mp.resize(n);
+	```
+	Resize the vector of unordered maps to the size of the input array.
 
-2. **Initialization**:
-   - The size of the input vector `nums` is stored in `n`. 
-   - A vector of unordered maps (`mp`) is created, where each index corresponds to an element in `nums`. Each map will store the common difference as the key and the length of the longest arithmetic subsequence ending at that index as the value.
+5. **Initialize Result**
+	```cpp
+	    int res = 1;
+	```
+	Initialize the result variable `res` to 1, as the minimum possible arithmetic subsequence length is 1.
 
-3. **Result Variable**:
-   - The variable `res` is initialized to `1`, which represents the minimum possible length of an arithmetic subsequence (a single number).
+6. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterate over the array elements with index `i` as the end of a potential arithmetic subsequence.
 
-4. **Iterating Over Pairs**:
-   - A nested loop structure is established:
-     - The outer loop iterates over each element `i` in `nums`.
-     - The inner loop iterates over each preceding element `j` (where `j < i`) to compare with the current element.
+7. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < i; j++) {
+	```
+	Iterate over previous elements with index `j` to calculate the difference `d` between elements at indices `j` and `i`.
 
-5. **Calculate the Difference**:
-   - For each pair `(j, i)`, the difference `d` is calculated as `nums[j] - nums[i]`. This difference is essential in determining the arithmetic nature of the subsequence.
+8. **Calculate Difference**
+	```cpp
+	            int d = nums[j] - nums[i];
+	```
+	Calculate the difference `d` between elements at indices `j` and `i`.
 
-6. **Check for Existing Differences**:
-   - A check is performed to see if the difference `d` exists in the map at index `j` (`mp[j].count(d)`). 
-   - If it does, the length of the arithmetic subsequence can be extended. The length at index `i` for difference `d` is updated to the maximum of its current value and the value at `mp[j][d] + 1`.
-   - If the difference does not exist in the map for `j`, it initializes `mp[i][d]` to `2`, indicating that a new arithmetic sequence can be formed starting from the pair `(nums[j], nums[i])`.
+9. **Update Map**
+	```cpp
+	            if(mp[j].count(d)) mp[i][d] = max(mp[i][d], mp[j][d] + 1);
+	```
+	If the difference `d` exists in the map for index `j`, update the map for index `i` with the incremented count of the subsequence.
 
-7. **Update Maximum Length**:
-   - The maximum length found so far (`res`) is updated by comparing it to the current length at `mp[i][d]`.
+10. **Initialize Difference**
+	```cpp
+	            else mp[i][d] = max(mp[i][d], 2);
+	```
+	If the difference `d` does not exist in the map for index `j`, initialize it with a value of 2.
 
-8. **Return Result**:
-   - Once all pairs have been processed, the function returns `res`, which now holds the length of the longest arithmetic subsequence in the array.
+11. **Update Result**
+	```cpp
+	            res = max(mp[i][d], res);
+	```
+	Update the result `res` to the maximum length found so far.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of the solution is \(O(n^2)\), where \(n\) is the number of elements in the input array. This is due to the nested loops that iterate over pairs of elements.
-- **Space Complexity**: The space complexity is \(O(n \cdot k)\), where \(k\) is the average number of unique differences. In the worst case, this can also approach \(O(n^2)\) if all differences are unique.
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the length of the longest arithmetic subsequence.
 
-### Conclusion
-The `longestArithSeqLength` function effectively finds the length of the longest arithmetic subsequence using a dynamic programming approach enhanced by hash maps. By tracking the lengths of subsequences based on common differences, the algorithm efficiently computes the desired result.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-This solution is particularly valuable in scenarios involving numerical sequences, such as in data analysis, statistics, and algorithm design competitions, where understanding patterns and subsequences is critical. The approach demonstrates how to combine mathematical reasoning with computational techniques to solve complex problems in a manageable way.
+The time complexity is O(n^2) due to the nested loop over pairs of elements.
 
-In summary, the implementation showcases the versatility of dynamic programming and hash maps in handling sequence-related problems, making it a valuable asset for any programmer's repertoire. The clarity in problem breakdown and structured approach underscores the importance of systematic problem-solving in computer science, contributing to a deeper understanding of algorithm design principles.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the hash maps storing subsequences for each difference.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-arithmetic-subsequence/description/)

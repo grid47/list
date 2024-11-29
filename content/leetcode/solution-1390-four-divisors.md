@@ -14,144 +14,192 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums, find the sum of divisors of all integers in that array that have exactly four divisors. If there are no such integers, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array nums.
+- **Example:** `For nums = [21, 7, 6, 35], the output is 92.`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- 1 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of divisors of the numbers that have exactly four divisors.
+- **Example:** `For nums = [21, 7, 6, 35], the output is 92.`
+- **Constraints:**
+	- If no number has exactly four divisors, return 0.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find numbers with exactly four divisors and sum those divisors.
 
-class Solution {
-public:
+- 1. Loop through each number in nums.
+- 2. For each number, find its divisors.
+- 3. Check if the number has exactly four divisors.
+- 4. If so, sum those divisors and add to the final sum.
+- 5. Return the final sum after processing all numbers.
+{{< dots >}}
+### Problem Assumptions ✅
+- You can assume that the input will always be valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [21, 7, 6, 35], the divisors of 21 are [1, 3, 7, 21] (exactly 4), and the divisors of 6 are [1, 2, 3, 6] (exactly 4). The sum of divisors is 92.`  \
+  **Explanation:** We only consider numbers with exactly four divisors. For each such number, we calculate and sum the divisors.
 
-    int sumFourDivisors(vector<int>& nums) {
-        
-        int sum = 0;
-        
-        for(auto n: nums) {
-            int d = 0;
-            for(int i = 2; i * i <= n; i++) {
-                if(n % i == 0) {
-                    if(d == 0) {
-                        d = i;
-                    } else {
-                        d = 0;
-                        break;
-                    }
+{{< dots >}}
+## Approach 🚀
+To solve the problem, for each number in the array, find its divisors and check if it has exactly four divisors. If so, add the sum of its divisors to the final result.
+
+### Initial Thoughts 💭
+- We need an efficient way to find divisors for large numbers.
+- Iterating through each number and finding its divisors up to the square root of the number can help minimize time complexity.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty.
+- The algorithm must handle arrays of size up to 10^4 and values up to 10^5.
+- If no number has exactly four divisors, return 0.
+- Consider the upper bounds when finding divisors efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int sumFourDivisors(vector<int>& nums) {
+    
+    int sum = 0;
+    
+    for(auto n: nums) {
+        int d = 0;
+        for(int i = 2; i * i <= n; i++) {
+            if(n % i == 0) {
+                if(d == 0) {
+                    d = i;
+                } else {
+                    d = 0;
+                    break;
                 }
             }
-            if(d > 0 && d != n/d) {
-                sum += 1 + n + d + n/d;
-            }            
         }
-        return sum;
+        if(d > 0 && d != n/d) {
+            sum += 1 + n + d + n/d;
+        }            
     }
-};
-{{< /highlight >}}
----
+    return sum;
+}
+```
 
-### Problem Statement
+The function `sumFourDivisors` calculates the sum of the divisors of each number in the `nums` array, only if the number has exactly four divisors. The function uses nested loops to find divisors and checks if a number has exactly four divisors before summing them.
 
-The problem requires us to find the sum of all integers in a given array `nums` that have exactly four divisors. If a number has four divisors, we need to sum those numbers together and return the result. A number with exactly four divisors can be expressed in one of the following ways:
-1. The number is a product of two distinct prime numbers \( p \) and \( q \) (i.e., \( n = p \times q \)). Its divisors will be \( 1, p, q, n \).
-2. The number is a cube of a prime number \( p^3 \) (i.e., \( n = p^3 \)). Its divisors will be \( 1, p, p^2, n \).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sumFourDivisors(vector<int>& nums) {
+	```
+	Define the function `sumFourDivisors`, which takes a vector of integers `nums` and returns the sum of divisors for numbers with exactly four divisors.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initialize the variable `sum` to 0. This will hold the running total of divisors for the numbers in `nums`.
 
-The approach to solving the problem involves iterating through each number in the input array and determining if it has exactly four divisors. We can achieve this by:
-1. Checking divisors of each number up to its square root.
-2. Counting valid divisors found, ensuring they meet the conditions for having exactly four distinct divisors.
-3. If a number meets the conditions, we add it to the total sum.
+3. **Loop**
+	```cpp
+	    for(auto n: nums) {
+	```
+	Start a loop to iterate over each number `n` in the `nums` array.
 
-### Code Breakdown (Step by Step)
+4. **Variable Initialization**
+	```cpp
+	        int d = 0;
+	```
+	Initialize the variable `d` to 0. This will track the divisor of `n` while checking for exactly four divisors.
 
-Let's break down the provided C++ code into its components:
+5. **Nested Loop**
+	```cpp
+	        for(int i = 2; i * i <= n; i++) {
+	```
+	Start a loop to iterate through potential divisors `i` starting from 2, going up to the square root of `n`.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class is defined, which contains the method to solve the problem.
+6. **Divisor Check**
+	```cpp
+	            if(n % i == 0) {
+	```
+	Check if `i` is a divisor of `n`.
 
-2. **Method Definition**:
-   ```cpp
-       int sumFourDivisors(vector<int>& nums) {
-   ```
-   - The method `sumFourDivisors` takes a vector of integers `nums` as input and returns an integer.
+7. **Divisor Assignment**
+	```cpp
+	                if(d == 0) {
+	```
+	If this is the first divisor found, assign `i` to `d`.
 
-3. **Variable Initialization**:
-   ```cpp
-           int sum = 0;
-   ```
-   - An integer variable `sum` is initialized to zero. This variable will hold the cumulative sum of all integers with exactly four divisors.
+8. **Divisor Reset**
+	```cpp
+	                    d = i;
+	```
+	Assign `i` to `d` as the first divisor of `n`.
 
-4. **Iterating Over Each Number**:
-   ```cpp
-           for(auto n: nums) {
-               int d = 0;
-   ```
-   - A for-each loop iterates through each number `n` in the `nums` vector.
-   - A variable `d` is initialized to zero, which will be used to keep track of a potential divisor.
+9. **Divisor Conflict**
+	```cpp
+	                } else {
+	```
+	If a second divisor is found, reset `d` to 0 and break the loop.
 
-5. **Finding Divisors**:
-   ```cpp
-               for(int i = 2; i * i <= n; i++) {
-                   if(n % i == 0) {
-                       if(d == 0) {
-                           d = i;
-                       } else {
-                           d = 0;
-                           break;
-                       }
-                   }
-               }
-   ```
-   - An inner loop iterates through possible divisors starting from 2 up to the square root of `n` (i.e., \( i \times i \leq n \)).
-   - If `i` divides `n`, we check if `d` is still zero. If so, we assign `d` to `i` (indicating we've found one divisor).
-   - If `d` already has a value (indicating a previous divisor was found), we reset `d` to zero and break out of the loop, as more than one divisor was found.
+10. **Reset Divisor**
+	```cpp
+	                    d = 0;
+	```
+	Reset `d` to 0, indicating that the number has more than two divisors, so it won't have exactly four divisors.
 
-6. **Checking Conditions for Four Divisors**:
-   ```cpp
-               if(d > 0 && d != n/d) {
-                   sum += 1 + n + d + n/d;
-               }            
-           }
-   ```
-   - After exiting the inner loop, we check if `d` is greater than zero and if `d` is not equal to `n/d` (to ensure the divisors are distinct).
-   - If both conditions are satisfied, we add the divisors \( 1, n, d, \) and \( n/d \) to `sum`.
+11. **Break Loop**
+	```cpp
+	                    break;
+	```
+	Exit the loop since more than two divisors have been found.
 
-7. **Returning the Result**:
-   ```cpp
-           return sum;
-       }
-   };
-   ```
-   - Finally, the method returns the calculated `sum`.
+12. **Divisor Validation**
+	```cpp
+	        if(d > 0 && d != n/d) {
+	```
+	Check if exactly four divisors are found: `d` and `n/d` must be distinct, and `d` must be greater than 0.
 
-### Complexity
+13. **Sum Calculation**
+	```cpp
+	            sum += 1 + n + d + n/d;
+	```
+	If the number has exactly four divisors, add them to the `sum`. The divisors are `1`, `n`, `d`, and `n/d`.
 
-- **Time Complexity**:
-  - The time complexity of the solution is \( O(m \sqrt{n}) \), where \( m \) is the size of the input array `nums` and \( n \) is the largest number in the array. This is because for each number, we potentially check divisors up to its square root.
+14. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	Return the final sum of divisors for all numbers with exactly four divisors.
 
-- **Space Complexity**:
-  - The space complexity is \( O(1) \), as we are using a constant amount of extra space regardless of the size of the input.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * sqrt(m))
+- **Average Case:** O(n * sqrt(m))
+- **Worst Case:** O(n * sqrt(m))
 
-### Conclusion
+The time complexity is O(n * sqrt(m)) where n is the length of the array and m is the largest value in nums.
 
-The provided solution efficiently calculates the sum of integers that have exactly four divisors by iterating through each number in the input array and checking for valid divisors. 
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The key points to note include:
-- Understanding the mathematical properties that lead to a number having exactly four divisors.
-- Employing efficient divisor-finding logic that minimizes unnecessary calculations.
-- Ensuring that the conditions for distinct prime factors or cube roots are adequately checked.
+The space complexity is O(1) as we only use a constant amount of extra space.
 
-This code provides a clear and effective method for solving the problem, demonstrating both mathematical insight and practical programming skills. 
+**Happy Coding! 🎉**
 
-Overall, it is an excellent example of how to approach problems involving number theory and divisor counting in an algorithmic context. By mastering such techniques, programmers can tackle a wide array of challenges in competitive programming and algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/four-divisors/description/)
 

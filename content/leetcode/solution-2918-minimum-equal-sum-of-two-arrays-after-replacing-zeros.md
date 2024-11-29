@@ -14,139 +14,145 @@ img_src = ""
 youtube = "0l2IwK_OHac"
 youtube_upload_date="2023-10-29"
 youtube_thumbnail="https://i.ytimg.com/vi/0l2IwK_OHac/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays `nums1` and `nums2`, both containing positive integers. Some elements in the arrays are zeros, which need to be replaced with strictly positive integers. The goal is to make the sums of both arrays equal by replacing the zeros in such a way that the resulting sums are the same. Return the minimum possible sum that can make the sums of both arrays equal, or return -1 if it is impossible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays of integers, `nums1` and `nums2`.
+- **Example:** `nums1 = [5, 3, 0, 4, 0], nums2 = [10, 8, 0]`
+- **Constraints:**
+	- 1 <= nums1.length, nums2.length <= 10^5
+	- 0 <= nums1[i], nums2[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long minSum(vector<int>& nums1, vector<int>& nums2) {
-        long long cnt1 = 0, cnt2 = 0, sum1 = 0, sum2 = 0;
-        for(int num: nums1) cnt1 += num == 0, sum1 += num;
-        for(int num: nums2) cnt2 += num == 0, sum2 += num;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum possible sum that can make the sums of both arrays equal, or -1 if it is impossible.
+- **Example:** `Output: 16`
+- **Constraints:**
+	- The output must be an integer.
 
-        if(cnt1 == 0 && cnt2 + sum2 > sum1 ||
-            cnt2 == 0 && cnt1 + sum1 > sum2)
-                return -1;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to calculate the sum of both arrays after replacing all zeros with positive integers in such a way that the sums become equal.
 
-        return max(sum1 + cnt1, sum2 + cnt2);
+- Calculate the sum of both arrays, excluding the zeros.
+- Count how many zeros exist in each array.
+- If the sum of one array is larger than the other and there are no zeros to adjust, return -1.
+- Distribute the necessary values to the zeros to make the sums equal, aiming to minimize the sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both arrays contain at least one element.
+- The values in the arrays are positive integers, except for the zeros.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums1 = [5, 3, 0, 4, 0], nums2 = [10, 8, 0]`  \
+  **Explanation:** We replace the zeros with positive integers in a way that minimizes the sum while making both arrays' sums equal. The result is 16.
 
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+We approach this problem by calculating the initial sums of both arrays and using the zeros to balance the sums while aiming to minimize the final sum.
 
-### Problem Statement:
-The given problem requires determining the minimum sum of two lists, `nums1` and `nums2`, based on specific conditions involving zeros in the lists. The goal is to compute a sum where zeros can potentially influence the outcome. The result is defined by how the zeros in each list interact with the non-zero elements, making this problem an interesting challenge in both logic and optimization.
+### Initial Thoughts 💭
+- We need to make the sums of both arrays equal by replacing the zeros with positive integers.
+- The key is to balance the difference in the sums while minimizing the added values for zeros.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one element in both arrays.
+- The solution must efficiently handle up to 100,000 elements in each array.
+- When one array has no zeros and the other has many, we must ensure the sum can still be balanced.
+- We assume the constraints are within the given limits.
+{{< dots >}}
+## Code 💻
+```cpp
+long long minSum(vector<int>& nums1, vector<int>& nums2) {
+    long long cnt1 = 0, cnt2 = 0, sum1 = 0, sum2 = 0;
+    for(int num: nums1) cnt1 += num == 0, sum1 += num;
+    for(int num: nums2) cnt2 += num == 0, sum2 += num;
 
-### Approach:
-To solve this problem, we need to assess the impact of zeros in each of the two input arrays, `nums1` and `nums2`. The main idea is to calculate the sums of the elements in both arrays, while also counting how many zeros are present. Based on the presence of zeros and their counts, we derive an answer that either represents the minimum sum possible or `-1` if certain conditions are violated. Let's break down the approach step by step:
+    if(cnt1 == 0 && cnt2 + sum2 > sum1 ||
+        cnt2 == 0 && cnt1 + sum1 > sum2)
+            return -1;
 
-1. **Initialization of Variables**:
-   We define several variables:
-   - `cnt1` and `cnt2`: These are counters that track how many zeros exist in `nums1` and `nums2`, respectively.
-   - `sum1` and `sum2`: These variables store the sum of all elements in `nums1` and `nums2`, respectively. These sums will help us calculate the final answer.
+    return max(sum1 + cnt1, sum2 + cnt2);
 
-   ```cpp
-   long long cnt1 = 0, cnt2 = 0, sum1 = 0, sum2 = 0;
-   ```
+}
+```
 
-2. **Iterating through `nums1`**:
-   We loop through the first list `nums1` and:
-   - Increment `cnt1` each time we encounter a zero.
-   - Add the value of each element to `sum1`.
+This function calculates the maximum sum by counting the zeroes in both arrays and summing the elements. If certain conditions are met, it returns -1, otherwise it returns the maximum sum considering the zero counts.
 
-   ```cpp
-   for(int num: nums1) cnt1 += num == 0, sum1 += num;
-   ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long minSum(vector<int>& nums1, vector<int>& nums2) {
+	```
+	Defines the function 'minSum' that takes two vectors of integers, nums1 and nums2, and returns a long long value.
 
-3. **Iterating through `nums2`**:
-   Similarly, we iterate through `nums2` and:
-   - Increment `cnt2` for each zero encountered.
-   - Add each element’s value to `sum2`.
+2. **Variable Initialization**
+	```cpp
+	    long long cnt1 = 0, cnt2 = 0, sum1 = 0, sum2 = 0;
+	```
+	Initializes variables 'cnt1' and 'cnt2' for counting zeros in nums1 and nums2, and 'sum1' and 'sum2' for summing the elements of nums1 and nums2.
 
-   ```cpp
-   for(int num: nums2) cnt2 += num == 0, sum2 += num;
-   ```
+3. **Loop through nums1**
+	```cpp
+	    for(int num: nums1) cnt1 += num == 0, sum1 += num;
+	```
+	Iterates over 'nums1', counting the zeros with 'cnt1' and summing the elements with 'sum1'.
 
-4. **Checking for Invalid Conditions**:
-   After calculating the necessary sums and zero counts, we check if the condition for returning `-1` is met. The condition checks whether one list has no zeros while the other list has a sum that exceeds the first list's sum:
-   - If `cnt1` is `0` (no zeros in `nums1`) and the sum of `nums2` plus `cnt2` (the number of zeros in `nums2`) exceeds the sum of `nums1`, return `-1`.
-   - If `cnt2` is `0` (no zeros in `nums2`) and the sum of `nums1` plus `cnt1` exceeds the sum of `nums2`, return `-1`.
+4. **Loop through nums2**
+	```cpp
+	    for(int num: nums2) cnt2 += num == 0, sum2 += num;
+	```
+	Iterates over 'nums2', counting the zeros with 'cnt2' and summing the elements with 'sum2'.
 
-   ```cpp
-   if(cnt1 == 0 && cnt2 + sum2 > sum1 ||
-      cnt2 == 0 && cnt1 + sum1 > sum2)
-          return -1;
-   ```
+5. **Condition Check**
+	```cpp
+	    if(cnt1 == 0 && cnt2 + sum2 > sum1 ||
+	```
+	Checks if 'cnt1' is zero and if the sum of 'cnt2' and 'sum2' is greater than 'sum1', or if 'cnt2' is zero and if the sum of 'cnt1' and 'sum1' is greater than 'sum2'.
 
-5. **Calculating the Result**:
-   If the invalid conditions are not met, we calculate the final result by returning the maximum of the sum of each list plus its corresponding zero count:
-   - `sum1 + cnt1` represents the sum of `nums1` with the added zeros, and similarly, `sum2 + cnt2` represents the sum of `nums2` with the added zeros.
+6. **Condition Check**
+	```cpp
+	        cnt2 == 0 && cnt1 + sum1 > sum2)
+	```
+	Continues the conditional check to verify the conditions between the elements and sums of both arrays.
 
-   ```cpp
-   return max(sum1 + cnt1, sum2 + cnt2);
-   ```
+7. **Return Statement**
+	```cpp
+	            return -1;
+	```
+	Returns -1 if the previous condition evaluates to true, indicating that the required condition is not met.
 
-   This step ensures that we are computing the minimum sum that satisfies the conditions laid out in the problem statement.
+8. **Return Result**
+	```cpp
+	    return max(sum1 + cnt1, sum2 + cnt2);
+	```
+	Returns the maximum sum between the sums of nums1 with the count of zeroes and nums2 with the count of zeroes.
 
-### Code Breakdown (Step by Step):
-1. **Initialization and Zero Count**:
-   We begin by setting up the variables necessary for tracking the sum and the count of zeros. This prepares us to handle both the sums of the arrays and the conditions that will arise based on the zeros.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m), where n and m are the lengths of nums1 and nums2.
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-   ```cpp
-   long long cnt1 = 0, cnt2 = 0, sum1 = 0, sum2 = 0;
-   ```
+We iterate through both arrays to calculate the sums and counts of zeros.
 
-2. **First Loop: Sum and Zero Count in `nums1`**:
-   This loop iterates through `nums1` and updates the counter `cnt1` for zeros and the sum `sum1` for all elements. The logic in this loop is essential for tracking both the non-zero sum and the count of zeros.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1), since the space used is constant.
 
-   ```cpp
-   for(int num: nums1) cnt1 += num == 0, sum1 += num;
-   ```
+We use a constant amount of space to track sums and counts.
 
-3. **Second Loop: Sum and Zero Count in `nums2`**:
-   Similarly, we loop through `nums2`, updating the `cnt2` and `sum2` values. This loop provides the same information for `nums2` as the first loop does for `nums1`.
+**Happy Coding! 🎉**
 
-   ```cpp
-   for(int num: nums2) cnt2 += num == 0, sum2 += num;
-   ```
-
-4. **Condition for Returning `-1`**:
-   After we have computed the necessary sums and zero counts, we check whether either array has no zeros, and the other array's sum, when adjusted by the zero count, exceeds the sum of the first array. If any of these conditions hold, we return `-1`.
-
-   ```cpp
-   if(cnt1 == 0 && cnt2 + sum2 > sum1 ||
-      cnt2 == 0 && cnt1 + sum1 > sum2)
-          return -1;
-   ```
-
-5. **Final Calculation**:
-   If the invalid conditions are not met, we compute the maximum of the adjusted sums and return it as the result.
-
-   ```cpp
-   return max(sum1 + cnt1, sum2 + cnt2);
-   ```
-
-### Complexity:
-1. **Time Complexity**:
-   The solution involves two loops that each iterate through the arrays `nums1` and `nums2`. Each loop runs in linear time relative to the size of the arrays. Therefore, the overall time complexity is:
-   \[
-   O(n + m)
-   \]
-   where `n` is the size of `nums1` and `m` is the size of `nums2`. Since we only process each element of the arrays once, the solution is efficient and optimal in terms of time complexity.
-
-2. **Space Complexity**:
-   The space complexity of this solution is constant, \(O(1)\), because we only use a fixed number of variables (`cnt1`, `cnt2`, `sum1`, `sum2`) to store intermediate values, regardless of the size of the input arrays.
-
-### Conclusion:
-The solution to this problem efficiently handles the task of calculating the minimum sum of two arrays while considering the impact of zeros in each array. By using a straightforward approach that counts zeros and computes sums, the solution is both time and space efficient. It effectively handles the conditions required for invalid cases and ensures the correct minimum sum is returned based on the given problem statement.
-
-This approach is both simple and optimal, making it suitable for a wide range of input sizes, with the time complexity scaling linearly with the size of the input arrays.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/)
 

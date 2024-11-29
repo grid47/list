@@ -14,122 +14,163 @@ img_src = ""
 youtube = "I5pfHLmrBrA"
 youtube_upload_date="2024-05-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/I5pfHLmrBrA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer `n`, determine the maximum distance between any two adjacent 1's in the binary representation of `n`. Two 1's are adjacent if only 0's separate them. If there are no two adjacent 1's, return 0. The distance between two 1's is the absolute difference in their positions when counting from the rightmost bit.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A single positive integer `n`.
+- **Example:** `Input: n = 13`
+- **Constraints:**
+	- 1 <= n <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int binaryGap(int n) {
-        int res = 0;
-        for (int d = -32; n; n >>=1, d++)
-            if (n % 2) 
-            { 
-                res = max(res, d);
-                d   = 0;
-            }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum distance between any two adjacent 1's in the binary representation of `n`. If there are no adjacent 1's, return 0.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output is a single integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the longest distance between any two adjacent 1's in the binary representation of `n`.
 
-The problem asks to find the **maximum distance** between two consecutive `1` bits in the binary representation of a given number `n`. The binary gap is defined as the number of positions between two consecutive `1` bits, and the goal is to return the largest such gap in the binary representation of `n`. If there are no two consecutive `1` bits, the result should be `0`.
+- Convert the number `n` into its binary representation.
+- Identify the positions of all 1's in the binary string.
+- Calculate the distances between consecutive 1's.
+- Return the maximum distance found.
+{{< dots >}}
+### Problem Assumptions ✅
+- Input `n` is always a valid positive integer within the specified range.
+- The binary representation of `n` has at least one 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 13`  \
+  **Explanation:** Binary representation of 13 is '1101'. The distances between adjacent 1's are 2 (positions 1 and 3) and 1 (positions 3 and 4). The maximum distance is 2.
 
-#### Example:
+- **Input:** `Input: n = 2`  \
+  **Explanation:** Binary representation of 2 is '10'. There are no two adjacent 1's, so the output is 0.
 
-- **Input**: `n = 22`
-- **Binary Representation of `n`**: `10110`
-- **Output**: `2`
-- **Explanation**: The binary representation of `22` is `10110`, and the maximum gap between two consecutive `1` bits is `2` (between positions 2 and 4).
+- **Input:** `Input: n = 21`  \
+  **Explanation:** Binary representation of 21 is '10101'. The distances between adjacent 1's are 2 (positions 1 and 3) and 2 (positions 3 and 5). The maximum distance is 2.
 
-### Problem Explanation
+{{< dots >}}
+## Approach 🚀
+Iterate through the binary representation of `n` while keeping track of the positions of 1's and computing the distances between consecutive 1's.
 
-We are given an integer `n`, and we need to compute the largest binary gap, which is the maximum distance between two consecutive `1` bits in its binary representation. The task is to:
-1. Convert the number into its binary form.
-2. Track the maximum distance between any two consecutive `1` bits in the binary representation.
-
-For example:
-- `n = 5` has a binary representation of `101`. The largest gap between consecutive `1`s is `2`.
-- `n = 8` has a binary representation of `1000`. There are no consecutive `1`s, so the result is `0`.
-
-### Approach
-
-The strategy to solve this problem involves the following steps:
-1. **Initialize** a variable to store the result (`res`) and a variable (`d`) to track the current distance between two consecutive `1`s.
-2. **Loop through each bit** of the number `n`. For each bit:
-   - **Check if the bit is `1`**: If it's `1`, calculate the distance from the previous `1` bit and update the result.
-   - **Reset the distance** after a `1` is encountered.
-3. **Shift the number** to the right to check the next bit. Continue this process until all bits have been processed.
-4. **Return the result**.
-
-By using bitwise operations (shifting and modulo), the solution efficiently processes the number without needing to explicitly convert it to a binary string.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Result and Distance
-
+### Initial Thoughts 💭
+- The binary representation of any number is finite.
+- We only need to calculate distances between positions of 1's.
+- Iterate through the binary digits to find the indices of 1's.
+- Track the maximum distance dynamically while traversing.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as `n` is always provided.
+- Handle binary representations of numbers close to 10^9 efficiently.
+- Inputs like `n = 1` (binary '1') should return 0.
+- Inputs like `n = 2` (binary '10') should return 0.
+- Ensure the function runs in O(log n) time complexity.
+{{< dots >}}
+## Code 💻
 ```cpp
-int res = 0;
-```
-- The variable `res` will hold the largest binary gap encountered. We initialize it to `0`.
-
-```cpp
-for (int d = -32; n; n >>= 1, d++)
-```
-- The `for` loop iterates over the bits of the number `n`. The variable `d` is initialized to `-32` (since the number of bits in a 32-bit integer is 32) and is incremented after each iteration to represent the position of the current bit. The condition `n` ensures the loop continues until all bits of `n` have been processed.
-
-- The `n >>= 1` operation performs a right shift on `n`, which moves each bit of the number one position to the right, effectively checking the next bit.
-
-#### Step 2: Check if the Current Bit is `1`
-
-```cpp
-if (n % 2) 
-{
-    res = max(res, d);
-    d = 0;
+int binaryGap(int n) {
+    int res = 0;
+    for (int d = -32; n; n >>=1, d++)
+        if (n % 2) 
+        { 
+            res = max(res, d);
+            d   = 0;
+        }
+    return res;
 }
 ```
-- The condition `n % 2` checks if the least significant bit of `n` is `1`. If it is:
-  - We update the result `res` to the maximum of the current result and the distance `d`. This ensures that we keep track of the largest gap between consecutive `1` bits.
-  - After encountering a `1`, we reset the distance `d` to `0`, as the next gap will start from this `1` bit.
 
-#### Step 3: Return the Result
+This code defines a function to find the maximum binary gap in an integer. It iterates through the bits of the number and tracks the longest sequence of consecutive 0s between 1s.
 
-```cpp
-return res;
-```
-- After the loop completes and all bits of `n` have been processed, we return the value of `res`, which represents the largest distance between consecutive `1` bits.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int binaryGap(int n) {
+	```
+	The function definition for `binaryGap`, which takes an integer `n` and returns the length of its longest sequence of consecutive 0s in its binary representation.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the result variable `res` to store the maximum binary gap found during the iteration.
 
-#### Time Complexity:
-The time complexity of the solution is `O(log n)`:
-- The number `n` has a logarithmic number of bits (specifically, at most `log(n)` bits).
-- The loop iterates over each bit of the number, performing constant time operations inside the loop.
-- Therefore, the overall time complexity is proportional to the number of bits in `n`, which is `O(log n)`.
+3. **Loop Setup**
+	```cpp
+	    for (int d = -32; n; n >>=1, d++)
+	```
+	Sets up a loop to iterate over the bits of `n`. The variable `d` tracks the distance from the last 1-bit, starting from -32.
 
-#### Space Complexity:
-The space complexity of this solution is `O(1)`:
-- We only use a few integer variables (`res`, `d`) and do not allocate additional memory for arrays or data structures that grow with the size of the input.
-- Thus, the space complexity is constant, i.e., `O(1)`.
+4. **Condition Check**
+	```cpp
+	        if (n % 2) 
+	```
+	Checks if the current bit is 1 by using the modulus operator.
 
-### Conclusion
+5. **Block Start**
+	```cpp
+	        { 
+	```
+	Begins the block of code to execute when a 1-bit is found.
 
-This solution efficiently computes the largest binary gap between consecutive `1` bits in the binary representation of a given number `n`. By using bitwise operations such as right shifting (`n >>= 1`) and modulo (`n % 2`), we can process the number bit by bit without explicitly converting it to a binary string. The approach has an optimal time complexity of `O(log n)` and constant space complexity `O(1)`, making it highly efficient for large inputs.
+6. **Max Gap Calculation**
+	```cpp
+	            res = max(res, d);
+	```
+	Updates the result `res` with the maximum of the current `res` and the value of `d`, which represents the current gap between 1s.
 
-Key points:
-- The algorithm iterates over the bits of the integer `n`, calculating the distance between consecutive `1` bits.
-- By using bitwise operations, the solution avoids the overhead of converting the number to a string or array, leading to a more efficient implementation.
-- The time and space complexities ensure that this solution scales well with large inputs, making it suitable for a variety of scenarios where binary representation analysis is needed.
+7. **Reset Distance**
+	```cpp
+	            d   = 0;
+	```
+	Resets the distance variable `d` to 0 after finding a 1-bit, as the gap calculation restarts.
 
-This code is an example of how bitwise manipulation can be leveraged to solve problems involving binary numbers efficiently.
+8. **Block End**
+	```cpp
+	        }
+	```
+	Ends the block of code for when a 1-bit is encountered.
+
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the maximum binary gap found during the loop.
+
+10. **Function End**
+	```cpp
+	}
+	```
+	Marks the end of the `binaryGap` function.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
+
+The binary representation of `n` has at most log n bits, so the solution iterates through each bit.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space used is constant, as we only maintain a few variables for calculations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-gap/description/)
 

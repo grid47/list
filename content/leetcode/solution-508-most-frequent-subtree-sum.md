@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "CvmRmzBQhu8"
 youtube_upload_date="2023-01-14"
 youtube_thumbnail="https://i.ytimg.com/vi/CvmRmzBQhu8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,177 +28,262 @@ youtube_thumbnail="https://i.ytimg.com/vi/CvmRmzBQhu8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, return the most frequent subtree sum. A subtree sum is the sum of all the node values in the subtree rooted at any node, including the node itself. If there is a tie, return all the subtree sums with the highest frequency.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root node of a binary tree with integer values.
+- **Example:** `[5, 2, -3]`
+- **Constraints:**
+	- 1 <= Number of nodes <= 10^4
+	- -10^5 <= Node.val <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-    int mx;
-public:
-    vector<int> findFrequentTreeSum(TreeNode* root) {
-        vector<int> ans;
-        map<int, int> mp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of the most frequent subtree sums.
+- **Example:** `[2, -3, 4]`
+- **Constraints:**
+	- The output list contains the most frequent subtree sums, with no specific order.
 
-        mx = 0;
-        dfs(root, mp, ans);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the most frequent subtree sum(s) by traversing the tree and calculating the sum of each subtree.
 
-        return ans;
-    }
-    
-    int dfs(TreeNode* root, map<int, int>& mp, vector<int>& ans) {
-        
-        if (root == NULL) return 0;
-        int res;
-            
-        if (root->left  == NULL && 
-            root->right == NULL)
-             { res = root->val; }
-        else {
-            int l = dfs(root->left , mp, ans);
-            int r = dfs(root->right, mp, ans);
-            res = l + r + root->val;
-        }
-        
-        mp[res] += 1;
-        
-        if(mx < mp[res]) {
-            ans.clear();
-            ans.push_back(res);
-            mx = mp[res];
-        } else if(mx == mp[res]) {
-            ans.push_back(res);
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+- 1. Perform a depth-first search (DFS) on the tree.
+- 2. Calculate the sum of each subtree and keep track of their frequencies.
+- 3. Identify the subtree sum(s) with the highest frequency.
+- 4. Return the list of those sums.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree is well-formed and follows valid tree structure rules.
+- The values of the nodes are integers, and they may be negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[5, 2, -3]`  \
+  **Explanation:** In this example, the subtree sums are calculated as follows: the sum of the subtree rooted at 5 is 5 + 2 + (-3) = 4; the sum of the subtree rooted at 2 is 2; the sum of the subtree rooted at -3 is -3. Therefore, the most frequent sums are [2, -3, 4].
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+We will perform a depth-first search (DFS) on the tree, calculate the subtree sums, and track the frequency of each sum. The most frequent sums will be identified and returned.
 
-In this problem, you are given the root of a binary tree. Each node in the tree has an integer value. The task is to find the most frequent subtree sums in the binary tree, where a subtree sum is the sum of all node values in a particular subtree (including the root node of that subtree). If multiple subtree sums have the same frequency, return all of them. 
-
-Your task is to return a list of the most frequent subtree sums in the binary tree.
-
-### Approach
-
-To solve this problem efficiently, we use a **Depth First Search (DFS)** to traverse the binary tree. For each node, we calculate the sum of its subtree, which includes the node itself and the sums of its left and right children. We can store these sums in a **map** (or dictionary) to track their frequencies.
-
-The steps in the solution are as follows:
-
-1. **DFS Traversal**: Starting from the root, recursively calculate the sum of the subtree for each node.
-   - The sum of a leaf node is just the node's value.
-   - For non-leaf nodes, the sum is the node's value plus the sums of its left and right subtrees.
-   
-2. **Tracking Frequencies**: We store the calculated sums in a `map` where the key is the sum, and the value is its frequency (i.e., how many times the sum has occurred).
-   - After calculating the sum for each node's subtree, we update the frequency of that sum in the map.
-   
-3. **Finding Maximum Frequency**: As we update the map, we also keep track of the maximum frequency encountered so far. This allows us to identify the most frequent subtree sums.
-
-4. **Handling Multiple Results**: If multiple sums have the same frequency, we need to return all such sums. To do this, we maintain a list (`ans`) to store all the sums with the highest frequency.
-
-5. **Return Result**: Finally, the result is the list of the most frequent subtree sums.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the provided code and understand each part of it:
-
-#### 1. Initialization and Setup
-
+### Initial Thoughts 💭
+- DFS allows us to calculate the sum of each subtree while traversing the tree.
+- We need a data structure to store the frequencies of each subtree sum.
+- We can use a map or hash map to track the frequency of each sum. After the DFS, we will identify the sums with the highest frequency.
+{{< dots >}}
+### Edge Cases 🌐
+- The tree will always have at least one node, so this case does not occur.
+- The solution should handle trees with up to 10,000 nodes efficiently.
+- Nodes with negative values should be correctly handled in the sum calculations.
+- The algorithm should ensure that it works efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
 int mx;
 public:
 vector<int> findFrequentTreeSum(TreeNode* root) {
     vector<int> ans;
     map<int, int> mp;
+
     mx = 0;
     dfs(root, mp, ans);
+
     return ans;
 }
-```
 
-- `mx`: This is an integer variable that stores the maximum frequency of any subtree sum.
-- `findFrequentTreeSum`: This is the main function that initializes a `map<int, int>` to store the frequency of subtree sums and a `vector<int>` to store the most frequent subtree sums.
-- Inside `findFrequentTreeSum`, we call the `dfs` function to traverse the tree and calculate the subtree sums. After the DFS traversal, we return the `ans` vector, which contains the most frequent subtree sums.
-
-#### 2. Depth First Search (DFS)
-
-```cpp
 int dfs(TreeNode* root, map<int, int>& mp, vector<int>& ans) {
+    
     if (root == NULL) return 0;
     int res;
-    
-    if (root->left == NULL && root->right == NULL) {
-        res = root->val;
-    } else {
-        int l = dfs(root->left, mp, ans);
+        
+    if (root->left  == NULL && 
+        root->right == NULL)
+         { res = root->val; }
+    else {
+        int l = dfs(root->left , mp, ans);
         int r = dfs(root->right, mp, ans);
         res = l + r + root->val;
     }
     
     mp[res] += 1;
     
-    if (mx < mp[res]) {
+    if(mx < mp[res]) {
         ans.clear();
         ans.push_back(res);
         mx = mp[res];
-    } else if (mx == mp[res]) {
+    } else if(mx == mp[res]) {
         ans.push_back(res);
     }
-    
     return res;
 }
 ```
 
-- **Base Case**: The DFS function starts by checking if the current node (`root`) is `NULL`. If it is `NULL`, it returns `0`, indicating that an empty node contributes no value to the sum.
-  
-- **Leaf Node Case**: If the node is a leaf (both left and right children are `NULL`), the sum for this node is just its value (`res = root->val`).
+The complete code for this solution defines the main logic for finding the most frequent tree sum using a depth-first search (DFS). It traverses the tree, calculates the sums for each subtree, and keeps track of the most frequent sums in a map.
 
-- **Non-Leaf Node Case**: For non-leaf nodes, the function recursively calculates the sum of the left subtree (`l`) and the sum of the right subtree (`r`). The sum for the current node's subtree is the sum of these left and right sums plus the current node's value (`res = l + r + root->val`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int mx;
+	```
+	A variable to keep track of the maximum frequency of the tree sums.
 
-- **Updating Frequency**: The subtree sum (`res`) is added to the map (`mp`), and its frequency is incremented by 1 (`mp[res] += 1`).
+2. **Access Modifiers**
+	```cpp
+	public:
+	```
+	Public section where the function definitions are accessible.
 
-- **Tracking Maximum Frequency**:
-    - If the current frequency of `res` is greater than the current maximum frequency (`mx`), we clear the `ans` vector and add the current sum `res` to `ans`. We also update `mx` to the new maximum frequency.
-    - If the current frequency of `res` is equal to `mx`, we simply add the current sum `res` to `ans`.
+3. **Function Definition**
+	```cpp
+	vector<int> findFrequentTreeSum(TreeNode* root) {
+	```
+	Defines the function that returns the most frequent tree sums from a given root.
 
-- **Returning Subtree Sum**: Finally, the function returns the sum of the current node's subtree (`res`).
+4. **Variable Declaration**
+	```cpp
+	    vector<int> ans;
+	```
+	A vector to store the most frequent tree sums.
 
-#### 3. TreeNode Definition
+5. **Data Structure Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map to store the frequency of each tree sum.
 
-```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-```
+6. **Frequency Reset**
+	```cpp
+	    mx = 0;
+	```
+	Initializes the maximum frequency to 0.
 
-This is the definition of a binary tree node. Each `TreeNode` contains:
-- `val`: The value of the node.
-- `left`: A pointer to the left child node.
-- `right`: A pointer to the right child node.
+7. **Function Call**
+	```cpp
+	    dfs(root, mp, ans);
+	```
+	Calls the dfs function to traverse the tree and compute the frequencies.
 
-### Complexity
+8. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the vector containing the most frequent tree sums.
 
-#### Time Complexity:
-- **DFS Traversal**: The DFS function visits each node once, so the time complexity of the traversal is `O(n)`, where `n` is the number of nodes in the tree.
-- **Map Operations**: For each node, we perform an insert and lookup operation in the map, which takes `O(log k)`, where `k` is the number of unique subtree sums. However, since the number of unique subtree sums is at most `n`, we can treat this as `O(log n)` for each node.
+9. **DFS Function Definition**
+	```cpp
+	int dfs(TreeNode* root, map<int, int>& mp, vector<int>& ans) {
+	```
+	Defines the dfs function to traverse the tree and calculate the sum for each node.
 
-Thus, the overall time complexity is `O(n log n)`.
+10. **Base Case**
+	```cpp
+	    if (root == NULL) return 0;
+	```
+	Base case for the DFS, returns 0 if the current node is NULL.
 
-#### Space Complexity:
-- The space complexity is determined by the storage of the map `mp` and the recursive call stack.
-- The map `mp` stores at most `n` subtree sums, so it requires `O(n)` space.
-- The recursive call stack for DFS also requires `O(n)` space in the worst case (i.e., if the tree is a straight line).
+11. **Local Variable Declaration**
+	```cpp
+	    int res;
+	```
+	Declares a variable to store the current subtree sum.
 
-Thus, the overall space complexity is `O(n)`.
+12. **Leaf Node Check**
+	```cpp
+	    if (root->left  == NULL && root->right == NULL) { res = root->val; }
+	```
+	Checks if the current node is a leaf node. If it is, the sum is just the node's value.
 
-### Conclusion
+13. **Recursive DFS Calls**
+	```cpp
+	    else {
+	```
+	If the current node is not a leaf, recursively calculate the left and right subtree sums.
 
-This solution efficiently solves the problem by leveraging a DFS traversal to calculate subtree sums and using a map to track the frequency of each sum. By maintaining the maximum frequency during the traversal, we can easily identify the most frequent subtree sums. The solution has optimal time and space complexity for the given problem, making it suitable for large binary trees.
+14. **Recursive DFS Left**
+	```cpp
+	        int l = dfs(root->left , mp, ans);
+	```
+	Recursively calls dfs for the left child and stores the result in l.
+
+15. **Recursive DFS Right**
+	```cpp
+	        int r = dfs(root->right, mp, ans);
+	```
+	Recursively calls dfs for the right child and stores the result in r.
+
+16. **Subtree Sum Calculation**
+	```cpp
+	        res = l + r + root->val;
+	```
+	Calculates the sum of the current node, left and right subtree sums.
+
+17. **Frequency Tracking**
+	```cpp
+	    mp[res] += 1;
+	```
+	Updates the frequency map with the current subtree sum.
+
+18. **Max Frequency Check**
+	```cpp
+	    if(mx < mp[res]) {
+	```
+	Checks if the current subtree sum frequency is greater than the max frequency.
+
+19. **Update Results**
+	```cpp
+	        ans.clear();
+	```
+	Clears the results vector if a new max frequency is found.
+
+20. **Add New Max Frequency**
+	```cpp
+	        ans.push_back(res);
+	```
+	Adds the current sum to the results list.
+
+21. **Update Max Frequency**
+	```cpp
+	        mx = mp[res];
+	```
+	Updates the max frequency to the current frequency.
+
+22. **Frequency Equality Check**
+	```cpp
+	    } else if(mx == mp[res]) {
+	```
+	Checks if the current sum frequency equals the max frequency.
+
+23. **Add Equal Frequency**
+	```cpp
+	        ans.push_back(res);
+	```
+	Adds the current sum to the results list if it matches the max frequency.
+
+24. **Return Subtree Sum**
+	```cpp
+	    return res;
+	```
+	Returns the current subtree sum to the caller.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of nodes in the tree. Each node is visited once during the DFS.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for the map to store the frequency of subtree sums and the recursion stack during DFS.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-frequent-subtree-sum/description/)
 

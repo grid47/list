@@ -14,187 +14,314 @@ img_src = ""
 youtube = "mLpW3qfbNJ8"
 youtube_upload_date="2021-06-20"
 youtube_thumbnail="https://i.ytimg.com/vi/mLpW3qfbNJ8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two m x n binary matrices, grid1 and grid2, where each cell can either be 0 (representing water) or 1 (representing land). An island is a group of connected 1's, connected either horizontally or vertically. An island in grid2 is considered a sub-island if there is a corresponding island in grid1 that contains all the cells of the island in grid2. Your task is to determine the number of sub-islands in grid2.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two m x n binary matrices grid1 and grid2. Each element in the grid is either 0 or 1.
+- **Example:** `Example 1: 
+grid1 = [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]] 
+grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]]`
+- **Constraints:**
+	- 1 <= m, n <= 500
+	- grid1 and grid2 have the same dimensions
+	- grid1[i][j], grid2[i][j] are either 0 or 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
-        
-        int m =grid2.size(), n = grid2[0].size();
-        
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid2[i][j] == 1)
-                dfs(grid2, i, j);
-        
-        int res = 0;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid2[i][j] == 2)
-                res += find(grid1, grid2, i, j);
-        
-        return res;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the number of islands in grid2 that are considered sub-islands.
+- **Example:** `Example 1: 
+Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to count the number of sub-islands in grid2 by identifying islands in grid2 that are fully contained within the corresponding islands in grid1.
+
+- Iterate over grid2 and for each land cell (1), perform a DFS to find all connected land cells.
+- For each island in grid2, check if all its cells are part of an island in grid1.
+- Count the number of valid islands that satisfy the sub-island condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both grids are binary matrices with 0's and 1's.
+- An island is formed by connected 1's in a 4-directional manner.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: 
+grid1 = [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]] 
+grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]]`  \
+  **Explanation:** In grid1, we have several islands formed by connected 1's. In grid2, some of these islands are fully contained within the islands of grid1, making them sub-islands. There are three sub-islands in grid2.
+
+{{< dots >}}
+## Approach 🚀
+We will solve the problem by identifying all the islands in grid2, checking if they are fully contained in grid1, and counting those that qualify as sub-islands.
+
+### Initial Thoughts 💭
+- We need to iterate over grid2 and find all the connected islands (1's).
+- For each island in grid2, we will check if its cells are part of a corresponding island in grid1.
+- Depth-First Search (DFS) can be used to identify the islands in both grids and check if they are sub-islands.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle the case where the input grids are entirely made up of water (0's).
+- Consider edge cases where the grids have the maximum size (500x500).
+- Handle cases where there are no islands in grid1, making it impossible for any island in grid2 to be a sub-island.
+- Ensure that the solution works efficiently for large grids.
+{{< dots >}}
+## Code 💻
+```cpp
+int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
     
-    void dfs(vector<vector<int>>& grid2, int i, int j) {
+    int m =grid2.size(), n = grid2[0].size();
+    
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(grid2[i][j] == 1)
+            dfs(grid2, i, j);
+    
+    int res = 0;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(grid2[i][j] == 2)
+            res += find(grid1, grid2, i, j);
+    
+    return res;
+}
 
-        int m = grid2.size(), n = grid2[0].size();
+void dfs(vector<vector<int>>& grid2, int i, int j) {
 
-        if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 1) return;
+    int m = grid2.size(), n = grid2[0].size();
 
-        grid2[i][j] = 2;
+    if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 1) return;
 
-        dfs(grid2, i, j + 1);
-        dfs(grid2, i + 1, j);
-        dfs(grid2, i - 1, j);
-        dfs(grid2, i, j - 1);
+    grid2[i][j] = 2;
 
-    }
+    dfs(grid2, i, j + 1);
+    dfs(grid2, i + 1, j);
+    dfs(grid2, i - 1, j);
+    dfs(grid2, i, j - 1);
 
-    bool find(vector<vector<int>>& grid1, vector<vector<int>>& grid2, int i, int j) {
-        int m = grid2.size(), n = grid2[0].size();
-        if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 2) return true;
+}
 
-        bool res = true;
-        if (grid1[i][j] != 1) res = false;
+bool find(vector<vector<int>>& grid1, vector<vector<int>>& grid2, int i, int j) {
+    int m = grid2.size(), n = grid2[0].size();
+    if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 2) return true;
 
-        grid2[i][j] = 3;
+    bool res = true;
+    if (grid1[i][j] != 1) res = false;
 
-        res &= find(grid1, grid2, i, j + 1);
-        res &= find(grid1, grid2, i + 1, j);
-        res &= find(grid1, grid2, i - 1, j);
-        res &= find(grid1, grid2, i, j - 1);
+    grid2[i][j] = 3;
 
-        return res;
-    }
+    res &= find(grid1, grid2, i, j + 1);
+    res &= find(grid1, grid2, i + 1, j);
+    res &= find(grid1, grid2, i - 1, j);
+    res &= find(grid1, grid2, i, j - 1);
 
-};
-{{< /highlight >}}
----
+    return res;
+}
 
-### Problem Statement
+```
 
-The problem is to count the number of sub-islands that can be formed from a second grid (`grid2`) while ensuring that these sub-islands are completely contained within a first grid (`grid1`). A sub-island is defined as an island in `grid2` that corresponds to a land area (represented by `1`s) in `grid1`. The task is to identify these sub-islands in `grid2` and check if their land cells (1s) match with the land cells in `grid1`.
+This is the implementation of the algorithm to count the number of sub-islands. The solution works by checking each cell in grid2, marking parts of islands, and validating if the islands in grid2 are present in grid1.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
+	```
+	This is the function signature for counting the sub-islands. It takes two 2D grids, grid1 and grid2, as inputs.
 
-To tackle this problem, we will use a depth-first search (DFS) strategy. The approach can be broken down into the following steps:
+2. **Variable Initialization**
+	```cpp
+	    int m =grid2.size(), n = grid2[0].size();
+	```
+	Here, the dimensions of grid2 are assigned to m (rows) and n (columns).
 
-1. **Mark All Land Cells in Grid2**: Iterate through `grid2` to identify all connected land cells (1s) and mark them. We will use a DFS function to traverse all connected components starting from each unvisited land cell in `grid2`.
+3. **Looping Over Grid**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	This is the outer loop that iterates through the rows of grid2.
 
-2. **Count Valid Sub-Islands**: After marking the cells in `grid2`, we will iterate through the marked cells (now represented as 2) and check if they form valid sub-islands by comparing them with `grid1`. This will be done using another DFS function that verifies if all corresponding cells in `grid1` are land cells (1s).
+4. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	The inner loop iterates through the columns of grid2.
 
-3. **Return the Count of Sub-Islands**: Finally, we will count and return the number of valid sub-islands identified.
+5. **Condition Check**
+	```cpp
+	        if(grid2[i][j] == 1)
+	```
+	This condition checks if the current cell in grid2 is part of an island (value 1).
 
-### Code Breakdown (Step by Step)
+6. **DFS Call**
+	```cpp
+	            dfs(grid2, i, j);
+	```
+	If the condition is met, a depth-first search (DFS) is called to mark the connected island cells.
 
-Let’s analyze the provided code step by step to understand how the solution is implemented:
+7. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	This initializes the result counter to zero, which will hold the number of sub-islands.
 
-1. **Class Definition**: The solution is encapsulated within a class named `Solution`.
+8. **Second Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	This is another loop over the rows of grid2 to check the marked cells.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+9. **Second Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	The second inner loop checks the columns of grid2 to validate islands.
 
-2. **Function Signature**: The primary function `countSubIslands` takes two 2D vectors (`grid1` and `grid2`) and returns an integer count of the sub-islands.
+10. **Condition Check for Sub-Island**
+	```cpp
+	        if(grid2[i][j] == 2)
+	```
+	If a cell is marked with 2 (indicating it is part of a valid island), the find function is called.
 
-   ```cpp
-       int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
-   ```
+11. **Increment Result**
+	```cpp
+	            res += find(grid1, grid2, i, j);
+	```
+	If the find function returns true, the result counter is incremented.
 
-3. **Grid Size Initialization**: We initialize the dimensions of the grids `m` (number of rows) and `n` (number of columns).
+12. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Finally, the function returns the number of sub-islands found.
 
-   ```cpp
-           int m = grid2.size(), n = grid2[0].size();
-   ```
+13. **DFS Function**
+	```cpp
+	void dfs(vector<vector<int>>& grid2, int i, int j) {
+	```
+	This is the DFS function that is called to explore and mark the connected components of grid2.
 
-4. **DFS Traversal**: We iterate through each cell of `grid2`. If we encounter a land cell (1), we invoke the `dfs` function to mark all connected land cells.
+14. **DFS Boundaries Check**
+	```cpp
+	    if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 1) return;
+	```
+	This condition checks if the indices are within bounds and if the current cell is part of an island (value 1).
 
-   ```cpp
-           for(int i = 0; i < m; i++)
-               for(int j = 0; j < n; j++)
-                   if(grid2[i][j] == 1)
-                       dfs(grid2, i, j);
-   ```
+15. **Mark Cell as Visited**
+	```cpp
+	    grid2[i][j] = 2;
+	```
+	Marks the current cell as visited by changing its value to 2.
 
-5. **Sub-Island Counting**: We initialize a counter `res` to zero. Then, we check for cells marked with 2 (previously land cells) and use the `find` function to determine if they form a valid sub-island in relation to `grid1`.
+16. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid2, i, j + 1);
+	```
+	Recursively calls DFS for the cell to the right.
 
-   ```cpp
-           int res = 0;
-           for(int i = 0; i < m; i++)
-               for(int j = 0; j < n; j++)
-                   if(grid2[i][j] == 2)
-                       res += find(grid1, grid2, i, j);
-   ```
+17. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid2, i + 1, j);
+	```
+	Recursively calls DFS for the cell below.
 
-6. **Returning the Result**: Finally, we return the count of valid sub-islands.
+18. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid2, i - 1, j);
+	```
+	Recursively calls DFS for the cell above.
 
-   ```cpp
-           return res;
-       }
-   ```
+19. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid2, i, j - 1);
+	```
+	Recursively calls DFS for the cell to the left.
 
-7. **DFS Function**: The `dfs` function marks the connected land cells in `grid2` as 2. It takes the coordinates of the current cell and recursively marks adjacent land cells.
+20. **Find Function**
+	```cpp
+	bool find(vector<vector<int>>& grid1, vector<vector<int>>& grid2, int i, int j) {
+	```
+	The find function checks whether an island in grid2 exists in grid1 at the given coordinates.
 
-   ```cpp
-       void dfs(vector<vector<int>>& grid2, int i, int j) {
-           int m = grid2.size(), n = grid2[0].size();
-           if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 1) return;
-           grid2[i][j] = 2;
-           dfs(grid2, i, j + 1);
-           dfs(grid2, i + 1, j);
-           dfs(grid2, i - 1, j);
-           dfs(grid2, i, j - 1);
-       }
-   ```
+21. **Boundary Check**
+	```cpp
+	    if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 2) return true;
+	```
+	Checks if the current cell is out of bounds or already validated.
 
-8. **Find Function**: The `find` function checks if all marked land cells in `grid2` correspond to land cells in `grid1`. If any corresponding cell in `grid1` is not a land cell (0), it returns false. It also marks processed cells as 3 to prevent revisiting.
+22. **Result Initialization**
+	```cpp
+	    bool res = true;
+	```
+	Initializes a boolean variable to track whether the island is a valid sub-island.
 
-   ```cpp
-       bool find(vector<vector<int>>& grid1, vector<vector<int>>& grid2, int i, int j) {
-           int m = grid2.size(), n = grid2[0].size();
-           if (i < 0 || j < 0 || i >= m || j >= n || grid2[i][j] != 2) return true;
-           bool res = true;
-           if (grid1[i][j] != 1) res = false;
-           grid2[i][j] = 3;
-           res &= find(grid1, grid2, i, j + 1);
-           res &= find(grid1, grid2, i + 1, j);
-           res &= find(grid1, grid2, i - 1, j);
-           res &= find(grid1, grid2, i, j - 1);
-           return res;
-       }
-   ```
+23. **Grid1 Validation**
+	```cpp
+	    if (grid1[i][j] != 1) res = false;
+	```
+	Checks if the current cell in grid2 is part of an island in grid1.
 
-### Complexity
+24. **Marking the Cell**
+	```cpp
+	    grid2[i][j] = 3;
+	```
+	Marks the current cell as processed.
 
-- **Time Complexity**: The time complexity of this solution is O(m * n), where m is the number of rows and n is the number of columns in the grids. Each cell is visited a constant number of times during the DFS traversal.
+25. **Recursive Find Calls**
+	```cpp
+	    res &= find(grid1, grid2, i, j + 1);
+	```
+	Recursively calls the find function for the cell to the right.
 
-- **Space Complexity**: The space complexity is O(m * n) in the worst case due to the recursion stack used by DFS and the potential need for auxiliary data structures to hold visited states.
+26. **Recursive Find Calls**
+	```cpp
+	    res &= find(grid1, grid2, i + 1, j);
+	```
+	Recursively calls the find function for the cell below.
 
-### Conclusion
+27. **Recursive Find Calls**
+	```cpp
+	    res &= find(grid1, grid2, i - 1, j);
+	```
+	Recursively calls the find function for the cell above.
 
-The `countSubIslands` function efficiently counts the number of valid sub-islands in `grid2` based on the structure of `grid1`. By utilizing depth-first search, the solution captures connected components in `grid2` and verifies their validity against `grid1`. This algorithm is optimal for solving the problem with a clear and concise approach.
+28. **Recursive Find Calls**
+	```cpp
+	    res &= find(grid1, grid2, i, j - 1);
+	```
+	Recursively calls the find function for the cell to the left.
 
-### Use Cases
+29. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns true if the island is valid, otherwise returns false.
 
-The functionality provided by this algorithm can be applied in several scenarios:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where m is the number of rows and n is the number of columns.
+- **Average Case:** O(m * n), as each cell is visited once during DFS.
+- **Worst Case:** O(m * n), where m is the number of rows and n is the number of columns.
 
-1. **Geographical Mapping**: In geographical information systems (GIS), the algorithm can be used to analyze the overlap of certain land areas (islands) between two datasets.
+The time complexity depends on the size of the grid, as we visit each cell during DFS.
 
-2. **Environmental Studies**: Researchers may use such algorithms to determine protected areas in relation to developed land, helping in conservation planning.
+### Space Complexity 💾
+- **Best Case:** O(m * n), for the same reason as worst-case.
+- **Worst Case:** O(m * n), as we need to store the grid and the visited states during DFS.
 
-3. **Computer Graphics**: The concept of sub-islands can be applicable in rendering systems where certain areas need to be identified and manipulated separately.
+The space complexity is determined by the size of the grid and the recursive DFS stack.
 
-4. **Game Development**: In games involving terrain and map design, this algorithm could assist in evaluating specific land features and their relationships with one another.
+**Happy Coding! 🎉**
 
-By integrating such functionality, applications can enhance their data processing capabilities while maintaining efficiency and clarity in the algorithms used. The depth-first search approach ensures comprehensive coverage of potential land configurations while validating conditions against the initial grid.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-sub-islands/description/)
 

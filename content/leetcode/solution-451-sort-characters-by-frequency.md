@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "JTdpTHaGQoA"
 youtube_upload_date="2020-05-22"
 youtube_thumbnail="https://i.ytimg.com/vi/JTdpTHaGQoA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,116 +28,190 @@ youtube_thumbnail="https://i.ytimg.com/vi/JTdpTHaGQoA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string, sort its characters based on their frequency of occurrence in descending order. If multiple solutions are possible, any valid answer is acceptable. The frequency of each character refers to how many times it appears in the string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string 's' containing uppercase and lowercase English letters and digits.
+- **Example:** `"banana"`
+- **Constraints:**
+	- 1 <= s.length <= 5 * 10^5
+	- s consists of uppercase and lowercase English letters and digits.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string frequencySort(string s) {
-        unordered_map<char,int> freq;
-        vector<string> bucket(s.size()+1, "");
-        string res;
-        
-        //count frequency of each character
-        for(char c:s) freq[c]++;
-        //put character into frequency bucket
-        for(auto& it:freq) {
-            int n = it.second;
-            char c = it.first;
-            bucket[n].append(n, c);
-        }
-        //form descending sorted string
-        for(int i=s.size(); i>0; i--) {
-            if(bucket[i].size())
-                res.append(bucket[i]);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string where the characters are sorted in decreasing order based on their frequency. Characters with higher frequencies should appear first in the string.
+- **Example:** `"aaannb"`
+- **Constraints:**
+	- The output should be a valid sorted string based on character frequency.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to sort the string based on the frequency of characters in decreasing order.
+
+- 1. Count the frequency of each character in the string.
+- 2. Group the characters based on their frequencies.
+- 3. Sort the characters in descending order of frequency.
+- 4. Construct the resulting string based on the sorted frequencies.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string contains English letters and digits.
+- The length of the string is manageable within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"banana"`  \
+  **Explanation:** The character 'a' appears 3 times, 'n' appears 2 times, and 'b' appears once. So the result must have 'a' repeated 3 times, 'n' repeated 2 times, and 'b' once.
+
+- **Input:** `"abcd"`  \
+  **Explanation:** Since all characters appear exactly once, the output can be in any order.
+
+- **Input:** `"apple"`  \
+  **Explanation:** 'p' appears twice, 'a' and 'l' appear once. The correct answer could be 'ppale' or 'pplea'.
+
+{{< dots >}}
+## Approach 🚀
+We will first calculate the frequency of each character in the string. Then we will group the characters by their frequencies and sort them in descending order. Finally, we will concatenate the characters based on their sorted frequencies to form the resulting string.
+
+### Initial Thoughts 💭
+- We need to count the frequency of characters efficiently.
+- We will need a way to group characters by their frequencies.
+- Using a hash map to count frequencies and a bucket sort approach to group characters by frequency would be an efficient solution.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle the case where the string is empty (although the constraints ensure this won't happen).
+- The solution should efficiently handle strings of length up to 5 * 10^5.
+- Ensure that both lowercase and uppercase letters are handled distinctly.
+- The algorithm must perform efficiently within the time and space constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+string frequencySort(string s) {
+    unordered_map<char,int> freq;
+    vector<string> bucket(s.size()+1, "");
+    string res;
+    
+    //count frequency of each character
+    for(char c:s) freq[c]++;
+    //put character into frequency bucket
+    for(auto& it:freq) {
+        int n = it.second;
+        char c = it.first;
+        bucket[n].append(n, c);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to sort the characters in a given string based on their frequency of occurrence. The characters that appear more frequently should come first in the resulting string, and characters with the same frequency should be sorted in any order among themselves. We are to return the resulting string after sorting the characters based on their frequency.
-
-### Approach
-
-To solve the problem efficiently, we can break down the task into the following steps:
-
-1. **Frequency Count**: The first step is to count how many times each character appears in the string. This will allow us to group characters by their frequency of occurrence.
-   
-2. **Bucket Sort by Frequency**: Using the frequency count, we can place characters into "buckets," where each bucket represents a different frequency. The index of each bucket will represent the frequency of characters in that bucket. The characters will then be appended to these buckets according to their frequency.
-   
-3. **Construct the Resulting String**: Finally, we need to construct the result string by iterating over the buckets in descending order of frequency and appending the characters to the result string based on their frequency.
-
-This approach leverages the concept of bucket sorting to efficiently group characters by their frequency and then sort them in a manner that respects the problem's requirements.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Count the Frequency of Each Character
-
-```cpp
-unordered_map<char,int> freq;
-for(char c: s) freq[c]++;
-```
-
-- The `unordered_map` `freq` is used to store the frequency of each character in the string. The key is the character itself, and the value is the number of times that character appears.
-- We iterate over each character `c` in the string `s` and update the frequency count for that character.
-
-#### Step 2: Organize Characters into Frequency Buckets
-
-```cpp
-vector<string> bucket(s.size() + 1, "");
-for(auto& it: freq) {
-    int n = it.second;
-    char c = it.first;
-    bucket[n].append(n, c);
+    //form descending sorted string
+    for(int i=s.size(); i>0; i--) {
+        if(bucket[i].size())
+            res.append(bucket[i]);
+    }
+    return res;
 }
 ```
 
-- The `vector<string> bucket` is initialized with a size of `s.size() + 1` because the maximum frequency of any character can be at most `s.size()`, and we want to account for all possible frequencies.
-- For each character in the frequency map `freq`, we extract its frequency `n` and the character `c`. We then append `n` copies of `c` to the appropriate bucket corresponding to the frequency `n`.
-  - If a character `c` appears 3 times, for example, it will be added to `bucket[3]`, which stores all characters that appear 3 times in the string.
+This function sorts the characters of the string based on their frequencies in descending order. It uses a frequency map and a bucket sort approach to achieve the sorting.
 
-#### Step 3: Construct the Result String in Descending Frequency Order
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string frequencySort(string s) {
+	```
+	The `frequencySort` function takes a string `s` as input and returns a string sorted by the frequency of characters in descending order.
 
-```cpp
-string res;
-for(int i = s.size(); i > 0; i--) {
-    if(bucket[i].size())
-        res.append(bucket[i]);
-}
-```
+2. **Variable Declaration**
+	```cpp
+	    unordered_map<char,int> freq;
+	```
+	Declares an unordered map `freq` to store the frequency of each character in the string.
 
-- We initialize an empty string `res` to store the final result.
-- We iterate over the `bucket` array from the highest possible frequency (which is `s.size()`) to the lowest frequency (1). This ensures that we are appending the most frequent characters first.
-- If a bucket contains any characters (i.e., `bucket[i].size()` is not zero), we append those characters to `res`. These characters are already grouped by frequency.
+3. **Bucket Initialization**
+	```cpp
+	    vector<string> bucket(s.size()+1, "");
+	```
+	Creates a vector of strings `bucket`, with size equal to `s.size() + 1`, to group characters by their frequencies.
 
-#### Step 4: Return the Result
+4. **Result Variable**
+	```cpp
+	    string res;
+	```
+	Declares a string `res` to store the final sorted result.
 
-```cpp
-return res;
-```
+5. **Frequency Count Loop**
+	```cpp
+	    for(char c:s) freq[c]++;
+	```
+	Loops through each character in the string `s` and increments its corresponding count in the `freq` map.
 
-- Once the result string `res` has been constructed, we return it. This string contains all the characters sorted by frequency, with characters that appear more frequently coming first.
+6. **Bucket Sorting Loop**
+	```cpp
+	    for(auto& it:freq) {
+	```
+	Loops through the `freq` map to process each character-frequency pair.
 
-### Complexity
+7. **Character Frequency**
+	```cpp
+	        int n = it.second;
+	```
+	Extracts the frequency `n` of the character `it.first` from the `freq` map.
 
-#### Time Complexity:
-- **Frequency Count**: The first loop iterates over each character in the string `s`, which takes `O(n)` time, where `n` is the length of the string.
-- **Bucket Sorting**: The second loop iterates over each entry in the `freq` map. In the worst case, there could be up to `n` unique characters, so this loop takes `O(n)` time.
-- **Result Construction**: The third loop iterates over the `bucket` array and appends the characters to `res`. Since each character in the string is appended exactly once, this step also takes `O(n)` time.
-- **Overall Time Complexity**: The overall time complexity of the algorithm is `O(n)`.
+8. **Character Assignment**
+	```cpp
+	        char c = it.first;
+	```
+	Extracts the character `c` from the `freq` map.
 
-#### Space Complexity:
-- **Frequency Map**: The space used by the `freq` map is proportional to the number of unique characters in the string, which is at most `n`. Therefore, the space complexity for the frequency map is `O(n)`.
-- **Buckets**: The space used by the `bucket` array is proportional to the length of the string (`O(n)`), as there is one bucket for each possible frequency.
-- **Overall Space Complexity**: The overall space complexity is `O(n)`.
+9. **Bucket Update**
+	```cpp
+	        bucket[n].append(n, c);
+	```
+	Appends the character `c` `n` times to the `bucket[n]` string.
 
-### Conclusion
+10. **End Bucket Loop**
+	```cpp
+	    }
+	```
+	End of the loop that places characters into their respective frequency buckets.
 
-This solution efficiently solves the problem of sorting characters in a string by their frequency of occurrence using a combination of a frequency map and bucket sorting. The algorithm is linear in both time and space complexity, making it highly efficient for handling large strings. The approach is easy to understand and leverages common sorting techniques to provide an optimal solution. By focusing on counting the frequencies and then organizing the characters into buckets, we ensure that the solution works within the constraints and returns the correct result.
+11. **Descending Bucket Loop**
+	```cpp
+	    for(int i=s.size(); i>0; i--) {
+	```
+	Loops through the `bucket` vector in descending order of frequency (from highest to lowest).
+
+12. **Bucket Size Check**
+	```cpp
+	        if(bucket[i].size())
+	```
+	Checks if there are any characters in the `bucket[i]` (i.e., if the bucket for this frequency is non-empty).
+
+13. **Result Update**
+	```cpp
+	            res.append(bucket[i]);
+	```
+	Appends the characters in `bucket[i]` to the result string `res`.
+
+14. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the result string `res`, which contains the characters sorted by frequency in descending order.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + k log k)
+- **Average Case:** O(n + k log k)
+- **Worst Case:** O(n + k log k)
+
+The time complexity is dominated by the sorting step, which is O(k log k), where k is the number of unique characters. Counting frequencies takes O(n), where n is the length of the string.
+
+### Space Complexity 💾
+- **Best Case:** O(n + k)
+- **Worst Case:** O(n + k)
+
+Space complexity is O(n + k), where n is the length of the string and k is the number of unique characters due to the hash map and the bucket array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-characters-by-frequency/description/)
 

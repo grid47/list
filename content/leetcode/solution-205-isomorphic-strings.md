@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "WIJcGWvzu24"
 youtube_upload_date="2022-06-26"
 youtube_thumbnail="https://i.ytimg.com/vi/WIJcGWvzu24/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,135 +28,178 @@ youtube_thumbnail="https://i.ytimg.com/vi/WIJcGWvzu24/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Two strings s and t are isomorphic if you can replace the characters in s to get t. The replacement should be such that each character in s maps to exactly one character in t, and the mapping must preserve the order of characters. No two characters in s or t can map to the same character.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings s and t.
+- **Example:** `s = 'abc', t = 'xyz'`
+- **Constraints:**
+	- 1 <= s.length, t.length <= 5 * 10^4
+	- s.length == t.length
+	- Both s and t consist of printable ASCII characters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isIsomorphic(string s, string t) {
-       
-         
-        map<char, char> fwd, rwd;
-        int n = s.size();
-        for(int i = 0; i < n; i++) {
-            if (fwd.count(s[i])){
-                if(fwd[s[i]] != t[i])
-                    return false;
-            }
-            if(rwd.count(t[i])){
-                if(rwd[t[i]] != s[i])
-                    return false;
-            }
-            fwd[s[i]] = t[i];
-            rwd[t[i]] = s[i];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the two strings s and t are isomorphic, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean value indicating whether the strings are isomorphic.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the characters of s can be uniquely mapped to the characters of t without violating the mapping rules.
+
+- Iterate through each character in both strings.
+- Use two maps: one to track the mapping from s to t and another from t to s.
+- For each character in s and t, check if a consistent mapping exists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings are valid and consist of printable ASCII characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abc', t = 'xyz'`  \
+  **Explanation:** In this case, 'a' maps to 'x', 'b' maps to 'y', and 'c' maps to 'z'. Since no characters map to the same character, the strings are isomorphic.
+
+- **Input:** `s = 'foo', t = 'bar'`  \
+  **Explanation:** Here, 'o' maps to both 'a' and 'r', so the strings are not isomorphic.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by checking if there is a consistent one-to-one mapping between characters of s and t.
+
+### Initial Thoughts 💭
+- This problem requires mapping characters between two strings while ensuring uniqueness in both directions.
+- Using two hash maps to track mappings from s to t and t to s can help efficiently solve this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- Since the strings are guaranteed to have the same length and be non-empty, there will be no empty inputs.
+- The algorithm must handle large inputs efficiently, given the constraint of up to 50,000 characters.
+- When s and t are identical strings, they are always isomorphic.
+- The solution must work within the time limits for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isIsomorphic(string s, string t) {
+   
+     
+    map<char, char> fwd, rwd;
+    int n = s.size();
+    for(int i = 0; i < n; i++) {
+        if (fwd.count(s[i])){
+            if(fwd[s[i]] != t[i])
+                return false;
         }
-        return true;
+        if(rwd.count(t[i])){
+            if(rwd[t[i]] != s[i])
+                return false;
+        }
+        fwd[s[i]] = t[i];
+        rwd[t[i]] = s[i];
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-Let’s explore the **Isomorphic Strings** problem! 🌟 We’re given two strings `s` and `t`, and we need to determine if they are **isomorphic**. That means:
-1. Every character in `s` maps to a unique character in `t`.
-2. No two different characters in `s` can map to the same character in `t`.
-3. The mapping should be consistent throughout the strings.
-
-#### Example:
-- **Input:** `s = "egg"`, `t = "add"`
-- **Output:** `true` (because `'e'` maps to `'a'` and `'g'` maps to `'d'`).
-
-- **Input:** `s = "foo"`, `t = "bar"`
-- **Output:** `false` (since `'o'` maps to both `'a'` and `'r'`, violating the one-to-one mapping rule).
-
-Ready to check if two strings are isomorphic? Let’s dive in! 🚀
-
----
-
-### 🔍 Approach
-
-To solve this problem, we can use a **two-way mapping** approach. We’ll set up two maps:
-1. **`fwd`** will store the mapping from characters in `s` to characters in `t`.
-2. **`rwd`** will store the reverse mapping from characters in `t` to characters in `s`.
-
-#### Key Steps:
-1. Initialize two maps (`fwd` and `rwd`) to track the mappings.
-2. Loop through each character of both strings.
-3. For each character at index `i`, check if the mapping in both directions is valid.
-4. If everything checks out, the strings are isomorphic!
-
-Let’s see how it works step-by-step! 🧠
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Here’s how we can implement the solution. 💻
-
-#### Step 1: Initialize Maps
-```cpp
-map<char, char> fwd, rwd;
-```
-- **Purpose:** We create two maps to store the character mappings between the two strings:
-  - `fwd` stores the forward mapping (from `s` to `t`).
-  - `rwd` stores the reverse mapping (from `t` to `s`).
-
-#### Step 2: Loop Through Both Strings
-```cpp
-for (int i = 0; i < n; i++) {
-    if (fwd.count(s[i])) {
-        if (fwd[s[i]] != t[i])
-            return false;
-    }
-    if (rwd.count(t[i])) {
-        if (rwd[t[i]] != s[i])
-            return false;
-    }
-    fwd[s[i]] = t[i];
-    rwd[t[i]] = s[i];
+    return true;
 }
 ```
-- **Purpose:** We loop through both strings and check if the mappings are consistent:
-  1. **Forward Mapping Check:** 
-     - If `s[i]` is already mapped in `fwd`, we check if it maps to `t[i]`. If not, return `false`.
-  2. **Reverse Mapping Check:** 
-     - If `t[i]` is already mapped in `rwd`, we check if it maps to `s[i]`. If not, return `false`.
-  3. After checking, we add the new mappings to `fwd` and `rwd`.
 
-#### Step 3: Return the Result
-```cpp
-return true;
-```
-- **Purpose:** If all checks pass, return `true`, indicating the strings are isomorphic! 🎉
+This code solves the Isomorphic Strings problem by ensuring a one-to-one character mapping between the two strings `s` and `t`. The function uses two maps (`fwd` and `rwd`) to check if the characters in `s` and `t` can be consistently mapped to each other.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isIsomorphic(string s, string t) {
+	```
+	Define the function `isIsomorphic` that checks if two strings `s` and `t` are isomorphic. Two strings are isomorphic if characters in `s` can be mapped to characters in `t` in a consistent one-to-one manner.
 
-### 📊 Complexity Analysis
+2. **Variable Initialization**
+	```cpp
+	    map<char, char> fwd, rwd;
+	```
+	Initialize two maps, `fwd` and `rwd`, to store the character mappings from `s` to `t` and from `t` to `s`, respectively.
 
-Let’s break down the time and space complexity. ⏱️💾
+3. **String Length Calculation**
+	```cpp
+	    int n = s.size();
+	```
+	Calculate the length of string `s` and store it in the variable `n`. The same length applies to string `t`.
 
-#### Time Complexity:
-- **O(n):** 
-  - We loop through both strings once, performing constant-time operations for each character. 
-  - Therefore, the time complexity is **O(n)**, where `n` is the length of the strings.
+4. **For Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a for loop to iterate through each character of the strings `s` and `t`.
 
-#### Space Complexity:
-- **O(n):**
-  - We use two maps to store character mappings. In the worst case, each character in the strings is unique, so we need space proportional to the length of the strings.
-  - Hence, the space complexity is **O(n)**.
+5. **Check Forward Mapping**
+	```cpp
+	        if (fwd.count(s[i])){
+	```
+	Check if the character `s[i]` has already been mapped in the `fwd` map.
 
----
+6. **Validate Forward Mapping**
+	```cpp
+	            if(fwd[s[i]] != t[i])
+	```
+	If `s[i]` is already mapped, check if the current mapping matches `t[i]`. If not, the strings are not isomorphic.
 
-### 🏁 Conclusion
+7. **Return False**
+	```cpp
+	                return false;
+	```
+	Return `false` if the mappings are inconsistent.
 
-We’ve successfully solved the problem of checking whether two strings are isomorphic using a **two-way mapping** approach! 🎯 Here’s a quick recap:
+8. **Check Reverse Mapping**
+	```cpp
+	        if(rwd.count(t[i])){
+	```
+	Check if the character `t[i]` has already been mapped in the `rwd` map.
 
-1. **Efficiency:** The solution runs in **O(n)** time, making it fast for large strings.
-2. **Space:** The space complexity is **O(n)**, which is manageable for typical input sizes.
-3. **Simplicity:** The algorithm is simple and intuitive, relying on maps to track the character mappings.
+9. **Validate Reverse Mapping**
+	```cpp
+	            if(rwd[t[i]] != s[i])
+	```
+	If `t[i]` is already mapped, check if the current mapping matches `s[i]`. If not, the strings are not isomorphic.
 
-This method ensures that we detect any inconsistencies in the mappings and confirm whether the strings are truly isomorphic. Keep practicing, and you’ll master these string manipulation challenges in no time! 🌟
+10. **Return False**
+	```cpp
+	                return false;
+	```
+	Return `false` if the mappings are inconsistent.
+
+11. **Forward Mapping Assignment**
+	```cpp
+	        fwd[s[i]] = t[i];
+	```
+	Assign the mapping `s[i]` to `t[i]` in the `fwd` map.
+
+12. **Reverse Mapping Assignment**
+	```cpp
+	        rwd[t[i]] = s[i];
+	```
+	Assign the mapping `t[i]` to `s[i]` in the `rwd` map.
+
+13. **Return True**
+	```cpp
+	    return true;
+	```
+	Return `true` if no inconsistencies were found, indicating that the strings are isomorphic.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the strings, as we perform a single pass through the strings and constant time operations with hash maps.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the two hash maps.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/isomorphic-strings/description/)
 

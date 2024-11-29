@@ -14,124 +14,170 @@ img_src = ""
 youtube = "oL_BwmPMkng"
 youtube_upload_date="2023-05-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/oL_BwmPMkng/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D array `nums` where each row represents a set of numbers. You perform operations on the matrix by removing the largest number from each row at each step. After removing the largest number from each row, you identify the highest number amongst all those removed and add it to your score. Repeat this until the matrix becomes empty and return the final score.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D array `nums` which is a matrix of integers. Each row in the matrix represents a set of numbers, and the matrix may have varying numbers of columns.
+- **Example:** `Input: nums = [[4, 2, 5], [3, 1, 6], [7, 2, 1]]`
+- **Constraints:**
+	- 1 <= nums.length <= 300
+	- 1 <= nums[i].length <= 500
+	- 0 <= nums[i][j] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int matrixSum(vector<vector<int>>& nums) {
-        
-        int res = 0;
-        
-        int m = nums.size(), n = nums[0].size();
-        
-        for(int i = 0; i < m; i++)
-        sort(nums[i].rbegin(), nums[i].rend());
-        
-        for(int i = 0; i < n; i++) {
-            int mx = nums[0][i];
-            for(int j = 0; j < m; j++) {
-                mx = max(mx, nums[j][i]);
-            }
-            res += mx;
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the final score, which is the sum of the highest numbers chosen at each step.
+- **Example:** `Output: 12`
+- **Constraints:**
+	- The result should be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To maximize the score, we need to repeatedly pick the largest number from each row and accumulate the highest number among those chosen.
 
-The problem at hand involves calculating the sum of the maximum elements from each column in a matrix after sorting each row in descending order. Given a matrix, you need to sort each row in descending order and then find the maximum value in each column. The goal is to return the sum of these maximum values.
+- Step 1: Sort each row in descending order to easily access the largest number.
+- Step 2: For each column (corresponding to the largest number from each row), find the maximum value and add it to the score.
+- Step 3: Repeat the process until all rows are empty.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input matrix is non-empty and contains valid integers within the specified range.
+- All operations should be done optimally to ensure efficient execution for large inputs.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [[4, 2, 5], [3, 1, 6], [7, 2, 1]]`  \
+  **Explanation:** In the first operation, the largest numbers are 5, 6, and 7. We add 7 to the score. Next, we remove the next largest numbers: 4, 3, and 2. We add 4 to the score. Finally, we remove the last remaining numbers: 2, 1, and 1. We add 2 to the score. Thus, the final score is 7 + 4 + 2 = 12.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting each row in descending order and then iterating through each column to select the maximum number at each step, updating the score accordingly.
 
-The approach to solving this problem involves two main steps:
-
-1. **Sorting the rows**: Each row in the matrix is sorted in descending order.
-2. **Finding the maximum of each column**: After sorting, for each column, we select the maximum element and accumulate it in the result.
-
-The matrix is given as a 2D vector of integers, and we need to apply the sorting and the column-wise maximum selection to compute the sum.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Result and Matrix Dimensions
-
+### Initial Thoughts 💭
+- Sorting each row in descending order allows easy access to the largest number in each row.
+- We can iterate over the columns to select the maximum value at each step.
+- The solution should handle large inputs efficiently by ensuring the matrix is sorted only once per row.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will always contain at least one row and column, so no need to handle empty matrices.
+- The solution must be optimized to handle matrices with up to 300 rows and 500 columns efficiently.
+- If all elements in the matrix are equal, the score will be the sum of the largest number repeated for each step.
+- Ensure that sorting each row and processing columns works efficiently for the largest possible inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
-int res = 0;
-int m = nums.size(), n = nums[0].size();
-```
-
-- **Line 1**: We initialize `res` to 0, which will hold the final result (sum of the maximum values from each column).
-- **Line 2**: `m` is assigned the number of rows in the matrix (`nums.size()`), and `n` is assigned the number of columns (`nums[0].size()`).
-
-#### Step 2: Sort Each Row in Descending Order
-
-```cpp
-for(int i = 0; i < m; i++)
+int matrixSum(vector<vector<int>>& nums) {
+    
+    int res = 0;
+    
+    int m = nums.size(), n = nums[0].size();
+    
+    for(int i = 0; i < m; i++)
     sort(nums[i].rbegin(), nums[i].rend());
-```
-
-- **Line 3-4**: We loop through each row of the matrix (`i` from 0 to `m-1`), and for each row, we sort it in descending order. The `sort` function with `rbegin()` and `rend()` sorts the row in reverse order (descending).
-    - `nums[i].rbegin()` is an iterator pointing to the last element of the row (rightmost element).
-    - `nums[i].rend()` is an iterator pointing just before the first element of the row.
-    - Sorting in descending order ensures that the largest element of each row is at the beginning of the row.
-
-#### Step 3: Find the Maximum in Each Column
-
-```cpp
-for(int i = 0; i < n; i++) {
-    int mx = nums[0][i];
-    for(int j = 0; j < m; j++) {
-        mx = max(mx, nums[j][i]);
+    
+    for(int i = 0; i < n; i++) {
+        int mx = nums[0][i];
+        for(int j = 0; j < m; j++) {
+            mx = max(mx, nums[j][i]);
+        }
+        res += mx;
     }
-    res += mx;
+    return res;
 }
 ```
 
-- **Line 5-6**: We iterate over each column (`i` from 0 to `n-1`), and for each column, we initialize `mx` to the first element of the column (`nums[0][i]`).
-- **Line 7-9**: We then iterate over each row (`j` from 0 to `m-1`) to find the maximum element in the current column. We update `mx` to be the maximum of its current value and the value at `nums[j][i]`, which is the element in the `j`-th row and `i`-th column.
-    - By the end of this loop, `mx` will contain the maximum value in column `i`.
-- **Line 10**: We add the value of `mx` (the maximum value in the current column) to the result `res`.
+The function 'matrixSum' calculates the sum of the maximum elements in each column after sorting the rows in descending order. It first sorts each row in reverse order and then selects the maximum element from each column to add to the result.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int matrixSum(vector<vector<int>>& nums) {
+	```
+	The function 'matrixSum' is defined to accept a 2D vector 'nums', which represents a matrix of integers. The goal is to find the sum of the maximum values from each column after sorting each row in descending order.
 
-```cpp
-return res;
-```
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	A variable 'res' is initialized to 0, which will store the sum of the maximum values from each column after sorting the rows.
 
-- **Line 11**: After iterating through all the columns, the sum of the maximum values from each column is stored in `res`, which we then return.
+3. **Matrix Dimensions**
+	```cpp
+	    int m = nums.size(), n = nums[0].size();
+	```
+	The number of rows 'm' is determined by the size of 'nums', and the number of columns 'n' is determined by the size of the first row. These values will guide the iteration process.
 
-### Complexity
+4. **Row Sorting**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	We loop through each row of the matrix, from the first to the last.
 
-#### Time Complexity:
+5. **Sort Row**
+	```cpp
+	    sort(nums[i].rbegin(), nums[i].rend());
+	```
+	Each row is sorted in descending order using 'rbegin()' and 'rend()' to reverse the row, ensuring that the largest elements come first.
 
-1. Sorting each row takes **O(n log n)**, where `n` is the number of columns in a row. Since there are `m` rows, the sorting step for all rows takes **O(m * n log n)**.
-2. Finding the maximum in each column involves iterating through each row, which takes **O(m)** for each column. Since there are `n` columns, this step takes **O(m * n)**.
+6. **Column Processing**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	We loop through each column of the matrix to find the maximum value from that column.
 
-Thus, the total time complexity is:
+7. **Max Initialization**
+	```cpp
+	        int mx = nums[0][i];
+	```
+	The first element of the column (from the first row) is assigned to 'mx', which will track the maximum value in that column.
 
-- **O(m * n log n)** for sorting the rows.
-- **O(m * n)** for finding the maximum in each column.
+8. **Find Max in Column**
+	```cpp
+	        for(int j = 0; j < m; j++) {
+	```
+	We loop through each row in the current column to find the maximum value.
 
-Overall, the time complexity of the solution is dominated by the sorting step, so the total time complexity is:
+9. **Update Max**
+	```cpp
+	            mx = max(mx, nums[j][i]);
+	```
+	For each element in the current column, we update 'mx' to the larger of the current 'mx' and the current element in the column.
 
-- **O(m * n log n)**
+10. **Add to Result**
+	```cpp
+	        res += mx;
+	```
+	After finding the maximum element in the current column, it is added to 'res', which is accumulating the sum of maximum values for each column.
 
-#### Space Complexity:
+11. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the total sum of the maximum values from each column after sorting the rows.
 
-- **O(1)** additional space. The sorting operation is done in-place on the matrix, and we only use a constant amount of extra space for the result and iterators.
-- Thus, the space complexity is **O(1)**, as no extra data structures are used beyond the input matrix and the result variable.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n log n), where m is the number of rows and n is the number of columns.
+- **Average Case:** O(m * n log n)
+- **Worst Case:** O(m * n log n)
 
-### Conclusion
+Sorting each row takes O(n log n), and iterating over each column to find the maximum takes O(m). Therefore, the overall time complexity is O(m * n log n).
 
-The solution provided efficiently solves the problem of summing the maximum values from each column in a matrix after sorting each row in descending order. It leverages sorting to arrange the elements in each row and uses a simple loop to find the maximum element in each column. The algorithm is optimized to work in **O(m * n log n)** time, making it efficient for large matrices with `m` rows and `n` columns. The space complexity is **O(1)**, as the matrix is modified in place without the need for additional data structures. This solution is optimal for most practical use cases where performance and memory usage are critical factors.
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the need to store the matrix and its sorted form.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-in-a-matrix/description/)
 

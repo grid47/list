@@ -14,20 +14,78 @@ img_src = ""
 youtube = "eHk8TQIhvCk"
 youtube_upload_date="2021-03-22"
 youtube_thumbnail="https://i.ytimg.com/vi/eHk8TQIhvCk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a social network consisting of multiple users and their friendships, users can communicate with each other only if they share a common language. You are given a list of languages each user knows and a list of friendships between users. Your task is to teach a single language to some users such that all the users in each friendship can communicate. The goal is to minimize the number of users you need to teach the new language.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays:
+1. `languages`: A list of lists, where each inner list represents the languages known by a particular user. `languages[i]` contains the languages known by the i-th user.
+2. `friendships`: A list of pairs, where each pair represents a friendship between two users. Friendship `[u, v]` indicates that user `u` and user `v` are friends.
+- **Example:** `Input: n = 3, languages = [[1, 2], [2, 3], [1, 3], [2]], friendships = [[1, 2], [1, 3], [2, 3]]`
+- **Constraints:**
+	- 2 <= n <= 500
+	- languages.length == m
+	- 1 <= m <= 500
+	- 1 <= languages[i].length <= n
+	- 1 <= u_i < v_i <= languages.length
+	- 1 <= friendships.length <= 500
+	- languages[i] contains only unique values
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of users who need to be taught a new language so that all users in each friendship can communicate.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output is an integer representing the minimum number of users to teach a new language.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the minimal set of users who need to be taught a new language so that all users in each friendship can communicate, considering the languages they already know.
+
+- 1. Create a set for each user containing the languages they know.
+- 2. For each friendship, check if there is a common language between the two users. If not, mark both users as needing to learn a new language.
+- 3. Find the language that is most frequently spoken by the users who need to learn a new language and teach that language to the fewest number of users.
+- 4. Return the total number of users who need to be taught a language.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each user is a node, and each friendship is an edge in an undirected graph.
+- Languages known by users are represented as sets of integers, ensuring no duplicate languages within a user's knowledge.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 3, languages = [[1, 2], [2, 3], [1, 3], [2]], friendships = [[1, 2], [1, 3], [2, 3]]`  \
+  **Explanation:** In this case, users 1, 2, and 3 each have some overlapping language knowledge, but user 3 does not share any common language with user 1. Teaching user 1 a new language (language 3) would allow all users to communicate.
+
+- **Input:** `Input: n = 2, languages = [[1], [2], [1, 2]], friendships = [[1, 2], [1, 3], [2, 3]]`  \
+  **Explanation:** In this case, user 1 knows only language 1, user 2 knows only language 2, and user 3 knows both languages. Teaching user 1 language 2 or user 2 language 1 will ensure that all users can communicate.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we need to consider the friendship relationships and the languages known by each user. The strategy involves finding which users need a language taught to them and selecting the language that minimizes the total number of users to teach.
+
+### Initial Thoughts 💭
+- We need to minimize the number of users who need to be taught a new language while ensuring all users in each friendship can communicate.
+- We can treat this problem as a graph where each user is a node and each friendship is an edge. We want to ensure there is a common language between all nodes in each connected component.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input case should not exist due to constraints (m ≥ 1).
+- The solution should be efficient enough to handle the largest cases where n, m, and the number of friendships are all near their upper bounds.
+- Some users may already be able to communicate with all of their friends.
+- Handle cases where multiple users need to be taught a language.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
 
 public:
 
-    int minimumTeachings(int k, vector<vector<int>>& lang, vector<vector<int>>& frnd) {
-        
+int minimumTeachings(int k, vector<vector<int>>& lang, vector<vector<int>>& frnd) {
+    
 			int n = lang.size();
 
 			vector<set<int>> langs;
@@ -49,129 +107,205 @@ public:
 				ntk.insert(u);
 				ntk.insert(v);
 			}
-            if (ntk.size() == 0) return 0;
-        
-            vector<int> lg(k + 1, 0);
+        if (ntk.size() == 0) return 0;
+    
+        vector<int> lg(k + 1, 0);
 			for (int f : ntk)
-            for (int l : langs[f]) lg[l]++;
-        
-            int mx = lg[0];
-            for (int c : lg) {
-                mx = max(mx, c);
-            }
-        
+        for (int l : langs[f]) lg[l]++;
+    
+        int mx = lg[0];
+        for (int c : lg) {
+            mx = max(mx, c);
+        }
+    
 			return ntk.size() - mx;
-    }
+}
 
-};
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This solution finds the minimum number of languages a person needs to learn such that all pairs of friends can communicate. The algorithm ensures that friends with no common language are considered for language teaching.
 
-The problem is about determining the minimum number of languages that need to be taught to ensure that all pairs of friends can communicate with each other. Given a number of languages, an array of languages known by each person, and an array of friendships, the goal is to identify how many languages need to be taught to eliminate any communication barriers among friends.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	The class `Solution` is declared. This class will contain the method `minimumTeachings` to solve the problem.
 
-### Approach
+2. **Public Section**
+	```cpp
+	public:
+	```
+	This marks the beginning of the public section in the class, where methods that can be accessed from outside the class will be defined.
 
-To solve this problem, we can break it down into several key steps:
+3. **Function Definition**
+	```cpp
+	int minimumTeachings(int k, vector<vector<int>>& lang, vector<vector<int>>& frnd) {
+	```
+	The function `minimumTeachings` is defined. It takes three parameters: `k` (the number of languages), `lang` (a vector of vectors where each inner vector represents the languages spoken by a person), and `frnd` (a vector of pairs representing friendships).
 
-1. **Data Structure Initialization**: We will use a vector of sets to store the languages known by each individual. This will allow us to efficiently check for common languages between friends.
+4. **Variable Initialization**
+	```cpp
+	    int n = lang.size();
+	```
+	The variable `n` is initialized to the size of `lang`, which represents the total number of people.
 
-2. **Identify Friend Pairs Without Common Languages**: For each pair of friends, we will check if they share any languages. If they do not share a language, we will keep track of those individuals who need to learn new languages.
+5. **Vector Initialization**
+	```cpp
+	    vector<set<int>> langs;
+	```
+	A vector of sets `langs` is declared. Each set will hold the languages spoken by a person, making it easier to check common languages.
 
-3. **Count Language Requirements**: For the individuals who need to learn languages, we will count how many people know each language and identify the language that the maximum number of those individuals already know. This helps us minimize the total number of teachings required.
+6. **Populating Language Sets**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is initiated to iterate over each person in the `lang` array.
 
-4. **Calculate Minimum Teachings**: Finally, we will compute the minimum number of new languages that need to be taught by subtracting the maximum count of a known language from the number of individuals who need to learn languages.
+7. **Set Creation**
+	```cpp
+	        set<int> s(begin(lang[i]), end(lang[i]));
+	```
+	For each person `i`, a set `s` is created containing the languages they speak.
 
-### Code Breakdown (Step by Step)
+8. **Adding to Vector**
+	```cpp
+	        langs.push_back(s);
+	```
+	The set `s` containing the languages of person `i` is added to the `langs` vector.
 
-Here’s a detailed breakdown of the code implementation:
+9. **Set Initialization**
+	```cpp
+	    set<int> ntk;
+	```
+	A set `ntk` is declared. This set will keep track of the people who need to learn a new language.
 
-1. **Class Definition**: The solution is encapsulated in a class named `Solution`.
+10. **Friendship Loop**
+	```cpp
+	    for(vector<int> frd: frnd) {
+	```
+	A loop is started to iterate over each friendship in the `frnd` array.
 
-   ```cpp
-   class Solution {
-   ```
+11. **Friendship Processing**
+	```cpp
+	        int u = frd[0] - 1;
+	```
+	The first person `u` in the friendship pair `frd` is adjusted for zero-based indexing.
 
-2. **Public Method**: The method `minimumTeachings` takes in the number of languages `k`, a vector of vectors representing the languages known by individuals `lang`, and a vector of friend pairs `frnd`.
+12. **Friendship Processing**
+	```cpp
+	        int v = frd[1] - 1;
+	```
+	The second person `v` in the friendship pair `frd` is adjusted for zero-based indexing.
 
-   ```cpp
-   public:
-       int minimumTeachings(int k, vector<vector<int>>& lang, vector<vector<int>>& frnd) {
-   ```
+13. **Set Initialization**
+	```cpp
+	        set<int> s1 = langs[u];
+	```
+	The set `s1` is initialized with the languages spoken by person `u`.
 
-3. **Initialization**: We determine the number of individuals and create a vector of sets to hold the languages each person knows.
+14. **Set Initialization**
+	```cpp
+	        set<int> s2 = langs[v];
+	```
+	The set `s2` is initialized with the languages spoken by person `v`.
 
-   ```cpp
-   int n = lang.size();
-   vector<set<int>> langs;
-   ```
+15. **Set Intersection**
+	```cpp
+	        set<int> res;
+	```
+	A set `res` is declared to store the common languages between persons `u` and `v`.
 
-4. **Populate Language Sets**: We iterate through each individual and convert their language array into a set for easier intersection operations later.
+16. **Intersection Operation**
+	```cpp
+	        set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(res, res.begin()));
+	```
+	The `set_intersection` function is used to find common languages between `s1` and `s2` and store them in `res`.
 
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       set<int> s(begin(lang[i]), end(lang[i]));
-       langs.push_back(s);
-   }
-   ```
+17. **Check for Common Languages**
+	```cpp
+	        if (res.size() > 0) continue;
+	```
+	If there are common languages (i.e., `res.size() > 0`), the friendship pair does not need any additional teaching, so the loop moves to the next pair.
 
-5. **Identify Non-Communicating Friend Pairs**: We create a set to track individuals who need to learn new languages. For each friendship pair, we check if they share any languages using set intersection. If they don’t share a language, we add them to the `ntk` (need to know) set.
+18. **Track People to Teach**
+	```cpp
+	        ntk.insert(u);
+	```
+	If no common languages exist, both people in the friendship pair are added to the `ntk` set.
 
-   ```cpp
-   set<int> ntk;
-   for(vector<int> frd: frnd) {
-       int u = frd[0] - 1; // Friend index adjustment
-       int v = frd[1] - 1; // Friend index adjustment
-       set<int> s1 = langs[u];
-       set<int> s2 = langs[v];                
-       set<int> res;
-       set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(res, res.begin()));
-       if (res.size() > 0) continue; // They can communicate
-       ntk.insert(u); // They need to learn languages
-       ntk.insert(v);
-   }
-   ```
+19. **Track People to Teach**
+	```cpp
+	        ntk.insert(v);
+	```
+	Both people in the friendship pair are added to the `ntk` set.
 
-6. **Early Exit**: If no individuals need to learn new languages (`ntk` is empty), return 0, indicating no teachings are necessary.
+20. **No Need for Teaching**
+	```cpp
+	    if (ntk.size() == 0) return 0;
+	```
+	If no people need to learn a new language (i.e., `ntk` is empty), the function returns `0`.
 
-   ```cpp
-   if (ntk.size() == 0) return 0;
-   ```
+21. **Language Frequency Initialization**
+	```cpp
+	        vector<int> lg(k + 1, 0);
+	```
+	A vector `lg` of size `k+1` is initialized to store the frequency of each language spoken by the people in `ntk`.
 
-7. **Count Language Knowledge**: We create a vector to count how many people know each language among those who need to learn. We then iterate through each individual in `ntk`, updating our counts based on the languages they know.
+22. **Count Languages for Each Person**
+	```cpp
+	        for (int f : ntk)
+	```
+	A loop is started to iterate over the set `ntk` to count the languages spoken by the people who need to learn a new language.
 
-   ```cpp
-   vector<int> lg(k + 1, 0); // Language count
-   for (int f : ntk) // Count languages known by those in ntk
-       for (int l : langs[f]) lg[l]++;
-   ```
+23. **Language Count Update**
+	```cpp
+	        for (int l : langs[f]) lg[l]++;
+	```
+	For each person `f` in `ntk`, the languages they speak are counted in the `lg` vector.
 
-8. **Determine Maximum Known Language**: We find the language that is known by the maximum number of individuals in `ntk`.
+24. **Max Frequency Calculation**
+	```cpp
+	        int mx = lg[0];
+	```
+	The variable `mx` is initialized with the frequency of the first language.
 
-   ```cpp
-   int mx = lg[0];
-   for (int c : lg) {
-       mx = max(mx, c);
-   }
-   ```
+25. **Max Frequency Calculation**
+	```cpp
+	        for (int c : lg) {
+	```
+	A loop is started to calculate the maximum frequency of any language in the `lg` vector.
 
-9. **Calculate Minimum Teachings**: Finally, the minimum teachings required will be the number of individuals in `ntk` minus the maximum number of individuals that already know a language.
+26. **Max Frequency Update**
+	```cpp
+	            mx = max(mx, c);
+	```
+	The variable `mx` is updated to the maximum frequency found in the `lg` vector.
 
-   ```cpp
-   return ntk.size() - mx;
-   }
-   ```
+27. **Return Result**
+	```cpp
+	        return ntk.size() - mx;
+	```
+	The function returns the number of people in `ntk` minus the maximum frequency of any language spoken by them.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where m is the number of users and n is the number of languages.
+- **Average Case:** O(m * n), since we may need to check each user's languages in the worst case.
+- **Worst Case:** O(m * n), as we need to evaluate each friendship and language scenario.
 
-- **Time Complexity**: The overall time complexity is \(O(n + m \cdot k)\), where \(n\) is the number of individuals, \(m\) is the number of friendships, and \(k\) is the maximum number of languages. This accounts for iterating through the friends and the languages known by individuals.
+The time complexity is driven by the need to check all friendships and languages.
 
-- **Space Complexity**: The space complexity is \(O(n + k)\), where \(n\) is the number of individuals for the sets of languages and \(k\) for the language count vector.
+### Space Complexity 💾
+- **Best Case:** O(m), since the space required to store users and their languages depends on the number of users.
+- **Worst Case:** O(m * n), where m is the number of users and n is the number of languages.
 
-### Conclusion
+The space complexity depends on the number of users and languages stored for each user.
 
-This solution efficiently determines the minimum number of new languages that need to be taught to ensure all pairs of friends can communicate. By employing sets for language representation and counting known languages among those who need to learn, we minimize the teachings required. The approach effectively handles the problem with clear logic and efficient data structures, making it well-suited for situations involving language learning and communication barriers. The implementation is robust and can be extended or modified to adapt to variations of the problem, such as varying friendship structures or additional constraints on language learning.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-people-to-teach/description/)
 

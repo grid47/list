@@ -14,40 +14,87 @@ img_src = ""
 youtube = "mzU9eVB62hA"
 youtube_upload_date="2022-07-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mzU9eVB62hA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design a number container system that allows inserting or replacing a number at a specific index and finding the smallest index for a given number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of multiple operations: `change(index, number)` for inserting/replacing a number at a given index, and `find(number)` to find the smallest index containing a particular number.
+- **Example:** `Input: ["NumberContainers", "find", "change", "change", "change", "change", "find", "change", "find"]
+Input: [[], [10], [2, 10], [1, 10], [3, 10], [5, 10], [10], [1, 20], [10]]`
+- **Constraints:**
+	- 1 <= index, number <= 10^9
+	- At most 10^5 operations in total.
 
-{{< highlight cpp >}}
-class NumberContainers {
-    map<int, set<int>> mp;
-    map<int, int> in;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output consists of an array of results corresponding to each operation. For `find(number)`, return the smallest index filled with the given number, or -1 if not found.
+- **Example:** `[null, -1, null, null, null, null, 1, null, 2]`
+- **Constraints:**
+	- The result of `find(number)` will be an integer, either the smallest index or -1 if the number is not found.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To track the numbers at specific indices and efficiently find the smallest index for a given number.
+
+- Store the numbers in a map with index as the key.
+- Use another map to store sets of indices for each number.
+- On inserting or replacing a number at an index, update the map of indices.
+- To find the smallest index for a number, return the smallest index from the set of indices for that number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The container system should handle insertions, replacements, and searches efficiently.
+- The system should handle large index values (up to 10^9).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["NumberContainers", "find", "change", "change", "change", "change", "find", "change", "find"]`  \
+  **Explanation:** This example shows how the container system works step-by-step, with operations being executed in sequence. Initially, `find(10)` returns -1 because no indices are filled with 10. As we fill the containers at different indices, `find(10)` returns the smallest index where 10 is found.
+
+{{< dots >}}
+## Approach 🚀
+Use a map to store the number at each index and another map to track the indices for each number.
+
+### Initial Thoughts 💭
+- Efficiently storing and retrieving numbers by index and tracking the smallest index for a given number is key.
+- We need two maps: one for tracking the numbers at indices, and one for tracking the indices for each number.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as every operation requires either an index or a number.
+- Ensure that the system can handle up to 10^5 operations efficiently.
+- If a number is replaced at an index, the previous number at that index should be removed from the tracking map.
+- The approach should ensure efficient time complexity and avoid excessive memory use.
+{{< dots >}}
+## Code 💻
+```cpp
+map<int, int> in;
 public:
-    NumberContainers() {
+NumberContainers() {
+    
+}
+
+void change(int idx, int num) {
+    if(in.count(idx)) {
         
-    }
-    
-    void change(int idx, int num) {
-        if(in.count(idx)) {
-            
-            int x = in[idx];
-            mp[x].erase(idx);
+        int x = in[idx];
+        mp[x].erase(idx);
 
 
-        } 
-        in[idx] = num;
-        mp[num].insert(idx);
-         
-    }
-    
-    int find(int num) {
-        if(mp.count(num) && !mp[num].empty()) {
-            return *begin(mp[num]);
-        } return -1;
-    }
+    } 
+    in[idx] = num;
+    mp[num].insert(idx);
+     
+}
+
+int find(int num) {
+    if(mp.count(num) && !mp[num].empty()) {
+        return *begin(mp[num]);
+    } return -1;
+}
 };
 
 /**
@@ -55,98 +102,101 @@ public:
  * NumberContainers* obj = new NumberContainers();
  * obj->change(index,number);
  * int param_2 = obj->find(number);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves implementing a container system that supports two main operations:
-1. **Change Operation**: Change the number stored at a given index.
-2. **Find Operation**: Find the smallest index that stores a specific number.
-
-We need to design a data structure that allows these operations to be performed efficiently. Each container holds a number at an index, and we are tasked with supporting the following operations:
-- **change(int idx, int num)**: This operation changes the number at index `idx` to `num`. If a number already exists at `idx`, the previous number should be removed.
-- **find(int num)**: This operation finds the smallest index that stores the number `num`. If there is no index storing `num`, it should return `-1`.
-
-### Approach
-
-To solve this problem efficiently, we can use a combination of two data structures:
-1. **Map of Sets (`mp`)**: This will map each number to a set of indices where that number is stored. The use of a set ensures that we have efficient lookups, insertions, and deletions of indices.
-2. **Map of Integers (`in`)**: This will store the current number at each index. This ensures we know which number is currently stored at each index for performing the `change` operation.
-
-The idea is that:
-- For the `change(idx, num)` operation, we first check if the number at the given index has changed. If it has, we remove the old number from the set and insert the new number at that index.
-- For the `find(num)` operation, we can directly access the set of indices associated with the number `num` and return the smallest index.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Data Structure Initialization**
-```cpp
-map<int, set<int>> mp;
-map<int, int> in;
 ```
-- `mp`: This map associates each number with a set of indices that store that number. This ensures that for any given number, we can quickly access the indices where that number is stored. A set is used because we are interested in the smallest index, and sets are naturally ordered.
-- `in`: This map stores the number at each index. It allows us to easily find the current number at a specific index, which is necessary for the `change` operation.
 
-#### 2. **Constructor**
-```cpp
-NumberContainers() {
-}
-```
-- The constructor is empty because there is no specific initialization needed apart from initializing the maps `mp` and `in`, which happens automatically.
+This class, `NumberContainers`, uses a map to store the index of a number and another map to store indices for each number. It provides two functions: `change()` to update the number at a given index, and `find()` to find the smallest index where a given number exists.
 
-#### 3. **Change Operation**
-```cpp
-void change(int idx, int num) {
-    if(in.count(idx)) {
-        int x = in[idx];
-        mp[x].erase(idx);
-    } 
-    in[idx] = num;
-    mp[num].insert(idx);
-}
-```
-- **Step 1**: We first check if the index `idx` already has a number stored in it by using `in.count(idx)`. If it does, we remove the index from the set of indices associated with the old number (`x`), which is stored in `in[idx]`. This ensures that we are removing the old number from the set before updating.
-- **Step 2**: We then update the number at index `idx` in the `in` map to the new number `num`.
-- **Step 3**: After updating the number at index `idx`, we insert the index `idx` into the set corresponding to the new number in `mp[num]`. This ensures that the new number is associated with the correct index.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	map<int, int> in;
+	```
+	Declares a map `in` that associates an index with a number.
 
-#### 4. **Find Operation**
-```cpp
-int find(int num) {
-    if(mp.count(num) && !mp[num].empty()) {
-        return *begin(mp[num]);
-    } 
-    return -1;
-}
-```
-- **Step 1**: We first check if the number `num` exists in the map `mp` and whether the associated set is non-empty. This ensures that there is at least one index storing the number `num`.
-- **Step 2**: If the set for `num` is non-empty, we return the smallest index in the set by using `*begin(mp[num])`. This takes advantage of the fact that sets are ordered, and `begin()` gives us the smallest element.
-- **Step 3**: If the number `num` is not found in the map `mp` or if the set is empty, we return `-1` to indicate that no index stores that number.
+2. **Access Modifier**
+	```cpp
+	public:
+	```
+	Defines the public access modifier for the class members and methods.
 
-### Complexity
+3. **Constructor**
+	```cpp
+	NumberContainers() {
+	```
+	The constructor of the `NumberContainers` class. It initializes the internal data structures.
 
-#### Time Complexity:
-- **Change Operation (`change(idx, num)`)**:  
-  - Inserting and erasing elements in a set takes `O(log N)` time, where `N` is the number of elements in the set.
-  - The `in[idx] = num` operation is a simple `O(1)` operation.
-  - Overall, the time complexity for `change` is `O(log N)` where `N` is the number of indices associated with a number.
-  
-- **Find Operation (`find(num)`)**:  
-  - Finding an element in the map `mp` takes `O(log M)` where `M` is the number of unique numbers in `mp`.  
-  - Accessing the smallest element in the set takes `O(1)` time due to the ordering property of sets.
-  - The overall time complexity for `find` is `O(log M)`, where `M` is the number of unique numbers in the container.
+4. **Function Definition**
+	```cpp
+	void change(int idx, int num) {
+	```
+	Defines the `change()` function that updates the number at a given index.
 
-#### Space Complexity:
-- **O(N + M)**:  
-  - `N` is the number of indices (which can be as large as the number of elements in `in`), and `M` is the number of unique numbers (which can be as large as the number of unique numbers in `mp`).  
-  - The `in` map stores `N` elements, and the `mp` map stores up to `M` sets. Hence, the space complexity is `O(N + M)`.
+5. **Condition Check**
+	```cpp
+	    if(in.count(idx)) {
+	```
+	Checks if the index `idx` already exists in the map `in`.
 
-### Conclusion
+6. **Index Fetch**
+	```cpp
+	        int x = in[idx];
+	```
+	Fetches the current number `x` stored at index `idx` from the map `in`.
 
-This solution efficiently handles the `change` and `find` operations using a combination of maps and sets. The `change` operation ensures that the number at each index is updated properly, while the `find` operation quickly finds the smallest index storing a specific number. The use of maps and sets allows these operations to be performed efficiently, even for large inputs.
+7. **Remove Index from Previous Map**
+	```cpp
+	        mp[x].erase(idx);
+	```
+	Removes the index `idx` from the map `mp` corresponding to the number `x`.
 
-The time complexity of both operations is logarithmic in terms of the number of elements, ensuring that the solution can handle a wide range of inputs efficiently. This approach is highly optimized for scenarios where frequent updates and queries are required, making it suitable for real-time systems or interactive applications where performance is critical.
+8. **Update Index**
+	```cpp
+	    in[idx] = num;
+	```
+	Updates the map `in` to associate the index `idx` with the new number `num`.
+
+9. **Insert into Map**
+	```cpp
+	    mp[num].insert(idx);
+	```
+	Inserts the index `idx` into the map `mp` under the corresponding number `num`.
+
+10. **Function Definition**
+	```cpp
+	int find(int num) {
+	```
+	Defines the `find()` function to return the smallest index where a given number exists.
+
+11. **Condition Check**
+	```cpp
+	    if(mp.count(num) && !mp[num].empty()) {
+	```
+	Checks if the map `mp` contains the number `num` and if the list of indices for that number is not empty.
+
+12. **Return Smallest Index**
+	```cpp
+	        return *begin(mp[num]);
+	```
+	Returns the smallest index for the given number `num` by accessing the first element in the set of indices.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(log n)
+
+For most operations, the time complexity is constant. However, finding the smallest index involves searching through a set of indices, which takes logarithmic time.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity depends on the number of distinct indices and numbers, but it remains efficient due to the use of maps and sets.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-a-number-container-system/description/)
 

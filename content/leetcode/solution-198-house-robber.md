@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "UVNgW5nSoiU"
 youtube_upload_date="2023-06-20"
 youtube_thumbnail="https://i.ytimg.com/vi/UVNgW5nSoiU/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,128 +28,145 @@ youtube_thumbnail="https://i.ytimg.com/vi/UVNgW5nSoiU/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are a burglar planning to rob houses along a street. Each house has an amount of money, but robbing two adjacent houses will trigger an alarm. Given an integer array `nums` representing the money stashed in each house, find the maximum amount you can rob without triggering the alarm.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers where each integer represents the amount of money in each house.
+- **Example:** `nums = [5, 3, 4, 11]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 0 <= nums[i] <= 400
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int rob(vector<int>& a) {
-        int n = a.size();
-        if(n == 1) return a[0];
-        vector<int> dp(n,0);
-        dp[0] = a[0];
-        dp[1] = max(a[0], a[1]);
-        for(int i = 2; i < n; i++)
-            dp[i] = max(dp[i-2]+a[i], dp[i-1]);
-        return dp[n-1];
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the maximum amount of money that can be robbed without triggering the alarm by robbing adjacent houses.
+- **Example:** `Output = 16`
+- **Constraints:**
+	- The output is a single integer representing the maximum amount of money that can be robbed.
 
-### 🌟 House Robber Problem (Dynamic Programming)
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the total amount of money robbed while ensuring no two adjacent houses are robbed.
 
-The problem at hand is a classic dynamic programming problem known as the **House Robber** problem. Given a list of non-negative integers representing the amount of money stored in each house, the goal is to determine the maximum amount of money you can rob tonight without alerting the police. The catch is that you cannot rob two adjacent houses on the same night.
+- Step 1: Use dynamic programming to keep track of the maximum money robbed up to each house.
+- Step 2: For each house, calculate the maximum amount by either skipping the house or robbing it and adding its value to the previous non-adjacent house's value.
+- Step 3: Return the maximum value at the last house.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty.
+- The values in the input array are valid integers within the given range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [5, 3, 4, 11]`  \
+  **Explanation:** The maximum money that can be robbed is 16 by robbing house 1 (5) and house 4 (11). The adjacent houses can't both be robbed, so we skip house 2 and 3.
 
-#### Example:
-- **Input:** `a = [2, 7, 9, 3, 1]`
-- **Output:** `12` (Rob the first, third, and fifth house for a total of 12).
+- **Input:** `Input: nums = [3, 2, 5, 10, 7]`  \
+  **Explanation:** The optimal choice is to rob house 1 (3), house 3 (5), and house 5 (7), yielding a total of 15.
 
-### 💡 Approach
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using dynamic programming. The idea is to iterate through the houses and keep track of the maximum money we can rob up to each house without robbing two adjacent houses.
 
-We solve this problem using **dynamic programming** by deciding for each house whether to rob it or skip it. The decision at each house depends on the maximum amount we can rob up to that point, considering whether we rob the current house or skip it.
-
-**State Definition:**
-- Let `dp[i]` represent the maximum amount of money that can be robbed from the first `i` houses (i.e., from house `0` to house `i`).
-
-**Recurrence Relation:**
-- If we rob the `i`-th house, we cannot rob the `(i-1)`-th house, but we can take the money from the `(i-2)`-th house. Therefore, the value will be `dp[i-2] + a[i]`.
-- If we skip the `i`-th house, we take the value of `dp[i-1]`.
-- Thus, the recurrence relation is:
-  \[
-  dp[i] = \max(dp[i-1], dp[i-2] + a[i])
-  \]
-- Base cases:
-  - `dp[0] = a[0]`: If there is only one house, we rob it.
-  - `dp[1] = max(a[0], a[1])`: If there are two houses, we rob the one with the higher amount of money.
-
-### 🛠 Code Breakdown
-
-#### Step 1: Handle Small Input Sizes
-```cpp
-if (n == 1) return a[0];
-```
-- If there is only one house, we can rob it, so we return the value in `a[0]`.
-
-#### Step 2: Initialize the DP Array
-```cpp
-vector<int> dp(n, 0);
-```
-- We initialize a vector `dp` of size `n` (the number of houses) to store the maximum money that can be robbed up to each house.
-
-#### Step 3: Set Base Cases
-```cpp
-dp[0] = a[0];
-dp[1] = max(a[0], a[1]);
-```
-- For the first house (`dp[0]`), the maximum money we can rob is `a[0]`.
-- For the second house (`dp[1]`), we choose the house with the higher amount of money: `max(a[0], a[1])`.
-
-#### Step 4: Fill the DP Array for All Other Houses
-```cpp
-for (int i = 2; i < n; i++)
-    dp[i] = max(dp[i-2] + a[i], dp[i-1]);
-```
-- For each house from the third onward, we update `dp[i]` by choosing the maximum between:
-  - Robbing the current house (`dp[i-2] + a[i]`), or
-  - Skipping the current house and taking the value of `dp[i-1]`.
-
-#### Step 5: Return the Final Result
-```cpp
-return dp[n-1];
-```
-- The final value `dp[n-1]` contains the maximum money that can be robbed, considering all the houses.
-
-### 📊 Complexity Analysis
-
-#### Time Complexity:
-- **O(n):** We iterate through the list of houses once, performing constant-time operations for each house (calculating the maximum between two values). Thus, the time complexity is linear in the number of houses, i.e., **O(n)**.
-
-#### Space Complexity:
-- **O(n):** We use a dynamic programming array `dp` of size `n` to store intermediate results. Therefore, the space complexity is proportional to the number of houses, i.e., **O(n)**.
-
-### 🚀 Space Complexity Optimization
-
-We can reduce the space complexity to **O(1)** by keeping track of only the last two values in the `dp` array. This is because each state (`dp[i]`) only depends on the previous two states (`dp[i-1]` and `dp[i-2]`).
-
-#### Optimized Code:
-
+### Initial Thoughts 💭
+- This is a typical dynamic programming problem where we need to make decisions based on previous results.
+- We can define a dp array where dp[i] represents the maximum money we can rob up to the i-th house.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as the problem guarantees at least one house.
+- The problem's constraints are small enough (up to 100 houses) that large inputs are not a concern.
+- If the array contains only one house, we simply rob that house.
+- The input will always have at least one house.
+{{< dots >}}
+## Code 💻
 ```cpp
 int rob(vector<int>& a) {
     int n = a.size();
-    if (n == 1) return a[0];
-
-    int prev2 = a[0], prev1 = max(a[0], a[1]);
-    for (int i = 2; i < n; i++) {
-        int current = max(prev2 + a[i], prev1);
-        prev2 = prev1;
-        prev1 = current;
-    }
-    return prev1;
+    if(n == 1) return a[0];
+    vector<int> dp(n,0);
+    dp[0] = a[0];
+    dp[1] = max(a[0], a[1]);
+    for(int i = 2; i < n; i++)
+        dp[i] = max(dp[i-2]+a[i], dp[i-1]);
+    return dp[n-1];
 }
 ```
-In this optimized version:
-- We use two variables, `prev1` and `prev2`, to store the results of the last two houses.
-- This reduces the space complexity to **O(1)**, while still maintaining the same time complexity of **O(n)**.
 
-### ✅ Conclusion
+This function implements the 'House Robber' problem using dynamic programming. It determines the maximum amount of money that can be robbed from a series of houses, where adjacent houses cannot be robbed on the same night.
 
-The **House Robber** problem is efficiently solved using dynamic programming. The key idea is to make decisions based on previous choices, and the solution can be optimized to use constant space. Here's a recap:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int rob(vector<int>& a) {
+	```
+	Define the function 'rob' which accepts a vector of integers 'a' representing the amount of money in each house, and returns the maximum amount that can be robbed.
 
-- **Time Complexity:** **O(n)**, where `n` is the number of houses.
-- **Space Complexity:** **O(1)** after optimization.
+2. **Array Size**
+	```cpp
+	    int n = a.size();
+	```
+	Store the size of the input vector 'a' in the variable 'n', which represents the number of houses.
 
-This solution is not only optimal in terms of time and space but also applicable to similar problems that require making decisions based on previous states.
+3. **Edge Case Check**
+	```cpp
+	    if(n == 1) return a[0];
+	```
+	Check if there is only one house. If so, return the amount in that single house as there are no other houses to consider.
+
+4. **DP Array Initialization**
+	```cpp
+	    vector<int> dp(n,0);
+	```
+	Initialize a dynamic programming (DP) array 'dp' of size 'n' with all elements set to zero. This array will store the maximum amount that can be robbed up to each house.
+
+5. **Base Case Initialization**
+	```cpp
+	    dp[0] = a[0];
+	```
+	Set the base case: the maximum amount that can be robbed from just the first house is the amount in the first house itself.
+
+6. **Base Case Comparison**
+	```cpp
+	    dp[1] = max(a[0], a[1]);
+	```
+	For the second house, the maximum amount that can be robbed is the greater of the first and second house values.
+
+7. **Loop Through Houses**
+	```cpp
+	    for(int i = 2; i < n; i++)
+	```
+	Start a loop from the third house onward to compute the maximum amount that can be robbed by either including or excluding the current house.
+
+8. **DP Update**
+	```cpp
+	        dp[i] = max(dp[i-2]+a[i], dp[i-1]);
+	```
+	Update the DP array by choosing the maximum between robbing the current house (dp[i-2] + a[i]) or skipping the current house (dp[i-1]).
+
+9. **Return Result**
+	```cpp
+	    return dp[n-1];
+	```
+	Return the maximum amount that can be robbed from all houses, which is stored in the last element of the DP array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the input array `nums`. We process each house once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the dynamic programming array used to store the maximum amounts for each house.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/house-robber/description/)
 

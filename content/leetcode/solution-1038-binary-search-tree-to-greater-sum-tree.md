@@ -14,108 +14,144 @@ img_src = ""
 youtube = "FiGdEA4herM"
 youtube_upload_date="2022-11-13"
 youtube_thumbnail="https://i.ytimg.com/vi/FiGdEA4herM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a Binary Search Tree (BST), convert it into a Greater Tree where each node's value is updated to the sum of its original value and all the values greater than it in the BST. The transformation should preserve the BST structure.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with the root of a Binary Search Tree. The nodes of the tree are distinct integers, and the task is to transform the tree as described.
+- **Example:** `Input: root = [5,3,8,1,4,7,10]`
+- **Constraints:**
+	- 1 <= number of nodes <= 100
+	- 0 <= Node.val <= 100
+	- All node values are distinct
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root of the Greater Tree after transformation.
+- **Example:** `Output: [30,36,21,36,35,26,15]`
+- **Constraints:**
+	- The tree should be transformed such that each node's value is the sum of its original value and all greater values in the BST.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to transform the BST into a Greater Tree by accumulating the sum of all values greater than a node's value.
+
+- 1. Perform a reverse in-order traversal of the BST, starting from the rightmost node.
+- 2. Accumulate the sum of nodes encountered during the traversal, updating each node's value.
+- 3. Continue the traversal until all nodes are visited.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is a valid Binary Search Tree (BST) with unique values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]`  \
+  **Explanation:** After converting the BST to a Greater Tree, the new root tree will be [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8], where each node is updated to the sum of its original value and the values greater than it.
+
+- **Input:** `Input: root = [0,null,1]`  \
+  **Explanation:** After the transformation, the tree becomes [1,null,1], where the only non-zero transformation is at the root node.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses reverse in-order traversal to accumulate the sum of nodes in the BST and transform it into the Greater Tree.
+
+### Initial Thoughts 💭
+- This problem requires a depth-first traversal of the tree, visiting the nodes in descending order (right to left).
+- By accumulating the values as we traverse, we can transform each node to include the sum of greater nodes.
+- A reverse in-order traversal works efficiently for this task because it visits nodes in decreasing order, allowing us to accumulate the sum of greater values before updating each node.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty tree (root is null) should simply return null.
+- For large trees (close to 100 nodes), the algorithm should still function efficiently due to the O(n) time complexity of the traversal.
+- The algorithm handles trees with nodes having values from 0 to 100.
+- Ensure the tree structure remains a valid BST after transformation.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    int pre;
+int pre;
 public:
-    TreeNode* bstToGst(TreeNode* root) {
-        if(root->right) bstToGst(root->right);
-        pre = root->val = pre + root->val;
-        if(root->left) bstToGst(root->left);
-        return root;
-    }
-};
-{{< /highlight >}}
----
+TreeNode* bstToGst(TreeNode* root) {
+    if(root->right) bstToGst(root->right);
+    pre = root->val = pre + root->val;
+    if(root->left) bstToGst(root->left);
+    return root;
+}
+```
 
+This is the code for converting a Binary Search Tree (BST) to a Greater Sum Tree (GST), where each node contains the sum of all nodes greater than or equal to itself.
 
-### Problem Statement
-The problem involves transforming a binary search tree (BST) into a greater sum tree (GST). In a GST, each node's value is replaced by the sum of all values greater than or equal to that node's original value in the BST. This transformation must maintain the binary tree structure, ensuring that for every node, the left subtree contains only values less than the node's value, while the right subtree contains values greater than the node's value.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	Define a class 'Solution' to implement the function for converting a BST to a GST.
 
-### Approach
-To achieve this transformation, we will employ a reverse in-order traversal of the BST. The key steps in our approach include:
+2. **Variable Declaration**
+	```cpp
+	int pre;
+	```
+	Declare an integer 'pre' that will store the cumulative sum of node values during the tree traversal.
 
-1. **Reverse In-Order Traversal**: This traversal method processes nodes in decreasing order of their values. We start from the rightmost node and move to the left.
-2. **Cumulative Sum Calculation**: We maintain a running total of the sum of the values processed so far. When visiting a node, we update its value to the cumulative sum, and then we add the node's original value to this sum for subsequent nodes.
-3. **Recursive Function**: We implement the transformation using a recursive function that traverses the tree and updates node values accordingly.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Define the public section of the class, where the function 'bstToGst' will be declared.
 
-### Code Breakdown (Step by Step)
+4. **Function Definition**
+	```cpp
+	TreeNode* bstToGst(TreeNode* root) {
+	```
+	Define the function 'bstToGst' which will traverse the BST in reverse in-order and modify each node to store the GST value.
 
-1. **Class Definition**: The solution is encapsulated in a class named `Solution`.
+5. **Right Subtree Traversal**
+	```cpp
+	    if(root->right) bstToGst(root->right);
+	```
+	Recursively traverse the right subtree of the node, ensuring the largest nodes are processed first.
 
-2. **Member Variables**:
-   - `pre`: An integer that holds the cumulative sum of node values as we traverse the tree.
+6. **Node Value Update**
+	```cpp
+	    pre = root->val = pre + root->val;
+	```
+	Update the node's value by adding the current value of 'pre' (which holds the cumulative sum) and assign it to 'pre'. This ensures the node gets the sum of all greater nodes.
 
-3. **Function Signature**: 
-   - The `bstToGst` function takes a pointer to the root of the BST and returns a pointer to the modified root after transformation.
+7. **Left Subtree Traversal**
+	```cpp
+	    if(root->left) bstToGst(root->left);
+	```
+	Recursively traverse the left subtree after updating the current node, ensuring all nodes are visited.
 
-   ```cpp
-   TreeNode* bstToGst(TreeNode* root) {
-       //...
-   }
-   ```
+8. **Return Root**
+	```cpp
+	    return root;
+	```
+	Return the modified root node of the tree after all values have been updated.
 
-4. **Base Case and Recursive Traversal**:
-   - The function first checks if the right child of the current node exists. If it does, it recursively calls `bstToGst` on the right child. This ensures we process larger values first, adhering to the reverse in-order traversal.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-   if(root->right) bstToGst(root->right);
-   ```
+The time complexity is O(n), where n is the number of nodes in the tree. This is because we visit each node once during the traversal.
 
-5. **Updating Node Values**:
-   - Once we are at a node, we update its value to include the cumulative sum of values processed thus far. The `pre` variable is updated to include the original value of the current node.
-   - This line effectively performs two actions: updating the node's value and maintaining the cumulative sum.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
 
-   ```cpp
-   pre = root->val = pre + root->val;
-   ```
+The space complexity is O(h), where h is the height of the tree. In the worst case, for a skewed tree, the height is O(n), but in a balanced tree, it is O(log n).
 
-6. **Processing the Left Subtree**:
-   - After updating the current node, the function checks for the existence of a left child. If present, it recursively processes the left child, allowing us to continue the transformation for all nodes in the tree.
-
-   ```cpp
-   if(root->left) bstToGst(root->left);
-   ```
-
-7. **Returning the Root**:
-   - Finally, the modified root node is returned after the entire tree has been processed.
-
-   ```cpp
-   return root;
-   }
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this approach is \(O(n)\), where \(n\) is the number of nodes in the binary search tree. This is because each node is visited exactly once during the traversal.
-  
-- **Space Complexity**: The space complexity is \(O(h)\), where \(h\) is the height of the tree. This accounts for the space used by the call stack during the recursive traversal. In the worst case (for a skewed tree), this could be \(O(n)\), but for balanced trees, it would be \(O(\log n)\).
-
-### Conclusion
-The provided code effectively transforms a binary search tree into a greater sum tree using a reverse in-order traversal approach. This transformation updates each node's value to be the sum of all values greater than or equal to its original value, preserving the binary tree structure.
-
-The algorithm's efficiency, with a linear time complexity, makes it suitable for large trees, ensuring that each node is processed with minimal overhead. Additionally, the use of a single member variable for cumulative sums simplifies the implementation while maintaining clarity.
-
-This approach demonstrates the utility of tree traversal techniques in modifying data structures, making it applicable in various scenarios involving hierarchical data representations. The clarity and conciseness of the code enhance its maintainability and adaptability for further enhancements or modifications.
-
-In summary, the `bstToGst` function provides a robust solution to the problem, showcasing the effectiveness of recursive algorithms in tree manipulations and their relevance in practical applications such as data analysis, computational algorithms, and software development.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/description/)

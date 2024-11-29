@@ -14,143 +14,199 @@ img_src = ""
 youtube = "rh8Mnj9Bd64"
 youtube_upload_date="2023-06-02"
 youtube_thumbnail="https://i.ytimg.com/vi/rh8Mnj9Bd64/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums` of length `n`. For each index `i`, calculate the absolute difference between the average of the first `i + 1` elements and the average of the last `n - i - 1` elements. Both averages should be rounded down to the nearest integer. Your task is to find the index `i` with the minimum average difference. If there are multiple indices with the same difference, return the smallest index.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer array `nums` representing the list of integers.
+- **Example:** `nums = [8, 2, 5, 6, 7, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the index with the minimum average difference.
+- **Example:** `Output: 2`
+- **Constraints:**
 
-class Solution {
-public:
-    int minimumAverageDifference(vector<int>& nums) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify the index that results in the smallest average difference, considering the left and right subarrays formed by dividing the array at each index.
 
-        typedef long long ll;
-        
-        ll sum = 0;
-        for(int a : nums) sum += a;
+- Compute the sum of the entire array `nums`.
+- Iterate through each index `i` and calculate the average of the first `i + 1` elements and the last `n - i - 1` elements.
+- For each index, compute the absolute difference between the two averages.
+- Keep track of the minimum difference and the corresponding index.
+- Return the index with the smallest difference. In case of a tie, return the smallest index.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` is non-empty.
+- If the array has only one element, return 0 since there's no right subarray.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [8, 2, 5, 6, 7, 3]`  \
+  **Explanation:** For each index `i`, calculate the average of the first `i + 1` elements and the last `n - i - 1` elements, and find the index with the smallest difference in averages.
 
-        ll n = nums.size(), res = INT_MAX, ret = 0, la = 0, ra = 0;
-        ll l = 0, r = sum;
-        for(int i = 0; i < n; i++) {
-            int prv = res;
-            l += nums[i];
-            r -= nums[i];      
-            la = l / (i + 1);
-            ra = (i+1==n)?0:r / (n-(i+1));
-            res = min(res, abs(la - ra));
-            if(prv != res) ret = i;
-        }
-        return ret;            
+- **Input:** `nums = [10]`  \
+  **Explanation:** With a single element, the average difference is 0. Therefore, the result is index 0.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by computing prefix and suffix sums efficiently to avoid recalculating sums repeatedly for each index.
+
+### Initial Thoughts 💭
+- We need to calculate averages for subarrays efficiently. Prefix sums will help us avoid recomputing sums for each subarray.
+- This problem requires iterating over all indices in the array and comparing average differences.
+- We can compute the total sum of the array and update the sums for the left and right subarrays incrementally as we move through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` contains only one element, return index 0.
+- For arrays with 100,000 elements, ensure the solution runs efficiently by using prefix and suffix sums.
+- If all elements are the same, the average difference will always be 0.
+- Handle cases where `nums` contains large numbers or a large number of elements efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumAverageDifference(vector<int>& nums) {
+
+    typedef long long ll;
+    
+    ll sum = 0;
+    for(int a : nums) sum += a;
+
+    ll n = nums.size(), res = INT_MAX, ret = 0, la = 0, ra = 0;
+    ll l = 0, r = sum;
+    for(int i = 0; i < n; i++) {
+        int prv = res;
+        l += nums[i];
+        r -= nums[i];      
+        la = l / (i + 1);
+        ra = (i+1==n)?0:r / (n-(i+1));
+        res = min(res, abs(la - ra));
+        if(prv != res) ret = i;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the index where the absolute difference between the average of the left part and the average of the right part of a list `nums` is minimized. Specifically, the left part consists of all elements before and including the given index, and the right part contains all the remaining elements. The goal is to return the index where the absolute difference between the averages of the two parts is the smallest.
-
-For example:
-- Given an array `nums = [2, 4, 1, 3, 5]`, the goal is to split the array at every index, compute the averages of the left and right parts, and return the index where the absolute difference between these averages is minimized.
-
-### Approach
-
-To solve this problem, we can break it down into the following steps:
-
-1. **Compute the Total Sum of the Array**: We need to calculate the sum of all elements in the array, as this will help us efficiently compute the sum of the right part without iterating over the array multiple times.
-
-2. **Sliding Window of Sums**: The key idea is to iterate through the array and compute the average of the left part (`l`) and the right part (`r`) at each index. The sum of the left part (`l`) can be easily calculated incrementally by adding elements from the start of the array. The sum of the right part (`r`) is the total sum minus the sum of the left part.
-
-3. **Average Calculation**: Once we have the sum of both parts at each index, we can compute the average for each part:
-   - Left average = sum of left part / size of left part
-   - Right average = sum of right part / size of right part
-   - If the right part is empty, the average is considered to be 0.
-
-4. **Track the Minimum Difference**: For each index, we compute the absolute difference between the left and right averages. We keep track of the index where this difference is the smallest.
-
-5. **Return the Index with Minimum Difference**: After iterating through the entire array, we return the index where the minimum difference was found.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-typedef long long ll;
-
-ll sum = 0;
-for(int a : nums) sum += a;
-```
-
-- We define `ll` as a typedef for `long long` to handle potentially large sums. 
-- We initialize a variable `sum` and calculate the sum of all elements in `nums`. This will be used to compute the right sum without iterating multiple times.
-
-#### Step 2: Initialize Variables for Tracking
-
-```cpp
-ll n = nums.size(), res = INT_MAX, ret = 0, la = 0, ra = 0;
-ll l = 0, r = sum;
-```
-
-- `n` is the size of the array `nums`.
-- `res` is initialized to `INT_MAX` and will store the minimum absolute difference found during the iteration.
-- `ret` is initialized to `0` and will store the index where the minimum difference occurs.
-- `la` and `ra` represent the left and right averages respectively.
-- `l` is the running sum for the left part, initialized to `0`.
-- `r` is initialized to `sum`, representing the sum of the right part (initially the entire array).
-
-#### Step 3: Iterate Over the Array
-
-```cpp
-for(int i = 0; i < n; i++) {
-    int prv = res;
-    l += nums[i];
-    r -= nums[i];      
-    la = l / (i + 1);
-    ra = (i + 1 == n) ? 0 : r / (n - (i + 1));
-    res = min(res, abs(la - ra));
-    if(prv != res) ret = i;
+    return ret;            
 }
 ```
 
-- We iterate over the array, starting from index `0` to `n-1`.
-- `prv` stores the previous value of `res` to check if `res` changes in this iteration.
-- We update the left sum `l` by adding `nums[i]` and update the right sum `r` by subtracting `nums[i]`.
-- `la` is the left average calculated as the sum of the left part divided by the number of elements in the left part (i.e., `i + 1`).
-- `ra` is the right average. If we are at the last index, the right part is empty, and we set `ra` to 0. Otherwise, we compute the right average as the sum of the right part divided by the number of elements in the right part (i.e., `n - (i + 1)`).
-- We compute the absolute difference between the left and right averages and update `res` to store the minimum difference found.
-- If the current `res` is different from `prv`, we update `ret` to the current index `i`.
+This function calculates the index where the absolute difference between the average of elements on the left and right is minimized. It computes cumulative sums on both sides of the current index, then compares the average differences at each step.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumAverageDifference(vector<int>& nums) {
+	```
+	The function 'minimumAverageDifference' is defined here, which takes a vector of integers 'nums' as input and returns the index where the absolute difference between the left and right average is minimized.
 
-```cpp
-return ret;
-```
+2. **Type Definition**
+	```cpp
+	    typedef long long ll;
+	```
+	The type 'll' is defined as 'long long' to handle large integer values without overflow.
 
-- After finishing the iteration, we return the index `ret`, which represents the index with the minimum absolute difference between the left and right averages.
+3. **Variable Initialization**
+	```cpp
+	    ll sum = 0;
+	```
+	The variable 'sum' is initialized to zero. It will store the total sum of the elements in the 'nums' vector.
 
-### Complexity
+4. **Sum Calculation**
+	```cpp
+	    for(int a : nums) sum += a;
+	```
+	This loop iterates through the vector 'nums' and adds each element to 'sum', calculating the total sum of all elements.
 
-#### Time Complexity
+5. **Variable Initialization**
+	```cpp
+	    ll n = nums.size(), res = INT_MAX, ret = 0, la = 0, ra = 0;
+	```
+	Here, 'n' stores the size of the 'nums' vector. 'res' is initialized to the maximum integer value to track the minimum average difference. 'ret' stores the index with the minimum difference, and 'la' and 'ra' store the left and right averages, respectively.
 
-1. **Summing the Array**: The initial sum of all elements in the array takes \( O(n) \), where `n` is the size of the array.
-2. **Iterating Through the Array**: The loop iterates over the array once, and within each iteration, we perform constant-time operations (such as updating sums and averages). This gives us a time complexity of \( O(n) \).
+6. **Left and Right Sums**
+	```cpp
+	    ll l = 0, r = sum;
+	```
+	Variables 'l' and 'r' are initialized to zero and 'sum', respectively. 'l' will track the cumulative sum from the left, while 'r' starts with the total sum and will decrease as we move through the array.
 
-Thus, the overall time complexity of the solution is \( O(n) \), where `n` is the size of the input array `nums`.
+7. **Iterate Through Elements**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop that iterates through each element in the vector 'nums', adjusting the left and right sums and calculating the averages at each step.
 
-#### Space Complexity
+8. **Store Previous Result**
+	```cpp
+	        int prv = res;
+	```
+	Stores the previous result in 'prv' for comparison later to track if the minimum result has changed.
 
-The space complexity of the solution is \( O(1) \) because we are using only a constant amount of extra space (for variables like `l`, `r`, `res`, `ret`, etc.), aside from the input array.
+9. **Update Left Sum**
+	```cpp
+	        l += nums[i];
+	```
+	Adds the current element 'nums[i]' to the left sum 'l'.
 
-### Conclusion
+10. **Update Right Sum**
+	```cpp
+	        r -= nums[i];      
+	```
+	Subtracts the current element 'nums[i]' from the right sum 'r'.
 
-This solution efficiently solves the problem by iterating through the array once and using cumulative sums to compute the left and right averages at each index. By leveraging the total sum of the array, we can calculate the right sum without iterating over the array multiple times. This approach ensures a linear time complexity, making it optimal for large inputs.
+11. **Calculate Left Average**
+	```cpp
+	        la = l / (i + 1);
+	```
+	Calculates the average of the left part by dividing 'l' (the sum of the left part) by the number of elements processed so far (i+1).
 
-The key insight is using the total sum to dynamically update the right sum as we iterate, and keeping track of the left and right averages to find the index where the absolute difference between them is minimized.
+12. **Calculate Right Average**
+	```cpp
+	        ra = (i+1==n)?0:r / (n-(i+1));
+	```
+	Calculates the average of the right part by dividing 'r' (the sum of the remaining elements) by the number of elements left (n-(i+1)). If we're at the last element, the right average is set to zero.
 
-This solution is both time-efficient (with \( O(n) \) complexity) and space-efficient (with \( O(1) \) space complexity), making it well-suited for handling large arrays within competitive programming constraints.
+13. **Update Minimum Difference**
+	```cpp
+	        res = min(res, abs(la - ra));
+	```
+	Updates 'res' to the minimum of its current value and the absolute difference between the left and right averages.
+
+14. **Update Index of Minimum Difference**
+	```cpp
+	        if(prv != res) ret = i;
+	```
+	If the result has changed, it updates 'ret' with the current index 'i', which now holds the minimum average difference.
+
+15. **Return Result**
+	```cpp
+	    return ret;            
+	```
+	Returns 'ret', which is the index where the absolute difference between the left and right average is minimized.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution only requires a single iteration through the array to compute the necessary sums and differences.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, as we only use a few variables to keep track of sums and the minimum difference.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-average-difference/description/)
 

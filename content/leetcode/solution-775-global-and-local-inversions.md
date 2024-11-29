@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,113 +28,125 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array nums of length n, which is a permutation of all integers in the range [0, n - 1]. A global inversion is a pair of indices (i, j) such that 0 <= i < j < n and nums[i] > nums[j]. A local inversion is a pair where 0 <= i < n - 1 and nums[i] > nums[i + 1]. Return true if the number of global inversions is equal to the number of local inversions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array nums, which represents a permutation of integers in the range [0, n - 1].
+- **Example:** `Input: nums = [2, 0, 1]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] < n
+	- All elements in nums are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isIdealPermutation(vector<int>& nums) {
-        int cmax = 0, n = nums.size();
-        for(int i = 0; i < n - 2; i++) {
-            cmax = max(cmax, nums[i]);
-            if(cmax > nums[i + 2]) return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the number of global inversions is equal to the number of local inversions.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The number of global inversions must equal the number of local inversions.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the number of global inversions is equal to the number of local inversions.
+
+- Iterate through the array, maintaining the current maximum value encountered.
+- Check if any element is out of place beyond its local inversion (i.e., check for global inversions).
+- If a global inversion is found that does not qualify as a local inversion, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always be a valid permutation of integers from 0 to n-1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: nums = [2, 0, 1]`  \
+  **Explanation:** There is 1 global inversion (pair (0, 1)) and 1 local inversion (pair (1, 2)). Since the counts are equal, the result is true.
+
+- **Input:** `Example 2: Input: nums = [3, 2, 1, 0]`  \
+  **Explanation:** There are 3 global inversions (pairs (0, 1), (0, 2), (0, 3)) but only 2 local inversions (pairs (0, 1), (1, 2)). The counts are not equal, so the result is false.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over the array and comparing the elements to detect global inversions that are not local inversions. The maximum value encountered up to each index can be used to determine whether an inversion is a global or local one.
+
+### Initial Thoughts 💭
+- Global inversions can be detected by checking pairs (i, j) where i < j and nums[i] > nums[j].
+- The maximum value encountered so far helps in identifying whether an inversion is local or global.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least one element, as n >= 1.
+- Ensure the solution handles arrays with up to 10^5 elements.
+- If the array is sorted, there are no inversions, hence the result will be true.
+- The array is a permutation of integers from 0 to n-1.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isIdealPermutation(vector<int>& nums) {
+    int cmax = 0, n = nums.size();
+    for(int i = 0; i < n - 2; i++) {
+        cmax = max(cmax, nums[i]);
+        if(cmax > nums[i + 2]) return false;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task at hand is to determine whether a given permutation of integers can be classified as "ideal." In the context of this problem, an "ideal" permutation is defined by the property that for every index `i`, the largest number in the subarray `nums[0]` to `nums[i]` must not exceed the element at index `i + 2`. More formally, if the permutation is ideal, for every index `i`, the following condition should hold:
-
-\[ \text{max}(nums[0], nums[1], \dots, nums[i]) \leq nums[i+2] \]
-
-This problem requires us to check if this condition is satisfied for all possible indices in the array.
-
-**Example 1:**
-
-- Input: `nums = [1, 0, 2, 3, 4]`
-- Output: `true`
-
-Here, the array is ideal because for each `i`, the largest number up to index `i` is less than or equal to the number at index `i + 2`.
-
-**Example 2:**
-
-- Input: `nums = [1, 2, 0, 3]`
-- Output: `false`
-
-In this case, the condition is violated for `i = 0` because the largest number up to index `0` (which is `1`) is greater than `nums[2]` (which is `0`).
-
-### Approach
-
-To solve this problem, we need to traverse the input array `nums` and, at each step, check whether the largest element in the subarray from index `0` to `i` is less than or equal to the element at index `i + 2`. Specifically, we need to track the maximum value encountered so far while iterating through the array. If, at any point, we find that this maximum value exceeds `nums[i + 2]`, we return `false`, as the permutation cannot be ideal. If no such violation is found by the end of the loop, we return `true`.
-
-#### Detailed Explanation:
-
-- We initialize `cmax` to store the maximum value encountered up to index `i`.
-- For each index `i` from `0` to `n-3` (where `n` is the length of the array), we update `cmax` to be the maximum of `cmax` and `nums[i]`.
-- Then, we check whether `cmax` exceeds `nums[i + 2]`. If it does, the array is not ideal, and we return `false`.
-- If we complete the loop without finding any violations, the array is ideal, and we return `true`.
-
-This approach ensures that we are checking all potential violations efficiently in a single pass through the array.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int cmax = 0, n = nums.size();
+    return true;
+}
 ```
 
-- `cmax` is initialized to `0` and will be used to track the maximum number encountered up to the current index `i`.
-- `n` stores the size of the input array `nums`.
+This function checks if the given permutation is 'ideal'. It iterates through the array, updating the maximum element and comparing it to the element two positions ahead, returning false if the condition is violated.
 
-#### Step 2: Iterate Through the Array
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isIdealPermutation(vector<int>& nums) {
+	```
+	Define the function that checks whether a given permutation of integers is 'ideal'.
 
-```cpp
-for(int i = 0; i < n - 2; i++) {
-    cmax = max(cmax, nums[i]);
-```
+2. **Variable Initialization**
+	```cpp
+	    int cmax = 0, n = nums.size();
+	```
+	Initialize the 'cmax' variable to store the maximum value encountered so far and 'n' to store the size of the input array.
 
-- We iterate through the array from `i = 0` to `i = n-3` (i.e., the second-to-last element).
-- At each step, we update `cmax` to be the maximum of the current `cmax` and the current element `nums[i]`.
+3. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n - 2; i++) {
+	```
+	Start a loop that iterates through the array from index 0 to n-3.
 
-#### Step 3: Check the Ideal Condition
+4. **Max Update**
+	```cpp
+	        cmax = max(cmax, nums[i]);
+	```
+	Update the 'cmax' variable to hold the maximum value found so far between 'cmax' and the current element 'nums[i]'.
 
-```cpp
-if(cmax > nums[i + 2]) return false;
-```
+5. **Condition Check**
+	```cpp
+	        if(cmax > nums[i + 2]) return false;
+	```
+	Check if the maximum value encountered so far ('cmax') is greater than the element two positions ahead ('nums[i + 2]'). If true, return false, indicating the permutation is not ideal.
 
-- After updating `cmax`, we check if it exceeds `nums[i + 2]`. If it does, the permutation is not ideal, and we return `false` immediately.
+6. **Return Statement**
+	```cpp
+	    return true;
+	```
+	Return true, indicating the permutation is ideal if the loop completes without returning false.
 
-#### Step 4: Return True if No Violations are Found
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n), since we iterate over the array once.
+- **Worst Case:** O(n), as we only perform one pass through the array.
 
-```cpp
-return true;
-```
+The time complexity is linear because we only iterate through the array once.
 
-- If the loop completes without returning `false`, it means that all the conditions for an ideal permutation are satisfied, so we return `true`.
+### Space Complexity 💾
+- **Best Case:** O(1), since we only need constant space to track the maximum value.
+- **Worst Case:** O(1), as no additional space is required except for the variables used in the logic.
 
-### Complexity
+The space complexity is constant because we only use a few variables for tracking.
 
-#### Time Complexity:
-- **O(n)**: The time complexity of the solution is linear because we are iterating through the array once. For each element, we perform constant-time operations (updating `cmax` and comparing values).
+**Happy Coding! 🎉**
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because we are using a fixed amount of extra space (for the variables `cmax` and `n`). No additional data structures that grow with the input size are used.
-
-### Conclusion
-
-This solution is optimal and highly efficient for determining if a given permutation is ideal. The key to solving this problem efficiently lies in the observation that we only need to keep track of the maximum value encountered up to each index. By checking this value against `nums[i + 2]` at each step, we can verify whether the permutation satisfies the condition for being ideal.
-
-#### Key Insights:
-- The condition for an ideal permutation can be checked by maintaining a running maximum (`cmax`) while traversing the array.
-- The time complexity is **O(n)**, which ensures that the solution can handle large input sizes efficiently.
-- The space complexity is **O(1)**, making the solution space-efficient as well.
-
-This method is not only time-efficient but also very intuitive. It uses a single pass to determine whether the condition for an ideal permutation holds across the entire array, ensuring a quick resolution to the problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/global-and-local-inversions/description/)
 

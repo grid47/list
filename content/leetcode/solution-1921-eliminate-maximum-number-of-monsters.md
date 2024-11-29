@@ -14,137 +14,180 @@ img_src = ""
 youtube = "6QQRayzOTD4"
 youtube_upload_date="2021-07-04"
 youtube_thumbnail="https://i.ytimg.com/vi/6QQRayzOTD4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are defending your city from a group of n monsters. You are given two arrays dist and speed, where dist[i] is the initial distance of the ith monster from the city, and speed[i] is the speed of the ith monster in kilometers per minute. Your weapon takes one minute to charge and can eliminate one monster once fully charged. The game ends if any monster reaches the city before your weapon is ready. Return the maximum number of monsters you can eliminate or n if all monsters can be eliminated before they reach the city.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays dist and speed, both of size n. dist[i] is the initial distance of the ith monster, and speed[i] is the speed of the ith monster.
+- **Example:** `dist = [2,4,6], speed = [2,1,1]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= dist[i], speed[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of monsters that can be eliminated before any of them reach the city, or return n if all monsters can be eliminated.
+- **Example:** `3`
+- **Constraints:**
 
-        int n = dist.size();
-        vector<double> res(n, 0);
-        for(int i = 0; i < n; i++)
-        res[i] = (double(dist[i]) / speed[i]);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the time each monster takes to reach the city, sort them, and eliminate monsters one by one until any of them reach the city.
 
-        sort(res.begin(), res.end());
+- For each monster, calculate the time it takes to reach the city: dist[i] / speed[i].
+- Sort the times in ascending order.
+- Iterate through the sorted times, and eliminate monsters as long as their arrival time is greater than the time elapsed (which increases with each elimination).
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays dist and speed will always have the same length.
+- The values in dist are the initial distances of the monsters, and speed represents their constant speed.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `dist = [2,4,6], speed = [2,1,1]`  \
+  **Explanation:** The monsters start at distances [2,4,6] and move at speeds [2,1,1]. We compute the time each monster takes to reach the city, which is [1,4,6]. After eliminating each monster one by one, we find that all 3 can be eliminated before reaching the city.
 
-        long j = 0, ans = 0;
-        for (int i = 0; i < n; i++)
-            if(j < res[i]) {
-                ans++;
-                j++;
-            } else break;
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating how long each monster takes to reach the city and sorting the times. We then iterate through the sorted list of times, eliminating monsters one by one until we can no longer eliminate any more.
 
-        return (int) ans;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves determining how many monsters can be eliminated before they reach the city. Each monster has a certain distance to travel (`dist[i]`) and a speed (`speed[i]`). The goal is to calculate how many monsters can be eliminated before any of them arrive, based on the time it takes each monster to reach the city.
-
-### Approach
-
-To solve this problem, we can follow these steps:
-
-1. **Calculate Arrival Times**: For each monster, we need to compute the time it takes to reach the city, which can be calculated using the formula:
-   \[
-   \text{time} = \frac{\text{distance}}{\text{speed}}
-   \]
-
-2. **Store and Sort Arrival Times**: Store these arrival times in a vector and then sort them. This allows us to handle the monsters in the order they will arrive.
-
-3. **Eliminate Monsters**: Using a loop, we check if we can eliminate the monster at the current index before its arrival time. We maintain a counter to track how many monsters can be eliminated.
-
-4. **Return Result**: Finally, we return the count of monsters that can be eliminated.
-
-### Code Breakdown (Step by Step)
-
-Let's take a closer look at the provided code:
-
+### Initial Thoughts 💭
+- We can calculate the time for each monster by dividing dist[i] by speed[i].
+- After sorting the monsters by their arrival time, we can eliminate monsters in sequence until we hit a monster that arrives before we can eliminate it.
+- The solution relies on sorting and then a single scan through the list of monsters, which ensures it runs in O(n log n) time.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one monster.
+- The solution must handle cases where n is large (up to 10^5).
+- If all monsters are close to the city and have high speeds, they may reach the city quickly, limiting how many can be eliminated.
+- The algorithm needs to be efficient in both time and space due to the constraints on n.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
+int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
+
+    int n = dist.size();
+    vector<double> res(n, 0);
+    for(int i = 0; i < n; i++)
+    res[i] = (double(dist[i]) / speed[i]);
+
+    sort(res.begin(), res.end());
+
+    long j = 0, ans = 0;
+    for (int i = 0; i < n; i++)
+        if(j < res[i]) {
+            ans++;
+            j++;
+        } else break;
+
+    return (int) ans;
+}
 ```
-This line defines a class `Solution` with a public method `eliminateMaximum`, which takes two vectors, `dist` and `speed`, as input parameters.
 
-```cpp
-        int n = dist.size();
-        vector<double> res(n, 0);
-```
-Here, we determine the size of the input arrays (both should be the same) and initialize a vector `res` of size `n` to hold the calculated arrival times.
+This function calculates the maximum number of eliminations that can be made from two vectors: 'dist' and 'speed', by calculating the time it takes for each element to reach its destination, sorting the times, and then simulating the eliminations.
 
-```cpp
-        for(int i = 0; i < n; i++)
-            res[i] = (double(dist[i]) / speed[i]);
-```
-In this loop, we compute the arrival time for each monster using the formula discussed earlier and store it in the `res` vector. We use `double` to ensure we have precise floating-point division.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
+	```
+	Defines the function 'eliminateMaximum' which accepts two vectors: 'dist' for distances and 'speed' for speeds, and returns an integer value representing the maximum number of eliminations.
 
-```cpp
-        sort(res.begin(), res.end());
-```
-After calculating all arrival times, we sort the `res` vector in ascending order. This sorting will help us process the monsters in the order they will arrive.
+2. **Variable Initialization**
+	```cpp
+	    int n = dist.size();
+	```
+	Initializes the variable 'n' to store the size of the 'dist' vector.
 
-```cpp
-        long j = 0, ans = 0;
-```
-We initialize two counters: `j` to keep track of the number of monsters we have eliminated, and `ans` to count how many monsters can be eliminated.
+3. **Array Initialization**
+	```cpp
+	    vector<double> res(n, 0);
+	```
+	Initializes a vector 'res' of size 'n' to store the calculated times for each element.
 
-```cpp
-        for (int i = 0; i < n; i++)
-            if(j < res[i]) {
-                ans++;
-                j++;
-            } else break;
-```
-In this loop, we iterate through the sorted arrival times. If `j` (the number of monsters we have eliminated) is less than the current monster's arrival time (`res[i]`), it means we can eliminate this monster. We increment both `ans` and `j`. If we encounter a monster that cannot be eliminated (i.e., `j` is not less than `res[i]`), we break out of the loop.
+4. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Begins a loop that iterates over each index 'i' of the 'dist' and 'speed' vectors.
 
-```cpp
-        return (int) ans;
-    }
-};
-```
-Finally, we return the count of monsters that can be eliminated, casting `ans` to an integer.
+5. **Time Calculation**
+	```cpp
+	    res[i] = (double(dist[i]) / speed[i]);
+	```
+	Calculates the time taken for each element to reach its destination by dividing the distance 'dist[i]' by the speed 'speed[i]', and stores the result in the 'res' vector.
 
-### Complexity
+6. **Sorting**
+	```cpp
+	    sort(res.begin(), res.end());
+	```
+	Sorts the 'res' vector in ascending order to get the fastest times first.
 
-- **Time Complexity**: The time complexity of this algorithm is O(n log n) due to the sorting step, where `n` is the number of monsters. The loop that counts how many monsters can be eliminated runs in O(n) time.
+7. **Variable Initialization**
+	```cpp
+	    long j = 0, ans = 0;
+	```
+	Initializes variables 'j' (the current elimination count) and 'ans' (to store the total number of eliminations).
 
-- **Space Complexity**: The space complexity is O(n) because we are using an additional vector `res` to store the arrival times.
+8. **Loop Start**
+	```cpp
+	    for (int i = 0; i < n; i++)
+	```
+	Begins another loop to simulate the elimination process using the sorted times from the 'res' vector.
 
-### Conclusion
+9. **Condition Check**
+	```cpp
+	        if(j < res[i]) {
+	```
+	Checks if the current elimination count 'j' is less than the corresponding time in the sorted 'res' vector.
 
-The `eliminateMaximum` function efficiently determines how many monsters can be eliminated before they reach the city based on their distances and speeds. The approach leverages sorting and a simple counting mechanism to provide an optimal solution.
+10. **Elimination**
+	```cpp
+	            ans++;
+	```
+	If the condition is met, the elimination count 'ans' is incremented.
 
-### Key Features
+11. **Increment**
+	```cpp
+	            j++;
+	```
+	Increments the elimination index 'j'.
 
-1. **Precise Time Calculation**: The use of floating-point arithmetic ensures that the arrival times are calculated accurately, which is crucial for determining whether a monster can be eliminated.
+12. **Exit Condition**
+	```cpp
+	        } else break;
+	```
+	If the condition is not met, the loop breaks, stopping the elimination process.
 
-2. **Efficient Sorting**: Sorting the arrival times allows for a straightforward comparison to see if monsters can be eliminated in the order of their arrival.
+13. **Return Statement**
+	```cpp
+	    return (int) ans;
+	```
+	Returns the total number of eliminations as an integer.
 
-3. **Simple Logic**: The logic used to determine how many monsters can be eliminated is clear and easy to follow, making the implementation straightforward.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-### Use Cases
+The solution requires sorting the times, which takes O(n log n) time.
 
-1. **Simulation Games**: This algorithm can be applied in game development, particularly in scenarios where players need to eliminate threats before they reach a target.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Resource Management**: In resource management applications, similar logic can be used to manage incoming threats or resources based on their arrival times.
+We store the computed times for each monster, requiring O(n) space.
 
-3. **Event Processing**: The approach can be adapted for processing events in real-time systems where events have different processing times.
+**Happy Coding! 🎉**
 
-4. **Competitive Programming**: Understanding this type of problem can help in competitive programming contexts where efficient data handling and sorting are required.
-
-5. **Networking**: In network management, similar principles can be applied to handle data packets based on their transmission times, ensuring timely processing and preventing bottlenecks.
-
-By grasping this solution, developers can enhance their skills in problem-solving and optimization, enabling them to tackle a variety of challenges involving timing and order in programming tasks.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/eliminate-maximum-number-of-monsters/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "0U5Lenn_vMo"
 youtube_upload_date="2021-04-21"
 youtube_thumbnail="https://i.ytimg.com/vi/0U5Lenn_vMo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,116 +28,162 @@ youtube_thumbnail="https://i.ytimg.com/vi/0U5Lenn_vMo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, simulate a process on a list of integers from 1 to n where every other number is removed, alternating the direction from left to right and right to left until only one number remains. Return the last remaining number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer n representing the length of a list starting from 1 to n.
+- **Example:** `input = 10`
+- **Constraints:**
+	- 1 <= n <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int lastRemaining(int n) {
-        bool left = true;
-        int rm = n;
-        int step = 1;
-        int head = 1;
-        while(rm > 1) {
-            if(left || rm % 2 == 1) {
-                head += step;
-            }
-            rm /= 2;
-            step *= 2;
-            left = !left;
-        }
-        return head;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the last remaining number in the list after applying the alternating removal process.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The last number should be a positive integer.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the last remaining number after alternating removal of numbers from the list.
 
-The task is to find the **last remaining number** in a sequence after repeatedly eliminating every second number. Starting with an array of integers from 1 to `n`, we eliminate every other number (either from left to right or right to left) in successive rounds. Our goal is to determine which number remains after all rounds are completed.
+- Simulate the process of removing every other number starting from the left, then from the right, and alternate until only one number remains.
+- Keep track of the position of the remaining number after each step.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is guaranteed to be a positive integer n where 1 <= n <= 10^9.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: 10`  \
+  **Explanation:** Start with a list of numbers from 1 to 10, and simulate the alternating removal process. The last remaining number is 4.
 
----
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we can use a mathematical approach that exploits the alternating removal pattern without having to simulate the entire process for large inputs.
 
-### 🧠 Approach
-
-This problem can be simplified by recognizing a predictable pattern in the elimination process. Rather than simulating each round, we can use a mathematical approach to find the last number left standing.
-
-#### Key Observations:
-1. **Direction alternation**: The elimination direction alternates between left-to-right and right-to-left in successive rounds.
-2. **Halving the sequence**: Each round halves the remaining sequence, as every second number is eliminated.
-3. **Elimination based on parity**: The sequence behaves differently when the number of elements is odd vs. even. In cases where the length is odd, the last element is eliminated first in the left-to-right direction.
-
-By recognizing these patterns, we can use an efficient iterative approach to calculate the last remaining number without simulating the entire process.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Here’s the code that implements this approach:
-
+### Initial Thoughts 💭
+- Simulating the alternating process for large values of n would be computationally expensive, so we need to optimize.
+- The problem follows a predictable pattern, and the answer can be determined using mathematical reasoning rather than directly simulating the process.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be a valid input where n >= 1.
+- Ensure the solution can handle values of n up to 10^9 efficiently.
+- When n = 1, the result is trivially 1.
+- The algorithm must handle large values of n without directly simulating the process.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int lastRemaining(int n) {
-        bool left = true;  // Tracks elimination direction (left-to-right or right-to-left)
-        int rm = n;        // Number of remaining elements
-        int step = 1;      // The step size (initially 1 for eliminating every second number)
-        int head = 1;      // The first number in the sequence (initially 1)
-
-        // Continue until only one number remains
-        while (rm > 1) {
-            if (left || rm % 2 == 1) {
-                head += step;  // Update the first remaining number
-            }
-            rm /= 2;       // Halve the sequence length
-            step *= 2;     // Double the step size
-            left = !left;  // Alternate the direction of elimination
+int lastRemaining(int n) {
+    bool left = true;
+    int rm = n;
+    int step = 1;
+    int head = 1;
+    while(rm > 1) {
+        if(left || rm % 2 == 1) {
+            head += step;
         }
-
-        return head;  // Return the last remaining number
+        rm /= 2;
+        step *= 2;
+        left = !left;
     }
-};
+    return head;
+}
 ```
 
-#### Step-by-Step Explanation:
-1. **Initialize Variables**:
-   - `left`: This flag indicates whether the current round is left-to-right (`true`) or right-to-left (`false`).
-   - `rm`: The number of remaining elements in the sequence, initially set to `n`.
-   - `step`: The step size, which starts at 1 (eliminate every second number). It doubles with each round to account for the halving of the sequence.
-   - `head`: The first number of the sequence, initially 1.
+This code finds the last remaining number in a sequence after repeatedly removing numbers according to a specific rule, either from the left or right.
 
-2. **Iterative Process**:
-   - The `while` loop runs as long as there is more than one element (`rm > 1`).
-   - On each iteration:
-     - If the direction is `left` or the number of remaining elements is odd, we update the first remaining number (`head`) by adding the `step`.
-     - We then halve the sequence (`rm /= 2`) and double the step size (`step *= 2`).
-     - The direction is toggled (`left = !left`) for the next round.
-     
-3. **Return the Result**:
-   - When the loop finishes, `head` contains the last remaining number, which is returned.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int lastRemaining(int n) {
+	```
+	Define the function 'lastRemaining' which takes an integer 'n' representing the number of elements in the sequence, and returns the last remaining element.
 
----
+2. **Variable Initialization**
+	```cpp
+	    bool left = true;
+	```
+	Initialize 'left' as true to track whether numbers should be removed from the left or right in each step.
 
-### 📈 Complexity Analysis
+3. **Variable Initialization**
+	```cpp
+	    int rm = n;
+	```
+	Initialize 'rm' as the total number of elements 'n'. This will keep track of the remaining elements in each step.
 
-#### Time Complexity:
-The time complexity of this solution is **O(log n)**. The sequence length (`rm`) is halved in each round, meaning the loop runs approximately **log n** times, where `n` is the initial size of the sequence.
+4. **Variable Initialization**
+	```cpp
+	    int step = 1;
+	```
+	Initialize 'step' to 1. This will track the step size by which elements are removed in each iteration.
 
-#### Space Complexity:
-The space complexity is **O(1)** because we are using only a few integer variables (`left`, `rm`, `step`, `head`) that occupy constant space, regardless of the size of `n`.
+5. **Variable Initialization**
+	```cpp
+	    int head = 1;
+	```
+	Initialize 'head' to 1. This variable represents the first element in the sequence that will be returned as the last remaining element.
 
----
+6. **While Loop**
+	```cpp
+	    while(rm > 1) {
+	```
+	Start a while loop that runs until only one element remains in the sequence (i.e., rm > 1).
 
-### 🏁 Conclusion
+7. **Conditional Check**
+	```cpp
+	        if(left || rm % 2 == 1) {
+	```
+	Check if we are removing elements from the left side or if the remaining number of elements is odd, in which case the element at the 'head' should be included in the remaining sequence.
 
-This approach efficiently computes the **last remaining number** in the sequence after repeatedly eliminating every second number. By leveraging the predictable halving pattern and alternating direction, we can solve the problem in **O(log n)** time, making it suitable for large inputs.
+8. **Path Update**
+	```cpp
+	            head += step;
+	```
+	If removing from the left or the number of remaining elements is odd, update 'head' to include the next element to be kept in the sequence.
 
-### 🎯 Key Takeaways:
-- **Optimized Iteration**: Instead of simulating the elimination process, we use mathematical observations to reduce the problem to a logarithmic number of steps.
-- **Constant Space**: The solution only uses a few integer variables, ensuring minimal space usage.
-- **Logarithmic Time**: The process runs in **O(log n)** time, making it highly efficient for large values of `n`.
+9. **Division**
+	```cpp
+	        rm /= 2;
+	```
+	Divide 'rm' by 2 to halve the remaining elements in the sequence after each round of removals.
 
-With this solution, you can confidently handle the problem even with very large inputs. Keep up the great work, and happy coding! 🚀
+10. **Step Increase**
+	```cpp
+	        step *= 2;
+	```
+	Double the 'step' after each round of removals to account for the increasing gap between remaining elements.
+
+11. **Switch Direction**
+	```cpp
+	        left = !left;
+	```
+	Switch the direction of removal (from left to right or right to left) by toggling the 'left' flag.
+
+12. **Return Statement**
+	```cpp
+	    return head;
+	```
+	Return the value of 'head', which represents the last remaining number in the sequence.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
+
+The time complexity is O(log n) as we reduce the number of elements by half in each step.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we do not need extra space other than a few variables to track the current state.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/elimination-game/description/)
 

@@ -14,116 +14,178 @@ img_src = ""
 youtube = "0_4H68f85HQ"
 youtube_upload_date="2020-05-19"
 youtube_thumbnail="https://i.ytimg.com/vi/0_4H68f85HQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `ages`, where each element represents the age of a person on a social media platform. A person will not send a friend request to another person if any of the following conditions are true:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numFriendRequests(vector<int>& ages) {
-        unordered_map<int, int> cnt;
-        for(int age: ages)
-            cnt[age]++;
+1. The recipient's age is less than or equal to half of the sender's age plus 7.
+2. The recipient's age is greater than the sender's age.
+3. The recipient's age is greater than 100 and the sender's age is less than 100.
 
-        int res = 0;
-        for(auto a: cnt)
-        for(auto b: cnt)
-        if(request(a.first, b.first))
-            res += a.second * (b.second - (a.first == b.first? 1: 0));
-        return res;
-    }
+Otherwise, the sender can send a friend request. Return the total number of friend requests made between people.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer array `ages` of length `n` (the number of people). Each element represents the age of a person.
+- **Example:** `Input: ages = [18, 20, 30, 40]`
+- **Constraints:**
+	- 1 <= n <= 2 * 10^4
+	- 1 <= ages[i] <= 120
 
-    bool request(int a, int b) {
-        return !(b <= 0.5 * a + 7 || b > a || (b > 100 && a < 100));
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the total number of valid friend requests made according to the given conditions.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output must be an integer representing the number of friend requests.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the total number of friend requests by checking each pair of people in the `ages` array and applying the given conditions.
 
-In this problem, you are given an array of ages, where each element represents the age of a person. The task is to calculate the total number of **friend requests** that can be made based on a specific set of rules. The rules for friend requests between two people with ages `a` and `b` are as follows:
+- Step 1: Create a frequency map of the ages.
+- Step 2: For each pair of distinct ages, check if they meet the conditions for sending a friend request.
+- Step 3: If a valid request is possible, add the appropriate number of requests to the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- There are no people with ages less than 1 or greater than 120.
+- The problem guarantees that the input array will not be empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ages = [18, 20, 30, 40]`  \
+  **Explanation:** The person with age 20 will send a request to 18, 30, and 40. The person with age 30 will send a request to 40. This results in a total of 4 requests.
 
-1. A person with age `a` can send a friend request to another person with age `b` if:
-   - `b` is greater than 0.5 times `a` plus 7 (`b > 0.5 * a + 7`).
-   - `b` is not greater than `a` (`b <= a`).
-   - If `b` is greater than 100, `a` must also be greater than 100 (`b <= 100` and `a > 100`).
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through each possible pair of people in the `ages` array and applying the given conditions to count the valid requests.
 
-Given these conditions, the goal is to calculate how many valid friend requests can be made for all pairs of people in the given `ages` list.
+### Initial Thoughts 💭
+- The conditions for sending a friend request are simple comparisons of the ages.
+- We can take advantage of counting the occurrences of each age and use these counts to avoid directly comparing every possible pair of people.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one person, so the input will never be empty.
+- When the input size is large, the solution should still handle it efficiently.
+- Ensure correct handling of the edge case where someone is 100 years old or more.
+- The algorithm should efficiently handle inputs with up to 20,000 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+int numFriendRequests(vector<int>& ages) {
+    unordered_map<int, int> cnt;
+    for(int age: ages)
+        cnt[age]++;
 
-### Approach
+    int res = 0;
+    for(auto a: cnt)
+    for(auto b: cnt)
+    if(request(a.first, b.first))
+        res += a.second * (b.second - (a.first == b.first? 1: 0));
+    return res;
+}
 
-The approach to solving this problem involves:
+bool request(int a, int b) {
+    return !(b <= 0.5 * a + 7 || b > a || (b > 100 && a < 100));
+}
+```
 
-1. **Counting the Frequency of Ages**:
-   - Since we are only interested in comparing pairs of ages and making requests between them, it is beneficial to first count how many people are of each age. This can be done using a hash map, where the key is the age and the value is the count of people with that age.
+This function counts the number of friend requests that can be made based on the ages of people in a given vector, using specific conditions to decide whether one person can send a friend request to another.
 
-2. **Iterating Over All Age Pairs**:
-   - Once we have the frequency of each age, we need to iterate over all pairs of ages (`a` and `b`). For each pair, check if the friend request is valid using the provided rules.
-   - If a valid friend request exists between ages `a` and `b`, the number of possible requests is the product of their respective frequencies. However, if `a == b`, we subtract one from the count to avoid counting the person sending a request to themselves.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numFriendRequests(vector<int>& ages) {
+	```
+	Declares the function `numFriendRequests` that takes a vector of integers `ages` representing the ages of individuals, and returns the number of valid friend requests.
 
-3. **Efficiency**:
-   - Instead of comparing every person with every other person (which would take quadratic time), we reduce the problem to a pairwise comparison of distinct ages by counting the occurrences of each age.
+2. **Map Initialization**
+	```cpp
+	    unordered_map<int, int> cnt;
+	```
+	Initializes an unordered map `cnt` to keep track of the frequency of each age in the `ages` vector.
 
-4. **Request Function**:
-   - A helper function `request(int a, int b)` checks whether a valid request can be made based on the given conditions. This ensures that the core logic is clean and modular.
+3. **Loop**
+	```cpp
+	    for(int age: ages)
+	```
+	Iterates through each `age` in the `ages` vector to populate the `cnt` map with the count of each age.
 
-### Code Breakdown (Step by Step)
+4. **Map Update**
+	```cpp
+	        cnt[age]++;
+	```
+	Increments the count of the current `age` in the `cnt` map.
 
-1. **Count Frequency of Ages**:
-   ```cpp
-   unordered_map<int, int> cnt;
-   for(int age: ages)
-       cnt[age]++;
-   ```
-   - We create an unordered map `cnt` to store the frequency of each age. By iterating over the `ages` array, we populate this map, where the key is the age and the value is the count of people with that age.
+5. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Declares and initializes an integer variable `res` to store the total number of valid friend requests.
 
-2. **Iterating Through Age Pairs**:
-   ```cpp
-   int res = 0;
-   for(auto a: cnt)
-   for(auto b: cnt)
-       if(request(a.first, b.first))
-           res += a.second * (b.second - (a.first == b.first ? 1 : 0));
-   ```
-   - We initialize `res` to zero, which will hold the total number of valid requests.
-   - We then iterate over all pairs of ages in the frequency map `cnt`. Each pair of ages (`a.first` and `b.first`) is checked to see if a request is valid using the helper function `request`.
-   - If the request is valid, we calculate the number of possible requests between these two ages. If both `a` and `b` are the same, we subtract one to ensure that a person doesn’t send a request to themselves.
+6. **Nested Loop**
+	```cpp
+	    for(auto a: cnt)
+	```
+	Begins a loop that iterates over each age `a` in the `cnt` map, representing the first person in a potential friend request.
 
-3. **Helper Function for Validating Requests**:
-   ```cpp
-   bool request(int a, int b) {
-       return !(b <= 0.5 * a + 7 || b > a || (b > 100 && a < 100));
-   }
-   ```
-   - The `request` function checks if a friend request can be made between two people of ages `a` and `b` by verifying the following conditions:
-     1. `b > 0.5 * a + 7`: ensures that `b` is not too small compared to `a`.
-     2. `b <= a`: ensures that `b` is not greater than `a` because the rule specifies that a person can only send a request to someone younger or of the same age.
-     3. `(b > 100 && a < 100)`: ensures that if `b` is greater than 100, `a` must also be greater than 100.
+7. **Nested Loop**
+	```cpp
+	    for(auto b: cnt)
+	```
+	Begins a second nested loop that iterates over each age `b` in the `cnt` map, representing the second person in a potential friend request.
 
-4. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - Finally, the total number of valid friend requests `res` is returned.
+8. **Condition Check**
+	```cpp
+	    if(request(a.first, b.first))
+	```
+	Checks whether a valid friend request can be made between person `a` and person `b` by calling the `request` function.
 
-### Complexity
+9. **Calculation**
+	```cpp
+	        res += a.second * (b.second - (a.first == b.first? 1: 0));
+	```
+	If a valid request is possible, increment `res` by the product of the counts of ages `a` and `b`, adjusting for the case where `a` and `b` are the same age.
 
-- **Time Complexity**: 
-   - The time complexity is \(O(n + k^2)\), where \(n\) is the size of the `ages` array and \(k\) is the number of distinct ages in the `ages` list.
-   - The first part of the code (counting frequencies) takes \(O(n)\), where \(n\) is the number of people in the list.
-   - The second part, where we iterate over all pairs of distinct ages, takes \(O(k^2)\), where \(k\) is the number of unique ages. In the worst case, if all ages are distinct, \(k\) is \(n\), leading to a quadratic time complexity for the pairwise comparison.
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total number of valid friend requests calculated.
 
-- **Space Complexity**: 
-   - The space complexity is \(O(k)\), where \(k\) is the number of unique ages, as we store the frequency of each unique age in the unordered map `cnt`.
+11. **Function Declaration**
+	```cpp
+	bool request(int a, int b) {
+	```
+	Declares the `request` function that checks whether a person with age `a` can send a friend request to a person with age `b` based on specific conditions.
 
-### Conclusion
+12. **Condition Check**
+	```cpp
+	    return !(b <= 0.5 * a + 7 || b > a || (b > 100 && a < 100));
+	```
+	Returns true if the conditions for a valid friend request are met, otherwise false. The conditions include age restrictions for sending requests.
 
-This solution efficiently calculates the total number of valid friend requests based on the given conditions. By using a frequency map to count the occurrences of each age, we reduce the problem from potentially \(O(n^2)\) (comparing every person to every other person) to \(O(k^2)\), where \(k\) is the number of distinct ages. The helper function `request` ensures that the conditions for valid requests are checked in a modular and clean way. The solution is both time-efficient and space-efficient, making it suitable for large inputs where \(n\) (the number of people) can be large.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of people, as we can use frequency counting to reduce the number of comparisons.
+- **Average Case:** O(n^2), if we need to check all pairs of ages.
+- **Worst Case:** O(n^2), for the largest inputs where all people have distinct ages.
+
+The time complexity is O(n^2) in the worst case, where we need to compare each pair of distinct ages.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if there are few distinct ages.
+- **Worst Case:** O(n), where n is the number of distinct ages.
+
+The space complexity is O(n) due to the space required for the frequency map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/friends-of-appropriate-ages/description/)
 

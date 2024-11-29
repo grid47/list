@@ -14,113 +14,176 @@ img_src = ""
 youtube = "GgRr0TbbsO0"
 youtube_upload_date="2023-06-04"
 youtube_thumbnail="https://i.ytimg.com/vi/GgRr0TbbsO0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a number n and a list of queries. Initially, an n x n matrix is filled with zeros. Each query updates either a row or a column in the matrix to a given value. After applying all the queries, compute and return the sum of all elements in the matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A number n and a list of queries, where each query is of the form [typei, indexi, vali].
+- **Example:** `n = 3, queries = [[0, 0, 1], [1, 2, 2], [0, 2, 3], [1, 0, 4]]`
+- **Constraints:**
+	- 1 <= n <= 10^4
+	- 1 <= queries.length <= 5 * 10^4
+	- queries[i].length == 3
+	- 0 <= typei <= 1
+	- 0 <= indexi < n
+	- 0 <= vali <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long matrixSumQueries(int n, vector<vector<int>>& q) {
-        long long res = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of all elements in the matrix after all queries are applied.
+- **Example:** `23`
+- **Constraints:**
+	- The sum will be a non-negative integer.
 
-        int seen[2][10001] = {};
-        int cnt[2] = {n, n};
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to efficiently calculate the sum of the matrix after applying all queries.
 
-        for(int i = q.size() - 1; i >= 0; i--) {
-            
-            int type = q[i][0], id = q[i][1], val = q[i][2];
-            
-            if(!seen[type][id]) {
-                seen[type][id] = 1;
-                res += val * cnt[!type];
-                --cnt[type];
-            }
-            
+- Keep track of the changes for each row and column separately.
+- Process the queries in reverse order to minimize redundant updates.
+- Update the matrix based on the query type (row or column) and compute the sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is initially filled with zeros.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** For n = 3 and queries = [[0, 0, 1], [1, 2, 2], [0, 2, 3], [1, 0, 4]], we update the matrix according to the queries and calculate the sum of all elements.
+
+- **Input:** `Example 2`  \
+  **Explanation:** For n = 3 and queries = [[0, 0, 4], [0, 1, 2], [1, 0, 1], [0, 2, 3], [1, 2, 1]], the sum of all matrix elements after applying the queries is 17.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves processing the queries in reverse order to optimize the number of updates, while keeping track of the sum of all matrix elements.
+
+### Initial Thoughts 💭
+- The matrix can be updated by rows or columns, so we need to handle each query based on its type.
+- We can use a greedy approach by iterating through the queries in reverse to minimize redundant operations and compute the final sum.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since queries length is guaranteed to be at least 1.
+- Handle large matrix sizes and a high number of queries efficiently using an optimized approach.
+- If the matrix size is 1, the result is directly the value of the first query.
+- The solution must handle up to 10^4 matrix size and 5 * 10^4 queries efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+long long matrixSumQueries(int n, vector<vector<int>>& q) {
+    long long res = 0;
+
+    int seen[2][10001] = {};
+    int cnt[2] = {n, n};
+
+    for(int i = q.size() - 1; i >= 0; i--) {
+        
+        int type = q[i][0], id = q[i][1], val = q[i][2];
+        
+        if(!seen[type][id]) {
+            seen[type][id] = 1;
+            res += val * cnt[!type];
+            --cnt[type];
         }
-
-        return res;
+        
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-In this problem, we are given a matrix of size `n x n`, and a list of queries to perform on this matrix. Each query specifies a type of operation, the index of the row or column to be affected, and the value to be added. Our goal is to calculate the sum of all the values in the matrix after all queries have been processed.
-
-Each query involves either adding a value to an entire row or an entire column. The sum should be updated accordingly, but each row or column can only be updated once. After processing all the queries, we are asked to return the total sum of the matrix.
-
-### Approach
-
-To solve the problem efficiently, we must carefully track the updates made by the queries and avoid unnecessary recalculations. We need a strategy that enables us to handle the updates in constant time rather than iterating over the entire matrix for each query.
-
-Here’s the plan:
-1. **Track Updates**: Instead of updating the matrix directly for each query, we maintain two arrays (`seen` and `cnt`) to track which rows and columns have already been updated. This allows us to avoid repeating operations on rows and columns that have already been modified.
-2. **Work Backwards**: By processing the queries in reverse order, we can ensure that each query is applied efficiently. When we encounter a query that updates a row or column that hasn’t been updated yet, we apply the value to all remaining cells in the matrix that correspond to that row or column.
-3. **Efficient Sum Calculation**: For each query, we multiply the value to be added by the number of remaining cells in the matrix that are affected by that query (i.e., rows or columns that have not been updated yet). This ensures that we update the sum correctly without having to iterate over the entire matrix each time.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Necessary Data Structures
-
-```cpp
-long long res = 0;
-int seen[2][10001] = {};  // Track if row or column has been updated
-int cnt[2] = {n, n};  // Count of rows and columns yet to be updated
-```
-
-- `res`: This will hold the running total sum of the matrix after all queries are processed.
-- `seen[2][10001]`: A 2D array that tracks whether a row (`seen[0]`) or a column (`seen[1]`) has already been updated. We use a 2D array because each query updates either a row or a column.
-- `cnt[2]`: An array that keeps track of how many rows and columns are yet to be updated. Initially, both are set to `n`, indicating that all rows and columns are unmodified.
-
-#### Step 2: Process Queries in Reverse Order
-
-```cpp
-for(int i = q.size() - 1; i >= 0; i--) {
-    int type = q[i][0], id = q[i][1], val = q[i][2];
-```
-
-- We iterate over the queries in reverse order using the index `i`. The reason for processing in reverse is that we want to update the matrix sum by applying only the first time a row or column is updated.
-
-#### Step 3: Apply Updates
-
-```cpp
-if(!seen[type][id]) {
-    seen[type][id] = 1;  // Mark row or column as updated
-    res += val * cnt[!type];  // Add value to sum based on the remaining rows/columns
-    --cnt[type];  // Decrement the count for rows or columns remaining
+    return res;
 }
 ```
 
-- **Check if Row or Column is Updated**: We check if the row or column has already been updated by looking at `seen[type][id]`. If it’s zero, we know that it hasn’t been updated yet, so we apply the update.
-- **Update the Sum**: We add the value `val` multiplied by the count of the remaining rows or columns (`cnt[!type]`). This is because if a row is updated, it affects every column in that row, and if a column is updated, it affects every row in that column.
-- **Decrement the Count**: We then decrement `cnt[type]` to reflect that one more row or column has been updated.
+This function calculates the sum of queries where each query modifies an element in a 2D matrix. The matrix elements are either row-based or column-based, and the result is the sum of values modified by the queries.
 
-#### Step 4: Return the Total Sum
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long matrixSumQueries(int n, vector<vector<int>>& q) {
+	```
+	The function `matrixSumQueries` is defined, accepting an integer `n` (the size of the matrix) and a 2D vector `q` containing the queries. It returns a long long integer representing the calculated sum after processing all queries.
 
-```cpp
-return res;
-```
+2. **Variable Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	The variable `res` is initialized to 0, which will hold the cumulative result of all valid queries.
 
-- After all queries are processed, the value of `res` holds the total sum of the matrix after applying all the updates. We return this value.
+3. **Array Initialization**
+	```cpp
+	    int seen[2][10001] = {};
+	```
+	The `seen` array is initialized to track whether a particular row or column has been processed. It has dimensions 2 by 10001 to accommodate the two types of queries and matrix indices.
 
-### Complexity
+4. **Array Initialization**
+	```cpp
+	    int cnt[2] = {n, n};
+	```
+	The `cnt` array is initialized with `n` for both rows and columns, representing the number of rows and columns available for modification.
 
-#### Time Complexity
-- **O(m)**, where `m` is the number of queries. We process each query exactly once, and each operation within the query (checking and updating arrays) takes constant time.
-- The `find` and update operations for the arrays `seen` and `cnt` are done in constant time for each query. Hence, the overall time complexity is **O(m)**, where `m` is the number of queries.
+5. **Loop Start**
+	```cpp
+	    for(int i = q.size() - 1; i >= 0; i--) {
+	```
+	A loop is initiated that iterates through the queries in reverse order, starting from the last query and moving backward to the first.
 
-#### Space Complexity
-- **O(n)**, where `n` is the size of the matrix. We use two arrays (`seen` and `cnt`) to keep track of the rows and columns, both of which require `O(n)` space.
-- The array `q` (queries) is given as input, but it’s not part of the space complexity analysis.
+6. **Query Parsing**
+	```cpp
+	        int type = q[i][0], id = q[i][1], val = q[i][2];
+	```
+	For each query, the variables `type`, `id`, and `val` are extracted. `type` specifies whether the operation is on a row or a column, `id` is the row or column index, and `val` is the value to be added to the matrix.
 
-### Conclusion
+7. **Condition Check**
+	```cpp
+	        if(!seen[type][id]) {
+	```
+	The condition checks if the row or column has already been processed in a previous query. If not, it proceeds with the operation.
 
-This approach efficiently computes the total sum of the matrix after all updates by processing the queries in reverse order. The solution avoids the inefficiency of directly modifying the matrix, reducing the problem to a series of constant-time operations for each query. By leveraging the `seen` and `cnt` arrays, we can track updates in constant space and time. With a time complexity of **O(m)** and space complexity of **O(n)**, this solution is optimal for large inputs.
+8. **Mark As Seen**
+	```cpp
+	            seen[type][id] = 1;
+	```
+	The element at the specified type and index (`type`, `id`) is marked as processed by setting `seen[type][id]` to 1.
+
+9. **Result Calculation**
+	```cpp
+	            res += val * cnt[!type];
+	```
+	The result is updated by adding the value of the query (`val`) multiplied by the remaining count of rows or columns that have not yet been processed (`cnt[!type]`).
+
+10. **Decrement Count**
+	```cpp
+	            --cnt[type];
+	```
+	The count for the type (row or column) is decremented, as one row or column has now been processed.
+
+11. **Return Result**
+	```cpp
+	    return res;
+	```
+	The final result is returned, which is the sum of all valid query contributions.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The time complexity is linear in terms of the number of queries and matrix size.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) since we only store a few arrays to track row and column updates.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-matrix-after-queries/description/)
 

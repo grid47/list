@@ -14,132 +14,200 @@ img_src = ""
 youtube = "wXKif4MwAtI"
 youtube_upload_date="2022-10-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/wXKif4MwAtI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string consisting of lowercase English letters. You must remove one letter from the string so that the frequency of all remaining letters is equal. Return true if it is possible to achieve this by removing exactly one letter, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string word consisting of lowercase English letters.
+- **Example:** `word = "abcc"`
+- **Constraints:**
+	- 2 <= word.length <= 100
+	- word consists of lowercase English letters only.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool equalFrequency(string word) {
-        unordered_map<char, int> mp;
-        map<int, int> mp2;
-        for(auto c: word)  mp[c]++;
-        
-        for(auto m: mp)  mp2[m.second]++;
-        
-        
-        if(mp2.size() > 2) return false;
-        map<int, int>::iterator it1 = mp2.begin();
-        map<int, int>::iterator it2 = mp2.begin();
-        it2++;
-        
-        if(mp2.size() == 1){
-            if(mp.size() == 1 || it1->first == 1) return true;
-            return false;
-        }
-       
-        
-        if(it1->first == 1 && it1->second == 1) return true;
-        if(it1->first == it2->first-1 && it2->second == 1) return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to remove one letter so that all remaining letters have equal frequency, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if it is possible to remove one letter so that all remaining characters have equal frequencies.
+
+- 1. Count the frequency of each letter in the string.
+- 2. Count how many times each frequency appears in the string.
+- 3. If there are more than two distinct frequencies, return false.
+- 4. If there is only one frequency, check if all letters have this frequency or if one letter appears once (removable).
+- 5. If the two frequencies differ by 1 and one letter has that frequency, it can be removed to balance frequencies, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string will always contain at least 2 characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: word = "abcc"`  \
+  **Explanation:** By removing the last 'c', the frequency of 'a', 'b', and 'c' becomes equal (1 for each). Hence, the answer is true.
+
+- **Input:** `Input: word = "aazz"`  \
+  **Explanation:** It is impossible to remove one letter and make the frequency of all characters equal because the frequencies of 'a' and 'z' differ, and neither can be reduced to equal the other.
+
+{{< dots >}}
+## Approach 🚀
+We need to check if it's possible to remove one character so that the frequencies of all remaining characters are equal. This can be done by analyzing the frequency distribution of characters in the string.
+
+### Initial Thoughts 💭
+- The problem requires checking how frequencies of characters are distributed.
+- By counting frequencies and the frequency of frequencies, we can easily determine if removing a letter will balance the remaining frequencies.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that word will have at least 2 characters.
+- The solution should efficiently handle strings of length 100.
+- Check for cases where only one letter appears multiple times and all others appear once.
+- Ensure that time complexity is O(n) for counting frequencies.
+{{< dots >}}
+## Code 💻
+```cpp
+bool equalFrequency(string word) {
+    unordered_map<char, int> mp;
+    map<int, int> mp2;
+    for(auto c: word)  mp[c]++;
+    
+    for(auto m: mp)  mp2[m.second]++;
+    
+    
+    if(mp2.size() > 2) return false;
+    map<int, int>::iterator it1 = mp2.begin();
+    map<int, int>::iterator it2 = mp2.begin();
+    it2++;
+    
+    if(mp2.size() == 1){
+        if(mp.size() == 1 || it1->first == 1) return true;
         return false;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks whether we can make all characters in a string appear the same number of times by removing exactly one character. Specifically, the task is to check if it's possible to adjust the frequency of characters in the string to make them all equal by removing one character from the string.
-
-### Approach
-
-To solve this problem, we need to check the frequencies of characters in the string. The core idea is to identify if it is possible to make all frequencies the same by removing exactly one character. Here are the main steps to achieve that:
-
-1. **Count Character Frequencies**: We first count how many times each character appears in the string.
-2. **Count Frequency of Frequencies**: We count how many times each frequency appears. This is crucial because if we have two different frequencies, we need to check whether one of them can be reduced by removing just one character to make all frequencies the same.
-3. **Check Possible Conditions**: Based on the frequency counts, we check if we can modify the string by removing one character to make the frequency of all characters equal.
-
-#### Key Scenarios to Check:
-- If there is only one unique frequency, then it is always possible to make all characters have the same frequency, or if all characters appear exactly once.
-- If there are two different frequencies:
-  - One frequency can be reduced by 1 to match the other frequency.
-  - One of the frequencies can be 1, which means we can remove one character to make that frequency 0 (effectively removing the character from the string).
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Count Character Frequencies
-
-```cpp
-unordered_map<char, int> mp;
-for(auto c: word)  mp[c]++;
-```
-
-- We use an unordered map (`mp`) to store the frequency of each character in the string `word`.
-- We iterate through the string and for each character, we increment its corresponding count in `mp`.
-
-#### Step 2: Count Frequency of Frequencies
-
-```cpp
-map<int, int> mp2;
-for(auto m: mp)  mp2[m.second]++;
-```
-
-- Now, we need to count how many times each frequency occurs. We use a `map<int, int>` (`mp2`) to store the frequency of frequencies.
-- We iterate through the character frequencies stored in `mp`, and for each frequency `m.second`, we increment the count of that frequency in `mp2`.
-
-#### Step 3: Check Number of Different Frequencies
-
-```cpp
-if(mp2.size() > 2) return false;
-```
-
-- If there are more than two different frequencies, it is impossible to make the frequencies equal by removing one character. In this case, we return `false` immediately.
-
-#### Step 4: Handle the Case with One Frequency
-
-```cpp
-map<int, int>::iterator it1 = mp2.begin();
-map<int, int>::iterator it2 = mp2.begin();
-it2++;
-if(mp2.size() == 1){
-    if(mp.size() == 1 || it1->first == 1) return true;
+   
+    
+    if(it1->first == 1 && it1->second == 1) return true;
+    if(it1->first == it2->first-1 && it2->second == 1) return true;
     return false;
 }
 ```
 
-- If there is only one unique frequency, we have two possibilities:
-  1. If all characters are the same (`mp.size() == 1`), we return `true` because we don't need to do anything.
-  2. If all characters appear once, we can remove one character and make all others have the same frequency.
-- Otherwise, if there is more than one character but all frequencies are the same, we return `false`.
+This function checks whether a string has equal frequency of characters after removing or modifying at most one character.
 
-#### Step 5: Handle the Case with Two Frequencies
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool equalFrequency(string word) {
+	```
+	Defines the function 'equalFrequency' which accepts a string and returns a boolean value indicating whether it is possible to equalize the frequency of characters in the string.
 
-```cpp
-if(it1->first == 1 && it1->second == 1) return true;
-if(it1->first == it2->first-1 && it2->second == 1) return true;
-return false;
-```
+2. **Data Structure Initialization**
+	```cpp
+	    unordered_map<char, int> mp;
+	```
+	Declares an unordered map 'mp' to store the frequency count of each character in the word.
 
-- If there are two different frequencies, we check:
-  1. If one frequency is 1 and it occurs only once (`it1->first == 1 && it1->second == 1`), we can remove this character completely, making the remaining frequencies equal.
-  2. If the frequencies are consecutive (i.e., `it1->first == it2->first - 1`) and the higher frequency occurs only once (`it2->second == 1`), we can reduce the higher frequency by 1 to match the lower frequency.
-- If neither condition is true, we return `false` because we can't make all frequencies the same by removing just one character.
+3. **Data Structure Initialization**
+	```cpp
+	    map<int, int> mp2;
+	```
+	Declares a map 'mp2' to store how many times each frequency appears.
 
-### Complexity
+4. **Frequency Counting**
+	```cpp
+	    for(auto c: word)  mp[c]++;
+	```
+	Loops through each character in the word, incrementing its count in the map 'mp'.
 
-#### Time Complexity:
-- **O(N log N)**: The time complexity is dominated by the need to sort the frequencies of characters. Counting the frequency of each character takes **O(N)**, and inserting into the frequency map (`mp2`) takes **O(log N)** for each element. Hence, the overall complexity is **O(N log N)**, where `N` is the length of the input string.
+5. **Frequency Counting**
+	```cpp
+	    for(auto m: mp)  mp2[m.second]++;
+	```
+	Iterates over the map 'mp' to fill 'mp2' with the frequency of each frequency.
 
-#### Space Complexity:
-- **O(N)**: The space complexity is mainly determined by the storage of the character frequencies in `mp` and the frequency of frequencies in `mp2`, both of which require **O(N)** space.
+6. **Validation**
+	```cpp
+	    if(mp2.size() > 2) return false;
+	```
+	If there are more than two different frequencies, return false as it is impossible to make the frequencies equal by removing or modifying one character.
 
-### Conclusion
+7. **Iterator Setup**
+	```cpp
+	    map<int, int>::iterator it1 = mp2.begin();
+	```
+	Creates an iterator 'it1' pointing to the beginning of the 'mp2' map.
 
-This solution leverages two maps to count character frequencies and the frequencies of those frequencies, providing an efficient way to determine if we can make all character frequencies equal by removing exactly one character. By checking conditions on the frequency map, we can solve the problem in **O(N log N)** time, which is efficient enough for most typical input sizes. The approach ensures that we handle edge cases and special conditions systematically, making the solution both clear and robust.
+8. **Iterator Setup**
+	```cpp
+	    map<int, int>::iterator it2 = mp2.begin();
+	```
+	Creates another iterator 'it2' also pointing to the beginning of the 'mp2' map.
+
+9. **Iterator Adjustment**
+	```cpp
+	    it2++;
+	```
+	Moves the second iterator 'it2' to the second element in the 'mp2' map.
+
+10. **Condition Check**
+	```cpp
+	    if(mp2.size() == 1){
+	```
+	Checks if there is only one frequency in 'mp2', indicating all characters have the same frequency.
+
+11. **Condition Check**
+	```cpp
+	        if(mp.size() == 1 || it1->first == 1) return true;
+	```
+	If there is only one character or all characters have a frequency of 1, return true (it is possible to equalize frequencies).
+
+12. **Condition Check**
+	```cpp
+	        return false;
+	```
+	If neither of the previous conditions are met, return false.
+
+13. **Final Condition**
+	```cpp
+	    if(it1->first == 1 && it1->second == 1) return true;
+	```
+	If the frequency of 1 appears exactly once, return true as it can be equalized by removing a single character.
+
+14. **Final Condition**
+	```cpp
+	    if(it1->first == it2->first-1 && it2->second == 1) return true;
+	```
+	If the difference between the two frequencies is 1 and the second frequency occurs exactly once, return true.
+
+15. **Final Condition**
+	```cpp
+	    return false;
+	```
+	Return false if none of the conditions for equalizing the frequencies are met.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the length of the string, as we need to traverse the string and perform frequency analysis.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the two hash maps used for counting character and frequency distributions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-letter-to-equalize-frequency/description/)
 

@@ -14,159 +14,281 @@ img_src = ""
 youtube = "PwzZ9UVWqBk"
 youtube_upload_date="2023-11-25"
 youtube_thumbnail="https://i.ytimg.com/vi/PwzZ9UVWqBk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a grid with n + 2 horizontal bars and m + 2 vertical bars, creating 1x1 unit cells. You can remove some bars from the given arrays hBars (horizontal bars) and vBars (vertical bars). The remaining bars are fixed and cannot be removed. Your task is to determine the maximum area of a square-shaped hole that can be formed in the grid after removing some bars.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the integers n and m, and two arrays of integers: hBars and vBars. The arrays represent the positions of horizontal and vertical bars in the grid.
+- **Example:** `n = 2, m = 1, hBars = [2, 3], vBars = [2]`
+- **Constraints:**
+	- 1 <= n <= 10^9
+	- 1 <= m <= 10^9
+	- 1 <= hBars.length <= 100
+	- 1 <= vBars.length <= 100
+	- 2 <= hBars[i] <= n + 1
+	- 2 <= vBars[i] <= m + 1
+	- All values in hBars are distinct.
+	- All values in vBars are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximizeSquareHoleArea(int n, int m, vector<int>& hBars, vector<int>& vBars) {
-        vector<int>h;
-        vector<int>v;
-        sort(hBars.begin(),hBars.end());
-        sort(vBars.begin(),vBars.end());
-        for(auto i:hBars)
-            h.push_back(i);
-        for(auto i:vBars)
-            v.push_back(i);
-        int mv=1,mh=1;
-        int c=1;
-        for(int i=1;i<h.size();i++)
-        {   
-            
-            if(h[i]==h[i-1]+1)
-                c++;
-            else
-                c=1;
-            mh=max(mh,c);
-        }
-        c=1;
-        for(int i=1;i<v.size();i++)
-        {   
-            if(v[i]==v[i-1]+1)
-                c++;
-            else
-                c=1;
-            mv=max(mv,c);
-        }
-        int x=min(mh+1,mv+1);
-        return x*x;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the maximum area of a square-shaped hole that can be formed in the grid after removing some bars.
+- **Example:** `For n = 2, m = 1, hBars = [2, 3], vBars = [2], the output is 4.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the maximum possible area of a square-shaped hole that can be created in the grid by removing some horizontal and vertical bars.
+
+- Sort the hBars and vBars arrays.
+- Calculate the maximum distance between consecutive bars in both horizontal and vertical directions.
+- The maximum square area is the square of the minimum distance between the bars in the horizontal and vertical directions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays hBars and vBars contain distinct values and represent valid positions of the bars in the grid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 2, m = 1, hBars = [2, 3], vBars = [2]`  \
+  **Explanation:** The maximum square-shaped hole can be obtained by removing horizontal bar 2 and vertical bar 2, creating a square of area 4.
+
+- **Input:** `n = 1, m = 1, hBars = [2], vBars = [2]`  \
+  **Explanation:** By removing horizontal bar 2 and vertical bar 2, a square-shaped hole of area 4 is formed.
+
+- **Input:** `n = 2, m = 3, hBars = [2, 3], vBars = [2, 4]`  \
+  **Explanation:** By removing horizontal bar 3 and vertical bar 4, a square-shaped hole with an area of 4 is created.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the bars and calculating the maximum square area by finding the largest gap between consecutive bars in both the horizontal and vertical directions.
+
+### Initial Thoughts 💭
+- The problem boils down to finding the largest gap between consecutive bars in both horizontal and vertical directions.
+- Sorting the bars and calculating the maximum gap between consecutive bars will help us find the largest square that can be formed.
+{{< dots >}}
+### Edge Cases 🌐
+- The input arrays hBars and vBars should never be empty, as per the problem's constraints.
+- The problem allows very large values for n and m (up to 10^9), but the lengths of hBars and vBars are small (up to 100), making the problem feasible for the given constraints.
+- If hBars and vBars contain bars placed very close to each other, the maximum square hole area will be smaller.
+- The arrays hBars and vBars are guaranteed to have distinct values within the given range.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximizeSquareHoleArea(int n, int m, vector<int>& hBars, vector<int>& vBars) {
+    vector<int>h;
+    vector<int>v;
+    sort(hBars.begin(),hBars.end());
+    sort(vBars.begin(),vBars.end());
+    for(auto i:hBars)
+        h.push_back(i);
+    for(auto i:vBars)
+        v.push_back(i);
+    int mv=1,mh=1;
+    int c=1;
+    for(int i=1;i<h.size();i++)
+    {   
+        
+        if(h[i]==h[i-1]+1)
+            c++;
+        else
+            c=1;
+        mh=max(mh,c);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-Given a grid with vertical and horizontal bars, the task is to find the maximum area of a square hole that can be formed. A hole is formed by selecting horizontal and vertical bars such that the distance between consecutive bars on both axes is at least 1 unit. The goal is to maximize the area of the square formed by these distances.
-
-Specifically, we are given:
-- `n`: the number of horizontal bars.
-- `m`: the number of vertical bars.
-- `hBars`: an array representing the positions of the horizontal bars.
-- `vBars`: an array representing the positions of the vertical bars.
-
-You need to calculate the largest square area that can be formed within the grid defined by these bars. The square’s sides should lie between two consecutive bars on both the horizontal and vertical axes.
-
-### Approach:
-To solve the problem, we need to focus on the following key observations:
-1. **Consecutive Bars**: The size of the square formed between two consecutive bars is determined by the minimum distance between any two bars (both horizontally and vertically). If the horizontal bars are too close together, the maximum square's side length will be limited by them, and similarly for vertical bars.
-   
-2. **Sort and Calculate Gaps**: By sorting the arrays of horizontal (`hBars`) and vertical (`vBars`) bars, we can easily compute the maximum distance between consecutive bars. The distance between two consecutive bars is simply the difference between their positions.
-
-3. **Maximize Square's Side**: The largest square hole will be constrained by the maximum gap between consecutive horizontal bars and the maximum gap between consecutive vertical bars. The side length of the square is limited by the smaller of these two values, since both the width and height of the square need to fit within the available gaps.
-
-4. **Result**: Once we determine the maximum possible side length of the square, we can compute the area of the square, which is simply the square of the side length.
-
-### Code Breakdown (Step by Step):
-
-#### 1. **Sorting the Bars**:
-First, we sort both `hBars` (horizontal bars) and `vBars` (vertical bars) to ensure that we can calculate the distances between consecutive bars easily.
-
-```cpp
-sort(hBars.begin(), hBars.end());
-sort(vBars.begin(), vBars.end());
-```
-
-#### 2. **Copying Sorted Bars into Separate Vectors**:
-We copy the sorted bars into separate vectors `h` and `v`. While this step isn't strictly necessary (since we could work with the sorted input directly), it is done here for clarity.
-
-```cpp
-vector<int> h;
-vector<int> v;
-for(auto i:hBars)
-    h.push_back(i);
-for(auto i:vBars)
-    v.push_back(i);
-```
-
-#### 3. **Calculating Maximum Horizontal Gap**:
-We now calculate the largest gap between consecutive horizontal bars. We initialize `mh` (maximum horizontal gap) to 1 because the smallest possible gap is at least 1 (as bars are placed at distinct positions).
-
-Then, we iterate over the sorted horizontal bars and calculate the gap between each pair of consecutive bars. If the gap between two consecutive bars is 1, we increase the count `c`. Otherwise, we reset `c` to 1.
-
-```cpp
-int mh = 1;
-int c = 1;
-for (int i = 1; i < h.size(); i++) {
-    if (h[i] == h[i-1] + 1)
-        c++;
-    else
-        c = 1;
-    mh = max(mh, c);
+    c=1;
+    for(int i=1;i<v.size();i++)
+    {   
+        if(v[i]==v[i-1]+1)
+            c++;
+        else
+            c=1;
+        mv=max(mv,c);
+    }
+    int x=min(mh+1,mv+1);
+    return x*x;
 }
 ```
 
-#### 4. **Calculating Maximum Vertical Gap**:
-Similarly, we calculate the largest gap between consecutive vertical bars using the same logic as for the horizontal bars. We initialize `mv` (maximum vertical gap) to 1 and iterate through the sorted vertical bars.
+This function calculates the maximum square area that can be formed using horizontal and vertical bars. It first sorts the horizontal and vertical bar positions, then checks consecutive bars to determine the maximum distance between bars. Finally, it calculates the area of the largest square that can be formed.
 
-```cpp
-int mv = 1;
-c = 1;
-for (int i = 1; i < v.size(); i++) {
-    if (v[i] == v[i-1] + 1)
-        c++;
-    else
-        c = 1;
-    mv = max(mv, c);
-}
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximizeSquareHoleArea(int n, int m, vector<int>& hBars, vector<int>& vBars) {
+	```
+	Defines the function 'maximizeSquareHoleArea' that takes the dimensions of the grid and vectors of horizontal and vertical bars as input, and returns the area of the largest square that can be formed.
 
-#### 5. **Calculating the Maximum Square Area**:
-After finding the maximum consecutive gaps horizontally (`mh`) and vertically (`mv`), we calculate the side length of the largest square that can be formed. The side length of the square is the minimum of `mh + 1` and `mv + 1` because the square's side length is constrained by the smaller of these two values.
+2. **Vector Initialization**
+	```cpp
+	    vector<int>h;
+	```
+	Initializes an empty vector 'h' to store the horizontal bar positions.
 
-Finally, we return the area of the square, which is the square of the side length.
+3. **Vector Initialization**
+	```cpp
+	    vector<int>v;
+	```
+	Initializes an empty vector 'v' to store the vertical bar positions.
 
-```cpp
-int x = min(mh + 1, mv + 1);
-return x * x;
-```
+4. **Sort Horizontal Bars**
+	```cpp
+	    sort(hBars.begin(),hBars.end());
+	```
+	Sorts the 'hBars' vector in ascending order to process the bars in the correct order.
 
-### Complexity:
+5. **Sort Vertical Bars**
+	```cpp
+	    sort(vBars.begin(),vBars.end());
+	```
+	Sorts the 'vBars' vector in ascending order to process the bars in the correct order.
 
-#### Time Complexity:
-- Sorting the horizontal bars takes \(O(n \log n)\), where `n` is the number of horizontal bars.
-- Sorting the vertical bars takes \(O(m \log m)\), where `m` is the number of vertical bars.
-- Calculating the maximum gap between consecutive horizontal bars takes \(O(n)\), and similarly, calculating the maximum gap between vertical bars takes \(O(m)\).
+6. **Push Horizontal Bars to Vector**
+	```cpp
+	    for(auto i:hBars)
+	```
+	Iterates over the sorted 'hBars' and pushes each element into the 'h' vector.
 
-Thus, the overall time complexity is dominated by the sorting step and is:
-\[
-O(n \log n + m \log m)
-\]
+7. **Push Horizontal Bar to Vector**
+	```cpp
+	        h.push_back(i);
+	```
+	Adds the current horizontal bar position to the 'h' vector.
 
-#### Space Complexity:
-- We use additional space for the `h` and `v` vectors to store the sorted bars. Therefore, the space complexity is \(O(n + m)\), where `n` and `m` are the number of horizontal and vertical bars, respectively.
+8. **Push Vertical Bars to Vector**
+	```cpp
+	    for(auto i:vBars)
+	```
+	Iterates over the sorted 'vBars' and pushes each element into the 'v' vector.
 
-### Conclusion:
-The solution efficiently calculates the maximum area of a square that can be formed between the horizontal and vertical bars. The key idea is to find the maximum gap between consecutive bars in both dimensions, and the side length of the square is limited by the smaller of these two gaps. This solution leverages sorting and linear scanning to achieve the result in optimal time.
+9. **Push Vertical Bar to Vector**
+	```cpp
+	        v.push_back(i);
+	```
+	Adds the current vertical bar position to the 'v' vector.
 
-#### Key Points:
-- The largest square's side length is determined by the maximum gap between consecutive bars in both horizontal and vertical directions.
-- The time complexity is \(O(n \log n + m \log m)\), where `n` and `m` are the sizes of the input arrays.
-- The space complexity is \(O(n + m)\), as we store the sorted bars in separate vectors.
+10. **Initialize Variables**
+	```cpp
+	    int mv=1,mh=1;
+	```
+	Initializes two variables 'mv' and 'mh' to store the maximum consecutive vertical and horizontal distances, respectively.
+
+11. **Initialize Counter**
+	```cpp
+	    int c=1;
+	```
+	Initializes a counter 'c' to track the number of consecutive bars (either horizontal or vertical).
+
+12. **Loop Through Horizontal Bars**
+	```cpp
+	    for(int i=1;i<h.size();i++)
+	```
+	Starts a loop to iterate through the 'h' vector (horizontal bars) starting from the second element.
+
+13. **Consecutive Horizontal Bars Check**
+	```cpp
+	        if(h[i]==h[i-1]+1)
+	```
+	Checks if the current horizontal bar is consecutive to the previous one (i.e., if the difference between the current and previous bar is 1).
+
+14. **Increment Counter**
+	```cpp
+	            c++;
+	```
+	If the current horizontal bar is consecutive to the previous one, increments the counter 'c'.
+
+15. **Reset Counter**
+	```cpp
+	        else
+	```
+	If the bars are not consecutive, resets the counter 'c' to 1.
+
+16. **Update Maximum Horizontal Distance**
+	```cpp
+	            c=1;
+	```
+	Resets the counter to 1, as the sequence of consecutive bars was broken.
+
+17. **Update Maximum Horizontal Distance**
+	```cpp
+	        mh=max(mh,c);
+	```
+	Updates the maximum horizontal distance 'mh' to the maximum of the current 'mh' and the counter 'c'.
+
+18. **Reset Counter for Vertical Bars**
+	```cpp
+	    c=1;
+	```
+	Resets the counter 'c' to 1 before checking the vertical bars.
+
+19. **Loop Through Vertical Bars**
+	```cpp
+	    for(int i=1;i<v.size();i++)
+	```
+	Starts a loop to iterate through the 'v' vector (vertical bars) starting from the second element.
+
+20. **Consecutive Vertical Bars Check**
+	```cpp
+	        if(v[i]==v[i-1]+1)
+	```
+	Checks if the current vertical bar is consecutive to the previous one (i.e., if the difference between the current and previous bar is 1).
+
+21. **Increment Counter**
+	```cpp
+	            c++;
+	```
+	If the current vertical bar is consecutive to the previous one, increments the counter 'c'.
+
+22. **Reset Counter**
+	```cpp
+	        else
+	```
+	If the bars are not consecutive, resets the counter 'c' to 1.
+
+23. **Update Maximum Vertical Distance**
+	```cpp
+	            c=1;
+	```
+	Resets the counter to 1, as the sequence of consecutive bars was broken.
+
+24. **Update Maximum Vertical Distance**
+	```cpp
+	        mv=max(mv,c);
+	```
+	Updates the maximum vertical distance 'mv' to the maximum of the current 'mv' and the counter 'c'.
+
+25. **Calculate Square Size**
+	```cpp
+	    int x=min(mh+1,mv+1);
+	```
+	Calculates the size of the largest square possible using the minimum of the maximum horizontal and vertical distances, incremented by 1.
+
+26. **Return Result**
+	```cpp
+	    return x*x;
+	```
+	Returns the area of the square, which is the square of the calculated size 'x'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting of the hBars and vBars arrays.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the input arrays.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-area-of-square-hole-in-grid/description/)

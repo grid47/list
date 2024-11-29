@@ -14,45 +14,92 @@ img_src = ""
 youtube = "W5QOLqXskZM"
 youtube_upload_date="2023-05-31"
 youtube_thumbnail="https://i.ytimg.com/vi/W5QOLqXskZM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with building a system to track customer travel times within an underground railway network. The system should calculate the average time taken to travel between two stations based on previous trips. Implement the `UndergroundSystem` class with the following methods.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of several commands, each one representing a method call to the UndergroundSystem class. Each command is represented as an array where the first element is the method name, and the rest are its respective arguments.
+- **Example:** `["UndergroundSystem", "checkIn", "checkOut", "getAverageTime"]`
+- **Constraints:**
+	- 1 <= id, t <= 10^6
+	- 1 <= stationName.length <= 10
+	- All strings consist of uppercase and lowercase English letters and digits.
 
-{{< highlight cpp >}}
-struct Node {
-    int time;
-    string station;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output for each method call will be either null (for checkIn and checkOut methods) or a double representing the average time for the given trip (for getAverageTime).
+- **Example:** `[null, null, 10.00000]`
+- **Constraints:**
+	- Answers within 10^-5 of the actual value will be accepted.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To efficiently track and calculate the average travel times between stations.
+
+- 1. Use a map to store the check-in times and stations for each customer.
+- 2. When a customer checks out, calculate the travel time and update the sum and count of trips between stations.
+- 3. To calculate the average time between two stations, divide the total time by the number of trips between the stations.
+{{< dots >}}
+### Problem Assumptions ✅
+- All method calls will be valid and in chronological order.
+- No customer will check in or check out at the same time.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["UndergroundSystem", "checkIn", "checkOut", "getAverageTime"]`  \
+  **Explanation:** In this example, we simulate customers checking in and out of stations and calculating average travel times.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves tracking each customer's check-in and check-out times, updating a map of total travel times and counts for each trip, and calculating the average when requested.
+
+### Initial Thoughts 💭
+- Efficiently managing check-in and check-out events will be crucial for large datasets.
+- Use maps for storing check-in and check-out data to ensure fast access.
+- Focus on optimizing the update of travel times and counts for each station pair.
+{{< dots >}}
+### Edge Cases 🌐
+- What if no customer checks in before calling `getAverageTime`?
+- Ensure the system handles up to 20,000 method calls efficiently.
+- Handle cases where a customer checks in and out multiple times for the same station pair.
+- The system should work with varying customer IDs and station names.
+{{< dots >}}
+## Code 💻
+```cpp
+string station;
 };
 
 class UndergroundSystem {
 public:
-    map<string, map<string, double>> cnt, sum;
-    map<int, Node> user;
-    UndergroundSystem() {
-        
-    }
+map<string, map<string, double>> cnt, sum;
+map<int, Node> user;
+UndergroundSystem() {
     
-    void checkIn(int id, string name, int t) {
-        Node n;
-        n.time = t;
-        n.station = name;
-        user[id] = n;
-    }
-    
-    void checkOut(int id, string name, int t) {
-        Node entry = user[id];
-        cout << user[id].station;
-        user.erase(id);
-        cnt[entry.station][name]++;
-        sum[entry.station][name]+= t - entry.time;
-    }
-    
-    double getAverageTime(string start, string end) {
-        return sum[start][end] / cnt[start][end];
-    }
+}
+
+void checkIn(int id, string name, int t) {
+    Node n;
+    n.time = t;
+    n.station = name;
+    user[id] = n;
+}
+
+void checkOut(int id, string name, int t) {
+    Node entry = user[id];
+    cout << user[id].station;
+    user.erase(id);
+    cnt[entry.station][name]++;
+    sum[entry.station][name]+= t - entry.time;
+}
+
+double getAverageTime(string start, string end) {
+    return sum[start][end] / cnt[start][end];
+}
 };
 
 /**
@@ -61,133 +108,137 @@ public:
  * obj->checkIn(id,stationName,t);
  * obj->checkOut(id,stationName,t);
  * double param_3 = obj->getAverageTime(startStation,endStation);
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This code defines the `UndergroundSystem` class that tracks the average travel time between pairs of stations, utilizing check-in and check-out functions.
 
-The problem is to implement a system that tracks the check-in and check-out times of passengers at various stations in an underground transportation system. The goal is to allow passengers to check in and out at different stations while being able to retrieve the average travel time between any two stations. This system involves managing user data effectively and calculating average travel times based on the recorded check-in and check-out times.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	string station;
+	```
+	Declaring a string variable `station` to hold the station name for each user.
 
-### Approach
+2. **Class Definition**
+	```cpp
+	class UndergroundSystem {
+	```
+	Beginning of the `UndergroundSystem` class definition.
 
-To address this problem, we utilize a class-based design in C++, leveraging several data structures to efficiently store and manage passenger data and travel times. The following are the key components of our approach:
+3. **Access Control**
+	```cpp
+	public:
+	```
+	Public access specifier for methods and variables that follow.
 
-1. **Data Structures**:
-   - **Maps**: We use two maps:
-     - `cnt`: A nested map that tracks the count of trips between stations. The outer map uses the starting station as the key, while the inner map uses the destination station as the key to store the number of trips taken between the two stations.
-     - `sum`: Another nested map that keeps the total travel time for each trip between stations. This allows us to compute the average travel time efficiently.
-   - **Node Struct**: A simple struct `Node` is defined to store the check-in time and station name for each passenger, enabling easy retrieval of check-in information when the passenger checks out.
+4. **Map Operations**
+	```cpp
+	map<string, map<string, double>> cnt, sum;
+	```
+	Declaring two nested maps to track the count of rides (`cnt`) and the sum of times (`sum`) between station pairs.
 
-2. **Check-In and Check-Out Logic**:
-   - **Check-In**: When a passenger checks in, we record their ID, station, and time in a map (`user`). The passenger's information is stored in a `Node` instance associated with their ID.
-   - **Check-Out**: Upon checking out, we retrieve the passenger's check-in information, calculate the travel time, update the `cnt` and `sum` maps accordingly, and remove the passenger's data from the `user` map.
+5. **Map Operations**
+	```cpp
+	map<int, Node> user;
+	```
+	A map to store the user data by their unique ID.
 
-3. **Average Travel Time Calculation**: 
-   - The `getAverageTime` function computes the average travel time between two stations by dividing the total travel time by the count of trips. This provides an efficient way to return results for any queried route.
+6. **Constructor**
+	```cpp
+	UndergroundSystem() {
+	```
+	Constructor for the `UndergroundSystem` class, initializing necessary data structures.
 
-### Code Breakdown (Step by Step)
+7. **Method Definition**
+	```cpp
+	void checkIn(int id, string name, int t) {
+	```
+	Defines the `checkIn` method to record a user's entry at a station.
 
-Here’s a detailed step-by-step breakdown of the provided C++ code:
+8. **Variable Initialization**
+	```cpp
+	    Node n;
+	```
+	Creates a `Node` object to store information about the user's check-in.
 
-1. **Node Struct Definition**:
-   ```cpp
-   struct Node {
-       int time;
-       string station;
-   };
-   ```
-   - A `Node` structure is defined to hold the check-in time and station name.
+9. **Variable Assignment**
+	```cpp
+	    n.time = t;
+	```
+	Assigns the time of check-in to the `Node` object.
 
-2. **Class Definition**:
-   ```cpp
-   class UndergroundSystem {
-   public:
-       map<string, map<string, double>> cnt, sum;
-       map<int, Node> user;
-   ```
-   - The `UndergroundSystem` class is defined. It contains:
-     - `cnt`: A map for counting trips between stations.
-     - `sum`: A map for summing travel times between stations.
-     - `user`: A map that holds the check-in information for each passenger based on their ID.
+10. **Variable Assignment**
+	```cpp
+	    n.station = name;
+	```
+	Assigns the station name to the `Node` object.
 
-3. **Constructor**:
-   ```cpp
-       UndergroundSystem() {
-       }
-   ```
-   - A default constructor initializes the class instance. No additional setup is required at this point.
+11. **Data Insertion**
+	```cpp
+	    user[id] = n;
+	```
+	Inserts the user data into the `user` map with the user ID as the key.
 
-4. **Check-In Method**:
-   ```cpp
-       void checkIn(int id, string name, int t) {
-           Node n;
-           n.time = t;
-           n.station = name;
-           user[id] = n;
-       }
-   ```
-   - The `checkIn` method takes the passenger's ID, station name, and time as parameters.
-   - A `Node` is created to store the current station and time.
-   - This node is then stored in the `user` map using the passenger ID as the key.
+12. **Method Definition**
+	```cpp
+	void checkOut(int id, string name, int t) {
+	```
+	Defines the `checkOut` method to record when a user exits a station.
 
-5. **Check-Out Method**:
-   ```cpp
-       void checkOut(int id, string name, int t) {
-           Node entry = user[id];
-           cout << user[id].station; // Debug line (can be removed)
-           user.erase(id);
-           cnt[entry.station][name]++;
-           sum[entry.station][name]+= t - entry.time;
-       }
-   ```
-   - The `checkOut` method retrieves the passenger’s check-in information using their ID.
-   - It calculates the travel time by subtracting the check-in time from the current time.
-   - The counts and sums for trips between the checked-in and checked-out stations are updated.
-   - The passenger’s information is removed from the `user` map.
+13. **Data Retrieval**
+	```cpp
+	    Node entry = user[id];
+	```
+	Retrieves the user's check-in data from the `user` map.
 
-6. **Average Time Calculation Method**:
-   ```cpp
-       double getAverageTime(string start, string end) {
-           return sum[start][end] / cnt[start][end];
-       }
-   ```
-   - The `getAverageTime` method takes the starting and ending station names as parameters.
-   - It calculates the average time by dividing the total travel time (stored in `sum`) by the count of trips (stored in `cnt`).
-   - The average travel time is returned as a double.
+14. **Data Deletion**
+	```cpp
+	    user.erase(id);
+	```
+	Removes the user from the `user` map after checking out.
 
-7. **Usage**:
-   ```cpp
-   /**
-    * Your UndergroundSystem object will be instantiated and called as such:
-    * UndergroundSystem* obj = new UndergroundSystem();
-    * obj->checkIn(id,stationName,t);
-    * obj->checkOut(id,stationName,t);
-    * double param_3 = obj->getAverageTime(startStation,endStation);
-    */
-   ```
-   - This section outlines how to create an instance of `UndergroundSystem` and how to use the provided methods.
+15. **Map Operations**
+	```cpp
+	    cnt[entry.station][name]++;
+	```
+	Increments the count of rides between stations in the `cnt` map.
 
-### Complexity
+16. **Map Operations**
+	```cpp
+	    sum[entry.station][name]+= t - entry.time;
+	```
+	Adds the time spent during the ride to the `sum` map.
 
-- **Time Complexity**:
-  - **Check-In and Check-Out**: Both operations run in \( O(1) \) time on average due to direct access to hash maps.
-  - **Get Average Time**: This operation also runs in \( O(1) \) since it involves direct access to the maps for the sum and count.
+17. **Method Definition**
+	```cpp
+	double getAverageTime(string start, string end) {
+	```
+	Defines the `getAverageTime` method to calculate the average time between two stations.
 
-- **Space Complexity**:
-  - The space complexity is \( O(n) \), where \( n \) is the number of unique passengers checked in and the number of routes taken between stations. This is due to the storage requirements for the maps.
+18. **Return Statement**
+	```cpp
+	    return sum[start][end] / cnt[start][end];
+	```
+	Returns the average time by dividing the sum by the count of rides.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for getAverageTime when there is only one trip.
+- **Average Case:** O(1) for getAverageTime, O(log N) for checkIn and checkOut operations.
+- **Worst Case:** O(N) for getAverageTime in cases where many trips are recorded.
 
-This implementation of the underground system efficiently manages passenger check-ins and check-outs while providing quick access to average travel times between stations. 
 
-Key takeaways from this solution include:
 
-- **Efficient Data Management**: Using maps to store counts and sums allows for efficient aggregation of travel times.
-- **Clear Separation of Responsibilities**: The code cleanly separates the logic for check-in, check-out, and average time calculation, improving readability and maintainability.
-- **Utilization of Structs**: The `Node` struct provides a clean way to encapsulate the check-in information for passengers, making the code easier to understand.
+### Space Complexity 💾
+- **Best Case:** O(1) for operations with minimal data.
+- **Worst Case:** O(N) for storing customer and trip data.
 
-Overall, this design demonstrates effective use of data structures and algorithms to solve a real-world problem, making it suitable for applications in transportation systems and other domains requiring similar functionalities.
+
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-underground-system/description/)
 

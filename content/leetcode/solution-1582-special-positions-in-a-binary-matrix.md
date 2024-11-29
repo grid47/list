@@ -14,127 +14,176 @@ img_src = ""
 youtube = "CsxwXaPmMyE"
 youtube_upload_date="2020-09-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/CsxwXaPmMyE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary matrix of size m x n, where each element is either 0 or 1. A position (i, j) in the matrix is considered special if mat[i][j] = 1 and all other elements in the same row i and column j are 0. Your task is to find how many such special positions exist in the matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a matrix 'mat' of size m x n, where each element is either 0 or 1.
+- **Example:** `Input: mat = [[1, 0, 0], [0, 0, 1], [1, 0, 0]]`
+- **Constraints:**
+	- 1 <= m, n <= 100
+	- mat[i][j] is either 0 or 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numSpecial(vector<vector<int>>& mat) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the number of special positions in the matrix.
+- **Example:** `Output: 1`
+- **Constraints:**
 
-        int m = mat.size(), n = mat[0].size();
-        vector<int> row(m, 0), col(n, 0);
-        int res = 0;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            if(mat[i][j] == 1) row[i]++, col[j]++;
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find special positions, we need to check each 1 in the matrix and verify that all other elements in its row and column are 0.
 
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            if(row[i] == 1 && col[j] == 1 && mat[i][j] == 1) {
-                res++;
-            }
-        }
-        
-        return res;
+- 1. Traverse the entire matrix to calculate how many 1's are present in each row and column.
+- 2. For each element in the matrix, check if it's 1, and if the row and column of that element contain no other 1's.
+- 3. Count the number of such positions that meet the condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix will not be empty, and the elements are constrained to 0 or 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: mat = [[1, 0, 0], [0, 0, 1], [1, 0, 0]]`  \
+  **Explanation:** In this case, only the position (1, 2) is special because mat[1][2] == 1 and all other elements in row 1 and column 2 are 0. Therefore, the output is 1.
+
+- **Input:** `Example 2: mat = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]`  \
+  **Explanation:** Here, the positions (0, 0), (1, 1), and (2, 2) are all special. Therefore, the output is 3.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to determine the special positions by first counting how many 1's are present in each row and column, then checking each 1 in the matrix to ensure there are no other 1's in its row and column.
+
+### Initial Thoughts 💭
+- A brute force approach would involve checking each element in the matrix for the special condition, which could lead to a time complexity of O(m * n^2).
+- A more efficient approach would involve counting the number of 1's in each row and column first, then performing a single check for each element, which would improve the solution's efficiency.
+{{< dots >}}
+### Edge Cases 🌐
+- Matrix dimensions are guaranteed to be at least 1x1.
+- The solution should handle large matrices efficiently, with dimensions up to 100x100.
+- When the matrix consists entirely of 0's, the output will be 0.
+- Ensure the solution is efficient enough to handle the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+int numSpecial(vector<vector<int>>& mat) {
+
+    int m = mat.size(), n = mat[0].size();
+    vector<int> row(m, 0), col(n, 0);
+    int res = 0;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++) {
+        if(mat[i][j] == 1) row[i]++, col[j]++;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-The problem requires us to find the number of "special" ones in a binary matrix. A "special" one is defined as a `1` that is the only `1` in its respective row and column. Given the constraints of the problem, our goal is to efficiently count how many such special ones exist in the matrix.
-
-### Approach
-
-To solve the problem, we can break down the task into several clear steps:
-
-1. **Initialize Counters**: We will maintain two arrays to keep track of the number of `1`s in each row and each column.
-
-2. **Count `1`s**: Iterate through the matrix to populate the row and column counts.
-
-3. **Identify Special Ones**: Perform another pass through the matrix to check each `1`. If a `1` is the only `1` in its row and its column, we will count it as a special one.
-
-4. **Return the Count**: Finally, we return the total count of special ones found.
-
-This approach allows us to efficiently determine the number of special ones by leveraging simple counting mechanisms, which keeps our solution efficient.
-
-### Code Breakdown (Step by Step)
-
-Let's analyze the code to see how it implements the above approach:
-
-```cpp
-class Solution {
-public:
-    int numSpecial(vector<vector<int>>& mat) {
-        int m = mat.size(), n = mat[0].size();
-        vector<int> row(m, 0), col(n, 0);
-        int res = 0;
-```
-
-- **Class Definition**: We define a class `Solution` with a public member function `numSpecial`.
-- **Matrix Dimensions**: We determine the dimensions of the input matrix `mat` where `m` is the number of rows and `n` is the number of columns.
-- **Counters**: Two vectors, `row` and `col`, are initialized to keep track of the number of `1`s in each row and column respectively. The result counter `res` is initialized to zero.
-
-#### Counting `1`s
-
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            if(mat[i][j] == 1) row[i]++, col[j]++;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++) {
+        if(row[i] == 1 && col[j] == 1 && mat[i][j] == 1) {
+            res++;
         }
-```
-
-- **Nested Loop**: We use two nested loops to traverse each element in the matrix.
-- **Increment Counters**: If we encounter a `1`, we increment the respective row and column counters. This operation runs in \( O(m \times n) \) time, where \( m \) and \( n \) are the dimensions of the matrix.
-
-#### Identifying Special Ones
-
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            if(row[i] == 1 && col[j] == 1 && mat[i][j] == 1) {
-                res++;
-            }
-        }
-```
-
-- **Second Nested Loop**: We again traverse the matrix with two nested loops.
-- **Check Conditions**: For each `1`, we check:
-  - Whether it is the only `1` in its row (i.e., `row[i] == 1`).
-  - Whether it is the only `1` in its column (i.e., `col[j] == 1`).
-  - Finally, we verify that the current element is indeed a `1`.
-- **Count Special Ones**: If all conditions are met, we increment the result counter `res`.
-
-#### Returning the Result
-
-```cpp
-        return res;
     }
-};
+    
+    return res;
+}
 ```
 
-- **Final Output**: After checking all elements, we return the total count of special ones stored in `res`.
+This function calculates the number of special positions in a matrix where the cell is 1 and its row and column contain exactly one 1.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numSpecial(vector<vector<int>>& mat) {
+	```
+	Define the function `numSpecial` that takes a matrix `mat` as input, where each cell can either be 0 or 1.
 
-- **Time Complexity**: The time complexity of this algorithm is \( O(m \times n) \). This is because we are performing two passes over the matrix: one to count the `1`s and another to check for special ones.
-  
-- **Space Complexity**: The space complexity is \( O(m + n) \) due to the additional space used for the `row` and `col` arrays.
+2. **Variable Initialization**
+	```cpp
+	    int m = mat.size(), n = mat[0].size();
+	```
+	Initialize variables `m` and `n` to represent the number of rows and columns in the matrix, respectively.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    vector<int> row(m, 0), col(n, 0);
+	```
+	Create two vectors `row` and `col`, initialized to zero. These vectors will track the count of 1s in each row and each column.
 
-This solution effectively identifies special ones in a binary matrix through a straightforward counting approach. By maintaining arrays to track the number of `1`s in each row and column, we achieve an efficient solution that can handle the problem within the constraints typically encountered in competitive programming. 
+4. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize `res` to 0, which will store the result (the number of special positions in the matrix).
 
-The clear separation of counting and checking logic allows for easy debugging and understanding of the flow of data through the algorithm. This technique can be broadly applied to similar matrix manipulation problems where conditions are based on row and column relationships. 
+5. **Outer Loop - Row Iteration**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Start the first loop to iterate over each row in the matrix.
 
-Moreover, the solution adheres to best practices by ensuring clarity and simplicity, making it suitable for both educational purposes and real-world applications. It showcases how careful algorithm design can lead to efficient solutions with optimal complexity.
+6. **Inner Loop - Column Iteration**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Start the second loop to iterate over each column in the current row.
+
+7. **Update Row and Column Counts**
+	```cpp
+	        if(mat[i][j] == 1) row[i]++, col[j]++;
+	```
+	If the current cell is 1, increment the count for the corresponding row (`row[i]`) and column (`col[j]`), indicating that a 1 has been found.
+
+8. **Second Loop - Checking Special Positions**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Start the third loop to iterate over each row again, this time to check for special positions.
+
+9. **Second Inner Loop - Checking Columns**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Start the fourth loop to iterate over each column in the current row and check if the position is special.
+
+10. **Condition Check - Special Position**
+	```cpp
+	        if(row[i] == 1 && col[j] == 1 && mat[i][j] == 1) {
+	```
+	Check if the current cell is 1, and if both its row and column contain exactly one 1.
+
+11. **Increment Result**
+	```cpp
+	            res++;
+	```
+	If the condition is true, increment the result `res` by 1, as this cell is a special position.
+
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the final result `res`, which represents the number of special positions in the matrix.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n) because we process each element in the matrix once and use auxiliary arrays to store the row and column counts.
+
+### Space Complexity 💾
+- **Best Case:** O(m + n)
+- **Worst Case:** O(m + n)
+
+The space complexity is O(m + n) because we use two arrays to store the row and column counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/special-positions-in-a-binary-matrix/description/)
 

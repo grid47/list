@@ -14,136 +14,197 @@ img_src = ""
 youtube = "PnzvwU4CFg8"
 youtube_upload_date="2020-06-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/PnzvwU4CFg8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a binary array nums, you should delete one element from it. After deleting one element, return the size of the longest non-empty subarray containing only 1's in the resulting array. If no such subarray exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a binary array nums where each element is either 0 or 1.
+- **Example:** `nums = [1, 0, 1, 1, 0]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- nums[i] is either 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the size of the longest contiguous subarray containing only 1's after deleting one element. If no such subarray exists, return 0.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The array will contain at least one element.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To maximize the length of contiguous 1's after deleting one element, we will use a sliding window approach to count the maximum subarray of 1's with at most one zero.
+
+- Initialize two pointers, `i` and `j`, for the sliding window.
+- Count the zeros in the window and ensure there is at most one zero.
+- If there is more than one zero, shrink the window from the left.
+- Track the maximum length of the window that contains at most one zero.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums contains only 0's and 1's.
+- There will be at least one element in the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1,0,1,1,0]`  \
+  **Explanation:** After deleting the element at index 1, the array becomes [1, 1, 1, 0]. The longest subarray with only 1's is of length 4.
+
+- **Input:** `nums = [0,1,1,0,1,1,1,0]`  \
+  **Explanation:** After deleting the element at index 3, the array becomes [0, 1, 1, 1, 1, 1, 0]. The longest subarray of 1's is of length 5.
+
+- **Input:** `nums = [1, 1, 1]`  \
+  **Explanation:** After deleting one element, the remaining array has two 1's, so the longest subarray is of length 2.
+
+{{< dots >}}
+## Approach 🚀
+The sliding window approach allows us to efficiently find the longest subarray of 1's with one element deleted. By maintaining a window with at most one 0, we can compute the result in linear time.
+
+### Initial Thoughts 💭
+- We need to handle cases where the array has no 0's or the array contains only one element.
+- By keeping track of the zeros within the window, we can adjust the window size to maximize the length of 1's.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array is not a valid input as per the constraints.
+- For large arrays, the solution must handle up to 10^5 elements efficiently.
+- If the array contains only one element, after deleting it, the result will be 0.
+- The solution must handle all edge cases efficiently, especially when there is a single zero or when the array contains only 1's.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int longestSubarray(vector<int>& nums) {
     
-    int longestSubarray(vector<int>& nums) {
+    int ans = 0;
+    
+    int n = nums.size();
+    
+    int k = 1;
+    
+    int j = 0;
+    for(int i = 0; i < n; i++) {
+        if(nums[i] == 0) k--;
         
-        int ans = 0;
-        
-        int n = nums.size();
-        
-        int k = 1;
-        
-        int j = 0;
-        for(int i = 0; i < n; i++) {
-            if(nums[i] == 0) k--;
-            
-            while(k < 0) {
-                if(nums[j] == 0)
-                    k++;
-                j++;
-            }
-            ans = max(ans, i - j);
+        while(k < 0) {
+            if(nums[j] == 0)
+                k++;
+            j++;
         }
-        
-        /*
-        i - j mean one elment will be cut from [j, i] closed interval
-        what k does is, make that element a zero.
-        */
-
-        return ans;
+        ans = max(ans, i - j);
     }
-};
-{{< /highlight >}}
----
+    
+    /*
+    i - j mean one element will be cut from [j, i] closed interval
+    what k does is, make that element a zero.
+    */
 
-### Problem Statement
-
-The problem is to find the length of the longest subarray in a binary array (composed of `0`s and `1`s) after removing **at most one `0`**. The goal is to return the maximum length of contiguous `1`s that can be achieved by removing a single `0` from the array.
-
-### Approach
-
-To solve this problem, we can use a sliding window technique. The idea is to maintain a window that keeps track of the number of `0`s in the current subarray. By allowing at most one `0` in the window, we can adjust the left pointer of the window whenever we exceed this limit. Here’s a step-by-step breakdown of the approach:
-
-1. **Initialize Pointers and Variables**: Use two pointers (`i` for the current end of the window and `j` for the start of the window) and a variable `k` to track the number of `0`s in the current window.
-  
-2. **Expand the Window**: As we iterate through the array with the right pointer `i`, if we encounter a `0`, we decrement `k`.
-
-3. **Shrink the Window**: If `k` becomes less than `0`, it means there are more than one `0`s in the current window, so we need to increment the left pointer `j` until we have at most one `0`.
-
-4. **Calculate Maximum Length**: Throughout the process, keep track of the maximum length of the window that can be formed.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int longestSubarray(vector<int>& nums) {
+    return ans;
+}
 ```
-This begins the declaration of the `Solution` class and its method `longestSubarray`, which takes a vector of integers as input.
 
-#### Step 1: Initialize Variables
+The `longestSubarray` function finds the length of the longest subarray with at most one zero. It uses a sliding window approach, adjusting the window's size dynamically based on the value of `k`.
 
-```cpp
-        int ans = 0;
-        int n = nums.size();
-        int k = 1;
-        int j = 0;
-```
-- `ans`: This variable will hold the maximum length of the desired subarray.
-- `n`: The size of the input array `nums`.
-- `k`: Set to `1`, representing the maximum number of `0`s allowed in the window.
-- `j`: This pointer will represent the start of the current subarray window.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int longestSubarray(vector<int>& nums) {
+	```
+	The function `longestSubarray` takes a vector of integers `nums` as input and returns the length of the longest subarray containing at most one zero.
 
-#### Step 2: Iterate Over the Array
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize `ans` to 0. This variable will store the length of the longest subarray with at most one zero.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-```
-- A for loop begins, iterating through the array with `i` representing the current end of the window.
+3. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Get the size of the input vector `nums` and store it in `n`.
 
-#### Step 3: Manage the Window Size
+4. **Variable Initialization**
+	```cpp
+	    int k = 1;
+	```
+	Initialize `k` to 1, representing the maximum allowed number of zeros in the subarray.
 
-```cpp
-            if(nums[i] == 0) k--;
-```
-- If the current element `nums[i]` is `0`, decrement `k`. This indicates we have encountered a `0` and are now allowing one fewer `0` in the current window.
+5. **Variable Initialization**
+	```cpp
+	    int j = 0;
+	```
+	Initialize `j` to 0, which will be the left boundary of the sliding window.
 
-#### Step 4: Adjust the Left Pointer
+6. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop from `i = 0` to `i = n - 1` to iterate through the elements of the vector `nums`.
 
-```cpp
-            while(k < 0) {
-                if(nums[j] == 0)
-                    k++;
-                j++;
-            }
-```
-- The inner while loop checks if `k` is less than `0`, which means we have encountered more than one `0`. If this is the case, we increment `j` to shrink the window from the left. If the element at `j` is `0`, we increment `k` to indicate that we are removing a `0` from the window.
+7. **Zero Detection**
+	```cpp
+	        if(nums[i] == 0) k--;
+	```
+	If the current element `nums[i]` is zero, decrement `k` to track the number of zeros in the current window.
 
-#### Step 5: Calculate the Length of the Current Window
+8. **Inner Loop**
+	```cpp
+	        while(k < 0) {
+	```
+	If `k` is negative (indicating more than one zero in the window), enter a while loop to shrink the window.
 
-```cpp
-            ans = max(ans, i - j);
-```
-- After adjusting the pointers, calculate the current length of the valid window (`i - j`) and update `ans` with the maximum value found so far.
+9. **Adjust Left Boundary**
+	```cpp
+	            if(nums[j] == 0)
+	```
+	If `nums[j]` is zero, increment `k` because we are removing a zero from the window.
 
-### Complexity
+10. **Adjust Left Boundary**
+	```cpp
+	                k++;
+	```
+	Increment `k` because a zero is being removed from the left side of the window.
 
-#### Time Complexity
-- The time complexity of this algorithm is **O(n)**, where `n` is the length of the input array. The algorithm processes each element of the array at most twice (once by `i` and once by `j`).
+11. **Adjust Left Boundary**
+	```cpp
+	            j++;
+	```
+	Move the left boundary `j` to the right, effectively shrinking the window.
 
-#### Space Complexity
-- The space complexity is **O(1)**, as we are using a fixed amount of extra space for variables regardless of the input size.
+12. **Max Length Update**
+	```cpp
+	        ans = max(ans, i - j);
+	```
+	Update `ans` with the maximum length of the current valid subarray, which is the difference between the right boundary `i` and the left boundary `j`.
 
-### Conclusion
+13. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the value of `ans`, which represents the length of the longest subarray with at most one zero.
 
-This implementation provides an efficient way to determine the length of the longest contiguous subarray of `1`s that can be obtained by removing at most one `0`. The sliding window approach optimizes the search for valid subarrays, making it suitable for large input sizes.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-**Key Points**:
-- **Efficiency**: The O(n) time complexity ensures that the solution is efficient and scalable for large inputs.
-- **Clarity**: The sliding window method is intuitive and easy to follow, making the code more understandable.
-- **Edge Cases**: The implementation handles edge cases, such as arrays with all `1`s or arrays with only one `0`, effectively without additional checks.
+The time complexity is linear, O(n), since we only need a single pass through the array with a sliding window approach.
 
-Overall, this solution is an excellent example of how to apply sliding window techniques to solve problems related to contiguous subarrays, especially when constraints are placed on the elements within the window.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, O(1), since we only need a few variables for tracking the window and count of zeros.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/description/)
 

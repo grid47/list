@@ -14,115 +14,153 @@ img_src = ""
 youtube = "H8_hAPOW5UE"
 youtube_upload_date="2020-05-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/H8_hAPOW5UE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings `s1` and `s2` of the same length. You need to check if some permutation of `s1` can 'break' some permutation of `s2`, or vice-versa. A string `x` can break string `y` if for every character at position `i`, `x[i] >= y[i]` when sorted alphabetically.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings `s1` and `s2`, both containing only lowercase English letters.
+- **Example:** `s1 = 'cat', s2 = 'abc'`
+- **Constraints:**
+	- 1 <= s1.length == s2.length <= 10^5
+	- All strings consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkIfCanBreak(string s1, string s2) {
-        sort(s1.begin(), s1.end());
-        sort(s2.begin(), s2.end());
-        int n = s1.size();
-        string a = s1 < s2 ? s2: s1;
-        string b = s1 < s2 ? s1: s2;   
-        // cout << a << "\n"<< b;
-        for(int i = 0; i < n; i++) {
-            if(a[i] < b[i]) return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean indicating whether one permutation of `s1` can break some permutation of `s2`, or vice-versa.
+- **Example:** `true`
+- **Constraints:**
+	- The output is 'true' if one permutation can break the other, otherwise 'false'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if one permutation of `s1` can break some permutation of `s2` or vice-versa.
+
+- Step 1: Sort both strings `s1` and `s2`.
+- Step 2: Compare the characters of the sorted strings. If at any position, a character from `s1` is less than the corresponding character from `s2`, return 'false'.
+- Step 3: If no such position is found, return 'true'.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both input strings are valid and consist of lowercase English letters.
+- The strings are of equal length.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s1 = 'cat', s2 = 'abc'`  \
+  **Explanation:** After sorting both strings, we have 'act' and 'abc'. Since each character in 'act' is greater than or equal to the corresponding character in 'abc', 's1' can break 's2'.
+
+- **Input:** `s1 = 'dog', s2 = 'god'`  \
+  **Explanation:** After sorting both strings, we have 'dgo' and 'dgo'. Since the strings are identical, neither can break the other.
+
+{{< dots >}}
+## Approach 🚀
+We will compare the sorted versions of both strings to determine if one string can break the other. Sorting ensures that we are comparing the lexicographically ordered characters.
+
+### Initial Thoughts 💭
+- Sorting the strings ensures that we can directly compare their characters in lexicographical order.
+- By comparing sorted strings character by character, we can determine if one can break the other.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the problem guarantees non-empty strings.
+- Ensure the solution handles strings up to the length of 10^5 efficiently.
+- Consider cases where the strings are identical (e.g., 'abc' and 'abc').
+- The solution should be efficient enough to handle strings of length up to 10^5.
+{{< dots >}}
+## Code 💻
+```cpp
+bool checkIfCanBreak(string s1, string s2) {
+    sort(s1.begin(), s1.end());
+    sort(s2.begin(), s2.end());
+    int n = s1.size();
+    string a = s1 < s2 ? s2: s1;
+    string b = s1 < s2 ? s1: s2;   
+    // cout << a << "\n"<< b;
+    for(int i = 0; i < n; i++) {
+        if(a[i] < b[i]) return false;
     }
-};
-{{< /highlight >}}
----
+    return true;
+}
+```
 
-### Problem Statement
+The `checkIfCanBreak` function checks if one string can break another string based on lexicographical order after sorting. The function returns `true` if every character in the sorted version of one string is greater than or equal to the corresponding character in the sorted version of the other string.
 
-The problem involves determining whether one string can "break" another string based on their characters. A string `s1` can break another string `s2` if for every character in `s2`, there is a corresponding character in `s1` that is greater than or equal to it. Alternatively, `s2` can break `s1` if the opposite holds true. The goal is to check if either string can break the other.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkIfCanBreak(string s1, string s2) {
+	```
+	Defines the function `checkIfCanBreak`, which takes two strings `s1` and `s2` as input and determines whether one can break the other.
 
-### Approach
+2. **Sorting**
+	```cpp
+	    sort(s1.begin(), s1.end());
+	```
+	Sorts the string `s1` in lexicographical order.
 
-The solution involves the following steps:
+3. **Sorting**
+	```cpp
+	    sort(s2.begin(), s2.end());
+	```
+	Sorts the string `s2` in lexicographical order.
 
-1. **Sorting the Strings**: By sorting both strings, we can easily compare the characters in order to check if one string can break the other.
-2. **Comparison of Characters**: After sorting, compare the characters of both strings. If at any position the character from the first string is less than the corresponding character from the second string, then the first string cannot break the second.
-3. **Return Result**: If one of the strings meets the criteria to break the other, return `true`. If neither can break the other, return `false`.
+4. **Variable Initialization**
+	```cpp
+	    int n = s1.size();
+	```
+	Stores the size of string `s1` in the variable `n`. Both strings are assumed to have the same length.
 
-### Code Breakdown (Step by Step)
+5. **String Comparison**
+	```cpp
+	    string a = s1 < s2 ? s2: s1;
+	```
+	Assigns `a` to be the lexicographically larger of `s1` and `s2`.
 
-Let’s break down the provided code for a detailed understanding:
+6. **String Comparison**
+	```cpp
+	    string b = s1 < s2 ? s1: s2;   
+	```
+	Assigns `b` to be the lexicographically smaller of `s1` and `s2`.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+7. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins a loop that iterates over each character of the strings `a` and `b`.
 
-   - The code defines a class named `Solution`, which will contain the method for solving the problem.
+8. **Conditional Check**
+	```cpp
+	        if(a[i] < b[i]) return false;
+	```
+	Compares the characters at the same position in `a` and `b`. If any character in `a` is less than the corresponding character in `b`, returns `false`.
 
-2. **Function Declaration**:
-   ```cpp
-   bool checkIfCanBreak(string s1, string s2) {
-   ```
+9. **Return Statement**
+	```cpp
+	    return true;
+	```
+	If the loop completes without returning `false`, it means that every character in `a` is greater than or equal to the corresponding character in `b`, so it returns `true`.
 
-   - This method takes two strings, `s1` and `s2`, as parameters and returns a boolean value indicating whether one string can break the other.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) for sorting the strings.
+- **Average Case:** O(n log n) for sorting and O(n) for the comparison.
+- **Worst Case:** O(n log n) due to the sorting step.
 
-3. **Sorting the Strings**:
-   ```cpp
-   sort(s1.begin(), s1.end());
-   sort(s2.begin(), s2.end());
-   ```
+The time complexity is dominated by the sorting step.
 
-   - Both strings are sorted in lexicographical order using the `sort` function from the C++ Standard Library. This step ensures that characters are in ascending order, making comparison straightforward.
+### Space Complexity 💾
+- **Best Case:** O(n), as we need to store the sorted versions of the strings.
+- **Worst Case:** O(n) for storing the sorted strings.
 
-4. **Determine the Longer String**:
-   ```cpp
-   int n = s1.size();
-   string a = s1 < s2 ? s2 : s1;
-   string b = s1 < s2 ? s1 : s2; 
-   ```
+The space complexity is linear, as we are storing the sorted versions of both strings.
 
-   - The size of the strings is stored in `n`. We then assign the lexicographically larger string to `a` and the smaller one to `b`. This is done to simplify the comparison process, ensuring that we always check if `a` can break `b`.
+**Happy Coding! 🎉**
 
-5. **Character Comparison Loop**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       if(a[i] < b[i]) return false;
-   }
-   ```
-
-   - The loop iterates through each character of the sorted strings. If at any index `i`, the character in `a` is less than the character in `b`, it means that `a` cannot break `b`, and the function returns `false`.
-
-6. **Return True**:
-   ```cpp
-   return true;
-   ```
-
-   - If the loop completes without returning `false`, it indicates that `a` can break `b`, and thus the function returns `true`.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is dominated by the sorting step, which is \(O(n \log n)\), where \(n\) is the length of the longest string. The subsequent comparison is linear, \(O(n)\), but sorting is the most time-consuming operation in this solution.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) for the sort in-place, but if we consider the sorted strings, it could be considered \(O(n)\) due to the additional storage used for sorting. However, the input strings are sorted in place, so the auxiliary space usage is minimal.
-
-### Conclusion
-
-The provided solution is efficient and straightforward for the problem of checking whether one string can break another. The method leverages sorting to facilitate character comparisons, allowing for a clean and effective implementation.
-
-#### Key Takeaways:
-
-1. **Sorting for Simplification**: By sorting both strings, we turn the problem of comparing characters into a simple linear scan, which makes the solution easier to understand and implement.
-   
-2. **Lexicographical Comparison**: The approach demonstrates the utility of lexicographical ordering in string comparisons, enabling quick assessments of relative character values.
-
-3. **Efficiency Considerations**: The algorithm's time complexity is acceptable for typical string lengths, making it practical for use in various applications.
-
-Overall, this code serves as a solid example of leveraging sorting and comparative logic to solve string manipulation problems, emphasizing both clarity and efficiency in its design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-string-can-break-another-string/description/)
 

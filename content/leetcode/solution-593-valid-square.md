@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "5ErP0_vpzvI"
 youtube_upload_date="2020-07-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/5ErP0_vpzvI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,93 +28,118 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/5ErP0_vpzvI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given four points in a 2D space, determine if these points form a valid square. The points are not necessarily provided in any particular order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of four points, each represented as an array of two integers [x, y], where x and y are the coordinates of the point in the 2D plane.
+- **Example:** `Input: p1 = [0, 0], p2 = [1, 1], p3 = [1, 0], p4 = [0, 1]`
+- **Constraints:**
+	- Each point is represented by two integers, xi and yi, where -10^4 ≤ xi, yi ≤ 10^4.
+	- The input will always contain exactly four points.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int d(vector<int> p, vector<int> q) {
-        return (p[0] - q[0])*(p[0] - q[0]) + (p[1] - q[1]) * (p[1] - q[1]);
-    }
-    bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
-        set<int> s({d(p1, p2), d(p2, p3), d(p3, p4), d(p4, p1), d(p1, p3), d(p2, p4)});
-        return !s.count(0) && s.size() == 2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return 'true' if the four points form a valid square, otherwise return 'false'.
+- **Example:** `Output: 'true'`
+- **Constraints:**
+	- The output is a boolean value indicating whether the points form a valid square.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To check if the four given points form a valid square by ensuring equal side lengths and 90-degree angles.
 
-In this problem, we are given the coordinates of four points in a 2D plane. The task is to determine whether these points can form a valid square. A valid square is one where:
-1. All four sides are of equal length.
-2. The diagonals are of equal length, and they intersect at right angles (i.e., they are perpendicular).
+- Calculate the pairwise distances between the four points.
+- Check if there are two unique distances: one for the sides (which should appear four times) and one for the diagonals (which should appear twice).
+- Ensure that the diagonals are longer than the sides, as they should be the hypotenuses of the right triangles formed by the sides.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain four valid points, and the points are not guaranteed to be ordered in any way.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,1]`  \
+  **Explanation:** These points form a square as they have equal sides and the diagonals are equal.
 
-The input consists of four points, each represented by a vector of two integers indicating the x and y coordinates of the points. The goal is to return `true` if the points form a valid square, and `false` otherwise.
+- **Input:** `Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,12]`  \
+  **Explanation:** These points do not form a square as the sides are not equal.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+To determine whether the points form a valid square, we compute the distances between each pair of points and check for two unique distances: one for the sides and one for the diagonals.
 
-To solve this problem, we can break it down into the following steps:
-
-1. **Distance Calculation**: For a valid square, we need to calculate the distances between the points. This includes the distances between adjacent points (sides of the square) and the distances between opposite points (diagonals). 
-   
-2. **Set of Distances**: We can utilize a set to store the distances. A valid square will have exactly two unique distances in the set:
-   - The shorter distance will correspond to the sides of the square.
-   - The longer distance will correspond to the diagonals of the square.
-   
-3. **Conditions for Valid Square**:
-   - The distance between two points cannot be zero (i.e., no two points can coincide).
-   - There should only be two distinct distances in the set: one for the sides and one for the diagonals.
-   - The diagonals should be longer than the sides.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Distance Calculation
+### Initial Thoughts 💭
+- A square has equal side lengths and equal diagonals.
+- We can calculate the squared Euclidean distance between pairs of points.
+- If there are two distinct distances: one for sides (appearing four times) and one for diagonals (appearing twice), then the points form a square.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain four points, so empty inputs are not a concern.
+- The input coordinates are within a bounded range, so large inputs are not an issue.
+- Points with coordinates on axes or forming degenerate squares (e.g., all points on a straight line) need to be handled.
+- The points are not guaranteed to be in any specific order.
+{{< dots >}}
+## Code 💻
 ```cpp
 int d(vector<int> p, vector<int> q) {
-    return (p[0] - q[0]) * (p[0] - q[0]) + (p[1] - q[1]) * (p[1] - q[1]);
+    return (p[0] - q[0])*(p[0] - q[0]) + (p[1] - q[1]) * (p[1] - q[1]);
 }
-```
-- The function `d` computes the squared distance between two points `p` and `q` in the 2D plane. The squared distance formula is:
-  \[
-  \text{distance}^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2
-  \]
-  This avoids calculating the square root, which is computationally expensive and unnecessary for this problem since we are only interested in comparing distances.
-  
-- This function is called multiple times in the solution to calculate the distance between pairs of points.
-
-#### Step 2: Valid Square Check
-```cpp
 bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
     set<int> s({d(p1, p2), d(p2, p3), d(p3, p4), d(p4, p1), d(p1, p3), d(p2, p4)});
     return !s.count(0) && s.size() == 2;
 }
 ```
-- In this step, the function `validSquare` checks if the four points form a valid square:
-  - We compute the distances between all pairs of points: `d(p1, p2)`, `d(p2, p3)`, `d(p3, p4)`, `d(p4, p1)`, `d(p1, p3)`, and `d(p2, p4)`. These represent the distances between adjacent points (sides) and opposite points (diagonals).
-  - These distances are stored in a `set<int> s`. A set automatically removes duplicates, ensuring that we only store unique distances. If there are no duplicate distances, the set will contain exactly two unique distances — one for the sides and one for the diagonals.
-  - The function then checks two conditions:
-    1. `!s.count(0)`: This ensures that there are no duplicate points, as a distance of `0` would indicate that two points coincide.
-    2. `s.size() == 2`: This ensures that there are exactly two unique distances — one for the sides and one for the diagonals.
 
-### Complexity
+This code defines a function to check if four points form a valid square. The helper function `d` computes the squared distance between two points, and the main function `validSquare` checks whether the set of distances between all pairs of points contains exactly two unique distances (the side length and the diagonal).
 
-#### Time Complexity:
-- **O(1)**: The time complexity is constant because we are always working with exactly six distances (the six unique pairs of points), regardless of the specific values of the points. The set operations (insertion and checking size) are constant time because the set has a maximum of two distinct distances.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int d(vector<int> p, vector<int> q) {
+	```
+	Declares the function `d` that calculates the squared Euclidean distance between two points, `p` and `q`, represented by 2D vectors.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because we are only storing six distances in the set, which does not grow with the size of the input. Therefore, the space complexity is fixed.
+2. **Distance Calculation**
+	```cpp
+	    return (p[0] - q[0])*(p[0] - q[0]) + (p[1] - q[1]) * (p[1] - q[1]);
+	```
+	Calculates the squared distance between the two points `p` and `q`. This avoids the need for a square root calculation, which is computationally expensive.
 
-### Conclusion
+3. **Function Declaration**
+	```cpp
+	bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
+	```
+	Declares the function `validSquare` that takes four 2D points as input and returns a boolean indicating whether they form a valid square.
 
-This solution provides an efficient way to determine whether four points can form a valid square. By leveraging the properties of distances between points and utilizing a set to store unique distances, the code is able to quickly and accurately check the conditions for a valid square. 
+4. **Set Initialization**
+	```cpp
+	    set<int> s({d(p1, p2), d(p2, p3), d(p3, p4), d(p4, p1), d(p1, p3), d(p2, p4)});
+	```
+	Creates a set `s` to store the squared distances between all pairs of points. Since sets do not allow duplicates, this step helps in identifying whether there are exactly two unique distances (the side length and diagonal).
 
-The key steps include:
-1. **Calculating the distances** between all pairs of points.
-2. **Storing the distances in a set** to ensure uniqueness and checking if there are exactly two distinct distances (sides and diagonals).
-3. **Checking for duplicate points** to ensure no two points overlap.
+5. **Condition Check**
+	```cpp
+	    return !s.count(0) && s.size() == 2;
+	```
+	Checks if there are no zero distances (which would indicate overlapping points) and if the set contains exactly two unique distances, which is a characteristic of a square.
 
-This approach ensures correctness while maintaining optimal time and space complexity, making it an ideal solution for this problem.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(6)
+
+Since there are always exactly four points, the time complexity is constant, O(6), due to the fixed number of pairwise comparisons.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, O(1), as we are only storing a fixed number of distances.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-square/description/)
 

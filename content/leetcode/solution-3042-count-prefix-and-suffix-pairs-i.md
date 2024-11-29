@@ -14,72 +14,65 @@ img_src = ""
 youtube = "wDPL8oM9rO8"
 youtube_upload_date="2024-02-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/wDPL8oM9rO8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed string array `words`. You need to determine the number of index pairs `(i, j)` such that `i < j` and the string at index `i` is both a prefix and a suffix of the string at index `j`. The function `isPrefixAndSuffix(str1, str2)` returns true if `str1` is both a prefix and a suffix of `str2`, and false otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array `words` of strings.
+- **Example:** `words = ["ab", "abab", "abc", "ababc"]`
+- **Constraints:**
+	- 1 <= words.length <= 50
+	- 1 <= words[i].length <= 10
+	- words[i] consists only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> wds;
-    
-    bool pre(int i, int j) {
-        int p = 0, q = 0;
-        if(wds[j].size() < wds[i].size()) return false;
-        while(p < wds[i].size() && q < wds[j].size() && wds[i][p] == wds[j][q]) {
-            p++; q++;
-        }
-        return p == wds[i].size();
-    }
-    
-    bool post(int i, int j) {
-        int p = wds[i].size() - 1, q = wds[j].size() - 1;
-        if(p > q) return false;
-        while(p >= 0  && q >= 0 && wds[i][p] == wds[j][q]) {
-            p--; q--;
-        }
-        return p == -1;
-    }    
-    
-    int countPrefixSuffixPairs(vector<string>& w) {
-        wds = w;
-        int n = w.size(), cnt = 0;
-        
-        for(int i = 0; i < n; i++)
-        for(int j = i + 1; j < n; j++)
-            if(pre(i, j) && post(i, j)) cnt++;
-        
-        return cnt;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the number of valid index pairs `(i, j)` where `i < j` and `isPrefixAndSuffix(words[i], words[j])` is true.
+- **Example:** `For the input words = ["ab", "abab", "abc", "ababc"], the output is 1.`
+- **Constraints:**
+	- Return 0 if no such pairs exist.
 
-### Problem Statement:
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The function should iterate through all pairs `(i, j)` with `i < j` and check whether the word at index `i` is both a prefix and a suffix of the word at index `j`. If this condition is met, the pair is valid, and the counter should be incremented.
 
-Given a list of strings, the task is to count the number of pairs of strings where one string is a prefix and a suffix of the other. Specifically, for each string pair `(i, j)`, check if:
-1. String `wds[i]` is a prefix of string `wds[j]`.
-2. String `wds[i]` is also a suffix of string `wds[j]`.
+- Iterate through all pairs of indices (i, j) with i < j.
+- For each pair, check if the word at index i is a prefix and suffix of the word at index j.
+- If both conditions are true, increment the counter.
+- Finally, return the count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input contains only lowercase English letters.
+- Each word can be a valid prefix and suffix for another word in the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ["ab", "abab", "abc", "ababc"]`  \
+  **Explanation:** In this case, the only valid pair is i = 0 and j = 1, because 'ab' is a prefix and suffix of 'abab'. The result is 1.
 
-The goal is to return the count of such pairs.
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through all pairs of indices (i, j) with i < j and check if the string at index i is both a prefix and suffix of the string at index j.
 
-### Approach:
-
-To solve this problem, we will need to implement two functions: `pre` and `post` that check if one string is a prefix or a suffix of another. Once these helper functions are defined, we will iterate through all pairs of strings in the list and use these functions to check the condition for each pair. If both conditions are satisfied, we increment the count.
-
-#### Key Concepts:
-- **Prefix**: A string `A` is a prefix of string `B` if the beginning of `B` matches the whole string `A`.
-- **Suffix**: A string `A` is a suffix of string `B` if the ending of `B` matches the whole string `A`.
-- **String Iteration**: To compare the prefix and suffix, we use simple iteration over the characters of the two strings.
-
-### Code Breakdown:
-
-#### Step 1: Define Helper Functions - `pre` and `post`
+### Initial Thoughts 💭
+- Prefix and suffix matching should be checked efficiently.
+- We can check if a string is a prefix of another string using substring matching, and similarly for suffix matching.
+{{< dots >}}
+### Edge Cases 🌐
+- If words array is empty, return 0.
+- For large inputs, ensure the algorithm performs efficiently.
+- If no valid pairs exist, return 0.
+- Handle cases with words of varying lengths efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
+vector<string> wds;
+
 bool pre(int i, int j) {
     int p = 0, q = 0;
     if(wds[j].size() < wds[i].size()) return false;
@@ -96,62 +89,162 @@ bool post(int i, int j) {
         p--; q--;
     }
     return p == -1;
-}
-```
+}    
 
-- **`pre(int i, int j)`**:
-    - This function checks if string `wds[i]` is a prefix of string `wds[j]`. 
-    - We start by comparing the characters of both strings from the beginning. If all characters of `wds[i]` match the starting characters of `wds[j]`, then `wds[i]` is a prefix of `wds[j]`.
-    - The function returns `true` if the prefix condition is satisfied (i.e., all characters of `wds[i]` match the start of `wds[j]`), and `false` otherwise.
-
-- **`post(int i, int j)`**:
-    - This function checks if string `wds[i]` is a suffix of string `wds[j]`. 
-    - We start by comparing the characters from the end of both strings. If all characters of `wds[i]` match the ending characters of `wds[j]`, then `wds[i]` is a suffix of `wds[j]`.
-    - The function returns `true` if the suffix condition is satisfied (i.e., all characters of `wds[i]` match the end of `wds[j]`), and `false` otherwise.
-
-#### Step 2: Main Function - `countPrefixSuffixPairs`
-```cpp
 int countPrefixSuffixPairs(vector<string>& w) {
     wds = w;
     int n = w.size(), cnt = 0;
     
     for(int i = 0; i < n; i++)
-        for(int j = i + 1; j < n; j++)
-            if(pre(i, j) && post(i, j)) cnt++;
+    for(int j = i + 1; j < n; j++)
+        if(pre(i, j) && post(i, j)) cnt++;
     
     return cnt;
+    
 }
 ```
 
-- **`countPrefixSuffixPairs(vector<string>& w)`**:
-    - The main function takes a vector of strings `wds` (renamed `w` in the argument) and counts the pairs of strings where one is both a prefix and a suffix of the other.
-    - We store the input vector `w` in a class variable `wds` to be used by the helper functions `pre` and `post`.
-    - We iterate over all pairs `(i, j)` where `i < j` to avoid counting the same pair twice.
-    - For each pair, we call both `pre(i, j)` and `post(i, j)` to check if `wds[i]` is both a prefix and a suffix of `wds[j]`. If both conditions are satisfied, we increment the count `cnt`.
-    - Finally, we return the count of valid pairs.
+This function counts pairs of strings in the input vector `w` where one string is a prefix of another and the other is a suffix of the first string.
 
-### Time Complexity:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<string> wds;
+	```
+	Declares a global vector `wds` to store the input list of strings for processing in the `pre` and `post` functions.
 
-1. **Prefix and Suffix Check (Functions `pre` and `post`)**:
-    - Both `pre` and `post` functions iterate over the characters of the strings involved in the comparison. In the worst case, each of these functions takes `O(m)` time, where `m` is the size of the larger string.
-    - Thus, the total time complexity for checking both the prefix and suffix conditions for a pair of strings is `O(m)`.
+2. **Function Definition**
+	```cpp
+	bool pre(int i, int j) {
+	```
+	Defines the helper function `pre` that checks if the string at index `i` is a prefix of the string at index `j`.
 
-2. **Double Loop Iteration**:
-    - The function iterates over all pairs of strings `(i, j)` where `i < j`. There are `O(n^2)` such pairs where `n` is the number of strings in the input.
-    - For each pair, the `pre` and `post` functions are called, which takes `O(m)` time for each pair, where `m` is the average length of the strings.
+3. **Variable Initialization**
+	```cpp
+	    int p = 0, q = 0;
+	```
+	Initializes two variables `p` and `q` to iterate over the characters of the strings at indices `i` and `j` respectively.
 
-3. **Overall Time Complexity**:
-    - The total time complexity is the product of the number of pairs `O(n^2)` and the time taken to check each pair `O(m)` (where `m` is the maximum length of a string).
-    - Therefore, the overall time complexity is **O(n^2 * m)**, where `n` is the number of strings and `m` is the length of the longest string in the list.
+4. **Size Check**
+	```cpp
+	    if(wds[j].size() < wds[i].size()) return false;
+	```
+	Checks if the string at index `j` is smaller than the string at index `i`. If true, returns `false` since the smaller string cannot be a prefix.
 
-### Space Complexity:
+5. **Prefix Check Loop**
+	```cpp
+	    while(p < wds[i].size() && q < wds[j].size() && wds[i][p] == wds[j][q]) {
+	```
+	Begins a loop that compares each character of both strings until either a mismatch is found or the end of one string is reached.
 
-- The space complexity is dominated by the input storage, which is `O(n * m)`, where `n` is the number of strings and `m` is the average length of each string.
-- Additionally, there are variables used for indexing and storing the results, but they do not significantly impact the space complexity.
+6. **Character Comparison**
+	```cpp
+	        p++; q++;
+	```
+	Increments the indices `p` and `q` to move to the next characters in both strings.
 
-### Conclusion:
+7. **Prefix Check Return**
+	```cpp
+	    return p == wds[i].size();
+	```
+	Returns `true` if the entire string at index `i` matches the beginning of the string at index `j` (i.e., string `i` is a prefix of string `j`).
 
-This solution efficiently solves the problem of counting pairs of strings that are both prefixes and suffixes of each other. The use of helper functions `pre` and `post` ensures that each pair is checked in linear time relative to the length of the strings. The overall time complexity is quadratic in the number of strings, making it feasible for moderately sized input lists. By optimizing string comparison with efficient iteration, this approach achieves correctness and performance while keeping the space usage manageable.
+8. **Function Definition**
+	```cpp
+	bool post(int i, int j) {
+	```
+	Defines the helper function `post` that checks if the string at index `i` is a suffix of the string at index `j`.
+
+9. **Variable Initialization**
+	```cpp
+	    int p = wds[i].size() - 1, q = wds[j].size() - 1;
+	```
+	Initializes `p` and `q` to point to the last characters of the strings at indices `i` and `j`, respectively.
+
+10. **Size Check**
+	```cpp
+	    if(p > q) return false;
+	```
+	Checks if the string at index `i` is larger than the string at index `j`. If true, returns `false` since the larger string cannot be a suffix.
+
+11. **Suffix Check Loop**
+	```cpp
+	    while(p >= 0  && q >= 0 && wds[i][p] == wds[j][q]) {
+	```
+	Begins a loop that compares each character of both strings from the end until either a mismatch is found or the beginning of one string is reached.
+
+12. **Character Comparison**
+	```cpp
+	        p--; q--;
+	```
+	Decrements the indices `p` and `q` to move to the previous characters in both strings.
+
+13. **Suffix Check Return**
+	```cpp
+	    return p == -1;
+	```
+	Returns `true` if the entire string at index `i` matches the end of the string at index `j` (i.e., string `i` is a suffix of string `j`).
+
+14. **Function Definition**
+	```cpp
+	int countPrefixSuffixPairs(vector<string>& w) {
+	```
+	Defines the function `countPrefixSuffixPairs` that counts how many pairs of strings in the input vector `w` satisfy the prefix-suffix conditions.
+
+15. **Copy Input List**
+	```cpp
+	    wds = w;
+	```
+	Copies the input vector `w` to the global `wds` for further processing.
+
+16. **Variable Initialization**
+	```cpp
+	    int n = w.size(), cnt = 0;
+	```
+	Initializes `n` to the size of the input vector `w` and `cnt` to count the valid prefix-suffix pairs.
+
+17. **Nested Loops**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Begins the outer loop to iterate over each string `i` in the input vector `w`.
+
+18. **Inner Loop**
+	```cpp
+	    for(int j = i + 1; j < n; j++)
+	```
+	Begins the inner loop to iterate over each string `j` that comes after string `i` in the input vector `w`.
+
+19. **Check Prefix-Suffix Pair**
+	```cpp
+	        if(pre(i, j) && post(i, j)) cnt++;
+	```
+	Checks if the strings `i` and `j` form a valid prefix-suffix pair. If true, increments the count `cnt`.
+
+20. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the final count of valid prefix-suffix pairs.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2 * m), where n is the number of words and m is the maximum length of a word.
+- **Average Case:** O(n^2 * m).
+- **Worst Case:** O(n^2 * m), where n is the number of words and m is the maximum length of a word.
+
+We check all pairs of words and compare their prefixes and suffixes.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as no extra space is required.
+- **Worst Case:** O(n), where n is the number of words, for storing the array.
+
+Space complexity is mainly determined by the space needed to store the input array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-prefix-and-suffix-pairs-i/description/)
 

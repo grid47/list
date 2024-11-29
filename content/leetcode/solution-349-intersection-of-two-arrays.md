@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "XxStWmfXJRs"
 youtube_upload_date="2020-01-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/XxStWmfXJRs/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,110 +28,141 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/XxStWmfXJRs/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique, and you may return the result in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integer arrays, nums1 and nums2. The arrays contain integer elements.
+- **Example:** `Input: nums1 = [3, 1, 4, 4], nums2 = [4, 3, 5]`
+- **Constraints:**
+	- 1 <= nums1.length, nums2.length <= 1000
+	- 0 <= nums1[i], nums2[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-        unordered_set<int> m(nums1.begin(), nums1.end());
-        vector<int> res;
-        for (auto a : nums2)
-            if (m.count(a)) {
-                res.push_back(a);
-                m.erase(a);
-            }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of unique integers representing the intersection of the two input arrays.
+- **Example:** `Output: [3, 4]`
+- **Constraints:**
+	- The output array must contain only unique elements.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to return the intersection of the two arrays as a list of unique elements.
 
-In this problem, you're asked to find the **intersection** of two integer arrays, `nums1` and `nums2`. The intersection should include only the unique elements that appear in both arrays. If an element appears multiple times in either array, it should only appear once in the result.
+- Create a set from the first array to ensure uniqueness and facilitate quick lookup.
+- Iterate through the second array and check if each element exists in the set from the first array.
+- If an element exists in both arrays, add it to the result array and remove it from the set to ensure uniqueness in the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both input arrays are non-empty, and they contain valid integers within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums1 = [3, 1, 4, 4], nums2 = [4, 3, 5]`  \
+  **Explanation:** The intersection of the two arrays is [3, 4] because both 3 and 4 appear in both arrays.
 
-For example:
-- If `nums1 = [1, 2, 2, 1]` and `nums2 = [2, 2]`, the intersection would be `[2]`.
+- **Input:** `Input: nums1 = [1, 3, 7, 8], nums2 = [9, 7, 3, 1]`  \
+  **Explanation:** The intersection of the two arrays is [1, 3, 7] because these elements appear in both arrays.
 
-Your task is to compute the intersection efficiently and return the result with only unique elements. Let's dive into the approach! 🌟
+- **Input:** `Input: nums1 = [2, 2, 1], nums2 = [2, 3]`  \
+  **Explanation:** The intersection of the two arrays is [2] because 2 is the only common element in both arrays.
 
----
+{{< dots >}}
+## Approach 🚀
+The approach involves converting one of the arrays into a set to ensure uniqueness and facilitate fast lookups. Then, we iterate through the second array to find common elements.
 
-### 🧠 Approach
-
-To efficiently solve this problem, we can break down the task into a few key steps:
-
-1. **Use a Set for One Array**: Convert one of the arrays (`nums1`) into an unordered set. This allows us to perform fast lookups when checking for common elements from `nums2`. 🎯
-   
-2. **Check for Common Elements**: Iterate through the elements of `nums2`. For each element, check if it exists in the set. If it does, it means the element is in both arrays. 💡
-
-3. **Ensure Uniqueness**: Once we find a common element, we remove it from the set. This ensures no duplicate elements are added to the result. 🎉
-
-4. **Return the Result**: Finally, we return the result vector containing the intersection of the two arrays. 🏁
-
-This approach guarantees that we’re checking each element only once, ensuring optimal performance.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s go through the code together! 👩‍💻
-
-#### Step 1: Convert `nums1` to an Unordered Set
+### Initial Thoughts 💭
+- Using a set for the first array will allow for efficient checking of elements in the second array.
+- By iterating over the second array, we can check each element's presence in the first array using the set and ensure uniqueness in the result.
+{{< dots >}}
+### Edge Cases 🌐
+- If either nums1 or nums2 is empty, the result should be an empty array.
+- Ensure that the solution efficiently handles large arrays with sizes up to 1000.
+- Handle arrays with no common elements by returning an empty array.
+- The algorithm should work efficiently with arrays up to the maximum constraint of 1000 elements.
+{{< dots >}}
+## Code 💻
 ```cpp
-unordered_set<int> m(nums1.begin(), nums1.end());
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+    unordered_set<int> m(nums1.begin(), nums1.end());
+    vector<int> res;
+    for (auto a : nums2)
+        if (m.count(a)) {
+            res.push_back(a);
+            m.erase(a);
+        }
+    return res;
+}
 ```
-- Here, we initialize an unordered set `m` containing all unique elements from `nums1`. This set will let us perform fast **O(1)** average time complexity lookups.
 
-#### Step 2: Iterate Through `nums2` and Find Common Elements
-```cpp
-for (auto a : nums2)
-    if (m.count(a)) {
-        res.push_back(a);
-        m.erase(a);
-    }
-```
-- We loop through each element `a` in `nums2` and check if it exists in `m` using `m.count(a)`. If it does, we add `a` to the result vector `res`.
-- After adding `a` to the result, we erase it from `m` to ensure it’s not added again. This guarantees uniqueness! 🌟
+This function returns the intersection of two integer arrays, `nums1` and `nums2`. It uses an unordered set to efficiently find common elements, ensuring each element appears only once in the result.
 
-#### Step 3: Return the Result
-```cpp
-return res;
-```
-- Finally, we return the vector `res`, which now contains all the unique common elements between `nums1` and `nums2`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+	```
+	The function `intersection` takes two integer vectors `nums1` and `nums2` as input and returns a vector containing their intersection, i.e., elements common to both vectors.
 
----
+2. **Set Initialization**
+	```cpp
+	    unordered_set<int> m(nums1.begin(), nums1.end());
+	```
+	Create an unordered set `m` initialized with the elements from `nums1`. This allows for efficient O(1) lookups when checking for element existence.
 
-### 📈 Complexity Analysis
+3. **Result Vector Declaration**
+	```cpp
+	    vector<int> res;
+	```
+	Declare an empty vector `res` to store the elements that are part of the intersection of `nums1` and `nums2`.
 
-Let’s evaluate the time and space complexity of our solution to make sure it’s as efficient as possible.
+4. **Loop Over Second Array**
+	```cpp
+	    for (auto a : nums2)
+	```
+	Iterate through each element `a` in the second array `nums2`.
 
-#### Time Complexity:
-- **O(n + m)**, where `n` is the length of `nums1` and `m` is the length of `nums2`.
-  - **O(n)** for inserting all elements of `nums1` into the unordered set `m`.
-  - **O(m)** for iterating through `nums2` and checking for each element’s presence in the set (each check takes **O(1)** on average).
-  - Therefore, the overall time complexity is **O(n + m)**, which is optimal!
+5. **Check if Element Exists in Set**
+	```cpp
+	        if (m.count(a)) {
+	```
+	For each element `a` in `nums2`, check if it exists in the set `m` (i.e., if it is also in `nums1`).
 
-#### Space Complexity:
-- **O(n)**, where `n` is the number of unique elements in `nums1`. This is because we’re using an unordered set to store the elements of `nums1`. In the worst case, all elements of `nums1` are unique, and the set will contain `n` elements.
-- We also use a result vector `res` to store the intersection, but its space usage is bounded by **O(min(n, m))**, which is negligible compared to the set’s space.
+6. **Add to Result**
+	```cpp
+	            res.push_back(a);
+	```
+	If the element `a` exists in `m`, add it to the result vector `res`.
 
----
+7. **Erase from Set**
+	```cpp
+	            m.erase(a);
+	```
+	Remove the element `a` from the set `m` to ensure that each element is added to the result only once, preventing duplicates.
 
-### 🏁 Conclusion
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	After iterating through `nums2`, return the vector `res` which now contains the intersection of `nums1` and `nums2`.
 
-We've successfully solved the problem of finding the **intersection** of two integer arrays! 🎉
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-#### Key Takeaways:
-- **Time Complexity**: **O(n + m)**, where `n` and `m` are the sizes of `nums1` and `nums2`.
-- **Space Complexity**: **O(n)**, where `n` is the number of unique elements in `nums1`.
-- The solution is time-efficient and space-efficient, making it perfect for handling large arrays.
-- By using an unordered set, we ensure that the solution works optimally with constant time lookups.
+The solution iterates through both arrays once, where n and m are the lengths of nums1 and nums2, respectively.
 
-This approach is straightforward, easy to implement, and guarantees that we get the result with minimal overhead. 🚀
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-Keep practicing and applying this approach to other problems that involve set intersections — you'll be a pro in no time! 💪
+The space complexity is O(n) because we store the elements of nums1 in a set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/intersection-of-two-arrays/description/)
 

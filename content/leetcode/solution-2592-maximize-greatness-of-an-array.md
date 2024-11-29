@@ -14,128 +14,169 @@ img_src = ""
 youtube = "p1njSkWtg2U"
 youtube_upload_date="2023-03-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/p1njSkWtg2U/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums`. You can permute (rearrange) the elements of `nums` into a new array `perm`. Define the greatness of `nums` as the number of indices `0 <= i < nums.length` where `perm[i] > nums[i]`. Your task is to return the maximum possible greatness you can achieve after permuting `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer array `nums` representing the array of integers.
+- **Example:** `For example, `nums = [3, 1, 4, 2]`.`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximizeGreatness(vector<int>& nums) {
-        // 1 1 1 2 3 3 5
-        sort(nums.begin(), nums.end());
-        int n = nums.size();
-        map<int, int> pos;
-        pos[-1] = -1;
-        for(int i = 0; i < n; i++) {
-            auto it = upper_bound(nums.begin() + pos[i - 1] + 1, nums.end(), nums[i]);
-            if(it == nums.end()) break;
-            int idx = it - nums.begin();
-            pos[i] = idx;
-            if(idx == n - 1) break;
-        }
-        return pos.size() - 1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the maximum possible greatness you can achieve after permuting `nums`.
+- **Example:** `For `nums = [3, 1, 4, 2]`, the output is `3`.`
+- **Constraints:**
+	- The output is an integer value representing the maximum greatness.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to permute the array `nums` to maximize the number of indices where `perm[i] > nums[i]`.
+
+- 1. Sort the array `nums` to create a sorted version.
+- 2. Use a greedy approach to find the maximum number of indices where `perm[i] > nums[i]` by pairing elements from the sorted array with the original array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least one integer, and no element will exceed 10^9 in value.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `nums = [3, 1, 4, 2]``  \
+  **Explanation:** By rearranging `nums` into `perm = [4, 2, 3, 1]`, the greatness is 3 because at indices `0, 1, 2`, `perm[i] > nums[i]`. This is the optimal rearrangement.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the array `nums` and then using a greedy approach to match the elements from the sorted array with the original array to maximize the number of times `perm[i] > nums[i]`.
+
+### Initial Thoughts 💭
+- To maximize greatness, we want to pair smaller values in `nums` with larger values from a sorted version of `nums`.
+- Sorting the array and then using a greedy approach to match elements can help achieve the maximum greatness.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is guaranteed to have at least one element, so there will be no empty inputs.
+- The solution must handle large inputs efficiently, with the array size up to 10^5.
+- If all elements in `nums` are the same, the result will be zero because no element can be greater than another.
+- The input constraints ensure that the number of elements will be manageable within the time limits.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximizeGreatness(vector<int>& nums) {
+    // 1 1 1 2 3 3 5
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    map<int, int> pos;
+    pos[-1] = -1;
+    for(int i = 0; i < n; i++) {
+        auto it = upper_bound(nums.begin() + pos[i - 1] + 1, nums.end(), nums[i]);
+        if(it == nums.end()) break;
+        int idx = it - nums.begin();
+        pos[i] = idx;
+        if(idx == n - 1) break;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to maximize the greatness of an array by rearranging its elements. Specifically, for a given array, the greatness is defined as the number of pairs of indices `(i, j)` such that `i < j` and `nums[i] < nums[j]` after rearranging the array. Our task is to determine how to arrange the elements in such a way that the number of valid pairs is maximized.
-
-### Approach
-
-To maximize the number of valid pairs, we need to rearrange the elements such that for each index `i`, the value `nums[i]` is less than some `nums[j]` where `j > i`. The key observation is that sorting the array first allows us to compare each element against its potential future positions in the array. By keeping track of the positions in the sorted array, we can determine how many valid pairs we can form while maintaining a running check on the order of the elements.
-
-The approach works by iterating through the sorted array and using a `map` to track the positions where elements can be placed, ensuring that we always try to place each element in a position where it forms the maximum number of valid pairs.
-
-### Code Breakdown
-
-#### Step 1: Sorting the Array
-```cpp
-sort(nums.begin(), nums.end());
-```
-- The first step is to sort the given array. Sorting the array helps in efficiently identifying valid pairs because if `nums[i] < nums[j]` and `i < j`, then after sorting the array, this relationship will naturally hold. Sorting ensures that each element has potential greater elements available later in the array, which is crucial for maximizing the number of valid pairs.
-
-#### Step 2: Initializing the Tracking Map
-```cpp
-map<int, int> pos;
-pos[-1] = -1;
-```
-- A `map` named `pos` is initialized. This map is used to keep track of the valid indices in the sorted array. The map stores the index of the last placed element, and its key represents the position in the original array from where the element was placed. The initialization of `pos[-1] = -1` ensures that the first comparison will always succeed. It represents the last placed index before the first element in the sorted array.
-
-#### Step 3: Iterating Over the Sorted Array
-```cpp
-for(int i = 0; i < n; i++) {
-    auto it = upper_bound(nums.begin() + pos[i - 1] + 1, nums.end(), nums[i]);
-    if(it == nums.end()) break;
-    int idx = it - nums.begin();
-    pos[i] = idx;
-    if(idx == n - 1) break;
+    return pos.size() - 1;
 }
 ```
-- **Iteration**: The loop iterates through each element `i` of the sorted array `nums`. For each element, the function attempts to find the first element greater than `nums[i]` that comes after the position of the previously placed element.
-- **Upper Bound Search**: `upper_bound(nums.begin() + pos[i - 1] + 1, nums.end(), nums[i])` is used to find the first element that is greater than `nums[i]`. The `upper_bound` function performs a binary search and returns an iterator pointing to the first element in the range that is strictly greater than `nums[i]`. This ensures that we are always considering valid pairs.
-- **Break Condition**: If no valid element is found (`it == nums.end()`), we break out of the loop because further pairs cannot be formed.
-- **Position Update**: If a valid element is found, we calculate the index `idx` of this element and store it in the map `pos`. The map keeps track of the positions where elements are placed so that the next elements can be compared against the correct positions.
-- **Termination Condition**: If we reach the last element (`idx == n - 1`), we stop, as we have exhausted all valid pairs that can be formed.
 
-#### Step 4: Return the Result
-```cpp
-return pos.size() - 1;
-```
-- After the loop, the size of the map `pos` represents the number of valid elements that have been placed in positions where they can form valid pairs. We subtract 1 from this value because the initial entry `pos[-1] = -1` does not count as a valid placement.
+This function calculates the maximum possible greatness of a sequence by rearranging its elements. The algorithm sorts the input array and uses a map to track the positions of elements that can be added to the result, ensuring that each new element is greater than the previous.
 
-### Example Walkthrough
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximizeGreatness(vector<int>& nums) {
+	```
+	Defines the `maximizeGreatness` function that takes a vector of integers, `nums`, as an argument.
 
-#### Input:
-```cpp
-vector<int> nums = {1, 3, 5, 2, 1, 3};
-```
-1. **Sort the Array**: The first step is to sort the array.
-   - Sorted array: `[1, 1, 2, 3, 3, 5]`
-   
-2. **Initialization**:
-   - `pos[-1] = -1`: Initializing the map to track positions.
-   
-3. **First Iteration (i = 0)**:
-   - We look for the first element greater than `nums[0] = 1`. Using `upper_bound`, we find that the first element greater than 1 is `2`, at index 2.
-   - Update map: `pos[0] = 2`.
+2. **Sort Array**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the input array `nums` in non-decreasing order.
 
-4. **Second Iteration (i = 1)**:
-   - We look for the first element greater than `nums[1] = 1` starting from index 3. The first element greater than 1 is `2`, at index 2.
-   - Since the element is already placed at index 2, we continue to the next index and find the next available greater element at index 3 (`3`).
-   - Update map: `pos[1] = 3`.
+3. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	Calculates the size of the sorted array and stores it in variable `n`.
 
-5. **Continue the Iteration**:
-   - We repeat the process for each element, trying to place it in a valid position where it forms the maximum number of valid pairs. Eventually, the valid placements are determined for each element.
+4. **Map Initialization**
+	```cpp
+	    map<int, int> pos;
+	```
+	Declares a map `pos` to track the positions of elements that are being considered for the result.
 
-6. **Final Result**:
-   - The final result, after processing all elements, is the size of the `pos` map minus 1, which represents the total number of valid placements.
+5. **Initial Value Assignment**
+	```cpp
+	    pos[-1] = -1;
+	```
+	Initializes the map `pos` with a value for `-1` key set to `-1`, which serves as the starting point for comparisons.
 
-#### Output:
-```cpp
-return 4;  // The maximum number of valid pairs is 4.
-```
+6. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop that iterates over each element in the sorted array `nums`.
 
-### Time Complexity
+7. **Upper Bound Search**
+	```cpp
+	        auto it = upper_bound(nums.begin() + pos[i - 1] + 1, nums.end(), nums[i]);
+	```
+	Uses the `upper_bound` function to find the first position in the array where the current element `nums[i]` can be inserted while maintaining sorted order.
 
-- **Time Complexity**: \(O(n \log n)\)
-  - The sorting of the array takes \(O(n \log n)\).
-  - For each element, we perform a binary search (`upper_bound`) which takes \(O(\log n)\), and we do this for all \(n\) elements. Therefore, the overall time complexity is \(O(n \log n)\).
+8. **Break Condition**
+	```cpp
+	        if(it == nums.end()) break;
+	```
+	Breaks the loop if no valid position is found for the current element.
 
-### Space Complexity
+9. **Index Calculation**
+	```cpp
+	        int idx = it - nums.begin();
+	```
+	Calculates the index `idx` of the found position where the current element can be inserted.
 
-- **Space Complexity**: \(O(n)\)
-  - The map `pos` stores the positions of each element, requiring \(O(n)\) space. Additionally, the sorted array requires \(O(n)\) space.
+10. **Map Update**
+	```cpp
+	        pos[i] = idx;
+	```
+	Updates the `pos` map with the index `idx` for the current element at position `i`.
 
-### Conclusion
+11. **End Condition Check**
+	```cpp
+	        if(idx == n - 1) break;
+	```
+	Ends the loop early if the last element of the array is reached.
 
-This solution efficiently maximizes the number of valid pairs by sorting the array and using a binary search approach to find the optimal placements of elements. By leveraging the properties of sorted arrays and maintaining a map to track valid positions, the solution ensures that the greatest number of valid pairs is formed. The algorithm runs in \(O(n \log n)\) time, making it suitable for handling larger inputs within acceptable time limits.
+12. **Return Statement**
+	```cpp
+	    return pos.size() - 1;
+	```
+	Returns the size of the `pos` map minus one, which represents the maximum greatness of the sequence.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which is O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the additional space used for sorting the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-greatness-of-an-array/description/)
 

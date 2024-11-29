@@ -14,129 +14,135 @@ img_src = ""
 youtube = "DEMUS-1tq-0"
 youtube_upload_date="2021-08-21"
 youtube_thumbnail="https://i.ytimg.com/vi/DEMUS-1tq-0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a special typewriter with lowercase English letters ('a' to 'z') arranged in a circle. A pointer initially starts at the character 'a'. Each second, you may perform one of two operations: move the pointer one character clockwise or counterclockwise, or type the character the pointer is currently on. Your task is to determine the minimum number of seconds needed to type the given string `word`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `word` of length `n`, where 1 <= n <= 100, consisting of lowercase English letters.
+- **Example:** `word = 'xyz'`
+- **Constraints:**
+	- 1 <= word.length <= 100
+	- word consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minTimeToType(string word) {
-        int res = word.size(), point = 'a';
-        for (auto ch : word) {
-            res += min(abs(ch - point), 26 - abs(point - ch));
-            point = ch;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer, which represents the minimum number of seconds required to type the entire word.
+- **Example:** `Output: 12`
+- **Constraints:**
+	- The result should be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the minimum number of seconds to type out the characters in the word.
+
+- Step 1: Initialize a variable to keep track of the current pointer position, starting at 'a'.
+- Step 2: For each character in the word, calculate the time required to move the pointer to the target character (either clockwise or counterclockwise).
+- Step 3: Accumulate the time spent on each move and typing action to get the total time.
+- Step 4: Return the total time as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The word consists only of lowercase letters from 'a' to 'z'.
+- There are no special characters or spaces in the input word.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: word = 'abc'`  \
+  **Explanation:** Starting with the pointer at 'a', the steps would be: Type 'a' (1 second), move to 'b' (1 second), type 'b' (1 second), move to 'c' (1 second), and type 'c' (1 second). The total time is 5 seconds.
+
+- **Input:** `Input: word = 'bza'`  \
+  **Explanation:** Starting with the pointer at 'a', the steps would be: Move to 'b' (1 second), type 'b' (1 second), move counterclockwise to 'z' (2 seconds), type 'z' (1 second), move clockwise to 'a' (1 second), and type 'a' (1 second). The total time is 7 seconds.
+
+- **Input:** `Input: word = 'zjpc'`  \
+  **Explanation:** Starting with the pointer at 'a', the steps would be: Move counterclockwise to 'z' (1 second), type 'z' (1 second), move clockwise to 'j' (10 seconds), type 'j' (1 second), move to 'p' (6 seconds), type 'p' (1 second), move counterclockwise to 'c' (13 seconds), and type 'c' (1 second). The total time is 34 seconds.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we calculate the minimal time required to move the pointer to each character in the word. The key observation is to find the shortest distance between the current pointer position and the target character, either clockwise or counterclockwise, and add the time to type that character.
+
+### Initial Thoughts 💭
+- The problem can be approached by calculating the minimal distance between two characters, considering the circular nature of the alphabet.
+- A direct approach involves iterating through the string and updating the pointer position as we compute the minimum time to reach each successive character.
+{{< dots >}}
+### Edge Cases 🌐
+- The word will always have at least one character, as per the constraints.
+- The solution must efficiently handle strings of up to 100 characters.
+- If the word consists of the same repeated character (e.g., 'aaaa'), the time will be minimized as no movement is required after the first character.
+- The alphabet is circular, so ensure that the minimal distance between characters is always correctly calculated.
+{{< dots >}}
+## Code 💻
+```cpp
+int minTimeToType(string word) {
+    int res = word.size(), point = 'a';
+    for (auto ch : word) {
+        res += min(abs(ch - point), 26 - abs(point - ch));
+        point = ch;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand involves calculating the minimum time required to type a given string `word` using a circular keyboard. The keyboard consists of the 26 lowercase English letters arranged in a circular fashion from 'a' to 'z'. The typing process starts from the letter 'a', and the time taken to move from one letter to another is based on the shortest distance between them, either moving forward or backward around the keyboard.
-
-The goal is to determine the total time needed to type out the entire string, taking into consideration the time it takes to move from one character to the next and the time it takes to press each character.
-
-### Approach
-
-To solve this problem, we will follow these steps:
-
-1. **Initialization**: Start at the letter 'a' and initialize the total time to the length of the word (since each character takes one unit of time to press).
-
-2. **Iterate Through Characters**: For each character in the string, calculate the time taken to move from the current character (starting from 'a') to the next character in the string.
-
-3. **Distance Calculation**: The distance between two characters can be determined in two ways:
-   - Direct distance: The absolute difference between the ASCII values of the two characters.
-   - Circular distance: The distance when considering the circular arrangement of the keyboard, which can be calculated as `26 - direct_distance`.
-
-4. **Update Current Position**: After calculating the movement time to the current character, update the position to this character and continue to the next character.
-
-5. **Return Total Time**: After iterating through all characters, return the total time calculated.
-
-### Code Breakdown (Step by Step)
-
-Here’s the code with detailed explanations:
-
-```cpp
-class Solution {
-public:
-    int minTimeToType(string word) {
-```
-This line begins the definition of the `minTimeToType` function, which takes a string `word` as input and returns the minimum time to type it.
-
-```cpp
-        int res = word.size(), point = 'a';
-```
-We initialize `res` to the length of the word, as each character takes one unit of time to type. The variable `point` keeps track of the current position on the keyboard, starting at 'a'.
-
-```cpp
-        for (auto ch : word) {
-```
-We loop through each character `ch` in the input `word`.
-
-```cpp
-            res += min(abs(ch - point), 26 - abs(point - ch));
-```
-Here, we calculate the minimum time required to move from the current `point` to the character `ch`. We use the `abs` function to get the direct distance between the two characters and determine the circular distance using `26 - abs(point - ch)`. We add the smaller of the two distances to `res`.
-
-```cpp
-            point = ch;
-```
-After calculating the distance, we update `point` to the current character `ch`, so that we can calculate the distance to the next character correctly.
-
-```cpp
-        }
-        return res;
-    }
-};
-```
-Finally, we return the total time stored in `res` after processing all characters.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the length of the input string. We loop through each character exactly once.
-
-- **Space Complexity**: The space complexity is \(O(1)\) since we only use a fixed number of variables for calculations regardless of the input size.
-
-### Conclusion
-
-This solution efficiently calculates the minimum time required to type a word on a circular keyboard by utilizing the properties of distance calculation in a circular arrangement. By carefully considering both direct and circular distances between characters, we ensure that we account for the fastest possible movement between characters.
-
-### Key Features
-
-1. **Efficiency**: The algorithm runs in linear time relative to the length of the input string, making it suitable for longer strings.
-
-2. **Simplicity**: The approach leverages basic arithmetic operations and is easy to understand, making it accessible for those new to algorithm design.
-
-3. **Circular Logic**: The method effectively handles the circular nature of the keyboard without any complex data structures, keeping the solution clean and straightforward.
-
-### Example Usage
-
-Here’s how to use the `minTimeToType` function:
-
-```cpp
-Solution sol;
-string word = "abc";
-int result = sol.minTimeToType(word);
-cout << "Minimum time to type: " << result << endl; // Output: Minimum time to type: 5
+    return res;
+}
 ```
 
-In this example, the output will indicate the minimum time needed to type the word "abc".
+This code computes the minimum time required to type a word, assuming each key press takes a fixed amount of time and the typing is done on a circular keyboard.
 
-### Potential Improvements and Variations
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minTimeToType(string word) {
+	```
+	This function calculates the minimum time to type a given word on a circular keyboard. It takes the word as input and returns the total time required.
 
-1. **Keyboard Layout Customization**: The function could be extended to accept different keyboard layouts or more characters if needed.
+2. **Variable Initialization**
+	```cpp
+	    int res = word.size(), point = 'a';
+	```
+	The variable 'res' is initialized to the length of the word, representing the base time to type the word. The variable 'point' keeps track of the current position on the keyboard (starting from 'a').
 
-2. **Optimization for Large Inputs**: If the input size is known to be very large, additional optimizations or pre-computation strategies could be employed to improve performance.
+3. **Loop**
+	```cpp
+	    for (auto ch : word) {
+	```
+	This loop iterates over each character in the word to calculate the time required to move from the current character to the next.
 
-3. **Dynamic Programming Approach**: For more complex variations of the problem, such as typing multiple words or handling different typing speeds, a dynamic programming approach could be considered.
+4. **Min Time Calculation**
+	```cpp
+	        res += min(abs(ch - point), 26 - abs(point - ch));
+	```
+	This line computes the minimum time to move from the current 'point' to the character 'ch'. It calculates both the direct and circular distances between the characters and adds the minimum of these two to 'res'.
 
-This solution not only provides an effective way to calculate typing time on a circular keyboard but also serves as a foundation for exploring related problems in computer science and algorithm design.
+5. **Update Point**
+	```cpp
+	        point = ch;
+	```
+	After typing the current character, 'point' is updated to the current character 'ch' as the new starting point for the next character.
+
+6. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the total time accumulated in 'res', which represents the minimum time required to type the word.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where `n` is the length of the word.
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+For each character in the word, we calculate the minimal movement to the target character, making the time complexity O(n), where `n` is the length of the word.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we only use a few variables to track the current pointer and total time.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-type-word-using-special-typewriter/description/)
 

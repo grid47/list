@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "fIxck3tlId4"
 youtube_upload_date="2024-09-26"
 youtube_thumbnail="https://i.ytimg.com/vi/fIxck3tlId4/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,129 +28,145 @@ youtube_thumbnail="https://i.ytimg.com/vi/fIxck3tlId4/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are implementing a calendar application where you can add events. Each event has a start time and end time represented by a half-open interval [start, end). An event can only be added if it does not overlap with existing events in the calendar. Return true if the event can be booked successfully, and false if it causes a conflict.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of method calls with parameters. The first call is always initializing the MyCalendar object, followed by calls to the book method.
+- **Example:** `Input: ["MyCalendar", "book", "book", "book"] [[], [10, 20], [15, 25], [20, 30]]`
+- **Constraints:**
+	- 0 <= start < end <= 10^9
+	- At most 1000 calls will be made to book.
 
-{{< highlight cpp >}}
-class MyCalendar {
-    map<int, int> mp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output will be an array of results for each call. For the MyCalendar initialization, the result will be null, and for each book method call, the result will be a boolean indicating whether the event was successfully booked or not.
+- **Example:** `Output: [null, true, false, true]`
+- **Constraints:**
+	- For each call to book, return true if the event can be booked, false otherwise.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to implement a calendar that checks for overlapping events and returns whether a new event can be added without causing a conflict.
+
+- 1. Create a map or structure to store the events, with start times as the key.
+- 2. For each new event, check if it overlaps with any existing event.
+- 3. If no overlap is found, add the event to the calendar and return true.
+- 4. If overlap is found, return false and do not add the event.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input start and end times are integers, and the events are well-formed.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["MyCalendar", "book", "book", "book"] [[], [10, 20], [15, 25], [20, 30]]`  \
+  **Explanation:** In the first example, the first event is successfully booked as no previous events exist. The second event cannot be booked as it overlaps with the first event. The third event is successfully booked since it does not overlap with the first event (ends at 20).
+
+{{< dots >}}
+## Approach 🚀
+The approach involves maintaining a data structure to track events and efficiently checking for overlaps when booking a new event.
+
+### Initial Thoughts 💭
+- We need to efficiently store and check for overlapping intervals.
+- Using a map structure will help track the intervals and quickly check for any conflicts.
+{{< dots >}}
+### Edge Cases 🌐
+- If no events have been booked yet, any new event can be booked.
+- Ensure the solution handles up to 1000 booking attempts efficiently.
+- Consider cases where the start and end times are very close, or the events have minimal overlap.
+- The solution must be able to handle start and end times within the range of [0, 10^9].
+{{< dots >}}
+## Code 💻
+```cpp
 public:
-    MyCalendar() {
-        
-    }
+MyCalendar() {
     
-    bool book(int start, int end) {
-        auto nxt = mp.upper_bound(start);
-        if (nxt != mp.end() && (*nxt).second < end) {
-            return false;
-        }
-        mp[end] = start;
-        return true;
+}
+
+bool book(int start, int end) {
+    auto nxt = mp.upper_bound(start);
+    if (nxt != mp.end() && (*nxt).second < end) {
+        return false;
     }
+    mp[end] = start;
+    return true;
+}
 };
 
 /**
  * Your MyCalendar object will be instantiated and called as such:
  * MyCalendar* obj = new MyCalendar();
  * bool param_1 = obj->book(start,end);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are tasked with implementing a calendar system that allows us to book events. Each event is defined by a start and end time, and we need to ensure that no two events overlap. The objective is to design a calendar system where we can efficiently check if a new event can be scheduled and, if so, add it to the calendar.
-
-### Approach
-
-The key challenge is to efficiently check if a new event overlaps with any previously booked event. We can achieve this by using a **map (or balanced binary search tree)** to store the end times as the keys and the start times as the values. This allows for efficient lookups and insertion operations.
-
-#### Steps:
-
-1. **Initialization**: 
-   - We maintain a `map<int, int> mp` where the keys represent the end time of booked events, and the values represent the corresponding start time of those events. This ensures that the events are stored in chronological order based on their end times.
-   
-2. **Booking an Event**:
-   - For each new event, we check if there is any existing event that overlaps with it. We do this by looking for the first event whose start time is after the new event's start time using `upper_bound(start)` function on the map. This gives us an iterator pointing to the first event that starts after the proposed start time of the new event.
-   - If such an event exists, we then check if the end time of this event is before the proposed end time of the new event. If it is, then the events overlap, and we return `false` to indicate that the booking is not possible.
-   - If no overlap is found, we can safely add the new event to the calendar by inserting it into the map with its end time as the key.
-
-3. **Return Value**:
-   - The `book` function returns `true` if the event was successfully booked, otherwise, it returns `false` if the event overlaps with an already existing one.
-
-This approach allows for efficient insertion and overlap checking by leveraging the properties of the `map` (balanced tree structure) that ensures logarithmic time complexity for both operations.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Constructor `MyCalendar`**
-
-```cpp
-MyCalendar() {
-    // Constructor initializes the calendar system
-}
-```
-- The constructor initializes an empty `map<int, int> mp`, which will be used to store events.
-  
-#### 2. **Booking Function `book`**
-
-```cpp
-bool book(int start, int end) {
-    // Find the first event that starts after the proposed start time
-    auto nxt = mp.upper_bound(start);
-    
-    // Check if the next event starts before the current event ends (overlap check)
-    if (nxt != mp.end() && (*nxt).second < end) {
-        return false;  // If overlap exists, return false
-    }
-    
-    // If no overlap, insert the event into the map
-    mp[end] = start;
-    return true;  // Booking was successful
-}
-```
-- **`auto nxt = mp.upper_bound(start)`**: Finds the first event whose start time is greater than `start`. The `upper_bound` function returns an iterator pointing to the first element whose key is greater than `start`.
-- **Overlap check**: We then check if the `nxt` event starts before the proposed event's end time. If it does, it means there is an overlap, and we return `false`.
-- **Booking**: If no overlap is found, we add the new event to the `map` with `end` as the key and `start` as the value, indicating that this event has been booked.
-- **Return `true`**: If the event is successfully booked, we return `true`.
-
-#### 3. **Helper Functions (Upper Bound and Insert)**
-The `upper_bound` function is provided by the map to perform a binary search on the keys. It efficiently finds the first element that is greater than the specified start time.
-
-```cpp
-auto nxt = mp.upper_bound(start);
 ```
 
-This allows us to avoid scanning through the entire map and efficiently check for overlaps. The map ensures that all keys (end times) are stored in sorted order, allowing us to perform binary search in **O(log n)** time complexity.
+This is the implementation of the MyCalendar class which supports booking time intervals. The method 'book' ensures that the new booking does not overlap with any existing bookings.
 
-#### 4. **`MyCalendar` Object Usage**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Access Modifier**
+	```cpp
+	public:
+	```
+	Defines the access level for the members that follow, making them accessible to other parts of the program.
 
-```cpp
-MyCalendar* obj = new MyCalendar();
-bool param_1 = obj->book(start, end);
-```
-- **Instantiating the calendar**: An object `obj` of type `MyCalendar` is created.
-- **Booking an event**: The `book` function is called with the start and end times of the new event. The result (`true` or `false`) is stored in `param_1`.
+2. **Constructor**
+	```cpp
+	MyCalendar() {
+	```
+	Constructor for the MyCalendar class. Initializes the calendar object.
 
-### Complexity Analysis
+3. **Method Definition**
+	```cpp
+	bool book(int start, int end) {
+	```
+	Defines the 'book' method which attempts to schedule a new booking from 'start' to 'end'.
 
-#### Time Complexity:
-- **`book` function**: The primary operations in the `book` function are:
-  - **Finding the next event**: `upper_bound(start)` takes **O(log n)** time where `n` is the number of events booked so far. This operation performs a binary search in the map to find the correct position.
-  - **Insertion into the map**: Inserting a new element into the `map` also takes **O(log n)** time due to the balanced tree structure of the map.
-  - Overall, the time complexity for the `book` function is **O(log n)**.
+4. **Variable Declaration**
+	```cpp
+	    auto nxt = mp.upper_bound(start);
+	```
+	Uses 'upper_bound' to find the first event in 'mp' that starts after the 'start' time.
 
-#### Space Complexity:
-- The space complexity is determined by the size of the `map` that stores the events. In the worst case, when all events are booked without overlap, the map will store `n` events. Therefore, the space complexity is **O(n)**, where `n` is the number of events booked.
+5. **Conditional Check**
+	```cpp
+	    if (nxt != mp.end() && (*nxt).second < end) {
+	```
+	Checks if there is an existing booking that overlaps with the new booking.
 
-### Conclusion
+6. **Return Statement**
+	```cpp
+	        return false;
+	```
+	If an overlap is detected, return false to indicate the booking was not successful.
 
-The `MyCalendar` class effectively solves the problem of booking events without overlap using a `map` to store the events and efficiently check for possible overlaps. The approach leverages the properties of a balanced tree to achieve efficient booking operations with logarithmic time complexity for both insertion and overlap checking. This makes the solution scalable and performant for large inputs.
+7. **Map Update**
+	```cpp
+	    mp[end] = start;
+	```
+	Records the new booking in the map 'mp', where 'end' is the key and 'start' is the value.
 
-#### Key Points:
-- **Efficient overlap checking**: By using a `map`, we can check for overlaps in **O(log n)** time.
-- **Balanced tree structure**: The `map` maintains the events in sorted order, making insertions and lookups efficient.
-- **Space and time efficiency**: The solution efficiently uses space and time resources, with complexities of **O(log n)** for each booking operation and **O(n)** space for storing events.
+8. **Return Statement**
+	```cpp
+	    return true;
+	```
+	If no overlap is found, return true to indicate the booking was successful.
 
-This design is optimal for scenarios where frequent event bookings and overlap checks are needed. It provides a clean and efficient way to manage a calendar with minimal overhead.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log N)
+- **Average Case:** O(log N)
+- **Worst Case:** O(N)
+
+In the worst case, we check all the events for conflicts, making the time complexity O(N), where N is the number of events. A more efficient approach could be implemented using a balanced tree or interval tree for quicker access.
+
+### Space Complexity 💾
+- **Best Case:** O(N)
+- **Worst Case:** O(N)
+
+The space complexity is O(N) as we store all booked events in the calendar.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/my-calendar-i/description/)
 

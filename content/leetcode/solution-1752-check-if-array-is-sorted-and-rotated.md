@@ -14,105 +14,155 @@ img_src = ""
 youtube = "uoEJ3FXr56w"
 youtube_upload_date="2021-02-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/uoEJ3FXr56w/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums`. The array is originally sorted in non-decreasing order and then rotated some number of positions (including zero). Your task is to determine if the array could have been rotated from a sorted array. Return `true` if the array can be rotated to become sorted, and `false` otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array `nums` of length `n`.
+- **Example:** `Input: nums = [4,5,6,7,1,2,3]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool check(vector<int>& nums) {
-        int n = nums.size();
-        int cnt = 0;
-        for(int i=1;i<n;i++){
-            if(nums[i-1]>nums[i]){
-                cnt++;
-            }
-        }
-        if(nums[n-1]>nums[0]){
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the array can be rotated to become sorted in non-decreasing order. Otherwise, return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The returned value will be either true or false.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if the array can be rotated to match a sorted sequence.
+
+- 1. Traverse the array from the first to the last element.
+- 2. Count how many times the array decreases (i.e., when `nums[i] > nums[i+1]`).
+- 3. If there is more than one decrease, the array cannot be a rotated sorted array, and return `false`.
+- 4. If there is zero or one decrease, return `true`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array can contain duplicate elements.
+- There is no need to handle edge cases for empty arrays as the length of `nums` is always at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3,4,5,1,2]`  \
+  **Explanation:** This array can be viewed as a rotation of [1,2,3,4,5]. Hence, the array can be rotated back into a sorted array, and the output is `true`.
+
+- **Input:** `Input: nums = [2,1,3,4]`  \
+  **Explanation:** This array cannot be rotated into a sorted array because there is a drop between `2` and `1` and it cannot be rotated to become sorted. Hence, the output is `false`.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by checking how many times the array decreases while traversing it. If there is at most one decrease, the array can be rotated into a sorted order.
+
+### Initial Thoughts 💭
+- We can check for decreases in the array and count how many times the order is violated.
+- If we encounter more than one decrease, the array cannot be rotated into a sorted form. We need to keep track of the number of decreases.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the array will have at least one element, so there will be no need to handle empty inputs.
+- For large inputs, the solution should efficiently handle arrays of up to 100 elements.
+- If all elements in the array are identical, the array is trivially sorted, so the result will be `true`.
+- Ensure the solution handles arrays where elements are repeated or where there are only small changes between consecutive elements.
+{{< dots >}}
+## Code 💻
+```cpp
+bool check(vector<int>& nums) {
+    int n = nums.size();
+    int cnt = 0;
+    for(int i=1;i<n;i++){
+        if(nums[i-1]>nums[i]){
             cnt++;
         }
-        return cnt<=1;
     }
-};
-{{< /highlight >}}
----
+    if(nums[n-1]>nums[0]){
+        cnt++;
+    }
+    return cnt<=1;
+}
+```
 
-### Problem Statement
+The function checks if the array can be sorted in non-decreasing order by at most one rotation.
 
-The problem at hand involves determining whether a given array of integers can be considered "sorted" in a circular manner. Specifically, we want to check if the array can be sorted in non-decreasing order by making at most one rotation. A rotation involves moving elements from the front of the array to the end, or vice versa. For instance, the array `[3, 4, 5, 1, 2]` can be viewed as a rotated version of `[1, 2, 3, 4, 5]`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool check(vector<int>& nums) {
+	```
+	Declares a function to check if the input array can be sorted by at most one rotation.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializes `n` to store the size of the input vector `nums`.
 
-To solve this problem, we will utilize the following approach:
+3. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes a counter `cnt` to track the number of discontinuities in the array.
 
-1. **Count Descending Pairs**: We will traverse through the array and count how many times an element is greater than the subsequent element. This will help us identify any 'breaks' in the sorted order.
+4. **Loop**
+	```cpp
+	    for(int i=1;i<n;i++){
+	```
+	Iterates through the array to check for descending pairs of elements.
 
-2. **Check Circular Condition**: Since the array is circular, we need to check if the last element is greater than the first element. If it is, we count that as an additional break.
+5. **Conditional Check**
+	```cpp
+	        if(nums[i-1]>nums[i]){
+	```
+	Checks if the current pair of elements violates the non-decreasing order.
 
-3. **Determine Validity**: If the total number of breaks (descents) is less than or equal to 1, then the array can be considered a rotated sorted array. If there are more than one breaks, the array cannot be sorted with a single rotation.
+6. **Increment**
+	```cpp
+	            cnt++;
+	```
+	Increments the counter if a discontinuity is found.
 
-### Code Breakdown (Step by Step)
+7. **Conditional Check**
+	```cpp
+	    if(nums[n-1]>nums[0]){
+	```
+	Checks if the last element is greater than the first, indicating a discontinuity across the circular boundary.
 
-Here’s a step-by-step breakdown of the implementation in the `check` function:
+8. **Increment**
+	```cpp
+	        cnt++;
+	```
+	Increments the counter if a discontinuity is found at the circular boundary.
 
-1. **Class Definition**: The function is encapsulated within a class named `Solution`.
+9. **Return Statement**
+	```cpp
+	    return cnt<=1;
+	```
+	Returns true if there is at most one discontinuity in the array.
 
-   ```cpp
-   class Solution {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n), as we scan through the array once.
+- **Worst Case:** O(n), as we still only need to scan the array once.
 
-2. **Public Method**: The `check` method takes a vector of integers as input and returns a boolean value indicating whether the array meets the criteria.
+The time complexity is linear, as we traverse the array only once.
 
-   ```cpp
-   public:
-       bool check(vector<int>& nums) {
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1), as no extra space is required.
+- **Worst Case:** O(1), as the algorithm uses a constant amount of extra space.
 
-3. **Initialization**: We determine the size of the array and initialize a counter for the number of descents.
+The space complexity is constant because we are only using a few variables to track the state of the array.
 
-   ```cpp
-   int n = nums.size();
-   int cnt = 0;
-   ```
+**Happy Coding! 🎉**
 
-4. **Iterate Through the Array**: We loop through the array, checking each pair of consecutive elements to see if a descent occurs (where the previous element is greater than the current element).
-
-   ```cpp
-   for(int i = 1; i < n; i++) {
-       if(nums[i-1] > nums[i]) {
-           cnt++;
-       }
-   }
-   ```
-
-5. **Check the Circular Condition**: After checking all pairs, we need to evaluate the relationship between the last and the first element to account for the circular nature of the array.
-
-   ```cpp
-   if(nums[n-1] > nums[0]) {
-       cnt++;
-   }
-   ```
-
-6. **Return Result**: Finally, we return whether the number of descents is less than or equal to one, indicating that the array can be sorted with at most one rotation.
-
-   ```cpp
-   return cnt <= 1;
-   }
-   ```
-
-### Complexity
-
-- **Time Complexity**: The overall time complexity of this solution is \(O(n)\), where \(n\) is the number of elements in the array. This is because we make a single pass through the array to count the descents.
-
-- **Space Complexity**: The space complexity is \(O(1)\) since we are using a constant amount of additional space for the counter and do not use any data structures that scale with the size of the input.
-
-### Conclusion
-
-In conclusion, this solution efficiently checks if an array can be sorted in a circular manner by utilizing a straightforward approach that counts the number of descending pairs. The use of a single traversal of the array ensures optimal performance, making this solution both effective and efficient. The algorithm handles edge cases effectively, such as when the array consists of all identical elements or is already sorted in a circular manner. Overall, this method provides a clear and concise way to determine the circular sorted condition of an array, making it a valuable technique in competitive programming and algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/)
 

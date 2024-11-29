@@ -14,99 +14,128 @@ img_src = ""
 youtube = "eAA1gS_2QwY"
 youtube_upload_date="2021-05-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/eAA1gS_2QwY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array nums, along with two integers target and start. Your task is to find an index i such that nums[i] == target, and the absolute difference between i and start is minimized. Return abs(i - start), where abs(x) is the absolute value of x.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums, an integer target, and an integer start.
+- **Example:** `[10, 20, 30, 40, 50], target = 40, start = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i] <= 10^4
+	- 0 <= start < nums.length
+	- target is in nums
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getMinDistance(vector<int>& nums, int target, int start) {
-    int res = INT_MAX;
-    for (int i = 0; i < nums.size() && res > abs(start - i); ++i)
-        if (nums[i] == target)
-            res = abs(start - i);
-    return res;
-}
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum absolute difference abs(i - start) for the index i where nums[i] == target.
+- **Example:** `1`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the index of target in nums that minimizes the absolute difference with the start index.
 
-The goal of the problem is to find the minimum distance from a given starting index to the closest occurrence of a specified target value in an array of integers. The function takes three parameters: an integer vector `nums`, an integer `target`, and an integer `start`. The task is to determine the minimum absolute distance between the index of the `target` in `nums` and the `start` index.
+- Iterate through the array to find all indices where nums[i] equals target.
+- Calculate the absolute difference between each index and the start index.
+- Return the minimum of these differences.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains at least one element.
+- The target value is guaranteed to be present in the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[10, 20, 30, 40, 50], target = 40, start = 2`  \
+  **Explanation:** The element 40 is located at index 3, and the minimum distance to the start index (2) is 1.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the array to find all indices where nums[i] equals target and then calculating the minimum distance between the indices and the start index.
 
-To solve the problem, we can follow a straightforward approach:
-
-1. **Initialization**: Begin by initializing a variable `res` to a large value (using `INT_MAX`) to keep track of the minimum distance found.
-
-2. **Iterate through the Array**: Use a loop to traverse each element in the array `nums`. For each index, check if the current element equals the `target`.
-
-3. **Calculate Distance**: If the current element is equal to the `target`, calculate the absolute distance between the current index and the `start` index. If this distance is smaller than the previously recorded minimum distance (`res`), update `res`.
-
-4. **Return the Result**: After checking all elements, return the minimum distance found.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Iterating through the array once is sufficient to find all occurrences of target.
+- By keeping track of the minimum distance while iterating, we can achieve an optimal solution.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will never be empty, as the input length is guaranteed to be at least 1.
+- Ensure that the algorithm handles arrays with the maximum length of 1000 efficiently.
+- Consider arrays where the target appears multiple times, or where the target is at the start or end of the array.
+- The approach needs to efficiently handle arrays of size up to 1000.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-```
-- We define a class `Solution` that contains the method we will use to find the minimum distance.
-
-```cpp
-    int getMinDistance(vector<int>& nums, int target, int start) {
-```
-- The method `getMinDistance` is defined, which takes three parameters: a vector of integers `nums`, an integer `target`, and an integer `start`.
-
-```cpp
-    int res = INT_MAX;
-```
-- We initialize a variable `res` to `INT_MAX`, which represents the maximum possible integer value. This is used to track the minimum distance encountered during the search.
-
-```cpp
-    for (int i = 0; i < nums.size() && res > abs(start - i); ++i)
-```
-- We use a `for` loop to iterate through each index `i` in the `nums` array. The loop continues as long as `i` is less than the size of `nums` and `res` is greater than the absolute distance between `start` and `i`. This ensures that we stop checking once we have found a distance smaller than the current value of `res`.
-
-```cpp
-        if (nums[i] == target)
-```
-- Inside the loop, we check if the current element `nums[i]` is equal to the `target`.
-
-```cpp
-            res = abs(start - i);
-```
-- If the condition is true, we calculate the absolute distance between `start` and `i` and update `res` with this value.
-
-```cpp
-    return res;
+int getMinDistance(vector<int>& nums, int target, int start) {
+int res = INT_MAX;
+for (int i = 0; i < nums.size() && res > abs(start - i); ++i)
+    if (nums[i] == target)
+        res = abs(start - i);
+return res;
 }
 ```
-- Finally, after checking all elements in the array, we return the minimum distance `res` found.
 
-### Complexity
+This function calculates the minimum distance between a target element in the `nums` array and the given starting index. It returns the minimum distance from the start index to the closest occurrence of the target value.
 
-- **Time Complexity**: 
-  - The time complexity of this solution is \( O(n) \), where \( n \) is the number of elements in the `nums` array. This is because we potentially need to check each element once.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int getMinDistance(vector<int>& nums, int target, int start) {
+	```
+	Defines the function `getMinDistance`, which takes a vector `nums`, a target value, and a start index, returning the minimum distance to the target.
 
-- **Space Complexity**: 
-  - The space complexity is \( O(1) \) since we are using a fixed amount of space for the variables, regardless of the size of the input.
+2. **Variable Initialization**
+	```cpp
+	int res = INT_MAX;
+	```
+	Initializes a variable `res` to store the minimum distance, starting with the maximum possible value, `INT_MAX`.
 
-### Conclusion
+3. **Loop Initialization**
+	```cpp
+	for (int i = 0; i < nums.size() && res > abs(start - i); ++i)
+	```
+	Begins a loop that iterates through the array `nums`. It also ensures that the loop continues until the distance becomes smaller than `res`.
 
-This code provides an efficient and simple solution to the problem of finding the minimum distance to a target value in an array. By leveraging a linear scan of the array, it effectively locates the closest occurrence of the target relative to the specified starting index.
+4. **Condition Check**
+	```cpp
+	    if (nums[i] == target)
+	```
+	Checks if the current element in the array `nums[i]` is equal to the `target`.
 
-The approach is intuitive and easy to implement, making it suitable for use in scenarios where one needs to quickly assess the proximity of a value in a list. The use of absolute distance calculation ensures that we consider both directions from the starting index, providing a complete picture of the minimum distance to the target.
+5. **Distance Update**
+	```cpp
+	        res = abs(start - i);
+	```
+	Updates the value of `res` with the absolute difference between the current index `i` and the start index, which represents the distance.
 
-This method can be particularly useful in various applications, such as search algorithms, data retrieval tasks, and scenarios where quick access to the closest matches in a dataset is required. Its simplicity and efficiency make it a valuable technique for software developers and data scientists alike.
+6. **Return Statement**
+	```cpp
+	return res;
+	```
+	Returns the minimum distance found during the iteration.
 
-In summary, the `getMinDistance` function efficiently determines the closest occurrence of a target value in an array while maintaining a clear and concise structure that promotes readability and maintainability. This makes it an ideal choice for competitive programming and algorithmic challenges where performance and clarity are paramount.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, O(n), where n is the length of the array, as we need to check each element in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, O(1), as we only need a few variables to track the minimum distance.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-distance-to-the-target-element/description/)
 

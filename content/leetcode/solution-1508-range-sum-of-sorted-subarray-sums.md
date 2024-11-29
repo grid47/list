@@ -14,136 +14,186 @@ img_src = ""
 youtube = "7XTGlO6b16A"
 youtube_upload_date="2024-08-04"
 youtube_thumbnail="https://i.ytimg.com/vi/7XTGlO6b16A/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of positive integers. Compute all possible subarray sums, sort them in non-decreasing order, and return the sum of elements from index left to right in the sorted array modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of size n, and you are asked to compute the sum of all non-empty subarrays, sort them, and then return a specific sum from the sorted array.
+- **Example:** `nums = [1, 2, 3, 4], n = 4, left = 1, right = 5`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i] <= 100
+	- 1 <= left <= right <= n * (n + 1) / 2
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mod = (int) 1e9 + 7;
-    int rangeSum(vector<int>& nums, int n, int left, int right) {
-        // binary search
-        vector<int> ans;
-        for(int i = 0; i < n; i++) {
-            int sum = 0;
-            for(int j = i; j < n; j++) {
-                sum = (sum + nums[j]) % mod;                
-                ans.push_back(sum);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer, which is the sum of the elements from index left to right in the sorted list of all subarray sums, modulo 10^9 + 7.
+- **Example:** `13`
+- **Constraints:**
+	- The output should be returned modulo 10^9 + 7.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the sum of all subarrays, sort them, and compute the sum of the elements within the specified range.
+
+- Step 1: Generate all subarray sums by iterating over all pairs of indices in the array.
+- Step 2: Sort the subarray sums in non-decreasing order.
+- Step 3: Return the sum of the elements from index left to right in the sorted list, modulo 10^9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always be non-empty and consist of positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3, 4], n = 4, left = 1, right = 5`  \
+  **Explanation:** After sorting the subarray sums, the sum of elements from index 1 to 5 is 13.
+
+- **Input:** `nums = [1, 2, 3, 4], n = 4, left = 3, right = 4`  \
+  **Explanation:** After sorting the subarray sums, the sum of elements from index 3 to 4 is 6.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to calculate all subarray sums, sort them, and then compute the sum of the elements in the sorted array for the specified range.
+
+### Initial Thoughts 💭
+- Sorting all subarray sums can be time-consuming, especially with large input sizes.
+- Efficiently compute the subarray sums and handle sorting to avoid excessive time complexity.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the result should be 0.
+- Ensure the solution can handle the maximum array size efficiently.
+- Consider cases where the array contains identical elements or where there are small subarrays.
+- The input array should respect the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int mod = (int) 1e9 + 7;
+int rangeSum(vector<int>& nums, int n, int left, int right) {
+    // binary search
+    vector<int> ans;
+    for(int i = 0; i < n; i++) {
+        int sum = 0;
+        for(int j = i; j < n; j++) {
+            sum = (sum + nums[j]) % mod;                
+            ans.push_back(sum);
         }
-        
-        sort(ans.begin(), ans.end());
-        
-        int res = 0;
-        for(int i = left - 1; i < right; i++)
-            res = (res + ans[i]) % mod;
-        
-        return res;
-        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to calculate the sum of subarray sums within a given range in a list of integers. Specifically, we need to find the sum of the smallest sums of the subarrays in sorted order between two indices, `left` and `right`, after sorting all the subarray sums. The final result should be returned modulo \(10^9 + 7\).
-
-### Approach
-
-To solve this problem, we can break it down into the following steps:
-
-1. **Generate All Subarray Sums**: For a given array of integers, compute the sums of all possible subarrays.
-
-2. **Store Subarray Sums**: Store these sums in a list.
-
-3. **Sort the Sums**: Once all sums are computed, sort the list of sums to arrange them in non-decreasing order.
-
-4. **Calculate the Final Sum**: Sum the values between the `left` and `right` indices in the sorted list and return this sum modulo \(10^9 + 7\).
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int mod = (int) 1e9 + 7;
+    
+    sort(ans.begin(), ans.end());
+    
+    int res = 0;
+    for(int i = left - 1; i < right; i++)
+        res = (res + ans[i]) % mod;
+    
+    return res;
+    
+}
 ```
-- We begin by defining a class `Solution` and declaring a member variable `mod`, which will be used to ensure our results remain within the bounds of standard integer sizes by applying the modulus operation with \(10^9 + 7\).
 
-```cpp
-    int rangeSum(vector<int>& nums, int n, int left, int right) {
-```
-- The method `rangeSum` is defined, which takes a vector of integers `nums`, its size `n`, and the range defined by `left` and `right`.
+This code defines the `rangeSum` function, which calculates the sum of subarrays within a specified range [left, right] after sorting all possible subarray sums. The sum is computed modulo 1e9 + 7 to prevent overflow.
 
-```cpp
-        vector<int> ans;
-```
-- We declare a vector `ans` to store the sums of all subarrays.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Constant Initialization**
+	```cpp
+	int mod = (int) 1e9 + 7;
+	```
+	Initializes the constant `mod` with the value 1e9 + 7, which is used to take the modulo of the sums to avoid overflow.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-            int sum = 0;
-```
-- We use a nested loop structure. The outer loop iterates through each starting index `i` of the subarray.
+2. **Function Definition**
+	```cpp
+	int rangeSum(vector<int>& nums, int n, int left, int right) {
+	```
+	Defines the `rangeSum` function which takes a vector `nums`, its size `n`, and two integers `left` and `right` to calculate the sum of subarrays between indices `left` and `right`.
 
-```cpp
-            for(int j = i; j < n; j++) {
-                sum = (sum + nums[j]) % mod;                
-                ans.push_back(sum);
-            }
-        }
-```
-- The inner loop iterates from the starting index `i` to the end of the array, maintaining a cumulative sum of the elements.
-- Each cumulative sum is added to the `ans` vector. The use of modulus ensures that the sum does not overflow during the addition.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	Initializes an empty vector `ans` that will store the sums of all possible subarrays.
 
-```cpp
-        sort(ans.begin(), ans.end());
-```
-- After generating all possible subarray sums, we sort the vector `ans` to prepare it for the next step.
+4. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop that iterates over all the elements of the input array `nums`.
 
-```cpp
-        int res = 0;
-```
-- We initialize a variable `res` to store the final result.
+5. **Variable Initialization**
+	```cpp
+	        int sum = 0;
+	```
+	Initializes a variable `sum` to 0, which will store the sum of the current subarray.
 
-```cpp
-        for(int i = left - 1; i < right; i++)
-            res = (res + ans[i]) % mod;
-```
-- We loop through the indices from `left - 1` to `right - 1` (since the problem statement uses 1-based indexing).
-- Each element in this range is added to `res`, applying the modulus operation to keep the result manageable.
+6. **Nested Loop**
+	```cpp
+	        for(int j = i; j < n; j++) {
+	```
+	Starts a nested loop that iterates through the elements of `nums`, starting from index `i`.
 
-```cpp
-        return res;
-    }
-};
-```
-- Finally, we return the result `res`.
+7. **Subarray Sum Calculation**
+	```cpp
+	            sum = (sum + nums[j]) % mod;                
+	```
+	Calculates the sum of the current subarray by adding `nums[j]` and taking the result modulo `mod`.
 
-### Complexity
+8. **Vector Update**
+	```cpp
+	            ans.push_back(sum);
+	```
+	Pushes the current subarray sum to the vector `ans`.
 
-#### Time Complexity
-- The time complexity of this approach is \(O(n^2 \log(n))\). 
-  - \(O(n^2)\) arises from generating all subarray sums, as we have a nested loop iterating through the array.
-  - Sorting the subarray sums takes \(O(m \log(m))\), where \(m\) is the number of subarrays (approximately \(\frac{n(n+1)}{2}\)).
-  
-#### Space Complexity
-- The space complexity is \(O(m)\), which is the space used to store the subarray sums in the `ans` vector.
+9. **Sorting**
+	```cpp
+	    sort(ans.begin(), ans.end());
+	```
+	Sorts the vector `ans` containing the subarray sums in ascending order.
 
-### Conclusion
+10. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes `res` to 0, which will store the sum of the subarray sums in the specified range.
 
-The solution effectively calculates the sum of subarray sums within a specified range by systematically generating all subarrays, storing their sums, and then processing these sums. 
+11. **Loop**
+	```cpp
+	    for(int i = left - 1; i < right; i++)
+	```
+	Iterates over the sorted vector `ans` from the `left - 1` to `right - 1` to select the required subarray sums.
 
-**Key Takeaways**:
-- **Cumulative Sums**: Using cumulative sums allows for efficient calculation of subarray sums by progressively adding elements.
-- **Sorting**: Sorting is crucial in obtaining the required order of sums, enabling the selection of specific ranges.
-- **Modular Arithmetic**: Applying the modulus operation prevents overflow and keeps the result within acceptable limits.
+12. **Sum Calculation**
+	```cpp
+	        res = (res + ans[i]) % mod;
+	```
+	Adds the current subarray sum to `res` and takes the result modulo `mod` to prevent overflow.
 
-This approach illustrates a fundamental strategy in algorithm design—breaking down a complex problem into manageable parts, utilizing nested loops for combinatorial generation, and leveraging sorting for efficient retrieval. The problem exemplifies common techniques applicable in various algorithmic contexts, particularly in competitive programming scenarios where efficiency and clarity are paramount.
+13. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the final result, which is the sum of subarray sums in the specified range [left, right], modulo 1e9 + 7.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2 log n)
+- **Average Case:** O(n^2 log n)
+- **Worst Case:** O(n^2 log n)
+
+The time complexity is dominated by the sorting step, which is O(n^2 log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) because we store all subarray sums.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/description/)
 

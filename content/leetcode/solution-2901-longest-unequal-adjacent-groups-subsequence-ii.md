@@ -14,141 +14,93 @@ img_src = ""
 youtube = "DJaTr0BnG1Q"
 youtube_upload_date="2023-10-14"
 youtube_thumbnail="https://i.ytimg.com/vi/DJaTr0BnG1Q/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of strings `words` and an array `groups` of equal length `n`. The task is to find the longest subsequence from `words` such that the corresponding elements in `groups` are unequal for adjacent elements in the subsequence, and the Hamming distance between consecutive strings in the subsequence is exactly 1. A string's Hamming distance with another string is the number of positions at which their characters differ. The subsequence should be returned as an array of strings in the order of the subsequence indices.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: a string array `words` and an integer array `groups`, both of length `n`. Each element in `words` is a distinct lowercase string, and each element in `groups` is a positive integer. The strings in `words` may be of different lengths.
+- **Example:** `words = ["hello", "hero", "hollow", "hi"], groups = [1, 2, 1, 3]`
+- **Constraints:**
+	- 1 <= n == words.length == groups.length <= 1000
+	- 1 <= words[i].length <= 10
+	- 1 <= groups[i] <= n
+	- words consists of distinct strings
+	- words[i] consists of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups) {
-        vector<vector<int>> dp(n);
-        for (int i = 0; i < n; i++) dp[i].push_back(i);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the longest subsequence of strings from `words` that satisfies the conditions. The subsequence should be ordered according to the selected indices in the subsequence.
+- **Example:** `For words = ["hello", "hero", "hollow", "hi"], groups = [1, 2, 1, 3], the output would be ["hello", "hollow"] because they satisfy both conditions.`
+- **Constraints:**
+	- The words in the subsequence should appear in the order of the indices selected.
 
-        int longest_length = 1;
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (groups[i] == groups[j]) continue;
-                if (words[i].size() != words[j].size()) continue;
-                if (getHammingDistance(words[i], words[j]) != 1) continue;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the longest subsequence of words such that the elements in `groups` at consecutive positions are different, and the Hamming distance between consecutive strings in the subsequence is 1.
 
-                if ((dp[j].size() + 1) > dp[i].size()) {
-                    dp[i] = dp[j];
-                    dp[i].push_back(i);
-                    longest_length = max(longest_length, int(dp[i].size()));
-                }
+- Iterate through each string in `words` and compare it with previous strings based on the Hamming distance and the group values.
+- If the current string has a Hamming distance of 1 from the previous string and the group values are different, add it to the subsequence.
+- Track the length of the longest subsequence and its corresponding words.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings in `words` are distinct.
+- All strings in `words` can have different lengths.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For words = ["cat", "bat", "rat", "mat"], groups = [1, 2, 2, 1], the valid subsequence is ["cat", "bat", "rat"]`  \
+  **Explanation:** Here, words at indices 0, 1, and 2 have different groups, and the Hamming distance between consecutive strings is exactly 1.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through each word and checking if it can be included in the subsequence based on the conditions. A dynamic programming approach is used to keep track of the longest valid subsequences.
+
+### Initial Thoughts 💭
+- The problem requires us to compare words with others in terms of Hamming distance and group values.
+- This problem can be solved with dynamic programming by maintaining a list of subsequences and updating them when a new valid word is found.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input arrays are empty, return an empty subsequence.
+- Ensure that the solution works efficiently with up to 1000 words.
+- Words that are identical except for one character may be valid subsequences if they belong to different groups.
+- Handle large inputs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups) {
+    vector<vector<int>> dp(n);
+    for (int i = 0; i < n; i++) dp[i].push_back(i);
+
+    int longest_length = 1;
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            if (groups[i] == groups[j]) continue;
+            if (words[i].size() != words[j].size()) continue;
+            if (getHammingDistance(words[i], words[j]) != 1) continue;
+
+            if ((dp[j].size() + 1) > dp[i].size()) {
+                dp[i] = dp[j];
+                dp[i].push_back(i);
+                longest_length = max(longest_length, int(dp[i].size()));
             }
         }
-
-        vector<string> result;
-        for (int i = 0; i < n; i++) {
-            if (dp[i].size() == longest_length) {
-                for (const int& x : dp[i]) result.push_back(words[x]);
-                break;
-            }
-        }
-        return result;
     }
+
+    vector<string> result;
+    for (int i = 0; i < n; i++) {
+        if (dp[i].size() == longest_length) {
+            for (const int& x : dp[i]) result.push_back(words[x]);
+            break;
+        }
+    }
+    return result;
+}
 private:
-    int getHammingDistance(const string& s, const string& t) {
-        int dist = 0;
-        int k = s.size();
-        for (int i = 0; i < k; i++) {
-            if (s[i] != t[i]) dist++;
-        }
-        return dist;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the longest subsequence of words from a given list where each word is part of a unique group and differs from the previous word by exactly one character (i.e., Hamming Distance = 1). Given the constraints, the solution should efficiently compute and return this longest subsequence of words.
-
-### Approach
-
-To tackle this problem, the algorithm employs dynamic programming (DP) to store subsequences as it iterates through each word in the list. Here’s the approach in detail:
-
-1. **Initialize DP Table**:
-   - We set up a DP table (`dp`) where each entry `dp[i]` will hold the longest subsequence ending at the `i`-th word.
-   - Initially, each `dp[i]` entry contains only the index `i`, indicating each word as a subsequence of itself.
-
-2. **Iterate Through Words**:
-   - We iterate over each word `i` from `1` to `n - 1` (where `n` is the total number of words) and check every previous word `j` (from `0` to `i - 1`).
-   - The goal here is to check if the word at index `i` can extend the subsequence ending at `j` by meeting the following conditions:
-     - **Different Groups**: The two words should belong to different groups (checked using the `groups` array).
-     - **Equal Lengths**: The words should have the same length to compare each character.
-     - **Hamming Distance of 1**: The words must differ by exactly one character.
-
-3. **Update DP and Track Longest Subsequence**:
-   - If the above conditions are satisfied, we check if the subsequence ending at `j` can be extended to form a longer subsequence ending at `i`.
-   - If yes, we update `dp[i]` by copying the subsequence from `dp[j]` and appending `i` to it.
-   - We also update `longest_length` to track the maximum length of subsequences encountered so far.
-
-4. **Retrieve Result**:
-   - Finally, we look for the subsequence in `dp` that has the length equal to `longest_length`.
-   - We gather the words corresponding to the indices in this subsequence and return them as the result.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize DP Table
-
-```cpp
-vector<vector<int>> dp(n);
-for (int i = 0; i < n; i++) dp[i].push_back(i);
-```
-
-- Here, we initialize `dp`, a vector of vectors, where each `dp[i]` is initialized to hold the index `i`, representing that each word is initially considered as a single-element subsequence.
-
-#### Step 2: Iterate Through Words and Build Subsequences
-
-```cpp
-int longest_length = 1;
-for (int i = 1; i < n; i++) {
-    for (int j = 0; j < i; j++) {
-        if (groups[i] == groups[j]) continue;
-        if (words[i].size() != words[j].size()) continue;
-        if (getHammingDistance(words[i], words[j]) != 1) continue;
-```
-
-- For each word `i`, we look at each previous word `j`. 
-- We skip `j` if `groups[i]` equals `groups[j]` (same group), or if the word lengths don’t match, or if the Hamming Distance is not exactly `1`.
-
-#### Step 3: Update DP Array if Conditions are Met
-
-```cpp
-if ((dp[j].size() + 1) > dp[i].size()) {
-    dp[i] = dp[j];
-    dp[i].push_back(i);
-    longest_length = max(longest_length, int(dp[i].size()));
-}
-```
-
-- If extending the subsequence ending at `j` creates a longer subsequence ending at `i`, we update `dp[i]` and record the `longest_length`.
-
-#### Step 4: Retrieve and Return Result
-
-```cpp
-vector<string> result;
-for (int i = 0; i < n; i++) {
-    if (dp[i].size() == longest_length) {
-        for (const int& x : dp[i]) result.push_back(words[x]);
-        break;
-    }
-}
-return result;
-```
-
-- After iterating, we check each entry in `dp` to find a subsequence that matches `longest_length`.
-- We then collect the words in this subsequence and return them.
-
-#### Helper Function: Compute Hamming Distance
-
-```cpp
 int getHammingDistance(const string& s, const string& t) {
     int dist = 0;
     int k = s.size();
@@ -159,22 +111,183 @@ int getHammingDistance(const string& s, const string& t) {
 }
 ```
 
-- This helper function calculates the Hamming Distance between two strings by comparing each character.
+This code defines a function to find the longest subsequence of words where each pair of words in the subsequence has a Hamming distance of 1, and they belong to different groups. It uses dynamic programming to track the longest subsequences and their lengths.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups) {
+	```
+	Defines the function and initializes input parameters: n (number of words), words (the list of words), and groups (the groups of each word).
 
-#### Time Complexity
+2. **Data Structure Initialization**
+	```cpp
+	    vector<vector<int>> dp(n);
+	```
+	Initializes a 2D vector dp, where dp[i] will store the indices of the longest subsequence ending at word i.
 
-- **Main Iteration**: The nested loop that compares each pair of words has a time complexity of `O(n^2)`.
-- **Hamming Distance Calculation**: Each call to `getHammingDistance` takes `O(L)`, where `L` is the length of each word. Given `n` words, the worst case is `O(n^2 * L)`.
+3. **Loop Initialization**
+	```cpp
+	    for (int i = 0; i < n; i++) dp[i].push_back(i);
+	```
+	Populates the dp vector with the indices of each word, starting each subsequence with just the word itself.
 
-#### Space Complexity
+4. **Variable Initialization**
+	```cpp
+	    int longest_length = 1;
+	```
+	Initializes the longest_length variable to 1, as the shortest subsequence will have at least one word.
 
-- **DP Array**: The `dp` array uses `O(n^2)` space, where each `dp[i]` stores the longest subsequence of word indices ending at `i`.
+5. **Outer Loop**
+	```cpp
+	    for (int i = 1; i < n; i++) {
+	```
+	Starts the outer loop to go through each word starting from the second word.
 
-### Conclusion
+6. **Inner Loop**
+	```cpp
+	        for (int j = 0; j < i; j++) {
+	```
+	Starts the inner loop to compare the current word with all previous words.
 
-This solution provides an efficient approach to finding the longest subsequence of words with a Hamming Distance of 1 and different group affiliations. The DP technique optimizes the subsequence formation by checking only necessary conditions and updating the longest subsequence dynamically. This allows the algorithm to perform efficiently, even with larger inputs, while ensuring that the constraints of unique groups and minimal character differences are met.
+7. **Condition Check**
+	```cpp
+	            if (groups[i] == groups[j]) continue;
+	```
+	Skips comparing words in the same group as they should belong to different groups.
+
+8. **Condition Check**
+	```cpp
+	            if (words[i].size() != words[j].size()) continue;
+	```
+	Skips comparing words that are of different lengths since their Hamming distance cannot be 1.
+
+9. **Distance Check**
+	```cpp
+	            if (getHammingDistance(words[i], words[j]) != 1) continue;
+	```
+	Skips comparing words that do not have a Hamming distance of 1.
+
+10. **Subsequence Update**
+	```cpp
+	            if ((dp[j].size() + 1) > dp[i].size()) {
+	```
+	If adding the current word to the subsequence at dp[j] results in a longer subsequence, update dp[i].
+
+11. **Subsequence Update**
+	```cpp
+	                dp[i] = dp[j];
+	```
+	Copy the subsequence from dp[j] to dp[i], as dp[j] gives a longer subsequence.
+
+12. **Subsequence Update**
+	```cpp
+	                dp[i].push_back(i);
+	```
+	Add the current word's index to the subsequence at dp[i].
+
+13. **Length Update**
+	```cpp
+	                longest_length = max(longest_length, int(dp[i].size()));
+	```
+	Update the longest subsequence length if the current subsequence at dp[i] is longer.
+
+14. **Result Construction**
+	```cpp
+	    vector<string> result;
+	```
+	Initializes the result vector to store the words in the longest subsequence.
+
+15. **Result Construction**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	Loops through the dp array to find the subsequence that has the longest length.
+
+16. **Result Construction**
+	```cpp
+	        if (dp[i].size() == longest_length) {
+	```
+	Checks if the current subsequence is the longest, and if so, proceeds to construct the result.
+
+17. **Result Construction**
+	```cpp
+	            for (const int& x : dp[i]) result.push_back(words[x]);
+	```
+	Adds the words from the longest subsequence to the result vector.
+
+18. **Result Construction**
+	```cpp
+	            break;
+	```
+	Breaks the loop after finding the longest subsequence.
+
+19. **Return Result**
+	```cpp
+	    return result;
+	```
+	Returns the longest subsequence of words.
+
+20. **Private Function**
+	```cpp
+	private:
+	```
+	Marks the start of a private helper function.
+
+21. **Helper Function**
+	```cpp
+	int getHammingDistance(const string& s, const string& t) {
+	```
+	Defines the helper function to calculate the Hamming distance between two strings.
+
+22. **Variable Initialization**
+	```cpp
+	    int dist = 0;
+	```
+	Initializes the dist variable to count the Hamming distance.
+
+23. **Loop Setup**
+	```cpp
+	    int k = s.size();
+	```
+	Gets the size of the strings to iterate over each character.
+
+24. **Loop Setup**
+	```cpp
+	    for (int i = 0; i < k; i++) {
+	```
+	Starts the loop to compare characters of the two strings.
+
+25. **Distance Calculation**
+	```cpp
+	        if (s[i] != t[i]) dist++;
+	```
+	Increments the distance for each mismatched character.
+
+26. **Return Statement**
+	```cpp
+	    return dist;
+	```
+	Returns the calculated Hamming distance.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+In the worst case, every word is compared to every other word.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
+
+The space complexity depends on the size of the DP table which can grow up to O(n^2) in the worst case.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/description/)
 

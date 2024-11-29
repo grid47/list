@@ -14,185 +14,354 @@ img_src = ""
 youtube = "G1vTpGA9Gkc"
 youtube_upload_date="2021-01-10"
 youtube_thumbnail="https://i.ytimg.com/vi/G1vTpGA9Gkc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays, `source` and `target`, both of length `n`, and an array `allowedSwaps` containing pairs of indices where swapping is allowed. You can perform multiple swaps between the specified pairs to minimize the Hamming distance between `source` and `target`. The Hamming distance is the number of indices where the elements of `source` and `target` differ.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integer arrays `source` and `target`, and an array `allowedSwaps` where each element is a pair of indices representing allowed swaps.
+- **Example:** `Input: source = [1, 2, 3, 4], target = [2, 1, 4, 5], allowedSwaps = [[0, 1], [2, 3]]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= source[i], target[i] <= 10^5
+	- 0 <= allowedSwaps.length <= 10^5
+	- allowedSwaps[i].length == 2
+	- 0 <= ai, bi <= n - 1
+	- ai != bi
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum Hamming distance between `source` and `target` after performing any number of allowed swaps.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The arrays `source` and `target` have the same length `n`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To minimize the Hamming distance, you must swap elements in `source` based on the allowed pairs of indices to make it match `target` as much as possible.
+
+- 1. Initialize a union-find data structure to track connected components formed by the allowed swaps.
+- 2. For each component (group of indices), group the corresponding elements of `source` and `target`.
+- 3. Compare the two groups and count how many elements can be matched in order to minimize the Hamming distance.
+- 4. Return the minimum Hamming distance after all possible swaps.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays `source` and `target` are non-empty and have the same length.
+- The allowed swaps provide the flexibility to change the arrangement of `source` elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: source = [1, 2, 3, 4], target = [2, 1, 4, 5], allowedSwaps = [[0, 1], [2, 3]]`  \
+  **Explanation:** By swapping indices 0 and 1, and then indices 2 and 3, the array `source` becomes [2, 1, 4, 3]. This results in a Hamming distance of 1, since only the element at index 3 is different.
+
+- **Input:** `Input: source = [5, 1, 2, 4, 3], target = [1, 5, 4, 2, 3], allowedSwaps = [[0, 4], [4, 2], [1, 3], [1, 4]]`  \
+  **Explanation:** By performing the allowed swaps, the `source` array can be transformed into [1, 5, 4, 2, 3], resulting in a Hamming distance of 0, since the arrays now match exactly.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a union-find data structure to group indices that can be swapped and then comparing the elements at those indices in `source` and `target` to minimize the Hamming distance.
+
+### Initial Thoughts 💭
+- The allowed swaps form connected components of indices that can be freely rearranged among themselves.
+- We can use union-find to efficiently group the indices that can be swapped, and then we can match the corresponding elements from `source` and `target` within each group.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array is not a valid input, as the problem assumes that `source` and `target` have at least one element.
+- The solution should efficiently handle inputs where `n` and `allowedSwaps.length` are as large as 10^5.
+- If no allowed swaps are given, the result will be the original Hamming distance between `source` and `target`.
+- The arrays `source` and `target` must have the same length.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    vector<int> parent, rnk;
+vector<int> parent, rnk;
 public:
-    int minimumHammingDistance(vector<int>& src, vector<int>& dst, vector<vector<int>>& swp) {
-        int n = src.size();
-        parent.resize(n, 0);
-        rnk.resize(n, 0);
-        for(int i = 0; i < n; i++) {
-            parent[i] = i;
-        }
+int minimumHammingDistance(vector<int>& src, vector<int>& dst, vector<vector<int>>& swp) {
+    int n = src.size();
+    parent.resize(n, 0);
+    rnk.resize(n, 0);
+    for(int i = 0; i < n; i++) {
+        parent[i] = i;
+    }
 
-        for(vector<int> s: swp) {
-            int x = find(s[0]);
-            int y = find(s[1]);
-            if(rnk[x] < rnk[y]) {
-                parent[x] = y;
-                rnk[y]++;
-            } else {
-                parent[y] = x;
-                rnk[x]++;                
-            }
+    for(vector<int> s: swp) {
+        int x = find(s[0]);
+        int y = find(s[1]);
+        if(rnk[x] < rnk[y]) {
+            parent[x] = y;
+            rnk[y]++;
+        } else {
+            parent[y] = x;
+            rnk[x]++;                
         }
-        
-        unordered_map<int, unordered_map<int, int>> mp;
-        
-        for(int i = 0; i < n; i++) {
-            int p = find(i);
-            auto &m = mp[p];
-            m[src[i]]++;
-        }
-        
-        int res = 0;
-        
-        for(int i = 0; i < n; i++) {
-            int p = find(i);
-            auto &m = mp[p];
-            if((m[dst[i]]--) <= 0) {
-                res += 1;
-            }
-        }
-        
-        return res;
-        
     }
     
-    int find(int x) {
-        int y = parent[x];
-        if(y != x) {
-            parent[x] = find(y);
-        }
-        return parent[x];
+    unordered_map<int, unordered_map<int, int>> mp;
+    
+    for(int i = 0; i < n; i++) {
+        int p = find(i);
+        auto &m = mp[p];
+        m[src[i]]++;
     }
-};
-{{< /highlight >}}
----
+    
+    int res = 0;
+    
+    for(int i = 0; i < n; i++) {
+        int p = find(i);
+        auto &m = mp[p];
+        if((m[dst[i]]--) <= 0) {
+            res += 1;
+        }
+    }
+    
+    return res;
+    
+}
 
-### Problem Statement
+int find(int x) {
+    int y = parent[x];
+    if(y != x) {
+        parent[x] = find(y);
+    }
+    return parent[x];
+}
+```
 
-The problem at hand involves determining the minimum Hamming distance between two integer arrays, `src` and `dst`. A Hamming distance measures the number of positions at which the corresponding elements of two arrays are different. Given a series of swaps defined by a 2D array `swp`, where each entry specifies two indices of `src` that can be swapped, the goal is to calculate the minimum Hamming distance after performing all possible swaps.
+The `minimumHammingDistance` function calculates the minimum Hamming distance between two arrays, `src` and `dst`, after performing swap operations on indices specified in `swp`. The solution uses a union-find (disjoint-set) data structure to efficiently group elements that can be swapped and calculates the number of differing elements between the two arrays within each group.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	The class `Solution` is defined, which contains the function `minimumHammingDistance` that will calculate the minimum Hamming distance between two arrays after performing the allowed swap operations.
 
-To solve the problem, we can use the Disjoint Set Union (DSU) data structure, also known as Union-Find. The primary steps involved in the approach are as follows:
+2. **Variable Declarations**
+	```cpp
+	vector<int> parent, rnk;
+	```
+	Two vectors `parent` and `rnk` are declared. `parent` will store the representative of each element in the union-find structure, and `rnk` will store the rank (or depth) of the trees in the union-find structure to keep the structure balanced.
 
-1. **Initialize Union-Find Structure**: We will maintain two arrays: `parent` for tracking the parent of each element and `rnk` (rank) for keeping the tree flat during union operations.
+3. **Access Control**
+	```cpp
+	public:
+	```
+	This marks the beginning of the public section of the class, making the function `minimumHammingDistance` accessible from outside the class.
 
-2. **Union Operations**: For each swap operation defined in the `swp` array, we will perform a union operation to group the elements that can be swapped.
+4. **Function Definition**
+	```cpp
+	int minimumHammingDistance(vector<int>& src, vector<int>& dst, vector<vector<int>>& swp) {
+	```
+	The function `minimumHammingDistance` is defined. It takes three arguments: two integer vectors `src` and `dst` representing the two arrays, and a 2D vector `swp` representing the allowed swap operations between indices.
 
-3. **Count Elements in Each Component**: After processing all swaps, we will count how many times each value appears in each connected component of the `src` array.
+5. **Initialize n**
+	```cpp
+	    int n = src.size();
+	```
+	The integer `n` is initialized to the size of the `src` array, which is assumed to be the same size as `dst`.
 
-4. **Calculate Minimum Hamming Distance**: Finally, we will iterate through the `dst` array and check if each element can be matched with the count from the corresponding component in `src`. If a value from `dst` cannot be matched with the corresponding component's counts, it contributes to the Hamming distance.
+6. **Resize Parent Array**
+	```cpp
+	    parent.resize(n, 0);
+	```
+	The `parent` array is resized to size `n` and initialized with zeros. Each element will represent its own parent initially.
 
-### Code Breakdown (Step by Step)
+7. **Resize Rank Array**
+	```cpp
+	    rnk.resize(n, 0);
+	```
+	The `rnk` array is resized to size `n` and initialized with zeros. This array will track the rank of each tree in the union-find structure.
 
-Here’s a detailed breakdown of the code implementation:
+8. **Initialize Parent Array**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is initiated to initialize the `parent` array, setting each element's parent to itself.
 
-1. **Class Definition**: The solution is encapsulated in the `Solution` class.
+9. **Set Parent**
+	```cpp
+	        parent[i] = i;
+	```
+	Each element in the `parent` array is set to point to itself, indicating that initially each element is its own representative.
 
-   ```cpp
-   class Solution {
-       vector<int> parent, rnk;
-   ```
+10. **Swap Operation Loop**
+	```cpp
+	    for(vector<int> s: swp) {
+	```
+	A loop is started to process each swap operation in the `swp` array. Each swap operation is represented as a vector of two integers.
 
-2. **Public Method**: The `minimumHammingDistance` method is defined, taking three parameters: `src`, `dst`, and `swp`.
+11. **Find Roots for Swap**
+	```cpp
+	        int x = find(s[0]);
+	```
+	The `find` function is called to get the root (representative) of the first element `s[0]` in the swap operation.
 
-   ```cpp
-   public:
-       int minimumHammingDistance(vector<int>& src, vector<int>& dst, vector<vector<int>>& swp) {
-   ```
+12. **Find Roots for Swap**
+	```cpp
+	        int y = find(s[1]);
+	```
+	The `find` function is called to get the root (representative) of the second element `s[1]` in the swap operation.
 
-3. **Initialization**: The size of `src` (and `dst`) is stored in `n`. Two vectors, `parent` and `rnk`, are resized to hold the parent and rank information for the union-find structure. Each element is initialized to point to itself.
+13. **Union by Rank**
+	```cpp
+	        if(rnk[x] < rnk[y]) {
+	```
+	If the rank of root `x` is less than that of root `y`, the tree rooted at `x` will be attached to the tree rooted at `y`.
 
-   ```cpp
-   int n = src.size();
-   parent.resize(n, 0);
-   rnk.resize(n, 0);
-   for(int i = 0; i < n; i++) {
-       parent[i] = i;
-   }
-   ```
+14. **Union by Rank**
+	```cpp
+	            parent[x] = y;
+	```
+	The parent of `x` is set to `y`, merging the two sets.
 
-4. **Union-Find Logic**: For each swap operation defined in `swp`, we determine the roots of the two indices to be swapped using the `find` method. If the roots are different, we perform a union operation based on their ranks to maintain a balanced tree.
+15. **Increase Rank**
+	```cpp
+	            rnk[y]++;
+	```
+	The rank of root `y` is increased, indicating the depth of the tree has grown.
 
-   ```cpp
-   for(vector<int> s: swp) {
-       int x = find(s[0]);
-       int y = find(s[1]);
-       if(rnk[x] < rnk[y]) {
-           parent[x] = y;
-           rnk[y]++;
-       } else {
-           parent[y] = x;
-           rnk[x]++;                
-       }
-   }
-   ```
+16. **Union by Rank**
+	```cpp
+	        } else {
+	```
+	If the rank of root `x` is greater than or equal to that of root `y`, the tree rooted at `y` is attached to the tree rooted at `x`.
 
-5. **Count Values in Components**: We utilize an unordered map to store the count of each value in the corresponding component identified by its root.
+17. **Union by Rank**
+	```cpp
+	            parent[y] = x;
+	```
+	The parent of `y` is set to `x`, merging the two sets.
 
-   ```cpp
-   unordered_map<int, unordered_map<int, int>> mp;
-   for(int i = 0; i < n; i++) {
-       int p = find(i);
-       auto &m = mp[p];
-       m[src[i]]++;
-   }
-   ```
+18. **Increase Rank**
+	```cpp
+	            rnk[x]++;                
+	```
+	The rank of root `x` is increased.
 
-6. **Calculate the Result**: We initialize a counter `res` to keep track of the minimum Hamming distance. For each element in `dst`, we check if it exists in the component's count map and decrement its count. If the count becomes less than or equal to zero, it means that this value cannot be matched, and we increment the Hamming distance counter.
+19. **Create Map**
+	```cpp
+	    unordered_map<int, unordered_map<int, int>> mp;
+	```
+	An unordered map `mp` is created to track the frequencies of elements in the `src` array within each connected component.
 
-   ```cpp
-   int res = 0;
-   for(int i = 0; i < n; i++) {
-       int p = find(i);
-       auto &m = mp[p];
-       if((m[dst[i]]--) <= 0) {
-           res += 1;
-       }
-   }
-   ```
+20. **Populate Map**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is initiated to populate the map `mp` with the frequency of elements in `src`.
 
-7. **Return the Result**: Finally, we return the calculated minimum Hamming distance.
+21. **Add Frequency**
+	```cpp
+	        int p = find(i);
+	```
+	The representative `p` of the current element `i` is found.
 
-   ```cpp
-   return res;
-   }
-   ```
+22. **Add Frequency**
+	```cpp
+	        auto &m = mp[p];
+	```
+	A reference `m` to the map of frequencies for the connected component is obtained.
 
-8. **Find Method**: The `find` method is implemented to perform path compression, making future queries faster by ensuring that all nodes directly point to the root.
+23. **Add Frequency**
+	```cpp
+	        m[src[i]]++;
+	```
+	The frequency of `src[i]` is incremented in the map `m` for the connected component `p`.
 
-   ```cpp
-   int find(int x) {
-       int y = parent[x];
-       if(y != x) {
-           parent[x] = find(y);
-       }
-       return parent[x];
-   }
-   ```
+24. **Calculate Hamming Distance**
+	```cpp
+	    int res = 0;
+	```
+	The integer `res` is initialized to 0. This will store the total Hamming distance.
 
-### Complexity
+25. **Update Hamming Distance**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is initiated to calculate the Hamming distance.
 
-- **Time Complexity**: The time complexity is \( O(n + m \cdot \alpha(n)) \), where \( n \) is the size of the arrays and \( m \) is the number of swaps. Here, \( \alpha \) is the inverse Ackermann function, which grows very slowly, making this nearly linear in practice.
+26. **Update Hamming Distance**
+	```cpp
+	        int p = find(i);
+	```
+	The representative `p` of the current element `i` is found.
 
-- **Space Complexity**: The space complexity is \( O(n) \) due to the additional space used for the parent and rank arrays, as well as the unordered map for counting occurrences.
+27. **Update Hamming Distance**
+	```cpp
+	        auto &m = mp[p];
+	```
+	A reference `m` to the map of frequencies for the connected component is obtained.
 
-### Conclusion
+28. **Update Hamming Distance**
+	```cpp
+	        if((m[dst[i]]--) <= 0) {
+	```
+	If the frequency of `dst[i]` is not sufficient to match, it indicates a mismatch, and the result is incremented.
 
-In summary, the code efficiently calculates the minimum Hamming distance between two integer arrays while considering possible swaps. The implementation leverages the Disjoint Set Union (DSU) data structure to group indices that can be swapped, thus allowing for an efficient counting of matches between `src` and `dst`.
+29. **Increment Result**
+	```cpp
+	            res += 1;
+	```
+	The result is incremented when the frequencies don't match.
 
-This solution is not only effective but also well-structured, demonstrating a clear understanding of union-find operations and their applications in problems involving connectivity and grouping. The approach ensures that we minimize the number of differences between the two arrays, optimizing the Hamming distance calculation. By maintaining clarity and modularity in the code, it is easy to follow and adaptable to similar problems involving array manipulation and component analysis.
+30. **Return Result**
+	```cpp
+	    return res;
+	```
+	The final Hamming distance is returned.
+
+31. **Find Function**
+	```cpp
+	int find(int x) {
+	```
+	The `find` function is defined to find the representative (or root) of a given element `x`.
+
+32. **Path Compression**
+	```cpp
+	    int y = parent[x];
+	```
+	The parent of `x` is stored in `y`.
+
+33. **Path Compression**
+	```cpp
+	    if(y != x) {
+	```
+	If the parent of `x` is not itself, path compression is applied.
+
+34. **Path Compression**
+	```cpp
+	        parent[x] = find(y);
+	```
+	The parent of `x` is set to the representative of `y` recursively.
+
+35. **Return Representative**
+	```cpp
+	    return parent[x];
+	```
+	The representative (or root) of `x` is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m), where n is the number of elements in `source` and `target`, and m is the number of allowed swaps.
+- **Average Case:** O(n + m), as we process each swap and each element in the arrays once.
+- **Worst Case:** O(n + m), where n is the number of elements and m is the number of allowed swaps.
+
+The time complexity is linear in terms of both the number of elements and the number of allowed swaps.
+
+### Space Complexity 💾
+- **Best Case:** O(n), as the space used is proportional to the size of the input arrays and the union-find structure.
+- **Worst Case:** O(n + m), for storing the union-find data structure and the collections of elements in each group.
+
+The space complexity is linear in terms of the number of elements and the number of allowed swaps.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/description/)
 

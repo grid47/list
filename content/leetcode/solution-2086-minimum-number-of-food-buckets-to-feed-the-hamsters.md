@@ -14,152 +14,238 @@ img_src = ""
 youtube = "aDb0N0ZBvZQ"
 youtube_upload_date="2021-11-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/aDb0N0ZBvZQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string representing hamster positions. The string consists of 'H' for a hamster and '.' for an empty space. You must place food buckets in empty positions such that all hamsters are fed. A hamster is fed if a food bucket is placed at one of its adjacent positions. Your task is to return the minimum number of food buckets required to feed all the hamsters. If it is impossible, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string 'hamsters' of length n (1 <= n <= 10^5). The string consists of 'H' for hamster positions and '.' for empty positions.
+- **Example:** `".H.H."`
+- **Constraints:**
+	- 1 <= hamsters.length <= 10^5
+	- hamsters[i] is either 'H' or '.'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> memo;
-    int dp(int idx, string &ham) {
-        if(idx >= ham.size()) {
-            // cout << ham << "\n";
-            return 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of food buckets needed to feed all hamsters, or -1 if it is impossible to feed all hamsters.
+- **Example:** `2`
+- **Constraints:**
+	- Return -1 if it's impossible to feed all hamsters.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We aim to feed all hamsters with the minimum number of food buckets placed in empty spaces.
+
+- Iterate through the string and find empty spaces ('.') near a hamster ('H').
+- For each hamster, place a food bucket in an adjacent empty space if possible.
+- If a hamster cannot be fed (no empty space next to it), return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- There is at least one hamster in the string.
+- All empty spaces are potential places for food buckets.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `".H.H."`  \
+  **Explanation:** By placing a food bucket at index 2, both hamsters at indices 1 and 3 will be fed.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we can iterate through the string and check the positions of the hamsters. For each hamster, we try to place food buckets in adjacent empty spaces. We should keep track of the positions where food buckets are placed to ensure all hamsters are fed.
+
+### Initial Thoughts 💭
+- Hamsters that are isolated between empty spaces will require multiple food buckets.
+- Adjacent food buckets can feed multiple hamsters.
+- We need to handle each hamster carefully to ensure minimal food bucket usage.
+{{< dots >}}
+### Edge Cases 🌐
+- The string is guaranteed to contain at least one hamster.
+- The solution should work efficiently with strings of length up to 100,000.
+- If all positions are occupied by hamsters, no food bucket is needed.
+- Ensure that the solution runs within the time limit for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> memo;
+int dp(int idx, string &ham) {
+    if(idx >= ham.size()) {
+        // cout << ham << "\n";
+        return 0;
+    }
+    if(memo[idx] != -1) return memo[idx];
+    
+    int ans = 100001;
+    if(ham[idx] == 'H') {
+        if(idx + 1 < ham.size() && ham[idx + 1] == '.') {
+            // ham[idx + 1] = 'C';
+            ans = min(ans, 1 + dp(idx + 3, ham));
+            // ham[idx + 1] = '.';
         }
-        if(memo[idx] != -1) return memo[idx];
-        
-        int ans = 100001;
-        if(ham[idx] == 'H') {
-            if(idx + 1 < ham.size() && ham[idx + 1] == '.') {
-                // ham[idx + 1] = 'C';
-                ans = min(ans, 1 + dp(idx + 3, ham));
-                // ham[idx + 1] = '.';
-            }
-            if(idx - 1 >= 0 && (ham[idx - 1] == '.')) {
-                // ham[idx - 1] = 'C';
-                ans = min(ans, 1 + dp(idx + 1, ham));
-                // ham[idx - 1] = '.';                    
-            }
-        } else {
-            ans = dp(idx + 1, ham);
+        if(idx - 1 >= 0 && (ham[idx - 1] == '.')) {
+            // ham[idx - 1] = 'C';
+            ans = min(ans, 1 + dp(idx + 1, ham));
+            // ham[idx - 1] = '.';                    
         }
-        
-        return memo[idx] = ans;
+    } else {
+        ans = dp(idx + 1, ham);
     }
     
-    int minimumBuckets(string ham) {
-        int n = ham.size();
-        memo.resize(n, -1);
-        int ans = dp(0, ham);
-        return ans >= 100001? -1: ans;
-    }
-};
-{{< /highlight >}}
----
+    return memo[idx] = ans;
+}
 
-### Problem Statement
-
-The problem involves determining the minimum number of "buckets" needed to cover all occurrences of 'H' (which represents hungry hamsters) in a given string `ham`. The string can contain 'H', '.' (which represents empty spaces), and 'C' (which represents occupied spaces). The challenge is to cover each 'H' with a bucket while adhering to specific rules: a bucket can be placed directly next to an 'H' or can span over an empty space ('.'). If an 'H' is adjacent to another 'H' and is covered by a single bucket, it will not require additional buckets.
-
-### Approach
-
-To solve this problem, we can use a dynamic programming approach with memoization to keep track of the minimum number of buckets needed at each index of the string. The idea is to recursively evaluate the string from each position and consider different options for placing buckets.
-
-1. **Dynamic Programming with Memoization**: We define a helper function `dp(idx, ham)` that computes the minimum number of buckets needed starting from index `idx`. We use a memoization array to store previously computed results for each index to avoid redundant calculations.
-
-2. **Base Case**: If `idx` exceeds the length of the string, we return 0 since no more buckets are needed.
-
-3. **Recursive Cases**:
-   - If the character at `idx` is 'H', we check:
-     - If the next character is '.', we consider placing a bucket to cover `H` and potentially the next empty space (moving `idx` forward by 3).
-     - If the previous character is '.', we consider placing a bucket before the current 'H' (moving `idx` forward by 1).
-   - If the character at `idx` is not 'H', we move to the next character.
-
-4. **Final Decision**: The function returns the minimum number of buckets needed to cover all 'H's in the string, and if it's impossible to cover all 'H's, we return -1.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code implementation:
-
-```cpp
-class Solution {
-public:
-    vector<int> memo;  // Memoization array to store results for each index
-
-    int dp(int idx, string &ham) {
+int minimumBuckets(string ham) {
+    int n = ham.size();
+    memo.resize(n, -1);
+    int ans = dp(0, ham);
+    return ans >= 100001? -1: ans;
+}
 ```
 
-1. **Class and Method Definition**: The class `Solution` contains a public member `memo`, which is a vector used for memoization. The method `dp(int idx, string &ham)` is defined to recursively compute the minimum buckets needed.
+This code defines a dynamic programming solution to the problem of placing buckets in a hamster maze. It uses a recursive function `dp` to minimize the number of buckets needed, where the hamster can move in the maze according to specific rules.
 
-```cpp
-        if(idx >= ham.size()) {
-            return 0;  // Base case: No more buckets needed
-        }
-        if(memo[idx] != -1) return memo[idx];  // Return cached result if available
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<int> memo;
+	```
+	This line initializes a vector `memo` to store the results of subproblems for dynamic programming (memoization). The vector is used to avoid redundant calculations for the same index.
 
-2. **Base Case Handling**: The function first checks if `idx` is beyond the bounds of the string. If so, it returns 0 since no further buckets are needed. If a result for the current index is already computed, it returns that result to save time.
+2. **Function Definition**
+	```cpp
+	int dp(int idx, string &ham) {
+	```
+	This defines the recursive function `dp`, which takes an index `idx` and a reference to a string `ham` as arguments. The function will return the minimum number of buckets needed for the hamster starting at index `idx`.
 
-```cpp
-        int ans = 100001;  // Initialize to a large value (effectively infinity)
-```
+3. **Base Case**
+	```cpp
+	    if(idx >= ham.size()) {
+	```
+	This checks if the current index `idx` is out of bounds of the string `ham`. If so, the recursion ends and returns 0, as no more buckets are needed.
 
-3. **Initialization**: A variable `ans` is initialized to a large value to ensure any valid result will be smaller.
+4. **Base Case Return**
+	```cpp
+	        return 0;
+	```
+	If the index `idx` is beyond the maze, the function returns 0, signifying no more buckets are needed.
 
-```cpp
-        if(ham[idx] == 'H') {
-```
+5. **Memoization Check**
+	```cpp
+	    if(memo[idx] != -1) return memo[idx];
+	```
+	This checks if the result for the current index `idx` has already been computed. If so, it returns the stored result from `memo` to avoid recalculating it.
 
-4. **Handling 'H'**: If the current character is 'H', we explore the possibilities for placing a bucket.
+6. **Variable Initialization**
+	```cpp
+	    int ans = 100001;
+	```
+	This initializes a variable `ans` with a large value (100001), which will store the minimum number of buckets needed for the current recursive call.
 
-```cpp
-            if(idx + 1 < ham.size() && ham[idx + 1] == '.') {
-                ans = min(ans, 1 + dp(idx + 3, ham));  // Place a bucket covering H and the next '.'
-            }
-            if(idx - 1 >= 0 && (ham[idx - 1] == '.')) {
-                ans = min(ans, 1 + dp(idx + 1, ham));  // Place a bucket before H
-            }
-        } else {
-            ans = dp(idx + 1, ham);  // Move to the next character if not 'H'
-        }
-```
+7. **Condition for 'H'**
+	```cpp
+	    if(ham[idx] == 'H') {
+	```
+	This checks if the current character at index `idx` in the string `ham` is 'H', which represents the hamster that needs to be placed into a bucket.
 
-5. **Bucket Placement Logic**: Two scenarios are evaluated:
-   - If an empty space follows the 'H', a bucket is placed, and the recursion continues from two indices forward (skipping the covered 'H' and '.').
-   - If an empty space precedes the 'H', a bucket is placed before it, and the recursion continues from the next character.
+8. **Check Right Movement**
+	```cpp
+	        if(idx + 1 < ham.size() && ham[idx + 1] == '.') {
+	```
+	This checks if there is a valid position to the right of the hamster (i.e., if the index `idx + 1` is within bounds and the character is '.' which is an empty space).
 
-6. **Final Decision**: The function returns the result for the current index, storing it in the memoization array.
+9. **Recursive Call**
+	```cpp
+	            ans = min(ans, 1 + dp(idx + 3, ham));
+	```
+	This line calculates the minimum number of buckets needed by recursively calling the `dp` function. It places the hamster in the right bucket (if possible) and skips 3 positions ahead.
 
-```cpp
-        return memo[idx] = ans;
-    }
-    
-    int minimumBuckets(string ham) {
-        int n = ham.size();
-        memo.resize(n, -1);  // Initialize memoization array with -1
-        int ans = dp(0, ham);  // Start recursion from index 0
-        return ans >= 100001? -1: ans;  // Return -1 if no solution found
-    }
-};
-```
+10. **End Right Movement Check**
+	```cpp
+	        }
+	```
+	End of the right movement check.
 
-7. **Wrapper Function**: The `minimumBuckets` function initializes the memoization array and starts the recursion from index 0. It returns the minimum number of buckets or -1 if covering all 'H's is impossible.
+11. **Check Left Movement**
+	```cpp
+	        if(idx - 1 >= 0 && (ham[idx - 1] == '.')) {
+	```
+	This checks if there is a valid position to the left of the hamster where a bucket can be placed (i.e., if the index `idx - 1` is valid and the character is '.' which represents an empty space).
 
-### Complexity
+12. **Recursive Call Left**
+	```cpp
+	            ans = min(ans, 1 + dp(idx + 1, ham));
+	```
+	This recursively calls the `dp` function to calculate the minimum number of buckets required by placing a bucket in the left space and moving one step ahead.
 
-- **Time Complexity**: The time complexity is \(O(n)\), where \(n\) is the length of the string `ham`. Each index is processed once due to memoization.
+13. **Else Case for Non-H**
+	```cpp
+	    } else {
+	```
+	This condition is executed if the current character in `ham` is not 'H'. It moves to the next index without placing a bucket.
 
-- **Space Complexity**: The space complexity is also \(O(n)\) for the memoization array.
+14. **Recursive Call Else**
+	```cpp
+	        ans = dp(idx + 1, ham);
+	```
+	If the current position does not require a bucket, the function simply moves to the next index.
 
-### Conclusion
+15. **Memoization Assignment**
+	```cpp
+	    return memo[idx] = ans;
+	```
+	This assigns the result of the current recursive call to the `memo` vector at index `idx`, which allows for memoization of previously calculated subproblems.
 
-This solution efficiently determines the minimum number of buckets required to cover all 'H's in the string using dynamic programming and memoization. The recursive approach combined with strategic checks for placing buckets ensures that we consider all possible placements while avoiding unnecessary recalculations.
+16. **Main Function**
+	```cpp
+	int minimumBuckets(string ham) {
+	```
+	This is the main function `minimumBuckets`, which is responsible for initializing the memoization vector and calling the recursive `dp` function.
 
-This algorithm can be particularly useful in scenarios where such coverage problems arise, such as in resource allocation or optimization tasks. Understanding and implementing memoization techniques like this one can significantly improve the efficiency of solutions for similar dynamic programming challenges.
+17. **Size Calculation**
+	```cpp
+	    int n = ham.size();
+	```
+	This calculates the size of the input string `ham`, which represents the hamster maze.
+
+18. **Resize Memoization**
+	```cpp
+	    memo.resize(n, -1);
+	```
+	This resizes the `memo` vector to match the size of the input string `ham`, initializing all values to -1.
+
+19. **Call DP**
+	```cpp
+	    int ans = dp(0, ham);
+	```
+	This calls the `dp` function starting from index 0 and stores the result in `ans`.
+
+20. **Return Final Result**
+	```cpp
+	    return ans >= 100001? -1: ans;
+	```
+	This checks the result of `dp`. If the value is still the initial large number (indicating no valid solution), it returns -1. Otherwise, it returns the result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) if there are no isolated hamsters and food buckets can be placed efficiently.
+- **Average Case:** O(n) for scanning and placing food buckets.
+- **Worst Case:** O(n) due to the need to scan the entire string.
+
+The time complexity is linear in the size of the string.
+
+### Space Complexity 💾
+- **Best Case:** O(n) when all spaces are empty and need tracking.
+- **Worst Case:** O(n) for storing food bucket placements and the string.
+
+Space complexity is linear due to string traversal and food bucket placement tracking.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-food-buckets-to-feed-the-hamsters/description/)
 

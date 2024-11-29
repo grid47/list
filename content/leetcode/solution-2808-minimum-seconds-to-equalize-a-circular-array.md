@@ -14,128 +14,186 @@ img_src = ""
 youtube = "NgWw6HIyCWE"
 youtube_upload_date="2023-08-06"
 youtube_thumbnail="https://i.ytimg.com/vi/NgWw6HIyCWE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array nums containing n integers. At each second, replace every nums[i] with either nums[i], nums[(i-1+n)%n], or nums[(i+1)%n]. Return the minimum number of seconds required to make all elements in the array equal.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of integers nums where nums[i] represents the value at index i.
+- **Example:** `Input: nums = [3, 5, 5, 3]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumSeconds(vector<int>& nums) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of seconds needed to make all the elements in the array equal.
+- **Example:** `Output: 1`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine how many seconds are needed to transform the array such that all elements become the same.
+
+- 1. Identify the indices of each distinct number in the array.
+- 2. For each distinct number, calculate the maximum gap between its occurrences.
+- 3. Compute the minimum number of seconds required to fill these gaps for all distinct numbers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always have at least one element.
+- The problem assumes that all elements are integers and the array can be very large.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 5, 5, 3]`  \
+  **Explanation:** In 1 second, we can replace elements so that the array becomes [5, 5, 5, 5], making all elements equal.
+
+- **Input:** `Input: nums = [1, 3, 2, 3, 1]`  \
+  **Explanation:** It takes 2 seconds to make all elements equal by first turning the array into [1, 3, 3, 3, 3] and then [3, 3, 3, 3, 3].
+
+{{< dots >}}
+## Approach 🚀
+We will calculate how many seconds it takes to make all elements in the array equal by identifying the maximum gap for each distinct number and filling those gaps.
+
+### Initial Thoughts 💭
+- The problem requires efficiently tracking the occurrences of each number in the array.
+- The key observation is to minimize the time it takes to fill the gaps between occurrences of each distinct number.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will not be empty.
+- The solution should efficiently handle arrays of size up to 100,000 elements.
+- If all elements are the same initially, the answer should be 0.
+- Ensure the solution runs in O(n) time to handle large inputs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumSeconds(vector<int>& nums) {
+    
+    int n = nums.size();
+    map<int, vector<int>> pos;
+    
+    for(int i = 0; i < n; i++)
+        pos[nums[i]].push_back(i);
+    
+    int res = INT_MAX;
+    
+    for(auto [key, val]: pos) {
+        int sec = 0;
+        val.push_back(val[0] + n);
         
-        int n = nums.size();
-        map<int, vector<int>> pos;
-        
-        for(int i = 0; i < n; i++)
-            pos[nums[i]].push_back(i);
-        
-        int res = INT_MAX;
-        
-        for(auto [key, val]: pos) {
-            int sec = 0;
-            val.push_back(val[0] + n);
-            
-            for(int i = 1; i < val.size(); i++) {
-                sec = max(sec, (val[i] - val[i - 1])/ 2);
-            }
-            
-            res = min(res, sec);
+        for(int i = 1; i < val.size(); i++) {
+            sec = max(sec, (val[i] - val[i - 1])/ 2);
         }
-        return res;
+        
+        res = min(res, sec);
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the minimum number of seconds required for a certain condition to be satisfied in a circular list, based on the time differences between repeated numbers.
 
-The problem asks to determine the minimum number of seconds required to make all elements of the array equal, where each second allows one to perform a cyclic shift of any number of positions in the array. The goal is to find the minimal time (in seconds) such that all elements of the array can be made equal after a series of cyclic shifts. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumSeconds(vector<int>& nums) {
+	```
+	The function definition that takes a vector of integers as input and returns the minimum number of seconds.
 
-Given a list of integers, where each element appears one or more times, the task is to compute the minimum seconds it takes to bring all elements in the array to the same value by shifting elements in a cyclic manner.
+2. **Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializes the variable 'n' to store the size of the input vector 'nums'.
 
-### Approach
+3. **Data Structure Initialization**
+	```cpp
+	    map<int, vector<int>> pos;
+	```
+	Declares a map 'pos' that stores a vector of integers for each unique element in 'nums', representing the indices of each occurrence.
 
-The solution involves understanding the cyclic nature of the array and the distribution of the values within it. The key observation is that the problem essentially boils down to figuring out the maximum gap between two occurrences of the same element in the array. The minimum time to make all elements equal corresponds to the maximum distance between consecutive occurrences of any element (as you can cyclically shift the array and only need to worry about the largest gap).
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts a for loop to iterate through each element of the input vector.
 
-Here’s how the solution works step-by-step:
-1. **Group Positions of Same Elements**:
-   - First, we group all the positions of the same element in the array. This helps us understand the spacing between consecutive occurrences of the same number.
-  
-2. **Calculate Gaps Between Consecutive Occurrences**:
-   - For each number, calculate the gap between its consecutive occurrences. To handle the cyclic nature of the array, we also consider the gap between the last occurrence and the first occurrence, wrapping around the array.
-  
-3. **Determine the Minimum Time**:
-   - The minimum time required to equalize the elements corresponds to the largest gap divided by 2. This is because we are concerned with how long it takes for the array to "catch up" to the target value by shifting the elements.
-  
-4. **Iterate Over All Values**:
-   - For each unique value, compute the required time and keep track of the smallest of these times.
+5. **Data Insertion**
+	```cpp
+	        pos[nums[i]].push_back(i);
+	```
+	Inserts the current index 'i' into the 'pos' map for the current element 'nums[i]'.
 
-### Code Breakdown (Step by Step)
+6. **Variable Initialization**
+	```cpp
+	    int res = INT_MAX;
+	```
+	Initializes 'res' to the maximum possible integer value to track the minimum time required.
 
-1. **Initialize the Necessary Data Structures**:
-   ```cpp
-   map<int, vector<int>> pos;
-   ```
-   - We use a map `pos` to store the positions of each unique value in the array. The keys of the map are the unique values in `nums`, and the values are vectors of integers representing the indices at which each number appears in the array.
+7. **Loop Through Map**
+	```cpp
+	    for(auto [key, val]: pos) {
+	```
+	Starts a for-each loop to iterate over the elements of the 'pos' map.
 
-2. **Store Positions of Each Value**:
-   ```cpp
-   for(int i = 0; i < n; i++)
-       pos[nums[i]].push_back(i);
-   ```
-   - The for loop iterates over the array `nums`. For each element `nums[i]`, we store its index in the map `pos` under the key corresponding to `nums[i]`. This allows us to efficiently gather all indices for each unique number.
+8. **Variable Initialization**
+	```cpp
+	        int sec = 0;
+	```
+	Initializes a variable 'sec' to track the maximum gap between repeated elements.
 
-3. **Set Initial Result**:
-   ```cpp
-   int res = INT_MAX;
-   ```
-   - We initialize the variable `res` to store the minimum number of seconds required. We begin with `INT_MAX`, which represents an arbitrarily large number, since we are trying to minimize the result.
+9. **Circular List Adjustment**
+	```cpp
+	        val.push_back(val[0] + n);
+	```
+	Adds a new element to 'val' to simulate a circular list by adding 'n' (the size of the list) to the first element.
 
-4. **Iterate Over Each Unique Value**:
-   ```cpp
-   for(auto [key, val]: pos) {
-       int sec = 0;
-       val.push_back(val[0] + n);
-   ```
-   - The loop iterates through each key-value pair in the map `pos`, where `key` is the unique number and `val` is the vector of indices where this number appears.
-   - We create a new entry in the `val` vector by adding the first element of `val` plus `n` (the length of the array). This step is used to simulate the circular behavior of the array, effectively "wrapping around" the indices.
+10. **Gap Calculation**
+	```cpp
+	        for(int i = 1; i < val.size(); i++) {
+	```
+	Starts a loop to calculate the gap between consecutive indices in the 'val' vector.
 
-5. **Calculate Maximum Gap**:
-   ```cpp
-   for(int i = 1; i < val.size(); i++) {
-       sec = max(sec, (val[i] - val[i - 1])/ 2);
-   }
-   ```
-   - After adding the wrapped-around index, we loop through the vector `val` to calculate the gaps between consecutive indices. We compute the gap as `(val[i] - val[i - 1]) / 2` to find the largest possible gap. We update the `sec` variable to keep track of the maximum gap.
+11. **Max Gap Calculation**
+	```cpp
+	            sec = max(sec, (val[i] - val[i - 1])/ 2);
+	```
+	Updates 'sec' to the maximum gap between consecutive indices divided by 2.
 
-6. **Update the Minimum Result**:
-   ```cpp
-   res = min(res, sec);
-   ```
-   - After computing the largest gap for the current value, we update `res` to be the minimum of `res` and `sec`. This ensures that we keep track of the smallest time required across all values in the array.
+12. **Update Result**
+	```cpp
+	        res = min(res, sec);
+	```
+	Updates 'res' to the minimum value between 'res' and 'sec'.
 
-7. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - Finally, we return `res`, which contains the minimum number of seconds required to make all elements equal in the array.
+13. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the minimum number of seconds calculated.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. **Time Complexity**:
-   - **Storing positions**: The first loop iterates over the array, which takes **O(n)** time, where `n` is the length of the array `nums`.
-   - **Calculating gaps**: For each unique value in `nums`, we calculate the gaps between its consecutive occurrences. In the worst case, if every element in the array is unique, we would process each element separately, but for each element, we are simply iterating over its positions. This means the total number of operations for all values is proportional to the size of the array, so this step also takes **O(n)** time.
-   - **Overall time complexity**: Since each step takes linear time, the overall time complexity of the solution is **O(n)**.
+The time complexity is O(n) where n is the number of elements in the array.
 
-2. **Space Complexity**:
-   - The space complexity is determined by the space required to store the positions of the elements. In the worst case, if all elements are unique, the map `pos` would contain `n` entries, and each entry would store a single index. Thus, the space complexity is **O(n)**.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The space complexity is O(n) due to storing the indices of each distinct number in a map.
 
-The solution efficiently calculates the minimum number of seconds required to make all elements in the array equal. By using a map to store the positions of each element and calculating the maximum gap between consecutive occurrences, the algorithm effectively handles the cyclic nature of the array. With a time complexity of **O(n)** and a space complexity of **O(n)**, this approach is optimal for solving the problem efficiently, even for large arrays.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/description/)
 

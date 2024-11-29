@@ -14,150 +14,95 @@ img_src = ""
 youtube = "BJWTAclDvEA"
 youtube_upload_date="2023-02-05"
 youtube_thumbnail="https://i.ytimg.com/vi/BJWTAclDvEA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A robber is tasked with stealing money from houses lined along a street. Each house has a certain amount of money, but the robber refuses to rob adjacent houses. The robber must steal from at least 'k' houses. Your goal is to determine the minimum amount of money the robber will steal from any house, out of all the possible ways of selecting at least 'k' houses, given the constraints.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array 'nums' where each element represents the amount of money in the corresponding house. The second input is an integer 'k', representing the minimum number of houses the robber will steal from.
+- **Example:** `Input: nums = [1, 2, 3, 4, 5], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 1 <= k <= (nums.length + 1)/2
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    int n;
-    vector<int> nums;
-    vector<vector<vector<map<int, int>>>> memo;
-    
-    int dp(int idx, int k, bool prv, int mx) {
-        if(idx == n) return (k > 0)? INT_MAX: mx;
-        
-        if(memo[idx][k][prv].count(mx)) return memo[idx][k][prv][mx];
-        
-        int ans = dp(idx + 1, k, false, mx);
-        
-        if(!prv) {
-            int tmp = dp(idx + 1, k - 1 < 1? 0: k-1, true, mx == 0? nums[idx]: (mx > nums[idx]) ? mx: nums[idx]);
-            ans = min(ans, tmp);            
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum capability, which is the least maximum amount of money the robber steals from any of the houses he robs.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result will always be a positive integer.
 
-        return memo[idx][k][prv][mx] = ans;
-    }
-    
-    int minCap(vector<int>& nums, int k) {
-        this->nums = nums;
-        n = nums.size();
-        memo.resize(n, vector<vector<map<int, int>>>(n + 1, vector<map<int,int>>(2)));
-        return dp(0, k, false, 0);
-    }
-    
-    bool can(vector<int> &nums, int k, int mid) {
-        int n = nums.size();
-        int cnt = 0, take = true;
-        for(int i = 0; i < n; i += 1) {
-            if(nums[i] <= mid && take) {
-                take = false;
-                cnt++;
-            } else if(!take) {
-                take = true;
-            }
-            if(cnt >= k) return true;
-        }
-        cnt = 0, take = true;
-        for(int i = 1; i < n; i += 2) {
-            if(nums[i] <= mid && take) {
-                take = false;
-                cnt++;
-            } else if(!take) {
-                take = true;
-            }
-            if(cnt >= k) return true;
-        }        
-        return false;
-    }
-    
-    int minCapability(vector<int>& nums, int k) {
-        
-        int mx = *max_element(nums.begin(), nums.end());
-        int mn = *min_element(nums.begin(), nums.end());
-        int l = mn, r = mx, ans = mx;
-        while(l <= r) {
-            int mid = l + (r - l + 1) / 2;
-            // cout << mid << " " << can(nums, k, mid) << "\n";
-            if(can(nums, k, mid)) {
-                ans = mid;
-                r = mid - 1;
-            } else l = mid + 1;
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the maximum amount of money the robber steals while robbing at least 'k' houses.
 
-### Problem Statement
+- First, define the minimum and maximum possible capabilities for the robber.
+- Use binary search to determine the optimal maximum capability while ensuring the robber can rob at least 'k' houses.
+- Implement a helper function to check if a particular capability allows the robber to rob at least 'k' houses.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is always possible to rob at least 'k' houses.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [2, 3, 5, 9], k = 2`  \
+  **Explanation:** In this example, the robber has three ways to rob two houses: (0, 2), (0, 3), and (1, 3). The corresponding maximum values of the money stolen are 5, 9, and 9. Therefore, the minimum capability is 5.
 
-We are tasked with finding the minimum capability of a number `x` such that we can select `k` non-adjacent numbers from a list of integers `nums`. The selected numbers should be less than or equal to `x`. 
+- **Input:** `Example 2: nums = [2, 7, 9, 3, 1], k = 2`  \
+  **Explanation:** In this example, the robber can rob two houses with the minimum capability being 2, by robbing houses at index 0 and 4.
 
-The goal is to minimize the largest number in the selected subsequence, and `x` must be chosen such that there exists a way to select exactly `k` non-adjacent numbers. 
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by binary searching on the possible capabilities, while using a greedy strategy to check if a certain capability allows for robbing at least 'k' houses.
 
-In simple terms, the problem asks us to determine the minimum maximum number `x` such that we can select `k` non-adjacent numbers from the list where each selected number is less than or equal to `x`.
-
-### Approach
-
-The problem is a combination of **dynamic programming** and **binary search**. The main idea is to use binary search to find the minimum maximum number `x`, and for each potential value of `x`, we check if it's possible to select `k` non-adjacent numbers less than or equal to `x`. Here's how we approach the solution:
-
-1. **Binary Search**:
-   - First, we perform a binary search over the range of possible values of `x`, which are the values in `nums`.
-   - The search will be between the minimum value (`mn`) and the maximum value (`mx`) in the array `nums`. For each middle value (`mid`), we check if it's possible to select `k` non-adjacent numbers all less than or equal to `mid`.
-
-2. **Checking Feasibility**:
-   - For each `mid` value during the binary search, we check if it's possible to select `k` non-adjacent numbers from `nums` such that all the selected numbers are less than or equal to `mid`. This check is done by iterating through the array and greedily selecting the numbers.
-   
-3. **Memoization and Dynamic Programming**:
-   - We use memoization with dynamic programming to avoid redundant calculations, especially when trying to find the minimal number for the selected subsequence.
-   
-By combining these two approaches (binary search and dynamic programming), we can efficiently find the solution.
-
-### Code Breakdown
-
-#### Step 1: Initialization and Binary Search Setup
-
+### Initial Thoughts 💭
+- We need to find a way to minimize the maximum value that the robber can steal from a house, given the constraint of robbing at least 'k' houses.
+- Binary search can be used to efficiently find the minimum maximum capability, as the solution space is bounded by the minimum and maximum values in the array.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the problem is invalid, as no houses exist.
+- For large inputs, binary search ensures that the solution is efficient.
+- If 'k' equals half the size of the array or more, the solution must still ensure that the robber steals only from non-adjacent houses.
+- Handle arrays with both small and large numbers of houses efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-int mx = *max_element(nums.begin(), nums.end());
-int mn = *min_element(nums.begin(), nums.end());
-int l = mn, r = mx, ans = mx;
-```
 
-- **mx**: The maximum element in the list `nums`, which serves as the upper bound for our binary search.
-- **mn**: The minimum element in `nums`, which is the lower bound for our binary search.
-- **l** and **r** represent the left and right bounds of our binary search range.
-- **ans** keeps track of the optimal value of `x`, which will store the minimum possible capability.
+int n;
+vector<int> nums;
+vector<vector<vector<map<int, int>>>> memo;
 
-#### Step 2: Binary Search Loop
+int dp(int idx, int k, bool prv, int mx) {
+    if(idx == n) return (k > 0)? INT_MAX: mx;
+    
+    if(memo[idx][k][prv].count(mx)) return memo[idx][k][prv][mx];
+    
+    int ans = dp(idx + 1, k, false, mx);
+    
+    if(!prv) {
+        int tmp = dp(idx + 1, k - 1 < 1? 0: k-1, true, mx == 0? nums[idx]: (mx > nums[idx]) ? mx: nums[idx]);
+        ans = min(ans, tmp);            
+    }
 
-```cpp
-while(l <= r) {
-    int mid = l + (r - l + 1) / 2;
-    if(can(nums, k, mid)) {
-        ans = mid;
-        r = mid - 1;
-    } else l = mid + 1;
+    return memo[idx][k][prv][mx] = ans;
 }
-```
 
-- In each iteration of the binary search loop, we calculate the middle point `mid`.
-- We then call the `can` function to check if it's possible to select `k` non-adjacent numbers all less than or equal to `mid`.
-- If it's possible, we update `ans` with the current `mid` and continue to search in the lower half (`r = mid - 1`).
-- If it's not possible, we search in the upper half (`l = mid + 1`).
+int minCap(vector<int>& nums, int k) {
+    this->nums = nums;
+    n = nums.size();
+    memo.resize(n, vector<vector<map<int, int>>>(n + 1, vector<map<int,int>>(2)));
+    return dp(0, k, false, 0);
+}
 
-#### Step 3: Feasibility Check Function (`can`)
-
-```cpp
 bool can(vector<int> &nums, int k, int mid) {
     int n = nums.size();
     int cnt = 0, take = true;
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < n; i += 1) {
         if(nums[i] <= mid && take) {
             take = false;
             cnt++;
@@ -178,68 +123,170 @@ bool can(vector<int> &nums, int k, int mid) {
     }        
     return false;
 }
-```
 
-- **Feasibility Check**: This function checks whether we can select `k` non-adjacent numbers from `nums` where each selected number is less than or equal to `mid`.
-- We use two passes through the array `nums` to ensure that the selected numbers are non-adjacent:
-  1. The first pass starts from index 0 and selects every alternate number.
-  2. The second pass starts from index 1 and selects every alternate number.
-- The function returns `true` if it's possible to select `k` non-adjacent numbers under these constraints; otherwise, it returns `false`.
-
-#### Step 4: Dynamic Programming and Memoization (Optional)
-
-```cpp
-vector<int> nums;
-vector<vector<vector<map<int, int>>>> memo;
-int dp(int idx, int k, bool prv, int mx) {
-    if(idx == n) return (k > 0)? INT_MAX: mx;
-    if(memo[idx][k][prv].count(mx)) return memo[idx][k][prv][mx];
-    int ans = dp(idx + 1, k, false, mx);
-    if(!prv) {
-        int tmp = dp(idx + 1, k - 1 < 1? 0: k-1, true, mx == 0? nums[idx]: (mx > nums[idx]) ? mx: nums[idx]);
-        ans = min(ans, tmp);            
+int minCapability(vector<int>& nums, int k) {
+    
+    int mx = *max_element(nums.begin(), nums.end());
+    int mn = *min_element(nums.begin(), nums.end());
+    int l = mn, r = mx, ans = mx;
+    while(l <= r) {
+        int mid = l + (r - l + 1) / 2;
+        // cout << mid << " " << can(nums, k, mid) << "\n";
+        if(can(nums, k, mid)) {
+            ans = mid;
+            r = mid - 1;
+        } else l = mid + 1;
     }
-    return memo[idx][k][prv][mx] = ans;
+    return ans;
 }
 ```
 
-- **Memoization**: The `memo` array stores the results of previously computed subproblems to avoid recalculating them.
-- **Dynamic Programming**: The function `dp` recursively explores the possible states while maintaining the maximum number (`mx`) encountered during the process. It uses a depth-first search approach with memoization to avoid recalculating the same states.
+This code defines a dynamic programming approach to solve a problem involving arrays and binary search to minimize the largest element in a set of partitions. The solution uses memoization and efficient checks to determine the minimum capability required.
 
-#### Step 5: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int n;
+	```
+	The variable `n` is used to store the size of the input array `nums`.
 
-```cpp
-return ans;
-```
+2. **Vector Declaration**
+	```cpp
+	vector<int> nums;
+	```
+	A vector `nums` is declared to store the input values that the algorithm will work with.
 
-- Once the binary search is complete, the value of `ans` will be the minimum capability `x` for which it's possible to select `k` non-adjacent numbers.
+3. **Memoization**
+	```cpp
+	vector<vector<vector<map<int, int>>>> memo;
+	```
+	A 3D memoization table is initialized to store intermediate results during the dynamic programming process, helping avoid redundant calculations.
 
-### Complexity Analysis
+4. **Function Declaration**
+	```cpp
+	int dp(int idx, int k, bool prv, int mx) {
+	```
+	This function defines a recursive dynamic programming approach to solve the problem, where `idx` is the current index, `k` represents remaining partitions, `prv` tracks if the previous element was selected, and `mx` keeps the maximum element in the current partition.
 
-#### Time Complexity:
+5. **Base Case**
+	```cpp
+	    if(idx == n) return (k > 0)? INT_MAX: mx;
+	```
+	Base case: If we've reached the end of the array, return the current max value or infinity if there are still partitions left to be made.
 
-- **Binary Search**: The binary search runs for \(O(\log(\text{max} - \text{min}))\), where the difference is between the maximum and minimum values in `nums`. This is at most \(O(\log(\text{max element}))\).
-- **Feasibility Check**: Each call to the `can` function processes all elements of `nums` in linear time \(O(n)\).
-- **Dynamic Programming (if used)**: The recursion and memoization can add additional complexity, but the combined approach with binary search ensures that the overall complexity remains manageable.
+6. **Memoization Check**
+	```cpp
+	    if(memo[idx][k][prv].count(mx)) return memo[idx][k][prv][mx];
+	```
+	Memoization check: If the result for the current state is already calculated, return it to avoid redundant computation.
 
-Thus, the time complexity of the solution is approximately:
-\[
-O(n \log(\text{max element}))
-\]
-where \(n\) is the number of elements in `nums`.
+7. **Recursive Step**
+	```cpp
+	    int ans = dp(idx + 1, k, false, mx);
+	```
+	Recursive call to solve the problem by excluding the current element from the partition.
 
-#### Space Complexity:
+8. **Conditional Branch**
+	```cpp
+	    if(!prv) {
+	```
+	Conditional check to determine whether the previous element was included in the current partition.
 
-- **Memoization Storage**: The `memo` array requires space proportional to the size of the state space. In the worst case, this could be \(O(n \cdot k \cdot \log(\text{max element}))\), depending on the specific implementation of the DP approach.
+9. **Recursive Step with Modification**
+	```cpp
+	        int tmp = dp(idx + 1, k - 1 < 1? 0: k-1, true, mx == 0? nums[idx]: (mx > nums[idx]) ? mx: nums[idx]);
+	```
+	If not the previous element, another recursive call is made, adjusting the value of `k` and `mx` to reflect the current partitioning logic.
 
-Thus, the space complexity is approximately:
-\[
-O(n \cdot k)
-\]
+10. **Update Minimum Result**
+	```cpp
+	        ans = min(ans, tmp);            
+	```
+	Update the minimum answer found so far between the current result and the recursive result.
 
-### Conclusion
+11. **Memoization Storage**
+	```cpp
+	    return memo[idx][k][prv][mx] = ans;
+	```
+	Store the result of the current state in the memoization table to avoid redundant calculations in the future.
 
-This solution efficiently uses binary search combined with dynamic programming to find the minimum capability for selecting `k` non-adjacent numbers from the list. The use of memoization optimizes repeated subproblems, and the binary search reduces the range of possible values for `x`, making the solution optimal for large input sizes. The combination of these techniques ensures that the problem is solved efficiently within the given constraints.
+12. **Main Function Declaration**
+	```cpp
+	int minCap(vector<int>& nums, int k) {
+	```
+	Main function declaration which initializes necessary variables and sets up the memoization table before calling the dynamic programming function.
+
+13. **Input Handling**
+	```cpp
+	    this->nums = nums;
+	```
+	Assign the input array to the class's `nums` variable.
+
+14. **Size Calculation**
+	```cpp
+	    n = nums.size();
+	```
+	Calculate the size of the input array.
+
+15. **Memoization Table Resize**
+	```cpp
+	    memo.resize(n, vector<vector<map<int, int>>>(n + 1, vector<map<int,int>>(2)));
+	```
+	Resize the memoization table to match the input array size.
+
+16. **Call Dynamic Programming Function**
+	```cpp
+	    return dp(0, k, false, 0);
+	```
+	Call the dynamic programming function to compute the result.
+
+17. **Binary Search Setup**
+	```cpp
+	int mx = *max_element(nums.begin(), nums.end());
+	```
+	Find the maximum element in the input array, as we will use it as the upper bound for binary search.
+
+18. **Binary Search Main Loop**
+	```cpp
+	    int l = mn, r = mx, ans = mx;
+	    while(l <= r) {
+	        int mid = l + (r - l + 1) / 2;
+	```
+	Set up the binary search loop where `l` and `r` are the range, and `mid` is the current middle value.
+
+19. **Check Feasibility**
+	```cpp
+	        if(can(nums, k, mid)) {
+	            ans = mid;
+	            r = mid - 1;
+	        } else l = mid + 1;
+	```
+	Check if the mid value satisfies the condition and adjust the binary search range accordingly.
+
+20. **Return Answer**
+	```cpp
+	    return ans;
+	```
+	Return the final answer after the binary search has completed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log m), where n is the number of houses and m is the maximum value in the 'nums' array.
+- **Average Case:** O(n log m), due to the binary search and checking each house.
+- **Worst Case:** O(n log m), as the binary search goes through all possible values of the capability.
+
+The time complexity is determined by the binary search and the checking of each house for each potential capability.
+
+### Space Complexity 💾
+- **Best Case:** O(n), as space usage is dominated by the input size and intermediate calculations.
+- **Worst Case:** O(n), where n is the size of the 'nums' array, due to the space used by the binary search and the helper function.
+
+The space complexity is O(n) because the solution stores intermediate results while performing the binary search.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/house-robber-iv/description/)
 

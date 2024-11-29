@@ -14,71 +14,127 @@ img_src = ""
 youtube = "4JA5MW772N0"
 youtube_upload_date="2024-02-13"
 youtube_thumbnail="https://i.ytimg.com/vi/4JA5MW772N0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a list of words, return the first word that is a palindrome. A palindrome is a word that reads the same forwards and backwards. If no palindromic word is found, return an empty string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of strings, words, where each string consists of lowercase English letters.
+- **Example:** `words = ["hello", "level", "world"]`
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length <= 100
+	- words[i] consists only of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string firstPalindrome(vector<string>& words) {
-        for (auto &w : words)
-            if (w == string(rbegin(w), rend(w)))
-                return w;
-        return "";
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the first palindromic word from the input array. If no such word exists, return an empty string.
+- **Example:** `For words = ["hello", "level", "world"], the output should be "level".`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the first word in the array that is palindromic by checking if each word is equal to its reverse.
 
-The problem requires finding the first palindromic string in a given list of strings (`words`). A palindrome is a string that reads the same forwards and backwards. If a palindromic string is found, the function should return it; if no palindromic string exists in the list, return an empty string.
+- Iterate through each word in the array.
+- For each word, check if it reads the same forward and backward.
+- Return the first word that satisfies the condition. If no word satisfies the condition, return an empty string.
+{{< dots >}}
+### Problem Assumptions ✅
+- All strings are lowercase English letters.
+- The solution must identify palindromes efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: words = ["hello", "level", "world"]`  \
+  **Explanation:** The first palindromic word is "level", as it is the first word in the list that reads the same forward and backward.
 
-### Approach
+- **Input:** `Example 2: words = ["apple", "banana", "radar"]`  \
+  **Explanation:** The first palindromic word is "radar".
 
-The solution leverages a straightforward approach:
+- **Input:** `Example 3: words = ["dog", "cat"]`  \
+  **Explanation:** There are no palindromic words in the array, so the output is an empty string.
 
-1. **Iterate Through Each Word**: Traverse each string (`w`) in the `words` list.
-2. **Check for Palindrome**: For each string, check if it reads the same forwards and backwards. This is achieved by comparing `w` to its reverse, which is generated using `string(rbegin(w), rend(w))`.
-3. **Return the First Palindrome**: If a match is found, return that word immediately.
-4. **No Palindrome Found**: If the loop completes without finding a palindrome, return an empty string.
+{{< dots >}}
+## Approach 🚀
+The problem requires iterating over the list of words and checking if each word is a palindrome. A palindrome is a word that reads the same backward as forward.
 
-### Code Breakdown (Step by Step)
+### Initial Thoughts 💭
+- We can check if a word is a palindrome by comparing the word to its reverse.
+- Since the constraints are small (up to 100 words, each with up to 100 characters), the solution can use a straightforward approach of checking each word.
+- The solution is simple and works in O(n*m) time where n is the number of words and m is the average length of the words.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the function should return an empty string.
+- If the input contains many long strings (up to the maximum constraints), the function should still operate efficiently.
+- A single-character word is always a palindrome.
+- The solution should handle up to 100 words, each with up to 100 characters.
+{{< dots >}}
+## Code 💻
+```cpp
+string firstPalindrome(vector<string>& words) {
+    for (auto &w : words)
+        if (w == string(rbegin(w), rend(w)))
+            return w;
+    return "";
+}
+```
 
-1. **Loop Through Words**:
-   ```cpp
-   for (auto &w : words)
-   ```
-   - Here, each string `w` in `words` is checked individually.
+This function checks if a given list of words contains a palindrome and returns the first one. If no palindrome is found, it returns an empty string.
 
-2. **Check Palindrome Condition**:
-   ```cpp
-   if (w == string(rbegin(w), rend(w)))
-       return w;
-   ```
-   - `w == string(rbegin(w), rend(w))` compares `w` to its reverse. If true, `w` is a palindrome, and the function immediately returns it.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string firstPalindrome(vector<string>& words) {
+	```
+	Define the function `firstPalindrome` that takes a vector of strings as an argument.
 
-3. **Return Empty String if No Palindrome**:
-   ```cpp
-   return "";
-   ```
-   - If the loop completes without finding any palindromic string, an empty string is returned.
+2. **Loop Start**
+	```cpp
+	    for (auto &w : words)
+	```
+	Start a loop to iterate through each word in the `words` vector.
 
-### Complexity Analysis
+3. **Condition Check**
+	```cpp
+	        if (w == string(rbegin(w), rend(w)))
+	```
+	Check if the current word `w` is equal to its reverse (using reverse iterators).
 
-- **Time Complexity**: \(O(n \cdot m)\), where `n` is the number of strings in `words` and `m` is the average length of each string.
-  - In the worst case, each string needs to be checked for palindrome status. Checking if a string is a palindrome takes \(O(m)\) time, leading to a combined complexity of \(O(n \cdot m)\).
-  
-- **Space Complexity**: \(O(1)\) for storage, aside from the input list.
-  - While `string(rbegin(w), rend(w))` temporarily creates a reversed version of `w`, no additional storage grows with the input size.
+4. **Return Statement**
+	```cpp
+	            return w;
+	```
+	If a palindrome is found, return the current word `w`.
 
-### Conclusion
+5. **Return Statement**
+	```cpp
+	    return "";
+	```
+	If no palindrome is found after checking all words, return an empty string.
 
-This solution efficiently finds the first palindromic string in a list by leveraging direct comparisons with reversed strings. The code is concise, readable, and effective, especially for shorter lists or average-length strings. Its simplicity and efficiency make it ideal for scenarios where only a single palindrome is needed from a collection, avoiding unnecessary extra processing.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n*m)
+- **Worst Case:** O(n*m)
+
+The time complexity is O(n*m) where n is the number of words and m is the average length of the words.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as the solution only requires a few additional variables to store intermediate results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-first-palindromic-string-in-the-array/description/)
 

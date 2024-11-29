@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Cg6_nF7YIks"
 youtube_upload_date="2024-03-27"
 youtube_thumbnail="https://i.ytimg.com/vi/Cg6_nF7YIks/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,95 +28,164 @@ youtube_thumbnail="https://i.ytimg.com/vi/Cg6_nF7YIks/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of integers `nums` and an integer `k`, return the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than `k`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` of integers and an integer `k`.
+- **Example:** `nums = [3, 4, 1, 2], k = 20`
+- **Constraints:**
+	- 1 <= nums.length <= 3 * 10^4
+	- 1 <= nums[i] <= 1000
+	- 0 <= k <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
-        if(k == 0) return 0;
-        long long prod = 1;
-        int res = 0, j = 0;
-        for(int i = 0; i < nums.size(); i++) {
-            prod *= nums[i];
-            
-            while(prod >= k && j <= i) {
-                prod /= nums[j++];
-            }
-            
-            res += (i - j + 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the count of contiguous subarrays whose product of elements is strictly less than `k`.
+- **Example:** `6`
+- **Constraints:**
+	- The result should be a non-negative integer representing the count of subarrays.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To efficiently calculate the number of contiguous subarrays with product less than `k`.
+
+- Use a sliding window technique to iterate through the array.
+- Maintain a product variable to store the product of the current subarray.
+- If the product exceeds `k`, move the left boundary of the window to reduce the product.
+- For each valid window, the number of subarrays ending at the current position is added to the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains positive integers and `k` is a non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 4, 1, 2], k = 20`  \
+  **Explanation:** The subarrays [3], [4], [1], [2], [3, 4], and [4, 1] have products less than 20, totaling 6 valid subarrays.
+
+- **Input:** `nums = [1, 1, 1], k = 5`  \
+  **Explanation:** All possible subarrays in this case have products less than 5, so the output is 6.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved efficiently using a sliding window technique to track the product of elements in subarrays.
+
+### Initial Thoughts 💭
+- Using a brute force approach by checking all possible subarrays would be too slow for large arrays.
+- A sliding window approach can help reduce the time complexity.
+- We will use a window where the product of the elements is maintained dynamically, updating it as the window slides over the array.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return 0.
+- Ensure the solution works efficiently for large arrays, up to the size constraint of 30,000.
+- If `k` is 0, the result should be 0 as no subarray can have a product less than 0.
+- Handle cases where `k` is very large or very small relative to the elements in the array.
+{{< dots >}}
+## Code 💻
+```cpp
+int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+    if(k == 0) return 0;
+    long long prod = 1;
+    int res = 0, j = 0;
+    for(int i = 0; i < nums.size(); i++) {
+        prod *= nums[i];
+        
+        while(prod >= k && j <= i) {
+            prod /= nums[j++];
         }
-        return res;
+        
+        res += (i - j + 1);
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
-The problem asks us to find the number of contiguous subarrays in a given array `nums` such that the product of the elements in each subarray is less than a given value `k`. Specifically, the task is to calculate how many contiguous subarrays have a product that is less than `k`.
+The function calculates the number of contiguous subarrays whose product of elements is less than a given value 'k' using the sliding window technique.
 
-### Approach
-This problem can be solved using the **sliding window** technique, which efficiently handles situations where we need to examine consecutive elements of an array. By maintaining a window of elements whose product is less than `k`, we can find all the valid subarrays without needing to check each possible subarray individually, which would be inefficient.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+	```
+	Define the function 'numSubarrayProductLessThanK' which takes a vector of integers 'nums' and an integer 'k'.
 
-The core idea of the sliding window technique in this case is to extend the window by including more elements from the array, while keeping track of the product of the elements in that window. If the product exceeds or equals `k`, we shrink the window from the left until the product is less than `k` again.
+2. **Edge Case Handling**
+	```cpp
+	    if(k == 0) return 0;
+	```
+	Handle the edge case where 'k' is 0, in which case no subarray product can be less than 0, thus return 0.
 
-### Code Breakdown (Step by Step)
-Let's break down the solution step by step:
+3. **Variable Initialization**
+	```cpp
+	    long long prod = 1;
+	```
+	Initialize the product variable 'prod' to 1. This will hold the product of elements in the current subarray.
 
-1. **Initialization**:
-   - `prod = 1`: This variable holds the product of the elements in the current window.
-   - `res = 0`: This variable counts the number of valid subarrays.
-   - `j = 0`: This is the left boundary of the sliding window.
+4. **Variable Initialization**
+	```cpp
+	    int res = 0, j = 0;
+	```
+	Initialize 'res' to store the result (number of valid subarrays) and 'j' as the starting index of the sliding window.
 
-2. **Loop Over Array Elements**:
-   - The outer loop iterates over each element `i` in the array `nums`:
-     ```cpp
-     for(int i = 0; i < nums.size(); i++) {
-     ```
+5. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Loop through each element in the 'nums' array using the variable 'i' as the end index of the sliding window.
 
-3. **Extend the Window**:
-   - For each element `nums[i]`, the product is updated by multiplying it with `prod`:
-     ```cpp
-     prod *= nums[i];
-     ```
+6. **Product Calculation**
+	```cpp
+	        prod *= nums[i];
+	```
+	Multiply the current element 'nums[i]' with the running product 'prod'.
 
-4. **Shrink the Window (If Necessary)**:
-   - If the product of the elements in the current window becomes greater than or equal to `k`, we move the left boundary `j` to the right, effectively removing elements from the window to reduce the product:
-     ```cpp
-     while(prod >= k && j <= i) {
-         prod /= nums[j++];
-     }
-     ```
-   - This ensures that the product of the elements in the window is always less than `k`.
+7. **Sliding Window Adjustment**
+	```cpp
+	        
+	```
+	Check and adjust the sliding window if the product exceeds 'k'.
 
-5. **Count Valid Subarrays**:
-   - After adjusting the window, the number of subarrays ending at index `i` with a product less than `k` is given by `i - j + 1`. This is because for each valid `i`, there are `i - j + 1` valid subarrays that can be formed by the elements in the range `[j, i]`:
-     ```cpp
-     res += (i - j + 1);
-     ```
+8. **While Loop**
+	```cpp
+	        while(prod >= k && j <= i) {
+	```
+	While the product exceeds or equals 'k', move the starting index 'j' to the right to reduce the product.
 
-6. **Return the Result**:
-   - Finally, the total count of valid subarrays is returned:
-     ```cpp
-     return res;
-     ```
+9. **Window Shrinking**
+	```cpp
+	            prod /= nums[j++];
+	```
+	Divide the product by 'nums[j]' (the element at the starting index), and increment 'j' to shrink the window.
 
-### Complexity Analysis
+10. **Counting Valid Subarrays**
+	```cpp
+	        res += (i - j + 1);
+	```
+	For each valid subarray (where the product is less than 'k'), add the number of valid subarrays in the current window to 'res'.
 
-- **Time Complexity**:
-  - The time complexity of this approach is **O(n)**, where `n` is the size of the array `nums`. This is because each element is added and removed from the product at most once. The two pointers `i` and `j` each move through the array once, and no element is processed more than twice.
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the total count of valid subarrays whose product is less than 'k'.
 
-- **Space Complexity**:
-  - The space complexity is **O(1)**, since we only use a constant amount of extra space for variables like `prod`, `res`, and `j`. The space used does not depend on the size of the input array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
-This solution efficiently counts the number of contiguous subarrays whose product is less than a given value `k` using a sliding window approach. By iterating over the array once, adjusting the window as needed, and counting valid subarrays on the go, the algorithm achieves optimal time complexity. This is a perfect example of how the sliding window technique can be leveraged to solve problems involving subarrays or sub-sequences in linear time.
+In the worst case, we process each element once while adjusting the window, making the time complexity linear.
 
-By implementing this solution, we achieve an efficient algorithm for a problem that might otherwise seem to require brute force, ensuring that we can handle large input arrays in a time-efficient manner.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This approach, due to its linear time complexity, is well-suited for handling large datasets and real-time applications where performance is critical. The technique of adjusting the window dynamically ensures that we only process the necessary elements, avoiding redundant calculations and optimizing the overall process.
+The solution uses constant space, only requiring a few variables to maintain the window and the count.
 
-In summary, this code offers a clean, efficient, and scalable solution to the problem, demonstrating the power of the sliding window technique in solving subarray problems.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarray-product-less-than-k/description/)
 

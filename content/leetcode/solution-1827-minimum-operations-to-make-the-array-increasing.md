@@ -14,103 +14,143 @@ img_src = ""
 youtube = "U217V1lFwlk"
 youtube_upload_date="2021-04-17"
 youtube_thumbnail="https://i.ytimg.com/vi/U217V1lFwlk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums. In one operation, you can increment any element of the array by 1. The goal is to make the array strictly increasing, meaning that each element should be smaller than the next. Return the minimum number of operations required to achieve this.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array nums of length n where 1 <= n <= 5000 and 1 <= nums[i] <= 10^4.
+- **Example:** `For example, nums = [2, 3, 1, 5] means the array consists of four elements: 2, 3, 1, and 5.`
+- **Constraints:**
+	- 1 <= nums.length <= 5000
+	- 1 <= nums[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minOperations(vector<int>& nums) {
-        int res = 0, need = nums[0] + 1;
-        int n = nums.size();
-        for(int i = 1; i < n; i++) {
-            res += max(0, need - nums[i]);
-            need = max(nums[i], need) + 1;
-        }
-        
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer, which is the minimum number of operations needed to make the array strictly increasing.
+- **Example:** `For nums = [2, 3, 1, 5], the output is 2 because we need to increment nums[2] (1) to 4 and nums[3] (5) to 6 to make the array strictly increasing.`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the minimum number of increment operations to make the array strictly increasing.
+
+- 1. Iterate over the array starting from the second element.
+- 2. If an element is not greater than the previous one, calculate the number of increments needed to make it strictly larger.
+- 3. Keep track of the total number of operations (increments).
+{{< dots >}}
+### Problem Assumptions ✅
+- If the array is already strictly increasing, no operations are needed.
+- The solution should handle arrays with both small and large values efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2, 3, 1, 5]`  \
+  **Explanation:** The array is not strictly increasing because 1 is not greater than 3. To make it strictly increasing, we need to increment 1 to 4 and 5 to 6. This results in 2 operations.
+
+- **Input:** `Input: nums = [1, 2, 3]`  \
+  **Explanation:** The array is already strictly increasing, so no operations are needed.
+
+- **Input:** `Input: nums = [8, 7, 5, 5]`  \
+  **Explanation:** The array is not strictly increasing because the elements 7 and 5 are not greater than the preceding elements. We need to increment 7 to 9 and 5 to 10 to make the array strictly increasing. This results in 4 operations.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating through the array and ensuring that each element is strictly greater than the previous one by applying the necessary number of increments.
+
+### Initial Thoughts 💭
+- The key observation is that for any element nums[i], it must be greater than nums[i-1]. If it is not, the difference between nums[i-1] and nums[i] tells us how many increments are needed.
+- The problem involves minimizing the number of increments, so we should compute the required increments in a single pass.
+- The solution is linear in complexity, processing each element in the array once. This ensures that we can solve the problem efficiently even for large arrays.
+{{< dots >}}
+### Edge Cases 🌐
+- The array has only one element (no operation needed).
+- When the array has the maximum length of 5000 elements, the solution must handle this efficiently with linear time complexity.
+- Arrays where all elements are the same or where the array is already strictly increasing.
+- Ensure that the solution handles arrays with large values and ensures efficiency with O(n) time complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+int minOperations(vector<int>& nums) {
+    int res = 0, need = nums[0] + 1;
+    int n = nums.size();
+    for(int i = 1; i < n; i++) {
+        res += max(0, need - nums[i]);
+        need = max(nums[i], need) + 1;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to determine the minimum number of operations required to transform a given array of integers, `nums`, such that every element at index `i` is strictly greater than the element at index `i-1`. Specifically, for each `i` from `1` to `n-1` (where `n` is the length of the array), we want to ensure that `nums[i]` is greater than `nums[i-1]`. 
-
-If `nums[i]` is not greater than `nums[i-1]`, we need to perform operations to increase its value. The goal is to find out how many such increment operations are required to achieve the desired state.
-
-### Approach
-
-To solve this problem, we can utilize a simple greedy algorithm. The approach can be broken down into the following steps:
-
-1. **Initialization**: Start with the first element of the array and initialize a counter to keep track of the total number of operations (`res`). We also maintain a variable (`need`) that tracks the value that the next number must exceed.
-
-2. **Iterate Through the Array**: Loop through the array starting from the second element:
-   - For each element, check if it is less than or equal to `need`.
-   - If it is, calculate the difference needed to make it exceed `need` and add this difference to the operations counter.
-   - Update `need` to be the maximum of the current element and the current `need`, and increment `need` by 1 for the next iteration.
-
-3. **Return the Result**: At the end of the loop, the counter will hold the total number of operations needed.
-
-This approach ensures that we only traverse the array once, leading to an efficient solution.
-
-### Code Breakdown (Step by Step)
-
-Here is the complete implementation of the approach explained above:
-
-```cpp
-class Solution {
-public:
-    int minOperations(vector<int>& nums) {
+    
+    return res;
+}
 ```
-- The function `minOperations` takes a vector of integers `nums` as input.
 
-```cpp
-        int res = 0, need = nums[0] + 1; // Initialize operations count and set need to first element + 1
-        int n = nums.size(); // Get the size of the nums array
-```
-- `res` is initialized to `0` to count the operations.
-- `need` is initialized to `nums[0] + 1` because the next number must be greater than the first number.
+This code implements the function `minOperations` to find the minimum number of operations needed to make the array strictly increasing. It iterates through the array, adjusting values as needed and calculating the operations.
 
-```cpp
-        for(int i = 1; i < n; i++) { // Iterate from the second element
-```
-- A loop is initiated starting from the second element (index `1`) to the last element.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minOperations(vector<int>& nums) {
+	```
+	This defines the main function `minOperations`, which takes a vector of integers as input and computes the minimum operations needed to make the array strictly increasing.
 
-```cpp
-            res += max(0, need - nums[i]); // Calculate operations needed for nums[i]
-```
-- For each element, we check if it meets the requirement of being greater than `need`. If not, we calculate how many increments are needed (`need - nums[i]`) and add it to `res`. The `max(0, ...)` ensures that we do not add negative values (i.e., if `nums[i]` is already greater than `need`).
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, need = nums[0] + 1;
+	```
+	Here, `res` is initialized to 0 to store the number of operations, and `need` is set to one more than the first element in the array, representing the smallest required value for the next element.
 
-```cpp
-            need = max(nums[i], need) + 1; // Update need for the next iteration
-        }
-```
-- After considering the current element, `need` is updated to the maximum of the current `nums[i]` and the previous `need`, plus `1` for the next element.
+3. **Array Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	This line calculates the size of the `nums` array to determine the number of iterations needed for the loop.
 
-```cpp
-        return res; // Return the total operations needed
-    }
-};
-```
-- Finally, we return the count of operations needed.
+4. **Loop Setup**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	A for-loop starts from the second element (index 1) to iterate through the array and adjust the values to ensure it is strictly increasing.
 
-### Complexity
+5. **Operation Calculation**
+	```cpp
+	        res += max(0, need - nums[i]);
+	```
+	This line computes the number of operations needed to adjust the current element (`nums[i]`). If the element is less than `need`, the difference is added to `res`.
 
-- **Time Complexity**: The time complexity of the solution is \(O(n)\), where \(n\) is the length of the `nums` array. This is because we iterate through the array once, performing constant-time operations for each element.
+6. **Updating Need**
+	```cpp
+	        need = max(nums[i], need) + 1;
+	```
+	The `need` value is updated to be the maximum of the current element and the previous `need` value, then incremented by 1. This ensures that the next element will be strictly greater than the current one.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we are using a constant amount of extra space for our variables (`res`, `need`, and `n`).
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the total number of operations stored in `res`.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), when the array is already strictly increasing.
+- **Average Case:** O(n), since we are iterating through the array once.
+- **Worst Case:** O(n), when we have to increment each element of the array.
 
-The implemented solution efficiently computes the minimum number of operations required to ensure that every subsequent element in the array is strictly greater than the previous one. By iterating through the array and maintaining a running total of required increments, the solution achieves optimal performance while keeping the implementation straightforward and easy to understand.
+The time complexity is linear because we only traverse the array once.
 
-This method leverages the greedy strategy effectively, ensuring that the next element meets the necessary conditions without unnecessary operations. Thus, it provides a clear, efficient means to solve the problem of transforming the array to meet the given constraints.
+### Space Complexity 💾
+- **Best Case:** O(1), since no additional space is needed.
+- **Worst Case:** O(1), since we only need a constant amount of extra space for variables.
+
+The space complexity is constant because we only use a few variables to store intermediate results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-make-the-array-increasing/description/)
 

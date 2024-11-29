@@ -14,103 +14,144 @@ img_src = ""
 youtube = "IFRYDmhEWGw"
 youtube_upload_date="2023-01-22"
 youtube_thumbnail="https://i.ytimg.com/vi/IFRYDmhEWGw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a positive integer n. Each digit of n has a sign according to the following rules: The most significant digit is assigned a positive sign. Each other digit has an opposite sign to its adjacent digits. Return the sum of all digits with their corresponding sign.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a positive integer n.
+- **Example:** `n = 324`
+- **Constraints:**
+	- 1 <= n <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int alternateDigitSum(int n) {
-        int sum = 0;
-        int sgn = 1;
-        while(n) {
-            sum += sgn * (n % 10);
-            n /= 10;
-            sgn *= -1;
-        }
-        return sgn == -1? sum : -sum;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of all digits with their corresponding signs.
+- **Example:** `1`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the sum of the digits of the integer n, where each digit has a sign based on its position.
+
+- 1. Extract each digit from the number n, starting from the least significant to the most significant.
+- 2. Alternate the sign for each digit based on its position.
+- 3. Compute the sum of the digits, considering their corresponding signs.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input number n is a positive integer.
+- The number has at least one digit.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 324`  \
+  **Explanation:** For n = 324, the sum is (+3) + (-2) + (+4) = 1.
+
+- **Input:** `n = 101`  \
+  **Explanation:** For n = 101, the sum is (+1) + (-0) + (+1) = 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to alternate the signs of the digits in the number and compute their sum.
+
+### Initial Thoughts 💭
+- The problem asks us to sum digits with alternating signs based on their position.
+- This is a straightforward problem of alternating signs and summing values.
+- We can extract digits one by one and alternate their signs using a simple loop.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is always a positive integer, so no need to handle empty inputs.
+- Handle inputs where n is close to the upper constraint of 10^9.
+- Handle cases where all digits are the same, such as n = 111.
+- The algorithm should run efficiently even for large numbers up to 10^9.
+{{< dots >}}
+## Code 💻
+```cpp
+int alternateDigitSum(int n) {
+    int sum = 0;
+    int sgn = 1;
+    while(n) {
+        sum += sgn * (n % 10);
+        n /= 10;
+        sgn *= -1;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to compute the **alternating sum of the digits** of a given number `n`, where the digits are added or subtracted alternately. Specifically, you need to:
-
-- Start from the least significant digit (rightmost digit) and alternate the sign (positive/negative) as you move leftward.
-- For example, for the number `4321`, the alternating sum will be computed as:
-  - `1 - 2 + 3 - 4 = -2`
-
-Given an integer `n`, you are to compute the alternating digit sum.
-
-### Approach
-
-The approach for this problem involves processing each digit of the number `n` in sequence, starting from the least significant digit, and alternately adding and subtracting the digits. The sign alternates after every digit, and we use a variable to track whether the current digit should be added or subtracted. The process continues until all digits of `n` are processed.
-
-1. **Initialization**: We need two variables:
-   - `sum`: This will store the resulting alternating sum.
-   - `sgn`: This will be used to track the alternating sign, initially set to `1` (for adding the first digit).
-   
-2. **Processing Each Digit**:
-   - Extract the least significant digit of the number using `n % 10`.
-   - Multiply the digit by the current sign (`sgn`), and add this value to the `sum`.
-   - Remove the last digit of `n` using integer division (`n /= 10`).
-   - Alternate the sign by multiplying `sgn` by `-1`.
-   
-3. **Final Adjustment**: After the loop, if the sign (`sgn`) is still `-1`, it means the sum of the digits should be negated. This is a result of how the sign alternates with each digit, and we need to adjust the sum at the end.
-
-4. **Return the Result**: Finally, return the computed alternating digit sum.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the sum and sign
-```cpp
-int sum = 0;
-int sgn = 1;
-```
-- `sum` is initialized to `0`, as we need to accumulate the alternating sum of the digits.
-- `sgn` is initialized to `1` since we start with adding the rightmost digit (positive sign).
-
-#### Step 2: Extract digits and compute alternating sum
-```cpp
-while(n) {
-    sum += sgn * (n % 10);
-    n /= 10;
-    sgn *= -1;
+    return sgn == -1? sum : -sum;
 }
 ```
-- The loop runs while `n` is not `0`, meaning there are still digits left to process.
-- `n % 10` extracts the least significant digit of `n`.
-- We multiply this digit by the current sign (`sgn`) and add it to `sum`.
-- Then, we update `n` by removing the least significant digit using integer division (`n /= 10`).
-- After processing each digit, we alternate the sign for the next digit by multiplying `sgn` by `-1`.
 
-#### Step 3: Final adjustment of the sum
-```cpp
-return sgn == -1 ? sum : -sum;
-```
-- After all digits have been processed, the sign (`sgn`) will either be `1` or `-1`.
-  - If `sgn` is `-1`, it means the sum was calculated correctly, and we return it as-is.
-  - If `sgn` is `1`, the sum needs to be negated to correct the final result.
+This function calculates the alternating digit sum of an integer by adding and subtracting the digits of the number in an alternating pattern, starting with addition.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int alternateDigitSum(int n) {
+	```
+	The function 'alternateDigitSum' is defined to compute the alternating sum of digits of an integer 'n'.
 
-#### Time Complexity:
-The time complexity of this algorithm is determined by how many digits the number `n` has. Specifically:
-- We process each digit once, and the number of digits in `n` is proportional to `log10(n)`.
-- Therefore, the time complexity is `O(log n)`, where `n` is the input number.
+2. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	The variable 'sum' is initialized to zero. This will accumulate the alternating sum of the digits.
 
-#### Space Complexity:
-The space complexity of the algorithm is constant, `O(1)`, because we are using only a few variables (`sum` and `sgn`) to store the intermediate results, and no additional data structures are used that depend on the size of `n`.
+3. **Variable Initialization**
+	```cpp
+	    int sgn = 1;
+	```
+	The variable 'sgn' is initialized to 1. This will help alternate the sign (positive or negative) for each digit in the number.
 
-### Conclusion
+4. **Loop Setup**
+	```cpp
+	    while(n) {
+	```
+	A while loop is initiated to iterate over the digits of the integer 'n'. The loop will continue until all digits are processed.
 
-The function successfully computes the alternating digit sum by processing the digits of `n` from right to left, alternating the sign of the sum as it goes. This approach is efficient with a time complexity of `O(log n)` and a space complexity of `O(1)`, making it both time-efficient and space-efficient for large values of `n`. The solution leverages simple arithmetic and control flow to achieve the desired result in an optimal manner.
+5. **Digit Extraction and Summing**
+	```cpp
+	        sum += sgn * (n % 10);
+	```
+	The last digit of 'n' (n % 10) is multiplied by 'sgn' (which alternates between 1 and -1) and added to 'sum'.
+
+6. **Digit Removal**
+	```cpp
+	        n /= 10;
+	```
+	The last digit of 'n' is removed by dividing it by 10, effectively shifting to the next digit.
+
+7. **Sign Alternation**
+	```cpp
+	        sgn *= -1;
+	```
+	The sign alternator 'sgn' is multiplied by -1 to switch between adding and subtracting for the next digit.
+
+8. **Return Statement**
+	```cpp
+	    return sgn == -1? sum : -sum;
+	```
+	Once the loop is complete, the function returns the sum. If 'sgn' is -1, the sum is returned as is; otherwise, it is negated to account for the final sign.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(d), where d is the number of digits in n.
+- **Average Case:** O(d), where d is the number of digits in n.
+- **Worst Case:** O(d), where d is the number of digits in n.
+
+The time complexity is O(d), where d is the number of digits in n (which is log(n) with respect to the input number).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, O(1), as we only use a fixed amount of space for the sum and a few variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/alternating-digit-sum/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "2g_b1aYTHeg"
 youtube_upload_date="2021-12-27"
 youtube_thumbnail="https://i.ytimg.com/vi/2g_b1aYTHeg/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,152 +28,221 @@ youtube_thumbnail="https://i.ytimg.com/vi/2g_b1aYTHeg/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a string s consisting of lowercase English letters. The task is to rearrange the characters of the string such that no two adjacent characters are the same. Return any valid rearrangement of the string, or return an empty string if it is not possible to rearrange the characters in such a way.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single string s, which contains only lowercase English letters.
+- **Example:** `Input: s = "abc"`
+- **Constraints:**
+	- 1 <= s.length <= 500
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string reorganizeString(string s) {
-        int mfq = 0, i = 0;
-        
-        vector<int> frq(26, 0);
-        for(char c: s)
-            if (++frq[c - 'a'] > frq[mfq])
-                mfq = c - 'a';
-        
-        // if mfq over bounds return ""
-        if(2 * frq[mfq] - 1 > s.size()) return "";
-        /*  dist mfq across
-            dist rest across */
-        while(frq[mfq]) {
-            s[i] = 'a' + mfq;
-            i += 2;
-            frq[mfq]--;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return any valid rearrangement of the string s such that no two adjacent characters are the same. If such rearrangement is not possible, return an empty string.
+- **Example:** `Output: "abc"`
+- **Constraints:**
+	- The output string should satisfy the condition where no two adjacent characters are the same.
 
-        for(int j = 0; j < 26; j++) {
-            while(frq[j]) {
-                if(i >= s.size()) i = 1;
-                s[i] = 'a' + j;
-                frq[j]--;
-                i += 2;
-            }
-        }
-        
-        return s;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to rearrange the string in such a way that no two adjacent characters are the same.
 
-### Problem Statement
+- Count the frequency of each character in the string.
+- Identify if any character appears too many times (more than half of the string's length).
+- Place the most frequent character in every alternate position first, then fill in the remaining positions with the other characters.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string is non-empty and consists of lowercase English letters only.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: s = "abc"`  \
+  **Explanation:** In this case, the characters 'a', 'b', and 'c' can be rearranged in any order without any adjacent characters being the same.
 
-The problem asks us to reorganize a string `s` in such a way that no two adjacent characters are the same. If it is not possible to rearrange the string to satisfy this condition, the function should return an empty string. For example:
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by first counting the frequency of each character and ensuring that no character appears more than half of the string's length. Then, we can place characters in alternate positions to avoid adjacent duplicates.
 
-- Input: `"aab"`
-- Output: `"aba"`
-
-The goal is to find an efficient way to rearrange the string, or determine when it's impossible to do so, while making sure that no two identical characters are adjacent.
-
-### Approach
-
-To solve the problem, we can employ a greedy algorithm. Here's the high-level strategy:
-
-1. **Frequency Count**: First, we need to calculate the frequency of each character in the string. This will help us identify if it's possible to reorganize the string. If any character appears more than half the length of the string (rounded up), it's impossible to rearrange the string, and we should return an empty string.
-
-2. **Greedy Rearrangement**: After we determine that rearranging is possible, we will use the most frequent character first and place it in every other position. Then, we will place the remaining characters in the gaps created by the most frequent character.
-
-3. **Rearranging Step**: 
-   - We start by placing the most frequent character in the even-indexed positions.
-   - Then, we proceed to place the remaining characters in the odd-indexed positions.
-
-By ensuring that the most frequent character is placed first and spaced out as much as possible, we can prevent consecutive occurrences of the same character.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Frequency Count
-
+### Initial Thoughts 💭
+- If any character appears more than half of the string length, it is impossible to rearrange the string without adjacent duplicates.
+- The frequency distribution of characters is key to determining if a rearrangement is possible.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle strings where all characters are the same, e.g., "aaa".
+- Ensure the solution works efficiently for strings up to 500 characters long.
+- If the string contains only one character, return the string itself.
+- Ensure the rearrangement preserves the original characters and doesn't introduce any adjacent duplicates.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<int> frq(26, 0);
-for(char c: s)
-    if (++frq[c - 'a'] > frq[mfq])
-        mfq = c - 'a';
-```
-
-- We create an array `frq` of size 26 to store the frequency of each character in the string `s`.
-- We also maintain a variable `mfq` to track the index of the character with the maximum frequency.
-- As we iterate over the string, we update the frequency count of each character and check if the current character has a higher frequency than the previous maximum. If so, we update `mfq`.
-
-#### Step 2: Check for Feasibility
-
-```cpp
-if(2 * frq[mfq] - 1 > s.size()) return "";
-```
-
-- After calculating the frequency of each character, we check if the most frequent character can be placed in the string such that no two identical characters are adjacent.
-- If the count of the most frequent character is greater than half the size of the string (rounded up), then it's impossible to reorganize the string without having two adjacent identical characters. In this case, we return an empty string `""`.
-
-#### Step 3: Place the Most Frequent Character
-
-```cpp
-while(frq[mfq]) {
-    s[i] = 'a' + mfq;
-    i += 2;
-    frq[mfq]--;
-}
-```
-
-- We now proceed to place the most frequent character (indexed by `mfq`) in the string. We start placing it in every other position, i.e., at even indices.
-- For each placement, we decrement the frequency of the most frequent character (`frq[mfq]--`) and move to the next available position (`i += 2`).
-
-#### Step 4: Place the Remaining Characters
-
-```cpp
-for(int j = 0; j < 26; j++) {
-    while(frq[j]) {
-        if(i >= s.size()) i = 1;
-        s[i] = 'a' + j;
-        frq[j]--;
+string reorganizeString(string s) {
+    int mfq = 0, i = 0;
+    
+    vector<int> frq(26, 0);
+    for(char c: s)
+        if (++frq[c - 'a'] > frq[mfq])
+            mfq = c - 'a';
+    
+    // if mfq over bounds return ""
+    if(2 * frq[mfq] - 1 > s.size()) return "";
+    /*  dist mfq across
+        dist rest across */
+    while(frq[mfq]) {
+        s[i] = 'a' + mfq;
         i += 2;
+        frq[mfq]--;
     }
+
+    for(int j = 0; j < 26; j++) {
+        while(frq[j]) {
+            if(i >= s.size()) i = 1;
+            s[i] = 'a' + j;
+            frq[j]--;
+            i += 2;
+        }
+    }
+    
+    return s;
+    
 }
 ```
 
-- After placing all occurrences of the most frequent character, we proceed to place the remaining characters.
-- For each character (from `a` to `z`), we check if it still has occurrences left (i.e., `frq[j]` is non-zero). If so, we place it in the next available position.
-- If we reach the end of the string (i.e., `i >= s.size()`), we reset the position to 1 (odd indices) to fill the gaps between the already placed characters.
-- We continue this process until all characters are placed.
+The function reorganizes the input string such that no two adjacent characters are the same. It achieves this by placing the most frequent character first and then filling in the rest of the characters.
 
-#### Step 5: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	string reorganizeString(string s) {
+	```
+	Defines the function to reorganize a string where no two adjacent characters are the same.
 
-```cpp
-return s;
-```
+2. **Initialization**
+	```cpp
+	    int mfq = 0, i = 0;
+	```
+	Initializes the variables 'mfq' for the most frequent character index and 'i' for the position to place the characters.
 
-- Once all characters are placed successfully, we return the rearranged string `s`.
+3. **Frequency Calculation**
+	```cpp
+	    vector<int> frq(26, 0);
+	```
+	Creates a frequency array to track the count of each character in the string.
 
-### Complexity
+4. **Frequency Calculation**
+	```cpp
+	    for(char c: s)
+	```
+	Iterates through each character in the string.
 
-#### Time Complexity:
+5. **Frequency Calculation**
+	```cpp
+	        if (++frq[c - 'a'] > frq[mfq])
+	```
+	Increments the frequency of the current character and updates 'mfq' if the current character becomes the most frequent.
 
-- **O(n)**: The time complexity is linear with respect to the length of the string `n`. This is because:
-  - We first iterate through the string to count the frequency of each character, which takes O(n) time.
-  - Then, we iterate over the characters to place them in the result string, which takes another O(n) time.
-  - The complexity is dominated by the linear pass through the string and frequency array.
+6. **Frequency Calculation**
+	```cpp
+	            mfq = c - 'a';
+	```
+	Sets the 'mfq' index to the current character if it becomes the most frequent.
 
-#### Space Complexity:
+7. **Bounds Check**
+	```cpp
+	    if(2 * frq[mfq] - 1 > s.size()) return "";
+	```
+	Returns an empty string if it is impossible to rearrange the string (i.e., the most frequent character exceeds half the string size).
 
-- **O(1)**: The space complexity is constant because we only use a fixed-size array `frq` of size 26 to store character frequencies and a few integer variables. The space used does not depend on the size of the input string.
+8. **Main Logic**
+	```cpp
+	    while(frq[mfq]) {
+	```
+	Loops to place the most frequent character in every alternate position.
 
-### Conclusion
+9. **Main Logic**
+	```cpp
+	        s[i] = 'a' + mfq;
+	```
+	Places the most frequent character at the current position 'i'.
 
-This solution provides an efficient approach to solving the problem of rearranging a string such that no two adjacent characters are the same. The greedy approach ensures that the most frequent character is spaced out as much as possible, preventing consecutive identical characters. The algorithm works in linear time with constant space, making it both time and space-efficient for large inputs.
+10. **Main Logic**
+	```cpp
+	        i += 2;
+	```
+	Increments the index by 2 to place the next most frequent character at an alternate position.
 
-- **Time Complexity**: **O(n)**, where `n` is the size of the input string.
-- **Space Complexity**: **O(1)**, as we use only a fixed number of auxiliary variables.
+11. **Main Logic**
+	```cpp
+	        frq[mfq]--;
+	```
+	Decreases the frequency count of the most frequent character.
 
-By implementing this approach, we can successfully reorganize the string or determine if it's impossible to do so efficiently.
+12. **Main Logic**
+	```cpp
+	    for(int j = 0; j < 26; j++) {
+	```
+	Loops through the remaining characters (other than the most frequent character).
+
+13. **Main Logic**
+	```cpp
+	        while(frq[j]) {
+	```
+	Loops to place each character at available positions.
+
+14. **Main Logic**
+	```cpp
+	            if(i >= s.size()) i = 1;
+	```
+	If the end of the string is reached, start placing characters at position 1.
+
+15. **Main Logic**
+	```cpp
+	            s[i] = 'a' + j;
+	```
+	Places the current character in the available position 'i'.
+
+16. **Main Logic**
+	```cpp
+	            frq[j]--;
+	```
+	Decreases the frequency count of the current character.
+
+17. **Main Logic**
+	```cpp
+	            i += 2;
+	```
+	Increments the index by 2 to place the next character at an alternate position.
+
+18. **Return**
+	```cpp
+	    
+	```
+	Empty space for the return statement.
+
+19. **Return**
+	```cpp
+	    return s;
+	```
+	Returns the reorganized string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string, since we need to count the frequency of characters and rearrange them.
+- **Average Case:** O(n), as the operations for rearranging characters are linear in complexity.
+- **Worst Case:** O(n), as the worst case is when all characters are distinct or the same and we have to process every character.
+
+Time complexity is linear because we iterate through the string to count frequencies and rearrange characters.
+
+### Space Complexity 💾
+- **Best Case:** O(n), if the input is already optimally arranged or does not require rearranging.
+- **Worst Case:** O(n), as we store the frequency of each character and the rearranged string.
+
+Space complexity is linear because we store the frequency count and the rearranged string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reorganize-string/description/)
 

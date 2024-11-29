@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "yubRKwixN-U"
 youtube_upload_date="2021-08-20"
 youtube_thumbnail="https://i.ytimg.com/vi/yubRKwixN-U/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,127 +28,135 @@ youtube_thumbnail="https://i.ytimg.com/vi/yubRKwixN-U/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer, return true if the number is a palindrome. A number is a palindrome if it reads the same forwards and backwards. If the number is negative, it is automatically not a palindrome.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a single integer x. The number can be negative or positive.
+- **Example:** `Input: x = 121`
+- **Constraints:**
+	- -231 <= x <= 231 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPalindrome(int x) {
-        if(x < 0) return false;
-        long long int y = x, z = 0;
-        while(x) {
-            z = z * 10 + x % 10;
-            x /= 10;
-        }
-        return y == z;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a boolean value indicating whether the input integer is a palindrome or not.
+- **Example:** `Output: true`
+- **Constraints:**
+	- Return true if the number is a palindrome, false otherwise.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To check if a given number is a palindrome without converting the integer to a string.
+
+- Check if the number is negative. If it is, return false immediately.
+- Reverse the digits of the number.
+- Compare the original number with the reversed number. If they are the same, return true; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- We are guaranteed that the input will be within the specified range (-231 <= x <= 231 - 1).
+- Negative numbers are not palindromes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: x = 121`  \
+  **Explanation:** The number 121 reads the same from left to right and right to left, so it is a palindrome.
+
+- **Input:** `Input: x = -121`  \
+  **Explanation:** The number -121 is not a palindrome because the negative sign appears only on the left, not the right.
+
+- **Input:** `Input: x = 10`  \
+  **Explanation:** The number 10 is not a palindrome because it reads '01' from right to left, which is not the same as the original number.
+
+{{< dots >}}
+## Approach 🚀
+To check if a number is a palindrome, we reverse its digits and compare the reversed number with the original. We will handle negative numbers immediately as they can never be palindromes.
+
+### Initial Thoughts 💭
+- A simple approach is to reverse the digits and check if the original and reversed numbers match.
+- We need to handle negative numbers early since they can't be palindromes.
+- We must reverse the digits without converting the number to a string, which can be done by manipulating the number mathematically.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is always a valid integer within the specified range.
+- The solution should handle the largest integer values within the range efficiently.
+- If the number is negative, it will not be a palindrome.
+- If the number ends with a zero and is greater than zero, it cannot be a palindrome.
+- Do not convert the number to a string. Reverse the digits mathematically.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isPalindrome(int x) {
+    if(x < 0) return false;
+    long long int y = x, z = 0;
+    while(x) {
+        z = z * 10 + x % 10;
+        x /= 10;
     }
-};
-{{< /highlight >}}
----
-
-### 🧠 **Palindrome Number Check**
-
-The problem asks us to determine whether a given integer is a palindrome. A number is a **palindrome** if it reads the same forwards and backwards. For instance, `121` is a palindrome, but `123` is not.
-
-Our goal is to **check if a number is a palindrome** without converting the number into a string. Let's dive into an efficient approach to solve this problem!
-
----
-
-### 📌 **Example**
-
-- **Input**: `isPalindrome(121)`  
-  **Output**: `true`  
-  (Explanation: `121` reads the same forwards and backwards.)
-
-- **Input**: `isPalindrome(-121)`  
-  **Output**: `false`  
-  (Explanation: Negative numbers can't be palindromes due to the negative sign.)
-
-- **Input**: `isPalindrome(10)`  
-  **Output**: `false`  
-  (Explanation: `10` is not a palindrome since it does not read the same backward.)
-
----
-
-### 🛠️ **Approach: Palindrome Check Without String Conversion**
-
-To determine if an integer `x` is a palindrome, follow these steps:
-
-1. **Handle Negative Numbers**: If the number is negative, immediately return `false`. Negative numbers can never be palindromes because the negative sign doesn’t reflect in the reversed number.
-   
-2. **Reverse the Number**: We can reverse the digits of the number and compare the reversed version with the original number. If they match, it's a palindrome.
-
-3. **Overflow Concerns**: Since reversing could potentially overflow, we’ll work with a `long long int` to handle large numbers safely.
-
----
-
-### 💻 **Code Breakdown (Step-by-Step)**
-
-#### Step 1: Handle Negative Numbers
-
-```cpp
-if(x < 0) return false;
-```
-
-- If the number is negative, we return `false` because a negative number cannot be a palindrome.
-
-#### Step 2: Set Up Variables for Reversal
-
-```cpp
-long long int y = x, z = 0;
-```
-
-- `y`: This variable stores the original number, which will be used later to compare with the reversed number.
-- `z`: This is where we store the reversed number. Initially, it's set to `0`.
-
-#### Step 3: Reverse the Digits of the Number
-
-```cpp
-while(x) {
-    z = z * 10 + x % 10;
-    x /= 10;
+    return y == z;
 }
 ```
 
-- The loop extracts the last digit of the number using the modulus operator (`x % 10`), then adds it to `z` while shifting `z` by one digit to the left (`z * 10`).
-- The number `x` is divided by `10` to remove the last digit, and this continues until all digits are processed.
+This code implements the `isPalindrome` function, which checks if an integer is a palindrome.
 
-#### Step 4: Compare the Reversed Number with the Original
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isPalindrome(int x) {
+	```
+	Declare the `isPalindrome` function, which takes an integer `x` as input and returns a boolean indicating whether it's a palindrome.
 
-```cpp
-return y == z;
-```
+2. **Conditional Check**
+	```cpp
+	    if(x < 0) return false;
+	```
+	Check if the input number `x` is negative. Negative numbers cannot be palindromes, so return `false` immediately.
 
-- After reversing the number, we compare the reversed number (`z`) with the original number (`y`).
-- If they are the same, it means the number is a palindrome, and we return `true`. Otherwise, we return `false`.
+3. **Variable Initialization**
+	```cpp
+	    long long int y = x, z = 0;
+	```
+	Initialize two variables: `y` to store a copy of the original number `x`, and `z` to store the reversed number.
 
----
+4. **Loop Iteration**
+	```cpp
+	    while(x) {
+	```
+	Start a loop that continues while `x` is not zero.
 
-### 📈 **Complexity Analysis**
+5. **Mathematical Operations**
+	```cpp
+	        z = z * 10 + x % 10;
+	```
+	Extract the last digit of `x` using the modulo operator and append it to the reversed number `z`.
 
-#### Time Complexity: **O(log(x))**
-- The time complexity is logarithmic because we divide the number by `10` in each iteration. The number of iterations depends on the number of digits in `x`, which is proportional to `log(x)`.
+6. **Integer Division**
+	```cpp
+	        x /= 10;
+	```
+	Remove the last digit from `x` by integer division.
 
-#### Space Complexity: **O(1)**
-- The space complexity is constant because we only use a fixed amount of extra space (for the variables `y` and `z`), regardless of the input size.
+7. **Return Value**
+	```cpp
+	    return y == z;
+	```
+	Compare the original number `y` with the reversed number `z`. If they are equal, the number is a palindrome, so return `true`. Otherwise, return `false`.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(x)), where x is the integer. This is because we reverse the digits of the number, and the number of digits is proportional to log(x).
+- **Average Case:** O(log(x))
+- **Worst Case:** O(log(x)), since we are iterating over all digits to reverse the number.
 
-### 🚀 **Conclusion**
+The time complexity is logarithmic relative to the size of the integer.
 
-This solution efficiently checks if a number is a palindrome by reversing the number and comparing it to the original:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1), since we only use a constant amount of extra space for the reversal.
 
-- **Negative numbers are immediately rejected** as palindromes.
-- **Digit reversal** is used to check if the number reads the same forwards and backwards.
-- The solution works in **logarithmic time** with **constant space**, making it ideal for large numbers.
+The space complexity is constant as we only use a few variables to store intermediate values.
 
-This approach is simple, effective, and avoids unnecessary string conversions, providing an optimal solution for checking palindrome numbers.
-
----
-
-### 🌱 **Pro Tip: Keep Practicing!**
-To master problems like this, practice with different types of number manipulations and think about how you can optimize each step. **Consistent practice is the key** to improving your problem-solving skills!
-
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/palindrome-number/description/)

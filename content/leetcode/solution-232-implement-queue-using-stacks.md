@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "eanwa3ht3YQ"
 youtube_upload_date="2024-01-29"
 youtube_thumbnail="https://i.ytimg.com/vi/eanwa3ht3YQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,46 +28,93 @@ youtube_thumbnail="https://i.ytimg.com/vi/eanwa3ht3YQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design and implement a queue using only two stacks. The queue should support the basic operations of a normal queue: enqueue, dequeue, peek, and checking if the queue is empty.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of several function calls to manipulate the queue. Each call is an operation on the queue object.
+- **Example:** `Input: ["MyQueue", "enqueue", "enqueue", "peek", "dequeue", "empty"]
+[[], [5], [10], [], [], []]`
+- **Constraints:**
+	- 1 <= x <= 9
+	- At most 100 calls will be made to enqueue, dequeue, peek, and empty.
+	- All dequeue and peek operations are valid.
 
-{{< highlight cpp >}}
-class MyQueue {
-public:
-    stack<int> s1, s2;
-    MyQueue() {
-        
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output will be the result of the operations performed on the queue.
+- **Example:** `Output: [null, null, null, 5, 5, false]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to use two stacks to simulate the FIFO behavior of a queue.
+
+- Use two stacks: s1 for enqueue operations and s2 for dequeue operations.
+- For enqueue, push elements to s1.
+- For dequeue and peek, transfer elements from s1 to s2 if s2 is empty, then perform the operation on s2.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will consist of valid function calls for the queue.
+- The operations enqueue, dequeue, peek, and empty will be called sequentially.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["MyQueue", "enqueue", "enqueue", "peek", "dequeue", "empty"]
+[[], [5], [10], [], [], []]`  \
+  **Explanation:** After pushing 5 and 10, the queue is [5, 10]. Peek returns 5, dequeue returns 5, and empty returns false because the queue is not empty.
+
+{{< dots >}}
+## Approach 🚀
+We will simulate the FIFO behavior of a queue using two stacks. The idea is to use one stack (s1) for storing incoming elements and the other stack (s2) for serving the front of the queue.
+
+### Initial Thoughts 💭
+- A queue is a FIFO data structure, which means the first element added is the first one to be removed.
+- Stacks are LIFO, meaning the last element added is the first one to be removed.
+- To simulate a queue, we can use two stacks: one to hold the incoming elements and the other to hold the elements in reverse order when needed for dequeue or peek.
+{{< dots >}}
+### Edge Cases 🌐
+- The queue should handle the case where no elements are added and operations like pop or peek are called.
+- The solution should be able to handle a maximum of 100 function calls efficiently.
+- The queue will return null for push operations as they don't have an output.
+- The operations must be implemented using only stack operations.
+{{< dots >}}
+## Code 💻
+```cpp
+stack<int> s1, s2;
+MyQueue() {
     
-    void push(int x) {
-        s1.push(x);
-    }
-    
-    int pop() {
-        if(s2.empty()) {
-            while(!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
+}
+
+void push(int x) {
+    s1.push(x);
+}
+
+int pop() {
+    if(s2.empty()) {
+        while(!s1.empty()) {
+            s2.push(s1.top());
+            s1.pop();
         }
-        int x = s2.top();
-        s2.pop();
-        return x;
-        
     }
+    int x = s2.top();
+    s2.pop();
+    return x;
     
-    int peek() {
-        if(s2.empty()) {
-            while(!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
+}
+
+int peek() {
+    if(s2.empty()) {
+        while(!s1.empty()) {
+            s2.push(s1.top());
+            s1.pop();
         }
-        return s2.top();
     }
-    
-    bool empty() {
-        return s1.empty() && s2.empty();
-    }
+    return s2.top();
+}
+
+bool empty() {
+    return s1.empty() && s2.empty();
+}
 };
 
 /**
@@ -76,132 +124,149 @@ public:
  * int param_2 = obj->pop();
  * int param_3 = obj->peek();
  * bool param_4 = obj->empty();
- */
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, you’re asked to implement a **queue** using **two stacks**. A queue follows the **First In, First Out (FIFO)** principle, meaning the first element added is the first one to be removed. But here's the twist: you must simulate the queue operations using stacks, which work on the **Last In, First Out (LIFO)** principle.
-
-The queue must support the following operations:
-1. **push(x)**: Push element `x` to the back of the queue.
-2. **pop()**: Removes and returns the element from the front of the queue.
-3. **peek()**: Returns the element at the front of the queue without removing it.
-4. **empty()**: Returns `true` if the queue is empty, otherwise `false`.
-
----
-
-### 🧠 Approach
-
-To simulate a queue with stacks, we need to **adapt the LIFO behavior** of stacks to mimic FIFO behavior. We can use **two stacks**, where:
-- **Stack `s1`** is used for **pushing** elements (adding to the queue).
-- **Stack `s2`** is used for **popping** and **peeking** elements (removing or viewing the front of the queue).
-
-#### Here’s how it works:
-
-1. **Push Operation**:
-   - When we push an element, it’s simply added to the first stack (`s1`).
-   
-2. **Pop Operation**:
-   - If `s2` is empty, we need to **transfer all elements from `s1` to `s2`**. This transfer ensures the oldest element (the one added first) is now at the top of `s2`.
-   - Once the elements are transferred, popping from `s2` gives us the front of the queue.
-   
-3. **Peek Operation**:
-   - Similar to the pop operation, but instead of removing the element, we just return the top element of `s2` without popping it.
-
-4. **Empty Operation**:
-   - The queue is empty if both stacks `s1` and `s2` are empty.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code in detail:
-
-```cpp
-class MyQueue {
-public:
-    stack<int> s1, s2;  // Two stacks to simulate the queue
 ```
-- We declare the class `MyQueue` and define two stacks: `s1` (for pushing elements) and `s2` (for popping and peeking elements).
 
-```cpp
-    MyQueue() { }  // Constructor initializes the stacks (empty at the start)
-```
-- The constructor is simple; it doesn’t require any additional setup since both stacks start empty.
+This is a queue implementation using two stacks, which supports the operations: push, pop, peek, and empty.
 
-```cpp
-    void push(int x) {
-        s1.push(x);  // Push the element to the back of the queue (to stack s1)
-    }
-```
-- The `push` operation is straightforward: we add `x` to `s1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Data Structures**
+	```cpp
+	stack<int> s1, s2;
+	```
+	Declares two stacks `s1` and `s2` to simulate the behavior of a queue. `s1` is used to push new elements, and `s2` is used for popping and peeking elements.
 
-```cpp
-    int pop() {
-        if(s2.empty()) {  // If s2 is empty, transfer elements from s1 to s2
-            while(!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
-        }
-        int x = s2.top();  // Pop from s2 (this is the front of the queue)
-        s2.pop();
-        return x;  // Return the popped element
-    }
-```
-- The `pop` operation checks if `s2` is empty. If it is, we transfer all elements from `s1` to `s2`. After the transfer, popping from `s2` gives us the front element of the queue.
+2. **Constructor**
+	```cpp
+	MyQueue() {
+	```
+	Constructor for the `MyQueue` class. Initializes the two stacks `s1` and `s2`.
 
-```cpp
-    int peek() {
-        if(s2.empty()) {  // Transfer elements from s1 to s2 if s2 is empty
-            while(!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
-            }
-        }
-        return s2.top();  // Return the top of s2 (front of the queue)
-    }
-```
-- The `peek` operation works similarly to `pop`, but we only return the top element of `s2` without removing it.
+3. **Push Operation**
+	```cpp
+	void push(int x) {
+	```
+	Defines the `push` function to insert an element into the queue.
 
-```cpp
-    bool empty() {
-        return s1.empty() && s2.empty();  // The queue is empty if both stacks are empty
-    }
-};
-```
-- The `empty` operation checks if both stacks are empty. If they are, the queue is empty; otherwise, it’s not.
+4. **Push Logic**
+	```cpp
+	    s1.push(x);
+	```
+	Pushes the element `x` onto stack `s1`.
 
----
+5. **Pop Operation**
+	```cpp
+	int pop() {
+	```
+	Defines the `pop` function to remove and return the front element of the queue.
 
-### 📈 Complexity Analysis
+6. **Pop Condition**
+	```cpp
+	    if(s2.empty()) {
+	```
+	Checks if `s2` is empty. If it is, we need to transfer elements from `s1` to `s2` to maintain the correct order.
 
-#### Time Complexity:
-- **push(x)**: The `push` operation is **O(1)** because it simply adds an element to `s1`.
-  
-- **pop()**: The worst-case time complexity of the `pop` operation is **O(n)**, where `n` is the number of elements in the queue. This happens when we need to transfer all elements from `s1` to `s2`. Once the transfer is done, popping from `s2` takes **O(1)** time.
+7. **Transfer Elements**
+	```cpp
+	        while(!s1.empty()) {
+	```
+	Transfers all elements from `s1` to `s2`, reversing their order to simulate queue behavior.
 
-- **peek()**: The time complexity of `peek` is also **O(n)** in the worst case (when `s2` is empty and we need to transfer all elements from `s1` to `s2`). After that, peeking is **O(1)**.
+8. **Move Element**
+	```cpp
+	            s2.push(s1.top());
+	```
+	Moves the top element from `s1` to `s2`.
 
-- **empty()**: The `empty` operation is **O(1)** because it simply checks if both stacks are empty.
+9. **Pop Element**
+	```cpp
+	            s1.pop();
+	```
+	Pops the element from `s1` after moving it to `s2`.
 
-#### Space Complexity:
-- **Space Complexity**: The space complexity is **O(n)**, where `n` is the number of elements in the queue. We store all elements in the two stacks, and the space used grows linearly with the number of elements.
+10. **Pop Value**
+	```cpp
+	    int x = s2.top();
+	```
+	Gets the top element from `s2` (the front element of the queue).
 
----
+11. **Pop Removal**
+	```cpp
+	    s2.pop();
+	```
+	Removes the top element from `s2`, effectively popping the front element of the queue.
 
-### 🏁 Conclusion
+12. **Return Pop Value**
+	```cpp
+	    return x;
+	```
+	Returns the popped element from the queue.
 
-This solution efficiently simulates a queue using two stacks, providing all the required operations (`push`, `pop`, `peek`, and `empty`). The key idea is to use two stacks to reverse the order of elements, ensuring that the **First In, First Out (FIFO)** principle of a queue is maintained. 
+13. **Peek Operation**
+	```cpp
+	int peek() {
+	```
+	Defines the `peek` function to return the front element of the queue without removing it.
 
-#### Key Highlights:
-- **Simple and Elegant**: The solution uses a clever method of transferring elements between two stacks to simulate queue behavior.
-- **Time Complexity**: The time complexity for `pop` and `peek` operations can be **O(n)** in the worst case, but the `push` and `empty` operations are very efficient at **O(1)**.
-- **Space Complexity**: The space used is proportional to the number of elements in the queue, making it efficient in terms of space usage.
+14. **Peek Condition**
+	```cpp
+	    if(s2.empty()) {
+	```
+	Checks if `s2` is empty. If so, we transfer elements from `s1` to `s2`.
 
-This solution is a great example of how to leverage stack properties to simulate queue operations. It's perfect for situations where you need to work with queues but only have access to stacks, such as in coding challenges or interviews! 🚀
+15. **Peek Transfer**
+	```cpp
+	        while(!s1.empty()) {
+	```
+	Transfers elements from `s1` to `s2` to maintain the queue's order.
+
+16. **Move Element for Peek**
+	```cpp
+	            s2.push(s1.top());
+	```
+	Moves the top element from `s1` to `s2`.
+
+17. **Pop Element for Peek**
+	```cpp
+	            s1.pop();
+	```
+	Pops the element from `s1` after moving it to `s2`.
+
+18. **Peek Value**
+	```cpp
+	    return s2.top();
+	```
+	Returns the top element from `s2`, which is the front element of the queue.
+
+19. **Empty Operation**
+	```cpp
+	bool empty() {
+	```
+	Defines the `empty` function to check if the queue is empty.
+
+20. **Check Empty**
+	```cpp
+	    return s1.empty() && s2.empty();
+	```
+	Returns `true` if both `s1` and `s2` are empty, indicating that the queue is empty.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(n) when transferring elements from s1 to s2 during pop or peek operations.
+
+While the pop and peek operations may take O(n) in the worst case, the overall complexity is amortized to O(1) for each operation over time.
+
+### Space Complexity 💾
+- **Best Case:** O(1) when no elements are stored in the queue.
+- **Worst Case:** O(n) because the queue can hold up to n elements.
+
+The space complexity is O(n), where n is the number of elements in the queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/implement-queue-using-stacks/description/)
 

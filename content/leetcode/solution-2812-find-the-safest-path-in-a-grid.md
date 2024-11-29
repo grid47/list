@@ -14,150 +14,264 @@ img_src = ""
 youtube = "-5mQcNiVWTs"
 youtube_upload_date="2024-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi/-5mQcNiVWTs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a square grid of size n x n, where each cell contains either a thief (represented by 1) or is empty (represented by 0). You start at the top-left corner of the grid and must find the maximum safeness factor for a path to the bottom-right corner. The safeness factor is defined as the minimum Manhattan distance from any cell in the path to the nearest thief.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a grid, where each cell is either 0 or 1. A 0 indicates an empty cell, and a 1 indicates a cell with a thief.
+- **Example:** `grid = [[0, 0, 1], [0, 0, 0], [0, 0, 0]]`
+- **Constraints:**
+	- 1 <= n <= 400
+	- grid[i][j] is either 0 or 1
+	- There is at least one thief in the grid.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumSafenessFactor(vector<vector<int>>& g) {
-    queue<array<int, 2>> q;
-    int dir[5] = {1, 0, -1, 0, 1}, n = g.size();
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < n; ++j)
-            if (g[i][j])
-                q.push({i, j});
-    while (!q.empty()) {
-        auto [i, j] = q.front(); q.pop();
-        for (int d = 0; d < 4; ++d) {
-            int x = i + dir[d], y = j + dir[d + 1];
-            if (min(x, y) >= 0 && max(x, y) < n && g[x][y] == 0) {
-                g[x][y] = g[i][j] + 1;
-                q.push({x, y});
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum safeness factor of all paths leading to cell (n-1, n-1).
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The safeness factor is an integer value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum safeness factor for any path to the bottom-right corner of the grid.
+
+- Initialize a queue and push the positions of all thieves in the grid.
+- Use a breadth-first search (BFS) to calculate the minimum distance from each cell to the nearest thief.
+- Use a priority queue to find the path from the top-left to the bottom-right corner while maximizing the safeness factor.
+- Return the maximum safeness factor from the top of the priority queue.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is square, and at least one thief is present.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** All paths from (0, 0) to (n-1, n-1) go through thieves, resulting in a safeness factor of 0.
+
+- **Input:** `Example 2`  \
+  **Explanation:** The safeness factor is calculated as the minimum Manhattan distance from the path to the nearest thief.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the Manhattan distance to the nearest thief for each cell, followed by a priority-based search to find the maximum safeness factor along a valid path.
+
+### Initial Thoughts 💭
+- A breadth-first search is ideal for calculating the minimum distances to thieves.
+- We can use a priority queue to maximize the safeness factor while exploring possible paths.
+- The key to solving this problem is efficiently calculating distances to thieves and then exploring valid paths using these distances.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs as at least one thief is guaranteed in the grid.
+- Handle the scenario where the grid is large (up to 400x400) efficiently using BFS and priority queue.
+- Consider edge cases where the thief is at the start or end of the path.
+- Ensure the solution works within the time limits for grids as large as 400x400.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumSafenessFactor(vector<vector<int>>& g) {
+queue<array<int, 2>> q;
+int dir[5] = {1, 0, -1, 0, 1}, n = g.size();
+for (int i = 0; i < n; ++i)
+    for (int j = 0; j < n; ++j)
+        if (g[i][j])
+            q.push({i, j});
+while (!q.empty()) {
+    auto [i, j] = q.front(); q.pop();
+    for (int d = 0; d < 4; ++d) {
+        int x = i + dir[d], y = j + dir[d + 1];
+        if (min(x, y) >= 0 && max(x, y) < n && g[x][y] == 0) {
+            g[x][y] = g[i][j] + 1;
+            q.push({x, y});
         }
     }
-    priority_queue<array<int, 3>> pq;
-    pq.push({g[0][0], 0, 0});
-    while (pq.top()[1] < n - 1 || pq.top()[2] < n - 1) {
-        auto [sf, i, j] = pq.top(); pq.pop();
-        for (int d = 0; d < 4; ++d) {
-            int x = i + dir[d], y = j + dir[d + 1];
-            if (min(x, y) >= 0 && max(x, y) < n && g[x][y] > 0) {
-                pq.push({min(sf, g[x][y]), x, y});
-                g[x][y] *= -1; 
-            }
-        }
-    }
-    return pq.top()[0] - 1;
 }
-};
-{{< /highlight >}}
----
+priority_queue<array<int, 3>> pq;
+pq.push({g[0][0], 0, 0});
+while (pq.top()[1] < n - 1 || pq.top()[2] < n - 1) {
+    auto [sf, i, j] = pq.top(); pq.pop();
+    for (int d = 0; d < 4; ++d) {
+        int x = i + dir[d], y = j + dir[d + 1];
+        if (min(x, y) >= 0 && max(x, y) < n && g[x][y] > 0) {
+            pq.push({min(sf, g[x][y]), x, y});
+            g[x][y] *= -1; 
+        }
+    }
+}
+return pq.top()[0] - 1;
+}
+```
 
-### Problem Statement
+This function calculates the maximum safeness factor in a grid, where each cell is either a safe (1) or unsafe (0) zone. It first computes distances from safe zones using breadth-first search (BFS) and then performs a priority queue-based search to determine the maximum safeness factor by considering the minimum safeness factor encountered along paths from the starting cell.
 
-In this problem, you are given a square grid `g` of size `n x n` where each cell can either be:
-- `0`, representing an empty cell, or
-- `1`, representing a cell containing an obstacle.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumSafenessFactor(vector<vector<int>>& g) {
+	```
+	Defines the 'maximumSafenessFactor' function, which takes a 2D vector 'g' representing a grid of safe (1) and unsafe (0) zones and returns an integer representing the maximum safeness factor.
 
-The task is to compute the **maximum safeness factor** for the top-left to bottom-right path, which is defined as the minimum number of steps needed to traverse from the top-left corner to the bottom-right corner. The grid represents a map, where obstacles reduce the available path options. You are asked to find the path that maximizes the safeness factor (the minimum distance to an obstacle) while traveling along the grid.
+2. **Queue Initialization**
+	```cpp
+	queue<array<int, 2>> q;
+	```
+	Initializes a queue 'q' that will store coordinates of the cells in the grid to process them in the BFS.
 
-### Approach
+3. **Direction Setup**
+	```cpp
+	int dir[5] = {1, 0, -1, 0, 1}, n = g.size();
+	```
+	Defines a direction array 'dir' for moving up, right, down, and left on the grid, and stores the grid size 'n'.
 
-The solution can be broken down into two primary phases:
-1. **Flood Fill (BFS)**: In the first phase, we will calculate the **minimum distance to the nearest obstacle** for every empty cell in the grid. This is accomplished using a multi-source breadth-first search (BFS), where all obstacle cells are treated as the starting points, and we propagate distances from these points to every adjacent empty cell.
-  
-2. **Dijkstra-like Algorithm for Safeness Factor**: After calculating the distances in the previous phase, we will employ a modified Dijkstra algorithm. Here, we treat each cell as a node and aim to find the safest path from the top-left corner to the bottom-right corner. The goal is to maximize the safeness factor along the path, which corresponds to the minimum distance to an obstacle encountered along that path.
+4. **Grid Traversal Setup**
+	```cpp
+	for (int i = 0; i < n; ++i)
+	```
+	Starts a loop over the rows of the grid.
 
-### Code Breakdown (Step by Step)
+5. **Grid Traversal Setup**
+	```cpp
+	    for (int j = 0; j < n; ++j)
+	```
+	Starts a nested loop over the columns of the grid.
 
-1. **Initialization**:
-   ```cpp
-   queue<array<int, 2>> q;
-   int dir[5] = {1, 0, -1, 0, 1}, n = g.size();
-   ```
-   - A `queue` is initialized to perform a BFS for the first phase. We will store the coordinates of cells and their corresponding distances to the nearest obstacle.
-   - The `dir` array represents the four possible movement directions: down, right, up, and left (clockwise).
-   - `n` stores the size of the grid (`n x n`), where `n` is the number of rows or columns.
+6. **Safe Zone Detection**
+	```cpp
+	        if (g[i][j])
+	```
+	Checks if the current cell is a safe zone (value 1).
 
-2. **Multi-source BFS to Calculate Minimum Distances**:
-   ```cpp
-   for (int i = 0; i < n; ++i)
-       for (int j = 0; j < n; ++j)
-           if (g[i][j])
-               q.push({i, j});
-   ```
-   - The outer loop iterates through all the cells in the grid. If a cell contains an obstacle (`g[i][j] == 1`), we add it to the queue as a starting point for the BFS.
+7. **Queue Push**
+	```cpp
+	            q.push({i, j});
+	```
+	If the current cell is a safe zone, its coordinates are added to the queue for processing in the BFS.
 
-   ```cpp
-   while (!q.empty()) {
-       auto [i, j] = q.front(); q.pop();
-       for (int d = 0; d < 4; ++d) {
-           int x = i + dir[d], y = j + dir[d + 1];
-           if (min(x, y) >= 0 && max(x, y) < n && g[x][y] == 0) {
-               g[x][y] = g[i][j] + 1;
-               q.push({x, y});
-           }
-       }
-   }
-   ```
-   - We perform BFS, where for each obstacle cell, we propagate the distance to its neighboring empty cells. The grid `g` is updated in-place to store the minimum distance to the nearest obstacle for each empty cell.
-   - For each neighboring cell, we ensure it is within bounds and has not already been visited (indicated by `g[x][y] == 0`).
+8. **BFS Loop**
+	```cpp
+	while (!q.empty()) {
+	```
+	Starts a while loop that processes the queue until it is empty, performing the BFS traversal of the grid.
 
-3. **Dijkstra-like Algorithm to Find Safeness Factor**:
-   ```cpp
-   priority_queue<array<int, 3>> pq;
-   pq.push({g[0][0], 0, 0});
-   ```
-   - We initialize a max-priority queue (`pq`) to process cells based on their safeness factor (minimum distance to an obstacle). The priority queue stores tuples of the form `(safeness factor, x, y)` where `safeness factor` represents the minimum distance to an obstacle along the path to that cell.
-   - We push the starting cell (top-left corner) into the queue with its calculated safeness factor (`g[0][0]`).
+9. **Queue Pop**
+	```cpp
+	    auto [i, j] = q.front(); q.pop();
+	```
+	Pops the front element from the queue, representing the current cell to process.
 
-4. **Process Cells to Maximize Safeness Factor**:
-   ```cpp
-   while (pq.top()[1] < n - 1 || pq.top()[2] < n - 1) {
-       auto [sf, i, j] = pq.top(); pq.pop();
-       for (int d = 0; d < 4; ++d) {
-           int x = i + dir[d], y = j + dir[d + 1];
-           if (min(x, y) >= 0 && max(x, y) < n && g[x][y] > 0) {
-               pq.push({min(sf, g[x][y]), x, y});
-               g[x][y] *= -1;
-           }
-       }
-   }
-   ```
-   - We process the cells in the priority queue, starting from the top-left corner. The goal is to maximize the minimum safeness factor along the path.
-   - For each current cell, we examine its neighbors, updating their safeness factor by considering the minimum distance between the current cell’s safeness factor and the neighboring cell’s distance to the nearest obstacle.
-   - Once a neighboring cell is processed, we mark it as visited by multiplying its value by `-1`.
+10. **Direction Loop**
+	```cpp
+	    for (int d = 0; d < 4; ++d) {
+	```
+	Starts a loop to check the four possible directions (up, right, down, left) from the current cell.
 
-5. **Return the Result**:
-   ```cpp
-   return pq.top()[0] - 1;
-   ```
-   - After the loop completes, the safeness factor for the bottom-right corner is stored in `pq.top()[0]`. Since we have tracked the safeness factor during the traversal, we return the final value, subtracting `1` as the last step ensures the correct output format.
+11. **Next Cell Calculation**
+	```cpp
+	        int x = i + dir[d], y = j + dir[d + 1];
+	```
+	Calculates the coordinates of the adjacent cell in the current direction.
 
-### Complexity
+12. **Boundary Check**
+	```cpp
+	        if (min(x, y) >= 0 && max(x, y) < n && g[x][y] == 0) {
+	```
+	Checks if the adjacent cell is within bounds and is an unsafe zone (value 0).
 
-1. **Time Complexity**:
-   - **Phase 1 (BFS)**: The BFS processes each cell once, and each operation involves examining up to 4 neighboring cells. Hence, the time complexity of this phase is **O(n^2)**, where `n` is the size of the grid.
-   - **Phase 2 (Dijkstra-like Algorithm)**: The priority queue processes each cell, and for each cell, we examine its 4 neighbors. Each insertion and extraction from the priority queue takes **O(log n)** time, but since we process each cell only once, the overall time complexity is **O(n^2 log n)**.
+13. **Distance Update**
+	```cpp
+	            g[x][y] = g[i][j] + 1;
+	```
+	Updates the distance for the adjacent cell to be one more than the current cell's distance.
 
-   Therefore, the overall time complexity of the algorithm is **O(n^2 log n)**.
+14. **Queue Push**
+	```cpp
+	            q.push({x, y});
+	```
+	Pushes the coordinates of the adjacent cell onto the queue to be processed next.
 
-2. **Space Complexity**:
-   - The space complexity is determined by the data structures used. The queue and priority queue store up to `n^2` elements, so the space complexity is **O(n^2)**.
+15. **Priority Queue Initialization**
+	```cpp
+	priority_queue<array<int, 3>> pq;
+	```
+	Initializes a priority queue 'pq' to store cells along with their safeness factors for further processing.
 
-### Conclusion
+16. **Start Priority Queue Push**
+	```cpp
+	pq.push({g[0][0], 0, 0});
+	```
+	Pushes the starting cell (top-left corner) along with its safeness factor to the priority queue.
 
-This solution effectively solves the problem by using two key strategies:
-- A **multi-source BFS** to compute the minimum distance to the nearest obstacle for every cell.
-- A **Dijkstra-like algorithm** to find the path that maximizes the safeness factor from the top-left to the bottom-right corner.
+17. **Priority Queue Processing**
+	```cpp
+	while (pq.top()[1] < n - 1 || pq.top()[2] < n - 1) {
+	```
+	Starts a while loop that processes the priority queue until the destination cell (bottom-right corner) is reached.
 
-The algorithm is efficient and handles large grids well, with a time complexity of **O(n^2 log n)**, which is suitable for typical input sizes. The approach ensures that we maximize the safeness factor while navigating through the grid, effectively solving the problem within the given constraints.
+18. **Priority Queue Pop**
+	```cpp
+	    auto [sf, i, j] = pq.top(); pq.pop();
+	```
+	Pops the top element from the priority queue, representing the current cell to process.
+
+19. **Direction Loop**
+	```cpp
+	    for (int d = 0; d < 4; ++d) {
+	```
+	Starts a loop to check the four possible directions from the current cell.
+
+20. **Next Cell Calculation**
+	```cpp
+	        int x = i + dir[d], y = j + dir[d + 1];
+	```
+	Calculates the coordinates of the adjacent cell in the current direction.
+
+21. **Cell Processing Check**
+	```cpp
+	        if (min(x, y) >= 0 && max(x, y) < n && g[x][y] > 0) {
+	```
+	Checks if the adjacent cell is within bounds and has a valid safeness factor (greater than 0).
+
+22. **Priority Queue Push**
+	```cpp
+	            pq.push({min(sf, g[x][y]), x, y});
+	```
+	Pushes the adjacent cell and the minimum safeness factor encountered along the path to the priority queue.
+
+23. **Mark Processed Cell**
+	```cpp
+	            g[x][y] *= -1;
+	```
+	Marks the adjacent cell as processed by multiplying its value by -1.
+
+24. **Return Maximum Safeness Factor**
+	```cpp
+	return pq.top()[0] - 1;
+	```
+	Returns the maximum safeness factor by subtracting 1 from the top element in the priority queue, which represents the final result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2) for BFS and pathfinding.
+- **Average Case:** O(n^2 log n) due to the priority queue.
+- **Worst Case:** O(n^2 log n) for large grids.
+
+The worst case is when the grid is fully explored and all cells are processed using the BFS and priority queue.
+
+### Space Complexity 💾
+- **Best Case:** O(n) for small grids.
+- **Worst Case:** O(n^2) for storing the grid and BFS queue.
+
+The space complexity depends on the grid size and the storage required for BFS and the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-safest-path-in-a-grid/description/)
 

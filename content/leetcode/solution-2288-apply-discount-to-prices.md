@@ -14,199 +14,234 @@ img_src = ""
 youtube = "7W1Wzpfa1tg"
 youtube_upload_date="2022-05-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/7W1Wzpfa1tg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a sentence, which contains words that may include prices represented by a dollar sign ('$') followed by a sequence of digits. For each word in the sentence that represents a price, apply a given discount percentage and update the word. The price should be updated with exactly two decimal places. The goal is to return a modified sentence where the updated prices reflect the discount.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string sentence where words are separated by single spaces. Each word may represent a price in the form of a dollar sign followed by digits. An integer discount is also provided, which is the percentage of discount to be applied to the prices.
+- **Example:** `Input: sentence = "apple $100 orange $200 banana", discount = 20`
+- **Constraints:**
+	- 1 <= sentence.length <= 105
+	- sentence consists of lowercase English letters, digits, '$', and spaces.
+	- All words in the sentence are separated by a single space.
+	- Prices will be positive numbers without leading zeros.
+	- 0 <= discount <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string discountPrices(string sentence, int discount) {
-        auto doit = [&](string word) {
-            int n = word.size();
-            if( n == 1 || word[0] != '$')
-            return word;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the modified sentence where each price word has been updated with the discount applied. The updated price should have exactly two decimal places.
+- **Example:** `Output: "apple $80.00 orange $160.00 banana"`
+- **Constraints:**
 
-            long long num = 0;
-            for(int i = 1; i < word.size(); i++) {
-                if(!isdigit(word[i])) return word;
-                num = num * 10 + (word[i] - '0');
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to apply a discount to each word representing a price and update the price accordingly. The price should be formatted with two decimal places.
 
-            stringstream ss2;
-            double discountPercentag = (100 - discount) / 100.00;
-            ss2 << fixed << setprecision(2) << (discountPercentag * num);
-            return "$" + ss2.str();
+- Step 1: Split the sentence into words.
+- Step 2: For each word, check if it represents a price (starts with '$' followed by digits).
+- Step 3: If the word is a price, calculate the new price after applying the discount.
+- Step 4: Format the discounted price to two decimal places and update the word in the sentence.
+- Step 5: Join the words back together to form the modified sentence and return it.
+{{< dots >}}
+### Problem Assumptions ✅
+- All words representing prices are valid, meaning they are correctly formatted with a dollar sign followed by digits.
+- The discount will always be between 0 and 100, inclusive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: sentence = "apple $100 orange $200 banana", discount = 20`  \
+  **Explanation:** Here, '$100' will be discounted by 20%, resulting in '$80.00'. '$200' will be discounted by 20%, resulting in '$160.00'. The final sentence will be: 'apple $80.00 orange $160.00 banana'.
 
-        };
+- **Input:** `Input: sentence = "item $50 item2 $30", discount = 10`  \
+  **Explanation:** In this case, '$50' will be discounted by 10%, resulting in '$45.00'. '$30' will be discounted by 10%, resulting in '$27.00'. The final sentence will be: 'item $45.00 item2 $27.00'.
 
-        string res, word;
-        stringstream ss(sentence);
-        while(ss >> word) {
-            res += doit(word) + " ";
-        }
-        res.pop_back();
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to iterate through the words in the sentence, identify the ones that represent prices, and apply the discount percentage to those prices while ensuring that the updated prices are formatted correctly.
 
-### Problem Statement
-
-The task is to process a sentence where certain words are prices, and apply a discount to them. A price is denoted by a string that starts with a dollar sign (`$`) followed by digits, and the goal is to apply a discount to the prices while maintaining the format. Non-price words should remain unchanged.
-
-For instance, given the sentence `"I bought a $200 shirt and a $300 pair of shoes"`, and a discount of 20%, the expected output should be: `"I bought a $160 shirt and a $240 pair of shoes"`.
-
-### Approach
-
-To solve this problem, we will follow these steps:
-
-1. **Identify Price Words**: A price word starts with the dollar sign `$` and is followed by one or more digits. These are the words that need to be discounted.
-
-2. **Apply Discount**: For each price word, we need to:
-   - Extract the numeric part (the digits after the dollar sign).
-   - Apply the discount to the extracted number.
-   - Reformat the result to ensure it is in the correct price format, with two decimal places.
-
-3. **Keep Other Words Intact**: If the word does not represent a price (i.e., it doesn't start with a dollar sign or is not followed by digits), we should leave it unchanged.
-
-4. **Return the Sentence**: Once all words have been processed, we need to return the modified sentence where the prices have been discounted accordingly.
-
-### Code Breakdown (Step by Step)
-
-Here is the detailed breakdown of the provided code:
-
-#### Step 1: Function Definition
-
-The function `discountPrices` takes two arguments:
-- **`sentence`**: A string representing the sentence where some words may represent prices.
-- **`discount`**: An integer representing the discount percentage to apply to the price words.
-
+### Initial Thoughts 💭
+- We need to process each word to check if it represents a price.
+- The challenge is to handle formatting of the price to exactly two decimal places.
+- We can use string manipulation to extract and update prices, and then use a formatting function to ensure the correct number of decimal places.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty sentence will not be provided based on the problem constraints.
+- The solution must handle sentences with up to 100,000 characters efficiently.
+- If the discount is 0, no change will be applied to any prices.
+- If the discount is 100, all prices will become $0.00.
+- All prices will be valid and formatted correctly.
+{{< dots >}}
+## Code 💻
 ```cpp
 string discountPrices(string sentence, int discount) {
-```
+    auto doit = [&](string word) {
+        int n = word.size();
+        if( n == 1 || word[0] != '$')
+        return word;
 
-#### Step 2: Helper Function `doit`
+        long long num = 0;
+        for(int i = 1; i < word.size(); i++) {
+            if(!isdigit(word[i])) return word;
+            num = num * 10 + (word[i] - '0');
+        }
 
-The `doit` function is used to process each individual word from the sentence. It checks if the word is a price and applies the discount accordingly.
+        stringstream ss2;
+        double discountPercentag = (100 - discount) / 100.00;
+        ss2 << fixed << setprecision(2) << (discountPercentag * num);
+        return "$" + ss2.str();
 
-```cpp
-auto doit = [&](string word) {
-```
+    };
 
-1. **Check if the word starts with a dollar sign**: We first check if the word starts with a `$` character and if its length is greater than 1 (to ensure it's a valid price).
-   
-   ```cpp
-   int n = word.size();
-   if (n == 1 || word[0] != '$')
-   return word;
-   ```
-
-2. **Extract the Numeric Value**: If the word is valid (i.e., it starts with a `$`), we attempt to extract the number from the word. We iterate through the characters after the dollar sign to confirm that they are digits. If any character is not a digit, we return the original word, indicating it was not a valid price.
-
-   ```cpp
-   long long num = 0;
-   for (int i = 1; i < word.size(); i++) {
-       if (!isdigit(word[i])) return word;
-       num = num * 10 + (word[i] - '0');
-   }
-   ```
-
-3. **Apply Discount**: Once we have the number, we calculate the discounted value. We first convert the discount percentage into a decimal value by dividing `(100 - discount)` by 100.00. Then, we multiply the original price by this factor to get the discounted price.
-
-   ```cpp
-   stringstream ss2;
-   double discountPercentage = (100 - discount) / 100.00;
-   ss2 << fixed << setprecision(2) << (discountPercentage * num);
-   ```
-
-4. **Return the Discounted Price**: Finally, we format the discounted price as a string with two decimal places and prepend a dollar sign. This ensures the price format is correct.
-
-   ```cpp
-   return "$" + ss2.str();
-   ```
-
-#### Step 3: Processing the Entire Sentence
-
-The main function processes the sentence word by word using a `stringstream`. We initialize an empty string `res` to store the final result.
-
-```cpp
-string res, word;
-stringstream ss(sentence);
-while (ss >> word) {
-    res += doit(word) + " ";
+    string res, word;
+    stringstream ss(sentence);
+    while(ss >> word) {
+        res += doit(word) + " ";
+    }
+    res.pop_back();
+    return res;
 }
 ```
 
-- The `stringstream` splits the sentence into individual words.
-- Each word is passed to the `doit` function, which either applies the discount or leaves the word unchanged.
-- The result is concatenated to the `res` string, along with a space after each word.
+The function `discountPrices` calculates the discounted price for each price in a sentence that starts with a dollar sign ('$'). The function iterates over the sentence, identifies prices, applies the discount, and returns the modified sentence with updated prices.
 
-#### Step 4: Remove the Last Space
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string discountPrices(string sentence, int discount) {
+	```
+	The function `discountPrices` is declared, taking a `sentence` string and an integer `discount` as input. It returns a string with discounted prices where applicable.
 
-After the loop, we remove the extra space at the end of the sentence. This is done by calling `pop_back()` on the `res` string.
+2. **Define Helper Function**
+	```cpp
+	    auto doit = [&](string word) {
+	```
+	A lambda function `doit` is defined to process each word in the sentence. This function applies the discount if the word represents a price (starting with '$').
 
-```cpp
-res.pop_back();
-```
+3. **Get Word Length**
+	```cpp
+	        int n = word.size();
+	```
+	The size of the word is stored in the variable `n` to check if the word contains a price.
 
-#### Step 5: Return the Final Result
+4. **Check if Word is Price**
+	```cpp
+	        if( n == 1 || word[0] != '$')
+	```
+	If the word is not a price (it either doesn't start with a '$' or is too short to be a valid price), the function returns the word unchanged.
 
-Finally, the modified sentence is returned.
+5. **Return Word if Not Price**
+	```cpp
+	        return word;
+	```
+	If the word is not a price, return the original word as-is.
 
-```cpp
-return res;
-```
+6. **Initialize Number Variable**
+	```cpp
+	        long long num = 0;
+	```
+	A variable `num` is initialized to store the numeric value of the price (excluding the '$' sign).
 
-### Example Walkthrough
+7. **Iterate Over Price Digits**
+	```cpp
+	        for(int i = 1; i < word.size(); i++) {
+	```
+	A loop iterates over the characters in the word (starting from the second character) to extract the numeric value.
 
-**Example 1**:
-Input:
-```cpp
-string sentence = "I bought a $200 shirt and a $300 pair of shoes";
-int discount = 20;
-```
+8. **Check if Character is Digit**
+	```cpp
+	            if(!isdigit(word[i])) return word;
+	```
+	If a character is not a digit, return the original word as it's not a valid price.
 
-1. The sentence is split into words: `"I"`, `"bought"`, `"a"`, `"$200"`, `"shirt"`, `"and"`, `"a"`, `"$300"`, `"pair"`, `"of"`, `"shoes"`.
-2. The `doit` function is applied to the price words:
-   - `"$200"`: The function extracts `200`, applies a 20% discount to get `160.00`, and returns `"$160.00"`.
-   - `"$300"`: The function extracts `300`, applies a 20% discount to get `240.00`, and returns `"$240.00"`.
-3. The other words (`"I"`, `"bought"`, `"a"`, `"shirt"`, `"and"`, `"a"`, `"pair"`, `"of"`, `"shoes"`) are left unchanged.
-4. The final result is: `"I bought a $160.00 shirt and a $240.00 pair of shoes"`.
+9. **Build Number from Digits**
+	```cpp
+	            num = num * 10 + (word[i] - '0');
+	```
+	The number `num` is constructed by iterating over each digit of the price and converting it to an integer.
 
-**Example 2**:
-Input:
-```cpp
-string sentence = "The price is $99 for this item";
-int discount = 10;
-```
+10. **Initialize Discount Calculation**
+	```cpp
+	        stringstream ss2;
+	```
+	A stringstream `ss2` is initialized to store the discounted price formatted to two decimal places.
 
-1. The sentence is split into words: `"The"`, `"price"`, `"is"`, `"$99"`, `"for"`, `"this"`, `"item"`.
-2. The `doit` function is applied to the price word:
-   - `"$99"`: The function extracts `99`, applies a 10% discount to get `89.10`, and returns `"$89.10"`.
-3. The other words (`"The"`, `"price"`, `"is"`, `"for"`, `"this"`, `"item"`) are left unchanged.
-4. The final result is: `"The price is $89.10 for this item"`.
+11. **Calculate Discounted Price**
+	```cpp
+	        double discountPercentag = (100 - discount) / 100.00;
+	```
+	The discount percentage is calculated by subtracting the given `discount` from 100, then dividing by 100 to get the decimal form.
 
-### Complexity
+12. **Apply Discount and Format**
+	```cpp
+	        ss2 << fixed << setprecision(2) << (discountPercentag * num);
+	```
+	The discounted price is calculated by multiplying the original price by the discount percentage. The result is formatted to two decimal places using `stringstream`.
 
-#### Time Complexity
+13. **Return Discounted Price**
+	```cpp
+	        return "$" + ss2.str();
+	```
+	The discounted price is converted to a string, prepended with the '$' sign, and returned.
 
-- **Splitting the sentence**: The `stringstream` splits the sentence into words. This operation takes `O(n)`, where `n` is the length of the sentence.
-- **Processing each word**: For each word, we check if it starts with `$` and extract the numeric part. This takes `O(m)` for each word, where `m` is the length of the word.
-  - Overall, processing all words takes `O(w * m)`, where `w` is the number of words, and `m` is the average length of each word.
-- **Final complexity**: The overall time complexity is **O(n)**, where `n` is the length of the sentence.
+14. **Initialize Result Variables**
+	```cpp
+	    string res, word;
+	```
+	Two variables `res` and `word` are initialized. `res` will store the final result, and `word` will hold each individual word from the sentence.
 
-#### Space Complexity
+15. **Create String Stream for Sentence**
+	```cpp
+	    stringstream ss(sentence);
+	```
+	A stringstream `ss` is created from the `sentence` to facilitate word-by-word processing.
 
-- **Auxiliary space**: The space used is proportional to the number of words and the sentence length. The space complexity is **O(w + n)**, where `w` is the number of words and `n` is the length of the sentence.
+16. **Process Each Word**
+	```cpp
+	    while(ss >> word) {
+	```
+	A while loop is used to extract each word from the sentence.
 
-### Conclusion
+17. **Update Result with Processed Word**
+	```cpp
+	        res += doit(word) + " ";
+	```
+	For each word, the `doit` function is called to apply the discount if the word is a price, and the result is appended to `res`.
 
-This solution efficiently processes the sentence and applies discounts to the price words while maintaining the format. By splitting the sentence into words, checking for price words, and applying the discount only where necessary, the algorithm handles the task with a time complexity of **O(n)**. This makes it suitable for longer sentences while ensuring correctness by formatting the discounted prices to two decimal places.
+18. **Remove Extra Space**
+	```cpp
+	    res.pop_back();
+	```
+	The last space is removed from the result string `res` after processing all the words.
+
+19. **Return Final Result**
+	```cpp
+	    return res;
+	```
+	The final sentence with discounted prices is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the sentence, as we need to process each word once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), where n is the length of the sentence, as we store the words in memory.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-discount-to-prices/description/)
 

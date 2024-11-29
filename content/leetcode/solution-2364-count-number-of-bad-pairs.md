@@ -14,97 +14,119 @@ img_src = ""
 youtube = "alyDgY0FCiA"
 youtube_upload_date="2022-08-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/alyDgY0FCiA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array, nums. A pair of indices (i, j) is considered a 'bad pair' if i < j and j - i is not equal to nums[j] - nums[i]. Your task is to determine the total number of bad pairs in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single 0-indexed integer array nums, where each element represents a number in the array.
+- **Example:** `nums = [2, 5, 3, 6, 7]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long countBadPairs(vector<int>& nums, long cnt = 0) {
-        unordered_map<int,int> mp;
-        for(int i = 0; i < nums.size(); i++)
-            cnt += i - mp[i - nums[i]]++;
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer, representing the total number of bad pairs in the array nums.
+- **Example:** `Output: 4`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to count the number of pairs (i, j) such that i < j and j - i is not equal to nums[j] - nums[i].
 
-The goal of this problem is to count the number of "bad pairs" in an array of integers. A pair `(i, j)` is defined as bad if it satisfies two conditions:
-- `j > i` (i.e., the second index `j` is greater than the first index `i`).
-- `j - i` is **not** equal to `nums[j] - nums[i]` (the difference between the indices should not match the difference between the values at those indices).
+- We can use a hashmap to keep track of the differences between indices and the corresponding values in the array.
+- For each index i, calculate the difference j - nums[j] and use the hashmap to count how many times that difference has occurred for previous indices.
+- Accumulate the count of bad pairs based on the differences.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2, 5, 3, 6, 7]`  \
+  **Explanation:** For the given array, the bad pairs are the pairs of indices (i, j) where i < j, and the condition j - i != nums[j] - nums[i] holds. The total bad pairs in this example are 4.
 
-In simpler terms, we need to count how many pairs of indices do not have the same difference between their indices and the difference between their corresponding values. The task requires an efficient way to calculate these bad pairs in a given list of integers.
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves using a hashmap to track the difference between indices and their respective values efficiently.
 
-### Approach
-
-To solve this problem efficiently, a brute-force solution would involve checking each pair `(i, j)` for all pairs of indices in the array, which would be computationally expensive with a time complexity of `O(n^2)`. Instead, an optimized solution uses a **hash map** (or unordered map) to track differences between index `i` and the value `nums[i]` efficiently. By recognizing that a good pair `(i, j)` satisfies the condition `i - nums[i] = j - nums[j]`, we can reduce the problem to tracking these differences and counting how many times each difference has appeared before. 
-
-1. **Key Observation:**
-   - For each index `i`, the difference `i - nums[i]` can be used as a key to identify whether a pair `(i, j)` is "good" or "bad." If `i - nums[i]` has appeared before at a previous index, it means the pair involving the current index and the previous index is a "good pair."
-   
-2. **Using a Hash Map:**
-   - We use a hash map to store how many times each difference `i - nums[i]` has appeared before. By doing so, we can quickly calculate how many good pairs exist for a given index `i`, and thus determine the number of bad pairs.
-
-3. **Counting Bad Pairs:**
-   - The total number of pairs `(i, j)` for which `j > i` is `n(n-1)/2` where `n` is the length of the array.
-   - The number of good pairs is determined by counting how many times the difference `i - nums[i]` has appeared before. The bad pairs can be obtained by subtracting the count of good pairs from the total number of pairs.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- To determine if a pair is bad, we need to check the difference between indices and their corresponding values.
+- Using a hashmap will allow us to efficiently track and calculate the number of bad pairs.
+- A hashmap will allow for constant time lookup and update, which will help in counting the bad pairs efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the input array will have at least one element, so no need to handle empty arrays.
+- The solution should be efficient enough to handle arrays of size up to 100,000.
+- If all the elements are the same, there will be no bad pairs, as the condition will always hold.
+- Ensure the solution runs in O(n) time to handle large inputs within the constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
 long long countBadPairs(vector<int>& nums, long cnt = 0) {
-    unordered_map<int, int> mp;
-```
-
-- We define the function `countBadPairs` which accepts a vector `nums` representing the array and an optional variable `cnt` (initialized to `0`) to store the count of bad pairs.
-- We also initialize an unordered map `mp` that will be used to store the difference `i - nums[i]` as the key and its frequency as the value. This helps in tracking the number of times a certain difference has occurred before.
-
-#### Step 2: Iterate Through the Array
-
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    cnt += i - mp[i - nums[i]]++;
+    unordered_map<int,int> mp;
+    for(int i = 0; i < nums.size(); i++)
+        cnt += i - mp[i - nums[i]]++;
+    return cnt;
 }
 ```
 
-- The loop runs through each element in the `nums` array by index `i`.
-- The expression `i - nums[i]` is calculated, which is the difference between the index `i` and the value at that index `nums[i]`. This difference is used as a key in the unordered map `mp`.
-- `mp[i - nums[i]]` is the number of times this difference has occurred before. We add this number to `cnt` because these are the "good pairs" (i.e., the pairs that satisfy the condition `i - nums[i] = j - nums[j]`).
-- We then increment the count of this difference in the map (`mp[i - nums[i]]++`). This ensures that we keep track of how many times this difference has occurred for future indices.
+This function counts the number of 'bad pairs' in the given vector of integers, where a bad pair is defined as a pair of indices (i, j) such that i < j and nums[i] - nums[j] != i - j.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long countBadPairs(vector<int>& nums, long cnt = 0) {
+	```
+	This is the function declaration. It initializes a variable 'cnt' to count the bad pairs.
 
-```cpp
-return cnt;
-```
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<int,int> mp;
+	```
+	This line declares an unordered map 'mp' to store the frequency of the differences between elements in the vector and their indices.
 
-- After processing all the elements in the array, the variable `cnt` contains the total number of bad pairs.
-- We return `cnt` as the result, which represents the number of bad pairs in the array.
+3. **Loop Start**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++)
+	```
+	This starts a loop over all elements in the 'nums' vector. The loop index 'i' iterates through the elements.
 
-### Complexity
+4. **Count Calculation**
+	```cpp
+	        cnt += i - mp[i - nums[i]]++;
+	```
+	This line updates the 'cnt' by calculating the number of bad pairs for each index 'i'. It uses the unordered map to find how many times the difference (i - nums[i]) has occurred previously.
 
-#### Time Complexity:
-- The algorithm iterates through the array `nums` exactly once, performing constant-time operations (such as updating the hash map and performing arithmetic) for each element. 
-- The operations for inserting and retrieving values from an unordered map (`mp`) are, on average, O(1). 
-- Therefore, the time complexity is `O(n)`, where `n` is the length of the array `nums`.
+5. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	This returns the final count of bad pairs after iterating over all elements in the 'nums' vector.
 
-#### Space Complexity:
-- The space complexity is dominated by the hash map `mp`, which stores the differences `i - nums[i]` and their frequencies. In the worst case, the number of unique differences could be equal to the length of the array `n`, leading to a space complexity of `O(n)`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The time complexity is O(n), where n is the length of the input array, as we are iterating over the array once and performing constant-time operations for each element.
 
-This solution efficiently counts the number of bad pairs in an array by leveraging a hash map to track the frequency of differences between the index `i` and the value `nums[i]`. By counting good pairs and subtracting them from the total number of pairs, we can compute the number of bad pairs efficiently. This approach has a linear time complexity `O(n)` and is much more efficient than a brute-force solution. 
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-The space complexity is also `O(n)` due to the hash map, which stores the differences. This solution is well-suited for handling larger arrays, providing an optimal solution with respect to both time and space.
+The space complexity is O(n), as we are storing differences in a hashmap, which requires space proportional to the number of unique differences.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-bad-pairs/description/)
 

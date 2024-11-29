@@ -14,113 +14,165 @@ img_src = ""
 youtube = "2_B2ZUBRYQQ"
 youtube_upload_date="2021-04-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/2_B2ZUBRYQQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a sentence with words separated by a space, truncate the sentence to contain only the first k words. Return the truncated sentence.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sentence s and an integer k.
+- **Example:** `s = "Sunshine and rainbows are beautiful", k = 3`
+- **Constraints:**
+	- 1 <= s.length <= 500
+	- k is in the range [1, the number of words in s].
+	- s consists of only lowercase and uppercase English letters and spaces.
+	- The words in s are separated by a single space.
+	- There are no leading or trailing spaces in s.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string truncateSentence(string s, int k) {
-        int count =0;
-        string ans="";
-        for(auto x:s)
-        {
-            if(x==' ')
-                count++;
-            if(count==k)
-                break;
-            ans+=x;
-        }
-        
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sentence containing only the first k words.
+- **Example:** `Output: "Sunshine and rainbows"`
+- **Constraints:**
+	- The output should be a string representing the truncated sentence.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Truncate the sentence to contain only the first k words.
+
+- Split the sentence into words.
+- Select the first k words.
+- Join the selected words into a new sentence and return it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The sentence contains at least one word.
+- The value of k is always valid and within the range of words in the sentence.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "Sunshine and rainbows are beautiful", k = 3`  \
+  **Explanation:** The first 3 words are "Sunshine", "and", "rainbows".
+
+- **Input:** `s = "Learn to code at any time", k = 5`  \
+  **Explanation:** The sentence contains exactly 5 words, so the entire sentence is returned.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by splitting the sentence into words and selecting the first k words.
+
+### Initial Thoughts 💭
+- We can split the sentence by spaces to get the individual words.
+- Then, we can simply join the first k words together.
+- This problem has a simple solution using basic string operations.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will not be empty.
+- The function should handle strings of length up to 500 characters efficiently.
+- When k equals the total number of words, the entire sentence is returned.
+- The solution must handle various string lengths and word counts within the problem's constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+string truncateSentence(string s, int k) {
+    int count =0;
+    string ans="";
+    for(auto x:s)
+    {
+        if(x==' ')
+            count++;
+        if(count==k)
+            break;
+        ans+=x;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to truncate a given sentence after a specified number of words. The function should take a string `s`, which represents the sentence, and an integer `k`, which specifies the number of words to keep. The goal is to return a new string containing only the first `k` words of the original sentence. If the number of words in the sentence is less than or equal to `k`, the entire sentence should be returned as is.
-
-### Approach
-
-To solve this problem, we can follow a simple iterative approach:
-
-1. **Initialize Counters**: We will maintain a count of the number of words encountered as we iterate through the string.
-2. **Iterate Through the Sentence**: We will traverse each character in the string `s` and check for spaces, which indicate the separation between words.
-3. **Build the Result**: As we encounter each character, we will append it to our result string `ans`. Once we reach the `k`-th word (after counting `k-1` spaces), we will stop the iteration.
-4. **Return the Result**: Finally, we will return the constructed result string `ans`.
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed breakdown of the code implementation:
-
-```cpp
-class Solution {
-public:
+    
+    return ans;
+}
 ```
-- A class `Solution` is defined to encapsulate the functionality required to solve the problem.
 
-```cpp
-    string truncateSentence(string s, int k) {
-```
-- The method `truncateSentence` takes two parameters: a string `s` representing the sentence and an integer `k` representing the number of words to keep. The function returns a string.
+The function `truncateSentence` truncates the sentence `s` after the k-th word. It iterates over each character in the string `s` and counts the number of spaces encountered. Once the k-th space is encountered, the loop breaks, returning the sentence up to that point.
 
-```cpp
-        int count = 0;
-        string ans = "";
-```
-- We initialize an integer `count` to keep track of the number of words we have encountered and a string `ans` to store the resulting truncated sentence.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string truncateSentence(string s, int k) {
+	```
+	This defines the function `truncateSentence` which takes a string `s` and an integer `k` as input, and returns the string truncated after the k-th word.
 
-```cpp
-        for(auto x : s)
-        {
-```
-- A for-loop is initiated to iterate over each character `x` in the string `s`.
+2. **Variable Initialization**
+	```cpp
+	    int count =0;
+	```
+	A variable `count` is initialized to 0. It will be used to count the number of spaces encountered in the string `s`.
 
-```cpp
-            if(x == ' ')
-                count++;
-```
-- Inside the loop, we check if the current character `x` is a space. If it is, we increment our `count` variable by 1 to indicate that we have found another word.
+3. **Variable Initialization**
+	```cpp
+	    string ans="";
+	```
+	A string `ans` is initialized as an empty string. It will store the result of the truncated sentence.
 
-```cpp
-            if(count == k)
-                break;
-```
-- We check if the `count` of words encountered is equal to `k`. If it is, we break out of the loop as we have reached the desired number of words to include in our result.
+4. **Loop Over String**
+	```cpp
+	    for(auto x:s)
+	```
+	This loop iterates over each character `x` in the string `s`.
 
-```cpp
-            ans += x;
-```
-- Regardless of whether we have hit the word limit or not, we append the current character `x` to our result string `ans`.
+5. **Space Detection**
+	```cpp
+	        if(x==' ')
+	```
+	This checks if the current character `x` is a space.
 
-```cpp
-        return ans;
-```
-- Finally, we return the constructed string `ans` that contains the truncated sentence.
+6. **Count Space**
+	```cpp
+	            count++;
+	```
+	If the character is a space, `count` is incremented by 1 to track the number of spaces encountered.
 
-```cpp
-    }
-};
-```
-- The method and class are closed.
+7. **Check k-th Word**
+	```cpp
+	        if(count==k)
+	```
+	This checks if `count` has reached the value of `k`, indicating that the k-th word has been encountered.
 
-### Complexity
+8. **Break Loop**
+	```cpp
+	            break;
+	```
+	If the k-th space is encountered, the loop is terminated using `break`, effectively truncating the sentence at the k-th word.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the string `s`. This is because we potentially traverse the entire string in the worst case, counting words and building the result.
+9. **Accumulate Character**
+	```cpp
+	        ans+=x;
+	```
+	This appends the current character `x` to the string `ans`, effectively building the truncated sentence.
 
-- **Space Complexity**: The space complexity is \(O(m)\), where \(m\) is the number of characters in the resulting string. In the worst case, this could be the length of `s` if the sentence has fewer than or equal to `k` words.
+10. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the string `ans`, which contains the truncated sentence.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The `truncateSentence` function effectively truncates a sentence to the specified number of words by iterating through the input string character by character. It uses a straightforward counting mechanism to determine when to stop adding words to the result, ensuring that we capture the first `k` words of the sentence accurately.
+The time complexity is O(n) where n is the length of the string, as we need to split the string into words and then join them.
 
-This implementation showcases a simple and efficient approach to string manipulation in C++. It highlights the importance of understanding word boundaries and counting techniques in solving common string-related problems. The code is designed to handle edge cases seamlessly, such as when the sentence has fewer words than `k`, making it robust for various inputs. Overall, this solution is an excellent example of practical string handling in competitive programming and software development contexts.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) as we need to store the split words temporarily before joining them.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/truncate-sentence/description/)
 

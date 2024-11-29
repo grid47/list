@@ -14,106 +14,126 @@ img_src = ""
 youtube = "SG7VnKzhfjo"
 youtube_upload_date="2021-06-09"
 youtube_thumbnail="https://i.ytimg.com/vi/SG7VnKzhfjo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array. In one move, you can change any element of the array to any value. Perform at most three moves to minimize the difference between the largest and smallest values of the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums where each element can range from -10^9 to 10^9.
+- **Example:** `nums = [4, 3, 5, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minDifference(vector<int>& nums) {
-        int n = nums.size();
-        /* change one element to any other value in one move */
-        /* get min diff between max and min value after performing atmost 3 moves */
-        if(n < 5) return 0;
-        sort(nums.begin(), nums.end());
-        
-        return min({nums[n - 1] - nums[3], nums[n - 2] - nums[2], nums[n - 3] - nums[1], nums[n - 4] - nums[0]});
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum difference between the maximum and minimum values in the array after performing at most three moves.
+- **Example:** `0`
+- **Constraints:**
+	- Return the result as an integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the difference between the maximum and minimum values of the array after performing at most 3 moves.
 
-The problem at hand is to minimize the difference between the maximum and minimum values of an array after performing a series of operations. Specifically, we are allowed to change any of the elements in the array up to three times, and our goal is to find the minimum possible difference between the maximum and minimum elements of the array after these changes.
+- Step 1: Sort the array to easily access the smallest and largest values.
+- Step 2: Try changing the largest and smallest values to reduce the difference.
+- Step 3: Return the minimum difference after performing at most three moves.
+{{< dots >}}
+### Problem Assumptions ✅
+- You are allowed to change any element to any other value.
+- You can perform at most three moves.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 3, 5, 2]`  \
+  **Explanation:** After performing three moves, we can make all elements equal to 3, resulting in a minimum difference of 0.
 
-### Approach
+- **Input:** `nums = [1, 6, 8, 10, 15]`  \
+  **Explanation:** After performing three moves, the difference between the largest and smallest values is minimized to 1.
 
-To tackle this problem, we can break down the solution into the following steps:
+{{< dots >}}
+## Approach 🚀
+We need to minimize the difference between the largest and smallest values of the array by performing at most three moves.
 
-1. **Early Return for Small Arrays**: If the array contains fewer than 5 elements, it is impossible to create a significant difference between the maximum and minimum values through three operations, so we can directly return 0.
-
-2. **Sorting the Array**: By sorting the array, we can easily access the smallest and largest elements. This will allow us to determine how the maximum and minimum values can be adjusted by changing elements.
-
-3. **Consider All Combinations**: Since we can change up to three elements, we need to consider several configurations:
-   - Decreasing the three largest elements (and keeping the smallest unchanged).
-   - Decreasing the two largest and increasing the smallest.
-   - Decreasing the largest and the second-largest, while increasing the two smallest.
-   - Increasing the three smallest elements (and keeping the largest unchanged).
-
-4. **Calculate Differences**: For each configuration, calculate the difference between the new maximum and minimum values, and return the minimum of these differences.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Sorting the array helps in quickly accessing the smallest and largest values.
+- Consider all possible ways to change the three largest and smallest values and check the resulting differences.
+{{< dots >}}
+### Edge Cases 🌐
+- The array should not be empty as per the problem constraints.
+- Ensure the solution works efficiently even with large arrays (up to 100,000 elements).
+- Handle arrays with a small number of elements (e.g., 2 or 3 elements).
+- Ensure that no element exceeds the allowed range of values.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int minDifference(vector<int>& nums) {
+int minDifference(vector<int>& nums) {
+    int n = nums.size();
+    /* change one element to any other value in one move */
+    /* get min diff between max and min value after performing atmost 3 moves */
+    if(n < 5) return 0;
+    sort(nums.begin(), nums.end());
+    
+    return min({nums[n - 1] - nums[3], nums[n - 2] - nums[2], nums[n - 3] - nums[1], nums[n - 4] - nums[0]});
+}
 ```
-- We define a class `Solution` and the method `minDifference`, which takes a vector of integers `nums` as input.
 
-```cpp
-        int n = nums.size();
-```
-- We determine the size of the input array `n`.
+This code defines the `minDifference` function that minimizes the difference between the maximum and minimum values in the array `nums` after performing at most three modifications. It calculates this by sorting the array and evaluating the differences between specific elements.
 
-```cpp
-        /* change one element to any other value in one move */
-        /* get min diff between max and min value after performing atmost 3 moves */
-        if(n < 5) return 0;
-```
-- We check if the size of the array is less than 5. If it is, we can directly return 0 because it is impossible to achieve a meaningful difference with so few elements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minDifference(vector<int>& nums) {
+	```
+	Defines the `minDifference` function, which takes a vector `nums` as input and aims to minimize the difference between the maximum and minimum values after at most three changes.
 
-```cpp
-        sort(nums.begin(), nums.end());
-```
-- We sort the array `nums` in non-decreasing order. This sorting step allows us to easily access the largest and smallest values in the array.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializes a variable `n` to store the size of the vector `nums`. This is used to determine the number of elements in the array.
 
-```cpp
-        return min({nums[n - 1] - nums[3], nums[n - 2] - nums[2], nums[n - 3] - nums[1], nums[n - 4] - nums[0]});
-    }
-};
-```
-- We calculate the minimum difference by evaluating four scenarios:
-  - `nums[n - 1] - nums[3]`: This corresponds to reducing the three largest values.
-  - `nums[n - 2] - nums[2]`: This represents reducing the two largest values while keeping the two smallest.
-  - `nums[n - 3] - nums[1]`: Here we reduce the largest and second largest values while keeping the three smallest.
-  - `nums[n - 4] - nums[0]`: This considers increasing the three smallest values.
-  
-- The `min` function takes the minimum of these four computed differences and returns it as the result.
+3. **Condition Check**
+	```cpp
+	    if(n < 5) return 0;
+	```
+	Checks if the size of the array is less than 5. If it is, the function returns 0, as no moves are necessary in this case.
 
-### Complexity
+4. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the vector `nums` in ascending order to facilitate easier calculations of the possible differences between elements after moves.
 
-#### Time Complexity
-- The time complexity of this algorithm is \(O(n \log n)\) due to the sorting step. The rest of the operations (calculating the differences) are constant time operations, \(O(1)\).
+5. **Min Difference Calculation**
+	```cpp
+	    return min({nums[n - 1] - nums[3], nums[n - 2] - nums[2], nums[n - 3] - nums[1], nums[n - 4] - nums[0]});
+	```
+	Calculates the minimum difference between the maximum and minimum values in the sorted array after performing at most three changes by evaluating specific differences.
 
-#### Space Complexity
-- The space complexity is \(O(1)\) as we are only using a fixed amount of extra space for calculations and not allocating additional structures that scale with input size.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-### Conclusion
+The time complexity is O(n log n) due to the sorting step.
 
-This solution efficiently computes the minimum possible difference between the maximum and minimum elements of an array after performing a limited number of changes. 
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-**Key Takeaways**:
-- **Sorting**: The solution heavily relies on sorting to easily determine the potential maximum and minimum values after modifications.
-- **Combinatorial Logic**: By considering various combinations of which elements to modify, the algorithm ensures that it finds the optimal solution without unnecessary complexity.
-- **Edge Cases**: The early return for small arrays demonstrates good handling of edge cases, simplifying the problem and avoiding unnecessary computation.
+The space complexity is O(n) as we store the array.
 
-This algorithm showcases a clean and effective approach to minimizing differences in arrays, leveraging sorting and strategic analysis of possible outcomes based on allowed operations. Such techniques are valuable in competitive programming and algorithm design, where efficiency and clarity are paramount.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/description/)
 

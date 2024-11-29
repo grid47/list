@@ -14,121 +14,165 @@ img_src = ""
 youtube = "N4wDSOw65hI"
 youtube_upload_date="2021-09-26"
 youtube_thumbnail="https://i.ytimg.com/vi/N4wDSOw65hI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D grid of size 2 x n, where each cell contains points. Two robots play a game where they start at (0, 0) and aim to reach (1, n-1). The first robot moves first, collecting points along its path. Then, the second robot moves, trying to maximize the points it collects. The task is to find the number of points collected by the second robot if both play optimally.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array grid of size 2 x n, where each element grid[r][c] represents the number of points at position (r, c) in the grid.
+- **Example:** `[[2, 5, 4], [1, 5, 1]]`
+- **Constraints:**
+	- grid.length == 2
+	- n == grid[r].length
+	- 1 <= n <= 5 * 10^4
+	- 1 <= grid[r][c] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long gridGame(vector<vector<int>>& grid) {
-        long long top = accumulate(grid[0].begin(), grid[0].end(), 0LL);
-        long long bottom = 0;
-        int n = grid[0].size();
-        long long ans = LLONG_MAX;
-        for(int i = 0; i < n; i++) {
-            top -= grid[0][i];
-            ans = min(ans, max(top, bottom));
-            bottom+= grid[1][i];
-      }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of points collected by the second robot after both robots have moved optimally.
+- **Example:** `4`
+- **Constraints:**
+	- The output should be the total number of points collected by the second robot.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to simulate the movement of both robots while ensuring that the first robot minimizes the points collected by the second robot and the second robot maximizes its own points.
 
-In this problem, we need to find the minimum possible score for the second player in a two-row grid game. Each player can choose a column, and the goal is to minimize the score for the second player, who collects points from the bottom row after the first player has selected their column. The first player selects a column, and the score for the second player is the sum of points in the bottom row minus any points from the column that the first player chooses.
+- Initialize variables to track the points collected by the first and second robots.
+- Iterate through each column and update the points for both robots.
+- For each robot, calculate the optimal path by updating the number of points in the grid after each robot’s move.
+- Return the result of the second robot’s collected points.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will always have two rows and at least one column.
+- Both robots will move optimally to achieve their respective goals.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[2, 5, 4], [1, 5, 1]]`  \
+  **Explanation:** The first robot moves optimally to minimize the points collected by the second robot. After its path, the second robot collects 4 points.
 
-Given a grid of dimensions 2 x n, where each cell contains a non-negative integer representing points, the task is to calculate the minimum score for the second player after the first player has made their selection.
+- **Input:** `[[3, 3, 1], [8, 5, 2]]`  \
+  **Explanation:** After the first robot moves, the second robot is left with 4 points on its path, as it maximizes its collection.
 
-### Approach
+- **Input:** `[[1, 3, 1, 15], [1, 3, 3, 1]]`  \
+  **Explanation:** The second robot collects 7 points after the first robot moves optimally.
 
-To solve this problem, we can follow these steps:
+{{< dots >}}
+## Approach 🚀
+The approach involves simulating both robots’ moves while keeping track of the points collected by each robot and updating the grid after the first robot's movement.
 
-1. **Initial Calculations**: Compute the total points in the top row. We will also maintain a running total of points collected by the second player in the bottom row.
-
-2. **Iterate through the Columns**: For each column, simulate the first player picking that column and compute the resultant score for the second player:
-   - Deduct the points from the selected column in the top row from the total points.
-   - Add the points from the current column in the bottom row to a running total.
-   - Calculate the maximum score for the second player after this selection.
-
-3. **Track the Minimum Score**: Keep track of the minimum score observed after considering all possible selections by the first player.
-
-4. **Return the Result**: Finally, return the minimum score found.
-
-### Code Breakdown (Step by Step)
-
-Let's analyze the implementation:
-
+### Initial Thoughts 💭
+- The grid has two rows, and each robot moves from the start to the end while collecting points.
+- The first robot should minimize the points for the second robot by picking a path with fewer points, and the second robot should aim to maximize its own collection.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid will always have two rows and at least one column, so there will be no empty inputs.
+- Ensure the solution handles the upper limit of grid size (n = 50,000) efficiently.
+- Handle cases where the grid has very small values (e.g., 1) or large values (e.g., 100,000).
+- Ensure the algorithm runs within the time limits for large inputs (up to 50,000 columns).
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    long long gridGame(vector<vector<int>>& grid) {
+long long gridGame(vector<vector<int>>& grid) {
+    long long top = accumulate(grid[0].begin(), grid[0].end(), 0LL);
+    long long bottom = 0;
+    int n = grid[0].size();
+    long long ans = LLONG_MAX;
+    for(int i = 0; i < n; i++) {
+        top -= grid[0][i];
+        ans = min(ans, max(top, bottom));
+        bottom+= grid[1][i];
+  }
+    return ans;
+}
 ```
-- We define a class named `Solution` with a public method `gridGame` that takes a 2D vector of integers as its parameter, representing the grid.
 
-```cpp
-        long long top = accumulate(grid[0].begin(), grid[0].end(), 0LL);
-```
-- We calculate the total points in the top row using the `accumulate` function from the STL, initializing it with `0LL` to ensure we are working with long long integers.
+This function calculates the minimum maximum score a player can achieve in a grid game by processing the grid values in two rows and optimizing the values for both the top and bottom positions.
 
-```cpp
-        long long bottom = 0;
-        int n = grid[0].size();
-```
-- We initialize `bottom` to zero, which will be used to accumulate the points from the bottom row. We also retrieve the number of columns `n` in the grid.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long gridGame(vector<vector<int>>& grid) {
+	```
+	This defines the function `gridGame`, which takes a 2D vector `grid` representing the game grid and returns a `long long` value as the result.
 
-```cpp
-        long long ans = LLONG_MAX;
-```
-- We set `ans` to the maximum possible long long value, as we are looking for the minimum score.
+2. **Variable Initialization**
+	```cpp
+	    long long top = accumulate(grid[0].begin(), grid[0].end(), 0LL);
+	```
+	This initializes the `top` variable by summing all elements of the first row of the grid using the `accumulate` function, starting with an initial value of 0.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-```
-- We start a loop that will iterate over each column in the grid.
+3. **Variable Initialization**
+	```cpp
+	    long long bottom = 0;
+	```
+	This initializes the `bottom` variable to 0, which will accumulate values from the second row of the grid.
 
-```cpp
-            top -= grid[0][i];
-```
-- For each column, we deduct the points in the top row from `top`, simulating the first player picking that column.
+4. **Grid Size Calculation**
+	```cpp
+	    int n = grid[0].size();
+	```
+	This determines the number of columns in the grid (the size of the first row), which will be used as the upper bound for the loop.
 
-```cpp
-            ans = min(ans, max(top, bottom));
-```
-- We compute the maximum score between the updated `top` and the accumulated `bottom` points, then update `ans` to hold the minimum score observed.
+5. **Variable Initialization**
+	```cpp
+	    long long ans = LLONG_MAX;
+	```
+	This initializes the `ans` variable to the maximum possible long long value, which will store the result of the minimum maximum score during the game.
 
-```cpp
-            bottom += grid[1][i];
-```
-- We add the points from the bottom row in the current column to `bottom` for the next iteration.
+6. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This starts a loop that iterates over each column of the grid.
 
-```cpp
-        }
-        return ans;
-    }
-};
-```
-- The loop concludes, and we return the minimum score `ans`.
+7. **Top Row Update**
+	```cpp
+	        top -= grid[0][i];
+	```
+	This subtracts the value of the current column from the `top` variable, effectively removing the score for that column from the top row.
 
-### Complexity
+8. **Score Calculation**
+	```cpp
+	        ans = min(ans, max(top, bottom));
+	```
+	This calculates the current maximum of `top` and `bottom` and updates the result `ans` with the minimum value of `ans` and this new maximum.
 
-The time complexity of this algorithm is O(n), where n is the number of columns in the grid, as we are iterating through the columns just once. The space complexity is O(1) since we are using a constant amount of extra space for our variables.
+9. **Bottom Row Update**
+	```cpp
+	        bottom+= grid[1][i];
+	```
+	This adds the value of the current column from the second row of the grid to the `bottom` variable.
 
-### Conclusion
+10. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	This returns the calculated result `ans`, which is the minimum of the maximum scores across all the iterations.
 
-In summary, the `gridGame` method efficiently calculates the minimum score for the second player in the grid game by leveraging a single pass through the columns. This approach is optimal and avoids the need for nested iterations, making it suitable for larger inputs.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-By keeping track of the total points in the top row and maintaining a running total for the bottom row, we can quickly evaluate the potential outcomes for each column selection made by the first player. This demonstrates the power of cumulative calculations and optimal score tracking in algorithm design.
+The algorithm iterates through the columns of the grid once, so the time complexity is linear in terms of n.
 
-This solution not only provides an effective means to solve the problem but also illustrates key concepts in dynamic programming and greedy algorithms. The implementation is straightforward and easy to follow, serving as a great learning tool for those looking to deepen their understanding of such algorithms.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-In real-world applications, similar approaches can be employed in various scenarios where resource allocation and optimization are key factors. Understanding how to manipulate and evaluate potential outcomes based on choices made in sequential structures is a valuable skill for any programmer or data analyst.
+The space complexity is constant since we only need a few variables to track the robots' movements and points.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/grid-game/description/)
 

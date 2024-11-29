@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,126 +28,164 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, return the count of all numbers with unique digits x, such that 0 <= x < 10^n.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer n, where 0 <= n <= 8.
+- **Example:** `n = 3`
+- **Constraints:**
+	- 0 <= n <= 8
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the count of numbers with unique digits in the range 0 <= x < 10^n.
+- **Example:** `Input: n = 3
+Output: 739`
+- **Constraints:**
+	- The output should be the total number of valid numbers with unique digits.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To count all the numbers from 0 to 10^n-1 that have unique digits.
+
+- Start with the total valid numbers for n=1 (which is 10).
+- Iterate for each subsequent value of n and compute the number of unique digit numbers for that value.
+- For each n, reduce the available digits and multiply by the previous number of unique digits to get the total count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number of digits n is small enough that the approach of reducing the available digits and multiplying is efficient.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 3
+Output: 739`  \
+  **Explanation:** For n = 3, the total numbers in the range of 0 to 999 excluding numbers with repeated digits (such as 11, 22, etc.) is 739.
+
+{{< dots >}}
+## Approach 🚀
+We will iterate through the possible numbers of digits and calculate the count of numbers with unique digits using combinatorics.
+
+### Initial Thoughts 💭
+- The numbers with unique digits are formed by selecting distinct digits from the available pool of digits (0-9).
+- We can count how many numbers have unique digits for each number of digits from 1 to n using a decrementing approach.
+{{< dots >}}
+### Edge Cases 🌐
+- When n = 0, the answer should be 1, as there is only one number: 0.
+- When n = 8, the result needs to be computed efficiently using the combinatorial approach.
+- If n = 1, the result should be 10 (the numbers 0-9).
+- Ensure the solution handles n values from 0 to 8.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    public int countNumbersWithUniqueDigits(int n) {
-        if(n == 0) return 1;
-        
-        int res = 10;
-        int available = 9;
-        int unqNums = 9;
-        
-        while(n-- > 1 && available > 0) {
-            unqNums = unqNums * available;
-            res += unqNums;
-            available--;
-        }
-        return res;
+public int countNumbersWithUniqueDigits(int n) {
+    if(n == 0) return 1;
+    
+    int res = 10;
+    int available = 9;
+    int unqNums = 9;
+    
+    while(n-- > 1 && available > 0) {
+        unqNums = unqNums * available;
+        res += unqNums;
+        available--;
     }
-}
-{{< /highlight >}}
----
-
-### 🌟 Problem Statement
-
-The task at hand is to count how many numbers with **unique digits** can be formed with `n` digits, using digits from 0 to 9, and ensuring that no digit is repeated.
-
-- **For example**:
-  - When `n = 2`, the valid numbers with unique digits are 12, 13, 21, etc., but not 11, 22, or 33.
-  - When `n = 3`, valid 3-digit numbers include 123, 132, 231, but not 101, 121, etc.
-
----
-
-### 🔍 Approach
-
-To solve this problem efficiently, we'll break it down step-by-step:
-
-1. **Single Digit Numbers**:
-   - When `n = 1`, all digits from 0 to 9 are possible. So, we have 10 such numbers.
-
-2. **For Numbers with More than One Digit**:
-   - We start by calculating the number of valid choices for each digit:
-     - The **first digit** has 9 valid choices (1 to 9, because 0 cannot be the leading digit).
-     - The **second digit** has 9 valid choices (0 to 9, excluding the first digit).
-     - The **third digit** has 8 valid choices (excluding the first two digits).
-     - This pattern continues until we fill all `n` digits.
-
-3. **Edge Case**:
-   - If `n = 0`, the problem specifies returning 1, as there is exactly one way to have "zero digits" (the empty number).
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s look at the code, which follows the approach outlined above:
-
-#### Step 1: Handle Base Case (`n = 0`)
-
-```java
-if (n == 0) return 1;  // If n is 0, return 1 (one valid number: the empty number)
-```
-
-- When `n = 0`, we simply return 1 since the empty number is considered valid.
-
-#### Step 2: Initialize Variables
-
-```java
-int res = 10;      // Start with 10 valid 1-digit numbers (0 to 9)
-int available = 9;  // 9 choices for the first digit (1 to 9)
-int unqNums = 9;   // The number of valid numbers for the first digit
-```
-
-- We initialize `res` to 10 because there are 10 valid 1-digit numbers (0 through 9).
-- `available` represents the number of valid choices for the first digit, which is 9 (since the leading digit can't be 0).
-- `unqNums` stores the number of valid numbers formed up to the current digit.
-
-#### Step 3: Loop Through Remaining Digits
-
-```java
-while (n-- > 1 && available > 0) {
-    unqNums = unqNums * available;  // Calculate possible numbers for current digit count
-    res += unqNums;                 // Add the count to the result
-    available--;                    // Decrease available choices for the next digit
+    return res;
 }
 ```
 
-- For each digit from 2 to `n`, we:
-  - Multiply `unqNums` by the number of available choices for the current digit.
-  - Add the result to `res` to accumulate the total count of valid numbers.
-  - Decrease `available` by 1 for the next digit.
+This code defines a function `countNumbersWithUniqueDigits` which calculates how many numbers can be formed with unique digits for a given number of digits n. It handles the case where n = 0 separately, returning 1.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	This line begins the declaration of the `Solution` class, which contains the method `countNumbersWithUniqueDigits`.
 
-```java
-return res;
-```
+2. **Method Declaration**
+	```cpp
+	public int countNumbersWithUniqueDigits(int n) {
+	```
+	This is the declaration of the method `countNumbersWithUniqueDigits`, which takes an integer `n` as input and returns an integer representing the number of unique digit numbers that can be formed.
 
-- After the loop finishes, we return `res`, which holds the total number of valid unique-digit numbers.
+3. **Conditional Check**
+	```cpp
+	    if(n == 0) return 1;
+	```
+	This line checks if `n` is zero, and if so, it returns 1, as there is only one number (0) with zero digits.
 
----
+4. **Variable Initialization**
+	```cpp
+	    int res = 10;
+	```
+	Initializes the variable `res` to 10, which accounts for the numbers with one digit (0-9).
 
-### 📈 Complexity Analysis
+5. **Variable Initialization**
+	```cpp
+	    int available = 9;
+	```
+	Initializes the variable `available` to 9, which represents the number of available digits (1-9) for the next digit in multi-digit numbers.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(n)** because we iterate from 2 up to `n` in the loop, with constant-time operations inside the loop (multiplication and addition).
+6. **Variable Initialization**
+	```cpp
+	    int unqNums = 9;
+	```
+	Initializes the variable `unqNums` to 9, which represents the number of possible unique digits for the next digit.
 
-#### Space Complexity:
-- The space complexity is **O(1)** because we only use a few integer variables (`res`, `available`, `unqNums`), which don't grow with the size of `n`.
+7. **Variable Initialization**
+	```cpp
+	    
+	```
+	This is a placeholder for a blank line or spacing for readability.
 
----
+8. **Loop Declaration**
+	```cpp
+	    while(n-- > 1 && available > 0) {
+	```
+	This is a `while` loop that continues as long as `n` is greater than 1 and there are available digits to use. It iterates through each digit position.
 
-### 🏁 Conclusion
+9. **Variable Assignment**
+	```cpp
+	        unqNums = unqNums * available;
+	```
+	Multiplies the `unqNums` variable by the number of available digits for the next digit, updating the possible unique numbers.
 
-This solution is efficient and easy to understand. By calculating the number of possible numbers step-by-step for each digit, we avoid the need to explicitly generate all possible numbers. The approach ensures we have an optimal solution in terms of both **time** and **space** complexity. 
+10. **Variable Update**
+	```cpp
+	        res += unqNums;
+	```
+	Adds the newly calculated `unqNums` value to `res`, which keeps track of the total number of unique numbers formed.
 
----
+11. **Variable Update**
+	```cpp
+	        available--;
+	```
+	Decreases the `available` variable by 1, as one less digit is available for use in the next digit position.
 
-### 🎯 Quick Summary:
-- For `n = 1`, the count of valid numbers is 10.
-- For higher values of `n`, we calculate the possibilities for each digit, progressively reducing the available choices.
-- The solution has **O(n)** time complexity, making it fast even for large `n`.
+12. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total number of unique digit numbers (`res`) after completing the loop.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) when n = 0.
+- **Average Case:** O(n) for values of n up to 8, where the time complexity increases linearly with the value of n.
+- **Worst Case:** O(8) since n is capped at 8.
+
+The solution iterates up to n times, where n is at most 8.
+
+### Space Complexity 💾
+- **Best Case:** O(1) when n = 0.
+- **Worst Case:** O(1) as the space complexity is constant and only a few variables are used.
+
+Space complexity is constant as we only store a few variables for calculation.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)

@@ -14,91 +14,137 @@ img_src = ""
 youtube = "izRDc1il9Pk"
 youtube_upload_date="2021-08-14"
 youtube_thumbnail="https://i.ytimg.com/vi/izRDc1il9Pk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the roots of two binary trees. A flip operation consists of choosing any node and swapping its left and right child subtrees. A tree X is flip equivalent to tree Y if and only if we can make tree X equal to tree Y by performing some flip operations on X. Your task is to determine if the two trees are flip equivalent.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the roots of two binary trees, represented as TreeNode objects.
+- **Example:** `Input: root1 = [3,5,6,7,8], root2 = [3,8,5,6,7]`
+- **Constraints:**
+	- The number of nodes in each tree is in the range [0, 100].
+	- Each tree will have unique node values in the range [0, 99].
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool flipEquiv(TreeNode* root1, TreeNode* root2) {
-        if(root1 == NULL || root2 == NULL) 
-            return root1 == root2;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a boolean value indicating whether the two trees are flip equivalent.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output will be a boolean: true if the trees are flip equivalent, false otherwise.
 
-        return (root1->val == root2->val) && 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if two binary trees are flip equivalent, we need to recursively compare both trees while considering the possibility of flipping subtrees.
+
+- 1. Compare the root values of both trees. If they are not equal, return false.
+- 2. Recursively check if both left and right subtrees are flip equivalent, either in the original order or after flipping them.
+- 3. If either of these conditions hold true, return true; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input trees are binary trees with unique node values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root1 = [1,2,3,4,5,6], root2 = [1,3,2,5,6,4]`  \
+  **Explanation:** Both trees are flip equivalent because we can perform flip operations at nodes with values 1 and 3 to make the structures of the two trees identical.
+
+- **Input:** `Input: root1 = [1,2,3], root2 = [1,3,2]`  \
+  **Explanation:** The trees are flip equivalent because we can swap the left and right subtrees of node 1.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves a recursive check on the binary trees. At each node, we will compare the left and right subtrees, considering both the possibility of no flip and a flip operation.
+
+### Initial Thoughts 💭
+- This problem can be solved by comparing trees recursively while considering both the direct and flipped structures.
+- The recursive approach will allow us to break down the problem by comparing smaller subtrees at each level.
+{{< dots >}}
+### Edge Cases 🌐
+- If both trees are empty, return true since two empty trees are trivially flip equivalent.
+- For large trees with up to 100 nodes, the solution must work efficiently within the problem's constraints.
+- If one tree is empty and the other is not, the trees are not flip equivalent.
+- The solution must handle trees with at most 100 nodes efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+bool flipEquiv(TreeNode* root1, TreeNode* root2) {
+    if(root1 == NULL || root2 == NULL) 
+        return root1 == root2;
+
+    return (root1->val == root2->val) && 
 (flipEquiv(root1->left, root2->left) && flipEquiv(root1->right, root2->right) ||
 flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
 
-    }
-};
-{{< /highlight >}}
----
+}
+```
 
-### Problem Statement
+This function checks if two binary trees are flip equivalent, meaning that one tree can be transformed into the other by swapping left and right subtrees. The function compares nodes recursively to determine if the trees are equivalent in structure and value, allowing for subtree flipping.
 
-The problem asks us to determine whether two binary trees are equivalent when considering a special form of equivalence, known as **flip equivalence**. In this problem, two binary trees are considered equivalent if they can be made identical by flipping the children of any number of nodes. A flip operation at a node means swapping its left and right children. The goal is to return `true` if the two binary trees are flip equivalent, and `false` otherwise.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool flipEquiv(TreeNode* root1, TreeNode* root2) {
+	```
+	The function `flipEquiv` takes two binary tree roots, `root1` and `root2`, and returns `true` if the two trees are flip equivalent, otherwise `false`.
 
-### Approach
+2. **Base Case Check**
+	```cpp
+	    if(root1 == NULL || root2 == NULL) 
+	```
+	Check if either of the trees is empty. If one is empty and the other is not, return `false`. If both are `NULL`, return `true`.
 
-To solve this problem, we use a recursive approach to check the equivalence between two binary trees under the allowed flip operations. The idea is that for each pair of corresponding nodes in the two trees, we check if their values are the same, and then check recursively whether the subtrees rooted at those nodes are equivalent either in the original or flipped orientation.
+3. **Base Case Result**
+	```cpp
+	        return root1 == root2;
+	```
+	Return `true` if both trees are `NULL` or `false` if one is `NULL` and the other is not.
 
-There are two possible ways to check the equivalence of the subtrees:
-1. The left child of `root1` is equivalent to the left child of `root2` and the right child of `root1` is equivalent to the right child of `root2`.
-2. The left child of `root1` is equivalent to the right child of `root2` and the right child of `root1` is equivalent to the left child of `root2`.
+4. **Recursive Check Start**
+	```cpp
+	
+	```
+	Proceed to recursively compare the subtrees of both trees, considering both possible scenarios (subtrees are in the same order or flipped).
 
-If either of these conditions hold true for each pair of nodes, the trees are flip equivalent.
+5. **Value Comparison**
+	```cpp
+	    return (root1->val == root2->val) && 
+	```
+	First, check if the values at the current nodes of `root1` and `root2` are equal. If they are not equal, the trees cannot be flip equivalent.
 
-### Code Breakdown (Step by Step)
+6. **Recursive Left-Right Comparison**
+	```cpp
+	(flipEquiv(root1->left, root2->left) && flipEquiv(root1->right, root2->right) ||
+	```
+	Recursively check if the left subtree of `root1` is flip equivalent to the left subtree of `root2`, and if the right subtrees match as well.
 
-1. **Base Case**:
-   ```cpp
-   if(root1 == NULL || root2 == NULL) 
-       return root1 == root2;
-   ```
-   - The base case checks whether either of the trees is `NULL`. If both are `NULL`, they are considered equivalent, so we return `true`. If only one of them is `NULL`, they are not equivalent, so we return `false`.
+7. **Recursive Flipped Left-Right Comparison**
+	```cpp
+	flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
+	```
+	Alternatively, check if the left subtree of `root1` is flip equivalent to the right subtree of `root2`, and vice versa, indicating a flip of subtrees.
 
-2. **Recursion for Node Values**:
-   ```cpp
-   return (root1->val == root2->val) && 
-   (flipEquiv(root1->left, root2->left) && flipEquiv(root1->right, root2->right) ||
-   flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
-   ```
-   - After ensuring that neither of the nodes is `NULL`, we check if their values are the same. If they are not, we return `false` immediately.
-   - If the values are the same, we proceed to check the two recursive conditions:
-     1. The left child of `root1` is flip equivalent to the left child of `root2` and the right child of `root1` is flip equivalent to the right child of `root2`.
-     2. The left child of `root1` is flip equivalent to the right child of `root2` and the right child of `root1` is flip equivalent to the left child of `root2`.
-   - If either of these conditions is true, we return `true`; otherwise, we return `false`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-3. **Flip Equivalence Check**:
-   - The recursive function `flipEquiv()` is called for all the child nodes, checking whether the trees rooted at these child nodes are equivalent in either the original or flipped configuration.
-   - The recursive calls are structured such that both configurations (original and flipped) are checked for each pair of corresponding child nodes.
+The time complexity is linear, O(n), where n is the number of nodes in the tree. This is because we traverse each node once.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
 
-1. **Time Complexity**:
-   - The time complexity of this solution depends on the number of nodes in the binary trees. Since we visit each node once and perform constant-time operations for each node (i.e., comparing values and recursively checking child nodes), the time complexity is **O(N)**, where `N` is the number of nodes in the trees.
-   - The recursion depth is also O(N) in the worst case (i.e., when the tree is skewed).
+The space complexity is O(h), where h is the height of the tree, due to the recursion stack.
 
-2. **Space Complexity**:
-   - The space complexity is primarily due to the recursive stack used for traversing the tree. In the worst case (i.e., a skewed tree), the recursion depth will be O(N). Thus, the space complexity is **O(N)**.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-The solution uses a recursive approach to check if two binary trees are flip equivalent. The key idea is to recursively check the equivalence of the left and right subtrees, both in the original and flipped configurations, at each level of the tree. This approach ensures that we correctly handle cases where a flip at a node might be necessary to achieve equivalence. The time and space complexity of the solution are both O(N), making it efficient for solving this problem within the constraints typically given in competitive programming contexts.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flip-equivalent-binary-trees/description/)
 

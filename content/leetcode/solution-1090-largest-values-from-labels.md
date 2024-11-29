@@ -14,112 +14,170 @@ img_src = ""
 youtube = "E0OkE3G95vU"
 youtube_upload_date="2020-12-06"
 youtube_thumbnail="https://i.ytimg.com/vi/E0OkE3G95vU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays, `values` and `labels`, representing the value and label of items, respectively. Your goal is to choose a subset of items with the maximum sum of values such that the number of items selected is at most `numWanted` and no label appears more than `useLimit` times in the subset. Return the maximum possible sum of the values from the selected subset of items.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: `values` and `labels` of length `n`, where each element in `values` represents the value of the corresponding item, and each element in `labels` represents the label of the corresponding item. Additionally, you are given two integers: `numWanted` (the maximum number of items that can be selected) and `useLimit` (the maximum number of items that can be selected with the same label).
+- **Example:** `Input: values = [10, 8, 5, 4, 3], labels = [1, 1, 2, 2, 3], numWanted = 3, useLimit = 1`
+- **Constraints:**
+	- n == values.length == labels.length
+	- 1 <= n <= 2 * 10^4
+	- 0 <= values[i], labels[i] <= 2 * 10^4
+	- 1 <= numWanted, useLimit <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int largestValsFromLabels(vector<int>& values, vector<int>& labels, int numWanted, int useLimit) {
-        multimap<int, int> s;
-        unordered_map<int, int> m;
-        for(int i = 0; i < values.size(); i++) 
-            s.insert({values[i], labels[i]});
-        int res = 0;
-        for(auto it = rbegin(s); it != rend(s) && numWanted > 0; it++) {
-            if(++m[it->second] <= useLimit) {
-                res += it->first;
-                --numWanted;                
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum of the values from the selected subset of items that satisfies the constraints on selection and label usage.
+- **Example:** `Output: 18`
+- **Constraints:**
+	- The maximum sum should be obtained by selecting the best possible combination of items while respecting the label constraints.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to select the subset of items that yields the maximum sum of values while ensuring that no more than `numWanted` items are chosen and that no label appears more than `useLimit` times.
+
+- 1. Sort the items by their values in descending order to prioritize the highest value items.
+- 2. Track the frequency of each label as items are selected.
+- 3. Select items one by one while ensuring that the total number of selected items does not exceed `numWanted`, and no label appears more than `useLimit` times.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays `values` and `labels` are non-empty and contain valid values within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: values = [10, 8, 5, 4, 3], labels = [1, 1, 2, 2, 3], numWanted = 3, useLimit = 1`  \
+  **Explanation:** The optimal subset of items with the highest values while respecting the label constraints is the first, third, and fifth items, yielding a total value of 10 + 5 + 3 = 18.
+
+- **Input:** `Input: values = [9, 8, 7, 6, 5], labels = [0, 0, 1, 1, 0], numWanted = 3, useLimit = 2`  \
+  **Explanation:** In this example, the best subset is the first, second, and third items, which gives the maximum sum of values: 9 + 8 + 7 = 24.
+
+- **Input:** `Input: values = [5, 4, 3, 2, 1], labels = [1, 1, 2, 2, 3], numWanted = 3, useLimit = 1`  \
+  **Explanation:** The subset chosen is the first, third, and fifth items with the sum of values: 5 + 3 + 1 = 9.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a greedy approach where we prioritize selecting items with the highest values while ensuring that the label constraints are satisfied.
+
+### Initial Thoughts 💭
+- We need to ensure that the number of items selected does not exceed `numWanted`, and no label appears more than `useLimit` times.
+- Sorting the items by value and then iterating over them while respecting the label constraints will allow us to efficiently find the optimal solution.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input arrays `values` and `labels` are empty, the result should be 0.
+- For large inputs, the algorithm should handle up to 20,000 items efficiently, ensuring that the solution works within the time limits.
+- If all items have the same label, the solution should ensure that no more than `useLimit` items with the same label are selected.
+- The algorithm should respect the constraints on the number of items selected and the label limitations.
+{{< dots >}}
+## Code 💻
+```cpp
+int largestValsFromLabels(vector<int>& values, vector<int>& labels, int numWanted, int useLimit) {
+    multimap<int, int> s;
+    unordered_map<int, int> m;
+    for(int i = 0; i < values.size(); i++) 
+        s.insert({values[i], labels[i]});
+    int res = 0;
+    for(auto it = rbegin(s); it != rend(s) && numWanted > 0; it++) {
+        if(++m[it->second] <= useLimit) {
+            res += it->first;
+            --numWanted;                
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
+The function `largestValsFromLabels` returns the sum of the largest values that can be selected based on a label constraint, where a label can be used up to a specified limit (`useLimit`), and a total of `numWanted` values are chosen.
 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int largestValsFromLabels(vector<int>& values, vector<int>& labels, int numWanted, int useLimit) {
+	```
+	This line defines the function `largestValsFromLabels`, which takes four parameters: `values`, `labels`, `numWanted`, and `useLimit`.
 
-### Problem Statement
-The task is to maximize the sum of selected values from a list while respecting two constraints: you can select a limited number of values (`numWanted`) and each value has a corresponding label that can be used a maximum of `useLimit` times. Given two arrays, one for values and one for corresponding labels, the objective is to calculate the largest possible sum of values that can be selected according to the specified conditions.
+2. **Variable Initialization - Multimap**
+	```cpp
+	    multimap<int, int> s;
+	```
+	A multimap `s` is initialized to store pairs of values and their corresponding labels, with the ability to store multiple values with the same key.
 
-### Approach
-To tackle this problem effectively, we will follow these steps:
+3. **Variable Initialization - Unordered Map**
+	```cpp
+	    unordered_map<int, int> m;
+	```
+	An unordered map `m` is initialized to count how many times a label has been used.
 
-1. **Store Values with Labels**: Use a data structure to pair each value with its label.
-2. **Sort Values**: Sort these pairs in descending order based on the value to prioritize the highest values first.
-3. **Select Values**: Iterate through the sorted list and select values while ensuring that the number of times each label is used does not exceed the `useLimit`. Keep track of how many labels have been used and accumulate the total sum.
-4. **Return the Result**: Once the maximum sum is calculated, return it.
+4. **Loop - Insert Values and Labels**
+	```cpp
+	    for(int i = 0; i < values.size(); i++) 
+	```
+	This loop iterates through the `values` vector and inserts each value with its corresponding label into the multimap `s`.
 
-### Code Breakdown (Step by Step)
+5. **Insert Pair into Multimap**
+	```cpp
+	        s.insert({values[i], labels[i]});
+	```
+	Each pair of value and label is inserted into the multimap `s`, where the value will be sorted in ascending order by default.
 
-1. **Class Definition**: The class `Solution` contains the method `largestValsFromLabels`, which implements the logic to solve the problem.
+6. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	The variable `res` is initialized to 0. It will hold the sum of the selected largest values.
 
-   ```cpp
-   class Solution {
-   public:
-       int largestValsFromLabels(vector<int>& values, vector<int>& labels, int numWanted, int useLimit) {
-   ```
+7. **Loop - Process Values**
+	```cpp
+	    for(auto it = rbegin(s); it != rend(s) && numWanted > 0; it++) {
+	```
+	This loop iterates through the multimap `s` in reverse order, processing the largest values first. The loop continues until `numWanted` becomes 0.
 
-2. **Initialize Data Structures**: We declare a multimap `s` to store pairs of values and labels, allowing us to sort by value while maintaining label associations. An unordered map `m` will keep track of how many times each label has been used.
+8. **Condition - Label Usage Limit Check**
+	```cpp
+	        if(++m[it->second] <= useLimit) {
+	```
+	This condition checks if the label of the current item has been used fewer times than the allowed limit (`useLimit`). If the condition is true, the value is included in the sum.
 
-   ```cpp
-           multimap<int, int> s;
-           unordered_map<int, int> m;
-   ```
+9. **Add Value to Result**
+	```cpp
+	            res += it->first;
+	```
+	The value (`it->first`) from the current multimap entry is added to the result sum `res`.
 
-3. **Populate the Multimap**: We iterate through the `values` and `labels` arrays, inserting each pair into the multimap. This creates an ordered collection of values associated with their respective labels.
+10. **Decrement numWanted**
+	```cpp
+	            --numWanted;
+	```
+	Since one value has been added to the result, `numWanted` is decremented to track how many more values need to be selected.
 
-   ```cpp
-           for(int i = 0; i < values.size(); i++) 
-               s.insert({values[i], labels[i]});
-   ```
+11. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the result, which is the sum of the largest values that have been selected.
 
-4. **Initialize Result Variable**: A variable `res` is initialized to zero to accumulate the maximum sum of values selected.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-   ```cpp
-           int res = 0;
-   ```
+The sorting step dominates the time complexity, which is O(n log n) where n is the number of items.
 
-5. **Iterate Through the Multimap**: We use a reverse iterator to go through the multimap starting from the highest value. We continue until we have either exhausted the multimap or reached the limit on selected values.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-           for(auto it = rbegin(s); it != rend(s) && numWanted > 0; it++) {
-   ```
+The space complexity is O(n) due to the need to store the items and track their labels and counts.
 
-6. **Count Usage of Labels**: For each value-label pair, we increment the count of how many times the label has been used. If the count does not exceed the `useLimit`, we add the value to the result and decrement the number of values we still need to select (`numWanted`).
-
-   ```cpp
-               if(++m[it->second] <= useLimit) {
-                   res += it->first;
-                   --numWanted;                
-               }
-           }
-   ```
-
-7. **Return the Result**: Finally, we return the accumulated sum of the selected values.
-
-   ```cpp
-           return res;
-       }
-   };
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this algorithm is \(O(N \log N)\), where \(N\) is the number of values. This is primarily due to the insertion of elements into the multimap, which requires sorting. The iteration through the sorted elements is \(O(N)\).
-  
-- **Space Complexity**: The space complexity is \(O(N)\) as we store up to \(N\) pairs in the multimap and also maintain the unordered map for counting label usages.
-
-### Conclusion
-The provided C++ code effectively solves the problem of maximizing the sum of selected values under specific constraints using a clear and efficient approach. By leveraging a multimap to sort the values in descending order and tracking the usage of labels, the algorithm ensures that we can select the highest possible values while adhering to the limits set on each label.
-
-This method is especially useful in scenarios where prioritization of elements based on value is critical, such as resource allocation, budget optimization, or inventory management. Its \(O(N \log N)\) time complexity makes it suitable for reasonably sized datasets, providing a balance between efficiency and clarity.
-
-In summary, the `largestValsFromLabels` method demonstrates a robust strategy for solving a combinatorial selection problem, showcasing the effectiveness of data structures like maps and multisets in achieving optimal results in competitive programming and algorithmic challenges.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-values-from-labels/description/)

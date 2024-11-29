@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ciPrKYoOQkI"
 youtube_upload_date="2024-01-14"
 youtube_thumbnail="https://i.ytimg.com/vi/ciPrKYoOQkI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,100 +28,160 @@ youtube_thumbnail="https://i.ytimg.com/vi/ciPrKYoOQkI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a sorted array of integers, find two numbers whose sum equals a target value. Return the indices of these two numbers, ensuring they are 1-indexed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sorted array `numbers` of integers and a `target` integer.
+- **Example:** `numbers = [1, 5, 8, 12], target = 13`
+- **Constraints:**
+	- 2 <= numbers.length <= 30,000
+	- -1,000 <= numbers[i] <= 1,000
+	- The array is sorted in non-decreasing order.
+	- -1,000 <= target <= 1,000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> ans(2, 0);
-        map<int, int> mp;
-        for(int i = 0; i < nums.size(); i++) {
-            if(mp.count(nums[i])) {
-                ans[0] = mp[nums[i]] + 1;
-                ans[1] = i + 1;
-                return ans;
-            } else {
-                mp[target - nums[i]] = i;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of two integers representing the 1-indexed positions of the two numbers that add up to the target.
+- **Example:** `Output: [2, 3]`
+- **Constraints:**
+	- The output array contains exactly two integers.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find two indices such that the sum of the numbers at those indices equals the target.
+
+- Use a two-pointer approach to iterate through the array.
+- Start with pointers at the beginning and end of the array.
+- Move the pointers towards each other based on whether the sum is less than or greater than the target.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is already sorted in non-decreasing order.
+- There is exactly one valid solution.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `numbers = [1, 5, 8, 12], target = 13`  \
+  **Explanation:** The sum of 5 and 8 equals 13, so the solution is at indices 2 and 3.
+
+{{< dots >}}
+## Approach 🚀
+We will use a two-pointer approach to efficiently find the solution in O(n) time.
+
+### Initial Thoughts 💭
+- The array is sorted, so we can use the two-pointer technique to find the pair.
+- We will initialize two pointers: one at the beginning and one at the end of the array, and move them based on the current sum.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the array will always have at least two elements.
+- For large arrays, the solution is efficient with O(n) time complexity.
+- If the target is negative, the same approach works.
+- Since the array is sorted and there's exactly one solution, the two-pointer approach is optimal.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> twoSum(vector<int>& nums, int target) {
+    vector<int> ans(2, 0);
+    map<int, int> mp;
+    for(int i = 0; i < nums.size(); i++) {
+        if(mp.count(nums[i])) {
+            ans[0] = mp[nums[i]] + 1;
+            ans[1] = i + 1;
+            return ans;
+        } else {
+            mp[target - nums[i]] = i;
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### 🌐 Two Sum: Efficiently Finding a Pair of Numbers that Sum to a Target
-
-The problem is to find two indices in an array such that the numbers at those indices sum up to a given target value. Specifically, we need to return the **1-based indices** of the two numbers that add up to the target.
-
-### 💡 Approach
-
-To solve this efficiently, we use a **hash map** (in C++, `map`) to store the numbers we've already encountered while iterating through the array. This allows us to check, in constant time, if the complement of the current number (i.e., `target - current_number`) exists in the array. By leveraging this strategy, we reduce the time complexity from a brute-force **O(n^2)** solution to an optimal **O(n)** solution.
-
----
-
-### 📝 Code Breakdown (Step-by-Step)
-
-#### 🔹 Step 1: Initialize the Variables
-
-```cpp
-vector<int> ans(2, 0);
-map<int, int> mp;
-```
-- `ans`: A vector to store the two indices of the numbers that sum up to the target. It's initialized with two zeroes as placeholders.
-- `mp`: A map (or hash table) used to store the complement of each number as we iterate through the array. The key will be the complement (`target - nums[i]`), and the value will be the index `i` of the number.
-
-#### 🔹 Step 2: Iterate Through the Array
-
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    if(mp.count(nums[i])) {
-        ans[0] = mp[nums[i]] + 1;
-        ans[1] = i + 1;
-        return ans;
-    } else {
-        mp[target - nums[i]] = i;
-    }
+    return ans;
 }
 ```
-- The loop iterates over each element in the array `nums`. For each element:
-  - **Check if the current number exists in the map (`mp`)**:
-    - If `mp.count(nums[i])` is true, it means the complement (`target - nums[i]`) has already been encountered. Thus, we have found a valid pair that sums up to the target.
-    - We then set `ans[0] = mp[nums[i]] + 1` and `ans[1] = i + 1` to store the **1-based indices** of the two numbers.
-    - The function returns the `ans` immediately, as we've found the pair.
-  - **If the complement is not found in the map**:
-    - We store the complement of the current number (`target - nums[i]`) as the key in the map, with the current index `i` as the value. This will allow us to find the complement when we encounter it later in the array.
 
-#### 🔹 Step 3: Return the Result
+This function solves the 'Two Sum' problem by finding two indices in the array such that their sum equals the given target. It uses a map to store the complement of the target minus the current number and its index.
 
-```cpp
-return ans;
-```
-- If no pair is found, `ans` would be returned. However, the problem guarantees that there is exactly one solution, so we would always find and return the pair within the loop.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> twoSum(vector<int>& nums, int target) {
+	```
+	Define the function 'twoSum' which takes a vector of integers 'nums' and an integer 'target', and returns a vector of two indices whose sum equals the target.
 
----
+2. **Variable Initialization**
+	```cpp
+	    vector<int> ans(2, 0);
+	```
+	Initialize a vector 'ans' with two elements, both set to 0, which will store the indices of the two numbers that sum to the target.
 
-### 🔎 Complexity
+3. **Map Declaration**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declare a map 'mp' to store the complement (target - nums[i]) as the key, and the index of the number as the value.
 
-#### Time Complexity:
-- **O(n)**: The algorithm iterates over the array once. Each iteration involves a constant-time check (`mp.count`) and a constant-time insertion/update (`mp[target - nums[i]]`). Hence, the time complexity is **O(n)**, where `n` is the size of the array.
+4. **For Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Start a loop to iterate through each element of the input vector 'nums'.
 
-#### Space Complexity:
-- **O(n)**: The space complexity is determined by the space used by the map `mp`. In the worst case, the map will store up to `n` elements (one for each number in the array). Therefore, the space complexity is **O(n)**.
+5. **Condition Check**
+	```cpp
+	        if(mp.count(nums[i])) {
+	```
+	Check if the current number 'nums[i]' exists in the map 'mp'. If it does, the two sum condition is met.
 
----
+6. **Index Assignment**
+	```cpp
+	            ans[0] = mp[nums[i]] + 1;
+	```
+	If the condition is true, assign the index of the first number (found in the map) to 'ans[0]'. Add 1 to make the index 1-based.
 
-### ✅ Conclusion
+7. **Index Assignment**
+	```cpp
+	            ans[1] = i + 1;
+	```
+	Assign the current index 'i' to 'ans[1]' (adding 1 to make it 1-based) as the second index of the two numbers whose sum equals the target.
 
-This solution is both time-efficient and space-efficient, with a time complexity of **O(n)** and a space complexity of **O(n)**. By using a **hash map**, we are able to track the complements of the numbers and check for pairs that sum up to the target in constant time. This approach is far more efficient than a brute-force **O(n^2)** solution.
+8. **Return Statement**
+	```cpp
+	            return ans;
+	```
+	Return the result vector 'ans' containing the indices of the two numbers that sum to the target.
 
-#### Key Takeaways:
-- The core idea is to store the complement of each number in a map and check if it has already been encountered during the iteration.
-- The time complexity of **O(n)** ensures that the solution works well for large input sizes.
-- The **O(n)** space complexity comes from the map, which is necessary to achieve the time efficiency.
+9. **Else Condition**
+	```cpp
+	        } else {
+	```
+	If the current number is not in the map, proceed to store its complement (target - nums[i]) in the map.
 
-This approach is ideal when solving problems that involve finding pairs in an array that satisfy certain conditions (like summing to a target value).
+10. **Map Insertion**
+	```cpp
+	            mp[target - nums[i]] = i;
+	```
+	Store the complement of the current number (target - nums[i]) as the key and its index 'i' as the value in the map 'mp'.
+
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the 'ans' vector, which will contain the indices of the two numbers whose sum equals the target, if they are found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only need to iterate through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we are using only constant extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 

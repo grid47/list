@@ -14,152 +14,183 @@ img_src = ""
 youtube = "YfdfIOeV_RU"
 youtube_upload_date="2024-05-18"
 youtube_thumbnail="https://i.ytimg.com/vi/YfdfIOeV_RU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary tree with `n` nodes, where each node contains `node.val` coins. There are exactly `n` coins in total across the tree. In one move, you can transfer a coin between two adjacent nodes (parent to child or child to parent). Return the minimum number of moves required to ensure that every node has exactly one coin.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A binary tree represented by an array of integers, where each integer corresponds to the number of coins at that node.
+- **Example:** `root = [1, 0, 0]`
+- **Constraints:**
+	- 1 <= n <= 100
+	- 0 <= Node.val <= n
+	- The sum of all Node.val is n.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-    int mv;
-public:
-    int distributeCoins(TreeNode* root) {
-        mv = 0;
-        move(root, mv);
-        return mv;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of moves required to make every node have exactly one coin.
+- **Example:** `2`
+- **Constraints:**
+	- The output must be an integer representing the minimum number of moves.
 
-    int move(TreeNode* r, int & mv) {
-        if(r == nullptr) return 0;
-        int left = move(r->left, mv);
-        int right = move(r->right, mv);
-        mv += abs(left) + abs(right);
-        return r->val + left + right - 1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to calculate the minimum moves by redistributing coins across the binary tree.
 
-### Problem Statement
+- Traverse the tree recursively.
+- For each node, calculate the difference between the node's coin count and the desired coin count (which is 1).
+- Accumulate the total moves by summing the absolute differences in coin count for each subtree.
+- Return the total number of moves.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is well-formed, and all nodes are valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [1, 0, 0]`  \
+  **Explanation:** The root node has one coin, and both children have none. The solution involves moving coins from the root to its children to balance the tree.
 
-In this problem, we are given a binary tree where each node has a value representing the number of coins in that node. The goal is to distribute the coins across the tree such that each node ends up with exactly one coin. To achieve this, we are allowed to move coins between the nodes. A move consists of transferring a coin from a node to its parent or child node. The objective is to find the **minimum number of moves** required to achieve the desired state, where each node has exactly one coin.
+- **Input:** `root = [0, 2, 0]`  \
+  **Explanation:** In this case, two coins are initially at the left child. We move coins to the root and then move one coin to the right child.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+A recursive approach is used to traverse the tree, compute the difference in coins for each node, and calculate the total moves required.
 
-The problem can be solved efficiently using a **depth-first search (DFS)** traversal of the tree, combined with a recursive function to compute the required moves.
-
-#### Key Insights:
-1. **Problem Restatement**:
-   - Each node must end with exactly one coin. If a node has more than one coin, it needs to give some coins to its children. If a node has fewer than one coin, it needs to receive coins from its children.
-   
-2. **Recursive Strategy**:
-   - The solution works by recursively calculating how many coins need to be moved between nodes to achieve the target state (one coin per node).
-   - For any given node, the number of coins to move depends on its left and right subtrees. Specifically:
-     - If the left subtree has a surplus or deficit of coins, it contributes to the moves required to balance the current node.
-     - Similarly, the right subtree contributes as well.
-   
-3. **Moves Calculation**:
-   - For each node, we first calculate the number of coins that need to be moved to balance the left and right subtrees.
-   - After the recursive call, the result for each subtree is the number of extra or missing coins that need to be moved. The result is calculated using the formula:
-     ```cpp
-     r->val + left + right - 1
-     ```
-   - The number of moves for each subtree is the **absolute sum** of extra or missing coins for both subtrees, and we accumulate this value to track the total moves.
-
-4. **Accumulating Moves**:
-   - As we traverse the tree, we update the `mv` variable to accumulate the total number of moves required. At each node, we add the absolute values of the moves required for the left and right subtrees.
-
-5. **Base Case**:
-   - If a node is `nullptr`, the function returns `0` as it doesn't require any coins to be moved.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **TreeNode Structure**:
-   - The problem defines the `TreeNode` structure, which has three properties:
-     - `val`: The number of coins in the node.
-     - `left`: Pointer to the left child node.
-     - `right`: Pointer to the right child node.
-
-```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-```
-
-#### 2. **Solution Class**:
-   - The `Solution` class has a public method `distributeCoins` that takes the root of the binary tree as input and returns the minimum number of moves required.
-
+### Initial Thoughts 💭
+- Each node needs to have exactly one coin.
+- The total number of coins in the tree is already fixed and equal to the number of nodes.
+- We need to find an efficient way to traverse the tree and redistribute coins to meet the target distribution.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty tree is not a valid input based on the constraints.
+- For large inputs, ensure that the algorithm handles the maximum number of nodes efficiently.
+- If all nodes already have one coin, no moves are needed.
+- The tree must contain at least one node.
+{{< dots >}}
+## Code 💻
 ```cpp
 class Solution {
-    int mv;
+int mv;
 public:
-    int distributeCoins(TreeNode* root) {
-        mv = 0;  // Initialize the move counter
-        move(root, mv);  // Call the recursive function to compute moves
-        return mv;  // Return the total number of moves
-    }
+int distributeCoins(TreeNode* root) {
+    mv = 0;
+    move(root, mv);
+    return mv;
+}
+
+int move(TreeNode* r, int & mv) {
+    if(r == nullptr) return 0;
+    int left = move(r->left, mv);
+    int right = move(r->right, mv);
+    mv += abs(left) + abs(right);
+    return r->val + left + right - 1;
+}
 ```
 
-#### 3. **Move Function (Recursive DFS)**:
-   - The `move` function performs a depth-first search on the tree, starting from the root.
-   - For each node, it calculates the number of coins that need to be moved from the left and right subtrees to balance the current node.
+This code defines a solution to the problem of distributing coins in a binary tree, where each node has a coin, and the goal is to find the minimum number of moves required to balance the tree such that each node has exactly one coin.
 
-```cpp
-    int move(TreeNode* r, int & mv) {
-        if(r == nullptr) return 0;  // Base case: return 0 if the node is null
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the class `Solution` which contains methods for solving the problem of distributing coins in a binary tree.
 
-- **Base Case**: If the node is `nullptr`, the function returns `0` because no coins need to be moved in this case.
+2. **Member Variable Declaration**
+	```cpp
+	int mv;
+	```
+	Declares a member variable `mv` which will hold the number of moves required to balance the coins in the binary tree.
 
-```cpp
-        int left = move(r->left, mv);  // Calculate moves for the left subtree
-        int right = move(r->right, mv);  // Calculate moves for the right subtree
-        mv += abs(left) + abs(right);  // Add the moves from both subtrees to the total
-```
+3. **Public Method Declaration**
+	```cpp
+	public:
+	```
+	Begins the public section of the class, where the methods that can be accessed from outside the class are defined.
 
-- **Recursive Call**: The function recursively calls itself for the left and right child nodes. The result of these calls is the number of coins that need to be moved from the respective subtrees.
-- **Accumulating Moves**: The `abs(left)` and `abs(right)` values represent the number of extra or missing coins in the left and right subtrees. These are added to the total move counter `mv`.
+4. **Main Method**
+	```cpp
+	int distributeCoins(TreeNode* root) {
+	```
+	Defines the method `distributeCoins` which takes a pointer to the root of the binary tree and returns the minimum number of moves required to balance the coins.
 
-```cpp
-        return r->val + left + right - 1;  // Return the number of coins at the current node, after accounting for the left and right subtrees
-    }
-};
-```
+5. **Initialize Moves**
+	```cpp
+	    mv = 0;
+	```
+	Initializes the `mv` variable to 0, which will be used to count the number of moves needed to balance the coins.
 
-- **Returning Value**: The function returns the number of coins that the current node has after accounting for the left and right subtrees. This is calculated by adding the number of coins in the node (`r->val`) and the total excess or deficit from the left and right subtrees. The subtraction of `1` accounts for the fact that the node itself needs exactly one coin.
+6. **Recursive Call to Move**
+	```cpp
+	    move(root, mv);
+	```
+	Calls the helper method `move` to recursively calculate the required moves, passing the root node and the `mv` variable.
 
-### Complexity
+7. **Return Result**
+	```cpp
+	    return mv;
+	```
+	Returns the total number of moves required to balance the tree.
 
-- **Time Complexity**: 
-  - The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we visit each node exactly once during the depth-first traversal.
-  - Each recursive call performs constant work (calculating distances, accumulating moves), making the overall time complexity linear in terms of the number of nodes.
+8. **Helper Method Declaration**
+	```cpp
+	int move(TreeNode* r, int & mv) {
+	```
+	Defines the helper method `move`, which is a recursive function that calculates the number of moves required for each node to balance the coins in its subtree.
 
-- **Space Complexity**:
-  - The space complexity is **O(h)**, where `h` is the height of the binary tree. This is due to the space used by the recursive call stack during the depth-first traversal. In the worst case, when the tree is skewed, the height `h` could be equal to `n`, making the space complexity **O(n)**.
+9. **Base Case**
+	```cpp
+	    if(r == nullptr) return 0;
+	```
+	Checks if the current node is null. If so, it returns 0, as no moves are needed for a non-existent node.
 
-### Conclusion
+10. **Recursive Call for Left Subtree**
+	```cpp
+	    int left = move(r->left, mv);
+	```
+	Recursively calls the `move` method on the left child of the current node to calculate the number of moves for the left subtree.
 
-The `distributeCoins` function efficiently calculates the minimum number of moves required to distribute the coins in a binary tree such that each node has exactly one coin. The solution leverages a depth-first search (DFS) strategy to recursively traverse the tree and compute the moves needed for the left and right subtrees. By using a simple recursive approach and efficiently calculating the number of coins to move, the solution is optimal in terms of time and space complexity.
+11. **Recursive Call for Right Subtree**
+	```cpp
+	    int right = move(r->right, mv);
+	```
+	Recursively calls the `move` method on the right child of the current node to calculate the number of moves for the right subtree.
 
-This approach ensures that the solution works in linear time and is well-suited for large binary trees. The simplicity and elegance of the DFS solution make it an effective approach for this type of problem.
+12. **Calculate Moves for Current Node**
+	```cpp
+	    mv += abs(left) + abs(right);
+	```
+	Calculates the total number of moves for the current node by adding the absolute values of the moves required for the left and right subtrees.
+
+13. **Return Value for Current Node**
+	```cpp
+	    return r->val + left + right - 1;
+	```
+	Returns the value for the current node, adjusting for the moves required by its left and right children, and subtracting 1 because each node starts with one coin.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution requires traversing every node in the tree once, resulting in a time complexity of O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
+
+The space complexity is O(h) where h is the height of the tree due to recursion stack usage.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distribute-coins-in-binary-tree/description/)
 

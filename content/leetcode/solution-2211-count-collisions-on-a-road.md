@@ -14,103 +14,171 @@ img_src = ""
 youtube = "Cy_E7rABX_U"
 youtube_upload_date="2022-03-20"
 youtube_thumbnail="https://i.ytimg.com/vi/Cy_E7rABX_U/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You have `n` cars on a straight road, each numbered from 0 to `n-1` from left to right, with each car positioned at a unique location. You are given a string `directions` where each character represents the direction of a car ('L' for left, 'R' for right, and 'S' for stationary). Each moving car has the same speed, and the cars can collide under the following conditions: Two cars moving in opposite directions ('L' and 'R') will collide, counting as 2 collisions. A moving car colliding with a stationary car ('S') will result in 1 collision. After a collision, the cars involved stay at the collision point and no longer move. Your task is to calculate the total number of collisions that will happen.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 0-indexed string `directions` of length `n`, where each character is one of 'L', 'R', or 'S', denoting the direction of each car.
+- **Example:** `"RSLSRL"`
+- **Constraints:**
+	- 1 <= directions.length <= 10^5
+	- directions[i] is one of 'L', 'R', or 'S'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countCollisions(string dir) {
-        int l = 0, r = dir.size() - 1;
-        int n = dir.size();
-        while(l < n && dir[l] == 'L')
-            l++;
-        
-        while(r >= 0 && dir[r] == 'R')
-            r--;
-        
-        int cnt = 0;
-        for(int i = l; i <= r; i++)
-            if(dir[i] != 'S')
-                cnt++;
-        
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of collisions that will happen.
+- **Example:** `4`
+- **Constraints:**
+	- The output will be an integer representing the total number of collisions.
 
-### Problem Statement
-The problem asks us to calculate the number of collisions that happen in a traffic scenario where cars are moving in different directions. The cars can either move to the left ('L'), to the right ('R'), or stay still ('S'). A collision occurs when two cars are facing towards each other, meaning one car is moving left ('L') and the other is moving right ('R'). We are to count how many collisions happen as cars move towards each other.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of collisions by checking when cars move in opposite directions or when moving cars collide with stationary cars.
 
-### Approach
-The solution can be efficiently implemented by:
-1. Scanning from both ends of the string to skip over cars that are not involved in collisions.
-2. Identifying the region in the string where collisions are possible, i.e., between cars moving in opposite directions.
-3. Counting the number of collisions based on the positions of these cars.
-   
-To solve this, we:
-- First skip any cars moving to the left at the beginning (`L` characters).
-- Then skip any cars moving to the right at the end (`R` characters).
-- The remaining cars in between are the ones that may collide. For these, we check if they are either moving left ('L') or right ('R') and count them as collisions.
+- Find the first car that moves towards the left and the last car that moves towards the right.
+- Count the number of cars between them that collide based on the direction of movement and whether they are stationary.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `directions` represents valid data with no other characters apart from 'L', 'R', or 'S'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"RSLSRL"`  \
+  **Explanation:** The cars move in opposite directions, causing collisions between moving cars and stationary cars as they meet, and we count these interactions to get the total number of collisions.
 
-### Code Breakdown (Step by Step)
+{{< dots >}}
+## Approach 🚀
+The approach involves scanning the `directions` string and identifying the range of cars that will collide based on their movement directions, counting the number of collisions based on specific rules.
 
-1. **Initialize Pointers:**
-   ```cpp
-   int l = 0, r = dir.size() - 1;
-   int n = dir.size();
-   ```
-   - `l` and `r` are pointers that will be used to scan from the left and right ends of the string, respectively.
-   - `n` stores the size of the string `dir`.
+### Initial Thoughts 💭
+- Cars moving in opposite directions (R and L) will collide.
+- Cars moving towards a stationary car will cause a collision.
+- We need to identify collisions between moving cars and stationary cars, and count collisions where two cars move towards each other.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is guaranteed to have at least one car.
+- The solution should handle strings of length up to 10^5 efficiently.
+- The string may contain only 'L', 'R', or 'S'.
+- The string should not contain any other characters apart from 'L', 'R', or 'S'.
+{{< dots >}}
+## Code 💻
+```cpp
+int countCollisions(string dir) {
+    int l = 0, r = dir.size() - 1;
+    int n = dir.size();
+    while(l < n && dir[l] == 'L')
+        l++;
+    
+    while(r >= 0 && dir[r] == 'R')
+        r--;
+    
+    int cnt = 0;
+    for(int i = l; i <= r; i++)
+        if(dir[i] != 'S')
+            cnt++;
+    
+    return cnt;
+}
+```
 
-2. **Skipping Cars Moving Left at the Beginning:**
-   ```cpp
-   while(l < n && dir[l] == 'L')
-       l++;
-   ```
-   - We increment `l` while the character at position `l` is 'L'. This is because cars moving left at the start won't collide with any other cars, as they are already moving in the opposite direction.
+This function counts the number of collisions between cars represented by the string `dir`. Cars are represented by 'L' (left), 'R' (right), and 'S' (stopped). A collision occurs when a moving car ('L' or 'R') encounters another moving car or a stationary car.
 
-3. **Skipping Cars Moving Right at the End:**
-   ```cpp
-   while(r >= 0 && dir[r] == 'R')
-       r--;
-   ```
-   - We decrement `r` while the character at position `r` is 'R'. These cars are also not involved in collisions as they are already moving away from the center of the traffic.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countCollisions(string dir) {
+	```
+	Function definition starts. The function takes a string `dir` that represents the direction of cars ('L' for left, 'R' for right, 'S' for stopped) and returns an integer indicating the number of collisions.
 
-4. **Counting Collisions:**
-   ```cpp
-   int cnt = 0;
-   for(int i = l; i <= r; i++)
-       if(dir[i] != 'S')
-           cnt++;
-   ```
-   - We iterate from `l` to `r`, which marks the region where collisions can occur.
-   - For each car in this region, if it is either 'L' or 'R' (not 'S'), it indicates a collision with another car.
-   - Each such car contributes to the collision count, and we increment `cnt` accordingly.
+2. **Variable Initialization**
+	```cpp
+	    int l = 0, r = dir.size() - 1;
+	```
+	Initialize two variables `l` and `r` to track the leftmost and rightmost car positions in the string `dir`.
 
-5. **Return the Collision Count:**
-   ```cpp
-   return cnt;
-   ```
-   - Finally, after counting the collisions, we return the result stored in `cnt`.
+3. **Size Calculation**
+	```cpp
+	    int n = dir.size();
+	```
+	Calculate the size of the input string `dir` and store it in the variable `n`.
 
-### Complexity
+4. **Left Pointer Movement**
+	```cpp
+	    while(l < n && dir[l] == 'L')
+	```
+	Move the left pointer `l` to the right while the car is moving left ('L').
 
-#### Time Complexity:
-- **O(n)**: 
-  - The solution involves a linear scan of the string `dir`. First, we increment `l` and decrement `r` to find the valid collision region. Then, we iterate over the remaining cars to count the collisions. Since each operation (increment, decrement, and iteration) takes constant time, the overall time complexity is O(n), where `n` is the size of the string `dir`.
+5. **Left Pointer Update**
+	```cpp
+	        l++;
+	```
+	Increment the left pointer `l` to skip over all left-moving cars ('L').
 
-#### Space Complexity:
-- **O(1)**: 
-  - The space complexity is O(1) as we are only using a few variables (`l`, `r`, `cnt`) to track the positions and the result. We do not use any additional space that scales with the input size.
+6. **Right Pointer Movement**
+	```cpp
+	    while(r >= 0 && dir[r] == 'R')
+	```
+	Move the right pointer `r` to the left while the car is moving right ('R').
 
-### Conclusion
-This solution is efficient and simple, providing an optimal way to count collisions in a traffic scenario. The two-pointer technique, combined with direct counting, ensures that the solution runs in linear time O(n), making it well-suited for large inputs. The space complexity is constant (O(1)), which ensures that the solution is memory-efficient. By focusing on the portion of the array where collisions can occur and skipping irrelevant elements, this approach is both time-efficient and space-efficient, making it ideal for solving problems of this nature.
+7. **Right Pointer Update**
+	```cpp
+	        r--;
+	```
+	Decrement the right pointer `r` to skip over all right-moving cars ('R').
+
+8. **Collision Counter Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initialize the collision counter `cnt` to 0. This will be used to count the number of collisions.
+
+9. **Loop through Middle Cars**
+	```cpp
+	    for(int i = l; i <= r; i++)
+	```
+	Loop through the cars between the left and right pointers (from `l` to `r`).
+
+10. **Collision Check**
+	```cpp
+	        if(dir[i] != 'S')
+	```
+	Check if the car at position `i` is not stationary ('S'). If it's moving ('L' or 'R'), it's a collision.
+
+11. **Increment Collision Counter**
+	```cpp
+	            cnt++;
+	```
+	If the car at position `i` is moving ('L' or 'R'), increment the collision counter `cnt`.
+
+12. **Return Collision Count**
+	```cpp
+	    return cnt;
+	```
+	Return the final count of collisions detected.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We scan the directions string only once to determine the collisions.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution uses a constant amount of extra space as we only need a few variables for the calculation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-collisions-on-a-road/description/)
 

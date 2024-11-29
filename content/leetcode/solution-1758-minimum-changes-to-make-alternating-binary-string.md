@@ -14,116 +14,152 @@ img_src = ""
 youtube = "9vAQdmVU2ds"
 youtube_upload_date="2023-12-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/9vAQdmVU2ds/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting only of the characters '0' and '1'. The string is considered alternating if no two adjacent characters are the same. Your task is to determine the minimum number of operations needed to make the string alternating, where in one operation, you can change any '0' to '1' or vice versa.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` which only contains the characters '0' and '1'.
+- **Example:** `Input: s = '1001'`
+- **Constraints:**
+	- 1 <= s.length <= 10^4
+	- s[i] is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minOperations(string s) {
-        int zero = 0, one = 0, zf = false, of = false;
-        for(int i = 0; i < s.size(); i++) {
-            if(zf   && s[i] == '0') zero++;
-            if(!zf  && s[i] == '1') zero++;
-            if(!of   && s[i] == '0') one++;
-            if(of  && s[i] == '1') one++;
-            zf = !zf, of = !of;
-        }
-        return min(zero, one);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to make `s` alternating.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The number of operations should be minimized.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of changes required to convert the given string into an alternating string.
+
+- 1. Traverse the string `s` and check each adjacent pair of characters.
+- 2. If two adjacent characters are the same, a change is needed.
+- 3. Calculate the number of changes required for both possible alternating patterns: '010101...' and '101010...'.
+- 4. Return the minimum of these two values.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `s` is not empty and contains only '0' or '1'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = '1001'`  \
+  **Explanation:** To make the string alternating, change the second '0' to '1' or the last '1' to '0'. The minimum number of operations needed is 1.
+
+- **Input:** `Input: s = '1101'`  \
+  **Explanation:** Here, the first two '1's are adjacent and need to be altered to make the string alternating. Two changes are required.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to calculate the number of operations required for both alternating patterns: '010101...' and '101010...'. For each pattern, count how many characters need to be changed and then choose the minimum number of changes.
+
+### Initial Thoughts 💭
+- The problem is about comparing the string to two alternating patterns and finding the minimum number of changes needed.
+- Since there are only two possible alternating patterns, we can compare the string to each pattern and count the differences.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, return 0 (no changes needed).
+- Ensure the solution can handle strings of length up to 10^4 efficiently.
+- If the string is already alternating, the result is 0.
+- The solution should be optimized to handle the maximum string length.
+{{< dots >}}
+## Code 💻
+```cpp
+int minOperations(string s) {
+    int zero = 0, one = 0, zf = false, of = false;
+    for(int i = 0; i < s.size(); i++) {
+        if(zf   && s[i] == '0') zero++;
+        if(!zf  && s[i] == '1') zero++;
+        if(!of   && s[i] == '0') one++;
+        if(of  && s[i] == '1') one++;
+        zf = !zf, of = !of;
     }
-};
-{{< /highlight >}}
----
+    return min(zero, one);
+}
+```
 
-### Problem Statement
+The function calculates the minimum number of operations to make a binary string alternate between 0 and 1 by counting mismatches for two possible patterns.
 
-The problem is to determine the minimum number of operations required to convert a binary string into a string where no two adjacent characters are the same. An operation can be defined as flipping a character from `0` to `1` or vice versa. For example, given the string `s = "1001"`, the output should be `1`, as we can flip the last `0` to `1` to obtain the alternating string `1010`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minOperations(string s) {
+	```
+	Declares the function to calculate the minimum operations for an alternating binary string.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int zero = 0, one = 0, zf = false, of = false;
+	```
+	Initializes counters and flags for tracking mismatches with alternating patterns.
 
-To solve this problem, the solution uses a systematic approach that involves counting the number of flips required to convert the input binary string into two potential valid patterns:
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Iterates over the characters of the input string to count mismatches.
 
-1. **Pattern Starting with `0`**: The first valid pattern starts with `0` and alternates between `0` and `1`.
-2. **Pattern Starting with `1`**: The second valid pattern starts with `1` and alternates similarly.
+4. **Condition Check**
+	```cpp
+	        if(zf   && s[i] == '0') zero++;
+	```
+	Checks if the current character matches the '0' expectation for the first pattern.
 
-The algorithm iterates through the input string and counts how many flips are required for each pattern. At the end, it returns the minimum of the two counts.
+5. **Condition Check**
+	```cpp
+	        if(!zf  && s[i] == '1') zero++;
+	```
+	Checks if the current character matches the '1' expectation for the first pattern.
 
-### Code Breakdown (Step by Step)
+6. **Condition Check**
+	```cpp
+	        if(!of   && s[i] == '0') one++;
+	```
+	Checks if the current character matches the '0' expectation for the second pattern.
 
-Here's a detailed breakdown of the `minOperations` function:
+7. **Condition Check**
+	```cpp
+	        if(of  && s[i] == '1') one++;
+	```
+	Checks if the current character matches the '1' expectation for the second pattern.
 
-1. **Class Definition**: The function is defined inside a class called `Solution`.
+8. **Flag Update**
+	```cpp
+	        zf = !zf, of = !of;
+	```
+	Flips the flags to alternate the expected pattern for the next iteration.
 
-   ```cpp
-   class Solution {
-   ```
+9. **Return Statement**
+	```cpp
+	    return min(zero, one);
+	```
+	Returns the minimum of the two mismatch counts as the result.
 
-2. **Public Method**: The `minOperations` method takes a single binary string `s` as input and returns an integer.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string.
+- **Average Case:** O(n), as each character is checked against both alternating patterns.
+- **Worst Case:** O(n), where n is the length of the string.
 
-   ```cpp
-   public:
-       int minOperations(string s) {
-   ```
+The time complexity is linear, as the string is traversed once.
 
-3. **Variable Initialization**: Four variables are initialized:
-   - `zero` counts the number of flips needed to match the pattern starting with `0`.
-   - `one` counts the number of flips needed to match the pattern starting with `1`.
-   - `zf` (zero flag) keeps track of whether the last expected character was `0` for the pattern starting with `0`.
-   - `of` (one flag) does the same for the pattern starting with `1`.
+### Space Complexity 💾
+- **Best Case:** O(1), as no additional space is needed regardless of the input.
+- **Worst Case:** O(1), since only a few variables are used for comparison.
 
-   ```cpp
-   int zero = 0, one = 0, zf = false, of = false;
-   ```
+The space complexity is constant, as only a few counters are used.
 
-4. **Loop Through the String**: A loop iterates through each character of the input string `s`.
+**Happy Coding! 🎉**
 
-   ```cpp
-   for(int i = 0; i < s.size(); i++) {
-   ```
-
-5. **Count Flips for Pattern Starting with `0`**: Inside the loop:
-   - If the last expected character for the pattern starting with `0` was `0` (`zf` is true) and the current character is also `0`, it means a flip is needed; hence `zero` is incremented.
-   - If `zf` is false and the current character is `1`, it means a flip is needed for the first `1`; thus `zero` is incremented.
-   
-   ```cpp
-   if(zf && s[i] == '0') zero++;
-   if(!zf && s[i] == '1') zero++;
-   ```
-
-6. **Count Flips for Pattern Starting with `1`**: Similarly:
-   - If the last expected character for the pattern starting with `1` was `1` (`of` is true) and the current character is `1`, it means a flip is needed; thus `one` is incremented.
-   - If `of` is false and the current character is `0`, it means a flip is needed for the first `0`; thus `one` is incremented.
-   
-   ```cpp
-   if(!of && s[i] == '0') one++;
-   if(of && s[i] == '1') one++;
-   ```
-
-7. **Toggle Flags**: After counting flips for both patterns, toggle the flags for the next iteration.
-
-   ```cpp
-   zf = !zf, of = !of;
-   ```
-
-8. **Return Minimum Flips**: Finally, the function returns the minimum of the two counts, which represents the least number of operations required to achieve an alternating binary string.
-
-   ```cpp
-   return min(zero, one);
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity is \(O(n)\), where \(n\) is the length of the input string `s`. This is because the algorithm makes a single pass through the string to count the necessary flips.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) since only a constant amount of extra space is used to store the counters and flags, regardless of the input size.
-
-### Conclusion
-
-In summary, the `minOperations` function effectively counts the number of flips required to convert a binary string into a valid alternating string. By systematically comparing the characters of the input string against two possible valid patterns, the solution provides an efficient way to compute the result in linear time. This approach showcases how counting and toggling flags can simplify problems related to patterns and sequences, making it a valuable technique in algorithm design. The method is not only optimal but also easy to understand and implement, which makes it a great choice for similar problems involving string manipulations.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-changes-to-make-alternating-binary-string/description/)
 

@@ -14,138 +14,185 @@ img_src = ""
 youtube = "u5GIK6GaNWk"
 youtube_upload_date="2021-01-03"
 youtube_thumbnail="https://i.ytimg.com/vi/u5GIK6GaNWk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of non-negative integers. Your task is to count the number of ways the array can be split into three contiguous non-empty subarrays: left, mid, and right. The sum of the elements in the left subarray should be less than or equal to the sum in the mid subarray, and the sum of the mid subarray should be less than or equal to the sum of the right subarray. Return the number of such good splits modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array 'nums' where each element is a non-negative integer.
+- **Example:** `[3, 5, 1, 6, 2]`
+- **Constraints:**
+	- 3 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^4
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of valid ways to split the array into three subarrays that satisfy the sum conditions, modulo 10^9 + 7.
+- **Example:** `2`
+- **Constraints:**
+	- The output should be a non-negative integer less than 10^9 + 7.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the number of valid splits of the array based on the sum conditions.
+
+- 1. Calculate the cumulative sums of the elements in the array.
+- 2. Use two pointers to explore valid subarray splits that satisfy the condition: left_sum <= mid_sum <= right_sum.
+- 3. For each potential left and mid subarray split, calculate how many valid right subarrays exist, and count them.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty and has at least 3 elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[1,2,2,2,5,0]`  \
+  **Explanation:** There are three good ways to split the array into three subarrays: [1] [2] [2,2,5,0], [1] [2,2] [2,5,0], and [1,2] [2,2] [5,0]. Each split satisfies the condition left_sum <= mid_sum <= right_sum.
+
+- **Input:** `[3,2,1]`  \
+  **Explanation:** There is no valid way to split the array because no subarray splits satisfy the condition left_sum <= mid_sum <= right_sum.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we need to calculate the number of valid subarray splits that satisfy the sum conditions using two pointers and cumulative sums.
+
+### Initial Thoughts 💭
+- We need to track the sums of potential subarrays efficiently.
+- Using a cumulative sum array will allow us to calculate the sum of any subarray in constant time.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least three elements based on the constraints.
+- Make sure the algorithm can handle the largest input sizes (up to 10^5 elements).
+- Handle cases where all elements are the same value or where some elements are zero.
+- The solution must be efficient and handle the upper constraint limits within time limits.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    int mod = 1000000007;
+int mod = 1000000007;
 public:
-    int waysToSplit(vector<int>& nums) {
-        
-        int n = nums.size(), res=0;
+int waysToSplit(vector<int>& nums) {
+    
+    int n = nums.size(), res=0;
 
-        partial_sum(nums.begin(), nums.end(), nums.begin());
-        
-        for(int i = 0, j = 0, k = 0; i < n - 2; i++) {
-
-            j = max(i + 1, j);
-            while(j < n - 1 && 2 * nums[i] > nums[j]) j++;
-
-            k = max(j, k);
-            while(k < n - 1 && nums[k] - nums[i] <= nums[n - 1] - nums[k]) k++;
-
-            res = (res + (k - j)) % mod;
-        }
-        return res;            
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to determine the number of ways to split an array `nums` into three contiguous parts such that the sum of the first part is less than or equal to the sum of the second part, and the sum of the second part is less than or equal to the sum of the third part. This can be visualized as finding indices \(i\), \(j\), and \(k\) that satisfy the conditions:
-
-- \( \text{sum}(nums[0:i]) \leq \text{sum}(nums[i:j]) \)
-- \( \text{sum}(nums[i:j]) \leq \text{sum}(nums[j:n]) \)
-
-Where \(n\) is the size of the array, and we need to find all such valid splits.
-
-For example, given an array `[1, 2, 2, 3, 5]`, the valid splits could be identified, and the task is to count how many such splits exist.
-
-### Approach
-
-To solve the problem, we can use the following approach:
-
-1. **Prefix Sum Calculation**: First, compute the prefix sums for the input array. This allows us to easily calculate the sum of any subarray in constant time.
-
-2. **Two-Pointer Technique**: Use a two-pointer approach to efficiently find valid positions for the split:
-   - Iterate through potential starting indices for the first part (denoted by \(i\)).
-   - For each \(i\), find the appropriate indices for \(j\) and \(k\):
-     - \(j\) should point to the first index where the sum of the first part exceeds half of the total sum, i.e., \(2 \times \text{sum}(nums[0:i]) > \text{sum}(nums)\).
-     - \(k\) should point to the first index where the sum of the second part is less than or equal to the sum of the third part.
-
-3. **Counting Valid Splits**: For each valid \(i\), the valid positions for \(j\) and \(k\) give the range of possible splits, and we can count how many valid splits exist between these two pointers.
-
-4. **Modulo Operation**: Since the number of ways can be large, we will return the result modulo \(10^9 + 7\).
-
-### Code Breakdown (Step by Step)
-
-Now, let’s delve into the provided code to understand its implementation:
-
-1. **Class Declaration**: The solution is encapsulated within a class named `Solution`.
-
-    ```cpp
-    class Solution {
-        int mod = 1000000007;
-    ```
-
-2. **Method Declaration**: The public method `waysToSplit` takes a reference to a vector of integers and returns an integer representing the number of valid ways to split the array.
-
-    ```cpp
-    public:
-    int waysToSplit(vector<int>& nums) {
-    ```
-
-3. **Variable Initialization**: We initialize variables for the size of the array \(n\), a result counter \(res\), and the modulo constant.
-
-    ```cpp
-    int n = nums.size(), res = 0;
-    ```
-
-4. **Prefix Sum Calculation**: We calculate the prefix sum using the `partial_sum` function, which modifies the original `nums` array to contain cumulative sums.
-
-    ```cpp
     partial_sum(nums.begin(), nums.end(), nums.begin());
-    ```
-
-5. **Main Loop**: The outer loop iterates through potential starting indices \(i\) for the first part, going up to \(n - 2\) since we need at least two more elements for parts two and three.
-
-    ```cpp
+    
     for(int i = 0, j = 0, k = 0; i < n - 2; i++) {
-    ```
 
-6. **Finding j**: We increment the pointer \(j\) to find the first index such that \(2 \times \text{sum}(nums[0:i]) > \text{sum}(nums[j:n])\).
+        j = max(i + 1, j);
+        while(j < n - 1 && 2 * nums[i] > nums[j]) j++;
 
-    ```cpp
-    j = max(i + 1, j);
-    while(j < n - 1 && 2 * nums[i] > nums[j]) j++;
-    ```
+        k = max(j, k);
+        while(k < n - 1 && nums[k] - nums[i] <= nums[n - 1] - nums[k]) k++;
 
-7. **Finding k**: We increment the pointer \(k\) to find the first index that maintains the condition for the sum of the second part being less than or equal to the sum of the third part.
-
-    ```cpp
-    k = max(j, k);
-    while(k < n - 1 && nums[k] - nums[i] <= nums[n - 1] - nums[k]) k++;
-    ```
-
-8. **Count Valid Splits**: The number of valid splits for the current \(i\) is given by the range between \(j\) and \(k\), and we add this count to \(res\).
-
-    ```cpp
-    res = (res + (k - j)) % mod;
-    ```
-
-9. **Return the Result**: After processing all indices, we return the total count of valid splits.
-
-    ```cpp
-    return res;
+        res = (res + (k - j)) % mod;
     }
-    ```
+    return res;            
+}
+```
 
-### Complexity
+This function calculates the number of ways to split the given array `nums` into three non-empty contiguous subarrays, such that the sum of the first subarray is less than or equal to the sum of the second subarray, and the sum of the second subarray is less than or equal to the sum of the third subarray. The result is computed modulo 1,000,000,007.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\) because each pointer \(j\) and \(k\) is incremented at most \(n\) times during the entire iteration of the outer loop.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) beyond the input storage, as we are only using a fixed amount of extra space for variables.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class that contains the method to solve the problem.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	int mod = 1000000007;
+	```
+	Initializes a constant `mod` with a large prime number to compute the result modulo this value.
 
-In conclusion, this solution efficiently counts the number of ways to split an array into three contiguous parts with specific sum conditions using a combination of prefix sums and a two-pointer approach. The use of cumulative sums allows for rapid sum calculations, while the two-pointer technique optimally finds valid split points without unnecessary iterations. The algorithm is designed to handle larger inputs within the constraints typically expected in competitive programming, ensuring performance and correctness. Overall, the code is cleanly structured, demonstrating a solid understanding of array manipulation and efficient algorithm design.
+3. **Access Specifier**
+	```cpp
+	public:
+	```
+	Marks the following methods as public, allowing them to be accessed outside of the class.
+
+4. **Function Definition**
+	```cpp
+	int waysToSplit(vector<int>& nums) {
+	```
+	Defines the function `waysToSplit` that takes a vector `nums` and returns the number of valid ways to split the array into three subarrays.
+
+5. **Variable Initialization**
+	```cpp
+	int n = nums.size(), res=0;
+	```
+	Initializes `n` with the size of the input array `nums` and `res` to store the result of the computation.
+
+6. **Prefix Sum Calculation**
+	```cpp
+	partial_sum(nums.begin(), nums.end(), nums.begin());
+	```
+	Calculates the prefix sum of the array `nums` and stores the cumulative sum in the same vector, which allows for efficient range sum calculations.
+
+7. **Outer Loop**
+	```cpp
+	for(int i = 0, j = 0, k = 0; i < n - 2; i++) {
+	```
+	Begins a loop through the array to consider each possible starting index for the first subarray.
+
+8. **Update j**
+	```cpp
+	j = max(i + 1, j);
+	```
+	Updates the index `j` to ensure it is at least one position ahead of `i`.
+
+9. **Inner Loop**
+	```cpp
+	while(j < n - 1 && 2 * nums[i] > nums[j]) j++;
+	```
+	Advances the index `j` while the sum of the first subarray (`nums[i]`) is greater than the sum of the second subarray (`nums[j]`).
+
+10. **Update k**
+	```cpp
+	k = max(j, k);
+	```
+	Ensures that `k` is at least as large as `j`, maintaining the correct relationship between the indices.
+
+11. **Second Inner Loop**
+	```cpp
+	while(k < n - 1 && nums[k] - nums[i] <= nums[n - 1] - nums[k]) k++;
+	```
+	Advances the index `k` to maintain the condition that the difference between the second and third subarray sums is non-negative.
+
+12. **Result Update**
+	```cpp
+	res = (res + (k - j)) % mod;
+	```
+	Updates the result `res` by adding the number of valid splits found in the current iteration, taking the modulo `mod` to prevent overflow.
+
+13. **Return Result**
+	```cpp
+	return res;
+	```
+	Returns the final result, which is the total number of valid ways to split the array into three subarrays.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the input array.
+- **Average Case:** O(n), as we iterate through the array and calculate valid splits in a linear pass.
+- **Worst Case:** O(n), as we perform a linear scan with two pointers over the array.
+
+The solution uses a linear scan to find all valid splits, making the time complexity O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n), if the input array is large.
+- **Worst Case:** O(n), due to the space needed for the cumulative sum array.
+
+The space complexity is O(n) because we store the cumulative sums of the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/description/)
 

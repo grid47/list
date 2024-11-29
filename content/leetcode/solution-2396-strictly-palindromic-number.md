@@ -14,98 +14,100 @@ img_src = ""
 youtube = "37EtWXDucwQ"
 youtube_upload_date="2022-09-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/37EtWXDucwQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+An integer `n` is considered strictly palindromic if, for every base `b` between 2 and `n - 2` (inclusive), the representation of `n` in base `b` is a palindrome. A number is palindromic in a base if the string representation of that number in that base reads the same forward and backward. Your task is to determine if the given integer `n` is strictly palindromic or not.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer `n` (4 <= n <= 10^5), where `n` is the number you need to check for strict palindromicity across various bases.
+- **Example:** `n = 5`
+- **Constraints:**
+	- 4 <= n <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isStrictlyPalindromic(int n) {
-        return false;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if `n` is strictly palindromic, otherwise return `false`.
+- **Example:** `Output: false`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if for all bases between 2 and `n - 2`, the base `b` representation of `n` is palindromic. If for any base it is not palindromic, return false.
 
-The problem asks us to determine whether a number `n` is **strictly palindromic**. A number is said to be strictly palindromic if it is palindromic in **every base** from 2 to `n - 2`. A palindromic number is one that reads the same forwards and backwards. 
+- 1. Iterate through all bases from 2 to `n - 2`.
+- 2. For each base, convert `n` to its string representation in that base.
+- 3. Check if the string representation is a palindrome.
+- 4. If a non-palindromic representation is found, return false.
+- 5. If all representations are palindromic, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number `n` is always greater than or equal to 4.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 6`  \
+  **Explanation:** In base 2: 6 = 110 (not palindromic), base 3: 6 = 20 (not palindromic), base 4: 6 = 12 (not palindromic), hence 6 is not strictly palindromic.
 
-For example, in base 2, a number is palindromic if its binary representation is the same when read from left to right as it is when read from right to left. Similarly, in base 3, the number must be palindromic when converted to base 3, and so on, for all bases from 2 to `n - 2`.
+- **Input:** `n = 7`  \
+  **Explanation:** In base 2: 7 = 111 (palindromic), base 3: 7 = 21 (not palindromic), hence 7 is not strictly palindromic.
 
-### Key Definitions
-- **Palindromic Number**: A number whose string representation (in any given base) reads the same forwards and backwards.
-- **Strictly Palindromic**: A number `n` is strictly palindromic if its representation in **every** base from 2 to `n-2` is a palindrome.
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate over all bases between 2 and `n - 2`, converting the number `n` to its base `b` representation and checking if the representation is palindromic. If any base has a non-palindromic representation, the function will return false.
 
-For example:
-- Input: `n = 9`
-  - Check if 9 is palindromic in base 2, base 3, and so on, up to base `9 - 2 = 7`.
-- Output: Determine whether all these representations are palindromes.
-
-The problem asks us to determine whether there exists any number `n` that can satisfy this condition.
-
-### Approach
-
-At first glance, the problem seems to require checking if a number is palindromic in various bases between 2 and `n - 2`. However, there's a key insight that simplifies the problem significantly. 
-
-For a number to be **strictly palindromic**, it must satisfy the condition in all bases from 2 to `n-2`. Let's examine a few small cases to see if such a number can exist.
-
-1. **Base Representation Insight**:
-   - Consider `n = 4`. In base 2, the number `4` is represented as `100`. This is not palindromic, so `4` cannot be strictly palindromic.
-   - Similarly, for larger numbers, the number's representation in various bases (from 2 to `n - 2`) becomes increasingly complex and unlikely to be palindromic. For example:
-     - In base `n - 2`, the number `n` would be represented as `10` (which is always palindromic), but this doesn’t guarantee that it will be palindromic in smaller bases.
-
-2. **Mathematical Observation**:
-   - It turns out that no number `n` greater than 2 can be strictly palindromic. This is because, in the majority of bases between 2 and `n - 2`, the representation of the number cannot consistently form a palindrome. This can be verified through a detailed exploration of various base representations for different values of `n`.
-   - Hence, for all numbers `n >= 3`, it is impossible to satisfy the strictly palindromic condition for all bases between 2 and `n - 2`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Function Definition
-
-The function `isStrictlyPalindromic` is defined with the integer `n` as the input. This function will determine whether the number `n` is strictly palindromic or not.
-
+### Initial Thoughts 💭
+- This problem involves converting numbers to various bases and checking for palindromic properties.
+- The challenge lies in efficiently checking palindromes for all bases up to `n-2`.
+{{< dots >}}
+### Edge Cases 🌐
+- Since `n` is always >= 4, there are no empty inputs.
+- Handle cases where `n` is near the upper limit of 10^5.
+- Consider how values near the lower bound (like `n = 4`) behave.
+- Make sure that the solution is efficient enough to handle the largest inputs within the time limit.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool isStrictlyPalindromic(int n) {
     return false;
 }
 ```
 
-#### Step 2: Return `false` for All Inputs
+The function `isStrictlyPalindromic` is a placeholder function that takes an integer `n` as input and simply returns `false`. This function is likely meant to check if a number is strictly palindromic in some base, but it is incomplete.
 
-The function returns `false` unconditionally for all input values of `n`. This is based on the observation that there is no number `n` greater than or equal to 3 that can be strictly palindromic. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isStrictlyPalindromic(int n) {
+	```
+	The function `isStrictlyPalindromic` is declared. It takes an integer `n` as input and is expected to return a boolean value indicating whether `n` is strictly palindromic in a given base.
 
-```cpp
-return false;
-```
+2. **Return Statement**
+	```cpp
+	    return false;
+	```
+	The function currently returns `false`, meaning that no number is considered strictly palindromic in this implementation. The logic for palindromic checking in various bases needs to be implemented.
 
-This statement directly implements the conclusion derived from the mathematical insight: no number `n >= 3` can satisfy the condition of being strictly palindromic.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the input number.
+- **Average Case:** O(n), where n is the length of the input number.
+- **Worst Case:** O(n^2), where n is the length of the input number due to base conversion and palindrome checking.
 
-### Complexity
+The worst-case time complexity is O(n^2) because for each base we convert the number and check if it's palindromic.
 
-#### Time Complexity
-The time complexity of this function is **O(1)**. The function simply returns `false` regardless of the value of `n`, so no computation or iteration is performed.
+### Space Complexity 💾
+- **Best Case:** O(1), if using a constant amount of extra space.
+- **Worst Case:** O(n), where n is the length of the input number due to space used in storing the string representations.
 
-- Since there are no loops or complex operations, the time complexity is constant, i.e., **O(1)**.
+The space complexity is O(n) in the worst case, where n is the number of digits in the base `b` representation of `n`.
 
-#### Space Complexity
-The space complexity is also **O(1)**. The function only uses a constant amount of space (no arrays or data structures are allocated), so the space complexity is constant.
-
-- The function uses a fixed amount of memory to execute, resulting in **O(1)** space complexity.
-
-### Conclusion
-
-The problem of determining whether a number `n` is strictly palindromic can be solved trivially by returning `false` for all inputs `n >= 3`. This is due to the observation that no number `n` greater than or equal to 3 can be palindromic in every base from 2 to `n - 2`. 
-
-The solution leverages the mathematical insight that strictly palindromic numbers do not exist for `n >= 3`, which simplifies the problem to a constant-time solution. The time and space complexities of this solution are both **O(1)**, making it an extremely efficient solution.
-
-Key Takeaways:
-- The problem asks about a very specific condition that no number can satisfy for `n >= 3`.
-- The insight into base representations leads to a simple solution with constant time and space complexity.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/strictly-palindromic-number/description/)

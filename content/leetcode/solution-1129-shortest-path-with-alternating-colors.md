@@ -14,172 +14,285 @@ img_src = ""
 youtube = "VaW0deOb2aQ"
 youtube_upload_date="2024-04-07"
 youtube_thumbnail="https://i.ytimg.com/vi/VaW0deOb2aQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a directed graph with n nodes, where each node is labeled from 0 to n-1. The graph contains edges that can be either red or blue. You are provided with two lists of edges: redEdges and blueEdges, where redEdges[i] = [ai, bi] indicates a directed red edge from node ai to node bi, and blueEdges[j] = [uj, vj] indicates a directed blue edge from node uj to node vj. Your goal is to find the shortest alternating path from node 0 to each node x. Return an array answer where each answer[x] is the length of the shortest alternating path from node 0 to node x, or -1 if no such path exists.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays representing red and blue edges in a directed graph. Each array consists of pairs of integers denoting the start and end nodes of the respective colored edges.
+- **Example:** `Input: n = 4, redEdges = [[0,1],[1,2]], blueEdges = [[2,3]]`
+- **Constraints:**
+	- 1 <= n <= 100
+	- 0 <= redEdges.length, blueEdges.length <= 400
+	- redEdges[i].length == blueEdges[j].length == 2
+	- 0 <= ai, bi, uj, vj < n
 
-{{< highlight cpp >}}
-class Solution {
-    public:
-    vector<int> shortestAlternatingPaths(int n, vector<vector<int>> &redEdges, vector<vector<int>> &greenEdges) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array answer where answer[x] is the length of the shortest alternating path from node 0 to node x, or -1 if no such path exists.
+- **Example:** `Output: [0, 1, 2, 3]`
+- **Constraints:**
+	- The array should have length n.
+	- The value of each element should be either the shortest path length or -1 if no path exists.
 
-        vector<vector<int>> gph(n);
-        vector<vector<vector<int>>> grid(2, gph);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the shortest alternating paths from node 0 to all other nodes, alternating between red and blue edges.
 
-        for(int i = 0; i < redEdges.size(); i++)
-            grid[0][redEdges[i][0]].push_back(redEdges[i][1]);
+- Initialize a graph representation with two colors (red and blue).
+- Use a BFS (Breadth-First Search) to explore the graph, alternating between red and blue edges.
+- Track the shortest path to each node for both edge colors and ensure the paths alternate.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph may contain self-loops and parallel edges.
+- The input will always be valid according to the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 4, redEdges = [[0,1],[1,2]], blueEdges = [[2,3]]`  \
+  **Explanation:** Starting from node 0, we first move to node 1 with a red edge, then to node 2 with a blue edge, and finally to node 3 with a red edge. This gives us the shortest alternating path to each node.
 
-        for(int i = 0; i < greenEdges.size(); i++)
-            grid[1][greenEdges[i][0]].push_back(greenEdges[i][1]);
+- **Input:** `Input: n = 3, redEdges = [[0,1]], blueEdges = [[2,1]]`  \
+  **Explanation:** Starting from node 0, we can reach node 1 with a red edge, but node 2 is not reachable with an alternating path, so the answer for node 2 is -1.
 
-        vector<vector<int>> len(2, vector<int>(n, 2 * n));
+{{< dots >}}
+## Approach 🚀
+Use a BFS algorithm to explore the graph while alternating between red and blue edges, updating the shortest path lengths for each node.
 
-        queue<vector<int>> q;
+### Initial Thoughts 💭
+- The problem is a shortest path problem with alternating edge colors, so a modified BFS is a suitable approach.
+- We can use BFS to traverse the graph, but we'll need to alternate between the two edge colors during the traversal.
+{{< dots >}}
+### Edge Cases 🌐
+- If both redEdges and blueEdges are empty, the result should be [0] since no paths exist except the starting node.
+- The solution should efficiently handle large input sizes, up to 100 nodes and 400 edges.
+- Handle cases where a node cannot be reached with an alternating path, returning -1 for such nodes.
+- Ensure the BFS algorithm runs within the time limits for the maximum constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> shortestAlternatingPaths(int n, vector<vector<int>> &redEdges, vector<vector<int>> &greenEdges) {
 
-        len[0][0] = 0;
-        len[1][0] = 0;
-        q.push({0, 0});
-        q.push({0, 1});
+    vector<vector<int>> gph(n);
+    vector<vector<vector<int>>> grid(2, gph);
 
-        while(!q.empty()) {
-            auto it = q.front();
-            q.pop();
-            int node = it[0], color = it[1];
-            for(int nxt: grid[1 - color][node]) {
-                if(len[1 - color][nxt] == 2 * n) {
-                    len[1 - color][nxt] = len[color][node] + 1;
-                    q.push({nxt, 1 - color});
-                }
+    for(int i = 0; i < redEdges.size(); i++)
+        grid[0][redEdges[i][0]].push_back(redEdges[i][1]);
+
+    for(int i = 0; i < greenEdges.size(); i++)
+        grid[1][greenEdges[i][0]].push_back(greenEdges[i][1]);
+
+    vector<vector<int>> len(2, vector<int>(n, 2 * n));
+
+    queue<vector<int>> q;
+
+    len[0][0] = 0;
+    len[1][0] = 0;
+    q.push({0, 0});
+    q.push({0, 1});
+
+    while(!q.empty()) {
+        auto it = q.front();
+        q.pop();
+        int node = it[0], color = it[1];
+        for(int nxt: grid[1 - color][node]) {
+            if(len[1 - color][nxt] == 2 * n) {
+                len[1 - color][nxt] = len[color][node] + 1;
+                q.push({nxt, 1 - color});
             }
         }
-
-        vector<int> res(n, 0);
-        for(int i = 0; i < n; i++) {
-            res[i] = min(len[0][i], len[1][i]);
-            if(res[i] == 2 * n) res[i] = -1;
-        }
-
-        return res;
     }
-};
-{{< /highlight >}}
----
 
+    vector<int> res(n, 0);
+    for(int i = 0; i < n; i++) {
+        res[i] = min(len[0][i], len[1][i]);
+        if(res[i] == 2 * n) res[i] = -1;
+    }
 
+    return res;
+}
+```
 
-### Problem Statement
-The problem is to find the shortest path from node `0` to every other node in a directed graph, where the edges are colored either red or green. You can only traverse the graph by alternating between red and green edges. If it’s impossible to reach a node, the output should be `-1`.
+This function computes the shortest alternating paths in a graph where edges are either red or green. It uses BFS and two color queues to explore paths alternatively through red and green edges.
 
-You are given:
-- An integer `n`, the number of nodes (0-indexed) in the graph.
-- A list of edges `redEdges`, where each edge is represented as a vector of two integers `[u, v]` indicating a directed red edge from node `u` to node `v`.
-- A list of edges `greenEdges`, represented similarly, indicating directed green edges.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> shortestAlternatingPaths(int n, vector<vector<int>> &redEdges, vector<vector<int>> &greenEdges) {
+	```
+	This function initializes the parameters: the number of nodes `n`, and two sets of edges, `redEdges` and `greenEdges`, for the graph.
 
-Your goal is to return a vector of integers representing the shortest path lengths from node `0` to each node, where paths must alternate colors.
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> gph(n);
+	```
+	This initializes a graph `gph`, represented as an adjacency list of size `n`.
 
-### Approach
-The approach to solve this problem utilizes a modified breadth-first search (BFS) algorithm. Here are the main steps involved:
-1. **Graph Representation**: Use an adjacency list to represent the directed graph, storing edges separately for red and green.
-2. **Length Initialization**: Create a 2D vector `len` to keep track of the shortest path lengths for both edge colors, initializing with a value larger than any possible path length (e.g., `2 * n`).
-3. **Queue for BFS**: Utilize a queue to facilitate the BFS traversal. Each entry in the queue will store a pair representing the current node and the last edge color used to reach that node.
-4. **BFS Traversal**: Start from node `0` and traverse through the graph, alternating edge colors. Update the shortest path lengths as you find valid paths.
-5. **Result Construction**: After BFS completes, construct the result vector by taking the minimum length found for each node from both colors. If a node remains unreachable, set its value to `-1`.
+3. **Grid Initialization**
+	```cpp
+	    vector<vector<vector<int>>> grid(2, gph);
+	```
+	A 3D grid is initialized, where `grid[0]` holds the red edges and `grid[1]` holds the green edges.
 
-### Code Breakdown (Step by Step)
+4. **Edge Insertion**
+	```cpp
+	    for(int i = 0; i < redEdges.size(); i++)
+	```
+	This loop iterates through the `redEdges` and populates the `grid[0]` with the red edges.
 
-1. **Class and Method Definition**:
-   - We define a class `Solution` with the public method `shortestAlternatingPaths` which takes parameters `n`, `redEdges`, and `greenEdges`.
+5. **Edge Insertion**
+	```cpp
+	        grid[0][redEdges[i][0]].push_back(redEdges[i][1]);
+	```
+	This line inserts a red edge into the graph by pushing it into `grid[0]`.
 
-   ```cpp
-   class Solution {
-   public:
-       vector<int> shortestAlternatingPaths(int n, vector<vector<int>> &redEdges, vector<vector<int>> &greenEdges) {
-   ```
+6. **Edge Insertion**
+	```cpp
+	    for(int i = 0; i < greenEdges.size(); i++)
+	```
+	This loop iterates through the `greenEdges` and populates the `grid[1]` with the green edges.
 
-2. **Graph Initialization**:
-   - Create a 2D vector `gph` for the graph and another 2D vector `grid` to hold edges grouped by their colors.
+7. **Edge Insertion**
+	```cpp
+	        grid[1][greenEdges[i][0]].push_back(greenEdges[i][1]);
+	```
+	This line inserts a green edge into the graph by pushing it into `grid[1]`.
 
-   ```cpp
-           vector<vector<int>> gph(n);
-           vector<vector<vector<int>>> grid(2, gph);
-   ```
+8. **Distance Array Initialization**
+	```cpp
+	    vector<vector<int>> len(2, vector<int>(n, 2 * n));
+	```
+	This initializes a `len` array to store the shortest path lengths for each color (red and green), initially set to a large value (2 * n).
 
-3. **Populating the Graph**:
-   - Fill `grid[0]` with red edges and `grid[1]` with green edges by iterating over the input edge lists.
+9. **Queue Initialization**
+	```cpp
+	    queue<vector<int>> q;
+	```
+	A queue `q` is initialized to perform BFS traversal.
 
-   ```cpp
-           for(int i = 0; i < redEdges.size(); i++)
-               grid[0][redEdges[i][0]].push_back(redEdges[i][1]);
+10. **Starting Point Setup**
+	```cpp
+	    len[0][0] = 0;
+	```
+	This sets the starting point for the red edges (color 0) to have a distance of 0.
 
-           for(int i = 0; i < greenEdges.size(); i++)
-               grid[1][greenEdges[i][0]].push_back(greenEdges[i][1]);
-   ```
+11. **Starting Point Setup**
+	```cpp
+	    len[1][0] = 0;
+	```
+	This sets the starting point for the green edges (color 1) to have a distance of 0.
 
-4. **Initializing Lengths**:
-   - Create a `len` array to store the minimum lengths, initialized to `2 * n` (representing infinity).
+12. **Queue Push**
+	```cpp
+	    q.push({0, 0});
+	```
+	Push the starting point with color 0 (red) into the queue.
 
-   ```cpp
-           vector<vector<int>> len(2, vector<int>(n, 2 * n));
-   ```
+13. **Queue Push**
+	```cpp
+	    q.push({0, 1});
+	```
+	Push the starting point with color 1 (green) into the queue.
 
-5. **Queue Initialization**:
-   - Initialize a queue for BFS and set the starting conditions for both edge colors from node `0`.
+14. **BFS Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start the BFS loop to explore the graph.
 
-   ```cpp
-           queue<vector<int>> q;
+15. **Queue Pop**
+	```cpp
+	        auto it = q.front();
+	```
+	Pop an element from the front of the queue.
 
-           len[0][0] = 0; // Starting point for red
-           len[1][0] = 0; // Starting point for green
-           q.push({0, 0}); // Starting from node 0 with red
-           q.push({0, 1}); // Starting from node 0 with green
-   ```
+16. **Queue Pop**
+	```cpp
+	        q.pop();
+	```
+	Remove the front element from the queue.
 
-6. **BFS Traversal**:
-   - While the queue is not empty, process each node and explore its neighbors. Update the lengths if a shorter path is found.
+17. **Node and Color Extraction**
+	```cpp
+	        int node = it[0], color = it[1];
+	```
+	Extract the node and color information from the queue element.
 
-   ```cpp
-           while(!q.empty()) {
-               auto it = q.front();
-               q.pop();
-               int node = it[0], color = it[1];
-               for(int nxt: grid[1 - color][node]) {
-                   if(len[1 - color][nxt] == 2 * n) {
-                       len[1 - color][nxt] = len[color][node] + 1;
-                       q.push({nxt, 1 - color});
-                   }
-               }
-           }
-   ```
+18. **Neighbor Traversal**
+	```cpp
+	        for(int nxt: grid[1 - color][node]) {
+	```
+	Traverse all the neighboring nodes in the opposite color (i.e., if the current node is reached by a red edge, now explore the green edges).
 
-7. **Result Construction**:
-   - Create the result vector by taking the minimum path length from both colors for each node, setting unreachable nodes to `-1`.
+19. **Edge Relaxation**
+	```cpp
+	            if(len[1 - color][nxt] == 2 * n) {
+	```
+	If the neighbor node has not been visited, relax the edge and update its distance.
 
-   ```cpp
-           vector<int> res(n, 0);
-           for(int i = 0; i < n; i++) {
-               res[i] = min(len[0][i], len[1][i]);
-               if(res[i] == 2 * n) res[i] = -1;
-           }
+20. **Distance Update**
+	```cpp
+	                len[1 - color][nxt] = len[color][node] + 1;
+	```
+	Update the shortest path length for the neighbor node.
 
-           return res; // Return the final result
-       }
-   };
-   ```
+21. **Queue Push**
+	```cpp
+	                q.push({nxt, 1 - color});
+	```
+	Push the neighboring node and its associated edge color into the queue.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity is \(O(V + E)\), where \(V\) is the number of nodes (n) and \(E\) is the total number of edges in both `redEdges` and `greenEdges`. This is because each edge and node is processed at most once during BFS.
-  
-- **Space Complexity**: The space complexity is \(O(V + E)\) as well, which is required to store the adjacency list and the lengths.
+22. **Result Calculation**
+	```cpp
+	    vector<int> res(n, 0);
+	```
+	Initialize a result array to store the shortest alternating paths for each node.
 
-### Conclusion
-The `shortestAlternatingPaths` function efficiently computes the shortest paths from the starting node to all other nodes in a directed graph with alternating edge colors. By leveraging a breadth-first search strategy, this implementation effectively explores the graph while maintaining the constraints of alternating colors.
+23. **Path Assignment**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterate over each node to calculate the shortest alternating path.
 
-This approach is optimal for problems involving paths with constraints, as it systematically explores valid paths while minimizing the use of additional resources. The method highlights the usefulness of BFS in exploring paths in graphs and demonstrates an effective way to manage edge color constraints through organized graph representation and careful state management.
+24. **Path Assignment**
+	```cpp
+	        res[i] = min(len[0][i], len[1][i]);
+	```
+	For each node, select the minimum distance between red and green paths.
 
-Overall, this code serves as a solid example of how to tackle graph traversal problems with specific constraints, providing a clear solution to the alternating path problem in directed graphs.
+25. **Edge Case Handling**
+	```cpp
+	        if(res[i] == 2 * n) res[i] = -1;
+	```
+	If a node is unreachable, mark its result as -1.
+
+26. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the result array with the shortest alternating paths for all nodes.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The time complexity is O(n + m), where n is the number of nodes and m is the number of edges. We process each edge and node once during the BFS traversal.
+
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The space complexity is O(n + m) due to the storage required for the adjacency list and the BFS queue.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-path-with-alternating-colors/description/)

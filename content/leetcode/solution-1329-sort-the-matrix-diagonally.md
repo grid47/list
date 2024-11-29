@@ -14,96 +14,166 @@ img_src = ""
 youtube = "0FheWgwnG-w"
 youtube_upload_date="2020-06-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/0FheWgwnG-w/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix `mat` of integers with dimensions `m x n`. A matrix diagonal is a sequence of matrix elements that start from some cell in the topmost row or leftmost column and go diagonally towards the bottom-right corner. Your task is to sort each matrix diagonal in ascending order and return the resulting matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D integer matrix `mat` of dimensions `m x n`.
+- **Example:** `For example, given mat = [[5, 9, 3], [8, 6, 1], [7, 4, 2]], the task is to sort each diagonal of this matrix.`
+- **Constraints:**
+	- 1 <= m, n <= 100
+	- 1 <= mat[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
-        int m = mat.size(), n = mat[0].size();
-        map<int, priority_queue<int, vector<int>, greater<int>>> mp;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            mp[i-j].push(mat[i][j]);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the matrix where each diagonal is sorted in ascending order.
+- **Example:** `For mat = [[5, 9, 3], [8, 6, 1], [7, 4, 2]], the output would be [[1, 3, 2], [4, 5, 1], [7, 6, 9]].`
+- **Constraints:**
 
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            mat[i][j] = mp[i-j].top();
-            mp[i-j].pop();
-        }
-        return mat;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Sort the elements along each diagonal of the matrix in ascending order while keeping the relative positions of the diagonals unchanged.
+
+- 1. Identify all diagonals in the matrix.
+- 2. For each diagonal, store the elements and sort them in ascending order.
+- 3. Replace the original elements of each diagonal with the sorted values.
+- 4. Return the modified matrix.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is not empty, and each element is an integer between 1 and 100.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: mat = [[5, 9, 3], [8, 6, 1], [7, 4, 2]]`  \
+  **Explanation:** The diagonals are [5], [9, 8], [3, 6, 7], [1, 4], and [2]. After sorting each diagonal, we get the matrix [[1, 3, 2], [4, 5, 1], [7, 6, 9]].
+
+- **Input:** `Input: mat = [[10, 21, 30], [4, 15, 24], [5, 6, 23]]`  \
+  **Explanation:** The diagonals are [10], [21, 4], [30, 15, 5], [24, 6], and [23]. After sorting each diagonal, we get the matrix [[4, 15, 23], [5, 21, 30], [10, 6, 24]].
+
+{{< dots >}}
+## Approach 🚀
+The algorithm extracts the elements along each diagonal, sorts them, and then places the sorted values back in the matrix, preserving the original structure of the matrix.
+
+### Initial Thoughts 💭
+- Each diagonal is independent and can be sorted individually.
+- We need to identify and extract diagonals before sorting them and placing the sorted values back into the matrix.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty matrix will not be provided based on the problem constraints.
+- The matrix could be as large as 100x100, but the solution should still be efficient.
+- When all elements in a diagonal are the same, the diagonal will remain unchanged after sorting.
+- The matrix has at least one row and column, and each element is between 1 and 100.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+    int m = mat.size(), n = mat[0].size();
+    map<int, priority_queue<int, vector<int>, greater<int>>> mp;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        mp[i-j].push(mat[i][j]);
+
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++) {
+        mat[i][j] = mp[i-j].top();
+        mp[i-j].pop();
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The goal is to sort each diagonal of a given 2D matrix in ascending order. A diagonal in a matrix consists of elements that share the same difference between their row and column indices. For example, the elements at positions (0,0), (1,1), (2,2) form a diagonal, and those at (0,1), (1,2) form another. The output should be the same matrix structure but with each diagonal sorted in ascending order.
-
-### Approach
-The solution utilizes a mapping of diagonals to a min-heap (priority queue) for efficient sorting:
-1. **Mapping Diagonals**: Each diagonal can be identified by the difference \(i - j\) between its row index \(i\) and column index \(j\). This difference acts as a unique key for each diagonal.
-
-2. **Storing Elements**: A map is used to store each diagonal's elements in a min-heap, which allows for automatic sorting when elements are inserted.
-
-3. **Rebuilding the Matrix**: After all elements are stored, the matrix is rebuilt by extracting the smallest elements from the min-heaps, ensuring each diagonal is filled with its sorted elements.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
-        int m = mat.size(), n = mat[0].size();
+    return mat;
+}
 ```
-- The `diagonalSort` function is defined within the `Solution` class. It takes a 2D vector `mat` as input, representing the matrix to be sorted. The dimensions of the matrix, `m` (number of rows) and `n` (number of columns), are determined.
 
-```cpp
-        map<int, priority_queue<int, vector<int>, greater<int>>> mp;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            mp[i-j].push(mat[i][j]);
-```
-- A map `mp` is created, where the key is the diagonal index (the difference \(i - j\)), and the value is a min-heap (implemented as a priority queue) containing the elements of that diagonal.
-- Two nested loops iterate through each element of the matrix. The element `mat[i][j]` is pushed into the corresponding min-heap based on its diagonal index.
+This function sorts the diagonals of a matrix. It uses a priority queue to store and sort the elements on each diagonal. The matrix is then updated with sorted elements, effectively sorting each diagonal in ascending order.
 
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            mat[i][j] = mp[i-j].top();
-            mp[i-j].pop();
-        }
-```
-- The next two nested loops traverse the matrix again. For each element, the top element of the corresponding min-heap is retrieved (which is the smallest element due to the properties of the min-heap) and assigned to `mat[i][j]`.
-- After assigning the value, the top element is popped from the heap to prepare for the next assignment.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+	```
+	This line declares the 'diagonalSort' function that takes a 2D matrix 'mat' as input and returns the matrix with diagonals sorted in ascending order.
 
-```cpp
-        return mat;
-    }
-};
-```
-- Finally, the modified matrix `mat` is returned, now with each diagonal sorted in ascending order.
+2. **Matrix Dimensions Calculation**
+	```cpp
+	    int m = mat.size(), n = mat[0].size();
+	```
+	The dimensions of the matrix are calculated, where 'm' is the number of rows and 'n' is the number of columns.
 
-### Complexity Analysis
+3. **Priority Queue Declaration**
+	```cpp
+	    map<int, priority_queue<int, vector<int>, greater<int>>> mp;
+	```
+	A map 'mp' is declared where the keys represent the diagonals (calculated by the difference 'i-j'), and the values are priority queues that store the diagonal elements in ascending order.
 
-- **Time Complexity**:
-  - The overall time complexity is \(O(m \cdot n \cdot \log(k))\), where \(k\) is the maximum number of elements in any diagonal. This complexity arises because each element is inserted and removed from the min-heap, and operations on a min-heap take \(O(\log(k))\).
-  
-- **Space Complexity**:
-  - The space complexity is \(O(k)\) for storing the elements of the diagonals in the min-heaps, where \(k\) is the number of elements in the largest diagonal.
+4. **Outer Loop - Row Iteration**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	The outer loop iterates over each row of the matrix.
 
-### Conclusion
-The provided code efficiently sorts each diagonal of a matrix by utilizing a combination of maps and priority queues. This approach not only ensures that each diagonal's elements are sorted in ascending order but also maintains the original structure of the matrix. The solution is both elegant and effective, making it an excellent example of applying data structures to solve a problem involving sorting.
+5. **Inner Loop - Column Iteration**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	The inner loop iterates over each column in the current row.
 
-In practical applications, understanding how to manipulate matrices and leverage advanced data structures like priority queues can greatly enhance the performance of algorithms. This solution serves as a valuable reference for tackling similar problems that involve sorting and managing collections of data within specified constraints. 
+6. **Push Diagonal Element into Queue**
+	```cpp
+	        mp[i-j].push(mat[i][j]);
+	```
+	The element at position (i, j) is pushed into the priority queue corresponding to the diagonal (i-j).
 
-Overall, mastering such techniques is essential for anyone looking to excel in competitive programming or software development, where efficient data handling is often a key requirement.
+7. **Reprocess Matrix with Sorted Diagonals**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	The second loop starts to reprocess the matrix and fill each diagonal with sorted elements.
+
+8. **Set Sorted Diagonal Element**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	This inner loop iterates through each column of the current row to replace the matrix elements with the sorted elements from the corresponding priority queue.
+
+9. **Replace Element with Sorted Value**
+	```cpp
+	        mat[i][j] = mp[i-j].top();
+	```
+	The top element (smallest element) from the priority queue for the current diagonal is placed into the matrix at position (i, j).
+
+10. **Pop the Used Element**
+	```cpp
+	        mp[i-j].pop();
+	```
+	After placing the smallest element into the matrix, it is removed from the priority queue for the current diagonal.
+
+11. **Return Sorted Matrix**
+	```cpp
+	    return mat;
+	```
+	The sorted matrix is returned after all diagonals have been processed and updated.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n * log(m))
+- **Average Case:** O(m * n * log(m))
+- **Worst Case:** O(m * n * log(m))
+
+The best, average, and worst cases all involve sorting each diagonal, which requires sorting a maximum of m elements.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to storing the diagonals and the original matrix.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-the-matrix-diagonally/description/)
 

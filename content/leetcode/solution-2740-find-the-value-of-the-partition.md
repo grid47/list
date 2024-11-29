@@ -14,111 +14,130 @@ img_src = ""
 youtube = "WeaM8AiavbY"
 youtube_upload_date="2023-06-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/WeaM8AiavbY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of positive integers `nums`. Your task is to partition this list into two non-empty arrays, `nums1` and `nums2`, such that the absolute difference between the maximum element of `nums1` and the minimum element of `nums2` is minimized.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array of positive integers `nums`.
+- **Example:** `nums = [3, 7, 2, 8]`
+- **Constraints:**
+	- 2 <= nums.length <= 100000
+	- 1 <= nums[i] <= 1000000000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findValueOfPartition(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int res = nums[1] - nums[0];
-        for(int i = 1; i < nums.size(); i++) {
-            res = min(nums[i] - nums[i - 1], res);
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the integer denoting the value of the partition, i.e., the minimum possible absolute difference between the maximum of `nums1` and the minimum of `nums2`.
+- **Example:** `Output: 1`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To minimize the absolute difference between the maximum of `nums1` and the minimum of `nums2`.
 
-The problem asks to find the minimum difference between any two adjacent elements in the array after sorting it. Specifically, we are given a list of integers, and the task is to return the smallest difference between any two numbers in the sorted version of the array. This problem is typically useful for applications like optimizing resource allocation, determining range spans, or analyzing ordered data for efficient operations.
+- Sort the array `nums` in ascending order.
+- Find the smallest difference between two consecutive elements in the sorted array.
+- Return this minimum difference as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in `nums` are positive integers.
+- The array is non-empty and contains at least two elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 7, 2, 8]`  \
+  **Explanation:** We can partition the array into `nums1 = [2, 7]` and `nums2 = [3, 8]`. The minimum absolute difference is `|7 - 3| = 1`.
 
-### Approach
+- **Input:** `nums = [15, 2, 5]`  \
+  **Explanation:** We can partition the array into `nums1 = [5]` and `nums2 = [15, 2]`. The minimum absolute difference is `|5 - 2| = 3`.
 
-To solve this problem, we can follow a structured approach:
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the array and calculating the smallest difference between two consecutive elements in the sorted array.
 
-1. **Sorting the Array**:
-   - The main idea behind this approach is that the smallest difference between any two elements in the array will always occur between adjacent elements when the array is sorted. This is because, in a sorted array, the values that are closest to each other will be placed next to each other.
-
-2. **Calculate the Difference Between Adjacent Elements**:
-   - Once the array is sorted, the next step is to traverse through the sorted array and compute the difference between every two consecutive elements.
-
-3. **Keep Track of the Minimum Difference**:
-   - As we compute the differences, we keep track of the smallest one. This can be done using a simple comparison mechanism that updates the minimum difference as we progress through the array.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code line by line:
-
+### Initial Thoughts 💭
+- Sorting the array helps us easily find the smallest possible difference between two elements.
+- The problem can be solved by comparing adjacent elements in the sorted array.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as per the constraints.
+- For large arrays, sorting the array and finding the minimum difference should still be efficient.
+- If the array contains two elements, the result is the absolute difference between those two elements.
+- The solution needs to handle arrays with up to 100,000 elements efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 int findValueOfPartition(vector<int>& nums) {
     sort(nums.begin(), nums.end());
-```
-
-- **Sorting the Array**:
-  - The `sort` function is used to sort the array in ascending order. This ensures that the smallest and closest numbers in terms of magnitude are placed next to each other, making it easier to find the minimum difference.
-  - Sorting the array is the first and necessary step to ensure that adjacent numbers in the array will have the smallest possible differences.
-
-```cpp
     int res = nums[1] - nums[0];
-```
-
-- **Initial Minimum Difference**:
-  - After sorting, the difference between the first two elements (`nums[1] - nums[0]`) is calculated and stored in the variable `res`. This is the starting value of the minimum difference.
-  - At this point, we assume that the smallest difference is between the first two elements, as this is the only comparison we can make initially.
-
-```cpp
     for(int i = 1; i < nums.size(); i++) {
         res = min(nums[i] - nums[i - 1], res);
     }
-```
-
-- **Iterating and Updating the Minimum Difference**:
-  - A `for` loop iterates over the array starting from the second element (`i = 1`) up to the end of the array.
-  - Inside the loop, the difference between each adjacent pair of numbers (`nums[i] - nums[i - 1]`) is calculated. This is the key part of the algorithm where we compare each adjacent pair of numbers in the sorted array.
-  - The `min` function is used to keep track of the smallest difference encountered so far. At each iteration, we update `res` to hold the smaller value between the current difference and the previously stored minimum difference.
-
-```cpp
     return res;
 }
 ```
 
-- **Return the Result**:
-  - After the loop finishes, the variable `res` will hold the smallest difference between any two adjacent numbers in the sorted array.
-  - The function returns `res` as the final result.
+This function calculates the minimum difference between any two adjacent numbers in a sorted array `nums`.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findValueOfPartition(vector<int>& nums) {
+	```
+	The function `findValueOfPartition` is defined, which takes a vector of integers `nums` and returns the minimum difference between any two adjacent elements after sorting the array.
 
-#### Time Complexity
+2. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	The `nums` array is sorted in non-decreasing order using the `sort` function from the Standard Library.
 
-1. **Sorting the Array**:
-   - The `sort` function has a time complexity of \( O(n \log n) \), where \( n \) is the size of the input array. Sorting is the most time-consuming operation in this approach.
+3. **Variable Initialization**
+	```cpp
+	    int res = nums[1] - nums[0];
+	```
+	The variable `res` is initialized to the difference between the first two elements of the sorted array, which will hold the minimum difference found.
 
-2. **Iterating Over the Array**:
-   - The `for` loop runs once for each element in the array, so the time complexity of this step is \( O(n) \), where \( n \) is the size of the array.
+4. **Loop - Condition**
+	```cpp
+	    for(int i = 1; i < nums.size(); i++) {
+	```
+	A `for` loop is initiated, iterating over the sorted `nums` array starting from index 1.
 
-Thus, the overall time complexity of the algorithm is dominated by the sorting step, resulting in \( O(n \log n) \).
+5. **Min Calculation**
+	```cpp
+	        res = min(nums[i] - nums[i - 1], res);
+	```
+	Inside the loop, the difference between the current element `nums[i]` and the previous element `nums[i - 1]` is calculated. The result is compared with the current value of `res`, and the smaller value is assigned back to `res`.
 
-#### Space Complexity
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the value of `res`, which contains the minimum difference between adjacent elements in the sorted array.
 
-- The algorithm does not use any extra data structures that grow with the size of the input. It only uses a few variables (`res`, `i`), all of which take constant space.
-- Thus, the space complexity is \( O(1) \), meaning the algorithm uses constant extra space.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-### Conclusion
+The time complexity is dominated by the sorting step, which is O(n log n).
 
-The solution efficiently solves the problem of finding the minimum difference between adjacent elements in an array by first sorting the array and then iterating over it to compute the differences. Sorting ensures that the closest values are adjacent, making it easy to find the minimum difference. The approach is optimal with a time complexity of \( O(n \log n) \), which is suitable for typical input sizes.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-- **Time Complexity**: \( O(n \log n) \), where `n` is the size of the input array.
-- **Space Complexity**: \( O(1) \), as the solution only uses a fixed amount of extra space.
+The space complexity is O(n) for storing the sorted array, assuming the sorting algorithm uses extra space.
 
-This method is simple, intuitive, and runs efficiently for large inputs.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-value-of-the-partition/description/)
 

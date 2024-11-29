@@ -14,235 +14,169 @@ img_src = ""
 youtube = "sOV1nRhmsMQ"
 youtube_upload_date="2024-09-09"
 youtube_thumbnail="https://i.ytimg.com/vi/sOV1nRhmsMQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integers, m and n, which represent the dimensions of a matrix. You are also given the head of a linked list of integers. Your task is to generate an m x n matrix by filling it in a spiral order (clockwise) using the integers from the linked list. If any spaces remain, fill them with -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, m and n, and the head of a linked list containing integers.
+- **Example:** `m = 3, n = 5, head = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37]`
+- **Constraints:**
+	- 1 <= m, n <= 10^5
+	- 1 <= m * n <= 10^5
+	- The linked list contains between 1 and m * n integers.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
-        vector<vector<int>> res(m, vector<int>(n, -1));
-        int i = 0, j = 0, cur_dir = 0, d[5] = {0, 1, 0, -1, 0};
-        for(;head != nullptr; head = head->next) {
-            res[i][j] = head->val;
-            int ni = i + d[cur_dir], nj = j + d[cur_dir + 1];
-            if(min(ni, nj) < 0 || ni >= m || nj >= n || res[ni][nj] != -1)
-                cur_dir = (cur_dir + 1) % 4;
-            i += d[cur_dir];
-            j += d[cur_dir + 1];
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an m x n matrix where the values from the linked list are placed in a spiral order, and any remaining empty spaces are filled with -1.
+- **Example:** `For m = 3, n = 5, and head = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37], the output is [[1, 4, 7, 10, 13], [16, 19, 22, 25, 28], [31, 34, 37, -1, -1]].`
+- **Constraints:**
+	- The generated matrix must have exactly m rows and n columns.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To fill the matrix in a spiral order using the integers from the linked list and handle any remaining empty spaces.
+
+- 1. Initialize an m x n matrix filled with -1.
+- 2. Use the linked list to place values in the matrix in spiral order (clockwise).
+- 3. When the linked list is exhausted, stop placing values. Any remaining empty cells should be filled with -1.
+- 4. Return the filled matrix.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list contains between 1 and m * n integers.
+- The matrix size is valid for the given m and n values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `m = 3, n = 5, head = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37]`  \
+  **Explanation:** The linked list values are filled into the matrix in a spiral order. The remaining cells are filled with -1.
+
+- **Input:** `m = 2, n = 3, head = [0, 1, 2, 3]`  \
+  **Explanation:** The linked list values are placed in the matrix in a spiral order, with any remaining cells filled with -1.
+
+{{< dots >}}
+## Approach 🚀
+The task is to fill the matrix in a spiral order using the integers from the linked list. We can use a directional approach to achieve the spiral filling.
+
+### Initial Thoughts 💭
+- We need to traverse the matrix in a spiral fashion and fill it with values from the linked list.
+- Each time we hit the boundary of the matrix or an already filled cell, we change direction.
+- A straightforward approach would be to simulate the movement through the matrix while filling it with values from the linked list.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one node in the linked list, so empty linked lists do not need to be handled.
+- The solution must efficiently handle matrices with sizes up to 10^5 cells and corresponding linked lists.
+- Ensure that the matrix is filled in the spiral order and any remaining spaces are correctly filled with -1.
+- The linked list must contain a number of elements between 1 and m * n.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
+    vector<vector<int>> res(m, vector<int>(n, -1));
+    int i = 0, j = 0, cur_dir = 0, d[5] = {0, 1, 0, -1, 0};
+    for(;head != nullptr; head = head->next) {
+        res[i][j] = head->val;
+        int ni = i + d[cur_dir], nj = j + d[cur_dir + 1];
+        if(min(ni, nj) < 0 || ni >= m || nj >= n || res[ni][nj] != -1)
+            cur_dir = (cur_dir + 1) % 4;
+        i += d[cur_dir];
+        j += d[cur_dir + 1];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to take a singly linked list with integer values and place its values in a matrix in a spiral order. The matrix is of size `m` by `n` (with `m` rows and `n` columns), and we are given the head of the singly linked list. Our task is to fill the matrix with the values from the linked list in a spiral order, starting from the top-left corner.
-
-The matrix should be filled in the following spiral pattern:
-- Start at the top-left corner of the matrix.
-- Move right, then down, left, and up, filling each cell with the next value from the linked list.
-- Continue this pattern until all values from the linked list have been used.
-- If there are any leftover cells in the matrix, they should remain as `-1`.
-
-### Approach
-
-To solve this problem, we will:
-1. **Initialize the matrix**: First, create a matrix with the dimensions `m` by `n`, and initialize all its values to `-1`, indicating that they are empty.
-2. **Track the current position and direction**: We need to iterate through the matrix in a spiral order. This involves updating the current direction at each step and ensuring we do not go out of bounds or overwrite any previously filled cells.
-3. **Spiral traversal**: Starting from the top-left corner of the matrix, we will insert the linked list values into the matrix in the spiral order by using a direction vector. The directions for moving are: right, down, left, and up. If we hit the boundaries of the matrix or a filled cell, we change direction clockwise.
-4. **Linked list traversal**: Traverse the linked list, inserting its values into the matrix one by one. Once we reach the end of the linked list, we stop filling the matrix.
-5. **Return the matrix**: After filling the matrix, return it as the result.
-
-### Code Breakdown (Step by Step)
-
-Let’s walk through the code in detail to understand how it implements this approach:
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
+    return res;
+}
 ```
 
-- The function `spiralMatrix` takes three parameters: `m`, `n`, and `head`, which represent the number of rows, columns, and the head of the linked list respectively.
-- The function will return a 2D vector (`vector<vector<int>>`) representing the matrix with the values from the linked list inserted in a spiral order.
+This function takes two integers `m` and `n` representing the dimensions of a matrix and a linked list `head`. It fills the matrix in a spiral order using the values from the linked list and returns the filled matrix.
 
-```cpp
-        vector<vector<int>> res(m, vector<int>(n, -1));
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
+	```
+	Declares the `spiralMatrix` function that takes the matrix dimensions `m` and `n` and a linked list `head` as inputs. It returns a 2D matrix filled in a spiral order.
 
-- We initialize the result matrix `res` with dimensions `m` by `n`, filling every cell initially with `-1` to represent empty cells.
+2. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> res(m, vector<int>(n, -1));
+	```
+	Initializes a 2D vector `res` of size `m` by `n`, with all elements set to -1. This matrix will hold the final result of the spiral traversal.
 
-```cpp
-        int i = 0, j = 0, cur_dir = 0, d[5] = {0, 1, 0, -1, 0};
-```
+3. **Variable Initialization**
+	```cpp
+	    int i = 0, j = 0, cur_dir = 0, d[5] = {0, 1, 0, -1, 0};
+	```
+	Initializes variables `i` and `j` to 0 to start at the top-left corner of the matrix. `cur_dir` tracks the current direction (0 = right, 1 = down, 2 = left, 3 = up). The array `d` represents the change in row and column for each direction.
 
-- We initialize `i` and `j` to `0`, representing the starting position at the top-left corner of the matrix.
-- `cur_dir` is initialized to `0`, which will track the current direction of traversal (right, down, left, or up).
-- `d` is an array that defines the movement directions in the spiral traversal. The directions are defined as pairs of changes to `i` and `j`: `{0, 1}` for moving right, `{1, 0}` for moving down, `{0, -1}` for moving left, and `{-1, 0}` for moving up.
+4. **Linked List Traversal**
+	```cpp
+	    for(;head != nullptr; head = head->next) {
+	```
+	Iterates through each node in the linked list `head` until the list is exhausted.
 
-```cpp
-        for (; head != nullptr; head = head->next) {
-```
+5. **Matrix Assignment**
+	```cpp
+	        res[i][j] = head->val;
+	```
+	Assigns the value of the current node `head->val` to the current position in the matrix `res[i][j]`.
 
-- This loop iterates through the linked list, starting from the `head`. For each node in the linked list, we will insert its value into the matrix at the current position.
+6. **Next Position Calculation**
+	```cpp
+	        int ni = i + d[cur_dir], nj = j + d[cur_dir + 1];
+	```
+	Calculates the next row (`ni`) and column (`nj`) based on the current direction (`cur_dir`).
 
-```cpp
-            res[i][j] = head->val;
-```
+7. **Boundary Check**
+	```cpp
+	        if(min(ni, nj) < 0 || ni >= m || nj >= n || res[ni][nj] != -1)
+	```
+	Checks if the next position (`ni`, `nj`) is out of bounds or already filled. If true, it indicates the need to change direction.
 
-- We set the current matrix position `res[i][j]` to the value of the current node in the linked list.
+8. **Direction Change**
+	```cpp
+	            cur_dir = (cur_dir + 1) % 4;
+	```
+	Changes the direction (right -> down -> left -> up) by updating `cur_dir`. This ensures the traversal follows a spiral pattern.
 
-```cpp
-            int ni = i + d[cur_dir], nj = j + d[cur_dir + 1];
-```
+9. **Position Update**
+	```cpp
+	        i += d[cur_dir];
+	```
+	Updates the row index `i` to the next position based on the current direction.
 
-- We calculate the next position (`ni`, `nj`) based on the current direction `cur_dir`. We use `d[cur_dir]` for the change in the `i` (row) index and `d[cur_dir + 1]` for the change in the `j` (column) index.
+10. **Position Update**
+	```cpp
+	        j += d[cur_dir + 1];
+	```
+	Updates the column index `j` to the next position based on the current direction.
 
-```cpp
-            if (min(ni, nj) < 0 || ni >= m || nj >= n || res[ni][nj] != -1)
-                cur_dir = (cur_dir + 1) % 4;
-```
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the matrix `res` after it has been filled in a spiral order.
 
-- We check if the next position (`ni`, `nj`) is out of bounds or if the cell is already filled (i.e., not `-1`).
-- If either condition is true, it means we need to change direction (turn 90 degrees clockwise). We update `cur_dir` to the next direction in the cycle, using modulo 4 to ensure it stays within the range `[0, 3]`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-```cpp
-            i += d[cur_dir];
-            j += d[cur_dir + 1];
-```
+The time complexity is O(m * n), as each cell in the matrix is filled once.
 
-- After checking if the next position is valid, we move to the next position in the current direction by updating `i` and `j`.
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-```cpp
-        }
-        return res;
-    }
-};
-```
+The space complexity is O(m * n), as we need to store the resulting matrix.
 
-- The loop continues until all nodes in the linked list have been processed.
-- After filling the matrix, the function returns the result matrix `res`.
+**Happy Coding! 🎉**
 
-### Example Walkthrough
-
-Let’s consider a simple example to understand how the code works:
-
-#### Input:
-- `m = 3`, `n = 3` (matrix dimensions)
-- `head = 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9` (linked list values)
-
-#### Steps:
-
-1. Initialize a 3x3 matrix filled with `-1`:
-   ```
-   [-1, -1, -1]
-   [-1, -1, -1]
-   [-1, -1, -1]
-   ```
-
-2. Start at the top-left corner (position `i = 0`, `j = 0`), and move right:
-   - Insert `1` at `[0][0]`, matrix becomes:
-     ```
-     [1, -1, -1]
-     [-1, -1, -1]
-     [-1, -1, -1]
-     ```
-   - Move right to `[0][1]`, insert `2`, matrix becomes:
-     ```
-     [1, 2, -1]
-     [-1, -1, -1]
-     [-1, -1, -1]
-     ```
-   - Move right to `[0][2]`, insert `3`, matrix becomes:
-     ```
-     [1, 2, 3]
-     [-1, -1, -1]
-     [-1, -1, -1]
-     ```
-
-3. Change direction to move down:
-   - Move down to `[1][2]`, insert `4`, matrix becomes:
-     ```
-     [1, 2, 3]
-     [-1, -1, 4]
-     [-1, -1, -1]
-     ```
-   - Move down to `[2][2]`, insert `5`, matrix becomes:
-     ```
-     [1, 2, 3]
-     [-1, -1, 4]
-     [-1, -1, 5]
-     ```
-
-4. Change direction to move left:
-   - Move left to `[2][1]`, insert `6`, matrix becomes:
-     ```
-     [1, 2, 3]
-     [-1, -1, 4]
-     [-1, 6, 5]
-     ```
-
-5. Change direction to move up:
-   - Move up to `[1][1]`, insert `7`, matrix becomes:
-     ```
-     [1, 2, 3]
-     [-1, 7, 4]
-     [-1, 6, 5]
-     ```
-
-6. Change direction to move right:
-   - Move right to `[1][0]`, insert `8`, matrix becomes:
-     ```
-     [1, 2, 3]
-     [8, 7, 4]
-     [-1, 6, 5]
-     ```
-
-7. Change direction to move down:
-   - Move down to `[2][0]`, insert `9`, matrix becomes:
-     ```
-     [1, 2, 3]
-     [8, 7, 4]
-     [9, 6, 5]
-     ```
-
-#### Output:
-The final matrix after filling all values from the linked list:
-```
-[1, 2, 3]
-[8, 7, 4]
-[9, 6, 5]
-```
-
-### Time Complexity
-
-- The time complexity of the solution is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns of the matrix.
-- Each cell in the matrix is filled once, and each node in the linked list is processed once.
-
-### Space Complexity
-
-- The space complexity is **O(m * n)**, as we store the matrix of size `m` by `n`.
-
-### Conclusion
-
-This solution efficiently fills the matrix with values from the linked list in a spiral order. By using direction vectors and handling boundary checks, the algorithm ensures that the matrix is filled correctly and avoids overwriting cells. The overall complexity of the solution is optimal for the given problem, making it suitable for larger matrix sizes and linked lists.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix-iv/description/)
 

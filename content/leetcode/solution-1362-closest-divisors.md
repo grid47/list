@@ -14,87 +14,122 @@ img_src = ""
 youtube = "wx3731P3At4"
 youtube_upload_date="2022-08-04"
 youtube_thumbnail="https://i.ytimg.com/vi/wx3731P3At4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer `num`, find the closest two integers whose product is equal to either `num + 1` or `num + 2` and whose absolute difference is the smallest. You need to return these two integers in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `num` which represents the given number.
+- **Example:** `num = 8`
+- **Constraints:**
+	- 1 <= num <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> closestDivisors(int num) {
-        
-        for(int a = sqrt(num + 2); a > 0; a--) {
-            if((num + 1) % a == 0) return vector<int>{a, (num + 1) / a};
-            if((num + 2) % a == 0) return vector<int>{a, (num + 2) / a};            
-        }
-        return vector<int>{};
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of two integers that have the smallest absolute difference, whose product is equal to `num + 1` or `num + 2`.
+- **Example:** `[3, 3]`
+- **Constraints:**
+	- The output will always contain exactly two integers.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the two closest divisors of `num + 1` or `num + 2` whose absolute difference is the smallest.
 
-### Problem Statement
-The task is to find two integers \(a\) and \(b\) such that:
-1. Both \(a\) and \(b\) are divisors of \(num + 1\) or \(num + 2\).
-2. The product \(a \times b\) is as close to \(num\) as possible, where \(num\) is a given integer.
-3. If multiple pairs of divisors satisfy this condition, the pair with the larger \(a\) should be preferred.
+- For each possible divisor from `sqrt(num + 2)` down to 1, check if it divides `num + 1` or `num + 2`.
+- Once a divisor is found, return the pair of divisors with the smallest difference.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input `num` is always a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `num = 8`  \
+  **Explanation:** For `num + 1 = 9`, the closest divisors are `3` and `3`, and for `num + 2 = 10`, the closest divisors are `2` and `5`. The pair `[3, 3]` is returned as it has the smallest absolute difference.
 
-### Approach
-To solve this problem, we can utilize the following approach:
-1. **Iterate Backwards**: Start from the square root of \(num + 2\) and check for divisors in descending order. This helps us find larger divisors first, thus aligning with the requirement to prefer larger values of \(a\).
-2. **Check Divisibility**: For each integer \(a\) from the square root down to 1, check if \(a\) divides \(num + 1\) or \(num + 2\). If it does, compute \(b\) as \((num + 1) / a\) or \((num + 2) / a\).
-3. **Return Result**: Once a valid pair is found, return it immediately since we start from the largest possible divisor.
+- **Input:** `num = 25`  \
+  **Explanation:** For `num + 1 = 26`, the closest divisors are `2` and `13`, and for `num + 2 = 27`, the closest divisors are `3` and `9`. The pair `[5, 6]` is returned because it forms the closest divisors.
 
-### Code Breakdown (Step by Step)
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating from the square root of `num + 2` down to 1, checking divisibility, and selecting the closest divisors with the smallest absolute difference.
 
+### Initial Thoughts 💭
+- The problem requires finding divisors of `num + 1` and `num + 2`.
+- We can use the square root method to optimize the search for divisors.
+- The main challenge is to ensure that the divisors have the smallest possible difference.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not involve empty inputs, as the input is always a positive integer.
+- Ensure that the solution handles very large values of `num` up to 10^9 efficiently.
+- Handle cases where `num + 1` or `num + 2` has only one divisor pair.
+- Ensure that the solution works within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    vector<int> closestDivisors(int num) {
-        // Start iterating from the integer part of the square root of (num + 2)
-        for(int a = sqrt(num + 2); a > 0; a--) {
-            // Check if 'a' is a divisor of (num + 1)
-            if((num + 1) % a == 0) 
-                return vector<int>{a, (num + 1) / a}; // Return the pair {a, b}
-
-            // Check if 'a' is a divisor of (num + 2)
-            if((num + 2) % a == 0) 
-                return vector<int>{a, (num + 2) / a}; // Return the pair {a, b}
-        }
-        // Return an empty vector if no divisors are found (shouldn't happen)
-        return vector<int>{};
+vector<int> closestDivisors(int num) {
+    
+    for(int a = sqrt(num + 2); a > 0; a--) {
+        if((num + 1) % a == 0) return vector<int>{a, (num + 1) / a};
+        if((num + 2) % a == 0) return vector<int>{a, (num + 2) / a};            
     }
-};
+    return vector<int>{};
+}
 ```
 
-1. **Function Declaration**:
-   - The method `closestDivisors` is defined as a public member of the `Solution` class and takes an integer `num` as input.
+This function finds the closest divisors of a number 'num' by checking the divisors of 'num+1' and 'num+2' starting from the largest possible divisor and returns the pair of divisors. If no divisors are found, it returns an empty vector.
 
-2. **Looping Through Potential Divisors**:
-   - The loop begins by calculating the square root of \(num + 2\) using `sqrt(num + 2)`. This value is stored in the variable `a`, which will be decremented in each iteration to check for divisors.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> closestDivisors(int num) {
+	```
+	The function 'closestDivisors' takes an integer 'num' and returns a vector containing two divisors of 'num+1' or 'num+2' whose product is closest to 'num'.
 
-3. **Divisibility Checks**:
-   - In the first condition, the code checks if \(num + 1\) is divisible by \(a\). If true, it constructs a vector with the values \(a\) and \((num + 1) / a\) and immediately returns this vector.
-   - The second condition performs the same check for \(num + 2\). If this condition holds, it also returns the respective divisor pair.
+2. **For Loop Initialization**
+	```cpp
+	    for(int a = sqrt(num + 2); a > 0; a--) {
+	```
+	A for loop is initialized with 'a' starting from the square root of 'num + 2'. It iterates downwards, checking possible divisors of 'num+1' and 'num+2'.
 
-4. **Return Statement**:
-   - If no divisors are found (which is unlikely), the function returns an empty vector.
+3. **Divisor Check for num+1**
+	```cpp
+	        if((num + 1) % a == 0) return vector<int>{a, (num + 1) / a};
+	```
+	Checks if 'a' is a divisor of 'num+1'. If true, it returns a vector with 'a' and 'num+1' divided by 'a' as the divisors.
 
-### Complexity Analysis
-- **Time Complexity**:
-  - The time complexity is \(O(\sqrt{num})\). This is because we iterate from \(\sqrt{num + 2}\) down to 1 to find divisors. The number of iterations is proportional to the square root of the input, making this approach efficient for large values of `num`.
+4. **Divisor Check for num+2**
+	```cpp
+	        if((num + 2) % a == 0) return vector<int>{a, (num + 2) / a};            
+	```
+	Checks if 'a' is a divisor of 'num+2'. If true, it returns a vector with 'a' and 'num+2' divided by 'a' as the divisors.
 
-- **Space Complexity**:
-  - The space complexity is \(O(1)\) since we are using a constant amount of extra space for the variables and the output vector. The vector returned holds two integers, but this does not depend on the size of the input.
+5. **Return Empty Vector**
+	```cpp
+	    return vector<int>{};
+	```
+	If no divisors are found for 'num+1' or 'num+2', the function returns an empty vector.
 
-### Conclusion
-The `closestDivisors` function efficiently finds two integers that are divisors of either \(num + 1\) or \(num + 2\) and that multiply to a product closest to \(num\). By leveraging the properties of divisors and iterating from the square root downwards, the implementation achieves both correctness and optimal performance. This approach is particularly useful in competitive programming and algorithm design, where understanding divisor properties can lead to more efficient solutions.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(sqrt(num))
+- **Average Case:** O(sqrt(num))
+- **Worst Case:** O(sqrt(num))
 
-This explanation is crafted to provide clarity and understanding to readers, while being optimized for search engines to reach a broader audience interested in algorithm explanations and code analysis.
+The time complexity is dominated by the need to check divisors up to the square root of `num + 2`.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant since only a few variables are used in the solution.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/closest-divisors/description/)

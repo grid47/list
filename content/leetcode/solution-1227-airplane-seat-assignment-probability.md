@@ -14,74 +14,105 @@ img_src = ""
 youtube = "pHgWf79hNoY"
 youtube_upload_date="2024-02-05"
 youtube_thumbnail="https://i.ytimg.com/vi/pHgWf79hNoY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+There are `n` passengers boarding an airplane with `n` seats. The first passenger has lost their ticket and picks a random seat. The remaining passengers sit in their assigned seat if available or pick a random seat if their assigned seat is taken. Return the probability that the nth person gets their own seat.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer `n` (1 <= n <= 10^5), representing the number of passengers and seats.
+- **Example:** `n = 3`
+- **Constraints:**
+	- 1 <= n <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double nthPersonGetsNthSeat(int n) {
-        if(n == 1) return 1;
-        return 1/2.0;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a floating-point number representing the probability that the nth person sits in their own seat.
+- **Example:** `0.50000`
+- **Constraints:**
+	- Return the answer with a precision of 5 decimal places.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the probability that the last passenger sits in their own seat.
 
-### Problem Statement
-The problem involves a scenario where there are \( n \) seats on a bus, and \( n \) passengers each have a ticket for a specific seat. The first passenger, however, does not have a preference and randomly chooses a seat upon boarding. Each subsequent passenger either takes their assigned seat if it is available or picks a random empty seat if it is taken.
+- If there's only one passenger, they will always sit in their own seat (probability = 1).
+- For more than one passenger, the probability follows a pattern where it is 0.5 for n >= 2.
+{{< dots >}}
+### Problem Assumptions ✅
+- The first passenger randomly selects a seat.
+- Each subsequent passenger will either sit in their assigned seat or pick a random seat if theirs is taken.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 3`  \
+  **Explanation:** For three passengers, the first has a 50% chance of sitting in their assigned seat. If they don't, the third passenger has a 50% chance of sitting in theirs. The total probability for the nth person is 0.5.
 
-The objective is to determine the probability that the last passenger (the \( n \)-th person) will sit in their designated seat. This problem poses an interesting challenge in understanding randomness and probability.
+{{< dots >}}
+## Approach 🚀
+The problem boils down to a simple observation: the probability of the nth person sitting in their seat is always 0.5 for n >= 2, and 1 for n = 1.
 
-### Approach
-To solve the problem, we can analyze the situation by considering the following scenarios:
-1. If the first passenger sits in their own seat (seat 1), then everyone else will sit in their assigned seat, including the last passenger.
-2. If the first passenger sits in the last passenger’s seat (seat \( n \)), then the last passenger will not be able to sit in their designated seat.
-3. If the first passenger sits in any other seat (seat \( k \)), then the problem is reduced to the same scenario for \( k-1 \) remaining passengers and their respective seats.
-
-From this analysis, it becomes evident that the first passenger has two critical choices:
-- Sitting in their own seat leads to a probability of 1 for the last passenger to sit in their own seat.
-- Sitting in the last passenger’s seat leads to a probability of 0 for the last passenger to sit in their own seat.
-
-However, these choices ultimately balance out, leading us to deduce that the probability of the last passenger sitting in their own seat is always \( \frac{1}{2} \) for \( n > 1 \). For \( n = 1 \), the probability is obviously 1 since there is only one passenger and one seat.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- For n = 1, the answer is trivially 1.
+- For n >= 2, the answer is always 0.5 based on a probabilistic pattern observed.
+- This problem does not require complex simulations or recursive calculations for large n. We can directly return the result based on the value of n.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs are allowed.
+- The solution should handle up to 10^5 efficiently.
+- For n = 1, the probability is always 1.
+- Ensure that the result is returned with a precision of 5 decimal places.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    double nthPersonGetsNthSeat(int n) {
+double nthPersonGetsNthSeat(int n) {
+    if(n == 1) return 1;
+    return 1/2.0;
+}
 ```
-- **Lines 1-3**: The `Solution` class is defined, and the public method `nthPersonGetsNthSeat` is declared, which takes an integer \( n \) representing the number of passengers and seats.
 
-```cpp
-        if(n == 1) return 1;
-```
-- **Line 4**: A conditional check is performed to see if \( n \) is equal to 1. If there is only one passenger, the probability that this passenger sits in their designated seat (which is the only seat available) is 1. Thus, the function immediately returns 1.
+This function calculates the probability that the nth person gets their own seat in a scenario where the first person selects a seat at random and subsequent people sit in their assigned seats if available or select randomly from remaining seats.
 
-```cpp
-        return 1/2.0;
-```
-- **Line 5**: If \( n \) is greater than 1, the function returns \( \frac{1}{2.0} \). The use of `2.0` ensures that the division is performed in floating-point arithmetic, returning a precise double value of 0.5.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	double nthPersonGetsNthSeat(int n) {
+	```
+	This is the function definition for `nthPersonGetsNthSeat`, which calculates the probability of the nth person sitting in their assigned seat.
 
-```cpp
-    }
-};
-```
-- **Lines 6-7**: The method and class definitions are closed.
+2. **Conditional Check**
+	```cpp
+	    if(n == 1) return 1;
+	```
+	If there is only one person (n == 1), they will always sit in their own seat, so the function returns 1.
 
-### Complexity
-1. **Time Complexity**: The time complexity of this function is \( O(1) \) because the function simply checks a condition and performs a constant number of operations regardless of the size of \( n \).
-   
-2. **Space Complexity**: The space complexity is also \( O(1) \) since no additional data structures are used that scale with input size.
+3. **Return Value**
+	```cpp
+	    return 1/2.0;
+	```
+	For all cases where n > 1, the probability is always 1/2 (50%) based on the problem's constraints, as the first person randomly chooses a seat, and from then on, the probability alternates.
 
-### Conclusion
-The `nthPersonGetsNthSeat` function elegantly solves the problem of determining the probability that the last passenger will sit in their designated seat. By analyzing the seating arrangement and the decisions made by the first passenger, we derive that the probability is \( 1 \) for one passenger and \( \frac{1}{2} \) for more than one passenger. This solution exemplifies how probability can simplify complex situations into manageable results, showcasing the power of mathematical reasoning in programming challenges. The function is efficient with constant time complexity, making it a straightforward yet insightful contribution to algorithmic problem-solving in competitive programming and technical interviews.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+The time complexity is constant since we are only checking if n is 1 or not.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as no additional space is required beyond a simple check.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/airplane-seat-assignment-probability/description/)
 

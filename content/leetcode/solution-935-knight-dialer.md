@@ -14,144 +14,242 @@ img_src = ""
 youtube = "vlsUUm_qqsY"
 youtube_upload_date="2023-11-27"
 youtube_thumbnail="https://i.ytimg.com/vi/vlsUUm_qqsY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A knight is on a phone pad, and it can move to adjacent numeric cells according to its unique movement pattern (an L-shape: two squares vertically and one square horizontally, or two squares horizontally and one square vertically). Given an integer n, you need to calculate how many distinct phone numbers of length n the knight can dial, starting from any numeric cell on the pad and performing n-1 valid knight jumps.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer n, representing the length of the phone number to dial.
+- **Example:** `Input: n = 3`
+- **Constraints:**
+	- 1 <= n <= 5000
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct phone numbers of length n that can be dialed by the knight, modulo 10^9 + 7.
+- **Example:** `Output: 30`
+- **Constraints:**
+	- The result should be returned modulo 10^9 + 7.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the number of valid knight paths of length n starting from each numeric cell on the phone pad. Use dynamic programming to compute the total count efficiently by caching intermediate results.
+
+- 1. Use dynamic programming to store the number of valid ways to reach each cell on the pad for each number of moves.
+- 2. For each cell, recursively calculate the number of ways to reach it by performing valid knight moves.
+- 3. Sum up the results for all starting cells, ensuring the answer is taken modulo 10^9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The knight always starts on one of the numeric cells on the phone pad.
+- Each jump must follow the valid knight's move pattern, as described.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 1`  \
+  **Explanation:** For a phone number of length 1, any of the 10 numeric cells on the pad can be the starting point. Thus, there are 10 possible phone numbers.
+
+- **Input:** `Input: n = 2`  \
+  **Explanation:** For a phone number of length 2, we count all valid knight moves from each numeric cell. This gives a total of 20 possible valid phone numbers.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses dynamic programming to compute the number of valid knight moves for each phone number length n. We maintain a table to store the results of all knight moves and use memoization to optimize the solution.
+
+### Initial Thoughts 💭
+- The knight has a restricted set of moves, so the problem can be tackled using dynamic programming.
+- Using dynamic programming and memoization helps avoid recalculating the number of valid moves for the same cell multiple times.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain a valid n, as per the problem constraints.
+- The solution needs to efficiently handle large values of n, up to 5000.
+- The smallest value of n is 1, which means the knight just needs to pick a starting point.
+- The result must be returned modulo 10^9 + 7.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    int mod = 1e9 + 7;
+int mod = 1e9 + 7;
 public:
-    int knightDialer(int n) {
-        long long res = 0;
-        vector<vector<long long>> arr(4, vector<long long>(3, -1));
-        vector<vector<vector<long long>>> mem(n + 1, arr);
+int knightDialer(int n) {
+    long long res = 0;
+    vector<vector<long long>> arr(4, vector<long long>(3, -1));
+    vector<vector<vector<long long>>> mem(n + 1, arr);
 
-        for(int i = 0; i < 4; i++)
-        for(int j = 0; j < 3; j++)
-        {
-            res = (res + path(i, j, n, mem))% mod;
-        }
-        return res;
+    for(int i = 0; i < 4; i++)
+    for(int j = 0; j < 3; j++)
+    {
+        res = (res + path(i, j, n, mem))% mod;
     }
+    return res;
+}
 
 long long path(int i, int j, int n, vector<vector<vector<long long>>> &mem) {
-        
-        if(i < 0 || j < 0|| i >= 4 || j >= 3 || (i==3 && j !=1))
-            return 0;
+    
+    if(i < 0 || j < 0|| i >= 4 || j >= 3 || (i==3 && j !=1))
+        return 0;
 
-        if(mem[n][i][j] != -1) return mem[n][i][j] % mod;
+    if(mem[n][i][j] != -1) return mem[n][i][j] % mod;
 
-        if (n == 1) return 1;
+    if (n == 1) return 1;
 
-        mem[n][i][j] = path(i -1 , j -2, n - 1, mem) % mod +
-                  path(i -1 , j +2, n - 1, mem) % mod +
-                  path(i -2 , j -1, n - 1, mem) % mod +
-                  path(i -2 , j +1, n - 1, mem) % mod +
-                  path(i +1 , j -2, n - 1, mem) % mod +
-                  path(i +1 , j +2, n - 1, mem) % mod +
-                  path(i +2 , j -1, n - 1, mem) % mod +
-                  path(i +2 , j +1, n - 1, mem) % mod;
-        return mem[n][i][j];
-    }
-
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand involves counting the number of distinct ways a knight can dial a number on a standard keypad after making `n` moves. The knight starts at any key on a 3x4 keypad (with the keys arranged as follows):
+    mem[n][i][j] = path(i -1 , j -2, n - 1, mem) % mod +
+              path(i -1 , j +2, n - 1, mem) % mod +
+              path(i -2 , j -1, n - 1, mem) % mod +
+              path(i -2 , j +1, n - 1, mem) % mod +
+              path(i +1 , j -2, n - 1, mem) % mod +
+              path(i +1 , j +2, n - 1, mem) % mod +
+              path(i +2 , j -1, n - 1, mem) % mod +
+              path(i +2 , j +1, n - 1, mem) % mod;
+    return mem[n][i][j];
+}
 
 ```
-1 2 3
-4 5 6
-7 8 9
-  0
-```
 
-The knight can move to a key that is two rows away and one column away, or one row away and two columns away. The task is to determine how many distinct ways the knight can land on a number after `n` moves, starting from any key on the keypad.
+This code defines a solution to the Knight Dialer problem where the knight moves on a phone's number pad. The function knightDialer calculates the number of distinct phone numbers that can be formed, while the helper function path recursively calculates possible moves.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	Define the Solution class, which encapsulates the entire problem-solving process.
 
-This problem can be solved efficiently using dynamic programming and memoization. Here's a step-by-step explanation of the approach:
+2. **Variable Declaration**
+	```cpp
+	int mod = 1e9 + 7;
+	```
+	Declare the modulus value used for handling large numbers and to avoid overflow.
 
-1. **Understanding the Knight's Moves**: The knight in this problem moves in an "L" shape, i.e., it can either move two rows and one column or one row and two columns. There are a total of 8 possible moves for any given position, except for some boundary conditions (like the bottom row, where the knight cannot move down further).
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Indicates that the following methods and variables are publicly accessible.
 
-2. **Memoization to Avoid Repetition**: To optimize the solution, we use a memoization technique to store the results of previously computed states. Since there are multiple recursive calls for the same position and the number of moves, we avoid recalculating these states by storing the results in a memoization table.
+4. **Main Function**
+	```cpp
+	int knightDialer(int n) {
+	```
+	Define the knightDialer function, which calculates the total number of distinct phone numbers the knight can dial.
 
-3. **Recursive Function to Explore All Possible Paths**: The recursive function `path` calculates the number of distinct ways to reach a key after a certain number of moves. Starting from any given key on the keypad, it recursively explores all possible moves and accumulates the results. Each call checks if a move is within the bounds of the keypad, and if not, it returns 0.
+5. **Result Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Initialize the result variable to 0. This will accumulate the total number of distinct dialed numbers.
 
-4. **Base Case**: The base case of the recursion is when `n == 1`, meaning we have only one move left. In this case, every key on the keypad is reachable from the starting key, so the result is 1 for that specific key.
+6. **Grid Initialization**
+	```cpp
+	    vector<vector<long long>> arr(4, vector<long long>(3, -1));
+	```
+	Initialize the 4x3 grid, representing the phone's keypad, with all values set to -1.
 
-5. **Memoization Table**: The memoization table `mem` is a 3-dimensional array where the first dimension represents the number of moves left (`n`), and the second and third dimensions represent the position of the knight on the keypad (`i` for row and `j` for column). If a state has been computed before, we return the stored result to avoid recalculating it.
+7. **Memoization Table**
+	```cpp
+	    vector<vector<vector<long long>>> mem(n + 1, arr);
+	```
+	Create a memoization table to store intermediate results for subproblems, where mem[n][i][j] stores the result for n moves starting from position (i, j).
 
-6. **Modulo Operation**: Since the result may be a large number, the answer is taken modulo `1e9 + 7` to ensure the result fits within the constraints and prevents integer overflow.
+8. **Outer Loop Start**
+	```cpp
+	    for(int i = 0; i < 4; i++)
+	```
+	Start the loop iterating over all rows of the phone's keypad grid.
 
-7. **Iterating Over All Keys**: Finally, the `knightDialer` function iterates over all positions on the keypad (represented by the grid coordinates `i` and `j`), and for each position, it computes the number of distinct paths starting from that key by calling the `path` function.
+9. **Inner Loop Start**
+	```cpp
+	    for(int j = 0; j < 3; j++)
+	```
+	Start the loop iterating over all columns of the phone's keypad grid.
 
-### Code Breakdown (Step by Step)
+10. **Path Function Call**
+	```cpp
+	        res = (res + path(i, j, n, mem))% mod;
+	```
+	Call the path function for each (i, j) position, adding the result to the total.
 
-1. **Initialization**:
-   ```cpp
-   long long res = 0;
-   vector<vector<long long>> arr(4, vector<long long>(3, -1));
-   vector<vector<vector<long long>>> mem(n + 1, arr);
-   ```
-   - The variable `res` holds the result, which is the total number of distinct paths.
-   - `arr` is a temporary 2D array used to initialize the memoization table `mem`. This table has dimensions `[n+1][4][3]`, where `n+1` is for the number of moves, and `4` and `3` represent the number of rows and columns on the keypad.
+11. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the accumulated result, representing the total number of distinct phone numbers the knight can dial.
 
-2. **Iterating Over All Keys**:
-   ```cpp
-   for(int i = 0; i < 4; i++)
-       for(int j = 0; j < 3; j++)
-       {
-           res = (res + path(i, j, n, mem)) % mod;
-       }
-   ```
-   - This double loop iterates over each key on the keypad (from `(0,0)` to `(3,2)`), calling the `path` function for each key to compute the number of distinct paths starting from that key.
+12. **Path Function Declaration**
+	```cpp
+	long long path(int i, int j, int n, vector<vector<vector<long long>>> &mem) {
+	```
+	Define the path function, which recursively calculates the number of valid knight moves from position (i, j).
 
-3. **Path Calculation with Memoization**:
-   ```cpp
-   long long path(int i, int j, int n, vector<vector<vector<long long>>> &mem) {
-       if(i < 0 || j < 0 || i >= 4 || j >= 3 || (i == 3 && j != 1))
-           return 0;
-       if(mem[n][i][j] != -1) return mem[n][i][j] % mod;
-       if (n == 1) return 1;
-       mem[n][i][j] = path(i - 1, j - 2, n - 1, mem) % mod +
-                      path(i - 1, j + 2, n - 1, mem) % mod +
-                      path(i - 2, j - 1, n - 1, mem) % mod +
-                      path(i - 2, j + 1, n - 1, mem) % mod +
-                      path(i + 1, j - 2, n - 1, mem) % mod +
-                      path(i + 1, j + 2, n - 1, mem) % mod +
-                      path(i + 2, j - 1, n - 1, mem) % mod +
-                      path(i + 2, j + 1, n - 1, mem) % mod;
-       return mem[n][i][j];
-   }
-   ```
-   - **Base Case**: If the knight moves outside the boundaries of the keypad or tries to move from an invalid key (like the bottom-left or right corners), we return 0.
-   - If the state has already been computed (`mem[n][i][j] != -1`), we return the stored value.
-   - If there is only one move left (`n == 1`), we return 1 because any key is reachable from the starting key.
-   - The recursion explores all 8 possible moves and accumulates the results using modulo `1e9 + 7` to prevent overflow.
+13. **Base Case Check**
+	```cpp
+	    if(i < 0 || j < 0 || i >= 4 || j >= 3 || (i==3 && j !=1))
+	```
+	Check if the current position is out of bounds or invalid (e.g., the knight cannot land on the bottom-right corner).
 
-4. **Returning the Final Result**:
-   ```cpp
-   return res;
-   ```
-   After all calculations, the final result is returned, which is the sum of the distinct paths starting from all keys on the keypad.
+14. **Return Invalid Case**
+	```cpp
+	        return 0;
+	```
+	Return 0 if the knight's current position is invalid.
 
-### Complexity
+15. **Memoization Check**
+	```cpp
+	    if(mem[n][i][j] != -1) return mem[n][i][j] % mod;
+	```
+	Check if the result for the current position and move count is already computed. If so, return the stored result.
 
-- **Time Complexity**: The time complexity of this solution is O(n * 4 * 3), which simplifies to O(n). This is because for each key on the keypad (12 total), we compute the number of distinct paths by exploring 8 possible moves recursively, and memoization ensures that we only compute each state once.
-  
-- **Space Complexity**: The space complexity is O(n * 4 * 3), which simplifies to O(n). This is due to the memoization table `mem` that stores the results for each key position and the number of remaining moves.
+16. **Base Case for n == 1**
+	```cpp
+	    if (n == 1) return 1;
+	```
+	If the remaining number of moves is 1, return 1 as the knight can make a valid move.
 
-### Conclusion
+17. **Recursive Calls**
+	```cpp
+	    mem[n][i][j] = path(i -1 , j -2, n - 1, mem) % mod +
+	```
+	Recursively calculate the number of valid moves from the current position by exploring all 8 possible knight moves.
 
-This solution leverages dynamic programming and memoization to efficiently count the number of distinct ways a knight can dial a number on a keypad after `n` moves. By storing previously computed results, the algorithm avoids redundant calculations, ensuring an optimal solution. This approach works well even for large values of `n` and provides the answer modulo `1e9 + 7` to handle large outputs.
+18. **Recursive Calls Continue**
+	```cpp
+	              path(i -1 , j +2, n - 1, mem) % mod +
+	```
+	Continue recursive calls for the other knight moves.
+
+19. **Final Recursive Call**
+	```cpp
+	              path(i +2 , j +1, n - 1, mem) % mod;
+	```
+	Final recursive call in the sequence, returning the total number of valid moves.
+
+20. **Return Result**
+	```cpp
+	    return mem[n][i][j];
+	```
+	Return the calculated result, which is the total number of valid knight moves from position (i, j).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * 10)
+- **Average Case:** O(n * 10)
+- **Worst Case:** O(n * 10)
+
+Each cell has at most 8 valid moves, and we compute the result for all moves up to n. The total time complexity is proportional to n times the number of cells (10).
+
+### Space Complexity 💾
+- **Best Case:** O(n * 10)
+- **Worst Case:** O(n * 10)
+
+We store results for all cells at each step of the knight's movement, leading to space complexity proportional to n times the number of cells.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/knight-dialer/description/)
 

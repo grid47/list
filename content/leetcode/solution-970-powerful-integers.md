@@ -14,135 +14,155 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given three integers x, y, and bound, find all powerful integers that are less than or equal to bound. A powerful integer can be expressed in the form x^i + y^j for non-negative integers i and j. Return the results as a list with no duplicates, and the order of the elements does not matter.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Three integers x, y, and bound.
+- **Example:** `Input: x = 2, y = 3, bound = 20`
+- **Constraints:**
+	- 1 <= x, y <= 100
+	- 0 <= bound <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> powerfulIntegers(int x, int y, int bound) {
-        unordered_set<int> s;
-        for(int i = 1; i <= bound; i *= x) {
-            for(int j = 1; i + j <= bound; j *= y) {
-                s.insert(i + j);
-                if(y == 1) break;
-            }
-            if(x == 1) break;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** A list of all unique powerful integers less than or equal to bound.
+- **Example:** `Output: [2, 3, 4, 5, 9, 10, 17]`
+- **Constraints:**
+	- Each powerful integer must appear only once in the list.
+	- The integers in the output can be in any order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Compute all unique powerful integers less than or equal to the given bound.
+
+- Iterate over possible values of i such that x^i <= bound.
+- For each i, iterate over possible values of j such that x^i + y^j <= bound.
+- If x or y is 1, break early to avoid infinite loops.
+- Store the resulting sums in a set to ensure uniqueness.
+- Convert the set to a list and return it.
+{{< dots >}}
+### Problem Assumptions ✅
+- x and y are positive integers.
+- The values of x and y can be 1, which simplifies the calculation.
+- The bound is non-negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: x = 3, y = 2, bound = 25`  \
+  **Explanation:** The powerful integers are calculated as follows: 
+3^0 + 2^0 = 2, 3^1 + 2^0 = 4, 3^0 + 2^1 = 3, 3^1 + 2^1 = 5, 3^2 + 2^0 = 9, 3^2 + 2^1 = 11, 3^0 + 2^2 = 6, 3^1 + 2^2 = 10, 3^2 + 2^2 = 13, ...
+Output: [2, 3, 4, 5, 6, 9, 10, 11, 13]
+
+- **Input:** `Input: x = 1, y = 1, bound = 5`  \
+  **Explanation:** Since x and y are both 1, only one unique powerful integer can be formed: 1 + 1 = 2. Output: [2]
+
+{{< dots >}}
+## Approach 🚀
+Use nested loops to calculate all possible values of x^i + y^j within the bound, ensuring no duplicates by using a set.
+
+### Initial Thoughts 💭
+- Both x and y can potentially grow exponentially, so the number of iterations depends on the logarithmic scale of the bound.
+- Using a set ensures uniqueness of results.
+- Iterate over all possible powers of x and y while ensuring their sum remains within the bound.
+- Break early when either x or y equals 1 since their powers do not grow.
+{{< dots >}}
+### Edge Cases 🌐
+- If bound is 0, the result should be an empty list.
+- For large values of bound, ensure the algorithm terminates efficiently by breaking early when x == 1 or y == 1.
+- If x == 1 and y == 1, the only valid output is [2] (if bound >= 2).
+- If x or y is 1, the respective loop becomes constant.
+- Ensure that x^i and y^j are calculated without overflow within the constraints of bound.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> powerfulIntegers(int x, int y, int bound) {
+    unordered_set<int> s;
+    for(int i = 1; i <= bound; i *= x) {
+        for(int j = 1; i + j <= bound; j *= y) {
+            s.insert(i + j);
+            if(y == 1) break;
         }
-        return vector<int>(s.begin(), s.end());
+        if(x == 1) break;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find all possible powerful integers, which are integers that can be written as the sum of powers of two integers `x` and `y`, where `x` and `y` are positive integers greater than or equal to 1, and the sum of these powers is less than or equal to a given bound. Specifically, the task is to return all unique integers that can be expressed as `x^i + y^j` such that the resulting number does not exceed the given `bound`.
-
-For this problem, we are tasked to find all such values of `i` and `j` where:
-- `x^i + y^j <= bound`
-- The values of `x` and `y` are fixed.
-- `i` and `j` are non-negative integers.
-
-### Approach
-
-The approach is based on brute-forcing the power values of `x` and `y` while ensuring that the sum of the powers does not exceed the `bound`. The main steps of the approach are:
-
-1. **Iterate over powers of `x`**:
-   - We start by iterating over all powers of `x` starting from `x^0 = 1` (the smallest power) up to the largest power of `x` that is still less than or equal to the `bound`. 
-   - In each iteration, the current power of `x` is multiplied by `x`, generating the next power of `x`.
-
-2. **Iterate over powers of `y`**:
-   - For each power of `x`, we start iterating over the powers of `y`, from `y^0 = 1` and continue to calculate powers of `y` until the sum of the current power of `x` and the current power of `y` exceeds the `bound`.
-
-3. **Store the results**:
-   - If the sum of a power of `x` and a power of `y` is less than or equal to `bound`, we store that sum in an unordered set to ensure uniqueness. 
-   - This ensures that we do not include duplicates in our result.
-
-4. **Handle special cases**:
-   - If `x == 1`, the powers of `x` will always be `1`, so we need to break out of the loop to avoid unnecessary calculations.
-   - Similarly, if `y == 1`, the powers of `y` will always be `1`, and we only need to calculate sums involving `x`'s powers and `1`.
-
-5. **Return the result**:
-   - After processing all valid powers, we return the result as a vector containing all unique sums stored in the set.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<int> powerfulIntegers(int x, int y, int bound) {
+    return vector<int>(s.begin(), s.end());
+}
 ```
-1. **Function Declaration**:
-   - The function `powerfulIntegers` is defined to take three arguments: `x`, `y`, and `bound`. `x` and `y` are the base integers, and `bound` is the upper limit for the sum of the powers.
 
-```cpp
-        unordered_set<int> s;
-```
-2. **Unordered Set for Storing Unique Results**:
-   - An unordered set `s` is used to store the unique sums of the form `x^i + y^j`. Using a set ensures that duplicate sums are not added, as the set automatically handles uniqueness.
+The `powerfulIntegers` function generates a list of all integers of the form `x^i + y^j` that do not exceed a given bound. It uses a set to avoid duplicate values.
 
-```cpp
-        for(int i = 1; i <= bound; i *= x) {
-```
-3. **Outer Loop for Powers of `x`**:
-   - We begin the outer loop to iterate over the powers of `x`. Starting from `i = 1` (which represents `x^0`), we multiply `i` by `x` in each iteration. The loop continues until `i` exceeds the `bound`.
-   - The condition `i <= bound` ensures that we stop iterating once `x^i` becomes greater than `bound`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> powerfulIntegers(int x, int y, int bound) {
+	```
+	This is the function header where `x`, `y`, and `bound` are the input parameters. It defines the function that will generate all powerful integers.
 
-```cpp
-            for(int j = 1; i + j <= bound; j *= y) {
-```
-4. **Inner Loop for Powers of `y`**:
-   - For each power of `x`, we start an inner loop to iterate over the powers of `y`. Initially, `j = 1` represents `y^0`. We multiply `j` by `y` in each iteration, generating subsequent powers of `y`.
-   - The loop continues as long as the sum of `i + j` is less than or equal to `bound`.
+2. **Set Initialization**
+	```cpp
+	    unordered_set<int> s;
+	```
+	A set `s` is initialized to store the unique powerful integers found during the process.
 
-```cpp
-                s.insert(i + j);
-```
-5. **Insert Sum into Set**:
-   - For each valid pair of powers of `x` and `y` (i.e., where `i + j <= bound`), we insert the sum `i + j` into the set `s`. This ensures that only unique sums are stored, as the set does not allow duplicate values.
+3. **Outer Loop**
+	```cpp
+	    for(int i = 1; i <= bound; i *= x) {
+	```
+	Start a loop with `i` initialized to 1. It will multiply `i` by `x` in each iteration to generate powers of `x` up to the bound.
 
-```cpp
-                if(y == 1) break;
-```
-6. **Break if `y == 1`**:
-   - If `y == 1`, the powers of `y` will always be `1` (since `y^j = 1` for all `j`). In this case, the inner loop will keep adding the same value (`i + 1`) to the set. Thus, we break the inner loop early to avoid redundant calculations.
+4. **Inner Loop**
+	```cpp
+	        for(int j = 1; i + j <= bound; j *= y) {
+	```
+	Start an inner loop with `j` initialized to 1. It multiplies `j` by `y` to generate powers of `y` while ensuring that the sum `i + j` does not exceed the bound.
 
-```cpp
-            if(x == 1) break;
-```
-7. **Break if `x == 1`**:
-   - Similarly, if `x == 1`, the powers of `x` will always be `1` (since `x^i = 1` for all `i`). Thus, we break the outer loop early as further iterations of `i` will be unnecessary.
+5. **Set Insertion**
+	```cpp
+	            s.insert(i + j);
+	```
+	Add the sum of `i + j` to the set `s`. This ensures all combinations of `x^i + y^j` are stored without duplicates.
 
-```cpp
-        return vector<int>(s.begin(), s.end());
-```
-8. **Convert Set to Vector**:
-   - After collecting all unique sums, we return the result as a vector. The unordered set `s` is converted to a vector using its iterator range (`s.begin()` to `s.end()`), and this vector is returned as the final result.
+6. **Break Condition**
+	```cpp
+	            if(y == 1) break;
+	```
+	If `y` is 1, the loop breaks early because further powers of `y` will always be 1, leading to redundant results.
 
-```cpp
-    }
-};
-```
-9. **End of Function and Class**:
-   - The function ends, and the solution is complete.
+7. **Outer Loop Break**
+	```cpp
+	        if(x == 1) break;
+	```
+	If `x` is 1, the outer loop breaks early because further powers of `x` will always be 1, leading to redundant results.
 
-### Complexity
+8. **Return Statement**
+	```cpp
+	    return vector<int>(s.begin(), s.end());
+	```
+	Convert the set `s` into a vector and return it as the result, containing all the unique powerful integers.
 
-- **Time Complexity**:
-  - The time complexity is **O(log(bound) * log(bound))**, where `log(bound)` represents the number of iterations for `x^i` and `y^j` respectively. 
-  - The outer loop runs for the powers of `x` (i.e., `log_x(bound)`), and for each power of `x`, the inner loop runs for the powers of `y` (i.e., `log_y(bound)`). Thus, the total time complexity is approximately the product of these two logarithms.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(bound))
+- **Average Case:** O(log(bound)^2)
+- **Worst Case:** O(log(bound)^2)
 
-- **Space Complexity**:
-  - The space complexity is **O(k)**, where `k` is the number of unique sums that are less than or equal to `bound`. This is because the unordered set `s` stores all unique results, and the resulting vector will also have a size of `k`.
+The worst case involves nested loops iterating logarithmically with respect to x and y.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-This solution efficiently computes all powerful integers that can be expressed as `x^i + y^j` without exceeding the given bound. By using nested loops for powers of `x` and `y`, and leveraging an unordered set to ensure uniqueness, the approach guarantees that only valid and unique sums are considered. The algorithm handles edge cases where either `x` or `y` is `1` by breaking early from loops, preventing unnecessary calculations. With logarithmic time complexity with respect to the bound, this solution is efficient and scalable for large inputs.
+Space complexity is determined by the size of the set storing results, which is O(n), where n is the number of unique results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/powerful-integers/description/)
 

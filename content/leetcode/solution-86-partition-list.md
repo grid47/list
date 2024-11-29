@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "KT1iUciJr4g"
 youtube_upload_date="2021-02-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/KT1iUciJr4g/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,168 +28,186 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/KT1iUciJr4g/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the head of a linked list and a value x, partition the list such that all nodes with values less than x appear before nodes with values greater than or equal to x. The relative order of the nodes in each partition should be preserved.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the head of a singly linked list and an integer x. The linked list contains nodes with integer values.
+- **Example:** `Input: head = [6,2,5,3,8,1], x = 5`
+- **Constraints:**
+	- The number of nodes in the list is between 0 and 200.
+	- -100 <= Node.val <= 100
+	- -200 <= x <= 200
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* partition(ListNode* head, int x) {
-        
-        ListNode* p1 = new ListNode(0);
-        ListNode* p2 = new ListNode(0);        
-        
-        ListNode* ans = p1, *r = p2;
-        
-        while(head) {
-            if(head->val < x) {
-                p1->next = new ListNode(head->val);
-                p1 = p1->next;
-            } else {
-                p2->next = new ListNode(head->val);
-                p2 = p2->next;                
-            }
-            head = head->next;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should return the head of the partitioned linked list, where nodes less than x appear first, followed by nodes greater than or equal to x. The relative order of nodes in each partition should be preserved.
+- **Example:** `Output: [2,3,1,6,5,8]`
+- **Constraints:**
+	- The list should maintain the relative order of elements within each partition.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To partition the linked list around the given value x such that all nodes with values less than x come before those with values greater than or equal to x, preserving the original order of the nodes.
+
+- Create two separate lists: one for values less than x, and one for values greater than or equal to x.
+- Traverse the original list, and for each node, append it to the appropriate list based on its value.
+- Once the traversal is complete, merge the two lists by connecting the last node of the first list to the head of the second list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list will always be a valid linked list with the specified range of values.
+- The partitioning will maintain the relative order of nodes within each partition.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [6,2,5,3,8,1], x = 5`  \
+  **Explanation:** The list is partitioned into nodes less than 5 (2, 3, 1) and nodes greater than or equal to 5 (6, 5, 8), maintaining their relative order.
+
+- **Input:** `Input: head = [4, 2, 7, 3], x = 5`  \
+  **Explanation:** Nodes less than 5 (4, 2, 3) appear first, followed by nodes greater than or equal to 5 (7). The relative order of each partition is preserved.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we create two separate linked lists: one for nodes with values less than x, and one for nodes with values greater than or equal to x. After traversing the input list, we merge these two lists together to form the final partitioned list.
+
+### Initial Thoughts 💭
+- We can easily partition the list by separating the nodes into two lists based on their value relative to x.
+- The challenge is to ensure that the relative order of nodes in each partition is maintained.
+- By iterating through the original list and adding nodes to two new lists, we can preserve the order and later merge the lists together.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input linked list is empty (head is null), the output should also be null.
+- Ensure the solution can handle up to 200 nodes efficiently.
+- If all nodes have values less than x or greater than or equal to x, the list should still maintain its relative order.
+- The solution must not modify the relative order of nodes within each partition.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* partition(ListNode* head, int x) {
+    ListNode *dummy1 = new ListNode(0), *dummy2 = new ListNode(0);
+    ListNode *p1 = dummy1, *p2 = dummy2;
+
+    while (head) {
+        if (head->val < x) {
+            p1->next = head;
+            p1 = p1->next;
+        } else {
+            p2->next = head;
+            p2 = p2->next;
         }
-
-        p1->next = r->next;
-        return ans->next;
+        head = head->next;
     }
-};
-{{< /highlight >}}
----
 
-### 📝 **Partitioning a Singly Linked List**
-
-In this problem, we are given a singly linked list and an integer `x`. The task is to partition the list such that:
-
-- All nodes with values less than `x` appear before nodes with values greater than or equal to `x`.
-- The relative order of nodes in each partition should remain unchanged.
-
-The goal is to return the head of the newly partitioned linked list.
-
-### 🔍 **Approach**
-
-To solve this problem efficiently, we use a **two-pointer approach** by maintaining two separate linked lists:
-1. One list will store nodes with values **less than `x`**.
-2. The other list will store nodes with values **greater than or equal to `x`**.
-
-At the end of the partitioning process, we merge the two lists into one, maintaining the order as required.
-
-### 🧑‍💻 **Step-by-Step Code Breakdown**
-
-#### Step 1: Define the `ListNode` Structure
-
-```cpp
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-```
-
-- The `ListNode` structure represents a node in the singly linked list.
-- It has two fields:
-  - `val`: stores the value of the node.
-  - `next`: a pointer to the next node in the list.
-- There are three constructors:
-  - The default constructor initializes `val` to 0 and `next` to `nullptr`.
-  - The second constructor initializes `val` to the given value and sets `next` to `nullptr`.
-  - The third constructor initializes both `val` and `next` with the given arguments.
-
-#### Step 2: Create Two New Lists to Partition the Original List
-
-```cpp
-ListNode* p1 = new ListNode(0);
-ListNode* p2 = new ListNode(0);
-ListNode* ans = p1, *r = p2;
-```
-
-- Two new dummy nodes, `p1` and `p2`, are created. These will help us build two separate lists:
-  - `p1`: Stores nodes with values **less than `x`**.
-  - `p2`: Stores nodes with values **greater than or equal to `x`**.
-- `ans` is a pointer to `p1`, which will eventually point to the head of the resulting partitioned list.
-- `r` is a pointer to `p2`, used to link the second list to the first.
-
-#### Step 3: Traverse the Input List and Partition the Nodes
-
-```cpp
-while(head) {
-    if(head->val < x) {
-        p1->next = new ListNode(head->val);
-        p1 = p1->next;
-    } else {
-        p2->next = new ListNode(head->val);
-        p2 = p2->next;
-    }
-    head = head->next;
+    p2->next = nullptr;
+    p1->next = dummy2->next;
+    return dummy1->next;
 }
 ```
 
-- We iterate through the input list starting from the `head` pointer.
-- For each node:
-  - If the node's value is less than `x`, it’s added to the list represented by `p1` (nodes with values less than `x`).
-  - If the node's value is greater than or equal to `x`, it’s added to the list represented by `p2` (nodes with values greater than or equal to `x`).
-- After adding the node, the corresponding pointer (`p1` or `p2`) is moved to the next node in the respective list.
+This code partitions a linked list around a given value `x`. Nodes with values less than `x` come before nodes with values greater than or equal to `x`.
 
-#### Step 4: Merge the Two Lists
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* partition(ListNode* head, int x) {
+	```
+	Declares a function `partition` that takes a linked list `head` and a pivot value `x` as input and returns the head of the partitioned list.
 
-```cpp
-p1->next = r->next;
-```
+2. **Variable Initialization**
+	```cpp
+	    ListNode *dummy1 = new ListNode(0), *dummy2 = new ListNode(0);
+	```
+	Creates two dummy nodes `dummy1` and `dummy2` to act as the heads of two new lists: one for nodes less than `x` and one for nodes greater than or equal to `x`.
 
-- After traversing the entire input list, we merge the two partitions.
-- We link `p1->next` to `r->next`, which points to the head of the second list (`p2`).
-- This connects the two lists together, with all nodes less than `x` appearing before nodes greater than or equal to `x`.
+3. **Variable Initialization**
+	```cpp
+	    ListNode *p1 = dummy1, *p2 = dummy2;
+	```
+	Initializes pointers `p1` and `p2` to point to the dummy nodes.
 
-#### Step 5: Return the New Head of the Partitioned List
+4. **Loop Iteration**
+	```cpp
+	    while (head) {
+	```
+	Iterates through the original linked list.
 
-```cpp
-return ans->next;
-```
+5. **Conditional**
+	```cpp
+	        if (head->val < x) {
+	```
+	Checks if the current node's value is less than `x`.
 
-- The result list is now starting from `ans->next`, because `ans` is a dummy node.
-- We return `ans->next` as the new head of the partitioned list.
+6. **Node Manipulation**
+	```cpp
+	            p1->next = head;
+	```
+	Appends the current node to the first list.
 
-### ⏱️ **Time and Space Complexity**
+7. **Pointer Update**
+	```cpp
+	            p1 = p1->next;
+	```
+	Moves the `p1` pointer to the next node in the first list.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the number of nodes in the linked list.
-  - We traverse the entire list once to partition it into two separate lists.
-  - Merging the two lists is a constant-time operation.
-  - Thus, the time complexity is linear in terms of the number of nodes.
+8. **Conditional**
+	```cpp
+	        } else {
+	```
+	If the current node's value is greater than or equal to `x`.
 
-#### Space Complexity:
-- **O(n)**, where `n` is the number of nodes in the linked list.
-  - We create two new linked lists (one for nodes less than `x` and one for nodes greater than or equal to `x`).
-  - Each new node requires additional space, so the space complexity is proportional to the number of nodes in the input list.
+9. **Node Manipulation**
+	```cpp
+	            p2->next = head;
+	```
+	Appends the current node to the second list.
 
-### 🎯 **Conclusion**
+10. **Pointer Update**
+	```cpp
+	            p2 = p2->next;
+	```
+	Moves the `p2` pointer to the next node in the second list.
 
-This solution efficiently partitions a singly linked list around a given value `x` using a two-pointer approach. By maintaining two separate lists and merging them at the end, we ensure that the order of nodes is preserved, and the time and space complexity remain linear (`O(n)`), making this approach both optimal and scalable.
+11. **Pointer Update**
+	```cpp
+	        head = head->next;
+	```
+	Moves to the next node in the original linked list.
 
-**Key Takeaways:**
-- The algorithm efficiently partitions the linked list into two parts.
-- The relative order of nodes is maintained within each partition.
-- A dummy node is used to simplify list manipulation.
-- The solution operates in linear time and space, making it ideal for large lists.
+12. **Node Manipulation**
+	```cpp
+	    p2->next = nullptr;
+	```
+	Sets the `next` pointer of the last node in the second list to `null`.
 
----
+13. **Node Manipulation**
+	```cpp
+	    p1->next = dummy2->next;
+	```
+	Connects the two lists by setting the `next` pointer of the last node in the first list to the head of the second list.
 
-#### 🌟 **Final Thoughts**: Keep practicing, keep coding!
+14. **Return**
+	```cpp
+	    return dummy1->next;
+	```
+	Returns the head of the partitioned list, which is the `next` node of `dummy1`.
 
-Solving problems like these not only sharpens your problem-solving skills but also enhances your ability to implement efficient algorithms. Keep learning and improving every day! ✨
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of nodes in the list. We perform a single pass through the list.
+- **Average Case:** O(n)
+- **Worst Case:** O(n), since we traverse the list once and then merge the partitions.
+
+The time complexity is linear because we iterate through the list once to partition the nodes.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n), where n is the number of nodes in the list, as we create two new lists to hold the partitions.
+
+The space complexity is linear due to the need to store the two partitioned lists.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-list/description/)
 

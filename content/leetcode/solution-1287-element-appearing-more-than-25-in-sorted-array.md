@@ -14,16 +14,60 @@ img_src = ""
 youtube = "G74W8v2yVjY"
 youtube_upload_date="2020-01-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/G74W8v2yVjY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a sorted integer array, find and return the integer that occurs more than 25% of the time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array sorted in non-decreasing order.
+- **Example:** `Input: arr = [1,2,2,6,6,6,6,7,10]`
+- **Constraints:**
+	- 1 <= arr.length <= 104
+	- 0 <= arr[i] <= 105
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function should return the integer that appears more than 25% of the time in the array.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- It is guaranteed that exactly one integer will appear more than 25% of the time.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the element that appears more than 25% of the time in the array.
+
+- Traverse through the array to count the frequency of each integer.
+- Check if any integer appears more than one-fourth of the array length.
+- Return the integer that satisfies the condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is already sorted in non-decreasing order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [1,2,2,6,6,6,6,7,10]`  \
+  **Explanation:** In this case, the integer '6' appears 4 times, which is more than 25% of the length of the array, so the function returns '6'.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to count the occurrences of each integer in the array and check if any integer appears more than 25% of the time.
+
+### Initial Thoughts 💭
+- Since the array is sorted, repeated elements will be adjacent to each other, making it easier to count occurrences.
+- A hashmap or simple iteration through the array could be used to count the occurrences of each integer.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array will never occur since the minimum length of the array is 1.
+- The solution should efficiently handle arrays with lengths up to 10^4.
+- In the case where all elements are the same, that element will automatically be the result.
+- Since exactly one element appears more than 25% of the time, there are no corner cases where no element satisfies the condition.
+{{< dots >}}
+## Code 💻
+```cpp
 	int findSpecialInteger(vector<int>& arr) {
 		unordered_map<int, int> m;
 		for(int i = 0; i < arr.size(); i++){
@@ -36,71 +80,77 @@ public:
 		}
 		return arr[0];
 	}
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The task is to find an integer in a given array that appears more than 25% of the time (or 1/4th of the size of the array). This integer is termed as a "special integer." If no such integer exists, the function should return any integer from the array.
-
-For example, given the input array `[1, 2, 2, 3, 3, 3, 4]`, the integer `2` appears twice in an array of size 7, which is not greater than 25%. However, if the input were `[1, 1, 2, 3, 1]`, the integer `1` appears three times in an array of size 5, which is greater than 25%. Thus, `1` is the special integer in this case.
-
-### Approach
-To solve this problem, we can use a hash map (or unordered map) to count the occurrences of each integer in the array. Here’s a step-by-step breakdown of the approach:
-
-1. **Counting Frequencies**: Traverse through the array and count the frequency of each integer using a hash map.
-2. **Checking Conditions**: After counting, iterate through the hash map to check if any integer's count exceeds `n/4`, where `n` is the size of the array.
-3. **Return Result**: Return the integer that meets the condition. If no such integer exists, return the first element of the array.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int findSpecialInteger(vector<int>& arr) {
-        unordered_map<int, int> m;
 ```
-- **Lines 1-3**: The class `Solution` is defined, and the method `findSpecialInteger` begins. An unordered map `m` is declared to store the frequency of each integer in the array.
 
-```cpp
-        for(int i = 0; i < arr.size(); i++){
-            m[arr[i]]++;
-        }
-```
-- **Lines 4-6**: A for loop iterates over each element in the input array `arr`:
-  - For each element, its count in the unordered map `m` is incremented. This builds a frequency distribution of all integers in `arr`.
+This function finds the integer that appears more than 25% of the time in a sorted array using a frequency map and a linear scan.
 
-```cpp
-        for(auto i : m){
-            if(i.second > arr.size() / 4){
-                return i.first;
-            }
-        }
-```
-- **Lines 7-12**: Another loop iterates over the key-value pairs in the unordered map:
-  - If the count (value) of any integer (key) exceeds one-fourth of the size of `arr`, that integer is returned immediately as the special integer.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+		int findSpecialInteger(vector<int>& arr) {
+	```
+	Defines a function to find the special integer that appears more than 25% of the time.
 
-```cpp
-        return arr[0];
-    }
-};
-```
-- **Lines 13-15**: If no integer satisfies the condition after checking all entries in the map, the function returns the first element of the array as a fallback.
+2. **Data Structure**
+	```cpp
+			unordered_map<int, int> m;
+	```
+	Declares an unordered map to store the frequency of each integer in the array.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The time complexity of this solution is \(O(n)\), where \(n\) is the size of the input array. This is because we traverse the array twice: once for counting frequencies and once for checking the conditions.
+3. **Loop Start**
+	```cpp
+			for(int i = 0; i < arr.size(); i++){
+	```
+	Iterates through the array to populate the frequency map.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(k)\), where \(k\) is the number of unique integers in the array. In the worst case, if all integers are unique, \(k\) can be equal to \(n\), making the space complexity \(O(n)\).
+4. **Increment Frequency**
+	```cpp
+				m[arr[i]]++;
+	```
+	Increments the count of the current integer in the frequency map.
 
-### Conclusion
-The `findSpecialInteger` function effectively identifies a special integer in a given array using a hash map to track the frequency of each integer. This approach ensures that we efficiently find the integer that appears more than 25% of the time while maintaining an optimal time complexity of \(O(n)\).
+5. **Check Frequencies**
+	```cpp
+			for(auto i : m){
+	```
+	Iterates through the frequency map to find the special integer.
 
-By utilizing unordered maps, the solution is straightforward and elegant, making it a suitable choice for similar problems involving frequency counts in arrays. This method is also a good practice for tackling problems related to finding significant elements based on their occurrence in datasets, which is a common task in data analysis and competitive programming.
+6. **Condition Check**
+	```cpp
+				if(i.second > arr.size() / 4){
+	```
+	Checks if the current integer's frequency exceeds 25% of the array size.
 
-This explanation not only clarifies the logic behind the solution but also provides insight into algorithm design and complexity analysis, making it a valuable reference for developers and learners in the field of computer science.
+7. **Return Value**
+	```cpp
+					return i.first;
+	```
+	Returns the integer if it satisfies the condition.
+
+8. **Default Return**
+	```cpp
+			return arr[0];
+	```
+	Returns the first element as a default value if no special integer is found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - The best case is when the array is short and the element is immediately found.
+- **Average Case:** O(n) - In the average case, we iterate through the entire array to count occurrences.
+- **Worst Case:** O(n) - The worst case involves iterating through the entire array and counting all frequencies.
+
+The time complexity is O(n) because we have to process each element in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1) - If only one unique element appears, the space required will be minimal.
+- **Worst Case:** O(n) - The worst case occurs when all elements in the array are unique, so we store the frequency of all elements.
+
+The space complexity is O(n) in the worst case because we need to store the frequency of each element in the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array/description/)
 

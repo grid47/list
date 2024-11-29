@@ -14,75 +14,171 @@ img_src = ""
 youtube = "LkSQby_5YMg"
 youtube_upload_date="2022-02-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/LkSQby_5YMg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array nums consisting of n positive integers. The array nums is called alternating if nums[i - 2] == nums[i] and nums[i - 1] != nums[i] for all valid i. In one operation, you can choose an index i and change nums[i] into any positive integer. Your task is to return the minimum number of operations required to make the array alternating.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer array nums containing positive integers.
+- **Example:** `[4, 1, 4, 2, 3, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer, which represents the minimum number of operations required to make the array alternating.
+- **Example:** `3`
+- **Constraints:**
+	- The output must be an integer value representing the number of operations.
 
-    array<int, 3> top2Freq(vector<int>& nums, int start) {
-        int first = 0, second = 0, cnt[100001] = {};
-        for(int i = start; i < nums.size(); i += 2) {
-            if(++cnt[nums[i]] >= cnt[first]) {
-                if(nums[i] != first)
-                    second = first;
-                first = nums[i];
-            } else if(cnt[nums[i]] > cnt[second]) second = nums[i];
-        }
-        return {first, cnt[first], cnt[second] };
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of operations required to make the array alternate by modifying its elements.
+
+- Find the most frequent elements at even and odd indices separately.
+- Determine the number of operations based on the most frequent elements and the number of required changes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains only positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[4, 1, 4, 2, 3, 4]`  \
+  **Explanation:** In this example, to make the array alternating, we change the numbers at the odd indices to match the most frequent numbers at the even indices. This requires 3 operations.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to count the most frequent elements at the even and odd indexed positions and minimize the number of changes required to make the array alternating.
+
+### Initial Thoughts 💭
+- By focusing on the most frequent elements at even and odd indices, we can minimize the number of changes needed.
+- We need to handle two cases: when the most frequent elements at even and odd indices are the same, and when they are different.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will not be empty as per the constraints.
+- Ensure the solution handles large arrays efficiently, with lengths up to 10^5.
+- Handle cases where all elements in the array are the same.
+- Make sure the solution works within the provided input constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+
+array<int, 3> top2Freq(vector<int>& nums, int start) {
+    int first = 0, second = 0, cnt[100001] = {};
+    for(int i = start; i < nums.size(); i += 2) {
+        if(++cnt[nums[i]] >= cnt[first]) {
+            if(nums[i] != first)
+                second = first;
+            first = nums[i];
+        } else if(cnt[nums[i]] > cnt[second]) second = nums[i];
     }
+    return {first, cnt[first], cnt[second] };
+}
 
-    int minimumOperations(vector<int>& nums) {
-        auto ev = top2Freq(nums, 0), od = top2Freq(nums, 1);
-        return nums.size() - (ev[0] != od[0]? ev[1] + od[1] : max(ev[1]+ od[2], ev[2] + od[1]));
-    }
-};
-{{< /highlight >}}
----
+int minimumOperations(vector<int>& nums) {
+    auto ev = top2Freq(nums, 0), od = top2Freq(nums, 1);
+    return nums.size() - (ev[0] != od[0]? ev[1] + od[1] : max(ev[1]+ od[2], ev[2] + od[1]));
+}
+```
 
-### Problem Statement
-The problem involves finding the minimum number of operations needed to make an array `nums` such that no two adjacent elements are the same. An operation is defined as changing an element in the array to a different value. The goal is to minimize these changes while ensuring that adjacent elements have different values.
+This code defines two functions: `top2Freq`, which finds the two most frequent elements in even and odd indexed positions of a vector, and `minimumOperations`, which calculates the minimum number of operations required to make the two most frequent elements equal across the entire array.
 
-### Approach
-The approach to solve this problem includes the following key steps:
-1. **Divide and conquer**:
-   - Separate the even-indexed and odd-indexed elements of the array into two groups.
-2. **Find top frequencies**:
-   - Use the `top2Freq` function to determine the two most frequent numbers and their counts for both even-indexed and odd-indexed elements.
-3. **Calculate minimal operations**:
-   - If the most frequent elements in the even and odd groups are different, the optimal solution is to keep these elements, minimizing changes.
-   - If the most frequent elements in both groups are the same, consider swapping the second-most frequent number in one of the groups to avoid adjacent duplicates and maximize the number of unchanged elements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	array<int, 3> top2Freq(vector<int>& nums, int start) {
+	```
+	This defines the function `top2Freq`, which takes a vector of integers and an integer `start` as input and returns an array of three integers: the two most frequent elements and their respective counts.
 
-### Code Breakdown (Step by Step)
-1. **Helper Function `top2Freq`**:
-   - The function takes the `nums` array and a `start` index (0 for even, 1 for odd).
-   - It iterates through `nums` starting from `start`, incrementing by 2 to gather frequencies of either even or odd indexed elements.
-   - A frequency array `cnt` is used to count occurrences of each number up to `100,000`.
-   - The function returns an array containing:
-     - The most frequent number (`first`).
-     - The count of the most frequent number.
-     - The count of the second most frequent number (`second`).
+2. **Variable Initialization**
+	```cpp
+	    int first = 0, second = 0, cnt[100001] = {};
+	```
+	Here, two variables `first` and `second` are initialized to 0, and an array `cnt` is created to store the frequency of elements up to index 100000.
 
-2. **Main Function `minimumOperations`**:
-   - Calls `top2Freq` for both even and odd indexed positions to obtain their most and second most frequent numbers.
-   - Checks if the most frequent numbers from even and odd positions (`ev[0]` and `od[0]`) are different:
-     - If different, the number of operations needed is the total length of `nums` minus the sum of their counts (`ev[1] + od[1]`).
-     - If the same, it calculates the best possible combination by considering using the second-most frequent number from either group (`max(ev[1] + od[2], ev[2] + od[1])`).
+3. **For Loop**
+	```cpp
+	    for(int i = start; i < nums.size(); i += 2) {
+	```
+	The `for` loop iterates through the `nums` array, starting from the given `start` index and moving in steps of 2, to handle either even or odd indexed positions.
 
-3. **Return Value**:
-   - Returns the minimum number of operations needed to make the array valid by subtracting the highest achievable sum of unchanged elements from `nums.size()`.
+4. **Frequency Count Update**
+	```cpp
+	        if(++cnt[nums[i]] >= cnt[first]) {
+	```
+	The count of the current element `nums[i]` is incremented, and if its frequency is greater than or equal to the frequency of `first`, the element is considered for the top two frequent elements.
 
-### Complexity
-- **Time Complexity**: O(n), where `n` is the length of `nums`. The `top2Freq` function runs in O(n) as it scans half of `nums` in each call. The main function calls `top2Freq` twice, keeping the time complexity linear.
-- **Space Complexity**: O(1) for auxiliary space, apart from the constant-sized array `cnt` used for counting frequencies. The space used by this array is independent of `n`.
+5. **First Element Assignment**
+	```cpp
+	            if(nums[i] != first)
+	```
+	If the current element is not the same as the most frequent element (`first`), the previous `first` becomes `second`.
 
-### Conclusion
-This solution is an optimal approach for determining the minimum number of operations to make an array such that no two adjacent elements are the same. By breaking down the array into even and odd indexed elements and calculating their most and second-most frequent values, the solution efficiently evaluates the best strategy for minimizing operations. This method leverages frequency counting and careful selection logic to ensure an optimal result, with clear and maintainable code logic.
+6. **Second Element Assignment**
+	```cpp
+	                second = first;
+	```
+	The previous `first` value is now assigned to `second`, since we have found a new most frequent element.
+
+7. **First Element Update**
+	```cpp
+	            first = nums[i];
+	```
+	The current element `nums[i]` becomes the new most frequent element (`first`).
+
+8. **Else Condition**
+	```cpp
+	        } else if(cnt[nums[i]] > cnt[second]) second = nums[i];
+	```
+	If the current element's frequency is greater than that of `second`, then `second` is updated with the current element.
+
+9. **Return Statement**
+	```cpp
+	    return {first, cnt[first], cnt[second] };
+	```
+	The function returns an array containing the most frequent element `first`, its frequency `cnt[first]`, and the second most frequent element `second`.
+
+10. **Function Definition**
+	```cpp
+	int minimumOperations(vector<int>& nums) {
+	```
+	This defines the function `minimumOperations`, which calculates the minimum number of operations required to make the two most frequent elements equal across the entire array.
+
+11. **Calling top2Freq**
+	```cpp
+	    auto ev = top2Freq(nums, 0), od = top2Freq(nums, 1);
+	```
+	The function calls `top2Freq` twice, once for even indexed positions (`ev`) and once for odd indexed positions (`od`), storing the results in `ev` and `od` respectively.
+
+12. **Return Statement**
+	```cpp
+	    return nums.size() - (ev[0] != od[0]? ev[1] + od[1] : max(ev[1]+ od[2], ev[2] + od[1]));
+	```
+	The function calculates the minimum operations needed by checking if the most frequent elements of even and odd indexed positions are the same or different, and returns the calculated number of operations.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) as we are scanning through the array and calculating frequencies.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we need to store the frequency counts of the elements in the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/description/)
 

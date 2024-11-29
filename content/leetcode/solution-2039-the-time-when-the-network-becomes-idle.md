@@ -14,134 +14,100 @@ img_src = ""
 youtube = "9URBYJ62lyY"
 youtube_upload_date="2021-10-16"
 youtube_thumbnail="https://i.ytimg.com/vi/9URBYJ62lyY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are managing a network of servers connected by communication channels. One server, labeled as 0, acts as the master server, while the others are data servers. Each data server sends a message to the master server at the start and waits for a reply. The reply travels back via the same route the message took. If a server does not receive a reply within a specific period (defined by its patience value), it resends the message. The goal is to determine when the network will become idle, meaning there are no active messages being transmitted or received.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The network is represented by edges and patience values for each server.
+- **Example:** `edges = [[0,1],[1,2]], patience = [0,3,2]`
+- **Constraints:**
+	- n == patience.length
+	- 2 <= n <= 10^5
+	- patience[0] == 0
+	- 1 <= patience[i] <= 10^5 for 1 <= i < n
+	- 1 <= edges.length <= min(10^5, n * (n - 1) / 2)
+	- edges[i].length == 2
+	- 0 <= ui, vi < n
+	- ui != vi
+	- No duplicate edges exist, and all servers are connected.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int networkBecomesIdle(vector<vector<int>>& edges, vector<int>& patience) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function returns the earliest time (in seconds) when the network becomes idle.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The returned time is a positive integer.
 
-        int n = patience.size();        
-        vector<vector<int>> grid(n);
-        
-        for(auto e: edges) {
-            grid[e[0]].push_back(e[1]);
-            grid[e[1]].push_back(e[0]);
-        }
-        
-        vector<int> sd(n, INT_MAX); // shortest distance(sd) to master;
-        
-        sd[0] = 0;
-        
-        queue<int> q;
-        vector<int> vis(n, 0);
-        q.push(0);
-        vis[0] = 1;
-        
-        int t = 0;
-        while(!q.empty()) {
-            int sz = q.size();
-                t++;            
-            while(sz--) {
-                int node = q.front();
-                q.pop();
-                for(auto it: grid[node]) {
-                    if(vis[it]) continue;
-                    vis[it] = true;
-                    sd[it] = t;
-                    q.push(it);
-                }
-            }
-        }
-        
-        // for(int i = 0; i < n; i++)
-        //     cout << sd[i] << " ";
-        
-        int mx = 0;
-        for(int i = 0; i < n; i++) {
-            int dist = 2 * sd[i];
-            int pat = patience[i];
-            if(pat >= dist) {
-                mx = max(mx, dist);
-            } else {
-                
-                int mod = dist % pat == 0? pat: dist % pat;
-                
-                mx = max(mx, dist - mod + dist);
-            }
-            
-        }
-        return mx + 1;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the time at which the last reply is received, accounting for resending rules based on patience values.
 
-### Problem Statement
+- Construct a graph representation of the network using the edges.
+- Perform a Breadth-First Search (BFS) to compute the shortest distance from the master server (0) to all other servers.
+- For each server, calculate the round-trip time for its messages.
+- Determine the last time a server resends its message before the network becomes idle.
+- Find the maximum time across all servers and return it as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- Messages travel optimally between servers using the shortest path.
+- Replies are sent instantly upon reaching the master server.
+- Servers only resend messages if they do not receive a reply within their patience interval.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `edges = [[0,1],[1,2]], patience = [0,3,2]`  \
+  **Explanation:** Server 1 sends its message and receives a reply by second 2, so no resends occur. Server 2 resends its message once before receiving a reply by second 4. The network becomes idle at second 7.
 
-The task is to determine when a network will become "idle." Given a network represented by nodes and edges, where one node (the master server) sends data to other nodes, we want to calculate the time it will take for all data exchanges to stop, based on the response pattern of each node. Specifically, each node has a patience level, which dictates how often it re-sends a message if it hasn’t received a reply. The goal is to find the earliest time when the network is completely idle, meaning all data exchanges have ceased.
+- **Input:** `edges = [[0,1],[0,2],[1,2]], patience = [0,5,5]`  \
+  **Explanation:** Both servers 1 and 2 receive replies by second 2. No resends occur, and the network becomes idle at second 3.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution uses BFS to compute shortest distances, followed by calculations of resending times and idle times for each server.
 
-To solve this, we break down the problem into several key steps. Here’s a high-level overview of the approach:
+### Initial Thoughts 💭
+- Shortest distance is crucial for determining the timing of replies.
+- Servers with higher patience values may not resend messages often, reducing overall activity in the network.
+- Using a BFS ensures efficient computation of shortest distances for all servers.
+- Patience values affect the timing of last resends, which determines the idle time.
+{{< dots >}}
+### Edge Cases 🌐
+- None, as input is guaranteed to have at least two servers.
+- A fully connected network with maximum n = 10^5 servers.
+- All servers except the master server have the same patience value.
+- Servers are connected in a straight line.
+- No duplicate edges and all servers are connected.
+{{< dots >}}
+## Code 💻
+```cpp
+int networkBecomesIdle(vector<vector<int>>& edges, vector<int>& patience) {
 
-1. **Graph Representation**: Represent the network as a graph, where each node is a computer, and edges represent bidirectional communication links. We use an adjacency list to model this graph.
-2. **Shortest Distance Calculation**: Since the master server (node 0) needs to send data to all other nodes, we calculate the shortest distance from the master server to each node. We perform a Breadth-First Search (BFS) starting from the master server to find the shortest path to each node.
-3. **Calculate Message Return Times**: Using the distances computed in the previous step, we determine the time it takes for messages to travel to each node and back to the master server. For each node, the round-trip time is `2 * distance`.
-4. **Calculate Idle Time**: For each node, we check if its patience is greater than or equal to the round-trip time. If it is, the node will only send one message and wait for the reply. If not, it will keep re-sending messages according to its patience level until the first message reaches the node. Using these rules, we calculate the exact time the network will become idle.
-
-### Code Breakdown (Step by Step)
-
-Let’s walk through each part of the code in detail.
-
-1. **Class and Method Definition**: We define a class named `Solution` containing our main method `networkBecomesIdle`. This method takes two parameters: `edges`, which represents the network connections, and `patience`, which contains the patience levels of each node.
-
-    ```cpp
-    class Solution {
-    public:
-        int networkBecomesIdle(vector<vector<int>>& edges, vector<int>& patience) {
-    ```
-
-2. **Initialize Variables**: We initialize `n` as the number of nodes and `grid` as an adjacency list to represent the graph.
-
-    ```cpp
     int n = patience.size();        
     vector<vector<int>> grid(n);
-    ```
-
-3. **Build the Graph**: Using the `edges` list, we construct the adjacency list for the graph.
-
-    ```cpp
+    
     for(auto e: edges) {
         grid[e[0]].push_back(e[1]);
         grid[e[1]].push_back(e[0]);
     }
-    ```
-
-4. **Initialize Distance and Visited Arrays**: We set up an array `sd` to store the shortest distance from the master server to each node, initializing each entry to `INT_MAX` except for the master server (distance 0). We also initialize `vis`, an array to track visited nodes, and a queue `q` for BFS.
-
-    ```cpp
-    vector<int> sd(n, INT_MAX); // shortest distance to master;
+    
+    vector<int> sd(n, INT_MAX); // shortest distance(sd) to master;
+    
     sd[0] = 0;
+    
     queue<int> q;
     vector<int> vis(n, 0);
     q.push(0);
     vis[0] = 1;
-    ```
-
-5. **Breadth-First Search (BFS)**: Using BFS, we calculate the shortest distance from the master server to each node.
-
-    ```cpp
+    
     int t = 0;
     while(!q.empty()) {
         int sz = q.size();
-        t++;            
+            t++;            
         while(sz--) {
             int node = q.front();
             q.pop();
@@ -153,13 +119,7 @@ Let’s walk through each part of the code in detail.
             }
         }
     }
-    ```
-
-6. **Calculate Idle Time for Each Node**: We iterate over each node and calculate the time the network becomes idle based on the node’s patience level and the round-trip time. For each node:
-   - If the patience level is greater than or equal to the round-trip time, we add this time to `mx`.
-   - Otherwise, we calculate the last time the node sends a message before receiving a response, adjusting the maximum idle time (`mx`) accordingly.
-
-    ```cpp
+    
     int mx = 0;
     for(int i = 0; i < n; i++) {
         int dist = 2 * sd[i];
@@ -167,27 +127,241 @@ Let’s walk through each part of the code in detail.
         if(pat >= dist) {
             mx = max(mx, dist);
         } else {
-            int mod = dist % pat == 0 ? pat : dist % pat;
+            
+            int mod = dist % pat == 0? pat: dist % pat;
+            
             mx = max(mx, dist - mod + dist);
         }
     }
-    ```
-
-7. **Return the Final Idle Time**: After looping through all nodes, we return `mx + 1`, accounting for the final message sent by the master server.
-
-    ```cpp
     return mx + 1;
-    }
-    ```
+}
+```
 
-### Complexity
+This function calculates the time when all nodes in a network become idle after communication. It computes the shortest distances from the source node, and based on the patience of each node, it determines when they will stop waiting for messages.
 
-- **Time Complexity**: The time complexity is \(O(n + m)\), where \(n\) is the number of nodes and \(m\) is the number of edges. BFS ensures that we visit each node and edge once.
-- **Space Complexity**: The space complexity is \(O(n + m)\) for the adjacency list and other auxiliary arrays.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int networkBecomesIdle(vector<vector<int>>& edges, vector<int>& patience) {
+	```
+	The function `networkBecomesIdle` takes two arguments: a list of edges representing the network and a list `patience` containing the patience level of each node. It returns the time when the entire network becomes idle.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	    int n = patience.size();        
+	```
+	The variable `n` stores the number of nodes in the network, determined by the size of the `patience` array.
 
-In summary, this solution efficiently calculates when a network becomes idle after all data exchanges cease. By using BFS to compute shortest distances and iterating over nodes to apply the patience rules, we achieve an optimal and clean solution. This approach balances careful timing and efficient graph traversal to meet the problem’s requirements. Thus, the method not only provides an accurate solution but also scales well with larger inputs, making it a powerful approach to network-related timing issues in graph-based problems.
+3. **Grid Initialization**
+	```cpp
+	    vector<vector<int>> grid(n);
+	```
+	The `grid` variable is initialized as a 2D vector to represent the network as an adjacency list, where each node points to its connected nodes.
+
+4. **Building Adjacency List**
+	```cpp
+	    for(auto e: edges) {
+	```
+	This loop iterates over all edges in the network and constructs the adjacency list for each node by adding the connected nodes.
+
+5. **Adjacency List Population**
+	```cpp
+	        grid[e[0]].push_back(e[1]);
+	```
+	For each edge, the nodes are bidirectionally connected, so this line adds the destination node to the source node’s adjacency list.
+
+6. **Adjacency List Population**
+	```cpp
+	        grid[e[1]].push_back(e[0]);
+	```
+	Similarly, the destination node adds the source node to its adjacency list, completing the bidirectional connection.
+
+7. **Distance Initialization**
+	```cpp
+	    vector<int> sd(n, INT_MAX); // shortest distance(sd) to master;
+	```
+	The `sd` vector is initialized to store the shortest distance from the master node (node 0) to all other nodes, initially set to `INT_MAX` (infinity).
+
+8. **Distance Initialization**
+	```cpp
+	    sd[0] = 0;
+	```
+	The distance to the master node (node 0) is set to 0, as the master node is the starting point.
+
+9. **Queue Initialization**
+	```cpp
+	    queue<int> q;
+	```
+	A queue `q` is initialized for Breadth-First Search (BFS) to traverse the network.
+
+10. **Visited Initialization**
+	```cpp
+	    vector<int> vis(n, 0);
+	```
+	The `vis` vector is initialized to keep track of visited nodes during the BFS traversal.
+
+11. **Queue Push**
+	```cpp
+	    q.push(0);
+	```
+	The master node (node 0) is pushed into the queue to start the BFS traversal.
+
+12. **Visited Update**
+	```cpp
+	    vis[0] = 1;
+	```
+	The master node is marked as visited.
+
+13. **Time Initialization**
+	```cpp
+	    int t = 0;
+	```
+	The variable `t` tracks the time it takes for each node to receive a message during the BFS traversal.
+
+14. **BFS Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	This `while` loop runs as long as there are nodes in the queue, performing the BFS to compute shortest distances.
+
+15. **Queue Size**
+	```cpp
+	        int sz = q.size();
+	```
+	The variable `sz` stores the number of nodes in the current level of the BFS.
+
+16. **Time Increment**
+	```cpp
+	            t++;            
+	```
+	The time `t` is incremented as we move to the next level of the BFS.
+
+17. **BFS Inner Loop**
+	```cpp
+	        while(sz--) {
+	```
+	This inner loop iterates over each node in the current BFS level.
+
+18. **Node Processing**
+	```cpp
+	            int node = q.front();
+	```
+	The current node is retrieved from the front of the queue for processing.
+
+19. **Queue Pop**
+	```cpp
+	            q.pop();
+	```
+	The current node is removed from the queue.
+
+20. **Neighbor Traversal**
+	```cpp
+	            for(auto it: grid[node]) {
+	```
+	This loop iterates over all the neighbors of the current node.
+
+21. **Visited Check**
+	```cpp
+	                if(vis[it]) continue;
+	```
+	If a neighbor has already been visited, we skip it.
+
+22. **Visited Update**
+	```cpp
+	                vis[it] = true;
+	```
+	The neighbor is marked as visited.
+
+23. **Distance Update**
+	```cpp
+	                sd[it] = t;
+	```
+	The shortest distance to the neighbor is updated to the current time `t`.
+
+24. **Queue Push**
+	```cpp
+	                q.push(it);
+	```
+	The neighbor is added to the queue for further processing.
+
+25. **Max Time Calculation**
+	```cpp
+	    int mx = 0;
+	```
+	The variable `mx` will store the maximum time required for the last node to become idle.
+
+26. **Time Calculation Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This loop calculates the time for each node to become idle.
+
+27. **Distance to Time Calculation**
+	```cpp
+	        int dist = 2 * sd[i];
+	```
+	The time is calculated as twice the shortest distance because the message has to travel back and forth.
+
+28. **Patience Check**
+	```cpp
+	        int pat = patience[i];
+	```
+	The patience of each node is retrieved to determine how long they will wait for a message before becoming idle.
+
+29. **Patience Check Logic**
+	```cpp
+	        if(pat >= dist) {
+	```
+	If the node’s patience is greater than or equal to the distance, it will become idle after the message travels back and forth.
+
+30. **Max Time Update**
+	```cpp
+	            mx = max(mx, dist);
+	```
+	The maximum time is updated if this node’s time is greater than the previous maximum.
+
+31. **Patience Check Else**
+	```cpp
+	        } else {
+	```
+	If the node’s patience is less than the time required, it will become idle earlier.
+
+32. **Mod Time Calculation**
+	```cpp
+	            int mod = dist % pat == 0? pat: dist % pat;
+	```
+	The time calculation is adjusted based on the node’s patience and the message travel time.
+
+33. **Max Time Update**
+	```cpp
+	            mx = max(mx, dist - mod + dist);
+	```
+	The maximum time is updated based on the adjusted time calculation.
+
+34. **Return Statement**
+	```cpp
+	    return mx + 1;
+	```
+	The function returns the maximum time `mx` plus 1 to account for the last time unit.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m), where n is the number of servers and m is the number of edges.
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+BFS traversal and idle time calculation are linear in terms of servers and edges.
+
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+Graph representation and BFS queue storage dominate space usage.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-time-when-the-network-becomes-idle/description/)
 

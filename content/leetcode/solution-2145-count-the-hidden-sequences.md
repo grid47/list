@@ -14,125 +14,177 @@ img_src = ""
 youtube = "kEhFfpz-qps"
 youtube_upload_date="2022-01-22"
 youtube_thumbnail="https://i.ytimg.com/vi/kEhFfpz-qps/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array representing the differences between each pair of consecutive integers of a hidden sequence. You are also given two integers, lower and upper, which define an inclusive range that the elements of the hidden sequence can take. Your task is to determine the number of possible hidden sequences that fit the given differences and lie within the specified range.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the following elements: 
+- An integer array differences of size n (1 ≤ n ≤ 10^5), where differences[i] = hidden[i + 1] - hidden[i]. 
+- Two integers lower and upper (−10^5 ≤ lower ≤ upper ≤ 10^5) which specify the inclusive range of values the hidden sequence can contain.
+- **Example:** `For example, given differences = [2, -5, 3], lower = -4, upper = 6, we are tasked with finding the number of possible hidden sequences.`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- -10^5 <= differences[i] <= 10^5
+	- -10^5 <= lower <= upper <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfArrays(vector<int>& diff, long lower, long upper) {
-        // last - fist of n + 1 seq
-        
-        long mn = 0, mx = 0, x = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer that represents the number of valid hidden sequences that lie within the specified range, or 0 if no valid sequences exist.
+- **Example:** `For differences = [2, -5, 3], lower = -4, upper = 6, the output would be 3.`
+- **Constraints:**
 
-        for(int k : diff) {
-            x += k;
-            mx = max(mx, x);
-            mn = min(mn, x);
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the number of possible hidden sequences that satisfy the given differences and lie within the specified range.
+
+- 1. Initialize two variables, mn and mx, to track the minimum and maximum sum encountered during the process of generating the sequence from the given differences.
+- 2. Iterate through the differences array and calculate the cumulative sum, updating mn and mx as necessary.
+- 3. Check if the range between lower and upper is large enough to accommodate the difference between mx and mn. If not, return 0.
+- 4. Otherwise, calculate the number of valid sequences by determining how many positions in the range [lower, upper] can fit the sequence's difference.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is assumed that the input array differences is not empty and contains at least one element.
+- It is assumed that the given range [lower, upper] is valid, with lower ≤ upper.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: differences = [2, -5, 3], lower = -4, upper = 6.`  \
+  **Explanation:** In this case, the possible hidden sequences are: [-3, 0, -5, -2], [0, 5, 0, 3], and [1, 6, 1, 4]. Thus, there are 3 valid sequences, so the output is 3.
+
+- **Input:** `Example 2: differences = [1, -3, 4], lower = 1, upper = 6.`  \
+  **Explanation:** Here, the two possible sequences are [3, 4, 1, 5] and [4, 5, 2, 6]. The output is 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a greedy approach by calculating the cumulative sum of the differences and checking if the resulting sequence can fit within the given range [lower, upper].
+
+### Initial Thoughts 💭
+- The problem is essentially about adjusting the sequence to fit the given range after applying the cumulative differences.
+- The sequence will need to be adjusted so that the difference between the maximum and minimum values is within the bounds defined by lower and upper.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle the case where the input differences array is empty.
+- For large input sizes (n up to 100,000), ensure the algorithm runs efficiently with O(n) time complexity.
+- Handle the edge cases where differences contain large negative or positive numbers.
+- Ensure that the solution handles the case where the hidden sequence cannot fit within the specified range.
+{{< dots >}}
+## Code 💻
+```cpp
+int numberOfArrays(vector<int>& diff, long lower, long upper) {
+    // last - fist of n + 1 seq
+    
+    long mn = 0, mx = 0, x = 0;
+
+    for(int k : diff) {
+        x += k;
+        mx = max(mx, x);
+        mn = min(mn, x);
+    }
+    
+    int sum = mx - mn;
+    if (upper - lower < sum)
+        return 0;
+    else {
         
-        int sum = mx - mn;
-        if (upper - lower < sum)
-            return 0;
-        else {
-            
-            return (int)(upper - lower) - sum + 1;
-            
-        }
+        return (int)(upper - lower) - sum + 1;
         
     }
-};
-{{< /highlight >}}
----
+    
+}
+```
 
-### Problem Statement
+This function calculates the number of valid arrays that can be formed by considering the difference array and the given bounds. It computes the maximum and minimum prefix sums and checks if the range between 'lower' and 'upper' is large enough to accommodate the sum difference.
 
-The problem at hand is to determine the number of possible arrays that can be constructed given the difference array `diff`, along with specified lower and upper bounds. Each element in `diff` represents the difference between consecutive elements in the original array, and the goal is to find how many valid starting points exist within the given bounds.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numberOfArrays(vector<int>& diff, long lower, long upper) {
+	```
+	This line defines the function `numberOfArrays`, which takes three parameters: a reference to a vector `diff`, and two long integers `lower` and `upper` representing the bounds of the valid range.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    long mn = 0, mx = 0, x = 0;
+	```
+	This initializes three long integers: `mn` for the minimum prefix sum, `mx` for the maximum prefix sum, and `x` for the current running sum of differences.
 
-To solve this problem, we can break it down into the following steps:
+3. **Loop**
+	```cpp
+	    for(int k : diff) {
+	```
+	This starts a loop that iterates over each element `k` in the vector `diff`, representing the difference array.
 
-1. **Understanding the Difference Array**: The `diff` array represents the differences between consecutive elements of an unknown array. By integrating these differences, we can derive the bounds of the unknown array.
+4. **Accumulate Sum**
+	```cpp
+	        x += k;
+	```
+	This adds the current element `k` to the running sum `x`.
 
-2. **Calculating Minimum and Maximum Values**: By iterating through the `diff` array, we can calculate the cumulative sum of differences. This will help us find the maximum and minimum possible values in the unknown array.
+5. **Update Maximum**
+	```cpp
+	        mx = max(mx, x);
+	```
+	This updates the maximum prefix sum `mx` by comparing it with the current running sum `x`.
 
-3. **Determining the Valid Range**: Based on the calculated maximum and minimum values, we can then determine the valid range of the starting point of the unknown array. This is done by checking if the range defined by the lower and upper bounds can accommodate the range created by the differences.
+6. **Update Minimum**
+	```cpp
+	        mn = min(mn, x);
+	```
+	This updates the minimum prefix sum `mn` by comparing it with the current running sum `x`.
 
-4. **Counting Valid Starting Points**: Finally, if the range is valid, we compute the number of valid starting points that would satisfy both the lower and upper bounds of the unknown array.
+7. **Calculate Range**
+	```cpp
+	    int sum = mx - mn;
+	```
+	This calculates the difference between the maximum and minimum prefix sums, storing the result in `sum`.
 
-### Code Breakdown (Step by Step)
+8. **Condition Check**
+	```cpp
+	    if (upper - lower < sum)
+	```
+	This condition checks if the difference between the `upper` and `lower` bounds is smaller than the calculated sum `sum`.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The class `Solution` is defined, which contains the method to solve the problem.
+9. **Return Zero**
+	```cpp
+	        return 0;
+	```
+	If the condition is true, it means the range is too small to accommodate the required sum, so the function returns 0.
 
-2. **Number of Arrays Function**:
-   ```cpp
-   int numberOfArrays(vector<int>& diff, long lower, long upper) {
-   ```
-   - This function takes three parameters: the `diff` array, and two long integers representing the `lower` and `upper` bounds for the starting point of the original array.
+10. **Else Block**
+	```cpp
+	    else {
+	```
+	If the condition is false (the range is large enough), the function proceeds to the next step.
 
-3. **Variable Initialization**:
-   ```cpp
-   long mn = 0, mx = 0, x = 0;
-   ```
-   - Three long integers are initialized: `mn` and `mx` to track the minimum and maximum sums, respectively, and `x` to hold the cumulative sum of the differences.
+11. **Return Result**
+	```cpp
+	        return (int)(upper - lower) - sum + 1;
+	```
+	This line calculates and returns the number of valid arrays that can be formed by subtracting the sum from the range and adding 1.
 
-4. **Calculating Cumulative Sums**:
-   ```cpp
-   for(int k : diff) {
-       x += k;
-       mx = max(mx, x);
-       mn = min(mn, x);
-   }
-   ```
-   - A loop iterates through each element `k` in the `diff` array. The cumulative sum `x` is updated, and the maximum (`mx`) and minimum (`mn`) cumulative sums are tracked.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Determining the Range**:
-   ```cpp
-   int sum = mx - mn;
-   if (upper - lower < sum)
-       return 0;
-   ```
-   - The difference between `mx` and `mn` is calculated and stored in `sum`. If the difference between `upper` and `lower` is less than `sum`, it implies that it is impossible to form any valid array, so the function returns 0.
+The time complexity is linear, as we need to process each element of the differences array once.
 
-6. **Counting Valid Starting Points**:
-   ```cpp
-   else {
-       return (int)(upper - lower) - sum + 1;
-   }
-   ```
-   - If the range is valid, the number of valid starting points is calculated as the difference between `upper` and `lower`, adjusted for the calculated `sum`, and returned as an integer.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-7. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This closing brace signifies the end of the `Solution` class.
+The space complexity is constant, as we only need a few extra variables for tracking the cumulative min and max sums.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-- **Time Complexity**: \(O(n)\), where \(n\) is the number of elements in the `diff` array.
-  - The algorithm iterates through the `diff` array once to compute the cumulative sums, which is linear in time complexity.
-
-- **Space Complexity**: \(O(1)\)
-  - The algorithm uses a constant amount of additional space for variables, regardless of the size of the input.
-
-### Conclusion
-
-The `numberOfArrays` function effectively calculates the number of valid arrays that can be formed based on the provided difference array and specified bounds. 
-
-The approach relies on cumulative sum calculations to derive the minimum and maximum possible values, followed by a straightforward check to determine the validity of potential starting points. This solution is both efficient and easy to understand, making it an excellent example of how to work with difference arrays and constraints in algorithm design.
-
-Understanding this method not only helps in solving similar problems involving differences and boundaries but also reinforces concepts related to cumulative sums and range queries in array manipulation. Mastery of these techniques is invaluable in competitive programming and algorithmic challenges, enhancing your problem-solving skills significantly.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-hidden-sequences/description/)
 

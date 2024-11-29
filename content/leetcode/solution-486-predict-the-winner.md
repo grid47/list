@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "KjlXtj7IwyY"
 youtube_upload_date="2022-10-03"
 youtube_thumbnail="https://i.ytimg.com/vi/KjlXtj7IwyY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,126 +28,201 @@ youtube_thumbnail="https://i.ytimg.com/vi/KjlXtj7IwyY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array nums. Two players, Player 1 and Player 2, take turns to pick numbers from either end of the array. Each player adds the selected number to their score. The goal is to determine if Player 1 can win the game. Player 1 wins if they have a higher score or if the scores are tied.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums`, representing the available numbers that the players can select from.
+- **Example:** `nums = [3, 9, 1, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 20
+	- 0 <= nums[i] <= 10^7
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if Player 1 can win the game, or `false` otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The result will be a boolean value indicating whether Player 1 can win the game.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Implement a strategy to simulate the game and check if Player 1 can win using dynamic programming or recursive techniques.
+
+- 1. Use dynamic programming to calculate the best score each player can achieve based on optimal choices.
+- 2. Start with Player 1 making the first move.
+- 3. Evaluate both possible moves from either end of the array.
+- 4. Use memoization to avoid recalculating the same game states.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always have at least one element.
+- Both players are playing optimally, making the best choice at each step.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 9, 1, 2]`  \
+  **Explanation:** Player 1 picks 3 first, leaving Player 2 with 9 and 1. Player 1 picks 9 next, leaving Player 2 to pick 1. Player 1 ends up with a score of 12, while Player 2 has a score of 3. Therefore, Player 1 wins.
+
+- **Input:** `nums = [5, 3, 4, 5]`  \
+  **Explanation:** Player 1 picks 5 first. Player 2 can pick either 5 or 4, but Player 1 will always be able to pick the higher number. In the end, Player 1 wins.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves simulating the game and using dynamic programming or recursion to calculate the best score each player can achieve based on the current state of the array.
+
+### Initial Thoughts 💭
+- Both players can make optimal decisions by looking ahead at the possible outcomes.
+- Memoization is essential to avoid recalculating the same game states.
+- The problem can be solved using a top-down dynamic programming approach with memoization to optimize the score calculation.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one element, so there is no need to handle empty arrays.
+- For larger input sizes, ensure that the solution is optimized with memoization to handle the recursive calls efficiently.
+- When the array has only one element, Player 1 will always win by selecting that element.
+- Ensure that the algorithm can handle input arrays up to the maximum length of 20 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+
+vector<int> nums;
+vector<vector<map<int, int>>> memo;
+
+int dp(int l, int r, int net) {
     
-    vector<int> nums;
-    vector<vector<map<int, int>>> memo;
+    if(l == r) return nums[l];
     
-    int dp(int l, int r, int net) {
-        
-        if(l == r) return nums[l];
-        
-        if(memo[l][r].count(net)) return memo[l][r][net];
-        
-        int ans = net - dp(l + 1, r, net - nums[l]);
-        ans = max(ans, net - dp(l, r - 1, net - nums[r]));
-        
-        return memo[l][r][net] = ans;
-    }
+    if(memo[l][r].count(net)) return memo[l][r][net];
     
-    bool predictTheWinner(vector<int>& nums) {
+    int ans = net - dp(l + 1, r, net - nums[l]);
+    ans = max(ans, net - dp(l, r - 1, net - nums[r]));
+    
+    return memo[l][r][net] = ans;
+}
 
-        this->nums = nums;
-        int n = nums.size();
-        memo.resize(n + 1, vector<map<int,int>>(n + 1));
-        
-        int net = accumulate(nums.begin(), nums.end(), 0);
-        
-        int ret = dp(0, n - 1, net);
+bool predictTheWinner(vector<int>& nums) {
 
-        return ret >= net - ret;
-    }
-};
-{{< /highlight >}}
----
+    this->nums = nums;
+    int n = nums.size();
+    memo.resize(n + 1, vector<map<int,int>>(n + 1));
+    
+    int net = accumulate(nums.begin(), nums.end(), 0);
+    
+    int ret = dp(0, n - 1, net);
 
-### Problem Statement
+    return ret >= net - ret;
+}
+```
 
-The problem is to determine if the first player can guarantee a win in a two-player game with an optimal strategy. Given an array of integers `nums`, where each element represents a score value of a card, two players take turns to pick either the leftmost or rightmost card from the array. The player with the highest total score at the end wins. The goal is to determine if the first player can guarantee victory, assuming both players play optimally.
+This solution uses dynamic programming to determine if a player can win the game by choosing numbers from the ends of a list. The `dp` function calculates the score difference between the two players, and the `predictTheWinner` function evaluates if the player starting first can win.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<int> nums;
+	```
+	Declares a vector `nums` to store the game values that will be used to compute the scores.
 
-The solution leverages dynamic programming with memoization to make this decision efficiently. Here’s a breakdown of the approach:
+2. **Memoization Structure**
+	```cpp
+	vector<vector<map<int, int>>> memo;
+	```
+	Declares a 3D vector of maps `memo` for memoization, storing the results of subproblems to avoid redundant calculations in the dynamic programming solution.
 
-1. **Dynamic Programming (DP) Strategy**:
-   - The key to solving this problem is to understand that each player will pick cards with the intention of maximizing their score while minimizing the opponent’s potential score.
-   - We define a recursive `dp` function that calculates the maximum score a player can obtain from a subarray defined by the indices `l` (left) and `r` (right) of `nums`.
-   - The function also tracks the `net` score, which represents the sum of the elements in the current subarray.
-   
-2. **Memoization**:
-   - Since calculating scores recursively for overlapping subproblems can be redundant, we use a memoization structure (`memo`) to store previously computed results.
-   - The `memo` structure is a 2D vector of maps, where `memo[l][r][net]` stores the result of the `dp` function for subarray `nums[l]` to `nums[r]` with the given `net`.
+3. **Function Definition**
+	```cpp
+	int dp(int l, int r, int net) {
+	```
+	Defines the `dp` function that calculates the maximum score difference for a given range of the game array.
 
-3. **Recursive Calculation**:
-   - For each recursive call, we consider two options:
-     - If the player picks the left card, the next recursive call computes the score for the range from `l + 1` to `r`.
-     - If the player picks the right card, the range becomes `l` to `r - 1`.
-   - The final score is then computed as the maximum score obtainable by either choice.
+4. **Base Case**
+	```cpp
+	    if(l == r) return nums[l];
+	```
+	Base case: when only one element is left, return its value as it represents the score the current player will get.
 
-4. **Game Decision**:
-   - After calculating the maximum score for the first player, we compare it to the remainder of the total score. If the first player's score is greater than or equal to half of the total score, they can guarantee a win.
+5. **Memoization Check**
+	```cpp
+	    if(memo[l][r].count(net)) return memo[l][r][net];
+	```
+	Checks if the result for the current subproblem has already been computed. If yes, it returns the stored result to avoid redundant calculations.
 
-### Code Breakdown (Step by Step)
+6. **Recursion**
+	```cpp
+	    int ans = net - dp(l + 1, r, net - nums[l]);
+	```
+	Recursively calculates the score difference by choosing the leftmost element and subtracting it from the net score.
 
-The solution code consists of two main parts: the `dp` function and the `predictTheWinner` function.
+7. **Recursion**
+	```cpp
+	    ans = max(ans, net - dp(l, r - 1, net - nums[r]));
+	```
+	Compares the result of choosing the leftmost element with the result of choosing the rightmost element. The maximum of these two choices is stored as the final answer.
 
-1. **Member Variables**:
-   ```cpp
-   vector<int> nums;
-   vector<vector<map<int, int>>> memo;
-   ```
-   Here, `nums` stores the input array, and `memo` is a 2D vector of maps to cache results for each subarray and net value combination.
+8. **Memoization**
+	```cpp
+	    return memo[l][r][net] = ans;
+	```
+	Stores the computed result in the `memo` structure to avoid redundant calculations in future calls.
 
-2. **Dynamic Programming Function (`dp`)**:
-   ```cpp
-   int dp(int l, int r, int net) {
-       if(l == r) return nums[l];
-       if(memo[l][r].count(net)) return memo[l][r][net];
-       
-       int ans = net - dp(l + 1, r, net - nums[l]);
-       ans = max(ans, net - dp(l, r - 1, net - nums[r]));
-       
-       return memo[l][r][net] = ans;
-   }
-   ```
-   - **Base Case**: If `l` equals `r`, there’s only one card left, so the result is simply `nums[l]`.
-   - **Memoization Check**: If the result for this subarray and net value has already been computed, it is returned from `memo`.
-   - **Recursive Calculation**: The player’s score is calculated based on the choices of picking either the left or right card. The player maximizes their score while reducing the opponent’s score in the recursive calls.
-   - **Memoization Storage**: The result is stored in `memo` to avoid recomputation in subsequent recursive calls.
+9. **Function Definition**
+	```cpp
+	bool predictTheWinner(vector<int>& nums) {
+	```
+	Defines the `predictTheWinner` function which determines if the first player can win given the array `nums`.
 
-3. **Main Function (`predictTheWinner`)**:
-   ```cpp
-   bool predictTheWinner(vector<int>& nums) {
-       this->nums = nums;
-       int n = nums.size();
-       memo.resize(n + 1, vector<map<int,int>>(n + 1));
-       
-       int net = accumulate(nums.begin(), nums.end(), 0);
-       int ret = dp(0, n - 1, net);
+10. **Input Assignment**
+	```cpp
+	    this->nums = nums;
+	```
+	Assigns the input vector `nums` to the class-level `nums` variable for use in the dynamic programming solution.
 
-       return ret >= net - ret;
-   }
-   ```
-   - **Initialization**: The input `nums` is assigned to the class variable, and `memo` is resized based on the size of `nums`.
-   - **Net Calculation**: `net` represents the total sum of all elements in `nums`.
-   - **Recursive Call**: The `dp` function is called for the full array, aiming to maximize the score for the first player.
-   - **Decision**: If the first player’s score `ret` is greater than or equal to half of `net`, the function returns `true`, indicating that the first player can guarantee a win.
+11. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	Calculates the size of the input vector `nums` and stores it in the variable `n`.
 
-### Complexity
+12. **Memoization Initialization**
+	```cpp
+	    memo.resize(n + 1, vector<map<int,int>>(n + 1));
+	```
+	Initializes the memoization structure to handle all subproblems of size up to `n`.
 
-1. **Time Complexity**:
-   - The time complexity is roughly `O(n^2 * S)`, where `n` is the size of `nums` and `S` represents the range of potential values in `net`. However, due to memoization, this complexity is significantly reduced by storing intermediate results.
+13. **Net Score Calculation**
+	```cpp
+	    int net = accumulate(nums.begin(), nums.end(), 0);
+	```
+	Calculates the total score (`net`) by summing all elements in `nums`.
 
-2. **Space Complexity**:
-   - The space complexity is `O(n^2 * S)`, accounting for the 2D `memo` structure.
+14. **Recursive Call**
+	```cpp
+	    int ret = dp(0, n - 1, net);
+	```
+	Calls the `dp` function to calculate the score difference between the two players starting from the first and last elements of the array.
 
-### Conclusion
+15. **Return Statement**
+	```cpp
+	    return ret >= net - ret;
+	```
+	Returns `true` if the first player can win or tie, otherwise returns `false`.
 
-This solution demonstrates an effective use of dynamic programming with memoization to solve a problem involving recursive choices. By storing intermediate results and making optimal decisions at each step, we ensure that the solution is both efficient and scalable for larger inputs. This approach is highly effective for problems involving competitive strategy, making it ideal for scenarios where players compete over resource allocation or score maximization.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) because the algorithm involves recursively calculating the best score for each subarray, and memoization ensures that each state is calculated only once.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the memoization table storing results for every possible subarray.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/predict-the-winner/description/)
 

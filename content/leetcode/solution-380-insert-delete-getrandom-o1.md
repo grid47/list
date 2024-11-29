@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "j4KwhBziOpg"
 youtube_upload_date="2022-03-16"
 youtube_thumbnail="https://i.ytimg.com/vi/j4KwhBziOpg/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,172 +28,252 @@ youtube_thumbnail="https://i.ytimg.com/vi/j4KwhBziOpg/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design a data structure that supports three operations: insert, remove, and getRandom. The insert operation adds an element to the set if it is not already present. The remove operation removes an element from the set if it exists. The getRandom operation returns a random element from the set, with each element having an equal probability of being selected.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of multiple function calls, starting with the creation of the RandomizedSet object. The operations 'insert(val)', 'remove(val)', and 'getRandom()' are called sequentially.
+- **Example:** `Example input: [[], [1], [2], [2], [], [1], [2], []]`
+- **Constraints:**
+	- -2^31 <= val <= 2^31 - 1
+	- At most 2 * 10^5 calls will be made to insert, remove, and getRandom.
+	- There will always be at least one element in the set when getRandom() is called.
 
-{{< highlight cpp >}}
-class RandomizedSet {
-private:
-    vector<int> a;
-    unordered_map<int,int> m;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a list of results corresponding to the sequence of operations performed.
+- **Example:** `Example output: [null, true, false, true, 2, true, false, 2]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Use a combination of a list and a hash map to efficiently perform insertions, removals, and random selections in constant time on average.
+
+- Use a list to store elements and a hash map to store their indices for fast access.
+- In the insert operation, check if the element already exists. If not, add it to the list and map the value to its index.
+- In the remove operation, replace the element to be removed with the last element in the list, update its index in the map, and then pop the last element.
+- In the getRandom operation, simply pick a random index from the list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The elements are stored uniquely in the set.
+- The set will always have at least one element when getRandom() is called.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: [[], [1], [2], [2], [], [1], [2], []]`  \
+  **Explanation:** We track elements in the set, and after each operation, we provide the result for that operation. For example, 'insert(1)' returns true because 1 is inserted, while 'remove(2)' returns false because 2 was not in the set.
+
+- **Input:** `Example 2: [[], [5], [], [10], [5], []]`  \
+  **Explanation:** After each operation, the result is either true, false, or a random element from the set.
+
+{{< dots >}}
+## Approach 🚀
+We use a list to store elements and a hash map to store indices, allowing for O(1) average time complexity for all operations.
+
+### Initial Thoughts 💭
+- We need to maintain efficient O(1) time for insert, remove, and getRandom operations.
+- A list allows for O(1) time access, while the hash map helps with O(1) element removal and index tracking.
+- The key challenge is efficiently handling the removal operation while maintaining the ability to return a random element.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty operations will be allowed as the problem guarantees at least one element when getRandom() is called.
+- Ensure the solution works efficiently with up to 2 * 10^5 operations.
+- Handle edge cases where the value is at the boundary of the allowed range (-2^31 or 2^31 - 1).
+- Ensure O(1) time complexity for each of the operations.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> a;
+unordered_map<int,int> m;
 public:
-    RandomizedSet() {
+RandomizedSet() {
+}
+bool insert(int val) {
+    if(m.find(val)!=m.end())
+        return false;
+    else{
+        a.push_back(val);
+        m[val]=a.size()-1;
+        return true;
     }
-    bool insert(int val) {
-        if(m.find(val)!=m.end())
-            return false;
-        else{
-            a.push_back(val);
-            m[val]=a.size()-1;
-            return true;
-        }
+}
+
+bool remove(int val) {
+    if(m.find(val)==m.end())
+        return false;
+    else{
+        int last=a.back(); 
+        a[m[val]]=a.back();
+        a.pop_back();
+        m[last]=m[val];   
+        m.erase(val);
+        return true;
     }
-    
-    bool remove(int val) {
-        if(m.find(val)==m.end())
-            return false;
-        else{
-            int last=a.back(); 
-            a[m[val]]=a.back();
-            a.pop_back();
-            m[last]=m[val];   
-            m.erase(val);
-            return true;
-        }
-    }
-    
-    int getRandom() {
-        return a[rand()%a.size()];
-    }
-};
-{{< /highlight >}}
----
+}
 
-### 🚀 Problem Statement
-
-In this challenge, we need to implement a data structure called `RandomizedSet` that supports the following operations:
-
-1. **Insert**: Insert a value into the set if it's not already present.
-2. **Remove**: Remove a value from the set if it exists.
-3. **Get Random**: Retrieve a random element from the set.
-
-The real trick here is that we need to make the **Insert** and **Remove** operations **efficient** (constant time), while still being able to randomly pick an element with **O(1)** time complexity.
-
----
-
-### 🧠 Approach
-
-To build a `RandomizedSet` that efficiently supports all three operations, we'll use a **combination of a vector** and an **unordered map**:
-
-1. **Vector (`a`)**:
-   - The vector holds the elements of the set. Since we need **random access** to any element, the vector provides **O(1)** time complexity for accessing an element by its index.
-   - We will use the **last element** of the vector to replace any removed element. This ensures the **O(1)** complexity for the `Remove` operation.
-
-2. **Unordered Map (`m`)**:
-   - The map stores the value as the **key** and its corresponding index in the vector as the **value**.
-   - This allows us to check if an element is present in the set in **O(1)** time and to find its index quickly, which is crucial for efficient removal.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's walk through the implementation!
-
-#### Step 1: Define the `RandomizedSet` Class
-```cpp
-class RandomizedSet {
-private:
-    vector<int> a;
-    unordered_map<int, int> m;
-public:
-    RandomizedSet() {
-    }
+int getRandom() {
+    return a[rand()%a.size()];
+}
 ```
-- We start by defining our class `RandomizedSet` with two private members:
-  - `a`: The vector storing elements.
-  - `m`: The unordered map that maps each element to its index in the vector.
 
----
+This code implements a RandomizedSet class with three functions: insert, remove, and getRandom. It uses an unordered map to store values and a vector to keep track of the order.
 
-#### Step 2: Insert Method
-```cpp
-    bool insert(int val) {
-        if(m.find(val) != m.end())
-            return false;
-        else{
-            a.push_back(val);
-            m[val] = a.size() - 1;
-            return true;
-        }
-    }
-```
-- The `insert` method checks if the value is already in the map (`m.find(val)`). If it's not found, the value is:
-  - Added to the vector `a`.
-  - Its index in `a` is stored in the map `m`.
-- If the insertion is successful, the method returns **true**. If the element is already in the set, it returns **false**.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<int> a;
+	```
+	This line initializes a vector `a` to store the values inserted into the set.
 
----
+2. **Variable Initialization**
+	```cpp
+	unordered_map<int,int> m;
+	```
+	This line initializes an unordered map `m` to store each value and its corresponding index in the vector `a`.
 
-#### Step 3: Remove Method
-```cpp
-    bool remove(int val) {
-        if(m.find(val) == m.end())
-            return false;
-        else{
-            int last = a.back();
-            a[m[val]] = a.back();
-            a.pop_back();
-            m[last] = m[val];
-            m.erase(val);
-            return true;
-        }
-    }
-```
-- The `remove` method first checks if the element exists in the set using `m.find(val)`. If it's not in the set, it returns **false**.
-- If the element exists:
-  - The last element in the vector is swapped with the element to be removed.
-  - The last element is removed, and the map is updated with the new index of the swapped element.
-- This ensures that the removal is done efficiently in **O(1)** time.
+3. **Constructor**
+	```cpp
+	public:
+	```
+	This marks the beginning of the public section where functions are defined.
 
----
+4. **Constructor Definition**
+	```cpp
+	RandomizedSet() {
+	```
+	This is the constructor for the RandomizedSet class, initializing the data structures.
 
-#### Step 4: Get Random Method
-```cpp
-    int getRandom() {
-        return a[rand() % a.size()];
-    }
-```
-- The `getRandom` method generates a random index using `rand() % a.size()`. Since the vector allows constant time access to any element, this operation is **O(1)**.
+5. **Insert Function**
+	```cpp
+	bool insert(int val) {
+	```
+	This function attempts to insert a value `val` into the set. It returns false if the value already exists, otherwise it inserts the value and returns true.
 
----
+6. **Conditionals**
+	```cpp
+	    if(m.find(val)!=m.end())
+	```
+	This checks if the value already exists in the set by looking it up in the unordered map.
 
-### 📈 Complexity Analysis
+7. **Return Statement**
+	```cpp
+	        return false;
+	```
+	If the value already exists, the function returns `false` to indicate the insertion was unsuccessful.
 
-#### Time Complexity:
-- **Insert Operation**: **O(1)**. Inserting an element involves checking if it's already in the set (`O(1)`), adding it to the vector (`O(1)`), and updating the map (`O(1)`).
-- **Remove Operation**: **O(1)**. Removing an element involves finding its index (`O(1)`), replacing it with the last element (`O(1)`), and updating both the vector and map (`O(1)`).
-- **Get Random Operation**: **O(1)**. Retrieving a random element from the vector takes constant time.
+8. **Insert Action**
+	```cpp
+	    else{
+	```
+	This marks the beginning of the block of code to execute if the value does not already exist.
 
-#### Space Complexity:
-- **O(n)**, where `n` is the number of elements in the set. The space is used by the vector `a` and the unordered map `m`, both of which store the set elements.
+9. **Insert Action**
+	```cpp
+	        a.push_back(val);
+	```
+	The value is pushed onto the vector `a` to store it.
 
----
+10. **Insert Action**
+	```cpp
+	        m[val]=a.size()-1;
+	```
+	The value is mapped to its index in the vector `a` in the unordered map `m`.
 
-### 🏁 Conclusion
+11. **Return Statement**
+	```cpp
+	        return true;
+	```
+	If the insertion is successful, the function returns `true`.
 
-The `RandomizedSet` class provides a super-efficient way to insert, remove, and retrieve random elements, all in **O(1)** time. Here's why this approach shines:
+12. **Remove Function**
+	```cpp
+	bool remove(int val) {
+	```
+	This function attempts to remove a value `val` from the set. It returns false if the value does not exist, otherwise it removes the value and returns true.
 
-- **Insert** and **Remove** operations are fast, with no need for complex shifts or resizing (thanks to the vector).
-- **Get Random** is incredibly fast because we directly access an index in the vector in constant time.
-- The combination of a **vector** and an **unordered map** is key to achieving this efficiency, ensuring that we can modify and query the set without sacrificing performance.
+13. **Conditionals**
+	```cpp
+	    if(m.find(val)==m.end())
+	```
+	This checks if the value exists in the unordered map `m`. If it doesn't exist, the function will return false.
 
----
+14. **Return Statement**
+	```cpp
+	        return false;
+	```
+	If the value does not exist, the function returns `false` to indicate the removal was unsuccessful.
 
-#### 🌟 Key Takeaways:
-- All core operations are implemented in **O(1)** time.
-- The **vector** allows efficient indexing, while the **unordered map** keeps track of indices.
-- This makes the `RandomizedSet` both **time-efficient** and **space-efficient** for all operations!
+15. **Remove Action**
+	```cpp
+	    else{
+	```
+	This marks the beginning of the block of code to execute if the value exists.
 
-And there you have it! With this solution, you’ve got a powerful, lightning-fast data structure to handle a dynamic set with random access. 💪
+16. **Remove Action**
+	```cpp
+	        int last=a.back(); 
+	```
+	The last value from the vector `a` is stored in the variable `last`.
+
+17. **Remove Action**
+	```cpp
+	        a[m[val]]=a.back();
+	```
+	The last value is moved to the position of the value being removed in the vector.
+
+18. **Remove Action**
+	```cpp
+	        a.pop_back();
+	```
+	The last value is removed from the vector `a` after it is moved to the position of the removed value.
+
+19. **Remove Action**
+	```cpp
+	        m[last]=m[val];   
+	```
+	The index of the last value is updated in the unordered map `m`.
+
+20. **Remove Action**
+	```cpp
+	        m.erase(val);
+	```
+	The value is removed from the unordered map `m`.
+
+21. **Return Statement**
+	```cpp
+	        return true;
+	```
+	If the removal is successful, the function returns `true`.
+
+22. **Get Random Function**
+	```cpp
+	int getRandom() {
+	```
+	This function returns a random value from the set by selecting a random index from the vector `a`.
+
+23. **Get Random Action**
+	```cpp
+	    return a[rand()%a.size()];
+	```
+	A random index is selected from the vector `a`, and the corresponding value is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+All operations (insert, remove, getRandom) have an average time complexity of O(1) due to the use of a list and a hash map.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) as we need to store the elements in a list and a hash map, where n is the number of elements in the set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/insert-delete-getrandom-o1/description/)
 

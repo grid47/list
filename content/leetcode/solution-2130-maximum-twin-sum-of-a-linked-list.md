@@ -14,160 +14,222 @@ img_src = ""
 youtube = "FnKG0uH2PVc"
 youtube_upload_date="2023-05-18"
 youtube_thumbnail="https://i.ytimg.com/vi/FnKG0uH2PVc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a linked list with an even number of nodes. Each node in the list has a twin located symmetrically from the center of the list. Specifically, the ith node is the twin of the (n-1-i)th node, where n is the total number of nodes in the list. For example, the first node is the twin of the last node, the second node is the twin of the second last node, and so on. The twin sum is defined as the sum of a node and its twin. Your task is to return the maximum twin sum of the linked list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the head of a singly linked list with an even number of nodes.
+- **Example:** `head = [3, 1, 4, 2]`
+- **Constraints:**
+	- The number of nodes in the list is even.
+	- 1 <= Node.val <= 10^5.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    int pairSum(ListNode* head) {
-        
-        ListNode* slow = head, *fast = head;
-        while(slow && fast && fast->next) {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        
-        /*
-        
-        if its a even chain fast pointer will go out of index
-        slow will reach at second of middle elements or first of second half of the chain
-        
-        */
-        
-        ListNode *cur = slow, *prv = NULL, *nxt;
-        
-        while(cur) {
-            nxt = cur->next;
-            cur->next = prv;
-            prv = cur;
-            cur = nxt;
-        }
-        
-        int res = 0;
-        while(prv) {
-            res = max(res, head->val + prv->val);
-            head = head->next;
-            prv = prv->next;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum twin sum, which is the largest sum of a node and its twin in the linked list.
+- **Example:** `Input: head = [3, 1, 4, 2] Output: 6`
+- **Constraints:**
+	- The solution should return a single integer representing the maximum twin sum.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the twin sum for all possible pairs of nodes and return the maximum sum.
+
+- 1. Use two pointers, slow and fast, to find the middle of the linked list.
+- 2. Reverse the second half of the list starting from the slow pointer.
+- 3. Calculate the twin sum by adding the corresponding nodes from the first and second halves.
+- 4. Keep track of the maximum twin sum while traversing the two halves.
+{{< dots >}}
+### Problem Assumptions ✅
+- The list has at least two nodes.
+- There is no need to handle odd-length lists.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [3, 1, 4, 2]`  \
+  **Explanation:** In this case, the first node (3) and the last node (2) form a twin pair with a sum of 5. Similarly, the second node (1) and the third node (4) form another twin pair with a sum of 5. The maximum twin sum is 6.
+
+- **Input:** `Input: head = [5, 3, 7, 4]`  \
+  **Explanation:** The first node (5) and the last node (4) form a twin pair with a sum of 9. The second node (3) and the third node (7) form a twin pair with a sum of 10. Therefore, the maximum twin sum is 10.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves finding the middle of the linked list, reversing the second half, and then calculating the twin sums.
+
+### Initial Thoughts 💭
+- We need to reverse the second half of the linked list and calculate the twin sums with the first half.
+- By using a slow and fast pointer approach, we can efficiently find the middle of the list, then reverse the second half and calculate the twin sums in a single pass.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not require handling for empty lists as it is guaranteed that the number of nodes is even and at least 2.
+- Ensure that the solution can handle linked lists with a large number of nodes, up to the limit of 10^5 nodes.
+- The value of each node can range from 1 to 10^5, so ensure that the sums are calculated correctly for large numbers.
+- The solution must be efficient enough to handle large inputs within the time limits.
+{{< dots >}}
+## Code 💻
+```cpp
+int pairSum(ListNode* head) {
+    
+    ListNode* slow = head, *fast = head;
+    while(slow && fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
     }
-};
-{{< /highlight >}}
----
+    
+    /*
+    
+    if its a even chain fast pointer will go out of index
+    slow will reach at second of middle elements or first of second half of the chain
+    
+    */
+    
+    ListNode *cur = slow, *prv = NULL, *nxt;
+    
+    while(cur) {
+        nxt = cur->next;
+        cur->next = prv;
+        prv = cur;
+        cur = nxt;
+    }
+    
+    int res = 0;
+    while(prv) {
+        res = max(res, head->val + prv->val);
+        head = head->next;
+        prv = prv->next;
+    }
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the maximum pair sum of a singly linked list by splitting it into two halves and then finding the maximum sum of corresponding elements from each half.
 
-The problem requires us to find the maximum twin sum of a linked list. A twin sum is defined as the sum of pairs of nodes from the front and back of the list. Given a singly linked list, we need to calculate the twin sums formed by taking the first element with the last, the second with the second last, and so on. The objective is to return the maximum twin sum from these pairs.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Declaration**
+	```cpp
+	int pairSum(ListNode* head) {
+	```
+	Function declaration for pairSum, which takes the head of a linked list and returns an integer.
 
-### Approach
+2. **Pointer Setup**
+	```cpp
+	    ListNode* slow = head, *fast = head;
+	```
+	Two pointers (slow and fast) are initialized to the head of the linked list to find the middle.
 
-To tackle this problem, we can utilize a two-pointer technique along with reversing the second half of the linked list. The steps are as follows:
+3. **Loop Setup**
+	```cpp
+	    while(slow && fast && fast->next) {
+	```
+	A while loop to move the slow pointer one step and the fast pointer two steps to find the middle of the list.
 
-1. **Find the Middle of the Linked List**: Use the slow and fast pointer technique to locate the midpoint of the list.
-2. **Reverse the Second Half**: Once the midpoint is identified, reverse the second half of the linked list.
-3. **Calculate Maximum Twin Sum**: Traverse through the original first half and the reversed second half simultaneously, computing the twin sums and tracking the maximum sum encountered.
+4. **Pointer Movement**
+	```cpp
+	        slow = slow->next;
+	```
+	Move the slow pointer one step forward.
 
-This approach ensures we traverse the linked list a minimal number of times, maintaining efficiency.
+5. **Pointer Movement**
+	```cpp
+	        fast = fast->next->next;
+	```
+	Move the fast pointer two steps forward.
 
-### Code Breakdown (Step by Step)
+6. **Reversal Initialization**
+	```cpp
+	    ListNode *cur = slow, *prv = NULL, *nxt;
+	```
+	Initialize three pointers: cur to slow (start of second half), prv as NULL, and nxt to help in reversing the list.
 
-Here's a detailed breakdown of the implementation:
+7. **Loop Setup**
+	```cpp
+	    while(cur) {
+	```
+	Start of a loop to reverse the second half of the linked list.
 
-1. **ListNode Definition**:
-   ```cpp
-   struct ListNode {
-       int val;
-       ListNode *next;
-       ListNode() : val(0), next(nullptr) {}
-       ListNode(int x) : val(x), next(nullptr) {}
-       ListNode(int x, ListNode *next) : val(x), next(next) {}
-   };
-   ```
-   - This struct defines a node in a singly linked list, which contains an integer value `val` and a pointer to the next node `next`.
+8. **Pointer Movement**
+	```cpp
+	        nxt = cur->next;
+	```
+	Store the next node of cur to help in the reversal process.
 
-2. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class is defined, encapsulating the method that will solve the problem.
+9. **Pointer Update**
+	```cpp
+	        cur->next = prv;
+	```
+	Reverse the pointer of the current node to point to the previous node.
 
-3. **Function Definition**:
-   ```cpp
-   int pairSum(ListNode* head) {
-   ```
-   - The public member function `pairSum` takes a pointer to the head of the linked list and will return the maximum twin sum as an integer.
+10. **Pointer Movement**
+	```cpp
+	        prv = cur;
+	```
+	Move the previous pointer to the current node.
 
-4. **Finding the Middle of the Linked List**:
-   ```cpp
-   ListNode* slow = head, *fast = head;
-   while(slow && fast && fast->next) {
-       slow = slow->next;
-       fast = fast->next->next;
-   }
-   ```
-   - Two pointers, `slow` and `fast`, are initialized at the head of the list. The `slow` pointer moves one step at a time, while the `fast` pointer moves two steps. This loop continues until the `fast` pointer cannot advance two steps (indicating the end of the list). When this happens, `slow` will be at the midpoint of the list.
+11. **Pointer Movement**
+	```cpp
+	        cur = nxt;
+	```
+	Move the current pointer to the next node.
 
-5. **Reversing the Second Half of the List**:
-   ```cpp
-   ListNode *cur = slow, *prv = NULL, *nxt;
-   while(cur) {
-       nxt = cur->next;
-       cur->next = prv;
-       prv = cur;
-       cur = nxt;
-   }
-   ```
-   - We initialize `cur` to the `slow` pointer (midpoint) and `prv` to `NULL`. We then reverse the linked list by adjusting the `next` pointers of each node until we reach the end of the list. The `prv` pointer will ultimately point to the new head of the reversed second half of the list.
+12. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize the result variable to 0, which will store the maximum pair sum.
 
-6. **Calculating the Maximum Twin Sum**:
-   ```cpp
-   int res = 0;
-   while(prv) {
-       res = max(res, head->val + prv->val);
-       head = head->next;
-       prv = prv->next;
-   }
-   return res;
-   ```
-   - We initialize `res` to store the maximum twin sum. In a loop, we calculate the twin sums by adding the values of the nodes pointed to by `head` (first half) and `prv` (reversed second half). We continue until `prv` reaches the end of the list, updating `res` with the maximum sum found.
+13. **Loop Setup**
+	```cpp
+	    while(prv) {
+	```
+	Start of a while loop to find the maximum pair sum.
 
-7. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This curly brace marks the end of the `Solution` class definition.
+14. **Max Calculation**
+	```cpp
+	        res = max(res, head->val + prv->val);
+	```
+	Calculate the sum of the current nodes from both halves and update the result with the maximum value.
 
-### Complexity Analysis
+15. **Pointer Movement**
+	```cpp
+	        head = head->next;
+	```
+	Move the head pointer to the next node in the first half of the list.
 
-- **Time Complexity**: \(O(n)\)
-  - The time complexity is \(O(n)\) because we traverse the linked list three times: once to find the middle, once to reverse the second half, and once to compute the maximum twin sum.
+16. **Pointer Movement**
+	```cpp
+	        prv = prv->next;
+	```
+	Move the prv pointer to the next node in the second half of the list.
 
-- **Space Complexity**: \(O(1)\)
-  - The space complexity is \(O(1)\) as we are not using any additional data structures that grow with input size. We only use a constant amount of extra space for pointers.
+17. **Return**
+	```cpp
+	    return res;
+	```
+	Return the computed result, which is the maximum pair sum.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The `pairSum` function effectively calculates the maximum twin sum of a linked list using an efficient approach that combines the two-pointer technique with in-place list reversal. By minimizing the number of traversals, the algorithm achieves optimal time complexity while maintaining constant space usage.
+The time complexity is O(n) because we traverse the list at most twice, where n is the number of nodes in the linked list.
 
-This method is robust and works effectively for a variety of input cases, including even and odd-length linked lists. The elegant use of linked list manipulations showcases the power of understanding data structures in solving complex problems efficiently.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-In summary, this solution exemplifies how to tackle linked list challenges with clarity and efficiency, making it a useful reference for similar problems in algorithm design and implementation. The overall design is both effective and efficient, ensuring that the maximum twin sum is found with minimal computational overhead.
+The space complexity is O(1) because we are only using a constant amount of extra space, aside from the input list itself.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/)
 

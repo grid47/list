@@ -14,110 +14,149 @@ img_src = ""
 youtube = "oEy0bzfioG4"
 youtube_upload_date="2023-05-18"
 youtube_thumbnail="https://i.ytimg.com/vi/oEy0bzfioG4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a directed acyclic graph with n vertices, find the smallest set of vertices from which all nodes in the graph are reachable.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the number of vertices n and an array of directed edges.
+- **Example:** `n = 5, edges = [[0,1],[2,1],[3,1],[1,4],[2,4]]`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- 1 <= edges.length <= min(10^5, n * (n - 1) / 2)
+	- edges[i].length == 2
+	- 0 <= fromi, toi < n
+	- All pairs (fromi, toi) are distinct
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
-        vector<int> ca(n, 0);
-        vector<int> ans;
-        for(auto e: edges) {
-            ca[e[1]]++;
-        }
-        for(int i = 0; i< n ; i++)
-        if(ca[i] == 0) ans.push_back(i);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest set of vertices from which all nodes in the graph are reachable.
+- **Example:** `Output: [0, 2, 3]`
+- **Constraints:**
+	- The output should be a list of vertices.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the smallest set of vertices that can reach all the nodes in the graph.
 
-The problem is to find the smallest set of vertices from a directed graph that can reach all other vertices. This is commonly known as the "Minimum Starting Vertices" problem. In other words, we want to identify all vertices that have no incoming edges. These vertices serve as the starting points for traversing the entire graph since all other vertices can be reached from them.
+- 1. Initialize an array to track the number of incoming edges for each vertex.
+- 2. Traverse the edges to update the number of incoming edges for each vertex.
+- 3. Identify vertices that have no incoming edges (i.e., vertices that must be included in the set).
+- 4. Return the list of these vertices.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph is a directed acyclic graph (DAG).
+- There is always a unique solution.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 6, edges = [[0, 1], [0, 2], [2, 5], [3, 4], [4, 2]]`  \
+  **Explanation:** From vertex 0, we can reach nodes [0, 1, 2, 5], and from vertex 3, we can reach nodes [3, 4, 2, 5]. Therefore, the smallest set of vertices is [0, 3].
 
-### Approach
+- **Input:** `n = 5, edges = [[0, 1], [2, 1], [3, 1], [1, 4], [2, 4]]`  \
+  **Explanation:** The vertices 0, 2, and 3 are not reachable from any other node, so they must be included in the set. Any of these vertices can reach nodes 1 and 4.
 
-To solve this problem, we can follow a straightforward approach that involves counting the incoming edges for each vertex. By maintaining an array that tracks the count of incoming edges for each vertex, we can easily identify which vertices have no incoming edges.
+{{< dots >}}
+## Approach 🚀
+The approach involves identifying vertices with no incoming edges, as these must be included in the smallest set of vertices that can reach all nodes.
 
-1. **Initialize Count Array**: Create an array `ca` of size `n` initialized to zero. This array will keep track of the number of incoming edges for each vertex.
-
-2. **Count Incoming Edges**: Iterate through the list of edges, and for each edge directed from vertex `u` to vertex `v`, increment the count for vertex `v` in the `ca` array. 
-
-3. **Identify Starting Vertices**: After counting the incoming edges, iterate through the count array. Any vertex with a count of zero is a starting vertex, meaning it has no incoming edges.
-
-4. **Return Result**: Collect all starting vertices in a result vector and return it.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code:
-
+### Initial Thoughts 💭
+- The smallest set of vertices will be those that are not reachable from other vertices.
+- By counting the number of incoming edges for each vertex, we can identify those vertices that must be included in the solution.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as n >= 2.
+- The solution must efficiently handle large inputs with n up to 10^5.
+- The graph is guaranteed to have a unique solution.
+- The graph is a directed acyclic graph (DAG).
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
-        // Step 1: Initialize a count array to keep track of incoming edges
-        vector<int> ca(n, 0); // ca[i] will hold the count of incoming edges to vertex i
-        vector<int> ans; // This will store the result, i.e., the vertices with no incoming edges
-        
-        // Step 2: Count incoming edges for each vertex
-        for(auto e: edges) {
-            ca[e[1]]++; // Increment the count for the destination vertex of the edge
-        }
-        
-        // Step 3: Identify vertices with zero incoming edges
-        for(int i = 0; i < n; i++) {
-            if(ca[i] == 0) // Check if there are no incoming edges to vertex i
-                ans.push_back(i); // If so, add it to the result
-        }
-        
-        // Step 4: Return the result vector containing all starting vertices
-        return ans;
+vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+    vector<int> ca(n, 0);
+    vector<int> ans;
+    for(auto e: edges) {
+        ca[e[1]]++;
     }
-};
+    for(int i = 0; i< n ; i++)
+    if(ca[i] == 0) ans.push_back(i);
+    return ans;
+}
 ```
 
-#### Step-by-Step Explanation:
+This function `findSmallestSetOfVertices` takes in two parameters: an integer `n` (the number of vertices) and a 2D vector `edges` representing directed edges between vertices. It returns a vector containing the vertices that cannot be reached by any other vertex, also known as the smallest set of vertices that can reach all others in the graph.
 
-1. **Initialization**: 
-   - The vector `ca` is initialized to store counts of incoming edges for `n` vertices. Each index corresponds to a vertex, and each value at that index counts how many edges point to it.
-   - The result vector `ans` will store the vertices with zero incoming edges.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+	```
+	This is the function definition for `findSmallestSetOfVertices`, which takes in the number of vertices `n` and a 2D vector `edges` that represents directed edges between vertices. It returns a vector containing the smallest set of vertices that can reach all other vertices in the graph.
 
-2. **Counting Edges**: 
-   - The code iterates over the `edges` vector, where each edge is represented as a pair `[u, v]`. The vertex `u` points to vertex `v`. 
-   - For each edge, the count of incoming edges for vertex `v` is incremented by 1.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> ca(n, 0);
+	```
+	This line initializes a vector `ca` of size `n` with all values set to 0. It will be used to count the incoming edges for each vertex.
 
-3. **Finding Vertices with No Incoming Edges**: 
-   - A loop runs through each vertex (from 0 to n-1). For each vertex, it checks if the incoming edge count (`ca[i]`) is zero.
-   - If a vertex has no incoming edges, it is added to the result vector `ans`.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	This line initializes an empty vector `ans` to store the vertices that are part of the smallest set of vertices.
 
-4. **Return Statement**: 
-   - Finally, the function returns the vector `ans`, which contains all the vertices that can be starting points for reaching the rest of the graph.
+4. **Loop Iteration**
+	```cpp
+	    for(auto e: edges) {
+	```
+	This for-each loop iterates over each edge in the `edges` vector, where `e` represents each directed edge in the form of a 2-element vector (source, destination).
 
-### Complexity
+5. **Edge Processing**
+	```cpp
+	        ca[e[1]]++;
+	```
+	For each edge, the count of incoming edges for the destination vertex (`e[1]`) is incremented in the `ca` vector.
 
-#### Time Complexity
-- **O(n + e)**: The time complexity is linear with respect to the number of vertices (`n`) and edges (`e`) in the graph. The counting of edges takes O(e) time, and the subsequent checks for vertices take O(n) time.
+6. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i< n ; i++)
+	```
+	This for loop iterates through all vertices from 0 to `n-1` to check which vertices have no incoming edges.
 
-#### Space Complexity
-- **O(n)**: The space complexity is O(n) due to the storage of the incoming edge counts in the array `ca`, as well as the output vector `ans`.
+7. **Condition Check**
+	```cpp
+	    if(ca[i] == 0) ans.push_back(i);
+	```
+	If a vertex `i` has no incoming edges (i.e., `ca[i] == 0`), it is added to the `ans` vector as it is part of the smallest set of vertices.
 
-### Conclusion
+8. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the `ans` vector, which contains the smallest set of vertices that can reach all other vertices.
 
-The `findSmallestSetOfVertices` function efficiently identifies all starting vertices in a directed graph that can reach all other vertices. By leveraging an array to count incoming edges, the algorithm provides a clear and efficient solution to this problem.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-**Key Insights**:
-- **Graph Representation**: Understanding how directed graphs are represented using edges is crucial. Each directed edge contributes to the incoming edge count of the target vertex.
-- **Direct Counting**: The method of counting incoming edges simplifies the process of identifying starting points.
-- **Practical Applications**: This solution has practical applications in network flow problems, dependency resolution in tasks, and many graph-related problems in computer science.
+The time complexity is O(n + m) where n is the number of vertices and m is the number of edges.
 
-This algorithm illustrates how to approach graph problems systematically by using counting methods, ensuring efficiency and clarity in implementation. By following the steps outlined in the approach and breaking down the code methodically, we achieve a comprehensive understanding of finding the smallest set of vertices in a directed graph.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the incoming edges count and the result.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/)
 

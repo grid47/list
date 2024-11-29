@@ -14,119 +14,165 @@ img_src = ""
 youtube = "3JIMkdeoF1c"
 youtube_upload_date="2022-09-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/3JIMkdeoF1c/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums of size n and a positive integer k, find all good indices in the array. An index i is considered good if: The k elements just before it are in non-increasing order, and the k elements just after it are in non-decreasing order. Return a list of all good indices in increasing order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array nums of integers and a positive integer k.
+- **Example:** `nums = [3,2,2,2,5,6,2], k = 2`
+- **Constraints:**
+	- 3 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^6
+	- 1 <= k <= n / 2
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> goodIndices(vector<int>& a, int k) {
-        int n = a.size();
-        vector<int> dp1(n + 1, 1), dp2(n + 1, 1), ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array containing all good indices sorted in increasing order.
+- **Example:** `Output: [2, 3]`
+- **Constraints:**
 
-        for(int i = 1; i < n; i++)
-            if(a[i -1] >= a[i]) dp1[i] = dp1[i - 1]+1;
-        for(int i = n -2; i > 0; i--)
-            if(a[i] <= a[i +1]) dp2[i] = dp2[i +1]+1;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify the indices where the k elements before and after it satisfy the non-increasing and non-decreasing conditions, respectively.
 
-        for(int i = k; i< n-k; i++)
-        if(dp1[i-1] >= k && dp2[i+1] >=k)
-        ans.push_back(i);
+- 1. Initialize two arrays dp1 and dp2, where dp1 tracks the length of non-increasing subsequences before each index and dp2 tracks non-decreasing subsequences after each index.
+- 2. Traverse the array to fill dp1 and dp2.
+- 3. Loop through the indices from k to n-k and check the conditions for good indices.
+- 4. Collect and return the indices that satisfy the conditions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will contain at least 3 elements, and the value of k will be such that k <= n / 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 2, 2, 2, 5, 6, 2], k = 2`  \
+  **Explanation:** Indices 2 and 3 are good because the elements before them form non-increasing sequences and the elements after them form non-decreasing sequences.
 
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+The solution involves filling two arrays (dp1 and dp2) to track the lengths of non-increasing and non-decreasing subsequences. The final step is checking which indices satisfy the good index conditions.
 
-### Problem Statement
-
-The problem asks to find the "good indices" in an array `a`, where an index `i` is considered "good" if:
-1. The subarray from index `i - k` to `i` is non-increasing.
-2. The subarray from index `i` to `i + k` is non-decreasing.
-Here, `k` is a given parameter, and we are to find all indices that satisfy the above conditions. We are required to return the indices of these "good" positions.
-
-### Approach
-
-The approach to solve this problem efficiently uses dynamic programming (DP) to compute two auxiliary arrays:
-1. **`dp1[i]`**: Represents the length of the longest non-increasing subarray ending at index `i`.
-2. **`dp2[i]`**: Represents the length of the longest non-decreasing subarray starting at index `i`.
-
-Using these two arrays, we can quickly check if the index `i` satisfies the "good" condition by verifying:
-- `dp1[i-1] >= k`: Ensures the subarray from index `i-k` to `i-1` is non-increasing.
-- `dp2[i+1] >= k`: Ensures the subarray from index `i+1` to `i+k` is non-decreasing.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- We need to efficiently track sequences of non-increasing and non-decreasing elements.
+- We can use dynamic programming to build the dp1 and dp2 arrays and check for good indices by iterating over the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that n will be at least 3, so this case does not need to be handled.
+- The algorithm should handle the maximum input size (up to 100,000 elements) efficiently.
+- If no indices satisfy the conditions, return an empty array.
+- Ensure the solution runs within time limits for large inputs (O(n) time complexity).
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = a.size();
-vector<int> dp1(n + 1, 1), dp2(n + 1, 1), ans;
+vector<int> goodIndices(vector<int>& a, int k) {
+    int n = a.size();
+    vector<int> dp1(n + 1, 1), dp2(n + 1, 1), ans;
+
+    for(int i = 1; i < n; i++)
+        if(a[i -1] >= a[i]) dp1[i] = dp1[i - 1]+1;
+    for(int i = n -2; i > 0; i--)
+        if(a[i] <= a[i +1]) dp2[i] = dp2[i +1]+1;
+
+    for(int i = k; i< n-k; i++)
+    if(dp1[i-1] >= k && dp2[i+1] >=k)
+    ans.push_back(i);
+
+    return ans;
+}
 ```
 
-- **`n`**: Stores the size of the input array `a`.
-- **`dp1`**: A dynamic programming array where `dp1[i]` holds the length of the longest non-increasing subarray ending at index `i`. We initialize it to 1 for all elements, assuming each element forms a subarray of length 1.
-- **`dp2`**: A dynamic programming array where `dp2[i]` holds the length of the longest non-decreasing subarray starting at index `i`. This is also initialized to 1 for all elements.
-- **`ans`**: A vector to store the resulting "good" indices.
+This function finds all indices in a given array where a specific condition holds, based on a sliding window defined by the parameter 'k'. It utilizes two dynamic programming arrays to track decreasing and increasing subsequences.
 
-#### Step 2: Fill `dp1` (Longest Non-Increasing Subarray Ending at Each Index)
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> goodIndices(vector<int>& a, int k) {
+	```
+	This line defines the function 'goodIndices', which takes a vector of integers 'a' and an integer 'k'. It returns a vector of integers representing the indices where the condition holds.
 
-```cpp
-for(int i = 1; i < n; i++)
-    if(a[i - 1] >= a[i]) dp1[i] = dp1[i - 1] + 1;
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = a.size();
+	```
+	This line initializes 'n' to store the size of the input vector 'a'.
 
-- We iterate through the array `a` from index 1 to `n - 1`.
-- If the current element `a[i]` is less than or equal to the previous element `a[i-1]`, it means the subarray from `i-1` to `i` is non-increasing, so we increment `dp1[i]` based on `dp1[i-1]`. Otherwise, `dp1[i]` remains 1 (indicating a new subarray starts at `i`).
+3. **Dynamic Programming Arrays Initialization**
+	```cpp
+	    vector<int> dp1(n + 1, 1), dp2(n + 1, 1), ans;
+	```
+	Here, two dynamic programming arrays, 'dp1' and 'dp2', are initialized to size 'n + 1' with all elements set to 1. 'dp1' will track the length of decreasing subsequences from the left, while 'dp2' will track increasing subsequences from the right. The vector 'ans' will store the valid indices.
 
-#### Step 3: Fill `dp2` (Longest Non-Decreasing Subarray Starting at Each Index)
+4. **First Loop**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	This loop iterates over the array starting from the second element (index 1). It updates the 'dp1' array based on whether the current element is less than or equal to the previous one.
 
-```cpp
-for(int i = n - 2; i > 0; i--)
-    if(a[i] <= a[i + 1]) dp2[i] = dp2[i + 1] + 1;
-```
+5. **Update dp1**
+	```cpp
+	        if(a[i -1] >= a[i]) dp1[i] = dp1[i - 1]+1;
+	```
+	If the current element 'a[i]' is less than or equal to the previous element 'a[i-1]', 'dp1[i]' is updated to the value of 'dp1[i-1]' + 1, indicating the continuation of a decreasing subsequence.
 
-- We iterate backward through the array `a` from index `n-2` to index 1.
-- If the current element `a[i]` is less than or equal to the next element `a[i+1]`, it means the subarray from `i` to `i+1` is non-decreasing, so we increment `dp2[i]` based on `dp2[i+1]`. Otherwise, `dp2[i]` remains 1.
+6. **Second Loop**
+	```cpp
+	    for(int i = n -2; i > 0; i--)
+	```
+	This loop iterates over the array from the second last element to the second element. It calculates the 'dp2' array based on the condition of the next element being greater than or equal to the current element.
 
-#### Step 4: Find "Good" Indices
+7. **Update dp2**
+	```cpp
+	        if(a[i] <= a[i +1]) dp2[i] = dp2[i +1]+1;
+	```
+	If the current element 'a[i]' is less than or equal to the next element 'a[i+1]', 'dp2[i]' is updated to the value of 'dp2[i+1]' + 1, indicating the continuation of an increasing subsequence.
 
-```cpp
-for(int i = k; i < n - k; i++)
-    if(dp1[i - 1] >= k && dp2[i + 1] >= k)
-        ans.push_back(i);
-```
+8. **Third Loop**
+	```cpp
+	    for(int i = k; i< n-k; i++)
+	```
+	This loop iterates over indices 'i' from 'k' to 'n-k', ensuring that we have enough elements on both sides of the current index for comparison.
 
-- We iterate through the array starting from index `k` to `n - k - 1` (ensuring there is space for both subarrays of length `k` before and after `i`).
-- For each index `i`, we check if:
-  - The subarray from `i - k` to `i - 1` is non-increasing (`dp1[i - 1] >= k`).
-  - The subarray from `i + 1` to `i + k` is non-decreasing (`dp2[i + 1] >= k`).
-- If both conditions are satisfied, we add the index `i` to the `ans` vector.
+9. **Condition for Valid Indices**
+	```cpp
+	    if(dp1[i-1] >= k && dp2[i+1] >=k)
+	```
+	This condition checks if the current index 'i' can form a valid index based on the lengths of the decreasing subsequence before it (dp1[i-1]) and the increasing subsequence after it (dp2[i+1]). Both need to be greater than or equal to 'k'.
 
-#### Step 5: Return the Result
+10. **Store Valid Indices**
+	```cpp
+	    ans.push_back(i);
+	```
+	If the index satisfies the condition, it is added to the 'ans' vector.
 
-```cpp
-return ans;
-```
+11. **Return**
+	```cpp
+	    return ans;
+	```
+	The function returns the 'ans' vector, which contains all the valid indices.
 
-- Finally, we return the `ans` vector containing the indices that are "good" according to the problem's definition.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity
+The time complexity is O(n) because we only traverse the array a few times.
 
-#### Time Complexity:
-- **O(N)**: The time complexity of the solution is linear, O(N), where `N` is the length of the array `a`. This is because we iterate through the array a constant number of times (three times in total: once for filling `dp1`, once for `dp2`, and once for checking the good indices).
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
-- **O(N)**: We use three arrays: `dp1`, `dp2`, and `ans`, each of size `N`. Hence, the space complexity is O(N).
+The space complexity is O(n) because we use two additional arrays (dp1 and dp2) of size n.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently solves the problem by using dynamic programming to preprocess the information required for each index. By maintaining two auxiliary arrays `dp1` and `dp2` that store the lengths of the longest non-increasing and non-decreasing subarrays, we can determine if an index satisfies the "good" condition in constant time. The time complexity of O(N) ensures that the solution scales well with large inputs, making it an optimal solution for this problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-good-indices/description/)
 

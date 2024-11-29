@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "s8p8ukTyA2I"
 youtube_upload_date="2021-11-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/s8p8ukTyA2I/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,143 +28,242 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/s8p8ukTyA2I/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a list of tasks and a number n, determine the minimum number of CPU intervals required to complete all tasks, respecting the constraint that the same task must be separated by at least n intervals.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of tasks (represented as uppercase English letters) and an integer n, which denotes the cooling period between the same tasks.
+- **Example:** `tasks = ["A", "A", "A", "B", "B", "B"], n = 2`
+- **Constraints:**
+	- 1 <= tasks.length <= 10^4
+	- tasks[i] is an uppercase English letter.
+	- 0 <= n <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int leastInterval(vector<char>& tasks, int n) {
-        // if(n == 0) return tasks.size();
-        map<char, int> mp;
-        for(char x: tasks)
-            mp[x]++;
-        priority_queue<pair<int, char>> pq;
-        for(auto it: mp) {
-            pq.push({it.second, it.first});
-        }
-        int time = 0, net = 0;
-        while(!pq.empty()) {
-            vector<pair<int, char>> tmp;
-            time = 0;
-            for(int i = 0; i < n + 1; i++) {
-                if(!pq.empty()) {
-                    // cout<<pq.top().first << " ";
-                    tmp.push_back(pq.top());
-                    pq.pop();
-                    time++;
-                }
-            }
-            for(auto it: tmp) {
-                it.first--;
-                if(it.first)
-                    pq.push(it);
-            }
-            net += !pq.empty()? n + 1: time;
-        }
-        return net;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of CPU intervals required to execute all tasks, including idle times where no task is executed.
+- **Example:** `8`
+- **Constraints:**
+	- The output is a single integer representing the number of intervals.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To minimize the number of CPU intervals, the algorithm should schedule tasks in a way that maximizes task completion while respecting the cooling time n.
+
+- 1. Count the frequency of each task.
+- 2. Use a priority queue to process tasks in the order of their frequency.
+- 3. For each task, perform it and then wait for n intervals before performing it again, using idle periods where necessary.
+- 4. Return the total number of intervals.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tasks list is valid and contains only uppercase English letters.
+- n is a non-negative integer representing the cooling time between tasks of the same type.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `tasks = ["A", "A", "A", "B", "B", "B"], n = 2`  \
+  **Explanation:** In this example, task A and task B need to be performed in such a way that there are at least 2 intervals between each repetition of the same task. Thus, idling is required between repetitions.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves calculating the frequencies of tasks and efficiently scheduling them while respecting the cooling interval using a priority queue.
+
+### Initial Thoughts 💭
+- This is a scheduling problem with a cooling constraint, which is a typical greedy approach scenario.
+- We need to ensure that tasks are performed in an optimal order to minimize idle times.
+{{< dots >}}
+### Edge Cases 🌐
+- If no tasks are provided (empty list), the result is 0 intervals.
+- Handle cases where the number of tasks is close to 10^4, requiring efficient scheduling.
+- If n = 0, tasks can be performed one after another without idle time.
+- Ensure that the solution can efficiently handle large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int leastInterval(vector<char>& tasks, int n) {
+    // if(n == 0) return tasks.size();
+    map<char, int> mp;
+    for(char x: tasks)
+        mp[x]++;
+    priority_queue<pair<int, char>> pq;
+    for(auto it: mp) {
+        pq.push({it.second, it.first});
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to determine the least amount of time required to complete a set of tasks with cooling periods between the same tasks. You are given a list of tasks, each represented by a character, and a cooling period `n`. The goal is to schedule the tasks in such a way that no two identical tasks are executed within `n` units of time. 
-
-The cooling period `n` defines the minimum number of units of time that must pass between two consecutive executions of the same task. If there are idle times when no tasks are available to schedule, they should be accounted for as well. 
-
-Your task is to calculate the least interval (time) required to complete all tasks.
-
-### Approach
-
-This problem can be efficiently solved using a **greedy approach** combined with a **priority queue** (max-heap). Here's the breakdown of the approach:
-
-1. **Task Frequency Calculation:** We first count the frequency of each task. The higher the frequency, the higher its priority in the scheduling process.
-
-2. **Max-Heap to Select Tasks:** We use a max-heap to always pick the most frequent task available to execute. The heap ensures that tasks with higher frequencies are processed first, and tasks that still need to be executed are moved to the heap again after the cooling period.
-
-3. **Time Simulation:** Each cycle consists of executing the most frequent tasks and then waiting for a cooling period. The cycle runs until all tasks are completed. If there are idle times (when no task is available to schedule), they are accounted for as well.
-
-4. **Cooling Period Management:** After each cycle, the tasks that are processed are decremented (one execution), and those tasks that still need to be executed are put back into the heap for future cycles. If tasks have no remaining executions left, they are discarded.
-
-By simulating this process, we can compute the minimum time required to complete all tasks.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Count Task Frequencies
-```cpp
-map<char, int> mp;
-for(char x: tasks)
-    mp[x]++;
-```
-- We use a map to count how many times each task occurs in the `tasks` list. Each key represents a task, and the value is the number of times that task appears.
-
-#### Step 2: Create a Max-Heap for Task Prioritization
-```cpp
-priority_queue<pair<int, char>> pq;
-for(auto it: mp) {
-    pq.push({it.second, it.first});
+    int time = 0, net = 0;
+    while(!pq.empty()) {
+        vector<pair<int, char>> tmp;
+        time = 0;
+        for(int i = 0; i < n + 1; i++) {
+            if(!pq.empty()) {
+                // cout<<pq.top().first << " ";
+                tmp.push_back(pq.top());
+                pq.pop();
+                time++;
+            }
+        }
+        for(auto it: tmp) {
+            it.first--;
+            if(it.first)
+                pq.push(it);
+        }
+        net += !pq.empty()? n + 1: time;
+    }
+    return net;
 }
 ```
-- We create a priority queue (max-heap) to prioritize tasks based on their frequency. The heap stores pairs of `<frequency, task>`. The task with the highest frequency will always be at the top of the heap, ensuring that we schedule the most frequent tasks first.
 
-#### Step 3: Time Simulation Loop
-```cpp
-int time = 0, net = 0;
-while(!pq.empty()) {
-    vector<pair<int, char>> tmp;
-    time = 0;
-    for(int i = 0; i < n + 1; i++) {
-        if(!pq.empty()) {
-            tmp.push_back(pq.top());
-            pq.pop();
-            time++;
-        }
-    }
-```
-- We simulate each unit of time using a loop that continues as long as there are tasks in the heap. For each unit of time, we attempt to execute up to `n + 1` tasks (since we can process up to `n + 1` tasks within each cooling period).
-- We push the most frequent tasks from the heap into the `tmp` vector and increment the `time` for each task processed.
+The `leastInterval` function calculates the minimum time required to complete all tasks with given constraints. Tasks are represented as characters in a list, and a cooling period of `n` intervals is enforced between tasks of the same type. The algorithm uses a priority queue to process tasks in decreasing order of frequency, ensuring that tasks are completed within the constraints.
 
-#### Step 4: Update Task Frequency After Execution
-```cpp
-for(auto it: tmp) {
-    it.first--;
-    if(it.first)
-        pq.push(it);
-}
-```
-- After executing a task, we decrement its frequency by 1 (`it.first--`). If a task still needs to be executed (its frequency is greater than 0), we push it back into the heap for future scheduling.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int leastInterval(vector<char>& tasks, int n) {
+	```
+	Declares the `leastInterval` function, which accepts a list of tasks and a cooling period `n`, and returns the minimum time required to complete all tasks.
 
-#### Step 5: Calculate Time for Each Cycle
-```cpp
-net += !pq.empty()? n + 1: time;
-```
-- After each cycle, if there are still tasks left in the heap, we account for the full cooling period `n + 1`. If there are no tasks left to process, we use the actual `time` spent in that cycle.
+2. **Map Initialization**
+	```cpp
+	    map<char, int> mp;
+	```
+	Initializes a map `mp` to store the frequency of each task (character) in the `tasks` list.
 
-#### Step 6: Return the Total Time
-```cpp
-return net;
-```
-- Once all tasks are completed and the heap is empty, we return the total time spent to complete all tasks.
+3. **Loop Over Tasks**
+	```cpp
+	    for(char x: tasks)
+	```
+	Iterates over the `tasks` list, counting the frequency of each task using the map `mp`.
 
-### Complexity
+4. **Increment Task Count**
+	```cpp
+	        mp[x]++;
+	```
+	Increments the count of task `x` in the map `mp`, recording how many times each task appears.
 
-#### Time Complexity:
-- **O(N log K)**, where `N` is the number of tasks and `K` is the number of unique tasks. The main operations involving the priority queue are the insertions and extractions, both of which take **O(log K)** time. In the worst case, every task will be pushed and popped from the heap, resulting in a time complexity of **O(N log K)**.
+5. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<pair<int, char>> pq;
+	```
+	Initializes a priority queue `pq` to store tasks in decreasing order of their frequency, where the task with the highest frequency is processed first.
 
-#### Space Complexity:
-- **O(K)**, where `K` is the number of unique tasks. We use a map to store the frequency of each task, and the priority queue stores each unique task with its frequency. Hence, the space complexity is proportional to the number of unique tasks.
+6. **Map to Priority Queue**
+	```cpp
+	    for(auto it: mp) {
+	```
+	Iterates over the map `mp` to push each task and its frequency into the priority queue `pq`.
 
-### Conclusion
+7. **Push to Priority Queue**
+	```cpp
+	        pq.push({it.second, it.first});
+	```
+	Pushes the task-frequency pair (`it.second`, `it.first`) into the priority queue, ensuring that tasks are ordered by frequency.
 
-This solution efficiently calculates the least amount of time needed to complete all tasks while respecting the cooling period between identical tasks. By using a greedy approach with a priority queue, we ensure that tasks are scheduled in an optimal order, prioritizing the most frequent tasks. The use of the max-heap allows us to select the tasks with the highest frequency, ensuring that we always work on tasks that require the most attention.
+8. **Time Initialization**
+	```cpp
+	    int time = 0, net = 0;
+	```
+	Initializes variables `time` (to track the current time) and `net` (to track the total time required to complete all tasks).
 
-The solution handles various edge cases, including:
-- Tasks with different frequencies.
-- Scenarios where there are fewer tasks than the available cooling time.
-- Edge cases where no cooling period is required (`n = 0`).
+9. **While Loop (Priority Queue Processing)**
+	```cpp
+	    while(!pq.empty()) {
+	```
+	Starts a loop that continues until all tasks are processed, i.e., until the priority queue is empty.
 
-The time and space complexity are efficient enough for large inputs, making this approach suitable for solving problems with large task lists and cooling periods. This solution strikes a balance between clarity and efficiency, ensuring both correctness and optimal performance for a variety of test cases.
+10. **Temporary Task Storage**
+	```cpp
+	        vector<pair<int, char>> tmp;
+	```
+	Creates a temporary vector `tmp` to store tasks that are processed in the current cycle of `n+1` steps.
+
+11. **Reset Time**
+	```cpp
+	        time = 0;
+	```
+	Resets the `time` variable to 0 for each new cycle of task processing.
+
+12. **For Loop (Task Processing)**
+	```cpp
+	        for(int i = 0; i < n + 1; i++) {
+	```
+	Iterates over the tasks for the current cycle, allowing up to `n+1` steps in each cycle (processing one task per step).
+
+13. **Task Available Check**
+	```cpp
+	            if(!pq.empty()) {
+	```
+	Checks if there are tasks available in the priority queue to process in the current step.
+
+14. **Push Task to Temporary Storage**
+	```cpp
+	                tmp.push_back(pq.top());
+	```
+	Pushes the task with the highest frequency (top of the priority queue) into the temporary vector `tmp`.
+
+15. **Pop Task from Priority Queue**
+	```cpp
+	                pq.pop();
+	```
+	Pops the task from the priority queue, as it has been selected for processing in the current cycle.
+
+16. **Increment Time**
+	```cpp
+	                time++;
+	```
+	Increments the `time` variable to account for the time spent processing the current task.
+
+17. **Update Task Counts**
+	```cpp
+	        for(auto it: tmp) {
+	```
+	Iterates over the tasks in `tmp` (tasks processed in the current cycle) to update their frequencies.
+
+18. **Decrement Task Count**
+	```cpp
+	            it.first--;
+	```
+	Decrements the frequency of the task in `tmp` as it has been processed once.
+
+19. **Re-add Task to Queue**
+	```cpp
+	            if(it.first)
+	```
+	Checks if the task still has remaining occurrences (frequency > 0) before re-adding it to the priority queue.
+
+20. **Push Task Back to Queue**
+	```cpp
+	                pq.push(it);
+	```
+	Pushes the task back into the priority queue if it still has remaining occurrences.
+
+21. **Update Net Time**
+	```cpp
+	        net += !pq.empty()? n + 1: time;
+	```
+	Adds either `n + 1` (if tasks are still remaining) or `time` (if no tasks are left) to the total `net` time.
+
+22. **Return Result**
+	```cpp
+	    return net;
+	```
+	Returns the total time required to complete all tasks, represented by the `net` variable.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N log N)
+- **Average Case:** O(N log N)
+- **Worst Case:** O(N log N)
+
+The time complexity is dominated by the heap operations which take O(log N) time, where N is the number of unique tasks.
+
+### Space Complexity 💾
+- **Best Case:** O(N)
+- **Worst Case:** O(N)
+
+The space complexity is O(N) where N is the number of unique tasks, as we need to store them in the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/task-scheduler/description/)
 

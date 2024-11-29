@@ -14,101 +14,144 @@ img_src = ""
 youtube = "TBVr58ynqsI"
 youtube_upload_date="2022-09-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/TBVr58ynqsI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string 's' consisting of lowercase English letters, find the length of the longest substring where the characters are consecutive in the alphabet.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string 's'.
+- **Example:** `s = "abcaz"`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists of only lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestContinuousSubstring(string s) {
-        int x = 1, ans = 1;
-        for(int i = 1; i < s.size(); i++) {
-            if(s[i] == s[i -1] +1) {
-                x++;
-            } else x = 1;
-            ans = max(x, ans);
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest continuous substring of consecutive letters in the alphabet.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the longest substring of consecutive letters.
+
+- 1. Initialize a variable 'x' to track the current length of the substring.
+- 2. Iterate over the string 's', checking if each character is consecutive to the previous one.
+- 3. If the current character is consecutive, increment 'x'.
+- 4. If the current character is not consecutive, reset 'x' to 1.
+- 5. Keep track of the maximum value of 'x' during the iteration.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string 's' is not empty.
+- The input will only contain lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "abacada"`  \
+  **Explanation:** The longest continuous alphabetical substring is 'ab', which has a length of 2. The 'ac' and 'ad' substrings are not consecutive.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the string and check for consecutive letters. If consecutive, increase the count. If not, reset and continue.
+
+### Initial Thoughts 💭
+- We need to check each character against the previous one to determine if they are consecutive.
+- The solution needs to iterate through the string once, so the complexity should be linear.
+- This problem can be solved efficiently in linear time, as we only need a single scan through the string.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always have at least one character, as per the problem constraints.
+- The solution must handle strings of length up to 100,000 efficiently.
+- If the string contains only one character, the longest substring is the string itself with a length of 1.
+- Ensure the solution runs in linear time due to the size constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestContinuousSubstring(string s) {
+    int x = 1, ans = 1;
+    for(int i = 1; i < s.size(); i++) {
+        if(s[i] == s[i -1] +1) {
+            x++;
+        } else x = 1;
+        ans = max(x, ans);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the length of the longest continuous substring of a given string `s`, where each character in the substring follows a continuous increasing order. This means that for a valid substring, each character should be one greater than the previous character in terms of their ASCII values.
-
-For example:
-- Given the string `"abc"`, the longest continuous increasing substring is `"abc"` with a length of 3.
-- Given the string `"abzcd"`, the longest continuous increasing substring is `"ab"` with a length of 2 because `"z"` breaks the increasing pattern.
-
-### Approach
-
-The task is to find the longest substring where each character follows an increment pattern (i.e., the ASCII value of each character is one more than the previous character). To achieve this, we can iterate through the string while keeping track of the current length of the valid increasing substring. If a character is not in the expected continuous increasing order, we reset the length counter.
-
-The solution proceeds as follows:
-1. We initialize two variables:
-   - `x` to track the length of the current increasing substring.
-   - `ans` to keep track of the maximum length found so far.
-   
-2. We iterate over the string starting from the second character, comparing each character with the previous one:
-   - If the current character is one greater than the previous character (i.e., `s[i] == s[i - 1] + 1`), we increase the current length counter `x`.
-   - Otherwise, we reset `x` to 1, as the increasing pattern has been broken.
-
-3. After each comparison, we update the result `ans` with the maximum value between the current length `x` and the previous maximum `ans`.
-
-4. At the end of the loop, `ans` will hold the length of the longest continuous increasing substring.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Initialization
-
-```cpp
-int x = 1, ans = 1;
-```
-- We initialize two variables:
-  - `x` is set to 1 because the minimum length of any valid substring is at least 1.
-  - `ans` is also set to 1 to store the maximum length of any increasing substring found during the iteration.
-
-#### 2. Iteration Through the String
-
-```cpp
-for(int i = 1; i < s.size(); i++) {
-    if(s[i] == s[i - 1] + 1) {
-        x++;
-    } else x = 1;
-    ans = max(x, ans);
+    return ans;
 }
 ```
-- We start a loop from `i = 1` (the second character) and go through the entire string.
-- Inside the loop:
-  - We check if the current character `s[i]` is one greater than the previous character `s[i-1]` (`s[i] == s[i - 1] + 1`). If so, we increment `x` because we are still in a continuous increasing substring.
-  - If the characters are not in the expected order (i.e., `s[i] != s[i - 1] + 1`), we reset `x` to 1 because the current substring has broken the increasing order, and the new potential substring starts with the current character.
-  
-- After each check, we update `ans` to store the maximum length of any valid substring found so far.
 
-#### 3. Return the Result
+This function finds the length of the longest continuous substring where each character is greater than the previous one by 1.
 
-```cpp
-return ans;
-```
-- Once the loop completes, the `ans` variable contains the length of the longest continuous increasing substring, which is returned as the result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int longestContinuousSubstring(string s) {
+	```
+	Function declaration for 'longestContinuousSubstring'. It takes a string 's' as input.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    int x = 1, ans = 1;
+	```
+	Initialize two variables: 'x' to track the length of the current continuous substring, and 'ans' to store the maximum length found.
 
-#### Time Complexity:
-- The time complexity of this solution is \( O(n) \), where `n` is the length of the input string `s`. We only need to iterate through the string once, comparing each character with its predecessor. This makes the solution linear in time complexity.
+3. **Loop Start**
+	```cpp
+	    for(int i = 1; i < s.size(); i++) {
+	```
+	Loop through the string starting from the second character, checking the relationship between consecutive characters.
 
-#### Space Complexity:
-- The space complexity is \( O(1) \), because we only use a constant amount of extra space for the variables `x` and `ans`. We don't use any additional data structures that grow with the input size.
+4. **Condition Check**
+	```cpp
+	        if(s[i] == s[i -1] +1) {
+	```
+	Check if the current character 's[i]' is exactly 1 greater than the previous character 's[i - 1]'.
 
-### Conclusion
+5. **Increment Counter**
+	```cpp
+	            x++;
+	```
+	If the condition is true, increment the length of the current continuous substring.
 
-The solution effectively solves the problem by using a single pass through the string, maintaining the current length of the increasing substring and updating the maximum length as needed. The simplicity of the approach, with just two variables for tracking the current and maximum lengths, ensures that both time and space complexities are optimal. This solution is efficient and scalable, handling even the largest inputs within the problem constraints. The code is both easy to understand and elegant, making it a reliable and fast approach to solving the problem of finding the longest continuous increasing substring.
+6. **Reset Counter**
+	```cpp
+	        } else x = 1;
+	```
+	If the condition is false, reset the length of the current continuous substring to 1.
+
+7. **Update Maximum**
+	```cpp
+	        ans = max(x, ans);
+	```
+	Update the maximum length found so far between the current substring length 'x' and the stored maximum 'ans'.
+
+8. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the maximum length of the continuous substring found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear because we only need to traverse the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only need a few integer variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/length-of-the-longest-alphabetical-continuous-substring/description/)
 

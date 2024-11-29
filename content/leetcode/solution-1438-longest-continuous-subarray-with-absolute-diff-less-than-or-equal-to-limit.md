@@ -14,128 +14,156 @@ img_src = ""
 youtube = "V-ecDfY5xEw"
 youtube_upload_date="2024-06-23"
 youtube_thumbnail="https://i.ytimg.com/vi/V-ecDfY5xEw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers `nums` and a positive integer `limit`, determine the length of the longest subarray where the absolute difference between the minimum and maximum elements is less than or equal to `limit`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers `nums` and an integer `limit`.
+- **Example:** `nums = [6,3,5,8], limit = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 0 <= limit <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestSubarray(vector<int>& nums, int limit) {
-        multiset<int> ms;
-        int res = 0, j = 0;
-        for(int i = 0; i < nums.size(); i++) {
-            ms.insert(nums[i]);
-            while(!ms.empty() && *ms.rbegin() - *ms.begin() > limit) {
-                ms.erase(ms.find(nums[j++]));
-            }
-            res = max(res, i - j + 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the size of the longest subarray satisfying the given condition.
+- **Example:** `2`
+- **Constraints:**
+	- The output is a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the size of the longest subarray where the absolute difference between the minimum and maximum elements is less than or equal to the given `limit`.
+
+- Step 1: Use a multiset to track the current subarray's elements.
+- Step 2: For every element in `nums`, add it to the multiset and check if the max difference exceeds the `limit`.
+- Step 3: If the condition is violated, remove elements from the start of the current subarray until it satisfies the condition again.
+- Step 4: Keep track of the maximum subarray size.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` contains at least one element.
+- The input values are within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [6,3,5,8], limit = 3`  \
+  **Explanation:** The longest subarray is [6,3] or [5,8], each with a size of 2.
+
+- **Input:** `nums = [9,2,4,6], limit = 4`  \
+  **Explanation:** The subarray [2,4,6] has a max difference of 4 and is the longest subarray with size 3.
+
+{{< dots >}}
+## Approach 🚀
+Use a sliding window approach with a multiset to efficiently maintain the current subarray's minimum and maximum values.
+
+### Initial Thoughts 💭
+- The problem requires maintaining a subarray that satisfies a condition on the maximum and minimum values.
+- A sliding window with dynamic size can help efficiently process the array.
+- We can use a multiset or two deques to maintain the max and min values of the current window.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty input is allowed as `nums` will always have at least one element.
+- The solution must handle arrays with up to 10^5 elements efficiently.
+- Handle cases with `limit = 0` where only subarrays with identical elements are valid.
+- Ensure the solution remains efficient even for extreme values of `limit` or `nums[i]`.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestSubarray(vector<int>& nums, int limit) {
+    multiset<int> ms;
+    int res = 0, j = 0;
+    for(int i = 0; i < nums.size(); i++) {
+        ms.insert(nums[i]);
+        while(!ms.empty() && *ms.rbegin() - *ms.begin() > limit) {
+            ms.erase(ms.find(nums[j++]));
         }
-        return res;
+        res = max(res, i - j + 1);
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+The `longestSubarray` function calculates the length of the longest subarray with the absolute difference between the maximum and minimum elements being less than or equal to a given limit. It uses a sliding window technique with a multiset to maintain the subarray in sorted order.
 
-The task is to find the length of the longest contiguous subarray in a given list of integers such that the difference between the maximum and minimum elements in the subarray does not exceed a specified limit. This problem can be understood as a sliding window problem, where we want to maintain a window of numbers that satisfies a certain condition regarding their maximum and minimum values.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestSubarray(vector<int>& nums, int limit) {
+	```
+	Defines the function `longestSubarray`, which takes a vector of integers `nums` and an integer `limit` as input. It returns the length of the longest subarray where the difference between the maximum and minimum elements is within the limit.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    multiset<int> ms;
+	```
+	Initializes a `multiset` named `ms` to store elements of the subarray in sorted order. This allows efficient access to the minimum and maximum elements.
 
-To solve this problem, we will use a sliding window technique combined with a multiset data structure to keep track of the elements in the current window. The general steps involved in the approach are as follows:
+3. **Variable Initialization**
+	```cpp
+	    int res = 0, j = 0;
+	```
+	Initializes two variables: `res` to store the length of the longest valid subarray found and `j` to represent the starting index of the sliding window.
 
-1. **Initialize Variables**: We will use a multiset to store the elements of the current window. We also maintain pointers to define the start and end of the window and a variable to store the maximum length of valid subarrays found so far.
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Starts a loop where `i` iterates through each element of the `nums` vector. This loop represents the end of the sliding window.
 
-2. **Iterate Over the Array**: We will traverse through the array using a loop, expanding the window by adding elements to the multiset.
+5. **Insert Operation**
+	```cpp
+	        ms.insert(nums[i]);
+	```
+	Inserts the current element `nums[i]` into the `multiset` to maintain the sorted order of the subarray.
 
-3. **Check Validity of the Window**: For each new element added, we will check if the condition (difference between max and min elements in the window) is violated. If it is, we will shrink the window from the left by removing elements from the multiset until the condition is satisfied again.
+6. **Condition Check**
+	```cpp
+	        while(!ms.empty() && *ms.rbegin() - *ms.begin() > limit) {
+	```
+	Checks whether the difference between the maximum (`*ms.rbegin()`) and minimum (`*ms.begin()`) elements of the `multiset` exceeds the `limit`. If so, the subarray is invalid, and the sliding window is adjusted.
 
-4. **Update Result**: After adjusting the window, we will compute the length of the current valid window and update our maximum length variable if needed.
+7. **Erase Operation**
+	```cpp
+	            ms.erase(ms.find(nums[j++]));
+	```
+	Erases the element at index `j` from the `multiset` and increments `j` to shrink the sliding window from the left side.
 
-5. **Return the Result**: Finally, we return the maximum length of the valid subarrays found.
+8. **Update Result**
+	```cpp
+	        res = max(res, i - j + 1);
+	```
+	Updates the result `res` with the length of the current valid subarray, which is `i - j + 1`, and stores the maximum length found.
 
-### Code Breakdown (Step by Step)
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the value of `res`, which represents the length of the longest valid subarray found.
 
-Let’s break down the provided code step by step:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of `nums`.
+- **Average Case:** O(n) for maintaining the sliding window and set operations.
+- **Worst Case:** O(n) for iterating through the array.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+The time complexity is linear as each element is added and removed from the sliding window at most once.
 
-   - We define a class named `Solution` which will contain our method to compute the result.
+### Space Complexity 💾
+- **Best Case:** O(1) if subarrays are very small.
+- **Worst Case:** O(n) for the multiset or deque in extreme cases.
 
-2. **Function Declaration**:
-   ```cpp
-   int longestSubarray(vector<int>& nums, int limit) {
-   ```
+The space complexity depends on the size of the sliding window and is O(n) in the worst case.
 
-   - The function `longestSubarray` takes two parameters: a vector of integers `nums` and an integer `limit` which defines the maximum allowed difference between the maximum and minimum elements in a valid subarray.
+**Happy Coding! 🎉**
 
-3. **Variable Initialization**:
-   ```cpp
-   multiset<int> ms;
-   int res = 0, j = 0;
-   ```
-
-   - We declare a `multiset<int>` named `ms` to store the elements of the current subarray. The integer `res` will store the maximum length of valid subarrays found, and `j` is used as a pointer to the start of the current window.
-
-4. **Iterate Over the Array**:
-   ```cpp
-   for(int i = 0; i < nums.size(); i++) {
-       ms.insert(nums[i]);
-   ```
-
-   - A loop iterates over each element in the `nums` array. The current element `nums[i]` is inserted into the multiset.
-
-5. **Check Window Validity**:
-   ```cpp
-   while(!ms.empty() && *ms.rbegin() - *ms.begin() > limit) {
-       ms.erase(ms.find(nums[j++]));
-   }
-   ```
-
-   - We check if the difference between the maximum element (`*ms.rbegin()`) and the minimum element (`*ms.begin()`) in the multiset exceeds the specified `limit`. If it does, we remove the leftmost element from the window (pointed to by `j`) until the condition is satisfied.
-
-6. **Update Maximum Length**:
-   ```cpp
-   res = max(res, i - j + 1);
-   ```
-
-   - After ensuring the window is valid, we calculate the current length of the window (`i - j + 1`) and update `res` if this length is greater than the previously recorded maximum.
-
-7. **Return the Result**:
-   ```cpp
-   return res;
-   }
-   ```
-
-   - Finally, we return the maximum length of the valid subarray stored in `res`.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \(O(n \log n)\), where \(n\) is the number of elements in the input array. This complexity arises from the insertion and deletion operations on the multiset, which take \(O(\log n)\) time.
-
-- **Space Complexity**: The space complexity is \(O(n)\) in the worst case, as we may store all elements in the multiset if the entire array satisfies the condition.
-
-### Conclusion
-
-This solution effectively finds the longest contiguous subarray that meets the specified condition using a sliding window approach and a multiset for dynamic maintenance of the window's elements. It showcases the power of combining data structures with algorithmic strategies to solve complex problems efficiently.
-
-#### Key Takeaways:
-
-1. **Sliding Window Technique**: The sliding window technique is a common pattern for solving problems related to subarrays, allowing for efficient tracking of conditions over a range of elements.
-
-2. **Multiset Usage**: Using a multiset provides an easy way to maintain a sorted order of elements and allows quick access to the maximum and minimum elements, which is crucial for this problem.
-
-3. **Dynamic Problem Solving**: The method illustrates how to dynamically adjust the size of the solution set (the window) based on the input conditions, demonstrating an effective approach to managing constraints in array problems.
-
-Overall, this implementation serves as a practical example of leveraging data structures to achieve efficient algorithms in solving array-related challenges.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/)
 

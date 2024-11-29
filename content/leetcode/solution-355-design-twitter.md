@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "pNichitDD2E"
 youtube_upload_date="2022-01-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/pNichitDD2E/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,117 +28,165 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/pNichitDD2E/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design a simplified version of Twitter where users can post tweets, follow/unfollow other users, and view the most recent tweets in their news feed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sequence of method calls to the Twitter object. Each method is represented as a list where the first element is the method name and the subsequent elements are the parameters passed to the method.
+- **Example:** `["Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"]
+[[ ], [1, 10], [1], [1, 3], [3, 20], [1], [1, 3], [1]]`
+- **Constraints:**
+	- 1 <= userId, followerId, followeeId <= 500
+	- 0 <= tweetId <= 104
+	- All tweets have unique IDs.
+	- At most 3 * 10^4 calls will be made to postTweet, getNewsFeed, follow, and unfollow.
 
-{{< highlight cpp >}}
-class Tweet {
-public:
-    int id;
-    int time;
-    Tweet* next;
-    Tweet(int id, int time) {
-        this->id = id;
-        this->time = time;
-        next = NULL;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Each method call may return different outputs, for example, the postTweet function does not return anything, while getNewsFeed will return the 10 most recent tweet IDs.
+- **Example:** `[null, null, [10], null, null, [20, 10], null, [10]]`
+- **Constraints:**
+	- The output of getNewsFeed should contain the tweet IDs in order of the most recent to least recent.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Design a Twitter system with basic functionality such as posting tweets, following/unfollowing users, and retrieving the latest tweets in a user's feed.
+
+- Create a User class that stores tweets and followed users.
+- Create a Twitter class that handles posting tweets, following/unfollowing users, and retrieving the news feed with the 10 most recent tweets.
+{{< dots >}}
+### Problem Assumptions ✅
+- Users may follow and unfollow other users multiple times.
+- Tweets are posted by the user or the users they follow.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"]
+[[ ], [1, 10], [1], [1, 3], [3, 20], [1], [1, 3], [1]]`  \
+  **Explanation:** In this example, User 1 posts a tweet with ID 10, follows User 3, and receives tweets from User 3 in their feed. After unfollowing User 3, User 1 only sees their own tweets.
+
+{{< dots >}}
+## Approach 🚀
+We will simulate the Twitter functionality using classes for Users and the main Twitter system, handling tweets, following, unfollowing, and retrieving news feeds.
+
+### Initial Thoughts 💭
+- The primary challenge is efficiently managing the tweets and followed users for each user.
+- A priority queue or similar structure will help in retrieving the most recent tweets.
+- We need a way to store the user's tweets and the users they follow, and we should retrieve the most recent tweets from both the user and the followed users efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- When no tweets are posted yet, the news feed should return an empty list.
+- Handle cases where many users are following each other and there are numerous tweets to retrieve.
+- If a user unfollows themselves, it should not affect their own tweets in their news feed.
+- Ensure that the solution handles up to 30,000 operations efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int id;
+int time;
+Tweet* next;
+Tweet(int id, int time) {
+    this->id = id;
+    this->time = time;
+    next = NULL;
+}
 };
 
 class User {
 public:
-    int id;
-    set<int> followed;
-    Tweet* tweet_head;
+int id;
+set<int> followed;
+Tweet* tweet_head;
 
-    User(int id) {
-        id = id;
-        follow(id); // follow self;
-        tweet_head = NULL;
-    }
+User(int id) {
+    id = id;
+    follow(id); // follow self;
+    tweet_head = NULL;
+}
 
-    void follow(int id) {
-        followed.insert(id);
-    }
+void follow(int id) {
+    followed.insert(id);
+}
 
-    void unfollow(int id) {
-        followed.erase(id);
-    }
+void unfollow(int id) {
+    followed.erase(id);
+}
 
-    void post(int id, int times) {
-        Tweet* t = new Tweet(id, times);
-        t->next = tweet_head;
-        tweet_head = t;
-    }
+void post(int id, int times) {
+    Tweet* t = new Tweet(id, times);
+    t->next = tweet_head;
+    tweet_head = t;
+}
 };
 
 
 class Twitter {
 public:
-    int timeStamp = 0;
-    map<int, User*> userMap;
-    
+int timeStamp = 0;
+map<int, User*> userMap;
+
 public:
-    Twitter() {
-        // user map init
-    }
-    
-    void postTweet(int userId, int tweetId) {
-        if(!userMap.count(userId)) {
-            User* u = new User(userId);
-            userMap[userId] = u;
-        }
-        userMap[userId]->post(tweetId, timeStamp++);
-    }
-    
-    struct compare {
-        bool operator()(const Tweet* l, const Tweet* r) {
-            return l->time < r->time;
-        }
-    };
+Twitter() {
+    // user map init
+}
 
-    vector<int> getNewsFeed(int userId) {
-        vector<int> res;
-        if(!userMap.count(userId)) {
-            return res;
-        };
-        set<int> users = userMap[userId]->followed;
-        
-        priority_queue<Tweet*, vector<Tweet*>, compare> pq;
+void postTweet(int userId, int tweetId) {
+    if(!userMap.count(userId)) {
+        User* u = new User(userId);
+        userMap[userId] = u;
+    }
+    userMap[userId]->post(tweetId, timeStamp++);
+}
 
-        for(int user: users) {
-            Tweet* t = userMap[user]->tweet_head;
-            if(t != NULL)
-                pq.push(t);
-        }
-        int n = 0;
-        while(!pq.empty() && n < 10) {
-            Tweet* t = pq.top();
-            pq.pop();
-            res.push_back(t->id);
-            n++;
-            if(t->next != NULL)
-                pq.push(t->next);
-        }
-        cout << n << "-";
+struct compare {
+    bool operator()(const Tweet* l, const Tweet* r) {
+        return l->time < r->time;
+    }
+};
+
+vector<int> getNewsFeed(int userId) {
+    vector<int> res;
+    if(!userMap.count(userId)) {
         return res;
-    }
+    };
+    set<int> users = userMap[userId]->followed;
     
-    void follow(int followerId, int followeeId) {
-        if(!userMap.count(followerId)) {
-            User* u = new User(followerId);
-            userMap[followerId] = u;
-        }
-        if(!userMap.count(followeeId)) {
-            User* u = new User(followeeId);
-            userMap[followeeId] = u;
-        }        
-        userMap[followerId]->follow(followeeId);
+    priority_queue<Tweet*, vector<Tweet*>, compare> pq;
+
+    for(int user: users) {
+        Tweet* t = userMap[user]->tweet_head;
+        if(t != NULL)
+            pq.push(t);
     }
-    
-    void unfollow(int followerId, int followeeId) {
-        if(userMap.count(followerId) && followerId == followeeId)
-            return;
-            userMap[followerId]->unfollow(followeeId);
+    int n = 0;
+    while(!pq.empty() && n < 10) {
+        Tweet* t = pq.top();
+        pq.pop();
+        res.push_back(t->id);
+        n++;
+        if(t->next != NULL)
+            pq.push(t->next);
     }
+    cout << n << "-";
+    return res;
+}
+
+void follow(int followerId, int followeeId) {
+    if(!userMap.count(followerId)) {
+        User* u = new User(followerId);
+        userMap[followerId] = u;
+    }
+    if(!userMap.count(followeeId)) {
+        User* u = new User(followeeId);
+        userMap[followeeId] = u;
+    }        
+    userMap[followerId]->follow(followeeId);
+}
+
+void unfollow(int followerId, int followeeId) {
+    if(userMap.count(followerId) && followerId == followeeId)
+        return;
+        userMap[followerId]->unfollow(followeeId);
+}
 
 };
 
@@ -148,212 +197,167 @@ public:
  * vector<int> param_2 = obj->getNewsFeed(userId);
  * obj->follow(followerId,followeeId);
  * obj->unfollow(followerId,followeeId);
- */
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-Imagine you’re designing a simplified version of **Twitter**, where users can:
-
-- **Post tweets**
-- **Follow/unfollow other users**
-- **View a personalized news feed** with tweets from themselves and the users they follow
-
-Key operations:
-- **Posting a tweet**: A user can post a tweet with a unique ID and a timestamp.
-- **Getting the news feed**: A user can view their own tweets and tweets from the users they follow, sorted by timestamp (most recent first).
-- **Following and unfollowing users**: A user can follow and unfollow other users, and this impacts what appears in their news feed.
-
-Let’s dive into how we can build this Twitter-like system efficiently! 🧑‍💻
-
----
-
-### 🧠 Approach
-
-To simulate this Twitter-like system, we need to efficiently manage users, their tweets, and their relationships (follow/unfollow). Here's the plan:
-
-1. **User and Tweet Management**: 
-   - Each user has a unique ID, a set of followed users, and a linked list of their tweets.
-   - Each tweet has an ID, a timestamp, and a pointer to the next tweet in the sequence.
-   - Users can follow/unfollow other users, affecting what shows up in their feed.
-
-2. **Tweet Ordering**: 
-   - Tweets need to be displayed in **most recent first** order.
-   - A **priority queue (heap)** is perfect for this because it always lets us access the tweet with the highest timestamp efficiently.
-
-3. **Data Structure**:
-   - **User Map**: A map (`userMap`) stores each user by their unique ID. It helps us quickly access user data.
-   - **Tweet Linked List**: Each user has a linked list of tweets, with the newest tweet at the head.
-   - **Priority Queue**: A heap stores tweets based on their timestamps, so we can efficiently get the most recent ones.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code step by step and understand how it all comes together. 💡
-
-#### Step 1: Define the `Tweet` Class
-
-The `Tweet` class represents a single tweet:
-```cpp
-class Tweet {
-public:
-    int id;  // Unique identifier for the tweet
-    int time;  // Timestamp when the tweet was posted
-    Tweet* next;  // Pointer to the next tweet in the linked list
-
-    Tweet(int id, int time) {
-        this->id = id;
-        this->time = time;
-        next = NULL;
-    }
-};
 ```
-- Each tweet has an ID, a timestamp, and a link to the next tweet (forming a linked list).
-- The linked list helps us store tweets in the order they were posted (newest at the front).
 
-#### Step 2: Define the `User` Class
+This section contains the complete code of the 'Twitter' class, including methods for posting tweets, following/unfollowing users, and getting the news feed. It defines a 'Tweet' class and handles a map of users, with each user having their own list of followers and tweets.
 
-The `User` class manages information about a user:
-```cpp
-class User {
-public:
-    int id;
-    set<int> followed;  // Set of users this user is following
-    Tweet* tweet_head;  // Head of the linked list of tweets
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int id;
+	```
+	This is the declaration of the 'id' variable, which stores the unique identifier for the tweet.
 
-    User(int id) {
-        this->id = id;
-        follow(id);  // Follow self by default
-        tweet_head = NULL;
-    }
+2. **Variable Initialization**
+	```cpp
+	int time;
+	```
+	This variable tracks the time when the tweet is posted, used for ordering tweets.
 
-    void follow(int id) {
-        followed.insert(id);  // Add the user to the followed list
-    }
+3. **Pointer Initialization**
+	```cpp
+	Tweet* next;
+	```
+	This pointer links to the next tweet in the list, forming a chain of tweets for each user.
 
-    void unfollow(int id) {
-        followed.erase(id);  // Remove the user from the followed list
-    }
+4. **Constructor**
+	```cpp
+	Tweet(int id, int time) {
+	```
+	This constructor initializes a new tweet with a unique id and timestamp.
 
-    void post(int id, int times) {
-        Tweet* t = new Tweet(id, times);  // Create a new tweet
-        t->next = tweet_head;  // Insert the tweet at the head of the list
-        tweet_head = t;
-    }
-};
-```
-- **`follow()`**: Adds a user to the followed list.
-- **`unfollow()`**: Removes a user from the followed list.
-- **`post()`**: Adds a tweet to the front of the user's tweet list.
+5. **Variable Assignment**
+	```cpp
+	    this->id = id;
+	```
+	Assigns the passed tweet ID to the instance variable 'id'.
 
-#### Step 3: Define the `Twitter` Class
+6. **Variable Assignment**
+	```cpp
+	    this->time = time;
+	```
+	Assigns the passed timestamp to the instance variable 'time'.
 
-The `Twitter` class manages the main operations: posting tweets, following/unfollowing, and getting the news feed:
-```cpp
-class Twitter {
-public:
-    int timeStamp = 0;  // Global timestamp for all tweets
-    map<int, User*> userMap;  // Map storing users by their ID
+7. **Pointer Initialization**
+	```cpp
+	    next = NULL;
+	```
+	Initializes the 'next' pointer to NULL, as it points to the next tweet in the list.
 
-    Twitter() {
-        // Constructor to initialize the Twitter system
-    }
+8. **Class Declaration**
+	```cpp
+	class User {
+	```
+	Declares the 'User' class, which represents a user of Twitter, with the ability to post tweets and follow/unfollow other users.
 
-    void postTweet(int userId, int tweetId) {
-        if (!userMap.count(userId)) {
-            User* u = new User(userId);  // Create a new user if not exists
-            userMap[userId] = u;
-        }
-        userMap[userId]->post(tweetId, timeStamp++);  // Post the tweet with the current timestamp
-    }
-```
-- **`userMap`** stores users and their data (tweets, followers).
-- **`postTweet()`**: Adds a tweet to the user's tweet list, ensuring each tweet has a unique timestamp.
+9. **Variable Declaration**
+	```cpp
+	int id;
+	```
+	Holds the unique identifier for the user.
 
-#### Step 4: Implement the `getNewsFeed()` Function
+10. **Data Structure**
+	```cpp
+	set<int> followed;
+	```
+	Stores the list of users that this user is following.
 
-This function retrieves a user’s news feed, with tweets from the user and those they follow:
-```cpp
-    vector<int> getNewsFeed(int userId) {
-        vector<int> res;
-        if (!userMap.count(userId)) {
-            return res;  // Return empty result if user does not exist
-        }
+11. **Pointer Declaration**
+	```cpp
+	Tweet* tweet_head;
+	```
+	Points to the head of the linked list of tweets posted by the user.
 
-        set<int> users = userMap[userId]->followed;  // Get the list of users the user is following
-        priority_queue<Tweet*, vector<Tweet*>, compare> pq;  // Max-heap to store tweets
+12. **Constructor**
+	```cpp
+	User(int id) {
+	```
+	Constructor for initializing a new user with a unique ID.
 
-        // Push the most recent tweet from each followed user into the priority queue
-        for (int user : users) {
-            Tweet* t = userMap[user]->tweet_head;
-            if (t != NULL)
-                pq.push(t);
-        }
+13. **Variable Assignment**
+	```cpp
+	    id = id;
+	```
+	Assigns the provided user ID to the user's 'id' variable.
 
-        int n = 0;
-        while (!pq.empty() && n < 10) {  // Retrieve at most 10 tweets
-            Tweet* t = pq.top();  // Get the tweet with the highest timestamp
-            pq.pop();  // Remove it from the queue
-            res.push_back(t->id);  // Add the tweet's ID to the result
-            n++;
-            if (t->next != NULL)
-                pq.push(t->next);  // Push the next tweet from the same user
-        }
-        return res;  // Return the result containing tweet IDs
-    }
-```
-- A **priority queue** is used to get the most recent tweets efficiently.
-- The function retrieves up to 10 tweets, prioritizing newer ones.
+14. **Method Call**
+	```cpp
+	    follow(id); // follow self;
+	```
+	Makes the user follow themselves by calling the follow method.
 
-#### Step 5: Implement the `follow()` and `unfollow()` Functions
+15. **Variable Initialization**
+	```cpp
+	    tweet_head = NULL;
+	```
+	Initializes the 'tweet_head' pointer to NULL, indicating that the user has not posted any tweets initially.
 
-These manage user relationships:
-```cpp
-    void follow(int followerId, int followeeId) {
-        if (!userMap.count(followerId)) {
-            User* u = new User(followerId);
-            userMap[followerId] = u;
-        }
-        if (!userMap.count(followeeId)) {
-            User* u = new User(followeeId);
-            userMap[followeeId] = u;
-        }
-        userMap[followerId]->follow(followeeId);  // Make the follower follow the followee
-    }
+16. **Method Declaration**
+	```cpp
+	void follow(int id) {
+	```
+	Defines the 'follow' method that allows a user to follow another user by adding their ID to the 'followed' set.
 
-    void unfollow(int followerId, int followeeId) {
-        if (userMap.count(followerId) && followerId != followeeId)
-            userMap[followerId]->unfollow(followeeId);  // Make the follower unfollow the followee
-    }
-};
-```
-- **`follow()`** makes a user follow another user.
-- **`unfollow()`** allows a user to stop following another user (except themselves).
+17. **Set Insertion**
+	```cpp
+	    followed.insert(id);
+	```
+	Inserts the provided user ID into the 'followed' set, indicating that the user is now following this user.
 
----
+18. **Method Declaration**
+	```cpp
+	void unfollow(int id) {
+	```
+	Defines the 'unfollow' method that allows a user to unfollow another user.
 
-### 📈 Complexity Analysis
+19. **Set Removal**
+	```cpp
+	    followed.erase(id);
+	```
+	Removes the provided user ID from the 'followed' set, meaning the user no longer follows this user.
 
-#### Time Complexity:
-- **postTweet**: **O(1)** — Inserting a tweet is constant time.
-- **getNewsFeed**: **O(N log N)**, where `N` is the total number of tweets from followed users. This is because we use a priority queue (heap) to manage tweet retrieval.
-- **follow/unfollow**: **O(1)** — Set operations are constant time.
+20. **Method Declaration**
+	```cpp
+	void post(int id, int times) {
+	```
+	Defines the 'post' method that allows a user to post a tweet, which is added to their list of tweets.
 
-#### Space Complexity:
-- **O(N)** — Where `N` is the total number of tweets across all users. This includes the memory used by tweet objects and the `userMap`.
+21. **Tweet Creation**
+	```cpp
+	    Tweet* t = new Tweet(id, times);
+	```
+	Creates a new 'Tweet' object with the provided ID and timestamp.
 
----
+22. **Pointer Assignment**
+	```cpp
+	    t->next = tweet_head;
+	```
+	Sets the new tweet's 'next' pointer to the current head of the tweet list.
 
-### 🏁 Conclusion
+23. **Pointer Assignment**
+	```cpp
+	    tweet_head = t;
+	```
+	Updates the 'tweet_head' pointer to point to the new tweet, making it the first tweet in the list.
 
-This Twitter-like simulation is both efficient and simple, handling the major operations like posting tweets, following/unfollowing users, and getting news feeds. By using data structures like **priority queues** and **sets**, we ensure fast access and optimal performance.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for operations like follow or unfollow, when no tweets need to be retrieved.
+- **Average Case:** O(log N) for posting tweets and updating news feeds.
+- **Worst Case:** O(N log N) for retrieving news feeds, where N is the number of users followed and tweets available.
 
-Key Takeaways:
-- **Time Complexity**: O(N log N) for retrieving tweets, thanks to the priority queue.
-- **Space Complexity**: O(N) for storing tweets and user data.
-- This solution is well-suited for handling the simulation of social media interactions efficiently! 🎉
+
+
+### Space Complexity 💾
+- **Best Case:** O(1) for simple operations without large followings or tweets.
+- **Worst Case:** O(N) where N is the number of users and tweets.
+
+The space complexity depends on the number of users, their followers, and the number of tweets stored.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-twitter/description/)
 

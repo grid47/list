@@ -14,118 +14,204 @@ img_src = ""
 youtube = "I3lnDUIzIG4"
 youtube_upload_date="2023-02-12"
 youtube_thumbnail="https://i.ytimg.com/vi/I3lnDUIzIG4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A country network consists of n cities connected by n-1 bidirectional roads. The capital city is city 0, and each city has one representative with a car having a fixed number of seats. Calculate the minimum amount of fuel required for all representatives to reach the capital city.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of roads representing the connections between cities, and an integer seats indicating the number of seats in each car.
+- **Example:** `roads = [[3, 1], [3, 2], [1, 0], [0, 4], [0, 5], [4, 6]], seats = 2`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- roads.length == n - 1
+	- 0 <= ai, bi < n
+	- ai != bi
+	- 1 <= seats <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long ans;
-    int s;
-    long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
-        vector<vector<int>> graph(roads.size()+1);s = seats;
-        for (vector<int> r: roads){
-            graph[r[0]].push_back(r[1]);
-                      graph[r[1]].push_back(r[0]);
-        }
-        dfs(0, 0, graph);
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of liters of fuel required for all representatives to reach the capital city.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The output should be a single integer representing the minimum fuel cost.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the minimum liters of fuel required by all representatives to reach city 0. Representatives can share rides to minimize the fuel cost.
+
+- Construct the graph representing the road network.
+- Perform a depth-first search (DFS) starting from city 0.
+- For each city, calculate the number of representatives traveling to the capital.
+- Optimize the fuel consumption by grouping representatives where possible.
+{{< dots >}}
+### Problem Assumptions ✅
+- The country network is always a valid tree with no cycles.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 2: roads = [[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]], seats = 2`  \
+  **Explanation:** In this example, the representatives must share rides wherever possible to minimize the fuel consumption. The total fuel cost is 7 liters.
+
+{{< dots >}}
+## Approach 🚀
+We aim to minimize the fuel usage by considering the number of representatives in each subtree. For each city, we calculate how many representatives need to travel and group them based on the seat capacity of each car.
+
+### Initial Thoughts 💭
+- Each representative can either travel alone or share a car with others.
+- The number of liters required is minimized by efficiently grouping representatives to share cars.
+- The solution involves a depth-first search (DFS) traversal to calculate the number of representatives traveling to the capital city from each subtree.
+{{< dots >}}
+### Edge Cases 🌐
+- No roads exist, which means there is only one city (the capital). In this case, no travel is needed, so the fuel cost is 0.
+- For large inputs (up to 10^5 cities), the algorithm should efficiently compute the minimum fuel cost using DFS traversal and seat grouping.
+- If the number of seats is greater than or equal to the number of representatives in any city, no sharing is needed.
+- The graph is a tree, meaning it has no cycles and a unique path between any two cities.
+{{< dots >}}
+## Code 💻
+```cpp
+long long ans;
+int s;
+long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
+    vector<vector<int>> graph(roads.size()+1);s = seats;
+    for (vector<int> r: roads){
+        graph[r[0]].push_back(r[1]);
+                  graph[r[1]].push_back(r[0]);
     }
-    int dfs(int i, int prev, vector<vector<int>> &graph) {
-        int people = 1;
-        for(int &x: graph[i]) {
-            if (x == prev) continue;
-            people += dfs(x,i, graph);
-        }
-        if(i != 0) ans += (s + people - 1)/s;
-        return people;
-     }
-};
-{{< /highlight >}}
----
+    dfs(0, 0, graph);
+    return ans;
+}
+int dfs(int i, int prev, vector<vector<int>> &graph) {
+    int people = 1;
+    for(int &x: graph[i]) {
+        if (x == prev) continue;
+        people += dfs(x,i, graph);
+    }
+    if(i != 0) ans += (s + people - 1)/s;
+    return people;
+ }
+```
 
-### Problem Statement:
-The problem involves calculating the minimum fuel cost required to transport people between cities connected by roads. The cities are represented by nodes in a tree structure, and the roads are represented by edges. The goal is to determine the minimum fuel cost to transport people from city 0 (the root) to all other cities, with the constraint that each vehicle can carry at most `seats` passengers. The fuel cost for each trip is calculated based on the number of vehicles needed to transport people, where each vehicle requires 1 unit of fuel for each road it travels.
+This solution calculates the minimum fuel cost needed to transport people in a graph-like structure representing roads between cities. It uses depth-first search (DFS) to traverse the tree and calculates the fuel cost based on the number of people traveling and the number of seats available in the vehicle.
 
-### Approach:
-The key idea is to model the problem as a tree, where each node represents a city and each edge represents a road between two cities. The problem becomes one of determining the minimum number of vehicles required to transport people from the root (city 0) to all other cities, using a depth-first search (DFS) approach. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	long long ans;
+	```
+	This variable `ans` holds the total fuel cost for all the trips calculated during the DFS traversal.
 
-#### Detailed Steps:
-1. **Graph Representation**:
-   - First, we represent the roads as an undirected graph using an adjacency list. This allows us to easily traverse the tree from any node to any other connected node.
+2. **Variable Declaration**
+	```cpp
+	int s;
+	```
+	The variable `s` stores the number of seats available in each vehicle.
 
-2. **DFS Traversal**:
-   - We perform a DFS traversal starting from city 0 (the root). The DFS function keeps track of the number of people in the subtree rooted at each node, which includes the node itself and all its descendants.
-   - For each node (city), we calculate how many vehicles are needed to transport all the people in that node’s subtree. The number of vehicles required is the ceiling of `people/seats`, which can be calculated as `(people + seats - 1) / seats` (a trick to avoid using floating-point arithmetic).
+3. **Function Declaration**
+	```cpp
+	long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
+	```
+	The `minimumFuelCost` function calculates the total fuel cost for transporting people between cities based on the roads and the number of seats available.
 
-3. **Accumulate Fuel Costs**:
-   - As we visit each node, we accumulate the fuel cost based on how many vehicles are required to transport the people from that node to its parent.
-   - For the root node (city 0), we don't accumulate any fuel cost because it’s the starting point. However, for all other nodes, we accumulate the required fuel cost by adding the vehicles needed to transport the people in that subtree.
+4. **Graph Initialization**
+	```cpp
+	    vector<vector<int>> graph(roads.size()+1);s = seats;
+	```
+	A graph is created as an adjacency list to represent the roads between cities. Each city is a node, and the roads are the edges. The variable `s` is initialized with the number of seats.
 
-4. **Return Result**:
-   - After the DFS traversal, the accumulated fuel cost will be the minimum fuel cost required to transport people from the root (city 0) to all other cities in the tree.
+5. **Graph Construction**
+	```cpp
+	    for (vector<int> r: roads){
+	```
+	Loops over each road, which is represented as a pair of cities, and adds edges between the two cities in the graph.
 
-### Code Breakdown (Step by Step):
-Now, let’s go through the code and explain each part in detail:
+6. **Graph Edge Insertion**
+	```cpp
+	        graph[r[0]].push_back(r[1]);
+	```
+	Adds an edge from city `r[0]` to city `r[1]` in the graph.
 
-1. **Function Definition and Initialization**:
-   ```cpp
-   long long ans;
-   int s;
-   long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
-       vector<vector<int>> graph(roads.size() + 1); s = seats;
-       for (vector<int> r: roads){
-           graph[r[0]].push_back(r[1]);
-           graph[r[1]].push_back(r[0]);
-       }
-       dfs(0, 0, graph);
-       return ans;
-   }
-   ```
-   - The function `minimumFuelCost` takes two inputs: `roads`, which is a list of edges (roads between cities), and `seats`, which is the number of seats in each vehicle.
-   - The graph is initialized as an adjacency list to represent the cities and roads. The graph has `roads.size() + 1` nodes, because the number of nodes is one more than the number of edges in the tree.
-   - The `dfs` function is called starting from city 0, with a parent node of 0 (because city 0 is the root).
+7. **Graph Edge Insertion**
+	```cpp
+	                  graph[r[1]].push_back(r[0]);
+	```
+	Adds an edge from city `r[1]` to city `r[0]` in the graph (since the roads are bidirectional).
 
-2. **DFS Traversal**:
-   ```cpp
-   int dfs(int i, int prev, vector<vector<int>> &graph) {
-       int people = 1;  // Start with 1 person (the current city itself)
-       for(int &x: graph[i]) {
-           if (x == prev) continue;  // Skip the parent node
-           people += dfs(x, i, graph);  // Add the number of people from the child node
-       }
-       if(i != 0) ans += (s + people - 1) / s;  // If it's not the root, add the fuel cost
-       return people;
-   }
-   ```
-   - The function `dfs` is a recursive function that traverses the tree.
-   - `i` is the current node (city), and `prev` is the parent node of the current node.
-   - The variable `people` is initialized to 1, representing the current node itself.
-   - The DFS function recursively calls itself on each child node (`x`), skipping the parent node to avoid cycles.
-   - After visiting all the child nodes, the `people` variable will contain the total number of people in the subtree rooted at the current node.
-   - If the current node is not the root (i.e., `i != 0`), we calculate the number of vehicles required to transport `people` people, and we add that to the fuel cost (`ans`). The number of vehicles is `(people + seats - 1) / seats`, which gives the ceiling of `people / seats`.
-   - Finally, the function returns the total number of people in the subtree rooted at the current node.
+8. **DFS Function Call**
+	```cpp
+	    dfs(0, 0, graph);
+	```
+	Calls the DFS function starting from the root (city 0), with no previous city (0) and the graph as input.
 
-3. **Result**:
-   - Once the DFS traversal is complete, the variable `ans` will contain the total fuel cost, which is returned as the result.
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the calculated total fuel cost `ans` after the DFS traversal.
 
-### Complexity:
+10. **Helper Function Declaration**
+	```cpp
+	int dfs(int i, int prev, vector<vector<int>> &graph) {
+	```
+	The `dfs` function performs a depth-first search to calculate the number of people that need to be transported from each city to the root (city 0), and computes the fuel cost.
 
-- **Time Complexity**:
-  - **DFS Traversal**: The DFS function visits each node exactly once and processes each edge exactly once. Therefore, the time complexity for the DFS traversal is \(O(n)\), where \(n\) is the number of nodes in the tree (which is equal to `roads.size() + 1`).
-  - **Overall Time Complexity**: Since the DFS is the only major operation in this algorithm, the overall time complexity is \(O(n)\).
+11. **People Count Initialization**
+	```cpp
+	    int people = 1;
+	```
+	Initializes the variable `people` to 1 to represent the current city (itself).
 
-- **Space Complexity**:
-  - **Graph Representation**: The space complexity for storing the graph is \(O(n)\), where \(n\) is the number of nodes in the tree.
-  - **Recursion Stack**: The depth of the recursion stack will be at most \(O(n)\), since the tree is a connected acyclic graph.
-  - **Overall Space Complexity**: The total space complexity is \(O(n)\), dominated by the space required to store the graph and the recursion stack.
+12. **DFS Loop**
+	```cpp
+	    for(int &x: graph[i]) {
+	```
+	Iterates over all neighboring cities of the current city `i` in the graph.
 
-### Conclusion:
-The algorithm efficiently calculates the minimum fuel cost required to transport people in a tree structure of cities using a depth-first search (DFS) approach. By leveraging the properties of DFS and taking advantage of the tree structure, we can calculate the total fuel cost in linear time, \(O(n)\), where \(n\) is the number of cities. This approach ensures that the solution is both time and space-efficient, making it suitable for large input sizes. The use of integer arithmetic to compute the number of vehicles avoids the need for floating-point operations and keeps the solution simple and fast.
+13. **Skip Previous City**
+	```cpp
+	        if (x == prev) continue;
+	```
+	Skips the previous city to avoid revisiting it during the DFS traversal.
+
+14. **Recursive DFS Call**
+	```cpp
+	        people += dfs(x,i, graph);
+	```
+	Recursively calls the DFS function for the neighboring city `x` and adds the number of people from that subtree to the current city.
+
+15. **Fuel Calculation**
+	```cpp
+	    if(i != 0) ans += (s + people - 1)/s;
+	```
+	If the current city is not the root (city 0), calculate the fuel cost for transporting `people` to the root. The formula `(s + people - 1)/s` computes the number of trips needed to transport all the people using vehicles with `s` seats.
+
+16. **Return People Count**
+	```cpp
+	    return people;
+	```
+	Returns the total number of people (including the current city itself) for this subtree.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because the algorithm performs a DFS traversal over all n cities.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the graph and recursive stack space used in DFS.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/description/)
 

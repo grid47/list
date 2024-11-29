@@ -14,110 +14,140 @@ img_src = ""
 youtube = "C37FoUne7gc"
 youtube_upload_date="2022-06-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/C37FoUne7gc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string s consisting of both uppercase and lowercase English letters, return the greatest letter that appears as both a lowercase and uppercase letter in the string. The returned letter should be in uppercase. If no such letter exists, return an empty string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s containing both uppercase and lowercase English letters.
+- **Example:** `s = 'aBcDeFg'`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s consists of lowercase and uppercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string greatestLetter(string s) {
-        int cnt[128] = {};
-        for (auto ch : s)
-            ++cnt[ch];
-        for (auto ch = 'Z'; ch >= 'A'; --ch)
-            if (cnt[ch] && cnt[ch + 'a' - 'A'])
-                return string(1, ch);
-        return "";
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the greatest English letter that appears as both a lowercase and uppercase letter, in uppercase form. If no such letter exists, return an empty string.
+- **Example:** `For s = 'aBcDeFg', the output is 'F'.`
+- **Constraints:**
+	- Return the greatest letter in uppercase.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the letter that appears both in uppercase and lowercase, and return the greatest one in uppercase.
 
-The problem asks to find the greatest letter (in lexicographical order) that appears both in uppercase and lowercase in the given string. Specifically, the string `s` contains both uppercase and lowercase English letters, and we need to find the largest letter `x` such that both `x` (uppercase) and `x` (lowercase) exist in the string. If no such letter exists, we return an empty string.
+- Iterate through the string s and track the occurrence of each letter in both lowercase and uppercase.
+- Start from the greatest possible letter ('Z') and check if both the lowercase and uppercase versions are present in the string.
+- Return the first such letter found in uppercase, or an empty string if no such letter exists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string contains only English letters and may include both uppercase and lowercase versions of letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'aBcDeFg'`  \
+  **Explanation:** The letter 'F' is the greatest letter that appears as both 'f' and 'F'. The function returns 'F'.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves checking for the presence of each letter as both lowercase and uppercase, then returning the greatest one.
 
-To solve this problem efficiently, the key is to identify the presence of both the uppercase and lowercase versions of each letter in the string. Here’s how we can approach it:
-
-1. **Count the Occurrences of Each Character:**
-   - First, we iterate over the string and count the occurrences of each character. We can use a simple array where the index represents the ASCII value of the character. For example, for a character `ch`, its ASCII value can be mapped directly to the index `ch`. This allows us to efficiently track which characters appear in the string.
-
-2. **Check for Paired Uppercase and Lowercase Characters:**
-   - Once we have the counts, we check in reverse lexicographical order (starting from 'Z' and going down to 'A') for any letter that appears both in its uppercase and lowercase form.
-   - The reason for starting from 'Z' is that we want the "greatest" letter, meaning we need to find the lexicographically largest character that satisfies the condition.
-
-3. **Return the Result:**
-   - If we find a letter that satisfies the condition, we return that letter.
-   - If no such letter is found, we return an empty string.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Counting Character Occurrences
-
+### Initial Thoughts 💭
+- We need to efficiently find a letter that appears as both lowercase and uppercase.
+- Starting from the largest possible letter ('Z'), we can check each letter for both cases. If found, return that letter in uppercase.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty strings are not possible according to the constraints.
+- Handle strings of length up to 1000 efficiently.
+- If no letter appears in both uppercase and lowercase, return an empty string.
+- Ensure that the output is the letter in uppercase if both cases are found.
+{{< dots >}}
+## Code 💻
 ```cpp
-int cnt[128] = {};
-for (auto ch : s)
-    ++cnt[ch];
+string greatestLetter(string s) {
+    int cnt[128] = {};
+    for (auto ch : s)
+        ++cnt[ch];
+    for (auto ch = 'Z'; ch >= 'A'; --ch)
+        if (cnt[ch] && cnt[ch + 'a' - 'A'])
+            return string(1, ch);
+    return "";
+}
 ```
 
-- We initialize an array `cnt` of size 128 to track the occurrences of characters in the input string `s`. The array size is 128 because there are 128 ASCII characters, covering all uppercase and lowercase English letters, along with other possible characters.
-- We then iterate over the string `s` using a range-based for loop, and for each character `ch`, we increment the corresponding index in the `cnt` array.
-  - For example, if `ch` is `'A'`, then `cnt['A']` is incremented.
-  - This step ensures that we know how many times each character appears in the string.
+This function finds the greatest letter (in uppercase) that appears both in uppercase and lowercase in a given string. It first counts the occurrences of each character in the string, then checks from 'Z' to 'A' to find the greatest matching letter.
 
-#### Step 2: Searching for Paired Uppercase and Lowercase Characters
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string greatestLetter(string s) {
+	```
+	Define the function `greatestLetter` that takes a string `s` as input and returns a string containing the greatest letter (uppercase) that appears both in uppercase and lowercase.
 
-```cpp
-for (auto ch = 'Z'; ch >= 'A'; --ch)
-    if (cnt[ch] && cnt[ch + 'a' - 'A'])
-        return string(1, ch);
-```
+2. **Array Initialization**
+	```cpp
+	    int cnt[128] = {};
+	```
+	Initialize an array `cnt` of size 128 to store the frequency of each character in the input string. The size 128 ensures that all ASCII characters are accounted for.
 
-- After counting the occurrences of all characters, we loop through all uppercase English letters, starting from `'Z'` and going down to `'A'`.
-- For each character `ch` (starting with 'Z'), we check if both the uppercase letter `ch` and the corresponding lowercase letter `ch + 'a' - 'A'` (i.e., `ch` converted to lowercase) appear in the string. This check is done using the condition:
-  - `cnt[ch]` checks if the uppercase letter `ch` is present in the string.
-  - `cnt[ch + 'a' - 'A']` checks if the lowercase version of `ch` is present.
-  - If both conditions are satisfied, it means that both the uppercase and lowercase versions of the letter are present in the string, so we return that letter as the result.
-  - The expression `string(1, ch)` converts the character `ch` into a string of length 1 and returns it.
+3. **Loop Through String**
+	```cpp
+	    for (auto ch : s)
+	```
+	Iterate through each character `ch` in the input string `s`.
 
-#### Step 3: Return Empty String If No Match Found
+4. **Character Count**
+	```cpp
+	        ++cnt[ch];
+	```
+	Increment the corresponding count for the character `ch` in the `cnt` array.
 
-```cpp
-return "";
-```
+5. **Descending Check**
+	```cpp
+	    for (auto ch = 'Z'; ch >= 'A'; --ch)
+	```
+	Start a loop that checks each uppercase letter from 'Z' to 'A'. This ensures we find the greatest possible letter first.
 
-- If no such pair of uppercase and lowercase letters is found during the loop (i.e., if no letter satisfies the condition), we return an empty string. This is the case where no letter appears both in uppercase and lowercase in the string.
+6. **Matching Check**
+	```cpp
+	        if (cnt[ch] && cnt[ch + 'a' - 'A'])
+	```
+	Check if both the uppercase character `ch` and its corresponding lowercase character `ch + 'a' - 'A'` appear in the string.
 
-### Complexity
+7. **Return Result**
+	```cpp
+	            return string(1, ch);
+	```
+	If both uppercase and lowercase characters are found, return the uppercase letter as a string.
 
-#### Time Complexity:
-- **Counting Occurrences:**
-  - The first loop that counts the occurrences of characters in the string takes `O(n)` time, where `n` is the length of the string. This is because we iterate over the entire string once and perform constant-time operations (array updates) for each character.
-  
-- **Checking Pairs of Characters:**
-  - The second loop checks each of the 26 uppercase English letters (`'Z'` through `'A'`). For each letter, we perform a constant-time check to see if both the uppercase and lowercase versions of the letter are present. This takes `O(1)` time for each character check, and there are at most 26 checks.
-  
-  - Thus, the total time complexity for this step is `O(26)`, which is a constant time operation, `O(1)`.
+8. **Return Empty String**
+	```cpp
+	    return "";
+	```
+	If no matching pair of uppercase and lowercase letters is found, return an empty string.
 
-- **Overall Time Complexity:**
-  - Combining these two steps, the overall time complexity is `O(n)` where `n` is the length of the input string `s`. The second step is constant, so it does not affect the overall time complexity.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
-- **Counting Array:**
-  - The `cnt` array uses a fixed amount of space of size 128 to store the counts of characters. Since the space required is constant (independent of the input size), the space complexity is `O(1)`.
+The time complexity is O(n) where n is the length of the input string, as we only iterate through the string once.
 
-- **Overall Space Complexity:**
-  - The overall space complexity is `O(1)` since the only extra space used is for the `cnt` array, which is fixed in size.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Conclusion
+The space complexity is O(1) as we only use a constant amount of space for tracking the occurrences of each letter.
 
-This solution is both time and space efficient. The time complexity of `O(n)` ensures that the solution can handle large input sizes effectively, while the space complexity of `O(1)` means that the solution does not require significant extra space. By leveraging a count array and a reverse search for the greatest letter, the solution efficiently identifies the lexicographically largest letter that appears both in uppercase and lowercase in the input string. If no such letter exists, it returns an empty string. This approach is optimal for the problem and well-suited for practical use cases.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "SFMCxqSeM94"
 youtube_upload_date="2020-01-16"
 youtube_thumbnail="https://i.ytimg.com/vi/SFMCxqSeM94/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,124 +28,125 @@ youtube_thumbnail="https://i.ytimg.com/vi/SFMCxqSeM94/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of integers, determine if there are any duplicate values present. Return true if any value appears more than once, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers nums.
+- **Example:** `[10, 20, 30, 10]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool containsDuplicate(vector<int>& nums) {
-        map<int, int> ma;
-        for(int x: nums)
-            if(ma.count(x)) return true;
-        else ma[x] = 1;
-        return false;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if there are duplicates in the array, otherwise return false.
+- **Example:** `For input [10, 20, 30, 10], the output is true.`
+- **Constraints:**
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify whether there are any duplicate values in the array.
 
-Hey there! 👋 In this problem, you’re tasked with checking if a given integer array `nums` contains any duplicate elements. Specifically, you need to return `true` if any value appears at least twice, and `false` if every element in the array is unique.
+- Use a set or map to track the elements in the array as you iterate through it.
+- If you encounter an element that is already in the set or map, return true indicating a duplicate is found.
+- If no duplicates are found after processing all elements, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will not be empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this example, the value 10 occurs twice, so the answer is true.
 
-This is a common problem that often pops up when dealing with data validation, filtering, or handling large datasets. Let’s dive in and tackle it! 💡
+- **Input:** `Example 2`  \
+  **Explanation:** In this case, all elements are distinct, so the output is false.
 
----
+- **Input:** `Example 3`  \
+  **Explanation:** Here, several elements such as 7, 8, and 4 repeat, so the output is true.
 
-### 🧠 Approach
+{{< dots >}}
+## Approach 🚀
+Use a set or a map to efficiently track elements and identify duplicates.
 
-The most straightforward way to solve this problem is by using a **hash map (or dictionary)**. 🔑 Hash maps allow us to efficiently track if an element has already been seen, with average time complexity for lookups and insertions being **O(1)**. Perfect for our needs! Let’s break down the steps:
-
-1. **Iterate Through the Array**: Loop through each element in the array and check if it’s already been encountered.
-2. **Check for Duplicates Using a Map**: As we traverse the array, use a map (or unordered_map) to store elements. If we encounter an element already in the map, we immediately return `true` (we’ve found a duplicate!).
-3. **If No Duplicates Are Found**: If the loop finishes without finding any duplicates, we return `false`.
-
-By using a map, we can achieve an efficient solution with linear time complexity for both time and space! 🚀
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Here’s the code for solving the problem:
-
+### Initial Thoughts 💭
+- A set or map can help efficiently identify duplicates in O(n) time by keeping track of seen elements.
+- By leveraging the properties of a set or map (constant-time lookups), we can check for duplicates while iterating through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least one element.
+- Ensure the solution works efficiently for arrays with 10^5 elements.
+- The array may contain very large or very small integers, but the solution must handle all values within the range.
+- Handle cases where all elements are the same.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool containsDuplicate(vector<int>& nums) {
-        map<int, int> ma;  // Step 1: Create a map to track elements
-        for(int x: nums)   // Step 2: Iterate through the elements in nums
-            if(ma.count(x)) return true;  // Step 3: Check if the element is already in the map
-        else ma[x] = 1;    // Step 4: If not, add the element to the map
-        return false;      // Step 5: Return false if no duplicates were found
-    }
-};
+bool containsDuplicate(vector<int>& nums) {
+    map<int, int> ma;
+    for(int x: nums)
+        if(ma.count(x)) return true;
+    else ma[x] = 1;
+    return false;
+}
 ```
 
----
+This function checks whether a given vector of integers contains any duplicate elements. It uses a map to track the occurrences of each element.
 
-#### Step 1: Initialize the Map
-```cpp
-map<int, int> ma;
-```
-- We declare a map `ma` where the key is the element from the array, and the value represents the number of times it has appeared. This allows us to track the elements efficiently!
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	bool containsDuplicate(vector<int>& nums) {
+	```
+	Defines the 'containsDuplicate' function which takes a vector of integers 'nums' as input and returns a boolean value indicating whether any element in the vector appears more than once.
 
----
+2. **Map Initialization**
+	```cpp
+	    map<int, int> ma;
+	```
+	Initializes a map 'ma' to keep track of the count of each integer in the 'nums' vector. The key is the integer, and the value is its count.
 
-#### Step 2: Iterate Over the Array
-```cpp
-for(int x: nums)
-```
-- Here, we loop through the array `nums`. Each element `x` is checked to see if it’s already in the map.
+3. **Loop Iteration**
+	```cpp
+	    for(int x: nums)
+	```
+	Iterates over each element 'x' in the 'nums' vector.
 
----
+4. **Check for Duplicates**
+	```cpp
+	        if(ma.count(x)) return true;
+	```
+	Checks if the current element 'x' is already present in the map 'ma'. If it is, that means a duplicate has been found, and the function returns 'true'.
 
-#### Step 3: Check for Duplicates
-```cpp
-if(ma.count(x)) return true;
-```
-- The `count()` function checks whether the element `x` already exists in the map. If it does, we immediately return `true`, because a duplicate is found! 🎯
+5. **Map Update**
+	```cpp
+	    else ma[x] = 1;
+	```
+	If the element 'x' is not found in the map, it is added with a count of 1, indicating that this element has been encountered once.
 
----
+6. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If no duplicates are found after iterating through all elements in the vector, the function returns 'false'.
 
-#### Step 4: Add New Elements to the Map
-```cpp
-else ma[x] = 1;
-```
-- If the element `x` is not in the map, we add it with a value of 1, signifying it’s been encountered once.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array. This occurs when the first duplicate is encountered early in the iteration.
+- **Average Case:** O(n), as we perform one lookup and one insertion for each element.
+- **Worst Case:** O(n), when no duplicates are found and we need to process every element.
 
----
+The solution operates in linear time since the set or map allows constant-time lookups and insertions.
 
-#### Step 5: Return False
-```cpp
-return false;
-```
-- If the loop finishes without encountering duplicates, we return `false`, meaning all elements are distinct. ✅
+### Space Complexity 💾
+- **Best Case:** O(1), if there are no duplicates and only a single element is stored.
+- **Worst Case:** O(n), where n is the number of elements in the array, since we may need to store all elements in the set or map.
 
----
+The space complexity is determined by the number of unique elements in the array.
 
-### 📈 Complexity Analysis
+**Happy Coding! 🎉**
 
-Let’s take a moment to analyze the efficiency of this approach. 📊
-
-#### Time Complexity:
-- The time complexity is dominated by the `for` loop that iterates through all the elements in `nums`.
-- Each element is processed with operations like `ma.count(x)` and `ma[x] = 1`, both of which have **O(1)** average time complexity for map lookups and insertions.
-- So, the overall time complexity is **O(n)**, where `n` is the number of elements in the array.
-
-#### Space Complexity:
-- The space complexity depends on the size of the map. In the worst case, where all elements are unique, we store all `n` elements in the map.
-- Therefore, the space complexity is **O(n)**, where `n` is the number of elements in the input array.
-
----
-
-### 🏁 Conclusion
-
-And that’s it! 🎉 By using a **hash map**, we’ve efficiently checked if there are any duplicates in the array.
-
-- **Time Complexity**: **O(n)** — We go through the array once, and each map operation is **O(1)** on average.
-- **Space Complexity**: **O(n)** — We store the elements in the map to track duplicates.
-
-This approach is optimal for solving problems where checking for duplicates is required. It’s simple, efficient, and easily adaptable to other tasks, like counting element frequencies. Keep this in mind for future problems! 🌟
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/contains-duplicate/description/)
 

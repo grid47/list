@@ -14,155 +14,174 @@ img_src = ""
 youtube = "j5BlwSyz3F8"
 youtube_upload_date="2022-05-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/j5BlwSyz3F8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays: one containing a series of messages, and another with the names of the senders corresponding to each message. A message is a list of words separated by spaces. Your task is to determine which sender has sent the most words across all their messages. If there is a tie for the most words, return the sender with the lexicographically larger name.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with two arrays, messages and senders, both of length n. Each message corresponds to a sender in the same index.
+- **Example:** `Input: messages = ["I love coding","How are you today?","Great to see you here!"], senders = ["Bob","Charlie","Bob"]`
+- **Constraints:**
+	- 1 <= n <= 10^4
+	- 1 <= messages[i].length <= 100
+	- 1 <= senders[i].length <= 10
+	- messages[i] consists of uppercase and lowercase English letters and spaces.
+	- Each message has no leading or trailing spaces.
+	- senders[i] consists of uppercase and lowercase English letters only.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string largestWordCount(vector<string>& messages, vector<string>& senders) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sender who sent the most words across all their messages. If there is a tie, return the sender with the lexicographically larger name.
+- **Example:** `Output: "Bob"`
+- **Constraints:**
 
-        unordered_map<string, int> cnt;
-        string res;
-        int max_cnt = 0;
-        for(int i = 0; i < senders.size(); i++) {
-            int words = count(begin(messages[i]), end(messages[i]), ' ') + 1;
-            int cur = cnt[senders[i]] += words;
-            if((cur > max_cnt) || (cur == max_cnt && senders[i] > res)) {
-                res = senders[i];
-                max_cnt = cur;
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the sender with the largest word count across all their messages. If multiple senders share the maximum word count, return the one with the lexicographically larger name.
+
+- Iterate through the list of senders and messages.
+- Count the number of words in each message.
+- Maintain a record of total word counts for each sender.
+- At the end of the iteration, identify the sender with the highest word count. If there's a tie, return the lexicographically larger name.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each sender sends at least one message.
+- The word count can be calculated by splitting the message string by spaces.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: messages = ["I love coding","How are you today?","Great to see you here!"], senders = ["Bob","Charlie","Bob"]`  \
+  **Explanation:** Here, Bob sends 2 words in the first message and 5 words in the last message, for a total of 7 words. Charlie sends 4 words, so Bob is the sender with the largest word count.
+
+- **Input:** `Input: messages = ["Coding is fun","What are you doing?"], senders = ["Alice","Bob"]`  \
+  **Explanation:** Alice sends 3 words in the first message, while Bob sends 4 words. Bob, having sent more words, is returned.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we'll iterate through the arrays to calculate the total word count for each sender. Then, we'll compare the word counts and return the sender with the highest count, resolving ties based on lexicographical order.
+
+### Initial Thoughts 💭
+- The word count for each message can be easily determined by counting spaces and adding one.
+- We need to handle ties by lexicographical order.
+- We can use a hashmap to track the total word count for each sender.
+{{< dots >}}
+### Edge Cases 🌐
+- Messages and senders arrays cannot be empty.
+- The algorithm should efficiently handle up to 10^4 messages.
+- Messages with varying spaces between words and senders with the same number of words.
+- Consider the lexicographical order in case of ties.
+{{< dots >}}
+## Code 💻
+```cpp
+string largestWordCount(vector<string>& messages, vector<string>& senders) {
+
+    unordered_map<string, int> cnt;
+    string res;
+    int max_cnt = 0;
+    for(int i = 0; i < senders.size(); i++) {
+        int words = count(begin(messages[i]), end(messages[i]), ' ') + 1;
+        int cur = cnt[senders[i]] += words;
+        if((cur > max_cnt) || (cur == max_cnt && senders[i] > res)) {
+            res = senders[i];
+            max_cnt = cur;
         }
-
-        return res;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-In this problem, you are given two vectors:
-1. **messages**: A vector of strings where each string represents a message.
-2. **senders**: A vector of strings where each string represents the sender corresponding to the message at the same index in the `messages` vector.
-
-Your task is to identify which sender has sent the most words in total across all their messages. If there is a tie in the number of words, the sender whose name is lexicographically larger should be returned.
-
-### Approach
-
-The core idea of the solution is to calculate the total number of words sent by each sender and then identify the sender with the highest total word count. In case of a tie, the lexicographically largest sender name is returned. Here's how we can approach the problem:
-
-1. **Counting Words**: The number of words in a message is calculated by counting the number of spaces in the message, as the number of words is always one more than the number of spaces.
-   
-2. **Tracking Word Counts**: We maintain a hash map (`unordered_map`) where the keys are the sender's name, and the values are the total number of words sent by that sender across all their messages.
-
-3. **Checking the Maximum Word Count**: As we process each message and its corresponding sender, we update the total word count for the sender. At each step, we compare the current sender's total word count with the maximum count found so far. If the current sender has sent more words, or if they tie with the current maximum but their name is lexicographically larger, we update the result.
-
-4. **Returning the Result**: After processing all the messages, we return the sender with the highest word count, or the lexicographically largest sender name in case of a tie.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code into manageable sections:
-
-```cpp
-unordered_map<string, int> cnt;
-string res;
-int max_cnt = 0;
-```
-- **`unordered_map<string, int> cnt;`**: This is a hash map used to track the cumulative word count for each sender. The key is the sender's name (`string`), and the value is the total number of words they have sent (`int`).
-- **`string res;`**: This variable will store the name of the sender who has sent the most words.
-- **`int max_cnt = 0;`**: This variable keeps track of the maximum word count encountered so far.
-
-```cpp
-for(int i = 0; i < senders.size(); i++) {
-    int words = count(begin(messages[i]), end(messages[i]), ' ') + 1;
-    int cur = cnt[senders[i]] += words;
-```
-- **`for(int i = 0; i < senders.size(); i++)`**: We loop through the messages and senders. The loop runs once for each message and sender.
-- **`int words = count(begin(messages[i]), end(messages[i]), ' ') + 1;`**: The `count()` function counts the spaces in the message. Since the number of words is always one more than the number of spaces, we add 1 to the count of spaces to get the number of words in the message.
-- **`int cur = cnt[senders[i]] += words;`**: We update the word count for the current sender by adding the number of words in the current message. The `cnt` map is updated, and `cur` stores the updated word count for the sender.
-
-```cpp
-if((cur > max_cnt) || (cur == max_cnt && senders[i] > res)) {
-    res = senders[i];
-    max_cnt = cur;
+    return res;
 }
 ```
-- **`if((cur > max_cnt) || (cur == max_cnt && senders[i] > res))`**: This condition checks whether the current sender has sent more words than the previously found maximum word count (`max_cnt`). If the current sender has sent more words, we update the result (`res`) and set the new `max_cnt` to the current sender's word count.
-  - In case of a tie (`cur == max_cnt`), we compare the names lexicographically. If the current sender's name is lexicographically larger than the current result (`res`), we update the result.
 
-```cpp
-res = senders[i];
-max_cnt = cur;
-```
-- **`res = senders[i];`**: Updates the result with the name of the sender who has the highest word count (or the lexicographically larger name in case of a tie).
-- **`max_cnt = cur;`**: Updates the maximum word count with the current sender's word count.
+This function takes two vectors: `messages` (a list of messages sent) and `senders` (a list of corresponding senders), and returns the sender with the most words across their messages. If two senders have the same number of words, it returns the sender with the lexicographically larger name.
 
-```cpp
-return res;
-```
-- **`return res;`**: After all the messages have been processed, the sender with the largest total word count (or the lexicographically larger name in case of a tie) is returned as the result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string largestWordCount(vector<string>& messages, vector<string>& senders) {
+	```
+	The function `largestWordCount` is defined to return a string (the sender with the most words). It takes two vectors of strings: `messages` (the content of messages) and `senders` (the names of the senders).
 
-### Example Walkthrough
+2. **Initialize Count Map**
+	```cpp
+	    unordered_map<string, int> cnt;
+	```
+	An unordered map `cnt` is initialized, where the keys are sender names and the values are the total word counts for each sender's messages.
 
-Let’s walk through an example to see how the algorithm works:
+3. **Initialize Result Variables**
+	```cpp
+	    string res;
+	```
+	A string `res` is declared to store the sender with the maximum word count.
 
-```cpp
-vector<string> messages = {"Hello world", "How are you doing?", "Good morning", "Have a great day"};
-vector<string> senders = {"Alice", "Bob", "Alice", "Alice"};
-```
+4. **Initialize Maximum Count**
+	```cpp
+	    int max_cnt = 0;
+	```
+	An integer `max_cnt` is initialized to track the highest word count encountered during iteration.
 
-1. **First Iteration (i = 0)**:
-   - Sender: Alice
-   - Message: "Hello world"
-   - Word count: 2
-   - Cumulative word count for Alice: 2
-   - `max_cnt = 2`, `res = "Alice"`
+5. **Iterate Over Senders**
+	```cpp
+	    for(int i = 0; i < senders.size(); i++) {
+	```
+	A `for` loop is started to iterate over each sender in the `senders` vector and corresponding messages in `messages`.
 
-2. **Second Iteration (i = 1)**:
-   - Sender: Bob
-   - Message: "How are you doing?"
-   - Word count: 4
-   - Cumulative word count for Bob: 4
-   - `max_cnt = 4`, `res = "Bob"`
+6. **Count Words in Message**
+	```cpp
+	        int words = count(begin(messages[i]), end(messages[i]), ' ') + 1;
+	```
+	The number of words in the current message (`messages[i]`) is calculated by counting spaces and adding 1 (to account for the last word).
 
-3. **Third Iteration (i = 2)**:
-   - Sender: Alice
-   - Message: "Good morning"
-   - Word count: 2
-   - Cumulative word count for Alice: 4
-   - `max_cnt = 4`, `res = "Bob"` (Since "Alice" has tied with Bob in word count, we keep "Bob" because it's lexicographically larger than "Alice".)
+7. **Update Word Count for Sender**
+	```cpp
+	        int cur = cnt[senders[i]] += words;
+	```
+	The word count for the current sender is updated by adding the number of words in their message.
 
-4. **Fourth Iteration (i = 3)**:
-   - Sender: Alice
-   - Message: "Have a great day"
-   - Word count: 4
-   - Cumulative word count for Alice: 8
-   - `max_cnt = 8`, `res = "Alice"`
+8. **Check for Maximum Word Count**
+	```cpp
+	        if((cur > max_cnt) || (cur == max_cnt && senders[i] > res)) {
+	```
+	If the current sender's word count exceeds `max_cnt` or equals it but has a lexicographically larger name than the current result (`res`), the sender becomes the new candidate.
 
-Final result: **Alice** has the most words.
+9. **Update Result and Max Count**
+	```cpp
+	            res = senders[i];
+	```
+	If the condition is satisfied, the sender with the maximum word count (or the lexicographically larger name) is saved as `res`.
 
-### Complexity
+10. ****
+	```cpp
+	            max_cnt = cur;
+	```
+	The variable `max_cnt` is updated to the current word count (`cur`) of the sender.
 
-#### Time Complexity
+11. **Return the Result**
+	```cpp
+	    return res;
+	```
+	The function returns the sender with the maximum word count (or the lexicographically largest sender name in case of a tie).
 
-- **Iterating Through the Senders and Messages**: We iterate through all the messages and senders exactly once. For each message, we use the `count()` function to count spaces, which takes linear time with respect to the length of the message.
-- **Overall Time Complexity**: The overall time complexity is **O(n * m)**, where:
-  - `n` is the number of messages (or the number of senders).
-  - `m` is the average length of the messages (since `count()` takes linear time with respect to the message length).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity
+The time complexity is O(n) where n is the number of messages because we process each message and sender once.
 
-- **Storing Word Counts**: The `unordered_map` `cnt` stores the word counts for each sender. The number of entries in this map will be equal to the number of unique senders, which is **O(k)**, where `k` is the number of unique senders.
-- **Overall Space Complexity**: The space complexity is **O(k)**, where `k` is the number of unique senders.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+We store the word count for each sender, so the space complexity is O(n) where n is the number of unique senders.
 
-The solution efficiently tracks the total word count for each sender and determines which sender has sent the most words. In case of a tie, it returns the lexicographically larger sender. The algorithm runs in **O(n * m)** time complexity, which makes it efficient for typical input sizes. The use of an unordered map ensures that the space complexity remains manageable.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sender-with-largest-word-count/description/)
 

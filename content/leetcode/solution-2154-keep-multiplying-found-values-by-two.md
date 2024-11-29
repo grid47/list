@@ -14,96 +14,131 @@ img_src = ""
 youtube = "b-6Wf-ZShQQ"
 youtube_upload_date="2022-01-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/b-6Wf-ZShQQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers 'nums' and an integer 'original'. Start with the number 'original' and search for it in the array. If found, multiply it by two. Repeat this process until 'original' is no longer found in 'nums'. Return the final value of 'original'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers 'nums' and an integer 'original'.
+- **Example:** `nums = [4, 2, 8, 1, 16], original = 4`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i], original <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-  int findFinalValue(vector<int>& nums, int o) {
-        int h[1001]={};
-        for(auto i:nums) h[i]++;
-		
-        while(o<=1000 && h[o])
-            o*=2;
-        
-        return o;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the final value of 'original' after performing the described operations.
+- **Example:** `Output: 64`
+- **Constraints:**
+	- The final value of 'original' should be returned after the process stops.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if 'original' is in the array, and if so, multiply it by two. Repeat this process until 'original' is no longer found in the array.
 
-The task is to find the "final value" of a given integer `o` after repeatedly multiplying it by 2 if it exists in the array `nums`. Given an integer `o` and a list of integers `nums`, the process continues as long as the current value of `o` exists in `nums`. The function returns the final value of `o` after it no longer exists in `nums`.
+- Create a frequency map to count occurrences of each number in 'nums'.
+- Check if 'original' is present in 'nums' and multiply it by two if found.
+- Repeat the process until 'original' is not found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains integers within the specified range, and the number 'original' is also within the valid bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [4, 2, 8, 1, 16], original = 4`  \
+  **Explanation:** The number 4 is found and doubled to 8, then 8 is found and doubled to 16, and so on until 64 is obtained, which is not found in the array.
 
-### Approach
+- **Input:** `Example 2: nums = [1, 3, 5], original = 2`  \
+  **Explanation:** The number 2 is not found in the array, so the process stops immediately, and the final value remains 2.
 
-The approach leverages an array `h` to store the count of elements in `nums`. Using this frequency array, we can quickly check if the current value of `o` exists in `nums` by simply checking if `h[o]` is non-zero. If it exists, we multiply `o` by 2 and continue the process. If `o` is greater than 1000 or `h[o]` is zero, the loop terminates, and the function returns `o`.
+{{< dots >}}
+## Approach 🚀
+The approach involves checking if the number 'original' is in the array, and multiplying it by 2 whenever it is found, repeating the process until it is no longer found.
 
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The algorithm needs to check for the presence of a number and keep multiplying it until it is no longer found.
+- A frequency map can be useful to quickly check if a number exists in the array.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty input arrays are not allowed by the problem constraints.
+- The solution should efficiently handle large arrays with a length of up to 1000.
+- If 'original' is not found initially, the algorithm should return the unchanged value of 'original'.
+- The array 'nums' and the value 'original' are within specified bounds.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
   int findFinalValue(vector<int>& nums, int o) {
-        int h[1001]={};          // Step 1: Initialize an array `h` with 1001 elements set to 0
-        for(auto i : nums)       // Step 2: Populate `h` with elements from `nums`
-            h[i]++;
-        
-        while(o <= 1000 && h[o]) // Step 3: Repeat while `o` is within bounds and exists in `nums`
-            o *= 2;              // Step 4: Multiply `o` by 2 if it exists in `nums`
-        
-        return o;                // Step 5: Return the final value of `o`
-    }
-};
+    int h[1001]={};
+    for(auto i:nums) h[i]++;
+		
+    while(o<=1000 && h[o])
+        o*=2;
+    
+    return o;
+}
 ```
 
-#### Step-by-Step Breakdown
+This function finds the final value of 'o' after repeatedly doubling it until it no longer exists in the 'nums' array, using a frequency array for efficient lookup.
 
-1. **Frequency Array Initialization**:
-   ```cpp
-   int h[1001]={};
-   ```
-   An array `h` of size 1001 is created with all elements initialized to 0. Each index in `h` represents an integer value from 0 to 1000, so any element in `nums` (bounded by 1000) can be easily accessed in constant time.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	  int findFinalValue(vector<int>& nums, int o) {
+	```
+	The function 'findFinalValue' takes an array 'nums' and an integer 'o'. It calculates a final value by repeatedly doubling 'o' if the value exists in 'nums'.
 
-2. **Populating the Frequency Array**:
-   ```cpp
-   for(auto i : nums) h[i]++;
-   ```
-   For each element `i` in `nums`, we increment the corresponding index in `h`, marking its presence in the array `nums`.
+2. **Array Initialization**
+	```cpp
+	    int h[1001]={};
+	```
+	Initialize a frequency array 'h' of size 1001 to store the frequency of each integer in 'nums'. The array is initially set to zero.
 
-3. **Loop to Adjust the Value of `o`**:
-   ```cpp
-   while(o <= 1000 && h[o])
-       o *= 2;
-   ```
-   This loop continues as long as `o` is within the bounds (less than or equal to 1000) and `o` is found in `nums`. If `h[o]` is non-zero, this means `o` exists in `nums`, so we multiply `o` by 2. The loop exits when either `o` is not found in `nums` or `o` exceeds 1000.
+3. **Frequency Counting**
+	```cpp
+	    for(auto i:nums) h[i]++;
+	```
+	Iterate over each element in the 'nums' array and update the frequency of that element in the array 'h'.
 
-4. **Returning the Final Value of `o`**:
-   ```cpp
-   return o;
-   ```
-   After the loop finishes, `o` no longer exists in `nums` or has exceeded 1000, so we return `o`.
+4. **Loop Control**
+	```cpp
+	    while(o<=1000 && h[o])
+	```
+	While 'o' is less than or equal to 1000 and the value 'o' exists in the frequency array 'h', keep doubling 'o'.
 
-### Complexity Analysis
+5. **Doubling**
+	```cpp
+	        o*=2;
+	```
+	Double the value of 'o'. This continues until 'o' is not present in the frequency array or exceeds 1000.
 
-#### Time Complexity
-- Constructing the frequency array `h` from `nums` takes **O(n)** time, where `n` is the number of elements in `nums`.
-- The while loop may potentially iterate at most **log(n)** times since we double `o` each time.
+6. **Return Statement**
+	```cpp
+	    return o;
+	```
+	Return the final value of 'o' after the loop terminates.
 
-Thus, the overall time complexity is **O(n)**, which is efficient.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity
-- The space complexity is **O(1)** as `h` is a fixed-size array (1001 elements) and does not depend on the input size `n`.
+The time complexity is O(n) due to the need to iterate through the array once to build the frequency map.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution provides an efficient way to compute the "final value" by checking for each existence of `o` using constant-time lookups in the frequency array. This results in a linear time solution with minimal space usage, which makes it optimal for large arrays with elements bounded by 1000. The solution also ensures that `o` is doubled efficiently until it reaches a value not present in `nums`. This approach balances both time and space complexity, achieving high performance with simplicity.
+The space complexity is O(n) due to the storage required for the frequency map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/keep-multiplying-found-values-by-two/description/)
 

@@ -14,113 +14,168 @@ img_src = ""
 youtube = "xV-TA-TtiAg"
 youtube_upload_date="2023-07-08"
 youtube_thumbnail="https://i.ytimg.com/vi/xV-TA-TtiAg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a binary string 's', partition it into substrings such that each substring represents a power of 5 in binary form and does not contain leading zeros. Return the minimum number of such partitions, or -1 if impossible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single binary string 's'.
+- **Example:** `Input: s = '1101'`
+- **Constraints:**
+	- 1 <= s.length <= 15
+	- s[i] is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-        int minimumBeautifulSubstrings(string s) {
-        int n = s.length();
-        vector<int> dp(n + 1, n + 1);
-        dp[0] = 0;
-        for (int i = 0; i < n; i++) {
-            if (s[i] == '0') continue;
-            for (int j = i, cur = 0; j < n; j++) {
-                cur = cur * 2 + s[j] - '0';
-                if (15625 % cur == 0)
-                    dp[j + 1] = min(dp[j + 1], dp[i] + 1);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of partitions such that each substring meets the specified criteria. If no valid partition exists, return -1.
+- **Example:** `Output: 2 for Input: s = '1101'`
+- **Constraints:**
+	- Output must be an integer, representing the minimum number of partitions or -1 if invalid.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To minimize the number of substrings while ensuring each substring represents a power of 5 and does not have leading zeros.
+
+- Iterate through the binary string and check all possible substrings.
+- For each substring, check if it is a valid binary representation of a power of 5.
+- Use dynamic programming to track the minimum partitions for each prefix of the string.
+{{< dots >}}
+### Problem Assumptions ✅
+- All substrings must represent numbers greater than zero.
+- Leading zeros in substrings invalidate them.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = '1101'`  \
+  **Explanation:** The string can be split into ['110', '1'], where both parts are valid binary representations of powers of 5.
+
+- **Input:** `Input: s = '0001'`  \
+  **Explanation:** The string cannot be partitioned into valid substrings as all parts have leading zeros.
+
+{{< dots >}}
+## Approach 🚀
+Dynamic programming approach to minimize partitions while validating binary substrings as powers of 5.
+
+### Initial Thoughts 💭
+- Binary strings can be parsed into integers to check if they are powers of 5.
+- Leading zeros are invalid, so such substrings are not considered.
+- Dynamic programming can efficiently find the minimum number of valid partitions.
+{{< dots >}}
+### Edge Cases 🌐
+- The constraints ensure the input string is not empty.
+- The maximum length of the string is 15, so edge cases with maximum length must be handled efficiently.
+- Strings with only zeros ('0000') or invalid patterns should return -1.
+- The binary string must be partitioned into contiguous, valid substrings.
+{{< dots >}}
+## Code 💻
+```cpp
+    int minimumBeautifulSubstrings(string s) {
+    int n = s.length();
+    vector<int> dp(n + 1, n + 1);
+    dp[0] = 0;
+    for (int i = 0; i < n; i++) {
+        if (s[i] == '0') continue;
+        for (int j = i, cur = 0; j < n; j++) {
+            cur = cur * 2 + s[j] - '0';
+            if (15625 % cur == 0)
+                dp[j + 1] = min(dp[j + 1], dp[i] + 1);
         }
-        return dp[n] > n ? -1 : dp[n];
     }
-};
-{{< /highlight >}}
----
+    return dp[n] > n ? -1 : dp[n];
+}
+```
 
-### Problem Statement
+This function calculates the minimum number of beautiful substrings (binary substrings divisible by 15625). It uses dynamic programming to track the minimum number of splits needed to form these substrings.
 
-Given a binary string `s`, the task is to split it into the minimum number of beautiful substrings. A beautiful substring is defined as a substring that, when converted to a decimal number, is divisible by `15625`. The goal is to determine the minimum number of beautiful substrings into which the string `s` can be split, or return `-1` if it's not possible to split `s` into beautiful substrings.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	    int minimumBeautifulSubstrings(string s) {
+	```
+	Defines the function `minimumBeautifulSubstrings`, which takes a binary string `s` and returns the minimum number of beautiful substrings or `-1` if it's impossible.
 
-### Approach
+2. **Calculate String Length**
+	```cpp
+	    int n = s.length();
+	```
+	Calculates the length of the input string `s` and stores it in the variable `n`.
 
-The core idea of this solution is to use dynamic programming to minimize the number of beautiful substrings we can obtain from the string `s`. We'll take advantage of the fact that the only values divisible by `15625` that can be represented as binary strings are specific powers of 5. Therefore, our approach focuses on iterating over the string and trying to find all valid binary substrings that are divisible by `15625`, updating the result through dynamic programming.
+3. **Initialize DP Array**
+	```cpp
+	    vector<int> dp(n + 1, n + 1);
+	```
+	Initializes a dynamic programming (DP) array `dp` of size `n + 1` where each entry represents the minimum number of beautiful substrings up to that position in the string. Initially, all values are set to `n + 1`.
 
-Here are the steps involved:
+4. **Base Case**
+	```cpp
+	    dp[0] = 0;
+	```
+	Sets the base case: `dp[0]` is 0, indicating no substrings are needed for an empty string.
 
-1. **Initialization**:
-   - We need a dynamic programming array `dp` where `dp[i]` will store the minimum number of beautiful substrings needed to split the substring `s[0..i-1]`. 
-   - We initialize the `dp` array with a large value (`n + 1`), except for `dp[0]`, which is 0 because no substrings are needed before the start of the string.
+5. **Iterate Over String**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate over each character in the input string `s`.
 
-2. **Check Divisibility for All Substrings**:
-   - For every substring starting from index `i`, we try to form a number from the binary digits of the string. For each binary substring, we convert it to a decimal number and check if it is divisible by `15625`.
-   - If the number is divisible by `15625`, we update the `dp` value for the end of that substring to reflect that we've found a new beautiful substring.
+6. **Skip Zeros**
+	```cpp
+	        if (s[i] == '0') continue;
+	```
+	If the current character is '0', skips the rest of the loop and moves to the next character.
 
-3. **Final Answer**:
-   - After processing the entire string, if `dp[n]` is still `n + 1`, it means it's impossible to split the string into beautiful substrings, so we return `-1`. Otherwise, we return the value of `dp[n]`, which represents the minimum number of beautiful substrings.
+7. **Inner Loop**
+	```cpp
+	        for (int j = i, cur = 0; j < n; j++) {
+	```
+	Starts an inner loop to iterate from the current position `i` to the end of the string, calculating the binary value of the substring starting at `i`.
 
-### Code Breakdown (Step by Step)
+8. **Update Current Value**
+	```cpp
+	            cur = cur * 2 + s[j] - '0';
+	```
+	Updates the current binary value `cur` by shifting it left by one bit (multiply by 2) and adding the current character (`s[j]`) to it. The subtraction of `'0'` converts the character to its integer value (0 or 1).
 
-Let's walk through the code line by line:
+9. **Check Divisibility**
+	```cpp
+	            if (15625 % cur == 0)
+	```
+	Checks if the current binary value `cur` is divisible by 15625 (the divisor for beautiful substrings).
 
-1. **Dynamic Programming Array Setup**:
-   ```cpp
-   int n = s.length();
-   vector<int> dp(n + 1, n + 1);
-   dp[0] = 0;
-   ```
-   - The variable `n` holds the length of the string `s`.
-   - We initialize the `dp` array with size `n + 1`. The value of `dp[i]` represents the minimum number of beautiful substrings needed to split the substring `s[0..i-1]`. Initially, all values are set to `n + 1` (a large value), except for `dp[0]`, which is set to 0 because no substrings are required before the start of the string.
+10. **Update DP Array**
+	```cpp
+	                dp[j + 1] = min(dp[j + 1], dp[i] + 1);
+	```
+	If the current binary value is divisible by 15625, updates the DP array at index `j + 1` to reflect the minimum number of beautiful substrings by adding 1 to the DP value at index `i`.
 
-2. **Iterate Through the String**:
-   ```cpp
-   for (int i = 0; i < n; i++) {
-       if (s[i] == '0') continue;
-       for (int j = i, cur = 0; j < n; j++) {
-           cur = cur * 2 + s[j] - '0';
-           if (15625 % cur == 0)
-               dp[j + 1] = min(dp[j + 1], dp[i] + 1);
-       }
-   }
-   ```
-   - The outer loop iterates through each character in the string. If the current character is `'0'`, it skips to the next iteration because no valid substring can start with `0`.
-   - The inner loop tries to form a binary number starting from index `i`. The variable `cur` keeps track of the current number as we append each bit.
-   - We convert the binary substring formed by `s[i..j]` into a decimal number by continuously updating `cur = cur * 2 + s[j] - '0'`.
-   - If the current number `cur` is divisible by `15625`, we update the `dp[j + 1]` to the minimum value between the current `dp[j + 1]` and `dp[i] + 1`. This means we've found a valid substring from `i` to `j`, and we can consider it as one beautiful substring, increasing the count.
+11. **Return Result**
+	```cpp
+	    return dp[n] > n ? -1 : dp[n];
+	```
+	Returns the minimum number of beautiful substrings, which is stored in `dp[n]`. If no valid result is found (i.e., `dp[n]` is greater than `n`), it returns `-1`.
 
-3. **Return Result**:
-   ```cpp
-   return dp[n] > n ? -1 : dp[n];
-   ```
-   - After iterating through all substrings, if `dp[n]` is still greater than `n`, it means it's impossible to split the string into beautiful substrings, so we return `-1`.
-   - Otherwise, we return `dp[n]`, which represents the minimum number of beautiful substrings.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-### Complexity Analysis
+Iterating through substrings and checking validity contributes to the quadratic complexity.
 
-#### Time Complexity:
-1. **Outer Loop**:
-   - The outer loop runs from `i = 0` to `i = n-1`, so it iterates `n` times.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Inner Loop**:
-   - For each position `i`, the inner loop iterates from `j = i` to `j = n-1`. In the worst case, the inner loop runs \(n\) times for each value of `i`. Therefore, the total number of iterations in both loops is approximately \(O(n^2)\).
+Space complexity is dominated by the dp array storing results for substrings.
 
-3. **Divisibility Check**:
-   - For each valid substring, we check if `cur % 15625 == 0`, which takes constant time \(O(1)\) because checking divisibility is a simple operation.
+**Happy Coding! 🎉**
 
-Hence, the total time complexity is \(O(n^2)\), where \(n\) is the length of the string `s`.
-
-#### Space Complexity:
-- We are using an array `dp` of size \(n + 1\) to store the minimum number of beautiful substrings. Hence, the space complexity is \(O(n)\), where \(n\) is the length of the string `s`.
-
-### Conclusion
-
-This solution utilizes dynamic programming to find the minimum number of beautiful substrings in a binary string. The algorithm processes the string by iterating over all possible substrings and checking if they are divisible by `15625`. The time complexity of \(O(n^2)\) makes the solution efficient for moderate-sized strings. The solution is well-optimized, with space complexity of \(O(n)\) for the `dp` array, and it provides the correct result by keeping track of the minimum number of beautiful substrings needed. 
-
-This approach ensures that all edge cases, such as strings containing only `0`s or strings where no beautiful substring exists, are handled correctly.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-string-into-minimum-beautiful-substrings/description/)
 

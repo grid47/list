@@ -14,194 +14,260 @@ img_src = ""
 youtube = "4hb3bZS1o1o"
 youtube_upload_date="2022-11-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/4hb3bZS1o1o/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers where each element represents the cost of hiring a worker. You need to hire exactly k workers by running k sessions. In each session, choose the worker with the lowest cost from either the first 'candidates' workers or the last 'candidates' workers. If there is a tie, choose the worker with the smallest index.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three values: the costs array, k (the number of workers to hire), and candidates (the number of workers to consider from both the beginning and end of the remaining workers).
+- **Example:** `costs = [5, 8, 3, 1, 6, 2], k = 2, candidates = 3`
+- **Constraints:**
+	- 1 <= costs.length <= 10^5
+	- 1 <= costs[i] <= 10^5
+	- 1 <= k, candidates <= costs.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long totalCost(vector<int>& costs, int k, int cand) {
-        long long cost = 0;
-        int n = costs.size();
-        int l = cand - 1, r = n - cand; // inclusive
-        
-        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
-        
-        if(l >= r) {
-            for(int i = 0; i < n; i++)
-                pq.push({costs[i], i});
-            
-            while(k--) {
-                cost += pq.top()[0];
-                pq.pop();
-            }
-            return cost;
-        }
-        
-        
-        int i = 0;
-        while(i <= l) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total cost of hiring exactly k workers following the selection rule.
+- **Example:** `For costs = [5, 8, 3, 1, 6, 2], k = 2, candidates = 3, the output is 4.`
+- **Constraints:**
+	- The result should be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To hire exactly k workers by choosing from the first 'candidates' workers or the last 'candidates' workers based on the minimum cost and smallest index for ties.
+
+- Initialize a priority queue to track the lowest cost workers.
+- Iterate through the first 'candidates' and last 'candidates' workers, pushing them into the queue.
+- For each of the k hiring sessions, pop the worker with the lowest cost and smallest index from the queue.
+- After each hiring session, update the queue with the next possible workers from both the beginning and end.
+{{< dots >}}
+### Problem Assumptions ✅
+- The workers are chosen according to the lowest cost with the smallest index for ties.
+- Once a worker is chosen, they are no longer available for subsequent selections.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For costs = [5, 8, 3, 1, 6, 2], k = 2, candidates = 3`  \
+  **Explanation:** In the first hiring session, we choose the worker with the cost of 1 (index 3), and in the second session, we choose the worker with the cost of 3 (index 2), totaling 4.
+
+{{< dots >}}
+## Approach 🚀
+Use a priority queue (min-heap) to select the lowest cost worker at each session from the first 'candidates' workers or the last 'candidates' workers.
+
+### Initial Thoughts 💭
+- We need to keep track of the workers in the first and last 'candidates' positions.
+- A priority queue will help efficiently select the worker with the lowest cost.
+- Ensure that the heap is updated after each selection to reflect the remaining candidates.
+{{< dots >}}
+### Edge Cases 🌐
+- If the costs array is empty, return 0.
+- If the array is large, ensure the solution is optimized for time complexity.
+- If all workers have the same cost, select the worker with the smallest index.
+- The solution must handle up to 100,000 workers efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+long long totalCost(vector<int>& costs, int k, int cand) {
+    long long cost = 0;
+    int n = costs.size();
+    int l = cand - 1, r = n - cand; // inclusive
+    
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+    
+    if(l >= r) {
+        for(int i = 0; i < n; i++)
             pq.push({costs[i], i});
-            i++;
-        }
-        
-        i = n - 1;
-        
-        while(i >= r) {
-            pq.push({costs[i], i});
-            i--;
-        }
         
         while(k--) {
-            auto it = pq.top();
+            cost += pq.top()[0];
             pq.pop();
-            cost += it[0];
-            if(it[1] <= l && l < r - 1) {
-                l++;
-                pq.push({costs[l], l});
-            } else if(it[1] >= r && l < r - 1) {
-                r--;
-                pq.push({costs[r], r});
-            }
-            
         }
         return cost;
     }
-};
-{{< /highlight >}}
----
+    
+    
+    int i = 0;
+    while(i <= l) {
+        pq.push({costs[i], i});
+        i++;
+    }
+    
+    i = n - 1;
+    
+    while(i >= r) {
+        pq.push({costs[i], i});
+        i--;
+    }
+    
+    while(k--) {
+        auto it = pq.top();
+        pq.pop();
+        cost += it[0];
+        if(it[1] <= l && l < r - 1) {
+            l++;
+            pq.push({costs[l], l});
+        } else if(it[1] >= r && l < r - 1) {
+            r--;
+            pq.push({costs[r], r});
+        }
+        
+    }
+    return cost;
+}
+```
 
-### Problem Statement:
-In this problem, we are given an array `costs` of integers representing the cost of hiring workers, an integer `k` representing the number of workers to hire, and an integer `cand` representing the number of candidates. The task is to hire `k` workers at the minimum total cost. The workers available for hiring are the first `cand` candidates from the start and the last `cand` candidates from the end of the `costs` array.
+This code calculates the minimum total cost to choose 'k' workers by utilizing a priority queue to select candidates based on their costs efficiently.
 
-We need to efficiently select `k` workers such that their total cost is minimized.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long totalCost(vector<int>& costs, int k, int cand) {
+	```
+	The function signature defining inputs: a cost array, the number of workers 'k,' and a candidate range 'cand.'
 
-### Approach:
-The problem boils down to selecting `k` workers from the `cand` number of candidates at the beginning and end of the array. Since we need to minimize the total cost, we can use a **min-heap** (priority queue) to always select the worker with the lowest cost. The idea is to maintain a window of candidates on the left and right and select workers from those windows in order to minimize the hiring cost. Here's how we approach the solution:
+2. **Variable Initialization**
+	```cpp
+	    long long cost = 0;
+	```
+	Initialize the total cost to zero.
 
-1. **Two Candidate Pools**:
-   - The workers we can select are either from the first `cand` workers or from the last `cand` workers.
-   - If there are more than `cand` workers, the solution needs to balance between selecting from the left and right ends while minimizing the total cost.
+3. **Variable Initialization**
+	```cpp
+	    int n = costs.size();
+	```
+	Determine the size of the input cost array.
 
-2. **Use of a Min-Heap (Priority Queue)**:
-   - A **min-heap** will allow us to always pick the worker with the lowest cost in constant time, while adding and removing elements in logarithmic time.
+4. **Variable Initialization**
+	```cpp
+	    int l = cand - 1, r = n - cand; // inclusive
+	```
+	Set up the left and right candidate range boundaries.
 
-3. **Maintaining the Left and Right Windows**:
-   - First, the heap will be initialized with workers from both ends (`[0, cand-1]` and `[n-cand, n-1]`).
-   - We need to consider workers between these two windows and add them to the heap as we process the workers.
+5. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+	```
+	Declare a min-heap priority queue to manage costs and indices.
 
-4. **Cost Calculation**:
-   - At each step, the worker with the lowest cost is selected from the heap, and the cost is added to the total cost.
-   - After selecting a worker, we expand the window by moving inward (if possible) and add the next potential worker to the heap.
+6. **Condition Check**
+	```cpp
+	    if(l >= r) {
+	```
+	Check if the left and right boundaries overlap, indicating all elements can be pushed directly.
 
-### Code Breakdown (Step by Step):
+7. **Loop**
+	```cpp
+	        for(int i = 0; i < n; i++)
+	```
+	Iterate through the entire cost array to push elements into the priority queue.
 
-1. **Function Definition**:
-   ```cpp
-   long long totalCost(vector<int>& costs, int k, int cand) {
-   ```
-   The function `totalCost` accepts:
-   - `costs`: The array representing the cost of hiring each worker.
-   - `k`: The number of workers to hire.
-   - `cand`: The number of candidates to choose from at both ends of the array.
+8. **Priority Queue Operation**
+	```cpp
+	            pq.push({costs[i], i});
+	```
+	Push the cost and index pair into the priority queue.
 
-   It returns a `long long` value representing the minimum total cost to hire `k` workers.
+9. **Loop**
+	```cpp
+	        while(k--) {
+	```
+	Iterate to extract the minimum 'k' costs from the priority queue.
 
-2. **Initialization**:
-   ```cpp
-   long long cost = 0;
-   int n = costs.size();
-   int l = cand - 1, r = n - cand; // inclusive
-   priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
-   ```
-   - `cost`: Stores the accumulated cost of the hired workers.
-   - `n`: The number of workers available.
-   - `l` and `r`: Variables represent the current window for the left and right candidate pools.
-   - `pq`: A priority queue (min-heap) that stores pairs of `{cost, index}` to allow easy retrieval of the lowest cost worker.
+10. **Priority Queue Operation**
+	```cpp
+	            cost += pq.top()[0];
+	```
+	Add the minimum cost from the top of the queue.
 
-3. **When `l >= r` (All Candidates are from One Side)**:
-   ```cpp
-   if(l >= r) {
-       for(int i = 0; i < n; i++)
-           pq.push({costs[i], i});
-       
-       while(k--) {
-           cost += pq.top()[0];
-           pq.pop();
-       }
-       return cost;
-   }
-   ```
-   - If there is no overlap between the left and right candidate pools (i.e., all candidates come from one side), we simply add all workers to the priority queue and select the `k` workers with the lowest cost.
+11. **Priority Queue Operation**
+	```cpp
+	            pq.pop();
+	```
+	Remove the top element from the priority queue.
 
-4. **Initializing the Min-Heap with Left and Right Pools**:
-   ```cpp
-   int i = 0;
-   while(i <= l) {
-       pq.push({costs[i], i});
-       i++;
-   }
-   
-   i = n - 1;
-   while(i >= r) {
-       pq.push({costs[i], i});
-       i--;
-   }
-   ```
-   - This part of the code initializes the priority queue with workers from both ends:
-     - The first loop adds workers from the left side (first `cand` workers).
-     - The second loop adds workers from the right side (last `cand` workers).
+12. **Return**
+	```cpp
+	        return cost;
+	```
+	Return the total minimum cost when all workers are selected.
 
-5. **Selecting Workers**:
-   ```cpp
-   while(k--) {
-       auto it = pq.top();
-       pq.pop();
-       cost += it[0];
-   ```
-   - We now enter the main loop where we select `k` workers:
-     - We always select the worker with the lowest cost from the top of the priority queue.
-     - The cost of that worker is added to the total `cost`, and the worker is removed from the heap.
+13. **Loop**
+	```cpp
+	    while(i <= l) {
+	```
+	Push elements from the left boundary range into the priority queue.
 
-6. **Expanding the Candidate Windows**:
-   ```cpp
-   if(it[1] <= l && l < r - 1) {
-       l++;
-       pq.push({costs[l], l});
-   } else if(it[1] >= r && l < r - 1) {
-       r--;
-       pq.push({costs[r], r});
-   }
-   ```
-   - After selecting a worker, we check if we can expand the candidate window:
-     - If the selected worker is from the left side and we haven't exhausted the left window, we increment `l` to add the next worker from the left.
-     - If the selected worker is from the right side and we haven't exhausted the right window, we decrement `r` to add the next worker from the right.
+14. **Priority Queue Operation**
+	```cpp
+	        pq.push({costs[i], i});
+	```
+	Push left-side candidates into the priority queue.
 
-7. **Returning the Total Cost**:
-   ```cpp
-   return cost;
-   }
-   ```
-   - After selecting `k` workers, the function returns the total accumulated cost.
+15. **Loop**
+	```cpp
+	    while(i >= r) {
+	```
+	Push elements from the right boundary range into the priority queue.
 
-### Complexity:
+16. **Priority Queue Operation**
+	```cpp
+	        pq.push({costs[i], i});
+	```
+	Push right-side candidates into the priority queue.
 
-1. **Time Complexity**:
-   - Building the priority queue initially takes \( O(n \log n) \) since each worker is pushed into the heap.
-   - In the main loop, each operation (insertion and removal) on the heap takes \( O(\log n) \), and since we perform this operation `k` times, the total time complexity for selecting the workers is \( O(k \log n) \).
-   - Thus, the overall time complexity is \( O(n \log n + k \log n) \), which simplifies to \( O(n \log n) \) since \( k \leq n \).
+17. **Priority Queue Operation**
+	```cpp
+	        auto it = pq.top();
+	```
+	Extract the current minimum cost element.
 
-2. **Space Complexity**:
-   - The space complexity is determined by the priority queue, which can store up to `n` workers at any point in time.
-   - Therefore, the space complexity is \( O(n) \).
+18. **Condition Check**
+	```cpp
+	        if(it[1] <= l && l < r - 1) {
+	```
+	Check if the selected candidate is from the left and adjust the boundary.
 
-### Conclusion:
+19. **Priority Queue Operation**
+	```cpp
+	            pq.push({costs[l], l});
+	```
+	Push the next candidate from the left boundary.
 
-The `totalCost` function efficiently selects the `k` workers with the minimum total cost by utilizing a priority queue to always select the worker with the lowest cost from the available candidate pools. By managing two candidate pools (left and right), the algorithm ensures that workers are selected in the optimal manner, while maintaining the constraint on the number of workers to hire. The solution has a time complexity of \( O(n \log n) \), making it suitable for large input sizes, and the space complexity is \( O(n) \), which is optimal for this problem.
+20. **Condition Check**
+	```cpp
+	        } else if(it[1] >= r && l < r - 1) {
+	```
+	Check if the selected candidate is from the right and adjust the boundary.
+
+21. **Priority Queue Operation**
+	```cpp
+	            pq.push({costs[r], r});
+	```
+	Push the next candidate from the right boundary.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k log k)
+- **Average Case:** O(k log k)
+- **Worst Case:** O(k log k)
+
+Each operation (insertion and removal) in the priority queue takes O(log k), and we perform k operations.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is O(k) due to the storage required for the priority queue to manage the workers.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/total-cost-to-hire-k-workers/description/)
 

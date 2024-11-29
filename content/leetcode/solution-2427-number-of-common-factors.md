@@ -14,143 +14,118 @@ img_src = ""
 youtube = "QzFzbNvmRgs"
 youtube_upload_date="2022-10-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QzFzbNvmRgs/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two positive integers, a and b. Your task is to find the number of common divisors (factors) between a and b. A number x is considered a common divisor of a and b if it divides both a and b without leaving any remainder.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two positive integers, a and b.
+- **Example:** `a = 18, b = 24`
+- **Constraints:**
+	- 1 <= a, b <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int commonFactors(int a, int b) {
-    int res = 1, hi = gcd(a, b);
-    for (int n = 2; n <= hi; ++n)
-        res += a % n == 0 && b % n == 0;
-    return res;
-}
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of common divisors (factors) of a and b.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The result will be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the number of common divisors efficiently.
 
-The problem requires calculating the number of common factors (or divisors) between two integers `a` and `b`. A common factor is a number that divides both `a` and `b` without leaving a remainder. Your task is to return the total number of such common divisors between the two given integers.
+- 1. Find the greatest common divisor (GCD) of a and b.
+- 2. Count all the divisors of the GCD, since the divisors of the GCD are the common divisors of a and b.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both a and b are positive integers.
+- We need to calculate only the common divisors between the two numbers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `a = 18, b = 24`  \
+  **Explanation:** The common divisors of 18 and 24 are 1, 2, 3, 6, 9, and 18. Therefore, the answer is 6.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We can solve the problem by first finding the greatest common divisor (GCD) of a and b. Then, we find all the divisors of the GCD, as they will also be the common divisors of both a and b.
 
-To solve this problem, we need to find the divisors of both numbers and count the ones that are common between the two. However, we can optimize the process by leveraging the **greatest common divisor (GCD)** of the two numbers.
-
-#### Key Insights
-
-1. **Divisors of a Number**:
-   - The divisors of a number `n` are the integers `x` such that `n % x == 0`.
-   - Divisors come in pairs. For example, if `x` divides `n`, then `n / x` also divides `n`.
-
-2. **Common Divisors**:
-   - The common divisors of two numbers `a` and `b` are the divisors of their GCD. This is because any divisor of the GCD is guaranteed to be a divisor of both `a` and `b`.
-   - Thus, instead of iterating through all numbers from 1 to `min(a, b)`, we only need to consider the divisors of `gcd(a, b)`.
-
-3. **Efficient Counting**:
-   - Once we have the GCD of the two numbers, the problem reduces to counting the divisors of the GCD.
-   - This can be done by checking for each integer from `1` to `sqrt(gcd(a, b))`. For each such number `n`, both `n` and `gcd(a, b) / n` (if distinct) are divisors.
-
-### Code Breakdown (Step by Step)
-
-Let's walk through the code provided in the solution.
-
-#### Step 1: Calculate the GCD of `a` and `b`
-
+### Initial Thoughts 💭
+- The common divisors of two numbers are the divisors of their greatest common divisor (GCD).
+- We can use the Euclidean algorithm to find the GCD of a and b and then count its divisors.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as both a and b are guaranteed to be positive integers.
+- The solution should handle input values up to 1000 efficiently.
+- If a and b are the same number, the GCD will be the number itself, and its divisors will be the number of divisors of that number.
+- The solution must run efficiently for the entire input range.
+{{< dots >}}
+## Code 💻
 ```cpp
-int hi = gcd(a, b);
-```
-
-- The function `gcd(a, b)` is used to calculate the greatest common divisor of the integers `a` and `b`. The result, stored in `hi`, is the largest integer that divides both `a` and `b`.
-- By focusing on the divisors of `hi`, we guarantee that we're only counting the common divisors of `a` and `b`.
-
-#### Step 2: Initialize the Result
-
-```cpp
-int res = 1;
-```
-
-- We initialize the result variable `res` to `1`. This is because `1` is always a common divisor of any two numbers. Therefore, we begin the count with one.
-
-#### Step 3: Loop Through Possible Divisors
-
-```cpp
+int commonFactors(int a, int b) {
+int res = 1, hi = gcd(a, b);
 for (int n = 2; n <= hi; ++n)
     res += a % n == 0 && b % n == 0;
-```
-
-- We loop through all integers from `2` to `hi` (the GCD of `a` and `b`).
-- For each integer `n`, we check if both `a` and `b` are divisible by `n` (i.e., `a % n == 0 && b % n == 0`). If this is true, then `n` is a common divisor of both `a` and `b`.
-- We increment the result `res` for each common divisor found.
-
-#### Step 4: Return the Result
-
-```cpp
 return res;
+}
 ```
 
-- After the loop, the result `res` contains the count of common divisors between `a` and `b`, including `1` which was initially added.
-- Finally, we return the value of `res` as the output.
+This function calculates the number of common factors between two integers by iterating through potential divisors.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int commonFactors(int a, int b) {
+	```
+	This line defines the function 'commonFactors' that takes two integers as input parameters.
 
-#### Time Complexity:
+2. **Variable Initialization**
+	```cpp
+	int res = 1, hi = gcd(a, b);
+	```
+	Here, a variable 'res' is initialized to 1 and 'hi' is set to the greatest common divisor (gcd) of a and b.
 
-The time complexity of this solution depends on two main operations:
-1. **GCD Calculation**:
-   - The `gcd(a, b)` function computes the greatest common divisor of `a` and `b` using the **Euclidean algorithm**. The time complexity of this operation is **O(log(min(a, b)))**.
-   
-2. **Counting Divisors**:
-   - To find the divisors of the GCD, we iterate through all integers from `2` to `sqrt(gcd(a, b))`. The number of iterations is proportional to **O(sqrt(hi))**, where `hi` is the GCD of `a` and `b`.
+3. **For Loop Setup**
+	```cpp
+	for (int n = 2; n <= hi; ++n)
+	```
+	This is the start of a loop that will iterate from 2 to the greatest common divisor (hi).
 
-Therefore, the total time complexity is:
+4. **Condition Check**
+	```cpp
+	    res += a % n == 0 && b % n == 0;
+	```
+	In this line, we check if both a and b are divisible by n. If so, 'res' is incremented.
 
-\[
-O(\log(\min(a, b))) + O(\sqrt{\text{gcd}(a, b)})
-\]
+5. **Return Statement**
+	```cpp
+	return res;
+	```
+	After the loop ends, the function returns the number of common factors found.
 
-In the worst case, the time complexity is **O(sqrt(gcd(a, b)))**, since the GCD calculation is logarithmic and the divisor-counting step is more significant.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(min(a, b))) for finding the GCD.
+- **Average Case:** O(sqrt(gcd)) for counting the divisors.
+- **Worst Case:** O(sqrt(gcd)) for counting the divisors.
 
-#### Space Complexity:
+The time complexity is dominated by finding the divisors of the GCD, which takes O(sqrt(gcd)) time.
 
-The space complexity is **O(1)** because the algorithm uses a constant amount of extra space (apart from the input variables). We are not using any additional data structures that grow with the size of the input.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Example Walkthrough
+The space complexity is O(1) because we only use a constant amount of space.
 
-Let's go through a small example to better understand how the algorithm works.
+**Happy Coding! 🎉**
 
-#### Example 1: `a = 12`, `b = 18`
-
-1. **Calculate GCD**:
-   - The GCD of `12` and `18` is `6`.
-
-2. **Count Divisors of 6**:
-   - The divisors of `6` are `1`, `2`, `3`, and `6`.
-   - We check each number from `2` to `6`:
-     - `2` divides both `12` and `18`, so it's a common divisor.
-     - `3` divides both `12` and `18`, so it's a common divisor.
-     - `6` divides both `12` and `18`, so it's a common divisor.
-   - The total number of common divisors is `4` (including `1`).
-
-#### Example 2: `a = 15`, `b = 25`
-
-1. **Calculate GCD**:
-   - The GCD of `15` and `25` is `5`.
-
-2. **Count Divisors of 5**:
-   - The divisors of `5` are `1` and `5`.
-   - We check each number from `2` to `5`:
-     - `5` divides both `15` and `25`, so it's a common divisor.
-   - The total number of common divisors is `2` (including `1`).
-
-### Conclusion
-
-This solution efficiently calculates the number of common divisors between two integers using the GCD. By focusing on the divisors of the GCD, we avoid unnecessary checks and reduce the problem to a more manageable size. The algorithm is optimal with respect to both time and space, and it performs well even for large values of `a` and `b`. This method provides a clear and concise way to solve the problem while leveraging the properties of divisors and the GCD.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-common-factors/description/)
 

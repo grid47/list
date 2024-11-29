@@ -14,151 +14,209 @@ img_src = ""
 youtube = "rvASCADV4Lw"
 youtube_upload_date="2022-09-18"
 youtube_thumbnail="https://i.ytimg.com/vi/rvASCADV4Lw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays: 'players' and 'trainers'. The array 'players' represents the abilities of different players, and the array 'trainers' represents the training capacities of various trainers. A player can be matched with a trainer if the player's ability is less than or equal to the trainer's capacity. The goal is to find the maximum number of valid matchings between players and trainers such that each player is matched with at most one trainer and vice versa.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integer arrays: 'players' and 'trainers'.
+- **Example:** `players = [5, 6, 8], trainers = [7, 2, 6, 8]`
+- **Constraints:**
+	- 1 <= players.length, trainers.length <= 10^5
+	- 1 <= players[i], trainers[j] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int matchPlayersAndTrainers(vector<int>& man, vector<int>& master) {
-        
-        priority_queue<int, vector<int>, greater<int>> pq, qq;
-        
-        int m = man.size(), n = master.size();
-        
-        for(int i = 0; i < m; i++) {
-            pq.push(man[i]);
-        }
-        for(int i = 0; i < n; i++) {
-            qq.push(master[i]);
-        }
-        int cnt = 0;
-        while(!pq.empty() && !qq.empty()) {
-            while(!qq.empty() && pq.top() > qq.top())
-                qq.pop();
-            if(!qq.empty()) {
-                cnt++;
-                qq.pop();
-                pq.pop();
-            }
-        }
-        
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer that represents the maximum number of valid matchings between players and trainers.
+- **Example:** `Output: 3`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the number of valid pairings by comparing the abilities of players with the training capacities of trainers.
 
-Given two lists `man` and `master`, where each list contains positive integers representing the skill levels of players and trainers, respectively, the task is to match the players to the trainers. Each player can be matched with a trainer if the player's skill is less than or equal to the trainer's skill. The goal is to determine the maximum number of matches that can be made under these constraints.
+- 1. Sort both the players and trainers arrays.
+- 2. Use two pointers to try matching the smallest available player with the smallest available trainer that can accommodate them.
+- 3. Move through both lists and count the valid pairings, ensuring each player and trainer is matched at most once.
+{{< dots >}}
+### Problem Assumptions ✅
+- Players can only be matched with a trainer if their ability is less than or equal to the trainer's capacity.
+- Each player and trainer can be matched at most once.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `players = [5, 6, 8], trainers = [7, 2, 6, 8]`  \
+  **Explanation:** After sorting the arrays, players = [5, 6, 8] and trainers = [2, 6, 7, 8]. We can match player 5 with trainer 6, player 6 with trainer 7, and player 8 with trainer 8. Thus, the answer is 3.
 
-### Approach
+- **Input:** `players = [1, 1, 1], trainers = [10]`  \
+  **Explanation:** In this case, all players have the same ability (1), and there is only one trainer with capacity 10. The trainer can be matched with any of the three players, so the maximum number of matches is 1.
 
-The key idea is to match the players to trainers in an optimal way by always attempting to find the least skilled trainer who can accommodate the current player. This allows for the most efficient use of trainers, ensuring that players are matched as often as possible.
+{{< dots >}}
+## Approach 🚀
+The solution uses sorting and a greedy approach to maximize the number of valid matchings between players and trainers.
 
-The approach involves sorting the players and trainers, and using a greedy approach to match them. Here is a detailed breakdown of the approach:
-
-1. **Use Two Priority Queues**:
-    - A priority queue (min-heap) is used to store both players and trainers. The players are pushed into the queue to ensure that we can always process the least skilled player first.
-    - Similarly, the trainers are stored in another priority queue to retrieve the least skilled trainer who is still available.
-
-2. **Greedy Matching**:
-    - For each player (starting from the least skilled), we check if there exists a trainer whose skill is greater than or equal to the player's skill. If such a trainer is found, the player is matched with the trainer, and both are removed from their respective queues.
-    - The process continues until no more matches can be made.
-
-3. **End Condition**:
-    - The algorithm terminates when either all players have been matched or there are no more trainers who can accommodate the remaining players.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Initialize Priority Queues
-
+### Initial Thoughts 💭
+- The problem can be efficiently solved by sorting both the players and trainers arrays.
+- By matching players from the smallest to the largest with the trainers, we can maximize the number of valid pairings.
+- After sorting, we can use a two-pointer technique to find the optimal pairings.
+{{< dots >}}
+### Edge Cases 🌐
+- The input arrays will not be empty as per the problem constraints.
+- For large inputs, the solution needs to efficiently handle the sorting and matching process.
+- If all players have the same ability, the solution should still handle the maximum number of matches correctly.
+- If all trainers have much higher capacity than players, then the number of matches will be limited by the number of players.
+- The solution should work within the given constraints of the problem.
+{{< dots >}}
+## Code 💻
 ```cpp
-priority_queue<int, vector<int>, greater<int>> pq, qq;
-```
-
-- Two priority queues are declared: `pq` for storing players and `qq` for storing trainers.
-- The `greater<int>` comparator is used to turn the default priority queue (which is a max-heap) into a min-heap. This ensures that the player with the lowest skill level is always at the top of the heap.
-  
-#### 2. Populate the Priority Queues with Players and Trainers
-
-```cpp
-int m = man.size(), n = master.size();
-
-for(int i = 0; i < m; i++) {
-    pq.push(man[i]);
-}
-for(int i = 0; i < n; i++) {
-    qq.push(master[i]);
-}
-```
-
-- The `man` vector (players) and `master` vector (trainers) are processed to fill the priority queues.
-- Each element in the `man` vector (representing player skill levels) is pushed into the `pq` priority queue.
-- Similarly, each element in the `master` vector (representing trainer skill levels) is pushed into the `qq` priority queue.
-
-#### 3. Greedily Match Players with Trainers
-
-```cpp
-int cnt = 0;
-while(!pq.empty() && !qq.empty()) {
-    while(!qq.empty() && pq.top() > qq.top()) {
-        qq.pop();
+int matchPlayersAndTrainers(vector<int>& man, vector<int>& master) {
+    
+    priority_queue<int, vector<int>, greater<int>> pq, qq;
+    
+    int m = man.size(), n = master.size();
+    
+    for(int i = 0; i < m; i++) {
+        pq.push(man[i]);
     }
-    if(!qq.empty()) {
-        cnt++;
-        qq.pop();
-        pq.pop();
+    for(int i = 0; i < n; i++) {
+        qq.push(master[i]);
     }
+    int cnt = 0;
+    while(!pq.empty() && !qq.empty()) {
+        while(!qq.empty() && pq.top() > qq.top())
+            qq.pop();
+        if(!qq.empty()) {
+            cnt++;
+            qq.pop();
+            pq.pop();
+        }
+    }
+    
+    return cnt;
 }
 ```
 
-- A variable `cnt` is initialized to `0` to keep track of the number of successful matches.
-- The outer `while` loop continues as long as both priority queues (`pq` and `qq`) are not empty.
-    - **Inner while loop**: This loop checks if the current player’s skill (at the top of the `pq`) is greater than the current trainer's skill (at the top of the `qq`). If the player's skill is higher, the trainer is removed from the `qq` queue because the trainer cannot accommodate this player, and we need to try the next trainer.
-    - **Matching**: If a trainer is found that can accommodate the current player (i.e., the player's skill is less than or equal to the trainer’s skill), we increment the match count `cnt`, and both the player and the trainer are removed from their respective queues.
+This function matches players to trainers by comparing their skills using two priority queues. It returns the count of valid pairings where both player and trainer have matching skills.
 
-#### 4. Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int matchPlayersAndTrainers(vector<int>& man, vector<int>& master) {
+	```
+	Declares the function `matchPlayersAndTrainers` that takes two vectors representing players and trainers' skills.
 
-```cpp
-return cnt;
-```
+2. **Queue Initialization**
+	```cpp
+	    priority_queue<int, vector<int>, greater<int>> pq, qq;
+	```
+	Creates two priority queues (`pq` for players and `qq` for trainers) to store their skills in ascending order.
 
-- Once all possible matches have been made, the function returns the total count `cnt`, which is the number of successful matches.
+3. **Size Calculation**
+	```cpp
+	    int m = man.size(), n = master.size();
+	```
+	Calculates the size of the `man` and `master` vectors to determine the number of players and trainers.
 
-### Complexity
+4. **For Loop - Players**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Begins a loop to iterate through the players and push their skills into the `pq` priority queue.
 
-#### Time Complexity:
+5. **Queue Push - Players**
+	```cpp
+	        pq.push(man[i]);
+	```
+	Pushes the skill of the current player into the `pq` queue.
 
-1. **Filling the Priority Queues**:
-   - Pushing each element from the `man` and `master` vectors into the priority queues takes `O(m log m)` and `O(n log n)` time, respectively, where `m` is the number of players and `n` is the number of trainers.
-   
-2. **Greedy Matching**:
-   - The greedy matching part involves checking each player against the available trainers. The worst-case scenario involves popping from the priority queue for each player, which takes `O(log n)` time.
-   - Hence, for `m` players, the greedy matching loop takes `O(m log n)` time.
+6. **For Loop - Trainers**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins a loop to iterate through the trainers and push their skills into the `qq` priority queue.
 
-Thus, the overall time complexity is:
+7. **Queue Push - Trainers**
+	```cpp
+	        qq.push(master[i]);
+	```
+	Pushes the skill of the current trainer into the `qq` queue.
 
-- **O(m log m + n log n + m log n)**
+8. **Counter Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes a counter variable `cnt` to keep track of the valid player-trainer pairings.
 
-This can be simplified to **O(m log m + n log n)**, as the matching process does not exceed the number of players `m`.
+9. **While Loop - Main Matching**
+	```cpp
+	    while(!pq.empty() && !qq.empty()) {
+	```
+	Begins a while loop that runs as long as there are players and trainers in their respective queues.
 
-#### Space Complexity:
+10. **While Loop - Trainer Skill Comparison**
+	```cpp
+	        while(!qq.empty() && pq.top() > qq.top())
+	```
+	This inner while loop ensures that trainers with lesser skills than the current player are removed from the queue.
 
-- The space complexity is dominated by the space used by the two priority queues, each of which can hold up to `m` and `n` elements, respectively.
-  
-Thus, the space complexity is **O(m + n)**.
+11. **Queue Pop - Trainer**
+	```cpp
+	            qq.pop();
+	```
+	Pops a trainer from the `qq` queue if their skill is less than the player's skill.
 
-### Conclusion
+12. **If Statement - Valid Match**
+	```cpp
+	        if(!qq.empty()) {
+	```
+	Checks if there are still trainers left after removing those with insufficient skill to match the current player.
 
-The solution efficiently solves the problem of matching players to trainers using a greedy approach with priority queues. By sorting the players and trainers based on their skill levels, and then attempting to match the least skilled player with the least skilled trainer that can accommodate them, we ensure that the number of successful matches is maximized.
+13. **Counter Increment**
+	```cpp
+	            cnt++;
+	```
+	Increments the counter `cnt` when a valid player-trainer match is found.
 
-This approach is both time and space efficient, with a time complexity of **O(m log m + n log n)** and space complexity of **O(m + n)**, making it well-suited for large inputs.
+14. **Queue Pop - Player**
+	```cpp
+	            qq.pop();
+	```
+	Pops a trainer from the `qq` queue after a match is made.
+
+15. **Queue Pop - Trainer**
+	```cpp
+	            pq.pop();
+	```
+	Pops a player from the `pq` queue after a match is made.
+
+16. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	Returns the final count of valid player-trainer matches.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n), where n is the size of the larger of the two arrays (players or trainers).
+- **Average Case:** O(n log n), as the sorting step dominates the complexity.
+- **Worst Case:** O(n log n), since we are always sorting both arrays.
+
+The solution involves sorting both arrays, which takes O(n log n) time.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as no extra space is needed beyond the input arrays.
+- **Worst Case:** O(1), as we only use a few additional variables to track the pointers and match counts.
+
+The space complexity is constant, as no additional data structures are used beyond the input arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-matching-of-players-with-trainers/description/)
 

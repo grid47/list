@@ -14,157 +14,200 @@ img_src = ""
 youtube = "bFer5PdsgpY"
 youtube_upload_date="2020-09-01"
 youtube_thumbnail="https://i.ytimg.com/vi/bFer5PdsgpY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers, your task is to find the maximum length of a contiguous subarray where the product of all its elements is positive. The product of a subarray is considered positive if the result of multiplying all elements of the subarray results in a positive number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers where each integer represents a value in the array. The goal is to find the longest subarray that has a positive product.
+- **Example:** `Input: nums = [3,-1,-2,4,2]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getMaxLen(vector<int>& nums) {
-        int ans = 0, positive = 0, negative = 0;
-        for(int x : nums) {
-            if (x == 0) {
-                positive = 0;
-                negative = 0;
-            }
-            else if (x > 0) {
-                positive++;
-                negative = negative == 0 ? 0 : negative + 1;
-            }
-            else {
-                int tmp  = positive;
-                positive = negative == 0 ? 0 : negative + 1;
-                negative = tmp + 1;
-            }
-            ans = max(ans, positive);
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest subarray where the product of all its elements is positive.
+- **Example:** `Output: 4`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to track the lengths of subarrays with positive products, adjusting the lengths based on whether the current element is positive, negative, or zero.
 
-The task is to find the maximum length of a contiguous subarray in a given integer array `nums` such that the product of the elements in that subarray is positive. A positive product can be achieved in two cases:
-1. The subarray contains an even number of negative numbers.
-2. The subarray contains only positive numbers.
+- Initialize variables to track the length of the subarray with positive and negative products.
+- Iterate through the array and adjust the lengths of the subarrays based on the current value (positive, negative, or zero).
+- Keep track of the maximum length of subarrays with positive products during the iteration.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array nums is non-empty.
+- A subarray can be an empty sequence, but we are interested in subarrays with a positive product.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [3,-1,-2,4,2]`  \
+  **Explanation:** In this case, the longest subarray with a positive product is [3, -1, -2, 4], which has a product of 24. The length of this subarray is 4.
 
-Additionally, the presence of a zero in the array will break the subarray, requiring the calculation to reset whenever a zero is encountered.
+- **Input:** `Example 2: nums = [1,-2,-3,0,1]`  \
+  **Explanation:** In this case, the longest subarray with a positive product is [-2, -3], which has a product of 6. The length of this subarray is 2.
 
-### Approach
+- **Input:** `Example 3: nums = [0,1,-2,-3,-4]`  \
+  **Explanation:** Here, the longest subarray with a positive product is [1, -2, -3], which has a product of 6. The length of this subarray is 3.
 
-To efficiently determine the maximum length of a contiguous subarray with a positive product, we can utilize a linear scan through the array while maintaining two counters:
-- `positive`: This counter tracks the length of the current positive product subarray.
-- `negative`: This counter tracks the length of the current negative product subarray.
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, the approach tracks the length of the longest subarray with a positive product while iterating over the array. We maintain two variables to track the lengths of subarrays with positive and negative products, adjusting them based on the sign of the current element.
 
-The key observations in this approach are:
-- When we encounter a positive number, we increase the `positive` counter and, if there's an ongoing negative subarray, we also increment the `negative` counter by 1.
-- When we encounter a negative number, the roles of the counters are reversed:
-  - The `positive` length becomes the previous `negative` length incremented by 1, and the `negative` length becomes the previous `positive` length incremented by 1.
-- Upon encountering a zero, both counters are reset since a zero product cannot contribute to a positive product subarray.
-
-By keeping track of the lengths in this manner, we can compute the maximum length of a contiguous subarray with a positive product in a single pass through the input array.
-
-### Code Breakdown (Step by Step)
-
-Let’s analyze the provided code in detail:
-
-- **Class Declaration**:
-    The solution is encapsulated within a class named `Solution`.
-
-```cpp
-class Solution {
-public:
-```
-
-- **Function Definition**:
-    The `getMaxLen` function is defined to take a vector of integers (`nums`) as input and returns an integer representing the maximum length of a contiguous subarray with a positive product.
-
+### Initial Thoughts 💭
+- The product of a subarray is positive if the number of negative elements in the subarray is even.
+- A zero in the array will reset any product, as the product becomes zero.
+- Using a dynamic approach to track both the positive and negative subarrays will allow us to efficiently find the longest subarray with a positive product.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least one element, so no need to handle empty arrays.
+- The solution must handle large arrays efficiently, with up to 10^5 elements.
+- Zero elements should be handled by resetting the positive and negative subarray lengths.
+- Ensure the solution works within the time limits for large inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
 int getMaxLen(vector<int>& nums) {
-```
-
-- **Variable Initialization**:
-    We initialize three integer variables: 
-    - `ans`: To keep track of the maximum length found so far.
-    - `positive`: To count the length of the current subarray with a positive product.
-    - `negative`: To count the length of the current subarray with a negative product.
-
-```cpp
-int ans = 0, positive = 0, negative = 0;
-```
-
-- **Iterate Through Each Element**:
-    A for-each loop iterates through each element `x` in the `nums` array.
-
-```cpp
-for(int x : nums) {
-```
-
-- **Handle Zero Case**:
-    If the current element is zero, we reset both the `positive` and `negative` counters to zero, as zeros terminate any ongoing subarray.
-
-```cpp
-if (x == 0) {
-    positive = 0;
-    negative = 0;
+    int ans = 0, positive = 0, negative = 0;
+    for(int x : nums) {
+        if (x == 0) {
+            positive = 0;
+            negative = 0;
+        }
+        else if (x > 0) {
+            positive++;
+            negative = negative == 0 ? 0 : negative + 1;
+        }
+        else {
+            int tmp  = positive;
+            positive = negative == 0 ? 0 : negative + 1;
+            negative = tmp + 1;
+        }
+        ans = max(ans, positive);
+    }
+    return ans;
 }
 ```
 
-- **Handle Positive Number**:
-    If the current element is positive, we increment the `positive` counter by 1. The `negative` counter is only incremented if it is non-zero, indicating that there was an ongoing negative product subarray.
+This function calculates the maximum length of a contiguous subarray with a positive product in a given array of integers.
 
-```cpp
-else if (x > 0) {
-    positive++;
-    negative = negative == 0 ? 0 : negative + 1;
-}
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int getMaxLen(vector<int>& nums) {
+	```
+	Defines the function `getMaxLen` which takes a vector `nums` representing a sequence of integers.
 
-- **Handle Negative Number**:
-    If the current element is negative, we temporarily store the value of `positive` in `tmp`. The `positive` length now becomes the length of the `negative` subarray incremented by 1 (if it exists), and the `negative` length is updated to be `tmp + 1`, reflecting the addition of the current negative number.
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0, positive = 0, negative = 0;
+	```
+	Initializes the variables `ans`, `positive`, and `negative`. `ans` stores the maximum length of subarray with positive product, while `positive` and `negative` track the length of positive and negative product subarrays, respectively.
 
-```cpp
-else {
-    int tmp  = positive;
-    positive = negative == 0 ? 0 : negative + 1;
-    negative = tmp + 1;
-}
-```
+3. **Loop Start**
+	```cpp
+	    for(int x : nums) {
+	```
+	Starts a loop that iterates through each element `x` in the input array `nums`.
 
-- **Update Maximum Length**:
-    After processing each element, we update the `ans` variable to ensure it holds the maximum length found so far.
+4. **Zero Check**
+	```cpp
+	        if (x == 0) {
+	```
+	Checks if the current element is zero. A zero in the array breaks any product subarray, so both `positive` and `negative` are reset.
 
-```cpp
-ans = max(ans, positive);
-```
+5. **Reset Variables**
+	```cpp
+	            positive = 0;
+	```
+	Resets the `positive` variable to zero, as a zero product subarray is reset.
 
-- **Return Statement**:
-    Finally, after iterating through all elements in the array, the function returns `ans`, representing the length of the longest contiguous subarray with a positive product.
+6. **Reset Variables**
+	```cpp
+	            negative = 0;
+	```
+	Resets the `negative` variable to zero, as a zero product subarray is reset.
 
-```cpp
-return ans;
-}
-```
+7. **Positive Number Check**
+	```cpp
+	        else if (x > 0) {
+	```
+	Checks if the current element `x` is greater than zero, which will increase the length of positive product subarrays.
 
-### Complexity
+8. **Positive Update**
+	```cpp
+	            positive++;
+	```
+	Increments the `positive` counter, as a positive number will extend any positive product subarray.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of elements in the input array. The solution only requires a single pass through the array.
+9. **Negative Update**
+	```cpp
+	            negative = negative == 0 ? 0 : negative + 1;
+	```
+	If `negative` is non-zero, it is incremented. Otherwise, it is reset to zero because a positive number cannot extend a negative product subarray.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we only use a fixed number of additional integer variables regardless of the size of the input array.
+10. **Negative Number Check**
+	```cpp
+	        else {
+	```
+	If the current element `x` is negative, it causes the positive and negative product subarrays to swap roles.
 
-### Conclusion
+11. **Temporary Variable for Positive**
+	```cpp
+	            int tmp  = positive;
+	```
+	Stores the current value of `positive` in a temporary variable `tmp` to swap the roles of `positive` and `negative`.
 
-The `getMaxLen` function effectively computes the maximum length of a contiguous subarray with a positive product using a linear scan approach. By leveraging the properties of positive and negative numbers in the context of multiplication, the function maintains counters to track lengths dynamically and efficiently.
+12. **Negative Update**
+	```cpp
+	            positive = negative == 0 ? 0 : negative + 1;
+	```
+	Updates `positive` to `negative + 1`, or zero if `negative` is zero, as a negative number will convert a negative product subarray to a positive one.
 
-This implementation serves as a clear example of how to utilize greedy strategies and simple arithmetic to solve problems related to subarray properties. Understanding this approach not only reinforces the concept of dynamic counting but also illustrates the importance of handling edge cases, such as zeros, in array manipulation tasks.
+13. **Positive Update**
+	```cpp
+	            negative = tmp + 1;
+	```
+	Updates `negative` to `tmp + 1`, which represents the previous positive subarray length plus one for the new negative number.
 
-In summary, the algorithm showcases a robust method for determining contiguous subarray lengths based on product properties, making it a valuable technique for developers facing similar challenges in competitive programming or technical interviews. This solution emphasizes clarity, efficiency, and elegance in algorithm design, establishing a solid foundation for future explorations into array-based problems.
+14. **Max Length Update**
+	```cpp
+	        ans = max(ans, positive);
+	```
+	Updates the maximum length `ans` by comparing it with the current value of `positive` to store the longest subarray with a positive product.
+
+15. **Return**
+	```cpp
+	    return ans;
+	```
+	Returns the value of `ans`, which is the length of the longest contiguous subarray with a positive product.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we iterate over the array exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only need a constant amount of extra space to store the current lengths of the subarrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/description/)
 

@@ -14,91 +14,148 @@ img_src = ""
 youtube = "rtGJycuTSUo"
 youtube_upload_date="2022-07-31"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rtGJycuTSUo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a non-negative integer array nums. In each operation, you must:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumOperations(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int mx = 0, res = 0, diff;
-        for(int i = 0; i < nums.size(); i++) {
-            if(mx < nums[i]) {
-                mx = nums[i];
-                res++;
-            }
+- Choose a positive integer x that is less than or equal to the smallest non-zero element in nums.
+- Subtract x from every positive element in nums.
+
+Return the minimum number of operations to make every element in nums equal to 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums where each element is a non-negative integer.
+- **Example:** `Input: nums = [1, 5, 0, 3, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 0 <= nums[i] <= 100
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the minimum number of operations required.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output will always be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Sort the input array and calculate the number of operations based on distinct positive elements.
+
+- Sort the input array.
+- Iterate over the array and count how many distinct non-zero elements exist.
+- For each distinct positive element, consider an operation to reduce those elements to zero.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in nums are non-negative integers.
+- At least one element in nums is positive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [1, 5, 0, 3, 5]`  \
+  **Explanation:** In this case, we perform three operations: subtract 1 from all elements (resulting in [0, 4, 0, 2, 4]), subtract 2 from all elements (resulting in [0, 2, 0, 0, 2]), and finally subtract 2 again (resulting in [0, 0, 0, 0, 0]). Thus, the output is 3.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to sort the array and calculate the number of operations based on distinct positive elements in the array.
+
+### Initial Thoughts 💭
+- We can sort the array to easily track the smallest non-zero element.
+- We need to perform operations for each distinct positive element in the array.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array has only zeroes, the output should be 0.
+- Even with the largest possible input size (100 elements), sorting and iterating through the array will be efficient enough.
+- If all elements are zero, no operation is needed.
+- Ensure that only positive elements are considered when counting operations.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumOperations(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    int mx = 0, res = 0, diff;
+    for(int i = 0; i < nums.size(); i++) {
+        if(mx < nums[i]) {
+            mx = nums[i];
+            res++;
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine the minimum number of operations required to make all elements of a given integer array `nums` equal to zero. Each operation allows you to subtract a fixed positive integer (greater than zero) from all non-zero elements in the array. The aim is to count the number of distinct values that must be subtracted to reduce every element in the array to zero.
-
-### Approach
-
-1. **Sorting**: First, sort `nums` to bring identical values together and simplify the identification of unique elements. Sorting helps in counting distinct values efficiently by iterating once through the sorted list.
-  
-2. **Counting Unique Reductions**:
-   - Initialize a `mx` variable to track the maximum value of elements processed so far.
-   - Iterate through `nums`, and whenever you encounter a number greater than `mx`, it represents a new distinct value that needs to be subtracted from all elements.
-   - Increment the result count (`res`) for each new unique number encountered and update `mx` to this value.
-
-3. **Returning the Result**: After counting all unique reductions, `res` will represent the minimum number of operations required.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sort the Array
-
-```cpp
-sort(nums.begin(), nums.end());
-```
-- Sorting helps arrange the array in increasing order, which simplifies counting unique values needed for reduction.
-
-#### Step 2: Initialize Variables for Counting Unique Operations
-
-```cpp
-int mx = 0, res = 0;
-```
-- `mx`: Tracks the highest unique value seen so far, to help detect new unique values.
-- `res`: Stores the number of unique reduction operations needed.
-
-#### Step 3: Iterate Through the Array
-
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    if(mx < nums[i]) {
-        mx = nums[i];
-        res++;
-    }
+    return res;
 }
 ```
-- For each element, if `nums[i]` is greater than `mx`, it is a new unique value for reduction.
-- Update `mx` and increment `res` to reflect this unique value.
 
-#### Step 4: Return the Result
+This function calculates the minimum number of operations required to make all elements of the array equal, where an operation consists of picking a larger number and updating it to the current maximum.
 
-```cpp
-return res;
-```
-- Return `res`, which now holds the minimum number of unique reductions required.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumOperations(vector<int>& nums) {
+	```
+	Defines the function `minimumOperations`, which takes a vector of integers `nums` and returns an integer representing the minimum operations needed.
 
-### Complexity
+2. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the vector `nums` in ascending order to facilitate comparison between the current element and the maximum element.
 
-- **Time Complexity**: **O(n log n)**, primarily due to the sorting step. The subsequent single loop through the array runs in **O(n)**.
-- **Space Complexity**: **O(1)**, as the solution uses only a few extra variables.
+3. **Variable Initialization**
+	```cpp
+	    int mx = 0, res = 0, diff;
+	```
+	Initializes `mx` to track the maximum number encountered, `res` to count the number of operations, and `diff` which is unused in this case.
 
-### Conclusion
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Loops through each element of the sorted `nums` array.
 
-This solution efficiently calculates the minimum operations needed by counting distinct values after sorting the array. By leveraging sorting and tracking the maximum encountered value, it ensures that each unique reduction is counted only once. This approach is optimal for this problem, making it suitable for large datasets. The algorithm achieves high performance through minimal space usage and avoids redundancy by using sorted order and conditionals to count only distinct values for reduction.
+5. **Condition Check**
+	```cpp
+	        if(mx < nums[i]) {
+	```
+	Checks if the current number is greater than the previously encountered maximum `mx`.
+
+6. **Update Maximum**
+	```cpp
+	            mx = nums[i];
+	```
+	Updates `mx` to the current number `nums[i]` if it is greater.
+
+7. **Increment Operation Count**
+	```cpp
+	            res++;
+	```
+	Increments the operation count `res` each time a new maximum is found, implying a change operation.
+
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the total number of operations performed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The worst-case time complexity is O(n log n) due to sorting the array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the array being stored in memory.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/)
 

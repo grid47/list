@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "k5UYQtKXJGo"
 youtube_upload_date="2022-02-06"
 youtube_thumbnail="https://i.ytimg.com/vi/k5UYQtKXJGo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,99 +28,131 @@ youtube_thumbnail="https://i.ytimg.com/vi/k5UYQtKXJGo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, generate an n-bit Gray code sequence. A Gray code sequence is a sequence of integers where each integer's binary representation differs from the next one by exactly one bit. The first integer in the sequence is always 0, and every integer appears only once in the sequence. The binary representation of the first and last integers should also differ by exactly one bit.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer n, representing the number of bits in the Gray code sequence.
+- **Example:** `Input: n = 3`
+- **Constraints:**
+	- 1 <= n <= 16
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> grayCode(int n) {
-        vector<int> res = {0};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of integers that represent a valid n-bit Gray code sequence.
+- **Example:** `Output: [0, 1, 3, 2, 6, 7, 5, 4]`
+- **Constraints:**
+	- Each integer in the sequence must be a valid n-bit number.
 
-        for (int idx = 0; idx < n; idx++) {
-            int sz = res.size();
-            for (int jdx = sz - 1; jdx >= 0; jdx--)
-                res.push_back(res[jdx] | (1 << idx));
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate a sequence of integers such that every adjacent pair of integers differs by exactly one bit in their binary representation, and the first and last integers differ by exactly one bit.
+
+- Start with the sequence containing only the integer 0.
+- Iteratively generate the next integer by flipping a bit in the binary representation of the integers already in the sequence, ensuring that each new integer differs by exactly one bit from the previous one.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input value n is always within the specified range (1 <= n <= 16).
+- The Gray code sequence will be valid for any input within this range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 2`  \
+  **Explanation:** For n = 2, a valid Gray code sequence is [0, 1, 3, 2]. The binary representations are: 00, 01, 11, 10. Each adjacent pair of numbers differs by exactly one bit.
+
+- **Input:** `Input: n = 3`  \
+  **Explanation:** For n = 3, a valid Gray code sequence is [0, 1, 3, 2, 6, 7, 5, 4]. The binary representations are: 000, 001, 011, 010, 110, 111, 101, 100. Each adjacent pair of numbers differs by exactly one bit.
+
+{{< dots >}}
+## Approach 🚀
+To generate the Gray code sequence, we can use an iterative method. Start with a list containing only 0, then iteratively construct the sequence by reflecting the current list and flipping the appropriate bits to generate the new sequence.
+
+### Initial Thoughts 💭
+- The Gray code sequence for any given n can be generated from the sequence of n-1 bits by reflecting it and flipping the appropriate bits.
+- By iteratively constructing the sequence for smaller bit sizes, we can use previously computed results to generate the Gray code sequence for larger sizes.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have a valid value for n (1 <= n <= 16).
+- For n = 16, the sequence will contain 65536 integers, so ensure that the algorithm can handle large sequences efficiently.
+- For n = 1, the sequence will be [0, 1].
+- The Gray code sequence must be valid for any n between 1 and 16.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> grayCode(int n) {
+    vector<int> res = {0};
+    for (int i = 0; i < n; i++) {
+        int size = res.size();
+        for (int j = size - 1; j >= 0; j--) {
+            res.push_back(res[j] | (1 << i));
         }
-
-        return res;        
     }
-};
-{{< /highlight >}}
----
-
-### 📝 **Gray Code Sequence Problem**
-
-Given an integer `n`, the task is to generate the Gray Code sequence for `n` bits. In this sequence, each number differs from the previous one by exactly one bit.
-
-#### Example:
-- For `n = 2`, the Gray Code sequence is: `[0, 1, 3, 2]`
-- For `n = 3`, the Gray Code sequence is: `[0, 1, 3, 2, 6, 7, 5, 4]`
-
-### 🔍 **Approach**
-
-To generate the Gray Code sequence efficiently, we use an **iterative approach**. The key observation is:
-- The Gray Code for `n` bits can be derived by reflecting the Gray Code for `n-1` bits and prefixing the original values with `0` and the reflected values with `1`.
-
-#### Step-by-Step Process:
-1. **Base Case**: For `n = 0`, the Gray Code sequence is simply `[0]`.
-2. **Iterative Generation**:
-   - For each bit position from `1` to `n`, reflect the previous sequence, prefix the original numbers with `0`, and the reflected numbers with `1`.
-   - This step effectively builds the sequence incrementally, adding one bit at a time.
-
-### 🧑‍💻 **Code Breakdown**
-
-#### Step 1: Initialize the Result
-
-```cpp
-vector<int> res = {0};
-```
-We start with the base case where the Gray Code sequence for `0` bits is just `[0]`.
-
-#### Step 2: Iterating Over the Bit Positions
-
-```cpp
-for (int idx = 0; idx < n; idx++) {
-```
-We loop through each bit position (from `0` to `n-1`). For each iteration, the sequence is updated to include Gray Code for the current number of bits.
-
-#### Step 3: Reflecting the Sequence
-
-```cpp
-int sz = res.size();
-for (int jdx = sz - 1; jdx >= 0; jdx--)
-    res.push_back(res[jdx] | (1 << idx));
+    return res;
+}
 ```
 
-- The `sz = res.size()` stores the current size of the sequence.
-- The inner loop processes the sequence in reverse order. For each element in the current sequence, we add a new value by setting the `idx`-th bit to `1` using the bitwise OR operation `res[jdx] | (1 << idx)`. This step mirrors the sequence and adds the new bit to the reflected part.
+This code generates the Gray code of a given number of bits `n` using a recursive approach.
 
-#### Step 4: Return the Final Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> grayCode(int n) {
+	```
+	Declares a function `grayCode` that takes an integer `n` representing the number of bits and returns a vector of integers representing the Gray code.
 
-```cpp
-return res;
-```
-After processing all bit positions, the sequence `res` contains the Gray Code sequence for `n` bits, which is returned.
+2. **Array Initialization**
+	```cpp
+	    vector<int> res = {0};
+	```
+	Initializes a vector `res` to store the Gray code, starting with the initial value 0.
 
-### ⏱ **Complexity Analysis**
+3. **Loop Iteration**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	Iterates `n` times, where `n` is the number of bits.
 
-#### Time Complexity:
-The time complexity is **O(2^n)** because:
-- The size of the Gray Code sequence for `n` bits is `2^n`.
-- Each iteration of the outer loop processes the sequence by reflecting it and adding `1` to each value, so the total number of operations is proportional to the size of the sequence.
+4. **Size Calculation**
+	```cpp
+	        int size = res.size();
+	```
+	Stores the current size of the `res` vector.
 
-Thus, the time complexity is **O(2^n)**.
+5. **Reverse Loop Iteration**
+	```cpp
+	        for (int j = size - 1; j >= 0; j--) {
+	```
+	Iterates over the current `res` vector in reverse order.
 
-#### Space Complexity:
-The space complexity is also **O(2^n)**, as we store the Gray Code sequence in a vector of size `2^n`.
+6. **Bitwise Operations, Array Manipulation**
+	```cpp
+	            res.push_back(res[j] | (1 << i));
+	```
+	Calculates the next Gray code value by taking the current value `res[j]` and OR-ing it with `1 << i`. This effectively adds the `i`-th bit to the current value. The new value is then added to the end of the `res` vector.
 
-### 🎯 **Conclusion**
+7. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the final `res` vector containing the generated Gray code.
 
-This solution generates the Gray Code sequence for `n` bits using an iterative approach. By reflecting the sequence and adjusting each number by adding one bit at a time, the algorithm constructs the sequence efficiently. With both time and space complexities of **O(2^n)**, this approach is optimal for generating the Gray Code sequence, especially for larger values of `n`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(2^n), where n is the number of bits. We need to generate 2^n numbers.
+- **Average Case:** O(2^n)
+- **Worst Case:** O(2^n), since the sequence contains 2^n integers.
 
----
+The time complexity is linear with respect to the size of the sequence.
 
-#### 🌟 **Final Thoughts**:
-This solution is highly efficient and can be used to generate Gray Code sequences for a wide range of inputs. Keep practicing these types of problems to further enhance your understanding of bit manipulation and iterative algorithms!
+### Space Complexity 💾
+- **Best Case:** O(2^n)
+- **Worst Case:** O(2^n), since we store the entire Gray code sequence.
+
+The space complexity is linear in the number of integers in the Gray code sequence.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/gray-code/description/)
 

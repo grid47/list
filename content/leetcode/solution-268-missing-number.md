@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "WnPLSRLSANE"
 youtube_upload_date="2021-07-26"
 youtube_thumbnail="https://i.ytimg.com/vi/WnPLSRLSANE/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,119 +28,129 @@ youtube_thumbnail="https://i.ytimg.com/vi/WnPLSRLSANE/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array nums containing n distinct numbers, each in the range [0, n], return the only number in the range that is missing from the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums containing distinct integers in the range [0, n].
+- **Example:** `For example, nums = [1, 0, 3].`
+- **Constraints:**
+	- 1 <= n <= 10^4
+	- 0 <= nums[i] <= n
+	- All the numbers of nums are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int missingNumber(vector<int>& nums) {
-        int sum = nums[0];
-        for(int i = 1; i < nums.size(); i++)
-            sum ^= nums[i];
-        for(int i = 0; i <= nums.size(); i++)
-            sum ^= i;
-        return sum;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the only missing number in the range [0, n].
+- **Example:** `For nums = [1, 0, 3], the output is 2.`
+- **Constraints:**
+	- The missing number is guaranteed to be between 0 and n.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the missing number in the array, we can leverage a mathematical approach using XOR or summation properties.
 
-In this problem, you’re given an array `nums` of integers where each integer is between 0 and `n` (inclusive), and the array contains `n` distinct numbers. Your goal is to find the missing number from the range `0` to `n`. 
+- 1. Calculate the XOR of all elements in the array.
+- 2. XOR the result with all the numbers from 0 to n.
+- 3. The result will be the missing number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always contain n distinct elements in the range [0, n].
+- There will always be one missing number.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [1, 0, 3], the missing number is 2.`  \
+  **Explanation:** The array should have contained the numbers 0, 1, 2, and 3. The missing number is 2.
 
-For example:
-- **Input**: `nums = [3, 0, 1]`
-- **Output**: `2`
-  - The array contains the numbers `0`, `1`, and `3`, so the missing number is `2`.
+{{< dots >}}
+## Approach 🚀
+The approach to solve this problem involves leveraging the properties of XOR or the summation formula to find the missing number in the range [0, n].
 
-Let's dive into an efficient approach to solve this! 🏃‍♂️💨
-
----
-
-### 🧠 Approach
-
-The key to solving this problem efficiently is the **XOR (exclusive OR)** operation, which has some awesome properties that help us identify the missing number in no time! ⚡
-
-1. **Properties of XOR**:
-   - `a ^ a = 0` (XOR of any number with itself is 0)
-   - `a ^ 0 = a` (XOR of any number with 0 is the number itself)
-   - XOR is both commutative and associative, which means the order of operations doesn’t matter.
-
-Given these properties, XOR is like a magic tool for canceling out matching numbers. Here’s the trick:
-- XOR all elements of the array with the numbers from `0` to `n`.
-- Numbers that appear in both the array and the range cancel out, and the missing number is the one that’s left!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code to see how XOR works its magic! ✨
-
+### Initial Thoughts 💭
+- The XOR of two identical numbers cancels out, which makes XOR an efficient way to find the missing number.
+- We can use the XOR approach to achieve the solution in O(n) time and O(1) space.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always contain at least one element, so there are no empty inputs.
+- For large inputs, the XOR approach ensures an O(n) time complexity and O(1) space complexity.
+- If the array is missing 0, it will be correctly identified as the missing number.
+- The solution should work for arrays of size up to 10^4.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int missingNumber(vector<int>& nums) {
+int missingNumber(vector<int>& nums) {
+    int sum = nums[0];
+    for(int i = 1; i < nums.size(); i++)
+        sum ^= nums[i];
+    for(int i = 0; i <= nums.size(); i++)
+        sum ^= i;
+    return sum;
+}
 ```
-- We define a function `missingNumber` inside the `Solution` class, which takes an array `nums` as input and returns the missing number from the range `0` to `n`.
 
-```cpp
-        int sum = nums[0];
-        for(int i = 1; i < nums.size(); i++)
-            sum ^= nums[i];
-```
-- First, we initialize a variable `sum` with the first element of the array `nums[0]`. 
-- Then, we loop through the rest of the array and XOR `sum` with each element. This ensures we accumulate the XOR of all the elements in the array.
+This function finds the missing number in an array of integers from 0 to n. It uses the XOR operation to find the number that does not appear in the array.
 
-```cpp
-        for(int i = 0; i <= nums.size(); i++)
-            sum ^= i;
-```
-- In the second loop, we XOR `sum` with all integers from `0` to `n` (where `n = nums.size()`).
-- This ensures that all the numbers in the range `0` to `n` are included, and the numbers that appear in both the array and the range will cancel out.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int missingNumber(vector<int>& nums) {
+	```
+	Defines the `missingNumber` function that takes a vector of integers `nums` and returns the missing number from the range 0 to n.
 
-```cpp
-        return sum;
-    }
-};
-```
-- After both loops, `sum` will hold the missing number because all other numbers have canceled out. We return `sum`, which is our final result! 🎉
+2. **Initial XOR Setup**
+	```cpp
+	    int sum = nums[0];
+	```
+	Initializes the variable `sum` with the first element of `nums` to start the XOR operation.
 
----
+3. **Iterate Over Input Array**
+	```cpp
+	    for(int i = 1; i < nums.size(); i++)
+	```
+	Iterates over the remaining elements in the `nums` array, starting from the second element.
 
-### 📈 Complexity Analysis
+4. **XOR Each Array Element**
+	```cpp
+	        sum ^= nums[i];
+	```
+	Applies the XOR operation between the current `sum` and each element of the `nums` array.
 
-Let's see how efficient our solution is! 🔍
+5. **Iterate Over Full Range**
+	```cpp
+	    for(int i = 0; i <= nums.size(); i++)
+	```
+	Iterates over the full range from 0 to `n`, where `n` is the size of the array.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the size of the array `nums`. 
-  - We have two loops:
-    - The first loop processes all the elements in the array (`nums.size()` iterations).
-    - The second loop processes all integers from `0` to `n` (another `n + 1` iterations).
-  - Since both loops iterate linearly over the array and the range, the overall time complexity is proportional to the size of the array.
+6. **XOR with Range Elements**
+	```cpp
+	        sum ^= i;
+	```
+	Applies the XOR operation between `sum` and each value in the range 0 to `n`.
 
-#### Space Complexity:
-- **O(1)**, constant space. 
-  - The algorithm only uses a few variables (`sum`, `i`), which do not depend on the size of the input array. No additional space is required, so it's super space-efficient! 💡
+7. **Return Missing Number**
+	```cpp
+	    return sum;
+	```
+	Returns the result of the XOR operation, which is the missing number in the array.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### 🏁 Conclusion
+The time complexity is O(n) since we iterate over the array once and perform constant time operations for each element.
 
-We’ve now solved the problem efficiently using XOR. Let’s quickly recap the main points:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Key Takeaways:
-1. **XOR Properties**: XOR is a powerful tool that helps us find the missing number by canceling out matching numbers.
-2. **Optimal Time Complexity**: The solution runs in **O(n)** time, which is great for large inputs.
-3. **No Extra Space**: With **O(1)** space complexity, the solution doesn’t require any additional memory, making it space-efficient.
-4. **Simplicity**: XOR operations simplify the problem, allowing us to find the missing number in just a few lines of code! ✨
+The space complexity is O(1) as we only use a constant amount of extra space.
 
-### 🎯 Quick Recap:
-- **Time**: O(n) ⏱️
-- **Space**: O(1) 💡
-- **Solution**: Use XOR to cancel out numbers and find the missing one!
+**Happy Coding! 🎉**
 
-This approach is both elegant and efficient, making it perfect for coding interviews or competitive programming. Keep practicing, and you’ll be a master at solving XOR-based problems in no time! 💪🎉
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/missing-number/description/)
 

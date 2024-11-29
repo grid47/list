@@ -14,148 +14,214 @@ img_src = ""
 youtube = "iuiNCc0HkX8"
 youtube_upload_date="2022-08-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/iuiNCc0HkX8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers, tasks, representing tasks that need to be completed in order. Each element in tasks[i] represents the type of the i-th task. Additionally, a positive integer space is provided, representing the minimum number of days that must pass after completing a task before another task of the same type can be performed. Each day, you either complete the next task or take a break. Your goal is to determine the minimum number of days needed to complete all tasks.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array tasks, where each element tasks[i] represents the type of the i-th task, and an integer space that represents the minimum number of days between completing tasks of the same type.
+- **Example:** `tasks = [2, 3, 2, 3, 1], space = 2`
+- **Constraints:**
+	- 1 <= tasks.length <= 10^5
+	- 1 <= tasks[i] <= 10^9
+	- 1 <= space <= tasks.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long taskSchedulerII(vector<int>& tasks, int space) {
-        
-        map<int, long long> mp;
-        
-        long long n= tasks.size(), days = 0;
-        
-        int i = 0;
-        while(i < n) {
-            if(mp.count(tasks[i])) {
-                if(days - mp[tasks[i]] > space) {
-                    mp[tasks[i]] = days;
-                    days++;
-                    i++;
-                } else {
-                    days = mp[tasks[i]] + space + 1;
-                }
-            } else {
-                mp[tasks[i]] = days;                
-                days++;
-                i++;
-            }
-        }
-        
-        
-        return days;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer, representing the minimum number of days required to complete all tasks.
+- **Example:** `Output: 7`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to calculate the minimum number of days required to complete all tasks while respecting the space constraint between tasks of the same type.
 
-The problem asks to schedule tasks in such a way that no task can be executed again within `space` days of its last occurrence. The tasks are represented by integers in the array `tasks`, and we are given an integer `space` which represents the number of days we need to wait before a task can be executed again. The goal is to determine the minimum number of days required to complete all tasks, considering the constraints on task repetition.
+- Use a map to track the last day a task type was completed.
+- For each task, check if the task has been completed recently based on the space constraint.
+- If the task can be completed immediately, proceed to the next task, else take a break until the task can be completed.
+- Accumulate the days required for task completion and break days.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tasks array will always have at least one task.
+- The space constraint ensures that tasks of the same type cannot be performed consecutively without taking a break.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: tasks = [2, 3, 2, 3, 1], space = 2`  \
+  **Explanation:** In this example, to complete all tasks in 7 days, we need to respect the space constraint. The sequence could look like: Day 1: task 0, Day 2: task 1, Day 3: break, Day 4: task 2, Day 5: break, Day 6: task 3, Day 7: task 4.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution involves tracking the last completion day for each task type and determining when a task can be completed again based on the space constraint.
 
-The solution follows a greedy approach with the help of a **map** (or dictionary) to track the last execution day of each task. Here’s the step-by-step breakdown:
-
-1. **Key Observation:**
-   - A task can only be scheduled again after `space` days have passed since its last execution. If we attempt to schedule a task too soon (before the `space` period has passed), we need to jump forward in time (i.e., set the day counter to a value that reflects the gap).
-   
-2. **Greedy Strategy:**
-   - We iterate over the tasks one by one. For each task, we check if it has been executed before (using the `map`).
-   - If it has been executed before, we check if the time elapsed since the last execution of this task exceeds the `space` constraint. If it does, we can execute the task; otherwise, we must "skip" days to meet the constraint.
-   - If the task hasn’t been executed before, we can execute it immediately and update its last execution day.
-
-3. **Tracking the Last Execution:**
-   - We use a map `mp` to track the last day a particular task was executed. This allows us to determine whether we can execute the task on the current day or need to wait until a later day.
-
-4. **Counting the Total Days:**
-   - We increment the `days` counter as we schedule each task, ensuring that we account for waiting periods whenever necessary.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initializing Variables
-
+### Initial Thoughts 💭
+- We need to track the days each task type was last completed.
+- If the same task appears, we must respect the space constraint before completing it again.
+- The task completion logic can be optimized by using a map to efficiently track and update task completion days.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the input will have at least one task, so no need to handle empty task arrays.
+- The solution should efficiently handle arrays of up to 100,000 tasks.
+- If tasks contains only one type of task, the solution must respect the space constraint and return the correct number of days.
+- Ensure the solution handles cases where tasks are spaced just enough or need breaks in between.
+{{< dots >}}
+## Code 💻
 ```cpp
 long long taskSchedulerII(vector<int>& tasks, int space) {
-    map<int, long long> mp;  // Map to track last execution day of each task
-    long long n = tasks.size(), days = 0;  // n: number of tasks, days: total days
+    
+    map<int, long long> mp;
+    
+    long long n= tasks.size(), days = 0;
+    
     int i = 0;
-```
-
-- The function starts by initializing the map `mp` to store the last execution day of each task.
-- `n` stores the number of tasks, and `days` keeps track of the total number of days used to complete all tasks.
-- `i` is used as the index to iterate through the list of tasks.
-
-#### Step 2: Loop Through Tasks
-
-```cpp
-while (i < n) {
-```
-
-- The `while` loop runs until all tasks are scheduled (`i < n`).
-
-#### Step 3: Check If Task Has Been Executed Before
-
-```cpp
-if (mp.count(tasks[i])) {
-    if (days - mp[tasks[i]] > space) {
-        mp[tasks[i]] = days;  // Update last execution day of the task
-        days++;  // Increment day count
-        i++;  // Move to the next task
-    } else {
-        days = mp[tasks[i]] + space + 1;  // Skip to the next available day
+    while(i < n) {
+        if(mp.count(tasks[i])) {
+            if(days - mp[tasks[i]] > space) {
+                mp[tasks[i]] = days;
+                days++;
+                i++;
+            } else {
+                days = mp[tasks[i]] + space + 1;
+            }
+        } else {
+            mp[tasks[i]] = days;                
+            days++;
+            i++;
+        }
     }
+    
+    
+    return days;
 }
 ```
 
-- For each task `tasks[i]`, we first check if it has been executed previously by checking if it exists in the map (`mp.count(tasks[i])`).
-- If the task has been executed before, we check whether enough days have passed since its last execution. If the gap between `days` and the last execution day is greater than `space`, we can execute the task. We then:
-  - Update the task’s last execution day to the current `days`.
-  - Increment `days` and move to the next task (`i++`).
-- If not enough time has passed since the last execution, we set the current `days` to the next available day, which is `mp[tasks[i]] + space + 1`.
+This function schedules tasks given a set of task IDs and a space constraint between consecutive executions of the same task. It tracks the last execution day of each task and ensures there is a gap of at least 'space' days between the executions of the same task.
 
-#### Step 4: Schedule the Task if It’s New
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long taskSchedulerII(vector<int>& tasks, int space) {
+	```
+	This is the function declaration. It initializes the function 'taskSchedulerII', which takes a vector of tasks and a space value representing the required gap between the same tasks.
 
-```cpp
-else {
-    mp[tasks[i]] = days;  // Task has never been executed before
-    days++;  // Increment day count
-    i++;  // Move to the next task
-}
-```
+2. **Map Initialization**
+	```cpp
+	    map<int, long long> mp;
+	```
+	This declares a map 'mp' to store the last execution day of each task, where the task ID is the key and the execution day is the value.
 
-- If the task hasn’t been executed before, we can schedule it immediately:
-  - We record the current day as the last execution day of the task (`mp[tasks[i]] = days`).
-  - We increment `days` and move to the next task.
+3. **Task and Days Initialization**
+	```cpp
+	    long long n= tasks.size(), days = 0;
+	```
+	This line initializes 'n' to the number of tasks and 'days' to 0, which will be used to track the total number of days spent scheduling tasks.
 
-#### Step 5: Return the Total Days
+4. **Loop Start**
+	```cpp
+	    int i = 0;
+	```
+	This initializes the index 'i' to 0, which will be used to iterate through the 'tasks' vector.
 
-```cpp
-return days;
-```
+5. **While Loop**
+	```cpp
+	    while(i < n) {
+	```
+	This begins the while loop, which continues as long as there are tasks to schedule.
 
-- After all tasks have been scheduled, the function returns the total number of days (`days`), which accounts for both task execution and any waiting periods due to the `space` constraint.
+6. **Task Check**
+	```cpp
+	        if(mp.count(tasks[i])) {
+	```
+	This checks if the current task has been scheduled before by looking it up in the map 'mp'.
 
-### Complexity
+7. **Space Check**
+	```cpp
+	            if(days - mp[tasks[i]] > space) {
+	```
+	This checks if the space constraint has been satisfied, i.e., if the gap between the current day and the last execution of the same task is greater than 'space'.
 
-#### Time Complexity:
+8. **Task Scheduling**
+	```cpp
+	                mp[tasks[i]] = days;
+	```
+	This updates the map with the current task's last execution day.
 
-- The algorithm iterates through the list of tasks once, so the time complexity of the loop is `O(n)`, where `n` is the number of tasks.
-- For each task, we perform constant-time operations (checking the map, updating values, and incrementing counters).
-- Thus, the overall time complexity is `O(n)`.
+9. **Increment Day and Task Index**
+	```cpp
+	                days++;
+	```
+	This increments the total number of days.
 
-#### Space Complexity:
+10. **Task Index Increment**
+	```cpp
+	                i++;
+	```
+	This increments the task index to move to the next task.
 
-- The space complexity is dominated by the map `mp`, which stores the last execution day of each task. In the worst case, every task could be unique, leading to a space complexity of `O(n)`.
+11. **Else Case**
+	```cpp
+	            } else {
+	```
+	If the space constraint is not met, the code moves to the else block.
 
-### Conclusion
+12. **Adjust Days for Space**
+	```cpp
+	                days = mp[tasks[i]] + space + 1;
+	```
+	This adjusts the day count to ensure that the current task can only be scheduled after 'space' days from its last execution.
 
-This solution efficiently schedules tasks while respecting the `space` constraint using a greedy approach with a map to track the last execution day of each task. The algorithm runs in linear time (`O(n)`), making it well-suited for large input sizes. By updating the `days` counter and checking if tasks can be scheduled based on the `space` constraint, the solution ensures that all tasks are completed in the minimum number of days possible, while also handling any necessary waiting periods between repeated tasks. The approach is both time-efficient and space-efficient, making it ideal for real-world applications involving task scheduling with constraints.
+13. **Task Not Scheduled**
+	```cpp
+	        } else {
+	```
+	This block handles the case where the task has not been scheduled before.
+
+14. **Task Scheduling (New Task)**
+	```cpp
+	            mp[tasks[i]] = days;                
+	```
+	This schedules the task by adding it to the map 'mp' with the current day.
+
+15. **Increment Day and Task Index**
+	```cpp
+	            days++;
+	```
+	This increments the day count.
+
+16. **Task Index Increment**
+	```cpp
+	            i++;
+	```
+	This increments the task index to move to the next task.
+
+17. **Return Result**
+	```cpp
+	    return days;
+	```
+	This returns the total number of days it took to schedule all tasks while respecting the space constraint.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the tasks array, because we process each task exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), as we store the last completion day for each task type in the map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/task-scheduler-ii/description/)
 

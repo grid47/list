@@ -14,89 +14,146 @@ img_src = ""
 youtube = "cY-wxEdhSAY"
 youtube_upload_date="2023-05-28"
 youtube_thumbnail="https://i.ytimg.com/vi/cY-wxEdhSAY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer represented as a string, your task is to return the same integer but with all trailing zeros removed. The result should also be returned as a string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string representing a positive integer without leading zeros.
+- **Example:** `Input: num = "890000"`
+- **Constraints:**
+	- 1 <= num.length <= 1000
+	- num consists only of digits.
+	- The integer represented by the string does not have leading zeros.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string removeTrailingZeros(string num) {
-        int n = num.size();
-        int cnt = 0;
-        int len;
-        for( len = 1; len <= n; len++) {
-            if(num[n - len] == '0') cnt++;
-            else break;
-        }
-        return num.substr(0, n - cnt);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the input string after removing any trailing zeros.
+- **Example:** `Output: "89"`
+- **Constraints:**
+	- The output should be the string representing the integer without trailing zeros.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Remove all trailing zeros from the string representation of the given integer.
+
+- Step 1: Start from the last character of the string and check if it is a '0'.
+- Step 2: Continue checking characters until a non-zero character is found.
+- Step 3: Slice the string to exclude all trailing zeros.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always represent a valid positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num = "5403000"`  \
+  **Explanation:** The integer represented by the string '5403000' has three trailing zeros. After removing them, the resulting string is '5403'.
+
+- **Input:** `Input: num = "1000"`  \
+  **Explanation:** The string '1000' has three trailing zeros. After removing them, the output is '1'.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem efficiently by iterating through the string from the end to the beginning and removing all the '0' characters until a non-zero digit is encountered.
+
+### Initial Thoughts 💭
+- Trailing zeros can be identified by iterating from the end of the string.
+- Removing trailing zeros does not require modifying the middle portion of the string.
+- The solution should be efficient enough to handle strings with up to 1000 characters.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will not be empty, as per the constraints.
+- Ensure that the solution works for large input sizes up to 1000 characters.
+- If the string is composed of only zeros (e.g., '0000'), the result should be an empty string or '0'.
+- Ensure that the solution works correctly for inputs with varying numbers of trailing zeros.
+{{< dots >}}
+## Code 💻
+```cpp
+string removeTrailingZeros(string num) {
+    int n = num.size();
+    int cnt = 0;
+    int len;
+    for( len = 1; len <= n; len++) {
+        if(num[n - len] == '0') cnt++;
+        else break;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires removing all trailing zeros from a given string `num`. The string represents a non-negative integer, and trailing zeros are defined as any number of zeros occurring at the end of the string. For instance, for the string `"1234500"`, the trailing zeros are `"00"`, and the desired output would be `"12345"`. The task is to return the number without its trailing zeros.
-
-### Approach
-
-The problem can be approached by iterating through the string from the end and counting how many trailing zeros exist. Once the count is determined, we can return the substring of the original string that excludes these zeros.
-
-1. **Count Trailing Zeros**: Start from the last character of the string and move backwards, counting zeros until a non-zero character is encountered.
-2. **Remove Zeros**: Once the count of trailing zeros is determined, return a substring of the original string that excludes these zeros.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initial Setup
-```cpp
-int n = num.size();
-int cnt = 0;
-int len;
-```
-- `n` stores the length of the string `num`.
-- `cnt` is used to count how many trailing zeros are present in the string.
-- `len` is used to keep track of the current position while iterating through the string from the end.
-
-#### Step 2: Count Trailing Zeros
-```cpp
-for(len = 1; len <= n; len++) {
-    if(num[n - len] == '0') cnt++;
-    else break;
+    return num.substr(0, n - cnt);
 }
 ```
-- The loop starts from the last character (`n - 1`) and checks each character to see if it's a zero. 
-- If the character is `'0'`, increment the `cnt` variable, which keeps track of the number of trailing zeros.
-- If a non-zero character is encountered (i.e., a character other than `'0'`), the loop breaks.
-- The loop runs at most `n` times but will stop early if a non-zero character is encountered.
 
-#### Step 3: Return the Substring Without Trailing Zeros
-```cpp
-return num.substr(0, n - cnt);
-```
-- Once the number of trailing zeros (`cnt`) is determined, the function returns the substring of `num` from the beginning up to the length `n - cnt`. This effectively removes all trailing zeros from the original string.
-- The `substr` function in C++ returns a substring starting from index `0` up to `n - cnt`.
+This function `removeTrailingZeros` takes a string `num` and removes all trailing zeros from it. It iterates through the string from the end, counting zeros, and then returns the substring excluding those zeros.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string removeTrailingZeros(string num) {
+	```
+	The function `removeTrailingZeros` is declared. It takes a string `num` as an input and returns a string with trailing zeros removed.
 
-#### Time Complexity
+2. **Variable Initialization**
+	```cpp
+	    int n = num.size();
+	```
+	The variable `n` is initialized to the size of the input string `num`, representing the total number of characters in the string.
 
-- The loop runs through the string starting from the end and counts the trailing zeros. In the worst case, the string consists entirely of zeros, and the loop runs `n` times where `n` is the length of the string.
-- The `substr` function is also linear in complexity, as it involves copying a portion of the string.
+3. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initialize `cnt` to zero. This variable will count the number of trailing zeros in the string.
 
-Thus, the overall time complexity is **O(n)**, where `n` is the length of the input string.
+4. **Variable Declaration**
+	```cpp
+	    int len;
+	```
+	Declare the variable `len` which will be used to iterate through the string from the end.
 
-#### Space Complexity
+5. **Loop Setup**
+	```cpp
+	    for( len = 1; len <= n; len++) {
+	```
+	A `for` loop is set up to iterate from the last character of the string towards the beginning, checking for trailing zeros.
 
-- The space complexity is **O(1)**, since we are only using a few integer variables (`n`, `cnt`, `len`) and not storing any additional data structures that scale with the input size.
-- The space complexity does not depend on the size of the input string, making it very efficient in terms of space.
+6. **Check for Trailing Zero**
+	```cpp
+	        if(num[n - len] == '0') cnt++;
+	```
+	If the current character (starting from the end) is a zero, increment the `cnt` variable to track the number of zeros.
 
-### Conclusion
+7. **Break Condition**
+	```cpp
+	        else break;
+	```
+	If a non-zero character is found, break the loop as there are no more trailing zeros.
 
-This solution efficiently removes trailing zeros from a string representation of a number. By iterating from the end of the string, counting the zeros, and using the `substr` function to return the desired substring, we achieve an optimal solution. The time complexity of **O(n)** is efficient for large strings, and the space complexity of **O(1)** ensures that the solution remains memory-efficient. This approach is simple, direct, and works well for the problem's constraints.
+8. **Return Statement**
+	```cpp
+	    return num.substr(0, n - cnt);
+	```
+	Return the substring of `num` from the start to `n - cnt` to remove the trailing zeros.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the string, as we only need to traverse the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case when the string has to be modified or a new string is created to hold the result.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-trailing-zeros-from-a-string/description/)
 

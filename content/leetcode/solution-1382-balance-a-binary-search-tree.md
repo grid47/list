@@ -14,135 +14,215 @@ img_src = ""
 youtube = "0KGdtzgL9Ec"
 youtube_upload_date="2021-01-28"
 youtube_thumbnail="https://i.ytimg.com/vi/0KGdtzgL9Ec/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a binary search tree (BST), return a balanced BST containing the same node values. A balanced BST is one where the depth of the left and right subtrees of every node never differ by more than 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a binary search tree (BST) represented as an array where each element is a node of the tree.
+- **Example:** `Input: root = [1, null, 2, null, 3, null, 4]`
+- **Constraints:**
+	- The number of nodes in the tree is between 1 and 10,000.
+	- The value of each node is between 1 and 100,000.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a balanced binary search tree (BST) containing the same node values from the input tree. The tree should be balanced in such a way that the difference in height between the left and right subtrees of any node is at most 1.
+- **Example:** `Output: [2, 1, 3, null, null, null, 4]`
+- **Constraints:**
+	- The tree must be balanced according to the problem definition.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to return a balanced BST that contains the same node values as the input BST.
+
+- 1. Perform an inorder traversal on the BST to get the nodes in sorted order.
+- 2. Use the sorted nodes to construct a balanced BST by recursively selecting the middle node as the root and dividing the remaining nodes into left and right subtrees.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is a binary search tree (BST).
+- A balanced BST is defined as a tree where the height difference between the left and right subtrees of every node is at most 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1, null, 2, null, 3, null, 4]`  \
+  **Explanation:** The input tree is right-skewed. To balance it, we first extract the nodes in sorted order: [1, 2, 3, 4]. We then construct a new tree with the middle element (2) as the root, and recursively build left and right subtrees from the remaining nodes.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves converting the input BST to an inorder array and then using this sorted array to build a balanced BST by recursively selecting the middle element as the root of each subtree.
+
+### Initial Thoughts 💭
+- The tree is unbalanced, and we need to rearrange it to create a balanced structure.
+- Inorder traversal of a BST results in a sorted list of node values.
+- Once we have the sorted array of nodes, we can use it to recursively build a balanced tree.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty, return null.
+- Ensure that the solution handles large trees (up to 10,000 nodes) efficiently.
+- The values of the nodes are between 1 and 100,000, which means that balancing the tree should not depend on specific values.
+- The solution should not exceed time limits for large trees with up to 10,000 nodes.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    vector<int> arr;
+vector<int> arr;
 public:
-    TreeNode* balanceBST(TreeNode* root) {
-        inorder (root);
-        return reform(0, arr.size()-1);
-    }
-    
-    void inorder (TreeNode* root) {
-        if(root == NULL ) return;
-        inorder (root->left);
-        arr.push_back(root->val);
-        inorder (root->right);
-    }
-    
+TreeNode* balanceBST(TreeNode* root) {
+    inorder (root);
+    return reform(0, arr.size()-1);
+}
+
+void inorder (TreeNode* root) {
+    if(root == NULL ) return;
+    inorder (root->left);
+    arr.push_back(root->val);
+    inorder (root->right);
+}
+
  TreeNode* reform(int l, int r) {
-        if (l > r) return NULL;
-     int mid = (l + r)/2;
-     TreeNode* node = new TreeNode(arr[mid]);
-     node->left = reform (l, mid -1);
-     node->right= reform (mid +1, r);
-     return node;
-    }
-};
-{{< /highlight >}}
----
+    if (l > r) return NULL;
+ int mid = (l + r)/2;
+ TreeNode* node = new TreeNode(arr[mid]);
+ node->left = reform (l, mid -1);
+ node->right= reform (mid +1, r);
+ return node;
+}
+```
 
-### Problem Statement
+This solution provides a balanced binary search tree (BST) by performing an in-order traversal to store the values of the original tree in a vector. It then reuses the sorted values to construct a balanced tree.
 
-The problem involves balancing a binary search tree (BST). A binary search tree is balanced if, for every node, the height of its left and right subtrees differs by at most one. If a given BST is unbalanced, we need to restructure it to create a new BST that maintains its properties while ensuring it is balanced. This solution focuses on converting an unbalanced BST into a balanced one by utilizing in-order traversal and reformation techniques.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Define a class Solution where the main logic for balancing the BST will be implemented.
 
-### Approach
+2. **Data Structures**
+	```cpp
+	vector<int> arr;
+	```
+	A vector is used to store the elements of the BST during the in-order traversal.
 
-To balance the BST, we can follow these steps:
+3. **Access Modifiers**
+	```cpp
+	public:
+	```
+	The public section of the class where the methods will be defined for solving the problem.
 
-1. **In-Order Traversal**: First, we perform an in-order traversal of the given BST. This traversal collects the values of the nodes in a sorted order because, by definition, in-order traversal of a BST returns values in ascending order.
+4. **Function Definition**
+	```cpp
+	TreeNode* balanceBST(TreeNode* root) {
+	```
+	The balanceBST function receives the root of the tree and balances the BST by calling inorder and reform functions.
 
-2. **Reconstruction of the BST**: After obtaining the sorted values, we reconstruct a new balanced BST. We do this by recursively selecting the middle element of the current range as the root of the subtree, ensuring that the left subtree consists of elements smaller than the root and the right subtree consists of elements larger than the root. This method guarantees that the newly formed tree is balanced.
+5. **Traversal**
+	```cpp
+	    inorder (root);
+	```
+	Call the inorder function to perform an in-order traversal of the binary tree and store its values.
 
-### Code Breakdown (Step by Step)
+6. **Return Statement**
+	```cpp
+	    return reform(0, arr.size()-1);
+	```
+	Invoke the reform function to build a balanced BST using the values stored in arr.
 
-The provided C++ code implements the above approach with the following components:
+7. **Function Definition**
+	```cpp
+	void inorder (TreeNode* root) {
+	```
+	The inorder function is used to traverse the tree in in-order fashion and store the values in the arr vector.
 
-1. **TreeNode Structure**:
-   ```cpp
-   struct TreeNode {
-       int val;
-       TreeNode *left;
-       TreeNode *right;
-       TreeNode() : val(0), left(nullptr), right(nullptr) {}
-       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-       TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-   };
-   ```
-   - The `TreeNode` structure represents a node in the binary tree. Each node contains an integer value (`val`), a pointer to the left child (`left`), and a pointer to the right child (`right`).
+8. **Base Case**
+	```cpp
+	    if(root == NULL ) return;
+	```
+	Base case for the recursion: if the node is NULL, return immediately.
 
-2. **Solution Class**:
-   ```cpp
-   class Solution {
-       vector<int> arr;
-   public:
-       TreeNode* balanceBST(TreeNode* root) {
-           inorder(root);
-           return reform(0, arr.size() - 1);
-       }
-   ```
-   - The `Solution` class contains a public method `balanceBST`, which takes the root of the unbalanced BST as an argument.
-   - A vector `arr` is declared to store the sorted values collected during the in-order traversal.
+9. **Traversal**
+	```cpp
+	    inorder (root->left);
+	```
+	Recursive call to traverse the left subtree of the node.
 
-3. **In-Order Traversal Method**:
-   ```cpp
-       void inorder(TreeNode* root) {
-           if (root == NULL) return;
-           inorder(root->left);
-           arr.push_back(root->val);
-           inorder(root->right);
-       }
-   ```
-   - The `inorder` method performs an in-order traversal of the BST. 
-   - If the current node (`root`) is `NULL`, it returns without doing anything. Otherwise, it recursively traverses the left subtree, adds the current node's value to the `arr` vector, and then traverses the right subtree.
+10. **Store Data**
+	```cpp
+	    arr.push_back(root->val);
+	```
+	Store the value of the current node in the arr vector.
 
-4. **Reconstruction Method**:
-   ```cpp
-       TreeNode* reform(int l, int r) {
-           if (l > r) return NULL;
-           int mid = (l + r) / 2;
-           TreeNode* node = new TreeNode(arr[mid]);
-           node->left = reform(l, mid - 1);
-           node->right = reform(mid + 1, r);
-           return node;
-       }
-   };
-   ```
-   - The `reform` method takes two indices, `l` and `r`, which represent the current range of the `arr` vector.
-   - If `l` is greater than `r`, it returns `NULL`, indicating there are no nodes to create.
-   - The middle index (`mid`) is calculated, and a new `TreeNode` is created using the value at this index. This node becomes the root of the current subtree.
-   - The left and right subtrees are constructed recursively by calling `reform` on the appropriate segments of the array.
-   - Finally, the newly constructed node is returned.
+11. **Traversal**
+	```cpp
+	    inorder (root->right);
+	```
+	Recursive call to traverse the right subtree of the node.
 
-### Complexity
+12. **Function Definition**
+	```cpp
+	 TreeNode* reform(int l, int r) {
+	```
+	The reform function recursively builds a balanced binary tree using the sorted values stored in arr.
 
-- **Time Complexity**:
-  - The time complexity for this solution is \(O(N)\), where \(N\) is the number of nodes in the binary search tree. This is due to the two main operations: in-order traversal (to collect the values) and reconstruction (to form the new balanced BST).
+13. **Base Case**
+	```cpp
+	    if (l > r) return NULL;
+	```
+	Base case for recursion: if the left index exceeds the right, return NULL (no more nodes to add).
 
-- **Space Complexity**:
-  - The space complexity is \(O(N)\) as well, primarily due to the storage of the sorted values in the `arr` vector. Additionally, the recursion stack could take up to \(O(H)\) space, where \(H\) is the height of the tree. In the worst case (for a skewed tree), this could also be \(O(N)\).
+14. **Calculate Middle**
+	```cpp
+	 int mid = (l + r)/2;
+	```
+	Find the middle index of the current range to select the root of the subtree.
 
-### Conclusion
+15. **Node Creation**
+	```cpp
+	 TreeNode* node = new TreeNode(arr[mid]);
+	```
+	Create a new tree node with the middle value from the arr vector.
 
-The solution effectively balances a binary search tree by utilizing in-order traversal to collect the node values in a sorted manner, followed by reconstructing the tree from these values. This approach ensures that the resulting tree maintains the properties of a BST while being balanced. The implementation is efficient and straightforward, making it an excellent reference for developers and students studying tree data structures and algorithms in computer science. Understanding this method not only aids in mastering tree manipulations but also lays the groundwork for tackling more complex problems involving tree balancing and restructuring in various applications. Overall, the code exemplifies best practices in algorithm design and offers insights into the intricacies of binary search trees.
+16. **Recursive Call**
+	```cpp
+	 node->left = reform (l, mid -1);
+	```
+	Recursively build the left subtree with the values between the current left index and mid-1.
+
+17. **Recursive Call**
+	```cpp
+	 node->right= reform (mid +1, r);
+	```
+	Recursively build the right subtree with the values between mid+1 and the current right index.
+
+18. **Return Statement**
+	```cpp
+	 return node;
+	```
+	Return the newly created node as the root of the subtree.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of nodes in the tree. This occurs because both the inorder traversal and the tree-building steps require O(n) time.
+- **Average Case:** O(n) in most cases.
+- **Worst Case:** O(n) in all cases.
+
+Both the inorder traversal and the tree reconstruction steps have a time complexity of O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n) in all cases.
+- **Worst Case:** O(n), where n is the number of nodes in the tree. This is due to the storage required for the sorted array of node values.
+
+The space complexity is O(n) due to the space needed for storing the node values during the inorder traversal and the recursive calls.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/balance-a-binary-search-tree/description/)
 

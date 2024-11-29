@@ -14,94 +14,134 @@ img_src = ""
 youtube = "_tfiTQNZCbs"
 youtube_upload_date="2019-12-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/_tfiTQNZCbs/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of coordinates, where each coordinate represents a point in the 2D plane. Your task is to check if all the points in the array lie on the same straight line.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of points, where each point is represented by two integers [x, y].
+- **Example:** `coordinates = [[2, 3], [4, 5], [6, 7], [8, 9], [10, 11]]`
+- **Constraints:**
+	- 2 <= coordinates.length <= 1000
+	- coordinates[i].length == 2
+	- -10^4 <= coordinates[i][0], coordinates[i][1] <= 10^4
+	- coordinates contains no duplicate point.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkStraightLine(vector<vector<int>>& cord) {
-        double slopt = (cord[1][0] - cord[0][0]) == 0? INT_MAX: (double)(cord[1][1] - cord[0][1]) / (double)(cord[1][0] - cord[0][0]);
-        for(int i = 2; i < cord.size(); i++) {
-            double slp = (cord[i][0] - cord[0][0]) == 0?INT_MAX: (double)(cord[i][1] - cord[0][1]) / (double)(cord[i][0] - cord[0][0]);
-            if(slp != slopt) return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a boolean value indicating whether all points lie on the same straight line.
+- **Example:** `true`
+- **Constraints:**
+	- Return 'true' if all points are collinear, otherwise return 'false'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the slope between consecutive points remains the same across the entire list of points.
+
+- Calculate the slope between the first two points.
+- For each subsequent point, calculate the slope between it and the first point.
+- If the slopes are not equal, return false.
+- If all slopes are equal, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input coordinates represent valid points in a 2D plane.
+- The points are given in no particular order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `coordinates = [[2, 3], [4, 5], [6, 7], [8, 9], [10, 11]]`  \
+  **Explanation:** The points have the same slope between consecutive pairs, meaning they lie on the same straight line, so the output is 'true'.
+
+- **Input:** `coordinates = [[1, 1], [2, 3], [3, 5], [4, 7]]`  \
+  **Explanation:** The slope between the first two points is different from the slopes between the other points, meaning they do not lie on the same straight line, so the output is 'false'.
+
+{{< dots >}}
+## Approach 🚀
+To determine if the points are collinear, we calculate the slope between the first point and the second, then compare it to the slope between the first point and each subsequent point.
+
+### Initial Thoughts 💭
+- The slope between two points is given by the formula (y2 - y1) / (x2 - x1).
+- If the slopes between consecutive points are all equal, the points must lie on the same straight line.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as the input will always contain at least two points.
+- The solution should handle up to 1000 points efficiently.
+- The coordinates can include negative values, but the slope calculation remains unaffected.
+- Ensure that there are no duplicate points in the input.
+{{< dots >}}
+## Code 💻
+```cpp
+bool checkStraightLine(vector<vector<int>>& cord) {
+    double slopt = (cord[1][0] - cord[0][0]) == 0? INT_MAX: (double)(cord[1][1] - cord[0][1]) / (double)(cord[1][0] - cord[0][0]);
+    for(int i = 2; i < cord.size(); i++) {
+        double slp = (cord[i][0] - cord[0][0]) == 0?INT_MAX: (double)(cord[i][1] - cord[0][1]) / (double)(cord[i][0] - cord[0][0]);
+        if(slp != slopt) return false;
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The task is to determine if a given set of points, represented as coordinates in a 2D space, lies on a straight line. Each point is provided as a pair of integers corresponding to its \(x\) and \(y\) coordinates. The challenge is to efficiently ascertain whether all these points share the same slope when compared to each other, thus confirming they lie on a linear path.
-
-### Approach
-To solve the problem, we utilize the properties of slopes in geometry. The slope between any two points \((x_1, y_1)\) and \((x_2, y_2)\) can be calculated using the formula:
-
-\[
-\text{slope} = \frac{y_2 - y_1}{x_2 - x_1}
-\]
-
-For all the points to lie on a straight line, the slopes formed between the first point and all other points should be equal. However, directly comparing slopes could lead to division by zero errors when dealing with vertical lines (where \(x_1 = x_2\)). Therefore, we can circumvent this by comparing the cross products instead, which avoids division and provides a reliable way to determine collinearity.
-
-1. Calculate the slope between the first two points to establish a reference slope.
-2. For each subsequent point, calculate its slope with the first point and compare it to the reference slope.
-3. If any point has a different slope, return false. If all points share the same slope, return true.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
+    return true;
+}
 ```
-- **Lines 1-2**: The `Solution` class is defined, and the public method `checkStraightLine` is declared, which takes a vector of vectors (2D array) representing coordinates.
 
-```cpp
-    bool checkStraightLine(vector<vector<int>>& cord) {
-```
-- **Line 3**: The method `checkStraightLine` begins its implementation, accepting a reference to a 2D vector named `cord`.
+This function checks if a given set of points (represented as coordinates in `cord`) form a straight line by comparing the slopes between consecutive points.
 
-```cpp
-        double slopt = (cord[1][0] - cord[0][0]) == 0? INT_MAX: (double)(cord[1][1] - cord[0][1]) / (double)(cord[1][0] - cord[0][0]);
-```
-- **Line 4**: The slope between the first two points is calculated. If the \(x\) coordinates of the first two points are the same (indicating a vertical line), `slopt` is set to `INT_MAX` to represent an undefined slope. Otherwise, the slope is calculated as the change in \(y\) divided by the change in \(x\).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkStraightLine(vector<vector<int>>& cord) {
+	```
+	This is the function definition for `checkStraightLine`. The function takes a 2D vector of coordinates and checks whether the points lie on a straight line.
 
-```cpp
-        for(int i = 2; i < cord.size(); i++) {
-```
-- **Line 5**: A loop is initiated that iterates from the third point (index 2) to the last point in the coordinates list.
+2. **Slope Calculation**
+	```cpp
+	    double slopt = (cord[1][0] - cord[0][0]) == 0? INT_MAX: (double)(cord[1][1] - cord[0][1]) / (double)(cord[1][0] - cord[0][0]);
+	```
+	The slope between the first two points is calculated. If the x-values of the points are the same, the slope is set to `INT_MAX` to represent an undefined slope (vertical line).
 
-```cpp
-            double slp = (cord[i][0] - cord[0][0]) == 0?INT_MAX: (double)(cord[i][1] - cord[0][1]) / (double)(cord[i][0] - cord[0][0]);
-```
-- **Line 6**: Inside the loop, the slope for the current point (with respect to the first point) is calculated using the same logic as before. If the \(x\) coordinates match, `slp` is set to `INT_MAX`, otherwise it is computed.
+3. **Iteration Over Points**
+	```cpp
+	    for(int i = 2; i < cord.size(); i++) {
+	```
+	The function iterates over all the remaining points starting from the third point.
 
-```cpp
-            if(slp != slopt) return false;
-```
-- **Line 7**: A comparison is made between the current slope (`slp`) and the reference slope (`slopt`). If they are not equal, it indicates that the points do not lie on the same straight line, and the function immediately returns `false`.
+4. **Slope Comparison**
+	```cpp
+	        double slp = (cord[i][0] - cord[0][0]) == 0?INT_MAX: (double)(cord[i][1] - cord[0][1]) / (double)(cord[i][0] - cord[0][0]);
+	```
+	For each point, the slope with respect to the first point is calculated. If the x-values are the same, the slope is set to `INT_MAX`.
 
-```cpp
-        }
-        return true;
-    }
-};
-```
-- **Lines 8-10**: If the loop completes without finding any differing slopes, the function returns `true`, indicating that all points are collinear. The method and class definitions are closed.
+5. **Slope Check**
+	```cpp
+	        if(slp != slopt) return false;
+	```
+	If the calculated slope of any point does not match the slope of the first two points, the function returns `false`, indicating the points do not form a straight line.
 
-### Complexity
-1. **Time Complexity**: The time complexity of this function is \( O(n) \), where \( n \) is the number of points in the input vector. The function iterates through the list of points once to check their slopes.
-   
-2. **Space Complexity**: The space complexity is \( O(1) \) since only a constant amount of additional space is used for variables, regardless of the input size.
+6. **Return True**
+	```cpp
+	    return true;
+	```
+	If all slopes are the same, the function returns `true`, indicating the points form a straight line.
 
-### Conclusion
-The `checkStraightLine` function effectively determines whether a given set of coordinates forms a straight line by analyzing the slopes between points in a systematic way. Utilizing cross products avoids the pitfalls of division by zero and ensures accurate comparisons of slopes. This solution is efficient, with linear time complexity and constant space usage, making it suitable for handling large datasets of points in Cartesian space. Understanding the geometry of points and lines is crucial for solving such problems, and this implementation serves as an excellent example of applying mathematical concepts in programming.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We iterate through the points exactly once, so the time complexity is O(n), where n is the number of points.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, as we only use a few variables for slope calculation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-it-is-a-straight-line/description/)
 

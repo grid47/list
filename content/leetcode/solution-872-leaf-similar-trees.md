@@ -14,116 +14,72 @@ img_src = ""
 youtube = "Nr8dbnL0_cM"
 youtube_upload_date="2024-01-09"
 youtube_thumbnail="https://i.ytimg.com/vi/Nr8dbnL0_cM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two binary trees, determine if their leaf value sequences are identical. A binary tree's leaf value sequence is the sequence of values of its leaves, from left to right, following the in-order traversal. Two trees are considered leaf-similar if the leaf values in both trees appear in the same order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two binary trees represented by their root nodes, `root1` and `root2`.
+- **Example:** `Input: root1 = [1, 3, 4, null, null, 5, 6], root2 = [1, 2, 3, null, 4, 6, 5]`
+- **Constraints:**
+	- The number of nodes in each tree is between 1 and 200.
+	- The values of the nodes are between 0 and 200.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        stack<TreeNode*> s1, s2;
-        s1.push(root1), s2.push(root2);
-        while(!s1.empty() && !s2.empty())
-            if(dfs(s1) != dfs(s2)) return false;
-        return s1.empty() && s2.empty();
-    }
-    
-    int dfs(stack<TreeNode*> &stk) {
-        while(true) {
-            TreeNode* node = stk.top(); stk.pop();
-            if(node->left) stk.push(node->left);
-            if(node->right) stk.push(node->right);
-            if(!node->left && !node->right) return node->val;
-        }
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the two trees have identical leaf value sequences, otherwise return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean indicating whether the trees' leaf value sequences are identical.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to traverse both trees and compare their leaf sequences.
 
-In this problem, we are asked to determine whether two binary trees are "leaf similar." Two trees are considered leaf similar if their leaf nodes (the nodes that do not have left or right children) form the same sequence when traversed from left to right. Specifically, we are given two binary trees, `root1` and `root2`, and we need to check if their leaf nodes' values appear in the same order.
+- Perform a depth-first search (DFS) on both trees to collect the leaf values.
+- Compare the leaf value sequences of both trees. If they are identical, return `true`; otherwise, return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input trees are binary trees.
+- The leaf nodes are the nodes without any children.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root1 = [1, 3, 4, null, null, 5, 6], root2 = [1, 2, 3, null, 4, 6, 5]`  \
+  **Explanation:** Both trees have the same leaf value sequence [5, 6], so the output is `true`.
 
-A leaf node is defined as a node that does not have a left or right child.
+- **Input:** `Input: root1 = [1, 2, 3], root2 = [1, 3, 2]`  \
+  **Explanation:** The leaf value sequences for root1 are [2, 3] and for root2 are [3, 2], which are not identical, so the output is `false`.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by performing a DFS traversal on both trees to extract their leaf values and then compare the sequences.
 
-To solve this problem, we can take advantage of **depth-first search (DFS)** to traverse the trees. We aim to compare the sequences of leaf nodes from both trees and check if they match. Here’s how the solution is structured:
-
-1. **Use DFS for Leaf Extraction**: Perform a DFS traversal of both trees and extract the leaf nodes. This traversal will allow us to check the nodes one by one, comparing them as we go.
-
-2. **Simultaneous DFS on Both Trees**: We use two stacks (one for each tree) to traverse both trees simultaneously. At each step, we compare the leaf nodes from both trees.
-
-3. **Return Result Based on Comparison**: If the leaf nodes from both trees match in the same order, we return `true`; otherwise, we return `false`.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The leaf value sequence of a tree can be obtained through a depth-first search (DFS).
+- Both trees need to be traversed in the same way to ensure the sequences are compared correctly.
+- A DFS approach is efficient for this problem since it allows us to directly extract the leaf values in order.
+{{< dots >}}
+### Edge Cases 🌐
+- If either tree is empty, the result should be `false` since leaf sequences can't match.
+- For large inputs (trees with 200 nodes), the algorithm should efficiently handle the traversal and comparison.
+- If both trees have only one node each, the result depends on whether the nodes are leaves and have the same value.
+- The solution must handle trees with a maximum of 200 nodes and node values within the specified range.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        stack<TreeNode*> s1, s2;
-        s1.push(root1), s2.push(root2);
-        
-        while(!s1.empty() && !s2.empty())  // Step 1: Compare leaf nodes
-            if(dfs(s1) != dfs(s2)) return false;
-        
-        return s1.empty() && s2.empty();  // Step 2: Ensure both stacks are empty
-    }
-    
-    int dfs(stack<TreeNode*> &stk) {
-        while(true) {  // Step 3: DFS to extract leaf node value
-            TreeNode* node = stk.top(); stk.pop();
-            if(node->left) stk.push(node->left);
-            if(node->right) stk.push(node->right);
-            if(!node->left && !node->right) return node->val;  // Step 4: Return leaf node value
-        }
-    }
-};
-```
-
-#### Step 1: Compare Leaf Nodes Simultaneously
-
-```cpp
-stack<TreeNode*> s1, s2;
-s1.push(root1), s2.push(root2);
-
-while(!s1.empty() && !s2.empty()) {
-    if(dfs(s1) != dfs(s2)) return false;
+bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+    stack<TreeNode*> s1, s2;
+    s1.push(root1), s2.push(root2);
+    while(!s1.empty() && !s2.empty())
+        if(dfs(s1) != dfs(s2)) return false;
+    return s1.empty() && s2.empty();
 }
-```
 
-- We use two stacks `s1` and `s2` to hold the nodes of `root1` and `root2` respectively.
-- The `while` loop runs as long as both stacks are not empty. At each iteration, we pop leaf nodes from both stacks using the `dfs` function.
-- If the leaf values from the two trees do not match, we return `false` immediately, indicating that the leaf nodes in both trees are not similar.
-
-#### Step 2: Ensure Both Stacks are Empty
-
-```cpp
-return s1.empty() && s2.empty();
-```
-
-- After the loop, if both stacks are empty, we know that both trees have been completely traversed, and all leaf nodes from both trees have been compared. If no mismatches were found, we return `true`.
-- If any stack is not empty, it means that one tree has more leaf nodes than the other, and we return `false`.
-
-#### Step 3: Depth-First Search to Extract Leaf Nodes
-
-```cpp
 int dfs(stack<TreeNode*> &stk) {
     while(true) {
         TreeNode* node = stk.top(); stk.pop();
@@ -134,27 +90,99 @@ int dfs(stack<TreeNode*> &stk) {
 }
 ```
 
-- The `dfs` function is responsible for performing a depth-first traversal and extracting the leaf node value.
-- We start by popping the top node from the stack. If the node has left or right children, we push them onto the stack.
-- If a node does not have left or right children (i.e., it is a leaf node), we return its value.
-- The `dfs` function is called each time in the main `while` loop to retrieve the next leaf node from both trees.
+The function `leafSimilar` checks if two binary trees have the same leaf sequence using depth-first search (DFS) with a stack. The `dfs` function traverses the tree and returns the value of a leaf node.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+	```
+	Defines the function `leafSimilar` that compares the leaf nodes of two binary trees for similarity.
 
-#### Time Complexity:
+2. **Stack Initialization**
+	```cpp
+	    stack<TreeNode*> s1, s2;
+	```
+	Initializes two stacks, `s1` and `s2`, to hold nodes for depth-first traversal of `root1` and `root2`.
 
-- **DFS Traversal**: Both trees are traversed in a depth-first manner. In the worst case, each tree has `N` nodes (where `N` is the number of nodes in the tree), and we visit each node once. Thus, the DFS traversal for each tree takes `O(N)` time.
-- **Comparison**: At each step, we compare the leaf nodes of both trees. Each comparison is done in constant time, `O(1)`.
-- Therefore, the total time complexity is `O(N)`, where `N` is the total number of nodes in both trees.
+3. **Push Roots**
+	```cpp
+	    s1.push(root1), s2.push(root2);
+	```
+	Pushes the root nodes of both `root1` and `root2` onto their respective stacks.
 
-#### Space Complexity:
+4. **Loop Setup**
+	```cpp
+	    while(!s1.empty() && !s2.empty())
+	```
+	Starts a loop to traverse both trees as long as neither stack is empty.
 
-- **Stack Space**: We use two stacks, `s1` and `s2`, which each store at most `O(N)` nodes during the DFS traversal.
-- Therefore, the space complexity is `O(N)`.
+5. **Leaf Comparison**
+	```cpp
+	        if(dfs(s1) != dfs(s2)) return false;
+	```
+	Compares the leaf nodes of both trees by calling the `dfs` function on each stack. If the leaf values don't match, it returns `false`.
 
-### Conclusion
+6. **Return Comparison Result**
+	```cpp
+	    return s1.empty() && s2.empty();
+	```
+	Returns `true` if both stacks are empty, indicating that both trees had the same leaf sequence.
 
-The solution efficiently compares the leaf nodes of two binary trees by performing a depth-first traversal on both trees simultaneously. The two stacks (`s1` and `s2`) allow us to traverse the trees in a memory-efficient manner, and the DFS function helps in extracting leaf nodes. By comparing the leaf nodes one-by-one, we ensure that the order and values match. This approach has a time complexity of `O(N)`, where `N` is the number of nodes in the trees, and a space complexity of `O(N)` due to the use of the stacks.
+7. **DFS Function Definition**
+	```cpp
+	int dfs(stack<TreeNode*> &stk) {
+	```
+	Defines the `dfs` function that performs depth-first search on the tree using a stack and returns the value of the leaf node.
+
+8. **Infinite Loop**
+	```cpp
+	    while(true) {
+	```
+	Starts an infinite loop to keep processing nodes from the stack.
+
+9. **Pop Node**
+	```cpp
+	        TreeNode* node = stk.top(); stk.pop();
+	```
+	Pops the top node from the stack for processing.
+
+10. **Push Child Nodes**
+	```cpp
+	        if(node->left) stk.push(node->left);
+	```
+	Pushes the left child of the current node onto the stack if it exists.
+
+11. **Push Right Child**
+	```cpp
+	        if(node->right) stk.push(node->right);
+	```
+	Pushes the right child of the current node onto the stack if it exists.
+
+12. **Return Leaf Value**
+	```cpp
+	        if(!node->left && !node->right) return node->val;
+	```
+	If the current node is a leaf (both left and right children are null), return its value.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in terms of the number of nodes, as each tree is traversed once to collect the leaf values.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+Space is required for storing the leaf values during the DFS traversal, resulting in O(n) space complexity.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/leaf-similar-trees/description/)
 

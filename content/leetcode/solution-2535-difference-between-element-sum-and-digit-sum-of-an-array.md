@@ -14,106 +14,124 @@ img_src = ""
 youtube = "wg-szN5zvr4"
 youtube_upload_date="2023-01-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/wg-szN5zvr4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer array `nums`, compute the absolute difference between the element sum and the digit sum of the elements in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` containing positive integers.
+- **Example:** `[2, 28, 5, 7]`
+- **Constraints:**
+	- 1 <= nums.length <= 2000
+	- 1 <= nums[i] <= 2000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-int dsum(int v) {
-    return v == 0 ? 0 : v % 10 + dsum(v / 10);
-}
-int differenceOfSum(vector<int>& n) {
-    return abs(accumulate(begin(n), end(n), 0) - 
-        accumulate(begin(n), end(n), 0, [&](int s, int v){ return s + dsum(v); }));
-}
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the absolute difference between the element sum and the digit sum.
+- **Example:** `6`
+- **Constraints:**
+	- The output will be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the absolute difference between the element sum and digit sum efficiently.
 
-The problem requires calculating the absolute difference between the sum of elements in an array and the sum of the sum of digits of each element in the array. Specifically, given an array of integers, we need to compute:
+- Calculate the element sum by adding all integers in the `nums` array.
+- Calculate the digit sum by summing up each digit of all the integers in the `nums` array.
+- Return the absolute difference between the element sum and digit sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will only contain positive integers.
+- The array can be of varying lengths within the specified constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[2, 28, 5, 7]`  \
+  **Explanation:** The element sum is 42, and the digit sum is 24. The absolute difference between them is 6.
 
-1. **The sum of the array elements**.
-2. **The sum of the digits of each element** (for each number, we sum its digits and then sum those results across all the numbers).
-3. **The absolute difference** between the two sums.
+- **Input:** `[10, 20, 30]`  \
+  **Explanation:** The element sum is 60, and the digit sum is 6. The absolute difference between them is 10.
 
-The task is to compute this difference and return it.
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating both the element sum and the digit sum, then finding their absolute difference.
 
-### Approach
-
-To solve this problem, we need to break it into two main parts:
-
-1. **Sum of elements**: The sum of elements in the given array is straightforward to calculate using the `accumulate` function in C++.
-   
-2. **Sum of digits of elements**: For each number in the array, we need to calculate the sum of its digits. This can be done using a recursive approach.
-
-Once both sums are computed, we can simply return the absolute difference between the two sums.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Recursive Function to Compute Sum of Digits**
-
+### Initial Thoughts 💭
+- We need to calculate the sum of integers and the sum of individual digits of each integer.
+- We can iterate through the array once to compute both sums efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will never be empty as `nums.length >= 1`.
+- Ensure the solution handles arrays with the maximum length of 2000 efficiently.
+- Handle edge cases like single-element arrays, where the element sum and digit sum may be the same.
+- Ensure that the solution works for all values within the range of 1 to 2000 for each element.
+{{< dots >}}
+## Code 💻
 ```cpp
 int dsum(int v) {
-    return v == 0 ? 0 : v % 10 + dsum(v / 10);
+return v == 0 ? 0 : v % 10 + dsum(v / 10);
+}
+int differenceOfSum(vector<int>& n) {
+return abs(accumulate(begin(n), end(n), 0) - 
+    accumulate(begin(n), end(n), 0, [&](int s, int v){ return s + dsum(v); }));
 }
 ```
 
-- This function, `dsum`, computes the sum of the digits of a number recursively.
-- The base case is when the number `v` is 0. If `v` is 0, the function returns 0, as the sum of digits of 0 is 0.
-- In the recursive case, the function computes the last digit of the number using `v % 10` and adds it to the result of recursively calling `dsum(v / 10)`. This effectively breaks down the number by removing the last digit at each recursive step.
-- For example, for `v = 123`, the function will compute `1 + 2 + 3 = 6`.
+The function 'dsum' computes the sum of digits of a number recursively, while 'differenceOfSum' calculates the absolute difference between the sum of the elements and the sum of their digits using accumulators.
 
-#### 2. **Calculating the Absolute Difference**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int dsum(int v) {
+	```
+	The function 'dsum' is defined, accepting an integer 'v' as input. This function calculates the sum of the digits of the integer recursively.
 
-```cpp
-int differenceOfSum(vector<int>& n) {
-    return abs(accumulate(begin(n), end(n), 0) - 
-               accumulate(begin(n), end(n), 0, [&](int s, int v){ return s + dsum(v); }));
-}
-```
+2. **Recursive Logic**
+	```cpp
+	return v == 0 ? 0 : v % 10 + dsum(v / 10);
+	```
+	The function uses recursion: if 'v' is 0, the base case returns 0. Otherwise, it adds the last digit of 'v' (v % 10) to the result of the recursive call with 'v' divided by 10 (removing the last digit).
 
-- The function `differenceOfSum` calculates the absolute difference between the sum of the elements in the array and the sum of the digits of those elements.
-  
-- **Sum of elements**: `accumulate(begin(n), end(n), 0)` calculates the sum of all the elements in the array `n`. The `accumulate` function is used here, which is a standard C++ algorithm to sum the elements of a range (from `begin(n)` to `end(n)`), starting from an initial sum of 0.
-  
-- **Sum of digits of elements**: `accumulate(begin(n), end(n), 0, [&](int s, int v){ return s + dsum(v); })` calculates the sum of the sum of digits of each element in the array `n`. Here:
-  - The `accumulate` function is again used, but this time with a custom lambda function. The lambda function computes the sum of digits of each number `v` by calling `dsum(v)`.
-  - The lambda accumulates the sum of digits for each element in the array.
-  
-- **Absolute Difference**: Finally, the absolute difference between the sum of the elements and the sum of the sum of digits is calculated using `abs()`. This function ensures that the result is always a non-negative value, as we are interested in the magnitude of the difference, regardless of which sum is larger.
+3. **Function Definition**
+	```cpp
+	int differenceOfSum(vector<int>& n) {
+	```
+	The function 'differenceOfSum' is defined, accepting a vector of integers 'n'. It calculates the absolute difference between the sum of the elements of 'n' and the sum of the digits of each element.
 
-#### 3. **Final Return**
+4. **Accumulate**
+	```cpp
+	return abs(accumulate(begin(n), end(n), 0) - 
+	```
+	The 'accumulate' function computes the sum of the elements in the vector 'n'. The result is subtracted from the sum of the digits of each element in 'n'. The 'abs' function is used to return the absolute value of the result.
 
-- The function returns the absolute difference between the two sums, as required by the problem statement.
+5. **Accumulate with Lambda**
+	```cpp
+	    accumulate(begin(n), end(n), 0, [&](int s, int v){ return s + dsum(v); }));
+	```
+	This part uses another 'accumulate' to sum the results of applying 'dsum' to each element in 'n'. The lambda function takes the sum accumulator 's' and each element 'v', and adds the result of 'dsum(v)' to 's'.
 
-### Complexity Analysis
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Time Complexity
+The time complexity is O(n), where n is the length of the `nums` array, since we perform a linear scan to compute both sums.
 
-- **Sum of Elements**: The first `accumulate` function, which computes the sum of the elements, iterates through the entire array once. The time complexity for this step is \( O(n) \), where \( n \) is the number of elements in the array.
-  
-- **Sum of Digits**: The second `accumulate` function involves iterating over the array and, for each element, calculating the sum of its digits using the recursive `dsum` function.
-  - The time complexity of `dsum(v)` depends on the number of digits in the number `v`. If `v` has \( d \) digits, then the time complexity of `dsum(v)` is \( O(d) \).
-  - For each element, the `dsum` function is called, and if we assume the maximum number of digits in any number is \( D \), the overall time complexity for computing the sum of digits is \( O(n \cdot D) \), where \( n \) is the number of elements in the array and \( D \) is the number of digits in the largest number in the array.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Overall Time Complexity**: The total time complexity is \( O(n \cdot D) \), where \( n \) is the size of the array and \( D \) is the maximum number of digits in any element of the array.
+The space complexity is O(1) since we only need a few variables to hold the sums, irrespective of the size of the input.
 
-#### Space Complexity
+**Happy Coding! 🎉**
 
-- **Auxiliary Space for Sum of Digits**: The `dsum` function uses recursion. The maximum depth of the recursion depends on the number of digits in the largest number. Thus, the space complexity for recursion is \( O(D) \), where \( D \) is the number of digits in the largest number in the array.
-  
-- **Overall Space Complexity**: The overall space complexity is \( O(D) \), as the space required for recursion dominates.
-
-### Conclusion
-
-This solution efficiently computes the absolute difference between the sum of the elements in the array and the sum of the sum of digits of each element. By utilizing the `accumulate` function and a recursive approach to calculate the sum of digits, the code is both clean and efficient. The primary time complexity arises from iterating through the elements of the array and calculating the sum of digits, which makes it suitable for arrays with relatively small numbers. However, for larger numbers with many digits, the solution still remains feasible due to its recursive nature.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/difference-between-element-sum-and-digit-sum-of-an-array/description/)
 

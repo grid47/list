@@ -14,110 +14,175 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a special ranking system, each voter assigns a rank to all participating teams in a competition. The rankings are based on the most first-place votes, then second-place votes, and so on. If there is still a tie, teams are ranked alphabetically.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of strings where each string represents the rankings given by a voter.
+- **Example:** `votes = ["XYZ", "YZX", "ZXY", "XYZ", "YZX"]`
+- **Constraints:**
+	- 1 <= votes.length <= 1000
+	- 1 <= votes[i].length <= 26
+	- votes[i].length == votes[j].length for all 0 <= i, j < votes.length
+	- Each character in a vote string is unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string rankTeams(vector<string>& votes) {
-        vector<vector<int>> count(26, vector<int> (27));
-        for(char &c: votes[0])
-        count[c - 'A'][26] = c;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a string containing all the teams ranked from highest to lowest based on the voting system.
+- **Example:** `"XYZ"`
+- **Constraints:**
+	- The output string will contain all teams in the order of their ranks.
 
-        for(string& vote: votes)
-        for(int i =0; i < vote.size(); i++)
-        --count[vote[i] - 'A'][i];
-        
-        sort(count.begin(), count.end());
-        string res;
-        for(int i = 0; i < votes[0].length(); i++)
-            res += count[i][26];
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to rank teams based on their positions in the votes, resolving ties using subsequent positions, and sorting alphabetically if necessary.
 
+- Count the number of first-place, second-place, third-place, etc., votes for each team.
+- Sort teams primarily by the number of first-place votes, then second-place votes, and so on.
+- If teams are still tied after considering all positions, sort them alphabetically.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input contains valid rankings where each character is a unique team in every vote string.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `votes = ["XYZ", "YZX", "ZXY", "XYZ", "YZX"]`  \
+  **Explanation:** In this case, team X received the most first-place votes, so it ranks first. Team Y and team Z tie for second place but team Y has the most second-place votes, so it ranks second.
 
-### Problem Statement
-The problem involves ranking teams based on votes received from a group of voters. Each voter casts a ranked vote for a set of teams (represented by uppercase letters). The goal is to determine the final ranking of teams based on these votes, with ties broken by lexicographical order.
+- **Input:** `votes = ["ABCDE", "DCBAE", "EABCD"]`  \
+  **Explanation:** Team A received the most first-place votes across all voters, so it ranks first, followed by team B.
 
-### Approach
-To achieve the desired ranking, we can follow these steps:
-1. **Count Votes**: For each team (denoted by letters), maintain a count of their rankings based on the votes. The ranking is such that the higher the rank (lower index), the more negative the score.
-2. **Store Team Information**: Use a 2D array to store the score and character for each team, enabling easy sorting.
-3. **Sort Teams**: Sort the teams based on the negative ranking scores and lexicographically to break ties.
-4. **Construct Result**: Extract the sorted team characters to form the final ranking string.
+{{< dots >}}
+## Approach 🚀
+The approach involves counting the number of votes each team receives for each position and sorting them according to the ranking system.
 
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The problem requires ranking teams based on votes for each position in a list of rankings.
+- Sorting the teams by first-place votes, then second-place votes, and so on, will allow us to handle ties effectively.
+{{< dots >}}
+### Edge Cases 🌐
+- If there is only one voter, their ranking is the final result.
+- Ensure the solution handles large inputs efficiently, up to 1000 votes and 26 teams.
+- If all teams are tied at each position, sort them alphabetically.
+- Make sure to handle cases where there are multiple ties at various positions.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    string rankTeams(vector<string>& votes) {
-        // Initialize a count array to store rankings for each team
-        vector<vector<int>> count(26, vector<int>(27));
-        
-        // Store the team character for each index in the last position of the subarray
-        for(char &c: votes[0])
-            count[c - 'A'][26] = c;
+string rankTeams(vector<string>& votes) {
+    vector<vector<int>> count(26, vector<int> (27));
+    for(char &c: votes[0])
+    count[c - 'A'][26] = c;
 
-        // Iterate through each vote and adjust the ranking scores
-        for(string& vote: votes)
-            for(int i = 0; i < vote.size(); i++)
-                --count[vote[i] - 'A'][i];
-        
-        // Sort the count array to determine final rankings
-        sort(count.begin(), count.end());
-        
-        // Construct the resulting ranking string
-        string res;
-        for(int i = 0; i < votes[0].length(); i++)
-            res += count[i][26];
-        
-        return res;
-    }
-};
+    for(string& vote: votes)
+    for(int i =0; i < vote.size(); i++)
+    --count[vote[i] - 'A'][i];
+    
+    sort(count.begin(), count.end());
+    string res;
+    for(int i = 0; i < votes[0].length(); i++)
+        res += count[i][26];
+    
+    return res;
+}
 ```
 
-1. **Class Definition**:
-   - The `Solution` class contains a single public method named `rankTeams`.
+This function ranks teams based on votes, where each vote is a string representing the ranking of teams. The function calculates the score of each team using a scoring system based on vote positions, sorts the teams based on their scores, and returns a string representing the ranked teams.
 
-2. **Initialization of the Count Array**:
-   - A 2D vector `count` is created to hold the rankings of the 26 teams (A-Z). Each sub-array holds 27 integers where the first 26 indices represent the negative rankings and the last index (26) stores the team character.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string rankTeams(vector<string>& votes) {
+	```
+	This function takes a vector of strings 'votes', where each string represents a ranking of teams, and returns a string that represents the ranked order of the teams.
 
-3. **Storing Team Characters**:
-   - The first loop iterates over the first vote string to initialize the last element of each sub-array with the corresponding team character. For example, for team 'A', it sets `count[0][26] = 'A'`.
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> count(26, vector<int> (27));
+	```
+	A 2D vector 'count' is initialized to store the ranking positions of 26 teams (A-Z), with each row representing a team and each column representing the position in the votes.
 
-4. **Adjusting Rankings**:
-   - The second nested loop processes each vote, decrementing the count for the corresponding team's rank position. This means that higher-ranked teams will accumulate more negative scores.
+3. **First Vote Processing**
+	```cpp
+	    for(char &c: votes[0])
+	```
+	The first string in the 'votes' vector is iterated, and for each character (team), its corresponding position in the 'count' array is updated.
 
-5. **Sorting the Teams**:
-   - The `sort` function sorts the `count` array based on the first 26 elements (the scores). Since the sort is based on the vector's natural ordering, teams with higher negative scores (i.e., better rankings) will come first. In case of a tie in scores, the lexicographical order of team characters (stored in the last position) will be used to break ties.
+4. **Store Team Character**
+	```cpp
+	    count[c - 'A'][26] = c;
+	```
+	Stores the character representing the team in the last column (index 26) of the 'count' array. This keeps track of the team character in the count table.
 
-6. **Building the Result**:
-   - The final loop constructs the result string `res` by appending the team characters in the order determined by the sorted `count` array.
+5. **Iterate Over Votes**
+	```cpp
+	    for(string& vote: votes)
+	```
+	The function iterates over all the votes to process each vote string.
 
-7. **Return Statement**:
-   - Finally, the method returns the constructed ranking string.
+6. **Iterate Over Each Vote**
+	```cpp
+	    for(int i = 0; i < vote.size(); i++)
+	```
+	For each vote string, this loop iterates over each position in the vote to update the corresponding team's score.
 
-### Complexity Analysis
-- **Time Complexity**:
-  - The time complexity of this algorithm is \(O(V + T \log T)\), where \(V\) is the total number of votes and \(T\) is the number of teams (which is fixed at 26). Sorting the teams dominates the complexity due to the sorting operation, but since \(T\) is a constant, this can be simplified to \(O(V)\) for practical input sizes.
-  
-- **Space Complexity**:
-  - The space complexity is \(O(1)\) in terms of extra space, as the size of the `count` array is constant (26 for teams). However, the space used to store the input (votes) can be considered \(O(V)\).
+7. **Update Team Score**
+	```cpp
+	    --count[vote[i] - 'A'][i];
+	```
+	For each team in the vote string, the corresponding team's score is decremented based on its position in the vote (lower positions have higher priority).
 
-### Conclusion
-The `rankTeams` function efficiently calculates the final rankings of teams based on voters' preferences using a systematic counting and sorting approach. By representing the rankings as negative scores and leveraging lexicographical ordering to resolve ties, the algorithm ensures accurate and fair rankings. This solution is particularly well-suited for scenarios involving ranked voting systems, providing a clear demonstration of using data structures like arrays and sorting algorithms in competitive programming.
+8. **Sort Teams**
+	```cpp
+	    sort(count.begin(), count.end());
+	```
+	The 'count' array is sorted based on the scores of the teams, placing the teams with the highest score first.
 
-This comprehensive breakdown elucidates the code's logic and performance, making it accessible for readers interested in understanding how to solve ranking problems in programming contests.
+9. **Initialize Result String**
+	```cpp
+	    string res;
+	```
+	A string 'res' is initialized to store the result of the ranked teams.
+
+10. **Construct Result String**
+	```cpp
+	    for(int i = 0; i < votes[0].length(); i++)
+	```
+	The function iterates over the length of the vote strings to construct the result string by adding teams in ranked order.
+
+11. **Add Ranked Team to Result**
+	```cpp
+	        res += count[i][26];
+	```
+	For each ranked team, its character (team) is appended to the result string 'res'.
+
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	The final ranked order of teams is returned as a string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, where n is the number of teams.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is linear in the number of teams, as we need to store counts for each team.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rank-teams-by-votes/description/)

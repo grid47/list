@@ -14,200 +14,281 @@ img_src = ""
 youtube = "hPe9Z3TiUrA"
 youtube_upload_date="2020-08-24"
 youtube_thumbnail="https://i.ytimg.com/vi/hPe9Z3TiUrA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You and two friends are given 3n piles of coins, and in each step, three piles are chosen. Alice always picks the pile with the most coins, you pick the second largest pile, and your friend Bob picks the remaining pile. Repeat this process until all piles are picked. Your goal is to maximize the total number of coins you can collect.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers, where each integer represents the number of coins in a pile. The length of the array is 3n, where n is a positive integer.
+- **Example:** `Input: piles = [1, 3, 2, 7, 5, 4, 6, 8, 9]`
+- **Constraints:**
+	- 3 <= piles.length <= 10^5
+	- piles.length % 3 == 0
+	- 1 <= piles[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxCoins(vector<int>& piles) {
-        int max = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of coins you can collect.
+- **Example:** `Output: 18`
+- **Constraints:**
 
-        int n = piles.size();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the coins you collect by strategically selecting piles in each round, ensuring you pick the second largest pile in each triplet.
 
-        for (int i : piles) {
+- Sort the piles in descending order to prioritize larger piles for Alice.
+- Pick the second largest pile for yourself in each triplet.
+- Repeat the process until all piles are picked, keeping track of your total.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always have a size that is a multiple of 3.
+- The number of coins in each pile is a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: piles = [1, 3, 2, 7, 5, 4, 6, 8, 9]`  \
+  **Explanation:** In this case, the optimal choices would be: (9, 8, 7), (6, 5, 4), and (3, 2, 1). You would get 8 + 6 = 14 coins.
 
-            if (max < i) max = i;
+- **Input:** `Example 2: piles = [1, 2, 3, 4, 5, 6]`  \
+  **Explanation:** In this case, the optimal choices would be: (6, 5, 4), (3, 2, 1). You would get 5 + 2 = 7 coins.
 
-        }
+{{< dots >}}
+## Approach 🚀
+The solution involves sorting the piles in descending order and picking the second largest pile in each triplet.
 
-        vector<int> freq(max + 1, 0);
+### Initial Thoughts 💭
+- Since Alice picks the largest pile in each triplet, the second largest pile will always be the optimal choice for you.
+- Sorting the array will help us easily select the largest, second largest, and smallest piles in each step.
+- Sorting the array is the key to ensuring we can maximize the coins we collect.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least three piles in the input, so no need to handle empty inputs.
+- For large inputs, ensure that the sorting operation does not cause time-limit issues. The time complexity of sorting is O(n log n), which should be efficient enough given the constraints.
+- If all piles have the same number of coins, the result will be the sum of every second pile in each triplet.
+- Ensure that the input size is divisible by 3, as per the problem constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxCoins(vector<int>& piles) {
+    int max = 0;
 
-        for (int i : piles) {
+    int n = piles.size();
 
-            freq[i]++;
+    for (int i : piles) {
 
-        }
+        if (max < i) max = i;
 
-        int coins = 0;
+    }
 
-        int chance = n / 3;
+    vector<int> freq(max + 1, 0);
 
-        int turn = 1;
+    for (int i : piles) {
 
-        int i = max;
+        freq[i]++;
 
-        while (chance != 0) {
+    }
 
-            if (freq[i] > 0) {
+    int coins = 0;
 
-                if (turn == 1) turn = 0;
+    int chance = n / 3;
 
-                else {
+    int turn = 1;
 
-                    chance--;
+    int i = max;
 
-                    turn = 1;
+    while (chance != 0) {
 
-                    coins += i;
+        if (freq[i] > 0) {
 
-                }
+            if (turn == 1) turn = 0;
 
-                freq[i]--;
+            else {
 
-            } else {
+                chance--;
 
-                i--;
+                turn = 1;
+
+                coins += i;
 
             }
 
+            freq[i]--;
+
+        } else {
+
+            i--;
+
         }
 
-        return coins;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-The problem involves a strategic game where players pick coins from piles to maximize their total coin collection. Given an array `piles`, where each element represents the number of coins in a pile, the goal is to determine the maximum number of coins one player can collect. The game follows these rules:
-1. Players can only take coins in rounds, and each player picks one pile during their turn.
-2. The player can only collect coins after every other player has taken their turn, meaning they can only take coins in every second turn of the game.
-3. The game continues until no more coins can be picked based on the total number of piles.
-
-The objective is to compute the maximum coins that the player can collect based on the distribution of coins across the piles.
-
-### Approach
-
-The solution employs a greedy strategy to maximize the number of coins collected by the player. The following steps outline the approach:
-
-1. **Find the Maximum Value**: Determine the maximum number of coins in any pile to set the range for frequency counting.
-
-2. **Frequency Count**: Create a frequency array that counts how many piles contain each possible number of coins.
-
-3. **Coin Collection Logic**: Use a loop to simulate the collection of coins:
-   - The player can only collect coins in every second turn.
-   - For each turn, check if the current maximum pile has coins available. If so, reduce its count and add its value to the player's total coins collected. 
-   - Adjust the turn counter and decrease the chance counter accordingly.
-
-4. **Return Result**: Once the player can no longer collect coins (when the `chance` counter reaches zero), return the total coins collected.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code, explaining each section:
-
-- **Class Declaration**:
-    The solution is encapsulated within a class named `Solution`.
-
-```cpp
-class Solution {
-public:
-```
-
-- **Function Definition**:
-    The `maxCoins` function is defined, taking a vector of integers (`piles`) as input and returning an integer representing the maximum coins collectible.
-
-```cpp
-int maxCoins(vector<int>& piles) {
-```
-
-- **Initialization**:
-    A variable `max` is initialized to zero, and the size of the `piles` vector (`n`) is determined.
-
-```cpp
-int max = 0;
-int n = piles.size();
-```
-
-- **Finding Maximum Value**:
-    A loop iterates through the `piles` vector to find the maximum number of coins in any pile.
-
-```cpp
-for (int i : piles) {
-    if (max < i) max = i;
+    return coins;
 }
 ```
 
-- **Frequency Array**:
-    A frequency array `freq` is created to count the occurrences of each coin count in the piles.
+This is the complete function `maxCoins`, which calculates the maximum number of coins that can be collected from the piles, adhering to the rules defined in the problem.
 
-```cpp
-vector<int> freq(max + 1, 0);
-for (int i : piles) {
-    freq[i]++;
-}
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxCoins(vector<int>& piles) {
+	```
+	This is the function declaration for `maxCoins`, which takes a vector of integers `piles` as input, representing the piles of coins.
 
-- **Coin Collection Variables**:
-    Initialize variables to keep track of the total coins collected (`coins`), the number of chances (`chance`), the turn indicator (`turn`), and an index `i` starting from the maximum value.
+2. **Variable Initialization**
+	```cpp
+	    int max = 0;
+	```
+	Here, we initialize the `max` variable to zero. This will be used to track the maximum value in the piles.
 
-```cpp
-int coins = 0;
-int chance = n / 3;
-int turn = 1;
-int i = max;
-```
+3. **Variable Initialization**
+	```cpp
+	    int n = piles.size();
+	```
+	We initialize `n` to the size of the `piles` vector, which represents the total number of piles.
 
-- **Coin Collection Loop**:
-    The main loop continues until there are no more chances to collect coins.
+4. **Loop Iteration**
+	```cpp
+	    for (int i : piles) {
+	```
+	This is the start of a for loop that iterates over each element `i` in the `piles` vector.
 
-```cpp
-while (chance != 0) {
-```
+5. **Condition Check**
+	```cpp
+	        if (max < i) max = i;
+	```
+	In this condition, we check if the current pile value `i` is greater than `max`, and if so, update `max`.
 
-- **Collecting Coins**:
-    Inside the loop, check if there are coins in the current maximum pile (`freq[i]`). If there are:
-    - Toggle the `turn` variable.
-    - If it’s the player’s turn (when `turn == 1`), skip to the next iteration. Otherwise, collect the coins, reduce the pile count, and decrease the `chance` counter.
+6. **Variable Initialization**
+	```cpp
+	    vector<int> freq(max + 1, 0);
+	```
+	We initialize a frequency vector `freq` of size `max + 1` with all elements set to zero. This will help us count the occurrences of each pile size.
 
-```cpp
-if (freq[i] > 0) {
-    if (turn == 1) turn = 0;
-    else {
-        chance--;
-        turn = 1;
-        coins += i;
-    }
-    freq[i]--;
-} else {
-    i--;
-}
-```
+7. **Loop Iteration**
+	```cpp
+	    for (int i : piles) {
+	```
+	This for loop iterates over each pile value `i` again to update the frequency count.
 
-- **Return Statement**:
-    Once the loop concludes (when `chance` reaches zero), the total coins collected is returned.
+8. **Variable Update**
+	```cpp
+	        freq[i]++;
+	```
+	Here, we increment the corresponding index in the `freq` vector to track the frequency of each pile size.
 
-```cpp
-return coins;
-}
-```
+9. **Variable Initialization**
+	```cpp
+	    int coins = 0;
+	```
+	We initialize `coins` to zero, which will store the total coins collected.
 
-### Complexity
+10. **Variable Initialization**
+	```cpp
+	    int chance = n / 3;
+	```
+	The `chance` variable is initialized to `n / 3`, which represents the number of chances the player has to pick coins.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n + m)\), where \(n\) is the number of piles and \(m\) is the maximum value of coins in any pile. The `O(n)` accounts for populating the frequency array, while `O(m)` accounts for iterating through possible pile values.
+11. **Variable Initialization**
+	```cpp
+	    int turn = 1;
+	```
+	We initialize `turn` to 1, which keeps track of whose turn it is. Player 1's turn is represented by 1.
 
-- **Space Complexity**: The space complexity is \(O(m)\) due to the frequency array used to count occurrences of coin counts.
+12. **Variable Initialization**
+	```cpp
+	    int i = max;
+	```
+	The variable `i` is initialized to the value of `max`, which will be used to traverse the piles starting from the largest pile.
 
-### Conclusion
+13. **Loop Iteration**
+	```cpp
+	    while (chance != 0) {
+	```
+	This while loop continues until the number of chances (`chance`) is zero.
 
-The `maxCoins` function offers an efficient solution to the problem of maximizing coin collection from piles. By employing a greedy algorithm, the function effectively calculates the optimal strategy for selecting coins while adhering to the game’s turn rules. The combination of frequency counting and controlled collection simulates the strategic choices that a player would make in such a game.
+14. **Condition Check**
+	```cpp
+	        if (freq[i] > 0) {
+	```
+	If there are piles of size `i` remaining, we proceed with the selection process.
 
-Understanding this solution can enhance one’s algorithmic skills, particularly in the areas of greedy strategies and array manipulations. This approach serves as a reference for tackling similar problems involving optimization in competitive programming scenarios, showcasing how to efficiently navigate through a collection of items to achieve the best outcome. The algorithm's clarity and performance make it an excellent choice for developers looking to implement coin collection strategies or similar game mechanics in their applications.
+15. **Condition Check**
+	```cpp
+	            if (turn == 1) turn = 0;
+	```
+	If it's Player 1's turn, we switch to Player 2's turn by setting `turn` to 0.
+
+16. **Condition Check**
+	```cpp
+	            else {
+	```
+	If it's Player 2's turn, we process the turn and reduce the `chance` by one.
+
+17. **Variable Update**
+	```cpp
+	                chance--;
+	```
+	Decrement the `chance` by 1, indicating that one chance has been used.
+
+18. **Variable Update**
+	```cpp
+	                turn = 1;
+	```
+	Switch back to Player 1's turn by setting `turn` to 1.
+
+19. **Variable Update**
+	```cpp
+	                coins += i;
+	```
+	Add the current pile size `i` to the total `coins` collected.
+
+20. **Variable Update**
+	```cpp
+	            freq[i]--;
+	```
+	Decrement the frequency of the pile size `i`, as it has been used.
+
+21. **Else Block**
+	```cpp
+	        } else {
+	```
+	If no piles of size `i` are remaining, we decrement `i` to try the next smaller pile.
+
+22. **Variable Update**
+	```cpp
+	            i--;
+	```
+	Decrement `i` to try the next smaller pile.
+
+23. **Return Statement**
+	```cpp
+	    return coins;
+	```
+	Finally, we return the total number of `coins` collected by the players.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The sorting operation dominates the time complexity, making it O(n log n) in all cases.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the sorted array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-coins-you-can-get/description/)
 

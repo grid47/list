@@ -14,123 +14,156 @@ img_src = ""
 youtube = "JykfDvn2o0M"
 youtube_upload_date="2022-09-11"
 youtube_thumbnail="https://i.ytimg.com/vi/JykfDvn2o0M/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums`. Your task is to return the most frequent even element in the array. If there is a tie (i.e., multiple even elements appear the most number of times), return the smallest one. If there is no even element, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `nums` containing elements from 0 to 100,000.
+- **Example:** `nums = [1, 3, 5, 2, 4, 4, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 2000
+	- 0 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mostFrequentEven(vector<int>& nums) {
-        map<int, int> mp;
-        for(auto n: nums) mp[n]++;
-        int ans = -1, mx = -1;
-        for(auto m: mp){
-            if(m.first%2 == 0 && m.second > mx){
-                mx = m.second;
-                ans = m.first;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the most frequent even element in the array. If no even element exists, return -1.
+- **Example:** `Output: 4`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the most frequent even element, and in case of a tie, return the smallest one.
+
+- 1. Create a map (hash table) to count the frequency of each element in the array.
+- 2. Loop through the map and identify the most frequent even element.
+- 3. If there is a tie in frequency, select the smallest element.
+- 4. If no even element is found, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is valid and consists only of non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [0, 1, 2, 2, 4, 4, 1]`  \
+  **Explanation:** The even elements in the array are 0, 2, and 4. Both 2 and 4 appear the most times, but since 2 is smaller, it is returned.
+
+- **Input:** `nums = [3, 5, 7, 9]`  \
+  **Explanation:** There are no even elements in the array, so the result is -1.
+
+- **Input:** `nums = [4, 4, 4, 9, 2, 4]`  \
+  **Explanation:** The even element 4 appears most frequently, so it is returned.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a hash map to count the frequency of each element in the array and then determine the most frequent even element.
+
+### Initial Thoughts 💭
+- We can iterate over the array to count the occurrences of each element.
+- We need to check if the element is even and then compare its frequency to keep track of the most frequent even element.
+- Efficiently counting frequencies using a hash map and checking conditions will help us solve the problem in linear time.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not have an empty input case as the array length is guaranteed to be at least 1.
+- The solution should efficiently handle arrays with sizes up to 2000 and elements in the range of 0 to 100,000.
+- If no even element exists in the array, return -1.
+- The solution must be efficient with a time complexity of O(n) due to the array's potential size.
+{{< dots >}}
+## Code 💻
+```cpp
+int mostFrequentEven(vector<int>& nums) {
+    map<int, int> mp;
+    for(auto n: nums) mp[n]++;
+    int ans = -1, mx = -1;
+    for(auto m: mp){
+        if(m.first%2 == 0 && m.second > mx){
+            mx = m.second;
+            ans = m.first;
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an array `nums` of integers, the goal is to return the most frequent even number in the array. If there are multiple even numbers with the same highest frequency, return the smallest one. If there are no even numbers, return `-1`.
-
-### Approach
-
-The solution involves two key steps:
-
-1. **Counting the Frequency of Each Number**: We need to first determine the frequency of each number in the array.
-2. **Identifying the Most Frequent Even Number**: After counting the frequencies, we then need to identify which even number appears the most frequently, and if there is a tie, return the smallest such number.
-
-#### Key Concepts:
-- **Map (HashMap)**: A map (or hash map) allows us to store the frequency of each number efficiently. By iterating over the input list and updating the map, we can track how many times each number appears in the array.
-- **Even Numbers**: We are only interested in even numbers, so we filter out odd numbers during our frequency comparison.
-- **Comparison Logic**: We need to determine the most frequent even number, and if multiple numbers have the same frequency, we return the smallest one.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Map to Count Frequencies
-
-```cpp
-map<int, int> mp;
-for(auto n: nums) mp[n]++;
-```
-
-- **map<int, int> mp**: We use a `map` to store the frequency of each number in the array. The key is the number from the array, and the value is the frequency (count of occurrences of that number).
-  
-- **for(auto n: nums)**: This loop iterates over every number `n` in the array `nums`. For each number, we update the map `mp[n]` by incrementing its frequency count (`mp[n]++`).
-
-#### Step 2: Initialize Variables for Tracking the Result
-
-```cpp
-int ans = -1, mx = -1;
-```
-
-- **ans**: This variable will store the result, i.e., the most frequent even number. We initialize it to `-1`, which represents the case where no even number is found.
-  
-- **mx**: This variable keeps track of the maximum frequency encountered so far. Initially, it is set to `-1`, since we haven't encountered any numbers yet.
-
-#### Step 3: Find the Most Frequent Even Number
-
-```cpp
-for(auto m: mp){
-    if(m.first % 2 == 0 && m.second > mx){
-        mx = m.second;
-        ans = m.first;
-    }
+    return ans;
 }
 ```
 
-- **for(auto m: mp)**: This loop iterates over each entry in the map `mp`, where `m.first` is the number and `m.second` is its frequency.
-  
-- **if(m.first % 2 == 0 && m.second > mx)**: We only care about even numbers, so we check if the number (`m.first`) is even using the condition `m.first % 2 == 0`. Additionally, we check if the frequency of the current number (`m.second`) is greater than the current maximum frequency `mx`. If both conditions are satisfied:
-  - We update `mx` to the new higher frequency (`m.second`).
-  - We update `ans` to the current number (`m.first`), since it has the highest frequency.
+This function finds the most frequent even number in a given list of integers `nums`. It returns -1 if no even number is found.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int mostFrequentEven(vector<int>& nums) {
+	```
+	This is the function signature for `mostFrequentEven`, which takes a reference to a vector of integers `nums`.
 
-```cpp
-return ans;
-```
+2. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initialize a map `mp` where the key is an integer from the array, and the value is its frequency of occurrence.
 
-- Once the loop finishes, we return the value of `ans`, which contains the most frequent even number. If no even numbers were found, `ans` will remain `-1`.
+3. **Frequency Counting**
+	```cpp
+	    for(auto n: nums) mp[n]++;
+	```
+	Iterate through the `nums` array, counting the frequency of each number and storing it in the map `mp`.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int ans = -1, mx = -1;
+	```
+	Initialize variables `ans` to store the answer (set to -1 initially), and `mx` to track the maximum frequency of any number (also set to -1).
 
-#### Time Complexity:
-- **Counting Frequencies**: We iterate over each element in the `nums` array once. This takes **O(n)** time, where `n` is the length of the array.
-  
-- **Iterating Over the Map**: After constructing the map, we iterate over the entries in the map. In the worst case, the map will have as many entries as the number of unique numbers in the input array. This step takes **O(k)** time, where `k` is the number of unique numbers in the array.
+5. **Loop Through Map**
+	```cpp
+	    for(auto m: mp){
+	```
+	Loop through each key-value pair in the map `mp`, where `m.first` is the number and `m.second` is its frequency.
 
-Thus, the overall time complexity of the algorithm is **O(n + k)**, where:
-- `n` is the size of the input array (`nums`),
-- `k` is the number of unique numbers in `nums`.
+6. **Condition Check for Even Numbers**
+	```cpp
+	        if(m.first%2 == 0 && m.second > mx){
+	```
+	Check if the number is even (`m.first % 2 == 0`) and if its frequency `m.second` is greater than the current maximum frequency `mx`.
 
-#### Space Complexity:
-- **Map Storage**: The map stores the frequency of each number in the array. In the worst case, the map could store every number as a unique key, which requires **O(k)** space, where `k` is the number of unique numbers in the array.
-  
-Thus, the space complexity is **O(k)**.
+7. **Update Maximum Frequency**
+	```cpp
+	            mx = m.second;
+	```
+	Update the maximum frequency `mx` to the frequency of the current even number.
 
-### Conclusion
+8. **Update Answer**
+	```cpp
+	            ans = m.first;
+	```
+	Update the answer `ans` to the current even number `m.first` with the highest frequency.
 
-This solution efficiently finds the most frequent even number in an array using a map to store frequency counts and a linear scan to identify the most frequent even number. The approach ensures that we:
-- Handle arrays of any size,
-- Correctly identify even numbers and return the smallest one in case of ties,
-- Handle edge cases such as arrays with no even numbers.
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the answer `ans`, which is the most frequent even number or -1 if no such number exists.
 
-Key Takeaways:
-- Using a map to track frequency is an efficient way to solve problems involving frequency counts.
-- We efficiently filter out odd numbers by checking the condition `m.first % 2 == 0`.
-- The solution's time and space complexities are optimal for the problem, ensuring that it scales well with the input size.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array, since we only need to pass through the array once and then through the map.
+- **Average Case:** O(n), as we still process each element in the array once and use the map in linear time.
+- **Worst Case:** O(n), as both counting frequencies and comparing map entries are linear operations.
+
+The solution runs in linear time, making it optimal for this problem.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if there are no even elements or only one unique element in the array.
+- **Worst Case:** O(n), as we store the frequency of each unique element in the array in a hash map.
+
+The space complexity is linear, as we store the frequencies of the elements in a hash map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-frequent-even-element/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,133 +28,159 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a 2 x n grid and two types of tiles: a 2 x 1 domino and a tromino (which can be rotated). You must cover the grid entirely with these tiles. The task is to find the number of possible ways to tile the 2 x n board, modulo 10^9 + 7. Each tile must cover exactly two adjacent squares, and every square must be covered by a tile.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a single integer n, representing the length of the grid.
+- **Example:** `n = 4`
+- **Constraints:**
+	- 1 <= n <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numTilings(int n) {
-        int mod = 1e9 + 7;
-        vector<long long> v(10001, 0);
-        v[1] = 1;
-        v[2] = 2;
-        v[3] = 5;
-        if(n <= 3) return v[n];
-        for(int i = 4; i <= n; i++) {
-            v[i]  = (2 * v[i-1] + v[i-3]);
-            v[i] %= mod;
-        }
-        return v[n];
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of ways to tile the 2 x n grid, modulo 10^9 + 7.
+- **Example:** `Output: 11`
+- **Constraints:**
+	- The output should be returned as a single integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the number of ways to tile a 2 x n grid with dominos and trominos, use dynamic programming to compute the number of ways for each grid size up to n.
 
-The problem at hand is to calculate the number of ways to tile a `2 x n` grid using dominoes (2x1 tiles) and trominoes (2x2 tiles). The solution must return the result modulo `10^9 + 7`. This problem is a variation of the famous "domino tiling problem" and requires the computation of different ways to tile the grid based on the size of `n`.
+- Initialize a dynamic programming array where dp[i] stores the number of ways to tile a 2 x i grid.
+- Base cases: dp[1] = 1, dp[2] = 2, dp[3] = 5.
+- For each i from 4 to n, calculate dp[i] as (2 * dp[i-1] + dp[i-3]) % mod.
+- Return dp[n].
+{{< dots >}}
+### Problem Assumptions ✅
+- The input n is always valid, and there are no constraints on the arrangement of the tiles other than that they must fill the grid completely.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 3`  \
+  **Explanation:** The number of ways to tile a 2 x 3 grid is 5. The five different ways are achieved by combining 2 x 1 dominoes and 2 x 2 trominos in different configurations.
 
-Given `n`, the number of columns in the grid, we are tasked with determining the number of ways to fill the entire grid with dominoes and trominoes, under the constraint that the grid dimensions are `2 x n`.
+- **Input:** `Input: n = 1`  \
+  **Explanation:** There is only one way to tile a 2 x 1 grid, using one 2 x 1 domino. Hence, the output is 1.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We can approach this problem using dynamic programming by building the solution iteratively from smaller subproblems.
 
-The problem is a classical dynamic programming problem. To break it down efficiently, we observe a pattern in the number of ways to tile grids of different sizes. Let's define a function `dp(n)` that represents the number of ways to tile a `2 x n` grid.
-
-We can approach this problem by considering the following:
-
-1. **Base Cases**:
-   - A `2 x 1` grid can only be tiled in one way (using a single domino). Thus, `dp(1) = 1`.
-   - A `2 x 2` grid can be tiled in two ways: two dominoes (vertically) or one tromino. Thus, `dp(2) = 2`.
-   - A `2 x 3` grid can be tiled in five ways, using combinations of dominoes and trominoes. Thus, `dp(3) = 5`.
-
-2. **Recursive Formula**:
-   For `n > 3`, we can deduce that:
-   - You can always add a vertical domino to a `2 x (n-1)` grid.
-   - Alternatively, you can add two horizontal dominoes to a `2 x (n-2)` grid.
-   - You can also add a tromino (which covers a `2 x 2` area) to a `2 x (n-3)` grid.
-
-   This leads to the recursive relation:
-   \[
-   dp(n) = 2 \times dp(n-1) + dp(n-3)
-   \]
-   The reasoning behind this formula is:
-   - The term `2 \times dp(n-1)` accounts for placing a vertical domino and then solving the problem for a grid of size `2 x (n-1)`.
-   - The term `dp(n-3)` corresponds to placing a tromino and solving the problem for a grid of size `2 x (n-3)`.
-
-3. **Modulo Operation**:
-   Since the result can grow very large, we compute the result modulo `10^9 + 7` to prevent integer overflow and ensure the result fits within standard integer limits.
-
-### Code Breakdown (Step by Step)
-
-Let's walk through the code line by line to understand how the dynamic programming approach is implemented:
-
+### Initial Thoughts 💭
+- The problem can be solved efficiently using dynamic programming, where the solution to a problem depends on solutions to smaller subproblems.
+- The key observation is that the number of ways to tile a 2 x n grid can be computed using the number of ways to tile smaller grids, leveraging previously computed results.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as the input is guaranteed to be a positive integer.
+- For large inputs up to n = 1000, the solution should efficiently compute the number of ways using dynamic programming.
+- For n = 1 and n = 2, the number of ways to tile the grid is very small (1 and 2 respectively).
+- Ensure that all calculations are done modulo 10^9 + 7 to avoid overflow.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int numTilings(int n) {
-        int mod = 1e9 + 7;  // Define the modulus for large number handling
-        vector<long long> v(10001, 0);  // Create a vector to store the DP values, initialized to 0
-        v[1] = 1;  // Base case: 1 way to tile a 2x1 grid
-        v[2] = 2;  // Base case: 2 ways to tile a 2x2 grid
-        v[3] = 5;  // Base case: 5 ways to tile a 2x3 grid
-        if(n <= 3) return v[n];  // If n is 3 or less, directly return the precomputed value
-        for(int i = 4; i <= n; i++) {  // Loop to fill the DP table for values n >= 4
-            v[i] = (2 * v[i-1] + v[i-3]);  // Apply the recurrence relation
-            v[i] %= mod;  // Take the result modulo 10^9 + 7 to prevent overflow
-        }
-        return v[n];  // Return the result for dp(n)
+int numTilings(int n) {
+    int mod = 1e9 + 7;
+    vector<long long> v(10001, 0);
+    v[1] = 1;
+    v[2] = 2;
+    v[3] = 5;
+    if(n <= 3) return v[n];
+    for(int i = 4; i <= n; i++) {
+        v[i]  = (2 * v[i-1] + v[i-3]);
+        v[i] %= mod;
     }
-};
+    return v[n];
+}
 ```
 
-### Explanation of the Code
+This function calculates the number of ways to tile a 2xN grid using 1x2 dominoes and 2x1 dominoes. The result is computed using dynamic programming and is taken modulo 1e9 + 7.
 
-1. **Initialization**:
-   - We define a large modulus value `mod = 1e9 + 7` to handle large results and prevent overflow.
-   - We initialize a vector `v` of size 10001 (which covers all possible values of `n` up to the maximum value of `n = 10000`). This vector is used to store the computed results for each `n`. It is initialized with all zeros.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numTilings(int n) {
+	```
+	The function 'numTilings' is defined with a parameter 'n', representing the length of the grid.
 
-2. **Base Case Setup**:
-   - `v[1] = 1`: There is only one way to tile a `2 x 1` grid.
-   - `v[2] = 2`: There are two ways to tile a `2 x 2` grid (either two vertical dominoes or one tromino).
-   - `v[3] = 5`: There are five ways to tile a `2 x 3` grid.
+2. **Modulo Definition**
+	```cpp
+	    int mod = 1e9 + 7;
+	```
+	This line defines the modulus 'mod' as 1e9 + 7 to prevent integer overflow and ensure the result is within manageable limits.
 
-3. **Handling Small Values of `n`**:
-   - If `n` is 1, 2, or 3, the function immediately returns the precomputed value from the `v` vector.
+3. **Array Initialization**
+	```cpp
+	    vector<long long> v(10001, 0);
+	```
+	A vector 'v' of size 10001 is initialized with all values set to 0. This vector will store the number of ways to tile grids of different lengths.
 
-4. **Iterative Calculation**:
-   - The loop iterates from `i = 4` to `n`, applying the recurrence relation for each `i`:
-   \[
-   dp(i) = 2 \times dp(i-1) + dp(i-3)
-   \]
-   - The result is taken modulo `10^9 + 7` after each calculation to prevent the value from growing too large.
+4. **Base Cases**
+	```cpp
+	    v[1] = 1;
+	```
+	The base case: there is one way to tile a 2x1 grid (using a single vertical domino).
 
-5. **Final Result**:
-   - After the loop completes, the value `v[n]` contains the number of ways to tile a `2 x n` grid, which is then returned.
+5. **Base Cases**
+	```cpp
+	    v[2] = 2;
+	```
+	The base case: there are two ways to tile a 2x2 grid (using two vertical dominoes or two horizontal dominoes).
 
-### Complexity Analysis
+6. **Base Cases**
+	```cpp
+	    v[3] = 5;
+	```
+	The base case: there are five ways to tile a 2x3 grid. This is derived from the problem constraints.
 
-- **Time Complexity**:
-  The time complexity of this solution is **O(n)**, where `n` is the input value. The loop iterates from `i = 4` to `n`, and each iteration performs constant-time operations: the recurrence calculation and modulo operation.
+7. **Early Return for Small n**
+	```cpp
+	    if(n <= 3) return v[n];
+	```
+	If 'n' is less than or equal to 3, the function returns the precomputed result from the base cases.
 
-  Thus, the overall time complexity is linear in terms of `n`, i.e., **O(n)**.
+8. **Dynamic Programming Loop**
+	```cpp
+	    for(int i = 4; i <= n; i++) {
+	```
+	A loop starts from 4 up to 'n' to calculate the number of ways to tile grids of size 2x4, 2x5, etc., using the recurrence relation.
 
-- **Space Complexity**:
-  The space complexity is **O(n)** because the solution uses a vector `v` of size `n` to store the results of the dynamic programming computation. Since the size of `n` is constrained by the problem, this space usage is efficient.
+9. **Recurrence Relation**
+	```cpp
+	        v[i]  = (2 * v[i-1] + v[i-3]);
+	```
+	The number of ways to tile a 2x' i' grid is calculated using the recurrence relation: v[i] = 2 * v[i-1] + v[i-3]. This accounts for different ways of filling the grid using smaller grids.
 
-### Conclusion
+10. **Modulo Operation**
+	```cpp
+	        v[i] %= mod;
+	```
+	The result is taken modulo 1e9 + 7 to prevent overflow and ensure it fits within the constraints.
 
-This solution provides an efficient and elegant way to solve the tiling problem using dynamic programming. By leveraging a recurrence relation and storing intermediate results, we can compute the number of ways to tile a `2 x n` grid in linear time. The space complexity is also linear, making this solution both time-efficient and space-efficient.
+11. **Return Result**
+	```cpp
+	    return v[n];
+	```
+	Finally, the function returns the precomputed result for a grid of size 2xN.
 
-- **Key Takeaways**:
-  - The solution uses dynamic programming to build up the number of ways to tile grids of increasing size.
-  - The recurrence relation is based on adding vertical dominoes, horizontal dominoes, and trominoes to smaller subproblems.
-  - The result is computed modulo `10^9 + 7` to handle large values and prevent overflow.
-  
-- **Efficiency**:
-  - **Time Complexity**: O(n), where `n` is the size of the grid.
-  - **Space Complexity**: O(n), storing intermediate results.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the grid.
+- **Average Case:** O(n), since we calculate dp[i] for each i from 1 to n.
+- **Worst Case:** O(n), where n is the maximum value of 1000.
 
-This solution is optimal for the problem and works efficiently within the given constraints.
+The time complexity is linear, as we only need to compute the result for each value of i from 1 to n once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if the solution is optimized to use constant space.
+- **Worst Case:** O(n), where n is the size of the grid, since we store the number of ways to tile each grid size in the dynamic programming array.
+
+The space complexity is linear, as we store the result for each grid size up to n.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/domino-and-tromino-tiling/description/)
 

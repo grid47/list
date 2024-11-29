@@ -14,113 +14,165 @@ img_src = ""
 youtube = "TZFQMCeNEho"
 youtube_upload_date="2023-10-15"
 youtube_thumbnail="https://i.ytimg.com/vi/TZFQMCeNEho/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums of size n, an integer indexDifference, and an integer valueDifference. Your task is to find two indices i and j that satisfy the following conditions:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findIndices(vector<int>& nums, int idif, int vdif) {
+- abs(i - j) >= indexDifference,
+- abs(nums[i] - nums[j]) >= valueDifference.
 
-        int mn = 0, mx = 0;
-        for (int i = idif, j = 0; i < nums.size(); ++i, ++j) {
-            mn = nums[mn] < nums[j] ? mn : j;
-            mx = nums[mx] > nums[j] ? mx : j;
-            if (abs(nums[i] - nums[mn]) >= vdif)
-                return {mn, i};
-            if (abs(nums[i] - nums[mx]) >= vdif)
-                return {mx, i};
-        }
-        return {-1, -1};        
-        
+Return the indices [i, j] if such a pair exists, or [-1, -1] if no such pair exists. If there are multiple pairs, any valid pair is acceptable.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array nums, a positive integer indexDifference, and a positive integer valueDifference.
+- **Example:** `nums = [7, 3, 8, 2], indexDifference = 2, valueDifference = 4`
+- **Constraints:**
+	- 1 <= n == nums.length <= 10^5
+	- 0 <= nums[i] <= 10^9
+	- 0 <= indexDifference <= 10^5
+	- 0 <= valueDifference <= 10^9
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a two-element array [i, j] if there are indices i and j that satisfy the conditions. If no such pair exists, return [-1, -1].
+- **Example:** `[0, 3]`
+- **Constraints:**
+	- The answer should contain two indices, either valid or [-1, -1].
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find indices i and j such that the absolute differences between their indices and values meet the specified conditions.
+
+- 1. Iterate through the array with two pointers (i and j).
+- 2. Check if the difference between the indices and the values meets the criteria.
+- 3. Return the valid indices as soon as found, otherwise return [-1, -1].
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be a valid array with non-negative integers.
+- Both indexDifference and valueDifference are non-negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [7, 3, 8, 2], indexDifference = 2, valueDifference = 4`  \
+  **Explanation:** The pair (0, 3) satisfies abs(i - j) >= 2 and abs(nums[i] - nums[j]) >= 4, hence the valid pair is [0, 3].
+
+{{< dots >}}
+## Approach 🚀
+The problem can be approached by iterating through the array with two pointers, keeping track of the indices that satisfy the difference conditions.
+
+### Initial Thoughts 💭
+- We need to check if both the index difference and value difference conditions are met.
+- It’s crucial to maintain two pointers to check for the conditions efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- Input arrays of size 1.
+- Input arrays of size 10^5.
+- IndexDifference or ValueDifference being 0.
+- Both nums[i] and indexDifference can have very large values.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> findIndices(vector<int>& nums, int idif, int vdif) {
+
+    int mn = 0, mx = 0;
+    for (int i = idif, j = 0; i < nums.size(); ++i, ++j) {
+        mn = nums[mn] < nums[j] ? mn : j;
+        mx = nums[mx] > nums[j] ? mx : j;
+        if (abs(nums[i] - nums[mn]) >= vdif)
+            return {mn, i};
+        if (abs(nums[i] - nums[mx]) >= vdif)
+            return {mx, i};
     }
-};
-{{< /highlight >}}
----
-
-The given code is designed to find two indices in an array `nums` such that the absolute difference between the values at these indices is greater than or equal to a given value `vdif`. The function takes an array `nums`, and two integers `idif` and `vdif`. It returns a pair of indices of the array, such that the values at those indices differ by at least `vdif`. If no such pair exists, it returns `{-1, -1}`.
-
-### Problem Statement
-
-The problem requires us to find two indices `i` and `j` in the array `nums` such that:
-- `i` is greater than or equal to `idif` (starting index).
-- The absolute difference between `nums[i]` and `nums[j]` is greater than or equal to a given threshold value `vdif`.
-- The goal is to return the pair of indices `[i, j]`, where `i` is smaller than `j`. If no such pair exists, return `{-1, -1}`.
-
-### Approach
-
-To solve this problem efficiently, we can use a greedy approach combined with tracking the minimum and maximum values in the array from the given starting index (`idif`). The logic is as follows:
-
-1. **Greedy Search for Pair**: 
-   - Traverse the array starting from index `idif`. For each element at index `i`, we look for the smallest (`mn`) and largest (`mx`) elements in the array before the current index. These elements represent potential candidates for forming a valid pair with the current element `nums[i]`.
-   - If the absolute difference between the current element `nums[i]` and the minimum element `nums[mn]` or the maximum element `nums[mx]` is greater than or equal to `vdif`, we return the indices of that pair. 
-   
-2. **Tracking Min and Max**:
-   - Use two variables `mn` and `mx` to track the indices of the minimum and maximum values seen so far. These will help efficiently check if a valid pair exists with the current element.
-
-3. **Return Result**: 
-   - As we iterate through the array, we keep checking if any valid pair satisfies the condition `abs(nums[i] - nums[mn]) >= vdif` or `abs(nums[i] - nums[mx]) >= vdif`.
-   - If we find such a pair, we return the indices. If no such pair is found after iterating through the array, we return `{-1, -1}`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int mn = 0, mx = 0;
+    return {-1, -1};        
+    
+}
 ```
-- We initialize `mn` (minimum index) and `mx` (maximum index) to 0, which are the initial candidates for the smallest and largest values.
 
-#### Step 2: Iterate Over the Array
+This function finds and returns the indices of two elements in the vector `nums` such that the difference between them is at least `vdif`. The starting index for the search is provided by `idif`.
 
-```cpp
-for (int i = idif, j = 0; i < nums.size(); ++i, ++j)
-```
-- Start iterating from index `idif`. The variable `j` is used to compare the current element `nums[i]` with the elements before it.
-  
-#### Step 3: Update Minimum and Maximum Indices
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findIndices(vector<int>& nums, int idif, int vdif) {
+	```
+	Defines the function `findIndices` which takes a vector `nums`, an index `idif`, and a difference value `vdif`, and returns a pair of indices where the absolute difference between the values at those indices is at least `vdif`.
 
-```cpp
-mn = nums[mn] < nums[j] ? mn : j;
-mx = nums[mx] > nums[j] ? mx : j;
-```
-- For each iteration, we update the `mn` and `mx` indices by comparing the values at `nums[mn]`, `nums[mx]`, and the current element `nums[j]`.
-- `mn` is updated to the index of the minimum value and `mx` is updated to the index of the maximum value.
+2. **Variable Initialization**
+	```cpp
+	    int mn = 0, mx = 0;
+	```
+	Initializes two integer variables `mn` and `mx` to store the indices of the minimum and maximum values in the window being examined.
 
-#### Step 4: Check Difference Conditions
+3. **Loop Initialization**
+	```cpp
+	    for (int i = idif, j = 0; i < nums.size(); ++i, ++j) {
+	```
+	Starts a loop to iterate through the `nums` vector, with `i` as the index starting from `idif`, and `j` as the index of the current element in the window.
 
-```cpp
-if (abs(nums[i] - nums[mn]) >= vdif)
-    return {mn, i};
-if (abs(nums[i] - nums[mx]) >= vdif)
-    return {mx, i};
-```
-- After updating the minimum and maximum indices, we check if the absolute difference between the current element `nums[i]` and the values at `nums[mn]` or `nums[mx]` is greater than or equal to `vdif`.
-- If this condition holds true, we return the pair of indices `{mn, i}` or `{mx, i}`.
+4. **Compare Min**
+	```cpp
+	        mn = nums[mn] < nums[j] ? mn : j;
+	```
+	Updates the `mn` variable to the index of the smaller value between the current `mn` and `j`. This tracks the minimum value in the window.
 
-#### Step 5: Return No Pair Found
+5. **Compare Max**
+	```cpp
+	        mx = nums[mx] > nums[j] ? mx : j;
+	```
+	Updates the `mx` variable to the index of the larger value between the current `mx` and `j`. This tracks the maximum value in the window.
 
-```cpp
-return {-1, -1};
-```
-- If no pair of indices meets the condition throughout the loop, we return `{-1, -1}`, indicating that no such pair exists.
+6. **Condition Check for Min**
+	```cpp
+	        if (abs(nums[i] - nums[mn]) >= vdif)
+	```
+	Checks if the absolute difference between the current element `nums[i]` and the minimum value `nums[mn]` is greater than or equal to `vdif`.
 
-### Complexity
+7. **Return Indices for Min**
+	```cpp
+	            return {mn, i};
+	```
+	If the condition is true, returns the indices of the minimum value and the current index `i`.
 
-#### Time Complexity:
-- The time complexity of the solution is `O(n)`, where `n` is the length of the input array `nums`. 
-  - This is because we only iterate through the array once, and each comparison operation (updating `mn`, `mx`, and checking conditions) takes constant time.
+8. **Condition Check for Max**
+	```cpp
+	        if (abs(nums[i] - nums[mx]) >= vdif)
+	```
+	Checks if the absolute difference between the current element `nums[i]` and the maximum value `nums[mx]` is greater than or equal to `vdif`.
 
-#### Space Complexity:
-- The space complexity is `O(1)`, as we are only using a few integer variables (`mn`, `mx`, `i`, `j`) for tracking purposes. We do not use any additional data structures that depend on the input size.
+9. **Return Indices for Max**
+	```cpp
+	            return {mx, i};
+	```
+	If the condition is true, returns the indices of the maximum value and the current index `i`.
 
-### Conclusion
+10. **Return Default Indices**
+	```cpp
+	    return {-1, -1};        
+	```
+	If no valid pair of indices is found, returns `{-1, -1}` to indicate no solution.
 
-The provided solution is efficient and optimal for the problem at hand. By using a greedy approach that tracks the minimum and maximum values dynamically, the algorithm can quickly identify a valid pair of indices where the absolute difference between the elements is greater than or equal to the given threshold `vdif`. The solution runs in linear time, making it suitable for large inputs. It also operates with constant space complexity, which further optimizes memory usage.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We iterate through the array once, so the time complexity is O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+We use a constant amount of space to store variables for tracking the indices.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-indices-with-index-and-value-difference-ii/description/)
 

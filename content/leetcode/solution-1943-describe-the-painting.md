@@ -14,163 +14,225 @@ img_src = ""
 youtube = "inJXN48LgPo"
 youtube_upload_date="2021-07-24"
 youtube_thumbnail="https://i.ytimg.com/vi/inJXN48LgPo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a painting represented by a number line. Multiple overlapping segments are painted with different colors. Your task is to return a minimal set of non-overlapping painted segments, where each segment represents a portion of the painting with a unique set of mixed colors. Each segment should be represented by the sum of the colors in the mixed sets.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of segments, where each segment is represented by [start, end, color]. Each segment is half-closed, meaning it includes the start value and excludes the end value. The color is a positive integer.
+- **Example:** `segments = [[1,5,5], [4,7,7], [1,7,9]]`
+- **Constraints:**
+	- 1 <= segments.length <= 2 * 10^4
+	- segments[i].length == 3
+	- 1 <= start_i < end_i <= 10^5
+	- 1 <= color_i <= 10^9
+	- Each color_i is distinct.
 
-{{< highlight cpp >}}
-class Solution {
-    typedef long long ll;
-public:
-    vector<vector<long long>> splitPainting(vector<vector<int>>& segs) {
-        
-       // sort(seg.begin(), seg.end());
-        
-        map<ll, ll> mp;
-        
-        
-        vector<vector<ll>> res;
-        int n = segs.size();
-        for(vector<int> seg : segs) {
-            mp[seg[0]] += seg[2];
-            mp[seg[1]] -= seg[2];
-            
-            
-            }
-        
-        ll prv = -1, clr = 0;
-        for(auto & itr : mp) {
-            
-            if(clr )
-                res.push_back({prv, itr.first, clr});
-            clr += itr.second;
-            prv = itr.first;
-            
-            }
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an array of non-overlapping segments represented by [left, right, mixed_color_sum], where mixed_color_sum is the sum of the colors in the mixed set of that segment.
+- **Example:** `Output: [[1, 4, 14], [4, 7, 16]]`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To merge overlapping segments and compute the sum of mixed colors for each non-overlapping segment.
 
-The problem at hand involves painting segments on a number line where each segment has a specific color value associated with it. The goal is to determine the resulting painted segments after combining overlapping segments, accounting for their color values. Each segment is defined by its start point, end point, and the color value, and the output should provide the distinct painted segments with their respective color values.
+- Sort the segments by their starting position.
+- Use a map to track the color sum at each position of the painting.
+- Iterate through the segments and update the color sums in the map.
+- After processing all segments, extract the non-overlapping segments and their respective color sums.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input segments are valid and the color values are distinct.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `segments = [[1,7,9], [6,8,15], [8,10,7]]`  \
+  **Explanation:** In this example, the first segment paints [1, 7) with color 9, the second segment paints [6, 8) with color 15, and the third paints [8, 10) with color 7. The resulting segments are [1, 6) with color 9, [6, 7) with mixed colors 9 and 15 (sum = 24), [7, 8) with color 15, and [8, 10) with color 7.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by sorting the segments and using a map to track the color sums at each position of the number line.
 
-To solve this problem, we utilize a **sweep line algorithm** combined with a **map** to efficiently track color contributions at each point on the number line. Here’s a breakdown of the approach:
-
-1. **Event Point Representation**: For each segment, we represent the start and end points as events in a map where:
-   - The start point adds the color value.
-   - The end point subtracts the color value.
-
-2. **Sorting and Processing Events**: We then iterate over the sorted event points to determine how the total color value changes across the number line:
-   - If the current total color value is non-zero, we create a new segment from the last event to the current event with the accumulated color.
-   - We update the total color value as we process each event.
-
-3. **Output Result**: Finally, the result is built as a list of segments representing the painted areas with their color values.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the provided code in detail:
-
+### Initial Thoughts 💭
+- Overlapping segments need to be merged to form non-overlapping segments with color sums.
+- The map data structure can help us efficiently track the color sums during the iteration.
+{{< dots >}}
+### Edge Cases 🌐
+- If no segments are provided, return an empty result.
+- Ensure the solution handles the maximum input size efficiently.
+- Handle cases where multiple segments overlap at the same position.
+- Manage memory and time complexity effectively for large input sizes.
+{{< dots >}}
+## Code 💻
 ```cpp
 class Solution {
-    typedef long long ll; // Define 'll' as a shorthand for 'long long'
+typedef long long ll;
 public:
-    vector<vector<long long>> splitPainting(vector<vector<int>>& segs) {
-```
-We define a class `Solution` and a public method `splitPainting`, which takes a 2D vector `segs` representing the segments to be painted.
-
-```cpp
-       // sort(seg.begin(), seg.end());
+vector<vector<long long>> splitPainting(vector<vector<int>>& segs) {
+    
+   // sort(seg.begin(), seg.end());
+    
+    map<ll, ll> mp;
+    
+    
+    vector<vector<ll>> res;
+    int n = segs.size();
+    for(vector<int> seg : segs) {
+        mp[seg[0]] += seg[2];
+        mp[seg[1]] -= seg[2];
         
-        map<ll, ll> mp; // Initialize a map to hold the color contributions at different points
         
-        vector<vector<ll>> res; // Initialize the result vector to store the final painted segments
-        int n = segs.size(); // Get the number of segments
-```
-Although the sorting line is commented out, we initialize a `map` named `mp` to track the color changes, where the keys are the positions on the number line and the values are the cumulative color contributions. We also initialize a result vector `res` to store the final segments.
-
-```cpp
-        for(vector<int> seg : segs) {
-            mp[seg[0]] += seg[2]; // Add the color value at the start of the segment
-            mp[seg[1]] -= seg[2]; // Subtract the color value at the end of the segment
         }
-```
-We iterate over each segment in `segs`:
-- For each segment, we increment the color contribution at the start of the segment by its color value (`seg[2]`).
-- We decrement the color contribution at the end of the segment (`seg[1]`) by the same color value.
-
-```cpp
-        ll prv = -1, clr = 0; // Initialize previous position and current color sum
-        for(auto & itr : mp) {
-```
-We initialize `prv` to `-1` (to signify no previous position) and `clr` to `0` (to keep track of the current color value). We then start iterating over the entries in the map.
-
-```cpp
-            if(clr) // Check if there is a current color contribution
-                res.push_back({prv, itr.first, clr}); // If yes, add the segment to the result
-            clr += itr.second; // Update the current color with the change at the current event point
-            prv = itr.first; // Update the previous position to the current event point
+    
+    ll prv = -1, clr = 0;
+    for(auto & itr : mp) {
+        
+        if(clr )
+            res.push_back({prv, itr.first, clr});
+        clr += itr.second;
+        prv = itr.first;
+        
         }
+    
+    return res;
+}
 ```
-Within the loop:
-- If `clr` is non-zero, it means we have a segment that has been painted with color, and we push a new segment into `res` defined by the previous position `prv`, the current position `itr.first`, and the current color `clr`.
-- We then update the current color value by adding the contribution from the current point `itr.second`.
-- Finally, we set `prv` to the current event point.
 
-```cpp
-        return res; // Return the final list of painted segments
-    }
-};
-```
-After processing all event points, we return the result vector `res`, which contains the distinct painted segments with their respective color values.
+This code implements a solution to split painting segments where each segment is described by a start point, an end point, and the color it covers. It uses a map to track color changes at specific points and calculates the merged segments.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **CodeStructure**
+	```cpp
+	class Solution {
+	```
+	This defines the Solution class, which will contain the method to split painting segments.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n \log n)\) due to the insertion into the map, where \(n\) is the number of segments. Each segment results in two operations on the map (one for the start and one for the end), and sorting the keys will dominate the time complexity.
-  
-- **Space Complexity**: The space complexity is \(O(n)\) as well, since we store each segment's contribution in the map and potentially have up to \(2n\) distinct event points.
+2. **Typedef**
+	```cpp
+	typedef long long ll;
+	```
+	Defines 'll' as a shorthand for 'long long', which is used for larger integer values.
 
-### Conclusion
+3. **Access Control**
+	```cpp
+	public:
+	```
+	Defines the start of the public section of the class, where the method 'splitPainting' will be defined.
 
-This code efficiently solves the problem of determining the painted segments on a number line based on overlapping segments with color values. By leveraging a map to keep track of color contributions and a sweep line approach, the solution combines simplicity and efficiency. The output provides a clear representation of how the number line is segmented and colored after processing all input segments.
+4. **Method Definition**
+	```cpp
+	vector<vector<long long>> splitPainting(vector<vector<int>>& segs) {
+	```
+	This defines the 'splitPainting' method, which takes a vector of painting segments and returns the merged result.
 
-### Key Features
+5. **Data Structure**
+	```cpp
+	    map<ll, ll> mp;
+	```
+	Declares a map 'mp' where the key is the position and the value is the color value at that position.
 
-1. **Event Point Tracking**: The use of a map allows for efficient tracking of color contributions at specific points on the number line, enabling quick updates and lookups.
+6. **Initialization**
+	```cpp
+	    vector<vector<ll>> res;
+	```
+	Declares a vector 'res' to store the final result of merged painting segments.
 
-2. **Handling Overlaps**: By subtracting color values at end points, the solution effectively handles overlapping segments, ensuring that the final output accurately represents the resultant painted segments.
+7. **Variable Declaration**
+	```cpp
+	    int n = segs.size();
+	```
+	Stores the number of painting segments into the variable 'n'.
 
-3. **Dynamic Segment Creation**: The algorithm dynamically creates segments based on changing color values, making it adaptable to a wide range of input scenarios.
+8. **Loop**
+	```cpp
+	    for(vector<int> seg : segs) {
+	```
+	Iterates over each painting segment in the input 'segs'.
 
-### Use Cases
+9. **Map Update**
+	```cpp
+	        mp[seg[0]] += seg[2];
+	```
+	Updates the map to reflect the color change at the starting position of the segment.
 
-This approach can be useful in various applications, including:
+10. **Map Update**
+	```cpp
+	        mp[seg[1]] -= seg[2];
+	```
+	Updates the map to reflect the color removal at the ending position of the segment.
 
-- **Graphics and Visualizations**: In computer graphics, where multiple overlapping shapes need to be painted with different colors, understanding the resultant overlap can be crucial.
+11. **LoopEnd**
+	```cpp
+	        }
+	```
+	End of the loop iterating over the segments.
 
-- **Geographical Mapping**: For applications in geographic information systems (GIS), where different regions may be colored based on various data attributes, such as population density or land use.
+12. **Variable Initialization**
+	```cpp
+	    ll prv = -1, clr = 0;
+	```
+	Initializes 'prv' as -1 to keep track of the previous position and 'clr' to track the current color.
 
-- **Data Visualization**: In data analysis tools that visualize trends over time, this approach can effectively represent how overlapping data points affect the visual outcome.
+13. **Loop**
+	```cpp
+	    for(auto & itr : mp) {
+	```
+	Iterates over the map 'mp' to process each position and color change.
 
-### Implementation Considerations
+14. **Condition**
+	```cpp
+	        if(clr )
+	```
+	Checks if the current color is non-zero before adding the segment to the result.
 
-When implementing this solution, consider the following:
+15. **Result Update**
+	```cpp
+	            res.push_back({prv, itr.first, clr});
+	```
+	Adds a new merged segment to the result vector 'res'.
 
-- **Input Validation**: Ensure that the segments are well-defined, with valid start and end points.
+16. **Color Update**
+	```cpp
+	        clr += itr.second;
+	```
+	Updates the current color based on the map entry, adding the color change at the current position.
 
-- **Performance Testing**: Given the potential for large inputs, it’s advisable to test the performance of the implementation under various scenarios to ensure that it operates within acceptable time limits.
+17. **Position Update**
+	```cpp
+	        prv = itr.first;
+	```
+	Updates the previous position to the current position.
 
-- **Edge Cases**: Handle special cases, such as segments that do not overlap or segments that completely overlap with others.
+18. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the merged painting segments as the result.
 
-By understanding and applying these concepts, one can effectively tackle similar problems involving overlapping intervals and color contributions.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which is O(n log n), where n is the number of segments.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the use of a map to store the color sums at each position of the painting.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/describe-the-painting/description/)
 

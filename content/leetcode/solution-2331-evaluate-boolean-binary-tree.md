@@ -14,125 +14,142 @@ img_src = ""
 youtube = "9a_cP54jn8Q"
 youtube_upload_date="2024-05-16"
 youtube_thumbnail="https://i.ytimg.com/vi/9a_cP54jn8Q/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a full binary tree. The leaf nodes hold boolean values: 0 (False) and 1 (True). The non-leaf nodes hold values 2 (OR) or 3 (AND). Your task is to evaluate the tree according to the logical operations and return the final boolean result of the root node.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the root of a full binary tree. Each node has a value of 0 or 1 (leaf nodes), or 2 (OR) or 3 (AND) for non-leaf nodes.
+- **Example:** `root = [3, 2, 1, null, null, 0, 1]`
+- **Constraints:**
+	- 1 <= Number of nodes <= 1000
+	- Each node has either 0 or 2 children.
+	- Leaf nodes have value 0 or 1, non-leaf nodes have value 2 or 3.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool evaluateTree(TreeNode* root) {
-        if(!root) return false;
-        if(!root->left && !root->right) return root->val;
-        
-        if(root->val == 2)
-            return evaluateTree(root->left) || evaluateTree(root->right);
-      else
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the boolean result of evaluating the root node of the tree.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean value (true or false).
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Evaluate the binary tree using logical operations (AND/OR) and return the result at the root node.
+
+- Check if the current node is a leaf node. If so, return its value.
+- If the current node is not a leaf, recursively evaluate the left and right children.
+- If the node is an AND node (value 3), return the result of applying AND on the left and right children's evaluations.
+- If the node is an OR node (value 2), return the result of applying OR on the left and right children's evaluations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a full binary tree, meaning each non-leaf node has exactly two children.
+- The leaf nodes' values are either 0 or 1, representing boolean False and True respectively.
+- Non-leaf nodes' values are either 2 (for OR operation) or 3 (for AND operation).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [3, 2, 1, null, null, 0, 1]`  \
+  **Explanation:** The evaluation starts from the leaf nodes. The OR operation at the left child evaluates to 1, and the AND operation at the root results in true.
+
+- **Input:** `root = [2, 0, 0]`  \
+  **Explanation:** The OR operation at the root evaluates to false since both children are 0 (False).
+
+{{< dots >}}
+## Approach 🚀
+We recursively evaluate the binary tree by checking each node's value. If the node is a leaf, we return its value. Otherwise, we evaluate its children and apply the corresponding logical operation.
+
+### Initial Thoughts 💭
+- Each node's value either indicates a leaf (0 or 1) or a logical operation (2 for OR, 3 for AND).
+- We can use a recursive approach to evaluate each node based on whether it is a leaf or a non-leaf.
+{{< dots >}}
+### Edge Cases 🌐
+- No tree (null input) should be handled.
+- Large trees with 1000 nodes.
+- A single leaf node with value 1 or 0.
+- Ensure that the tree is properly constructed with each node having either 0 or 2 children.
+{{< dots >}}
+## Code 💻
+```cpp
+bool evaluateTree(TreeNode* root) {
+    if(!root) return false;
+    if(!root->left && !root->right) return root->val;
+    
+    if(root->val == 2)
+        return evaluateTree(root->left) || evaluateTree(root->right);
+  else
 
 return evaluateTree(root->left) && evaluateTree(root->right);        
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to evaluate a binary tree that represents a logical expression. Each node of the tree can either be a leaf node or an internal node. The leaf nodes have values of either `0` or `1`, representing logical `false` and `true`, respectively. The internal nodes represent logical operators:
-
-- A node with a value of `2` represents the logical OR operation (`||`).
-- A node with a value of `3` represents the logical AND operation (`&&`).
-
-Given a binary tree with these properties, the goal is to evaluate the tree and return the final result (`true` or `false`) based on the logical expressions formed by traversing the tree.
-
-### Approach
-
-To solve this problem, we can perform a **recursive traversal** of the tree. The traversal will evaluate the logical expression represented by the binary tree. We need to process each node according to its value:
-
-1. **Leaf Nodes**: If a node is a leaf (it has no left or right child), its value directly determines the result. If the value is `1`, it means `true`, and if it is `0`, it means `false`.
-   
-2. **Internal Nodes (OR and AND operations)**: For internal nodes, the value determines the type of logical operation:
-   - If the node’s value is `2`, it represents an OR operation (`||`). The result is `true` if either the left or the right child evaluates to `true`.
-   - If the node’s value is `3`, it represents an AND operation (`&&`). The result is `true` only if both the left and right children evaluate to `true`.
-
-The algorithm recursively computes the result of the subtrees, applying the corresponding logical operation at each internal node, and finally returns the result at the root.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Function Definition
-
-```cpp
-class Solution {
-public:
-    bool evaluateTree(TreeNode* root) {
+}
 ```
-- The `evaluateTree` function takes the root of a binary tree as input. The result is a boolean value indicating whether the logical expression represented by the tree evaluates to `true` or `false`.
 
-#### Step 2: Base Case: Null Node
+This function evaluates a binary tree where each node is either an operator (2 for OR, 3 for AND) or a leaf node with a value (0 or 1). The function returns the result of evaluating the logical expression represented by the tree, with OR and AND operations applied between nodes.
 
-```cpp
-        if(!root) return false;
-```
-- The first check handles the base case where the tree node is null. This could be a safeguard, though in a well-formed binary tree, the root node should never be null when the tree is given as input. If we encounter a null node, we return `false` as an indicator of an invalid or non-existent node.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool evaluateTree(TreeNode* root) {
+	```
+	Declares the function `evaluateTree`, which takes a `TreeNode* root` as input and returns a boolean value (`true` or `false`). It evaluates the logical expression represented by a binary tree.
 
-#### Step 3: Leaf Node Check
+2. **Base Case Check**
+	```cpp
+	    if(!root) return false;
+	```
+	Checks if the current node is `null`. If the node is `null`, it returns `false` as there is no logical expression to evaluate.
 
-```cpp
-        if(!root->left && !root->right) return root->val;
-```
-- The next step checks if the current node is a leaf node, which means it has no left or right child. A leaf node’s value will either be `0` or `1`, representing logical `false` or `true`, respectively. Therefore, we return the value of the node as the result.
+3. **Leaf Node Check**
+	```cpp
+	    if(!root->left && !root->right) return root->val;
+	```
+	If the node is a leaf node (no left or right child), it simply returns the value of the node (`root->val`), which is either 0 or 1.
 
-#### Step 4: Internal Node Handling (OR and AND operations)
+4. **OR Operation Check**
+	```cpp
+	    if(root->val == 2)
+	```
+	Checks if the current node represents an OR operation (denoted by `2`). If it does, the function will recursively evaluate the left and right children using the logical OR operation.
 
-```cpp
-        if(root->val == 2)
-            return evaluateTree(root->left) || evaluateTree(root->right);
-      else
-            return evaluateTree(root->left) && evaluateTree(root->right);
-```
-- For internal nodes:
-  - If the node's value is `2`, it represents the logical OR (`||`) operation. We recursively evaluate both the left and right subtrees and return `true` if either subtree evaluates to `true`.
-  - If the node’s value is `3`, it represents the logical AND (`&&`) operation. We recursively evaluate both the left and right subtrees and return `true` only if both subtrees evaluate to `true`.
+5. **OR Operation Evaluation**
+	```cpp
+	        return evaluateTree(root->left) || evaluateTree(root->right);
+	```
+	If the current node is an OR operator, it evaluates the left and right children and returns the logical OR of their results.
 
-The `evaluateTree` function is called recursively on the left and right subtrees, and the logical operation is applied based on the current node's value.
+6. **AND Operation Check**
+	```cpp
+	  else
+	```
+	If the node is not an OR operator (i.e., it must be an AND operator, denoted by `3`), the function proceeds to the AND evaluation.
 
-#### Step 5: Final Return Value
+7. **AND Operation Evaluation**
+	```cpp
+	return evaluateTree(root->left) && evaluateTree(root->right);
+	```
+	If the current node is an AND operator, it evaluates the left and right children and returns the logical AND of their results.
 
-```cpp
-    }
-};
-```
-- Once the recursive calls finish, the function returns the final boolean result for the logical expression rooted at the given node. The recursive calls propagate back up to the root, and the final result is returned to the caller.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity
+The time complexity is linear, as we visit each node in the tree once.
 
-#### Time Complexity:
-The time complexity of the algorithm is **O(N)**, where `N` is the number of nodes in the binary tree. This is because we visit each node exactly once during the recursive traversal. Each recursive call processes a node and its children, and since there are `N` nodes, the total time complexity is linear in terms of the number of nodes.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
-The space complexity is **O(H)**, where `H` is the height of the binary tree. This is the space required for the recursion stack. In the worst case, the height of the tree is `N` (if the tree is skewed), and the space complexity would be `O(N)`. However, for a balanced tree, the height would be `log(N)`, resulting in a space complexity of `O(log(N))`.
+The space complexity is O(n) due to the recursive stack in the worst case, where n is the number of nodes in the tree.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution uses a simple recursive approach to evaluate the logical expression represented by a binary tree. Each node in the tree represents either a logical value (`0` or `1`) or a logical operation (`OR` or `AND`). The recursive traversal computes the result by evaluating subtrees and applying the appropriate logical operations at each internal node.
-
-- **Time Complexity**: The algorithm runs in linear time, i.e., **O(N)**, where `N` is the number of nodes in the tree.
-- **Space Complexity**: The space complexity is proportional to the height of the tree, i.e., **O(H)**, where `H` is the height of the tree.
-
-This approach is efficient and easy to implement, making it a suitable solution for evaluating logical expressions represented by binary trees.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/evaluate-boolean-binary-tree/description/)
 

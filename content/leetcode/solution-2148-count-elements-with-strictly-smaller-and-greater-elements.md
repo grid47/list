@@ -14,122 +14,180 @@ img_src = ""
 youtube = "V3SamYLfPtg"
 youtube_upload_date="2022-01-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/V3SamYLfPtg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums'. Your task is to return the count of elements in the array that have both a strictly smaller and a strictly greater number in the array. Each element should have at least one number strictly smaller and one number strictly greater.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer array 'nums'.
+- **Example:** `nums = [5, 8, 1, 10]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- -105 <= nums[i] <= 105
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countElements(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int res = 0, l = -1, r = -1, n = nums.size();
-        for(int i = 1; i < n; i++) {
-            if(nums[i] > nums[i - 1]) {
-              l = i;
-              break;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the count of elements in the array that satisfy the given condition.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We aim to count the number of elements in 'nums' that have both a strictly smaller and a strictly greater element.
+
+- Sort the array to easily compare neighboring elements.
+- Identify the range where there are both smaller and larger elements than the current element.
+- Count elements that satisfy the condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains at least one element.
+- The array may contain duplicate elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [5, 8, 1, 10]`  \
+  **Explanation:** The element '8' has both a smaller element '1' and a greater element '10'. Similarly, '5' has a smaller element '1' and a greater element '8'. Thus, two elements satisfy the condition.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by sorting the array and then finding elements that have both smaller and greater elements in the sorted array.
+
+### Initial Thoughts 💭
+- Sorting the array helps in easily finding elements that have both smaller and larger neighbors.
+- We need to traverse the sorted array and count the elements that meet the criteria.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array is not valid per the constraints.
+- The solution should handle the maximum size of the input array efficiently.
+- Arrays with all identical elements should return 0.
+- Ensure that the array is sorted before making comparisons.
+{{< dots >}}
+## Code 💻
+```cpp
+int countElements(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    int res = 0, l = -1, r = -1, n = nums.size();
+    for(int i = 1; i < n; i++) {
+        if(nums[i] > nums[i - 1]) {
+          l = i;
+          break;
         }
-        for(int i = n - 1; i > 0; i--) {
-            if(nums[i] > nums[i - 1]) {
-              r = i;
-              break;
-            }
-        }
-        if(l < r) return r - l;
-        return 0;
     }
-};
-{{< /highlight >}}
----
+    for(int i = n - 1; i > 0; i--) {
+        if(nums[i] > nums[i - 1]) {
+          r = i;
+          break;
+        }
+    }
+    if(l < r) return r - l;
+    return 0;
+}
+```
 
-### Problem Statement
+This function sorts the input vector and finds the positions of the first and last elements that are out of order, returning the count of elements between these positions.
 
-The task is to count the number of elements in an array that are strictly between the minimum and maximum values of that array. In other words, we need to identify all elements that are greater than the minimum element and less than the maximum element. If there are no such elements, the function should return `0`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Start**
+	```cpp
+	int countElements(vector<int>& nums) {
+	```
+	The function begins. The input vector `nums` is passed by reference.
 
-### Approach
+2. **Sort Array**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sort the input array to prepare for identifying the unsorted segment.
 
-To solve this problem, we can break down the approach into the following steps:
+3. **Variable Initialization**
+	```cpp
+	    int res = 0, l = -1, r = -1, n = nums.size();
+	```
+	Initialize variables: `res` (result), `l` (left index), `r` (right index), and `n` (size of the array).
 
-1. **Sort the Array**: First, sort the input array. This allows us to easily identify the minimum and maximum values and to find elements that lie strictly between them.
+4. **Forward Iteration**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	Start a loop to iterate from the second element to the end of the sorted array.
 
-2. **Identify the Left and Right Indices**: Traverse the sorted array to find the first element that is greater than the minimum and the last element that is less than the maximum. This will help in determining the range of elements that lie strictly between the minimum and maximum.
+5. **Check Left Bound**
+	```cpp
+	        if(nums[i] > nums[i - 1]) {
+	```
+	Check if the current element is greater than the previous one, identifying the first unordered pair.
 
-3. **Count Elements**: If we have found valid indices, the count of elements between the minimum and maximum can be computed by subtracting these indices. If no such indices are found, return `0`.
+6. **Set Left Index**
+	```cpp
+	          l = i;
+	```
+	Set the left index `l` to the current position where the first unordered element is found.
 
-4. **Return the Result**: Finally, return the calculated count of elements that meet the criteria.
+7. **Break Loop**
+	```cpp
+	          break;
+	```
+	Break out of the loop once the left boundary is identified.
 
-### Code Breakdown (Step by Step)
+8. **Backward Iteration**
+	```cpp
+	    for(int i = n - 1; i > 0; i--) {
+	```
+	Start a loop to iterate from the last element to the first in reverse order.
 
-1. **Function Definition**:
-   ```cpp
-   int countElements(vector<int>& nums) {
-   ```
-   - The function `countElements` takes a vector of integers `nums` as input.
+9. **Check Right Bound**
+	```cpp
+	        if(nums[i] > nums[i - 1]) {
+	```
+	Check if the current element is greater than the previous one, identifying the second unordered pair.
 
-2. **Sorting the Array**:
-   ```cpp
-   sort(nums.begin(), nums.end());
-   ```
-   - We use the `sort` function to sort the elements of the array in non-decreasing order. This is crucial as it allows us to easily identify the minimum and maximum values and the elements between them.
+10. **Set Right Index**
+	```cpp
+	          r = i;
+	```
+	Set the right index `r` to the current position where the second unordered element is found.
 
-3. **Variable Initialization**:
-   ```cpp
-   int res = 0, l = -1, r = -1, n = nums.size();
-   ```
-   - Here, we initialize `res` to `0`, which will hold the final count of elements. The variables `l` and `r` are initialized to `-1` to indicate that we have not found any valid indices yet. The variable `n` holds the size of the array.
+11. **Break Loop**
+	```cpp
+	          break;
+	```
+	Break out of the loop once the right boundary is identified.
 
-4. **Finding the Left Index**:
-   ```cpp
-   for(int i = 1; i < n; i++) {
-       if(nums[i] > nums[i - 1]) {
-           l = i;
-           break;
-       }
-   }
-   ```
-   - We iterate through the sorted array starting from the second element (index `1`). The goal is to find the first index `l` where an element is greater than its predecessor, indicating that it is greater than the minimum value. Once found, we break out of the loop.
+12. **Check Unsorted Segment**
+	```cpp
+	    if(l < r) return r - l;
+	```
+	If the left index `l` is less than the right index `r`, return the difference between them as the length of the unsorted segment.
 
-5. **Finding the Right Index**:
-   ```cpp
-   for(int i = n - 1; i > 0; i--) {
-       if(nums[i] > nums[i - 1]) {
-           r = i;
-           break;
-       }
-   }
-   ```
-   - This loop runs from the end of the array back to the first element, looking for the last index `r` where an element is greater than its predecessor, indicating it is less than the maximum value. Again, we break out of the loop once we find this index.
+13. **Return Result**
+	```cpp
+	    return 0;
+	```
+	Return 0 if no unsorted segment was found.
 
-6. **Counting Elements**:
-   ```cpp
-   if(l < r) return r - l;
-   return 0;
-   ```
-   - If `l` is less than `r`, it means we have valid indices, and the count of elements between the minimum and maximum is calculated as `r - l`. This expression effectively counts the elements that lie strictly between the two indices. If no such indices exist (i.e., all elements are the same or there's only one unique value), we return `0`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-7. **Function Return**:
-   ```cpp
-   }
-   ```
-   - The function ends, returning the count of elements found.
+The time complexity is determined by the sorting step, which takes O(n log n).
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Time Complexity**: \(O(n \log n)\)
-  - The most time-consuming operation in this solution is sorting the array, which has a time complexity of \(O(n \log n)\). The subsequent operations to find the left and right indices only require linear scans, resulting in an overall time complexity dominated by the sorting step.
+The space complexity is constant since we only use a few variables for counting and comparisons.
 
-- **Space Complexity**: \(O(1)\)
-  - We are using a constant amount of space for our variables (`res`, `l`, `r`, `n`). The sorting operation may use additional space in terms of internal handling, but since we're only using a few variables, we can consider the space complexity as \(O(1)\) in terms of our own usage.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-The `countElements` function provides an efficient means to count the number of elements in a list that are strictly between the smallest and largest values. By leveraging sorting, we can quickly identify these boundaries and effectively calculate the required count.
-
-This solution exemplifies fundamental algorithm design techniques, such as sorting and linear traversal, which are commonly employed in array manipulation problems. Understanding this method equips developers with essential skills for tackling similar problems in various programming contexts, reinforcing the importance of combining algorithmic efficiency with clear logic. The function not only achieves its purpose with clarity but also adheres to optimal performance standards, making it an exemplary implementation in competitive programming and coding interviews.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-elements-with-strictly-smaller-and-greater-elements/description/)
 

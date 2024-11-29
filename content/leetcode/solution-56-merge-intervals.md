@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "HCbKvBOlMVI"
 youtube_upload_date="2024-06-13"
 youtube_thumbnail="https://i.ytimg.com/vi/HCbKvBOlMVI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,159 @@ youtube_thumbnail="https://i.ytimg.com/vi/HCbKvBOlMVI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of intervals where each interval is represented by a pair [start, end]. Merge all overlapping intervals and return a list of non-overlapping intervals that cover all the input intervals.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an array of intervals, where each interval is a pair [start, end].
+- **Example:** `[[1,3],[2,6],[8,10],[15,18]]`
+- **Constraints:**
+	- 1 <= intervals.length <= 10^4
+	- intervals[i].length == 2
+	- 0 <= starti <= endi <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> merge(vector<vector<int>>& iv) {
-        sort(iv.begin(), iv.end());
-        vector<vector<int>> ans;
-        vector<int> tmp = iv[0];
-        for(int i = 0; i < iv.size(); i++) {
-            if(iv[i][0] <= tmp[1]) {
-                tmp[1] = max(tmp[1], iv[i][1]);
-            } else {
-                ans.push_back(tmp);
-                tmp = iv[i];
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of intervals where each interval represents a non-overlapping range that covers all intervals in the input.
+- **Example:** `[[1, 6], [8, 10], [15, 18]]`
+- **Constraints:**
+	- The output should contain only non-overlapping intervals.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to merge any overlapping intervals and return the merged intervals as the result.
+
+- 1. Sort the intervals by their starting value.
+- 2. Initialize a variable to store the merged intervals.
+- 3. Traverse through the sorted intervals, and for each interval, check if it overlaps with the last merged interval.
+- 4. If they overlap, merge the intervals by updating the end of the last merged interval. Otherwise, add the current interval to the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The intervals are represented as pairs of integers, where each pair follows the rule: starti <= endi.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1, 3], [2, 6], [8, 10], [15, 18]]`  \
+  **Explanation:** The intervals [1, 3] and [2, 6] overlap, so they are merged into [1, 6]. The intervals [8, 10] and [15, 18] do not overlap and are returned as is.
+
+- **Input:** `[[1, 4], [4, 5]]`  \
+  **Explanation:** The intervals [1, 4] and [4, 5] overlap at index 4, so they are merged into [1, 5].
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the intervals and then merging the overlapping ones iteratively.
+
+### Initial Thoughts 💭
+- Sorting the intervals is essential to efficiently merge overlapping ones.
+- This problem can be solved using a greedy approach by merging overlapping intervals in a single pass after sorting.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input is an empty list, return an empty list.
+- The algorithm should efficiently handle large inputs (up to 10^4 intervals).
+- Intervals that touch at the boundary (e.g., [1, 4] and [4, 5]) should be merged.
+- The solution must run in O(n log n) time due to the sorting step.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    sort(intervals.begin(), intervals.end());
+    vector<vector<int>> merged; // To store the merged intervals
+    merged.push_back(intervals[0]);
+
+    for (int i = 1; i < intervals.size(); ++i) {
+        if (merged.back()[1] >= intervals[i][0]) {
+            // Overlapping intervals, merge them
+            merged.back()[1] = max(merged.back()[1], intervals[i][1]);
+        } else {
+            // Non-overlapping interval, add it to the merged list
+            merged.push_back(intervals[i]);
         }
-        ans.push_back(tmp);
-        return ans;
     }
-};
-{{< /highlight >}}
----
 
-### 🚀 **Merge Intervals**
-
-The problem asks you to merge overlapping intervals from a collection of intervals. Each interval is represented as a pair of integers `[start, end]`, where `start` is the beginning of the interval, and `end` is the end. The task is to merge all overlapping or contiguous intervals and return a list of non-overlapping intervals.
-
-For example, given the intervals:
-
-```
-[[1, 3], [2, 4], [5, 7], [6, 8]]
-```
-
-The intervals `[1, 3]` and `[2, 4]` overlap, so they should be merged into `[1, 4]`. Similarly, the intervals `[5, 7]` and `[6, 8]` should be merged into `[5, 8]`. The final result would be:
-
-```
-[[1, 4], [5, 8]]
-```
-
-### 🧑‍💻 **Approach**
-
-To solve this problem efficiently, we use a **greedy approach**. The core steps are:
-
-1. **Sort the intervals** by their start times. Sorting helps us group overlapping intervals together, making it easier to merge them.
-2. **Iterate through the sorted intervals** and compare each interval with the last added merged interval:
-   - If the current interval overlaps or is contiguous with the last merged interval, merge them by updating the end of the last interval.
-   - If there is no overlap, add the current interval as a new merged interval into the result list.
-3. Finally, return the list of merged intervals.
-
-This approach ensures that we merge overlapping intervals in an optimal manner.
-
-### 📝 **Code Breakdown**
-
-#### Step 1: Sorting the Intervals
-
-```cpp
-sort(iv.begin(), iv.end());
-```
-
-- **Sorting:** We start by sorting the input list of intervals `iv` based on their starting points (`iv[i][0]`). This helps us easily compare consecutive intervals to check if they overlap. Sorting ensures that we process intervals in increasing order of their start times, which simplifies the merging logic.
-
-#### Step 2: Initialization
-
-```cpp
-vector<vector<int>> ans;
-vector<int> tmp = iv[0];
-```
-
-- **ans:** This vector will store the final merged intervals.
-- **tmp:** This temporary vector is initialized to the first interval `iv[0]` and represents the current interval being merged with subsequent intervals.
-
-#### Step 3: Iterating Over the Intervals
-
-```cpp
-for(int i = 0; i < iv.size(); i++) {
-    if(iv[i][0] <= tmp[1]) {
-        tmp[1] = max(tmp[1], iv[i][1]);
-    } else {
-        ans.push_back(tmp);
-        tmp = iv[i];
-    }
+    return merged;
 }
 ```
 
-- **Loop through intervals:** We iterate through the sorted intervals.
-- **If the current interval overlaps:** If the start of the current interval (`iv[i][0]`) is less than or equal to the end of the last merged interval (`tmp[1]`), it means the intervals overlap or are contiguous. In this case, we merge them by updating the end time of `tmp` to the maximum of the two intervals' end times (`tmp[1] = max(tmp[1], iv[i][1])`).
-- **If there is no overlap:** If the current interval does not overlap with the last merged interval, we push the current merged interval (`tmp`) into the result list `ans` and start a new merge with the current interval `iv[i]`.
+This code efficiently merges overlapping intervals in a given list of intervals.
 
-#### Step 4: Final Merge
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> merge(vector<vector<int>>& intervals) {
+	```
+	This line declares a function named `merge` that takes a vector of intervals `intervals` as input and returns a vector of merged intervals.
 
-```cpp
-ans.push_back(tmp);
-```
+2. **Sorting Intervals**
+	```cpp
+	    sort(intervals.begin(), intervals.end());
+	```
+	This line sorts the input intervals based on their starting points in ascending order.
 
-- After the loop ends, we push the last interval `tmp` into the result list `ans` since it has not been added yet. This ensures that the final merged interval is included.
+3. **Result Vector Initialization**
+	```cpp
+	    vector<vector<int>> merged;
+	```
+	This line initializes an empty vector `merged` to store the merged intervals.
 
-#### Step 5: Return the Result
+4. **Initialize First Interval**
+	```cpp
+	    merged.push_back(intervals[0]);
+	```
+	This line adds the first interval from the input to the `merged` vector as a starting point.
 
-```cpp
-return ans;
-```
+5. **Iterate Over Intervals**
+	```cpp
+	    for (int i = 1; i < intervals.size(); ++i) {
+	```
+	This loop iterates over the intervals starting from the second interval.
 
-- Finally, we return the list of merged intervals stored in `ans`.
+6. **Check for Overlap**
+	```cpp
+	        if (merged.back()[1] >= intervals[i][0]) {
+	```
+	This condition checks if the current interval overlaps with the last interval in the `merged` vector. Overlap occurs if the end of the last interval is greater than or equal to the start of the current interval.
 
-### 📊 **Complexity Analysis**
+7. **Merge Overlapping Intervals**
+	```cpp
+	            merged.back()[1] = max(merged.back()[1], intervals[i][1]);
+	```
+	If there's an overlap, the end point of the last interval in `merged` is updated to the maximum of its current end point and the end point of the current interval. This effectively merges the two overlapping intervals.
 
-#### Time Complexity:
+8. **Add Non-Overlapping Interval**
+	```cpp
+	        } else {
+	```
+	If there's no overlap, the current interval is added to the `merged` vector as a new, non-overlapping interval.
 
-- **O(n log n):** The most time-consuming operation is sorting the intervals, which takes `O(n log n)` time, where `n` is the number of intervals. After sorting, we iterate over the intervals once to merge them, which takes `O(n)` time. Therefore, the overall time complexity is dominated by the sorting step, resulting in **O(n log n)**.
+9. **Add Current Interval to Merged List**
+	```cpp
+	            merged.push_back(intervals[i]);
+	```
+	The current interval is added to the `merged` vector.
 
-#### Space Complexity:
+10. **Return Merged Intervals**
+	```cpp
+	    return merged;
+	```
+	The function returns the `merged` vector containing the merged intervals.
 
-- **O(n):** The space complexity is `O(n)` because we store the merged intervals in the result list `ans`. In the worst case, if no intervals overlap, the result will contain `n` intervals, requiring `O(n)` space.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-### 🌟 **Conclusion**
+The time complexity is O(n log n), where n is the number of intervals, due to the sorting step.
 
-This solution efficiently merges overlapping intervals using a **greedy approach**. By sorting the intervals and iterating through them once, we can merge overlapping or contiguous intervals in an optimal manner. The time complexity of **O(n log n)** makes this approach suitable for handling large input sizes, and the space complexity of **O(n)** ensures efficient memory usage.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-The algorithm works by:
-1. Sorting the intervals to make merging easier.
-2. Iterating through the sorted intervals to merge them as necessary.
-3. Returning the final merged intervals.
+The space complexity is O(n), where n is the number of intervals, since we store the result in a separate array.
 
-This approach guarantees that we can handle all edge cases, such as intervals that don’t overlap, intervals that are already merged, or more complex overlapping scenarios. With its simplicity and efficiency, this solution is ideal for practical applications requiring interval merging.
+**Happy Coding! 🎉**
 
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-intervals/description/)
 

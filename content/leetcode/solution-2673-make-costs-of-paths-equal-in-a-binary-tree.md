@@ -14,109 +14,138 @@ img_src = ""
 youtube = "W62wT5Lem6E"
 youtube_upload_date="2023-05-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/W62wT5Lem6E/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a perfect binary tree with `n` nodes, where each node has a cost associated with it. The tree is numbered from 1 to n, with node 1 as the root. For each node `i`, its left child is `2*i` and its right child is `2*i + 1`. You are allowed to increment the cost of any node by 1 any number of times. Your task is to return the minimum number of increments required to make the total cost of the path from the root to each leaf node equal.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `n` representing the number of nodes in a perfect binary tree, followed by a list of integers `cost`, where `cost[i]` is the cost of node `i+1`.
+- **Example:** `Input: n = 5, cost = [2, 4, 3, 2, 5]`
+- **Constraints:**
+	- 3 <= n <= 10^5
+	- n + 1 is a power of 2
+	- cost.length == n
+	- 1 <= cost[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minIncrements(int n, vector<int>& A) {
-        int res = 0;
-        for (int i = n / 2 - 1; i >= 0; --i) {
-            int l = i * 2 + 1, r = i * 2 + 2;
-            res += abs(A[l] - A[r]);
-            A[i] += max(A[l], A[r]);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer, which represents the minimum number of increments required to make the cost of all root-to-leaf paths equal.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of increments required to equalize the path costs.
+
+- Step 1: Starting from the leaf nodes, propagate the required increments up to the root node, ensuring each path has the same total cost.
+- Step 2: For each non-leaf node, compare the costs of its left and right children. Increment the smaller one to match the larger one and count the number of increments.
+- Step 3: Repeat the process until you reach the root node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a perfect binary tree, meaning every non-leaf node has exactly two children.
+- All nodes have a non-negative cost value.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 5, cost = [2, 4, 3, 2, 5]`  \
+  **Explanation:** In this case, the two paths from root to leaves are [2, 4, 5] and [2, 3, 5]. To equalize the path costs, we increment the cost of node 2 to match node 3's cost. This requires 4 increments, so the total increments required are 4.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will work our way from the leaf nodes upwards to the root, balancing the path costs by making necessary increments.
+
+### Initial Thoughts 💭
+- We need to ensure that the cost of each root-to-leaf path is the same.
+- This requires comparing the costs of left and right children of every node and balancing them.
+- Starting from the leaf nodes and adjusting the internal nodes' costs seems to be an efficient way to solve this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least 3 nodes, ensuring a valid binary tree structure.
+- The solution must handle up to 10^5 nodes efficiently.
+- If the tree already has equal costs for all root-to-leaf paths, the result should be 0 increments.
+- Ensure the solution runs in O(n) time complexity to handle the largest inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int minIncrements(int n, vector<int>& A) {
+    int res = 0;
+    for (int i = n / 2 - 1; i >= 0; --i) {
+        int l = i * 2 + 1, r = i * 2 + 2;
+        res += abs(A[l] - A[r]);
+        A[i] += max(A[l], A[r]);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to modify an array `A` of length `n` (where `n` is always a power of 2) so that the array is transformed into a binary heap. The goal is to perform the minimum number of increment operations on the elements to make the array a binary heap. Specifically, we need to make sure that for each node `i` in the array, the values of its left child and right child are greater than or equal to the value at index `i`.
-
-### Approach
-
-To solve this problem, the idea is to process the array in a bottom-up manner, starting from the leaf nodes and moving towards the root. The binary heap property requires that the value at each parent node must be greater than or equal to the values at the child nodes. If the value at a parent node is less than the value at one of its children, we will need to increment the value of that parent node so that it satisfies the heap condition.
-
-We also need to ensure that the total number of increments is minimized. This is achieved by adjusting the value at the parent node to be the maximum of its children if the heap property is violated, and incrementing it by the difference between the two values.
-
-The algorithm follows a simple greedy approach:
-1. Start from the bottom-most level of the binary heap (leaf nodes) and move towards the root.
-2. For each parent node, compare the values of its left and right children.
-3. If the parent value is smaller than either of its children, increment it to make sure the heap property is satisfied.
-4. Keep track of the total number of increments performed.
-5. Return the total increments needed after processing all nodes.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Result Variable
-
-```cpp
-int res = 0;
+    return res;
+}
 ```
 
-- **Line 1**: We initialize the variable `res` to store the total number of increments required to satisfy the binary heap condition. This variable will be updated as we process each parent node in the heap.
+The function 'minIncrements' calculates the minimum number of increments required to make the array a valid heap. It iterates over the elements and compares each pair of child nodes in the heap, accumulating the difference and adjusting the parent element accordingly.
 
-#### Step 2: Loop Through Each Parent Node in Bottom-Up Manner
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minIncrements(int n, vector<int>& A) {
+	```
+	This is the function definition of 'minIncrements', which takes an integer 'n' (size of the array) and a reference to a vector 'A'. The goal is to compute the minimum number of increments needed to turn the array into a valid heap.
 
-```cpp
-for (int i = n / 2 - 1; i >= 0; --i) {
-```
+2. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	We initialize 'res' to 0. This variable will keep track of the total number of increments made while adjusting the array.
 
-- **Line 2**: The loop starts from the last internal node (which is the parent of the last leaf node) and moves towards the root of the binary heap. The index of the last internal node is `n / 2 - 1`, and the loop processes nodes from this index down to `0` (the root).
+3. **Loop Start**
+	```cpp
+	    for (int i = n / 2 - 1; i >= 0; --i) {
+	```
+	We start a loop that iterates over the parent nodes of the binary heap, starting from the last parent node (at index 'n / 2 - 1') and moving upwards.
 
-#### Step 3: Identify Left and Right Child Nodes
+4. **Child Nodes Calculation**
+	```cpp
+	        int l = i * 2 + 1, r = i * 2 + 2;
+	```
+	For each parent node, we calculate the indices of its left ('l') and right ('r') children using the standard binary heap indexing formula.
 
-```cpp
-int l = i * 2 + 1, r = i * 2 + 2;
-```
+5. **Difference Calculation**
+	```cpp
+	        res += abs(A[l] - A[r]);
+	```
+	We calculate the absolute difference between the values of the left and right children, adding this value to 'res' to account for the required increments to make the children equal.
 
-- **Line 3**: We calculate the indices of the left and right children of the current parent node `i`. In a complete binary tree represented as an array:
-  - The left child of a node at index `i` is located at index `2i + 1`.
-  - The right child of a node at index `i` is located at index `2i + 2`.
+6. **Adjust Parent Value**
+	```cpp
+	        A[i] += max(A[l], A[r]);
+	```
+	To maintain the heap property, we adjust the parent node's value by adding the maximum of its left or right child's value.
 
-#### Step 4: Calculate the Difference in Values
+7. **Return Result**
+	```cpp
+	    return res;
+	```
+	We return the total number of increments made to the array, stored in 'res'.
 
-```cpp
-res += abs(A[l] - A[r]);
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- **Line 4**: If the parent node does not satisfy the binary heap condition, we calculate the difference between the values of the left and right children. We add this difference to the result variable `res`, as this represents the number of increments required to bring the parent node’s value to a valid value. Specifically, if one of the child nodes has a higher value, the parent will need to be incremented.
+The time complexity is O(n) as we only need to traverse the tree once, adjusting costs from the leaves to the root.
 
-#### Step 5: Update Parent Node Value
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-```cpp
-A[i] += max(A[l], A[r]);
-```
+The space complexity is O(n) due to the space needed for the cost array.
 
-- **Line 5**: After calculating the necessary increments for the parent node, we adjust the value of the parent node `i` to be the maximum of its two children (`A[l]` and `A[r]`). This ensures that the parent node satisfies the binary heap property for both children. By incrementing the parent node to the maximum value, we effectively ensure the heap condition holds.
+**Happy Coding! 🎉**
 
-#### Step 6: Return Total Increments
-
-```cpp
-return res;
-```
-
-- **Line 6**: After processing all nodes, we return the total number of increments required to convert the array into a valid binary heap.
-
-### Complexity
-
-#### Time Complexity:
-- **O(n)**: The algorithm processes each parent node exactly once. Since the array has `n` elements, the total number of nodes processed is approximately `n/2`. Each operation on a node (finding the left and right children, updating the parent) is done in constant time. Thus, the overall time complexity is **O(n)**.
-
-#### Space Complexity:
-- **O(1)**: The algorithm uses a constant amount of space for the `res` variable, and no additional data structures are used apart from the input array `A`. Therefore, the space complexity is **O(1)**.
-
-### Conclusion
-
-This solution efficiently solves the problem of transforming an array into a binary heap with the minimum number of increments. By processing the nodes in a bottom-up manner, the algorithm ensures that each parent node satisfies the binary heap condition with minimal changes. The approach is optimal in terms of both time and space complexity, making it suitable for large inputs. With a time complexity of **O(n)** and space complexity of **O(1)**, this solution is efficient and scalable.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-costs-of-paths-equal-in-a-binary-tree/description/)
 

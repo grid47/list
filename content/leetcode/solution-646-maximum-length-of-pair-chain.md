@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "LcNNorqMVTw"
 youtube_upload_date="2023-08-26"
 youtube_thumbnail="https://i.ytimg.com/vi/LcNNorqMVTw/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,184 @@ youtube_thumbnail="https://i.ytimg.com/vi/LcNNorqMVTw/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of pairs where each pair represents an interval with two integers. A pair can follow another pair if the second integer of the first pair is less than the first integer of the second pair. Your task is to determine the length of the longest chain that can be formed by linking the pairs.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of pairs, where each pair is a list of two integers [lefti, righti] with lefti < righti. The number of pairs is n.
+- **Example:** `pairs = [[1, 2], [2, 3], [3, 4]]`
+- **Constraints:**
+	- 1 <= n <= 1000
+	- -1000 <= lefti < righti <= 1000
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the length of the longest chain of pairs that can be formed.
+- **Example:** `2`
+- **Constraints:**
+	- The result will be a single integer representing the length of the longest chain.
 
-class Solution {
-public:
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the length of the longest chain that can be formed from the given pairs.
 
-    static bool cmp(vector<int> &a, vector<int> &b) {
-        if(a[0] == b[0]) return a[1] < b[1];
-        else return a[0] < b[0];
-    }
+- 1. Sort the pairs by the second value of each pair.
+- 2. Iterate over the sorted pairs and greedily select the ones that can form a chain, starting with the first pair and selecting each subsequent pair where the first value is greater than the second value of the previous pair.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain at least one pair.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1, 2], [2, 3], [3, 4]]`  \
+  **Explanation:** The longest chain is formed by selecting pairs [1, 2] and [3, 4], giving a chain length of 2.
 
-    int findLongestChain(vector<vector<int>>& pairs) {
-        sort(pairs.begin(), pairs.end(), cmp);
-        
-        int n = pairs.size();
-        
-        vector<int> dp(n, 1);
-        int mx = 1;
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < i; j++) {
-                if(pairs[i][0] > pairs[j][1]) {
-                    dp[i] = max(dp[i], dp[j] + 1);
-                    mx = max(mx, dp[i]);
-                }
-            }
-        }
-        
-        return mx;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+The solution is based on sorting the pairs and using a greedy approach to select pairs that can form a valid chain.
 
-### Problem Statement
-
-The problem requires us to find the length of the longest chain of pairs where each pair consists of two integers. A pair `(a, b)` can only follow another pair `(c, d)` if `b < c`, meaning the second element of the first pair is strictly less than the first element of the second pair. The goal is to determine the longest sequence of pairs that can form a valid chain.
-
-For example, given a set of pairs `[[1, 2], [2, 3], [3, 4], [5, 6]]`, the longest chain would be `[[1, 2], [3, 4], [5, 6]]`, which has a length of 3.
-
-### Approach
-
-This problem is essentially a variant of the **Longest Increasing Subsequence (LIS)** problem, but with pairs. The basic idea is to sort the pairs and use dynamic programming (DP) to determine the longest valid chain that can be formed.
-
-Here’s how we solve the problem:
-
-1. **Sorting the Pairs**: 
-   - First, we sort the pairs. The primary sorting criterion is the first element of each pair, and if two pairs have the same first element, we sort them based on the second element.
-   - Sorting the pairs ensures that we only need to compare the second element of a pair to determine if it can form a valid chain with another pair.
-
-2. **Dynamic Programming (DP) Setup**:
-   - We use a DP array `dp[]` where each `dp[i]` represents the length of the longest chain that ends with the pair at index `i`.
-   - Initially, we assume that every pair can form a chain of length `1`, so we set each `dp[i] = 1`.
-   - We then iterate over all pairs and try to extend the chains by comparing the current pair to previous pairs in the sorted order. If the second element of the previous pair is less than the first element of the current pair, we can form a valid chain, and we update `dp[i]` accordingly.
-
-3. **Max Length Calculation**:
-   - As we iterate through the pairs and update the DP array, we keep track of the maximum value in `dp[]`, which will be the length of the longest chain.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the solution step by step to understand how it works:
-
-#### 1. **Comparing Pairs**:
+### Initial Thoughts 💭
+- Sorting the pairs based on their second element allows us to efficiently find the longest chain by selecting pairs that follow each other.
+- A greedy approach works well here because it ensures that we always pick the next pair that can extend the chain without skipping any possible valid pairs.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one pair.
+- The solution should handle inputs up to the maximum size of 1000 pairs.
+- Pairs that are already sorted or pairs with no possible chain need to be handled properly.
+- Ensure that the algorithm sorts the pairs efficiently and selects the valid chain in linear time after sorting.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 static bool cmp(vector<int> &a, vector<int> &b) {
     if(a[0] == b[0]) return a[1] < b[1];
     else return a[0] < b[0];
 }
-```
-- We define a static comparison function `cmp` to sort the pairs. If the first elements of two pairs are the same, we sort them by their second elements. Otherwise, we sort them by the first element.
-- This ensures that the pairs are sorted in a way that makes it easy to apply the DP approach for finding the longest chain.
 
-#### 2. **Sorting the Pairs**:
-```cpp
-sort(pairs.begin(), pairs.end(), cmp);
-```
-- We sort the input pairs using the comparison function `cmp`. Sorting is the first step in setting up the problem for the dynamic programming approach.
-
-#### 3. **Initializing DP Array**:
-```cpp
-int n = pairs.size();
-vector<int> dp(n, 1);
-int mx = 1;
-```
-- We initialize the `dp[]` array with `1` since each pair, by itself, can form a chain of length `1`.
-- We also initialize `mx = 1`, which will store the length of the longest chain.
-
-#### 4. **Dynamic Programming Loop**:
-```cpp
-for(int i = 0; i < n; i++) {
-    for(int j = 0; j < i; j++) {
-        if(pairs[i][0] > pairs[j][1]) {
-            dp[i] = max(dp[i], dp[j] + 1);
-            mx = max(mx, dp[i]);
+int findLongestChain(vector<vector<int>>& pairs) {
+    sort(pairs.begin(), pairs.end(), cmp);
+    
+    int n = pairs.size();
+    
+    vector<int> dp(n, 1);
+    int mx = 1;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < i; j++) {
+            if(pairs[i][0] > pairs[j][1]) {
+                dp[i] = max(dp[i], dp[j] + 1);
+                mx = max(mx, dp[i]);
+            }
         }
     }
+    
+    return mx;
 }
 ```
-- We use two nested loops: the outer loop iterates over each pair, and the inner loop compares the current pair to all the pairs before it.
-- If the first element of the current pair is greater than the second element of a previous pair (`pairs[i][0] > pairs[j][1]`), then the current pair can be added to the chain formed by the previous pair. We update `dp[i]` to be the maximum of its current value and `dp[j] + 1`, which represents extending the chain ending at pair `j` by adding the current pair.
-- We also update `mx` to track the longest chain encountered so far.
 
-#### 5. **Returning the Result**:
-```cpp
-return mx;
-```
-- Finally, after iterating through all the pairs and updating the `dp[]` array, we return `mx`, which contains the length of the longest valid chain.
+This code finds the longest chain of pairs in a collection of pairs of integers. It uses dynamic programming to track the longest chain while sorting the pairs to simplify the comparison logic.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Helper Function**
+	```cpp
+	static bool cmp(vector<int> &a, vector<int> &b) {
+	```
+	Defines a helper function 'cmp' that compares two pairs (a and b). It first compares the first elements of the pairs, and if they are equal, it compares the second elements. This function is used for sorting the pairs.
 
-#### Time Complexity:
-- **Sorting the pairs** takes `O(n log n)`, where `n` is the number of pairs.
-- **Dynamic programming** involves two nested loops, each iterating over `n` pairs. The inner loop runs `n` times for each iteration of the outer loop, resulting in a time complexity of `O(n^2)`.
+2. **Comparison Logic**
+	```cpp
+	    if(a[0] == b[0]) return a[1] < b[1];
+	```
+	Compares the second element of the pair if the first elements are equal. This ensures that the pairs are ordered first by the first element and then by the second element.
 
-Thus, the total time complexity is dominated by the `O(n^2)` term from the DP part of the solution. Therefore, the overall time complexity is **O(n^2)**.
+3. **Comparison Logic**
+	```cpp
+	    else return a[0] < b[0];
+	```
+	If the first elements of the pairs are not equal, this part of the function ensures that pairs are sorted in increasing order of the first element.
 
-#### Space Complexity:
-- We use an array `dp[]` of size `n` to store the length of the longest chain for each pair. This results in a space complexity of **O(n)**.
-- The space complexity is **O(n)** due to the DP array.
+4. **Function Definition**
+	```cpp
+	int findLongestChain(vector<vector<int>>& pairs) {
+	```
+	Defines the main function 'findLongestChain' which takes a reference to a vector of pairs and returns an integer representing the length of the longest chain of pairs.
 
-### Conclusion
+5. **Sorting**
+	```cpp
+	    sort(pairs.begin(), pairs.end(), cmp);
+	```
+	Sorts the pairs using the 'cmp' function defined earlier. This ensures that the pairs are sorted in a way that makes it easier to find the longest chain.
 
-The solution to the problem of finding the longest chain of pairs uses a combination of sorting and dynamic programming to efficiently determine the result. By sorting the pairs, we ensure that we only need to compare the second element of a pair with the first element of previous pairs to form a valid chain. The dynamic programming approach allows us to build the longest chain by iterating through the sorted pairs and updating the chain lengths as we go.
+6. **Variable Initialization**
+	```cpp
+	    int n = pairs.size();
+	```
+	Initializes an integer 'n' with the size of the 'pairs' vector, representing the total number of pairs.
 
-While the time complexity of the solution is `O(n^2)` due to the nested loops, this approach is straightforward and works well for moderately sized input arrays. The space complexity of `O(n)` is optimal since we only need to store the DP values.
+7. **Dynamic Programming Initialization**
+	```cpp
+	    vector<int> dp(n, 1);
+	```
+	Declares and initializes a dynamic programming vector 'dp' with size 'n', where each element is initialized to 1. The vector will be used to store the longest chain ending at each pair.
 
-This solution is both simple to understand and effective in finding the longest chain of pairs that can form a valid sequence.
+8. **Variable Initialization**
+	```cpp
+	    int mx = 1;
+	```
+	Initializes the variable 'mx' to 1, which will keep track of the length of the longest chain found.
+
+9. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts an outer loop to iterate through each pair in the sorted 'pairs' vector.
+
+10. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < i; j++) {
+	```
+	Starts an inner loop to check each pair before the current pair 'i' to find a valid chain.
+
+11. **Chain Check**
+	```cpp
+	            if(pairs[i][0] > pairs[j][1]) {
+	```
+	Checks if the current pair 'i' can form a valid chain with pair 'j'. The first element of pair 'i' must be greater than the second element of pair 'j'.
+
+12. **Dynamic Programming Update**
+	```cpp
+	                dp[i] = max(dp[i], dp[j] + 1);
+	```
+	If the chain condition is met, updates the dynamic programming value for pair 'i', ensuring it holds the maximum length of the chain ending at that pair.
+
+13. **Maximum Chain Length Update**
+	```cpp
+	                mx = max(mx, dp[i]);
+	```
+	Updates the variable 'mx' to store the maximum length of any chain found so far.
+
+14. **Final Return**
+	```cpp
+	    return mx;
+	```
+	Returns the length of the longest chain found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the pairs and the result.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-length-of-pair-chain/description/)
 

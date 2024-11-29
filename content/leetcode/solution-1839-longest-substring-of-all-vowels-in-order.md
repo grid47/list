@@ -14,158 +14,246 @@ img_src = ""
 youtube = "hhyzRnwYBwA"
 youtube_upload_date="2021-04-25"
 youtube_thumbnail="https://i.ytimg.com/vi/hhyzRnwYBwA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A string is considered beautiful if it satisfies the following conditions: each of the five vowels ('a', 'e', 'i', 'o', 'u') must appear at least once, and the characters must appear in alphabetical order. Given a string word consisting of English vowels, return the length of the longest beautiful substring of word. If no such substring exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string word containing only vowels ('a', 'e', 'i', 'o', 'u').
+- **Example:** `word = 'aeiouaeiouaei'`
+- **Constraints:**
+	- 1 <= word.length <= 5 * 10^5
+	- word consists only of characters 'a', 'e', 'i', 'o', 'u'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestBeautifulSubstring(string s) {
-        map<char, int> idx;
-        idx['a'] = 0;
-        idx['e'] = 1;
-        idx['i'] = 2;
-        idx['o'] = 3;
-        idx['u'] = 4;
-        
-        int j = 0, res = 0, n = s.size();
-        int id = -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the length of the longest beautiful substring in the word.
+- **Example:** `11`
+- **Constraints:**
 
-        for(int i = 0; i < n; i++) {
-            if(s[i] == 'a') {
-                if(id != 0) {                 
-                    j = i;
-                }
-                id = 0;
-            }else if((idx[s[i]] < id) || (idx[s[i]] - id > 1)) {
-                id = -1;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the longest contiguous substring that contains all five vowels at least once and appears in alphabetical order.
+
+- Initialize a map for vowel indices.
+- Iterate through the string and use a sliding window to track the longest valid substring that meets the conditions of a beautiful string.
+- Update the result with the longest valid substring found during iteration.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always contain characters from the set { 'a', 'e', 'i', 'o', 'u' }.
+- The string will have at least 1 character.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word = 'aeiouaeiouaei'`  \
+  **Explanation:** The longest beautiful substring in 'aeiouaeiouaei' is 'aeiouaeioua' because it contains all vowels in the correct order and is the longest such substring.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a sliding window approach to iterate through the string and keep track of the longest valid substring. The window is valid if it contains all five vowels and they appear in order.
+
+### Initial Thoughts 💭
+- We need to track the positions of each vowel in the string to check if they appear in the correct order.
+- A sliding window is a natural choice here since we are looking for a contiguous sequence of characters.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always contain at least one character, so this case does not need to be handled explicitly.
+- The solution should be efficient enough to handle large strings up to 5 * 10^5 characters.
+- Strings with only one type of vowel or without all five vowels cannot be considered beautiful.
+- The solution must work for strings of varying lengths, from 1 to 5 * 10^5 characters.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestBeautifulSubstring(string s) {
+    map<char, int> idx;
+    idx['a'] = 0;
+    idx['e'] = 1;
+    idx['i'] = 2;
+    idx['o'] = 3;
+    idx['u'] = 4;
+    
+    int j = 0, res = 0, n = s.size();
+    int id = -1;
+
+    for(int i = 0; i < n; i++) {
+        if(s[i] == 'a') {
+            if(id != 0) {                 
                 j = i;
-            } else if(idx[s[i]] - id == 1) {
-                id = idx[s[i]];
-                
             }
+            id = 0;
+        }else if((idx[s[i]] < id) || (idx[s[i]] - id > 1)) {
+            id = -1;
+            j = i;
+        } else if(idx[s[i]] - id == 1) {
+            id = idx[s[i]];
             
-            if(id == 4) {
-                res = max(res, i - j + 1);
-            }
         }
-        return res;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to find the length of the longest beautiful substring in a given string \( s \). A substring is defined as beautiful if it contains all the vowels `a`, `e`, `i`, `o`, and `u` in that specific order, with each vowel appearing at least once, and they must not be interspersed with any consonants. For instance, the string "aeiou" is beautiful, while "aeioub" is not due to the inclusion of a consonant at the end.
-
-### Approach
-
-To solve this problem, we will utilize a linear traversal of the string with the help of a mapping to track the vowels and their order. Here’s a step-by-step breakdown of the approach:
-
-1. **Mapping Vowels**: Create a mapping of the vowels to their respective indices to easily track their order. This mapping helps determine if the current character follows the previous vowel in the required sequence.
-
-2. **Iterate through the String**: Use a single loop to iterate over each character in the string. 
-
-3. **Track the Start of the Substring**: Whenever we encounter an 'a', we may potentially start a new beautiful substring. We also update a variable to keep track of the start index of the current substring.
-
-4. **Validate Vowel Sequence**: For other vowels, check if they are either the same as the last vowel, the next vowel in the sequence, or a reset condition (i.e., when a vowel does not follow the sequence). If it does not follow the sequence, we reset the state.
-
-5. **Update the Length of Beautiful Substring**: If we encounter all vowels in order (i.e., we have seen `u` last), calculate the length of the current beautiful substring and update the maximum length if necessary.
-
-6. **Return the Result**: After the loop, return the maximum length found.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code implementation:
-
-```cpp
-class Solution {
-public:
-    int longestBeautifulSubstring(string s) {
-```
-- A class named `Solution` is defined with a public method `longestBeautifulSubstring`, which takes a string \( s \) as input and returns an integer.
-
-```cpp
-        map<char, int> idx;
-        idx['a'] = 0;
-        idx['e'] = 1;
-        idx['i'] = 2;
-        idx['o'] = 3;
-        idx['u'] = 4;
-```
-- A `map` is created to associate each vowel with an integer index. This allows for easy comparison to check the order of vowels in the substring.
-
-```cpp
-        int j = 0, res = 0, n = s.size();
-        int id = -1;
-```
-- Several integer variables are initialized: 
-  - `j` to track the starting index of the current beautiful substring,
-  - `res` to store the maximum length of beautiful substrings found, 
-  - `n` to store the size of the input string \( s \),
-  - `id` to represent the last encountered vowel’s index, initialized to -1 (indicating no vowel has been seen yet).
-
-```cpp
-        for(int i = 0; i < n; i++) {
-```
-- A for loop iterates over each character in the string \( s \).
-
-```cpp
-            if(s[i] == 'a') {
-                if(id != 0) {                 
-                    j = i;
-                }
-                id = 0;
-```
-- If the current character is 'a', check if the last vowel seen (`id`) is not 'a'. If so, it indicates the start of a new substring, and `j` is updated to the current index \( i \). The `id` is then updated to 0, indicating 'a' has been encountered.
-
-```cpp
-            }else if((idx[s[i]] < id) || (idx[s[i]] - id > 1)) {
-                id = -1;
-                j = i;
-```
-- For characters that are not 'a', check if the current character’s index (from the map) is either less than the last vowel’s index or is not the next expected vowel. If so, reset the state (`id` to -1) and set `j` to the current index, effectively starting a new potential substring.
-
-```cpp
-            } else if(idx[s[i]] - id == 1) {
-                id = idx[s[i]];
-            }
-```
-- If the current character follows the expected order (the index of the current character is exactly one more than `id`), update `id` to the current character’s index.
-
-```cpp
-            if(id == 4) {
-                res = max(res, i - j + 1);
-            }
-```
-- Check if all vowels have been encountered in the required order (when `id` equals 4, meaning 'u' was the last vowel seen). If so, calculate the length of the current beautiful substring and update `res` with the maximum length found so far.
-
-```cpp
+        
+        if(id == 4) {
+            res = max(res, i - j + 1);
         }
-        return res;
     }
-};
+    return res;
+}
 ```
-- After the loop finishes, return the maximum length of any beautiful substring found, which is stored in `res`.
 
-### Complexity
+This function finds the length of the longest substring of a string `s` that contains characters 'a', 'e', 'i', 'o', 'u' in order, where the characters must appear exactly once and in consecutive order. It uses a sliding window approach with a map to track the required characters.
 
-- **Time Complexity**: The overall time complexity is \( O(n) \), where \( n \) is the length of the input string \( s \). This is because we traverse the string once.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestBeautifulSubstring(string s) {
+	```
+	Defines the function `longestBeautifulSubstring`, which takes a string `s` and returns the length of the longest substring containing the vowels 'a', 'e', 'i', 'o', 'u' in order.
 
-- **Space Complexity**: The space complexity is \( O(1) \) for the variables used, as the size of the map for vowels is constant (only five entries), and no additional data structures are used that scale with the input size.
+2. **Map Initialization**
+	```cpp
+	    map<char, int> idx;
+	```
+	Declares a map `idx` that associates each vowel with a corresponding integer value to track the order in which the vowels should appear.
 
-### Conclusion
+3. **Assign Vowel Indexes**
+	```cpp
+	    idx['a'] = 0;
+	```
+	Assigns 0 to 'a' in the map `idx`, representing its position in the sequence of vowels.
 
-The provided solution effectively computes the length of the longest beautiful substring in the input string by utilizing a linear scan and a mapping of vowels to track their sequence. The use of a sliding window concept allows for efficient identification of valid substrings without the need for nested loops, which could lead to higher time complexity.
+4. **Assign Vowel Indexes**
+	```cpp
+	    idx['e'] = 1;
+	```
+	Assigns 1 to 'e' in the map `idx`, representing its position in the sequence of vowels.
 
-This approach highlights important algorithmic principles, such as maintaining state while iterating through data and leveraging data structures (like maps) for efficient lookup and management of relationships (in this case, the order of vowels). 
+5. **Assign Vowel Indexes**
+	```cpp
+	    idx['i'] = 2;
+	```
+	Assigns 2 to 'i' in the map `idx`, representing its position in the sequence of vowels.
 
-In conclusion, the `longestBeautifulSubstring` function demonstrates how to tackle substring problems in strings efficiently, making it an excellent example for those looking to strengthen their skills in string manipulation and algorithm design. The simplicity and efficiency of the code ensure that it performs well even for larger input sizes, which is a key consideration in competitive programming and real-world applications.
+6. **Assign Vowel Indexes**
+	```cpp
+	    idx['o'] = 3;
+	```
+	Assigns 3 to 'o' in the map `idx`, representing its position in the sequence of vowels.
+
+7. **Assign Vowel Indexes**
+	```cpp
+	    idx['u'] = 4;
+	```
+	Assigns 4 to 'u' in the map `idx`, representing its position in the sequence of vowels.
+
+8. **Variable Initialization**
+	```cpp
+	    int j = 0, res = 0, n = s.size();
+	```
+	Initializes variables: `j` to track the starting index of the current substring, `res` to store the result (longest valid substring length), and `n` for the size of the input string `s`.
+
+9. **Variable Initialization**
+	```cpp
+	    int id = -1;
+	```
+	Initializes the variable `id` to -1 to keep track of the most recent vowel index in the substring.
+
+10. **For Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through the string `s` character by character.
+
+11. **Check for 'a'**
+	```cpp
+	        if(s[i] == 'a') {
+	```
+	Checks if the current character is 'a'.
+
+12. **Check and Update Window**
+	```cpp
+	            if(id != 0) {                 
+	```
+	If the previous vowel was not 'a', reset the start of the window by setting `j` to the current index `i`.
+
+13. **Update Start Index**
+	```cpp
+	                j = i;
+	```
+	Sets `j` to the current index `i` to start a new potential substring.
+
+14. **Update Vowel Index**
+	```cpp
+	            id = 0;
+	```
+	Sets the vowel index `id` to 0, representing the 'a' vowel.
+
+15. **Check for Invalid Vowel Sequence**
+	```cpp
+	        }else if((idx[s[i]] < id) || (idx[s[i]] - id > 1)) {
+	```
+	Checks if the current character does not follow the correct vowel sequence or if it's out of order.
+
+16. **Reset Vowel Sequence**
+	```cpp
+	            id = -1;
+	```
+	Resets `id` to -1 and `j` to the current index `i`, marking the start of a new potential valid substring.
+
+17. **Update Start Index**
+	```cpp
+	            j = i;
+	```
+	Resets the starting index `j` because the current character breaks the valid vowel order.
+
+18. **Check for Valid Vowel Progression**
+	```cpp
+	        } else if(idx[s[i]] - id == 1) {
+	```
+	Checks if the current character is the next vowel in the sequence.
+
+19. **Update Vowel Index**
+	```cpp
+	            id = idx[s[i]];
+	```
+	Updates the vowel index `id` to the index of the current character.
+
+20. **Check for Full Sequence**
+	```cpp
+	        if(id == 4) {
+	```
+	Checks if the substring has reached the end of the vowel sequence, 'u'.
+
+21. **Update Result**
+	```cpp
+	            res = max(res, i - j + 1);
+	```
+	Updates the result `res` with the length of the current valid substring if it's longer than the previous longest substring.
+
+22. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the length of the longest beautiful substring found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only need to iterate over the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we only need a constant amount of extra space for the sliding window.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/description/)
 

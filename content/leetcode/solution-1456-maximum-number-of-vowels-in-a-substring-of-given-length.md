@@ -14,133 +14,168 @@ img_src = ""
 youtube = "tal8tKUr6dU"
 youtube_upload_date="2023-05-06"
 youtube_thumbnail="https://i.ytimg.com/vi/tal8tKUr6dU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting of lowercase English letters and an integer `k`. Your task is to find the maximum number of vowels in any substring of length `k`. Vowels in English are 'a', 'e', 'i', 'o', and 'u'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` and an integer `k`.
+- **Example:** `Input: s = "programming", k = 4`
+- **Constraints:**
+	- 1 <= s.length <= 100,000
+	- s consists of only lowercase English letters.
+	- 1 <= k <= s.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int vowels[26] = {  1,0,0,0,1, 0,0,0,1,0, 
-                        0,0,0,0,1, 0,0,0,0,0, 
-                        1,0,0,0,0, 0 };
-    int maxVowels(string s, int k) {
-        int mx = 0;
-        for(int i = 0, cur = 0; i < s.size(); i++) {
-            cur += vowels[s[i] - 'a'];
-            if(i >= k) cur -= vowels[s[i-k] - 'a'];
-            mx = max(cur, mx);
-        }
-        return mx;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of vowels in any substring of `s` with length `k`.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output must be a single integer representing the maximum count of vowels.
+	- If there are multiple substrings with the same maximum count, return the count as a single value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the maximum number of vowels present in any substring of length `k`.
+
+- Define a helper function to identify vowels efficiently.
+- Use a sliding window approach to count vowels in substrings of length `k`.
+- Adjust the count dynamically as the window moves forward in the string.
+- Track and update the maximum count of vowels encountered.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string and integer are valid and meet the constraints.
+- Substrings of length `k` are always possible as `k <= s.length`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "basketball", k = 5`  \
+  **Explanation:** Output: 2. The substring "asket" contains 2 vowels ('a' and 'e').
+
+- **Input:** `Input: s = "university", k = 3`  \
+  **Explanation:** Output: 2. Substring "uni" contains 2 vowels ('u' and 'i').
+
+- **Input:** `Input: s = "robot", k = 4`  \
+  **Explanation:** Output: 1. The substring "obot" contains 1 vowel ('o').
+
+{{< dots >}}
+## Approach 🚀
+Utilize a sliding window approach to efficiently count vowels in each substring of length `k`.
+
+### Initial Thoughts 💭
+- Vowels are a small, fixed subset of characters, so membership checks can be done using a set.
+- Sliding window helps avoid recomputing the vowel count for overlapping substrings.
+- Efficient implementation requires linear time complexity.
+- Use a sliding window to maintain a running count of vowels as we traverse the string.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as `s` is guaranteed to have at least one character.
+- Input: s with length 100,000 and k close to s.length. Verify performance.
+- Input: s = "aaaaa", k = 3 -> Output: 3. Handles case with all vowels.
+- Input: s = "bcdfg", k = 2 -> Output: 0. Handles case with no vowels.
+- Ensure the function handles edge cases like `k = 1` or `k = s.length` gracefully.
+{{< dots >}}
+## Code 💻
+```cpp
+int vowels[26] = {  1,0,0,0,1, 0,0,0,1,0, 
+                    0,0,0,0,1, 0,0,0,0,0, 
+                    1,0,0,0,0, 0 };
+int maxVowels(string s, int k) {
+    int mx = 0;
+    for(int i = 0, cur = 0; i < s.size(); i++) {
+        cur += vowels[s[i] - 'a'];
+        if(i >= k) cur -= vowels[s[i-k] - 'a'];
+        mx = max(cur, mx);
     }
-};
-{{< /highlight >}}
----
+    return mx;
+}
+```
 
-### Problem Statement
+This function 'maxVowels' calculates the maximum number of vowels in any substring of length 'k' from the string 's'. An auxiliary array 'vowels' is used to mark the vowel letters in the alphabet.
 
-The objective is to find the maximum number of vowels in any contiguous substring of a given length \( k \) from the input string \( s \). A vowel is defined as one of the characters 'a', 'e', 'i', 'o', or 'u'. The solution should be efficient and should work for strings of varying lengths and compositions.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Array Initialization**
+	```cpp
+	int vowels[26] = {  1,0,0,0,1, 0,0,0,1,0, 
+	```
+	This array 'vowels' is used to mark the presence of vowels in the alphabet. Each element corresponds to a letter, where vowels are marked with a '1' and consonants with a '0'.
 
-### Approach
+2. **Array Initialization**
+	```cpp
+	                    0,0,0,0,1, 0,0,0,0,0, 
+	```
+	Continues the initialization of the 'vowels' array. This ensures that the vowels (a, e, i, o, u) are marked with '1' while other letters are marked with '0'.
 
-To solve this problem, we can employ a sliding window technique, which allows us to maintain a window of length \( k \) as we traverse through the string. This approach enables us to calculate the number of vowels in each substring of length \( k \) without needing to count the vowels from scratch for each new substring.
+3. **Array Initialization**
+	```cpp
+	                    1,0,0,0,0, 0 };
+	```
+	Finalizes the 'vowels' array initialization, ensuring that all vowels are marked as '1'.
 
-1. **Initialize a Vowel Lookup**: Create an array that indicates whether a character is a vowel.
-2. **Use a Sliding Window**: Traverse the string while maintaining the count of vowels in the current window.
-3. **Update Count Dynamically**: When the window moves, subtract the vowel count of the character that is sliding out of the window and add the count of the character that is sliding into the window.
-4. **Track the Maximum**: Throughout the traversal, keep track of the maximum number of vowels encountered in any window of size \( k \).
+4. **Function Declaration**
+	```cpp
+	int maxVowels(string s, int k) {
+	```
+	The function 'maxVowels' is declared. It takes a string 's' and an integer 'k', and returns an integer representing the maximum number of vowels in any substring of length 'k'.
 
-### Code Breakdown (Step by Step)
+5. **Variable Initialization**
+	```cpp
+	    int mx = 0;
+	```
+	The variable 'mx' is initialized to zero, which will later hold the maximum number of vowels encountered in any substring of length 'k'.
 
-Here’s a detailed breakdown of the provided code:
+6. **Loop**
+	```cpp
+	    for(int i = 0, cur = 0; i < s.size(); i++) {
+	```
+	A loop starts, iterating through each character in the string 's'. The variable 'cur' keeps track of the current count of vowels in the current sliding window of length 'k'.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   ```
+7. **Vowel Count Update**
+	```cpp
+	        cur += vowels[s[i] - 'a'];
+	```
+	The 'cur' variable is updated by adding 1 if the current character 's[i]' is a vowel (as determined by the 'vowels' array).
 
-   - The solution is encapsulated within a class named `Solution`, as is typical in competitive programming.
+8. **Sliding Window Adjustment**
+	```cpp
+	        if(i >= k) cur -= vowels[s[i-k] - 'a'];
+	```
+	If the index 'i' is greater than or equal to 'k', the character that is sliding out of the window (at position 'i-k') is subtracted from 'cur'.
 
-2. **Vowel Lookup Array**:
-   ```cpp
-   int vowels[26] = {  1,0,0,0,1, 0,0,0,1,0, 
-                       0,0,0,0,1, 0,0,0,0,0, 
-                       1,0,0,0,0, 0 };
-   ```
+9. **Max Vowel Update**
+	```cpp
+	        mx = max(cur, mx);
+	```
+	The variable 'mx' is updated to store the maximum value between 'cur' (the current count of vowels in the window) and the previous maximum count.
 
-   - An integer array named `vowels` is defined with a size of 26 (for each letter of the alphabet). Each position corresponds to a letter ('a' corresponds to index 0, 'b' to index 1, and so on).
-   - The value at each index is `1` if the corresponding letter is a vowel (i.e., 'a', 'e', 'i', 'o', 'u') and `0` otherwise.
+10. **Return Statement**
+	```cpp
+	    return mx;
+	```
+	The function returns the value of 'mx', which is the maximum number of vowels found in any substring of length 'k'.
 
-3. **Function Declaration**:
-   ```cpp
-   int maxVowels(string s, int k) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   - The function `maxVowels` takes a string `s` and an integer `k`, representing the length of the substring to be evaluated.
+The sliding window traverses the string once, making it linear in terms of `n`, the length of the string.
 
-4. **Variable Initialization**:
-   ```cpp
-       int mx = 0;
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   - A variable `mx` is initialized to store the maximum number of vowels found in any substring of length \( k \).
+Only a fixed amount of space is used for tracking the count and vowel set.
 
-5. **Sliding Window Logic**:
-   ```cpp
-       for(int i = 0, cur = 0; i < s.size(); i++) {
-           cur += vowels[s[i] - 'a'];
-   ```
+**Happy Coding! 🎉**
 
-   - A for-loop is initiated to iterate over each character in the string \( s \). The variable `cur` is used to count the number of vowels in the current window.
-   - For each character, the code adds `1` to `cur` if the character is a vowel (using the `vowels` array).
-
-6. **Adjusting for Window Size**:
-   ```cpp
-           if(i >= k) cur -= vowels[s[i-k] - 'a'];
-   ```
-
-   - When the index `i` is greater than or equal to \( k \), it indicates that the window has reached its maximum size. The character that is sliding out of the window (at index `i - k`) is subtracted from the count of vowels in `cur`.
-
-7. **Update Maximum Vowel Count**:
-   ```cpp
-           mx = max(cur, mx);
-       }
-   ```
-
-   - The maximum number of vowels found so far is updated by comparing `cur` with `mx`.
-
-8. **Return the Result**:
-   ```cpp
-       return mx;
-   }
-   ```
-
-   - Finally, the function returns the maximum count of vowels found in any substring of length \( k \).
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \( O(n) \), where \( n \) is the length of the string \( s \). This efficiency is achieved because we make a single pass through the string, updating counts in constant time for each character.
-  
-- **Space Complexity**: The space complexity is \( O(1) \) because the size of the `vowels` array is constant (26), and we use only a few integer variables regardless of the input size.
-
-### Conclusion
-
-The provided code effectively counts the maximum number of vowels in any substring of a specified length \( k \) using a sliding window approach. 
-
-#### Key Takeaways:
-
-1. **Sliding Window Technique**: This approach is optimal for problems involving contiguous subarrays or substrings, as it allows for efficient updates as the window moves.
-
-2. **Predefined Lookups**: Using an array to mark vowels enables quick access to check whether a character is a vowel or not.
-
-3. **Efficiency**: The method is both time-efficient and space-efficient, making it suitable for larger inputs.
-
-4. **Clarity**: The code is straightforward and easy to understand, demonstrating clear logic that can be easily followed.
-
-In summary, this solution serves as a great example of how to leverage efficient algorithms and data structures to solve common string manipulation problems in a clear and effective manner.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/)
 

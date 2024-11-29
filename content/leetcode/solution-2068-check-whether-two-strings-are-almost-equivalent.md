@@ -14,88 +14,137 @@ img_src = ""
 youtube = "l_KAgx9c8Mc"
 youtube_upload_date="2021-11-13"
 youtube_thumbnail="https://i.ytimg.com/vi/l_KAgx9c8Mc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, `word1` and `word2`, each of length `n`. The two strings are considered almost equivalent if the difference in frequency of each letter between `word1` and `word2` is at most 3. Return true if they are almost equivalent, or false otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two strings of equal length `n` are provided as input. Each string consists of lowercase English letters.
+- **Example:** `word1 = "abcd", word2 = "abdc"`
+- **Constraints:**
+	- 1 <= n <= 100
+	- Both word1 and word2 consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkAlmostEquivalent(string s, string t) {
-        int cnt[26] = {};
-        for (char c : s) cnt[c - 'a']++;
-        for (char c : t) cnt[c - 'a']--;
-        for (int i = 0; i < 26; ++i) {
-            if (abs(cnt[i]) > 3) return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the two strings are almost equivalent, otherwise return `false`.
+- **Example:** `true`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if the absolute frequency difference for each letter in the two strings is at most 3.
+
+- Count the frequency of each letter in both strings.
+- Calculate the absolute difference of the frequencies for each letter.
+- If any difference exceeds 3, return false; otherwise, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both input strings are of equal length.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word1 = "abcd", word2 = "abdc"`  \
+  **Explanation:** Both strings have identical characters, and the frequency difference for each letter is 0, which is within the allowed limit.
+
+- **Input:** `word1 = "zzzz", word2 = "aaabb"`  \
+  **Explanation:** The difference in the frequency of 'z' is 4, which exceeds the allowed limit of 3.
+
+{{< dots >}}
+## Approach 🚀
+Count the frequency of each character in both strings, compute the difference in their frequencies, and check if any difference exceeds 3.
+
+### Initial Thoughts 💭
+- Both strings should be of the same length.
+- We need to compare the frequencies of each character.
+- An efficient solution would involve counting the frequencies of characters and comparing the differences for each letter.
+{{< dots >}}
+### Edge Cases 🌐
+- If either string is empty, the function should return true.
+- If the strings are at their maximum length (100), ensure that the solution works within the time constraints.
+- If the strings are identical, the function should return true.
+- Both strings must be the same length.
+{{< dots >}}
+## Code 💻
+```cpp
+bool checkAlmostEquivalent(string s, string t) {
+    int cnt[26] = {};
+    for (char c : s) cnt[c - 'a']++;
+    for (char c : t) cnt[c - 'a']--;
+    for (int i = 0; i < 26; ++i) {
+        if (abs(cnt[i]) > 3) return false;
     }
-};
-{{< /highlight >}}
----
+    return true;
+}
+```
 
-### Problem Statement
+This function checks whether two input strings are almost equivalent. It compares the frequency of characters in both strings, and if the absolute difference in the frequency of any character exceeds 3, the function returns false.
 
-The objective of this problem is to determine whether two given strings, `s` and `t`, can be considered "almost equivalent." Specifically, two strings are defined as almost equivalent if the absolute difference in the frequency of any character between the two strings does not exceed three. This means that for each character from 'a' to 'z', the difference between the counts of that character in `s` and `t` should be at most 3.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkAlmostEquivalent(string s, string t) {
+	```
+	This line defines the function `checkAlmostEquivalent` that takes two strings as input and returns a boolean value.
 
-### Approach
+2. **Array Initialization**
+	```cpp
+	    int cnt[26] = {};
+	```
+	An array `cnt` of size 26 is initialized to store the frequency of each letter in the input strings. The array is initialized with zero values.
 
-To solve this problem, we can follow these steps:
+3. **Count Characters in s**
+	```cpp
+	    for (char c : s) cnt[c - 'a']++;
+	```
+	This loop iterates through each character in string `s` and increments the corresponding index in the `cnt` array based on the character's ASCII value.
 
-1. **Character Count Calculation**: We will maintain a frequency count of characters for both strings. This involves iterating through each character in the strings and updating a count array that records the frequency of each character.
+4. **Count Characters in t**
+	```cpp
+	    for (char c : t) cnt[c - 'a']--;
+	```
+	This loop iterates through each character in string `t` and decrements the corresponding index in the `cnt` array.
 
-2. **Difference Evaluation**: Once we have the character frequencies, we will check the differences in frequency for each character. If the difference for any character exceeds 3, the strings are not almost equivalent. Otherwise, they are considered almost equivalent.
+5. **Loop Over All Characters**
+	```cpp
+	    for (int i = 0; i < 26; ++i) {
+	```
+	This loop checks all indices of the `cnt` array (corresponding to each letter of the alphabet).
 
-3. **Return Result**: Finally, based on the evaluation of differences, we will return `true` if the strings are almost equivalent and `false` otherwise.
+6. **Check Difference Exceeds 3**
+	```cpp
+	        if (abs(cnt[i]) > 3) return false;
+	```
+	If the absolute value of the count at any index in the `cnt` array exceeds 3, the function returns `false`, indicating the strings are not almost equivalent.
 
-### Code Breakdown (Step by Step)
+7. **Return True**
+	```cpp
+	    return true;
+	```
+	If no character's frequency difference exceeds 3, the function returns `true`, indicating the strings are almost equivalent.
 
-1. **Character Count Array Initialization**: We declare an integer array `cnt` of size 26 (for each letter of the English alphabet) and initialize it to zero. This array will help us keep track of the frequency differences between the two strings.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-   int cnt[26] = {};
-   ```
+The time complexity is linear, as we iterate over each string once.
 
-2. **Count Characters from String `s`**: We iterate through each character in the string `s`. For each character, we calculate its corresponding index (based on its ASCII value) and increment the count at that index. This step effectively counts how many times each character appears in `s`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   ```cpp
-   for (char c : s) cnt[c - 'a']++;
-   ```
+We use constant space, as we only need an array of size 26 to store character frequencies.
 
-3. **Count Characters from String `t`**: We perform a similar iteration for string `t`, but instead of incrementing the count, we decrement it. This will allow us to evaluate the frequency differences directly within the same count array.
+**Happy Coding! 🎉**
 
-   ```cpp
-   for (char c : t) cnt[c - 'a']--;
-   ```
-
-4. **Evaluate Frequency Differences**: After processing both strings, we loop through the count array to check the absolute values of the counts. If any count exceeds 3, we immediately return `false`, indicating that the strings are not almost equivalent.
-
-   ```cpp
-   for (int i = 0; i < 26; ++i) {
-       if (abs(cnt[i]) > 3) return false;
-   }
-   ```
-
-5. **Return Result**: If we complete the loop without finding any differences greater than 3, we return `true`, indicating that the strings are almost equivalent.
-
-   ```cpp
-   return true;
-   ```
-
-### Complexity
-
-- **Time Complexity**: O(n + m), where `n` is the length of string `s` and `m` is the length of string `t`. The algorithm iterates through both strings once to calculate character counts and then once more through the count array, resulting in a linear time complexity relative to the size of the input.
-
-- **Space Complexity**: O(1). The space complexity is constant because we use a fixed-size array of size 26, regardless of the input size. This means that the space requirement does not grow with the input size, making the solution efficient in terms of memory usage.
-
-### Conclusion
-
-The solution provided efficiently determines whether two strings are almost equivalent by leveraging a simple character frequency counting approach combined with a constant space evaluation of differences. This method is effective and straightforward, ensuring clarity and maintainability. The time complexity remains optimal for the problem, and the space usage is minimal, making it a robust solution for scenarios where such string comparison tasks are needed. 
-
-Overall, this implementation serves as an excellent example of how to handle string manipulation problems in competitive programming and software development, offering both performance and ease of understanding for future adaptations.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-whether-two-strings-are-almost-equivalent/description/)
 

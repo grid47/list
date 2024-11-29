@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "7utL5cTDcnA"
 youtube_upload_date="2024-09-27"
 youtube_thumbnail="https://i.ytimg.com/vi/7utL5cTDcnA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,140 +28,200 @@ youtube_thumbnail="https://i.ytimg.com/vi/7utL5cTDcnA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are implementing a calendar system where you can add events. Each event is represented by a start time and an end time, defined as a half-open interval [startTime, endTime). You need to ensure that no more than two events overlap at any given time, or else return false. Your task is to implement a class, MyCalendarTwo, that will book events while preventing triple bookings.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of method calls with parameters. The first call is always the initialization of the MyCalendarTwo object, followed by calls to the book method.
+- **Example:** `Input: ["MyCalendarTwo", "book", "book", "book", "book", "book", "book"] [[], [10, 20], [50, 60], [10, 40], [5, 15], [5, 10], [25, 55]]`
+- **Constraints:**
+	- 0 <= start < end <= 10^9
+	- At most 1000 calls will be made to book.
 
-{{< highlight cpp >}}
-class MyCalendarTwo {
-    map<int, int> mp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output will be an array of boolean values for each call. The first call to the MyCalendarTwo constructor returns null. For each book method call, return true if the event can be booked without causing a triple booking, and false otherwise.
+- **Example:** `Output: [null, true, true, true, false, true, true]`
+- **Constraints:**
+	- The response for each book method call is a boolean indicating whether the event was successfully booked or not.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to design a method that tracks the number of overlapping events at any time and ensures that no more than two events overlap.
+
+- 1. Use a data structure to track the number of events occurring at any given time.
+- 2. For each new booking, update the event count at the corresponding start and end times.
+- 3. Check if the number of overlapping events exceeds 2 at any point.
+- 4. If more than two events overlap, revert the booking and return false. Otherwise, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The start and end times of events are valid integers, and events are well-formed.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["MyCalendarTwo", "book", "book", "book", "book", "book", "book"] [[], [10, 20], [50, 60], [10, 40], [5, 15], [5, 10], [25, 55]]`  \
+  **Explanation:** In this example, the first three events are successfully booked as they do not overlap more than twice. The fourth event fails as it causes a triple booking. The fifth event is booked because it only overlaps with one event at any time.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a data structure to track and manage overlapping events, ensuring no triple booking occurs.
+
+### Initial Thoughts 💭
+- We need a way to efficiently count overlapping events at any point in time.
+- We can use a map to track the number of active events at any given time. This will allow us to quickly determine if adding a new event causes a triple booking.
+{{< dots >}}
+### Edge Cases 🌐
+- If no events are booked yet, any event can be booked.
+- Ensure the solution efficiently handles up to 1000 booking attempts.
+- Consider events with very close start and end times that could overlap very slightly.
+- The solution must handle start and end times within the range of [0, 10^9].
+{{< dots >}}
+## Code 💻
+```cpp
 public:
-    MyCalendarTwo() {
-        
-    }
+MyCalendarTwo() {
     
-    bool book(int start, int end) {
-        mp[start]++;
-        mp[end]--;
-        int bkd = 0;
+}
+
+bool book(int start, int end) {
+    mp[start]++;
+    mp[end]--;
+    int bkd = 0;
+
     
+    for(auto it =mp.begin(); it != mp.end(); it++) {
         
-        for(auto it =mp.begin(); it != mp.end(); it++) {
+        bkd += it->second;
+        
+        if(bkd == 3) {
             
-            bkd += it->second;
+            mp[start]--;
+            mp[end]++;
             
-            if(bkd == 3) {
-                
-                mp[start]--;
-                mp[end]++;
-                
-                return false;
-            }
+            return false;
         }
-        
-        return true;
     }
+    
+    return true;
+}
 };
 
 /**
  * Your MyCalendarTwo object will be instantiated and called as such:
  * MyCalendarTwo* obj = new MyCalendarTwo();
  * bool param_1 = obj->book(start,end);
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This is the implementation of a calendar system that tracks events and ensures no more than two events overlap at the same time.
 
-The problem involves designing a calendar system where events can be booked, and there are no restrictions on double bookings. However, the challenge arises when trying to handle triple bookings (i.e., when more than two events overlap). Your task is to implement a data structure that supports booking events, with the constraint that no more than two events can overlap at the same time.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Declaration**
+	```cpp
+	public:
+	```
+	Access modifier specifying that the following methods are publicly accessible.
 
-### Approach
+2. **Constructor**
+	```cpp
+	MyCalendarTwo() {
+	```
+	Constructor for the MyCalendarTwo class, initializing the object.
 
-To solve this problem efficiently, we can use a **map** (or dictionary) to store the changes in the number of active bookings at each time point. The idea is to track the "events" of when an event starts and ends, and adjust a counter that reflects the number of overlapping events at any given moment.
+3. **Empty Block**
+	```cpp
+	    
+	```
+	Empty line for spacing, no code here.
 
-The key operations in this approach involve:
-1. **Incrementing a counter when an event starts**.
-2. **Decrementing the counter when an event ends**.
-3. **Checking if the current booking causes three simultaneous bookings at any time**. If it does, we undo the booking attempt.
+4. **End Block**
+	```cpp
+	}
+	```
+	Closing bracket to end the constructor.
 
-We use a **map** to maintain these events, where the keys represent the times (both start and end times), and the values represent the change in the count of overlapping events at that particular time.
+5. **Method Declaration**
+	```cpp
+	bool book(int start, int end) {
+	```
+	Declaring the 'book' method, which checks if a new event can be booked.
 
-### Code Breakdown (Step by Step)
+6. **Update Map**
+	```cpp
+	    mp[start]++;
+	```
+	Increments the count for the 'start' time in the map, indicating the start of an event.
 
-#### 1. **Class Definition and Data Structures**
-   - The class `MyCalendarTwo` is defined with a private member `map<int, int> mp;`. The map `mp` will store the time points (start and end times of events) as keys, and the values will represent the changes in the booking count.
-   
-   ```cpp
-   class MyCalendarTwo {
-       map<int, int> mp;
-   public:
-       MyCalendarTwo() {}
-   ```
+7. **Update Map**
+	```cpp
+	    mp[end]--;
+	```
+	Decrements the count for the 'end' time in the map, indicating the end of an event.
 
-   - The map is initialized in the constructor, and we will use it to keep track of the bookings.
+8. **Variable Declaration**
+	```cpp
+	    int bkd = 0;
+	```
+	Declares an integer variable 'bkd' to keep track of the number of overlapping events.
 
-#### 2. **The `book` Function**
-   The `book` function is the core of the solution. It handles the task of adding a new booking (with `start` and `end` times), and ensuring that no more than two events overlap at any time.
+9. **ForLoop**
+	```cpp
+	    for(auto it =mp.begin(); it != mp.end(); it++) {
+	```
+	Iterates over the events in the map to check the number of overlapping events.
 
-   ```cpp
-   bool book(int start, int end) {
-       mp[start]++;  // Increment the count at the start time
-       mp[end]--;    // Decrement the count at the end time
-   ```
+10. **Update Variable**
+	```cpp
+	        bkd += it->second;
+	```
+	Adds the value from the current map entry to 'bkd' to track the current overlap count.
 
-   - The `start` time is incremented by 1, and the `end` time is decremented by 1. This effectively marks the beginning and end of an event.
+11. **If Statement**
+	```cpp
+	        if(bkd == 3) {
+	```
+	Checks if the number of overlapping events has reached 3 (i.e., more than 2 overlapping events).
 
-#### 3. **Checking for Triple Bookings**
-   After updating the map, we need to check if the new event causes any point in time to have more than two overlapping events. We do this by iterating through the map and maintaining a running sum of the bookings.
+12. **Update Map**
+	```cpp
+	            mp[start]--;
+	```
+	Decrements the count for the 'start' time, effectively canceling the booking.
 
-   ```cpp
-   int bkd = 0;  // To keep track of the current number of active bookings
-   for (auto it = mp.begin(); it != mp.end(); it++) {
-       bkd += it->second;  // Update the number of active bookings at the current time
-       
-       if (bkd == 3) {  // If there are 3 bookings at the same time
-           mp[start]--;  // Undo the booking by decrementing the start time
-           mp[end]++;    // Undo the booking by incrementing the end time
-           return false; // Return false because triple booking is not allowed
-       }
-   }
-   ```
+13. **Update Map**
+	```cpp
+	            mp[end]++;
+	```
+	Increments the count for the 'end' time to reflect the cancellation.
 
-   - The variable `bkd` tracks the cumulative count of overlapping events as we iterate through the map.
-   - If at any point the value of `bkd` reaches 3, it means that three events overlap, and thus we cannot book the current event. In this case, we undo the booking attempt by decrementing the `start` time and incrementing the `end` time.
-   - The function returns `false` if a triple booking occurs, indicating that the booking could not be completed.
+14. **Return Statement**
+	```cpp
+	            return false;
+	```
+	Returns 'false' to indicate that the booking cannot be made due to too many overlapping events.
 
-#### 4. **Successful Booking**
-   If no triple booking occurs during the iteration, the event is successfully booked, and the function returns `true` to indicate success.
+15. **Return Statement**
+	```cpp
+	    return true;
+	```
+	Returns 'true' to indicate that the booking was successful.
 
-   ```cpp
-   return true;
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log N)
+- **Average Case:** O(log N)
+- **Worst Case:** O(N)
 
-#### 5. **Class Usage**
-   The class can be used by first creating an instance of `MyCalendarTwo` and then calling the `book` function for each event to be booked.
+In the worst case, we check all events for conflicts, making the time complexity O(N), where N is the number of events.
 
-   ```cpp
-   MyCalendarTwo* obj = new MyCalendarTwo();
-   bool param_1 = obj->book(start, end);
-   ```
+### Space Complexity 💾
+- **Best Case:** O(N)
+- **Worst Case:** O(N)
 
-   The `book` function is called with the `start` and `end` times of the event, and it returns `true` if the event is successfully booked, or `false` if the event causes a triple booking.
+The space complexity is O(N) as we store the number of events in the calendar.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-#### Time Complexity:
-- **O(log n)** for each booking operation, where `n` is the number of distinct time points in the map. This is because the map is implemented as a balanced binary search tree (e.g., `std::map` in C++), which allows for logarithmic time complexity for both insertion and iteration operations.
-- Specifically:
-  - Inserting a new event (incrementing the start time and decrementing the end time) takes O(log n) time.
-  - Iterating through the map to check the number of overlapping events takes O(log n) time as well, since the map’s size can grow proportionally to the number of events booked.
-
-#### Space Complexity:
-- **O(n)**, where `n` is the number of events. In the worst case, each event might introduce a new unique time point in the map, so the space complexity is proportional to the number of events booked.
-
-### Conclusion
-
-The `MyCalendarTwo` class efficiently handles event bookings while ensuring that no more than two events overlap at any given time. By using a map to track the start and end times of events and applying the concept of a running sum to count the number of overlapping events, the class is able to detect and prevent triple bookings in logarithmic time. This approach optimizes both time and space complexity, making it scalable for large numbers of event bookings.
-
-The use of a **map** ensures that the operations of insertion and iteration are efficient, and the overall time complexity of O(log n) per booking operation is optimal for this type of problem. Additionally, by applying a straightforward check for triple bookings, the algorithm guarantees that no more than two events can overlap at the same time. The `book` function ensures that users are informed if their booking request cannot be processed due to conflicting events, making the class both efficient and easy to use in scenarios where event scheduling is required.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/my-calendar-ii/description/)
 

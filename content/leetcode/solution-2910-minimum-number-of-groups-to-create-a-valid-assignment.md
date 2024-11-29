@@ -14,126 +14,202 @@ img_src = ""
 youtube = "-upnA7dVDU0"
 youtube_upload_date="2023-10-22"
 youtube_thumbnail="https://i.ytimg.com/vi/-upnA7dVDU0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a collection of balls, each marked with a number. Your task is to sort the balls into boxes in a way that follows two rules: Balls with the same number must be placed in the same box, but if there are multiple balls with the same number, they can be placed in different boxes. Additionally, the biggest box can only have one more ball than the smallest box. Return the fewest number of boxes required to sort these balls while following these rules.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers, where each integer represents a ball. The array can have up to 10^5 elements.
+- **Example:** `balls = [4, 4, 4, 2, 1, 1, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the fewest number of boxes required to sort the balls into according to the given rules.
+- **Example:** `For the input [4, 4, 4, 2, 1, 1, 5], the output should be 4.`
+- **Constraints:**
 
-    int split(unordered_map<int, int> &cnt, int g1) {
-        int groups = 0, g = g1 - 1;
-        for (const auto &[_, c] : cnt) {
-            int group_cnt = c / g1, last_group = c % g1;
-            if (last_group && last_group + group_cnt < g)
-                return INT_MAX;
-            groups += group_cnt + (last_group > 0);
-        }
-        return groups;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of boxes that can accommodate the balls while adhering to the constraints on box sizes and ball distribution.
+
+- Count the occurrences of each number in the balls array.
+- Determine the smallest number of boxes required by calculating how many groups can be formed where the group sizes differ by at most 1.
+- Return the minimum number of groups (boxes) required to sort all balls according to the rules.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain at least one ball.
+- It is guaranteed that the number of balls is non-negative and the input is well-formed.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `balls = [4, 4, 4, 2, 1, 1, 5]`  \
+  **Explanation:** In this example, we need 4 boxes: one for the balls marked '4', one for the balls marked '2', one for the balls marked '1', and one for the ball marked '5'. The total number of boxes is 4.
+
+{{< dots >}}
+## Approach 🚀
+We aim to find the fewest number of boxes that can accommodate the balls by analyzing their frequencies and balancing the distribution of balls across the boxes.
+
+### Initial Thoughts 💭
+- The problem boils down to partitioning the balls into groups where each group can fit into a box, and the size of the boxes can differ by at most one ball.
+- By considering the frequency of each ball number and calculating how to evenly distribute them across boxes, we can minimize the number of boxes required.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one ball, so there will never be an empty input.
+- The solution should handle large inputs efficiently, up to 10^5 balls.
+- Consider cases where all balls are the same, or where there is only one ball with no other numbers present.
+- Input values for each ball will be between 1 and 10^9.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int split(unordered_map<int, int> &cnt, int g1) {
+    int groups = 0, g = g1 - 1;
+    for (const auto &[_, c] : cnt) {
+        int group_cnt = c / g1, last_group = c % g1;
+        if (last_group && last_group + group_cnt < g)
+            return INT_MAX;
+        groups += group_cnt + (last_group > 0);
     }
+    return groups;
+}
 
-    int minGroupsForValidAssignment(vector<int>& nums) {
-        unordered_map<int, int> cnt;
-        for (auto n : nums)
-            ++cnt[n];
-        int g = min_element(begin(cnt), end(cnt), [](const auto &p1, const auto &p2){
-            return p1.second < p2.second;})->second;
-        for (; split(cnt, g + 1) == INT_MAX; --g) ;
-        return split(cnt, g + 1);
-    }
+int minGroupsForValidAssignment(vector<int>& nums) {
+    unordered_map<int, int> cnt;
+    for (auto n : nums)
+        ++cnt[n];
+    int g = min_element(begin(cnt), end(cnt), [](const auto &p1, const auto &p2){
+        return p1.second < p2.second;})->second;
+    for (; split(cnt, g + 1) == INT_MAX; --g) ;
+    return split(cnt, g + 1);
+}
 
 };
-
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand asks us to determine the minimum number of groups needed to assign a list of integers such that every group has a valid distribution of integers. The goal is to ensure that each group is as balanced as possible based on the frequencies of the integers in the list, and we want to minimize the total number of groups required. Specifically, the frequency distribution of the integers must meet the conditions for valid assignments, and the task is to find the least number of groups needed to accomplish this.
-
-### Approach
-
-To solve this problem, we need to perform the following steps:
-
-1. **Count the Frequency of Each Number**: The first task is to determine how many times each number appears in the given array. This is essential because it dictates how we can group the numbers in a valid way.
-
-2. **Determine the Minimum Group Size**: The next step is to evaluate the minimum group size (`g`) where the numbers can be split into valid groups. A valid group has to respect the condition that no number can appear more times than it is allowed in a group. We aim to minimize the group size while still being able to create valid groupings.
-
-3. **Optimize Group Splitting**: Once we know the frequency distribution of the numbers, we attempt to split the numbers into as few groups as possible while adhering to the frequency constraints. The `split()` function will help us determine the number of groups needed for a given group size.
-
-4. **Iterative Search for the Optimal Group Size**: Starting with a relatively large group size and iteratively decreasing it, we check if the numbers can still be grouped validly. The goal is to find the smallest group size where a valid grouping can still be made.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Frequency Count of Each Number
-
-```cpp
-unordered_map<int, int> cnt;
-for (auto n : nums)
-    ++cnt[n];
 ```
 
-- We first create an `unordered_map` called `cnt` to store the frequency of each number in the list `nums`.
-- We iterate through the input array `nums`, incrementing the count for each number. This step essentially builds a frequency map where the keys are the unique numbers in the array, and the values are their respective frequencies.
+The code defines two functions: `split` and `minGroupsForValidAssignment`. The `split` function calculates the minimum number of groups based on the counts of each element in the map. The `minGroupsForValidAssignment` function calculates the minimum number of groups required to assign numbers in `nums` such that the groups satisfy certain constraints.
 
-#### Step 2: Determine the Minimum Group Size
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int split(unordered_map<int, int> &cnt, int g1) {
+	```
+	Defines the `split` function, which calculates the minimum number of groups based on the counts of elements in the `cnt` unordered map and a given group size `g1`.
 
-```cpp
-int g = min_element(begin(cnt), end(cnt), [](const auto &p1, const auto &p2){
-    return p1.second < p2.second;
-})->second;
-```
+2. **Variable Initialization**
+	```cpp
+	    int groups = 0, g = g1 - 1;
+	```
+	Initializes two variables: `groups` to track the total number of groups and `g` to represent the target group size minus one.
 
-- In this step, we find the number with the minimum frequency by using the `min_element` function. We look for the element with the smallest count, and `g` is assigned that count.
-- This value `g` is the minimum frequency among the numbers, which sets an initial threshold for the smallest valid group size.
+3. **Loop: Iterate over Element Counts**
+	```cpp
+	    for (const auto &[_, c] : cnt) {
+	```
+	Iterates through each element and its count (`c`) in the `cnt` unordered map.
 
-#### Step 3: Split Numbers into Groups
+4. **Calculate Group Counts**
+	```cpp
+	        int group_cnt = c / g1, last_group = c % g1;
+	```
+	Calculates the number of full groups (`group_cnt`) that can be formed from the count `c` and determines the remaining elements (`last_group`) that don't fill a full group.
 
-```cpp
-int groups = 0, g = g1 - 1;
-for (const auto &[_, c] : cnt) {
-    int group_cnt = c / g1, last_group = c % g1;
-    if (last_group && last_group + group_cnt < g)
-        return INT_MAX;
-    groups += group_cnt + (last_group > 0);
-}
-return groups;
-```
+5. **Conditional Check: Valid Grouping**
+	```cpp
+	        if (last_group && last_group + group_cnt < g)
+	```
+	Checks if the remaining elements (`last_group`) plus the full groups (`group_cnt`) are less than the target group size `g`. If so, returns `INT_MAX` to indicate an invalid grouping.
 
-- The function `split()` attempts to split the numbers into groups of size `g1`. The parameters passed to the function are the frequency map `cnt` and the group size `g1`.
-- We calculate how many full groups (`group_cnt`) can be made for each number's frequency (`c / g1`), and whether there is any leftover group (`last_group = c % g1`).
-- If there is a leftover group and the number of groups formed is insufficient to meet the criteria (i.e., the leftover group is too small to form a valid group), the function returns `INT_MAX`, indicating that the group size `g1` is not feasible.
-- Otherwise, we update the `groups` counter to reflect the number of groups formed for the given group size `g1`.
+6. **Return on Invalid Grouping**
+	```cpp
+	            return INT_MAX;
+	```
+	Returns `INT_MAX` when the grouping is invalid, which indicates that the current group size `g1` is not possible.
 
-#### Step 4: Iterative Search for the Optimal Group Size
+7. **Update Group Count**
+	```cpp
+	        groups += group_cnt + (last_group > 0);
+	```
+	Updates the `groups` count by adding the number of full groups (`group_cnt`) and an additional group if there are any remaining elements (`last_group > 0`).
 
-```cpp
-for (; split(cnt, g + 1) == INT_MAX; --g) ;
-return split(cnt, g + 1);
-```
+8. **Return Group Count**
+	```cpp
+	    return groups;
+	```
+	Returns the total number of groups after iterating through all the elements in `cnt`.
 
-- The loop iteratively decreases the group size `g` starting from the initial value and tries to find the smallest valid group size. If the `split()` function returns `INT_MAX`, it means the group size is not valid, so we continue decreasing the group size.
-- The loop stops when we find the smallest group size that allows the numbers to be split into valid groups, and the result is returned.
+9. **Function Definition**
+	```cpp
+	int minGroupsForValidAssignment(vector<int>& nums) {
+	```
+	Defines the `minGroupsForValidAssignment` function, which calculates the minimum number of groups needed for a valid assignment of elements in the array `nums`.
 
-### Complexity
+10. **Variable Initialization**
+	```cpp
+	    unordered_map<int, int> cnt;
+	```
+	Initializes an unordered map `cnt` to store the count of each element in the array `nums`.
 
-#### Time Complexity:
-- **Counting Frequencies**: The time complexity of building the frequency map `cnt` is `O(n)`, where `n` is the number of elements in the input list `nums`.
-- **Finding the Minimum Group Size**: The time complexity of finding the minimum frequency using `min_element` is `O(k)`, where `k` is the number of unique elements in `cnt`.
-- **Splitting into Groups**: The time complexity of the `split()` function depends on the number of unique elements `k` and involves iterating over the frequency map. The worst-case time complexity for splitting is `O(k)`.
-- **Iterative Search for the Optimal Group Size**: In the worst case, the group size can range from `1` to `g1` (the maximum frequency), which leads to a total complexity of `O(g1 * k)` for the iterative search.
-- **Overall Time Complexity**: The overall time complexity is dominated by the iterative search, leading to a total time complexity of `O(g1 * k)`.
+11. **Counting Elements**
+	```cpp
+	    for (auto n : nums)
+	```
+	Loops through each element `n` in the array `nums`.
 
-#### Space Complexity:
-- The space complexity is primarily determined by the space used to store the frequency map `cnt`, which has a space complexity of `O(k)`, where `k` is the number of unique elements in `nums`.
+12. **Increment Count**
+	```cpp
+	        ++cnt[n];
+	```
+	Increments the count of the element `n` in the unordered map `cnt`.
 
-### Conclusion
+13. **Find Minimum Element Count**
+	```cpp
+	    int g = min_element(begin(cnt), end(cnt), [](const auto &p1, const auto &p2){
+	```
+	Finds the element with the minimum count in the unordered map `cnt` using a lambda function to compare the counts.
 
-The solution efficiently solves the problem of determining the minimum number of groups required for valid assignments of the input numbers. By leveraging frequency counting, group size optimization, and iterative search, the algorithm minimizes the number of groups while ensuring that the groupings adhere to the constraints. The approach is both time-efficient and space-efficient, making it suitable for larger input sizes. The use of `unordered_map` and `min_element` ensures that the frequency count and the search for valid group sizes are performed optimally. This solution provides an optimal balance between accuracy and efficiency, achieving the desired result with a manageable time complexity.
+14. **End of Min Element Count**
+	```cpp
+	        return p1.second < p2.second;})->second;
+	```
+	Completes the finding of the minimum element count and assigns it to the variable `g`.
+
+15. **Loop: Adjust Group Size**
+	```cpp
+	    for (; split(cnt, g + 1) == INT_MAX; --g) ;
+	```
+	Starts a loop that decreases `g` until a valid group size is found. It calls the `split` function to check if the current group size (`g + 1`) is valid.
+
+16. **Return Final Group Count**
+	```cpp
+	    return split(cnt, g + 1);
+	```
+	Returns the minimum number of groups for a valid assignment by calling the `split` function with the final valid group size `g + 1`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of balls, as we only need to pass through the array a constant number of times.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the count of each ball number in a map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/description/)
 

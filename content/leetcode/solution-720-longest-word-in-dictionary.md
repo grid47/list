@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "t2jdltmqnlY"
 youtube_upload_date="2020-06-17"
 youtube_thumbnail="https://i.ytimg.com/vi/t2jdltmqnlY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,112 +28,152 @@ youtube_thumbnail="https://i.ytimg.com/vi/t2jdltmqnlY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of strings `words`, return the longest word in the list that can be built progressively one character at a time by other words in the list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of strings `words`, where each string represents a word in the dictionary.
+- **Example:** `words = ["b", "ba", "ban", "bana", "banana"]`
+- **Constraints:**
+	- 1 <= words.length <= 1000
+	- 1 <= words[i].length <= 30
+	- words[i] consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string longestWord(vector<string>& words) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the longest word that can be formed progressively from other words in the list. If there is a tie, return the lexicographically smallest word.
+- **Example:** `"banana"`
+- **Constraints:**
+	- The result should be a string representing the longest word that can be progressively built.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the longest word that can be formed one character at a time by other words in the list.
+
+- Sort the list of words lexicographically to ensure that we check the smallest words first.
+- Use a set to keep track of the words that can be progressively formed.
+- For each word, check if it can be formed by adding one character at a time from another word that is already in the set.
+- If a word can be formed, update the result if it is longer or lexicographically smaller than the current result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The list of words is guaranteed to contain at least one word.
+- All words are in lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ["b", "ba", "ban", "bana", "banana"]`  \
+  **Explanation:** The word 'banana' can be built progressively from 'b', 'ba', 'ban', and 'bana', making it the longest valid word.
+
+- **Input:** `words = ["d", "do", "dog", "dogs", "dot", "done"]`  \
+  **Explanation:** The word 'dog' can be built progressively from 'd' and 'do', whereas 'dogs' cannot be built from any previous word.
+
+{{< dots >}}
+## Approach 🚀
+The solution leverages sorting and set operations to efficiently find the longest word that can be built progressively.
+
+### Initial Thoughts 💭
+- We need to check each word's ability to be progressively built from smaller words.
+- Sorting the words helps to check shorter words first, ensuring that we find the longest valid word in lexicographical order.
+{{< dots >}}
+### Edge Cases 🌐
+- If the list is empty, the result should be an empty string.
+- Handle cases where the input list contains a large number of words (up to 1000).
+- Handle cases where the result is a single character word or where no valid word can be built.
+- Ensure that sorting and set operations work efficiently within the problem's constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+string longestWord(vector<string>& words) {
+
+    sort(words.begin(),words.end());
+    unordered_set<string> mp;
+    string res="";
     
-        sort(words.begin(),words.end());
-        unordered_set<string> mp;
-        string res="";
-        
-        for(string w: words){
-            if(w.size() == 1 || mp.count(w.substr(0, w.size() -1))) {
-                res = w.size()>res.size()? w:res;
-                mp.insert(w);
-            }
+    for(string w: words){
+        if(w.size() == 1 || mp.count(w.substr(0, w.size() -1))) {
+            res = w.size()>res.size()? w:res;
+            mp.insert(w);
         }
-        return res;
     }
+    return res;
+}
 
-};
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This function finds the longest word in a dictionary that can be built one character at a time by other words in the dictionary.
 
-The problem asks us to find the **longest word** from a list of words that can be built by adding one character at a time to the previous word. Specifically, we want to find the longest word such that every prefix of it is also present in the list of words. A prefix is defined as the initial part of the word, which must also be a valid word in the list.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string longestWord(vector<string>& words) {
+	```
+	Defines the function to find the longest word that meets the criteria.
 
-### Approach
+2. **Sorting**
+	```cpp
+	    sort(words.begin(),words.end());
+	```
+	Sorts the words lexicographically to ensure smaller words are processed first.
 
-To solve this problem efficiently, we can use a **greedy approach** combined with a **hash set** to track the valid words we've encountered. Here’s a step-by-step breakdown of how we can approach the problem:
+3. **Data Structure**
+	```cpp
+	    unordered_set<string> mp;
+	```
+	Initializes a hash set to store valid prefixes of words.
 
-1. **Sorting the Words**: By sorting the list of words lexicographically, we ensure that we process smaller words first. This is crucial because smaller words are potential prefixes for larger words. This step allows us to easily check if a prefix of a word is already in the set.
+4. **Initialization**
+	```cpp
+	    string res="";
+	```
+	Initializes an empty string to store the result.
 
-2. **Using a Hash Set**: We use an **unordered set (hash set)** to store the valid words that we have encountered so far. This allows us to check if a prefix exists in constant time.
+5. **Loop**
+	```cpp
+	    for(string w: words){
+	```
+	Iterates through each word in the sorted list.
 
-3. **Checking Each Word**: For each word in the list, we check if the word can be built by adding one character at a time. This is done by checking if the word’s prefix (i.e., the substring formed by removing the last character) is already in the set of valid words. If it is, we add the current word to the set and consider it as a potential result.
+6. **Condition Check**
+	```cpp
+	        if(w.size() == 1 || mp.count(w.substr(0, w.size() -1))) {
+	```
+	Checks if the word is a single character or if its prefix exists in the hash set.
 
-4. **Choosing the Longest Word**: As we process the words, we keep track of the longest word that meets the criteria. If a new word is longer than the current result, we update the result.
+7. **Update Result**
+	```cpp
+	            res = w.size()>res.size()? w:res;
+	```
+	Updates the result if the current word is longer than the existing result.
 
-### Code Breakdown (Step by Step)
+8. **Insert**
+	```cpp
+	            mp.insert(w);
+	```
+	Adds the current word to the hash set as a valid prefix.
 
-Let’s now look at the code to understand the solution in more detail:
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the longest word that satisfies the conditions.
 
-1. **Sorting the Words**:
-   ```cpp
-   sort(words.begin(), words.end());
-   ```
-   - The list of words is sorted lexicographically. This ensures that for any given word, all of its prefixes are processed before the word itself. Sorting helps in optimizing the search for prefixes in the set.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) for sorting the words, where n is the number of words.
+- **Average Case:** O(n log n) for sorting and O(n * m) for checking each word (n is the number of words, m is the average length of the words).
+- **Worst Case:** O(n log n) for sorting and O(n * m) for checking each word.
 
-2. **Initializing the Hash Set**:
-   ```cpp
-   unordered_set<string> mp;
-   ```
-   - The unordered set `mp` is used to store all the valid words we encounter while processing the list. This set helps in checking if a prefix exists in constant time.
+The time complexity is dominated by the sorting step, followed by checking the progressive formation of each word.
 
-3. **Initializing the Result String**:
-   ```cpp
-   string res = "";
-   ```
-   - The variable `res` holds the current longest word that satisfies the condition. We initialize it as an empty string and update it as we process the list of words.
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the words in a set.
+- **Worst Case:** O(n) for storing the words in a set.
 
-4. **Iterating Over Each Word**:
-   ```cpp
-   for (string w: words) {
-   ```
-   - We loop through each word in the sorted list of words.
+The space complexity is O(n) due to the set used for tracking the valid words.
 
-5. **Checking If the Word is Valid**:
-   ```cpp
-   if (w.size() == 1 || mp.count(w.substr(0, w.size() - 1))) {
-   ```
-   - For each word, we check if it can be formed by adding one character at a time to a valid prefix. If the word has only one character, it’s automatically valid. Otherwise, we check if the prefix of the word (i.e., the word minus its last character) exists in the set `mp`.
+**Happy Coding! 🎉**
 
-6. **Updating the Result**:
-   ```cpp
-   res = w.size() > res.size() ? w : res;
-   ```
-   - If the current word is valid (i.e., its prefix exists in the set), we compare its length with the current result `res`. If the current word is longer than the current result, we update `res` to the current word.
-
-7. **Adding the Word to the Set**:
-   ```cpp
-   mp.insert(w);
-   ```
-   - After processing the current word, we add it to the set `mp` so that it can be used as a prefix for subsequent words.
-
-8. **Returning the Result**:
-   ```cpp
-   return res;
-   ```
-   - After processing all the words, we return the longest valid word found.
-
-### Complexity Analysis
-
-- **Time Complexity**:
-  - **Sorting the words**: Sorting the list of words takes **O(n log n)**, where `n` is the number of words.
-  - **Checking and inserting into the set**: For each word, we perform a constant time check and insert operation in the unordered set. The check involves substring operations, which take **O(m)** time where `m` is the length of the word. Hence, the overall time complexity is **O(n log n + n * m)**, where `n` is the number of words and `m` is the average length of the words.
-  
-- **Space Complexity**:
-  - We use an unordered set to store the words, which takes **O(n * m)** space in the worst case, where `n` is the number of words and `m` is the average length of the words.
-
-### Conclusion
-
-This solution leverages a combination of sorting and hash set lookups to efficiently find the longest word that can be built from the list of words by adding one character at a time. The sorting step ensures that we process words in order, making it easy to check if each word's prefix exists. The unordered set allows for fast lookups and insertions to track valid words. This approach has a time complexity of **O(n log n + n * m)** and a space complexity of **O(n * m)**, making it efficient for large input sizes.
-
-By using these techniques, we can solve the problem in an optimal manner. The greedy approach ensures that we always choose the longest valid word while processing each word in the sorted list. This solution is efficient and works well within the given problem constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-word-in-dictionary/description/)
 

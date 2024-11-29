@@ -14,16 +14,61 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a contaminated binary tree, recover it and implement a class to search for specific values in the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of operations. Each operation is either the initialization of a tree or a search for a target value.
+- **Example:** `[[[-1, null, -1]], [1], [2]]`
+- **Constraints:**
+	- The tree has at most 10^4 nodes.
+	- Each node value is -1 initially.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a list where each entry corresponds to the result of a 'find' operation, indicating whether the target exists in the tree.
+- **Example:** `[null, false, true]`
+- **Constraints:**
+	- The result of the 'find' operation is either true or false.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Recover the tree's original values and search for specific targets efficiently.
+
+- 1. Initialize the tree with the given contaminated root.
+- 2. Recover the values of each node using depth-first traversal.
+- 3. Implement the 'find' operation by checking if the target exists in the recovered set of values.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree has been contaminated (all node values are initially -1).
+- Each node follows the given value rules in the original uncontaminated tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[[-1, null, -1]], [1], [2]]`  \
+  **Explanation:** In this example, after recovering the tree, the result of searching for 1 is 'false' and 2 is 'true'.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by first recovering the tree values using a recursive depth-first search and then using a set to store these values for efficient lookups.
+
+### Initial Thoughts 💭
+- The binary tree follows a specific value pattern which allows for recursive recovery.
+- Use recursion to recover each node value, starting from the root. Then, store the recovered values in a set for efficient querying.
+{{< dots >}}
+### Edge Cases 🌐
+- The input tree is empty, which should not happen according to the problem constraints.
+- The solution should efficiently handle trees with up to 10^4 nodes.
+- The root value is always 0 and must be recovered first.
+- Handle up to 10^4 nodes efficiently in both time and space.
+{{< dots >}}
+## Code 💻
+```cpp
  * struct TreeNode {
  *     int val;
  *     TreeNode *left;
@@ -34,121 +79,129 @@ youtube_thumbnail=""
  * };
  */
 class FindElements {
-    unordered_set<int> set;
+unordered_set<int> set;
 public:
-    void recover(TreeNode* root, int x) {
-        if(root == NULL) return;
-        root->val = x;
-        set.emplace(x);
-        recover(root->left, 2*x+1);
-        recover(root->right, 2*x+2);
-        }
-    FindElements(TreeNode* root) {
-        recover(root, 0);
+void recover(TreeNode* root, int x) {
+    if(root == NULL) return;
+    root->val = x;
+    set.emplace(x);
+    recover(root->left, 2*x+1);
+    recover(root->right, 2*x+2);
     }
-    
-    bool find(int target) {
-        return set.count(target);
-    }
+FindElements(TreeNode* root) {
+    recover(root, 0);
+}
+
+bool find(int target) {
+    return set.count(target);
+}
 };
 
 /**
  * Your FindElements object will be instantiated and called as such:
  * FindElements* obj = new FindElements(root);
  * bool param_1 = obj->find(target);
- */
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The problem involves recovering a binary tree that has been corrupted such that all nodes have been set to `NULL`. Given a binary tree that represents a unique structure where nodes should have values derived from their positions, the task is to reconstruct the values based on the binary tree's structure. The values should be assigned such that:
-- The value of the root node is `0`.
-- For any node with value `x`, the left child node should have a value of `2 * x + 1`, and the right child should have a value of `2 * x + 2`.
-
-After recovering the values of the binary tree nodes, we should provide a method to determine if a given target value exists in the recovered tree.
-
-### Approach
-To solve this problem, we will implement the following steps:
-1. **Recursive Recovery**: Create a recursive function to traverse the tree and assign values to each node based on its position.
-2. **Storage of Values**: Utilize a data structure (such as an unordered set) to store the recovered values for quick lookups.
-3. **Find Method**: Implement a method to check if a target value exists within the recovered values.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 ```
-- **Lines 1-10**: The definition of the `TreeNode` structure, which represents a node in a binary tree. It contains an integer value (`val`), pointers to the left child (`left`), and the right child (`right`). It includes constructors for easy initialization of tree nodes.
 
-```cpp
-class FindElements {
-    unordered_set<int> set;
-```
-- **Line 11**: The class `FindElements` is defined. Within this class, we declare an unordered set named `set` to store the recovered values from the binary tree.
+This code defines the `FindElements` class, which is used to recover a binary tree where all nodes are initially set to an unknown value. It also provides a method to check if a given target value exists in the tree.
 
-```cpp
-public:
-    void recover(TreeNode* root, int x) {
-        if(root == NULL) return;
-        root->val = x;
-        set.emplace(x);
-        recover(root->left, 2*x+1);
-        recover(root->right, 2*x+2);
-    }
-```
-- **Line 12-18**: The `recover` function is defined. This is a recursive function that assigns values to the tree nodes.
-  - **Line 13**: If the current node (`root`) is `NULL`, the function returns, terminating that branch of recursion.
-  - **Line 14**: The value of the current node is set to `x`.
-  - **Line 15**: The value `x` is added to the unordered set `set`, ensuring all unique values are stored for later lookups.
-  - **Line 16-17**: The function recursively calls itself for the left and right children of the current node. The left child's value is set to `2 * x + 1`, and the right child's value is set to `2 * x + 2`, thus adhering to the problem's requirements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class FindElements {
+	```
+	This defines the `FindElements` class, which is used to recover the binary tree and search for specific elements.
 
-```cpp
-    FindElements(TreeNode* root) {
-        recover(root, 0);
-    }
-```
-- **Line 19-21**: The constructor for the `FindElements` class initializes the object with the given tree root. It calls the `recover` function with the root and the initial value `0`.
+2. **Data Member**
+	```cpp
+	unordered_set<int> set;
+	```
+	This declares an unordered set `set` to store the recovered values from the binary tree for fast look-up.
 
-```cpp
-    bool find(int target) {
-        return set.count(target);
-    }
-};
-```
-- **Line 22-25**: The `find` method checks whether a given `target` value exists in the unordered set `set`. The `count` function of the unordered set returns `1` if the value exists and `0` otherwise, enabling an efficient search operation.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	This sets the section following it to public access, making the methods accessible outside the class.
 
-```cpp
-/**
- * Your FindElements object will be instantiated and called as such:
- * FindElements* obj = new FindElements(root);
- * bool param_1 = obj->find(target);
- */
-```
-- **Lines 26-29**: This commented section provides an example of how to instantiate the `FindElements` class and use the `find` method to check for the presence of a target value.
+4. **Function Definition**
+	```cpp
+	void recover(TreeNode* root, int x) {
+	```
+	This defines the `recover` function, which is used to traverse the tree and recover the values by assigning values based on the binary tree's structure.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The recovery of the tree through the `recover` method takes \(O(n)\), where \(n\) is the number of nodes in the binary tree. Each node is visited once to assign its value.
-   - The `find` method operates in \(O(1)\) on average due to the properties of the unordered set, providing constant time complexity for lookups.
+5. **Base Case**
+	```cpp
+	    if(root == NULL) return;
+	```
+	This is the base case of the recursion: if the node is `NULL`, the function returns without performing any operations.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(n)\) as we are storing the values of all \(n\) nodes in the unordered set `set`.
+6. **Node Value Assignment**
+	```cpp
+	    root->val = x;
+	```
+	This assigns the current node's value to `x`.
 
-### Conclusion
-The `FindElements` class provides an efficient way to recover a binary tree's node values based on a specific structure and enables rapid queries to check for the existence of these values. By utilizing recursive depth-first traversal to assign values and an unordered set for quick lookups, this solution achieves optimal time and space complexity.
+7. **Insert to Set**
+	```cpp
+	    set.emplace(x);
+	```
+	This inserts the node's value `x` into the `set` for fast lookup during search operations.
 
-This approach demonstrates not only the ability to manipulate tree structures in C++ but also the effectiveness of using data structures like sets for efficient data retrieval. The combination of these techniques makes the `FindElements` class a robust solution for the problem at hand, illustrating key concepts in data structures and algorithm design.
+8. **Recursive Call (Left Child)**
+	```cpp
+	    recover(root->left, 2*x+1);
+	```
+	This recursively calls the `recover` function to process the left child of the current node, assigning it the value `2*x+1`.
+
+9. **Recursive Call (Right Child)**
+	```cpp
+	    recover(root->right, 2*x+2);
+	```
+	This recursively calls the `recover` function to process the right child of the current node, assigning it the value `2*x+2`.
+
+10. **Constructor Definition**
+	```cpp
+	FindElements(TreeNode* root) {
+	```
+	This defines the constructor of the `FindElements` class, which initializes the tree recovery process.
+
+11. **Call to recover**
+	```cpp
+	    recover(root, 0);
+	```
+	This calls the `recover` function to recover the tree starting from the root node with an initial value of 0.
+
+12. **Function Definition**
+	```cpp
+	bool find(int target) {
+	```
+	This defines the `find` function, which checks if a given target value exists in the recovered tree.
+
+13. **Set Lookup**
+	```cpp
+	    return set.count(target);
+	```
+	This checks if the `target` value is present in the `set` and returns `true` if it is, or `false` otherwise.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N), where N is the number of nodes in the tree (for the recovery operation).
+- **Average Case:** O(1) for each 'find' operation (due to the set lookup).
+- **Worst Case:** O(N) for the recovery operation and O(1) for each 'find' operation.
+
+The time complexity of the recovery operation is O(N), where N is the number of nodes in the tree. The time complexity of each 'find' operation is O(1) due to the set lookup.
+
+### Space Complexity 💾
+- **Best Case:** O(N) for the space used by the set storing the recovered values.
+- **Worst Case:** O(N), where N is the number of nodes in the tree (for storing the recovered values).
+
+The space complexity is O(N) for storing the recovered tree values in the set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/description/)
 

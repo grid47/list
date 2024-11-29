@@ -14,171 +14,269 @@ img_src = ""
 youtube = "xvwTd19SncE"
 youtube_upload_date="2024-10-23"
 youtube_thumbnail="https://i.ytimg.com/vi/xvwTd19SncE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a binary tree, replace the value of each node in the tree with the sum of all its cousins' values. Two nodes are cousins if they have the same depth but different parents. The depth of a node is the number of edges from the root to the node.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by the root node, which is an instance of a TreeNode. Each TreeNode has a value, a left child, and a right child.
+- **Example:** `root = [3, 4, 6, 2, 5, null, 7]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [1, 10^5].
+	- 1 <= Node.val <= 10^4.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* replaceValueInTree(TreeNode* root) {
-        
-        list<TreeNode*> q;
-        
-        q.push_back(root);
-        root->val = 0;
-        map<TreeNode*, int> mp;
-        while(!q.empty()) {
-            int sz = q.size();
-            long long sum = 0;
-            while(sz--) {
-                auto it = q.front();
-                q.pop_front();
-                if(it->left != NULL) {
-                    mp[it] += it->left->val;
-                    q.push_back(it->left);
-                }
-                if(it->right != NULL) {
-                    mp[it] += it->right->val;
-                    q.push_back(it->right);
-                }
-                sum += mp[it];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root of the modified binary tree where each node's value is replaced by the sum of its cousins' values.
+- **Example:** `Output: [0, 0, 0, 7, 7, null, 11]`
+- **Constraints:**
+	- The output tree will maintain the structure of the original tree, with modified values.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to replace the value of each node with the sum of its cousins' values, ensuring that the tree's structure is maintained.
+
+- Step 1: Traverse the tree level by level using a queue to process each node.
+- Step 2: For each level, calculate the sum of the values of the cousins by excluding the node's own value.
+- Step 3: Replace the node's value with the sum of its cousins.
+- Step 4: Move to the next level and repeat the process.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input binary tree is non-empty and consists of positive integer values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [3, 4, 6, 2, 5, null, 7]`  \
+  **Explanation:** For the root [3], there are no cousins, so its sum is 0. The node with value 4 has cousins 6 and 7, so its new value will be 13. Similarly, other nodes' values are replaced based on the sum of their cousins.
+
+{{< dots >}}
+## Approach 🚀
+We will traverse the tree level by level, using a queue to handle each level. For each level, we compute the sum of the cousins' values by excluding the node's value, and then update the tree accordingly.
+
+### Initial Thoughts 💭
+- We need to process the tree level by level to correctly identify cousins, as nodes on the same level with different parents are cousins.
+- Using a queue for level-order traversal is an efficient way to handle this problem, allowing us to compute the cousin sums as we process each level.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input tree is empty, return an empty tree.
+- For large trees with up to 100,000 nodes, the solution must be efficient and handle the maximum input size within time limits.
+- If all nodes at a particular level have the same value, the sum of the cousins will be the same for each node at that level.
+- Ensure the algorithm runs in linear time relative to the number of nodes, i.e., O(n), where n is the number of nodes in the tree.
+{{< dots >}}
+## Code 💻
+```cpp
+TreeNode* replaceValueInTree(TreeNode* root) {
+    
+    list<TreeNode*> q;
+    
+    q.push_back(root);
+    root->val = 0;
+    map<TreeNode*, int> mp;
+    while(!q.empty()) {
+        int sz = q.size();
+        long long sum = 0;
+        while(sz--) {
+            auto it = q.front();
+            q.pop_front();
+            if(it->left != NULL) {
+                mp[it] += it->left->val;
+                q.push_back(it->left);
             }
-            for(auto it: mp) {
-                if(it.first->left != NULL) {
-                    it.first->left->val = sum - it.second;
-                }
-                if(it.first->right != NULL) {
-                    it.first->right->val = sum - it.second;
-                }    
+            if(it->right != NULL) {
+                mp[it] += it->right->val;
+                q.push_back(it->right);
             }
-            mp.clear();
+            sum += mp[it];
         }
-        return root;
+        for(auto it: mp) {
+            if(it.first->left != NULL) {
+                it.first->left->val = sum - it.second;
+            }
+            if(it.first->right != NULL) {
+                it.first->right->val = sum - it.second;
+            }    
+        }
+        mp.clear();
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to modify a binary tree such that each node's value is replaced by the sum of all node values in its subtree except for its own value. Specifically, the value of each node should be updated to the sum of the values of all its descendants, excluding the node itself. The tree is represented by a binary tree structure with `left` and `right` child pointers.
-
-### Approach
-
-To solve the problem, we need to perform a level-order traversal (breadth-first search, BFS) of the tree, processing each level of the tree at a time and updating the values of the child nodes based on their parent nodes. The key idea is to accumulate the values of the left and right children for each node and update their values accordingly.
-
-The approach is broken down as follows:
-
-1. **Level-Order Traversal (BFS)**:
-   - We traverse the tree level by level. For each node at a given level, we calculate the sum of all nodes at that level and update their children's values.
-   
-2. **Tracking Sum of Child Values**:
-   - While traversing each node, we accumulate the sum of its left and right children into a map. This helps us to efficiently compute the sum of all child values for each node.
-   
-3. **Updating Node Values**:
-   - After processing all nodes at a level, we update the values of the children (left and right) of each node in that level to be the sum of all other nodes in their respective subtrees.
-
-4. **Iterating Through All Levels**:
-   - We continue this process for all levels of the tree, ensuring each node’s value is updated correctly based on its subtree sum.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initial Setup**
-
-We begin by initializing a queue (`q`) to store nodes while performing the level-order traversal. A `map` called `mp` is used to track the sum of child values for each node. We set the root’s value to 0 as part of the tree transformation.
-
-```cpp
-list<TreeNode*> q;
-q.push_back(root);  // Start with the root node
-root->val = 0;  // Set the root value to 0
-map<TreeNode*, int> mp;  // Map to track the sum of child values for each node
-```
-
-#### 2. **Level-Order Traversal Loop**
-
-We perform a loop over the queue `q` that processes each level of the tree. For each level, we calculate the sum of child node values (`sum`) for all nodes at that level.
-
-```cpp
-while(!q.empty()) {
-    int sz = q.size();  // Size of the current level
-    long long sum = 0;  // Initialize the sum of child values for this level
-```
-
-#### 3. **Processing Nodes in the Current Level**
-
-For each node in the current level:
-- We pop the node from the queue and check if it has left or right children.
-- If a child exists, we add its value to the sum of child values for that node and enqueue the child for the next level.
-
-```cpp
-while(sz--) {
-    auto it = q.front();  // Get the front node
-    q.pop_front();
-    if(it->left != NULL) {
-        mp[it] += it->left->val;  // Add left child's value to the map
-        q.push_back(it->left);  // Enqueue left child
-    }
-    if(it->right != NULL) {
-        mp[it] += it->right->val;  // Add right child's value to the map
-        q.push_back(it->right);  // Enqueue right child
-    }
-    sum += mp[it];  // Add the node's child sum to the total sum
+    return root;
 }
 ```
 
-#### 4. **Updating Child Node Values**
+This code defines a function `replaceValueInTree` that traverses a binary tree using breadth-first search (BFS) and replaces each node's value with the sum of the values of all nodes in its subtree, excluding the current node's value.
 
-After processing all nodes at the current level, we update the left and right child values based on the sum calculated previously. We subtract the stored value from the sum (this excludes the current node itself), and assign this new value to the children.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	TreeNode* replaceValueInTree(TreeNode* root) {
+	```
+	Define the function `replaceValueInTree` that takes a root node of a tree and returns the root after modifying node values.
 
-```cpp
-for(auto it: mp) {
-    if(it.first->left != NULL) {
-        it.first->left->val = sum - it.second;  // Update left child's value
-    }
-    if(it.first->right != NULL) {
-        it.first->right->val = sum - it.second;  // Update right child's value
-    }    
-}
-mp.clear();  // Clear the map for the next level
-```
+2. **Queue Setup**
+	```cpp
+	    list<TreeNode*> q;
+	```
+	Initialize a queue `q` to facilitate breadth-first traversal of the tree.
 
-#### 5. **Returning the Modified Tree**
+3. **Queue Initialization**
+	```cpp
+	    q.push_back(root);
+	```
+	Add the root node to the queue for BFS traversal.
 
-Once the entire tree has been processed and all node values have been updated, we return the modified root node.
+4. **Initial Assignment**
+	```cpp
+	    root->val = 0;
+	```
+	Set the root node's value to 0 as part of initialization.
 
-```cpp
-return root;  // Return the modified root
-```
+5. **Map Setup**
+	```cpp
+	    map<TreeNode*, int> mp;
+	```
+	Initialize a map `mp` to store the accumulated sums for each node.
 
-### Complexity
+6. **Loop Start**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start a loop that continues until the queue is empty, indicating all nodes are processed.
 
-#### Time Complexity:
-- **BFS Traversal**: We perform a level-order traversal of the tree, processing each node once. Since we process every node exactly once, the time complexity is \(O(n)\), where \(n\) is the number of nodes in the tree.
-- **Sum Calculation and Updates**: The operations inside the BFS loop (such as checking children, adding to the map, and updating child values) are constant-time operations. Thus, the overall time complexity remains \(O(n)\).
+7. **Queue Size**
+	```cpp
+	        int sz = q.size();
+	```
+	Store the current size of the queue, representing the number of nodes at the current level.
 
-#### Space Complexity:
-- **Queue**: The space required for the queue is proportional to the number of nodes at the widest level of the tree, which is \(O(n)\) in the worst case (for a completely unbalanced tree). Thus, the space complexity for the queue is \(O(n)\).
-- **Map**: The map `mp` stores values for each node, so the space complexity for the map is \(O(n)\) in the worst case.
-- **Total Space Complexity**: The overall space complexity is \(O(n)\) due to the queue and the map.
+8. **Sum Initialization**
+	```cpp
+	        long long sum = 0;
+	```
+	Initialize a variable `sum` to keep track of the sum of node values at the current level.
 
-### Conclusion
+9. **Level Processing**
+	```cpp
+	        while(sz--) {
+	```
+	Process each node in the current level of the tree.
 
-The solution effectively handles the problem using a breadth-first search (BFS) traversal of the binary tree. By maintaining a map to track the sum of child values for each node and updating child node values after processing each level, the algorithm ensures that the tree is modified as required. The time complexity is linear in the number of nodes, and the space complexity is also linear, making this solution efficient for large trees. This approach avoids unnecessary recalculations and ensures that each node's value is updated efficiently based on its descendants.
+10. **Node Access**
+	```cpp
+	            auto it = q.front();
+	```
+	Get the front node of the queue to process it.
+
+11. **Node Removal**
+	```cpp
+	            q.pop_front();
+	```
+	Remove the front node from the queue after accessing it.
+
+12. **Left Child Check**
+	```cpp
+	            if(it->left != NULL) {
+	```
+	Check if the current node has a left child.
+
+13. **Left Child Sum**
+	```cpp
+	                mp[it] += it->left->val;
+	```
+	Add the value of the left child to the map.
+
+14. **Left Child Enqueue**
+	```cpp
+	                q.push_back(it->left);
+	```
+	Add the left child to the queue for processing in the next iteration.
+
+15. **Right Child Check**
+	```cpp
+	            if(it->right != NULL) {
+	```
+	Check if the current node has a right child.
+
+16. **Right Child Sum**
+	```cpp
+	                mp[it] += it->right->val;
+	```
+	Add the value of the right child to the map.
+
+17. **Right Child Enqueue**
+	```cpp
+	                q.push_back(it->right);
+	```
+	Add the right child to the queue for processing in the next iteration.
+
+18. **Sum Update**
+	```cpp
+	            sum += mp[it];
+	```
+	Add the value of the current node to the total sum.
+
+19. **Update Nodes**
+	```cpp
+	        for(auto it: mp) {
+	```
+	Iterate through the map to update each node's value based on the sum.
+
+20. **Left Node Update**
+	```cpp
+	            if(it.first->left != NULL) {
+	```
+	Check if the current node has a left child to update its value.
+
+21. **Left Node Value Update**
+	```cpp
+	                it.first->left->val = sum - it.second;
+	```
+	Update the left child node's value based on the calculated sum.
+
+22. **Right Node Update**
+	```cpp
+	            if(it.first->right != NULL) {
+	```
+	Check if the current node has a right child to update its value.
+
+23. **Right Node Value Update**
+	```cpp
+	                it.first->right->val = sum - it.second;
+	```
+	Update the right child node's value based on the calculated sum.
+
+24. **Map Reset**
+	```cpp
+	        mp.clear();
+	```
+	Clear the map to prepare for the next level.
+
+25. **Return**
+	```cpp
+	    return root;
+	```
+	Return the modified root node after the entire tree has been processed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we visit each node exactly once during the level-order traversal.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the queue used for the level-order traversal, which can hold up to n nodes in the worst case.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cousins-in-binary-tree-ii/description/)
 

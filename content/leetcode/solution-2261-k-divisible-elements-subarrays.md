@@ -14,117 +14,172 @@ img_src = ""
 youtube = "BZdbRvIM-js"
 youtube_upload_date="2022-05-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/BZdbRvIM-js/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums` and two integers `k` and `p`. Your task is to count the number of distinct subarrays where there are at most `k` elements divisible by `p`. A subarray is defined as a contiguous part of the array, and two subarrays are considered distinct if they differ in either length or at least one element.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `nums` and two integers `k` and `p`.
+- **Example:** `nums = [5, 8, 3, 5, 6], k = 2, p = 5`
+- **Constraints:**
+	- 1 <= nums.length <= 200
+	- 1 <= nums[i], p <= 200
+	- 1 <= k <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countDistinct(vector<int>& nums, int k, int p) {
-        
-        int res = 0, n = nums.size();
-        vector<int> cnt(201, 0); vector<long long> hash(201, 0);
-        for (int sz = 0; sz < n; sz++) {
-            unordered_set<int> s;
-            for(int i = 0; i + sz < n; i++){
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct subarrays with at most `k` elements divisible by `p`.
+- **Example:** `Output: 7`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to find the distinct subarrays that satisfy the condition of having at most `k` elements divisible by `p`.
+
+- Iterate over the array to consider all possible subarrays.
+- For each subarray, count the elements divisible by `p`.
+- If the count is less than or equal to `k`, add the subarray to a set of distinct subarrays.
+- Use hashing to ensure subarrays are distinct and avoid duplicates.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array `nums` is non-empty.
+- Subarrays are considered distinct if they differ in length or in elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [5, 8, 3, 5, 6], k = 2, p = 5`  \
+  **Explanation:** We can form the subarrays [5], [5,8], [5,8,3], [8], [8,3], [3], and [5,6], which all contain at most 2 elements divisible by 5. Hence, the output is 7.
+
+- **Input:** `nums = [10, 20, 30], k = 1, p = 10`  \
+  **Explanation:** The distinct subarrays satisfying the condition are [10], [20], [30], and [10,20], [20,30], and [10,20,30]. There are 6 distinct subarrays, and the output is 6.
+
+{{< dots >}}
+## Approach 🚀
+We will iterate through all subarrays and keep track of the number of elements divisible by `p`. Using a set ensures that we count only distinct subarrays.
+
+### Initial Thoughts 💭
+- We need an efficient way to find all subarrays and check the number of divisible elements.
+- Using hashing will help keep track of the distinct subarrays without manually comparing each one.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is non-empty, so there are no empty inputs.
+- Ensure the solution handles input sizes up to 200 elements efficiently.
+- Consider cases where all elements are divisible by `p`.
+- Ensure the solution works within the problem's constraints, especially with larger values of `k`.
+{{< dots >}}
+## Code 💻
+```cpp
+int countDistinct(vector<int>& nums, int k, int p) {
+    
+    int res = 0, n = nums.size();
+    vector<int> cnt(201, 0); vector<long long> hash(201, 0);
+    for (int sz = 0; sz < n; sz++) {
+        unordered_set<int> s;
+        for(int i = 0; i + sz < n; i++){
 
 cnt[i] += ((nums[i + sz] % p) == 0);
-            if(cnt[i] <= k) {
+        if(cnt[i] <= k) {
 hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
-                res += s.insert(hash[i]).second;
-            }
+            res += s.insert(hash[i]).second;
         }
-        }
-        
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given an array `nums` of integers, an integer `k`, and an integer `p`. The goal is to count how many distinct subarrays of `nums` exist such that the number of elements divisible by `p` in each subarray is **at most k**. A subarray is defined as a contiguous portion of the array.
-
-### Approach
-
-To efficiently solve the problem, we can break the task down into several steps:
-1. **Iterate Over All Possible Subarrays**: We need to find all possible subarrays in `nums`. For each subarray, we will keep track of how many elements are divisible by `p`.
-2. **Condition on the Number of Divisible Elements**: For each subarray, if the number of divisible elements is greater than `k`, we should discard that subarray.
-3. **Hash Subarrays**: To count distinct subarrays, we use a hash-based approach to ensure that we don't count the same subarray multiple times.
-4. **Efficiently Track Hashes and Divisibility**: We can use a sliding window approach to move through subarrays and update the count of divisible elements as we progress.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int res = 0, n = nums.size();
-vector<int> cnt(201, 0); 
-vector<long long> hash(201, 0);
-```
-
-- `res` keeps track of the number of distinct subarrays that meet the condition.
-- `n` is the size of the input array `nums`.
-- `cnt` is an array of size 201, used to track the number of elements divisible by `p` in the subarray.
-- `hash` is an array that holds the hash values for subarrays to ensure distinctness.
-
-#### Step 2: Iterate Over All Possible Subarrays
-
-```cpp
-for (int sz = 0; sz < n; sz++) {
-    unordered_set<int> s;
-    for(int i = 0; i + sz < n; i++) {
-```
-
-- The outer loop (`sz`) iterates through all possible subarray sizes from 0 to `n-1`.
-- The inner loop (`i`) iterates through all starting positions for a subarray of size `sz`.
-
-#### Step 3: Update Count of Divisible Elements
-
-```cpp
-cnt[i] += ((nums[i + sz] % p) == 0);
-```
-
-- For each subarray, we increment the count of divisible elements by `p` for the element `nums[i + sz]`. If the element is divisible by `p`, we increment the count for that starting index `i` in the `cnt` array.
-
-#### Step 4: Check if Subarray Meets the Condition
-
-```cpp
-if(cnt[i] <= k) {
-    hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
-    res += s.insert(hash[i]).second;
+    }
+    
+    return res;
 }
 ```
 
-- If the count of elements divisible by `p` is less than or equal to `k`, we calculate the hash for the subarray.
-- The hash is calculated by multiplying the current hash by 200 (a chosen constant) and adding the current number (`nums[i + sz]`).
-- The result is taken modulo `1000000007` to avoid overflow and ensure that we do not get collisions in the hash values.
-- We use an unordered set `s` to ensure that we only count distinct subarrays. The `insert` method returns `true` if the subarray's hash was not previously seen, and `false` otherwise. We add to `res` when a new subarray is encountered.
+This function counts the number of distinct subarrays that satisfy the condition of having at most 'k' divisible numbers by 'p' in the subarray, using hashing and a sliding window approach.
 
-#### Step 5: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int countDistinct(vector<int>& nums, int k, int p) {
+	```
+	The function `countDistinct` takes three parameters: `nums` (a vector of integers), `k` (the maximum number of divisible elements), and `p` (the divisor used to check divisibility). It returns an integer representing the count of distinct subarrays that meet the given conditions.
 
-```cpp
-return res;
-```
+2. **Size and Count Initialization**
+	```cpp
+	    int res = 0, n = nums.size();
+	```
+	The variable `res` is initialized to zero to store the count of distinct subarrays, and `n` is the size of the `nums` array.
 
-- After processing all subarrays, the variable `res` contains the number of distinct subarrays that satisfy the condition.
+3. **Auxiliary Arrays**
+	```cpp
+	    vector<int> cnt(201, 0); vector<long long> hash(201, 0);
+	```
+	Two vectors `cnt` and `hash` are initialized: `cnt` tracks how many elements in the subarray are divisible by `p`, and `hash` stores the hash value of each subarray for quick distinctness checking.
 
-### Complexity
+4. **Outer Loop (Subarray Size)**
+	```cpp
+	    for (int sz = 0; sz < n; sz++) {
+	```
+	The outer loop iterates over all possible subarray sizes starting from each index in the `nums` array.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n^2)**. The outer loop iterates `n` times, and for each subarray size, the inner loop iterates over all possible starting indices for the subarray. The hashing operation and insertion into the set take **O(1)** time on average. Therefore, the overall time complexity is **O(n^2)**.
+5. **Set Initialization**
+	```cpp
+	        unordered_set<int> s;
+	```
+	A set `s` is initialized to store the unique hash values of the subarrays.
 
-#### Space Complexity:
-The space complexity is **O(n)**. We use extra space for the `cnt` and `hash` arrays, both of which are of size `n`. Additionally, we use an unordered set to store hash values of subarrays, which in the worst case will store all possible subarrays. Therefore, the space complexity is linear in terms of the number of subarrays.
+6. **Inner Loop (Subarray Elements)**
+	```cpp
+	        for(int i = 0; i + sz < n; i++){
+	```
+	The inner loop generates the subarrays by starting at index `i` and extending the subarray by `sz` elements.
 
-### Conclusion
+7. **Divisibility Count Update**
+	```cpp
+	cnt[i] += ((nums[i + sz] % p) == 0);
+	```
+	The `cnt` array is updated by checking if the element at index `i + sz` in `nums` is divisible by `p`. If it is, the count for that subarray index is incremented.
 
-This solution uses a hash-based approach to count distinct subarrays where the number of elements divisible by `p` is at most `k`. By iterating through all possible subarrays and using a set to ensure distinctness, the algorithm efficiently computes the desired result. The time complexity of **O(n^2)** is acceptable for moderately sized input arrays, and the space complexity of **O(n)** is also reasonable given the problem constraints. This solution balances clarity and efficiency, making it a good choice for solving this problem.
+8. **Condition Check**
+	```cpp
+	        if(cnt[i] <= k) {
+	```
+	This checks if the current subarray has at most `k` elements divisible by `p`. If true, it proceeds to the next steps.
+
+9. **Hash Calculation**
+	```cpp
+	hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
+	```
+	The hash value for the current subarray is updated by multiplying the existing hash by 200 and adding the current element `nums[i + sz]`, then taking the modulus to avoid overflow.
+
+10. **Distinct Count Update**
+	```cpp
+	            res += s.insert(hash[i]).second;
+	```
+	The `insert` function of the set `s` is used to add the subarray hash. If the hash is unique, it increments the `res` counter.
+
+11. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the count of distinct subarrays that satisfy the condition.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is quadratic because we iterate over all subarrays and for each subarray, we check divisibility for each element.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the storage of distinct subarrays in a set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-divisible-elements-subarrays/description/)
 

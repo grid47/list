@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "i3HU4Ur3-uM"
 youtube_upload_date="2021-02-03"
 youtube_thumbnail="https://i.ytimg.com/vi/i3HU4Ur3-uM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,159 +28,229 @@ youtube_thumbnail="https://i.ytimg.com/vi/i3HU4Ur3-uM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the head of a singly linked list. The goal is to reorder the list such that the nodes are arranged as follows: L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → ..., without modifying the values of the nodes. Only the structure of the list can be changed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a singly linked list with integer values. The linked list is given by its head node.
+- **Example:** `Input: head = [10, 20, 30, 40]`
+- **Constraints:**
+	- The number of nodes in the list is in the range [1, 5 * 10^4].
+	- 1 <= Node.val <= 1000
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    void reorderList(ListNode* head) {
-        ListNode* fast = head, *slow = head;
-        while(fast->next && fast->next->next) {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        ListNode* mid = slow->next;
-        slow->next = NULL;
-        ListNode* next, *prev = NULL;
-        while(mid) {
-            next = mid->next;
-            mid->next = prev;
-            prev = mid;
-            mid = next;
-        }
-        ListNode* l1 = head, *l2 = prev;
-        while(l1 && l2) {
-            ListNode* tmp1 = l1->next;
-            l1->next = l2;
-            ListNode* tmp2 = l2->next;
-            l2->next = tmp1;
-            l1 = tmp1;
-            l2 = tmp2;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the reordered linked list where nodes are arranged as L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → ...
+- **Example:** `Output: [10, 40, 20, 30]`
+- **Constraints:**
+	- The output should be a singly linked list with the nodes rearranged as described.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to reorder the linked list as per the given structure without modifying the node values.
+
+- 1. Find the middle of the list using the slow and fast pointer approach.
+- 2. Reverse the second half of the list.
+- 3. Merge the first half and the reversed second half by alternating nodes from each half.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is non-empty and contains valid integers.
+- The list is not cyclic.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [10, 20, 30, 40]`  \
+  **Explanation:** In this example, the list is reordered as [10, 40, 20, 30], where the first node is followed by the last node, then the second node, followed by the second last node, and so on.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves three main steps: finding the middle of the list, reversing the second half, and merging the two halves.
+
+### Initial Thoughts 💭
+- The problem requires rearranging nodes without modifying their values.
+- A two-pointer approach can help find the middle of the list. After that, reversing the second half allows us to merge both halves in the required order.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input list contains only one node, the list remains unchanged.
+- The algorithm should efficiently handle lists with up to 50,000 nodes.
+- The list may contain nodes with varying values, but the algorithm should not modify their values, only their positions.
+- The solution must use linear time and constant space.
+{{< dots >}}
+## Code 💻
+```cpp
+void reorderList(ListNode* head) {
+    ListNode* fast = head, *slow = head;
+    while(fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
     }
-};
-{{< /highlight >}}
----
-
-### 📝 **Problem Understanding: Reorder a Singly Linked List**
-
-We are asked to reorder a singly linked list such that the nodes are arranged in an alternating order. Specifically, for a given linked list `L0 -> L1 -> L2 -> L3 -> ... -> Ln`, we want to reorder it as:
-
-`L0 -> Ln -> L1 -> Ln-1 -> L2 -> Ln-2 -> ...`.
-
-#### Example Cases:
-- **Input**: `head = [1, 2, 3, 4, 5]`
-  - **Output**: `head = [1, 5, 2, 4, 3]`
-
-- **Input**: `head = [1, 2, 3, 4]`
-  - **Output**: `head = [1, 4, 2, 3]`
-
----
-
-### 🔧 **Approach: Reordering the List**
-
-The key to solving this problem is to:
-1. Split the linked list into two halves.
-2. Reverse the second half.
-3. Merge the two halves in the alternating order.
-
-#### Key Steps:
-1. **Find the Middle of the List**: Use the slow and fast pointer technique to find the middle node of the list. The fast pointer moves two steps at a time, while the slow pointer moves one step at a time. By the time the fast pointer reaches the end, the slow pointer will be at the middle.
-
-2. **Reverse the Second Half**: After finding the middle node, reverse the second half of the list. This can be done using a simple loop to reverse the `next` pointers of the nodes.
-
-3. **Merge the Two Halves**: Once the second half is reversed, merge the two halves by alternating nodes from each half.
-
----
-
-### 🖥️ **Code Breakdown: Step-by-Step**
-
-#### Step 1: Finding the Middle of the List
-```cpp
-ListNode* fast = head, *slow = head;
-while(fast->next && fast->next->next) {
-    slow = slow->next;
-    fast = fast->next->next;
+    ListNode* mid = slow->next;
+    slow->next = NULL;
+    ListNode* next, *prev = NULL;
+    while(mid) {
+        next = mid->next;
+        mid->next = prev;
+        prev = mid;
+        mid = next;
+    }
+    ListNode* l1 = head, *l2 = prev;
+    while(l1 && l2) {
+        ListNode* tmp1 = l1->next;
+        l1->next = l2;
+        ListNode* tmp2 = l2->next;
+        l2->next = tmp1;
+        l1 = tmp1;
+        l2 = tmp2;
+    }
 }
 ```
-- We use two pointers: `slow` and `fast`, both initialized to the head of the list.
-- The `fast` pointer moves two steps at a time, and the `slow` pointer moves one step at a time.
-- The loop continues until the `fast` pointer reaches the end of the list, at which point the `slow` pointer will be at the middle of the list.
 
-#### Step 2: Split the List and Reverse the Second Half
-```cpp
-ListNode* mid = slow->next;
-slow->next = NULL;
-ListNode* next, *prev = NULL;
-while(mid) {
-    next = mid->next;
-    mid->next = prev;
-    prev = mid;
-    mid = next;
-}
-```
-- After identifying the middle, we split the list into two halves. The first half goes from `head` to `slow`, and the second half starts from `slow->next`.
-- We disconnect the first half by setting `slow->next = NULL`.
-- Next, we reverse the second half by iterating through it and updating the `next` pointers.
+This function reorders a linked list to the specific pattern: first element, last element, second element, second last element, and so on. It uses the slow and fast pointer technique to find the middle, reverses the second half of the list, and then merges the two halves.
 
-#### Step 3: Merge the Two Halves
-```cpp
-ListNode* l1 = head, *l2 = prev;
-while(l1 && l2) {
-    ListNode* tmp1 = l1->next;
-    l1->next = l2;
-    ListNode* tmp2 = l2->next;
-    l2->next = tmp1;
-    l1 = tmp1;
-    l2 = tmp2;
-}
-```
-- After reversing the second half, we merge the two halves. We use two pointers: `l1` pointing to the first half and `l2` pointing to the reversed second half.
-- In each iteration, we alternately attach nodes from `l1` and `l2`:
-  - First, link `l1` to `l2`.
-  - Then, link `l2` to the next node of `l1`.
-- We continue this process until one of the halves is fully processed.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	void reorderList(ListNode* head) {
+	```
+	This defines the `reorderList` function, which reorders the nodes of a linked list in a specific pattern by modifying the list in-place.
 
----
+2. **Pointer Initialization**
+	```cpp
+	    ListNode* fast = head, *slow = head;
+	```
+	Two pointers, `fast` and `slow`, are initialized at the head of the list. `fast` moves two steps at a time, and `slow` moves one step at a time.
 
-### 🧮 **Time and Space Complexity**
+3. **Find Middle**
+	```cpp
+	    while(fast->next && fast->next->next) {
+	```
+	This loop runs until the `fast` pointer reaches the end of the list. It helps in finding the middle of the linked list using the slow and fast pointer technique.
 
-#### ⏱️ **Time Complexity**:
-- **O(n)**: The algorithm consists of three main steps:
-  1. Finding the middle of the list: **O(n)**.
-  2. Reversing the second half: **O(n/2)**, which simplifies to **O(n)**.
-  3. Merging the two halves: **O(n)**.
-  
-  The overall time complexity is linear, **O(n)**, where `n` is the number of nodes in the list.
+4. **Move Slow Pointer**
+	```cpp
+	        slow = slow->next;
+	```
+	The `slow` pointer moves one step at a time toward the middle of the list.
 
-#### 🧳 **Space Complexity**:
-- **O(1)**: The algorithm only uses a fixed number of pointers and does not require extra data structures. Thus, the space complexity is constant, **O(1)**.
+5. **Move Fast Pointer**
+	```cpp
+	        fast = fast->next->next;
+	```
+	The `fast` pointer moves two steps at a time, so when it reaches the end, the `slow` pointer will be at the middle of the list.
 
----
+6. **Middle Node**
+	```cpp
+	    ListNode* mid = slow->next;
+	```
+	After finding the middle of the list, the `mid` pointer is initialized to the node right after the `slow` pointer.
 
-### 🎯 **Conclusion: Efficient Linked List Reordering**
+7. **Break First Half**
+	```cpp
+	    slow->next = NULL;
+	```
+	Breaks the list into two halves by setting `slow->next` to `NULL`, thus isolating the first half of the list.
 
-This solution provides an optimal way to reorder a singly linked list in **O(n)** time and **O(1)** space. Here's why this approach works well:
+8. **Pointer Initialization for Reversal**
+	```cpp
+	    ListNode* next, *prev = NULL;
+	```
+	Two pointers, `prev` and `next`, are initialized. `prev` is used for reversing the second half of the list.
 
-1. **Time Efficiency**: The algorithm performs the key operations—finding the middle, reversing the second half, and merging the two halves—in linear time, **O(n)**.
-2. **Space Efficiency**: The solution only uses a fixed number of pointers and does not require additional space or data structures.
-3. **Simplicity and Optimality**: This approach efficiently handles the problem in-place without converting the list to other data structures.
+9. **Reverse Second Half**
+	```cpp
+	    while(mid) {
+	```
+	This loop reverses the second half of the list by iterating over the nodes starting from `mid`.
 
-#### Key Insights:
-- **Efficient List Manipulation**: By splitting the list, reversing part of it, and merging the halves, we efficiently reorder the list with minimal complexity.
-- **Optimal Solution**: The solution operates in linear time and uses constant space, making it ideal for handling large linked lists.
+10. **Save Next Node**
+	```cpp
+	        next = mid->next;
+	```
+	Saves the next node in the `next` pointer to avoid losing the reference during the reversal.
 
-This technique is particularly useful when working with large linked lists, ensuring both quick execution and minimal memory usage.
+11. **Reverse Link**
+	```cpp
+	        mid->next = prev;
+	```
+	Reverses the `mid` node's `next` pointer to point to the previous node, effectively reversing the list.
+
+12. **Update Previous Pointer**
+	```cpp
+	        prev = mid;
+	```
+	Moves the `prev` pointer one step forward to the current node (`mid`), preparing it for the next iteration.
+
+13. **Move Mid Pointer**
+	```cpp
+	        mid = next;
+	```
+	Moves the `mid` pointer to the next node in the original list.
+
+14. **Pointer Initialization for Merging**
+	```cpp
+	    ListNode* l1 = head, *l2 = prev;
+	```
+	Initializes two pointers, `l1` pointing to the head of the first half, and `l2` pointing to the head of the reversed second half.
+
+15. **Merge Two Halves**
+	```cpp
+	    while(l1 && l2) {
+	```
+	This loop merges the two halves by alternating nodes from `l1` and `l2`.
+
+16. **Save Next Node in First Half**
+	```cpp
+	        ListNode* tmp1 = l1->next;
+	```
+	Saves the next node of `l1` in `tmp1` to prevent losing the reference during the merge.
+
+17. **Connect First Half to Second Half**
+	```cpp
+	        l1->next = l2;
+	```
+	Connects the current node of the first half (`l1`) to the current node of the second half (`l2`).
+
+18. **Save Next Node in Second Half**
+	```cpp
+	        ListNode* tmp2 = l2->next;
+	```
+	Saves the next node of `l2` in `tmp2` to ensure the merge can continue.
+
+19. **Connect Second Half to First Half**
+	```cpp
+	        l2->next = tmp1;
+	```
+	Connects the current node of the second half (`l2`) to the next node of the first half (`tmp1`).
+
+20. **Move to Next Nodes**
+	```cpp
+	        l1 = tmp1;
+	```
+	Moves the `l1` pointer to the next node in the first half.
+
+21. **Move to Next Nodes**
+	```cpp
+	        l2 = tmp2;
+	```
+	Moves the `l2` pointer to the next node in the second half.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), when the list is reordered by following the standard procedure.
+- **Average Case:** O(n), the list will always require a full traversal for reordering.
+- **Worst Case:** O(n), the solution works in linear time in all cases.
+
+The time complexity is O(n) because we traverse the list multiple times, but each traversal is linear.
+
+### Space Complexity 💾
+- **Best Case:** O(1), the space complexity remains constant.
+- **Worst Case:** O(1), since only a few pointers are used.
+
+The space complexity is O(1) because no extra space is used apart from a few pointers.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reorder-list/description/)
 

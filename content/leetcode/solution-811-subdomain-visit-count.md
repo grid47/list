@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "oe_eXlH5dUM"
 youtube_upload_date="2019-12-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/oe_eXlH5dUM/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,132 +28,184 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/oe_eXlH5dUM/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a list of count-paired domains, where each entry consists of a number followed by a domain name. The number represents the number of visits to that domain. A domain may also have subdomains, and visiting a subdomain also counts as visiting its parent domains. Your task is to return the count of visits for each domain and its subdomains.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You will be provided with a list of strings where each string contains a visit count and a domain name. The format is 'count domain'. Each domain name can have subdomains separated by dots.
+- **Example:** `Input: cpdomains = ['100 xyz.com', '200 abc.xyz.com']`
+- **Constraints:**
+	- 1 <= cpdomain.length <= 100
+	- 1 <= cpdomain[i].length <= 100
+	- cpdomain[i] follows the 'count domain' format.
+	- The domains are composed of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> subdomainVisits(vector<string>& cpdomains) {
-        unordered_map<string, int> count;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of strings, each string showing the total count of visits for a domain or subdomain, in the format 'count domain'.
+- **Example:** `Output: ['100 xyz.com', '200 abc.xyz.com', '300 com']`
+- **Constraints:**
+	- The result should be returned in any order.
 
-        for(auto cp: cpdomains) {
-            int i = cp.find(" ");
-            int n = stoi(cp.substr(0, i));
-            string s = cp.substr(i + 1);
-            for(int i = 0; i < s.size(); i++) {
-                if(s[i] == '.')
-                    count[s.substr(i + 1)] += n;
-            }
-            count[s] += n;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The task is to determine how many times each domain and its subdomains have been visited, accounting for the subdomains' visits as well.
+
+- Parse the input string to extract the number of visits and the domain name.
+- For each domain, also count its parent domains by iterating through the subdomains.
+- Store the total visit count for each domain and its subdomains in a map or dictionary.
+- Finally, return the list of counts in the required format.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input data format is valid and follows the expected pattern.
+- Each domain and subdomain consists only of lowercase letters and dot separators.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: cpdomains = ['100 xyz.com', '200 abc.xyz.com']`  \
+  **Explanation:** In this example, 'xyz.com' is visited 100 times, 'abc.xyz.com' is visited 200 times, and 'com' is visited a total of 300 times (100 from 'xyz.com' and 200 from 'abc.xyz.com').
+
+{{< dots >}}
+## Approach 🚀
+The approach involves counting the number of visits for each domain and all its subdomains by iterating through the input list and breaking down the domain names into their subdomains.
+
+### Initial Thoughts 💭
+- Each domain name can have multiple subdomains.
+- The number of visits to the parent domain is shared by all of its subdomains.
+- We need to keep track of visits to both the full domain and all possible subdomains.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input list is empty, return an empty result.
+- Ensure that the solution can handle the upper limit of the input size efficiently.
+- Check how the solution handles cases where subdomains are not repeated.
+- The solution should run efficiently for the maximum number of domains.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> subdomainVisits(vector<string>& cpdomains) {
+    unordered_map<string, int> count;
+
+    for(auto cp: cpdomains) {
+        int i = cp.find(" ");
+        int n = stoi(cp.substr(0, i));
+        string s = cp.substr(i + 1);
+        for(int i = 0; i < s.size(); i++) {
+            if(s[i] == '.')
+                count[s.substr(i + 1)] += n;
         }
-        vector<string> res;
-        for(auto it: count)
-        res.push_back(to_string(it.second) + " " + it.first);
-        return res;
+        count[s] += n;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task involves counting the number of visits to various subdomains from a given list of domain visit counts. Each element in the list contains a domain and the number of times it was visited. The challenge is to break down these domain visits into subdomains and tally the total number of visits to each subdomain. For instance, for a domain "sports.yahoo.com", we should also consider visits to "yahoo.com" and "com", and aggregate the visit counts accordingly.
-
-We are required to return the total visit count for each subdomain in the format: `count subdomain`. Subdomains include not only the full domain name but also any part of it (e.g., for the domain "sports.yahoo.com", the subdomains would include "yahoo.com", "com").
-
-### Approach
-
-To solve this problem efficiently, we need to:
-1. Parse each domain visit string to extract the count and domain.
-2. Split each domain into its respective subdomains.
-3. Aggregate the visit counts for each subdomain.
-4. Format the result by returning each subdomain with its total count.
-
-We can leverage the following approach:
-- **Use a HashMap**: The problem naturally fits the use of a hash map (`unordered_map`) to store and accumulate the visit counts for each subdomain.
-- **String Manipulation**: For each domain, we break it down by iterating through the segments separated by periods ('.'), counting the visits for the full domain as well as its subdomains.
-- **Efficiency**: Using a hash map allows us to efficiently store and update the visit counts. Given that we will be processing each domain string and its subdomains only once, the solution is optimal in terms of time complexity.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Declare a HashMap to Track Subdomain Visits
-```cpp
-unordered_map<string, int> count;
-```
-- We use an unordered map `count` to store the number of visits for each subdomain. The key is the subdomain string, and the value is the count of visits.
-
-#### Step 2: Parse the Input List of Domain Visits
-```cpp
-for(auto cp: cpdomains) {
-    int i = cp.find(" ");
-    int n = stoi(cp.substr(0, i)); // Extract the visit count
-    string s = cp.substr(i + 1); // Extract the domain part
-}
-```
-- We iterate over each domain visit string in `cpdomains`. 
-- `cp.find(" ")` finds the space that separates the visit count from the domain name.
-- `n` stores the number of visits, which is extracted by taking the substring before the space and converting it to an integer using `stoi`.
-- `s` contains the domain name, which is extracted from the part of the string after the space.
-
-#### Step 3: Split the Domain into Subdomains
-```cpp
-for(int i = 0; i < s.size(); i++) {
-    if(s[i] == '.')
-        count[s.substr(i + 1)] += n;
-}
-```
-- For each domain `s`, we iterate over its characters and check if the character is a dot ('.').
-- Every time we encounter a dot, we consider the substring starting from the character after the dot as a subdomain.
-- We update the count for this subdomain in the map `count`, adding the visit count `n` for each occurrence of a subdomain.
-
-#### Step 4: Include the Full Domain in the Count
-```cpp
-count[s] += n;
-```
-- After processing all subdomains, we also increment the count for the full domain (`s`).
-
-#### Step 5: Generate the Result
-```cpp
-vector<string> res;
-for(auto it: count)
+    vector<string> res;
+    for(auto it: count)
     res.push_back(to_string(it.second) + " " + it.first);
+    return res;
+}
 ```
-- We create an empty vector `res` to store the final result.
-- We iterate over the entries in `count` and for each subdomain, we append a string to the result in the format `"count subdomain"`, where `count` is the total number of visits and `subdomain` is the domain.
-- `to_string(it.second)` converts the count (an integer) into a string, and `it.first` is the subdomain.
 
-#### Step 6: Return the Final Result
-```cpp
-return res;
-```
-- Finally, we return the `res` vector, which contains the visit counts for all subdomains.
+This function processes a list of domain visit counts and returns a list of the subdomains with the corresponding visit counts.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> subdomainVisits(vector<string>& cpdomains) {
+	```
+	This is the function signature, defining a function `subdomainVisits` that takes a vector of strings (`cpdomains`). The function returns a vector of strings containing the subdomain visit counts.
 
-#### Time Complexity:
-- **O(n * m)**: 
-   - Here, `n` is the number of domain visit entries in the `cpdomains` list, and `m` is the average length of the domain strings. 
-   - We process each domain string once and perform a substring operation for each segment of the domain (which is bounded by the number of dots in the domain).
-   - Thus, the time complexity is linear in terms of the number of domain visit entries and the average length of the domain strings.
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<string, int> count;
+	```
+	An unordered map `count` is initialized to store the number of visits to each subdomain. The keys are subdomains and the values are visit counts.
 
-#### Space Complexity:
-- **O(k)**: 
-   - Where `k` is the number of unique subdomains in the input list.
-   - We store each subdomain in the hash map `count`, so the space complexity depends on the number of unique subdomains. 
-   - In the worst case, the space complexity is proportional to the number of distinct subdomains across all domain visit entries.
+3. **Subdomain Extraction**
+	```cpp
+	    for(auto cp: cpdomains) {
+	```
+	The function begins a loop to process each domain in the `cpdomains` list.
 
-### Conclusion
+4. **Substring Processing**
+	```cpp
+	        int i = cp.find(" ");
+	```
+	This line finds the first space in the string `cp` which separates the visit count from the domain.
 
-The solution efficiently counts the visits to each subdomain by leveraging string manipulation and hash maps. By processing each domain string once, breaking it down into subdomains, and aggregating the counts, we ensure that the solution is both time and space efficient. 
+5. **String to Integer Conversion**
+	```cpp
+	        int n = stoi(cp.substr(0, i));
+	```
+	This converts the numeric part of the string (before the space) into an integer `n`, representing the number of visits.
 
-The key steps in the algorithm are:
-1. Extracting the visit count and domain name from each entry.
-2. Iterating through the domain to identify subdomains and accumulate the visit counts.
-3. Storing the results in a hash map and then formatting the final output.
+6. **Domain Extraction**
+	```cpp
+	        string s = cp.substr(i + 1);
+	```
+	The part of the string after the space is extracted and stored in `s`, which is the full domain name.
 
-This approach guarantees that the solution runs in linear time with respect to the number of domain entries and their lengths. The use of an unordered map ensures that subdomain visits are counted efficiently, providing an optimal solution for the problem. 
+7. **Loop through Subdomains**
+	```cpp
+	        for(int i = 0; i < s.size(); i++) {
+	```
+	This inner loop iterates over each character in the domain string `s`.
 
-Overall, this solution is well-suited for handling large input sizes due to its simplicity and efficiency. The problem combines the concepts of string manipulation and hash maps, which are common in real-world software engineering tasks such as web analytics and domain tracking.
+8. **Subdomain Counting**
+	```cpp
+	            if(s[i] == '.')
+	```
+	Whenever a period (`.`) is encountered, it indicates the end of a subdomain. The part after the period is treated as a subdomain.
+
+9. **Increment Subdomain Count**
+	```cpp
+	                count[s.substr(i + 1)] += n;
+	```
+	The subdomain starting from the current position is added to the `count` map, and its count is incremented by `n`.
+
+10. **Final Count Update**
+	```cpp
+	        count[s] += n;
+	```
+	The full domain `s` is also added to the map with its count incremented by `n`.
+
+11. **Result Vector Initialization**
+	```cpp
+	    vector<string> res;
+	```
+	A new vector `res` is initialized to store the result.
+
+12. **Result Population**
+	```cpp
+	    for(auto it: count)
+	```
+	This loop iterates over the `count` map to prepare the result vector by formatting the counts.
+
+13. **Formatting Result**
+	```cpp
+	    res.push_back(to_string(it.second) + " " + it.first);
+	```
+	Each entry in `count` is formatted as a string with the visit count and the domain, and added to the result vector.
+
+14. **Return Result**
+	```cpp
+	    return res;
+	```
+	The result vector `res` is returned, containing the formatted subdomain visit counts.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the total number of domains.
+- **Average Case:** O(n * m) where n is the number of input domains and m is the average number of subdomains per domain.
+- **Worst Case:** O(n * m) in the worst case when every domain has many subdomains.
+
+The time complexity mainly depends on the number of subdomains and how we iterate through them.
+
+### Space Complexity 💾
+- **Best Case:** O(n) when there are fewer subdomains.
+- **Worst Case:** O(n * m) where n is the number of domains and m is the average number of subdomains, due to the space used by the map to store the visit counts.
+
+The space complexity is determined by the number of unique subdomains that need to be stored.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subdomain-visit-count/description/)
 

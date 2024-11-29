@@ -14,115 +14,159 @@ img_src = ""
 youtube = "5qwGgOEHL3U"
 youtube_upload_date="2023-05-03"
 youtube_thumbnail="https://i.ytimg.com/vi/5qwGgOEHL3U/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums. The task is to compute the product of all the elements in the array and return the sign of the product. Implement the function signFunc(x) that returns 1 if x is positive, -1 if x is negative, and 0 if x is 0. Return signFunc(product) for the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums containing integers.
+- **Example:** `nums = [1, 2, 3, 4, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- -100 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int arraySign(vector<int>& nums) {
-        int sgn = 1;
-        for(int i = 0; i < nums.size(); i++) {
-            if(nums[i] == 0) {
-                sgn = 0;
-                break;
-            } else if(nums[i] > 0) {
-                
-            } else if(nums[i] < 0) {
-                sgn *= -1;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the result of signFunc(product) where product is the product of all elements in the array.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The product can be a very large number, but signFunc only needs to determine the sign of the product.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the sign of the product of elements in nums.
+
+- Initialize a variable to store the product sign (positive, negative, or zero).
+- Iterate over the array nums and adjust the sign based on the number of negative elements.
+- If any element is zero, return the sign for zero immediately.
+- Return the final computed sign.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty.
+- The product can be large but will not overflow if handled correctly.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3, 4, 5]`  \
+  **Explanation:** The product is positive, so the return value is 1.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the array, multiplying the values and keeping track of whether the product is positive, negative, or zero.
+
+### Initial Thoughts 💭
+- We only need the sign of the product, not the actual product itself.
+- If there is a zero in the array, the product is zero, and we can return 0 immediately.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array should not be allowed by the constraints.
+- Large arrays should be handled efficiently with a time complexity of O(n).
+- If the array contains a zero, the result is immediately zero.
+- The solution should work for the full range of allowed input sizes and values.
+{{< dots >}}
+## Code 💻
+```cpp
+int arraySign(vector<int>& nums) {
+    int sgn = 1;
+    for(int i = 0; i < nums.size(); i++) {
+        if(nums[i] == 0) {
+            sgn = 0;
+            break;
+        } else if(nums[i] > 0) {
+            
+        } else if(nums[i] < 0) {
+            sgn *= -1;
         }
-        return sgn;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine the sign of the product of an array of integers. The product can either be positive, negative, or zero. The sign can be represented as:
-- 1 if the product is positive,
-- -1 if the product is negative,
-- 0 if the product is zero.
-
-The input is an array of integers, and the goal is to compute the sign of their product without explicitly calculating the product itself.
-
-### Approach
-
-To solve this problem, we can use a straightforward approach:
-1. **Iterate Through the Array**: We will iterate through each element of the given array.
-2. **Check for Zero**: If we encounter a zero in the array, we immediately know that the product will be zero, and we can return 0.
-3. **Count Negative Numbers**: We maintain a sign variable that keeps track of the overall sign. We will increment this variable by multiplying it by -1 every time we encounter a negative number.
-4. **Determine Final Sign**: At the end of the iteration, if we do not encounter any zeros, the sign will indicate whether the product is positive or negative.
-
-### Code Breakdown (Step by Step)
-
-Here's the implementation of the approach:
-
-```cpp
-class Solution {
-public:
-    int arraySign(vector<int>& nums) {
+    return sgn;
+}
 ```
-- The `Solution` class is defined, and within it, the `arraySign` method is declared, which takes a vector of integers as input.
 
-```cpp
-        int sgn = 1;
-```
-- We initialize a variable `sgn` to 1. This variable will keep track of the sign of the product.
+The function `arraySign` calculates the sign of the product of elements in the array `nums`. It returns 1 if the product is positive, -1 if the product is negative, and 0 if the product contains a zero.
 
-```cpp
-        for(int i = 0; i < nums.size(); i++) {
-```
-- We begin a loop that will iterate over each element in the `nums` array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int arraySign(vector<int>& nums) {
+	```
+	This is the function definition for `arraySign`, which takes a vector `nums` as input and returns an integer indicating the sign of the product of its elements.
 
-```cpp
-            if(nums[i] == 0) {
-                sgn = 0;
-                break;
-            }
-```
-- Within the loop, we first check if the current number is zero. If it is, we set `sgn` to 0 and break out of the loop since the product is guaranteed to be zero.
+2. **Variable Initialization**
+	```cpp
+	    int sgn = 1;
+	```
+	The variable `sgn` is initialized to 1, representing the sign of the product. It will be updated during iteration through the array.
 
-```cpp
-            else if(nums[i] > 0) {
-                // Positive number, do nothing
-            } 
-```
-- If the number is positive, we do nothing and simply continue the loop since positive numbers do not affect the overall sign of the product.
+3. **Loop Setup**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	This `for` loop iterates through each element in the `nums` vector to evaluate its effect on the product's sign.
 
-```cpp
-            else if(nums[i] < 0) {
-                sgn *= -1;
-            }
-        }
-```
-- If the number is negative, we multiply `sgn` by -1 to toggle the sign. This accounts for the fact that multiplying two negative numbers results in a positive number, while multiplying a negative number with a positive number results in a negative number.
+4. **Check for Zero**
+	```cpp
+	        if(nums[i] == 0) {
+	```
+	This conditional checks if the current element of the array is zero. If found, the product will be zero, so `sgn` is set to 0.
 
-```cpp
-        return sgn;
-    }
-};
-```
-- Finally, after processing all elements in the array, we return the value of `sgn`, which now reflects the sign of the product.
+5. **Set Sign to Zero**
+	```cpp
+	            sgn = 0;
+	```
+	If an element is zero, the sign is immediately set to zero, as multiplying by zero results in zero.
 
-### Complexity
+6. **Break Loop**
+	```cpp
+	            break;
+	```
+	Once a zero is found, the loop is broken, as the sign has already been determined (0).
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of elements in the input array. This is because we need to iterate through the entire array to determine the sign of the product.
+7. **Check for Positive Number**
+	```cpp
+	        } else if(nums[i] > 0) {
+	```
+	This checks if the current element is positive. Positive numbers do not change the sign, so nothing needs to be done.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we are using a fixed amount of space for the `sgn` variable, regardless of the size of the input array.
+8. **Check for Negative Number**
+	```cpp
+	        } else if(nums[i] < 0) {
+	```
+	This conditional checks if the current element is negative. Negative numbers flip the sign of the product, so `sgn` is updated accordingly.
 
-### Conclusion
+9. **Flip the Sign**
+	```cpp
+	            sgn *= -1;
+	```
+	When a negative number is found, the sign is flipped by multiplying `sgn` by -1.
 
-The `arraySign` function provides a simple and efficient way to determine the sign of the product of an integer array. By leveraging the properties of multiplication and iterating through the array, we can achieve the desired result without the need to compute the actual product.
+10. **Return Sign**
+	```cpp
+	    return sgn;
+	```
+	The final sign of the product is returned. It can be 1 (positive), -1 (negative), or 0 (if any element was zero).
 
-This approach is beneficial, especially when dealing with large arrays, as it avoids potential overflow issues that may arise from multiplying large integers. Additionally, by checking for zeros early in the process, we can terminate the computation promptly, which enhances the efficiency of the solution.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-In summary, this implementation demonstrates the importance of understanding mathematical properties in programming. By carefully considering the implications of multiplying positive and negative integers, we can devise efficient solutions to seemingly complex problems. The `arraySign` function exemplifies how to achieve clarity and conciseness in code, ensuring that our solutions are not only effective but also maintainable and easy to understand.
+The solution requires a single pass over the array to compute the result, making it O(n) in time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only need to keep track of the sign during the iteration.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sign-of-the-product-of-an-array/description/)
 

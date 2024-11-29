@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "NzVaNmqPaSo"
 youtube_upload_date="2021-02-25"
 youtube_thumbnail="https://i.ytimg.com/vi/NzVaNmqPaSo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,116 +28,184 @@ youtube_thumbnail="https://i.ytimg.com/vi/NzVaNmqPaSo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array, find the shortest continuous subarray such that, if you sort this subarray in non-decreasing order, the whole array will become sorted.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A list of integers, nums, representing the array to be considered.
+- **Example:** `Input: nums = [3, 8, 6, 10, 12, 9, 14]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -10^5 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findUnsortedSubarray(vector<int>& nums) {
-        
-        int mn = 0, mx = 0, n = nums.size();
-        
-        
-        vector<pair<int, int>> tmp(n);
-        
-        for(int i = 0; i < n; i++)
-        tmp[i] = make_pair(nums[i], i);
-        
-        sort(tmp.begin(), tmp.end());
-        
-        int start = -1, end = -1;
-        
-        for(int i = 0; i < n; i++) {
-            if(i != tmp[i].second)
-                if (start == -1) start = i;
-                else               end = i;
-        }
-        
-        if(start == -1) return 0;
-        return end - (start - 1);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the shortest subarray that needs to be sorted in order to make the whole array sorted.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output must be a non-negative integer.
 
-### Problem Statement:
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the shortest subarray that needs to be sorted to make the entire array sorted.
 
-The problem asks us to find the shortest subarray in an array of integers `nums` that, if sorted, would result in the entire array being sorted. In other words, we need to identify a contiguous subarray that is out of order and should be sorted so that the entire array becomes sorted.
+- Identify the part of the array that is out of order.
+- Check for the leftmost and rightmost positions where elements are not in order.
+- Find the subarray between these positions and calculate its length.
+- Return the length of the shortest subarray that needs to be sorted.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is not empty.
+- The array contains only integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 8, 6, 10, 12, 9, 14]`  \
+  **Explanation:** The subarray [8, 6, 10, 12] is the only part that is out of order, so sorting it will sort the entire array.
 
-We are given an integer array `nums`, and we need to find the length of this subarray. If the array is already sorted, the result should be `0`.
+- **Input:** `Input: nums = [1, 2, 3, 4]`  \
+  **Explanation:** The array is already sorted, so the length of the subarray to be sorted is 0.
 
-### Approach:
+{{< dots >}}
+## Approach 🚀
+The key idea is to find the positions where the array stops being sorted and then calculate the length of the subarray that needs to be sorted.
 
-To solve this problem, we need to identify the range within the array that is out of order. The strategy is to:
-1. Sort the array, keeping track of the original indices of the elements.
-2. Compare the sorted version with the original array to find the starting and ending positions of the unsorted subarray.
-3. Calculate the length of the subarray between the starting and ending indices.
-
-We can break down the solution into several steps:
-
-1. **Sorting the Array**: First, we sort the array, but while doing this, we need to keep track of the original indices. This is crucial because the sorted array will allow us to identify which elements are misplaced.
-   
-2. **Identify Start and End Indices**: We then iterate through both the original and sorted arrays to find where the original array deviates from the sorted array. This deviation gives us the boundaries of the unsorted subarray.
-   
-3. **Return the Length**: Once we have identified the `start` and `end` indices of the unsorted subarray, we can easily compute the length of the subarray.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Initialize Variables and Prepare for Sorting
+### Initial Thoughts 💭
+- The problem boils down to finding where the array is unsorted, both from the left and right sides.
+- We need to find the smallest subarray that, when sorted, sorts the entire array.
+- We can scan the array from both ends to identify where the unsorted subarray starts and ends.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is always non-empty according to the constraints.
+- The input size can be as large as 10^4, so the solution needs to be efficient in time and space.
+- If the array is already sorted, return 0.
+- The solution must run in O(n) time.
+{{< dots >}}
+## Code 💻
 ```cpp
-int mn = 0, mx = 0, n = nums.size();
-vector<pair<int, int>> tmp(n);
-```
-- We start by defining the necessary variables. `mn` and `mx` are placeholders for tracking the minimum and maximum values, but they aren't used in this version of the solution.
-- `n` stores the size of the input array `nums`.
-- `tmp` is a vector of pairs, where each pair consists of an element from the original array and its corresponding index. This will help us track the original positions of the elements after sorting.
-
-#### Step 2: Create Pairs of Elements and Indices
-```cpp
-for(int i = 0; i < n; i++)
+int findUnsortedSubarray(vector<int>& nums) {
+    
+    int mn = 0, mx = 0, n = nums.size();
+    
+    
+    vector<pair<int, int>> tmp(n);
+    
+    for(int i = 0; i < n; i++)
     tmp[i] = make_pair(nums[i], i);
-```
-- We iterate through the array and populate `tmp` with pairs of values from the `nums` array and their original indices.
-
-#### Step 3: Sort the Array of Pairs
-```cpp
-sort(tmp.begin(), tmp.end());
-```
-- We sort the array `tmp` based on the values of the elements (the first part of each pair). This will allow us to compare the original array with the sorted version to identify where the elements are out of order.
-
-#### Step 4: Identify the Start and End of the Unsorted Subarray
-```cpp
-int start = -1, end = -1;
-for(int i = 0; i < n; i++) {
-    if(i != tmp[i].second)
-        if (start == -1) start = i;
-        else               end = i;
+    
+    sort(tmp.begin(), tmp.end());
+    
+    int start = -1, end = -1;
+    
+    for(int i = 0; i < n; i++) {
+        if(i != tmp[i].second)
+            if (start == -1) start = i;
+            else               end = i;
+    }
+    
+    if(start == -1) return 0;
+    return end - (start - 1);
 }
 ```
-- After sorting, we loop through the array again and compare each element's original index (from `tmp[i].second`) with its position in the sorted array (`i`). If the original index is not equal to the current index, it indicates that the element is misplaced.
-- The first time we encounter a mismatch, we set `start` to that index. If a mismatch occurs again, we set `end` to that index. This gives us the boundaries of the unsorted subarray.
-  
-#### Step 5: Return the Length of the Unsorted Subarray
-```cpp
-if(start == -1) return 0;
-return end - (start - 1);
-```
-- If no mismatches were found (i.e., the array is already sorted), we return `0`.
-- Otherwise, we calculate and return the length of the subarray by subtracting the `start` index from the `end` index.
 
-### Complexity:
+This function finds the shortest unsorted subarray that, when sorted, results in the entire array being sorted. The function uses sorting and compares the sorted array's indices with the original array's indices to identify the unsorted subarray.
 
-#### Time Complexity:
-- **O(n log n)**: The time complexity is dominated by the sorting step, where `n` is the number of elements in the array. Sorting takes O(n log n) time, while the rest of the operations (initialization and iteration through the array) take linear time O(n). Thus, the overall time complexity is O(n log n).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int findUnsortedSubarray(vector<int>& nums) {
+	```
+	Declares the function `findUnsortedSubarray`, which takes a vector of integers as input and returns the length of the shortest unsorted subarray.
 
-#### Space Complexity:
-- **O(n)**: We use an additional vector `tmp` to store pairs of elements and their indices, which requires O(n) space. The space complexity is linear with respect to the number of elements in the input array.
+2. **Variable Initialization**
+	```cpp
+	    int mn = 0, mx = 0, n = nums.size();
+	```
+	Initializes variables `mn`, `mx`, and `n`. `mn` and `mx` will be used to track the minimum and maximum values within the subarray, while `n` holds the size of the input array.
 
-### Conclusion:
+3. **Temporary Array Initialization**
+	```cpp
+	    vector<pair<int, int>> tmp(n);
+	```
+	Creates a temporary vector `tmp` of pairs, where each pair contains an element from the `nums` array and its corresponding index. This will help track the original order of elements while sorting.
 
-This solution efficiently finds the shortest subarray that needs to be sorted in order to sort the entire array. By using sorting and tracking the original indices, we can easily identify the misplaced elements and calculate the boundaries of the unsorted subarray. The time complexity of O(n log n) is acceptable for arrays of typical sizes encountered in competitive programming, and the space complexity of O(n) is reasonable for this problem.
+4. **Array Population**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts a loop to populate the `tmp` vector with pairs. Each pair consists of an element from `nums` and its corresponding index.
 
-The algorithm performs well in terms of both time and space efficiency, making it an ideal solution for this problem. It effectively handles edge cases, such as when the array is already sorted or when the entire array needs to be sorted, and provides a clear and simple approach to identifying the required subarray.
+5. **Pair Assignment**
+	```cpp
+	    tmp[i] = make_pair(nums[i], i);
+	```
+	For each element in `nums`, assigns a pair containing the element and its index to `tmp[i]`.
+
+6. **Array Sorting**
+	```cpp
+	    sort(tmp.begin(), tmp.end());
+	```
+	Sorts the `tmp` vector based on the element values. This is essential to compare the original order with the sorted order and identify the subarray that is out of order.
+
+7. **Variable Initialization for Indices**
+	```cpp
+	    int start = -1, end = -1;
+	```
+	Initializes two variables `start` and `end` to -1. These will be used to track the first and last indices of the unsorted subarray.
+
+8. **Subarray Identification Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to compare the indices of the original array (`nums`) with those in the sorted `tmp` array. If the indices don't match, it identifies the unsorted subarray.
+
+9. **Index Comparison**
+	```cpp
+	        if(i != tmp[i].second)
+	```
+	Compares the current index `i` with the index in the sorted `tmp` array. If they don't match, it indicates that this element is part of the unsorted subarray.
+
+10. **Start Index Assignment**
+	```cpp
+	            if (start == -1) start = i;
+	```
+	If `start` is still -1 (not yet set), assigns the current index `i` as the `start` of the unsorted subarray.
+
+11. **End Index Assignment**
+	```cpp
+	            else               end = i;
+	```
+	Once `start` is assigned, sets the current index `i` as the `end` of the unsorted subarray.
+
+12. **Check for Already Sorted Array**
+	```cpp
+	    if(start == -1) return 0;
+	```
+	Checks if the array is already sorted. If `start` is still -1, it means no unsorted subarray was found, so it returns 0.
+
+13. **Return Subarray Length**
+	```cpp
+	    return end - (start - 1);
+	```
+	Calculates and returns the length of the unsorted subarray by subtracting `start` from `end`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We scan the array once to find the leftmost and rightmost out-of-order elements, resulting in O(n) time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution only requires a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/description/)
 

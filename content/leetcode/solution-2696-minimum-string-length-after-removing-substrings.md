@@ -14,130 +14,186 @@ img_src = ""
 youtube = "8SD0rcmgFMU"
 youtube_upload_date="2023-05-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/8SD0rcmgFMU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting of only uppercase English letters. You can repeatedly remove any occurrence of the substrings 'AB' or 'CD' from `s`. Each operation removes one of these substrings and shortens the string. After performing the operations, return the minimum possible length of the resulting string. Note that removing substrings can create new occurrences of 'AB' or 'CD', which can be removed in further operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` which contains only uppercase English letters.
+- **Example:** `Input: s = 'ABDCACDB'`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- s consists only of uppercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minLength(string s) {
-        int n = s.size();
-        int res = n;
-        for(int i = 0; i < n - 1; i++) {
-            int p = i, q = i + 1;
-            while((p >= 0 && q < n && s[p] == 'A' && s[q] == 'B') ||
-               (p >= 0 && q < n && s[p] == 'C' && s[q] == 'D') ) {
-                s[p] = 'X';
-                s[q] = 'X';                
-                res -= 2;
-                while(q < n && s[q] == 'X') q++;
-                while(p >= 0&& s[p] == 'X') p--;                
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum possible length of the string after applying the operations.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be a single integer representing the length of the resulting string after all possible operations.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove the substrings 'AB' or 'CD' as much as possible to minimize the length of the string.
+
+- Step 1: Initialize a variable `res` to store the length of the string.
+- Step 2: Loop through the string to find occurrences of 'AB' or 'CD'.
+- Step 3: Remove each occurrence by marking the characters as 'X' (or any placeholder).
+- Step 4: After removing a substring, check the new string for additional occurrences of 'AB' or 'CD'.
+- Step 5: Continue removing substrings until no more 'AB' or 'CD' substrings can be found.
+- Step 6: Return the length of the string after all possible removals.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string is not empty.
+- The string contains only uppercase English letters.
+- The string can be modified multiple times as long as 'AB' or 'CD' substrings are present.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'ABDCACDB'`  \
+  **Explanation:** We can remove 'AB' from the string, resulting in 'DCACDB'. Then, remove 'DC' and 'CD' to get 'AC'. Finally, remove 'AC' to get an empty string. The minimum length is 3.
+
+- **Input:** `Input: s = 'AABBCCDD'`  \
+  **Explanation:** We can remove 'AB' and 'CD' twice to get 'CC'. The final string has a length of 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the string and repeatedly removing substrings 'AB' or 'CD' until no such substrings are left.
+
+### Initial Thoughts 💭
+- We need to keep checking for 'AB' or 'CD' substrings and remove them.
+- The string can be dynamically modified as substrings are removed.
+- A greedy approach can be used where we continuously remove the substrings 'AB' and 'CD' until none remain.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string is not possible based on constraints but if it were, the length would be 0.
+- For strings close to the upper limit of length 100, ensure the approach handles the string efficiently.
+- If no 'AB' or 'CD' substrings exist, the length of the string will remain unchanged.
+- The string length is guaranteed to be between 1 and 100, so the algorithm should perform efficiently within these bounds.
+{{< dots >}}
+## Code 💻
+```cpp
+int minLength(string s) {
+    int n = s.size();
+    int res = n;
+    for(int i = 0; i < n - 1; i++) {
+        int p = i, q = i + 1;
+        while((p >= 0 && q < n && s[p] == 'A' && s[q] == 'B') ||
+           (p >= 0 && q < n && s[p] == 'C' && s[q] == 'D') ) {
+            s[p] = 'X';
+            s[q] = 'X';                
+            res -= 2;
+            while(q < n && s[q] == 'X') q++;
+            while(p >= 0&& s[p] == 'X') p--;                
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to reduce a given string by repeatedly removing adjacent pairs of characters: specifically, "AB" and "CD". For every such pair, we delete both characters from the string and keep performing this operation until no more such pairs are found. The goal is to return the final length of the string after all such operations have been applied.
-
-### Approach
-
-We will solve this problem using a greedy approach. The idea is to iterate through the string and check for adjacent pairs of characters that can be removed. When a valid pair ("AB" or "CD") is found, we replace both characters with 'X' (to indicate that they've been removed) and continue the process. This helps in reducing the string efficiently.
-
-To optimize the process:
-1. We will use two pointers (`p` and `q`) to track potential adjacent pairs.
-2. Every time we find a valid pair, we reduce the string length by 2 and move the pointers inward to continue searching for further valid pairs.
-3. Once a pair is removed, we skip over the 'X' characters (which are placeholders for removed characters) to continue checking the string efficiently.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialization
-
-```cpp
-int n = s.size();
-int res = n;
+    return res;
+}
 ```
 
-- The variable `n` holds the size of the input string `s`.
-- The variable `res` is initialized to `n` and will track the length of the string as it is reduced by removing adjacent pairs.
+This function `minLength` computes the minimal length of a string after repeatedly removing adjacent pairs of characters ('A', 'B') or ('C', 'D'). It uses a greedy approach to remove these pairs and return the final string length.
 
-#### Step 2: Iterating Through the String
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minLength(string s) {
+	```
+	This line defines the function `minLength` that takes a string `s` as input and returns an integer representing the minimal length of the string after removal of certain character pairs.
 
-```cpp
-for(int i = 0; i < n - 1; i++) {
-    int p = i, q = i + 1;
-```
+2. **String Size Calculation**
+	```cpp
+	    int n = s.size();
+	```
+	The variable `n` stores the length of the input string `s`.
 
-- We loop through the string from index `0` to `n-2` (because we are checking adjacent pairs).
-- `p` and `q` represent the two adjacent characters at positions `i` and `i+1`.
+3. **Initialization**
+	```cpp
+	    int res = n;
+	```
+	The variable `res` is initialized to `n`, representing the initial length of the string before any pairs are removed.
 
-#### Step 3: Removing Valid Pairs
+4. **Outer Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n - 1; i++) {
+	```
+	A loop is initiated to iterate through each character in the string, excluding the last character (as we are checking pairs).
 
-```cpp
-while((p >= 0 && q < n && s[p] == 'A' && s[q] == 'B') ||
-      (p >= 0 && q < n && s[p] == 'C' && s[q] == 'D')) {
-```
+5. **Pointer Setup**
+	```cpp
+	        int p = i, q = i + 1;
+	```
+	Two pointers `p` and `q` are initialized, where `p` points to the current character and `q` points to the next character.
 
-- Inside the loop, we check if we have found one of the valid adjacent pairs:
-  - "AB"
-  - "CD"
-- If a valid pair is found, we proceed to remove the characters.
+6. **Pair Checking**
+	```cpp
+	        while((p >= 0 && q < n && s[p] == 'A' && s[q] == 'B') ||
+	```
+	The while loop checks if the characters at positions `p` and `q` form a valid pair ('A' and 'B').
 
-#### Step 4: Marking Characters as Removed
+7. **Pair Checking**
+	```cpp
+	           (p >= 0 && q < n && s[p] == 'C' && s[q] == 'D') ) {
+	```
+	This condition checks if the characters at positions `p` and `q` form the pair ('C' and 'D'). The loop continues if either pair is found.
 
-```cpp
-s[p] = 'X';
-s[q] = 'X';
-res -= 2;
-```
+8. **Character Replacement**
+	```cpp
+	            s[p] = 'X';
+	```
+	The character at position `p` is replaced with 'X' to indicate that the pair has been removed.
 
-- We replace the characters at positions `p` and `q` with 'X' to indicate that they have been removed.
-- We decrease the result (`res`) by 2 because we've removed two characters from the string.
+9. **Character Replacement**
+	```cpp
+	            s[q] = 'X';                
+	```
+	The character at position `q` is also replaced with 'X', marking it as removed.
 
-#### Step 5: Skipping Over 'X' Characters
+10. **Result Update**
+	```cpp
+	            res -= 2;
+	```
+	The length of the string is decreased by 2, as two characters have been removed.
 
-```cpp
-while(q < n && s[q] == 'X') q++;
-while(p >= 0 && s[p] == 'X') p--;
-```
+11. **Pointer Adjustment**
+	```cpp
+	            while(q < n && s[q] == 'X') q++;
+	```
+	The pointer `q` is moved forward to skip over any 'X' characters (those marked as removed).
 
-- After removing a valid pair, we move the pointers `p` and `q` inward to skip over any 'X' characters (which are placeholders for removed characters).
-- We increment `q` to find the next valid character to check and decrement `p` to do the same in the opposite direction.
+12. **Pointer Adjustment**
+	```cpp
+	            while(p >= 0&& s[p] == 'X') p--;                
+	```
+	Similarly, the pointer `p` is moved backward to skip over any 'X' characters.
 
-#### Step 6: Continue Loop Until No Valid Pair is Found
+13. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the final length of the string after all possible pair removals.
 
-The outer `while` loop continues as long as valid pairs are being removed from the string. This ensures that the string is reduced as much as possible by repeatedly removing valid pairs.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n^2)
 
-#### Step 7: Return Final Length of the String
+The time complexity is O(n) in the best case when no removals are necessary, but may reach O(n^2) in the worst case when multiple passes through the string are required.
 
-```cpp
-return res;
-```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-- After the loop terminates (i.e., no more valid pairs are found), we return `res`, which holds the final length of the string after all possible reductions.
+The space complexity is O(n) due to the storage required for the string during processing.
 
-### Complexity
+**Happy Coding! 🎉**
 
-#### Time Complexity
-
-- The time complexity of this solution is **O(n)**, where `n` is the size of the input string. This is because each character in the string is visited at most once: we scan the string for adjacent pairs, and each time we find a pair, we mark both characters as removed ('X') and skip over them.
-- We only loop through the string once with the two pointers, so the solution is linear in terms of time complexity.
-
-#### Space Complexity
-
-- The space complexity is **O(1)**, assuming that we modify the string in-place. We only use a few additional integer variables (`res`, `p`, and `q`), which occupy constant space.
-
-### Conclusion
-
-This approach efficiently reduces the string by removing adjacent pairs "AB" and "CD" using a greedy method. The algorithm works in linear time, making it suitable for handling large strings. By iterating through the string once and marking removed characters, we achieve optimal performance with a minimal space footprint. The solution ensures that all possible reductions are made and provides the correct final length of the string.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-string-length-after-removing-substrings/description/)
 

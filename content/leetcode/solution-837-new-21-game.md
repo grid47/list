@@ -14,127 +14,200 @@ img_src = ""
 youtube = "zKi4LzjK27k"
 youtube_upload_date="2023-05-25"
 youtube_thumbnail="https://i.ytimg.com/vi/zKi4LzjK27k/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice is playing a game where she starts with 0 points and randomly draws a number from the range [1, maxPts] each time. Alice continues drawing until her points reach or exceed a target value k. After each draw, she may stop if her total points reach or exceed k. The goal is to determine the probability that Alice has at most n points before reaching k points.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of three integers: n, k, and maxPts. Here, n is the maximum number of points Alice can have without exceeding it, k is the target score Alice needs to reach or exceed to stop drawing, and maxPts is the maximum number of points Alice can draw in each round.
+- **Example:** `Input: n = 15, k = 10, maxPts = 5`
+- **Constraints:**
+	- 0 <= k <= n <= 10^4
+	- 1 <= maxPts <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double new21Game(int n, int k, int w) {
-        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the probability that Alice has at most n points when she stops drawing.
+- **Example:** `Output: 0.80000`
+- **Constraints:**
+	- The probability should be accurate within a relative or absolute error of 10^-5.
 
-        if(k == 0 || n >= k + w)
-            return 1;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the probability that Alice's points are at most n before she reaches the target k.
 
-        
-        /*
-        
-        You will get number x (1 to w) in a draw, with probablity 1 / w
-        
-        if you need probablity of getting i points in a draw
-        
-        we can do slecting (i - x) points with probablity dp[i - x] and
-        selecting x with probablity x
-        
-        so doing it together dp[i - x] * 1 / w
-        
-        and this to every x in [1, w] to get net prob of dp[i].
-        
-        once the pionts has crossed a limit k, there will be no more selections.
-        
-        then we look for only the over flows from previous trials.
+- Step 1: Initialize a dp array to store the probabilities of Alice having exactly i points.
+- Step 2: Start with the base case where Alice has 0 points (probability = 1).
+- Step 3: For each possible score from 1 to n, calculate the probability of reaching that score by drawing a number from the range [1, maxPts].
+- Step 4: Use a sliding window to sum the probabilities efficiently to calculate the next values in the dp array.
+- Step 5: If the points exceed or reach k, stop the process and sum the probabilities for the cases where the points are less than or equal to n.
+{{< dots >}}
+### Problem Assumptions ✅
+- Alice draws random numbers independently and each draw has an equal probability of any number in the range [1, maxPts].
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 15, k = 10, maxPts = 5`  \
+  **Explanation:** In this case, Alice can draw numbers from 1 to 5, and she needs to stop when her points exceed or equal 10. We need to calculate the probability that she has 15 or fewer points before stopping.
 
-        why target probablity counted from k onward instead of dp[n].
+- **Input:** `Input: n = 10, k = 1, maxPts = 10`  \
+  **Explanation:** Alice draws a single card and immediately stops when she reaches or exceeds the target k = 1. Therefore, the probability of having 10 or fewer points is 1.
 
-        */        
-        
-        vector<double> dp(n+1);
-        dp[0] = 1;
-        double Wsum = 1.0, res = 0.0;
-        for(int i = 1; i <= n; i++) {
-            dp[i] = Wsum/ w;
-            if(i < k) Wsum += dp[i];
-            else res += dp[i];
-            if(i - w >= 0) Wsum -= dp[i - w];
-        }
-        return res;
+{{< dots >}}
+## Approach 🚀
+We need to calculate the probability of having n or fewer points, which involves dynamic programming and efficient sliding window sum computation.
+
+### Initial Thoughts 💭
+- This is a probability problem where we need to accumulate probabilities over multiple draws.
+- We can use dynamic programming to efficiently calculate the probability distribution of the total points after each draw.
+- The key challenge is to compute the probability of having a specific number of points, while ensuring we don't exceed the target score k.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty or invalid inputs should not be provided.
+- Ensure the solution handles large inputs efficiently, especially when n, k, or maxPts are close to the upper limits of 10^4.
+- Handle cases where n or k is 0, or maxPts is equal to 1.
+- Make sure the values adhere to the constraints and do not exceed the bounds.
+{{< dots >}}
+## Code 💻
+```cpp
+double new21Game(int n, int k, int w) {
+    
+
+    if(k == 0 || n >= k + w)
+        return 1;
+
+    
+    /*
+    
+    You will get number x (1 to w) in a draw, with probablity 1 / w
+    
+    if you need probablity of getting i points in a draw
+    
+    we can do slecting (i - x) points with probablity dp[i - x] and
+    selecting x with probablity x
+    
+    so doing it together dp[i - x] * 1 / w
+    
+    and this to every x in [1, w] to get net prob of dp[i].
+    
+    once the pionts has crossed a limit k, there will be no more selections.
+    
+    then we look for only the over flows from previous trials.
+
+    why target probablity counted from k onward instead of dp[n].
+
+    */        
+    
+    vector<double> dp(n+1);
+    dp[0] = 1;
+    double Wsum = 1.0, res = 0.0;
+    for(int i = 1; i <= n; i++) {
+        dp[i] = Wsum/ w;
+        if(i < k) Wsum += dp[i];
+        else res += dp[i];
+        if(i - w >= 0) Wsum -= dp[i - w];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are tasked with solving a variant of the "21 Game" in a probabilistic setting. In the game, we are given a total number of points `n`, a threshold value `k` (which is the target), and a range `w` of possible points you can get in each draw. The task is to calculate the probability of achieving exactly `n` points or fewer, starting from a score of `0`, without exceeding `n` points.
-
-- **n**: The total score we aim to achieve or exceed.
-- **k**: The threshold score, at which we stop drawing cards (if the score is greater than or equal to `k`, no more cards are drawn).
-- **w**: The maximum value a single card can have in a draw.
-
-### Approach
-
-The goal is to compute the probability of reaching a score less than or equal to `n` without exceeding `n`. The game has certain dynamics, where you draw cards, and each card has a value from `1` to `w`. If a score `i` exceeds `n`, the game ends, and we do not continue drawing cards. We need to calculate the probability that the game ends in a score less than or equal to `n`.
-
-#### Key Observations:
-
-1. The game ends as soon as your score reaches or exceeds `k`. If the score exceeds `n`, it is also an end condition.
-2. Every time you draw a card, you gain between 1 and `w` points, and the probability of drawing a particular card value is `1/w`.
-3. The dynamic programming approach works well here. We use a DP array, `dp[i]`, to store the probability of reaching exactly `i` points at any given time. The main challenge is to efficiently calculate these probabilities without redundantly computing subproblems.
-4. We start by initializing `dp[0] = 1` because starting from score `0` is guaranteed. Then, we calculate probabilities for each score up to `n`.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-vector<double> dp(n+1);
-dp[0] = 1;
-double Wsum = 1.0, res = 0.0;
-```
-- We initialize an array `dp` of size `n + 1` to store the probabilities. The element `dp[i]` will represent the probability of having exactly `i` points.
-- We set `dp[0] = 1` because the probability of starting from `0` is always 1.
-- `Wsum` is used to maintain the sum of the probabilities from the previous `w` states (i.e., the sum of probabilities for scores that can contribute to the current score).
-
-```cpp
-for(int i = 1; i <= n; i++) {
-    dp[i] = Wsum / w;
-    if(i < k) Wsum += dp[i];
-    else res += dp[i];
-    if(i - w >= 0) Wsum -= dp[i - w];
+    return res;
 }
 ```
-- For each score `i` from `1` to `n`, we compute the probability of reaching `i` points by considering all possible previous states that can contribute to this score.
-  - The probability `dp[i]` is computed as the sum of probabilities of drawing any card that leads to score `i`, which is given by `Wsum / w` (as we divide the sum by `w` because each draw has an equal probability).
-- If `i < k`, we add `dp[i]` to `Wsum` since we are still drawing cards and the score has not reached the threshold `k`.
-- If `i >= k`, we stop drawing cards and add `dp[i]` to the result `res` because this is the score we are interested in.
-- If `i - w >= 0`, we subtract `dp[i - w]` from `Wsum` to ensure that the sliding window of probabilities is kept up to date.
 
-Finally, the result `res` will contain the total probability of reaching a score from `k` to `n` without exceeding `n`.
+This code implements a probability-based approach for the game described. It calculates the probability of reaching a score within a specified range and returns the overall probability of success.
 
-```cpp
-return res;
-```
-- Return the result `res`, which contains the total probability of achieving a score within the required range.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	double new21Game(int n, int k, int w) {
+	```
+	Define a function to calculate the probability of winning a game given the parameters n (number of points), k (limit), and w (range of possible outcomes in a draw).
 
-### Complexity
+2. **Condition Check**
+	```cpp
+	    if(k == 0 || n >= k + w)
+	```
+	Check if the game is over based on the values of k and n. If k is zero or n exceeds the limit plus range, return a probability of 1.
 
-#### Time Complexity:
+3. **Return Statement**
+	```cpp
+	        return 1;
+	```
+	If the condition in the previous step is true, the game ends with a probability of 1.
 
-- **O(n)**: We loop through each score from `1` to `n`. For each score, we perform constant time operations (adding and subtracting values to/from `Wsum`). Thus, the overall time complexity is linear with respect to the number of scores `n`.
+4. **Dynamic Programming Setup**
+	```cpp
+	    vector<double> dp(n+1);
+	```
+	Initialize a vector dp to store probabilities for each score from 0 to n.
 
-#### Space Complexity:
+5. **Initialization**
+	```cpp
+	    dp[0] = 1;
+	```
+	Set the base case: the probability of getting 0 points is 1.
 
-- **O(n)**: We use an array `dp` of size `n + 1` to store the probabilities for each score from `0` to `n`. The space complexity is therefore proportional to `n`.
+6. **Variable Initialization**
+	```cpp
+	    double Wsum = 1.0, res = 0.0;
+	```
+	Initialize variables for cumulative probability (Wsum) and the result (res).
 
-### Conclusion
+7. **Main Loop**
+	```cpp
+	    for(int i = 1; i <= n; i++) {
+	```
+	Loop through all possible scores from 1 to n to calculate the probabilities.
 
-The `new21Game` function computes the probability of achieving a score within the allowed range by using dynamic programming. By maintaining a running sum of probabilities (`Wsum`), the solution efficiently calculates the required probability for each score. The sliding window technique ensures that we do not redundantly compute overlapping subproblems, making this approach both time and space efficient.
+8. **Probability Calculation**
+	```cpp
+	        dp[i] = Wsum / w;
+	```
+	Set the probability of reaching score i by dividing the cumulative probability by w.
 
-This solution is optimal for solving the problem with a time complexity of **O(n)** and space complexity of **O(n)**, making it scalable for large inputs.
+9. **Cumulative Probability Update**
+	```cpp
+	        if(i < k) Wsum += dp[i];
+	```
+	If the score is less than k, update the cumulative probability.
 
-This approach uses concepts of dynamic programming, sliding window, and probabilistic calculations, all of which contribute to its efficiency in solving the "new21Game" problem.
+10. **Result Calculation**
+	```cpp
+	        else res += dp[i];
+	```
+	If the score exceeds k, add the probability to the result.
+
+11. **Cumulative Probability Adjust**
+	```cpp
+	        if(i - w >= 0) Wsum -= dp[i - w];
+	```
+	Adjust the cumulative probability by subtracting the value that is no longer in the valid range.
+
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the computed result as the final probability of winning.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in terms of n, as we are iterating over the possible number of points and updating probabilities.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the dp array for keeping track of probabilities.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/new-21-game/description/)
 

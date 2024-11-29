@@ -14,18 +14,71 @@ img_src = ""
 youtube = "CC0X2wxP7dE"
 youtube_upload_date="2023-03-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/CC0X2wxP7dE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array nums of length n. You can perform the following operation as many times as needed: pick an index i that has not been previously selected, and choose a prime number p such that p < nums[i]. Then, subtract p from nums[i]. Your task is to determine if it is possible to make the array strictly increasing by performing the operation described.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers nums, where each element nums[i] represents the value at index i.
+- **Example:** `nums = [8, 12, 7, 15]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool primeSubOperation(vector<int>& nums) {
-        vector<int> arr = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to make nums strictly increasing using the described operations; otherwise, return false.
+- **Example:** `true`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if it's possible to make the array strictly increasing using the prime subtraction operation.
+
+- Iterate through the array starting from the second-to-last element.
+- For each element nums[i], check if it is greater than or equal to the next element nums[i + 1].
+- If nums[i] >= nums[i + 1], find the largest prime number p such that p < nums[i] and subtract it from nums[i].
+- Check if the updated nums[i] is strictly less than nums[i + 1]. If not, return false.
+- If the array is processed successfully, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array can have duplicate elements.
+- The prime subtraction operation can be performed any number of times on different elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [8, 12, 7, 15]`  \
+  **Explanation:** We can subtract prime numbers 5 from 8, and 7 from 12 to make the array strictly increasing.
+
+- **Input:** `nums = [5, 6, 10, 12]`  \
+  **Explanation:** The array is already strictly increasing, no operation needed.
+
+- **Input:** `nums = [4, 8, 3]`  \
+  **Explanation:** It is not possible to perform any operation to make this array strictly increasing.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves iterating through the array and performing prime subtraction to make the array strictly increasing.
+
+### Initial Thoughts 💭
+- The array must be strictly increasing at every step.
+- Prime numbers less than nums[i] can be used to decrease nums[i].
+- We need to iterate from the second-to-last element to the first element to perform operations efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array should return false as there are no elements to operate on.
+- The solution should handle input arrays of size up to 1000 efficiently.
+- Consider edge cases where nums[i] is 1, and no prime can be subtracted.
+- The solution must respect the constraints of 1 <= nums.length <= 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+bool primeSubOperation(vector<int>& nums) {
+    vector<int> arr = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173,
 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281,
 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409,
@@ -34,99 +87,114 @@ public:
 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809,
 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941,
 947, 953, 967, 971, 977, 983, 991, 997 };
-        int n = nums.size();
-        for(int i = n - 2; i >= 0; i--) {
-            int j = 0, tmp = nums[i];
-            if(nums[i] >= nums[i + 1]) {
-                int diff = nums[i] - nums[i + 1] + 1;
-                auto it = lower_bound(arr.begin(), arr.end(), diff);
-                if(it == arr.end() || *it >= nums[i]) return false;
-                nums[i] -= *it;
-            }
-            if(nums[i] >= nums[i + 1]) return false;
+    int n = nums.size();
+    for(int i = n - 2; i >= 0; i--) {
+        int j = 0, tmp = nums[i];
+        if(nums[i] >= nums[i + 1]) {
+            int diff = nums[i] - nums[i + 1] + 1;
+            auto it = lower_bound(arr.begin(), arr.end(), diff);
+            if(it == arr.end() || *it >= nums[i]) return false;
+            nums[i] -= *it;
         }
-        return true;
+        if(nums[i] >= nums[i + 1]) return false;
     }
-};
-{{< /highlight >}}
----
+    return true;
+}
+```
 
-### Problem Statement
+This is the complete implementation of the 'primeSubOperation' function that checks if a sequence of numbers satisfies certain conditions using a predefined list of prime numbers.
 
-The problem asks to determine if it is possible to perform a series of operations on an array `nums` such that after applying a sequence of operations, the resulting array is strictly increasing. In each operation, you are allowed to subtract a prime number from an element of the array. The goal is to check whether it's possible to apply the operation to each element such that the array becomes strictly increasing, with no element being greater than or equal to the next one after the operation.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool primeSubOperation(vector<int>& nums) {
+	```
+	Define the function 'primeSubOperation', which takes a reference to a vector of integers and returns a boolean value.
 
-### Approach
+2. **Prime Numbers Initialization**
+	```cpp
+	    vector<int> arr = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997 };
+	```
+	Initialize a vector of prime numbers which will be used to compare and subtract from the elements in 'nums'.
 
-To solve this problem, we need to ensure that for each element in the array, we can find a prime number (from a pre-defined list of primes) that can be subtracted from the current element such that the result still maintains the condition of the array being strictly increasing. This will involve the following steps:
+3. **Determine List Size**
+	```cpp
+	    int n = nums.size();
+	```
+	Get the size of the input vector 'nums'.
 
-1. **Prime List**: We are given a list of prime numbers. These primes will be the only candidates for subtraction from each element of the array.
-   
-2. **Traversal of the Array**: We start from the second-to-last element and move towards the first element. For each element:
-   - We check whether it is greater than or equal to the next element. If so, we need to subtract a prime from it.
-   - The prime subtracted must make the current element strictly less than the next element.
-   
-3. **Using Lower Bound**: To find a suitable prime number to subtract, we calculate the difference between the current element and the next element. Then, we use binary search (`lower_bound`) to find the smallest prime that is greater than this difference.
-   
-4. **Checking Validity**: After subtracting the prime, we ensure that the current element becomes smaller than the next element. If at any point, the conditions are violated, we return `false`. If we can process all elements without violating the condition, we return `true`.
+4. **Loop Initialization**
+	```cpp
+	    for(int i = n - 2; i >= 0; i--) {
+	```
+	Start a loop that iterates through the vector from second-to-last element down to the first.
 
-### Code Breakdown (Step by Step)
+5. **Store Temporary Value**
+	```cpp
+	        int j = 0, tmp = nums[i];
+	```
+	Store the current element in 'tmp' and initialize 'j'.
 
-#### 1. **Prime List Initialization**:
-   ```cpp
-   vector<int> arr = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, ... };
-   ```
-   - We initialize a list of prime numbers `arr` that can be used for subtraction. This list contains all primes up to 1000. These primes will be used to determine which prime number to subtract from an element in the `nums` array.
+6. **Check Comparison Condition**
+	```cpp
+	        if(nums[i] >= nums[i + 1]) {
+	```
+	Check if the current element is greater than or equal to the next element.
 
-#### 2. **Looping Through the Array**:
-   ```cpp
-   int n = nums.size();
-   for(int i = n - 2; i >= 0; i--) {
-       int j = 0, tmp = nums[i];
-   ```
-   - The array `nums` is processed from the second-to-last element to the first element (reverse order). This is done because we need to ensure each element is less than the next one. We compare `nums[i]` with `nums[i+1]` and adjust `nums[i]` accordingly.
+7. **Calculate Difference**
+	```cpp
+	            int diff = nums[i] - nums[i + 1] + 1;
+	```
+	Calculate the difference between the current element and the next element, adding 1.
 
-#### 3. **Checking if Current Element is Greater Than or Equal to Next Element**:
-   ```cpp
-   if(nums[i] >= nums[i + 1]) {
-       int diff = nums[i] - nums[i + 1] + 1;
-   ```
-   - For each element `nums[i]`, we check if it is greater than or equal to the next element `nums[i+1]`. If so, we calculate the difference `diff` between `nums[i]` and `nums[i+1]` and add `1` to it. This value represents the minimum difference needed to ensure `nums[i]` becomes strictly less than `nums[i+1]`.
+8. **Find Lower Bound Prime**
+	```cpp
+	            auto it = lower_bound(arr.begin(), arr.end(), diff);
+	```
+	Find the smallest prime number that is greater than or equal to the calculated difference.
 
-#### 4. **Binary Search for a Suitable Prime**:
-   ```cpp
-   auto it = lower_bound(arr.begin(), arr.end(), diff);
-   if(it == arr.end() || *it >= nums[i]) return false;
-   nums[i] -= *it;
-   ```
-   - We then use `lower_bound` to find the smallest prime in the list `arr` that is greater than or equal to the difference `diff`. This prime will be subtracted from `nums[i]`.
-   - If no suitable prime is found (i.e., the iterator `it` reaches the end of the list), or if the prime found is greater than or equal to `nums[i]`, we return `false`, because it would violate the condition that the array remains strictly increasing.
-   - If a suitable prime is found, we subtract it from `nums[i]`.
+9. **Prime Validation**
+	```cpp
+	            if(it == arr.end() || *it >= nums[i]) return false;
+	```
+	Check if the found prime number is valid. If not, return false.
 
-#### 5. **Final Check for Validity**:
-   ```cpp
-   if(nums[i] >= nums[i + 1]) return false;
-   ```
-   - After the subtraction, we check if `nums[i]` is still greater than or equal to `nums[i + 1]`. If so, we return `false`, as the array is not strictly increasing.
+10. **Subtract Prime**
+	```cpp
+	            nums[i] -= *it;
+	```
+	Subtract the found prime from the current element.
 
-#### 6. **Return True if All Elements are Processed**:
-   ```cpp
-   return true;
-   ```
-   - If the loop completes successfully without returning `false`, it means the array can be transformed into a strictly increasing array by subtracting the appropriate primes. Therefore, we return `true`.
+11. **Condition Check**
+	```cpp
+	        if(nums[i] >= nums[i + 1]) return false;
+	```
+	After modification, check again if the current element is greater than or equal to the next element.
 
-### Complexity Analysis
+12. **Return True**
+	```cpp
+	    return true;
+	```
+	If the loop finishes successfully, return true.
 
-- **Time Complexity**:
-  - The main time complexity comes from the binary search (`lower_bound`) for each element in the array. The binary search takes \(O(\log p)\), where `p` is the number of primes in the list (`arr`), which is 168 primes.
-  - The loop runs through the array from `n-2` to `0`, so it iterates `n-1` times.
-  - Therefore, the total time complexity is \(O(n \cdot \log p)\), where `n` is the number of elements in `nums` and `p` is the number of primes in the list.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-- **Space Complexity**:
-  - The space complexity is dominated by the storage of the prime list `arr`, which has a constant size of 168 primes. Therefore, the space complexity is \(O(p)\), where `p` is the number of primes in the list.
+In the worst case, for each element, we need to search for a prime number smaller than the element.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution efficiently checks whether it is possible to transform the `nums` array into a strictly increasing sequence by subtracting primes. The algorithm leverages binary search on a predefined list of primes to find the appropriate prime to subtract at each step, ensuring that the array is modified correctly. The solution has a time complexity of \(O(n \cdot \log p)\), which is efficient given the constraints, and a constant space complexity due to the fixed size of the prime list.
+The space complexity is O(n) due to the space needed for the prime number list and storing the modified array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-subtraction-operation/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "80wUjzYWSV4"
 youtube_upload_date="2023-03-19"
 youtube_thumbnail="https://i.ytimg.com/vi/80wUjzYWSV4/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,73 +28,117 @@ youtube_thumbnail="https://i.ytimg.com/vi/80wUjzYWSV4/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are tasked with creating a data structure that allows adding words and checking if a word matches any previously added word, with support for the wildcard '.' character.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of calls to the WordDictionary constructor, addWord method, and search method. Words can include lowercase letters and the wildcard '.' character.
+- **Example:** `[[], ["hello"], ["world"], ["hell"], ["hell"], ["hello"], ["h.ll"], ["wo.ld"]]`
+- **Constraints:**
+	- 1 <= word.length <= 25
+	- Words consist of lowercase English letters in addWord and lowercase English letters or '.' in search.
+	- At most 10^4 calls to addWord and search.
 
-{{< highlight cpp >}}
-class Node {
-    public:
-    bool isWord;
-    char val;
-    vector<Node*> next;
-    Node(char val, bool isWord) {
-        this->val = val;
-        this->isWord = isWord;
-        next.resize(26, NULL);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each search query, return true if a matching word exists, otherwise return false.
+- **Example:** `For input ["search('hell')"] after adding 'hello' and 'hell', the output will be true.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Implement a data structure that supports efficient addition and search of words, with the ability to match patterns using the '.' wildcard.
+
+- Use a Trie (prefix tree) to store added words.
+- For search, use a backtracking approach to explore all possible matching words, considering '.' as a wildcard.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will contain lowercase letters and the wildcard '.' character only.
+- The system should efficiently handle large numbers of addWord and search calls.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** After adding 'hello', 'world', and 'hell', searching for 'hell' returns true because 'hell' is an exact match. Searching for 'h.ll' also returns true because 'hello' matches the pattern.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a Trie for storing words and backtracking for searching with patterns containing '.'
+
+### Initial Thoughts 💭
+- The Trie is an efficient data structure for storing words based on their prefixes.
+- Backtracking can be used for searching, especially with the wildcard '.' character.
+- We will need to recursively explore all possible matches when encountering a dot in the search string.
+{{< dots >}}
+### Edge Cases 🌐
+- If no words are added, any search will return false.
+- The solution should handle cases with large numbers of words and search queries efficiently.
+- Search queries containing '.' should match any character in the corresponding position.
+- Optimize for time complexity to handle up to 10^4 operations.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isWord;
+char val;
+vector<Node*> next;
+Node(char val, bool isWord) {
+    this->val = val;
+    this->isWord = isWord;
+    next.resize(26, NULL);
+}
 };
 class WordDictionary {
 public:
-    Node* root;
-    WordDictionary() {
-        root = new Node(' ', false);
-    }
-    
-    void addWord(string word) {
-        Node* node = this->root;
-        for(int i = 0; i < word.size(); i++) {
-            int code = word[i] - 'a';
-            if(node->next[code] == NULL) {
-                node->next[code] = new Node(word[i], false);
-            }
-            node = node->next[code];
+Node* root;
+WordDictionary() {
+    root = new Node(' ', false);
+}
+
+void addWord(string word) {
+    Node* node = this->root;
+    for(int i = 0; i < word.size(); i++) {
+        int code = word[i] - 'a';
+        if(node->next[code] == NULL) {
+            node->next[code] = new Node(word[i], false);
         }
-        node->isWord = true;
+        node = node->next[code];
     }
-    
-    bool search(string word) {
-        return bt(word, this->root, 0);
-    }
-    
-    bool bt(string word, Node* node, int idx) {
-        if(word[idx] == '.') {
-            if(idx + 1 == word.size()) {
-                int res = false;
-                for(int i = 0; i < 26; i++) {
-                    if(node->next[i] != NULL)
-                        res |= node->next[i]->isWord;
-                    if(res) return true;
-                }
-                return false;
-            } else {
-                int res = false;
-                for(int i = 0; i < 26; i++) {
-                    if(node->next[i] != NULL)
-                        res |= bt(word, node->next[i], idx+1);
-                    if(res) return true;
-                }
-                return false;                
+    node->isWord = true;
+}
+
+bool search(string word) {
+    return bt(word, this->root, 0);
+}
+
+bool bt(string word, Node* node, int idx) {
+    if(word[idx] == '.') {
+        if(idx + 1 == word.size()) {
+            int res = false;
+            for(int i = 0; i < 26; i++) {
+                if(node->next[i] != NULL)
+                    res |= node->next[i]->isWord;
+                if(res) return true;
             }
+            return false;
         } else {
-            
-            int code = word[idx] - 'a';
-            if(node->next[code] == NULL)
-                return false;
-            node = node->next[code];
-            if(idx + 1 == word.size())
-                return node->isWord;
-            return bt(word, node, idx + 1);
+            int res = false;
+            for(int i = 0; i < 26; i++) {
+                if(node->next[i] != NULL)
+                    res |= bt(word, node->next[i], idx+1);
+                if(res) return true;
+            }
+            return false;                
         }
+    } else {
+        
+        int code = word[idx] - 'a';
+        if(node->next[code] == NULL)
+            return false;
+        node = node->next[code];
+        if(idx + 1 == word.size())
+            return node->isWord;
+        return bt(word, node, idx + 1);
     }
+}
 };
 
 /**
@@ -101,164 +146,245 @@ public:
  * WordDictionary* obj = new WordDictionary();
  * obj->addWord(word);
  * bool param_2 = obj->search(word);
- */
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-The task is to implement a **WordDictionary** class that allows adding words and searching for them, including supporting the use of the wildcard character `.`. This wildcard matches any letter, making searches more flexible by allowing patterns instead of exact matches. The operations required are:
-
-1. **addWord(word)** - Adds a word to the dictionary.
-2. **search(word)** - Searches for a word, where `.` can represent any letter in the word.
-
----
-
-### 🧠 Approach
-
-This problem is a perfect candidate for a **Trie (Prefix Tree)**, a data structure designed for efficient word storage and retrieval. A Trie allows us to store words character by character, making it easy to search for exact words and handle wildcard matches.
-
-To support the `.` wildcard, we use a **Depth-First Search (DFS)** approach. The `.` wildcard can match any character, so we recursively explore all possible paths in the Trie for each wildcard occurrence.
-
-#### Key Steps:
-1. **Trie Structure**: 
-   - Each **Node** in the Trie represents a character.
-   - **isWord**: A flag to mark the end of a valid word.
-   - **next**: An array of 26 pointers, each corresponding to a letter of the alphabet (`a` to `z`), pointing to the next character node.
-
-2. **addWord(word)**: 
-   - We iterate over each character in the word, creating nodes for new characters as needed.
-   - We mark the last node as the end of a word.
-
-3. **search(word)**:
-   - For exact matches, we traverse the Trie.
-   - For wildcard matches (`.`), we recursively try all possible paths at that position and continue the search.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's dive into the code to understand the implementation!
-
-```cpp
-class Node {
-public:
-    bool isWord;   // Indicates if the node is the end of a word
-    char val;      // Stores the character at the node
-    vector<Node*> next;  // Pointers to the next nodes (for each character a-z)
-    
-    Node(char val, bool isWord) {
-        this->val = val;
-        this->isWord = isWord;
-        next.resize(26, NULL);  // Initialize with NULL for all 26 letters
-    }
-};
 ```
 
-- **Node Class**: Represents a single character in the Trie. Each node stores:
-  - **val**: The character at this node.
-  - **isWord**: A flag marking whether the node represents the end of a valid word.
-  - **next**: A vector that holds pointers to the next possible characters.
+This code defines a WordDictionary class that supports adding words and searching for them, where the search allows for wildcards (represented by '.') in the word.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	bool isWord;
+	```
+	The 'isWord' variable indicates if the current node represents the end of a word.
 
-```cpp
-class WordDictionary {
-public:
-    Node* root;  // The root node of the Trie
+2. **Variable Initialization**
+	```cpp
+	char val;
+	```
+	The 'val' variable stores the character that the node represents in the trie structure.
 
-    WordDictionary() {
-        root = new Node(' ', false);  // Initialize with a dummy root node
-    }
-    
-    void addWord(string word) {
-        Node* node = this->root;
-        for(int i = 0; i < word.size(); i++) {
-            int code = word[i] - 'a';  // Map character to index (0-25)
-            if(node->next[code] == NULL) {
-                node->next[code] = new Node(word[i], false);  // Create new node if needed
-            }
-            node = node->next[code];  // Move to the next node
-        }
-        node->isWord = true;  // Mark the end of the word
-    }
-```
+3. **Vector Insertion**
+	```cpp
+	vector<Node*> next;
+	```
+	The 'next' vector holds pointers to the next nodes in the trie, with each position corresponding to a character from 'a' to 'z'.
 
-- **addWord(word)**: Adds a word to the Trie by creating nodes for each character. We map each character to an index using `word[i] - 'a'`, and create new nodes if they don't already exist.
+4. **Constructor**
+	```cpp
+	Node(char val, bool isWord) {
+	```
+	Constructor for initializing a node with a character and a boolean value indicating if it's a valid word.
 
----
+5. **Assignment Operation**
+	```cpp
+	    this->val = val;
+	```
+	Assigns the character 'val' to the node.
 
-```cpp
-    bool search(string word) {
-        return bt(word, this->root, 0);  // Start recursive search from root
-    }
-```
+6. **Assignment Operation**
+	```cpp
+	    this->isWord = isWord;
+	```
+	Sets the 'isWord' flag to determine if this node represents a complete word.
 
-- **search(word)**: Begins the search by calling a helper function `bt()` to handle both exact and wildcard matches.
+7. **Vector Initialization**
+	```cpp
+	    next.resize(26, NULL);
+	```
+	Initializes the 'next' vector with 26 null pointers, one for each letter of the alphabet.
 
----
+8. **Class Declaration**
+	```cpp
+	class WordDictionary {
+	```
+	Declares the WordDictionary class, which will hold the root node of the trie and methods to add and search for words.
 
-```cpp
-    bool bt(string word, Node* node, int idx) {
-        if(word[idx] == '.') {  // Handle the wildcard '.'
-            if(idx + 1 == word.size()) {
-                int res = false;
-                for(int i = 0; i < 26; i++) {
-                    if(node->next[i] != NULL)
-                        res |= node->next[i]->isWord;  // Check if any branch leads to a valid word
-                    if(res) return true;  // Return true if a valid word is found
-                }
-                return false;  // No valid word found
-            } else {
-                int res = false;
-                for(int i = 0; i < 26; i++) {
-                    if(node->next[i] != NULL)
-                        res |= bt(word, node->next[i], idx+1);  // Recursively check each branch
-                    if(res) return true;  // If found, return true
-                }
-                return false;  // No valid word found
-            }
-        } else {
-            int code = word[idx] - 'a';  // Get index for character
-            if(node->next[code] == NULL)
-                return false;  // If no matching node, return false
-            node = node->next[code];  // Move to next node
-            if(idx + 1 == word.size())
-                return node->isWord;  // If last character, check if it marks the end of a word
-            return bt(word, node, idx + 1);  // Recursively check the next character
-        }
-    }
-};
-```
+9. **Public Access Modifier**
+	```cpp
+	public:
+	```
+	Access modifier that allows the methods and variables below to be accessed outside the class.
 
-- **bt(word, node, idx)**: A helper function that performs the DFS search:
-  - For a wildcard (`.`), it explores all possible branches of the Trie at that position.
-  - For exact characters, it follows the corresponding node.
-  - It returns `true` if a valid word is found, and `false` otherwise.
+10. **Variable Initialization**
+	```cpp
+	Node* root;
+	```
+	A pointer to the root node of the trie.
 
----
+11. **Constructor**
+	```cpp
+	WordDictionary() {
+	```
+	Constructor for the WordDictionary class that initializes the root node.
 
-### 📈 Complexity Analysis
+12. **Memory Allocation**
+	```cpp
+	    root = new Node(' ', false);
+	```
+	Allocates memory for the root node with a space character and 'isWord' set to false.
 
-- **Time Complexity**:
-  - **addWord(word)**: O(L), where `L` is the length of the word. Each character is inserted into the Trie.
-  - **search(word)**: O(L * 26) in the worst case. For each character (up to length `L`), if it's a wildcard (`.`), we check all 26 possible branches.
+13. **Method Definition**
+	```cpp
+	void addWord(string word) {
+	```
+	Defines the addWord method, which inserts a word into the trie.
 
-- **Space Complexity**:
-  - **addWord(word)**: O(L), where `L` is the length of the word. This space is used to store the nodes in the Trie.
-  - **search(word)**: O(1), aside from the recursive call stack, which can go as deep as the length of the word.
+14. **Variable Initialization**
+	```cpp
+	    Node* node = this->root;
+	```
+	Initializes a node pointer to the root node of the trie.
 
----
+15. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < word.size(); i++) {
+	```
+	Iterates through each character in the word to add it to the trie.
 
-### 🏁 Conclusion
+16. **Arithmetic Operation**
+	```cpp
+	        int code = word[i] - 'a';
+	```
+	Converts the character to an index in the 'next' vector (0 for 'a', 1 for 'b', etc.).
 
-By leveraging a **Trie** data structure, we efficiently handle word storage and searches. The solution also supports **wildcard matching** using a **Depth-First Search (DFS)**, making it flexible and powerful. Whether it's exact or pattern matching, this approach offers fast insertions and searches, even when dealing with wildcards.
+17. **Conditional Statement**
+	```cpp
+	        if(node->next[code] == NULL) {
+	```
+	Checks if the node at the corresponding position in the trie is null.
 
-### 🌟 Key Takeaways:
-- **Trie** is a great data structure for prefix-based search problems.
-- **DFS** allows efficient handling of wildcards.
-- The solution balances time and space complexity well for large inputs.
+18. **Memory Allocation**
+	```cpp
+	            node->next[code] = new Node(word[i], false);
+	```
+	Allocates a new node at the position corresponding to the current character.
 
+19. **Assignment Operation**
+	```cpp
+	        node = node->next[code];
+	```
+	Moves the pointer to the next node in the trie corresponding to the current character.
+
+20. **Assignment Operation**
+	```cpp
+	    node->isWord = true;
+	```
+	Marks the node as the end of a valid word.
+
+21. **Method Definition**
+	```cpp
+	bool search(string word) {
+	```
+	Defines the search method, which searches for a word in the trie.
+
+22. **Function Call**
+	```cpp
+	    return bt(word, this->root, 0);
+	```
+	Calls the helper function 'bt' to perform a recursive search.
+
+23. **Method Definition**
+	```cpp
+	bool bt(string word, Node* node, int idx) {
+	```
+	Defines the recursive helper function 'bt' used by the search method.
+
+24. **Conditional Statement**
+	```cpp
+	    if(word[idx] == '.') {
+	```
+	Checks if the current character in the word is a wildcard ('.').
+
+25. **Recursive Call**
+	```cpp
+	        if(idx + 1 == word.size()) {
+	```
+	Checks if we've reached the end of the word.
+
+26. **Conditional Statement**
+	```cpp
+	            int res = false;
+	```
+	Initializes a variable 'res' to keep track of the search result.
+
+27. **Loop Iteration**
+	```cpp
+	            for(int i = 0; i < 26; i++) {
+	```
+	Loops through each possible character in the trie.
+
+28. **Conditional Statement**
+	```cpp
+	                if(node->next[i] != NULL)
+	```
+	Checks if the node at position 'i' is not null.
+
+29. **Logical Operation**
+	```cpp
+	                    res |= node->next[i]->isWord;
+	```
+	Checks if any of the next nodes leads to a valid word.
+
+30. **Return Statement**
+	```cpp
+	                if(res) return true;
+	```
+	If a valid word is found, return true.
+
+31. **Return Statement**
+	```cpp
+	            return false;
+	```
+	If no valid word is found, return false.
+
+32. **Block Termination**
+	```cpp
+	        }
+	```
+	Ends the conditional statement for checking the end of the word.
+
+33. **Recursive Call**
+	```cpp
+	        else {
+	```
+	If the current character is a wildcard, we recursively search for the rest of the word.
+
+34. **Recursive Call**
+	```cpp
+	            for(int i = 0; i < 26; i++) {
+	```
+	Loops through all possible next nodes for the wildcard.
+
+35. **Recursive Call**
+	```cpp
+	                if(node->next[i] != NULL)
+	                    res |= bt(word, node->next[i], idx+1);
+	```
+	Recursively calls 'bt' on each next node.
+
+36. **Return Statement**
+	```cpp
+	        return false;
+	```
+	If no match is found, returns false.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m), where m is the length of the word being searched.
+- **Average Case:** O(m), assuming an average branching factor for the Trie.
+- **Worst Case:** O(m * 26^k), where k is the number of '.' characters in the search query and 26 is the number of possible letters for each dot.
+
+In the worst case, we may need to explore all possible combinations for the dots in the query.
+
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the number of words, assuming each word has a constant length.
+- **Worst Case:** O(n * m), where n is the number of words and m is the average length of each word.
+
+The space complexity is mainly determined by the Trie structure, which stores all words and their corresponding characters.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-add-and-search-words-data-structure/description/)

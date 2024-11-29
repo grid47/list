@@ -14,58 +14,110 @@ img_src = ""
 youtube = "10111CfY7GQ"
 youtube_upload_date="2021-11-13"
 youtube_thumbnail="https://i.ytimg.com/vi/10111CfY7GQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A robot is placed on a grid and initially faces East. It is instructed to move forward by a specified number of steps. If the robot attempts to move out of bounds, it turns 90 degrees counterclockwise and tries again. The task is to implement a class for the robot that can handle these movements and return its current position and direction.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two parts: the dimensions of the grid and the instructions for the robot's movements. The robot starts at position (0, 0), facing East.
+- **Example:** ``
+- **Constraints:**
 
-{{< highlight cpp >}}
-class Robot {
-public:
-    int w, h, i, j, dir, per;
-    Robot(int width, int height) {
-        w = width;
-        h = height;
-        i = 0;
-        j = 0;
-        dir = 0;
-        per = 2 * (w + h - 2);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output includes the robot's current position in the grid (as a two-element array [x, y]) and its current facing direction.
+- **Example:** ``
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To move the robot based on instructions and handle boundary conditions with turning.
+
+- Initialize the grid dimensions and robot's starting position and direction.
+- Implement logic to move the robot one step at a time, checking for boundary conditions and turning the robot if necessary.
+- Ensure that the robot's position and direction are correctly updated after each movement instruction.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid's width and height will always be at least 2.
+- The robot will always start at position (0, 0) and face East.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Robot robot = new Robot(6, 3);`  \
+  **Explanation:** Here, the robot is initialized on a 6x3 grid, starting at position (0, 0), facing East.
+
+- **Input:** `robot.step(2); robot.getPos(); robot.getDir();`  \
+  **Explanation:** The robot moves two steps East and is now at position (2, 0), facing East.
+
+- **Input:** `robot.step(2); robot.getPos(); robot.getDir();`  \
+  **Explanation:** After moving two more steps East, the robot is at position (4, 0), still facing East.
+
+- **Input:** `robot.step(2); robot.step(1); robot.step(4); robot.getPos(); robot.getDir();`  \
+  **Explanation:** After additional steps, the robot moves in different directions, including turning when hitting boundaries, eventually reaching position (1, 2) facing West.
+
+{{< dots >}}
+## Approach 🚀
+The robot's movement can be tracked by updating its position and direction after each step, with a check for boundary conditions that triggers a 90-degree turn.
+
+### Initial Thoughts 💭
+- The robot's direction can be represented by an integer (0 = East, 1 = North, 2 = West, 3 = South).
+- The robot's movement follows a simple grid structure, with checks for boundaries.
+- We need to manage the robot's movement and turning behavior efficiently, especially given the constraint on the number of operations.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid must always have a valid size.
+- For large step values, use modulo operations to prevent excessive calculations.
+- Ensure that the robot turns properly when hitting boundaries.
+- Ensure that the total number of operations doesn't exceed 10^4.
+{{< dots >}}
+## Code 💻
+```cpp
+int w, h, i, j, dir, per;
+Robot(int width, int height) {
+    w = width;
+    h = height;
+    i = 0;
+    j = 0;
+    dir = 0;
+    per = 2 * (w + h - 2);
+}
+
+void step(int num) {
+    if(num > per) {
+        num %= per;
+        if(i == 0 && j == 0 && dir == 0) dir = 3;
+    }
+    int mo[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    while(num) {
+        int x = i + mo[dir][0], y = j + mo[dir][1];
+        if(x >= w || y >= h || x < 0 || y < 0) {
+            dir = (dir + 1) % 4;
+        } else {
+            i = x;
+            j = y;
+            num--;
+        }
     }
     
-    void step(int num) {
-        if(num > per) {
-            num %= per;
-            if(i == 0 && j == 0 && dir == 0) dir = 3;
-        }
-        int mo[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-        while(num) {
-            int x = i + mo[dir][0], y = j + mo[dir][1];
-            if(x >= w || y >= h || x < 0 || y < 0) {
-                dir = (dir + 1) % 4;
-            } else {
-                i = x;
-                j = y;
-                num--;
-            }
-        }
-        
+}
+
+vector<int> getPos() {
+    return {i, j};
+}
+
+string getDir() {
+    switch(dir) {
+        case 0: return "East"   ; break;
+        case 1: return "North"  ; break;    
+        case 2: return "West"   ; break;    
+        case 3: return "South"  ; break;
     }
-    
-    vector<int> getPos() {
-        return {i, j};
-    }
-    
-    string getDir() {
-        switch(dir) {
-            case 0: return "East"   ; break;
-            case 1: return "North"  ; break;    
-            case 2: return "West"   ; break;    
-            case 3: return "South"  ; break;
-        }
-        return "";
-    }
+    return "";
+}
 };
 
 /**
@@ -74,106 +126,155 @@ public:
  * obj->step(num);
  * vector<int> param_2 = obj->getPos();
  * string param_3 = obj->getDir();
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This class simulates the movement of a robot in a grid with specified width and height. The robot's position and direction are updated based on the steps it takes.
 
-The task involves creating a `Robot` class that simulates the movement of a robot within a rectangular grid defined by its width and height. The robot starts at the top-left corner of the grid, facing east, and is capable of moving in four directions: east, north, west, and south. The challenge is to allow the robot to step a specified number of times, wrapping around when it reaches the edges of the grid, and to retrieve its current position and direction after the steps have been taken.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int w, h, i, j, dir, per;
+	```
+	This line declares the necessary variables: `w` and `h` for the width and height of the grid, `i` and `j` for the robot's current position, `dir` for the robot's current direction, and `per` for the perimeter of the grid.
 
-### Approach
+2. **Constructor Definition**
+	```cpp
+	Robot(int width, int height) {
+	```
+	This is the constructor for the `Robot` class that initializes the robot's grid size (`w` and `h`), its starting position (`i` and `j`), its starting direction (`dir`), and calculates the perimeter of the grid.
 
-1. **Initialization**: When creating an instance of the `Robot`, we need to initialize its position, direction, and the perimeter of the grid. The position is set to the top-left corner (0, 0), and the direction is initially set to east (0).
+3. **Width Initialization**
+	```cpp
+	    w = width;
+	```
+	This line initializes the width of the grid with the input `width` value.
 
-2. **Movement Logic**: The robot can move a specified number of steps. When the robot reaches the boundaries of the grid, it changes direction (turns) instead of moving outside the grid. The robot's movement can be handled using a predefined array that represents the changes in coordinates for each direction.
+4. **Height Initialization**
+	```cpp
+	    h = height;
+	```
+	This line initializes the height of the grid with the input `height` value.
 
-3. **Wrapping Movement**: If the robot is instructed to move more steps than the perimeter of the grid, the effective number of steps is calculated using modulo operation to wrap around correctly.
+5. **Initial Position**
+	```cpp
+	    i = 0;
+	```
+	This line sets the robot's initial horizontal position (`i`) to 0 (top-left corner).
 
-4. **Position and Direction Retrieval**: After executing the movement, we need methods to retrieve the robot's current position and direction.
+6. **Initial Position**
+	```cpp
+	    j = 0;
+	```
+	This line sets the robot's initial vertical position (`j`) to 0 (top-left corner).
 
-### Code Breakdown (Step by Step)
+7. **Direction Initialization**
+	```cpp
+	    dir = 0;
+	```
+	This line sets the robot's initial direction (`dir`) to 0, which represents East.
 
-1. **Class Definition**: The `Robot` class is defined with private attributes for width (`w`), height (`h`), current x-coordinate (`i`), current y-coordinate (`j`), current direction (`dir`), and the perimeter of the grid (`per`).
+8. **Perimeter Calculation**
+	```cpp
+	    per = 2 * (w + h - 2);
+	```
+	This line calculates the perimeter of the grid, which is used to optimize movement by limiting unnecessary steps.
 
-   ```cpp
-   class Robot {
-   public:
-       int w, h, i, j, dir, per;
-   ```
+9. **Step Function Definition**
+	```cpp
+	void step(int num) {
+	```
+	This function defines how the robot steps based on the input `num`, which represents the number of steps to move.
 
-2. **Constructor**: The constructor initializes the width and height of the grid and sets the initial position to `(0, 0)` and direction to east (`0`). The perimeter is calculated using the formula \(2 \times (\text{width} + \text{height} - 2)\) to determine how many total steps can be taken before returning to the starting point.
+10. **Check for Perimeter Exceedance**
+	```cpp
+	    if(num > per) {
+	```
+	This checks if the number of steps exceeds the perimeter of the grid. If so, it reduces the steps to stay within the perimeter.
 
-   ```cpp
-   Robot(int width, int height) {
-       w = width;
-       h = height;
-       i = 0;
-       j = 0;
-       dir = 0;
-       per = 2 * (w + h - 2);
-   }
-   ```
+11. **Modulo Adjustment**
+	```cpp
+	        num %= per;
+	```
+	This line applies the modulo operation to `num` to ensure the number of steps does not exceed the perimeter.
 
-3. **Step Function**: The `step` function takes the number of steps to move. It first checks if the number of steps exceeds the perimeter; if so, it reduces the step count using the modulo operator. A movement array (`mo`) defines the direction vectors for east, north, west, and south.
+12. **Initial Direction Adjustment**
+	```cpp
+	        if(i == 0 && j == 0 && dir == 0) dir = 3;
+	```
+	This condition adjusts the direction to South if the robot starts at the top-left corner facing East.
 
-   ```cpp
-   void step(int num) {
-       if(num > per) {
-           num %= per;
-           if(i == 0 && j == 0 && dir == 0) dir = 3;
-       }
-       int mo[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-   ```
+13. **Movement Directions Setup**
+	```cpp
+	    int mo[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+	```
+	This array defines the movement directions: East, North, West, and South, using coordinate shifts.
 
-4. **Movement Loop**: The function contains a loop that executes the movement commands. If moving in the current direction would result in going out of bounds, the direction is changed clockwise. If not, the position is updated and the step count is decremented.
+14. **Movement Loop**
+	```cpp
+	    while(num) {
+	```
+	This loop runs while there are steps left to take.
 
-   ```cpp
-   while(num) {
-       int x = i + mo[dir][0], y = j + mo[dir][1];
-       if(x >= w || y >= h || x < 0 || y < 0) {
-           dir = (dir + 1) % 4;
-       } else {
-           i = x;
-           j = y;
-           num--;
-       }
-   }
-   ```
+15. **Calculate New Position**
+	```cpp
+	        int x = i + mo[dir][0], y = j + mo[dir][1];
+	```
+	This calculates the new position (`x`, `y`) based on the current direction of movement.
 
-5. **Getting Position**: The `getPos` method returns the current position of the robot as a vector containing the x and y coordinates.
+16. **Boundary Check**
+	```cpp
+	        if(x >= w || y >= h || x < 0 || y < 0) {
+	```
+	This condition checks if the new position is outside the grid boundaries.
 
-   ```cpp
-   vector<int> getPos() {
-       return {i, j};
-   }
-   ```
+17. **Change Direction**
+	```cpp
+	            dir = (dir + 1) % 4;
+	```
+	If the new position is outside the grid, the direction is updated to the next direction in the cycle (East -> North -> West -> South).
 
-6. **Getting Direction**: The `getDir` method returns the current direction as a string based on the value of `dir`. Each case corresponds to a specific direction.
+18. **Position Update**
+	```cpp
+	        } else {
+	```
+	If the new position is within bounds, proceed to update the robot's position.
 
-   ```cpp
-   string getDir() {
-       switch(dir) {
-           case 0: return "East";
-           case 1: return "North";
-           case 2: return "West";
-           case 3: return "South";
-       }
-       return "";
-   }
-   ```
+19. **Update Position**
+	```cpp
+	            i = x;
+	```
+	This updates the robot's horizontal position (`i`).
 
-### Complexity
+20. **Update Position**
+	```cpp
+	            j = y;
+	```
+	This updates the robot's vertical position (`j`).
 
-- **Time Complexity**: The time complexity for the `step` function is O(n) in the worst case, where n is the number of steps requested. In most cases, the effective steps are reduced by the perimeter calculation, making it efficient for larger inputs.
+21. **Step Decrement**
+	```cpp
+	            num--;
+	```
+	This decrements the number of steps remaining.
 
-- **Space Complexity**: The space complexity is O(1) since we only use a fixed amount of space for variables and do not utilize any data structures that grow with input size.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(num)
+- **Worst Case:** O(num)
 
-### Conclusion
+The time complexity is proportional to the number of steps the robot takes, as each step is processed sequentially.
 
-This `Robot` class implementation provides a clear and efficient way to model the movement of a robot within a bounded grid. The combination of directional logic and boundary checking ensures that the robot operates within the defined constraints, allowing for realistic movement simulation. The ability to easily retrieve the robot's position and direction enhances the utility of the class for potential applications in robotics and simulation scenarios.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-Overall, the design is intuitive, making it easy to extend or modify if additional features are required, such as different movement strategies or additional grid dimensions. The implementation serves as an excellent demonstration of how to apply object-oriented programming principles to solve practical problems in a structured manner.
+The space complexity is constant as we only store the robot's position and direction.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/walking-robot-simulation-ii/description/)
 

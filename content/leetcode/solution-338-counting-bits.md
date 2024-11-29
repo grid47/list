@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "RyBM56RIWrM"
 youtube_upload_date="2021-06-07"
 youtube_thumbnail="https://i.ytimg.com/vi/RyBM56RIWrM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,111 +28,116 @@ youtube_thumbnail="https://i.ytimg.com/vi/RyBM56RIWrM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer n.
+- **Example:** `n = 3`
+- **Constraints:**
+	- 0 <= n <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> countBits(int n) {
-        vector<int> res(n + 1, 0);
-        for(int i = 0; i <= n; i++) {
-            res[i] = res[i >> 1] + (i & 1);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array ans such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.
+- **Example:** `[0, 1, 1, 2]`
+- **Constraints:**
+	- The solution must run in linear time O(n).
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the number of 1's in the binary representation for each number from 0 to n.
+
+- Initialize an array res of size n + 1 with 0s.
+- For each number i from 0 to n, set res[i] = res[i >> 1] + (i & 1).
+- Return the array res.
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of n is within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 3`  \
+  **Explanation:** For the input n = 3, the binary representations of 0, 1, 2, and 3 are '0', '1', '10', '11'. The number of 1's in these binary numbers are 0, 1, 1, and 2 respectively.
+
+- **Input:** `n = 6`  \
+  **Explanation:** For the input n = 6, the binary representations of 0, 1, 2, 3, 4, 5, and 6 are '0', '1', '10', '11', '100', '101', '110'. The number of 1's in these binary numbers are 0, 1, 1, 2, 1, 2, and 2 respectively.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can calculate the number of 1's in the binary representation of each integer from 0 to n using an efficient approach.
+
+### Initial Thoughts 💭
+- We need to avoid using built-in functions like popcount to solve the problem.
+- We can use bitwise operations to compute the number of 1's in a number's binary representation.
+{{< dots >}}
+### Edge Cases 🌐
+- If n = 0, the output should be [0].
+- For large values of n (up to 10^5), ensure the solution runs in linear time.
+- Consider cases where all the numbers in the range have the same number of 1's in their binary representation, such as n = 0.
+- The solution should not exceed O(n) time complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> countBits(int n) {
+    vector<int> res(n + 1, 0);
+    for(int i = 0; i <= n; i++) {
+        res[i] = res[i >> 1] + (i & 1);
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-The task is to count the number of **1-bits** (also known as Hamming Weight or Population Count) in the binary representation of each number from `0` to `n` inclusive, where `n` is a non-negative integer. Given a number `n`, we need to return an array where the `i`-th element represents the number of `1`-bits in the binary representation of `i`.
-
-For example, given `n = 5`, the output should be:
-```
-[0, 1, 1, 2, 1, 2]
-```
-This is because:
-- `0` in binary is `0` → 0 bits set
-- `1` in binary is `1` → 1 bit set
-- `2` in binary is `10` → 1 bit set
-- `3` in binary is `11` → 2 bits set
-- `4` in binary is `100` → 1 bit set
-- `5` in binary is `101` → 2 bits set
-
----
-
-### 🧠 Approach
-
-To solve this efficiently, we'll use a **dynamic programming (DP)** approach that leverages previously computed results. Here's how it works:
-
-#### Key Insight:
-1. **Bitwise Shifting**: 
-   - The number of `1`-bits in a number `i` can be broken down into:
-     - The number of `1`-bits in `i >> 1` (right-shifting `i` by one position).
-     - The least significant bit (`i & 1`), which is `1` if `i` is odd and `0` if `i` is even.
-   - The formula for counting bits is:
-     ```
-     countBits(i) = countBits(i >> 1) + (i & 1)
-     ```
-
-2. **Dynamic Programming**:
-   - For each number `i` from `0` to `n`, we can calculate the number of `1`-bits using the formula above. Since the result for `i >> 1` is already known, this makes each calculation efficient, leading to an **O(n)** time complexity.
-
-3. **Space Optimization**:
-   - We store the results for each number in an array `res`. As we iterate through the numbers, we update this array using the formula.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code into manageable steps to see how it works:
-
-#### Step 1: Initialize the Result Vector
-```cpp
-vector<int> res(n + 1, 0);
-```
-- We initialize a vector `res` of size `n + 1` to store the number of `1`-bits for each number from `0` to `n`. It starts with all values set to `0`, since `0` has zero `1`-bits.
-
-#### Step 2: Loop Over All Numbers from `0` to `n`
-```cpp
-for(int i = 0; i <= n; i++) {
-    res[i] = res[i >> 1] + (i & 1);
+    return res;
 }
 ```
-- We loop through each integer `i` from `0` to `n`. For each `i`, we calculate the number of `1`-bits:
-  - **`res[i >> 1]`**: This gives the number of `1`-bits for the number `i >> 1` (right-shifted version of `i`).
-  - **`(i & 1)`**: This checks if `i` is odd (`1`) or even (`0`). It contributes `1` to the bit count if `i` is odd.
-- Adding these two values gives us the total number of `1`-bits for `i`.
 
-#### Step 3: Return the Result
-```cpp
-return res;
-```
-- After filling the `res` vector with the number of `1`-bits for each number, we return the result.
+This function calculates the number of 1's (set bits) in the binary representation of all integers from 0 to `n`. The result is stored in a vector, where each index `i` contains the number of set bits in `i`.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> countBits(int n) {
+	```
+	This is the declaration of the `countBits` function, which takes an integer `n` and returns a vector of integers representing the number of set bits (1's) in the binary representation of each integer from 0 to `n`.
 
-### 📈 Complexity Analysis
+2. **Vector Initialization**
+	```cpp
+	    vector<int> res(n + 1, 0);
+	```
+	A vector `res` is initialized with `n + 1` elements, all set to 0. This will store the number of set bits for each integer from 0 to `n`.
 
-#### Time Complexity:
-- **O(n)**: The loop runs from `0` to `n`, and for each number, we perform a constant amount of work (bitwise shifting and bitwise AND operation). Hence, the overall time complexity is **O(n)**, where `n` is the input number.
+3. **For Loop Setup**
+	```cpp
+	    for(int i = 0; i <= n; i++) {
+	```
+	A `for` loop is used to iterate over all integers from 0 to `n`. In each iteration, the number of set bits in `i` will be calculated.
 
-#### Space Complexity:
-- **O(n)**: We use a vector `res` of size `n + 1` to store the results, which gives a space complexity of **O(n)**.
+4. **Bit Calculation**
+	```cpp
+	        res[i] = res[i >> 1] + (i & 1);
+	```
+	For each integer `i`, the number of set bits is calculated by shifting `i` right by 1 (`i >> 1`) and adding the least significant bit (`i & 1`). This approach uses dynamic programming to build the solution efficiently.
 
----
+5. **Return Statement**
+	```cpp
+	    return res;
+	```
+	After the loop completes, the vector `res` containing the count of set bits for all integers from 0 to `n` is returned.
 
-### 🏁 Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This approach efficiently solves the problem of counting the number of `1`-bits in the binary representations of numbers from `0` to `n`. By using dynamic programming and bitwise operations, we reduce the complexity to **O(n)**, which is optimal for this type of problem.
+The time complexity is linear because we only iterate over the numbers from 0 to n once.
 
-#### Key Benefits:
-- **Efficient**: The time complexity is **O(n)**, making the solution scalable for large values of `n`.
-- **Intuitive**: The use of bitwise operations and the simple DP approach makes the solution both easy to implement and understand.
-- **Space Optimized**: The space complexity is minimal at **O(n)**, ensuring the solution is memory-efficient.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This method is highly effective for counting `1`-bits, and it works seamlessly even for larger values of `n`. Keep practicing dynamic programming and bit manipulation—these are powerful tools for solving many problems efficiently! 🌟
+The space complexity is O(n) because we store the result in an array of size n + 1.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/counting-bits/description/)
 

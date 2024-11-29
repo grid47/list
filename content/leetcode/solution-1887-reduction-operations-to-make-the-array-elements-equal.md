@@ -14,112 +14,151 @@ img_src = ""
 youtube = "1etc9Ip8Xm8"
 youtube_upload_date="2021-06-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/1etc9Ip8Xm8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums, the task is to perform operations until all elements in the array are the same. In each operation, identify the largest element in the array, find the next largest value strictly smaller than the current largest, and reduce the largest element to that value. The goal is to count how many operations are required to make all elements in the array equal.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of integers nums, where each element nums[i] represents a value in the array.
+- **Example:** `For example, given nums = [4, 1, 2]`
+- **Constraints:**
+	- The length of nums is between 1 and 50,000, inclusive.
+	- Each element nums[i] is between 1 and 50,000, inclusive.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int reductionOperations(vector<int>& nums) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of operations required to make all elements in the array equal.
+- **Example:** `For nums = [4, 1, 2], the output will be 3.`
+- **Constraints:**
+	- The output is an integer representing the number of operations.
 
-        int ops = 0, n = nums.size();
-        sort(nums.begin(), nums.end());
-        for(int i = n - 2; i >= 0; i--) {
-            
-            if(nums[i] == nums[i + 1]) continue;
-            ops += (n - 1 - i);
-            
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the minimum number of operations required to make all elements in the array equal by reducing the largest elements in the array progressively.
+
+- Sort the array in ascending order.
+- Iterate through the sorted array and reduce the largest element to the next smaller element.
+- Count the number of such operations until all elements become equal.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty, and the values are positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 1, 2]`  \
+  **Explanation:** It takes 3 operations to make all elements equal: 
+1. largest = 4, nextLargest = 2, reduce nums[0] to 2, nums = [2, 1, 2]. 
+2. largest = 2, nextLargest = 1, reduce nums[0] to 1, nums = [1, 1, 2]. 
+3. largest = 2, nextLargest = 1, reduce nums[2] to 1, nums = [1, 1, 1].
+
+- **Input:** `nums = [1, 1, 1]`  \
+  **Explanation:** All elements are already equal, so no operations are needed. The output is 0.
+
+- **Input:** `nums = [3, 3, 2, 2, 5]`  \
+  **Explanation:** It takes 4 operations to make all elements equal: 
+1. largest = 5, nextLargest = 3, reduce nums[4] to 3, nums = [3, 3, 2, 2, 3]. 
+2. largest = 3, nextLargest = 2, reduce nums[0] to 2, nums = [2, 3, 2, 2, 3]. 
+3. largest = 3, nextLargest = 2, reduce nums[1] to 2, nums = [2, 2, 2, 2, 3]. 
+4. largest = 3, nextLargest = 2, reduce nums[4] to 2, nums = [2, 2, 2, 2, 2].
+
+{{< dots >}}
+## Approach 🚀
+The solution involves sorting the array and performing operations to reduce the largest element until all elements are equal.
+
+### Initial Thoughts 💭
+- Sorting the array ensures that we always have easy access to the largest and next largest values.
+- By iterating from the largest values downward, we can minimize the number of operations needed to make all elements the same.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array cannot be empty, as the problem guarantees at least one element.
+- For larger inputs (e.g., nums.length = 50,000), the solution should handle them efficiently with O(n log n) time complexity.
+- The array could contain repeated values or be already equal, in which case no operations would be required.
+- Ensure that the solution works within the time and space limits for larger arrays.
+{{< dots >}}
+## Code 💻
+```cpp
+int reductionOperations(vector<int>& nums) {
+
+    int ops = 0, n = nums.size();
+    sort(nums.begin(), nums.end());
+    for(int i = n - 2; i >= 0; i--) {
         
-        return ops;
+        if(nums[i] == nums[i + 1]) continue;
+        ops += (n - 1 - i);
+        
     }
-};
-{{< /highlight >}}
----
+    
+    return ops;
+}
+```
 
-### Problem Statement
+This function implements a reduction operation on a vector of integers, sorting them and counting the number of operations needed to reduce adjacent duplicates.
 
-The problem is to determine the minimum number of operations required to reduce all elements of an array to the same value. An operation consists of selecting an element and reducing it by one. The goal is to find the total number of such operations needed.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int reductionOperations(vector<int>& nums) {
+	```
+	Function declaration, takes a vector of integers as input.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int ops = 0, n = nums.size();
+	```
+	Initialize variables: 'ops' for counting operations, 'n' for the size of the vector.
 
-The approach to solving this problem involves the following steps:
+3. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sort the input vector 'nums' in ascending order.
 
-1. **Sorting the Array**: Start by sorting the input array. This allows us to easily determine how many elements are greater than a certain value.
-2. **Counting Operations**: Iterate through the sorted array, counting how many operations are required to reduce elements to the next unique value.
-3. **Using a Running Total**: For each unique value encountered, calculate how many elements need to be reduced to reach that value from the previous unique value.
+4. **For Loop**
+	```cpp
+	    for(int i = n - 2; i >= 0; i--) {
+	```
+	Iterate through the sorted vector from the second-to-last element to the first.
 
-### Code Breakdown (Step by Step)
+5. **Comparison**
+	```cpp
+	        if(nums[i] == nums[i + 1]) continue;
+	```
+	Skip duplicates by checking if the current element is equal to the next element.
 
-1. **Class Definition**: The `Solution` class encapsulates the method to solve the problem.
+6. **Operation Counting**
+	```cpp
+	        ops += (n - 1 - i);
+	```
+	Count the operations needed to reduce the current element.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+7. **Return Statement**
+	```cpp
+	    return ops;
+	```
+	Return the total number of operations.
 
-2. **Main Function**: The `reductionOperations` function is defined to take a vector of integers as input.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-   ```cpp
-       int reductionOperations(vector<int>& nums) {
-   ```
+The primary time complexity arises from sorting the array, which takes O(n log n), followed by a linear scan to count the operations.
 
-3. **Variable Initialization**: Initialize variables to keep track of the total number of operations (`ops`) and the size of the array (`n`).
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-   ```cpp
-           int ops = 0, n = nums.size();
-   ```
+The space complexity is O(n) due to the space required for sorting the array. The space complexity can be reduced if in-place sorting is used.
 
-4. **Sorting the Array**: The input array is sorted in ascending order. This enables easy access to the elements and facilitates counting the operations required.
+**Happy Coding! 🎉**
 
-   ```cpp
-           sort(nums.begin(), nums.end());
-   ```
-
-5. **Counting Operations Loop**: Iterate through the sorted array from the second-to-last element down to the first. This allows checking each element against the next one to determine how many operations are needed.
-
-   ```cpp
-           for(int i = n - 2; i >= 0; i--) {
-   ```
-
-6. **Skip Duplicates**: If the current element is equal to the next one, continue to the next iteration. This is crucial because we only need to count operations when we encounter a unique value.
-
-   ```cpp
-               if(nums[i] == nums[i + 1]) continue;
-   ```
-
-7. **Calculate Operations**: For each unique element, add to the `ops` counter the number of elements that are greater than this element. This is done by subtracting the index `i` from `n - 1` to get the count of elements that need to be reduced.
-
-   ```cpp
-               ops += (n - 1 - i);
-           }
-   ```
-
-8. **Return Result**: Finally, return the total number of operations needed to make all elements equal.
-
-   ```cpp
-           return ops;
-       }
-   };
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \( O(n \log n) \) due to the sorting step, where \( n \) is the number of elements in the input array. The subsequent loop runs in \( O(n) \), which is dominated by the sorting step.
-
-- **Space Complexity**: The space complexity is \( O(1) \) if we ignore the input size since we are using a constant amount of additional space for variables, and the sorting is done in place.
-
-### Conclusion
-
-The provided solution efficiently calculates the minimum number of operations required to make all elements in the array equal. By leveraging sorting and careful counting, it ensures optimal performance and correctness.
-
-This method is particularly effective in scenarios where minimizing operations is crucial, such as in resource allocation problems or optimization tasks in computational mathematics. The clear structure and logical flow of the code make it easy to understand and maintain, adhering to best practices in programming.
-
-Overall, this solution highlights fundamental programming techniques such as sorting, iteration, and condition handling, offering a solid framework for tackling similar problems in the future. By applying these techniques, developers can solve a wide range of challenges involving numerical arrays and optimization requirements.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reduction-operations-to-make-the-array-elements-equal/description/)
 

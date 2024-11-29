@@ -14,112 +14,168 @@ img_src = ""
 youtube = "D8B4tKxMTnY"
 youtube_upload_date="2023-02-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/D8B4tKxMTnY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers arr and two integers k and threshold, return the number of subarrays of size k whose average is greater than or equal to the threshold.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers and two integers, k and threshold.
+- **Example:** `arr = [1,3,5,7,9,10,12], k = 3, threshold = 7`
+- **Constraints:**
+	- 1 <= arr.length <= 10^5
+	- 1 <= arr[i] <= 10^4
+	- 1 <= k <= arr.length
+	- 0 <= threshold <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numOfSubarrays(vector<int>& arr, int k, int th) {
-        int cnt = 0, sum = 0;
-        th = th * k;
-        for(int i = 0; i < k; i++) {
-            sum += arr[i];
-        }
-        cnt += sum >= th;
-        for(int i = k; i < arr.size(); i++) {
-            sum += arr[i];
-            sum -= arr[i - k];
-            if(sum >= th) cnt++;
-        }
-        return cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of subarrays of size k whose average is greater than or equal to the threshold.
+- **Example:** `For arr = [1,3,5,7,9,10,12], k = 3, threshold = 7, the output will be 4.`
+- **Constraints:**
+	- The answer will be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count how many subarrays of size k have an average greater than or equal to the threshold.
+
+- 1. Use a sliding window of size k to calculate the sum of each subarray.
+- 2. Compute the average by dividing the sum of the subarray by k.
+- 3. Count the number of subarrays whose average is greater than or equal to the threshold.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always have at least one subarray of the given size k.
+- The array elements and threshold are non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: arr = [1, 3, 5, 7, 9, 10, 12], k = 3, threshold = 7`  \
+  **Explanation:** Subarrays of size 3 are checked, and their averages are compared to the threshold to count the valid subarrays.
+
+- **Input:** `Example 2: arr = [2, 2, 2, 2, 5, 5, 5, 8], k = 3, threshold = 4`  \
+  **Explanation:** The subarrays are evaluated based on their averages, and only those meeting or exceeding the threshold are counted.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we can use a sliding window technique to efficiently compute the sum of each subarray of size k and check if the average is greater than or equal to the threshold.
+
+### Initial Thoughts 💭
+- A sliding window approach ensures we only calculate the sum of each subarray once and adjust it as we move through the array.
+- The sliding window approach is efficient and avoids recalculating the sum from scratch for each subarray, making it optimal for large arrays.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty arrays, as the length of arr is always at least 1.
+- For large inputs, the solution should be efficient and run in O(n) time where n is the length of the array.
+- The threshold value may be 0, in which case all subarrays with positive values will have an average greater than or equal to the threshold.
+- The array will contain only positive integers, and the subarray size k will always be valid.
+{{< dots >}}
+## Code 💻
+```cpp
+int numOfSubarrays(vector<int>& arr, int k, int th) {
+    int cnt = 0, sum = 0;
+    th = th * k;
+    for(int i = 0; i < k; i++) {
+        sum += arr[i];
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The task is to count the number of contiguous subarrays of length `k` in a given integer array `arr` where the sum of the elements in each subarray is greater than or equal to a specified threshold value `th`. This problem requires efficient computation due to potentially large input sizes.
-
-### Approach
-To solve this problem, we can utilize a sliding window technique, which allows us to efficiently calculate the sum of each contiguous subarray of length `k` without having to compute the sum from scratch for every possible subarray. The approach can be broken down into the following steps:
-
-1. **Initialize Variables**: We will maintain a running sum for the current window of size `k` and a counter to track the number of valid subarrays that meet the threshold.
-
-2. **Calculate Initial Sum**: Compute the sum of the first `k` elements in the array to establish a baseline for the sliding window.
-
-3. **Slide the Window**: As we iterate through the array, we slide the window to the right by adding the next element and removing the first element of the previous window. After each adjustment, we check if the updated sum meets or exceeds the threshold.
-
-4. **Count Valid Subarrays**: Increment the counter whenever the sum of the current window meets the threshold.
-
-5. **Return the Count**: After iterating through the array, return the total count of valid subarrays.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int numOfSubarrays(vector<int>& arr, int k, int th) {
-```
-- A class `Solution` is defined, containing the method `numOfSubarrays` which takes a vector of integers `arr`, an integer `k`, and an integer `th` as parameters.
-
-```cpp
-        int cnt = 0, sum = 0;
-        th = th * k;
-```
-- Two integer variables `cnt` and `sum` are initialized to zero. The threshold `th` is multiplied by `k` to facilitate comparisons with the sum of the subarrays.
-
-```cpp
-        for(int i = 0; i < k; i++) {
-            sum += arr[i];
-        }
-```
-- A loop runs from `0` to `k-1`, calculating the sum of the first `k` elements of the array. This initial sum serves as the starting point for the sliding window.
-
-```cpp
-        cnt += sum >= th;
-```
-- The counter `cnt` is incremented by one if the initial sum is greater than or equal to the threshold `th`. This checks if the first window is valid.
-
-```cpp
-        for(int i = k; i < arr.size(); i++) {
-```
-- A for-loop starts from the `k`-th index to iterate through the rest of the array, allowing us to slide the window.
-
-```cpp
-            sum += arr[i];
-            sum -= arr[i - k];
-```
-- Inside the loop, the sum is updated by adding the current element `arr[i]` and subtracting the element that is left out of the window `arr[i - k]`.
-
-```cpp
-            if(sum >= th) cnt++;
-```
-- After updating the sum, we check if it meets the threshold condition. If it does, we increment the count.
-
-```cpp
-        return cnt;
+    cnt += sum >= th;
+    for(int i = k; i < arr.size(); i++) {
+        sum += arr[i];
+        sum -= arr[i - k];
+        if(sum >= th) cnt++;
     }
-};
+    return cnt;
+}
 ```
-- Finally, the method returns the count of valid subarrays.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the size of the input array `arr`. The sliding window allows us to traverse the array with constant time updates for each element.
+This function calculates the number of subarrays of length `k` whose average value is at least `th`. It uses a sliding window technique to efficiently compute the sum for each subarray.
 
-- **Space Complexity**: The space complexity is \(O(1)\) because we are using a constant amount of extra space regardless of the input size, storing only a few integer variables.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numOfSubarrays(vector<int>& arr, int k, int th) {
+	```
+	Defines the function that takes an array, window size `k`, and a threshold value `th` as inputs and returns the count of subarrays meeting the criteria.
 
-### Conclusion
-The provided code efficiently counts the number of contiguous subarrays of a specified length `k` that have a sum greater than or equal to a given threshold `th` using a sliding window technique. This approach minimizes the number of operations required, making it suitable for large datasets.
+2. **Variable Initialization**
+	```cpp
+	    int cnt = 0, sum = 0;
+	```
+	Initializes `cnt` to track the number of valid subarrays and `sum` to store the current window's sum.
 
-By leveraging the sliding window method, the algorithm maintains a competitive performance in both time and space, which is crucial in algorithm design and competitive programming scenarios. Understanding this technique can significantly enhance one’s problem-solving skills, especially in tasks involving contiguous subarrays or sequences.
+3. **Threshold Adjustment**
+	```cpp
+	    th = th * k;
+	```
+	Converts the threshold to the total sum equivalent for a subarray of size `k` by multiplying it with `k`.
 
-This solution is not only optimal for the current problem but also applicable to various other problems involving sums of subarrays, highlighting the versatility and efficiency of the sliding window approach.
+4. **Initial Window**
+	```cpp
+	    for(int i = 0; i < k; i++) {
+	```
+	Starts a loop to calculate the sum of the first window of size `k`.
+
+5. **Sum Update**
+	```cpp
+	        sum += arr[i];
+	```
+	Adds the current element to the sum for the first window.
+
+6. **Initial Count Check**
+	```cpp
+	    cnt += sum >= th;
+	```
+	Checks if the initial window meets the threshold and increments `cnt` if true.
+
+7. **Sliding Window Loop**
+	```cpp
+	    for(int i = k; i < arr.size(); i++) {
+	```
+	Begins the sliding window process to check subsequent windows.
+
+8. **Window Update Add**
+	```cpp
+	        sum += arr[i];
+	```
+	Adds the next element in the array to the current window's sum.
+
+9. **Window Update Remove**
+	```cpp
+	        sum -= arr[i - k];
+	```
+	Removes the element that is sliding out of the window from the sum.
+
+10. **Count Check**
+	```cpp
+	        if(sum >= th) cnt++;
+	```
+	Checks if the updated window's sum meets the threshold and increments `cnt` if true.
+
+11. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the final count of subarrays meeting the threshold criteria.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of elements in the array.
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only traverse the array once while maintaining a sliding window.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only need a few extra variables to track the sum and count.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/)

@@ -14,147 +14,231 @@ img_src = ""
 youtube = "j8KrBYIxHK8"
 youtube_upload_date="2024-08-10"
 youtube_thumbnail="https://i.ytimg.com/vi/j8KrBYIxHK8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an n x n grid where each cell contains one of the following characters: '/', '\', or ' '. These characters divide the grid into different regions. Your task is to determine how many distinct regions the grid is divided into.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of strings representing the n x n grid, where each string corresponds to a row in the grid. Each character in the grid can be '/', '\', or ' '.
+- **Example:** `Input: grid = [" /", "\ "]`
+- **Constraints:**
+	- 1 <= n <= 30
+	- grid[i][j] is either '/', '\', or ' '.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int regionsBySlashes(vector<string>& grid) {
-        int n = grid.size();
-        vector<vector<int>> g(n * 3, vector<int>(n * 3, 0));
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                if(grid[i][j] == '/') {
-                    g[i * 3 + 2][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3][j * 3 + 2] = 1;
-                } else if(grid[i][j] == '\\') {
-                    g[i * 3][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3 + 2][j * 3 + 2] = 1;
-                }
-                }
-            }
-        
-        int reg = 0;
-        for(int i = 0; i < n * 3; i++) {
-            for(int j = 0; j < n * 3; j++) {
-                reg += dfs(g, i, j)? 1: 0;
-            }
-        }
-        return reg;
-    }
-    
-    int dfs(vector<vector<int>> &g, int i, int j) {
-        
-        if ( min(i, j) < 0 || max(i, j) >= g.size() || g[i][j] != 0) {
-            return 0; }
-        
-        g[i][j] = 1;
-        
-        return 1 + dfs(g, i + 1, j) + dfs(g, i - 1, j) + dfs(g, i, j + 1) + dfs(g, i, j - 1);
-        
-    }
-    
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of distinct regions formed by the characters in the grid.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The function should return a non-negative integer representing the number of regions.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of distinct regions formed by '/' and '\' characters in the grid, with the characters dividing the grid into different regions.
 
-The problem at hand involves calculating the number of **regions** formed by a grid of slashes and backslashes. The grid consists of characters `'/'` and `'\\'`, and we need to determine how many regions are created by these slashes when they divide the grid into smaller sub-regions. For instance, the slashes divide each cell into smaller triangles, and these cells can combine to form regions that are either connected or separated by the slashes.
+- 1. Convert the grid into a larger grid where each cell in the original grid becomes a 3x3 subgrid.
+- 2. Mark regions in the larger grid based on the '/' and '\' characters.
+- 3. Use depth-first search (DFS) to count the number of distinct regions by traversing the grid and marking cells that are part of the same region.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is a valid n x n matrix with characters '/', '\', and ' '.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [" /", "\ "]`  \
+  **Explanation:** In this case, the grid is divided into two distinct regions, one formed by the '/' and the other formed by the '\'.
 
-The goal is to return the total number of **distinct regions** formed by the slashes, where regions are defined as groups of connected empty spaces.
+- **Input:** `Input: grid = [" /", "  "]`  \
+  **Explanation:** Here, the grid is divided into one region formed by the '/' character, and the second row is empty space.
 
-### Approach
+- **Input:** `Input: grid = ["/\\", "\/ "]`  \
+  **Explanation:** In this case, the grid is divided into five distinct regions due to the positioning of the '\' and '/' characters.
 
-To solve this problem, we will use the following approach:
+{{< dots >}}
+## Approach 🚀
+The approach involves transforming the grid into a 3x3 matrix for each original grid cell, then counting the number of connected regions using depth-first search (DFS).
 
-1. **Transform the grid**: Each cell in the grid can be viewed as a 3x3 block of smaller cells, where slashes divide the block into multiple sub-cells. This transformation allows us to work with smaller units and manage the connections between them.
-
-2. **Graph Representation**: We represent the entire grid as a larger grid where each cell is divided into a 3x3 sub-grid. The task becomes a problem of counting the connected components in this transformed grid. We will use **Depth First Search (DFS)** to explore all connected regions in this larger grid.
-
-3. **DFS Traversal**: By using DFS, we explore all connected empty spaces (cells with value 0) in the grid. Each time we encounter a new empty space that has not been visited, we initiate a DFS search, marking all connected cells as visited. Each new DFS invocation indicates the discovery of a new region.
-
-4. **Counting Regions**: The number of times DFS is initiated corresponds to the number of distinct regions. We count these DFS invocations to determine the total number of regions.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Each cell in the grid can contribute to a new region or be part of an existing region depending on its connections with neighboring cells.
+- By expanding each cell into a 3x3 subgrid, we can simplify the problem of region counting by treating connected components as parts of the same region.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid will never be empty as per the constraints.
+- For larger grids, the solution must efficiently handle grids with dimensions up to 30x30.
+- Consider grids with no '/' or '\' characters, where all cells are empty space.
+- The grid will always be a square of size n x n with 1 <= n <= 30.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int regionsBySlashes(vector<string>& grid) {
-        int n = grid.size();  // Get the size of the grid (number of rows/columns)
-        vector<vector<int>> g(n * 3, vector<int>(n * 3, 0));  // Create a grid of size 3*n x 3*n to represent sub-cells
-```
-
-1. **Initialize the grid**: 
-   - The input grid is of size `n x n`. To transform it into a graph where each cell is divided into 3x3 sub-cells, we create a new grid `g` of size `3*n x 3*n`. Each element of the grid `g` is initialized to 0 (indicating an empty space).
-
-```cpp
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                if(grid[i][j] == '/') {
-                    // If the cell contains a '/', mark the appropriate cells as occupied
-                    g[i * 3 + 2][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3][j * 3 + 2] = 1;
-                } else if(grid[i][j] == '\\') {
-                    // If the cell contains a '\\', mark the appropriate cells as occupied
-                    g[i * 3][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3 + 2][j * 3 + 2] = 1;
-                }
+int regionsBySlashes(vector<string>& grid) {
+    int n = grid.size();
+    vector<vector<int>> g(n * 3, vector<int>(n * 3, 0));
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(grid[i][j] == '/') {
+                g[i * 3 + 2][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3][j * 3 + 2] = 1;
+            } else if(grid[i][j] == '\\') {
+                g[i * 3][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3 + 2][j * 3 + 2] = 1;
             }
         }
-```
-
-2. **Marking the grid**: 
-   - We iterate through each cell of the input grid. For each cell that contains a slash (`'/'` or `'\\'`), we mark the appropriate sub-cells in the larger grid `g` as occupied (with `1`). For a `/`, the three cells it divides in the sub-grid are marked, and similarly, for a `\\`, its corresponding sub-cells are marked.
-   
-```cpp
-        int reg = 0;  // Initialize a counter for the regions
-        for(int i = 0; i < n * 3; i++) {
-            for(int j = 0; j < n * 3; j++) {
-                reg += dfs(g, i, j)? 1: 0;  // For each cell, if DFS finds a new region, increment the count
-            }
-        }
-        return reg;  // Return the total number of regions
     }
-```
-
-3. **Counting Regions**:
-   - We initialize a variable `reg` to count the number of regions.
-   - We iterate through each cell in the larger grid (`g`). If the cell is an empty space (i.e., its value is `0`), we start a DFS search to explore the connected region. Each successful DFS search indicates the discovery of a new region, so we increment the `reg` counter.
-   
-```cpp
-    int dfs(vector<vector<int>> &g, int i, int j) {
-        if (min(i, j) < 0 || max(i, j) >= g.size() || g[i][j] != 0) {
-            return 0;  // If the cell is out of bounds or already visited, return 0
+    int reg = 0;
+    for(int i = 0; i < n * 3; i++) {
+        for(int j = 0; j < n * 3; j++) {
+            reg += dfs(g, i, j) ? 1 : 0;
         }
-
-        g[i][j] = 1;  // Mark the cell as visited
-        
-        // Perform DFS in all four directions: up, down, left, right
-        return 1 + dfs(g, i + 1, j) + dfs(g, i - 1, j) + dfs(g, i, j + 1) + dfs(g, i, j - 1);
     }
-};
+    return reg;
+}
+
+int dfs(vector<vector<int>> &g, int i, int j) {
+    if (min(i, j) < 0 || max(i, j) >= g.size() || g[i][j] != 0) {
+        return 0;
+    }
+    g[i][j] = 1;
+    return 1 + dfs(g, i + 1, j) + dfs(g, i - 1, j) + dfs(g, i, j + 1) + dfs(g, i, j - 1);
+}
 ```
 
-4. **DFS Function**:
-   - The `dfs` function is a standard depth-first search. It starts from a given cell `(i, j)` and explores all connected empty spaces (cells with value `0`). 
-   - It first checks if the current cell is out of bounds or has already been visited (i.e., its value is not `0`).
-   - If the cell is valid, we mark it as visited by setting `g[i][j] = 1` and recursively call DFS on the neighboring cells (up, down, left, and right).
-   - Each DFS invocation returns the number of connected empty cells, but the actual result isn't used because we are only interested in whether a region exists or not. Hence, DFS returns `1` for each valid region it discovers.
+This function determines the number of regions formed by slashes and backslashes in a grid. It expands the grid, performs depth-first search (DFS) to identify distinct regions, and counts them.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int regionsBySlashes(vector<string>& grid) {
+	```
+	Declares the function that computes the number of regions formed by slashes in a given grid.
 
-- **Time Complexity**: The time complexity of this solution is **O(n^2)**, where `n` is the size of the input grid. This is because:
-  - We traverse every cell in the grid once, which takes `O(n^2)` time.
-  - For each cell, we may perform a DFS, but each cell is visited at most once during DFS. The DFS explores at most `O(9)` cells (since each cell in the grid is represented by a 3x3 sub-grid), so the complexity per cell is constant.
-  
-- **Space Complexity**: The space complexity is **O(n^2)** because the largest grid we construct (`g`) has a size of `3*n x 3*n`, which requires `O(n^2)` space. Additionally, the recursive stack used in DFS can go as deep as `O(n^2)` in the worst case (if all cells are connected).
+2. **Variable Initialization**
+	```cpp
+	    int n = grid.size();
+	```
+	Initializes the variable `n` with the size of the grid.
 
-### Conclusion
+3. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> g(n * 3, vector<int>(n * 3, 0));
+	```
+	Expands the grid by a factor of 3 to better represent slashes and backslashes.
 
-This solution efficiently calculates the number of regions formed by slashes in the grid using depth-first search. By transforming the grid into a larger representation and applying DFS, we can systematically explore all connected components and count the distinct regions. The approach guarantees that each cell is visited only once, ensuring optimal time and space complexity for solving this problem. This method is both easy to understand and implement, making it a robust solution for this type of problem.
+4. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Outer loop to iterate over rows of the grid.
+
+5. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	Inner loop to iterate over columns of the grid.
+
+6. **Slash Condition**
+	```cpp
+	            if(grid[i][j] == '/') {
+	```
+	Checks if the current cell contains a forward slash and marks corresponding positions in the expanded grid.
+
+7. **Mark Grid for Slash**
+	```cpp
+	                g[i * 3 + 2][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3][j * 3 + 2] = 1;
+	```
+	Marks the positions of the forward slash in the expanded grid.
+
+8. **Backslash Condition**
+	```cpp
+	            } else if(grid[i][j] == '\\') {
+	```
+	Checks if the current cell contains a backslash and marks corresponding positions in the expanded grid.
+
+9. **Mark Grid for Backslash**
+	```cpp
+	                g[i * 3][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3 + 2][j * 3 + 2] = 1;
+	```
+	Marks the positions of the backslash in the expanded grid.
+
+10. **Region Counter**
+	```cpp
+	    int reg = 0;
+	```
+	Initializes a counter for the number of distinct regions.
+
+11. **Outer Loop for DFS**
+	```cpp
+	    for(int i = 0; i < n * 3; i++) {
+	```
+	Outer loop to iterate over rows of the expanded grid for DFS.
+
+12. **Inner Loop for DFS**
+	```cpp
+	        for(int j = 0; j < n * 3; j++) {
+	```
+	Inner loop to iterate over columns of the expanded grid for DFS.
+
+13. **Region Identification**
+	```cpp
+	            reg += dfs(g, i, j) ? 1 : 0;
+	```
+	Performs DFS to identify and count a new region if it exists.
+
+14. **Return Statement**
+	```cpp
+	    return reg;
+	```
+	Returns the total number of regions identified in the grid.
+
+15. **DFS Function Declaration**
+	```cpp
+	int dfs(vector<vector<int>> &g, int i, int j) {
+	```
+	Declares the depth-first search (DFS) helper function.
+
+16. **Base Condition**
+	```cpp
+	    if (min(i, j) < 0 || max(i, j) >= g.size() || g[i][j] != 0) {
+	```
+	Checks if the current cell is out of bounds or already visited.
+
+17. **Base Condition Return**
+	```cpp
+	        return 0; }
+	```
+	Returns 0 if the base condition is met.
+
+18. **Mark Cell as Visited**
+	```cpp
+	    g[i][j] = 1;
+	```
+	Marks the current cell as visited in the grid.
+
+19. **Recursive DFS Calls**
+	```cpp
+	    return 1 + dfs(g, i + 1, j) + dfs(g, i - 1, j) + dfs(g, i, j + 1) + dfs(g, i, j - 1);
+	```
+	Recursively explores all neighboring cells to calculate the region size.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+In all cases, the time complexity is O(n^2) because we need to explore every cell in the grid at least once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the storage of the larger grid for processing and the space used by the depth-first search stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/regions-cut-by-slashes/description/)
 

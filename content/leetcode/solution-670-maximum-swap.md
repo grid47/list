@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "arecn8VuQL0"
 youtube_upload_date="2020-05-02"
 youtube_thumbnail="https://i.ytimg.com/vi/arecn8VuQL0/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,102 +28,175 @@ youtube_thumbnail="https://i.ytimg.com/vi/arecn8VuQL0/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer `num`, and you can swap two digits at most once to get the largest possible number. Return the maximum number that can be obtained after performing the swap.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `num` which is the number whose digits need to be rearranged by swapping at most two digits to get the maximum value.
+- **Example:** `num = 1234`
+- **Constraints:**
+	- 0 <= num <= 10^8
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumSwap(int num) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest number that can be obtained by swapping two digits in the number at most once.
+- **Example:** `4231`
+- **Constraints:**
+	- The number must be returned as an integer.
 
-        vector<int> idx(10, 0);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the number by swapping two digits at most once.
 
-        string nm = to_string(num);
-        for(int i = 0; i < nm.size(); i++) idx[nm[i] - '0'] = i;
+- 1. Convert the number into a string to easily access individual digits.
+- 2. Track the index of the largest possible digit that can be swapped for each position.
+- 3. For each digit, check if a swap is possible with any larger digit from a later position.
+- 4. Perform the swap and return the resulting number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number is a non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `num = 1234`  \
+  **Explanation:** The maximum number can be obtained by swapping the digits 1 and 4, resulting in 4231.
 
-        for(int i = 0; i < nm.size(); i++)
-        for(int j = 9; j > nm[i] - '0'; j--) {
-            if(idx[j] > i) {
-                swap(nm[idx[j]], nm[i]);
-                return stoi(nm);
-            }
-        }
+- **Input:** `num = 9876`  \
+  **Explanation:** Since the number is already in the maximum possible order, no swap is needed, and the result is 9876.
 
-        return num;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to find the largest number by performing at most one swap between two digits of the number.
 
-### Problem Statement:
-
-The problem asks us to find the largest number possible by swapping at most one pair of digits in a given number `num`. You are to return the maximum number that can be obtained by performing a single swap of digits, or if no such swap can improve the number, return the original number.
-
-### Approach:
-
-To solve this problem, we need to find the first opportunity where swapping digits results in a larger number. The approach is as follows:
-1. **Track the Last Occurrence of Each Digit**: We start by storing the last index where each digit (from 0 to 9) appears in the number. This allows us to determine which digit to swap with to maximize the number.
-   
-2. **Greedy Approach for Maximum Swap**: We iterate through the number from left to right. For each digit, we look for the largest possible digit (greater than the current digit) that occurs later in the number. If such a digit exists, we perform the swap to maximize the number and return the result.
-
-3. **Single Swap**: Once we identify the digits that should be swapped, we perform the swap and return the number as an integer.
-
-The main idea is to use a greedy approach, always attempting to make the largest possible swap when encountering a smaller digit.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Create a Vector to Store the Last Occurrence of Each Digit
+### Initial Thoughts 💭
+- The approach involves checking the possibility of swapping each digit with the largest available digit from the right side.
+- If a swap can maximize the number, we perform the swap and return the result.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs in this problem, as the number is always provided.
+- Ensure the solution handles numbers with up to 8 digits (max 10^8).
+- If the number is already the largest possible form, no swap should be made.
+- The number will be within the range 0 <= num <= 10^8.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<int> idx(10, 0);
-```
-- We initialize a vector `idx` of size 10 to store the last occurrence of each digit (0-9) in the number. The index of this vector represents the digit, and the value at each index represents the position of the last occurrence of that digit in the number.
+int maximumSwap(int num) {
 
-#### Step 2: Convert the Number to a String
-```cpp
-string nm = to_string(num);
-```
-- We convert the integer `num` into a string `nm` to allow easy manipulation of the individual digits. This allows us to access each digit by index, which is more convenient for performing the swap.
+    vector<int> idx(10, 0);
 
-#### Step 3: Populate the `idx` Vector with Last Occurrences of Each Digit
-```cpp
-for(int i = 0; i < nm.size(); i++) 
-    idx[nm[i] - '0'] = i;
-```
-- We iterate over each digit in the string `nm`, converting it to its integer form by subtracting `'0'`. For each digit, we update the `idx` vector to record the last position of that digit in the number.
+    string nm = to_string(num);
+    for(int i = 0; i < nm.size(); i++) idx[nm[i] - '0'] = i;
 
-#### Step 4: Find the First Possible Swap for Maximum Number
-```cpp
-for(int i = 0; i < nm.size(); i++)
+    for(int i = 0; i < nm.size(); i++)
     for(int j = 9; j > nm[i] - '0'; j--) {
         if(idx[j] > i) {
             swap(nm[idx[j]], nm[i]);
             return stoi(nm);
         }
     }
+
+    return num;
+}
 ```
-- Now, we iterate through the string `nm` from left to right. For each digit `nm[i]`, we check if there is a larger digit (from 9 down to `nm[i] + 1`) that appears later in the number. This is done by checking the `idx` vector to see if the last occurrence of a larger digit is positioned after the current digit `i`.
-- If we find such a digit, we perform the swap and return the number immediately after converting it back to an integer using `stoi(nm)`.
 
-#### Step 5: Return the Original Number if No Swap is Needed
-```cpp
-return num;
-```
-- If no valid swap is found, meaning the number is already the largest possible number we can get by swapping at most one pair of digits, we return the original number.
+This function attempts to maximize the given number by performing at most one swap between any two digits. It swaps the digits in such a way that the resulting number is the largest possible number that can be obtained by one swap.
 
-### Complexity:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumSwap(int num) {
+	```
+	This is the function definition for `maximumSwap`, which takes an integer `num` and returns the largest number that can be obtained by swapping two digits of `num` at most once.
 
-#### Time Complexity:
-- **O(n)**: The time complexity is dominated by the two loops: the first loop iterates through the string `nm` to populate the `idx` vector, and the second nested loop checks for possible swaps. Both loops run in linear time, so the overall time complexity is O(n), where `n` is the length of the number (i.e., the number of digits in `num`).
+2. **Initialization of Array**
+	```cpp
+	
+	```
+	An integer vector `idx` of size 10 is initialized to store the index positions of the last occurrence of each digit from 0 to 9 in the number.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant. The `idx` vector has a fixed size of 10 (for the digits 0-9), and the string `nm` stores the digits of the number. Since the size of the `idx` vector does not depend on the size of the input and the space used for the string is proportional to the number of digits, the space complexity is O(1).
+3. **Index Array Initialization**
+	```cpp
+	    vector<int> idx(10, 0);
+	```
+	A vector `idx` is created and initialized to store the last index of each digit in the number `num`.
 
-### Conclusion:
+4. **Convert Number to String**
+	```cpp
+	
+	```
+	The number `num` is converted to a string so that we can easily iterate through its digits.
 
-This solution efficiently solves the problem by using a greedy approach to maximize the number by performing a single swap. The key idea is to track the last occurrence of each digit, and then, for each digit in the number, try to swap it with the largest possible digit that appears later in the number. This approach ensures that the number is maximized with minimal computation.
+5. **String Conversion**
+	```cpp
+	    string nm = to_string(num);
+	```
+	Convert the number `num` into a string `nm` to facilitate manipulation of individual digits.
 
-The algorithm runs in linear time, O(n), making it suitable for numbers with a large number of digits. The space complexity is constant, O(1), as we only use a fixed-size vector and the space required for the string representation of the number.
+6. **Tracking Digit Indices**
+	```cpp
+	    for(int i = 0; i < nm.size(); i++) idx[nm[i] - '0'] = i;
+	```
+	Iterate through each digit of the string `nm` and store its index in the `idx` array. This ensures that we know the position of each digit's last occurrence.
 
-By leveraging this approach, we ensure an optimal solution to the problem, achieving the maximum number with a single swap in an efficient and easy-to-understand manner.
+7. **Main Loop**
+	```cpp
+	
+	```
+	The outer loop iterates through the digits of `nm` from left to right to determine which digits can be swapped for maximizing the number.
+
+8. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < nm.size(); i++)
+	```
+	This loop iterates through each digit of `nm` to determine if a larger digit can be swapped with it to form a larger number.
+
+9. **Inner Loop**
+	```cpp
+	    for(int j = 9; j > nm[i] - '0'; j--) {
+	```
+	The inner loop looks for a larger digit, from 9 to the current digit, that appears later in the string to swap with the current digit.
+
+10. **Check for Valid Swap**
+	```cpp
+	        if(idx[j] > i) {
+	```
+	If a digit larger than the current digit is found later in the string (`idx[j] > i`), this means we can swap these digits to form a larger number.
+
+11. **Perform Swap**
+	```cpp
+	            swap(nm[idx[j]], nm[i]);
+	```
+	Swap the current digit `nm[i]` with the larger digit found later in the string `nm[idx[j]]`.
+
+12. **Return Maximized Number**
+	```cpp
+	            return stoi(nm);
+	```
+	Convert the modified string back to an integer and return it as the result, representing the maximum number that can be obtained by one swap.
+
+13. **Return Original Number**
+	```cpp
+	    return num;
+	```
+	Return the original number `num` if no valid swap was found that can maximize the number.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of digits in the number. Since the number has at most 8 digits, this is efficient.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we only use a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-swap/description/)
 

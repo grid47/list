@@ -14,117 +14,146 @@ img_src = ""
 youtube = "geZPsJWEzfc"
 youtube_upload_date="2019-12-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/geZPsJWEzfc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of flight bookings, where each booking specifies the flight range (from first flight to last flight) and the number of seats reserved for each of the flights in that range. You need to compute the total number of seats reserved for each flight, from flight 1 to flight n.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of bookings, where each element `bookings[i]` is an array containing three integers: `[firsti, lasti, seatsi]`, representing the first flight, last flight, and the number of seats reserved for each flight in the given range. Additionally, you are given an integer `n` representing the total number of flights.
+- **Example:** `bookings = [[1, 2, 10], [2, 3, 20], [2, 5, 25]], n = 5`
+- **Constraints:**
+	- 1 <= n <= 2 * 10^4
+	- 1 <= bookings.length <= 2 * 10^4
+	- bookings[i].length == 3
+	- 1 <= firsti <= lasti <= n
+	- 1 <= seatsi <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> corpFlightBookings(vector<vector<int>>& bookings, int m) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array `answer` of length `n`, where each element `answer[i]` represents the total number of seats reserved for the i-th flight.
+- **Example:** `Output: [10, 55, 45, 25, 25]`
+- **Constraints:**
+	- Each element in the answer array should be the sum of reserved seats for the respective flight.
 
-        vector<int> ans(m, 0);
-        for(auto& v: bookings) {
-            ans[v[0] - 1] += v[2];
-            if(v[1] < m) ans[v[1]] -= v[2];
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the total number of reserved seats for each flight while efficiently handling multiple bookings that affect overlapping flight ranges.
 
-        for(int j = 1; j < m; j++)
-            ans[j] += ans[j-1];
+- Start with an array `ans` initialized to zero, which will store the total seats for each flight.
+- For each booking, increment the number of seats reserved for the first flight in the range, and decrement the number of seats for the flight right after the last flight in the range.
+- Use a cumulative sum to calculate the total seats reserved for each flight.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each flight range will contain valid indexes and the number of seats will always be within the allowed range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: bookings = [[1, 2, 10], [2, 3, 20], [2, 5, 25]], n = 5`  \
+  **Explanation:** In this case, bookings affect the following flights: the first booking reserves 10 seats for flights 1 and 2. The second booking reserves 20 seats for flights 2 and 3. The third booking reserves 25 seats for flights 2 through 5. The total seats for each flight are: [10, 55, 45, 25, 25].
 
-        return ans;
+{{< dots >}}
+## Approach 🚀
+We will use a technique known as difference array to efficiently process overlapping bookings and compute the total seats reserved for each flight.
+
+### Initial Thoughts 💭
+- We need to keep track of seat reservations for overlapping flight ranges, which can be handled by using the difference array approach.
+- For each booking, we will increment the start of the range and decrement the flight after the last in the range. This way, we can compute the cumulative number of reserved seats with just one pass through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- Bookings array cannot be empty as the problem guarantees at least one booking.
+- The solution must handle the upper limits of input sizes efficiently (up to 20,000 flights and bookings).
+- If all bookings affect the same flight range, the result should correctly accumulate the reserved seats for each flight.
+- Ensure the solution works within the provided constraints of `n` and the size of the bookings array.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> corpFlightBookings(vector<vector<int>>& bookings, int m) {
+
+    vector<int> ans(m, 0);
+    for(auto& v: bookings) {
+        ans[v[0] - 1] += v[2];
+        if(v[1] < m) ans[v[1]] -= v[2];
     }
-};
-{{< /highlight >}}
----
 
+    for(int j = 1; j < m; j++)
+        ans[j] += ans[j-1];
 
-### Problem Statement
-In this problem, you are tasked with calculating the number of seats booked for a series of flights based on a list of booking requests. Each request includes:
-- A start flight number.
-- An end flight number.
-- The number of seats booked for all flights in the specified range.
+    return ans;
+}
+```
 
-Given a list of such booking requests and the total number of flights, your objective is to determine how many seats are booked for each flight.
+This function calculates the number of booked seats on each flight based on a list of bookings. It uses a prefix sum approach to efficiently calculate the number of seats for each flight.
 
-**Input:**
-- An integer `m` representing the total number of flights.
-- A list of bookings, where each booking is represented as a vector containing three integers:
-  - The start flight number.
-  - The end flight number.
-  - The number of seats booked.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> corpFlightBookings(vector<vector<int>>& bookings, int m) {
+	```
+	The function `corpFlightBookings` accepts a 2D vector `bookings` representing the booking ranges (start and end flight) and an integer `m` representing the total number of flights. It returns a vector of integers where each element corresponds to the number of bookings for a flight.
 
-**Output:**
-- A vector of integers, where each integer represents the total number of seats booked for the corresponding flight.
+2. **Initialization**
+	```cpp
+	    vector<int> ans(m, 0);
+	```
+	A vector `ans` of size `m` is initialized to zero, representing the number of bookings for each flight initially set to zero.
 
-### Approach
-To efficiently calculate the number of booked seats for each flight, we will use the "difference array" technique. This approach involves:
-1. Initializing an array to keep track of seat changes at the beginning and just after the end of the booking range.
-2. Iterating over the booking requests to update the seat counts at the specified start and end indices.
-3. Using a prefix sum calculation to derive the total booked seats for each flight.
+3. **Loop Through Bookings**
+	```cpp
+	    for(auto& v: bookings) {
+	```
+	This loop iterates over each booking in the `bookings` vector. Each booking is represented by a vector `v` of three elements: start flight, end flight, and number of seats booked.
 
-This method is optimal as it reduces the complexity of updating the seat counts from linear to constant time for each booking, followed by a linear pass to compute the final counts.
+4. **Booking Updates**
+	```cpp
+	        ans[v[0] - 1] += v[2];
+	```
+	For each booking, the number of seats booked is added to the `ans` vector at the index corresponding to the start flight (adjusted by subtracting 1 for zero-based indexing).
 
-### Code Breakdown (Step by Step)
+5. **Decrement After End Flight**
+	```cpp
+	        if(v[1] < m) ans[v[1]] -= v[2];
+	```
+	If the end flight `v[1]` is less than `m` (i.e., within the range of flights), the number of seats booked is subtracted from the `ans` vector at the index corresponding to the end flight.
 
-1. **Class Definition**: The `Solution` class contains the method to compute the seat bookings.
+6. **Prefix Sum Calculation**
+	```cpp
+	    for(int j = 1; j < m; j++)
+	```
+	This loop calculates the prefix sum for each flight, adding the number of seats booked for each previous flight to compute the total number of seats for the current flight.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+7. **Prefix Sum Update**
+	```cpp
+	        ans[j] += ans[j-1];
+	```
+	The prefix sum is updated for each flight by adding the previous flight's seat count to the current flight's seat count.
 
-2. **Method Declaration**: The `corpFlightBookings` method is defined, which takes a vector of bookings and an integer `m` as input parameters.
+8. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the `ans` vector, which contains the total number of seats booked for each flight after processing all bookings.
 
-   ```cpp
-       vector<int> corpFlightBookings(vector<vector<int>>& bookings, int m) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-3. **Initialization**: An answer vector `ans` of size `m` is initialized to zero. This will hold the total booked seats for each flight.
+The time complexity is O(n + m), where `n` is the number of flights and `m` is the number of bookings, as we process each booking and then compute the cumulative sum for the flights.
 
-   ```cpp
-           vector<int> ans(m, 0);
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Updating Seat Changes**: The code iterates through each booking request, updating the `ans` vector:
-   - Increase the booking count at the start index (adjusted to zero-based).
-   - Decrease the booking count at the end index (if it is within bounds), indicating that the seats booked will stop affecting subsequent flights.
+The space complexity is O(n), where `n` is the number of flights, due to the array used to store seat reservations for each flight.
 
-   ```cpp
-           for(auto& v: bookings) {
-               ans[v[0] - 1] += v[2];  // Increase the booking count for the start flight
-               if(v[1] < m) ans[v[1]] -= v[2];  // Decrease for the flight just after the end flight
-           }
-   ```
-
-5. **Calculating Prefix Sums**: After processing all bookings, the code calculates the prefix sum of the `ans` vector. This step converts the difference array into the actual counts of booked seats for each flight.
-
-   ```cpp
-           for(int j = 1; j < m; j++)
-               ans[j] += ans[j - 1];  // Update counts by accumulating previous values
-   ```
-
-6. **Return Result**: Finally, the method returns the populated `ans` vector, which contains the total number of booked seats for each flight.
-
-   ```cpp
-           return ans;  // Return the final counts of booked seats
-       }
-   };
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of the algorithm is \(O(n + m)\), where \(n\) is the number of booking requests and \(m\) is the number of flights. The first loop iterates through the bookings, and the second loop processes the prefix sums.
-- **Space Complexity**: The space complexity is \(O(m)\) due to the `ans` vector, which holds the booked seat counts for each flight.
-
-### Conclusion
-The provided C++ code efficiently computes the total number of booked seats for each flight using the difference array technique. By leveraging this method, the algorithm minimizes the number of operations required for updating seat counts based on booking ranges, leading to significant performance improvements.
-
-In summary, this solution showcases a clever application of the difference array approach, providing an optimal way to handle range updates in competitive programming. This technique is particularly beneficial in scenarios where multiple updates to an array are needed, allowing for quick and efficient calculations.
-
-This explanation serves as a comprehensive guide for readers interested in understanding both the algorithm and its implementation, making it valuable for those looking to enhance their skills in coding and algorithm design.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/corporate-flight-bookings/description/)

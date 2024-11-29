@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ZmGk7h8KZLs"
 youtube_upload_date="2024-06-13"
 youtube_thumbnail="https://i.ytimg.com/vi/ZmGk7h8KZLs/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,146 @@ youtube_thumbnail="https://i.ytimg.com/vi/ZmGk7h8KZLs/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of integers, find the kth largest element without sorting the entire array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer k. The array contains n integers, and k is an integer specifying the rank of the largest element to find.
+- **Example:** `[7, 2, 5, 8, 3, 9], k = 3`
+- **Constraints:**
+	- 1 <= k <= nums.length <= 10^5
+	- -10^4 <= nums[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findKthLargest(vector<int>& nums, int k) {
-        priority_queue<int> pq;
-        for(int x: nums)
-            pq.push(x);
-        
-        int x;
-        while(k-->0) {
-            x = pq.top();
-            pq.pop();
-        }
-        return x;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the kth largest element from the array.
+- **Example:** `For input [7, 2, 5, 8, 3, 9] and k = 3, the output is 7.`
+- **Constraints:**
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Efficiently find the kth largest element in the array.
 
-Hey there! 👋 In this problem, you're asked to find the `k`-th largest element in an unsorted array of integers. 📊 The number `k` represents the position of the largest element you're after, and your task is to return that element when the list is sorted in descending order.
+- Use a priority queue (min-heap) to keep track of the k largest elements encountered so far.
+- Iterate through the array, pushing each element into the heap. If the heap exceeds size k, remove the smallest element.
+- After processing the array, the root of the heap will contain the kth largest element.
+{{< dots >}}
+### Problem Assumptions ✅
+- k will always be a valid number, such that 1 <= k <= nums.length.
+- The array will not be empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this example, the 3rd largest element is 7. After sorting the array in descending order, the array becomes [9, 8, 7, 5, 3, 2]. The 3rd largest element is 7.
 
----
+- **Input:** `Example 2`  \
+  **Explanation:** In this example, the 2nd largest element is 8. The sorted array is [10, 8, 6, 4, 2, 1]. The 2nd largest element is 8.
 
-### 🧠 Approach
+{{< dots >}}
+## Approach 🚀
+Use a heap (priority queue) to maintain the k largest elements efficiently without sorting the entire array.
 
-To solve this efficiently, we’re going to use a **priority queue**. 🔑 This clever data structure will allow us to always access the largest element in constant time while keeping track of the order of the elements. It’s like having a trusty sidekick that can instantly give you the biggest treasure in the pile! 🏆
-
-#### Key Concepts:
-1. **Priority Queue (Max-Heap)**: A priority queue is a special data structure that lets us efficiently get the largest or smallest element. Here, we’ll use a **max-heap**, which ensures that the largest element is always at the top of the heap.
-   
-2. **Heap Property**: In a heap, each parent node is greater than or equal to its children (for a max-heap). So, the root always holds the largest element. 🌳
-
-3. **How to Find the k-th Largest Element**: 
-   - Insert all the elements of the array into the priority queue (max-heap).
-   - Then, extract the largest element `k` times (first the largest, then the second largest, and so on).
-   - After `k` extractions, the top element will be our `k`-th largest element!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break this down and make sure we understand every part! 🔍
-
+### Initial Thoughts 💭
+- Sorting the entire array would be inefficient for large arrays. A heap can help achieve this in O(n log k) time.
+- The heap's size will be kept at k, and we will only insert new elements into the heap when necessary.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will not be empty.
+- Ensure that the solution works for arrays up to size 10^5.
+- If the array contains duplicate elements, the algorithm will still correctly identify the kth largest element.
+- Handle cases where all elements in the array are the same.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int findKthLargest(vector<int>& nums, int k) {
-        priority_queue<int> pq;  // Step 1: Initialize a max-heap priority queue
-        for(int x: nums)         // Step 2: Insert all elements from nums into the priority queue
-            pq.push(x);
-        
-        int x;
-        while(k-->0) {           // Step 3: Extract the top element k times
-            x = pq.top();        // Get the largest element from the heap
-            pq.pop();            // Remove the largest element
-        }
-        return x;                // Step 4: Return the k-th largest element
+int findKthLargest(vector<int>& nums, int k) {
+    priority_queue<int> pq;
+    for(int x: nums)
+        pq.push(x);
+    
+    int x;
+    while(k-->0) {
+        x = pq.top();
+        pq.pop();
     }
-};
+    return x;
+}
 ```
 
-#### Step-by-Step Explanation:
-1. **Initialize the Priority Queue:**
-   ```cpp
-   priority_queue<int> pq;
-   ```
-   - We create a **max-heap** priority queue. In C++, `priority_queue` is a max-heap by default, so the largest element is always at the top! 🔝
+This function finds the kth largest element in an unsorted array using a priority queue (max heap). The heap is filled with the elements, and then we pop elements until the kth largest is found.
 
-2. **Insert Elements into the Priority Queue:**
-   ```cpp
-   for(int x: nums) 
-       pq.push(x);
-   ```
-   - Here, we loop through each element `x` in the `nums` array and push it into the priority queue. Each insertion maintains the heap property, so the largest element always stays at the top. 💥
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int findKthLargest(vector<int>& nums, int k) {
+	```
+	The method definition for the 'findKthLargest' function, which takes a vector of integers 'nums' and an integer 'k' as input.
 
-3. **Extract the Largest Element `k` Times:**
-   ```cpp
-   while(k-->0) { 
-       x = pq.top(); 
-       pq.pop();
-   }
-   ```
-   - The `top()` function gives us the largest element at the root of the heap.
-   - We then `pop()` it off the heap, and the next largest element moves to the top.
-   - We repeat this process `k` times to find the `k`-th largest element.
+2. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<int> pq;
+	```
+	Initializes a priority queue 'pq' (a max heap by default in C++) to store the elements of the array 'nums'.
 
-4. **Return the k-th Largest Element:**
-   ```cpp
-   return x;
-   ```
-   - After the loop, `x` holds the value of the `k`-th largest element. That’s the one we return! 🎯
+3. **Loop Iteration**
+	```cpp
+	    for(int x: nums)
+	```
+	Iterates over each element 'x' in the 'nums' vector.
 
----
+4. **Priority Queue Insertion**
+	```cpp
+	        pq.push(x);
+	```
+	Pushes each element 'x' from the 'nums' vector into the priority queue 'pq'.
 
-### 📈 Complexity Analysis
+5. **Variable Declaration**
+	```cpp
+	    int x;
+	```
+	Declares an integer variable 'x' to store the current top element from the priority queue.
 
-Let’s take a quick look at how efficient this solution is! 📊
+6. **While Loop**
+	```cpp
+	    while(k-->0) {
+	```
+	A loop that runs 'k' times, each time removing the largest element from the priority queue.
 
-#### Time Complexity:
-- **Inserting all elements into the priority queue**: Each `push` operation in the priority queue takes `O(log n)` time, where `n` is the number of elements in the array.
-  - So, inserting all `n` elements into the heap takes `O(n log n)` time.
+7. **Priority Queue Access**
+	```cpp
+	        x = pq.top();
+	```
+	Accesses the top (largest) element of the priority queue and assigns it to the variable 'x'.
 
-- **Extracting the top element `k` times**: Each `pop` operation takes `O(log n)` time. Since we perform `k` extractions, the time complexity for this part is `O(k log n)`.
+8. **Priority Queue Removal**
+	```cpp
+	        pq.pop();
+	```
+	Removes the top element from the priority queue.
 
-Therefore, the **total time complexity** is:
-\[
-O(n \log n) + O(k \log n) = O(n \log n)
-\]
-In most cases, `k <= n`, so the time complexity is dominated by the heap insertions, which is **O(n log n)**.
+9. **Return Statement**
+	```cpp
+	    return x;
+	```
+	Returns the 'kth' largest element (the last element 'x' retrieved from the priority queue).
 
-#### Space Complexity:
-- We store all `n` elements in the priority queue, so the **space complexity** is `O(n)`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log k), where n is the length of the array.
+- **Average Case:** O(n log k), as we iterate through the array and perform heap operations.
+- **Worst Case:** O(n log k), since each heap operation takes O(log k) time, and we do this for each of the n elements.
 
----
+The time complexity is proportional to the number of elements in the array, with the log k factor accounting for the heap operations.
 
-### 🏁 Conclusion
+### Space Complexity 💾
+- **Best Case:** O(k), since the heap size is always k.
+- **Worst Case:** O(k), as we store at most k elements in the heap.
 
-And there you have it! 🎉 This solution is an efficient and intuitive way to find the `k`-th largest element in an unsorted array. By using a **max-heap**, we can efficiently track and extract the largest elements.
+The space complexity is dominated by the size of the heap, which is k.
 
-- **Time Complexity**: `O(n log n)`, which is great for handling even large arrays!
-- **Space Complexity**: `O(n)`, due to storing the array in the priority queue.
+**Happy Coding! 🎉**
 
-This approach is clear, efficient, and works wonders for problems where we need to find the largest or smallest elements. 🚀 Keep this trick in your toolbox for future problems—it's a real lifesaver! 😎
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-largest-element-in-an-array/description/)
 

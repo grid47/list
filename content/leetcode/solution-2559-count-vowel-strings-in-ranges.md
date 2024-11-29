@@ -14,153 +14,169 @@ img_src = ""
 youtube = "hTXRevcm3kI"
 youtube_upload_date="2023-02-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/hTXRevcm3kI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of strings `words` and a list of queries, each query asks to count the number of strings in the specified range that start and end with a vowel. The vowels are 'a', 'e', 'i', 'o', and 'u'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of strings `words` and a list of queries where each query specifies a range of indices in `words`.
+- **Example:** `words = ["aba", "bcb", "ace", "aa", "e"], queries = [[0,2],[1,4],[1,1]]`
+- **Constraints:**
+	- 1 <= words.length <= 10^5
+	- 1 <= words[i].length <= 40
+	- sum(words[i].length) <= 3 * 10^5
+	- 1 <= queries.length <= 10^5
+	- 0 <= li <= ri < words.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& q) {
-        int n = words.size();
-        vector<int> cnt(n, 0), ans(q.size(), 0);
-        set<char> ch = {'a', 'e', 'i', 'o', 'u'};
-        for(int i = 0; i < n; i++) {
-            if(ch.count(words[i][0]) && ch.count(words[i][words[i].size() -1]))
-                cnt[i] = 1;
-            if(i > 0) cnt[i] += cnt[i - 1];
-        }
-        for(int i= 0; i < q.size(); i++) {
-            ans[i] = cnt[q[i][1]] - ((q[i][0] > 0)? cnt[q[i][0] - 1]: 0);
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of integers where each element is the count of valid strings (those starting and ending with a vowel) in the given range for each query.
+- **Example:** `[2, 3, 0]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To efficiently compute the number of valid strings in the range for each query, we preprocess the input to allow fast queries.
+
+- 1. Iterate over the words and determine if they start and end with a vowel.
+- 2. Maintain a prefix sum array to quickly compute the count of valid words in any given range.
+- 3. For each query, compute the difference between the prefix sums at the range boundaries.
+{{< dots >}}
+### Problem Assumptions ✅
+- Words consist only of lowercase English letters.
+- Each query is valid, i.e., 0 <= li <= ri < words.length.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ["aba", "bcb", "ace", "aa", "e"], queries = [[0,2],[1,4],[1,1]]`  \
+  **Explanation:** The valid strings are 'aba', 'ace', 'aa', and 'e'. The answers to the queries are 2, 3, and 0 respectively.
+
+- **Input:** `words = ["a", "e", "i"], queries = [[0,2],[0,1],[2,2]]`  \
+  **Explanation:** All the strings satisfy the condition of starting and ending with vowels. Hence, the answers to the queries are 3, 2, and 1 respectively.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses a prefix sum approach to efficiently calculate the number of valid words in the range of each query.
+
+### Initial Thoughts 💭
+- We need a way to quickly determine the number of valid strings in a given range.
+- Prefix sums can be used to answer range queries efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The array `words` is guaranteed to have at least one element.
+- The solution must handle queries on large arrays efficiently.
+- Words of length 1 are valid only if the word itself is a vowel.
+- Ensure that the solution handles large inputs efficiently with up to 100,000 queries.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& q) {
+    int n = words.size();
+    vector<int> cnt(n, 0), ans(q.size(), 0);
+    set<char> ch = {'a', 'e', 'i', 'o', 'u'};
+    for(int i = 0; i < n; i++) {
+        if(ch.count(words[i][0]) && ch.count(words[i][words[i].size() -1]))
+            cnt[i] = 1;
+        if(i > 0) cnt[i] += cnt[i - 1];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine how many words in a given list of strings begin and end with a vowel. We're provided with an array of strings and a list of query ranges, and our task is to efficiently calculate, for each query, how many words in the specified range begin and end with a vowel.
-
-- **Words**: Each word in the list is a string.
-- **Vowels**: The vowels in this problem are the characters 'a', 'e', 'i', 'o', and 'u'.
-- **Queries**: Each query is a pair of indices `[l, r]`, and for each query, we need to find how many words in the range from `l` to `r` (inclusive) start and end with a vowel.
-
-The goal is to efficiently answer all the queries based on the given list of words.
-
-### Approach
-
-To solve this problem efficiently, we will use **prefix sums** combined with **preprocessing**. The idea is to preprocess the list of words to check whether each word starts and ends with a vowel, then use this information to quickly answer the queries. Here’s a breakdown of how we approach this:
-
-1. **Vowel Check**:
-   - For each word in the list, check whether the first and last characters are vowels.
-   - If both characters are vowels, mark that word as valid.
-   
-2. **Prefix Sum Array**:
-   - We will create an array `cnt` where `cnt[i]` holds the cumulative number of valid words (words that start and end with a vowel) from the start of the list up to index `i`.
-   - This allows us to quickly compute the number of valid words in any range `[l, r]` using the formula:
-     \[
-     \text{cnt}[r] - \text{cnt}[l-1]
-     \]
-   - If `l` is 0, then simply `cnt[r]` gives the correct result for that query.
-
-3. **Answering Queries**:
-   - For each query `[l, r]`, the number of valid words in the range can be found by subtracting the cumulative count up to `l-1` from the cumulative count up to `r`. This can be done in constant time due to the prefix sum array.
-
-### Code Breakdown
-
-Let's break down the code step by step:
-
-#### Step 1: Initialize Data Structures
-
-```cpp
-int n = words.size();
-vector<int> cnt(n, 0), ans(q.size(), 0);
-set<char> ch = {'a', 'e', 'i', 'o', 'u'};
-```
-
-- `n`: The number of words in the list.
-- `cnt`: A vector that will store the cumulative count of valid words. Initially, all elements are set to 0.
-- `ans`: A vector that will store the result for each query. The size of `ans` is equal to the number of queries (`q.size()`).
-- `ch`: A set containing the vowels ('a', 'e', 'i', 'o', 'u'). We use this set to check if a character is a vowel.
-
-#### Step 2: Preprocess the Words
-
-```cpp
-for(int i = 0; i < n; i++) {
-    if(ch.count(words[i][0]) && ch.count(words[i][words[i].size() - 1]))
-        cnt[i] = 1;
-    if(i > 0) cnt[i] += cnt[i - 1];
+    for(int i= 0; i < q.size(); i++) {
+        ans[i] = cnt[q[i][1]] - ((q[i][0] > 0)? cnt[q[i][0] - 1]: 0);
+    }
+    return ans;
 }
 ```
 
-- **Vowel Check**: For each word in the `words` array:
-  - Check if the first character (`words[i][0]`) and the last character (`words[i][words[i].size() - 1]`) are both vowels. This is done using `ch.count()`, which returns `1` if the character is in the set of vowels, and `0` otherwise.
-  - If both the first and last characters are vowels, mark `cnt[i] = 1`, indicating that the word is valid.
-  
-- **Prefix Sum**: After marking the current word as valid, we update the `cnt[i]` to be the cumulative sum of valid words up to index `i`. If `i > 0`, we add `cnt[i - 1]` to the current value of `cnt[i]`. This ensures that `cnt[i]` will hold the count of valid words from index `0` to `i`.
+The function 'vowelStrings' takes a vector of words and a vector of queries. For each word, it checks if it starts and ends with a vowel. It then answers each query by counting how many words between two indices meet the condition of starting and ending with a vowel.
 
-#### Step 3: Answer the Queries
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& q) {
+	```
+	The function 'vowelStrings' is defined to take two parameters: a vector of words and a vector of queries. It returns a vector of integers representing the result of each query.
 
-```cpp
-for(int i= 0; i < q.size(); i++) {
-    ans[i] = cnt[q[i][1]] - ((q[i][0] > 0)? cnt[q[i][0] - 1]: 0);
-}
-```
+2. **Word Count Initialization**
+	```cpp
+	    int n = words.size();
+	```
+	The size of the 'words' vector is stored in 'n', representing the number of words to process.
 
-- **Query Loop**: For each query in the list of queries `q`, which contains pairs `[l, r]`, the number of valid words in the range `[l, r]` can be computed as:
-  - If `l > 0`, the result is `cnt[r] - cnt[l - 1]`.
-  - If `l == 0`, the result is simply `cnt[r]`.
-  
-This uses the prefix sum approach to compute the result in constant time for each query.
+3. **Vector Initialization**
+	```cpp
+	    vector<int> cnt(n, 0), ans(q.size(), 0);
+	```
+	Two vectors are initialized: 'cnt' (to keep track of cumulative counts of words starting and ending with vowels) and 'ans' (to store the result of each query).
 
-#### Step 4: Return the Results
+4. **Vowel Set Initialization**
+	```cpp
+	    set<char> ch = {'a', 'e', 'i', 'o', 'u'};
+	```
+	A set 'ch' is initialized containing the vowels. This set will be used to check if a word starts and ends with a vowel.
 
-```cpp
-return ans;
-```
+5. **Loop Over Words**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop starts that iterates over each word in the 'words' vector.
 
-- Finally, we return the `ans` vector containing the result for each query.
+6. **Check Start and End Vowel**
+	```cpp
+	        if(ch.count(words[i][0]) && ch.count(words[i][words[i].size() -1]))
+	```
+	This condition checks if the first and last characters of the word are vowels by checking if they exist in the 'ch' set.
 
-### Complexity Analysis
+7. **Update Count**
+	```cpp
+	            cnt[i] = 1;
+	```
+	If the word starts and ends with a vowel, the corresponding position in the 'cnt' vector is set to 1.
 
-#### Time Complexity:
+8. **Cumulative Count Update**
+	```cpp
+	        if(i > 0) cnt[i] += cnt[i - 1];
+	```
+	This updates the cumulative count for the current word by adding the previous word's count to the current word's count, ensuring that 'cnt' holds the cumulative number of valid words up to each position.
 
-1. **Preprocessing the Words**:
-   - We iterate over each word in the `words` array and check the first and last characters. This operation takes \(O(n)\), where `n` is the number of words.
-   - Additionally, we perform the cumulative sum operation, which takes \(O(n)\).
-   
-   Therefore, the time complexity for preprocessing is \(O(n)\).
+9. **Loop Over Queries**
+	```cpp
+	    for(int i= 0; i < q.size(); i++) {
+	```
+	A loop starts to process each query in the 'q' vector.
 
-2. **Answering the Queries**:
-   - For each query, we compute the result in constant time, i.e., \(O(1)\).
-   - If there are `m` queries, the total time complexity for answering all queries is \(O(m)\).
-   
-Therefore, the total time complexity is:
-\[
-O(n + m)
-\]
-where `n` is the number of words and `m` is the number of queries.
+10. **Answer Query**
+	```cpp
+	        ans[i] = cnt[q[i][1]] - ((q[i][0] > 0)? cnt[q[i][0] - 1]: 0);
+	```
+	For each query, the function computes the number of valid words between the given range by using the cumulative counts stored in 'cnt'. If the starting index is greater than 0, it subtracts the cumulative count at the previous index.
 
-#### Space Complexity:
+11. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The function returns the 'ans' vector, which contains the results for each query.
 
-- We use a vector `cnt` of size `n` to store the cumulative count of valid words.
-- We use a vector `ans` of size `m` to store the results of the queries.
-- The set `ch` stores 5 characters (the vowels), which is constant space.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + q), where n is the number of words and q is the number of queries.
+- **Average Case:** O(n + q), as we preprocess the array in O(n) time and answer each query in constant time.
+- **Worst Case:** O(n + q), where n is the number of words and q is the number of queries.
 
-Thus, the space complexity is:
-\[
-O(n + m)
-\]
-where `n` is the number of words and `m` is the number of queries.
 
-### Conclusion
 
-This solution efficiently preprocesses the list of words and answers each query in constant time using a prefix sum approach. The time complexity is linear with respect to the number of words and queries, making this solution optimal for large input sizes. By using a set to check for vowels and maintaining a prefix sum array, we avoid unnecessary recomputation and ensure fast query resolution.
+### Space Complexity 💾
+- **Best Case:** O(n), as the space complexity depends on the number of words.
+- **Worst Case:** O(n), where n is the number of words, as we store the prefix sum array.
+
+The space complexity is dominated by the prefix sum array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-vowel-strings-in-ranges/description/)
 

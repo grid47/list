@@ -14,150 +14,191 @@ img_src = ""
 youtube = "IMktz_WlNYo"
 youtube_upload_date="2022-08-21"
 youtube_thumbnail="https://i.ytimg.com/vi/IMktz_WlNYo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `num` consisting only of digits. Your task is to form the largest possible palindromic number by rearranging the digits of `num`. The resulting number should not have leading zeros and must use at least one digit from the string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `num` of length `n` containing only digits.
+- **Example:** `Input: num = '123321'`
+- **Constraints:**
+	- 1 <= num.length <= 10^5
+	- num consists of digits only.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string largestPalindromic(string num) {
-        int cnt[10] = {}, mid = -1;
-        string s;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest palindromic number that can be formed from the digits of `num`. The result should be a string.
+- **Example:** `Output: '321123'`
+- **Constraints:**
 
-        for(char c: num) cnt[c - '0']++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To form the largest possible palindromic number from the digits, rearrange them to maximize the digits in the left half and mirror them on the right side.
 
-        for(int i = 9; i > 0; i--) {
-            if(cnt[i] == 0) continue;
-            s.append(cnt[i]/2, i + '0');
-            if(mid == -1 && (cnt[i]&1))
-                    mid = i;
-        }
+- 1. Count the occurrences of each digit in the string.
+- 2. Build the first half of the palindrome by placing as many pairs of digits as possible in descending order.
+- 3. If there is any digit with an odd count, place it in the center of the palindrome.
+- 4. Mirror the first half to create the full palindrome.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain at least one non-zero digit.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num = '123321'`  \
+  **Explanation:** In this example, we can rearrange the digits to form '321123', which is the largest palindromic number. The digits are arranged so that the first half is mirrored to the second half.
 
-        if(s.size() && cnt[0]) s.append(cnt[0]/2, '0');
-        mid = mid == -1 && (cnt[0] & 1)? 0: mid;
-        if(mid != -1) s.push_back(mid + '0');
-        s.insert(s.end(), s.rbegin() + (mid == -1? 0:1), s.rend());
+- **Input:** `Input: num = '00009'`  \
+  **Explanation:** In this case, the only non-zero digit is '9', so the largest palindromic number we can form is simply '9'.
 
-        return s != ""? s : "0";
+{{< dots >}}
+## Approach 🚀
+The problem can be approached by counting the frequency of each digit in the string and then arranging them to maximize the palindrome. The key steps are forming pairs for the left and right halves of the palindrome and placing any remaining odd digit in the center.
+
+### Initial Thoughts 💭
+- A palindrome must have the same digits in reverse order, so we need to carefully distribute the digits to form a symmetric structure.
+- By focusing on maximizing the left half of the palindrome, we can easily generate the largest possible palindrome.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one digit.
+- The solution should efficiently handle input strings of length up to 100,000.
+- If the input consists only of zeros, the result should be '0'.
+- If there are multiple occurrences of the same digit, they should be grouped together to form the largest palindrome.
+- The solution should not generate palindromes with leading zeros unless the palindrome is '0'.
+{{< dots >}}
+## Code 💻
+```cpp
+string largestPalindromic(string num) {
+    int cnt[10] = {}, mid = -1;
+    string s;
+
+    for(char c: num) cnt[c - '0']++;
+
+    for(int i = 9; i > 0; i--) {
+        if(cnt[i] == 0) continue;
+        s.append(cnt[i]/2, i + '0');
+        if(mid == -1 && (cnt[i]&1))
+                mid = i;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    if(s.size() && cnt[0]) s.append(cnt[0]/2, '0');
+    mid = mid == -1 && (cnt[0] & 1)? 0: mid;
+    if(mid != -1) s.push_back(mid + '0');
+    s.insert(s.end(), s.rbegin() + (mid == -1? 0:1), s.rend());
 
-The problem asks for the largest palindromic number that can be formed from the digits of a given string `num`. A palindromic number reads the same forward and backward, and we must form the largest possible one by rearranging the digits of the input string.
+    return s != ""? s : "0";
+}
+```
 
-**Key Constraints**:
-- The string `num` can contain digits from '0' to '9'.
-- The solution must be the largest palindrome that can be constructed from the digits of `num`.
-- If it's not possible to create any palindrome, return `"0"`.
+This function takes a string of digits and finds the largest possible palindromic number by rearranging the digits, ensuring that it returns a valid palindrome. If no palindrome can be formed, it returns "0".
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string largestPalindromic(string num) {
+	```
+	This line defines the function 'largestPalindromic' which takes a string 'num' representing the number whose largest palindromic arrangement is to be found.
 
-To form the largest palindromic number, we need to use the following strategy:
+2. **Variable Initialization**
+	```cpp
+	    int cnt[10] = {}, mid = -1;
+	```
+	This initializes an array 'cnt' to keep track of the count of each digit (0-9), and 'mid' is used to store the middle digit for the palindrome.
 
-1. **Character Counting**: 
-   - We first count the occurrences of each digit in the input string. This will help us understand how many times we can use each digit in the final palindrome.
+3. **Variable Declaration**
+	```cpp
+	    string s;
+	```
+	A string 's' is declared which will hold the left half of the palindromic number as it's built.
 
-2. **Constructing the Palindrome**:
-   - A palindrome is symmetric, meaning that half of the digits must be the same as the other half.
-   - For digits that appear an even number of times, we can use half of them on the left side and the other half on the right side of the palindrome.
-   - For digits that appear an odd number of times, we can use all but one of them symmetrically. One of the odd digits (if any) can be used in the middle of the palindrome.
+4. **For Loop**
+	```cpp
+	    for(char c: num) cnt[c - '0']++;
+	```
+	This loop iterates over each character in the input string 'num', converting it to an integer, and increments the corresponding count in the 'cnt' array.
 
-3. **Handling Special Cases**:
-   - If no digits can be used to form a palindrome, return `"0"`.
-   - The palindrome should be as large as possible, so we should prioritize placing larger digits first.
+5. **For Loop**
+	```cpp
+	    for(int i = 9; i > 0; i--) {
+	```
+	This loop processes the digits in descending order, starting from 9, to form the largest possible palindrome.
 
-### Code Breakdown (Step by Step)
+6. **Condition Check**
+	```cpp
+	        if(cnt[i] == 0) continue;
+	```
+	If there are no occurrences of the current digit 'i', the loop skips to the next iteration.
 
-1. **Initialize the Count Array**:
-   ```cpp
-   int cnt[10] = {}, mid = -1;
-   string s;
-   ```
-   - We initialize an array `cnt` to store the frequency of each digit from '0' to '9'. The array will have 10 elements, where `cnt[i]` will store how many times the digit `i` appears in the input string.
-   - We also initialize a variable `mid` to store the middle digit of the palindrome (if any). Initially, it is set to -1, meaning there is no middle digit.
+7. **String Append**
+	```cpp
+	        s.append(cnt[i]/2, i + '0');
+	```
+	This appends half the occurrences of digit 'i' to the string 's' to form the left half of the palindrome.
 
-2. **Count the Frequency of Each Digit**:
-   ```cpp
-   for(char c: num) cnt[c - '0']++;
-   ```
-   - For each character `c` in the input string `num`, we increment the corresponding count in the `cnt` array. `c - '0'` converts the character to its corresponding integer value (e.g., '1' becomes 1).
+8. **Mid Digit Assignment**
+	```cpp
+	        if(mid == -1 && (cnt[i]&1))
+	```
+	Checks if 'mid' is unassigned and if the current digit 'i' occurs an odd number of times, setting 'mid' to 'i'.
 
-3. **Form the Left Half of the Palindrome**:
-   ```cpp
-   for(int i = 9; i > 0; i--) {
-       if(cnt[i] == 0) continue;
-       s.append(cnt[i]/2, i + '0');
-       if(mid == -1 && (cnt[i] & 1))
-               mid = i;
-   }
-   ```
-   - We start by iterating through the digits from 9 to 1. This ensures that we form the largest palindrome possible by using the largest digits first.
-   - For each digit `i`, we append `cnt[i] / 2` instances of the digit `i` to the string `s`. This creates the left half of the palindrome.
-   - If `cnt[i]` is odd (i.e., `cnt[i] & 1`), we record the digit `i` as a candidate for the middle of the palindrome. This will only be used if no middle digit has been assigned yet (i.e., `mid == -1`).
+9. **Mid Digit Assignment**
+	```cpp
+	                mid = i;
+	```
+	Sets 'mid' to 'i' as it will be placed in the center of the palindrome if it's the only odd occurrence.
 
-4. **Handle the Middle Digit**:
-   ```cpp
-   if(s.size() && cnt[0]) s.append(cnt[0]/2, '0');
-   mid = mid == -1 && (cnt[0] & 1)? 0: mid;
-   ```
-   - After forming the left half of the palindrome, we check if the string `s` is non-empty and if there are any '0's in the input (`cnt[0] > 0`). If so, we append half of the zeros to the left half of the palindrome.
-   - We update the `mid` variable to `0` if no middle digit has been assigned yet, and there is an odd count of '0's.
+10. **Condition Check**
+	```cpp
+	    if(s.size() && cnt[0]) s.append(cnt[0]/2, '0');
+	```
+	If 's' has any digits and the digit '0' occurs, it appends half of the occurrences of '0' to 's'.
 
-5. **Create the Full Palindrome**:
-   ```cpp
-   if(mid != -1) s.push_back(mid + '0');
-   s.insert(s.end(), s.rbegin() + (mid == -1? 0:1), s.rend());
-   ```
-   - If a middle digit (`mid`) is found, we append it to the string `s`.
-   - To complete the palindrome, we append the reverse of the left half of the string `s` (excluding the middle digit if present). This ensures that the string reads the same forward and backward.
+11. **Mid Digit Adjustment**
+	```cpp
+	    mid = mid == -1 && (cnt[0] & 1)? 0: mid;
+	```
+	If 'mid' was not assigned, it checks if '0' has an odd count, assigning '0' as 'mid' if necessary.
 
-6. **Return the Result**:
-   ```cpp
-   return s != ""? s : "0";
-   ```
-   - Finally, we check if the string `s` is non-empty. If it is, we return the palindrome. If the string is empty (i.e., no palindrome could be formed), we return `"0"`.
+12. **Mid Digit Check**
+	```cpp
+	    if(mid != -1) s.push_back(mid + '0');
+	```
+	If 'mid' is assigned, it appends the 'mid' digit to the center of the string.
 
-### Example Walkthrough
+13. **String Reverse**
+	```cpp
+	    s.insert(s.end(), s.rbegin() + (mid == -1? 0:1), s.rend());
+	```
+	This inserts the reverse of the left half of the string 's' to form the right half of the palindrome.
 
-Let’s walk through an example to better understand how the algorithm works:
+14. **Return Statement**
+	```cpp
+	    return s != ""? s : "0";
+	```
+	Returns the constructed palindromic string, or '0' if the string is empty (meaning no palindrome could be formed).
 
-#### Input: `"444947137"`
-1. Count the digits: `cnt = [0, 0, 0, 0, 3, 0, 0, 1, 1, 1]`.
-2. Iterate over the digits from 9 to 1:
-   - For `i = 9`, `cnt[9] = 1` (odd count). We choose 9 as the middle digit: `mid = 9`.
-   - For `i = 8`, `cnt[8] = 1` (odd count). We choose 8 as part of the palindrome and append half (i.e., 1): `s = "8"`.
-   - For `i = 7`, `cnt[7] = 1` (odd count). We choose 7: `s = "87"`.
-   - For `i = 4`, `cnt[4] = 3`. We append half (i.e., 1) of 4 to `s`: `s = "874"`, then append 4 again (since `cnt[4]` is odd): `s = "8744"`.
-3. Append the reverse of `s` (excluding the middle digit if present): `s = "87449"`.
-4. Return `"87449"` as the largest palindrome.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Input: `"1111"`
-1. Count the digits: `cnt = [0, 4]`.
-2. For `i = 1`, `cnt[1] = 4`. We append 2 ones to `s`: `s = "11"`.
-3. Append the reverse of `s` (excluding the middle digit): `s = "1111"`.
-4. Return `"1111"`.
+The time complexity is linear in relation to the length of the input string, as we process each digit only once.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-1. **Time Complexity**:
-   - The algorithm performs two main operations: counting the digits and constructing the palindrome.
-   - Counting the digits takes **O(n)** time, where `n` is the length of the input string `num`.
-   - Constructing the palindrome involves iterating over the digit counts (a constant amount of operations for each digit), so the time complexity is **O(1)** for the loop over digits.
-   - The total time complexity is therefore **O(n)**.
+The space complexity is constant, as we only need a small fixed amount of extra space to store the digit counts and the palindrome.
 
-2. **Space Complexity**:
-   - The space complexity is **O(1)**, as we only use a fixed amount of extra space for the digit count array and a few integer variables. The space used does not depend on the size of the input string.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution efficiently constructs the largest palindromic number that can be formed from the digits of a given string. It leverages character counting, prioritizes larger digits to form the largest palindrome, and handles special cases like middle digits and zeros. The solution runs in linear time, making it optimal for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-palindromic-number/description/)
 

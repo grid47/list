@@ -14,120 +14,191 @@ img_src = ""
 youtube = "X4wzXCe1wvs"
 youtube_upload_date="2023-01-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/X4wzXCe1wvs/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `nums` and an integer `k`, return the number of "good" subarrays. A subarray is good if it contains at least `k` pairs of indices `(i, j)` such that `i < j` and `nums[i] == nums[j]`. A subarray is a contiguous non-empty sequence of elements within the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and an integer `k`. The task is to count how many subarrays satisfy the good subarray condition.
+- **Example:** `nums = [5, 2, 7, 5, 3, 3, 7], k = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i], k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long countGood(vector<int>& nums, int k) {
-        long long res = 0, tmp = 0;
-        
-        int n = nums.size();
-        
-        map<int, int> mp, cnt;
-        
-        int j = 0;
-        for(int i = 0; i < n; i++) {
-            tmp += (cnt[nums[i]]);
-            cnt[nums[i]]++;            
-            while(j <= i && tmp >= k) {
-                res+= (n - i);
-                cnt[nums[j]]--;
-                tmp -= cnt[nums[j]];
-                j++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the number of good subarrays that meet the condition of containing at least `k` pairs of equal elements.
+- **Example:** `4`
+- **Constraints:**
+	- The result should be an integer indicating the number of good subarrays.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Efficiently count the number of good subarrays by checking the number of valid pairs for each subarray.
+
+- Iterate through the array and for each subarray, count how many pairs of equal elements exist.
+- Use a map to track the frequency of each element, then calculate how many pairs can be formed from these frequencies.
+- Count the number of subarrays that have at least `k` pairs.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array `nums` is always valid and non-empty.
+- The value of `k` is always a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[5, 2, 7, 5, 3, 3, 7], k = 2`  \
+  **Explanation:** In this example, there are 4 different subarrays that contain at least 2 pairs of equal elements.
+
+- **Input:** `[2, 2, 2, 2, 2], k = 10`  \
+  **Explanation:** In this example, the only good subarray is the entire array itself, which has exactly 10 pairs.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the number of pairs of equal elements in each subarray and checking if it meets the threshold `k`.
+
+### Initial Thoughts 💭
+- The number of good subarrays depends on the number of pairs formed by equal elements.
+- By tracking the frequency of each element as we iterate through the array, we can count the pairs efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least one element.
+- Ensure the algorithm can handle arrays with up to 10^5 elements efficiently.
+- Handle cases where `k` is large relative to the number of elements in the array.
+- The solution should avoid brute force techniques, as they would be inefficient for large arrays.
+{{< dots >}}
+## Code 💻
+```cpp
+long long countGood(vector<int>& nums, int k) {
+    long long res = 0, tmp = 0;
+    
+    int n = nums.size();
+    
+    map<int, int> mp, cnt;
+    
+    int j = 0;
+    for(int i = 0; i < n; i++) {
+        tmp += (cnt[nums[i]]);
+        cnt[nums[i]]++;            
+        while(j <= i && tmp >= k) {
+            res+= (n - i);
+            cnt[nums[j]]--;
+            tmp -= cnt[nums[j]];
+            j++;
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is asking us to count the number of subarrays from a given array `nums` where the number of pairs `(nums[i], nums[j])` where `i < j` and `nums[i] == nums[j]` is at least `k`. The challenge is to compute this count efficiently given the constraints.
-
-### Approach
-
-To solve this problem efficiently, we can utilize a **sliding window technique** combined with **hash maps (or dictionaries)** to track the frequencies of elements within the current window. This allows us to efficiently calculate how many valid subarrays exist where the count of pairs `(nums[i], nums[j])` (i.e., duplicate numbers) is at least `k`.
-
-#### Key Observations:
-1. For each element in the array, we maintain a sliding window defined by indices `i` and `j`. The window expands by incrementing `i` (the right side of the window) and contracts by incrementing `j` (the left side of the window).
-2. The variable `tmp` will store the number of duplicate pairs that exist in the current window. Specifically, `tmp` keeps track of the total number of pairs formed by duplicate numbers in the window.
-3. Whenever the number of pairs `tmp` is greater than or equal to `k`, we calculate how many valid subarrays exist in the current window and add this count to the result.
-4. The sliding window is adjusted by moving `j` to the right to reduce the number of pairs whenever `tmp >= k`.
-
-#### Algorithm:
-1. **Sliding Window**: Start with an empty window. Expand the window by iterating over `i` (right boundary). For each `i`, add the element `nums[i]` to the frequency map `cnt` and update the number of pairs `tmp`.
-2. **Tracking Pairs**: The number of duplicate pairs increases as you encounter duplicate elements in the window. For each duplicate number `x`, the number of pairs contributed by this number is incremented by `cnt[x]`.
-3. **Counting Valid Subarrays**: If `tmp` exceeds or equals `k`, then all subarrays starting from `j` to `i` are valid. The number of such subarrays is `(n - i)`, where `n` is the size of the array.
-4. **Shrinking the Window**: After counting valid subarrays, increment `j` to reduce the window size and keep the number of pairs `tmp` below `k`.
-
-This method allows us to efficiently compute the result without explicitly checking all subarrays.
-
-### Code Breakdown
-
-#### Step 1: Initialize Variables
-```cpp
-long long res = 0, tmp = 0;
-int n = nums.size();
-map<int, int> mp, cnt;
-int j = 0;
-```
-- `res`: Stores the final result, i.e., the number of valid subarrays.
-- `tmp`: Tracks the number of pairs `(nums[i], nums[j])` that satisfy `i < j` and `nums[i] == nums[j]`.
-- `mp`: A frequency map (though not used in the code, it might be kept for debugging or future use).
-- `cnt`: Another frequency map that tracks how many times each number appears in the current window.
-- `j`: The left boundary of the sliding window.
-
-#### Step 2: Iterating Over the Array
-```cpp
-for(int i = 0; i < n; i++) {
-    tmp += (cnt[nums[i]]);
-    cnt[nums[i]]++;            
-```
-- Loop over each element `nums[i]`.
-- For each element, update `tmp` by adding the number of pairs formed by `nums[i]`. This is the value `cnt[nums[i]]` because if `nums[i]` appears `m` times in the window, the number of pairs formed is `m`.
-- Increment the frequency of `nums[i]` in `cnt`.
-
-#### Step 3: Shrinking the Window
-```cpp
-while(j <= i && tmp >= k) {
-    res+= (n - i);
-    cnt[nums[j]]--;
-    tmp -= cnt[nums[j]];
-    j++;
+    return res;
 }
 ```
-- If the number of pairs `tmp` is greater than or equal to `k`, calculate the number of valid subarrays. All subarrays starting from `j` to `i` are valid, and the count of these subarrays is `(n - i)`.
-- After counting valid subarrays, decrement the count of `nums[j]` from `cnt` and adjust `tmp` accordingly by subtracting the number of pairs that `nums[j]` contributed.
-- Increment `j` to shrink the window and try to reduce `tmp`.
 
-#### Step 4: Return the Result
-```cpp
-return res;
-```
-- After iterating through all elements and processing all subarrays, return the final count stored in `res`.
+The function 'countGood' counts the number of subarrays with a certain property based on the input array and an integer k. It uses a sliding window approach to count good subarrays where the frequency condition is satisfied.
 
-### Time and Space Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long countGood(vector<int>& nums, int k) {
+	```
+	The function 'countGood' is defined, which takes a vector of integers 'nums' and an integer 'k' as input and returns a long long result.
 
-#### Time Complexity:
-1. **Iterating Over the Array**: The outer loop runs over all elements in `nums`, i.e., `O(n)`, where `n` is the size of the array.
-2. **Sliding Window Adjustment**: The inner `while` loop is only executed when `tmp >= k`, but each element is added to and removed from `cnt` at most once. Thus, the total number of operations in the inner loop is `O(n)` as well.
-3. **Overall Time Complexity**: The time complexity is `O(n)` due to the two-pointer approach and efficient frequency map updates.
+2. **Variable Initialization**
+	```cpp
+	    long long res = 0, tmp = 0;
+	```
+	Two variables 'res' and 'tmp' are initialized to 0. 'res' will store the count of good subarrays, and 'tmp' tracks the frequency condition within the sliding window.
 
-#### Space Complexity:
-1. **Frequency Maps**: The space complexity is dominated by the `cnt` map, which stores the frequency of each number in the current window. In the worst case, there are `O(n)` unique elements, so the space complexity is `O(n)`.
-2. **Overall Space Complexity**: The space complexity is `O(n)` due to the frequency map.
+3. **Array Size**
+	```cpp
+	    int n = nums.size();
+	```
+	The variable 'n' is set to the size of the input array 'nums'.
 
-### Conclusion
+4. **Map Initialization**
+	```cpp
+	    map<int, int> mp, cnt;
+	```
+	Two maps, 'mp' and 'cnt', are initialized. 'mp' will be used for storing elements of the array (though it's not used in this code), and 'cnt' will track the frequency of elements within the sliding window.
 
-This solution effectively uses the sliding window technique and frequency maps to solve the problem efficiently. By leveraging the sliding window approach, we avoid the need to examine all subarrays explicitly, which would be inefficient for larger arrays. Instead, we dynamically adjust the window size and count valid subarrays as we go, leading to an optimal time complexity of `O(n)`. This approach is both time-efficient and space-efficient, making it suitable for larger inputs within the problem's constraints.
+5. **Pointer Initialization**
+	```cpp
+	    int j = 0;
+	```
+	The pointer 'j' is initialized to 0. It represents the left boundary of the sliding window.
+
+6. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	An outer loop starts from 'i = 0' to 'i < n', iterating over each element of the 'nums' array.
+
+7. **Frequency Update**
+	```cpp
+	        tmp += (cnt[nums[i]]);
+	```
+	The variable 'tmp' is updated by adding the current frequency of 'nums[i]' from the 'cnt' map. This tracks the frequency condition within the window.
+
+8. **Count Update**
+	```cpp
+	        cnt[nums[i]]++;            
+	```
+	The frequency count of the current element 'nums[i]' is incremented in the 'cnt' map.
+
+9. **Inner Loop Condition**
+	```cpp
+	        while(j <= i && tmp >= k) {
+	```
+	A while loop is initiated as long as the frequency condition 'tmp >= k' holds, and the left pointer 'j' is less than or equal to the right pointer 'i'.
+
+10. **Result Update**
+	```cpp
+	            res += (n - i);
+	```
+	The result variable 'res' is updated by adding the count of valid subarrays from 'i' to the end of the array. This is part of the sliding window approach.
+
+11. **Count Decrease**
+	```cpp
+	            cnt[nums[j]]--;
+	```
+	The frequency of the element 'nums[j]' at the left boundary of the sliding window is decreased in the 'cnt' map.
+
+12. **Frequency Decrease**
+	```cpp
+	            tmp -= cnt[nums[j]];
+	```
+	The variable 'tmp' is updated by subtracting the updated frequency of 'nums[j]', reflecting the change in the window's frequency condition.
+
+13. **Pointer Increment**
+	```cpp
+	            j++;
+	```
+	The left boundary pointer 'j' is incremented to shrink the window.
+
+14. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the final result 'res', which is the count of all valid subarrays that meet the frequency condition.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) due to a single pass through the array and efficient use of a map to track frequencies.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the frequencies of elements in a map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-good-subarrays/description/)
 

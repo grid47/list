@@ -14,122 +14,125 @@ img_src = ""
 youtube = "McbkGprY2C4"
 youtube_upload_date="2022-02-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/McbkGprY2C4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer `num`, return the number of positive integers less than or equal to `num` whose digit sum is even.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer `num`.
+- **Example:** `7`
+- **Constraints:**
+	- 1 <= num <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countEven(int num) {
-        int temp = num, sum = 0;
-        while (num > 0) {
-            sum += num % 10;
-            num /= 10;
-        }
-        return sum % 2 == 0 ? temp / 2 : (temp - 1) / 2;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the number of positive integers less than or equal to `num` whose digit sum is even.
+- **Example:** `3`
+- **Constraints:**
+	- The digit sum is calculated by summing all the digits of a number.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count how many numbers from 1 to `num` have an even digit sum.
+
+- For each number from 1 to `num`, calculate the sum of its digits.
+- If the sum of the digits is even, increment the count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number `num` is positive and within the given range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `7`  \
+  **Explanation:** The integers less than or equal to 7 whose digit sum is even are 2, 4, and 6.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves checking the digit sum of each integer from 1 to `num` and counting how many have an even digit sum.
+
+### Initial Thoughts 💭
+- We can easily calculate the sum of digits by iterating over the digits of a number.
+- Since we are iterating over the numbers up to `num`, the time complexity will be proportional to the size of `num`.
+{{< dots >}}
+### Edge Cases 🌐
+- If `num` is 1, the result is 0 since there are no numbers with even digit sums less than 1.
+- For large values of `num`, the solution should handle them efficiently within the given constraints.
+- The edge case where `num` is the smallest value, 1, should be handled separately.
+- Ensure the solution works efficiently for `num` values up to 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+int countEven(int num) {
+    int temp = num, sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to count the number of even integers from 1 to a given integer `num` based on the sum of its digits. Specifically:
-- The function needs to evaluate if the sum of the digits of a given number `num` is even.
-- If the sum of the digits is even, return half of the original number (`num / 2`).
-- If the sum of the digits is odd, return half of the number minus one (`(num - 1) / 2`).
-
-### Approach
-
-The approach to solving this problem is relatively simple and involves iterating through the digits of the given number `num`. The solution is based on these steps:
-1. First, we compute the sum of the digits of `num`.
-2. We check whether the sum of the digits is even or odd.
-3. If the sum is even, we return `num / 2` (integer division).
-4. If the sum is odd, we return `(num - 1) / 2`.
-
-### Code Breakdown (Step by Step)
-
-Let's walk through the code in detail:
-
-```cpp
-class Solution {
-public:
-    int countEven(int num) {
-        int temp = num, sum = 0;
+    return sum % 2 == 0 ? temp / 2 : (temp - 1) / 2;
+}
 ```
-- The function `countEven` is defined to take an integer `num` as input and return an integer result.
-- The `temp` variable is used to store the original number (`num`) because we may modify `num` in the process of calculating the sum of its digits. `sum` is initialized to 0 and will be used to store the sum of the digits of `num`.
 
-```cpp
-        while (num > 0) {
-            sum += num % 10;
-            num /= 10;
-        }
-```
-- This is a `while` loop that iterates through each digit of `num`:
-  - `num % 10` gives the last digit of `num`. We add this to `sum`.
-  - `num /= 10` removes the last digit from `num` by performing integer division by 10.
-- This process continues until `num` becomes zero, meaning all digits have been processed and added to `sum`.
+This function, `countEven`, calculates the sum of the digits of a given number `num` and checks if the sum is even. Based on this condition, it returns either `temp / 2` or `(temp - 1) / 2`.
 
-```cpp
-        return sum % 2 == 0 ? temp / 2 : (temp - 1) / 2;
-    }
-};
-```
-- Once the sum of the digits has been calculated, we check if the sum is even or odd:
-  - `sum % 2 == 0` checks if the sum of the digits is even.
-  - If the sum is even, we return `temp / 2`, which is the original number divided by 2.
-  - If the sum is odd, we return `(temp - 1) / 2`, which is the number minus 1, then divided by 2.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countEven(int num) {
+	```
+	Define the function `countEven` that takes an integer `num` and returns an integer result based on the sum of the digits.
 
-This concise and efficient approach ensures that we compute the result based on the sum of digits and return the correct result as per the problem's requirements.
+2. **Variable Initialization**
+	```cpp
+	    int temp = num, sum = 0;
+	```
+	Initialize two variables: `temp` stores the original value of `num`, and `sum` accumulates the sum of the digits of `num`.
 
-### Example Walkthrough
+3. **Loop**
+	```cpp
+	    while (num > 0) {
+	```
+	Start a while loop that continues until `num` becomes 0.
 
-Let’s walk through some examples to understand the behavior of the code:
+4. **Sum Calculation**
+	```cpp
+	        sum += num % 10;
+	```
+	Add the last digit of `num` (obtained using `num % 10`) to `sum`.
 
-#### Example 1: `num = 30`
+5. **Update Number**
+	```cpp
+	        num /= 10;
+	```
+	Remove the last digit from `num` by dividing it by 10.
 
-- **Step 1**: Calculate the sum of digits.
-  - `3 + 0 = 3` (sum of digits is odd).
-  
-- **Step 2**: Since the sum is odd, the code returns `(num - 1) / 2 = (30 - 1) / 2 = 29 / 2 = 14`.
+6. **Return Statement**
+	```cpp
+	    return sum % 2 == 0 ? temp / 2 : (temp - 1) / 2;
+	```
+	Check if the sum of digits (`sum`) is even. If true, return `temp / 2`; otherwise, return `(temp - 1) / 2`.
 
-Thus, the output for `num = 30` will be `14`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Example 2: `num = 22`
+The time complexity is linear in terms of the input size (`num`).
 
-- **Step 1**: Calculate the sum of digits.
-  - `2 + 2 = 4` (sum of digits is even).
-  
-- **Step 2**: Since the sum is even, the code returns `num / 2 = 22 / 2 = 11`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-Thus, the output for `num = 22` will be `11`.
+The space complexity is constant since the solution only requires a fixed amount of extra space.
 
-#### Example 3: `num = 15`
+**Happy Coding! 🎉**
 
-- **Step 1**: Calculate the sum of digits.
-  - `1 + 5 = 6` (sum of digits is even).
-  
-- **Step 2**: Since the sum is even, the code returns `num / 2 = 15 / 2 = 7`.
-
-Thus, the output for `num = 15` will be `7`.
-
-### Time Complexity
-
-- **Time Complexity**: The time complexity is **O(d)**, where `d` is the number of digits in `num`. This is because we are iterating through each digit of `num` once to calculate the sum of the digits.
-  - In the worst case, if `num` is a very large number, the number of digits is proportional to `log(num)`, so the time complexity can be considered **O(log(num))**.
-
-- **Space Complexity**: The space complexity is **O(1)**. We only use a constant amount of space to store intermediate values like `sum`, `temp`, and the current `num` while computing the sum of digits.
-
-### Conclusion
-
-This solution is efficient and works well for solving the problem of determining how many even numbers there are from `1` to `num` based on the sum of the digits of `num`. By using basic integer arithmetic and modular operations, we can efficiently compute the result in **O(d)** time complexity, where `d` is the number of digits in `num`. The space complexity is minimal, with constant space used for intermediate variables.
-
-This approach is simple yet effective, offering a clear understanding of how the sum of digits affects the final output. By following the modular arithmetic and checking if the sum is even or odd, the solution efficiently determines the correct result in all cases.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-integers-with-even-digit-sum/description/)
 

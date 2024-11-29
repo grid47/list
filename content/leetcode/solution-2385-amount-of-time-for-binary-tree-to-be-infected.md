@@ -14,209 +14,316 @@ img_src = ""
 youtube = "3lcaz9lw448"
 youtube_upload_date="2022-08-21"
 youtube_thumbnail="https://i.ytimg.com/vi/3lcaz9lw448/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary tree where each node has a unique value, and an integer start representing the initial infected node. At minute 0, the infection begins at the node with value start. Each minute, an adjacent uninfected node becomes infected. Your task is to return the total number of minutes it takes for the entire tree to become infected.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by the root node and an integer start.
+- **Example:** `Input: root = [1,5,3,null,4,10,6,9,2], start = 3`
+- **Constraints:**
+	- 1 <= The number of nodes in the tree <= 10^5
+	- 1 <= Node.val <= 10^5
+	- Each node has a unique value.
+	- A node with the value 'start' exists in the tree.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of minutes it will take for the entire tree to be infected.
+- **Example:** `Output: 4`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the time required for the entire tree to be infected by spreading the infection level by level.
+
+- 1. Convert the binary tree into an undirected graph where each node is connected to its adjacent nodes.
+- 2. Perform a breadth-first search (BFS) starting from the infected node (start).
+- 3. For each level of BFS, increment the time (minute).
+- 4. Continue the process until all nodes are infected.
+{{< dots >}}
+### Problem Assumptions ✅
+- The infection spreads to adjacent nodes every minute, and no node is re-infected.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1,5,3,null,4,10,6,9,2], start = 3`  \
+  **Explanation:** At minute 0, the infection starts at node 3. At each subsequent minute, neighboring nodes become infected. It takes 4 minutes for all nodes to be infected, hence the output is 4.
+
+- **Input:** `Input: root = [1], start = 1`  \
+  **Explanation:** In this case, there is only one node in the tree, and it's infected at minute 0, so no time is needed for the entire tree to be infected. The output is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves transforming the binary tree into a graph structure and then using BFS to simulate the infection spread.
+
+### Initial Thoughts 💭
+- We can represent the tree as a graph where each node is connected to its neighbors.
+- Breadth-first search (BFS) is a natural choice to simulate the spreading of the infection level by level.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree contains only one node, the answer should be 0 because no infection time is needed.
+- For large trees with 10^5 nodes, ensure that the solution can handle the upper limit efficiently.
+- Handle the case where the start node is the root or a leaf node.
+- Ensure the BFS algorithm is optimized for large input sizes to fit within time limits.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    unordered_map<int, vector<int>> mp;
+unordered_map<int, vector<int>> mp;
 public:
-    int amountOfTime(TreeNode* root, int start) {
-        graph(root);
+int amountOfTime(TreeNode* root, int start) {
+    graph(root);
 
-        queue<int> q;
-        q.push(start);
-        unordered_map<int, bool> seen;
-        seen[start] = true;
-        int timer = 0;
-        for(; q.size(); timer++) {
-            int n = q.size();
-            while(n--) {
-                auto node = q.front();
-                q.pop();
-                for(int i: mp[node]) {
-                    if(!seen[i]) {
-                        seen[i] = true;
-                        q.push(i);
-                    }
-                }
-            }
-        }
-        
-        return timer-1;
-    }
-
-    void graph(TreeNode* root) {
-        queue<pair<TreeNode*, int>> q;
-        q.push({root, -1});
-        while(!q.empty()) {
-            auto [node, parent] = q.front();
+    queue<int> q;
+    q.push(start);
+    unordered_map<int, bool> seen;
+    seen[start] = true;
+    int timer = 0;
+    for(; q.size(); timer++) {
+        int n = q.size();
+        while(n--) {
+            auto node = q.front();
             q.pop();
-            if(parent != -1) {
-                mp[parent].push_back(node->val);
-                mp[node->val].push_back(parent);
+            for(int i: mp[node]) {
+                if(!seen[i]) {
+                    seen[i] = true;
+                    q.push(i);
+                }
             }
-            if(node->left) q.push({node->left, node->val});
-            if(node->right) q.push({node->right, node->val});
         }
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to determine how long it takes for an entire binary tree to be infected, starting from a specific node. The tree nodes represent individuals, and once an individual is infected, it can spread the infection to its neighboring individuals (nodes). We are given a binary tree where each node has a value, and the infection spreads from a starting node to its neighboring nodes in the tree.
-
-You are tasked with returning the amount of time (in terms of number of rounds or steps) it takes for the infection to spread to the entire tree. The infection spreads through the tree such that at each step, all neighboring nodes of infected nodes become infected.
-
-### Approach
-
-To solve this problem, we can transform the binary tree into an **undirected graph** and use a **Breadth-First Search (BFS)** traversal to model the infection spreading process. Here's the step-by-step breakdown of the approach:
-
-1. **Transform the Tree to a Graph**:
-   - A binary tree is inherently a tree structure, but to efficiently traverse and simulate the infection spreading process, we will first represent the tree as an undirected graph. Each node in the binary tree will be connected to its neighbors (both its left and right children) in this graph.
-   - We'll create an adjacency list to store the tree in graph form. This will allow easy access to a node's neighbors during BFS traversal.
-
-2. **Breadth-First Search (BFS)**:
-   - Starting from the given node, we use BFS to simulate the infection spreading. At each level of BFS, the infection spreads to all the neighboring nodes that have not been infected already.
-   - We maintain a queue that tracks the nodes to be processed. As we process each node, we add its unvisited neighbors to the queue for the next round.
-
-3. **Track the Number of Rounds**:
-   - As we perform the BFS, we keep track of how many rounds it takes for the infection to reach all nodes in the tree. The result will be the number of rounds minus one (because we start counting from the initial infection).
-
-### Code Breakdown (Step by Step)
-
-1. **TreeNode Definition**:
-    ```cpp
-    struct TreeNode {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    };
-    ```
-    - The `TreeNode` struct represents a node in the binary tree, with `val` as its value, and `left` and `right` pointers representing the left and right children.
-
-2. **Main Solution Class**:
-    ```cpp
-    class Solution {
-        unordered_map<int, vector<int>> mp;
-    public:
-        int amountOfTime(TreeNode* root, int start) {
-            graph(root);
     
-            queue<int> q;
-            q.push(start);
-            unordered_map<int, bool> seen;
-            seen[start] = true;
-            int timer = 0;
-            for(; q.size(); timer++) {
-                int n = q.size();
-                while(n--) {
-                    auto node = q.front();
-                    q.pop();
-                    for(int i: mp[node]) {
-                        if(!seen[i]) {
-                            seen[i] = true;
-                            q.push(i);
-                        }
-                    }
-                }
-            }
-            
-            return timer-1;
+    return timer-1;
+}
+
+void graph(TreeNode* root) {
+    queue<pair<TreeNode*, int>> q;
+    q.push({root, -1});
+    while(!q.empty()) {
+        auto [node, parent] = q.front();
+        q.pop();
+        if(parent != -1) {
+            mp[parent].push_back(node->val);
+            mp[node->val].push_back(parent);
         }
-    ```
-    - **graph(root)**: This function is used to convert the binary tree into an undirected graph.
-    - **amountOfTime(root, start)**: This function is the main BFS loop that simulates the infection process and calculates the number of rounds it takes for the infection to spread throughout the tree.
-    
-    The key variables in the method are:
-    - `q`: The queue stores the nodes that need to be processed during each round of infection.
-    - `seen`: This map tracks whether a node has already been infected or visited.
-    - `timer`: This variable tracks how many rounds it takes for the infection to spread to all nodes.
-    
-3. **Graph Construction**:
-    ```cpp
-        void graph(TreeNode* root) {
-            queue<pair<TreeNode*, int>> q;
-            q.push({root, -1});
-            while(!q.empty()) {
-                auto [node, parent] = q.front();
-                q.pop();
-                if(parent != -1) {
-                    mp[parent].push_back(node->val);
-                    mp[node->val].push_back(parent);
-                }
-                if(node->left) q.push({node->left, node->val});
-                if(node->right) q.push({node->right, node->val});
-            }
-        }
-    ```
-    - **graph(root)** converts the binary tree into an adjacency list representation of an undirected graph.
-    - It uses a **queue** to perform a level-order traversal of the tree, where each node is processed along with its parent node.
-    - For each node, it adds an edge between the node and its parent to the adjacency list. If the node has left or right children, they are added to the queue for further processing.
-    - The result is an adjacency list (`mp`) where each key is a node value, and the corresponding value is a vector of neighboring node values.
+        if(node->left) q.push({node->left, node->val});
+        if(node->right) q.push({node->right, node->val});
+    }
+}
+```
 
-4. **BFS Traversal**:
-    ```cpp
-            queue<int> q;
-            q.push(start);
-            unordered_map<int, bool> seen;
-            seen[start] = true;
-            int timer = 0;
-            for(; q.size(); timer++) {
-                int n = q.size();
-                while(n--) {
-                    auto node = q.front();
-                    q.pop();
-                    for(int i: mp[node]) {
-                        if(!seen[i]) {
-                            seen[i] = true;
-                            q.push(i);
-                        }
-                    }
-                }
-            }
-    ```
-    - The BFS starts with the `start` node, marking it as visited (`seen[start] = true`).
-    - At each level (round), the algorithm processes all nodes in the queue. For each node, it checks all its neighbors in the graph. If a neighbor has not been visited, it is added to the queue for processing in the next round.
-    - The variable `timer` increments after processing each round, and once all nodes are processed, the function returns `timer - 1`, which gives the number of rounds it took for the infection to spread completely.
+This is a C++ implementation of a function to calculate the time needed to inform all nodes in a binary tree starting from a specific node, using breadth-first search (BFS) and constructing a graph representation of the tree.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	The class `Solution` defines the main structure that contains the method `amountOfTime` and helper method `graph`.
 
-1. **Time Complexity**:
-    - Constructing the graph takes **O(n)** time, where `n` is the number of nodes in the binary tree.
-    - BFS traversal also takes **O(n)** time, as each node is processed exactly once, and we check all its neighbors (which, in the worst case, is constant since each node has at most two neighbors).
-    
-    Thus, the total time complexity is **O(n)**, where `n` is the number of nodes in the tree.
+2. **Data Structure**
+	```cpp
+	unordered_map<int, vector<int>> mp;
+	```
+	This unordered map `mp` maps each node in the binary tree to a list of its connected nodes, essentially representing the graph.
 
-2. **Space Complexity**:
-    - The adjacency list (`mp`) requires **O(n)** space to store the graph representation.
-    - The `seen` map and the queue used in BFS also require **O(n)** space.
-    
-    Therefore, the space complexity is **O(n)**.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	The access modifier `public:` allows access to the methods `amountOfTime` and `graph` outside the class.
 
-### Conclusion
+4. **Function Declaration**
+	```cpp
+	int amountOfTime(TreeNode* root, int start) {
+	```
+	This function calculates the amount of time needed to inform all nodes in the tree, starting from the `start` node.
 
-The problem is efficiently solved using the **Breadth-First Search (BFS)** algorithm. By first converting the binary tree into an undirected graph and using BFS to simulate the infection process, we can calculate the number of rounds it takes for the infection to spread to the entire tree. The solution has optimal time and space complexity of **O(n)**, making it suitable for large trees. The BFS approach is well-suited to simulate this type of process, where the infection spreads level by level through the tree's nodes.
+5. **Graph Construction**
+	```cpp
+	    graph(root);
+	```
+	The `graph` method is called to build the graph representation of the tree.
+
+6. **Queue Initialization**
+	```cpp
+	    queue<int> q;
+	```
+	A queue `q` is initialized to store the nodes to be processed in breadth-first search.
+
+7. **Queue Operation**
+	```cpp
+	    q.push(start);
+	```
+	The starting node is pushed to the queue to begin the BFS.
+
+8. **Map Initialization**
+	```cpp
+	    unordered_map<int, bool> seen;
+	```
+	An unordered map `seen` keeps track of the nodes that have already been visited.
+
+9. **Mark Start Node**
+	```cpp
+	    seen[start] = true;
+	```
+	The start node is marked as visited.
+
+10. **Timer Initialization**
+	```cpp
+	    int timer = 0;
+	```
+	A timer variable is initialized to count the levels (or time) taken in the BFS.
+
+11. **BFS Loop**
+	```cpp
+	    for(; q.size(); timer++) {
+	```
+	The BFS loop continues as long as there are nodes in the queue. The timer increments with each level of BFS.
+
+12. **Queue Size**
+	```cpp
+	        int n = q.size();
+	```
+	The size of the queue is recorded to determine how many nodes are at the current level.
+
+13. **Processing Nodes**
+	```cpp
+	        while(n--) {
+	```
+	A while loop processes all nodes at the current level.
+
+14. **Node Processing**
+	```cpp
+	            auto node = q.front();
+	```
+	The first node in the queue is dequeued and processed.
+
+15. **Queue Operation**
+	```cpp
+	            q.pop();
+	```
+	The dequeued node is removed from the queue.
+
+16. **Neighbor Exploration**
+	```cpp
+	            for(int i: mp[node]) {
+	```
+	For each neighbor of the current node, check if it has been visited.
+
+17. **Neighbor Check**
+	```cpp
+	                if(!seen[i]) {
+	```
+	If the neighbor node has not been visited, mark it as visited.
+
+18. **Mark Neighbor**
+	```cpp
+	                    seen[i] = true;
+	```
+	Mark the neighbor node as visited.
+
+19. **Queue Operation**
+	```cpp
+	                    q.push(i);
+	```
+	Push the neighbor node to the queue for future processing.
+
+20. **Return Statement**
+	```cpp
+	    return timer-1;
+	```
+	Return the time taken (number of levels in the BFS minus one).
+
+21. **Graph Construction Function**
+	```cpp
+	void graph(TreeNode* root) {
+	```
+	This function builds the graph representation of the binary tree by traversing it and storing parent-child relationships.
+
+22. **Queue Initialization**
+	```cpp
+	    queue<pair<TreeNode*, int>> q;
+	```
+	Initialize a queue to store pairs of nodes and their respective parent nodes.
+
+23. **Queue Operation**
+	```cpp
+	    q.push({root, -1});
+	```
+	Push the root node and its parent (which is `-1` indicating no parent) to the queue.
+
+24. **While Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start processing the queue while it's not empty.
+
+25. **Node Dequeuing**
+	```cpp
+	        auto [node, parent] = q.front();
+	```
+	Dequeue the front element of the queue and extract the current node and its parent.
+
+26. **Queue Operation**
+	```cpp
+	        q.pop();
+	```
+	Remove the front element from the queue.
+
+27. **Parent-Child Relationship**
+	```cpp
+	        if(parent != -1) {
+	```
+	If the parent is not `-1`, add the current node to the adjacency list of its parent and vice versa.
+
+28. **Map Update**
+	```cpp
+	            mp[parent].push_back(node->val);
+	```
+	Add the current node's value to its parent's adjacency list.
+
+29. **Map Update**
+	```cpp
+	            mp[node->val].push_back(parent);
+	```
+	Add the parent node to the current node's adjacency list.
+
+30. **Left Child Check**
+	```cpp
+	        if(node->left) q.push({node->left, node->val});
+	```
+	If the current node has a left child, add it to the queue with its parent as the current node.
+
+31. **Right Child Check**
+	```cpp
+	        if(node->right) q.push({node->right, node->val});
+	```
+	If the current node has a right child, add it to the queue with its parent as the current node.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the number of nodes, as we visit each node once during BFS.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the adjacency list and BFS queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/description/)
 

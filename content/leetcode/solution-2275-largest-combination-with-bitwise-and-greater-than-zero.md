@@ -14,157 +14,152 @@ img_src = ""
 youtube = "OyyfVofM_MM"
 youtube_upload_date="2022-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/OyyfVofM_MM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of positive integers `candidates`. Your task is to evaluate the bitwise AND of every possible combination of numbers in the array and return the size of the largest combination where the result of the AND operation is greater than 0. Each number in the array may only be used once in each combination.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `candidates` where each element represents a positive integer.
+- **Example:** `Input: candidates = [32, 16, 24, 64, 128]`
+- **Constraints:**
+	- 1 <= candidates.length <= 10^5
+	- 1 <= candidates[i] <= 10^7
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the size of the largest combination where the bitwise AND of the numbers in that combination is greater than 0.
+- **Example:** `Output: 3`
+- **Constraints:**
 
-    int largestCombination(vector<int>& candidates) {
-        int res = 0, cur = 0;
-        for(int  i = 1; i < 10000000; i <<= 1) {
-            cur = 0;
-            for(int a: candidates)
-                if(a & i)
-                cur++;
-            res = max(res, cur);
-        }
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the largest combination of numbers such that their bitwise AND is greater than 0.
+
+- Iterate through all possible powers of 2 (bits).
+- For each power of 2, count how many numbers in the array have the current bit set.
+- Track the maximum count across all bits.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each element in the array is unique.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: candidates = [32, 16, 24, 64, 128]`  \
+  **Explanation:** For this input, the largest combination with a bitwise AND greater than 0 is [32, 64, 128]. The AND operation of these numbers gives 32, so the result is 3.
+
+- **Input:** `Input: candidates = [8, 8]`  \
+  **Explanation:** The largest combination is [8, 8], which gives a bitwise AND of 8. Therefore, the answer is 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will evaluate the bitwise AND for each combination of numbers by iterating over different bits in the binary representation of the numbers. For each bit, we will count how many numbers have that bit set, and track the largest such group.
+
+### Initial Thoughts 💭
+- The AND operation is sensitive to individual bits. If two numbers share a 1 at the same position, the AND result will have that bit set.
+- To find the largest group with a non-zero AND, we can focus on each bit position and count how many numbers have that bit set.
+- By focusing on bits and counting how many numbers share each bit, we can efficiently find the largest combination.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as the array length is guaranteed to be at least 1.
+- Ensure that the solution works efficiently when there are 100,000 elements in the input array.
+- If all numbers are identical, the result will be the size of the array.
+- The solution must handle values up to 10^7 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int largestCombination(vector<int>& candidates) {
+    int res = 0, cur = 0;
+    for(int  i = 1; i < 10000000; i <<= 1) {
+        cur = 0;
+        for(int a: candidates)
+            if(a & i)
+            cur++;
+        res = max(res, cur);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the **largest combination** of numbers in a given array where all numbers in the combination share at least one common bit set to `1` in their binary representation. Specifically, we are given an array of integers `candidates`, and we need to return the size of the largest subset where all numbers in that subset have the same bit set.
-
-For example, if we have an array `[16, 8, 4, 2, 1]`, the largest combination of numbers that share at least one bit set could be the subset `{16, 8, 4}`, since these numbers all share the bit at position 4 (the highest bit in binary).
-
-### Approach
-
-The approach revolves around checking each bit position from the least significant bit (LSB) to the most significant bit (MSB) in the binary representations of the numbers in the `candidates` array. Here's the thought process:
-
-1. **Bitwise AND operation**: We use bitwise operations to identify which numbers in the array share a particular bit set. Specifically, for each bit position, we check how many numbers in the array have that bit set to `1`.
-   
-2. **Iterate over bit positions**: Start with the least significant bit and work towards the most significant bit. For each bit position `i`, check how many numbers have that particular bit set to `1`. This is done using the bitwise AND operation `a & i` for each number in the array.
-
-3. **Track the largest subset**: As we evaluate each bit position, we keep track of the maximum number of numbers that share the same bit. This is done by updating the result with the largest count found.
-
-4. **Termination**: We stop when we've checked all relevant bit positions. We do not need to check beyond `2^23` because the range of typical integers is large enough that we don't need to go further. The maximum value `2^23` covers integers up to around 8 million, which is beyond typical input sizes for most problems.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Result Variables
-```cpp
-int res = 0, cur = 0;
-```
-- `res` will hold the maximum size of the subset found where all numbers share a common bit.
-- `cur` is used to keep track of how many numbers share the current bit we are checking.
-
-#### Step 2: Iterate Over All Possible Bit Positions
-```cpp
-for(int i = 1; i < 10000000; i <<= 1) {
-```
-- We loop through the possible bit positions using the left shift operator `i <<= 1`. This shifts `i` left by one bit in each iteration, effectively checking the bits `1, 2, 4, 8, ...`. This loop will go through each power of 2 until we reach a number large enough to cover the bit positions in the candidates.
-
-#### Step 3: Count Numbers with the Current Bit Set
-```cpp
-cur = 0;
-for(int a: candidates)
-    if(a & i)
-        cur++;
-```
-- `cur` is reset to `0` for each new bit position.
-- We then iterate over each number `a` in the `candidates` array. The condition `if(a & i)` checks if the current number `a` has the bit corresponding to `i` set. If it does, we increment `cur`, which keeps track of how many numbers have the current bit set.
-
-#### Step 4: Update the Maximum Subset Size
-```cpp
-res = max(res, cur);
-```
-- After checking all numbers for the current bit, we update `res` with the maximum value between the previous `res` and `cur`. This ensures that we are always tracking the largest subset of numbers that share a common bit.
-
-#### Step 5: Return the Result
-```cpp
-return res;
-```
-- Once we've checked all bit positions, `res` will contain the size of the largest subset where all numbers have at least one bit set in common. We return this value as the result.
-
-### Complexity
-
-#### Time Complexity
-The time complexity of the solution can be broken down as follows:
-1. **Outer Loop**: The outer loop runs for each bit position, from `1` to `10000000` (which represents `2^23`). This loop iterates approximately 24 times.
-2. **Inner Loop**: The inner loop iterates over the entire `candidates` array. If `n` is the size of the `candidates` array, the inner loop takes `O(n)` time for each bit position.
-
-Thus, the total time complexity is:
-- **O(n * 24) = O(n)** (since `24` is a constant).
-
-#### Space Complexity
-- The space complexity is **O(1)**, since we only use a constant amount of extra space for tracking the result (`res`, `cur`) and iterating through the candidates.
-
-### Example Walkthrough
-
-Let’s walk through an example to understand how the code works.
-
-#### Example 1
-```cpp
-vector<int> candidates = {16, 8, 4, 2, 1};
+    return res;
+}
 ```
 
-- Initially, `res = 0` and `cur = 0`.
-- For `i = 1` (checking the least significant bit):
-    - `16 & 1 = 0` (no match)
-    - `8 & 1 = 0` (no match)
-    - `4 & 1 = 0` (no match)
-    - `2 & 1 = 0` (no match)
-    - `1 & 1 = 1` (match)
-    - `cur = 1` → `res = max(0, 1) = 1`
-- For `i = 2` (checking the second least significant bit):
-    - `16 & 2 = 0` (no match)
-    - `8 & 2 = 0` (no match)
-    - `4 & 2 = 0` (no match)
-    - `2 & 2 = 2` (match)
-    - `1 & 2 = 0` (no match)
-    - `cur = 1` → `res = max(1, 1) = 1`
-- For `i = 4` (checking the third least significant bit):
-    - `16 & 4 = 4` (match)
-    - `8 & 4 = 0` (no match)
-    - `4 & 4 = 4` (match)
-    - `2 & 4 = 0` (no match)
-    - `1 & 4 = 0` (no match)
-    - `cur = 2` → `res = max(1, 2) = 2`
-- For `i = 8` (checking the fourth least significant bit):
-    - `16 & 8 = 8` (match)
-    - `8 & 8 = 8` (match)
-    - `4 & 8 = 0` (no match)
-    - `2 & 8 = 0` (no match)
-    - `1 & 8 = 0` (no match)
-    - `cur = 2` → `res = max(2, 2) = 2`
-- For `i = 16` (checking the fifth least significant bit):
-    - `16 & 16 = 16` (match)
-    - `8 & 16 = 0` (no match)
-    - `4 & 16 = 0` (no match)
-    - `2 & 16 = 0` (no match)
-    - `1 & 16 = 0` (no match)
-    - `cur = 1` → `res = max(2, 1) = 2`
-- Return `res = 2`.
+This code defines the function `largestCombination`, which calculates the largest number of candidates in the vector `candidates` that share the same bit set at a particular position. The function iterates through bit positions to find the combination with the most common bits set.
 
-#### Example 2
-```cpp
-vector<int> candidates = {3, 7, 10, 8, 4};
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int largestCombination(vector<int>& candidates) {
+	```
+	This is the function header for `largestCombination`, which calculates the largest combination of candidates sharing the same bit at a certain position in their binary representations.
 
-- After running the algorithm, the largest combination of numbers that share at least one bit in common is `{7, 3, 4}`, since they share the bit at position 1. The result will be `3`.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, cur = 0;
+	```
+	Initializes two variables: `res` to 0 (to store the maximum number of candidates sharing the same bit), and `cur` to 0 (to count the candidates with the current bit set).
 
-### Conclusion
+3. **Loop Start**
+	```cpp
+	    for(int  i = 1; i < 10000000; i <<= 1) {
+	```
+	Starts a loop where `i` represents the current bit position, initialized at 1 (the least significant bit) and doubles in value with each iteration, checking higher bit positions.
 
-This solution efficiently computes the largest combination of numbers from an array that share at least one common bit. By using bitwise operations to check the bits of each number and iterating through the possible bit positions, the solution ensures that we find the largest such subset in **O(n)** time complexity, making it highly scalable even for larger input sizes. The space complexity is **O(1)**, further improving its efficiency. This approach offers a clean and optimal solution to the problem.
+4. **Variable Reset**
+	```cpp
+	        cur = 0;
+	```
+	Resets `cur` to 0 for each bit position to count the candidates that have the current bit set.
+
+5. **Inner Loop Start**
+	```cpp
+	        for(int a: candidates)
+	```
+	Starts an inner loop to iterate over each element `a` in the `candidates` vector.
+
+6. **Bitwise AND Operation**
+	```cpp
+	            if(a & i)
+	```
+	Performs a bitwise AND operation between the candidate `a` and the current bit `i`. If the result is non-zero, it means the current candidate has the bit `i` set.
+
+7. **Count Matching Bits**
+	```cpp
+	            cur++;
+	```
+	Increments the counter `cur` each time a candidate has the current bit set.
+
+8. **Update Maximum**
+	```cpp
+	        res = max(res, cur);
+	```
+	Updates the `res` variable to the maximum of the current `res` and `cur`, which ensures that the largest count of candidates with a shared bit is retained.
+
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the value of `res`, which represents the largest number of candidates that share the same bit set at the same position.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log M)
+- **Average Case:** O(n log M)
+- **Worst Case:** O(n log M)
+
+The time complexity is O(n log M), where n is the number of candidates and M is the maximum possible value (10^7). This is because we iterate through each candidate for every bit position.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of intermediate results for each candidate.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-combination-with-bitwise-and-greater-than-zero/description/)
 

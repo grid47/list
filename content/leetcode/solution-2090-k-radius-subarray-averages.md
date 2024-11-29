@@ -14,93 +14,181 @@ img_src = ""
 youtube = "rdKE6yZ_D3A"
 youtube_upload_date="2021-11-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rdKE6yZ_D3A/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers, you need to compute the k-radius average for each element in the array. The k-radius average for an element at index i is the average of the elements from index i - k to i + k (inclusive). If there are fewer than k elements before or after the index i, the result for that index will be -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array nums and an integer k.
+- **Example:** `nums = [7,4,3,9,1,8,5,2,6], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= k <= 10^5
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> getAverages(vector<int>& nums, int k) {
-        int n = nums.size();
-        vector<long> psum(n, 0);
-        vector<int> avg(n, 0);
-        psum[0] = nums[0];
-        for(int i = 1; i < n; i++)
-            psum[i] = psum[i - 1] + nums[i];
-        
-        for(int i = 0; i < n; i++) {
-            if(i - k < 0 || i + k >= n) {
-                avg[i] = -1;
-            } else {
-                avg[i] = (psum[i + k] - ((i - k) == 0? 0: psum[i - k - 1])) / (2 * k + 1);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of integers where each element is the k-radius average for the corresponding index in the input array.
+- **Example:** `Output: [-1,-1,-1,5,4,4,-1,-1,-1]`
+- **Constraints:**
+	- The length of the output array is the same as the input array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the k-radius average for each index in the array.
+
+- Initialize an array to store prefix sums of the input array.
+- For each index, check if there are enough elements to the left and right to calculate the k-radius average.
+- If there are enough elements, compute the sum of the subarray and calculate the integer division of the sum by the total number of elements.
+- If there are not enough elements, set the result for that index to -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array may contain both large positive and negative integers.
+- The function should be optimized for large inputs.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1,2,3,4,5], k = 2`  \
+  **Explanation:** The k-radius average for index 2 is calculated using elements from index 0 to index 4. The sum is 15, so the average is 15 // 5 = 3.
+
+{{< dots >}}
+## Approach 🚀
+We calculate the prefix sum of the array to efficiently compute the sum of elements in any subarray. We use this to determine the k-radius average for each index.
+
+### Initial Thoughts 💭
+- We need to calculate the sum of elements in a subarray for each index.
+- Using a prefix sum array will allow us to compute the sum of any subarray in constant time.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle the case where nums is empty.
+- Ensure that the solution handles large arrays efficiently.
+- When k is 0, the k-radius average for each index is just the element itself.
+- Handle large values of k and nums size efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> getAverages(vector<int>& nums, int k) {
+    int n = nums.size();
+    vector<long> psum(n, 0);
+    vector<int> avg(n, 0);
+    psum[0] = nums[0];
+    for(int i = 1; i < n; i++)
+        psum[i] = psum[i - 1] + nums[i];
+    
+    for(int i = 0; i < n; i++) {
+        if(i - k < 0 || i + k >= n) {
+            avg[i] = -1;
+        } else {
+            avg[i] = (psum[i + k] - ((i - k) == 0? 0: psum[i - k - 1])) / (2 * k + 1);
         }
-        return avg;
     }
-};
-{{< /highlight >}}
----
+    return avg;
+}
+```
 
-### Problem Statement
+This function `getAverages` computes the moving averages of elements in the `nums` array within a window of size `2k+1`. If the window is out of bounds for an element, it returns `-1` for that position.
 
-The problem at hand is to find the average of all elements in a sliding window of size `2k + 1` for a given array `nums`. For each index `i`, if the sliding window cannot be formed (i.e., if `i - k` is less than 0 or `i + k` is greater than or equal to the length of `nums`), the output should be `-1`. The goal is to implement an efficient solution that avoids unnecessary recomputation, particularly in situations where the size of the array and the value of `k` can be large.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> getAverages(vector<int>& nums, int k) {
+	```
+	This defines the `getAverages` function that takes a reference to a vector `nums` and an integer `k` as input parameters, and returns a vector of integers.
 
-### Approach
+2. **Variable Declaration**
+	```cpp
+	    int n = nums.size();
+	```
+	This declares an integer `n` that stores the size of the `nums` vector.
 
-To tackle this problem efficiently, we utilize the concept of prefix sums. The prefix sum array allows us to compute the sum of any subarray in constant time, which is essential for maintaining optimal performance while calculating averages in a sliding window. The solution involves the following key steps:
+3. **Variable Initialization**
+	```cpp
+	    vector<long> psum(n, 0);
+	```
+	This initializes a vector `psum` of size `n` to store the prefix sums of the `nums` array, initialized to 0.
 
-1. **Initialization**: We first establish the size of the input array, `n`, and create two arrays: `psum` for storing the prefix sums and `avg` for the final average results.
+4. **Variable Initialization**
+	```cpp
+	    vector<int> avg(n, 0);
+	```
+	This initializes a vector `avg` of size `n` to store the averages of the moving window, initialized to 0.
 
-2. **Building the Prefix Sum Array**: We populate the `psum` array such that each element at index `i` holds the sum of the elements from the start of the array up to `i`. This is accomplished through a simple loop where each element is added to the previous sum.
+5. **Prefix Sum Calculation**
+	```cpp
+	    psum[0] = nums[0];
+	```
+	This sets the first element of the `psum` vector to be equal to the first element of the `nums` vector.
 
-3. **Calculating Averages**: With the prefix sum array in place, we iterate through each index `i` of the original array. For each index:
-   - We check if the current index allows for a valid sliding window by ensuring `i - k` is not less than 0 and `i + k` is less than `n`.
-   - If a valid window exists, we compute the average of the elements in the window using the prefix sum array. The average is calculated by subtracting the sum of elements outside the window from the total sum provided by the prefix sums and then dividing by `2 * k + 1`.
-   - If a valid window does not exist, we simply set the average at that index to `-1`.
+6. **Prefix Sum Calculation**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	This starts a loop from the second element to the last element of the `nums` vector to calculate the prefix sum.
 
-This approach ensures that we efficiently compute the required averages without redundantly summing elements, leading to significant performance gains, especially for larger arrays.
+7. **Prefix Sum Calculation**
+	```cpp
+	        psum[i] = psum[i - 1] + nums[i];
+	```
+	This calculates the prefix sum for the `i`-th element by adding the `i`-th element of `nums` to the previous prefix sum.
 
-### Code Breakdown (Step by Step)
+8. **Window Calculation**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This starts a loop to calculate the moving average for each element in the `nums` vector.
 
-The code provided implements the outlined approach in a clear manner:
+9. **Boundary Check**
+	```cpp
+	        if(i - k < 0 || i + k >= n) {
+	```
+	This checks if the current index `i` is within the valid window range, i.e., the window `[i-k, i+k]` must be within bounds.
 
-1. **Prefix Sum Calculation**:
-   ```cpp
-   psum[0] = nums[0];
-   for(int i = 1; i < n; i++)
-       psum[i] = psum[i - 1] + nums[i];
-   ```
-   Here, we initialize the first element of the prefix sum array and iteratively fill in the rest by adding the current element to the previous sum.
+10. **Assignment**
+	```cpp
+	            avg[i] = -1;
+	```
+	If the window is out of bounds for the current index `i`, it assigns `-1` to the corresponding position in the `avg` vector.
 
-2. **Average Calculation**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       if(i - k < 0 || i + k >= n) {
-           avg[i] = -1;
-       } else {
-           avg[i] = (psum[i + k] - ((i - k) == 0 ? 0 : psum[i - k - 1])) / (2 * k + 1);
-       }
-   }
-   ```
-   In this loop, we assess whether we can form a complete window around the index `i`. If not, we assign `-1`. If we can, we calculate the average by leveraging the prefix sum array for quick access to the necessary sums.
+11. **Window Calculation**
+	```cpp
+	        } else {
+	```
+	This handles the case where the current index `i` is within the valid window range.
 
-3. **Return Statement**:
-   ```cpp
-   return avg;
-   ```
-   Finally, the computed averages are returned as a vector.
+12. **Averaging**
+	```cpp
+	            avg[i] = (psum[i + k] - ((i - k) == 0? 0: psum[i - k - 1])) / (2 * k + 1);
+	```
+	This calculates the average for the window centered at `i`. It subtracts the appropriate prefix sums to get the sum of elements in the window and divides by the window size `2k + 1`.
 
-### Complexity
+13. **Return Statement**
+	```cpp
+	    return avg;
+	```
+	This returns the vector `avg`, which contains the moving averages (or `-1` for out-of-bounds windows).
 
-The overall complexity of this algorithm is linear, O(n), where `n` is the length of the input array. This is due to the single pass needed to construct the prefix sum and another pass to compute the averages. The space complexity is also O(n) due to the storage of the prefix sum and the average arrays. This efficient approach ensures that we can handle even large datasets swiftly.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n), since we only iterate over the array once for prefix sums and once for calculating the averages.
+- **Worst Case:** O(n), the time complexity remains linear.
 
-### Conclusion
+The time complexity is linear because we iterate over the array twice: once to calculate the prefix sum, and once to compute the averages.
 
-In summary, the provided solution efficiently computes the averages for a sliding window of size `2k + 1` using the prefix sum technique. By leveraging this method, the algorithm achieves optimal time complexity while maintaining clarity and maintainability in the code. This solution is particularly valuable in scenarios where quick average computations are essential, such as in real-time data processing or large-scale numerical analyses.
+### Space Complexity 💾
+- **Best Case:** O(n), since both the prefix sum and result arrays are of size n.
+- **Worst Case:** O(n) space for the prefix sum array and the result array.
+
+The space complexity is linear due to the storage of the prefix sum and the result array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-radius-subarray-averages/description/)
 

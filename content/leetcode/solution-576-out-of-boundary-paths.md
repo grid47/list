@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Bg5CLRqtNmk"
 youtube_upload_date="2024-01-26"
 youtube_thumbnail="https://i.ytimg.com/vi/Bg5CLRqtNmk/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,120 +28,205 @@ youtube_thumbnail="https://i.ytimg.com/vi/Bg5CLRqtNmk/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an m x n grid and a ball placed at position [startRow, startColumn]. The ball can move to one of four adjacent cells or out of the grid boundary. You are allowed at most maxMove moves. Return the number of ways the ball can move out of the grid boundary modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of five integers representing the grid dimensions, maximum allowed moves, and the ball's starting position.
+- **Example:** `Input: m = 3, n = 3, maxMove = 2, startRow = 1, startColumn = 1`
+- **Constraints:**
+	- 1 <= m, n <= 50
+	- 0 <= maxMove <= 50
+	- 0 <= startRow < m
+	- 0 <= startColumn < n
 
-{{< highlight cpp >}}
-class Solution {
-    int mod = (int) 1e9 + 7;
-public:
-    int findPaths(int m, int n, int mv, int i, int j) {
-        
-        vector<vector<vector<int>>> mm(mv + 1, vector<vector<int>>(m, vector<int>(n, -1)));
-        
-        return dfs(m, n, mv, 0, i, j, mm);
-        
-    }
-    
-    int dfs(int m, int n, int mx, int mv, int x, int y, vector<vector<vector<int>>> & mm) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of ways to move the ball out of the grid boundary within the allowed moves, modulo 10^9 + 7.
+- **Example:** `Output: 12`
+- **Constraints:**
+	- The result must be an integer modulo 10^9 + 7.
 
-        if (x < 0 || y < 0 || x >= m || y >= n) return 1;
-        if (mv == mx)                           return 0;
-        if (mm[mv][x][y] > -1)                  return mm[mv][x][y];
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the number of paths to move the ball out of the grid boundary within maxMove moves.
 
-        int res = 0;
-        res = ( res + dfs(m, n, mx, mv + 1, x + 1, y, mm) ) % mod;
-        res = ( res + dfs(m, n, mx, mv + 1, x - 1, y, mm) ) % mod;
-        res = ( res + dfs(m, n, mx, mv + 1, x, y + 1, mm) ) % mod;
-        res = ( res + dfs(m, n, mx, mv + 1, x, y - 1, mm) ) % mod;
+- Use a recursive approach to track the number of moves left and the ball's position.
+- If the ball moves out of the grid boundary, count it as one valid path.
+- Use memoization to avoid redundant calculations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid dimensions and ball position are valid.
+- The ball can move in any direction, even if it immediately crosses the boundary.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: m = 3, n = 3, maxMove = 2, startRow = 1, startColumn = 1`  \
+  **Explanation:** There are 12 possible ways for the ball to move out of the grid boundary within 2 moves.
 
-        return mm[mv][x][y] = (res % mod);
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `Input: m = 2, n = 3, maxMove = 3, startRow = 0, startColumn = 2`  \
+  **Explanation:** The ball can move out of the grid boundary in 18 ways from the starting position.
 
-### Problem Statement:
+{{< dots >}}
+## Approach 🚀
+The approach involves using Depth-First Search (DFS) with memoization to count the paths while avoiding redundant calculations.
 
-The problem asks us to find the number of distinct paths that lead outside a grid starting from a given position. Specifically, we are given an `m x n` grid, and from a starting position `(i, j)`, we need to move `mv` times. Each move can either go up, down, left, or right, and our goal is to count the number of ways the path will go outside the grid after exactly `mv` moves.
-
-We are asked to return the result modulo \(10^9 + 7\), which is a common practice in competitive programming to prevent overflow.
-
-### Approach:
-
-The problem can be solved using **dynamic programming** (DP) and **depth-first search** (DFS) combined with **memoization**. Here's how we approach the problem:
-
-1. **DFS with Memoization:**
-   - We'll perform a DFS search starting from the position `(i, j)`.
-   - At each step, we check all four possible moves (up, down, left, right).
-   - If we move out of bounds (i.e., we step outside the grid), we count that as a valid path.
-   - If we've made `mv` moves, we stop the recursion, as no further moves are allowed.
-   
-2. **Memoization:**
-   - To avoid recalculating the same state multiple times, we use a 3D memoization table `mm` to store the results of subproblems. The state is represented by the number of remaining moves (`mv`), the current row `x`, and the current column `y`.
-   - If we reach a state that has already been computed, we return the stored result to avoid redundant calculations.
-
-3. **Modulo Operation:**
-   - Since the number of paths can become very large, we use modulo \(10^9 + 7\) to ensure the result fits within the constraints and avoid overflow.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Initialization and Memoization Setup
+### Initial Thoughts 💭
+- The ball can move in four directions, and paths may overlap if revisiting positions.
+- The number of moves is limited, so a recursive solution with memoization will be efficient.
+- A grid-based recursive approach with boundary checks should solve this problem efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs due to constraints; the grid always has dimensions.
+- For large grids (m, n = 50) and maxMove = 50, the algorithm must use memoization to remain efficient.
+- The ball starts at the grid boundary; it might move out immediately.
+- The solution must handle all inputs efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
 int mod = (int) 1e9 + 7;
 public:
-    int findPaths(int m, int n, int mv, int i, int j) {
-        vector<vector<vector<int>>> mm(mv + 1, vector<vector<int>>(m, vector<int>(n, -1)));
-        return dfs(m, n, mv, 0, i, j, mm);
-    }
-```
-- We define `mod` as \(10^9 + 7\) to handle the modulo operation.
-- In the function `findPaths`, we initialize a 3D vector `mm` with dimensions `(mv + 1, m, n)` to store the results of subproblems. Initially, all values are set to `-1` to indicate that the states are unvisited.
-- We then call the DFS function `dfs` with the initial parameters.
+int findPaths(int m, int n, int mv, int i, int j) {
+    
+    vector<vector<vector<int>>> mm(mv + 1, vector<vector<int>>(m, vector<int>(n, -1)));
+    
+    return dfs(m, n, mv, 0, i, j, mm);
+    
+}
 
-#### Step 2: DFS Recursive Function with Memoization
-```cpp
 int dfs(int m, int n, int mx, int mv, int x, int y, vector<vector<vector<int>>> & mm) {
-    if (x < 0 || y < 0 || x >= m || y >= n) return 1;  // Out of bounds: 1 valid path
-    if (mv == mx) return 0;  // Reached maximum moves, can't move further
-    if (mm[mv][x][y] > -1) return mm[mv][x][y];  // Return the memoized result
-    
+
+    if (x < 0 || y < 0 || x >= m || y >= n) return 1;
+    if (mv == mx)                           return 0;
+    if (mm[mv][x][y] > -1)                  return mm[mv][x][y];
+
     int res = 0;
-    // Explore all four directions: down, up, right, left
-    res = ( res + dfs(m, n, mx, mv + 1, x + 1, y, mm) ) % mod;  // Move down
-    res = ( res + dfs(m, n, mx, mv + 1, x - 1, y, mm) ) % mod;  // Move up
-    res = ( res + dfs(m, n, mx, mv + 1, x, y + 1, mm) ) % mod;  // Move right
-    res = ( res + dfs(m, n, mx, mv + 1, x, y - 1, mm) ) % mod;  // Move left
-    
-    return mm[mv][x][y] = (res % mod);  // Store the result in memoization table
+    res = ( res + dfs(m, n, mx, mv + 1, x + 1, y, mm) ) % mod;
+    res = ( res + dfs(m, n, mx, mv + 1, x - 1, y, mm) ) % mod;
+    res = ( res + dfs(m, n, mx, mv + 1, x, y + 1, mm) ) % mod;
+    res = ( res + dfs(m, n, mx, mv + 1, x, y - 1, mm) ) % mod;
+
+    return mm[mv][x][y] = (res % mod);
 }
 ```
 
-- **Base Case (Out of Bounds):** If the current position `(x, y)` is outside the grid (i.e., `x < 0` or `y < 0` or `x >= m` or `y >= n`), we return `1` because we've successfully moved outside the grid, which is a valid path.
-  
-- **Base Case (Max Moves):** If we've made `mv` moves, we return `0` because we've reached the maximum number of allowed moves without going out of bounds, so no valid path exists from here.
+The solution uses dynamic programming and recursion to calculate the number of paths in a grid that start at position `(i, j)` and can move in all 4 directions up, down, left, or right, for a total of `mv` moves. It utilizes memoization to store intermediate results and optimize the recursive calls.
 
-- **Memoization Check:** Before performing any recursive calls, we check if the current state `(mv, x, y)` has already been computed. If so, we return the stored result to avoid redundant calculations.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the main `Solution` class which contains the function `findPaths` to solve the problem.
 
-- **Recursive Exploration:** We explore all four possible directions: moving down (`x + 1`), up (`x - 1`), right (`y + 1`), and left (`y - 1`). For each move, we make a recursive call and accumulate the results.
+2. **Modulus Initialization**
+	```cpp
+	int mod = (int) 1e9 + 7;
+	```
+	Initializes the modulus `mod` to ( 10^9 + 7 ) for ensuring the result stays within integer limits.
 
-- **Modulo Operation:** Since the number of paths can be large, we apply modulo \(10^9 + 7\) to the results to ensure we don't exceed the limits and avoid overflow.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	The public section of the class where the functions are accessible outside the class.
 
-- **Store Result:** Finally, we store the result of the current state `(mv, x, y)` in the memoization table `mm` and return it.
+4. **Function Declaration - findPaths**
+	```cpp
+	int findPaths(int m, int n, int mv, int i, int j) {
+	```
+	The `findPaths` function initializes the dynamic programming table and calls the `dfs` function to calculate the number of possible paths.
 
-#### Step 3: Final Return
-- The final result is obtained by calling the `dfs` function with the initial position `(i, j)` and starting from `0` moves. The result is then returned to `findPaths`.
+5. **Memoization Table Initialization**
+	```cpp
+	    vector<vector<vector<int>>> mm(mv + 1, vector<vector<int>>(m, vector<int>(n, -1)));
+	```
+	Creates a 3D memoization table `mm` to store results for subproblems. Each element is initialized to -1 indicating that it hasn't been computed yet.
 
-### Complexity:
+6. **Recursive Call to DFS**
+	```cpp
+	    return dfs(m, n, mv, 0, i, j, mm);
+	```
+	Calls the `dfs` function to start the recursive traversal and path calculation from the given starting position `(i, j)` with `mv` remaining moves.
 
-#### Time Complexity:
-- **O(m * n * mv):** In the worst case, we may need to calculate the result for each state `(mv, x, y)` where `mv` ranges from `0` to `mv`, and `(x, y)` ranges over the grid of size `m * n`. Thus, the total number of unique states is `m * n * mv`, and since we only calculate each state once (due to memoization), the time complexity is O(m * n * mv).
+7. **Function Declaration - dfs**
+	```cpp
+	int dfs(int m, int n, int mx, int mv, int x, int y, vector<vector<vector<int>>> & mm) {
+	```
+	The `dfs` function performs depth-first search to explore all possible paths from the current position `(x, y)` within `mv` moves.
 
-#### Space Complexity:
-- **O(m * n * mv):** We use a 3D array `mm` to store the results for all states. The size of this array is `(mv + 1) * m * n`, so the space complexity is O(m * n * mv).
+8. **Boundary Check**
+	```cpp
+	    if (x < 0 || y < 0 || x >= m || y >= n) return 1;
+	```
+	Checks if the current position `(x, y)` is out of bounds of the grid. If so, returns 1 as the base case of the recursive call, indicating one valid path.
 
-### Conclusion:
+9. **Max Moves Check**
+	```cpp
+	    if (mv == mx)                           return 0;
+	```
+	Checks if the current number of moves has reached the maximum allowed moves `mx`. If so, it returns 0 since no more moves are left.
 
-This solution efficiently calculates the number of distinct paths that lead outside the grid using a combination of dynamic programming and depth-first search with memoization. The recursive DFS explores all possible paths while ensuring that each state is computed only once, thus reducing the computational overhead. By using memoization, we avoid redundant calculations and optimize the solution. The time complexity of O(m * n * mv) ensures that the solution can handle larger inputs within the given constraints. The modulo operation ensures that the results stay within the bounds of typical integer ranges in programming contests.
+10. **Memoization Check**
+	```cpp
+	    if (mm[mv][x][y] > -1)                  return mm[mv][x][y];
+	```
+	Checks if the result for the current position `(x, y)` with `mv` moves has been previously computed. If so, it returns the stored result to avoid redundant calculations.
+
+11. **Path Calculation**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the variable `res` to store the total number of valid paths from the current position.
+
+12. **Recursive Calls - Down**
+	```cpp
+	    res = ( res + dfs(m, n, mx, mv + 1, x + 1, y, mm) ) % mod;
+	```
+	Recursively calls `dfs` for moving down in the grid, incrementing the move count by 1.
+
+13. **Recursive Calls - Up**
+	```cpp
+	    res = ( res + dfs(m, n, mx, mv + 1, x - 1, y, mm) ) % mod;
+	```
+	Recursively calls `dfs` for moving up in the grid, incrementing the move count by 1.
+
+14. **Recursive Calls - Right**
+	```cpp
+	    res = ( res + dfs(m, n, mx, mv + 1, x, y + 1, mm) ) % mod;
+	```
+	Recursively calls `dfs` for moving right in the grid, incrementing the move count by 1.
+
+15. **Recursive Calls - Left**
+	```cpp
+	    res = ( res + dfs(m, n, mx, mv + 1, x, y - 1, mm) ) % mod;
+	```
+	Recursively calls `dfs` for moving left in the grid, incrementing the move count by 1.
+
+16. **Memoization Result Storage**
+	```cpp
+	    return mm[mv][x][y] = (res % mod);
+	```
+	Stores the computed result for the current position `(x, y)` with `mv` moves in the memoization table.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n * maxMove)
+- **Average Case:** O(m * n * maxMove)
+- **Worst Case:** O(m * n * maxMove)
+
+Each grid position and number of remaining moves is calculated once, thanks to memoization.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n * maxMove)
+- **Worst Case:** O(m * n * maxMove)
+
+The space complexity is driven by the memoization array, which has dimensions m x n x maxMove.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/out-of-boundary-paths/description/)
 

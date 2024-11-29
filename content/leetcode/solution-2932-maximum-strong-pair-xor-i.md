@@ -14,133 +14,149 @@ img_src = ""
 youtube = "n6CncKaYGwk"
 youtube_upload_date="2023-11-14"
 youtube_thumbnail="https://i.ytimg.com/vi/n6CncKaYGwk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array 'nums'. A pair of integers 'x' and 'y' is called a strong pair if it satisfies the condition |x - y| <= min(x, y). Your task is to find two integers from 'nums' that form a strong pair and have the highest possible bitwise XOR value among all strong pairs in the array. You can pick the same integer twice.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 0-indexed integer array 'nums'.
+- **Example:** `For nums = [1, 2, 3, 4, 5], the maximum XOR of a strong pair is 7.`
+- **Constraints:**
+	- 1 <= nums.length <= 50
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumStrongPairXor(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int n = nums.size(), res = 0;
-        for(int i = 0; i < n; i++)
-        for(int j = i; j < n; j++) {
-            if((nums[j] - nums[i] <= nums[i]) && (res <= (nums[i] ^ nums[j]))){
-                // cout << nums[i] << " " << nums[j] << "\n";
-                res = max(res, nums[i] ^ nums[j]);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum XOR value among all possible strong pairs in the array 'nums'.
+- **Example:** `For nums = [10, 100], the output will be 0.`
+- **Constraints:**
+	- The result will be a non-negative integer representing the maximum XOR value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the maximum XOR value of strong pairs in the given array 'nums'.
+
+- Sort the array 'nums' to simplify comparison and checking for strong pairs.
+- Iterate over all possible pairs (i, j) in the array.
+- For each pair, check if it satisfies the strong pair condition: |nums[i] - nums[j]| <= min(nums[i], nums[j]).
+- Calculate the XOR for all valid pairs and track the maximum XOR value.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will contain integers in the given range, and the XOR operation is safe for these values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [1, 2, 3, 4, 5]`  \
+  **Explanation:** The strong pairs (1, 1), (1, 2), (2, 2), (2, 3), (2, 4), (3, 3), (3, 4), (3, 5), (4, 4), (4, 5), and (5, 5) are formed. The maximum XOR value from these pairs is 7 (from pair (3, 4)).
+
+- **Input:** `Example 2: nums = [10, 100]`  \
+  **Explanation:** There are two strong pairs: (10, 10) and (100, 100), both of which yield an XOR of 0.
+
+- **Input:** `Example 3: nums = [5, 6, 25, 30]`  \
+  **Explanation:** The strong pairs (5, 5), (5, 6), (6, 6), (25, 25), (25, 30), and (30, 30) are formed. The maximum XOR value from these pairs is 7 (from pair (25, 30)).
+
+{{< dots >}}
+## Approach 🚀
+The approach involves checking all possible pairs and evaluating their XOR values while ensuring the strong pair condition is met.
+
+### Initial Thoughts 💭
+- A brute force approach works for this problem due to the small constraints (array length up to 50).
+- We can simplify the pair generation by sorting the array and then checking for valid strong pairs in a nested loop.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one element in the input array, so no need to handle empty inputs.
+- The maximum input size is 50 elements, so the solution can comfortably check all pairs.
+- If all elements in the array are the same, the XOR of all pairs will be zero.
+- The approach works efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumStrongPairXor(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    int n = nums.size(), res = 0;
+    for(int i = 0; i < n; i++)
+    for(int j = i; j < n; j++) {
+        if((nums[j] - nums[i] <= nums[i]) && (res <= (nums[i] ^ nums[j]))){
+            // cout << nums[i] << " " << nums[j] << "\n";
+            res = max(res, nums[i] ^ nums[j]);
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement:
-The problem asks us to find the maximum XOR value of a "strong pair" from an array of integers `nums`. A pair `(nums[i], nums[j])` is considered a "strong pair" if the following conditions are met:
-1. \( nums[j] - nums[i] \leq nums[i] \)
-2. The XOR value of `nums[i]` and `nums[j]` should be the largest among all possible valid pairs.
+This function calculates the maximum XOR value of a 'strong pair' of numbers from the given vector. A 'strong pair' is defined as a pair of numbers where the difference between them is less than or equal to one of the numbers, and the XOR value of the pair is greater than the current result.
 
-The goal is to compute the maximum XOR value of all valid pairs satisfying these conditions. The XOR operation is used here because it has certain mathematical properties, making it an interesting operation in combinatorial problems like this one.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumStrongPairXor(vector<int>& nums) {
+	```
+	Defines the function 'maximumStrongPairXor' which takes a vector of integers 'nums' and returns the maximum XOR value of a strong pair.
 
-### Approach:
-We need to find the maximum XOR value for pairs of numbers in the array `nums` that satisfy the condition:
-\[
-nums[j] - nums[i] \leq nums[i]
-\]
-This condition ensures that the second number in the pair is not significantly larger than the first one, making the pair "strong."
+2. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the input vector 'nums' in ascending order to simplify the search for valid pairs.
 
-To solve the problem efficiently:
-1. **Sort the Array**: Sorting the array helps us easily compare pairs. Sorting ensures that we can evaluate differences between numbers in a structured manner, as `nums[j]` will always be greater than or equal to `nums[i]` for any pair `(i, j)`.
-2. **Brute Force Pair Comparison**: We can then iterate over each pair `(nums[i], nums[j])` and check if the pair satisfies the condition \( nums[j] - nums[i] \leq nums[i] \). If it does, we compute the XOR value of the pair and update the maximum XOR value encountered so far.
-3. **Efficiency Consideration**: Sorting the array takes \(O(n \log n)\), and the nested loops over the array elements give a time complexity of \(O(n^2)\) for comparing all pairs. This brute force approach can be slow for large inputs, but it is straightforward and works for moderate-sized inputs.
+3. **Variable Initialization**
+	```cpp
+	    int n = nums.size(), res = 0;
+	```
+	Initializes 'n' to the size of the vector and 'res' to 0, which will hold the maximum XOR value of the valid pairs.
 
-### Code Breakdown (Step by Step):
+4. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts the outer loop over each element in the sorted vector 'nums'.
 
-1. **Function Definition**:
-   The function `maximumStrongPairXor` takes a single argument, `nums`, which is a vector of integers. It returns the maximum XOR value of a strong pair.
+5. **Inner Loop**
+	```cpp
+	    for(int j = i; j < n; j++) {
+	```
+	Starts the inner loop, which iterates through the remaining elements starting from the current element 'i'.
 
-   ```cpp
-   int maximumStrongPairXor(vector<int>& nums) {
-   ```
+6. **Condition Check**
+	```cpp
+	        if((nums[j] - nums[i] <= nums[i]) && (res <= (nums[i] ^ nums[j]))) {
+	```
+	Checks if the difference between the two numbers 'nums[j]' and 'nums[i]' is less than or equal to 'nums[i]' and if the XOR of the pair is greater than the current result 'res'.
 
-2. **Sorting the Array**:
-   We start by sorting the array `nums` in ascending order. This ensures that for any pair `(i, j)`, we know that `nums[i] <= nums[j]`, which simplifies the comparison and helps to check the condition \( nums[j] - nums[i] \leq nums[i] \).
+7. **Update Result**
+	```cpp
+	            res = max(res, nums[i] ^ nums[j]);
+	```
+	Updates 'res' with the maximum XOR value found between the current pair 'nums[i]' and 'nums[j]'.
 
-   ```cpp
-   sort(nums.begin(), nums.end());
-   ```
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the maximum XOR value of any valid 'strong pair' found in the input vector.
 
-3. **Initialize Variables**:
-   We initialize two variables:
-   - `n` to store the size of the array.
-   - `res` to keep track of the maximum XOR value found. We initialize it to 0 since the XOR of any two non-negative integers is at least 0.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-   ```cpp
-   int n = nums.size(), res = 0;
-   ```
+Since we need to check all pairs of elements in the array, the time complexity is O(n^2).
 
-4. **Nested Loop to Compare Pairs**:
-   We use two nested loops to iterate over all pairs of numbers `(nums[i], nums[j])`:
-   - The outer loop runs through each number `i` from 0 to `n-1`.
-   - The inner loop runs from `i` to `n-1`, comparing the current element `nums[i]` with `nums[j]` where `j >= i`.
-   
-   ```cpp
-   for(int i = 0; i < n; i++)
-       for(int j = i; j < n; j++) {
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Check Strong Pair Condition**:
-   Inside the inner loop, we check if the pair `(nums[i], nums[j])` satisfies the condition \( nums[j] - nums[i] \leq nums[i] \). If it does, we compute the XOR value of `nums[i]` and `nums[j]` and check if it's greater than the current maximum XOR value `res`. If it is, we update `res` to this new value.
+The space complexity is O(n) due to sorting the array.
 
-   ```cpp
-   if((nums[j] - nums[i] <= nums[i]) && (res <= (nums[i] ^ nums[j]))) {
-       res = max(res, nums[i] ^ nums[j]);
-   }
-   ```
-
-6. **Return the Result**:
-   After all iterations, we return the maximum XOR value `res`, which is the answer to the problem.
-
-   ```cpp
-   return res;
-   }
-   ```
-
-### Complexity:
-
-1. **Time Complexity**:
-   The time complexity of this solution is dominated by the nested loops and the sorting step:
-   - Sorting the array takes \(O(n \log n)\), where `n` is the size of the array.
-   - The nested loops iterate over all pairs of elements in the array, which takes \(O(n^2)\) time.
-
-   Thus, the overall time complexity is:
-   \[
-   O(n \log n + n^2)
-   \]
-   Since \(O(n^2)\) dominates \(O(n \log n)\) for large `n`, the time complexity is effectively \(O(n^2)\).
-
-2. **Space Complexity**:
-   The space complexity of this solution is \(O(1)\) for auxiliary space since we only use a few variables to keep track of the result and the array size. The space complexity of sorting the array is typically \(O(n)\) due to the internal sorting mechanism, but we are not explicitly using additional data structures that grow with the input size.
-
-   Hence, the space complexity is \(O(n)\) due to the sorting step, but the overall auxiliary space used is constant.
-
-### Conclusion:
-This solution is a straightforward approach to the problem, leveraging sorting and brute force comparison of pairs to find the maximum XOR value that satisfies the given condition. The algorithm performs well for small and moderate-sized arrays but may become inefficient for large arrays due to the \(O(n^2)\) time complexity. 
-
-The strengths of this solution are:
-- Simplicity: The algorithm is easy to understand and implement.
-- Correctness: It guarantees finding the maximum XOR value of a strong pair as per the problem's requirements.
-
-However, for larger inputs, the time complexity can be a bottleneck, and optimizing this solution through more advanced techniques like dynamic programming or bit manipulation may be necessary to improve performance. In scenarios where the array size is relatively small or moderate, this brute-force solution should work efficiently within the time limits.
-
-To summarize:
-- **Time Complexity**: \(O(n^2)\)
-- **Space Complexity**: \(O(n)\) (for sorting)
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-strong-pair-xor-i/description/)

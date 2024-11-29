@@ -14,91 +14,148 @@ img_src = ""
 youtube = "86n-e3Zwx34"
 youtube_upload_date="2023-09-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/86n-e3Zwx34/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of cars represented by their starting and ending positions on a number line. Your task is to count how many distinct integer points are covered by any part of a car.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A list of pairs representing the start and end positions of each car on the number line.
+- **Example:** `nums = [[1, 4], [2, 5], [6, 7]]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- nums[i].length == 2
+	- 1 <= starti <= endi <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfPoints(vector<vector<int>>& nums) {
-    vector<int> v(102, 0);
-    int ans = 0;
-    for(auto n: nums){
-        for(int i = n[0]; i <= n[1]; ++i) v[i-1]++;
-    }
-    for(auto e: v){
-        if(e) ans++;
-    }
-    return ans;
-}
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The total number of distinct integer points covered by any part of a car.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The output should be a single integer representing the total number of distinct integer points.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the total number of distinct integer points covered by any part of a car.
 
-The problem asks to find the number of unique points covered by a set of intervals. Each interval is given as a pair of integers `[start, end]` where each point between `start` and `end` is included in the interval. The task is to count how many distinct points are covered by at least one of the intervals.
+- Create a boolean array to represent the points on the number line that are covered by a car.
+- For each car, mark the points it covers as true in the array.
+- Count the number of true values in the array, which represents the total number of covered points.
+{{< dots >}}
+### Problem Assumptions ✅
+- All cars have valid starting and ending positions where starti <= endi.
+- The cars may overlap, but each point on the number line is counted only once.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [[1, 4], [2, 5], [6, 7]]`  \
+  **Explanation:** The integer points covered by the cars are: 1, 2, 3, 4, 5, 6. Hence, the total number of points covered is 6.
 
-### Approach
+- **Input:** `nums = [[1, 3], [4, 6], [5, 8]]`  \
+  **Explanation:** The integer points covered by the cars are: 1, 2, 3, 4, 5, 6, 7, 8. After removing duplicates, the answer is 6.
 
-To solve this problem efficiently, we can use a simple technique involving an array that tracks whether a point is covered by an interval. For every interval, we can mark all the points that the interval covers. After processing all intervals, we can count how many unique points have been covered.
+{{< dots >}}
+## Approach 🚀
+The approach involves creating an array to mark the covered integer points and then counting how many distinct points are covered by any of the cars.
 
-The key idea is to use a frequency array (`v`) where each index represents a point, and the value at that index indicates how many times that point is covered by intervals. Once we know which points are covered, we can simply count how many unique points are covered by at least one interval.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Frequency Array
+### Initial Thoughts 💭
+- We need to track the integer points on the number line covered by the cars.
+- The positions of the cars may overlap, so we need to count each point only once.
+- We can use a boolean array to mark covered points and count the true values to find the answer.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty input arrays are expected as per the problem statement.
+- The solution should handle the maximum number of cars efficiently.
+- Cars with the same start and end position should still be counted correctly.
+- The approach should work within the time and space constraints provided.
+{{< dots >}}
+## Code 💻
 ```cpp
+int numberOfPoints(vector<vector<int>>& nums) {
 vector<int> v(102, 0);
-```
-- We initialize a vector `v` of size 102 with all elements set to 0. This array will track how many intervals cover each point.
-- We use a size of 102 because the interval endpoints are between 1 and 100, and we need to accommodate for the fact that the index in `v` represents one less than the actual point (due to the 0-based indexing in the vector). The array is large enough to handle all points from 1 to 100.
-
-#### Step 2: Process Each Interval
-```cpp
-for (auto n : nums) {
-    for (int i = n[0]; i <= n[1]; ++i) v[i - 1]++;
+int ans = 0;
+for(auto n: nums){
+    for(int i = n[0]; i <= n[1]; ++i) v[i-1]++;
 }
-```
-- The outer loop iterates over each interval in the input vector `nums`. Each interval is represented by a pair `[start, end]` in the array `nums`.
-- The inner loop iterates through each integer point between `start` and `end` (inclusive) in the current interval. For each point `i`, we increment the corresponding index in the vector `v`. Specifically, we increment `v[i-1]`, because the point `i` corresponds to index `i-1` in the vector `v` (due to the 0-based indexing of `v`).
-  
-This step marks all the points covered by each interval by incrementing the values in the array `v`.
-
-#### Step 3: Count the Covered Points
-```cpp
-for (auto e : v) {
-    if (e) ans++;
+for(auto e: v){
+    if(e) ans++;
 }
-```
-- After processing all the intervals, the array `v` contains the number of intervals covering each point. The value at index `i-1` in the array `v` represents how many intervals cover the point `i`.
-- The loop goes through each element `e` in `v`, and if `e` is non-zero (indicating that the corresponding point is covered by at least one interval), we increment the variable `ans`. This step counts how many unique points are covered by at least one interval.
-
-#### Step 4: Return the Result
-```cpp
 return ans;
+}
 ```
-- Finally, the variable `ans` holds the total count of unique points covered by at least one interval, and we return this value.
 
-### Complexity
+This function calculates the number of distinct points covered by a set of ranges represented as pairs of integers.
 
-#### Time Complexity:
-- **O(n * m)**: The outer loop runs for each interval in `nums`, which has `n` elements. For each interval, we iterate through its range from `start` to `end`. In the worst case, an interval can cover up to 100 points. Therefore, if we assume that the total number of points across all intervals is `m`, the overall time complexity is `O(n * m)`, where `n` is the number of intervals and `m` is the maximum number of points covered by any single interval. However, since the number of distinct points is at most 100, this operation is bounded by a constant.
-  
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because the array `v` always has a fixed size of 102, regardless of the size of the input. The size of the input does not affect the space usage.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numberOfPoints(vector<vector<int>>& nums) {
+	```
+	Defines the function 'numberOfPoints', which takes a vector of integer pairs as input representing ranges.
 
-### Conclusion
+2. **Vector Initialization**
+	```cpp
+	vector<int> v(102, 0);
+	```
+	Initializes a vector 'v' of size 102 to track the frequency of each point in the range, all initialized to zero.
 
-This solution efficiently solves the problem by using a frequency array to track the points covered by intervals. The approach ensures that we count all unique points covered by at least one interval without needing to store the exact points themselves. By incrementing values in the array for each point covered by an interval and then counting how many non-zero values are in the array, we can quickly compute the result.
+3. **Variable Initialization**
+	```cpp
+	int ans = 0;
+	```
+	Declares and initializes an integer variable 'ans' to store the count of distinct points covered by the ranges.
 
-The solution runs efficiently even with the maximum number of intervals and covers all edge cases, including when no points are covered or when all points are covered. This method also leverages simple array manipulation and avoids the need for more complex data structures, making it easy to implement and understand.
+4. **Outer Loop**
+	```cpp
+	for(auto n: nums){
+	```
+	Starts a loop to iterate over each range in the input vector 'nums'. Each range is represented by a pair of integers.
 
-This approach is highly efficient, with linear time complexity relative to the number of intervals and constant space complexity, making it suitable for large datasets.
+5. **Inner Loop**
+	```cpp
+	    for(int i = n[0]; i <= n[1]; ++i) v[i-1]++;
+	```
+	For each range, this loop increments the corresponding index in the vector 'v' for each point between the range's start and end (inclusive).
+
+6. **Count Points**
+	```cpp
+	for(auto e: v){
+	```
+	Starts a loop to iterate over the elements of the vector 'v' to count how many distinct points are covered.
+
+7. **Condition Check**
+	```cpp
+	    if(e) ans++;
+	```
+	Increments 'ans' whenever a point is covered (i.e., the count at that index is greater than zero).
+
+8. **Return Statement**
+	```cpp
+	return ans;
+	```
+	Returns the total count of distinct points covered by the ranges.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the number of cars, as we iterate over each car and the points it covers.
+
+### Space Complexity 💾
+- **Best Case:** O(101)
+- **Worst Case:** O(101)
+
+The space complexity is O(101) because we use an array of size 101 to track covered points.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/points-that-intersect-with-cars/description/)
 

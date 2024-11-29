@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "AZrQMv5ne54"
 youtube_upload_date="2021-02-27"
 youtube_thumbnail="https://i.ytimg.com/vi/AZrQMv5ne54/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,107 +28,152 @@ youtube_thumbnail="https://i.ytimg.com/vi/AZrQMv5ne54/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of integers, return the number of triplets that can form a valid triangle. A valid triangle is formed when the sum of any two sides is greater than the third side.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of integers representing the side lengths of the triangle.
+- **Example:** `nums = [1, 2, 3, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 0 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int triangleNumber(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        
-        int cnt = 0, n = nums.size();
-        
-        for(int i = n - 1; i >= 0; i--)
-            for(int j = 0, k = i - 1; j < k;) {
-                if(nums[i] < nums[j] + nums[k]) {
-                    cnt+= k - j;
-                    k--;
-                } else j++;
-            }
-        
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of triplets from the array that can form a valid triangle.
+- **Example:** `3`
+- **Constraints:**
+	- The result is an integer representing the number of valid triplets.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine how many triplets from the array satisfy the triangle inequality property.
 
-Given an array of integers `nums`, we are tasked with finding the number of valid triangles that can be formed with three sides where the side lengths are taken from the array. For a set of three side lengths to form a valid triangle, the sum of any two sides must be greater than the third side. Specifically, given three side lengths `a`, `b`, and `c` (where `a <= b <= c`), the condition for forming a triangle is:
+- Sort the array in non-decreasing order.
+- For each element in the array, consider it as the largest side of the triangle.
+- Use two pointers to find pairs of smaller sides that form a valid triangle with the largest side.
+{{< dots >}}
+### Problem Assumptions ✅
+- The numbers in the array represent side lengths of a potential triangle.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3, 4]`  \
+  **Explanation:** In this case, there are three valid triangles that can be formed by picking different combinations of side lengths.
 
-- `a + b > c`
+{{< dots >}}
+## Approach 🚀
+The approach is to first sort the array and then use a two-pointer technique to find valid triplets that satisfy the triangle inequality.
 
-### Approach
-
-To solve this problem efficiently, we can use the **two-pointer technique** combined with sorting. The main idea is to:
-1. **Sort the array**: Sorting the array will allow us to simplify checking the triangle inequality condition. If the array is sorted, for any triplet of sides `a`, `b`, and `c` (where `a <= b <= c`), we only need to check if `a + b > c` to verify if they form a valid triangle.
-2. **Iterate through each element**: For each element `nums[i]`, treat it as the largest side (`c`) of the triangle.
-3. **Use two pointers**: For each fixed `nums[i]` as `c`, use two pointers (`j` and `k`) to find pairs of numbers from the previous elements (`nums[0]` to `nums[i-1]`) that can form valid triangles with `nums[i]`. Specifically, for each pair `nums[j]` and `nums[k]`, we check if they satisfy the condition `nums[j] + nums[k] > nums[i]`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sorting the Array
+### Initial Thoughts 💭
+- Sorting the array helps us efficiently check for valid triplets by leveraging the triangle inequality.
+- By sorting the array and iterating through it, we can reduce the time complexity and find the triplets in linear time.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array.
+- Handling arrays of size 1000 with large values.
+- Arrays with duplicate values or elements that cannot form a triangle.
+- Ensure that the algorithm works within the time limits for large arrays.
+{{< dots >}}
+## Code 💻
 ```cpp
-sort(nums.begin(), nums.end());
+int triangleNumber(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    
+    int cnt = 0, n = nums.size();
+    
+    for(int i = n - 1; i >= 0; i--)
+        for(int j = 0, k = i - 1; j < k;) {
+            if(nums[i] < nums[j] + nums[k]) {
+                cnt+= k - j;
+                k--;
+            } else j++;
+        }
+    
+    return cnt;
+}
 ```
-- We begin by sorting the `nums` array in ascending order. This ensures that for each triplet `a`, `b`, and `c` where `a <= b <= c`, the triangle inequality check (`a + b > c`) will be straightforward to implement.
 
-#### Step 2: Initialize Variables
-```cpp
-int cnt = 0, n = nums.size();
-```
-- `cnt` will store the count of valid triangles.
-- `n` is the size of the input array `nums`.
+The `triangleNumber` function counts the number of valid triangles that can be formed from an array of side lengths. A valid triangle satisfies the triangle inequality theorem, where the sum of the lengths of any two sides must be greater than the third side.
 
-#### Step 3: Loop Over the Largest Side (`c`)
-```cpp
-for(int i = n - 1; i >= 0; i--)
-```
-- We start by iterating backward from the last element of the sorted array (`i = n - 1`). The element at index `i` is considered as the largest side (`c`) of the triangle.
-- The reason for iterating backwards is that we want to consider the largest possible side first and check for possible valid triangles with smaller sides.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int triangleNumber(vector<int>& nums) {
+	```
+	Defines the function `triangleNumber` that takes a vector of integers (`nums`) representing side lengths and returns an integer count of valid triangles that can be formed.
 
-#### Step 4: Use Two Pointers to Find Valid Pairs
-```cpp
-for(int j = 0, k = i - 1; j < k;)
-```
-- For each fixed value of `nums[i]`, we use two pointers (`j` and `k`) to check for valid pairs of sides from the previous elements (`nums[0]` to `nums[i-1]`).
-  - `j` starts at 0 (the smallest element) and `k` starts at `i - 1` (the element just before `nums[i]`).
-  - The goal is to check if the sum of `nums[j]` and `nums[k]` is greater than `nums[i]` (the largest side of the triangle).
+2. **Sort Input**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the input array `nums` in ascending order to facilitate the triangle validation process. Sorting helps reduce the number of checks needed when evaluating potential triangles.
 
-#### Step 5: Check Triangle Validity and Update Pointers
-```cpp
-if(nums[i] < nums[j] + nums[k]) {
-    cnt += k - j;
-    k--;
-} else j++;
-```
-- If `nums[j] + nums[k] > nums[i]`, we have found valid pairs that can form a triangle with `nums[i]` as the largest side.
-  - The number of valid triangles with `nums[i]` as the largest side is `k - j`, because every pair of `nums[j]` and `nums[l]` (where `j <= l <= k`) will satisfy the condition `nums[j] + nums[l] > nums[i]`.
-  - We increment the count `cnt` by `k - j` and move the pointer `k--` to check the next smaller pair.
-- If `nums[j] + nums[k] <= nums[i]`, we increment `j` to try with a larger value for `nums[j]`.
+3. **Variable Initialization (cnt, n)**
+	```cpp
+	    int cnt = 0, n = nums.size();
+	```
+	Initializes a counter `cnt` to 0, which will track the number of valid triangles. It also stores the size of the array `nums` in the variable `n`.
 
-#### Step 6: Return the Final Count
-```cpp
-return cnt;
-```
-- After iterating through all possible valid triangles, the final count of valid triangles is returned.
+4. **Outer Loop (i)**
+	```cpp
+	    for(int i = n - 1; i >= 0; i--)
+	```
+	The outer loop starts from the largest element in the sorted array (`i = n - 1`) and iterates downwards. This loop helps in checking the largest side of the triangle first.
 
-### Complexity
+5. **Inner Loop (j, k)**
+	```cpp
+	        for(int j = 0, k = i - 1; j < k;) {
+	```
+	The inner loop uses two pointers, `j` and `k`, to check potential pairs of sides (`nums[j]`, `nums[k]`) with the current largest side (`nums[i]`). The pointers move towards each other to check all possible pairs.
 
-#### Time Complexity:
-- **O(n^2)**: 
-  - Sorting the array takes **O(n log n)** time.
-  - The outer loop runs `n` times (for each `nums[i]`), and for each iteration of the outer loop, the inner loop runs with two pointers, resulting in a total of **O(n^2)** iterations in the worst case.
-  - Therefore, the overall time complexity is **O(n^2)**.
+6. **Triangle Validation Check**
+	```cpp
+	            if(nums[i] < nums[j] + nums[k]) {
+	```
+	Checks if the current set of sides (`nums[i]`, `nums[j]`, `nums[k]`) forms a valid triangle based on the triangle inequality theorem (sum of two sides must be greater than the third side).
 
-#### Space Complexity:
-- **O(1)**: 
-  - The space complexity is constant because we only use a few extra variables (`cnt`, `n`, `j`, `k`), and no extra space is used for storing additional data structures (except for the input array).
-  - Therefore, the space complexity is **O(1)**.
+7. **Update Count**
+	```cpp
+	                cnt+= k - j;
+	```
+	If the sides form a valid triangle, the count `cnt` is updated. The number of valid triangles is incremented by `k - j` because all pairs of sides between `j` and `k` form valid triangles with the current `i`.
 
-### Conclusion
+8. **Move Pointer k**
+	```cpp
+	                k--;
+	```
+	Decrements the pointer `k` to check the next possible smaller side for forming valid triangles.
 
-This solution efficiently counts the number of valid triangles that can be formed from the given array of integers. By leveraging sorting and the two-pointer technique, we can reduce the complexity of the problem from **O(n^3)** (brute force approach) to **O(n^2)**, making it suitable for larger input sizes. The algorithm ensures that all possible triplets are checked in an optimal manner, yielding the correct count of valid triangles. This method is both time-efficient and space-efficient, providing an ideal solution for counting valid triangles from side lengths in a sorted array.
+9. **Move Pointer j**
+	```cpp
+	            } else j++;
+	```
+	If the sides do not form a valid triangle, increment the pointer `j` to check the next possible larger side.
+
+10. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the total count `cnt` of valid triangles that can be formed from the input side lengths.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N^2)
+- **Average Case:** O(N^2)
+- **Worst Case:** O(N^2)
+
+The time complexity is O(N^2) due to the two-pointer approach after sorting the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only need a constant amount of space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-triangle-number/description/)
 

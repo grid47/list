@@ -14,198 +14,154 @@ img_src = ""
 youtube = "ZDZ4KQsbnbc"
 youtube_upload_date="2022-06-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ZDZ4KQsbnbc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums where the length of the array is a power of 2. The task is to apply a repeated algorithm to reduce the array size. In each iteration, if the index of an element is even, the new value at that index will be the minimum of two adjacent elements; if the index is odd, the new value will be the maximum. The process continues until only one element remains, which is the result.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array nums of integers where the length is a power of 2.
+- **Example:** `Input: nums = [2, 4, 6, 8, 10, 12, 14, 16]`
+- **Constraints:**
+	- 1 <= nums.length <= 1024
+	- nums.length is a power of 2
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minMaxGame(vector<int>& nums) {
-        int n = nums.size(); 
-        if(n==1) return nums[0];  // Base case
-        vector<int> newNum(n/2); 
-        for(int i=0; i<n/2; i++) { 
-            if(i%2==0) newNum[i] = min(nums[2 * i], nums[2 * i + 1]); 
-            else newNum[i] = max(nums[2 * i], nums[2 * i + 1]); 
-        } 
-        int res = minMaxGame(newNum); // Recursive call
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the last number that remains in the array after applying the reduction algorithm repeatedly.
+- **Example:** `Output: 8`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to reduce the array by repeatedly applying the described transformation. In each iteration, alternate positions are filled with the minimum or maximum values of adjacent elements.
 
-The given problem requires solving a sequence of numbers, where we need to repeatedly process the array to reduce it to a single element. Specifically, for every adjacent pair of numbers in the array, you compute the minimum for even indices and the maximum for odd indices. After this step, the array is halved, and the process is repeated until one number remains.
+- Step 1: Begin with the full array.
+- Step 2: Create a new array by replacing elements at even indices with the minimum of two adjacent elements and elements at odd indices with the maximum.
+- Step 3: Replace the original array with the new array and repeat the process.
+- Step 4: Continue until only one element remains in the array, which is returned as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The length of the array is guaranteed to be a power of 2.
+- The integer values in the array are valid and within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 5, 7]`  \
+  **Explanation:** In the first iteration: newNums = [min(1, 3), max(5, 7)] = [1, 7]. Then, the next iteration gives newNums = [1]. The last remaining element is 1.
 
-Given an array of integers, the objective is to repeatedly apply this transformation until we are left with a single value, which is the result.
+- **Input:** `Input: nums = [2, 4, 6, 8, 10, 12, 14, 16]`  \
+  **Explanation:** After the first iteration, nums = [2, 6, 10, 14], and in subsequent iterations, nums = [2, 10], and finally, nums = [8].
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves recursively applying the reduction algorithm to the array until only one element remains. In each iteration, you need to build a new array based on the minimum and maximum values of adjacent pairs.
 
-The approach is recursive and works by breaking down the problem into smaller subproblems. Here's a step-by-step explanation of the approach:
-
-1. **Base Case**: 
-   - When the length of the input array is 1, we simply return the only element, as no further processing is needed.
-
-2. **Transform the Array**:
-   - For each pair of adjacent elements in the array:
-     - At even indices, take the minimum of the two adjacent elements.
-     - At odd indices, take the maximum of the two adjacent elements.
-   - This transformation reduces the size of the array by half after each step.
-
-3. **Recursive Call**:
-   - After transforming the array, we make a recursive call on the new, reduced array. This process repeats until the array size becomes 1, at which point the last remaining element is the answer.
-
-4. **Return the Result**:
-   - The final result is the number left after repeated transformations.
-
-### Code Breakdown (Step by Step)
-
-The following code implements the approach outlined above:
-
+### Initial Thoughts 💭
+- The array's size reduces by half in each iteration.
+- The process continues recursively until only one element is left.
+- The problem can be solved efficiently by using a recursive approach to apply the transformation on smaller arrays.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty, as the length of the array is guaranteed to be at least 1.
+- For large arrays (up to size 1024), ensure that the algorithm efficiently reduces the array size in each iteration.
+- Arrays with identical values will always return that value as the result.
+- The array will always be a power of 2, and the number of iterations will be logarithmic with respect to the array size.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int minMaxGame(vector<int>& nums) {
-        int n = nums.size(); 
-        if (n == 1) return nums[0];  // Base case: if only one element is left, return it
-
-        vector<int> newNum(n / 2); // Array to hold the transformed values
-
-        // Process the array in pairs
-        for (int i = 0; i < n / 2; i++) { 
-            if (i % 2 == 0) {
-                // For even indices, take the minimum of the adjacent pair
-                newNum[i] = min(nums[2 * i], nums[2 * i + 1]); 
-            } else {
-                // For odd indices, take the maximum of the adjacent pair
-                newNum[i] = max(nums[2 * i], nums[2 * i + 1]); 
-            }
-        }
-
-        // Recursively call the function on the reduced array
-        return minMaxGame(newNum);
-    }
-};
+int minMaxGame(vector<int>& nums) {
+    int n = nums.size(); 
+    if(n==1) return nums[0];  // Base case
+    vector<int> newNum(n/2); 
+    for(int i=0; i<n/2; i++) { 
+        if(i%2==0) newNum[i] = min(nums[2 * i], nums[2 * i + 1]); 
+        else newNum[i] = max(nums[2 * i], nums[2 * i + 1]); 
+    } 
+    int res = minMaxGame(newNum); // Recursive call
+    return res;
+}
 ```
 
-#### Detailed Explanation:
+The function `minMaxGame` recursively reduces the size of the input array by choosing the minimum or maximum between adjacent elements in pairs, alternating between minimum and maximum at each step, until the array is reduced to one element. This element is then returned as the result.
 
-1. **Base Case**:
-   - The function first checks if the size of the array `nums` is 1. If so, it directly returns the single element, since no further operations are needed. This is the base case of the recursion.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minMaxGame(vector<int>& nums) {
+	```
+	The function `minMaxGame` is declared, which takes a reference to a vector of integers `nums` and returns an integer. This function aims to reduce the input vector based on alternating min and max operations.
 
-   ```cpp
-   if (n == 1) return nums[0];
-   ```
+2. **Get Array Size**
+	```cpp
+	    int n = nums.size(); 
+	```
+	The size of the input vector `nums` is calculated and stored in the variable `n`.
 
-2. **Creating a New Array**:
-   - The array `newNum` is created, which will hold the transformed values. The size of `newNum` is half the size of the original array (`n / 2`), as the number of elements will reduce after one transformation step.
+3. **Base Case Check**
+	```cpp
+	    if(n==1) return nums[0];  // Base case
+	```
+	A base case is checked: if the vector has only one element, that element is returned as the result.
 
-   ```cpp
-   vector<int> newNum(n / 2);
-   ```
+4. **Create New Vector**
+	```cpp
+	    vector<int> newNum(n/2); 
+	```
+	A new vector `newNum` of size `n/2` is created to store the results of the alternating min and max operations.
 
-3. **Transforming the Array**:
-   - The loop runs through the original array in steps of 2. For each index `i`, it processes a pair of adjacent elements:
-     - If `i` is even, the minimum of the two adjacent numbers is stored at index `i` in `newNum`.
-     - If `i` is odd, the maximum of the two adjacent numbers is stored at index `i` in `newNum`.
+5. **Iterate Over Vector**
+	```cpp
+	    for(int i=0; i<n/2; i++) { 
+	```
+	A for-loop is initiated to iterate through the input vector `nums` in steps of two, processing pairs of elements.
 
-   ```cpp
-   for (int i = 0; i < n / 2; i++) { 
-       if (i % 2 == 0) {
-           newNum[i] = min(nums[2 * i], nums[2 * i + 1]);
-       } else {
-           newNum[i] = max(nums[2 * i], nums[2 * i + 1]);
-       }
-   }
-   ```
+6. **Min Operation**
+	```cpp
+	        if(i%2==0) newNum[i] = min(nums[2 * i], nums[2 * i + 1]); 
+	```
+	For even indexed iterations, the minimum of the two adjacent elements in `nums` is stored in `newNum[i]`.
 
-4. **Recursive Call**:
-   - After transforming the array, the function calls itself recursively on the newly formed array `newNum` to repeat the transformation. This continues until the array size becomes 1.
+7. **Max Operation**
+	```cpp
+	        else newNum[i] = max(nums[2 * i], nums[2 * i + 1]); 
+	```
+	For odd indexed iterations, the maximum of the two adjacent elements in `nums` is stored in `newNum[i]`.
 
-   ```cpp
-   return minMaxGame(newNum);
-   ```
+8. **Recursive Call**
+	```cpp
+	    int res = minMaxGame(newNum); // Recursive call
+	```
+	The function `minMaxGame` is called recursively with the newly created vector `newNum` as the input.
 
-5. **Returning the Final Result**:
-   - The recursion will continue reducing the array size until it reaches the base case where only one element is left, and that element is returned as the result.
+9. **Return Result**
+	```cpp
+	    return res;
+	```
+	The result of the recursive call is returned.
 
-### Example Walkthrough
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-Let’s walk through the algorithm with an example to clarify how it works:
+The time complexity is O(n) for each iteration, and there are log(n) iterations in total. Hence, the overall complexity is O(n log n).
 
-#### Example 1:
-Input: 
-```cpp
-vector<int> nums = {1, 3, 2, 4, 5, 7, 6, 8};
-```
-Steps:
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-1. The first call processes the array of size 8:
-   - For `i = 0`: `min(1, 3) = 1`
-   - For `i = 1`: `max(2, 4) = 4`
-   - For `i = 2`: `min(5, 7) = 5`
-   - For `i = 3`: `max(6, 8) = 8`
-   - So, the new array becomes `[1, 4, 5, 8]`.
+The space complexity is O(n) since we create a new array of half the size of the original array in each iteration.
 
-2. The second call processes the array of size 4:
-   - For `i = 0`: `min(1, 4) = 1`
-   - For `i = 1`: `max(5, 8) = 8`
-   - The new array becomes `[1, 8]`.
+**Happy Coding! 🎉**
 
-3. The third call processes the array of size 2:
-   - For `i = 0`: `min(1, 8) = 1`
-   - The new array becomes `[1]`.
-
-4. The base case is reached, and the function returns `1`.
-
-Final Result: `1`
-
-#### Example 2:
-Input: 
-```cpp
-vector<int> nums = {4, 7, 9, 10};
-```
-Steps:
-
-1. The first call processes the array of size 4:
-   - For `i = 0`: `min(4, 7) = 4`
-   - For `i = 1`: `max(9, 10) = 10`
-   - The new array becomes `[4, 10]`.
-
-2. The second call processes the array of size 2:
-   - For `i = 0`: `min(4, 10) = 4`
-   - The new array becomes `[4]`.
-
-3. The base case is reached, and the function returns `4`.
-
-Final Result: `4`
-
-### Time Complexity
-
-Let `n` be the size of the input array.
-
-1. Each recursive call reduces the size of the array by half.
-2. At each level, the algorithm processes every element once, which takes `O(n)` time.
-3. The number of recursive calls is logarithmic, i.e., `O(log n)`.
-
-Thus, the overall time complexity is **O(n)**.
-
-### Space Complexity
-
-The space complexity is determined by the storage required for the recursive calls and the new array at each step.
-
-- In each recursive call, a new array of size `n / 2` is created. The maximum depth of the recursion is `log n`.
-- Thus, the space complexity is **O(n)** due to the space used for the recursive call stack and the array at each level.
-
-### Conclusion
-
-The provided solution implements a recursive approach to reduce the given array by applying a sequence of transformations. The algorithm effectively handles arrays of any size, repeatedly applying the transformation until a single element remains. With a time complexity of **O(n)** and space complexity of **O(n)**, this solution is efficient and scalable for large arrays.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/min-max-game/description/)
 

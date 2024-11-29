@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,98 +28,148 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string `s`, return the number of unique non-empty substrings of `s` that are present in the infinite wraparound string 'abcdefghijklmnopqrstuvwxyz'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s`.
+- **Example:** `s = 'c'`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findSubstringInWraproundString(string p) {
-        vector<int> len(26, 0);
-        int cur = 1;
-        len[p[0] - 'a'] = 1;
-        for(int i = 1; i < p.size(); i++) {
-            if((p[i] + 26 - p[i - 1]) % 26 == 1) cur++;
-            else cur = 1;
-            len[p[i] - 'a'] = max(len[p[i] - 'a'], cur);
-        }
-        return accumulate(len.begin(), len.end(), 0);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of unique substrings of `s` that are found in the infinite wraparound string.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The output should be an integer representing the count of unique substrings in the wraparound base string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find all unique substrings of `s` and check if they exist in the infinite wraparound string.
+
+- 1. Traverse the string `s` and find substrings that are contiguous in the wraparound base string.
+- 2. Track the maximum length of continuous substrings from `s` that can be matched to substrings in the base string.
+- 3. Count the number of unique substrings by leveraging the tracked maximum lengths.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `s` is non-empty and contains only lowercase letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'c'`  \
+  **Explanation:** The substring 'c' is present in the infinite base string.
+
+- **Input:** `s = 'db'`  \
+  **Explanation:** The substrings 'd' and 'b' are both present in the infinite base string.
+
+- **Input:** `s = 'zab'`  \
+  **Explanation:** The substrings 'z', 'a', 'b', 'za', 'ab', and 'zab' are all present in the infinite base string.
+
+{{< dots >}}
+## Approach 🚀
+We solve the problem by finding the substrings of `s` that can be matched in the infinite wraparound string.
+
+### Initial Thoughts 💭
+- The problem involves identifying substrings that are continuous in the base string, which requires recognizing circular sequences.
+- A key observation is that substrings can be tracked by looking at the maximum length of valid sequences from `s` that match the base string.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string is not allowed as per the constraints.
+- Ensure the solution handles large inputs efficiently, with lengths up to 10^5.
+- Consider cases where the string contains repeating characters or sequences, such as 'aaaa'.
+- The solution must run in linear time to handle large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int findSubstringInWraproundString(string p) {
+    vector<int> len(26, 0);
+    int cur = 1;
+    len[p[0] - 'a'] = 1;
+    for(int i = 1; i < p.size(); i++) {
+        if((p[i] + 26 - p[i - 1]) % 26 == 1) cur++;
+        else cur = 1;
+        len[p[i] - 'a'] = max(len[p[i] - 'a'], cur);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding the number of unique substrings that can be formed from a string `p` in a wraparound string. A wraparound string is one where after the last character, the string wraps around to the first character in a cyclic manner. The substrings we are interested in must be contiguous, and they need to follow the wraparound rule. The goal is to determine how many distinct substrings can be created from such a string.
-
-### Approach
-
-To solve the problem efficiently, we must think about how we can utilize the cyclic nature of the string and the fact that substrings can overlap. Instead of explicitly generating all substrings and checking for uniqueness, we can leverage dynamic programming (DP) to keep track of the longest possible substring that ends at each character. The key observation is that substrings formed from a continuous sequence of consecutive characters in the alphabet (in a wraparound manner) should be handled effectively using a linear scan.
-
-#### Key Insights:
-1. **Wraparound Substrings**: If two consecutive characters in the string `p` form a valid subsequence in a cyclic manner, we should treat them as a part of a larger valid substring.
-   - For example, if `p = "abc"`, then the substrings `"a"`, `"b"`, `"c"`, `"ab"`, `"bc"`, and `"abc"` are all valid.
-   - Similarly, for wraparound behavior, the substring `"z"` followed by `"a"` should be treated as part of a larger substring.
-
-2. **Dynamic Programming**: We can use a DP approach where:
-   - We maintain an array `len[26]` of size 26 to store the maximum length of a substring that ends with each character (`'a'`, `'b'`, ..., `'z'`).
-   - As we iterate through the string `p`, we calculate the length of substrings that end at each character, considering the cyclic nature of the string.
-
-3. **Accumulate Results**: The total number of unique substrings can be calculated by summing the values stored in the `len` array, which represent the maximum lengths of substrings that end at each character.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Data Structures
-
-```cpp
-vector<int> len(26, 0);
-int cur = 1;
-len[p[0] - 'a'] = 1;
-```
-
-- We initialize a vector `len` of size 26, where each element corresponds to a character of the alphabet. Initially, all values are set to 0.
-- We also initialize `cur` to 1, representing the current length of the substring that we are examining.
-- The first character in the string `p` is considered as a valid substring of length 1, so we set `len[p[0] - 'a'] = 1`.
-
-#### Step 2: Iterate Through the String
-
-```cpp
-for(int i = 1; i < p.size(); i++) {
-    if((p[i] + 26 - p[i - 1]) % 26 == 1) cur++;
-    else cur = 1;
-    len[p[i] - 'a'] = max(len[p[i] - 'a'], cur);
+    return accumulate(len.begin(), len.end(), 0);
 }
 ```
 
-- We start iterating over the string `p` from the second character (index 1).
-- For each character `p[i]`, we check if it forms a valid substring with the previous character `p[i - 1]` based on the wraparound condition.
-  - The expression `(p[i] + 26 - p[i - 1]) % 26 == 1` checks whether the characters `p[i]` and `p[i - 1]` are consecutive in the alphabet (considering wraparound).
-  - If this condition holds true, it means that we can extend the current valid substring, so we increment the `cur` value.
-  - If the condition doesn't hold, we reset `cur` to 1 because we cannot extend the current substring.
-- We then update `len[p[i] - 'a']` to store the maximum length of a substring that ends with the character `p[i]`.
+The function `findSubstringInWraproundString` calculates the total number of unique substrings in a circular alphabet string. It tracks the length of substrings that follow a continuous sequence of characters in the alphabet, considering wraparound behavior (i.e., after 'z' comes 'a').
 
-#### Step 3: Sum the Results
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findSubstringInWraproundString(string p) {
+	```
+	Defines the function `findSubstringInWraproundString` that takes a string `p` and returns the total count of unique substrings that can be formed in a wraparound string.
 
-```cpp
-return accumulate(len.begin(), len.end(), 0);
-```
+2. **Vector Initialization**
+	```cpp
+	    vector<int> len(26, 0);
+	```
+	Initializes a vector `len` of size 26 to store the maximum length of substrings ending with each letter of the alphabet, initialized to 0.
 
-- After iterating through the string and updating the `len` array, we simply sum all the values in `len` using `accumulate`. Each value in `len` represents the maximum length of substrings that end with the corresponding character. By summing these values, we get the total number of distinct substrings that can be formed from the string `p` under the wraparound constraint.
+3. **Variable Initialization**
+	```cpp
+	    int cur = 1;
+	```
+	Initializes the variable `cur` to 1, which keeps track of the current length of the ongoing sequence of consecutive characters in the alphabet.
 
-### Complexity
+4. **First Character Handling**
+	```cpp
+	    len[p[0] - 'a'] = 1;
+	```
+	Sets the length of the substring ending with the first character of `p` (indexed by `p[0] - 'a'`) to 1, as it forms a single-character substring.
 
-#### Time Complexity:
-- **Iterating Through the String**: We iterate through the string `p` once, which takes `O(n)` time, where `n` is the length of the string.
-- **Accumulate**: We perform a sum operation over the array `len`, which takes `O(26)` time since the array has a fixed size of 26.
-- **Overall Time Complexity**: The total time complexity of the solution is `O(n)`, where `n` is the length of the string `p`.
+5. **Loop Start**
+	```cpp
+	    for(int i = 1; i < p.size(); i++) {
+	```
+	Begins a loop to iterate through the string `p`, starting from the second character, to check for continuous character sequences.
 
-#### Space Complexity:
-- **Space for `len` Array**: We use an array `len` of size 26 to store the maximum length of substrings ending with each character, which takes `O(1)` space (constant space).
-- **Overall Space Complexity**: The space complexity is `O(1)` because we only use a constant amount of extra space for the `len` array.
+6. **Sequence Check**
+	```cpp
+	        if((p[i] + 26 - p[i - 1]) % 26 == 1) cur++;
+	```
+	Checks if the current character `p[i]` and the previous character `p[i-1]` are consecutive in the alphabet, considering wraparound behavior. If they are consecutive, it increments `cur`.
 
-### Conclusion
+7. **Sequence Reset**
+	```cpp
+	        else cur = 1;
+	```
+	If the current character is not consecutive to the previous one, it resets `cur` to 1, starting a new sequence.
 
-This solution efficiently computes the number of unique substrings in the wraparound string using a dynamic programming approach. The algorithm processes the string in a single pass (`O(n)` time complexity) and uses constant space (`O(1)` space complexity), making it highly efficient. The key insight is to track the longest valid substring that ends at each character and sum the results to get the total number of unique substrings. This approach ensures that we consider all possible wraparound substrings without explicitly generating each one, making it optimal for large inputs.
+8. **Update Lengths**
+	```cpp
+	        len[p[i] - 'a'] = max(len[p[i] - 'a'], cur);
+	```
+	Updates the maximum length of the substring ending with the character `p[i]` by comparing the current value in `len` and the ongoing sequence length `cur`.
+
+9. **Final Calculation**
+	```cpp
+	    return accumulate(len.begin(), len.end(), 0);
+	```
+	Calculates the sum of all the maximum lengths of substrings ending with each letter of the alphabet using the `accumulate` function, returning the total number of unique substrings.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) since we process each character of the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(26)
+- **Worst Case:** O(26)
+
+The space complexity is O(26) due to the fixed array used to track the maximum lengths of substrings for each character.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-substrings-in-wraparound-string/description/)
 

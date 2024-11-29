@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "NtHOsOl8zvQ"
 youtube_upload_date="2022-06-28"
 youtube_thumbnail="https://i.ytimg.com/vi/NtHOsOl8zvQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,124 +28,162 @@ youtube_thumbnail="https://i.ytimg.com/vi/NtHOsOl8zvQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two binary trees, merge them into a new binary tree where overlapping nodes are summed, and non-overlapping nodes are retained as they are.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two binary trees, represented by their root nodes. Each node contains an integer value.
+- **Example:** `root1 = [1, 3, 2, 5], root2 = [2, 1, 3, None, 4, None, 7]`
+- **Constraints:**
+	- The number of nodes in each tree is in the range [0, 2000].
+	- -10^4 <= Node.val <= 10^4
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* mergeTrees(TreeNode* r1, TreeNode* r2) {
-        TreeNode* ans = new TreeNode(0);
-        if(r1 == NULL && r2 == NULL) return NULL;
-        if(r1 != NULL && r2 != NULL)
-            ans->val = r1->val + r2->val;
-        else if(r1 == NULL)
-            ans->val = r2->val;
-        else
-            ans->val = r1->val;
-        ans->left = mergeTrees(r1?r1->left:NULL, r2?r2->left:NULL);
-        ans->right = mergeTrees(r1?r1->right:NULL, r2?r2->right:NULL);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root of the merged binary tree.
+- **Example:** `[3, 4, 5, 5, 4, None, 7]`
+- **Constraints:**
+	- The merged tree should be returned as the root node of the new binary tree.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Merge two binary trees by summing overlapping nodes and using non-overlapping nodes directly.
 
-Given two binary trees, we are tasked with merging them into a new binary tree. The merging process is defined as follows:
-- If two nodes overlap, we sum their values and create a new node with this sum.
-- If one of the trees has a node and the other does not, we keep the existing node's value.
-- If both trees have a `NULL` node at the same position, the merged tree will also have a `NULL` node at that position.
+- 1. If both nodes are non-null, sum the values and recursively merge the left and right subtrees.
+- 2. If one of the nodes is null, return the non-null node as it is.
+- 3. If both nodes are null, return null.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both input trees are valid binary trees.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root1 = [1, 3, 2, 5], root2 = [2, 1, 3, None, 4, None, 7]`  \
+  **Explanation:** In this example, the root nodes (1 and 2) are merged into 3. The left children (3 and 1) are merged into 4, and similarly for the right children. The leaves are merged by summing the node values.
 
-The goal is to return the merged tree as a new binary tree.
+{{< dots >}}
+## Approach 🚀
+We will merge the trees recursively by comparing the values of the nodes and summing them where both nodes are non-null, or directly using the non-null node if one is null.
 
-### Approach
-
-The problem can be solved using a **recursive approach**. At each step of recursion, we merge two nodes:
-1. **Base Case:** If both nodes are `NULL`, return `NULL` because there's nothing to merge.
-2. **If both nodes exist:** We sum the values of the two nodes and create a new node with this value.
-3. **If one of the nodes is `NULL`:** If one tree has a node and the other tree does not, we take the node from the tree that has it.
-4. **Recursively merge left and right children:** After processing the current nodes, we proceed to merge the left children and right children recursively.
-
-This recursive approach ensures that all nodes from both trees are merged appropriately.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Result Node
+### Initial Thoughts 💭
+- The problem is a classic example of recursion where we merge two binary trees.
+- We will recursively traverse both trees and merge them by summing the overlapping nodes and retaining the non-overlapping nodes.
+{{< dots >}}
+### Edge Cases 🌐
+- If both trees are empty, return null.
+- Handle cases where the trees have up to 2000 nodes.
+- Trees with null nodes or trees that have only one node.
+- Ensure that the function handles the merging of trees efficiently within the input size constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-TreeNode* ans = new TreeNode(0);
+TreeNode* mergeTrees(TreeNode* r1, TreeNode* r2) {
+    TreeNode* ans = new TreeNode(0);
+    if(r1 == NULL && r2 == NULL) return NULL;
+    if(r1 != NULL && r2 != NULL)
+        ans->val = r1->val + r2->val;
+    else if(r1 == NULL)
+        ans->val = r2->val;
+    else
+        ans->val = r1->val;
+    ans->left = mergeTrees(r1?r1->left:NULL, r2?r2->left:NULL);
+    ans->right = mergeTrees(r1?r1->right:NULL, r2?r2->right:NULL);
+    return ans;
+}
 ```
-- We create a new `TreeNode` object, `ans`, which will hold the merged value at the current level. Initially, the value is set to `0` because it will be updated later based on the current merge condition.
 
-#### Step 2: Base Case – Both Nodes are `NULL`
-```cpp
-if(r1 == NULL && r2 == NULL) return NULL;
-```
-- This is the base case where both input nodes (`r1` and `r2`) are `NULL`. In this case, there is nothing to merge, so we return `NULL`.
+The `mergeTrees` function merges two binary trees. If both trees have nodes at a given position, their values are summed up. If only one tree has a node, the value from that tree is used. The left and right subtrees are recursively merged in the same way.
 
-#### Step 3: Merging the Nodes When Both Exist
-```cpp
-if(r1 != NULL && r2 != NULL)
-    ans->val = r1->val + r2->val;
-```
-- If both `r1` and `r2` are non-`NULL`, we add their values and assign the sum to the `ans` node's `val` field.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	TreeNode* mergeTrees(TreeNode* r1, TreeNode* r2) {
+	```
+	Defines the `mergeTrees` function that takes two binary tree nodes (`r1` and `r2`) as input and returns a new merged tree rooted at `ans`.
 
-#### Step 4: Handling Missing Nodes
-```cpp
-else if(r1 == NULL)
-    ans->val = r2->val;
-else
-    ans->val = r1->val;
-```
-- If only one of `r1` or `r2` is `NULL`, we assign the value of the non-`NULL` node to the `ans` node. This ensures that the merged tree keeps the value from the tree that has the node.
+2. **Node Creation**
+	```cpp
+	    TreeNode* ans = new TreeNode(0);
+	```
+	Creates a new `TreeNode` named `ans` and initializes its value to `0`. This will hold the merged values from both trees.
 
-#### Step 5: Recursively Merge Left Subtrees
-```cpp
-ans->left = mergeTrees(r1 ? r1->left : NULL, r2 ? r2->left : NULL);
-```
-- After handling the current node, we recursively merge the left children of `r1` and `r2`. If either `r1` or `r2` is `NULL`, we pass `NULL` for the corresponding left child.
+3. **Base Case (NULL check)**
+	```cpp
+	    if(r1 == NULL && r2 == NULL) return NULL;
+	```
+	Checks if both input nodes are NULL. If so, it returns NULL because there is no tree to merge.
 
-#### Step 6: Recursively Merge Right Subtrees
-```cpp
-ans->right = mergeTrees(r1 ? r1->right : NULL, r2 ? r2->right : NULL);
-```
-- Similarly, we recursively merge the right children of `r1` and `r2`. The same logic applies: if one of the trees is missing the right child, we pass `NULL`.
+4. **Both Nodes Present**
+	```cpp
+	    if(r1 != NULL && r2 != NULL)
+	```
+	Checks if both input nodes (`r1` and `r2`) are non-NULL. If true, their values will be added together to form the value of the merged node.
 
-#### Step 7: Return the Merged Tree
-```cpp
-return ans;
-```
-- After processing the current nodes and their left and right subtrees, we return the `ans` node, which contains the merged value and the references to its merged left and right children.
+5. **Sum Values of Both Nodes**
+	```cpp
+	        ans->val = r1->val + r2->val;
+	```
+	If both nodes are non-NULL, the values from both nodes (`r1->val` and `r2->val`) are summed and stored in `ans->val`.
 
-### Complexity
+6. **Only First Node Present**
+	```cpp
+	    else if(r1 == NULL)
+	```
+	Checks if the first node (`r1`) is NULL, meaning only `r2` has a node at this position in the tree.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the larger tree. The reason is that we visit each node in the trees exactly once during the recursion. Each recursive call processes one node, so the overall complexity is linear in terms of the total number of nodes across both trees.
+7. **Use Value from Second Node**
+	```cpp
+	        ans->val = r2->val;
+	```
+	If `r1` is NULL, the value from `r2` is assigned to `ans->val`, as `r2` is the only valid node.
 
-#### Space Complexity:
-- The space complexity is **O(h)**, where `h` is the height of the tree. This is due to the recursion stack used to store the function calls during the merging process. In the worst case, where the tree is unbalanced (e.g., a linked list), the recursion depth would be equal to the number of nodes, and thus the space complexity will be **O(n)**. In the best case, where the tree is balanced, the recursion depth will be **O(log n)**, and the space complexity will be **O(log n)**.
+8. **Only Second Node Present**
+	```cpp
+	    else
+	```
+	If neither of the previous conditions was met, it implies that `r2` is NULL and only `r1` is valid at this position.
 
-### Conclusion
+9. **Use Value from First Node**
+	```cpp
+	        ans->val = r1->val;
+	```
+	If `r2` is NULL, the value from `r1` is assigned to `ans->val`, as `r1` is the only valid node.
 
-This solution successfully merges two binary trees by combining their nodes. The recursive approach is simple yet efficient, ensuring that each node is processed only once. The approach handles all possible cases:
-1. If both nodes exist, their values are summed and stored.
-2. If only one node exists, the value from that node is kept.
-3. If both nodes are `NULL`, the merged node is also `NULL`.
+10. **Recursive Left Subtree Merge**
+	```cpp
+	    ans->left = mergeTrees(r1?r1->left:NULL, r2?r2->left:NULL);
+	```
+	Recursively merges the left subtrees of `r1` and `r2`. If a tree is missing a left child, it passes NULL instead.
 
-The time complexity of **O(n)** makes this approach suitable for large binary trees, while the space complexity of **O(h)** ensures that it remains manageable even for deep trees. By summing overlapping nodes and recursively merging the subtrees, the solution creates a merged tree that is both correct and efficient.
+11. **Recursive Right Subtree Merge**
+	```cpp
+	    ans->right = mergeTrees(r1?r1->right:NULL, r2?r2->right:NULL);
+	```
+	Recursively merges the right subtrees of `r1` and `r2`. Similar to the left subtree, NULL is passed if a tree has no right child.
 
-This approach works efficiently in real-world scenarios where trees may vary in size and structure, and it provides an optimal solution to the problem of merging binary trees.
+12. **Return Merged Tree**
+	```cpp
+	    return ans;
+	```
+	Returns the root of the merged tree, which has been constructed by recursively merging nodes and their children.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N)
+- **Average Case:** O(N)
+- **Worst Case:** O(N)
+
+The time complexity is O(N) where N is the total number of nodes in both trees, as we visit each node once.
+
+### Space Complexity 💾
+- **Best Case:** O(H)
+- **Worst Case:** O(H)
+
+The space complexity is O(H) where H is the height of the tree due to the recursive call stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-two-binary-trees/description/)
 

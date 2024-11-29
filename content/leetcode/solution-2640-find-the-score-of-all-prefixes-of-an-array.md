@@ -14,113 +14,159 @@ img_src = ""
 youtube = "Xp413jTlTNk"
 youtube_upload_date="2023-04-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Xp413jTlTNk/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums` of length `n`. For each prefix `nums[0..i]`, you are asked to calculate its 'score.' The score is defined as the sum of the conversion array of the prefix. The conversion array of a prefix is formed by the following rule: conver[i] = nums[i] + max(nums[0..i]), where max(nums[0..i]) is the maximum value in the prefix from the start to the current index.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` of length `n` where 1 <= n <= 10^5 and 1 <= nums[i] <= 10^9.
+- **Example:** `nums = [4, 6, 2, 9]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<long long> findPrefixScore(vector<int>& nums) {
-        int mx = nums[0];
-        long long sum = 0;
-        int n = nums.size();
-        vector<long long> ans(n, 0);
-        for(int i = 0; i < n; i++) {
-            mx = max(mx, nums[i]);
-            int scr = nums[i] + mx;
-            ans[i] = i == 0? scr: ans[i - 1] + scr;
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer array `ans` of length `n`, where each `ans[i]` represents the score of the prefix `nums[0..i]`.
+- **Example:** `Output: [8, 18, 26, 44]`
+- **Constraints:**
+	- The output array will have exactly `n` elements, each corresponding to the score of the prefix.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the score of each prefix of the array. For each index `i`, compute the conversion array element as the sum of `nums[i]` and the maximum value encountered in the array up to that index.
+
+- Step 1: Initialize a variable to keep track of the maximum value encountered so far in the array.
+- Step 2: Iterate over the array, and for each element at index `i`, calculate its conversion array value by adding `nums[i]` to the maximum value up to that point.
+- Step 3: Maintain a running sum of the conversion array values to store the score of the prefix `nums[0..i]`.
+- Step 4: Return the array of scores for all prefixes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` is non-empty and contains positive integers within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 6, 2, 9]`  \
+  **Explanation:** For the prefix [4], the conversion array is [8] with score 8. For the prefix [4, 6], the conversion array is [8, 12] with score 18. For the prefix [4, 6, 2], the conversion array is [8, 12, 14] with score 26. For the prefix [4, 6, 2, 9], the conversion array is [8, 12, 14, 20] with score 44.
+
+- **Input:** `nums = [1, 2, 3]`  \
+  **Explanation:** For the prefix [1], the conversion array is [2] with score 2. For the prefix [1, 2], the conversion array is [2, 4] with score 6. For the prefix [1, 2, 3], the conversion array is [2, 4, 6] with score 12.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating through the array while maintaining the maximum element encountered up to the current index. We can calculate the conversion array value on the fly and maintain a running sum for each prefix score.
+
+### Initial Thoughts 💭
+- The problem asks us to compute a running score for each prefix of the array, so a straightforward approach would be to maintain the maximum of the prefix as we iterate through the array.
+- By keeping track of the maximum element encountered so far, we can efficiently compute the conversion array for each prefix and accumulate the score in a single pass.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the result should also be an empty array.
+- The solution should handle large arrays with up to 100,000 elements efficiently.
+- When all elements are the same, the result will follow a predictable pattern where the score increases steadily based on the fixed maximum value.
+- The algorithm must be optimized to run in O(n) time to handle large inputs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<long long> findPrefixScore(vector<int>& nums) {
+    int mx = nums[0];
+    long long sum = 0;
+    int n = nums.size();
+    vector<long long> ans(n, 0);
+    for(int i = 0; i < n; i++) {
+        mx = max(mx, nums[i]);
+        int scr = nums[i] + mx;
+        ans[i] = i == 0? scr: ans[i - 1] + scr;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to calculate the prefix scores for a given array `nums`. The prefix score at index `i` is defined as the sum of all elements from index `0` to `i`, where each element in the range contributes the sum of the element and the maximum value from index `0` to `i`. We need to return a vector where each element represents the prefix score at the corresponding index.
-
-### Approach
-
-To solve the problem efficiently, the approach leverages a running maximum for the elements from the start up to the current index and calculates the prefix scores progressively as we traverse through the array. Here's the breakdown of the approach:
-
-1. **Initialize the Required Variables**:
-   - We start by initializing `mx`, which keeps track of the maximum element encountered so far. This helps us compute the score for each element.
-   - `sum` keeps a running total of the prefix scores.
-   - An array `ans` of the same size as `nums` is used to store the prefix scores for each index.
-
-2. **Iterate Over the Array**:
-   - For each element `nums[i]`, we update `mx` to be the maximum between the current `mx` and `nums[i]`. This ensures that `mx` always holds the largest number seen up to the current index.
-   
-   - For each element `nums[i]`, calculate the score `scr` as `nums[i] + mx`. This represents the contribution of the current element and the maximum value encountered up to that point.
-   
-   - The prefix score at index `i` is the sum of the current score and the prefix score at the previous index, except for the first index where it is just the score at that index.
-
-3. **Return the Result**:
-   - After iterating through the entire array, the `ans` vector contains the prefix scores for all indices, which is then returned.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization of Variables**
-
-We first initialize the necessary variables:
-
-- `mx`: This variable stores the maximum element encountered so far. It is initialized to `nums[0]`, the first element of the array, because the first element will be the maximum for the first index.
-- `sum`: This variable is used to accumulate the scores as we calculate the prefix scores, although it’s not directly used here.
-- `ans`: This vector holds the final result, initialized to store `n` values, each set to zero initially.
-
-```cpp
-int mx = nums[0];  // Initialize max to the first element
-long long sum = 0;  // Initialize sum to 0 (not directly used)
-int n = nums.size();  // Size of the input array
-vector<long long> ans(n, 0);  // Initialize result vector to store prefix scores
-```
-
-#### 2. **Iterate Over the Array**
-
-Next, we loop through each element in the array `nums`:
-
-- **Updating the maximum**: For each element, we update `mx` to the larger of the current `mx` and the current element `nums[i]`.
-- **Calculating the score**: We calculate the score for the current element as the sum of the element and the current `mx`. This is the contribution of `nums[i]` to the prefix score.
-- **Storing the prefix score**: For the first element (`i == 0`), the prefix score is just the score of the current element. For subsequent elements, the prefix score is the cumulative sum of scores up to the previous element plus the score of the current element.
-
-```cpp
-for(int i = 0; i < n; i++) {
-    mx = max(mx, nums[i]);  // Update max value encountered so far
-    int scr = nums[i] + mx;  // Calculate score for the current element
-    ans[i] = i == 0 ? scr : ans[i - 1] + scr;  // Compute prefix score
+    return ans;
 }
 ```
 
-#### 3. **Return the Result**
+This function computes the prefix scores of an array of integers, where the score for each element is the sum of the element and the maximum element seen so far, with the result being a cumulative sum of these scores.
 
-Once the loop finishes, the `ans` vector contains the prefix scores for all indices. We then return the vector.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Header**
+	```cpp
+	vector<long long> findPrefixScore(vector<int>& nums) {
+	```
+	This line defines the function `findPrefixScore`, which takes a vector of integers `nums` and returns a vector of long long integers containing the prefix scores.
 
-```cpp
-return ans;
-```
+2. **Variable Initialization**
+	```cpp
+	    int mx = nums[0];
+	```
+	Initializes `mx` to the first element of the array `nums`, representing the maximum value encountered so far.
 
-### Complexity
+3. **Variable Initialization**
+	```cpp
+	    long long sum = 0;
+	```
+	A variable `sum` is initialized to 0, but it's not used further in the current code.
 
-#### Time Complexity:
-- **Looping through the array**: The solution involves a single loop over the array `nums`, iterating `n` times (where `n` is the size of the input array).
-- **Each iteration** performs constant-time operations such as calculating the maximum and the score for the current element.
+4. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Stores the size of the `nums` array in the variable `n`.
 
-Thus, the overall time complexity is \(O(n)\), where \(n\) is the number of elements in the input array.
+5. **Array Initialization**
+	```cpp
+	    vector<long long> ans(n, 0);
+	```
+	Initializes a vector `ans` of size `n` to store the cumulative prefix scores, initially filled with zeros.
 
-#### Space Complexity:
-- We use a vector `ans` of size `n` to store the prefix scores, so the space complexity is \(O(n)\).
-- Other variables like `mx`, `sum`, and `scr` use constant space, so they do not affect the space complexity.
+6. **Loop Setup**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through each element of the `nums` array.
 
-Thus, the overall space complexity is \(O(n)\), where \(n\) is the number of elements in the input array.
+7. **Logic**
+	```cpp
+	        mx = max(mx, nums[i]);
+	```
+	Updates the `mx` variable to be the maximum of the current `mx` and the current element of `nums[i]`.
 
-### Conclusion
+8. **Computation**
+	```cpp
+	        int scr = nums[i] + mx;
+	```
+	Calculates the score `scr` for the current element as the sum of the element `nums[i]` and the maximum element `mx` seen so far.
 
-This solution efficiently computes the prefix scores by maintaining a running maximum of the elements and progressively calculating the scores. By using a single loop to process the array and updating the prefix scores on-the-fly, the approach ensures an optimal \(O(n)\) time complexity, making it suitable for large input arrays. The space complexity is also linear, as we only store the result vector and a few auxiliary variables. This method is both time-efficient and space-efficient for the problem at hand.
+9. **Condition**
+	```cpp
+	        ans[i] = i == 0? scr: ans[i - 1] + scr;
+	```
+	If it's the first element (`i == 0`), assigns `scr` to `ans[i]`. Otherwise, adds `scr` to the cumulative sum stored in `ans[i-1]`.
+
+10. **Return**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans` containing the cumulative prefix scores.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we process each element of the array once and perform constant time operations for each element.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for the result array `ans`, which stores the scores for all prefixes.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-score-of-all-prefixes-of-an-array/description/)
 

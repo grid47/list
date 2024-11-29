@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "H2U24n4bcQQ"
 youtube_upload_date="2024-03-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/H2U24n4bcQQ/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,116 +28,183 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/H2U24n4bcQQ/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a sorted array of unique elements, rotated between 1 and n times, find the minimum element in this array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a sorted array of unique integers which is rotated between 1 and n times.
+- **Example:** `nums = [6,7,9,10,2,3,4]`
+- **Constraints:**
+	- 1 <= n <= 5000
+	- -5000 <= nums[i] <= 5000
+	- All elements in the array are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findMin(vector<int>& nums) {
-        int n = nums.size();
-        int s = 0, e = n - 1;
-        int ans = -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the minimum element in the rotated sorted array.
+- **Example:** `2`
+- **Constraints:**
+	- The array will always be rotated between 1 and n times.
 
-        if(n == 1) return nums[0];
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the minimum element, use a binary search approach that reduces the search space in each step.
 
-        while(s < e) {
-            int mid = s + (e - s) / 2;
+- Initialize two pointers: start and end of the array.
+- Find the middle element and compare it with the rightmost element.
+- If the middle element is greater than the rightmost element, the minimum must be in the right half, so move the start pointer to mid + 1.
+- Otherwise, move the end pointer to mid.
+- Repeat this process until the start pointer equals the end pointer, which will be the minimum element.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is sorted and rotated.
+- The array has at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [6,7,9,10,2,3,4]`  \
+  **Explanation:** The array was originally [2,3,4,6,7,9,10] and was rotated 4 times. The minimum element is 2.
 
-            // if(mid - 1 >= 0 && nums[mid] < nums[mid - 1]) return nums[mid];
+- **Input:** `nums = [10,11,13,15,18,20,1]`  \
+  **Explanation:** The array was originally [1,10,11,13,15,18,20] and was rotated 6 times. The minimum element is 1.
 
-            if(nums[e] < nums[mid]) {
-                s = mid + 1;
-            } else{
-                e = mid;
-            }
+{{< dots >}}
+## Approach 🚀
+We can use binary search to find the minimum element efficiently in O(log n) time.
+
+### Initial Thoughts 💭
+- Since the array is sorted and rotated, the minimum element will always be the pivot point where the array shifts from higher to lower values.
+- Binary search will be optimal to reduce the time complexity to O(log n).
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least one element.
+- The solution must efficiently handle arrays with up to 5000 elements.
+- Negative values and large values within the constraints should be handled correctly.
+- The array will always contain unique elements.
+{{< dots >}}
+## Code 💻
+```cpp
+int findMin(vector<int>& nums) {
+    int n = nums.size();
+    int s = 0, e = n - 1;
+    int ans = -1;
+
+    if(n == 1) return nums[0];
+
+    while(s < e) {
+        int mid = s + (e - s) / 2;
+
+        // if(mid - 1 >= 0 && nums[mid] < nums[mid - 1]) return nums[mid];
+
+        if(nums[e] < nums[mid]) {
+            s = mid + 1;
+        } else{
+            e = mid;
         }
-        cout << "Hi" << e;
-        return nums[e];
     }
-};
-{{< /highlight >}}
----
-
-### 🌐 Find Minimum in Rotated Sorted Array
-
-In this task, we’re given a rotated sorted array, and our goal is to identify the **minimum element** efficiently. This array was originally sorted in ascending order but was then rotated at an unknown pivot point. 
-
-For instance:
-- Original array: `[1, 2, 3, 4, 5, 6, 7]`
-- After rotating by 3 positions: `[4, 5, 6, 7, 1, 2, 3]`
-
-In this case, `1` is the smallest element, and we want to locate it using an optimized approach with **O(log n)** time complexity. Let’s dive into the steps to solve this problem efficiently!
-
----
-
-### 💡 Approach
-
-Our approach leverages **binary search** principles but with a twist to account for the rotation:
-
-1. **Rotation Insight**: The minimum element is where the array “rotates” or changes direction. We compare the middle element (`nums[mid]`) with the last element (`nums[e]`) to determine which half contains the minimum.
-2. **Binary Search Adjustments**:
-   - If `nums[mid]` is greater than `nums[e]`, the minimum element is in the **right half** of the array.
-   - If `nums[mid]` is less than or equal to `nums[e]`, the minimum is in the **left half** or could be `mid` itself.
-
----
-
-### 📝 Code Breakdown (Step-by-Step)
-
-#### 🔹 Step 1: Initialize Variables
-
-```cpp
-int n = nums.size();
-int s = 0, e = n - 1;
-
-if(n == 1) return nums[0];
-```
-
-Explanation:
-- `n`: Size of the input array `nums`.
-- `s` and `e`: Represent the start and end indices, respectively.
-- If there’s only one element (`n == 1`), it’s trivially the minimum.
-
-#### 🔹 Step 2: Binary Search Loop
-
-```cpp
-while(s < e) {
-    int mid = s + (e - s) / 2;
-```
-
-This `while` loop will continue as long as `s` is less than `e`. It calculates `mid` using `s + (e - s) / 2` to prevent overflow.
-
-#### 🔹 Step 3: Adjust Search Range Based on Element Comparison
-
-```cpp
-if(nums[e] < nums[mid]) {
-    s = mid + 1;
-} else {
-    e = mid;
+    cout << "Hi" << e;
+    return nums[e];
 }
 ```
 
-Key steps:
-- If `nums[e] < nums[mid]`, the minimum must be in the right half, so we update `s` to `mid + 1`.
-- Otherwise, the minimum is in the left half, so we update `e` to `mid`.
+This code is used to find the minimum element in a rotated sorted array. The logic applies binary search, adjusting the search range based on the comparison of the current middle element with the rightmost element of the array.
 
-#### 🔹 Step 4: Return the Minimum Element
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findMin(vector<int>& nums) {
+	```
+	Defines the function `findMin`, which takes a vector of integers and returns the minimum element in a rotated sorted array.
 
-```cpp
-return nums[e];
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializes `n` to the size of the `nums` vector to handle the array's length and ensure valid indexing.
 
-At the end, `s` and `e` converge at the minimum element’s index, so we return `nums[e]`.
+3. **Variable Initialization**
+	```cpp
+	    int s = 0, e = n - 1;
+	```
+	Initializes `s` (start) and `e` (end) to the first and last indices of the array, respectively, setting the bounds for the binary search.
 
----
+4. **Variable Initialization**
+	```cpp
+	    int ans = -1;
+	```
+	Initializes `ans` to store the result of the minimum element (though it isn't used in the final implementation here).
 
-### 🔎 Complexity
+5. **Edge Case Handling**
+	```cpp
+	    if(n == 1) return nums[0];
+	```
+	Handles the edge case where the array has only one element. If true, returns that single element as the minimum.
 
-- **Time Complexity**: **O(log n)** due to the binary search approach.
-- **Space Complexity**: **O(1)** since we only use a few extra variables.
+6. **Loop Iteration**
+	```cpp
+	
+	```
+	This space is reserved for the beginning of the loop that will iterate until the search range is narrowed down to a single element.
 
-### ✅ Conclusion
+7. **Binary Search**
+	```cpp
+	    while(s < e) {
+	```
+	Begins the while loop for binary search, which will continue until the search range (`s` to `e`) is reduced to a single element.
 
-This modified binary search provides an optimal solution to locate the minimum element in **O(log n)** time, even when the array is rotated. This method is efficient for large arrays and showcases how binary search can be adapted to solve rotated array problems.
+8. **Midpoint Calculation**
+	```cpp
+	        int mid = s + (e - s) / 2;
+	```
+	Calculates the midpoint `mid` between `s` and `e` to split the array into two halves during each iteration.
+
+9. **Binary Search Logic**
+	```cpp
+	        if(nums[e] < nums[mid]) {
+	```
+	Compares the element at the rightmost index (`e`) with the middle element. If the element at `e` is smaller, the minimum must be in the right half of the array.
+
+10. **Binary Search Update**
+	```cpp
+	            s = mid + 1;
+	```
+	Adjusts the start index `s` to `mid + 1` to narrow the search to the right half of the array.
+
+11. **Binary Search Logic**
+	```cpp
+	        } else{
+	```
+	If the element at `e` is not smaller than the middle element, the minimum must lie in the left half or could be the middle itself.
+
+12. **Binary Search Update**
+	```cpp
+	            e = mid;
+	```
+	Adjusts the end index `e` to `mid` to narrow the search to the left half of the array.
+
+13. **Return Value**
+	```cpp
+	    return nums[e];
+	```
+	Returns the element at index `e`, which is the minimum element in the rotated sorted array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
+
+Binary search will run in logarithmic time.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution only requires a constant amount of space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)
 

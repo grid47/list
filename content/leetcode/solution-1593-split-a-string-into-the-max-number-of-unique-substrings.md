@@ -14,138 +14,237 @@ img_src = ""
 youtube = "fLjeVALxzjg"
 youtube_upload_date="2024-10-21"
 youtube_thumbnail="https://i.ytimg.com/vi/fLjeVALxzjg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string s, your task is to split it into the maximum number of non-empty substrings such that all substrings are unique. You are allowed to split the string in any way, but each substring in the split must not repeat.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s, where the length of s is between 1 and 16. The string contains only lowercase English letters.
+- **Example:** `Input: s = "abcab"`
+- **Constraints:**
+	- 1 <= s.length <= 16
+	- s consists of lowercase English letters only
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mx = 1, n;
-    string s;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of unique substrings that the string can be split into.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The substrings must be unique and non-empty.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum number of unique substrings by splitting the string. You should use backtracking to explore all possible splits and track the uniqueness of each substring.
+
+- 1. Start by initializing an empty set to store unique substrings.
+- 2. Use a backtracking approach to try different substrings at each position.
+- 3. For each substring, check if it's already in the set of unique substrings. If not, add it to the set and continue exploring further.
+- 4. When a valid split is reached, keep track of the maximum number of unique substrings found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string s is non-empty.
+- We are only dealing with lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "abcab"`  \
+  **Explanation:** One possible maximal split is ['a', 'b', 'c', 'ab']. In this split, all substrings are unique, and we have 4 unique substrings.
+
+- **Input:** `Input: s = "aaaa"`  \
+  **Explanation:** The only valid split is ['a'], as all other possible splits repeat substrings. Hence, the maximum number of unique substrings is 1.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using backtracking to explore all possible splits of the string while ensuring that the substrings are unique. We will maintain a set of substrings to keep track of uniqueness.
+
+### Initial Thoughts 💭
+- The problem requires checking different ways to split the string while ensuring uniqueness at each step.
+- Backtracking will help in exploring all possible splits.
+- Using backtracking with a set for uniqueness seems to be a good strategy. The constraints are small enough (with string length ≤ 16) to allow exploring all possible splits.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, the result should be 0.
+- Even though the string length is small, ensure that the backtracking approach can handle the largest possible input of length 16 efficiently.
+- If all characters in the string are the same, the maximum number of unique substrings will be 1.
+- Make sure the solution works efficiently within the time and space constraints, especially for the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+int mx = 1, n;
+string s;
+
+int maxUniqueSplit(string s) {
+    set<string> cnt;
+    string tmp = "";
+    n = s.size();
+    this->s = s;
+    bt(0, tmp, cnt);
     
-    int maxUniqueSplit(string s) {
-        set<string> cnt;
-        string tmp = "";
-        n = s.size();
-        this->s = s;
-        bt(0, tmp, cnt);
-        
-        return mx;
+    return mx;
+}
+
+void bt(int idx, string tmp, set<string> cnt) {
+    if(idx == n) {
+        mx = max(mx, (int)cnt.size());
+        return;
     }
     
-    void bt(int idx, string tmp, set<string> cnt) {
-        if(idx == n) {
-            mx = max(mx, (int)cnt.size());
-            return;
-        }
-        
-        for(int i = idx; i < n; i++) {
-            tmp += s[i];
-            if(!cnt.count(tmp)) {
-                cnt.insert(tmp);
-                bt(i + 1, "", cnt);
-                cnt.erase(tmp);
-            }
+    for(int i = idx; i < n; i++) {
+        tmp += s[i];
+        if(!cnt.count(tmp)) {
+            cnt.insert(tmp);
+            bt(i + 1, "", cnt);
+            cnt.erase(tmp);
         }
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand involves determining the maximum number of unique substrings that can be obtained from a given string `s` by splitting it into distinct parts. Each part must be a non-empty substring of `s`, and we want to maximize the count of these unique substrings.
-
-### Approach
-
-To solve this problem, we can employ a backtracking approach, which allows us to explore all possible ways to split the string while keeping track of the unique substrings we have encountered. The steps are as follows:
-
-1. **Initialize Variables**: Set up necessary variables including a maximum counter `mx` to keep track of the maximum number of unique substrings found so far, and a string `tmp` to build substrings during backtracking.
-
-2. **Backtracking Function**: Create a backtracking function that takes the current index in the string, the temporary substring being built, and a set to keep track of the unique substrings.
-
-3. **Recursive Exploration**: In the backtracking function:
-   - Check if we have reached the end of the string. If so, update the maximum counter with the size of the set.
-   - Loop through the string to build substrings and check if they are unique (i.e., not already present in the set).
-   - If a substring is unique, add it to the set and recursively call the function for the next index.
-   - After returning from the recursive call, remove the substring from the set (backtrack) to explore other possibilities.
-
-4. **Return the Result**: After exploring all possible splits, return the maximum number of unique substrings found.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code:
-
-```cpp
-class Solution {
-public:
-    int mx = 1, n;
-    string s;
+}
 ```
 
-- **Class and Variable Initialization**: The `Solution` class defines two public variables, `mx` to track the maximum number of unique substrings found, and `n` to store the length of the input string. The variable `s` holds the string itself.
+This solution aims to find the maximum number of unique splits of a string, using a backtracking approach where substrings are considered for splitting, and a set is used to track unique splits.
 
-```cpp
-    int maxUniqueSplit(string s) {
-        set<string> cnt; // Set to store unique substrings
-        string tmp = ""; // Temporary string to build substrings
-        n = s.size(); // Get the length of the string
-        this->s = s; // Store the input string for access in the backtracking function
-        bt(0, tmp, cnt); // Start the backtracking process
-        return mx; // Return the maximum count of unique substrings
-    }
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int mx = 1, n;
+	```
+	This line initializes the variable `mx` to store the maximum number of unique splits (set to 1 initially) and `n` to store the length of the string.
 
-- **Main Function**: The `maxUniqueSplit` function initializes a set `cnt` for storing unique substrings and a temporary string `tmp`. It sets the size of the string and invokes the backtracking function starting from index 0.
+2. **Variable Declaration**
+	```cpp
+	string s;
+	```
+	This declares the string variable `s`, which will hold the input string for the unique splits calculation.
 
-```cpp
-    void bt(int idx, string tmp, set<string> cnt) {
-        if(idx == n) {
-            mx = max(mx, (int)cnt.size()); // Update maximum count if at end of string
-            return;
-        }
-```
+3. **Function Declaration**
+	```cpp
+	int maxUniqueSplit(string s) {
+	```
+	This is the declaration of the main function `maxUniqueSplit`, which takes a string `s` and returns an integer, representing the maximum number of unique splits.
 
-- **Backtracking Function**: The `bt` function is responsible for exploring all possible substring splits. If the index `idx` reaches the length of the string `n`, it means we've considered one possible splitting; thus, we update `mx` with the maximum size of unique substrings found.
+4. **Set Initialization**
+	```cpp
+	    set<string> cnt;
+	```
+	This initializes a set `cnt` to store the substrings that have been used as splits. The set automatically handles duplicate values.
 
-```cpp
-        for(int i = idx; i < n; i++) {
-            tmp += s[i]; // Build the substring
-            if(!cnt.count(tmp)) { // Check if the substring is unique
-                cnt.insert(tmp); // Add to set if unique
-                bt(i + 1, "", cnt); // Recur for the next index
-                cnt.erase(tmp); // Backtrack: remove the substring
-            }
-        }
-    }
-};
-```
+5. **String Initialization**
+	```cpp
+	    string tmp = "";
+	```
+	This initializes an empty string `tmp` which will hold the current substring being considered for splitting.
 
-- **Exploring Substrings**: The loop iterates over the string, building substrings by appending characters. It checks if the substring is already in the set `cnt`:
-  - If it is unique, the substring is added to the set, and we recursively call the function to continue checking for subsequent substrings starting from the next index.
-  - After returning from the recursive call, the substring is removed from the set to backtrack and explore other potential splits.
+6. **Length Calculation**
+	```cpp
+	    n = s.size();
+	```
+	This sets the variable `n` to the size of the string `s`, which represents the length of the input string.
 
-### Complexity
+7. **String Assignment**
+	```cpp
+	    this->s = s;
+	```
+	This assigns the input string `s` to the class's string `s`. This line assumes that `s` is a member variable of a class.
 
-- **Time Complexity**: The time complexity for this approach is \(O(2^n)\), where \(n\) is the length of the string. This is due to the exponential number of possible substring splits that need to be explored. The complexity arises because for each character, we have the choice to either include it in a substring or not.
+8. **Recursive Call**
+	```cpp
+	    bt(0, tmp, cnt);
+	```
+	This calls the backtracking function `bt`, passing the initial index (`0`), the empty string `tmp`, and the set `cnt` to start the recursive process of finding unique splits.
 
-- **Space Complexity**: The space complexity is \(O(n)\) for storing the current unique substrings in the set and the maximum substring length temporarily held during the recursion. 
+9. **Return Statement**
+	```cpp
+	    return mx;
+	```
+	This returns the value of `mx`, which holds the maximum number of unique splits found by the backtracking function.
 
-### Conclusion
+10. **Empty Line**
+	```cpp
+	
+	```
+	This is an empty line before the declaration of the backtracking function.
 
-This solution effectively utilizes backtracking to explore the space of possible substring splits while maintaining uniqueness through the use of a set. The approach is intuitive, allowing for a clear method to achieve the desired outcome. 
+11. **Backtracking Function Declaration**
+	```cpp
+	void bt(int idx, string tmp, set<string> cnt) {
+	```
+	This is the declaration of the backtracking function `bt`, which takes the current index `idx`, a temporary string `tmp`, and a set of previously seen substrings `cnt`.
 
-Key takeaways include:
+12. **Base Case**
+	```cpp
+	    if(idx == n) {
+	```
+	This is the base case of the recursion, which checks if the index `idx` has reached the length of the string `n`. If it has, the function processes the result.
 
-- **Backtracking Strategy**: The use of backtracking enables thorough exploration of all substring combinations, allowing us to find the maximum number of unique substrings efficiently.
-- **Utilization of Sets**: Using a set for tracking unique substrings ensures that operations for checking and inserting are handled in average constant time, making our solution more efficient than naive approaches.
-- **Dynamic Programming Consideration**: While this solution is straightforward, there are considerations for optimizing the process, such as memoization or pruning paths that do not lead to valid splits.
+13. **Updating Maximum**
+	```cpp
+	        mx = max(mx, (int)cnt.size());
+	```
+	This updates the value of `mx` to be the maximum of its current value and the size of the set `cnt`, which represents the number of unique substrings found so far.
 
-This method serves as a good example of how recursive strategies can be applied to string manipulation problems, particularly those involving uniqueness constraints.
+14. **Return Statement**
+	```cpp
+	        return;
+	```
+	This returns from the backtracking function, ending the recursion for the current path.
+
+15. **Loop (Backtracking)**
+	```cpp
+	    for(int i = idx; i < n; i++) {
+	```
+	This loop iterates from the current index `idx` to the end of the string `n`, trying all possible substrings starting from `idx`.
+
+16. **Substring Construction**
+	```cpp
+	        tmp += s[i];
+	```
+	This appends the character `s[i]` to the string `tmp`, gradually building up the current substring.
+
+17. **Checking for Uniqueness**
+	```cpp
+	        if(!cnt.count(tmp)) {
+	```
+	This checks if the substring `tmp` is already in the set `cnt`. If it is not, the substring is unique and can be considered for the next step.
+
+18. **Inserting Substring**
+	```cpp
+	            cnt.insert(tmp);
+	```
+	This inserts the substring `tmp` into the set `cnt`.
+
+19. **Recursive Call**
+	```cpp
+	            bt(i + 1, "", cnt);
+	```
+	This recursively calls the backtracking function, passing the next index `i + 1`, an empty string for the next substring, and the updated set `cnt`.
+
+20. **Removing Substring**
+	```cpp
+	            cnt.erase(tmp);
+	```
+	This removes the substring `tmp` from the set `cnt` after the recursive call, ensuring that the set only contains substrings for the current path.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - If the string can be split in a way that no further exploration is needed.
+- **Average Case:** O(2^n) - In the worst case, backtracking explores all possible splits of the string.
+- **Worst Case:** O(2^n) - The backtracking approach explores all subsets of the string, where n is the length of the string.
+
+The time complexity is exponential due to the backtracking approach that explores all possible splits.
+
+### Space Complexity 💾
+- **Best Case:** O(n) - Space is mainly used by the set of substrings and the recursion stack.
+- **Worst Case:** O(n) - Space is required to store the set of substrings and recursive function calls.
+
+The space complexity is linear in the worst case due to the storage of substrings in a set and the recursion stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/description/)
 

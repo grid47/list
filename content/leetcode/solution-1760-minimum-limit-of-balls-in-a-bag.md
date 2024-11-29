@@ -14,131 +14,178 @@ img_src = ""
 youtube = "znZ4wT1L8Y0"
 youtube_upload_date="2021-02-14"
 youtube_thumbnail="https://i.ytimg.com/vi/znZ4wT1L8Y0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` where each element represents the number of balls in a bag. You can perform up to `maxOperations` operations, where each operation consists of splitting one bag of balls into two smaller bags. Each new bag must contain a positive number of balls. The goal is to minimize the maximum number of balls in any bag after performing the operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums`, representing the number of balls in each bag, and an integer `maxOperations`, which is the maximum number of operations you can perform.
+- **Example:** `Input: nums = [7, 10], maxOperations = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= maxOperations, nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumSize(vector<int>& nums, int mxOps) {
-        
-        int l = 1, r = *max_element(nums.begin(), nums.end());
-        // int total_bags = n + 2 * mxOps - 1;
-        
-        while(l < r) {
-            int mid = l + (r - l) / 2;
-            int cnt = 0;
-            for(int a: nums)
-                cnt += (a - 1) / mid;
-            if(cnt <= mxOps)
-                r = mid;
-            else
-                l = mid + 1;
-        }
-        return l;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum possible maximum number of balls in any bag after performing the operations, modulo 10^9 + 7.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The result should be modulo 10^9 + 7.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the maximum number of balls in any bag after performing the allowed number of operations.
+
+- 1. Perform a binary search over the possible maximum number of balls in a bag, starting from 1 to the maximum value in the `nums` array.
+- 2. For each candidate maximum, count the number of operations needed to achieve this maximum for all bags.
+- 3. If the number of operations required is less than or equal to `maxOperations`, it is possible to achieve this maximum, so continue searching for a smaller maximum.
+- 4. Return the minimum maximum number of balls that can be achieved.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in the `nums` array are positive integers.
+- The number of operations `maxOperations` is positive and within bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [7, 10], maxOperations = 3`  \
+  **Explanation:** You can divide the bag with 10 balls into two bags with 5 and 5 balls. The maximum number of balls in any bag is 5. With one more operation, you can divide a bag of 7 balls into two bags with 4 and 3 balls. The final maximum number of balls in a bag is 4.
+
+- **Input:** `Input: nums = [2, 3, 5], maxOperations = 2`  \
+  **Explanation:** You can divide the bag with 5 balls into two bags with 3 and 2 balls, and then divide the bag with 3 balls into two bags with 2 and 1 balls. The maximum number of balls in any bag is 2.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves binary search over the possible maximum number of balls, using a helper function to count how many operations are needed to ensure no bag exceeds this maximum.
+
+### Initial Thoughts 💭
+- The problem is about minimizing the maximum value in a list of bags by splitting them into smaller bags.
+- Binary search is an ideal approach to efficiently find the minimum possible maximum number of balls.
+- We can try various maximum values and check how many operations are required to achieve that value. The smallest possible maximum that requires no more than `maxOperations` is our answer.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` is empty, return 0 since there are no bags.
+- Ensure that the binary search and the operation counting function work efficiently for large arrays.
+- If all bags contain the same number of balls, no operations are needed, and the penalty is the number of balls in any bag.
+- The solution should be efficient for arrays of length up to 10^5.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumSize(vector<int>& nums, int mxOps) {
+    
+    int l = 1, r = *max_element(nums.begin(), nums.end());
+    // int total_bags = n + 2 * mxOps - 1;
+    
+    while(l < r) {
+        int mid = l + (r - l) / 2;
+        int cnt = 0;
+        for(int a: nums)
+            cnt += (a - 1) / mid;
+        if(cnt <= mxOps)
+            r = mid;
+        else
+            l = mid + 1;
     }
-};
-{{< /highlight >}}
----
+    return l;
+}
+```
 
-### Problem Statement
+This function determines the minimum possible maximum bag size after a series of operations to split integers in the vector. It uses binary search to find the optimal value efficiently.
 
-The problem requires us to determine the minimum size of the largest bag that can be achieved by performing a limited number of operations on an array of integers. The array `nums` represents the sizes of bags, and `mxOps` is the maximum number of operations allowed. The goal is to minimize the maximum size of the bags after performing the operations. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minimumSize(vector<int>& nums, int mxOps) {
+	```
+	Declares a function to minimize the largest bag size given a maximum number of operations.
 
-Each operation allows us to decrease the size of a bag by any integer amount. Thus, with a given number of operations, we want to find out what the smallest possible size of the largest bag can be, ensuring that we can achieve this size with the allowed operations.
+2. **Variable Initialization**
+	```cpp
+	    int l = 1, r = *max_element(nums.begin(), nums.end());
+	```
+	Initializes the binary search range with `l` as the smallest possible size and `r` as the maximum number in the array.
 
-### Approach
+3. **Binary Search Loop**
+	```cpp
+	    while(l < r) {
+	```
+	Begins a binary search loop to find the minimum maximum bag size.
 
-The solution uses a binary search algorithm to efficiently find the minimum size of the largest bag. The idea is to search for the smallest possible size `mid` for which we can achieve that size while performing no more than `mxOps` operations.
+4. **Mid Calculation**
+	```cpp
+	        int mid = l + (r - l) / 2;
+	```
+	Calculates the middle point to test as the potential maximum bag size.
 
-1. **Binary Search Setup**:
-   - The search range is set between `1` and the maximum value found in `nums`.
-   - We continuously narrow down the search space based on the number of operations required to achieve the `mid` size.
+5. **Variable Initialization**
+	```cpp
+	        int cnt = 0;
+	```
+	Initializes the operation counter to track the total number of splits required.
 
-2. **Operation Counting**:
-   - For each candidate size `mid`, we calculate how many operations are needed to ensure that all bags are less than or equal to `mid`.
-   - If the total operations needed to reduce all bags is within the allowed `mxOps`, then `mid` is a feasible size, and we continue searching for a potentially smaller size. If it exceeds `mxOps`, we need to search for a larger size.
+6. **For Loop**
+	```cpp
+	        for(int a: nums)
+	```
+	Iterates through each element in the array to calculate the operations required for the current `mid` size.
 
-3. **Termination**:
-   - The search continues until the lower and upper bounds converge, at which point the minimum size of the largest bag that can be achieved with the allowed operations is found.
+7. **Operation Calculation**
+	```cpp
+	            cnt += (a - 1) / mid;
+	```
+	Calculates the number of operations needed to reduce the current element to the `mid` size or smaller.
 
-### Code Breakdown (Step by Step)
+8. **Condition Check**
+	```cpp
+	        if(cnt <= mxOps)
+	```
+	Checks if the total operations required is within the allowed limit.
 
-Here’s a detailed breakdown of the `minimumSize` function:
+9. **Range Update**
+	```cpp
+	            r = mid;
+	```
+	Narrows the search range by setting the upper bound to `mid` when the condition is met.
 
-1. **Class Definition**: The method is defined within the class `Solution`.
+10. **Else Block**
+	```cpp
+	        else
+	```
+	Handles the case where the current `mid` size is too small to meet the operation limit.
 
-   ```cpp
-   class Solution {
-   ```
+11. **Range Update**
+	```cpp
+	            l = mid + 1;
+	```
+	Narrows the search range by increasing the lower bound when the condition is not met.
 
-2. **Public Method**: The `minimumSize` method takes two parameters: a vector of integers `nums` and an integer `mxOps`.
+12. **Return Statement**
+	```cpp
+	    return l;
+	```
+	Returns the smallest possible maximum bag size after applying the allowed operations.
 
-   ```cpp
-   public:
-       int minimumSize(vector<int>& nums, int mxOps) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log(max(nums)))
+- **Average Case:** O(n log(max(nums)))
+- **Worst Case:** O(n log(max(nums)))
 
-3. **Initialization**: 
-   - The lower bound `l` is initialized to `1`.
-   - The upper bound `r` is initialized to the maximum element in `nums`.
+The time complexity is driven by the binary search and the operation counting function, resulting in O(n log(max(nums))) where `n` is the length of the array and `max(nums)` is the maximum number of balls in any bag.
 
-   ```cpp
-   int l = 1, r = *max_element(nums.begin(), nums.end());
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-4. **Binary Search Loop**: A `while` loop continues until `l` is less than `r`.
+The space complexity is constant, O(1), since we only need a few variables to track the current state.
 
-   ```cpp
-   while(l < r) {
-   ```
+**Happy Coding! 🎉**
 
-5. **Calculate Midpoint**: Inside the loop, calculate the midpoint `mid` as the average of `l` and `r`.
-
-   ```cpp
-   int mid = l + (r - l) / 2;
-   ```
-
-6. **Count Operations**: Initialize a counter `cnt` to zero. For each bag size `a` in `nums`, calculate how many operations would be required to reduce that bag size to `mid` or less. This is done using the formula `(a - 1) / mid`, which gives the number of full `mid` sizes that can fit into `a`.
-
-   ```cpp
-   int cnt = 0;
-   for(int a: nums)
-       cnt += (a - 1) / mid;
-   ```
-
-7. **Adjust Search Bounds**:
-   - If the total operations `cnt` is less than or equal to `mxOps`, it means we can afford to make `mid` the maximum size, so we try to find a smaller possible size by setting `r = mid`.
-   - Otherwise, we need a larger size, so we set `l = mid + 1`.
-
-   ```cpp
-   if(cnt <= mxOps)
-       r = mid;
-   else
-       l = mid + 1;
-   ```
-
-8. **Return Result**: When the loop terminates, `l` will point to the smallest maximum size that can be achieved with the allowed operations, which is returned as the result.
-
-   ```cpp
-   return l;
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \(O(n \log m)\), where \(n\) is the number of elements in `nums` and \(m\) is the maximum element in `nums`. The logarithmic factor arises from the binary search over the range of possible sizes, while the linear scan through `nums` for counting operations contributes to the \(n\) factor.
-
-- **Space Complexity**: The space complexity is \(O(1)\) as no additional data structures that grow with input size are used.
-
-### Conclusion
-
-The `minimumSize` function effectively finds the minimum possible size of the largest bag after performing a limited number of operations on an array of integers. By employing a binary search strategy, the solution efficiently narrows down the feasible sizes based on the required operations for each potential size. This approach demonstrates an effective method for solving optimization problems involving constraints and searching for optimal values within a defined range.
-
-The clear structure of the code and the logical flow of the binary search make it an elegant solution to the problem, ensuring both correctness and efficiency. This algorithmic technique can be applied to a variety of problems that require optimizing a variable under certain constraints, showcasing its versatility and utility in algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/description/)
 

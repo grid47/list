@@ -14,124 +14,172 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums` and an integer `k`. For each element in `nums`, you can either add or subtract `k`. The score of the array is calculated as the difference between the maximum and minimum elements of the modified array. Your task is to find and return the minimum possible score after modifying the values in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and an integer `k`.
+- **Example:** `Input: nums = [5, 8], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- 0 <= nums[i] <= 10^4
+	- 0 <= k <= 10^4
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum score of the array after modifying the values of the elements.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The returned score should be the smallest possible score after modifying the array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the score of the array by appropriately modifying each element with either addition or subtraction of `k`.
+
+- Sort the input array `nums` to arrange the elements in ascending order.
+- Initialize the left boundary as `nums[0] + k` and the right boundary as `nums[n-1] - k`.
+- Iterate through the sorted array and compute the new score by adjusting each element by either adding or subtracting `k`.
+- Track the minimum score by updating the result after each modification.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty, with at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [5, 8], k = 3`  \
+  **Explanation:** In this case, changing the values of `5` and `8` by adding or subtracting `3` gives [2, 11]. The score is the difference between the maximum and minimum, which is 11 - 2 = 9.
+
+- **Input:** `Input: nums = [2, 4, 7], k = 1`  \
+  **Explanation:** Here, changing the values of `2`, `4`, and `7` results in [3, 3, 6]. The score is the difference between the maximum and minimum, which is 6 - 3 = 3.
+
+{{< dots >}}
+## Approach 🚀
+The strategy is to first sort the array, then evaluate the minimum score by adjusting each element's value with `k` and updating the score based on the adjusted maximum and minimum values.
+
+### Initial Thoughts 💭
+- By sorting the array, we can ensure that the largest and smallest elements are easy to access and modify.
+- The key observation is that modifying the largest and smallest values with `k` can significantly affect the score.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs in this problem as the length of `nums` is always at least 1.
+- For large inputs, the algorithm must handle arrays of length up to 10^4 efficiently.
+- If `k` is 0, the array remains unchanged, and the score is simply the difference between the maximum and minimum elements.
+- Ensure that the solution handles arrays with values at the upper limit (10^4) correctly.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
 
 public:
-    int smallestRangeII(vector<int>& nums, int k) {
-        
-        sort(nums.begin(), nums.end());
-        int n = nums.size(), left = nums[0] + k, right = nums[n - 1] - k;
-        
-        int res = nums[n - 1] - nums[0];
-        for(int i = 0; i < n - 1; i++) {
-            int maxi = max(nums[i] + k, right);
-            int mini = min(nums[i + 1] - k, left);
-            res = min(res, maxi - mini);
-        }
-        
-        return res;
+int smallestRangeII(vector<int>& nums, int k) {
+    
+    sort(nums.begin(), nums.end());
+    int n = nums.size(), left = nums[0] + k, right = nums[n - 1] - k;
+    
+    int res = nums[n - 1] - nums[0];
+    for(int i = 0; i < n - 1; i++) {
+        int maxi = max(nums[i] + k, right);
+        int mini = min(nums[i + 1] - k, left);
+        res = min(res, maxi - mini);
     }
     
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given an array of integers `nums` and an integer `k`. Your task is to return the **smallest possible range** that can be obtained by modifying the elements of the array. You can either increase or decrease each element of the array by at most `k` in order to minimize the difference between the maximum and minimum values in the array.
-
-### Approach
-
-The main goal is to reduce the difference between the maximum and minimum values of the array by modifying the elements. The most efficient way to do this is to exploit the properties of sorted arrays and the constraints provided by the problem. Below is a step-by-step breakdown of how we can solve this problem:
-
-1. **Sort the Array**: 
-   Sorting the array will allow us to identify the smallest and largest values easily. The main idea behind sorting is that the optimal solution to minimizing the range will involve modifying the largest and smallest elements in the array.
-
-2. **Calculate the Initial Range**: 
-   After sorting, the difference between the largest and smallest element gives the initial range. The goal is to reduce this range by adjusting the numbers with the given `k`.
-
-3. **Modify Elements Within the Range**:
-   After sorting the array, the two key actions to minimize the range are:
-   - **Increasing the smallest values** by `k` to push them toward the larger values.
-   - **Decreasing the largest values** by `k` to pull them down toward the smaller values.
-   By adjusting both ends of the sorted array, we can explore possible ranges.
-
-4. **Iterate to Find the Minimum Range**: 
-   Iterate through the array, adjusting the `i-th` element and the `(i+1)-th` element and compute the possible maximum and minimum values. The range for each split is calculated by:
-   - **Maximizing** the current value at position `i` increased by `k`, and the last value (position `n-1`) decreased by `k`.
-   - **Minimizing** the next value at position `i+1` decreased by `k`, and the first value (position `0`) increased by `k`.
-
-   This approach ensures that we explore all potential ways to adjust the range by modifying elements optimally.
-
-### Code Breakdown (Step by Step)
-
-#### **Sorting the Array**
-
-```cpp
-sort(nums.begin(), nums.end());
-```
-- First, we sort the array `nums` in ascending order. Sorting allows us to easily work with the smallest and largest elements in the array. The first element (`nums[0]`) represents the smallest value, and the last element (`nums[n-1]`) represents the largest value.
-
-#### **Initial Range Calculation**
-
-```cpp
-int n = nums.size(), left = nums[0] + k, right = nums[n - 1] - k;
-```
-- We initialize `n` as the size of the array.
-- The `left` value represents the smallest possible value we can achieve by adding `k` to the smallest element (`nums[0]`).
-- The `right` value represents the largest possible value we can achieve by subtracting `k` from the largest element (`nums[n-1]`).
-
-#### **Initial Range (Difference Between Largest and Smallest Elements)**
-
-```cpp
-int res = nums[n - 1] - nums[0];
-```
-- We calculate the initial range as the difference between the largest and smallest elements in the array, `nums[n-1] - nums[0]`.
-
-#### **Iterate Through the Array to Minimize the Range**
-
-```cpp
-for (int i = 0; i < n - 1; i++) {
-    int maxi = max(nums[i] + k, right);
-    int mini = min(nums[i + 1] - k, left);
-    res = min(res, maxi - mini);
+    return res;
 }
+
 ```
-- We iterate through the array and consider adjusting each element.
-- For each element `i`, we calculate:
-  - **`maxi`**: The maximum value after adjusting the current element at index `i`. This is calculated as `max(nums[i] + k, right)`, where `nums[i] + k` represents the value of the `i-th` element increased by `k`, and `right` represents the current largest possible value (after adjusting the largest element).
-  - **`mini`**: The minimum value after adjusting the next element (`i+1`). This is calculated as `min(nums[i + 1] - k, left)`, where `nums[i + 1] - k` represents the value of the `i+1-th` element decreased by `k`, and `left` represents the current smallest possible value (after adjusting the smallest element).
 
-- Finally, we update the result `res` with the minimum of the current `res` and `maxi - mini`, which represents the current range.
+This code defines a solution for finding the smallest range after modifying the elements of the input array based on a value `k`. The logic sorts the array, then calculates the minimum difference possible by adjusting the elements using the value of `k`.
 
-#### **Return the Result**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Code Block**
+	```cpp
+	class Solution {
+	```
+	The class definition for `Solution`, which contains the method for solving the problem.
 
-```cpp
-return res;
-```
-- After iterating through all possible splits and adjusting the elements optimally, we return `res`, which holds the minimum possible range that can be achieved.
+2. **Access Modifier**
+	```cpp
+	public:
+	```
+	The access modifier that makes the following method accessible from outside the class.
 
-### Complexity
+3. **Function Declaration**
+	```cpp
+	int smallestRangeII(vector<int>& nums, int k) {
+	```
+	The declaration of the method `smallestRangeII`, which takes an integer vector `nums` and an integer `k` and returns an integer value.
 
-#### **Time Complexity**
+4. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the input vector `nums` to simplify the process of calculating the smallest range after modifying elements.
 
-- **O(n log n)**: The time complexity is dominated by the sorting step, which takes \(O(n \log n)\). After sorting, the iteration through the array takes linear time \(O(n)\), so the overall time complexity is \(O(n \log n)\).
+5. **Variable Initialization**
+	```cpp
+	    int n = nums.size(), left = nums[0] + k, right = nums[n - 1] - k;
+	```
+	Initializes variables: `n` (the size of `nums`), `left` (the modified value of the smallest element), and `right` (the modified value of the largest element).
 
-#### **Space Complexity**
+6. **Variable Initialization**
+	```cpp
+	    int res = nums[n - 1] - nums[0];
+	```
+	Calculates the initial difference between the largest and smallest elements in the sorted array, which is the starting value for the smallest range.
 
-- **O(1)**: The space complexity is constant because we are only using a few extra variables (`res`, `left`, `right`) to store intermediate results. The input array is modified in place, so no additional space is required beyond the input.
+7. **Loop**
+	```cpp
+	    for(int i = 0; i < n - 1; i++) {
+	```
+	A loop to iterate through the array to calculate the smallest possible range by adjusting elements using `k`.
 
-### Conclusion
+8. **Computation**
+	```cpp
+	        int maxi = max(nums[i] + k, right);
+	```
+	Calculates the maximum value for the current range, considering the modified `nums[i]` and `right`.
 
-This approach efficiently minimizes the range between the maximum and minimum values of the array by optimally adjusting the elements with the given `k`. By sorting the array and adjusting both ends of the array, we ensure that we find the smallest possible range with minimal computations. The time complexity of \(O(n \log n)\) ensures that the solution can handle larger arrays efficiently. This solution provides an elegant and optimal approach to solving the problem of minimizing the range in the Snakes and Ladders game while adhering to the given constraints.
+9. **Computation**
+	```cpp
+	        int mini = min(nums[i + 1] - k, left);
+	```
+	Calculates the minimum value for the current range, considering the modified `nums[i + 1]` and `left`.
+
+10. **Computation**
+	```cpp
+	        res = min(res, maxi - mini);
+	```
+	Updates the result `res` with the minimum range found between `maxi` and `mini`.
+
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the smallest range found after processing the entire array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which takes O(n log n), where n is the number of elements in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+In the worst case, the space complexity is O(n) due to the sorting operation. However, the space complexity can be reduced to O(1) if sorting is done in-place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-range-ii/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "M1IL4hz0QrE"
 youtube_upload_date="2020-06-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/M1IL4hz0QrE/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,103 +28,143 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/M1IL4hz0QrE/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array nums of size n, return the majority element. The majority element is the element that appears more than n // 2 times. You may assume that the majority element always exists in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums of integers of size n, where 1 <= n <= 50,000 and -10^9 <= nums[i] <= 10^9.
+- **Example:** `nums = [4, 4, 2, 2, 2, 4, 4]`
+- **Constraints:**
+	- 1 <= n <= 5 * 10^4
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-        int e = nums[0], cnt = 1;
-        map<int, int> mp;
-        for(int x: nums) {
-            mp[x]++;
-            if(mp[x] > cnt) {
-                cnt = mp[x];
-                e = x;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the majority element in the input array.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output will always be a valid majority element, as per the problem assumption.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the majority element in the given array.
+
+- Initialize a variable to store the current majority element and its count.
+- Iterate through the array and update the current majority element whenever necessary.
+- Return the element that appears more than n // 2 times.
+{{< dots >}}
+### Problem Assumptions ✅
+- The majority element always exists in the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [5, 3, 5]`  \
+  **Explanation:** In this example, the element 5 appears twice, which is more than half of the array's length (3 // 2). Therefore, 5 is the majority element.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the array and keeping track of the current majority element using a counter.
+
+### Initial Thoughts 💭
+- This is a problem that can be solved efficiently using a linear pass through the array, keeping track of the counts of elements.
+- We can use a counter to track the frequency of the current majority element.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that there is always a majority element, so we do not need to handle the empty array case.
+- For larger inputs (up to 50,000 elements), the solution should work efficiently in linear time.
+- The majority element will always appear more than n // 2 times, so no need to handle cases where no majority exists.
+- The solution should work in linear time and handle the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+int majorityElement(vector<int>& nums) {
+    int e = nums[0], cnt = 1;
+    map<int, int> mp;
+    for(int x: nums) {
+        mp[x]++;
+        if(mp[x] > cnt) {
+            cnt = mp[x];
+            e = x;
         }
-        return e;
     }
-};
-{{< /highlight >}}
----
-
-### 🌟 Majority Element
-
-The problem is to find the majority element in an array `nums`, which is defined as the element that appears more than **n/2** times, where `n` is the size of the array. If such an element exists, the function should return it.
-
-#### Example:
-- In the array `[3, 2, 3]`, the majority element is `3`.
-- In the array `[2, 2, 1, 1, 1, 2, 2]`, the majority element is `2`.
-
-The problem guarantees that a majority element will always exist.
-
-### 💡 Approach
-
-To solve the problem efficiently, we need to identify the element that appears more than half the times in the array. A brute force approach would involve checking the occurrences of each element, but that could be inefficient with **O(n²)** time complexity. Instead, we use a more efficient method utilizing a frequency map (hash map).
-
-Here’s the plan:
-1. We will iterate through the array and maintain a frequency map (`map<int, int> mp`) that tracks the count of each element.
-2. As we process each element, we will update the count and keep track of the element with the highest frequency.
-3. At the end, we will return the element with the maximum frequency as the majority element.
-
-### 🔍 Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int e = nums[0], cnt = 1;
-map<int, int> mp;
-```
-- `e` is initialized to the first element of the array, and `cnt` is initialized to `1` because we've already seen the first element.
-- `mp` is a frequency map that will store the count of each element.
-
-#### Step 2: Iterate Through the Array
-
-```cpp
-for(int x: nums) {
-    mp[x]++;
-```
-- We iterate through each element `x` in the array `nums`.
-- For each element, we increment its count in the map (`mp[x]++`).
-
-#### Step 3: Track the Majority Element
-
-```cpp
-    if(mp[x] > cnt) {
-        cnt = mp[x];
-        e = x;
-    }
+    return e;
 }
 ```
-- For every element, we check if its count in the map exceeds the current maximum count (`cnt`).
-- If the count is higher, we update `cnt` to the new count and set `e` to the current element `x`.
 
-#### Step 4: Return the Majority Element
+This function finds the majority element in a list, i.e., the element that appears more than half the time in the array.
 
-```cpp
-return e;
-```
-- After iterating through all elements, we return `e`, which holds the majority element — the one with the highest frequency.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int majorityElement(vector<int>& nums) {
+	```
+	Define the function 'majorityElement' that takes a vector of integers as input and returns the majority element, which appears more than half the time in the array.
 
-### 📊 Complexity Analysis
+2. **Variable Initialization**
+	```cpp
+	    int e = nums[0], cnt = 1;
+	```
+	Initialize two variables: 'e' (to store the majority element) and 'cnt' (to store the count of occurrences of the current majority element). Initially, set 'e' to the first element of the array and 'cnt' to 1.
 
-#### Time Complexity:
-- **O(n)**: We iterate through the array once, and for each element, the map operations (`mp[x]++`) are **O(1)** on average. Thus, the overall time complexity is linear, **O(n)**, where `n` is the size of the array.
+3. **Data Structure Declaration**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declare a map 'mp' to keep track of the frequency count of each element in the array.
 
-#### Space Complexity:
-- **O(n)**: The space complexity is determined by the size of the frequency map `mp`. In the worst case, all elements could be unique, resulting in a map size of `n`. Hence, the space complexity is **O(n)**.
+4. **For Loop**
+	```cpp
+	    for(int x: nums) {
+	```
+	Iterate through each element 'x' in the array 'nums'.
 
-### ✅ Conclusion
+5. **Frequency Update**
+	```cpp
+	        mp[x]++;
+	```
+	Increment the frequency count of element 'x' in the map.
 
-This solution efficiently finds the majority element using a frequency map, operating in linear time **O(n)** and with a space complexity of **O(n)**. The approach guarantees that the majority element will be identified as specified in the problem.
+6. **Frequency Comparison**
+	```cpp
+	        if(mp[x] > cnt) {
+	```
+	Check if the frequency of the current element 'x' is greater than the current maximum count 'cnt'.
 
-#### Key Takeaways:
-- **Efficient Time Complexity**: The solution runs in **O(n)** time, making it suitable for large arrays.
-- **Space Complexity**: The space complexity is **O(n)** due to the use of a map to store frequencies.
-- **Majority Element**: This method ensures that we find the majority element, as the problem guarantees its existence.
+7. **Count Update**
+	```cpp
+	            cnt = mp[x];
+	```
+	If the frequency of 'x' exceeds the current count, update 'cnt' to the new frequency of 'x'.
 
-This approach provides an optimal and straightforward solution to the majority element problem.
+8. **Element Update**
+	```cpp
+	            e = x;
+	```
+	Update the majority element 'e' to the current element 'x' as it has the highest frequency so far.
+
+9. **Return Statement**
+	```cpp
+	    return e;
+	```
+	Return the majority element 'e' that has been identified by the loop.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only iterate through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only use a few extra variables to store the current majority element and counter.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/majority-element/description/)
 

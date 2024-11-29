@@ -14,170 +14,202 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a given 2D grid, a peak element is an element that is greater than all of its adjacent elements (left, right, top, and bottom). You are given an m x n matrix `mat` where no two adjacent elements are equal. Your task is to find and return the coordinates of any peak element. The grid is surrounded by a perimeter filled with -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A matrix of integers, mat, representing the grid.
+- **Example:** `mat = [[10, 20, 15], [21, 30, 14], [7, 16, 32]]`
+- **Constraints:**
+	- m == mat.length
+	- n == mat[i].length
+	- 1 <= m, n <= 500
+	- 1 <= mat[i][j] <= 10^5
+	- No two adjacent cells are equal.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findPeakGrid(vector<vector<int>>& mat) {
-        int m = mat.size(), n = mat[0].size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the coordinates of any peak element in the grid.
+- **Example:** `[1, 1]`
+- **Constraints:**
+	- Coordinates of any peak element in the grid.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the coordinates of any peak element.
+
+- Perform binary search on columns.
+- For each column, find the row with the largest element.
+- Check if the element is greater than its left and right neighbors.
+- Adjust the search space based on comparisons with neighbors.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is non-empty and valid.
+- There will always be at least one peak element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: mat = [[10, 20, 15], [21, 30, 14], [7, 16, 32]]`  \
+  **Explanation:** The element at [1, 1] (30) is a peak because it is greater than its neighbors (20, 15, 21, 14).
+
+{{< dots >}}
+## Approach 🚀
+We can use binary search to find a peak element in O(m log(n)) or O(n log(m)) time.
+
+### Initial Thoughts 💭
+- The problem can be approached using a divide-and-conquer technique, such as binary search.
+- By reducing the search space at each step, we can efficiently find a peak element.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty matrix is not allowed based on constraints.
+- Handle matrices with dimensions close to 500 x 500.
+- Ensure proper handling when elements are at the edges of the matrix.
+- The matrix is guaranteed to have no two adjacent equal cells.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> findPeakGrid(vector<vector<int>>& mat) {
+    int m = mat.size(), n = mat[0].size();
+    
+    int l = 0, r = n - 1;
+    
+    while(l <= r) {
+        int mid = l + (r - l + 1) / 2;
         
-        int l = 0, r = n - 1;
+        int row = 0;
+        for(int i = 0; i < m; i++)
+            row = mat[i][mid] >= mat[row][mid]? i: row;
         
-        while(l <= r) {
-            int mid = l + (r - l + 1) / 2;
-            
-            int row = 0;
-            for(int i = 0; i < m; i++)
-                row = mat[i][mid] >= mat[row][mid]? i: row;
-            
-            int isRightLarger = mid + 1 <= r ? mat[row][mid + 1] > mat[row][mid]: false;
-            int isLeftLarger = mid - 1 >= l  ? mat[row][mid - 1] > mat[row][mid]: false;            
-            
-            if(!isRightLarger && !isLeftLarger)
-                return vector<int>{row, mid};
-            
-            if(isRightLarger) l = mid + 1;
-            else             r = mid - 1;
-            
-        }
-        return vector<int>{-1, -1};
+        int isRightLarger = mid + 1 <= r ? mat[row][mid + 1] > mat[row][mid]: false;
+        int isLeftLarger = mid - 1 >= l  ? mat[row][mid - 1] > mat[row][mid]: false;            
+        
+        if(!isRightLarger && !isLeftLarger)
+            return vector<int>{row, mid};
+        
+        if(isRightLarger) l = mid + 1;
+        else             r = mid - 1;
+        
     }
-};
-{{< /highlight >}}
----
+    return vector<int>{-1, -1};
+}
+```
 
-### Problem Statement
+This is the complete function to find a peak element in a 2D grid using a binary search approach.
 
-The task is to find a peak element in a given 2D matrix. A peak element is defined as an element that is greater than or equal to its neighbors. For elements on the edges or corners of the matrix, we consider only the available neighbors. The matrix will be represented as a 2D vector of integers.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findPeakGrid(vector<vector<int>>& mat) {
+	```
+	The function 'findPeakGrid' is defined to take a 2D matrix as input and return a vector of integers representing the peak's coordinates.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int m = mat.size(), n = mat[0].size();
+	```
+	Here, we initialize 'm' to the number of rows and 'n' to the number of columns in the matrix.
 
-The approach to solve this problem utilizes a binary search technique across the columns of the matrix. Here are the key steps involved in the approach:
+3. **Binary Search Setup**
+	```cpp
+	    int l = 0, r = n - 1;
+	```
+	We initialize two variables 'l' and 'r' to represent the left and right boundaries for the binary search on columns.
 
-1. **Initialize Search Bounds**: We set up the left and right bounds for binary search. The left bound `l` starts at 0 and the right bound `r` starts at the last column index.
+4. **While Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	This while loop will continue to iterate as long as there is a valid range between 'l' and 'r'.
 
-2. **Binary Search on Columns**: The main idea is to perform binary search on the columns of the matrix. For each iteration, we calculate the middle column index `mid`.
+5. **Mid Calculation**
+	```cpp
+	        int mid = l + (r - l + 1) / 2;
+	```
+	Here, we calculate the middle column index 'mid' to split the matrix and search for the peak.
 
-3. **Identify the Row with the Maximum Value**: For the current middle column, we traverse each row to find the row index `row` that contains the maximum value in that column.
+6. **Row Search**
+	```cpp
+	        int row = 0;
+	```
+	We initialize a variable 'row' to track the row that contains the maximum value at the current 'mid' column.
 
-4. **Check Neighboring Values**: After identifying the maximum value in the middle column:
-   - Check if it is greater than its left and right neighbors (if they exist).
-   - If the maximum value is not smaller than both neighbors, it is a peak.
+7. **Iterating Rows**
+	```cpp
+	        for(int i = 0; i < m; i++)
+	```
+	This for loop iterates over each row of the matrix to find the row where the element in the 'mid' column is the largest.
 
-5. **Adjust Search Range**: Depending on whether the left or right neighbor is larger than the current maximum value, we adjust our search range:
-   - If the right neighbor is larger, move the left bound to `mid + 1`.
-   - If the left neighbor is larger, move the right bound to `mid - 1`.
+8. **Row Selection**
+	```cpp
+	            row = mat[i][mid] >= mat[row][mid]? i: row;
+	```
+	If the current element in the 'mid' column is greater than the previous maximum, update the 'row' variable.
 
-6. **Return Peak Coordinates**: Once a peak is found, return its coordinates as a vector.
+9. **Right Comparison**
+	```cpp
+	        int isRightLarger = mid + 1 <= r ? mat[row][mid + 1] > mat[row][mid]: false;
+	```
+	We check if the element to the right of 'mid' in the same row is larger. If it is, we will move the binary search range to the right.
 
-### Code Breakdown (Step by Step)
+10. **Left Comparison**
+	```cpp
+	        int isLeftLarger = mid - 1 >= l  ? mat[row][mid - 1] > mat[row][mid]: false;
+	```
+	We check if the element to the left of 'mid' in the same row is larger. If it is, we will move the binary search range to the left.
 
-Let’s break down the code into its key components to understand how it works:
+11. **Peak Check**
+	```cpp
+	        if(!isRightLarger && !isLeftLarger)
+	```
+	If neither the left nor the right elements are larger, we have found the peak element, so we return the coordinates.
 
-1. **Class Definition**: We start by defining a class called `Solution`.
+12. **Returning Peak**
+	```cpp
+	            return vector<int>{row, mid};
+	```
+	Return the coordinates of the peak element as a vector.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+13. **Adjusting Search Range**
+	```cpp
+	        if(isRightLarger) l = mid + 1;
+	```
+	If the right neighbor is larger, update the left boundary 'l' to search the right half of the matrix.
 
-2. **findPeakGrid Function**: This function is the main method that will return the coordinates of the peak element.
+14. **Adjusting Search Range**
+	```cpp
+	        else             r = mid - 1;
+	```
+	If the left neighbor is larger, update the right boundary 'r' to search the left half of the matrix.
 
-   ```cpp
-       vector<int> findPeakGrid(vector<vector<int>>& mat) {
-   ```
+15. **Return Invalid Result**
+	```cpp
+	    return vector<int>{-1, -1};
+	```
+	If no peak is found, return an invalid result indicating failure to find a peak.
 
-3. **Matrix Dimensions**: We determine the number of rows `m` and columns `n` in the matrix.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m log(n))
+- **Average Case:** O(m log(n))
+- **Worst Case:** O(m log(n))
 
-   ```cpp
-           int m = mat.size(), n = mat[0].size();
-   ```
+Binary search is applied on columns, ensuring logarithmic time complexity in one dimension.
 
-4. **Initialize Search Bounds**: Set the initial bounds for binary search on the columns.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   ```cpp
-           int l = 0, r = n - 1;
-   ```
+The space complexity is constant since we do not use any additional space for storing intermediate results.
 
-5. **Binary Search Loop**: Start a while loop that continues until the left bound exceeds the right bound.
+**Happy Coding! 🎉**
 
-   ```cpp
-           while(l <= r) {
-   ```
-
-   - **Calculate Mid Column**: Calculate the middle column index.
-
-   ```cpp
-               int mid = l + (r - l + 1) / 2;
-   ```
-
-6. **Find the Maximum Row**: Initialize a variable `row` to store the index of the row with the maximum value in the current column.
-
-   ```cpp
-               int row = 0;
-               for(int i = 0; i < m; i++)
-                   row = mat[i][mid] >= mat[row][mid]? i: row;
-   ```
-
-7. **Check Neighboring Values**: Determine if the neighboring values are larger.
-
-   ```cpp
-               int isRightLarger = mid + 1 <= r ? mat[row][mid + 1] > mat[row][mid]: false;
-               int isLeftLarger = mid - 1 >= l  ? mat[row][mid - 1] > mat[row][mid]: false;
-   ```
-
-8. **Determine If Peak Found**: If neither neighbor is larger, return the current peak coordinates.
-
-   ```cpp
-               if(!isRightLarger && !isLeftLarger)
-                   return vector<int>{row, mid};
-   ```
-
-9. **Adjust Search Range**: Update the search bounds based on the comparisons.
-
-   ```cpp
-               if(isRightLarger) l = mid + 1;
-               else             r = mid - 1;
-           }
-   ```
-
-10. **Return Not Found**: If no peak is found (which theoretically should not happen), return `{-1, -1}`.
-
-   ```cpp
-           return vector<int>{-1, -1};
-       }
-   };
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this approach is \( O(m \log n) \), where \( m \) is the number of rows and \( n \) is the number of columns in the matrix. This is because for each of the \( \log n \) iterations of binary search, we perform a linear scan through the rows \( m \).
-
-- **Space Complexity**: The space complexity is \( O(1) \) since we are using a constant amount of extra space for variables and do not require additional data structures that grow with input size.
-
-### Conclusion
-
-The `findPeakGrid` function efficiently finds a peak in a 2D matrix using a binary search strategy. The solution is both optimal and straightforward, leveraging the properties of peak elements and binary search to minimize the number of comparisons needed.
-
-This algorithm is particularly useful in scenarios involving large matrices where a peak element needs to be identified quickly without exhaustively searching all elements. The method is robust and can be applied in various contexts, such as computer graphics, terrain analysis, or any domain where peak detection in multi-dimensional data is required.
-
-### Use Cases
-
-This problem can be applied in various domains, such as:
-
-- **Image Processing**: In computer vision, identifying peak points in images can help with edge detection and feature recognition.
-
-- **Geographical Data Analysis**: In analyzing elevation data from topographic maps, finding peaks is essential for understanding terrain.
-
-- **Signal Processing**: In signal analysis, detecting peaks in data streams can be crucial for identifying significant events or anomalies.
-
-By efficiently using this method, developers and researchers can ensure their applications are both robust and efficient in handling multi-dimensional data analysis tasks.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-a-peak-element-ii/description/)
 

@@ -14,145 +14,200 @@ img_src = ""
 youtube = "QOmHQiUMBuI"
 youtube_upload_date="2020-10-31"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QOmHQiUMBuI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two strings s and t, count the number of ways to choose a non-empty substring of s and replace exactly one character such that the resulting substring becomes a substring of t. In other words, find how many substrings in s differ from substrings in t by exactly one character.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings s and t. Both strings are lowercase English letters.
+- **Example:** `s = "cat", t = "bat"`
+- **Constraints:**
+	- 1 <= s.length, t.length <= 100
+	- s and t consist of lowercase English letters only.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countSubstrings(string s, string t) {
-        int res = 0;
-        for(int i = 0; i < s.size(); i++)
-            res += helper(s, t, i, 0);
-        for(int j = 1; j < t.size(); j++)
-            res += helper(s, t, 0, j);
-        return res;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the number of substrings in s that differ from some substring in t by exactly one character.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output will be a non-negative integer.
 
-    int helper(string s, string t, int i, int j) {
-        int res = 0, pre = 0, cur = 0;
-        for(int n = s.size(), m = t.size(); i < n && j < m; i++, j++) {
-            cur++;
-            if(s[i] != t[j]) {
-                pre = cur;
-                cur = 0;
-            }
-            res += pre;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count how many substrings in s differ by exactly one character from substrings in t.
+
+- Iterate over all possible substrings of s and t.
+- For each pair of substrings, check if they differ by exactly one character.
+- Count the number of valid substring pairs.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings s and t will always contain at least one character.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "cat", t = "bat"`  \
+  **Explanation:** The substrings that differ by exactly one character are 'cat' vs 'bat', which gives a count of 3.
+
+{{< dots >}}
+## Approach 🚀
+We will solve this problem by iterating through all possible substrings of s and t, checking if they differ by exactly one character, and counting those pairs.
+
+### Initial Thoughts 💭
+- Checking every pair of substrings from s and t is a brute force approach.
+- Optimizing the approach to check for only those substrings that are similar in size might improve performance.
+{{< dots >}}
+### Edge Cases 🌐
+- Both strings will have at least one character, so no need to handle empty inputs.
+- For large inputs, the algorithm may need optimization to avoid exceeding time limits.
+- Substrings of length 1 should be handled carefully.
+- Ensure that the algorithm works for all valid lengths of strings.
+{{< dots >}}
+## Code 💻
+```cpp
+int countSubstrings(string s, string t) {
+    int res = 0;
+    for(int i = 0; i < s.size(); i++)
+        res += helper(s, t, i, 0);
+    for(int j = 1; j < t.size(); j++)
+        res += helper(s, t, 0, j);
+    return res;
+}
+
+int helper(string s, string t, int i, int j) {
+    int res = 0, pre = 0, cur = 0;
+    for(int n = s.size(), m = t.size(); i < n && j < m; i++, j++) {
+        cur++;
+        if(s[i] != t[j]) {
+            pre = cur;
+            cur = 0;
         }
-        return res;
+        res += pre;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires counting the number of substrings in two given strings, \(s\) and \(t\), such that the two substrings differ by exactly one character. A substring is defined as a contiguous sequence of characters within a string. This problem tests the understanding of substring manipulation and string comparison in programming.
-
-### Approach
-
-The solution utilizes a two-part approach to efficiently count the required substrings:
-
-1. **Counting from the Start of `s`**: For each starting index in the string \(s\), we call a helper function to count how many substrings that start from that index in \(s\) can match with any starting index in \(t\) while differing by exactly one character.
-
-2. **Counting from the Start of `t`**: Similarly, we count substrings starting from each index in \(t\) that can match with any starting index in \(s\).
-
-### Code Breakdown (Step by Step)
-
-Let's analyze the provided code to understand how it achieves the desired functionality.
-
-```cpp
-class Solution {
-public:
-    int countSubstrings(string s, string t) {
+    return res;
+}
 ```
-- The `countSubstrings` function begins the process by defining the input strings \(s\) and \(t\). This function will ultimately return the count of valid substrings differing by one character.
 
-```cpp
-        int res = 0;
-```
-- We initialize a variable `res` to accumulate the total count of substrings found.
+This function counts the number of substrings where characters from strings 's' and 't' match at corresponding positions, using a helper function for the matching process.
 
-```cpp
-        for(int i = 0; i < s.size(); i++)
-            res += helper(s, t, i, 0);
-```
-- This loop iterates through each index of the string \(s\). For each index \(i\), the helper function is invoked, starting at \(i\) in \(s\) and at index \(0\) in \(t\). The returned count from the helper function is added to `res`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int countSubstrings(string s, string t) {
+	```
+	Define the method 'countSubstrings' that takes two strings, 's' and 't', as input and calculates the number of matching substrings.
 
-```cpp
-        for(int j = 1; j < t.size(); j++)
-            res += helper(s, t, 0, j);
-```
-- This loop iterates through each index of the string \(t\) starting from index \(1\). For each index \(j\), the helper function is called, starting at index \(0\) in \(s\) and at \(j\) in \(t\). The count returned from this function call is also added to `res`.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize a result variable 'res' to store the total count of matching substrings.
 
-```cpp
-        return res;
-    }
-```
-- Finally, the total count `res` is returned.
+3. **Loop Constructs**
+	```cpp
+	    for(int i = 0; i < s.size(); i++)
+	```
+	Start a loop that iterates over the string 's' from the first to the last character.
 
-#### Helper Function Explanation
+4. **Function Call**
+	```cpp
+	        res += helper(s, t, i, 0);
+	```
+	Call the helper function for each starting position 'i' in string 's' and fixed starting position 0 in string 't'.
 
-```cpp
-    int helper(string s, string t, int i, int j) {
-        int res = 0, pre = 0, cur = 0;
-```
-- The `helper` function is defined to compare substrings starting at indices \(i\) in \(s\) and \(j\) in \(t\). Three variables are initialized:
-  - `res`: to hold the count of valid substrings found.
-  - `pre`: to track the length of matching substrings before the last mismatch.
-  - `cur`: to track the current length of the substring being analyzed.
+5. **Loop Constructs**
+	```cpp
+	    for(int j = 1; j < t.size(); j++)
+	```
+	Start another loop that iterates over the string 't' from the second character to the last.
 
-```cpp
-        for(int n = s.size(), m = t.size(); i < n && j < m; i++, j++) {
-```
-- A loop is initiated that continues as long as indices \(i\) and \(j\) are within the bounds of \(s\) and \(t\) respectively.
+6. **Function Call**
+	```cpp
+	        res += helper(s, t, 0, j);
+	```
+	Call the helper function for each starting position 'j' in string 't' and fixed starting position 0 in string 's'.
 
-```cpp
-            cur++;
-```
-- For every iteration, `cur` is incremented as the current substring is being extended.
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the final result, which is the total number of matching substrings.
 
-```cpp
-            if(s[i] != t[j]) {
-                pre = cur;
-                cur = 0;
-            }
-```
-- If the characters at the current indices of \(s\) and \(t\) do not match, the following actions occur:
-  - `pre` is updated to the current length of the substring, representing the last known sequence of matches.
-  - `cur` is reset to `0` since a mismatch has occurred.
+8. **Helper Function Definition**
+	```cpp
+	int helper(string s, string t, int i, int j) {
+	```
+	Define the helper function that counts matching substrings starting from the given positions 'i' in string 's' and 'j' in string 't'.
 
-```cpp
-            res += pre;
-```
-- The variable `res` is updated by adding `pre`. This accounts for all valid substrings found up to the current mismatch that differ by exactly one character.
+9. **Variable Initialization**
+	```cpp
+	    int res = 0, pre = 0, cur = 0;
+	```
+	Initialize variables 'res' for the total count of matches, 'pre' for tracking previous matches, and 'cur' for the current matching length.
 
-```cpp
-        return res;
-    }
-```
-- Finally, the function returns the total count of valid substrings found.
+10. **Loop Constructs**
+	```cpp
+	    for(int n = s.size(), m = t.size(); i < n && j < m; i++, j++) {
+	```
+	Start a loop that iterates over the strings 's' and 't' as long as both indices 'i' and 'j' are within the bounds of their respective strings.
 
-### Complexity
+11. **Mathematical Operations**
+	```cpp
+	        cur++;
+	```
+	Increment the 'cur' variable as we find a matching character at the current positions 'i' and 'j'.
 
-- **Time Complexity**: The overall time complexity of this solution is \(O(n \times m)\), where \(n\) is the length of string \(s\) and \(m\) is the length of string \(t\). Each helper function call can take up to \(O(n + m)\) time in the worst case, and there are \(n + m\) such calls.
+12. **Conditional Statement**
+	```cpp
+	        if(s[i] != t[j]) {
+	```
+	Check if the characters at positions 'i' in string 's' and 'j' in string 't' do not match.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since no additional space proportional to the input size is utilized; we are only using a fixed number of variables for counting.
+13. **Variable Update**
+	```cpp
+	            pre = cur;
+	```
+	If the characters don't match, store the value of 'cur' (the length of the previous match) in 'pre'.
 
-### Conclusion
+14. **Variable Reset**
+	```cpp
+	            cur = 0;
+	```
+	Reset 'cur' to 0 because the match was broken.
 
-The `countSubstrings` function effectively counts the number of substrings from two strings that differ by exactly one character by leveraging the helper function to analyze potential substring matches efficiently.
+15. **Mathematical Operations**
+	```cpp
+	        res += pre;
+	```
+	Add the value of 'pre' (previous match length) to 'res'.
 
-**Key Takeaways**:
-1. **Two-Dimensional Comparison**: The approach of checking substrings starting from different positions in both strings ensures that we capture all valid cases of differing substrings.
-2. **Utilizing Helper Functions**: The use of a helper function to encapsulate the logic for counting valid substrings simplifies the main function and promotes code reuse.
-3. **Efficient Counting Strategy**: The counting mechanism utilizes prefix tracking to avoid unnecessary recalculations, making the substring comparison efficient.
+16. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the total number of matching substrings found by the helper function.
 
-This solution serves as a great example of using structured iteration and conditional checks to derive counts from complex string operations in an optimal manner.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) because we are generating and comparing all possible substrings.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to storing all possible substrings.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-substrings-that-differ-by-one-character/description/)
 

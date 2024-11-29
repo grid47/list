@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "kn0Z5_qPPzY"
 youtube_upload_date="2023-02-28"
 youtube_thumbnail="https://i.ytimg.com/vi/kn0Z5_qPPzY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,73 +28,54 @@ youtube_thumbnail="https://i.ytimg.com/vi/kn0Z5_qPPzY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, return all duplicate subtrees. For each duplicate subtree, return the root node of any one of them. Two trees are considered duplicates if they have the same structure and node values.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root of a binary tree, represented as an array of integers where null indicates no child for a node.
+- **Example:** `root = [1,2,3,4,null,2,4,null,null,4]`
+- **Constraints:**
+	- 1 <= number of nodes <= 5000
+	- -200 <= Node.val <= 200
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
-        unordered_map<string, vector<TreeNode*>> mp;
-        serialise(mp, root);
-        vector<TreeNode*> res;
-        for(auto it: mp) {
-            if(it.second.size() > 1)
-            res.push_back(it.second[0]);
-        }
-        return res;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of root nodes of duplicate subtrees. Each node in the output should be the root of a duplicate subtree.
+- **Example:** `[[2,4],[4]]`
+- **Constraints:**
+	- Only return the root of any duplicate subtree.
 
-    string serialise(unordered_map<string, vector<TreeNode*>> &mp, TreeNode* root) {
-        if(root == NULL) return "";
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify and return the root of all duplicate subtrees.
 
-        string s = "(" + serialise(mp, root->left) + to_string(root->val) + serialise(mp, root->right) + ")";
-        mp[s].push_back(root);
-        return s;
+- 1. Traverse the tree in a depth-first manner.
+- 2. For each subtree, serialize its structure into a string.
+- 3. Use a hash map to store the frequency of each serialized subtree.
+- 4. If a subtree appears more than once, add its root node to the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree may contain duplicate subtrees that need to be identified.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [1,2,3,4,null,2,4,null,null,4]`  \
+  **Explanation:** In this tree, the subtree [2,4] and the subtree [4] are repeated, so they are returned as the output.
 
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+Use serialization of the subtrees to identify duplicates. Each subtree is represented as a string, and a hashmap is used to track how many times each subtree occurs.
 
-### Problem Statement
-
-In this problem, we are given a binary tree, and we need to find all the subtrees in the tree that are duplicates. A subtree is defined as a part of the tree that includes the node itself, along with all its descendants. Two subtrees are considered duplicate if they have the same structure and node values. The task is to return a list of the root nodes of all duplicate subtrees.
-
-### Approach
-
-To solve this problem, we can take advantage of **tree serialization** and a **hash map** (unordered_map) to efficiently identify and track duplicate subtrees. The idea is to convert each subtree into a unique string representation, and then store these representations in a hash map. If we encounter a subtree that has been seen before (i.e., it maps to the same string), we can be sure that it is a duplicate subtree.
-
-The algorithm can be broken down into two main parts:
-1. **Serializing the tree**: This is done by traversing the tree and creating a string that uniquely represents each subtree. For each node, we recursively serialize its left and right subtrees, and combine them with the node's value to form a string. This way, identical subtrees will result in the same string representation.
-2. **Tracking duplicates**: As we serialize each subtree, we store the serialized string in a hash map. If a particular string (representing a subtree) appears more than once, we know that the subtree is a duplicate.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **TreeNode Definition**:
-```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-```
-- The `TreeNode` structure defines the binary tree node, containing the integer `val`, a pointer to the left child `left`, and a pointer to the right child `right`. The constructor initializes these values.
-
-#### 2. **Main Function (findDuplicateSubtrees)**:
+### Initial Thoughts 💭
+- We need an efficient way to compare subtrees, and serializing them into strings is a good strategy.
+- Hash maps can help store the serialized subtrees and detect duplicates.
+{{< dots >}}
+### Edge Cases 🌐
+- The input tree will not be empty, as it is guaranteed to have at least one node.
+- For large input sizes (up to 5000 nodes), ensure that the solution is optimized for time and space.
+- Handle cases where there are no duplicate subtrees, in which case the output should be an empty list.
+- The tree can have up to 5000 nodes, so ensure the solution is efficient.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
     unordered_map<string, vector<TreeNode*>> mp;
@@ -101,52 +83,120 @@ vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
     vector<TreeNode*> res;
     for(auto it: mp) {
         if(it.second.size() > 1)
-            res.push_back(it.second[0]);
+        res.push_back(it.second[0]);
     }
     return res;
 }
-```
-- We define a hash map `mp` that stores serialized subtree strings as keys, and vectors of `TreeNode*` as values. The vector contains all the nodes that share the same subtree structure and node values.
-- The function `serialise(mp, root)` is called to fill this map by serializing all subtrees.
-- After serialization, we iterate through the map to identify any subtrees that appear more than once. If the vector for a subtree has more than one element, we know that subtree is a duplicate, and we add the first occurrence of it (i.e., the root node) to the result list `res`.
 
-#### 3. **Subtree Serialization (serialise)**:
-```cpp
 string serialise(unordered_map<string, vector<TreeNode*>> &mp, TreeNode* root) {
     if(root == NULL) return "";
+
     string s = "(" + serialise(mp, root->left) + to_string(root->val) + serialise(mp, root->right) + ")";
     mp[s].push_back(root);
     return s;
+
 }
 ```
-- The `serialise` function recursively serializes each subtree. If the current node is `NULL`, we return an empty string.
-- For each non-NULL node, we create a string `s` by concatenating:
-  - The serialized left subtree (`serialise(mp, root->left)`),
-  - The current node's value (`to_string(root->val)`),
-  - The serialized right subtree (`serialise(mp, root->right)`).
-- This string representation ensures that the structure and node values are captured, so that identical subtrees will generate the same serialized string.
-- We then store this string in the hash map `mp` and associate it with the current root node of the subtree.
-- Finally, the function returns the serialized string `s`.
 
-### Complexity
+This function identifies duplicate subtrees in a binary tree. It uses a helper function `serialise` to convert each subtree into a string representation. The `findDuplicateSubtrees` function collects and returns the duplicate subtrees.
 
-#### Time Complexity:
-1. **Tree Traversal**: The algorithm performs a depth-first traversal of the entire tree to serialize each node and its subtrees. This traversal takes **O(n)** time, where `n` is the number of nodes in the tree.
-2. **Serialization and Hash Map Operations**: Each node's serialization involves creating a string and performing a hash map lookup and insertion. In the worst case, the serialization string for each subtree can be linear in terms of the size of the subtree (though in practice it may be shorter). The time complexity for handling each node is **O(n)**, leading to a total time complexity of **O(n)** for the entire process.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
+	```
+	The `findDuplicateSubtrees` function is defined to return a vector of TreeNode pointers representing the duplicate subtrees in the given binary tree rooted at `root`.
 
-Therefore, the overall time complexity is **O(n)**.
+2. **Map Initialization**
+	```cpp
+	    unordered_map<string, vector<TreeNode*>> mp;
+	```
+	An unordered map `mp` is created to store serialized subtree strings as keys and the corresponding vector of TreeNode pointers as values.
 
-#### Space Complexity:
-1. **Hash Map**: The space complexity is dominated by the storage required for the hash map, which stores one serialized string for each unique subtree. In the worst case, if no two subtrees are identical, the hash map will store `n` strings. Each string can be at most **O(n)** in length. Hence, the space complexity for the hash map is **O(n^2)**.
-2. **Recursive Call Stack**: The depth of the recursion is the height of the tree, which is **O(n)** in the worst case for an unbalanced tree.
+3. **Subtree Serialization**
+	```cpp
+	    serialise(mp, root);
+	```
+	The helper function `serialise` is called to serialize the binary tree, populating the map `mp` with serialized subtree strings and corresponding TreeNode pointers.
 
-Thus, the overall space complexity is **O(n^2)**, dominated by the storage of the serialized strings in the hash map.
+4. **Result Vector Initialization**
+	```cpp
+	    vector<TreeNode*> res;
+	```
+	A vector `res` is initialized to store the duplicate subtrees.
 
-### Conclusion
+5. **Map Iteration**
+	```cpp
+	    for(auto it: mp) {
+	```
+	The function iterates over each entry in the map `mp`, where the key is the serialized subtree string and the value is a vector of TreeNode pointers representing that subtree.
 
-The solution to finding duplicate subtrees in a binary tree efficiently uses serialization and a hash map. By recursively traversing the tree and creating a string representation for each subtree, we can easily identify duplicate subtrees by looking for duplicate strings in the hash map. The approach ensures that the problem is solved with a time complexity of **O(n)** and a space complexity of **O(n^2)**, making it suitable for most binary trees.
+6. **Check for Duplicates**
+	```cpp
+	        if(it.second.size() > 1)
+	```
+	If the vector associated with a serialized subtree string has more than one element, it means the subtree is a duplicate.
 
-This method is optimal for solving subtree duplication problems, and the recursive approach allows for easy implementation while ensuring that both time and space complexities are manageable.
+7. **Store Duplicate Subtree**
+	```cpp
+	        res.push_back(it.second[0]);
+	```
+	The first occurrence of the duplicate subtree is added to the result vector `res`.
+
+8. **Return Results**
+	```cpp
+	    return res;
+	```
+	The function returns the vector `res` containing the duplicate subtrees.
+
+9. **Serialization Function Definition**
+	```cpp
+	string serialise(unordered_map<string, vector<TreeNode*>> &mp, TreeNode* root) {
+	```
+	The `serialise` helper function is defined to serialize the binary tree rooted at `root` into a string representation.
+
+10. **Base Case**
+	```cpp
+	    if(root == NULL) return "";
+	```
+	If the current node is NULL, return an empty string, which represents a non-existent subtree.
+
+11. **Subtree Serialization**
+	```cpp
+	    string s = "(" + serialise(mp, root->left) + to_string(root->val) + serialise(mp, root->right) + ")";
+	```
+	The current node's value is combined with the serialized representations of its left and right subtrees, enclosed in parentheses, to form a complete string representation of the current subtree.
+
+12. **Map Update**
+	```cpp
+	    mp[s].push_back(root);
+	```
+	The serialized string `s` is used as a key in the map `mp`, and the current node is added to the vector of TreeNode pointers for that subtree.
+
+13. **Return Serialized String**
+	```cpp
+	    return s;
+	```
+	The serialized string `s` representing the current subtree is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+In the worst case, we traverse the tree once, and each subtree serialization takes linear time relative to its size.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+Space complexity is O(n) due to the space used by the hashmap and the recursion stack for tree traversal.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-duplicate-subtrees/description/)
 

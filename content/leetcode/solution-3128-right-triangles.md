@@ -14,161 +14,237 @@ img_src = ""
 youtube = "SgwaC6fRCSE"
 youtube_upload_date="2024-04-27"
 youtube_thumbnail="https://i.ytimg.com/vi/SgwaC6fRCSE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D binary matrix grid, where each element is either 0 or 1. A collection of three elements of the grid is considered a right triangle if one element lies in the same row as another and in the same column as the third. The three elements must not be adjacent to each other. Your task is to count the number of right triangles that can be formed where all three elements have a value of 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 2D binary matrix grid of size m x n, where each element is either 0 or 1.
+- **Example:** `Example 1:
+Input: grid = [[0, 1, 0], [0, 1, 1], [0, 1, 0]]
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long numberOfRightTriangles(vector<vector<int>>& grid) {
-        
-        int m = grid.size(), n = grid[0].size();
-        
-        vector<vector<int>> hr = grid;
-        vector<vector<int>> vr = grid;        
-        
-        for(int i = 0; i < m; i++) {
-            for(int j = 1; j < n; j++) {
-                hr[i][j] += hr[i][j - 1];
-                // cout << hr[i][j] << " ";
-            }
-            // cout << "\n";
+Example 2:
+Input: grid = [[1, 0, 0, 0], [0, 1, 0, 1], [1, 0, 0, 0]]`
+- **Constraints:**
+	- 1 <= grid.length <= 1000
+	- 1 <= grid[i].length <= 1000
+	- 0 <= grid[i][j] <= 1
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of right triangles that can be formed using the 1's in the grid.
+- **Example:** `Example 1:
+Output: 2
+
+Example 2:
+Output: 0`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To count all possible right triangles formed by the 1's in the grid.
+
+- Use dynamic programming to count the number of 1's in the row and column directions for each cell.
+- Iterate through each cell and check if it can form a right triangle with other cells in the same row and column that contain 1's.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input matrix is always a valid 2D binary grid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this case, the two right triangles that can be formed have all 1's as their elements. These two right triangles are formed from grid positions that satisfy the condition of a right triangle.
+
+- **Input:** `Example 2`  \
+  **Explanation:** Here, there are no possible right triangles because no three elements form a valid right triangle.
+
+{{< dots >}}
+## Approach 🚀
+This problem can be solved by leveraging dynamic programming to track the number of 1's along rows and columns for each cell. Once this information is available, we can efficiently check for potential right triangles.
+
+### Initial Thoughts 💭
+- The problem involves a large grid, so we must focus on efficiency in counting 1's in rows and columns.
+- Dynamic programming seems to be the optimal approach to solve this problem efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty matrices should return 0 as no triangles can be formed.
+- For very large inputs, ensure the solution handles matrix sizes up to the maximum constraint efficiently.
+- A grid consisting entirely of 0's should return 0, as no right triangles can be formed.
+- The grid is guaranteed to have at least one element.
+{{< dots >}}
+## Code 💻
+```cpp
+long long numberOfRightTriangles(vector<vector<int>>& grid) {
+    
+    int m = grid.size(), n = grid[0].size();
+    
+    vector<vector<int>> hr = grid;
+    vector<vector<int>> vr = grid;        
+    
+    for(int i = 0; i < m; i++) {
+        for(int j = 1; j < n; j++) {
+            hr[i][j] += hr[i][j - 1];
+            // cout << hr[i][j] << " ";
         }
+        // cout << "\n";
+    }
 
 
-        for(int i = 1; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                vr[i][j] += vr[i - 1][j];            
-                // cout << vr[i][j] << " ";
-            }
-            // cout << "\n";
-        }
-
-
-        long long  cnt = 0, net;
-        for(int i = 0; i < m; i++)
+    for(int i = 1; i < m; i++) {
         for(int j = 0; j < n; j++) {
-            if(grid[i][j]) {
-                // if(i == 1 && j == 1) {
-                //     cout << ((vr[m - 1][j] - vr[i][j]) + (i >= 1? vr[i - 1][j]: 0));                    
-                // }
-
-                net = (hr[i][n - 1] - 1) * ((vr[m - 1][j] - vr[i][j]) + (i > 0? vr[i - 1][j]: 0));
-                // cout << i << " " << j << " " << net << "\n";
-                cnt += net;
-                
-            }
-        }        
-        return cnt;
-        
+            vr[i][j] += vr[i - 1][j];            
+            // cout << vr[i][j] << " ";
+        }
+        // cout << "\n";
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
 
-The problem asks us to find the number of right-angled triangles that can be formed using cells in a 2D grid. The grid consists of `1`s and `0`s, where `1` represents a valid cell, and `0` represents an empty cell. A right-angled triangle can be formed when three points lie in a right-angled relationship in the grid. Specifically, the triangle's right angle must align with the grid axes, either horizontally or vertically.
-
-The goal is to determine how many such right-angled triangles can be formed based on the given grid.
-
-### Approach
-
-To solve this problem efficiently, we can break down the task into several sub-problems:
-
-1. **Precompute Horizontal and Vertical Sums**: First, we compute two auxiliary grids:
-   - `hr[i][j]`: The cumulative sum of `1`s from the leftmost column to column `j` in row `i`. This tells us how many `1`s there are to the left of a given cell in a particular row.
-   - `vr[i][j]`: The cumulative sum of `1`s from the topmost row to row `i` in column `j`. This tells us how many `1`s there are above a given cell in a particular column.
-
-2. **Count Right-Angled Triangles**: Once we have the horizontal and vertical sums, we can calculate the number of triangles that can be formed with each cell `(i, j)` as the right-angle vertex. The formula for calculating the number of triangles at a point `(i, j)` is:
-   \[
-   \text{Triangles at }(i, j) = (\text{number of 1s in row i to the right of } j) \times (\text{number of 1s in column j below } i)
-   \]
-   This formula accounts for the potential triangles that could be formed by using the current cell as the right-angle corner of the triangle.
-
-3. **Accumulate the Results**: We then accumulate the number of triangles for each valid cell `(i, j)` where there is a `1`.
-
-### Code Breakdown
-
-#### Step 1: Initialize and Precompute Horizontal and Vertical Sums
-
-```cpp
-vector<vector<int>> hr = grid;
-vector<vector<int>> vr = grid;
-```
-- Here, `hr` and `vr` are copies of the original grid `grid`. We will use these grids to store the cumulative counts of `1`s in the rows and columns, respectively.
-
-```cpp
-for(int i = 0; i < m; i++) {
-    for(int j = 1; j < n; j++) {
-        hr[i][j] += hr[i][j - 1];
-    }
-}
-```
-- This loop precomputes the cumulative sum of `1`s in each row.
-- For each row `i`, starting from column `1`, we accumulate the values of `grid[i][j]` into `hr[i][j]`.
-
-```cpp
-for(int i = 1; i < m; i++) {
+    long long  cnt = 0, net;
+    for(int i = 0; i < m; i++)
     for(int j = 0; j < n; j++) {
-        vr[i][j] += vr[i - 1][j];
-    }
+        if(grid[i][j]) {
+            // if(i == 1 && j == 1) {
+            //     cout << ((vr[m - 1][j] - vr[i][j]) + (i >= 1? vr[i - 1][j]: 0));                    
+            // }
+
+            net = (hr[i][n - 1] - 1) * ((vr[m - 1][j] - vr[i][j]) + (i > 0? vr[i - 1][j]: 0));
+            // cout << i << " " << j << " " << net << "\n";
+            cnt += net;
+            
+        }
+    }        
+    return cnt;
+    
 }
 ```
-- This loop precomputes the cumulative sum of `1`s in each column.
-- For each column `j`, starting from row `1`, we accumulate the values of `grid[i][j]` into `vr[i][j]`.
 
-#### Step 2: Calculate the Number of Right-Angled Triangles
+This function calculates the number of right-angled triangles in a given grid, using dynamic programming techniques to accumulate row and column sums. It checks for potential triangle formations by considering horizontal and vertical grid values.
 
-```cpp
-long long cnt = 0, net;
-```
-- We initialize `cnt` to accumulate the total number of right-angled triangles.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long numberOfRightTriangles(vector<vector<int>>& grid) {
+	```
+	Defines the function `numberOfRightTriangles` which takes a 2D grid as input and returns the count of right-angled triangles.
 
-```cpp
-for(int i = 0; i < m; i++)
-for(int j = 0; j < n; j++) {
-    if(grid[i][j]) {
-        net = (hr[i][n - 1] - 1) * ((vr[m - 1][j] - vr[i][j]) + (i > 0? vr[i - 1][j]: 0));
-        cnt += net;
-    }
-}
-```
-- We loop through every cell `(i, j)` in the grid.
-- If `grid[i][j] == 1`, we calculate the number of possible right-angled triangles with `(i, j)` as the right angle using the precomputed `hr` and `vr` arrays.
-- The formula used for `net` computes the number of possible triangles:
-  - `hr[i][n - 1] - 1` gives the number of `1`s to the right of column `j` in row `i` (since we need to exclude the current cell).
-  - `(vr[m - 1][j] - vr[i][j]) + (i > 0? vr[i - 1][j]: 0)` gives the number of `1`s below cell `(i, j)` in column `j`. If `i > 0`, we add the number of `1`s above cell `(i, j)` to account for all `1`s in the same column.
-- We add the result to `cnt`.
+2. **Variable Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Initializes variables `m` and `n` to store the number of rows and columns of the grid.
 
-#### Step 3: Return the Final Result
+3. **Grid Initialization**
+	```cpp
+	    vector<vector<int>> hr = grid;
+	```
+	Creates a copy of the grid named `hr` to store horizontal cumulative sums.
 
-```cpp
-return cnt;
-```
-- After iterating through the entire grid and counting the triangles for every valid `(i, j)`, we return the total count `cnt` as the result.
+4. **Grid Initialization**
+	```cpp
+	    vector<vector<int>> vr = grid;        
+	```
+	Creates a copy of the grid named `vr` to store vertical cumulative sums.
 
-### Complexity
+5. **Horizontal Sum Calculation**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Starts the loop to iterate over each row of the grid for horizontal cumulative sum calculations.
 
-#### Time Complexity:
-- **O(m * n)**: 
-  - We iterate over the entire grid to compute the cumulative horizontal and vertical sums in two separate loops, each with a time complexity of O(m * n).
-  - We also iterate over the entire grid again to calculate the number of triangles, which is another O(m * n) operation.
-  - Therefore, the overall time complexity is O(m * n).
+6. **Nested Loop**
+	```cpp
+	        for(int j = 1; j < n; j++) {
+	```
+	Inner loop to calculate the horizontal cumulative sum for each row.
 
-#### Space Complexity:
-- **O(m * n)**: 
-  - We use additional `m * n` space to store the `hr` and `vr` grids, which are used to calculate the number of triangles.
+7. **Sum Calculation**
+	```cpp
+	            hr[i][j] += hr[i][j - 1];
+	```
+	Updates the horizontal sum by adding the previous horizontal value.
 
-### Conclusion
+8. **Vertical Sum Calculation**
+	```cpp
+	    for(int i = 1; i < m; i++) {
+	```
+	Starts the loop to calculate vertical cumulative sums.
 
-This solution efficiently computes the number of right-angled triangles that can be formed in the given grid by leveraging precomputation techniques. The use of cumulative sums (`hr` and `vr`) ensures that we can quickly calculate the number of possible triangles at each cell. The overall time complexity of O(m * n) ensures that the solution works efficiently even for larger grids. 
+9. **Nested Loop**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	Inner loop to calculate the vertical cumulative sum for each column.
 
-The approach is both time-efficient and space-efficient, making it suitable for use in competitive programming and real-world scenarios where similar grid-based problems arise. By handling the precomputation and applying the triangle-counting formula efficiently, the solution provides a robust and optimized way to solve the problem.
+10. **Sum Calculation**
+	```cpp
+	            vr[i][j] += vr[i - 1][j];            
+	```
+	Updates the vertical sum by adding the previous vertical value.
+
+11. **Triangle Calculation**
+	```cpp
+	    long long  cnt = 0, net;
+	```
+	Initializes counters for the total number of triangles (`cnt`) and a temporary variable (`net`) for each triangle calculation.
+
+12. **Double Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Outer loop to iterate over each row.
+
+13. **Nested Loop**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Inner loop to iterate over each column.
+
+14. **Check for Valid Grid Cell**
+	```cpp
+	        if(grid[i][j]) {
+	```
+	Checks if the current grid cell has a value indicating a potential right-angled triangle.
+
+15. **Triangle Calculation**
+	```cpp
+	            net = (hr[i][n - 1] - 1) * ((vr[m - 1][j] - vr[i][j]) + (i > 0? vr[i - 1][j]: 0));
+	```
+	Calculates the number of triangles formed by the current grid cell.
+
+16. **Update Count**
+	```cpp
+	            cnt += net;
+	```
+	Adds the calculated number of triangles to the total count.
+
+17. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the total number of right-angled triangles.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The algorithm iterates through each cell in the matrix once and performs constant-time operations for each cell.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+We use additional space to store the cumulative counts of 1's in the horizontal and vertical directions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/right-triangles/description/)
 

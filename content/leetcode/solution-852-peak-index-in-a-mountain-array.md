@@ -14,127 +14,181 @@ img_src = ""
 youtube = "yeYhFWpIus4"
 youtube_upload_date="2022-06-29"
 youtube_thumbnail="https://i.ytimg.com/vi/yeYhFWpIus4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a mountain array `arr` of length `n`, where the values first strictly increase to a peak element and then strictly decrease. Your task is to find the index of the peak element in the array. The peak element is an element that is greater than both its neighbors.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `arr` that represents the mountain array.
+- **Example:** `Input: arr = [1, 3, 2]`
+- **Constraints:**
+	- 3 <= arr.length <= 10^5
+	- 0 <= arr[i] <= 10^6
+	- arr is guaranteed to be a mountain array.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int peakIndexInMountainArray(vector<int>& arr) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the index of the peak element in the array.
+- **Example:** `Output: 1`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the index of the peak element in O(log(n)) time complexity using binary search.
+
+- Step 1: Initialize two pointers, `l` and `r`, to represent the left and right bounds of the search range.
+- Step 2: Use binary search to find the peak element by comparing the middle element with its neighbors.
+- Step 3: If the middle element is greater than both neighbors, return its index.
+- Step 4: If the middle element is less than its right neighbor, move the left pointer to `mid + 1`. Otherwise, move the right pointer to `mid - 1`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is a valid mountain array, which means there is always exactly one peak.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [0, 2, 1, 0]`  \
+  **Explanation:** In this example, the peak element is 2, which is located at index 1. The values increase from index 0 to 1, and then decrease from index 1 to 3, so the peak is at index 1.
+
+- **Input:** `Input: arr = [0, 10, 5, 2]`  \
+  **Explanation:** Here, the peak element is 10, located at index 1. The values increase from index 0 to 1, and then decrease from index 1 to 3, with 10 being the peak.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem efficiently using a binary search approach to find the peak element in O(log n) time.
+
+### Initial Thoughts 💭
+- The array is a mountain array, meaning the elements first increase to a peak and then decrease.
+- We can take advantage of the binary search technique by checking the middle element and adjusting our search bounds based on whether we are on the increasing or decreasing slope.
+{{< dots >}}
+### Edge Cases 🌐
+- N/A: The array always has at least 3 elements.
+- The solution must efficiently handle cases where the array length is close to the upper limit (10^5).
+- The array will always contain a valid peak, so there is no need for additional validity checks.
+- The binary search approach ensures O(log n) time complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+int peakIndexInMountainArray(vector<int>& arr) {
+    
+    int n = arr.size();
+
+    int l = 1, r = n - 2;
+
+    while(l <= r) {
+        int mid = l + (r - l + 1) / 2;
         
-        int n = arr.size();
-
-        int l = 1, r = n - 2;
-
-        while(l <= r) {
-            int mid = l + (r - l + 1) / 2;
-            
-            if(arr[mid] > arr[mid + 1] && arr[mid] > arr[mid - 1]) {
-                return mid;
-            }
-            
-            if(arr[mid] > arr[mid + 1]) {
-                r = mid - 1;
-            } else if(arr[mid] > arr[mid - 1]) {
-                l = mid + 1;
-            }
-            
+        if(arr[mid] > arr[mid + 1] && arr[mid] > arr[mid - 1]) {
+            return mid;
         }
-        return 0;
+        
+        if(arr[mid] > arr[mid + 1]) {
+            r = mid - 1;
+        } else if(arr[mid] > arr[mid - 1]) {
+            l = mid + 1;
+        }
+        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the index of the peak element in a **mountain array**. A **mountain array** is an array where:
-1. The array is strictly increasing up to a peak element.
-2. The array is strictly decreasing after the peak element.
-
-Given an array `arr` of integers, where the length of the array is at least 3, the goal is to find the index of the peak element. The peak element is an element that is greater than both its neighbors.
-
-**Example**:
-- **Input**: `arr = [0, 2, 3, 4, 5, 3, 1]`
-- **Output**: `4` (The peak is `5` at index `4`).
-
-### Approach
-
-To solve the problem efficiently, we can apply a **binary search** strategy. Since the array is guaranteed to form a mountain, we can exploit the structure to perform a **logarithmic** search. The peak element must satisfy the condition that it is greater than its neighbors. We can use the binary search to efficiently find this peak.
-
-1. **Binary Search Approach**: 
-   - The basic idea is to divide the array into two parts and compare the middle element with its neighbors.
-   - If the middle element is greater than its neighbors, we have found the peak.
-   - If the middle element is less than its right neighbor, the peak lies to the right of the middle, so we move the left pointer (`l`) to `mid + 1`.
-   - If the middle element is less than its left neighbor, the peak lies to the left of the middle, so we move the right pointer (`r`) to `mid - 1`.
-   
-2. **Edge Case**:
-   - Since the array is guaranteed to have at least one peak (due to the problem constraints), we don't need to worry about edge cases like arrays of length 2 or non-mountain arrays.
-
-This approach will run in **O(log n)** time, where `n` is the length of the array, making it optimal for large arrays.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize pointers
-```cpp
-int l = 1, r = n - 2;
-```
-- We initialize two pointers, `l` (left) and `r` (right), to point to the elements just next to the first and last elements of the array. We exclude the first and last elements since the peak must be somewhere between these two points.
-
-#### Step 2: Binary Search Loop
-```cpp
-while (l <= r) {
-    int mid = l + (r - l + 1) / 2;
-```
-- We start a `while` loop where `l` is less than or equal to `r`. In each iteration, we calculate the middle index `mid` of the current search range. We use the formula `l + (r - l + 1) / 2` to avoid overflow and ensure that the search space is balanced.
-
-#### Step 3: Peak Condition
-```cpp
-if (arr[mid] > arr[mid + 1] && arr[mid] > arr[mid - 1]) {
-    return mid;
+    return 0;
 }
 ```
-- We check if the current middle element (`arr[mid]`) is greater than both its left neighbor (`arr[mid - 1]`) and right neighbor (`arr[mid + 1]`). If this condition holds, then we have found the peak, and we return the index `mid`.
 
-#### Step 4: Adjust Search Range
-```cpp
-if (arr[mid] > arr[mid + 1]) {
-    r = mid - 1;
-} else if (arr[mid] > arr[mid - 1]) {
-    l = mid + 1;
-}
-```
-- If the middle element is greater than its right neighbor (`arr[mid] > arr[mid + 1]`), it means the peak lies to the left of `mid`, so we adjust the right pointer (`r = mid - 1`) to narrow the search to the left half.
-- If the middle element is greater than its left neighbor (`arr[mid] > arr[mid - 1]`), it means the peak lies to the right of `mid`, so we adjust the left pointer (`l = mid + 1`) to narrow the search to the right half.
+This is an implementation of finding the peak index in a mountain array using binary search.
 
-#### Step 5: Return the Result
-```cpp
-return 0;
-```
-- After the binary search loop completes, if no peak is found (though the problem guarantees that one will exist), we return `0`. In this case, returning `0` is more of a fallback, though the loop ensures that we find a peak.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int peakIndexInMountainArray(vector<int>& arr) {
+	```
+	Defines the function that will return the index of the peak element in the mountain array.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    int n = arr.size();
+	```
+	Stores the size of the input array into variable 'n'.
 
-#### Time Complexity:
-- The time complexity is **O(log n)** because we reduce the search range by half with each iteration of the binary search. This makes it very efficient, especially for large arrays.
+3. **Variable Initialization**
+	```cpp
+	    int l = 1, r = n - 2;
+	```
+	Initializes left and right pointers (l and r) to search within the range of valid indices.
 
-#### Space Complexity:
-- The space complexity is **O(1)** because we are only using a constant amount of extra space to store the pointers `l`, `r`, and `mid`. The algorithm does not use any additional data structures that scale with the input size.
+4. **Looping**
+	```cpp
+	    while(l <= r) {
+	```
+	Starts the binary search loop to find the peak.
 
-### Conclusion
+5. **Mid Calculation**
+	```cpp
+	        int mid = l + (r - l + 1) / 2;
+	```
+	Calculates the middle index (mid) for the binary search range.
 
-This solution leverages a binary search approach to efficiently find the peak element in a mountain array. By continually halving the search space, we ensure that the algorithm runs in **O(log n)** time, which is optimal for large input sizes. The simplicity and efficiency of the binary search make this solution ideal for this problem. 
+6. **Condition Check**
+	```cpp
+	        if(arr[mid] > arr[mid + 1] && arr[mid] > arr[mid - 1]) {
+	```
+	Checks if the current element is greater than its neighbors, indicating it's the peak.
 
-Key takeaways:
-- The problem guarantees the presence of a peak, making binary search a natural choice.
-- The use of binary search ensures that we can find the peak in logarithmic time, making the solution scalable for large inputs.
-- The solution only requires constant space, making it space-efficient.
+7. **Return**
+	```cpp
+	            return mid;
+	```
+	Returns the index of the peak element.
 
-This method is a perfect example of how to leverage the structure of a problem (in this case, the "mountain" property) to design an optimal solution.
+8. **Condition Check**
+	```cpp
+	        if(arr[mid] > arr[mid + 1]) {
+	```
+	If the current element is greater than the element on its right, move the right pointer.
+
+9. **Pointer Update**
+	```cpp
+	            r = mid - 1;
+	```
+	Updates the right pointer to search the left half of the array.
+
+10. **Condition Check**
+	```cpp
+	        } else if(arr[mid] > arr[mid - 1]) {
+	```
+	If the current element is greater than the element on its left, move the left pointer.
+
+11. **Pointer Update**
+	```cpp
+	            l = mid + 1;
+	```
+	Updates the left pointer to search the right half of the array.
+
+12. **Return**
+	```cpp
+	    return 0;
+	```
+	Returns 0 if no peak is found (default case).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
+
+The time complexity is O(log n) due to the binary search process, which halves the search space at each step.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as the solution uses only a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/peak-index-in-a-mountain-array/description/)
 

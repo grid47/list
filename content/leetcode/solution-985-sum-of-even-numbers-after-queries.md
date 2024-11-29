@@ -14,106 +14,159 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums and an array of queries, each of which is in the form [value, index], you need to apply each query by adding value to nums[index] and return the sum of even numbers in the updated nums array after each query.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array nums of integers and an array of queries, where each query consists of a value to be added to nums at a specific index.
+- **Example:** `nums = [5, 7, 9, 10], queries = [[2, 0], [-5, 1], [4, 0], [6, 3]]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -10^4 <= nums[i] <= 10^4
+	- 1 <= queries.length <= 10^4
+	- -10^4 <= value <= 10^4
+	- 0 <= index < nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& qs) {
-        vector<int> res = {};
-        int sum = accumulate(begin(A), end(A), 0, [](int s, int a) {
-            return s + (a % 2 == 0? a : 0);
-        });
-        for(auto &q: qs) {
-            if(A[q[1]] %2 == 0) sum-=A[q[1]];
-            A[q[1]] += q[0];
-            if(A[q[1]]%2 == 0) sum+=A[q[1]];
-            res.push_back(sum);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each query, return the sum of even numbers in nums after the query has been applied.
+- **Example:** `Output: [12, 7, 12, 14]`
+- **Constraints:**
+	- The output should be an array of integers representing the sum of even numbers after each query.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to modify the nums array with each query and compute the sum of even values in the updated array.
+
+- Initialize a sum variable to hold the sum of even numbers in nums.
+- Iterate over each query and modify the appropriate value in nums.
+- After modifying nums, update the sum of even numbers based on the updated value.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each query modifies nums at a specific index, and the sum of even values is updated immediately after each modification.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [5, 7, 9, 10], queries = [[2, 0], [-5, 1], [4, 0], [6, 3]]`  \
+  **Explanation:** In this example, we modify nums in place for each query and compute the sum of even values after each query.
+
+{{< dots >}}
+## Approach 🚀
+We can keep track of the sum of even values in nums and update it after each query, adjusting for the even/odd status of the modified value.
+
+### Initial Thoughts 💭
+- We need to efficiently update the sum of even values after each query without recalculating from scratch.
+- By adjusting the sum based on whether the modified value is even or odd, we can avoid unnecessary recalculations.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle cases where nums has only one element.
+- Consider large arrays and large values for nums and queries.
+- Handle cases where the modified number becomes even or odd due to the addition.
+- Ensure the solution is efficient enough to handle the maximum constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& qs) {
+    vector<int> res = {};
+    int sum = accumulate(begin(A), end(A), 0, [](int s, int a) {
+        return s + (a % 2 == 0? a : 0);
+    });
+    for(auto &q: qs) {
+        if(A[q[1]] %2 == 0) sum-=A[q[1]];
+        A[q[1]] += q[0];
+        if(A[q[1]]%2 == 0) sum+=A[q[1]];
+        res.push_back(sum);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to calculate the sum of all even numbers in an array `A` after performing a series of queries. Each query consists of two elements: a number `x` and an index `i`. The task is to add `x` to `A[i]` and compute the sum of all even numbers in the array after each query.
-
-The array can contain both even and odd numbers, and after each update, the goal is to efficiently compute and return the sum of all even numbers in the array.
-
-### Approach
-
-To solve this problem, we need to efficiently track the sum of even numbers in the array while performing the updates specified by the queries.
-
-We use a **greedy approach** combined with a **lazy evaluation strategy** to handle the updates and sum computation:
-
-1. **Initial Sum Calculation**:
-   - First, we compute the sum of all even numbers in the array `A` before any updates. This is done using the `accumulate` function, which iterates through the array and adds up the even numbers.
-   - The key observation here is that we only need to track the sum of even numbers, which means odd numbers are ignored during the initial calculation.
-
-2. **Query Processing**:
-   - For each query `(x, i)`, we first check if `A[i]` is even. If it is, we subtract it from the current sum, as we are going to modify `A[i]` by adding `x` to it.
-   - After performing the update (`A[i] += x`), we check if the updated value of `A[i]` is even. If it is, we add it to the current sum.
-   - This process allows us to efficiently track the sum of even numbers after each update without needing to re-scan the entire array after every query.
-
-3. **Efficient Update and Result Calculation**:
-   - After processing each query, the sum of even numbers is appended to the result array.
-   - By maintaining a running sum of even numbers and only updating it when necessary, we avoid redundant computations and achieve an efficient solution.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initial Setup and Sum Calculation**:
-```cpp
-vector<int> res = {};
-int sum = accumulate(begin(A), end(A), 0, [](int s, int a) {
-    return s + (a % 2 == 0? a : 0);
-});
-```
-- We start by initializing an empty result vector `res` to store the sum of even numbers after each query.
-- The variable `sum` is initialized by calculating the sum of all even numbers in the array `A`. This is done using the `accumulate` function, which iterates over each element of the array and adds the element to the sum if it is even (checked with `a % 2 == 0`).
-
-#### 2. **Processing Each Query**:
-```cpp
-for(auto &q: qs) {
-    if(A[q[1]] % 2 == 0) sum -= A[q[1]];
-    A[q[1]] += q[0];
-    if(A[q[1]] % 2 == 0) sum += A[q[1]];
-    res.push_back(sum);
+    return res;
 }
 ```
-- For each query `q`, the following steps are performed:
-  1. We check if `A[q[1]]` (the current value at index `q[1]`) is even. If it is, we subtract it from the sum, as it is about to be updated.
-  2. The value `q[0]` (the number to be added) is added to `A[q[1]]`, effectively updating the element at index `q[1]`.
-  3. After the update, we check if the new value of `A[q[1]]` is even. If it is, we add it to the sum.
-  4. Finally, the updated sum is pushed to the `res` vector.
 
-#### 3. **Returning the Result**:
-```cpp
-return res;
-```
-- Once all queries are processed, the result vector `res` is returned, which contains the sum of all even numbers after each query.
+This function `sumEvenAfterQueries` takes an array `A` and a list of queries `qs`. It modifies the array based on the queries and computes the sum of even elements after each update. The result is stored in `res` and returned.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& qs) {
+	```
+	Defines the function `sumEvenAfterQueries`, which takes an array `A` and a list of queries `qs`, returning a vector of integers with the sum of even elements after each query.
 
-#### Time Complexity:
-- **Initial Sum Calculation**: The initial sum calculation using `accumulate` takes **O(n)** time, where `n` is the size of the array `A`.
-- **Processing Each Query**: For each query, we perform constant-time operations to update the array and the sum. Therefore, processing all `q` queries takes **O(q)** time, where `q` is the number of queries.
-- Overall, the time complexity is **O(n + q)**, where `n` is the size of the array `A` and `q` is the number of queries.
+2. **Initialize Result Vector**
+	```cpp
+	    vector<int> res = {};
+	```
+	Initializes an empty vector `res` that will store the results after each query, representing the sum of even elements in the array.
 
-#### Space Complexity:
-- **Space Complexity**: The space complexity is **O(n + q)** due to the storage required for the result vector `res` and the array `A`. The space used by other variables (like `sum` and the loop variables) is constant, so it does not affect the overall space complexity.
+3. **Initialize Sum of Even Elements**
+	```cpp
+	    int sum = accumulate(begin(A), end(A), 0, [](int s, int a) {
+	```
+	Calculates the initial sum of all even elements in the array `A` using the `accumulate` function and a lambda to check if an element is even.
 
-### Conclusion
+4. **Lambda for Even Sum**
+	```cpp
+	        return s + (a % 2 == 0? a : 0);
+	```
+	This lambda function adds the element `a` to the sum `s` if `a` is even (`a % 2 == 0`), otherwise it adds 0.
 
-This solution efficiently computes the sum of even numbers in the array `A` after each query by maintaining a running sum of even numbers and only updating it when necessary. By using a greedy approach and avoiding redundant computations, the solution ensures optimal time complexity of **O(n + q)**, making it suitable for larger inputs. The space complexity is also efficient, using **O(n + q)** space to store the result and input data.
+5. **Iterate Over Queries**
+	```cpp
+	    for(auto &q: qs) {
+	```
+	Begins a loop to iterate over the list of queries `qs`. Each query contains an update to the array `A`.
 
-This approach provides an elegant and efficient solution to the problem by leveraging the power of accumulation and careful updates to track the sum of even numbers after each query.
+6. **Remove Even Value from Sum**
+	```cpp
+	        if(A[q[1]] %2 == 0) sum-=A[q[1]];
+	```
+	If the element at the index specified by `q[1]` is even, it is subtracted from the sum of even numbers before applying the query.
+
+7. **Apply Query**
+	```cpp
+	        A[q[1]] += q[0];
+	```
+	Updates the element in the array `A` at the index `q[1]` by adding the value `q[0]` from the current query.
+
+8. **Add Even Value to Sum**
+	```cpp
+	        if(A[q[1]]%2 == 0) sum+=A[q[1]];
+	```
+	After updating the element, if the element at index `q[1]` is even, it is added back to the sum of even numbers.
+
+9. **Store the Sum After Query**
+	```cpp
+	        res.push_back(sum);
+	```
+	After processing the query, the current sum of even numbers is added to the result vector `res`.
+
+10. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the result vector `res`, which contains the sum of even elements after each query.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for each query if the update does not affect the even/odd status.
+- **Average Case:** O(1) for each query as we only adjust the sum.
+- **Worst Case:** O(n) if we recalculate the sum of even numbers after each query (though this is avoidable).
+
+Each query is processed in constant time if we manage the sum of even numbers efficiently.
+
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the nums array.
+- **Worst Case:** O(n) for storing the nums array.
+
+The space complexity is O(n) where n is the size of the nums array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-even-numbers-after-queries/description/)
 

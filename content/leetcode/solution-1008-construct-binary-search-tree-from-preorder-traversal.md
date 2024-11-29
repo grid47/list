@@ -14,95 +14,153 @@ img_src = ""
 youtube = "30WqiTVp8Kc"
 youtube_upload_date="2020-04-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/30WqiTVp8Kc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array representing the preorder traversal of a binary search tree (BST). Your task is to construct the BST from this preorder traversal and return the root of the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers representing the preorder traversal of a BST. The array will have a length of at least 1 and at most 100, with each integer between 1 and 1000.
+- **Example:** `preorder = [10, 5, 1, 7, 15, 12]`
+- **Constraints:**
+	- 1 <= preorder.length <= 100
+	- 1 <= preorder[i] <= 1000
+	- All elements in the preorder array are unique.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root of the binary search tree constructed from the given preorder traversal.
+- **Example:** `Output: [10,5,15,1,7,null,12]`
+- **Constraints:**
+	- The output is the root of the binary search tree in level-order traversal.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to construct a binary search tree from the preorder traversal. Each node in the tree should satisfy the BST property where the left child is less than the parent and the right child is greater than the parent.
+
+- Start with the first element of the preorder array as the root of the tree.
+- For each subsequent element, place it in the correct position in the tree following the BST rules.
+- Continue this process until all elements are placed in the tree.
+{{< dots >}}
+### Problem Assumptions ✅
+- The preorder array contains unique values and forms a valid BST.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: preorder = [10, 5, 1, 7, 15, 12]`  \
+  **Explanation:** In this case, we can construct the following BST: [10, 5, 15, 1, 7, null, 12]. The first element 10 becomes the root, then 5 goes to the left of 10, 1 goes to the left of 5, and so on.
+
+- **Input:** `Input: preorder = [15, 10, 5, 12, 20, 17]`  \
+  **Explanation:** For this input, the BST would look like [15, 10, 20, 5, 12, null, 17]. Starting with 15 as the root, 10 goes to the left, 20 goes to the right, and so on.
+
+{{< dots >}}
+## Approach 🚀
+We can use the preorder traversal of a BST to reconstruct the tree. We start with the first element as the root and use the properties of BSTs to place each subsequent element in the correct position.
+
+### Initial Thoughts 💭
+- We need to ensure that each element is inserted in the correct position based on the BST rules.
+- The key idea is to use a recursive approach to insert nodes into the tree while maintaining the BST property.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty, as per the problem constraints.
+- The solution should be optimized to handle the maximum input size (up to 100 elements).
+- If all values are large (e.g., all greater than 500), the BST structure should still be correct.
+- The input array will always contain unique values, so there is no need to handle duplicates.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    int i = 0;
+int i = 0;
 public:
-    TreeNode* bstFromPreorder(vector<int>& pre, int bound = INT_MAX) {
-        if(i == pre.size() || pre[i] > bound) return NULL;
-        
-        TreeNode* root = new TreeNode(pre[i++]);
-        root->left = bstFromPreorder(pre, root->val);
-        root->right = bstFromPreorder(pre, bound);
-        return root;
-    }
+TreeNode* bstFromPreorder(vector<int>& pre, int bound = INT_MAX) {
+    if(i == pre.size() || pre[i] > bound) return NULL;
     
-    
-};
-{{< /highlight >}}
----
+    TreeNode* root = new TreeNode(pre[i++]);
+    root->left = bstFromPreorder(pre, root->val);
+    root->right = bstFromPreorder(pre, bound);
+    return root;
+}
 
 
+```
 
-### Problem Statement
-The task is to construct a binary search tree (BST) from a given preorder traversal of its nodes. In a BST, for any given node:
-- The left child must contain a value less than the node's value.
-- The right child must contain a value greater than the node's value.
+This function builds a Binary Search Tree (BST) from the given preorder traversal of the tree. It recursively constructs the tree nodes by following the preorder traversal rules.
 
-Given a sequence of integers that represent the preorder traversal of a BST, our goal is to reconstruct the tree structure. The preorder traversal is defined as visiting the root node first, followed by the left subtree and then the right subtree. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	Declares a Solution class to house the method for building the BST from the preorder traversal.
 
-### Approach
-To solve this problem, we will utilize a recursive approach that exploits the properties of BSTs and the characteristics of preorder traversal. The strategy involves:
-1. Iterating through the values in the preorder array while keeping track of the current index.
-2. Using a bound to ensure that the values inserted into the left and right subtrees adhere to the BST properties.
-3. Recursively constructing the left and right subtrees by calling the same function with updated bounds.
+2. **Variable Initialization**
+	```cpp
+	int i = 0;
+	```
+	Initializes a class member variable i to track the current index in the preorder vector while recursively constructing the BST.
 
-### Code Breakdown (Step by Step)
+3. **Access Specifier**
+	```cpp
+	public:
+	```
+	Specifies that the following members are public and can be accessed from outside the class.
 
-1. **TreeNode Definition**:
-   - The code begins with a definition of the `TreeNode` structure, which contains an integer value (`val`), a pointer to the left child (`left`), and a pointer to the right child (`right`). This structure serves as the building block for our binary search tree.
+4. **Function Declaration**
+	```cpp
+	TreeNode* bstFromPreorder(vector<int>& pre, int bound = INT_MAX) {
+	```
+	Declares the function `bstFromPreorder` which takes a vector of integers `pre` (representing the preorder traversal of a BST) and an optional `bound` parameter to limit node values during recursion.
 
-2. **Solution Class Declaration**:
-   - The `Solution` class encapsulates our method for constructing the BST. It maintains a class member variable `i` that tracks the current index in the preorder array as we build the tree.
+5. **Base Case**
+	```cpp
+	    if(i == pre.size() || pre[i] > bound) return NULL;
+	```
+	Checks if the current index has reached the end of the preorder vector or if the current node value exceeds the allowed bound, indicating that no more nodes can be added under this subtree.
 
-3. **Function Declaration**:
-   - The function `bstFromPreorder` is defined as a public member of the `Solution` class. It takes a vector of integers (`pre`) representing the preorder traversal of the BST and an optional `bound` parameter that defaults to `INT_MAX`.
+6. **Node Creation**
+	```cpp
+	    TreeNode* root = new TreeNode(pre[i++]);
+	```
+	Creates a new TreeNode with the current value from the preorder vector and increments the index i.
 
-4. **Base Case**:
-   - The function begins by checking two conditions:
-     - If `i` equals the size of the preorder array (`pre.size()`), it indicates that we have processed all nodes, and the function returns `NULL`.
-     - If the current value `pre[i]` exceeds the provided `bound`, it means that the value cannot be placed in the current subtree (as it violates the BST property). In this case, the function also returns `NULL`.
+7. **Left Subtree Construction**
+	```cpp
+	    root->left = bstFromPreorder(pre, root->val);
+	```
+	Recursively constructs the left subtree by passing the current node's value as the new bound, ensuring that the left child is smaller than the current node.
 
-5. **Creating a New Node**:
-   - When both conditions are satisfied, we create a new `TreeNode` with the value `pre[i]`. After creating the node, we increment the index `i` to move to the next element in the preorder array.
+8. **Right Subtree Construction**
+	```cpp
+	    root->right = bstFromPreorder(pre, bound);
+	```
+	Recursively constructs the right subtree with the original bound, ensuring that the right child is larger than the current node.
 
-6. **Recursive Calls for Subtrees**:
-   - The function then recursively constructs the left subtree by calling `bstFromPreorder` with the updated bound set to the value of the current node (`root->val`). This ensures that all values in the left subtree will be less than the current node's value.
-   - After the left subtree is constructed, the function constructs the right subtree by calling `bstFromPreorder` with the original bound. This ensures that all values in the right subtree are greater than the current node's value.
+9. **Return Statement**
+	```cpp
+	    return root;
+	```
+	Returns the root of the current subtree.
 
-7. **Returning the Root**:
-   - Finally, after constructing both subtrees, the function returns the root of the newly constructed BST.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n^2)
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this function is O(n), where `n` is the number of nodes in the input preorder array. Each node is processed exactly once, leading to a linear runtime.
-- **Space Complexity**: The space complexity is O(h), where `h` is the height of the tree. This space is utilized by the call stack due to recursion. In the worst case (for a completely unbalanced tree), the height can be O(n). For a balanced tree, the height would be O(log n).
+The time complexity is O(n) in the best case when the tree is balanced, but it can be O(n^2) in the worst case when the tree is skewed (e.g., a sorted array).
 
-### Conclusion
-The `bstFromPreorder` function provides an efficient and elegant solution for reconstructing a binary search tree from a preorder traversal. By leveraging recursion and the properties of BSTs, the function successfully builds the tree while maintaining the required constraints on node values. 
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This approach highlights the utility of recursion in tree construction problems and demonstrates how properties of binary search trees can guide the reconstruction process. Understanding this method is beneficial for solving related problems in data structures and algorithms, especially those involving tree traversal and manipulation.
+The space complexity is O(n) due to the recursion stack and the space used to store the tree.
 
-The implementation also underscores the importance of managing indices and bounds when working with recursive algorithms, allowing for clean and readable code. This technique can be adapted for various tree-related challenges, making it a versatile tool in algorithm design.
-
-In summary, the `bstFromPreorder` function is a valuable contribution to the toolkit of anyone working with binary trees, enabling the efficient reconstruction of BSTs and facilitating further operations such as searching, insertion, and traversal in a structured manner.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/)

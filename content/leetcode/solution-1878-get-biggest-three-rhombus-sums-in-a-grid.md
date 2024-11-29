@@ -14,150 +14,235 @@ img_src = ""
 youtube = "KAuzn8OcGXk"
 youtube_upload_date="2021-05-29"
 youtube_thumbnail="https://i.ytimg.com/vi/KAuzn8OcGXk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an `m x n` matrix `grid`. A **rhombus sum** refers to the sum of the elements that form the border of a rhombus shape. The rhombus should be viewed as a square rotated 45 degrees, with each of its corners centered on a grid cell. Compute the biggest three distinct rhombus sums in the grid and return them in descending order. If there are fewer than three distinct sums, return all of them.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D matrix `grid` of integers.
+- **Example:** `For grid = [[5,1,3],[4,2,6],[7,8,9]].`
+- **Constraints:**
+	- 1 <= m, n <= 50
+	- 1 <= grid[i][j] <= 10^5
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the biggest three distinct rhombus sums in descending order. If fewer than three distinct sums exist, return all of them.
+- **Example:** `For grid = [[5,1,3],[4,2,6],[7,8,9]], the output is [25, 17, 12].`
+- **Constraints:**
+	- The output should be an array of integers representing the biggest three distinct rhombus sums.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the rhombus sums, we need to iterate through all possible centers in the grid and calculate the sum of elements that form the rhombus for each center.
+
+- Iterate over each cell in the grid to treat it as a potential center of a rhombus.
+- For each center, compute the sum of all grid elements that form the rhombus border.
+- Store these sums in a set to ensure distinct values.
+- Sort the set and return the top three distinct sums.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is at least 1x1 in size.
+- All grid elements are positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For grid = [[5,1,3],[4,2,6],[7,8,9]].`  \
+  **Explanation:** The rhombus sums for the three biggest distinct rhombuses are: 25, 17, and 12.
+
+- **Input:** `For grid = [[7, 7, 7]].`  \
+  **Explanation:** Since all rhombus sums are the same, the output is [7].
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves calculating the rhombus sum for each possible center in the grid. For each center, we add the values of the grid cells that make up the rhombus and store them. The biggest three distinct sums are then returned.
+
+### Initial Thoughts 💭
+- The rhombus shape can expand out from a center and includes values from adjacent cells at varying distances.
+- We need to carefully iterate through all possible rhombus shapes, ensuring we compute the correct sums and handle distinct values efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as the grid is guaranteed to have at least one row and one column.
+- The algorithm should efficiently handle grids as large as 50x50.
+- All elements being the same value or all rhombus sums being identical.
+- The grid should be within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    typedef long long ll;
+typedef long long ll;
 public:
-    vector<int> getBiggestThree(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        set<int> s;
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                for(int sz = 0; i + sz < m && i - sz >= 0 && j + 2 * sz < n; sz++) {
+vector<int> getBiggestThree(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    set<int> s;
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            for(int sz = 0; i + sz < m && i - sz >= 0 && j + 2 * sz < n; sz++) {
+                
+                ll x = i, y = j, rsum = 0;
+                do rsum += grid[x++][y++]; while(x < i + sz);
+                if(sz > 0) {
                     
-                    ll x = i, y = j, rsum = 0;
-                    do rsum += grid[x++][y++]; while(x < i + sz);
-                    if(sz > 0) {
-                        
-                        do rsum += grid[x--][y++]; while(y < j + 2 * sz);
-                        do rsum += grid[x--][y--]; while(x > i - sz);
-                        do rsum += grid[x++][y--]; while(x < i);
-                        
-                    }
-                    s.insert(rsum);
-                    if(s.size() > 3) {
-                        s.erase(begin(s));}
+                    do rsum += grid[x--][y++]; while(y < j + 2 * sz);
+                    do rsum += grid[x--][y--]; while(x > i - sz);
+                    do rsum += grid[x++][y--]; while(x < i);
+                    
                 }
-                }
+                s.insert(rsum);
+                if(s.size() > 3) {
+                    s.erase(begin(s));}
             }
-        return vector<int>(rbegin(s), rend(s));
-    }
-};
-{{< /highlight >}}
----
+            }
+        }
+    return vector<int>(rbegin(s), rend(s));
+}
+```
 
-### Problem Statement
+This code computes the three largest unique rhombus sums in a 2D grid by iterating over possible rhombus centers and sizes.
 
-The objective of this problem is to identify the three largest unique sums of diamonds that can be formed in a given grid of integers. A diamond shape in this context is defined as a collection of cells where the center of the diamond is at a specific cell in the grid, and it expands outward symmetrically. The size of the diamond can vary, allowing it to encompass more cells as long as it remains within the boundaries of the grid. The task is to compute the sums of these diamond shapes and return the three largest unique sums.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Define a class to encapsulate the solution logic.
 
-### Approach
+2. **Type Alias**
+	```cpp
+	typedef long long ll;
+	```
+	Define a type alias for long long integers to simplify usage.
 
-To solve this problem, the following steps are performed:
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Specify public access for class members.
 
-1. **Initialize Variables**: Set up the dimensions of the grid and a set to store the unique sums of the diamonds.
+4. **Function Definition**
+	```cpp
+	vector<int> getBiggestThree(vector<vector<int>>& grid) {
+	```
+	Define a function to compute the three largest unique rhombus sums in a grid.
 
-2. **Iterate Over Each Cell**: For each cell in the grid, treat it as the potential center of a diamond.
+5. **Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Initialize the grid dimensions.
 
-3. **Expand the Diamond**: For each cell, expand the diamond shape:
-   - Use a nested loop to increase the size of the diamond until it reaches the boundaries of the grid.
-   - Compute the sum of the values in the diamond shape by traversing the required cells.
+6. **Set Initialization**
+	```cpp
+	    set<int> s;
+	```
+	Use a set to store unique rhombus sums, automatically sorted.
 
-4. **Store Unique Sums**: Store each computed sum in a set to ensure all values are unique.
+7. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Iterate over all rows of the grid.
 
-5. **Limit the Size of the Set**: If the set exceeds three elements, remove the smallest sum to keep only the three largest sums.
+8. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	Iterate over all columns of the grid.
 
-6. **Return the Results**: Convert the set of sums to a vector and return it in descending order.
+9. **Rhombus Size Loop**
+	```cpp
+	            for(int sz = 0; i + sz < m && i - sz >= 0 && j + 2 * sz < n; sz++) {
+	```
+	Iterate over possible rhombus sizes centered at (i, j).
 
-### Code Breakdown (Step by Step)
+10. **Variable Initialization**
+	```cpp
+	                ll x = i, y = j, rsum = 0;
+	```
+	Initialize variables for rhombus calculation.
 
-1. **Class Definition**: The code is encapsulated within a class named `Solution`, which follows the structure used in competitive programming.
+11. **Diagonal Sum**
+	```cpp
+	                do rsum += grid[x++][y++]; while(x < i + sz);
+	```
+	Calculate the sum of the first diagonal.
 
-   ```cpp
-   class Solution {
-       typedef long long ll; // Using typedef for long long type for large sums
-   public:
-   ```
+12. **Check Size**
+	```cpp
+	                if(sz > 0) {
+	```
+	Proceed with additional rhombus sides if the size is greater than zero.
 
-2. **Function Declaration**: The `getBiggestThree` function is declared, taking a 2D vector of integers \( grid \) as input and returning a vector of integers.
+13. **Second Diagonal**
+	```cpp
+	                    do rsum += grid[x--][y++]; while(y < j + 2 * sz);
+	```
+	Calculate the sum of the second diagonal.
 
-   ```cpp
-   vector<int> getBiggestThree(vector<vector<int>>& grid) {
-   ```
+14. **Third Diagonal**
+	```cpp
+	                    do rsum += grid[x--][y--]; while(x > i - sz);
+	```
+	Calculate the sum of the third diagonal.
 
-3. **Initialize Variables**: The dimensions of the grid \( m \) and \( n \) are determined. A set \( s \) is created to store unique sums.
+15. **Fourth Diagonal**
+	```cpp
+	                    do rsum += grid[x++][y--]; while(x < i);
+	```
+	Calculate the sum of the fourth diagonal.
 
-   ```cpp
-   int m = grid.size(), n = grid[0].size();
-   set<int> s;
-   ```
+16. **Insert to Set**
+	```cpp
+	                s.insert(rsum);
+	```
+	Insert the calculated rhombus sum into the set.
 
-4. **Iterate Over Each Cell**: A nested loop iterates through each cell in the grid, treating each cell as the potential center of a diamond.
+17. **Set Size Check**
+	```cpp
+	                if(s.size() > 3) {
+	```
+	Ensure the set only keeps the three largest sums.
 
-   ```cpp
-   for(int i = 0; i < m; i++) {
-       for(int j = 0; j < n; j++) {
-   ```
+18. **Erase Smallest**
+	```cpp
+	                    s.erase(begin(s));}
+	```
+	Remove the smallest sum if the set size exceeds three.
 
-5. **Expand the Diamond**: A third loop is used to determine the size \( sz \) of the diamond while ensuring that the diamond stays within the grid boundaries.
+19. **End Rhombus Size Loop**
+	```cpp
+	            }
+	```
+	End the loop for iterating rhombus sizes.
 
-   ```cpp
-   for(int sz = 0; i + sz < m && i - sz >= 0 && j + 2 * sz < n; sz++) {
-   ```
+20. **Return Statement**
+	```cpp
+	    return vector<int>(rbegin(s), rend(s));
+	```
+	Convert the set to a vector and return the three largest sums in descending order.
 
-6. **Compute Diamond Sums**: Within the size loop, variables \( x \) and \( y \) are initialized to the current cell coordinates. The variable \( rsum \) is initialized to zero to accumulate the sum of the diamond's values.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n * k)
+- **Worst Case:** O(m * n * k)
 
-   ```cpp
-   ll x = i, y = j, rsum = 0;
-   ```
+The time complexity depends on the size of the grid and the maximum possible size of a rhombus that can be formed from each cell.
 
-   - The first `do-while` loop accumulates the sum of the left side of the diamond.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(m * n)
 
-   ```cpp
-   do rsum += grid[x++][y++]; while(x < i + sz);
-   ```
+Space complexity is O(m * n) due to the storage of rhombus sums in a set.
 
-   - If the diamond size is greater than zero, the following loops calculate the remaining sides of the diamond.
+**Happy Coding! 🎉**
 
-   ```cpp
-   if(sz > 0) {
-       do rsum += grid[x--][y++]; while(y < j + 2 * sz);
-       do rsum += grid[x--][y--]; while(x > i - sz);
-       do rsum += grid[x++][y--]; while(x < i);
-   }
-   ```
-
-7. **Store Unique Sums**: The computed sum is inserted into the set \( s \). If the size of the set exceeds three, the smallest element is removed.
-
-   ```cpp
-   s.insert(rsum);
-   if(s.size() > 3) {
-       s.erase(begin(s));
-   }
-   ```
-
-8. **Return the Results**: Finally, convert the set into a vector, returning it in descending order using reverse iterators.
-
-   ```cpp
-   return vector<int>(rbegin(s), rend(s));
-   }
-   ```
-
-### Complexity
-
-The time complexity of this solution is \( O(m \times n \times \min(m, n)) \), where \( m \) is the number of rows and \( n \) is the number of columns in the grid. This complexity arises because for each cell in the grid, the algorithm potentially examines a diamond of increasing size until it hits the boundary of the grid. The space complexity is \( O(1) \) for the output vector and \( O(k) \) for the set \( s \), where \( k \) is limited to 3 since we are only storing the three largest sums.
-
-### Conclusion
-
-In conclusion, the `getBiggestThree` function effectively identifies the three largest unique sums of diamond shapes in a grid of integers. This approach demonstrates a systematic way to explore possible shapes within a 2D array while efficiently managing and tracking unique sums. The use of nested loops to explore each cell and its potential diamonds illustrates fundamental algorithmic techniques that can be applied to various grid-based problems.
-
-This solution not only provides a clear path to finding the desired sums but also serves as a great example of utilizing data structures like sets for uniqueness and efficiency in tracking results. By understanding and applying these techniques, programmers can enhance their problem-solving skills in both competitive programming and real-world applications where grid manipulation is common. Overall, this problem showcases the combination of mathematical reasoning and programming logic to solve complex challenges efficiently.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/get-biggest-three-rhombus-sums-in-a-grid/description/)
 

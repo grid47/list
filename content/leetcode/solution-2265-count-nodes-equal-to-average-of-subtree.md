@@ -14,170 +14,207 @@ img_src = ""
 youtube = "yg9A3yLTcsE"
 youtube_upload_date="2022-05-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/yg9A3yLTcsE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary tree. Your task is to return the number of nodes where the value of the node is equal to the average of the values in its entire subtree (including the node itself). The average of a set of values is the sum of the values divided by the number of values, rounded down to the nearest integer.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root of a binary tree where each node contains an integer value.
+- **Example:** `root = [3, 9, 20, null, null, 15, 7]`
+- **Constraints:**
+	- The number of nodes in the tree is between 1 and 1000.
+	- Node values are between 0 and 1000.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
- 
-class Solution {
-public:
-    int ans = 0;
-    pair<int,int> solve(TreeNode* root){
-        if(root==NULL) return {0,0};
-        
-        auto left = solve(root->left);
-        int l_sum = left.first; // sum of nodes present in left sub tree
-        int l_cnt = left.second; // no. of nodes present in left sub tree
-        
-        auto right = solve(root->right);
-        int r_sum = right.first; // sum of nodes present in right sub tree
-        int r_cnt = right.second; // no. of nodes present in left sub tree
-        
-        int sum = root->val + l_sum + r_sum;
-        int cnt = l_cnt + r_cnt + 1;
-        
-        if(root->val == sum/cnt) ans++;
-        return {sum,cnt};
-    }
-    int averageOfSubtree(TreeNode* root) {
-        solve(root);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the count of nodes that satisfy the condition of having their value equal to the average of the values in their respective subtree.
+- **Example:** `Output: 3`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to traverse the binary tree and calculate the sum and count of nodes for each subtree, comparing each node's value to the average of its subtree.
 
-In this problem, you are given the root of a binary tree. Each node of the tree contains an integer value. The task is to find the number of nodes whose value is equal to the average of the values of the nodes in its subtree (including itself). The average of a node's subtree is defined as the sum of the values of all nodes in the subtree divided by the total number of nodes in the subtree.
+- Recursively calculate the sum and count of nodes for each subtree starting from the root.
+- For each node, check if its value matches the average of its subtree (rounded down).
+- Count the number of nodes that satisfy the condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree is non-empty, with a size of at least 1 node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [3, 9, 20, null, null, 15, 7]`  \
+  **Explanation:** For the node with value 3: The average of its subtree is (3 + 9 + 20 + 15 + 7) / 5 = 54 / 5 = 10, which is not equal to 3.
+For the node with value 9: The average of its subtree is 9 / 1 = 9, which is equal to 9.
+For the node with value 20: The average of its subtree is (20 + 15 + 7) / 3 = 42 / 3 = 14, which is not equal to 20.
+Thus, 2 nodes satisfy the condition (9 and 15). The result is 3.
 
-You need to return the total count of nodes that satisfy the condition where the node's value is equal to the average of its subtree.
+- **Input:** `root = [1]`  \
+  **Explanation:** For the node with value 1: The average of its subtree is 1 / 1 = 1, which is equal to 1. The result is 1.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We will use a recursive approach to traverse the binary tree. For each node, we will calculate the sum and the number of nodes in its subtree. If the node's value equals the average of its subtree, we will increment the result counter.
 
-To solve this problem, we can use a **post-order traversal** approach where:
-1. We recursively compute the sum and the count of nodes in the subtree rooted at each node.
-2. For each node, we check if the value of the node equals the average of its subtree. If it does, we increase the count of such nodes.
-3. We return both the sum and the number of nodes in the subtree for each node to facilitate calculations at its parent node.
-
-Here’s a more structured explanation of the approach:
-1. **Subtree Information**: For each node, we need to calculate the sum of all nodes in its subtree and the total number of nodes in the subtree.
-2. **Check Average**: After calculating the sum and count of nodes in the subtree, we compare the value of the node with the average of its subtree, which is computed as `sum / count`.
-3. **Recursion**: We perform a post-order traversal of the tree, starting from the leaf nodes and moving upwards to the root. This ensures that when calculating the sum and count for a node, we already have the information for its left and right children.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Define the TreeNode structure
-
-The `TreeNode` structure is defined as:
-```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-```
-This is a typical definition for a binary tree node, where `val` stores the value of the node, and `left` and `right` are pointers to its left and right child nodes, respectively.
-
-#### Step 2: Initialize global variables
-
+### Initial Thoughts 💭
+- We need to calculate the sum and node count for each subtree recursively.
+- The main challenge is ensuring that we compare each node's value to the average of its subtree, which involves both sum and count.
+- Using recursion allows us to explore each node's subtree and compute the required values in a natural and straightforward manner.
+{{< dots >}}
+### Edge Cases 🌐
+- The input tree will not be empty, as the minimum number of nodes is 1.
+- The algorithm should efficiently handle up to 1000 nodes in the tree.
+- Consider trees with all nodes having the same value, or with extreme values like 0 or 1000.
+- The solution should work within the given constraints, ensuring that it efficiently handles trees with 1000 nodes.
+{{< dots >}}
+## Code 💻
 ```cpp
 int ans = 0;
-```
-- `ans` is initialized to `0` and will keep track of the number of nodes whose value is equal to the average of their respective subtrees.
-
-#### Step 3: Define the recursive `solve` function
-
-```cpp
-pair<int, int> solve(TreeNode* root) {
-    if (root == NULL) return {0, 0};
-```
-- The `solve` function takes a `TreeNode* root` as input and returns a pair of integers:
-  - The first element of the pair represents the sum of node values in the subtree rooted at `root`.
-  - The second element represents the number of nodes in the subtree.
-- If `root` is `NULL` (base case), we return a pair `{0, 0}`, indicating that there are no nodes in the subtree and the sum is zero.
-
-#### Step 4: Recursively solve for the left and right subtrees
-
-```cpp
-auto left = solve(root->left);
-int l_sum = left.first; // sum of nodes in the left subtree
-int l_cnt = left.second; // number of nodes in the left subtree
-
-auto right = solve(root->right);
-int r_sum = right.first; // sum of nodes in the right subtree
-int r_cnt = right.second; // number of nodes in the right subtree
-```
-- We recursively call the `solve` function for the left and right children of the current node. We store the results for the left and right subtrees, which include the sum and count of nodes.
-
-#### Step 5: Calculate the sum and count for the current subtree
-
-```cpp
-int sum = root->val + l_sum + r_sum;
-int cnt = l_cnt + r_cnt + 1;
-```
-- The total sum for the subtree rooted at the current node is the sum of:
-  - The value of the current node (`root->val`).
-  - The sum of the left subtree (`l_sum`).
-  - The sum of the right subtree (`r_sum`).
-- The total count for the subtree is the sum of:
-  - The count of nodes in the left subtree (`l_cnt`).
-  - The count of nodes in the right subtree (`r_cnt`).
-  - 1 (for the current node itself).
-
-#### Step 6: Check if the node's value equals the average of its subtree
-
-```cpp
-if (root->val == sum / cnt) ans++;
-```
-- We check if the value of the current node (`root->val`) is equal to the average of its subtree, which is `sum / cnt`. If they are equal, we increment the `ans` variable, indicating that we found a node whose value equals the average of its subtree.
-
-#### Step 7: Return the sum and count of the current subtree
-
-```cpp
-return {sum, cnt};
-```
-- After processing the current node, we return the sum and count of the nodes in the subtree rooted at `root`.
-
-#### Step 8: Invoke the `solve` function and return the result
-
-```cpp
+pair<int,int> solve(TreeNode* root){
+    if(root==NULL) return {0,0};
+    
+    auto left = solve(root->left);
+    int l_sum = left.first; // sum of nodes present in left sub tree
+    int l_cnt = left.second; // no. of nodes present in left sub tree
+    
+    auto right = solve(root->right);
+    int r_sum = right.first; // sum of nodes present in right sub tree
+    int r_cnt = right.second; // no. of nodes present in left sub tree
+    
+    int sum = root->val + l_sum + r_sum;
+    int cnt = l_cnt + r_cnt + 1;
+    
+    if(root->val == sum/cnt) ans++;
+    return {sum,cnt};
+}
 int averageOfSubtree(TreeNode* root) {
     solve(root);
     return ans;
 }
 ```
-- The `averageOfSubtree` function is the entry point for the solution. It invokes the `solve` function on the root of the binary tree and returns the value of `ans`, which is the total number of nodes whose value equals the average of their subtree.
 
-### Complexity
+This solution calculates the number of nodes in a binary tree where the value of the node equals the average of its subtree. It uses a recursive approach to traverse the tree and computes the sum and count of nodes in each subtree.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we visit each node exactly once during the post-order traversal, and at each node, we perform constant-time operations (sum and count calculations, comparisons, and increments).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int ans = 0;
+	```
+	The variable `ans` is initialized to 0, which will store the count of nodes whose value equals the average of their subtree.
 
-#### Space Complexity:
-The space complexity is **O(h)**, where `h` is the height of the binary tree. This is the space required for the recursion stack in the worst case. In the worst case, the tree is skewed (like a linked list), and the height is `n`. In the best case (balanced tree), the height is `log n`.
+2. **Recursive Function Declaration**
+	```cpp
+	pair<int,int> solve(TreeNode* root){
+	```
+	The function `solve` is a recursive helper function that computes the sum and count of nodes in a subtree. It returns a pair of integers: the sum of node values and the count of nodes in the subtree.
 
-### Conclusion
+3. **Base Case**
+	```cpp
+	    if(root==NULL) return {0,0};
+	```
+	This is the base case of the recursion. If the current node is NULL, it returns a pair of zeros, indicating no nodes and no sum in the subtree.
 
-This solution efficiently computes the number of nodes in the binary tree whose value is equal to the average of the nodes in their subtree. By leveraging a post-order traversal, the algorithm computes the sum and count of each subtree while checking if the current node satisfies the condition. The solution has a time complexity of **O(n)**, making it optimal for large trees, and uses a recursion stack with space complexity **O(h)**. This approach is both effective and efficient for solving the problem of subtree averages in binary trees.
+4. **Recursive Call - Left Subtree**
+	```cpp
+	    auto left = solve(root->left);
+	```
+	This recursive call calculates the sum and count of nodes in the left subtree of the current node.
+
+5. **Left Subtree Sum**
+	```cpp
+	    int l_sum = left.first; // sum of nodes present in left sub tree
+	```
+	The sum of the nodes in the left subtree is stored in `l_sum`.
+
+6. **Left Subtree Node Count**
+	```cpp
+	    int l_cnt = left.second; // no. of nodes present in left sub tree
+	```
+	The number of nodes in the left subtree is stored in `l_cnt`.
+
+7. **Recursive Call - Right Subtree**
+	```cpp
+	    auto right = solve(root->right);
+	```
+	This recursive call calculates the sum and count of nodes in the right subtree of the current node.
+
+8. **Right Subtree Sum**
+	```cpp
+	    int r_sum = right.first; // sum of nodes present in right sub tree
+	```
+	The sum of the nodes in the right subtree is stored in `r_sum`.
+
+9. **Right Subtree Node Count**
+	```cpp
+	    int r_cnt = right.second; // no. of nodes present in left sub tree
+	```
+	The number of nodes in the right subtree is stored in `r_cnt`.
+
+10. **Current Node Sum and Count**
+	```cpp
+	    int sum = root->val + l_sum + r_sum;
+	```
+	The sum of the current node's value, the sum of its left subtree, and the sum of its right subtree is calculated and stored in `sum`.
+
+11. **Total Node Count**
+	```cpp
+	    int cnt = l_cnt + r_cnt + 1;
+	```
+	The total number of nodes in the current subtree is the sum of the nodes in the left subtree, the nodes in the right subtree, and the current node itself, stored in `cnt`.
+
+12. **Check Average Condition**
+	```cpp
+	    if(root->val == sum/cnt) ans++;
+	```
+	If the value of the current node equals the average of its subtree (calculated as `sum/cnt`), the counter `ans` is incremented.
+
+13. **Return Subtree Sum and Count**
+	```cpp
+	    return {sum,cnt};
+	```
+	The function returns the sum and count of nodes in the current subtree as a pair.
+
+14. **Main Function Declaration**
+	```cpp
+	int averageOfSubtree(TreeNode* root) {
+	```
+	The function `averageOfSubtree` takes the root of the binary tree as input and returns the count of nodes whose value equals the average of their respective subtrees.
+
+15. **Call Recursive Function**
+	```cpp
+	    solve(root);
+	```
+	The recursive function `solve` is called to traverse the tree and compute the sum and count for each subtree.
+
+16. **Return Final Answer**
+	```cpp
+	    return ans;
+	```
+	The function returns the final count of nodes that satisfy the condition, stored in the variable `ans`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we visit each node once to calculate the sum and count of its subtree.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
+
+The space complexity is O(h), where h is the height of the tree. This is due to the recursion stack used for tree traversal.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree/description/)
 

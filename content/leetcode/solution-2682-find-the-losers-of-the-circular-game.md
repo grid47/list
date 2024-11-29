@@ -14,141 +14,191 @@ img_src = ""
 youtube = "bNZuwqt1pg0"
 youtube_upload_date="2023-05-14"
 youtube_thumbnail="https://i.ytimg.com/vi/bNZuwqt1pg0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In this game, there are `n` friends sitting in a circle, numbered from 1 to `n`. The game starts with the 1st friend receiving a ball. The ball is passed to a friend `k` steps away in a clockwise direction, and then on each subsequent turn, the ball is passed to the friend `i * k` steps away, where `i` is the turn number (starting from 1). The game ends when any friend receives the ball for the second time. The friends who never receive the ball are considered the losers. The task is to return the list of losers in ascending order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers, `n` and `k`, where `n` is the number of friends and `k` is the number of steps the ball is passed on each turn.
+- **Example:** `Input: n = 6, k = 3`
+- **Constraints:**
+	- 1 <= k <= n <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> circularGameLosers(int n, int k) {
-        vector<int> rcvd(n, 0);
-        int i = 0;
-        int cnt = 1;
-        rcvd[0] = 1;
-        while(rcvd[i] == 1) {
-            i = (i + cnt * k) % n;            
-            if(rcvd[i] == 1) break;
-            rcvd[i] = 1;
-            cnt++;
-        }
-        vector<int> ans;
-        for(int j = 0; j < n; j++) {
-            // cout << rcvd[j] << " ";
-            if(rcvd[j] == 0) ans.push_back(j + 1);            
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array containing the losers of the game (the friends who never received the ball), sorted in ascending order.
+- **Example:** `Output: [2, 4, 5, 6]`
+- **Constraints:**
+	- The output should be an array of integers.
 
-        return ans;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to simulate the passing of the ball based on the given rules and track which friends never receive the ball.
+
+- Step 1: Initialize an array to track whether each friend has received the ball.
+- Step 2: Start with the 1st friend receiving the ball and pass it `k` steps away on each turn.
+- Step 3: After each pass, mark the friend as having received the ball and continue passing it in increasing multiples of `k`.
+- Step 4: Stop the game when any friend receives the ball for the second time.
+- Step 5: Gather all the friends who never received the ball and return them as the losers.
+{{< dots >}}
+### Problem Assumptions ✅
+- All input values are valid as per the problem constraints.
+- The game will always end when a friend receives the ball for the second time.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 6, k = 3`  \
+  **Explanation:** In this case, the ball starts with the 1st friend and is passed 3 steps away each time. The game proceeds as follows: 1st friend -> 4th friend -> 1st friend (game ends). The losers are the friends who never received the ball: 2nd, 5th, and 6th friends.
+
+- **Input:** `Input: n = 4, k = 2`  \
+  **Explanation:** The ball starts with the 1st friend and is passed 2 steps away each time. The game proceeds as follows: 1st friend -> 3rd friend -> 1st friend (game ends). The losers are the 2nd and 4th friends.
+
+{{< dots >}}
+## Approach 🚀
+We will simulate the game by passing the ball as per the rules and track the friends who receive the ball, using a simple array to mark each friend as they receive the ball.
+
+### Initial Thoughts 💭
+- We need to simulate the ball passing efficiently to track the friends who received the ball.
+- A straightforward simulation should suffice as `n` is small enough (up to 50).
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one friend, so no empty inputs.
+- The solution should be efficient enough for `n` up to 50.
+- The case where `k` equals `n` should be handled correctly, as the ball will be passed back to the 1st friend immediately.
+- The ball will always return to a friend who has already received it, ensuring the game ends.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> circularGameLosers(int n, int k) {
+    vector<int> rcvd(n, 0);
+    int i = 0;
+    int cnt = 1;
+    rcvd[0] = 1;
+    while(rcvd[i] == 1) {
+        i = (i + cnt * k) % n;            
+        if(rcvd[i] == 1) break;
+        rcvd[i] = 1;
+        cnt++;
     }
-};
-{{< /highlight >}}
----
+    vector<int> ans;
+    for(int j = 0; j < n; j++) {
+        // cout << rcvd[j] << " ";
+        if(rcvd[j] == 0) ans.push_back(j + 1);            
+    }
 
-### Problem Statement
-
-The problem asks to simulate a circular game where `n` players are involved, and each player is assigned a number from `1` to `n`. The players start at position 1, and the game proceeds by eliminating players according to a specific step size `k`. The goal is to determine which players are not eliminated in the game, returning their positions.
-
-Specifically, the rules of the game are:
-1. The game starts at position `1`.
-2. From the current position, move forward by `k` steps, considering the positions circularly (i.e., after reaching position `n`, wrap back to position `1`).
-3. Once a player is reached, they are eliminated and marked as "received."
-4. The process continues until all the remaining players are eliminated.
-
-The function should return a list of the positions of the players who are not eliminated.
-
-### Approach
-
-The game can be modeled using an array where each index represents a player, and the value at each index indicates whether the player has been eliminated (`1` if eliminated, `0` if not). The solution involves simulating the game step by step.
-
-The process can be broken down as follows:
-
-1. **Initialization**: Create an array `rcvd` of size `n` to keep track of eliminated players, initialized with `0`. We also initialize the game starting at position `0` (i.e., the first player).
-   
-2. **Simulation**: Start the game by marking the first player as eliminated (`rcvd[0] = 1`), and then simulate the game loop. The loop continues to eliminate players by moving `k` steps forward each time.
-
-3. **Circular Movement**: Since the game is played in a circular manner, the index is computed using modulo operation to ensure that when we exceed the bounds of the array, we wrap around to the beginning.
-
-4. **Termination**: The game continues until we revisit a player who has already been eliminated, which breaks the loop.
-
-5. **Final Result**: After the loop finishes, the remaining players (those who are not eliminated) are collected and returned as the result.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Tracking Array
-
-```cpp
-vector<int> rcvd(n, 0);
-int i = 0;
-int cnt = 1;
-rcvd[0] = 1;
-```
-
-- **`rcvd`**: An array of size `n` is created and initialized to all `0`. Each index represents a player, and the value at that index will be `1` if the player is eliminated, or `0` if the player is still in the game.
-- **`i = 0`**: The game starts with the first player (index `0`).
-- **`cnt = 1`**: This variable keeps track of how many players have been eliminated.
-- **`rcvd[0] = 1`**: The first player is eliminated immediately to start the process.
-
-#### Step 2: Simulate the Game
-
-```cpp
-while(rcvd[i] == 1) {
-    i = (i + cnt * k) % n;
-    if(rcvd[i] == 1) break;
-    rcvd[i] = 1;
-    cnt++;
+    return ans;
 }
 ```
 
-- **`while(rcvd[i] == 1)`**: The game continues until we revisit a player who has already been eliminated. This ensures we don't loop indefinitely.
-- **`i = (i + cnt * k) % n;`**: This calculates the new position `i` after moving `k` steps forward. The modulo operation ensures the circular movement, meaning after reaching `n`, we wrap back to `0`.
-- **`if(rcvd[i] == 1) break;`**: If the player at the new position `i` has already been eliminated (`rcvd[i] == 1`), we break the loop since no more players can be eliminated.
-- **`rcvd[i] = 1;`**: If the player hasn't been eliminated, mark them as eliminated (`rcvd[i] = 1`).
-- **`cnt++`**: Increment the count of eliminated players (`cnt`), as one more player has been eliminated.
+The function 'circularGameLosers' simulates a game where players are eliminated in a circular fashion. Starting from player 1, the game progresses by skipping 'k' players each time, and the eliminated player is marked. The function returns a list of players who were not eliminated.
 
-#### Step 3: Collect Non-Eliminated Players
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> circularGameLosers(int n, int k) {
+	```
+	The function 'circularGameLosers' is defined to take two arguments: an integer 'n' representing the number of players and an integer 'k' representing the number of steps between eliminations. The goal is to return the list of players who are not eliminated.
 
-```cpp
-vector<int> ans;
-for(int j = 0; j < n; j++) {
-    if(rcvd[j] == 0) ans.push_back(j + 1);
-}
-```
+2. **Variable Initialization**
+	```cpp
+	    vector<int> rcvd(n, 0);
+	```
+	A vector 'rcvd' is initialized to size 'n', with all values set to 0, representing that no players are initially eliminated.
 
-- **`ans`**: A vector to store the positions of players who were not eliminated.
-- **`for(int j = 0; j < n; j++)`**: Iterate through all players.
-- **`if(rcvd[j] == 0) ans.push_back(j + 1);`**: If a player is not eliminated (`rcvd[j] == 0`), add their position (index `j + 1` because positions are 1-based) to the `ans` vector.
+3. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	The variable 'i' is initialized to 0 and will be used to keep track of the current player in the game.
 
-#### Step 4: Return the Result
+4. **Variable Initialization**
+	```cpp
+	    int cnt = 1;
+	```
+	The variable 'cnt' is initialized to 1 and will keep track of the number of steps taken between eliminations.
 
-```cpp
-return ans;
-```
+5. **First Elimination**
+	```cpp
+	    rcvd[0] = 1;
+	```
+	The first player (index 0) is marked as eliminated by setting 'rcvd[0]' to 1.
 
-- The function returns the vector `ans` containing the positions of all players who were not eliminated.
+6. **Game Loop**
+	```cpp
+	    while(rcvd[i] == 1) {
+	```
+	A while loop is initiated, continuing as long as the current player 'i' is marked as eliminated.
 
-### Complexity
+7. **Player Elimination Calculation**
+	```cpp
+	        i = (i + cnt * k) % n;            
+	```
+	The index 'i' is updated by moving 'k' steps forward, multiplied by 'cnt', and taken modulo 'n' to ensure it stays within the circular bounds of the array.
 
-#### Time Complexity
+8. **Elimination Check**
+	```cpp
+	        if(rcvd[i] == 1) break;
+	```
+	If the current player is already eliminated, the loop breaks, ending the game.
 
-- **Initialization of `rcvd`**: The initialization of the array `rcvd` takes **O(n)** time.
-- **Game Simulation**: The while loop runs until all players are eliminated, or the loop revisits a player. In the worst case, each player can be visited multiple times, but since we eliminate one player per iteration, the loop will run at most `n` times.
-  - The computation inside the loop (index calculation and update of the `rcvd` array) is constant time, so the total complexity for the game simulation is **O(n)**.
-- **Final Result**: Collecting the non-eliminated players also takes **O(n)** time.
+9. **Player Elimination**
+	```cpp
+	        rcvd[i] = 1;
+	```
+	The current player 'i' is marked as eliminated by setting 'rcvd[i]' to 1.
 
-- **Overall Time Complexity**: The total time complexity is **O(n)**, where `n` is the number of players.
+10. **Step Increment**
+	```cpp
+	        cnt++;
+	```
+	The 'cnt' variable is incremented to account for the next step in the game, which will be used to calculate the next elimination.
 
-#### Space Complexity
+11. **Result Vector Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	An empty vector 'ans' is initialized to store the indices of players who were not eliminated.
 
-- The space complexity is **O(n)** because we are using an array `rcvd` of size `n` to track eliminated players, and an additional vector `ans` to store the non-eliminated players.
+12. **Losers Collection Loop**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	A loop iterates through the 'rcvd' vector to identify the players who were not eliminated.
 
-- **Overall Space Complexity**: The space complexity is **O(n)**.
+13. **Losers Identification**
+	```cpp
+	        if(rcvd[j] == 0) ans.push_back(j + 1);            
+	```
+	If the player 'j' is not eliminated (i.e., 'rcvd[j] == 0'), their index (adjusted by 1) is added to the 'ans' vector.
 
-### Conclusion
+14. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The 'ans' vector, containing the indices of the players who were not eliminated, is returned as the final result.
 
-This solution efficiently simulates the circular game by using an array to track eliminated players and iterating through the array with the given step size `k`. The algorithm computes the positions of the players who are not eliminated and does so in linear time, making it well-suited for large input sizes.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We iterate over the friends once to simulate the ball passing process, which takes linear time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use an array of size `n` to track the friends who received the ball.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-losers-of-the-circular-game/description/)
 

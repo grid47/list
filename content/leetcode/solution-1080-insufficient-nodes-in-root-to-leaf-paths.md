@@ -14,120 +14,138 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary tree and an integer limit. Your task is to delete all nodes in the tree that are considered insufficient. A node is insufficient if every root-to-leaf path passing through that node has a sum strictly less than the given limit. A leaf is defined as a node with no children. Return the root of the resulting binary tree after the deletions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary tree represented by its root node and an integer limit.
+- **Example:** `Input: root = [2, 3, 4, 5, -10, -10, 8, 10], limit = 15`
+- **Constraints:**
+	- 1 <= Number of nodes in the tree <= 5000
+	- -10^5 <= Node value <= 10^5
+	- -10^9 <= limit <= 10^9
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* sufficientSubset(TreeNode* root, int limit) {
-        if(!root) return NULL;
-        if(root->left == NULL && root->right == NULL)
-            return root->val < limit ? NULL : root;
-        root->left = sufficientSubset(root->left, limit - root->val);
-        root->right= sufficientSubset(root->right, limit - root->val);
-        return root->left == root->right ? NULL : root;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the root node of the resulting binary tree after deleting insufficient nodes.
+- **Example:** `Output: [2, 3, 4, 5, null, null, 10]`
+- **Constraints:**
+	- The structure of the binary tree should be preserved after deleting the insufficient nodes.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to traverse the tree and prune any nodes whose root-to-leaf path does not satisfy the sum condition with respect to the limit.
 
+- 1. Perform a post-order traversal of the tree.
+- 2. At each node, compute the sum of the path from root to leaf, considering all descendants.
+- 3. If the sum at the current node is less than the limit, delete the node.
+- 4. Return the modified tree after pruning the insufficient nodes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is a valid binary tree.
+- The limit value is a valid integer within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [3, 1, 2, 4, 5, -99, 6], limit = 10`  \
+  **Explanation:** In this case, the path from root to leaf through nodes 3 -> 1 -> 4 has a sum of 8, which is less than the limit. Thus, node 1 and its descendants (4) will be deleted. The resulting tree will have root 3, with the right child 2, and the leaf nodes 6 and 5 remaining.
 
-### Problem Statement
-The problem involves modifying a binary tree by removing all leaf nodes whose path sum from the root to the leaf is less than a specified limit. The aim is to retain only those nodes in the tree that contribute to a path whose total value meets or exceeds the given limit. For instance, given a binary tree and a limit of 15, if a path from the root to a leaf sums up to less than 15, that leaf node should be removed from the tree.
+- **Input:** `Input: root = [2, 3, 4, 5, 6, 7, 8], limit = 18`  \
+  **Explanation:** The tree contains multiple paths where the sum exceeds the limit. After pruning, only the nodes forming valid paths above the limit are retained.
 
-### Approach
-The approach to solve this problem employs a recursive depth-first search (DFS) technique. The idea is to traverse the tree from the root down to the leaves while maintaining a running sum of values. If a leaf node is found where the sum is less than the limit, it is removed. The recursive function returns `NULL` for nodes that need to be removed, effectively pruning the tree as the recursion unwinds.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, a post-order depth-first search (DFS) approach can be employed, where each node is processed after its children, and insufficient nodes are removed based on the sum condition.
 
-### Code Breakdown (Step by Step)
+### Initial Thoughts 💭
+- A bottom-up DFS traversal works well because we need to decide whether to prune a node after considering its children.
+- Using recursion allows us to handle the pruning and return the modified tree efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty (i.e., root is null), return null.
+- The solution must handle large trees (up to 5000 nodes) efficiently.
+- If the limit is extremely large or small, the algorithm should still work within the given constraints.
+- The solution should efficiently prune insufficient nodes in large binary trees.
+{{< dots >}}
+## Code 💻
+```cpp
+TreeNode* sufficientSubset(TreeNode* root, int limit) {
+    if(!root) return NULL;
+    if(root->left == NULL && root->right == NULL)
+        return root->val < limit ? NULL : root;
+    root->left = sufficientSubset(root->left, limit - root->val);
+    root->right= sufficientSubset(root->right, limit - root->val);
+    return root->left == root->right ? NULL : root;
+}
+```
 
-1. **Struct Definition**:
-   The `TreeNode` structure is defined to represent nodes in the binary tree. Each node contains an integer value and pointers to its left and right children.
+This function takes a binary tree and a limit value. It traverses the tree and removes any nodes where the sum of values from that node to the leaf is less than the given limit. If a leaf node's value is less than the limit, it is removed.
 
-   ```cpp
-   struct TreeNode {
-       int val;
-       TreeNode *left;
-       TreeNode *right;
-       TreeNode() : val(0), left(nullptr), right(nullptr) {}
-       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-       TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-   };
-   ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	TreeNode* sufficientSubset(TreeNode* root, int limit) {
+	```
+	This line defines the function `sufficientSubset`, which takes a pointer to the root of a binary tree and an integer `limit`. It returns the root of the modified tree after removing insufficient nodes.
 
-2. **Class Definition**:
-   The `Solution` class contains the method `sufficientSubset` that will perform the main logic of the problem.
+2. **Base Case - Empty Node**
+	```cpp
+	    if(!root) return NULL;
+	```
+	This checks if the current node is `NULL`. If the node is empty, it returns `NULL`, signaling the end of this path in the tree.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+3. **Base Case - Leaf Node**
+	```cpp
+	    if(root->left == NULL && root->right == NULL)
+	```
+	This checks if the current node is a leaf (i.e., has no left or right child).
 
-3. **Recursive Function Implementation**:
-   The method `sufficientSubset` takes a pointer to the root of the binary tree and an integer `limit` as arguments. It returns a pointer to the root of the modified tree.
+4. **Leaf Node Value Check**
+	```cpp
+	        return root->val < limit ? NULL : root;
+	```
+	If the node is a leaf, it checks whether its value is less than the `limit`. If it is, the node is removed (returns `NULL`), otherwise, it is kept.
 
-   ```cpp
-   TreeNode* sufficientSubset(TreeNode* root, int limit) {
-   ```
+5. **Recursive Call - Left Child**
+	```cpp
+	    root->left = sufficientSubset(root->left, limit - root->val);
+	```
+	This recursively calls the `sufficientSubset` function on the left child of the current node, reducing the `limit` by the current node's value.
 
-4. **Base Case for Null Nodes**:
-   The first check is for a null node. If the current node is `NULL`, the function simply returns `NULL`, indicating that there is no node to process.
+6. **Recursive Call - Right Child**
+	```cpp
+	    root->right= sufficientSubset(root->right, limit - root->val);
+	```
+	This recursively calls the `sufficientSubset` function on the right child of the current node, similarly adjusting the `limit`.
 
-   ```cpp
-       if(!root) return NULL;
-   ```
+7. **Return Condition**
+	```cpp
+	    return root->left == root->right ? NULL : root;
+	```
+	This checks if both the left and right children are `NULL` (meaning both children were removed). If so, the current node is also removed (returns `NULL`), otherwise, it is returned.
 
-5. **Base Case for Leaf Nodes**:
-   The next check identifies leaf nodes, which are nodes without children. If the current node is a leaf, it checks if its value is less than the `limit`. If the value is less than `limit`, it returns `NULL`, indicating that this leaf should be removed; otherwise, it returns the current leaf.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-       if(root->left == NULL && root->right == NULL)
-           return root->val < limit ? NULL : root;
-   ```
+In the worst case, we visit all nodes in the tree once, leading to a linear time complexity with respect to the number of nodes.
 
-6. **Recursive Calls**:
-   The function then recursively calls itself for the left and right children of the current node. It subtracts the current node's value from the limit to adjust the threshold for the child nodes.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
 
-   ```cpp
-       root->left = sufficientSubset(root->left, limit - root->val);
-       root->right = sufficientSubset(root->right, limit - root->val);
-   ```
+The space complexity is proportional to the height of the tree due to the recursion stack in the DFS traversal.
 
-7. **Pruning the Tree**:
-   After the recursive calls, the function checks if both the left and right children are `NULL`. If they are, it means both children have been removed (i.e., the current node is a leaf node that does not satisfy the limit). In this case, the current node itself should also be removed by returning `NULL`.
-
-   ```cpp
-       return root->left == root->right ? NULL : root;
-   }
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this algorithm is \(O(N)\), where \(N\) is the number of nodes in the binary tree. This is because we traverse each node once during the recursive calls.
-  
-- **Space Complexity**: The space complexity is \(O(H)\), where \(H\) is the height of the binary tree. This space is used by the recursion stack. In the worst case (for example, a skewed tree), the height could be equal to \(N\), leading to a space complexity of \(O(N)\).
-
-### Conclusion
-The provided C++ code offers an efficient solution to the problem of pruning a binary tree based on path sums. By employing a depth-first search approach, the algorithm effectively identifies and removes leaf nodes whose path sums fall below a specified limit. The recursive nature of the function allows it to handle the tree in a clean and straightforward manner, ensuring that only the necessary nodes are retained.
-
-This solution is not only optimal in terms of time complexity but also elegantly handles tree traversal using recursion. It showcases the power of recursion in solving problems involving hierarchical data structures like trees. The algorithm can be utilized in various applications where pruning or modifying tree structures based on specific conditions is required, making it a valuable addition to the toolkit of algorithms for tree manipulations.
-
-In summary, the `sufficientSubset` method efficiently prunes a binary tree while maintaining its structural integrity for paths that meet the specified criteria, demonstrating a robust approach to tree modification challenges.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths/description/)

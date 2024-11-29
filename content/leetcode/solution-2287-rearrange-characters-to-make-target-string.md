@@ -14,160 +14,170 @@ img_src = ""
 youtube = "Mgtl8CIIWX4"
 youtube_upload_date="2022-05-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Mgtl8CIIWX4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, s and target. Your task is to determine the maximum number of times you can rearrange the characters of s to form the string target. A character from s can only be used once in the target string, and the letters must be rearranged to form a new target string each time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings, s and target, where s represents a string of available characters, and target is the string you are trying to form. Both strings consist of lowercase English letters.
+- **Example:** `Input: s = "helloworld", target = "low"`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- 1 <= target.length <= 10
+	- s and target consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int rearrangeCharacters(string s, string target) {
-        unordered_map<char,int> targetFreq ; 
-        for(auto a : target) {
-             targetFreq[a] ++;
-        }
-        unordered_map<char , int> sentFreq ; 
-        for(auto a : s) {
-            sentFreq[a] ++ ; 
-        }
-        int mn = INT_MAX  ; 
-        for(auto a : targetFreq ) {
-             mn = min(mn , sentFreq[a.first]/a.second); 
-        }
-        return mn ; 
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of times the string target can be formed by rearranging letters from s.
+- **Example:** `Output: 1`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate how many full copies of the target string can be formed using characters from s.
+
+- Step 1: Count the frequency of each character in the target string.
+- Step 2: Count the frequency of each character in the string s.
+- Step 3: For each character in the target string, check how many times it can be used from s and keep track of the minimum count across all characters.
+- Step 4: Return the minimum count as the result, which represents the maximum number of target strings that can be formed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings consist only of lowercase English letters.
+- All characters in the target string must be present in the source string s, and we can't reuse characters from s.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "helloworld", target = "low"`  \
+  **Explanation:** In this case, we can use 'l', 'o', and 'w' from s to form one copy of the target string 'low'. We can only form one copy as the string 'low' requires a specific combination of characters, and there are no extra 'w' or 'o' left to form another copy.
+
+- **Input:** `Input: s = "aabbcc", target = "abc"`  \
+  **Explanation:** Here, we can form one copy of the string 'abc' as we have exactly one 'a', one 'b', and one 'c'. The result is 1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we'll count the frequency of characters in both s and target, then calculate how many full target strings can be formed based on the availability of each character.
+
+### Initial Thoughts 💭
+- This problem is similar to counting the frequency of characters and comparing how many full sets can be made.
+- The key is to keep track of how many times each character appears in both s and target.
+- We need to calculate the minimum number of target strings that can be formed, which is determined by the character in the target string that is the most limiting.
+{{< dots >}}
+### Edge Cases 🌐
+- Both s and target will not be empty as per the problem constraints.
+- The algorithm should efficiently handle strings of length up to 100 for s.
+- If s contains more characters than target, it does not affect the number of full target strings that can be formed.
+- We only need to consider lowercase English letters.
+{{< dots >}}
+## Code 💻
+```cpp
+int rearrangeCharacters(string s, string target) {
+    unordered_map<char,int> targetFreq ; 
+    for(auto a : target) {
+         targetFreq[a] ++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine how many times you can rearrange the characters of a given string `s` to form the string `target`. In other words, you need to find the maximum number of times the string `target` can be created by using characters from string `s`. Each character in `s` can only be used once per rearrangement.
-
-### Approach
-
-The problem can be efficiently solved by counting the frequencies of characters in both the string `s` and the target string. Once we know how many times each character appears in both strings, we can determine how many times we can create the target string by using characters from `s`. The key steps are as follows:
-
-1. **Count the Frequencies of Characters in `target`**: 
-   - For each character in `target`, we need to know how many times it appears. This helps us understand the minimum number of times we need that character to form one complete copy of `target`.
-
-2. **Count the Frequencies of Characters in `s`**: 
-   - For each character in `s`, we count how many times it appears. This will tell us how many copies of the characters are available in `s` for rearranging.
-
-3. **Determine How Many Complete Rearrangements of `target` Can Be Formed**:
-   - For each character in `target`, we check how many times it appears in `s`. The number of complete rearrangements of `target` is determined by the limiting character — i.e., the character in `target` for which there are the fewest available copies in `s` compared to the number required for one complete rearrangement of `target`.
-
-4. **Return the Result**: 
-   - The result is the minimum number of times the characters of `target` can be rearranged to form a complete `target`.
-
-### Code Breakdown (Step by Step)
-
-The code implementation follows the steps mentioned in the approach:
-
-```cpp
-unordered_map<char,int> targetFreq;
-for(auto a : target) {
-    targetFreq[a]++; // Count frequency of each character in the target string
+    unordered_map<char , int> sentFreq ; 
+    for(auto a : s) {
+        sentFreq[a] ++ ; 
+    }
+    int mn = INT_MAX  ; 
+    for(auto a : targetFreq ) {
+         mn = min(mn , sentFreq[a.first]/a.second); 
+    }
+    return mn ; 
 }
 ```
-- **`targetFreq`**: This is an unordered map (hash map) that stores the frequency of each character in the `target` string.
-- We iterate over each character in `target`, and for each character, we increase its frequency count in the `targetFreq` map. This helps us know how many of each character is required to form one occurrence of the `target` string.
 
-```cpp
-unordered_map<char, int> sentFreq;
-for(auto a : s) {
-    sentFreq[a]++; // Count frequency of each character in the input string `s`
-}
-```
-- **`sentFreq`**: This is another unordered map that stores the frequency of each character in the string `s`.
-- We iterate over each character in `s` and update the frequency count in `sentFreq`. This map will give us an idea of how many copies of each character we have in `s`.
+This function calculates the maximum number of times the characters from the string `target` can be rearranged using characters from the string `s`. It works by counting the frequency of characters in both strings and determining the minimum number of complete rearrangements possible.
 
-```cpp
-int mn = INT_MAX;
-for(auto a : targetFreq) {
-    mn = min(mn, sentFreq[a.first] / a.second); // Determine the minimum number of complete target strings that can be formed
-}
-```
-- **`mn`**: This variable is initialized to `INT_MAX` (the largest possible integer value). It keeps track of the minimum number of complete rearrangements of `target` that can be formed using characters from `s`.
-- For each character in `targetFreq`, we calculate how many times the character from `target` can be used based on its frequency in `s`. Specifically, we take the quotient of `sentFreq[a.first] / a.second` for each character `a.first` in `targetFreq` and `a.second` (the number of times it appears in `target`). 
-  - This represents how many times we can use the current character from `s` to form the target string. 
-  - We take the minimum of these quotients because the overall number of times we can form `target` depends on the most limiting character (i.e., the one that is available the least).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int rearrangeCharacters(string s, string target) {
+	```
+	The function `rearrangeCharacters` is declared, which takes two strings `s` and `target` as input and returns an integer representing the maximum number of times the `target` string can be formed from the characters of `s`.
 
-```cpp
-return mn; // Return the result: the maximum number of times the target can be formed
-```
-- Finally, after processing all characters in `target`, we return `mn`, which holds the maximum number of complete rearrangements of `target` that can be made using characters from `s`.
+2. **Initialize Target Frequency Map**
+	```cpp
+	    unordered_map<char,int> targetFreq ; 
+	```
+	An unordered map `targetFreq` is initialized to store the frequency of each character in the `target` string.
 
-### Example Walkthrough
+3. **Iterate Over Target String**
+	```cpp
+	    for(auto a : target) {
+	```
+	A `for` loop iterates over each character in the `target` string to count its frequency.
 
-Let's go through a step-by-step walkthrough of how the solution works using an example.
+4. **Update Target Frequency Map**
+	```cpp
+	         targetFreq[a] ++;
+	```
+	For each character `a` in the `target` string, the frequency of that character is incremented in the `targetFreq` map.
 
-**Example 1**:
-```cpp
-string s = "iloveleetcode";
-string target = "love";
-```
+5. **Initialize Sent Frequency Map**
+	```cpp
+	    unordered_map<char , int> sentFreq ; 
+	```
+	An unordered map `sentFreq` is initialized to store the frequency of each character in the `s` string.
 
-1. **Count the characters in `target`**:
-   - `targetFreq` will look like: `{'l': 1, 'o': 1, 'v': 1, 'e': 1}`
+6. **Iterate Over Sent String**
+	```cpp
+	    for(auto a : s) {
+	```
+	A `for` loop iterates over each character in the `s` string to count its frequency.
 
-2. **Count the characters in `s`**:
-   - `sentFreq` will look like: `{'i': 1, 'l': 1, 'o': 2, 'v': 1, 'e': 3, 't': 2, 'c': 1, 'd': 1}`
+7. **Update Sent Frequency Map**
+	```cpp
+	        sentFreq[a] ++ ; 
+	```
+	For each character `a` in the `s` string, the frequency of that character is incremented in the `sentFreq` map.
 
-3. **Determine how many complete target strings can be formed**:
-   - For `'l'`: We need 1, but we have 1, so we can use it 1 time.
-   - For `'o'`: We need 1, but we have 2, so we can use it 2 times.
-   - For `'v'`: We need 1, but we have 1, so we can use it 1 time.
-   - For `'e'`: We need 1, but we have 3, so we can use it 3 times.
+8. **Initialize Minimum Count**
+	```cpp
+	    int mn = INT_MAX  ; 
+	```
+	The variable `mn` is initialized to `INT_MAX` to track the minimum number of times the `target` string can be formed from the characters in `s`.
 
-4. **Calculate the minimum value**:
-   - The minimum number of complete rearrangements is `min(1, 2, 1, 3)` which equals 1.
+9. **Check for Minimum Rearrangement**
+	```cpp
+	    for(auto a : targetFreq ) {
+	```
+	A `for` loop iterates over each character-frequency pair in the `targetFreq` map.
 
-So, the result is `1` — we can form one complete rearrangement of `"love"` from the characters in `"iloveleetcode"`.
+10. **Update Minimum Count**
+	```cpp
+	         mn = min(mn , sentFreq[a.first]/a.second); 
+	```
+	For each character in `targetFreq`, the minimum number of times the character can be rearranged is calculated by dividing the frequency in `sentFreq` by the required frequency in `targetFreq`. The result is stored in `mn`.
 
-**Example 2**:
-```cpp
-string s = "abcabc";
-string target = "abc";
-```
+11. **Return the Result**
+	```cpp
+	    return mn ; 
+	```
+	The function returns the value of `mn`, which represents the maximum number of times the `target` string can be formed using characters from `s`.
 
-1. **Count the characters in `target`**:
-   - `targetFreq`: `{'a': 1, 'b': 1, 'c': 1}`
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-2. **Count the characters in `s`**:
-   - `sentFreq`: `{'a': 2, 'b': 2, 'c': 2}`
+The time complexity is O(n + m), where n is the length of s and m is the length of target, as we need to count the frequency of each character in both strings.
 
-3. **Determine how many complete target strings can be formed**:
-   - For `'a'`: We need 1, and we have 2, so we can use it 2 times.
-   - For `'b'`: We need 1, and we have 2, so we can use it 2 times.
-   - For `'c'`: We need 1, and we have 2, so we can use it 2 times.
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-4. **Calculate the minimum value**:
-   - The minimum number of complete rearrangements is `min(2, 2, 2)` which equals 2.
+The space complexity is O(n + m), where n is the length of s and m is the length of target, due to the frequency maps used for both strings.
 
-So, the result is `2` — we can form two complete rearrangements of `"abc"` from the characters in `"abcabc"`.
+**Happy Coding! 🎉**
 
-### Complexity
-
-#### Time Complexity
-
-- **Building the frequency map for `target`**: Iterating through the `target` string takes `O(m)`, where `m` is the length of `target`.
-- **Building the frequency map for `s`**: Iterating through the `s` string takes `O(n)`, where `n` is the length of `s`.
-- **Calculating the minimum number of rearrangements**: We iterate over the keys of `targetFreq`, which will have at most 26 entries (since there are only 26 letters in the alphabet). Hence, this step takes `O(1)` time, since the maximum number of unique characters is constant.
-- **Overall time complexity**: The time complexity is **O(n + m)**, where `n` is the length of `s` and `m` is the length of `target`.
-
-#### Space Complexity
-
-- **Storing frequency maps**: We use two unordered maps, `targetFreq` and `sentFreq`, each of size at most 26 (since we are only dealing with lowercase English letters). The space complexity is **O(1)** due to the constant size of the alphabet.
-
-- **Overall space complexity**: The space complexity is **O(1)**.
-
-### Conclusion
-
-This solution efficiently counts the number of times the `target` string can be rearranged using characters from string `s` by leveraging frequency counting and finding the limiting character. The algorithm runs in linear time with respect to the sizes of `s` and `target`, making it efficient even for larger inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rearrange-characters-to-make-target-string/description/)
 

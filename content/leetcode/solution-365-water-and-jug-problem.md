@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,113 +28,130 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two jugs with capacities x and y liters, and an infinite supply of water. You need to determine whether you can measure exactly target liters of water using the following operations: fill, empty, and pour water between the jugs.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of three integers: x, y, and target, representing the capacities of the two jugs and the target amount of water to measure.
+- **Example:** `x = 3, y = 5, target = 4`
+- **Constraints:**
+	- 1 <= x, y, target <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canMeasureWater(int x, int y, int z) {
-        if(x + y < z) return false;
-        if(x == z || y == z || x + y == z) return true;
-        return z % gcd(x, y) == 0;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be true if it is possible to measure exactly the target amount of water, otherwise false.
+- **Example:** `Input: x = 3, y = 5, target = 4
+Output: true`
+- **Constraints:**
+	- The output should be true or false based on the feasibility of measuring the target amount of water.
 
-    int gcd(int a, int b) {
-        return b == 0? a: gcd(b, a%b);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if it is possible to measure exactly the target amount of water using the given operations on the two jugs.
 
-### 🚀 Problem Statement
+- 1. If the total capacity of both jugs is less than the target, return false.
+- 2. If either jug has the exact target capacity, return true.
+- 3. If the sum of the two jugs' capacities is equal to the target, return true.
+- 4. Otherwise, check if the target is divisible by the greatest common divisor (gcd) of the two jug capacities.
+{{< dots >}}
+### Problem Assumptions ✅
+- The solution assumes that the jugs can be manipulated by filling, emptying, and pouring until the target amount is reached or proven impossible.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: x = 3, y = 5, target = 4
+Output: true`  \
+  **Explanation:** You can measure 4 liters by filling and transferring water between the two jugs. Follow the steps to achieve the target of 4 liters.
 
-In this problem, we are given two jugs with capacities `x` and `y`, and we need to determine if it's possible to measure exactly `z` liters of water. You can perform the following operations:
+{{< dots >}}
+## Approach 🚀
+The solution uses the greatest common divisor (gcd) method to determine whether the target amount can be measured by checking the mathematical conditions for each jug capacity.
 
-- Fill a jug to its full capacity.
-- Empty a jug.
-- Pour water from one jug into the other until one of them is either full or empty.
-
-The goal is to return `true` if it is possible to measure exactly `z` liters, and `false` otherwise.
-
----
-
-### 🧠 Key Insights
-
-To solve this, here are some important insights:
-- **GCD (Greatest Common Divisor)**: If the greatest common divisor (gcd) of the jug capacities `x` and `y` divides `z`, then it's possible to measure `z` liters. This is because of the properties of Diophantine equations, which tell us that we can only measure quantities that are multiples of the gcd of the two jugs.
-- **Capacity Check**: The combined capacity of both jugs (`x + y`) must be greater than or equal to `z`, since you can't measure more water than the total capacity of the jugs.
-
----
-
-### 🛠️ Approach
-
-We can solve this problem in a few steps:
-
-1. **Initial Checks**:
-   - If the total capacity of the jugs (`x + y`) is less than `z`, it's immediately impossible to measure `z` liters. In this case, return `false`.
-   - If either jug already contains exactly `z` liters (i.e., `x == z` or `y == z`), we can immediately return `true`.
-   - If the sum of both jugs equals `z` (i.e., `x + y == z`), we can also return `true`, because we can simply combine both jugs to reach the target.
-
-2. **GCD Condition**:
-   - If none of the above conditions are true, we calculate the greatest common divisor (gcd) of `x` and `y`.
-   - If `z` is divisible by the gcd of `x` and `y` (`z % gcd(x, y) == 0`), it means it's possible to measure exactly `z` liters. Otherwise, return `false`.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break it down:
-
-#### Step 1: Initial Checks
-
+### Initial Thoughts 💭
+- The gcd of the jug capacities plays a key role in determining whether it's possible to measure the target.
+- We need to ensure the target is either directly achievable or divisible by the gcd of the two jug capacities.
+{{< dots >}}
+### Edge Cases 🌐
+- If x, y, or target is 0, return false.
+- Ensure the solution handles inputs up to 1000 efficiently.
+- When x or y equals the target, return true.
+- The constraints guarantee that inputs will always be within the range of 1 to 1000.
+{{< dots >}}
+## Code 💻
 ```cpp
-if(x + y < z) return false;
-if(x == z || y == z || x + y == z) return true;
-```
-- **Step 1a**: Check if the total capacity of both jugs is less than `z`. If so, return `false`.
-- **Step 1b**: Check if either jug contains exactly `z` liters (i.e., `x == z` or `y == z`), or if the sum of both jugs equals `z`. If so, return `true`.
+bool canMeasureWater(int x, int y, int z) {
+    if(x + y < z) return false;
+    if(x == z || y == z || x + y == z) return true;
+    return z % gcd(x, y) == 0;
+}
 
-#### Step 2: GCD Condition
-
-```cpp
-return z % gcd(x, y) == 0;
-```
-- If none of the above conditions hold, calculate the gcd of `x` and `y`. If `z` is divisible by this gcd, return `true`, otherwise return `false`.
-
-#### Step 3: GCD Calculation
-
-```cpp
 int gcd(int a, int b) {
-    return b == 0 ? a : gcd(b, a % b);
+    return b == 0? a: gcd(b, a%b);
 }
 ```
-- The gcd function uses the Euclidean algorithm to calculate the greatest common divisor. If `b` is zero, `a` is the gcd. Otherwise, we recursively compute `gcd(b, a % b)` until `b` becomes zero.
 
----
+The `canMeasureWater` function checks if it's possible to measure exactly `z` units using two jugs with capacities `x` and `y`. It uses the mathematical principle that the target amount `z` must be a multiple of the greatest common divisor (GCD) of `x` and `y` for it to be possible.
 
-### 📈 Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Declaration**
+	```cpp
+	bool canMeasureWater(int x, int y, int z) {
+	```
+	This line declares the method `canMeasureWater`, which takes three integers `x`, `y`, and `z`, representing the capacities of the two jugs and the target amount of water to measure.
 
-- **Time Complexity**: The most time-consuming operation is the calculation of the gcd. Using the Euclidean algorithm, the time complexity is **O(log(min(x, y)))**, where `x` and `y` are the capacities of the jugs.
-- **Space Complexity**: The space complexity is **O(1)** since we only use a few integer variables and no additional data structures.
+2. **Conditional Check**
+	```cpp
+	    if(x + y < z) return false;
+	```
+	Checks if the sum of the two jugs' capacities is less than the target `z`. If so, it returns `false` because it’s impossible to measure `z` units of water.
 
----
+3. **Conditional Check**
+	```cpp
+	    if(x == z || y == z || x + y == z) return true;
+	```
+	Checks if either jug can directly hold the target amount of water (`z`) or if the sum of both jugs' capacities equals `z`. In either case, it returns `true`.
 
-### 🏁 Conclusion
+4. **Mathematical Condition**
+	```cpp
+	    return z % gcd(x, y) == 0;
+	```
+	Returns `true` if `z` is divisible by the greatest common divisor (GCD) of `x` and `y`, which is a key condition for measuring exactly `z` units using the two jugs.
 
-This solution efficiently solves the water jug problem by leveraging the mathematical properties of the greatest common divisor. By breaking the problem down into a series of simple checks and using the gcd to determine whether `z` liters can be measured, we ensure optimal performance with minimal space usage.
+5. **Blank Line**
+	```cpp
+	
+	```
+	This is a blank line for readability, separating the main method from the helper function `gcd`.
 
-**In a nutshell**: If the sum of the jugs is greater than or equal to `z` and `z` is divisible by the gcd of the two jugs, it’s possible to measure exactly `z` liters. This approach guarantees a solution in logarithmic time and constant space.
+6. **Helper Method Declaration**
+	```cpp
+	int gcd(int a, int b) {
+	```
+	This line declares a helper method `gcd` to calculate the greatest common divisor (GCD) of two integers `a` and `b` using the Euclidean algorithm.
 
----
+7. **Recursive Call**
+	```cpp
+	    return b == 0? a: gcd(b, a%b);
+	```
+	This line uses the Euclidean algorithm to calculate the GCD recursively. If `b` is 0, it returns `a` as the GCD; otherwise, it recursively calls `gcd` with `b` and `a % b`.
 
-### 🌟 Quick Recap
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(min(x, y))) for calculating gcd.
+- **Average Case:** O(log(min(x, y))) for gcd and conditional checks.
+- **Worst Case:** O(log(min(x, y))) for gcd calculation.
 
-- Check if the combined capacity of the jugs is sufficient.
-- Verify if the target amount `z` is directly achievable via one of the jugs.
-- Use the gcd to check if `z` is a multiple of the gcd of `x` and `y`.
-- Time complexity is **O(log(min(x, y)))** and space complexity is **O(1)**.
+The gcd computation takes logarithmic time relative to the smaller jug capacity.
 
-Now you’re ready to tackle similar problems with confidence! 😊
+### Space Complexity 💾
+- **Best Case:** O(1) as no extra space is used.
+- **Worst Case:** O(1) as no additional data structures are required.
+
+The space complexity is constant because only a few variables are used.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/water-and-jug-problem/description/)
 

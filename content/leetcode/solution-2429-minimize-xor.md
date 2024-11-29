@@ -14,181 +14,204 @@ img_src = ""
 youtube = "mWUMfdloybo"
 youtube_upload_date="2022-10-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mWUMfdloybo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two positive integers, num1 and num2. Your task is to find a positive integer x such that: 1. x has the same number of set bits (1's in binary representation) as num2, and 2. The value of x XOR num1 is minimized. The XOR operation is performed bitwise. Your goal is to return the integer x.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two positive integers num1 and num2.
+- **Example:** `num1 = 4, num2 = 7`
+- **Constraints:**
+	- 1 <= num1, num2 <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimizeXor(int num1, int num2) {
-        int n = __builtin_popcount(num2);
-        int res = 0;
-        for(int i = 30; i >= 0; i--) {
-            if(((num1 >> i) & 1) == 1) {
-                if(n > 0) {
-                    res |= (1 << i);
-                    n--;
-                    if(n == 0) return res;
-                }
-            }
-        }
-        int i = 0;
-        while(n > 0) {
-            if(((res >> i) & 1) == 0) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the integer x that satisfies the given conditions.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- There will always be a unique solution.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the integer x such that it has the same number of set bits as num2 and minimizes the value of x XOR num1.
+
+- 1. Count the number of set bits (1's) in num2.
+- 2. Try to set bits of x to match the set bits of num2 from the higher bits of num1, aiming to minimize the XOR result.
+- 3. If there are still set bits remaining, set them in the lowest possible positions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The inputs num1 and num2 are positive integers.
+- There is always a unique solution.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `num1 = 3, num2 = 5`  \
+  **Explanation:** In this example, num1 is 3 (binary 0011) and num2 is 5 (binary 0101). We need to find a number with the same number of set bits as num2 and that minimizes the XOR with num1. The number 3 (binary 0011) is the answer, as it has the same number of set bits and gives the minimal XOR value (0).
+
+- **Input:** `num1 = 1, num2 = 12`  \
+  **Explanation:** Here, num1 is 1 (binary 0001) and num2 is 12 (binary 1100). The integer 3 (binary 0011) satisfies the condition as it has the same number of set bits as 12 and gives the minimal XOR with num1, resulting in a value of 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to minimize the XOR value while matching the number of set bits in num2. By trying to match the set bits of num1 with num2 from the highest to the lowest positions, we can minimize the XOR value.
+
+### Initial Thoughts 💭
+- The number of set bits in num2 is fixed, so the task is to match those set bits while minimizing the XOR result.
+- We can attempt to build the number x by manipulating the bits of num1 and num2 from higher to lower positions.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as num1 and num2 are always positive integers.
+- Ensure the algorithm handles large inputs up to 10^9 efficiently.
+- Consider edge cases where num1 and num2 have very different binary representations, such as num1 = 1 and num2 = 1000000000.
+- The solution must handle large numbers and respect the constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimizeXor(int num1, int num2) {
+    int n = __builtin_popcount(num2);
+    int res = 0;
+    for(int i = 30; i >= 0; i--) {
+        if(((num1 >> i) & 1) == 1) {
+            if(n > 0) {
                 res |= (1 << i);
                 n--;
+                if(n == 0) return res;
             }
-            i++;
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to minimize the XOR of two numbers `num1` and `num2` while changing the bits of `num1` such that the number of `1` bits in the result is equal to the number of `1` bits in `num2`. This task requires an optimal approach to achieve the minimum possible value of the XOR by manipulating the bits of `num1` and `num2` strategically.
-
-### Approach
-
-To solve this problem efficiently, we need to take advantage of the properties of the XOR operation and bit manipulation. XOR is a binary operation that outputs `1` if the bits are different and `0` if they are the same. The goal is to minimize this difference by adjusting the bits of `num1` while ensuring the number of `1` bits in the result matches that of `num2`.
-
-### Key Steps
-
-The steps to minimize the XOR are as follows:
-
-1. **Count the `1` bits in `num2`:**
-   The first step is to determine how many `1` bits are in `num2`. This can be done using the `__builtin_popcount()` function, which counts the number of `1` bits in an integer. We will need to match this number of `1` bits in the resulting number.
-
-2. **Set `1` bits in `num1`:**
-   We then go through the bits of `num1` from the most significant bit (MSB) to the least significant bit (LSB). For each `1` bit in `num1`, we try to keep it in the result as long as there are still `1` bits required (i.e., the number of `1` bits left to place in the result is greater than 0).
-
-3. **Set `0` bits where necessary:**
-   Once we have placed all the `1` bits from `num1`, if there are still `1` bits remaining to be placed, we set the lowest unset bits in the result until the required number of `1` bits is reached.
-
-4. **Return the result:**
-   After all the bits are adjusted, we return the modified number, which now has the same number of `1` bits as `num2`, and we have minimized the XOR value.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Count the `1` bits in `num2`
-
-```cpp
-int n = __builtin_popcount(num2);
-```
-
-- We use the `__builtin_popcount()` function to count the number of `1` bits in `num2` and store this value in `n`. This tells us how many `1` bits we need in the final result.
-
-#### Step 2: Iterate over the bits of `num1`
-
-```cpp
-int res = 0;
-for(int i = 30; i >= 0; i--) {
-    if(((num1 >> i) & 1) == 1) {
-        if(n > 0) {
+    int i = 0;
+    while(n > 0) {
+        if(((res >> i) & 1) == 0) {
             res |= (1 << i);
             n--;
-            if(n == 0) return res;
         }
+        i++;
     }
+    return res;
 }
 ```
 
-- We initialize `res` to `0`. This will hold the result.
-- We start iterating over the bits of `num1` from the most significant bit (bit 30) to the least significant bit (bit 0). We do this because we want to prioritize setting the most significant bits first, which helps in minimizing the XOR value.
-- For each bit `i` of `num1`, we check if the bit is `1` using `((num1 >> i) & 1) == 1`. If the bit is `1`, we check if there are still `1` bits left to place (i.e., `n > 0`). If so, we set this bit in `res` by performing `res |= (1 << i)`, and we decrement `n`.
-- If `n` reaches `0` (i.e., we have placed all the `1` bits required), we return `res`.
+This function minimizes the XOR result between two integers by considering the number of 1-bits in the second number and adjusting the bits of the first number accordingly.
 
-#### Step 3: Set remaining `1` bits in `res`
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function**
+	```cpp
+	int minimizeXor(int num1, int num2) {
+	```
+	Defines the function 'minimizeXor' which takes two integer arguments and returns an integer.
 
-```cpp
-int i = 0;
-while(n > 0) {
-    if(((res >> i) & 1) == 0) {
-        res |= (1 << i);
-        n--;
-    }
-    i++;
-}
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = __builtin_popcount(num2);
+	```
+	Initializes the variable 'n' to store the count of 1-bits in 'num2'.
 
-- If `n` is still greater than `0` after iterating through all the bits of `num1`, we need to place the remaining `1` bits in the result. We do this by iterating from the least significant bit (bit 0) upwards and setting the bits of `res` to `1` where they are currently `0`.
-- We check if the bit `i` is `0` in `res` using `((res >> i) & 1) == 0`. If it is `0`, we set it to `1` using `res |= (1 << i)` and decrement `n`.
-- We continue this process until all the `1` bits required are placed in `res`.
+3. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes 'res' to 0, which will store the result of the minimized XOR.
 
-#### Step 4: Return the Result
+4. **Loop**
+	```cpp
+	    for(int i = 30; i >= 0; i--) {
+	```
+	Starts a loop that iterates through all 32 bits (from 30 down to 0) of 'num1'.
 
-```cpp
-return res;
-```
+5. **Condition**
+	```cpp
+	        if(((num1 >> i) & 1) == 1) {
+	```
+	Checks if the i-th bit of 'num1' is 1.
 
-- Finally, we return the result `res`, which now contains the minimal XOR value with the same number of `1` bits as `num2`.
+6. **Condition**
+	```cpp
+	            if(n > 0) {
+	```
+	Checks if there are still 1-bits remaining in 'num2' to assign to 'res'.
 
-### Complexity Analysis
+7. **Operation**
+	```cpp
+	                res |= (1 << i);
+	```
+	Sets the i-th bit of 'res' to 1 by performing a bitwise OR operation.
 
-#### Time Complexity:
+8. **Update**
+	```cpp
+	                n--;
+	```
+	Decreases the count of 1-bits in 'num2'.
 
-- The function iterates over the bits of `num1` and `res`, both of which are integers and have at most 32 bits (assuming a 32-bit integer). The total number of iterations is thus constant, specifically `O(32)`.
-- The operations inside the loop (bit shifting, bitwise AND, OR, and comparison) are all constant time operations.
-- Therefore, the overall time complexity of the solution is:
-  \[
-  O(1)
-  \]
-  This is because the number of bits is fixed, and the algorithm processes each bit in constant time.
+9. **Return Condition**
+	```cpp
+	                if(n == 0) return res;
+	```
+	Returns the result if all 1-bits from 'num2' have been assigned.
 
-#### Space Complexity:
+10. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	Initializes 'i' for the while loop that will fill in remaining 1-bits in 'res'.
 
-- The algorithm uses a constant amount of extra space, only requiring a few integer variables (`n`, `res`, and `i`).
-- Therefore, the space complexity is:
-  \[
-  O(1)
-  \]
+11. **Loop**
+	```cpp
+	    while(n > 0) {
+	```
+	Starts a while loop that continues until all 1-bits from 'num2' are assigned.
 
-### Example Walkthrough
+12. **Condition**
+	```cpp
+	        if(((res >> i) & 1) == 0) {
+	```
+	Checks if the i-th bit of 'res' is 0.
 
-Let's walk through an example to see how the algorithm works.
+13. **Operation**
+	```cpp
+	            res |= (1 << i);
+	```
+	Sets the i-th bit of 'res' to 1.
 
-#### Example 1: `num1 = 3`, `num2 = 5`
+14. **Update**
+	```cpp
+	            n--;
+	```
+	Decreases the count of remaining 1-bits to be assigned.
 
-1. **Count the `1` bits in `num2`:**
-   - `num2 = 5` has two `1` bits, so `n = 2`.
+15. **Update**
+	```cpp
+	        i++;
+	```
+	Increments 'i' to check the next bit of 'res'.
 
-2. **Iterate over `num1`:**
-   - `num1 = 3` has two `1` bits in positions 1 and 0.
-   - Start with `res = 0`.
-   - For `i = 1` (bit 1 of `num1`), the bit is `1` and `n > 0`, so we set the bit in `res`: `res |= (1 << 1)` gives `res = 2`. Decrement `n` to 1.
-   - For `i = 0` (bit 0 of `num1`), the bit is `1` and `n > 0`, so we set the bit in `res`: `res |= (1 << 0)` gives `res = 3`. Decrement `n` to 0.
-   - Since `n == 0`, return `res = 3`.
+16. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the result after all necessary bits have been assigned.
 
-3. **Result:**
-   - The result is `3`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-#### Example 2: `num1 = 6`, `num2 = 7`
+The time complexity is O(log n) where n is the size of the integers because the algorithm processes the bits of num1 and num2.
 
-1. **Count the `1` bits in `num2`:**
-   - `num2 = 7` has three `1` bits, so `n = 3`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-2. **Iterate over `num1`:**
-   - `num1 = 6` has two `1` bits at positions 2 and 1.
-   - Start with `res = 0`.
-   - For `i = 2` (bit 2 of `num1`), the bit is `1` and `n > 0`, so we set the bit in `res`: `res |= (1 << 2)` gives `res = 4`. Decrement `n` to 2.
-   - For `i = 1` (bit 1 of `num1`), the bit is `1` and `n > 0`, so we set the bit in `res`: `res |= (1 << 1)` gives `res = 6`. Decrement `n` to 1.
-   - For `i = 0` (bit 0 of `num1`), the bit is `0`. We move to the next step to place the remaining `1` bits.
+The space complexity is O(1) as the solution uses a constant amount of space to store intermediate results.
 
-3. **Place remaining `1` bits:**
-   - `n = 1`, and we need to place one `1` bit. For `i = 0`, `res = 6` (bit 0 is `0`), so we set it: `res |= (1 << 0)` gives `res = 7`. Decrement `n` to 0.
+**Happy Coding! 🎉**
 
-4. **Result:**
-   - The result is `7`.
-
-### Conclusion
-
-This solution uses bitwise operations and a greedy approach to efficiently minimize the XOR of two numbers while ensuring that the result has the same number of `1` bits as `num2`. The time and space complexity of the solution are both constant, making it an optimal solution for this problem. The algorithm is both efficient and easy to understand.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-xor/description/)
 

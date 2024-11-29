@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "p5Ocm71wB0E"
 youtube_upload_date="2021-02-07"
 youtube_thumbnail="https://i.ytimg.com/vi/p5Ocm71wB0E/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,113 +28,132 @@ youtube_thumbnail="https://i.ytimg.com/vi/p5Ocm71wB0E/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a matrix where each element indicates if two cities are directly connected. Your task is to determine the number of provinces formed by the cities. A province is a group of directly or indirectly connected cities.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an n x n matrix 'isConnected' where 'isConnected[i][j]' is 1 if city 'i' is connected directly to city 'j', and 0 otherwise.
+- **Example:** `Input: isConnected = [[1, 1, 0], [1, 1, 0], [0, 0, 1]]`
+- **Constraints:**
+	- 1 <= n <= 200
+	- n == isConnected.length
+	- n == isConnected[i].length
+	- isConnected[i][j] is 1 or 0.
+	- isConnected[i][i] == 1
+	- isConnected[i][j] == isConnected[j][i]
 
-{{< highlight cpp >}}
-class UnionFind {
-    public:
-        vector<int> par;
-        int grp;
-        UnionFind(int n) {
-            par.resize(n);
-            grp = n;
-            for(int i = 0; i < n; i++)
-                par[i] = i;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of provinces in the network of cities.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output is an integer representing the total number of provinces.
 
-        bool join(int i, int j) {
-            int x = find(i);
-            int y = find(j);
-            if(x != y) {
-                par[x] = y;
-                grp--;
-                return true;
-            }
-            return false;
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the number of provinces by grouping cities that are connected directly or indirectly.
 
-        int find(int x) {
-            int y = par[x];
-            return par[x] = x == y? x: find(y);
-        }
-};
+- Use a depth-first search (DFS) or union-find approach to group cities that are directly or indirectly connected.
+- Track the groups of cities and count how many separate groups (provinces) there are.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input matrix is always valid and satisfies the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: isConnected = [[1, 1, 0], [1, 1, 0], [0, 0, 1]]`  \
+  **Explanation:** In this example, there are two provinces: one consisting of city 1 and city 2, and the second consisting only of city 3.
 
-class Solution {
-public:
-    int findCircleNum(vector<vector<int>>& grid) {
-        int n = grid.size();
-        UnionFind* uf = new UnionFind(n);
-        for(int i = 0; i < n; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 1) uf->join(i, j);
-        
-        return uf->grp;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using either Depth-First Search (DFS) or Union-Find algorithms. Both approaches will allow us to group cities that are connected either directly or indirectly.
 
-### Problem Statement
-The problem revolves around determining the number of distinct provinces in a given grid of relationships (grid[i][j] = 1 means person `i` and person `j` are directly connected). This is a classic problem that can be solved using the Union-Find (also known as Disjoint Set Union, DSU) data structure.
+### Initial Thoughts 💭
+- We need to find groups of connected cities.
+- This can be done by either performing DFS for each unvisited city or by using union-find to group connected cities.
+- Using DFS, we can traverse the matrix and mark all connected cities as visited for each unvisited city, which will allow us to count the number of provinces.
+{{< dots >}}
+### Edge Cases 🌐
+- The input matrix will always contain at least one city, so there will never be an empty input.
+- The algorithm should efficiently handle matrices up to 200 x 200 in size.
+- If all cities are isolated (no connections), each city forms its own province.
+- Ensure the algorithm handles the matrix dimensions efficiently for the upper limit of 200 cities.
+{{< dots >}}
+## Code 💻
+```cpp
+int findCircleNum(vector<vector<int>>& grid) {
+    int n = grid.size();
+    UnionFind* uf = new UnionFind(n);
+    for(int i = 0; i < n; i++)
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] == 1) uf->join(i, j);
+    
+    return uf->grp;
+}
+```
 
-Given an `n x n` matrix `grid`, where each element `grid[i][j]` is either `1` (indicating that person `i` and person `j` are friends) or `0` (indicating no direct friendship), our task is to determine how many distinct groups (provinces) exist. A group is formed when there is a way to indirectly or directly connect all people in that group. A province is defined as a group of people who are all connected directly or indirectly.
+This function finds the number of connected components (or friend circles) in a given 2D grid, where each cell represents a person, and a value of 1 indicates a friendship. The function uses Union-Find (Disjoint Set Union) to merge connected people and returns the number of disjoint sets (friend circles).
 
-### Approach
-To solve the problem efficiently, we can leverage the Union-Find (or Disjoint Set Union) data structure, which supports two key operations:
-1. **Union**: Merging two disjoint sets into one.
-2. **Find**: Finding the representative or the root of the set to which an element belongs.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findCircleNum(vector<vector<int>>& grid) {
+	```
+	Defines the function `findCircleNum`, which calculates the number of connected components (friend circles) in the given `grid`.
 
-By treating each individual person as an element in a set, we can use the Union-Find structure to efficiently track connected individuals. Each time two people (i.e., `i` and `j`) are found to be connected (i.e., `grid[i][j] = 1`), we unify them into the same group. At the end, the number of distinct groups (provinces) will be the number of different sets left.
+2. **Matrix Size Calculation**
+	```cpp
+	    int n = grid.size();
+	```
+	Calculates the size of the grid (number of rows/columns) and stores it in variable `n`.
 
-The key idea behind using the Union-Find data structure is its efficiency in handling dynamic connectivity queries. The "find" operation finds the representative (root) of an element's set, and the "union" operation merges two sets efficiently, keeping track of connections without having to explore the entire matrix repeatedly.
+3. **UnionFind Initialization**
+	```cpp
+	    UnionFind* uf = new UnionFind(n);
+	```
+	Creates a new instance of the `UnionFind` class, initializing it with the grid size `n`. This object will be used to manage the union and find operations for the friend circles.
 
-### Code Breakdown (Step by Step)
-The code consists of two main components: the `UnionFind` class and the `Solution` class.
+4. **Outer Loop (Row Traversal)**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts the outer loop to traverse each row in the grid.
 
-#### `UnionFind` Class
-This class implements the Union-Find data structure with path compression and union by rank/size to ensure that the operations are efficient.
+5. **Inner Loop (Column Traversal)**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Starts the inner loop to traverse each column in the current row of the grid.
 
-1. **Member Variables**:
-   - `par`: A vector of integers where `par[i]` indicates the parent (or root) of the element `i`. Initially, every person is their own parent.
-   - `grp`: An integer to keep track of the number of disjoint sets (provinces) currently in the system. Initially, this is set to `n`, as each person is their own province.
+6. **Union Operation**
+	```cpp
+	        if(grid[i][j] == 1) uf->join(i, j);
+	```
+	Checks if there is a friendship (grid[i][j] == 1). If true, performs a `union` operation to merge the sets of `i` and `j` using the `join` method of the `UnionFind` class.
 
-2. **Constructor**:
-   The constructor initializes the `par` vector to represent each person as their own root, i.e., `par[i] = i` for all `i` from `0` to `n-1`. It also initializes `grp` to `n` as initially each person is a separate province.
+7. **Return Statement**
+	```cpp
+	    return uf->grp;
+	```
+	Returns the number of distinct groups (friend circles) found in the grid, which is stored in the `grp` attribute of the `UnionFind` object.
 
-3. **`join` Function**:
-   This function connects two people (i.e., merges two sets). It uses the `find` function to check if both people are already in the same group. If not, it makes one the root of the other, reducing the number of groups (`grp--`).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-4. **`find` Function**:
-   This function returns the representative (root) of the set that a particular element belongs to. It uses **path compression** to ensure that future queries are faster by flattening the tree structure of sets.
+Since we need to process each entry in the matrix to determine connectivity, the time complexity is O(n^2).
 
-#### `Solution` Class
-The `Solution` class contains the `findCircleNum` function, which is the main function to solve the problem.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
 
-1. **Input**:
-   - The input is a `grid`, which is a 2D array where each element `grid[i][j] = 1` means person `i` and person `j` are connected, and `0` means they are not.
+The space complexity is O(n) for the visited array, and O(n^2) for storing the matrix.
 
-2. **Union-Find Initialization**:
-   The function first initializes a `UnionFind` object `uf` for the given `n` people (i.e., the size of the grid). This object will help in managing the dynamic connectivity of the individuals.
+**Happy Coding! 🎉**
 
-3. **Iterate Over the Grid**:
-   The nested loop iterates through every pair `(i, j)` in the grid. If `grid[i][j] = 1`, indicating that person `i` and person `j` are connected, the `join` function is called to unite their respective groups. This will ensure that all people who are directly or indirectly connected are part of the same group.
-
-4. **Result**:
-   After all pairs have been processed, the number of distinct provinces (groups) is stored in `uf->grp`, and this value is returned as the result.
-
-### Complexity
-#### Time Complexity:
-- The `find` and `join` operations in Union-Find are typically near constant time, denoted as **O(α(n))**, where **α(n)** is the inverse Ackermann function, which grows very slowly and is almost constant for practical input sizes.
-- The code iterates over all pairs `(i, j)` in the `n x n` grid, which gives a time complexity of **O(n^2)**.
-- Therefore, the overall time complexity is **O(n^2)**, dominated by the grid traversal, with the Union-Find operations being almost constant time.
-
-#### Space Complexity:
-- The space complexity is **O(n)**, as we need to store the parent array `par` to keep track of the connected components, and an additional integer `grp` to store the number of provinces.
-
-### Conclusion
-The solution is both time and space efficient for the given problem of finding the number of provinces in a grid of connections. By using the Union-Find data structure with path compression and union by rank, we ensure that even with large inputs, the operations remain nearly constant time. This approach is well-suited for problems involving dynamic connectivity, such as finding connected components in graphs.
-
-The problem-solving technique applied here, which utilizes the Union-Find structure, is fundamental for scenarios where we need to efficiently handle multiple queries regarding connectedness, such as social network analysis, connectivity in graphs, and dynamic component merging.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-provinces/description/)
 

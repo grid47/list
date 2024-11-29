@@ -14,138 +14,183 @@ img_src = ""
 youtube = "PEKRvVTWf4g"
 youtube_upload_date="2023-04-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/PEKRvVTWf4g/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 2D grid of integers, you need to determine the largest prime number present on any of the diagonals of the grid. A number is considered prime if it is greater than 1 and divisible only by 1 and itself. The diagonal elements are those where the row and column indices are the same or sum to the length of the grid minus 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a square grid of integers 'nums', represented as a 2D array. Each element in nums is an integer between 1 and 4*10^6.
+- **Example:** `nums = [[2, 3, 5], [7, 11, 13], [17, 19, 23]]`
+- **Constraints:**
+	- 1 <= nums.length <= 300
+	- nums.length == numsi.length
+	- 1 <= nums[i][j] <= 4 * 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest prime number present on any of the diagonals in the grid. If no prime number is found, return 0.
+- **Example:** `Output: 23`
+- **Constraints:**
+	- The output is a single integer representing the largest prime number on the diagonals, or 0 if none is found.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the largest prime number that appears on at least one diagonal of the matrix.
+
+- Step 1: Loop through the grid and check both diagonals (top-left to bottom-right and top-right to bottom-left).
+- Step 2: For each number on the diagonals, check if it is prime.
+- Step 3: Keep track of the largest prime number encountered.
+- Step 4: Return the largest prime, or 0 if no prime is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- You can assume the matrix will be square (same number of rows and columns).
+- The elements are integers, and the prime check will be done for values between 1 and 4*10^6.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [[2, 3, 5], [7, 11, 13], [17, 19, 23]]`  \
+  **Explanation:** The diagonals are [2, 11, 23] and [5, 11, 17]. The prime numbers on these diagonals are 2, 11, 17, 23, and the largest prime is 23.
+
+- **Input:** `nums = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`  \
+  **Explanation:** The diagonals are [1, 5, 9] and [3, 5, 7]. The prime numbers are 5 and 7, and the largest prime is 7.
+
+{{< dots >}}
+## Approach 🚀
+We will first iterate through the diagonal elements of the 2D grid and check if each element is prime. We will keep track of the largest prime number encountered during the iteration.
+
+### Initial Thoughts 💭
+- Prime number checking can be computationally expensive, so we need an efficient method to check for primes, such as using a sieve of Eratosthenes for precomputation.
+- We can precompute prime numbers up to 4 * 10^6 using a sieve, which will allow us to quickly check if a number is prime during the iteration through the matrix diagonals.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input grid is empty, return 0.
+- Ensure that the algorithm handles grids of size up to 300x300 efficiently.
+- Consider cases where all diagonal elements are non-prime, in which case the function should return 0.
+- Handle cases where the matrix contains the maximum integer value of 4 * 10^6.
+{{< dots >}}
+## Code 💻
+```cpp
   // seive
   bool isPrime(int n){
-      if (n <= 2 || n % 2 == 0) 
-          return n == 2;
-      for (int i = 3; i * i <= n; i += 2)
-          if (n % i == 0)
-              return false;
-      return true;
+  if (n <= 2 || n % 2 == 0) 
+      return n == 2;
+  for (int i = 3; i * i <= n; i += 2)
+      if (n % i == 0)
+          return false;
+  return true;
   }      
   int diagonalPrime(vector<vector<int>>& n) {
-      int p = 0;
-      for (int i = 0; i < n.size(); ++i)
-          p = max({p, isPrime(n[i][i]) * n[i][i], 
-              isPrime(n[i][n.size() - i - 1]) * n[i][n.size() - i - 1]});
-      return p;
+  int p = 0;
+  for (int i = 0; i < n.size(); ++i)
+      p = max({p, isPrime(n[i][i]) * n[i][i], 
+          isPrime(n[i][n.size() - i - 1]) * n[i][n.size() - i - 1]});
+  return p;
   }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks you to find the largest prime number from the diagonals of a square matrix `n`. The matrix is of size `n x n`, where each element is an integer. Specifically, you need to examine the two diagonals:
-1. The **main diagonal** where the elements have the same row and column index, i.e., `n[i][i]`.
-2. The **anti-diagonal** where the elements have row index `i` and column index `n-i-1`.
-
-Your goal is to find the largest prime number from these two diagonals. If no prime number exists on either diagonal, return `0`.
-
-### Approach
-
-To solve this problem efficiently, we can break it down into the following steps:
-
-1. **Prime Check Function (isPrime)**: 
-   We need a utility function to check if a number is prime. A prime number is a number greater than 1 that has no divisors other than 1 and itself. For efficient checking, we can use trial division up to the square root of the number, as any factor larger than the square root would have a corresponding factor smaller than the square root.
-
-2. **Iterate Through Diagonals**: 
-   Once we have the prime check function, we can iterate through both diagonals (main diagonal and anti-diagonal) of the matrix and apply the prime check on each element.
-
-3. **Track the Largest Prime**:
-   As we iterate over the diagonals, we compare the prime numbers and track the largest prime number encountered. If no prime number is found, we return `0`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Prime Check Function (`isPrime`)
-
-```cpp
-bool isPrime(int n){
-    if (n <= 2 || n % 2 == 0) 
-        return n == 2;
-    for (int i = 3; i * i <= n; i += 2)
-        if (n % i == 0)
-            return false;
-    return true;
-}
 ```
 
-- **Explanation**:
-  - The `isPrime` function checks whether a given number `n` is prime.
-  - **Base Case**: First, the function checks if `n` is less than or equal to 2 or is even. If `n` is 2, the function returns `true` since 2 is the only even prime number.
-  - For numbers greater than 2, we check if the number is divisible by any integer from `3` to `sqrt(n)`. We only check odd numbers (hence `i += 2`), as even numbers greater than 2 cannot be prime.
-  - If `n` is divisible by any number in this range, it is not prime, and we return `false`. If no divisors are found, the number is prime, and we return `true`.
+The complete solution defines two functions. The 'isPrime' function checks whether a number is prime, and 'diagonalPrime' finds the largest prime number on the diagonals of a 2D matrix.
 
-#### Step 2: Diagonal Traversal
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	  bool isPrime(int n){
+	```
+	The function 'isPrime' checks if a number is prime. It takes an integer 'n' as input.
 
-```cpp
-int diagonalPrime(vector<vector<int>>& n) {
-    int p = 0;
-    for (int i = 0; i < n.size(); ++i)
-        p = max({p, isPrime(n[i][i]) * n[i][i], 
-            isPrime(n[i][n.size() - i - 1]) * n[i][n.size() - i - 1]});
-    return p;
-}
-```
+2. **Condition**
+	```cpp
+	  if (n <= 2 || n % 2 == 0) 
+	```
+	The condition checks if the number is less than or equal to 2 or if it is divisible by 2, immediately returning true for number 2.
 
-- **Explanation**:
-  - The function `diagonalPrime` is where the main logic resides.
-  - We initialize a variable `p` to track the largest prime number found. Initially, `p` is set to `0`.
-  - We loop over the matrix `n` using a single loop, where `i` represents the current row and column index.
-  - For each iteration, we check both diagonals:
-    - **Main Diagonal**: The element at position `[i][i]`.
-    - **Anti-Diagonal**: The element at position `[i][n.size() - i - 1]`, where `n.size() - i - 1` calculates the corresponding column index for the anti-diagonal.
-  - For each of these elements, we check if they are prime using the `isPrime` function. If they are prime, we multiply the prime number by `1` (since `isPrime` returns `true` or `false`, which can be treated as `1` or `0` respectively).
-  - We then compare the current prime number with the current maximum prime `p`. If it is larger, we update `p`.
-  - After looping through all rows, we return the value of `p`, which holds the largest prime number found on the diagonals. If no prime was found, `p` will remain `0`.
+3. **Return Statement**
+	```cpp
+	      return n == 2;
+	```
+	If 'n' equals 2, the function returns true, indicating that 2 is a prime number.
 
-#### Step 3: Return the Result
+4. **Loop**
+	```cpp
+	  for (int i = 3; i * i <= n; i += 2)
+	```
+	This loop checks all odd numbers starting from 3 up to the square root of 'n' to see if any divide 'n'.
 
-- After iterating through the entire matrix and checking both diagonals, the function will return the largest prime found. If no prime numbers are found on the diagonals, the function will return `0`.
+5. **Condition**
+	```cpp
+	      if (n % i == 0)
+	```
+	This condition checks if 'n' is divisible by the current value of 'i'.
 
-### Complexity Analysis
+6. **Return Statement**
+	```cpp
+	          return false;
+	```
+	If 'n' is divisible by any number 'i', the function returns false, indicating that 'n' is not a prime number.
 
-#### Time Complexity:
+7. **Return Statement**
+	```cpp
+	  return true;
+	```
+	If no divisors are found, the function returns true, indicating that 'n' is a prime number.
 
-1. **Prime Check (`isPrime`)**: 
-   - For each element on the diagonals, we perform a primality test, which runs in \(O(\sqrt{n})\) time, where `n` is the value of the element being checked.
-   
-2. **Loop Over Diagonal Elements**:
-   - We loop over the diagonals of the matrix, which has a size of \(n\). Therefore, we perform the primality check for `2n` elements in total (both diagonals).
+8. **Function Definition**
+	```cpp
+	  int diagonalPrime(vector<vector<int>>& n) {
+	```
+	The function 'diagonalPrime' takes a 2D vector 'n' as input and finds the largest prime number on its diagonals.
 
-3. **Overall Time Complexity**:
-   - The time complexity is \(O(n \cdot \sqrt{m})\), where `n` is the size of the matrix (number of rows or columns), and `m` is the maximum value in the matrix, as we perform a primality test for each diagonal element.
+9. **Variable Declaration**
+	```cpp
+	  int p = 0;
+	```
+	A variable 'p' is declared to store the largest prime number found on the diagonals.
 
-#### Space Complexity:
+10. **Loop**
+	```cpp
+	  for (int i = 0; i < n.size(); ++i)
+	```
+	This loop iterates through each index of the 2D vector to check the diagonals.
 
-1. **Input Matrix**: 
-   - The space complexity for the input matrix `n` is \(O(n^2)\), where `n` is the size of the matrix (number of rows and columns).
+11. **Max Calculation**
+	```cpp
+	      p = max({p, isPrime(n[i][i]) * n[i][i], 
+	```
+	The current maximum prime value is updated by comparing it with the prime values found at the current diagonal positions.
 
-2. **Auxiliary Space**:
-   - We use a constant amount of extra space for the prime check (`isPrime`) and the `p` variable to track the largest prime. This does not require additional space beyond \(O(1)\).
+12. **Max Calculation**
+	```cpp
+	          isPrime(n[i][n.size() - i - 1]) * n[i][n.size() - i - 1]});
+	```
+	The second diagonal element is also checked for primality and the maximum prime is updated.
 
-3. **Overall Space Complexity**:
-   - The space complexity is \(O(n^2)\) for storing the input matrix.
+13. **Return Statement**
+	```cpp
+	  return p;
+	```
+	The function returns the largest prime number found on either of the diagonals.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2 + P), where P is the sieve's precomputation time
 
-This solution efficiently solves the problem by:
-1. Iterating over both diagonals of the matrix.
-2. Using an optimized primality test to check if the elements on the diagonals are prime.
-3. Keeping track of the largest prime number found during the iteration.
-4. Returning the largest prime number, or `0` if no prime is found.
+The sieve of Eratosthenes takes O(P) time, where P is the largest number in the grid, and checking the diagonals takes O(n^2) time, where n is the size of the grid.
 
-With a time complexity of \(O(n \cdot \sqrt{m})\) and space complexity of \(O(n^2)\), the solution is efficient for most input sizes. The use of the `isPrime` function allows for a quick check of prime status, while the loop through the diagonals ensures we evaluate all relevant elements in the matrix.
+### Space Complexity 💾
+- **Best Case:** O(P)
+- **Worst Case:** O(P)
+
+The space complexity is dominated by the storage required for the sieve array, which has a space complexity of O(P), where P is 4 * 10^6.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-in-diagonal/description/)
 

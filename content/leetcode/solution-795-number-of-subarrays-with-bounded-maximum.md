@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "V8jAp1Zi1Os"
 youtube_upload_date="2021-06-17"
 youtube_thumbnail="https://i.ytimg.com/vi/V8jAp1Zi1Os/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,125 +28,192 @@ youtube_thumbnail="https://i.ytimg.com/vi/V8jAp1Zi1Os/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array `nums` and two integers `left` and `right`, return the number of contiguous non-empty subarrays such that the maximum value in each subarray lies within the inclusive range [left, right].
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `nums` of size `n`, and two integers `left` and `right` that represent the range of valid maximum values for the subarrays.
+- **Example:** `Input: nums = [1, 2, 3], left = 2, right = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^9
+	- 0 <= left <= right <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numSubarrayBoundedMax(vector<int>& nums, int left, int right) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the number of valid subarrays where the maximum value lies within the range [left, right].
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The answer will always fit within a 32-bit integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count all contiguous subarrays such that the maximum element in each subarray falls within the given range [left, right].
+
+- Initialize a variable `ans` to keep track of the number of valid subarrays.
+- Iterate through each element of `nums` while maintaining a variable `dp` to count valid subarrays ending at the current index.
+- If the current element is less than `left`, add `dp` to `ans` since the subarray formed up to this element is valid.
+- If the current element is greater than `right`, reset `dp` as this element and any subarray containing it are no longer valid.
+- If the current element is within the range [left, right], calculate `dp` as the number of valid subarrays that can be formed with the current element and add it to `ans`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` is non-empty and contains integers.
+- The range [left, right] is valid and falls within the specified bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 3], left = 2, right = 3`  \
+  **Explanation:** There are four subarrays where the maximum element lies between 2 and 3: [2], [2, 3], [3], and [1, 2, 3].
+
+- **Input:** `Input: nums = [2, 9, 2, 5, 6], left = 2, right = 8`  \
+  **Explanation:** The valid subarrays are [2], [2, 9], [9], [2, 9, 2], [2, 9, 2, 5], [9, 2], and [2]. The total count is 7.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by iterating through the array and using a sliding window approach to count valid subarrays. We keep track of the number of valid subarrays ending at each position using a dynamic programming approach.
+
+### Initial Thoughts 💭
+- We need an efficient way to count subarrays. A brute force approach could take too long.
+- A sliding window approach combined with dynamic programming should work well here, as it allows us to track subarrays in constant time.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` is empty, the result should be 0.
+- For large arrays, the solution should still be efficient enough to handle up to 10^5 elements.
+- If all elements in the array are larger than `right`, no valid subarrays will exist.
+- The array should be non-empty, and `left` and `right` should be valid integer values.
+{{< dots >}}
+## Code 💻
+```cpp
+int numSubarrayBoundedMax(vector<int>& nums, int left, int right) {
+    
+    int n = nums.size();
+    
+    int ans = 0, dp = 0, prv = -1;
+    for(int i = 0; i < n; i++) {
         
-        int n = nums.size();
-        
-        int ans = 0, dp = 0, prv = -1;
-        for(int i = 0; i < n; i++) {
+        if(nums[i] < left)
+            ans += dp;
             
-            if(nums[i] < left)
-                ans += dp;
-                
-            if(nums[i] > right) {
-                dp = 0;
-                prv = i;
-            }
-                
-            if(nums[i] >= left && nums[i] <= right) {
-                dp = i - prv;
-                ans += dp;
-            }
-                
+        if(nums[i] > right) {
+            dp = 0;
+            prv = i;
         }
-        
-        return ans;
+            
+        if(nums[i] >= left && nums[i] <= right) {
+            dp = i - prv;
+            ans += dp;
+        }
+            
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-In this problem, we are tasked with counting the number of contiguous subarrays within a given array `nums` whose maximum element is within a specified range `[left, right]`. The problem is essentially about finding subarrays that have their largest value within a given boundary. We need to implement an efficient algorithm to compute the total number of valid subarrays.
-
-A subarray is defined as any contiguous segment of the array. The problem requires us to count how many subarrays have a maximum element within the range of `[left, right]`.
-
-### Approach
-To solve this problem, we need to take the following approach:
-
-1. **Breaking the Problem into Subparts**:
-   - We first identify two parts:
-     - Subarrays where all elements are strictly smaller than `left`.
-     - Subarrays where all elements lie within the range `[left, right]`.
-   - We can solve the problem by counting all subarrays where the maximum element is less than or equal to `right`, and subtracting subarrays where the maximum element is strictly smaller than `left`.
-
-2. **Counting Valid Subarrays**:
-   - The key observation is that we can calculate the number of subarrays where the maximum element is less than or equal to a given value using a sliding window approach. This allows us to efficiently compute the number of subarrays that meet the criteria.
-
-3. **Efficient Calculation**:
-   - We use a sliding window technique to track subarrays where the maximum element is within the range `[left, right]`.
-   - By using a variable `dp` that stores the number of valid subarrays ending at the current index, we can keep updating it as we traverse through the array.
-
-4. **Handling the Range**:
-   - As we traverse through the array, we adjust the `dp` value based on the current element's value relative to the `left` and `right` boundaries. When the value exceeds `right`, we reset the count, as any subarray containing that element would no longer be valid.
-
-### Code Breakdown (Step by Step)
-The code implementation uses a sliding window approach to efficiently solve the problem. Let's break it down step by step:
-
-#### Step 1: Initialize Variables
-```cpp
-int n = nums.size();
-int ans = 0, dp = 0, prv = -1;
+    
+    return ans;
+}
 ```
-- `n`: The size of the `nums` array.
-- `ans`: This variable keeps track of the total number of valid subarrays.
-- `dp`: A variable used to count the number of valid subarrays ending at the current index. It is updated based on the current element.
-- `prv`: This variable tracks the last index where a number greater than `right` was found. It is used to calculate the number of valid subarrays between two indices.
 
-#### Step 2: Traverse Through the Array
-```cpp
-for(int i = 0; i < n; i++) {
-    if(nums[i] < left)
-        ans += dp;
-```
-- We iterate over each element of the array `nums`.
-- If the current element is less than `left`, then any subarray ending at `i` will not contribute to the valid subarrays with a maximum within the range `[left, right]`. We add `dp` to `ans`, as the subarrays from the previous positions are still valid.
+This function calculates the number of subarrays with a bounded maximum in the range [left, right]. It iterates through the array, maintaining a count of subarrays that meet the conditions. The code uses a dynamic programming approach to handle this efficiently.
 
-#### Step 3: Handle Elements Greater Than `right`
-```cpp
-    if(nums[i] > right) {
-        dp = 0;
-        prv = i;
-    }
-```
-- If the current element exceeds `right`, we reset `dp` to 0 because no valid subarray can end at this index if the maximum element exceeds `right`.
-- We also update `prv` to store the index of the element greater than `right`, as any valid subarrays must end before this index.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numSubarrayBoundedMax(vector<int>& nums, int left, int right) {
+	```
+	Defines the function that calculates the number of subarrays with a bounded maximum.
 
-#### Step 4: Handle Elements Within the Range `[left, right]`
-```cpp
-    if(nums[i] >= left && nums[i] <= right) {
-        dp = i - prv;
-        ans += dp;
-    }
-```
-- If the current element is within the valid range `[left, right]`, we update `dp` to the number of subarrays ending at the current index. This is calculated as `i - prv`, where `prv` is the index of the last element that exceeded `right`.
-- We add `dp` to `ans`, as it represents the count of valid subarrays that end at index `i`.
+2. **Initialize Variables**
+	```cpp
+	    
+	```
+	Prepare for the loop and initialize variables used for the calculation.
 
-#### Step 5: Return the Final Result
-```cpp
-return ans;
-```
-- Finally, the variable `ans` contains the total number of valid subarrays, and we return it.
+3. **Get Array Size**
+	```cpp
+	    int n = nums.size();
+	```
+	Calculates the size of the input array nums.
 
-### Complexity
+4. **Initialize Variables**
+	```cpp
+	    int ans = 0, dp = 0, prv = -1;
+	```
+	Initializes variables: ans for the result, dp for counting valid subarrays, and prv for tracking the previous index.
 
-#### Time Complexity:
-The time complexity of this algorithm is O(n), where `n` is the length of the input array `nums`. This is because we only traverse the array once in a single loop, and each operation inside the loop takes constant time.
+5. **Loop through Array**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins the iteration through the input array.
 
-#### Space Complexity:
-The space complexity is O(1), as we use only a few variables (`ans`, `dp`, `prv`, and `n`) to store intermediate results. The space used does not depend on the size of the input array, making the space complexity constant.
+6. **Update Answer if Element is Less than Left**
+	```cpp
+	        if(nums[i] < left)
+	```
+	If the current element is less than the left bound, accumulate the result by adding the dynamic programming state.
 
-### Conclusion
-The provided solution effectively solves the problem of counting the number of subarrays whose maximum element lies within the specified range `[left, right]`. The approach is efficient, with a time complexity of O(n) and space complexity of O(1), making it suitable for large input arrays.
+7. **Add to Answer**
+	```cpp
+	            ans += dp;
+	```
+	Adds the value of dp to the answer if the current element is less than the left bound.
 
-The sliding window technique used to keep track of valid subarrays ensures that the solution handles the constraints optimally. By updating the count of valid subarrays as we traverse the array, the solution avoids unnecessary recomputation, making it a highly efficient solution for this problem.
+8. **Handle Element Greater than Right**
+	```cpp
+	        if(nums[i] > right) {
+	```
+	Checks if the current element exceeds the upper bound.
 
-This solution is both easy to understand and efficient, demonstrating the power of the sliding window technique in solving range-based problems. Whether the input array is large or small, the algorithm will perform efficiently, providing an optimal solution to the problem of counting subarrays with bounded maximums.
+9. **Reset DP and Update Index**
+	```cpp
+	            dp = 0;
+	```
+	Resets the dynamic programming state to zero because no valid subarrays can end at this element.
+
+10. **Update Previous Index**
+	```cpp
+	            prv = i;
+	```
+	Sets the previous index to the current one, which marks the new boundary for subarray calculations.
+
+11. **Check if Element is in Range**
+	```cpp
+	        if(nums[i] >= left && nums[i] <= right) {
+	```
+	Checks if the current element is within the range [left, right].
+
+12. **Update DP for Valid Element**
+	```cpp
+	            dp = i - prv;
+	```
+	Updates dp to represent the count of subarrays ending at the current element.
+
+13. **Update Answer for Valid Subarray**
+	```cpp
+	            ans += dp;
+	```
+	Adds the number of valid subarrays (dp) to the total answer.
+
+14. **Return Final Answer**
+	```cpp
+	    return ans;
+	```
+	Returns the final count of subarrays with bounded maximum values.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), when the array is small or when no valid subarrays exist.
+- **Average Case:** O(n), since we are iterating through the array once.
+- **Worst Case:** O(n), as we always process each element of the array once.
+
+The time complexity is linear because we process each element of the array exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as the space used is constant regardless of input size.
+- **Worst Case:** O(1), since we only use a few variables for tracking counts and the solution does not use extra space proportional to the input size.
+
+The space complexity is constant because we only use a fixed amount of additional memory.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/description/)
 

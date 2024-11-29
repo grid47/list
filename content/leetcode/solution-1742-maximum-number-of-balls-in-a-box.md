@@ -14,100 +14,163 @@ img_src = ""
 youtube = "bRjEkQZ1R7Y"
 youtube_upload_date="2021-01-31"
 youtube_thumbnail="https://i.ytimg.com/vi/bRjEkQZ1R7Y/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are working in a ball factory with `n` balls numbered from `lowLimit` to `highLimit` (inclusive). You have an infinite number of boxes numbered from 1 to infinity. Your task is to place each ball into the box where the box number equals the sum of the digits of the ball's number. For example, a ball numbered 321 will go into box 6 (since 3 + 2 + 1 = 6), and a ball numbered 10 will go into box 1 (since 1 + 0 = 1). The goal is to find the box with the most balls and return the number of balls in that box.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers `lowLimit` and `highLimit`, which represent the range of ball numbers.
+- **Example:** `Input: lowLimit = 15, highLimit = 25`
+- **Constraints:**
+	- 1 <= lowLimit <= highLimit <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countBalls(int lowLimit, int highLimit) {
-        
-        vector<int> box (46,0);
-        for(int i = lowLimit;i<=highLimit;i++)
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of balls in any box.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The ball numbers are between 1 and 100,000.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To place balls into boxes based on the sum of digits of the ball numbers and find the box with the most balls.
+
+- 1. For each ball number, calculate the sum of its digits.
+- 2. Track how many balls are placed into each box using an array.
+- 3. Find the maximum count from the array and return it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The ball numbers are valid integers within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: lowLimit = 15, highLimit = 25`  \
+  **Explanation:** For the numbers 15 through 25, the sum of digits for each ball is calculated, and the balls are placed into their respective boxes. The box with the most balls contains 3 balls.
+
+- **Input:** `Input: lowLimit = 30, highLimit = 40`  \
+  **Explanation:** For the numbers 30 through 40, the sum of digits for each ball is calculated, and the ball count in each box is tracked. Box 3 has the most balls.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over the ball numbers, calculating the sum of their digits, and storing the count of balls in each corresponding box.
+
+### Initial Thoughts 💭
+- The sum of digits function is straightforward to implement for each ball number.
+- We can use an array to track how many balls are placed in each box.
+- The solution will need to handle up to 100,000 ball numbers efficiently, so the operations need to be optimized.
+{{< dots >}}
+### Edge Cases 🌐
+- This case is not applicable as `lowLimit` and `highLimit` are always at least 1.
+- Ensure that the solution handles the maximum possible input size (lowLimit = 1, highLimit = 100000) efficiently.
+- Consider cases where the sum of digits leads to many balls being placed in the same box.
+- The algorithm should efficiently handle input sizes up to 100,000.
+{{< dots >}}
+## Code 💻
+```cpp
+int countBalls(int lowLimit, int highLimit) {
+    
+    vector<int> box (46,0);
+    for(int i = lowLimit;i<=highLimit;i++)
+    {
+        int sum = 0;
+        int temp = i;
+        while(temp)
         {
-            int sum = 0;
-            int temp = i;
-            while(temp)
-            {
-                sum = sum + temp%10;
-                temp = temp/10;
-            }
-            box[sum]++;
+            sum = sum + temp%10;
+            temp = temp/10;
         }
-        
-        return *max_element(box.begin(),box.end());
+        box[sum]++;
     }
-};
-{{< /highlight >}}
----
+    
+    return *max_element(box.begin(),box.end());
+}
+```
 
-### Problem Statement
+This function counts the number of balls that can be placed in boxes, where each ball is assigned to a box based on the sum of digits of the ball number. It returns the maximum number of balls placed in any single box.
 
-The problem is to find the maximum number of balls that can be placed in a box based on specific rules. Given two integers, `lowLimit` and `highLimit`, each number between `lowLimit` and `highLimit` represents a ball. The ball is placed in a box determined by the sum of its digits. The task is to determine the maximum number of balls in any single box after placing all balls from `lowLimit` to `highLimit` based on their digit sums.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int countBalls(int lowLimit, int highLimit) {
+	```
+	This is the function declaration for `countBalls`, which takes two integers, `lowLimit` and `highLimit`, as input and returns the maximum number of balls placed in any box.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    vector<int> box (46,0);
+	```
+	This line initializes a vector `box` of size 46 (to handle sums of digits from 0 to 45) with all values set to 0. It will store the count of balls in each box.
 
-1. **Counting Digit Sums**: For each number from `lowLimit` to `highLimit`, calculate the sum of its digits. This sum will determine the index of the box where the ball is placed.
-  
-2. **Tracking Ball Counts per Box**: Using a vector `box` of size 46 (as the maximum possible sum of digits for this range will not exceed 45), increment the count for the box corresponding to each sum.
-  
-3. **Finding the Maximum Count**: After counting the balls in each box, find the box with the highest count. This maximum count is the result.
+3. **Loop Start**
+	```cpp
+	    for(int i = lowLimit;i<=highLimit;i++)
+	```
+	This loop iterates over all the ball numbers from `lowLimit` to `highLimit`.
 
-### Code Breakdown (Step by Step)
+4. **Variable Initialization**
+	```cpp
+	        int sum = 0;
+	```
+	The variable `sum` is initialized to 0 and will be used to store the sum of the digits of the current ball number.
 
-The solution involves iterating over the range of numbers and performing simple arithmetic operations to calculate the sum of the digits. Let’s break down the code:
+5. **Variable Initialization**
+	```cpp
+	        int temp = i;
+	```
+	The variable `temp` is initialized with the current ball number `i` and will be used to compute the sum of digits.
 
-1. **Initializing the `box` Array**: This array of size 46 (initialized to zero) tracks the count of balls in each box. Each index in `box` corresponds to a possible sum of digits, where `box[i]` represents the count for the box with digit sum `i`.
+6. **Loop Start**
+	```cpp
+	        while(temp)
+	```
+	This `while` loop runs as long as `temp` is not 0, to extract and sum the digits of the number.
 
-   ```cpp
-   vector<int> box(46, 0);
-   ```
+7. **Sum Calculation**
+	```cpp
+	            sum = sum + temp%10;
+	```
+	This line adds the last digit of `temp` (obtained by `temp % 10`) to `sum`.
 
-2. **Looping through Each Number in Range**: The outer loop iterates over each integer `i` from `lowLimit` to `highLimit`.
+8. **Variable Update**
+	```cpp
+	            temp = temp/10;
+	```
+	This line removes the last digit of `temp` by performing integer division (`temp / 10`).
 
-   ```cpp
-   for(int i = lowLimit; i <= highLimit; i++) {
-   ```
+9. **Array Operation**
+	```cpp
+	        box[sum]++;
+	```
+	This line increments the count of balls placed in the box corresponding to the digit sum `sum`.
 
-3. **Calculating the Digit Sum**: For each number `i`, calculate the sum of its digits by iterating through each digit.
+10. **Return**
+	```cpp
+	    return *max_element(box.begin(),box.end());
+	```
+	This line returns the maximum value from the `box` vector, which represents the maximum number of balls placed in any box.
 
-   ```cpp
-       int sum = 0;
-       int temp = i;
-       while(temp) {
-           sum += temp % 10;
-           temp /= 10;
-       }
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where `n` is the number of ball numbers in the range.
+- **Average Case:** O(n), since calculating the sum of digits and updating the box counts is done in constant time for each number.
+- **Worst Case:** O(n), as we must compute the sum of digits for each number from `lowLimit` to `highLimit`.
 
-   - We initialize `sum` to zero for each new ball.
-   - In the `while` loop, we add each last digit to `sum` using `temp % 10` and remove the last digit by integer division (`temp /= 10`).
+The time complexity is linear in the number of ball numbers.
 
-4. **Updating the Box Count**: After calculating the sum of digits for the current ball, increment the corresponding index in `box` by one.
+### Space Complexity 💾
+- **Best Case:** O(46), since the space needed is constant regardless of input size.
+- **Worst Case:** O(46), as the sum of digits for any number between 1 and 100,000 cannot exceed 45.
 
-   ```cpp
-       box[sum]++;
-   ```
+The space complexity is constant, as we use a fixed-size array to count the balls in boxes.
 
-5. **Finding the Maximum Ball Count**: After processing all numbers, find the maximum value in `box` to get the highest number of balls in any single box.
+**Happy Coding! 🎉**
 
-   ```cpp
-   return *max_element(box.begin(), box.end());
-   ```
-
-### Complexity
-
-- **Time Complexity**: The algorithm runs in \(O(n \times d)\), where \(n\) is the number of integers in the range (`highLimit - lowLimit + 1`) and \(d\) is the number of digits in each integer (at most, this is a constant factor of about 6 in this range). Thus, the complexity is linear with respect to `n`.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) as we use a fixed-size vector `box` of size 46.
-
-### Conclusion
-
-This solution efficiently calculates the maximum number of balls in any single box by leveraging the digit sum property. By using a fixed-size vector to store counts, it avoids unnecessary space allocation and allows for direct access to counts by digit sum, providing a highly optimized approach. This approach is effective for the given constraints and demonstrates how small mathematical insights, like summing digits to classify numbers, can simplify a problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-balls-in-a-box/description/)
 

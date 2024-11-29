@@ -14,109 +14,122 @@ img_src = ""
 youtube = "jVRdLKA6t4k"
 youtube_upload_date="2021-09-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/jVRdLKA6t4k/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string 'word' and a character 'ch'. Reverse the portion of the string starting at index 0 and ending at the index of the first occurrence of 'ch'. If 'ch' is not found, return the original string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string 'word' and a character 'ch'. The length of the string is between 1 and 250 characters. The string consists of lowercase English letters.
+- **Example:** `word = 'abcdefd', ch = 'd'`
+- **Constraints:**
+	- 1 <= word.length <= 250
+	- word consists of lowercase English letters
+	- ch is a lowercase English letter
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string reversePrefix(string word, char ch) {
-        auto p = word.find(ch);
-        if (p != string::npos)
-            reverse(begin(word), begin(word) + p + 1);
-        return word;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the resulting string after reversing the segment from index 0 to the first occurrence of 'ch'. If 'ch' is not found, return the original string.
+- **Example:** `'dcbaefd'`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to reverse the substring from the start of the string to the first occurrence of the character 'ch'. If 'ch' is absent, return the string unchanged.
 
-The problem involves reversing a substring of a given string `word` from the beginning of the string up to and including the first occurrence of a specified character `ch`. If the character `ch` does not exist in the string, the string should be returned unchanged. This operation is a common string manipulation task that requires efficiently finding the position of the character and performing a reversal on the substring.
+- 1. Find the first occurrence of 'ch' in the string.
+- 2. If 'ch' is found, reverse the substring from index 0 to the index of the first occurrence of 'ch'.
+- 3. If 'ch' is not found, return the original string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always contain valid lowercase letters, and the character 'ch' is also a lowercase letter.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word = 'abcdefd', ch = 'd'`  \
+  **Explanation:** The first occurrence of 'd' is at index 3. The substring from index 0 to 3 is reversed, giving 'dcbaefd'.
 
-### Approach
+- **Input:** `word = 'abcd', ch = 'z'`  \
+  **Explanation:** 'z' does not exist in 'abcd', so no reversal is done and the original string is returned.
 
-To tackle this problem, we will follow a straightforward approach:
+{{< dots >}}
+## Approach 🚀
+The solution finds the first occurrence of 'ch' and reverses the segment from index 0 to the first occurrence of 'ch'. If 'ch' is not found, the string remains unchanged.
 
-1. **Finding the Character**: Use the `find` method to locate the first occurrence of the character `ch` in the string `word`. This method returns the index of the character if found or `string::npos` if the character is not present.
-
-2. **Reversing the Substring**: If the character is found, we will reverse the substring from the beginning of the string to the index of the found character, inclusive. This can be achieved using the `reverse` function from the `<algorithm>` library.
-
-3. **Returning the Result**: Finally, we will return the modified string. If the character was not found, we return the original string without any modifications.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the provided code for a better understanding:
-
+### Initial Thoughts 💭
+- We need to identify the index of the first occurrence of 'ch' and reverse the substring if it exists.
+- This problem requires string manipulation and can be solved efficiently by utilizing Python's built-in string functions.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string always has at least one character.
+- Handle strings up to the maximum length of 250 characters.
+- If 'ch' is not found in the string, return the original string without modification.
+- Ensure the string contains only lowercase letters and falls within the specified length range.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    string reversePrefix(string word, char ch) {
-```
-- We define a class named `Solution` that contains a public method `reversePrefix`.
-- The method takes two parameters: a string `word` and a character `ch`.
-
-```cpp
-        auto p = word.find(ch);
-```
-- We use the `find` method to search for the first occurrence of the character `ch` within the string `word`. The result is stored in the variable `p`. 
-- `p` will hold the index of the character if found, or `string::npos` if the character is not present.
-
-```cpp
-        if (p != string::npos)
-            reverse(begin(word), begin(word) + p + 1);
-```
-- We check if `p` is not equal to `string::npos`, which indicates that the character was found in the string.
-- If found, we use the `reverse` function to reverse the substring from the start of the string up to and including the character at index `p`.
-- The `begin(word)` function gets an iterator to the beginning of the string, and `begin(word) + p + 1` points to the position right after the character `ch`.
-
-```cpp
-        return word;
-    }
-};
-```
-- Finally, we return the modified string `word`. If the character `ch` was not found, `word` remains unchanged and is returned as is.
-
-### Complexity
-
-- **Time Complexity**: The time complexity for this solution is \(O(n)\), where \(n\) is the length of the string `word`. This is due to the need to search for the character and possibly reverse a substring of the string.
-
-- **Space Complexity**: The space complexity is \(O(1)\) if we consider the in-place reversal of the string. No additional data structures are used that scale with input size.
-
-### Conclusion
-
-The provided solution effectively solves the problem of reversing a substring of a string up to the first occurrence of a specified character. By leveraging the `find` and `reverse` functions, the implementation remains concise and efficient. This approach is beneficial in scenarios involving string manipulations, such as formatting, parsing, and data transformation tasks.
-
-The code handles both cases—when the character is present and when it is not—ensuring robustness. This makes it a valuable snippet for software development involving string operations.
-
-### Example Usage
-
-Here’s how you might utilize the `Solution` class to reverse the prefix of a string:
-
-```cpp
-#include <iostream>
-#include <string>
-using namespace std;
-
-int main() {
-    Solution sol;
-    string word = "abcdefg";
-    char ch = 'c';
-    
-    string result = sol.reversePrefix(word, ch);
-    cout << "Result: " << result << endl; // Output: "cbadefg"
-    
-    return 0;
+string reversePrefix(string word, char ch) {
+    auto p = word.find(ch);
+    if (p != string::npos)
+        reverse(begin(word), begin(word) + p + 1);
+    return word;
 }
 ```
 
-In this example, we create an instance of the `Solution` class, define the string `word`, and specify the character `ch`. When we call the `reversePrefix` method, it reverses the substring up to the first occurrence of `ch`, resulting in the output "cbadefg". If we change `ch` to a character not present in `word`, the original string is returned unchanged. 
+This function takes a string `word` and a character `ch`, finds the position of `ch` in `word`, and reverses the substring from the beginning of `word` to the position of `ch`. If `ch` is not found, the word is returned unchanged.
 
-This implementation demonstrates the effectiveness of the solution in real-world scenarios and emphasizes the utility of string manipulation techniques in programming.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string reversePrefix(string word, char ch) {
+	```
+	Defines the function `reversePrefix`, which takes a string `word` and a character `ch` and returns the modified string with the prefix reversed up to the character `ch`.
+
+2. **Find Character**
+	```cpp
+	    auto p = word.find(ch);
+	```
+	Finds the position of the first occurrence of character `ch` in the string `word`. If `ch` is not found, `p` will be set to `string::npos`.
+
+3. **Conditional Check**
+	```cpp
+	    if (p != string::npos)
+	```
+	Checks if the character `ch` was found in the string by comparing the position `p` with `string::npos`. If found, it proceeds to reverse the prefix.
+
+4. **Reverse Operation**
+	```cpp
+	        reverse(begin(word), begin(word) + p + 1);
+	```
+	Reverses the substring of `word` from the beginning to the position of `ch` (inclusive). The `begin(word)` and `begin(word) + p + 1` specify the range to reverse.
+
+5. **Return Statement**
+	```cpp
+	    return word;
+	```
+	Returns the modified string `word` after the reversal operation, or the original string if `ch` was not found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the string. We search for the first occurrence of 'ch' and, if found, reverse the substring up to that point.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space needed to hold the string while performing the reversal.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-prefix-of-word/description/)
 

@@ -14,139 +14,233 @@ img_src = ""
 youtube = "D12AShvqNfE"
 youtube_upload_date="2022-09-18"
 youtube_thumbnail="https://i.ytimg.com/vi/D12AShvqNfE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice and Bob are traveling to Rome for separate business meetings. You are given four strings representing their travel dates: arriveAlice, leaveAlice, arriveBob, and leaveBob. Each string follows the format 'MM-DD', which represents the month and day of their respective travel dates. Alice will be in Rome from 'arriveAlice' to 'leaveAlice', while Bob will be in the city from 'arriveBob' to 'leaveBob'. Your task is to calculate how many days they will both be in Rome together.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of four strings: arriveAlice, leaveAlice, arriveBob, and leaveBob. Each string represents a date in the format 'MM-DD'.
+- **Example:** `arriveAlice = '07-10', leaveAlice = '07-15', arriveBob = '07-12', leaveBob = '07-17'`
+- **Constraints:**
+	- 1 <= month <= 12
+	- 1 <= day <= 31
+	- Alice's arrival date is earlier than or equal to their departure date.
+	- Bob's arrival date is earlier than or equal to their departure date.
+	- The dates are valid within a non-leap year.
 
-{{< highlight cpp >}}
-int md[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the number of days Alice and Bob will both be in Rome together.
+- **Example:** `Output: 4`
+- **Constraints:**
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the overlap between the two time intervals (one for Alice and one for Bob). The number of days they both spend in Rome together is the length of the intersection of these two intervals.
+
+- 1. Convert the string dates into a day of the year format.
+- 2. Find the overlapping range by calculating the maximum of the start dates and the minimum of the end dates.
+- 3. If there is an overlap, calculate the number of overlapping days by subtracting the start date of the overlap from the end date.
+- 4. Return the total number of overlapping days.
+{{< dots >}}
+### Problem Assumptions ✅
+- The dates provided are valid and fall within the same calendar year.
+- Alice and Bob may or may not have overlapping travel dates.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `arriveAlice = '07-10', leaveAlice = '07-15', arriveBob = '07-12', leaveBob = '07-17'`  \
+  **Explanation:** In this example, Alice is in Rome from July 10 to July 15, and Bob is in Rome from July 12 to July 17. They will both be in Rome together from July 12 to July 15, which gives 4 days of overlap.
+
+- **Input:** `arriveAlice = '10-01', leaveAlice = '10-31', arriveBob = '11-01', leaveBob = '12-31'`  \
+  **Explanation:** In this example, Alice is in Rome in October, and Bob is in Rome from November onwards. There are no overlapping days, so the result is 0.
+
+- **Input:** `arriveAlice = '02-15', leaveAlice = '02-18', arriveBob = '02-16', leaveBob = '02-20'`  \
+  **Explanation:** Alice is in Rome from February 15 to February 18, and Bob is in Rome from February 16 to February 20. They overlap from February 16 to February 18, so the result is 3 days.
+
+{{< dots >}}
+## Approach 🚀
+We will convert the dates into a single day number of the year (from 1 to 365) and then calculate the overlap between Alice's and Bob's travel dates.
+
+### Initial Thoughts 💭
+- The challenge is to handle the overlap calculation efficiently.
+- We need to account for all valid months and days of a non-leap year.
+- A simple solution can be derived by converting the dates into day numbers and calculating the overlap directly.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since all dates are valid.
+- Given the constraints, all inputs are manageable, and the solution runs in constant time due to the fixed nature of date operations.
+- If there is no overlap, return 0 days.
+- If Alice and Bob have identical travel dates, the total days together will be the length of the interval.
+- The solution is optimized for constant time complexity due to the simplicity of date conversion and comparison operations.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
 	// Convert date to respective number in year.
-    int td(string s) {
-        int m = s[1] - '0' + 10*(s[0] - '0');
-        int d = s[4] - '0' + 10*(s[3] - '0');
-        --m;
-        while (m > 0) {
-            d += md[m];
-            --m;
-        }
-        return d;
-    }
-public:
-    int countDaysTogether(string sa1, string sa2, string sb1, string sb2) {
-        int a1 = td(sa1), a2 = td(sa2), b1 = td(sb1), b2 = td(sb2);
-        int ans = 0;
-		// Check all 365 days in year
-        for (int i = 0; i < 367; ++i) {
-            if (a1 <= i && i <= a2 && b1 <= i && i <= b2) {
-                ++ans;
-            }
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to determine how many days are there in common between two date ranges in a year. Given two date intervals (for two different people), we are tasked with counting the number of overlapping days between these intervals, considering that a year has 365 days.
-
-### Approach
-
-To solve this problem, we convert the given date strings into day numbers of the year, where the first day of the year (January 1st) is numbered as `0`, the second day as `1`, and so on. Once we have the date intervals converted to day numbers, we can check how many days overlap between the two given date ranges.
-
-#### Steps Involved:
-
-1. **Date Conversion to Day of Year**: 
-    - Convert each given date (in the format `"MM-DD"`) to the corresponding day number in the year. This is done by calculating the number of days that have passed from January 1st to the given date.
-    - To achieve this, the code first extracts the month and day from the date string. Then it calculates the cumulative days from the beginning of the year (accounting for the number of days in each month).
-  
-2. **Count Overlapping Days**: 
-    - After converting both date ranges to day numbers (using the helper function `td`), we compare each day in the year to check if it falls within both ranges. If a day is in the intersection of both ranges, it is counted as an overlapping day.
-
-3. **Result Calculation**:
-    - Finally, we count how many days overlap between the two date ranges and return the result.
-
-### Code Breakdown (Step by Step)
-
-#### Helper Function `td` - Convert Date to Day of Year
-
-```cpp
 int td(string s) {
-    int m = s[1] - '0' + 10*(s[0] - '0');  // Month extraction
-    int d = s[4] - '0' + 10*(s[3] - '0');  // Day extraction
-    --m;  // Adjust month index for 0-based indexing
-    while (m > 0) {  // Accumulate days of all months before the given month
-        d += md[m];  // Add days of the previous month
+    int m = s[1] - '0' + 10*(s[0] - '0');
+    int d = s[4] - '0' + 10*(s[3] - '0');
+    --m;
+    while (m > 0) {
+        d += md[m];
         --m;
     }
-    return d;  // Return the total number of days since the beginning of the year
+    return d;
 }
-```
-
-- **Month and Day Extraction**: 
-    - The string `s` is in the format `"MM-DD"`, so we first extract the month (`m`) and the day (`d`).
-    - We convert the month from a 2-digit string to an integer and subtract 1 to make the month 0-based (January is month `0`).
-  
-- **Cumulative Day Calculation**:
-    - We add the number of days for all the months preceding the given month (using the `md` array that stores the number of days in each month).
-  
-- **Return the Day of Year**:
-    - The function returns the cumulative number of days from January 1st to the given date.
-
-#### Main Function `countDaysTogether` - Calculate Overlapping Days
-
-```cpp
+public:
 int countDaysTogether(string sa1, string sa2, string sb1, string sb2) {
     int a1 = td(sa1), a2 = td(sa2), b1 = td(sb1), b2 = td(sb2);
     int ans = 0;
-    for (int i = 0; i < 367; ++i) {  // Iterate over all days in a year (365 days + 2 for easier boundary handling)
-        if (a1 <= i && i <= a2 && b1 <= i && i <= b2) {  // Check if the day is within both ranges
-            ++ans;  // Increment count if the day is in both ranges
+		// Check all 365 days in year
+    for (int i = 0; i < 367; ++i) {
+        if (a1 <= i && i <= a2 && b1 <= i && i <= b2) {
+            ++ans;
         }
     }
-    return ans;  // Return the total number of overlapping days
+    return ans;
 }
 ```
 
-- **Convert Dates to Day Numbers**:
-    - The four input dates (`sa1`, `sa2`, `sb1`, `sb2`) are converted to their respective day numbers using the `td` helper function. 
-    - `a1` and `a2` are the start and end days of the first range (for the first person), and `b1` and `b2` are for the second range (for the second person).
-  
-- **Loop Over All Possible Days in a Year**:
-    - The loop runs from `0` to `366`, representing the days of the year (from January 1st to December 31st, with an extra day `366` for easier boundary handling).
-  
-- **Check for Overlap**:
-    - For each day `i` in the loop, we check if the day falls within both date ranges. Specifically, the day `i` should lie between `a1` and `a2` (inclusive) and between `b1` and `b2` (inclusive).
-  
-- **Count Overlapping Days**:
-    - If day `i` is in both ranges, we increment the count (`ans`).
-  
-- **Return the Result**:
-    - After checking all days, the function returns the total number of overlapping days as the result.
+This is the full implementation of a function `countDaysTogether` that calculates the number of overlapping days between two given date ranges.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	This class is used to solve the problem of counting overlapping days between two date ranges.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(1)**. The operations performed include:
-  - Converting four date strings into day numbers (constant time operations).
-  - Iterating over all 367 possible days and checking if each day lies within both date ranges (constant time operations).
-- Since all operations inside the loop are constant-time checks, the overall time complexity is **O(1)** for fixed inputs (since the number of days in a year is constant).
+2. **Comment**
+	```cpp
+		// Convert date to respective number in year.
+	```
+	This comment describes the purpose of the following function, which converts a date string to a day number within the year.
 
-#### Space Complexity:
-- The space complexity is also **O(1)** because:
-  - We are using only a fixed amount of space for the `md` array (which stores the number of days in each month) and other variables (`a1`, `a2`, `b1`, `b2`, and `ans`).
-  
-Thus, both the time and space complexities are constant, making the solution highly efficient.
+3. **Function Definition**
+	```cpp
+	int td(string s) {
+	```
+	The function `td` takes a date string `s` and converts it to a day number within the year.
 
-### Conclusion
+4. **Operation**
+	```cpp
+	    int m = s[1] - '0' + 10*(s[0] - '0');
+	```
+	Extracts the month from the date string and converts it into an integer representation.
 
-This approach efficiently counts the number of overlapping days between two date ranges in a year. By converting the date strings into day numbers and iterating over all possible days in the year, we can easily check if a given day falls within both date ranges. This solution has constant time and space complexity, making it optimal for this problem.
+5. **Operation**
+	```cpp
+	    int d = s[4] - '0' + 10*(s[3] - '0');
+	```
+	Extracts the day from the date string and converts it into an integer representation.
+
+6. **Decrement**
+	```cpp
+	    --m;
+	```
+	Decreases the month value by 1, since month indices in the `md` array start from 0.
+
+7. **Loop**
+	```cpp
+	    while (m > 0) {
+	```
+	Iterates through the months to accumulate the total number of days up to the specified month.
+
+8. **Operation**
+	```cpp
+	        d += md[m];
+	```
+	Adds the number of days in the current month to the total day count `d`.
+
+9. **Decrement**
+	```cpp
+	        --m;
+	```
+	Decreases the month index and moves to the previous month.
+
+10. **Return Statement**
+	```cpp
+	    return d;
+	```
+	Returns the total day count calculated for the given date.
+
+11. **Access Modifier**
+	```cpp
+	public:
+	```
+	Indicates the start of the public section of the class, where the main function is located.
+
+12. **Function Definition**
+	```cpp
+	int countDaysTogether(string sa1, string sa2, string sb1, string sb2) {
+	```
+	This function calculates the number of overlapping days between two date ranges.
+
+13. **Function Call**
+	```cpp
+	    int a1 = td(sa1), a2 = td(sa2), b1 = td(sb1), b2 = td(sb2);
+	```
+	Calls the `td` function to convert the given date strings into day numbers.
+
+14. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes the `ans` variable to count the number of overlapping days.
+
+15. **Comment**
+	```cpp
+			// Check all 365 days in year
+	```
+	This comment explains the upcoming loop, which checks each day of the year to see if it falls within both date ranges.
+
+16. **Loop**
+	```cpp
+	    for (int i = 0; i < 367; ++i) {
+	```
+	Loops through all the days in the year (365 days, plus one extra for boundary checking).
+
+17. **Condition**
+	```cpp
+	        if (a1 <= i && i <= a2 && b1 <= i && i <= b2) {
+	```
+	Checks if the current day `i` is within both date ranges.
+
+18. **Increment**
+	```cpp
+	            ++ans;
+	```
+	Increments the `ans` variable if the current day `i` is within both date ranges.
+
+19. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the number of overlapping days between the two date ranges.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), as the solution uses simple date calculations and comparisons.
+- **Average Case:** O(1), as date operations are constant time.
+- **Worst Case:** O(1), since there are only four date strings to process.
+
+The solution is optimal with constant time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1), since no extra space is needed beyond the input dates.
+- **Worst Case:** O(1), as only a few variables are used to store date values.
+
+The solution uses constant space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-days-spent-together/description/)
 

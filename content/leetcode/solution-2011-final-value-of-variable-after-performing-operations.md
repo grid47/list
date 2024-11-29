@@ -14,146 +14,188 @@ img_src = ""
 youtube = "xPKIXpfxvZ8"
 youtube_upload_date="2021-09-19"
 youtube_thumbnail="https://i.ytimg.com/vi/xPKIXpfxvZ8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a simplified programming language, there are only four operations: incrementing or decrementing a variable X by 1. You are given a list of operations that can either increment or decrement the value of X. Your task is to determine the final value of X after applying all the operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of strings, where each string represents an operation on the variable X. The operations can be any of the following: '++X', 'X++', '--X', or 'X--'. Initially, X is set to 0.
+- **Example:** `operations = ["X++", "--X", "++X"]`
+- **Constraints:**
+	- 1 <= operations.length <= 100
+	- operations[i] will be either '++X', 'X++', '--X', or 'X--'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int finalValueAfterOperations(vector<string>& operations) 
-    {
-        int X = 0;
-        for(int i=0;i<operations.size();i++)
-        {
-            if(operations[i]=="X++")
-            {
-                X++;
-            }
-            else if(operations[i] == "++X")
-            {
-                ++X;
-            }
-            else if(operations[i] == "X--")
-            {
-                X--;
-            }
-            else if(operations[i] == "--X")
-            {
-                --X;
-            }
-        }
-        return X;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the final value of X after performing all operations.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The output will be an integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the final value of X after applying all the operations sequentially.
 
-The task at hand is to evaluate a sequence of operations that modify a variable `X`, which starts at zero. The operations are represented as strings and include incrementing or decrementing `X` in various forms. The operations are as follows:
+- Start with X initialized to 0.
+- Iterate through each operation in the list.
+- For each operation, update the value of X accordingly: increment if the operation is '++X' or 'X++', decrement if the operation is '--X' or 'X--'.
+- Return the final value of X.
+{{< dots >}}
+### Problem Assumptions ✅
+- The initial value of X is 0.
+- The operations are applied in the order they appear in the list.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: operations = ["X++", "--X", "++X"]`  \
+  **Explanation:** The operations are applied as follows: X = 0 initially. 'X++' increments X to 1, '--X' decrements X to 0, '++X' increments X to 1. The final value of X is 1.
 
-- `X++`: Increment `X` after the current value is used.
-- `++X`: Increment `X` before the current value is used.
-- `X--`: Decrement `X` after the current value is used.
-- `--X`: Decrement `X` before the current value is used.
+- **Input:** `Example 2: Input: operations = ["++X", "++X", "X++"]`  \
+  **Explanation:** The operations are applied as follows: X = 0 initially. '++X' increments X to 1, '++X' increments X to 2, 'X++' increments X to 3. The final value of X is 3.
 
-Given an array of these operation strings, the objective is to compute the final value of `X` after applying all the operations sequentially.
+- **Input:** `Example 3: Input: operations = ["X++", "--X", "X--"]`  \
+  **Explanation:** The operations are applied as follows: X = 0 initially. 'X++' increments X to 1, '--X' decrements X to 0, 'X--' decrements X to -1. The final value of X is -1.
 
-For example, if the input is `operations = ["++X", "X++", "X--", "--X"]`, we should evaluate each operation in order to find out the final value of `X`.
+{{< dots >}}
+## Approach 🚀
+We can simply iterate over the operations list, update the value of X based on each operation, and return the final value.
 
-### Approach
-
-To solve this problem, we can use a straightforward iterative approach:
-
-1. **Initialization**: Start with a variable `X` initialized to zero.
-2. **Iterate through Operations**: Loop through each operation string in the provided list:
-   - If the operation is `X++` or `++X`, increment `X`.
-   - If the operation is `X--` or `--X`, decrement `X`.
-3. **Return Result**: After processing all operations, return the final value of `X`.
-
-### Code Breakdown (Step by Step)
-
-Let’s analyze the code and see how it implements this approach:
-
-1. **Class Definition**: We define a class called `Solution`, which encapsulates the logic for our solution.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: We declare a public method named `finalValueAfterOperations`, which takes a vector of strings representing the operations and returns an integer.
-
-    ```cpp
-    int finalValueAfterOperations(vector<string>& operations) 
-    ```
-
-3. **Variable Initialization**: Inside the method, we initialize a variable `X` to zero, which will hold the result of the operations.
-
-    ```cpp
+### Initial Thoughts 💭
+- The operations only involve simple increments and decrements of X.
+- The operations are applied in sequence, and each operation affects the value of X directly.
+- Since the operations are straightforward and independent, we can solve this problem using a simple loop to apply each operation sequentially.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty, as per the constraints.
+- The solution should handle the maximum input size of 100 operations efficiently.
+- The initial value of X is always 0.
+- Ensure that the operations are valid as per the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int finalValueAfterOperations(vector<string>& operations) 
+{
     int X = 0;
-    ```
-
-4. **Iterating through Operations**: We use a for loop to iterate through the `operations` vector.
-
-    ```cpp
-    for(int i=0; i<operations.size(); i++)
-    ```
-
-5. **Operation Evaluation**: For each operation, we check the string and modify `X` accordingly:
-
-    - If the operation is `X++`, we increment `X` by 1.
-
-        ```cpp
-        if(operations[i] == "X++") {
+    for(int i=0;i<operations.size();i++)
+    {
+        if(operations[i]=="X++")
+        {
             X++;
         }
-        ```
-
-    - If the operation is `++X`, we also increment `X` by 1. The difference between `X++` and `++X` in this context is negligible for our final result.
-
-        ```cpp
-        else if(operations[i] == "++X") {
+        else if(operations[i] == "++X")
+        {
             ++X;
         }
-        ```
-
-    - If the operation is `X--`, we decrement `X` by 1.
-
-        ```cpp
-        else if(operations[i] == "X--") {
+        else if(operations[i] == "X--")
+        {
             X--;
         }
-        ```
-
-    - If the operation is `--X`, we also decrement `X` by 1.
-
-        ```cpp
-        else if(operations[i] == "--X") {
+        else if(operations[i] == "--X")
+        {
             --X;
         }
-        ```
-
-6. **Return Final Value**: After processing all operations, we return the final value of `X`.
-
-    ```cpp
-    return X;
     }
-    ```
+    return X;
+}
+```
 
-### Complexity
+This code calculates the final value of X after performing a series of increment or decrement operations defined in the `operations` vector.
 
-The time complexity of this solution is O(n), where `n` is the number of operations in the input array. This is because we process each operation exactly once. The space complexity is O(1), as we are using a constant amount of additional space to store the variable `X`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int finalValueAfterOperations(vector<string>& operations) 
+	```
+	Defines the function `finalValueAfterOperations` that takes a vector of strings representing operations and returns the final value of `X`.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	    int X = 0;
+	```
+	Initializes the variable `X` to 0, which will hold the result of the operations.
 
-In summary, the code effectively implements a simple iterative solution to determine the final value of `X` after a series of increment and decrement operations. This problem emphasizes the importance of understanding how operations affect a variable and provides a clear example of how straightforward logical checks can be implemented in programming.
+3. **Loop Initialization**
+	```cpp
+	    for(int i=0;i<operations.size();i++)
+	```
+	Starts a for loop to iterate over each operation in the `operations` vector.
 
-This implementation is efficient, easy to understand, and serves as a solid basis for tackling similar problems involving sequences of operations. Whether you're a beginner looking to learn about control structures and operations in programming or an experienced developer refreshing your knowledge, this example offers valuable insights into basic algorithm design and implementation. The clarity of the logic and simplicity of the solution make it a great reference for similar coding challenges.
+4. **Conditional Check**
+	```cpp
+	        if(operations[i]=="X++")
+	```
+	Checks if the current operation is `X++`, which increments `X`.
+
+5. **Increment Operation**
+	```cpp
+	            X++;
+	```
+	Increments the value of `X` by 1.
+
+6. **Conditional Check**
+	```cpp
+	        else if(operations[i] == "++X")
+	```
+	Checks if the current operation is `++X`, which also increments `X`.
+
+7. **Increment Operation**
+	```cpp
+	            ++X;
+	```
+	Increments `X` by 1 before returning the value.
+
+8. **Conditional Check**
+	```cpp
+	        else if(operations[i] == "X--")
+	```
+	Checks if the current operation is `X--`, which decrements `X`.
+
+9. **Decrement Operation**
+	```cpp
+	            X--;
+	```
+	Decrements `X` by 1.
+
+10. **Conditional Check**
+	```cpp
+	        else if(operations[i] == "--X")
+	```
+	Checks if the current operation is `--X`, which also decrements `X`.
+
+11. **Decrement Operation**
+	```cpp
+	            --X;
+	```
+	Decrements `X` by 1 before returning the value.
+
+12. **Return Statement**
+	```cpp
+	    return X;
+	```
+	Returns the final value of `X` after all operations have been performed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of operations.
+- **Average Case:** O(n), where n is the number of operations.
+- **Worst Case:** O(n), where n is the number of operations.
+
+The time complexity is linear because we need to process each operation once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as the space requirement does not depend on the input size.
+- **Worst Case:** O(1), as we only need a constant amount of space to store the value of X.
+
+The space complexity is constant because we only store the value of X.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/final-value-of-variable-after-performing-operations/description/)
 

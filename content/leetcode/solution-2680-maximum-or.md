@@ -14,165 +14,258 @@ img_src = ""
 youtube = "XiaXIrEHFEY"
 youtube_upload_date="2023-05-13"
 youtube_thumbnail="https://i.ytimg.com/vi/XiaXIrEHFEY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums` of length `n` and an integer `k`. In each operation, you can pick an element from the array and multiply it by 2. Your goal is to determine the maximum possible value of the bitwise OR of all elements in the array after applying the operation at most `k` times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of integers `nums` and an integer `k` which represents the maximum number of operations allowed.
+- **Example:** `Input: nums = [5, 3, 7], k = 1`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 1 <= k <= 15
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maximumOr(vector<int>& nums, int k) 
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum possible value of the bitwise OR after applying the operation at most `k` times.
+- **Example:** `Output: 15`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the bitwise OR of the array after modifying elements using the operation as optimally as possible.
+
+- Step 1: Iterate over each element of the array.
+- Step 2: For each element, calculate the result of multiplying it by 2 for up to `k` times and calculate the resulting bitwise OR.
+- Step 3: Track the maximum bitwise OR across all possible operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- All input values are within the specified constraints.
+- The solution should efficiently handle the maximum possible size of the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [5, 3, 7], k = 1`  \
+  **Explanation:** In the first operation, if we multiply 3 by 2, the new array becomes [5, 6, 7]. The bitwise OR of 5, 6, and 7 is 7. Thus, the final result is 7.
+
+- **Input:** `Input: nums = [8, 1, 2], k = 2`  \
+  **Explanation:** If we multiply 8 by 2 twice, we get [32, 1, 2]. The bitwise OR of 32, 1, and 2 is 35. Thus, the final result is 35.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves using a greedy approach to maximize the OR by considering the impact of multiplying elements by 2 up to `k` times and calculating the OR for each possible modification.
+
+### Initial Thoughts 💭
+- We want to maximize the OR, which means we need to focus on the higher values in the array and determine if multiplying them will result in a higher OR.
+- It might be useful to calculate the OR for each possible operation and compare the results.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always contain at least one element, so there are no empty arrays.
+- The solution must be optimized to handle arrays with up to 10^5 elements efficiently.
+- If all elements are the same, multiplying any of them will still yield the same OR, and the OR should be calculated based on that.
+- Ensure that the solution is efficient for large values of `nums[i]` and handles arrays up to the size limit.
+{{< dots >}}
+## Code 💻
+```cpp
+long long maximumOr(vector<int>& nums, int k) 
+{
+    //prefix or
+    //suffix or
+    vector<long long>prefixor;
+    for(int i = 0 ; i < nums.size() ; i++)
     {
-        //prefix or
-        //suffix or
-        vector<long long>prefixor;
-        for(int i = 0 ; i < nums.size() ; i++)
+        if(i == 0) prefixor.push_back((1LL * nums[i]));
+        else prefixor.push_back(((1LL*prefixor.back()) | (1LL*nums[i])));
+    }    
+
+    vector<long long>suffixor;
+    for(int i = nums.size() - 1; i >= 0; i--)
+    {
+        if(i == (nums.size()-1))  suffixor.push_back((1LL * nums[i]));
+        else suffixor.push_back(((1LL*suffixor.back()) | (1LL*nums[i])));
+    }
+    reverse(suffixor.begin(),suffixor.end());
+
+    long long ans = 0;
+    for(int i = 0 ; i < nums.size() ; i++)
+    { 
+        long long int left = 0;
+        long long int self;
+        long long int right = 0;
+        if((i-1) >= 0)
         {
-            if(i == 0) prefixor.push_back((1LL * nums[i]));
-            else prefixor.push_back(((1LL*prefixor.back()) | (1LL*nums[i])));
-        }    
-
-        vector<long long>suffixor;
-        for(int i = nums.size() - 1; i >= 0; i--)
+            left = prefixor[i-1];
+        }
+        self = (nums[i] * pow(2,k));
+        if((i+1) <= nums.size()-1)
         {
-            if(i == (nums.size()-1))  suffixor.push_back((1LL * nums[i]));
-            else suffixor.push_back(((1LL*suffixor.back()) | (1LL*nums[i])));
+            right = suffixor[i+1];
         }
-        reverse(suffixor.begin(),suffixor.end());
-
-        long long ans = 0;
-        for(int i = 0 ; i < nums.size() ; i++)
-        { 
-            long long int left = 0;
-            long long int self;
-            long long int right = 0;
-            if((i-1) >= 0)
-            {
-                left = prefixor[i-1];
-            }
-            self = (nums[i] * pow(2,k));
-            if((i+1) <= nums.size()-1)
-            {
-                right = suffixor[i+1];
-            }
-            ans = max(ans , left | self | right);
-        }
-        return ans;
+        ans = max(ans , left | self | right);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The given problem requires finding the maximum OR value achievable by performing the following operation on an element in an array `nums`. You can multiply any element `nums[i]` by `2^k` and perform an OR operation on it with the elements to its left and right. The goal is to compute the maximum possible OR value after performing the operation on any element in the array.
-
-The task is to maximize the value of the OR operation involving the modified element and its neighbors, considering all possible positions in the array.
-
-### Approach
-
-This problem is essentially about combining the properties of the OR operation and efficiently modifying the elements in the array by multiplying them with a power of 2. The solution can be broken down into several key steps:
-
-1. **Prefix OR Array**: First, calculate the prefix OR of the array. The prefix OR is a way to keep track of the OR operation on all elements to the left of a given index.
-   
-2. **Suffix OR Array**: Similarly, calculate the suffix OR of the array. This is similar to the prefix OR but tracks the OR operation for all elements to the right of the given index.
-
-3. **Main Calculation**: Iterate through each element in the array. For each element:
-   - Calculate the OR of the elements to its left (using the prefix OR array).
-   - Modify the current element by multiplying it by `2^k` and compute the OR with the neighbors using the suffix OR array.
-   - Calculate the maximum OR value obtained by this process.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Calculate Prefix OR Array
-
-```cpp
-vector<long long> prefixor;
-for (int i = 0; i < nums.size(); i++) {
-    if (i == 0) 
-        prefixor.push_back((1LL * nums[i]));
-    else 
-        prefixor.push_back(((1LL * prefixor.back()) | (1LL * nums[i])));
+    return ans;
 }
 ```
 
-- **Line 1**: We initialize an empty vector `prefixor` to store the OR results for each prefix of the array.
-- **Line 2-5**: We iterate through the array `nums`. If it's the first element, simply set `prefixor[0]` to the first element. For all other elements, calculate the prefix OR up to that index by taking the OR of the previous prefix OR value and the current element in the array.
+The function 'maximumOr' takes a vector of integers 'nums' and an integer 'k'. It calculates the maximum bitwise OR of a modified element of the array after considering each element, its neighbors, and the effect of the number being shifted left by k bits. It uses prefix and suffix OR arrays to optimize the calculation of the OR operation across the array.
 
-#### Step 2: Calculate Suffix OR Array
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long maximumOr(vector<int>& nums, int k) 
+	```
+	The function 'maximumOr' is defined to take a vector of integers 'nums' and an integer 'k'. It calculates the maximum value of the bitwise OR operation across modified elements of the array.
 
-```cpp
-vector<long long> suffixor;
-for (int i = nums.size() - 1; i >= 0; i--) {
-    if (i == (nums.size() - 1))  
-        suffixor.push_back((1LL * nums[i]));
-    else 
-        suffixor.push_back(((1LL * suffixor.back()) | (1LL * nums[i])));
-}
-reverse(suffixor.begin(), suffixor.end());
-```
+2. **Prefix OR Vector Initialization**
+	```cpp
+	    vector<long long>prefixor;
+	```
+	A vector 'prefixor' is initialized to store the cumulative OR values from the start of the array.
 
-- **Line 1**: We initialize an empty vector `suffixor` to store the OR results for each suffix of the array.
-- **Line 2-5**: We iterate through the array in reverse. For each element, we calculate the suffix OR from the rightmost element to the leftmost one.
-- **Line 6**: After the iteration, we reverse the `suffixor` array to align it with the original order of the `nums` array.
+3. **Prefix OR Calculation Loop**
+	```cpp
+	    for(int i = 0 ; i < nums.size() ; i++)
+	```
+	A loop iterates through the 'nums' array to calculate the prefix OR values.
 
-#### Step 3: Calculate the Maximum OR Value
+4. **First Prefix OR Value**
+	```cpp
+	        if(i == 0) prefixor.push_back((1LL * nums[i]));
+	```
+	For the first element, we initialize the prefix OR with the value of the first element.
 
-```cpp
-long long ans = 0;
-for (int i = 0; i < nums.size(); i++) {
-    long long int left = 0;
-    long long int self;
-    long long int right = 0;
+5. **Subsequent Prefix OR Values**
+	```cpp
+	        else prefixor.push_back(((1LL*prefixor.back()) | (1LL*nums[i])));
+	```
+	For subsequent elements, the prefix OR is calculated by performing a bitwise OR with the previous prefix OR value.
 
-    if ((i - 1) >= 0) {
-        left = prefixor[i - 1];
-    }
-    self = (nums[i] * pow(2, k));
+6. **Suffix OR Vector Initialization**
+	```cpp
+	    vector<long long>suffixor;
+	```
+	A vector 'suffixor' is initialized to store the cumulative OR values from the end of the array.
 
-    if ((i + 1) <= nums.size() - 1) {
-        right = suffixor[i + 1];
-    }
+7. **Suffix OR Calculation Loop**
+	```cpp
+	    for(int i = nums.size() - 1; i >= 0; i--)
+	```
+	A loop iterates through 'nums' in reverse to calculate the suffix OR values.
 
-    ans = max(ans, left | self | right);
-}
-```
+8. **First Suffix OR Value**
+	```cpp
+	        if(i == (nums.size()-1))  suffixor.push_back((1LL * nums[i]));
+	```
+	For the last element, we initialize the suffix OR with the value of the last element.
 
-- **Line 1**: Initialize a variable `ans` to store the maximum OR value.
-- **Line 2-10**: We iterate through the array and calculate the OR for each element:
-  - **Left**: If the current element is not the first, set `left` as the prefix OR of the element just before it.
-  - **Self**: Multiply the current element by `2^k` to simulate the modification, and store the result in `self`.
-  - **Right**: If the current element is not the last, set `right` as the suffix OR of the element just after it.
-  - For each element, compute the OR of `left`, `self`, and `right`, and update the maximum `ans`.
+9. **Subsequent Suffix OR Values**
+	```cpp
+	        else suffixor.push_back(((1LL*suffixor.back()) | (1LL*nums[i])));
+	```
+	For subsequent elements, the suffix OR is calculated by performing a bitwise OR with the next suffix OR value.
 
-#### Step 4: Return the Result
+10. **Reverse Suffix OR**
+	```cpp
+	    reverse(suffixor.begin(),suffixor.end());
+	```
+	The suffix OR vector is reversed so that it represents cumulative OR values from the start of the array.
 
-```cpp
-return ans;
-```
+11. **Result Initialization**
+	```cpp
+	    long long ans = 0;
+	```
+	The variable 'ans' is initialized to 0, which will store the maximum OR value found.
 
-- **Line 11**: After iterating through all elements, return the maximum OR value stored in `ans`.
+12. **Main Calculation Loop**
+	```cpp
+	    for(int i = 0 ; i < nums.size() ; i++)
+	```
+	A loop is initiated to calculate the OR values for each element and its neighbors.
 
-### Complexity
+13. **Left Value Calculation**
+	```cpp
+	        long long int left = 0;
+	```
+	The variable 'left' stores the prefix OR value of the element's left neighbor.
 
-#### Time Complexity:
+14. **Self Value Calculation**
+	```cpp
+	        long long int self;
+	```
+	The variable 'self' stores the OR value of the current element shifted by k bits.
 
-1. **Prefix OR Calculation**: The prefix OR is calculated in **O(n)** time, where `n` is the size of the array.
-2. **Suffix OR Calculation**: The suffix OR is calculated in **O(n)** time as well.
-3. **Main Loop**: The main loop iterates through the array and performs constant-time operations (such as multiplications and OR operations) for each element. Thus, it takes **O(n)** time.
+15. **Right Value Calculation**
+	```cpp
+	        long long int right = 0;
+	```
+	The variable 'right' stores the suffix OR value of the element's right neighbor.
 
-Therefore, the overall time complexity is **O(n)**, where `n` is the size of the input array.
+16. **Left Value Assignment**
+	```cpp
+	        if((i-1) >= 0)
+	```
+	Check if there is a left neighbor (i.e., i > 0).
 
-#### Space Complexity:
+17. **Left Assignment**
+	```cpp
+	            left = prefixor[i-1];
+	```
+	Assign the prefix OR value of the left neighbor.
 
-- The space complexity is **O(n)** because we use two additional arrays (`prefixor` and `suffixor`), each of size `n`, to store the prefix and suffix OR values.
+18. **Self Calculation**
+	```cpp
+	        self = (nums[i] * pow(2,k));
+	```
+	Calculate the self value by shifting the current element by k bits.
 
-### Conclusion
+19. **Right Value Assignment**
+	```cpp
+	        if((i+1) <= nums.size()-1)
+	```
+	Check if there is a right neighbor (i.e., i < nums.size() - 1).
 
-The solution provided is efficient for solving the problem of maximizing the OR value after modifying each element in the array. It leverages the prefix and suffix OR arrays to reduce redundant calculations, making the solution run in **O(n)** time, which is optimal for this problem. The space complexity is **O(n)** due to the extra arrays used for storing the OR values. This approach is well-suited for large arrays and is highly efficient, balancing time complexity with space usage.
+20. **Right Assignment**
+	```cpp
+	            right = suffixor[i+1];
+	```
+	Assign the suffix OR value of the right neighbor.
+
+21. **Maximum OR Update**
+	```cpp
+	        ans = max(ans , left | self | right);
+	```
+	Update the 'ans' variable with the maximum OR value found.
+
+22. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the maximum OR value calculated.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n * k)
+- **Worst Case:** O(n * k)
+
+We iterate through the array and perform operations on each element. The worst-case time complexity occurs when we apply up to `k` operations for each element, resulting in O(n * k).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use additional space to store the prefix and suffix ORs, which requires O(n) space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-or/description/)
 

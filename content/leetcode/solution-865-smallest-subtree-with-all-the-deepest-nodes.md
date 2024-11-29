@@ -14,137 +14,172 @@ img_src = ""
 youtube = "QF7ZBH8mXHE"
 youtube_upload_date="2020-04-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QF7ZBH8mXHE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a binary tree, return the smallest subtree that contains all the nodes with the maximum depth in the tree. A node is considered the deepest if it has the greatest distance to the root among all nodes. The subtree of a node consists of the node itself and all its descendants.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root of a binary tree, represented as an array with level-order traversal.
+- **Example:** `root = [4,3,5,null,7,6]`
+- **Constraints:**
+	- The binary tree contains between 1 and 500 nodes.
+	- Each node in the tree has a unique value in the range [0, 500].
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-        return lcadn(root).first;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest subtree that includes all the deepest nodes in the tree, represented by the root of that subtree.
+- **Example:** `Output: [7]`
+- **Constraints:**
+	- The subtree's root must include all nodes at the maximum depth.
 
-    pair<TreeNode*, int> lcadn(TreeNode* root) {
-        if(root == NULL) return {NULL, 0};
-        auto lft = lcadn(root->left);
-        auto rht = lcadn(root->right);
-        if(lft.second < rht.second) {
-            return {rht.first, rht.second + 1};
-        } else if (lft.second > rht.second) {
-            return {lft.first, lft.second + 1};            
-        }
-        return {root, lft.second + 1};
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify the smallest subtree containing all the deepest nodes in the binary tree.
 
-### Problem Statement
+- Traverse the tree to find the maximum depth.
+- For each node, recursively determine if its left and right subtrees contain nodes at the maximum depth.
+- If both subtrees contain the deepest nodes, return the current node as the root of the subtree.
+- If only one subtree contains the deepest nodes, propagate that subtree's root upwards.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is non-empty.
+- The input is well-formed and represents a valid binary tree.
+- All nodes have unique values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [4,3,5,null,7,6], Output: [7]`  \
+  **Explanation:** The deepest node is 7. It is the only node at the maximum depth, so it forms the smallest subtree.
 
-The problem asks to find the **smallest subtree** that contains all the deepest nodes in a binary tree. In other words, given a binary tree, you need to determine the node that is the root of the subtree that includes all the deepest nodes (nodes at the maximum depth). The deepest nodes are those at the greatest depth, and the subtree should be the smallest such subtree that includes all of them.
+- **Input:** `Input: root = [2,4,8,null,null,6,10], Output: [8,6,10]`  \
+  **Explanation:** The deepest nodes are 6 and 10. The smallest subtree containing both of them is rooted at node 8.
 
-### Problem Explanation
+{{< dots >}}
+## Approach 🚀
+Use a recursive approach to calculate the depth of each node and find the lowest common ancestor of the deepest nodes.
 
-We are given a binary tree, and we need to find a subtree that contains all the deepest nodes. A **subtree** is any node in the tree, along with all of its descendants. A node is considered a **deepest node** if it is at the greatest depth in the tree. 
-
-To solve this problem, we must efficiently traverse the tree, calculate the depth of each node, and identify the deepest nodes. From there, we need to find the **lowest common ancestor** (LCA) of all the deepest nodes. The LCA of a set of nodes in a binary tree is the deepest node that is an ancestor of all of them.
-
-### Approach
-
-To approach this problem, the following steps are undertaken:
-1. **Depth Calculation**: For each node, calculate the depth of its left and right subtrees.
-2. **Comparison of Depths**: Compare the depths of the left and right subtrees at each node. The node will be part of the answer if the depths of its left and right children are equal and at the maximum depth.
-3. **Lowest Common Ancestor (LCA)**: The solution leverages the concept of LCA to identify the smallest subtree that contains all the deepest nodes. The LCA of the deepest nodes is the root of this smallest subtree.
-
-The algorithm involves:
-- Recursively calculating the depths of each subtree.
-- Tracking the node at each depth level.
-- Returning the node that corresponds to the subtree containing all the deepest nodes.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Define the Helper Function
-
-The helper function `lcadn` calculates the **lowest common ancestor** (LCA) of the deepest nodes and also returns the depth of the deepest node.
-
-```cpp
-pair<TreeNode*, int> lcadn(TreeNode* root) {
-    if (root == NULL) return {NULL, 0}; // Base case: if the node is NULL, the depth is 0
-```
-
-- We start with the base case: if the current node is `NULL`, it means we've reached a leaf's child, so we return `NULL` as the LCA and `0` as the depth.
-
-#### Step 2: Recursively Calculate the LCA and Depth for Left and Right Subtrees
-
-```cpp
-    auto lft = lcadn(root->left);  // Recursively find the LCA and depth of the left subtree
-    auto rht = lcadn(root->right); // Recursively find the LCA and depth of the right subtree
-```
-
-- We recursively call the helper function `lcadn` on the left and right children of the current node (`root->left` and `root->right`). This will allow us to calculate the LCA and the depth for each subtree.
-
-#### Step 3: Compare the Depths of Left and Right Subtrees
-
-```cpp
-    if (lft.second < rht.second) {
-        return {rht.first, rht.second + 1}; // If the right subtree is deeper, return the right subtree's LCA
-    } else if (lft.second > rht.second) {
-        return {lft.first, lft.second + 1}; // If the left subtree is deeper, return the left subtree's LCA
-    }
-```
-
-- After obtaining the depths of the left and right subtrees, we compare them:
-  - If the left subtree is deeper, we return the LCA from the left subtree and its depth.
-  - If the right subtree is deeper, we return the LCA from the right subtree and its depth.
-
-#### Step 4: Handle the Case Where Both Subtrees Have the Same Depth
-
-```cpp
-    return {root, lft.second + 1}; // If both subtrees have the same depth, the current node is the LCA
-}
-```
-
-- If both the left and right subtrees have the same depth, it means that the current node is the lowest common ancestor of all the deepest nodes in its subtree.
-- We return the current node (`root`) as the LCA and its depth (`lft.second + 1`, which is the depth of the current node).
-
-#### Step 5: The Main Function to Get the Result
-
+### Initial Thoughts 💭
+- The problem reduces to finding the lowest common ancestor of the deepest nodes.
+- Using a recursive depth-first search (DFS), we can propagate depth information upwards.
+- The depth information for the left and right children can determine the smallest subtree containing all deepest nodes.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, since the tree is guaranteed to have at least one node.
+- Tree with the maximum allowed nodes (500).
+- All nodes are at the same depth.
+- The tree is a single path (linked list).
+- Ensure the tree structure is correctly formed and all nodes are unique.
+{{< dots >}}
+## Code 💻
 ```cpp
 TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-    return lcadn(root).first; // Return the LCA of the deepest nodes
+    return lcadn(root).first;
+}
+
+pair<TreeNode*, int> lcadn(TreeNode* root) {
+    if(root == NULL) return {NULL, 0};
+    auto lft = lcadn(root->left);
+    auto rht = lcadn(root->right);
+    if(lft.second < rht.second) {
+        return {rht.first, rht.second + 1};
+    } else if (lft.second > rht.second) {
+        return {lft.first, lft.second + 1};            
+    }
+    return {root, lft.second + 1};
 }
 ```
 
-- The main function `subtreeWithAllDeepest` calls the helper function `lcadn` on the root of the binary tree and returns the first element of the pair, which is the LCA of the deepest nodes. This node represents the root of the subtree containing all the deepest nodes.
+This code implements a function to find the subtree that contains all the deepest nodes of a binary tree. The method relies on a helper function `lcadn` that calculates the deepest node and its depth.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	TreeNode* subtreeWithAllDeepest(TreeNode* root) {
+	```
+	This is the function signature of `subtreeWithAllDeepest`, which takes the root of a binary tree as input and returns the subtree containing all the deepest nodes.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the number of nodes in the binary tree.
-- The function `lcadn` is called once for each node, and each node is processed a constant number of times (once for left and right children).
+2. **Return Statement**
+	```cpp
+	    return lcadn(root).first;
+	```
+	The function calls `lcadn`, a helper function, on the root node and returns the first element of the pair, which is the subtree containing the deepest nodes.
 
-#### Space Complexity:
-- **O(h)**, where `h` is the height of the binary tree.
-- The space complexity is due to the recursive calls on the function stack. In the worst case (unbalanced tree), the height could be equal to the number of nodes, so the space complexity is O(n). For a balanced tree, the height is O(log n), so the space complexity is O(log n).
+3. **Helper Function Definition**
+	```cpp
+	pair<TreeNode*, int> lcadn(TreeNode* root) {
+	```
+	This is the function signature of `lcadn`, which is a helper function that returns a pair containing the deepest node and its depth.
 
-### Conclusion
+4. **Base Case**
+	```cpp
+	    if(root == NULL) return {NULL, 0};
+	```
+	This is the base case where if the current node is `NULL`, it returns a pair with `NULL` for the node and `0` for the depth.
 
-This solution efficiently solves the problem of finding the smallest subtree containing all the deepest nodes by utilizing the concept of the **lowest common ancestor (LCA)**. The recursive helper function calculates both the LCA and the depth of the deepest nodes in the tree. By comparing the depths of the left and right subtrees, the algorithm determines the correct subtree that contains all the deepest nodes, while maintaining an optimal time and space complexity. This approach is efficient and leverages the properties of binary trees and LCA to find the solution in a concise manner.
+5. **Left Subtree Recursion**
+	```cpp
+	    auto lft = lcadn(root->left);
+	```
+	This line recursively calls `lcadn` on the left child of the current node and stores the result in the variable `lft`.
+
+6. **Right Subtree Recursion**
+	```cpp
+	    auto rht = lcadn(root->right);
+	```
+	This line recursively calls `lcadn` on the right child of the current node and stores the result in the variable `rht`.
+
+7. **Depth Comparison**
+	```cpp
+	    if(lft.second < rht.second) {
+	```
+	This checks if the depth of the left subtree (`lft.second`) is less than the depth of the right subtree (`rht.second`).
+
+8. **Return Right Subtree**
+	```cpp
+	        return {rht.first, rht.second + 1};
+	```
+	If the right subtree is deeper, return the right subtree (`rht.first`) with its depth incremented by 1.
+
+9. **Else Condition**
+	```cpp
+	    } else if (lft.second > rht.second) {
+	```
+	This checks if the depth of the left subtree (`lft.second`) is greater than the depth of the right subtree (`rht.second`).
+
+10. **Return Left Subtree**
+	```cpp
+	        return {lft.first, lft.second + 1};
+	```
+	If the left subtree is deeper, return the left subtree (`lft.first`) with its depth incremented by 1.
+
+11. **Equal Depths Return**
+	```cpp
+	    return {root, lft.second + 1};
+	```
+	If both subtrees are of equal depth, return the current node (`root`) as the subtree containing all the deepest nodes, with its depth incremented by 1.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N), where N is the number of nodes in the tree.
+- **Average Case:** O(N), since each node is visited once.
+- **Worst Case:** O(N), if the tree is skewed or has maximum depth.
+
+Each node is visited once during the DFS traversal.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if the tree height is minimal (single node).
+- **Worst Case:** O(H), where H is the height of the tree (due to recursive stack).
+
+Space complexity depends on the recursion depth, which is equal to the tree height.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/description/)
 

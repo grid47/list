@@ -14,108 +14,124 @@ img_src = ""
 youtube = "23vlLuh_v6c"
 youtube_upload_date="2023-11-05"
 youtube_thumbnail="https://i.ytimg.com/vi/23vlLuh_v6c/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a tournament, there are 'n' teams, each represented by an index from 0 to n-1. You are given a 2D boolean matrix grid of size n x n, where the value at grid[i][j] is 1 if team 'i' is stronger than team 'j', and 0 otherwise. Your task is to determine the champion team, which is the team that no other team is stronger than.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D boolean matrix grid where grid[i][j] indicates if team 'i' is stronger than team 'j'.
+- **Example:** `For input grid = [[0, 1], [0, 0]], the result is 0.`
+- **Constraints:**
+	- 2 <= n <= 100
+	- grid[i][j] is either 0 or 1
+	- grid[i][i] == 0
+	- For all i != j, grid[i][j] != grid[j][i]
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findChampion(vector<vector<int>>& g) {
-        for (int i = 0; i < g.size(); ++i)
-            if (accumulate(begin(g[i]), end(g[i]), 0) == g.size() - 1)
-                return i;
-        return -1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the index of the team that is the champion, or -1 if no such team exists.
+- **Example:** `For input grid = [[0, 1], [0, 0]], the output is 0.`
+- **Constraints:**
+	- The output will always be a valid team index or -1.
 
-### Problem Statement:
-The problem requires finding a "champion" in a directed graph where each node represents a player, and directed edges represent a win or loss in a game between two players. A champion is defined as a player who has won against every other player in the graph, meaning that there is a directed edge from the champion to every other player, but no directed edge back to the champion from any other player. The task is to identify this champion player if they exist, or return `-1` if no champion exists.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the team that no other team can beat, i.e., the team that has a '1' in every column of the matrix corresponding to the teams that it is stronger than.
 
-The problem is essentially about finding a node in a graph that has out-degree of `n - 1` (where `n` is the number of players, or size of the graph) and in-degree of `0`. In simpler terms, the champion should have a directed edge to all other players, but no directed edges pointing back to them.
+- Iterate through each row of the matrix.
+- Sum the values in the row (excluding the diagonal).
+- If the sum of a row equals n-1, that team is the champion.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid matrix will always be valid and well-formed.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: grid = [[0, 1], [0, 0]]`  \
+  **Explanation:** Here, team 0 is stronger than team 1, and there are only two teams. Thus, team 0 will be the champion.
 
-### Approach:
-The approach to solving this problem is straightforward and involves iterating through the given matrix representing the graph and checking if any player meets the criteria for being a champion.
+- **Input:** `Example 2: grid = [[0, 0, 1], [1, 0, 1], [0, 0, 0]]`  \
+  **Explanation:** In this case, team 1 is stronger than both team 0 and team 2, making team 1 the champion.
 
-1. **Understanding the Input:**
-   The graph is represented by a 2D vector `g`, where `g[i][j] = 1` means player `i` won against player `j` (there is a directed edge from `i` to `j`), and `g[i][j] = 0` means player `i` did not win against player `j` (no directed edge from `i` to `j`).
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to identify the team that no other team can defeat. We can do this by summing the rows of the grid and checking if a row contains 'n-1' 1's.
 
-2. **Champion Criteria:**
-   For a player to be a champion:
-   - The player should have won against all other players, i.e., the sum of the `i`th row in the matrix should be equal to `n - 1`, where `n` is the number of players. This is because they must have won against every other player (thus having `n - 1` wins).
-   - Additionally, there should be no directed edge pointing back to the champion from any other player. This condition is inherently met because if the sum of the row is `n - 1`, the remaining entries must be `0`, which implies that no other player won against the champion.
+### Initial Thoughts 💭
+- The matrix represents a directed graph where each node (team) has directed edges (victories) to other teams.
+- We are looking for a team that has outgoing edges to all other teams, and no other team has an outgoing edge to it.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty.
+- The algorithm must handle the grid size up to 100 x 100.
+- When n = 2, there will be exactly one possible champion.
+- The grid will always follow the rules as described in the problem.
+{{< dots >}}
+## Code 💻
+```cpp
+int findChampion(vector<vector<int>>& g) {
+    for (int i = 0; i < g.size(); ++i)
+        if (accumulate(begin(g[i]), end(g[i]), 0) == g.size() - 1)
+            return i;
+    return -1;
+}
+```
 
-3. **Algorithm:**
-   - Iterate over each row of the matrix.
-   - For each row, sum the elements. If the sum equals `n - 1`, then that player is the champion.
-   - If no such player exists after checking all rows, return `-1`.
+This function identifies the 'champion' in a directed graph represented as an adjacency matrix. The champion is the node that is directed to by all other nodes but does not direct to any other node. The function returns the index of the champion node or -1 if no champion exists.
 
-### Code Breakdown (Step by Step):
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findChampion(vector<vector<int>>& g) {
+	```
+	Defines the function 'findChampion' that takes a 2D vector 'g', which represents a directed graph, and returns the index of the champion node.
 
-1. **Function Definition:**
-   The function `findChampion` takes a 2D vector `g` as an argument, which represents the directed graph of wins and losses between players.
+2. **Loop Over Graph**
+	```cpp
+	    for (int i = 0; i < g.size(); ++i)
+	```
+	Iterates through each row of the adjacency matrix 'g'. Each row represents a node in the graph, and we are checking if it is a potential champion.
 
-   ```cpp
-   int findChampion(vector<vector<int>>& g) {
-   ```
+3. **Check Champion Condition**
+	```cpp
+	        if (accumulate(begin(g[i]), end(g[i]), 0) == g.size() - 1)
+	```
+	Uses the 'accumulate' function to sum up the values in the current row of the matrix. A champion node should have all other nodes pointing to it, so the sum must be equal to 'g.size() - 1', indicating that all other nodes point to this node.
 
-2. **Iterating Over Each Player:**
-   We iterate through each player in the graph (i.e., each row in the 2D vector). The index `i` represents a particular player.
+4. **Return Champion**
+	```cpp
+	            return i;
+	```
+	If the current node satisfies the champion condition, the function returns its index as the champion.
 
-   ```cpp
-   for (int i = 0; i < g.size(); ++i)
-   ```
+5. **Return No Champion**
+	```cpp
+	    return -1;
+	```
+	If no champion node is found after checking all rows, the function returns -1.
 
-3. **Checking the Sum of Wins for Each Player:**
-   For each player `i`, we calculate the sum of their row. The `accumulate` function is used here to sum up the elements of the row, which represent the outcomes of games against all other players.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-   - `begin(g[i])` gives the iterator to the first element of row `i`.
-   - `end(g[i])` gives the iterator to the last element of row `i`.
-   - `accumulate(begin(g[i]), end(g[i]), 0)` sums all the values in row `i`.
+In the worst case, we will need to iterate through all teams and check each of their victories in the grid, leading to a time complexity of O(n^2).
 
-   ```cpp
-   if (accumulate(begin(g[i]), end(g[i]), 0) == g.size() - 1)
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
 
-   The `accumulate` function returns the total number of wins player `i` has. If this total equals `g.size() - 1` (i.e., they have won against all other players), then player `i` is the champion.
+We are storing the entire grid, which requires O(n^2) space.
 
-4. **Returning the Champion:**
-   If the condition is met, the index `i` (representing the champion player) is returned.
+**Happy Coding! 🎉**
 
-   ```cpp
-   return i;
-   ```
-
-5. **Return -1 if No Champion is Found:**
-   If no player meets the condition (i.e., no player has won against every other player), we return `-1`, indicating that there is no champion in the graph.
-
-   ```cpp
-   return -1;
-   ```
-
-### Complexity:
-
-1. **Time Complexity:**
-   The time complexity of this solution is \(O(n^2)\), where `n` is the number of players (or the size of the graph). This is because we iterate through each row in the matrix (`n` rows), and for each row, we calculate the sum of its elements (which takes \(O(n)\) time). Therefore, the overall complexity is \(O(n \times n) = O(n^2)\).
-
-   Specifically, the `accumulate` function processes each element of the row, and since there are `n` elements in each row, we perform \(O(n)\) work for each of the `n` rows.
-
-2. **Space Complexity:**
-   The space complexity of this solution is \(O(1)\) since the algorithm only uses a constant amount of extra space. The input graph `g` is the only space used, and we don't require any additional data structures that scale with the input size. We only store a few integer variables (`i`, the iterator for rows, and `dp` for the sum), making the space complexity constant.
-
-### Conclusion:
-This solution efficiently identifies the champion in a directed graph, where the players' wins are represented in a 2D matrix. The problem boils down to checking each row in the matrix to see if the player has won against all other players, which is done using the `accumulate` function.
-
-The algorithm works by iterating over the graph, checking the sum of wins for each player, and identifying if any player meets the criteria for being the champion. If no such player exists, the function returns `-1`.
-
-The time complexity of \(O(n^2)\) makes this solution feasible for moderate-sized graphs, and the space complexity of \(O(1)\) ensures that the algorithm can handle large inputs without excessive memory usage.
-
-This approach is simple, clear, and optimal for the problem at hand, making it a strong solution for identifying the champion in a directed graph.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-champion-i/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "UQ-1sBMV0v4"
 youtube_upload_date="2023-02-27"
 youtube_thumbnail="https://i.ytimg.com/vi/UQ-1sBMV0v4/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,181 +28,214 @@ youtube_thumbnail="https://i.ytimg.com/vi/UQ-1sBMV0v4/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an n x n binary grid of 0's and 1's. Your task is to represent this grid with a Quad-Tree. A Quad-Tree is a tree structure where each node has four children. Each internal node has two properties: `val` (True for a grid of 1's or False for a grid of 0's) and `isLeaf` (True if the node is a leaf, False if it has children). If the entire grid has the same value, the node is a leaf. If not, the grid is divided into four sub-grids, and the process is repeated recursively for each sub-grid. Your goal is to return the root of the Quad-Tree that represents the grid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a grid, which is a 2D array of integers where each element is either 0 or 1. The grid is guaranteed to be a perfect square (n x n).
+- **Example:** `[[0, 1], [1, 0]]`
+- **Constraints:**
+	- 1 <= n <= 64
+	- grid is a 2D array of 0's and 1's
 
-{{< highlight cpp >}}
-/*
-// Definition for a QuadTree node.
-class Node {
-public:
-    bool val;
-    bool isLeaf;
-    Node* topLeft;
-    Node* topRight;
-    Node* bottomLeft;
-    Node* bottomRight;
-    
-    Node() {
-        val = false;
-        isLeaf = false;
-        topLeft = NULL;
-        topRight = NULL;
-        bottomLeft = NULL;
-        bottomRight = NULL;
-    }
-    
-    Node(bool _val, bool _isLeaf) {
-        val = _val;
-        isLeaf = _isLeaf;
-        topLeft = NULL;
-        topRight = NULL;
-        bottomLeft = NULL;
-        bottomRight = NULL;
-    }
-    
-    Node(bool _val, bool _isLeaf, Node* _topLeft, Node* _topRight, Node* _bottomLeft, Node* _bottomRight) {
-        val = _val;
-        isLeaf = _isLeaf;
-        topLeft = _topLeft;
-        topRight = _topRight;
-        bottomLeft = _bottomLeft;
-        bottomRight = _bottomRight;
-    }
-};
-*/
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the root of the Quad-Tree that represents the input grid. The Quad-Tree is serialized using a level-order traversal where each node is represented as a list with two values: `[isLeaf, val]`. If the node is a leaf, isLeaf is 1, and the value `val` is either 1 for True or 0 for False. Internal nodes are represented with isLeaf 0 and any value for val.
+- **Example:** `[[0, 1], [1, 0], [1, 1], [1, 1], [1, 0]]`
+- **Constraints:**
 
-class Solution {
-public:
-    Node* construct(vector<vector<int>>& grid) {
-        return helper(grid, 0, 0, grid.size());
-    }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to recursively divide the grid into four quadrants and create a tree structure where each node represents a square of the grid. If all elements in the square are the same, the node is a leaf; otherwise, it is an internal node with four children.
 
-    Node* helper(vector<vector<int>> &grid, int x, int y, int sz) {
-        if(sz == 1) return new Node(grid[x][y] != 0, true, NULL, NULL, NULL, NULL);
-        Node* res = new Node();
-        Node* topRight    = helper(grid, x , y+sz/2, sz / 2);
-        Node* topLeft     = helper(grid, x , y, sz / 2);
-        Node* bottomRight = helper(grid, x +sz/2, y+sz/2, sz / 2);
-        Node* bottomLeft  = helper(grid, x +sz/2, y, sz / 2);
+- 1. Start with the whole grid.
+- 2. If the grid is a 1x1 grid, return a leaf node.
+- 3. If all elements of the grid are the same, return a leaf node with val set to that element's value.
+- 4. Otherwise, split the grid into four sub-grids and recursively construct the Quad-Tree for each sub-grid.
+- 5. If all four sub-grids have the same value, merge them into a single leaf node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is square and consists of only 0's and 1's.
+- The value of n is always a power of 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0],[1,1,1,1,0,0,0,0]]`  \
+  **Explanation:** This grid is split into four sub-grids. The top-left, bottom-left, and bottom-right sub-grids are uniform, while the top-right sub-grid has a mix of 1's and 0's. These sub-grids are further divided, leading to a Quad-Tree that efficiently represents the entire grid.
 
-        if(topRight->isLeaf && topLeft->isLeaf && bottomRight->isLeaf && bottomLeft->isLeaf && 
-        topLeft->val == topRight->val && topRight->val == bottomRight->val && bottomRight->val == bottomLeft->val) {
-            res->val = topLeft->val;
-            res-> isLeaf = true;
-        } else {
-             res->topRight    = topRight;   
-             res->topLeft     = topLeft;   
-             res->bottomRight = bottomRight;   
-             res->bottomLeft  = bottomLeft;       
-        }
-        return res;
-    }
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves recursively dividing the grid into smaller sub-grids and constructing the Quad-Tree based on the uniformity of the values in the sub-grids.
 
-
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to construct a QuadTree from a given 2D grid of binary values (0s and 1s). A QuadTree is a tree data structure where each node represents a 4-way partition of the 2D grid, subdividing it into quadrants. Each internal node has four children: top-left, top-right, bottom-left, and bottom-right. A leaf node represents a single square in the grid and holds a value (either 0 or 1). The goal is to create a QuadTree from the grid where the leaves represent uniform values and internal nodes group similar values.
-
-### Approach
-
-To solve this problem, the approach is based on recursive subdivision of the grid. The key idea is:
-1. **Subdivide the grid**: At each step, divide the grid into 4 smaller quadrants (top-left, top-right, bottom-left, bottom-right).
-2. **Leaf node check**: If all values in a quadrant are the same (either all 0s or all 1s), the corresponding node becomes a leaf node.
-3. **Internal node creation**: If a quadrant has mixed values, it requires further subdivision until leaf nodes are formed.
-4. **Optimization**: If all four sub-quadrants are identical, we can represent them with a single leaf node.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Main Function – `construct`
-
-The `construct` function is the main entry point for the solution. It takes a 2D grid as input and returns the root node of the constructed QuadTree.
-
+### Initial Thoughts 💭
+- Each grid is divided into four quadrants at each step.
+- If all elements of a sub-grid are the same, it can be represented as a leaf node.
+- Recursive approach seems ideal, where we break down the grid into smaller grids and represent uniform grids as leaf nodes.
+{{< dots >}}
+### Edge Cases 🌐
+- A grid with all elements as 0 or all elements as 1 will immediately return a leaf node.
+- If n is large, the recursive approach may encounter performance issues, so optimization or memoization might be needed.
+- Grids with a single 0 or 1 will result in a very simple tree with just one node.
+- Only grids with dimensions that are powers of 2 need to be considered.
+{{< dots >}}
+## Code 💻
 ```cpp
 Node* construct(vector<vector<int>>& grid) {
     return helper(grid, 0, 0, grid.size());
 }
-```
 
-This function simply invokes the recursive helper function `helper`, starting with the full grid (from index `(0, 0)` to `grid.size()`) to begin constructing the QuadTree.
+Node* helper(vector<vector<int>> &grid, int x, int y, int sz) {
+    if(sz == 1) return new Node(grid[x][y] != 0, true, NULL, NULL, NULL, NULL);
+    Node* res = new Node();
+    Node* topRight    = helper(grid, x , y+sz/2, sz / 2);
+    Node* topLeft     = helper(grid, x , y, sz / 2);
+    Node* bottomRight = helper(grid, x +sz/2, y+sz/2, sz / 2);
+    Node* bottomLeft  = helper(grid, x +sz/2, y, sz / 2);
 
-#### Step 2: Recursive Helper Function – `helper`
-
-The helper function is a recursive function that performs the core logic of subdividing the grid and creating nodes for the QuadTree. It works as follows:
-
-```cpp
-Node* helper(vector<vector<int>>& grid, int x, int y, int sz) {
-    // Base case: If the grid is of size 1x1, create a leaf node.
-    if (sz == 1) {
-        return new Node(grid[x][y] != 0, true, NULL, NULL, NULL, NULL);
-    }
-```
-
-- **Base Case**: When the size of the current sub-grid is 1x1, it is directly converted into a leaf node. The `Node` constructor is invoked with the value from the grid (`grid[x][y]`), and the `isLeaf` flag is set to `true`. If the value is `0`, the `val` is set to `false`, otherwise it is `true`.
-
-#### Step 3: Recursive Subdivision and Node Creation
-
-```cpp
-Node* res = new Node();
-Node* topRight = helper(grid, x , y + sz / 2, sz / 2);
-Node* topLeft = helper(grid, x , y, sz / 2);
-Node* bottomRight = helper(grid, x + sz / 2, y + sz / 2, sz / 2);
-Node* bottomLeft = helper(grid, x + sz / 2, y, sz / 2);
-```
-
-- For grids larger than `1x1`, the current grid is divided into four smaller quadrants:
-  - **Top-left**: From `(x, y)` to `(x + sz/2, y + sz/2)`
-  - **Top-right**: From `(x, y + sz/2)` to `(x + sz/2, y + sz)`
-  - **Bottom-left**: From `(x + sz/2, y)` to `(x + sz, y + sz/2)`
-  - **Bottom-right**: From `(x + sz/2, y + sz/2)` to `(x + sz, y + sz)`
-
-Each of these quadrants is recursively processed using the `helper` function.
-
-#### Step 4: Merging the Results
-
-```cpp
-if (topRight->isLeaf && topLeft->isLeaf && bottomRight->isLeaf && bottomLeft->isLeaf && 
+    if(topRight->isLeaf && topLeft->isLeaf && bottomRight->isLeaf && bottomLeft->isLeaf && 
     topLeft->val == topRight->val && topRight->val == bottomRight->val && bottomRight->val == bottomLeft->val) {
-    res->val = topLeft->val;
-    res->isLeaf = true;
-} else {
-    res->topRight = topRight;
-    res->topLeft = topLeft;
-    res->bottomRight = bottomRight;
-    res->bottomLeft = bottomLeft;
+        res->val = topLeft->val;
+        res-> isLeaf = true;
+    } else {
+         res->topRight    = topRight;   
+         res->topLeft     = topLeft;   
+         res->bottomRight = bottomRight;   
+         res->bottomLeft  = bottomLeft;       
+    }
+    return res;
 }
+
+
 ```
 
-- **Merge Quadrants**: After recursively dividing the grid into quadrants, the next step is to check if all four quadrants are identical and can be merged into a single leaf node. This check is performed using the following conditions:
-  - If all four quadrants are leaf nodes (`isLeaf == true`).
-  - If the values of all four leaf nodes are the same.
-  
-  If these conditions are met, the current node (`res`) becomes a leaf node with the value of the shared quadrants. Otherwise, the current node is an internal node with four children (top-left, top-right, bottom-left, and bottom-right).
+This code constructs a quadtree from a 2D grid using a divide-and-conquer approach. Each node represents a quadrant of the grid, and the recursion merges nodes if all child quadrants have the same value.
 
-#### Step 5: Return the Constructed Node
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	Node* construct(vector<vector<int>>& grid) {
+	```
+	Defines the `construct` function that initializes the recursive construction of the quadtree by calling the `helper` function with the entire grid.
 
-Finally, after checking and possibly merging the quadrants, the constructed node is returned:
+2. **Recursive Call**
+	```cpp
+	    return helper(grid, 0, 0, grid.size());
+	```
+	Initiates the recursive construction of the quadtree starting from the top-left corner of the grid with its full size.
 
-```cpp
-return res;
-```
+3. **Helper Function Declaration**
+	```cpp
+	Node* helper(vector<vector<int>> &grid, int x, int y, int sz) {
+	```
+	Defines the `helper` function, which recursively divides the grid into quadrants and constructs nodes for the quadtree.
 
-This node represents the current grid or sub-grid, and the recursive calls continue until the entire grid is processed.
+4. **Base Case**
+	```cpp
+	    if(sz == 1) return new Node(grid[x][y] != 0, true, NULL, NULL, NULL, NULL);
+	```
+	Handles the base case: if the grid size is 1, creates a leaf node with the grid value indicating whether it is true (non-zero) or false (zero).
 
-### Complexity
+5. **Node Initialization**
+	```cpp
+	    Node* res = new Node();
+	```
+	Creates a new node to represent the current region of the grid.
 
-#### Time Complexity:
-- The time complexity of this solution is `O(n)`, where `n` is the total number of cells in the grid. The recursive approach ensures that every cell is processed once, with each recursive step handling a smaller grid.
+6. **Recursive Subdivision**
+	```cpp
+	    Node* topRight    = helper(grid, x , y+sz/2, sz / 2);
+	```
+	Recursively constructs the top-right quadrant of the current grid region.
 
-#### Space Complexity:
-- The space complexity is `O(n)` due to the space used for the recursive call stack and the additional space required for storing the grid itself. In the worst case, the recursion depth is proportional to the number of grid cells.
+7. **Recursive Subdivision**
+	```cpp
+	    Node* topLeft     = helper(grid, x , y, sz / 2);
+	```
+	Recursively constructs the top-left quadrant of the current grid region.
 
-### Conclusion
+8. **Recursive Subdivision**
+	```cpp
+	    Node* bottomRight = helper(grid, x +sz/2, y+sz/2, sz / 2);
+	```
+	Recursively constructs the bottom-right quadrant of the current grid region.
 
-This solution efficiently constructs a QuadTree from a 2D binary grid using recursive subdivision. By leveraging the properties of leaf nodes and internal nodes, it reduces unnecessary subdivisions when all quadrants contain the same value. The approach ensures that the QuadTree is constructed optimally with a time complexity of `O(n)` and a space complexity of `O(n)`. This method provides a clean and efficient solution for handling QuadTree construction problems in a binary grid.
+9. **Recursive Subdivision**
+	```cpp
+	    Node* bottomLeft  = helper(grid, x +sz/2, y, sz / 2);
+	```
+	Recursively constructs the bottom-left quadrant of the current grid region.
+
+10. **Merge Condition**
+	```cpp
+	    if(topRight->isLeaf && topLeft->isLeaf && bottomRight->isLeaf && bottomLeft->isLeaf && 
+	```
+	Checks if all child nodes are leaves and have the same value, allowing them to be merged into a single leaf node.
+
+11. **Merge Nodes**
+	```cpp
+	    topLeft->val == topRight->val && topRight->val == bottomRight->val && bottomRight->val == bottomLeft->val) {
+	```
+	Ensures that the values of all child nodes are equal before merging them.
+
+12. **Set Leaf Node**
+	```cpp
+	        res->val = topLeft->val;
+	```
+	Assigns the value of the child nodes to the parent node since all child nodes have the same value.
+
+13. **Set Leaf Flag**
+	```cpp
+	        res-> isLeaf = true;
+	```
+	Marks the current node as a leaf node because all child nodes were merged.
+
+14. **Assign Children**
+	```cpp
+	         res->topRight    = topRight;   
+	```
+	Assigns the top-right child to the current node when the children cannot be merged.
+
+15. **Assign Children**
+	```cpp
+	         res->topLeft     = topLeft;   
+	```
+	Assigns the top-left child to the current node when the children cannot be merged.
+
+16. **Assign Children**
+	```cpp
+	         res->bottomRight = bottomRight;   
+	```
+	Assigns the bottom-right child to the current node when the children cannot be merged.
+
+17. **Assign Children**
+	```cpp
+	         res->bottomLeft  = bottomLeft;       
+	```
+	Assigns the bottom-left child to the current node when the children cannot be merged.
+
+18. **Return Node**
+	```cpp
+	    return res;
+	```
+	Returns the constructed node, which represents the current region of the grid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+In the worst case, we need to examine all elements of the grid to determine if it can be represented as a leaf or needs further division.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n^2)
+
+The space complexity is driven by the recursion depth and the storage of the Quad-Tree nodes, which in the worst case can be proportional to the size of the grid.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-quad-tree/description/)
 

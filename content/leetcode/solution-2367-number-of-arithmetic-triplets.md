@@ -14,101 +14,137 @@ img_src = ""
 youtube = "WEyiBgwO4ZA"
 youtube_upload_date="2022-08-07"
 youtube_thumbnail="https://i.ytimg.com/vi/WEyiBgwO4ZA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a strictly increasing array of integers, nums, and a positive integer diff. A triplet (i, j, k) is an arithmetic triplet if the following conditions hold: i < j < k, nums[j] - nums[i] == diff, and nums[k] - nums[j] == diff. Your task is to return the number of unique arithmetic triplets that can be formed from the given array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a strictly increasing array nums, and an integer diff which specifies the common difference in the arithmetic triplet.
+- **Example:** `nums = [1, 3, 4, 6, 8, 9], diff = 2`
+- **Constraints:**
+	- 3 <= nums.length <= 200
+	- 0 <= nums[i] <= 200
+	- 1 <= diff <= 50
+	- nums is strictly increasing
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int arithmeticTriplets(vector<int>& nums, int diff) {
-    int cnt[201] = {}, res = 0;
-    for (auto n : nums) {
-        if (n >= 2 * diff)
-            res += cnt[n - diff] && cnt[n - 2 * diff];
-        cnt[n] = true;
-    }
-    return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer, representing the number of unique arithmetic triplets that satisfy the conditions described.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to count the number of valid triplets where the difference between consecutive numbers is exactly the given diff.
+
+- Initialize an array to keep track of the occurrences of potential triplet values.
+- For each number in the input array, check if the previous two numbers that form a valid triplet (with the given diff) have appeared before.
+- Accumulate the count of valid triplets and return the final result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is guaranteed to be strictly increasing.
+- The number of triplets should be counted based on the difference condition, not the exact indices.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 4, 6, 8, 9], diff = 2`  \
+  **Explanation:** In this example, the valid arithmetic triplets are (1, 3, 5), (3, 5, 7), and (4, 6, 8). These triplets are formed by choosing values where the difference between consecutive numbers is exactly 2.
+
+{{< dots >}}
+## Approach 🚀
+We need to efficiently count the number of valid arithmetic triplets by checking if the conditions for triplet formation are met for each number in the array.
+
+### Initial Thoughts 💭
+- We need to check if each number in the array can form an arithmetic triplet with the previous numbers.
+- We can use a frequency count to store potential triplet values.
+- By iterating over the array, we can efficiently check for the existence of valid pairs and count the triplets.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the input will always contain at least three elements, so empty arrays are not possible.
+- The solution should efficiently handle arrays with up to 200 elements.
+- If diff is large (close to 50) and nums values are also close to 200, the number of valid triplets might be small.
+- Ensure that you handle cases where no valid triplets are found.
+{{< dots >}}
+## Code 💻
+```cpp
+int arithmeticTriplets(vector<int>& nums, int diff) {
+int cnt[201] = {}, res = 0;
+for (auto n : nums) {
+    if (n >= 2 * diff)
+        res += cnt[n - diff] && cnt[n - 2 * diff];
+    cnt[n] = true;
+}
+return res;
   }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to find the number of arithmetic triplets in a given array `nums` such that for each triplet `(a, b, c)`:
-- `b - a = diff`
-- `c - b = diff`
-
-Where `diff` is a given difference value. In other words, we need to find how many triplets of numbers in the array form an arithmetic progression with the given common difference `diff`.
-
-### Approach
-
-To solve this problem efficiently, we can utilize a **hash map** (or an array in this case, since the range of numbers is limited) to track the occurrences of potential values that could form the triplet. The idea is to iterate over the numbers in the array, and for each number, check if the required preceding and succeeding numbers of the triplet have already been encountered. If they have, we increment the count of valid triplets.
-
-The algorithm works by:
-1. Iterating over the array `nums`.
-2. For each number `n` in the array, check if:
-   - `n - diff` exists in the array (this is the first number in the triplet).
-   - `n - 2*diff` exists in the array (this is the second number in the triplet).
-3. If both conditions are met, we have found an arithmetic triplet and increment the result counter.
-4. We maintain an array `cnt` to track the numbers we've encountered so far and ensure that we do not count the same number multiple times.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int arithmeticTriplets(vector<int>& nums, int diff) {
-        int cnt[201] = {}, res = 0;
 ```
-- **`cnt[201] = {}`**: We declare a frequency array `cnt` with a size of `201` to track the occurrence of numbers in `nums`. The array is initialized to zero. The reason we use a fixed array size is because the numbers in `nums` are guaranteed to be in the range `[0, 200]`, as per the problem constraints. So, we can safely use this array to track the numbers we encounter.
-- **`res = 0`**: This variable keeps track of the number of valid arithmetic triplets we have found.
 
-```cpp
-        for (auto n : nums) {
-            if (n >= 2 * diff)
-                res += cnt[n - diff] && cnt[n - 2 * diff];
-            cnt[n] = true;
-        }
-```
-- **`for (auto n : nums)`**: We iterate through each number `n` in the array `nums`.
-- **`if (n >= 2 * diff)`**: This condition checks if the current number `n` can potentially be the third number in an arithmetic triplet. The smallest possible value for `n` to be the third number in the triplet is `2 * diff`. If `n` is less than `2 * diff`, it's impossible for `n` to be the third number of a valid triplet because the second number would be negative or outside the valid range of the array.
-  
-  If `n >= 2 * diff`, we proceed to check for potential triplets.
-  
-- **`res += cnt[n - diff] && cnt[n - 2 * diff]`**: This line checks whether the previous two numbers in the triplet (i.e., `n - diff` and `n - 2 * diff`) have been encountered before in the array. If both of these values are present (i.e., `cnt[n - diff]` and `cnt[n - 2 * diff]` are both `true`), it means that we have found an arithmetic triplet `(n - 2*diff, n - diff, n)`. Therefore, we increment the result counter `res` by 1.
-  
-- **`cnt[n] = true`**: We mark the number `n` as encountered by setting `cnt[n]` to `true`. This ensures that future numbers can check if they can form a triplet with `n` as the second or third element.
+This function counts the number of arithmetic triplets in a sequence where the difference between each element is 'diff'. The approach uses an auxiliary array to track previously seen numbers.
 
-```cpp
-        return res;
-    }
-};
-```
-- **Return Statement**: Finally, we return the result `res`, which contains the total number of valid arithmetic triplets found in the array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int arithmeticTriplets(vector<int>& nums, int diff) {
+	```
+	The function starts by defining the input parameters, which are a vector of integers 'nums' and an integer 'diff' representing the difference between triplet elements.
 
-### Complexity
+2. **Array Initialization**
+	```cpp
+	int cnt[201] = {}, res = 0;
+	```
+	An array 'cnt' is initialized to track the presence of numbers in the sequence, with a size of 201, as the problem restricts the numbers to a known range. 'res' is initialized to store the final count of valid triplets.
 
-#### Time Complexity:
-- The time complexity of the algorithm is **O(n)**, where `n` is the length of the input array `nums`. This is because we iterate over the array once, performing constant-time operations (array accesses and assignments) for each element.
+3. **For Loop**
+	```cpp
+	for (auto n : nums) {
+	```
+	A for loop iterates over each element 'n' in the input array 'nums'.
 
-#### Space Complexity:
-- The space complexity is **O(1)**, assuming that the size of the array `cnt` is constant (which it is, with size 201). Although we use an array to track numbers, its size does not depend on the input size `n`, making the space complexity constant.
+4. **Condition Check**
+	```cpp
+	    if (n >= 2 * diff)
+	```
+	Checks if the current number 'n' is large enough to form a triplet. Specifically, it ensures that there is a possibility of forming a triplet with the required difference.
 
-### Conclusion
+5. **Counting Triplets**
+	```cpp
+	        res += cnt[n - diff] && cnt[n - 2 * diff];
+	```
+	If the condition is met, the result counter 'res' is incremented by 1, indicating a valid triplet. This is determined by checking if two previous numbers, 'n - diff' and 'n - 2 * diff', have been seen before.
 
-This solution is highly efficient for finding arithmetic triplets in an array with a time complexity of **O(n)** and a constant space complexity of **O(1)**. The algorithm works by maintaining a hash map (in this case, a simple frequency array `cnt`) to track the presence of numbers and checking the necessary conditions to form valid triplets. This method ensures that we can solve the problem with minimal time and space usage, making it suitable for large inputs.
+6. **Marking Presence**
+	```cpp
+	    cnt[n] = true;
+	```
+	Marks the current number 'n' as present by setting 'cnt[n]' to true. This helps track which numbers have been seen in the array.
 
-- **Edge Cases Considered**:
-  - Arrays with fewer than 3 elements (no triplet can be formed).
-  - Arrays where no valid arithmetic triplets exist.
-  - Arrays where all numbers are the same but don't form valid arithmetic progressions.
-  
-The solution leverages simple, efficient array operations to count valid arithmetic triplets, making it an ideal approach for solving this problem.
+7. **Return Statement**
+	```cpp
+	return res;
+	```
+	The function returns the total count of valid arithmetic triplets found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the array, since we iterate over the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) as we need extra space to store the occurrence count for each number in the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-arithmetic-triplets/description/)
 

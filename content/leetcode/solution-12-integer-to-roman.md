@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Rsq1ObYg6ak"
 youtube_upload_date="2022-09-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Rsq1ObYg6ak/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,139 +28,168 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/Rsq1ObYg6ak/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a positive integer and need to convert it into a Roman numeral. Roman numerals are constructed by combining symbols from the set: I, V, X, L, C, D, M, where each symbol has a specific value. The conversion rules are based on subtractive notation for values like 4 (IV), 9 (IX), and so on, to avoid using symbols multiple times where not allowed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a single integer `num` (1 <= num <= 3999), which represents the number to be converted to a Roman numeral.
+- **Example:** `Input: num = 1987`
+- **Constraints:**
+	- 1 <= num <= 3999
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string intToRoman(int num) {
-        vector<int> nums = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
-        vector<string> chrs = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the Roman numeral representation of the given number.
+- **Example:** `Output: 'MCMLXXXVII'`
+- **Constraints:**
+	- The result should be a string representing the Roman numeral equivalent of the input number.
 
-        int idx = 0;
-        string res = "";
-        while(num > 0)
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to break down the number into its decimal place values and convert them into Roman numerals according to the Roman numeral conversion rules.
+
+- Create a list of values for Roman numerals starting from the largest to the smallest.
+- For each value, check if it can be subtracted from the current number and add the corresponding Roman numeral symbol to the result.
+- If a subtractive form like 4 (IV) or 9 (IX) is needed, use those instead of repeating smaller symbols.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input number will always be a valid positive integer within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num = 1987`  \
+  **Explanation:** 1987 is split into 1000 (M), 900 (CM), 80 (LXXX), and 7 (VII). Therefore, the Roman numeral is 'MCMLXXXVII'.
+
+- **Input:** `Input: num = 58`  \
+  **Explanation:** 58 is split into 50 (L) and 8 (VIII). Therefore, the Roman numeral is 'LVIII'.
+
+{{< dots >}}
+## Approach 🚀
+To convert the number to a Roman numeral, we use a greedy approach that subtracts the largest possible Roman numeral values from the number at each step, appending the corresponding symbols to the result string.
+
+### Initial Thoughts 💭
+- We should process the Roman numeral symbols from largest to smallest to maximize the efficiency of the conversion.
+- Start with the largest value (1000, M) and work downwards. This avoids adding unnecessary symbols.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the number will always be between 1 and 3999.
+- The solution should work efficiently for the largest input (3999).
+- Ensure that the subtractive notation is correctly applied, e.g., 4 (IV), 9 (IX), 40 (XL), etc.
+- The solution should process the number in O(1) time since the number of possible Roman numeral symbols is constant.
+{{< dots >}}
+## Code 💻
+```cpp
+string intToRoman(int num) {
+    vector<int> nums = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+    vector<string> chrs = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+
+    int idx = 0;
+    string res = "";
+    while(num > 0)
+    {
+        while(num >= nums[idx])
         {
-            while(num >= nums[idx])
-            {
-                num -= nums[idx];
-                res += chrs[idx];
-            }
-            idx++;
+            num -= nums[idx];
+            res += chrs[idx];
         }
-        return res;
+        idx++;
     }
-};
-{{< /highlight >}}
----
-
-### 🌟 **Converting Integer to Roman Numeral: A Simple Approach**
-
-We are tasked with converting an integer into its Roman numeral representation. Roman numerals are symbols that represent specific values, such as:
-
-| Symbol | Value |
-|--------|-------|
-| I      | 1     |
-| V      | 5     |
-| X      | 10    |
-| L      | 50    |
-| C      | 100   |
-| D      | 500   |
-| M      | 1000  |
-
-For example:
-- `3` becomes "III"
-- `58` becomes "LVIII"
-
-Let’s break down how we can solve this problem step by step, and make it simple and intuitive. 💡
-
----
-
-### 🧠 **Understanding the Greedy Approach**
-
-We can solve this problem efficiently by **greedily** subtracting the largest Roman numeral values from the given number. Think of it like packing a bag starting with the largest items first! We will continue this process until the number becomes zero.
-
-#### Key Observations:
-1. **Symbols Combination**: Certain numbers like 4 are represented as "IV" (not "IIII") and 9 as "IX", which helps avoid repetitive characters.
-   
-2. **Greedy Strategy**: At each step, subtract the largest possible Roman numeral value from the number, and append the corresponding symbol to the result. Simple, right?
-
----
-
-### 🏃‍♂️ **Step-by-Step Breakdown of the Code**
-
-#### Step 1: Roman Numerals List
-
-We start by creating two arrays:
-- **Numeral values (`nums`)**: A list of integers representing the Roman numeral values from largest to smallest.
-- **Corresponding symbols (`chrs`)**: A list of strings that represent the Roman numeral symbols for the values in `nums`.
-
-```cpp
-vector<int> nums = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-vector<string> chrs = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-```
-
-These two arrays allow us to efficiently match numbers to their Roman numeral symbols.
-
----
-
-#### Step 2: Initialize Result and Index
-
-Before diving into the conversion process, we set up a result string to store the final Roman numeral and an index to keep track of where we are in the `nums` array.
-
-```cpp
-int idx = 0;
-string res = "";
-```
-
----
-
-#### Step 3: Loop to Convert
-
-Now comes the fun part! We iterate over the integer, subtracting the largest Roman numeral possible at each step.
-
-```cpp
-while (num > 0) {
-    while (num >= nums[idx]) {
-        num -= nums[idx];  // Subtract the Roman numeral value from the integer
-        res += chrs[idx];   // Append the corresponding Roman numeral symbol to the result
-    }
-    idx++;  // Move to the next Roman numeral value
+    return res;
 }
 ```
 
-- **Inner loop**: We subtract `nums[idx]` from `num` as long as it's still greater than or equal to the current value. Each time, we add the corresponding Roman numeral symbol (`chrs[idx]`) to `res`.
-- **Index increment**: After using the current Roman numeral value, we move on to the next one.
+This code implements the `intToRoman` function, which converts an integer to a Roman numeral.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string intToRoman(int num) {
+	```
+	Declare the `intToRoman` function, which takes an integer `num` as input and returns a string representing the Roman numeral equivalent.
 
-### ⏱️ **Time and Space Complexity**
+2. **Array Initialization**
+	```cpp
+	    vector<int> nums = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+	```
+	Initialize a vector `nums` to store the decimal values of Roman numerals in descending order.
 
-- **Time Complexity**: The algorithm runs in constant time **O(1)** since the number of Roman numeral symbols is fixed (13), meaning the loop will iterate a constant number of times regardless of the input number.
-  
-- **Space Complexity**: The space complexity is **O(1)** because we only use a few variables and two fixed-size arrays to store the Roman numeral symbols and their values.
+3. **Array Initialization**
+	```cpp
+	    vector<string> chrs = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+	```
+	Initialize a vector `chrs` to store the corresponding Roman numerals for each decimal value.
 
----
+4. **Variable Initialization**
+	```cpp
+	    int idx = 0;
+	```
+	Initialize an index `idx` to keep track of the current position in the `nums` and `chrs` vectors.
 
-### 🤓 **Why This Works So Well**
+5. **Variable Initialization**
+	```cpp
+	    string res = "";
+	```
+	Initialize an empty string `res` to store the resulting Roman numeral.
 
-By always starting with the largest Roman numeral and working our way down, we ensure the number is represented optimally. The greedy approach is **simple yet powerful** — always choose the biggest piece first!
+6. **Loop Iteration**
+	```cpp
+	    while(num > 0)
+	```
+	Start a loop that continues while `num` is greater than 0.
 
-#### Advantages:
-- **Fast and Efficient**: With **O(1)** time and space complexity, this approach can handle any valid input instantly.
-- **Clear and Concise**: The logic is intuitive. We process each value in descending order, which makes the solution straightforward.
+7. **Loop Iteration**
+	```cpp
+	        while(num >= nums[idx])
+	```
+	Start an inner loop that continues while `num` is greater than or equal to the current decimal value.
 
-#### Limitations:
-- This solution works for numbers between **1 and 3999** since Roman numerals don't have representations for numbers larger than 3999.
+8. **Mathematical Operations**
+	```cpp
+	            num -= nums[idx];
+	```
+	Subtract the current decimal value from `num`.
 
----
+9. **String Manipulation**
+	```cpp
+	            res += chrs[idx];
+	```
+	Append the corresponding Roman numeral to the `res` string.
 
-### 🎯 **Key Takeaways**
+10. **Index Update**
+	```cpp
+	        idx++;
+	```
+	Increment the index `idx` to move to the next decimal value and its corresponding Roman numeral.
 
-- Start with the largest Roman numeral and subtract it from the number, adding the symbol to the result.
-- **Practice makes perfect**! By applying this greedy strategy, you'll soon be able to convert any integer into a Roman numeral with ease.
-  
-This approach is both **elegant** and **efficient**, ensuring optimal performance for any input. Keep practicing, and soon you’ll be converting numbers to Roman numerals like a pro! ✨
+11. **Loop Iteration**
+	```cpp
+	    }
+	```
+	End of the outer loop.
+
+12. **Return Value**
+	```cpp
+	    return res;
+	```
+	Return the final Roman numeral string `res`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+Since the number of Roman numeral symbols is fixed and there are only a few steps involved in the conversion, the time complexity is O(1).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we are only using a fixed number of variables to store the result and intermediate values.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/integer-to-roman/description/)
 

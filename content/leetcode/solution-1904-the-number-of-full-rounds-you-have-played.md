@@ -14,130 +14,172 @@ img_src = ""
 youtube = "kwvB82HHvoQ"
 youtube_upload_date="2021-06-20"
 youtube_thumbnail="https://i.ytimg.com/vi/kwvB82HHvoQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are participating in an online chess tournament where rounds start every 15 minutes, starting at 00:00. You are given two times: `loginTime` and `logoutTime`. Your task is to calculate the number of full rounds you have participated in during the period from `loginTime` to `logoutTime`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two strings: `loginTime` and `logoutTime` representing the times when you log in and log out respectively.
+- **Example:** `loginTime = "08:25", logoutTime = "09:05"`
+- **Constraints:**
+	- loginTime and logoutTime are in the format hh:mm.
+	- 00 <= hh <= 23
+	- 00 <= mm <= 59
+	- loginTime and logoutTime are not equal.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfRounds(string login, string logout) {
-        
-        int in = (((login[0] - '0') * 10 + (login[1]- '0')) * 60) + ((login[3] - '0') * 10 + (login[4] - '0'));
-        int out = (((logout[0] - '0') * 10 + (logout[1]- '0')) * 60) + ((logout[3] - '0') * 10 + (logout[4] - '0'));
-        // cout << in << " " << out;
-        int cnt = 0;
-        if(in > out) {
-            for(int i = 0; i < 24 * 60; i += 15) {
-                if(i + 15 <= out || i >= in) cnt++;
-            }
-            return cnt;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of full chess rounds you have participated in during the given time window.
+- **Example:** `1`
+- **Constraints:**
+	- The result is an integer representing the count of full rounds played.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the number of full chess rounds you have played between `loginTime` and `logoutTime`.
+
+- Convert `loginTime` and `logoutTime` to minutes from 00:00.
+- If `logoutTime` is earlier than `loginTime`, split the time into two parts: from `loginTime` to midnight, and from midnight to `logoutTime`.
+- Count the full rounds (each lasting 15 minutes) in both parts of the time window.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input times are in the 24-hour format with no leading zeros in the time parts.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: loginTime = "22:50", logoutTime = "01:30"`  \
+  **Explanation:** You played 1 full round from 22:50 to 23:00, and 5 full rounds from 00:00 to 01:30. Total = 6 full rounds.
+
+{{< dots >}}
+## Approach 🚀
+We need to calculate the number of full rounds by breaking down the time window into multiple 15-minute intervals. We handle the case where the login and logout times span across midnight.
+
+### Initial Thoughts 💭
+- The rounds start every 15 minutes, so checking for full rounds involves dividing the time window into intervals of 15 minutes.
+- By converting the time to minutes and iterating through the intervals, we can efficiently count full rounds.
+{{< dots >}}
+### Edge Cases 🌐
+- Input times cannot be empty, as the constraints ensure they are always valid strings.
+- The solution should efficiently handle the maximum number of rounds, even if `loginTime` and `logoutTime` span across the entire day.
+- Handle the scenario where `logoutTime` is earlier than `loginTime` by splitting the time window across midnight.
+- Ensure that input values are within the range 00:00 to 23:59.
+{{< dots >}}
+## Code 💻
+```cpp
+int numberOfRounds(string login, string logout) {
+    
+    int in = (((login[0] - '0') * 10 + (login[1]- '0')) * 60) + ((login[3] - '0') * 10 + (login[4] - '0'));
+    int out = (((logout[0] - '0') * 10 + (logout[1]- '0')) * 60) + ((logout[3] - '0') * 10 + (logout[4] - '0'));
+    // cout << in << " " << out;
+    int cnt = 0;
+    if(in > out) {
         for(int i = 0; i < 24 * 60; i += 15) {
-            // cout << "\n" << i; 
-            if(i >= in && (i + 15) <= out) cnt++;
+            if(i + 15 <= out || i >= in) cnt++;
         }
         return cnt;
-        
-        
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    for(int i = 0; i < 24 * 60; i += 15) {
+        // cout << "\n" << i; 
+        if(i >= in && (i + 15) <= out) cnt++;
+    }
+    return cnt;
+    
+    
+}
+```
 
-The problem is to determine the number of complete 15-minute rounds that a user is active based on their login and logout times. The login and logout times are provided in a `HH:MM` format (24-hour clock), and the solution must account for scenarios where the logout time could be on the following day if the login occurs late in the day.
+This function calculates the number of 15-minute intervals that overlap between two given times represented by the `login` and `logout` strings.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfRounds(string login, string logout) {
+	```
+	The function definition starts here. It takes two string parameters `login` and `logout`, representing the login and logout times in HH:MM format.
 
-To solve this problem, we will:
+2. **Login Time Calculation**
+	```cpp
+	    int in = (((login[0] - '0') * 10 + (login[1]- '0')) * 60) + ((login[3] - '0') * 10 + (login[4] - '0'));
+	```
+	This line calculates the `in` time by converting the `login` string (HH:MM) to the number of minutes from midnight.
 
-1. **Convert Time to Minutes**: Convert the login and logout times from `HH:MM` format into total minutes since the start of the day. This makes it easier to perform arithmetic calculations.
+3. **Logout Time Calculation**
+	```cpp
+	    int out = (((logout[0] - '0') * 10 + (logout[1]- '0')) * 60) + ((logout[3] - '0') * 10 + (logout[4] - '0'));
+	```
+	This line calculates the `out` time by converting the `logout` string (HH:MM) to the number of minutes from midnight.
 
-2. **Calculate Active Rounds**: Count how many complete 15-minute rounds fall within the active time from login to logout. A complete round is defined as a time interval that starts and ends within the active period.
+4. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	This line initializes a counter `cnt` to 0, which will track the number of overlapping 15-minute intervals.
 
-3. **Handle Overnight Scenarios**: If the login time is greater than the logout time, it indicates that the user logged in before midnight and logged out after. We need to account for the full 24-hour cycle.
+5. **Conditional Check**
+	```cpp
+	    if(in > out) {
+	```
+	This condition checks if the `in` time is greater than the `out` time, which could happen if the login time is after midnight, indicating a new day.
 
-4. **Return the Result**: Finally, return the count of the complete 15-minute rounds.
+6. **For Loop (Overlapping Time Calculation)**
+	```cpp
+	        for(int i = 0; i < 24 * 60; i += 15) {
+	```
+	This for loop iterates through all possible 15-minute intervals in a day (from 0 to 1440 minutes).
 
-### Code Breakdown (Step by Step)
+7. **Interval Check**
+	```cpp
+	            if(i + 15 <= out || i >= in) cnt++;
+	```
+	This checks if the current 15-minute interval overlaps with the given time range, and increments the counter `cnt`.
 
-Let's break down the code to understand how these steps are implemented:
+8. **Return Value (Condition True)**
+	```cpp
+	        return cnt;
+	```
+	If the `in` time is greater than the `out` time, return the number of intervals counted so far.
 
-1. **Class Definition**: The solution is encapsulated in a class named `Solution`.
+9. **For Loop (Overlapping Time Calculation)**
+	```cpp
+	    for(int i = 0; i < 24 * 60; i += 15) {
+	```
+	This for loop iterates through all possible 15-minute intervals in a day (from 0 to 1440 minutes).
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+10. **Interval Check**
+	```cpp
+	        if(i >= in && (i + 15) <= out) cnt++;
+	```
+	This checks if the current 15-minute interval is fully within the `in` and `out` times and increments the counter `cnt`.
 
-2. **Function Signature**: The function `numberOfRounds` is defined, which takes two strings, `login` and `logout`, as input and returns an integer.
+11. **Return Value (Else Block)**
+	```cpp
+	    return cnt;
+	```
+	If the `in` time is less than or equal to the `out` time, return the number of intervals counted so far.
 
-   ```cpp
-       int numberOfRounds(string login, string logout) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-3. **Time Conversion**: The login and logout times are converted into total minutes. This is done by multiplying the hour part by 60 and adding the minute part.
+The time complexity depends on how many rounds are counted, which is proportional to the number of 15-minute intervals in a 24-hour period (96 intervals).
 
-   ```cpp
-           int in = (((login[0] - '0') * 10 + (login[1]- '0')) * 60) + ((login[3] - '0') * 10 + (login[4] - '0'));
-           int out = (((logout[0] - '0') * 10 + (logout[1]- '0')) * 60) + ((logout[3] - '0') * 10 + (logout[4] - '0'));
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-4. **Counter Initialization**: A counter `cnt` is initialized to zero to keep track of the number of complete rounds.
+The space complexity is constant, as we only use a few variables to store the start and end times and the count of rounds.
 
-   ```cpp
-           int cnt = 0;
-   ```
+**Happy Coding! 🎉**
 
-5. **Overnight Handling**: The first `if` condition checks if the login time is greater than the logout time, indicating an overnight scenario. If so, it counts rounds for the time between the login time and the end of the day, and then from the start of the day to the logout time.
-
-   ```cpp
-           if(in > out) {
-               for(int i = 0; i < 24 * 60; i += 15) {
-                   if(i + 15 <= out || i >= in) cnt++;
-               }
-               return cnt;
-           }
-   ```
-
-6. **Regular Case**: If the login time is less than or equal to the logout time, it counts the complete rounds that fall strictly within the active time.
-
-   ```cpp
-           for(int i = 0; i < 24 * 60; i += 15) {
-               if(i >= in && (i + 15) <= out) cnt++;
-           }
-           return cnt;
-       }
-   };
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is O(1) since the loop will iterate a fixed number of times (96 times for the 15-minute intervals in a day). The overall complexity does not depend on the input size.
-
-- **Space Complexity**: The space complexity is also O(1) because we are using a fixed amount of space for the variables, regardless of the input size.
-
-### Conclusion
-
-The `numberOfRounds` function effectively calculates the number of complete 15-minute rounds that fall within a user's active time, taking into account both day transitions and the specifics of time calculation. The approach is efficient and straightforward, utilizing basic arithmetic and conditional checks.
-
-### Use Cases
-
-The `numberOfRounds` function can be applied in various domains, such as:
-
-- **Workforce Management**: In applications that track employee work hours, it can be used to calculate active working time blocks, which can help in payroll calculations or productivity assessments.
-
-- **Time Tracking Applications**: For applications that require time logging and reporting, this function can help in generating reports based on active time spent.
-
-- **Game Development**: In online gaming, where player activity is logged, this function could be used to calculate active playtime in specific intervals, helping in reward systems or player engagement metrics.
-
-By implementing this function, developers can ensure their applications effectively handle time tracking, while maintaining clarity and performance in their code. The simple yet effective approach makes it an ideal candidate for integration into larger systems that require time-based calculations.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-full-rounds-you-have-played/description/)
 

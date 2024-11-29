@@ -14,108 +14,134 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary matrix with 2 rows and n columns, where each element is either 0 or 1. The sum of elements in the 0-th (upper) row is given by upper, the sum of elements in the 1-st (lower) row is given by lower, and the column-wise sum is given by colsum. Your task is to reconstruct the matrix based on these sums. If reconstruction is not possible, return an empty matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of three integers: upper, lower, and a list colsum representing the column-wise sums.
+- **Example:** `upper = 2, lower = 1, colsum = [1,1,1]`
+- **Constraints:**
+	- 1 <= colsum.length <= 10^5
+	- 0 <= upper, lower <= colsum.length
+	- 0 <= colsum[i] <= 2
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> reconstructMatrix(int u, int l, vector<int>& cs) {
-        vector<vector<int>> res(2, vector<int>(cs.size()));
-        for(int i = 0; i < cs.size(); u -= res[0][i], l -= res[1][i], i++) {
-            res[0][i] = cs[i] == 2 || (cs[i] == 1 && l < u);
-            res[1][i] = cs[i] == 2 || (cs[i] == 1 && !res[0][i]);
-        }
-        return u == 0 && l == 0 ? res : vector<vector<int>>();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the reconstructed matrix if valid; otherwise, return an empty matrix.
+- **Example:** `[[1, 1, 0], [0, 0, 1]]`
+- **Constraints:**
+	- The reconstructed matrix must satisfy the row and column sums.
+	- If no valid solution exists, return an empty matrix.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Reconstruct a valid binary matrix by ensuring that row and column sums match the given constraints.
+
+- Iterate through the colsum array to reconstruct the matrix by assigning values to the two rows based on the constraints.
+- Ensure that the values assigned to the rows satisfy the given upper and lower row sums as well as the colsum constraints.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values are valid and the row sums upper and lower are feasible with respect to colsum.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `upper = 2, lower = 1, colsum = [1, 1, 1]`  \
+  **Explanation:** The matrix is valid as the sums of the rows and columns match the given values.
+
+- **Input:** `upper = 2, lower = 3, colsum = [2, 2, 1, 1]`  \
+  **Explanation:** It is impossible to reconstruct a valid matrix, as the lower row sum exceeds the total sum of the columns.
+
+- **Input:** `upper = 5, lower = 5, colsum = [2, 1, 2, 0, 1, 0, 1, 2, 0, 1]`  \
+  **Explanation:** The matrix is reconstructed correctly, with the row and column sums matching the given values.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we iterate through the column sums and try to allocate values to the two rows, ensuring that the row and column sums match the given constraints.
+
+### Initial Thoughts 💭
+- The binary matrix reconstruction requires careful allocation of values to the rows based on the column sums.
+- The problem can be solved by iterating over the colsum array and using a greedy approach to assign 1s to the upper and lower rows, ensuring that the row sums are satisfied.
+{{< dots >}}
+### Edge Cases 🌐
+- If colsum is an empty array, return an empty matrix.
+- The solution should handle large inputs efficiently, with a maximum length of 100,000 for colsum.
+- If the column sums are all zeros, the matrix should be filled with zeros.
+- Ensure the solution handles all edge cases, including invalid cases where no solution exists.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> reconstructMatrix(int u, int l, vector<int>& cs) {
+    vector<vector<int>> res(2, vector<int>(cs.size()));
+    for(int i = 0; i < cs.size(); u -= res[0][i], l -= res[1][i], i++) {
+        res[0][i] = cs[i] == 2 || (cs[i] == 1 && l < u);
+        res[1][i] = cs[i] == 2 || (cs[i] == 1 && !res[0][i]);
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-In this problem, you are tasked with reconstructing a binary matrix based on two constraints: the number of 1s in each column and the number of 1s in each row. Given the upper limit (`u`) for the number of 1s in the first row and the lower limit (`l`) for the second row, as well as a vector (`cs`) that represents the count of 1s for each column, the objective is to generate a binary matrix (2xN) such that:
-
-1. The sum of the first row equals `u`.
-2. The sum of the second row equals `l`.
-3. Each column contains either two 1s, one 1, or no 1s based on the values in `cs`.
-
-The function should return the constructed matrix if possible, or an empty matrix if it's not feasible to meet the constraints.
-
-### Approach
-To solve this problem, we will employ the following approach:
-
-1. **Matrix Initialization**: Create a 2xN matrix initialized with zeros. This matrix will hold the reconstructed values.
-
-2. **Iterate through Columns**: Loop through each column, using the corresponding value in `cs` to determine how many 1s should be placed in that column.
-
-3. **Decision Logic**: For each column, the decision on how many 1s to place is made based on:
-   - If `cs[i]` equals 2, place 1 in both rows.
-   - If `cs[i]` equals 1, place 1 in the row that still has remaining capacity (either `u` or `l`).
-   - If `cs[i]` equals 0, leave both rows as 0.
-
-4. **Final Check**: After filling in the matrix, check if the total counts of `u` and `l` have been met. If they match, return the matrix; otherwise, return an empty matrix.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> reconstructMatrix(int u, int l, vector<int>& cs) {
+    return u == 0 && l == 0 ? res : vector<vector<int>>();
+}
 ```
-- **Line 1-2**: The class `Solution` is defined with the public method `reconstructMatrix`, which takes two integers (`u`, `l`) and a vector of integers (`cs`). This method will return a 2D vector representing the reconstructed matrix.
 
-```cpp
-        vector<vector<int>> res(2, vector<int>(cs.size()));
-```
-- **Line 3**: A 2D vector `res` is initialized with 2 rows and `cs.size()` columns, filled with zeros. This will eventually contain the binary matrix.
+The function `reconstructMatrix` attempts to reconstruct a binary matrix based on the given counts of ones in each row (`u` for upper row and `l` for lower row) and a vector `cs` indicating the constraints for each column. It returns the reconstructed matrix if it's possible, otherwise returns an empty matrix.
 
-```cpp
-        for(int i = 0; i < cs.size(); u -= res[0][i], l -= res[1][i], i++) {
-```
-- **Line 4**: A for loop iterates through each index `i` of the `cs` vector, where `u` and `l` will be decremented based on the values placed in the current column.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> reconstructMatrix(int u, int l, vector<int>& cs) {
+	```
+	The function `reconstructMatrix` is defined, which takes two integers `u` (the number of ones in the upper row) and `l` (the number of ones in the lower row) as inputs, along with a vector `cs` containing constraints for each column.
 
-```cpp
-            res[0][i] = cs[i] == 2 || (cs[i] == 1 && l < u);
-```
-- **Line 5**: The first row's value for the current column is set to `1` if `cs[i]` equals `2` (indicating both rows get a `1`) or if it equals `1` and there are more remaining `1s` in the first row (`u`) than in the second row (`l`). This ensures that we prioritize filling the row with a higher remaining capacity.
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> res(2, vector<int>(cs.size()));
+	```
+	A 2D vector `res` of size 2xN (where N is the size of `cs`) is initialized to store the reconstructed binary matrix. The first row represents the upper row, and the second represents the lower row.
 
-```cpp
-            res[1][i] = cs[i] == 2 || (cs[i] == 1 && !res[0][i]);
-```
-- **Line 6**: The second row's value is similarly set. If `cs[i]` is `2`, both rows receive a `1`. If `cs[i]` is `1` and the first row does not have a `1` in that column (`!res[0][i]`), then a `1` is placed in the second row.
+3. **For Loop**
+	```cpp
+	    for(int i = 0; i < cs.size(); u -= res[0][i], l -= res[1][i], i++) {
+	```
+	A `for` loop is used to iterate over each column in the matrix. During each iteration, `u` and `l` are reduced based on the number of ones placed in the upper and lower rows respectively.
 
-```cpp
-        }
-```
-- **Line 7**: This marks the end of the for loop.
+4. **Condition for Upper Row**
+	```cpp
+	        res[0][i] = cs[i] == 2 || (cs[i] == 1 && l < u);
+	```
+	For the current column, if the value in `cs[i]` is 2, the upper row at `i` is set to 1. If the value in `cs[i]` is 1, the upper row is set to 1 only if the remaining number of ones in the lower row (`l`) is less than the upper row (`u`).
 
-```cpp
-        return u == 0 && l == 0 ? res : vector<vector<int>>();
-```
-- **Line 8**: Finally, after the loop, we check if both `u` and `l` are equal to zero. If they are, this means we have successfully constructed a valid matrix, which is returned. If not, we return an empty vector, indicating that it's impossible to satisfy the constraints.
+5. **Condition for Lower Row**
+	```cpp
+	        res[1][i] = cs[i] == 2 || (cs[i] == 1 && !res[0][i]);
+	```
+	For the current column, if `cs[i]` is 2, the lower row at `i` is set to 1. If `cs[i]` is 1, the lower row is set to 1 only if the upper row at the same column is 0.
 
-```cpp
-    }
-};
-```
-- **Line 9-10**: This closes the method and the class.
+6. **Return Result**
+	```cpp
+	    return u == 0 && l == 0 ? res : vector<vector<int>>();
+	```
+	After processing all columns, the function checks if both `u` and `l` have been reduced to 0, meaning the number of ones for both rows is fully satisfied. If true, it returns the reconstructed matrix `res`; otherwise, it returns an empty 2D vector indicating that the reconstruction was not possible.
 
-### Complexity Analysis
-1. **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the number of columns in the `cs` vector. The function iterates through the `cs` vector once to fill the matrix.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Space Complexity**: The space complexity is also \(O(n)\) due to the storage required for the output matrix `res`, which has a fixed size of \(2 \times n\).
+The solution iterates through the colsum array once, resulting in a time complexity of O(n).
 
-### Conclusion
-The `reconstructMatrix` function provides a clear and efficient method for reconstructing a binary matrix based on given constraints. By utilizing a straightforward approach to iteratively fill the matrix according to the rules set by the input parameters (`u`, `l`, and `cs`), the function ensures that the matrix meets the required criteria.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution exemplifies how to apply logical reasoning and decision-making in coding, particularly when working with matrix structures and constraints. The combination of GCD properties and matrix manipulation not only leads to an effective solution but also highlights the importance of understanding the underlying mathematical principles in algorithm design.
+The space complexity is O(n) due to the storage of the result matrix.
 
-Overall, the `reconstructMatrix` function serves as an excellent example of practical problem-solving in programming, providing insights into how to handle similar tasks involving constraints and binary representations effectively. By maintaining clarity and efficiency, this function can be a useful addition to any coder's toolkit.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/description/)
 

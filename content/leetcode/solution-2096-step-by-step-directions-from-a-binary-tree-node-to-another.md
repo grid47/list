@@ -14,131 +14,184 @@ img_src = ""
 youtube = "JegJNGcwtFg"
 youtube_upload_date="2024-07-16"
 youtube_thumbnail="https://i.ytimg.com/vi/JegJNGcwtFg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary tree where each node has a unique value between 1 and n. You are also given a start node and a destination node, each represented by their values. Your task is to find the shortest path from the start node to the destination node in terms of directions. The directions should be represented by a string using the characters 'L', 'R', and 'U', where 'L' means left child, 'R' means right child, and 'U' means moving to the parent node.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of the binary tree and two integers representing the start and destination nodes.
+- **Example:** `root = [8, 3, 10, 1, 6, null, 14, null, null, 4, 7], startValue = 1, destValue = 7`
+- **Constraints:**
+	- The number of nodes in the tree is between 2 and 10^5.
+	- Each node's value is unique.
+	- The startValue and destValue are different.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string representing the directions from the start node to the destination node, using 'L', 'R', and 'U' characters.
+- **Example:** `Output: 'UUR'`
+- **Constraints:**
 
-    bool find(TreeNode* n, int val, string &path) {
-        if(n->val == val) return true;
-             if (n->left  && find(n->left,  val, path)) path.push_back('L');
-        else if (n->right && find(n->right, val, path)) path.push_back('R');
-        return !path.empty();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the shortest path between the start and destination nodes in terms of directions.
+
+- First, find the path from the root to the start node and the path from the root to the destination node.
+- Compare the two paths and remove the common part from the end of both paths.
+- For the remaining part of the start path, replace each step with 'U' to move upwards to the common ancestor.
+- For the remaining part of the destination path, leave the steps as they are, which will be moving downwards to the destination.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is not empty.
+- Both startValue and destValue are valid and exist in the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: root = [8, 3, 10, 1, 6, null, 14, null, null, 4, 7], startValue = 1, destValue = 7`  \
+  **Explanation:** The shortest path from 1 to 7 is: 1 → 3 → 6 → 7. The directions are 'UUR'.
+
+- **Input:** `Example 2: root = [1, 2], startValue = 1, destValue = 2`  \
+  **Explanation:** The shortest path from 1 to 2 is directly down the left child. The direction is 'L'.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves finding the paths from the root to both the start and destination nodes, comparing them, and extracting the necessary directions for the shortest path.
+
+### Initial Thoughts 💭
+- We need to traverse the tree to find the paths to the start and destination nodes.
+- Once we have the paths, we can easily determine the shortest path by removing the common portion and adjusting the directions accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty input cases as the tree is guaranteed to contain at least two nodes.
+- The solution should handle trees with up to 10^5 nodes efficiently.
+- The start and destination nodes are distinct and valid, ensuring there are no circular paths.
+- The tree is not empty, and both nodes are within the valid range.
+{{< dots >}}
+## Code 💻
+```cpp
+
+bool find(TreeNode* n, int val, string &path) {
+    if(n->val == val) return true;
+         if (n->left  && find(n->left,  val, path)) path.push_back('L');
+    else if (n->right && find(n->right, val, path)) path.push_back('R');
+    return !path.empty();
+}
+
+string getDirections(TreeNode* root, int startValue, int destValue) {
+    string sp, dp;
+    find(root, startValue, sp);
+    find(root,  destValue, dp);
+    while(!sp.empty() && !dp.empty() && sp.back() == dp.back()) {
+        sp.pop_back();
+        dp.pop_back();
     }
+    return string(sp.size(), 'U') + string(rbegin(dp), rend(dp));
+}
+```
 
-    string getDirections(TreeNode* root, int startValue, int destValue) {
-        string sp, dp;
-        find(root, startValue, sp);
-        find(root,  destValue, dp);
-        while(!sp.empty() && !dp.empty() && sp.back() == dp.back()) {
-            sp.pop_back();
-            dp.pop_back();
-        }
-        return string(sp.size(), 'U') + string(rbegin(dp), rend(dp));
-    }
-};
-{{< /highlight >}}
----
+This code defines two functions. The first, 'find', searches for a node in a binary tree and records the path from the root to the node. The second, 'getDirections', finds the directions to go from one node to another in the tree, moving up ('U') to a common ancestor and then down ('L' or 'R') to the destination.
 
-### Problem Statement
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Start of find function**
+	```cpp
+	bool find(TreeNode* n, int val, string &path) {
+	```
+	Defines the 'find' function, which searches for a node with a specific value in a binary tree and records the path to that node.
 
-The problem requires finding the path between two nodes in a binary tree, given the values of the two nodes. The path is defined by directions: "L" for left, "R" for right, and "U" for moving up to the parent node. The objective is to return a string that represents the path from the start node to the destination node, including any necessary moves up the tree to reach a common ancestor before proceeding down to the destination node.
+2. **Base Case Check**
+	```cpp
+	    if(n->val == val) return true;
+	```
+	Checks if the current node's value matches the target value. If so, it returns true, indicating the node has been found.
 
-### Approach
+3. **Left Subtree Search**
+	```cpp
+	         if (n->left  && find(n->left,  val, path)) path.push_back('L');
+	```
+	If the left child exists, recursively searches the left subtree. If the value is found, 'L' is added to the path indicating a left move.
 
-To solve this problem, we will take the following steps:
+4. **Right Subtree Search**
+	```cpp
+	    else if (n->right && find(n->right, val, path)) path.push_back('R');
+	```
+	If the right child exists, recursively searches the right subtree. If the value is found, 'R' is added to the path indicating a right move.
 
-1. **Traverse the Tree**: We need to locate both the start node and the destination node in the binary tree. This can be accomplished through a depth-first search (DFS) that explores the tree recursively.
+5. **Return Condition**
+	```cpp
+	    return !path.empty();
+	```
+	Returns true if a path has been found (i.e., the path vector is not empty), indicating the target node exists in the tree.
 
-2. **Record Paths**: As we traverse the tree, we will build paths for both the start and destination nodes. We will store these paths in strings (`sp` for the start node and `dp` for the destination node) where each character represents a direction taken during the traversal.
+6. **Start of getDirections function**
+	```cpp
+	string getDirections(TreeNode* root, int startValue, int destValue) {
+	```
+	Defines the 'getDirections' function, which calculates the directions from the start node to the destination node in a binary tree.
 
-3. **Identify the Lowest Common Ancestor (LCA)**: After obtaining both paths, we need to determine the point where the two paths diverge. This point will indicate the lowest common ancestor of the two nodes. We will do this by comparing the characters in both strings from the end until they differ.
+7. **Initialize Path Variables**
+	```cpp
+	    string sp, dp;
+	```
+	Declares two string variables, 'sp' and 'dp', to store the paths from the root to the start node and the destination node, respectively.
 
-4. **Construct the Final Path**: Once the divergence point is found, the final path from the start node to the destination node will consist of moving up to the LCA (using 'U' for each move) followed by moving down to the destination node (using the characters from the path to the destination node).
+8. **Find Start Node Path**
+	```cpp
+	    find(root, startValue, sp);
+	```
+	Finds the path from the root to the start node using the 'find' function, storing the result in 'sp'.
 
-5. **Return the Result**: The final path string will be returned as the output.
+9. **Find Destination Node Path**
+	```cpp
+	    find(root,  destValue, dp);
+	```
+	Finds the path from the root to the destination node using the 'find' function, storing the result in 'dp'.
 
-This approach efficiently handles the tree traversal and path construction using simple recursion, yielding a clean solution to the problem.
+10. **Common Ancestor Check**
+	```cpp
+	    while(!sp.empty() && !dp.empty() && sp.back() == dp.back()) {
+	```
+	This loop checks for the common ancestor by comparing the last characters of both paths. If the characters are the same, it means both paths lead to the same node, so both characters are removed from the paths.
 
-### Code Breakdown (Step by Step)
+11. **Remove Matching Steps from Start Path**
+	```cpp
+	        sp.pop_back();
+	```
+	Removes the last character from the 'sp' path, indicating that the current step matches the destination path up to the common ancestor.
 
-Let’s break down the provided code to understand how it implements the above approach:
+12. **Remove Matching Steps from Destination Path**
+	```cpp
+	        dp.pop_back();
+	```
+	Removes the last character from the 'dp' path, indicating that the current step matches the start path up to the common ancestor.
 
-1. **TreeNode Structure**:
-   ```cpp
-   struct TreeNode {
-       int val;
-       TreeNode *left;
-       TreeNode *right;
-       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-   };
-   ```
-   The `TreeNode` struct defines a node in the binary tree, containing an integer value (`val`) and pointers to the left and right child nodes.
+13. **Construct Final Direction String**
+	```cpp
+	    return string(sp.size(), 'U') + string(rbegin(dp), rend(dp));
+	```
+	Constructs the final direction string by concatenating 'U' (up steps) for the start path and the reverse of the destination path to go down ('L' or 'R').
 
-2. **Solution Class**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-3. **Find Function**:
-   ```cpp
-       bool find(TreeNode* n, int val, string &path) {
-           if(n->val == val) return true;
-           if (n->left && find(n->left, val, path)) path.push_back('L');
-           else if (n->right && find(n->right, val, path)) path.push_back('R');
-           return !path.empty();
-       }
-   ```
-   - The `find` function is a helper function that searches for a node with the specified value (`val`) starting from the current node (`n`).
-   - If the current node's value matches `val`, the function returns `true`.
-   - If not, the function checks the left and right children recursively.
-   - If a node is found in either subtree, it appends 'L' or 'R' to the `path` string to record the direction taken.
-   - The function returns `true` if a path was found and updates the `path` string accordingly.
+The time complexity is O(n) because we need to traverse the entire tree to find both paths to the start and destination nodes.
 
-4. **Get Directions Function**:
-   ```cpp
-       string getDirections(TreeNode* root, int startValue, int destValue) {
-           string sp, dp;
-           find(root, startValue, sp);
-           find(root, destValue, dp);
-   ```
-   - The `getDirections` function initializes two strings, `sp` and `dp`, to store the paths to the start and destination nodes, respectively.
-   - It calls the `find` function twice to populate these paths.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-5. **Identifying the Lowest Common Ancestor (LCA)**:
-   ```cpp
-           while(!sp.empty() && !dp.empty() && sp.back() == dp.back()) {
-               sp.pop_back();
-               dp.pop_back();
-           }
-   ```
-   - This while loop continues as long as the last characters of both path strings are equal, indicating that both paths are still moving up the tree towards the common ancestor.
-   - When the characters differ, it means we have reached the divergence point. The remaining characters in `sp` will represent the moves up to the LCA, while `dp` will contain the moves down to the destination node.
+The space complexity is O(n) because we need to store the paths from the root to both nodes.
 
-6. **Constructing the Final Path**:
-   ```cpp
-           return string(sp.size(), 'U') + string(rbegin(dp), rend(dp));
-       }
-   };
-   ```
-   - The final string is constructed by creating a string of 'U' characters for the number of moves needed to reach the LCA from the start node (`sp.size()`).
-   - It then appends the reversed path from the LCA to the destination node (`dp`), using `rbegin` and `rend` to reverse the order of the characters.
-   - The complete path string is returned as the output of the function.
+**Happy Coding! 🎉**
 
-### Complexity
-
-The time complexity of this solution is O(n), where `n` is the number of nodes in the binary tree. This complexity arises from the need to traverse the tree potentially twice (once for each node). The space complexity is O(h), where `h` is the height of the tree, which accounts for the recursion stack used during the depth-first search.
-
-### Conclusion
-
-In conclusion, the solution effectively determines the path between two nodes in a binary tree by leveraging depth-first search to find paths to both nodes and subsequently identifying their lowest common ancestor. This approach is both efficient and straightforward, providing a clear method for navigating binary trees. Understanding how to construct paths and manage tree traversals is crucial for solving similar problems in data structures and algorithms, making this solution an important technique for developers and computer scientists.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/)
 

@@ -14,120 +14,169 @@ img_src = ""
 youtube = "bcXy-T4Sc3E"
 youtube_upload_date="2024-06-09"
 youtube_thumbnail="https://i.ytimg.com/vi/bcXy-T4Sc3E/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums and an integer k, return the number of non-empty subarrays where the sum of elements is divisible by k. A subarray is defined as a contiguous sequence of elements in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer array nums and an integer k.
+- **Example:** `nums = [3, 1, -4, 6, 5], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 3 * 10^4
+	- -10^4 <= nums[i] <= 10^4
+	- 2 <= k <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int subarraysDivByK(vector<int>& nums, int k) {
-        int res = 0, n = nums.size(), sum = 0;        
-        vector<int> frq(k, 0);
-        frq[0] = 1;
-        for(int j = 0; j < n; j++) {
-            sum += nums[j];
-            int rm = sum % k;
-            if(rm < 0) rm += k;            
-            res += frq[rm];
-            frq[rm]++;
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An integer representing the count of subarrays where the sum is divisible by k.
+- **Example:** `6`
+- **Constraints:**
+	- The result must fit within a 32-bit signed integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of subarrays with a sum divisible by k.
 
-The problem is to find the total number of **subarrays** within a given array `nums` where the sum of the elements in each subarray is divisible by a given integer `k`. A subarray is defined as a contiguous portion of the array.
+- Maintain a running sum of elements as you traverse the array.
+- Use the modulo operator to compute the remainder of the running sum when divided by k.
+- Adjust negative remainders to ensure they fall within the range [0, k-1].
+- Store the frequency of each remainder in a hashmap and use it to count subarrays with matching remainders.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums is valid and non-empty.
+- The integer k is greater than or equal to 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 1, -4, 6, 5], k = 3`  \
+  **Explanation:** The total subarrays with sums divisible by k = 3 are 6, including single-element subarrays like [3] and multi-element subarrays like [3, 1, -4, 6, 5].
 
-### Approach
+- **Input:** `nums = [7, -3, 2, 8], k = 4`  \
+  **Explanation:** The subarrays [-3, 2, 8], [2, 8], [8], and [7, -3, 2] have sums divisible by k = 4, resulting in a count of 4.
 
-To solve this problem efficiently, we can utilize the **prefix sum** technique combined with **modulo arithmetic** and a **hash map (or array)** to keep track of remainders. This approach avoids the need to explicitly calculate the sum of every possible subarray, which would be inefficient for large arrays.
+{{< dots >}}
+## Approach 🚀
+Use a hashmap to count the frequency of remainders when the running sum is divided by k, leveraging the remainder property to count subarrays.
 
-#### Key Insights:
-
-1. **Prefix Sum**:
-   - A prefix sum for an array is the sum of elements from the start of the array up to a given index.
-   - If we know the prefix sum up to two indices `i` and `j`, we can calculate the sum of the subarray `nums[i...j]` as:
-   
-   \[
-   \text{sum}(nums[i...j]) = \text{prefix\_sum}[j] - \text{prefix\_sum}[i]
-   \]
-   
-2. **Modulo Operation**:
-   - To determine whether a subarray sum is divisible by `k`, we check if the sum modulo `k` equals 0.
-   - If `prefix_sum[i] % k == prefix_sum[j] % k`, then the sum of the subarray `nums[i...j]` is divisible by `k`.
-
-3. **Using a Frequency Array**:
-   - As we traverse the array and compute prefix sums, we track how often each possible remainder (from the modulo operation) occurs using a frequency array `frq`. This allows us to count subarrays that satisfy the condition without explicitly checking all subarrays.
-   - The key observation is that, for any index `j`, if there exists an index `i` such that `prefix_sum[i] % k == prefix_sum[j] % k`, then the sum of the subarray from `i+1` to `j` is divisible by `k`.
-
-#### Algorithm:
-
-1. Start by initializing the total result (`res`) to 0 and the prefix sum (`sum`) to 0.
-2. Use an array `frq` to store the frequencies of remainders (modulo `k`), where `frq[rem]` stores the number of times a remainder `rem` has occurred.
-3. Traverse the array, update the prefix sum, and calculate the remainder of the prefix sum modulo `k`. If this remainder has been encountered before, it means that there are subarrays ending at the current index whose sum is divisible by `k`.
-4. For each remainder, increment the corresponding entry in the frequency array.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- A naive approach of computing the sum for all subarrays would be inefficient for large arrays.
+- The problem can be optimized using the property of remainders to identify subarrays with sums divisible by k.
+- Using a hashmap to track remainder frequencies allows for efficient subarray counting by leveraging previous results.
+{{< dots >}}
+### Edge Cases 🌐
+- An array with one element and k > 1, ensuring no subarray is divisible.
+- An array of maximum length with varying large values, ensuring efficient handling.
+- All elements in the array are 0.
+- Ensure that negative remainders are handled correctly.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int subarraysDivByK(vector<int>& nums, int k) {
-        int res = 0, n = nums.size(), sum = 0;        
-        vector<int> frq(k, 0);
-        frq[0] = 1; // To count subarrays that are divisible by k from the beginning
+int subarraysDivByK(vector<int>& nums, int k) {
+    int res = 0, n = nums.size(), sum = 0;        
+    vector<int> frq(k, 0);
+    frq[0] = 1;
+    for(int j = 0; j < n; j++) {
+        sum += nums[j];
+        int rm = sum % k;
+        if(rm < 0) rm += k;            
+        res += frq[rm];
+        frq[rm]++;
+    }
+    return res;
+}
 ```
 
-1. **Initialization**:
-   - `res`: This variable holds the result, which is the total number of subarrays whose sum is divisible by `k`.
-   - `n`: The size of the input array `nums`.
-   - `sum`: This keeps track of the cumulative sum of elements from the start to the current position in the array.
-   - `frq`: An array that stores the frequency of each remainder when the prefix sum is divided by `k`. We initialize `frq[0] = 1` to account for the subarrays that are divisible by `k` starting from the first element.
+This function counts the number of subarrays whose sum is divisible by a given integer 'k'. It uses a frequency array to track the modulo of the sum of elements as it iterates through the array.
 
-```cpp
-        for(int j = 0; j < n; j++) {
-            sum += nums[j];
-            int rm = sum % k;
-            if(rm < 0) rm += k;            
-            res += frq[rm];
-            frq[rm]++;
-        }
-        return res;
-    }
-};
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int subarraysDivByK(vector<int>& nums, int k) {
+	```
+	Defines the function `subarraysDivByK`, which takes an integer vector `nums` and an integer `k`, and returns the number of subarrays whose sum is divisible by `k`.
 
-2. **Main Loop**:
-   - We iterate through the array `nums` with the index `j`.
-   - `sum += nums[j]`: We accumulate the prefix sum at the current index.
-   - `rm = sum % k`: We compute the remainder when the current prefix sum is divided by `k`.
-   - If `rm < 0`: This step ensures that we handle negative remainders correctly. Since the remainder of a negative number in C++ can be negative, we adjust it by adding `k` to ensure all remainders are positive.
-   - `res += frq[rm]`: This is the core of the solution. If the remainder `rm` has been encountered before, it means that there are subarrays whose sum is divisible by `k` (because the difference of their prefix sums would be divisible by `k`).
-   - `frq[rm]++`: We update the frequency of the remainder `rm` in the frequency array.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, n = nums.size(), sum = 0;        
+	```
+	Initializes variables: `res` to store the result (number of valid subarrays), `n` to store the size of `nums`, and `sum` to accumulate the sum of elements as we iterate.
 
-3. **Return Result**:
-   - Finally, we return `res`, which contains the total number of subarrays whose sum is divisible by `k`.
+3. **Frequency Array Declaration**
+	```cpp
+	    vector<int> frq(k, 0);
+	```
+	Declares a frequency array `frq` of size `k`, initialized with 0, to keep track of the modulo results of subarray sums.
 
-### Complexity
+4. **Initial Frequency Setup**
+	```cpp
+	    frq[0] = 1;
+	```
+	Sets `frq[0]` to 1, since a sum of 0 is always divisible by `k`, which allows us to count subarrays starting from the first element.
 
-- **Time Complexity**: 
-   - The algorithm only loops through the array once, and each operation inside the loop (such as computing the sum and updating the frequency array) takes constant time.
-   - Therefore, the time complexity is **O(n)**, where `n` is the size of the input array `nums`.
+5. **Loop Over Array**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Starts a loop to iterate through each element in the `nums` array.
 
-- **Space Complexity**:
-   - The space complexity is **O(k)**, where `k` is the divisor. This is because we only need an array of size `k` to store the frequency of each possible remainder.
-   - Additionally, the space for the input array `nums` is not considered here as it is part of the input.
+6. **Update Sum**
+	```cpp
+	        sum += nums[j];
+	```
+	Adds the current element `nums[j]` to the running sum `sum`.
 
-### Conclusion
+7. **Modulo Calculation**
+	```cpp
+	        int rm = sum % k;
+	```
+	Calculates the remainder `rm` when the accumulated sum is divided by `k`.
 
-This solution uses the **prefix sum** technique combined with **modulo arithmetic** to efficiently count subarrays whose sum is divisible by `k`. By tracking the frequency of each remainder modulo `k`, we avoid explicitly checking every possible subarray, resulting in an efficient solution with a time complexity of **O(n)**. The approach is optimal for solving problems related to divisibility of subarray sums, especially when the input array is large.
+8. **Handle Negative Remainders**
+	```cpp
+	        if(rm < 0) rm += k;            
+	```
+	Adjusts the remainder if it's negative by adding `k` to ensure that `rm` is always positive.
+
+9. **Update Result**
+	```cpp
+	        res += frq[rm];
+	```
+	Increments the result `res` by the value stored in `frq[rm]`, which represents the count of subarrays whose sum modulo `k` equals `rm`.
+
+10. **Update Frequency Array**
+	```cpp
+	        frq[rm]++;
+	```
+	Increments the frequency count of the remainder `rm` in the frequency array `frq`.
+
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the result `res`, which contains the total number of subarrays whose sum is divisible by `k`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The array is traversed once, and hashmap operations are O(1) on average.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The hashmap stores at most k entries for the remainders.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarray-sums-divisible-by-k/description/)
 

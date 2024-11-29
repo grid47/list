@@ -14,180 +14,309 @@ img_src = ""
 youtube = "8Nt7G6bIkSI"
 youtube_upload_date="2022-04-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/8Nt7G6bIkSI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string expression in the form '<num1>+<num2>', where <num1> and <num2> represent positive integers. Your task is to add a pair of parentheses to the expression such that the resulting expression evaluates to the smallest possible value. The parentheses must be placed around the '+' operator. If there are multiple valid solutions yielding the same result, any of them can be returned.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string expression containing exactly one '+' symbol, with digits from '1' to '9'.
+- **Example:** `expression = '345+56'`
+- **Constraints:**
+	- 3 <= expression.length <= 10
+	- expression consists of digits from '1' to '9' and a single '+'
+	- expression starts and ends with digits
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string minimizeResult(string exp) {
-        
-        int pos = -1;
-        int x = 0, y = 0, p = 0, q = 0;        
-        for(int i = 0; i < exp.size(); i++) {
-            if(exp[i] == '+') pos = i;
-            if(pos == -1) {
-                y = y * 10 + exp[i] - '0';
-            } else if (exp[i] != '+'){
-                q = q * 10 + exp[i] - '0';
-            }
-        }
-        int tmp = q;
-        // cout << y << " " << pos << " " << q << "\n";
-        
-        vector<int> res = {-1, -1}; int ans = INT_MAX;
-        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the expression after adding a pair of parentheses such that the result of the expression is minimized.
+- **Example:** `Output: '3(45+56)'`
+- **Constraints:**
+	- The result fits within a signed 32-bit integer.
 
-        for(int i = 0; i < pos; i++) {
-            
-            x = x * 10 + (i > 0? exp[i - 1] - '0': 0);
-            y = y % (int)pow(10, pos - i);
-            
-            for(int j = pos + 1; j < exp.size(); j++) {
-                
-                p = p * 10 + (exp[j] - '0');
-                q= q % (int)pow(10, exp.size() - 1 - j);
-                // cout << x << " " << y << " " << p << " " << q << " " << ans << "\n";                  
-                if((x==0?1:x) * (y + p) * (q==0?1:q) < ans) {
-                    ans = (x==0?1:x) * (y + p) * (q==0?1:q);
-                    // cout << x << " " << y << " " << p << " " << q << " " << ans << "\n";                    
-                    res = {i, j};
-                }
-            }
-            p = 0;
-            q = tmp;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the expression by placing parentheses around the '+' operator. To achieve this, we need to consider the placement of parentheses that minimizes the product after the addition.
+
+- 1. Find the position of the '+' symbol in the expression.
+- 2. Try different placements of the parentheses around the '+' and calculate the resulting value.
+- 3. Return the expression that yields the smallest result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The expression is always a valid mathematical string with exactly one '+' symbol.
+- The length of the expression is guaranteed to be between 3 and 10 characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: expression = '345+56'`  \
+  **Explanation:** In this case, we can place parentheses around '345' and '56', resulting in '3(45+56)', which evaluates to 3 * (45 + 56) = 3 * 101 = 303, which is the smallest possible value.
+
+- **Input:** `Input: expression = '123+45'`  \
+  **Explanation:** Here, placing parentheses around '12' and '45' results in '1(23+45)' which evaluates to 1 * (23 + 45) = 1 * 68 = 68, the smallest value.
+
+- **Input:** `Input: expression = '100+200'`  \
+  **Explanation:** For this case, the expression '100+200' becomes '(100+200)', which evaluates to 300, the only possible solution.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to explore various positions for the parentheses around the '+' symbol and calculate the resulting expressions. We then select the one that produces the smallest value.
+
+### Initial Thoughts 💭
+- The parentheses need to be placed around the '+' symbol to affect the addition operation.
+- We can use brute force to check all possible valid parentheses placements and calculate the result to find the minimum.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the problem guarantees valid expressions.
+- Since the length of the input is limited to 10 characters, handling large inputs is not an issue.
+- The '+' symbol may be at different positions in the expression, but this doesn't affect the approach.
+- The expression always contains exactly one '+' symbol.
+{{< dots >}}
+## Code 💻
+```cpp
+string minimizeResult(string exp) {
+    
+    int pos = -1;
+    int x = 0, y = 0, p = 0, q = 0;        
+    for(int i = 0; i < exp.size(); i++) {
+        if(exp[i] == '+') pos = i;
+        if(pos == -1) {
+            y = y * 10 + exp[i] - '0';
+        } else if (exp[i] != '+'){
+            q = q * 10 + exp[i] - '0';
         }
-        // cout << res[0] << " " << res[1];
-        
-        string ret = "";
-        
-        int i = 0;
-        while(i < res[0]) ret += exp[i++];
-        ret += '(';
-        while(i <= res[1]) ret += exp[i++];
-        ret += ')';
-        while(i < exp.size()) ret += exp[i++];
-        
-        return ret;
     }
-};
-{{< /highlight >}}
----
+    int tmp = q;
+    // cout << y << " " << pos << " " << q << "\n";
+    
+    vector<int> res = {-1, -1}; int ans = INT_MAX;
+    
 
-### Problem Statement
-
-The problem requires you to minimize the result of an arithmetic expression of the form `"A+B"`, where `A` and `B` are non-negative integers. You can insert parentheses around one of the subexpressions to minimize the overall result.
-
-The goal is to minimize the result by placing parentheses at an appropriate location in the expression. Your task is to return the modified expression as a string.
-
-### Example:
-For input expression `"12+34"`, the minimum result occurs when you place the parentheses around `"12+34"`. The resulting expression is `"12+(34)"`, which evaluates to `12 + 34 = 46`.
-
-### Approach
-
-To solve this problem, the main idea is to iterate over all possible positions for placing parentheses. We want to test different ways of splitting the expression into two parts: one before the addition (`+`) and one after. For each split, we will compute the result of the expression and track the smallest result.
-
-Here's the step-by-step approach:
-
-1. **Parse the Expression**:
-   - First, we separate the left and right parts of the equation using the `+` sign.
-   - We need to separate the digits of both parts of the expression so we can compute the result.
-
-2. **Try All Possible Parentheses Placements**:
-   - Iterate over all possible positions of the parentheses, trying each combination.
-   - For each position, calculate the result after evaluating the expression with the parentheses.
-   - Track the minimum result, keeping track of the corresponding placement of the parentheses.
-
-3. **Compute the Result**:
-   - For each potential parentheses placement, evaluate the result and keep track of the smallest result. If a better placement is found, update the result.
-
-4. **Return the Modified Expression**:
-   - After determining the optimal position for the parentheses, we reconstruct the string by adding the parentheses and returning the modified expression.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    string minimizeResult(string exp) {
-        int pos = -1;
-        int x = 0, y = 0, p = 0, q = 0;        
-```
-- The `minimizeResult` function starts by declaring variables to store the left and right parts of the expression, as well as intermediate values used during the calculation. `pos` is used to store the position of the `+` symbol, and `x`, `y`, `p`, `q` are used to store the digits of the two parts of the expression.
-
-```cpp
-        for(int i = 0; i < exp.size(); i++) {
-            if(exp[i] == '+') pos = i;  // Find the position of the plus sign
-            if(pos == -1) {
-                y = y * 10 + exp[i] - '0';  // Collect digits for the left part of the expression
-            } else if (exp[i] != '+'){
-                q = q * 10 + exp[i] - '0';  // Collect digits for the right part of the expression
-            }
-        }
-```
-- We iterate over the expression to identify the position of the `+` symbol. While iterating, we separate the digits before and after the `+` sign, using the variables `y` and `q` to accumulate the left and right parts of the expression, respectively.
-
-```cpp
-        int tmp = q;  // Store the original value of q for later use.
-        vector<int> res = {-1, -1};  // Initialize a result array to store the best parentheses placement
-        int ans = INT_MAX;  // Initialize the answer to the maximum possible integer value
-```
-- We store the current value of `q` (right part) to `tmp` to reset it later. `res` will store the optimal indices for placing the parentheses, and `ans` will store the smallest result found.
-
-```cpp
-        for(int i = 0; i < pos; i++) {
-            x = x * 10 + (i > 0? exp[i - 1] - '0': 0);  // Collect digits before the plus sign
-            y = y % (int)pow(10, pos - i);  // Extract the digits for evaluation
-```
-- We begin iterating over the digits before the `+` symbol to test different positions for the parentheses. `x` is used to accumulate the digits before `i`, and `y` is modified to focus on the digits after `i`.
-
-```cpp
-            for(int j = pos + 1; j < exp.size(); j++) {
-                p = p * 10 + (exp[j] - '0');  // Collect digits after the plus sign
-                q = q % (int)pow(10, exp.size() - 1 - j);  // Extract the digits for evaluation
-```
-- Inside the loop for `i`, we iterate over the digits after the `+` symbol, storing them in `p` and adjusting `q` as we explore different parentheses placements.
-
-```cpp
-                if((x == 0 ? 1 : x) * (y + p) * (q == 0 ? 1 : q) < ans) {
-                    ans = (x == 0 ? 1 : x) * (y + p) * (q == 0 ? 1 : q);  // Calculate the result and check if it’s the smallest
-                    res = {i, j};  // Update the best parentheses placement
-                }
-            }
-            p = 0;  // Reset p for the next iteration
-            q = tmp;  // Reset q to its original value
-        }
-```
-- We calculate the result for each possible placement of parentheses. The result is calculated by multiplying `x`, `(y + p)`, and `q`. If the calculated result is smaller than the current `ans`, we update `ans` and store the current positions of the parentheses in `res`.
-
-```cpp
-        string ret = "";  // Initialize the result string
-        int i = 0;
-        while(i < res[0]) ret += exp[i++];  // Add the digits before the first parentheses position
-        ret += '(';  // Add the opening parenthesis
-        while(i <= res[1]) ret += exp[i++];  // Add the digits inside the parentheses
-        ret += ')';  // Add the closing parenthesis
-        while(i < exp.size()) ret += exp[i++];  // Add the remaining digits after the parentheses
+    for(int i = 0; i < pos; i++) {
         
-        return ret;  // Return the final modified expression
+        x = x * 10 + (i > 0? exp[i - 1] - '0': 0);
+        y = y % (int)pow(10, pos - i);
+        
+        for(int j = pos + 1; j < exp.size(); j++) {
+            
+            p = p * 10 + (exp[j] - '0');
+            q= q % (int)pow(10, exp.size() - 1 - j);
+            // cout << x << " " << y << " " << p << " " << q << " " << ans << "\n";                  
+            if((x==0?1:x) * (y + p) * (q==0?1:q) < ans) {
+                ans = (x==0?1:x) * (y + p) * (q==0?1:q);
+                // cout << x << " " << y << " " << p << " " << q << " " << ans << "\n";                    
+                res = {i, j};
+            }
+        }
+        p = 0;
+        q = tmp;
     }
-};
+    // cout << res[0] << " " << res[1];
+    
+    string ret = "";
+    
+    int i = 0;
+    while(i < res[0]) ret += exp[i++];
+    ret += '(';
+    while(i <= res[1]) ret += exp[i++];
+    ret += ')';
+    while(i < exp.size()) ret += exp[i++];
+    
+    return ret;
+}
 ```
-- We reconstruct the expression by adding the parentheses around the optimal split identified earlier. The digits before the first parentheses are added first, followed by the digits inside the parentheses, and finally, the remaining digits after the parentheses.
 
-### Complexity
+This function minimizes the result of a given mathematical expression by strategically placing parentheses. It takes a string representing the expression, identifies the position of the '+' operator, and then computes the minimal result by exploring various ways of grouping terms.
 
-- **Time Complexity**: O(n^2), where `n` is the length of the input string `exp`. The nested loops iterate over all possible pairs of parentheses placements, making the time complexity quadratic in the size of the input string.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string minimizeResult(string exp) {
+	```
+	Defines the function 'minimizeResult', which takes a string representing a mathematical expression and returns the minimized result after placing parentheses optimally.
 
-- **Space Complexity**: O(n), where `n` is the length of the input string. We use a few additional variables to store intermediate results, and the space used by these variables does not exceed the input size.
+2. **Variable Initialization**
+	```cpp
+	    int pos = -1;
+	```
+	Initializes the variable 'pos' to -1, which will store the index of the '+' operator in the expression.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    int x = 0, y = 0, p = 0, q = 0;
+	```
+	Initializes variables 'x', 'y', 'p', and 'q' to 0. These variables will be used to break down and calculate parts of the expression.
 
-This approach efficiently handles the problem of minimizing the result by trying all possible placements of parentheses around the addition operator. It iterates over the expression and computes the result for each possible configuration, ensuring that we find the optimal one. The solution is both straightforward and efficient for this problem.
+4. **Looping Through Expression**
+	```cpp
+	    for(int i = 0; i < exp.size(); i++) {
+	```
+	Starts a loop to iterate through each character of the expression string 'exp'.
+
+5. **Condition Check**
+	```cpp
+	        if(exp[i] == '+') pos = i;
+	```
+	Checks if the current character is a '+' operator and stores its position in 'pos'.
+
+6. **Condition Check**
+	```cpp
+	        if(pos == -1) {
+	```
+	Checks if the '+' operator hasn't been encountered yet.
+
+7. **Mathematical Operations**
+	```cpp
+	            y = y * 10 + exp[i] - '0';
+	```
+	If no '+' operator is found, the character is added to the variable 'y' by converting it to an integer.
+
+8. **Condition Check**
+	```cpp
+	        } else if (exp[i] != '+'){
+	```
+	If the character is not a '+', it is part of the second number after the '+' operator.
+
+9. **Mathematical Operations**
+	```cpp
+	            q = q * 10 + exp[i] - '0';
+	```
+	Adds the current character to the variable 'q', representing the second number in the expression.
+
+10. **Variable Assignment**
+	```cpp
+	    int tmp = q;
+	```
+	Stores the value of 'q' into 'tmp' to preserve its original value for later use.
+
+11. **Variable Initialization**
+	```cpp
+	    vector<int> res = {-1, -1}; int ans = INT_MAX;
+	```
+	Initializes a vector 'res' to store the optimal indices for placing parentheses, and initializes 'ans' to a large value (INT_MAX) to track the minimum result.
+
+12. **Looping Through Expression**
+	```cpp
+	    for(int i = 0; i < pos; i++) {
+	```
+	Starts a loop to iterate through the expression before the '+' operator.
+
+13. **Mathematical Operations**
+	```cpp
+	        x = x * 10 + (i > 0? exp[i - 1] - '0': 0);
+	```
+	Calculates the first part of the first number in the expression by adding digits before the '+' operator.
+
+14. **Mathematical Operations**
+	```cpp
+	        y = y % (int)pow(10, pos - i);
+	```
+	Calculates the remaining part of the second number after the '+' operator.
+
+15. **Looping Through Expression**
+	```cpp
+	        for(int j = pos + 1; j < exp.size(); j++) {
+	```
+	Starts a nested loop to iterate through the expression after the '+' operator.
+
+16. **Mathematical Operations**
+	```cpp
+	            p = p * 10 + (exp[j] - '0');
+	```
+	Adds the current character in the second part of the expression (after the '+') to the variable 'p'.
+
+17. **Mathematical Operations**
+	```cpp
+	            q= q % (int)pow(10, exp.size() - 1 - j);
+	```
+	Calculates the remaining part of 'q' after the current digit is processed.
+
+18. **Condition Check**
+	```cpp
+	            if((x==0?1:x) * (y + p) * (q==0?1:q) < ans) {
+	```
+	Checks if the current combination of 'x', 'y', 'p', and 'q' produces a smaller result.
+
+19. **Variable Assignment**
+	```cpp
+	                ans = (x==0?1:x) * (y + p) * (q==0?1:q);
+	```
+	Updates the minimum result 'ans' if the current combination yields a smaller value.
+
+20. **Variable Assignment**
+	```cpp
+	                res = {i, j};
+	```
+	Stores the indices of the optimal parentheses placement in 'res'.
+
+21. **Returning Result**
+	```cpp
+	    string ret = "";
+	```
+	Initializes an empty string 'ret' to store the result.
+
+22. **Building Result String**
+	```cpp
+	    int i = 0;
+	```
+	Initializes an index 'i' to start building the result string.
+
+23. **Building Result String**
+	```cpp
+	    while(i < res[0]) ret += exp[i++];
+	```
+	Adds the part before the first parenthesis to 'ret'.
+
+24. **Building Result String**
+	```cpp
+	    ret += '(';
+	```
+	Adds the opening parenthesis to 'ret'.
+
+25. **Building Result String**
+	```cpp
+	    while(i <= res[1]) ret += exp[i++];
+	```
+	Adds the part inside the parentheses to 'ret'.
+
+26. **Building Result String**
+	```cpp
+	    ret += ')';
+	```
+	Adds the closing parenthesis to 'ret'.
+
+27. **Building Result String**
+	```cpp
+	    while(i < exp.size()) ret += exp[i++];
+	```
+	Adds the remaining part of the expression to 'ret'.
+
+28. **Returning Result**
+	```cpp
+	    return ret;
+	```
+	Returns the final string with the parentheses placed optimally.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The algorithm performs linear passes over the expression to find the optimal placement of parentheses.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is linear due to storing intermediate results of expressions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/description/)
 

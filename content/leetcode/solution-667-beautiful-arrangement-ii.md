@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "A8-_z6gurGc"
 youtube_upload_date="2021-04-12"
 youtube_thumbnail="https://i.ytimg.com/vi/A8-_z6gurGc/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,91 +28,132 @@ youtube_thumbnail="https://i.ytimg.com/vi/A8-_z6gurGc/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two integers n and k, construct a list of n different positive integers from 1 to n such that the absolute differences between consecutive elements contain exactly k distinct integers. Return any valid solution.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers n and k, where n is the size of the list and k is the number of distinct differences to be present.
+- **Example:** `n = 4, k = 1`
+- **Constraints:**
+	- 1 <= k < n <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> constructArray(int n, int k) {
-        vector<int> res;
-        for(int i = 1, j = n; i <= j; ) {
-            if(k > 0) {
-                res.push_back(k--%2? i++: j--);
-            } else res.push_back(i++);
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of n distinct integers between 1 and n that satisfies the condition of having exactly k distinct differences.
+- **Example:** `[1, 2, 3, 4]`
+- **Constraints:**
+	- The answer list must contain distinct integers.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to construct the list such that the differences between consecutive elements have exactly k distinct values.
 
-The problem asks us to construct an array of integers from `1` to `n` such that:
-1. The array contains exactly `n` elements.
-2. The difference between consecutive elements is as large as possible for exactly `k` times.
-3. For the remaining elements, the difference between consecutive elements can be one.
+- 1. Start by choosing numbers from 1 to n.
+- 2. Arrange these numbers in a way that the absolute differences between consecutive numbers contain exactly k distinct values.
+- 3. Adjust the placement of numbers to ensure exactly k distinct differences.
+{{< dots >}}
+### Problem Assumptions ✅
+- The integers in the output list must be distinct.
+- There can be multiple valid answers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 4, k = 1`  \
+  **Explanation:** The differences between consecutive elements in the list [1, 2, 3, 4] are all 1, so there is exactly 1 distinct difference.
 
-The goal is to construct the array in such a way that the first `k` differences are maximized, followed by the regular increments of one.
+- **Input:** `n = 5, k = 2`  \
+  **Explanation:** The list [1, 5, 2, 4, 3] has differences of [4, 3, 2, 1], with exactly 2 distinct values: 1 and 3.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach for constructing the list involves systematically selecting elements such that the absolute differences between consecutive numbers meet the requirements.
 
-To solve this problem, we can use a two-pointer approach where one pointer starts from the beginning of the array (`i = 1`) and the other pointer starts from the end (`j = n`). The strategy is to alternate between the two pointers for the first `k` steps, maximizing the difference between consecutive elements. After these `k` steps, we simply fill the remaining positions in a linear increasing order, starting from `i`.
-
-#### Key Insights:
-1. **Maximizing Differences**: To maximize the difference, we alternate between the smallest available value and the largest available value. This is done by choosing either `i++` (the current smallest available number) or `j--` (the current largest available number) based on whether `k` is odd or even.
-2. **Filling the Remaining Positions**: After `k` steps, we simply add numbers in increasing order to fill the remaining spots in the array.
-3. **Two-pointer Strategy**: The two-pointer strategy allows us to efficiently alternate between `i` and `j`, and then move `i` alone when no more alternating steps are needed.
-
-### Code Breakdown (Step by Step)
-
-The implementation is done in the `constructArray` function. Let's go through the code step by step.
-
-#### 1. **Function Definition and Initial Setup**
-
+### Initial Thoughts 💭
+- We need to control the number of distinct absolute differences between consecutive elements.
+- The arrangement of the numbers must balance the number of unique differences.
+- By alternating between the smallest and largest remaining numbers, we can ensure a controlled difference distribution.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have valid n and k, so no empty cases need to be handled.
+- For large values of n and k, ensure that the algorithm is efficient enough to handle up to 10^4 elements.
+- If k = 1, the list will have identical differences, which means the sequence must be in increasing or decreasing order.
+- Ensure that the list contains distinct integers between 1 and n.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<int> constructArray(int n, int k) {
     vector<int> res;
-```
-- The function `constructArray` takes two parameters: `n` (the number of elements in the result array) and `k` (the number of maximum differences to generate).
-- A `vector<int> res` is declared to store the result array that will be returned.
-
-#### 2. **Loop to Generate the Result Array**
-
-```cpp
-for(int i = 1, j = n; i <= j; ) {
-    if(k > 0) {
-        res.push_back(k--%2? i++: j--);
-    } else res.push_back(i++);
+    for(int i = 1, j = n; i <= j; ) {
+        if(k > 0) {
+            res.push_back(k--%2? i++: j--);
+        } else res.push_back(i++);
+    }
+    return res;
 }
 ```
-- **Two Pointers Initialization**: We initialize two pointers `i` and `j`. `i` starts at `1` and represents the smallest available number, while `j` starts at `n` and represents the largest available number.
-- **Loop Condition**: The loop runs as long as `i <= j`, meaning we continue filling the array until all elements are placed.
-- **Maximizing Differences**: 
-  - If `k > 0`, the code alternates between adding `i++` (incrementing the smallest value) and `j--` (decrementing the largest value). This alternation ensures that the difference between consecutive elements is maximized.
-  - The `k-- % 2` condition is used to alternate between picking `i` and `j`. The modulo operation helps in alternating between odd and even steps.
-- **Remaining Positions**: Once `k` reaches zero, the loop simply adds the next smallest number (`i++`) without any alternation, as no further maximization of differences is needed.
 
-#### 3. **Returning the Result**
+This function constructs an array of integers from 1 to n such that the absolute difference between consecutive integers is as large as possible for the first k elements.
 
-```cpp
-return res;
-```
-- After the loop finishes, the array `res` contains the constructed array, which is then returned as the result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> constructArray(int n, int k) {
+	```
+	This is the function definition for `constructArray`, which takes two parameters: `n` (the size of the array) and `k` (the number of elements with the largest absolute difference between consecutive numbers). It returns a vector of integers.
 
-### Complexity
+2. **Result Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	Initialize an empty vector `res` that will hold the result of the constructed array.
 
-#### Time Complexity:
-- The time complexity is **O(n)**, where `n` is the size of the array. This is because we are iterating through the array once, with each operation inside the loop taking constant time.
-  
-#### Space Complexity:
-- The space complexity is **O(n)**, as we are storing the result array `res`, which has `n` elements.
+3. **Main Loop**
+	```cpp
+	    for(int i = 1, j = n; i <= j; ) {
+	```
+	Start a `for` loop with two pointers: `i` initialized to 1 (the first number) and `j` initialized to `n` (the last number). The loop continues until `i` exceeds `j`.
 
-### Conclusion
+4. **Condition Check**
+	```cpp
+	        if(k > 0) {
+	```
+	Check if `k` is greater than 0, indicating that we should alternate between the smallest and largest numbers to maximize the difference.
 
-This solution efficiently constructs the array with alternating maximum differences using a two-pointer approach. By alternating between the smallest and largest available numbers for the first `k` steps and then simply filling in the remaining elements in increasing order, we achieve the desired result. The time complexity of **O(n)** ensures that the solution scales well with larger inputs, and the space complexity of **O(n)** is optimal for the task.
+5. **Push Number with Alternating Direction**
+	```cpp
+	            res.push_back(k--%2? i++: j--);
+	```
+	If `k > 0`, decrement `k` and decide whether to push the next smallest (`i++`) or largest (`j--`) number, alternating between them. This maximizes the difference between consecutive numbers for the first `k` elements.
 
-The key to this problem is recognizing that maximizing differences can be efficiently achieved by alternating between the smallest and largest available values, and this approach avoids unnecessary complexity while ensuring correctness.
+6. **Push Incremented Number**
+	```cpp
+	        } else res.push_back(i++);
+	```
+	If `k` is 0, just push the next smallest number (`i++`) into the result vector. This ensures that the rest of the array is filled in increasing order.
+
+7. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the constructed result vector `res`, which contains the integers arranged with the maximum difference for the first `k` elements and the rest in increasing order.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) since we are constructing a list of size n and performing constant-time operations for each element.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the list of size n.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/beautiful-arrangement-ii/description/)
 

@@ -14,115 +14,144 @@ img_src = ""
 youtube = "PBZCmMugu5Q"
 youtube_upload_date="2020-05-22"
 youtube_thumbnail="https://i.ytimg.com/vi/PBZCmMugu5Q/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a m x n matrix of ones and zeros, count how many square submatrices are filled with all ones.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D matrix where each element is either a 0 or 1.
+- **Example:** `Input: matrix = [[0,1,1,1],[1,1,1,1],[0,1,1,1]]`
+- **Constraints:**
+	- 1 <= arr.length <= 300
+	- 1 <= arr[0].length <= 300
+	- 0 <= arr[i][j] <= 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countSquares(vector<vector<int>>& matrix) {
-        int res = 0, m = matrix.size(), n = matrix[0].size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of square submatrices that are fully filled with ones.
+- **Example:** `Output: 15`
+- **Constraints:**
+	- All submatrices considered must be squares filled with only 1s.
 
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-            if(matrix[i][j] && i && j)
-            matrix[i][j] += min({matrix[i - 1][j], matrix[i -1][j-1], matrix[i][j -1]});
-            res += matrix[i][j];
-        }
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the number of square submatrices that consist only of 1s.
+
+- Iterate through the matrix and at each cell that contains 1, calculate the largest possible square submatrix that can be formed with that cell as the bottom-right corner.
+- The size of the square submatrix is determined by the minimum of the squares possible at the adjacent cells (top, left, top-left diagonal).
+- Accumulate the number of squares of all sizes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is rectangular and may have varying numbers of rows and columns.
+- There will be no invalid values in the matrix, i.e., only 0s and 1s.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: matrix = [[0,1,1,1],[1,1,1,1],[0,1,1,1]]`  \
+  **Explanation:** The total count of square submatrices is determined by calculating the possible side lengths of squares that can be formed at each position. This includes squares of different sizes such as 1x1, 2x2, and 3x3.
+
+{{< dots >}}
+## Approach 🚀
+We approach this problem by using dynamic programming. For each cell in the matrix, calculate the largest square submatrix that ends at that cell.
+
+### Initial Thoughts 💭
+- At each cell, we can form a square if the current cell is 1 and the adjacent cells (above, left, and top-left diagonal) are part of squares as well.
+- Use dynamic programming to keep track of the largest square submatrix at each cell.
+{{< dots >}}
+### Edge Cases 🌐
+- If the matrix is empty or all zeros, the output should be 0.
+- For large matrices (300x300), ensure the solution is optimized to handle maximum size within time limits.
+- Matrices with only 1s should return the maximum number of square submatrices possible.
+- Ensure that the algorithm handles all possible matrix sizes up to 300x300 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int countSquares(vector<vector<int>>& matrix) {
+    int res = 0, m = matrix.size(), n = matrix[0].size();
+
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++) {
+        if(matrix[i][j] && i && j)
+        matrix[i][j] += min({matrix[i - 1][j], matrix[i -1][j-1], matrix[i][j -1]});
+        res += matrix[i][j];
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The problem at hand is to count the total number of square submatrices that have all 1s in a given binary matrix. A square submatrix is defined as a collection of elements arranged in a square shape, where all elements in that square are equal to 1. For example, in the matrix below:
-
-```
-1 0 1
-1 1 1
-1 1 1
+    return res;
+}
 ```
 
-The square submatrices of 1s are:
-- Four 1x1 squares (each individual '1').
-- One 2x2 square (the center four '1's).
-- One 3x3 square (the entire 3x3 matrix).
+This function counts the total number of square submatrices with all 1s in the given 2D matrix. It uses dynamic programming to update the values in the matrix to represent the size of the largest square that can end at that cell.
 
-In this case, the function should return 13 as the total count of these square submatrices.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Matrix Initialization**
+	```cpp
+	int countSquares(vector<vector<int>>& matrix) {
+	```
+	Defines the function to count square submatrices in the provided 2D matrix.
 
-### Approach
-To solve the problem efficiently, we will use dynamic programming. The idea is to iterate through the matrix while maintaining a count of the largest square that can end at each cell. The key observation is:
-- If the current cell (i, j) in the matrix is `1`, the size of the largest square submatrix ending at that cell can be determined by the minimum of the squares that can end at the adjacent cells:
-  - Directly above (i-1, j)
-  - Directly to the left (i, j-1)
-  - Diagonally upper-left (i-1, j-1)
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, m = matrix.size(), n = matrix[0].size();
+	```
+	Initializes the result variable and calculates the dimensions of the matrix.
 
-Thus, for each cell `(i, j)`, if `matrix[i][j] == 1`, we can update it to the size of the largest square that can end at that position by taking:
-```
-matrix[i][j] = 1 + min(matrix[i-1][j], matrix[i][j-1], matrix[i-1][j-1])
-```
-After updating, we will add the size of the square ending at that cell to our total count.
+3. **Loop Setup**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Begins iterating over each row of the matrix.
 
-### Code Breakdown (Step by Step)
+4. **Loop Setup**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Begins iterating over each column within the current row.
 
-```cpp
-class Solution {
-public:
-    int countSquares(vector<vector<int>>& matrix) {
-```
-- **Line 1-2**: We define a class `Solution` and start the `countSquares` method, which takes a reference to a 2D vector `matrix` as input.
+5. **Conditional Check**
+	```cpp
+	        if(matrix[i][j] && i && j)
+	```
+	Checks if the current cell is 1 and is not in the first row or column.
 
-```cpp
-        int res = 0, m = matrix.size(), n = matrix[0].size();
-```
-- **Line 3**: We initialize `res` to zero to keep track of the total count of square submatrices. We also retrieve the dimensions of the matrix `m` (number of rows) and `n` (number of columns).
+6. **Matrix Update**
+	```cpp
+	        matrix[i][j] += min({matrix[i - 1][j], matrix[i -1][j-1], matrix[i][j -1]});
+	```
+	Updates the cell value to the size of the largest square that can end at this cell.
 
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
-```
-- **Line 4-6**: We begin nested loops to traverse through each cell of the matrix. The outer loop iterates through each row `i`, while the inner loop iterates through each column `j`.
+7. **Result Calculation**
+	```cpp
+	        res += matrix[i][j];
+	```
+	Adds the current cell's value to the result, representing the count of squares ending at this cell.
 
-```cpp
-            if(matrix[i][j] && i && j)
-```
-- **Line 7**: We check if the current cell `matrix[i][j]` is `1` and ensure that we are not on the first row or first column (i.e., `i` and `j` should be greater than 0). This is necessary because a square cannot extend into non-existent indices.
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total count of square submatrices with all 1s.
 
-```cpp
-            matrix[i][j] += min({matrix[i - 1][j], matrix[i -1][j-1], matrix[i][j -1});
-```
-- **Line 8**: If the above condition is satisfied, we update the current cell `matrix[i][j]`. We add the minimum of the three adjacent cells to `matrix[i][j]`. The operation `min({matrix[i - 1][j], matrix[i -1][j-1], matrix[i][j -1]})` calculates the size of the largest square submatrix that can be formed up to this point, effectively building the size of the square ending at `matrix[i][j]`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-```cpp
-            res += matrix[i][j];
-```
-- **Line 9**: We add the updated value of `matrix[i][j]` to `res`. This count represents the number of squares of various sizes that end at that cell.
+The algorithm processes each cell of the matrix once.
 
-```cpp
-        }
-        return res;
-    }
-};
-```
-- **Line 10-12**: After completing the iteration through all cells, we return the total count stored in `res`.
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The time complexity of this algorithm is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the matrix. This is because we traverse each cell of the matrix exactly once.
+The space complexity is proportional to the matrix size, as we store results for each cell.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(1)\) if we consider the input matrix itself as the only space used. We are modifying the matrix in place to store the counts, and no additional data structures that scale with input size are used.
+**Happy Coding! 🎉**
 
-### Conclusion
-The `countSquares` function effectively counts the number of square submatrices with all 1s by employing a dynamic programming approach. This method is efficient, with both time and space complexities being manageable even for larger matrices. The algorithm smartly leverages the relationships between neighboring cells to build up the solution incrementally, demonstrating the power of dynamic programming in solving combinatorial problems.
-
-By following this structured breakdown, readers can appreciate not only how the solution works but also its efficiency and the thought process behind it. This insight into the code will be beneficial for anyone looking to understand dynamic programming or tackle similar problems in algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-square-submatrices-with-all-ones/description/)
 

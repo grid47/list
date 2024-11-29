@@ -14,128 +14,160 @@ img_src = ""
 youtube = "9Ty_eRjoDNM"
 youtube_upload_date="2024-11-02"
 youtube_thumbnail="https://i.ytimg.com/vi/9Ty_eRjoDNM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a sentence where words are separated by spaces. A sentence is considered circular if the last character of each word matches the first character of the next word, and the last character of the last word matches the first character of the first word.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string, where words are separated by spaces and consist of only uppercase and lowercase English letters.
+- **Example:** `sentence = 'hello ox oxo awesome endo'`
+- **Constraints:**
+	- 1 <= sentence.length <= 500
+	- sentence consists of lowercase and uppercase English letters and spaces.
+	- Words in sentence are separated by a single space.
+	- There are no leading or trailing spaces.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isCircularSentence(string s) {
-        
-        int n = s.size();
-        if((s[0]) != (s[n - 1]))
-            return false;
-        for(int i = 1; i < s.size() - 1; i++) {
-            if(s[i] == ' ') {
-                if((s[i - 1]) != (s[i + 1]))
-                    return false;                
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return 'true' if the sentence is circular, otherwise return 'false'.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The sentence will always be non-empty.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To check if the sentence satisfies the circular condition where the last character of each word matches the first character of the next word.
+
+- 1. Split the sentence into words.
+- 2. Compare the last character of each word with the first character of the next word.
+- 3. Also compare the last character of the last word with the first character of the first word.
+{{< dots >}}
+### Problem Assumptions ✅
+- Words in the sentence are non-empty.
+- Words consist only of uppercase and lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `sentence = 'hello ox oxo awesome endo'`  \
+  **Explanation:** In this example, 'hello' ends with 'o' which matches the first character of 'ox', 'ox' ends with 'x' which matches 'oxo's first character 'x', and so on, forming a circular sentence.
+
+- **Input:** `sentence = 'Leetcode is amazing'`  \
+  **Explanation:** In this case, 'Leetcode' ends with 'e' but 'is' starts with 'i', so the sentence is not circular.
+
+- **Input:** `sentence = 'ax aa a'`  \
+  **Explanation:** Here, 'ax' ends with 'x' but the next word 'aa' starts with 'a', and the pattern does not satisfy the circular condition.
+
+{{< dots >}}
+## Approach 🚀
+We check whether each word's last character matches the next word's first character and the first word's first character matches the last word's last character.
+
+### Initial Thoughts 💭
+- We need to check each word and compare the last character with the first character of the next word.
+- We also need to ensure the first word and the last word match circularly.
+- A simple iteration through the words should allow us to compare adjacent words, with special handling for the first and last word.
+{{< dots >}}
+### Edge Cases 🌐
+- The sentence will always be non-empty, so no need to handle empty sentences.
+- Ensure the solution works efficiently for sentences close to the maximum length of 500 characters.
+- The sentence may consist of just one word, in which case we check if the first and last character of the word match.
+- Handle sentences of varying lengths, ensuring they adhere to the space and character constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isCircularSentence(string s) {
+    
+    int n = s.size();
+    if((s[0]) != (s[n - 1]))
+        return false;
+    for(int i = 1; i < s.size() - 1; i++) {
+        if(s[i] == ' ') {
+            if((s[i - 1]) != (s[i + 1]))
+                return false;                
         }
-        return true;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to check whether a given string forms a "circular sentence." A string is defined as a circular sentence if:
-1. The first character of the string is the same as the last character.
-2. For every space in the string, the character immediately preceding the space must be the same as the character immediately following the space.
-
-For example:
-- `"abc cba"` is a circular sentence because:
-  - The first character ('a') is the same as the last character ('a').
-  - The characters before and after the space ('b' and 'c') are the same for both words.
-
-However:
-- `"hello world"` is **not** a circular sentence because:
-  - The first character ('h') is not the same as the last character ('d').
-
-### Approach
-
-The problem requires us to check two conditions for a sentence:
-1. **First and last character match**: The first and last characters of the sentence must be identical.
-2. **Words separated by spaces**: For each space in the string, the character immediately before the space should be the same as the character immediately after the space.
-
-To solve this problem, the approach involves:
-1. Checking if the first and last characters of the string are the same.
-2. Iterating through the string and for every space encountered, checking if the characters before and after the space match.
-3. If both conditions are satisfied, the string is a circular sentence; otherwise, it is not.
-
-The solution must efficiently traverse the string once while checking these conditions, which guarantees an optimal time complexity.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initial Setup**
-
-```cpp
-int n = s.size();
-```
-
-- The size of the string `s` is stored in the variable `n` to avoid repeated calls to `s.size()` throughout the function.
-
-#### 2. **Check if First and Last Characters are the Same**
-
-```cpp
-if((s[0]) != (s[n - 1]))
-    return false;
-```
-
-- The first condition to check is whether the first character `s[0]` is the same as the last character `s[n - 1]`.
-- If they are not the same, the string cannot be a circular sentence, so the function immediately returns `false`.
-
-#### 3. **Iterate Through the String to Check Each Space**
-
-```cpp
-for(int i = 1; i < s.size() - 1; i++) {
-    if(s[i] == ' ') {
-        if((s[i - 1]) != (s[i + 1]))
-            return false;                
-    }
+    return true;
 }
 ```
 
-- The loop starts from the second character (`i = 1`) and goes until the second-to-last character (`i < s.size() - 1`). This avoids unnecessary checks at the boundaries (the first and last characters are already checked).
-- The condition `s[i] == ' '` checks if the current character is a space.
-- If a space is found, we check if the characters immediately before and after the space are the same (`s[i - 1] == s[i + 1]`).
-  - If they are not the same, the function returns `false` because this violates the circular sentence condition.
+This function checks if a given sentence is circular, where the first and last characters are the same, and words between spaces are matched by their adjacent words.
 
-#### 4. **Return True if All Checks Pass**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isCircularSentence(string s) {
+	```
+	This line declares the function `isCircularSentence` which takes a string `s` as input and returns a boolean indicating whether the sentence is circular.
 
-```cpp
-return true;
-```
+2. **Variable Declaration**
+	```cpp
+	    int n = s.size();
+	```
+	This line calculates the size of the string `s` and stores it in the variable `n`.
 
-- If all the checks pass (i.e., the first and last characters match, and the characters around each space match), the function returns `true`, indicating that the string is a circular sentence.
+3. **Initial Check**
+	```cpp
+	    if((s[0]) != (s[n - 1]))
+	```
+	This conditional checks if the first character of the string `s` is not equal to the last character. If they are not the same, the function returns false.
 
-### Complexity Analysis
+4. **Early Return**
+	```cpp
+	        return false;
+	```
+	If the first and last characters do not match, the sentence is not circular, and the function returns `false`.
 
-#### Time Complexity:
-- The time complexity of the solution is **O(n)**, where `n` is the length of the string. This is because:
-  - The function iterates through the string once to check the characters.
-  - Each check (comparing characters or checking for spaces) is performed in constant time.
+5. **Loop Through Sentence**
+	```cpp
+	    for(int i = 1; i < s.size() - 1; i++) {
+	```
+	This loop iterates through the string starting from the second character and ends before the last character, checking for spaces and their adjacent characters.
 
-Thus, the time complexity is **O(n)**, where `n` is the number of characters in the string.
+6. **Check for Spaces**
+	```cpp
+	        if(s[i] == ' ') {
+	```
+	This line checks if the current character is a space.
 
-#### Space Complexity:
-- The space complexity is **O(1)**, as the solution only uses a few integer variables (`n` and `i`) to store intermediate values and does not create any additional data structures that grow with the input size.
+7. **Space Validation**
+	```cpp
+	            if((s[i - 1]) != (s[i + 1]))
+	```
+	If the current character is a space, this line checks if the character before the space is not equal to the character after the space. If they are not the same, the function returns `false`.
 
-Thus, the space complexity is **O(1)**.
+8. **Early Return**
+	```cpp
+	                return false;                
+	```
+	If the adjacent characters to the space are not equal, the sentence is not circular, and the function returns `false`.
 
-### Conclusion
+9. **Return True**
+	```cpp
+	    return true;
+	```
+	If the entire string passes the checks, the function returns `true`, indicating the sentence is circular.
 
-This solution efficiently checks if a given string is a circular sentence by validating two key conditions:
-1. The first and last characters must match.
-2. For every space in the string, the characters immediately before and after the space must be identical.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The solution is optimal with a time complexity of **O(n)**, where `n` is the length of the string, and a space complexity of **O(1)**. It uses a single loop to traverse the string and makes constant-time comparisons to ensure the string meets the requirements for being a circular sentence.
+The time complexity is O(n) where n is the number of characters in the sentence. We process each character once.
 
-This approach is simple and effective for this type of problem, ensuring that it runs efficiently even for long strings. The logic behind the solution is straightforward, involving basic string traversal and comparisons, making it both easy to understand and implement.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the words in the sentence, but it could be reduced to O(1) if we modify the sentence in place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/circular-sentence/description/)
 

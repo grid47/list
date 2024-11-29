@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "UP3dOYJa05s"
 youtube_upload_date="2024-04-24"
 youtube_thumbnail="https://i.ytimg.com/vi/UP3dOYJa05s/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,147 +28,140 @@ youtube_thumbnail="https://i.ytimg.com/vi/UP3dOYJa05s/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array `nums` containing unique elements. Find all possible subsets (the power set) of the array `nums`. The solution set should not contain duplicate subsets, and the result can be returned in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` with unique elements.
+- **Example:** `nums = [1, 2, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 10
+	- -10 <= nums[i] <= 10
+	- All elements of nums are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> nums;
-    vector<vector<int>> subsets(vector<int>& nums) {
-        this->nums = nums;
-        vector<vector<int>> ans;
-        vector<int> tmp;
-        bt(ans, tmp, 0);
-        return ans;
-    }
-    
-    void bt(vector<vector<int>> & ans, vector<int> &tmp, int idx) {
-        if(idx == nums.size()) {
-            ans.push_back(tmp);
-            return;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return all possible subsets (the power set) of the array `nums`, ensuring no duplicate subsets are included. The order of the subsets does not matter.
+- **Example:** `[[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]`
+- **Constraints:**
+	- The output should be a list of subsets where each subset is a list of integers.
 
-        
-        bt(ans, tmp, idx + 1);
-        
-        tmp.push_back(nums[idx]);
-        bt(ans, tmp, idx + 1);
-        tmp.pop_back();
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate all possible subsets (the power set) of the given array `nums` using a backtracking approach.
 
-### 🏷️ **Problem Statement**
+- Start with an empty subset and recursively explore both options: including the current element or excluding it.
+- For each element in the array, make a choice whether to add it to the current subset or skip it.
+- Each time an element is included or excluded, recursively call the function to build all possible subsets.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` contains unique integers.
+- The solution set should include all possible subsets without duplicates.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3]`  \
+  **Explanation:** The output includes all subsets, ranging from the empty subset to the full set itself.
 
-The goal of this problem is to generate all possible subsets from a given list of integers, `nums`. A subset of a set is any combination of its elements, including the empty set. The output should be a collection of all subsets where the order of subsets does not matter.
+- **Input:** `nums = [4]`  \
+  **Explanation:** There are two subsets: the empty subset `[]` and the subset `[4]`.
 
-#### Example:
-- **Input:** `nums = [1, 2, 3]`
-- **Output:** `[[ ], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]`
+{{< dots >}}
+## Approach 🚀
+The approach involves using backtracking to explore both possibilities for each element (include or exclude it) and build all possible subsets.
 
-Here, we are tasked with generating all possible combinations of the elements of the list, including the empty set and the set containing all elements.
-
----
-
-### 🧠 **Approach**
-
-The solution to this problem uses **backtracking**, a technique where we explore all possible combinations of elements by making incremental decisions and undoing those decisions when necessary. This is a perfect fit for problems like subset generation.
-
-#### Key Concepts:
-1. **Recursive Backtracking:** 
-   We use a helper function (`bt`) to recursively explore all possible subsets by either including or excluding each element in the set.
-
-2. **Exploration of Subsets:**
-   For each element in `nums`, we make two choices:
-   - **Exclude it** from the current subset.
-   - **Include it** in the current subset.
-   By exploring both choices recursively, we cover all subsets.
-
-3. **Base Case:**
-   When the function has considered all elements (i.e., `idx == nums.size()`), we add the current subset (`tmp`) to the result list (`ans`).
-
-4. **Backtracking:** 
-   After including an element, we backtrack by removing it from the current subset (`tmp`) and proceed with the next recursive step to explore other possibilities.
-
----
-
-### 📝 **Code Breakdown**
-
-#### Step 1: Definition of Member Variables
-```cpp
-vector<int> nums;
-```
-This vector holds the input list `nums`. It will be set through the method call.
-
-#### Step 2: Subsets Method
+### Initial Thoughts 💭
+- We can generate all subsets by recursively exploring both inclusion and exclusion of elements in the array.
+- Backtracking works well for generating subsets, as it allows for efficiently exploring all combinations by making decisions at each step.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` is an empty array, the only subset is the empty subset `[]`.
+- For larger arrays, ensure the solution handles the exponential number of subsets efficiently.
+- If `nums` contains just one element, the output will be two subsets: the empty subset `[]` and the subset with the single element.
+- The function should efficiently handle arrays up to the maximum size of 10 elements.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> subsets(vector<int>& nums) {
-    this->nums = nums;          // Store the input nums in the member variable
-    vector<vector<int>> ans;    // Vector to store all subsets
-    vector<int> tmp;            // Temporary vector to store the current subset
-    bt(ans, tmp, 0);            // Start the backtracking function
-    return ans;                 // Return the answer containing all subsets
-}
-```
-- **Explanation:**
-  - The method stores the input `nums` and initializes the `ans` vector (which holds all subsets) and `tmp` (used for the current subset).
-  - The backtracking function (`bt`) is called to start exploring subsets from index `0`.
-  
-#### Step 3: Backtracking Method
-```cpp
-void bt(vector<vector<int>> &ans, vector<int> &tmp, int idx) {
-    if (idx == nums.size()) {
-        ans.push_back(tmp);  // Add current subset to the answer when all elements are considered
-        return;
+    vector<vector<int>> result = {{}};
+    for (int num : nums) {
+        int n = result.size();
+        for (int i = 0; i < n; ++i) {
+            result.push_back(result[i]);
+            result.back().push_back(num);
+        }
     }
-
-    bt(ans, tmp, idx + 1);    // Case 1: Exclude the current element
-
-    tmp.push_back(nums[idx]); // Case 2: Include the current element
-    bt(ans, tmp, idx + 1);    // Recurse with the updated subset
-    tmp.pop_back();           // Backtrack, remove the last element to explore other possibilities
+    return result;
 }
 ```
-- **Base Case:** When `idx == nums.size()`, we've considered all elements, so the current subset (`tmp`) is added to the result.
-  
-- **Recursive Steps:**
-  - **Exclude the current element:** The first recursive call `bt(ans, tmp, idx + 1)` explores subsets without including `nums[idx]`.
-  - **Include the current element:** The second recursive call `bt(ans, tmp, idx + 1)` explores subsets with `nums[idx]` included, before backtracking.
 
-- **Backtracking:** After including `nums[idx]`, the function removes it (`tmp.pop_back()`) to explore subsets that don't include it.
+This code generates all possible subsets of a given set of numbers using an iterative approach.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> subsets(vector<int>& nums) {
+	```
+	Declares a function `subsets` that takes a vector of integers `nums` as input and returns a vector of vectors representing all possible subsets.
 
-### 🧮 **Complexity Analysis**
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> result = {{}};
+	```
+	Initializes a vector `result` to store the generated subsets, starting with an empty set.
 
-#### Time Complexity:
-The number of subsets of a list of size `n` is **2^n** because each element has two choices: to be included or excluded. Therefore, the time complexity is **O(2^n)**. For each subset, we also spend **O(n)** time to store and process it.
+3. **Loop Iteration**
+	```cpp
+	    for (int num : nums) {
+	```
+	Iterates over each number `num` in the input vector `nums`.
 
-Thus, the overall time complexity is **O(2^n * n)**.
+4. **Variable Initialization**
+	```cpp
+	        int n = result.size();
+	```
+	Stores the current size of the `result` vector in `n`.
 
-#### Space Complexity:
-- The recursive call stack has a maximum depth of `n` (the number of elements in `nums`), so the space complexity for recursion is **O(n)**.
-- The space required to store all subsets is **O(2^n * n)**, since there are `2^n` subsets, and each subset can have up to `n` elements.
+5. **Loop Iteration**
+	```cpp
+	        for (int i = 0; i < n; ++i) {
+	```
+	Iterates over the existing subsets in the `result` vector.
 
-Thus, the overall space complexity is **O(2^n * n)**, dominated by the space required to store the subsets.
+6. **Vector Operation**
+	```cpp
+	            result.push_back(result[i]);
+	```
+	Creates a new subset by copying the current subset `result[i]` and adds it to the `result` vector.
 
----
+7. **Vector Operation**
+	```cpp
+	            result.back().push_back(num);
+	```
+	Adds the current number `num` to the newly created subset.
 
-### 🎯 **Conclusion**
+8. **Return**
+	```cpp
+	    return result;
+	```
+	Returns the `result` vector containing all the generated subsets.
 
-This approach effectively generates all subsets of a given list of integers using the **backtracking** technique. By recursively considering both including and excluding each element, we explore all possible subsets. The time and space complexities are both exponential, reflecting the large number of subsets, but the algorithm is efficient and elegant for solving the problem of subset generation.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(2^n)
+- **Average Case:** O(2^n)
+- **Worst Case:** O(2^n)
 
-Backtracking allows us to systematically explore all possibilities, making it a perfect solution for combinatorial problems like this one.
+The time complexity is O(2^n) because there are 2^n subsets of a set with n elements.
 
----
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### ✨ **Key Takeaways**
-- **Backtracking** is a useful technique for exploring all combinations or subsets.
-- The time complexity of **O(2^n * n)** accounts for generating and storing all subsets.
-- Space complexity is also **O(2^n * n)**, dominated by the storage of subsets.
-- This solution is optimal for smaller input sizes, though it can be expensive for very large lists.
+The space complexity is O(n) due to the recursive call stack and storage for the current subset being built.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subsets/description/)

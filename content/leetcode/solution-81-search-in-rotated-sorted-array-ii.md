@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "oUnF7o88_Xc"
 youtube_upload_date="2023-08-10"
 youtube_thumbnail="https://i.ytimg.com/vi/oUnF7o88_Xc/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,152 +28,181 @@ youtube_thumbnail="https://i.ytimg.com/vi/oUnF7o88_Xc/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a sorted integer array `nums` that has been rotated at an unknown pivot index `k`. The array may contain duplicates. Your task is to determine whether a given target exists in the array, minimizing the number of operations as much as possible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a rotated sorted integer array `nums` and an integer target to search for in the array.
+- **Example:** `nums = [4,5,6,6,7,0,1,2,4], target = 0`
+- **Constraints:**
+	- 1 <= nums.length <= 5000
+	- -104 <= nums[i] <= 104
+	- -104 <= target <= 104
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool search(vector<int>& nums, int target) {
-        
-     int l = 0;
-        int r = nums.size() - 1;
-        
-        while(l <= r)
-        {
-            int mid = l + (r-l) / 2;
-            if (nums[mid] == target)
-                return true;
-            if((nums[l] == nums[mid]) && (nums[r] == nums[mid]))
-            {
-                l++;
-                r--;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the target exists in the array, otherwise return `false`.
+- **Example:** `true`
+- **Constraints:**
+	- The result should be true if the target exists in the array, and false if not.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To efficiently search for the target in the rotated sorted array, even when duplicates are present.
+
+- Use a modified binary search to handle both rotated arrays and duplicates.
+- At each step, check if the middle element equals the target. If it does, return true.
+- If the left, middle, and right elements are the same, increment `l` and decrement `r` to avoid duplicates.
+- Use the standard binary search logic to narrow down the search range based on the sorted portion of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is guaranteed to be rotated, but duplicates may be present.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4,5,6,6,7,0,1,2,4], target = 0`  \
+  **Explanation:** The target `0` is found at index 5, so the output is `true`.
+
+- **Input:** `nums = [1,3,5,7,8,8,10], target = 4`  \
+  **Explanation:** The target `4` does not exist in the array, so the output is `false`.
+
+{{< dots >}}
+## Approach 🚀
+We use a modified binary search approach that accounts for the rotation and potential duplicates in the array.
+
+### Initial Thoughts 💭
+- Binary search can be adapted to handle the rotated sorted array, but we need to handle duplicates carefully.
+- When elements are equal at the left, middle, and right indices, we need to increment and decrement `l` and `r` respectively to avoid redundant checks.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, the result should be false.
+- Ensure that the solution handles the largest possible input size efficiently.
+- Handle cases where all elements are the same and the target is present or absent.
+- Ensure that the solution works within the time and space limits for large arrays.
+{{< dots >}}
+## Code 💻
+```cpp
+bool search(vector<int>& nums, int target) {
+    int left = 0, right = nums.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (nums[mid] == target) {
+            return true;
+        }
+
+        // If left half is sorted
+        if (nums[left] <= nums[mid]) {
+            if (target >= nums[left] && target < nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
             }
-            else if(nums[l] <= nums[mid])
-            {
-				// target is in first  half
-                if((nums[l] <= target) && (nums[mid] > target))
-                    r = mid - 1;
-                else
-                    l = mid + 1;
-            }
-            else
-            {
-                if((nums[mid] < target) && (nums[r]>= target))
-                    l = mid + 1;
-                else
-                    r = mid - 1;
+        } else {
+            // Right half is sorted
+            if (target > nums[mid] && target <= nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
-        return false;
-    }        
-        
-};
-{{< /highlight >}}
----
+    }
 
-
-### 💡 **Search in Rotated Sorted Array with Duplicates** – Let’s Solve It Together!
-
-The **Search in Rotated Sorted Array** problem is a common challenge in coding interviews. In this variation, the array has been rotated at an unknown pivot, and it may contain duplicates. The goal is to **efficiently search for a target number** in the rotated sorted array. Let’s dive into how we can solve this problem using an optimized approach.
-
-### 📝 **What’s the Problem?**
-
-You're given:
-- A rotated **sorted array** `nums` that may contain duplicates.
-- A **target** number that we need to search for in the array.
-
-Our task is to **determine whether the target exists** in the array and return `true` if it is present, or `false` otherwise.
-
-### 🔍 **Approach: Modified Binary Search**
-
-To solve this problem, we’ll use a **modified binary search** approach. The typical binary search assumes that the array is sorted and does not handle the complexities of rotation or duplicates well. However, with careful adjustments, we can efficiently find the target in a rotated sorted array with duplicates.
-
-#### Key Observations:
-1. **The array is rotated** at an unknown pivot.
-2. **Duplicates are present**, which complicates the search process.
-3. **Binary Search** must be modified to handle both the rotation and duplicates.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Function Definition
-```cpp
-class Solution {
-public:
-    bool search(vector<int>& nums, int target) {
-```
-- We define the `search` function, which takes two parameters:
-  - `nums`: The rotated sorted array, which may contain duplicates.
-  - `target`: The number we are looking for.
-
-#### Step 2: Initializing Pointers
-```cpp
-int l = 0;
-int r = nums.size() - 1;
-```
-- We initialize two pointers, `l` (left) and `r` (right), to the first and last indices of the array, respectively.
-
-#### Step 3: While Loop for Binary Search
-```cpp
-while (l <= r) {
-    int mid = l + (r - l) / 2;
-    if (nums[mid] == target)
-        return true;
-```
-- The `while` loop runs as long as `l` is less than or equal to `r`.
-- We calculate the midpoint `mid` using `l + (r - l) / 2` to avoid overflow. If the element at `mid` equals the target, we return `true`.
-
-#### Step 4: Handling Duplicates
-```cpp
-if ((nums[l] == nums[mid]) && (nums[r] == nums[mid])) {
-    l++;
-    r--;
+    return false;
 }
 ```
-- If both the left (`nums[l]`) and right (`nums[r]`) elements are equal to the middle element (`nums[mid]`), we cannot definitively determine the sorted half because of duplicates.
-- We adjust the search range by incrementing `l` and decrementing `r`, effectively narrowing the search window.
 
-#### Step 5: Standard Binary Search Adjustments
-```cpp
-else if (nums[l] <= nums[mid]) {
-    // Target is in the first half
-    if ((nums[l] <= target) && (nums[mid] > target))
-        r = mid - 1;
-    else
-        l = mid + 1;
-}
-```
-- If the left side of the array is sorted (`nums[l] <= nums[mid]`), we check if the target is in the first half of the array. If the target is in the range between `nums[l]` and `nums[mid]`, we adjust the right pointer (`r = mid - 1`), otherwise, we adjust the left pointer (`l = mid + 1`).
+This code implements a binary search algorithm to find a target value in a rotated sorted array.
 
-#### Step 6: Handling the Right Half of the Array
-```cpp
-else {
-    if ((nums[mid] < target) && (nums[r] >= target))
-        l = mid + 1;
-    else
-        r = mid - 1;
-}
-```
-- If the right side of the array is sorted (`nums[mid] < nums[r]`), we check if the target is in the right half. If the target lies within `nums[mid]` and `nums[r]`, we move the left pointer (`l = mid + 1`), otherwise, we adjust the right pointer (`r = mid - 1`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool search(vector<int>& nums, int target) {
+	```
+	Declares a function `search` that takes a sorted rotated array `nums` and a target value `target` as input and returns a boolean indicating whether the target is found.
 
-#### Step 7: Return Statement
-```cpp
-return false;
-```
-- If we exit the loop without finding the target, we return `false`, indicating that the target is not in the array.
+2. **Variable Initialization**
+	```cpp
+	    int left = 0, right = nums.size() - 1;
+	```
+	Initializes two pointers, `left` and `right`, to the beginning and end of the array, respectively.
 
-### ⏱️ **Time and Space Complexity**
+3. **Loop Iteration**
+	```cpp
+	    while (left <= right) {
+	```
+	Starts a `while` loop that continues as long as `left` is less than or equal to `right`.
 
-#### Time Complexity:
-The time complexity is **O(n)** in the worst case. Although binary search typically operates in **O(log n)**, the presence of duplicates can degrade performance. In certain cases, when duplicates are encountered at both ends, the algorithm may fall back to a linear search, making the time complexity **O(n)** in the worst case.
+4. **Calculation**
+	```cpp
+	        int mid = left + (right - left) / 2;
+	```
+	Calculates the middle index `mid` using a formula that avoids potential integer overflow.
 
-#### Space Complexity:
-The space complexity is **O(1)** because we use a constant amount of extra space for variables such as `l`, `r`, and `mid`. The algorithm performs in-place searches, which means it doesn’t require additional memory for data structures.
+5. **Conditional**
+	```cpp
+	        if (nums[mid] == target) {
+	            return true;
+	        }
+	```
+	Checks if the element at the middle index is the target. If so, returns `true`.
 
-### 🚀 **Conclusion**
+6. **Conditional**
+	```cpp
+	        if (nums[left] <= nums[mid]) {
+	```
+	Checks if the left half of the array is sorted.
 
-This solution efficiently handles the search for a target in a rotated sorted array with duplicates. By modifying the typical binary search to handle duplicates, we ensure that we don't miss any potential targets. While the worst-case time complexity can be linear due to duplicates, this solution remains highly effective and optimal for most scenarios. 
+7. **Conditional**
+	```cpp
+	            if (target >= nums[left] && target < nums[mid]) {
+	                right = mid - 1;
+	            } else {
+	                left = mid + 1;
+	            }
+	```
+	If the left half is sorted and the target is within its range, adjusts the `right` pointer. Otherwise, adjusts the `left` pointer.
 
-Keep in mind that while the algorithm might degrade to a linear search in rare cases, it still provides an efficient solution for moderate-sized arrays. Happy coding! 💻🌟
+8. **Conditional**
+	```cpp
+	        } else {
+	```
+	If the left half is not sorted, the right half must be sorted.
+
+9. **Conditional**
+	```cpp
+	            if (target > nums[mid] && target <= nums[right]) {
+	                left = mid + 1;
+	            } else {
+	                right = mid - 1;
+	            }
+	```
+	If the right half is sorted and the target is within its range, adjusts the `left` pointer. Otherwise, adjusts the `right` pointer.
+
+10. **Return**
+	```cpp
+	    return false;
+	```
+	If the target is not found after the loop, returns `false`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(n)
+
+In the worst case, we may need to check every element due to duplicates, leading to linear time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution uses constant space, as we are modifying the search range in-place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "pfiQ_PS1g8E"
 youtube_upload_date="2021-04-20"
 youtube_thumbnail="https://i.ytimg.com/vi/pfiQ_PS1g8E/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,177 +28,210 @@ youtube_thumbnail="https://i.ytimg.com/vi/pfiQ_PS1g8E/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a 2D grid `board` containing characters and a string `word`. The task is to determine whether the given word can be formed by starting at any cell in the grid and moving to adjacent cells, which are horizontally or vertically neighboring. The same cell cannot be reused in forming the word.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D grid `board` of characters and a string `word`.
+- **Example:** `board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"`
+- **Constraints:**
+	- 1 <= m, n <= 6
+	- 1 <= word.length <= 15
+	- board and word consist of only uppercase and lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<char>> grid;
-    vector<vector<bool>> vis;
-    int m, n;
-    string w;
-    bool exist(vector<vector<char>>& board, string word) {
-        this->w = word;
-        this->grid = board;
-        this->m = board.size();
-        this->n = board[0].size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the word exists in the grid, otherwise return `false`.
+- **Example:** `true`
+- **Constraints:**
+	- The solution should return true if the word can be formed from the grid, and false otherwise.
 
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(w.size() == 1 && grid[i][j] == w[0])
-                return true;
-            else {
-                vis.resize(m, vector<bool>(n, false));
-                if(dfs(i, j, 0))
-                return true;
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To check if a word can be formed by navigating the grid's adjacent cells.
 
-        return false;
-    }
-    
-    bool dfs(int i, int j, int idx) {
-        if(idx == w.size()) return true;
-        if(grid[i][j] != w[idx] || vis[i][j]) {
-            return false;
-        }
-        vis[i][j] = true;
-        bool ans = false;
-        
-            if(i > 0) ans |= dfs(i - 1, j, idx + 1);
-            if(j > 0) ans |= dfs(i, j - 1, idx + 1);
-        if(i < m - 1) ans |= dfs(i + 1, j, idx + 1);
-        if(j < n - 1) ans |= dfs(i, j + 1, idx + 1);     
+- Iterate over each cell in the grid.
+- For each cell, perform a Depth-First Search (DFS) to explore all possible paths that form the word, marking cells as visited.
+- If a complete path that forms the word is found, return true; otherwise, continue the search.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid and word consist only of valid English alphabetic characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"`  \
+  **Explanation:** Starting at the top-left corner, the word 'ABCCED' can be formed by moving through adjacent cells.
 
-        vis[i][j] = false;
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"`  \
+  **Explanation:** The word 'SEE' can be formed by starting from the bottom-left corner.
 
-### 🏷️ **Problem Statement**
+- **Input:** `board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"`  \
+  **Explanation:** The word 'ABCB' cannot be formed because the letter 'B' would need to be reused.
 
-The goal is to determine whether a given word can be formed by traversing adjacent cells in a 2D grid of characters. Adjacent cells are those that share a side (up, down, left, or right). Each cell may only be used once per word search.
+{{< dots >}}
+## Approach 🚀
+The approach uses Depth-First Search (DFS) to explore possible paths for forming the word, pruning the search if a path leads to an invalid state.
 
-The function should return `true` if the word can be constructed from adjacent cells in the grid, otherwise `false`.
-
-#### Example:
-- **Input:** `board = [["A","B","C","E"], ["S","F","C","S"], ["A","D","E","E"]], word = "ABCCED"`
-- **Output:** `true`
-
----
-
-### 🧠 **Approach**
-
-The solution uses **Depth-First Search (DFS)** combined with **backtracking** to explore all possible paths that may form the word. The approach proceeds as follows:
-
-1. **DFS Traversal:**
-   The algorithm starts by trying to match the first character of the word with each cell in the grid. Once a match is found, it recursively checks the neighboring cells to find the next character of the word. This continues until the entire word is matched or no further match can be made.
-
-2. **Backtracking:**
-   While traversing the grid, the algorithm marks cells as visited to avoid revisiting them in the current word search. If a potential path does not lead to a solution, the algorithm backtracks by unmarking the visited cell and tries another path.
-
-3. **Pruning and Optimization:**
-   - If a cell doesn’t match the current character or has already been visited, the search backtracks immediately.
-   - If the word is found at any point, the search terminates early and returns `true`.
-
-4. **Edge Case Handling:**
-   - If the word is a single character, the algorithm checks if any cell contains that character.
-   - If the grid dimensions are smaller than the length of the word, the search terminates early.
-
----
-
-### 📝 **Code Breakdown**
-
-#### Step 1: Class Definition and Member Variables
-```cpp
-class Solution {
-public:
-    vector<vector<char>> grid;    // The grid to search for the word
-    vector<vector<bool>> vis;     // Visited cells to avoid revisiting in DFS
-    int m, n;                     // Dimensions of the grid
-    string w;                     // The word to search for
-```
-- `grid`: A 2D vector that stores the grid of characters.
-- `vis`: A 2D boolean vector used to mark visited cells during DFS.
-- `m, n`: The number of rows and columns of the grid.
-- `w`: The target word to be searched.
-
-#### Step 2: `exist` Method - Main Function to Check Word Existence
+### Initial Thoughts 💭
+- DFS is an ideal approach for exploring all paths in a grid.
+- By using a visited matrix to mark cells already used, we can prevent revisiting cells.
+{{< dots >}}
+### Edge Cases 🌐
+- If the grid is empty or the word length is 0, the result should be false.
+- Ensure the solution works efficiently for the maximum grid size (6x6).
+- Handle cases where the word contains repeated characters or if the grid contains the same character multiple times.
+- Make sure the word does not exceed the maximum length of 15.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool exist(vector<vector<char>>& board, string word) {
-    this->w = word;          // Store the word to search for
-    this->grid = board;      // Store the input grid
-    this->m = board.size();  // Number of rows in the grid
-    this->n = board[0].size(); // Number of columns in the grid
+    int m = board.size(), n = board[0].size();
+    vector<vector<bool>> visited(m, vector<bool>(n));
 
-    // Try to start the DFS from every cell in the grid
-    for (int i = 0; i < m; i++)
-        for (int j = 0; j < n; j++)
-            // Special case: if the word is a single character
-            if (w.size() == 1 && grid[i][j] == w[0])
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (dfs(board, visited, i, j, word, 0)) {
                 return true;
-            else {
-                vis.resize(m, vector<bool>(n, false)); // Reset the visited matrix
-                if (dfs(i, j, 0)) // Start DFS from cell (i, j)
-                    return true;  // If found, return true
             }
-
-    return false; // Return false if no path is found
+        }
+    }
+    return false;
 }
-```
-- Initializes necessary member variables (`w`, `grid`, `m`, and `n`).
-- Attempts to start the DFS search from every grid cell.
-- If the word length is 1, it checks if any cell contains that character.
-- For longer words, the DFS search is triggered, and the result is returned based on the findings.
 
-#### Step 3: DFS Method - Recursive Depth-First Search
-```cpp
-bool dfs(int i, int j, int idx) {
-    if (idx == w.size()) return true; // If the entire word is matched, return true
-    if (grid[i][j] != w[idx] || vis[i][j]) {
-        return false; // If current cell doesn't match the character or is already visited, return false
+bool dfs(vector<vector<char>>& board, vector<vector<bool>>& visited, int i, int j, string& word, int idx) {
+    if (idx == word.size()) {
+        return true;
+    }
+    if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || visited[i][j] || board[i][j] != word[idx]) {
+        return false;
     }
 
-    vis[i][j] = true; // Mark the current cell as visited
-    bool ans = false;
-
-    // Explore all 4 neighboring cells
-    if (i > 0) ans |= dfs(i - 1, j, idx + 1);  // Explore top cell
-    if (j > 0) ans |= dfs(i, j - 1, idx + 1);  // Explore left cell
-    if (i < m - 1) ans |= dfs(i + 1, j, idx + 1); // Explore bottom cell
-    if (j < n - 1) ans |= dfs(i, j + 1, idx + 1); // Explore right cell
-
-    vis[i][j] = false; // Unmark the current cell (backtrack)
-    return ans; // Return true if any path found, otherwise false
+    visited[i][j] = true;
+    bool found = dfs(board, visited, i - 1, j, word, idx + 1) ||
+                 dfs(board, visited, i + 1, j, word, idx + 1) ||
+                 dfs(board, visited, i, j - 1, word, idx + 1) ||
+                 dfs(board, visited, i, j + 1, word, idx + 1);
+    visited[i][j] = false;
+    return found;
 }
 ```
-- The `dfs` method recursively explores neighboring cells to match characters of the word starting from `(i, j)`.
-- If a cell matches the current character and hasn't been visited, it marks the cell as visited and explores its neighbors.
-- The function returns `true` if the word is found, otherwise `false`.
 
----
+This code checks if a given word exists in a 2D grid of characters using a Depth-First Search (DFS) approach.
 
-### 🧮 **Complexity Analysis**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool exist(vector<vector<char>>& board, string word) {
+	```
+	Declares a function `exist` that takes a 2D character grid `board` and a string `word` as input and returns a boolean indicating whether the word exists in the grid.
 
-#### Time Complexity:
-The time complexity of the algorithm is **O(m * n * 4^L)**, where `m` and `n` are the dimensions of the grid, and `L` is the length of the word.
+2. **Variable Initialization**
+	```cpp
+	    int m = board.size(), n = board[0].size();
+	```
+	Stores the dimensions of the board in `m` and `n`.
 
-- Each recursive DFS step explores up to 4 directions (top, left, bottom, right). In the worst case, for each of the `m * n` starting cells, the search explores up to `4^L` possibilities (since each character of the word could lead to 4 possible next cells).
-- Thus, the total time complexity is **O(m * n * 4^L)**.
+3. **Variable Initialization**
+	```cpp
+	    vector<vector<bool>> visited(m, vector<bool>(n));
+	```
+	Initializes a 2D boolean array `visited` to track visited cells during DFS.
 
-#### Space Complexity:
-The space complexity is **O(m * n)** due to:
-- The `vis` matrix used to track visited cells during the DFS traversal.
-- The recursion stack, which can grow to a maximum depth of `L` (the length of the word), but the dominant factor is the grid size.
+4. **Nested Loops**
+	```cpp
+	    for (int i = 0; i < m; ++i) {
+	        for (int j = 0; j < n; ++j) {
+	```
+	Iterates through each cell in the grid.
 
-Therefore, the overall space complexity is **O(m * n)**.
+5. **Recursive Call**
+	```cpp
+	            if (dfs(board, visited, i, j, word, 0)) {
+	                return true;
+	            }
+	        }
+	    }
+	```
+	Calls the `dfs` function to start the DFS from the current cell and returns `true` if the word is found.
 
----
+6. **Return**
+	```cpp
+	    return false;
+	```
+	Returns `false` if the word is not found after checking all cells.
 
-### 🎯 **Conclusion**
+7. **Function Declaration**
+	```cpp
+	bool dfs(vector<vector<char>>& board, vector<vector<bool>>& visited, int i, int j, string& word, int idx) {
+	```
+	Declares a recursive `dfs` function to perform DFS from a given cell.
 
-This approach effectively solves the problem of finding a word in a 2D grid by using **DFS (Depth-First Search)** and **backtracking**. It explores all possible paths to match the word's characters while ensuring that cells are not revisited during the search. The algorithm is efficient for moderate-sized grids and word lengths, though its time complexity can grow exponentially with larger grids and longer words. The space complexity is dominated by the size of the grid and the recursion stack.
+8. **Base Case**
+	```cpp
+	    if (idx == word.size()) {
+	        return true;
+	    }
+	```
+	Base case: If the current index `idx` reaches the end of the word, the word is found.
+
+9. **Conditional**
+	```cpp
+	    if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || visited[i][j] || board[i][j] != word[idx]) {
+	        return false;
+	    }
+	```
+	Checks if the current cell is out of bounds, already visited, or doesn't match the current character in the word.
+
+10. **Variable Assignment**
+	```cpp
+	    visited[i][j] = true;
+	```
+	Marks the current cell as visited.
+
+11. **Variable Initialization**
+	```cpp
+	    bool found = false;
+	```
+	Initializes a boolean variable `found` to track if the word is found in any of the four directions.
+
+12. **Recursive Call**
+	```cpp
+	    found = dfs(board, visited, i - 1, j, word, idx + 1) ||
+	                 dfs(board, visited, i + 1, j, word, idx + 1) ||
+	                 dfs(board, visited, i, j - 1, word, idx + 1) ||
+	                 dfs(board, visited, i, j + 1, word, idx + 1);
+	```
+	Recursively calls the `dfs` function to explore the four neighboring cells.
+
+13. **Variable Assignment**
+	```cpp
+	    visited[i][j] = false;
+	```
+	Unmarks the current cell as visited after exploring its neighbors.
+
+14. **Return**
+	```cpp
+	    return found;
+	```
+	Returns `true` if the word is found in any of the four directions, otherwise `false`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m*n)
+- **Average Case:** O(3^(len(word)))
+- **Worst Case:** O(3^(len(word)))
+
+The worst-case time complexity is proportional to the maximum number of recursive DFS calls, which is bounded by the length of the word and the grid size.
+
+### Space Complexity 💾
+- **Best Case:** O(m*n)
+- **Worst Case:** O(m*n)
+
+The space complexity is dominated by the recursion stack and the visited matrix, both of which are proportional to the grid size.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/word-search/description/)
 

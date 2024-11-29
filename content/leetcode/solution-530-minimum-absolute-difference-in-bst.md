@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "NttA_NC_ZhI"
 youtube_upload_date="2024-06-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/NttA_NC_ZhI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,113 +28,187 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/NttA_NC_ZhI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a Binary Search Tree, which is represented as a list of integers where each value represents a node in the tree. Null values indicate absent nodes.
+- **Example:** `Input: root = [4,2,6,1,3]`
+- **Constraints:**
+	- 2 <= The number of nodes in the tree <= 10^4
+	- 0 <= Node.val <= 10^5
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int getMinimumDifference(TreeNode* root) {
-        TreeNode* prv = NULL; int ans = INT_MAX;
-        stack<TreeNode*> stk;
-        while(!stk.empty() || root) {
-            if(root) {
-                stk.push(root);
-                root = root->left;
-            } else {
-                root = stk.top();
-                stk.pop();
-                if(prv != NULL) {
-                    ans = min(ans, root->val - prv->val);
-                }
-                prv = root;
-                root = root->right;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest absolute difference between values of any two nodes in the tree.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The answer will always be a positive integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the minimum absolute difference between values of any two nodes in the BST.
+
+- Perform an in-order traversal of the BST. In-order traversal of a BST yields a sorted list of values.
+- For each adjacent pair of values in this sorted list, calculate the absolute difference.
+- Track the minimum difference encountered.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is a valid Binary Search Tree.
+- The tree will contain at least two nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [4,2,6,1,3]`  \
+  **Explanation:** An in-order traversal of the BST gives the values [1, 2, 3, 4, 6]. The minimum absolute difference is 1, as the closest pair is (2, 3).
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will leverage an in-order traversal of the BST to generate a sorted list of node values, from which we can easily calculate the minimum absolute difference.
+
+### Initial Thoughts 💭
+- In-order traversal of a BST results in a sorted list of values.
+- The minimum absolute difference between two nodes will always be between two adjacent nodes in the sorted list.
+{{< dots >}}
+### Edge Cases 🌐
+- The tree has only one node (though this case is guaranteed not to happen due to the constraints).
+- A tree with the maximum number of nodes (10^4 nodes).
+- All nodes in the tree have the same value.
+- Ensure correct handling of trees with multiple identical values.
+{{< dots >}}
+## Code 💻
+```cpp
+int getMinimumDifference(TreeNode* root) {
+    TreeNode* prv = NULL; int ans = INT_MAX;
+    stack<TreeNode*> stk;
+    while(!stk.empty() || root) {
+        if(root) {
+            stk.push(root);
+            root = root->left;
+        } else {
+            root = stk.top();
+            stk.pop();
+            if(prv != NULL) {
+                ans = min(ans, root->val - prv->val);
             }
+            prv = root;
+            root = root->right;
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given a binary search tree (BST), the task is to find the minimum absolute difference between the values of any two nodes. This difference must be as small as possible. 
-
-### Approach
-
-The structure of a BST ensures that for any given node, all nodes in its left subtree have values less than the node’s value, while nodes in its right subtree have values greater. Thus, performing an in-order traversal (visiting nodes in ascending order) allows us to sequentially access the node values in sorted order. 
-
-In this solution, we use an in-order traversal to examine consecutive node values and calculate the differences. The smallest of these differences is the answer.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-TreeNode* prv = NULL; int ans = INT_MAX;
-stack<TreeNode*> stk;
-```
-
-- `prv`: A pointer to track the previously visited node during traversal. We initialize it to `NULL` as there is no "previous node" before the traversal starts.
-- `ans`: An integer to store the minimum difference. It's initialized to `INT_MAX`, which is the largest possible integer, ensuring any actual difference will be smaller.
-- `stk`: A stack to facilitate iterative in-order traversal of the tree, as recursion could be replaced with stack usage in iterative approaches.
-
-#### Step 2: Start the In-Order Traversal Loop
-
-```cpp
-while(!stk.empty() || root) {
-    if(root) {
-        stk.push(root);
-        root = root->left;
-    } else {
-        root = stk.top();
-        stk.pop();
-        if(prv != NULL) {
-            ans = min(ans, root->val - prv->val);
-        }
-        prv = root;
-        root = root->right;
-    }
+    return ans;
 }
 ```
 
-- This loop handles in-order traversal iteratively.
-    - If `root` is not `NULL`, it means we have not yet reached the leftmost node in the current subtree. We push `root` onto the stack and move to `root->left`.
-    - If `root` is `NULL`, it means we have reached the leftmost node of the subtree or completed processing the left subtree of a node.
-        - We set `root` to the top of the stack, representing the current node we are visiting.
-        - We then pop this node from the stack as we are about to process it.
-        
-- We compute the difference between the current node’s value (`root->val`) and the previous node’s value (`prv->val`) only if `prv` is not `NULL`.
-    - Update `ans` with the minimum of `ans` and this difference.
-- After processing the current node, `prv` is updated to the current `root`, and `root` is moved to `root->right` to continue the in-order traversal on the right subtree.
+This function computes the minimum absolute difference between values of any two nodes in a Binary Search Tree (BST). It uses an in-order traversal with a stack to traverse the tree iteratively and calculate the minimum difference between consecutive node values.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition, Tree Traversal**
+	```cpp
+	int getMinimumDifference(TreeNode* root) {
+	```
+	Defines the `getMinimumDifference` function that calculates the minimum absolute difference between node values in a Binary Search Tree (BST). The function takes the root of the tree as an argument.
 
-```cpp
-return ans;
-```
+2. **Variable Initialization**
+	```cpp
+	    TreeNode* prv = NULL; int ans = INT_MAX;
+	```
+	Initializes a pointer `prv` to track the previous node during traversal and a variable `ans` to store the minimum difference, initially set to the maximum possible value (`INT_MAX`).
 
-- The minimum difference computed, stored in `ans`, is returned as the final answer.
+3. **Stack Initialization**
+	```cpp
+	    stack<TreeNode*> stk;
+	```
+	Creates a stack `stk` to assist with the in-order traversal of the tree. This stack helps simulate the recursion that would normally be used for tree traversal.
 
-### Complexity
+4. **While Loop, Tree Traversal**
+	```cpp
+	    while(!stk.empty() || root) {
+	```
+	Starts the while loop that continues until the stack is empty and the current node (`root`) is NULL, ensuring all nodes are visited.
 
-- **Time Complexity**: `O(n)`, where `n` is the number of nodes in the binary search tree. This is because each node is visited once during the traversal.
-- **Space Complexity**: `O(h)`, where `h` is the height of the tree. In the worst case (for a completely unbalanced tree), this can be `O(n)` if the tree is a linked list. For a balanced tree, it is `O(log n)`.
+5. **Condition, Node Traversal**
+	```cpp
+	        if(root) {
+	```
+	Checks if the current node (`root`) is not NULL, indicating there are still nodes to traverse in the tree.
 
-### Conclusion
+6. **Push to Stack, Left Subtree**
+	```cpp
+	            stk.push(root);
+	```
+	Pushes the current node onto the stack to keep track of the path. This is part of the in-order traversal.
 
-This solution provides an efficient way to find the minimum absolute difference between values in a BST using in-order traversal. By leveraging BST properties, we only compare consecutive nodes in sorted order, which minimizes unnecessary comparisons and optimizes the process. The approach effectively handles even large BSTs due to its `O(n)` time complexity and efficient memory use.
+7. **Move to Left Child**
+	```cpp
+	            root = root->left;
+	```
+	Moves the current pointer to the left child of the current node, continuing the in-order traversal.
+
+8. **Else Block, Backtrack**
+	```cpp
+	        } else {
+	```
+	Executes when the current node is NULL, indicating that the left subtree has been fully traversed and it's time to process the current node.
+
+9. **Pop from Stack**
+	```cpp
+	            root = stk.top();
+	```
+	Pops the top element from the stack, which gives the node that is to be processed next in the in-order traversal.
+
+10. **Pop Stack, Move to Next Node**
+	```cpp
+	            stk.pop();
+	```
+	Removes the current node from the stack after processing it.
+
+11. **Check Previous Node**
+	```cpp
+	            if(prv != NULL) {
+	```
+	Checks if the previous node (`prv`) is not NULL, ensuring that there is a valid comparison between the current node and the previous one.
+
+12. **Calculate Minimum Difference**
+	```cpp
+	                ans = min(ans, root->val - prv->val);
+	```
+	Calculates the minimum absolute difference between the current node's value and the previous node's value. If the difference is smaller than the current `ans`, it updates `ans`.
+
+13. **Update Previous Node**
+	```cpp
+	            prv = root;
+	```
+	Updates the `prv` pointer to the current node, as it will be used for the next comparison.
+
+14. **Move to Right Child**
+	```cpp
+	            root = root->right;
+	```
+	Moves the pointer to the right child of the current node to continue the in-order traversal.
+
+15. **Return Minimum Difference**
+	```cpp
+	    return ans;
+	```
+	Returns the minimum absolute difference between node values found during the traversal.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the number of nodes in the tree, as we perform an in-order traversal and a single pass to calculate the differences.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case due to the recursion stack of the in-order traversal, where n is the number of nodes, and O(h) in the best case, where h is the height of the tree.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/)
 

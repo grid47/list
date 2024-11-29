@@ -14,128 +14,164 @@ img_src = ""
 youtube = "hyQUsjKrq1s"
 youtube_upload_date="2021-03-20"
 youtube_thumbnail="https://i.ytimg.com/vi/hyQUsjKrq1s/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an alphanumeric string 's', which consists of lowercase English letters and digits. Your task is to find the second largest numerical digit in 's'. If there is no second largest digit, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an alphanumeric string 's'. This string contains only lowercase letters and digits.
+- **Example:** `Input: s = 'zab10321xy'`
+- **Constraints:**
+	- 1 <= s.length <= 500
+	- s consists of only lowercase English letters and digits
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int secondHighest(string s) {
-        // support variables
-        int res[2] = {-1, -1};
-        // parsing s
-        for (char c: s) {
-            // considering only numerical characters
-            if (c >= '0' && c <= '9') {
-                // normalising c
-                c -= '0';
-                // updating res
-                if (c > res[0]) {
-                    res[1] = res[0];
-                    res[0] = c;
-                } else if (c != res[0] && c > res[1]) res[1] = c;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the second largest numerical digit in the string 's', or -1 if it does not exist.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the second largest numerical digit in the given string 's'. If such a digit does not exist, return -1.
+
+- Initialize an array to store the two largest digits found.
+- Loop through the string and extract all digits.
+- For each digit, compare it with the two largest digits found so far and update the array accordingly.
+- Return the second largest digit if it exists, otherwise return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string 's' is always valid and meets the input constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: 'ab12cd34'`  \
+  **Explanation:** The digits in the string are [1, 2, 3, 4]. The second largest digit is 3.
+
+- **Input:** `Input: 'abc1111'`  \
+  **Explanation:** The only digit is 1, so there is no second largest digit, and the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to iterate through the string to extract all digits, and then determine the second largest digit.
+
+### Initial Thoughts 💭
+- We are only interested in the numerical digits, which simplifies the problem to processing a small subset of characters.
+- We need to track the two largest digits found while iterating through the string. This will allow us to easily determine the second largest.
+{{< dots >}}
+### Edge Cases 🌐
+- Input string is guaranteed to have at least one character based on the problem constraints.
+- The solution must handle up to 500 characters efficiently.
+- The string might contain all non-digit characters, which should return -1.
+- Ensure the solution works within the time and space constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int secondHighest(string s) {
+    // support variables
+    int res[2] = {-1, -1};
+    // parsing s
+    for (char c: s) {
+        // considering only numerical characters
+        if (c >= '0' && c <= '9') {
+            // normalising c
+            c -= '0';
+            // updating res
+            if (c > res[0]) {
+                res[1] = res[0];
+                res[0] = c;
+            } else if (c != res[0] && c > res[1]) res[1] = c;
         }
-        return res[1];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the second highest digit in a given string `s`, which may contain a mix of letters and digits. If there is no second highest digit (e.g., when there is only one unique digit or none), the function should return `-1`. This problem is particularly useful in scenarios where data parsing is necessary, such as extracting numeric values from formatted strings.
-
-### Approach
-
-To solve the problem of finding the second highest digit in the string, we can utilize a simple and efficient approach involving the following steps:
-
-1. **Initialize Variables**: Create an array `res` to hold the highest and second highest digits found during the parsing process.
-
-2. **Iterate Over the String**: Loop through each character in the string and check if it is a numeric character.
-
-3. **Normalize and Update Values**: Convert the character from a character representation to an integer value and update the `res` array based on the digit's value. 
-
-4. **Conditionally Update**: If the current digit is greater than the highest found, update both the highest and second highest values. If the digit is distinct and greater than the current second highest, update the second highest.
-
-5. **Return Result**: After iterating through the string, check the value of the second highest digit. If it remains `-1`, return `-1` as no second highest digit was found. Otherwise, return the second highest digit.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int secondHighest(string s) {
+    return res[1];
+}
 ```
-- We define the `Solution` class and the `secondHighest` method, which takes a string `s` as an input parameter.
 
-```cpp
-        // support variables
-        int res[2] = {-1, -1};
-```
-- We initialize an array `res` with two elements, both set to `-1`. This array will be used to track the highest and the second highest digits found in the string.
+This function finds the second highest digit in a string of characters by iterating through the string, checking if each character is a digit, and comparing it with the two highest digits found so far.
 
-```cpp
-        // parsing s
-        for (char c: s) {
-```
-- We begin a loop to parse through each character `c` in the string `s`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int secondHighest(string s) {
+	```
+	Define the function `secondHighest` which accepts a string `s` and returns the second highest digit found in the string.
 
-```cpp
-            // considering only numerical characters
-            if (c >= '0' && c <= '9') {
-```
-- Inside the loop, we check if the character `c` is a numeric character by checking if it lies between `'0'` and `'9'`.
+2. **Array Initialization**
+	```cpp
+	    int res[2] = {-1, -1};
+	```
+	Initialize an array `res` of size 2 to store the highest (`res[0]`) and second highest (`res[1]`) digits. Both are initially set to -1, which represents no valid digits found yet.
 
-```cpp
-                // normalising c
-                c -= '0';
-```
-- If `c` is a digit, we normalize it by converting the character representation to its integer value. This is done by subtracting `'0'` from `c`, which gives the corresponding integer value (e.g., `'5'` becomes `5`).
+3. **Loop Start**
+	```cpp
+	    for (char c: s) {
+	```
+	Start a `for` loop that iterates over each character `c` in the string `s`.
 
-```cpp
-                // updating res
-                if (c > res[0]) {
-```
-- We check if the current digit is greater than the highest digit found so far (stored in `res[0]`).
+4. **Character Condition**
+	```cpp
+	        if (c >= '0' && c <= '9') {
+	```
+	This condition checks if the current character `c` is a digit (between '0' and '9').
 
-```cpp
-                    res[1] = res[0];
-                    res[0] = c;
-```
-- If the current digit is greater, we update the second highest digit (`res[1]`) to be the previous highest digit, and then update the highest digit to be the current digit.
+5. **Character Conversion**
+	```cpp
+	            c -= '0';
+	```
+	Convert the character `c` into its corresponding integer value by subtracting the ASCII value of '0'.
 
-```cpp
-                } else if (c != res[0] && c > res[1]) res[1] = c;
-```
-- If the current digit is not equal to the highest but is greater than the current second highest, we update the second highest digit to the current digit.
+6. **Update Highest and Second Highest**
+	```cpp
+	            if (c > res[0]) {
+	```
+	If the current digit `c` is greater than the current highest digit (`res[0]`), update the second highest to the current highest and set the new highest to `c`.
 
-```cpp
-            }
-        }
-        return res[1];
-    }
-};
-```
-- After parsing all characters in the string, we return `res[1]`, which holds the second highest digit found. If `res[1]` remains `-1`, it indicates that there was no second unique digit, and `-1` will be returned.
+7. **Update Second Highest**
+	```cpp
+	                res[1] = res[0];
+	```
+	Set the second highest value to the previous highest value.
 
-### Complexity
+8. **Update Highest**
+	```cpp
+	                res[0] = c;
+	```
+	Update the highest value in `res` to the current digit `c`.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the length of the input string. This is because we make a single pass through the string to check each character.
+9. **Update Second Highest (Else)**
+	```cpp
+	            } else if (c != res[0] && c > res[1]) res[1] = c;
+	```
+	If the current digit `c` is not equal to the highest digit (`res[0]`) but is greater than the second highest (`res[1]`), update the second highest value.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we are using a fixed amount of space for the `res` array, regardless of the size of the input string.
+10. **Return Statement**
+	```cpp
+	    return res[1];
+	```
+	Return the second highest digit stored in `res[1]`. If no second highest digit is found, it will return -1.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string, as we must scan through the string once.
+- **Average Case:** O(n), as the complexity is linear in the length of the string.
+- **Worst Case:** O(n), as we still need to check each character in the string.
 
-The `secondHighest` function effectively finds the second highest digit in a given string by parsing through each character and maintaining the highest and second highest values. This solution is efficient, leveraging a single pass through the string while using minimal extra space.
+The time complexity is O(n), where n is the length of the string, since we only need to traverse the string once.
 
-This approach can be useful in various applications, such as validating input formats or extracting numeric data from mixed content. By efficiently identifying and managing numeric values, this solution exemplifies how to handle data extraction tasks in programming, making it applicable in both algorithmic challenges and real-world scenarios involving string manipulation. 
+### Space Complexity 💾
+- **Best Case:** O(1), as we use constant space for storing the two largest digits.
+- **Worst Case:** O(1), as we are only storing two variables to track the largest digits.
 
-By focusing on both performance and clarity, the implementation ensures that it is easy to understand while being optimized for speed and resource use. The principles demonstrated in this solution can be generalized to similar problems where specific conditions must be met while iterating through data.
+The space complexity is O(1), as the space used does not depend on the input size.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/second-largest-digit-in-a-string/description/)
 

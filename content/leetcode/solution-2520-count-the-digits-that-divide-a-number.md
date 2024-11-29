@@ -14,43 +14,62 @@ img_src = ""
 youtube = "7SHHsS5kPJ8"
 youtube_upload_date="2023-01-02"
 youtube_thumbnail="https://i.ytimg.com/vi/7SHHsS5kPJ8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer `num`, determine how many of its digits divide `num` without leaving a remainder. In other words, for each digit in `num`, check if `num % digit == 0` and count how many digits satisfy this condition.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer `num`. You need to find how many of its digits divide the number `num` evenly.
+- **Example:** `num = 123`
+- **Constraints:**
+	- 1 <= num <= 10^9
+	- num does not contain the digit 0
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countDigits(int num) {
-        int res = 0;
-        for (int n = num; n > 0; n /= 10)
-            res += num % (n % 10) == 0;
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of digits in `num` that divide `num` without leaving a remainder.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output should be an integer representing the number of digits that divide the number.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count how many digits of `num` divide `num` evenly.
 
-The task is to count the number of digits in a given integer `num` that divide `num` evenly. For example, if the input number is `1012`, we should count how many digits in the number (in this case `1`, `0`, `1`, and `2`) divide `1012` without leaving a remainder. The result will be the number of digits that satisfy this condition.
+- Convert `num` to a string to access each digit.
+- For each digit in the number, check if `num % digit == 0`.
+- Count how many digits satisfy the condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- All digits in `num` are non-zero.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `num = 123`  \
+  **Explanation:** For `123`, the digits `1` and `3` divide `123`, but `2` does not. So, the answer is 2.
 
-### Approach
+- **Input:** `num = 256`  \
+  **Explanation:** For `256`, the digits `2`, `5`, and `6` divide `256`. So, the answer is 3.
 
-To solve this problem, the approach is straightforward. The idea is to iterate over each digit of the number and check if it divides the number completely. If it does, we increment the counter. To implement this, we need to extract each digit of the number and check the condition `num % digit == 0`. A special case needs to be handled for the digit `0`, since division by zero is not allowed.
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we will convert the number into its digits, check each digit for divisibility, and count how many satisfy the condition.
 
-The solution follows these steps:
-1. Extract each digit of the number.
-2. For each digit, check if it divides the number without a remainder.
-3. Count how many digits satisfy this condition.
-4. Return the final count.
-
-### Code Breakdown (Step by Step)
-
-#### Function Definition:
+### Initial Thoughts 💭
+- The problem requires iterating through the digits of a number and checking divisibility.
+- Converting the number to a string allows easy access to each digit, and the modulo operation can be used to check divisibility.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not require handling empty inputs as `num` is always a positive integer.
+- The solution must be efficient enough to handle the largest possible value of `num` (up to 10^9).
+- The number will not contain the digit zero, so no need to handle division by zero.
+- Ensure that the solution runs within time limits for the largest values of `num`.
+{{< dots >}}
+## Code 💻
 ```cpp
 int countDigits(int num) {
     int res = 0;
@@ -60,48 +79,57 @@ int countDigits(int num) {
 }
 ```
 
-1. **Initialization of `res`**:
-   ```cpp
-   int res = 0;
-   ```
-   - Here, we initialize the result counter `res` to zero. This will keep track of how many digits divide `num` evenly.
+This function `countDigits` calculates how many digits in a given number `num` divide the number evenly. It iterates over each digit of `num`, checking if `num` is divisible by the digit, and counts how many times this condition is true.
 
-2. **Iterating through the digits**:
-   ```cpp
-   for (int n = num; n > 0; n /= 10)
-   ```
-   - We start a loop that will run until `n` becomes zero.
-   - `n` is initially set to `num`, and we divide `n` by `10` in each iteration, effectively removing the last digit. This continues until we have processed all digits of the number.
-   - In each iteration, the loop will check one digit at a time, moving from the rightmost to the leftmost digit.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countDigits(int num) {
+	```
+	Define the function `countDigits` that takes an integer `num` as input and returns the count of digits that divide `num` evenly.
 
-3. **Extracting the last digit**:
-   ```cpp
-   res += num % (n % 10) == 0;
-   ```
-   - `n % 10` gives the last digit of the current value of `n`.
-   - `num % (n % 10)` checks if `num` is divisible by the last digit.
-     - If `num % (n % 10) == 0`, it means that the digit divides `num` completely, so we increment the result counter `res`.
-     - If the condition is false (i.e., the digit does not divide `num`), nothing happens, and the counter remains unchanged.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize a variable `res` to 0. This variable will hold the count of digits that divide `num` evenly.
 
-4. **Returning the result**:
-   ```cpp
-   return res;
-   ```
-   - After the loop completes and all digits have been checked, the function returns the value of `res`, which represents the count of digits in `num` that divide it evenly.
+3. **Loop**
+	```cpp
+	    for (int n = num; n > 0; n /= 10)
+	```
+	Start a `for` loop that iterates through each digit of `num`. The variable `n` starts as `num` and is divided by 10 in each iteration to move to the next digit.
 
-### Complexity
+4. **Condition Check**
+	```cpp
+	        res += num % (n % 10) == 0;
+	```
+	Check if the current digit `n % 10` divides `num` evenly (i.e., `num % digit == 0`). If true, increment the result `res`.
 
-#### Time Complexity:
-- The time complexity is dominated by the number of digits in `num`. 
-  - In each iteration of the loop, we reduce the size of `n` by a factor of 10, meaning the loop runs for `O(d)` iterations, where `d` is the number of digits in `num`.
-  - The number of digits in `num` is approximately \( \log_{10}(\text{num}) \). So the time complexity can be considered as `O(d)` or `O(log_{10}(\text{num}))`.
-  
-#### Space Complexity:
-- The space complexity is `O(1)` because we are using a constant amount of extra space. We only need a few variables to store the result and the current value of `num` during the iteration.
+5. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the final count of digits that divide `num` evenly, stored in `res`.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(d), where d is the number of digits in `num`.
+- **Average Case:** O(d), where d is the number of digits in `num`.
+- **Worst Case:** O(d), where d is the number of digits in `num`.
 
-This solution efficiently counts how many digits in a number divide the number evenly. By iterating over the digits and using modulus operations, we can determine the divisibility of each digit with respect to the number. The implementation is simple and effective, with a time complexity that scales logarithmically with the size of the input number. It avoids unnecessary complexity and ensures that the problem is solved in optimal time, making it suitable for even large numbers.
+The time complexity is linear in terms of the number of digits in `num`, which is at most 9.
+
+### Space Complexity 💾
+- **Best Case:** O(d), where d is the number of digits in `num`.
+- **Worst Case:** O(d), where d is the number of digits in `num`.
+
+We need space proportional to the number of digits in `num` to store them temporarily.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-digits-that-divide-a-number/description/)
 

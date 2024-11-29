@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "6OrZ4wAy4uE"
 youtube_upload_date="2019-02-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/6OrZ4wAy4uE/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,125 +28,129 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/6OrZ4wAy4uE/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the head of a linked list, determine if there is a cycle. A cycle occurs if a node can be revisited by following the 'next' pointers. The 'pos' parameter denotes where the last node connects to. If 'pos' is -1, there is no cycle.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a linked list head and a position, 'pos', indicating where the tail node connects.
+- **Example:** `Input: head = [4, 3, 2, 1], pos = 2`
+- **Constraints:**
+	- The number of nodes in the list is between 0 and 10^4.
+	- Node values range between -10^5 and 10^5.
+	- 'pos' is either -1 or a valid index within the list.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-class Solution {
-public:
-    bool hasCycle(ListNode *head) {
-        ListNode* slow = head, *fast = head;
-        while(fast && fast->next) {
-            slow = slow->next;
-            fast = fast->next->next;
-            if(slow == fast) return true;
-        }
-        return false;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean value indicating whether a cycle exists in the linked list.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output is true if a cycle exists, otherwise false.
 
-### 🧩 **Understanding the Problem: Detect Cycle in Linked List**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to detect if there is a cycle in the linked list using efficient memory usage.
 
-The problem asks us to determine whether a given singly linked list contains a cycle. A cycle in a linked list occurs when a node’s `next` pointer points to one of the previous nodes, forming a loop. The goal is to return `true` if the linked list has a cycle and `false` otherwise.
+- 1. Use two pointers, 'slow' and 'fast', where 'slow' moves one step and 'fast' moves two steps at a time.
+- 2. If there is a cycle, the two pointers will meet; otherwise, the fast pointer will reach the end of the list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list can have a cycle, or it can be a simple acyclic list.
+- All nodes contain integer values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [4, 3, 2, 1], pos = 2`  \
+  **Explanation:** In this example, the tail node points to the 2nd node, forming a cycle.
 
-For example:
-- **Input**: `head = [3, 2, 0, -4]`, `pos = 1` (where `pos` indicates the node at which the cycle starts).
-- **Output**: `true` (since the node at index 1 points back to itself, forming a cycle).
+{{< dots >}}
+## Approach 🚀
+The approach leverages the Floyd's Cycle-Finding Algorithm (also known as the Tortoise and Hare algorithm), using two pointers to detect cycles in constant space.
 
-- **Input**: `head = [1, 2]`, `pos = -1`.
-- **Output**: `false` (no cycle).
-
----
-
-### 🔄 **Approach: Floyd’s Cycle-Finding Algorithm (Tortoise and Hare)**
-
-To detect a cycle in a singly linked list, we can use **Floyd’s Cycle-Finding Algorithm**, also known as the **Tortoise and Hare** algorithm. This algorithm utilizes two pointers:
-1. A **slow pointer** (`tortoise`) that moves one step at a time.
-2. A **fast pointer** (`hare`) that moves two steps at a time.
-
-#### Key Ideas:
-- **If a cycle exists**: The fast pointer will eventually catch up with the slow pointer within the cycle.
-- **If no cycle**: The fast pointer will reach the end of the list.
-
-#### Key Steps:
-1. **Initialization**: Both the slow and fast pointers start at the head of the list.
-2. **Traversal**: In each iteration, the slow pointer moves one step, and the fast pointer moves two steps.
-3. **Cycle Detection**: If the slow pointer and the fast pointer meet at any point, a cycle exists, and we return `true`.
-4. **End of List**: If the fast pointer reaches the end of the list (`fast == NULL` or `fast->next == NULL`), we return `false`, indicating that there is no cycle.
-
----
-
-### 🖥️ **Code Breakdown: Step-by-Step**
-
-#### 1️⃣ **Function Definition and Initialization**
-
+### Initial Thoughts 💭
+- We need to detect a cycle using minimal space, ideally O(1).
+- By using two pointers, one slow and one fast, we can determine if there is a cycle without using additional data structures.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty list should return false since no cycle can exist.
+- For large lists, the solution should efficiently detect cycles without using extra memory.
+- When the cycle starts at the very first node or is self-referential (the last node points to itself).
+- Ensure constant space usage (O(1)) and linear time complexity (O(n)) for large inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool hasCycle(ListNode *head) {
     ListNode* slow = head, *fast = head;
+    while(fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast) return true;
+    }
+    return false;
+}
 ```
-- The function `hasCycle` takes a pointer `head` to the first node of the linked list.
-- We initialize two pointers, `slow` and `fast`, both pointing to the `head` of the list. The `slow` pointer moves one step at a time, while the `fast` pointer moves two steps at a time.
 
-#### 2️⃣ **Traversing the List**
+This code implements Floyd’s Cycle Detection Algorithm (also known as the Tortoise and Hare algorithm) to detect a cycle in a linked list. It uses two pointers: one moves slowly and the other moves quickly. If they meet, a cycle exists in the list.
 
-```cpp
-while(fast && fast->next) {
-    slow = slow->next;
-    fast = fast->next->next;
-```
-- The `while` loop ensures that we continue traversing as long as `fast` and `fast->next` are not `NULL`. If `fast` reaches `NULL`, there’s no cycle, and we can return `false`.
-- Inside the loop:
-  - The `slow` pointer advances by one node: `slow = slow->next`.
-  - The `fast` pointer advances by two nodes: `fast = fast->next->next`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool hasCycle(ListNode *head) {
+	```
+	This is the definition of the `hasCycle` function, which takes a pointer `head` to the first node of a linked list and returns a boolean indicating whether the list contains a cycle.
 
-#### 3️⃣ **Cycle Detection**
+2. **Pointer Initialization**
+	```cpp
+	    ListNode* slow = head, *fast = head;
+	```
+	Two pointers, `slow` and `fast`, are initialized to point to the head of the linked list. The `slow` pointer will move one step at a time, while the `fast` pointer will move two steps at a time.
 
-```cpp
-if(slow == fast) return true;
-```
-- After advancing both pointers, we check if `slow` and `fast` are pointing to the same node. If they are, it means the fast pointer has caught up with the slow pointer inside the cycle, indicating that a cycle exists. We return `true`.
+3. **While Loop (Cycle Detection)**
+	```cpp
+	    while(fast && fast->next) {
+	```
+	The while loop continues as long as the `fast` pointer and its next node are not `nullptr`. This ensures that the loop doesn't run into an invalid memory reference when traversing the list.
 
-#### 4️⃣ **End of the List**
+4. **Move Slow Pointer**
+	```cpp
+	        slow = slow->next;
+	```
+	The `slow` pointer moves one step forward in the list, advancing by one node at a time.
 
-```cpp
-return false;
-```
-- If the fast pointer reaches the end of the list (`fast == NULL` or `fast->next == NULL`), we return `false` because the list doesn’t have a cycle.
+5. **Move Fast Pointer**
+	```cpp
+	        fast = fast->next->next;
+	```
+	The `fast` pointer moves two steps forward, advancing by two nodes at a time.
 
----
+6. **Cycle Detection**
+	```cpp
+	        if(slow == fast) return true;
+	```
+	If the `slow` pointer and `fast` pointer meet at the same node, it indicates that a cycle exists in the linked list. The function returns `true`.
 
-### 🧮 **Time and Space Complexity**
+7. **Return False (No Cycle)**
+	```cpp
+	    return false;
+	```
+	If the `fast` pointer reaches the end of the list (i.e., `fast` or `fast->next` becomes `nullptr`), no cycle is present, so the function returns `false`.
 
-#### ⏱️ **Time Complexity**:
-- **O(n)**: In the worst case, the fast pointer will traverse the list at most twice: once moving two steps per iteration and then meeting the slow pointer. This gives a linear time complexity, O(n), where `n` is the number of nodes in the list.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of nodes in the list. The best case occurs when there is no cycle, and the fast pointer reaches the end of the list.
+- **Average Case:** O(n), the fast and slow pointers will eventually meet if there is a cycle.
+- **Worst Case:** O(n), the worst case is when there is no cycle, and the fast pointer needs to traverse the entire list.
 
-#### 🧳 **Space Complexity**:
-- **O(1)**: We only use two pointers (`slow` and `fast`), and the algorithm doesn’t require any additional space that grows with the size of the input. Hence, the space complexity is constant, O(1).
+The time complexity is O(n) since each pointer traverses the list at most once.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1), regardless of whether the list has a cycle or not, only two pointers are maintained.
+- **Worst Case:** O(1), the space complexity is constant since only two pointers are used.
 
-### 🎯 **Conclusion: Efficient Cycle Detection**
+The space complexity is O(1), as we are not using any additional data structures.
 
-Floyd’s Cycle-Finding Algorithm (Tortoise and Hare) efficiently detects whether a singly linked list contains a cycle. Here’s why this approach is optimal:
+**Happy Coding! 🎉**
 
-1. **Time Efficiency**: The algorithm runs in linear time, O(n), where `n` is the number of nodes. This is optimal because each node is visited at most once.
-2. **Space Efficiency**: The solution uses constant space, O(1), as it only requires two pointers regardless of the size of the list.
-3. **Simplicity**: This approach is easy to implement and avoids the need for extra space, such as a hash set or modifying the list structure.
-
-#### Key Insights:
-- **Fast and Slow Pointers**: The crux of this algorithm is the two-pointer approach, where one pointer moves faster than the other, helping us detect cycles when the fast pointer eventually meets the slow pointer.
-- **Optimal Solution**: The algorithm is optimal for cycle detection due to its linear time complexity and constant space usage.
-
-In conclusion, this is a highly efficient and widely-used algorithm for cycle detection in linked lists.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/linked-list-cycle/description/)
 

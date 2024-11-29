@@ -14,111 +14,155 @@ img_src = ""
 youtube = "VV4TTRQ5l0s"
 youtube_upload_date="2024-04-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/VV4TTRQ5l0s/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `word`. A letter is considered special if it appears both in its lowercase and uppercase form in the string. Return the number of special letters in `word`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `word` of length n.
+- **Example:** `word = "aAAbcdBC"`
+- **Constraints:**
+	- 1 <= word.length <= 50
+	- word consists of only lowercase and uppercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfSpecialChars(string word) {
-        set<char> ch;
-        for(char x: word)
-                ch.insert(x);
-        int cnt = 0;
-        for(int i = 0; i < 26; i++) {
-            if(ch.count('a' + i) && ch.count('A' + i))
-                cnt++;
-        }
-        return cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of special letters in the string `word`.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify letters that appear in both lowercase and uppercase in the string and count them.
+
+- 1. Create a set to store unique characters in `word`.
+- 2. Loop through each letter in the alphabet ('a' to 'z').
+- 3. For each letter, check if both the lowercase and uppercase forms exist in the set.
+- 4. Count and return the total number of special letters.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will only contain lowercase and uppercase English letters.
+- The string will have a length between 1 and 50 characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word = "aAAbcdBC"`  \
+  **Explanation:** The special characters are 'a', 'b', and 'c', as they appear in both uppercase and lowercase in `word`.
+
+- **Input:** `word = "abcdef"`  \
+  **Explanation:** No special characters exist in this string, as no letter appears in both uppercase and lowercase.
+
+- **Input:** `word = "AbBcC"`  \
+  **Explanation:** The special characters are 'b' and 'c', as they appear both in lowercase and uppercase.
+
+{{< dots >}}
+## Approach 🚀
+We can solve the problem by using a set to store all the letters in the string and then check if both the lowercase and uppercase versions of each letter exist in the set.
+
+### Initial Thoughts 💭
+- We need to check for each letter if both its lowercase and uppercase forms exist in the string.
+- By iterating through all the letters in the string, we can efficiently find special letters using a set.
+{{< dots >}}
+### Edge Cases 🌐
+- The string will always have at least one character as per the constraints.
+- The solution should efficiently handle strings with lengths up to 50 characters.
+- If the string contains only lowercase or only uppercase letters, the output should be 0.
+- The string is constrained to only contain lowercase and uppercase English letters.
+{{< dots >}}
+## Code 💻
+```cpp
+int numberOfSpecialChars(string word) {
+    set<char> ch;
+    for(char x: word)
+            ch.insert(x);
+    int cnt = 0;
+    for(int i = 0; i < 26; i++) {
+        if(ch.count('a' + i) && ch.count('A' + i))
+            cnt++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to count the number of special characters in a given string `word`. A "special character" is defined as any character that appears both in its lowercase and uppercase forms within the string. For example, if the string contains both `'a'` and `'A'`, then `a` is considered a special character.
-
-Given the string `word`, the goal is to count how many characters appear in both their lowercase and uppercase forms. We are required to implement a function that takes this string and returns the count of such "special characters."
-
-For instance:
-- For the string `"aAabB"`, the answer is `2` because `'a'` and `'b'` appear in both uppercase and lowercase forms.
-- For the string `"abc"`, the answer is `0` because no character appears in both forms.
-
-### Approach
-
-The approach to solving this problem is to:
-1. Use a data structure to store the characters in the string.
-2. Check for each character in the alphabet if it appears in both lowercase and uppercase forms.
-3. Count how many such special characters exist in the string.
-
-#### Approach Outline:
-1. **Store characters in a set**: A `set` data structure can be used to keep track of the unique characters present in the string. Since we only care about the presence of characters and not their frequency, a set is ideal because it automatically handles duplicates.
-2. **Check for both lowercase and uppercase**: For each character from 'a' to 'z', check if both its lowercase and uppercase versions are present in the set.
-3. **Count the special characters**: If both versions of a character (lowercase and uppercase) are present in the set, increase the count of special characters.
-4. **Return the count**: After iterating over all characters, return the count of special characters.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Set
-```cpp
-set<char> ch;
-```
-- A set `ch` is declared to store the unique characters from the input string `word`. The set is chosen because it automatically handles duplicate characters, ensuring that each character appears only once.
-
-#### Step 2: Insert Characters into the Set
-```cpp
-for(char x: word)
-    ch.insert(x);
-```
-- We iterate over the string `word` and insert each character `x` into the set `ch`. The `insert` method ensures that each character appears only once in the set, even if it appears multiple times in the string.
-
-#### Step 3: Initialize the Counter
-```cpp
-int cnt = 0;
-```
-- A counter `cnt` is initialized to zero. This will keep track of the number of special characters.
-
-#### Step 4: Iterate Over the Alphabet and Check for Special Characters
-```cpp
-for(int i = 0; i < 26; i++) {
-    if(ch.count('a' + i) && ch.count('A' + i))
-        cnt++;
+    return cnt;
 }
 ```
-- The loop iterates over all 26 letters of the alphabet (`'a'` to `'z'`).
-- For each letter, we check if both its lowercase (`'a' + i`) and uppercase (`'A' + i`) versions are present in the set `ch`. The `count` method of the set is used to check if a character is present in the set. It returns `1` if the character is present, and `0` if it is not.
-- If both versions (lowercase and uppercase) of a character are found, we increment the counter `cnt`.
 
-#### Step 5: Return the Result
-```cpp
-return cnt;
-```
-- After checking all 26 letters, we return the value of `cnt`, which represents the number of special characters in the string.
+This function calculates the number of special characters in the string `word`, where a special character is defined as a pair of lowercase and uppercase letters present in the string.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfSpecialChars(string word) {
+	```
+	Defines the function `numberOfSpecialChars` that takes a string `word` as input and returns the count of special characters, where a special character is a pair of the same letter in both lowercase and uppercase.
 
-#### Time Complexity:
-- **O(n + 26)**, where `n` is the length of the input string `word`.
-  - The first part of the algorithm involves iterating through the string and inserting each character into the set. This takes **O(n)** time.
-  - The second part involves iterating over the alphabet (26 characters) and checking if both the lowercase and uppercase versions of each letter exist in the set. This part takes **O(26)** time, which is constant.
-  - Overall, the time complexity is dominated by the first part, so the time complexity is **O(n)**.
+2. **Set Initialization**
+	```cpp
+	    set<char> ch;
+	```
+	Initializes a set `ch` to store unique characters from the input string `word`. Using a set ensures that each character is only stored once.
 
-#### Space Complexity:
-- **O(n)**, where `n` is the length of the input string `word`.
-  - The space complexity is determined by the size of the set `ch`, which can hold up to `n` unique characters (in the worst case). Thus, the space complexity is **O(n)**.
+3. **Loop Through String**
+	```cpp
+	    for(char x: word)
+	```
+	Iterates through each character `x` in the string `word`.
 
-### Conclusion
+4. **Insert Character into Set**
+	```cpp
+	            ch.insert(x);
+	```
+	Inserts the character `x` into the set `ch`, ensuring that only unique characters are stored.
 
-This solution efficiently counts the number of "special characters" in the string, where a special character is defined as a character that appears both in its lowercase and uppercase forms. The use of a set ensures that each character is counted only once, and the checking for both uppercase and lowercase versions of each character is done in constant time.
+5. **Counter Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes the counter variable `cnt` to 0, which will be used to count the number of special characters (pairs of lowercase and uppercase letters).
 
-The algorithm has a time complexity of **O(n)**, which is optimal for this type of problem, as we must inspect each character in the string. The space complexity is also **O(n)**, which is manageable for typical input sizes.
+6. **Loop Over Alphabet**
+	```cpp
+	    for(int i = 0; i < 26; i++) {
+	```
+	Starts a `for` loop that iterates over the 26 letters of the alphabet (from 'a' to 'z').
 
-This solution is both time-efficient and space-efficient, making it a great choice for solving the problem in real-world scenarios where performance is important. By leveraging the properties of sets and the simplicity of iterating over the alphabet, the solution provides a clean and effective approach to solving the problem.
+7. **Check Pair of Letters**
+	```cpp
+	        if(ch.count('a' + i) && ch.count('A' + i))
+	```
+	Checks if both the lowercase and uppercase versions of the letter (corresponding to `i`) are present in the set `ch`.
+
+8. **Increment Counter**
+	```cpp
+	            cnt++;
+	```
+	If both the lowercase and uppercase characters are found, increments the counter `cnt` to account for one special character.
+
+9. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the value of `cnt`, which represents the total number of special characters in the string `word`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the string, since we only loop through the string once and check for each character's presence in the set.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only store a constant number of unique characters (26 lowercase and 26 uppercase letters).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-special-characters-i/description/)
 

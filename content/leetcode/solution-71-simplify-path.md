@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "4e1gVeQ0AEs"
 youtube_upload_date="2022-02-26"
 youtube_thumbnail="https://i.ytimg.com/vi/4e1gVeQ0AEs/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,117 +28,177 @@ youtube_thumbnail="https://i.ytimg.com/vi/4e1gVeQ0AEs/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an absolute path for a Unix-style file system, simplify the path by following Unix file system rules. Handle '.' and '..' as current and parent directories, and multiple slashes as a single slash. Return the simplified canonical path.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string representing the absolute path of a file or directory in a Unix-style file system.
+- **Example:** `Input: path = "/home//docs/"`
+- **Constraints:**
+	- 1 <= path.length <= 3000
+	- path consists of English letters, digits, period '.', slash '/', or '_'.
+	- The path is a valid absolute Unix path.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string simplifyPath(string path) {
-        
-        set<string> dot = {"..", ".", ""};
-        
-        string res = "", tmp;
-        stringstream ss(path);
-        
-        stack<string> stk;
-        
-        while(getline(ss, tmp, '/')) {
-            if(tmp == ".." && !stk.empty()) stk.pop();
-            else if (!dot.count(tmp)) stk.push(tmp);
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the simplified canonical path as a string.
+- **Example:** `Output: "/home/docs"`
+- **Constraints:**
+	- The output must be a valid simplified absolute path.
 
-        while(!stk.empty()) {
-            res = "/" + stk.top() + res;
-            stk.pop();
-        }
-        return res == ""? "/": res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Simplify the absolute Unix path by handling '.' and '..' according to file system rules.
+
+- Split the path by the '/' character.
+- Iterate through each segment of the path.
+- Push valid directory names onto a stack, and pop the stack when encountering '..'.
+- Ignore '.' and empty segments.
+- Finally, reconstruct the canonical path from the stack.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input path is well-formed and always starts with a slash ('/').
+- The path is an absolute Unix-style file system path.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: path = "/home//docs/"`  \
+  **Explanation:** Multiple consecutive slashes are treated as a single slash, resulting in the simplified path '/home/docs'.
+
+- **Input:** `Input: path = "/home/user/../data/files/"`  \
+  **Explanation:** The '..' refers to the parent directory, simplifying the path to '/home/data/files'.
+
+{{< dots >}}
+## Approach 🚀
+Use a stack-based approach to simplify the Unix path by processing each component in sequence.
+
+### Initial Thoughts 💭
+- The problem requires handling several path components, including valid directory names, '.' (current directory), and '..' (parent directory).
+- A stack data structure is useful for maintaining the current directory context.
+- The challenge is to correctly handle '..' and '.' while ignoring extraneous slashes and invalid period-based directory names.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input is not possible due to the constraints (1 <= path.length).
+- Handle the largest possible input, where the length of the path is 3000 characters.
+- Handle cases like '/..' where going up from the root directory results in the root directory itself.
+- The solution must efficiently handle large inputs while simplifying the path.
+{{< dots >}}
+## Code 💻
+```cpp
+string simplifyPath(string path) {
+    
+    set<string> dot = {"..", ".", ""};
+    
+    string res = "", tmp;
+    stringstream ss(path);
+    
+    stack<string> stk;
+    
+    while(getline(ss, tmp, '/')) {
+        if(tmp == ".." && !stk.empty()) stk.pop();
+        else if (!dot.count(tmp)) stk.push(tmp);
     }
-};
-{{< /highlight >}}
----
 
-### 🧳 **Simplifying Absolute File Paths**
-
-The problem requires simplifying an absolute file path, given as a string, to its canonical form. For instance, given a path like `/a/./b/../../c/`, the canonical path should be `/c`. The simplification should remove redundant components, including:
-- Single dots (`.`) representing the current directory.
-- Double dots (`..`) representing moving up to the parent directory.
-- Extra slashes (`/`) treated as a single separator.
-
-### 🧠 **Approach**
-
-This solution uses a **stack-based approach** to process each component in the path. Here’s a step-by-step breakdown:
-
-1. **Initialize Set for Skipping Components**:
-   - We define a set `dot` containing values `{"..", ".", ""}` to identify parts of the path that should be ignored or handled specifically:
-     - The empty string (`""`) handles consecutive slashes.
-     - `"."` represents the current directory, which can be ignored.
-     - `".."` means moving up one directory.
-
-2. **Tokenize the Path**:
-   - A `stringstream` splits the `path` string by each `/` delimiter. Each extracted component is stored in `tmp`, which is then examined to check if it’s a directory or a special token (`..`, `.`, or empty).
-
-3. **Process Each Component Using a Stack**:
-   - For each component `tmp`:
-     - If `tmp` is `".."`, we move up one directory by popping the top element from the stack (unless the stack is empty).
-     - If `tmp` is not in the `dot` set (i.e., it's a valid directory), we push it onto the stack.
-   - At the end of this loop, the stack contains the simplified sequence of directories.
-
-4. **Construct the Result**:
-   - We pop each element from the stack and prepend it to `res` with a `/` to rebuild the canonical path.
-   - If `res` is empty after processing, return `/`, representing the root directory.
-
-### 💻 **Code Breakdown**
-
-#### Step 1: Initialize the Set, Stream, and Stack
-
-```cpp
-set<string> dot = {"..", ".", ""};
-string res = "", tmp;
-stringstream ss(path);
-stack<string> stk;
-```
-- `dot` helps manage special path components like `".."`, `"."`, and empty strings.
-- `res` will store the final canonical path.
-- `tmp` holds each part of the path as we process it.
-- `stk` manages directories as we build the simplified path.
-
-#### Step 2: Process the Path Using `stringstream` and Stack
-
-```cpp
-while(getline(ss, tmp, '/')) {
-    if(tmp == ".." && !stk.empty()) stk.pop();
-    else if (!dot.count(tmp)) stk.push(tmp);
+    while(!stk.empty()) {
+        res = "/" + stk.top() + res;
+        stk.pop();
+    }
+    return res == ""? "/": res;
 }
 ```
-- We iterate through each part of `path`, splitting by `/`.
-- If `tmp` is `".."` and the stack isn't empty, we pop from the stack (move up one directory).
-- If `tmp` is not in the `dot` set (i.e., it’s a valid directory name), we push it onto the stack.
 
-#### Step 3: Construct the Result from the Stack
+This code simplifies a given file path by removing redundant '.' and '..' segments.
 
-```cpp
-while(!stk.empty()) {
-    res = "/" + stk.top() + res;
-    stk.pop();
-}
-return res == ""? "/": res;
-```
-- We construct the result path by adding each directory to `res`, ensuring each one is prefixed by `/`.
-- If `res` is empty after processing, we return `/`, indicating the root directory.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string simplifyPath(string path) {
+	```
+	Declares a function `simplifyPath` that takes a string `path` as input and returns a simplified path as a string.
 
-### 📊 **Complexity Analysis**
+2. **Set Initialization**
+	```cpp
+	    set<string> dot = {"..", ".", ""};
+	```
+	Creates a set `dot` to store invalid path segments: '..', '.', and empty strings.
 
-#### Time Complexity:
-- **O(n)**: We process each part of the input `path` string once, and stack operations (push and pop) take constant time.
+3. **Variable Initialization**
+	```cpp
+	    string res = "", tmp;
+	```
+	Initializes `res` to store the simplified path and `tmp` to hold temporary path segments.
 
-#### Space Complexity:
-- **O(n)**: We use a stack to store the directories, which can hold all directories in the worst case.
+4. **String Stream Initialization**
+	```cpp
+	    stringstream ss(path);
+	```
+	Creates a string stream `ss` to parse the input `path`.
 
-### 🌟 **Conclusion**
+5. **Stack Initialization**
+	```cpp
+	    stack<string> stk;
+	```
+	Creates a stack `stk` to store valid path segments.
 
-This stack-based approach efficiently simplifies absolute file paths. It ensures that `..` correctly backtracks, and valid directories are added to the canonical path. This method is optimal for problems involving hierarchical paths and is especially suitable for file system path simplification.
+6. **Loop Iteration**
+	```cpp
+	    while(getline(ss, tmp, '/')) {
+	```
+	Iterates through each path segment in the string stream `ss`.
 
----
+7. **Conditions**
+	```cpp
+	        if(tmp == ".." && !stk.empty()) stk.pop();
+	```
+	If the current segment is '..' and the stack is not empty, pop the top element from the stack (go back one directory).
+
+8. **Conditions**
+	```cpp
+	        else if (!dot.count(tmp)) stk.push(tmp);
+	```
+	If the current segment is not a '.' or '..' or empty, push it onto the stack.
+
+9. **Loop Iteration**
+	```cpp
+	    while(!stk.empty()) {
+	```
+	Iterates while the stack is not empty.
+
+10. **String Concatenation**
+	```cpp
+	        res = "/" + stk.top() + res;
+	```
+	Concatenates the top element of the stack to the `res` string, prepending a '/'.
+
+11. **Stack Operations**
+	```cpp
+	        stk.pop();
+	```
+	Pops the top element from the stack.
+
+12. **Conditional Return**
+	```cpp
+	    return res == ""? "/": res;
+	```
+	Returns '/' if the `res` string is empty, otherwise returns the constructed simplified path.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We process each character of the input path once, making the time complexity linear in terms of the path length.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is proportional to the number of components in the path, which can be at most n.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/simplify-path/description/)
 

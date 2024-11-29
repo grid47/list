@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "wgFPrzTjm7s"
 youtube_upload_date="2020-08-18"
 youtube_thumbnail="https://i.ytimg.com/vi/wgFPrzTjm7s/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,198 @@ youtube_thumbnail="https://i.ytimg.com/vi/wgFPrzTjm7s/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two linked lists representing two non-negative integers, where each node contains a single digit, and the digits are stored in reverse order. Your task is to add these two numbers and return the result as a linked list. You can assume that the input does not contain leading zeros except for the number 0 itself.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two linked lists representing integers in reverse order.
+- **Example:** `l1 = [1, 2, 3], l2 = [4, 5, 6]`
+- **Constraints:**
+	- 1 <= number of nodes in each linked list <= 100
+	- 0 <= Node.val <= 9
+	- The lists represent valid non-negative integers without leading zeros, except for 0 itself.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* head = new ListNode(0);
-        ListNode* tail = head;
-        int rm = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a linked list representing the sum of the two input integers in reverse order.
+- **Example:** `[5, 7, 9]`
+- **Constraints:**
+	- The resulting linked list must maintain reverse order.
+	- Each node in the linked list must have a value between 0 and 9.
 
-        while (l1 != NULL || l2 != NULL || rm != 0) {
-            int no1 = (l1 != NULL) ? l1->val : 0;
-            int no2 = (l2 != NULL) ? l2->val : 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the sum of two integers represented as linked lists in reverse order and return the result as a linked list.
 
-            int sum = no1 + no2 + rm;
-            int digit = sum % 10;
-            rm = sum / 10;
+- Initialize a dummy node to start the result linked list.
+- Iterate through the two input linked lists while maintaining a carry for digit sums exceeding 9.
+- Add corresponding digits from both lists along with the carry to calculate the sum.
+- Create a new node for the result of each addition and append it to the result linked list.
+- Continue until both lists are traversed and there is no carry left.
+- Return the result linked list starting from the node next to the dummy.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always valid.
+- Both linked lists represent non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `l1 = [3, 4, 2], l2 = [4, 6, 5]`  \
+  **Explanation:** The numbers represented are 243 and 564. Their sum is 807, so the output is [7, 0, 8].
 
-            ListNode* nxt = new ListNode(digit);
-            tail->next = nxt;
-            tail = tail->next;
+- **Input:** `l1 = [0], l2 = [0]`  \
+  **Explanation:** The numbers represented are 0 and 0. Their sum is 0, so the output is [0].
 
-            l1 = (l1 != NULL) ? l1->next : NULL;
-            l2 = (l2 != NULL) ? l2->next : NULL;
-        }
+- **Input:** `l1 = [9, 9, 9], l2 = [1]`  \
+  **Explanation:** The numbers represented are 999 and 1. Their sum is 1000, so the output is [0, 0, 0, 1].
 
-        ListNode* res = head->next;
-        delete head;
-        return res;
+{{< dots >}}
+## Approach 🚀
+We iterate through the linked lists while maintaining a carry to handle sums that exceed a single digit.
+
+### Initial Thoughts 💭
+- The reverse order of digits simplifies addition as we can process from least significant to most significant digit.
+- A carry must be handled to account for sums greater than 9.
+- Iterating through both linked lists while summing corresponding nodes and keeping track of the carry will give the desired result.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one node per list.
+- Handles linked lists with up to 100 nodes efficiently.
+- Handles cases with all zeroes or where the carry extends the list.
+- Handles sums resulting in longer linked lists than either input.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    ListNode* head = new ListNode(0);
+    ListNode* tail = head;
+    int rm = 0;
+
+    while (l1 != NULL || l2 != NULL || rm != 0) {
+        int no1 = (l1 != NULL) ? l1->val : 0;
+        int no2 = (l2 != NULL) ? l2->val : 0;
+
+        int sum = no1 + no2 + rm;
+        int digit = sum % 10;
+        rm = sum / 10;
+
+        ListNode* nxt = new ListNode(digit);
+        tail->next = nxt;
+        tail = tail->next;
+
+        l1 = (l1 != NULL) ? l1->next : NULL;
+        l2 = (l2 != NULL) ? l2->next : NULL;
     }
-};
-{{< /highlight >}}
----
 
-### 💡 **Add Two Numbers Problem** – Let's Solve It Together!
-
-The **Add Two Numbers** problem is a classic linked list challenge that is both intuitive and powerful. In this problem, **two numbers are represented by linked lists** in reverse order, and the task is to **add these numbers** and return the sum as a linked list in the same reverse order. Let’s dive into how to tackle this step by step!
-
-### 📝 **Problem Statement**
-
-You are given:
-- **Two linked lists, `l1` and `l2`**, where each node contains a single digit of a non-negative integer, stored in reverse order. This means the **least significant digit** is at the head of the list.
-- The goal is to **add these two numbers** and return the result as a linked list, also in reverse order.
-
-### 🔍 **Plan and Approach: Adding Digit by Digit with Carry**
-
-We’ll use a method that mirrors manual addition:
-1. **Traverse both linked lists**: We’ll add corresponding digits from `l1` and `l2`, handling any remaining digits if the lists are of different lengths.
-2. **Carry management**: Keep track of any carry-over from each addition, carrying it to the next higher digit.
-3. **Build the result list**: As we sum digits, we’ll build the result list node-by-node in reverse order, just like the input format.
-
-### Step-by-Step Solution
-
-#### Step 1: Initialize Variables
-
-```cpp
-ListNode* head = new ListNode(0);  // Dummy node to start the result list
-ListNode* tail = head;
-int carry = 0;
-```
-
-- `head` acts as a dummy node to simplify list operations.
-- `tail` will point to the last node in our result list, making it easy to append new nodes.
-- `carry` will store any overflow value from each digit addition.
-
-#### Step 2: Traverse and Add Corresponding Digits
-
-```cpp
-while (l1 != NULL || l2 != NULL || carry != 0) {
-    int no1 = (l1 != NULL) ? l1->val : 0;
-    int no2 = (l2 != NULL) ? l2->val : 0;
-
-    int sum = no1 + no2 + carry;
-    int digit = sum % 10;
-    carry = sum / 10;
-
-    ListNode* nxt = new ListNode(digit);
-    tail->next = nxt;
-    tail = tail->next;
-
-    l1 = (l1 != NULL) ? l1->next : NULL;
-    l2 = (l2 != NULL) ? l2->next : NULL;
+    ListNode* res = head->next;
+    delete head;
+    return res;
 }
 ```
 
-- We loop while there are remaining digits in `l1` or `l2`, or there’s a carry left.
-- For each iteration:
-  - Get the value of each list’s current node (`0` if the list has ended).
-  - Compute `sum` as the total of these values plus the carry.
-  - Extract the resulting `digit` (sum modulo 10) and update `carry` (sum divided by 10).
-  - Append `digit` to our result list and advance pointers.
+This code adds two numbers represented as linked lists, where each node contains a single digit. It iteratively adds digits from corresponding nodes, handling carry-over digits, and constructs a new linked list representing the sum.
 
-#### Step 3: Return the Result List
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+	```
+	Declares a function `addTwoNumbers` that takes two linked lists `l1` and `l2` as input and returns a new linked list representing their sum.
 
-```cpp
-ListNode* res = head->next;
-delete head;
-return res;
-```
+2. **Dummy Node Initialization**
+	```cpp
+	    ListNode* head = new ListNode(0);
+	```
+	Creates a dummy node `head` to simplify handling the head of the result list.
 
-- After the loop, `head->next` points to the result list, skipping the dummy node.
-- We delete the dummy node to prevent memory leaks.
-- The resulting list represents the sum, stored in reverse order.
+3. **Tail Pointer Initialization**
+	```cpp
+	    ListNode* tail = head;
+	```
+	Initializes a tail pointer `tail` to point to the dummy node, which will be used to append new nodes to the result list.
 
-### 🌟 **Handling Edge Cases**
+4. **Carry-over Initialization**
+	```cpp
+	    int rm = 0;
+	```
+	Initializes a variable `rm` to store the carry-over digit from the previous addition.
 
-- **Different Lengths**: If one list is shorter, its remaining nodes are considered `0`.
-- **Final Carry**: If there’s still a carry after processing both lists, a new node with this carry value is appended.
+5. **Main Loop**
+	```cpp
+	    while (l1 != NULL || l2 != NULL || rm != 0) {
+	```
+	Starts a loop that continues as long as there are digits in either `l1` or `l2` or there's a carry-over.
 
-### ⏱️ **Understanding Time and Space Complexity**
+6. **Digit Extraction**
+	```cpp
+	        int no1 = (l1 != NULL) ? l1->val : 0;
+	        int no2 = (l2 != NULL) ? l2->val : 0;
+	```
+	Extracts the digits from the current nodes of `l1` and `l2`, handling cases where one or both lists have ended.
 
-- **Time Complexity**: **O(max(m, n))**, where `m` and `n` are the lengths of `l1` and `l2`. We iterate through each node once, resulting in linear time complexity.
-- **Space Complexity**: **O(max(m, n))** for storing the result list, with an additional node if there’s a carry at the end.
+7. **Digit Sum and Carry-over Calculation**
+	```cpp
+	        int sum = no1 + no2 + rm;
+	        int digit = sum % 10;
+	        rm = sum / 10;
+	```
+	Calculates the sum of the current digits and the carry-over, extracts the current digit, and updates the carry-over for the next iteration.
 
-### 💡 **Why This Approach Works Well**
+8. **Create New Node**
+	```cpp
+	        ListNode* nxt = new ListNode(digit);
+	```
+	Creates a new node `nxt` to store the current digit.
 
-This solution mimics manual addition closely and is both efficient and intuitive. The dummy node simplifies list construction, avoiding special cases for the head of the list. By following a structured approach, we maintain clean and readable code.
+9. **Append Node to Result List**
+	```cpp
+	        tail->next = nxt;
+	        tail = tail->next;
+	```
+	Appends the new node `nxt` to the end of the result list and updates the `tail` pointer.
 
-### 🏁 **You Got This!**
+10. **Advance Pointers**
+	```cpp
+	        l1 = (l1 != NULL) ? l1->next : NULL;
+	        l2 = (l2 != NULL) ? l2->next : NULL;
+	```
+	Moves the `l1` and `l2` pointers to the next nodes if they exist.
 
-With each problem, you’re building your coding expertise and strengthening your problem-solving skills. Linked list problems may seem tricky, but practice makes perfect. Keep going, coder, and remember that every challenge is a step closer to mastery! 🚀
+11. **Return Result List**
+	```cpp
+	    ListNode* res = head->next;
+	```
+	Sets the `res` pointer to the second node of the result list, skipping the dummy head node.
 
----
+12. **Delete Dummy Node**
+	```cpp
+	    delete head;
+	```
+	Deletes the dummy head node to avoid memory leaks.
 
-#### 🌟 **Final Thoughts**: Keep Coding, Keep Growing!
+13. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the head of the resulting linked list.
 
-Solving coding problems like these adds new skills to your coding toolkit. Stay focused, keep learning, and celebrate every bit of progress. Happy coding, and remember: each problem solved is a step forward! 🌱💪✨
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We iterate through the length of the longer linked list, where n is the maximum number of nodes.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We allocate a new node for each digit in the result, resulting in linear space usage.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-two-numbers/description/)
 

@@ -14,122 +14,177 @@ img_src = ""
 youtube = "dDse65NWFt8"
 youtube_upload_date="2023-09-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/dDse65NWFt8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of integers where each integer represents a student's happiness threshold. The task is to determine the number of ways to select a group of students so that all students in the group remain happy.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer list representing the happiness thresholds of each student.
+- **Example:** `nums = [2, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] < nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of valid ways to select students such that all students are happy.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output is an integer representing the number of valid student selection ways.
 
-    int countWays(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        int ans = 0, n = nums.size();
-        int selected = 0;
-        if(nums[0]!=0) ans = 1; // Not Selecting AnyOne
-        for(int i=0;i<n;i++) {
-            selected++;
-            if(selected>nums[i]) {  // No. of Selected Students is strictly greater than nums[i].
-                if(i+1<n && selected<nums[i+1]) // Considering from (i+1) to n Students is not Selected.
-                    ans++; 
-                else if(i+1==n) ans++;  // Last Student
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the number of ways to select a group of students such that all students in the group are happy.
+
+- Sort the input list to facilitate easier comparison of thresholds.
+- Iterate through the list while tracking the number of students selected.
+- Check if the current number of selected students satisfies the happiness condition for the student at each index.
+- Count the valid groupings based on these conditions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list will not be empty.
+- Each student's happiness threshold is valid according to the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [2, 2]`  \
+  **Explanation:** The valid ways to select students are: select no student, select the first student, select the second student, or select both students.
+
+- **Input:** `nums = [1, 0, 3, 2, 1, 4]`  \
+  **Explanation:** The valid ways to select students are: select no students, select the second student only, select students with indices 1 and 2, or select all students.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves iterating through the list of students, sorting the thresholds, and using a simple check to count the valid ways to form groups where all students are happy.
+
+### Initial Thoughts 💭
+- We need to find all subsets of students where the selected students' count meets the happiness conditions for each student.
+- Sorting the list helps in efficiently finding the valid groups by comparing thresholds with the current count of selected students.
+{{< dots >}}
+### Edge Cases 🌐
+- The list will not be empty based on the given constraints.
+- The solution should efficiently handle lists with up to 100,000 students.
+- When all students have a threshold of 0, there are many possible ways to select groups.
+- The input list must contain between 1 and 100,000 students.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int countWays(vector<int>& nums) {
+    sort(nums.begin(),nums.end());
+    int ans = 0, n = nums.size();
+    int selected = 0;
+    if(nums[0]!=0) ans = 1; // Not Selecting AnyOne
+    for(int i=0;i<n;i++) {
+        selected++;
+        if(selected>nums[i]) {  // No. of Selected Students is strictly greater than nums[i].
+            if(i+1<n && selected<nums[i+1]) // Considering from (i+1) to n Students is not Selected.
+                ans++; 
+            else if(i+1==n) ans++;  // Last Student
         }
-        return ans;
     }
-
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves counting the number of valid ways to select students from an array of `nums`, where each element in `nums` represents the number of students that are eligible for a certain role. The primary constraint for valid selection is that the number of selected students should be strictly greater than the value of the current student in the sorted array `nums`. Additionally, we need to ensure that there are no conflicts with the remaining students.
-
-### Approach
-
-The key insight to solve this problem lies in sorting the array `nums` and then systematically checking each student to see if they can be selected based on the constraint that the number of selected students must be strictly greater than the current student's value. By iterating over the array and counting selections, we can determine how many valid ways there are to make the selection.
-
-The approach can be broken down into the following steps:
-
-1. **Sort the Input Array**: First, we sort the array `nums` in ascending order. Sorting helps to easily determine the threshold of eligible students as we iterate through the list.
-
-2. **Initialization**: We initialize a counter for the number of valid selections and a counter for the number of selected students.
-
-3. **Iterate Over the Array**: For each student in the sorted array, check if the number of selected students is strictly greater than the value of the current student in the array. If so, count this as a valid selection.
-
-4. **Handling Edge Cases**: Ensure that there are no conflicts between the selections. If the next student in the array has a value greater than the number of selected students, we increment the count. Similarly, we handle the last student by checking if they can be selected given the constraints.
-
-5. **Return the Result**: Finally, return the number of valid selections.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-sort(nums.begin(), nums.end());
-```
-- The array `nums` is sorted in ascending order. Sorting is crucial because it allows us to easily check if the number of selected students is strictly greater than the current value of each student in `nums`.
-
-```cpp
-int ans = 0, n = nums.size();
-int selected = 0;
-```
-- `ans` is initialized to 0 and will store the total number of valid selections.
-- `n` is the size of the `nums` array.
-- `selected` is initialized to 0 and will count the number of students that have been selected.
-
-```cpp
-if (nums[0] != 0) ans = 1; // Not Selecting Anyone
-```
-- If the first element in the sorted `nums` array is not zero, this means that selecting no one is a valid way of selection. Thus, we set `ans` to 1 as we consider this case as one valid way.
-
-```cpp
-for (int i = 0; i < n; i++) {
-    selected++;
-```
-- We iterate over the array `nums`. For each student (indexed by `i`), we increment the `selected` counter because we are considering this student for selection.
-
-```cpp
-if (selected > nums[i]) {  // No. of Selected Students is strictly greater than nums[i].
-```
-- If the number of selected students is greater than the value of the current student (`nums[i]`), we check whether this selection is valid and whether it will be possible to select further students.
-
-```cpp
-if (i + 1 < n && selected < nums[i + 1]) // Considering from (i+1) to n Students is not Selected.
-    ans++;
-```
-- If we are not at the last student (`i + 1 < n`) and the number of selected students is strictly less than the next student’s value (`nums[i + 1]`), we count this as a valid selection and increment `ans`.
-
-```cpp
-else if (i + 1 == n) ans++;  // Last Student
-```
-- If we are at the last student (`i + 1 == n`), we can always select them, so we increment the answer as this is a valid selection.
-
-```cpp
+    return ans;
 }
+
 ```
-- The closing brace of the loop.
 
-```cpp
-return ans;
-```
-- Finally, return the result stored in `ans`, which represents the number of valid ways to select students.
+This function counts the number of ways to select students such that the number of selected students is strictly greater than their respective values in the array `nums`, which represents a threshold for each student.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countWays(vector<int>& nums) {
+	```
+	Defines the function `countWays`, which accepts a vector `nums` and returns the number of valid selections of students.
 
-#### Time Complexity:
-- Sorting the array takes **O(n log n)** where `n` is the number of students.
-- The for loop runs once for each student, so it takes **O(n)**.
-Thus, the overall time complexity of the solution is **O(n log n)**.
+2. **Sorting**
+	```cpp
+	    sort(nums.begin(),nums.end());
+	```
+	Sorts the array `nums` in ascending order to facilitate the selection process based on increasing thresholds.
 
-#### Space Complexity:
-- The space complexity is **O(1)**, as we are only using a fixed amount of extra space for variables like `ans`, `selected`, and `n`.
+3. **Variable Initialization**
+	```cpp
+	    int ans = 0, n = nums.size();
+	```
+	Initializes `ans` to 0 for counting valid selections and `n` to store the size of the `nums` array.
 
-### Conclusion
+4. **Selection Counter**
+	```cpp
+	    int selected = 0;
+	```
+	Initializes the variable `selected` to keep track of the number of selected students.
 
-This solution provides an efficient way to count the number of valid selections of students from the array `nums`. By sorting the array and iterating through it while maintaining a count of selected students, the algorithm ensures that the conditions for valid selection are met. The time complexity of **O(n log n)** makes this approach efficient for large inputs. The solution handles edge cases like the first student not being eligible for selection or being able to select the last student without conflicts.
+5. **Initial Condition**
+	```cpp
+	    if(nums[0]!=0) ans = 1; // Not Selecting AnyOne
+	```
+	Checks if the first element in the sorted `nums` is not zero, and if so, it sets `ans` to 1, indicating a valid selection (not selecting anyone).
+
+6. **Main Loop**
+	```cpp
+	    for(int i=0;i<n;i++) {
+	```
+	Starts a loop that iterates through each student represented by the array `nums`.
+
+7. **Increment Selection**
+	```cpp
+	        selected++;
+	```
+	Increments the `selected` counter for each iteration to represent selecting a student.
+
+8. **Condition Check**
+	```cpp
+	        if(selected>nums[i]) {  // No. of Selected Students is strictly greater than nums[i].
+	```
+	Checks if the number of selected students is strictly greater than the threshold value `nums[i]`.
+
+9. **Next Student Check**
+	```cpp
+	            if(i+1<n && selected<nums[i+1]) // Considering from (i+1) to n Students is not Selected.
+	```
+	Checks if the next student in the array is not selected and the selected count is still valid.
+
+10. **Valid Selection**
+	```cpp
+	                ans++; 
+	```
+	Increments the answer `ans` if the selection condition is satisfied.
+
+11. **Last Student Check**
+	```cpp
+	            else if(i+1==n) ans++;  // Last Student
+	```
+	Increments the answer `ans` if the current student is the last one in the array, meaning the selection is valid.
+
+12. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the final count of valid ways to select students.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which is O(n log n), where n is the number of students.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the sorted list of students.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/happy-students/description/)
 

@@ -14,111 +14,161 @@ img_src = ""
 youtube = "T64iR68Fxng"
 youtube_upload_date="2024-05-05"
 youtube_thumbnail="https://i.ytimg.com/vi/T64iR68Fxng/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s`, which is a concatenation of several anagrams of some string `t`. Your task is to find the minimum possible length of the string `t`. An anagram is formed by rearranging the letters of a string. For example, 'abc' and 'cab' are anagrams of each other. The string `t` is the original string that has been rearranged multiple times to form `s`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s`.
+- **Example:** `Example 1:
+Input: s = "abcabc"
+Output: 3`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minAnagramLength(string s) {
-        // 12,  4
-        // aaxxbb
-        // bbxxaa
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum length of the string `t` that can be used to form the concatenated anagrams in `s`.
+- **Example:** `Example 1:
+Input: s = "abcabc"
+Output: 3`
+- **Constraints:**
+	- The result must be an integer representing the minimum length of the string `t`.
 
-        int n = s.size();
-        map<char, int> mp;        
-        for(char x: s)
-            mp[x]++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the minimum possible length of `t`, we need to determine the greatest common divisor (GCD) of the frequency of characters in the string.
 
-        int mn = mp[s[0]];
-        for(auto it: mp)
-        mn = __gcd(mn, it.second);
+- Count the frequency of each character in the string `s`.
+- Find the GCD of the frequency counts of the characters in `s`.
+- The length of `t` will be the length of `s` divided by the GCD of the frequencies.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `s` is guaranteed to be a concatenation of anagrams.
+- The string `s` contains only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** For the string 'abcabc', the frequency of each character is 2. The greatest common divisor (GCD) of 2 is 2, so the minimum length of `t` is 3 (which is the length of `s` divided by 2).
 
-        return n / mn;
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `Example 2:`  \
+  **Explanation:** For the string 'abcdabcd', the frequency of each character is 2. The GCD of 2 is 2, so the minimum length of `t` is 4.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will use a frequency count of the characters in the string and apply the GCD method to determine the minimum possible length of `t`.
 
-The problem asks to determine the minimum length of the string required to rearrange it into an **anagram**. An anagram involves rearranging the characters of the string such that the result can be evenly partitioned into groups where each group contains the same characters. The goal is to find the minimum length such that the string can be split into equal-sized partitions, with each partition being a valid anagram of the others.
+### Initial Thoughts 💭
+- The problem is asking for the smallest possible string `t` that, when rearranged, can form the input string `s` through multiple concatenations.
+- By counting the frequency of characters and applying the GCD, we can identify the smallest repeating unit in `s`.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string is always guaranteed to have at least one character.
+- Ensure that the solution can handle input strings of length up to 10^5 efficiently.
+- The solution must handle cases where all characters in the string are the same.
+- Make sure to handle cases where characters have varying frequencies.
+{{< dots >}}
+## Code 💻
+```cpp
+int minAnagramLength(string s) {
+    // 12,  4
+    // aaxxbb
+    // bbxxaa
 
-### Approach
+    int n = s.size();
+    map<char, int> mp;        
+    for(char x: s)
+        mp[x]++;
 
-To solve the problem efficiently, we need to focus on the frequency of characters in the given string and use the concept of **greatest common divisor (GCD)** to determine the minimal partition size that can still be rearranged into an anagram.
+    int mn = mp[s[0]];
+    for(auto it: mp)
+    mn = __gcd(mn, it.second);
 
-The key idea here is:
-1. **Count Character Frequencies**: First, count how often each character appears in the string.
-2. **Calculate GCD of Frequencies**: The optimal way to partition the string into equal parts is determined by the **GCD of the frequencies** of all characters in the string. The reason we use the GCD is that it represents the largest possible number by which the frequencies of all characters can be evenly divided. This ensures that the string can be divided into equal parts, each being a valid anagram of the other.
-3. **Compute Minimum Length**: Once the GCD is found, the minimum length of the rearranged string that can be split into equal partitions is the length of the string divided by the GCD.
+    return n / mn;
+}
+```
 
-### Code Breakdown (Step by Step)
+This function calculates the minimum length of an anagram that can be made from a given string `s`. It finds the greatest common divisor (GCD) of the frequencies of characters in the string and divides the string length by this value to determine the anagram length.
 
-1. **Input Parsing**:
-   The input string `s` is provided, and its length `n` is calculated. This length will be used to determine how many groups the string can be split into.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minAnagramLength(string s) {
+	```
+	Defines the function `minAnagramLength`, which takes a string `s` as input and returns an integer representing the minimum length of an anagram that can be formed from `s`.
 
-   ```cpp
-   int n = s.size();
-   ```
+2. **Variable Initialization**
+	```cpp
+	    int n = s.size();
+	```
+	Initializes the variable `n` to store the length of the string `s`.
 
-2. **Character Frequency Counting**:
-   A map `mp` is used to store the frequency of each character in the string. The `for` loop iterates through the string and updates the map by incrementing the count for each character `x`.
+3. **Map Initialization**
+	```cpp
+	    map<char, int> mp;        
+	```
+	Initializes a map `mp` to store the frequency of each character in the string `s`.
 
-   ```cpp
-   map<char, int> mp;        
-   for(char x: s)
-       mp[x]++;
-   ```
+4. **For Loop**
+	```cpp
+	    for(char x: s)
+	```
+	Starts a loop that iterates through each character in the string `s`.
 
-   For example, for the input string `"aaxxbb"`, the map `mp` will look like this:
-   ```
-   mp = {'a': 2, 'x': 2, 'b': 2}
-   ```
+5. **Map Update**
+	```cpp
+	        mp[x]++;
+	```
+	For each character `x` in the string, it increments its count in the map `mp`.
 
-3. **Finding the Minimum Frequency**:
-   After counting the frequencies of each character, the goal is to find the greatest common divisor (GCD) of these frequencies. The first step is to initialize `mn` with the frequency of the first character, `mp[s[0]]`.
+6. **Variable Initialization**
+	```cpp
+	    int mn = mp[s[0]];
+	```
+	Initializes `mn` to the frequency of the first character in the string `s` to start finding the GCD of character frequencies.
 
-   ```cpp
-   int mn = mp[s[0]];
-   ```
+7. **For Loop**
+	```cpp
+	    for(auto it: mp)
+	```
+	Starts a loop to iterate through the map `mp`, which contains the frequencies of each character in the string.
 
-4. **Computing the GCD of All Frequencies**:
-   The next step is to compute the GCD of all the frequencies in the map `mp`. We iterate over the map using a `for` loop and update the value of `mn` by computing the GCD of `mn` and the current frequency `it.second`. The GCD is computed using the built-in `__gcd` function.
+8. **GCD Calculation**
+	```cpp
+	    mn = __gcd(mn, it.second);
+	```
+	For each character frequency in the map, it calculates the GCD of `mn` and the current character's frequency (`it.second`). This finds the greatest common divisor of all character frequencies.
 
-   ```cpp
-   for(auto it: mp)
-       mn = __gcd(mn, it.second);
-   ```
+9. **Return Statement**
+	```cpp
+	    return n / mn;
+	```
+	Returns the result of dividing the string length `n` by the GCD `mn`, which gives the minimum length of the anagram that can be made from the string.
 
-   For the input `"aaxxbb"`, the frequencies are `2, 2, 2`. The GCD of `2, 2, 2` is `2`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Calculating the Minimum Anagram Length**:
-   Once we have the GCD of all the frequencies, we compute the minimum length of the rearranged string that can be divided into valid anagram partitions. This is simply the total length of the string `n` divided by the GCD `mn`.
+The time complexity is linear, where `n` is the length of the input string `s`, since we are only iterating over the string once and performing constant time operations for each character.
 
-   ```cpp
-   return n / mn;
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-   In the example, the total length of the string is 6, and the GCD of the frequencies is 2. Therefore, the minimum length is `6 / 2 = 3`.
+The space complexity is O(n) for storing the frequency counts of the characters in the string.
 
-### Complexity
+**Happy Coding! 🎉**
 
-#### Time Complexity:
-- **O(n)**: The time complexity is linear in terms of the length of the string, where `n` is the length of the string. This is because:
-  - Counting the frequency of each character in the string takes O(n) time.
-  - Calculating the GCD of all frequencies involves iterating through the map of character frequencies. Since the number of unique characters is bounded by the alphabet size (26 for lowercase English letters), this operation is essentially constant in practice.
-
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because the number of unique characters is fixed (26 lowercase English letters). The space used for the map `mp` will at most require space for 26 entries, which is a constant.
-
-### Conclusion
-
-This solution efficiently computes the minimum length of the string that can be rearranged into an anagram by leveraging character frequency counts and the greatest common divisor. The solution is optimal with a time complexity of O(n), where `n` is the length of the string, and it uses a constant amount of space for storing the character frequencies. This approach is well-suited for handling strings of varying sizes and ensures that the rearranged string can be split into the smallest number of equal-length anagram groups.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-length-of-anagram-concatenation/description/)
 

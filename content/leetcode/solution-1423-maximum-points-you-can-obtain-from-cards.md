@@ -14,145 +14,180 @@ img_src = ""
 youtube = "TsA4vbtfCvo"
 youtube_upload_date="2021-06-29"
 youtube_thumbnail="https://i.ytimg.com/vi/TsA4vbtfCvo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `cardPoints` representing the points of cards arranged in a row. In each step, you can pick the first or the last card from the row. Your goal is to pick exactly `k` cards and maximize the sum of the points of the cards you select.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `cardPoints` and an integer `k`, representing the cards and the number of cards to be selected respectively.
+- **Example:** `[1, 2, 3, 4, 5, 6, 1], k = 3`
+- **Constraints:**
+	- 1 <= cardPoints.length <= 10^5
+	- 1 <= cardPoints[i] <= 10^4
+	- 1 <= k <= cardPoints.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxScore(vector<int>& card, int k) {
-        int n = card.size();
-        vector<int> frt, bck;
-        frt.push_back(0);
-        bck.push_back(0);
-        for(int i = 0; i < n; i++) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum score obtained by selecting exactly `k` cards.
+- **Example:** `12`
+- **Constraints:**
+	- The output is the maximum sum of the points of `k` cards selected from the array.
 
-        frt.push_back(frt.back() + card[i]);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum score by selecting exactly `k` cards from either end of the row.
+
+- Step 1: Use dynamic programming to track the total sum of cards taken from the left and right ends of the row.
+- Step 2: Evaluate each possible way of taking cards and find the maximum sum.
+- Step 3: Return the maximum score found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `cardPoints` contains at least one element.
+- You can only pick `k` cards from the beginning or the end of the row.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[1, 2, 3, 4, 5, 6, 1], k = 3`  \
+  **Explanation:** In this case, picking the last three cards results in the maximum sum: 1 + 6 + 5 = 12.
+
+- **Input:** `[9, 7, 7, 9, 7, 7, 9], k = 7`  \
+  **Explanation:** Here, you need to take all the cards, so the maximum sum is the sum of all the cards, which is 55.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the maximum score by considering all ways of picking `k` cards from the two ends of the row.
+
+### Initial Thoughts 💭
+- This problem involves selecting elements from the start or the end of an array.
+- Dynamic programming or sliding window techniques can be applied to track the maximum score.
+- We need to efficiently calculate the score for various ways of selecting `k` cards.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the length of the array is at least 1.
+- For large inputs, ensure that the solution runs in linear time to handle up to 100,000 elements.
+- Handle the case where all cards have the same point value, or where `k` is equal to the length of the array.
+- The array size can be large, but the time complexity of the solution should allow for efficient computation.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxScore(vector<int>& card, int k) {
+    int n = card.size();
+    vector<int> frt, bck;
+    frt.push_back(0);
+    bck.push_back(0);
+    for(int i = 0; i < n; i++) {
+
+    frt.push_back(frt.back() + card[i]);
  bck.push_back(bck.back() + card[n - 1 - i]);
 
-        }
-
-        int ans = bck[k];
-        for(int i = 1; i <= k; i++) {
-            
-            ans = max(ans, frt[i] + bck[k - i]);
-            }
-        return ans;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    int ans = bck[k];
+    for(int i = 1; i <= k; i++) {
+        
+        ans = max(ans, frt[i] + bck[k - i]);
+        }
+    return ans;
+}
+```
 
-The problem is to find the maximum score obtainable from a given array of cards by drawing cards from both ends. Specifically, given an array `card` and an integer `k`, we can select up to `k` cards from either the front or the back of the array. The goal is to maximize the sum of the selected cards. 
+The `maxScore` function calculates the maximum score possible by choosing up to `k` cards from the beginning and the end of the vector `card`. It uses dynamic programming to compute the maximum possible score by splitting the cards between the front and the back.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxScore(vector<int>& card, int k) {
+	```
+	Defines the function `maxScore` that takes a vector of integers `card` and an integer `k` as input and returns the maximum score possible.
 
-To achieve the desired result, we can employ the following approach:
+2. **Variable Initialization**
+	```cpp
+	    int n = card.size();
+	```
+	Initializes the variable `n` to the size of the `card` vector, which represents the total number of cards available.
 
-1. **Prefix and Suffix Sums**: We will create two auxiliary arrays:
-   - `frt`: This array will store the cumulative sum of cards from the front (left side).
-   - `bck`: This array will store the cumulative sum of cards from the back (right side).
+3. **Variable Initialization**
+	```cpp
+	    vector<int> frt, bck;
+	```
+	Declares two vectors `frt` and `bck`, which will store cumulative sums for the front and back sections of the `card` vector.
 
-2. **Cumulative Sums Calculation**:
-   - For the `frt` array, we calculate the cumulative sums as we traverse from the beginning of the `card` array.
-   - For the `bck` array, we calculate the cumulative sums while traversing from the end of the `card` array.
+4. **Vector Operations**
+	```cpp
+	    frt.push_back(0);
+	```
+	Pushes a `0` into the `frt` vector to represent the cumulative sum of cards from the front (starting with zero).
 
-3. **Maximizing the Score**: After obtaining the cumulative sums in both arrays:
-   - We iterate through the possible selections of cards from both ends. Specifically, we can take `i` cards from the front and `k-i` cards from the back.
-   - For each possible split, we calculate the total score and update the maximum score found.
+5. **Vector Operations**
+	```cpp
+	    bck.push_back(0);
+	```
+	Pushes a `0` into the `bck` vector to represent the cumulative sum of cards from the back (starting with zero).
 
-4. **Return Result**: Finally, return the maximum score obtained from the iterations.
+6. **Loop Constructs**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins a loop that iterates over all the cards in the `card` vector.
 
-### Code Breakdown (Step by Step)
+7. **Vector Operations**
+	```cpp
+	    frt.push_back(frt.back() + card[i]);
+	```
+	For each card `i`, adds the current card's value to the cumulative sum in the `frt` vector, which tracks the sum of cards taken from the front.
 
-Let’s analyze the implementation step by step:
+8. **Vector Operations**
+	```cpp
+	    bck.push_back(bck.back() + card[n - 1 - i]);
+	```
+	For each card `i`, adds the current card's value to the cumulative sum in the `bck` vector, which tracks the sum of cards taken from the back.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+9. **Score Initialization**
+	```cpp
+	    int ans = bck[k];
+	```
+	Initializes the variable `ans` with the sum of the first `k` cards from the back, which represents the score starting with cards from the back.
 
-   - This declares a `Solution` class where our method for computing the maximum score will be implemented.
+10. **Loop Constructs**
+	```cpp
+	    for(int i = 1; i <= k; i++) {
+	```
+	Begins a loop that iterates through possible splits of the `k` cards between the front and the back.
 
-2. **Function Declaration**:
-   ```cpp
-   int maxScore(vector<int>& card, int k) {
-   ```
+11. **Score Calculation**
+	```cpp
+	        ans = max(ans, frt[i] + bck[k - i]);
+	```
+	Updates the value of `ans` to be the maximum score found by splitting the `k` cards between the front and back sections.
 
-   - The method `maxScore` takes a vector of integers `card` and an integer `k`, returning the maximum score as an integer.
+12. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the maximum score found from the different possible splits of the cards.
 
-3. **Initialization**:
-   ```cpp
-   int n = card.size();
-   vector<int> frt, bck;
-   frt.push_back(0);
-   bck.push_back(0);
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n), since we process each element of the array exactly once.
+- **Worst Case:** O(n), as we need to compute the score for each possible selection of `k` cards.
 
-   - We store the size of the `card` array in `n`. We then initialize two vectors, `frt` and `bck`, both starting with a `0` to account for the cumulative sum calculations.
+The time complexity is linear, making it efficient for large input sizes.
 
-4. **Cumulative Sums Calculation**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       frt.push_back(frt.back() + card[i]);
-       bck.push_back(bck.back() + card[n - 1 - i]);
-   }
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n), as the space usage depends on the length of the input array.
+- **Worst Case:** O(n), since we store the cumulative sums of cards from both ends.
 
-   - We iterate through the `card` array. For each card:
-     - We append the cumulative sum of cards from the front to `frt`.
-     - We append the cumulative sum of cards from the back to `bck`. Here, `n - 1 - i` accesses the elements from the back of the array.
+The space complexity is linear, as we need extra space for the cumulative sums.
 
-5. **Initial Maximum Score**:
-   ```cpp
-   int ans = bck[k];
-   ```
+**Happy Coding! 🎉**
 
-   - We set the initial answer to the score obtained by taking the first `k` cards from the back (`bck[k]`).
-
-6. **Maximizing the Score**:
-   ```cpp
-   for(int i = 1; i <= k; i++) {
-       ans = max(ans, frt[i] + bck[k - i]);
-   }
-   ```
-
-   - We iterate from `1` to `k` to check different combinations of taking cards from the front and back:
-     - For each `i`, we take `i` cards from the front (`frt[i]`) and `k-i` cards from the back (`bck[k-i]`).
-     - We update `ans` with the maximum value obtained.
-
-7. **Return Statement**:
-   ```cpp
-   return ans;
-   }
-   ```
-
-   - Finally, we return the maximum score calculated.
-
-### Complexity
-
-- **Time Complexity**: The overall time complexity of this solution is \(O(n)\), where \(n\) is the length of the `card` array. This is due to the single pass required to compute the cumulative sums and another pass to compute the maximum score.
-
-- **Space Complexity**: The space complexity is \(O(n)\) as we are using additional space for the `frt` and `bck` vectors to store the cumulative sums.
-
-### Conclusion
-
-The `maxScore` function efficiently calculates the maximum score obtainable by selecting up to `k` cards from both ends of the `card` array. By utilizing cumulative sums and iterating over possible selections, we minimize unnecessary calculations while maximizing the score.
-
-#### Key Takeaways:
-
-- **Cumulative Sum Optimization**: This approach highlights how cumulative sums can simplify and optimize calculations involving contiguous subarrays or selections.
-- **Flexible Selection**: The method elegantly allows for flexible selections from both ends of an array, showcasing versatility in problem-solving.
-- **Efficiency**: The use of simple loops and cumulative storage results in an efficient solution that operates in linear time, making it suitable for larger inputs.
-
-Overall, the provided solution offers a clear and efficient way to tackle the problem of maximizing the score with a clever use of data structures and algorithmic principles, demonstrating both effective problem-solving and computational efficiency.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/)
 

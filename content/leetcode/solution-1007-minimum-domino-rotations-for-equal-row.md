@@ -14,100 +14,247 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays, tops and bottoms, where each array represents the top and bottom halves of a series of dominoes. A domino can be rotated, which means swapping its top and bottom halves. The task is to determine the minimum number of rotations required to make either the entire top row or the bottom row consist of the same value. If it is not possible to achieve this, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays of integers, tops and bottoms, where 1 <= tops.length == bottoms.length <= 2 * 10^4 and 1 <= tops[i], bottoms[i] <= 6.
+- **Example:** `tops = [2, 1, 3, 4], bottoms = [4, 1, 2, 3]`
+- **Constraints:**
+	- 1 <= tops.length == bottoms.length <= 2 * 10^4
+	- 1 <= tops[i], bottoms[i] <= 6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minDominoRotations(vector<int>& top, vector<int>& bottom) {
-        map<int, int> mp;
-        vector<int> tc(7, 0), uc(7, 0);
-        int n = top.size();
-        for(int i = 0; i < n; i++) {
-            if(bottom[i] != top[i]) {
-                mp[bottom[i]]++;
-                mp[top[i]]++;
-            } else mp[top[i]]++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of rotations required to make all elements in either the top or bottom row equal. If it is not possible, return -1.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- If no rotations can achieve a uniform row, return -1.
 
-            uc[bottom[i]]++;
-            tc[top[i]]++;
-        }
-        
-        vector<int> opt;
-        for(auto it: mp) {
-            if(it.second == n)
-                opt.push_back(it.first);
-        }
-        if(opt.empty()) return -1;
-        
-        int res = INT_MAX;
-        for(int x: opt) {
-            if(uc[x] == n || tc[x] == n) return 0;
-            res = min(res, n - uc[x]);
-            res = min(res, n - tc[x]);
-        }
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the minimum number of rotations needed to make all elements in either the top or bottom row the same. If not possible, return -1.
+
+- Count the frequency of each value in both the top and bottom rows.
+- For each value that appears in both rows, check if rotating dominoes can make either row uniform with that value.
+- Keep track of the minimum number of rotations required and return the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The values in the tops and bottoms arrays are between 1 and 6.
+- The dominoes can be rotated to swap the top and bottom values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: tops = [2, 1, 2, 4, 2, 2], bottoms = [5, 2, 6, 2, 3, 2]`  \
+  **Explanation:** In this case, rotating the second and fourth dominoes will make the top row equal to 2 with only 2 rotations.
+
+- **Input:** `Input: tops = [3, 5, 1, 2, 3], bottoms = [3, 6, 3, 3, 4]`  \
+  **Explanation:** In this case, it is impossible to make either row uniform with the same value, so the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to check if we can achieve a uniform row by rotating dominoes. We will consider each value that appears in both rows and calculate the number of rotations needed to make all elements in either the top or bottom row the same value.
+
+### Initial Thoughts 💭
+- We need to ensure that we can align all values in one row either by keeping them as they are or rotating the corresponding dominoes.
+- We can iterate through the dominoes and check if it's possible to make all top values or all bottom values equal for any common value.
+{{< dots >}}
+### Edge Cases 🌐
+- The input arrays will never be empty, as per the problem constraints.
+- The solution should efficiently handle input arrays with lengths up to 2 * 10^4.
+- If all values in either row are already the same, no rotations are needed.
+- The solution must handle the largest case efficiently, requiring a linear solution in terms of the length of the input arrays.
+{{< dots >}}
+## Code 💻
+```cpp
+int minDominoRotations(vector<int>& top, vector<int>& bottom) {
+    map<int, int> mp;
+    vector<int> tc(7, 0), uc(7, 0);
+    int n = top.size();
+    for(int i = 0; i < n; i++) {
+        if(bottom[i] != top[i]) {
+            mp[bottom[i]]++;
+            mp[top[i]]++;
+        } else mp[top[i]]++;
+
+        uc[bottom[i]]++;
+        tc[top[i]]++;
     }
-};
-{{< /highlight >}}
----
+    
+    vector<int> opt;
+    for(auto it: mp) {
+        if(it.second == n)
+            opt.push_back(it.first);
+    }
+    if(opt.empty()) return -1;
+    
+    int res = INT_MAX;
+    for(int x: opt) {
+        if(uc[x] == n || tc[x] == n) return 0;
+        res = min(res, n - uc[x]);
+        res = min(res, n - tc[x]);
+    }
+    return res;
+}
+```
 
+This function calculates the minimum number of rotations needed to make all the dominoes in both top and bottom arrays show the same number. It uses a map to track occurrences of each number and calculates the minimum rotation based on the condition.
 
-### Problem Statement
-The task is to determine the minimum number of rotations needed to make all the values in two stacks of dominoes uniform, meaning that both stacks will have the same number on each domino. Each domino has two numbers, one on the top and one on the bottom. A rotation of a domino swaps its top and bottom numbers. Our goal is to identify the least number of such rotations required to achieve uniformity. If it's not possible to achieve uniformity, the function should return -1.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minDominoRotations(vector<int>& top, vector<int>& bottom) {
+	```
+	Declares the main function which takes two vectors, top and bottom, representing the top and bottom numbers of each domino.
 
-### Approach
-To tackle this problem, we can utilize counting strategies to track the occurrences of each number on both stacks. The main idea is to:
-1. Count how many times each number appears in both the top and bottom stacks.
-2. Determine the valid numbers that can potentially make both stacks uniform. 
-3. Calculate the minimum rotations required for these valid numbers to ensure that either all top numbers or all bottom numbers are the same.
+2. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a map to store the frequency of each number across both top and bottom arrays.
 
-### Code Breakdown (Step by Step)
+3. **Vector Initialization**
+	```cpp
+	    vector<int> tc(7, 0), uc(7, 0);
+	```
+	Initializes two vectors, tc and uc, each of size 7 to track the count of numbers on top and bottom, respectively.
 
-1. **Function Definition**:
-   - The function `minDominoRotations` is defined as a public member of the `Solution` class. It takes two vectors of integers, `top` and `bottom`, representing the numbers on the top and bottom of the dominoes.
+4. **Variable Initialization**
+	```cpp
+	    int n = top.size();
+	```
+	Sets the variable n to the size of the top vector, which represents the number of dominoes.
 
-2. **Variable Initialization**:
-   - We create a map `mp` to store counts of how many times each number appears across both stacks.
-   - Two vectors, `tc` and `uc`, both of size 7 (to account for domino numbers 1 through 6), are initialized to track the counts of top and bottom numbers, respectively.
-   - We also capture the size of the input arrays with `n`, which represents the total number of dominoes.
+5. **Loop Begin**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop that iterates through each domino in the top and bottom arrays.
 
-3. **Counting Domino Numbers**:
-   - A `for` loop iterates through each index `i` of the dominoes:
-     - If the numbers on the top and bottom differ (`bottom[i] != top[i]`), we increment the count for both the top and bottom numbers in the map `mp`.
-     - If they are the same, we only increment the count for the number found in the top stack.
-     - Regardless, we also update the count of occurrences in `uc` (for bottom numbers) and `tc` (for top numbers).
+6. **Condition Check**
+	```cpp
+	        if(bottom[i] != top[i]) {
+	```
+	Checks if the top and bottom values for the current domino are different.
 
-4. **Identifying Valid Numbers**:
-   - A vector `opt` is created to hold valid numbers that could potentially make both stacks uniform. 
-   - We iterate over the entries in the map `mp`:
-     - If the count of a number equals `n`, it indicates that the number is present in all dominoes (either top or bottom) and is added to `opt`.
+7. **Map Update**
+	```cpp
+	            mp[bottom[i]]++;
+	```
+	Increases the count for the bottom value in the map.
 
-5. **Handle Cases with No Valid Number**:
-   - If the `opt` vector is empty, meaning no number can make the stacks uniform, we return -1.
+8. **Map Update**
+	```cpp
+	            mp[top[i]]++;
+	```
+	Increases the count for the top value in the map.
 
-6. **Calculating Minimum Rotations**:
-   - We initialize `res` to `INT_MAX`, which will store the minimum rotations found.
-   - We then loop over each number `x` in the `opt` vector:
-     - If the count of `x` in either `uc` or `tc` is equal to `n`, we can achieve uniformity without any rotations, so we return 0.
-     - Otherwise, we calculate the number of rotations needed to convert all occurrences of the other number to `x` using the formulas `n - uc[x]` and `n - tc[x]` and update `res` accordingly.
+9. **Same Number Check**
+	```cpp
+	        } else mp[top[i]]++;
+	```
+	If the top and bottom values are the same, just increase the count for the top value in the map.
 
-7. **Return the Result**:
-   - Finally, we return the minimum rotations stored in `res`.
+10. **Vector Update**
+	```cpp
+	        uc[bottom[i]]++;
+	```
+	Increases the count for the bottom number in the uc vector.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this function is O(n) since we make a single pass through the dominoes to count the occurrences and another pass through the potential valid numbers to calculate the minimum rotations. Thus, the algorithm is efficient and scalable with respect to input size.
-- **Space Complexity**: The space complexity is O(1) in terms of additional data structures, as the size of `mp`, `tc`, and `uc` remains constant (limited to numbers 1 to 6). Therefore, our memory usage does not grow with `n`.
+11. **Vector Update**
+	```cpp
+	        tc[top[i]]++;
+	```
+	Increases the count for the top number in the tc vector.
 
-### Conclusion
-The `minDominoRotations` function provides an efficient solution to the problem of determining the minimum number of rotations needed to achieve uniformity in stacks of dominoes. By leveraging counting techniques and managing occurrences of each number systematically, the algorithm successfully identifies valid candidates for uniformity and calculates the required rotations. The method is both time-efficient and straightforward, making it a valuable approach for similar problems that involve combinations or arrangements with constraints.
+12. **Optional Numbers**
+	```cpp
+	    vector<int> opt;
+	```
+	Initializes a vector to store the numbers that could be used for the minimum rotation.
 
-This implementation illustrates how to effectively utilize maps and vectors to track and manage state, which is crucial in solving problems involving multiple data sets. Understanding this solution can help in approaching a variety of algorithmic challenges where the goal is to manipulate and analyze collections of data efficiently. The logic used here can be adapted to broader contexts in competitive programming, coding interviews, and algorithm design tasks.
+13. **Map Iteration**
+	```cpp
+	    for(auto it: mp) {
+	```
+	Iterates through the map to find which numbers appear in all the dominoes.
+
+14. **Condition Check**
+	```cpp
+	        if(it.second == n)
+	```
+	Checks if a number appears in all dominoes (top and bottom arrays combined).
+
+15. **Vector Update**
+	```cpp
+	            opt.push_back(it.first);
+	```
+	Adds the number to the options vector if it appears in all dominoes.
+
+16. **Empty Check**
+	```cpp
+	    if(opt.empty()) return -1;
+	```
+	If no numbers can be used for rotation, return -1 indicating it's not possible.
+
+17. **Result Initialization**
+	```cpp
+	    int res = INT_MAX;
+	```
+	Initializes the result variable with the maximum possible value to find the minimum rotations.
+
+18. **Option Iteration**
+	```cpp
+	    for(int x: opt) {
+	```
+	Iterates through the possible numbers in the options vector to find the minimum rotations.
+
+19. **Condition Check**
+	```cpp
+	        if(uc[x] == n || tc[x] == n) return 0;
+	```
+	Checks if all dominoes can already show the same number either on the top or bottom.
+
+20. **Result Update**
+	```cpp
+	        res = min(res, n - uc[x]);
+	```
+	Calculates the minimum number of rotations needed for the bottom values.
+
+21. **Result Update**
+	```cpp
+	        res = min(res, n - tc[x]);
+	```
+	Calculates the minimum number of rotations needed for the top values.
+
+22. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the minimum number of rotations needed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of dominoes, as we process each domino a constant number of times.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we only need a few extra variables to track counts of numbers in the rows.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/description/)

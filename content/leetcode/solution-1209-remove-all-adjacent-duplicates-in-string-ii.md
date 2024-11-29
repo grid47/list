@@ -14,101 +14,171 @@ img_src = ""
 youtube = "w6LcypDgC4w"
 youtube_upload_date="2022-05-06"
 youtube_thumbnail="https://i.ytimg.com/vi/w6LcypDgC4w/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s and an integer k. A k duplicate removal consists of selecting k adjacent and equal letters from the string and removing them, causing the left and the right side of the deleted substring to concatenate together. Repeat this operation until no more such removals are possible. Return the final string after all removals are done.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string s and an integer k.
+- **Example:** `Input: s = "aabbcc", k = 2`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- 2 <= k <= 10^4
+	- s consists of lowercase English letters only.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string removeDuplicates(string s, int k) {
-        vector<pair<int, char>> stk = {{0, '#'}};
-        
-        for(char c : s) {
-            if(stk.back().second != c)
-                stk.push_back({1, c});
-            else if(++stk.back().first == k)
-                stk.pop_back();
-        }
-        
-        string res;
-        for(auto x: stk)
-            res.append(x.first, x.second);
-        
-        return res;
-        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the final string after all k duplicate removals have been made.
+- **Example:** `Output: ""`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to continuously remove adjacent duplicate letters from the string until no more removals can be made.
+
+- Iterate through the string and check for k adjacent equal letters.
+- Whenever such a substring is found, remove it and concatenate the remaining parts of the string.
+- Repeat this process until no more substrings can be removed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string s may contain substrings with duplicate characters that need to be removed.
+- The solution should handle cases where there are no substrings to remove, as well as when all characters can be removed.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "aabbcc", k = 2`  \
+  **Explanation:** Since the string contains only pairs of identical characters, all of them will be removed, leaving the string empty.
+
+- **Input:** `Input: s = "aaaabbbcccddeee", k = 3`  \
+  **Explanation:** After removing 'aaa', 'bbb', 'ccc', and 'ddd', the string reduces to 'ddee'.
+
+{{< dots >}}
+## Approach 🚀
+We can use a stack-based approach to efficiently remove duplicate substrings from the string. The stack will help us keep track of consecutive characters and their counts, allowing us to easily identify and remove substrings of length k.
+
+### Initial Thoughts 💭
+- A stack can be used to keep track of characters and their counts.
+- When a character appears k times consecutively, it can be removed.
+- The stack will help in managing the characters and removing the substrings efficiently without needing to traverse the string multiple times.
+{{< dots >}}
+### Edge Cases 🌐
+- The string should never be empty as per the constraints.
+- The algorithm must handle large strings efficiently, up to a length of 10^5.
+- Consider cases where no duplicates are found or where the entire string consists of the same character.
+- The solution should efficiently handle the maximum possible input size.
+{{< dots >}}
+## Code 💻
+```cpp
+string removeDuplicates(string s, int k) {
+    vector<pair<int, char>> stk = {{0, '#'}};
+    
+    for(char c : s) {
+        if(stk.back().second != c)
+            stk.push_back({1, c});
+        else if(++stk.back().first == k)
+            stk.pop_back();
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The objective of this problem is to remove adjacent duplicate characters from a string `s`. Specifically, if there are `k` or more consecutive identical characters in the string, all of those characters should be removed. This process may need to be repeated as new duplicates may emerge after previous removals. The challenge lies in efficiently managing the removal of these duplicates while traversing the string.
-
-### Approach
-To solve this problem, we can utilize a stack-based approach where we maintain a vector of pairs. Each pair consists of:
-1. The count of consecutive characters.
-2. The character itself.
-
-This stack-like structure allows us to efficiently track the counts of characters and remove them when they reach the specified threshold `k`. The process can be broken down into the following steps:
-1. Traverse the string and maintain a count of consecutive characters.
-2. When the count of a character reaches `k`, remove it from the stack.
-3. Construct the final result string from the remaining characters in the stack.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    string removeDuplicates(string s, int k) {
-        vector<pair<int, char>> stk = {{0, '#'}};
+    
+    string res;
+    for(auto x: stk)
+        res.append(x.first, x.second);
+    
+    return res;
+    
+}
 ```
-- **Lines 1-3**: Define the `Solution` class and the `removeDuplicates` method, which takes a string `s` and an integer `k` as parameters. A vector of pairs, `stk`, is initialized with a dummy character `'#'` to handle edge cases where the first character needs to be added.
 
-```cpp
-        for(char c : s) {
-```
-- **Line 4**: Begin a loop to iterate through each character `c` in the input string `s`.
+This function removes adjacent duplicates from a string, where a character that appears consecutively `k` times is completely removed. The function uses a stack to keep track of characters and their counts.
 
-```cpp
-            if(stk.back().second != c)
-                stk.push_back({1, c});
-```
-- **Lines 5-7**: Check if the current character `c` is different from the character at the top of the stack (`stk.back().second`). If it is, push a new pair onto the stack with a count of `1` and the current character.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string removeDuplicates(string s, int k) {
+	```
+	Define the function `removeDuplicates` which takes a string `s` and an integer `k` as inputs. The goal is to remove adjacent characters that appear consecutively `k` times.
 
-```cpp
-            else if(++stk.back().first == k)
-                stk.pop_back();
-```
-- **Lines 8-10**: If the current character is the same as the top character in the stack, increment the count of that character (`stk.back().first`). If this count equals `k`, it means we have found `k` consecutive characters, and we need to remove them. Therefore, we pop the top element from the stack.
+2. **Stack Initialization**
+	```cpp
+	    vector<pair<int, char>> stk = {{0, '#'}};
+	```
+	Initialize a stack `stk` that will hold pairs of integers and characters. The stack starts with a dummy pair `{0, '#'}` to simplify the logic of checking the first character.
 
-```cpp
-        string res;
-        for(auto x: stk)
-            res.append(x.first, x.second);
-```
-- **Lines 11-13**: Initialize an empty string `res`. Then, iterate through each pair in the stack and append the character `x.second` to `res`, repeated `x.first` times, effectively reconstructing the modified string without the removed duplicates.
+3. **Loop Through Input String**
+	```cpp
+	    for(char c : s) {
+	```
+	Start a loop that iterates over each character `c` in the input string `s`.
 
-```cpp
-        return res;
-    }
-};
-```
-- **Lines 14-16**: Finally, return the result string `res`, which contains the characters of `s` with all adjacent duplicates removed according to the specified rules.
+4. **Check for Non-Matching Character**
+	```cpp
+	        if(stk.back().second != c)
+	```
+	If the current character `c` does not match the character at the top of the stack, proceed to the next step.
 
-### Complexity
-1. **Time Complexity**:
-   - The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input string `s`. Each character is processed once, and operations on the stack (push and pop) are \(O(1)\).
+5. **Push New Character to Stack**
+	```cpp
+	            stk.push_back({1, c});
+	```
+	Push a new pair `{1, c}` to the stack, indicating that the character `c` has appeared once consecutively.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(n)\) in the worst case, where no characters are removed and all characters end up in the stack. The additional space used for the output string `res` also contributes to this complexity.
+6. **Check for Consecutive Duplicates**
+	```cpp
+	        else if(++stk.back().first == k)
+	```
+	If the current character `c` matches the top of the stack, increment the count of consecutive occurrences. If the count reaches `k`, proceed to the next step.
 
-### Conclusion
-The `removeDuplicates` function provides an efficient solution to the problem of removing adjacent duplicates from a string based on a specified count `k`. By using a stack-like structure, the algorithm effectively tracks the counts of characters and facilitates the removal process. The linear time complexity ensures that this solution is suitable for larger strings, making it both efficient and elegant. This method exemplifies the power of using data structures like stacks to manage and solve problems related to sequences and grouping in strings. Overall, this function is a practical approach to address string manipulation tasks in competitive programming and software development.
+7. **Pop the Stack**
+	```cpp
+	            stk.pop_back();
+	```
+	Pop the top element from the stack, as the character has occurred `k` times consecutively and should be removed.
+
+8. **Result String Initialization**
+	```cpp
+	    string res;
+	```
+	Initialize an empty string `res` to store the final result after removing the duplicates.
+
+9. **Rebuild Result String**
+	```cpp
+	    for(auto x: stk)
+	```
+	Iterate over the stack `stk` to rebuild the result string. Each element in the stack is a pair, where the first element is the count and the second element is the character.
+
+10. **Append Characters to Result**
+	```cpp
+	        res.append(x.first, x.second);
+	```
+	For each pair in the stack, append the character `x.second` to the result string `res`, `x.first` times.
+
+11. **Return Final Result**
+	```cpp
+	    return res;
+	```
+	Return the result string `res`, which contains the characters after removing all adjacent duplicates that appeared consecutively `k` times.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the string. Each character is processed at most twice.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), as we need to store the stack to manage the characters and their counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/description/)
 

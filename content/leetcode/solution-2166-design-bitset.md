@@ -14,57 +14,102 @@ img_src = ""
 youtube = "FWv-b_VITvA"
 youtube_upload_date="2022-02-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/FWv-b_VITvA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with implementing a Bitset class that supports operations such as setting bits, clearing bits, flipping all bits, and querying the state of the bits (whether all bits are set to 1, at least one bit is set to 1, etc.).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of operations to be performed on a Bitset object, starting with its initialization with a given size.
+- **Example:** `["Bitset", "fix", "fix", "flip", "all", "unfix", "flip", "one", "unfix", "count", "toString"]`
+- **Constraints:**
+	- 1 <= size <= 10^5
+	- 0 <= idx < size
+	- At most 10^5 calls will be made in total to fix, unfix, flip, all, one, count, and toString.
 
-{{< highlight cpp >}}
-class Bitset {
-    string s, flipp;
-    int ones = 0, size = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of results corresponding to the operations performed, where each result matches the expected output for each method call.
+- **Example:** `[null, null, null, null, false, null, null, true, null, 3, "01011"]`
+- **Constraints:**
+	- At least one call will be made to all, one, count, or toString.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Implement the `Bitset` class to efficiently support the operations on bits.
+
+- Initialize the Bitset with all bits set to 0.
+- Support methods to fix, unfix, flip, and query the state of the bits.
+- Ensure that all methods run efficiently, with constant time complexity for individual operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The size of the Bitset is always within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input = ["Bitset", "fix", "fix", "flip", "all", "unfix", "flip", "one", "unfix", "count", "toString"]`  \
+  **Explanation:** The Bitset is initialized with 5 bits. Several operations are performed such as fixing bits, flipping, and checking if all bits are set to 1, eventually returning the count and string representation of the Bitset.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to store the state of the Bitset using two strings: one for the actual bitset and one for the flipped version. This allows efficient bit manipulation and state queries.
+
+### Initial Thoughts 💭
+- The problem requires efficient manipulation and querying of bits.
+- Using two strings to represent the Bitset and its flipped version ensures efficient bit flipping and checking.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the Bitset always has at least one bit.
+- The solution must efficiently handle the maximum constraint of 10^5 bits.
+- Handling cases where all bits are fixed or all are unfixes is important.
+- Ensure that the solution works efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int ones = 0, size = 0;
 public:
-    Bitset(int size) {
-        s = string(size, '0');
-        flipp = string(size, '1');
-        ones = 0;
-        this->size = size;
-    }
-    
-    void fix(int idx) {
-        if(s[idx] == '0') ones++;
-        s[idx] = '1';
-        flipp[idx] = '0';
-    }
-    
-    void unfix(int idx) {
-        if(s[idx] == '1') ones--;
-        s[idx] = '0';
-        flipp[idx] = '1';        
-    }
-    
-    void flip() {
-        ones = size - ones;
-        s.swap(flipp);
-    }
-    
-    bool all() {
-        return ones == size;
-    }
-    
-    bool one() {
-        return ones > 0;
-    }
-    
-    int count() {
-        return ones;
-    }
-    
-    string toString() {
-        return s;
-    }
+Bitset(int size) {
+    s = string(size, '0');
+    flipp = string(size, '1');
+    ones = 0;
+    this->size = size;
+}
+
+void fix(int idx) {
+    if(s[idx] == '0') ones++;
+    s[idx] = '1';
+    flipp[idx] = '0';
+}
+
+void unfix(int idx) {
+    if(s[idx] == '1') ones--;
+    s[idx] = '0';
+    flipp[idx] = '1';        
+}
+
+void flip() {
+    ones = size - ones;
+    s.swap(flipp);
+}
+
+bool all() {
+    return ones == size;
+}
+
+bool one() {
+    return ones > 0;
+}
+
+int count() {
+    return ones;
+}
+
+string toString() {
+    return s;
+}
 };
 
 /**
@@ -77,93 +122,191 @@ public:
  * bool param_5 = obj->one();
  * int param_6 = obj->count();
  * string param_7 = obj->toString();
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
-The task is to design and implement a `Bitset` class that supports a series of operations on a binary set of a fixed size. Each element in the `Bitset` can either be a '0' or '1'. The class should provide methods to fix specific bits, unfix them, flip all bits, check if all or any bits are set, count the number of set bits, and return the string representation of the bitset.
+This code implements a `Bitset` class with methods to fix, unfix, flip, check if all bits are set, check if one bit is set, count the set bits, and convert the bitset to a string representation.
 
-### Approach
-The `Bitset` class uses two main string representations to manage bit states:
-1. **`s`**: The actual string representing the current state of the bits.
-2. **`flipp`**: An auxiliary string that represents the flipped version of `s`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int ones = 0, size = 0;
+	```
+	This line initializes two variables: `ones` to keep track of the number of bits set to 1, and `size` to store the size of the bitset.
 
-### Implementation Details
-1. **Constructor `Bitset(int size)`**:
-   - Initializes `s` as a string of '0's representing the bitset.
-   - Initializes `flipp` as a string of '1's, which is the complement of `s`.
-   - Initializes `ones` to track the number of bits currently set to '1'.
-   - Stores `size` as the total number of bits in the bitset.
+2. **Access Specifier**
+	```cpp
+	public:
+	```
+	This is the access specifier marking the beginning of the public section of the class, where methods that can be accessed outside the class are defined.
 
-2. **`void fix(int idx)`**:
-   - Sets the bit at index `idx` to '1'.
-   - Increments `ones` only if the bit at `idx` was originally '0'.
-   - Updates `flipp` by setting the bit at `idx` to '0'.
+3. **Constructor**
+	```cpp
+	Bitset(int size) {
+	```
+	This constructor initializes a `Bitset` object with the specified size, setting all bits to 0 initially.
 
-3. **`void unfix(int idx)`**:
-   - Sets the bit at index `idx` to '0'.
-   - Decrements `ones` only if the bit at `idx` was originally '1'.
-   - Updates `flipp` by setting the bit at `idx` to '1'.
+4. **Initialization**
+	```cpp
+	    s = string(size, '0');
+	```
+	This line initializes the string `s` with the given size, filling it with '0' characters representing the unset bits.
 
-4. **`void flip()`**:
-   - Swaps `s` with `flipp` to invert the bitset.
-   - Updates the count of `ones` to `size - ones`, as all '1's become '0's and vice versa.
+5. **Initialization**
+	```cpp
+	    flipp = string(size, '1');
+	```
+	This line initializes the string `flipp` with the given size, filling it with '1' characters, which are used for flipping the bits.
 
-5. **`bool all()`**:
-   - Returns `true` if all bits are set to '1', i.e., `ones == size`.
+6. **Initialization**
+	```cpp
+	    ones = 0;
+	```
+	This line initializes the `ones` counter to 0, as no bits are set initially.
 
-6. **`bool one()`**:
-   - Returns `true` if at least one bit is set to '1', i.e., `ones > 0`.
+7. **Initialization**
+	```cpp
+	    this->size = size;
+	```
+	This line sets the `size` of the bitset to the provided `size` argument.
 
-7. **`int count()`**:
-   - Returns the number of bits currently set to '1', tracked by `ones`.
+8. **Method Definition**
+	```cpp
+	void fix(int idx) {
+	```
+	This method is used to set the bit at the specified index `idx` to 1, and updates the count of ones.
 
-8. **`string toString()`**:
-   - Returns the string representation `s` of the current state of the bitset.
+9. **Condition Check**
+	```cpp
+	    if(s[idx] == '0') ones++;
+	```
+	This checks if the bit at the given index is currently 0. If it is, the counter for `ones` is incremented.
 
-### Code Breakdown (Step by Step)
-1. **Initialization**:
-   - `s` is initialized to a string of '0's (e.g., "000...0").
-   - `flipp` is initialized to a string of '1's (e.g., "111...1").
-   - `ones` is initialized to `0`, indicating no '1's at the start.
+10. **Modification**
+	```cpp
+	    s[idx] = '1';
+	```
+	This sets the bit at the specified index to 1.
 
-2. **`fix(int idx)`**:
-   - Checks if `s[idx]` is '0' to ensure `ones` is only incremented when a change occurs.
-   - Changes `s[idx]` to '1' and `flipp[idx]` to '0'.
+11. **Modification**
+	```cpp
+	    flipp[idx] = '0';
+	```
+	This sets the corresponding bit in the `flipp` string to '0' indicating it is no longer in the flip state.
 
-3. **`unfix(int idx)`**:
-   - Checks if `s[idx]` is '1' to ensure `ones` is only decremented when a change occurs.
-   - Changes `s[idx]` to '0' and `flipp[idx]` to '1'.
+12. **End Method**
+	```cpp
+	}
+	```
+	The closing brace marks the end of the `fix` method.
 
-4. **`flip()`**:
-   - Swaps `s` and `flipp` using the `swap()` function.
-   - Updates `ones` to `size - ones`.
+13. **Method Definition**
+	```cpp
+	void unfix(int idx) {
+	```
+	This method is used to set the bit at the specified index `idx` to 0, and updates the count of ones.
 
-5. **`all()`**:
-   - Returns `true` if `ones == size`, indicating all bits are '1'.
+14. **Condition Check**
+	```cpp
+	    if(s[idx] == '1') ones--;
+	```
+	This checks if the bit at the given index is currently 1. If it is, the counter for `ones` is decremented.
 
-6. **`one()`**:
-   - Returns `true` if `ones > 0`, indicating at least one bit is '1'.
+15. **Modification**
+	```cpp
+	    s[idx] = '0';
+	```
+	This sets the bit at the specified index to 0.
 
-7. **`count()`**:
-   - Directly returns the value of `ones`.
+16. **Modification**
+	```cpp
+	    flipp[idx] = '1';
+	```
+	This sets the corresponding bit in the `flipp` string to '1' indicating it is now in the flip state.
 
-8. **`toString()`**:
-   - Returns the current bitset representation `s`.
+17. **Method Definition**
+	```cpp
+	void flip() {
+	```
+	This method flips the entire bitset, changing each bit to its opposite (0 to 1 and vice versa).
 
-### Complexity
-- **Time Complexity**:
-  - Constructor `Bitset(int size)`: O(n), where `n` is the size of the bitset.
-  - `fix(int idx)`, `unfix(int idx)`: O(1), as only a single bit is updated.
-  - `flip()`: O(1), due to swapping and basic arithmetic.
-  - `all()`, `one()`, `count()`, `toString()`: O(1).
+18. **Modification**
+	```cpp
+	    ones = size - ones;
+	```
+	This updates the `ones` count after flipping by subtracting the current number of ones from the total size.
 
-- **Space Complexity**:
-  - O(n), where `n` is the size of the bitset, used by the `s` and `flipp` strings.
+19. **Modification**
+	```cpp
+	    s.swap(flipp);
+	```
+	This swaps the contents of the `s` and `flipp` strings, effectively flipping the bits.
 
-### Conclusion
-The `Bitset` class provides a clear and efficient way to manage and manipulate bits. It includes methods to set, reset, flip, count, and check the state of the bits, all in O(1) time. This design is optimal for scenarios requiring frequent bit manipulations with minimal overhead, making it suitable for applications in simulations, binary operations, and problem-solving environments where bit-level control is necessary.
+20. **Method Definition**
+	```cpp
+	bool all() {
+	```
+	This method checks if all bits in the bitset are set to 1.
+
+21. **Condition Check**
+	```cpp
+	    return ones == size;
+	```
+	This returns true if the number of ones is equal to the total size, meaning all bits are set to 1.
+
+22. **Method Definition**
+	```cpp
+	bool one() {
+	```
+	This method checks if at least one bit in the bitset is set to 1.
+
+23. **Condition Check**
+	```cpp
+	    return ones > 0;
+	```
+	This returns true if the number of ones is greater than 0, meaning at least one bit is set.
+
+24. **Method Definition**
+	```cpp
+	int count() {
+	```
+	This method returns the number of bits set to 1 in the bitset.
+
+25. **Return Statement**
+	```cpp
+	    return ones;
+	```
+	This returns the value of `ones`, which represents the number of bits set to 1.
+
+26. **Method Definition**
+	```cpp
+	string toString() {
+	```
+	This method converts the current bitset to a string.
+
+27. **Return Statement**
+	```cpp
+	    return s;
+	```
+	This returns the string representation of the current bitset.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+Each operation (fix, unfix, flip, all, one, count, toString) runs in constant time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of two strings representing the Bitset.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-bitset/description/)
 

@@ -14,231 +14,284 @@ img_src = ""
 youtube = "-ZE6ZmNU6KQ"
 youtube_upload_date="2022-12-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/-ZE6ZmNU6KQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two lists of words: one representing positive feedback and the other representing negative feedback. Each feedback word affects a student's points: a positive word adds 3 points, while a negative word subtracts 1 point. For each feedback report, which is associated with a student, calculate the total score by counting the occurrences of positive and negative words. After evaluating all reports, return the top k students based on their total points. In case of a tie in points, the student with the lower ID should rank higher.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the following inputs: 
+- `positive_feedback`: A list of words indicating positive feedback.
+- `negative_feedback`: A list of words indicating negative feedback.
+- `report`: A list of feedback reports for students.
+- `student_id`: A list of student IDs corresponding to each report.
+- `k`: An integer specifying how many top students to return based on their scores.
+- **Example:** `positive_feedback = ["creative", "enthusiastic", "hardworking"], negative_feedback = ["lazy"], report = ["the student is hardworking and lazy", "the student is creative and enthusiastic"], student_id = [1, 2], k = 2`
+- **Constraints:**
+	- 1 <= positive_feedback.length, negative_feedback.length <= 10^4
+	- 1 <= report[i].length <= 100
+	- 1 <= student_id[i] <= 10^9
+	- 1 <= k <= n
 
-{{< highlight cpp >}}
-class cmp {
-    public:
-    bool operator()(vector<int> &a, vector<int> &b) {
-        if(a[0] == b[0]) return a[1] > b[1];
-        return a[0] < b[0];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the top k student IDs ranked by their points. If multiple students have the same points, return the one with the lower student ID first.
+- **Example:** `[2, 1]`
+- **Constraints:**
+	- Return the IDs of the top k students.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the total score for each student based on the feedback words, sort them in descending order by score, and then return the top k students.
+
+- 1. Initialize sets for positive and negative feedback words.
+- 2. Loop through each report and calculate the score for each student by checking the occurrence of positive and negative words.
+- 3. Use a priority queue to sort the students by their scores in descending order, prioritizing lower IDs in case of a tie.
+- 4. Extract the IDs of the top k students from the priority queue.
+{{< dots >}}
+### Problem Assumptions ✅
+- All student IDs are unique.
+- Words in the report are separated by a single space.
+- There are no overlapping words between the positive and negative feedback lists.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `positive_feedback = ["smart","brilliant","studious"], negative_feedback = ["not"], report = ["this student is studious", "the student is smart"], student_id = [1, 2], k = 2`  \
+  **Explanation:** In this case, both students have the same number of positive feedback (3 points), but since student 1 has a lower ID, he ranks higher. The output is [1, 2].
+
+- **Input:** `positive_feedback = ["smart","brilliant","studious"], negative_feedback = ["not"], report = ["this student is not studious", "the student is smart"], student_id = [1, 2], k = 2`  \
+  **Explanation:** Student 1 has 3 points (1 positive, 1 negative), while student 2 has 3 points (1 positive). Since student 2 has more points, the output is [2, 1].
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we iterate over the feedback reports, calculate the points for each student based on the occurrence of positive and negative words, and then rank them in descending order of their points. The solution utilizes a priority queue to efficiently sort the students and handle ties.
+
+### Initial Thoughts 💭
+- The positive and negative feedback words can be stored in sets for quick lookup.
+- We need to consider both positive and negative feedback for each report.
+- We can use a priority queue to handle the sorting of students and ensure that the lowest ID student ranks higher in case of ties.
+{{< dots >}}
+### Edge Cases 🌐
+- If either positive_feedback or negative_feedback is empty, the solution should still work by handling the absence of words in the feedback reports.
+- If there are a large number of students or reports, the solution should be optimized to handle large inputs efficiently.
+- Ensure that the solution handles cases where students have equal points but different IDs.
+- Handle edge cases where n = 1 or k = 1, ensuring that the solution works for small input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> topStudents(vector<string>& pos, vector<string>& neg, vector<string>& report, vector<int>& id, int k) {
+    set<string> p, n;
+    for(auto it: pos) {
+        p.insert(it);
     }
-};
-
-class Solution {
-public:
-    vector<int> topStudents(vector<string>& pos, vector<string>& neg, vector<string>& report, vector<int>& id, int k) {
-        set<string> p, n;
-        for(auto it: pos) {
-            p.insert(it);
-        }
-        for(auto it: neg) {
-            n.insert(it);
-        }
-        
-        priority_queue<vector<int>, vector<vector<int>>, cmp> pq;
-        
-        int sz = report.size();
-        for(int i = 0; i < sz; i++) {
-            string s = report[i];
-            int prv = 0;
-            int sum = 0;
-            for(int j = 0; j < s.size(); j++) {
-                if(s[j] == ' ' || j == s.size() - 1) {
-                    string str = s.substr(prv, (j == s.size() - 1? s.size(): j) - prv);
-                    // cout << str << " ";
-                    prv = j + 1;
-                    if(p.count(str)) sum += 3;
-                    if(n.count(str)) sum -= 1;
-                }
+    for(auto it: neg) {
+        n.insert(it);
+    }
+    
+    priority_queue<vector<int>, vector<vector<int>>, cmp> pq;
+    
+    int sz = report.size();
+    for(int i = 0; i < sz; i++) {
+        string s = report[i];
+        int prv = 0;
+        int sum = 0;
+        for(int j = 0; j < s.size(); j++) {
+            if(s[j] == ' ' || j == s.size() - 1) {
+                string str = s.substr(prv, (j == s.size() - 1? s.size(): j) - prv);
+                // cout << str << " ";
+                prv = j + 1;
+                if(p.count(str)) sum += 3;
+                if(n.count(str)) sum -= 1;
             }
-            // cout << sum << " " << id[i] << "\n";
-            pq.push({sum, id[i]});
         }
-        cout << "\n";
-        vector<int> ans;
-        while(!pq.empty() && k--) {
-            cout << pq.top()[0] << " " << pq.top()[1] << "\n";
-            ans.push_back(pq.top()[1]);
-            pq.pop();
-        }
-        return ans;
+        // cout << sum << " " << id[i] << "\n";
+        pq.push({sum, id[i]});
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given:
-- Two lists of words, `pos` and `neg`. Words in the `pos` list are associated with positive points, and words in the `neg` list are associated with negative points.
-- A list of student reports, where each report contains a list of words. Each word in the report contributes to the score of the student. If the word is in the `pos` list, it adds 3 points; if the word is in the `neg` list, it subtracts 1 point.
-- Each student has a unique ID provided in the `id` list corresponding to each report.
-
-We need to return the top `k` students based on their total score from the reports. If two students have the same score, the student with the smaller ID comes first.
-
-### Approach
-
-We will use the following steps to solve the problem:
-
-1. **Initialize data structures**:
-   - We will use two sets, `p` and `n`, to store the positive and negative words for quick lookup. The set provides constant time complexity for checking if a word belongs to the positive or negative list.
-   - A priority queue will help us maintain the students' scores in descending order. If two students have the same score, the student with the smaller ID will be prioritized. This can be efficiently handled using a custom comparator.
-
-2. **Score calculation**:
-   - For each report, we will compute the total score by checking each word in the report. If the word is in the positive list (`pos`), we add 3 points; if it’s in the negative list (`neg`), we subtract 1 point.
-   - The result of each student's score, along with their ID, will be stored in a priority queue.
-
-3. **Returning top `k` students**:
-   - After processing all reports and storing the scores in the priority queue, we will pop the top `k` students from the queue.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Define the custom comparator class `cmp`
-```cpp
-class cmp {
-public:
-    bool operator()(vector<int> &a, vector<int> &b) {
-        if(a[0] == b[0]) return a[1] > b[1];  // If scores are the same, prioritize smaller ID
-        return a[0] < b[0];  // Otherwise, prioritize higher score
+    cout << "\n";
+    vector<int> ans;
+    while(!pq.empty() && k--) {
+        cout << pq.top()[0] << " " << pq.top()[1] << "\n";
+        ans.push_back(pq.top()[1]);
+        pq.pop();
     }
-};
-```
-- The comparator is used to ensure that the priority queue is ordered based on the score (`a[0]`). If two scores are equal, the student with the smaller ID (`a[1]`) is prioritized.
-
-#### Step 2: Define the main function `topStudents`
-
-```cpp
-class Solution {
-public:
-    vector<int> topStudents(vector<string>& pos, vector<string>& neg, vector<string>& report, vector<int>& id, int k) {
-        set<string> p, n;
-        for(auto it: pos) {
-            p.insert(it);  // Insert positive words into the set 'p'
-        }
-        for(auto it: neg) {
-            n.insert(it);  // Insert negative words into the set 'n'
-        }
-```
-- First, two sets `p` and `n` are initialized to store positive and negative words. We use sets for efficient word look-up.
-
-```cpp
-        priority_queue<vector<int>, vector<vector<int>>, cmp> pq;
-```
-- A priority queue (`pq`) is initialized. The queue will store pairs of score and student ID. The `cmp` class is used to ensure proper sorting in the queue.
-
-```cpp
-        int sz = report.size();
-        for(int i = 0; i < sz; i++) {
-            string s = report[i];  // Fetch the current student's report
-            int prv = 0;
-            int sum = 0;
-            for(int j = 0; j < s.size(); j++) {
-                if(s[j] == ' ' || j == s.size() - 1) {
-                    string str = s.substr(prv, (j == s.size() - 1? s.size(): j) - prv);
-                    prv = j + 1;
-                    if(p.count(str)) sum += 3;  // Add 3 points if word is in 'pos'
-                    if(n.count(str)) sum -= 1;  // Subtract 1 point if word is in 'neg'
-                }
-            }
-            pq.push({sum, id[i]});  // Push the score and student ID into the priority queue
-        }
-```
-- For each report in the `report` list:
-  - We split the report into words by scanning through each character.
-  - For each word, we check if it’s in the positive list `p` or the negative list `n`.
-  - We calculate the score by adding 3 for positive words and subtracting 1 for negative words.
-  - The total score along with the student ID is pushed into the priority queue.
-
-#### Step 3: Extract top `k` students
-
-```cpp
-        vector<int> ans;
-        while(!pq.empty() && k--) {
-            ans.push_back(pq.top()[1]);  // Push the student ID of the top element into 'ans'
-            pq.pop();  // Remove the top element
-        }
-        return ans;  // Return the list of top 'k' student IDs
-    }
-};
-```
-- After all reports are processed and the priority queue contains the students sorted by their scores (and IDs in case of ties), we pop the top `k` students from the queue.
-- The student IDs of the top `k` students are collected into the `ans` vector and returned as the result.
-
-### Example Walkthrough
-
-Let’s walk through an example to understand how the algorithm works.
-
-#### Example Input:
-
-```cpp
-vector<string> pos = {"math", "science", "english"};
-vector<string> neg = {"history", "geography"};
-vector<string> report = {"math science history", "science english geography", "math english history"};
-vector<int> id = {101, 102, 103};
-int k = 2;
+    return ans;
+}
 ```
 
-#### Step-by-step Execution:
-1. **Initialize sets**:
-   - `p = {"math", "science", "english"}`
-   - `n = {"history", "geography"}`
+The `topStudents` function calculates the top `k` students based on a report of positive and negative feedback words. Students are rewarded or penalized based on the occurrence of these words in their report, and the final result returns the top `k` students ordered by their score.
 
-2. **Process reports**:
-   - **Report 1**: "math science history"
-     - `sum = 0`
-     - Add points for "math" and "science" from `p`, subtract for "history" from `n`.
-     - Final score = `3 + 3 - 1 = 5`
-     - Push `(5, 101)` into the priority queue.
-   
-   - **Report 2**: "science english geography"
-     - `sum = 0`
-     - Add points for "science" and "english" from `p`, subtract for "geography" from `n`.
-     - Final score = `3 + 3 - 1 = 5`
-     - Push `(5, 102)` into the priority queue.
-   
-   - **Report 3**: "math english history"
-     - `sum = 0`
-     - Add points for "math" and "english" from `p`, subtract for "history" from `n`.
-     - Final score = `3 + 3 - 1 = 5`
-     - Push `(5, 103)` into the priority queue.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> topStudents(vector<string>& pos, vector<string>& neg, vector<string>& report, vector<int>& id, int k) {
+	```
+	Defines the `topStudents` function, which takes in five parameters: a list of positive words `pos`, a list of negative words `neg`, the student reports `report`, student ids `id`, and the integer `k` which determines how many top students to return.
 
-3. **Priority Queue** after processing all reports:
-   - `(5, 101)`
-   - `(5, 102)`
-   - `(5, 103)`
+2. **Set Initialization**
+	```cpp
+	    set<string> p, n;
+	```
+	Initializes two sets, `p` and `n`, to store the positive and negative words respectively.
 
-4. **Extract top `k = 2` students**:
-   - The first two students in the priority queue will be selected based on their ID order:
-     - `101`, `102` are selected (in order of IDs).
+3. **Set Population**
+	```cpp
+	    for(auto it: pos) {
+	```
+	Iterates through the list of positive words `pos` and adds each word to the set `p`.
 
-#### Output:
+4. **Set Population**
+	```cpp
+	        p.insert(it);
+	```
+	Inserts each positive word into the set `p`.
 
-```cpp
-{101, 102}
-```
+5. **Set Population**
+	```cpp
+	    for(auto it: neg) {
+	```
+	Iterates through the list of negative words `neg` and adds each word to the set `n`.
 
-### Complexity Analysis
+6. **Set Population**
+	```cpp
+	        n.insert(it);
+	```
+	Inserts each negative word into the set `n`.
 
-#### Time Complexity:
-- **Set Construction**: Constructing the sets `p` and `n` takes \(O(m)\), where \(m\) is the total number of words in the `pos` and `neg` lists.
-- **Report Processing**: For each report, we process each word, which takes \(O(w)\) time, where \(w\) is the number of words in the report. Thus, processing all reports takes \(O(s \cdot w)\), where \(s\) is the number of students (size of `report`).
-- **Priority Queue Operations**: We perform \(O(s \log s)\) operations for pushing all students into the priority queue and then \(O(k \log s)\) operations for extracting the top `k` students.
-- **Total Time Complexity**: \(O(s \cdot w + s \log s)\), where `s` is the number of students and `w` is the average number of words in a report.
+7. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<vector<int>, vector<vector<int>>, cmp> pq;
+	```
+	Initializes a priority queue `pq` to store the students' scores and ids, ordered by their scores using a custom comparator `cmp`.
 
-#### Space Complexity:
-- **Sets for Words**: The space complexity for the sets `p` and `n` is \(O(m)\), where \(m\) is the total number of words in the `pos` and `neg` lists.
-- **Priority Queue**: The priority queue stores up to `s` students, so its space complexity is \(O(s)\).
-- **Total Space Complexity**: \(O(m + s)\).
+8. **Size Calculation**
+	```cpp
+	    int sz = report.size();
+	```
+	Calculates the size of the `report` vector, which corresponds to the number of students.
 
-### Conclusion
+9. **Loop Structure**
+	```cpp
+	    for(int i = 0; i < sz; i++) {
+	```
+	Starts a loop to iterate over each student report.
 
-The solution efficiently calculates the top `k` students based on their scores, using sets for quick lookup and a priority queue for sorting students by score and ID. This approach is optimal in both time and space for handling large inputs, with a clear and maintainable implementation.
+10. **Variable Initialization**
+	```cpp
+	        string s = report[i];
+	```
+	Stores the current student's report (a string) in the variable `s`.
+
+11. **Variable Initialization**
+	```cpp
+	        int prv = 0;
+	```
+	Initializes a variable `prv` to track the position of the previous space in the report for word extraction.
+
+12. **Variable Initialization**
+	```cpp
+	        int sum = 0;
+	```
+	Initializes a variable `sum` to accumulate the student's score based on positive and negative words.
+
+13. **Word Extraction Loop**
+	```cpp
+	        for(int j = 0; j < s.size(); j++) {
+	```
+	Starts a loop to iterate over each character in the student's report string `s`.
+
+14. **Character Check**
+	```cpp
+	            if(s[j] == ' ' || j == s.size() - 1) {
+	```
+	Checks if the current character is a space or if it's the last character in the string to extract a word.
+
+15. **Word Extraction**
+	```cpp
+	                string str = s.substr(prv, (j == s.size() - 1? s.size(): j) - prv);
+	```
+	Extracts the current word from the report string `s` using `substr` and stores it in `str`.
+
+16. **Word Extraction**
+	```cpp
+	                prv = j + 1;
+	```
+	Updates `prv` to the position of the next character after the space or the last character in the string.
+
+17. **Score Calculation**
+	```cpp
+	                if(p.count(str)) sum += 3;
+	```
+	If the word is found in the positive set `p`, it adds 3 points to the `sum`.
+
+18. **Score Calculation**
+	```cpp
+	                if(n.count(str)) sum -= 1;
+	```
+	If the word is found in the negative set `n`, it subtracts 1 point from the `sum`.
+
+19. **Priority Queue Insertion**
+	```cpp
+	        pq.push({sum, id[i]});
+	```
+	Pushes a pair of the calculated score `sum` and the student's id into the priority queue `pq`.
+
+20. **Result Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	Initializes a vector `ans` to store the ids of the top `k` students.
+
+21. **Priority Queue Processing**
+	```cpp
+	    while(!pq.empty() && k--) {
+	```
+	Starts a while loop to process the priority queue `pq` and extract the top `k` students.
+
+22. **Priority Queue Processing**
+	```cpp
+	        cout << pq.top()[0] << " " << pq.top()[1] << "\n";
+	```
+	Outputs the score and id of the top student in the priority queue.
+
+23. **Result Population**
+	```cpp
+	        ans.push_back(pq.top()[1]);
+	```
+	Adds the id of the top student to the result vector `ans`.
+
+24. **Priority Queue Processing**
+	```cpp
+	        pq.pop();
+	```
+	Removes the top student from the priority queue `pq`.
+
+25. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans` containing the ids of the top `k` students.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) - The best case occurs when there is minimal feedback, but sorting still takes O(n log n) time.
+- **Average Case:** O(n log n) - The average case involves iterating over the reports and sorting the students, which takes O(n log n) time.
+- **Worst Case:** O(n log n) - In the worst case, the solution needs to iterate over all feedback reports and sort the students, resulting in O(n log n) time complexity.
+
+The time complexity is driven by the sorting step, which dominates the calculation of scores.
+
+### Space Complexity 💾
+- **Best Case:** O(n) - The space complexity remains O(n) in the best case, where only a small number of students and reports are processed.
+- **Worst Case:** O(n) - The space complexity is dominated by the storage of feedback reports and the priority queue.
+
+The space complexity is influenced by the need to store feedback reports and student scores.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reward-top-k-students/description/)
 

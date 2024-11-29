@@ -14,128 +14,194 @@ img_src = ""
 youtube = "kyyf-hiGeVc"
 youtube_upload_date="2021-12-26"
 youtube_thumbnail="https://i.ytimg.com/vi/kyyf-hiGeVc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s consisting of parentheses '(' and ')', and a binary string locked of the same length. Each position in locked determines whether the corresponding character in s can be changed or not. If locked[i] is '1', the character s[i] cannot be modified, but if locked[i] is '0', you can change s[i] to either '(' or ')'. Your task is to determine if it is possible to make the string s a valid parentheses string by changing the positions where locked[i] is '0'. A valid parentheses string is defined by the following conditions: It is either '()', or a concatenation of valid parentheses strings, or it can be written as (A) where A is a valid parentheses string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string s representing the parentheses and a binary string locked representing which characters can be modified.
+- **Example:** `s = ')())(', locked = '01001'`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- s consists of '(' and ')'.
+	- locked consists of '0' and '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canBeValid(string s, string lck) {
-        
-        return (s.size() % 2) == 0 && check(s, lck, '(') && check(s, lck, ')');
-        
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to make s a valid parentheses string by modifying the characters that correspond to '0' in locked. Otherwise, return false.
+- **Example:** `For s = ')())(', locked = '01001', the output is true.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if it's possible to modify certain characters in s to make it a valid parentheses string.
+
+- Check if the string length is even, as a valid parentheses string must have an even number of characters.
+- Use a helper function to check the string from left to right, counting the open and closed parentheses while considering the positions where characters can be modified (i.e., where locked[i] = '0').
+- Use another helper function to check the string from right to left to ensure the string can be balanced correctly from both directions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings s and locked are non-empty.
+- Each character in s is either '(' or ')'.
+- Each character in locked is either '0' or '1'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: s = ')())(', locked = '01001'`  \
+  **Explanation:** In this example, we can change the characters at positions 1, 4, and 5 to balance the parentheses, resulting in a valid string. The output is true.
+
+- **Input:** `Example 2: s = '(()', locked = '010'`  \
+  **Explanation:** In this case, no modification can balance the parentheses, so the output is false.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to use a greedy method to count the number of valid parentheses from left to right and right to left while respecting the locked positions.
+
+### Initial Thoughts 💭
+- The length of the string must be even for it to potentially be valid.
+- We need to track both the open and closed parentheses counts while considering the positions where characters can be changed.
+- A two-pass solution works: one pass from left to right to handle opening parentheses and another from right to left for closing parentheses.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, it cannot be a valid parentheses string, so return false.
+- Ensure the solution runs efficiently for the maximum input size of 100,000.
+- If the string consists entirely of locked characters that already form a valid parentheses string, return true.
+- The solution should run in O(n) time to handle the largest inputs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canBeValid(string s, string lck) {
     
-    bool check(string s, string lck, char op) {
+    return (s.size() % 2) == 0 && check(s, lck, '(') && check(s, lck, ')');
+    
+}
 
-        int blk = 0, wild = 0;
-        int n = s.size();
+bool check(string s, string lck, char op) {
 
-        int st  =  ( op == '(' ) ? 0 :  n - 1;
-        int nd  =  ( op == '(' ) ? n - 1:  0;
-        int dir =  ( op == '(' ) ? 1 : -1;
+    int blk = 0, wild = 0;
+    int n = s.size();
 
-        for(int i = st; (i < n) && (i >= 0); i += dir) {
+    int st  =  ( op == '(' ) ? 0 :  n - 1;
+    int nd  =  ( op == '(' ) ? n - 1:  0;
+    int dir =  ( op == '(' ) ? 1 : -1;
 
-            if(lck[i] == '1') blk += (s[i] == op) ? 1: -1;
-            else              wild++;
+    for(int i = st; (i < n) && (i >= 0); i += dir) {
 
-            if(blk + wild < 0) return false;
+        if(lck[i] == '1') blk += (s[i] == op) ? 1: -1;
+        else              wild++;
 
-        }
-
-        return blk <= wild;
+        if(blk + wild < 0) return false;
 
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    return blk <= wild;
 
-The problem is to determine if a given string `s`, composed of parentheses, can be made valid by replacing some of its characters using a lock string `lck`. The string `lck` consists of characters '0' and '1', where '1' indicates that the character at that position in `s` cannot be changed (it is locked) and '0' means it can be changed. A valid string of parentheses means that every opening bracket '(' has a corresponding closing bracket ')' and they are correctly nested.
+}
+```
 
-### Approach
+This code defines two functions to check if a string of parentheses can be valid, considering blocked and wildcard positions.
 
-To solve this problem, we need to validate whether the parentheses in the string `s` can be balanced considering the constraints imposed by the `lck` string. The overall approach involves checking if the number of parentheses can be balanced using the characters that are not locked. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool canBeValid(string s, string lck) {
+	```
+	Defines the main function `canBeValid`, which checks if the parentheses in the string `s` can be valid given the locking conditions in string `lck`.
 
-1. **Initial Validity Check**:
-   - We first check if the length of `s` is even. If it's odd, it cannot be a valid parentheses string since each opening bracket must have a matching closing bracket.
+2. **Return Statement**
+	```cpp
+	    return (s.size() % 2) == 0 && check(s, lck, '(') && check(s, lck, ')');
+	```
+	Checks if the size of the string `s` is even and both opening and closing parentheses can be valid by calling the `check` function for each.
 
-2. **Checking Parentheses Balance**:
-   - We utilize two separate checks: one for the opening bracket '(' and another for the closing bracket ')'.
-   - During each check, we maintain counters for the number of locked brackets (`blk`) and the number of wildcards (`wild`).
-   - As we traverse through the string, we increment or decrement the locked brackets based on the characters in `s` and check against the wildcards available.
+3. **Function Definition**
+	```cpp
+	bool check(string s, string lck, char op) {
+	```
+	Defines the helper function `check`, which verifies if a certain type of parenthesis (`(` or `)`) can be correctly matched in string `s` considering the locking conditions in `lck`.
 
-### Code Breakdown (Step by Step)
+4. **Variable Initialization**
+	```cpp
+	    int blk = 0, wild = 0;
+	```
+	Initializes variables `blk` (for blocked parentheses) and `wild` (for wildcards).
 
-1. **Function Definition**:
-   ```cpp
-   bool canBeValid(string s, string lck) {
-       return (s.size() % 2) == 0 && check(s, lck, '(') && check(s, lck, ')');
-   }
-   ```
-   - The function `canBeValid` checks if the string `s` can potentially be valid.
-   - It first checks if the length of `s` is even.
-   - It then calls the `check` function for both opening and closing parentheses.
+5. **Variable Initialization**
+	```cpp
+	    int n = s.size();
+	```
+	Stores the size of string `s` in variable `n`.
 
-2. **Check Function**:
-   ```cpp
-   bool check(string s, string lck, char op) {
-       int blk = 0, wild = 0;
-       int n = s.size();
-   ```
-   - The `check` function initializes counters for locked brackets (`blk`) and wildcards (`wild`).
-   - It retrieves the size of `s`.
+6. **Logic**
+	```cpp
+	    int st  =  ( op == '(' ) ? 0 :  n - 1;
+	```
+	Sets the starting index `st` based on whether the operator is `(` or `)`. For `(`, it starts from the beginning of the string, otherwise from the end.
 
-3. **Setting Direction**:
-   ```cpp
-   int st  =  ( op == '(' ) ? 0 :  n - 1;
-   int nd  =  ( op == '(' ) ? n - 1:  0;
-   int dir =  ( op == '(' ) ? 1 : -1;
-   ```
-   - Depending on whether we are checking for '(' or ')', we set the starting index (`st`), ending index (`nd`), and direction of iteration (`dir`).
+7. **Logic**
+	```cpp
+	    int nd  =  ( op == '(' ) ? n - 1:  0;
+	```
+	Sets the end index `nd` based on whether the operator is `(` or `)`. For `(`, it ends at the last index, otherwise at the start.
 
-4. **Iterating Through the String**:
-   ```cpp
-   for(int i = st; (i < n) && (i >= 0); i += dir) {
-   ```
-   - A loop iterates through the string based on the defined direction.
+8. **Logic**
+	```cpp
+	    int dir =  ( op == '(' ) ? 1 : -1;
+	```
+	Sets the direction of iteration (`dir`) based on whether the operator is `(` or `)`. For `(`, direction is positive (left to right), and for `)`, it's negative (right to left).
 
-5. **Counting Locked and Wildcards**:
-   ```cpp
-   if(lck[i] == '1') blk += (s[i] == op) ? 1: -1;
-   else              wild++;
-   ```
-   - If the character in `lck` is '1' (locked), we update the `blk` counter based on whether `s[i]` is the current operation character (op). If it's '0', we increment the wildcard counter.
+9. **Loop**
+	```cpp
+	    for(int i = st; (i < n) && (i >= 0); i += dir) {
+	```
+	Starts a loop from the calculated index `st`, iterating in the specified direction (`dir`) until the string bounds are reached.
 
-6. **Validity Check**:
-   ```cpp
-   if(blk + wild < 0) return false;
-   ```
-   - If at any point the sum of `blk` and `wild` becomes negative, it indicates that there are more closing brackets than opening ones that can be paired, so the function returns false.
+10. **Conditional Logic**
+	```cpp
+	        if(lck[i] == '1') blk += (s[i] == op) ? 1: -1;
+	```
+	Checks if the current character is blocked. If so, adjusts the `blk` counter based on whether the character matches the operator (`op`).
 
-7. **Final Check**:
-   ```cpp
-   return blk <= wild;
-   ```
-   - Finally, we check if the number of locked opening brackets can be matched with the available wildcards.
+11. **Increment**
+	```cpp
+	        else              wild++;
+	```
+	If the current character is not blocked, it increments the wildcard counter `wild`.
 
-### Complexity Analysis
+12. **Early Exit**
+	```cpp
+	        if(blk + wild < 0) return false;
+	```
+	If the sum of `blk` and `wild` becomes negative, it means the parentheses are invalid, so the function returns `false`.
 
-- **Time Complexity**: \(O(n)\)
-  - The algorithm iterates through the string `s` twice, once for each type of parentheses, resulting in a linear time complexity.
+13. **Return Statement**
+	```cpp
+	    return blk <= wild;
+	```
+	Returns `true` if the number of blocked parentheses is less than or equal to the number of wildcards, indicating a valid configuration.
 
-- **Space Complexity**: \(O(1)\)
-  - The algorithm uses a constant amount of additional space for counters, independent of the size of the input.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The time complexity is O(n), where n is the length of the input string s.
 
-The provided solution effectively determines if a string of parentheses can be made valid under the constraints set by a lock string. By separating the checks for opening and closing brackets, the algorithm ensures that it correctly accounts for locked characters while efficiently validating the balance of parentheses. This approach guarantees a robust solution with optimal time complexity, making it suitable for handling larger inputs as well. The clear structure of the code, coupled with the logical flow of checks, enhances its readability and maintainability.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only use a constant amount of extra space to track counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/description/)
 

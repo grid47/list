@@ -14,168 +14,187 @@ img_src = ""
 youtube = "QI4kCksMru0"
 youtube_upload_date="2022-12-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QI4kCksMru0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting of the characters 'a', 'b', and 'c', and a non-negative integer `k`. Each minute, you can choose to take either the leftmost or the rightmost character from `s`. Your task is to determine the minimum number of minutes required to collect at least `k` occurrences of each character ('a', 'b', and 'c'). If it is not possible to collect `k` of each character, return `-1`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` consisting of only the letters 'a', 'b', and 'c', and a non-negative integer `k`.
+- **Example:** `s = "abcabcabc", k = 2`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists of only the letters 'a', 'b', and 'c'.
+	- 0 <= k <= s.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int takeCharacters(string s, int k) {
-        
-        map<char, int> mp;
-        for(int i = 0; i < s.size(); i++)
-            mp[s[i]]++;
-        if(mp['a'] < k || mp['b'] < k || mp['c'] < k) return -1;
-        
-        int j = 0, mx = 0;
-        for(int i = 0; i < s.size(); i++) {
-            // select max window which does not decrements frq below k;
-            mp[s[i]]--;
-            while(j <= i && mp[s[i]] < k) {
-                mp[s[j]]++;
-                j++;
-            }
-            mx = max(mx, i - j + 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of minutes required to take at least `k` of each character, or -1 if it is not possible.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- If it's not possible to take `k` of each character, return -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to compute the minimum number of minutes required to collect at least `k` occurrences of each character from the string `s`.
+
+- Count the occurrences of each character in `s`.
+- If there are less than `k` occurrences of any character ('a', 'b', or 'c'), return -1.
+- Use a sliding window technique to find the minimum subarray that contains at least `k` occurrences of each character.
+- Return the size of this subarray, or -1 if no such subarray exists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `s` contains only the characters 'a', 'b', and 'c'.
+- The integer `k` is non-negative and less than or equal to the length of the string.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "abcabcabc", k = 2`  \
+  **Explanation:** We need to find the shortest time to collect at least 2 occurrences of each character. By taking 3 characters from the left and 3 characters from the right, we can collect 2 'a's, 2 'b's, and 2 'c's in a total of 6 minutes.
+
+- **Input:** `s = "aaa", k = 2`  \
+  **Explanation:** Since there are no 'b' or 'c' characters in the string, it is impossible to collect at least 2 of each character, so the answer is -1.
+
+{{< dots >}}
+## Approach 🚀
+The goal is to find the minimum number of minutes required to collect at least `k` of each character ('a', 'b', and 'c').
+
+### Initial Thoughts 💭
+- We can use a sliding window approach to find the shortest subarray containing the required characters.
+- If we can't find a subarray with the required characters, return -1.
+- The problem is essentially about finding the minimum window containing all the required characters.
+{{< dots >}}
+### Edge Cases 🌐
+- If `s` is empty, return -1.
+- Ensure the solution works efficiently for large inputs (up to 10^5 characters).
+- If `k` is 0, the result should be 0 because no characters need to be collected.
+- Ensure that the sliding window approach handles all edge cases.
+{{< dots >}}
+## Code 💻
+```cpp
+int takeCharacters(string s, int k) {
+    
+    map<char, int> mp;
+    for(int i = 0; i < s.size(); i++)
+        mp[s[i]]++;
+    if(mp['a'] < k || mp['b'] < k || mp['c'] < k) return -1;
+    
+    int j = 0, mx = 0;
+    for(int i = 0; i < s.size(); i++) {
+        // select max window which does not decrements frq below k;
+        mp[s[i]]--;
+        while(j <= i && mp[s[i]] < k) {
+            mp[s[j]]++;
+            j++;
         }
-        return s.size() - mx;
+        mx = max(mx, i - j + 1);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the minimum length of a substring that can be taken from a given string `s` such that in the substring, each of the characters 'a', 'b', and 'c' appears at least `k` times. If no such substring exists, return `-1`. If there are multiple such substrings, return the length of the shortest one.
-
-### Approach
-
-To solve this problem efficiently, we need to use a sliding window technique combined with frequency counting. The sliding window approach is particularly useful for problems that involve substrings or subarrays with specific conditions, like counting characters or ensuring certain properties hold over a range of indices.
-
-### Step-by-Step Explanation
-
-We will employ the following steps to solve the problem:
-
-1. **Initial Frequency Count**: 
-   - We begin by counting the frequency of each character in the entire string `s`. If any of the characters 'a', 'b', or 'c' appear less than `k` times in the string, it is impossible to form a valid substring, so we immediately return `-1`.
-
-2. **Sliding Window**: 
-   - We will maintain a sliding window with two pointers (`i` and `j`) and try to expand the window by incrementing the right pointer (`i`) while ensuring that the frequency of characters 'a', 'b', and 'c' inside the window is at least `k`. 
-   - If the frequency of any character falls below `k` within the window, we increment the left pointer (`j`) to reduce the window size and restore the condition that each of 'a', 'b', and 'c' should appear at least `k` times.
-
-3. **Maximize Window Size**:
-   - For each window, we calculate its size (i.e., the number of characters inside the window) and track the largest window size that satisfies the condition. This is done by keeping track of `mx`, which stores the maximum valid window size found so far.
-
-4. **Calculate Result**:
-   - After iterating over all possible windows, the result is determined by subtracting the maximum valid window size from the length of the string `s`. The intuition is that the characters outside this maximum valid window must be removed to satisfy the condition.
-
-### Code Breakdown
-
-#### Step 1: Initialize Frequency Count for 'a', 'b', and 'c'
-```cpp
-map<char, int> mp;
-for(int i = 0; i < s.size(); i++) 
-    mp[s[i]]++;
-```
-- We use a `map` to count the frequency of each character in the string `s`. 
-- This will help us check if any of the characters 'a', 'b', or 'c' appear fewer than `k` times. If any of them do, we can immediately return `-1`, as it's impossible to find a valid substring.
-
-#### Step 2: Check if it is Possible to Form a Valid Substring
-```cpp
-if(mp['a'] < k || mp['b'] < k || mp['c'] < k) 
-    return -1;
-```
-- If the string doesn't have enough of 'a', 'b', or 'c', we return `-1` because no valid substring can be formed.
-
-#### Step 3: Sliding Window with Two Pointers
-```cpp
-int j = 0, mx = 0;
-for(int i = 0; i < s.size(); i++) {
-    // select max window which does not decrements frq below k;
-    mp[s[i]]--;
-    while(j <= i && mp[s[i]] < k) {
-        mp[s[j]]++;
-        j++;
-    }
-    mx = max(mx, i - j + 1);
+    return s.size() - mx;
 }
 ```
-- We start with two pointers: `i` and `j`, where `i` represents the end of the current window and `j` represents the start.
-- For each character at index `i`, we decrease its frequency in the `map` to represent that it is part of the current window.
-- Then, we check whether the frequency of any character ('a', 'b', or 'c') in the window falls below `k`. If so, we increment the `j` pointer to shrink the window and restore the condition that the frequency of each character should be at least `k`.
-- We also keep track of the size of the largest valid window found so far (`mx`).
 
-#### Step 4: Return the Result
-```cpp
-return s.size() - mx;
-```
-- Once we have found the largest valid window that satisfies the condition, the result is the difference between the total length of the string `s` and the largest window size. This gives us the minimum number of characters that need to be removed from the string to satisfy the condition.
+This function calculates the minimum number of characters to be removed from a string so that all characters in the string appear at least 'k' times.
 
-### Example Walkthrough
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int takeCharacters(string s, int k) {
+	```
+	Define the function `takeCharacters`, which takes a string `s` and an integer `k` as parameters, and returns the minimum number of characters to remove to make the frequency of all characters at least `k`.
 
-#### Example 1:
-**Input**:
-```cpp
-string s = "aaabbbccc", k = 2;
-```
-- Initial frequency count:
-  - `a`: 3, `b`: 3, `c`: 3.
-- All characters appear more than `k = 2` times.
-- Now, we slide the window over the string to find the shortest substring that can be removed:
-  - In the first pass, the entire string is valid, as it contains at least `k` of each character. The maximum window size is 9.
-  - Therefore, the result is `9 - 9 = 0`.
+2. **Map Initialization**
+	```cpp
+	    map<char, int> mp;
+	```
+	Initialize a map `mp` to store the frequency of each character in the string.
 
-**Output**:
-```cpp
-0
-```
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < s.size(); i++)
+	```
+	Iterate through each character in the string `s`.
 
-#### Example 2:
-**Input**:
-```cpp
-string s = "aabbcc", k = 2;
-```
-- Initial frequency count:
-  - `a`: 2, `b`: 2, `c`: 2.
-- All characters appear exactly `k = 2` times.
-- In this case, the entire string is valid, so the result is `6 - 6 = 0`.
+4. **Frequency Counting**
+	```cpp
+	        mp[s[i]]++;
+	```
+	Increment the frequency count of the current character in the map.
 
-**Output**:
-```cpp
-0
-```
+5. **Condition Check**
+	```cpp
+	    if(mp['a'] < k || mp['b'] < k || mp['c'] < k) return -1;
+	```
+	Check if any of the characters 'a', 'b', or 'c' appear fewer than `k` times. If true, return -1 as it's not possible to achieve the condition.
 
-#### Example 3:
-**Input**:
-```cpp
-string s = "aabbbccc", k = 3;
-```
-- Initial frequency count:
-  - `a`: 2, `b`: 3, `c`: 3.
-- The character 'a' appears only 2 times, which is less than `k = 3`. Hence, the answer is `-1` because we cannot form a valid substring where each character appears at least `k` times.
+6. **Variable Initialization**
+	```cpp
+	    int j = 0, mx = 0;
+	```
+	Initialize two variables: `j` to represent the left boundary of the sliding window, and `mx` to store the maximum valid window size.
 
-**Output**:
-```cpp
--1
-```
+7. **Sliding Window**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Start a second loop to iterate over the string, using a sliding window approach to find the largest window where all characters meet the frequency requirement.
 
-### Complexity Analysis
+8. **Decrement Frequency**
+	```cpp
+	        mp[s[i]]--;
+	```
+	Decrement the frequency of the current character as it's included in the window.
 
-#### Time Complexity:
-- **Initial Frequency Count**: We iterate over the string `s` to calculate the frequency of each character, which takes \(O(n)\), where `n` is the length of the string.
-- **Sliding Window**: We move both pointers (`i` and `j`) over the string, and for each index `i`, we potentially move `j` forward to restore the validity of the window. The total time complexity of this part is also \(O(n)\).
-- **Overall Time Complexity**: The time complexity is \(O(n)\), where `n` is the length of the string.
+9. **Sliding Window Adjustment**
+	```cpp
+	        while(j <= i && mp[s[i]] < k) {
+	```
+	Start a while loop to move the left boundary `j` forward to maintain the frequency condition for all characters in the window.
 
-#### Space Complexity:
-- We use a `map` to store the frequency of characters in the string. Since there are only three characters of interest ('a', 'b', and 'c'), the space complexity is \(O(1)\), as the size of the map is constant.
-- **Overall Space Complexity**: The space complexity is \(O(1)\), since the space used does not scale with the input size.
+10. **Increment Frequency**
+	```cpp
+	            mp[s[j]]++;
+	```
+	Increment the frequency of the character at the left boundary `j` since it's being excluded from the window.
 
-### Conclusion
+11. **Window Adjustment**
+	```cpp
+	            j++;
+	```
+	Move the left boundary `j` forward to shrink the window.
 
-The sliding window technique is highly effective for problems involving substrings with specific conditions. This solution efficiently finds the minimum number of characters that must be removed to satisfy the condition using \(O(n)\) time and \(O(1)\) space. The approach scales well even for large input sizes, ensuring that the solution is both time-efficient and space-efficient.
+12. **Max Window Size**
+	```cpp
+	        mx = max(mx, i - j + 1);
+	```
+	Update the maximum valid window size if the current window is larger than the previously found windows.
+
+13. **Return Statement**
+	```cpp
+	    return s.size() - mx;
+	```
+	Return the number of characters to be removed, which is the total length of the string minus the size of the largest valid window.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We use a sliding window technique, which processes each character once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+We only need a fixed amount of space for the character counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "jK6XXYezw2g"
 youtube_upload_date="2024-04-08"
 youtube_thumbnail="https://i.ytimg.com/vi/jK6XXYezw2g/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,134 @@ youtube_thumbnail="https://i.ytimg.com/vi/jK6XXYezw2g/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two binary trees. Your task is to check if these two trees are the same. Two binary trees are considered the same if they are structurally identical and the nodes have the same value at each corresponding position.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the roots of two binary trees, 'p' and 'q'. Each tree is represented by its root node, and each node contains a value as well as pointers to its left and right children.
+- **Example:** `p = [3, 5, 8, 2, 6], q = [3, 5, 8, 2, 6]`
+- **Constraints:**
+	- 0 <= number of nodes <= 100
+	- -104 <= Node.val <= 104
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-        if(p == NULL && q == NULL) return true;
-        if(p == NULL || q == NULL) return false;
-        int ans = p->val == q->val;
-        ans &= isSameTree(p->left, q->left);
-        ans &= isSameTree(p->right, q->right);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function should return 'true' if the two trees are identical, and 'false' otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean value.
 
-### 🌳 **Check if Two Binary Trees are Identical**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to recursively check if the structure and values of corresponding nodes in the two trees are the same.
 
-The problem asks us to determine if two **binary trees** are **identical**. Two binary trees are considered identical if:
-- Both trees have the same number of nodes.
-- The values of corresponding nodes are the same.
-- The structure (i.e., the left and right children of every node) is identical.
+- If both trees are empty (i.e., both root nodes are null), return true.
+- If one tree is empty and the other is not, return false.
+- If both trees are non-empty, check if the value of the current node in both trees is the same.
+- Recursively check the left and right subtrees.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both trees are binary trees.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `p = [1, 2, 3], q = [1, 2, 3]`  \
+  **Explanation:** Both trees are structurally identical and have the same values, so the output is true.
 
----
+- **Input:** `p = [1, 2], q = [1, null, 2]`  \
+  **Explanation:** The structures of the trees differ because one tree has a null value where the other tree has a node, so the output is false.
 
-### 🔑 **Approach:**
+- **Input:** `p = [1, 2, 3], q = [1, 1, 2]`  \
+  **Explanation:** The trees are not identical because the node values are different at the same positions, so the output is false.
 
-To solve this problem, we can use a **recursive** approach to compare the two binary trees. The algorithm follows a **divide-and-conquer** strategy where we:
-1. Compare the root nodes of the two trees.
-2. If they are identical, recursively check the left and right subtrees of both trees.
-3. If the values or structure of any of the nodes don’t match, return `false`.
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using a recursive approach that checks the equality of the two trees node by node.
 
-The recursive comparison ensures that all corresponding nodes in both trees are compared, and if any difference is found, the function will return `false` early. If all nodes match, return `true`.
-
----
-
-### 💻 **Code Breakdown (Step by Step):**
-
-#### **1. Function Definition**
-
+### Initial Thoughts 💭
+- Both trees must have the same structure and corresponding node values to be considered the same.
+- We can solve this problem recursively by checking the root nodes and then moving to the left and right children of the trees.
+{{< dots >}}
+### Edge Cases 🌐
+- If both trees are empty, return true.
+- The solution should be efficient enough to handle up to 100 nodes in each tree.
+- If one tree has a null value where the other has a node, return false.
+- Ensure that the recursion depth does not exceed the limits for large inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool isSameTree(TreeNode* p, TreeNode* q) {
+bool isSameTree(TreeNode* p, TreeNode* q) {
+    if(p == NULL && q == NULL) return true;
+    if(p == NULL || q == NULL) return false;
+    int ans = p->val == q->val;
+    ans &= isSameTree(p->left, q->left);
+    ans &= isSameTree(p->right, q->right);
+    return ans;
+}
 ```
 
-- The function `isSameTree` is part of the `Solution` class. It takes two arguments: `p` and `q`, which are pointers to the root nodes of the two binary trees that need to be compared.
+This function checks if two binary trees are identical by recursively comparing their nodes' values and structure.
 
-#### **2. Base Case for Both Trees Being Null**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isSameTree(TreeNode* p, TreeNode* q) {
+	```
+	We define the function 'isSameTree' which takes two pointers to the root nodes of two trees and returns whether the trees are identical.
 
-```cpp
-        if(p == NULL && q == NULL) return true;
-```
+2. **Base Case 1**
+	```cpp
+	    if(p == NULL && q == NULL) return true;
+	```
+	If both nodes are NULL, it means both trees are empty, so they are considered identical.
 
-- This is the **base case** where both trees are `NULL`. If both `p` and `q` are `NULL`, it means that both trees are empty, and therefore, they are considered the same. Thus, we return `true`.
+3. **Base Case 2**
+	```cpp
+	    if(p == NULL || q == NULL) return false;
+	```
+	If one of the nodes is NULL and the other is not, the trees are not identical.
 
-#### **3. Handling One Tree Being Null**
+4. **Value Comparison**
+	```cpp
+	    int ans = p->val == q->val;
+	```
+	We compare the values of the current nodes. If they are not equal, the trees are not identical, and 'ans' is set to 0.
 
-```cpp
-        if(p == NULL || q == NULL) return false;
-```
+5. **Left Subtree Comparison**
+	```cpp
+	    ans &= isSameTree(p->left, q->left);
+	```
+	We recursively check if the left subtrees of both trees are identical by calling 'isSameTree' on the left children.
 
-- If one of the trees is `NULL` while the other is not, the trees cannot be the same because one tree has nodes while the other doesn’t. Therefore, we return `false`.
+6. **Right Subtree Comparison**
+	```cpp
+	    ans &= isSameTree(p->right, q->right);
+	```
+	We recursively check if the right subtrees of both trees are identical by calling 'isSameTree' on the right children.
 
-#### **4. Comparing Values of Current Nodes**
+7. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Finally, we return the result of all the comparisons. If all are true, the trees are identical.
 
-```cpp
-        int ans = p->val == q->val;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- If both trees are non-empty at this point, we compare the values of the current nodes in both trees, `p->val` and `q->val`.
-- The result of this comparison (`true` or `false`) is stored in the variable `ans`, where `true` is represented as `1` and `false` as `0`.
+In the worst case, we must check all nodes in both trees, where n is the number of nodes.
 
-#### **5. Recursive Comparison of Left and Right Subtrees**
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-```cpp
-        ans &= isSameTree(p->left, q->left);
-        ans &= isSameTree(p->right, q->right);
-```
+In the worst case, the recursion depth is equal to the height of the tree, which can be up to O(n) for a skewed tree. In the best case (balanced tree), it is O(log n).
 
-- After comparing the values of the current nodes, we proceed to recursively compare the left and right subtrees of both trees. 
-- If the left subtrees of `p` and `q` are identical, `isSameTree(p->left, q->left)` will return `true` (or `1`), and the same logic applies for the right subtrees.
-- The `&=` operator ensures that if any of the comparisons return `false` (or `0`), the overall result will be `false`. This allows us to short-circuit and return `false` if any mismatch is found at any level of recursion.
+**Happy Coding! 🎉**
 
-#### **6. Return the Final Result**
-
-```cpp
-        return ans;
-    }
-};
-```
-
-- The final result, stored in the variable `ans`, is returned. This result will be `true` if both trees are identical, and `false` otherwise.
-
----
-
-### 🧠 **Time and Space Complexity:**
-
-#### **Time Complexity:**
-
-The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the larger of the two trees. In the worst case, the algorithm needs to visit every node in both trees to perform the comparison. Therefore, the time complexity is proportional to the total number of nodes in the trees.
-
-#### **Space Complexity:**
-
-The space complexity is **O(h)**, where `h` is the height of the trees. This is due to the recursive calls made during the in-order traversal of the trees. In the worst case (i.e., the tree is unbalanced), the recursion stack can grow to the height of the tree, which could be equal to the number of nodes, resulting in a space complexity of **O(n)**. However, for balanced trees, the height `h` would be **O(log n)**, leading to a space complexity of **O(log n)**.
-
----
-
-### 🎯 **Conclusion:**
-
-This solution efficiently compares two binary trees by performing a **recursive in-order traversal** to compare their structure and node values. The **recursive comparison** ensures that all corresponding nodes are checked for equality, and the algorithm terminates early if a mismatch is detected. With a time complexity of **O(n)** and a space complexity of **O(h)**, this approach is optimal for solving the problem of determining whether two binary trees are identical.
-
----
-
-**Happy coding!** 🌱✨
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/same-tree/description/)
 

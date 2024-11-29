@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "zvBxnudTZmw"
 youtube_upload_date="2024-01-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/zvBxnudTZmw/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,91 +28,62 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/zvBxnudTZmw/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array nums with no duplicates, construct a maximum binary tree by recursively selecting the largest number as the root, and building the left and right subtrees from the elements before and after the largest number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer array with unique values.
+- **Example:** `nums = [6, 3, 8, 2, 5, 7, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 0 <= nums[i] <= 1000
+	- All integers in nums are unique
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root of the maximum binary tree, where each subtree is constructed according to the specified rules.
+- **Example:** `[8,3,7,2,5,null,4]`
+- **Constraints:**
+	- The output will be a binary tree structure representing the maximum binary tree.
 
-class Solution {
-public:
-    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        
-        vector<TreeNode*> stk;
-        
-        for(int num : nums) {
-            
-            TreeNode* cur = new TreeNode(num);
-            
-            while(!stk.empty() && stk.back()->val < num) {
-                cur->left = stk.back();
-                stk.pop_back();
-            }
-            
-            if(!stk.empty()) stk.back()->right = cur;
-            
-            stk.push_back(cur);
-            
-        }
-        
-        return stk.front();
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Build a binary tree where each node is the largest value in a subarray.
 
-### Problem Statement
+- 1. Find the largest element in the array.
+- 2. Make that element the root of the tree.
+- 3. Recursively build the left subtree using the elements before the largest element.
+- 4. Recursively build the right subtree using the elements after the largest element.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [6, 3, 8, 2, 5, 7, 4]`  \
+  **Explanation:** The largest number, 8, becomes the root. The subarrays to the left and right are [6, 3] and [2, 5, 7, 4], respectively. These subarrays are processed recursively, with 6 as the left child and 7 as the right child of the root.
 
-The problem asks us to construct a **Maximum Binary Tree** from a given list of integers. In this tree:
-- The root is the maximum value in the list.
-- The left subtree is the maximum binary tree for the elements to the left of the maximum value.
-- The right subtree is the maximum binary tree for the elements to the right of the maximum value.
+{{< dots >}}
+## Approach 🚀
+To construct the maximum binary tree, we find the largest value in the current subarray, make it the root, and then recursively build the left and right subtrees from the remaining elements.
 
-Given a list of integers, we need to return the root of the maximum binary tree constructed from these elements. 
-
-### Approach
-
-To solve this problem efficiently, we can utilize a **monotonic stack**. The basic idea is to iterate through the list of numbers, creating a binary tree where each node is constructed from the elements in the list based on their relative values. The stack helps to keep track of the nodes in the tree as we find the next largest number and build the tree in a way that respects the maximum value being the root of subtrees.
-
-The process involves iterating through the list, constructing nodes, and using the stack to correctly assign left and right children while ensuring that the tree adheres to the maximum binary tree properties. Specifically, the algorithm will:
-1. Use a stack to maintain the nodes as we iterate through the list.
-2. For each number, check if it is larger than the top of the stack. If so, pop the stack and make the current number the left child of the popped node.
-3. Attach the current number as the right child of the node on the stack if necessary.
-4. At the end of the iteration, the first node in the stack will be the root of the tree.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **TreeNode Definition**:
-
-```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-```
-- A `TreeNode` structure is defined to represent each node in the binary tree. Each node contains a value (`val`), a left child (`left`), and a right child (`right`). The constructor initializes these properties.
-
-#### 2. **Main Function (constructMaximumBinaryTree)**:
-
+### Initial Thoughts 💭
+- The maximum binary tree can be built by using a divide-and-conquer approach.
+- This problem requires finding the maximum value efficiently in the array and handling the recursion correctly for left and right subtrees.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will not be empty as it contains at least one element.
+- For large inputs, ensure that the solution handles up to 1000 elements efficiently.
+- Handle cases where the array is in strictly increasing or strictly decreasing order.
+- Ensure that the solution is optimized for time complexity, especially for larger arrays.
+{{< dots >}}
+## Code 💻
 ```cpp
 TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+    
     vector<TreeNode*> stk;
     
     for(int num : nums) {
+        
         TreeNode* cur = new TreeNode(num);
         
         while(!stk.empty() && stk.back()->val < num) {
@@ -122,60 +94,95 @@ TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
         if(!stk.empty()) stk.back()->right = cur;
         
         stk.push_back(cur);
+        
     }
     
     return stk.front();
+    
 }
 ```
 
-- **`stk`**: This is a vector that acts as a stack to keep track of the nodes as we iterate through the list.
-- **Loop through each number**: We iterate over the `nums` array to create a new `TreeNode` for each number.
-  
-#### 3. **Handling Smaller Numbers**:
+This function constructs a maximum binary tree from a given vector of integers. It uses a stack to maintain nodes in the tree, ensuring that the largest values appear as parents.
 
-```cpp
-while(!stk.empty() && stk.back()->val < num) {
-    cur->left = stk.back();
-    stk.pop_back();
-}
-```
-- **Condition**: This `while` loop checks if the top node of the stack has a value less than the current number (`num`). If it does, it means the current number should be the root of a new subtree, and we need to make the top node the left child of the current node.
-- We pop the stack and attach the popped node as the left child of the current node (`cur`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+	```
+	This is the function header for `constructMaximumBinaryTree`. It takes a vector of integers `nums` and returns a pointer to the root of the constructed binary tree.
 
-#### 4. **Attaching Right Child**:
+2. **Stack Initialization**
+	```cpp
+	    vector<TreeNode*> stk;
+	```
+	A stack `stk` is initialized to help in constructing the binary tree. The stack will hold nodes as we build the tree.
 
-```cpp
-if(!stk.empty()) stk.back()->right = cur;
-```
-- If there are still nodes left in the stack after the `while` loop, it means the current node (`cur`) is smaller than the node at the top of the stack, and thus should be the right child of that node.
+3. **Loop Through Input**
+	```cpp
+	    for(int num : nums) {
+	```
+	The function iterates over each integer in the `nums` vector to construct the binary tree.
 
-#### 5. **Push Current Node onto Stack**:
+4. **Node Creation**
+	```cpp
+	        TreeNode* cur = new TreeNode(num);
+	```
+	A new `TreeNode` is created for each value in the `nums` vector. This node will eventually be part of the binary tree.
 
-```cpp
-stk.push_back(cur);
-```
-- We push the current node onto the stack so that it can potentially be used as the left or right child of a future node as we continue to iterate through the list.
+5. **While Loop for Left Children**
+	```cpp
+	        while(!stk.empty() && stk.back()->val < num) {
+	```
+	The `while` loop checks if the last node in the stack has a smaller value than the current number. If true, this means the current node will be a parent of the nodes in the stack.
 
-#### 6. **Return the Root Node**:
+6. **Link Left Child**
+	```cpp
+	            cur->left = stk.back();
+	```
+	The node at the top of the stack becomes the left child of the current node, as the current node has a larger value.
 
-```cpp
-return stk.front();
-```
-- After all nodes are processed, the root of the tree will be the first node in the stack. This is because, by the end of the iteration, the last node will have become the root, and all other nodes will be appropriately attached as left or right children.
+7. **Pop Stack**
+	```cpp
+	            stk.pop_back();
+	```
+	The node is removed from the stack after being linked as the left child of the current node.
 
-### Complexity
+8. **Link Right Child**
+	```cpp
+	        if(!stk.empty()) stk.back()->right = cur;
+	```
+	If the stack is not empty, the current node is set as the right child of the node at the top of the stack.
 
-#### Time Complexity:
-- The time complexity is **O(n)**, where `n` is the number of elements in the input array `nums`. Each node is pushed onto and popped from the stack at most once, resulting in **O(n)** operations for each element.
+9. **Push Current Node to Stack**
+	```cpp
+	        stk.push_back(cur);
+	```
+	The current node is added to the stack to be used as a potential parent for the next node.
 
-#### Space Complexity:
-- The space complexity is **O(n)**, as the stack stores all `n` nodes in the worst case. Additionally, the space used by the tree nodes is also **O(n)**, as we are constructing the entire tree.
+10. **Return Root**
+	```cpp
+	    return stk.front();
+	```
+	The root of the tree, which is at the front of the stack after the loop completes, is returned.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution efficiently constructs the **Maximum Binary Tree** using a stack-based approach. The algorithm ensures that each element in the input list is processed in linear time, with each node being added to and removed from the stack exactly once. This results in an optimal **O(n)** time complexity, making the solution well-suited for large input sizes. The space complexity is also linear due to the stack and tree node storage.
+The time complexity is linear, O(n), because each element is processed once.
 
-The approach effectively constructs the maximum binary tree by leveraging the properties of the maximum binary tree and using a stack to manage the relationship between nodes. This solution is easy to understand and provides a concise way to solve the problem with optimal time and space complexities.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the recursion stack and the tree nodes.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-binary-tree/description/)
 

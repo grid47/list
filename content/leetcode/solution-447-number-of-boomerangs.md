@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "QPsEA1Ls3jQ"
 youtube_upload_date="2019-11-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QPsEA1Ls3jQ/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,66 +28,75 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/QPsEA1Ls3jQ/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given n distinct points in the 2D plane. A boomerang is defined as a tuple of three points (i, j, k) where the distance between points i and j equals the distance between points i and k. Count the total number of boomerangs that can be formed from the given points.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A list of n distinct points in the 2D plane, each represented by a pair of integers [xi, yi].
+- **Example:** `[[0,0], [1,0], [2,0]]`
+- **Constraints:**
+	- 1 <= n <= 500
+	- -10^4 <= xi, yi <= 10^4
+	- All points are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfBoomerangs(vector<vector<int>>& points) {
-        map<int, int> mp;
-        int res = 0;
-        for(int i = 0; i < points.size(); i++) {
-            for(int j = 0; j < points.size(); j++) {
-                int d = getDist(points[i], points[j]);
-                mp[d]++;
-            }
-            for(auto [_, val]: mp)
-            res += val * (val - 1);
-            mp.clear();
-        }
-        return res;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the number of boomerangs formed from the given points.
+- **Example:** `2`
+- **Constraints:**
+	- The number of boomerangs can be zero if no such triplets can be formed.
 
-    int getDist(vector<int> a, vector<int> b) {
-        int x = a[0] - b[0];
-        int y = a[1] - b[1];
-        return x * x + y * y;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the total number of boomerangs by comparing distances between points.
 
-### Problem Statement
+- 1. For each point, calculate the distances to all other points.
+- 2. Store the frequency of each distance in a map (or hashmap).
+- 3. For each distinct distance, calculate the number of ways to pick two points that share the same distance from the current point.
+- 4. The number of boomerangs is the sum of all valid pairs for all distances.
+{{< dots >}}
+### Problem Assumptions ✅
+- All points are distinct and represented as pairs of integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[0,0], [1,0], [2,0]]`  \
+  **Explanation:** The two boomerangs formed are: [[1,0],[0,0],[2,0]] and [[1,0],[2,0],[0,0]].
 
-The problem asks us to find the number of **boomerangs** in a given set of 2D points. A **boomerang** is defined as a set of three points `(i, j, k)` such that:
-- The distance between points `i` and `j` is equal to the distance between points `i` and `k`.
-- The points are distinct, and all points must be different.
+- **Input:** `[[1,1], [2,2], [3,3]]`  \
+  **Explanation:** The two boomerangs formed are: [[1,1], [2,2], [3,3]] and [[2,2], [1,1], [3,3]].
 
-The task is to count how many such sets of three points (boomerangs) exist in the given list of points.
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating distances between all pairs of points and counting valid triplets where the distance between two points is equal to the distance between another two points.
 
-### Approach
-
-To solve the problem, we can break it down into the following steps:
-
-1. **Understanding the Problem**:
-   - We need to identify sets of three points that form boomerangs. The key insight is that for each point `i`, we can calculate the distance from `i` to all other points `j` and `k`. If two other points have the same distance from `i`, they form a boomerang with `i`.
-   - To efficiently calculate the distance between points, we use the squared distance formula: `d = (x2 - x1)² + (y2 - y1)²`. Using squared distance avoids unnecessary floating-point precision errors and makes comparisons straightforward.
-
-2. **Plan**:
-   - **For each point `i`**:
-     - Calculate the distance between `i` and every other point `j`.
-     - Store these distances in a map (or hash map) where the key is the distance, and the value is the count of how many points are at that distance from `i`.
-     - For each unique distance, if there are `n` points at that distance, then the number of ways to choose two points from these `n` points (which form a boomerang with `i`) is `n * (n - 1)`, because we choose two distinct points out of `n` and each pair can form a distinct boomerang.
-     - Accumulate the boomerang count.
-
-3. **Efficiency Consideration**:
-   - The approach essentially compares all pairs of points for each point in the list, which gives a time complexity of `O(n^2)` where `n` is the number of points. This is feasible because the solution uses a hash map to efficiently count distances.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Helper Function to Calculate Distance
-
+### Initial Thoughts 💭
+- For each point, we can calculate distances to all other points, which gives us potential boomerangs.
+- By storing the frequency of distances, we can efficiently calculate the number of valid boomerangs.
+- We can optimize the process by using a hashmap to store the distances from each point.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one point, so no need to handle empty inputs.
+- For large inputs (up to 500 points), ensure that the solution efficiently handles the calculations of distances and the counting of pairs.
+- Ensure that the solution handles cases with no possible boomerangs, such as when there are fewer than 3 points.
+- The algorithm should efficiently handle the maximum constraint of 500 points.
+{{< dots >}}
+## Code 💻
 ```cpp
+int numberOfBoomerangs(vector<vector<int>>& points) {
+    map<int, int> mp;
+    int res = 0;
+    for(int i = 0; i < points.size(); i++) {
+        for(int j = 0; j < points.size(); j++) {
+            int d = getDist(points[i], points[j]);
+            mp[d]++;
+        }
+        for(auto [_, val]: mp)
+        res += val * (val - 1);
+        mp.clear();
+    }
+    return res;
+}
+
 int getDist(vector<int> a, vector<int> b) {
     int x = a[0] - b[0];
     int y = a[1] - b[1];
@@ -94,54 +104,117 @@ int getDist(vector<int> a, vector<int> b) {
 }
 ```
 
-- The function `getDist` computes the squared distance between two points `a` and `b`. The formula used is `(x2 - x1)² + (y2 - y1)²` where `a[0]` and `a[1]` are the coordinates of point `a`, and `b[0]` and `b[1]` are the coordinates of point `b`.
-- The squared distance is used to avoid floating-point calculations and maintain precision when comparing distances.
+This solution calculates the number of boomerangs in a set of points. A boomerang is a tuple of points such that the distance between one point and two other points is the same.
 
-#### Step 2: Main Logic for Counting Boomerangs
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfBoomerangs(vector<vector<int>>& points) {
+	```
+	Defines the main function to calculate the number of boomerangs in a set of points.
 
-```cpp
-map<int, int> mp;
-int res = 0;
-for(int i = 0; i < points.size(); i++) {
-    for(int j = 0; j < points.size(); j++) {
-        int d = getDist(points[i], points[j]);
-        mp[d]++;
-    }
-    for(auto [_, val]: mp)
-        res += val * (val - 1);
-    mp.clear();
-}
-```
+2. **Variable Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map to store distances and their frequencies for each pair of points.
 
-- `mp` is a map that stores the frequency of distances from a given point `i` to all other points.
-- We iterate through each point `i`. For each point `i`, we calculate the distance `d` between `i` and every other point `j`, and increment the count of that distance in `mp`.
-- After calculating all distances from point `i` to every other point, we calculate how many boomerangs can be formed. If there are `val` points at the same distance from `i`, the number of ways to form boomerangs is `val * (val - 1)` (choosing two distinct points from `val`).
-- Finally, we clear the map `mp` to prepare for the next point `i`.
+3. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	The result variable that will store the total number of boomerangs.
 
-#### Step 3: Return the Result
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < points.size(); i++) {
+	```
+	Loop over each point in the list of points.
 
-```cpp
-return res;
-```
+5. **Nested Loop**
+	```cpp
+	        for(int j = 0; j < points.size(); j++) {
+	```
+	Inner loop to compare the current point with every other point.
 
-- The variable `res` holds the total number of boomerangs found. Once all points have been processed, we return the final count.
+6. **Distance Calculation**
+	```cpp
+	            int d = getDist(points[i], points[j]);
+	```
+	Calculates the squared distance between two points.
 
-### Complexity
+7. **Map Operations**
+	```cpp
+	            mp[d]++;
+	```
+	Increments the count of the calculated distance in the map.
 
-#### Time Complexity:
-- **Outer Loops**: We have two nested loops: the outer loop iterates over each point (`O(n)`), and the inner loop iterates over all points for distance calculation (`O(n)`).
-- **Distance Calculation**: For each pair of points `(i, j)`, we calculate the squared distance, which is an `O(1)` operation.
-- **Total Time Complexity**: The overall time complexity of the algorithm is `O(n^2)` where `n` is the number of points. This is because for each point, we compute distances to every other point.
+8. **Map Iteration**
+	```cpp
+	        for(auto [_, val]: mp)
+	```
+	Iterate over the map to calculate boomerangs based on the distances.
 
-#### Space Complexity:
-- **Map Storage**: The space complexity is determined by the map `mp`, which stores the frequencies of distances. In the worst case, there can be `O(n)` distinct distances, so the space complexity is `O(n)`.
-- **Total Space Complexity**: The overall space complexity is `O(n)` for the map storage.
+9. **Result Calculation**
+	```cpp
+	        res += val * (val - 1);
+	```
+	For each distance, calculate how many boomerangs can be formed using the frequency of that distance.
 
-### Conclusion
+10. **Map Reset**
+	```cpp
+	        mp.clear();
+	```
+	Clears the map to start fresh for the next point.
 
-The solution effectively counts the number of boomerangs in a given set of points by calculating the squared distances between every pair of points and utilizing a map to count how many points lie at each distance. By iterating over each point and counting the possible boomerangs formed by pairs of points at the same distance, we achieve an optimal solution with a time complexity of `O(n^2)`.
+11. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the final count of boomerangs.
 
-This approach is efficient enough for moderate-sized input datasets and provides a clear and concise method for solving the problem using simple geometric insights and hash-based counting.
+12. **Helper Function Definition**
+	```cpp
+	int getDist(vector<int> a, vector<int> b) {
+	```
+	Helper function to calculate the squared distance between two points.
+
+13. **Distance Calculation**
+	```cpp
+	    int x = a[0] - b[0];
+	```
+	Calculates the difference in the x-coordinates of the two points.
+
+14. **Distance Calculation**
+	```cpp
+	    int y = a[1] - b[1];
+	```
+	Calculates the difference in the y-coordinates of the two points.
+
+15. **Return**
+	```cpp
+	    return x * x + y * y;
+	```
+	Returns the squared distance between the two points.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+In all cases, we need to calculate the distance between each pair of points, which results in O(n^2) time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
+
+In the worst case, we store distances for each point in a hashmap, resulting in O(n^2) space complexity.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-boomerangs/description/)
 

@@ -14,142 +14,183 @@ img_src = ""
 youtube = "oj7Rxz1r70g"
 youtube_upload_date="2021-02-13"
 youtube_thumbnail="https://i.ytimg.com/vi/oj7Rxz1r70g/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an inventory of different colored balls. The customer wants to buy a specific number of balls, and each ball has a value based on how many of that color are still available. Calculate the maximum total value you can obtain after fulfilling the customer's order. The result should be returned modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of integers representing the inventory of different colored balls and an integer representing the total number of orders the customer wants.
+- **Example:** `inventory = [4, 7], orders = 5`
+- **Constraints:**
+	- 1 <= inventory.length <= 10^5
+	- 1 <= inventory[i] <= 10^9
+	- 1 <= orders <= min(sum(inventory[i]), 10^9)
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mod = (int) 1e9 + 7;
-    int maxProfit(vector<int>& inv, int orders) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum total value that can be attained after selling the orders of colored balls. The result should be modulo 10^9 + 7.
+- **Example:** `Output: 25`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the value obtained by selling the balls in the most valuable order, starting with the most abundant colors.
+
+- Sort the inventory in descending order to maximize the value for each ball sold.
+- Sell the balls from the most abundant colors first, decreasing the value of each ball with each sale.
+- Calculate the total value after fulfilling the number of orders, ensuring no more balls are sold than are available.
+- Return the total value modulo 10^9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain valid values for inventory and orders, with no need to handle negative values or invalid input.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `inventory = [4, 7], orders = 5`  \
+  **Explanation:** First, sell the highest valued ball (from the largest inventory) to maximize the value. Then, sell balls from the next inventory, continuing the process until all orders are fulfilled.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the inventory, then selling balls in the most valuable order while keeping track of the total value and reducing the value of the balls with each sale.
+
+### Initial Thoughts 💭
+- To maximize the total value, sell balls starting from the color with the most balls in stock.
+- We need to consider both the value of the balls and the decreasing stock while fulfilling the order.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure there is always at least one color of balls in the inventory and at least one order.
+- The solution must efficiently handle large values for inventory sizes and ball counts.
+- When the orders are fewer than the number of balls available, we need to ensure we only sell the required number of balls.
+- Ensure the solution works efficiently within the given input size limits.
+{{< dots >}}
+## Code 💻
+```cpp
+int mod = (int) 1e9 + 7;
+int maxProfit(vector<int>& inv, int orders) {
+    
+    
+    long n = inv.size(), res = 0;
+    
+    sort(inv.rbegin(), inv.rend());
+    
+    for(int i = 0, col = 1; i < n && orders > 0; i++, col++) {
+        long cur = inv[i], prv = i + 1 < n? inv[i + 1]: 0;
+        long depth = min((long)orders/col, (long)cur - prv);
+        orders -= depth * col;
         
-        
-        long n = inv.size(), res = 0;
-        
-        sort(inv.rbegin(), inv.rend());
-        
-        for(int i = 0, col = 1; i < n && orders > 0; i++, col++) {
-            long cur = inv[i], prv = i + 1 < n? inv[i + 1]: 0;
-            long depth = min((long)orders/col, (long)cur - prv);
-            orders -= depth * col;
-            
-        res = (res + ((cur * (cur + 1) - (cur - depth) * (cur - depth + 1)) / 2 * col)) % mod;
-                  
-            if(cur - prv > depth) {
-                res = (res + orders * (cur - depth)) % mod;
-                break;
-            }
+    res = (res + ((cur * (cur + 1) - (cur - depth) * (cur - depth + 1)) / 2 * col)) % mod;
+              
+        if(cur - prv > depth) {
+            res = (res + orders * (cur - depth)) % mod;
+            break;
         }
-        
-        /*
-            There is a value k, for which all the balls above this value are sold.
-            
-        */
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to maximize the profit from selling a given number of orders of items, where each item can be sold at its inventory level. You are provided with an array `inv` that represents the inventory levels of different items, and a variable `orders` that denotes the total number of items you can sell. The objective is to determine the maximum profit obtainable while selling these items under the constraints of their respective inventories.
-
-### Approach
-
-To achieve this, the algorithm follows these steps:
-
-1. **Sort the Inventory**: The inventory is sorted in descending order to prioritize selling higher inventory items first.
-2. **Iterate Through the Inventory**: The algorithm iterates through the sorted inventory while attempting to fulfill the number of orders.
-3. **Calculate Potential Sales**: For each inventory level, the algorithm calculates how many items can be sold at that level, taking into account the remaining orders and the next lower inventory level.
-4. **Update Orders and Profit**: Adjust the remaining orders after fulfilling sales and update the total profit accordingly.
-5. **Return the Result**: Finally, return the maximum profit achieved.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the provided code:
-
-```cpp
-class Solution {
-public:
-    int mod = (int) 1e9 + 7;
-```
-- We define a class `Solution` and initialize a modulo constant `mod` to prevent integer overflow when calculating profits.
-
-```cpp
-    int maxProfit(vector<int>& inv, int orders) {
-```
-- We define the public method `maxProfit` that accepts a vector of integers `inv` (representing inventory levels) and an integer `orders` (the total number of orders to fulfill).
-
-```cpp
-        long n = inv.size(), res = 0;
+    
+    /*
+        There is a value k, for which all the balls above this value are sold.
         
-        sort(inv.rbegin(), inv.rend());
+    */
+    return res;
+}
 ```
-- We determine the size of the inventory `n` and initialize a variable `res` to accumulate the profit. The inventory is sorted in descending order using `sort` with `rbegin` and `rend` to process the highest inventories first.
 
-```cpp
-        for(int i = 0, col = 1; i < n && orders > 0; i++, col++) {
-```
-- We start a loop over the inventory with an index `i` and a variable `col` initialized to 1. `col` represents the current depth or the number of items available to sell.
+This function calculates the maximum profit from selling inventory items by using a greedy algorithm and modulo arithmetic for large sums. The inventory is processed in descending order to maximize profit at each step.
 
-```cpp
-            long cur = inv[i], prv = i + 1 < n ? inv[i + 1] : 0;
-```
-- For the current inventory level `cur`, we retrieve the next lower inventory level `prv`. If `i + 1` exceeds the size of the inventory, `prv` is set to 0.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int mod = (int) 1e9 + 7;
+	```
+	Defines a constant to handle large numbers with modulo arithmetic.
 
-```cpp
-            long depth = min((long)orders / col, (long)cur - prv);
-```
-- The `depth` variable calculates how many items can be sold at the current inventory level without exceeding the number of orders. It considers both the remaining orders divided by the current depth and the difference between `cur` and `prv`.
+2. **Function Definition**
+	```cpp
+	int maxProfit(vector<int>& inv, int orders) {
+	```
+	Begins the function definition for calculating the maximum profit from inventory sales.
 
-```cpp
-            orders -= depth * col;
-```
-- We reduce the number of orders by the number of items sold at the current inventory level, calculated as `depth * col`.
+3. **Sorting**
+	```cpp
+	    sort(inv.rbegin(), inv.rend());
+	```
+	Sorts the inventory in descending order to prioritize higher profits.
 
-```cpp
-            res = (res + ((cur * (cur + 1) - (cur - depth) * (cur - depth + 1)) / 2 * col)) % mod;
-```
-- The profit from selling `depth` items at the current level is computed using the formula for the sum of an arithmetic series. The total profit is updated, and the modulo operation ensures we remain within bounds.
+4. **Loop**
+	```cpp
+	    for(int i = 0, col = 1; i < n && orders > 0; i++, col++) {
+	```
+	Iterates through inventory items, calculating profit and reducing orders.
 
-```cpp
-            if (cur - prv > depth) {
-                res = (res + orders * (cur - depth)) % mod;
-                break;
-            }
-```
-- If there are more items at the current inventory level than can be sold, and we still have remaining orders, we compute the additional profit from fulfilling these orders at the current level. The loop is then exited since all orders are now accounted for.
+5. **Calculation**
+	```cpp
+	        long cur = inv[i], prv = i + 1 < n? inv[i + 1]: 0;
+	```
+	Determines the current inventory level and the next level for comparison.
 
-```cpp
-        return res;
-    }
-};
-```
-- Finally, we return the total profit calculated.
+6. **Calculation**
+	```cpp
+	        long depth = min((long)orders/col, (long)cur - prv);
+	```
+	Calculates the depth of items to sell at the current level.
 
-### Complexity
+7. **Update**
+	```cpp
+	        orders -= depth * col;
+	```
+	Decreases the remaining order count by the number of items sold.
 
-- **Time Complexity**: 
-  - Sorting the inventory takes \( O(n \log n) \), and the subsequent loop processes the inventory in \( O(n) \). Hence, the overall time complexity is \( O(n \log n) \).
-  
-- **Space Complexity**: 
-  - The space complexity is \( O(1) \) for variable storage since we are using a constant amount of extra space beyond the input.
+8. **Calculation**
+	```cpp
+	    res = (res + ((cur * (cur + 1) - (cur - depth) * (cur - depth + 1)) / 2 * col)) % mod;
+	```
+	Updates the result with the profit from selling the current level's items.
 
-### Conclusion
+9. **Condition**
+	```cpp
+	        if(cur - prv > depth) {
+	```
+	Checks if additional items remain at the current level after depth sales.
 
-The `maxProfit` method effectively calculates the maximum profit obtainable from fulfilling a given number of orders based on available inventory levels. By employing a greedy approach—selling the highest available inventory first—the algorithm ensures that profits are maximized while adhering to the constraints of inventory.
+10. **Update**
+	```cpp
+	            res = (res + orders * (cur - depth)) % mod;
+	```
+	Handles remaining orders by selling items at the current level.
 
-**Key Takeaways**:
-1. **Greedy Algorithm**: The solution demonstrates the greedy algorithm's effectiveness in optimizing profit by focusing on higher inventory levels first.
-2. **Efficiency through Sorting**: The sorting step, while computationally intensive, is necessary to ensure we are always considering the most profitable items available for sale.
-3. **Modular Arithmetic**: The use of modular arithmetic is crucial in avoiding overflow and ensuring that the results remain within the acceptable limits of integer values.
+11. **Break**
+	```cpp
+	            break;
+	```
+	Exits the loop once all orders are fulfilled.
 
-This method is applicable in various scenarios involving inventory management and sales optimization, making it a useful strategy in resource allocation and financial planning contexts.
+12. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the total profit calculated.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+Sorting the inventory takes O(n log n) time, where n is the number of distinct colors in the inventory.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the inventory and the sorted list of inventories.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sell-diminishing-valued-colored-balls/description/)
 

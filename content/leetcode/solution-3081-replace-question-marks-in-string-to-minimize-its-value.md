@@ -14,152 +14,215 @@ img_src = ""
 youtube = "dYPKJ4Kelxw"
 youtube_upload_date="2024-03-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/dYPKJ4Kelxw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting of lowercase English letters and question marks (`?`). Your task is to replace all occurrences of `?` with any lowercase English letter in such a way that the total cost of the resulting string is minimized. The cost of a string is the sum of how many times each character has appeared before its current position. If there are multiple solutions with the same minimal cost, return the lexicographically smallest one.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` of length `n`, where `1 <= n <= 10^5`, and each character is either a lowercase English letter or `?`.
+- **Example:** `s = "a?a?"`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s[i] is either a lowercase English letter or '?'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string minimizeStringValue(string s) {
-        vector<int> frq(26, 0), taken;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string where all occurrences of '?' are replaced with lowercase English letters in a way that minimizes the total cost. If there are multiple strings with the same minimal cost, return the lexicographically smallest one.
+- **Example:** `Output: "abac"`
+- **Constraints:**
 
-        int n = s.size();
-        for(char c: s) if(c != '?') frq[c - 'a']++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Minimize the cost of the resulting string by replacing '?' characters.
 
-        for(int i = 0; i < n; i++) {
-            if(s[i] != '?') continue;
+- Iterate over the string and maintain a frequency count of the letters already seen.
+- For each '?', select the smallest letter that has appeared the least number of times so far.
+- Replace '?' with this letter and update the frequency count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string can be large, so the solution must be efficient.
+- The string only contains lowercase English letters or '?' characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "a?a?"`  \
+  **Explanation:** In this case, replacing the '?' with 'b' and 'c' results in the string 'abac', which has a minimal cost of 1.
 
-            int mn = 0;
-            for(int j = 0; j < 26; j++)
-                if(frq[j] < frq[mn]) mn = j;
+- **Input:** `s = "???"`  \
+  **Explanation:** Replacing the '?' with 'a', 'b', and 'c' results in the string 'abc', which has a minimal cost of 0.
 
-            taken.push_back(mn);
-            frq[mn]++;
-        }
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we need to replace the '?' characters with the lexicographically smallest possible letters while ensuring that the resulting string has the minimal cost.
 
-        sort(taken.begin(), taken.end());
+### Initial Thoughts 💭
+- Replacing '?' with letters that minimize the cost requires tracking the frequency of each letter in the string.
+- We need to ensure that we minimize the cost while maintaining the lexicographical order.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string contains only '?', the solution will replace each '?' with the smallest unused letters.
+- For strings with the maximum length, the solution should be optimized to run in O(n) time.
+- Strings that already have distinct letters or no '?' should be handled correctly.
+- The solution should handle strings up to 10^5 characters efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+string minimizeStringValue(string s) {
+    vector<int> frq(26, 0), taken;
 
-        int idx = 0;
-        for(int i = 0; i < n; i++) {
-            if(s[i] == '?')
-            s[i] = taken[idx++] + 'a';
-        }
+    int n = s.size();
+    for(char c: s) if(c != '?') frq[c - 'a']++;
 
-        return s;
+    for(int i = 0; i < n; i++) {
+        if(s[i] != '?') continue;
+
+        int mn = 0;
+        for(int j = 0; j < 26; j++)
+            if(frq[j] < frq[mn]) mn = j;
+
+        taken.push_back(mn);
+        frq[mn]++;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement:
+    sort(taken.begin(), taken.end());
 
-In this problem, we are given a string `s` that may contain lowercase English letters and a few wildcard characters denoted by `?`. Our goal is to replace each `?` with a lowercase English letter such that the "value" of the string is minimized. The value of the string is defined as the maximum frequency of any character in the string after replacing all `?` characters. We need to return the modified string where the value is minimized, i.e., the maximum frequency of any character is as small as possible.
-
-### Approach:
-
-To minimize the string value, we need to replace the `?` characters in a way that balances the frequency of characters in the string. The strategy is as follows:
-
-1. **Count Existing Frequencies:** First, we need to know the frequency of each character (except `?`) in the string. This will help us identify which characters are less frequent and which are more frequent.
-  
-2. **Distribute `?` Characters:** For each `?` in the string, we will replace it with the character that has the smallest frequency so far. This way, we avoid creating a situation where one character’s frequency becomes much larger than the others.
-
-3. **Keep Track of Changes:** After replacing a `?`, we increment the frequency of that character to keep track of the number of times it has been used.
-
-4. **Sort the Used Characters:** Once we know which characters to use for the replacements, we will sort them to ensure that we replace the `?` characters in the most balanced way, starting from the least frequent character.
-
-5. **Final String Construction:** After replacing all `?` characters, the string will be the one with the smallest possible maximum character frequency.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Frequency Calculation
-
-```cpp
-vector<int> frq(26, 0), taken;
-int n = s.size();
-for(char c: s) if(c != '?') frq[c - 'a']++;
-```
-
-- We initialize a vector `frq` of size 26 to store the frequency of each character in the string. The index of the vector corresponds to the character (`'a'` maps to index 0, `'b'` to index 1, and so on).
-- We iterate through the string `s` and for every character `c` that is not a `?`, we increment its frequency in the `frq` vector.
-
-#### Step 2: Replace `?` with Minimum Frequency Characters
-
-```cpp
-for(int i = 0; i < n; i++) {
-    if(s[i] != '?') continue;
-
-    int mn = 0;
-    for(int j = 0; j < 26; j++)
-        if(frq[j] < frq[mn]) mn = j;
-
-    taken.push_back(mn);
-    frq[mn]++;
-}
-```
-
-- We iterate through the string again and focus on the `?` characters. For each `?`, we need to replace it with the character that has the smallest frequency.
-- We initialize `mn` to 0 and iterate through the `frq` vector to find the index `mn` that has the minimum frequency.
-- After identifying the character with the smallest frequency (`mn`), we append it to the `taken` list and increment the frequency of that character in the `frq` vector.
-
-#### Step 3: Sort the Replacements
-
-```cpp
-sort(taken.begin(), taken.end());
-```
-
-- After collecting all the characters that we will use to replace the `?`, we sort them. This ensures that the replacement happens in a balanced way, with the least frequent characters being used first.
-
-#### Step 4: Construct the Final String
-
-```cpp
-int idx = 0;
-for(int i = 0; i < n; i++) {
-    if(s[i] == '?')
+    int idx = 0;
+    for(int i = 0; i < n; i++) {
+        if(s[i] == '?')
         s[i] = taken[idx++] + 'a';
+    }
+
+    return s;
 }
 ```
 
-- We iterate through the string one final time. For each `?`, we replace it with the next character from the `taken` list (which has been sorted).
-- We use the variable `idx` to keep track of the current position in the `taken` list. For each replacement, we convert the integer index back to a character by adding `'a'` and update the string.
+This function replaces all '?' characters in the input string `s` with the lexicographically smallest characters such that no character appears more times than any other character.
 
-#### Step 5: Return the Modified String
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string minimizeStringValue(string s) {
+	```
+	Defines the function `minimizeStringValue` which takes a string `s` and returns a modified string where '?' characters are replaced with the lexicographically smallest characters.
 
-```cpp
-return s;
-```
+2. **Variable Initialization**
+	```cpp
+	    vector<int> frq(26, 0), taken;
+	```
+	Declares a vector `frq` to track the frequency of each letter ('a' to 'z') in the string `s`. The `taken` vector will store the indices of characters to replace '?' with.
 
-- After all replacements are done, we return the modified string `s` with the minimized value.
+3. **Size Calculation**
+	```cpp
+	    int n = s.size();
+	```
+	Calculates the length of the string `s` and stores it in `n`.
 
-### Complexity:
+4. **Frequency Count**
+	```cpp
+	    for(char c: s) if(c != '?') frq[c - 'a']++;
+	```
+	Loops through the string `s`, counting the frequency of each non-'?' character and storing it in the `frq` vector.
 
-#### Time Complexity:
+5. **Loop Through String**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins a loop through the string `s` to process each character.
 
-- **O(n + 26 * n log n + n)** where `n` is the length of the string.
-  - The first loop over the string to calculate frequencies runs in **O(n)** time.
-  - The second loop where we replace the `?` characters involves finding the minimum frequency character, which requires checking all 26 letters (constant time). Sorting the list of replacements takes **O(n log n)** time, as there are at most `n` `?` characters to replace.
-  - The final pass over the string to replace the characters takes **O(n)** time.
+6. **Skip Non-'?' Characters**
+	```cpp
+	        if(s[i] != '?') continue;
+	```
+	Skips the iteration if the current character is not a '?'.
 
-Thus, the time complexity is dominated by the sorting step, making it **O(n log n)** in the worst case.
+7. **Find Minimum Frequency**
+	```cpp
+	        int mn = 0;
+	```
+	Initializes `mn` to 0, which will track the index of the character with the smallest frequency.
 
-#### Space Complexity:
+8. **Find Smallest Frequency Character**
+	```cpp
+	        for(int j = 0; j < 26; j++)
+	```
+	Loops through all 26 lowercase English letters to find the character with the smallest frequency in `frq`.
 
-- **O(26 + n)** where `n` is the length of the string.
-  - We use a fixed-size array of 26 integers to store the frequencies of each character.
-  - The `taken` list can store up to `n` characters, which results in a space complexity of **O(n)**.
-  - Therefore, the total space complexity is **O(n)**.
+9. **Update Minimum Index**
+	```cpp
+	            if(frq[j] < frq[mn]) mn = j;
+	```
+	Updates `mn` to the index `j` if the frequency of the character at index `j` is smaller than the current minimum frequency.
 
-### Conclusion:
+10. **Store Chosen Character**
+	```cpp
+	        taken.push_back(mn);
+	```
+	Adds the index of the character with the smallest frequency to the `taken` vector.
 
-This approach solves the problem efficiently by minimizing the maximum frequency of any character after replacing all `?` characters. The strategy is both time-efficient and space-efficient, and it ensures that the resulting string has the smallest possible "value."
+11. **Update Frequency**
+	```cpp
+	        frq[mn]++;
+	```
+	Increments the frequency of the character chosen in the previous step.
 
-- **Time Complexity:** O(n log n)
-- **Space Complexity:** O(n)
+12. **Sort Taken Characters**
+	```cpp
+	    sort(taken.begin(), taken.end());
+	```
+	Sorts the `taken` vector in ascending order, ensuring the characters are replaced lexicographically.
 
-By iterating over the string twice and using a frequency array, we manage to distribute the `?` characters optimally. Sorting the replacements ensures that the characters are assigned in a balanced manner, ultimately minimizing the maximum frequency in the string. This method is well-suited for solving the problem with large input sizes.
+13. **Initialize Index**
+	```cpp
+	    int idx = 0;
+	```
+	Initializes `idx` to 0, which will be used to track the index of the next character to place in the string.
+
+14. **Replace '?' Characters**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Loops through the string `s` again to replace '?' characters with the chosen characters from the `taken` vector.
+
+15. **Replace Character**
+	```cpp
+	        if(s[i] == '?')
+	```
+	Checks if the current character is a '?' that needs to be replaced.
+
+16. **Assign Smallest Character**
+	```cpp
+	        s[i] = taken[idx++] + 'a';
+	```
+	Replaces the '?' character with the corresponding character from the `taken` vector and increments `idx`.
+
+17. **Return Statement**
+	```cpp
+	    return s;
+	```
+	Returns the modified string `s` with all '?' characters replaced.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution iterates over the string once, making the time complexity O(n), where n is the length of the string.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since the frequency count array has a fixed size of 26 for the 26 lowercase English letters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/description/)
 

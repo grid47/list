@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "2NMMVnxV6lo"
 youtube_upload_date="2024-07-30"
 youtube_thumbnail="https://i.ytimg.com/vi/2NMMVnxV6lo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,135 +28,205 @@ youtube_thumbnail="https://i.ytimg.com/vi/2NMMVnxV6lo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string, write it in a zigzag pattern on a specified number of rows and then read the rows line by line to create the final string. Return this transformed string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string and an integer specifying the number of rows for the zigzag pattern.
+- **Example:** `Input: s = 'HELLOZIGZAG', numRows = 3`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s consists of English letters (lower-case and upper-case), ',' and '.'.
+	- 1 <= numRows <= 1000
 
-{{< highlight cpp >}}
-#include <string>
-#include <vector>
-#include <iostream>
-class Solution {
-public:
-    string convert(string str, int n) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the string after converting it into the zigzag pattern and reading it row by row.
+- **Example:** `Output: 'HLZGELOIZALG'`
+- **Constraints:**
+	- The output must be a single string.
 
-        int len = str.size();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Transform the string into the zigzag pattern and read row by row to form the final output.
+
+- Initialize an array of strings to represent each row in the zigzag pattern.
+- Iterate through the input string and append characters to appropriate rows in a zigzag manner.
+- Switch direction (downwards or upwards) when the top or bottom row is reached.
+- Concatenate the strings from all rows to create the final result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number of rows will always be less than or equal to the length of the string.
+- If numRows is 1, the result is the same as the input string.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'HELLOZIGZAG', numRows = 3`  \
+  **Explanation:** The zigzag pattern for 3 rows creates the final string 'HLZGELOIZALG'.
+
+- **Input:** `Input: s = 'DSACODE', numRows = 4`  \
+  **Explanation:** The zigzag pattern for 4 rows creates the final string 'DCOESADE'.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses a simulation approach to mimic the zigzag traversal and builds each row incrementally.
+
+### Initial Thoughts 💭
+- The zigzag traversal alternates direction (downwards or upwards) when boundaries are reached.
+- Using an array of strings for each row simplifies the logic for appending characters.
+- We can iterate through the string once while maintaining a direction flag and row index.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs due to constraints.
+- The solution should handle strings of length 1000 and up to 1000 rows efficiently.
+- If numRows is 1, the output is the same as the input string.
+- Ensure memory and time usage are optimized for large input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
+string convert(string str, int n) {
+
+    int len = str.size();
+    
+    if(n == 1) return str;
+    
+    vector<string> s(n, "");
+
+    bool down = true; int ridx = 1;
+    for (int i = 0; i < len; i++) {
+
+        s[ridx - 1] += str[i];
+        if (down) ridx++;
+        else      ridx--;
+
+        if ( (ridx == n) || 
+             (ridx == 1) ) 
+            down = !down;
         
-        if(n == 1) return str;
-        
-        vector<string> s(n, "");
-
-        bool down = true; int ridx = 1;
-        for (int i = 0; i < len; i++) {
-
-            s[ridx - 1] += str[i];
-            if (down) ridx++;
-            else      ridx--;
-
-            if ( (ridx == n) || 
-                 (ridx == 1) ) 
-                down = !down;
-            
-        }
-        string res = "";
-        for(int i = 0; i < n; i++)
-            res += s[i];
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### 💡 **Zigzag Conversion**
-
-Given a string `str`, convert it to a "zigzag" pattern across `n` rows and then read it row by row to produce the final string.
-
-#### ✨ **Example**
-For `str = "PAYPALISHIRING"` and `n = 3`, the zigzag pattern would look like:
-
-```
-P   A   H   N
-A P L S I I G
-Y   I   R
-```
-
-The final output, reading row-by-row, is `"PAHNAPLSIIGYIR"`.
-
----
-
-### ⚙️ **Approach: Simulating the Zigzag Pattern**
-
-1. **Special Case (`n == 1`):** If there's only one row, the result is the original string since no zigzag pattern can form.
-
-2. **Set Up Rows:** Use a vector of strings to represent each row. Each element in the vector corresponds to one row in the zigzag pattern.
-
-3. **Simulate Zigzag Movement:** Traverse through `str`:
-   - Place each character in the current row.
-   - Move "down" to the next row if we're descending; move "up" if ascending.
-   - Switch directions upon reaching the top or bottom row.
-
-4. **Form the Result String:** Concatenate the rows to produce the final string.
-
----
-
-### 📘 **Code Explanation**
-
-#### Step 1: Handle Special Case for Single Row
-
-```cpp
-if (n == 1) return str;
-```
-
-- If `n == 1`, the zigzag pattern is just the original string, so we can return it immediately.
-
-#### Step 2: Initialize Rows
-
-```cpp
-vector<string> rows(n, "");
-```
-
-- Create a vector `rows` with `n` empty strings, one for each row.
-
-#### Step 3: Simulate the Zigzag Pattern
-
-```cpp
-bool going_down = true; 
-int row_index = 0;
-for (char c : str) {
-    rows[row_index] += c;
-    if (row_index == 0) going_down = true;
-    if (row_index == n - 1) going_down = false;
-    row_index += going_down ? 1 : -1;
+    string res = "";
+    for(int i = 0; i < n; i++)
+        res += s[i];
+    return res;
 }
 ```
 
-- **Direction Control (`going_down`)**: `true` when moving downward, `false` when moving upward.
-- **Row Update**: 
-  - For each character `c`, place it in `rows[row_index]`.
-  - Toggle `going_down` at the top (`row_index == 0`) and bottom (`row_index == n - 1`) rows to change direction.
-  - Adjust `row_index` based on `going_down`.
+This code implements the `convert` function, which takes a string `str` and an integer `n` as input and returns a string formed by zigzagging the input string in a zigzag pattern of `n` rows.
 
-#### Step 4: Combine the Rows for the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string convert(string str, int n) {
+	```
+	Declare the `convert` function, which takes a string `str` and an integer `n` as input and returns a string.
 
-```cpp
-string result = "";
-for (const string& row : rows)
-    result += row;
-return result;
-```
+2. **Variable Initialization**
+	```cpp
+	    int len = str.size();
+	```
+	Calculate the length of the input string `str` and store it in the `len` variable.
 
-- After filling `rows`, concatenate them to create the final zigzag string.
+3. **Conditional Return**
+	```cpp
+	    if(n == 1) return str;
+	```
+	If `n` is 1, return the input string `str` as it is.
 
----
+4. **Array Initialization**
+	```cpp
+	    vector<string> s(n, "");
+	```
+	Initialize a vector `s` of size `n` to store the characters of each row. Each element is initially an empty string.
 
-### 📊 **Complexity Analysis**
+5. **Variable Initialization**
+	```cpp
+	    bool down = true; int ridx = 1;
+	```
+	Initialize `down` to `true` to indicate the direction of zigzagging, and `ridx` to 1 to track the current row index.
 
-- **Time Complexity:** **O(n)**, where `n` is the length of `str`. Each character is processed once and concatenated in the end.
-- **Space Complexity:** **O(n)**, as we store each character in one of the rows, resulting in `n` characters in total across all rows.
+6. **Loop Iteration**
+	```cpp
+	    for (int i = 0; i < len; i++) {
+	```
+	Iterate over each character in the input string.
 
----
+7. **String Manipulation**
+	```cpp
+	        s[ridx - 1] += str[i];
+	```
+	Append the current character `str[i]` to the string at index `ridx - 1` in the `s` vector.
 
-### 🔑 **Key Insights**
+8. **Conditional Update**
+	```cpp
+	        if (down) ridx++;
+	```
+	If `down` is true, increment `ridx` to move to the next row.
 
-Simulating the zigzag pattern with directional control is effective and uses optimal space. This straightforward approach ensures we avoid unnecessary data structures, making it both clean and efficient for larger inputs.
+9. **Conditional Update**
+	```cpp
+	        else      ridx--;
+	```
+	If `down` is false, decrement `ridx` to move to the previous row.
+
+10. **Conditional Update**
+	```cpp
+	        if ( (ridx == n) || 
+	```
+	Check if we've reached the bottom row.
+
+11. **Conditional Update**
+	```cpp
+	             (ridx == 1) ) 
+	```
+	Check if we've reached the top row.
+
+12. **Conditional Update**
+	```cpp
+	            down = !down;
+	```
+	Toggle the `down` flag to change the direction of zigzagging.
+
+13. **Variable Initialization**
+	```cpp
+	    string res = "";
+	```
+	Initialize an empty string `res` to store the final result.
+
+14. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Iterate over each row in the `s` vector.
+
+15. **String Manipulation**
+	```cpp
+	        res += s[i];
+	```
+	Append the current row `s[i]` to the `res` string.
+
+16. **Return Value**
+	```cpp
+	    return res;
+	```
+	Return the final zigzagged string `res`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(s.length)
+- **Average Case:** O(s.length)
+- **Worst Case:** O(s.length)
+
+Each character in the string is processed exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(s.length)
+- **Worst Case:** O(s.length)
+
+Space is used for storing the strings for each row.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/zigzag-conversion/description/)
 

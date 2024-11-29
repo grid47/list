@@ -14,108 +14,131 @@ img_src = ""
 youtube = "aHqn4Dynd1k"
 youtube_upload_date="2021-08-22"
 youtube_thumbnail="https://i.ytimg.com/vi/aHqn4Dynd1k/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of unique binary strings, each of length n. Your task is to find and return a binary string of length n that is not present in the given array. There can be multiple valid solutions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer n representing the number of binary strings in the array nums, and a list of strings nums where each string is a binary number of length n.
+- **Example:** `nums = ['00', '11']`
+- **Constraints:**
+	- 1 <= n <= 16
+	- nums.length == n
+	- nums[i].length == n
+	- All strings in nums are unique binary strings.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string findDifferentBinaryString(vector<string>& nums) {
-        string ans = "";
-        int n = nums.size();
-        for(int i = 0; i < n; i++)
-        ans += nums[i][i] == '0'? '1':'0';
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a binary string of length n that is not present in the array nums. If there are multiple valid answers, any valid one can be returned.
+- **Example:** `Output: '10'`
+- **Constraints:**
+	- The returned string must not be in the input array.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify a binary string that does not match any of the given strings in nums. The approach relies on constructing a string that is guaranteed to differ from each input string at least in one position.
 
-The problem at hand is to find a binary string that differs from all the strings in a given list of binary strings. Each string in the list has the same length as the number of strings in the list, which creates a unique situation. The goal is to construct a binary string that is guaranteed to be different from each string at least in one position.
+- Create an empty result string.
+- Iterate through the array nums and for each index i, pick the opposite of the character at index i of the i-th string in nums.
+- Return the constructed binary string as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary strings in nums are unique and of the same length.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = ['01', '10']`  \
+  **Explanation:** In this case, the binary strings in nums are '01' and '10'. By flipping each corresponding bit, we can create '11', which does not appear in the input array.
 
-### Approach
+- **Input:** `Input: nums = ['11', '00']`  \
+  **Explanation:** The binary strings in nums are '11' and '00'. By flipping each bit in the corresponding positions, we get '00', which is already in the list. Hence, '10' or '01' can be a valid output.
 
-To solve this problem efficiently, we can use a technique inspired by the diagonal argument. By constructing a new binary string based on the diagonal elements of the binary strings provided, we ensure that the newly created string will differ from each string at least at one corresponding index. This approach guarantees that we will always find a unique binary string, irrespective of the provided input.
+{{< dots >}}
+## Approach 🚀
+The solution uses a simple technique of generating a binary string that differs from each input string at least in one position by flipping corresponding bits.
 
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- This is a problem of generating a unique binary string not present in the input.
+- By flipping the bits at each index, we can guarantee a string that does not appear in the input array.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array nums is empty, return a string with all bits set to '1'.
+- For large arrays with n = 16, the solution should handle these inputs efficiently.
+- If nums contains a single binary string, then any binary string differing from it will work.
+- The maximum length of the binary string and the array size should be handled within the time complexity.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-```
-The code begins with the definition of the `Solution` class, which encapsulates the function needed to solve the problem.
-
-```cpp
-    string findDifferentBinaryString(vector<string>& nums) {
-```
-Here, we define a public method named `findDifferentBinaryString`, which takes a vector of strings (`nums`) as an argument. This vector contains the binary strings from which we need to find a different binary string.
-
-```cpp
-        string ans = "";
-        int n = nums.size();
-```
-We initialize an empty string `ans`, which will hold the resultant binary string. The variable `n` is set to the size of the `nums` vector, indicating the number of strings we are working with.
-
-```cpp
-        for(int i = 0; i < n; i++)
-```
-A loop is initiated that will iterate `n` times, allowing us to process each string in the input vector.
-
-```cpp
-        ans += nums[i][i] == '0' ? '1' : '0';
-```
-Within the loop, we construct the binary string `ans`. For each index `i`, we check the `i`-th character of the `i`-th string in the `nums` vector. If this character is `'0'`, we append `'1'` to `ans`; if it is `'1'`, we append `'0'`. This guarantees that the constructed binary string differs from each corresponding string at the `i`-th position.
-
-```cpp
-        return ans;
-    }
-};
-```
-After constructing the binary string, we return it. The method completes and the `Solution` class is closed.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of strings in the `nums` vector. This is because we are simply iterating through the list once to construct our output string.
-
-- **Space Complexity**: The space complexity is \(O(n)\) as well, as the output string `ans` will hold a binary string of length \(n\).
-
-### Conclusion
-
-This solution effectively constructs a binary string that is guaranteed to be different from all provided strings by utilizing a straightforward and elegant approach. The diagonal construction method ensures uniqueness by modifying characters based on their positions, thus providing a quick and efficient way to meet the problem's requirements.
-
-### Example Usage
-
-Here's how you can utilize the `findDifferentBinaryString` method from the `Solution` class:
-
-```cpp
-#include <vector>
-#include <iostream>
-using namespace std;
-
-int main() {
-    Solution sol;
-    vector<string> nums = {"00", "01"};
-    string result = sol.findDifferentBinaryString(nums);
-    cout << "The different binary string is: " << result << endl; // Output: The different binary string is: "11"
-    return 0;
+string findDifferentBinaryString(vector<string>& nums) {
+    string ans = "";
+    int n = nums.size();
+    for(int i = 0; i < n; i++)
+    ans += nums[i][i] == '0'? '1':'0';
+    return ans;
 }
 ```
 
-### Potential Improvements and Variations
+This code defines a function that takes a vector of binary strings and returns a new binary string that differs from each of the input strings at the corresponding position.
 
-1. **Handling Edge Cases**: Although the current implementation handles the expected inputs well, one could enhance the function to gracefully handle unexpected inputs or edge cases, such as an empty list or strings of varying lengths.
-   
-2. **Expanding to Non-Binary Strings**: If the problem were to allow characters other than binary digits, the approach could be generalized by adapting the construction logic.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string findDifferentBinaryString(vector<string>& nums) {
+	```
+	Define the function `findDifferentBinaryString` that takes a vector of binary strings and returns a new binary string.
 
-3. **Optimizing for Large Inputs**: In scenarios with very large input sizes, it might be beneficial to explore memory-efficient string construction techniques or parallel processing.
+2. **Initialize Answer String**
+	```cpp
+	    string ans = "";
+	```
+	Initialize an empty string `ans` which will hold the resulting binary string.
 
-By following this approach, the solution remains clear, efficient, and adaptable for further extensions or variations in requirements.
+3. **Get Size of Input**
+	```cpp
+	    int n = nums.size();
+	```
+	Get the size of the input vector `nums` and store it in `n`.
+
+4. **Loop Through Strings**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loop through each binary string in the input vector `nums`.
+
+5. **Build the Answer String**
+	```cpp
+	    ans += nums[i][i] == '0'? '1':'0';
+	```
+	For each string in the input vector, if the character at index `i` is '0', append '1' to `ans`; otherwise, append '0'.
+
+6. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the constructed binary string `ans` which is different from each of the input binary strings at the corresponding positions.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the binary strings in nums.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the result string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-unique-binary-string/description/)
 

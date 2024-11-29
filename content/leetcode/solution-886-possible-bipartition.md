@@ -14,165 +14,171 @@ img_src = ""
 youtube = "WIJa0GAC9Cg"
 youtube_upload_date="2020-05-27"
 youtube_thumbnail="https://i.ytimg.com/vi/WIJa0GAC9Cg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a group of n people, labeled from 1 to n. Each person may dislike other people, and they should not be placed in the same group. Your task is to determine if it is possible to split the group of people into two subgroups, such that no one in the same group dislikes each other. Each pair of dislikes is represented by an array of two people who cannot be in the same group. Return true if such a split is possible, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer n, representing the number of people, and an array dislikes, where each element is a pair [ai, bi], indicating that person ai dislikes person bi.
+- **Example:** `Input: n = 4, dislikes = [[1,2],[1,3],[2,4]]`
+- **Constraints:**
+	- 1 <= n <= 2000
+	- 0 <= dislikes.length <= 10^4
+	- dislikes[i].length == 2
+	- 1 <= ai < bi <= n
+	- All the pairs of dislikes are unique.
 
-{{< highlight cpp >}}
-class UF {
-public:
-    vector<int> chd;
-    int cnt;
-    
-    UF(int n) {
-        chd.resize(n, 0);
-        for(int i = 0; i < n; i++)
-            chd[i] = i;
-        cnt = n;
-    }
-    
-    bool uni(int x, int y) {
-        int i = find(x);
-        int j = find(y);
-        if(i != j) {
-            chd[i] = j;
-            cnt--;
-            return true;
-        } else return false;
-    }
-    
-    int find(int x) {
-        if(x == chd[x]) return x;
-        return chd[x] = find(chd[x]);
-    }
-};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to split the people into two groups such that no one dislikes anyone in the same group. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean indicating whether the split is possible.
 
-class Solution {
-public:
-    bool possibleBipartition(int n, vector<vector<int>>& dlk) {
-        UF* uf = new UF(n + 1);
-        vector<vector<int>> gph(n + 1);
-        for(int i = 0; i < dlk.size(); i++) {
-            gph[dlk[i][0]].push_back(dlk[i][1]);
-            gph[dlk[i][1]].push_back(dlk[i][0]);            
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to verify if the graph representing the dislikes is bipartite, meaning the people can be split into two groups such that no two people in the same group dislike each other.
+
+- Represent the dislikes as a graph where each person is a node, and an edge between two nodes means they dislike each other.
+- Use a graph traversal algorithm (like DFS or BFS) to check if the graph can be colored with two colors (representing two groups) such that no two adjacent nodes (people) have the same color.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each pair of dislikes represents a mutual dislike between two people.
+- It is assumed that there are no other relationships besides dislikes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 4, dislikes = [[1,2],[1,3],[2,4]]`  \
+  **Explanation:** In this case, the dislikes form a bipartite graph, meaning we can split the people into two groups. Group 1 can be [1, 4], and Group 2 can be [2, 3]. No one in the same group dislikes each other.
+
+- **Input:** `Input: n = 3, dislikes = [[1,2],[1,3],[2,3]]`  \
+  **Explanation:** In this case, it is impossible to split the people into two groups, because person 1 dislikes both person 2 and person 3, and person 2 and person 3 also dislike each other. Therefore, more than two groups are needed.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will model the people and their dislikes as a graph and check if the graph is bipartite. A bipartite graph is one where we can divide the set of nodes into two disjoint sets such that no two adjacent nodes belong to the same set.
+
+### Initial Thoughts 💭
+- This is a classic graph problem where we need to check for bipartiteness using graph traversal techniques.
+- Using BFS or DFS, we can attempt to color the nodes and check if we encounter any conflicts where two connected nodes end up with the same color.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no dislikes, it's trivially possible to split the people into two groups.
+- Ensure the solution handles cases where n is large (up to 2000) and dislikes can be up to 10^4.
+- If dislikes are sparse (few pairs), the problem is easier to solve, as fewer constraints are placed on the groups.
+- Be mindful of the time complexity, as a solution with O(n + m) complexity will be efficient enough for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+bool possibleBipartition(int n, vector<vector<int>>& dlk) {
+    UF* uf = new UF(n + 1);
+    vector<vector<int>> gph(n + 1);
+    for(int i = 0; i < dlk.size(); i++) {
+        gph[dlk[i][0]].push_back(dlk[i][1]);
+        gph[dlk[i][1]].push_back(dlk[i][0]);            
+    }
+
+    for(int i = 1; i <= n; i++) {
+        for(int x: gph[i]) {
+            if(uf->find(x) == uf->find(i)) return false;
+            uf->uni(gph[i][0], x);
         }
-
-        for(int i = 1; i <= n; i++) {
-            for(int x: gph[i]) {
-                if(uf->find(x) == uf->find(i)) return false;
-                uf->uni(gph[i][0], x);
-            }
-        }
-        return true;
     }
-};
-{{< /highlight >}}
----
+    return true;
+}
+```
 
-### Problem Statement
+This is the complete implementation of the algorithm to determine if it's possible to bipartition a graph. It uses union-find (UF) to manage disjoint sets and iterates through the graph to check for conflicts in the bipartition.
 
-The problem asks whether it is possible to divide a group of `n` people into two groups such that no two people who dislike each other are in the same group. Each person is identified by an integer from 1 to `n`, and a list of dislikes between pairs of people is provided. The goal is to determine if a valid bipartition (division into two groups) exists such that all pairs of people who dislike each other end up in separate groups.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function**
+	```cpp
+	bool possibleBipartition(int n, vector<vector<int>>& dlk) {
+	```
+	Define the function that checks if the graph can be bipartitioned into two sets. It takes the number of nodes and a list of edges.
 
-### Approach
+2. **Data Initialization**
+	```cpp
+	    UF* uf = new UF(n + 1);
+	```
+	Create a new union-find (UF) structure to manage the connected components. The size is n + 1 to accommodate 1-based indexing.
 
-This problem is a typical graph bipartition problem, where the goal is to determine whether a graph is bipartite. A graph is bipartite if we can divide its set of vertices into two disjoint sets such that no two vertices within the same set are adjacent.
+3. **Data Initialization**
+	```cpp
+	    vector<vector<int>> gph(n + 1);
+	```
+	Initialize an adjacency list (graph) to store the edges. Each node will have a list of nodes it's connected to.
 
-In this problem:
-- Each person is a node.
-- A dislike relationship between two people is represented by an undirected edge between two nodes.
-- The task is to check whether it's possible to color this graph with two colors such that no two adjacent nodes (people who dislike each other) have the same color.
+4. **Edge Processing**
+	```cpp
+	    for(int i = 0; i < dlk.size(); i++) {
+	```
+	Loop through all edges in the input list (dlk) to build the graph.
 
-We can solve this problem using a **Union-Find** (also known as **Disjoint Set Union - DSU**) data structure, which efficiently supports the operations of finding the parent of a node and merging two sets. The strategy is:
-1. Use Union-Find to track connected components of the graph.
-2. If two people dislike each other, they must belong to different sets.
-3. If we ever find that two people who dislike each other are in the same set, then the graph is not bipartite, and we return `false`.
+5. **Edge Processing**
+	```cpp
+	        gph[dlk[i][0]].push_back(dlk[i][1]);
+	```
+	For each edge, add the connection from the first node to the second node in the adjacency list.
 
-### Code Breakdown (Step by Step)
+6. **Edge Processing**
+	```cpp
+	        gph[dlk[i][1]].push_back(dlk[i][0]);
+	```
+	Add the reverse connection from the second node to the first node, since the graph is undirected.
 
-#### **Union-Find Data Structure (UF Class)**
+7. **Bipartition Check**
+	```cpp
+	    for(int i = 1; i <= n; i++) {
+	```
+	Loop through each node to check its connections and determine if the graph can be bipartitioned.
 
-1. **Initialization**:
-   ```cpp
-   UF(int n) {
-       chd.resize(n, 0);
-       for(int i = 0; i < n; i++)
-           chd[i] = i;
-       cnt = n;
-   }
-   ```
-   The `UF` class is initialized with `n` elements. The `chd` vector stores the parent for each node, initially setting each node as its own parent (i.e., each node is its own representative in the set). The `cnt` variable tracks the number of disjoint sets.
+8. **Bipartition Check**
+	```cpp
+	        for(int x: gph[i]) {
+	```
+	For each connected node, check if it conflicts with the current node's partition.
 
-2. **Find Operation**:
-   ```cpp
-   int find(int x) {
-       if(x == chd[x]) return x;
-       return chd[x] = find(chd[x]);
-   }
-   ```
-   The `find` function recursively finds the root of the set that `x` belongs to. It uses path compression, meaning that it flattens the structure of the tree to make future queries faster.
+9. **Bipartition Check**
+	```cpp
+	            if(uf->find(x) == uf->find(i)) return false;
+	```
+	If both nodes belong to the same set, return false, as this indicates a conflict in the bipartition.
 
-3. **Union Operation**:
-   ```cpp
-   bool uni(int x, int y) {
-       int i = find(x);
-       int j = find(y);
-       if(i != j) {
-           chd[i] = j;
-           cnt--;
-           return true;
-       } else return false;
-   }
-   ```
-   The `uni` function connects two nodes `x` and `y`. If `x` and `y` are not already in the same set, it merges their sets by making `x`'s root point to `y`'s root and decreases the count of disjoint sets. If `x` and `y` are already in the same set, it returns `false`.
+10. **Union Operation**
+	```cpp
+	            uf->uni(gph[i][0], x);
+	```
+	Union the current node with the connected node, indicating they belong to the same set.
 
-#### **Main Solution (possibleBipartition Function)**
+11. **Return**
+	```cpp
+	    return true;
+	```
+	If no conflicts were found, return true, indicating that the graph can be bipartitioned.
 
-1. **Graph Representation**:
-   ```cpp
-   vector<vector<int>> gph(n + 1);
-   for(int i = 0; i < dlk.size(); i++) {
-       gph[dlk[i][0]].push_back(dlk[i][1]);
-       gph[dlk[i][1]].push_back(dlk[i][0]);            
-   }
-   ```
-   The function starts by building an adjacency list `gph` from the list of dislikes. This list represents an undirected graph where each person (node) is connected to other people (nodes) they dislike.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-2. **Union-Find Traversal**:
-   ```cpp
-   for(int i = 1; i <= n; i++) {
-       for(int x: gph[i]) {
-           if(uf->find(x) == uf->find(i)) return false;
-           uf->uni(gph[i][0], x);
-       }
-   }
-   ```
-   The main traversal begins with each person `i`. For each person `i`, the algorithm checks all their disliked people (adjacent nodes in the graph). If two people who dislike each other belong to the same set (i.e., they are in the same group), it returns `false` because this violates the bipartition condition.
+In the worst case, we traverse all the nodes and edges of the graph once, which takes O(n + m) time.
 
-   If the two people who dislike each other are in different sets, we use the `union` operation to connect them, effectively marking them as belonging to opposite groups.
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m)
 
-3. **Return Statement**:
-   ```cpp
-   return true;
-   ```
-   If no conflicts are found during the entire traversal, it means that the bipartition is possible, and the function returns `true`.
+The space complexity is O(n + m) because we need to store the graph and color information for each person.
 
-### Complexity
+**Happy Coding! 🎉**
 
-The time complexity of the solution is **O((n + m) * α(n))**, where:
-- `n` is the number of people.
-- `m` is the number of dislike pairs.
-- `α(n)` is the inverse Ackermann function, which grows very slowly, making the union-find operations effectively constant time for practical purposes.
-
-Thus, the solution is highly efficient, even for larger values of `n` and `m`.
-
-The space complexity is **O(n + m)** due to the adjacency list used to represent the graph and the `UF` data structure.
-
-### Conclusion
-
-This solution effectively solves the bipartition problem by leveraging the Union-Find data structure, ensuring that it can efficiently track the connected components and check for conflicts in the bipartition. The use of path compression and union by rank in the Union-Find operations makes the solution optimal for large inputs. The approach guarantees that we can determine whether it's possible to divide the group into two disjoint sets where no two people who dislike each other end up in the same set.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/possible-bipartition/description/)
 

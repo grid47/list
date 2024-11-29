@@ -14,92 +14,137 @@ img_src = ""
 youtube = "NpQ-ZKBNCa8"
 youtube_upload_date="2020-09-01"
 youtube_thumbnail="https://i.ytimg.com/vi/NpQ-ZKBNCa8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array arr and an integer difference, find the length of the longest subsequence in arr such that the difference between each adjacent element in the subsequence equals the given difference.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array arr and an integer difference.
+- **Example:** `Input: arr = [2, 4, 6, 8, 10], difference = 2`
+- **Constraints:**
+	- 1 <= arr.length <= 10^5
+	- -10^4 <= arr[i], difference <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestSubsequence(vector<int>& arr, int diff) {
-        map<int, int> mp;
-        int ans = 1;
-        for(int x: arr) {
-            mp[x] = 1 + max(mp[x - diff], mp.count(x)? mp[x] -1 :0);
-            ans = max(ans, mp[x]);
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest subsequence where the difference between adjacent elements equals the given difference.
+- **Example:** `Output: 5`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the longest subsequence of numbers that have a constant difference between adjacent elements.
+
+- Use a map to store the length of the longest subsequence ending at each element.
+- For each element in the array, check if there is a subsequence ending at the previous element that can be extended with the current element.
+- Update the map and keep track of the longest subsequence found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array may contain both positive and negative integers.
+- The difference can be both positive and negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [2, 4, 6, 8, 10], difference = 2`  \
+  **Explanation:** The entire array forms an arithmetic subsequence with a common difference of 2.
+
+- **Input:** `Input: arr = [1, 2, 3, 4], difference = 3`  \
+  **Explanation:** The longest subsequence with a difference of 3 is [1, 4].
+
+{{< dots >}}
+## Approach 🚀
+We can use dynamic programming with a hashmap to efficiently track the longest subsequence for each element.
+
+### Initial Thoughts 💭
+- Each element in the array can potentially extend a subsequence if it forms a valid arithmetic progression with the previous element.
+- We will use a map to store the longest subsequence that ends with each element and update it as we iterate through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least one element, as per the constraints.
+- The solution should be efficient enough to handle arrays of length up to 10^5.
+- Consider cases where the entire array is a valid arithmetic subsequence or when no subsequence forms.
+- The solution should work within the given time and space limits.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestSubsequence(vector<int>& arr, int diff) {
+    map<int, int> mp;
+    int ans = 1;
+    for(int x: arr) {
+        mp[x] = 1 + max(mp[x - diff], mp.count(x)? mp[x] -1 :0);
+        ans = max(ans, mp[x]);
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The goal of this problem is to find the length of the longest subsequence in an array `arr` such that the difference between consecutive elements in the subsequence is a fixed value `diff`. A subsequence is a sequence derived from another sequence by deleting some elements without changing the order of the remaining elements. 
-
-For instance, given an array like `[1, 5, 3, 4, 2]` and a difference of `1`, the longest valid subsequence would be `[1, 2, 3, 4]`, yielding a length of `4`.
-
-### Approach
-To solve this problem efficiently, we can use a hashmap (or in C++, a `map`) to keep track of the maximum length of subsequences that can be formed with a specific ending value. As we iterate through the array, we can compute the length of the subsequence that ends with the current number by checking how many valid subsequences exist for the number that is `diff` less than the current number.
-
-The steps involved in the approach are:
-1. Initialize a map to store the maximum lengths of subsequences ending at each number.
-2. Iterate through the array, updating the map based on the current number and the maximum length of subsequences that could extend to this number.
-3. Keep track of the maximum length encountered during the iteration.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int longestSubsequence(vector<int>& arr, int diff) {
+    return ans;
+}
 ```
-- **Lines 1-3**: Define the `Solution` class and the `longestSubsequence` method, which takes a vector of integers `arr` and an integer `diff` as parameters.
 
-```cpp
-        map<int, int> mp;
-        int ans = 1;
-```
-- **Lines 4-5**: Initialize a `map<int, int> mp` to store the lengths of subsequences ending with each number. We also initialize `ans` to `1` to account for at least one element in the subsequence.
+This function finds the length of the longest subsequence in the given array `arr` where the difference between consecutive elements is exactly `diff`. It uses dynamic programming with a hashmap to store the longest subsequence length for each element.
 
-```cpp
-        for(int x: arr) {
-```
-- **Line 6**: Begin a loop to iterate through each integer `x` in the input vector `arr`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestSubsequence(vector<int>& arr, int diff) {
+	```
+	Define the function `longestSubsequence` which takes a vector `arr` and an integer `diff` as input, where `diff` is the required difference between consecutive elements in the subsequence.
 
-```cpp
-            mp[x] = 1 + max(mp[x - diff], mp.count(x)? mp[x] -1 :0);
-```
-- **Line 7**: Update the map for the current number `x`. The value is computed as follows:
-    - Start with `1`, representing the current element itself.
-    - Check if there is a subsequence ending with `x - diff`. If so, add its length to the current value.
-    - If `x` is already in the map, we check to ensure we do not count it again for the same element (this is managed with `mp.count(x)? mp[x] -1 :0`).
+2. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initialize a map `mp` where the key is an element from `arr`, and the value is the length of the longest subsequence ending with that element.
 
-```cpp
-            ans = max(ans, mp[x]);
-```
-- **Line 8**: Update the variable `ans` with the maximum length found so far by comparing it to `mp[x]`, which is the length of the subsequence ending at `x`.
+3. **Answer Initialization**
+	```cpp
+	    int ans = 1;
+	```
+	Initialize `ans` to 1, which will store the length of the longest subsequence found so far. The minimum subsequence length is 1 (the element itself).
 
-```cpp
-        return ans;
-    }
-};
-```
-- **Lines 9-11**: After processing all elements in the array, return the length of the longest subsequence found, stored in `ans`.
+4. **Loop Through Array**
+	```cpp
+	    for(int x: arr) {
+	```
+	Start a loop to iterate through each element `x` in the input array `arr`.
 
-### Complexity
-1. **Time Complexity**:
-   - The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input array `arr`. Each element is processed once, and map operations (insertions and lookups) are \(O(1)\) on average.
+5. **Update Map with Subsequence Length**
+	```cpp
+	        mp[x] = 1 + max(mp[x - diff], mp.count(x)? mp[x] -1 :0);
+	```
+	For each element `x`, update the map `mp`. The new value is 1 plus the maximum of two cases: the length of the subsequence that ends with `x - diff` or the length of the subsequence ending with `x`, adjusted if it exists.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(n)\) in the worst case, where each number in `arr` could be unique and thus stored in the map.
+6. **Update Maximum Length**
+	```cpp
+	        ans = max(ans, mp[x]);
+	```
+	Update `ans` to be the maximum of the current `ans` and the subsequence length ending at `x`. This ensures that the longest subsequence length is stored.
 
-### Conclusion
-The `longestSubsequence` function provides an efficient method to determine the length of the longest subsequence in an array that adheres to a specific difference constraint. By utilizing a hashmap to track the lengths of valid subsequences, the solution efficiently computes the answer in linear time. This approach is particularly useful for problems involving subsequences, allowing for quick updates and lookups. Overall, this function showcases the power of dynamic programming and hashmap data structures in solving sequence-related challenges in programming contests and software development.
+7. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the length of the longest subsequence found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the array, as we process each element once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of subsequence lengths in the map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/description/)
 

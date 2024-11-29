@@ -14,126 +14,202 @@ img_src = ""
 youtube = "8miqwSN3EFo"
 youtube_upload_date="2020-07-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/8miqwSN3EFo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary matrix of size m x n where each element is either 0 or 1. Your task is to count how many submatrices consist entirely of 1s.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a matrix of size m x n, where each element is either 0 or 1. The task is to count all submatrices that contain only 1s.
+- **Example:** `mat = [[1,0,1],[1,1,0],[1,1,0]]`
+- **Constraints:**
+	- 1 <= m, n <= 150
+	- Each mat[i][j] is either 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numSubmat(vector<vector<int>>& mat) {
-        int m = mat.size();
-        int n = mat[0].size();
-        int cnt = 0;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            cnt += helper(mat, i, j);        
-        return cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the number of submatrices that consist entirely of 1s.
+- **Example:** `10`
+- **Constraints:**
+	- The number of submatrices is a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the number of submatrices consisting entirely of 1s by iterating through each potential rectangle.
+
+- For each cell in the matrix, calculate the number of submatrices that can end at that cell.
+- For each row, maintain the number of consecutive 1s up to that cell to efficiently calculate submatrices.
+- Sum up the counts of all submatrices formed by each cell.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix may contain a mix of 1s and 0s, and its size can vary.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `mat = [[1,0,1],[1,1,0],[1,1,0]]`  \
+  **Explanation:** The total number of submatrices made entirely of 1s is 10.
+
+- **Input:** `mat = [[0,1,1,0],[0,1,1,1],[1,1,1,0]]`  \
+  **Explanation:** The total number of submatrices made entirely of 1s is 16.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solve this problem involves calculating, for each cell in the matrix, the number of possible rectangles ending at that cell. By doing so, we count all submatrices efficiently.
+
+### Initial Thoughts 💭
+- We need to calculate the total number of submatrices formed by 1s in the matrix.
+- Iterating through each cell and considering all possible submatrices ending at each cell is key.
+{{< dots >}}
+### Edge Cases 🌐
+- If the matrix is empty, return 0.
+- Ensure that the solution handles the maximum matrix size efficiently.
+- If the matrix contains only 0s, the answer should be 0.
+- Ensure that the matrix dimensions respect the constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int numSubmat(vector<vector<int>>& mat) {
+    int m = mat.size();
+    int n = mat[0].size();
+    int cnt = 0;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        cnt += helper(mat, i, j);        
+    return cnt;
+}
+
+int helper(vector<vector<int>>& mat, int a, int b) {
+    int m = mat.size(), n = mat[0].size();
+    int cnt = 0, bnd = n;
+    for(int i = a; i < m; i++)
+    for(int j = b; j < bnd; j++) {
+        if(mat[i][j]) cnt +=1;
+        else bnd = j;
     }
-
-    int helper(vector<vector<int>>& mat, int a, int b) {
-        int m = mat.size(), n = mat[0].size();
-        int cnt = 0, bnd = n;
-        for(int i = a; i < m; i++)
-        for(int j = b; j < bnd; j++) {
-            if(mat[i][j]) cnt +=1;
-            else bnd = j;
-        }
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires counting the number of submatrices that consist entirely of 1s in a given binary matrix (a matrix consisting of only 0s and 1s). A submatrix is defined by a rectangular area within the matrix that has its upper left corner and lower right corner defined. 
-
-### Approach
-
-To solve this problem, we can adopt the following approach:
-
-1. **Iterate through each element of the matrix**: For each cell in the matrix, we need to determine how many valid submatrices can be formed starting from that cell.
-
-2. **Use a Helper Function**: We create a helper function that will calculate the number of valid submatrices that can be formed from a given starting cell (the top-left corner of the submatrix). 
-
-3. **Count Submatrices**: The helper function checks for valid submatrices extending downwards and to the right, incrementing the count whenever it encounters a cell that is a 1. If it encounters a cell that is a 0, it will terminate that particular expansion since a submatrix can only consist of 1s.
-
-4. **Return the Total Count**: The main function will sum up the counts obtained from each starting position to give the total number of submatrices.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int numSubmat(vector<vector<int>>& mat) {
-        int m = mat.size();
-        int n = mat[0].size();
-        int cnt = 0;
+    return cnt;
+}
 ```
-- We start by defining a class `Solution` and the method `numSubmat` which takes a 2D vector `mat` as input.
-- We initialize `m` and `n` to hold the number of rows and columns of the matrix, respectively, and initialize `cnt` to zero, which will keep track of the total count of submatrices.
 
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            cnt += helper(mat, i, j);        
-```
-- We use two nested loops to iterate through each element of the matrix. For each element, we call the `helper` function, passing the current coordinates `(i, j)` of the matrix. The result from the helper function is added to `cnt`.
+The code defines two functions: `numSubmat` which calculates the number of submatrices that contain only 1s in a given binary matrix, and `helper`, which calculates the count of valid submatrices starting from each position in the matrix.
 
-```cpp
-        return cnt;
-    }
-```
-- After traversing all elements and accumulating the counts, we return the total count of submatrices.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numSubmat(vector<vector<int>>& mat) {
+	```
+	Defines the main function that takes a binary matrix `mat` and calculates the number of submatrices containing only 1s.
 
-```cpp
-    int helper(vector<vector<int>>& mat, int a, int b) {
-        int m = mat.size(), n = mat[0].size();
-        int cnt = 0, bnd = n;
-```
-- The `helper` function is defined to calculate the number of submatrices that can be formed starting from the position `(a, b)`.
-- We again obtain the size of the matrix and initialize `cnt` to zero for counting submatrices and `bnd` to `n`, which serves as the right boundary for our exploration.
+2. **Variable Initialization**
+	```cpp
+	    int m = mat.size();
+	```
+	Initializes `m` to the number of rows in the matrix `mat`.
 
-```cpp
-        for(int i = a; i < m; i++)
-        for(int j = b; j < bnd; j++) {
-            if(mat[i][j]) cnt +=1;
-            else bnd = j;
-        }
-```
-- The helper function contains nested loops that iterate downwards (from `a` to `m`) and rightwards (from `b` to `bnd`).
-- If we encounter a cell with a value of 1, we increment `cnt`, indicating that we can include this in our count of valid submatrices.
-- If we encounter a 0, we update the boundary `bnd` to the current column index `j`, effectively stopping the expansion to the right for any submatrix beginning at `(a, b)`.
+3. **Variable Initialization**
+	```cpp
+	    int n = mat[0].size();
+	```
+	Initializes `n` to the number of columns in the first row of the matrix `mat`.
 
-```cpp
-        return cnt;
-    }
-};
-```
-- Finally, the helper function returns the count of valid submatrices found starting from the position `(a, b)`.
+4. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes the counter `cnt` to 0, which will store the total number of valid submatrices.
 
-### Complexity
+5. **Nested Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Iterates over each row in the matrix.
 
-#### Time Complexity
-- The time complexity of this approach is \(O(m \times n \times (m+n))\). This is due to the fact that for each cell in the matrix (total of \(m \times n\)), the helper function can iterate through all possible rows and columns starting from that cell.
+6. **Nested Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Iterates over each column in the matrix.
 
-#### Space Complexity
-- The space complexity is \(O(1)\) since we are using a constant amount of extra space (the variables `cnt` and `bnd`).
+7. **Function Call**
+	```cpp
+	        cnt += helper(mat, i, j);        
+	```
+	Calls the helper function to calculate the number of valid submatrices starting from position `(i, j)` and adds the result to `cnt`.
 
-### Conclusion
+8. **Return**
+	```cpp
+	    return cnt;
+	```
+	Returns the total count of submatrices that contain only 1s.
 
-The solution effectively counts all submatrices filled with 1s in a given binary matrix using a systematic approach that leverages nested loops and a helper function. 
+9. **Function Definition**
+	```cpp
+	int helper(vector<vector<int>>& mat, int a, int b) {
+	```
+	Defines the helper function that calculates the number of valid submatrices starting from position `(a, b)` in the matrix.
 
-**Key Takeaways**:
-- **Matrix Traversal**: Understanding how to traverse a matrix systematically is crucial for solving problems related to submatrices.
-- **Dynamic Counting**: The approach dynamically counts valid submatrices based on the current position, which ensures that we account for all potential submatrices originating from each cell.
-- **Efficiency Considerations**: Although the time complexity may seem high, this approach is straightforward and easy to understand, making it a good candidate for educational purposes or for understanding basic matrix manipulation.
+10. **Variable Initialization**
+	```cpp
+	    int m = mat.size(), n = mat[0].size();
+	```
+	Initializes `m` to the number of rows and `n` to the number of columns in the matrix `mat`.
 
-This method highlights how effective counting techniques can be applied to matrix-related problems, which is a common theme in algorithmic challenges. The ability to recognize patterns and efficiently calculate results is a valuable skill in competitive programming and software development.
+11. **Variable Initialization**
+	```cpp
+	    int cnt = 0, bnd = n;
+	```
+	Initializes `cnt` to 0 for counting valid submatrices and `bnd` to `n`, the initial right boundary for each row.
+
+12. **Nested Loop**
+	```cpp
+	    for(int i = a; i < m; i++)
+	```
+	Iterates over the rows starting from row `a`.
+
+13. **Nested Loop**
+	```cpp
+	    for(int j = b; j < bnd; j++) {
+	```
+	Iterates over the columns starting from column `b` and up to the current boundary `bnd`.
+
+14. **Conditional Statement**
+	```cpp
+	        if(mat[i][j]) cnt +=1;
+	```
+	If the current element is 1, increments the count `cnt` as it contributes to a valid submatrix.
+
+15. **Conditional Statement**
+	```cpp
+	        else bnd = j;
+	```
+	If the current element is 0, updates the right boundary `bnd` to the current column `j` because no further valid submatrices can extend beyond this point in this row.
+
+16. **Return**
+	```cpp
+	    return cnt;
+	```
+	Returns the count of valid submatrices found starting from position `(a, b)`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n), as we need to process each cell of the matrix.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) in the worst case when we store the submatrix counts for each cell.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-submatrices-with-all-ones/description/)
 

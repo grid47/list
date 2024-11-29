@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,116 +28,128 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary tree. Your task is to remove all subtrees in the tree that do not contain at least one node with the value 1. A subtree is defined as the node and all its descendants. Return the modified tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the root of a binary tree. The tree is represented as a series of node values in a binary tree structure.
+- **Example:** `Input: root = [1,null,0,0,1]`
+- **Constraints:**
+	- The number of nodes in the tree is between 1 and 200.
+	- Node values are either 0 or 1.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* pruneTree(TreeNode* root) {
-        if(root == NULL) return root;
-        root->left = pruneTree(root->left);
-        root->right= pruneTree(root->right);
-        if(!root->left && !root->right && root->val == 0)
-                return NULL;
-        return root;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the same binary tree where every subtree not containing a 1 has been removed. The returned tree should be in the same binary tree structure.
+- **Example:** `Output: [1,null,0,null,1]`
+- **Constraints:**
+	- The tree should be returned as a binary tree structure.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to prune the binary tree such that every subtree that does not contain a 1 is removed.
 
-The problem requires pruning a binary tree based on certain conditions. Specifically, we are tasked with removing all subtrees that do not contain any `1`s. In the context of this problem, each node in the binary tree contains either a `0` or a `1`. A subtree is pruned if it only contains `0`s, and if a node itself is `0` and it has no children with a `1`, it should be removed. The pruning operation should ensure that only those nodes and subtrees that are necessary for the tree to have a `1` remain.
+- Traverse the tree in a post-order manner (visit left, right, then root).
+- If a node's left and right subtrees do not contain any 1s, remove those subtrees.
+- If the current node itself has a value of 0 and both subtrees are removed, prune the current node as well.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is valid and consists of integers either 0 or 1.
+- Each node has at most two children.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1,null,0,0,1]`  \
+  **Explanation:** After pruning, the tree retains the root node with value 1, and only the right child containing a 1 remains. The left child is pruned because it does not contain any 1s.
 
-We are given the root of a binary tree and need to return the root of the pruned tree. If the root itself is pruned, we return `NULL`.
+{{< dots >}}
+## Approach 🚀
+The approach is to perform a post-order traversal on the tree. For each node, check its subtrees. If a subtree does not contain any 1s, it is pruned. This is achieved through recursion and modifying the left and right pointers of each node.
 
-### Approach
-
-This problem can be efficiently solved by using a **Depth First Search (DFS)** approach, combined with **recursion** to traverse the tree and prune the subtrees that do not contain any `1`s.
-
-1. **DFS Traversal**: We start at the root of the binary tree and recursively prune both the left and right subtrees. 
-2. **Prune Condition**: After pruning the left and right subtrees, we check whether the current node itself should be pruned. A node is pruned if:
-   - It has no left or right child (i.e., both children are `NULL`).
-   - The node's value is `0`.
-3. **Post-Pruning**: If a node's value is `0` and both its left and right subtrees are `NULL`, the node is pruned (i.e., the function returns `NULL`).
-4. **Return Pruned Tree**: If the node does not meet the pruning condition, we return it, either with or without a pruned subtree, depending on the result of the DFS traversal on its left and right children.
-
-This ensures that all unnecessary subtrees are removed, and only those parts of the tree that contribute to the presence of `1` remain.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- This problem is a typical tree traversal problem where pruning nodes is based on conditions.
+- The pruning should happen in a bottom-up manner, meaning we should first prune the children before making decisions about the parent node.
+{{< dots >}}
+### Edge Cases 🌐
+- A tree with only one node having a value of 0 should return null.
+- The solution should efficiently handle trees with up to 200 nodes.
+- Consider trees where all nodes have a value of 0 or where every node is a 1.
+- Make sure the pruning does not break the tree structure for non-zero subtrees.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    TreeNode* pruneTree(TreeNode* root) {
-        if(root == NULL) return root;
-        root->left = pruneTree(root->left);
-        root->right = pruneTree(root->right);
-        if(!root->left && !root->right && root->val == 0)
-                return NULL;
-        return root;
-    }
-};
+TreeNode* pruneTree(TreeNode* root) {
+    if(root == NULL) return root;
+    root->left = pruneTree(root->left);
+    root->right= pruneTree(root->right);
+    if(!root->left && !root->right && root->val == 0)
+            return NULL;
+    return root;
+}
 ```
 
-1. **Base Case**: 
-   ```cpp
-   if(root == NULL) return root;
-   ```
-   - This is the base case for the recursion. If the current node is `NULL` (i.e., it does not exist), we simply return `NULL` because there's nothing to prune.
-   
-2. **Recursive Calls**:
-   ```cpp
-   root->left = pruneTree(root->left);
-   root->right = pruneTree(root->right);
-   ```
-   - These two lines recursively prune the left and right subtrees. We make recursive calls on the left and right children of the current node, which means that for each node in the tree, we prune its left and right subtrees first before evaluating whether the node itself should be pruned.
-   
-3. **Prune the Current Node**:
-   ```cpp
-   if(!root->left && !root->right && root->val == 0)
-       return NULL;
-   ```
-   - This line checks if the current node itself should be pruned. The node should be pruned if:
-     - It has no left or right children (`!root->left && !root->right`), meaning it is a leaf node.
-     - Its value is `0` (`root->val == 0`).
-   - If both of these conditions are true, we return `NULL`, effectively removing this node from the tree.
+This function prunes a binary tree by removing nodes that do not contribute to the tree (i.e., nodes that are leaves with a value of 0). It recursively checks both left and right subtrees and prunes accordingly.
 
-4. **Return Pruned Tree**:
-   ```cpp
-   return root;
-   ```
-   - If the current node is not pruned, we return it as is. This could be a node that either has a non-null child or contains a `1`. The recursion continues up the tree, ensuring all subtrees are pruned as necessary.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function**
+	```cpp
+	TreeNode* pruneTree(TreeNode* root) {
+	```
+	This is the function definition for pruneTree, which takes a TreeNode pointer (root) as an argument.
 
-### Complexity
+2. **Condition**
+	```cpp
+	    if(root == NULL) return root;
+	```
+	This checks if the root is NULL (base case). If the root is NULL, it simply returns NULL.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we visit each node exactly once in a depth-first manner, performing constant time operations for each node (pruning and checking children).
+3. **Recursion**
+	```cpp
+	    root->left = pruneTree(root->left);
+	```
+	This recursively calls pruneTree on the left child of the current root.
 
-#### Space Complexity:
-- The space complexity is **O(h)**, where `h` is the height of the binary tree. This is due to the recursion stack. In the worst case, the height of the tree is equal to the number of nodes, leading to a space complexity of **O(n)**. However, in a balanced tree, the height would be **O(log n)**.
+4. **Recursion**
+	```cpp
+	    root->right= pruneTree(root->right);
+	```
+	This recursively calls pruneTree on the right child of the current root.
 
-### Conclusion
+5. **Condition**
+	```cpp
+	    if(!root->left && !root->right && root->val == 0)
+	```
+	This checks if the current root node is a leaf node (no left or right child) and its value is 0. If true, it will be pruned (i.e., set to NULL).
 
-This solution effectively solves the problem of pruning a binary tree by removing subtrees that do not contain any `1`s, ensuring that only the necessary parts of the tree remain. The use of DFS with recursion ensures that we traverse the tree in an efficient manner, pruning subtrees as we go. The time complexity of **O(n)** and space complexity of **O(h)** make this approach optimal for large trees.
+6. **Return**
+	```cpp
+	            return NULL;
+	```
+	If the current node is a leaf with a value of 0, it is pruned by returning NULL.
 
-#### Key Points:
-- **DFS Traversal**: The algorithm uses depth-first search to traverse and prune the tree.
-- **Pruning Logic**: The node is pruned if it’s a leaf node and has a value of `0`.
-- **Efficiency**: The algorithm runs in **O(n)** time, where `n` is the number of nodes in the tree, and uses **O(h)** space, where `h` is the height of the tree.
+7. **Return**
+	```cpp
+	    return root;
+	```
+	Returns the current root node after pruning its left and right children if necessary.
 
-This approach is both efficient and easy to understand, making it suitable for solving the problem of pruning a binary tree in an optimal way.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the number of nodes in the tree.
+- **Average Case:** O(n) as each node is visited once in the post-order traversal.
+- **Worst Case:** O(n) because every node is visited to check its subtrees.
+
+The time complexity is linear, as each node in the tree is processed once.
+
+### Space Complexity 💾
+- **Best Case:** O(1) if the tree is a perfect binary tree and recursion is tail optimized.
+- **Worst Case:** O(h) where h is the height of the tree due to recursion stack space.
+
+Space complexity depends on the height of the tree due to the recursive calls.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-pruning/description/)
 

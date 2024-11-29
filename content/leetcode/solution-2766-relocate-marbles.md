@@ -14,121 +14,154 @@ img_src = ""
 youtube = "bH2EmMR5jpU"
 youtube_upload_date="2023-07-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/bH2EmMR5jpU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array 'nums' representing the initial positions of marbles. You are also provided with two arrays, 'moveFrom' and 'moveTo', where each step moves marbles from one position to another. After performing all the moves, return the sorted list of unique positions that have at least one marble.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the following arrays: nums (the initial marble positions), moveFrom (the positions from which marbles are moved), and moveTo (the positions to which marbles are moved).
+- **Example:** `nums = [4, 5, 6, 7], moveFrom = [4, 7, 5], moveTo = [6, 8, 7]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= moveFrom.length <= 10^5
+	- moveFrom.length == moveTo.length
+	- 1 <= nums[i], moveFrom[i], moveTo[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> relocateMarbles(vector<int>& nums, vector<int>& moveFrom, vector<int>& moveTo) {
-        map<int, int> mp;  
-        for(auto n: nums) mp[n] = 1;
-        for(int i = 0; i < moveFrom.size(); ++i){
-            if(mp[moveFrom[i]] && moveFrom[i] != moveTo[i]) {
-                mp[moveTo[i]] = 1;  mp[moveFrom[i]] = 0;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sorted list of unique positions where at least one marble exists after all moves are completed.
+- **Example:** `For nums = [4, 5, 6, 7], moveFrom = [4, 7, 5], moveTo = [6, 8, 7], the output is [6, 7, 8].`
+- **Constraints:**
+	- The output is a list of unique positions sorted in ascending order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to track all the positions where marbles are placed after each move and return the sorted list of unique positions.
+
+- Create a set to store all occupied positions initially using the nums array.
+- For each move, transfer marbles from moveFrom[i] to moveTo[i], updating the set of occupied positions.
+- Finally, sort and return the positions.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will always be at least one marble in the positions specified by moveFrom during the corresponding move.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [4, 5, 6, 7], moveFrom = [4, 7, 5], moveTo = [6, 8, 7]`  \
+  **Explanation:** Initially, the marbles are at positions [4, 5, 6, 7]. After each move, the marbles are relocated as described in the example. The final occupied positions are [6, 7, 8].
+
+- **Input:** `For nums = [2, 3, 3, 6], moveFrom = [3, 2], moveTo = [4, 5]`  \
+  **Explanation:** Initially, the marbles are at positions [2, 3, 3, 6]. After each move, the marbles are relocated, and the final occupied positions are [4, 5, 6].
+
+{{< dots >}}
+## Approach 🚀
+The solution involves tracking the marbles' positions using a set and performing the moves sequentially while updating the set of occupied positions.
+
+### Initial Thoughts 💭
+- Using a set allows us to efficiently track unique positions occupied by marbles.
+- Since we only care about unique positions, a set data structure is ideal for this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem constraints ensure that nums, moveFrom, and moveTo are never empty, so no need to handle empty inputs.
+- Ensure the solution can handle up to 10^5 elements in nums, moveFrom, and moveTo.
+- If all marbles end up in one position, the result will be a list with just that position.
+- The solution must run efficiently with time complexity close to O(n log n) due to the sorting step at the end.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> relocateMarbles(vector<int>& nums, vector<int>& moveFrom, vector<int>& moveTo) {
+    map<int, int> mp;  
+    for(auto n: nums) mp[n] = 1;
+    for(int i = 0; i < moveFrom.size(); ++i){
+        if(mp[moveFrom[i]] && moveFrom[i] != moveTo[i]) {
+            mp[moveTo[i]] = 1;  mp[moveFrom[i]] = 0;
         }
-        vector<int> ans;
-        for(auto m: mp) if(m.second) ans.push_back(m.first);
-        return ans;
     }
-};
-{{< /highlight >}}
----
+    vector<int> ans;
+    for(auto m: mp) if(m.second) ans.push_back(m.first);
+    return ans;
+}
+```
 
-### Problem Statement
+This function relocates marbles from one position to another according to the `moveFrom` and `moveTo` arrays and returns the final positions of the marbles in ascending order.
 
-The problem requires us to simulate the movement of marbles on a one-dimensional track. You are given an initial configuration of marbles, represented by an array `nums`, where each value represents a distinct position on the track that contains a marble. You are also given two arrays `moveFrom` and `moveTo`, which represent the marble positions that need to be relocated. For each pair of corresponding positions, the marble at `moveFrom[i]` is moved to `moveTo[i]`. The task is to return the final positions of the marbles sorted in increasing order.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> relocateMarbles(vector<int>& nums, vector<int>& moveFrom, vector<int>& moveTo) {
+	```
+	Defines the function `relocateMarbles`, which takes three vectors: `nums` (initial marble positions), `moveFrom` (positions to move from), and `moveTo` (positions to move to). It returns a vector with the final positions of the marbles.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    map<int, int> mp;  
+	```
+	Initializes a map `mp` to track the marble positions, where the key is the position and the value is a flag indicating whether the position is occupied by a marble.
 
-To solve this problem efficiently, we can follow the below steps:
+3. **Mark Initial Positions**
+	```cpp
+	    for(auto n: nums) mp[n] = 1;
+	```
+	Iterates through the `nums` vector to mark all the initial marble positions in the `mp` map by setting their corresponding values to 1.
 
-1. **Track the Positions of Marbles**:
-   We can use a `map` (or dictionary) to keep track of the positions that have marbles. This allows efficient look-up, insertion, and deletion of marbles from their respective positions. Initially, we will mark each position in the input array `nums` as having a marble.
+4. **Iterate Over Moves**
+	```cpp
+	    for(int i = 0; i < moveFrom.size(); ++i){
+	```
+	Starts a loop to iterate through the `moveFrom` and `moveTo` vectors, processing each pair of positions to move a marble.
 
-2. **Simulate the Moves**:
-   For each move, we check if the position in `moveFrom` contains a marble (i.e., if it exists in the map and is non-zero). If it does, we remove the marble from the `moveFrom` position and place it in the `moveTo` position.
+5. **Check Valid Move**
+	```cpp
+	        if(mp[moveFrom[i]] && moveFrom[i] != moveTo[i]) {
+	```
+	Checks if a marble exists at the position `moveFrom[i]` and if the move is not to the same position (i.e., the `moveFrom` and `moveTo` positions are different).
 
-3. **Return the Final Marble Positions**:
-   After processing all the moves, the positions of the marbles are stored in the map. We will extract these positions and return them sorted in increasing order.
+6. **Update Positions**
+	```cpp
+	            mp[moveTo[i]] = 1;  mp[moveFrom[i]] = 0;
+	```
+	If the move is valid, updates the `mp` map: sets the destination position `moveTo[i]` to 1 (marble is placed there) and sets the source position `moveFrom[i]` to 0 (marble is removed).
 
-### Code Breakdown (Step by Step)
+7. **Prepare Final Answer**
+	```cpp
+	    vector<int> ans;
+	```
+	Initializes an empty vector `ans` to store the final positions of the marbles after all moves.
 
-Let’s go through the code line by line to understand the logic:
+8. **Collect Final Positions**
+	```cpp
+	    for(auto m: mp) if(m.second) ans.push_back(m.first);
+	```
+	Iterates through the `mp` map and adds the positions (keys) that have a marble (value is 1) to the `ans` vector.
 
-1. **Map Initialization**:
-   ```cpp
-   map<int, int> mp;
-   ```
-   We initialize a `map` named `mp` where the keys represent the positions on the track, and the values represent whether there is a marble at that position (1 for marble, 0 for no marble). A map is chosen because it allows us to efficiently check, update, and remove marbles.
+9. **Return Final Positions**
+	```cpp
+	    return ans;
+	```
+	Returns the final list of positions of the marbles in the `ans` vector, which will be in ascending order due to the map's sorting of keys.
 
-2. **Mark Initial Marble Positions**:
-   ```cpp
-   for(auto n: nums) mp[n] = 1;
-   ```
-   Here, we iterate through the `nums` array, which contains the initial positions of the marbles. For each position, we update the map `mp` to mark that the marble is present at that position.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-3. **Simulating the Movement**:
-   ```cpp
-   for(int i = 0; i < moveFrom.size(); ++i) {
-       if(mp[moveFrom[i]] && moveFrom[i] != moveTo[i]) {
-           mp[moveTo[i]] = 1;
-           mp[moveFrom[i]] = 0;
-       }
-   }
-   ```
-   - We loop through each pair of `moveFrom[i]` and `moveTo[i]`, where we need to move a marble from position `moveFrom[i]` to position `moveTo[i]`.
-   - For each move, we check if a marble exists at position `moveFrom[i]` (`mp[moveFrom[i]]`). We also ensure that the source and destination are not the same (`moveFrom[i] != moveTo[i]`), as there’s no need to move a marble to the same position.
-   - If both conditions are satisfied, we:
-     - Set the `moveTo[i]` position in the map to 1 (indicating a marble is now at this position).
-     - Set the `moveFrom[i]` position in the map to 0 (indicating the marble is removed from the source position).
+The worst case is determined by the sorting of unique positions at the end, where n is the number of unique positions.
 
-4. **Collect Final Marble Positions**:
-   ```cpp
-   vector<int> ans;
-   for(auto m: mp) if(m.second) ans.push_back(m.first);
-   return ans;
-   ```
-   - After all moves are simulated, we create a result vector `ans` to store the final positions of the marbles.
-   - We iterate over the `map` and collect all keys (positions) where the value is 1, which represents positions where marbles are currently located.
-   - The `map` inherently stores the keys in sorted order, so we don’t need to perform any additional sorting.
-   - Finally, we return the `ans` vector containing the sorted positions of the marbles.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity Analysis
+The space complexity is determined by the set storing the unique positions, which in the worst case can store all positions from nums.
 
-#### Time Complexity:
-1. **Initialization of Marble Positions**:
-   - The initialization of the map from the `nums` array takes \(O(m)\) time, where \(m\) is the size of the `nums` array.
-   
-2. **Processing the Moves**:
-   - For each move in the `moveFrom` and `moveTo` arrays, we perform constant-time operations to check and update the map (`mp[moveFrom[i]]` and `mp[moveTo[i]]`), which takes \(O(1)\) per move. Thus, the total time for processing all moves is \(O(k)\), where \(k\) is the number of moves.
+**Happy Coding! 🎉**
 
-3. **Collecting the Final Positions**:
-   - We iterate over the `map` to collect all positions with marbles. Since the map contains at most \(m\) unique positions, this step takes \(O(m)\) time.
-   
-   Therefore, the total time complexity is \(O(m + k)\), where:
-   - \(m\) is the number of unique positions in `nums` (or the size of the map).
-   - \(k\) is the number of moves.
-
-#### Space Complexity:
-1. **Map Storage**:
-   - The `map` `mp` stores the marble positions and their status. In the worst case, it will store as many entries as the number of unique positions in the input array `nums`, which is \(O(m)\).
-   
-2. **Result Vector**:
-   - The result vector `ans` will store the final positions of the marbles, which can also be at most \(O(m)\).
-   
-Thus, the space complexity is \(O(m)\), where \(m\) is the number of unique positions.
-
-### Conclusion
-
-This solution efficiently simulates the process of relocating marbles based on the given `moveFrom` and `moveTo` arrays. By using a `map`, we can keep track of the current positions of the marbles in constant time for each move. The approach is both time and space efficient, with a time complexity of \(O(m + k)\), where \(m\) is the number of unique marble positions and \(k\) is the number of moves.
-
-The solution handles edge cases, such as when marbles are moved to the same position or when no moves are made, by ensuring that only valid moves are processed. The use of a `map` also ensures that the final marble positions are returned in sorted order without needing additional sorting. This solution is optimal for the given problem and should perform well even for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/relocate-marbles/description/)
 

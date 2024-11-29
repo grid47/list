@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Y_4_or0Sc7I"
 youtube_upload_date="2024-02-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Y_4_or0Sc7I/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,132 +28,153 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/Y_4_or0Sc7I/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of integers where each integer represents the height of a vertical line drawn on a 2D plane. The x-axis is represented by the index of the array, and each line's height corresponds to the value at that index. Your task is to find two lines that, along with the x-axis, form a container that can hold the most water. The container’s area is determined by the distance between the lines and the height of the shorter line.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array 'height' of length 'n'.
+- **Example:** `height = [2, 5, 7, 3, 9, 4]`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- 0 <= height[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxArea(vector<int>& height) {
-        int res = 0;
-        int i = 0, j = height.size() -1;
-        
-        while(i < j) {
-            res = max(res, min(height[i], height[j]) * (j - i));
-            if(height[i] < height[j])
-                i++;
-            else j--;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum area of water that the container formed by two lines can hold.
+- **Example:** `Output: 30`
+- **Constraints:**
+	- The maximum area must be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To maximize the water area, we need to find the optimal pair of lines and calculate the area between them.
+
+- Start by initializing two pointers: one at the beginning and one at the end of the array.
+- Calculate the area between the lines at the current pointers.
+- Move the pointer pointing to the shorter line towards the other pointer to potentially find a larger area.
+- Repeat the process until the two pointers meet.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains only non-negative integers representing heights.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `height = [1, 8, 6, 2, 5, 4, 8, 3, 7]`  \
+  **Explanation:** In this case, the maximum area is formed by the lines at index 1 and index 8. The area is calculated as min(8, 7) * (8 - 1) = 49.
+
+- **Input:** `height = [3, 9, 1, 8, 6, 4]`  \
+  **Explanation:** The maximum area is formed by the lines at index 1 and index 3. The area is calculated as min(9, 8) * (3 - 1) = 16.
+
+{{< dots >}}
+## Approach 🚀
+We will use the two-pointer technique to efficiently find the maximum area.
+
+### Initial Thoughts 💭
+- To maximize the area, we need to consider the width between two lines and their heights.
+- The height of the container is determined by the shorter of the two lines, so we need to focus on the smaller heights.
+- The optimal solution involves checking the areas formed by lines at the current left and right pointers, then adjusting the pointers inward based on the shorter line.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least two elements, so no need to handle empty arrays.
+- Ensure that the solution can handle the upper limit of the array size (100,000 elements).
+- If all heights are equal, the largest area is formed by the first and last line.
+- The algorithm should run efficiently with a time complexity of O(n).
+{{< dots >}}
+## Code 💻
+```cpp
+int maxArea(vector<int>& height) {
+    int res = 0;
+    int i = 0, j = height.size() -1;
+    
+    while(i < j) {
+        res = max(res, min(height[i], height[j]) * (j - i));
+        if(height[i] < height[j])
+            i++;
+        else j--;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### 💡 **Maximum Area of Water Between Two Lines** – Let's Solve It Together!
+This code implements the `maxArea` function, which finds the container with the most water.
 
-The **Maximum Area** problem asks us to find the largest possible container that can hold water between two lines in a given array. Each element in the array represents the height of a line drawn at that position. The width between two lines is simply the distance between their indices. Our goal is to maximize the area of the container formed by any two lines and the x-axis.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxArea(vector<int>& height) {
+	```
+	Declare the `maxArea` function, which takes a vector of integers `height` representing the height of each container wall.
 
-### 📝 **What’s the Problem?**
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize a variable `res` to store the maximum area found so far.
 
-You are given:
-- **`height[]`** — an array where `height[i]` represents the height of the line at index `i`.
-- **`target`** — the maximum area we want to find between two lines.
+3. **Variable Initialization**
+	```cpp
+	    int i = 0, j = height.size() -1;
+	```
+	Initialize two pointers `i` and `j` to point to the beginning and end of the vector, respectively.
 
-Our task is to **determine the largest possible area** formed by any two lines in the array.
+4. **Loop Iteration**
+	```cpp
+	    while(i < j) {
+	```
+	Start the loop body.
 
-#### Example:
+5. **Mathematical Operations**
+	```cpp
+	        res = max(res, min(height[i], height[j]) * (j - i));
+	```
+	Calculate the area of the current container, which is the minimum of the heights at `i` and `j` multiplied by the distance between them. Update `res` if the current area is larger.
 
-- **Input**: `height = [1,8,6,2,5,4,8,3,7]`
-- **Output**: `49`  
-  (The maximum area is formed between lines at positions 1 and 8, with heights 8 and 7).
+6. **Conditional Check**
+	```cpp
+	        if(height[i] < height[j])
+	```
+	Check if the height at `i` is less than the height at `j`.
 
----
+7. **Index Update**
+	```cpp
+	            i++;
+	```
+	If the height at `i` is smaller, move `i` to the right to potentially find a larger container.
 
-### 🔍 **Approach: The Two-Pointer Technique**
+8. **Index Update**
+	```cpp
+	        else j--;
+	```
+	Otherwise, move `j` to the left to potentially find a larger container.
 
-To solve this efficiently, we use the **two-pointer technique**. The idea is to consider the container formed by two lines, one at the beginning (`i`) and one at the end (`j`) of the array. We calculate the area formed by the two lines and then move the pointers in such a way that we try to maximize the area.
+9. **Loop Iteration**
+	```cpp
+	    }
+	```
+	End of the loop.
 
-#### Key Observations:
-1. **Area Calculation**: The area between two lines is calculated as:
-   \[
-   \text{Area} = \text{min}(height[i], height[j]) \times (j - i)
-   \]
-   Where `height[i]` and `height[j]` are the heights of the two lines, and `(j - i)` is the width between them.
-   
-2. **Strategy to Maximize the Area**:
-   - Start with two pointers, `i = 0` at the beginning of the array and `j = height.size() - 1` at the end.
-   - Calculate the area formed between the two lines.
-   - Move the pointer of the shorter line inward. The idea is that we may find a taller line that increases the area.
+10. **Return Value**
+	```cpp
+	    return res;
+	```
+	Return the maximum area found.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### 🧑‍💻 **Step-by-Step Code Implementation**
+The algorithm only requires a single pass through the array with two pointers, so it runs in linear time.
 
-Let’s dive into how we can implement this approach:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-1. **Initialize Variables**:
-   ```cpp
-   int res = 0;  // Variable to store the maximum area
-   int i = 0, j = height.size() - 1;  // Pointers at the start and end of the array
-   ```
+The space complexity is constant since we only need a few variables to track the maximum area and the positions of the two pointers.
 
-2. **Calculate the Area**:
-   ```cpp
-   res = max(res, min(height[i], height[j]) * (j - i));
-   ```
-   - The area between the two lines at `i` and `j` is calculated as the minimum of their heights (`min(height[i], height[j])`) multiplied by the width (`j - i`).
-   - We update the `res` variable with the maximum area found so far.
-
-3. **Move the Pointers**:
-   ```cpp
-   if(height[i] < height[j]) 
-       i++;  // Move i right if height[i] is shorter
-   else 
-       j--;  // Move j left if height[j] is shorter
-   ```
-
-   - We move the pointer corresponding to the shorter line inward. This is because the area is constrained by the shorter line, so we attempt to find a taller one by moving the shorter line.
-
-4. **Return the Maximum Area**:
-   ```cpp
-   return res;
-   ```
-
----
-
-### ⏱️ **Time and Space Complexity**
-
-- **Time Complexity**:  
-  **O(n)** — The algorithm has a time complexity of O(n), where `n` is the length of the `height` array. The two-pointer technique ensures that each pointer is moved at most `n` times.
-
-- **Space Complexity**:  
-  **O(1)** — The space complexity is constant, O(1), as we use a fixed amount of extra space for the `res` variable and the two pointers.
-
----
-
-### 💡 **Why This Approach Works**
-
-- **Optimal Efficiency**: The two-pointer technique ensures that we only need **one pass** through the array, making the solution highly efficient.
-- **Simplicity**: The approach is intuitive and easy to implement because it directly models the process of finding the maximum area by comparing heights and adjusting the pointers.
-
----
-
-### 🏁 **Conclusion**
-
-This solution efficiently finds the **maximum area** formed by two lines from an array of heights using the **two-pointer technique**.
-
-#### Advantages:
-- **Optimal Time Complexity**: O(n), making it perfect for large arrays.
-- **Intuitive and Clean Logic**: The process is simple and avoids unnecessary computations.
-
-#### Limitations:
-- The solution assumes that the heights are non-negative, as negative heights don’t make sense in the context of the problem.
-
-With this approach, we avoid the O(n²) brute-force solution, and our time and space complexity is greatly reduced. This technique ensures that even large datasets can be handled with ease!
-
----
-
-Happy coding! 🚀 And remember, each problem you solve brings you one step closer to becoming a coding master! ✨
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/container-with-most-water/description/)

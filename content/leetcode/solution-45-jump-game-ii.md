@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "CsDI-yQuGeM"
 youtube_upload_date="2024-08-08"
 youtube_thumbnail="https://i.ytimg.com/vi/CsDI-yQuGeM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,107 +28,153 @@ youtube_thumbnail="https://i.ytimg.com/vi/CsDI-yQuGeM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a 0-indexed array 'nums' where each element represents the maximum length you can jump forward from that index. You are initially positioned at nums[0], and you need to reach the last index. Return the minimum number of jumps needed to reach the last index.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 0-indexed array of integers 'nums'. Each integer represents the maximum jump length from that index.
+- **Example:** `Input: nums = [3, 4, 1, 1, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- 0 <= nums[i] <= 1000
+	- It's guaranteed that you can reach nums[n-1].
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int jump(vector<int>& nums) {
-        int jumps = 0;
-        int cur = 0;
-        int far = 0;
-        for(int i = 0; i < nums.size() - 1; i++) {
-            far = max(far, i + nums[i]);
-            if(i == cur) {
-                cur = far;
-                jumps++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of jumps needed to reach the last index of the array.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output should be an integer representing the minimum number of jumps.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of jumps needed to reach the last index.
+
+- Initialize two variables: 'cur' (current index) and 'far' (farthest reachable index) to track your position and the furthest you can jump.
+- Iterate over the array, and for each index, update the 'far' index to reflect the maximum distance you can reach from that point.
+- When you reach 'cur' (the point where a jump is necessary), update 'cur' to 'far' and increment the jump count.
+- Repeat this process until you reach the last index.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always allow a valid path to reach the last index.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 4, 1, 1, 5]`  \
+  **Explanation:** Start at index 0, jump 3 steps to index 1, then jump 4 steps to reach the last index. This takes 2 jumps.
+
+- **Input:** `Input: nums = [2, 3, 1, 1, 4]`  \
+  **Explanation:** Jump 1 step to index 1, then jump 3 steps to reach the last index, making it a total of 2 jumps.
+
+- **Input:** `Input: nums = [1, 2, 3, 4, 5]`  \
+  **Explanation:** Jump 1 step to index 1, 2 steps to index 3, and 1 step to the last index, resulting in 3 jumps.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be approached using a greedy algorithm that minimizes the number of jumps by always jumping to the farthest possible index within each jump.
+
+### Initial Thoughts 💭
+- The key observation is that we need to jump to the farthest reachable index to minimize the number of jumps.
+- We can use a greedy strategy: always try to reach the farthest point from the current position in each jump.
+{{< dots >}}
+### Edge Cases 🌐
+- If nums has only one element, no jump is needed.
+- Ensure that the solution works efficiently with large inputs, up to the constraint limit of 10^4 elements.
+- Handle the case where nums contains large jump values at the beginning, which could quickly minimize the number of jumps.
+- The algorithm must efficiently handle arrays with lengths up to 10^4.
+{{< dots >}}
+## Code 💻
+```cpp
+int jump(vector<int>& nums) {
+    int jumps = 0;
+    int cur = 0;
+    int far = 0;
+    for(int i = 0; i < nums.size() - 1; i++) {
+        far = max(far, i + nums[i]);
+        if(i == cur) {
+            cur = far;
+            jumps++;
         }
-        return jumps;
     }
-};
-{{< /highlight >}}
----
-
-### 🏃‍♂️ **Minimum Jumps to Reach the End of the Array**
-
-The problem asks to find the minimum number of jumps required to reach the end of an array starting from the first element. Each element in the array represents the maximum number of steps you can jump forward from that position. Our goal is to compute the least number of jumps needed to move from the start to the last element.
-
----
-
-### 🚀 **Approach**
-
-To solve this efficiently, we'll use a **greedy approach**. The key idea is to always make the jump that takes us as far as possible at each step. Instead of evaluating all potential jump combinations (which would be inefficient), we will track the farthest position reachable at each step and jump accordingly. Here's a step-by-step explanation of the approach:
-
-1. **Current Position (`cur`)**: This variable tracks the farthest position we can reach with the current number of jumps.
-2. **Farthest Position (`far`)**: This keeps track of the farthest position we can reach considering all possible jumps in the current iteration.
-3. **Jumps (`jumps`)**: This variable counts the number of jumps made so far.
-4. **When to Jump**: If the current position `i` reaches the farthest point `cur`, it means we need to make a jump to the farthest position (`cur = far`) and increment the `jumps` counter.
-
----
-
-### 🖥️ **Code Breakdown (Step-by-Step)**
-
-#### Step 1: Initializing Variables
-
-```cpp
-int jumps = 0;
-int cur = 0;
-int far = 0;
-```
-
-- `jumps`: Tracks the total number of jumps taken so far.
-- `cur`: Represents the farthest index that can be reached with the current number of jumps.
-- `far`: Stores the farthest position that can be reached with the current jump (considering all possible jumps from the current index).
-
-#### Step 2: Looping Through the Array
-
-```cpp
-for (int i = 0; i < nums.size() - 1; i++) {
-    far = max(far, i + nums[i]);
-    if (i == cur) {
-        cur = far;
-        jumps++;
-    }
+    return jumps;
 }
 ```
 
-- **Line 1**: We iterate through the array, stopping just before the last element (`nums.size() - 1`) because reaching the last element means we are done.
-- **Line 2**: For each index `i`, we calculate the farthest we can reach from that index (`i + nums[i]`), and update the `far` variable to be the maximum of the current `far` and the new reachable position.
-- **Line 3**: If `i` is equal to `cur`, it means we've exhausted all reachable positions with the current number of jumps. We increment `jumps` and set `cur` to `far`, which is the farthest we can reach with the next jump.
+This code calculates the minimum number of jumps required to reach the end of an array of non-negative integers.
 
-#### Step 3: Returning the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int jump(vector<int>& nums) {
+	```
+	This line declares a function named `jump` that takes a vector of non-negative integers `nums` as input and returns the minimum number of jumps required to reach the end of the array.
 
-```cpp
-return jumps;
-```
+2. **Variable Initialization**
+	```cpp
+	    int jumps = 0;
+	```
+	This line initializes a variable `jumps` to 0 to keep track of the number of jumps made so far.
 
-- After the loop completes, the `jumps` variable contains the minimum number of jumps required to reach the last element of the array.
+3. **Variable Initialization**
+	```cpp
+	    int cur = 0;
+	```
+	This line initializes a variable `cur` to 0 to represent the current position in the array.
 
----
+4. **Variable Initialization**
+	```cpp
+	    int far = 0;
+	```
+	This line initializes a variable `far` to 0 to represent the farthest reachable position from the current position.
 
-### 🧮 **Complexity Analysis**
+5. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < nums.size() - 1; i++) {
+	```
+	This line starts a `for` loop to iterate through the array, excluding the last element.
 
-#### Time Complexity
+6. **Update Farthest Reachable Position**
+	```cpp
+	        far = max(far, i + nums[i]);
+	```
+	This line updates the `far` variable to the maximum of its current value and the farthest reachable position from the current index `i`.
 
-- The algorithm only makes a single pass through the array (`O(n)`), where `n` is the size of the input array `nums`. In each iteration, we perform constant-time operations to update `cur` and `far`, so the overall time complexity is:
-  - **Time Complexity:** `O(n)`, where `n` is the length of the array.
+7. **Condition Check**
+	```cpp
+	        if(i == cur) {
+	```
+	This line checks if the current index `i` has reached the current farthest position `cur`.
 
-#### Space Complexity
+8. **Update Current Position and Jump Count**
+	```cpp
+	            cur = far;
+	            jumps++;
+	```
+	If the condition is true, it means we've reached the end of a jump. We update the `cur` position to the new farthest reachable position `far` and increment the `jumps` count.
 
-- We only use a few variables (`jumps`, `cur`, `far`), and no additional data structures are used. Therefore, the space complexity is constant:
-  - **Space Complexity:** `O(1)`.
+9. **Return Result**
+	```cpp
+	    return jumps;
+	```
+	This line returns the final value of `jumps`, which represents the minimum number of jumps required to reach the end of the array.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### 🏁 **Conclusion**
+In all cases, the solution iterates over the array exactly once, giving it a linear time complexity.
 
-This greedy approach efficiently solves the problem of finding the minimum number of jumps required to reach the end of the array. By tracking the farthest positions reachable at each step, we ensure that we are always making the best choice at each step and minimize the number of jumps.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Time Complexity:** `O(n)` (linear time complexity, efficient for large arrays)
-- **Space Complexity:** `O(1)` (constant space usage)
+The space complexity is constant as the solution only uses a few extra variables.
 
-This solution is optimal in both time and space, making it suitable for large input arrays where an `O(n)` time complexity solution is essential.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/jump-game-ii/description/)
 

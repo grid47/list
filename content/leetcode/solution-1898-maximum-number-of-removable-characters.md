@@ -14,155 +14,277 @@ img_src = ""
 youtube = "NMP3nRPyX5g"
 youtube_upload_date="2021-06-13"
 youtube_thumbnail="https://i.ytimg.com/vi/NMP3nRPyX5g/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings s and p, where p is a subsequence of s. You are also given an array removable containing distinct indices of s. Your task is to determine the maximum number of indices you can remove from s such that p is still a subsequence of the remaining string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s, a string p, and an array removable of distinct indices in s.
+- **Example:** `For s = 'abcacb', p = 'ab', removable = [3, 1, 0]`
+- **Constraints:**
+	- 1 <= p.length <= s.length <= 105
+	- 0 <= removable.length < s.length
+	- 0 <= removable[i] < s.length
+	- p is a subsequence of s.
+	- s and p both consist of lowercase English letters.
+	- The elements in removable are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    int isSubseq(string &s, string &p, vector<int>& mp, int k) {
-        int i = 0, j = 0;
-        while(i < s.size() && j < p.size()) {
-            if(mp[i] <= k) {
-                i++;
-                continue;
-            }
-            if(s[i] == p[j]) {
-                i++;
-                j++;
-                if(j == p.size()) return true;
-            } else i++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of indices you can remove from s such that p remains a subsequence.
+- **Example:** `For s = 'abcacb', p = 'ab', removable = [3, 1, 0], the output will be 2.`
+- **Constraints:**
+	- The output is an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the maximum number of indices that can be removed without losing the subsequence property of p in s.
+
+- Iterate through the array removable and remove characters from s accordingly.
+- For each number of removals, check if p is still a subsequence of the remaining string.
+- Use binary search to find the maximum number of removable indices where p remains a subsequence.
+{{< dots >}}
+### Problem Assumptions ✅
+- p is always a subsequence of s.
+- The elements in removable are distinct and valid indices of s.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abcacb', p = 'ab', removable = [3, 1, 0]`  \
+  **Explanation:** After removing characters at indices 3 and 1, s becomes 'accb', which still contains p as a subsequence. Removing the characters at indices 3, 1, and 0 results in 'ccb', which no longer contains p.
+
+- **Input:** `s = 'abcbddddd', p = 'abcd', removable = [3, 2, 1, 4, 5, 6]`  \
+  **Explanation:** After removing the character at index 3, 'abcbddddd' becomes 'abcddddd', and p remains a subsequence.
+
+- **Input:** `s = 'abcab', p = 'abc', removable = [0, 1, 2, 3, 4]`  \
+  **Explanation:** If the first index in removable is removed, p is no longer a subsequence of the resulting string.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves checking whether p is still a subsequence of s after removing characters based on the indices provided in removable. We can use binary search to efficiently find the maximum number of indices to remove.
+
+### Initial Thoughts 💭
+- We need to check subsequence status after each potential removal.
+- We can use a binary search to find the maximum k such that p is still a subsequence of the resulting string after removing k characters.
+{{< dots >}}
+### Edge Cases 🌐
+- The input s and p will never be empty since p is a subsequence of s.
+- The algorithm should be efficient enough to handle the maximum input size where s can have up to 10^5 characters.
+- If removable contains no elements, the answer will be the maximum number of removals without affecting p.
+- The algorithm should work efficiently within the time constraints for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int isSubseq(string &s, string &p, vector<int>& mp, int k) {
+    int i = 0, j = 0;
+    while(i < s.size() && j < p.size()) {
+        if(mp[i] <= k) {
+            i++;
+            continue;
         }
-        return false;
+        if(s[i] == p[j]) {
+            i++;
+            j++;
+            if(j == p.size()) return true;
+        } else i++;
     }
-    
-    int maximumRemovals(string s, string p, vector<int>& rm) {
-        vector<int> mp(s.size(), INT_MAX);
-        for(int i = 0; i < rm.size(); i++)
-            mp[rm[i]] = i;
-        int l = 0, r = rm.size() - 1, ans = -1;
-        while(l <= r) {
-            int mid = l + (r - l + 1) / 2;
-            if(isSubseq(s, p, mp, mid)) {
-                ans = mid;
-                l = mid + 1;
-            } else {
-                r = mid - 1;
-            }
+    return false;
+}
+
+int maximumRemovals(string s, string p, vector<int>& rm) {
+    vector<int> mp(s.size(), INT_MAX);
+    for(int i = 0; i < rm.size(); i++)
+        mp[rm[i]] = i;
+    int l = 0, r = rm.size() - 1, ans = -1;
+    while(l <= r) {
+        int mid = l + (r - l + 1) / 2;
+        if(isSubseq(s, p, mp, mid)) {
+            ans = mid;
+            l = mid + 1;
+        } else {
+            r = mid - 1;
         }
-        return ans + 1;
     }
-};
-{{< /highlight >}}
----
+    return ans + 1;
+}
+```
 
-### Problem Statement
+This is a solution to a problem where we check whether a sequence `p` can be obtained from string `s` by removing a set of characters indexed in `rm`. The function `isSubseq` checks if a sequence is a subsequence, while `maximumRemovals` uses binary search to determine the maximum number of characters that can be removed while keeping `p` as a subsequence of `s`.
 
-The problem at hand is to determine the maximum number of characters from a string `s` that can be removed while still ensuring that the string `p` remains a subsequence of the modified string. A subsequence is a sequence derived from another sequence where some elements may be deleted without changing the order of the remaining elements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int isSubseq(string &s, string &p, vector<int>& mp, int k) {
+	```
+	This line defines the function `isSubseq` which checks if `p` can be formed as a subsequence of `s` after removing certain characters indexed by `mp`.
 
-Given a string `s`, a string `p`, and an array `rm` that contains the indices of characters in `s` that can potentially be removed, the goal is to find the maximum number of characters that can be removed such that `p` remains a subsequence of the remaining characters in `s`.
+2. **Variable Initialization**
+	```cpp
+	    int i = 0, j = 0;
+	```
+	Two pointers `i` and `j` are initialized to traverse `s` and `p`, respectively.
 
-### Approach
+3. **While Loop**
+	```cpp
+	    while(i < s.size() && j < p.size()) {
+	```
+	This `while` loop continues as long as there are characters in both `s` and `p` to compare.
 
-The solution to this problem employs a combination of binary search and a two-pointer technique. The core idea is to use binary search to find the maximum number of characters we can remove while still maintaining the subsequence condition.
+4. **Condition Check**
+	```cpp
+	        if(mp[i] <= k) {
+	```
+	This condition checks if the character at index `i` in `s` can be removed (based on the value in `mp`), allowing the pointer `i` to move forward.
 
-1. **Binary Search**: We perform a binary search over the possible number of characters that can be removed, ranging from `0` to the size of the `rm` array.
-2. **Subsequence Check**: For each middle value in the binary search, we check if `p` is still a subsequence of `s` after removing the specified characters using a helper function `isSubseq`.
+5. **Pointer Increment**
+	```cpp
+	            i++;
+	```
+	If the character at index `i` is removable, increment `i` and continue to the next iteration.
 
-### Code Breakdown (Step by Step)
+6. **Control Flow**
+	```cpp
+	            continue;
+	```
+	This skips the rest of the loop body and moves to the next character in `s`.
 
-1. **Class Definition**: We start by defining a class named `Solution`.
+7. **Matching Check**
+	```cpp
+	        if(s[i] == p[j]) {
+	```
+	This checks if the current characters in `s` and `p` match.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+8. **Pointer Increment**
+	```cpp
+	            i++;
+	```
+	If characters match, increment both pointers to move to the next characters.
 
-2. **isSubseq Function**: This function checks if `p` is a subsequence of `s` after removing characters according to the removal map `mp`.
+9. **Pointer Increment**
+	```cpp
+	            j++;
+	```
+	This increments pointer `j` to check the next character in `p`.
 
-   ```cpp
-       int isSubseq(string &s, string &p, vector<int>& mp, int k) {
-           int i = 0, j = 0;
-           while(i < s.size() && j < p.size()) {
-   ```
+10. **Match Completion Check**
+	```cpp
+	            if(j == p.size()) return true;
+	```
+	If the entire string `p` has been matched, return `true`.
 
-   - **Parameters**:
-     - `s`: The original string.
-     - `p`: The string to check as a subsequence.
-     - `mp`: A map that marks the indices of characters in `s` that are allowed to be removed.
-     - `k`: The maximum number of characters that can be removed.
-   
-   - **Pointer Initialization**: Two pointers, `i` for traversing `s` and `j` for traversing `p`, are initialized.
+11. **Pointer Increment**
+	```cpp
+	        } else i++;
+	```
+	If the characters don't match, move pointer `i` forward.
 
-   ```cpp
-               if(mp[i] <= k) {
-                   i++;
-                   continue;
-               }
-   ```
+12. **Return Statement**
+	```cpp
+	    return false;
+	```
+	Return `false` if the sequence `p` can't be formed from `s`.
 
-   - **Character Check**: If the character at index `i` in `s` is in the removal list up to `k`, we skip it by incrementing `i`. 
+13. **Function Definition**
+	```cpp
+	int maximumRemovals(string s, string p, vector<int>& rm) {
+	```
+	This line defines the `maximumRemovals` function which uses binary search to find the maximum number of removable characters in `s` while keeping `p` as a subsequence.
 
-   ```cpp
-               if(s[i] == p[j]) {
-                   i++;
-                   j++;
-                   if(j == p.size()) return true;
-               } else i++;
-           }
-           return false;
-       }
-   ```
+14. **Variable Initialization**
+	```cpp
+	    vector<int> mp(s.size(), INT_MAX);
+	```
+	Initialize a vector `mp` of size `s.size()` with values set to `INT_MAX`. This vector will hold the removal indices for characters in `s`.
 
-   - **Subsequence Match**: If the characters match, we increment both `i` and `j`. If all characters of `p` are matched (`j == p.size()`), we return `true`. If they do not match, we simply increment `i` to continue checking.
+15. **For Loop**
+	```cpp
+	    for(int i = 0; i < rm.size(); i++)
+	```
+	This `for` loop iterates over each index in the removal vector `rm`.
 
-3. **maximumRemovals Function**: This function uses binary search to find the maximum number of removable characters.
+16. **Index Assignment**
+	```cpp
+	        mp[rm[i]] = i;
+	```
+	Assign the removal index `i` to the corresponding position in `mp` based on the removal vector `rm`.
 
-   ```cpp
-       int maximumRemovals(string s, string p, vector<int>& rm) {
-           vector<int> mp(s.size(), INT_MAX);
-           for(int i = 0; i < rm.size(); i++)
-               mp[rm[i]] = i;
-   ```
+17. **Variable Initialization**
+	```cpp
+	    int l = 0, r = rm.size() - 1, ans = -1;
+	```
+	Initialize binary search bounds `l` and `r`, and a variable `ans` to store the result.
 
-   - **Initialization**: A vector `mp` is created to track the indices of characters in `s` that can be removed. It is initialized to `INT_MAX` to signify that no characters can be removed by default.
+18. **Binary Search Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	This `while` loop performs binary search on the removal indices.
 
-   ```cpp
-           int l = 0, r = rm.size() - 1, ans = -1;
-           while(l <= r) {
-               int mid = l + (r - l + 1) / 2;
-               if(isSubseq(s, p, mp, mid)) {
-                   ans = mid;
-                   l = mid + 1;
-               } else {
-                   r = mid - 1;
-               }
-           }
-           return ans + 1;
-       }
-   };
-   ```
+19. **Midpoint Calculation**
+	```cpp
+	        int mid = l + (r - l + 1) / 2;
+	```
+	Calculate the midpoint `mid` for the binary search.
 
-   - **Binary Search Logic**: The search continues until `l` is less than or equal to `r`. For each midpoint `mid`, it checks if `p` remains a subsequence of `s` after removing `mid` characters. If it does, we update `ans` and search in the right half; otherwise, we search in the left half.
+20. **Subsequence Check**
+	```cpp
+	        if(isSubseq(s, p, mp, mid)) {
+	```
+	Check if `p` can still be a subsequence of `s` after removing the first `mid` elements.
 
-   - **Return Value**: Finally, the function returns `ans + 1`, as the count of removable characters is expected to be zero-indexed.
+21. **Result Update**
+	```cpp
+	            ans = mid;
+	```
+	If the subsequence condition is met, update `ans` with the current value of `mid`.
 
-### Complexity
+22. **Binary Search Update**
+	```cpp
+	            l = mid + 1;
+	```
+	Update the lower bound `l` to search the higher half of the range.
 
-- **Time Complexity**: The overall time complexity of this solution is \( O(n \cdot m) \), where \( n \) is the length of string `s` and \( m \) is the length of string `p`. The binary search runs in \( O(\log r) \) iterations, where \( r \) is the size of the `rm` array, and in each iteration, the `isSubseq` function checks if `p` is a subsequence, taking \( O(n) \) time.
+23. **Binary Search Update**
+	```cpp
+	        } else {
+	```
+	If the subsequence condition is not met, search the lower half of the range.
 
-- **Space Complexity**: The space complexity is \( O(n) \) for the `mp` vector, which holds the removal indices.
+24. **Binary Search Update**
+	```cpp
+	            r = mid - 1;
+	```
+	Update the upper bound `r` to search the lower half of the range.
 
-### Conclusion
+25. **Return Statement**
+	```cpp
+	    return ans + 1;
+	```
+	Return the result, incremented by 1.
 
-The `maximumRemovals` function effectively utilizes a combination of binary search and a subsequence checking mechanism to determine the maximum number of characters that can be removed from `s` while keeping `p` as a subsequence. This method is efficient and scales well with the size of the input strings and the removal indices.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log m)
+- **Average Case:** O(n log m)
+- **Worst Case:** O(n log m)
 
-This solution is not only optimal but also highlights the importance of combining different algorithmic strategies, such as binary search and two-pointer techniques, to solve complex problems efficiently. The approach is particularly useful in scenarios where we need to check conditions involving subsequences and character manipulations, making it a valuable addition to any algorithmic toolkit.
+The time complexity is O(n log m), where n is the length of s and m is the length of removable.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the state of the removed indices.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-removable-characters/description/)
 

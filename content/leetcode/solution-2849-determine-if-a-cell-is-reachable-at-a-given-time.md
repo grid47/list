@@ -14,86 +14,125 @@ img_src = ""
 youtube = "r4MaK8AhoLI"
 youtube_upload_date="2023-09-10"
 youtube_thumbnail="https://i.ytimg.com/vi/r4MaK8AhoLI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a starting position (sx, sy) and a target position (fx, fy) on an infinite 2D grid. You need to determine if it's possible to reach the target in exactly t seconds, moving to any adjacent cell each second.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two pairs of integers representing the starting and target positions on the 2D grid, along with an integer t indicating the number of seconds.
+- **Example:** `sx = 2, sy = 4, fx = 7, fy = 7, t = 6`
+- **Constraints:**
+	- 1 <= sx, sy, fx, fy <= 10^9
+	- 0 <= t <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isReachableAtTime(int sx, int sy, int fx, int fy, int t) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it's possible to reach the target cell exactly in t seconds, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output is a boolean indicating whether the target can be reached in exactly t seconds.
 
-        int mn = min(abs(fy - sy), abs(fx - sx));
-        int asdf = (abs(fy - sy) - mn)+ (abs(fx - sx) - mn) + mn;
-        if(abs(fy - sy) == 0 && abs(fx - sx) == 0 && t == 1) return false;
-        return asdf <= t;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if the target position can be reached in exactly t seconds by moving to adjacent cells.
 
-    }
-};
-{{< /highlight >}}
----
+- Calculate the minimum time needed to reach the target using the Manhattan distance formula, considering diagonal moves.
+- Check if the remaining time after reaching the target can be matched by the time left after taking the shortest path.
+{{< dots >}}
+### Problem Assumptions ✅
+- The coordinates (sx, sy) and (fx, fy) are within the valid range.
+- Movement is allowed to any adjacent cell, including diagonals.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `sx = 2, sy = 4, fx = 7, fy = 7, t = 6`  \
+  **Explanation:** Starting at (2, 4), you can reach (7, 7) in exactly 6 seconds by following a diagonal path. Hence, the output is true.
 
-### Problem Statement
+- **Input:** `sx = 3, sy = 1, fx = 7, fy = 3, t = 3`  \
+  **Explanation:** Starting at (3, 1), the minimum time to reach (7, 3) is 4 seconds. Since t = 3, it's impossible to reach the target in exactly 3 seconds.
 
-The problem asks whether it is possible to reach a target point `(fx, fy)` from a starting point `(sx, sy)` in exactly `t` units of time. Movement is allowed along both the x-axis and y-axis simultaneously, meaning you can move diagonally as well as in straight lines. The task is to determine if you can reach the destination in the given time `t`.
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the minimum number of seconds required to reach the target, considering both horizontal and diagonal moves, and checking if we can use the remaining seconds to reach the target exactly.
 
-### Approach
-
-To solve this problem, we need to calculate the number of steps required to reach the destination from the starting point. The key idea is to use the concept of Manhattan distance for this problem. 
-
-Manhattan distance between two points `(sx, sy)` and `(fx, fy)` is the sum of the absolute differences of their x and y coordinates:
-\[
-\text{distance} = |fx - sx| + |fy - sy|
-\]
-
-Since we are allowed to move diagonally, we can reduce this distance by moving in both the x and y directions at the same time. However, after moving diagonally for as long as possible, we will need to cover any remaining horizontal or vertical distance.
-
-We need to ensure that the time `t` is sufficient to cover the entire distance but also not too large such that the exact time `t` is exhausted but we cannot reach the destination in exactly `t` time.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Calculate the Minimum Moves Required
+### Initial Thoughts 💭
+- The Manhattan distance gives the minimum number of moves required if only horizontal and vertical moves are allowed.
+- Diagonal moves reduce the required time.
+- We need to check if the time remaining after reaching the target is non-negative and even, since extra time can only be used in pairs of moves.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs are expected as per the problem statement.
+- The solution should handle large values of coordinates and time efficiently.
+- When sx == fx and sy == fy, the only way to reach the target in exactly t seconds is if t is even.
+- The approach should work for large values up to 10^9.
+{{< dots >}}
+## Code 💻
 ```cpp
-int mn = min(abs(fy - sy), abs(fx - sx));
+bool isReachableAtTime(int sx, int sy, int fx, int fy, int t) {
+
+    int mn = min(abs(fy - sy), abs(fx - sx));
+    int asdf = (abs(fy - sy) - mn)+ (abs(fx - sx) - mn) + mn;
+    if(abs(fy - sy) == 0 && abs(fx - sx) == 0 && t == 1) return false;
+    return asdf <= t;
+
+}
 ```
-- The variable `mn` calculates the minimum of the horizontal distance (`abs(fx - sx)`) and the vertical distance (`abs(fy - sy)`). This represents the maximum number of diagonal steps we can take, as we can reduce both the x and y distances simultaneously by 1 unit with each diagonal move. We move diagonally until one of the coordinates (either x or y) is exhausted.
 
-#### Step 2: Calculate the Remaining Distance
-```cpp
-int asdf = (abs(fy - sy) - mn) + (abs(fx - sx) - mn) + mn;
-```
-- After moving diagonally, we calculate how much distance remains for both the x and y directions. The expression `(abs(fy - sy) - mn)` computes the remaining vertical distance, and `(abs(fx - sx) - mn)` computes the remaining horizontal distance. The total distance `asdf` is the sum of these remaining distances along with the diagonal distance (`mn`).
+This function checks if a point (fx, fy) is reachable from (sx, sy) within 't' time, using a specific movement rule.
 
-#### Step 3: Special Case When Already at Destination
-```cpp
-if (abs(fy - sy) == 0 && abs(fx - sx) == 0 && t == 1) return false;
-```
-- This line checks if the starting point is the same as the destination, meaning `(sx, sy)` equals `(fx, fy)`. If we are already at the destination and the time `t` is exactly 1, it would be impossible to stay at the destination for 1 unit of time (since the problem specifies reaching the destination, not staying there), so it returns `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isReachableAtTime(int sx, int sy, int fx, int fy, int t) {
+	```
+	Defines the function 'isReachableAtTime' that checks if the destination (fx, fy) is reachable from the source (sx, sy) in the given time 't'.
 
-#### Step 4: Check if Reaching the Target is Possible in Time `t`
-```cpp
-return asdf <= t;
-```
-- Finally, the code checks if the total calculated distance `asdf` is less than or equal to the given time `t`. If it is, it means we can reach the destination in the given time. If `asdf` is greater than `t`, it would be impossible to reach the target in exactly `t` units of time, and the function returns `false`.
+2. **Minimum Calculation**
+	```cpp
+	    int mn = min(abs(fy - sy), abs(fx - sx));
+	```
+	Calculates the minimum of the absolute differences between the y-coordinates and x-coordinates of the source and destination.
 
-### Complexity
+3. **Adjusted Distance Calculation**
+	```cpp
+	    int asdf = (abs(fy - sy) - mn)+ (abs(fx - sx) - mn) + mn;
+	```
+	Computes the total distance adjusted by the previously calculated minimum value, summing the remaining x and y distances after subtracting 'mn'.
 
-#### Time Complexity:
-- **O(1)**: The algorithm involves only a few constant-time operations, such as calculating absolute differences, the minimum of two values, and a few condition checks. Hence, the time complexity is constant, O(1), regardless of the size of the input.
+4. **Edge Case Check**
+	```cpp
+	    if(abs(fy - sy) == 0 && abs(fx - sx) == 0 && t == 1) return false;
+	```
+	Checks if the source and destination are the same and if the time 't' is exactly 1, in which case the point is unreachable, returning false.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because the algorithm uses a fixed amount of space for storing variables such as `mn` and `asdf`. No additional data structures or dynamic memory allocation are used.
+5. **Final Check**
+	```cpp
+	    return asdf <= t;
+	```
+	Compares the adjusted distance 'asdf' with the time 't' and returns true if the destination is reachable within the given time, otherwise false.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution is both time and space efficient, achieving constant time complexity (O(1)) and constant space complexity (O(1)). The approach leverages simple geometry (Manhattan distance and diagonal movement) to determine whether it's possible to reach the target in the given time. By calculating the minimal number of diagonal moves and considering the remaining horizontal and vertical movements, the code ensures that the result is computed efficiently.
+The time complexity is O(1) because we only perform a few arithmetic operations.
 
-The special case when the starting point and the destination are the same is also correctly handled. This solution avoids unnecessary calculations and provides an accurate answer with minimal computational effort.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The simplicity and efficiency of the approach make it a solid solution for solving this problem in a wide range of scenarios where a time-efficient algorithm is necessary.
+The space complexity is O(1) as we only use a constant amount of space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-if-a-cell-is-reachable-at-a-given-time/description/)
 

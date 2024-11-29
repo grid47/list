@@ -14,53 +14,110 @@ img_src = ""
 youtube = "IG6X2CXMdKw"
 youtube_upload_date="2021-03-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/IG6X2CXMdKw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with creating an authentication system that handles tokens. Each token has an expiration time, and a user can generate new tokens or renew existing ones before they expire. The system should track and count the number of unexpired tokens at any given time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a series of operations: creating new tokens, renewing tokens, and counting unexpired tokens. Each token has an expiration time determined by the timeToLive parameter provided during the initialization of the AuthenticationManager.
+- **Example:** `Input: ["AuthenticationManager", "generate", "renew", "countUnexpiredTokens"]
+[[5], ["aaa", 1], ["aaa", 2], [6]]`
+- **Constraints:**
+	- 1 <= timeToLive <= 10^8
+	- 1 <= currentTime <= 10^8
+	- 1 <= tokenId.length <= 5
+	- tokenId consists only of lowercase letters
+	- All generate calls will have unique tokenIds
+	- currentTime will strictly increase with each operation
 
-{{< highlight cpp >}}
-class AuthenticationManager {
-public:
-    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
-    map<string, int> mp;
-    int ttl;
-    AuthenticationManager(int timeToLive) {
-        ttl = timeToLive;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output consists of the results of the operations, with generate and renew methods returning 'null' and the countUnexpiredTokens method returning the count of unexpired tokens at the given time.
+- **Example:** `Output: [null, null, null, 1]`
+- **Constraints:**
+	- The function must be efficient enough to handle up to 2000 operations.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Implement a system to manage token generation, renewal, and expiration, ensuring the correct number of unexpired tokens is returned when requested.
+
+- Initialize an authentication manager with a given timeToLive.
+- For each token, store its expiration time when it is generated.
+- For renewals, check if the token exists and is unexpired before extending its expiration time.
+- Implement a method to count the number of unexpired tokens based on the current time.
+{{< dots >}}
+### Problem Assumptions ✅
+- Tokens are uniquely identified by their tokenId.
+- All tokens have an expiration time that is based on the current time and the timeToLive value.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["AuthenticationManager", "generate", "renew", "countUnexpiredTokens"]
+[[5], ["aaa", 1], ["aaa", 2], [6]]`  \
+  **Explanation:** The system initializes with a timeToLive of 5 seconds. A new token 'aaa' is generated at time 1. At time 6, there is one unexpired token, 'aaa', so the count is 1.
+
+- **Input:** `Input: ["AuthenticationManager", "generate", "renew", "countUnexpiredTokens"]
+[[5], ["aaa", 1], ["aaa", 2], [7]]`  \
+  **Explanation:** At time 7, the token 'aaa' has expired, so there are no unexpired tokens, and the count is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves using a priority queue to track token expiration times and a map to store the number of unexpired tokens.
+
+### Initial Thoughts 💭
+- We need to efficiently track and update the expiration times of each token.
+- A priority queue can be used to easily manage the earliest expiration times.
+- We can process tokens efficiently by using a priority queue to manage expiration times, and a map to track how many tokens are unexpired at any given time.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure that the function handles cases where no tokens are generated.
+- The solution must be able to handle up to 2000 operations efficiently.
+- Handle cases where a token is requested for renewal after it has already expired.
+- The system should be able to handle up to 2000 operations and must perform efficiently within the time and space constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
+map<string, int> mp;
+int ttl;
+AuthenticationManager(int timeToLive) {
+    ttl = timeToLive;
+}
+
+void generate(string tokenId, int currentTime) {
+    while(!pq.empty() && currentTime >= pq.top().first) {
+        mp[pq.top().second]--;
+        if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+        pq.pop();
     }
-    
-    void generate(string tokenId, int currentTime) {
-        while(!pq.empty() && currentTime >= pq.top().first) {
-            mp[pq.top().second]--;
-            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
-            pq.pop();
-        }
-        pq.push({currentTime + ttl, tokenId});
+    pq.push({currentTime + ttl, tokenId});
+    mp[tokenId]++;
+}
+
+void renew(string tokenId, int currentTime) {
+    while(!pq.empty() && currentTime >= pq.top().first) {
+        mp[pq.top().second]--;
+        if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+        pq.pop();
+    }
+    if(mp.count(tokenId)) {
+        pq.push({currentTime + ttl, tokenId});            
         mp[tokenId]++;
     }
-    
-    void renew(string tokenId, int currentTime) {
-        while(!pq.empty() && currentTime >= pq.top().first) {
-            mp[pq.top().second]--;
-            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
-            pq.pop();
-        }
-        if(mp.count(tokenId)) {
-            pq.push({currentTime + ttl, tokenId});            
-            mp[tokenId]++;
-        }
+}
+
+int countUnexpiredTokens(int currentTime) {
+    while(!pq.empty() && currentTime >= pq.top().first) {
+        mp[pq.top().second]--;
+        if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+        pq.pop();
     }
-    
-    int countUnexpiredTokens(int currentTime) {
-        while(!pq.empty() && currentTime >= pq.top().first) {
-            mp[pq.top().second]--;
-            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
-            pq.pop();
-        }
-        return mp.size();
-    }
+    return mp.size();
+}
 };
 
 /**
@@ -69,114 +126,185 @@ public:
  * obj->generate(tokenId,currentTime);
  * obj->renew(tokenId,currentTime);
  * int param_3 = obj->countUnexpiredTokens(currentTime);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves designing an `AuthenticationManager` that handles token generation and renewal with a specified time-to-live (TTL). The primary tasks include generating tokens, renewing them, and counting unexpired tokens based on their lifetime. Tokens are considered expired if the current time exceeds their TTL. This is essential in applications requiring secure access control, such as APIs and user authentication systems.
-
-### Approach
-
-To efficiently manage the tokens and their expiration, we can use a combination of a priority queue and a map:
-
-1. **Priority Queue**: This will store the tokens along with their expiration times in a way that allows for easy retrieval of the earliest expired token.
-  
-2. **Map**: This will keep track of the count of valid (unexpired) tokens associated with their IDs, allowing for quick updates when tokens are generated or renewed.
-
-3. **Methods**:
-   - `generate(tokenId, currentTime)`: This method creates a new token with an expiration time based on the current time and TTL.
-   - `renew(tokenId, currentTime)`: This method renews an existing token, updating its expiration time if it has not expired yet.
-   - `countUnexpiredTokens(currentTime)`: This method counts the total number of unexpired tokens by removing any expired tokens from the data structures.
-
-### Code Breakdown (Step by Step)
-
-Here’s the complete code for the `AuthenticationManager` class:
-
-```cpp
-class AuthenticationManager {
-public:
-    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
-    map<string, int> mp;
-    int ttl;
 ```
-- We define the `AuthenticationManager` class, which includes a priority queue `pq` to store token expiration times and their corresponding IDs.
-- A map `mp` keeps track of the count of each token ID currently active.
-- An integer `ttl` holds the time-to-live value for tokens.
 
-```cpp
-    AuthenticationManager(int timeToLive) {
-        ttl = timeToLive;
-    }
-```
-- The constructor initializes the `ttl` variable with the provided time-to-live value for the tokens.
+This implementation of the AuthenticationManager class uses a priority queue to efficiently manage the expiration of authentication tokens. It supports three main operations: generating a token, renewing an existing token, and counting the number of unexpired tokens at any given time.
 
-```cpp
-    void generate(string tokenId, int currentTime) {
-        while(!pq.empty() && currentTime >= pq.top().first) {
-            mp[pq.top().second]--;
-            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
-            pq.pop();
-        }
-```
-- The `generate` method first checks for any expired tokens. If the current time exceeds the expiration time of the earliest token in the priority queue, it decrements the count of that token ID in the map. If the count drops to zero, the token ID is removed from the map.
-- The expired tokens are then removed from the priority queue as well.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
+	```
+	Declare a priority queue to store the expiration time of tokens along with the token ID. It uses the `greater` comparator to ensure the token with the earliest expiration time is at the top.
 
-```cpp
-        pq.push({currentTime + ttl, tokenId});
-        mp[tokenId]++;
-    }
-```
-- After cleaning up expired tokens, the method adds a new token to the priority queue with its expiration time and updates the map to reflect the new token.
+2. **Variable Initialization**
+	```cpp
+	map<string, int> mp;
+	```
+	Declare a map to store the count of each token, which allows checking if a token exists and managing its renewals.
 
-```cpp
-    void renew(string tokenId, int currentTime) {
-        while(!pq.empty() && currentTime >= pq.top().first) {
-            mp[pq.top().second]--;
-            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
-            pq.pop();
-        }
-```
-- The `renew` method similarly cleans up expired tokens before attempting to renew the specified token ID.
-- If the token is valid (exists in the map), it updates the expiration time and increments its count in the map.
+3. **Constructor**
+	```cpp
+	int ttl;
+	```
+	Declare an integer variable `ttl` to store the time-to-live value for the tokens.
 
-```cpp
-        if(mp.count(tokenId)) {
-            pq.push({currentTime + ttl, tokenId});            
-            mp[tokenId]++;
-        }
-    }
-```
-- If the token exists, a new expiration time is pushed to the priority queue, and its count is incremented.
+4. **Constructor**
+	```cpp
+	AuthenticationManager(int timeToLive) {
+	```
+	Constructor that initializes the `ttl` variable with the provided time-to-live value for tokens.
 
-```cpp
-    int countUnexpiredTokens(int currentTime) {
-        while(!pq.empty() && currentTime >= pq.top().first) {
-            mp[pq.top().second]--;
-            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
-            pq.pop();
-        }
-        return mp.size();
-    }
-};
-```
-- The `countUnexpiredTokens` method cleans up expired tokens and returns the size of the map, which corresponds to the count of unexpired tokens.
+5. **Constructor**
+	```cpp
+	    ttl = timeToLive;
+	```
+	Set the time-to-live value for the AuthenticationManager.
 
-### Complexity
+6. **Function Definition**
+	```cpp
+	void generate(string tokenId, int currentTime) {
+	```
+	Define the `generate` function that creates a new token with a specific ID and time, adding it to the priority queue and map.
 
-- **Time Complexity**:
-  - `generate`: \(O(\log m)\), where \(m\) is the number of tokens currently stored in the priority queue.
-  - `renew`: \(O(\log m)\), for the same reasons as above.
-  - `countUnexpiredTokens`: \(O(m \log m)\) in the worst case if all tokens are expired.
-  
-- **Space Complexity**: \(O(m)\), where \(m\) is the number of tokens being managed, due to the storage in the priority queue and map.
+7. **Token Management**
+	```cpp
+	    while(!pq.empty() && currentTime >= pq.top().first) {
+	```
+	Start a loop to remove expired tokens from the priority queue and map based on the current time.
 
-### Conclusion
+8. **Token Management**
+	```cpp
+	        mp[pq.top().second]--;
+	```
+	Decrement the count of the token in the map.
 
-The `AuthenticationManager` class effectively manages tokens through a priority queue and a hash map, allowing for efficient generation, renewal, and counting of unexpired tokens. The design of the class demonstrates best practices in handling time-based events and managing dynamic collections in C++. This implementation can be highly beneficial in secure applications where token management is crucial for maintaining access control, such as in user authentication and session management systems.
+9. **Token Cleanup**
+	```cpp
+	        if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+	```
+	If a token's count becomes zero, remove it from the map.
 
-By leveraging a combination of data structures, the class ensures that it can handle various operations with optimal time complexity, making it suitable for high-performance applications where speed and efficiency are paramount. The use of STL containers simplifies the implementation, providing a clean and maintainable solution. This class serves as a foundational component in systems that require robust authentication mechanisms, highlighting the importance of effective token management in software development.
+10. **Token Management**
+	```cpp
+	        pq.pop();
+	```
+	Remove the expired token from the priority queue.
+
+11. **Token Insertion**
+	```cpp
+	    pq.push({currentTime + ttl, tokenId});
+	```
+	Push the new token with its expiration time into the priority queue.
+
+12. **Token Insertion**
+	```cpp
+	    mp[tokenId]++;
+	```
+	Increment the count of the token in the map.
+
+13. **Function Definition**
+	```cpp
+	void renew(string tokenId, int currentTime) {
+	```
+	Define the `renew` function that renews an existing token if it is still valid.
+
+14. **Token Renewal**
+	```cpp
+	    while(!pq.empty() && currentTime >= pq.top().first) {
+	```
+	Similar to `generate`, remove expired tokens from the priority queue and map.
+
+15. **Token Renewal**
+	```cpp
+	        mp[pq.top().second]--;
+	```
+	Decrement the count of the token being renewed.
+
+16. **Token Cleanup**
+	```cpp
+	        if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+	```
+	Remove expired tokens from the map if their count reaches zero.
+
+17. **Token Management**
+	```cpp
+	        pq.pop();
+	```
+	Pop the expired token from the priority queue.
+
+18. **Token Renewal**
+	```cpp
+	    if(mp.count(tokenId)) {
+	```
+	Check if the token exists in the map.
+
+19. **Token Renewal**
+	```cpp
+	        pq.push({currentTime + ttl, tokenId});
+	```
+	Push the renewed token with a new expiration time into the priority queue.
+
+20. **Token Renewal**
+	```cpp
+	        mp[tokenId]++;
+	```
+	Increment the token count in the map.
+
+21. **Function Definition**
+	```cpp
+	int countUnexpiredTokens(int currentTime) {
+	```
+	Define the `countUnexpiredTokens` function that counts the number of unexpired tokens.
+
+22. **Token Counting**
+	```cpp
+	    while(!pq.empty() && currentTime >= pq.top().first) {
+	```
+	Remove expired tokens from the priority queue and map.
+
+23. **Token Cleanup**
+	```cpp
+	        mp[pq.top().second]--;
+	```
+	Decrement the count of the expired token.
+
+24. **Token Cleanup**
+	```cpp
+	        if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+	```
+	Remove expired tokens from the map.
+
+25. **Token Cleanup**
+	```cpp
+	        pq.pop();
+	```
+	Pop the expired token from the priority queue.
+
+26. **Return Statement**
+	```cpp
+	    return mp.size();
+	```
+	Return the number of unexpired tokens.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n) for each generate, renew, and countUnexpiredTokens operation, where n is the number of tokens.
+- **Average Case:** O(log n) for each operation due to the use of the priority queue.
+- **Worst Case:** O(log n) for each operation, where n is the number of tokens in the system.
+
+Each operation requires O(log n) time due to the priority queue operations.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no tokens are stored.
+- **Worst Case:** O(n), where n is the number of tokens, due to the storage requirements of the priority queue and map.
+
+The space complexity is O(n), where n is the number of tokens, as both the priority queue and the map store each token.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-authentication-manager/description/)
 

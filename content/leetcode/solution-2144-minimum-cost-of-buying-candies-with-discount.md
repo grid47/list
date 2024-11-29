@@ -14,111 +14,138 @@ img_src = ""
 youtube = "KvdPgFfH1t0"
 youtube_upload_date="2022-01-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/KvdPgFfH1t0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A shop offers a special deal: for every two candies you purchase, you get a third candy for free. The free candy must have a cost that is less than or equal to the minimum cost of the two candies purchased. Calculate the minimum cost of purchasing all candies.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `cost`, where each element represents the cost of a candy.
+- **Example:** `Input: cost = [3, 5, 7]`
+- **Constraints:**
+	- 1 <= cost.length <= 100
+	- 1 <= cost[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumCost(vector<int>& cost) {
-        sort(cost.begin(), cost.end());
-        int n = cost.size(), res = 0;
-        for(int i = 0; i < n; i++) {
-          if(i % 3 == n % 3) continue;
-          res += cost[i];
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer, representing the minimum cost of buying all the candies while making use of the 'buy 2, get 1 free' offer.
+- **Example:** `Output: 10`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Minimize the total cost by selecting pairs of candies to buy and making use of the third free candy when applicable.
+
+- Sort the candy prices in descending order.
+- For every three consecutive candies, only pay for the first two.
+- Sum up the costs of the candies you actually paid for to get the minimum cost.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always valid and contains at least one candy.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `cost = [3, 5, 7]`  \
+  **Explanation:** The optimal strategy is to buy the candies with costs 7 and 5, then take the candy priced at 3 for free. This results in a total cost of 5 + 7 = 10.
+
+- **Input:** `cost = [4, 9, 3, 6, 2, 1]`  \
+  **Explanation:** The optimal strategy is to buy candies with costs 9 and 6, then take the candy priced at 4 for free. After that, buy candies with costs 3 and 2, then take the candy priced at 1 for free. This results in a total cost of 9 + 6 + 3 + 2 = 17.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves sorting the candy prices in descending order and then pairing the candies optimally to minimize the cost using the 'buy 2, get 1 free' offer.
+
+### Initial Thoughts 💭
+- By buying the most expensive candies first, we can maximize the value of the free candy.
+- Sorting the prices in descending order ensures that the free candy is always the cheapest option.
+- A greedy approach works well in this case because it allows us to efficiently maximize the value of the 'buy 2, get 1 free' offer.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one candy, so there will be no empty inputs.
+- The approach must efficiently handle up to 100 candies.
+- If there are fewer than three candies, no candy will be free.
+- The solution must ensure that the time complexity remains manageable, even for the largest inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumCost(vector<int>& cost) {
+    sort(cost.begin(), cost.end());
+    int n = cost.size(), res = 0;
+    for(int i = 0; i < n; i++) {
+      if(i % 3 == n % 3) continue;
+      res += cost[i];
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the minimum cost by sorting the input vector and excluding every third element in the sorted list.
 
-The problem is to determine the minimum cost of purchasing items from a store, given a list of costs associated with each item. The key condition is that for every three items purchased, the cheapest one is free. The goal is to calculate the total minimum cost incurred while following this rule.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minimumCost(vector<int>& cost) {
+	```
+	This line defines the function `minimumCost`, which takes a reference to a vector `cost` as input and returns an integer representing the minimum cost.
 
-### Approach
+2. **Sorting**
+	```cpp
+	    sort(cost.begin(), cost.end());
+	```
+	This line sorts the vector `cost` in ascending order to arrange the cost values from smallest to largest.
 
-To efficiently calculate the minimum cost, the algorithm follows these steps:
+3. **Variable Initialization**
+	```cpp
+	    int n = cost.size(), res = 0;
+	```
+	This initializes two variables: `n` as the size of the sorted vector and `res` to store the accumulated result (initially set to 0).
 
-1. **Sorting the Costs**: By sorting the costs in ascending order, we can ensure that when we select items, the most expensive ones are prioritized for payment, maximizing the savings from the free item rule.
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This initiates a loop that iterates over each element of the sorted `cost` vector.
 
-2. **Iterating Through the Costs**: The algorithm iterates through the sorted list of costs and selectively sums the costs, skipping every third item. This ensures that the least expensive item among every three selected items is effectively counted as free.
+5. **Condition Check**
+	```cpp
+	      if(i % 3 == n % 3) continue;
+	```
+	This condition skips every third element in the sorted vector by checking the modulus of the current index `i` against `n % 3`.
 
-3. **Calculating the Result**: The final result is the accumulated cost after applying the above logic, which gives us the minimum cost incurred.
+6. **Accumulate Cost**
+	```cpp
+	      res += cost[i];
+	```
+	If the condition is not met (i.e., the current element is not skipped), this line adds the value of `cost[i]` to the result `res`.
 
-### Code Breakdown (Step by Step)
+7. **Return Result**
+	```cpp
+	    return res;
+	```
+	After processing all elements, this line returns the accumulated result `res`, which is the minimum cost excluding every third element.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The class `Solution` is defined, which contains the method to solve the problem.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-2. **Minimum Cost Function**:
-   ```cpp
-   int minimumCost(vector<int>& cost) {
-   ```
-   - This function takes a vector of integers (`cost`), representing the cost of each item.
+The time complexity is dominated by the sorting step, which is O(n log n), where n is the number of candies.
 
-3. **Sorting the Costs**:
-   ```cpp
-   sort(cost.begin(), cost.end());
-   ```
-   - The costs are sorted in ascending order to facilitate the logic of skipping the least expensive item when three items are considered.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Initialization**:
-   ```cpp
-   int n = cost.size(), res = 0;
-   ```
-   - The size of the cost array (`n`) is stored, and a variable (`res`) is initialized to hold the total cost.
+The space complexity is O(n) due to the space required for storing the sorted list of candy prices.
 
-5. **Iterating Through the Sorted Costs**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       if(i % 3 == n % 3) continue;
-       res += cost[i];
-   }
-   ```
-   - A loop iterates over each cost. The condition `i % 3 == n % 3` checks whether the current index corresponds to the position of the free item based on the total count of items.
-   - If the condition is true, the current item is skipped (not added to `res`).
-   - If false, the cost of the item is added to `res`.
+**Happy Coding! 🎉**
 
-6. **Return the Result**:
-   ```cpp
-   return res;
-   }
-   ```
-   - Finally, the total minimum cost (`res`) is returned as the output.
-
-7. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This closing brace signifies the end of the `Solution` class.
-
-### Complexity Analysis
-
-- **Time Complexity**: \(O(n \log n)\), where \(n\) is the number of items in the cost array.
-  - The most time-consuming operation is sorting the costs, which runs in \(O(n \log n)\). The subsequent loop runs in linear time \(O(n)\).
-
-- **Space Complexity**: \(O(1)\)
-  - The algorithm uses a constant amount of additional space since no significant data structures are created beyond the input.
-
-### Conclusion
-
-The `minimumCost` function effectively calculates the minimum cost of purchasing items while adhering to the promotional rule of getting the cheapest item for free among every three items bought. 
-
-This solution is efficient, leveraging sorting and simple iteration to achieve the desired result with optimal time complexity. By following the outlined approach, developers can handle similar problems involving conditional selections and cost optimizations in various scenarios.
-
-Understanding and implementing this solution provides valuable insights into algorithm design, particularly in sorting-based problems and greedy algorithms where optimal decisions are made based on local conditions to achieve a global goal.
-
-In practice, mastering these techniques will enhance your ability to tackle complex coding challenges, making you more adept in competitive programming and software development.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/description/)
 

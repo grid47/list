@@ -14,123 +14,147 @@ img_src = ""
 youtube = "99KTTNdlKns"
 youtube_upload_date="2022-10-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/99KTTNdlKns/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two arrays of strings, 'queries' and 'dictionary', where each word has the same length. A word from the 'queries' array can be transformed into a word from the 'dictionary' array by making at most two edits. An edit involves changing any character in the word to another letter. Your task is to find all words from 'queries' that, after making at most two edits, can match some word in 'dictionary'. Return the words in the same order they appear in the 'queries'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays, 'queries' and 'dictionary', where each element in both arrays is a string of lowercase English letters.
+- **Example:** `queries = ["hello", "world", "clue", "blue"], dictionary = ["blow", "hole", "blue"]`
+- **Constraints:**
+	- 1 <= queries.length, dictionary.length <= 100
+	- n == queries[i].length == dictionary[j].length
+	- 1 <= n <= 100
+	- All queries[i] and dictionary[j] are composed of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> twoEditWords(vector<string>& queries, vector<string>& dictionary) {
-        vector<string> res;
-        for(auto &q: queries)
-        for(auto &d: dictionary)
-        if(inner_product(begin(q), end(q), begin(d), 0, plus<int>(), not_equal_to<char>()) < 3) {
-            res.push_back(q);
-            break;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of words from 'queries' that can be transformed into a word from 'dictionary' with at most two edits.
+- **Example:** `Output: ["hello", "blue"]`
+- **Constraints:**
+	- The result list should contain the words in the same order they appear in 'queries'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find all words in 'queries' that can match some word from 'dictionary' after at most two edits.
+
+- 1. For each word in 'queries', compare it to each word in 'dictionary'.
+- 2. Count the number of character mismatches between the words.
+- 3. If the number of mismatches is less than or equal to two, add the word from 'queries' to the result list.
+- 4. Return the result list containing all the words from 'queries' that match some word in 'dictionary'.
+{{< dots >}}
+### Problem Assumptions ✅
+- The words in 'queries' and 'dictionary' are all valid lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `queries = ["hello", "world", "clue", "blue"], dictionary = ["blow", "hole", "blue"]`  \
+  **Explanation:** The word 'hello' from queries can become 'blow' in the dictionary with one edit ('h' to 'b'). 'world' cannot match any word from the dictionary with two or fewer edits. 'clue' can become 'blue' with one edit ('c' to 'b'). Thus, the result is ["hello", "blue"].
+
+- **Input:** `queries = ["apple", "grape", "melon"], dictionary = ["apricot", "grape", "mole"]`  \
+  **Explanation:** The word 'apple' cannot match any word from the dictionary with at most two edits. 'grape' matches with 'grape' in the dictionary (no edits needed). 'melon' can be changed to 'mole' with one edit ('n' to 'e'). Hence, the result is ["grape", "melon"].
+
+{{< dots >}}
+## Approach 🚀
+We will compare each word from 'queries' to each word from 'dictionary'. If a word from 'queries' can match a word from 'dictionary' after at most two edits, it will be added to the result list.
+
+### Initial Thoughts 💭
+- The task involves counting character mismatches and ensuring the number of mismatches is at most two.
+- We can compare each word in 'queries' with each word in 'dictionary' and count mismatches in O(n) time for each pair of words.
+{{< dots >}}
+### Edge Cases 🌐
+- If 'queries' or 'dictionary' is empty, return an empty result list.
+- The solution should handle the case where both 'queries' and 'dictionary' contain the maximum allowed number of words and word length.
+- If all words in 'queries' are already present in 'dictionary', no edits are needed, and the solution should correctly handle this case.
+- Ensure the solution handles the constraint of word lengths efficiently, particularly when they are close to the maximum value of 100.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> twoEditWords(vector<string>& queries, vector<string>& dictionary) {
+    vector<string> res;
+    for(auto &q: queries)
+    for(auto &d: dictionary)
+    if(inner_product(begin(q), end(q), begin(d), 0, plus<int>(), not_equal_to<char>()) < 3) {
+        res.push_back(q);
+        break;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement:
-In this problem, we are tasked with identifying words in a given list of queries that can be transformed into any word in a dictionary with at most two character changes. Specifically, for each query word, we need to check if there is any word in the dictionary that can be modified by changing at most two characters (at any position) to become the query word.
+This function compares words from two lists (queries and dictionary) and returns the words from `queries` that differ from at most two characters compared to any word in `dictionary`.
 
-### Approach:
-The problem can be approached by iterating through each query word and comparing it with every word in the dictionary. The goal is to check if the query word can match any dictionary word with at most two changes. This means that for each pair of query and dictionary word, we need to count the number of positions at which the characters differ.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> twoEditWords(vector<string>& queries, vector<string>& dictionary) {
+	```
+	Defines the `twoEditWords` function that takes two vectors of strings: `queries` and `dictionary`, and returns a vector of strings containing words from `queries` that differ by at most 2 characters from any word in `dictionary`.
 
-If the number of differing positions is less than or equal to two, then that dictionary word qualifies as a match for the query. The query word is then added to the result list.
+2. **Variable Initialization**
+	```cpp
+	    vector<string> res;
+	```
+	Initializes an empty vector `res` to store the result of words from `queries` that meet the specified condition.
 
-### Code Breakdown (Step by Step):
-Let’s walk through the solution code in detail, explaining each section step by step.
+3. **Outer Loop**
+	```cpp
+	    for(auto &q: queries)
+	```
+	Starts an outer loop to iterate over each word `q` in the `queries` list.
 
-1. **Function Declaration**:
-   ```cpp
-   vector<string> twoEditWords(vector<string>& queries, vector<string>& dictionary)
-   ```
-   This function `twoEditWords` takes in two parameters: 
-   - A vector `queries` containing the list of query words.
-   - A vector `dictionary` containing the list of dictionary words.
-   
-   It returns a vector of strings, containing the query words that can be transformed into any dictionary word by changing at most two characters.
+4. **Inner Loop**
+	```cpp
+	    for(auto &d: dictionary)
+	```
+	Starts an inner loop to iterate over each word `d` in the `dictionary` list.
 
-2. **Result Vector Initialization**:
-   ```cpp
-   vector<string> res;
-   ```
-   A `vector<string>` named `res` is initialized. This will hold the query words that meet the criteria — that is, words that can be transformed into a dictionary word with at most two character changes.
+5. **Comparison Condition**
+	```cpp
+	    if(inner_product(begin(q), end(q), begin(d), 0, plus<int>(), not_equal_to<char>()) < 3) {
+	```
+	Uses `inner_product` to compare characters between the two words `q` and `d`. The condition checks if the number of different characters between the two words is less than 3.
 
-3. **Outer Loop (Iterating Over Queries)**:
-   ```cpp
-   for (auto &q : queries)
-   ```
-   This outer loop iterates over each query word in the `queries` vector. The variable `q` refers to the current query word being processed.
+6. **Add to Result**
+	```cpp
+	        res.push_back(q);
+	```
+	If the condition is satisfied (i.e., the words differ by fewer than 3 characters), the word `q` is added to the result vector `res`.
 
-4. **Inner Loop (Iterating Over Dictionary)**:
-   ```cpp
-   for (auto &d : dictionary)
-   ```
-   Inside the outer loop, we have an inner loop that iterates over each word in the `dictionary`. The variable `d` refers to the current dictionary word being compared with the query word `q`.
+7. **Break Statement**
+	```cpp
+	        break;
+	```
+	Breaks the inner loop once a match is found, as we only need one match to add the word `q` to the result.
 
-5. **Comparison Using `inner_product`**:
-   ```cpp
-   if (inner_product(begin(q), end(q), begin(d), 0, plus<int>(), not_equal_to<char>()) < 3)
-   ```
-   Here’s where the main logic for comparing the query word and the dictionary word is applied. 
-   
-   The `inner_product` function is used to compare the query word `q` and the dictionary word `d`. It computes a sum of results from applying the `not_equal_to<char>()` operation to corresponding characters of `q` and `d`. This operation checks whether the characters are different at each position.
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the result vector `res`, which contains all the words from `queries` that matched the condition.
 
-   - `begin(q)` and `begin(d)` represent the starting points of the two strings (`q` and `d`).
-   - `end(q)` and `end(d)` represent the ending points of the strings.
-   - The initial value of the sum is set to `0`, and `plus<int>()` is used to add the results.
-   - `not_equal_to<char>()` returns `true` for differing characters, contributing `1` to the sum, and `false` contributes `0`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m)
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
 
-   The result of `inner_product` is the total number of character positions where `q` and `d` differ. If the result is less than 3, this means that the two words differ in less than three positions, satisfying the condition of transforming one word into another by changing at most two characters.
+For each word in 'queries' (n words), we compare it to each word in 'dictionary' (m words), and each comparison takes O(n) time where n is the length of the words.
 
-6. **Adding the Query to the Result**:
-   ```cpp
-   res.push_back(q);
-   break;
-   ```
-   If the condition is met (i.e., the number of differing positions is less than 3), the query word `q` is added to the result vector `res`. The inner loop is then broken using `break`, as we only need to find one matching dictionary word for each query word.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-7. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   After processing all the query words, the function returns the `res` vector, which contains all the query words that can be transformed into a dictionary word with at most two character changes.
+The space complexity is determined by the space used to store the result list, which can have up to 'n' elements.
 
-### Code Complexity:
-The time complexity and space complexity of this solution can be analyzed as follows:
+**Happy Coding! 🎉**
 
-- **Time Complexity**:
-  - The solution uses two nested loops: one iterating over the query words (`queries`) and another iterating over the dictionary words (`dictionary`).
-  - For each pair of query and dictionary word, we use `inner_product` to compare the characters, which takes linear time relative to the length of the words.
-  
-  If there are `m` query words and `n` dictionary words, and each word has a length of `l`, the overall time complexity can be expressed as:
-  \[
-  O(m \times n \times l)
-  \]
-  This is because for each pair of words (query and dictionary), we are performing a comparison of `l` characters.
-
-- **Space Complexity**:
-  - The space complexity is primarily determined by the storage of the result vector `res`, which can hold up to `m` query words. Each word is stored as a string, so the space complexity is:
-  \[
-  O(m \times l)
-  \]
-  where `m` is the number of query words and `l` is the average length of the words.
-
-### Conclusion:
-The `twoEditWords` function is an efficient solution to the problem of finding query words that can be transformed into dictionary words with at most two character edits. The algorithm leverages the `inner_product` function to efficiently compare characters between query and dictionary words. It uses two nested loops to check each query word against every dictionary word, and if any match is found with fewer than three differing characters, the query is added to the result.
-
-The time complexity is quadratic in terms of the number of queries and dictionary words, with an additional factor of the word length, making the algorithm suitable for moderate-sized inputs. By breaking down the problem into simple steps and using efficient comparison techniques, this solution offers a clear and straightforward approach to solving the problem.
-
-This solution can be further optimized or parallelized for very large inputs, but for typical scenarios, it performs well in terms of both time and space complexity.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/words-within-two-edits-of-dictionary/description/)
 

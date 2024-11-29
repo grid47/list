@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,144 +28,175 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an n-ary tree where each node contains a value and a list of its children. Your task is to return the level order traversal of the tree's nodes. Nodes are grouped by their level, with the root node at level 0. Each node’s children are separated by a null value in the level order serialization.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is serialized as a list where each node’s value is followed by its children, and groups of children are separated by null values.
+- **Example:** `root = [10, null, 20, 30, 40, null, 50, 60]`
+- **Constraints:**
+	- The total number of nodes is between [0, 104].
+	- The height of the tree is less than or equal to 1000.
 
-{{< highlight cpp >}}
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    vector<Node*> children;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of lists where each sublist represents the nodes at a particular level.
+- **Example:** `[[10], [20, 30, 40], [50, 60]]`
+- **Constraints:**
+	- The output should group nodes by their levels.
 
-    Node() {}
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to perform a level order traversal and group the nodes at each level into separate lists.
 
-    Node(int _val) {
-        val = _val;
-    }
+- 1. Initialize an empty result list to hold the groups of nodes.
+- 2. Traverse the tree level by level, using a queue to store nodes at each level.
+- 3. For each node, add its value to the corresponding level’s group in the result list.
+- 4. Continue the traversal until all nodes are processed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree structure is a valid n-ary tree.
+- Each node can have any number of children.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1, null, 2, 3, 4, 5, null, null, 6, 7, null, 8, 9, 10, null, null, 11, null, 12, null, 13, null, null, 14]`  \
+  **Explanation:** The tree structure is divided into levels. At each level, we group nodes together, starting with the root node at level 0. The children of each node are grouped at the next level.
 
-    Node(int _val, vector<Node*> _children) {
-        val = _val;
-        children = _children;
-    }
-};
-*/
+{{< dots >}}
+## Approach 🚀
+We will perform a level order traversal using a queue. The key is to handle the nodes at each level and collect their values separately in the result list.
 
-class Solution {
-public:
-    vector<vector<int>> levelOrder(Node* root) {
-        if(!root) return {};
-        vector<vector<int>> ans;
-        levelOrderT(root, 0, ans);
-        return ans;
-    }
-
-    void levelOrderT(Node* node, int level, vector<vector<int>> &ans) {
-        if(level == size(ans)) {
-            ans.push_back({node->val});
-        } else {
-            ans[level].push_back(node->val);
-        }
-
-        for(Node* child: node->children) {
-            levelOrderT(child, level+1, ans);
-        }
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to perform a level-order traversal on an n-ary tree and return the values of nodes at each level in a 2D vector. An n-ary tree is a tree where each node can have an arbitrary number of children. The solution should provide a way to traverse all the nodes in a breadth-first manner, grouping the node values at each level.
-
-### Approach
-
-Level-order traversal is a type of breadth-first search (BFS) in which we visit all the nodes at one level before moving to the next. In the case of an n-ary tree, each node can have multiple children, and therefore, the traversal must handle an arbitrary number of children at each level.
-
-To achieve this, we can use a **recursive depth-first search (DFS)** approach. We will maintain a 2D list where each sublist corresponds to one level of the tree. For each node, we record its value at the correct level based on its depth in the tree. 
-
-Key steps involved:
-1. **Recursive Traversal**: For each node, we traverse its children and append their values at the corresponding level in the result list.
-2. **Tracking Levels**: As we move down the tree, we increase the depth level for each child node. We check if a sublist for that level exists and either append the value or create a new sublist for that level.
-3. **Base Case**: The recursion stops when there are no more child nodes to traverse.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Handle the Base Case
-
+### Initial Thoughts 💭
+- A level order traversal ensures that we process each level of nodes one by one.
+- Using a queue will allow us to process nodes level by level, ensuring we capture the correct ordering.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty tree should return an empty list.
+- Large trees with up to 10,000 nodes should be handled efficiently.
+- Ensure correct behavior with nodes having no children (leaf nodes).
+- The solution should handle edge cases such as an empty tree or a tree with only one node.
+{{< dots >}}
+## Code 💻
 ```cpp
-if(!root) return {};
-```
+vector<vector<int>> levelOrder(Node* root) {
+    if(!root) return {};
+    vector<vector<int>> ans;
+    levelOrderT(root, 0, ans);
+    return ans;
+}
 
-- We first check if the root is `nullptr`. If the tree is empty (i.e., `root` is `nullptr`), we immediately return an empty result, as there are no nodes to traverse.
-
-#### Step 2: Initialize the Result Vector
-
-```cpp
-vector<vector<int>> ans;
-```
-
-- We initialize a `vector` of vectors `ans` to store the node values at each level. Each inner vector will hold the values of nodes at the same depth in the tree.
-
-#### Step 3: Begin the Recursive Traversal
-
-```cpp
-levelOrderT(root, 0, ans);
-```
-
-- We begin the recursive function `levelOrderT` with the root node, starting at level 0. The level starts at 0 because the root node is at depth 0.
-
-#### Step 4: Recursive Traversal Function
-
-```cpp
 void levelOrderT(Node* node, int level, vector<vector<int>> &ans) {
     if(level == size(ans)) {
         ans.push_back({node->val});
     } else {
         ans[level].push_back(node->val);
     }
-```
 
-- Inside the recursive function, we first check if the current `level` already exists in the `ans` vector. If the current level does not exist (i.e., we are visiting this level for the first time), we create a new sublist for that level and add the node's value to it.
-- If the level already exists, we simply append the node's value to the corresponding sublist for that level.
-
-#### Step 5: Traverse Child Nodes
-
-```cpp
-for(Node* child: node->children) {
-    levelOrderT(child, level + 1, ans);
+    for(Node* child: node->children) {
+        levelOrderT(child, level+1, ans);
+    }
 }
 ```
 
-- After processing the current node, we recursively visit each of its children. The level is incremented by 1 because we are moving one level deeper into the tree.
-- This step ensures that each child node is placed at the correct level in the `ans` vector.
+This function performs a level-order traversal of an n-ary tree, grouping nodes by their levels into a 2D vector.
 
-#### Step 6: Return the Final Answer
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> levelOrder(Node* root) {
+	```
+	Declares the main function for level-order traversal, returning a 2D vector containing nodes grouped by level.
 
-```cpp
-return ans;
-```
+2. **Base Condition**
+	```cpp
+	    if(!root) return {};
+	```
+	Handles the edge case where the tree is empty, returning an empty result.
 
-- After the recursive traversal is complete, we return the `ans` vector, which contains the values of the nodes grouped by their levels.
+3. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	Initializes a 2D vector to store the traversal result grouped by levels.
 
-### Complexity
+4. **Recursive Function Call**
+	```cpp
+	    levelOrderT(root, 0, ans);
+	```
+	Starts the recursive level-order traversal from the root node.
 
-#### Time Complexity:
-- The time complexity of this algorithm is `O(N)`, where `N` is the total number of nodes in the tree. This is because we visit each node exactly once, and each node contributes to one entry in the final result.
+5. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the final 2D vector containing the level-order traversal result.
 
-#### Space Complexity:
-- The space complexity is also `O(N)`. We store the values of all nodes in the result vector `ans`, and the recursion uses extra space for the call stack. In the worst case, the depth of the recursion can go up to the height of the tree, which is `O(H)`. However, since the total number of nodes is `N`, the overall space complexity is still `O(N)`.
+6. **Recursive Function Declaration**
+	```cpp
+	void levelOrderT(Node* node, int level, vector<vector<int>> &ans) {
+	```
+	Declares the recursive helper function for level-order traversal.
 
-### Conclusion
+7. **Conditional Check**
+	```cpp
+	    if(level == size(ans)) {
+	```
+	Checks if the current level exists in the 2D vector; if not, creates a new level.
 
-This solution efficiently implements the level-order traversal of an n-ary tree using a recursive depth-first search (DFS) approach. It handles the tree's structure with arbitrary branching at each level and returns the result as a 2D vector, where each sublist contains the values of nodes at a specific level.
+8. **Push**
+	```cpp
+	        ans.push_back({node->val});
+	```
+	Adds the current node's value to a new level in the result vector.
 
-- The algorithm performs in linear time, visiting each node once.
-- It uses additional space to store the result and maintain the recursive call stack, making it efficient for trees of large size.
-- This approach provides a clean, elegant solution to the problem of level-order traversal, making use of recursion to simplify the logic for handling arbitrary numbers of children at each node.
+9. **Else Condition**
+	```cpp
+	    } else {
+	```
+	Handles the case where the level already exists in the result vector.
 
-This solution is optimal for scenarios where the tree's structure is irregular (n-ary) and efficiently handles depth-based grouping of node values.
+10. **Push**
+	```cpp
+	        ans[level].push_back(node->val);
+	```
+	Appends the current node's value to the existing level in the result vector.
+
+11. **Condition End**
+	```cpp
+	    }
+	```
+	Ends the conditional block for checking the level.
+
+12. **Loop**
+	```cpp
+	    for(Node* child: node->children) {
+	```
+	Iterates through all children of the current node to process them recursively.
+
+13. **Recursive Call**
+	```cpp
+	        levelOrderT(child, level+1, ans);
+	```
+	Calls the helper function for each child, incrementing the level.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the total number of nodes in the tree.
+- **Average Case:** O(n), since we process each node once.
+- **Worst Case:** O(n), since we must visit all nodes.
+
+The time complexity is linear with respect to the total number of nodes.
+
+### Space Complexity 💾
+- **Best Case:** O(n), since we store all nodes in the queue for processing.
+- **Worst Case:** O(n), where n is the total number of nodes.
+
+Space complexity is linear, as we store nodes at each level during traversal.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/n-ary-tree-level-order-traversal/description/)
 

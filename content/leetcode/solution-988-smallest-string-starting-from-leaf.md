@@ -14,117 +14,158 @@ img_src = ""
 youtube = "UvdWfxQ_ZDs"
 youtube_upload_date="2024-04-17"
 youtube_thumbnail="https://i.ytimg.com/vi/UvdWfxQ_ZDs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary tree, where each node contains a value between 0 and 25, corresponding to letters from 'a' to 'z'. Your task is to find the lexicographically smallest string that can be formed by traversing from a leaf node to the root node, using the values in each node as letters.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary tree, where each node has an integer value in the range [0, 25].
+- **Example:** `root = [0, 1, 2, 3, 4, 3, 4]`
+- **Constraints:**
+	- The number of nodes in the tree is between 1 and 8500.
+	- 0 <= Node.val <= 25.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    string ans = "~";
-    string smallestFromLeaf(TreeNode* root) {
-        recur(root, "");
-        return ans;
-    }
-    void recur(TreeNode* node, string s) {
-        if(!node) return;
-        if(!node->left && !node->right) {
-            ans = min(ans, char(node->val + 'a') + s);
-        }
-        cout << node->val<<'\n';
-        recur(node->left,  char(node->val + 'a') + s);
-        recur(node->right, char(node->val + 'a') + s);  
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the lexicographically smallest string that starts from a leaf node and ends at the root.
+- **Example:** `Output: "dbd"`
+- **Constraints:**
+	- The string must be constructed by following the path from a leaf node to the root.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to traverse the binary tree from each leaf node to the root, constructing strings and determining the lexicographically smallest one.
 
-The problem asks to find the lexicographically smallest string that starts from any leaf of a binary tree and moves upwards to the root. Each node in the tree contains a value between 0 and 25, representing a letter in the English alphabet (where 0 maps to 'a', 1 maps to 'b', and so on). The goal is to find the smallest string from any leaf node to the root, considering that the string is formed by concatenating the node values.
+- Traverse the tree recursively from root to leaf nodes.
+- At each leaf node, generate the corresponding string by adding the character of the node to the string.
+- Compare the generated string with the current smallest string and update accordingly.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a binary tree with no cycles.
+- The tree contains at least one node (i.e., the root is not null).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [0, 1, 2, 3, 4, 3, 4]`  \
+  **Explanation:** In this example, the binary tree has leaf nodes with values corresponding to 'd', 'b', and 'd'. The lexicographically smallest string is formed by starting from the leaf 'd' and traversing back to the root, resulting in 'dbd'.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves recursively traversing the tree and constructing strings from leaf nodes to the root while keeping track of the lexicographically smallest string.
 
-This problem can be solved using a **depth-first search (DFS)** approach. The idea is to traverse the binary tree, starting from the root, and recursively explore the left and right subtrees. For each leaf node encountered, we form a string by concatenating the corresponding letter (based on the node’s value) and compare it with the previously smallest string found.
-
-Key observations:
-1. **Leaf Nodes**: A leaf node is defined as a node that does not have any children (both left and right children are null). We need to consider all possible paths that end at the leaf nodes.
-2. **Lexicographical Order**: The smallest string from the leaf to the root is determined by lexicographically comparing strings. The idea is to construct the string in reverse order (from leaf to root) and compare it to keep track of the lexicographically smallest one.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Helper Function (`smallestFromLeaf`)**:
+### Initial Thoughts 💭
+- We need to traverse each path from a leaf to the root and compare the strings lexicographically.
+- Using recursion allows us to easily explore all paths from leaf to root and compare the strings efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle the case where the tree has only one node.
+- Ensure the solution handles the maximum number of nodes efficiently.
+- Consider trees with values representing letters near the boundaries of the alphabet, such as 'a' (0) or 'z' (25).
+- Ensure the algorithm runs efficiently for a large number of nodes and is optimized for recursion.
+{{< dots >}}
+## Code 💻
 ```cpp
 string ans = "~";
 string smallestFromLeaf(TreeNode* root) {
     recur(root, "");
     return ans;
 }
-```
-- The function `smallestFromLeaf` initializes a variable `ans` to `"~"` (a string greater than any possible string formed by node values). It then calls the recursive helper function `recur` starting with the root of the binary tree.
-- The result of the smallest string is stored in `ans` and returned after the DFS traversal.
-
-#### 2. **Recursive Function (`recur`)**:
-```cpp
 void recur(TreeNode* node, string s) {
     if(!node) return;
     if(!node->left && !node->right) {
         ans = min(ans, char(node->val + 'a') + s);
     }
-    cout << node->val << '\n';
+    cout << node->val<<'\n';
     recur(node->left,  char(node->val + 'a') + s);
     recur(node->right, char(node->val + 'a') + s);  
 }
 ```
-- The function `recur` performs a DFS traversal of the binary tree. It takes two parameters:
-  - `node`: the current node being processed.
-  - `s`: the string constructed so far from the leaf node to the current node.
-  
-  **Base Case**:
-  - If the current node is null (`if(!node)`), we return immediately as there is nothing to process.
 
-  **Leaf Node Check**:
-  - If the current node is a leaf node (both left and right children are null), the string formed by traversing from this leaf to the root is complete. At this point, we compute the string by adding the current node’s corresponding character (`char(node->val + 'a')`) to the string `s`, which holds the characters from the leaf to the root. This string is compared with the current `ans` to track the lexicographically smallest string.
+This code defines the function `smallestFromLeaf` to find the lexicographically smallest string starting from the leaf node to the root in a binary tree. It uses recursion (`recur`) to traverse the tree and track the path from leaf to root, updating the answer string as it goes.
 
-  **Recursive Calls**:
-  - The function recursively calls itself for the left and right children of the current node, appending the character corresponding to the current node’s value (`char(node->val + 'a')`) to the string `s` being passed down. This continues until all leaf nodes have been processed.
-  - A debug print statement (`cout << node->val << '\n';`) is added to print the value of the current node for debugging purposes.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	string ans = "~";
+	```
+	Initializes the variable `ans` to `~`, which will be used to store the smallest string found from a leaf to the root during the traversal.
 
-#### 3. **String Construction**:
-- The string `s` is built from the leaf to the root, as we append the character for each node while traversing down. By the time we reach a leaf, the string `s` will have the characters corresponding to that leaf’s path to the root.
-- We use `char(node->val + 'a')` to convert a node’s integer value to a corresponding letter, ensuring that the node’s value `0` maps to `'a'`, `1` maps to `'b'`, and so on.
+2. **Function Definition**
+	```cpp
+	string smallestFromLeaf(TreeNode* root) {
+	```
+	Defines the function `smallestFromLeaf`, which takes the root node of a binary tree and returns the lexicographically smallest string from a leaf node to the root.
 
-### Complexity
+3. **Recursive Call**
+	```cpp
+	    recur(root, "");
+	```
+	Calls the helper function `recur` to start the recursive traversal of the tree. The empty string `""` is passed as the initial path.
 
-#### Time Complexity:
-- **DFS Traversal**: We are performing a depth-first search on the binary tree, visiting each node exactly once. The time complexity of the DFS traversal is **O(n)**, where `n` is the number of nodes in the tree.
-- **String Comparison**: At each leaf, we compare the current string with the smallest string found so far. Since the maximum length of a string is equal to the height of the tree (which is **O(n)** in the worst case), the string comparison operation takes **O(h)** time, where `h` is the height of the tree. In the worst case, `h = O(n)`, so the time complexity of comparing the strings is **O(n)**.
+4. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the variable `ans`, which contains the lexicographically smallest string from a leaf node to the root after the recursion completes.
 
-Thus, the overall time complexity is **O(n * h)**, where `n` is the number of nodes and `h` is the height of the tree.
+5. **Helper Function Definition**
+	```cpp
+	void recur(TreeNode* node, string s) {
+	```
+	Defines the helper function `recur`, which performs the recursive traversal of the binary tree, building the string path from the leaf to the root.
 
-#### Space Complexity:
-- **Recursive Stack**: The space complexity of the DFS traversal is determined by the depth of the recursion stack, which is **O(h)**, where `h` is the height of the tree.
-- **String Storage**: The string `s` can have at most `h` characters, so the space used by the string is also **O(h)**.
+6. **Base Case**
+	```cpp
+	    if(!node) return;
+	```
+	Checks if the current node is null, which is the base case for recursion. If the node is null, the function returns without doing anything.
 
-Thus, the overall space complexity is **O(h)**.
+7. **Leaf Node Check**
+	```cpp
+	    if(!node->left && !node->right) {
+	```
+	Checks if the current node is a leaf node (both left and right children are null). If it's a leaf, the function proceeds to check and update the answer.
 
-### Conclusion
+8. **Update Answer**
+	```cpp
+	        ans = min(ans, char(node->val + 'a') + s);
+	```
+	Updates the `ans` variable with the lexicographically smaller string between the current `ans` and the string formed by adding the current node's value (converted to a character) to the path `s`.
 
-This solution efficiently computes the lexicographically smallest string from a leaf to the root of a binary tree. By using a depth-first search approach and maintaining a running string that is constructed from leaf to root, we ensure that the solution is both time-efficient and easy to implement. The time complexity is **O(n * h)**, where `n` is the number of nodes in the tree and `h` is the height of the tree, making the approach scalable for larger trees. The space complexity is **O(h)**, as it only requires space proportional to the height of the tree for the recursive stack and the string being built.
+9. **Recursive Call for Left Child**
+	```cpp
+	    recur(node->left,  char(node->val + 'a') + s);
+	```
+	Recursively calls the `recur` function for the left child of the current node, passing the current node's value (converted to a character) prepended to the string path `s`.
+
+10. **Recursive Call for Right Child**
+	```cpp
+	    recur(node->right, char(node->val + 'a') + s);  
+	```
+	Recursively calls the `recur` function for the right child of the current node, prepending the current node's value (converted to a character) to the string path `s`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the number of nodes, as each node is visited once.
+- **Average Case:** O(n) where n is the number of nodes, as each node contributes to a string comparison.
+- **Worst Case:** O(n) where n is the number of nodes, since we visit each node in the tree once.
+
+The time complexity is O(n), where n is the number of nodes in the tree, due to the tree traversal.
+
+### Space Complexity 💾
+- **Best Case:** O(1) if the tree is very shallow or balanced.
+- **Worst Case:** O(h) where h is the height of the tree, due to recursion stack space.
+
+The space complexity is O(h), where h is the height of the tree, due to recursion.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-string-starting-from-leaf/description/)
 

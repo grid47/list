@@ -14,31 +14,78 @@ img_src = ""
 youtube = "8UaltcVnL5E"
 youtube_upload_date="2022-10-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/8UaltcVnL5E/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a stream of n distinct videos, each represented by a unique number from 1 to n. You need to design a data structure that tracks the longest prefix of uploaded videos at any point in time. A prefix is considered uploaded if all videos from 1 to i (inclusive) have been uploaded to the server.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two types of operations. The first operation initializes the system with n distinct videos. The second operation uploads a specific video to the server. The third operation returns the length of the longest uploaded prefix.
+- **Example:** `LUPrefix(5); upload(4); longest(); upload(2); longest(); upload(1); longest();`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= video <= n
+	- All video numbers are distinct.
+	- At most 2 * 10^5 operations (upload and longest) will be performed.
 
-{{< highlight cpp >}}
-class LUPrefix {
-public:
-    int i;
-    vector<bool> arr;
-    LUPrefix(int n) {
-        arr.resize(n + 1);
-        i = 1;
-    }
-    
-    void upload(int vid) {
-        arr[vid] = true;
-        while(i < arr.size() && arr[i]) i++;
-    }
-    
-    int longest() {
-        return i - 1;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each 'longest' operation, return the length of the longest uploaded prefix.
+- **Example:** `Output: [null, 0, null, 1, null, 3]`
+- **Constraints:**
+	- The result should be an integer representing the length of the longest uploaded prefix.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Track and return the longest sequence of consecutively uploaded videos starting from 1.
+
+- 1. Maintain an array or set to track which videos have been uploaded.
+- 2. For each 'upload' operation, mark the corresponding video as uploaded.
+- 3. After each upload, check how many consecutive videos starting from 1 have been uploaded, and update the longest uploaded prefix.
+- 4. For 'longest' operations, simply return the length of the current longest prefix.
+{{< dots >}}
+### Problem Assumptions ✅
+- All video numbers are distinct and within the range from 1 to n.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `LUPrefix(5); upload(4); longest(); upload(2); longest(); upload(1); longest();`  \
+  **Explanation:** Initially, no videos are uploaded, so the longest prefix is 0. After uploading video 4, no continuous prefix exists, so longest remains 0. After uploading video 2, the longest prefix is still 0, as video 1 hasn't been uploaded yet. Once video 1 is uploaded, the longest prefix becomes [1], and then with videos 1, 2, and 4 uploaded, the longest prefix becomes [1, 2, 3].
+
+{{< dots >}}
+## Approach 🚀
+We need to design an efficient way to track the longest uploaded prefix after each 'upload' operation.
+
+### Initial Thoughts 💭
+- We need to keep track of uploaded videos in a way that allows quick determination of the longest continuous prefix.
+- An array or set can be used to mark uploaded videos, and we can keep track of the longest prefix by iterating through uploaded videos starting from 1.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one 'longest' operation after initialization, so empty inputs won't occur.
+- For large inputs, ensure that the algorithm can handle the maximum constraints of 100,000 videos and 200,000 operations.
+- Consider cases where the uploaded videos are in a non-sequential order.
+- Ensure that the implementation does not exceed time limits, especially for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int i;
+vector<bool> arr;
+LUPrefix(int n) {
+    arr.resize(n + 1);
+    i = 1;
+}
+
+void upload(int vid) {
+    arr[vid] = true;
+    while(i < arr.size() && arr[i]) i++;
+}
+
+int longest() {
+    return i - 1;
+}
 };
 
 /**
@@ -46,83 +93,89 @@ public:
  * LUPrefix* obj = new LUPrefix(n);
  * obj->upload(video);
  * int param_2 = obj->longest();
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires simulating the process of uploading videos in sequential order and determining the length of the longest continuous sequence of uploaded videos starting from the first one. Specifically, the goal is to efficiently track the longest prefix of uploaded videos in sequential order from `1` to `n` after multiple upload operations.
-
-### Approach
-
-To solve this problem, we can take advantage of the sequential nature of the video uploads. The problem essentially boils down to keeping track of the first missing video from the sequence starting from `1`. Once a video is uploaded, we check whether it completes or extends the longest sequence of videos starting from the first video.
-
-#### Key Observations:
-- Each upload either extends the current longest sequence of uploaded videos or doesn't change it.
-- The longest sequence of consecutive uploaded videos can be tracked using an index `i` that keeps track of the next expected video. 
-- If `i` is the next video that is missing, uploading videos up to `i-1` will complete the sequence.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Class Definition and Initialization
-
-```cpp
-class LUPrefix {
-public:
-    int i;
-    vector<bool> arr;
-    LUPrefix(int n) {
-        arr.resize(n + 1);  // Create an array to track uploaded videos
-        i = 1;  // Initialize the next expected video to 1
-    }
-};
 ```
 
-- The class `LUPrefix` is defined to manage the video upload system.
-- `i` is an integer that tracks the next expected video. It starts from 1 because we expect video 1 to be uploaded first.
-- `arr` is a boolean vector where each element represents whether a particular video has been uploaded or not. The size of this vector is `n + 1` to accommodate for 1-based indexing (i.e., `arr[1]` represents video 1, `arr[2]` represents video 2, etc.).
+This code defines the `LUPrefix` class, which manages the upload of videos and keeps track of the longest prefix of videos uploaded.
 
-#### Step 2: The `upload` Function
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int i;
+	```
+	Declares an integer variable `i` to keep track of the current index of the longest prefix.
 
-```cpp
-void upload(int vid) {
-    arr[vid] = true;  // Mark the video as uploaded
-    while(i < arr.size() && arr[i]) i++;  // Update the next expected video
-}
-```
+2. **Variable Declaration**
+	```cpp
+	vector<bool> arr;
+	```
+	Declares a vector of booleans `arr` to store the uploaded videos' status (true if uploaded, false otherwise).
 
-- The `upload` function takes an integer `vid`, which represents the ID of the uploaded video.
-- It marks the corresponding video in the `arr` array as uploaded by setting `arr[vid] = true`.
-- The `while` loop then checks if the next expected video (`i`) has been uploaded. If so, it increments `i` to look for the next video that needs to be uploaded. This loop ensures that `i` always points to the next missing video in the sequence.
+3. **Constructor**
+	```cpp
+	LUPrefix(int n) {
+	```
+	Constructor to initialize the `LUPrefix` object with a given number `n` representing the total number of videos.
 
-#### Step 3: The `longest` Function
+4. **Constructor Initialization**
+	```cpp
+	    arr.resize(n + 1);
+	```
+	Resizes the `arr` vector to accommodate `n+1` elements, ensuring it can hold all video upload statuses.
 
-```cpp
-int longest() {
-    return i - 1;  // Return the length of the longest prefix
-}
-```
+5. **Constructor Initialization**
+	```cpp
+	    i = 1;
+	```
+	Initializes `i` to 1, which indicates the starting index for the longest uploaded video.
 
-- The `longest` function simply returns `i - 1`, which represents the length of the longest continuous sequence of uploaded videos starting from 1.
-- This works because the value of `i` represents the next missing video, so `i - 1` gives us the length of the longest continuous sequence.
+6. **Function Definition**
+	```cpp
+	void upload(int vid) {
+	```
+	Defines the `upload` function, which updates the video upload status for a specific video `vid`.
 
-### Complexity
+7. **Upload Logic**
+	```cpp
+	    arr[vid] = true;
+	```
+	Marks the video at index `vid` as uploaded by setting its status to true.
 
-#### Time Complexity:
-- **`O(1)` per `upload` operation**: The `upload` operation is efficient, as it only requires marking a video as uploaded in the array (`arr[vid] = true`) and incrementing the index `i` as necessary. The while loop only runs until the next missing video is found, but in the worst case, it increments `i` a constant number of times (since it only progresses when a new video is uploaded sequentially).
-- **`O(1)` per `longest` operation**: The `longest` function simply returns the value of `i - 1`, which is a constant time operation.
+8. **Upload Logic**
+	```cpp
+	    while(i < arr.size() && arr[i]) i++;
+	```
+	This loop increments `i` as long as there are uploaded videos, moving through the longest prefix.
 
-#### Space Complexity:
-- **`O(n)`**: The space complexity is determined by the size of the array `arr`, which is `n + 1` to track the status of all videos from 1 to `n`. Therefore, the space complexity is linear in terms of the number of videos `n`.
+9. **Function Definition**
+	```cpp
+	int longest() {
+	```
+	Defines the `longest` function, which returns the length of the longest prefix of uploaded videos.
 
-### Conclusion
+10. **Return Statement**
+	```cpp
+	    return i - 1;
+	```
+	Returns the length of the longest prefix of uploaded videos by subtracting 1 from `i`.
 
-The solution efficiently tracks the longest sequence of uploaded videos using an array and a simple index. The key insight is recognizing that we don't need to check the entire sequence of videos each time we upload one. Instead, we maintain a pointer (`i`) to track the next expected video and update it when new videos are uploaded sequentially.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(n)
 
-This approach allows both the `upload` and `longest` operations to be performed in constant time, making it highly efficient even for large input sizes. The space complexity is also optimal, as we only need to store the upload status for each video.
+The time complexity for 'upload' and 'longest' operations is O(1), while initialization takes O(n) to set up the system.
 
-The solution is ideal for scenarios where videos are uploaded in a sequence, and we need to efficiently track the longest contiguous sequence of uploaded videos.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the need to store the state of uploaded videos.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-uploaded-prefix/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "utBw5FbYswk"
 youtube_upload_date="2024-04-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/utBw5FbYswk/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,48 +28,58 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/utBw5FbYswk/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order. The same number can be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of distinct integers candidates and a target integer target.
+- **Example:** `Input: candidates = [1, 2, 3], target = 4`
+- **Constraints:**
+	- 1 <= candidates.length <= 30
+	- 2 <= candidates[i] <= 40
+	- All elements of candidates are distinct.
+	- 1 <= target <= 40
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> combinationSum(vector<int>& cand, int target) {
-        vector<vector<int>> ans;
-        vector<int> tmp;
-        bt(ans, tmp, 0, target, cand);
-        return ans;
-    }
-    
-    void bt(vector<vector<int>> &ans, vector<int> &tmp, int idx, int sum, vector<int> &cand) {
-        if(idx == cand.size() || sum == 0) {
-            if(sum == 0) ans.push_back(tmp);
-            return;
-        }
-        if(sum < 0) return;
-        tmp.push_back(cand[idx]);
-        bt(ans, tmp, idx, sum - cand[idx], cand);
-        tmp.pop_back();
-        
-        bt(ans, tmp, idx + 1, sum, cand);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of all unique combinations of candidates where the chosen numbers sum to the target.
+- **Example:** `Output: [[1, 1, 2], [1, 3], [2, 2]]`
+- **Constraints:**
+	- The output should be a list of lists containing valid combinations.
 
-### 📝 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find all possible combinations where the numbers sum to the target, allowing repeated numbers.
 
-The task is to solve the **Combination Sum** problem, where we are given a list of candidate numbers and a target number. The objective is to find **all unique combinations** of the candidates that sum up to the target. The twist is that each number from the list can be used **multiple times** in a combination.
+- Sort the candidates array (optional for optimization).
+- Use backtracking to explore all possible combinations of candidates that sum up to the target.
+- During the backtracking process, allow repetition of numbers but avoid using the same combination multiple times.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be valid, with distinct integers in candidates and a target value of at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: candidates = [1, 2, 3], target = 4`  \
+  **Explanation:** In this example, the target is 4, and we can form the following unique combinations: [1, 1, 2], [1, 3], and [2, 2].
 
-### 🛠️ Approach
+- **Input:** `Input: candidates = [5, 7, 10], target = 15`  \
+  **Explanation:** For this example, the unique combinations that sum to 15 are: [5, 5, 5], [7, 7], and [5, 10].
 
-We’ll use **backtracking** here—a powerful technique for generating all possible combinations by trying out each possibility and stepping back when necessary. The idea is to build combinations step-by-step, adding numbers from the candidates and checking if the sum matches the target.
+{{< dots >}}
+## Approach 🚀
+We can use backtracking to explore all possible combinations, while ensuring we don’t use the same combination more than once.
 
-If the current sum exceeds the target, we backtrack, removing the last added number. If the sum hits the target, we store that combination as a valid solution. By considering all possibilities, we explore every potential combination.
-
-### 🔍 Code Breakdown (Step by Step)
-
-#### Function: `combinationSum`
-
+### Initial Thoughts 💭
+- We can use recursion to explore all combinations, adding numbers to a temporary list and checking if we’ve reached the target sum.
+- Using backtracking will allow us to explore all possible combinations and backtrack if the sum exceeds the target.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return an empty result since no combinations can be formed.
+- Even with the upper limit of input size (candidates.length <= 30), the problem ensures fewer than 150 unique combinations, so performance should be manageable.
+- If the target is smaller than the smallest candidate, return an empty list.
+- Ensure no duplicate combinations are added to the result.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> combinationSum(vector<int>& cand, int target) {
     vector<vector<int>> ans;
@@ -76,14 +87,7 @@ vector<vector<int>> combinationSum(vector<int>& cand, int target) {
     bt(ans, tmp, 0, target, cand);
     return ans;
 }
-```
 
-- **Input:** The function takes the candidates list `cand` and the target sum `target`.
-- **Goal:** It initializes an empty result vector `ans` and a temporary vector `tmp` to build combinations. Then, it calls the **backtracking helper function** `bt` to explore all combinations starting from index `0` with the initial target sum.
-
-#### Function: `bt` (Backtracking Helper)
-
-```cpp
 void bt(vector<vector<int>> &ans, vector<int> &tmp, int idx, int sum, vector<int> &cand) {
     if(idx == cand.size() || sum == 0) {
         if(sum == 0) ans.push_back(tmp);
@@ -93,61 +97,107 @@ void bt(vector<vector<int>> &ans, vector<int> &tmp, int idx, int sum, vector<int
     tmp.push_back(cand[idx]);
     bt(ans, tmp, idx, sum - cand[idx], cand);
     tmp.pop_back();
-
+    
     bt(ans, tmp, idx + 1, sum, cand);
 }
 ```
 
-- **Base Case 1:** If `sum == 0`, we’ve found a valid combination. We add `tmp` (the current combination) to the result `ans` and return.
-  
-- **Base Case 2:** If `sum < 0`, this combination exceeds the target, so we stop and return without further exploration.
+This code finds all possible combinations of numbers from the given candidate numbers that add up to the target number.
 
-- **Recursive Step 1:** We try to include `cand[idx]` in the combination:
-  - Add `cand[idx]` to `tmp`.
-  - Recursively call `bt` with the same index `idx` (allowing repeated use of the same candidate) and reduce the target sum by `cand[idx]`.
-  - After the recursive call, backtrack by removing the last added number from `tmp`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> combinationSum(vector<int>& cand, int target) {
+	```
+	This line declares a function named `combinationSum` that takes a vector of candidate numbers `cand` and a target number `target` as input and returns a vector of vectors representing all possible combinations of numbers from `cand` that add up to `target`.
 
-- **Recursive Step 2:** We try excluding `cand[idx]` and move to the next candidate by increasing the index (`idx + 1`).
+2. **Vector Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	This line initializes an empty 2D vector `ans` to store the resulting combinations.
 
-The recursive calls ensure we explore both options (including or excluding a candidate) for every number in the list, generating all valid combinations.
+3. **Vector Initialization**
+	```cpp
+	    vector<int> tmp;
+	```
+	This line initializes an empty vector `tmp` to store a temporary combination during the backtracking process.
 
-### 🌱 Example Walkthrough
+4. **Function Call**
+	```cpp
+	    bt(ans, tmp, 0, target, cand);
+	```
+	This line calls the helper function `bt` to perform the backtracking process. The `ans`, `tmp`, `0`, `target`, and `cand` are passed as arguments.
 
-Let’s walk through an example to see how the algorithm works.
+5. **Return**
+	```cpp
+	    return ans;
+	```
+	This line returns the `ans` vector containing all the valid combinations.
 
-**Example Input:**
-- `cand = [2, 3, 6, 7]`
-- `target = 7`
+6. **Function Declaration**
+	```cpp
+	void bt(vector<vector<int>> &ans, vector<int> &tmp, int idx, int sum, vector<int> &cand) {
+	```
+	This line declares a recursive backtracking function `bt` that takes the following parameters: `ans` to store the result, `tmp` to store the current combination, `idx` to track the current index in the `cand` vector, `sum` representing the remaining target sum, and `cand` the vector of candidate numbers.
 
-**Steps:**
-1. Start with an empty combination `[]` and `target = 7`.
-2. Include `2`:
-   - New combination: `[2]`, new target: `5`.
-3. Include `2` again:
-   - New combination: `[2, 2]`, new target: `3`.
-4. Include `2` again:
-   - New combination: `[2, 2, 2]`, new target: `1`.
-5. Backtrack since `1` is less than `0`.
-6. Now, try `3` (next candidate) with combination `[2, 2]`:
-   - New combination: `[2, 2, 3]`, new target: `0`. This is a valid solution!
-7. Backtrack and explore other candidates `6` and `7`.
-8. Continue this process until all combinations are explored.
+7. **Base Case and Result Addition**
+	```cpp
+	    if(idx == cand.size() || sum == 0) {
+	        if(sum == 0) ans.push_back(tmp);
+	        return;
+	    }
+	```
+	This block checks the base cases: 1. If the index `idx` reaches the end of the `cand` vector or the `sum` becomes 0, it means we've reached a valid combination. If `sum` is 0, the current `tmp` combination is added to the `ans` vector. 2. In either case, the function returns to the previous recursive call.
 
-### ⏱️ Complexity Analysis
+8. **Pruning**
+	```cpp
+	    if(sum < 0) return;
+	```
+	This line prunes the search space by checking if the `sum` becomes negative. If so, it means the current path cannot lead to a valid combination, so the function returns early.
 
-#### Time Complexity:
-- The time complexity is **O(2^n)**, where `n` is the number of candidates. This is because at each candidate, we have two choices: include or exclude it. Thus, the total number of combinations is at most `2^n`.
+9. **Include the Current Candidate**
+	```cpp
+	    tmp.push_back(cand[idx]);
+	```
+	This line adds the current candidate number `cand[idx]` to the `tmp` combination.
 
-#### Space Complexity:
-- The space complexity is **O(n + 2^n)**, where `n` is the number of candidates. The `2^n` accounts for the possible combinations, and `n` represents the maximum depth of the recursion stack.
+10. **Recursive Call (Include)**
+	```cpp
+	    bt(ans, tmp, idx, sum - cand[idx], cand);
+	```
+	This line recursively calls the `bt` function with the updated `sum` (reduced by the current candidate) to explore the possibility of including the current candidate in the combination.
 
-### 🚀 Conclusion
+11. **Backtrack**
+	```cpp
+	    tmp.pop_back();
+	```
+	This line removes the last added candidate from the `tmp` combination to backtrack to the previous state.
 
-This approach effectively uses backtracking to explore all possible combinations, ensuring we find all solutions that sum up to the target. Each recursive step tries adding or excluding a number, efficiently exploring all paths. With a time complexity of **O(2^n)** and space complexity of **O(n + 2^n)**, this solution is optimal for reasonable-sized inputs.
+12. **Recursive Call (Exclude)**
+	```cpp
+	    bt(ans, tmp, idx + 1, sum, cand);
+	```
+	This line recursively calls the `bt` function with the same `sum` but the next index `idx + 1` to explore the possibility of excluding the current candidate from the combination.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N^2)
+- **Average Case:** O(N^2)
+- **Worst Case:** O(2^N)
 
-**Remember:** "Practice makes perfect!" Understanding recursion and backtracking will make problems like this feel more intuitive. 🌟
+The worst case complexity arises from the backtracking approach, where each number is considered in each recursive step.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(N)
+
+Space complexity depends on the depth of the recursion tree and the size of the temporary storage used for combinations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/combination-sum/description/)
 

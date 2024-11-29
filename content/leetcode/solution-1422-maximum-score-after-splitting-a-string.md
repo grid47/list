@@ -14,124 +14,161 @@ img_src = ""
 youtube = "mc_eSStDrWw"
 youtube_upload_date="2023-12-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mc_eSStDrWw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string `s` consisting of characters '0' and '1'. Your task is to split the string into two non-empty substrings (a left substring and a right substring) and return the maximum score that can be achieved by splitting the string. The score is the sum of the number of '0's in the left substring and the number of '1's in the right substring. Find the maximum score by evaluating all possible splits.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary string `s` with characters '0' and '1'.
+- **Example:** `"10101"`
+- **Constraints:**
+	- 2 <= s.length <= 500
+	- The string `s` consists of only the characters '0' and '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxScore(string s) {
-        int rightOnes = 0, leftZeroes = 0;
-        for(char c: s)
-            if(c=='1') rightOnes++;
-        
-        int score = 0;
-        for(int i=0; i<s.length()-1; i++){
-            if(s[i]=='0') leftZeroes++;
-            else rightOnes--;
-            score = max(score, leftZeroes + rightOnes);
-        }
-        return score;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum score obtained after splitting the string `s` into two non-empty substrings.
+- **Example:** `4`
+- **Constraints:**
+	- The score is the sum of the number of '0's in the left substring and the number of '1's in the right substring.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum score by evaluating every possible split of the string.
+
+- Step 1: Traverse the string and calculate the number of '1's in the right substring.
+- Step 2: For each position in the string (excluding the last), calculate the number of '0's in the left substring and the number of '1's in the right substring.
+- Step 3: Track the maximum score during this traversal.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string will have at least two characters.
+- The string contains only '0' and '1', and we need to count occurrences of each character.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"10101"`  \
+  **Explanation:** In this example, the maximum score is achieved when the left substring is '1' and the right substring is '0101'. The score is calculated as 0 (zeros in the left) + 3 (ones in the right) = 3.
+
+- **Input:** `"1101"`  \
+  **Explanation:** Here, the maximum score is 3 when the left substring is '11' and the right substring is '01'. The score is calculated as 2 (zeros in the left) + 1 (ones in the right) = 3.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this by traversing the string, keeping track of the number of zeros in the left substring and the number of ones in the right substring, and updating the score at each step.
+
+### Initial Thoughts 💭
+- The number of zeros and ones in each substring must be tracked separately.
+- We can traverse the string once and calculate the score for each potential split.
+- We need to handle the traversal efficiently, updating counts of zeros and ones as we process the string.
+{{< dots >}}
+### Edge Cases 🌐
+- A string of length 1 or less is not valid based on the problem constraints.
+- Ensure the solution can handle strings up to length 500 efficiently.
+- Handle cases where the string is mostly zeros or mostly ones.
+- The string should contain at least two characters and only '0' and '1'.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxScore(string s) {
+    int rightOnes = 0, leftZeroes = 0;
+    for(char c: s)
+        if(c=='1') rightOnes++;
+    
+    int score = 0;
+    for(int i=0; i<s.length()-1; i++){
+        if(s[i]=='0') leftZeroes++;
+        else rightOnes--;
+        score = max(score, leftZeroes + rightOnes);
     }
-};
-{{< /highlight >}}
----
+    return score;
+}
+```
 
-### Problem Statement
+The function `maxScore` calculates the maximum score obtainable by splitting the string `s` into two non-empty parts. The score is the sum of the number of '0's on the left part and the number of '1's on the right part of the split.
 
-The goal of the problem is to determine the maximum score obtainable by splitting a binary string `s` into two non-empty substrings. The score is defined as the sum of the number of `0`s in the left substring and the number of `1`s in the right substring. The task is to implement a function that computes this maximum score efficiently.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxScore(string s) {
+	```
+	Defines the function `maxScore` that takes a string `s` and returns the maximum score possible by splitting it into two parts.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int rightOnes = 0, leftZeroes = 0;
+	```
+	Initializes two variables: `rightOnes` to count the number of '1's on the right part of the string, and `leftZeroes` to count the number of '0's on the left part.
 
-To solve this problem, we can take advantage of a linear traversal of the string. The idea is to keep track of the number of `0`s in the left substring and the number of `1`s in the right substring as we iterate through the string. Here’s a step-by-step breakdown of the approach:
+3. **Loop Constructs**
+	```cpp
+	    for(char c: s)
+	```
+	Begins a loop to iterate over each character `c` in the string `s`.
 
-1. **Count Initial `1`s**: First, traverse the string to count the total number of `1`s present in the string, which will initially belong to the right substring.
+4. **Conditionals**
+	```cpp
+	        if(c=='1') rightOnes++;
+	```
+	If the character is '1', increment the `rightOnes` counter to track the number of '1's.
 
-2. **Iterate and Update Counts**: Iterate through the string from the beginning to the second last character (since both substrings must be non-empty). For each character:
-   - If it's a `0`, increment the count of `0`s in the left substring.
-   - If it's a `1`, decrement the count of `1`s in the right substring.
-   
-3. **Calculate and Track Maximum Score**: After updating counts, calculate the score as the sum of `0`s in the left substring and `1`s in the right substring. Continuously update the maximum score encountered during the iteration.
+5. **Variable Initialization**
+	```cpp
+	    int score = 0;
+	```
+	Initializes the variable `score` to 0, which will keep track of the maximum score found during the iterations.
 
-4. **Return Result**: At the end of the iteration, return the maximum score calculated.
+6. **Loop Constructs**
+	```cpp
+	    for(int i=0; i<s.length()-1; i++){
+	```
+	Begins another loop to iterate through the string `s`, excluding the last character to ensure both parts of the split are non-empty.
 
-### Code Breakdown (Step by Step)
+7. **Conditionals**
+	```cpp
+	        if(s[i]=='0') leftZeroes++;
+	```
+	If the character at position `i` is '0', increment the `leftZeroes` counter to track the number of '0's in the left part of the split.
 
-Let’s analyze the implementation step-by-step to understand how it works:
+8. **Conditionals**
+	```cpp
+	        else rightOnes--;
+	```
+	If the character at position `i` is '1', decrement the `rightOnes` counter, reducing the number of '1's in the right part.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+9. **Score Calculation**
+	```cpp
+	        score = max(score, leftZeroes + rightOnes);
+	```
+	Calculates the score for the current split as the sum of `leftZeroes` and `rightOnes`, and updates the `score` to the maximum score found so far.
 
-   - This defines the `Solution` class where our function to compute the maximum score will reside.
+10. **Return Statement**
+	```cpp
+	    return score;
+	```
+	Returns the maximum score found from all possible splits.
 
-2. **Function Declaration**:
-   ```cpp
-   int maxScore(string s) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string.
+- **Average Case:** O(n), as we process each character exactly once.
+- **Worst Case:** O(n), since we need to process each character to calculate the maximum score.
 
-   - The method `maxScore` accepts a string `s` and returns an integer representing the maximum score.
+The time complexity is linear, as we only traverse the string once.
 
-3. **Variable Initialization**:
-   ```cpp
-   int rightOnes = 0, leftZeroes = 0;
-   for(char c: s)
-       if(c=='1') rightOnes++;
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1), since the space usage does not depend on the input size.
+- **Worst Case:** O(1), as the solution uses only a few counters to keep track of zeros and ones.
 
-   - We initialize `rightOnes` to count the total number of `1`s in the string. We loop through the string and increment `rightOnes` whenever we encounter a `1`.
+The space complexity is constant since we only store a few counters.
 
-4. **Score Calculation**:
-   ```cpp
-   int score = 0;
-   for(int i=0; i<s.length()-1; i++){
-   ```
+**Happy Coding! 🎉**
 
-   - We initialize `score` to zero. The second loop iterates through the string up to the second last character to ensure both substrings are non-empty.
-
-5. **Updating Counts and Calculating Score**:
-   ```cpp
-   if(s[i]=='0') leftZeroes++;
-   else rightOnes--;
-   score = max(score, leftZeroes + rightOnes);
-   ```
-
-   - Inside the loop:
-     - If the current character is `0`, we increment `leftZeroes` to count the `0`s in the left substring.
-     - If the character is `1`, we decrement `rightOnes` to update the count of `1`s in the right substring.
-     - We then calculate the current score as the sum of `leftZeroes` and `rightOnes` and update `score` if this value is greater than the previously recorded maximum.
-
-6. **Return Statement**:
-   ```cpp
-   return score;
-   }
-   ```
-
-   - Finally, we return the computed maximum score.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of the algorithm is \(O(n)\), where \(n\) is the length of the string `s`. This is because we perform a constant-time operation for each character in the string during two passes: one for counting `1`s and another for computing the score.
-
-- **Space Complexity**: The space complexity is \(O(1)\) since we only use a fixed amount of space for the variables `rightOnes`, `leftZeroes`, and `score`, regardless of the size of the input string.
-
-### Conclusion
-
-The `maxScore` function efficiently calculates the maximum score obtainable by splitting the binary string into two non-empty substrings. By maintaining a count of `0`s on the left and `1`s on the right during a single linear traversal, we minimize both time and space complexity.
-
-#### Key Takeaways:
-
-- **Efficiency in Problem Solving**: This approach showcases how a linear traversal can optimize the solution to problems involving counting and scoring, providing results in optimal time.
-- **Use of Simple Variables**: The solution effectively uses a few simple variables to maintain state, which is a hallmark of efficient coding.
-- **Binary String Handling**: The problem emphasizes the importance of understanding the properties of binary strings and leveraging these properties in algorithm design.
-
-Overall, the provided solution offers a clear and efficient way to solve the problem of maximizing the score based on specified conditions in a binary string, demonstrating sound programming principles and effective algorithmic strategy.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-score-after-splitting-a-string/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "8kwPXbTMSnk"
 youtube_upload_date="2020-08-22"
 youtube_thumbnail="https://i.ytimg.com/vi/8kwPXbTMSnk/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGHIgZCgaMA8=&rs=AOn4CLAFskjPMvHmINXyYhzAGRh0xLe3Fw"
+comments = true
 +++
 
 
@@ -27,120 +28,218 @@ youtube_thumbnail="https://i.ytimg.com/vi/8kwPXbTMSnk/hqdefault.jpg?sqp=-oaymwEm
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of non-overlapping axis-aligned rectangles. Each rectangle is represented by its bottom-left and top-right corner. Your task is to design a system that can pick a random integer point from the space covered by one of the given rectangles. A point on the perimeter of a rectangle is considered inside the rectangle.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of rectangles, where each rectangle is represented by its bottom-left and top-right coordinates.
+- **Example:** `[[[[1, 1, 4, 4], [-2, -2, 2, 2]]]]`
+- **Constraints:**
+	- 1 <= rects.length <= 100
+	- rects[i].length == 4
+	- -10^9 <= ai < xi <= 10^9
+	- -10^9 <= bi < yi <= 10^9
+	- xi - ai <= 2000
+	- yi - bi <= 2000
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should return a random integer point inside the space covered by one of the rectangles.
+- **Example:** `[2, 2]`
+- **Constraints:**
+	- The output is an array of two integers, representing the coordinates of the selected random point.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to implement a system that can select a random point from the space covered by the given rectangles, ensuring equal probability for each point.
+
+- 1. For each rectangle, calculate the area it covers.
+- 2. Create a prefix sum array to track the cumulative area of rectangles.
+- 3. Use a random number generator to select a rectangle based on its area.
+- 4. Pick a random point within the selected rectangle.
+{{< dots >}}
+### Problem Assumptions ✅
+- All rectangles are non-overlapping and aligned to axes.
+- The selected random points should be equally likely to be chosen from any of the given rectangles.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[[[1, 1, 4, 4], [-2, -2, 2, 2]]]]`  \
+  **Explanation:** The first rectangle covers the area from (1, 1) to (4, 4), and the second rectangle covers the area from (-2, -2) to (2, 2). The 'pick' function randomly selects a point from one of these two rectangles, such as [2, 2] or [-1, -2].
+
+{{< dots >}}
+## Approach 🚀
+The solution involves calculating the area of each rectangle, storing cumulative areas, and then using these areas to select a rectangle randomly. After selecting a rectangle, a random point is chosen from within it.
+
+### Initial Thoughts 💭
+- The solution needs to ensure that each point has equal probability of being selected.
+- A prefix sum of the areas will allow efficient selection of rectangles based on their area.
+- Efficiently implementing this using a prefix sum array will allow fast lookups and selections.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the input will contain at least one rectangle.
+- The solution should efficiently handle up to 10^4 pick calls, so the algorithm must be optimized for speed.
+- Points on the perimeter should also be considered as valid points inside the rectangle.
+- Ensure that the algorithm is efficient enough to handle the upper limits of the input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    vector<int> v;
-    vector<vector<int>> rect;
+vector<int> v;
+vector<vector<int>> rect;
 public:
+
+int area(vector<int> r) {
     
-    int area(vector<int> r) {
-        
-        return (r[2] - r[0] +1) * (r[3] - r[1] +1);
+    return (r[2] - r[0] +1) * (r[3] - r[1] +1);
+}
+
+Solution(vector<vector<int>>& r) {
+    rect = r;
+    for(vector<int> re : r) {
+        v.push_back(area(re) + (v.empty()? 0 : v.back()));
     }
-    
-    Solution(vector<vector<int>>& r) {
-        rect = r;
-        for(vector<int> re : r) {
-            v.push_back(area(re) + (v.empty()? 0 : v.back()));
-        }
-    }
-    
-    vector<int> pick() {
-        int d = rand() % v.back();
-        int idz = upper_bound(v.begin(), v.end(), d) - v.begin();
-        vector<int> r = rect[idz];
-        return {
-            rand() % (r[2] - r[0] +1) + r[0],
-            rand() % (r[3] - r[1] +1) + r[1]
-        };
-    }
+}
+
+vector<int> pick() {
+    int d = rand() % v.back();
+    int idz = upper_bound(v.begin(), v.end(), d) - v.begin();
+    vector<int> r = rect[idz];
+    return {
+        rand() % (r[2] - r[0] +1) + r[0],
+        rand() % (r[3] - r[1] +1) + r[1]
+    };
+}
 };
 
 /**
  * Your Solution object will be instantiated and called as such:
  * Solution* obj = new Solution(rects);
  * vector<int> param_1 = obj->pick();
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+The Solution class implements the logic to randomly pick a point within the given set of rectangles. It uses the area of the rectangles to decide the probability of selecting points from each rectangle.
 
-The task is to design a solution that randomly selects a point from a set of given rectangles, with the probability of choosing a point being proportional to the area of the rectangle. Each rectangle is defined by its coordinates in a 2D space. For example, given rectangles represented as `[x1, y1, x2, y2]`, the task requires an efficient method to select points within these rectangles such that larger rectangles have a higher chance of selection than smaller ones.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class, which will be used to encapsulate the logic for selecting random points within given rectangles.
 
-### Approach
+2. **Variable Declaration**
+	```cpp
+	vector<int> v;
+	```
+	Declares a vector `v` that will store the cumulative area of rectangles to assist in random point selection based on area weights.
 
-This solution utilizes an area-weighted approach to ensure that larger rectangles are more likely to be chosen. We calculate and store cumulative areas for each rectangle, which we use to randomly select rectangles with a probability proportional to their area. Here’s a breakdown of the approach:
+3. **Variable Declaration**
+	```cpp
+	vector<vector<int>> rect;
+	```
+	Declares a 2D vector `rect`, which stores the coordinates of the rectangles given as input.
 
-1. **Calculate Areas**:
-   - We compute the area of each rectangle based on its coordinates. For a rectangle defined by `[x1, y1, x2, y2]`, the area can be calculated as `(x2 - x1 + 1) * (y2 - y1 + 1)`. This formula accounts for inclusive boundaries.
+4. **Access Specifier**
+	```cpp
+	public:
+	```
+	Marks the following methods as public, allowing them to be accessed by objects of the `Solution` class.
 
-2. **Cumulative Area Array**:
-   - We maintain a cumulative area array `v` to keep track of the cumulative areas of all rectangles. This allows us to perform a binary search later to efficiently select a rectangle with the desired probability.
-   - Each element in `v` represents the cumulative area up to that rectangle, making it easy to determine the probability distribution by the relative area size of each rectangle.
+5. **Method Definition**
+	```cpp
+	int area(vector<int> r) {
+	```
+	Defines a helper method `area` to calculate the area of a given rectangle represented by the vector `r`.
 
-3. **Random Selection**:
-   - To pick a point, we generate a random integer `d` between `0` and the total area (the last element in `v`).
-   - Using binary search (`upper_bound`), we find which rectangle this random value falls into, based on the cumulative area values stored in `v`.
-   - Once we select the rectangle, we randomly pick a point within its boundaries by generating random x and y coordinates.
+6. **Area Calculation**
+	```cpp
+	    return (r[2] - r[0] +1) * (r[3] - r[1] +1);
+	```
+	Calculates the area of the rectangle using the formula `(width) * (height)`, where `r[0]`, `r[1]` are the coordinates of the bottom-left corner, and `r[2]`, `r[3]` are the coordinates of the top-right corner.
 
-### Code Breakdown (Step by Step)
+7. **Constructor Definition**
+	```cpp
+	Solution(vector<vector<int>>& r) {
+	```
+	Defines the constructor of the `Solution` class that initializes the `rect` vector and calculates the cumulative areas of the rectangles.
 
-This solution consists of three main parts: an area calculation function, the constructor, and the `pick` function.
+8. **Input Assignment**
+	```cpp
+	    rect = r;
+	```
+	Assigns the input vector `r` to the class-level `rect` variable, which stores the rectangle data.
 
-1. **Helper Function for Area Calculation (`area`)**:
-   ```cpp
-   int area(vector<int> r) {
-       return (r[2] - r[0] + 1) * (r[3] - r[1] + 1);
-   }
-   ```
-   - This function takes a rectangle `r` represented by `[x1, y1, x2, y2]` and returns its area. The formula `(r[2] - r[0] + 1) * (r[3] - r[1] + 1)` computes the area by accounting for the inclusive nature of the boundaries.
+9. **Loop**
+	```cpp
+	    for(vector<int> re : r) {
+	```
+	Iterates over each rectangle in the input `r` to compute the areas and accumulate them.
 
-2. **Constructor (`Solution`)**:
-   ```cpp
-   Solution(vector<vector<int>>& r) {
-       rect = r;
-       for(vector<int> re : r) {
-           v.push_back(area(re) + (v.empty()? 0 : v.back()));
-       }
-   }
-   ```
-   - **Parameter Initialization**: The constructor initializes the `rect` vector with the input rectangles.
-   - **Cumulative Area Calculation**: For each rectangle `re` in `r`, we compute its area using `area(re)` and add it to `v`. If `v` is empty, we simply push the area of the first rectangle; otherwise, we add the area of the current rectangle to the last value in `v` (cumulative sum).
-   - After processing all rectangles, `v` stores the cumulative areas, with the last element being the total area covered by all rectangles.
+10. **Cumulative Area Calculation**
+	```cpp
+	        v.push_back(area(re) + (v.empty()? 0 : v.back()));
+	```
+	For each rectangle, calculates its area using the `area` method and adds it to the cumulative area vector `v`. If `v` is empty, it starts from 0.
 
-3. **Random Point Picker (`pick`)**:
-   ```cpp
-   vector<int> pick() {
-       int d = rand() % v.back();
-       int idz = upper_bound(v.begin(), v.end(), d) - v.begin();
-       vector<int> r = rect[idz];
-       return {
-           rand() % (r[2] - r[0] + 1) + r[0],
-           rand() % (r[3] - r[1] + 1) + r[1]
-       };
-   }
-   ```
-   - **Random Area Selection**: A random integer `d` is generated in the range `[0, v.back() - 1]`, which represents a random point within the total cumulative area.
-   - **Rectangle Selection via Binary Search**: Using `upper_bound`, we find the first rectangle whose cumulative area exceeds `d`. This gives us the index `idz` of the selected rectangle.
-   - **Random Point within Selected Rectangle**: Once the rectangle is chosen, we generate random `x` and `y` coordinates within the rectangle's boundaries:
-     - `x` is chosen as `rand() % (r[2] - r[0] + 1) + r[0]`.
-     - `y` is chosen as `rand() % (r[3] - r[1] + 1) + r[1]`.
+11. **Method Definition**
+	```cpp
+	vector<int> pick() {
+	```
+	Defines the `pick` method, which randomly selects a point from one of the rectangles based on their area probabilities.
 
-### Complexity
+12. **Random Selection**
+	```cpp
+	    int d = rand() % v.back();
+	```
+	Generates a random number `d` between 0 and the total area of all rectangles (stored in the last element of `v`).
 
-1. **Time Complexity**:
-   - **Constructor (`Solution`)**: Calculating the areas and cumulative sums takes `O(n)`, where `n` is the number of rectangles.
-   - **Pick Function (`pick`)**: Finding the rectangle using `upper_bound` is `O(log n)`, and selecting a random point within the rectangle is `O(1)`.
+13. **Binary Search**
+	```cpp
+	    int idz = upper_bound(v.begin(), v.end(), d) - v.begin();
+	```
+	Uses binary search (`upper_bound`) to find the rectangle corresponding to the randomly generated area `d`.
 
-2. **Space Complexity**:
-   - The space complexity is `O(n)` for storing the cumulative area array `v` and the input rectangles `rect`.
+14. **Rectangle Selection**
+	```cpp
+	    vector<int> r = rect[idz];
+	```
+	Selects the rectangle corresponding to the index `idz` from the `rect` vector.
 
-### Conclusion
+15. **Return Statement**
+	```cpp
+	    return {
+	```
+	Starts returning the randomly selected point within the chosen rectangle.
 
-This solution is optimized for selecting a random point from multiple rectangles with an area-weighted probability. By precomputing cumulative areas, we ensure that larger rectangles are more likely to be chosen. The use of binary search within `pick` allows for efficient rectangle selection, making this approach both time-efficient and scalable. The implementation handles rectangles in 2D space with ease, ensuring that each rectangle’s area directly impacts the selection probability, making this solution ideal for applications requiring weighted random selection.
+16. **Random Coordinate Generation**
+	```cpp
+	        rand() % (r[2] - r[0] +1) + r[0],
+	```
+	Generates a random x-coordinate within the bounds of the selected rectangle.
+
+17. **Random Coordinate Generation**
+	```cpp
+	        rand() % (r[3] - r[1] +1) + r[1]
+	```
+	Generates a random y-coordinate within the bounds of the selected rectangle.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
+
+The time complexity for selecting a rectangle is O(log n) due to the use of binary search on the prefix sum array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to storing the prefix sum array and the rectangles.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/random-point-in-non-overlapping-rectangles/description/)
 

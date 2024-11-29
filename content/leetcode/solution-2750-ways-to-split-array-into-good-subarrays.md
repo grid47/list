@@ -14,139 +14,179 @@ img_src = ""
 youtube = "T8f9ppAJHbY"
 youtube_upload_date="2023-07-01"
 youtube_thumbnail="https://i.ytimg.com/vi/T8f9ppAJHbY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary array 'nums' containing only 0s and 1s. A good subarray is defined as a contiguous subarray that contains exactly one 1. Your task is to find the number of ways to split the array into good subarrays. Return the result modulo (10^9 + 7).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You will be given a binary array 'nums' where each element is either 0 or 1.
+- **Example:** `nums = [0, 1, 0, 0, 1]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfGoodSubarraySplits(vector<int>& nums) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of ways to split the array 'nums' into good subarrays, modulo (10^9 + 7).
+- **Example:** `For nums = [0, 1, 0, 0, 1], the output is 4.`
+- **Constraints:**
+	- The result should be returned modulo (10^9 + 7).
 
-        int mod = (int) 1e9 + 7;
-        long ans = 1, cnt = 0;
-        int i = 0, n = nums.size();
-        while(i < n && nums[i] == 0) cnt++, i++;
-        if(cnt == n) return 0;
-        cnt = 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of ways to split 'nums' into good subarrays where each subarray contains exactly one 1.
 
-        for(; i < n; i++) {
-            if(nums[i]) {
-                ans = (ans * (cnt + 1)) % mod;
-                cnt = 0;
-            } else cnt++;
-        }
-        return ans;
+- Iterate through the array and count contiguous zeros between 1s.
+- For each segment of zeros, calculate the number of ways to split the segment into good subarrays.
+- Multiply the results for all segments together to get the final answer.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array 'nums' will always contain at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [0, 1, 0, 0, 1]`  \
+  **Explanation:** You need to count how many ways you can split the array into subarrays where each subarray contains exactly one 1. In this case, there are 4 ways.
+
+{{< dots >}}
+## Approach 🚀
+We need to find contiguous segments of zeros between the ones and calculate the number of possible ways to split those segments into subarrays containing exactly one 1.
+
+### Initial Thoughts 💭
+- The problem involves finding segments of zeros between ones in the array.
+- For each segment of zeros, the number of ways to split it depends on the length of the segment.
+- We can iterate through the array, identify the segments between 1s, and count the number of ways to split them.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one element, so no empty input case.
+- If the array is large (close to 100,000 elements), the solution needs to be efficient enough to handle this within the time limit.
+- If the array only contains 1s or only 0s, no valid splits are possible.
+- Ensure that the result is computed modulo (10^9 + 7).
+{{< dots >}}
+## Code 💻
+```cpp
+int numberOfGoodSubarraySplits(vector<int>& nums) {
+
+    int mod = (int) 1e9 + 7;
+    long ans = 1, cnt = 0;
+    int i = 0, n = nums.size();
+    while(i < n && nums[i] == 0) cnt++, i++;
+    if(cnt == n) return 0;
+    cnt = 0;
+
+    for(; i < n; i++) {
+        if(nums[i]) {
+            ans = (ans * (cnt + 1)) % mod;
+            cnt = 0;
+        } else cnt++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-We are given an array `nums` consisting of 0's and 1's. Our task is to calculate the number of ways to split the array into contiguous subarrays, such that each subarray contains exactly one `1`. The result should be returned modulo \(10^9 + 7\).
-
-A split is defined as a division of the array into contiguous subarrays. A valid split has the following properties:
-- Each subarray contains exactly one `1`.
-- Each subarray can contain any number of `0`s.
-
-### Approach
-
-We approach this problem by iterating through the array and counting the number of valid ways to form subarrays between consecutive `1`s. Specifically, we will keep track of the number of `0`s between each pair of `1`s because these zeros can be distributed in any way across the subarrays.
-
-1. **Initial Step**:
-   - If the array consists only of `0`s (i.e., there are no `1`s), then no valid split is possible, and we should return 0.
-   
-2. **Count the Zeros Between `1`s**:
-   - For each contiguous segment of `0`s between two `1`s, we can distribute those `0`s in several ways.
-   - For a block of `m` zeros between two `1`s, there are \( m + 1 \) ways to divide those zeros between the two `1`s (either placing some of the zeros before the first `1`, some after the second `1`, or any distribution in between).
-   
-3. **Multiplicative Count**:
-   - Multiply the number of ways for each block of zeros between `1`s. This will give us the total number of valid subarray splits for the given input.
-
-4. **Modulo Operation**:
-   - Since the answer can be large, we take the result modulo \(10^9 + 7\) at each step to ensure the result stays within manageable limits and adheres to the problem's constraints.
-
-5. **Edge Case**:
-   - If the entire array consists only of zeros (`cnt == n`), it is impossible to form a valid split, so return 0.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initial Setup and Modulo Declaration**
-
-```cpp
-int mod = (int) 1e9 + 7;
-long ans = 1, cnt = 0;
-int i = 0, n = nums.size();
-```
-
-- `mod`: The modulo value \(10^9 + 7\), which is used to keep the result within bounds.
-- `ans`: This will store the final result of the number of valid subarray splits.
-- `cnt`: This is used to count the number of consecutive zeros between `1`s.
-- `i`: The index for iterating through the `nums` array.
-- `n`: The size of the array `nums`.
-
-#### 2. **Check for All Zeros**
-
-```cpp
-while(i < n && nums[i] == 0) cnt++, i++;
-if(cnt == n) return 0;
-cnt = 0;
-```
-
-- This loop counts how many leading zeros are present at the beginning of the array.
-- If all the elements in the array are `0`s (`cnt == n`), we immediately return 0, as no valid split can be formed.
-
-#### 3. **Iterate Through the Array**
-
-```cpp
-for(; i < n; i++) {
-    if(nums[i]) {
-        ans = (ans * (cnt + 1)) % mod;
-        cnt = 0;
-    } else cnt++;
+    return ans;
 }
 ```
 
-- We start iterating through the array from the first `1` (after the leading zeros).
-- Whenever we encounter a `1`:
-  - We multiply `ans` by the number of ways to distribute the `0`s between the previous `1` and the current `1`. This is `cnt + 1`, as there are `cnt + 1` ways to split `cnt` zeros between the two `1`s.
-  - After processing a `1`, we reset `cnt` to 0, as we start counting the zeros between the next `1` (if any).
-- If the current element is `0`, we increment `cnt`, which keeps track of the number of consecutive zeros between the current `1` and the next `1`.
+This function calculates the number of 'good' subarray splits in an array of integers, where each subarray split contains at least one non-zero element. The result is computed using a modular arithmetic approach to avoid overflow.
 
-#### 4. **Return the Final Answer**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfGoodSubarraySplits(vector<int>& nums) {
+	```
+	Defines the function `numberOfGoodSubarraySplits` which takes a vector `nums` containing integers and returns the number of good subarray splits.
 
-```cpp
-return ans;
-```
+2. **Modular Arithmetic**
+	```cpp
+	    int mod = (int) 1e9 + 7;
+	```
+	Defines the modulus `mod` as (10^9 + 7), which is commonly used in competitive programming to prevent integer overflow.
 
-- After processing all the `1`s in the array, the variable `ans` will contain the total number of valid splits. This value is returned as the result.
+3. **Variable Initialization**
+	```cpp
+	    long ans = 1, cnt = 0;
+	```
+	Initializes the result variable `ans` to 1, and the counter `cnt` to 0. `cnt` will track the number of consecutive zeroes in the array.
 
-### Complexity Analysis
+4. **Size Calculation**
+	```cpp
+	    int i = 0, n = nums.size();
+	```
+	Initializes the index `i` to 0, and `n` to the size of the `nums` array. These will be used to traverse the array.
 
-#### Time Complexity
+5. **Count Leading Zeroes**
+	```cpp
+	    while(i < n && nums[i] == 0) cnt++, i++;
+	```
+	Counts the number of leading zeroes in the array by iterating through the array until a non-zero element is found.
 
-1. **Iterating Through the Array**:
-   - The main loop iterates through the array exactly once, making the time complexity \(O(n)\), where \(n\) is the size of the array `nums`.
+6. **Edge Case Check**
+	```cpp
+	    if(cnt == n) return 0;
+	```
+	If the entire array consists of zeroes, there are no valid subarray splits, so the function returns 0.
 
-2. **Modulo Operation**:
-   - The modulo operation is applied at each step to ensure the result stays within the bounds, and it takes constant time \(O(1)\).
+7. **Reset Counter**
+	```cpp
+	    cnt = 0;
+	```
+	Resets the `cnt` variable to 0, as we are starting to process non-zero elements in the array.
 
-Thus, the overall time complexity is \(O(n)\), where \(n\) is the number of elements in the input array `nums`.
+8. **Iterate Through Array**
+	```cpp
+	    for(; i < n; i++) {
+	```
+	Starts a loop to iterate over the remaining elements in the `nums` array, starting from the first non-zero element.
 
-#### Space Complexity
+9. **Non-zero Element Check**
+	```cpp
+	        if(nums[i]) {
+	```
+	Checks if the current element `nums[i]` is non-zero.
 
-1. **Auxiliary Variables**:
-   - We use a few integer variables (`mod`, `ans`, `cnt`, `i`, `n`) to store intermediate values, all of which take constant space.
+10. **Update Result**
+	```cpp
+	            ans = (ans * (cnt + 1)) % mod;
+	```
+	If the current element is non-zero, the result `ans` is updated by multiplying it with `cnt + 1` (the number of subarrays that can be formed from the zeroes), then taking the result modulo `mod`.
 
-Thus, the space complexity is \(O(1)\) because we are only using a constant amount of extra space.
+11. **Reset Counter After Non-zero Element**
+	```cpp
+	            cnt = 0;
+	```
+	Resets the counter `cnt` to 0 after processing a non-zero element.
 
-### Conclusion
+12. **Increment Zero Counter**
+	```cpp
+	        } else cnt++;
+	```
+	If the current element is zero, the counter `cnt` is incremented to track the consecutive zeroes.
 
-This solution efficiently calculates the number of valid subarray splits by counting the zeros between consecutive `1`s and leveraging the fact that zeros can be distributed in multiple ways. The solution uses a single pass through the array and handles the result using modular arithmetic to avoid overflow, ensuring optimal time and space complexity. The overall time complexity of \(O(n)\) makes it highly efficient for large input sizes, while the space complexity of \(O(1)\) ensures that the solution uses minimal memory.
+13. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the result `ans`, which represents the total number of good subarray splits modulo (10^9 + 7).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of nums.
+- **Average Case:** O(n).
+- **Worst Case:** O(n).
+
+We iterate through the array once to find the segments and compute the result, which is linear in time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1).
+- **Worst Case:** O(1).
+
+We only use a few variables to store intermediate results, so the space complexity is constant.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ways-to-split-array-into-good-subarrays/description/)
 

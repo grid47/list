@@ -14,90 +14,146 @@ img_src = ""
 youtube = "pbKnQYJuSY0"
 youtube_upload_date="2023-01-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/pbKnQYJuSY0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two integer arrays `nums1` and `nums2` sorted in non-decreasing order, return the smallest integer that is common to both arrays. If no such integer exists, return `-1`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integer arrays `nums1` and `nums2`, both sorted in non-decreasing order.
+- **Example:** `nums1 = [10, 15, 20], nums2 = [5, 10, 25]`
+- **Constraints:**
+	- 1 <= nums1.length, nums2.length <= 10^5
+	- 1 <= nums1[i], nums2[j] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getCommon(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int, int> mp;
-        for(int x: nums1)
-            mp[x] = true;
-        for(int y: nums2)
-            if(mp.count(y))
-                return y;
-        return -1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the smallest integer common to both arrays. If no common integer exists, return `-1`.
+- **Example:** `10`
+- **Constraints:**
+	- The result should be an integer or -1 if no common integer exists.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the smallest integer that is common in both arrays.
 
-In this problem, we are given two arrays `nums1` and `nums2`. Our task is to find the first common element between these two arrays. If no common element is found, return `-1`. The solution should be efficient and handle the constraints optimally.
+- Initialize two pointers to traverse the arrays.
+- Compare elements of both arrays at the current positions of the pointers.
+- If the elements match, return the common element as the result.
+- If the element in the first array is smaller, increment the pointer for the first array.
+- If the element in the second array is smaller, increment the pointer for the second array.
+- If no common elements are found, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both arrays `nums1` and `nums2` are valid and sorted in non-decreasing order.
+- The arrays may contain duplicates.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[4, 7, 9], [5, 7, 8]`  \
+  **Explanation:** The smallest common element between both arrays is 7, so the output is 7.
 
-### Approach
+- **Input:** `[10, 15, 20], [5, 10, 25]`  \
+  **Explanation:** The smallest common element between both arrays is 10, so the output is 10.
 
-To solve this problem, we will use a hash map (or unordered_map in C++) to store elements from one array and then check for common elements in the second array. The idea is to efficiently find the first common element between the two arrays by leveraging constant-time lookups offered by hash maps.
+{{< dots >}}
+## Approach 🚀
+The approach involves using a two-pointer technique to find the smallest common element efficiently.
 
-#### Steps:
-1. **Insert Elements into a Hash Map**: First, we insert each element from `nums1` into an unordered map (`mp`). This allows us to quickly check if any element from `nums2` exists in `nums1`.
-2. **Iterate Through `nums2`**: After storing all elements from `nums1`, we loop through `nums2` and check if any element exists in the hash map. The first time we find a match, we return that element as the first common element.
-3. **Return -1 if No Common Element is Found**: If we finish the loop through `nums2` without finding a common element, we return `-1`.
-
-This approach uses the unordered_map for constant-time lookups, making the solution more efficient than a brute-force approach.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Create an Unordered Map
+### Initial Thoughts 💭
+- The arrays are sorted, so we can use a two-pointer technique to compare elements in O(n) time.
+- By traversing both arrays and comparing the current elements, we can find the smallest common element efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- Both arrays are assumed to be non-empty.
+- Ensure that the solution works efficiently for large inputs with up to 10^5 elements.
+- Handle cases where there are no common elements.
+- The solution must be efficient enough to handle the largest possible inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
-unordered_map<int, int> mp;
+int getCommon(vector<int>& nums1, vector<int>& nums2) {
+    unordered_map<int, int> mp;
+    for(int x: nums1)
+        mp[x] = true;
+    for(int y: nums2)
+        if(mp.count(y))
+            return y;
+    return -1;
+}
 ```
-Here, we declare an unordered map `mp`. This map will store the elements of `nums1` as keys. We set the value of each key to `true` (or any arbitrary value) to mark its existence in `nums1`.
 
-#### Step 2: Insert Elements from `nums1` into the Map
-```cpp
-for(int x: nums1)
-    mp[x] = true;
-```
-In this step, we iterate over each element `x` in `nums1` and insert it into the unordered map `mp`. By doing this, we ensure that we can check the existence of any element from `nums2` in constant time later on.
+The function 'getCommon' finds the first common element between two arrays, 'nums1' and 'nums2'. It uses a hash map to store elements from 'nums1' and checks if any element from 'nums2' exists in the map.
 
-#### Step 3: Check for Common Elements in `nums2`
-```cpp
-for(int y: nums2)
-    if(mp.count(y))
-        return y;
-```
-We now loop through each element `y` in `nums2`. The `mp.count(y)` function checks whether `y` is present in the map `mp`. If it is, we immediately return `y` because it is the first common element between `nums1` and `nums2`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int getCommon(vector<int>& nums1, vector<int>& nums2) {
+	```
+	The function 'getCommon' is defined, which takes two vectors 'nums1' and 'nums2' as input and returns the first common element between them, or -1 if no common element is found.
 
-#### Step 4: Return `-1` if No Common Element is Found
-```cpp
-return -1;
-```
-If we reach the end of the second loop without finding a common element, we return `-1` as specified in the problem statement. This indicates that no common element exists between `nums1` and `nums2`.
+2. **Map Initialization**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	An unordered map 'mp' is initialized to store elements from 'nums1'. The map will help check if any element in 'nums2' is present in 'nums1'.
 
-### Complexity Analysis
+3. **Loop Through First Array**
+	```cpp
+	    for(int x: nums1)
+	```
+	A for loop iterates through each element 'x' of the first array 'nums1'.
 
-#### Time Complexity:
-- **Building the Hash Map**: Inserting elements from `nums1` into the unordered map takes `O(n)` time, where `n` is the length of `nums1`.
-- **Checking for Common Elements**: Iterating through `nums2` and performing constant-time lookups in the unordered map takes `O(m)` time, where `m` is the length of `nums2`.
-- **Overall Time Complexity**: The total time complexity is `O(n + m)`, where `n` is the size of `nums1` and `m` is the size of `nums2`. This is because we iterate over each array once, and each lookup operation in the unordered map is `O(1)` on average.
+4. **Map Population**
+	```cpp
+	        mp[x] = true;
+	```
+	For each element 'x' in 'nums1', it is added to the map 'mp' with the value 'true'. This marks the presence of the element in 'nums1'.
 
-#### Space Complexity:
-- **Space for the Hash Map**: The space required for the unordered map `mp` is `O(n)`, where `n` is the number of elements in `nums1`. This is because we store each element of `nums1` in the map.
-- **Overall Space Complexity**: The space complexity is `O(n)` due to the storage of `nums1` in the hash map.
+5. **Loop Through Second Array**
+	```cpp
+	    for(int y: nums2)
+	```
+	A second for loop iterates through each element 'y' in the second array 'nums2'.
 
-### Conclusion
+6. **Check for Common Element**
+	```cpp
+	        if(mp.count(y))
+	```
+	This if statement checks whether the element 'y' from 'nums2' exists in the map 'mp'. The count function returns true if the element is present.
 
-This solution efficiently finds the first common element between two arrays using an unordered map for constant-time lookups. The time complexity is linear, `O(n + m)`, where `n` and `m` are the sizes of the input arrays `nums1` and `nums2`. The space complexity is also linear, `O(n)`, due to the hash map storing the elements of `nums1`.
+7. **Return Common Element**
+	```cpp
+	            return y;
+	```
+	If a common element 'y' is found, it is immediately returned as the first common element between 'nums1' and 'nums2'.
 
-By using a hash map, we avoid the need for a nested loop, which would have resulted in a quadratic time complexity. This approach is optimal and scales well for large input sizes, making it a good choice for solving this problem within the given constraints.
+8. **Return -1**
+	```cpp
+	    return -1;
+	```
+	If no common element is found after checking all elements of 'nums2', the function returns -1 to indicate there is no common element.
 
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only traverse each array once using two pointers.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we only use a constant amount of extra space for the pointers.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-common-value/description/)

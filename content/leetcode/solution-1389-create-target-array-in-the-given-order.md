@@ -14,127 +14,168 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two arrays of integers nums and index, the task is to create a target array by inserting elements of nums at the positions specified by index. After processing all elements, return the target array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays: nums and index. The length of both arrays is the same, and nums[i] represents the element to be inserted at index[i] position in the target array.
+- **Example:** `For nums = [5, 10, 20, 30, 40], index = [0, 1, 2, 2, 1], the target array will be [5, 40, 10, 30, 20].`
+- **Constraints:**
+	- 1 <= nums.length, index.length <= 100
+	- nums.length == index.length
+	- 0 <= nums[i] <= 100
+	- 0 <= index[i] <= i
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    static bool cmp(vector<int> &a, vector<int> &b) {
-        return a[0] < b[0];
-        // return b[2] < a[2];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the target array after inserting all elements from nums at the corresponding indices from index.
+- **Example:** `For nums = [5, 10, 20, 30, 40] and index = [0, 1, 2, 2, 1], the output will be [5, 40, 10, 30, 20].`
+- **Constraints:**
+	- The output will always be a valid array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to insert elements from nums at positions specified by index, maintaining the order of elements in nums.
+
+- 1. Initialize an empty target array.
+- 2. Iterate over the nums and index arrays.
+- 3. Insert nums[i] at the position index[i] in the target array.
+- 4. Return the target array after all insertions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The insertion operations will always be valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [5, 10, 20, 30, 40] and index = [0, 1, 2, 2, 1], the target array becomes [5, 40, 10, 30, 20].`  \
+  **Explanation:** The algorithm inserts elements at positions defined by index, and we keep track of the current state of the target array.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, iterate through the nums and index arrays, inserting each element of nums at the specified position in the target array.
+
+### Initial Thoughts 💭
+- The insertion operation involves shifting elements of the target array to make room for the new element.
+- We will insert elements in the order specified, which means we need to shift the current elements of the target array each time.
+{{< dots >}}
+### Edge Cases 🌐
+- The input arrays nums and index will never be empty.
+- Ensure the solution handles cases with the maximum input size of 100 elements.
+- The input values will always be valid and within the specified range.
+- The algorithm must handle the maximum constraints efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+static bool cmp(vector<int> &a, vector<int> &b) {
+    return a[0] < b[0];
+    // return b[2] < a[2];
+}
+
+vector<int> createTargetArray(vector<int>& nums, vector<int>& index) {
+    int n = nums.size();
+    vector<int> ans(n, 0);
+    for(int i = 0; i < n; i++) {
+        int j = index[i];
+        for(int k = n - 1; k > j; k--)
+            ans[k] = ans[k - 1];
+        ans[j] = nums[i];
     }
-    
-    vector<int> createTargetArray(vector<int>& nums, vector<int>& index) {
-        int n = nums.size();
-        vector<int> ans(n, 0);
-        for(int i = 0; i < n; i++) {
-            int j = index[i];
-            for(int k = n - 1; k > j; k--)
-                ans[k] = ans[k - 1];
-            ans[j] = nums[i];
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
+This code solves the problem of creating a target array based on given index positions. It uses a helper function `cmp` for sorting (although it's commented out), and the main function `createTargetArray` inserts elements from the `nums` array into a new array at the specified positions in the `index` array.
 
-The problem involves creating a target array from two input arrays: `nums` and `index`. The goal is to build a new array called `target` such that each element from `nums` is inserted into `target` at the specified position indicated by `index`. Specifically, for each element in `nums`, it is placed in the `target` array at the corresponding position in `index`. If multiple elements are inserted at the same index, the existing elements are shifted to the right.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Helper Function**
+	```cpp
+	static bool cmp(vector<int> &a, vector<int> &b) {
+	```
+	Define a helper function `cmp` which compares two vectors based on the first element (used for sorting). The function can be customized to compare other elements.
 
-### Approach
+2. **Comparison**
+	```cpp
+	    return a[0] < b[0];
+	```
+	Compare the first element of the two vectors. This is used for sorting purposes (ascending order based on the first element).
 
-To tackle this problem, the approach involves the following steps:
+3. **Function Definition**
+	```cpp
+	vector<int> createTargetArray(vector<int>& nums, vector<int>& index) {
+	```
+	Define the function `createTargetArray`, which takes two arrays: `nums` (values to insert) and `index` (positions to insert the corresponding values).
 
-1. **Initialization**: Create an array `ans` of the same size as `nums` initialized to zero, which will hold the resulting target array.
+4. **Variable Declaration**
+	```cpp
+	    int n = nums.size();
+	```
+	Store the size of the `nums` array in the variable `n` to use as the loop limit.
 
-2. **Iterative Insertion**: Iterate through each element in `nums`:
-   - Determine the index at which the current number should be inserted using the `index` array.
-   - Shift existing elements in `ans` to the right to make space for the new element.
-   - Insert the current number from `nums` at the determined index in `ans`.
+5. **Data Structures**
+	```cpp
+	    vector<int> ans(n, 0);
+	```
+	Initialize a vector `ans` of size `n` with all elements set to 0. This will hold the final target array.
 
-3. **Return the Result**: After all elements are processed, return the `ans` array as the final target array.
+6. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterate over each element in the `nums` array using a loop.
 
-### Code Breakdown (Step by Step)
+7. **Index Assignment**
+	```cpp
+	        int j = index[i];
+	```
+	Get the index `j` from the `index` array, where the `i`-th number of `nums` should be inserted.
 
-Here's a detailed breakdown of the provided C++ code:
+8. **Nested Loop**
+	```cpp
+	        for(int k = n - 1; k > j; k--)
+	```
+	Loop backwards from `n-1` to `j+1`, shifting the elements in the target array to the right to make space for the new element.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class encapsulates the functionality required to create the target array.
+9. **Array Manipulation**
+	```cpp
+	            ans[k] = ans[k - 1];
+	```
+	Shift the element at index `k-1` to index `k`, moving all elements to the right starting from the end of the array.
 
-2. **Comparator Function (Unused)**:
-   ```cpp
-       static bool cmp(vector<int> &a, vector<int> &b) {
-           return a[0] < b[0];
-       }
-   ```
-   - A static comparator function is defined but not used in this context. It compares two vectors based on the first element. This could be useful if the function were to be modified for sorting, but it is not utilized in the current implementation.
+10. **Array Insertion**
+	```cpp
+	        ans[j] = nums[i];
+	```
+	Insert the `i`-th element of `nums` at the position `j` in the target array `ans`.
 
-3. **Main Function (createTargetArray)**:
-   ```cpp
-       vector<int> createTargetArray(vector<int>& nums, vector<int>& index) {
-           int n = nums.size();
-           vector<int> ans(n, 0);
-   ```
-   - The `createTargetArray` function takes two vectors, `nums` and `index`, as input parameters.
-   - It determines the size `n` of the `nums` array and initializes the `ans` array with zero values of the same size.
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the final target array `ans` after all elements from `nums` have been inserted at the specified positions.
 
-4. **Iterating Over Elements**:
-   ```cpp
-           for(int i = 0; i < n; i++) {
-               int j = index[i];
-   ```
-   - A loop iterates through each element of `nums`, indexed by `i`.
-   - For each iteration, it retrieves the corresponding index `j` from the `index` array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2), where n is the length of nums.
+- **Average Case:** O(n^2), due to shifting elements for each insertion.
+- **Worst Case:** O(n^2), where n is the length of nums.
 
-5. **Shifting Elements**:
-   ```cpp
-               for(int k = n - 1; k > j; k--)
-                   ans[k] = ans[k - 1];
-   ```
-   - A nested loop shifts existing elements in `ans` to the right starting from the end of the array, ensuring there is space to insert the new element at index `j`.
-   - This loop runs from `n - 1` down to `j + 1`, moving elements one position to the right.
+The time complexity is dominated by the shifting operations during each insertion.
 
-6. **Inserting the Current Element**:
-   ```cpp
-               ans[j] = nums[i];
-           }
-   ```
-   - After shifting elements, the current number from `nums` is placed at the appropriate index `j` in the `ans` array.
+### Space Complexity 💾
+- **Best Case:** O(n), since we store the target array.
+- **Worst Case:** O(n), where n is the length of nums, for storing the target array.
 
-7. **Returning the Result**:
-   ```cpp
-           return ans;
-       }
-   };
-   ```
-   - After all iterations are complete, the function returns the populated `ans` array, which represents the target array.
+The space complexity is O(n) due to the storage of the target array.
 
-### Complexity
+**Happy Coding! 🎉**
 
-- **Time Complexity**:
-  - The time complexity of this solution is \(O(n^2)\). This is because for each of the \(n\) elements in `nums`, we may shift up to \(n\) elements to make space, resulting in a worst-case scenario of \(n \times n = n^2\).
-
-- **Space Complexity**:
-  - The space complexity is \(O(n)\) due to the additional storage required for the `ans` array, which holds the target values.
-
-### Conclusion
-
-The provided solution effectively constructs a target array based on specified insertion indices while handling element shifting correctly. Although the algorithm is straightforward and correct, it suffers from inefficiency due to the \(O(n^2)\) time complexity arising from the nested loops.
-
-While this approach works for reasonably sized inputs, it may not be optimal for larger datasets. Future optimizations could involve using a different data structure, such as a linked list or a more complex array manipulation technique, to minimize the need for shifting elements.
-
-Overall, this solution serves as a good exercise in understanding how to manipulate arrays, handle indexing, and think about time complexity in algorithms. It also highlights the importance of considering both correctness and efficiency in algorithm design, making it a useful reference for similar array manipulation problems. By mastering these concepts, developers can tackle a variety of challenges related to data insertion, array manipulation, and algorithm optimization.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/create-target-array-in-the-given-order/description/)
 

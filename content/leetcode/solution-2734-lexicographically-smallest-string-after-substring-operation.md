@@ -14,111 +14,132 @@ img_src = ""
 youtube = "wvExCULvlqU"
 youtube_upload_date="2023-06-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/wvExCULvlqU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting of lowercase English letters. You can perform the operation of replacing every letter of a selected non-empty substring with the preceding letter in the alphabet. Your task is to return the lexicographically smallest string possible after performing the operation.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` of lowercase English letters.
+- **Example:** `s = 'efghi'`
+- **Constraints:**
+	- 1 <= s.length <= 3 * 10^5
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string smallestString(string s) {
-        int i = 0;
-        while(i < s.size() && s[i] == 'a') i++;
-        if(i >= s.size()) { s[s.size()-1] = 'z'; return s; }
-        while(i < s.size() && s[i] != 'a') { s[i]--; i++; }
-        return s;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically smallest string that can be obtained after performing the operation.
+- **Example:** `Output: 'defgh'`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the lexicographically smallest string by selecting and performing the operation on a substring.
 
-The problem asks us to transform a given string into its lexicographically smallest form by modifying the string according to certain rules. Specifically, the transformation involves changing the string's characters such that:
+- Find the first non-'a' character and perform the operation on it and all following characters.
+- Stop the operation when you encounter 'a' or the end of the string.
+{{< dots >}}
+### Problem Assumptions ✅
+- All characters in the string are lowercase English letters.
+- The string length is at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'efghi'`  \
+  **Explanation:** The operation is performed on the first two characters 'e' and 'f', changing them to 'd' and 'e', respectively. The result is 'defgh'.
 
-- If the string consists entirely of the character 'a', the last character should be changed to 'z'.
-- For other cases, the transformation involves decreasing the characters in the string that are not 'a' by 1, while the 'a' characters remain unchanged.
+- **Input:** `s = 'abc'`  \
+  **Explanation:** No operation is needed because the string is already lexicographically smallest.
 
-The goal is to return the modified string after applying the transformation rules as described above.
+- **Input:** `s = 'bcde'`  \
+  **Explanation:** The operation is performed on the substring 'b' and 'c', changing 'b' to 'a'. The result is 'abde'.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating over the string and applying the operation on the first non-'a' characters, reducing them by 1.
 
-The task involves modifying the string such that we can achieve the lexicographically smallest form by decreasing non-'a' characters until we encounter an 'a'. Here’s a breakdown of the approach to solve this problem:
-
-1. **Step 1: Identifying Leading 'a' Characters**:
-   - First, traverse through the string and find the first non-'a' character. The 'a' characters are the smallest lexicographically, so we don’t want to change them.
-   
-2. **Step 2: Handle the Case of All 'a' Characters**:
-   - If the string consists entirely of 'a' characters, the entire string is already in its smallest form. Therefore, the only modification we would make is to change the last character from 'a' to 'z'. This is the edge case where the string doesn’t require further transformations, but we still apply the rule that modifies the last character.
-
-3. **Step 3: Decrease Non-'a' Characters**:
-   - Once the first non-'a' character is found, we start decrementing the characters by 1 until we encounter an 'a'. This guarantees that we are transforming the string in a way that results in the lexicographically smallest string. Each non-'a' character is decreased by 1, and the process continues until we process all the characters in the string.
-
-4. **Step 4: Return the Result**:
-   - After the string has been modified, return the string.
-
-This approach ensures that the string is transformed in a manner that is optimal and results in the lexicographically smallest string possible based on the given rules.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code and explain it step by step:
-
+### Initial Thoughts 💭
+- We need to find the first character that is not 'a' and apply the operation on it.
+- If the string is all 'a's, we need to change the last character to 'z'.
+- Start iterating from the beginning, and when encountering the first non-'a' character, apply the operation.
+{{< dots >}}
+### Edge Cases 🌐
+- The string contains only 'a's.
+- The string has the maximum allowed length.
+- The string has no non-'a' characters.
+- The input string is always non-empty.
+{{< dots >}}
+## Code 💻
 ```cpp
-int i = 0;
+string smallestString(string s) {
+    int i = 0;
+    while(i < s.size() && s[i] == 'a') i++;
+    if(i >= s.size()) { s[s.size()-1] = 'z'; return s; }
+    while(i < s.size() && s[i] != 'a') { s[i]--; i++; }
+    return s;
+}
 ```
 
-- The variable `i` is initialized to zero and will be used to traverse through the string from left to right.
+This function takes a string `s` and modifies it to form the lexicographically smallest string. It decreases characters that are not 'a' until it encounters an 'a' or the end of the string.
 
-```cpp
-while(i < s.size() && s[i] == 'a') i++;
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string smallestString(string s) {
+	```
+	This is the function definition of `smallestString`, which takes a string `s` as input and returns the modified string.
 
-- This loop checks for consecutive 'a' characters starting from the beginning of the string. The loop continues until a character other than 'a' is found, or the end of the string is reached. The variable `i` will then point to the first non-'a' character, or the end of the string if the entire string is composed of 'a' characters.
+2. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	An integer variable `i` is initialized to 0. This will be used to iterate through the string `s`.
 
-```cpp
-if(i >= s.size()) { s[s.size()-1] = 'z'; return s; }
-```
+3. **Loop - Check 'a'**
+	```cpp
+	    while(i < s.size() && s[i] == 'a') i++;
+	```
+	The function enters a while-loop to skip all the leading 'a' characters in the string by incrementing `i` until a non-'a' character is found.
 
-- This condition handles the edge case where the string consists entirely of 'a' characters. If `i` reaches the end of the string, it means the entire string is made of 'a's. In this case, we change the last character of the string to 'z' (as per the rules) and return the string.
+4. **Condition - All 'a'**
+	```cpp
+	    if(i >= s.size()) { s[s.size()-1] = 'z'; return s; }
+	```
+	If `i` reaches the end of the string, meaning all characters were 'a', the last character is set to 'z' and the modified string `s` is returned.
 
-```cpp
-while(i < s.size() && s[i] != 'a') { s[i]--; i++; }
-```
+5. **Loop - Decrease Non-'a'**
+	```cpp
+	    while(i < s.size() && s[i] != 'a') { s[i]--; i++; }
+	```
+	This while-loop iterates through the string starting from the first non-'a' character and decreases each character until an 'a' is encountered or the string ends.
 
-- This loop is responsible for decrementing the characters in the string that are not 'a'. It starts from the first non-'a' character (found in the earlier loop) and continues to decrement each character by 1 until it encounters an 'a'. The loop proceeds through the string character by character, ensuring the lexicographically smallest transformation.
+6. **Return Statement**
+	```cpp
+	    return s;
+	```
+	After modifying the string, the function returns the modified string `s`.
 
-```cpp
-return s;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of the string.
+- **Average Case:** O(n) because we iterate over the string once.
+- **Worst Case:** O(n) since we need to process all characters in the string.
 
-- After all transformations are complete, the modified string is returned as the result.
+The time complexity is linear because we process each character once.
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1) when no operations are required.
+- **Worst Case:** O(1) since only a few variables are used.
 
-#### Time Complexity
+The space complexity is constant because we don't use any extra space proportional to the input size.
 
-The time complexity of the algorithm can be analyzed by considering the operations performed on the string:
+**Happy Coding! 🎉**
 
-1. **First Loop (Identifying Leading 'a' Characters)**:
-   - The first loop goes through the string to find the first non-'a' character. In the worst case, this loop will examine every character in the string, leading to a time complexity of \(O(n)\), where \(n\) is the length of the string.
-
-2. **Second Loop (Decreasing Non-'a' Characters)**:
-   - The second loop decreases the non-'a' characters until it encounters an 'a'. In the worst case, this loop will also traverse the entire string, leading to a time complexity of \(O(n)\).
-
-Therefore, the overall time complexity of the algorithm is \(O(n)\), where \(n\) is the length of the input string.
-
-#### Space Complexity
-
-The space complexity is determined by the amount of additional memory used by the algorithm. The algorithm does not use any extra data structures that grow with the size of the input string. The only additional variables used are a few integer variables (`i`), and the string `s` is modified in place.
-
-Therefore, the space complexity is \(O(1)\), meaning the algorithm uses constant space.
-
-### Conclusion
-
-This solution is efficient and handles the problem in linear time, making it suitable for large input sizes. By focusing on modifying the string in a single pass, the algorithm achieves the lexicographically smallest string by decrementing non-'a' characters until the first 'a' is encountered. The edge case of a string consisting entirely of 'a' characters is handled separately by changing the last character to 'z'. This approach is both simple and effective, ensuring that the solution is optimal for any valid input string.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lexicographically-smallest-string-after-substring-operation/description/)
 

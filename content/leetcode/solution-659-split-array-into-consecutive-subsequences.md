@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "hbNUEvWyiFU"
 youtube_upload_date="2020-07-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/hbNUEvWyiFU/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,128 +28,202 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/hbNUEvWyiFU/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a sorted integer array nums. Determine if it is possible to split nums into one or more subsequences such that each subsequence is a consecutive increasing sequence and each subsequence has a length of 3 or more.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sorted integer array nums.
+- **Example:** `nums = [1, 2, 3, 3, 4, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -1000 <= nums[i] <= 1000
+	- nums is sorted in non-decreasing order.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPossible(vector<int>& nums) {
-        unordered_map<int, int> left, end;
-        
-        for(int num: nums)
-            left[num]++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to split nums into valid subsequences, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The output is a boolean value indicating whether the split is possible.
 
-        for(int num: nums) { // nums is in increasing order
-            if(left[num] == 0) continue;
-            
-            left[num]--;
-            
-            if(end[num - 1] > 0) {
-                end[num - 1]--;
-                end[num]++;
-            }
-            else if(left[num + 1] > 0 && left[num + 2] > 0) {
-                left[num + 1]--;
-                left[num + 2]--;
-                end [num + 2]++;
-            } else return false;
-        }
-        return true;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if it is possible to form valid subsequences of length 3 or more, where each subsequence is a consecutive increasing sequence.
 
-### Problem Statement
+- 1. Use a map to count occurrences of each number in the array.
+- 2. Track the subsequences that can be extended with the current number.
+- 3. Ensure that each number is either added to an existing subsequence or starts a new valid subsequence of at least length 3.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is always sorted in non-decreasing order.
+- The length of the array is within the specified limits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3, 3, 4, 5]`  \
+  **Explanation:** The array can be split into two subsequences: [1, 2, 3] and [3, 4, 5], both of which are valid.
 
-The problem asks whether a given list of integers can be split into **one or more subsequences** such that each subsequence is a **consecutive sequence**. A subsequence is defined as a sequence of numbers that can be derived by deleting some or no elements of the array without changing the order of the remaining elements.
+- **Input:** `nums = [1, 2, 3, 4, 4, 5]`  \
+  **Explanation:** It is impossible to split this array into valid subsequences, as the subsequence starting with the second 4 cannot be extended to form a valid sequence.
 
-For example:
-- For the input `nums = [1, 2, 3, 3, 4, 5]`, the output should be `true` because it can be split into subsequences `[1, 2, 3]` and `[3, 4, 5]`.
-- For the input `nums = [1, 2, 3, 4, 5]`, the output should be `true` because it can be split into the subsequence `[1, 2, 3, 4, 5]`.
-- For the input `nums = [1, 2, 3, 5, 6]`, the output should be `false` because it cannot form valid consecutive subsequences.
+{{< dots >}}
+## Approach 🚀
+This problem can be solved by tracking the frequency of each element and ensuring that each number is placed in an appropriate subsequence.
 
-### Approach
-
-The approach to solving this problem is based on **greedy** strategy, where we attempt to build valid subsequences as we traverse the array. The two main components in this solution are:
-1. **Tracking elements left to process:** Using a `left` map to count how many occurrences of each number are left to be placed in subsequences.
-2. **Tracking the end of subsequences:** Using an `end` map to keep track of the number of subsequences that are ending with a specific number.
-
-#### Key Observations:
-1. A valid subsequence must always contain at least 3 consecutive numbers for the sequence to be valid.
-2. For any number in the array, we try to either extend an existing subsequence or start a new one by checking if we can use the next consecutive numbers (`num + 1` and `num + 2`).
-
-The logic of the solution is built upon trying to form these valid subsequences in a greedy manner.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization**
+### Initial Thoughts 💭
+- We can use a frequency map to keep track of the remaining numbers.
+- Subsequences should only be extended if the previous number is part of a valid subsequence.
+- We need to carefully manage how we form and extend subsequences to meet the requirement that all subsequences have at least 3 elements.
+{{< dots >}}
+### Edge Cases 🌐
+- There will be no empty arrays, as per the constraints.
+- The solution should handle arrays of size up to 10^4 efficiently.
+- Arrays where consecutive numbers repeat can be tricky, but the solution will handle them by extending or starting new subsequences.
+- Ensure the number of subsequences is managed correctly to meet the length 3 constraint.
+{{< dots >}}
+## Code 💻
 ```cpp
-unordered_map<int, int> left, end;
-```
-Here, we define two hash maps:
-- `left`: To track how many occurrences of a number are left to be placed into subsequences.
-- `end`: To track how many subsequences are currently ending at a specific number.
-
-#### 2. **Populating the `left` map**
-```cpp
-for(int num: nums)
-    left[num]++;
-```
-We iterate through the input array `nums` and populate the `left` map. This map keeps track of the count of each number in the array, indicating how many times we still need to place that number into a subsequence.
-
-#### 3. **Main Processing Loop**
-```cpp
-for(int num: nums) {
-    if(left[num] == 0) continue;
-    left[num]--;
+bool isPossible(vector<int>& nums) {
+    unordered_map<int, int> left, end;
     
-    if(end[num - 1] > 0) {
-        end[num - 1]--;
-        end[num]++;
+    for(int num: nums)
+        left[num]++;
+
+    for(int num: nums) { // nums is in increasing order
+        if(left[num] == 0) continue;
+        
+        left[num]--;
+        
+        if(end[num - 1] > 0) {
+            end[num - 1]--;
+            end[num]++;
+        }
+        else if(left[num + 1] > 0 && left[num + 2] > 0) {
+            left[num + 1]--;
+            left[num + 2]--;
+            end [num + 2]++;
+        } else return false;
     }
-    else if(left[num + 1] > 0 && left[num + 2] > 0) {
-        left[num + 1]--;
-        left[num + 2]--;
-        end[num + 2]++;
-    } else return false;
+    return true;
 }
 ```
 
-##### Explanation:
-- **Skip numbers already processed**:  
-  The `if(left[num] == 0) continue;` line skips the current number if it has already been placed in a subsequence, as indicated by the `left` map.
+This function checks whether it's possible to split an array of numbers into consecutive subsequences. It uses two hash maps (`left` and `end`) to track the counts of elements available for subsequences and the ending elements of subsequences, respectively.
 
-- **Try to extend an existing subsequence**:  
-  If a subsequence exists that ends with `num - 1`, then we can extend it by adding `num` to that subsequence. We do this by checking if there is any subsequence ending at `num - 1` (`end[num - 1] > 0`). If this is the case, we:
-  - Decrease the count of subsequences ending at `num - 1` (`end[num - 1]--`).
-  - Increase the count of subsequences ending at `num` (`end[num]++`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isPossible(vector<int>& nums) {
+	```
+	This is the function definition for `isPossible`, which takes a vector of integers `nums` and returns a boolean value indicating whether it's possible to split the array into consecutive subsequences.
 
-- **Create a new subsequence**:  
-  If no subsequence can be extended, we try to start a new subsequence using the current number. A new subsequence can only be formed if `num + 1` and `num + 2` are also available in the `left` map (i.e., `left[num + 1] > 0 && left[num + 2] > 0`). If this condition is true:
-  - Decrease the count of `num + 1` and `num + 2` in the `left` map.
-  - Add a new subsequence ending at `num + 2` by updating the `end` map.
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<int, int> left, end;
+	```
+	Two hash maps `left` and `end` are initialized. `left` tracks the count of available elements, and `end` tracks the number of subsequences ending at a specific number.
 
-- **Return False for invalid cases**:  
-  If neither extending an existing subsequence nor starting a new one is possible, we return `false` because it's impossible to create valid subsequences for this input.
+3. **Loop Initialization**
+	```cpp
+	    for(int num: nums)
+	```
+	Iterate over each number in the `nums` array.
 
-#### 4. **Returning the result**
-```cpp
-return true;
-```
-If we successfully process all the numbers and form valid subsequences, we return `true`, indicating that it's possible to split the array into subsequences of consecutive integers.
+4. **Left Count Update**
+	```cpp
+	        left[num]++;
+	```
+	For each number, increment the count in the `left` map to indicate that this number is available for building subsequences.
 
-### Complexity
+5. **Loop Start**
+	```cpp
+	    for(int num: nums) { // nums is in increasing order
+	```
+	This is the second loop that iterates through the numbers in `nums`. It processes each number in increasing order to check if it can be added to a subsequence.
 
-#### Time Complexity:
-- **O(n)**: The function iterates through the array `nums` once. For each number, we perform constant-time operations (updating the `left` and `end` maps). Since there are at most `n` numbers and each operation takes constant time, the overall time complexity is **O(n)**, where `n` is the length of the input array.
+6. **Skip Processed Numbers**
+	```cpp
+	        if(left[num] == 0) continue;
+	```
+	If the number has already been used in a subsequence (i.e., `left[num] == 0`), skip processing it.
 
-#### Space Complexity:
-- **O(n)**: We use two hash maps, `left` and `end`, to store information about the counts of each number in the array and the subsequences ending at each number. In the worst case, where all numbers in the array are distinct, both maps will contain `n` entries. Therefore, the space complexity is **O(n)**.
+7. **Left Count Decrement**
+	```cpp
+	        left[num]--;
+	```
+	Decrement the count of the current number in `left` because it is being used to form a subsequence.
 
-### Conclusion
+8. **Check Existing Subsequence**
+	```cpp
+	        if(end[num - 1] > 0) {
+	```
+	If there is a subsequence ending with `num - 1`, extend that subsequence by adding the current `num` to it.
 
-This solution efficiently solves the problem using a greedy approach combined with hash maps to track the available numbers for subsequences and the subsequences themselves. The use of two hash maps (`left` and `end`) ensures that we can manage the subsequences dynamically while processing each number. The overall time and space complexity of **O(n)** makes this solution optimal for large inputs. This approach is particularly suitable for scenarios where subsequences must follow specific constraints, such as forming consecutive sequences.
+9. **Extend Subsequence**
+	```cpp
+	            end[num - 1]--;
+	```
+	Decrement the count of subsequences ending with `num - 1` since we are now using `num` to extend it.
+
+10. **End Subsequence with Current Number**
+	```cpp
+	            end[num]++;
+	```
+	Increment the count of subsequences ending with `num` after adding it to an existing subsequence.
+
+11. **Check for New Subsequence**
+	```cpp
+	        } else if(left[num + 1] > 0 && left[num + 2] > 0) {
+	```
+	If no subsequence can be extended with the current number, check if we can start a new subsequence with `num`, `num + 1`, and `num + 2`.
+
+12. **Start New Subsequence**
+	```cpp
+	            left[num + 1]--;
+	```
+	Decrement the count of `num + 1` in `left` as it's being used to start a new subsequence.
+
+13. **New Subsequence Continuation**
+	```cpp
+	            left[num + 2]--;
+	```
+	Decrement the count of `num + 2` in `left` as it's also being used to continue the new subsequence.
+
+14. **End New Subsequence**
+	```cpp
+	            end [num + 2]++;
+	```
+	Increment the count of subsequences ending with `num + 2` to mark the successful creation of a new subsequence.
+
+15. **Return False**
+	```cpp
+	        } else return false;
+	```
+	If neither extending an existing subsequence nor starting a new one is possible, return `false` to indicate that it's not possible to split the array into consecutive subsequences.
+
+16. **Return True**
+	```cpp
+	    return true;
+	```
+	If the loop completes without returning `false`, return `true`, indicating that the array can be split into consecutive subsequences.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) as we process each element in the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage needed for the frequency and subsequence maps.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-array-into-consecutive-subsequences/description/)
 

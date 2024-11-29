@@ -14,65 +14,61 @@ img_src = ""
 youtube = "Z11zwNKd89I"
 youtube_upload_date="2022-12-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Z11zwNKd89I/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a positive integer n. The task is to repeatedly replace n with the sum of its prime factors, and continue this process until n reaches a value that cannot be reduced further. The process stops when the sum of the prime factors is equal to the current value of n. Return the smallest value n will eventually become.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer n, where 2 <= n <= 10^5.
+- **Example:** `n = 18`
+- **Constraints:**
+	- 2 <= n <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    int getFactSum(int n) {
-        int div = 2, sum = 0;
-        while(n > 1) {
-            if(n % div == 0) {
-                sum += div;
-                n /= div;
-            } else div++;
-        }
-        return sum;
-    }
-    
-    int smallestValue(int n) {
-        
-        while(1) {
-            int sum = getFactSum(n);
-            if(sum == n) break;
-            n = sum;
-        }
-        return n;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the smallest value that n will eventually become.
+- **Example:** `5`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the smallest value that n will eventually become after repeatedly replacing it with the sum of its prime factors.
 
-The problem requires us to find the **smallest value** that can be obtained from repeatedly replacing a number `n` with the sum of its prime factors. Specifically, we are asked to:
+- Find the prime factors of the number n, including repeated factors.
+- Replace n with the sum of its prime factors.
+- Repeat the process until n cannot be reduced further, i.e., when the sum of the prime factors equals the current value of n.
+{{< dots >}}
+### Problem Assumptions ✅
+- n is always a positive integer.
+- n is not a prime number in all cases (except when the prime factors sum process stabilizes).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 18`  \
+  **Explanation:** The process goes as follows: 18 -> 8 -> 6 -> 5. Therefore, 5 is the smallest value n will eventually reach.
 
-1. Find the sum of the prime factors of `n`.
-2. Replace `n` with this sum.
-3. Repeat the process until the sum of the prime factors equals `n`. At this point, the process stops, and we return the value of `n`.
+{{< dots >}}
+## Approach 🚀
+The approach involves finding the prime factors of n and repeatedly replacing n with the sum of its prime factors until a stable value is reached.
 
-### Approach
-
-To solve the problem, we need to understand two main operations:
-
-1. **Prime Factorization**: We need to find the prime factors of a number `n`. The prime factorization of a number is a way of expressing `n` as a product of prime numbers. For example, the prime factorization of 12 is \( 2^2 \times 3 \), so the prime factors are 2 and 3.
-
-2. **Iterative Process**: We are asked to repeatedly replace `n` with the sum of its prime factors. This process is repeated until the sum of prime factors of `n` equals `n`.
-
-The key insight is that the sum of the prime factors can decrease significantly when we replace `n` with this sum, and we stop once the sum of the prime factors equals `n`.
-
-#### Step-by-Step Explanation of the Code
-
-Let's break the code down and understand each part:
-
-### Step 1: Helper Function to Get the Sum of Prime Factors
+### Initial Thoughts 💭
+- Prime factorization can be done using a trial division method.
+- If n is divisible by a prime, we repeatedly divide n by that prime, adding it to the sum.
+- This process will eventually stabilize because each step reduces n, and the prime factor sum either stays the same or reduces to a smaller number.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be an input, since n >= 2.
+- For large values of n, ensure the factorization is efficient to handle up to n = 10^5.
+- If n is prime, the process will immediately stop since the prime factor sum will equal n.
+- Ensure that the solution handles edge cases like n being a small prime number.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 int getFactSum(int n) {
     int div = 2, sum = 0;
     while(n > 1) {
@@ -83,19 +79,9 @@ int getFactSum(int n) {
     }
     return sum;
 }
-```
 
-- **Purpose**: This function computes the sum of prime factors of a given number `n`. 
-- **Implementation Details**:
-  - We initialize `div = 2` because 2 is the smallest prime number.
-  - The `while (n > 1)` loop continues as long as `n` is greater than 1. During each iteration, we check if `div` divides `n` evenly (`n % div == 0`).
-    - If `div` divides `n`, we add `div` to the `sum` and then divide `n` by `div` (this removes the factor `div` from `n`).
-    - If `div` does not divide `n`, we increment `div` to check the next possible factor.
-  - The function continues until `n` becomes 1, and at this point, all prime factors of `n` have been processed. The function then returns the sum of these prime factors.
-
-### Step 2: Main Function to Find the Smallest Value
-```cpp
 int smallestValue(int n) {
+    
     while(1) {
         int sum = getFactSum(n);
         if(sum == n) break;
@@ -105,56 +91,111 @@ int smallestValue(int n) {
 }
 ```
 
-- **Purpose**: This is the main function that solves the problem. It repeatedly replaces `n` with the sum of its prime factors until the sum of the prime factors equals `n`. 
-- **Implementation Details**:
-  - We start by using a `while(1)` loop, which runs indefinitely until we break out of the loop.
-  - In each iteration, we calculate the sum of prime factors of `n` using the helper function `getFactSum(n)`.
-  - If the sum of prime factors (`sum`) is equal to `n`, we break out of the loop since the condition is satisfied.
-  - If the sum is not equal to `n`, we replace `n` with `sum` and continue to the next iteration.
-  - Finally, once the loop terminates (when `sum == n`), we return the value of `n`.
+The `getFactSum` function calculates the sum of divisors of a number `n`, and the `smallestValue` function iterates by repeatedly updating `n` with the sum of its divisors until `n` becomes equal to the sum of its divisors, at which point the function returns `n`.
 
-### Example Walkthrough
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int getFactSum(int n) {
+	```
+	Defines the `getFactSum` function that calculates the sum of divisors of the given integer `n`.
 
-Let’s go through an example to see how the solution works in practice:
+2. **Variable Initialization**
+	```cpp
+	    int div = 2, sum = 0;
+	```
+	Initializes two variables: `div`, starting at 2 (the smallest prime divisor), and `sum`, which stores the sum of divisors of `n`.
 
-Consider the input `n = 12`.
+3. **Loop Structure**
+	```cpp
+	    while(n > 1) {
+	```
+	Starts a while loop that runs as long as `n` is greater than 1. This loop will find divisors of `n`.
 
-1. **First Iteration**:
-   - `getFactSum(12)` computes the sum of prime factors of 12.
-   - The prime factorization of 12 is \( 2^2 \times 3 \). So, the prime factors are 2 and 3.
-   - The sum of the prime factors is \( 2 + 2 + 3 = 7 \).
-   - Since 7 is not equal to 12, we replace `n` with 7.
+4. **Condition Check**
+	```cpp
+	        if(n % div == 0) {
+	```
+	Checks if `n` is divisible by `div`. If true, the loop continues to find the divisors.
 
-2. **Second Iteration**:
-   - Now, `n = 7`.
-   - `getFactSum(7)` computes the sum of prime factors of 7.
-   - Since 7 is a prime number, its prime factorization is just 7 itself.
-   - The sum of the prime factors is 7, which is equal to `n`.
-   - Since the sum equals `n`, we break out of the loop and return `n`, which is 7.
+5. **Sum Update**
+	```cpp
+	            sum += div;
+	```
+	Adds `div` to the sum if `div` is a divisor of `n`.
 
-Thus, for the input `12`, the smallest value is `7`.
+6. **Variable Update**
+	```cpp
+	            n /= div;
+	```
+	Divides `n` by `div` to reduce it for the next iteration, potentially to find other divisors.
 
-### Complexity Analysis
+7. **Variable Update**
+	```cpp
+	        } else div++;
+	```
+	If `n` is not divisible by `div`, it increments `div` to check the next potential divisor.
 
-#### Time Complexity
+8. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	Returns the sum of divisors of `n`.
 
-- **Prime Factorization**: The function `getFactSum` performs a trial division to find the prime factors of `n`. In the worst case, we need to check all numbers up to `sqrt(n)` to find the factors. This takes \( O(\sqrt{n}) \) time.
-- **Iterative Process**: The process of replacing `n` with the sum of its prime factors continues until the sum of prime factors becomes equal to `n`. The number of iterations is dependent on the value of `n` and the sum of its prime factors. In the worst case, the number of iterations could be logarithmic in nature (in terms of the sum of prime factors), but in general, the process converges quickly.
-  
-Thus, the overall time complexity can be approximated as \( O(\sqrt{n} \cdot k) \), where `k` is the number of iterations required to reach the smallest value. Since the process converges quickly, `k` is typically small.
+9. **Function Definition**
+	```cpp
+	int smallestValue(int n) {
+	```
+	Defines the `smallestValue` function that repeatedly updates `n` with the sum of its divisors until `n` equals its divisor sum.
 
-#### Space Complexity
+10. **Infinite Loop**
+	```cpp
+	    while(1) {
+	```
+	Starts an infinite loop that will keep running until the condition inside the loop is satisfied.
 
-- The space complexity is \( O(1) \), as we are only using a few integer variables for computation, and the space used does not grow with the size of `n`.
+11. **Function Call**
+	```cpp
+	        int sum = getFactSum(n);
+	```
+	Calls the `getFactSum` function to calculate the sum of divisors of `n`.
 
-### Conclusion
+12. **Condition Check**
+	```cpp
+	        if(sum == n) break;
+	```
+	Checks if the sum of divisors of `n` is equal to `n`. If they are equal, it exits the loop.
 
-The solution efficiently solves the problem by iteratively computing the sum of the prime factors of `n` and replacing `n` with this sum until it converges to a stable value. By using trial division for prime factorization and leveraging the iterative nature of the problem, the solution provides a clear and optimal approach to solving this problem.
+13. **Variable Update**
+	```cpp
+	        n = sum;
+	```
+	If the sum of divisors is not equal to `n`, it updates `n` to the sum and continues the loop.
 
-- **Time Complexity**: \( O(\sqrt{n} \cdot k) \), where `k` is the number of iterations.
-- **Space Complexity**: \( O(1) \).
+14. **Return Statement**
+	```cpp
+	    return n;
+	```
+	Returns the value of `n` after it becomes equal to the sum of its divisors.
 
-This approach efficiently handles the problem within the given constraints and provides a clear path to the solution.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n) for prime numbers, as no further changes are needed.
+- **Average Case:** O(sqrt(n)) for factorization of each number.
+- **Worst Case:** O(n) for large composite numbers, depending on the prime factorization steps.
+
+Time complexity is dominated by the prime factorization process.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if n is prime and no additional storage is needed.
+- **Worst Case:** O(log n), due to the storage needed for prime factorization.
+
+The space complexity is minimal unless we store intermediate factors.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-value-after-replacing-with-sum-of-prime-factors/description/)
 

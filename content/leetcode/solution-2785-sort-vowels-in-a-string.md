@@ -14,111 +14,166 @@ img_src = ""
 youtube = "ESF0Q-rrol0"
 youtube_upload_date="2023-07-22"
 youtube_thumbnail="https://i.ytimg.com/vi/ESF0Q-rrol0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s. The task is to permute s such that all consonants remain in their original places, and the vowels are sorted in the nondecreasing order of their ASCII values.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s containing only English letters (uppercase and lowercase).
+- **Example:** `Input: s = 'ReAcTivE'`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists only of letters of the English alphabet in uppercase and lowercase.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isVowel(char ch) {
-        return ch == 'a' || ch == 'e' || ch == 'o'|| ch == 'u'|| ch == 'i';
-    }
-    string sortVowels(string s) {
-        string v;
-        copy_if(begin(s), end(s), back_inserter(v), [&](char ch){ 
-            return isVowel(tolower(ch)); 
-        });
-        sort(begin(v), end(v));
-        for (int i = 0, j = 0; i < s.size(); ++i)
-            if (isVowel(tolower(s[i])))
-                s[i] = v[j++];
-        return s;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the new string where the consonants remain in their original places and the vowels are sorted in non-decreasing ASCII order.
+- **Example:** `Output: 'ReACTivE'`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Sort the vowels in the string while leaving consonants in place.
 
-The problem requires sorting only the vowels in a given string while keeping the positions of the consonants unchanged. The vowels in the string should be sorted in ascending order, and their relative positions should be preserved with respect to the consonants.
+- Extract the vowels from the string and store them in a list.
+- Sort the list of vowels based on their ASCII values.
+- Reconstruct the string by replacing the vowels in their original positions with the sorted vowels.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string may contain both uppercase and lowercase vowels.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: 'ReAcTivE'`  \
+  **Explanation:** The vowels in 'ReAcTivE' are 'e', 'A', 'i'. After sorting them based on their ASCII values, the new string becomes 'ReACTivE'.
 
-### Approach
+- **Input:** `Input: 'hEllOWoRlD'`  \
+  **Explanation:** The vowels 'e', 'O', 'O' are sorted, resulting in 'hElLOOWrLD'.
 
-The strategy to solve this problem is divided into the following steps:
-1. **Extract all vowels** from the string while ignoring consonants.
-2. **Sort the vowels** in ascending order.
-3. **Reconstruct the string** by placing the sorted vowels back into their original positions, leaving consonants intact.
+{{< dots >}}
+## Approach 🚀
+Extract the vowels, sort them, and reinsert them into the original string in place of the vowels.
 
-We can achieve this by using a combination of the `copy_if` function to collect vowels, `sort` to sort the vowels, and a simple loop to replace the vowels back into the string.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Identify Vowels
+### Initial Thoughts 💭
+- Only the vowels need to be rearranged. Consonants stay in their places.
+- Sorting the vowels based on their ASCII values is straightforward.
+- I will extract vowels, sort them, and replace them in the original positions.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: ''. Output: ''
+- Input: 'a' repeated 10^5 times. Output: 'a' repeated 10^5 times.
+- Input: 'bCdfgh' (no vowels). Output: 'bCdfgh'.
+- The solution should handle up to 10^5 characters efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool isVowel(char ch) {
-    return ch == 'a' || ch == 'e' || ch == 'o' || ch == 'u' || ch == 'i';
+    return ch == 'a' || ch == 'e' || ch == 'o'|| ch == 'u'|| ch == 'i';
 }
-```
-- This function checks whether a given character `ch` is a vowel. The vowels are considered to be the characters `'a'`, `'e'`, `'i'`, `'o'`, and `'u'` (in lowercase). The function returns `true` if `ch` is a vowel and `false` otherwise.
-
-#### Step 2: Extract Vowels from the String
-```cpp
 string sortVowels(string s) {
     string v;
-    copy_if(begin(s), end(s), back_inserter(v), [&](char ch) { 
+    copy_if(begin(s), end(s), back_inserter(v), [&](char ch){ 
         return isVowel(tolower(ch)); 
     });
-```
-- We create an empty string `v` to store the vowels from the string `s`.
-- `copy_if(begin(s), end(s), back_inserter(v), ...)` is a standard library function that copies elements from the range `[begin(s), end(s))` into the string `v`, but only if the element satisfies the condition in the predicate. Here, the predicate is checking if the character is a vowel. 
-- We use `tolower(ch)` to ensure that the function works for both uppercase and lowercase vowels. This is done to handle cases where vowels might be in uppercase in the input string.
-
-#### Step 3: Sort the Vowels
-```cpp
     sort(begin(v), end(v));
-```
-- After collecting all the vowels from the string `s` into `v`, we use the `sort` function from the standard library to sort the characters in the string `v`. This ensures that the vowels will be in ascending order, which is the requirement of the problem.
-
-#### Step 4: Reconstruct the String
-```cpp
     for (int i = 0, j = 0; i < s.size(); ++i)
         if (isVowel(tolower(s[i])))
             s[i] = v[j++];
-```
-- In this step, we iterate through the original string `s`.
-- For each character `s[i]`, we check if it is a vowel (using `isVowel(tolower(s[i]))`). If it is a vowel, we replace it with the next vowel from the sorted list `v`. The variable `j` keeps track of the index of the next vowel in `v` that we need to place into `s`.
-- The index `j` is incremented after each vowel replacement.
-
-#### Step 5: Return the Result
-```cpp
     return s;
 }
 ```
-- After replacing all vowels in `s` with the sorted vowels from `v`, we return the modified string `s`.
 
-### Complexity
+The code consists of two functions: `isVowel`, which checks if a character is a vowel, and `sortVowels`, which sorts all the vowels in a string in ascending order while maintaining the position of consonants.
 
-#### Time Complexity:
-- **O(n log n)**: The main time complexity comes from sorting the vowels. Sorting requires `O(n log n)` time, where `n` is the number of vowels. The process of copying vowels and reconstructing the string both take **O(n)** time, but the sorting step dominates the complexity, making the overall time complexity **O(n log n)**.
-- Here, `n` refers to the length of the string `s`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isVowel(char ch) {
+	```
+	This function `isVowel` takes a character `ch` as input and checks if it is one of the vowels ('a', 'e', 'o', 'u', 'i'). It returns true if the character is a vowel, and false otherwise.
 
-#### Space Complexity:
-- **O(n)**: We need an additional string `v` to store the vowels, and the size of this string is proportional to the number of vowels in the input string. Therefore, the space complexity is **O(n)**, where `n` is the length of the string `s`.
+2. **Vowel Check**
+	```cpp
+	    return ch == 'a' || ch == 'e' || ch == 'o'|| ch == 'u'|| ch == 'i';
+	```
+	This line compares the input character `ch` against the five vowels ('a', 'e', 'o', 'u', 'i') and returns true if the character matches any of them.
 
-### Conclusion
+3. **Function Declaration**
+	```cpp
+	string sortVowels(string s) {
+	```
+	This function `sortVowels` takes a string `s` as input and returns a new string with the vowels sorted in ascending order, while keeping the consonants in their original positions.
 
-This solution provides an efficient approach to solving the problem of sorting only the vowels in a string while keeping the positions of the consonants unchanged. The algorithm performs the following steps:
-1. Extracts the vowels from the string.
-2. Sorts the vowels in ascending order.
-3. Replaces the vowels in the original string with the sorted vowels.
+4. **Variable Initialization**
+	```cpp
+	    string v;
+	```
+	A string `v` is initialized to hold all the vowels extracted from the input string `s`.
 
-The algorithm's time complexity is dominated by the sorting step, making it **O(n log n)**, where `n` is the number of vowels in the string. The space complexity is **O(n)** due to the use of an additional string to store the vowels.
+5. **Copying Vowels**
+	```cpp
+	    copy_if(begin(s), end(s), back_inserter(v), [&](char ch){ 
+	```
+	The `copy_if` function iterates over the string `s` and copies each character that is a vowel (determined by the `isVowel` function) into the string `v`.
 
-This solution is both time-efficient and space-efficient, handling various edge cases like uppercase vowels and strings with no vowels. It is easy to understand and implement using standard C++ functions like `copy_if`, `sort`, and `tolower`.
+6. **Vowel Check**
+	```cpp
+	        return isVowel(tolower(ch)); 
+	```
+	This lambda function checks if the character `ch` (converted to lowercase using `tolower`) is a vowel by calling the `isVowel` function.
+
+7. **Sorting Vowels**
+	```cpp
+	    sort(begin(v), end(v));
+	```
+	This line sorts the string `v` in ascending order so that the vowels are arranged alphabetically.
+
+8. **Looping Through String**
+	```cpp
+	    for (int i = 0, j = 0; i < s.size(); ++i)
+	```
+	This for loop iterates through each character of the string `s`. The variable `i` is the index for the original string, and `j` is used to track the position in the sorted `v` string.
+
+9. **Vowel Replacement**
+	```cpp
+	        if (isVowel(tolower(s[i])))
+	```
+	This condition checks if the current character in the string `s` (converted to lowercase) is a vowel.
+
+10. **Replacing Character**
+	```cpp
+	            s[i] = v[j++];
+	```
+	If the character is a vowel, it is replaced by the next vowel in the sorted string `v`, and the index `j` is incremented.
+
+11. **Returning Result**
+	```cpp
+	    return s;
+	```
+	After all vowels are replaced with the sorted vowels, the modified string `s` is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The most time-consuming operation is sorting the vowels, which takes O(n log n) time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We store the vowels and need extra space proportional to the size of the string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-vowels-in-a-string/description/)
 

@@ -14,113 +14,146 @@ img_src = ""
 youtube = "WYe644djV30"
 youtube_upload_date="2021-01-04"
 youtube_thumbnail="https://i.ytimg.com/vi/WYe644djV30/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a sorted integer array `nums`. Build and return an integer array `result` such that for each index `i`, `result[i]` is equal to the summation of absolute differences between `nums[i]` and all other elements in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sorted integer array `nums`.
+- **Example:** `nums = [2, 3, 5]`
+- **Constraints:**
+	- 2 <= nums.length <= 10^5
+	- 1 <= nums[i] <= nums[i + 1] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
-        int z = 0, n = nums.size();
-        for(int i = 0; i < n; i++)
-            z += nums[i] - nums[0];
-        vector<int> ans(n, 0);
-        ans[0] = z;
-        for(int i = 1; i < n; i++)
-            ans[i] = ans[i-1] + i * (nums[i] - nums[i-1]) - (n - i)* (nums[i] - nums[i-1]);
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer array `result` where `result[i]` is the summation of the absolute differences between `nums[i]` and all the other elements in `nums`.
+- **Example:** `Output: [4, 3, 5]`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the summation of absolute differences for each element of the array `nums`.
 
-The problem requires us to calculate the sum of absolute differences for each element in an array `nums`. Specifically, for each element `nums[i]`, we need to compute the sum of the absolute differences between `nums[i]` and every other element in the array. The result should be stored in a vector where the `i-th` element represents the sum of absolute differences for the element `nums[i]`.
+- Start by calculating the absolute differences for the first element and store it.
+- Then, use an iterative approach to build the result array, where each element `i` is calculated using the differences from the previous element and its neighbors.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` is already sorted in non-decreasing order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2, 4, 6]`  \
+  **Explanation:** The result for each element is the sum of absolute differences between the element and all other elements in the array.
 
-For example, given an array `[2, 3, 5]`, the output should be `[4, 3, 4]` because:
-- For `2`: `|2-2| + |2-3| + |2-5| = 0 + 1 + 3 = 4`
-- For `3`: `|3-2| + |3-3| + |3-5| = 1 + 0 + 2 = 3`
-- For `5`: `|5-2| + |5-3| + |5-5| = 3 + 2 + 0 = 5`
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to compute the absolute differences efficiently. Since the array is sorted, we can make use of this property to minimize redundant calculations.
 
-### Approach
-
-To efficiently compute the sum of absolute differences for each element in the array, we can utilize a mathematical approach that avoids the need for nested loops, thus optimizing performance. Here's a breakdown of the approach:
-
-1. **Initial Calculation**: Compute the initial sum of absolute differences for the first element `nums[0]` relative to all other elements in the array. This will serve as our starting point for calculations.
-
-2. **Dynamic Update**: Use the result from the previous element to calculate the result for the next element. This is done by recognizing how the sum of differences changes when moving from `nums[i-1]` to `nums[i]`. Specifically, we will derive the formula to update our answer based on the current and previous values.
-
-3. **Vector Storage**: Store the results in a vector, where each index corresponds to the respective element in `nums`.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the implementation:
-
+### Initial Thoughts 💭
+- The array is sorted, which means we can calculate the differences incrementally.
+- We can calculate the result iteratively by adjusting the previous result for the current element rather than recalculating the entire sum each time.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array `nums` should not be empty, as the problem defines that the array length is at least 2.
+- For large arrays (up to 10^5 elements), the solution needs to be efficient.
+- All elements in the array are the same, the result will be an array of zeros since there are no differences.
+- Ensure that the solution works within the time limits for the largest input size.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
+vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
+    int z = 0, n = nums.size();
+    for(int i = 0; i < n; i++)
+        z += nums[i] - nums[0];
+    vector<int> ans(n, 0);
+    ans[0] = z;
+    for(int i = 1; i < n; i++)
+        ans[i] = ans[i-1] + i * (nums[i] - nums[i-1]) - (n - i)* (nums[i] - nums[i-1]);
+    
+    return ans;
+}
 ```
-- **Class Definition**: We define a class named `Solution` and create a public method `getSumAbsoluteDifferences`, which takes a vector of integers `nums` as its parameter.
 
-```cpp
-        int z = 0, n = nums.size();
-        for(int i = 0; i < n; i++)
-            z += nums[i] - nums[0];
-```
-- **Initialization**:
-  - We initialize `z` to store the total sum of absolute differences for the first element, and `n` to hold the size of the `nums` vector.
-  - The first `for` loop calculates the sum of differences between `nums[0]` and each element in `nums`. The result is stored in `z`.
+This function calculates the sum of absolute differences between each element and every other element in the array for each index, returning a vector of results.
 
-```cpp
-        vector<int> ans(n, 0);
-        ans[0] = z;
-```
-- **Result Storage**:
-  - We create a vector `ans` of size `n` initialized to zero, which will hold the final results.
-  - We store the calculated sum of absolute differences for `nums[0]` in `ans[0]`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
+	```
+	Define the function 'getSumAbsoluteDifferences' which takes a vector of integers 'nums' and returns a vector of integers containing the sum of absolute differences.
 
-```cpp
-        for(int i = 1; i < n; i++)
-            ans[i] = ans[i-1] + i * (nums[i] - nums[i-1]) - (n - i)* (nums[i] - nums[i-1]);
-```
-- **Dynamic Calculation**:
-  - We use a `for` loop to iterate from the second element to the last element in `nums`.
-  - For each element `nums[i]`, we calculate the sum of absolute differences using the previous result `ans[i-1]`.
-  - The formula used is derived from the relationship between the current and previous elements, factoring in how many times each value affects the overall sum based on its position.
+2. **Variable Initialization**
+	```cpp
+	    int z = 0, n = nums.size();
+	```
+	Initialize the variable 'z' to 0 to accumulate the sum of differences, and 'n' to store the size of the 'nums' vector.
 
-```cpp
-        return ans;
-    }
-};
-```
-- **Return Result**: After calculating the sum of absolute differences for all elements, we return the vector `ans`, which contains the results.
+3. **Loop Through Array**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Start a loop to iterate through each element in the 'nums' array.
 
-### Complexity
+4. **Sum Absolute Differences**
+	```cpp
+	        z += nums[i] - nums[0];
+	```
+	In each iteration, accumulate the difference between the current element and the first element of the 'nums' array to 'z'.
 
-- **Time Complexity**: The time complexity of this solution is \( O(n) \), where \( n \) is the number of elements in the `nums` vector. We loop through the array a constant number of times.
+5. **Array Initialization**
+	```cpp
+	    vector<int> ans(n, 0);
+	```
+	Initialize a vector 'ans' of size 'n' with all elements set to 0. This will store the final results.
 
-- **Space Complexity**: The space complexity is \( O(n) \) due to the additional storage required for the result vector `ans`.
+6. **Set First Element of Result**
+	```cpp
+	    ans[0] = z;
+	```
+	Set the first element of the 'ans' vector to 'z', which is the sum of absolute differences calculated for the first element.
 
-### Conclusion
+7. **Loop Through Remaining Elements**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	Start a loop to process each element in the 'nums' array starting from the second element.
 
-This solution efficiently calculates the sum of absolute differences for each element in an array using a mathematical approach that avoids nested loops. 
+8. **Calculate Differences for Each Element**
+	```cpp
+	        ans[i] = ans[i-1] + i * (nums[i] - nums[i-1]) - (n - i)* (nums[i] - nums[i-1]);
+	```
+	Calculate the sum of absolute differences for the current element by adjusting the previous result. This step uses the previously calculated value to efficiently compute the next result.
 
-Key highlights include:
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the vector 'ans' containing the sum of absolute differences for each element.
 
-1. **Efficiency**: By avoiding nested loops, the algorithm runs in linear time, making it suitable for larger datasets.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Mathematical Insight**: The use of a dynamic update formula allows for quick recalculation of the sum of absolute differences as we iterate through the array.
+The time complexity is O(n) as we process each element in the array only once.
 
-3. **Scalability**: The method can handle any size of input and provides a quick and efficient way to obtain the desired results.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-Overall, the code showcases a clear and efficient algorithm for solving the problem, focusing on leveraging mathematical relationships to optimize performance and readability.
+The space complexity is O(n) as we store the result array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/description/)
 

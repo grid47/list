@@ -14,157 +14,232 @@ img_src = ""
 youtube = "knLFe7hEp3Y"
 youtube_upload_date="2024-05-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/knLFe7hEp3Y/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a graph with `n` vertices labeled from 0 to `n-1` (inclusive) and edges connecting pairs of vertices. Your task is to determine if there exists a valid path from a given source vertex to a destination vertex. The graph is undirected, and each pair of vertices is connected by at most one edge. The vertices are connected by edges as given in the input.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the following components: an integer `n`, representing the number of vertices, a 2D array `edges` representing the edges between vertices, and two integers `source` and `destination` which are the starting and ending vertices respectively.
+- **Example:** `n = 4, edges = [[0,1],[1,2],[2,3]], source = 0, destination = 3`
+- **Constraints:**
+	- 1 <= n <= 2 * 10^5
+	- 0 <= edges.length <= 2 * 10^5
+	- edges[i].length == 2
+	- 0 <= ui, vi <= n - 1
+	- ui != vi
+	- 0 <= source, destination <= n - 1
+	- There are no duplicate edges.
+	- There are no self edges.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool validPath(int n, vector<vector<int>>& edges, int start, int end) {
-        unordered_map<int,vector<int>> graph; 
-        for(auto e : edges) {
-            graph[e[0]].push_back(e[1]);
-            graph[e[1]].push_back(e[0]);
-        }
-        vector<bool> visited(n,0);        
-        queue<int> q;
-        q.push(start);
-        visited[start] = 1; 
-        while(!q.empty()) {
-            int curr = q.front();
-            q.pop();
-            if(curr == end)
-                return 1; 
-            for(auto &node : graph[curr]){
-                if(!visited[node]){
-                    visited[node] = 1; 
-                    q.push(node);
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a boolean value, `true` if there is a valid path from the source to the destination vertex, and `false` otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The solution must be able to handle large graphs efficiently.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if a valid path exists from the source to the destination vertex by performing a breadth-first search (BFS) or depth-first search (DFS) in the graph.
+
+- Step 1: Represent the graph using an adjacency list where each vertex points to a list of connected vertices.
+- Step 2: Use BFS (or DFS) starting from the source vertex to explore all reachable vertices.
+- Step 3: If the destination vertex is found during the traversal, return `true`.
+- Step 4: If the traversal completes without visiting the destination vertex, return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph is connected and there may be multiple paths from source to destination.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 3, edges = [[0,1],[1,2],[2,0]], source = 0, destination = 2`  \
+  **Explanation:** In this case, there is a direct path from vertex 0 to vertex 2, or a path through vertex 1 (0 -> 1 -> 2), so the output is `true`.
+
+- **Input:** `Input: n = 6, edges = [[0,1],[0,2],[3,5],[5,4],[4,3]], source = 0, destination = 5`  \
+  **Explanation:** In this case, there is no path from vertex 0 to vertex 5, so the output is `false`.
+
+{{< dots >}}
+## Approach 🚀
+We can approach this problem by performing a graph traversal (BFS or DFS) to check if a path exists between the source and destination vertices. The traversal should explore all connected vertices from the source and check if the destination is reachable.
+
+### Initial Thoughts 💭
+- The problem can be efficiently solved using BFS or DFS to traverse the graph.
+- The BFS approach will ensure we explore all possible paths from the source to the destination vertex in the shortest way possible.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no edges, and the source is not equal to the destination, the result will be `false`.
+- For large inputs with up to 200,000 vertices, we need to ensure the solution uses efficient graph traversal.
+- When the source and destination vertices are the same, the answer is trivially `true`.
+- Ensure that the graph traversal does not exceed time limits for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+bool validPath(int n, vector<vector<int>>& edges, int start, int end) {
+    unordered_map<int,vector<int>> graph; 
+    for(auto e : edges) {
+        graph[e[0]].push_back(e[1]);
+        graph[e[1]].push_back(e[0]);
+    }
+    vector<bool> visited(n,0);        
+    queue<int> q;
+    q.push(start);
+    visited[start] = 1; 
+    while(!q.empty()) {
+        int curr = q.front();
+        q.pop();
+        if(curr == end)
+            return 1; 
+        for(auto &node : graph[curr]){
+            if(!visited[node]){
+                visited[node] = 1; 
+                q.push(node);
             }
         }
-        
-        return false;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The goal of this problem is to determine if there exists a valid path between two nodes in an undirected graph. The graph is represented using edges, and we need to check if a path exists from a starting node to a target node. This problem can be commonly encountered in scenarios involving network connectivity, pathfinding in mazes, or navigating social networks.
-
-### Approach
-
-To solve this problem, we will utilize a breadth-first search (BFS) algorithm. BFS is particularly suitable for this task because it explores all neighbors at the present depth before moving on to nodes at the next depth level. This guarantees that we will find the shortest path if one exists.
-
-Here’s a breakdown of the steps we will take:
-
-1. **Graph Representation**: We will represent the graph using an adjacency list. Each node will have a list of its neighboring nodes.
-
-2. **BFS Initialization**: We will use a queue to facilitate the BFS traversal. A boolean array will keep track of visited nodes to prevent revisiting and entering into infinite loops.
-
-3. **Traversal Logic**: We will start the BFS from the `start` node and explore its neighbors. If we encounter the `end` node during our traversal, we return `true`. If the queue is exhausted and we haven’t found the `end` node, we return `false`.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool validPath(int n, vector<vector<int>>& edges, int start, int end) {
-```
-This line begins the definition of the `validPath` function, which takes the number of nodes `n`, a list of edges, and the start and end nodes as arguments.
-
-```cpp
-        unordered_map<int,vector<int>> graph; 
-        for(auto e : edges) {
-            graph[e[0]].push_back(e[1]);
-            graph[e[1]].push_back(e[0]);
-        }
-```
-Here, we create an adjacency list representation of the graph using an unordered map. For each edge, we add the connection in both directions since the graph is undirected.
-
-```cpp
-        vector<bool> visited(n,0);        
-        queue<int> q;
-        q.push(start);
-        visited[start] = 1; 
-```
-We initialize a boolean vector `visited` to track which nodes have been explored. We then create a queue and enqueue the starting node, marking it as visited.
-
-```cpp
-        while(!q.empty()) {
-            int curr = q.front();
-            q.pop();
-            if(curr == end)
-                return 1; 
-```
-We enter a loop that continues until there are no more nodes in the queue. We retrieve the front node and check if it matches the `end` node. If it does, we return `true`, indicating that a valid path exists.
-
-```cpp
-            for(auto &node : graph[curr]){
-                if(!visited[node]){
-                    visited[node] = 1; 
-                    q.push(node);
-                }
-            }
-        }
-```
-For each neighboring node of the current node, we check if it has already been visited. If not, we mark it as visited and add it to the queue for further exploration.
-
-```cpp
-        return false;
-    }
-};
-```
-If we exit the while loop without finding the `end` node, we return `false`, indicating that no valid path exists.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \(O(V + E)\), where \(V\) is the number of vertices (or nodes) in the graph and \(E\) is the number of edges. This is because, in the worst case, we might need to explore all nodes and edges.
-
-- **Space Complexity**: The space complexity is also \(O(V + E)\) for storing the graph in the adjacency list and the visited array, as well as the queue used for BFS.
-
-### Conclusion
-
-This BFS-based solution effectively determines whether a valid path exists between two nodes in an undirected graph. The use of an adjacency list allows for efficient storage and retrieval of neighbor information, while BFS ensures that all possible paths are explored in a systematic manner.
-
-### Key Features
-
-1. **Efficiency**: The algorithm runs in linear time relative to the number of nodes and edges, making it suitable for large graphs.
-
-2. **Simplicity**: The use of an adjacency list and a queue for BFS keeps the implementation straightforward and easy to understand.
-
-3. **Scalability**: This approach can easily be adapted to handle various graph-related problems, such as finding all connected components or detecting cycles.
-
-### Example Usage
-
-Here’s an example of how to use the `validPath` function:
-
-```cpp
-Solution sol;
-vector<vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}, {3, 4}};
-int n = 5; // Number of nodes
-int start = 0;
-int end = 4;
-bool result = sol.validPath(n, edges, start, end);
-cout << "Path exists: " << (result ? "Yes" : "No") << endl;
+    
+    return false;
+}
 ```
 
-In this example, the `validPath` function is called with a specific set of edges and nodes. The output indicates whether there is a valid path from the start node to the end node.
+This function determines if there is a valid path between the 'start' and 'end' nodes in a graph represented by edges. It uses breadth-first search (BFS) to traverse the graph.
 
-### Potential Improvements and Variations
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool validPath(int n, vector<vector<int>>& edges, int start, int end) {
+	```
+	This is the function signature, defining a function 'validPath' that takes the number of nodes (n), a vector of edges, and two nodes (start, end) to check if a path exists between them.
 
-1. **Bidirectional Search**: For very large graphs, a bidirectional search can be more efficient. This approach simultaneously explores from both the start and end nodes.
+2. **Graph Construction**
+	```cpp
+	    unordered_map<int,vector<int>> graph; 
+	```
+	Here, an unordered map 'graph' is created to store the adjacency list of the graph, where each node maps to a list of its connected nodes.
 
-2. **DFS Alternative**: While BFS is used here, depth-first search (DFS) could also be implemented for pathfinding, depending on the specific requirements of the problem.
+3. **Edge Processing**
+	```cpp
+	    for(auto e : edges) {
+	```
+	This loop iterates through each edge in the input 'edges' list to populate the adjacency list 'graph'.
 
-3. **Weighted Graphs**: If the graph is weighted, we could adapt the solution to use Dijkstra’s algorithm or A* search algorithm for shortest pathfinding.
+4. **Add Edge to Graph**
+	```cpp
+	        graph[e[0]].push_back(e[1]);
+	```
+	This line adds a directed edge from node e[0] to node e[1] in the graph.
 
-This solution not only provides a method for checking connectivity in graphs but also serves as a foundation for tackling more complex graph algorithms and problems in computer science.
+5. **Add Edge to Graph**
+	```cpp
+	        graph[e[1]].push_back(e[0]);
+	```
+	This line adds the reverse edge from node e[1] to node e[0] because the graph is undirected.
+
+6. **Visited Initialization**
+	```cpp
+	    vector<bool> visited(n,0);        
+	```
+	A 'visited' vector of size n is initialized to track whether a node has been visited during traversal.
+
+7. **Queue Initialization**
+	```cpp
+	    queue<int> q;
+	```
+	A queue is initialized to implement breadth-first search (BFS).
+
+8. **Queue Push Start Node**
+	```cpp
+	    q.push(start);
+	```
+	The 'start' node is added to the queue to begin BFS.
+
+9. **Mark Start Node as Visited**
+	```cpp
+	    visited[start] = 1; 
+	```
+	The 'start' node is marked as visited.
+
+10. **While Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	The while loop continues as long as there are nodes in the queue to process.
+
+11. **Queue Pop**
+	```cpp
+	        int curr = q.front();
+	```
+	The node at the front of the queue is assigned to 'curr' for processing.
+
+12. **Queue Pop**
+	```cpp
+	        q.pop();
+	```
+	The node is removed from the queue after being processed.
+
+13. **Check for End Node**
+	```cpp
+	        if(curr == end)
+	```
+	If the current node is the 'end' node, a valid path has been found.
+
+14. **Return Path Found**
+	```cpp
+	            return 1; 
+	```
+	Return 1 to indicate that a valid path was found between 'start' and 'end'.
+
+15. **Node Traversal**
+	```cpp
+	        for(auto &node : graph[curr]){
+	```
+	This loop iterates through all adjacent nodes of the current node.
+
+16. **Check if Node is Visited**
+	```cpp
+	            if(!visited[node]){
+	```
+	Check if the adjacent node has not been visited yet.
+
+17. **Mark Node as Visited**
+	```cpp
+	                visited[node] = 1; 
+	```
+	Mark the adjacent node as visited.
+
+18. **Queue Push Node**
+	```cpp
+	                q.push(node);
+	```
+	Add the adjacent node to the queue to continue BFS.
+
+19. **Return No Path**
+	```cpp
+	    return false;
+	```
+	Return false to indicate that no valid path was found between 'start' and 'end'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m), where `n` is the number of vertices and `m` is the number of edges
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The time complexity of BFS or DFS is O(n + m), where `n` is the number of vertices and `m` is the number of edges.
+
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The space complexity is O(n + m) due to the adjacency list and the visited array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-if-path-exists-in-graph/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "NomjaXe6kUE"
 youtube_upload_date="2020-05-11"
 youtube_thumbnail="https://i.ytimg.com/vi/NomjaXe6kUE/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,121 +28,176 @@ youtube_thumbnail="https://i.ytimg.com/vi/NomjaXe6kUE/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an m x n grid representing an image, where each element in the grid corresponds to a pixel value. Additionally, you're provided with three integers: sr (starting row), sc (starting column), and color. Your task is to perform a flood fill operation on the image starting at the pixel located at (sr, sc).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D grid representing an image, three integers sr, sc, and color.
+- **Example:** `image = [[1, 1, 1], [1, 1, 0], [1, 0, 1]], sr = 1, sc = 1, color = 2`
+- **Constraints:**
+	- m == image.length
+	- n == image[i].length
+	- 1 <= m, n <= 50
+	- 0 <= image[i][j], color < 216
+	- 0 <= sr < m
+	- 0 <= sc < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        if(color == image[sr][sc]) return image;
-        dfs(image, sr, sc, color, image[sr][sc]);
-        return image;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the modified image after performing the flood fill.
+- **Example:** `After performing the flood fill on the input image, return the modified grid.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Change the color of the starting pixel and recursively change the color of adjacent pixels that share the original color.
+
+- Check if the color to be applied is the same as the starting pixel's color.
+- If different, perform a DFS (depth-first search) to apply the flood fill to all connected pixels that have the same original color.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will always contain at least one element.
+- The target color will not be equal to the original color if the flood fill is to occur.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Starting from (1, 1) and applying the color 2 results in a flood fill of the connected pixels.`  \
+  **Explanation:** Starting from pixel (1, 1) with color 1, all connected pixels with color 1 will be changed to color 2. This process stops when there are no more pixels connected to the starting pixel with the same original color.
+
+{{< dots >}}
+## Approach 🚀
+Use DFS to apply the flood fill on the grid recursively.
+
+### Initial Thoughts 💭
+- DFS can be applied to propagate the color change to adjacent pixels.
+- Use a helper function to handle the recursive flood fill.
+{{< dots >}}
+### Edge Cases 🌐
+- If the grid is empty, handle gracefully without performing any flood fill.
+- Ensure the function handles larger grids efficiently within the given constraints.
+- If the starting pixel already has the target color, no changes should be made to the grid.
+- The maximum grid size is 50x50, which is small enough to handle with DFS efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+    if(color == image[sr][sc]) return image;
+    dfs(image, sr, sc, color, image[sr][sc]);
+    return image;
+}
+
+void dfs(vector<vector<int>> & img, int r, int c, int color, int node) {
+    int m = img.size(), n = img[0].size();
+    if (r < 0 || c < 0 || r == m || c == n || img[r][c] != node)
+        return;
     
-    void dfs(vector<vector<int>> & img, int r, int c, int color, int node) {
-        int m = img.size(), n = img[0].size();
-        if (r < 0 || c < 0 || r == m || c == n || img[r][c] != node)
-            return;
-        
-        img[r][c] = color;
-        dfs(img, r + 1, c, color, node);
-        dfs(img, r, c + 1, color, node);
-        dfs(img, r - 1, c, color, node);
-        dfs(img, r, c - 1, color, node);
-    }
-    
-};
-{{< /highlight >}}
----
+    img[r][c] = color;
+    dfs(img, r + 1, c, color, node);
+    dfs(img, r, c + 1, color, node);
+    dfs(img, r - 1, c, color, node);
+    dfs(img, r, c - 1, color, node);
+}
 
-### Problem Statement
+```
 
-The problem is based on the classic **Flood Fill** algorithm, commonly used in image processing and computer graphics. The task is to perform a flood fill starting from a given pixel in a 2D grid (image) and fill all connected pixels that have the same initial color with a new color. The flood fill should be performed in four directions: up, down, left, and right. The goal is to return the image after performing the flood fill operation.
+This code defines a flood fill algorithm using depth-first search (DFS). It updates an image matrix by filling a region connected to a starting point with a new color. The algorithm checks if the color at the starting point is the same as the target color to avoid redundant operations. The helper function `dfs` recursively visits connected pixels and updates their color.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+	```
+	This function initiates the flood fill process. It takes an image (a matrix), a starting row (`sr`), a starting column (`sc`), and a new color as inputs.
 
-The flood fill operation can be achieved using either a **Breadth-First Search (BFS)** or a **Depth-First Search (DFS)** algorithm. In this case, the DFS approach is used to explore the connected components starting from the given pixel and recursively fill all connected pixels that share the same initial color.
+2. **Check Color**
+	```cpp
+	    if(color == image[sr][sc]) return image;
+	```
+	This step checks if the color at the starting point is already the target color. If so, it returns the image without making any changes.
 
-#### Steps Involved:
-1. **Check for the base condition:** 
-   If the color to fill is the same as the color of the starting pixel, then there's no need to modify the image, and we can return the image as is.
-   
-2. **Depth-First Search (DFS):**
-   Start from the given pixel and explore all its neighbors. If the neighboring pixel has the same initial color, change its color to the new color and recursively explore its neighbors. This continues until all connected pixels are filled.
+3. **Call DFS**
+	```cpp
+	    dfs(image, sr, sc, color, image[sr][sc]);
+	```
+	If the color is different, the DFS function is called to start the flood fill operation, passing the image, the starting coordinates, the new color, and the current color at the starting point.
 
-3. **Direction of exploration:**
-   The flood fill explores the four possible directions (up, down, left, and right) from any pixel. If a neighbor is within the bounds of the image and has the same color as the starting pixel, it is recursively filled.
+4. **Return Image**
+	```cpp
+	    return image;
+	```
+	After completing the flood fill operation, the updated image is returned.
 
-4. **Boundary checks:**
-   Ensure that the current pixel is within the valid boundaries of the image (i.e., it should not go out of bounds).
+5. **DFS Function Definition**
+	```cpp
+	void dfs(vector<vector<int>> & img, int r, int c, int color, int node) {
+	```
+	This function is a helper function that performs the depth-first search. It takes the image, the current row and column (`r`, `c`), the new color, and the original color (`node`) of the region to be filled.
 
-By following this approach, we efficiently fill the connected regions in the image, and the solution has a linear time complexity proportional to the size of the image.
+6. **Matrix Dimensions**
+	```cpp
+	    int m = img.size(), n = img[0].size();
+	```
+	This line stores the number of rows (`m`) and columns (`n`) of the image matrix.
 
-### Code Breakdown (Step by Step)
+7. **Bounds Check**
+	```cpp
+	    if (r < 0 || c < 0 || r == m || c == n || img[r][c] != node)
+	```
+	This condition checks if the current pixel is out of bounds or does not match the original color. If so, the function returns without making any changes.
 
-#### 1. **The `floodFill` Function**
-   - This is the main function that initiates the flood fill process.
-   - It takes the image (a 2D vector), the starting row (`sr`), starting column (`sc`), and the new color to fill (`color`).
-   - Before starting the DFS, the function checks whether the new color is the same as the current color of the starting pixel (`image[sr][sc]`). If they are the same, the image is returned as is because no change is needed.
+8. **Exit DFS**
+	```cpp
+	        return;
+	```
+	If the pixel is out of bounds or not part of the target region, the DFS recursion is terminated for this pixel.
 
-   ```cpp
-   vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-       if(color == image[sr][sc]) return image;  // Base case: If the target color is the same as the current color, return the image
-       dfs(image, sr, sc, color, image[sr][sc]);  // Call DFS to perform the flood fill
-       return image;  // Return the updated image
-   }
-   ```
+9. **Color Update**
+	```cpp
+	    img[r][c] = color;
+	```
+	The current pixel is updated with the new color.
 
-   - If the initial pixel's color is different from the new color, the DFS function is called with the starting pixel coordinates, new color, and the current color of the starting pixel.
+10. **DFS Recursion (Down)**
+	```cpp
+	    dfs(img, r + 1, c, color, node);
+	```
+	The DFS function is called recursively on the neighboring pixel below the current one.
 
-#### 2. **The `dfs` (Depth-First Search) Function**
-   - The `dfs` function is the core of the flood fill process. It recursively explores the neighboring pixels and fills them if they match the initial color.
+11. **DFS Recursion (Right)**
+	```cpp
+	    dfs(img, r, c + 1, color, node);
+	```
+	The DFS function is called recursively on the neighboring pixel to the right of the current one.
 
-   ```cpp
-   void dfs(vector<vector<int>> & img, int r, int c, int color, int node) {
-       int m = img.size(), n = img[0].size();  // Get the dimensions of the image
-       if (r < 0 || c < 0 || r == m || c == n || img[r][c] != node) return;  // Base case: Boundary or mismatched color
-       
-       img[r][c] = color;  // Fill the current pixel with the new color
-       
-       dfs(img, r + 1, c, color, node);  // Explore the pixel below (down)
-       dfs(img, r, c + 1, color, node);  // Explore the pixel to the right (right)
-       dfs(img, r - 1, c, color, node);  // Explore the pixel above (up)
-       dfs(img, r, c - 1, color, node);  // Explore the pixel to the left (left)
-   }
-   ```
+12. **DFS Recursion (Up)**
+	```cpp
+	    dfs(img, r - 1, c, color, node);
+	```
+	The DFS function is called recursively on the neighboring pixel above the current one.
 
-   - **Base Condition:** 
-     The function first checks if the current pixel is out of bounds or if it doesn't match the initial color (i.e., `img[r][c] != node`). If any of these conditions are true, it simply returns without doing anything.
-   
-   - **Recursion:** 
-     If the current pixel matches the initial color (`node`), it is filled with the new color (`color`). The DFS function is then called recursively for the neighboring pixels in all four directions (up, down, left, and right).
+13. **DFS Recursion (Left)**
+	```cpp
+	    dfs(img, r, c - 1, color, node);
+	```
+	The DFS function is called recursively on the neighboring pixel to the left of the current one.
 
-   - **Termination:** 
-     The recursion terminates when all reachable pixels with the same color as the starting pixel are filled.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where m is the number of rows and n is the number of columns.
+- **Average Case:** O(m * n), as the flood fill may potentially visit every pixel in the worst case.
+- **Worst Case:** O(m * n), where m and n are the dimensions of the grid.
 
-#### 3. **The Recursive Process**
-   - Starting from the pixel at `(sr, sc)`, the `dfs` function works recursively to fill all connected pixels that have the same initial color. The recursion explores all directions (up, down, left, and right) until all connected pixels are processed.
+The time complexity depends on the size of the grid and the number of pixels connected to the starting pixel.
 
-   - Once all reachable pixels are filled, the function returns, and the updated image is returned from the `floodFill` function.
+### Space Complexity 💾
+- **Best Case:** O(1), if no recursive calls are made (e.g., if no adjacent pixels share the same color).
+- **Worst Case:** O(m * n), due to the recursive call stack in DFS.
 
-### Complexity
+The space complexity depends on the depth of the recursion tree, which can be proportional to the grid size.
 
-#### Time Complexity:
-- The time complexity of the flood fill operation is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the image.
-- In the worst case, all pixels in the image need to be visited, which is why the time complexity is proportional to the total number of pixels.
+**Happy Coding! 🎉**
 
-#### Space Complexity:
-- The space complexity is **O(m * n)** in the worst case, due to the space required by the recursion stack in the DFS. If the entire image is a single connected region, the recursion depth could reach `m * n`, causing the space complexity to be proportional to the number of pixels.
-- In practice, the space complexity may be smaller if fewer pixels are visited.
-
-### Conclusion
-
-The flood fill algorithm efficiently modifies a 2D grid by starting from a given pixel and recursively filling all connected pixels with the same color using DFS. This solution is particularly useful in scenarios like image editing, where we need to change the color of a specific region in an image. 
-
-The approach uses recursion to explore all four directions from the starting pixel and fill all connected pixels, ensuring that no pixel is missed. The solution is efficient, with a time complexity of **O(m * n)**, where `m` and `n` are the dimensions of the image.
-
-This code provides a robust method for performing flood fills in grid-based problems and can be extended to various applications such as image processing, game development (e.g., area filling), and other grid-based algorithms.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flood-fill/description/)
 

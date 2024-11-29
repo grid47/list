@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "RG17VCQOFpg"
 youtube_upload_date="2024-06-21"
 youtube_thumbnail="https://i.ytimg.com/vi/RG17VCQOFpg/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,123 +28,158 @@ youtube_thumbnail="https://i.ytimg.com/vi/RG17VCQOFpg/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of positive integers and a target value, find the minimal length of a contiguous subarray whose sum is greater than or equal to the target. If no such subarray exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of integers, `nums`, and an integer `target`.
+- **Example:** `[target = 8, nums = [1, 4, 4, 2, 1, 5]]`
+- **Constraints:**
+	- The value of target is between 1 and 10^9.
+	- The length of nums is between 1 and 100,000.
+	- Each element of nums is between 1 and 10^4.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minSubArrayLen(int target, vector<int>& nums) {
-        int sum = 0, idx = 0, g = INT_MAX, bdx = 0;
-        while(idx < nums.size()) {
-            sum += nums[idx];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the minimal length of a subarray whose sum is greater than or equal to the target, or 0 if no such subarray exists.
+- **Example:** `For target = 8 and nums = [1, 4, 4, 2, 1, 5], the output is 2.`
+- **Constraints:**
 
-            while(sum >= target) {
-                g = min(g, idx - bdx + 1);
-                sum -= nums[bdx];
-                bdx++;
-            }
-            idx++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To efficiently find the smallest subarray whose sum is greater than or equal to the target.
+
+- Start iterating over the array while maintaining a running sum of the elements.
+- If the sum becomes greater than or equal to the target, update the minimal subarray length and reduce the sum by removing elements from the start of the subarray.
+- Repeat until you have considered all subarrays.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains only positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this example, the subarray `[4, 4]` is the smallest subarray whose sum is at least 8, and its length is 2.
+
+- **Input:** `Example 2`  \
+  **Explanation:** The subarray `[3, 4]` sums to 7, which is greater than or equal to the target 6, and it has the minimal length of 2.
+
+- **Input:** `Example 3`  \
+  **Explanation:** In this case, no subarray's sum can reach 12, so the answer is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses a sliding window technique to find the minimal length of a subarray with a sum greater than or equal to the target.
+
+### Initial Thoughts 💭
+- Sliding window techniques are ideal for problems involving subarrays with conditions on their sum.
+- By maintaining a running sum and sliding the window over the array, we can find the minimal subarray efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty or the target is very large, the result will be 0.
+- For large arrays, ensure the solution handles up to 100,000 elements efficiently.
+- If the target is 1 and the array contains only 1s, the smallest subarray will always have length 1.
+- Ensure that the solution works within the time limits for large arrays (O(n) time complexity).
+{{< dots >}}
+## Code 💻
+```cpp
+int minSubArrayLen(int target, vector<int>& nums) {
+    int sum = 0, idx = 0, g = INT_MAX, bdx = 0;
+    while(idx < nums.size()) {
+        sum += nums[idx];
+
+        while(sum >= target) {
+            g = min(g, idx - bdx + 1);
+            sum -= nums[bdx];
+            bdx++;
         }
-        return g == INT_MAX? 0: g;
+        idx++;
     }
-    
-};
-{{< /highlight >}}
----
+    return g == INT_MAX? 0: g;
+}
 
-### 🚀 Problem Statement
-
-The goal of this problem is to find the minimal length of a contiguous subarray within an array of integers that has a sum greater than or equal to a given target value. If no such subarray exists, we should return `0`. This is a classic problem that can be tackled efficiently with the **sliding window technique**, which is designed to handle such dynamic range problems.
-
----
-
-### 🧠 Approach
-
-To solve this problem, we can apply the **sliding window technique**, which involves maintaining a variable-sized window (or subarray) of elements. The key idea here is to **expand** the window by adding new elements and **contract** the window by removing elements from the left side when necessary, all while ensuring the sum of elements within the window is at least the target value.
-
-By tracking the sum of the elements within the window, we can quickly check if the sum meets or exceeds the target. When it does, we attempt to shrink the window from the left to minimize its size, ensuring we find the smallest possible subarray that satisfies the condition.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code step by step to see how we can implement this approach:
-
-```cpp
-class Solution {
-public:
-    int minSubArrayLen(int target, vector<int>& nums) {
-        int sum = 0, idx = 0, g = INT_MAX, bdx = 0;
 ```
-- **sum**: This keeps track of the current sum of the elements within our sliding window.
-- **idx**: This is the "right" pointer, which will be used to expand the window by iterating over the array.
-- **g**: This variable holds the length of the smallest valid subarray. It’s initially set to `INT_MAX` to indicate that we haven’t found any valid subarray yet.
-- **bdx**: The "left" pointer, used to shrink the window once the sum meets or exceeds the target.
 
----
+This code implements the sliding window technique to find the minimum length of a subarray whose sum is greater than or equal to the given target. It uses two pointers to dynamically adjust the window size.
 
-```cpp
-        while(idx < nums.size()) {
-            sum += nums[idx];
-```
-- The outer `while` loop runs through the entire array using the `idx` index.
-- For each element in the array, we add it to the `sum`, expanding our window by including the current element.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minSubArrayLen(int target, vector<int>& nums) {
+	```
+	Define the function `minSubArrayLen` that takes a target sum and an array of integers, `nums`, and returns the minimum length of a subarray whose sum is at least equal to the target.
 
----
+2. **Variable Initialization**
+	```cpp
+	    int sum = 0, idx = 0, g = INT_MAX, bdx = 0;
+	```
+	Initialize variables: `sum` to track the current sum of the window, `idx` as the right pointer of the window, `g` to store the minimum length of the subarray, and `bdx` as the left pointer of the window.
 
-```cpp
-            while(sum >= target) {
-                g = min(g, idx - bdx + 1);
-                sum -= nums[bdx];
-                bdx++;
-            }
-```
-- The inner `while` loop checks whether the sum of the current window is greater than or equal to the target.
-- If the condition is satisfied, we:
-  1. Calculate the length of the current subarray (`idx - bdx + 1`) and update `g` with the smallest length between the current `g` and the length of the current subarray.
-  2. Shrink the window by subtracting the value at `nums[bdx]` from `sum` and moving the `bdx` pointer to the right. This effectively removes the leftmost element from the subarray.
+3. **Loop Iteration**
+	```cpp
+	    while(idx < nums.size()) {
+	```
+	Start a while loop that iterates through the array with the right pointer `idx`.
 
----
+4. **Sum Update**
+	```cpp
+	        sum += nums[idx];
+	```
+	Add the current element of `nums` at index `idx` to the sum of the current subarray.
 
-```cpp
-            idx++;
-        }
-```
-- After processing the current element, we increment `idx` to expand the window and move on to the next element in the array.
+5. **Inner While Loop**
+	```cpp
+	        while(sum >= target) {
+	```
+	Start an inner while loop that checks if the sum of the current subarray is greater than or equal to the target. If true, try to shrink the window.
 
----
+6. **Window Update**
+	```cpp
+	            g = min(g, idx - bdx + 1);
+	```
+	Update the minimum subarray length `g` with the current window length, which is `idx - bdx + 1`.
 
-```cpp
-        return g == INT_MAX ? 0 : g;
-    }
-};
-```
-- Finally, if `g` is still `INT_MAX`, it means we haven’t found any subarray that meets the target sum, so we return `0`.
-- Otherwise, we return the value of `g`, which represents the length of the smallest subarray that satisfies the condition.
+7. **Sum Update**
+	```cpp
+	            sum -= nums[bdx];
+	```
+	Shrink the window by subtracting the value at the left pointer `bdx` from the current sum.
 
----
+8. **Left Pointer Move**
+	```cpp
+	            bdx++;
+	```
+	Move the left pointer `bdx` to the right to shrink the window.
 
-### 📊 Complexity Analysis
+9. **Right Pointer Move**
+	```cpp
+	        idx++;
+	```
+	Move the right pointer `idx` to the next element, expanding the window.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the length of the input array `nums`.  
-  - The `idx` pointer moves through the array exactly once, and for each `idx`, the `bdx` pointer only moves forward. Thus, both pointers together traverse the array at most once, resulting in a linear time complexity.
+10. **Return Statement**
+	```cpp
+	    return g == INT_MAX? 0: g;
+	```
+	Return the minimum length of the subarray. If no valid subarray is found, return 0 (indicating no subarray meets the target sum).
 
-#### Space Complexity:
-- **O(1)**, since we only use a constant amount of extra space for variables like `sum`, `g`, `bdx`, and `idx`. No additional data structures like arrays or hashmaps are used.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), when the sum of elements exceeds the target early in the iteration.
+- **Average Case:** O(n), as we process each element exactly once.
+- **Worst Case:** O(n), in the worst case where the window moves across the entire array.
 
----
+The sliding window technique ensures that we only iterate over the array once, making the time complexity linear.
 
-### 🏁 Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1), as no additional space is required.
+- **Worst Case:** O(1), as the space complexity is constant, only requiring variables for sum and indexes.
 
-The sliding window technique is an optimal and efficient approach for finding the minimal length subarray with a sum greater than or equal to a target value. This solution achieves **O(n)** time complexity and **O(1)** space complexity, making it suitable for large inputs and real-time applications where performance is crucial.
+The space complexity is constant because we are only using a few variables to keep track of the running sum and indices.
 
-#### Key Steps:
-- **Expand the window** by adding elements to the sum.
-- **Contract the window** by removing elements from the left as long as the sum meets the target.
-- **Track the smallest valid subarray** to get the optimal result.
+**Happy Coding! 🎉**
 
-This approach is ideal for problems involving contiguous subarrays or sliding windows, providing a flexible and efficient way to solve a range of similar problems.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-size-subarray-sum/description/)
 

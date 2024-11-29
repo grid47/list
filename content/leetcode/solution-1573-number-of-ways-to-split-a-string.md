@@ -14,154 +14,205 @@ img_src = ""
 youtube = "DVcHb_poT6E"
 youtube_upload_date="2020-09-05"
 youtube_thumbnail="https://i.ytimg.com/vi/DVcHb_poT6E/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a binary string, you need to split it into three non-empty parts such that each part contains the same number of '1's. You must return the total number of ways to split the string, with the result modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a binary string, meaning it contains only '0's and '1's.
+- **Example:** `Input: s = "110101"`
+- **Constraints:**
+	- 3 <= s.length <= 10^5
+	- Each character in s is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numWays(string s) {
-        
-        long n = s.size();
-        int one = 0;
-        for(char x: s)
-            one += (x == '0')? 0: 1;
-        
-        int mod = (int) 1e9 + 7;
-        
-        if(one == 0) return (int)((n - 2) * (n - 1) / 2 % mod);
-        
-            
-        if(one % 3 != 0) return 0;
-        
-        long long waysOfFirstCut = 0, waysOfSecondCut = 0;
-        int net = one / 3, tmp = 0;
-        for(int i = 0; i < n; i++) {
-            if(s[i] == '1') tmp++;
-            if(tmp == net) waysOfFirstCut++;
-            else if(tmp == 2 * net) waysOfSecondCut++;
-        }
-        
-        return (int)(waysOfFirstCut *waysOfSecondCut % mod) ;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the number of ways to split the binary string into three parts where each part has the same number of '1's. The result should be returned modulo 10^9 + 7.
+- **Example:** `Output: 3`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count how many ways we can split the string into three parts such that each part has the same number of '1's.
 
-The problem at hand involves determining the number of ways to split a binary string into three non-empty parts such that each part contains an equal number of '1's. Given a binary string `s` consisting of '0's and '1's, the goal is to find the number of distinct ways to make two cuts in the string so that the resulting three substrings each have the same count of '1's. If it is not possible to split the string in this way, the function should return 0.
+- First, count the total number of '1's in the string.
+- If the total number of '1's is not divisible by 3, return 0 since it's not possible to split them evenly.
+- Divide the total number of '1's by 3 to find the number of '1's each part should contain.
+- Track the possible positions where the first and second cuts can be made to split the string into three parts with an equal number of '1's.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string is guaranteed to contain only '0's and '1's.
+- The total number of '1's in the string is divisible by 3 for a valid split.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: s = "110101"`  \
+  **Explanation:** The string has 4 '1's, so each part must have 4 / 3 = 1 '1'. The valid splits are: "1|1|01", "1|10|1", and "11|0|1".
 
-### Approach
+- **Input:** `Example 2: s = "1001"`  \
+  **Explanation:** The string has 2 '1's, which is not divisible by 3, so there are no valid ways to split the string.
 
-To solve this problem, we can utilize a systematic approach that involves counting the number of '1's in the string and leveraging combinatorial mathematics:
+- **Input:** `Example 3: s = "0000"`  \
+  **Explanation:** The string has 0 '1's, so any valid split would be a valid solution, and the number of splits is 3.
 
-1. **Count the Number of '1's**:
-   - First, iterate through the string to count the total number of '1's. This count will determine how we can split the string.
+{{< dots >}}
+## Approach 🚀
+The problem involves counting how many ways we can split the string into three parts such that each part contains the same number of '1's. We first calculate the total number of '1's, check if it is divisible by 3, and then find positions to make the cuts.
 
-2. **Handle Edge Cases**:
-   - If the count of '1's is zero, calculate the number of ways to choose two cuts between the zeros. This can be done using combinatorial mathematics.
-   - If the count of '1's is not divisible by three, it's impossible to split the string into three parts with equal '1's, so return 0.
-
-3. **Calculate Possible Cuts**:
-   - If the number of '1's is divisible by three, determine the number of ways to make the cuts. This is done by iterating through the string again, counting the occurrences of '1's up to the required divisions, and recording how many times we can make these cuts.
-
-4. **Compute the Result**:
-   - The total number of ways to split the string is the product of the number of ways to make the first cut and the number of ways to make the second cut.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code provided to understand its implementation in detail.
-
-- **Class Declaration**: The solution is encapsulated within a class named `Solution`.
-
-```cpp
-class Solution {
-public:
-```
-
-- **Function Definition**: The `numWays` function is defined to take a string `s` as input and returns an integer representing the number of ways to split the string.
-
+### Initial Thoughts 💭
+- The total number of '1's must be divisible by 3 for an equal split.
+- We can use the positions of '1's to count the valid splits.
+- By counting the number of '1's and tracking the positions where each cut can occur, we can efficiently calculate the number of valid splits.
+{{< dots >}}
+### Edge Cases 🌐
+- The string will always have at least 3 characters.
+- The algorithm should efficiently handle strings with lengths up to 10^5.
+- Strings with all '0's have multiple valid splits.
+- Ensure that the solution handles the maximum input size efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 int numWays(string s) {
-```
-
-- **Variable Initialization**: 
-   - We obtain the length of the string `n` and initialize a variable `one` to count the number of '1's in the string.
-
-```cpp
-long n = s.size();
-int one = 0;
-```
-
-- **Count '1's**: A loop iterates through each character in the string to count the number of '1's.
-
-```cpp
-for(char x: s)
-    one += (x == '0')? 0: 1;
-```
-
-- **Modulo Declaration**: We define a modulo variable to handle large numbers and prevent overflow.
-
-```cpp
-int mod = (int) 1e9 + 7;
-```
-
-- **Edge Case for Zero '1's**: If the total number of '1's is zero, we calculate the number of ways to select two cuts among the zeros. This is done using the formula for combinations.
-
-```cpp
-if(one == 0) return (int)((n - 2) * (n - 1) / 2 % mod);
-```
-
-- **Divisibility Check**: If the number of '1's is not divisible by three, return 0 as splitting is impossible.
-
-```cpp
-if(one % 3 != 0) return 0;
-```
-
-- **Calculate Possible Cuts**: We determine how many '1's should be present in each of the three parts and initialize counters for the number of ways to make the first and second cuts.
-
-```cpp
-long long waysOfFirstCut = 0, waysOfSecondCut = 0;
-int net = one / 3, tmp = 0;
-```
-
-- **Counting Cuts**: Another loop iterates through the string, counting '1's and tracking how many times we can make the first and second cuts based on the required number of '1's in each part.
-
-```cpp
-for(int i = 0; i < n; i++) {
-    if(s[i] == '1') tmp++;
-    if(tmp == net) waysOfFirstCut++;
-    else if(tmp == 2 * net) waysOfSecondCut++;
+    
+    long n = s.size();
+    int one = 0;
+    for(char x: s)
+        one += (x == '0')? 0: 1;
+    
+    int mod = (int) 1e9 + 7;
+    
+    if(one == 0) return (int)((n - 2) * (n - 1) / 2 % mod);
+    
+        
+    if(one % 3 != 0) return 0;
+    
+    long long waysOfFirstCut = 0, waysOfSecondCut = 0;
+    int net = one / 3, tmp = 0;
+    for(int i = 0; i < n; i++) {
+        if(s[i] == '1') tmp++;
+        if(tmp == net) waysOfFirstCut++;
+        else if(tmp == 2 * net) waysOfSecondCut++;
+    }
+    
+    return (int)(waysOfFirstCut *waysOfSecondCut % mod) ;
 }
 ```
 
-- **Return the Result**: Finally, the total number of ways to split the string is returned as the product of the ways to make the first and second cuts, modulo \(10^9 + 7\).
+This function calculates the number of ways to divide a binary string into three parts with equal numbers of '1's. It returns the result modulo 1e9 + 7.
 
-```cpp
-return (int)(waysOfFirstCut * waysOfSecondCut % mod);
-}
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numWays(string s) {
+	```
+	Defines the function `numWays` which takes a string `s` as input and returns an integer representing the number of ways to divide the string into three parts with equal '1's.
 
-### Complexity
+2. **Size Calculation**
+	```cpp
+	    long n = s.size();
+	```
+	Calculates the size of the string `s` and stores it in `n`.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the length of the string. This is due to the fact that we traverse the string multiple times, each requiring linear time.
+3. **Count '1's**
+	```cpp
+	    int one = 0;
+	```
+	Initializes a counter variable `one` to count the number of '1's in the string `s`.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we use only a fixed number of additional variables for counting and calculations, independent of the input size.
+4. **Loop Through String**
+	```cpp
+	    for(char x: s)
+	```
+	Starts a loop to iterate through each character `x` in the string `s`.
 
-### Conclusion
+5. **Count '1's in String**
+	```cpp
+	        one += (x == '0')? 0: 1;
+	```
+	Increments the counter `one` for each '1' encountered in the string `s`.
 
-The `numWays` function efficiently calculates the number of distinct ways to split a binary string into three equal parts based on the number of '1's it contains. By leveraging combinatorial counting and systematic iteration, the function provides a clear and concise solution to the problem.
+6. **Modulo Definition**
+	```cpp
+	    int mod = (int) 1e9 + 7;
+	```
+	Defines the modulus value `mod` as 1e9 + 7 to avoid overflow and ensure the result fits within the limits.
 
-This solution exemplifies effective programming techniques, including early returns for edge cases, modular arithmetic to manage large numbers, and the use of simple loops to perform complex counting tasks. 
+7. **Edge Case for Zero '1's**
+	```cpp
+	    if(one == 0) return (int)((n - 2) * (n - 1) / 2 % mod);
+	```
+	Handles the edge case where there are no '1's in the string. In this case, the number of ways to divide the string into three equal parts is calculated using the formula (n-2)*(n-1)/2.
 
-Understanding this approach equips developers with valuable insights into handling binary strings and combinatorial problems, making it a practical reference for similar challenges encountered in competitive programming or technical interviews.
+8. **Check for Divisibility by 3**
+	```cpp
+	    if(one % 3 != 0) return 0;
+	```
+	Checks if the total number of '1's is divisible by 3. If not, it's impossible to divide the string into three equal parts, so it returns 0.
 
-In summary, the `numWays` function not only solves the problem at hand but also serves as an educational resource for mastering counting principles in programming. Its efficiency, clarity, and robust handling of edge cases make it an excellent example of algorithm design in action.
+9. **Cut Variables Initialization**
+	```cpp
+	    long long waysOfFirstCut = 0, waysOfSecondCut = 0;
+	```
+	Initializes two variables `waysOfFirstCut` and `waysOfSecondCut` to keep track of the possible positions for the first and second cuts.
+
+10. **Net Calculation**
+	```cpp
+	    int net = one / 3, tmp = 0;
+	```
+	Calculates `net`, the number of '1's in each part of the string (one-third of the total number of '1's), and initializes `tmp` to count the '1's encountered while iterating through the string.
+
+11. **Loop Through String Again**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through the string `s` again to find the positions where the cuts can be made.
+
+12. **Count '1's During Iteration**
+	```cpp
+	        if(s[i] == '1') tmp++;
+	```
+	Increments the counter `tmp` whenever a '1' is encountered during the iteration.
+
+13. **First Cut Count**
+	```cpp
+	        if(tmp == net) waysOfFirstCut++;
+	```
+	If the counter `tmp` reaches `net`, it means the first cut can be made, so `waysOfFirstCut` is incremented.
+
+14. **Second Cut Count**
+	```cpp
+	        else if(tmp == 2 * net) waysOfSecondCut++;
+	```
+	If the counter `tmp` reaches `2 * net`, it means the second cut can be made, so `waysOfSecondCut` is incremented.
+
+15. **Return Result**
+	```cpp
+	    return (int)(waysOfFirstCut * waysOfSecondCut % mod);
+	```
+	Calculates the total number of ways to divide the string into three equal parts by multiplying the number of ways to make the first and second cuts. The result is taken modulo `mod`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) due to the need to iterate over the string to count the '1's and find valid split positions.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since only a few variables are used to track the counts and positions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-split-a-string/description/)
 

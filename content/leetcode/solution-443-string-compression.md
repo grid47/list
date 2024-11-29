@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "JHTqvUTZzqM"
 youtube_upload_date="2021-04-04"
 youtube_thumbnail="https://i.ytimg.com/vi/JHTqvUTZzqM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,129 +28,207 @@ youtube_thumbnail="https://i.ytimg.com/vi/JHTqvUTZzqM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of characters, compress it by replacing consecutive repeating characters with the character followed by the count of repetitions. If the character repeats only once, just include the character. The result should modify the input array and return the new length of the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an array of characters where each character is a lowercase or uppercase letter, digit, or symbol.
+- **Example:** `["a","a","b","b","c","c","c"]`
+- **Constraints:**
+	- 1 <= chars.length <= 2000
+	- chars[i] is a lowercase English letter, uppercase English letter, digit, or symbol.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int compress(vector<char>& chars) {
-        if(chars.size() < 2) return chars.size();
-        int i = 0, j = 0;
-        while(i < chars.size()) {
-            chars[j] = chars[i];
-            int cnt = 0;
-            while(i < chars.size() && chars[i] == chars[j]) {
-                cnt++;
-                i++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the new length of the modified array, with the array itself being compressed in place.
+- **Example:** `6`
+- **Constraints:**
+	- The modified array should be stored in the input array itself.
 
-            if(cnt == 1) {
-                j++;
-            } else {
-                string cntt = to_string(cnt);
-                for(auto ch: cntt) {
-                    chars[++j] = ch;
-                }
-                j++;
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Efficiently compress the character array by grouping consecutive repeating characters and replacing them with the character followed by the count.
+
+- 1. Iterate over the characters in the input array.
+- 2. For each group of consecutive repeating characters, append the character to the result.
+- 3. If the group contains more than one character, append the length of the group as well.
+- 4. Modify the input array in place to store the compressed version.
+- 5. Return the new length of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain at least one character.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["a","a","b","b","c","c","c"]`  \
+  **Explanation:** In this case, the consecutive characters 'a' and 'b' appear twice, while 'c' appears three times. The output compresses to ['a','2','b','2','c','3'].
+
+- **Input:** `["x"]`  \
+  **Explanation:** The array has only one character, so no compression is necessary and the length remains 1.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses a greedy approach to iterate through the input array, compressing consecutive character groups in place without using extra space.
+
+### Initial Thoughts 💭
+- This problem requires modifying the array in place, so careful management of indices is necessary.
+- We can use two pointers: one to track the current character and another to track the position where we will store the compressed result.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return 0.
+- For large input arrays with many consecutive repeating characters, the solution must run efficiently in O(n) time.
+- Consider cases where all characters are unique or all characters are the same.
+- Ensure that no additional space is used beyond constant space for character count storage.
+{{< dots >}}
+## Code 💻
+```cpp
+int compress(vector<char>& chars) {
+    if(chars.size() < 2) return chars.size();
+    int i = 0, j = 0;
+    while(i < chars.size()) {
+        chars[j] = chars[i];
+        int cnt = 0;
+        while(i < chars.size() && chars[i] == chars[j]) {
+            cnt++;
+            i++;
         }
-        return j;
+
+        if(cnt == 1) {
+            j++;
+        } else {
+            string cntt = to_string(cnt);
+            for(auto ch: cntt) {
+                chars[++j] = ch;
+            }
+            j++;
+        }
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to implement a string compression algorithm. Given a list of characters, we need to compress the string by replacing consecutive repeated characters with a single character followed by the count of its repetitions. For example, the input `["a","a","b","b","c","c","c"]` should be compressed to `["a","2","b","2","c","3"]`. The goal is to compress the list in-place, using the minimum amount of extra space, and return the new length of the compressed list.
-
-### Approach
-
-The key idea behind this solution is to use a two-pointer approach to iterate through the `chars` array and compress consecutive characters as we encounter them. The approach works by:
-
-1. **Iterating through the input array**: Using a pointer `i` to traverse through each character and another pointer `j` to place the result of compression.
-2. **Counting consecutive characters**: For each character, we count how many times it repeats consecutively.
-3. **Compressing the string**: If the character repeats more than once, we add both the character and the count of its occurrences to the `chars` array. If it only appears once, we just add the character.
-4. **Updating the pointer**: After processing a sequence of repeated characters, we update the pointer `j` accordingly and continue to the next unique character.
-5. **Handling edge cases**: Special cases like when the input string has fewer than two characters or no characters at all are handled early in the function.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Handle Short Inputs
-
-```cpp
-if(chars.size() < 2) return chars.size();
-```
-
-- We first handle the base case where the input has fewer than two characters. In this case, there’s no compression to do, so the function simply returns the size of the input.
-
-#### Step 2: Initialize Pointers
-
-```cpp
-int i = 0, j = 0;
-```
-
-- Two pointers are initialized: `i` is used to traverse the array to find consecutive characters, and `j` is used to place the result of the compression.
-
-#### Step 3: Main Loop to Traverse and Compress
-
-```cpp
-while(i < chars.size()) {
-    chars[j] = chars[i];
-    int cnt = 0;
-```
-
-- The loop begins with `i` pointing to the first character. The character at `chars[i]` is placed at `chars[j]` to preserve it for later compression. We also initialize a counter `cnt` to zero to count the consecutive occurrences of the current character.
-
-#### Step 4: Count Consecutive Occurrences
-
-```cpp
-while(i < chars.size() && chars[i] == chars[j]) {
-    cnt++;
-    i++;
+    return j;
 }
 ```
 
-- We use an inner `while` loop to count how many times the current character repeats consecutively in the array. Each time we find a match (`chars[i] == chars[j]`), we increment the counter `cnt` and move the pointer `i` to the next character.
+This function compresses a string by replacing consecutive duplicate characters with the character followed by its count. The function modifies the input vector and returns the new length after compression.
 
-#### Step 5: Handle the Count of Repeated Characters
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int compress(vector<char>& chars) {
+	```
+	Defines the function to compress a vector of characters by replacing consecutive duplicates with the character and its count.
 
-```cpp
-if(cnt == 1) {
-    j++;
-} else {
-    string cntt = to_string(cnt);
-    for(auto ch: cntt) {
-        chars[++j] = ch;
-    }
-    j++;
-}
-```
+2. **Edge Case Check**
+	```cpp
+	    if(chars.size() < 2) return chars.size();
+	```
+	Checks if the input vector has fewer than two characters. If so, no compression is needed, and the function returns the original size.
 
-- If the character appears only once (i.e., `cnt == 1`), we simply increment the pointer `j` to place the next character.
-- If the character appears more than once, we convert the count `cnt` to a string and place each digit of the count in the `chars` array, updating `j` each time we place a character or digit.
+3. **Variable Initialization**
+	```cpp
+	    int i = 0, j = 0;
+	```
+	Initializes two pointers, 'i' to traverse the input and 'j' to build the compressed version of the string.
 
-#### Step 6: Return the New Length
+4. **Main Loop**
+	```cpp
+	    while(i < chars.size()) {
+	```
+	Begins a loop to traverse the input vector of characters.
 
-```cpp
-return j;
-```
+5. **Character Assignment**
+	```cpp
+	        chars[j] = chars[i];
+	```
+	Assigns the current character at 'i' to the position 'j' in the compressed vector.
 
-- Finally, the function returns `j`, which represents the new length of the compressed string after the in-place compression is done.
+6. **Counter Initialization**
+	```cpp
+	        int cnt = 0;
+	```
+	Initializes a counter 'cnt' to track the number of consecutive occurrences of the current character.
 
-### Complexity
+7. **Count Consecutive Characters**
+	```cpp
+	        while(i < chars.size() && chars[i] == chars[j]) {
+	```
+	Starts an inner loop to count consecutive characters that are the same as the current character at 'j'.
 
-#### Time Complexity:
-- The time complexity of the solution is `O(n)`, where `n` is the size of the `chars` array. This is because we only traverse the input array once, and the inner loop only operates on a limited number of characters (i.e., the digits of the count). The overall number of iterations is proportional to the length of the input array, so the time complexity is linear.
+8. **Increment Count**
+	```cpp
+	            cnt++;
+	```
+	Increments the counter 'cnt' for each consecutive occurrence of the current character.
 
-#### Space Complexity:
-- The space complexity is `O(1)`, which means that the algorithm uses constant space, excluding the input and output. The compression is done in-place, meaning we do not use any additional data structures to store intermediate results (other than a small number of variables like `i`, `j`, and `cnt`).
+9. **Move Pointer**
+	```cpp
+	            i++;
+	```
+	Moves the pointer 'i' to the next character in the input vector.
 
-### Conclusion
+10. **Handle Count**
+	```cpp
+	        if(cnt == 1) {
+	```
+	Checks if there is only one occurrence of the character.
 
-This solution provides an efficient in-place approach to compressing a list of characters by replacing consecutive repeated characters with the character followed by the number of occurrences. It uses a two-pointer technique to traverse the list, counting consecutive characters and placing the result directly into the input array. The time complexity is linear (`O(n)`), making this approach very efficient for large inputs. The space complexity is constant (`O(1)`), making it an optimal solution in terms of memory usage as well.
+11. **Single Occurrence Handling**
+	```cpp
+	            j++;
+	```
+	If the character occurs only once, simply moves the pointer 'j' to the next position.
 
-By following this method, the function efficiently solves the problem while maintaining the required constraints and ensuring that the output is in the correct compressed format.
+12. **Handle Multiple Occurrences**
+	```cpp
+	        } else {
+	```
+	If the character occurs more than once, the function will append the count to the vector.
+
+13. **Count to String Conversion**
+	```cpp
+	            string cntt = to_string(cnt);
+	```
+	Converts the count 'cnt' to a string so that its digits can be added to the vector.
+
+14. **Appending Count Digits**
+	```cpp
+	            for(auto ch: cntt) {
+	```
+	Iterates through the digits of the count and appends each digit to the compressed vector.
+
+15. **Store Count Digit**
+	```cpp
+	                chars[++j] = ch;
+	```
+	Stores each digit of the count in the appropriate position in the vector.
+
+16. **Increment Pointer**
+	```cpp
+	            j++;
+	```
+	Increments pointer 'j' after appending the count digits.
+
+17. **Return Statement**
+	```cpp
+	    return j;
+	```
+	Returns the new length of the compressed vector.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the input array. This happens when there are no repetitions.
+- **Average Case:** O(n), because we still need to traverse the entire array.
+- **Worst Case:** O(n), where n is the length of the input array, even in the case of large repetitions.
+
+The solution traverses the array once, updating elements in place.
+
+### Space Complexity 💾
+- **Best Case:** O(1), since we do not use extra space except for the input array.
+- **Worst Case:** O(1), as we only use a few integer variables for indexing and counting.
+
+The space complexity is constant because we do not use any additional data structures.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/string-compression/description/)
 

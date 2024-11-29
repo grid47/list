@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "W-EfGB0E_ao"
 youtube_upload_date="2020-02-08"
 youtube_thumbnail="https://i.ytimg.com/vi/W-EfGB0E_ao/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,118 +28,142 @@ youtube_thumbnail="https://i.ytimg.com/vi/W-EfGB0E_ao/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the head of a singly linked list, reverse the list and return the new head of the reversed list. You need to reverse the order of the nodes in the list such that the first node becomes the last, the second becomes the second to last, and so on.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the head node of a singly linked list where each node contains an integer value and a reference to the next node.
+- **Example:** `head = [10, 20, 30, 40]`
+- **Constraints:**
+	- 0 <= The number of nodes in the list <= 5000
+	- -5000 <= Node.val <= 5000
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* reverseList(ListNode* head) {
-        ListNode* nxt, *prv = NULL;
-        while(head) {
-            nxt = head->next;
-            head->next = prv;
-            prv = head;
-            head = nxt;
-        }
-        return prv;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the head of the new reversed list.
+- **Example:** `Output: [40, 30, 20, 10]`
+- **Constraints:**
+	- The returned list must reflect the reversed order of the nodes.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to reverse the linked list and return the head of the newly reversed list.
+
+- Initialize two pointers, one for the current node and one for the previous node (which starts as NULL).
+- Iterate through the list while the current node is not NULL.
+- For each node, change its next pointer to point to the previous node.
+- Move both pointers forward to the next node in the original list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list is well-formed and the input is always valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [1, 2, 3, 4, 5]`  \
+  **Explanation:** In this example, the original list is [1, 2, 3, 4, 5]. After reversing, the new list becomes [5, 4, 3, 2, 1].
+
+- **Input:** `Input: head = [10, 20, 30]`  \
+  **Explanation:** Here, the input list is [10, 20, 30]. After reversing, the result is [30, 20, 10].
+
+- **Input:** `Input: head = []`  \
+  **Explanation:** In this case, the input is an empty list, so the output will also be an empty list.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by reversing the pointers in the list either iteratively or recursively.
+
+### Initial Thoughts 💭
+- This is a straightforward problem of manipulating pointers in a singly linked list.
+- The iterative approach is generally easier to implement and more space-efficient, as it avoids recursion stack overhead.
+{{< dots >}}
+### Edge Cases 🌐
+- If the list is empty (head is NULL), the reversed list is also NULL.
+- For large lists, ensure the algorithm handles the maximum input size (5000 nodes) efficiently.
+- If the list contains a single node, it is its own reversal.
+- The solution must work within the time limits for both small and large input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* reverseList(ListNode* head) {
+    ListNode* nxt, *prv = NULL;
+    while(head) {
+        nxt = head->next;
+        head->next = prv;
+        prv = head;
+        head = nxt;
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-Let’s dive into the **Reversing a Singly Linked List** problem! 🔄 Given the head of a singly linked list, your task is to reverse the list so that the first node becomes the last, and the last node becomes the first. We need to return the head of the reversed list after performing the operation.
-
-#### Example:
-- **Input:** `head = [1, 2, 3, 4, 5]`
-- **Output:** `head = [5, 4, 3, 2, 1]`
-
-This problem is about efficiently reversing the linked list with linear time complexity and constant space. Let's break it down! 💡
-
----
-
-### 🔍 Approach
-
-We can solve this problem using an **iterative approach** by keeping track of three pointers:
-1. **`head`**: Initially points to the first node of the list.
-2. **`prv`** (previous): Initially set to `nullptr` since the new tail will point to `nullptr`.
-3. **`nxt`** (next): Temporarily stores the next node while we adjust the `next` pointers.
-
-Here’s the game plan:
-1. Set up the pointers (`head`, `prv`, and `nxt`).
-2. Traverse the list, reverse the pointers one by one.
-3. Return the new head when the list is fully reversed.
-
-Let’s look at the detailed steps! 🧠
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-#### Step 1: Initialize Pointers
-```cpp
-ListNode* nxt, *prv = NULL;
-```
-- **`nxt`**: A temporary pointer to store the next node of the list.
-- **`prv`**: Initially set to `nullptr`, which will eventually become the new head of the reversed list.
-
-#### Step 2: Traverse the List
-```cpp
-while (head) {
-    nxt = head->next;   // Store the next node temporarily
-    head->next = prv;    // Reverse the current node's next pointer
-    prv = head;          // Move `prv` to the current node
-    head = nxt;          // Move to the next node in the list
+    return prv;
 }
 ```
-- **Loop condition:** We continue until we reach the end of the list (`head` becomes `nullptr`).
-- **`nxt = head->next`:** Store the next node so we don't lose the rest of the list.
-- **`head->next = prv`:** Reverse the current node's `next` pointer to point to the previous node.
-- **`prv = head`:** Move the `prv` pointer to the current node.
-- **`head = nxt`:** Move to the next node, stored in `nxt`.
 
-#### Step 3: Return the New Head
-```cpp
-return prv;
-```
-- Once the loop finishes, `prv` will point to the new head of the reversed list. Return it to complete the process! 🎉
+This function reverses a singly linked list. It iterates through the list, reassigning each node's `next` pointer to the previous node, effectively reversing the direction of the list until the entire list is reversed.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	ListNode* reverseList(ListNode* head) {
+	```
+	Define the function `reverseList` that takes a pointer to the head of a singly linked list and returns the reversed list.
 
-### 📊 Complexity Analysis
+2. **Variable Initialization**
+	```cpp
+	    ListNode* nxt, *prv = NULL;
+	```
+	Initialize two pointers: `nxt` for storing the next node and `prv` for keeping track of the previous node in the reversed list.
 
-Let’s analyze the time and space complexity of this solution. ⏱️💾
+3. **While Loop**
+	```cpp
+	    while(head) {
+	```
+	Start a `while` loop to iterate through the linked list as long as the current node `head` is not null.
 
-#### Time Complexity:
-- **O(n):** 
-  - We traverse the entire list once, visiting each node exactly once. For each node, we perform constant-time operations (updating pointers), so the time complexity is **O(n)**, where `n` is the number of nodes in the list.
+4. **Next Node Assignment**
+	```cpp
+	        nxt = head->next;
+	```
+	Store the next node (`head->next`) in the `nxt` pointer, so it can be used after modifying `head->next`.
 
-#### Space Complexity:
-- **O(1):**
-  - The space complexity is constant because we only use a few extra pointers (`prv`, `nxt`), regardless of the list size. No additional data structures are used, so the space complexity remains **O(1)**.
+5. **Reverse Pointer Assignment**
+	```cpp
+	        head->next = prv;
+	```
+	Reverse the direction of the list by pointing the current node’s `next` to the previous node (`prv`).
 
----
+6. **Move Previous Pointer**
+	```cpp
+	        prv = head;
+	```
+	Move the `prv` pointer to the current node, as it will become the previous node in the next iteration.
 
-### 🏁 Conclusion
+7. **Move Head Pointer**
+	```cpp
+	        head = nxt;
+	```
+	Move the `head` pointer to the next node in the original list (`nxt`) to continue the iteration.
 
-In conclusion, we’ve successfully reversed the singly linked list using an efficient iterative approach! 🚀 Here’s a quick summary:
+8. **Return Reversed List**
+	```cpp
+	    return prv;
+	```
+	Return the `prv` pointer, which now points to the head of the reversed list.
 
-1. **Time Efficiency:** The algorithm runs in **O(n)**, which is optimal since we must traverse each node.
-2. **Space Efficiency:** The solution uses constant space **O(1)**, making it perfect for large lists.
-3. **Simplicity:** The iterative approach is easy to implement, avoiding recursion and keeping things simple.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution is perfect when you need to reverse a linked list in the most efficient way possible. Keep practicing, and you’ll become a linked list pro in no time! 💪✨
+The time complexity is O(n) for all cases, as we need to visit each node once to reverse the list.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) for the iterative approach, as no extra space is needed except for a few pointers.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-linked-list/description/)
 

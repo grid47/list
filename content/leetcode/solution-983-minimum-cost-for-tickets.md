@@ -14,136 +14,188 @@ img_src = ""
 youtube = "akXV67u1pTg"
 youtube_upload_date="2023-07-08"
 youtube_thumbnail="https://i.ytimg.com/vi/akXV67u1pTg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are planning a series of train travels throughout the year. The days you plan to travel are given in a list of integers, where each integer represents a day of the year (from 1 to 365). You need to find the minimum cost needed to cover all the travel days using 1-day, 7-day, and 30-day passes.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers 'days', where each integer represents a day you plan to travel. Additionally, you are given an array 'costs' with three integers, where each represents the cost of the 1-day, 7-day, and 30-day passes respectively.
+- **Example:** `days = [1, 4, 6, 7, 8, 20], costs = [3, 10, 20]`
+- **Constraints:**
+	- 1 <= days.length <= 365
+	- 1 <= days[i] <= 365
+	- days is strictly increasing.
+	- costs.length == 3
+	- 1 <= costs[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mincostTickets(vector<int>& days, vector<int>& cost) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum cost needed to cover all the travel days using one or more of the available passes.
+- **Example:** `Output: 16`
+- **Constraints:**
+	- The output should be an integer representing the minimum cost.
 
-        int d = days.back();
-        vector<int>  dp(d + 1, 0);
-        vector<bool> td(d + 1, false);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to compute the minimum cost by selecting the best combination of passes for the given travel days.
 
-        for(int x : days) td[x] = true;
+- Initialize a dynamic programming array 'dp' to store the minimum cost to cover all days from 1 to the last day of travel.
+- For each day in the travel list, calculate the minimum cost considering each pass type (1-day, 7-day, 30-day).
+- Use previous computed costs to optimize the solution by avoiding redundant calculations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The days array is sorted in strictly increasing order.
+- The costs for the 1-day, 7-day, and 30-day passes are provided and are not negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `days = [1, 4, 6, 7, 8, 20], costs = [3, 10, 20]`  \
+  **Explanation:** In this example, we can use a combination of a 1-day pass and a 7-day pass to minimize the cost, resulting in a total of 16 dollars.
 
-        for(int i = 1; i < d + 1; i++) {
-            if(!td[i]) {
-                dp[i] = dp[i - 1];
-                continue;
-            }
-            
-            dp[i] = dp[i - 1] + cost[0];
-            dp[i] = min(dp[i], cost[1] + dp[max(i - 7, 0)]);
-            dp[i] = min(dp[i], cost[2] + dp[max(i - 30, 0)]);            
+{{< dots >}}
+## Approach 🚀
+The approach involves using dynamic programming to keep track of the minimum cost to cover all the travel days, iterating over the travel days and considering the cost of each type of pass at each step.
 
+### Initial Thoughts 💭
+- The problem can be solved efficiently using dynamic programming.
+- We should consider all possible pass options for each travel day.
+- We need to minimize the total cost while ensuring that we cover all the travel days.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle edge cases where there are no travel days.
+- Consider the performance of the algorithm when the number of travel days is large, near 365.
+- If the travel days cover the entire year, consider optimizing the pass choices accordingly.
+- The solution must handle the maximum constraints efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int mincostTickets(vector<int>& days, vector<int>& cost) {
+
+    int d = days.back();
+    vector<int>  dp(d + 1, 0);
+    vector<bool> td(d + 1, false);
+
+    for(int x : days) td[x] = true;
+
+    for(int i = 1; i < d + 1; i++) {
+        if(!td[i]) {
+            dp[i] = dp[i - 1];
+            continue;
         }
+        
+        dp[i] = dp[i - 1] + cost[0];
+        dp[i] = min(dp[i], cost[1] + dp[max(i - 7, 0)]);
+        dp[i] = min(dp[i], cost[2] + dp[max(i - 30, 0)]);            
 
-        return dp[d];
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-The problem asks to determine the minimum cost required to travel on specific days, where we are given a list of days when travel is required and the costs associated with different types of tickets. There are three types of tickets available:
-1. A 1-day ticket which covers travel for a single day.
-2. A 7-day ticket which covers travel for seven consecutive days.
-3. A 30-day ticket which covers travel for thirty consecutive days.
-
-Given these tickets, the goal is to determine the minimum cost to cover all the travel days in the given list.
-
-### Approach
-
-To solve this problem, we can use dynamic programming (DP). The basic idea is to compute the minimum cost of covering all travel days by considering the different ticket options available for each day and ensuring that we minimize the cost over the possible choices.
-
-#### Key Insights:
-1. **Dynamic Programming**:
-   - We can define a `dp` array where `dp[i]` represents the minimum cost required to travel from day 1 to day `i`.
-   - The main challenge is to choose which ticket to buy on each day to minimize the total cost.
-   - For each day `i`, we can either:
-     - Use a 1-day ticket, adding `cost[0]` to the cost of the previous day (`dp[i - 1]`).
-     - Use a 7-day ticket, adding `cost[1]` to the cost of the day that is 7 days earlier (`dp[i - 7]`).
-     - Use a 30-day ticket, adding `cost[2]` to the cost of the day that is 30 days earlier (`dp[i - 30]`).
-
-2. **Using a Helper Array**:
-   - To simplify the problem, we use an array `td` where `td[i]` is `true` if day `i` is a travel day (i.e., we need to travel on that day), and `false` otherwise.
-
-3. **Base Case**:
-   - We initialize `dp[0]` to `0` since no travel is needed on day 0.
-
-#### Detailed Steps:
-- First, we initialize the DP array and a boolean array `td` to mark the days when travel is needed.
-- Then, we iterate through all days from 1 to `d` (where `d` is the last day in the list of travel days), and for each day, we compute the minimum cost of travel by considering all three ticket options.
-- We use the `min` function to choose the least cost option at each step.
-- Finally, after iterating through all days, `dp[d]` will contain the minimum cost to travel on all the required days.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization**:
-```cpp
-int d = days.back();
-vector<int> dp(d + 1, 0);
-vector<bool> td(d + 1, false);
-```
-- We initialize the variable `d` to the last day in the `days` array, which gives the total number of days.
-- We initialize a `dp` array of size `d + 1` to store the minimum costs. Each entry represents the minimum cost for covering all days up to that point.
-- We also create a `td` array to mark which days are travel days.
-
-#### 2. **Marking Travel Days**:
-```cpp
-for(int x : days) td[x] = true;
-```
-- This loop marks all the days in the `days` array as `true` in the `td` array, indicating that we need to travel on those days.
-
-#### 3. **Filling the DP Array**:
-```cpp
-for(int i = 1; i < d + 1; i++) {
-    if(!td[i]) {
-        dp[i] = dp[i - 1];
-        continue;
-    }
-    
-    dp[i] = dp[i - 1] + cost[0];
-    dp[i] = min(dp[i], cost[1] + dp[max(i - 7, 0)]);
-    dp[i] = min(dp[i], cost[2] + dp[max(i - 30, 0)]);
+    return dp[d];
 }
 ```
-- We iterate through all the days from 1 to `d` (inclusive).
-- For each day `i`, if it is not a travel day (`!td[i]`), the cost is the same as the previous day (`dp[i] = dp[i - 1]`).
-- If day `i` is a travel day, we compute the cost for each ticket option:
-  - **1-day ticket**: We add the cost of the 1-day ticket (`cost[0]`) to the cost of the previous day (`dp[i - 1]`).
-  - **7-day ticket**: We add the cost of the 7-day ticket (`cost[1]`) to the cost of the day 7 days before (`dp[max(i - 7, 0)]`).
-  - **30-day ticket**: We add the cost of the 30-day ticket (`cost[2]`) to the cost of the day 30 days before (`dp[max(i - 30, 0)]`).
-- After calculating the costs for all three ticket options, we pick the minimum value and update `dp[i]`.
 
-#### 4. **Returning the Final Result**:
-```cpp
-return dp[d];
-```
-- After processing all the days, `dp[d]` contains the minimum cost to travel on all the required days, which is the final answer.
+This code defines the `mincostTickets` function to calculate the minimum cost of travel given specific day and cost inputs. It uses dynamic programming to compute the cost of tickets with one-day, seven-day, and thirty-day validity options.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int mincostTickets(vector<int>& days, vector<int>& cost) {
+	```
+	Defines the `mincostTickets` function, which calculates the minimum cost to cover the given travel days using dynamic programming.
 
-#### Time Complexity:
-- **Initialization**: Initializing the `dp` and `td` arrays takes **O(d)** time, where `d` is the last day in the `days` array.
-- **Filling the DP Array**: The loop iterates through all the days from 1 to `d`. For each day, we perform constant-time operations (checking travel days and updating `dp[i]`). Therefore, this step takes **O(d)** time.
-- **Total Time Complexity**: The overall time complexity is **O(d)**.
+2. **Initial Day Calculation**
+	```cpp
+	    int d = days.back();
+	```
+	Calculates the last day in the travel days array, `days`, and stores it in variable `d`. This is used as the total number of days to consider for ticket costs.
 
-#### Space Complexity:
-- **DP Array**: The `dp` array has a size of `d + 1`, so it takes **O(d)** space.
-- **TD Array**: The `td` array also has a size of `d + 1`, so it takes **O(d)** space.
-- **Total Space Complexity**: The overall space complexity is **O(d)**.
+3. **Dynamic Programming Array Initialization**
+	```cpp
+	    vector<int>  dp(d + 1, 0);
+	```
+	Initializes a dynamic programming array `dp` of size `d + 1` (one extra for 0-based indexing), where each element represents the minimum cost to cover the days up to that index.
 
-### Conclusion
+4. **Ticket Availability Array Initialization**
+	```cpp
+	    vector<bool> td(d + 1, false);
+	```
+	Initializes an array `td` of size `d + 1` to keep track of which days are travel days, marking `true` for each travel day and `false` otherwise.
 
-The `mincostTickets` function provides an optimal solution to the problem of determining the minimum cost to travel on specific days. By using dynamic programming, the solution efficiently computes the minimum cost by considering each type of ticket option and ensuring that the cost is minimized at each step. The time and space complexities are both linear, making this approach highly scalable for large input sizes.
+5. **Mark Travel Days**
+	```cpp
+	    for(int x : days) td[x] = true;
+	```
+	Iterates through the `days` array and marks the corresponding indices in the `td` array as `true` for each travel day.
+
+6. **Loop Over Days**
+	```cpp
+	    for(int i = 1; i < d + 1; i++) {
+	```
+	Starts a loop that iterates through each day from 1 to `d` (the last day of travel). This loop calculates the minimum cost to cover each day.
+
+7. **Check If Not Travel Day**
+	```cpp
+	        if(!td[i]) {
+	```
+	Checks if the current day `i` is not a travel day by checking the value of `td[i]`.
+
+8. **Copy Previous Cost**
+	```cpp
+	            dp[i] = dp[i - 1];
+	```
+	If it's not a travel day, the cost to cover day `i` is the same as the previous day (no additional ticket is needed).
+
+9. **Skip Non-Travel Day**
+	```cpp
+	            continue;
+	```
+	Skips the current iteration if it's not a travel day and continues to the next day.
+
+10. **Add One-Day Ticket Cost**
+	```cpp
+	        dp[i] = dp[i - 1] + cost[0];
+	```
+	For a travel day, adds the cost of a one-day ticket (represented by `cost[0]`) to the minimum cost of covering the previous day.
+
+11. **Add Seven-Day Ticket Cost**
+	```cpp
+	        dp[i] = min(dp[i], cost[1] + dp[max(i - 7, 0)]);
+	```
+	Checks if using a seven-day ticket (represented by `cost[1]`) results in a lower total cost by comparing it with the current value of `dp[i]`.
+
+12. **Add Thirty-Day Ticket Cost**
+	```cpp
+	        dp[i] = min(dp[i], cost[2] + dp[max(i - 30, 0)]);
+	```
+	Checks if using a thirty-day ticket (represented by `cost[2]`) results in a lower total cost by comparing it with the current value of `dp[i]`.
+
+13. **Return Result**
+	```cpp
+	    return dp[d];
+	```
+	Returns the minimum cost to cover all the travel days, which is stored in `dp[d]`, the last element of the dynamic programming array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the number of travel days.
+- **Average Case:** O(n) where n is the number of travel days.
+- **Worst Case:** O(n) where n is the number of travel days.
+
+The time complexity is linear in the number of travel days, as we only process each day once.
+
+### Space Complexity 💾
+- **Best Case:** O(1) if no travel days are planned.
+- **Worst Case:** O(n) for storing the DP array for n travel days.
+
+The space complexity is linear in the number of travel days, as we need to store the minimum cost for each day.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-for-tickets/description/)
 

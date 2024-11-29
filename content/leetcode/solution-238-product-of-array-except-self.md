@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "yKZFurr4GQA"
 youtube_upload_date="2024-01-10"
 youtube_thumbnail="https://i.ytimg.com/vi/yKZFurr4GQA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,151 +28,177 @@ youtube_thumbnail="https://i.ytimg.com/vi/yKZFurr4GQA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array, your task is to return an array where each element at index 'i' is the product of all the elements of the original array except the element at index 'i'. You are not allowed to use division in your solution, and the algorithm must run in O(n) time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array 'nums'. The array will contain at least two elements.
+- **Example:** `Input: nums = [2,3,4,5]`
+- **Constraints:**
+	- 2 <= nums.length <= 10^5
+	- -30 <= nums[i] <= 30
+	- The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> productExceptSelf(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> pre(n, 1), suf(n, 1);
-        pre[0] = nums[0];
-        suf[n - 1] = nums[n - 1];
-        for(int i = 1; i < n; i++)
-            pre[i] = pre[i - 1] * nums[i];
-        for(int i = n - 2; i >= 0; i--)
-            suf[i] = suf[i + 1] * nums[i];
-        
-        vector<int> ans(n, 1);
-        for(int i = 0; i < n; i++)
-            ans[i] = (i > 0? pre[i - 1]: 1) * (i < n - 1? suf[i + 1]: 1);
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array where each element is the product of all the numbers in the array except the one at that index.
+- **Example:** `Output: [60, 40, 30, 24]`
+- **Constraints:**
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the product of all the elements except the current element at each index.
 
-We are given an array `nums`, and our task is to compute a new array `output` where each element `output[i]` is the product of all elements in the original array except for the element at index `i`. The twist? We cannot use division, and we need to solve this in **O(n)** time complexity.
+- Create an array to store the product of all elements except the current element.
+- First, iterate through the array to calculate the prefix products (product of elements before the current element).
+- Then, iterate from the end of the array to calculate the suffix products (product of elements after the current element).
+- Multiply the prefix and suffix values for each index to get the desired result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least two elements.
+- There will be no division operations used in the solution.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2,3,4,5]`  \
+  **Explanation:** For this example, the product of all elements except the current one would be: [60, 40, 30, 24]. The output array is constructed by calculating the product of all numbers except the current one for each index.
 
-Here's an example to help visualize the problem:
+- **Input:** `Input: nums = [1,0,3,4]`  \
+  **Explanation:** Here, the output array will be: [0, 0, 0, 0]. This is because the product for each index excludes the element at that index, and the array contains zeros.
+
+{{< dots >}}
+## Approach 🚀
+The optimal approach is to compute the result in two passes: one for the prefix products and one for the suffix products, and multiply the two results for each element.
+
+### Initial Thoughts 💭
+- We cannot use division to simplify the problem.
+- To avoid using extra space for the prefix and suffix arrays, we can modify the result array in place.
+- The result can be built in two phases: one for the prefix products and another for the suffix products.
+{{< dots >}}
+### Edge Cases 🌐
+- The list is guaranteed to have at least two elements, so no empty list cases.
+- The solution should efficiently handle large arrays with up to 100,000 elements.
+- Handle cases where the array contains zeroes. The result array should correctly reflect the multiplication of other elements.
+- Make sure the output array fits within a 32-bit integer range.
+{{< dots >}}
+## Code 💻
 ```cpp
-Input:  [1, 2, 3, 4]
-Output: [24, 12, 8, 6]
+vector<int> productExceptSelf(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> pre(n, 1), suf(n, 1);
+    pre[0] = nums[0];
+    suf[n - 1] = nums[n - 1];
+    for(int i = 1; i < n; i++)
+        pre[i] = pre[i - 1] * nums[i];
+    for(int i = n - 2; i >= 0; i--)
+        suf[i] = suf[i + 1] * nums[i];
+    
+    vector<int> ans(n, 1);
+    for(int i = 0; i < n; i++)
+        ans[i] = (i > 0? pre[i - 1]: 1) * (i < n - 1? suf[i + 1]: 1);
+    
+    return ans;
+}
 ```
-Explanation:
-- `output[0] = 2 * 3 * 4 = 24`
-- `output[1] = 1 * 3 * 4 = 12`
-- `output[2] = 1 * 2 * 4 = 8`
-- `output[3] = 1 * 2 * 3 = 6`
 
----
+This function calculates the product of all elements in an array except for the current element, without using division. It uses two auxiliary arrays, one for the prefix product and one for the suffix product, to compute the result efficiently.
 
-### 🧠 Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> productExceptSelf(vector<int>& nums) {
+	```
+	Defines the function `productExceptSelf`, which takes a reference to a vector of integers (`nums`) and returns a vector of integers where each element is the product of all other elements except for the current one.
 
-To solve this problem in **O(n)** time, we'll use two main concepts: **prefix products** and **suffix products**. Let's break it down step by step.
+2. **Size of Array**
+	```cpp
+	    int n = nums.size();
+	```
+	Stores the size of the input array `nums` in variable `n`.
 
-1. **Prefix Products**:
-    - A prefix product for an index `i` is the product of all the elements before index `i`. For example, for `i = 3`, the prefix product would be `nums[0] * nums[1] * nums[2]`.
-    - We'll store the prefix products in an array called `pre`, where `pre[i]` holds the product of all elements before `i`.
+3. **Initialize Prefix and Suffix Arrays**
+	```cpp
+	    vector<int> pre(n, 1), suf(n, 1);
+	```
+	Initializes two auxiliary arrays, `pre` and `suf`, both of size `n`. `pre[i]` will store the product of all elements to the left of index `i`, and `suf[i]` will store the product of all elements to the right of index `i`.
 
-2. **Suffix Products**:
-    - A suffix product for an index `i` is the product of all elements after index `i`. For example, for `i = 3`, the suffix product would be `nums[4] * nums[5]`.
-    - We'll store the suffix products in an array called `suf`, where `suf[i]` holds the product of all elements after `i`.
+4. **Set First Prefix Value**
+	```cpp
+	    pre[0] = nums[0];
+	```
+	Sets the first element of the `pre` array to be equal to the first element of the `nums` array.
 
-3. **Final Product**:
-    - For each index `i`, the result will be the product of `pre[i - 1]` and `suf[i + 1]`. This gives us the product of all elements except the current one.
-    - For the first element, we consider only the suffix product, and for the last element, we consider only the prefix product.
+5. **Set Last Suffix Value**
+	```cpp
+	    suf[n - 1] = nums[n - 1];
+	```
+	Sets the last element of the `suf` array to be equal to the last element of the `nums` array.
 
----
+6. **Prefix Product Calculation**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	Starts a loop from the second element (`i = 1`) to the last element of the array, calculating the prefix product for each index.
 
-### 🔨 Step-by-Step Code Breakdown
+7. **Update Prefix Product**
+	```cpp
+	        pre[i] = pre[i - 1] * nums[i];
+	```
+	Updates the `pre[i]` array by multiplying the previous element's prefix product (`pre[i - 1]`) by the current element (`nums[i]`). This ensures that `pre[i]` holds the product of all elements to the left of index `i`.
 
-Now, let's break down the code to see how we implement this approach:
+8. **Suffix Product Calculation**
+	```cpp
+	    for(int i = n - 2; i >= 0; i--)
+	```
+	Starts a loop from the second-to-last element (`i = n - 2`) down to the first element, calculating the suffix product for each index.
 
-```cpp
-class Solution {
-public:
-    vector<int> productExceptSelf(vector<int>& nums) {
-```
-- We start by defining a class `Solution` with the method `productExceptSelf`, which accepts a vector `nums` representing the input array.
+9. **Update Suffix Product**
+	```cpp
+	        suf[i] = suf[i + 1] * nums[i];
+	```
+	Updates the `suf[i]` array by multiplying the next element's suffix product (`suf[i + 1]`) by the current element (`nums[i]`). This ensures that `suf[i]` holds the product of all elements to the right of index `i`.
 
-```cpp
-        int n = nums.size();
-```
-- We get the size of the input array `nums` and store it in `n`.
+10. **Initialize Answer Array**
+	```cpp
+	    vector<int> ans(n, 1);
+	```
+	Initializes the result array `ans` of size `n` with all elements set to 1.
 
-```cpp
-        vector<int> pre(n, 1), suf(n, 1);
-```
-- We create two arrays `pre` and `suf`, both of size `n`, to store the prefix and suffix products. We initialize both arrays with `1` since multiplying by `1` won't affect the results.
+11. **Compute Final Results**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts a loop to calculate the final result for each index `i` in the `ans` array.
 
-```cpp
-        pre[0] = nums[0];
-        suf[n - 1] = nums[n - 1];
-```
-- The first element of the prefix product is simply `nums[0]`, and the last element of the suffix product is `nums[n-1]`.
+12. **Calculate Product for Each Index**
+	```cpp
+	        ans[i] = (i > 0? pre[i - 1]: 1) * (i < n - 1? suf[i + 1]: 1);
+	```
+	For each index `i`, the result is calculated by multiplying the prefix product (`pre[i - 1]`) and the suffix product (`suf[i + 1]`). If `i` is the first or last index, the appropriate product (prefix or suffix) is taken as 1.
 
-```cpp
-        for(int i = 1; i < n; i++)
-            pre[i] = pre[i - 1] * nums[i];
-```
-- We calculate the prefix products for each element starting from the second element. The prefix product at `i` is the product of `nums[i]` and the previous prefix product `pre[i - 1]`.
+13. **Return Final Result**
+	```cpp
+	    return ans;
+	```
+	Returns the result array `ans`, which contains the product of all elements in the input array `nums` except for the current element.
 
-```cpp
-        for(int i = n - 2; i >= 0; i--)
-            suf[i] = suf[i + 1] * nums[i];
-```
-- Similarly, we calculate the suffix products in reverse order, starting from the second-to-last element. The suffix product at `i` is the product of `nums[i]` and the next suffix product `suf[i + 1]`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-```cpp
-        vector<int> ans(n, 1);
-        for(int i = 0; i < n; i++)
-            ans[i] = (i > 0? pre[i - 1]: 1) * (i < n - 1? suf[i + 1]: 1);
-```
-- Finally, we calculate the product for each index `i` by multiplying the corresponding prefix and suffix products. For the first index (`i = 0`), the prefix product is `1` because there are no elements before it. Similarly, for the last index (`i = n - 1`), the suffix product is `1` because there are no elements after it.
+The time complexity is O(n) because we iterate through the list twice.
 
-```cpp
-        return ans;
-    }
-};
-```
-- The method returns the resulting array `ans`, which contains the product of all elements except for the current element at each index.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
----
+We use only constant extra space as we update the result array in place.
 
-### 📈 Complexity Analysis
+**Happy Coding! 🎉**
 
-#### Time Complexity:
-- **O(n)**: We loop over the array three times (once for prefix, once for suffix, and once for the final result). Since each loop processes the array once, the time complexity is linear, or **O(n)**.
-
-#### Space Complexity:
-- **O(n)**: We use three arrays (`pre`, `suf`, and `ans`), each of size `n`. So, the space complexity is also **O(n)**.
-
----
-
-### 🏁 Conclusion
-
-This approach effectively solves the problem in **O(n)** time and **O(n)** space by using prefix and suffix products. It’s a clever way to calculate the product of all elements except for the current element without needing division or nested loops.
-
-#### Key Takeaways:
-- **Efficiency**: This solution efficiently handles the problem in linear time and space, which is optimal.
-- **No Division**: We avoid division altogether by using prefix and suffix products.
-- **Edge Cases**: The algorithm works for arrays of various sizes, including very small ones (e.g., arrays of length 1 or 2).
-
-This method is a great example of optimizing solutions using extra space (for the prefix and suffix products) to reduce time complexity!
-
----
-
-### 🎯 Quick Summary:
-- **Problem**: Compute the product of all elements except for the current element.
-- **Solution**: Use prefix and suffix products to get the desired result in linear time and space.
-- **Time Complexity**: O(n)
-- **Space Complexity**: O(n)
-
-This solution is simple, elegant, and efficient! Keep practicing to master these kinds of tricks! 💪✨
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/product-of-array-except-self/description/)
 

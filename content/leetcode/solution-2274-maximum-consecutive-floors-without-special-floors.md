@@ -14,139 +14,161 @@ img_src = ""
 youtube = "ZQ6iiXxEhRY"
 youtube_upload_date="2022-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ZQ6iiXxEhRY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice has rented a sequence of floors in a building from `bottom` to `top` (inclusive). Some of these floors are designated as special floors where relaxation occurs. You are given an array `special` that contains the indices of these special floors. Your task is to determine the maximum number of consecutive floors that are not designated as special.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers, `bottom` and `top`, representing the range of floors rented. You are also given an integer array `special` where each element represents a special floor within this range.
+- **Example:** `Input: bottom = 3, top = 10, special = [4, 5, 8]`
+- **Constraints:**
+	- 1 <= special.length <= 10^5
+	- 1 <= bottom <= special[i] <= top <= 10^9
+	- All the values in the special array are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxConsecutive(int bottom, int top, vector<int>& spec) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of consecutive floors that do not have a special floor.
+- **Example:** `Output: 3`
+- **Constraints:**
 
-        sort(spec.begin(), spec.end());
-        int prv = bottom - 1, n = spec.size();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the longest stretch of consecutive floors without any special floor in the given range.
 
-        int res = 0;
-        for(int cur : spec) {
-            res = max(res, cur - prv - 1);
-            prv = cur > prv ? cur : prv;
-        }
-        res = max(res, top - prv);
+- Sort the special floors in ascending order.
+- Track the difference between each adjacent pair of special floors and find the maximum gap.
+- Include the gap before the first special floor and after the last special floor.
+- Return the maximum gap.
+{{< dots >}}
+### Problem Assumptions ✅
+- The special floors are within the range from `bottom` to `top`.
+- There are no repeated special floors in the input array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: bottom = 3, top = 10, special = [4, 5, 8]`  \
+  **Explanation:** The special floors are 4, 5, and 8. The largest gap is between 7 and 10, which contains 3 consecutive floors. Therefore, the result is 3.
 
-        return res;
+- **Input:** `Input: bottom = 6, top = 8, special = [6, 7, 8]`  \
+  **Explanation:** All floors are special, so there are no consecutive floors without a special floor. The result is 0.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we first sort the special floors and then calculate the gaps between consecutive special floors, including the initial gap and the final gap. The largest of these gaps will be the maximum number of consecutive non-special floors.
+
+### Initial Thoughts 💭
+- Sorting the special floors helps easily identify the gaps between them.
+- We can treat the gap before the first special floor and after the last special floor as part of the solution.
+- The problem can be solved by calculating the gaps between adjacent special floors and finding the largest gap. This involves sorting and a linear scan.
+{{< dots >}}
+### Edge Cases 🌐
+- The special array will not be empty, but ensure that `bottom` and `top` are valid inputs.
+- For large inputs with up to 100,000 special floors, the solution should handle sorting efficiently.
+- If the special floors are at the start or end of the range, handle the gaps before and after properly.
+- The solution should work efficiently even when the range between `bottom` and `top` is very large (up to 10^9).
+{{< dots >}}
+## Code 💻
+```cpp
+int maxConsecutive(int bottom, int top, vector<int>& spec) {
+
+    sort(spec.begin(), spec.end());
+    int prv = bottom - 1, n = spec.size();
+
+    int res = 0;
+    for(int cur : spec) {
+        res = max(res, cur - prv - 1);
+        prv = cur > prv ? cur : prv;
     }
+    res = max(res, top - prv);
+
+    return res;
+}
 };
 
 // bottom - top
 // spec
-// 
-{{< /highlight >}}
----
-
-### Problem Statement
-In this problem, we are given a range of integers defined by `bottom` and `top`, and a list `spec` of special integers. The goal is to find the **maximum number of consecutive integers** in the range [bottom, top] that are **not present in `spec`**. In other words, we need to determine the longest gap of integers that are not specified in the list `spec`.
-
-For example, if the range is from 1 to 10 and `spec` contains [3, 5, 8], the longest consecutive subsequence of integers that are not in `spec` is `[6, 7]` (a length of 2).
-
-### Approach
-The approach involves the following steps:
-1. **Sort the `spec` array**: By sorting the list of special numbers, we can easily compare consecutive numbers and calculate the gaps between them.
-2. **Track the previous special number**: We will keep track of the last seen special number and compare it with the current special number to determine the gap.
-3. **Check the gaps between special numbers**: For each special number, we compute the difference between it and the previous special number (i.e., the gap). The goal is to find the maximum gap where no special number exists.
-4. **Consider the gaps at the boundaries**: We need to check the gaps at the beginning (between `bottom` and the first special number) and at the end (between the last special number and `top`).
-
-### Detailed Breakdown of the Code
-
-#### Step 1: Sorting the Special Numbers
-```cpp
-sort(spec.begin(), spec.end());
-```
-- The `spec` vector is sorted in ascending order. Sorting helps in easily determining the gaps between consecutive special numbers, ensuring that we can process them in a linear pass.
-
-#### Step 2: Initialize Variables
-```cpp
-int prv = bottom - 1, n = spec.size();
-```
-- **`prv`** is initialized to `bottom - 1`, which means that the first "special number" considered before the range starts is just before `bottom`. This helps when calculating the gap between the start of the range and the first special number.
-- **`n`** is the size of the `spec` array, representing the total number of special numbers.
-
-#### Step 3: Loop Through the Special Numbers
-```cpp
-int res = 0;
-for(int cur : spec) {
-    res = max(res, cur - prv - 1);
-    prv = cur > prv ? cur : prv;
-}
-```
-- **`res`** stores the maximum number of consecutive integers that are not in `spec`.
-- **`cur`** iterates through each number in the sorted `spec` array. For each special number, we compute the gap between `cur` and `prv` (the previous special number).
-- **`cur - prv - 1`** gives the number of integers between `prv` and `cur`, excluding `cur` itself.
-- We update `res` with the maximum of the current `res` and the calculated gap.
-- **`prv = cur > prv ? cur : prv;`** updates `prv` to the larger of `cur` and `prv`. This ensures that `prv` always points to the most recent special number, so the next gap calculation is correct.
-
-#### Step 4: Check the Gap at the End of the Range
-```cpp
-res = max(res, top - prv);
-```
-- After processing all the special numbers, we need to check the gap between the last special number and `top`. The gap is given by `top - prv`, which represents the number of integers from the last special number to `top`.
-- We update `res` with the maximum of the current `res` and this last gap.
-
-#### Step 5: Return the Result
-```cpp
-return res;
-```
-- Finally, the function returns the value of `res`, which contains the maximum length of consecutive integers not present in `spec`.
-
-### Complexity Analysis
-
-#### Time Complexity
-- **Sorting the `spec` array**: Sorting the `spec` array takes **O(n log n)**, where `n` is the number of elements in the `spec` vector.
-- **Iterating through the `spec` array**: After sorting, the loop iterates through the `spec` array once, taking **O(n)** time.
-- Therefore, the total time complexity is **O(n log n)** due to the sorting step.
-
-#### Space Complexity
-- The space complexity of this solution is **O(1)**, assuming that the space required for the input `spec` array is not counted. The solution only uses a few extra integer variables (`prv`, `res`, etc.) and does not require additional data structures, so the space complexity is constant.
-
-### Example Walkthrough
-
-Let’s walk through an example to understand how the code works.
-
-#### Example 1
-```cpp
-int bottom = 1, top = 10;
-vector<int> spec = {3, 5, 8};
 ```
 
-1. **Sort `spec`**: `spec` becomes `{3, 5, 8}`.
-2. Initialize `prv = 0` (since `bottom - 1 = 0`) and `res = 0`.
-3. Loop through `spec`:
-   - For `cur = 3`: The gap is `3 - 0 - 1 = 2`. Update `res` to 2. Now, `prv = 3`.
-   - For `cur = 5`: The gap is `5 - 3 - 1 = 1`. `res` remains 2. Now, `prv = 5`.
-   - For `cur = 8`: The gap is `8 - 5 - 1 = 2`. `res` remains 2. Now, `prv = 8`.
-4. The gap at the end is `top - prv = 10 - 8 = 2`. `res` remains 2.
-5. Return `res = 2`.
+This code defines the function `maxConsecutive`, which calculates the maximum number of consecutive integers that are not present in the `spec` array within the range [bottom, top]. The function sorts the array `spec`, iterates through it, and finds gaps between consecutive integers, returning the largest gap.
 
-#### Example 2
-```cpp
-int bottom = 1, top = 15;
-vector<int> spec = {3, 5, 8, 12};
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxConsecutive(int bottom, int top, vector<int>& spec) {
+	```
+	This is the function header for `maxConsecutive`, which calculates the largest gap between consecutive numbers in a specified range that are missing from the array `spec`.
 
-1. **Sort `spec`**: `spec` becomes `{3, 5, 8, 12}`.
-2. Initialize `prv = 0` (since `bottom - 1 = 0`) and `res = 0`.
-3. Loop through `spec`:
-   - For `cur = 3`: The gap is `3 - 0 - 1 = 2`. Update `res` to 2. Now, `prv = 3`.
-   - For `cur = 5`: The gap is `5 - 3 - 1 = 1`. `res` remains 2. Now, `prv = 5`.
-   - For `cur = 8`: The gap is `8 - 5 - 1 = 2`. `res` remains 2. Now, `prv = 8`.
-   - For `cur = 12`: The gap is `12 - 8 - 1 = 3`. Update `res` to 3. Now, `prv = 12`.
-4. The gap at the end is `top - prv = 15 - 12 = 3`. `res` remains 3.
-5. Return `res = 3`.
+2. **Sorting**
+	```cpp
+	    sort(spec.begin(), spec.end());
+	```
+	Sorts the vector `spec` in ascending order to make it easier to identify gaps between consecutive integers.
 
-### Conclusion
-The solution is efficient in determining the maximum length of consecutive integers not present in the list `spec`. The key to the solution lies in sorting the `spec` array and calculating the gaps between consecutive special numbers, as well as considering the boundaries of the range. With a time complexity of **O(n log n)** and a constant space complexity, the solution is both time-efficient and space-efficient, making it well-suited for solving this problem even for larger inputs.
+3. **Variable Initialization**
+	```cpp
+	    int prv = bottom - 1, n = spec.size();
+	```
+	Initializes `prv` to `bottom - 1` (a marker for the last considered integer before `bottom`) and `n` to the size of the `spec` vector.
+
+4. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes `res` to 0, which will store the maximum gap between consecutive integers.
+
+5. **Loop Start**
+	```cpp
+	    for(int cur : spec) {
+	```
+	Starts a for-each loop to iterate through each element `cur` in the sorted `spec` vector.
+
+6. **Gap Calculation**
+	```cpp
+	        res = max(res, cur - prv - 1);
+	```
+	Calculates the gap between the current number `cur` and the previous number `prv`, and updates `res` if this gap is larger than the previous maximum gap.
+
+7. **Update Previous Value**
+	```cpp
+	        prv = cur > prv ? cur : prv;
+	```
+	Updates `prv` to the maximum of `prv` and `cur` to ensure that `prv` always holds the most recent number considered.
+
+8. **Final Gap Calculation**
+	```cpp
+	    res = max(res, top - prv);
+	```
+	After the loop, calculates the gap between the last element `prv` and the `top` value, and updates `res` if this final gap is larger than the previous maximum.
+
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the value of `res`, which represents the maximum consecutive gap between numbers that are missing in the range [bottom, top].
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The worst-case time complexity is O(n log n), where n is the number of special floors, due to the sorting step.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the special floors array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-consecutive-floors-without-special-floors/description/)
 

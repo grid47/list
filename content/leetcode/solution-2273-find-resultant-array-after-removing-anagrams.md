@@ -14,110 +14,202 @@ img_src = ""
 youtube = "AdiW8KjFiyg"
 youtube_upload_date="2022-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/AdiW8KjFiyg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed string array `words`, where each element of `words[i]` consists of lowercase English letters. In one operation, you can delete any word `words[i]` if it is an anagram of the previous word `words[i-1]`. Repeat this operation until no more deletions are possible. Your task is to return the list of words after performing all possible operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single list of strings `words`, each representing a word of lowercase English letters.
+- **Example:** `words = ['abcd', 'abdc', 'dabc', 'xyz', 'zyx']`
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length <= 10
+	- words[i] consists of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> removeAnagrams(vector<string>& A) {
-        vector<string> ans;
-        int n= size(A);
-        for(int i=0;i<n;){
-            int j=i+1;
-            while( j<n and isang(A[i],A[j]) ) j++;
-            ans.push_back(A[i]);
-            i=j;
-        }
-        return ans;
-    }
-    //function for checking if two string are anagrams or not
-    bool isang(string p,string q){
-        vector<int> cnt(26);
-        int res=0;
-        for(auto i:p) cnt[i-'a']++;
-        for(auto i:q) cnt[i-'a']--;         
-        for(auto i:cnt) if(i!=0) return false;
-        return true;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the final list of words after all possible operations are performed.
+- **Example:** `Output: ['abcd', 'xyz']`
+- **Constraints:**
 
-### Problem Statement
-Given a list of strings `A`, the task is to **remove anagrams** such that only the first occurrence of each group of anagrams remains in the list. An anagram is defined as two strings that can be rearranged to form one another, meaning they have the same characters in the same frequencies, but possibly in different orders. The goal is to return a new list where no two strings are anagrams of each other.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To remove words that are anagrams of the previous word in the list by repeatedly checking adjacent words.
 
-### Approach
-The approach revolves around identifying and removing all subsequent occurrences of anagrams while preserving the first occurrence in the result. This is done by iterating through the list of strings, comparing each string with the others to see if they are anagrams. The core of the solution is the use of an efficient function to check if two strings are anagrams. Once an anagram is found, we skip further checks for that group of anagrams and continue processing the remaining strings.
+- Iterate through the list of words.
+- For each word, check if it is an anagram of the previous word. If so, remove the current word.
+- Repeat until no more words can be removed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The words are non-empty, and every string contains only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ['abcd', 'abdc', 'dabc', 'xyz', 'zyx']`  \
+  **Explanation:** In this example, 'abdc' and 'dabc' are anagrams of 'abcd', so they are deleted. Similarly, 'zyx' is an anagram of 'xyz' and is deleted. The final result is ['abcd', 'xyz'].
 
-### Detailed Breakdown of the Code
+- **Input:** `words = ['cat', 'tac', 'act', 'dog']`  \
+  **Explanation:** All words except 'dog' are anagrams of each other and can be deleted, resulting in ['dog'] as the final answer.
 
-#### Step 1: Define the `removeAnagrams` Function
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating through the list of words and checking whether each word is an anagram of the previous one. We can utilize sorting or frequency count of characters to identify anagrams.
+
+### Initial Thoughts 💭
+- We need to check if adjacent words are anagrams.
+- A simple approach is to sort the characters of each word and compare the sorted strings. If two words are anagrams, they will have the same sorted version.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty list of words should return an empty list.
+- For large inputs, the solution should handle lists with up to 100 words and each word being up to 10 characters long.
+- Words that are already distinct, where no operations are performed.
+- The solution must work within the provided constraints for both time and space.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<string> removeAnagrams(vector<string>& A) {
     vector<string> ans;
-    int n = size(A);
-```
-- **`ans`**: This vector will hold the resulting list of strings, where all anagrams are removed, leaving only the first string from each group of anagrams.
-- **`n`**: This variable stores the size of the input vector `A`, representing the total number of strings.
-
-#### Step 2: Iterating Through the List of Strings
-```cpp
-for(int i = 0; i < n;){
-    int j = i + 1;
-    while(j < n and isang(A[i], A[j])) j++;
-    ans.push_back(A[i]);
-    i = j;
+    int n= size(A);
+    for(int i=0;i<n;){
+        int j=i+1;
+        while( j<n and isang(A[i],A[j]) ) j++;
+        ans.push_back(A[i]);
+        i=j;
+    }
+    return ans;
 }
-```
-- The outer loop starts by setting `i` to 0, iterating over each string in the list.
-- **`j`** is initialized to `i + 1` and is used to check subsequent strings that might be anagrams of the string at index `i`.
-- The inner `while` loop checks whether the current string at index `i` is an anagram of the string at index `j` by calling the function `isang(A[i], A[j])`. If they are anagrams, the loop continues to increment `j` to check the next strings.
-- When an anagram is not found, or all anagrams have been skipped, we add `A[i]` (the first string of the group of anagrams) to the result vector `ans`.
-- **`i = j;`** ensures that we skip over all the strings that are anagrams of `A[i]`, and move to the next possible non-anagram string.
-
-#### Step 3: Define the `isang` Function (Anagram Check)
-```cpp
-bool isang(string p, string q) {
+//function for checking if two string are anagrams or not
+bool isang(string p,string q){
     vector<int> cnt(26);
-    int res = 0;
-    for(auto i : p) cnt[i - 'a']++;
-    for(auto i : q) cnt[i - 'a']--;
-    for(auto i : cnt) if(i != 0) return false;
+    int res=0;
+    for(auto i:p) cnt[i-'a']++;
+    for(auto i:q) cnt[i-'a']--;         
+    for(auto i:cnt) if(i!=0) return false;
     return true;
 }
 ```
-- **`cnt`**: A vector of size 26 is used to count the occurrences of each character in both strings `p` and `q`. Since we are working with lowercase English letters, there are 26 possible characters (`'a'` to `'z'`), hence the size of the `cnt` vector is 26.
-- **First loop**: For each character `i` in string `p`, we increment the corresponding count in the `cnt` vector.
-- **Second loop**: For each character `i` in string `q`, we decrement the corresponding count in the `cnt` vector.
-- **Third loop**: After both strings have been processed, if any value in the `cnt` vector is non-zero, it means the strings are not anagrams (i.e., they do not have the same characters in the same frequencies), and we return `false`.
-- If all counts in the `cnt` vector are zero, the strings are anagrams, and we return `true`.
 
-#### Step 4: Return the Result
-```cpp
-return ans;
-```
-- Once the iteration is complete and the anagrams are removed, the function returns the `ans` vector, which contains only the first occurrence of each group of anagrams.
+This code defines a function `removeAnagrams` that removes consecutive anagrams from a list of strings. It also includes a helper function `isang` that checks whether two strings are anagrams of each other by comparing the frequency of each character.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<string> removeAnagrams(vector<string>& A) {
+	```
+	This is the function header for `removeAnagrams`, which takes a reference to a vector of strings `A` and returns a vector of strings after removing consecutive anagrams.
 
-#### Time Complexity
-- **O(n * m)**: Here, `n` is the number of strings in the input list `A`, and `m` is the average length of each string. The outer loop iterates over each string once, and for each string, the `isang` function is called to compare it with others. The `isang` function checks if two strings are anagrams by comparing their character frequencies, which takes **O(m)** time for each pair of strings. Therefore, the overall time complexity is **O(n * m)**.
+2. **Variable Initialization**
+	```cpp
+	    vector<string> ans;
+	```
+	Initializes an empty vector `ans` to store the results (strings after removing anagrams).
 
-#### Space Complexity
-- **O(m)**: The space complexity is dominated by the space used to store the count of characters in the `isang` function, which requires an array of size 26 (`vector<int> cnt(26)`). Therefore, the space complexity is **O(m)**, where `m` is the maximum length of the strings being compared.
+3. **Variable Initialization**
+	```cpp
+	    int n= size(A);
+	```
+	Initializes `n` to the size of the input vector `A`, which is the number of strings in the list.
 
-### Conclusion
+4. **Loop Start**
+	```cpp
+	    for(int i=0;i<n;){
+	```
+	Starts a loop to iterate over the vector `A` and process each string while checking for consecutive anagrams.
 
-This solution efficiently removes anagrams from a list of strings while ensuring that only the first occurrence of each anagram group remains. By utilizing the `isang` function to check for anagrams by comparing character frequencies, the solution ensures that we accurately and quickly identify anagram groups. The use of a greedy approach in the `removeAnagrams` function ensures that once we encounter a non-anagram string, we add it to the result and skip all subsequent anagrams.
+5. **Variable Initialization**
+	```cpp
+	        int j=i+1;
+	```
+	Initializes `j` to `i+1`, which will be used to check the next string in the vector `A`.
 
-The algorithm has a time complexity of **O(n * m)**, where `n` is the number of strings in the list, and `m` is the average length of the strings, making it efficient for most practical inputs. The space complexity is **O(m)** due to the space needed to store character counts for comparison.
+6. **Inner Loop**
+	```cpp
+	        while( j<n and isang(A[i],A[j]) ) j++;
+	```
+	Uses a while loop to find consecutive anagrams. The function `isang` is used to check if `A[i]` and `A[j]` are anagrams. If they are, it increments `j`.
 
-This approach can be useful in various scenarios where we need to filter out anagrams, such as when processing lists of words in dictionaries, or when trying to find unique permutations of strings. The solution demonstrates an effective use of character counting and greedy algorithms to solve the problem efficiently.
+7. **Result Update**
+	```cpp
+	        ans.push_back(A[i]);
+	```
+	Pushes the current string `A[i]` into the result vector `ans` because it is not an anagram of the previous string.
+
+8. **Pointer Update**
+	```cpp
+	        i=j;
+	```
+	Updates `i` to `j`, moving the pointer to the next string after the consecutive anagrams are removed.
+
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans`, which contains the strings with consecutive anagrams removed.
+
+10. **Function Declaration**
+	```cpp
+	bool isang(string p,string q){
+	```
+	This is the function header for `isang`, which checks if two strings `p` and `q` are anagrams.
+
+11. **Variable Initialization**
+	```cpp
+	    vector<int> cnt(26);
+	```
+	Initializes a vector `cnt` of size 26 to store the frequency count of each character (assuming lowercase English letters).
+
+12. **Variable Initialization**
+	```cpp
+	    int res=0;
+	```
+	Initializes `res` to zero, though it is not used in the function and could be removed.
+
+13. **Count Characters**
+	```cpp
+	    for(auto i:p) cnt[i-'a']++;
+	```
+	Iterates over each character in string `p` and increments the corresponding position in the `cnt` vector to count the frequency of each character.
+
+14. **Count Characters**
+	```cpp
+	    for(auto i:q) cnt[i-'a']--;         
+	```
+	Iterates over each character in string `q` and decrements the corresponding position in the `cnt` vector to account for the characters in `q`.
+
+15. **Anagram Check**
+	```cpp
+	    for(auto i:cnt) if(i!=0) return false;
+	```
+	Checks the `cnt` vector to see if there are any non-zero values. If there are, it means the strings are not anagrams, and the function returns `false`.
+
+16. **Return Statement**
+	```cpp
+	    return true;
+	```
+	If all counts are zero, the function returns `true`, indicating the strings are anagrams.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n * m log m)
+- **Worst Case:** O(n * m log m)
+
+The worst-case time complexity is O(n * m log m), where n is the number of words and m is the maximum length of a word. Sorting each word takes O(m log m) time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n * m)
+
+The space complexity is O(n * m) due to the space required for storing the sorted words.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/description/)
 

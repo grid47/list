@@ -14,166 +14,262 @@ img_src = ""
 youtube = "kPsDTGcrzGM"
 youtube_upload_date="2023-02-14"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/kPsDTGcrzGM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an undirected, weighted graph of `n` nodes, represented by an edge list, where each edge connects two nodes with a given success probability. Given two nodes, `start` and `end`, find the path with the maximum probability of success to go from `start` to `end`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `n`, an edge list `edges`, an array `succProb` of success probabilities for each edge, and two integers `start` and `end`, representing the nodes to traverse from and to.
+- **Example:** `n = 4, edges = [[0,1],[1,2],[0,2],[2,3]], succProb = [0.9, 0.8, 0.5, 0.7], start = 0, end = 3`
+- **Constraints:**
+	- 2 <= n <= 10^4
+	- 0 <= start, end < n
+	- start != end
+	- 0 <= a, b < n
+	- a != b
+	- 0 <= succProb.length == edges.length <= 2*10^4
+	- 0 <= succProb[i] <= 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<pair<int, double>>> grid;
-    vector<bool> vis;
-    double ans = 0;
-    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& prob, int start, int end) {
-        grid.resize(n);
-        for(int i = 0; i < edges.size(); i++) {
-            grid[edges[i][1]].push_back({edges[i][0], prob[i]});            
-            grid[edges[i][0]].push_back({edges[i][1], prob[i]});
-        }
-        
-        priority_queue<pair<double, int>> pq;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum probability of success of the path from `start` to `end`.
+- **Example:** `0.31500`
+- **Constraints:**
+	- The answer must be accurate within a relative or absolute error of (10^{-5}).
 
-        vector<double> mx(n, 0);
-        mx[start] = 1;
-        vis.resize(n, false);
-        // vis[start] = true;
-        pq.push({1.0, start});
-        
-        while(!pq.empty()) {
-            auto it = pq.top();
-            pq.pop();
-            if(!vis[it.second]) {
-                vis[it.second] = true;
-                for(auto x: grid[it.second]) {
-                    if(mx[x.first] < it.first * x.second) {
-                        mx[x.first] = it.first * x.second;
-                        pq.push({it.first * x.second, x.first});
-                    }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the path from `start` to `end` with the highest probability. This can be done using a modified Dijkstra's algorithm, where instead of finding the shortest path, we maximize the product of probabilities.
+
+- Step 1: Build a graph representation where each edge has a success probability.
+- Step 2: Use a priority queue to perform a modified Dijkstra's algorithm, where at each step, you explore the node with the maximum success probability.
+- Step 3: Update the probability of reaching each neighboring node and continue until you reach the `end` node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph is connected, meaning there is at least one path from `start` to `end` unless otherwise stated.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 4, edges = [[0,1],[1,2],[0,2],[2,3]], succProb = [0.9, 0.8, 0.5, 0.7], start = 0, end = 3`  \
+  **Explanation:** The problem can be visualized as finding the best route from `0` to `3` by maximizing the product of success probabilities. The highest probability path is through `0 -> 1 -> 2 -> 3`, yielding a success probability of 0.504.
+
+- **Input:** `n = 3, edges = [[0,1],[1,2]], succProb = [0.5, 0.5], start = 0, end = 2`  \
+  **Explanation:** In this case, the only available path is `0 -> 1 -> 2`, and the success probability is `0.5 * 0.5 = 0.25`.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will use a priority queue to implement a variant of Dijkstra’s algorithm. Instead of minimizing the total weight, we will maximize the product of probabilities to reach the `end` node.
+
+### Initial Thoughts 💭
+- We need to maximize the product of probabilities to find the path with the highest probability of success.
+- We will use a priority queue to explore nodes with the highest probability first, updating the probability of reaching neighboring nodes along the way.
+{{< dots >}}
+### Edge Cases 🌐
+- The graph will never be empty as n >= 2.
+- Ensure the algorithm works efficiently even for large inputs where n can be as large as 10^4 and edges as many as 2 * 10^4.
+- Handle cases where there is no path from `start` to `end`.
+- The solution must run in O(n log n) time to handle large graphs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<pair<int, double>>> grid;
+vector<bool> vis;
+double ans = 0;
+double maxProbability(int n, vector<vector<int>>& edges, vector<double>& prob, int start, int end) {
+    grid.resize(n);
+    for(int i = 0; i < edges.size(); i++) {
+        grid[edges[i][1]].push_back({edges[i][0], prob[i]});            
+        grid[edges[i][0]].push_back({edges[i][1], prob[i]});
+    }
+    
+    priority_queue<pair<double, int>> pq;
+
+    vector<double> mx(n, 0);
+    mx[start] = 1;
+    vis.resize(n, false);
+    // vis[start] = true;
+    pq.push({1.0, start});
+    
+    while(!pq.empty()) {
+        auto it = pq.top();
+        pq.pop();
+        if(!vis[it.second]) {
+            vis[it.second] = true;
+            for(auto x: grid[it.second]) {
+                if(mx[x.first] < it.first * x.second) {
+                    mx[x.first] = it.first * x.second;
+                    pq.push({it.first * x.second, x.first});
                 }
             }
         }
-        return mx[end];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to find the maximum probability of reaching a destination node in a graph, starting from a source node, given a set of directed edges and their associated probabilities. Each edge connects two nodes and has a probability that represents the likelihood of successfully traversing that edge. The goal is to determine the maximum probability of reaching the target node from the starting node by traversing the edges of the graph.
-
-### Approach
-
-To solve this problem, we can use Dijkstra's algorithm, which is typically used to find the shortest paths in a graph. However, instead of minimizing distances, we will maximize probabilities. The algorithm will be modified to account for the probabilities of edge traversal.
-
-#### Key Steps in the Approach:
-
-1. **Graph Representation**: Use an adjacency list to represent the graph, where each node points to a list of pairs. Each pair contains a neighboring node and the probability of reaching that neighbor.
-
-2. **Priority Queue**: Utilize a max-heap (priority queue) to always expand the most promising node based on the highest probability encountered so far.
-
-3. **Probability Tracking**: Maintain a vector to track the maximum probability of reaching each node, initialized to zero for all nodes except the start node, which is initialized to one.
-
-4. **Exploration**: Continuously pop the node with the highest probability from the queue, explore its neighbors, and update their probabilities if a better path (higher probability) is found.
-
-5. **Termination**: The process continues until the queue is empty, and the maximum probability to reach the end node is returned.
-
-### Code Breakdown (Step by Step)
-
-Here's a detailed explanation of the provided code:
-
-```cpp
-class Solution {
-public:
-    vector<vector<pair<int, double>>> grid;
-    vector<bool> vis;
-    double ans = 0;
+    return mx[end];
+}
 ```
-- We define a class `Solution` with public members. The `grid` variable will hold the adjacency list representation of the graph, where each entry contains pairs of neighboring nodes and their associated probabilities. The `vis` vector is used to track visited nodes during the traversal.
 
-```cpp
-    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& prob, int start, int end) {
-        grid.resize(n);
-```
-- The method `maxProbability` initializes the `grid` to accommodate `n` nodes.
+This function, `maxProbability`, calculates the maximum probability of reaching the end node in a graph, given a set of edges and their corresponding probabilities. The graph is modeled as a weighted undirected graph, and a priority queue is used for efficient processing of nodes with the highest probabilities.
 
-```cpp
-        for(int i = 0; i < edges.size(); i++) {
-            grid[edges[i][1]].push_back({edges[i][0], prob[i]});            
-            grid[edges[i][0]].push_back({edges[i][1], prob[i]});
-        }
-```
-- This loop populates the adjacency list. For each edge, it adds both directions (since the graph is undirected), connecting the nodes with their corresponding probabilities.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<vector<pair<int, double>>> grid;
+	```
+	Declares a 2D vector `grid` to store the graph, where each element represents a node and a pair consisting of an adjacent node and the probability of traveling to that node.
 
-```cpp
-        priority_queue<pair<double, int>> pq;
-```
-- We declare a priority queue `pq` to facilitate the exploration of nodes based on their maximum probability.
+2. **Variable Declaration**
+	```cpp
+	vector<bool> vis;
+	```
+	Declares a vector `vis` to track whether each node has been visited during the process.
 
-```cpp
-        vector<double> mx(n, 0);
-        mx[start] = 1;
-        vis.resize(n, false);
-```
-- We initialize a vector `mx` to keep track of the maximum probabilities of reaching each node. The starting node's probability is set to 1, indicating that we start from there. The `vis` vector is resized to manage the visited status of nodes.
+3. **Variable Initialization**
+	```cpp
+	double ans = 0;
+	```
+	Declares a variable `ans` to store the final result, which will hold the maximum probability of reaching the destination node.
 
-```cpp
-        pq.push({1.0, start});
-```
-- We push the starting node into the priority queue with an initial probability of 1.
+4. **Function Definition**
+	```cpp
+	double maxProbability(int n, vector<vector<int>>& edges, vector<double>& prob, int start, int end) {
+	```
+	Defines the function `maxProbability` which takes the number of nodes `n`, the list of edges `edges`, the list of probabilities `prob`, and the start and end nodes as input parameters. It returns the maximum probability of reaching the destination node.
 
-```cpp
-        while(!pq.empty()) {
-            auto it = pq.top();
-            pq.pop();
-```
-- The main loop runs as long as there are nodes in the priority queue. We retrieve the node with the highest probability (`it`).
+5. **Graph Initialization**
+	```cpp
+	    grid.resize(n);
+	```
+	Resizes the `grid` to accommodate `n` nodes, ensuring each node has an associated adjacency list.
 
-```cpp
-            if(!vis[it.second]) {
-                vis[it.second] = true;
-```
-- If the current node has not been visited yet, we mark it as visited.
+6. **Edge Processing**
+	```cpp
+	    for(int i = 0; i < edges.size(); i++) {
+	```
+	Iterates over the edges and processes each one to add connections to the adjacency list in `grid`.
 
-```cpp
-                for(auto x: grid[it.second]) {
-                    if(mx[x.first] < it.first * x.second) {
-                        mx[x.first] = it.first * x.second;
-                        pq.push({it.first * x.second, x.first});
-                    }
-                }
-            }
-        }
-```
-- We then iterate through each neighbor of the current node. If traversing to the neighbor provides a higher probability than previously recorded, we update that neighbor's probability and push it onto the priority queue for further exploration.
+7. **Edge Insertion**
+	```cpp
+	        grid[edges[i][1]].push_back({edges[i][0], prob[i]});
+	```
+	Adds an edge to the adjacency list of node `edges[i][1]`, connecting it to node `edges[i][0]` with the probability `prob[i]`.
 
-```cpp
-        return mx[end];
-    }
-};
-```
-- Finally, once the queue is empty, we return the maximum probability to reach the end node, which is stored in `mx[end]`.
+8. **Edge Insertion**
+	```cpp
+	        grid[edges[i][0]].push_back({edges[i][1], prob[i]});
+	```
+	Adds an edge to the adjacency list of node `edges[i][0]`, connecting it to node `edges[i][1]` with the probability `prob[i]`. This ensures the graph is undirected.
 
-### Complexity
+9. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<pair<double, int>> pq;
+	```
+	Declares a priority queue `pq` to process nodes with the highest probability first. The queue stores pairs of probabilities and node indices.
 
-#### Time Complexity
-- The time complexity of this solution is \(O((E + V) \log V)\), where \(E\) is the number of edges and \(V\) is the number of vertices. Each node is processed at most once, and for each node, the priority queue operations (insert and extract) take logarithmic time.
+10. **Array Initialization**
+	```cpp
+	    vector<double> mx(n, 0);
+	```
+	Declares and initializes a vector `mx` to store the maximum probability of reaching each node. Initially, all probabilities are set to 0.
 
-#### Space Complexity
-- The space complexity is \(O(V + E)\) for storing the adjacency list and the visited status of the nodes.
+11. **Initial Probability Assignment**
+	```cpp
+	    mx[start] = 1;
+	```
+	Sets the probability of reaching the `start` node to 1, as the probability of starting at the start node is always 1.
 
-### Conclusion
+12. **Visited Array Initialization**
+	```cpp
+	    vis.resize(n, false);
+	```
+	Resizes the `vis` vector to store `n` boolean values, initialized to `false`, to track whether each node has been visited.
 
-This implementation effectively uses a modified Dijkstra's algorithm to solve the problem of maximizing the probability of reaching a target node in a graph. 
+13. **Priority Queue Insertion**
+	```cpp
+	    pq.push({1.0, start});
+	```
+	Pushes the `start` node into the priority queue with an initial probability of 1.0.
 
-**Key Insights**:
-- **Graph Representation**: The adjacency list provides an efficient way to represent the graph, allowing for quick access to neighbors.
-- **Priority Queue Usage**: The max-heap allows us to always expand the most promising path first, ensuring that we explore paths with the highest probabilities before others.
+14. **While Loop Start**
+	```cpp
+	    while(!pq.empty()) {
+	```
+	Starts a while loop that continues as long as the priority queue `pq` is not empty.
 
-The code is efficient, clear, and adheres to common practices for graph traversal problems, making it an excellent solution for finding the maximum probability path in a graph. This method can be extended to various other problems in graph theory, especially those dealing with probabilities and weights.
+15. **Pop from Priority Queue**
+	```cpp
+	        auto it = pq.top();
+	```
+	Extracts the top element from the priority queue, which is the node with the highest probability.
+
+16. **Pop from Priority Queue**
+	```cpp
+	        pq.pop();
+	```
+	Removes the top element from the priority queue after it has been processed.
+
+17. **Condition Check**
+	```cpp
+	        if(!vis[it.second]) {
+	```
+	Checks if the current node has not been visited. If it has not, the code proceeds to process it.
+
+18. **Mark as Visited**
+	```cpp
+	            vis[it.second] = true;
+	```
+	Marks the current node as visited to avoid revisiting it in subsequent iterations.
+
+19. **Loop Over Adjacent Nodes**
+	```cpp
+	            for(auto x: grid[it.second]) {
+	```
+	Loops through the adjacent nodes of the current node `it.second`.
+
+20. **Condition Check**
+	```cpp
+	                if(mx[x.first] < it.first * x.second) {
+	```
+	Checks if the probability of reaching the adjacent node `x.first` is less than the current probability multiplied by the edge's probability `x.second`.
+
+21. **Probability Update**
+	```cpp
+	                    mx[x.first] = it.first * x.second;
+	```
+	Updates the maximum probability for the adjacent node `x.first` if a higher probability path is found.
+
+22. **Push to Priority Queue**
+	```cpp
+	                    pq.push({it.first * x.second, x.first});
+	```
+	Pushes the adjacent node `x.first` with the updated probability into the priority queue.
+
+23. **Return Statement**
+	```cpp
+	    return mx[end];
+	```
+	Returns the maximum probability of reaching the destination node `end`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The worst case occurs when the priority queue has to process all the nodes, each requiring log n operations.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We store probabilities for each node and the graph structure, leading to a space complexity of O(n).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-with-maximum-probability/description/)
 

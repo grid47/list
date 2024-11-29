@@ -14,130 +14,185 @@ img_src = ""
 youtube = "YQ_8I9TmsyA"
 youtube_upload_date="2022-10-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/YQ_8I9TmsyA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` consisting of positive integers. For each number in the array, you need to reverse its digits and append the reversed number to the end of the array. After performing this operation for all numbers, return the number of distinct integers in the resulting array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` of positive integers.
+- **Example:** `nums = [21, 32, 12, 43]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int rev(int num) {
-        int res = 0;
-        while(num > 0) {
-            res = res * 10 + num % 10;
-            num /= 10;
-        }
-        return res;
-    }
-    
-    int countDistinctIntegers(vector<int>& nums) {
-        set<int> cnt;
-        int n = nums.size();
-        for(int i = 0; i < n; i++) {
-            cnt.insert(nums[i]);
-            cnt.insert(rev(nums[i]));
-        }
-        
-        return cnt.size();        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct integers in the final array after reversing and appending each number.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The result should be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the distinct integers in the final array formed by reversing and appending each integer from the original array.
 
-The problem asks to count the number of distinct integers in an array `nums` where each number can be reversed, and both the original number and its reversed version are considered. Essentially, the task is to find out how many distinct numbers there are in the set formed by taking each number in the array and its reverse.
+- 1. Reverse the digits of each integer in the array and append the reversed number to the array.
+- 2. Use a set to store the integers from the original and reversed numbers to ensure uniqueness.
+- 3. Return the size of the set, which gives the number of distinct integers.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each element in the array is a positive integer.
+- There will be no empty arrays.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [21, 32, 12, 43]`  \
+  **Explanation:** For this array, the reversed numbers would be [12, 23, 21, 34]. The resulting array would be [21, 32, 12, 43, 12, 23, 21, 34]. The distinct integers are {21, 32, 12, 43, 23, 34}, so the result is 6.
 
-For example:
-- Input: `[123, 321, 212]`
-- Output: `2`
+- **Input:** `nums = [5, 15, 25, 55]`  \
+  **Explanation:** After reversing the numbers, the array becomes [5, 15, 25, 55, 5, 51, 52, 55]. The distinct integers are {5, 15, 25, 55, 51, 52}, so the result is 6.
 
-In this example, the distinct numbers are `123` and `212`. The reverse of `123` is `321`, which is already in the array, so the total distinct numbers are `123` and `212`.
+{{< dots >}}
+## Approach 🚀
+The approach involves reversing each integer and storing the original and reversed integers in a set to count only distinct values.
 
-### Approach
-
-The approach for solving this problem can be outlined as follows:
-
-1. **Reverse Numbers**: For each number in the array, calculate its reverse. The reversed number is also considered as a valid distinct number.
-  
-2. **Track Distinct Values**: Use a data structure like a set to keep track of distinct values. Since sets automatically handle duplicates, adding both the original number and its reverse will ensure that only distinct values are counted.
-
-3. **Final Count**: After processing all the numbers and their reverses, the size of the set will give the number of distinct integers.
-
-This approach is straightforward and relies on the properties of sets to manage duplicates automatically.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Reverse Function Implementation
-
-First, we define a helper function `rev` that reverses a given integer. This function iterates through the digits of the number and constructs the reversed number by repeatedly taking the last digit and appending it to the result.
-
+### Initial Thoughts 💭
+- Reversing each number can be done efficiently by converting the number to a string, reversing the string, and converting it back to an integer.
+- A set will help us store only unique numbers, ensuring no duplicates.
+- We should reverse each integer, insert both the original and reversed numbers into a set, and return the size of the set.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is guaranteed to have at least one integer.
+- The solution should handle arrays with up to 10^5 integers efficiently.
+- When the array contains numbers that become identical after reversal (e.g., 10 becomes 1), it should correctly count distinct values.
+- The algorithm must work within the constraints and should use optimized data structures for performance.
+{{< dots >}}
+## Code 💻
 ```cpp
 int rev(int num) {
     int res = 0;
     while(num > 0) {
-        res = res * 10 + num % 10;  // Get the last digit and append it to the result
-        num /= 10;  // Remove the last digit from num
+        res = res * 10 + num % 10;
+        num /= 10;
     }
-    return res;  // Return the reversed number
+    return res;
 }
-```
 
-- `res = res * 10 + num % 10`: This line takes the last digit of `num` (`num % 10`) and adds it to the current `res`, shifting the previous digits left by one position (multiplying by 10).
-- `num /= 10`: This removes the last digit from `num`, so the loop continues until all digits are processed.
-
-#### Step 2: Counting Distinct Integers
-
-In the main function `countDistinctIntegers`, we initialize a set `cnt` to store the distinct values. The set automatically handles duplicates, so any number or its reverse will only be stored once.
-
-```cpp
 int countDistinctIntegers(vector<int>& nums) {
-    set<int> cnt;  // Set to store distinct numbers
-    int n = nums.size();  // Get the size of the input array
+    set<int> cnt;
+    int n = nums.size();
     for(int i = 0; i < n; i++) {
-        cnt.insert(nums[i]);  // Insert the original number into the set
-        cnt.insert(rev(nums[i]));  // Insert the reversed number into the set
+        cnt.insert(nums[i]);
+        cnt.insert(rev(nums[i]));
     }
     
-    return cnt.size();  // Return the number of distinct elements
+    return cnt.size();        
 }
 ```
 
-- **Insert Original Number**: `cnt.insert(nums[i]);` adds the original number to the set.
-- **Insert Reversed Number**: `cnt.insert(rev(nums[i]));` adds the reversed version of the number to the set.
-  
-The set `cnt` ensures that only unique numbers (whether original or reversed) are stored. After processing all the numbers in the array, the size of the set `cnt.size()` gives the total count of distinct integers.
+This code defines two functions: `rev` to reverse an integer and `countDistinctIntegers` to count the distinct integers in an array after considering both the integers and their reversed counterparts.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int rev(int num) {
+	```
+	Defining the `rev` function, which takes an integer `num` and returns its reversed value.
 
-Finally, the size of the set `cnt` is returned as the result, which gives the number of distinct integers formed by considering both the original numbers and their reversals.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializing `res` to store the reversed number, starting with a value of 0.
 
-```cpp
-return cnt.size();
-```
+3. **Loop**
+	```cpp
+	    while(num > 0) {
+	```
+	A loop that continues as long as `num` is greater than 0, reversing the digits of `num`.
 
-### Complexity
+4. **Mathematical Operation**
+	```cpp
+	        res = res * 10 + num % 10;
+	```
+	Extracting the last digit of `num` and adding it to `res` after shifting `res` one place to the left.
 
-#### Time Complexity
+5. **Integer Update**
+	```cpp
+	        num /= 10;
+	```
+	Removing the last digit from `num` by dividing it by 10.
 
-The time complexity of the solution is **O(n * m)**, where `n` is the size of the input array `nums` and `m` is the average number of digits in the numbers in the array. This is because:
-- For each number in the array, we perform the reversal operation, which takes time proportional to the number of digits in that number (`O(m)`).
-- The insert operation on the set is **O(1)** on average, but since we are doing this for two numbers (the original and the reversed), it still remains efficient.
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returning the reversed integer `res`.
 
-Thus, the overall time complexity is **O(n * m)**.
+7. **Function Definition**
+	```cpp
+	int countDistinctIntegers(vector<int>& nums) {
+	```
+	Defining the `countDistinctIntegers` function, which takes a vector `nums` and returns the count of distinct integers after considering both the original integers and their reversed counterparts.
 
-#### Space Complexity
+8. **Set Initialization**
+	```cpp
+	    set<int> cnt;
+	```
+	Creating a set `cnt` to store distinct integers, ensuring that duplicates are automatically removed.
 
-The space complexity of the solution is **O(n)**, as the set `cnt` stores the distinct values. In the worst case, if all numbers and their reversals are distinct, the set will store `2n` distinct values. However, the space complexity depends on the number of distinct integers, so it is at most **O(n)**.
+9. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Storing the size of the `nums` vector in variable `n`.
 
-### Conclusion
+10. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starting a loop that iterates through each element `i` in the `nums` vector.
 
-This solution efficiently counts the number of distinct integers in an array, considering both the original numbers and their reversed versions. The approach uses a set to automatically manage duplicates and ensure that only unique values are counted. The time complexity of **O(n * m)**, where `m` is the number of digits in the largest number in the array, ensures that the solution performs well even for larger inputs. The space complexity of **O(n)** makes the solution space-efficient, as it only stores the distinct integers.
+11. **Insert Element**
+	```cpp
+	        cnt.insert(nums[i]);
+	```
+	Inserting the current element `nums[i]` into the set `cnt`.
 
-This solution is optimal for this problem and leverages the power of sets in C++ to handle the distinct counting efficiently.
+12. **Insert Reversed Element**
+	```cpp
+	        cnt.insert(rev(nums[i]));
+	```
+	Inserting the reversed version of the current element `nums[i]` into the set `cnt`.
+
+13. **Return Statement**
+	```cpp
+	    return cnt.size();
+	```
+	Returning the size of the set `cnt`, which represents the number of distinct integers considering both original and reversed elements.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of elements in the array. Each operation (reversing a number and inserting it into the set) takes constant time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space used by the set to store distinct integers.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/description/)
 

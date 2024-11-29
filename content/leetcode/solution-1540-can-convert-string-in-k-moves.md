@@ -14,130 +14,208 @@ img_src = ""
 youtube = "3psLUZqiGx0"
 youtube_upload_date="2020-08-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/3psLUZqiGx0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings `s` and `t` and a number `k`. Your task is to convert string `s` into string `t` using no more than `k` moves. In each move, you can choose an index `j` (1-based) from string `s` and shift the character at that index by `i` positions, where `i` is the current move number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings `s` and `t`, both of length n, and an integer `k`.
+- **Example:** `s = 'abc', t = 'bcd', k = 6`
+- **Constraints:**
+	- 1 <= s.length, t.length <= 10^5
+	- 0 <= k <= 10^9
+	- s, t contain only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canConvertString(string s, string t, int k) {
-        if(s.size() != t.size()) return false;
-        int n = s.size();
-        vector<int> cnt(n, 0);
-        vector<int> frq(26, 0);
-        for(int i = 0; i < n; i++) {
-            if(t[i] > s[i]) {
-                cnt[i] = t[i] - s[i];
-            } else if(t[i] < s[i]) {
-                cnt[i] = 26 - (s[i] - t[i]);
-            }
-            // cout << cnt[i] << " ";
-            frq[cnt[i] % 26]++;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if it's possible to convert `s` into `t` in no more than `k` moves. Otherwise, return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The conversion is possible if the total shifts required for each character are within the available `k` moves.
 
-        for(int i = 1; i < 26; i++) {
-            // cout << frq[i] << " ";
-            if(frq[i] == 0) continue;
-            long net = (long) (i + (frq[i] - 1)  * 26);
-            if( net > k) return false;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if it's possible to convert `s` into `t` with no more than `k` moves.
+
+- 1. Iterate over the strings `s` and `t` to calculate the shift required for each character in `s` to match the corresponding character in `t`.
+- 2. Track the frequency of shifts needed for each character and ensure that no shift exceeds the available number of moves `k`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings `s` and `t` contain only lowercase English letters.
+- The maximum number of moves `k` is large enough that if the conversion is possible, it should be possible to calculate the solution.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abc', t = 'bcd', k = 6`  \
+  **Explanation:** You can shift each character in `s` to the corresponding character in `t` within 6 moves.
+
+- **Input:** `s = 'xyz', t = 'yza', k = 5`  \
+  **Explanation:** Shifting 'x' to 'y' in 1 move, 'y' to 'z' in 2 moves, and 'z' to 'a' in 3 moves fits within 5 moves.
+
+{{< dots >}}
+## Approach 🚀
+We need to check if it's possible to convert `s` into `t` in no more than `k` moves, by shifting characters at specific indices.
+
+### Initial Thoughts 💭
+- Each shift wraps around the alphabet.
+- The key is determining if the total required shifts can fit within the `k` moves.
+- Consider the difference between each character of `s` and `t`. If the number of moves required exceeds `k` for any character, return false.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure that the strings are not empty.
+- Handle cases where `s` and `t` are very large, up to 10^5 characters.
+- Check for cases where `k = 0` (no moves allowed).
+- Ensure that the strings are of equal length.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canConvertString(string s, string t, int k) {
+    if(s.size() != t.size()) return false;
+    int n = s.size();
+    vector<int> cnt(n, 0);
+    vector<int> frq(26, 0);
+    for(int i = 0; i < n; i++) {
+        if(t[i] > s[i]) {
+            cnt[i] = t[i] - s[i];
+        } else if(t[i] < s[i]) {
+            cnt[i] = 26 - (s[i] - t[i]);
         }
-        
-        return true;
+        // cout << cnt[i] << " ";
+        frq[cnt[i] % 26]++;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-The problem requires us to determine whether it is possible to convert one string `s` into another string `t` using a specified number of operations, `k`. Each operation consists of incrementing the character at any index in `s` by one (where 'z' wraps around to 'a'). The main constraints are that both strings must be of the same length, and the number of character increments needed should not exceed `k`. 
-
-### Approach
-
-The solution involves calculating how many operations are needed to convert each character of `s` to the corresponding character in `t`. For each character, we determine the number of increments required, taking into account the circular nature of the alphabet. After calculating the increments needed for all characters, we then check if the total required increments can be accomplished within the allowed operations `k`.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code snippet into smaller parts for a better understanding:
-
-```cpp
-class Solution {
-public:
-    bool canConvertString(string s, string t, int k) {
-        if(s.size() != t.size()) return false; // Step 1: Check lengths
-```
-
-- **Length Check**: The first step is to check if both strings `s` and `t` are of equal length. If not, conversion is impossible, so we immediately return `false`.
-
-```cpp
-        int n = s.size(); // Step 2: Get size of the strings
-        vector<int> cnt(n, 0); // Step 3: Create a vector to hold operations needed for each character
-        vector<int> frq(26, 0); // Step 4: Frequency array for counting increments
-```
-
-- **Initialization**: We initialize `n` to store the size of the strings and create two vectors:
-  - `cnt`: This will hold the number of increments needed for each character in `s` to match the corresponding character in `t`.
-  - `frq`: This will count how many characters require the same number of increments.
-
-```cpp
-        for(int i = 0; i < n; i++) {
-            if(t[i] > s[i]) {
-                cnt[i] = t[i] - s[i]; // Step 5: Calculate direct increments needed
-            } else if(t[i] < s[i]) {
-                cnt[i] = 26 - (s[i] - t[i]); // Step 6: Calculate wrap-around increments
-            }
-            frq[cnt[i] % 26]++; // Step 7: Increment frequency of needed operations
-        }
-```
-
-- **Calculate Increments**: In this loop, we calculate the increments needed for each character:
-  - If the character in `t` is greater than that in `s`, we take the difference directly.
-  - If the character in `t` is less than in `s`, we account for the circular nature of the alphabet by calculating how many increments wrap around from `z` to `a`. 
-  - We then update the `frq` array to count how many characters require each specific increment.
-
-```cpp
-        for(int i = 1; i < 26; i++) { // Step 8: Check each increment frequency
-            if(frq[i] == 0) continue; // Skip if no character requires this increment
-            long net = (long) (i + (frq[i] - 1)  * 26); // Step 9: Calculate total operations needed
-            if( net > k) return false; // Step 10: Check against k
-        }
-```
-
-- **Check Against `k`**: In this loop, we check if the total increments required for each frequency of increments can fit within `k`. 
-  - For each increment value `i`, if any characters require it (`frq[i] != 0`), we calculate the total operations needed:
-    - The formula `i + (frq[i] - 1) * 26` computes the net operations required for all characters needing that increment. 
-    - If this value exceeds `k`, we return `false`.
-
-```cpp
-        return true; // Step 11: If all checks pass, return true
+    for(int i = 1; i < 26; i++) {
+        // cout << frq[i] << " ";
+        if(frq[i] == 0) continue;
+        long net = (long) (i + (frq[i] - 1)  * 26);
+        if( net > k) return false;
     }
-};
+    
+    return true;
+}
 ```
 
-- **Final Return**: If all frequency checks pass without exceeding `k`, we conclude that conversion is possible and return `true`.
+This function checks if it is possible to convert string `s` to string `t` within `k` steps, where each step involves shifting a character in `s` to match the corresponding character in `t`. The function calculates the required shifts for each character and ensures that they do not exceed the allowed steps `k`.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool canConvertString(string s, string t, int k) {
+	```
+	This is the function declaration for `canConvertString`, which takes two strings `s` and `t`, and an integer `k` representing the maximum number of allowed shifts.
 
-#### Time Complexity
-- The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input strings. This is because we iterate through each character of the strings to calculate the increments and frequencies.
+2. **Condition Check**
+	```cpp
+	    if(s.size() != t.size()) return false;
+	```
+	Checks if the lengths of the strings `s` and `t` are different. If they are, it's impossible to convert `s` to `t`, so the function returns `false`.
 
-#### Space Complexity
-- The space complexity is \(O(1)\) with respect to the input size since the vectors `cnt` and `frq` have fixed sizes (26 for `frq` and `n` for `cnt`), which is not dependent on the input size.
+3. **Variable Initialization**
+	```cpp
+	    int n = s.size();
+	```
+	Initializes `n` to the length of string `s`, which is also the length of string `t` (as the function already checks for size equality).
 
-### Conclusion
+4. **Array Initialization**
+	```cpp
+	    vector<int> cnt(n, 0);
+	```
+	Initializes a vector `cnt` of size `n` to store the number of shifts required for each character in `s` to match the corresponding character in `t`.
 
-This code provides an efficient solution to determine if one string can be transformed into another using a limited number of operations. By carefully calculating the necessary increments for each character and counting how many characters require each increment, we can quickly ascertain whether the transformation can be accomplished within the specified constraints.
+5. **Array Initialization**
+	```cpp
+	    vector<int> frq(26, 0);
+	```
+	Initializes a vector `frq` of size 26 (for each letter of the alphabet) to count how often each shift amount occurs.
 
-**Key Takeaways**:
-- **String Manipulation**: Understanding character manipulation, especially in circular sequences like alphabets, is essential for problems like this.
-- **Efficient Counting**: Using frequency counting allows us to reduce the number of checks required, leading to a more efficient solution.
-- **Handling Edge Cases**: The solution includes an initial check for string length equality, which is crucial for ensuring valid comparisons.
+6. **For Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop starts, iterating through each character of the strings `s` and `t`.
 
-Overall, this approach ensures that we have a comprehensive and efficient method for determining the feasibility of transforming string `s` into string `t` within the allowed operations.
+7. **Conditional Check**
+	```cpp
+	        if(t[i] > s[i]) {
+	```
+	Checks if the character in `t` is lexicographically greater than the character in `s`. If true, a forward shift is needed.
+
+8. **Shift Calculation**
+	```cpp
+	            cnt[i] = t[i] - s[i];
+	```
+	Calculates the number of shifts required to convert `s[i]` to `t[i]`. If `t[i]` is greater, this is a simple difference.
+
+9. **Else If Check**
+	```cpp
+	        } else if(t[i] < s[i]) {
+	```
+	Checks if the character in `t` is lexicographically smaller than in `s`. If true, a backward shift is needed.
+
+10. **Shift Calculation**
+	```cpp
+	            cnt[i] = 26 - (s[i] - t[i]);
+	```
+	Calculates the number of backward shifts required to convert `s[i]` to `t[i]`. The 26 represents the number of letters in the alphabet.
+
+11. **Frequency Count**
+	```cpp
+	        frq[cnt[i] % 26]++;
+	```
+	Increments the count for the shift amount `cnt[i]`, ensuring that the shifts wrap around correctly by using modulo 26.
+
+12. **For Loop**
+	```cpp
+	    for(int i = 1; i < 26; i++) {
+	```
+	A loop that checks each shift amount (from 1 to 25) to ensure that all shifts can be performed within `k` steps.
+
+13. **Conditional Check**
+	```cpp
+	        if(frq[i] == 0) continue;
+	```
+	Skips the iteration if there are no shifts required for the current shift amount `i`.
+
+14. **Shift Validation**
+	```cpp
+	        long net = (long) (i + (frq[i] - 1)  * 26);
+	```
+	Calculates the total number of steps required to perform all shifts for a particular shift amount `i`.
+
+15. **Conditional Check**
+	```cpp
+	        if( net > k) return false;
+	```
+	Checks if the total number of steps for the current shift amount exceeds the allowed steps `k`. If it does, the function returns `false`.
+
+16. **Return Statement**
+	```cpp
+	    return true;
+	```
+	Returns `true` if all shifts can be performed within the allowed steps `k`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We need to iterate over each character of the strings to calculate the required shifts.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use additional space to track shifts and frequencies.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/can-convert-string-in-k-moves/description/)
 

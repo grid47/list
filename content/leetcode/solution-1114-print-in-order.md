@@ -14,148 +14,272 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a class with three methods: `first()`, `second()`, and `third()`. These methods are called concurrently by three threads. The goal is to ensure that `second()` is executed only after `first()` has been executed, and `third()` is executed only after `second()` has been executed. The execution of these methods is asynchronous, and you need to design a mechanism that guarantees the correct order of execution regardless of the operating system's thread scheduling.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an array of integers, where the integers represent the order in which the threads call the methods: 1 for `first()`, 2 for `second()`, and 3 for `third()`.
+- **Example:** `Input: nums = [1, 3, 2]`
+- **Constraints:**
+	- nums is a permutation of [1, 2, 3].
 
-{{< highlight cpp >}}
-class Foo {
-    int curVal;
-    std::mutex mtx;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the concatenation of the strings printed by each method in the correct order. For example, if `first()`, `second()`, and `third()` are printed in the correct order, the output will be 'firstsecondthird'.
+- **Example:** `Output: 'firstsecondthird'`
+- **Constraints:**
+	- The methods should be executed in the correct order, even if the threads are scheduled asynchronously.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Ensure that `second()` is executed after `first()`, and `third()` is executed after `second()`.
+
+- Use a mechanism to control the order of method execution, such as using mutex locks or condition variables.
+- Track the current method that should be executed and allow each thread to proceed only when it is their turn to execute the corresponding method.
+{{< dots >}}
+### Problem Assumptions ✅
+- The methods `first()`, `second()`, and `third()` are executed by three different threads.
+- Thread scheduling is unpredictable, and the order of execution is determined by the input array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 2]`  \
+  **Explanation:** In this case, thread A calls `first()`, thread B calls `third()`, and thread C calls `second()`. The expected output is 'firstsecondthird', as `second()` should execute after `first()`, and `third()` should execute after `second()`.
+
+- **Input:** `Input: nums = [2, 1, 3]`  \
+  **Explanation:** In this case, thread A calls `second()`, thread B calls `first()`, and thread C calls `third()`. The expected output is 'firstsecondthird', as the order must be adjusted to maintain correct execution.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves controlling the execution order using synchronization primitives like mutex locks or condition variables. By tracking the current stage of execution, we can ensure the correct order of method invocations.
+
+### Initial Thoughts 💭
+- Since the threads are running concurrently, we need to control the execution order between them.
+- Using locks or condition variables is a straightforward way to enforce the desired execution order.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain exactly three integers representing the methods to be executed.
+- Since the input array is always a permutation of [1, 2, 3], there are no large inputs to consider.
+- The solution should handle all permutations of [1, 2, 3].
+- Ensure that the methods are executed in the correct order, regardless of thread scheduling.
+{{< dots >}}
+## Code 💻
+```cpp
+std::mutex mtx;
 public:
-    Foo() {
-        curVal = 1;
-    }
+Foo() {
+    curVal = 1;
+}
 
-    void first(function<void()> printFirst) {
-        mtx.lock();
-        // printFirst() outputs "first". Do not change or remove this line.
-        printFirst();
-        curVal++;
+void first(function<void()> printFirst) {
+    mtx.lock();
+    // printFirst() outputs "first". Do not change or remove this line.
+    printFirst();
+    curVal++;
+    mtx.unlock();
+}
+
+void second(function<void()> printSecond) {
+    mtx.lock();
+    while(curVal != 2)
+    {
         mtx.unlock();
-    }
-
-    void second(function<void()> printSecond) {
         mtx.lock();
-        while(curVal != 2)
-        {
-            mtx.unlock();
-            mtx.lock();
-        }
-        mtx.unlock();
-        // printSecond() outputs "second". Do not change or remove this line.
-        printSecond();
-        curVal++ ;       
     }
+    mtx.unlock();
+    // printSecond() outputs "second". Do not change or remove this line.
+    printSecond();
+    curVal++ ;       
+}
 
-    void third(function<void()> printThird) {
+void third(function<void()> printThird) {
+    mtx.lock();
+    while(curVal != 3)
+    {
+        mtx.unlock();
         mtx.lock();
-        while(curVal != 3)
-        {
-            mtx.unlock();
-            mtx.lock();
-        }
-        mtx.unlock();
-        // printThird() outputs "third". Do not change or remove this line.
-        printThird();
-        curVal++;
     }
-};
-{{< /highlight >}}
----
+    mtx.unlock();
+    // printThird() outputs "third". Do not change or remove this line.
+    printThird();
+    curVal++;
+```
 
+This code defines a class that manages a sequence of tasks (first, second, and third) where each task is executed in a specific order. The `mutex` is used to ensure thread safety and control the execution order.
 
-### Problem Statement
-The task is to implement a class `Foo` that can synchronize the execution of three methods: `first`, `second`, and `third`. The goal is to ensure that:
-1. The `first` method prints "first".
-2. The `second` method prints "second".
-3. The `third` method prints "third".
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Mutex Declaration**
+	```cpp
+	std::mutex mtx;
+	```
+	A mutex `mtx` is declared to ensure that the tasks are executed in the correct order by preventing race conditions.
 
-The challenge is to ensure that these methods are called in the correct order: `first` must be called before `second`, and `second` must be called before `third`. The class must be thread-safe, meaning that multiple threads may call these methods concurrently without leading to race conditions or incorrect ordering.
+2. **Constructor**
+	```cpp
+	public:
+	```
+	Access modifier indicating that the following function is public.
 
-### Approach
-To solve this problem, we can utilize a mutex for synchronization and an integer to keep track of the current method being executed. The main steps involved in the implementation are:
-1. **Initialization**: A mutex is used to protect shared state, and an integer variable (`curVal`) is initialized to 1 to indicate that the `first` method should be called first.
-2. **Method Implementations**:
-   - In the `first` method, the thread will lock the mutex, execute the provided function to print "first", increment the tracking variable, and unlock the mutex.
-   - In the `second` method, the thread will lock the mutex and check whether it is its turn to execute. If not, it will repeatedly unlock and relock the mutex until it is allowed to print "second".
-   - In the `third` method, a similar approach is taken, ensuring that it waits until `second` has been executed.
-3. **Synchronization**: Proper locking and unlocking of the mutex ensures that the shared variable is accessed in a thread-safe manner, preventing race conditions.
+3. **Constructor**
+	```cpp
+	Foo() {
+	```
+	The constructor of the class `Foo` is defined. It initializes the `curVal` variable to 1.
 
-### Code Breakdown (Step by Step)
+4. **Variable Initialization**
+	```cpp
+	    curVal = 1;
+	```
+	The integer variable `curVal` is initialized to 1, which will control the order of the execution of the tasks.
 
-1. **Class Definition**: The `Foo` class is defined with private members to manage state and synchronization.
+5. **First Task**
+	```cpp
+	void first(function<void()> printFirst) {
+	```
+	The `first` method is defined, which will execute the first task, printing 'first' when called.
 
-   ```cpp
-   class Foo {
-       int curVal;      // Tracks the current method that can execute
-       std::mutex mtx;  // Mutex for synchronizing access
-   ```
+6. **Lock**
+	```cpp
+	    mtx.lock();
+	```
+	The mutex `mtx` is locked to ensure that no other task is executed before this one.
 
-2. **Constructor**: The constructor initializes `curVal` to 1, indicating that the `first` method should be executed first.
+7. **Function Call**
+	```cpp
+	    printFirst();
+	```
+	The `printFirst()` function is called to print 'first'.
 
-   ```cpp
-       public:
-           Foo() {
-               curVal = 1;  // Start with curVal set to 1
-           }
-   ```
+8. **Update Variable**
+	```cpp
+	    curVal++;
+	```
+	The `curVal` variable is incremented to 2 to indicate that the first task is complete.
 
-3. **First Method**: The `first` method locks the mutex, prints "first", increments `curVal`, and then unlocks the mutex.
+9. **Unlock**
+	```cpp
+	    mtx.unlock();
+	```
+	The mutex `mtx` is unlocked, allowing the next task to be executed.
 
-   ```cpp
-           void first(function<void()> printFirst) {
-               mtx.lock();          // Lock the mutex
-               printFirst();        // Print "first"
-               curVal++;            // Move to the next method
-               mtx.unlock();        // Unlock the mutex
-           }
-   ```
+10. **Second Task**
+	```cpp
+	void second(function<void()> printSecond) {
+	```
+	The `second` method is defined, which will execute the second task, printing 'second' when called.
 
-4. **Second Method**: The `second` method locks the mutex and uses a while loop to check whether it's the correct turn to execute. If not, it releases the lock and rechecks.
+11. **Lock**
+	```cpp
+	    mtx.lock();
+	```
+	The mutex `mtx` is locked to ensure exclusive access to the critical section.
 
-   ```cpp
-           void second(function<void()> printSecond) {
-               mtx.lock();          // Lock the mutex
-               while(curVal != 2) { // Wait until it's this method's turn
-                   mtx.unlock();    // Unlock and wait
-                   mtx.lock();      // Lock again for rechecking
-               }
-               mtx.unlock();        // Unlock the mutex
-               printSecond();       // Print "second"
-               curVal++;            // Move to the next method
-           }
-   ```
+12. **While Loop**
+	```cpp
+	    while(curVal != 2)
+	```
+	A `while` loop is used to wait until `curVal` is equal to 2, indicating that the first task has been completed.
 
-5. **Third Method**: The `third` method follows the same pattern as `second`, waiting for `curVal` to equal 3 before proceeding.
+13. **Unlock and Lock**
+	```cpp
+	        mtx.unlock();
+	```
+	Unlock the mutex to allow other threads to execute while the current task is waiting.
 
-   ```cpp
-           void third(function<void()> printThird) {
-               mtx.lock();          // Lock the mutex
-               while(curVal != 3) { // Wait until it's this method's turn
-                   mtx.unlock();    // Unlock and wait
-                   mtx.lock();      // Lock again for rechecking
-               }
-               mtx.unlock();        // Unlock the mutex
-               printThird();        // Print "third"
-               curVal++;            // Increment to finish
-           }
-   };
-   ```
+14. **Re-lock**
+	```cpp
+	        mtx.lock();
+	```
+	Re-lock the mutex to check the condition again and proceed once the `curVal` reaches 2.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of each method is \(O(n)\) in the worst-case scenario, where \(n\) is the number of threads waiting for the mutex to be available. However, since the methods are executed sequentially in a correct order, the average time is effectively constant per call.
-- **Space Complexity**: The space complexity is \(O(1)\) since we are using a fixed amount of space for variables like `curVal` and `mtx`, regardless of the number of threads or method calls.
+15. **Unlock**
+	```cpp
+	    mtx.unlock();
+	```
+	Unlock the mutex to allow the next task to execute.
 
-### Conclusion
-The provided C++ code effectively implements a solution to synchronize the execution order of three methods using a mutex and an integer to track the current state. The design ensures that `first` is always called before `second`, and `second` is always called before `third`, achieving the desired output sequence without any race conditions or deadlocks.
+16. **Function Call**
+	```cpp
+	    printSecond();
+	```
+	The `printSecond()` function is called to print 'second'.
 
-This implementation serves as a practical example of how to handle synchronization in multithreaded programming. The use of mutexes and condition checks demonstrates an essential pattern in concurrent programming, making it a valuable reference for developers dealing with similar challenges.
+17. **Update Variable**
+	```cpp
+	    curVal++ ;
+	```
+	The `curVal` variable is incremented to 3 to indicate that the second task is complete.
 
-Overall, the solution is both efficient and straightforward, showcasing effective synchronization techniques in C++. Readers interested in thread management and method synchronization will find this example beneficial for understanding key concepts in concurrent programming.
+18. **Third Task**
+	```cpp
+	void third(function<void()> printThird) {
+	```
+	The `third` method is defined, which will execute the third task, printing 'third' when called.
+
+19. **Lock**
+	```cpp
+	    mtx.lock();
+	```
+	The mutex `mtx` is locked to ensure exclusive access.
+
+20. **While Loop**
+	```cpp
+	    while(curVal != 3)
+	```
+	A `while` loop is used to wait until `curVal` is equal to 3, indicating that the second task has been completed.
+
+21. **Unlock and Lock**
+	```cpp
+	        mtx.unlock();
+	```
+	Unlock the mutex to allow other threads to execute while the current task is waiting.
+
+22. **Re-lock**
+	```cpp
+	        mtx.lock();
+	```
+	Re-lock the mutex to check the condition again and proceed once the `curVal` reaches 3.
+
+23. **Unlock**
+	```cpp
+	    mtx.unlock();
+	```
+	Unlock the mutex to allow the next task to execute.
+
+24. **Function Call**
+	```cpp
+	    printThird();
+	```
+	The `printThird()` function is called to print 'third'.
+
+25. **Update Variable**
+	```cpp
+	    curVal++;
+	```
+	The `curVal` variable is incremented, indicating that all tasks have been completed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+The time complexity is O(1) as the input size is fixed and each method is executed only once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because the solution only uses a fixed number of variables for synchronization.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/print-in-order/description/)

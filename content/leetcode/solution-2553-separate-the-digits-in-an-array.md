@@ -14,139 +14,168 @@ img_src = ""
 youtube = "wr1TK3mDUVY"
 youtube_upload_date="2023-02-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/wr1TK3mDUVY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` consisting of positive integers. Your task is to return a new array where each integer from `nums` is separated into its individual digits, while maintaining the order of the integers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array `nums` where each element is a positive integer.
+- **Example:** `nums = [14, 39, 58, 60]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> separateDigits(vector<int>& nums) {
-        vector<int> ans;
-        
-        for(auto x: nums) {
-            vector<int> tmp;
-            while(x) {
-                tmp.push_back(x % 10);
-                x /= 10;
-            }
-            while(!tmp.empty()) {
-                ans.push_back(tmp.back());
-                tmp.pop_back();
-            }
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array where each element contains the digits of the integers from `nums`, separated in the same order.
+- **Example:** `[1, 4, 3, 9, 5, 8, 6, 0]`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To break down each integer into its individual digits and return them in the same order.
 
-The problem asks to separate the digits of the elements of a given array of integers and return a new array containing these digits in the same order as they appear in the original array.
+- 1. For each number in `nums`, extract its digits by repeatedly dividing it by 10 and taking the remainder.
+- 2. Store the digits of each number in a new list.
+- 3. Append the digits of each number to the final result in order.
+{{< dots >}}
+### Problem Assumptions ✅
+- All numbers in `nums` are positive integers.
+- Each number in `nums` can have up to 5 digits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [14, 39, 58, 60]`  \
+  **Explanation:** In this example, we separate each number into its digits and return the combined result as [1, 4, 3, 9, 5, 8, 6, 0].
 
-For example, if the input is an array of integers `nums = [123, 45, 678]`, the output should be a single array of digits: `[1, 2, 3, 4, 5, 6, 7, 8]`.
+- **Input:** `nums = [3, 7, 1, 2]`  \
+  **Explanation:** Since all the numbers in `nums` are single digits, the output remains [3, 7, 1, 2].
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The goal is to convert each integer in `nums` into its constituent digits and return them in the same order.
 
-To solve this problem, the approach is as follows:
-
-1. **Iterate over each element in the `nums` array**:
-   - For each integer in the array, the goal is to break the integer into its individual digits.
-   - The digits should be stored in a way that they are eventually appended in the order they appear in the number.
-
-2. **Extract digits from each number**:
-   - For any integer `x`, we can extract its digits using the modulo operation (`x % 10`) to get the least significant digit. Then we divide the number by 10 (`x /= 10`) to remove that digit.
-   - This process is repeated until the entire number has been decomposed into its digits.
-
-3. **Maintain the order of digits**:
-   - While extracting the digits, the digits are collected in reverse order (from least significant to most significant).
-   - After extracting all digits from a number, the digits need to be reversed to restore their original order.
-
-4. **Build the result array**:
-   - The digits from each number are added to the result array, preserving the order of appearance in the original input array.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code into its individual steps:
-
-#### Step 1: Define the Function
-
+### Initial Thoughts 💭
+- We need to handle each number separately, extract its digits, and concatenate them in the order of appearance.
+- The task can be accomplished by repeatedly dividing each number by 10 to get its digits in reverse order and then reversing them.
+{{< dots >}}
+### Edge Cases 🌐
+- The array `nums` will always have at least one element, as per the constraints.
+- The solution must handle arrays up to 1000 integers and each integer up to 10^5.
+- Single-digit integers in `nums` should be handled as-is.
+- Ensure the solution works efficiently for the upper limits of input size and integer value.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<int> separateDigits(vector<int>& nums) {
     vector<int> ans;
-```
-- The function `separateDigits` takes in a reference to a vector `nums` containing integers.
-- The vector `ans` will be used to store the digits of all the integers in the input array.
-
-#### Step 2: Loop Through Each Integer in `nums`
-
-```cpp
+    
     for(auto x: nums) {
         vector<int> tmp;
-```
-- We iterate over each integer `x` in the array `nums`.
-- A temporary vector `tmp` is used to store the digits of the current integer `x` as we extract them.
-
-#### Step 3: Extract Digits from Each Integer
-
-```cpp
         while(x) {
             tmp.push_back(x % 10);
             x /= 10;
         }
-```
-- The `while(x)` loop continues as long as `x` is not zero.
-- Inside the loop, we extract the least significant digit using `x % 10` and push it to the `tmp` vector.
-- We then reduce `x` by dividing it by 10 (`x /= 10`), effectively removing the least significant digit.
-
-#### Step 4: Reverse the Digits and Add Them to the Result
-
-```cpp
         while(!tmp.empty()) {
             ans.push_back(tmp.back());
             tmp.pop_back();
         }
     }
-```
-- After extracting all the digits of `x`, they are stored in reverse order (from least significant to most significant).
-- We then pop the digits from the back of the `tmp` vector and append them to the result vector `ans` to maintain the correct order.
-
-#### Step 5: Return the Result
-
-```cpp
     return ans;
 }
 ```
-- Finally, after processing all the integers in `nums`, the result vector `ans`, which contains the separated digits in the correct order, is returned.
 
-### Complexity
+This function 'separateDigits' takes a vector of integers 'nums' and separates each number's digits into individual elements of a new vector. It uses a helper vector 'tmp' to reverse the digits and ensures the digits of each number are appended in the correct order.
 
-#### Time Complexity:
-- **Iterating over each number in the input array `nums`**: The number of iterations is equal to the number of elements in the array, i.e., \( O(n) \), where `n` is the size of the `nums` array.
-- **Extracting digits from each number**: For each number `x`, we need to extract all its digits. The number of digits in `x` is \( O(d) \), where `d` is the number of digits in `x`. In the worst case, the time complexity for extracting digits from all numbers is proportional to the sum of the digits of all numbers in `nums`.
-- Therefore, the overall time complexity is \( O(n \cdot d) \), where `n` is the number of elements in `nums` and `d` is the average number of digits per element in `nums`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> separateDigits(vector<int>& nums) {
+	```
+	This is the function definition for 'separateDigits'. It accepts a vector of integers, 'nums', and will return a vector containing all the digits from the numbers in 'nums'.
 
-#### Space Complexity:
-- We are using two vectors: `ans` and `tmp`.
-- The space required for the result vector `ans` is proportional to the total number of digits in all numbers in `nums`. If the total number of digits is \( D \), the space complexity is \( O(D) \), where \( D \) is the sum of the digits of all elements in `nums`.
-- The `tmp` vector stores the digits of one number at a time, so the space complexity for `tmp` is proportional to the number of digits in the current number, which is \( O(d) \) at most for a single number.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	Here, a vector 'ans' is initialized to store the final result, which will contain the separated digits from all the numbers in the input vector 'nums'.
 
-Thus, the overall space complexity is \( O(D) \), where \( D \) is the total number of digits in the input array.
+3. **Loop Through Input**
+	```cpp
+	    for(auto x: nums) {
+	```
+	This is a for-loop that iterates through each number in the input vector 'nums'. The variable 'x' represents each individual number.
 
-### Conclusion
+4. **Temporary Vector Initialization**
+	```cpp
+	        vector<int> tmp;
+	```
+	For each number 'x', a temporary vector 'tmp' is initialized to store the digits of the current number in reverse order.
 
-This solution efficiently separates the digits of each integer in the array and maintains their order using a simple iterative approach. The key steps involve:
-1. Using the modulo operation to extract the digits of each integer.
-2. Reversing the extracted digits to preserve their original order.
-3. Storing the result in a new array.
+5. **Extract Digits**
+	```cpp
+	        while(x) {
+	```
+	This while-loop runs as long as 'x' is not zero. It extracts each digit from the number by using modulo 10 and stores it in 'tmp'.
 
-The algorithm runs in linear time relative to the total number of digits across all integers in the array, making it efficient for large input sizes. The space complexity is also proportional to the number of digits, as we are storing them in a result vector.
+6. **Push Back Digit**
+	```cpp
+	            tmp.push_back(x % 10);
+	```
+	This line extracts the last digit of 'x' using modulo 10 and adds it to the 'tmp' vector.
 
-This solution is optimal for the problem, providing a straightforward method to solve it with minimal complexity and maximum clarity.
+7. **Divide Number**
+	```cpp
+	            x /= 10;
+	```
+	This divides 'x' by 10, effectively removing the last digit from the number for the next iteration.
+
+8. **Reverse Digits to Final Vector**
+	```cpp
+	        while(!tmp.empty()) {
+	```
+	This while-loop runs as long as 'tmp' is not empty, effectively reversing the digits that were collected in 'tmp'.
+
+9. **Push Back Reversed Digits**
+	```cpp
+	            ans.push_back(tmp.back());
+	```
+	This line takes the last digit from 'tmp' (which is the first digit of the original number) and adds it to the 'ans' vector.
+
+10. **Pop Back Reversed Digits**
+	```cpp
+	            tmp.pop_back();
+	```
+	This removes the last digit from 'tmp' after it has been added to 'ans', preparing for the next digit.
+
+11. **Return Final Result**
+	```cpp
+	    return ans;
+	```
+	The function returns the 'ans' vector, which now contains all the digits from the numbers in 'nums', each digit separated in the correct order.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where `n` is the number of elements in `nums`.
+- **Average Case:** O(n * m), where `n` is the number of elements and `m` is the maximum number of digits in any number.
+- **Worst Case:** O(n * m), where `n` is the number of elements and `m` is the maximum number of digits in any number.
+
+The time complexity depends on the total number of digits across all numbers in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(n), where `n` is the number of elements in `nums`.
+- **Worst Case:** O(n * m), where `n` is the number of elements in `nums` and `m` is the maximum number of digits in any number.
+
+The space complexity is determined by the space required to store the digits of all numbers in `nums`.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/separate-the-digits-in-an-array/description/)
 

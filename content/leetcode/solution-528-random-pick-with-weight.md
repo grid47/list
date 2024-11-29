@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "oYjDXfo-mt0"
 youtube_upload_date="2020-05-22"
 youtube_thumbnail="https://i.ytimg.com/vi/oYjDXfo-mt0/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,119 +28,215 @@ youtube_thumbnail="https://i.ytimg.com/vi/oYjDXfo-mt0/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a 0-indexed array of positive integers w, where w[i] describes the weight of the ith index. You need to implement the function pickIndex() which randomly picks an index in the range [0, w.length - 1] (inclusive), and the probability of picking index i is w[i] / sum(w).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array w where each element represents a positive weight.
+- **Example:** `[2, 5]`
+- **Constraints:**
+	- 1 <= w.length <= 10^4
+	- 1 <= w[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-    vector<int> wc;
-    public:
-    Solution(vector<int>& w) {
-        int n = w.size();
-        for(int i = 1; i < n; i++)
-            w[i] += w[i - 1];
-        wc = w;
-    }
-    
-    int pickIndex() {
-        
-        int x = rand() % wc.back()+1;//[(wc.size() - 1)];        
-        int l = 0, r = wc.size() - 1;
-    
-        while(l < r) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a randomly selected index i, where the probability of selecting i is proportional to its weight w[i].
+- **Example:** `1`
+- **Constraints:**
+	- The result should be a valid index between 0 and w.length - 1.
 
-            int mid = l + (r - l) / 2;            
-            if(wc[mid] == x) return mid;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to implement pickIndex() in such a way that the probability of selecting each index is proportional to its weight.
 
-            if(wc[mid] < x) l = mid + 1;
-            else            r = mid;
-        
-        }
-        
-        return l;
-    }
-};
+- 1. Precompute the cumulative sum of weights in the array.
+- 2. Use a random number generator to pick a number in the range of 1 to the total sum of weights.
+- 3. Use binary search to find the corresponding index based on the generated random number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array w contains positive integers representing the weight of each index.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[2, 5]`  \
+  **Explanation:** The total weight is 7, so the probability of picking index 0 is 2/7 and index 1 is 5/7.
 
-/**
- * Your Solution object will be instantiated and called as such:
- * Solution* obj = new Solution(w);
- * int param_1 = obj->pickIndex();
- */
-{{< /highlight >}}
----
+- **Input:** `[1]`  \
+  **Explanation:** With only one element in the array, the only valid index is 0, so the result is always 0.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+The approach involves precomputing a cumulative sum of the weights and then using binary search to pick an index based on a random number.
 
-The task is to create a solution where each index of an input array `w` is chosen with a probability proportional to the value at that index. This requires building a mechanism to select indices according to weighted probabilities. Given an array of positive integers, we need a way to initialize a data structure that, when calling `pickIndex`, returns an index based on these weights.
-
-### Approach
-
-1. **Prefix Sum Array**:
-   - First, transform the input weights array `w` into a prefix sum array. In the prefix sum array, each element at index `i` will contain the sum of all weights from the start up to index `i`.
-   - This transformation allows each index in the prefix sum array to represent cumulative probability bounds for selection.
-
-2. **Random Selection Using Binary Search**:
-   - To pick an index with the appropriate weight, generate a random integer `x` within the range `[1, wc.back()]` where `wc.back()` represents the total sum of weights.
-   - Using binary search, locate the smallest index in the prefix sum array `wc` where `wc[i] >= x`. This index `i` represents the randomly selected index based on the weight.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Prefix Sum Array
-
+### Initial Thoughts 💭
+- We can treat the array w as a list of intervals where each interval corresponds to a range of cumulative weights.
+- By using binary search, we can efficiently find the correct index based on the cumulative sum.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one element, so no need to handle empty input.
+- The solution must efficiently handle large arrays with up to 10^4 elements.
+- If all elements in the array are the same, each index will have an equal chance of being picked.
+- The solution should handle arrays with weights as large as 10^5 efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
+vector<int> wc;
+public:
 Solution(vector<int>& w) {
     int n = w.size();
     for(int i = 1; i < n; i++)
         w[i] += w[i - 1];
     wc = w;
 }
-```
 
-- This constructor takes an input weight array `w` and modifies it to be a prefix sum array.
-- By iterating from the second element, we update each element to hold the cumulative sum up to that point. This helps in determining probability boundaries, making it efficient to select indices in proportion to their weights.
-
-#### Step 2: Generate a Random Index Based on Weights
-
-```cpp
 int pickIndex() {
-    int x = rand() % wc.back() + 1;
-    int l = 0, r = wc.size() - 1;
     
+    int x = rand() % wc.back()+1;//[(wc.size() - 1)];        
+    int l = 0, r = wc.size() - 1;
+
     while(l < r) {
-        int mid = l + (r - l) / 2;
+
+        int mid = l + (r - l) / 2;            
         if(wc[mid] == x) return mid;
+
         if(wc[mid] < x) l = mid + 1;
         else            r = mid;
+    
     }
+    
     return l;
 }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(w);
+ * int param_1 = obj->pickIndex();
 ```
 
-- **Generate Random Number**: `rand() % wc.back() + 1` produces a random number between `1` and the sum of all weights (`wc.back()`).
-- **Binary Search for Index**: Using binary search, we find the first index in `wc` where the value is greater than or equal to `x`.
-   - If `wc[mid]` equals `x`, `mid` is returned immediately.
-   - Otherwise, the search continues, adjusting `l` or `r` to find the smallest `mid` where `wc[mid]` is greater than or equal to `x`.
+This class implements a random weighted picker. It uses a prefix sum approach to convert the problem into a range query problem and employs binary search for efficient index selection. The `pickIndex` function picks an index based on the weighted probability distribution.
 
-#### Example:
-Suppose `w = [1, 3, 2]`. After constructing `wc`, it becomes `[1, 4, 6]`. A random value `x` within the range `[1, 6]` will land in intervals corresponding to the weights in `w`:
-- If `x` is in `[1, 1]`, index `0` is selected.
-- If `x` is in `[2, 4]`, index `1` is selected.
-- If `x` is in `[5, 6]`, index `2` is selected.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class that will contain the constructor for prefix sum calculation and the method for picking a random index based on the prefix sum.
 
-### Complexity
+2. **Member Variable Declaration**
+	```cpp
+	vector<int> wc;
+	```
+	Declares a vector `wc` which stores the prefix sum of the input weights. This allows for efficient range queries when picking a random index.
 
-- **Time Complexity**:
-   - **Constructor**: Building the prefix sum array has a time complexity of `O(n)`, where `n` is the size of `w`.
-   - **pickIndex**: Each call to `pickIndex` involves a binary search, which has a time complexity of `O(log n)`.
-- **Space Complexity**:
-   - **Constructor**: The constructor requires `O(n)` space to store the prefix sum array `wc`.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Specifies the start of the public section of the class, making the constructor and methods accessible to external code.
 
-### Conclusion
+4. **Constructor**
+	```cpp
+	Solution(vector<int>& w) {
+	```
+	Constructor for the `Solution` class. It takes a vector of weights `w` and computes the prefix sum, which is stored in the member variable `wc`.
 
-This approach is efficient and effective for solving the weighted random index selection problem:
-- The prefix sum array allows proportional selection by creating probability intervals.
-- Binary search provides a fast way to locate the correct index based on a random value, ensuring that each index is selected in proportion to its weight.
-  
-This solution is optimal in both time and space for handling random weighted selections efficiently.
+5. **Variable Initialization**
+	```cpp
+	    int n = w.size();
+	```
+	Initializes the variable `n` to store the size of the input vector `w`.
+
+6. **Prefix Sum Calculation**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	Iterates over the input array `w` to calculate the prefix sum. The prefix sum stores the cumulative sum of weights up to each index.
+
+7. **Prefix Sum Calculation**
+	```cpp
+	        w[i] += w[i - 1];
+	```
+	Updates the current element in `w` to be the cumulative sum of the previous element and the current element. This converts the `w` vector into a prefix sum.
+
+8. **Store Prefix Sum**
+	```cpp
+	    wc = w;
+	```
+	Stores the computed prefix sum in the member variable `wc` for use in the `pickIndex` method.
+
+9. **Method Definition**
+	```cpp
+	int pickIndex() {
+	```
+	Defines the `pickIndex` method, which picks a random index based on the weighted distribution stored in `wc`.
+
+10. **Random Index Generation**
+	```cpp
+	    int x = rand() % wc.back()+1;//[(wc.size() - 1)];
+	```
+	Generates a random number `x` between 1 and the total weight (the last element in `wc`). This random number will be used to select an index based on the weighted probabilities.
+
+11. **Variable Initialization**
+	```cpp
+	    int l = 0, r = wc.size() - 1;
+	```
+	Initializes two variables `l` and `r` to represent the left and right bounds for binary search on the prefix sum array `wc`.
+
+12. **Binary Search**
+	```cpp
+	    while(l < r) {
+	```
+	Starts a binary search loop to find the index in the `wc` array where the random number `x` would fit in the prefix sum.
+
+13. **Binary Search Calculation**
+	```cpp
+	        int mid = l + (r - l) / 2;
+	```
+	Calculates the midpoint `mid` of the current range `[l, r]` during binary search.
+
+14. **Binary Search Comparison**
+	```cpp
+	        if(wc[mid] == x) return mid;
+	```
+	If the prefix sum at the midpoint `mid` equals the random number `x`, it returns the index `mid` as the selected index.
+
+15. **Binary Search Adjustment**
+	```cpp
+	        if(wc[mid] < x) l = mid + 1;
+	```
+	If the value at `wc[mid]` is less than `x`, it means the random number `x` must lie in the right half of the array, so it adjusts the left bound `l`.
+
+16. **Binary Search Adjustment**
+	```cpp
+	        else            r = mid;
+	```
+	If the value at `wc[mid]` is greater than `x`, it means the random number `x` must lie in the left half of the array, so it adjusts the right bound `r`.
+
+17. **Return Result**
+	```cpp
+	    return l;
+	```
+	Returns the index `l`, which is the position where the random number `x` should be placed in the prefix sum array `wc`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), if the sum and the random number are precomputed and binary search is fast.
+- **Average Case:** O(log n), due to the binary search on the cumulative sum.
+- **Worst Case:** O(log n), since binary search is always performed on the cumulative sum array.
+
+The time complexity is logarithmic due to binary search.
+
+### Space Complexity 💾
+- **Best Case:** O(n), since we are storing the cumulative sum for later use.
+- **Worst Case:** O(n), due to the cumulative sum array.
+
+The space complexity is linear due to the storage of the cumulative sum.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/random-pick-with-weight/description/)
 

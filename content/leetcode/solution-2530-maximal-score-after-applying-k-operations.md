@@ -14,151 +14,172 @@ img_src = ""
 youtube = "nsOipmYbRlc"
 youtube_upload_date="2023-01-08"
 youtube_thumbnail="https://i.ytimg.com/vi/nsOipmYbRlc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of integers `nums` and an integer `k`. In each operation, you choose an index `i`, increase your score by `nums[i]`, and replace `nums[i]` with `ceil(nums[i] / 3)`. Apply exactly `k` operations and return the maximum score you can achieve.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` of integers and an integer `k`.
+- **Example:** `[10, 10, 10, 10, 10], 5`
+- **Constraints:**
+	- 1 <= nums.length, k <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maxKelements(vector<int>& nums, int k) {
-        priority_queue<int> pq;
-        for(int i = 0; i < nums.size(); i++) {
-            pq.push(nums[i]);
-        }
-        long long ans = 0;
-        while(k--) {
-            int tmp = pq.top();
-            cout << tmp << " ";
-            ans += tmp;
-            pq.pop();
-            pq.push(ceil(tmp/3.0));
-            
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the maximum score after applying exactly `k` operations.
+- **Example:** `50`
+- **Constraints:**
+	- The output will be an integer representing the maximum score achievable.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the score by carefully selecting the index `i` at each operation.
+
+- Initialize a max-heap (priority queue) with all elements of `nums`.
+- For each of the `k` operations, extract the maximum element, increase the score by this value, and replace it with `ceil(nums[i] / 3)`.
+- Repeat the operation for exactly `k` times and return the final score.
+{{< dots >}}
+### Problem Assumptions ✅
+- You must apply exactly `k` operations.
+- The `nums` array is modified after each operation.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[15, 10, 20, 5, 30], 5`  \
+  **Explanation:** In this example, after applying the operation to each element, the final score is 15 + 20 + 30 + 5 + 10 = 80.
+
+- **Input:** `[10, 20, 15, 10], 3`  \
+  **Explanation:** The optimal sequence of operations results in a final score of 45.
+
+- **Input:** `[1, 1, 1, 1, 1], 3`  \
+  **Explanation:** In this case, after 3 operations, the score is simply 3.
+
+{{< dots >}}
+## Approach 🚀
+To maximize the score, always choose the largest element for each operation, ensuring the most valuable elements are reduced in value last.
+
+### Initial Thoughts 💭
+- Using a max-heap (priority queue) helps efficiently find the largest element for each operation.
+- The solution needs to be efficient, as `nums.length` and `k` can be as large as 100,000.
+{{< dots >}}
+### Edge Cases 🌐
+- The array `nums` is always non-empty, as the length is at least 1.
+- Ensure that the solution works efficiently for large inputs (up to 100,000 elements and operations).
+- Handle cases where elements are small, such as 1, which will always be replaced by 1 after an operation.
+- The problem requires an efficient approach, such as using a max-heap to handle up to 100,000 operations efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+long long maxKelements(vector<int>& nums, int k) {
+    priority_queue<int> pq;
+    for(int i = 0; i < nums.size(); i++) {
+        pq.push(nums[i]);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to maximize the sum of the largest elements in the array `nums` after performing `k` operations. Each operation allows you to take the largest element from the array, add it to the result, and replace it with a value that is one-third of its current value (rounded up). You need to repeat this process `k` times, and at the end, you should return the total sum.
-
-### Approach
-
-To solve this problem, we need to repeatedly access and modify the largest element of the array. The best way to handle this in an efficient manner is by using a max heap (priority queue). The steps can be broken down as follows:
-
-1. **Initialize a Max Heap**: A max heap allows us to efficiently access the largest element in constant time. In C++, a `priority_queue` provides this functionality.
-
-2. **Iterate for `k` Steps**: For each iteration (up to `k` times), we:
-   - Extract the maximum element from the heap.
-   - Add this element to the running total sum.
-   - Replace the maximum element with one-third of its value (rounded up).
-   - Push the modified value back into the heap.
-
-3. **Return the Result**: After `k` operations, return the accumulated sum.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Initializing the Max Heap
-
-```cpp
-priority_queue<int> pq;
-```
-
-- We declare a priority queue `pq` to represent a max heap. In a max heap, the largest element is always at the top, making it easy to access and modify.
-  
-#### 2. Push All Elements into the Max Heap
-
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    pq.push(nums[i]);
+    long long ans = 0;
+    while(k--) {
+        int tmp = pq.top();
+        cout << tmp << " ";
+        ans += tmp;
+        pq.pop();
+        pq.push(ceil(tmp/3.0));
+        
+    }
+    return ans;
 }
 ```
 
-- We iterate over all elements of the input array `nums` and push each element into the max heap `pq`. This allows us to access the largest element efficiently during each operation.
+The 'maxKelements' function computes the sum of the 'k' largest elements from a vector 'nums', repeatedly modifying these elements by dividing each one by 3 after it is used.
 
-#### 3. Initialize the Running Total (`ans`)
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long maxKelements(vector<int>& nums, int k) {
+	```
+	This is the function definition for 'maxKelements', which accepts a vector of integers 'nums' and an integer 'k', returning a long long value.
 
-```cpp
-long long ans = 0;
-```
+2. **Variable Initialization**
+	```cpp
+	    priority_queue<int> pq;
+	```
+	A priority queue 'pq' is declared to store integers. This will be used to efficiently access the largest element at any time.
 
-- We initialize a variable `ans` to 0. This will be used to accumulate the sum of the largest elements chosen during the `k` operations.
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	A for loop is initiated to iterate over the vector 'nums' and push each element into the priority queue.
 
-#### 4. Perform `k` Operations
+4. **Queue Operation**
+	```cpp
+	        pq.push(nums[i]);
+	```
+	Each element from the 'nums' vector is pushed into the priority queue 'pq', which will automatically arrange the elements in descending order.
 
-```cpp
-while(k--) {
-    int tmp = pq.top();
-    cout << tmp << " ";
-    ans += tmp;
-    pq.pop();
-    pq.push(ceil(tmp / 3.0));
-}
-```
+5. **Variable Initialization**
+	```cpp
+	    long long ans = 0;
+	```
+	A variable 'ans' is initialized to 0 to store the cumulative sum of the largest elements selected from the queue.
 
-- We enter a `while` loop that runs `k` times. In each iteration:
-  
-  1. **Access the Largest Element**: We use `pq.top()` to get the largest element of the heap (i.e., the element at the top of the heap).
-  
-  2. **Add to the Total**: We add the value of this largest element (`tmp`) to the total sum `ans`.
-  
-  3. **Remove the Element from the Heap**: We use `pq.pop()` to remove the largest element from the heap.
-  
-  4. **Modify and Reinsert the Element**: We calculate the new value of the element by dividing it by 3 and rounding up using `ceil(tmp / 3.0)`. We then push this new value back into the heap using `pq.push()`.
+6. **Loop**
+	```cpp
+	    while(k--) {
+	```
+	A while loop runs 'k' times to extract the largest element, update it, and accumulate the result.
 
-  5. This process ensures that the largest element is always selected, added to the sum, and replaced with a smaller value for the next iteration.
+7. **Queue Operation**
+	```cpp
+	        int tmp = pq.top();
+	```
+	The top element of the priority queue (the largest element) is stored in the variable 'tmp'.
 
-#### 5. Return the Result
+8. **Accumulate Sum**
+	```cpp
+	        ans += tmp;
+	```
+	The value of 'tmp' is added to the cumulative sum 'ans'.
 
-```cpp
-return ans;
-```
+9. **Queue Operation**
+	```cpp
+	        pq.pop();
+	```
+	The top element (which has already been used) is removed from the priority queue.
 
-- After performing `k` operations, we return the accumulated sum `ans`.
+10. **Queue Operation**
+	```cpp
+	        pq.push(ceil(tmp/3.0));
+	```
+	The value 'tmp' is divided by 3 and rounded up, then pushed back into the priority queue to be used in subsequent iterations.
 
-### Complexity Analysis
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The final accumulated sum 'ans' is returned as the result of the function.
 
-#### Time Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k log n)
+- **Average Case:** O(k log n)
+- **Worst Case:** O(k log n)
 
-The time complexity is primarily determined by the operations on the priority queue:
-- **Inserting into the heap**: Each insertion operation takes \( O(\log n) \), where \( n \) is the number of elements in the heap.
-- **Removing from the heap**: Similarly, each `pop` operation takes \( O(\log n) \).
-- Since we perform `k` operations and each operation involves both a `pop` and a `push`, the overall time complexity is:
-  
-  \[
-  O(k \cdot \log n)
-  \]
-  
-  Where:
-  - \( k \) is the number of operations.
-  - \( n \) is the number of elements in the input array `nums`.
+Each heap operation (extract and insert) takes O(log n) time, and we perform `k` operations.
 
-#### Space Complexity
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-The space complexity is determined by the space required to store the heap:
-- The heap stores all the elements of the array, which takes \( O(n) \) space.
-  
-Thus, the space complexity is:
-  
-  \[
-  O(n)
-  \]
+The space complexity is O(n) due to the storage of the heap, where `n` is the length of the `nums` array.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently computes the maximum sum achievable by performing `k` operations on the array. Using a max heap ensures that we can always access and modify the largest element in logarithmic time. The overall time complexity of \( O(k \cdot \log n) \) makes this approach suitable for large input sizes, and the space complexity of \( O(n) \) is manageable.
-
-This approach works well because:
-- The max heap allows for efficient retrieval and modification of the largest element.
-- By performing the operation `k` times, we ensure the sum is maximized by selecting the largest available elements during each step.
-  
-The solution is optimal in both time and space, making it a robust approach to solving the problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximal-score-after-applying-k-operations/description/)
 

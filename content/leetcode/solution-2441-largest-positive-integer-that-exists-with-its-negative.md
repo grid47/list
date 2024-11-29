@@ -14,103 +14,140 @@ img_src = ""
 youtube = "Ec0T3so3m2Y"
 youtube_upload_date="2022-10-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Ec0T3so3m2Y/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums` where each element is non-zero. Your task is to find the largest positive integer `k` such that its negative counterpart `-k` also exists in the array. Return the largest such `k`. If no such integer exists, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a non-empty array `nums` of integers, where each integer is non-zero.
+- **Example:** `nums = [4, -2, -4, 5, 1]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- -1000 <= nums[i] <= 1000
+	- nums[i] != 0
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest integer `k` such that `-k` exists in the array. If no such `k` exists, return -1.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The returned result must be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the largest integer `k` such that `-k` exists in the array.
+
+- 1. Iterate through the array and store the presence of each number in a hash map.
+- 2. For each positive integer `k` in the array, check if its negative counterpart `-k` is also present.
+- 3. Track the largest valid `k` found during the iteration and return it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least one element.
+- There will be no zeroes in the input array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, -2, -4, 5, 1]`  \
+  **Explanation:** Here, the number `4` has its negative counterpart `-4` in the array. The number `2` has `-2`, but the largest such integer is `4`. Hence, the output is 4.
+
+- **Input:** `nums = [-6, -3, 5, 2]`  \
+  **Explanation:** There is no positive integer `k` such that `-k` is present in the array. Therefore, the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to efficiently check for each number if its negative counterpart exists in the array. Using a hash map allows us to check for presence in constant time.
+
+### Initial Thoughts 💭
+- We can use a hash set to track the numbers that we encounter in the array.
+- After processing all numbers, we can iterate through the positive numbers and check if their negatives exist.
+- A direct approach using a hash set will be both time-efficient and simple to implement.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one non-zero element in the input array, so empty arrays are not a concern.
+- The solution should be able to handle arrays with up to 1000 elements efficiently.
+- When the array contains both positive and negative numbers, the solution should correctly identify pairs such as `3` and `-3`.
+- The solution must check for both positive and negative values in the array.
+{{< dots >}}
+## Code 💻
+```cpp
 int findMaxK(vector<int>& nums) {
-    int arr[2001] = {}, res = -1;
-    for (int n : nums) {
-        if (arr[-n + 1000])
-            res = max(res, abs(n));
-        ++arr[n + 1000];        
-    }
-    return res;
-}
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given an integer array `nums` containing both positive and negative integers. Your task is to find the largest integer `k` such that both `k` and `-k` exist in the array. If no such integer exists, return `-1`. The output should be the largest `k` such that both `k` and `-k` are present in the array.
-
-For example:
-- Input: `[3, 2, -2, 5, -3]`
-- Output: `3`
-
-Here, both `3` and `-3` exist in the array, and the largest such integer is `3`.
-
-### Approach
-
-The key to solving this problem efficiently is to use an auxiliary array to track the presence of both positive and negative values. The approach can be broken down into the following steps:
-
-1. **Track the Presence of Elements**: Use an auxiliary array `arr` of size `2001` (for handling values from `-1000` to `1000`) to keep track of the occurrence of each element. By adding `1000` to the elements, we can store both positive and negative numbers as indices.
-  
-2. **Check for the Presence of Opposite Numbers**: For each number `n` in the array, check whether its opposite `-n` has already been encountered. If so, update the result to be the maximum of the current result and the absolute value of `n`.
-
-3. **Update the Result**: If both `n` and `-n` are found in the array, store the maximum of `res` and the absolute value of `n`. This ensures that we keep track of the largest number whose opposite is also present in the array.
-
-4. **Return the Final Result**: Once all elements are processed, return the largest number `k` such that both `k` and `-k` are present. If no such number is found, return `-1`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Auxiliary Array and Result Variable
-
-We initialize an array `arr` of size 2001 to track the presence of both positive and negative numbers. Additionally, we initialize `res` to `-1` to represent that no valid number has been found yet.
-
-```cpp
 int arr[2001] = {}, res = -1;
-```
-
-- The `arr` array is sized `2001` to account for the range of possible values from `-1000` to `1000`.
-- The index `arr[i + 1000]` will represent the number `i` in the array.
-
-#### Step 2: Iterate Through the Array
-
-We iterate over each element `n` in the input array `nums`. For each number, we first check if its opposite `-n` has already been encountered. If it has, we update `res` to the maximum of its current value and the absolute value of `n`.
-
-```cpp
 for (int n : nums) {
     if (arr[-n + 1000])
         res = max(res, abs(n));
-    ++arr[n + 1000];
+    ++arr[n + 1000];        
+}
+return res;
 }
 ```
 
-- `arr[-n + 1000]` checks if the opposite of `n` has been encountered. If it has, the value at that index is non-zero, indicating the presence of `-n`.
-- `res = max(res, abs(n))` updates the result to the maximum of the current result and the absolute value of `n`.
-- `++arr[n + 1000]` increments the count for `n`. This ensures that the opposite number `-n` can be checked in subsequent iterations.
+This code defines a function `findMaxK` that finds the largest integer `k` in the array `nums` such that both `k` and `-k` exist in the array. It uses an auxiliary array to keep track of the integers encountered during the iteration.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findMaxK(vector<int>& nums) {
+	```
+	Defining the function `findMaxK`, which takes a vector `nums` and returns an integer representing the largest `k` such that both `k` and `-k` are present in the array.
 
-After iterating through all elements in `nums`, the variable `res` will hold the largest number `k` such that both `k` and `-k` are present in the array. If no such number exists, `res` will remain `-1`, and we return it.
+2. **Variable Initialization**
+	```cpp
+	int arr[2001] = {}, res = -1;
+	```
+	Initializing an auxiliary array `arr` of size 2001 to track the occurrence of integers from -1000 to 1000 (mapped to indices 0 to 2000). `res` is initialized to -1, which will store the result.
 
-```cpp
-return res;
-```
+3. **Loop**
+	```cpp
+	for (int n : nums) {
+	```
+	Iterating through each integer `n` in the `nums` array.
 
-### Complexity
+4. **Condition Check**
+	```cpp
+	    if (arr[-n + 1000])
+	```
+	Checking if the corresponding negative integer `-n` has already appeared in the array by using the auxiliary array `arr`. The `-n + 1000` adjusts for negative indices.
 
-#### Time Complexity
+5. **Mathematical Operation**
+	```cpp
+	        res = max(res, abs(n));
+	```
+	If both `n` and `-n` are found, update the result `res` to be the maximum of the current `res` and the absolute value of `n`.
 
-The time complexity of this solution is **O(n)**, where `n` is the size of the array `nums`. This is because we iterate through the array once, and each iteration involves constant-time operations (checking the presence of `-n` and updating the result).
+6. **Array Update**
+	```cpp
+	    ++arr[n + 1000];
+	```
+	Incrementing the value at the index corresponding to `n` in the auxiliary array `arr` to mark that `n` has been encountered.
 
-#### Space Complexity
+7. **Return Statement**
+	```cpp
+	return res;
+	```
+	Returning the result `res`, which holds the largest integer `k` such that both `k` and `-k` are present in the array, or -1 if no such pair exists.
 
-The space complexity is **O(1)**, or constant space, since we are using a fixed-size auxiliary array `arr` of size `2001`, which does not depend on the input size. The array size is constant regardless of the input.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The time complexity is O(n), where n is the length of the array, since we perform constant-time operations for each element.
 
-This solution efficiently solves the problem by utilizing an auxiliary array to track the presence of both positive and negative values in the array. By iterating over the array only once and using the auxiliary array to check for the existence of opposites, we can determine the largest integer `k` such that both `k` and `-k` are present.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-The time complexity of **O(n)** ensures that the solution will work efficiently even for large inputs, and the space complexity of **O(1)** makes the solution space-efficient. This approach leverages constant-time lookups and updates to efficiently track the elements and their opposites, making it an optimal solution for this problem.
+The space complexity is O(n) due to the hash set used to store the elements of the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-positive-integer-that-exists-with-its-negative/description/)
 

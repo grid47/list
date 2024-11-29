@@ -14,72 +14,103 @@ img_src = ""
 youtube = "9aTO0sRtL-s"
 youtube_upload_date="2023-01-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/9aTO0sRtL-s/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two binary strings `s` and `target` of the same length. You can perform an operation on `s` any number of times to transform it into `target`. The operation replaces two distinct indices with logical operations. Return `true` if it's possible to make `s` equal to `target`, otherwise return `false`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two binary strings `s` and `target` with the same length `n`. Each string consists of only '0's and '1's.
+- **Example:** `s = '1101', target = '1011'`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- s and target consist of only '0' and '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool makeStringsEqual(string s, string target) {
-        
-        return (s.find('1') != string::npos) == (target.find('1') != string::npos);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if it is possible to transform `s` into `target` using the defined operation; otherwise return `false`.
+- **Example:** `true`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The task is to determine whether it's possible to make `s` equal to `target` by repeatedly applying the specified operation.
 
-The task is to determine whether two given binary strings `s` and `target` can be made equal. The only operation allowed is to toggle the characters in the string (i.e., flip `0` to `1` or `1` to `0`). We need to find out if it's possible to make the two strings equal after performing any number of toggle operations.
+- 1. Check if both strings `s` and `target` contain at least one '1'.
+- 2. If both strings contain '1' or both do not contain '1', return true.
+- 3. Otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings `s` and `target` will always have the same length.
+- Only binary strings (composed of '0' and '1') are considered.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = '1101', target = '1011'`  \
+  **Explanation:** In this case, the strings `s` and `target` can be transformed into one another using a series of operations, so the result is `true`.
 
-The approach will not involve directly transforming one string to the other but rather checking the feasibility of such a transformation based on the presence of `1`s in both strings. If both strings contain at least one `1`, the transformation can be achieved; otherwise, it cannot.
+- **Input:** `s = '1000', target = '1111'`  \
+  **Explanation:** It is not possible to transform `s` into `target` because no sequence of operations will change the '0' in `s` to '1' independently.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution can be determined by checking whether both `s` and `target` contain at least one '1'. If both do or both do not, it is possible to transform `s` into `target`.
 
-The problem boils down to checking whether both strings `s` and `target` contain at least one `1`. If both strings contain `1`, then any transformations (toggling) can be done to make them identical. If one string contains `1` and the other doesn't, or if neither string contains `1`, then making the strings equal is not possible.
-
-Key observations:
-1. The presence of a `1` in the string is the deciding factor. If both strings contain at least one `1`, it is possible to perform the toggling operations to make the strings identical.
-2. If one string contains a `1` but the other doesn't, or if both strings do not contain any `1`, then the strings can never be made identical.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Find the position of `1` in the strings
+### Initial Thoughts 💭
+- The key observation is that the operation preserves the presence of '1's in both strings.
+- If both `s` and `target` contain at least one '1', the transformation is possible.
+- We need to check if both strings have the same pattern in terms of the presence of '1's.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle cases where `s` and `target` are minimal in size, i.e., 2 characters long.
+- Ensure the solution can handle the upper constraint where `n` can be as large as 10^5.
+- Consider cases where the strings `s` and `target` are identical or completely different.
+- The solution needs to handle edge cases like strings with no '1' or where `s` and `target` differ significantly.
+{{< dots >}}
+## Code 💻
 ```cpp
-return (s.find('1') != string::npos) == (target.find('1') != string::npos);
+bool makeStringsEqual(string s, string target) {
+    
+    return (s.find('1') != string::npos) == (target.find('1') != string::npos);
+}
 ```
-- **`s.find('1') != string::npos`**: This checks whether the string `s` contains the character `'1'`. The `find` function returns the index of the first occurrence of `'1'` in the string, or `string::npos` if the character `'1'` is not found.
-- Similarly, **`target.find('1') != string::npos`** checks for the presence of `'1'` in the string `target`.
 
-#### Step 2: Comparison for both strings
-- The result of the `find('1') != string::npos` expression will be `true` if the string contains a `'1'`, and `false` otherwise.
-- The final comparison checks if both strings either contain a `'1'` or both do not contain a `'1'`. This is done by comparing the results of `s.find('1')` and `target.find('1')`:
-  - If both strings contain `'1'`, both comparisons will evaluate to `true`, meaning they are equal.
-  - If neither string contains `'1'`, both comparisons will evaluate to `false`, meaning they are still equal.
-  - If one string contains `'1'` but the other does not, the comparisons will evaluate to `false`, meaning the strings are not equal and cannot be made equal.
+This code defines a function 'makeStringsEqual' that checks if two strings, 's' and 'target', contain the same number of occurrences of the character '1'. It uses the 'find' function to check for the presence of '1' in both strings and compares their results.
 
-#### Step 3: Return the result
-- The comparison is done using the `==` operator, which returns `true` if both strings either contain a `'1'` or both do not. If this condition is met, the function returns `true` (indicating the strings can be made equal). Otherwise, it returns `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool makeStringsEqual(string s, string target) {
+	```
+	The function 'makeStringsEqual' is defined to take two strings, 's' and 'target', and return a boolean value indicating whether both strings have the same presence of the character '1'.
 
-### Complexity
+2. **Return Statement**
+	```cpp
+	    return (s.find('1') != string::npos) == (target.find('1') != string::npos);
+	```
+	The function uses the 'find' method to check if the character '1' exists in both strings. If both strings either contain or do not contain the character '1', the function returns 'true'; otherwise, it returns 'false'.
 
-#### Time Complexity:
-- **O(n)**: The `find` function searches the string for the character `'1'` in a linear scan. Since both `s.find('1')` and `target.find('1')` are called, the time complexity is proportional to the length of the strings, which is `n` in the worst case. Thus, the overall time complexity is O(n), where `n` is the length of the strings.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string.
+- **Average Case:** O(n), since checking if '1' exists in both strings is linear.
+- **Worst Case:** O(n), since checking for '1' in both strings is a linear operation.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because the solution only uses a small amount of additional space to store intermediate results (a boolean result from `find('1')`), and no additional data structures are created.
+The time complexity is O(n) since we need to scan both strings to check for '1'.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1), as no additional space is required in the solution.
+- **Worst Case:** O(1), since we do not need any extra space apart from the input.
 
-In this problem, we check whether both strings `s` and `target` either both contain a `1` or neither contain a `1`. This simple observation allows us to determine if the two strings can be made equal by performing toggle operations.
+The space complexity is O(1), as the solution operates in constant space.
 
-The approach is both efficient and simple, as it leverages the built-in string search function to determine the presence of `1`s in the strings. With a time complexity of **O(n)** and space complexity of **O(1)**, this solution is optimal for this problem.
+**Happy Coding! 🎉**
 
-Thus, the algorithm ensures that it efficiently handles cases where strings can or cannot be made equal based on their contents, without needing to perform any actual toggle operations on the strings themselves.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/description/)
 

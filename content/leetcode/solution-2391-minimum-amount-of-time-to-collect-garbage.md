@@ -14,139 +14,177 @@ img_src = ""
 youtube = "gpjKAXQpOMM"
 youtube_upload_date="2022-08-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gpjKAXQpOMM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of strings `garbage` where each string represents the garbage collected at a specific house. The characters 'M', 'P', and 'G' represent metal, paper, and glass garbage, respectively. The time to collect one unit of garbage is 1 minute. You are also given an array `travel` where each element represents the time required to travel between two consecutive houses. Three trucks are responsible for picking up different types of garbage and can only travel sequentially from house 0 to the end. Each truck only collects one type of garbage and each truck can only be used one at a time. Return the minimum time required to pick up all the garbage.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: `garbage` and `travel`. `garbage[i]` represents the garbage at house `i` and consists of the characters 'M', 'P', and 'G'. `travel[i]` is the time it takes to travel between house `i` and house `i + 1`.
+- **Example:** `garbage = ['G','P','GP','GG'], travel = [2,4,3]`
+- **Constraints:**
+	- 2 <= garbage.length <= 10^5
+	- garbage[i] consists of the characters 'M', 'P', 'G'.
+	- 1 <= garbage[i].length <= 10
+	- travel.length == garbage.length - 1
+	- 1 <= travel[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int garbageCollection(vector<string>& garbage, vector<int>& travel) {
-        int last[128] = {}, res = 0;        
-        for(int i = 0; i < garbage.size(); i++) {
-            res += garbage[i].size();
-            for(char c : garbage[i])
-                last[c] = i;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total minimum time needed to collect all the garbage. This includes both the time to pick up the garbage and the time spent traveling.
+- **Example:** `Output: 21`
+- **Constraints:**
 
-        for(int j = 1; j < travel.size(); j++)
-            travel[j] += travel[j - 1];
-        
-        for(int c : "PGM")
-        if(last[c])
-        res += travel[last[c] - 1];
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the total time by collecting the garbage for each truck and considering the travel time for each truck's route.
+
+- 1. Iterate through each house and for each type of garbage, track the last house where it appears.
+- 2. Calculate the time required to collect all the garbage of each type.
+- 3. Add the travel time for each garbage truck based on the last house where its garbage is located.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each truck must pick up all the garbage of its type.
+- There are always at least one type of garbage to collect.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `garbage = ['G','P','GP','GG'], travel = [2,4,3]`  \
+  **Explanation:** The metal truck collects no garbage, so we ignore it. The paper truck collects garbage at house 1 and 2, traveling a total of 6 minutes. The glass truck collects garbage from houses 0, 2, and 3, traveling a total of 13 minutes. The total time is 6 + 13 = 21 minutes.
+
+- **Input:** `garbage = ['MMM','PGM','GP'], travel = [3,10]`  \
+  **Explanation:** The metal truck collects garbage from houses 0, 1, and 2, traveling a total of 7 minutes. The paper truck collects garbage from houses 0, 1, and 2, traveling 15 minutes. The glass truck collects garbage from houses 0, 1, and 2, also traveling 15 minutes. The total time is 7 + 15 + 15 = 37 minutes.
+
+{{< dots >}}
+## Approach 🚀
+We need to simulate the garbage collection by considering both the time spent picking up garbage and the travel times. This involves finding the last occurrence of each type of garbage and calculating the total time accordingly.
+
+### Initial Thoughts 💭
+- Each truck only needs to collect its respective garbage, and the trucks travel in order.
+- We can start by calculating the total garbage collected for each type and then consider the travel time from house 0 to the last house with that type of garbage.
+{{< dots >}}
+### Edge Cases 🌐
+- If the `garbage` array is empty, the total time should be zero.
+- Ensure the solution can handle arrays with lengths close to 100,000 efficiently.
+- Handle cases where only one type of garbage is present in the entire city.
+- Make sure the solution works within the time limits for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int garbageCollection(vector<string>& garbage, vector<int>& travel) {
+    int last[128] = {}, res = 0;        
+    for(int i = 0; i < garbage.size(); i++) {
+        res += garbage[i].size();
+        for(char c : garbage[i])
+            last[c] = i;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-In this problem, you are tasked with determining the total time required for garbage collection in a city with several neighborhoods. You are given two inputs:
-
-1. **`garbage`**: A list of strings where each string represents the garbage in a particular neighborhood. Each character in the string corresponds to a type of garbage (`'P'` for paper, `'G'` for glass, and `'M'` for metal).
-2. **`travel`**: A list of integers where each integer represents the travel time between two consecutive neighborhoods.
-
-The goal is to calculate the total time it will take for the garbage trucks to collect all the garbage from all neighborhoods. Each garbage truck can only collect one type of garbage, and it needs to travel to the last neighborhood that contains any garbage of its type.
-
-You need to determine the total time required, which includes both the time taken to collect all the garbage and the travel time between neighborhoods for each truck.
-
-### Approach
-
-The main task is to compute the total time required for garbage collection, considering both the garbage collection time and the travel time. The solution can be broken down into the following steps:
-
-1. **Sum the Garbage Collection Times**: For each neighborhood, we sum the size of the garbage string to get the total amount of garbage that needs to be collected. This is simply the sum of the lengths of the strings in the `garbage` array.
-
-2. **Determine the Last Occurrence of Each Garbage Type**: For each type of garbage (`'P'`, `'G'`, and `'M'`), we need to know the last neighborhood that has this type of garbage. This will help us calculate the travel time for the respective garbage truck, as the truck will need to travel to the last neighborhood containing that type of garbage.
-
-3. **Calculate the Travel Time for Each Garbage Type**: After determining the last occurrence for each garbage type, we calculate the total travel time. The travel time for each garbage truck is the sum of the travel times between neighborhoods leading up to the last neighborhood containing that type of garbage.
-
-4. **Add the Garbage Collection and Travel Times**: Finally, we sum the garbage collection times for all neighborhoods and the travel times for each garbage truck to get the total time required for garbage collection.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-We start by initializing an array `last` to store the last occurrence of each garbage type. The array is large enough to accommodate all possible ASCII values (128), but we only use the indices corresponding to the characters `'P'`, `'G'`, and `'M'`. We also initialize `res` to 0, which will store the total time required.
-
-```cpp
-int last[128] = {}, res = 0;
-```
-
-#### Step 2: Sum the Garbage Collection Times
-
-Next, we loop through each neighborhood in the `garbage` array. For each neighborhood:
-- We add the length of the string (the number of garbage items) to `res`.
-- We then loop through each character in the string and update `last` to reflect the last occurrence of each garbage type.
-
-```cpp
-for(int i = 0; i < garbage.size(); i++) {
-    res += garbage[i].size();
-    for(char c : garbage[i])
-        last[c] = i;
+    for(int j = 1; j < travel.size(); j++)
+        travel[j] += travel[j - 1];
+    
+    for(int c : "PGM")
+    if(last[c])
+    res += travel[last[c] - 1];
+    return res;
 }
 ```
 
-In this loop:
-- The `res += garbage[i].size()` line adds the number of garbage items in the current neighborhood to the total collection time.
-- The nested loop `for(char c : garbage[i])` iterates through each character in the garbage string and updates the `last` array to indicate the most recent neighborhood where that type of garbage appears.
+The function `garbageCollection` calculates the total time required for garbage collection, taking into account the travel time and the amount of garbage to be collected for each type of garbage.
 
-#### Step 3: Calculate Cumulative Travel Times
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int garbageCollection(vector<string>& garbage, vector<int>& travel) {
+	```
+	The function `garbageCollection` takes two arguments: a vector `garbage` that represents the amount of garbage for each type and a vector `travel` representing the travel times between stops.
 
-Next, we calculate the cumulative travel times. The `travel` array represents the travel time between consecutive neighborhoods, but to determine the total travel time for each garbage truck, we need to compute the cumulative travel time for each neighborhood. This can be done by iterating through the `travel` array and adding each element to the previous element.
+2. **Variable Initialization**
+	```cpp
+	    int last[128] = {}, res = 0;        
+	```
+	Initialize an array `last` to store the last index for each garbage type and an integer `res` to store the total garbage collection time.
 
-```cpp
-for(int j = 1; j < travel.size(); j++)
-    travel[j] += travel[j - 1];
-```
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < garbage.size(); i++) {
+	```
+	Loop through the `garbage` vector to calculate the total amount of garbage and update the `last` array for each garbage type.
 
-This loop modifies the `travel` array such that each element `travel[j]` stores the total travel time from neighborhood 0 to neighborhood `j`.
+4. **Accumulating Garbage Size**
+	```cpp
+	        res += garbage[i].size();
+	```
+	Add the size of each garbage collection string to the total `res`, representing the total amount of garbage to be collected.
 
-#### Step 4: Calculate Travel Time for Each Garbage Type
+5. **Tracking Garbage Type**
+	```cpp
+	        for(char c : garbage[i])
+	```
+	For each character in the string representing a garbage collection, update the `last` array to store the last occurrence of each garbage type.
 
-Now that we have the cumulative travel times, we need to calculate the total travel time for each garbage truck. We do this for each type of garbage (`'P'`, `'G'`, and `'M'`), checking the last neighborhood where that garbage type appears. If there is a neighborhood containing that garbage type (i.e., `last[c]` is non-zero), we add the travel time to `res`.
+6. **Update Last Occurrence**
+	```cpp
+	            last[c] = i;
+	```
+	Update the `last` array to set the current index `i` as the last occurrence of the garbage type represented by character `c`.
 
-```cpp
-for(int c : "PGM")
-    if(last[c])
-        res += travel[last[c] - 1];
-```
+7. **Travel Time Accumulation**
+	```cpp
+	    for(int j = 1; j < travel.size(); j++)
+	```
+	Loop through the `travel` vector starting from the second element to accumulate the total travel time at each stop.
 
-In this loop:
-- We iterate over the characters `'P'`, `'G'`, and `'M'` using `for(int c : "PGM")`.
-- If the garbage truck for type `c` needs to travel (i.e., `last[c]` is not zero), we add the appropriate travel time to `res` using `res += travel[last[c] - 1]`.
+8. **Cumulative Travel Time**
+	```cpp
+	        travel[j] += travel[j - 1];
+	```
+	Accumulate travel times by adding the previous stop's travel time to the current stop's travel time.
 
-The `last[c] - 1` indicates the index of the last neighborhood containing that garbage type, and `travel[last[c] - 1]` gives us the total travel time to that neighborhood.
+9. **Garbage Collection for Each Type**
+	```cpp
+	    for(int c : "PGM")
+	```
+	Loop through the string 'PGM' to check for the last occurrence of each garbage type (P, G, M).
 
-#### Step 5: Return the Total Time
+10. **Check Last Occurrence**
+	```cpp
+	    if(last[c])
+	```
+	Check if there is a last occurrence for the garbage type `c`.
 
-Finally, we return the computed total time, `res`.
+11. **Add Travel Time**
+	```cpp
+	    res += travel[last[c] - 1];
+	```
+	If a last occurrence exists, add the corresponding travel time to the total collection time.
 
-```cpp
-return res;
-```
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the total time for garbage collection, which includes both the garbage sizes and travel times.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the `garbage` array.
+- **Average Case:** O(n), where n is the length of the `garbage` array.
+- **Worst Case:** O(n), where n is the length of the `garbage` array.
 
-#### Time Complexity
-The time complexity of this solution is **O(n + m)**, where `n` is the number of neighborhoods and `m` is the maximum number of garbage items across all neighborhoods.
+The algorithm processes each house and each travel time at most once, so the time complexity is O(n).
 
-- The first loop that calculates the total garbage collection time (`for(int i = 0; i < garbage.size(); i++)`) runs in **O(n)** time, where `n` is the number of neighborhoods.
-- The second loop that calculates the cumulative travel times (`for(int j = 1; j < travel.size(); j++)`) runs in **O(m)** time, where `m` is the number of neighborhoods minus 1 (since `travel` has one less element than `garbage`).
-- The final loop that calculates the total travel time for each garbage truck runs in **O(1)** time since there are only three garbage types (`'P'`, `'G'`, and `'M'`).
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the number of houses.
+- **Worst Case:** O(n), where n is the number of houses, due to the storage needed for the garbage types and travel times.
 
-Thus, the overall time complexity is **O(n + m)**.
+The space complexity is O(n) due to the storage required for the garbage array and travel array.
 
-#### Space Complexity
-The space complexity is **O(n)** because the algorithm uses additional space to store the `last` array and modifies the `travel` array in-place. The `last` array has a fixed size of 128, so its space usage is constant, and the space used for the `garbage` and `travel` arrays is proportional to the input size.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution efficiently computes the total time required for garbage collection by leveraging cumulative travel times and tracking the last occurrence of each type of garbage. The time complexity is linear in relation to the number of neighborhoods and garbage items, making it scalable for large inputs. By considering both garbage collection and travel times, this algorithm ensures the garbage trucks collect all the garbage efficiently.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "LzcSE7-m6vY"
 youtube_upload_date="2024-04-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/LzcSE7-m6vY/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,132 +28,180 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/LzcSE7-m6vY/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two integers `dividend` and `divisor`, divide `dividend` by `divisor` without using multiplication, division, or modulus operators. Truncate the result towards zero and return the quotient.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers `dividend` and `divisor`.
+- **Example:** `For example, `dividend = 15`, `divisor = 4`.`
+- **Constraints:**
+	- -2^31 <= dividend, divisor <= 2^31 - 1
+	- divisor != 0
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int divide(int dividend, int divisor) {
-        
-        if (dividend == INT_MIN && divisor == -1) return INT_MAX;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the quotient after dividing `dividend` by `divisor`. The result should be truncated toward zero.
+- **Example:** `For `dividend = 15`, `divisor = 4`, the output is `3`.`
+- **Constraints:**
+	- The result should be within the 32-bit signed integer range: [-2^31, 2^31 - 1].
 
-        long dvd = labs(dividend), dvs = labs(divisor);
-        int sgn = (dividend > 0) ^ (divisor > 0) ? -1: 1;
-        long ans = 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Divide the `dividend` by `divisor` without using multiplication, division, or modulus operators, and truncate the result toward zero.
 
-        while( dvd >= dvs ) {
-            long tmp = dvs, m = 1;
-            while(tmp << 1 <= dvd) {
-                tmp <<= 1;
-                m <<= 1;
-            }
-            dvd -= tmp;
-            ans += m;
+- Handle edge case where the dividend is INT_MIN and divisor is -1 to prevent overflow.
+- Use bit manipulation (shifting) to simulate the division process and determine the quotient.
+- Calculate the sign of the result based on the signs of the `dividend` and `divisor`.
+- Iterate, doubling the divisor (using left shift) to subtract from the dividend in large chunks to optimize the division process.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both the `dividend` and `divisor` are valid 32-bit integers.
+- The result must be truncated toward zero.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `dividend = 15`, `divisor = 4``  \
+  **Explanation:** The division of `15` by `4` results in `3.75`. Truncated toward zero, the result is `3`.
+
+- **Input:** `For `dividend = 10`, `divisor = -3``  \
+  **Explanation:** The division of `10` by `-3` results in `-3.33333...`. Truncated toward zero, the result is `-3`.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to simulate the division operation using bit shifts. This avoids using multiplication, division, or modulus operators and allows us to compute the quotient efficiently.
+
+### Initial Thoughts 💭
+- The division can be optimized using bit shifts, which effectively doubles the divisor in each iteration, enabling fast subtraction from the dividend.
+- We can use bitwise operations to speed up the division process and avoid expensive division or multiplication operations.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem will not encounter empty inputs as the `dividend` and `divisor` are always provided.
+- Ensure that the solution handles large values of `dividend` and `divisor` efficiently.
+- Handle the case where the `dividend` is `INT_MIN` and the `divisor` is `-1`, as it could lead to overflow.
+- Ensure that the result is always within the 32-bit signed integer range.
+{{< dots >}}
+## Code 💻
+```cpp
+int divide(int dividend, int divisor) {
+    
+    if (dividend == INT_MIN && divisor == -1) return INT_MAX;
+
+    long dvd = labs(dividend), dvs = labs(divisor);
+    int sgn = (dividend > 0) ^ (divisor > 0) ? -1: 1;
+    long ans = 0;
+
+    while( dvd >= dvs ) {
+        long tmp = dvs, m = 1;
+        while(tmp << 1 <= dvd) {
+            tmp <<= 1;
+            m <<= 1;
         }
-
-        return sgn * ans;
+        dvd -= tmp;
+        ans += m;
     }
-};
-{{< /highlight >}}
----
 
-### 🌟 **Dividing Two Integers Without Using the Division Operator**
+    return sgn * ans;
+}
+```
 
-This problem challenges us to divide two integers without directly using the division (`/`), multiplication (`*`), or modulus (`%`) operators. The goal is to calculate the quotient of the division using bit manipulation and repeated subtraction. Let’s break this down and make it digestible! 🚀
+This code implements integer division without using multiplication or division operators, handling edge cases and overflow.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int divide(int dividend, int divisor) {
+	```
+	This line declares a function named 'divide' that takes two integer arguments: 'dividend' and 'divisor', and returns an integer representing the result of integer division.
 
-#### 🧠 **Approach Overview**
+2. **Edge Case Handling**
+	```cpp
+	    if (dividend == INT_MIN && divisor == -1) return INT_MAX;
+	```
+	This line handles a special edge case: when the dividend is the minimum integer value and the divisor is -1. In this case, the result would overflow, so the function returns the maximum integer value.
 
-The key idea here is to **use bit shifts** to optimize the division process. Instead of performing repeated subtraction (which is slow), we can use shifts to find how many times the divisor can fit into the dividend efficiently. This method reduces the complexity of the problem significantly.
+3. **Variable Initialization**
+	```cpp
+	    long dvd = labs(dividend), dvs = labs(divisor);
+	```
+	This line converts both the dividend and divisor to long integers to avoid integer overflow during calculations. The `labs` function is used to get the absolute values of the operands.
 
----
+4. **Variable Initialization**
+	```cpp
+	    int sgn = (dividend > 0) ^ (divisor > 0) ? -1: 1;
+	```
+	This line calculates the sign of the result. The `^` operator is used for XOR operation to determine the sign based on the signs of the dividend and divisor.
 
-### **Steps to Solve the Problem:**
+5. **Variable Initialization**
+	```cpp
+	    long ans = 0;
+	```
+	This line initializes a variable 'ans' to store the calculated quotient.
 
-1. **Handle Edge Case for Overflow**  
-   When dividing `INT_MIN` by `-1`, the result would exceed the integer limit (`INT_MAX`), so we handle this case separately.
+6. **Loop Iteration**
+	```cpp
+	    while( dvd >= dvs ) {
+	```
+	This line starts a loop that continues as long as the dividend is greater than or equal to the divisor.
 
-2. **Convert to Positive Numbers**  
-   To simplify, we work with the absolute values of both the dividend and divisor. This way, we focus only on the magnitude, and the final result's sign can be calculated later.
+7. **Variable Initialization**
+	```cpp
+	        long tmp = dvs, m = 1;
+	```
+	This line initializes two temporary variables: 'tmp' to store the current divisor and 'm' to track the multiplier.
 
-3. **Bitwise Division**  
-   The idea is to **shift the divisor** left (which is equivalent to multiplying by powers of 2) until it exceeds the dividend. This helps us quickly figure out how many times the divisor can fit into the dividend.
+8. **Loop Iteration**
+	```cpp
+	        while(tmp << 1 <= dvd) {
+	```
+	This inner loop repeatedly doubles the 'tmp' and 'm' values as long as doubling 'tmp' does not exceed the dividend.
 
-4. **Sign Handling**  
-   Once the division is performed, the result's sign is determined based on whether the dividend and divisor have the same or different signs.
+9. **Bitwise Operations**
+	```cpp
+	            tmp <<= 1;
+	```
+	This line left-shifts 'tmp' by 1, effectively doubling its value.
 
----
+10. **Bitwise Operations**
+	```cpp
+	            m <<= 1;
+	```
+	This line left-shifts 'm' by 1, doubling its value as well.
 
-### 👇 **Breaking Down the Code:**
+11. **Mathematical Operations**
+	```cpp
+	        dvd -= tmp;
+	```
+	This line subtracts the doubled 'tmp' value from the dividend.
 
-#### 1. **Handle Special Overflow Case**
-   ```cpp
-   if (dividend == INT_MIN && divisor == -1) return INT_MAX;
-   ```
-   - This checks for overflow when dividing `INT_MIN` by `-1`, which would result in an integer overflow.
+12. **Result Update**
+	```cpp
+	        ans += m;
+	```
+	This line adds the doubled 'm' value to the 'ans', effectively adding the number of times the doubled divisor can be subtracted from the dividend.
 
-#### 2. **Prepare the Dividend and Divisor**
-   ```cpp
-   long dvd = labs(dividend), dvs = labs(divisor);
-   int sgn = (dividend > 0) ^ (divisor > 0) ? -1 : 1;
-   ```
-   - Convert both `dividend` and `divisor` to their absolute values using `labs()` (absolute value for long integers).
-   - Determine the sign (`sgn`) of the result by checking whether the signs of the `dividend` and `divisor` are different using XOR. If they are, the result is negative.
+13. **Return**
+	```cpp
+	    return sgn * ans;
+	```
+	After the loop, the 'ans' variable holds the quotient. The function returns the quotient multiplied by the sign determined earlier.
 
-#### 3. **Initialize the Answer**
-   ```cpp
-   long ans = 0;
-   ```
-   - `ans` will store the final quotient, initialized to `0`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-#### 4. **Bit Shifting for Division**
-   ```cpp
-   while (dvd >= dvs) {
-       long tmp = dvs, m = 1;
-       while (tmp << 1 <= dvd) {
-           tmp <<= 1;
-           m <<= 1;
-       }
-       dvd -= tmp;
-       ans += m;
-   }
-   ```
-   - **Outer loop**: Continues subtracting multiples of the divisor from the dividend.
-   - **Inner loop**: Doubles the divisor (`tmp <<= 1`) and tracks the power of two with `m <<= 1` to see how much of the divisor can be subtracted at once.
-   - Once the largest `tmp` that fits into `dvd` is found, subtract it from the dividend and add the corresponding power of two to `ans`.
+The time complexity is O(log n) since the divisor is doubled in each iteration, reducing the dividend quickly.
 
-#### 5. **Return the Final Answer with the Correct Sign**
-   ```cpp
-   return sgn * ans;
-   ```
-   - Finally, multiply the result by `sgn` to apply the correct sign, and return the quotient.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
----
+The space complexity is O(1) as we only use a constant amount of space for variables.
 
-### ⏳ **Complexity Breakdown**
+**Happy Coding! 🎉**
 
-- **Time Complexity: O(log n)**  
-  The algorithm's time complexity is logarithmic because the divisor is doubled at each step using bit shifting. The number of iterations is proportional to the logarithm of the dividend, so we achieve **O(log n)** time complexity.
-
-- **Space Complexity: O(1)**  
-  The space complexity is constant since the algorithm only uses a fixed amount of extra space (for variables like `dvd`, `dvs`, `sgn`, and `ans`), making it very space-efficient.
-
----
-
-### 💡 **Key Insights**
-
-- **Efficient Division Using Bit Shifting**: By shifting the divisor left, we can quickly determine how many times the divisor fits into the dividend, drastically reducing the number of operations needed compared to repeated subtraction. 🔧
-- **Handling Overflow**: Special handling for the case where dividing `INT_MIN` by `-1` avoids overflow and ensures the correct result. 🌟
-- **In-Place Calculation**: No extra data structures are used, and all modifications happen in-place, which is both memory-efficient and fast. 💨
-
----
-
-### 🚀 **Conclusion**
-
-This solution offers an optimal approach to dividing two integers **without using division**, multiplication, or modulus operators. By utilizing **bit shifting** and efficient subtraction, we achieve **O(log n)** time complexity and **O(1)** space complexity. This makes the algorithm both **time-efficient** and **space-efficient**, perfect for large inputs. 🙌
-
-Understanding how to leverage **bit manipulation** for such tasks is a powerful tool in your programming toolkit! 🛠
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-two-integers/description/)
 

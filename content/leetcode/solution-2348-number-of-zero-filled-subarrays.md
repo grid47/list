@@ -14,92 +14,141 @@ img_src = ""
 youtube = "1Y_QfTQmfKg"
 youtube_upload_date="2023-03-21"
 youtube_thumbnail="https://i.ytimg.com/vi/1Y_QfTQmfKg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums`. Your task is to determine the total number of subarrays that consist entirely of zeroes.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array `nums` which contains integers. You need to count the subarrays filled with zeroes.
+- **Example:** `nums = [4, 0, 0, 3, 0, 0, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long zeroFilledSubarray(vector<int>& nums) {
-        long long res = 0;
-        for(int i = 0, j = 0; i < nums.size(); i++) {
-            if(nums[i] != 0)
-            j = i +1;
-            res += i + 1 - j;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the total number of subarrays filled with zeroes.
+- **Example:** `6`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To count the subarrays that consist entirely of zeroes.
+
+- Iterate through the array while keeping track of the count of consecutive zeroes.
+- For each group of consecutive zeroes, add the number of possible subarrays that can be formed from those zeroes.
+- Return the total count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will contain valid integers.
+- There may be multiple subarrays of zeroes in the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 0, 0, 3, 0, 0, 5]`  \
+  **Explanation:** There are 3 occurrences of `[0]`, 2 occurrences of `[0, 0]`, and 1 occurrence of `[0, 0, 0]`. Thus, the total is 6.
+
+- **Input:** `nums = [0, 0, 0, 5, 0, 0]`  \
+  **Explanation:** There are 5 occurrences of `[0]`, 3 occurrences of `[0, 0]`, and 1 occurrence of `[0, 0, 0]`. Thus, the total is 9.
+
+- **Input:** `nums = [1, 2, 3, 4, 5]`  \
+  **Explanation:** There are no subarrays of zeroes, so the result is 0.
+
+{{< dots >}}
+## Approach 🚀
+The problem is solved by iterating through the array and counting consecutive zeroes. The number of subarrays that can be formed from `k` consecutive zeroes is given by `k * (k + 1) / 2`.
+
+### Initial Thoughts 💭
+- We need to find contiguous blocks of zeroes.
+- Keep a counter for consecutive zeroes, and when a non-zero element is encountered, calculate the subarrays formed by the zeroes seen so far.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the array will always have at least one element.
+- The approach needs to handle arrays of up to 100,000 elements efficiently.
+- If all elements are non-zero, the answer should be 0.
+- The solution should handle both small and large arrays efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+long long zeroFilledSubarray(vector<int>& nums) {
+    long long res = 0;
+    for(int i = 0, j = 0; i < nums.size(); i++) {
+        if(nums[i] != 0)
+        j = i +1;
+        res += i + 1 - j;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given an array of integers `nums`, and we are tasked with finding the number of contiguous subarrays that are filled with zeros. A **subarray** is a sequence of consecutive elements in an array, and a **zero-filled subarray** is one in which every element is zero.
-
-The goal is to return the total number of these zero-filled subarrays in the given array.
-
-### Approach
-
-The main idea to solve this problem efficiently is by recognizing that any contiguous block of zeros can contribute multiple zero-filled subarrays. For example, a sequence of 3 consecutive zeros will have 6 zero-filled subarrays: `[0]`, `[0]`, `[0]`, `[0, 0]`, `[0, 0]`, `[0, 0, 0]`.
-
-#### Key Observations:
-- **Consecutive Zeros**: If there are `k` consecutive zeros in the array, the number of zero-filled subarrays that can be formed from these zeros is the sum of the first `k` integers. This sum is given by the formula `k * (k + 1) / 2`.
-- **Breaking Points**: Any non-zero number in the array serves as a break between potential zero-filled subarrays. When encountering a non-zero number, we reset the count of consecutive zeros.
-
-By maintaining a running count of consecutive zeros, we can calculate the number of zero-filled subarrays dynamically without needing to explicitly enumerate each subarray.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization**
-```cpp
-long long res = 0;
-```
-- We initialize a variable `res` to store the final result — the total number of zero-filled subarrays. The result is stored as a `long long` type to avoid overflow, as the number of subarrays can grow quickly.
-
-#### 2. **Loop Through the Array**
-```cpp
-for (int i = 0, j = 0; i < nums.size(); i++) {
-    if (nums[i] != 0) 
-        j = i + 1;
-    res += i + 1 - j;
+    return res;
 }
 ```
-- We loop through each element of the array using a variable `i`, where `i` is the index of the current element.
-- We use another variable `j` to track the index of the last non-zero element encountered. This allows us to determine the length of the current sequence of consecutive zeros.
-- Whenever we encounter a non-zero element (`nums[i] != 0`), we update `j` to `i + 1`, effectively marking the start of the next potential sequence of zeros.
 
-#### 3. **Counting Zero-filled Subarrays**
-```cpp
-res += i + 1 - j;
-```
-- For every position `i`, we calculate how many subarrays end at index `i` and are filled with zeros.
-- The formula `i + 1 - j` computes the number of zero-filled subarrays ending at `i`. This works because for a sequence of zeros ending at index `i`, the subarrays range from the previous break point `j` to the current index `i`.
-- We add this count to the running total `res`.
+This function calculates the number of subarrays filled with zeros in the given vector of integers. It uses a sliding window technique to count consecutive zeros.
 
-#### 4. **Return the Final Result**
-```cpp
-return res;
-```
-- After the loop finishes processing all elements, we return the result, which contains the total number of zero-filled subarrays.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long zeroFilledSubarray(vector<int>& nums) {
+	```
+	Defines the function `zeroFilledSubarray` which takes a vector of integers `nums` as input and returns a long long integer representing the number of zero-filled subarrays.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Initializes a variable `res` to store the result, which will hold the number of zero-filled subarrays.
 
-#### Time Complexity:
-- **O(n)**: The algorithm processes each element of the input array `nums` exactly once. In each iteration, the logic inside the loop runs in constant time. Hence, the time complexity is **O(n)**, where `n` is the length of the array.
+3. **For Loop**
+	```cpp
+	    for(int i = 0, j = 0; i < nums.size(); i++) {
+	```
+	This loop iterates through the vector `nums`. The variable `i` keeps track of the current index, and `j` marks the start of the zero-filled subarray.
 
-#### Space Complexity:
-- **O(1)**: The algorithm uses a constant amount of extra space since it only maintains a few variables (`res`, `i`, `j`). It doesn't use any additional data structures that scale with the size of the input, so the space complexity is **O(1)**.
+4. **Condition Check**
+	```cpp
+	        if(nums[i] != 0)
+	```
+	Checks if the current element `nums[i]` is non-zero. If true, it updates the position of `j` to start from the next element after the current non-zero element.
 
-### Conclusion
+5. **Update `j`**
+	```cpp
+	        j = i + 1;
+	```
+	If the current element is non-zero, sets `j` to the next index, which resets the potential subarray of zeros.
 
-This solution is efficient and works in linear time with constant space, making it ideal for large input sizes. The key idea is to dynamically track the length of consecutive zero sequences and count the zero-filled subarrays using a simple formula. This avoids the need for nested loops or explicitly constructing the subarrays, resulting in an optimized solution.
+6. **Update Result**
+	```cpp
+	        res += i + 1 - j;
+	```
+	Updates the result `res` by adding the number of consecutive zeros between indices `j` and `i`.
 
-By processing the array in a single pass and using a clever counting mechanism, we ensure that the solution is both time-efficient and space-efficient. This method is suitable for real-time applications where fast processing of large arrays is needed.
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total count of zero-filled subarrays.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution runs in linear time as we traverse the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, as we only use a few variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-zero-filled-subarrays/description/)
 

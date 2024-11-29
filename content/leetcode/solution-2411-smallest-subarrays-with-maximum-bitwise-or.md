@@ -14,144 +14,161 @@ img_src = ""
 youtube = "0xR5bFyo2QA"
 youtube_upload_date="2022-09-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/0xR5bFyo2QA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 0-indexed array of non-negative integers, 'nums', you need to find the length of the smallest subarray starting at each index that has the maximum possible bitwise OR. For each index 'i', find the minimum length subarray nums[i...j] such that the bitwise OR of this subarray equals the maximum OR value possible starting from index 'i'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array, 'nums', of non-negative integers.
+- **Example:** `nums = [3,1,2,5]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 0 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> smallestSubarrays(vector<int>& nums) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array where each element at index 'i' represents the size of the minimum sized subarray starting from index 'i' with the maximum bitwise OR.
+- **Example:** `Output: [3,2,2,1]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum length subarray starting at index 'i' whose OR is maximized among all subarrays starting at indices greater than or equal to 'i'.
+
+- 1. Initialize a result array with size 'n' where each element is initially set to 1.
+- 2. Track the last occurrence of each bit in the binary representation of the elements.
+- 3. Starting from the last element, calculate the bitwise OR for each subarray starting at the current index and update the answer accordingly.
+- 4. Use bitwise OR operation and last position tracking to efficiently compute the result for each index.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty, and all numbers are non-negative integers.
+- Subarrays must contain at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3,1,2,5]`  \
+  **Explanation:** For index 0, the maximum OR is 7. The shortest subarray starting at index 0 is [3, 1, 2], which has an OR of 7. For index 1, the OR is maximized by [1, 2], and for index 2, it is maximized by [2, 5]. Thus, the result is [3, 2, 2, 1].
+
+{{< dots >}}
+## Approach 🚀
+The solution uses a greedy approach with bitwise OR operations and last position tracking to minimize the subarray size.
+
+### Initial Thoughts 💭
+- Bitwise OR operations combine all set bits, and the maximum OR for a subarray will involve including all contributing bits.
+- The approach needs to track the last occurrence of set bits to determine the shortest subarray that gives the maximum OR.
+- Efficient handling of bitwise operations and subarray size computation will be key to solving the problem within the given constraints.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will not be empty as per the problem constraints.
+- The solution must efficiently handle large inputs (up to 100,000 elements) by using a linear time complexity approach.
+- If all elements in the array are the same, the result will be the same length for each index.
+- Handling large numbers efficiently, as bitwise operations should be performed on integers within the range 0 to 10^9.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> smallestSubarrays(vector<int>& nums) {
+    
+    int n = nums.size();
+    
+    vector<int> ans(n, 1), last(30, 0);
+    
+    
+    for(int i = n - 1; i >= 0; i--) {
         
-        int n = nums.size();
         
-        vector<int> ans(n, 1), last(30, 0);
-        
-        
-        for(int i = n - 1; i >= 0; i--) {
+        for(int j = 0; j < 30; j++) {
             
-            
-            for(int j = 0; j < 30; j++) {
-                
-                if(nums[i] & (1 << j)) {
-                    last[j] = i;
-                }
-                
-                ans[i] = max(ans[i], last[j] - i + 1);
+            if(nums[i] & (1 << j)) {
+                last[j] = i;
             }
+            
+            ans[i] = max(ans[i], last[j] - i + 1);
         }
-        
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an array `nums` of size `n`, the task is to find the smallest subarray that contains all the bits of each element of the array. For each element `nums[i]`, we need to find the length of the smallest subarray that contains all the set bits of `nums[i]`. The challenge is to solve this efficiently.
-
-### Approach
-
-The problem requires us to find the smallest subarray for each element of the array such that the subarray contains all the bits that are set in the binary representation of the number. To solve this problem efficiently, we can use bitwise operations combined with a dynamic programming approach.
-
-Here's the breakdown of the approach:
-
-1. **Bitwise Operations**:
-    - Each integer can be represented as a sequence of bits (0s and 1s). The idea is to track the position of the most recent occurrence of each bit (from the least significant bit to the most significant bit) as we process the array from right to left.
-    - The challenge is to keep track of the smallest subarray that contains all the set bits of each number. We can do this by checking the most recent occurrences of the bits for each number.
-
-2. **Tracking the Last Occurrence of Each Bit**:
-    - We maintain an array `last` of size 30, which tracks the most recent index where each bit (from the 0th to the 29th bit) was set.
-    - For each number `nums[i]`, we check the positions of all bits that are set in the number and update the `last` array accordingly.
-
-3. **Dynamic Programming Approach**:
-    - The idea is to iteratively compute the smallest subarray for each index `i` by considering all the set bits in `nums[i]` and the last seen positions of those bits.
-    - For each bit in the current number, we compute the distance between the current index `i` and the last seen position of that bit. The answer for `nums[i]` will be the maximum of these distances plus one (since we want the length of the subarray).
-
-4. **Final Answer**:
-    - For each index `i`, the length of the smallest subarray that contains all the set bits of `nums[i]` is stored in the `ans` array. Finally, we return the `ans` array as the result.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Initialization
-
-```cpp
-int n = nums.size();
-vector<int> ans(n, 1), last(30, 0);
-```
-
-- `n` stores the size of the input array `nums`.
-- `ans` is a vector that will store the answer for each index. Initially, we assume that the smallest subarray for each element is of length 1.
-- `last` is a vector of size 30 (as we are dealing with integers with up to 30 bits) to store the last seen index for each bit.
-
-#### 2. Loop Over the Array from Right to Left
-
-```cpp
-for(int i = n - 1; i >= 0; i--) {
-    for(int j = 0; j < 30; j++) {
-```
-
-- We loop over the array from right to left (starting from the last index). This allows us to efficiently compute the smallest subarray that contains all the set bits for each element.
-- For each element `nums[i]`, we need to check each of the 30 possible bits (0 through 29).
-
-#### 3. Update the `last` Array for Each Bit
-
-```cpp
-if(nums[i] & (1 << j)) {
-    last[j] = i;
+    
+    return ans;
 }
 ```
 
-- `nums[i] & (1 << j)` checks whether the `j`-th bit of `nums[i]` is set (1). If it is set, we update the `last` array to store the current index `i` as the most recent index where this bit was set.
+This function calculates the smallest subarrays that contain all set bits (1s) for each element in the given array.
 
-#### 4. Compute the Length of the Smallest Subarray
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> smallestSubarrays(vector<int>& nums) {
+	```
+	Function declaration to find the smallest subarray for each element of the input array 'nums'.
 
-```cpp
-ans[i] = max(ans[i], last[j] - i + 1);
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializing 'n' as the size of the input array 'nums'.
 
-- After updating the `last` array for the current bit, we compute the length of the smallest subarray for `nums[i]`. For each bit `j`, the smallest subarray that contains this bit will have a length equal to `last[j] - i + 1` (the distance between the current index `i` and the last seen index of this bit).
-- We take the maximum of all such distances to ensure that the subarray contains all the bits.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> ans(n, 1), last(30, 0);
+	```
+	Declaring and initializing 'ans' to store the answer for each element and 'last' to keep track of the last index of a set bit.
 
-#### 5. Return the Result
+4. **Loop**
+	```cpp
+	    for(int i = n - 1; i >= 0; i--) {
+	```
+	Starting the loop from the last element of the array and iterating backwards.
 
-```cpp
-return ans;
-```
+5. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < 30; j++) {
+	```
+	Inner loop iterating over the possible bit positions (0-29).
 
-- Once the loop finishes, the `ans` array will contain the smallest subarray lengths for each element in the input array. We return the `ans` array as the result.
+6. **Condition Check**
+	```cpp
+	            if(nums[i] & (1 << j)) {
+	```
+	Checking if the j-th bit is set (1) in the current number 'nums[i]'.
 
-### Complexity
+7. **Update**
+	```cpp
+	                last[j] = i;
+	```
+	Updating the 'last' array to store the current index for the j-th set bit.
 
-#### Time Complexity:
+8. **Update**
+	```cpp
+	            ans[i] = max(ans[i], last[j] - i + 1);
+	```
+	Updating the 'ans' array to hold the size of the smallest subarray that includes the current set bit.
 
-- We loop over each element of the input array `nums`, and for each element, we check each of the 30 bits. Hence, the total time complexity is:
-  
-  \[
-  O(n \times 30) = O(n)
-  \]
-  
-  where `n` is the size of the array `nums`. Since the number of bits is constant (30), it does not affect the overall time complexity.
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returning the final array 'ans' which contains the size of the smallest subarray for each element.
 
-#### Space Complexity:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the size of the input array.
+- **Average Case:** O(n), since each element is processed once.
+- **Worst Case:** O(n), the worst case is still linear due to the single pass through the array and constant time bitwise operations.
 
-- The space complexity is determined by the two arrays:
-  - `ans`: This array stores the smallest subarray lengths for each element, which takes \(O(n)\) space.
-  - `last`: This array stores the last seen index for each of the 30 bits, which takes \(O(30) = O(1)\) space.
-  
-Thus, the space complexity is:
+The approach runs in linear time, processing each element once and performing constant-time bitwise operations.
 
-\[
-O(n)
-\]
+### Space Complexity 💾
+- **Best Case:** O(n), the space complexity remains linear in all cases.
+- **Worst Case:** O(n), for the result array and last occurrence tracking arrays.
 
-### Conclusion
+The space complexity is linear, requiring space for the result array and bitwise tracking arrays.
 
-The solution efficiently computes the smallest subarray that contains all the set bits of each element in the array by leveraging bitwise operations and dynamic programming. The time complexity of \(O(n)\) and space complexity of \(O(n)\) make this approach suitable for large input sizes. By processing the array from right to left and tracking the most recent occurrences of each bit, we can ensure that the smallest subarray is computed efficiently for each element.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/description/)
 

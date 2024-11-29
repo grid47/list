@@ -14,139 +14,199 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, s and goal, consisting of lowercase letters. Your task is to determine whether you can swap exactly two characters in s so that the resulting string matches goal. If this is possible, return true, otherwise return false. The swap is defined as selecting two different indices i and j, and swapping the characters at those positions in s.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings, s and goal, both consisting of lowercase letters.
+- **Example:** `Input: s = "cd", goal = "dc"`
+- **Constraints:**
+	- 1 <= s.length, goal.length <= 2 * 10^4
+	- s and goal consist of lowercase letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool buddyStrings(string s, string goal) {
-        if(s.size() != goal.size()) return false;
-        int cnt = 0, fst = -1, scd = -1, cl = 0, fg = 0, t = 0;
-        for(int i = 0; i < s.size(); i++) {
-            if(s[i] != goal[i]) {
-                cnt++;
-                if(fst == -1) fst = i;
-                else if(scd == -1) scd = i;
-            }
-            if((fg >> (s[i] - 'a')) & 1) t = 1;
-            fg |= (1 << (s[i] - 'a'));
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to swap two characters in s such that the string becomes equal to goal. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if a valid swap exists such that s becomes goal.
+
+- Step 1: If the lengths of s and goal are different, return false.
+- Step 2: Count how many positions differ between s and goal. If more than two positions differ, return false.
+- Step 3: If there are exactly two positions where s and goal differ, check if swapping these two characters will make the strings equal.
+- Step 4: If the strings are already identical, check if any character repeats in s, as swapping identical characters will not change the string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings s and goal will always contain lowercase English letters.
+- The input strings will always be of valid lengths and contain only alphabetic characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "xy", goal = "yx"`  \
+  **Explanation:** In this example, we can swap the characters at indices 0 and 1 in s to get 'yx', which matches goal.
+
+- **Input:** `Input: s = "xy", goal = "xy"`  \
+  **Explanation:** In this example, s is already equal to goal, so the answer is false because no swap is necessary.
+
+{{< dots >}}
+## Approach 🚀
+To determine if a valid swap is possible, we first compare the two strings and check the number of differing positions. Based on the result, we either check for a swap possibility or determine that a swap is not possible.
+
+### Initial Thoughts 💭
+- If the strings are already identical, no swap can be made to make them equal.
+- If there are more than two differences, it's impossible to match the strings with just one swap.
+- The solution involves counting the differing positions between s and goal, then checking if those positions can be swapped to match the two strings.
+{{< dots >}}
+### Edge Cases 🌐
+- N/A: The inputs will always be valid strings of at least length 1.
+- The solution must efficiently handle strings of length up to 2 * 10^4.
+- If the strings are already identical, no swap is needed, so return false.
+- If there are more than two differences between s and goal, return false.
+- The lengths of s and goal are guaranteed to be within the given range, so large inputs will be handled efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+bool buddyStrings(string s, string goal) {
+    if(s.size() != goal.size()) return false;
+    int cnt = 0, fst = -1, scd = -1, cl = 0, fg = 0, t = 0;
+    for(int i = 0; i < s.size(); i++) {
+        if(s[i] != goal[i]) {
+            cnt++;
+            if(fst == -1) fst = i;
+            else if(scd == -1) scd = i;
         }
-        
-        if(cnt == 0) {
-            if(t) return true;
-            return false;
-        }
-
-        return (cnt == 2 && (s[fst] == goal[scd]) && (s[scd] == goal[fst]));
+        if((fg >> (s[i] - 'a')) & 1) t = 1;
+        fg |= (1 << (s[i] - 'a'));
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to determine if two given strings, `s` and `goal`, can be made equal by swapping exactly **two characters** in the string `s`. In addition, we need to check if the two strings can already be considered "buddy strings" (i.e., strings that are identical after swapping two characters in `s`).
-
-**Buddy strings** are defined as two strings where:
-1. Both strings must have the same length.
-2. The strings must differ in exactly two positions.
-3. The two characters at these differing positions in `s` must be swapped to make `s` equal to `goal`.
-
-The task is to implement a function that returns `true` if `s` and `goal` are buddy strings, and `false` otherwise.
-
-### Approach
-
-To solve this problem, we can approach it step-by-step with the following key observations:
-
-1. **Length Check**: If the strings `s` and `goal` have different lengths, they cannot be buddy strings. This is the first quick check we can do.
-  
-2. **Counting Differing Characters**: We need to count how many positions `i` in `s` and `goal` have different characters. If there are:
-   - **0 differences**: The strings `s` and `goal` are already equal. In this case, we only need to check if there are any repeating characters in `s`, because if there is a repeat, we could swap them to form the same string.
-   - **2 differences**: Check if swapping the two differing characters in `s` would make `s` equal to `goal`.
-   - **Any other number of differences**: The strings cannot be made equal by a single swap, so return `false`.
-
-3. **Tracking the Positions of Differences**: When we find differing characters, we need to track their positions. This will allow us to check if swapping those two positions will result in two strings that are equal.
-
-4. **Handling Identical Strings**: If `s` and `goal` are already identical and there are repeated characters in `s`, we can swap those repeated characters, and they will still be considered buddy strings.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initial Checks and Setup
-
-```cpp
-if (s.size() != goal.size()) return false;
-```
-
-- We begin by checking if `s` and `goal` have the same length. If they don't, it's impossible for them to be buddy strings, and we immediately return `false`.
-
-Next, we initialize a few variables that will help us track the differences between the strings:
-```cpp
-int cnt = 0, fst = -1, scd = -1, cl = 0, fg = 0, t = 0;
-```
-- `cnt`: This will count the number of positions where `s` and `goal` differ.
-- `fst` and `scd`: These will store the indices of the first and second differing positions, respectively.
-- `cl`: This is used to count if there are any repeated characters in `s`.
-- `fg`: This bitmask helps track which characters have been seen in `s`.
-- `t`: This flag is used to indicate if there is a duplicate character in `s`.
-
-#### Step 2: Iterate Through the Strings
-
-```cpp
-for (int i = 0; i < s.size(); i++) {
-    if (s[i] != goal[i]) {
-        cnt++;
-        if (fst == -1) fst = i;
-        else if (scd == -1) scd = i;
+    
+    if(cnt == 0) {
+        if(t) return true;
+        return false;
     }
-    if ((fg >> (s[i] - 'a')) & 1) t = 1;
-    fg |= (1 << (s[i] - 'a'));
+
+    return (cnt == 2 && (s[fst] == goal[scd]) && (s[scd] == goal[fst]));
 }
 ```
 
-- We loop through the characters of `s` and `goal` to compare them.
-- If `s[i]` is not equal to `goal[i]`, we increment `cnt` and store the positions of the first and second differing characters in `fst` and `scd`.
-- We also update the `fg` bitmask to track the characters we've seen so far. If a character has already been seen, we set `t` to `1`, indicating that there are repeated characters in `s`.
+This function checks if two strings `s` and `goal` are buddy strings. It verifies if they can be made identical by swapping exactly two characters. The process includes checking string length, tracking mismatched characters, and validating swap conditions.
 
-#### Step 3: Handle Identical Strings
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool buddyStrings(string s, string goal) {
+	```
+	This line defines the function `buddyStrings`, which takes two strings `s` and `goal` and returns a boolean indicating whether they can be made equal by swapping exactly two characters.
 
-```cpp
-if (cnt == 0) {
-    if (t) return true;
-    return false;
-}
-```
+2. **Length Check**
+	```cpp
+	    if(s.size() != goal.size()) return false;
+	```
+	The function checks if the lengths of the two strings are equal. If they are not, the function returns `false` because they cannot be buddy strings.
 
-- If `cnt == 0`, the strings `s` and `goal` are already identical. In this case, we return `true` if there are repeated characters in `s` (since we could swap the repeated characters), and `false` otherwise.
+3. **Variable Initialization**
+	```cpp
+	    int cnt = 0, fst = -1, scd = -1, cl = 0, fg = 0, t = 0;
+	```
+	Several variables are initialized: `cnt` counts mismatches, `fst` and `scd` store the indices of the first and second mismatched characters, `cl` is unused, `fg` tracks character frequencies, and `t` is a flag for duplicate characters.
 
-#### Step 4: Check for Exactly Two Differences
+4. **Loop Over Strings**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	A loop starts to iterate over each character in the strings `s` and `goal`.
 
-```cpp
-return (cnt == 2 && (s[fst] == goal[scd]) && (s[scd] == goal[fst]));
-```
+5. **Mismatch Detection**
+	```cpp
+	        if(s[i] != goal[i]) {
+	```
+	This condition checks if the characters at the current index `i` in `s` and `goal` are different. If they are, it counts as a mismatch.
 
-- If there are exactly two differing positions (`cnt == 2`), we check if swapping the characters at these positions in `s` would make `s` equal to `goal`.
-- We do this by checking if `s[fst] == goal[scd]` and `s[scd] == goal[fst]`.
+6. **Increment Mismatch Count**
+	```cpp
+	            cnt++;
+	```
+	The `cnt` variable is incremented to keep track of the number of mismatched characters between `s` and `goal`.
 
-If this condition is satisfied, we return `true`, meaning the strings are buddy strings. Otherwise, we return `false`.
+7. **Track Mismatched Indices**
+	```cpp
+	            if(fst == -1) fst = i;
+	```
+	If the first mismatch is found (`fst == -1`), the index is stored in `fst`.
 
-### Complexity
+8. **Track Second Mismatch**
+	```cpp
+	            else if(scd == -1) scd = i;
+	```
+	If the second mismatch is found, its index is stored in `scd`.
 
-#### Time Complexity:
-- The time complexity is **O(n)**, where `n` is the length of the strings `s` and `goal`. We only loop through the strings once to compare their characters and to track differences.
+9. **Frequency Check**
+	```cpp
+	        if((fg >> (s[i] - 'a')) & 1) t = 1;
+	```
+	This condition checks if the character `s[i]` has already appeared in the string using bitwise operations. If it has, the flag `t` is set to 1.
 
-#### Space Complexity:
-- The space complexity is **O(1)**, as we only use a fixed amount of extra space (the variables `cnt`, `fst`, `scd`, etc.). No extra space proportional to the size of the input is required.
+10. **Update Frequency**
+	```cpp
+	        fg |= (1 << (s[i] - 'a'));
+	```
+	The bitwise operation updates the `fg` variable to record the occurrence of the character `s[i]`.
 
-### Conclusion
+11. **Mismatch Count Check**
+	```cpp
+	    if(cnt == 0) {
+	```
+	The function checks if there are no mismatches (`cnt == 0`). If there are no mismatches, it checks for duplicate characters.
 
-The solution efficiently checks whether two strings are buddy strings by following a simple, linear-time approach. By counting differences, tracking positions, and checking if a swap can make the strings identical, we determine whether a swap is possible. The approach also handles edge cases such as identical strings and repeated characters in `s`.
+12. **Duplicate Check**
+	```cpp
+	        if(t) return true;
+	```
+	If there are duplicate characters (indicated by `t`), the function returns `true` because the strings are already identical and can be considered buddy strings.
 
-This solution runs in **O(n)** time, making it optimal for even large input sizes, and it uses constant space, making it space-efficient.
+13. **Return False**
+	```cpp
+	        return false;
+	```
+	If there are no duplicates, the function returns `false` because the strings cannot be buddy strings.
+
+14. **End Mismatch Check**
+	```cpp
+	    }
+	```
+	End of the mismatch count check block.
+
+15. **Return Swap Condition Check**
+	```cpp
+	    return (cnt == 2 && (s[fst] == goal[scd]) && (s[scd] == goal[fst]));
+	```
+	The function checks if exactly two mismatches were found (`cnt == 2`), and if swapping the characters at the mismatched indices in `s` makes it equal to `goal`. If so, it returns `true`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the strings. This is the time required to compare the strings and check the number of differing positions.
+- **Average Case:** O(n), as the comparison of strings takes linear time.
+- **Worst Case:** O(n), where n is the length of the strings.
+
+
+
+### Space Complexity 💾
+- **Best Case:** O(1), since the space used does not depend on the size of the input strings.
+- **Worst Case:** O(1), as no extra space is required other than a few variables for comparison.
+
+
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/buddy-strings/description/)
 

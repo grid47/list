@@ -14,125 +14,172 @@ img_src = ""
 youtube = "mmTJskqxquI"
 youtube_upload_date="2023-02-18"
 youtube_thumbnail="https://i.ytimg.com/vi/mmTJskqxquI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer num, and you know that Bob will sneakily remap one of the 10 possible digits (0 to 9) to another digit. Your task is to return the difference between the maximum and minimum values Bob can make by remapping exactly one digit in num. If no change is made, the value of num remains the same.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a single integer num, which can be as large as 10^8.
+- **Example:** `For example, num = 13579.`
+- **Constraints:**
+	- 1 <= num <= 10^8
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minMaxDifference(int num) {
-        int min_v = num, max_v = num;
-        for (int i = 0; i < 10; ++i) {
-            int lo = 0, hi = 0, mul = 1;
-            for (int n = num; n; n /= 10) {
-                bool replace = n % 10 == i;
-                lo += (replace ? 0 : n % 10) * mul;
-                hi += (replace ? 9 : n % 10) * mul;
-                mul *= 10;
-            }
-            min_v = min(min_v, lo);
-            max_v = max(max_v, hi);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the difference between the maximum and minimum possible values that Bob can obtain after remapping one digit.
+- **Example:** `For example, the output for num = 13579 is 99850.`
+- **Constraints:**
+	- The number should be in its integer form and the difference between max and min should be returned.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the largest possible difference between the maximum and minimum values obtained after remapping a digit.
+
+- 1. For each digit in num, calculate the value after remapping it to every other possible digit (0 to 9).
+- 2. Track the minimum and maximum values obtained.
+- 3. Return the difference between the maximum and minimum values.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input num will always be an integer within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For num = 13579, the largest difference comes from remapping the digit 1 to 9 for maximum value and 9 to 0 for minimum value.`  \
+  **Explanation:** This leads to the maximum value of 99579 and minimum value of 13570, resulting in a difference of 99850.
+
+- **Input:** `For num = 81, no remapping gives a higher or lower value than 81, so the difference is 0.`  \
+  **Explanation:** The result is 81 - 81 = 0.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will iterate through each digit and simulate all possible remapping operations.
+
+### Initial Thoughts 💭
+- We need to compute both the maximum and minimum numbers Bob can create by changing a single digit.
+- By testing all digits for remapping and calculating the resulting number, we can identify the max-min difference.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the input is always a valid integer.
+- When num is a large integer (up to 10^8), the solution needs to handle the digits efficiently.
+- If num has all identical digits, remapping any digit to another won't change the number.
+- The input num will always be a valid positive integer.
+{{< dots >}}
+## Code 💻
+```cpp
+int minMaxDifference(int num) {
+    int min_v = num, max_v = num;
+    for (int i = 0; i < 10; ++i) {
+        int lo = 0, hi = 0, mul = 1;
+        for (int n = num; n; n /= 10) {
+            bool replace = n % 10 == i;
+            lo += (replace ? 0 : n % 10) * mul;
+            hi += (replace ? 9 : n % 10) * mul;
+            mul *= 10;
         }
-        return max_v - min_v;
+        min_v = min(min_v, lo);
+        max_v = max(max_v, hi);
     }
-};
-{{< /highlight >}}
----
+    return max_v - min_v;
+}
+```
 
-### Problem Statement
+This is the full implementation of the function that calculates the maximum difference between the largest and smallest numbers that can be formed by replacing one digit of the given number with a number from 0 to 9.
 
-Given an integer `num`, the task is to compute the maximum and minimum possible values by modifying digits in `num` as follows:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minMaxDifference(int num) {
+	```
+	Defines the function `minMaxDifference` which takes an integer `num` as input.
 
-1. Replace some or all of the occurrences of a particular digit with the digit `0` to get the minimum value.
-2. Replace some or all of the occurrences of a particular digit with the digit `9` to get the maximum value.
+2. **Variable Initialization**
+	```cpp
+	    int min_v = num, max_v = num;
+	```
+	Initializes two variables `min_v` and `max_v` to the value of `num`, which will track the minimum and maximum values during the calculations.
 
-Return the difference between the maximum and minimum values obtained by these transformations.
+3. **Looping**
+	```cpp
+	    for (int i = 0; i < 10; ++i) {
+	```
+	A loop that iterates over each digit (0 to 9) to simulate replacing digits of `num` with each possible value.
 
-### Approach
+4. **Variable Initialization**
+	```cpp
+	        int lo = 0, hi = 0, mul = 1;
+	```
+	Initializes variables `lo` and `hi` to track the lowest and highest possible numbers, respectively, and `mul` to control the place value during digit manipulation.
 
-1. **Initialize Min and Max Values**: Begin by setting `min_v` and `max_v` to `num`. These will store the minimum and maximum values generated by modifying `num`.
+5. **Looping and Modulo Operation**
+	```cpp
+	        for (int n = num; n; n /= 10) {
+	```
+	A nested loop that processes each digit of `num` from right to left, dividing by 10 after each iteration to isolate each digit.
 
-2. **Iterate Through Each Digit**: 
-   - Iterate over each digit from `0` to `9`. For each digit, calculate the modified versions of `num` by replacing occurrences of that digit with `0` (for minimum value) and `9` (for maximum value).
-   
-3. **Generate Modified Values**:
-   - For each digit `i`, decompose `num` by separating each digit in reverse order. This allows us to inspect each position of `num` individually.
-   - For each position, decide if the digit matches `i`. If so, replace it with `0` (for minimum calculation) or `9` (for maximum calculation). If it does not match, keep the digit as it is.
-   
-4. **Calculate the Minimum and Maximum Versions**:
-   - Use two variables, `lo` (for minimum) and `hi` (for maximum), to build the modified numbers.
-   - Multiply each digit by the current positional multiplier (`mul`, starting at `1` and increasing by a factor of `10` with each position).
-   - As you proceed, add the modified digits to `lo` and `hi` respectively.
+6. **Conditional Statement**
+	```cpp
+	            bool replace = n % 10 == i;
+	```
+	Checks if the current digit (`n % 10`) matches the digit `i` being considered for replacement in the outer loop.
 
-5. **Update Global Minimum and Maximum**:
-   - After each iteration over `i`, update `min_v` with the minimum value of `min_v` and `lo`, and `max_v` with the maximum value of `max_v` and `hi`.
-   - This ensures that `min_v` holds the smallest possible value and `max_v` holds the largest possible value across all digit transformations.
+7. **Mathematical Operations**
+	```cpp
+	            lo += (replace ? 0 : n % 10) * mul;
+	```
+	Calculates the lower number by replacing the matching digit with 0, and keeps the other digits unchanged by adding them to `lo`.
 
-6. **Return the Difference**: Finally, return the difference `max_v - min_v`, which represents the maximum possible range of values achievable by digit replacements in `num`.
+8. **Mathematical Operations**
+	```cpp
+	            hi += (replace ? 9 : n % 10) * mul;
+	```
+	Calculates the higher number by replacing the matching digit with 9, and keeps the other digits unchanged by adding them to `hi`.
 
-### Code Breakdown (Step by Step)
+9. **Mathematical Operations**
+	```cpp
+	            mul *= 10;
+	```
+	Multiplies `mul` by 10 to move to the next higher place value for the next digit.
 
-1. **Initialize Variables**:
-   ```cpp
-   int min_v = num, max_v = num;
-   ```
-   `min_v` and `max_v` are initialized to `num` to hold the smallest and largest possible values.
+10. **Mathematical Operations**
+	```cpp
+	        min_v = min(min_v, lo);
+	```
+	Updates `min_v` to store the smallest possible value between the current `min_v` and the new `lo` value.
 
-2. **Loop Through Each Digit**:
-   ```cpp
-   for (int i = 0; i < 10; ++i) { ... }
-   ```
-   Loop through digits `0` to `9`. For each digit, calculate potential minimum and maximum versions by replacing occurrences of this digit.
+11. **Mathematical Operations**
+	```cpp
+	        max_v = max(max_v, hi);
+	```
+	Updates `max_v` to store the largest possible value between the current `max_v` and the new `hi` value.
 
-3. **Initialize Variables for Modified Values**:
-   ```cpp
-   int lo = 0, hi = 0, mul = 1;
-   ```
-   `lo` and `hi` store the minimum and maximum modified values of `num` by replacing occurrences of `i`. `mul` keeps track of positional value, starting at `1` for the least significant digit and increasing by `10` times per position.
+12. **Return Statement**
+	```cpp
+	    return max_v - min_v;
+	```
+	Returns the difference between the maximum and minimum values calculated during the loops.
 
-4. **Extract and Replace Digits**:
-   ```cpp
-   for (int n = num; n; n /= 10) {
-       bool replace = n % 10 == i;
-       lo += (replace ? 0 : n % 10) * mul;
-       hi += (replace ? 9 : n % 10) * mul;
-       mul *= 10;
-   }
-   ```
-   - For each digit in `num` (processed from right to left), check if it matches `i`.
-   - If `replace` is true, replace with `0` in `lo` and `9` in `hi`. Otherwise, keep the original digit.
-   - Update `mul` by a factor of `10` after processing each digit.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(d), where d is the number of digits in num.
+- **Average Case:** O(d * 10), where d is the number of digits in num.
+- **Worst Case:** O(d * 10), where d is the number of digits in num.
 
-5. **Update `min_v` and `max_v`**:
-   ```cpp
-   min_v = min(min_v, lo);
-   max_v = max(max_v, hi);
-   ```
-   After calculating `lo` and `hi` for the current digit `i`, update `min_v` and `max_v` with the minimum and maximum values found so far.
+For each digit, we try remapping it to all other digits, so the time complexity is linear with respect to the number of digits.
 
-6. **Return the Difference**:
-   ```cpp
-   return max_v - min_v;
-   ```
-   The result is the difference between the largest and smallest possible values of `num`.
+### Space Complexity 💾
+- **Best Case:** O(d), where d is the number of digits in num.
+- **Worst Case:** O(d), where d is the number of digits in num.
 
-### Complexity Analysis
+We need space to store the digits of num during the remapping process.
 
-- **Time Complexity**: 
-  - The outer loop iterates over 10 digits (`0` through `9`).
-  - The inner loop iterates over each digit of `num` (up to \(O(\log_{10} N)\) iterations, where \(N\) is the value of `num`).
-  - Therefore, the time complexity is \(O(10 \cdot \log_{10} N)\), which is efficient for typical input sizes.
+**Happy Coding! 🎉**
 
-- **Space Complexity**: 
-  - The algorithm uses \(O(1)\) additional space for storing integers (`min_v`, `max_v`, `lo`, `hi`, and `mul`), so the space complexity is \(O(1)\).
-
-### Conclusion
-
-This solution effectively maximizes and minimizes `num` by selectively replacing digits with `0` or `9`, allowing us to compute the widest possible range from minimum to maximum values. By iterating through each digit, we ensure that the solution is both efficient and comprehensive in finding the optimal transformations.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/description/)
 

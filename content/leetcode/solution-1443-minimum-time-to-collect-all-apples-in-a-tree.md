@@ -14,171 +14,239 @@ img_src = ""
 youtube = "Xdt5Z583auM"
 youtube_upload_date="2023-01-11"
 youtube_thumbnail="https://i.ytimg.com/vi/Xdt5Z583auM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an undirected tree with `n` vertices numbered from `0` to `n-1`. Some vertices in this tree contain apples. Each edge in the tree requires `1 second` to traverse. Starting at vertex `0`, determine the minimum time required to collect all apples and return to vertex `0`. The tree structure is described by the array `edges`, where `edges[i] = [ai, bi]` indicates an edge between vertices `ai` and `bi`. Additionally, the array `hasApple` specifies whether a vertex contains an apple (`true`) or not (`false`).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The number of vertices `n`, the list of edges representing the tree, and the boolean array `hasApple`.
+- **Example:** `Input: n = 5, edges = [[0,1],[0,2],[1,3],[1,4]], hasApple = [false,true,true,false,false]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- edges.length == n - 1
+	- 0 <= ai, bi < n
+	- Each vertex is part of exactly one connected component.
+	- hasApple.length == n
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An integer representing the minimum time in seconds to collect all apples and return to vertex `0`.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The output must be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum traversal time to collect all apples and return to the starting point.
+
+- Construct a graph from the edges.
+- Use a Depth-First Search (DFS) to traverse the tree starting from vertex `0`.
+- For each subtree, calculate the time required to collect apples.
+- Avoid unnecessary traversal if no apples are present in a subtree.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is connected and acyclic.
+- The input tree has exactly `n-1` edges.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 6, edges = [[0,1],[0,2],[1,3],[2,4],[2,5]], hasApple = [false,false,true,false,true,true]`  \
+  **Explanation:** The optimal path involves visiting vertices 2, 4, and 5. The total time is `8` seconds.
+
+- **Input:** `Input: n = 4, edges = [[0,1],[0,2],[1,3]], hasApple = [false,false,false,false]`  \
+  **Explanation:** No apples exist, so the output is `0`.
+
+{{< dots >}}
+## Approach 🚀
+Use Depth-First Search (DFS) to traverse the tree and calculate the minimal traversal time.
+
+### Initial Thoughts 💭
+- Traversing unnecessary paths increases the time.
+- Each edge should only be traversed if it leads to an apple.
+- Using DFS ensures that we only traverse relevant subtrees containing apples.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: n = 1, edges = [], hasApple = [false] -> Output: 0
+- Input: n = 10^5 with a sparse distribution of apples -> Should run within time constraints.
+- Input: All vertices have apples -> Every edge will be traversed.
+- Ensure no cycles exist in the graph structure.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    map<int, vector<int>> gph;
-    map<int, int> visited;
-    vector<bool> hasApple;
+map<int, vector<int>> gph;
+map<int, int> visited;
+vector<bool> hasApple;
 public:
-    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
-        this->hasApple = hasApple;
-        for(auto x: edges) {
-            gph[x[0]].push_back(x[1]);
-            gph[x[1]].push_back(x[0]);
-        }
-        
-        return dfs(0, 0);
+int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
+    this->hasApple = hasApple;
+    for(auto x: edges) {
+        gph[x[0]].push_back(x[1]);
+        gph[x[1]].push_back(x[0]);
     }
     
-    int dfs(int mycost, int node) {
-        if(visited[node]) return 0;
-        visited[node] = true;
-        int childcost = 0;
-        for(int x: gph[node]) {
-            childcost += dfs(2, x);
-        }
-        if(childcost == 0 && hasApple[node] == false)
-            return 0;
-        
-        return childcost + mycost;
+    return dfs(0, 0);
+}
+
+int dfs(int mycost, int node) {
+    if(visited[node]) return 0;
+    visited[node] = true;
+    int childcost = 0;
+    for(int x: gph[node]) {
+        childcost += dfs(2, x);
     }
-};
-{{< /highlight >}}
----
+    if(childcost == 0 && hasApple[node] == false)
+        return 0;
+    
+    return childcost + mycost;
+}
+```
 
-### Problem Statement
+The `minTime` function calculates the minimum time required to collect all apples in a tree-like structure using depth-first search (DFS). It uses a graph to represent the tree and performs DFS from the root to accumulate the cost for each node that has an apple.
 
-The problem is to determine the minimum time required to collect all the apples from a tree-like structure represented by a graph. Each node in the graph represents a location (like a branch of a tree), and the edges represent paths between these locations. Some of these locations contain apples, and we want to find out how much time it would take to collect all apples by starting from the root node (node 0). The cost to traverse from one node to another is given as 2 units of time for each edge traversed.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class that will contain the logic for the problem, including the graph representation and the depth-first search function.
 
-### Approach
+2. **Graph Initialization**
+	```cpp
+	map<int, vector<int>> gph;
+	```
+	Declares a map `gph` to store the graph as an adjacency list, where each node points to a list of connected nodes (edges).
 
-To solve this problem, we will use Depth First Search (DFS) to traverse the graph. The steps involved in the solution are:
+3. **Visited Nodes**
+	```cpp
+	map<int, int> visited;
+	```
+	Declares a map `visited` to keep track of the nodes that have been visited during the DFS traversal to avoid reprocessing the same node.
 
-1. **Graph Construction**: Build an undirected graph using an adjacency list representation from the provided edges.
+4. **Apple Nodes**
+	```cpp
+	vector<bool> hasApple;
+	```
+	Declares a vector `hasApple` to track whether a node contains an apple, where each element in the vector corresponds to a node.
 
-2. **DFS Traversal**: Use DFS to traverse the graph starting from the root node (node 0). During traversal, accumulate the cost of moving through nodes. 
+5. **Access Control**
+	```cpp
+	public:
+	```
+	Marks the beginning of the public section of the class, where methods can be accessed by other parts of the program.
 
-3. **Apple Collection Logic**: For each node, check if:
-   - It has an apple.
-   - It has children nodes from which apples can be collected. If a node has no children and does not have an apple, then it does not contribute to the total cost.
+6. **minTime Method**
+	```cpp
+	int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
+	```
+	Defines the `minTime` method, which calculates the minimum time to collect all apples. It takes the number of nodes, a list of edges, and a list of boolean values representing nodes with apples.
 
-4. **Cost Calculation**: Keep track of the total cost incurred to collect all apples while ensuring we only count the cost of edges that lead to nodes with apples.
+7. **Apple Assignment**
+	```cpp
+	    this->hasApple = hasApple;
+	```
+	Assigns the `hasApple` parameter to the class's `hasApple` member variable, enabling access to the apple information for each node.
 
-### Code Breakdown (Step by Step)
+8. **Graph Construction**
+	```cpp
+	    for(auto x: edges) {
+	```
+	Iterates over each edge in the `edges` list to build the graph (adjacency list). Each edge connects two nodes, represented by `x[0]` and `x[1]`.
 
-Let’s break down the code provided step by step:
+9. **Graph Population**
+	```cpp
+	        gph[x[0]].push_back(x[1]);
+	```
+	Adds the second node `x[1]` to the adjacency list of the first node `x[0]`, establishing an undirected connection.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   ```
+10. **Graph Population**
+	```cpp
+	        gph[x[1]].push_back(x[0]);
+	```
+	Adds the first node `x[0]` to the adjacency list of the second node `x[1]`, completing the undirected connection between the two nodes.
 
-   - We define a class named `Solution` which contains the method to calculate the minimum time to collect apples.
+11. **DFS Call**
+	```cpp
+	    return dfs(0, 0);
+	```
+	Calls the `dfs` method starting from node 0 (the root) with an initial cost of 0 and returns the total time required to collect all apples.
 
-2. **Member Variables**:
-   ```cpp
-   map<int, vector<int>> gph;
-   map<int, int> visited;
-   vector<bool> hasApple;
-   ```
+12. **DFS Method**
+	```cpp
+	int dfs(int mycost, int node) {
+	```
+	Defines the `dfs` method, which performs a depth-first search to calculate the total time for collecting apples from a given node. It takes the current cost (`mycost`) and the node to explore (`node`).
 
-   - We declare a map `gph` to represent the graph as an adjacency list.
-   - The `visited` map keeps track of whether a node has been visited during the DFS traversal.
-   - The vector `hasApple` stores information about which nodes have apples.
+13. **Visited Check**
+	```cpp
+	    if(visited[node]) return 0;
+	```
+	Checks if the current node has already been visited. If it has, returns 0 to avoid redundant calculations.
 
-3. **Function Declaration**:
-   ```cpp
-   int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
-   ```
+14. **Mark as Visited**
+	```cpp
+	    visited[node] = true;
+	```
+	Marks the current node as visited to prevent revisiting it in future DFS calls.
 
-   - The function `minTime` takes three parameters: the number of nodes \(n\), the edges of the graph, and a boolean vector indicating the presence of apples at each node.
+15. **Child Cost Initialization**
+	```cpp
+	    int childcost = 0;
+	```
+	Initializes a variable `childcost` to accumulate the cost of traversing the child nodes.
 
-4. **Graph Initialization**:
-   ```cpp
-   this->hasApple = hasApple;
-   for(auto x: edges) {
-       gph[x[0]].push_back(x[1]);
-       gph[x[1]].push_back(x[0]);
-   }
-   ```
+16. **Child Node Exploration**
+	```cpp
+	    for(int x: gph[node]) {
+	```
+	Iterates over all the child nodes of the current node (`node`) in the graph.
 
-   - We initialize the `hasApple` member variable.
-   - We construct the graph from the `edges` list, where each edge connects two nodes bidirectionally.
+17. **Recursive DFS Call**
+	```cpp
+	        childcost += dfs(2, x);
+	```
+	Makes a recursive call to `dfs` for each child node, with a cost of 2 (the fixed cost to move to a child node) and accumulates the returned `childcost`.
 
-5. **Calling DFS**:
-   ```cpp
-   return dfs(0, 0);
-   ```
+18. **Apple Check**
+	```cpp
+	    if(childcost == 0 && hasApple[node] == false)
+	```
+	Checks if the current node has no child nodes contributing to the cost and does not contain an apple. If true, it returns 0 to indicate no further action is needed for this node.
 
-   - We initiate the DFS traversal from the root node (node 0) with an initial cost of 0.
+19. **Return Zero**
+	```cpp
+	        return 0;
+	```
+	Returns 0 when the current node has no apple and no child nodes contributing to the cost.
 
-6. **DFS Function**:
-   ```cpp
-   int dfs(int mycost, int node) {
-   ```
+20. **Return Total Cost**
+	```cpp
+	    return childcost + mycost;
+	```
+	Returns the total accumulated cost of traversing from the current node, including the cost of its child nodes and the fixed cost (`mycost`) for visiting the node.
 
-   - The `dfs` function is responsible for traversing the graph. It takes two parameters: the current cost to reach a node and the current node.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-7. **Base Case Check**:
-   ```cpp
-   if(visited[node]) return 0;
-   visited[node] = true;
-   ```
+Each vertex and edge is visited at most once during DFS.
 
-   - If the current node has already been visited, we return 0 to prevent counting the same node multiple times. Otherwise, we mark it as visited.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-8. **Child Cost Calculation**:
-   ```cpp
-   int childcost = 0;
-   for(int x: gph[node]) {
-       childcost += dfs(2, x);
-   }
-   ```
+The adjacency list and recursion stack require linear space.
 
-   - We initialize a variable `childcost` to track the total cost incurred to collect apples from child nodes.
-   - We iterate through all adjacent nodes of the current node and call `dfs` recursively, adding the result to `childcost`. Each traversal to a child node incurs a cost of 2.
+**Happy Coding! 🎉**
 
-9. **Condition for No Apples**:
-   ```cpp
-   if(childcost == 0 && hasApple[node] == false)
-       return 0;
-   ```
-
-   - If the cumulative cost from the child nodes is zero and the current node does not have an apple, we return 0, indicating that this node does not contribute to the total time.
-
-10. **Return Total Cost**:
-   ```cpp
-   return childcost + mycost;
-   ```
-
-   - Finally, we return the total cost, which is the sum of the child costs and the cost to reach the current node.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the number of nodes. Each node is visited once during the DFS traversal.
-
-- **Space Complexity**: The space complexity is also \(O(n)\) due to the space used by the adjacency list for the graph representation and the `visited` map.
-
-### Conclusion
-
-This solution effectively calculates the minimum time required to collect all apples from a tree represented as a graph using DFS. By constructing an adjacency list and traversing the graph while checking for apples, we can efficiently accumulate the total cost of traversal.
-
-#### Key Takeaways:
-
-1. **Graph Representation**: Using an adjacency list is a standard way to represent a graph, allowing efficient traversal of nodes.
-
-2. **Depth First Search**: DFS is a powerful algorithm for exploring graphs and can be adapted for various problems, including those involving costs and constraints.
-
-3. **Condition Checking**: Ensuring that we only count the cost of traversing to nodes with apples is crucial to solving the problem optimally.
-
-In summary, the code presented provides a clear and efficient solution to the problem of collecting apples from a graph, making use of fundamental graph traversal techniques and properties of DFS.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/description/)
 

@@ -14,149 +14,213 @@ img_src = ""
 youtube = "Zl-atHgL8QY"
 youtube_upload_date="2020-10-17"
 youtube_thumbnail="https://i.ytimg.com/vi/Zl-atHgL8QY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given n points on a 1-D plane, where each point i is at x = i. Your task is to find the number of ways to draw exactly k non-overlapping line segments that cover two or more points, such that the endpoints are integral. Return the result modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers n (2 <= n <= 1000) and k (1 <= k <= n - 1), where n represents the number of points on the 1-D plane and k represents the number of non-overlapping line segments to draw.
+- **Example:** `n = 4, k = 2`
+- **Constraints:**
+	- 2 <= n <= 1000
+	- 1 <= k <= n - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int n;
-    int mod = (int) 1e9 + 7;
-    int memo[1001][1001][2];
-    int dp(int idx, int seg, bool startHere) {
-        if(seg == 0) return 1;
-        if(idx == n) return 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of ways to draw k non-overlapping line segments, modulo 10^9 + 7.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The result should be returned modulo 10^9 + 7.
 
-        if(memo[idx][seg][startHere] != -1) return memo[idx][seg][startHere];
-        
-        int ans = dp(idx + 1, seg, startHere); // will start on next or continue the seg
-        if(startHere) {
-            ans = (ans + dp(idx + 1, seg, false)) % mod; // stared new line            
-        } else {
-            ans = (ans + dp(idx, seg - 1, true)) % mod; // end the line here            
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** You need to find the number of distinct ways to draw k non-overlapping line segments.
 
-        return memo[idx][seg][startHere] = ans;
+- Use dynamic programming to calculate the number of ways to draw the segments.
+- Memoize intermediate results to optimize the calculation.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always satisfy the given constraints.
+- You can use dynamic programming with memoization to solve the problem efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 4, k = 2`  \
+  **Explanation:** The 5 different ways to draw 2 non-overlapping line segments are: (0, 2) and (2, 3), (0, 1) and (1, 3), (0, 1) and (2, 3), (1, 2) and (2, 3), (0, 1) and (1, 2).
+
+- **Input:** `n = 3, k = 1`  \
+  **Explanation:** The 3 ways to draw 1 non-overlapping line segment are: (0, 1), (0, 2), (1, 2).
+
+{{< dots >}}
+## Approach 🚀
+We use dynamic programming to compute the number of ways to draw k non-overlapping line segments by considering each point and whether we can start or end a line segment at that point.
+
+### Initial Thoughts 💭
+- The problem can be solved using dynamic programming to track the number of ways to draw the segments.
+- The segments must be non-overlapping, and we have to take care of memoization to avoid recomputation.
+- We need a recursive function that calculates the number of ways to draw segments from the current position and memoizes the results for efficiency.
+{{< dots >}}
+### Edge Cases 🌐
+- n cannot be less than 2, so there is no need to handle empty inputs.
+- Ensure that the solution handles the upper limit where n is up to 1000.
+- The number of ways may become large, so remember to return the result modulo 10^9 + 7.
+- The value of k must always be between 1 and n-1, inclusive.
+{{< dots >}}
+## Code 💻
+```cpp
+int n;
+int mod = (int) 1e9 + 7;
+int memo[1001][1001][2];
+int dp(int idx, int seg, bool startHere) {
+    if(seg == 0) return 1;
+    if(idx == n) return 0;
+
+    if(memo[idx][seg][startHere] != -1) return memo[idx][seg][startHere];
+    
+    int ans = dp(idx + 1, seg, startHere); // will start on next or continue the seg
+    if(startHere) {
+        ans = (ans + dp(idx + 1, seg, false)) % mod; // stared new line            
+    } else {
+        ans = (ans + dp(idx, seg - 1, true)) % mod; // end the line here            
     }
 
-    int numberOfSets(int n, int k) {
-        this->n = n;
-        memset(memo, -1, sizeof(memo));
-        return dp(0, k, true);
-    }
-};
-{{< /highlight >}}
----
+    return memo[idx][seg][startHere] = ans;
+}
 
-### Problem Statement
-
-The problem is to find the number of ways to partition a sequence of \( n \) elements into exactly \( k \) non-empty contiguous segments. Each segment must contain at least one element, and the segments must be formed by splitting the sequence without altering the order of the elements.
-
-### Approach
-
-The solution uses a dynamic programming approach with memoization to efficiently compute the number of valid ways to create these segments. Here are the key components of the approach:
-
-1. **State Representation**: We define a recursive function \( dp(idx, seg, startHere) \) where:
-   - `idx`: The current index in the sequence.
-   - `seg`: The remaining number of segments that need to be formed.
-   - `startHere`: A boolean that indicates whether we are starting a new segment at the current index.
-
-2. **Base Cases**:
-   - If \( seg = 0 \): This means we have successfully formed all required segments, and we return 1 as a valid configuration.
-   - If \( idx = n \): This means we have reached the end of the sequence without forming enough segments, so we return 0.
-
-3. **Memoization**: To optimize performance, we use a memoization table `memo[idx][seg][startHere]` to cache results of subproblems. If a state has been computed before, we can return the cached result instead of recalculating it.
-
-4. **Recurrence Relation**:
-   - We can choose to either continue the current segment or start a new segment:
-     - **Continue the segment**: We move to the next index with the same number of segments.
-     - **Start a new segment**: If we are allowed to start a new segment (i.e., if `startHere` is true), we can choose to start a new segment at the next index.
-     - **End the current segment**: If we are not starting a new segment (i.e., if `startHere` is false), we can finish the current segment and decrease the segment count.
-
-5. **Modulo Operation**: Since the number of ways can be very large, we take results modulo \( 10^9 + 7 \).
-
-### Code Breakdown (Step by Step)
-
-Here's a detailed breakdown of the code:
-
-```cpp
-class Solution {
-public:
-    int n;
-    int mod = (int) 1e9 + 7;
-    int memo[1001][1001][2];
+int numberOfSets(int n, int k) {
+    this->n = n;
+    memset(memo, -1, sizeof(memo));
+    return dp(0, k, true);
+}
 ```
-- We define a class `Solution` which contains the member variables:
-  - `n`: the total number of elements.
-  - `mod`: the modulo value.
-  - `memo`: a 3D array for memoization, initialized to size [1001][1001][2] to cover all potential states.
 
-```cpp
-    int dp(int idx, int seg, bool startHere) {
-        if(seg == 0) return 1;
-        if(idx == n) return 0;
-```
-- The `dp` function is defined to take the current index, remaining segments, and a boolean indicating whether we can start a new segment.
-- The base cases are checked:
-  - If `seg` is zero, return 1 (successful partitioning).
-  - If `idx` equals `n`, return 0 (not enough segments formed).
+This code defines a function `numberOfSets` to calculate the number of ways to divide a sequence into exactly `k` non-empty segments using dynamic programming. The function `dp` recursively explores different ways to split the sequence, caching results in a memoization table to improve efficiency.
 
-```cpp
-        if(memo[idx][seg][startHere] != -1) return memo[idx][seg][startHere];
-```
-- Check if the result for the current state has already been computed and stored in `memo`. If so, return that value.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int n;
+	```
+	Declare a variable `n` to store the length of the sequence to be divided.
 
-```cpp
-        int ans = dp(idx + 1, seg, startHere); // will start on next or continue the seg
-```
-- Recursively call `dp` to continue the current segment by moving to the next index without changing the segment count.
+2. **Variable Initialization**
+	```cpp
+	int mod = (int) 1e9 + 7;
+	```
+	Initialize a variable `mod` with a large prime number, used for modulo operations to prevent overflow in the final result.
 
-```cpp
-        if(startHere) {
-            ans = (ans + dp(idx + 1, seg, false)) % mod; // stared new line            
-        } else {
-            ans = (ans + dp(idx, seg - 1, true)) % mod; // end the line here            
-        }
-```
-- If we are allowed to start a new segment (`startHere` is true), we also explore the possibility of starting a new segment at the next index.
-- If we are not starting a new segment (`startHere` is false), we explore the option of ending the current segment and decreasing the segment count.
+3. **Array Initialization**
+	```cpp
+	int memo[1001][1001][2];
+	```
+	Declare a 3D array `memo` for memoization, to store results of subproblems and avoid redundant calculations. It stores results for different states of the recursion.
 
-```cpp
-        return memo[idx][seg][startHere] = ans;
-    }
-```
-- Store the computed value in the memoization table and return it.
+4. **Function Definition**
+	```cpp
+	int dp(int idx, int seg, bool startHere) {
+	```
+	Define the recursive function `dp`, which takes the current index `idx`, the number of segments left `seg`, and a boolean `startHere` indicating whether we are starting a new segment.
 
-```cpp
-    int numberOfSets(int n, int k) {
-        this->n = n;
-        memset(memo, -1, sizeof(memo));
-        return dp(0, k, true);
-    }
-};
-```
-- The `numberOfSets` function initializes the total number of elements, resets the memoization table to -1, and calls the `dp` function starting from index 0 with `k` segments and the ability to start a new segment.
+5. **Base Case**
+	```cpp
+	    if(seg == 0) return 1;
+	```
+	Base case: if there are no more segments to divide, return 1, indicating one valid way to split the sequence.
 
-### Complexity
+6. **Base Case**
+	```cpp
+	    if(idx == n) return 0;
+	```
+	Base case: if the index has reached the end of the sequence (`n`), return 0, as there are no ways to further split the sequence.
 
-- **Time Complexity**: The time complexity is \( O(n \times k) \), where \( n \) is the number of elements and \( k \) is the number of segments. This is due to the recursive exploration of states combined with memoization.
-  
-- **Space Complexity**: The space complexity is \( O(n \times k) \) for the memoization table. The function also uses a constant amount of additional space for other variables.
+7. **Memoization Check**
+	```cpp
+	    if(memo[idx][seg][startHere] != -1) return memo[idx][seg][startHere];
+	```
+	Check if the result for the current subproblem is already computed and stored in the `memo` array. If so, return the cached result.
 
-### Conclusion
+8. **Recursive Call**
+	```cpp
+	    int ans = dp(idx + 1, seg, startHere); // will start on next or continue the seg
+	```
+	Recursively call `dp` to explore the option of either starting a new segment or continuing the current one, incrementing the index `idx`.
 
-This solution effectively utilizes dynamic programming to solve the problem of counting the number of ways to partition a sequence into segments. By breaking the problem down into smaller subproblems and leveraging memoization, we achieve an efficient and scalable solution.
+9. **Conditional Branching**
+	```cpp
+	    if(startHere) {
+	```
+	Check if we are starting a new segment. If `startHere` is true, we can split the sequence at the current index and start a new segment.
 
-**Key Takeaways**:
-1. **Dynamic Programming**: This technique is crucial for optimizing problems that involve overlapping subproblems, allowing us to avoid redundant calculations.
-2. **Memoization**: Storing previously computed results significantly enhances performance, particularly in recursive algorithms.
-3. **Modular Arithmetic**: When dealing with potentially large numbers, applying modular arithmetic ensures results remain manageable and within required bounds.
+10. **Recursive Call**
+	```cpp
+	        ans = (ans + dp(idx + 1, seg, false)) % mod; // started new line
+	```
+	If we start a new segment, make a recursive call to `dp`, marking `startHere` as false and continue dividing the sequence.
 
-This approach can be applied to various combinatorial problems involving partitioning and grouping, and understanding the mechanics of state representation and recursive function calls can aid in tackling similar challenges in competitive programming and algorithm design.
+11. **Else Branch**
+	```cpp
+	    } else {
+	```
+	If we are not starting a new segment, then we end the current segment and decrease the segment count.
+
+12. **Recursive Call**
+	```cpp
+	        ans = (ans + dp(idx, seg - 1, true)) % mod; // end the line here
+	```
+	If not starting a new segment, recursively call `dp` with a reduced segment count `seg - 1` and mark `startHere` as true to start the next segment.
+
+13. **Memoization Update**
+	```cpp
+	    return memo[idx][seg][startHere] = ans;
+	```
+	Store the result of the current subproblem in the `memo` array to avoid redundant calculations in future calls.
+
+14. **Function Definition**
+	```cpp
+	int numberOfSets(int n, int k) {
+	```
+	Define the main function `numberOfSets`, which initializes the necessary variables and calls the `dp` function to calculate the number of ways to divide the sequence into `k` segments.
+
+15. **Variable Assignment**
+	```cpp
+	    this->n = n;
+	```
+	Assign the value of `n` (number of elements in the sequence) to the instance variable `n`.
+
+16. **Array Initialization**
+	```cpp
+	    memset(memo, -1, sizeof(memo));
+	```
+	Initialize the `memo` array to -1 to indicate that no subproblem results have been calculated yet.
+
+17. **Return Statement**
+	```cpp
+	    return dp(0, k, true);
+	```
+	Call the `dp` function starting from the first index (`0`), with `k` segments to be formed, and return the result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * k)
+- **Average Case:** O(n * k)
+- **Worst Case:** O(n * k)
+
+The dynamic programming solution evaluates each subproblem once, and there are at most n * k subproblems to solve.
+
+### Space Complexity 💾
+- **Best Case:** O(n * k)
+- **Worst Case:** O(n * k)
+
+The space complexity is O(n * k) due to the memoization table storing results for each subproblem.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-sets-of-k-non-overlapping-line-segments/description/)
 

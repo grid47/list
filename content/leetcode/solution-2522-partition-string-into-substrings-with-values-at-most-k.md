@@ -14,146 +14,219 @@ img_src = ""
 youtube = "XQh9V8PEIiI"
 youtube_upload_date="2023-01-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/XQh9V8PEIiI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string `s` consisting of digits between 1 and 9, and an integer `k`, you need to partition the string into the fewest possible substrings such that the value of each substring is less than or equal to `k`. Each substring must consist of contiguous digits and must be interpreted as an integer. If it's not possible to partition the string in such a way, return `-1`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` containing digits from '1' to '9' and an integer `k`. The task is to partition the string into the fewest number of substrings where each substring has a value less than or equal to `k`.
+- **Example:** `s = "123456", k = 50`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- 1 <= k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string str;
-    vector<map<int, int>> mem;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of substrings required to partition the string `s` where the value of each substring is less than or equal to `k`. If it's not possible to partition the string, return `-1`.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output should be an integer representing the minimum number of substrings or -1 if no valid partition exists.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of substrings where each substring has a value less than or equal to `k`. If such a partition isn't possible, return -1.
+
+- Iterate through the string and attempt to form the largest valid substrings starting from the current position.
+- For each substring, check if its value is less than or equal to `k`.
+- If a valid substring is found, continue to form the next substring from the remaining characters.
+- If a substring exceeds `k`, try partitioning earlier and minimize the number of substrings.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each digit in the string `s` is between '1' and '9', so the string contains no zero digits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "123456", k = 50`  \
+  **Explanation:** The string can be partitioned into substrings '12', '34', '5', and '6'. Each substring is less than or equal to 50, so the minimum number of substrings is 4.
+
+- **Input:** `s = "987654", k = 100`  \
+  **Explanation:** The string can be partitioned into substrings '9', '8', '7', '6', and '54'. Each substring is less than or equal to 100, so the minimum number of substrings is 5.
+
+- **Input:** `s = "238182", k = 5`  \
+  **Explanation:** It's not possible to partition the string such that all substrings are less than or equal to 5, so the answer is -1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, a dynamic programming approach can be used to recursively find the minimum number of valid partitions. At each index, try partitioning the string into substrings, and keep track of the minimum number of partitions.
+
+### Initial Thoughts 💭
+- Each substring must be interpreted as an integer and must be less than or equal to `k`.
+- A dynamic programming approach can be used to explore all possible valid partitions efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty strings in the problem as the length of `s` is always at least 1.
+- The solution must handle strings with up to 100,000 characters efficiently.
+- If `k` is very small (e.g., 1), the problem becomes much harder as only substrings with a value of 1 will be valid.
+- Ensure that the solution runs in time proportional to the length of the string `s` to handle the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+string str;
+vector<map<int, int>> mem;
+
+int dp(int idx, int k, int num) {
     
-    int dp(int idx, int k, int num) {
-        
-        if(idx == str.size()) return 1;
-        
-        if(mem[idx].count(num)) return mem[idx][num];
-
-        int ans = 1 + dp(idx + 1, k, str[idx] - '0');
-
-        long long net = (long long)num * 10 + (str[idx] - '0');
-        if(net <= k) {
-            ans = min(ans, dp(idx + 1, k, net));
-        }
-
-        return mem[idx][num] = ans;
-    }
+    if(idx == str.size()) return 1;
     
-    int minimumPartition(string s, int k) {
-        str = s;
-        for(char x: s)
-            if(x - '0' > k) return -1;
-        mem.resize(s.size());
-        int ans = dp(0, k, 0);
-        return ans;
+    if(mem[idx].count(num)) return mem[idx][num];
+
+    int ans = 1 + dp(idx + 1, k, str[idx] - '0');
+
+    long long net = (long long)num * 10 + (str[idx] - '0');
+    if(net <= k) {
+        ans = min(ans, dp(idx + 1, k, net));
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    return mem[idx][num] = ans;
+}
 
-Given a string `s` consisting of digits, and an integer `k`, the task is to partition the string into the minimum number of parts such that each part represents a number less than or equal to `k`. In each partition, the number formed by the digits should be valid (i.e., no leading zeros), and the goal is to minimize the number of partitions needed. If it's impossible to partition the string in such a way that each part is less than or equal to `k`, return `-1`.
-
-### Approach
-
-To solve this problem, we can approach it using **Dynamic Programming (DP)**. Here's the detailed breakdown of the approach:
-
-1. **Representation of the Problem**:
-   - We will traverse the string `s` from left to right, at each step considering if we can form a valid partition from the current position `idx` up to some further position `j`.
-   - For each partition, we will check if the number formed by the substring is less than or equal to `k`. If yes, we will consider it as a valid partition and continue the search for the next partitions.
-
-2. **Recursive DP Approach**:
-   - The idea is to use a recursive function `dp(idx, k, num)` where `idx` represents the current index in the string, `k` is the maximum allowable value for each number, and `num` is the number formed by the substring so far.
-   - The recursion will try to extend the number by including more digits, checking if the number stays within the bounds of `k`. If not, it will start a new partition.
-
-3. **Memoization**:
-   - We use memoization to store the results of previously computed subproblems. This will help avoid redundant calculations and speed up the process, especially for overlapping subproblems.
-
-4. **Base Case and Recursive Case**:
-   - The base case occurs when `idx` reaches the end of the string, which means we’ve found a valid partitioning, so we return `1` (indicating that one more partition is added).
-   - For each index, we try to either extend the current partition or start a new one if the number exceeds the allowed limit `k`.
-
-5. **Early Exit for Invalid Numbers**:
-   - If a digit in the string is greater than `k`, it's impossible to form a valid number, and we immediately return `-1`.
-
-### Code Breakdown (Step by Step)
-
-#### Class and Member Variables:
-
-```cpp
-class Solution {
-public:
-    string str;
-    vector<map<int, int>> mem;
+int minimumPartition(string s, int k) {
+    str = s;
+    for(char x: s)
+        if(x - '0' > k) return -1;
+    mem.resize(s.size());
+    int ans = dp(0, k, 0);
+    return ans;
+}
 ```
-- We define a class `Solution`, which contains a string `str` representing the input string, and `mem` which is a vector of maps used for memoization. Each map at index `i` stores the results for various numbers that can be formed starting from position `i` in the string.
 
-#### Recursive DP Function:
+This code defines a solution to the problem of partitioning a string into the minimum number of partitions such that each partition represents a number smaller than or equal to a given integer `k`. It uses dynamic programming (DP) to explore possible partitions and memoization to store already calculated results.
 
-```cpp
-    int dp(int idx, int k, int num) {
-        if(idx == str.size()) return 1;
-        if(mem[idx].count(num)) return mem[idx][num];
-```
-- The function `dp` is called with `idx` representing the current index in the string, `k` representing the maximum allowable number, and `num` representing the current number formed by the digits processed so far.
-- If we reach the end of the string (`idx == str.size()`), it means we've successfully partitioned the string, so we return `1`.
-- If the result for the current subproblem (starting from `idx` and forming a number `num`) is already computed, we return the stored result from the memoization map.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **String Initialization**
+	```cpp
+	string str;
+	```
+	Declare a string `str` that will hold the input string for the partition problem.
 
-```cpp
-        int ans = 1 + dp(idx + 1, k, str[idx] - '0');
-```
-- We attempt to form a partition starting from the current index. The recursive call `dp(idx + 1, k, str[idx] - '0')` checks the number formed by just the current digit (this is the smallest partition we can form).
-- We increment the answer by 1, since we are considering a new partition.
+2. **Memoization Structure**
+	```cpp
+	vector<map<int, int>> mem;
+	```
+	Declare a 2D vector `mem` of maps to store previously computed results for each index and number during the DP process.
 
-```cpp
-        long long net = (long long)num * 10 + (str[idx] - '0');
-        if(net <= k) {
-            ans = min(ans, dp(idx + 1, k, net));
-        }
-```
-- We attempt to extend the current number by adding the next digit (`str[idx]`). The value of `net` is calculated as the number formed by the current number `num` multiplied by 10 (to shift the digits left) plus the current digit (`str[idx] - '0'`).
-- If `net` is less than or equal to `k`, we make a recursive call to `dp(idx + 1, k, net)` to continue building the current number. We update the `ans` by taking the minimum of the current `ans` and the result of the recursive call, ensuring that we are minimizing the number of partitions.
+3. **Function Definition**
+	```cpp
+	int dp(int idx, int k, int num) {
+	```
+	Define the recursive DP function `dp` which calculates the minimum number of partitions starting from index `idx` with a current number `num`.
 
-```cpp
-        return mem[idx][num] = ans;
-    }
-```
-- After exploring both options (continuing with the current number or starting a new one), we store the result for the current subproblem in `mem[idx][num]`.
+4. **Base Case**
+	```cpp
+	    if(idx == str.size()) return 1;
+	```
+	Check if the current index is equal to the size of the string. If so, return 1 as we've reached the end and this partition is valid.
 
-#### Main Function:
+5. **Memoization Check**
+	```cpp
+	    if(mem[idx].count(num)) return mem[idx][num];
+	```
+	Check if the result for the current state (index and number) has already been computed and stored in the `mem` vector. If so, return the cached result.
 
-```cpp
-    int minimumPartition(string s, int k) {
-        str = s;
-        for(char x: s)
-            if(x - '0' > k) return -1;
-        mem.resize(s.size());
-        int ans = dp(0, k, 0);
-        return ans;
-    }
-```
-- The function `minimumPartition` starts by initializing the string `str` with the input string `s`.
-- It checks if any digit in the string is greater than `k`. If such a digit exists, it’s impossible to form a valid partition, and we return `-1` immediately.
-- We then initialize the memoization table `mem` to store the results for each position in the string.
-- Finally, we call the `dp` function starting from index 0 with an initial `num` of 0, which represents the initial state with no digits processed yet. The result of `dp(0, k, 0)` is returned as the answer.
+6. **Recursive Case**
+	```cpp
+	    int ans = 1 + dp(idx + 1, k, str[idx] - '0');
+	```
+	Recursively call `dp` for the next index, assuming the current digit forms a new partition. Add 1 to the result to account for this partition.
 
-### Complexity
+7. **Net Calculation**
+	```cpp
+	    long long net = (long long)num * 10 + (str[idx] - '0');
+	```
+	Form a new number `net` by appending the current digit (`str[idx] - '0'`) to the existing number `num`.
 
-#### Time Complexity:
-- The time complexity is driven by the number of recursive calls and the size of the memoization table. The function `dp` explores each index `idx` and each possible value of `num` that can be formed from that position.
-- Since the recursion is bounded by the length of the string `n` and the number of possible values for `num` is limited (because `num` can be at most `k`), the time complexity is \( O(n \times k) \), where `n` is the length of the string and `k` is the maximum allowable value for each partition.
+8. **Condition Check (k Limit)**
+	```cpp
+	    if(net <= k) {
+	```
+	Check if the newly formed number `net` is less than or equal to `k`. If true, attempt to extend the current partition.
 
-#### Space Complexity:
-- The space complexity is \( O(n \times k) \), where `n` is the length of the string and `k` is the maximum value for each partition. This space is used for storing the memoization table `mem` and recursive function calls.
+9. **Recursive Call (Valid Partition)**
+	```cpp
+	        ans = min(ans, dp(idx + 1, k, net));
+	```
+	Recursively call `dp` to check if the current number can be extended further. Store the minimum value between the previous result and the new call.
 
-### Conclusion
+10. **Return Result**
+	```cpp
+	    return mem[idx][num] = ans;
+	```
+	Store the result for the current index and number in the memoization table `mem`, and return the result.
 
-This solution uses dynamic programming with memoization to minimize the number of partitions needed to break the string `s` into valid parts, each less than or equal to `k`. By recursively trying to extend the current number or start a new partition, we efficiently compute the minimum number of partitions. Memoization helps optimize the solution by storing results of overlapping subproblems, reducing redundant computations. The approach works well within the problem constraints, providing an optimal solution with a time complexity of \( O(n \times k) \).
+11. **Function Definition**
+	```cpp
+	int minimumPartition(string s, int k) {
+	```
+	Define the function `minimumPartition` which computes the minimum number of partitions of the input string `s` such that each partition is a number less than or equal to `k`.
+
+12. **Input Assignment**
+	```cpp
+	    str = s;
+	```
+	Assign the input string `s` to the global string variable `str`.
+
+13. **Loop (Initial Check)**
+	```cpp
+	    for(char x: s)
+	```
+	Iterate through each character `x` in the string `s`.
+
+14. **Early Exit Condition**
+	```cpp
+	        if(x - '0' > k) return -1;
+	```
+	Check if any character in the string represents a number greater than `k`. If true, return -1 as it's impossible to partition the string.
+
+15. **Memoization Resize**
+	```cpp
+	    mem.resize(s.size());
+	```
+	Resize the `mem` vector to match the size of the input string `s` to store memoization results for each index.
+
+16. **Initial DP Call**
+	```cpp
+	    int ans = dp(0, k, 0);
+	```
+	Call the `dp` function to start the process from index 0, with initial number 0, and given constraint `k`.
+
+17. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the final result of the minimum partition calculations.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The worst case occurs when checking all substrings for each character, leading to a time complexity of O(n^2).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+Space complexity is O(n) due to memoization and the recursion stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/description/)
 

@@ -14,127 +14,202 @@ img_src = ""
 youtube = "ceuQgACqr78"
 youtube_upload_date="2024-07-19"
 youtube_thumbnail="https://i.ytimg.com/vi/ceuQgACqr78/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix of distinct numbers with dimensions m x n. A lucky number in the matrix is an element that is the minimum value in its row and the maximum value in its column. Your task is to find and return all such lucky numbers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D matrix of distinct integers.
+- **Example:** `matrix = [[10, 20, 30], [40, 50, 60], [70, 80, 90]]`
+- **Constraints:**
+	- The matrix will have dimensions m x n where 1 <= m, n <= 50.
+	- All elements in the matrix are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> luckyNumbers(vector<vector<int>>& matrix) {
-        vector<int> res;
-        vector<int> row(matrix.size(), 0);
-        vector<int> col(matrix[0].size(), 0);
-        for(int i = 0; i < matrix.size(); i++)
-        {
-            int m = matrix[i][0];
-            for(int j = 1; j < matrix[0].size(); j++) m = min(m, matrix[i][j]);
-            row[i] = m;
-        }
-        for(int j = 0; j < matrix[0].size(); j++)
-        {
-            int m = matrix[0][j];
-            for(int i = 1; i < matrix.size(); i++) m = max(m,matrix[i][j]);
-            col[j] = m;
-        }
-        
-        for(int i=0;i<matrix.size();i++)
-            for(int j=0;j<matrix[0].size();j++)
-                if(row[i] == col[j]) res.push_back(row[i]);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of all lucky numbers in the matrix.
+- **Example:** `[70]`
+- **Constraints:**
+	- The output should include all lucky numbers.
 
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify and return all lucky numbers in the matrix, where each lucky number is the minimum in its row and maximum in its column.
+
+- Find the minimum value in each row.
+- Find the maximum value in each column.
+- Identify the values that are both the minimum in their row and the maximum in their column.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each element in the matrix is distinct.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `matrix = [[10, 20, 30], [40, 50, 60], [70, 80, 90]]`  \
+  **Explanation:** In this example, 70 is the only lucky number because it is the minimum in its row and the maximum in its column.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over the matrix to find the minimum value in each row, followed by finding the maximum value in each column. Once the row minimums and column maximums are identified, we check for numbers that satisfy both conditions.
+
+### Initial Thoughts 💭
+- The matrix is guaranteed to have distinct numbers.
+- To efficiently find the lucky numbers, we should first calculate the row minimums and column maximums.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will always have at least one element, so no need to handle empty matrices.
+- Ensure the solution handles matrices with the maximum allowed size of 50 x 50.
+- All elements in the matrix are distinct, so there will be no duplicate values to consider.
+- The matrix elements are distinct and within the range [1, 10^5].
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> luckyNumbers(vector<vector<int>>& matrix) {
+    vector<int> res;
+    vector<int> row(matrix.size(), 0);
+    vector<int> col(matrix[0].size(), 0);
+    for(int i = 0; i < matrix.size(); i++)
+    {
+        int m = matrix[i][0];
+        for(int j = 1; j < matrix[0].size(); j++) m = min(m, matrix[i][j]);
+        row[i] = m;
     }
-};
-{{< /highlight >}}
----
+    for(int j = 0; j < matrix[0].size(); j++)
+    {
+        int m = matrix[0][j];
+        for(int i = 1; i < matrix.size(); i++) m = max(m,matrix[i][j]);
+        col[j] = m;
+    }
+    
+    for(int i=0;i<matrix.size();i++)
+        for(int j=0;j<matrix[0].size();j++)
+            if(row[i] == col[j]) res.push_back(row[i]);
 
-### Problem Statement
+    return res;
+}
+```
 
-The problem involves finding the "lucky numbers" in a given matrix. A lucky number in a matrix is defined as an element that is the minimum element in its row and the maximum element in its column. The task is to return all such lucky numbers from the provided matrix.
+This function `luckyNumbers` finds all the 'lucky' numbers in a matrix. A number is 'lucky' if it is the minimum in its row and the maximum in its column.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> luckyNumbers(vector<vector<int>>& matrix) {
+	```
+	We define the function `luckyNumbers` that takes a 2D matrix and returns a vector containing the lucky numbers.
 
-To solve the problem, we will follow a systematic approach that includes the following steps:
+2. **Variable Declaration**
+	```cpp
+	    vector<int> res;
+	```
+	We declare a vector `res` to store the lucky numbers found in the matrix.
 
-1. **Initialization**: We will create two vectors to store the minimum values for each row and the maximum values for each column.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> row(matrix.size(), 0);
+	```
+	We initialize a vector `row` to store the minimum values of each row in the matrix.
 
-2. **Row Minimum Calculation**: We will iterate through each row of the matrix to find the minimum element and store it in the corresponding entry of the row minimum vector.
+4. **Variable Initialization**
+	```cpp
+	    vector<int> col(matrix[0].size(), 0);
+	```
+	We initialize a vector `col` to store the maximum values of each column in the matrix.
 
-3. **Column Maximum Calculation**: We will iterate through each column of the matrix to find the maximum element and store it in the corresponding entry of the column maximum vector.
+5. **Loop (Rows)**
+	```cpp
+	    for(int i = 0; i < matrix.size(); i++)
+	```
+	We start a loop to iterate over each row of the matrix.
 
-4. **Finding Lucky Numbers**: Finally, we will compare the values from the row minimum vector and the column maximum vector. If a value from the row minimum vector matches a value from the column maximum vector, it is identified as a lucky number.
+6. **Variable Assignment**
+	```cpp
+	        int m = matrix[i][0];
+	```
+	We assign the first element of the row to the variable `m`, which will be used to find the minimum value in the row.
 
-### Code Breakdown (Step by Step)
+7. **Loop (Columns)**
+	```cpp
+	        for(int j = 1; j < matrix[0].size(); j++) m = min(m, matrix[i][j]);
+	```
+	We iterate through the remaining elements in the row to find the minimum value.
 
-The provided C++ code implements the above approach. Here’s a detailed breakdown of how it works:
+8. **Row Minimum Assignment**
+	```cpp
+	        row[i] = m;
+	```
+	We store the minimum value of the current row in the `row` vector.
 
-1. **Solution Class**:
-   ```cpp
-   class Solution {
-   public:
-       vector<int> luckyNumbers(vector<vector<int>>& matrix) {
-           vector<int> res;
-           vector<int> row(matrix.size(), 0);
-           vector<int> col(matrix[0].size(), 0);
-   ```
-   - The `Solution` class contains the method `luckyNumbers`, which takes a 2D vector `matrix` as input and returns a vector of integers representing the lucky numbers.
-   - The method initializes a result vector `res` to store the lucky numbers, a vector `row` to store the minimum values of each row, and a vector `col` to store the maximum values of each column.
+9. **Loop (Columns)**
+	```cpp
+	    for(int j = 0; j < matrix[0].size(); j++)
+	```
+	We start a loop to iterate over each column of the matrix.
 
-2. **Finding Row Minimums**:
-   ```cpp
-           for(int i = 0; i < matrix.size(); i++)
-           {
-               int m = matrix[i][0];
-               for(int j = 1; j < matrix[0].size(); j++) m = min(m, matrix[i][j]);
-               row[i] = m;
-           }
-   ```
-   - The outer loop iterates through each row `i` of the matrix.
-   - The inner loop initializes `m` to the first element of the current row and iterates through the rest of the row to find the minimum value.
-   - The minimum value found for each row is stored in the `row` vector at index `i`.
+10. **Variable Assignment**
+	```cpp
+	        int m = matrix[0][j];
+	```
+	We assign the first element of the column to the variable `m`, which will be used to find the maximum value in the column.
 
-3. **Finding Column Maximums**:
-   ```cpp
-           for(int j = 0; j < matrix[0].size(); j++)
-           {
-               int m = matrix[0][j];
-               for(int i = 1; i < matrix.size(); i++) m = max(m, matrix[i][j]);
-               col[j] = m;
-           }
-   ```
-   - The outer loop iterates through each column `j` of the matrix.
-   - The inner loop initializes `m` to the first element of the current column and iterates through the rest of the column to find the maximum value.
-   - The maximum value found for each column is stored in the `col` vector at index `j`.
+11. **Loop (Rows)**
+	```cpp
+	        for(int i = 1; i < matrix.size(); i++) m = max(m,matrix[i][j]);
+	```
+	We iterate through the remaining elements in the column to find the maximum value.
 
-4. **Finding Lucky Numbers**:
-   ```cpp
-           for(int i=0;i<matrix.size();i++)
-               for(int j=0;j<matrix[0].size();j++)
-                   if(row[i] == col[j]) res.push_back(row[i]);
-   ```
-   - Two nested loops iterate through each element of the matrix.
-   - If the minimum value from the `row` vector matches the maximum value from the `col` vector, the value is added to the `res` vector.
+12. **Column Maximum Assignment**
+	```cpp
+	        col[j] = m;
+	```
+	We store the maximum value of the current column in the `col` vector.
 
-5. **Return Result**:
-   ```cpp
-           return res;
-       }
-   };
-   ```
-   - After all lucky numbers are found, the method returns the `res` vector.
+13. **Nested Loop (Matrix Elements)**
+	```cpp
+	    for(int i=0;i<matrix.size();i++)
+	```
+	We start a nested loop to iterate over all elements of the matrix again.
 
-### Complexity
+14. **Nested Loop (Matrix Elements)**
+	```cpp
+	        for(int j=0;j<matrix[0].size();j++)
+	```
+	We iterate through each column for the current row in the nested loop.
 
-- **Time Complexity**: The time complexity of this solution is \(O(N \times M)\), where \(N\) is the number of rows and \(M\) is the number of columns in the matrix. The first two loops iterate through all elements to find the minimum and maximum values, and the last nested loop checks for lucky numbers.
+15. **Condition Check (Lucky Numbers)**
+	```cpp
+	            if(row[i] == col[j]) res.push_back(row[i]);
+	```
+	We check if the current row minimum is equal to the current column maximum. If they match, we add the value to the result vector `res`.
 
-- **Space Complexity**: The space complexity is \(O(N + M)\), where \(N\) is the number of rows and \(M\) is the number of columns. This is due to the storage of the `row` and `col` vectors.
+16. **Return Statement**
+	```cpp
+	    return res;
+	```
+	After finishing the loops, we return the vector `res`, which contains all the lucky numbers found.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-The solution effectively identifies lucky numbers in a given matrix by calculating the minimum values for each row and the maximum values for each column. By leveraging two simple iterations followed by a comparison, the algorithm efficiently finds all lucky numbers in the matrix. This approach ensures that the time complexity remains manageable, even for larger matrices. The clear structure of the code and the logical breakdown of the problem make it a valuable reference for developers and students interested in matrix manipulation and algorithmic problem-solving. The method can also serve as a foundation for exploring more complex matrix-related problems, enhancing one's understanding of data structures and algorithm design in computer science.
+The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix.
+
+### Space Complexity 💾
+- **Best Case:** O(m + n)
+- **Worst Case:** O(m + n)
+
+The space complexity is O(m + n), where m is the number of rows and n is the number of columns in the matrix due to the storage of row minimums and column maximums.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lucky-numbers-in-a-matrix/description/)
 

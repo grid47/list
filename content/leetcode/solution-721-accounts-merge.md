@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "otzKJY8YhRg"
 youtube_upload_date="2020-04-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/otzKJY8YhRg/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,151 +28,270 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/otzKJY8YhRg/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a list of accounts, where each account consists of a name and a list of emails. Merge accounts that share common emails, and return the merged accounts in the format: name followed by sorted emails.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Each account is represented by a list of strings. The first element is the name, and the rest are email addresses.
+- **Example:** `accounts = [["Alice","alice@mail.com","alice_newyork@mail.com"], ["Alice","alice@mail.com","alice123@mail.com"], ["Bob","bob@mail.com"]]`
+- **Constraints:**
+	- 1 <= accounts.length <= 1000
+	- 2 <= accounts[i].length <= 10
+	- 1 <= accounts[i][j].length <= 30
+	- accounts[i][0] consists of English letters.
+	- accounts[i][j] (for j > 0) is a valid email.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<string>> accountsMerge(vector<vector<string>>& acc) {
-        map<string, string> mp;
-        map<string, set<string>> gph;
-        for(auto ac: acc) {
-            for(int i = 1; i < ac.size(); i++) {
-                mp[ac[i]] = ac[0];
-                gph[ac[i]].insert(ac[1]);
-                gph[ac[1]].insert(ac[i]);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the merged accounts, where each account starts with the name followed by a sorted list of email addresses.
+- **Example:** `[["Alice","alice123@mail.com","alice@mail.com","alice_newyork@mail.com"]]`
+- **Constraints:**
+	- The accounts should be returned with emails in sorted order and merged by shared emails.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to merge accounts based on common emails.
+
+- Use a graph where each email is a node, and there is an edge between two emails if they belong to the same account.
+- For each account, build the graph by connecting emails together.
+- Perform DFS (depth-first search) to find all connected emails for each component, representing one account.
+- Sort the emails in lexicographical order and return the merged result with the name and emails.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each account contains at least one email.
+- The same person may have multiple accounts with the same or different names.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `accounts = [["Alice","alice@mail.com","alice_newyork@mail.com"], ["Alice","alice@mail.com","alice123@mail.com"], ["Bob","bob@mail.com"]]`  \
+  **Explanation:** The first and second Alice accounts are merged since they share the email 'alice@mail.com'. The result should contain Alice’s emails sorted, and Bob’s account should remain unchanged.
+
+- **Input:** `accounts = [["John","john1@mail.com","john2@mail.com","john3@mail.com"], ["Mike","mike1@mail.com","mike2@mail.com"], ["John","john1@mail.com","john4@mail.com"]]`  \
+  **Explanation:** Both John accounts share 'john1@mail.com', so they are merged, with all of John’s emails sorted.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses a graph-based approach to merge accounts that share common emails.
+
+### Initial Thoughts 💭
+- Each email can be treated as a node, and accounts with common emails form connected components in the graph.
+- By performing DFS on the graph, we can find all connected emails for each account and merge them.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input list is empty, return an empty list.
+- The solution must handle up to 1000 accounts efficiently.
+- If no accounts share any emails, each account should be returned individually.
+- The solution should work within time and space limits for the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<string>> accountsMerge(vector<vector<string>>& acc) {
+    map<string, string> mp;
+    map<string, set<string>> gph;
+    for(auto ac: acc) {
+        for(int i = 1; i < ac.size(); i++) {
+            mp[ac[i]] = ac[0];
+            gph[ac[i]].insert(ac[1]);
+            gph[ac[1]].insert(ac[i]);
         }
-        
-        set<string> seen;
-        vector<vector<string>> ans;
-        for(auto it: mp) {
-            if(seen.count(it.first)) continue;
-            vector<string> tmp;
-            dfs(tmp, gph, seen, it.first);
-            sort(tmp.begin(), tmp.end());
-            tmp.insert(tmp.begin(), it.second);
-            ans.push_back(tmp);
-        }
-        
-        return ans;
     }
     
-    void dfs(vector<string> &tmp, map<string, set<string>> &gph, set<string> &seen, string node) {
-        tmp.push_back(node);
-        seen.insert(node);
-        for(auto it: gph[node]) {
-            if(!seen.count(it)) {
-                dfs(tmp, gph, seen, it);
-            }
-        }
-        
+    set<string> seen;
+    vector<vector<string>> ans;
+    for(auto it: mp) {
+        if(seen.count(it.first)) continue;
+        vector<string> tmp;
+        dfs(tmp, gph, seen, it.first);
+        sort(tmp.begin(), tmp.end());
+        tmp.insert(tmp.begin(), it.second);
+        ans.push_back(tmp);
     }
-};
-{{< /highlight >}}
----
+    
+    return ans;
+}
 
-### Problem Statement
+void dfs(vector<string> &tmp, map<string, set<string>> &gph, set<string> &seen, string node) {
+    tmp.push_back(node);
+    seen.insert(node);
+    for(auto it: gph[node]) {
+        if(!seen.count(it)) {
+            dfs(tmp, gph, seen, it);
+        }
+    }
+    
+}
+```
 
-The problem asks us to **merge accounts** where multiple email addresses can belong to the same account, but may appear in different records. We are tasked with finding all the accounts that should be merged, where an account is merged if any two of its email addresses share a common domain. The final result should return the merged accounts, where each account is represented by a list of emails and the first email should represent the account holder's name.
+This function merges email accounts by identifying connected components in a graph where each email represents a node and edges exist between emails belonging to the same account.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Graph Initialization**
+	```cpp
+	vector<vector<string>> accountsMerge(vector<vector<string>>& acc) {
+	```
+	The main function starts by initializing the structure to merge accounts.
 
-The solution follows a **graph-based approach** to represent the email addresses as nodes and the connections between them as edges. Here’s a step-by-step breakdown of how we can approach the problem:
+2. **Data Mapping**
+	```cpp
+	    map<string, string> mp;
+	```
+	A mapping of emails to account names.
 
-1. **Graph Representation**: We model the problem as a graph, where each email address is a node. The edges between nodes represent that two email addresses belong to the same account. This is because an account can have multiple email addresses, and if one email address is linked to another, they belong to the same account.
+3. **Graph Construction**
+	```cpp
+	    map<string, set<string>> gph;
+	```
+	Graph representation where each email is a node connected to other emails.
 
-2. **Union-Find or DFS**: To merge accounts, we need to group connected components in the graph. This can be done using a **Depth-First Search (DFS)** approach or **Union-Find**. We will use DFS here to explore the connected components (i.e., the accounts).
+4. **Graph Traversal**
+	```cpp
+	    for(auto ac: acc) {
+	```
+	Iterates over each account to construct the graph.
 
-3. **Mapping Emails to Accounts**: We need to ensure that each email address is associated with the correct account holder's name. The first email in each list represents the account holder’s name.
+5. **Graph Edge Insertion**
+	```cpp
+	        for(int i = 1; i < ac.size(); i++) {
+	```
+	Iterates over emails in the account to establish edges.
 
-4. **Final Sorting**: After collecting the connected components (i.e., all the email addresses that belong to the same account), we sort them lexicographically and insert the account holder's name as the first element in each merged account.
+6. **Mapping Emails**
+	```cpp
+	            mp[ac[i]] = ac[0];
+	```
+	Maps each email to its corresponding account name.
 
-5. **Handling Already Seen Accounts**: To avoid revisiting email addresses we’ve already processed, we maintain a `seen` set, which ensures that we only visit each email once.
+7. **Graph Edge Insertion**
+	```cpp
+	            gph[ac[i]].insert(ac[1]);
+	```
+	Adds an edge from the current email to the first email.
 
-### Code Breakdown (Step by Step)
+8. **Graph Edge Insertion**
+	```cpp
+	            gph[ac[1]].insert(ac[i]);
+	```
+	Adds an edge from the first email to the current email.
 
-Let’s dive into the code to understand how it implements this approach:
+9. **Set Initialization**
+	```cpp
+	    set<string> seen;
+	```
+	A set to keep track of visited emails.
 
-1. **Data Structures**:
-   - `mp`: A map to associate each email address with the account holder’s name.
-   - `gph`: A map representing the graph where each email address points to a set of other email addresses connected to it.
-   - `seen`: A set to track the email addresses that have already been visited.
-   - `ans`: A vector of vectors where the final merged accounts will be stored.
+10. **Result Storage**
+	```cpp
+	    vector<vector<string>> ans;
+	```
+	Stores the merged accounts as a result.
 
-2. **Building the Graph**:
-   ```cpp
-   for(auto ac: acc) {
-       for(int i = 1; i < ac.size(); i++) {
-           mp[ac[i]] = ac[0];
-           gph[ac[i]].insert(ac[1]);
-           gph[ac[1]].insert(ac[i]);
-       }
-   }
-   ```
-   - The first loop iterates through each account in `acc`, where each account is represented as a vector of strings (the first element is the name and the rest are the email addresses).
-   - For each email address, we map it to the account holder’s name using the `mp` map.
-   - We also build the graph by inserting edges between the current email and the next one, ensuring both directions (i.e., if `a` and `b` are connected, both `a` points to `b` and `b` points to `a`).
+11. **Graph Traversal**
+	```cpp
+	    for(auto it: mp) {
+	```
+	Iterates through the email-to-name map to traverse the graph.
 
-3. **DFS Traversal**:
-   ```cpp
-   void dfs(vector<string> &tmp, map<string, set<string>> &gph, set<string> &seen, string node) {
-       tmp.push_back(node);
-       seen.insert(node);
-       for(auto it: gph[node]) {
-           if(!seen.count(it)) {
-               dfs(tmp, gph, seen, it);
-           }
-       }
-   }
-   ```
-   - The `dfs` function performs a Depth-First Search on the graph starting from the given email address (`node`).
-   - It adds the current email to the `tmp` vector, marks it as seen, and recursively visits all its neighbors (emails connected in the graph).
-   - This traversal collects all the email addresses that belong to the same account.
+12. **Visit Check**
+	```cpp
+	        if(seen.count(it.first)) continue;
+	```
+	Skips already visited emails.
 
-4. **Building the Result**:
-   ```cpp
-   for(auto it: mp) {
-       if(seen.count(it.first)) continue;
-       vector<string> tmp;
-       dfs(tmp, gph, seen, it.first);
-       sort(tmp.begin(), tmp.end());
-       tmp.insert(tmp.begin(), it.second);
-       ans.push_back(tmp);
-   }
-   ```
-   - The second loop processes each email address in `mp` (which is the list of all emails encountered).
-   - If the email has already been seen, it skips to the next one.
-   - Otherwise, it performs a DFS to collect all emails connected to the current email.
-   - After the DFS traversal, the emails are sorted lexicographically, and the account holder's name (from `mp`) is inserted as the first element of the result.
-   - Finally, the merged account is added to the result vector `ans`.
+13. **Temporary Storage**
+	```cpp
+	        vector<string> tmp;
+	```
+	Temporary storage for connected component emails.
 
-5. **Returning the Result**:
-   ```cpp
-   return ans;
-   ```
-   - After processing all emails and their connected components, the function returns the merged accounts.
+14. **Depth First Search**
+	```cpp
+	        dfs(tmp, gph, seen, it.first);
+	```
+	Performs DFS to collect all connected emails.
 
-### Complexity Analysis
+15. **Sorting**
+	```cpp
+	        sort(tmp.begin(), tmp.end());
+	```
+	Sorts emails alphabetically for output.
 
-- **Time Complexity**:
-  - **Building the Graph**: We iterate over each account and each email in it. This takes **O(N * M)** time, where `N` is the number of accounts and `M` is the average number of emails per account.
-  - **DFS Traversal**: We visit each email exactly once, so the DFS traversal takes **O(V + E)** time, where `V` is the number of emails and `E` is the number of edges (connections between emails). This is also **O(N * M)** in the worst case.
-  - **Sorting the Result**: After the DFS traversal, we sort the emails in each account, which takes **O(K log K)** for each account, where `K` is the number of emails in the account. In the worst case, the time complexity of sorting all accounts is **O(N * M log M)**.
-  
-  The overall time complexity is **O(N * M + N * M log M)**.
+16. **Insert Name**
+	```cpp
+	        tmp.insert(tmp.begin(), it.second);
+	```
+	Prepends the account name to the sorted emails.
 
-- **Space Complexity**:
-  - We use a map (`mp`) to store the account holder’s name for each email, which takes **O(V)** space, where `V` is the number of unique email addresses.
-  - We use a graph (`gph`) to store the adjacency list representation, which also takes **O(V + E)** space.
-  - The `seen` set takes **O(V)** space.
-  - The final result `ans` takes **O(V)** space.
+17. **Store Result**
+	```cpp
+	        ans.push_back(tmp);
+	```
+	Adds the merged account to the result.
 
-  The overall space complexity is **O(V + E)**.
+18. **Close Loop**
+	```cpp
+	    }
+	```
+	Closes the loop for iterating through the email-to-name map.
 
-### Conclusion
+19. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the final merged account list.
 
-This solution efficiently merges accounts by modeling the problem as a graph and performing a Depth-First Search (DFS) to find connected components. The approach ensures that we group emails belonging to the same account and sort them lexicographically for the final result. The use of a graph with an adjacency list allows us to efficiently check for connections between emails. The time complexity of **O(N * M + N * M log M)** and space complexity of **O(V + E)** makes this solution scalable for large inputs, where `N` is the number of accounts and `M` is the average number of emails per account. This approach efficiently solves the problem of merging accounts with multiple email addresses.
+20. **DFS Function**
+	```cpp
+	void dfs(vector<string> &tmp, map<string, set<string>> &gph, set<string> &seen, string node) {
+	```
+	Defines a helper function for DFS traversal.
+
+21. **DFS Visit**
+	```cpp
+	    tmp.push_back(node);
+	```
+	Marks the current node as visited and adds it to the result.
+
+22. **Mark Visited**
+	```cpp
+	    seen.insert(node);
+	```
+	Adds the node to the visited set.
+
+23. **Iterate Neighbors**
+	```cpp
+	    for(auto it: gph[node]) {
+	```
+	Iterates over all neighbors of the current node.
+
+24. **Check Unvisited**
+	```cpp
+	        if(!seen.count(it)) {
+	```
+	Checks if the neighbor has not been visited.
+
+25. **Recursive DFS**
+	```cpp
+	            dfs(tmp, gph, seen, it);
+	```
+	Recursively calls DFS for unvisited neighbors.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n), where n is the number of emails, because sorting the emails is the most time-consuming operation.
+- **Average Case:** O(n + e), where n is the number of emails and e is the number of edges in the graph (connections between emails).
+- **Worst Case:** O(n log n + e), where n is the number of emails and e is the number of edges.
+
+The time complexity is dominated by DFS and sorting the emails in each connected component.
+
+### Space Complexity 💾
+- **Best Case:** O(n), in the case where no emails are shared between accounts.
+- **Worst Case:** O(n + e), where n is the number of emails and e is the number of edges.
+
+The space complexity is dominated by the graph representation and storage for the emails.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/accounts-merge/description/)
 

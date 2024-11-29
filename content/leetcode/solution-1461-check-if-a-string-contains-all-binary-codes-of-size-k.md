@@ -14,161 +14,196 @@ img_src = ""
 youtube = "qU32rTy_kOM"
 youtube_upload_date="2022-05-31"
 youtube_thumbnail="https://i.ytimg.com/vi/qU32rTy_kOM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string s and an integer k. Your task is to determine if every possible binary code of length k appears as a substring within s. Return true if all such binary codes are present, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary string s and an integer k, where s represents a binary number and k specifies the length of binary codes to check.
+- **Example:** `Input: s = "1101011", k = 2`
+- **Constraints:**
+	- 1 <= s.length <= 5 * 10^5
+	- s[i] is either '0' or '1'.
+	- 1 <= k <= 20
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool hasAllCodes(string s, int k) {
-        
-        int n = s.size();
-        set<int> cnt;
-        int tmp = 0;
-        for(int i = 0; i < n; i++) {
-            if(i < k) {
-                tmp = tmp * 2 + (s[i] == '0'? 0: 1);
-                continue;
-            }
-            cnt.insert(tmp);
-            tmp *= 2;
-            tmp &= ((1 << k) - 1);            
-            tmp += (s[i] == '0'? 0: 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if every possible binary code of length k exists as a substring of s. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output is a boolean value indicating whether every binary code of length k exists in the string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if all binary codes of length k are present as substrings of s.
+
+- Initialize a set to store the binary codes of length k that appear as substrings.
+- Iterate over the string s, checking each substring of length k.
+- For each substring, add it to the set.
+- If the set size equals 2^k, then all possible binary codes of length k have been found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string s is valid and contains only '0' and '1'.
+- The integer k is at most 20, ensuring that checking all binary codes of length k is feasible.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "00110110", k = 2`  \
+  **Explanation:** Output: true. The binary codes of length 2 are "00", "01", "10", and "11", and all of them appear as substrings in s.
+
+- **Input:** `Input: s = "0110", k = 1`  \
+  **Explanation:** Output: true. The binary codes of length 1 are "0" and "1", and both appear as substrings in s.
+
+- **Input:** `Input: s = "0110", k = 2`  \
+  **Explanation:** Output: false. The binary code "00" is missing as a substring in s.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will use a sliding window approach to efficiently check every substring of length k in the string s.
+
+### Initial Thoughts 💭
+- The number of unique binary codes of length k is 2^k.
+- We need to efficiently check for all possible binary codes of length k in s.
+- A sliding window can help extract each substring of length k from s, and a set can be used to track unique substrings.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string s is empty, return false as no substrings can exist.
+- For large inputs where s has the maximum length (500,000 characters), ensure the solution remains efficient.
+- If k equals the length of the string, check if the string itself is a valid substring.
+- Handle cases where the string is smaller than 2^k, which means not all possible binary codes can be present.
+{{< dots >}}
+## Code 💻
+```cpp
+bool hasAllCodes(string s, int k) {
+    
+    int n = s.size();
+    set<int> cnt;
+    int tmp = 0;
+    for(int i = 0; i < n; i++) {
+        if(i < k) {
+            tmp = tmp * 2 + (s[i] == '0'? 0: 1);
+            continue;
         }
         cnt.insert(tmp);
-        // cout << cnt.size() << " " << (1 << k);
-        return cnt.size() == (1 << k);
+        tmp *= 2;
+        tmp &= ((1 << k) - 1);            
+        tmp += (s[i] == '0'? 0: 1);
     }
-};
-{{< /highlight >}}
----
+    cnt.insert(tmp);
+    // cout << cnt.size() << " " << (1 << k);
+    return cnt.size() == (1 << k);
+}
+```
 
-### Problem Statement
+This code defines the function `hasAllCodes`, which checks if a binary string `s` contains all possible binary codes of length `k`. The function iterates through the string, generating each k-length binary substring and adding it to a set. If the set's size equals the total number of possible binary codes (2^k), it returns `true`; otherwise, `false`.
 
-The task is to determine if a binary string `s` contains all possible binary codes of length `k`. A binary code of length `k` is simply a sequence of `k` bits (0s and 1s). For example, for \( k = 2 \), the valid codes are "00", "01", "10", and "11". If the string contains all possible binary codes of length \( k \), the function should return `true`; otherwise, it should return `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool hasAllCodes(string s, int k) {
+	```
+	Define the function `hasAllCodes`, which takes a string `s` and an integer `k` as input and returns a boolean value indicating whether all binary strings of length `k` are present in `s`.
 
-### Approach
+2. **String Size**
+	```cpp
+	    int n = s.size();
+	```
+	Store the length of the input string `s` in variable `n`.
 
-To solve this problem, we can use a sliding window technique combined with bit manipulation. The key idea is to slide through the string while constructing binary numbers based on the current window of size \( k \). Here’s a breakdown of the approach:
+3. **Set Declaration**
+	```cpp
+	    set<int> cnt;
+	```
+	Declare a set `cnt` to store unique binary integers corresponding to substrings of length `k`.
 
-1. **Initialize Variables**:
-   - We will maintain a set to keep track of the unique binary codes found in the string.
-   - A temporary integer will be used to store the current binary number being formed.
+4. **Initialization**
+	```cpp
+	    int tmp = 0;
+	```
+	Initialize the variable `tmp` to 0, which will store the current k-length binary number being processed.
 
-2. **Iterate Through the String**:
-   - As we traverse the string, we will continuously update the binary number.
-   - For the first \( k \) characters, we build the initial binary number.
-   - After processing the first \( k \) characters, we start sliding the window by one character at a time:
-     - Shift the current binary number left by one (multiply by 2).
-     - Ensure that the binary number stays within the limits of \( k \) bits using bitwise AND.
-     - Add the new bit from the string to the current binary number.
+5. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop that iterates through each character of the string `s`.
 
-3. **Store Unique Codes**:
-   - Each time a new binary number is formed, it is added to the set.
-   - After processing the entire string, we check if the size of the set matches the number of unique binary codes possible for length \( k \) (which is \( 2^k \)).
+6. **Condition Check**
+	```cpp
+	        if(i < k) {
+	```
+	Check if the current index `i` is less than `k`. This ensures the first `k` characters are processed correctly.
 
-4. **Return the Result**:
-   - If the size of the set is equal to \( 2^k \), we return `true`; otherwise, we return `false`.
+7. **Binary Conversion**
+	```cpp
+	            tmp = tmp * 2 + (s[i] == '0'? 0: 1);
+	```
+	Update `tmp` by shifting its bits left and adding the current character (0 or 1) of the string `s` to it.
 
-### Code Breakdown (Step by Step)
+8. **Continue**
+	```cpp
+	            continue;
+	```
+	Skip the rest of the loop for the current iteration since the set is only populated after `k` characters.
 
-Here's the detailed breakdown of the provided code:
+9. **Insert into Set**
+	```cpp
+	        cnt.insert(tmp);
+	```
+	Insert the current value of `tmp` into the set `cnt` to track the unique k-length binary numbers.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+10. **Shift and Mask**
+	```cpp
+	        tmp *= 2;
+	```
+	Shift the bits of `tmp` left by 1 to make room for the next bit.
 
-   - The solution is implemented within a class named `Solution`, which is standard in competitive programming and coding interviews.
+11. **Masking**
+	```cpp
+	        tmp &= ((1 << k) - 1);            
+	```
+	Apply a mask to keep only the last `k` bits of `tmp`, ensuring that the value fits within `k` bits.
 
-2. **Function Definition**:
-   ```cpp
-   bool hasAllCodes(string s, int k) {
-   ```
+12. **Update Binary Value**
+	```cpp
+	        tmp += (s[i] == '0'? 0: 1);
+	```
+	Add the current character (either 0 or 1) from `s` to `tmp` to form the new k-length binary number.
 
-   - This function takes a binary string `s` and an integer `k` as inputs and returns a boolean indicating whether all binary codes of length \( k \) are present in the string.
+13. **Final Insert**
+	```cpp
+	    cnt.insert(tmp);
+	```
+	After the loop, insert the final value of `tmp` into the set `cnt` to ensure it is considered.
 
-3. **Variable Initialization**:
-   ```cpp
-   int n = s.size();
-   set<int> cnt;
-   int tmp = 0;
-   ```
+14. **Return Statement**
+	```cpp
+	    return cnt.size() == (1 << k);
+	```
+	Return `true` if the size of the set `cnt` equals the total number of possible k-length binary strings (2^k), otherwise return `false`.
 
-   - `n`: The length of the string `s`.
-   - `cnt`: A set to store the unique binary codes we find.
-   - `tmp`: A temporary variable to construct the current binary number.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Iterate Through the String**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-   ```
+The time complexity is linear in terms of the length of the string s, as we slide through the string once and check substrings of length k.
 
-   - We begin a loop to iterate through each character of the string.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(2^k)
 
-5. **Building the Initial Binary Number**:
-   ```cpp
-   if(i < k) {
-       tmp = tmp * 2 + (s[i] == '0'? 0: 1);
-       continue;
-   }
-   ```
+The space complexity is O(2^k) for storing the unique binary substrings of length k in the set.
 
-   - For the first \( k \) characters, we construct the initial binary number by shifting left and adding the current bit:
-     - If the current character is '0', we add 0; if it's '1', we add 1.
-   - The `continue` statement skips the remaining code in the loop for this iteration.
+**Happy Coding! 🎉**
 
-6. **Sliding Window Logic**:
-   ```cpp
-   cnt.insert(tmp);
-   tmp *= 2;
-   tmp &= ((1 << k) - 1);
-   tmp += (s[i] == '0'? 0: 1);
-   ```
-
-   - Once we have processed the first \( k \) characters:
-     - We insert the current binary number `tmp` into the set.
-     - We shift `tmp` left by one (i.e., multiply by 2) to make space for the next bit.
-     - The bitwise AND operation ensures that `tmp` retains only the least significant \( k \) bits.
-     - We then add the new bit corresponding to the character at index \( i \).
-
-7. **Final Insertion**:
-   ```cpp
-   cnt.insert(tmp);
-   ```
-
-   - After the loop, we need to insert the last binary number formed from the final window into the set.
-
-8. **Check the Result**:
-   ```cpp
-   return cnt.size() == (1 << k);
-   ```
-
-   - We compare the size of the set `cnt` with \( 2^k \) (which can be computed as `1 << k`).
-   - If they are equal, it means we have found all possible binary codes of length \( k \).
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \( O(n) \), where \( n \) is the length of the string `s`. This is because we traverse the string once, performing constant-time operations within the loop.
-
-- **Space Complexity**: The space complexity is \( O(1) \) for the `tmp` variable and \( O(2^k) \) for the set, which may grow depending on the value of \( k \). Since there are at most \( 2^k \) unique codes, the overall space complexity is dictated by the set storage.
-
-### Conclusion
-
-This solution efficiently determines if all binary codes of length \( k \) are present in the given binary string using a combination of sliding window techniques and bit manipulation. The approach is optimal in both time and space, making it suitable for large strings and various values of \( k \). Key points of the solution include:
-
-1. **Sliding Window**: By managing a rolling binary number, we efficiently compute and track all possible binary codes without having to create explicit substrings.
-
-2. **Set Usage**: Using a set to store unique codes allows us to easily track and count the codes found during the iteration.
-
-3. **Bit Manipulation**: The bitwise operations provide a clear and concise method for managing binary data.
-
-Overall, this approach provides a robust framework for solving the problem, demonstrating effective use of algorithms and data structures in competitive programming contexts.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/description/)
 

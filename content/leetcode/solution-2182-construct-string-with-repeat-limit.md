@@ -14,190 +14,259 @@ img_src = ""
 youtube = "PZT5c2SFAYs"
 youtube_upload_date="2022-02-20"
 youtube_thumbnail="https://i.ytimg.com/vi/PZT5c2SFAYs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string of lowercase letters and an integer limit, construct a new string such that no character appears more than the given limit times consecutively. The new string should be lexicographically largest while satisfying this condition. You can use any subset of characters from the given string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string of lowercase English letters and an integer repeatLimit.
+- **Example:** `Input: s = 'bbaaccd', repeatLimit = 2`
+- **Constraints:**
+	- 1 <= repeatLimit <= s.length <= 10^5
+	- s consists of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string repeatLimitedString(string s, int repeatLimit) {
-        vector<int> freq(26, 0);
-        for(char ch: s) freq[ch - 'a']++;
-        priority_queue<pair<char, int>> pq;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** A lexicographically largest string satisfying the condition that no character appears more than repeatLimit times consecutively.
+- **Example:** `Output: 'ccbbaa'`
+- **Constraints:**
+	- No character appears consecutively more than repeatLimit times.
+	- Characters are used from the input string.
 
-        for(int i = 0; i < 26; i++)
-        if(freq[i] > 0) pq.push(make_pair((char) 'a' + i, freq[i]));
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Construct the lexicographically largest string that satisfies the repeatLimit constraint.
 
-        string ans = "";
-        while(!pq.empty()) {
-            pair<char, int> p = pq.top();
+- Count the frequency of each character in the string.
+- Use a max-heap to process characters by their lexicographical order and frequency.
+- Construct the result string by adding characters within the repeatLimit constraint.
+- Handle cases where the highest frequency character cannot continue by inserting the next highest character.
+{{< dots >}}
+### Problem Assumptions ✅
+- Input string is not empty.
+- repeatLimit is at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'abcabc', repeatLimit = 2`  \
+  **Explanation:** The result is 'ccbbaa'. Each character appears at most twice consecutively, and the string is lexicographically largest.
+
+- **Input:** `Input: s = 'xyzxxy', repeatLimit = 3`  \
+  **Explanation:** The result is 'yyxxyz'. The character 'y' appears 2 times consecutively, while 'x' and 'z' appear at most 2 times.
+
+{{< dots >}}
+## Approach 🚀
+Utilize a max-heap to manage characters based on their lexicographical order and frequency. Construct the string incrementally while respecting the repeatLimit constraint.
+
+### Initial Thoughts 💭
+- The lexicographical order can be maintained using a max-heap.
+- The repeatLimit constraint requires careful tracking of character counts.
+- A greedy approach prioritizing the largest available character should work.
+- If a character exceeds the repeatLimit, switch to the next largest character temporarily.
+{{< dots >}}
+### Edge Cases 🌐
+- No valid result as the input string must have at least one character.
+- An input string of length 10^5 with repeated characters.
+- An input string with all characters the same, e.g., 'aaaa'.
+- An input string with all unique characters, e.g., 'abcd'.
+- Ensure no character exceeds repeatLimit consecutively in the output.
+{{< dots >}}
+## Code 💻
+```cpp
+string repeatLimitedString(string s, int repeatLimit) {
+    vector<int> freq(26, 0);
+    for(char ch: s) freq[ch - 'a']++;
+    priority_queue<pair<char, int>> pq;
+
+    for(int i = 0; i < 26; i++)
+    if(freq[i] > 0) pq.push(make_pair((char) 'a' + i, freq[i]));
+
+    string ans = "";
+    while(!pq.empty()) {
+        pair<char, int> p = pq.top();
+        pq.pop();
+        int cnt = p.second;
+        for(int i = 0; i < repeatLimit && cnt-- > 0; i++) ans.push_back(p.first);
+
+        if(cnt > 0 && !pq.empty()) {
+            pair<char, int> sp = pq.top();
             pq.pop();
-            int cnt = p.second;
-            for(int i = 0; i < repeatLimit && cnt-- > 0; i++) ans.push_back(p.first);
-
-            if(cnt > 0 && !pq.empty()) {
-                pair<char, int> sp = pq.top();
-                pq.pop();
-                ans.push_back(sp.first);
-                if(sp.second > 1) {
-                    sp.second--;
-                    pq.push(sp);
-                }
-                p.second = cnt;
-                pq.push(p);
+            ans.push_back(sp.first);
+            if(sp.second > 1) {
+                sp.second--;
+                pq.push(sp);
             }
+            p.second = cnt;
+            pq.push(p);
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to generate a string by repeating characters from an input string `s` while adhering to the following constraints:
-1. Characters in the output string must appear in non-increasing lexicographical order.
-2. No character can be repeated more than `repeatLimit` times consecutively.
-
-The goal is to construct the longest possible string that satisfies these constraints, leveraging the frequency of characters in the original string.
-
-### Approach
-
-To solve the problem efficiently, we can break it down into the following steps:
-
-1. **Count the Frequency of Characters**: 
-   - We start by counting how many times each character appears in the string `s`. This is done by iterating over the string and updating a frequency array for the 26 lowercase English characters.
-
-2. **Use a Priority Queue**:
-   - The characters are then stored in a priority queue (or max-heap) based on their frequency. The queue ensures that characters with higher frequencies are processed first.
-   - Since we want the characters to be arranged in lexicographical order, we can take advantage of the ASCII value of characters. The characters with higher ASCII values (like 'z', 'y', etc.) should appear first in the string. The priority queue is configured to give us the character with the highest frequency and lexicographical order.
-
-3. **Construct the Resulting String**:
-   - The key challenge is to ensure that no character is repeated more than `repeatLimit` times consecutively.
-   - We pop the character with the highest frequency from the priority queue, append it to the result string, and continue adding it until we have appended the maximum allowed consecutive repetitions (`repeatLimit`).
-   - After using a character, we check if there are still remaining instances of it. If so, we reinsert it into the priority queue to be used later.
-   - If there are still characters left in the queue, we insert one from the next highest character to break up the repetition and prevent violating the `repeatLimit`.
-
-4. **Edge Cases**:
-   - If the string `s` contains only one type of character, the solution will need to ensure that it doesn't exceed the `repeatLimit` by managing the remaining count of that character correctly.
-   - If `repeatLimit` is 1, we can only add one occurrence of each character before switching to the next one.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    string repeatLimitedString(string s, int repeatLimit) {
-        // Step 1: Count the frequency of each character in the string
-        vector<int> freq(26, 0);
-        for(char ch: s) freq[ch - 'a']++;  // Update frequency array
+    return ans;
+}
 ```
-- The `freq` array stores the count of each character from 'a' to 'z'. We iterate through the string `s` and update the frequency count for each character.
 
-```cpp
-        // Step 2: Push characters into a max-heap (priority queue)
-        priority_queue<pair<char, int>> pq;
+This function repeats characters from the input string `s` but limits consecutive occurrences of the same character to `repeatLimit`. The function uses a priority queue to manage the frequency of characters and ensures that characters are repeated while adhering to the repeat limit.
 
-        // Fill the priority queue with character-frequency pairs
-        for(int i = 0; i < 26; i++)
-            if(freq[i] > 0) pq.push(make_pair((char) 'a' + i, freq[i]));
-```
-- We initialize a max-heap (`priority_queue`) that will store pairs of characters and their frequencies. The heap will ensure that characters with the highest frequency and lexicographically larger characters are processed first.
-- For each character in the alphabet, we check if its frequency is greater than zero and then add it to the heap.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string repeatLimitedString(string s, int repeatLimit) {
+	```
+	Define a function that takes a string `s` and an integer `repeatLimit` to return a new string with repeated characters, subject to the `repeatLimit`.
 
-```cpp
-        // Step 3: Build the result string by picking characters
-        string ans = "";
-        while(!pq.empty()) {
-            pair<char, int> p = pq.top();  // Get the most frequent character
-            pq.pop();
-            int cnt = p.second;  // Frequency of the character
-```
-- Now, we start building the result string by popping the most frequent character from the heap.
-- The variable `cnt` stores the frequency of the character `p.first` (the character at the top of the heap).
+2. **Variable Initialization**
+	```cpp
+	    vector<int> freq(26, 0);
+	```
+	Initialize a vector `freq` to store the frequency of each character (26 letters from 'a' to 'z').
 
-```cpp
-            // Step 4: Add the character up to the repeatLimit number of times
-            for(int i = 0; i < repeatLimit && cnt-- > 0; i++) ans.push_back(p.first);
-```
-- We add the character to the result string `repeatLimit` times or until its frequency (`cnt`) is exhausted. This ensures that no character is repeated more than `repeatLimit` times consecutively.
+3. **Character Frequency Counting**
+	```cpp
+	    for(char ch: s) freq[ch - 'a']++;
+	```
+	Iterate through the input string `s` and increment the frequency count of each character.
 
-```cpp
-            // Step 5: Handle remaining characters
-            if(cnt > 0 && !pq.empty()) {
-                // Add a different character to break the repetition
-                pair<char, int> sp = pq.top();
-                pq.pop();
-                ans.push_back(sp.first);  // Add this different character
+4. **Priority Queue Setup**
+	```cpp
+	    priority_queue<pair<char, int>> pq;
+	```
+	Create a priority queue `pq` to store pairs of characters and their corresponding frequencies in descending order.
 
-                // If there are still more of this character, put it back in the queue
-                if(sp.second > 1) {
-                    sp.second--;
-                    pq.push(sp);
-                }
+5. **Loop for Frequency to Queue**
+	```cpp
+	    for(int i = 0; i < 26; i++)
+	```
+	Loop through the frequency array to add characters with non-zero frequencies to the priority queue.
 
-                // Put the original character back into the queue with its reduced count
-                p.second = cnt;
-                pq.push(p);
-            }
-        }
-```
-- After using the most frequent character, if there are still remaining characters, we:
-  - Pop the next most frequent character (to break the repetition).
-  - Add it to the result string.
-  - If there are still more of this character left, we put it back into the queue.
-  - Then, we put the original character back into the queue if it still has remaining occurrences.
-  
-```cpp
-        return ans;  // Return the final result string
-    }
-};
-```
-- Finally, we return the resulting string that has been built by adhering to the constraints of the problem.
+6. **Queue Population**
+	```cpp
+	    if(freq[i] > 0) pq.push(make_pair((char) 'a' + i, freq[i]));
+	```
+	If a character has a non-zero frequency, push it to the priority queue along with its frequency.
 
-### Example Walkthrough
+7. **String Initialization**
+	```cpp
+	    string ans = "";
+	```
+	Initialize an empty string `ans` to build the final result.
 
-Let’s walk through an example to understand how the solution works:
+8. **Main Loop**
+	```cpp
+	    while(!pq.empty()) {
+	```
+	Start a while loop that continues as long as there are characters in the priority queue.
 
-#### Example 1:
-**Input**: `s = "aabbcc", repeatLimit = 2`
+9. **Extract Maximum Frequency Pair**
+	```cpp
+	        pair<char, int> p = pq.top();
+	```
+	Extract the character with the highest frequency from the priority queue.
 
-**Step-by-Step Execution**:
-- Count the frequency of each character: `a: 2`, `b: 2`, `c: 2`.
-- Push these into the priority queue: `pq = [ ('c', 2), ('b', 2), ('a', 2)]`.
-- Start building the result:
-  - Add `c` twice (as `repeatLimit = 2`).
-  - Add `b` once (remaining frequency of `b` is 1).
-  - Add `a` once (remaining frequency of `a` is 1).
-  - Put the remaining `b` and `a` back into the queue.
-  - Add the remaining `b` and `a` accordingly.
+10. **Pop Maximum Frequency Pair**
+	```cpp
+	        pq.pop();
+	```
+	Remove the character-frequency pair from the priority queue.
 
-**Final Output**: `"cbacb"`
+11. **Store Remaining Count**
+	```cpp
+	        int cnt = p.second;
+	```
+	Store the remaining count of the character in the variable `cnt`.
 
-#### Example 2:
-**Input**: `s = "aaabbbccc", repeatLimit = 2`
+12. **Repeat Characters**
+	```cpp
+	        for(int i = 0; i < repeatLimit && cnt-- > 0; i++) ans.push_back(p.first);
+	```
+	Push the character `p.first` to the result string `ans` up to the `repeatLimit` number of times, decrementing the count.
 
-**Step-by-Step Execution**:
-- Count the frequency of each character: `a: 3`, `b: 3`, `c: 3`.
-- Push into the priority queue: `pq = [ ('c', 3), ('b', 3), ('a', 3)]`.
-- Add `c` twice, then `b` once, then `a` once.
-- Reinsert remaining `c`, `b`, and `a` into the queue and continue the process.
+13. **Re-check Queue**
+	```cpp
+	        if(cnt > 0 && !pq.empty()) {
+	```
+	Check if the current character still has remaining counts and if there are other characters in the priority queue.
 
-**Final Output**: `"cbacbac"`
+14. **Process Next Character**
+	```cpp
+	            pair<char, int> sp = pq.top();
+	```
+	Extract the character with the second highest frequency from the priority queue.
 
-### Time Complexity
+15. **Pop Next Character**
+	```cpp
+	            pq.pop();
+	```
+	Remove the second highest frequency character from the queue.
 
-- **Time Complexity**: The time complexity is **O(n log k)**, where `n` is the length of the input string `s`, and `k` is the number of distinct characters in `s` (at most 26, since there are 26 lowercase letters). The most time-consuming operation is the heap push/pop operation, which takes `O(log k)` time. Since each character is pushed and popped at most once, the overall complexity is **O(n log k)**.
+16. **Add Next Character**
+	```cpp
+	            ans.push_back(sp.first);
+	```
+	Add the second character to the result string `ans`.
 
-- **Space Complexity**: The space complexity is **O(k)**, where `k` is the number of distinct characters in the string (at most 26). We store each character and its frequency in a priority queue and an array.
+17. **Re-insert Reduced Character**
+	```cpp
+	            if(sp.second > 1) {
+	```
+	If the second character has more than one occurrence left, reduce its frequency and add it back to the queue.
 
-### Conclusion
+18. **Update First Character**
+	```cpp
+	                sp.second--;
+	```
+	Decrement the frequency of the second character.
 
-The solution efficiently constructs the required string while respecting the lexicographical order and the repetition limit. The use of a priority queue ensures that we can efficiently manage the characters in the required order and process them based on their frequencies. The approach handles edge cases, like when the string contains a small number of characters or when all characters are identical, making it both robust and efficient.
+19. **Re-add Second Character**
+	```cpp
+	                pq.push(sp);
+	```
+	Push the second character back into the priority queue after decrementing its frequency.
+
+20. **Re-add First Character**
+	```cpp
+	            }
+	```
+	Complete the process of re-adding the characters to the queue.
+
+21. **Update First Character Frequency**
+	```cpp
+	            p.second = cnt;
+	```
+	Update the frequency of the first character after adding it to the result.
+
+22. **Re-add First Character to Queue**
+	```cpp
+	            pq.push(p);
+	```
+	Push the first character back into the priority queue with its updated frequency.
+
+23. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the final string `ans`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log k)
+- **Average Case:** O(n log k)
+- **Worst Case:** O(n log k)
+
+Heap operations dominate the time complexity, where n is the string length and k is the number of distinct characters.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+Heap storage and frequency tracking require space proportional to the number of distinct characters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-string-with-repeat-limit/description/)
 

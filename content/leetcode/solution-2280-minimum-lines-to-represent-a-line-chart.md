@@ -14,176 +14,172 @@ img_src = ""
 youtube = "EkoNpVUBSVo"
 youtube_upload_date="2022-05-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/EkoNpVUBSVo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of stock prices where each element represents the stock price on a specific day. The stock prices are given as pairs where the first element is the day number and the second element is the stock price for that day. A line chart can be drawn by plotting these prices on an XY-plane, where the X-axis represents the day and the Y-axis represents the price. Your task is to determine the minimum number of lines required to represent the stock prices as a continuous line chart.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 2D array `stockPrices` where each element `stockPrices[i] = [day_i, price_i]` represents the stock price on `day_i` with a price of `price_i`.
+- **Example:** `Input: stockPrices = [[1, 10], [2, 15], [3, 12], [4, 18], [5, 20]]`
+- **Constraints:**
+	- 1 <= stockPrices.length <= 10^5
+	- stockPrices[i].length == 2
+	- 1 <= day_i, price_i <= 10^9
+	- All day_i are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumLines(vector<vector<int>>& stk) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the minimum number of lines needed to represent the stock price chart.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the minimum number of straight lines that can connect all the stock prices by determining if the points lie on the same straight line.
+
+- Sort the stock prices by the day.
+- Iterate through the stock prices and check if each consecutive pair lies on the same line as the previous pair.
+- If a new line is required, increment the count.
+{{< dots >}}
+### Problem Assumptions ✅
+- Stock prices will be provided in unsorted order, so sorting is required.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: stockPrices = [[1, 7], [2, 6], [3, 5], [4, 4], [5, 4], [6, 3], [7, 2], [8, 1]]`  \
+  **Explanation:** The stock prices need 3 lines to be represented. The first line connects points (1, 7) to (4, 4). The second line connects (4, 4) to (5, 4), and the third line connects (5, 4) to (8, 1).
+
+- **Input:** `Input: stockPrices = [[1, 3], [2, 5], [3, 7], [4, 9], [5, 11]]`  \
+  **Explanation:** The stock prices form a single line where the price increases uniformly. Therefore, only one line is needed to represent the chart.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over the stock prices and checking if consecutive points lie on the same straight line. A new line is needed whenever the slope between consecutive points changes.
+
+### Initial Thoughts 💭
+- This problem can be solved efficiently by analyzing the slope between consecutive points and checking if they remain constant.
+- Sorting the stock prices will help simplify checking consecutive points. The main task is to check if each consecutive triplet of points lies on the same straight line.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is always non-empty since stockPrices.length is at least 1.
+- The solution should handle up to 100,000 stock prices efficiently.
+- If all prices are the same, only one line is required.
+- Sorting is O(n log n), and the overall complexity should not exceed O(n log n).
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumLines(vector<vector<int>>& stk) {
+    
+    sort(stk.begin(), stk.end());
+    
+    int res = 1, n = stk.size();
+    if (n < 2) return 0;
+
+    for(int i = 2; i < n; i++) {
+        long x1 = stk[i][0], x2 = stk[i - 1][0], x3 = stk[i - 2][0];
+        long y1 = stk[i][1], y2 = stk[i - 1][1], y3 = stk[i - 2][1];
         
-        sort(stk.begin(), stk.end());
+        long diff1 = (y3 - y2) * (x2 - x1);
+        long diff2 = (y2 - y1) * (x3 - x2);
         
-        int res = 1, n = stk.size();
-        if (n < 2) return 0;
-
-        for(int i = 2; i < n; i++) {
-            long x1 = stk[i][0], x2 = stk[i - 1][0], x3 = stk[i - 2][0];
-            long y1 = stk[i][1], y2 = stk[i - 1][1], y3 = stk[i - 2][1];
-            
-            long diff1 = (y3 - y2) * (x2 - x1);
-            long diff2 = (y2 - y1) * (x3 - x2);
-            
-            if (diff1 != diff2) res++;
-        }
-
-        return res;
+        if (diff1 != diff2) res++;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-In this problem, we are given a list of 2D points represented as pairs of coordinates, and our goal is to determine the minimum number of straight lines required to connect all the points. The key challenge is to minimize the number of lines by grouping points that lie on the same straight line.
-
-A straight line is defined by two points, and if a third point lies on the same line, it will satisfy the equation of the line formed by the first two points. The problem requires finding the minimum number of such lines needed to connect all points.
-
-### Approach
-
-To solve this problem, we need to find the minimal number of straight lines that can connect all the given points, such that some points are collinear (lie on the same line). Here's how we can approach the problem:
-
-1. **Sorting the Points**: First, we sort the points by their x-coordinates. Sorting helps us process the points in an orderly manner and helps ensure that we check for collinearity in a sequential manner.
-
-2. **Checking for Collinearity**: The main task is to determine if three consecutive points lie on the same straight line. To check whether three points are collinear, we can calculate the slope between pairs of points. Instead of computing the slope directly (which could involve division and floating-point errors), we compare the cross-products of the differences in the y-coordinates and x-coordinates.
-
-   - For three points \( (x1, y1), (x2, y2), (x3, y3) \), the points are collinear if:
-   
-     \[
-     (y2 - y1) * (x3 - x2) = (y3 - y2) * (x2 - x1)
-     \]
-   
-   If this condition holds, the three points are collinear and can be connected by the same line. If not, a new line is needed.
-
-3. **Counting the Number of Lines**: We start by assuming that the first two points are connected by a line, so we set the initial number of lines to 1. Then, we iterate through the rest of the points, checking for collinearity with the previous two points. If a point is collinear with the previous two, it can be connected to the same line. If not, we increment the count of lines.
-
-4. **Handling Edge Cases**: The algorithm also accounts for small inputs, such as when there are fewer than two points. In such cases, no lines are required, and the output is 0.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code to understand its functionality in detail:
-
-#### Step 1: Sort the Points
-
-```cpp
-sort(stk.begin(), stk.end());
-```
-
-- First, we sort the points in increasing order based on their x-coordinates. Sorting helps to process points sequentially, making it easier to check for collinearity between consecutive points.
-  
-#### Step 2: Initialize Variables
-
-```cpp
-int res = 1, n = stk.size();
-if (n < 2) return 0;
-```
-
-- We initialize `res` to 1, assuming that at least one line is required to connect the points.
-- We check if the number of points is less than 2. If so, no lines are required (since a single point doesn’t need a line to connect it), so we return 0 immediately.
-
-#### Step 3: Iterate Through Points to Check for Collinearity
-
-```cpp
-for(int i = 2; i < n; i++) {
-    long x1 = stk[i][0], x2 = stk[i - 1][0], x3 = stk[i - 2][0];
-    long y1 = stk[i][1], y2 = stk[i - 1][1], y3 = stk[i - 2][1];
-    
-    long diff1 = (y3 - y2) * (x2 - x1);
-    long diff2 = (y2 - y1) * (x3 - x2);
-    
-    if (diff1 != diff2) res++;
+    return res;
 }
 ```
 
-- We begin the loop from the third point (index 2) and iterate through the list of points.
-- For each point, we calculate the cross-products to check if the current point and the previous two points are collinear.
-  - `diff1` and `diff2` represent the cross-products of differences in y-coordinates and x-coordinates for the consecutive points. If `diff1` is equal to `diff2`, it means the points are collinear.
-  - If the points are not collinear, we increment the count of lines `res`.
+This function computes the minimum number of lines required to connect a set of points on a 2D plane. It sorts the points, then compares the slopes of consecutive triplets of points to determine if they lie on the same straight line. If not, the result counter `res` is incremented.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minimumLines(vector<vector<int>>& stk) {
+	```
+	The function header for `minimumLines` which takes a vector of vectors `stk` representing a list of points (each point is a pair of coordinates), and returns the minimum number of lines required to connect these points.
 
-```cpp
-return res;
-```
+2. **Sort Points**
+	```cpp
+	    sort(stk.begin(), stk.end());
+	```
+	This line sorts the vector `stk` in ascending order of points, which is essential to efficiently compare consecutive points and check if they lie on the same line.
 
-- After the loop, we return the total count of lines required to connect all points.
+3. **Initialize Variables**
+	```cpp
+	    int res = 1, n = stk.size();
+	```
+	Here, we initialize `res` to 1 (as at least one line is needed) and `n` to the number of points in `stk`. If there are fewer than 2 points, no line is needed, so the function would return 0.
 
-### Complexity
+4. **Early Exit**
+	```cpp
+	    if (n < 2) return 0;
+	```
+	If there are fewer than two points, no lines can be drawn, so the function returns 0.
 
-#### Time Complexity
+5. **Loop Over Points**
+	```cpp
+	    for(int i = 2; i < n; i++) {
+	```
+	This `for` loop starts from index 2 and iterates over the points to compare triplets of points to check if they lie on the same line.
 
-1. **Sorting the Points**: Sorting the points takes **O(n log n)** time, where `n` is the number of points. This is because the sort operation uses an efficient sorting algorithm like QuickSort or MergeSort, which has a time complexity of **O(n log n)**.
+6. **Extract Points**
+	```cpp
+	        long x1 = stk[i][0], x2 = stk[i - 1][0], x3 = stk[i - 2][0];
+	```
+	These lines extract the x-coordinates of the current point (`x1`), the previous point (`x2`), and the point before that (`x3`) to check the slope between these points.
 
-2. **Checking for Collinearity**: The loop iterates through each point exactly once, and in each iteration, we perform constant time calculations to check for collinearity. Therefore, the time complexity for this step is **O(n)**.
+7. **Extract Points (y-coordinates)**
+	```cpp
+	        long y1 = stk[i][1], y2 = stk[i - 1][1], y3 = stk[i - 2][1];
+	```
+	Similarly, these lines extract the y-coordinates (`y1`, `y2`, and `y3`) of the current, previous, and second previous points.
 
-Thus, the overall time complexity of the algorithm is:
-- **O(n log n)** due to the sorting step.
+8. **Calculate Slope Differences**
+	```cpp
+	        long diff1 = (y3 - y2) * (x2 - x1);
+	```
+	This calculates the first slope difference, which represents the difference in slopes between the last two points (`x1, y1` and `x2, y2`).
 
-#### Space Complexity
+9. **Calculate Slope Differences (cont.)**
+	```cpp
+	        long diff2 = (y2 - y1) * (x3 - x2);
+	```
+	This calculates the second slope difference, representing the difference in slopes between the second and third points (`x2, y2` and `x3, y3`).
 
-- The space complexity is **O(1)** because we only use a few extra variables for calculations, and the input is sorted in-place. No extra space is used other than the input itself.
+10. **Check Slopes**
+	```cpp
+	        if (diff1 != diff2) res++;
+	```
+	If the two slope differences (`diff1` and `diff2`) are not equal, this means the three points do not lie on the same straight line, so the result counter `res` is incremented.
 
-### Example Walkthrough
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Finally, the function returns the number of lines required to connect the points.
 
-Let’s walk through an example to better understand how the solution works.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-#### Example 1
+The time complexity is O(n log n) due to the sorting of the stock prices.
 
-```cpp
-vector<vector<int>> points = {{1, 1}, {2, 2}, {3, 3}, {4, 5}, {5, 5}};
-```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-1. First, we sort the points by their x-coordinates:
-   - After sorting, the points are: `{{1, 1}, {2, 2}, {3, 3}, {4, 5}, {5, 5}}`.
+The space complexity is O(n) for storing the sorted stock prices.
 
-2. We initialize `res = 1` (assuming at least one line is required) and start checking for collinearity from the third point.
+**Happy Coding! 🎉**
 
-3. For the first set of points (`{1, 1}, {2, 2}, {3, 3}`), we calculate the cross-products:
-   - `diff1 = (2 - 1) * (3 - 2) = 1`
-   - `diff2 = (3 - 2) * (2 - 1) = 1`
-   - Since `diff1 == diff2`, the points are collinear, and we don’t need to increment `res`.
-
-4. For the next set of points (`{2, 2}, {3, 3}, {4, 5}`), we calculate the cross-products:
-   - `diff1 = (3 - 2) * (4 - 3) = 1`
-   - `diff2 = (4 - 3) * (3 - 2) = 1`
-   - Since `diff1 != diff2`, the points are not collinear, so we increment `res` to 2.
-
-5. For the last set of points (`{3, 3}, {4, 5}, {5, 5}`), we calculate the cross-products:
-   - `diff1 = (5 - 5) * (4 - 5) = 0`
-   - `diff2 = (5 - 3) * (5 - 4) = 2`
-   - Since `diff1 != diff2`, the points are not collinear, so we increment `res` to 3.
-
-6. The result is `res = 3`, meaning three lines are required to connect all the points.
-
-#### Example 2
-
-```cpp
-vector<vector<int>> points = {{1, 1}, {2, 2}, {3, 3}};
-```
-
-1. Sorting the points gives: `{{1, 1}, {2, 2}, {3, 3}}`.
-
-2. The first two points `{1, 1}` and `{2, 2}` are collinear with the third point `{3, 3}`, so only one line is needed.
-
-3. The result is `res = 1`.
-
-### Conclusion
-
-This solution efficiently calculates the minimum number of straight lines required to connect a set of points using sorting and collinearity checks. By leveraging the properties of collinearity and using cross-products to avoid floating-point arithmetic, it ensures that the solution is both accurate and efficient. With a time complexity of **O(n log n)**, this approach works well for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-lines-to-represent-a-line-chart/description/)
 

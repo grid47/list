@@ -14,124 +14,188 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+The task is to find the kth integer in the range [lo, hi] sorted by the number of steps required to reach 1 using the Collatz conjecture rules. The power of a number is the number of steps needed to reach 1, following the rules: if the number is even, divide it by 2, and if it's odd, multiply it by 3 and add 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three integers lo, hi, and k. The integers lo and hi represent the range of numbers to check, and k is the position of the number to return after sorting by power value.
+- **Example:** `For lo = 10, hi = 15, and k = 2, the second number in the sorted list of powers is 11.`
+- **Constraints:**
+	- 1 <= lo <= hi <= 1000
+	- 1 <= k <= hi - lo + 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    map<int, int> memo;
-    
-    int dig(int num) {
-        if(num == 1) return 0;
-        if(memo.count(num)) return memo[num];
-        if(num % 2 == 0)
-            return memo[num] = dig(num / 2) + 1;
-        return memo[num] = dig(3 * num + 1) + 1;        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the kth integer from the sorted list of integers based on their power values.
+- **Example:** `For lo = 10, hi = 15, and k = 2, the output is 11.`
+- **Constraints:**
+	- The result will always be a valid integer within the specified range.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the number of steps (power) for each integer in the range and return the kth integer after sorting them by their power values.
+
+- 1. Compute the power of each number in the range [lo, hi].
+- 2. Sort the numbers based on their power values. If two numbers have the same power, sort them by their value.
+- 3. Return the kth number from the sorted list.
+{{< dots >}}
+### Problem Assumptions ✅
+- All integers in the range [lo, hi] will eventually transform into 1.
+- The power values of all integers will fit within a 32-bit signed integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For lo = 5, hi = 9, k = 3, the sorted list of powers is [8, 6, 5, 7, 9], so the third number is 5.`  \
+  **Explanation:** The power of each integer in the range [5, 9] is calculated. The numbers are then sorted by their power values, and the kth number is returned.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will compute the power for each integer in the range [lo, hi], sort them by their power values, and return the kth element.
+
+### Initial Thoughts 💭
+- We need to calculate the Collatz steps for each number efficiently.
+- Memoization can be used to store intermediate results to avoid redundant calculations.
+- A recursive approach with memoization can be applied to compute the power values for each integer.
+{{< dots >}}
+### Edge Cases 🌐
+- The input range [lo, hi] will always have at least one integer.
+- The function needs to efficiently compute the power for numbers in the range up to 1000.
+- Edge cases where lo and hi are the same value should be handled properly.
+- The function must work efficiently within the provided input constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+map<int, int> memo;
+
+int dig(int num) {
+    if(num == 1) return 0;
+    if(memo.count(num)) return memo[num];
+    if(num % 2 == 0)
+        return memo[num] = dig(num / 2) + 1;
+    return memo[num] = dig(3 * num + 1) + 1;        
+}
+
+int getKth(int lo, int hi, int k) {
+    vector<pair<int,int>> ans;
+    for(int i = lo; i <= hi; i++) {
+        int tmp = dig(i);
+        ans.push_back({tmp, i});
     }
-    
-    int getKth(int lo, int hi, int k) {
-        vector<pair<int,int>> ans;
-        for(int i = lo; i <= hi; i++) {
-            int tmp = dig(i);
-            ans.push_back({tmp, i});
-        }
-        sort(ans.begin(), ans.end());
-        return ans[k - 1].second;
-    }
-};
-{{< /highlight >}}
----
+    sort(ans.begin(), ans.end());
+    return ans[k - 1].second;
+}
+```
 
-### Problem Statement
+This solution finds the kth number between a range [lo, hi] based on the number of steps it takes to reduce the number to 1 following the 3x + 1 sequence. It uses memoization to optimize recursive calls.
 
-The problem involves finding the k-th integer in a specified range \([lo, hi]\) based on a sequence derived from the Collatz conjecture. The Collatz sequence for a number \(n\) follows these rules:
-- If \(n\) is even, divide it by 2.
-- If \(n\) is odd, multiply it by 3 and add 1.
-- Repeat the process until reaching 1.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Data Structures**
+	```cpp
+	map<int, int> memo;
+	```
+	Declare a memoization map `memo` to store previously computed results for the 'dig' function, optimizing repeated calculations.
 
-The challenge is to determine the number of steps it takes for each integer in the range to reach 1 and then return the k-th integer with the lowest number of steps. If two integers take the same number of steps, they should be sorted by their value.
+2. **Function Definition**
+	```cpp
+	int dig(int num) {
+	```
+	Define the recursive function `dig` that calculates the number of steps to reduce a number to 1 using the 3x + 1 problem's rules.
 
-### Approach
+3. **Base Case**
+	```cpp
+	    if(num == 1) return 0;
+	```
+	If the number is 1, return 0 since no steps are needed.
 
-The solution consists of the following steps:
+4. **Memoization**
+	```cpp
+	    if(memo.count(num)) return memo[num];
+	```
+	Check if the result for the current number has been computed before and return it from the memoization map.
 
-1. **Memoization for Efficiency**: Since the number of steps for many integers may overlap (as they could reach the same numbers through different paths), we will use memoization to store previously computed results for quick lookups.
+5. **Condition**
+	```cpp
+	    if(num % 2 == 0)
+	```
+	If the number is even, apply the rule `num / 2`.
 
-2. **Calculating Steps**: For each integer in the specified range, compute the number of steps to reach 1 using the rules of the Collatz conjecture.
+6. **Recursion**
+	```cpp
+	        return memo[num] = dig(num / 2) + 1;
+	```
+	Recursively call `dig(num / 2)` and store the result in `memo[num]`, adding 1 to account for the step.
 
-3. **Sorting Results**: Store the results in a list, sort this list first by the number of steps and then by the integer value itself.
+7. **Recursion**
+	```cpp
+	    return memo[num] = dig(3 * num + 1) + 1;        
+	```
+	If the number is odd, apply the rule `3 * num + 1`, recursively call `dig(3 * num + 1)`, and store the result in `memo[num]`.
 
-4. **Returning the Result**: Finally, extract and return the k-th integer from the sorted list.
+8. **Function Definition**
+	```cpp
+	int getKth(int lo, int hi, int k) {
+	```
+	Define the function `getKth` to find the kth number in the range [lo, hi] based on the number of steps from `dig`.
 
-### Code Breakdown (Step by Step)
+9. **Data Structures**
+	```cpp
+	    vector<pair<int,int>> ans;
+	```
+	Declare a vector `ans` of pairs to store the computed step counts and the corresponding numbers.
 
-Here's a detailed breakdown of the provided C++ code:
+10. **Loop**
+	```cpp
+	    for(int i = lo; i <= hi; i++) {
+	```
+	Loop through all numbers in the range [lo, hi].
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-       map<int, int> memo;
-   ```
-   - The `Solution` class contains a method to calculate the k-th integer based on the Collatz conjecture. A `map<int, int>` named `memo` is used to store the number of steps for each integer.
+11. **Function Call**
+	```cpp
+	        int tmp = dig(i);
+	```
+	Call the `dig` function to get the number of steps required to reduce the current number `i` to 1.
 
-2. **Collatz Function (dig)**:
-   ```cpp
-       int dig(int num) {
-           if(num == 1) return 0;
-           if(memo.count(num)) return memo[num];
-           if(num % 2 == 0)
-               return memo[num] = dig(num / 2) + 1;
-           return memo[num] = dig(3 * num + 1) + 1;        
-       }
-   ```
-   - The `dig` function calculates the number of steps required for a given number \(num\) to reach 1.
-   - If \(num\) is 1, it returns 0, indicating no steps are needed.
-   - If the number has already been computed (exists in `memo`), it retrieves and returns the stored value.
-   - If \(num\) is even, it calls itself with \(num / 2\) and adds 1 (for the step taken).
-   - If \(num\) is odd, it calls itself with \(3 \times num + 1\) and adds 1.
+12. **Data Structures**
+	```cpp
+	        ans.push_back({tmp, i});
+	```
+	Store the result (step count `tmp` and number `i`) as a pair in the vector `ans`.
 
-3. **Main Function (getKth)**:
-   ```cpp
-       int getKth(int lo, int hi, int k) {
-           vector<pair<int,int>> ans;
-           for(int i = lo; i <= hi; i++) {
-               int tmp = dig(i);
-               ans.push_back({tmp, i});
-           }
-   ```
-   - The `getKth` function accepts three parameters: the lower bound \(lo\), the upper bound \(hi\), and \(k\).
-   - It initializes a vector of pairs `ans` to store the number of steps alongside the integer itself.
-   - A loop iterates through all integers from \(lo\) to \(hi\), calculating the number of steps for each integer using the `dig` function, and stores the results in `ans`.
+13. **Sorting**
+	```cpp
+	    sort(ans.begin(), ans.end());
+	```
+	Sort the vector `ans` based on the step count in ascending order, ensuring that the number with the fewest steps comes first.
 
-4. **Sorting and Returning the Result**:
-   ```cpp
-           sort(ans.begin(), ans.end());
-           return ans[k - 1].second;
-       }
-   };
-   ```
-   - After populating the `ans` vector, it is sorted based on the first element (number of steps) and, in case of a tie, by the integer value itself.
-   - Finally, the k-th integer (0-indexed) is accessed from the sorted list and returned.
+14. **Return Statement**
+	```cpp
+	    return ans[k - 1].second;
+	```
+	Return the second element (the number) of the kth pair in the sorted vector `ans`.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n), where n is the number of integers in the range [lo, hi].
+- **Average Case:** O(n log n), considering sorting of the numbers based on power values.
+- **Worst Case:** O(n log n), where n is the number of integers in the range and log n is the complexity of sorting.
 
-- **Time Complexity**:
-  - The time complexity is \(O(n \log n)\) for sorting the list of integers, where \(n\) is the number of integers in the range \([lo, hi]\). The `dig` function itself has an average complexity of \(O(\log n)\) per integer due to the nature of the Collatz sequence.
+The primary time complexity is due to sorting the numbers by their power values.
 
-- **Space Complexity**:
-  - The space complexity is \(O(n)\) for storing the pairs in the `ans` vector and for the memoization map, which can potentially hold values for each integer in the range.
+### Space Complexity 💾
+- **Best Case:** O(n), for storing the memoized results and the list of integers.
+- **Worst Case:** O(n), where n is the number of integers in the range [lo, hi], for storing the power values and the sorted list.
 
-### Conclusion
+The space complexity is determined by the storage of the memoized results and the list of integers.
 
-The provided solution efficiently computes the k-th integer in a range based on the steps required to reach 1 using the Collatz conjecture. By leveraging memoization, the algorithm reduces redundant calculations, making it more efficient than a naive approach. This implementation serves as a practical example of combining recursion, dynamic programming principles, and sorting techniques in algorithm design.
+**Happy Coding! 🎉**
 
-Understanding this code enhances one’s grasp of complex number manipulation and recursive problem-solving techniques. Moreover, it illustrates how to efficiently handle potentially large input ranges with clever use of data structures. This approach not only addresses the immediate problem but also provides foundational knowledge applicable to a variety of algorithmic challenges in competitive programming and software development.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-integers-by-the-power-value/description/)
 

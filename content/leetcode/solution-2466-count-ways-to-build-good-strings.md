@@ -14,129 +14,195 @@ img_src = ""
 youtube = "t0QkjXhE02g"
 youtube_upload_date="2023-05-14"
 youtube_thumbnail="https://i.ytimg.com/vi/t0QkjXhE02g/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with constructing binary strings using the characters '0' and '1'. The string can be built by repeatedly appending '0' zero times or '1' one times, where 'zero' and 'one' are given values. The length of the final string must lie between 'low' and 'high', inclusive. Your task is to find how many different binary strings can be created that meet these requirements. Return the count modulo 1e9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with four integers: low, high, zero, and one. The integers 'low' and 'high' define the range for the possible lengths of the resulting binary string, while 'zero' and 'one' specify how many times the character '0' or '1' can be appended at each step.
+- **Example:** `low = 2, high = 4, zero = 1, one = 2`
+- **Constraints:**
+	- 1 <= low <= high <= 105
+	- 1 <= zero, one <= low
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct binary strings that can be constructed such that their length lies between 'low' and 'high' inclusive. The answer should be returned modulo 1e9 + 7.
+- **Example:** `For low = 2, high = 4, zero = 1, one = 2, the output is 6.`
+- **Constraints:**
+	- The result should be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to calculate the number of distinct good binary strings that can be constructed using the provided constraints.
+
+- For each possible length between 'low' and 'high', calculate the number of ways to construct a binary string of that length using dynamic programming.
+- Store previously computed results to avoid redundant calculations.
+- Return the sum of the results modulo 1e9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always respect the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For low = 2, high = 4, zero = 1, one = 2`  \
+  **Explanation:** The good binary strings that can be formed are: '00', '11', '000', '011', '110', '111'. There are 6 distinct strings, so the output is 6.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses dynamic programming to efficiently count the number of distinct binary strings for each length between 'low' and 'high'.
+
+### Initial Thoughts 💭
+- This problem can be solved efficiently using dynamic programming to keep track of previously computed results for subproblems.
+- Dynamic programming is the best approach here because it avoids recalculating the number of ways to form strings of the same length multiple times.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the input values will always be within the valid range.
+- Ensure that the solution works within the time limits for inputs where high can be as large as 100,000.
+- If zero equals one, the problem becomes simpler as the number of ways to form strings is identical for both cases.
+- The solution needs to handle inputs where the difference between low and high can be large.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    int mod = 1e9 + 7;
-public:
-    int countGoodStrings(int low, int high, int zero, int one) {
-        
-        vector<int> dp(high + 1, -1);
-        int ans = 0;
-        for(int i = low; i <= high; i++) {
-            ans = (ans + score(i, dp, zero, one)) % mod;
-        }
-        return ans;
-    }
-
-    int score(int target, vector<int> &dp, int zero, int one) {
-        if(target == 0)      return 1;
-        if(target < 1 )      return 0;
-        if(dp[target] != -1) return dp[target];
-
-        long long sum = score(target - zero, dp, zero, one) + score(target - one, dp, zero, one);
-
-        return dp[target] = sum % mod;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-
-The problem asks us to count the number of good strings that can be generated given certain constraints. A good string is defined as a string whose length lies between a given range `[low, high]` and can be formed by appending either `zero` number of '0's or `one` number of '1's to previously formed strings. The challenge is to count how many such strings can be formed and return the result modulo \(10^9 + 7\).
-
-Specifically, the problem gives us:
-- `low` and `high`, which represent the minimum and maximum length of the strings.
-- `zero` and `one`, which are the two possible ways of appending to a string (either `zero` '0's or `one` '1's at each step).
-We need to count the total number of valid strings of lengths between `low` and `high`, inclusive.
-
-### Approach:
-
-To solve the problem, we can break it down into the following steps:
-
-1. **Dynamic Programming**: 
-   The problem can be approached using dynamic programming (DP) to efficiently calculate the number of good strings that can be formed for each possible length up to `high`.
-
-2. **Recursive Function**:
-   We define a recursive function `score(target)` that calculates how many good strings can be formed for a given target length `target`. The function takes advantage of previously computed results (memoization) to avoid redundant calculations.
-
-3. **Memoization**:
-   To improve efficiency, we store the results of already computed subproblems using a DP table (`dp`). The DP table is indexed by the string length, and each entry contains the number of good strings that can be formed for that length.
-
-4. **Base Cases**:
-   - For `target == 0`, we return 1 because there is exactly one valid string of length 0 (the empty string).
-   - For `target < 0`, we return 0 because we cannot form a string with a negative length.
-
-5. **Transition**:
-   To compute the number of good strings for a length `target`, we consider the last operation:
-   - If the last operation added `zero` '0's, the number of ways to form the string is `score(target - zero)`.
-   - If the last operation added `one` '1's, the number of ways to form the string is `score(target - one)`.
-   Therefore, the total number of ways to form a string of length `target` is the sum of the two possibilities, i.e., `score(target - zero) + score(target - one)`.
-
-6. **Modulo Operation**:
-   Since the number of strings can become very large, every computation is done modulo \(10^9 + 7\) to prevent overflow and ensure the result fits within the constraints.
-
-7. **Final Computation**:
-   Once we have the DP table populated, we compute the total number of good strings of lengths between `low` and `high` by summing the results for all lengths from `low` to `high`.
-
-### Code Breakdown (Step by Step):
-
-#### 1. Class Definition and Modulo Constant:
-```cpp
 int mod = 1e9 + 7;
-```
-- `mod` is the modulo constant \(10^9 + 7\) which will be used to compute all results modulo this value to avoid overflow.
-
-#### 2. Main Function - `countGoodStrings`:
-```cpp
+public:
 int countGoodStrings(int low, int high, int zero, int one) {
-    vector<int> dp(high + 1, -1); // Initialize the DP table with -1 (indicating uncalculated values)
-    int ans = 0; // Variable to store the final answer
     
+    vector<int> dp(high + 1, -1);
+    int ans = 0;
     for(int i = low; i <= high; i++) {
-        ans = (ans + score(i, dp, zero, one)) % mod; // Sum the results for lengths between low and high
+        ans = (ans + score(i, dp, zero, one)) % mod;
     }
-    return ans; // Return the final result
+    return ans;
 }
-```
-- **Initialization**: We initialize the DP table `dp` with size `high + 1` and set all values to `-1`, indicating that they have not been computed yet.
-- **Loop over possible lengths**: We iterate over all lengths from `low` to `high` and compute the number of good strings for each length using the `score` function. The result is added to the total `ans` and taken modulo \(10^9 + 7\).
 
-#### 3. Helper Function - `score`:
-```cpp
 int score(int target, vector<int> &dp, int zero, int one) {
-    if(target == 0)      return 1; // Base case: exactly one way to form a string of length 0
-    if(target < 1 )      return 0; // If the target is negative, return 0 (no valid string)
-    if(dp[target] != -1) return dp[target]; // If already calculated, return the stored result
+    if(target == 0)      return 1;
+    if(target < 1 )      return 0;
+    if(dp[target] != -1) return dp[target];
 
-    long long sum = score(target - zero, dp, zero, one) + score(target - one, dp, zero, one); // Recursive call to calculate the number of ways
+    long long sum = score(target - zero, dp, zero, one) + score(target - one, dp, zero, one);
 
-    return dp[target] = sum % mod; // Store the result in dp and return the result modulo mod
+    return dp[target] = sum % mod;
 }
 ```
-- **Base cases**: If `target == 0`, there is exactly one valid string (the empty string). If `target < 0`, no valid string can be formed, so return 0.
-- **Memoization**: If the result for `dp[target]` is already computed (i.e., not `-1`), we simply return the value from the DP table.
-- **Recursive Calculation**: The total number of valid strings of length `target` is the sum of the results of two subproblems: forming a string by appending `zero` '0's and by appending `one` '1's. The result is taken modulo \(10^9 + 7\) and stored in `dp[target]`.
 
-### Complexity:
+This code implements a dynamic programming solution to calculate the number of good strings within a specified range. It uses memoization to optimize repeated calculations.
 
-1. **Time Complexity**:
-   - The `score` function is called recursively, but each subproblem is computed only once due to memoization. Thus, the time complexity is \(O(\text{high})\), since we are computing the number of good strings for each length from 0 to `high`.
-   - The total complexity of the algorithm is \(O(\text{high})\) because for each length from `low` to `high`, we are calculating the result once.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the main class for the solution.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(\text{high})\) due to the DP array `dp` that stores the results for each length from 0 to `high`.
+2. **Variable Initialization**
+	```cpp
+	int mod = 1e9 + 7;
+	```
+	Declares a constant modulus to handle large numbers and prevent overflow.
 
-### Conclusion:
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Marks the following methods as accessible from outside the class.
 
-The solution efficiently calculates the number of good strings of lengths between `low` and `high` using dynamic programming. By leveraging memoization to store previously computed results, the algorithm avoids redundant calculations and ensures optimal performance. The time and space complexity are linear in terms of the maximum string length `high`, making the solution scalable for large inputs. The modulo operation ensures that the results are within the problem's constraints.
+4. **Function Definition**
+	```cpp
+	int countGoodStrings(int low, int high, int zero, int one) {
+	```
+	Defines the main function to count good strings within a range.
+
+5. **Vector Initialization**
+	```cpp
+	    vector<int> dp(high + 1, -1);
+	```
+	Initializes a DP array to store intermediate results, reducing redundant calculations.
+
+6. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes a variable to store the cumulative count of good strings.
+
+7. **Loop**
+	```cpp
+	    for(int i = low; i <= high; i++) {
+	```
+	Iterates through each number in the given range.
+
+8. **DP Calculation**
+	```cpp
+	        ans = (ans + score(i, dp, zero, one)) % mod;
+	```
+	Updates the result using the `score` function while applying modulus to avoid overflow.
+
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the total count of good strings.
+
+10. **Recursive Function**
+	```cpp
+	int score(int target, vector<int> &dp, int zero, int one) {
+	```
+	Defines a helper function to recursively calculate the number of good strings for a target value.
+
+11. **Base Case**
+	```cpp
+	    if(target == 0)      return 1;
+	```
+	Returns 1 if the target is 0, as an empty string is a valid good string.
+
+12. **Base Case**
+	```cpp
+	    if(target < 1 )      return 0;
+	```
+	Returns 0 if the target is negative, as it is not valid.
+
+13. **Memoization Check**
+	```cpp
+	    if(dp[target] != -1) return dp[target];
+	```
+	Checks if the value for the current target is already computed to avoid redundant calculations.
+
+14. **Recursive Calculation**
+	```cpp
+	    long long sum = score(target - zero, dp, zero, one) + score(target - one, dp, zero, one);
+	```
+	Recursively calculates the sum of ways to achieve the target using `zero` and `one` steps.
+
+15. **Memoization Store**
+	```cpp
+	    return dp[target] = sum % mod;
+	```
+	Stores the computed result for the current target in the DP array and returns it.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the difference between high and low.
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution computes the number of ways to form strings for each length in the range between low and high.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because of the dynamic programming array used to store intermediate results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-ways-to-build-good-strings/description/)
 

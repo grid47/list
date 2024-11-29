@@ -14,131 +14,159 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays representing the preorder and postorder traversals of a binary tree. Your task is to reconstruct the binary tree from these two traversals and return the root node of the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with two integer arrays, preorder and postorder, where preorder is the preorder traversal and postorder is the postorder traversal of a binary tree.
+- **Example:** `Input: preorder = [1, 2, 4, 5, 3], postorder = [4, 5, 2, 3, 1]`
+- **Constraints:**
+	- 1 <= preorder.length <= 30
+	- 1 <= preorder[i] <= preorder.length
+	- All the values in preorder are unique.
+	- postorder.length == preorder.length
+	- 1 <= postorder[i] <= postorder.length
+	- All the values in postorder are unique.
+	- It is guaranteed that preorder and postorder represent the same binary tree.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int preIdx = 0, postIdx = 0;
-    TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
-        TreeNode* root = new TreeNode(preorder[preIdx++]);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root node of the reconstructed binary tree.
+- **Example:** `Output: [1, 2, 3, 4, 5]`
+- **Constraints:**
+	- The output should be the root node of the reconstructed tree.
 
-        if(root->val  != postorder[postIdx])
-            root->left = constructFromPrePost(preorder, postorder);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to use the preorder and postorder traversal information to reconstruct the binary tree. Preorder provides the root first, and postorder gives the root last. We need to identify the left and right subtrees and recursively reconstruct the tree.
 
-        if(root->val  != postorder[postIdx])
-            root->right = constructFromPrePost(preorder, postorder);
+- Start with the root node from preorder, which is the first element.
+- Use postorder to identify when we reach the root of the current subtree.
+- Recursively build the left and right subtrees by using the remaining elements of preorder and postorder, ensuring the structure is consistent with both traversals.
+{{< dots >}}
+### Problem Assumptions ✅
+- The preorder and postorder arrays represent the same binary tree and contain distinct values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: preorder = [1, 2, 4, 5, 3], postorder = [4, 5, 2, 3, 1]`  \
+  **Explanation:** In this example, the preorder traversal gives us the root of the tree first, and the postorder traversal tells us the root of the tree last. From the preorder traversal, we start with node 1 as the root. The left and right subtrees are identified by examining the first and last few elements of the arrays, reconstructing the tree recursively.
 
-        postIdx++;
-        return root;
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `Input: preorder = [1], postorder = [1]`  \
+  **Explanation:** In this case, the tree consists of just one node, 1, which is both the root and the only node in the tree.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+The problem requires reconstructing the binary tree from the preorder and postorder traversals. We need to use the information in the traversals to identify the root, left, and right subtrees recursively.
 
-The problem at hand is to reconstruct a binary tree from two traversal sequences: **preorder** and **postorder**. Given two arrays `preorder` and `postorder`, the task is to construct the binary tree. The tree nodes are represented by a structure `TreeNode` that contains a `val` (node value), a `left` pointer to the left child, and a `right` pointer to the right child.
+### Initial Thoughts 💭
+- Preorder traversal provides the root first, which helps in identifying the root of the tree at each level.
+- Postorder traversal provides the root last, allowing us to identify the boundaries of the left and right subtrees.
+- We can use recursion to process each subtree by maintaining the preorder and postorder arrays, adjusting the indices as we recursively construct the tree.
+{{< dots >}}
+### Edge Cases 🌐
+- If both preorder and postorder are empty, the tree is empty, and we return null.
+- The solution should efficiently handle the case where the length of the input arrays is 30.
+- If the tree consists of only one node, both preorder and postorder will have a single element.
+- Ensure that the solution works for arrays with maximum size of 30 and handles recursion efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int preIdx = 0, postIdx = 0;
+TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
+    TreeNode* root = new TreeNode(preorder[preIdx++]);
 
-- **Preorder Traversal**: A type of depth-first traversal where the root node is visited first, followed by the left subtree, and then the right subtree.
-  
-- **Postorder Traversal**: A type of depth-first traversal where the left subtree is visited first, followed by the right subtree, and then the root node.
+    if(root->val  != postorder[postIdx])
+        root->left = constructFromPrePost(preorder, postorder);
 
-Given these two traversal sequences, the objective is to reconstruct the binary tree uniquely. The challenge lies in leveraging both traversals to efficiently reconstruct the tree structure.
+    if(root->val  != postorder[postIdx])
+        root->right = constructFromPrePost(preorder, postorder);
 
-### Approach
+    postIdx++;
+    return root;
+}
+```
 
-The approach used to solve this problem revolves around recursive tree construction using the **preorder** and **postorder** traversals. The key observations for solving the problem are:
-1. **Preorder traversal** gives the root of the tree (or subtrees) first.
-2. **Postorder traversal** gives the root of the tree (or subtrees) last.
+This is the full implementation of the algorithm to construct a binary tree from preorder and postorder traversal arrays. The recursive function builds the tree by checking the root value and its corresponding children based on preorder and postorder lists.
 
-#### Steps:
-1. **First Step (Preorder root)**: From the **preorder** traversal, the first element corresponds to the root of the current subtree (or the entire tree if we are starting from the root).
-2. **Recursive Subtrees**: After identifying the root node, we recursively build the left and right subtrees by identifying the respective elements in the **preorder** and **postorder** arrays.
-3. **Postorder Consistency**: In **postorder** traversal, the root of a subtree is always the last element. As we build the left and right subtrees recursively, we ensure that the subtrees' root nodes are correctly matched by the postorder traversal.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int preIdx = 0, postIdx = 0;
+	```
+	Initialize two index variables, preIdx and postIdx, to traverse the preorder and postorder arrays respectively.
 
-The solution is designed to traverse both arrays (preorder and postorder) and build the binary tree recursively while maintaining consistency between the two traversal sequences.
+2. **Function Definition**
+	```cpp
+	TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
+	```
+	Define the recursive function to construct the binary tree from preorder and postorder traversals.
 
-### Code Breakdown (Step by Step)
+3. **Node Creation**
+	```cpp
+	    TreeNode* root = new TreeNode(preorder[preIdx++]);
+	```
+	Create a new tree node with the current value from the preorder array and increment the preIdx to move to the next element.
 
-1. **TreeNode Structure**:
-   The `TreeNode` struct represents the binary tree node and is defined as follows:
-   ```cpp
-   struct TreeNode {
-       int val;
-       TreeNode *left;
-       TreeNode *right;
-       TreeNode() : val(0), left(nullptr), right(nullptr) {}
-       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-       TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-   };
-   ```
-   The `TreeNode` contains:
-   - `val`: The integer value of the node.
-   - `left`: A pointer to the left child node.
-   - `right`: A pointer to the right child node.
+4. **Condition Check**
+	```cpp
+	    if(root->val  != postorder[postIdx])
+	```
+	Check if the current node's value does not match the value in the postorder array. If it doesn't, the left child is not fully constructed.
 
-2. **Recursive Tree Construction**:
-   ```cpp
-   TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
-       TreeNode* root = new TreeNode(preorder[preIdx++]);  // Step 1: Get the root node
-   ```
-   - A new root node is created using the first element from the `preorder` array (i.e., the current root).
-   - We increment the `preIdx` to move to the next element in the `preorder` array for subsequent recursive calls.
+5. **Recursive Left Child Construction**
+	```cpp
+	        root->left = constructFromPrePost(preorder, postorder);
+	```
+	Recursively construct the left subtree if the root's value doesn't match the postorder value at postIdx.
 
-3. **Constructing Left Subtree**:
-   ```cpp
-   if(root->val != postorder[postIdx])  // Ensure left subtree exists
-       root->left = constructFromPrePost(preorder, postorder);
-   ```
-   - The condition checks if the value of the current root node (from `preorder`) is not equal to the current value in `postorder` (tracked by `postIdx`). If this is true, the left subtree exists, and we proceed to recursively construct it.
+6. **Condition Check**
+	```cpp
+	    if(root->val  != postorder[postIdx])
+	```
+	Check again for the root's value not matching the postorder array. If it still doesn't match, the right child is not fully constructed.
 
-4. **Constructing Right Subtree**:
-   ```cpp
-   if(root->val != postorder[postIdx])  // Ensure right subtree exists
-       root->right = constructFromPrePost(preorder, postorder);
-   ```
-   - Similarly, if the root node value is not equal to the current value in `postorder`, we recursively construct the right subtree.
+7. **Recursive Right Child Construction**
+	```cpp
+	        root->right = constructFromPrePost(preorder, postorder);
+	```
+	Recursively construct the right subtree if the root's value still doesn't match the postorder value at postIdx.
 
-5. **Postorder Completion**:
-   ```cpp
-   postIdx++;  // Move to the next postorder element
-   return root;  // Return the constructed root node
-   ```
-   - After constructing both subtrees (left and right), we increment `postIdx` to track the next element in the `postorder` traversal and return the constructed tree.
+8. **Postorder Index Update**
+	```cpp
+	    postIdx++;
+	```
+	Increment the postIdx to move to the next element in the postorder traversal after constructing both left and right subtrees.
 
-6. **Global Indices**:
-   - The indices `preIdx` and `postIdx` are used to keep track of the current position in the `preorder` and `postorder` arrays. These indices are global to ensure that the recursive calls can access and update them properly.
+9. **Return Root**
+	```cpp
+	    return root;
+	```
+	Return the root node, which now has its left and right subtrees properly linked.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Time Complexity:
-- The solution performs a single pass over both `preorder` and `postorder` arrays, with each element being processed exactly once. For each recursive call, we update the indices and create nodes. Thus, the time complexity is **O(N)**, where `N` is the number of nodes in the tree (which is also the length of the `preorder` or `postorder` array).
+The time complexity is linear, O(n), where n is the number of nodes in the tree, as we visit each node once during the recursion.
 
-#### Space Complexity:
-- The space complexity is **O(N)** due to the recursion stack and the space required to store the binary tree. We use additional space to store the tree nodes (`N` nodes in total), and the recursion stack depth can also go up to `N` in the worst case (if the tree is skewed).
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The space complexity is O(n) due to the recursion stack and the space needed to store the tree structure.
 
-This solution efficiently reconstructs a binary tree from the given **preorder** and **postorder** traversals using a recursive approach. The key to solving this problem is the relationship between the root and the order of nodes in the two traversal sequences. By keeping track of the current root in **preorder** and ensuring consistency with the last element in **postorder**, the binary tree is reconstructed step by step.
+**Happy Coding! 🎉**
 
-The solution is optimal in both time and space, with a linear time complexity of **O(N)**, making it suitable for large input sizes. This approach ensures that the tree is reconstructed correctly and efficiently, leveraging both the **preorder** and **postorder** traversal properties.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/description/)
 

@@ -14,103 +14,108 @@ img_src = ""
 youtube = "mahSMDuJL9A"
 youtube_upload_date="2022-10-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mahSMDuJL9A/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two events, each with a start time and end time in the HH:MM format, determine if the two events overlap at any point in time. Return `true` if there is any overlap, otherwise return `false`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Each input consists of two arrays, `event1` and `event2`. Both arrays have two string elements representing the start and end times of the respective events.
+- **Example:** `event1 = ["09:00","10:00"], event2 = ["09:30","11:00"]`
+- **Constraints:**
+	- event1.length == event2.length == 2
+	- event1[i].length == event2[i].length == 5
+	- startTime <= endTime
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool haveConflict(vector<string>& event1, vector<string>& event2) {
-        if(event2[0] <= event1[1] && event2[1] >= event1[0]) return true;
-        return false;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if there is a conflict, meaning the two events overlap in time. Otherwise, return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- Both input arrays are guaranteed to have exactly two elements each, representing valid time intervals.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if there is an overlap between two time intervals.
 
-The problem asks us to determine if two events, represented by two pairs of strings, have a time conflict. Each event has a start time and an end time, and the goal is to check if the events overlap or not. 
+- 1. Compare the start and end times of both events.
+- 2. If the start time of the second event is before or at the end time of the first event, and the end time of the second event is after or at the start time of the first event, then the events overlap.
+{{< dots >}}
+### Problem Assumptions ✅
+- The events are within the same day, and the times are given in valid 24-hour format.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `event1 = ["01:00","02:00"], event2 = ["01:30","03:00"]`  \
+  **Explanation:** The events overlap from 01:30 to 02:00, so the answer is `true`.
 
-The two events are given as two string arrays `event1` and `event2`. Each array contains two strings: the start time and the end time of the event. The times are formatted as "HH:MM" (24-hour clock format). We need to return `true` if there is a conflict (i.e., the events overlap in time) and `false` if they do not.
+- **Input:** `event1 = ["12:00","13:00"], event2 = ["14:00","15:00"]`  \
+  **Explanation:** The events do not overlap, so the answer is `false`.
 
-For example:
-- **Input**: `event1 = ["01:00", "02:00"], event2 = ["01:30", "02:30"]`
-- **Output**: `true`
+{{< dots >}}
+## Approach 🚀
+The approach involves comparing the time intervals of both events to check if there is any overlap.
 
-Explanation: The first event lasts from "01:00" to "02:00", and the second event lasts from "01:30" to "02:30". Since the two events overlap from "01:30" to "02:00", the function should return `true`.
-
-### Approach
-
-To determine if two events overlap, we can break down the problem as follows:
-
-1. **Understanding the Time Intervals**: Each event is defined by two time points: a start time and an end time. We can think of the times as intervals on a number line.
-2. **Checking for Overlap**: The two events overlap if:
-   - The start time of `event2` is before or equal to the end time of `event1` (`event2[0] <= event1[1]`), and
-   - The end time of `event2` is after or equal to the start time of `event1` (`event2[1] >= event1[0]`).
-   
-   If both of these conditions are satisfied, then the two events overlap, and we return `true`. Otherwise, they don't overlap, and we return `false`.
-
-3. **Time Comparison**: Since the times are given in the "HH:MM" format, string comparison will work directly. Strings in lexicographical order will give the correct chronological order for times in this format, as the hour and minute values will be compared in sequence.
-
-Thus, our task is to compare the start and end times of the two events directly using the above conditions.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Checking Overlap Condition
-
-The function `haveConflict` takes two input parameters: `event1` and `event2`, which are both vectors of strings representing the start and end times of the respective events.
-
+### Initial Thoughts 💭
+- If the start time of one event is before or at the end time of the other event, and the end time is after or at the start of the other event, the two events overlap.
+- This problem can be solved with simple comparisons of the start and end times of the two events.
+{{< dots >}}
+### Edge Cases 🌐
+- Input will not contain empty arrays as per the problem constraints.
+- Event times are always within the valid 24-hour range, so we don't need to worry about very large numbers.
+- When the start time and end time of both events are the same, the events will overlap, and the result should be `true`.
+- The time format is always valid, so no need for further validation.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool haveConflict(vector<string>& event1, vector<string>& event2) {
-    if (event2[0] <= event1[1] && event2[1] >= event1[0]) return true;
+    if(event2[0] <= event1[1] && event2[1] >= event1[0]) return true;
     return false;
 }
 ```
 
-1. **Input Parameters**:
-   - `event1` is an array containing two strings: `event1[0]` represents the start time and `event1[1]` represents the end time.
-   - `event2` is similarly an array containing two strings: `event2[0]` represents the start time and `event2[1]` represents the end time.
-   
-2. **Overlap Condition**:
-   The condition inside the `if` statement checks if the events overlap. Specifically, we check:
-   - If the start time of `event2` is before or at the same time as the end time of `event1` (`event2[0] <= event1[1]`), and
-   - If the end time of `event2` is after or at the same time as the start time of `event1` (`event2[1] >= event1[0]`).
+This code defines a function `haveConflict` which checks if two events conflict by comparing their start and end times.
 
-   If both conditions are true, then the events overlap, and we return `true`. If either condition fails, we return `false` indicating no overlap.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool haveConflict(vector<string>& event1, vector<string>& event2) {
+	```
+	This line defines the function `haveConflict` that takes two arguments, `event1` and `event2`, each representing a range of event start and end times.
 
-3. **Return Statement**:
-   If the events overlap, the function returns `true`; otherwise, it returns `false`.
+2. **Conditional Check**
+	```cpp
+	    if(event2[0] <= event1[1] && event2[1] >= event1[0]) return true;
+	```
+	This condition checks if the start time of `event2` is before or at the end time of `event1`, and if the end time of `event2` is after or at the start time of `event1`. If both conditions are true, it indicates a conflict.
 
-#### Step 2: Conclusion
+3. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If no conflict is found, the function returns `false`.
 
-This code provides a simple and efficient way to determine if two events overlap by comparing their start and end times using basic string comparisons.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-### Complexity
+The time complexity is constant as we only need to compare the two time intervals.
 
-#### Time Complexity
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The time complexity of the solution is **O(1)**. The function performs a constant number of string comparisons and logical operations regardless of the size of the input, since it only checks two pairs of times. The comparison operations are performed directly between two time strings, which are fixed in length ("HH:MM" format), making the operation constant time.
+The space complexity is constant as we do not use additional data structures that grow with the input.
 
-Thus, the overall time complexity is **O(1)**.
+**Happy Coding! 🎉**
 
-#### Space Complexity
-
-The space complexity of the solution is **O(1)**, as the function only uses a constant amount of space for storing the input and the result. No additional data structures are used beyond the input arrays, making this solution space-efficient.
-
-### Conclusion
-
-This solution provides a direct and efficient way to determine if two events overlap. By leveraging simple string comparisons on the time values, we can easily check if the events conflict. The solution works in constant time, **O(1)**, and constant space, **O(1)**, making it highly efficient for this problem. 
-
-In summary:
-- **Time Complexity**: **O(1)** — Only a few string comparisons and logical operations are performed.
-- **Space Complexity**: **O(1)** — No additional space is used apart from the input and output.
-
-This approach is optimal for checking event conflicts and guarantees correctness due to the simplicity of comparing time intervals using lexicographical string comparison.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/determine-if-two-events-have-conflict/description/)
 

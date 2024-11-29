@@ -14,130 +14,196 @@ img_src = ""
 youtube = "TyZ_FFGIZgs"
 youtube_upload_date="2020-09-19"
 youtube_thumbnail="https://i.ytimg.com/vi/TyZ_FFGIZgs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers nums and a list of requests, where each request specifies a range in the array. The ith request asks for the sum of all elements from nums[starti] to nums[endi], inclusive. Your task is to determine the maximum total sum of all requests for any permutation of nums.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers nums, and a list of requests. Each request consists of two integers [starti, endi] representing a range in nums. The length of nums can be up to 10^5, and the number of requests can be as large as 10^5.
+- **Example:** `Input: nums = [1, 3, 2, 4], requests = [[0, 1], [1, 3]]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^5
+	- 1 <= requests.length <= 10^5
+	- 0 <= starti <= endi < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& req) {
-        int n = nums.size();
-        long long res = 0;
-        vector<long long> cnt(n, 0);
-        for(auto& r: req) {
-            cnt[r[0]]++;
-            if(r[1] + 1 < n)
-                cnt[r[1] +1]--;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum possible sum of all request sums for any permutation of the nums array, modulo 10^9 + 7.
+- **Example:** `Output: 21`
+- **Constraints:**
+	- The output should be an integer representing the maximum possible total sum modulo 10^9 + 7.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum total sum of the request sums for any permutation of nums by efficiently calculating the contributions of each element to the total sum based on the request ranges.
+
+- 1. Create an array of length n, where each element corresponds to the number of times it is included in a request range.
+- 2. Sort the nums array in increasing order and the request contributions in decreasing order.
+- 3. Multiply each element of nums with its corresponding contribution and sum the results.
+{{< dots >}}
+### Problem Assumptions ✅
+- The requests are well-formed, with starti <= endi.
+- All elements in nums are distinct and non-negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 2, 4], requests = [[0, 1], [1, 3]]`  \
+  **Explanation:** The permutation [4, 3, 2, 1] gives the maximum total sum for the requests. The first request sums nums[0] + nums[1] = 4 + 3 = 7 and the second request sums nums[1] + nums[2] + nums[3] = 3 + 2 + 1 = 6. The total sum is 7 + 6 = 13.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by treating the requests as intervals that increase the frequency of certain elements in nums. The elements of nums that appear in many requests should be assigned larger values to maximize the total sum. By sorting both the nums array and the request contributions, we can efficiently compute the result.
+
+### Initial Thoughts 💭
+- We need to calculate how often each element of nums is included in the request ranges.
+- Sorting both nums and the request contributions in a way that matches higher frequencies with higher values will give the maximum sum.
+- The problem boils down to sorting the frequency of requests and the values in nums to pair them optimally.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle the case where nums has only one element or there are no requests.
+- Ensure the solution can handle the largest possible input sizes efficiently.
+- Handle cases where all values in nums are zero, or where the ranges in requests are minimal (e.g., starti == endi).
+- Ensure the solution works within the provided time and space constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& req) {
+    int n = nums.size();
+    long long res = 0;
+    vector<long long> cnt(n, 0);
+    for(auto& r: req) {
+        cnt[r[0]]++;
+        if(r[1] + 1 < n)
+            cnt[r[1] +1]--;
+}
+    
+    for(int i = 1; i < n; i++)
+        cnt[i] += cnt[i -1];
+    sort(nums.begin(), nums.end());
+    sort(cnt.begin(), cnt.end());
+    for(int i = 0; i < n; i++)
+        res +=  ((long long) nums[i] * cnt[i]);
+    
+    return res % 1000000007;
     }
-        
-        for(int i = 1; i < n; i++)
-            cnt[i] += cnt[i -1];
-        sort(nums.begin(), nums.end());
-        sort(cnt.begin(), cnt.end());
-        for(int i = 0; i < n; i++)
-            res +=  ((long long) nums[i] * cnt[i]);
-        
-        return res % 1000000007;
-        }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand requires us to calculate the maximum sum of values from a given array based on specified range queries. Each query indicates a range of indices within the array, and our goal is to find an optimal arrangement of contributions from these values in a way that maximizes the total sum.
-
-### Approach
-
-To achieve this, we will take the following steps:
-
-1. **Count Contributions**: For each query, we will determine how many times each index in the `nums` array is included in the specified ranges.
-
-2. **Cumulative Count**: Using a technique similar to a prefix sum array, we will derive the total contributions for each index from the range queries.
-
-3. **Sorting**: To maximize the sum, we will sort both the `nums` array and the cumulative contribution counts in descending order.
-
-4. **Calculate Maximum Sum**: By multiplying the values from the sorted `nums` array with the sorted contribution counts, we can find the maximum possible sum from the ranges.
-
-5. **Modulo Operation**: Since the result could be large, we will return it modulo \(10^9 + 7\).
-
-### Code Breakdown (Step by Step)
-
-Let’s go through the code and explain its functionality in detail:
-
-```cpp
-class Solution {
-public:
-    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& req) {
-        int n = nums.size(); // Get the size of the nums array
-        long long res = 0; // Initialize the result variable to store the maximum sum
-        vector<long long> cnt(n, 0); // Create a count array initialized to zero
 ```
 
-- **Initialization**: We begin by initializing the result variable `res` to store the cumulative sum. The `cnt` array will track how many times each index of `nums` contributes to the total sum as determined by the queries.
+This function computes the maximum sum of values within the ranges specified in `req` after modifying `nums`. The final result is taken modulo 1000000007.
 
-```cpp
-        for(auto& r: req) { // Loop through each range query
-            cnt[r[0]]++; // Increment the start of the range
-            if(r[1] + 1 < n) // Check if the end of the range exceeds the array bounds
-                cnt[r[1] + 1]--; // Decrement the position after the end of the range
-        }
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& req) {
+	```
+	This line defines the function `maxSumRangeQuery` that takes two arguments: a vector of integers `nums` and a 2D vector `req` representing the ranges for computation.
 
-- **Counting Contributions**: For each query, we increment the start index and decrement the index just after the end of the range. This marks the beginning and end of the contributions for that query.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	This initializes the variable `n` to store the size of the `nums` array.
 
-```cpp
-        for(int i = 1; i < n; i++) // Convert the count array to cumulative counts
-            cnt[i] += cnt[i - 1]; // Accumulate counts to get total contributions for each index
-```
+3. **Variable Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Here, we initialize `res` to 0. This will hold the final result of the sum after performing the necessary calculations.
 
-- **Cumulative Count Calculation**: Here, we transform the `cnt` array into a cumulative count. This means that each index now holds the total number of times it was included across all range queries.
+4. **Array Initialization**
+	```cpp
+	    vector<long long> cnt(n, 0);
+	```
+	We create a vector `cnt` initialized to zeros. This will keep track of the frequency of range updates for each index in `nums`.
 
-```cpp
-        sort(nums.begin(), nums.end()); // Sort the nums array in ascending order
-        sort(cnt.begin(), cnt.end()); // Sort the count array in ascending order
-```
+5. **Loop (Outer)**
+	```cpp
+	    for(auto& r: req) {
+	```
+	This loop iterates over each range in the `req` vector. Each range is represented by the indices `r[0]` and `r[1]`.
 
-- **Sorting Arrays**: We sort both the `nums` array and the cumulative count array. Sorting ensures that we can maximize the sum when we multiply the largest contributions with the largest numbers.
+6. **Range Update**
+	```cpp
+	        cnt[r[0]]++;
+	```
+	This line increments the value at index `r[0]` in the `cnt` vector, indicating that the range starting at `r[0]` is updated.
 
-```cpp
-        for(int i = 0; i < n; i++) // Calculate the maximum sum
-            res += ((long long) nums[i] * cnt[i]); // Multiply corresponding elements from nums and cnt
-```
+7. **Conditional Update**
+	```cpp
+	        if(r[1] + 1 < n)
+	```
+	This checks if the end of the range `r[1]` is within bounds. If true, we need to decrement the value just after the range.
 
-- **Calculating the Maximum Sum**: In this loop, we multiply the corresponding elements of the sorted `nums` and `cnt` arrays. The result is accumulated into the `res` variable.
+8. **Range Update**
+	```cpp
+	            cnt[r[1] +1]--;
+	```
+	This line decrements the value just after the range `r[1] + 1`, signaling the end of the range effect.
 
-```cpp
-        return res % 1000000007; // Return the result modulo 10^9 + 7
-    }
-};
-```
+9. **Prefix Sum**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	This loop starts the prefix sum operation on the `cnt` array, which accumulates the range counts.
 
-- **Final Return**: Finally, we return the result modulo \(10^9 + 7\) to ensure that we handle large sums correctly.
+10. **Prefix Sum Update**
+	```cpp
+	        cnt[i] += cnt[i -1];
+	```
+	This line adds the previous value of `cnt[i-1]` to `cnt[i]`, effectively accumulating the range counts.
 
-### Complexity
+11. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	This sorts the `nums` array in ascending order to align the highest values with the most frequent ranges.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n + k \log k)\), where \(n\) is the size of the `nums` array and \(k\) is the number of queries. The most time-consuming steps are the sorting operations which each take \(O(k \log k)\).
+12. **Sorting**
+	```cpp
+	    sort(cnt.begin(), cnt.end());
+	```
+	This sorts the `cnt` array to match the corresponding frequencies with the sorted `nums` array.
 
-- **Space Complexity**: The space complexity is \(O(n)\) due to the additional count array used for tracking contributions.
+13. **Final Computation Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	This loop computes the final result by multiplying each value in `nums` by the corresponding frequency in `cnt`.
 
-### Conclusion
+14. **Final Computation**
+	```cpp
+	        res +=  ((long long) nums[i] * cnt[i]);
+	```
+	This line adds the product of the sorted values in `nums` and their corresponding frequencies in `cnt` to the result `res`.
 
-The provided solution efficiently calculates the maximum sum of contributions from the `nums` array based on the specified range queries. By leveraging cumulative counts and sorting, we ensure that we maximize the sum effectively. 
+15. **Modulo Operation**
+	```cpp
+	    return res % 1000000007;
+	```
+	After computing the total sum, we return the result modulo 1000000007 to avoid overflow and meet the problem's requirements.
 
-This approach showcases a clever use of array manipulation and sorting techniques to derive an optimal solution for a problem that could otherwise involve more complex and computationally expensive operations.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) - Sorting nums and cnt arrays takes O(n log n).
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-In summary, this algorithm effectively addresses the problem by:
+The most expensive operation is sorting the nums and cnt arrays.
 
-- Utilizing a counting technique to handle overlapping ranges.
-- Transforming the count into a cumulative format to easily manage contributions.
-- Employing sorting to ensure maximum contributions align with the largest values.
+### Space Complexity 💾
+- **Best Case:** O(n) - The space complexity is primarily determined by the storage of the cnt array and nums.
+- **Worst Case:** O(n) - Storing the cnt array and intermediate results requires O(n) space.
 
-This method is robust and can handle various input sizes, making it suitable for competitive programming and applications where performance is crucial.
+The space complexity is linear, proportional to the size of nums and the request list.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/description/)
 

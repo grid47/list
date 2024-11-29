@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "SFNvfrvWxVQ"
 youtube_upload_date="2019-11-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/SFNvfrvWxVQ/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,118 +28,151 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/SFNvfrvWxVQ/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of integers, you need to add parentheses in such a way that the division expression evaluates to the maximum possible value. The division must respect the adjacency of integers in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an array of integers 'nums'. The adjacent integers will perform the division operation.
+- **Example:** `Input: nums = [200, 50, 10]`
+- **Constraints:**
+	- 1 <= nums.length <= 10
+	- 2 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string optimalDivision(vector<int>& nums) {
-        string s = "";
-        if(nums.size() == 1) return to_string(nums[0]);
-        if(nums.size() == 2) return to_string(nums[0]) + '/' + to_string(nums[1]);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the corresponding expression with parentheses added optimally, resulting in the maximum evaluated value.
+- **Example:** `Output: '200/(50/10)'`
+- **Constraints:**
+	- The returned expression should not have redundant parentheses.
 
-        for(int i = 0; i < nums.size(); i++) {
-            s += to_string(nums[i]) + "/";
-            if(i == 0)
-                s += "(";
-        }
-        s[s.size() -1] = ')';
-        return s;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the optimal arrangement of parentheses in the given division expression to maximize the evaluated result.
+
+- If the array has only one element, return the number as a string.
+- If the array has two elements, return them with a '/' operator.
+- For arrays with more than two elements, always add parentheses around all but the first element.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is valid, and there is always a unique optimal expression.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [200, 50, 10]`  \
+  **Explanation:** By adding parentheses around (50/10), the expression becomes '200/(50/10)', which gives the maximum value of 40.
+
+{{< dots >}}
+## Approach 🚀
+To maximize the result of a division expression, we need to add parentheses in a way that minimizes the divisors in the sequence. This can be done by wrapping the divisions between all but the first number in parentheses.
+
+### Initial Thoughts 💭
+- When dividing numbers, larger numbers should ideally divide smaller ones.
+- The expression with the maximum value will involve minimizing the number of divisors in the sequence by grouping all but the first numbers into parentheses.
+- By focusing the parentheses around the numbers that need to be divided first, we maximize the value of the expression.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no edge cases with empty inputs, as the array will always have at least one number.
+- The solution should work efficiently for arrays of size up to 10.
+- Ensure that the parentheses are placed optimally, without redundant brackets that do not affect the order of operations.
+- The input size is small, and the solution should handle this easily.
+{{< dots >}}
+## Code 💻
+```cpp
+string optimalDivision(vector<int>& nums) {
+    string s = "";
+    if(nums.size() == 1) return to_string(nums[0]);
+    if(nums.size() == 2) return to_string(nums[0]) + '/' + to_string(nums[1]);
+
+    for(int i = 0; i < nums.size(); i++) {
+        s += to_string(nums[i]) + "/";
+        if(i == 0)
+            s += "(";
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the optimal division for a given list of integers, such that the result of the division is maximized. The optimal way to divide a list of numbers involves placing parentheses in such a way that maximizes the value of the division. You need to return the division expression as a string, which could include the necessary parentheses.
-
-**Example:**
-
-Input: `[1000, 100, 10, 2]`
-
-Output: `"1000/(100/10/2)"`
-
-The goal is to divide the first number by the result of dividing the rest of the numbers, ensuring that the parentheses are positioned to maximize the result.
-
-### Approach
-
-To maximize the result of the division, consider the properties of division:
-1. **Maximization Rule**: When dividing multiple numbers, the division result is largest when the first number is divided by the smallest possible value. This can be achieved by placing the division of the remaining numbers inside parentheses. 
-2. **Basic Strategy**: If we have more than two numbers, the optimal strategy is to divide the first number by the result of dividing the rest of the numbers (from the second element onward). For two numbers, just perform the division directly without parentheses.
-
-For example:
-- For a list with just one number, return that number as it is.
-- For two numbers, return the result of a simple division.
-- For more than two numbers, divide the first number by the result of the division of the rest of the numbers inside parentheses.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Class and Function Definition**
-```cpp
-class Solution {
-public:
-    string optimalDivision(vector<int>& nums) {
-        string s = "";
+    s[s.size() -1] = ')';
+    return s;
+}
 ```
-- The class `Solution` contains the function `optimalDivision`, which takes a vector `nums` of integers.
-- The string `s` is initialized to an empty string, which will store the final result.
 
-#### 2. **Handling a Single Element in the List**
-```cpp
-        if(nums.size() == 1) return to_string(nums[0]);
-```
-- If the input list `nums` contains only one element, the result is simply that element as a string. 
-- We convert the integer to a string using `to_string(nums[0])`.
+This function generates an optimal division string for the given array of integers. The division result is formatted as a string where the first element is divided by the sum of the remaining elements enclosed in parentheses, with special handling for arrays of size 1 or 2.
 
-#### 3. **Handling Two Elements**
-```cpp
-        if(nums.size() == 2) return to_string(nums[0]) + '/' + to_string(nums[1]);
-```
-- If the list contains exactly two numbers, the division expression is simply the first number divided by the second number, formatted as a string with the '/' operator.
-- The result is returned in the format `"num1/num2"`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string optimalDivision(vector<int>& nums) {
+	```
+	Defines the function `optimalDivision`, which takes a vector of integers `nums` and returns the optimal division string for them.
 
-#### 4. **Handling More Than Two Elements**
-```cpp
-        for(int i = 0; i < nums.size(); i++) {
-            s += to_string(nums[i]) + "/";
-            if(i == 0)
-                s += "(";
-        }
-```
-- For more than two elements, the function iterates through the list of numbers.
-- For each number, it appends that number to the string `s`, followed by a "/" (to represent the division).
-- If the current number is the first one (`i == 0`), it adds an opening parenthesis `(` to the string, indicating that the rest of the numbers will be divided inside the parentheses.
+2. **String Initialization**
+	```cpp
+	    string s = "";
+	```
+	Initializes an empty string `s` to build the division result.
 
-#### 5. **Closing Parenthesis**
-```cpp
-        s[s.size() -1] = ')';
-        return s;
-    }
-};
-```
-- After the loop finishes, the string `s` will have an extra '/' at the end. This is replaced with a closing parenthesis `)`, ensuring that the entire expression is wrapped inside parentheses (except for the first number).
-- The final division expression is then returned.
+3. **Edge Case Handling (Single Element)**
+	```cpp
+	    if(nums.size() == 1) return to_string(nums[0]);
+	```
+	Checks if the input vector contains only one element. If true, converts the element to a string and returns it as the result.
 
-### Complexity
+4. **Edge Case Handling (Two Elements)**
+	```cpp
+	    if(nums.size() == 2) return to_string(nums[0]) + '/' + to_string(nums[1]);
+	```
+	Handles the case where the input vector contains exactly two elements. Returns a string representing the division of the two elements.
 
-#### Time Complexity:
-- The function processes each number in the `nums` list exactly once, and for each number, it performs constant time operations (string concatenation).
-- Therefore, the time complexity is **O(n)**, where `n` is the size of the `nums` list.
+5. **Main Loop (Array Traversal)**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Starts a loop to traverse the `nums` array and build the division string.
 
-#### Space Complexity:
-- The space complexity is dominated by the string `s`, which stores the division expression. Since the length of the string is proportional to the number of elements in the `nums` list, the space complexity is also **O(n)**.
+6. **String Building**
+	```cpp
+	        s += to_string(nums[i]) + "/";
+	```
+	Appends each number in `nums` followed by a division sign ('/') to the string `s`.
 
-### Conclusion
+7. **Condition (First Element)**
+	```cpp
+	        if(i == 0)
+	```
+	Checks if the current index is the first element in the array.
 
-This solution efficiently constructs the optimal division expression for a given list of integers. By following the simple rules of division and leveraging parentheses to maximize the result, the function ensures the largest possible value for the division expression. The solution is optimized for both time and space, and its performance is linear with respect to the size of the input list.
+8. **Parentheses Addition**
+	```cpp
+	            s += "(";
+	```
+	If the current index is 0 (first element), appends an opening parenthesis to the string `s`.
 
-The function `optimalDivision` works for:
-- One element by returning it directly.
-- Two elements by performing a simple division.
-- More than two elements by formatting the result to maximize the division.
+9. **Parentheses Closure**
+	```cpp
+	    s[s.size() -1] = ')';
+	```
+	Replaces the last division sign with a closing parenthesis to properly close the division string.
 
-This approach provides an elegant and efficient solution to the problem by using basic string manipulation and mathematical insights into division. It's a perfect example of how to optimize expressions in mathematical problems through careful structuring of operations, ensuring that the code runs efficiently and produces the correct result.
+10. **Return Statement**
+	```cpp
+	    return s;
+	```
+	Returns the formatted division string `s`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Since we are processing the elements in a linear fashion, the time complexity is O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the resulting expression as a string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/optimal-division/description/)
 

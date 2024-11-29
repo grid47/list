@@ -14,122 +14,157 @@ img_src = ""
 youtube = "LDlUaEaunY0"
 youtube_upload_date="2022-01-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/LDlUaEaunY0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string consisting of multiple words separated by spaces. For each word, you need to change the capitalization based on the length of the word. If the word has 1 or 2 letters, it should be entirely in lowercase. If the word has 3 or more letters, the first letter should be uppercase and the remaining letters should be lowercase. Return the modified string with the updated capitalization for each word.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string where words are separated by a single space. Each word is a sequence of English letters with no leading or trailing spaces.
+- **Example:** `title = 'hello World this IS an EXample'`
+- **Constraints:**
+	- 1 <= title.length <= 100
+	- The string consists of words separated by a single space without any leading or trailing spaces.
+	- Each word contains only uppercase and lowercase English letters and is non-empty.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string capitalizeTitle(string s) {
-        for (int i = 0, j = 0; i <= s.size(); ++i) {
-            if (i == s.size() || s[i] == ' ') {
-                if (i - j > 2)
-                    s[j] = toupper(s[j]);
-                j = i + 1;
-            }
-            else
-                s[i] = tolower(s[i]);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the string with each word capitalized as per the given rules. Each word with a length of 1 or 2 letters will be lowercase, and the first letter of words with a length of 3 or more letters will be uppercase with the rest in lowercase.
+- **Example:** `Input: title = 'hello World this IS an EXample' Output: 'Hello World This Is an Example'`
+- **Constraints:**
+	- Ensure that the title is processed correctly for each word based on its length.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To modify the capitalization of each word based on its length, we need to iterate through the string and apply the capitalization rules accordingly.
+
+- Split the string into individual words.
+- For each word, check its length.
+- If the length is 1 or 2, convert all letters to lowercase.
+- If the length is 3 or more, capitalize the first letter and convert the rest to lowercase.
+- Join the words back together with a single space separating them.
+- Return the resulting string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string will always contain at least one word.
+- Words are separated by exactly one space and no extra spaces exist.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: title = 'hello World this IS an EXample'`  \
+  **Explanation:** The string contains five words. After processing each word based on its length, the result is 'Hello World This Is an Example'. Words with length 3 or more have their first letter capitalized, while shorter words are entirely in lowercase.
+
+- **Input:** `Input: title = 'a quick Brown fox'`  \
+  **Explanation:** Here, 'a' is a word with length 1 and is kept lowercase. 'quick' and 'Brown' have 3 or more letters, so their first letters are capitalized, and 'fox' is similarly processed. The result is 'a Quick Brown Fox'.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves iterating through each word in the string, applying the capitalization rules based on the word's length, and then combining the words back into a single string.
+
+### Initial Thoughts 💭
+- The main task is to process each word individually and change its capitalization according to its length.
+- We need to be mindful of how spaces are handled when splitting and rejoining the string.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem statement guarantees that the input will not be empty, so this case does not need handling.
+- Ensure that the solution handles strings with the maximum allowed length of 100 characters efficiently.
+- Words of length 1 or 2 should remain lowercase, and words of length 3 or more should follow the capitalization rule.
+- The solution must efficiently handle up to 100 characters in the input string.
+{{< dots >}}
+## Code 💻
+```cpp
+string capitalizeTitle(string s) {
+    for (int i = 0, j = 0; i <= s.size(); ++i) {
+        if (i == s.size() || s[i] == ' ') {
+            if (i - j > 2)
+                s[j] = toupper(s[j]);
+            j = i + 1;
         }
-        return s;
+        else
+            s[i] = tolower(s[i]);
     }
-};
-{{< /highlight >}}
----
+    return s;
+}
+```
 
-### Problem Statement
+This function capitalizes the first letter of each word in a string, provided the word length is greater than two characters. All other letters are converted to lowercase.
 
-The task requires us to transform a given string by capitalizing the first letter of words that have more than two letters, while ensuring that all other letters in each word are in lowercase. The final output should maintain the original word boundaries in terms of spaces, and it should return the modified string with the appropriate capitalization applied.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string capitalizeTitle(string s) {
+	```
+	This line defines the function 'capitalizeTitle' that takes a string 's' as input and returns the string with each word capitalized according to the specified rule.
 
-### Approach
+2. **Loop Initialization**
+	```cpp
+	    for (int i = 0, j = 0; i <= s.size(); ++i) {
+	```
+	This line initializes a for loop with two variables: 'i' (to iterate through each character of the string) and 'j' (to mark the beginning of each word). The loop continues until the end of the string.
 
-To solve this problem, we will follow these steps:
+3. **Condition Check**
+	```cpp
+	        if (i == s.size() || s[i] == ' ') {
+	```
+	This line checks if the current character is the end of the string or a space, indicating the end of a word.
 
-1. **Iterate through the String**: We will traverse the string character by character to identify words based on spaces.
-2. **Identify Word Boundaries**: As we traverse, we will track the start and end of each word to determine its length.
-3. **Transform the Word**: For each word:
-   - Convert all characters to lowercase.
-   - If the word's length is greater than two, capitalize the first character of that word.
-4. **Construct the Result**: As we modify the characters in the string, we will construct the final result based on the transformations we apply.
+4. **Word Length Check**
+	```cpp
+	            if (i - j > 2)
+	```
+	This line checks if the length of the current word (from 'j' to 'i') is greater than two characters. Only words longer than two characters will have their first letter capitalized.
 
-This approach is efficient as it processes each character of the string only once, maintaining the overall complexity at a manageable level.
+5. **Capitalization**
+	```cpp
+	                s[j] = toupper(s[j]);
+	```
+	This line capitalizes the first letter of the current word (i.e., the character at position 'j').
 
-### Code Breakdown (Step by Step)
+6. **Update Word Start**
+	```cpp
+	            j = i + 1;
+	```
+	This line updates the value of 'j' to mark the start of the next word after the space or end of the string.
 
-Here’s a detailed explanation of the implementation:
+7. **Lowercase Else**
+	```cpp
+	        else
+	```
+	This line handles the case where the current character is part of a word that is not at the start. The characters in these positions will be converted to lowercase.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class is defined, which contains the method responsible for capitalizing the title.
+8. **Lowercasing**
+	```cpp
+	            s[i] = tolower(s[i]);
+	```
+	This line converts the current character at position 'i' to lowercase, ensuring that non-initial letters of words are always in lowercase.
 
-2. **Function Definition**:
-   ```cpp
-   string capitalizeTitle(string s) {
-   ```
-   - The public member function `capitalizeTitle` is declared, which takes a string `s` as input and returns the transformed string.
+9. **Return Statement**
+	```cpp
+	    return s;
+	```
+	This line returns the modified string 's', with all words properly capitalized according to the rules.
 
-3. **Iterate Over Characters**:
-   ```cpp
-   for (int i = 0, j = 0; i <= s.size(); ++i) {
-   ```
-   - We use a `for` loop that iterates over the indices of the string `s`. The variable `i` tracks the current character's index, while `j` is used to mark the start of each word.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Check for Word End**:
-   ```cpp
-   if (i == s.size() || s[i] == ' ') {
-   ```
-   - We check if we have reached the end of the string (`i == s.size()`) or if the current character is a space (`s[i] == ' '`). This indicates that we have found the end of a word.
+The time complexity is O(n) because we iterate through each character in the string, where n is the length of the input string.
 
-5. **Process the Word**:
-   ```cpp
-   if (i - j > 2)
-       s[j] = toupper(s[j]);
-   j = i + 1;
-   ```
-   - We calculate the length of the word by subtracting `j` from `i`. If the length of the word is greater than 2, we capitalize the first character of the word by updating `s[j]` to its uppercase equivalent using `toupper`.
-   - After processing the word, we update `j` to `i + 1` to mark the start of the next word.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-6. **Convert Remaining Characters to Lowercase**:
-   ```cpp
-   else
-       s[i] = tolower(s[i]);
-   ```
-   - If we are still inside a word, we convert the current character to lowercase to ensure that all letters except the first one are in lowercase.
+The space complexity is O(n) because we store the words in an array temporarily during processing, where n is the length of the input string.
 
-7. **Return the Result**:
-   ```cpp
-   return s;
-   }
-   ```
-   - After processing the entire string, we return the modified string `s`, which now contains the capitalized words as per the specified rules.
+**Happy Coding! 🎉**
 
-8. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This curly brace marks the end of the `Solution` class definition.
-
-### Complexity Analysis
-
-- **Time Complexity**: \(O(n)\)
-  - The time complexity is \(O(n)\), where \(n\) is the length of the string. We traverse the string a single time to apply the transformations.
-
-- **Space Complexity**: \(O(1)\)
-  - The space complexity is \(O(1)\) since we are modifying the input string in place and using a constant amount of extra space for variables.
-
-### Conclusion
-
-The `capitalizeTitle` function efficiently transforms the input string by applying the rules for capitalizing words based on their lengths. By processing the string in a single pass, we ensure optimal performance while adhering to the requirements of the problem.
-
-This implementation showcases the effective use of string manipulation techniques in C++, including character iteration, conditional checks, and transformations. The solution is concise and leverages the language's built-in functions like `toupper` and `tolower` to simplify the character handling process.
-
-In summary, this method of title capitalization is a great example of how to utilize fundamental programming constructs to achieve a specified outcome, providing clarity and correctness in the final result. Whether dealing with various input formats or edge cases, this function is robust enough to handle typical use cases of title formatting in strings.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/capitalize-the-title/description/)
 

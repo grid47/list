@@ -14,147 +14,160 @@ img_src = ""
 youtube = "25az-hMz2YE"
 youtube_upload_date="2022-02-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/25az-hMz2YE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums` of length `n` and an integer `k`. You need to count the number of pairs `(i, j)` where `0 <= i < j < n` such that `nums[i] == nums[j]` and the product `i * j` is divisible by `k`. Return the number of such pairs.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and an integer `k`. The array represents the magic numbers found in different bags, and `k` is a divisor used to filter the valid pairs.
+- **Example:** `[5, 2, 3, 5, 2, 3], k = 6`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i], k <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countPairs(vector<int>& nums, int k) {
-        unordered_map<int,vector<int>> umap;
-        int count = 0;
-        for(int i = 0; i < nums.size(); i++) 
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the number of pairs `(i, j)` that satisfy the given conditions.
+- **Example:** `3`
+- **Constraints:**
+	- The output must be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find pairs `(i, j)` such that `nums[i] == nums[j]` and the product `i * j` is divisible by `k`.
+
+- Iterate over each element in the `nums` array.
+- For each element, check previously seen indices where the value is the same and check if `i * j` is divisible by `k`.
+- Count all such pairs and return the count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` is at least of length 1.
+- The values in the array `nums` and `k` are positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[5, 2, 3, 5, 2, 3], k = 6`  \
+  **Explanation:** In this example, the valid pairs are (0, 3), (1, 4), and (2, 5), and the count of such pairs is 3.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the array and for each element, check if any earlier occurrence of the same value forms a valid pair with the current element.
+
+### Initial Thoughts 💭
+- We need to efficiently check the conditions for each pair `(i, j)`.
+- An efficient approach would involve using a map to store previously seen values and their indices.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will not be empty due to the problem's constraints.
+- The solution should efficiently handle arrays up to length 100.
+- Consider the case when no value repeats in the array.
+- Ensure that the solution works within the input constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int countPairs(vector<int>& nums, int k) {
+    unordered_map<int,vector<int>> umap;
+    int count = 0;
+    for(int i = 0; i < nums.size(); i++) 
+    {
+        if(umap.find(nums[i]) != umap.end()) 
         {
-            if(umap.find(nums[i]) != umap.end()) 
-            {
-                for(auto x : umap[nums[i]]) 
-                    if((i * x) % k == 0)
-                        count++;
-            }
-            
-            umap[nums[i]].push_back(i);
+            for(auto x : umap[nums[i]]) 
+                if((i * x) % k == 0)
+                    count++;
         }
-        return count;
+        
+        umap[nums[i]].push_back(i);
     }
-};
-{{< /highlight >}}
----
+    return count;
+}
+```
 
-### Problem Statement
-You are given an array `nums` of integers and an integer `k`. The task is to find and count all pairs of indices `(i, j)` such that:
-- `i < j`
-- The product of the values at these indices `nums[i] * nums[j]` is divisible by `k`.
+This function, `countPairs`, takes a vector `nums` and an integer `k`, and returns the count of pairs `(i, j)` such that `i < j` and `(i * j) % k == 0`. The function uses an unordered map to store indices of each number in the vector.
 
-Your goal is to return the total count of such pairs.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countPairs(vector<int>& nums, int k) {
+	```
+	Define the function `countPairs` that takes a vector of integers `nums` and an integer `k`, and returns an integer `count` representing the number of valid pairs (i, j).
 
-### Approach
-To solve this problem, we need to find pairs of indices `(i, j)` where `i < j` and the condition `(nums[i] * nums[j]) % k == 0` holds true. We can break down the approach as follows:
+2. **Data Structure Initialization**
+	```cpp
+	    unordered_map<int,vector<int>> umap;
+	```
+	Initialize an unordered map `umap` where the key is an integer from `nums`, and the value is a vector of integers that stores indices where that number appears in `nums`.
 
-1. **Hash Map for Tracking Indices**:
-   - A hash map (`unordered_map<int, vector<int>> umap`) is used to track the indices where each number appears. This will help in efficiently finding potential pairs without having to check every possible pair explicitly.
+3. **Variable Initialization**
+	```cpp
+	    int count = 0;
+	```
+	Initialize a variable `count` to 0, which will keep track of the number of valid pairs that meet the condition `(i * j) % k == 0`.
 
-2. **Iterate Through the Array**:
-   - Iterate through each element `nums[i]` of the array. For each element, check all previously encountered elements to see if their product with the current element is divisible by `k`.
+4. **Loop Start**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) 
+	```
+	Start a for loop to iterate through each index `i` of the `nums` vector.
 
-3. **Check Divisibility**:
-   - For each pair `(i, x)` where `nums[i] * nums[x] % k == 0` (where `x` is a previous index), increment the `count`.
+5. **Condition Check**
+	```cpp
+	        if(umap.find(nums[i]) != umap.end()) 
+	```
+	Check if the current element `nums[i]` exists in the unordered map `umap`. If it does, proceed to find the pairs.
 
-4. **Store Indices**:
-   - For every element `nums[i]`, after checking all previous elements, store the current index in the hash map corresponding to `nums[i]`.
+6. **Inner Loop Start**
+	```cpp
+	            for(auto x : umap[nums[i]]) 
+	```
+	Iterate through all the indices `x` where `nums[i]` has appeared earlier (from the unordered map `umap`).
 
-5. **Return the Count**:
-   - Once the iteration completes, the variable `count` will hold the total number of valid pairs satisfying the condition.
+7. **Pair Validation**
+	```cpp
+	                if((i * x) % k == 0)
+	```
+	For each index `x`, check if the product of the current index `i` and `x` is divisible by `k`. If it is, it's a valid pair.
 
-### Code Breakdown (Step by Step)
+8. **Count Update**
+	```cpp
+	                    count++;
+	```
+	Increment the `count` variable for each valid pair found.
 
-1. **Initialize the Hash Map and Count**:
-   ```cpp
-   unordered_map<int, vector<int>> umap;
-   int count = 0;
-   ```
-   - `umap` is an unordered map where the keys are the numbers in the `nums` array, and the values are vectors of indices where those numbers appear. This will allow us to check for divisibility efficiently.
-   - `count` is initialized to 0 and will store the total number of valid pairs.
+9. **Map Update**
+	```cpp
+	        umap[nums[i]].push_back(i);
+	```
+	Add the current index `i` to the list of indices for `nums[i]` in the unordered map `umap`.
 
-2. **Iterate Through the Array**:
-   ```cpp
-   for(int i = 0; i < nums.size(); i++) {
-   ```
-   - This loop iterates through each element `nums[i]` in the array `nums`.
+10. **Return Result**
+	```cpp
+	    return count;
+	```
+	Return the final count of valid pairs.
 
-3. **Check for Previously Seen Elements**:
-   ```cpp
-   if(umap.find(nums[i]) != umap.end()) {
-       for(auto x : umap[nums[i]]) {
-           if((i * x) % k == 0)
-               count++;
-       }
-   }
-   ```
-   - The condition `umap.find(nums[i]) != umap.end()` checks if the current number `nums[i]` has been encountered before. If so, the corresponding vector of previous indices is retrieved (`umap[nums[i]]`).
-   - For each index `x` in this vector, we check if the product of `i` and `x` is divisible by `k` (`(i * x) % k == 0`). If true, we increment the count.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n^2)
 
-4. **Store the Current Index**:
-   ```cpp
-   umap[nums[i]].push_back(i);
-   ```
-   - After checking all previously encountered indices, the current index `i` is added to the vector of indices for the value `nums[i]` in the hash map.
+The time complexity is O(n) on average, but in the worst case (when many elements are the same), it could reach O(n^2).
 
-5. **Return the Count**:
-   ```cpp
-   return count;
-   ```
-   - Once the iteration is complete, the final count of valid pairs is returned.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-### Example Walkthrough
-Let's walk through an example with `nums = [2, 4, 8, 16]` and `k = 8`:
+The space complexity is O(n) due to the map storing indices for each element in the array.
 
-- **Step 1: Initialize**:
-  - `umap = {}` (empty hash map)
-  - `count = 0`
+**Happy Coding! 🎉**
 
-- **Step 2: Iterate through `nums`**:
-  - `i = 0`, `nums[i] = 2`
-    - `umap` is empty, so no pairs are found.
-    - `umap = {2: [0]}` (store index 0 for value 2).
-
-  - `i = 1`, `nums[i] = 4`
-    - Check if `nums[i] * nums[0]` is divisible by `8`: `(4 * 2) % 8 == 0` (True).
-    - Increment `count = 1`.
-    - `umap = {2: [0], 4: [1]}` (store index 1 for value 4).
-
-  - `i = 2`, `nums[i] = 8`
-    - Check if `nums[i] * nums[0]` is divisible by `8`: `(8 * 2) % 8 == 0` (True).
-    - Increment `count = 2`.
-    - Check if `nums[i] * nums[1]` is divisible by `8`: `(8 * 4) % 8 == 0` (True).
-    - Increment `count = 3`.
-    - `umap = {2: [0], 4: [1], 8: [2]}` (store index 2 for value 8).
-
-  - `i = 3`, `nums[i] = 16`
-    - Check if `nums[i] * nums[0]` is divisible by `8`: `(16 * 2) % 8 == 0` (True).
-    - Increment `count = 4`.
-    - Check if `nums[i] * nums[1]` is divisible by `8`: `(16 * 4) % 8 == 0` (True).
-    - Increment `count = 5`.
-    - Check if `nums[i] * nums[2]` is divisible by `8`: `(16 * 8) % 8 == 0` (True).
-    - Increment `count = 6`.
-    - `umap = {2: [0], 4: [1], 8: [2], 16: [3]}` (store index 3 for value 16).
-
-- **Step 3: Return the Result**:
-  - The final value of `count` is `6`, meaning there are 6 valid pairs where the product of the values at those indices is divisible by `k`.
-
-### Complexity
-
-- **Time Complexity**:
-  - The time complexity is O(n * m), where `n` is the number of elements in the `nums` array, and `m` is the average number of times each number appears in the array (due to checking each previous index). In the worst case, `m` can be up to `n`, making the overall complexity O(n^2). However, this is a reasonable trade-off for this type of problem.
-
-- **Space Complexity**:
-  - The space complexity is O(n), where `n` is the number of elements in the `nums` array. This is because we store the indices of each number in the hash map.
-
-### Conclusion
-This solution efficiently counts the pairs of indices where the product of the corresponding values is divisible by `k`. Using a hash map to store previously encountered numbers and their indices allows the algorithm to check conditions in a streamlined manner, reducing the need for nested loops that would otherwise increase the time complexity. While the solution is optimized, it is still important to note the potential O(n^2) complexity for very large arrays. Nonetheless, for moderate-sized inputs, this approach should work efficiently within the problem's constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/description/)
 

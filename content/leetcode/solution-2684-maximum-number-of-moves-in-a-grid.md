@@ -14,136 +14,224 @@ img_src = ""
 youtube = "MQQZiN9CnDk"
 youtube_upload_date="2023-06-09"
 youtube_thumbnail="https://i.ytimg.com/vi/MQQZiN9CnDk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix `grid` of size `m x n` filled with positive integers. Starting from any cell in the first column, you can move to any of the cells on the next column (right) that are strictly greater than the value of the current cell. The possible directions you can move to are: the cell directly to the right, the cell diagonally to the top-right, or the cell diagonally to the bottom-right. Your task is to return the maximum number of moves that you can perform by starting at any cell in the first column.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a matrix `grid` of size `m x n` where each value is a positive integer. You need to determine the maximum number of valid moves you can make by starting from any cell in the first column and moving in the allowed directions.
+- **Example:** `Input: grid = [[1, 3, 2], [4, 2, 6], [3, 5, 7]]`
+- **Constraints:**
+	- 2 <= m, n <= 1000
+	- 4 <= m * n <= 100000
+	- 1 <= grid[i][j] <= 106
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int m, n;
-    vector<vector<int>> grid, mem;
-    
-    int dfs(int p, int q) {
-        
-        if(mem[p][q] != -1) return mem[p][q];
-        int ans = 0;
-        if(p - 1>= 0 && q + 1 < n && grid[p - 1][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p - 1, q + 1));
-        if(p     < m && q + 1 < n && grid[p][q + 1]     > grid[p][q]) ans = max(ans, 1 + dfs(p    , q + 1));
-        if(p + 1 < m && q + 1 < n && grid[p + 1][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p + 1, q + 1));
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of moves that can be made from the first column.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output will be a single integer.
 
-        return mem[p][q] = ans;
-    }
-    
-    int maxMoves(vector<vector<int>>& grid) {
-        this->grid = grid;
-        m = grid.size();
-        n = grid[0].size();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the maximum number of valid moves that can be made starting from any cell in the first column and traversing according to the specified movement rules.
 
-        mem.resize(m, vector<int>(n, -1));
-        int ans = 0;
-        for(int i = 0; i < m; i++) {
-            ans = max(ans, dfs(i, 0));
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+- Step 1: Start from each cell in the first column.
+- Step 2: For each cell, recursively explore the possible moves (right, top-right, bottom-right) and compute the maximum number of valid moves.
+- Step 3: Use memoization to store the results of subproblems to avoid redundant calculations.
+- Step 4: Return the maximum number of moves that can be made from the first column.
+{{< dots >}}
+### Problem Assumptions ✅
+- You can always make valid moves if the conditions are met.
+- The grid is always valid and follows the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[2,4,3,5],[5,4,9,3],[3,4,2,11],[10,9,13,15]]`  \
+  **Explanation:** We can start at the cell (0, 0) and make the following moves: (0, 0) -> (0, 1) -> (1, 2) -> (2, 3). The maximum number of moves is 3.
 
-### Problem Statement
+- **Input:** `Input: grid = [[3, 2, 4], [2, 1, 9], [1, 1, 7]]`  \
+  **Explanation:** No valid moves can be made as there is no cell in the next column that is strictly greater than the current cell. Thus, the maximum number of moves is 0.
 
-In this problem, we are tasked with determining the maximum number of moves in a grid starting from the leftmost column to the rightmost column, following specific movement rules. Each element in the grid represents a value, and from any cell, we are allowed to move to one of the following cells in the next column:
-- Up-right diagonal (to the cell in the row above and the next column),
-- Right (to the cell in the same row but the next column),
-- Down-right diagonal (to the cell in the row below and the next column).
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use dynamic programming and memoization to efficiently calculate the maximum number of moves that can be made from any starting cell.
 
-The goal is to find the maximum number of moves we can make by starting from any cell in the first column and ending in any cell in the last column, while only moving to a cell with a strictly greater value than the current one.
-
-### Approach
-
-This problem can be solved efficiently using Depth-First Search (DFS) combined with memoization. The basic idea is to explore all possible paths from each cell in the first column to the last column while respecting the constraints (i.e., moving only to cells with strictly greater values).
-
-The DFS algorithm will:
-1. Start at each cell in the first column.
-2. Explore all three possible directions (up-right, right, down-right) to move to the next column, provided that the value of the next cell is strictly greater than the current cell's value.
-3. Use memoization to store the results of subproblems (i.e., the maximum number of moves from each cell), preventing redundant calculations.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initial Setup
-
+### Initial Thoughts 💭
+- We need to consider every cell in the first column as a potential starting point.
+- The problem has overlapping subproblems, so we can use memoization to avoid redundant computations.
+- A depth-first search (DFS) approach with memoization is suitable for this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- The input grid will never be empty as per the constraints.
+- For larger grids, the algorithm should efficiently compute the result within time limits.
+- The grid may have cells with the same values, in which case no valid move is possible from that cell.
+- Ensure the solution handles both small and large grids efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 int m, n;
 vector<vector<int>> grid, mem;
-```
 
-- `m` and `n` represent the number of rows and columns of the grid, respectively.
-- `grid` is the input 2D matrix representing the grid.
-- `mem` is a 2D vector that will store the results of subproblems, where `mem[i][j]` stores the maximum number of moves starting from the cell `(i, j)`.
-
-#### Step 2: Define the DFS Function
-
-```cpp
 int dfs(int p, int q) {
+    
     if(mem[p][q] != -1) return mem[p][q];
     int ans = 0;
-    if(p - 1 >= 0 && q + 1 < n && grid[p - 1][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p - 1, q + 1));
-    if(p < m && q + 1 < n && grid[p][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p, q + 1));
+    if(p - 1>= 0 && q + 1 < n && grid[p - 1][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p - 1, q + 1));
+    if(p     < m && q + 1 < n && grid[p][q + 1]     > grid[p][q]) ans = max(ans, 1 + dfs(p    , q + 1));
     if(p + 1 < m && q + 1 < n && grid[p + 1][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p + 1, q + 1));
+
     return mem[p][q] = ans;
 }
-```
 
-- The `dfs` function computes the maximum number of moves starting from a given cell `(p, q)` in the grid.
-- The base case for the DFS is when the result has already been computed and stored in `mem[p][q]`. If `mem[p][q]` is not `-1`, it returns the stored value.
-- The function recursively checks the three possible directions (up-right, right, down-right) and updates `ans` with the maximum number of moves found. If a valid move is found (i.e., moving to a cell with a strictly greater value), it recursively calls `dfs` for the next cell in that direction.
-- Finally, the result is memoized in `mem[p][q]` to avoid recomputation in future calls.
-
-#### Step 3: Main Function to Calculate the Maximum Moves
-
-```cpp
 int maxMoves(vector<vector<int>>& grid) {
     this->grid = grid;
     m = grid.size();
     n = grid[0].size();
 
-    mem.resize(m, vector<int>(n, -1)); // Initialize memoization table with -1
+    mem.resize(m, vector<int>(n, -1));
     int ans = 0;
     for(int i = 0; i < m; i++) {
-        ans = max(ans, dfs(i, 0)); // Start DFS from each cell in the first column
+        ans = max(ans, dfs(i, 0));
     }
     return ans;
 }
 ```
 
-- The function `maxMoves` is the main function that calculates the result.
-- The `grid` is passed as an argument, and `m` and `n` are initialized to the number of rows and columns of the grid, respectively.
-- The memoization table `mem` is initialized with `-1`, indicating that no cell has been processed yet.
-- A variable `ans` is used to store the maximum number of moves found across all starting points in the first column.
-- The `for` loop iterates over all the cells in the first column (`i = 0` to `i = m-1`), and for each cell, the `dfs` function is called to compute the maximum number of moves starting from that cell.
-- The final result is returned, which is the maximum number of moves starting from any cell in the first column.
+The 'maxMoves' function computes the maximum number of valid moves possible on a grid by applying a depth-first search (DFS) from each position in the first column, using memoization to store results for already computed positions.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int m, n;
+	```
+	Declare two integers, 'm' and 'n', to store the dimensions of the grid.
 
-#### Time Complexity
+2. **Variable Declaration**
+	```cpp
+	vector<vector<int>> grid, mem;
+	```
+	Declare two 2D vectors: 'grid' to represent the grid of values and 'mem' to store the memoization results for DFS.
 
-- The time complexity is `O(m * n)` where `m` is the number of rows and `n` is the number of columns.
-- The `dfs` function is called once for each cell in the grid, and each cell is processed at most once due to memoization. Therefore, the total number of calls to `dfs` is proportional to the number of cells in the grid (`m * n`).
+3. **Function Definition**
+	```cpp
+	int dfs(int p, int q) {
+	```
+	Define the recursive function 'dfs' which calculates the maximum valid moves starting from position (p, q) using memoization.
 
-#### Space Complexity
+4. **Base Case Check**
+	```cpp
+	    if(mem[p][q] != -1) return mem[p][q];
+	```
+	Check if the value for position (p, q) has already been computed (i.e., if it's not -1). If so, return the stored value.
 
-- The space complexity is `O(m * n)` due to the memoization table `mem` that stores the results of the subproblems.
-- Additionally, the space complexity includes the space required by the call stack for the DFS recursion, which is at most `O(m * n)` in the worst case (when exploring the entire grid).
+5. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize 'ans' to 0, which will store the maximum number of moves from the current position.
 
-### Conclusion
+6. **Recursive DFS Call**
+	```cpp
+	    if(p - 1>= 0 && q + 1 < n && grid[p - 1][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p - 1, q + 1));
+	```
+	Perform a DFS search to the upper-right neighboring cell if it exists and the value is greater than the current cell. Update 'ans' with the maximum result from the recursive call.
 
-This solution leverages depth-first search (DFS) combined with memoization to efficiently compute the maximum number of moves from any starting cell in the first column to the last column of the grid. By memoizing the results of subproblems, we ensure that each cell is processed only once, making the solution highly efficient with a time complexity of `O(m * n)`.
+7. **Recursive DFS Call**
+	```cpp
+	    if(p     < m && q + 1 < n && grid[p][q + 1]     > grid[p][q]) ans = max(ans, 1 + dfs(p    , q + 1));
+	```
+	Perform a DFS search to the right neighboring cell if it exists and the value is greater than the current cell.
 
-The problem-solving approach effectively handles the constraints and ensures that we explore all valid paths while adhering to the movement rules of the grid. This solution is optimal for grids of moderate size and efficiently computes the desired result.
+8. **Recursive DFS Call**
+	```cpp
+	    if(p + 1 < m && q + 1 < n && grid[p + 1][q + 1] > grid[p][q]) ans = max(ans, 1 + dfs(p + 1, q + 1));
+	```
+	Perform a DFS search to the lower-right neighboring cell if it exists and the value is greater than the current cell.
+
+9. **Memoization and Return**
+	```cpp
+	    return mem[p][q] = ans;
+	```
+	Store the computed value of 'ans' for position (p, q) in the memoization table and return the result.
+
+10. **Function Definition**
+	```cpp
+	int maxMoves(vector<vector<int>>& grid) {
+	```
+	Define the function 'maxMoves' which computes the maximum number of valid moves on the grid by calling the DFS function from each starting position in the first column.
+
+11. **Grid Assignment**
+	```cpp
+	    this->grid = grid;
+	```
+	Assign the input grid to the member variable 'grid'.
+
+12. **Grid Dimensions**
+	```cpp
+	    m = grid.size();
+	```
+	Set 'm' to the number of rows in the grid.
+
+13. **Grid Dimensions**
+	```cpp
+	    n = grid[0].size();
+	```
+	Set 'n' to the number of columns in the grid.
+
+14. **Memory Allocation**
+	```cpp
+	    mem.resize(m, vector<int>(n, -1));
+	```
+	Resize the memoization table 'mem' to match the grid dimensions and initialize all values to -1.
+
+15. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize 'ans' to store the maximum number of moves found during the DFS traversal.
+
+16. **Loop**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Loop through all rows of the grid to perform DFS starting from each element in the first column.
+
+17. **DFS Call**
+	```cpp
+	        ans = max(ans, dfs(i, 0));
+	```
+	For each row, call 'dfs' starting from the element at (i, 0) and update 'ans' with the maximum value returned.
+
+18. **Return**
+	```cpp
+	    return ans;
+	```
+	Return the maximum number of valid moves found after completing all DFS calls.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The solution requires visiting each cell and calculating the maximum number of moves from that cell, resulting in linear time complexity relative to the number of cells in the grid.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the memoization table storing the results for each cell.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/)
 

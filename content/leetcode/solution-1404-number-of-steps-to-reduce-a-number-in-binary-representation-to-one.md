@@ -14,148 +14,207 @@ img_src = ""
 youtube = "qxt7_HD8Cag"
 youtube_upload_date="2024-05-29"
 youtube_thumbnail="https://i.ytimg.com/vi/qxt7_HD8Cag/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string representing a non-negative integer. The task is to determine the number of steps required to reduce this number to 1, following the rules: divide by 2 if the number is even, or add 1 if it is odd. Return the total number of steps required.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a binary string representing a non-negative integer.
+- **Example:** `"1111"`
+- **Constraints:**
+	- 1 <= s.length <= 500
+	- s consists of characters '0' or '1'
+	- s[0] == '1'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numSteps(string s) {
-        
-        int idx = s.size() - 1, cnt = 0;
-        
-        while(idx > 0) {
-            if(s[idx] == '0') {
-                cnt++;
-                idx--;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the number of steps required to reduce the given number to 1.
+- **Example:** `7`
+- **Constraints:**
+	- The output should be the total number of steps to reduce the number to 1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count how many operations are needed to reduce the number to 1.
+
+- Convert the binary string to a decimal integer.
+- For each step, check if the number is odd or even.
+- If the number is odd, increment it by 1. If it's even, divide it by 2.
+- Keep track of the number of operations until the number becomes 1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is valid and represents a non-negative integer.
+- The problem will always have a solution as the number will eventually reduce to 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: "1111"`  \
+  **Explanation:** The binary representation '1111' corresponds to the number 15. It takes 7 steps to reduce 15 to 1 by following the rules of even and odd operations.
+
+- **Input:** `Input: "100"`  \
+  **Explanation:** The binary representation '100' corresponds to the number 4. It takes 3 steps to reduce 4 to 1.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to repeatedly perform the appropriate operation (add 1 or divide by 2) until the number reaches 1, while counting the steps.
+
+### Initial Thoughts 💭
+- We can represent the number as a binary string, which makes it easy to check if the number is odd or even.
+- We will simulate the process of reducing the number by performing the required operations, counting each step.
+{{< dots >}}
+### Edge Cases 🌐
+- The string will always have at least one character, as it represents a valid binary number.
+- Ensure the solution works for binary strings up to the maximum length of 500 characters.
+- What if the binary string is already 1? This case should immediately return 0.
+- The solution should be efficient enough to handle up to 500-character long binary strings.
+{{< dots >}}
+## Code 💻
+```cpp
+int numSteps(string s) {
+    
+    int idx = s.size() - 1, cnt = 0;
+    
+    while(idx > 0) {
+        if(s[idx] == '0') {
+            cnt++;
+            idx--;
+        } else {
+            int tmp = idx;
+            while(idx >= 0 && s[idx] == '1') idx--;
+            cnt++; // add one
+            if(idx >= 0) {
+                s[idx] = '1';
+                cnt += (tmp-idx); // divide by 2
             } else {
-                int tmp = idx;
-                while(idx >= 0 && s[idx] == '1') idx--;
-                cnt++; // add one
-                if(idx >= 0) {
-                    s[idx] = '1';
-                    cnt += (tmp-idx); // divide by 2
-                } else {
-                    cnt += (tmp-idx);
-                }
+                cnt += (tmp-idx);
             }
         }
-        return cnt;
     }
-};
-{{< /highlight >}}
----
+    return cnt;
+}
+```
 
-### Problem Statement
+This function, `numSteps`, calculates the minimum number of steps required to convert a binary string to a string of all '0's. It performs operations by toggling the binary digits based on specific conditions while iterating over the string from the end.
 
-The objective of this problem is to find the minimum number of steps required to reduce a given binary number (represented as a string) to zero. The operations allowed are:
-1. If the current number is even, you can perform a division by two.
-2. If the current number is odd, you can either:
-   - Subtract one to make it even, then proceed to divide by two.
-   - This means that every odd number requires at least one step to become even.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int numSteps(string s) {
+	```
+	Defines the method `numSteps`, which takes a binary string `s` and calculates the number of steps to transform it into a string of all '0's.
 
-The binary string is processed from the least significant bit (rightmost) to the most significant bit (leftmost), counting the steps required to reduce it to zero.
+2. **Variable Initialization**
+	```cpp
+	    int idx = s.size() - 1, cnt = 0;
+	```
+	Initializes two variables: `idx` to point to the last character of the string and `cnt` to track the number of steps taken.
 
-### Approach
+3. **Loop Start**
+	```cpp
+	    while(idx > 0) {
+	```
+	Starts a `while` loop to iterate through the string from the end towards the beginning, as long as `idx` is greater than 0.
 
-To solve this problem, we use a simple iterative approach that:
-- Starts from the least significant bit of the binary number and works its way to the most significant bit.
-- Counts the number of operations needed based on whether the current bit is '0' or '1':
-  - For each '0', we simply count the step since it indicates that the number is still even.
-  - For each '1', we must subtract one (to make it even) and then perform the subsequent divisions, counting how many bits are traversed in the process.
+4. **Condition Check**
+	```cpp
+	        if(s[idx] == '0') {
+	```
+	Checks if the current character is '0'. If so, it increments the step count and moves to the previous character.
 
-The algorithm keeps track of the total number of operations until the entire binary string has been processed and the number has been reduced to zero.
+5. **Count Increment**
+	```cpp
+	            cnt++;
+	```
+	Increments the `cnt` variable by 1 when encountering a '0' at the current index.
 
-### Code Breakdown (Step by Step)
+6. **Index Decrement**
+	```cpp
+	            idx--;
+	```
+	Decrements the `idx` variable to move to the previous character in the string.
 
-Here’s a detailed explanation of the provided C++ code that implements the above approach:
+7. **Else Block Start**
+	```cpp
+	        } else {
+	```
+	Starts the `else` block for handling the case when the current character is '1'.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - We define a class named `Solution` that will contain our method for calculating the number of steps.
+8. **Temporary Index Save**
+	```cpp
+	            int tmp = idx;
+	```
+	Saves the current index (`idx`) to `tmp` before processing the '1' character.
 
-2. **Method Signature**:
-   ```cpp
-       int numSteps(string s) {
-   ```
-   - The method `numSteps` takes a string `s` as an input, which represents the binary number.
+9. **Inner Loop Start**
+	```cpp
+	            while(idx >= 0 && s[idx] == '1') idx--;
+	```
+	Moves the `idx` pointer leftward while encountering '1' characters, skipping over consecutive '1's.
 
-3. **Variable Initialization**:
-   ```cpp
-           int idx = s.size() - 1, cnt = 0;
-   ```
-   - `idx` is initialized to the index of the last character in the string, representing the least significant bit of the binary number.
-   - `cnt` is initialized to 0 to keep track of the number of steps required to reduce the number to zero.
+10. **Step Increment**
+	```cpp
+	            cnt++; // add one
+	```
+	Increments `cnt` by 1 after encountering a '1' and moving past any consecutive '1's.
 
-4. **Main Loop**:
-   ```cpp
-           while(idx > 0) {
-   ```
-   - The loop continues until we have processed all the bits in the string (until `idx` is greater than 0).
+11. **Check for Index Validity**
+	```cpp
+	            if(idx >= 0) {
+	```
+	Checks if there are still remaining characters in the string to process.
 
-5. **Handling Even Bits**:
-   ```cpp
-               if(s[idx] == '0') {
-                   cnt++;
-                   idx--;
-               }
-   ```
-   - If the current bit at `idx` is '0', we simply increment the `cnt` by 1 because this means we are performing a division by 2 (since the number is even), and move to the previous bit (`idx--`).
+12. **Toggle Character**
+	```cpp
+	                s[idx] = '1';
+	```
+	Sets the character at the current index to '1', simulating the operation of transforming a '1' into a '0'.
 
-6. **Handling Odd Bits**:
-   ```cpp
-               } else {
-                   int tmp = idx;
-                   while(idx >= 0 && s[idx] == '1') idx--;
-                   cnt++; // add one
-                   if(idx >= 0) {
-                       s[idx] = '1';
-                       cnt += (tmp-idx); // divide by 2
-                   } else {
-                       cnt += (tmp-idx);
-                   }
-               }
-   ```
-   - If the current bit is '1', we first save the current index in `tmp`.
-   - Then, we move backward through the string while the bits are '1', effectively counting how many '1's there are before we hit a '0' (if any).
-   - We increment `cnt` by 1 for the operation of subtracting one (to make it even).
-   - If we find a '0' (i.e., `idx` is still valid), we set this bit to '1' (which is not strictly necessary but helps conceptualize that we are making it an even number), and add the number of '1's we skipped to `cnt` as these represent the divisions we will perform.
-   - If there are no more bits left (i.e., `idx` becomes less than 0), we just add the count of '1's skipped to `cnt`.
+13. **Step Adjustment**
+	```cpp
+	                cnt += (tmp-idx); // divide by 2
+	```
+	Adds the difference between the saved index (`tmp`) and the current index (`idx`) to `cnt`, simulating a 'divide by 2' operation.
 
-7. **Return Statement**:
-   ```cpp
-           return cnt;
-       }
-   };
-   ```
-   - After the loop concludes, the total count of operations required to reduce the binary number to zero is returned.
+14. **Else Block End**
+	```cpp
+	            } else {
+	```
+	Handles the case where there are no more characters to process in the string.
 
-### Complexity
+15. **Final Adjustment**
+	```cpp
+	                cnt += (tmp-idx);
+	```
+	Adds the difference between `tmp` and `idx` to `cnt` when the loop ends, finalizing the step count.
 
-- **Time Complexity**: 
-  - The time complexity of this solution is \( O(n) \), where \( n \) is the length of the input string `s`. Each bit is processed at most twice (once when evaluating its value and once when moving back through the '1's).
+16. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the total number of steps (`cnt`) needed to transform the input binary string into a string of all '0's.
 
-- **Space Complexity**:
-  - The space complexity is \( O(1) \) since we only use a fixed amount of additional space for variables (no additional data structures are used that scale with input size).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), when the input is already '1'.
+- **Average Case:** O(n), where n is the length of the binary string.
+- **Worst Case:** O(n), as we need to check each bit of the binary string and perform operations.
 
-### Conclusion
 
-This solution provides an efficient method to determine the number of steps required to reduce a binary number to zero. The iterative approach, combined with a clear understanding of binary arithmetic, allows us to effectively manage the operations required based on the characteristics of binary numbers.
 
-#### Key Takeaways:
+### Space Complexity 💾
+- **Best Case:** O(1), as no extra space is required beyond basic variables.
+- **Worst Case:** O(1), since we only need a few variables for the calculation.
 
-- **Understanding Binary Arithmetic**: Recognizing how binary numbers behave during division and subtraction is crucial for solving similar problems in computational mathematics.
-- **Efficiency**: The solution operates within linear time complexity, making it suitable for even large binary strings.
-- **Simplicity in Logic**: The straightforward logic behind handling odd and even bits demonstrates the effectiveness of using simple conditions to solve complex problems.
 
-This code serves as a prime example of how to approach problems involving binary representation in a programming context, emphasizing both clarity and efficiency in design.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/description/)
 

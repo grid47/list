@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "HQ4U24lRar8"
 youtube_upload_date="2021-03-06"
 youtube_thumbnail="https://i.ytimg.com/vi/HQ4U24lRar8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,123 +28,137 @@ youtube_thumbnail="https://i.ytimg.com/vi/HQ4U24lRar8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a string order that specifies a custom order of characters, and a string s that contains the characters you need to permute. The task is to rearrange the characters of s so that they follow the order specified in the string order. If a character appears in order, it must appear in s in the same relative order. Any characters from s that don't appear in order can be arranged in any position.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings: order and s.
+- **Example:** `order = 'zyx', s = 'abcxyz'`
+- **Constraints:**
+	- 1 <= order.length <= 26
+	- 1 <= s.length <= 200
+	- order and s consist of lowercase English letters.
+	- All characters in order are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string customSortString(string o, string s) {
-        
-        unordered_map<char, int> mp;
-        for(int i = 0; i < o.size(); i++)
-            mp[o[i]] = i + 1;
-        
-        sort(s.begin(), s.end(), [&](char a, char b) {
-            return mp[a] < mp[b];
-        });
-        
-        return s;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string that is a permutation of s, where the characters are arranged according to the order given by the string order. If a character does not appear in order, it can appear in any position.
+- **Example:** `Output: 'zyxcba'`
+- **Constraints:**
+	- The output should be a valid permutation of the characters of s.
 
-### Problem Statement
-The problem is to sort a string `s` based on the order of characters defined in a string `o`. The string `o` defines a custom order of characters, and the string `s` needs to be rearranged such that its characters appear in the order specified by `o`. Any characters in `s` that do not appear in `o` should remain in their original order. 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to permute the string s based on the order of characters provided in order.
 
-The task is to implement an efficient function that takes two strings, `o` and `s`, and returns `s` sorted according to the custom order defined by `o`.
+- Create a mapping of each character in order to its position.
+- Sort the string s using this mapping to ensure that characters in s appear in the same order as in order.
+- Characters not in order can be placed in any position in s.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings are valid, and characters in order appear only once.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: order = 'abc', s = 'bca'`  \
+  **Explanation:** The characters 'a', 'b', and 'c' must be arranged in the order specified by order. Therefore, the output should be 'abc'.
 
-### Approach
-To solve this problem, we need to use a sorting algorithm that respects a custom order defined by the string `o`. We can achieve this by:
+- **Input:** `Input: order = 'zyx', s = 'abcxyz'`  \
+  **Explanation:** The characters 'x', 'y', and 'z' must appear in the order 'z', 'y', 'x' as per order, while 'a', 'b', and 'c' can appear in any order.
 
-1. **Mapping characters from `o` to their order**: Create a mapping that associates each character in `o` with its position in the string (1-based index). This allows us to determine the priority of characters based on their positions in `o`.
-   
-2. **Sorting characters in `s` using the map**: Sort the string `s` by comparing the positions of each character in the map. Characters that are not present in `o` should still be compared based on their positions in `s`, so we can maintain their relative order.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a sorting algorithm that compares the characters based on their position in the order string.
 
-3. **Returning the sorted string**: Once sorted, the function will return the string `s` with characters ordered according to `o`.
+### Initial Thoughts 💭
+- The characters in order dictate the relative order of characters in s.
+- Characters not found in order can appear in any order in the result.
+- We can use a map to track the order of characters, then sort the string s accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since both order and s are non-empty.
+- For larger strings up to length 200, ensure that sorting remains efficient.
+- If s contains characters not found in order, they can be arranged in any position.
+- Ensure that the final string is a valid permutation of s, respecting the order of characters that appear in order.
+{{< dots >}}
+## Code 💻
+```cpp
+string customSortString(string o, string s) {
+    
+    unordered_map<char, int> mp;
+    for(int i = 0; i < o.size(); i++)
+        mp[o[i]] = i + 1;
+    
+    sort(s.begin(), s.end(), [&](char a, char b) {
+        return mp[a] < mp[b];
+    });
+    
+    return s;
+}
+```
 
-### Code Breakdown (Step by Step)
+This function customSortString sorts a string 's' based on the order defined by string 'o'. The characters in 's' are sorted according to their position in 'o'.
 
-Let's break down the code step by step:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string customSortString(string o, string s) {
+	```
+	The function 'customSortString' is defined with two string parameters: 'o' (the custom order) and 's' (the string to be sorted).
 
-1. **Define the function**:
-   The function is defined as:
-   ```cpp
-   string customSortString(string o, string s)
-   ```
+2. **Map Initialization**
+	```cpp
+	    unordered_map<char, int> mp;
+	```
+	An unordered_map 'mp' is created to store the position of each character in the string 'o', with the character as the key and its position as the value.
 
-   Here, `o` represents the custom order string, and `s` is the string that we need to sort.
+3. **Map Population**
+	```cpp
+	    for(int i = 0; i < o.size(); i++)
+	```
+	A loop iterates through each character in string 'o'.
 
-2. **Create the mapping**:
-   ```cpp
-   unordered_map<char, int> mp;
-   for(int i = 0; i < o.size(); i++)
-       mp[o[i]] = i + 1;
-   ```
+4. **Map Population**
+	```cpp
+	        mp[o[i]] = i + 1;
+	```
+	Each character in 'o' is mapped to a position (i+1) in the unordered_map 'mp'. The positions are 1-based.
 
-   In this step, we initialize an `unordered_map` called `mp` to store the custom order of characters from `o`. The key is the character from `o`, and the value is its position (1-based index). For example, if `o = "cba"`, the map will look like:
-   ```
-   { 'c': 1, 'b': 2, 'a': 3 }
-   ```
+5. **Sorting**
+	```cpp
+	    sort(s.begin(), s.end(), [&](char a, char b) {
+	```
+	The string 's' is sorted using the 'sort' function. The comparison function is a lambda that compares the characters based on their position in 'mp'.
 
-3. **Sort the string `s`**:
-   ```cpp
-   sort(s.begin(), s.end(), [&](char a, char b) {
-       return mp[a] < mp[b];
-   });
-   ```
+6. **Comparison Function**
+	```cpp
+	        return mp[a] < mp[b];
+	```
+	The lambda function compares two characters 'a' and 'b' based on their positions in the map 'mp'. It ensures characters are ordered according to their custom positions in 'o'.
 
-   Here, we use the `sort` function to sort the string `s`. The sorting comparison is customized using a lambda function. This lambda compares two characters `a` and `b` based on their order in the map `mp`. The expression `mp[a] < mp[b]` ensures that characters are sorted according to their order in `o`. If a character is not found in the map, the comparison will result in a default behavior that keeps its relative order intact.
+7. **Return Statement**
+	```cpp
+	    return s;
+	```
+	The sorted string 's' is returned as the output of the function.
 
-4. **Return the sorted string**:
-   ```cpp
-   return s;
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n), where n is the length of s.
+- **Average Case:** O(n log n), since sorting dominates the complexity.
+- **Worst Case:** O(n log n), where n is the length of s.
 
-   Once the string `s` is sorted according to the custom order, the function returns the sorted string.
+Sorting the characters based on the custom order requires O(n log n) time, where n is the length of the string s.
 
-### Example Walkthrough
+### Space Complexity 💾
+- **Best Case:** O(n), since we need space to store the sorted version of s.
+- **Worst Case:** O(n), where n is the length of s, for storing the result of the sorted string.
 
-Let’s walk through an example to better understand how the function works:
+The space complexity is O(n) due to the storage of the sorted string.
 
-1. **Input**: 
-   ```cpp
-   o = "cba", s = "abcd"
-   ```
+**Happy Coding! 🎉**
 
-2. **Mapping creation**: 
-   The unordered map `mp` is created as follows:
-   ```
-   { 'c': 1, 'b': 2, 'a': 3 }
-   ```
-
-3. **Sorting `s`**:
-   Initially, `s = "abcd"`. The sorting function will compare each pair of characters in `s` based on their positions in `mp`:
-   - 'a' has a rank of 3.
-   - 'b' has a rank of 2.
-   - 'c' has a rank of 1.
-   - 'd' is not in `o`, so it stays in its original position.
-   
-   After sorting, `s` becomes `"cbad"`.
-
-4. **Output**:
-   The function returns `"cbad"`.
-
-### Complexity
-
-- **Time Complexity**:
-  The time complexity of this solution is dominated by the sorting step. The `sort` function has a time complexity of **O(n log n)**, where `n` is the length of the string `s`. The creation of the map and the lambda comparison both take linear time, **O(m)**, where `m` is the length of the string `o`. Therefore, the overall time complexity is **O(n log n)**.
-
-- **Space Complexity**:
-  The space complexity is **O(m)** due to the space required for the `unordered_map` that stores the custom order, where `m` is the length of the string `o`. The space complexity is also influenced by the input string `s`, which is of length `n`, but the additional space required for sorting is constant, so the overall space complexity remains **O(m)**.
-
-### Conclusion
-
-This solution efficiently solves the problem of sorting a string according to a custom order. By leveraging an unordered map to store the custom order and using a lambda function with the `sort` function, we are able to sort the string in **O(n log n)** time complexity. 
-
-The approach is both simple and efficient, making it well-suited for handling cases where the custom order is specified and needs to be applied to a string quickly. The time complexity of **O(n log n)** ensures that this solution works efficiently even for larger strings.
-
-In summary, the function is designed to provide a flexible and efficient way to sort a string based on a custom order, preserving the relative order of characters that are not specified in the custom order string. This approach is ideal for problems that require sorting with specific constraints, and it can be extended to handle other similar sorting scenarios with ease.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/custom-sort-string/description/)
 

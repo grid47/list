@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "pGMsrvt0fpk"
 youtube_upload_date="2021-07-15"
 youtube_thumbnail="https://i.ytimg.com/vi/pGMsrvt0fpk/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,103 +28,153 @@ youtube_thumbnail="https://i.ytimg.com/vi/pGMsrvt0fpk/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an m x n grid filled with non-negative integers, find a path from the top-left to the bottom-right corner that minimizes the sum of all numbers along the way. The robot can only move either right or down at each step.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer 2D grid where grid[i][j] represents the cost at cell (i, j).
+- **Example:** `Input: grid = [[2,3,4],[5,1,2],[3,2,1]]`
+- **Constraints:**
+	- m == grid.length
+	- n == grid[i].length
+	- 1 <= m, n <= 200
+	- 0 <= grid[i][j] <= 200
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minPathSum(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-        {
-                 if(i > 0 && j > 0) grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
-            else if(i > 0) grid[i][j] += grid[i - 1][j];
-            else if(j > 0) grid[i][j] += grid[i][j - 1];
-        }
-        
-        return grid[m - 1][n - 1];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum sum of numbers along the path from the top-left to the bottom-right corner.
+- **Example:** `Output: 10`
+- **Constraints:**
+	- The result will always be less than or equal to 2 * 10^9.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the path from the top-left to the bottom-right corner of the grid that minimizes the total sum.
+
+- Iterate through each cell of the grid.
+- At each cell (i, j), calculate the minimum cost to reach the cell from either the top or the left neighbor.
+- For the top row or the leftmost column, only consider cells that exist within the bounds.
+- Return the value at the bottom-right corner as the final result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is non-empty and contains at least one cell.
+- The top-left corner is always the starting point.
+- The bottom-right corner is the destination.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[2,3,4],[5,1,2],[3,2,1]]`  \
+  **Explanation:** The path 2 → 3 → 1 → 2 → 1 minimizes the sum, giving an output of 10.
+
+- **Input:** `Input: grid = [[1,4,7],[2,5,6]]`  \
+  **Explanation:** The path 1 → 4 → 7 → 6 minimizes the sum, giving an output of 13.
+
+{{< dots >}}
+## Approach 🚀
+Use a dynamic programming approach to iteratively calculate the minimum path sum for each cell, based on values from its top or left neighbors.
+
+### Initial Thoughts 💭
+- The problem involves minimizing the sum, so dynamic programming is suitable.
+- Each cell's minimum cost depends on the values of its top and left neighbors.
+- Start with the base cases for the top row and leftmost column and build up the solution iteratively.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as the input grid is guaranteed to have at least one cell.
+- A grid with maximum size (200 x 200) containing large values close to the upper bound (200).
+- A grid where all values are zero, resulting in a minimum path sum of 0.
+- A grid where the only path is straight down or straight right.
+- Ensure that the solution handles edge cases for single-row or single-column grids efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int minPathSum(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+
+    // Handle the first row
+    for (int j = 1; j < n; j++) {
+        grid[0][j] += grid[0][j - 1];
     }
-};
-{{< /highlight >}}
----
 
-### 🛤️ **Minimum Path Sum in Grid**
+    // Handle the first column
+    for (int i = 1; i < m; i++) {
+        grid[i][0] += grid[i - 1][0];
+    }
 
-The problem is to find the minimum path sum from the top-left corner `(0, 0)` to the bottom-right corner `(m-1, n-1)` of an `m x n` grid. In this grid:
-- Each cell contains a non-negative integer that represents the cost to move through that cell.
-- Movement is restricted to either down or right at each step.
+    // Fill the rest of the grid
+    for (int i = 1; i < m; i++) {
+        for (int j = 1; j < n; j++) {
+            grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
+        }
+    }
 
-The goal is to find the path from the starting point to the destination that has the lowest possible sum of costs.
-
-### 🧠 **Approach**
-
-This problem is efficiently solved using **dynamic programming (DP)**, where we calculate the minimum path sum to each cell by building on previously computed values in the grid.
-
-#### Key Observations:
-1. **Modifying the Grid in Place**:
-   - We update the original `grid` directly to store the cumulative minimum path sum for each cell. This allows us to avoid using extra space, making the solution more memory efficient.
-
-2. **Base Cases**:
-   - If the cell is in the first row (i.e., `i == 0`), it can only be reached from the left cell.
-   - If the cell is in the first column (i.e., `j == 0`), it can only be reached from the cell above.
-   - For all other cells, the minimum path sum to reach `grid[i][j]` is the value of `grid[i][j]` plus the minimum of the values from the cell directly above or to the left.
-
-3. **Recursive Formula**:
-   - For each cell `(i, j)` (excluding the first row and column), the minimum path sum is calculated as:
-     ```cpp
-     grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
-     ```
-   - This efficiently updates the `grid` with cumulative minimum path sums, ensuring that each cell holds the lowest possible cost to reach it from the start.
-
-### 🔍 **Code Breakdown**
-
-#### Step 1: Initialize Grid Dimensions
-
-```cpp
-int m = grid.size(), n = grid[0].size();
+    return grid[m - 1][n - 1];
+}
 ```
-- Here, `m` is the number of rows, and `n` is the number of columns in the `grid`.
 
-#### Step 2: Iterate Through the Grid
+This code calculates the minimum path sum from the top-left corner to the bottom-right corner of a grid, where you can only move right or down.
 
-```cpp
-for(int i = 0; i < m; i++)
-    for(int j = 0; j < n; j++)
-```
-- The code iterates over each cell `(i, j)` in the `grid`, updating the minimum path sum to reach each cell.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minPathSum(vector<vector<int>>& grid) {
+	```
+	This line declares a function named `minPathSum` that takes a 2D vector `grid` representing the grid as input and returns the minimum path sum.
 
-#### Step 3: Update Each Cell
+2. **Get Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	This line gets the dimensions of the grid, `m` for rows and `n` for columns.
 
-```cpp
-if(i > 0 && j > 0) grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
-else if(i > 0) grid[i][j] += grid[i - 1][j];
-else if(j > 0) grid[i][j] += grid[i][j - 1];
-```
-- **General Case**: If the cell `(i, j)` is not in the first row or column, it adds the minimum of the values from the cell above `(i-1, j)` or to the left `(i, j-1)`.
-- **First Column**: Cells in the first column can only be reached from the cell above, so they add the value of `grid[i-1][j]`.
-- **First Row**: Cells in the first row can only be reached from the left, so they add the value of `grid[i][j-1]`.
+3. **Handle First Row**
+	```cpp
+	    for (int j = 1; j < n; j++) {
+	        grid[0][j] += grid[0][j - 1];
+	    }
+	```
+	This loop iterates over the first row of the grid, starting from the second element. For each cell, it adds the value of the cell to its left to the current cell's value. This represents the minimum path sum to reach that cell from the top-left corner.
 
-#### Step 4: Final Result
+4. **Handle First Column**
+	```cpp
+	    for (int i = 1; i < m; i++) {
+	        grid[i][0] += grid[i - 1][0];
+	    }
+	```
+	This loop iterates over the first column of the grid, starting from the second row. For each cell, it adds the value of the cell above it to the current cell's value. This represents the minimum path sum to reach that cell from the top-left corner.
 
-```cpp
-return grid[m - 1][n - 1];
-```
-- The value at `grid[m-1][n-1]` contains the minimum path sum to reach the bottom-right corner from the top-left corner.
+5. **Fill the Rest of the Grid**
+	```cpp
+	    for (int i = 1; i < m; i++) {
+	        for (int j = 1; j < n; j++) {
+	            grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
+	        }
+	    }
+	```
+	This nested loop iterates over the remaining cells of the grid. For each cell `(i, j)`, it calculates the minimum path sum to reach that cell by adding the minimum of the values from the cell above and the cell to the left to the current cell's value.
 
-### 📊 **Complexity Analysis**
+6. **Return Minimum Path Sum**
+	```cpp
+	    return grid[m - 1][n - 1];
+	```
+	After filling the grid with minimum path sums, the function returns the value at the bottom-right corner, which represents the minimum path sum from the top-left to the bottom-right corner.
 
-#### Time Complexity:
-- **O(m * n)**: We traverse every cell in the `m x n` grid once, making the time complexity `O(m * n)`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-#### Space Complexity:
-- **O(1)**: No extra space is used beyond the input grid, as the grid is modified in place to store cumulative minimum path sums.
+Each cell in the grid is visited exactly once.
 
-### 🌟 **Conclusion**
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This DP solution is optimal for finding the minimum path sum in a grid with non-negative integers. By modifying the `grid` in place, we efficiently compute the minimum sum, minimizing space complexity. The approach ensures that each cell holds the minimum cost path to reach it, making it a compact and efficient solution for grid-based minimum path problems.
+The solution modifies the input grid in place, requiring no extra space.
 
----
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-path-sum/description/)
 

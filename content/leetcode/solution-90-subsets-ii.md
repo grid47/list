@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Vn2v6ajA7U0"
 youtube_upload_date="2021-12-14"
 youtube_thumbnail="https://i.ytimg.com/vi/Vn2v6ajA7U0/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,127 +28,176 @@ youtube_thumbnail="https://i.ytimg.com/vi/Vn2v6ajA7U0/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array nums that may contain duplicates, return all possible subsets (the power set) of the array. The solution set should not contain duplicate subsets. The subsets should be returned in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer array nums, which may contain duplicate values.
+- **Example:** `Input: nums = [3, 3, 1]`
+- **Constraints:**
+	- 1 <= nums.length <= 10
+	- -10 <= nums[i] <= 10
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    map<vector<int>, bool> mp;
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> tmp;
-        sort(nums.begin(), nums.end());
-        mp.clear();
-        bt(ans, tmp, nums, 0);
-        return ans;
-    }
-    
-    void bt(vector<vector<int>> &ans, vector<int> &tmp,
-            vector<int> &nums, int idx) {
-        
-        if(idx == nums.size()) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of lists, where each inner list represents a unique subset of the input array.
+- **Example:** `Output: [[], [1], [1, 3], [1, 3, 3], [3], [3, 3]]`
+- **Constraints:**
+	- The subsets must not contain duplicates.
 
-            if(!mp.count(tmp)) {
-                ans.push_back(tmp);
-                mp[tmp] = true;
-            }
-            return;
-        }
-        
-        bt(ans, tmp, nums, idx + 1);
-        
-        tmp.push_back(nums[idx]);
-        bt(ans, tmp, nums, idx + 1);
-        tmp.pop_back();            
-        
-    }
-    
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate all possible subsets of the input array while avoiding duplicates. This can be done by iterating through the array, considering each element either as part of a subset or not, and ensuring that subsets with duplicate elements are not included.
 
-### 📝 **Problem Statement**
+- Sort the input array to ensure duplicates are adjacent.
+- Use a backtracking approach to generate subsets, ensuring that if an element is included, the next occurrence of the same element is only included if it was included previously in the current subset.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is not empty.
+- The input array length is at most 10, so it is feasible to generate all subsets.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 2]`  \
+  **Explanation:** For input [1, 2, 2], the possible unique subsets are: [], [1], [1, 2], [1, 2, 2], [2], and [2, 2]. The subset [2] appears twice, so only one of them is included in the result.
 
-Given a list of integers `nums`, generate all possible subsets. If `nums` contains duplicate elements, avoid including duplicate subsets in the final result.
+- **Input:** `Input: nums = [0]`  \
+  **Explanation:** For input [0], the only subsets are the empty set [] and the set containing the element itself [0].
 
-#### Example:
-- **Input:** `nums = [1, 2, 2]`
-- **Output:** `[[], [1], [1, 2], [1, 2, 2], [2], [2, 2]]`
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using backtracking to generate all subsets. Sorting the array first helps ensure that duplicate subsets are avoided by making sure the same elements are adjacent.
 
-### 🔍 **Approach**
-
-The problem can be tackled using **backtracking**. Additionally, to avoid duplicates, we'll **sort the input array** and apply a **recursive approach** to generate subsets efficiently. Here's a breakdown of the approach:
-
-1. **Sort the Input**: Sorting ensures that duplicates are adjacent, which makes it easier to skip duplicates during the generation process.
-  
-2. **Backtracking with Recursion**:
-   - Use a backtracking function to recursively decide whether to include or exclude each element in the subset.
-   - Avoid adding duplicate subsets by ensuring the subsets are built in a specific order and skipping over duplicate elements when necessary.
-
-### 🧑‍💻 **Code Breakdown**
-
-#### Step 1: Initial Setup
-
+### Initial Thoughts 💭
+- The backtracking approach can help generate subsets by either including or excluding an element.
+- The sorted array ensures that duplicate elements are adjacent and can be handled easily during the backtracking process.
+- Handling duplicates requires careful management during the backtracking to avoid generating the same subset multiple times.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array will result in a single subset: the empty set []
+- For large inputs (n = 10), the solution must handle 2^n subsets efficiently.
+- If the array contains duplicate values, the solution must ensure only unique subsets are returned.
+- The constraints (1 <= nums.length <= 10) allow for generating all subsets directly, as 2^10 subsets is a manageable number.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-    vector<vector<int>> ans;
-    vector<int> tmp;
-    sort(nums.begin(), nums.end());  // Sort to handle duplicates
-    backtrack(ans, tmp, nums, 0);    // Start the backtracking process
-    return ans;
-}
-```
-- `ans`: Holds all unique subsets.
-- `tmp`: A temporary vector to store the current subset during recursion.
-- We sort `nums` to group duplicate elements together, which helps in avoiding generating duplicate subsets.
-- The backtracking function `backtrack` is called starting from index `0`.
-
-#### Step 2: The Backtracking Function
-
-```cpp
-void backtrack(vector<vector<int>>& ans, vector<int>& tmp, vector<int>& nums, int idx) {
-    ans.push_back(tmp);  // Add the current subset to the result
-
-    for (int i = idx; i < nums.size(); i++) {
-        // Skip duplicates: If the current element is the same as the previous one, skip it
-        if (i > idx && nums[i] == nums[i - 1]) continue;
-
-        tmp.push_back(nums[i]);      // Include the current element
-        backtrack(ans, tmp, nums, i + 1);  // Recurse with the next element
-        tmp.pop_back();             // Backtrack: Remove the last element
+    sort(nums.begin(), nums.end());
+    vector<vector<int>> res = {{}};
+    int startIndex = 0, endIndex = 0;
+    for (int i = 0; i < nums.size(); i++) {
+        int n = res.size();
+        for (int j = 0; j < n; j++) {
+            if (i == 0 || nums[i] != nums[i - 1] || j >= startIndex) {
+                vector<int> temp = res[j];
+                temp.push_back(nums[i]);
+                res.push_back(temp);
+            }
+        }
+        startIndex = i + 1;
     }
+    return res;
 }
 ```
 
-- **Base Case**: At each recursive step, we add the current subset (`tmp`) to `ans` before making any recursive calls.
-- **Recursive Case**: We iterate through `nums`, starting from the current index `idx`. For each element:
-  - We skip duplicate elements by checking if the current element is the same as the previous one (this ensures we don't generate duplicate subsets).
-  - We then recursively generate subsets by including the current element, and after recursion, we backtrack by removing the last added element.
+This code generates all unique subsets of a given array of integers, including duplicates.
 
-#### Step 3: Handling Duplicates
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+	```
+	Declares a function `subsetsWithDup` that takes a vector of integers `nums` as input and returns a vector of vectors representing all unique subsets.
 
-- **Skip Duplicate Elements**: By sorting `nums` initially, duplicates are adjacent. We skip over duplicate elements by checking if the current element is equal to the previous one in the iteration (`if (i > idx && nums[i] == nums[i - 1]) continue`).
+2. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the input array `nums` in ascending order to handle duplicates efficiently.
 
-### ⏱ **Complexity Analysis**
+3. **Array Initialization**
+	```cpp
+	    vector<vector<int>> res = {{}};
+	```
+	Initializes a vector `res` to store the subsets. The initial empty subset `{}` is added.
 
-#### Time Complexity:
-- **Sorting**: Sorting the input array `nums` takes **O(n log n)**, where `n` is the length of `nums`.
-- **Backtracking**: In the worst case, we generate all subsets, which takes **O(2^n)** time. For each subset, we might perform a check to avoid duplicates, but the skipping mechanism ensures we don't generate duplicate subsets.
-  - The overall time complexity is **O(n log n + 2^n)**.
+4. **Variable Initialization**
+	```cpp
+	    int startIndex = 0, endIndex = 0;
+	```
+	Initializes `startIndex` and `endIndex` to keep track of the range of indices to consider for adding elements to subsets.
 
-#### Space Complexity:
-- **Result Storage**: The space required to store all unique subsets is proportional to the number of subsets, which is **O(2^n)** in the worst case.
-- **Recursion Stack**: The maximum depth of the recursion is `n`, so the recursion stack requires **O(n)** space.
-  - Total space complexity: **O(2^n + n)**.
+5. **Loop Iteration**
+	```cpp
+	    for (int i = 0; i < nums.size(); i++) {
+	```
+	Iterates through each element `nums[i]` in the sorted array.
 
-### 🎯 **Conclusion**
+6. **Size Calculation**
+	```cpp
+	        int n = res.size();
+	```
+	Stores the current size of the `res` vector.
 
-This approach efficiently generates all unique subsets of the list `nums` using **backtracking** with a sorted array to handle duplicates. The time complexity is driven by the exponential number of possible subsets, and the space complexity accounts for both the recursion stack and the storage of the result. This method ensures that no duplicate subsets are included in the final result and is well-suited for handling input lists with duplicate elements.
+7. **Nested Loop Iteration**
+	```cpp
+	        for (int j = 0; j < n; j++) {
+	```
+	Iterates through the existing subsets in `res`.
 
----
+8. **Conditional, Array Manipulation**
+	```cpp
+	            if (i == 0 || nums[i] != nums[i - 1] || j >= startIndex) {
+	```
+	Checks if it's the first iteration, or if the current element is different from the previous one, or if we've reached the `startIndex` for the current element. This ensures we avoid duplicates.
 
-#### 🌟 **Final Thoughts**:
-This backtracking solution is both time-efficient and space-efficient, handling the complexity of duplicates elegantly. By sorting the input and skipping duplicates in the iteration, we ensure optimal performance for generating subsets.
+9. **Array Manipulation**
+	```cpp
+	                vector<int> temp = res[j];
+	```
+	Creates a copy `temp` of the current subset `res[j]`.
+
+10. **Array Manipulation**
+	```cpp
+	                temp.push_back(nums[i]);
+	```
+	Adds the current element `nums[i]` to the `temp` subset.
+
+11. **Array Manipulation**
+	```cpp
+	                res.push_back(temp);
+	```
+	Adds the new subset `temp` to the `res` vector.
+
+12. **Index Update**
+	```cpp
+	        startIndex = i + 1;
+	```
+	Updates `startIndex` to the next index for the next iteration, skipping duplicate elements.
+
+13. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the final `res` vector containing all unique subsets.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(2^n), where n is the number of elements in the input array, since the solution involves generating all possible subsets.
+- **Average Case:** O(2^n)
+- **Worst Case:** O(2^n), as we must generate and check each subset once.
+
+The time complexity is exponential, as we are generating 2^n subsets.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no subsets are generated.
+- **Worst Case:** O(2^n), since we store all subsets.
+
+The space complexity depends on the number of subsets stored.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subsets-ii/description/)
 

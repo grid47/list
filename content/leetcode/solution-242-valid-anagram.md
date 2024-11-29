@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "QMXliZEU9dU"
 youtube_upload_date="2022-06-26"
 youtube_thumbnail="https://i.ytimg.com/vi/QMXliZEU9dU/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,120 +28,126 @@ youtube_thumbnail="https://i.ytimg.com/vi/QMXliZEU9dU/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two strings, s and t. Determine if t is an anagram of s. Two strings are considered anagrams if they contain the exact same characters, but possibly in a different order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings, s and t, both containing lowercase English letters.
+- **Example:** `Input: s = "listen", t = "silent"`
+- **Constraints:**
+	- 1 <= s.length, t.length <= 5 * 10^4
+	- s and t consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isAnagram(string s, string t) {
-        vector<int> ch(26, 0);
-        for(char x: s) ch[x - 'a']++;
-        for(char x: t) ch[x - 'a']--;
-        for(int x: ch) if(x != 0) return false;
-        return true;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if t is an anagram of s, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to verify if both strings contain the same frequency of characters.
 
-In this problem, we need to determine whether two strings, `s` and `t`, are **anagrams** of each other. 🧩 
+- 1. Initialize an array to track the frequency of characters in both strings.
+- 2. Increment the count for characters in string s.
+- 3. Decrement the count for characters in string t.
+- 4. If all counts are zero, return true. Otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings are case-sensitive and consist only of lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "listen", t = "silent"`  \
+  **Explanation:** Both strings contain the same characters with the same frequency. Therefore, they are anagrams, and the output is true.
 
-Two strings are anagrams if they contain the same characters in the same frequencies, but potentially in a different order. Here's how we can check:
+- **Input:** `Input: s = "rat", t = "car"`  \
+  **Explanation:** The characters in the two strings are different, so the output is false.
 
-**Example 1**:
-- **Input**: s = "anagram", t = "nagaram"
-- **Output**: `true` ✅ (Both strings contain the same characters with the same frequencies)
+- **Input:** `Input: s = "a", t = "a"`  \
+  **Explanation:** Both strings are identical, hence they are anagrams of each other. The output is true.
 
-**Example 2**:
-- **Input**: s = "rat", t = "car"
-- **Output**: `false` ❌ (The strings contain different characters)
+{{< dots >}}
+## Approach 🚀
+To check if two strings are anagrams, we can use a frequency count of characters from both strings. If both strings have identical frequency distributions for all characters, they are anagrams.
 
-We need to implement a function `isAnagram` that returns `true` if the two strings are anagrams and `false` otherwise. Let's dive in! 🎯
-
----
-
-### 🧠 Approach
-
-To solve this, we can use a simple and efficient approach. The main idea is to count the frequency of each character in both strings and then compare them. 🧑‍💻
-
-Here's how we can do it:
-
-1. **Character Frequency Count**: We can compare the character counts of both strings. If they have the same characters with the same frequencies, they are anagrams.
-2. **Optimized Approach**: Instead of comparing characters one-by-one, we'll use an array of size 26 (one for each lowercase English letter) to count the frequencies.
-3. **Why Size 26?** Since we only care about lowercase English letters, we only need 26 spots in our frequency array. ✅
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Now, let's break down the code into small, digestible steps! 🛠️
-
+### Initial Thoughts 💭
+- The solution involves comparing the character counts from both strings.
+- A direct comparison of character counts is efficient and will help identify if the strings are anagrams.
+{{< dots >}}
+### Edge Cases 🌐
+- If both strings are empty, return true as they are trivially anagrams.
+- The solution must efficiently handle strings of lengths up to 50,000 characters.
+- Handle cases where the strings are identical or differ by only one character.
+- Ensure that only lowercase letters are considered when counting characters.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool isAnagram(string s, string t) {
+bool isAnagram(string s, string t) {
+    vector<int> ch(26, 0);
+    for(char x: s) ch[x - 'a']++;
+    for(char x: t) ch[x - 'a']--;
+    for(int x: ch) if(x != 0) return false;
+    return true;
+}
 ```
-- Here, we define the function `isAnagram` that takes two strings `s` and `t`. The goal is to check if these two strings are anagrams of each other. Let's check it out!
 
-```cpp
-        vector<int> ch(26, 0);
-```
-- We create a vector `ch` of size 26, initialized to 0. This vector will help us track the frequency of each letter in the strings. It will correspond to the letters 'a' to 'z'. 🅰️ to 🅾️
+This function checks if two strings, `s` and `t`, are anagrams of each other by comparing the frequency of characters in both strings. It uses a vector `ch` to track the character frequencies, ensuring both strings have the same characters in the same counts.
 
-```cpp
-        for(char x: s) ch[x - 'a']++;
-```
-- We loop over each character in string `s` and update the frequency of that character in the `ch` vector. The index for each character is determined by `x - 'a'`. For example, for 'a', it updates `ch[0]`, for 'b', `ch[1]`, and so on.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isAnagram(string s, string t) {
+	```
+	Defines the function `isAnagram`, which takes two strings, `s` and `t`, and returns a boolean indicating whether the strings are anagrams of each other.
 
-```cpp
-        for(char x: t) ch[x - 'a']--;
-```
-- Next, we do the same for string `t`, but this time we **decrement** the frequency. This way, if both strings are anagrams, the counts will cancel out, leaving us with zeroes in all positions.
+2. **Character Frequency Vector Initialization**
+	```cpp
+	    vector<int> ch(26, 0);
+	```
+	Initializes a vector `ch` of size 26, which will be used to store the frequency count of each character in the alphabet (assuming the strings consist only of lowercase English letters).
 
-```cpp
-        for(int x: ch) if(x != 0) return false;
-```
-- Now, we check the `ch` vector. If any of its values is not zero, that means the frequencies of the characters in `s` and `t` are different, and they can't be anagrams! In that case, we return `false`.
+3. **Increment Character Frequency for String s**
+	```cpp
+	    for(char x: s) ch[x - 'a']++;
+	```
+	Iterates through each character `x` in string `s` and increments the corresponding position in the `ch` vector based on the character's ASCII value (adjusted by subtracting `'a'`).
 
-```cpp
-        return true;
-```
-- If all values are zero, it means both strings have the same character frequencies, so we return `true` to indicate that `s` and `t` are anagrams. 🏆
+4. **Decrement Character Frequency for String t**
+	```cpp
+	    for(char x: t) ch[x - 'a']--;
+	```
+	Iterates through each character `x` in string `t` and decrements the corresponding position in the `ch` vector. This balances the frequency counts of characters in `s` and `t`.
 
----
+5. **Check for Frequency Mismatch**
+	```cpp
+	    for(int x: ch) if(x != 0) return false;
+	```
+	Iterates through the `ch` vector to check if all character counts are zero. If any count is non-zero, it means the strings are not anagrams, so the function returns `false`.
 
-### 📈 Complexity Analysis
+6. **Return True for Anagrams**
+	```cpp
+	    return true;
+	```
+	If all character counts are zero, the strings are anagrams, so the function returns `true`.
 
-Let's break down the time and space complexities! 🧮
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Time Complexity:
-- **O(n)**: Where `n` is the length of the longer string between `s` and `t`. We iterate through both strings once, updating the frequency counts in a fixed-size array. So, it's linear with respect to the size of the strings.
+The time complexity is linear in the size of the input strings, where n is the length of the strings.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because the size of the `ch` array is always 26 (fixed for the alphabet). No matter how long the input strings are, the space used by `ch` stays the same. 💾
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
----
+The space complexity is constant since we only need a fixed-size array (of size 26) to count character frequencies.
 
-### 🏁 Conclusion
+**Happy Coding! 🎉**
 
-In this problem, we efficiently check whether two strings are anagrams using a frequency counting method with an array of size 26. Here's what we learned:
-
-#### Key Points:
-1. **Efficiency**: The solution runs in **O(n)** time, making it optimal for large inputs.
-2. **Space Optimization**: The space used is constant, **O(1)**, because we only store counts for 26 characters.
-3. **Simplicity**: It's a simple approach that uses a single pass through the strings to count characters and check if they match.
-4. **Practical**: This method works perfectly for problems involving anagram checks or frequency counting for fixed-size alphabets (like lowercase English letters). 📚
-
-By using this approach, you can quickly determine if two strings are anagrams, making it a solid solution for many string-based challenges! 💪
-
-### ✨ Quick Recap:
-- **Time**: O(n) ⏱️
-- **Space**: O(1) 💡
-- **Solution**: Frequency counting with an array of size 26!
-
-Hope this helps! Keep up the good work! 👏
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-anagram/description/)
 

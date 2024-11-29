@@ -14,142 +14,187 @@ img_src = ""
 youtube = "cueOpK5QMEA"
 youtube_upload_date="2024-10-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/cueOpK5QMEA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers representing the skill levels of players. You need to divide the players into pairs such that the sum of the skill levels of each pair is the same across all pairs. If it's possible to form such pairs, return the sum of their chemistry, which is the product of the skill levels in each pair. If no such division is possible, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of integers where each integer represents the skill level of a player.
+- **Example:** `skill = [1, 5, 2, 4, 3, 3]`
+- **Constraints:**
+	- 2 <= skill.length <= 100000
+	- skill.length is always even.
+	- 1 <= skill[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long dividePlayers(vector<int>& skill) {
-        sort(skill.begin(), skill.end());
-        int n = skill.size();
-        int l = 0, r = n - 1;
-        
-        int sum = skill[l] + skill[r];
-        long long prod = skill[l] * skill[r];
-        
-        l++, r--;
-        while(l < r) {
-            if(sum != (skill[l] + skill[r])) return -1;
-            prod += skill[l] * skill[r];
-            l++;
-            r--;
-        }
-        return prod;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of the chemistry for all valid pairs, or -1 if it's impossible to form the pairs.
+- **Example:** `Output: 22`
+- **Constraints:**
+	- The sum of chemistry values will be computed only for valid teams.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the players can be divided into pairs with equal total skill level, and calculate the sum of their chemistry.
+
+- 1. Sort the skill levels of players.
+- 2. Check if the sum of the first and last skill levels in the sorted array is the same for all adjacent pairs.
+- 3. If the total skill sum is the same for all pairs, calculate the chemistry for each pair and return the sum. Otherwise, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- Players' skill levels are always valid positive integers.
+- There will always be an even number of players in the input.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `skill = [1, 5, 2, 4, 3, 3]`  \
+  **Explanation:** Here, after sorting the array, the players form pairs (1, 5), (2, 4), and (3, 3) which have equal total skill (6). The chemistry is calculated as 1*5 + 2*4 + 3*3 = 5 + 8 + 9 = 22.
+
+- **Input:** `skill = [1, 2, 3, 4]`  \
+  **Explanation:** This input cannot form valid pairs because the total skill sum of any pair does not match, so the output is -1.
+
+- **Input:** `skill = [3, 4]`  \
+  **Explanation:** With only two players, they form a valid pair with a sum of 7, and the chemistry is 3*4 = 12.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we first sort the array to make pairing easier and check if all pairs have the same total skill level.
+
+### Initial Thoughts 💭
+- The problem requires ensuring the total skill for each pair is consistent.
+- Sorting the array allows easier pairing of players with compatible skill levels.
+- Sorting the array helps in pairing the smallest and largest available players to achieve a balanced sum.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain an even number of players and won't be empty.
+- For large inputs, ensure the sorting operation and pair checking runs efficiently.
+- The skill levels are between 1 and 1000, so there will be no zero or negative skill levels.
+- Ensure efficient handling of the upper limit of skill array length (up to 100,000 players).
+{{< dots >}}
+## Code 💻
+```cpp
+long long dividePlayers(vector<int>& skill) {
+    sort(skill.begin(), skill.end());
+    int n = skill.size();
+    int l = 0, r = n - 1;
+    
+    int sum = skill[l] + skill[r];
+    long long prod = skill[l] * skill[r];
+    
+    l++, r--;
+    while(l < r) {
+        if(sum != (skill[l] + skill[r])) return -1;
+        prod += skill[l] * skill[r];
+        l++;
+        r--;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to divide a given list of players into two teams such that:
-1. Each team has the same sum of skills.
-2. The product of the skills of the players in each pair (one player from each team) must be maximized.
-
-The goal is to compute the sum of the products of paired players, ensuring that each pair sums to the same value. If it's not possible to form such pairs, the function should return `-1`.
-
-For example:
-- Given a list of player skills: `[3, 1, 2, 4]`, we need to check if we can split the list into pairs such that the sum of the skills in each pair is equal and calculate the sum of the products of those pairs.
-- If it's possible, return the sum of the products of the pairs; otherwise, return `-1`.
-
-### Approach
-
-The main idea is to pair players in such a way that:
-- The sum of skills in each pair is equal.
-- The product of skills in each pair should be maximized.
-
-We can approach the problem in the following manner:
-1. **Sort the Skill List**: Start by sorting the list of player skills in ascending order. This allows us to pair players from opposite ends of the sorted list.
-2. **Check Pairing Conditions**: Once sorted, the first player (with the lowest skill) can be paired with the last player (with the highest skill). For each pair, we check if their sum is consistent across all pairs. If the sum of any pair differs, we return `-1`.
-3. **Calculate Product**: For each valid pair (where the sum is consistent), calculate the product of their skills and accumulate the result.
-4. **Return the Final Result**: If all pairs are valid, return the sum of their products. If any pair does not satisfy the conditions, return `-1`.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Sort the Skill List**
-
-```cpp
-sort(skill.begin(), skill.end());
-```
-
-- The first step is sorting the input `skill` vector. Sorting helps us easily pick pairs from the two ends of the list, which is a common technique in problems involving pairwise operations.
-
-#### 2. **Initialize Pointers**
-
-```cpp
-int n = skill.size();
-int l = 0, r = n - 1;
-```
-
-- We initialize two pointers, `l` and `r`, which point to the first and last elements of the sorted `skill` list, respectively. These pointers will help in forming pairs by picking players from the start and the end of the list.
-
-#### 3. **Initial Pair Sum and Product**
-
-```cpp
-int sum = skill[l] + skill[r];
-long long prod = skill[l] * skill[r];
-```
-
-- The first pair is formed by the players at indices `l` and `r`. The sum of their skills is calculated and stored in `sum`. The product of their skills is also calculated and stored in `prod`.
-- We will use these initial values to check if all subsequent pairs follow the same sum.
-
-#### 4. **Increment and Decrement Pointers**
-
-```cpp
-l++, r--;
-```
-
-- After processing the first pair, we move the `l` pointer forward and the `r` pointer backward to form the next pair.
-
-#### 5. **Iterate and Check Each Pair**
-
-```cpp
-while (l < r) {
-    if (sum != (skill[l] + skill[r])) return -1;
-    prod += skill[l] * skill[r];
-    l++;
-    r--;
+    return prod;
 }
 ```
 
-- We enter a `while` loop that continues until the `l` pointer meets the `r` pointer. For each pair, we check if the sum of the current pair is equal to the initial sum (`sum`). If the sum differs, it means the pairing is not valid, so we return `-1`.
-- If the sum is valid, we calculate the product of the current pair and add it to the accumulated `prod` value.
-- Finally, we increment `l` and decrement `r` to check the next pair.
+This function divides players into pairs based on their skill levels and computes the total product of their skills if the sum of each pair is equal. If not, it returns -1 indicating an invalid division.
 
-#### 6. **Return the Product**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long dividePlayers(vector<int>& skill) {
+	```
+	This line declares the function `dividePlayers`, which takes a vector `skill` representing the skill levels of players and returns a `long long` value representing the total product of paired skills.
 
-```cpp
-return prod;
-```
+2. **Sorting**
+	```cpp
+	    sort(skill.begin(), skill.end());
+	```
+	This line sorts the `skill` vector in ascending order to facilitate pairing the weakest and strongest players.
 
-- Once all pairs are processed and their sums are verified, we return the total product accumulated in `prod`.
+3. **Variable Initialization**
+	```cpp
+	    int n = skill.size();
+	```
+	This line initializes the variable `n` to the size of the `skill` vector, representing the total number of players.
 
-### Complexity Analysis
+4. **Pointers Initialization**
+	```cpp
+	    int l = 0, r = n - 1;
+	```
+	Here, two pointers, `l` (left) and `r` (right), are initialized to point to the first and last elements of the sorted `skill` vector, respectively.
 
-#### Time Complexity:
-- The time complexity is **O(n log n)**, where `n` is the size of the `skill` list.
-  - Sorting the list takes **O(n log n)** time.
-  - The subsequent iteration through the list to form pairs takes **O(n)** time.
-  
-Thus, the overall time complexity is dominated by the sorting step, which is **O(n log n)**.
+5. **Sum Calculation**
+	```cpp
+	    int sum = skill[l] + skill[r];
+	```
+	This line calculates the sum of the skills of the leftmost (`l`) and rightmost (`r`) players.
 
-#### Space Complexity:
-- The space complexity is **O(1)**, as the solution only uses a constant amount of extra space (a few integer variables such as `l`, `r`, `sum`, and `prod`), regardless of the size of the input list.
+6. **Product Calculation**
+	```cpp
+	    long long prod = skill[l] * skill[r];
+	```
+	Here, the product of the skills of the leftmost and rightmost players is calculated and stored in `prod`.
 
-Thus, the space complexity is **O(1)**.
+7. **Pointer Adjustment**
+	```cpp
+	    l++, r--;
+	```
+	The pointers `l` and `r` are moved inward, `l` is incremented, and `r` is decremented.
 
-### Conclusion
+8. **Loop Start**
+	```cpp
+	    while(l < r) {
+	```
+	This while loop runs as long as the left pointer is less than the right pointer, processing each pair of players.
 
-This solution efficiently solves the problem of pairing players with equal sum of skills and maximizing the product of skills within each pair. The algorithm works by sorting the skill list and using two pointers to form pairs from opposite ends of the list. It ensures that the sum of each pair is consistent and calculates the sum of their products.
+9. **Sum Validation**
+	```cpp
+	        if(sum != (skill[l] + skill[r])) return -1;
+	```
+	Inside the loop, the sum of the current pair of players' skills is checked. If it does not match the sum of the first pair, `-1` is returned indicating an invalid division.
 
-The time complexity of **O(n log n)** makes the solution suitable for relatively large inputs, and the space complexity of **O(1)** ensures that the algorithm uses minimal extra memory.
+10. **Product Update**
+	```cpp
+	        prod += skill[l] * skill[r];
+	```
+	If the sum is valid, the product of the current pair of skills is added to `prod`.
 
-The approach is simple yet effective for problems involving pairing or matching items under specific conditions. It leverages sorting and the two-pointer technique, both of which are commonly used in algorithms for pairing elements in lists or arrays.
+11. **Pointer Update**
+	```cpp
+	        l++;
+	```
+	The left pointer `l` is incremented to move to the next player.
+
+12. **Pointer Update**
+	```cpp
+	        r--;
+	```
+	The right pointer `r` is decremented to move to the next player.
+
+13. **Return Statement**
+	```cpp
+	    return prod;
+	```
+	Once all pairs have been processed, the function returns the total product of the pairs' skills.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting operation, which is O(n log n), where n is the length of the skill array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for the sorted array, but it could be reduced to O(1) if sorting is done in place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/description/)
 

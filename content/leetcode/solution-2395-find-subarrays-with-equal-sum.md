@@ -14,126 +14,129 @@ img_src = ""
 youtube = "1v-XTlRvUvU"
 youtube_upload_date="2022-09-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/1v-XTlRvUvU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums`. Your task is to determine if there are two subarrays of length 2 that have the same sum, but these subarrays must begin at different indices in the array. A subarray is defined as a contiguous sequence of elements within the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` of length n, where 2 <= n <= 1000 and -10^9 <= nums[i] <= 10^9.
+- **Example:** `nums = [3,1,2,3,5]`
+- **Constraints:**
+	- 2 <= nums.length <= 1000
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool findSubarrays(vector<int>& nums) {
-    unordered_set<int> s;
-    for (int i = 1; i < nums.size(); ++i)
-        if(!s.insert(nums[i - 1] + nums[i]).second)
-            return true;
-    return false;
-  }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if there are two distinct subarrays of length 2 with the same sum, and `false` otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find if there are two distinct subarrays of length 2 with the same sum by checking each pair of consecutive elements in the array.
 
-You are given an integer array `nums`, and the task is to determine if there exists a pair of consecutive subarrays (two consecutive elements) whose sums are equal. Specifically, you need to check if any two adjacent subarrays, each consisting of two consecutive elements, have the same sum. If such a pair of subarrays exists, return `true`; otherwise, return `false`.
+- 1. Traverse the array and for each pair of consecutive elements, calculate their sum.
+- 2. Store the sum of each subarray of length 2 in a set.
+- 3. If any sum is encountered more than once, return true.
+- 4. If no sums are repeated, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will always be at least one pair of subarrays to check.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4,2,4]`  \
+  **Explanation:** The subarrays [4,2] and [2,4] have the same sum of 6. Since they are at different indices, the answer is true.
 
-For example:
-- Input: `nums = [4, 2, 4]`
-- Output: `true`
-  - Explanation: The sums of consecutive pairs are `4 + 2 = 6` and `2 + 4 = 6`. Since these two sums are equal, the answer is `true`.
+- **Input:** `nums = [1,2,3,4,5]`  \
+  **Explanation:** No two subarrays of length 2 have the same sum. Hence, the answer is false.
 
-- Input: `nums = [1, 2, 3, 4, 5]`
-- Output: `false`
-  - Explanation: The sums of consecutive pairs are `1 + 2 = 3`, `2 + 3 = 5`, `3 + 4 = 7`, and `4 + 5 = 9`. None of these sums are equal, so the answer is `false`.
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the sum of all possible subarrays of length 2 and checking for duplicates using a set.
 
-### Approach
-
-To solve this problem, the goal is to efficiently determine whether any two consecutive subarrays (each consisting of two adjacent elements) have the same sum. Here's how we can break down the approach:
-
-1. **Iterate Through Pairs of Consecutive Elements**: For each pair of consecutive elements, we calculate their sum and check if this sum has been encountered before.
-
-2. **Store Sums in a Set**: As we traverse the array, we can use a hash set (`unordered_set`) to store the sums of the consecutive pairs. The hash set allows us to check if a sum already exists in constant time.
-
-3. **Check for Duplicate Sums**: Each time we compute the sum of a pair of consecutive elements, we check if that sum already exists in the hash set. If it does, it means we have found two subarrays with the same sum, and we return `true`. If not, we add the sum to the set and continue.
-
-4. **Early Termination**: If we find two equal sums early in the traversal, we can immediately return `true`, avoiding unnecessary computation. If we finish processing all pairs without finding any duplicates, we return `false`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Set
-We begin by declaring an unordered set `s` to store the sums of the consecutive pairs. The unordered set allows for average constant-time insertions and lookups.
-
+### Initial Thoughts 💭
+- The problem requires checking pairs of elements for matching sums.
+- We can use a set to track sums and easily check for duplicates.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array contains less than 2 elements, no subarray of length 2 can exist.
+- Handle cases where the array contains the maximum allowed number of elements (1000).
+- Consider cases where all elements are the same.
+- Ensure the solution works within time limits for large inputs and handles extreme values of array elements.
+{{< dots >}}
+## Code 💻
 ```cpp
+bool findSubarrays(vector<int>& nums) {
 unordered_set<int> s;
-```
-
-#### Step 2: Iterate Through the Array
-Next, we start iterating through the array `nums` from the second element (index 1), as we are interested in consecutive pairs. For each element `nums[i]`, we consider the pair formed by `nums[i-1]` and `nums[i]`.
-
-```cpp
 for (int i = 1; i < nums.size(); ++i)
-```
-
-#### Step 3: Calculate the Sum of Consecutive Elements
-Inside the loop, we calculate the sum of the current pair of consecutive elements `nums[i-1]` and `nums[i]`.
-
-```cpp
-nums[i - 1] + nums[i]
-```
-
-#### Step 4: Check for Duplicate Sums
-Next, we attempt to insert this sum into the unordered set `s`. If the insertion fails (i.e., the sum is already in the set), it means we have found a pair of consecutive subarrays with equal sums. In this case, we immediately return `true`.
-
-```cpp
-if(!s.insert(nums[i - 1] + nums[i]).second)
-    return true;
-```
-
-The `insert` function returns a pair, and the second element of the pair (`.second`) is a boolean indicating whether the insertion was successful. If `.second` is `false`, it means the sum already exists in the set.
-
-#### Step 5: Add the Sum to the Set
-If the sum is not already in the set, we add it to the set for future checks.
-
-```cpp
-s.insert(nums[i - 1] + nums[i]);
-```
-
-#### Step 6: Return the Result
-If the loop finishes without finding any duplicate sums, we return `false`, indicating that no two consecutive subarrays with equal sums were found.
-
-```cpp
+    if(!s.insert(nums[i - 1] + nums[i]).second)
+        return true;
 return false;
+  }
 ```
 
-### Complexity
+The function `findSubarrays` checks if there are any subarrays of size 2 in the input vector `nums` that have the same sum. It returns `true` if such subarrays exist, and `false` otherwise.
 
-#### Time Complexity
-The time complexity of this solution is **O(n)**, where `n` is the length of the array `nums`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool findSubarrays(vector<int>& nums) {
+	```
+	The function `findSubarrays` is declared, which takes a reference to a vector of integers `nums` as input and returns a boolean value.
 
-- **Iteration**: We iterate through the array once, so the loop runs in **O(n)** time.
-- **Set Operations**: In each iteration, the set operations (`insert` and lookup) have an average time complexity of **O(1)** due to the underlying hash table implementation of the unordered set.
-  
-Thus, the overall time complexity is **O(n)**.
+2. **Set Initialization**
+	```cpp
+	unordered_set<int> s;
+	```
+	An unordered set `s` is initialized to store the sums of consecutive pairs of elements in the `nums` array. This ensures that only unique sums are stored.
 
-#### Space Complexity
-The space complexity of the solution is **O(n)**, where `n` is the number of elements in the array.
+3. **Loop Initialization**
+	```cpp
+	for (int i = 1; i < nums.size(); ++i)
+	```
+	A loop starts from the second element of the `nums` vector (index 1) and iterates through the rest of the vector.
 
-- **Set Storage**: In the worst case, the set may contain all the sums of consecutive pairs, which would require **O(n)** space.
-  
-Thus, the overall space complexity is **O(n)**.
+4. **Checking for Duplicates**
+	```cpp
+	    if(!s.insert(nums[i - 1] + nums[i]).second)
+	```
+	For each consecutive pair of elements, their sum is calculated and inserted into the set `s`. If the insertion is unsuccessful (i.e., the sum is already in the set), it indicates that a duplicate sum exists.
 
-### Conclusion
+5. **Return True**
+	```cpp
+	        return true;
+	```
+	If a duplicate sum is found, the function immediately returns `true`, indicating that there are two consecutive subarrays with the same sum.
 
-This solution efficiently checks whether any two consecutive subarrays have equal sums by utilizing a hash set to track the sums of consecutive pairs. The use of the set allows us to perform constant-time lookups and insertions, making the solution highly efficient. With a time complexity of **O(n)** and space complexity of **O(n)**, this approach is optimal for large inputs.
+6. **Return False**
+	```cpp
+	return false;
+	```
+	If the loop completes without finding a duplicate sum, the function returns `false`, indicating no such subarrays exist.
 
-Key points to highlight:
-- The unordered set ensures fast lookup and insertion of sums.
-- We can return early if we detect two equal sums, improving the efficiency.
-- The solution works in linear time, making it suitable for large arrays.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the input array.
+- **Average Case:** O(n), where n is the length of the input array.
+- **Worst Case:** O(n), where n is the length of the input array.
 
-This approach offers a concise and efficient way to solve the problem while maintaining clarity and simplicity.
+The algorithm processes each pair of consecutive elements once, making the time complexity O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the length of the input array.
+- **Worst Case:** O(n), where n is the length of the input array, due to the space used by the set to store sums.
+
+The space complexity is O(n) as we need a set to store the subarray sums.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-subarrays-with-equal-sum/description/)
 

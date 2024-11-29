@@ -14,17 +14,63 @@ img_src = ""
 youtube = "uWSEfo1DlwY"
 youtube_upload_date="2022-12-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/uWSEfo1DlwY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of words, where each word consists of lowercase English letters. Two words are considered similar if they contain the exact same set of unique characters, regardless of the order. Your task is to count how many pairs of words (i, j) satisfy the condition where both words have the same set of unique characters. Return the count of such pairs (i, j) where 0 ≤ i < j ≤ len(words) - 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of words, where each word is a string of lowercase English letters.
+- **Example:** `["aba", "aabb", "abcd", "bac", "aabc"]`
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length <= 100
+	- words[i] consist of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int similarPairs(vector<string>& words) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the number of pairs (i, j) where the words[i] and words[j] have the same set of unique characters.
+- **Example:** `2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count pairs of words that consist of the same set of unique characters.
+
+- For each word in the input list, calculate a unique bitmask representing the set of characters in the word.
+- Use a map to store the frequency of each unique bitmask.
+- For each word's bitmask, find how many previous words have the same bitmask, indicating that the two words are similar.
+- Count the number of such pairs and return the total count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list will not contain any null or empty words.
+- Each word consists only of lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["aba", "aabb", "abcd", "bac", "aabc"]`  \
+  **Explanation:** In this example, the words 'aba' and 'aabb' are similar because they consist of the characters 'a' and 'b', and the words 'bac' and 'aabc' are similar because they consist of 'a', 'b', and 'c'. Therefore, there are 2 such pairs.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses bitwise operations to efficiently represent and compare the set of characters in each word.
+
+### Initial Thoughts 💭
+- Each word can be represented by a bitmask where each bit represents a character from 'a' to 'z'.
+- If two words have the same bitmask, they contain the same set of characters, regardless of order.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input list is empty, the result should be 0.
+- If the input list has the maximum number of words (100), ensure that the solution efficiently handles this size.
+- Words with only one character should also be handled correctly.
+- Ensure that words containing only distinct characters are correctly identified as similar if another word contains the same characters.
+{{< dots >}}
+## Code 💻
+```cpp
+int similarPairs(vector<string>& words) {
 		int ans = 0; 
 		unordered_map<int, int> freq; 
 		for (auto& word : words) {
@@ -33,114 +79,84 @@ public:
 			ans += freq[mask]++; 
 		}
 		return ans;         
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to count how many pairs of words in a given list of strings `words` are **similar**. Two words are considered similar if they contain the exact same set of distinct characters, regardless of the order in which the characters appear. For example, the words "abc" and "cab" are similar because both contain the characters 'a', 'b', and 'c'.
-
-We are required to determine the number of such similar pairs in the list of words.
-
-### Approach
-
-To solve this problem efficiently, we need to utilize a technique that maps the characters in each word to a unique bitmask. This will allow us to compare words based on their set of characters rather than their actual content, reducing the complexity of the problem.
-
-#### Key Insight:
-- **Bitmask Representation**: Each word can be represented as a bitmask, where each bit corresponds to one of the 26 lowercase English letters. If a letter is present in the word, the corresponding bit is set to 1, otherwise, it is 0.
-- **Efficient Comparison**: By using bitmasks, we can efficiently check if two words have the same set of characters. If two words have identical bitmasks, they have the same set of distinct characters, and we consider them similar.
-
-### Detailed Breakdown of the Code
-
-#### Step 1: Initializing Variables
-```cpp
-int ans = 0;
-unordered_map<int, int> freq;
-```
-- `ans` will hold the final count of similar pairs.
-- `freq` is an unordered map that tracks the frequency of each unique bitmask encountered in the list of words.
-
-#### Step 2: Iterating Over Words
-```cpp
-for (auto& word : words) {
-    int mask = 0;
-    for (auto& c : word) mask |= 1 << (c-'a');
-    ans += freq[mask]++;
 }
 ```
-- For each word in the input list `words`, we calculate its bitmask representation.
-- **Bitmask Calculation**: 
-  - For each character `c` in the word, we compute `1 << (c - 'a')` which gives a number where only the bit corresponding to the character `c` is set to 1.
-  - We then use the `|=` (bitwise OR) operator to combine the current bitmask with the newly calculated bit for character `c`.
-  - This process effectively sets the bits corresponding to each character in the word. For example, if the word is "abc", its bitmask would be `0b111` (since 'a', 'b', and 'c' correspond to the first three bits).
-  
-#### Step 3: Updating the Frequency Map
-```cpp
-ans += freq[mask]++;
-```
-- After calculating the bitmask for the word, we increment the count of words that have this specific bitmask in the `freq` map.
-- Each time we encounter a bitmask that we've already seen before, it indicates that we have found a word that is similar to one or more previous words.
-- The number of similar pairs for a given bitmask is incremented by `freq[mask]`, which represents how many words we've seen before with the same bitmask.
 
-#### Step 4: Returning the Final Count
-```cpp
-return ans;
-```
-- After iterating through all the words and updating the frequency map, we return the total count of similar pairs stored in `ans`.
+This function finds the number of similar pairs in a list of words. Two words are considered similar if they contain the same set of unique characters, regardless of order.
 
-### Example Walkthrough
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int similarPairs(vector<string>& words) {
+	```
+	Defines the function `similarPairs` which takes a reference to a vector of strings `words` and returns the number of similar pairs.
 
-Consider the following input:
+2. **Variable Initialization**
+	```cpp
+			int ans = 0; 
+	```
+	Initializes a variable `ans` to store the count of similar pairs. The initial value is 0.
 
-```cpp
-vector<string> words = {"aba", "aab", "abc", "cab", "bca"};
-```
+3. **Data Structure Initialization**
+	```cpp
+			unordered_map<int, int> freq; 
+	```
+	Declares an unordered map `freq` where the key is an integer (representing a unique bitmask) and the value is the frequency of that bitmask.
 
-1. For the first word `"aba"`, the bitmask will be:
-   - 'a' corresponds to bit 0.
-   - 'b' corresponds to bit 1.
-   - So, the bitmask is `0b011`.
+4. **Loop Structure**
+	```cpp
+			for (auto& word : words) {
+	```
+	Begins a loop that iterates over each word in the input vector `words`.
 
-2. For the second word `"aab"`, the bitmask will be the same (`0b011`), indicating that the word has the same set of distinct characters as `"aba"`.
+5. **Variable Initialization**
+	```cpp
+				int mask = 0; 
+	```
+	Initializes a variable `mask` to 0. This will be used to create a bitmask representing the unique characters in the current word.
 
-3. For the third word `"abc"`, the bitmask will be `0b111` because it contains the characters 'a', 'b', and 'c'.
+6. **Loop Structure**
+	```cpp
+				for (auto& c : word) mask |= 1 << (c-'a'); 
+	```
+	Inner loop that iterates over each character `c` in the word. It updates the `mask` by setting the corresponding bit for the character (using bitwise operations).
 
-4. For the fourth word `"cab"`, the bitmask is also `0b111`, since it contains the same characters as `"abc"`.
+7. **Map Manipulation**
+	```cpp
+				ans += freq[mask]++; 
+	```
+	Increments `ans` by the frequency of the current `mask` in the `freq` map, then updates the frequency of `mask` in the map.
 
-5. For the fifth word `"bca"`, the bitmask is again `0b111`.
+8. **Loop Structure**
+	```cpp
+			}
+	```
+	Ends the loop that processes each word in the `words` vector.
 
-As we process each word, the frequency map will look like this:
-- For the bitmask `0b011`: We encounter it twice, so we add `1 + 1 = 2` to `ans`.
-- For the bitmask `0b111`: We encounter it three times, so we add `2 + 3 = 5` to `ans`.
+9. **Return Statement**
+	```cpp
+			return ans;         
+	```
+	Returns the total count of similar pairs stored in `ans`.
 
-Thus, the total number of similar pairs is `7`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m), where n is the number of words and m is the average length of the words.
+- **Average Case:** O(n * m), since we have to process each word individually.
+- **Worst Case:** O(n * m), where n is the number of words and m is the maximum length of the words.
 
-### Time Complexity
+The complexity comes from processing each word and storing its bitmask, as well as looking up bitmask frequencies in the hashmap.
 
-- **Bitmask Calculation**: For each word, we iterate through its characters. The maximum length of a word is `O(L)`, where `L` is the length of the longest word in the list.
-- **Map Operations**: For each word, we perform constant-time operations for updating the frequency map and checking the count of the bitmask. The average time complexity for each map operation is \(O(1)\), so the total time complexity for processing all words is \(O(N \times L)\), where `N` is the number of words.
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the number of words.
+- **Worst Case:** O(n), since we need to store the bitmask frequencies for each word.
 
-Thus, the overall time complexity is \(O(N \times L)\), where:
-- `N` is the number of words in the list.
-- `L` is the average length of the words.
+The space complexity is proportional to the number of words and the number of distinct bitmasks.
 
-### Space Complexity
+**Happy Coding! 🎉**
 
-- **Bitmask Map**: We store the frequency of bitmasks in the `freq` map. In the worst case, each unique set of characters from all words may result in a unique bitmask. The number of unique bitmasks is at most \(2^{26}\), but in practice, it will be much less.
-- **Total Space Complexity**: The space complexity of the algorithm is dominated by the storage of the frequency map, which is \(O(N)\), where `N` is the number of words, and each word contributes at most one entry in the map.
-
-Thus, the space complexity is \(O(N)\).
-
-### Conclusion
-
-This solution efficiently counts the number of similar pairs of words by leveraging bitmasks to represent the set of distinct characters in each word. This allows us to reduce the problem of comparing words to a simple bitmask comparison, significantly improving performance. By using a frequency map to track the occurrence of each bitmask, we can efficiently count similar pairs. 
-
-- **Time Complexity**: \(O(N \times L)\), where `N` is the number of words and `L` is the average length of the words.
-- **Space Complexity**: \(O(N)\), where `N` is the number of words.
-
-This approach is optimal for the problem and should work efficiently even for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-pairs-of-similar-strings/description/)
 

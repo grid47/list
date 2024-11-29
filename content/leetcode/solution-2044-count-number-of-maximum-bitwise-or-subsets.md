@@ -14,102 +14,161 @@ img_src = ""
 youtube = "_wBj3IMV7tY"
 youtube_upload_date="2024-10-18"
 youtube_thumbnail="https://i.ytimg.com/vi/_wBj3IMV7tY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `nums`, find the maximum bitwise OR that can be achieved by any subset of `nums` and count how many different non-empty subsets yield this maximum value. A subset is defined as any combination of elements from the array, and subsets are considered different if their elements are selected from different indices.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer array `nums` representing the elements from which subsets can be formed. The goal is to determine the maximum bitwise OR and count subsets achieving it.
+- **Example:** `Input: nums = [4, 2, 6]`
+- **Constraints:**
+	- 1 <= nums.length <= 16
+	- 1 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countMaxOrSubsets(vector<int>& nums) {
-        int mx = 0;
-        int dp[1 << 17] = {1};
-        dp[0] = 1;
-        for(int a : nums) {
-            for(int i = mx; i >= 0; i--) {
-                dp[i | a] += dp[i];
-            }
-            mx |= a;
-        }
-        return dp[mx];
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the number of subsets that achieve the maximum bitwise OR value.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output is always a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the maximum bitwise OR value that can be obtained from any subset of `nums`, and count the subsets achieving this maximum.
 
-The problem requires finding the number of subsets within a given list of integers `nums` that, when combined using a bitwise OR operation, yield the maximum possible OR value obtainable from any subset of `nums`. Our goal is to efficiently calculate how many subsets of `nums` achieve this maximum OR value.
+- Iterate through all subsets of `nums` using a bitmask.
+- Calculate the bitwise OR for each subset.
+- Track the maximum bitwise OR value and count the subsets that achieve this value.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty.
+- All elements in the array are positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [4, 1, 7]`  \
+  **Explanation:** The maximum possible bitwise OR is 7. There are 4 subsets achieving this: [7], [4, 7], [1, 7], and [4, 1, 7]. Thus, the output is 4.
 
-### Approach
+- **Input:** `Input: nums = [1, 1, 1]`  \
+  **Explanation:** The maximum possible bitwise OR is 1. All subsets are non-empty and achieve this value. Total subsets: 2^3 - 1 = 7. Output is 7.
 
-To solve this, we use dynamic programming (DP) combined with bitwise operations. The bitwise OR operation compares each bit position in two integers, setting each bit in the result to 1 if either of the corresponding bits in the operands is 1. Using this approach, we aim to maximize the OR value across all possible subsets of `nums` and count how many subsets reach this maximum.
+{{< dots >}}
+## Approach 🚀
+Use dynamic programming to count subsets with a specific OR value while iterating through the array. This ensures efficient handling of overlapping subsets with similar OR results.
 
-Here's a breakdown of the approach:
-
-1. **Initialize Variables**: We define a variable `mx` to store the maximum OR value we can achieve, and a DP array `dp` where each entry `dp[i]` tracks the number of ways to reach a specific OR value `i`.
-2. **Calculate Possible OR Values**: We iterate over each number in `nums`, updating the `dp` array to record all possible OR values and the number of ways to achieve each.
-3. **Track Maximum OR Value**: As we iterate, we also keep updating `mx` to reflect the largest OR value obtained across subsets.
-4. **Return Count of Maximum OR Subsets**: Finally, `dp[mx]` will contain the count of all subsets whose OR is equal to `mx`.
-
-### Code Breakdown (Step by Step)
-
-Let's break down each part of the code to understand how it implements this approach.
-
-1. **Class and Method Definition**: We define the class `Solution` with the method `countMaxOrSubsets`, which takes a vector `nums` as input and returns an integer representing the count of subsets with the maximum OR value.
-
-    ```cpp
-    class Solution {
-    public:
-        int countMaxOrSubsets(vector<int>& nums) {
-    ```
-
-2. **Initialize Maximum OR Value (`mx`) and DP Array (`dp`)**: We start by defining an integer `mx`, which will hold the maximum OR value we achieve, and a DP array `dp` of size `1 << 17` (enough to hold OR values given the constraints). We initialize `dp[0]` to 1, representing the base case (empty subset).
-
-    ```cpp
+### Initial Thoughts 💭
+- The maximum bitwise OR value is achieved by including specific elements in the subset.
+- The problem can be solved efficiently by tracking the OR values dynamically instead of recalculating for each subset.
+- Iterate through the elements of `nums`, updating the count of subsets for each OR value dynamically.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty input cases exist since nums is guaranteed to be non-empty.
+- Handle cases where nums contains 16 elements, leading to 2^16 subsets.
+- All elements in nums are the same, e.g., nums = [7, 7, 7].
+- The array nums contains powers of 2, e.g., nums = [1, 2, 4, 8].
+- Maximum bitwise OR value must be calculated for all combinations efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int countMaxOrSubsets(vector<int>& nums) {
     int mx = 0;
     int dp[1 << 17] = {1};
     dp[0] = 1;
-    ```
-
-3. **Iterate Over Each Element in `nums`**: For each integer `a` in `nums`, we update the DP array to record all possible OR values we can obtain by including `a` in various subsets.
-
-    ```cpp
     for(int a : nums) {
-    ```
-
-4. **Update DP Array**: For each element `a`, we iterate backward through the DP array from `mx` down to 0. For each index `i` in `dp`, `dp[i | a] += dp[i]` updates the count of subsets achieving the OR value `i | a` (which represents adding `a` to the subset represented by `i`).
-
-    ```cpp
         for(int i = mx; i >= 0; i--) {
             dp[i | a] += dp[i];
         }
-    ```
-
-5. **Update Maximum OR Value**: After processing each element, we update `mx` to reflect the cumulative maximum OR value achievable with the current subset of `nums`.
-
-    ```cpp
         mx |= a;
-    ```
-
-6. **Return Result**: After processing all elements, `dp[mx]` will contain the number of subsets with the maximum OR value `mx`. We return this value.
-
-    ```cpp
-        return dp[mx];
     }
-    ```
+    return dp[mx];
+}
+```
 
-### Complexity Analysis
+This code implements a solution to find the number of subsets of a given list of integers `nums` such that the bitwise OR of all the elements in the subset is maximized.
 
-- **Time Complexity**: The time complexity is \(O(n \cdot 2^{\text{max_bits}})\), where `n` is the number of elements in `nums`, and `max_bits` represents the bit width necessary to cover all potential OR results given the constraints. Since we iterate over each element in `nums` and process a limited range of OR values for each, the complexity is feasible within the problem constraints.
-- **Space Complexity**: The space complexity is \(O(2^{\text{max_bits}})\) due to the DP array `dp`, which stores the counts of each possible OR result up to `1 << max_bits`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int countMaxOrSubsets(vector<int>& nums) {
+	```
+	This is the function header that defines the `countMaxOrSubsets` function, which takes a vector of integers `nums` as input.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	    int mx = 0;
+	```
+	The variable `mx` is initialized to 0. It will keep track of the maximum bitwise OR of all elements encountered so far.
 
-This solution uses a clever combination of dynamic programming and bitwise operations to efficiently find the count of subsets achieving the maximum OR value for any list of integers `nums`. By keeping track of possible OR values with a DP array, the code ensures that all possible subsets are accounted for without explicitly generating them. The result is a highly optimized solution that leverages the power of bitwise operations for an efficient count of maximum OR subsets. This approach demonstrates an effective way to handle subset generation problems with specific bitwise criteria.
+3. **Array Initialization**
+	```cpp
+	    int dp[1 << 17] = {1};
+	```
+	The array `dp` is initialized with size `1 << 17` (a large size to cover all possible OR results) and the first element set to 1.
+
+4. **Array Initialization**
+	```cpp
+	    dp[0] = 1;
+	```
+	Sets the base case for the dynamic programming array, indicating that there is one way to form a subset with a bitwise OR of 0.
+
+5. **Loop Start**
+	```cpp
+	    for(int a : nums) {
+	```
+	This loop iterates through each element `a` in the input vector `nums`.
+
+6. **Nested Loop Start**
+	```cpp
+	        for(int i = mx; i >= 0; i--) {
+	```
+	This nested loop iterates backwards from the current maximum OR value `mx` to 0, ensuring all subsets are considered.
+
+7. **Dynamic Programming Update**
+	```cpp
+	            dp[i | a] += dp[i];
+	```
+	This updates the dynamic programming array by adding the number of subsets that result in the OR value `i | a` to the current subset count.
+
+8. **Nested Loop End**
+	```cpp
+	        }
+	```
+	End of the inner loop where all possible OR values with the current element `a` are processed.
+
+9. **Update Maximum OR**
+	```cpp
+	        mx |= a;
+	```
+	Updates `mx` to reflect the maximum OR value encountered so far, combining it with the current element `a`.
+
+10. **Return Statement**
+	```cpp
+	    return dp[mx];
+	```
+	Returns the value in `dp[mx]`, which represents the number of subsets with the maximum OR value.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * max_or_values) when elements overlap minimally.
+- **Average Case:** O(n * max_or_values).
+- **Worst Case:** O(n * max_or_values) for highly overlapping subsets.
+
+The time complexity depends on the number of OR values dynamically tracked during the iterations.
+
+### Space Complexity 💾
+- **Best Case:** O(max_or_values).
+- **Worst Case:** O(max_or_values) for storing DP results.
+
+Space is used for the DP array storing counts for each OR value.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/description/)
 

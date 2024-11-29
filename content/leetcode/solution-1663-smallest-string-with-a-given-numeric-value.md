@@ -14,104 +14,137 @@ img_src = ""
 youtube = "o3MRJfsoUrw"
 youtube_upload_date="2021-02-15"
 youtube_thumbnail="https://i.ytimg.com/vi/o3MRJfsoUrw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integers `n` and `k`. Your task is to return the lexicographically smallest string of length `n` with a numeric value equal to `k`. The numeric value of a string is the sum of the numeric values of its characters, where 'a' = 1, 'b' = 2, ..., and 'z' = 26.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers, `n` and `k`. The string should be of length `n` and its numeric value should be equal to `k`.
+- **Example:** `n = 4, k = 34`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- n <= k <= 26 * n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string getSmallestString(int n, int k) {
-        string ans(n, 'a');
-        k -= n;
-        while(k > 0) {
-            ans[--n] += min(25, k);
-            k -= min(25, k);
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically smallest string of length `n` with a numeric value equal to `k`.
+- **Example:** `"aazb"`
+- **Constraints:**
+	- The string should be of length `n` and have a numeric value equal to `k`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To construct the lexicographically smallest string that has the given numeric value `k` and length `n`.
+
+- Initialize a string of length `n` with all 'a's, since 'a' has the smallest numeric value (1).
+- Subtract `n` from `k` to account for the initial 'a's.
+- From the end of the string, replace 'a' with other characters (up to 'z') to achieve the desired numeric value, starting with the largest possible character (i.e., 'z').
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of `k` will always be valid for the given `n` according to the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 4, k = 34`  \
+  **Explanation:** The string 'aazb' has a numeric value of 1 + 1 + 26 + 2 = 34, and is the lexicographically smallest string that satisfies these conditions.
+
+- **Input:** `n = 6, k = 60`  \
+  **Explanation:** The string 'aazzzz' has a numeric value of 1 + 1 + 26 + 26 + 26 + 26 = 60, and is the lexicographically smallest string that satisfies these conditions.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves starting with a string of all 'a's and adjusting the characters from the end to reach the desired numeric value `k`.
+
+### Initial Thoughts 💭
+- The smallest string is composed of 'a's, and we need to replace some of them with higher value characters to achieve the total value `k`.
+- We can use a greedy approach, modifying the string from the last position towards the first to minimize lexicographical order.
+{{< dots >}}
+### Edge Cases 🌐
+- If `n` is 1, then `k` must be between 1 and 26, inclusive.
+- For large values of `n`, the algorithm should efficiently adjust the string to reach the value `k`.
+- When `k` equals `n`, the string will consist only of 'a's.
+- The solution must handle values of `n` up to 10^5 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+string getSmallestString(int n, int k) {
+    string ans(n, 'a');
+    k -= n;
+    while(k > 0) {
+        ans[--n] += min(25, k);
+        k -= min(25, k);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to generate the lexicographically smallest string of length `n` with a given integer value `k`. The string can be composed of lowercase letters from 'a' to 'z'. The challenge is to ensure that the sum of the values of the characters in the string equals `k`, where the value of 'a' is 1, 'b' is 2, ..., and 'z' is 26. Therefore, for a string with only 'a's, the total value is equal to its length (since each 'a' contributes 1 to the total). The goal is to modify the string to meet the value requirement while keeping it as small as possible in lexicographical order.
-
-### Approach
-
-The solution can be approached with the following steps:
-
-1. **Initialization**: Start with a string filled with 'a's, since this will be the smallest lexicographical starting point.
-2. **Adjust Value**: Calculate the difference needed to reach the required value `k` by subtracting the initial sum of 'a's from `k`.
-3. **Distributing Value**: Traverse the string from the end and increase characters from 'a' to the maximum possible character value ('z') without exceeding the required sum.
-4. **Return Result**: Finally, return the constructed string which meets the conditions.
-
-This approach ensures that we start with the smallest possible string and then incrementally adjust the characters to achieve the desired total value.
-
-### Code Breakdown (Step by Step)
-
-Here’s the code with an explanation of each part:
-
-```cpp
-class Solution {
-public:
-    string getSmallestString(int n, int k) {
+    return ans;
+}
 ```
-- The `Solution` class contains the public method `getSmallestString`, which accepts two parameters: `n` (the length of the string) and `k` (the target sum of the string's values).
 
-```cpp
-        string ans(n, 'a'); // Step 1: Initialize the string with 'a's
-```
-- We create a string `ans` of length `n`, initialized with 'a' characters. This is the lexicographically smallest string we can start with.
+This function constructs the lexicographically smallest string of length `n` where the sum of the positions of the characters equals `k`. It uses greedy logic to adjust characters from 'a' upwards.
 
-```cpp
-        k -= n; // Step 2: Adjust k by subtracting the initial sum of 'a's
-```
-- Since each 'a' contributes 1 to the total value, we subtract `n` from `k` to determine how much more we need to add to the string's value to meet the target.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string getSmallestString(int n, int k) {
+	```
+	Defines the function `getSmallestString` which takes integers `n` (length of the string) and `k` (target sum) as input.
 
-```cpp
-        while(k > 0) { // Step 3: Distribute the remaining value
-```
-- We enter a loop that continues until `k` becomes 0, indicating that we've met our target.
+2. **Variable Initialization**
+	```cpp
+	    string ans(n, 'a');
+	```
+	Initializes the string `ans` with `n` characters, all set to 'a'.
 
-```cpp
-            ans[--n] += min(25, k); // Increment the character at position n-1
-```
-- We decrement `n` to work from the end of the string backwards. We increase the character at the current position by the minimum of 25 or `k`. This is because the maximum increment from 'a' to 'z' is 25 (from 1 to 26), and we can't increase beyond this value.
+3. **Mathematical Adjustment**
+	```cpp
+	    k -= n;
+	```
+	Decreases `k` by `n` because each 'a' contributes 1 to the total sum.
 
-```cpp
-            k -= min(25, k); // Reduce k by the increment we just made
-```
-- We update `k` by subtracting the value we just added to the character, effectively keeping track of how much more we need to reach our target.
+4. **Looping**
+	```cpp
+	    while(k > 0) {
+	```
+	Enters a loop to adjust the string until the remaining sum `k` is zero.
 
-```cpp
-        }
-        return ans; // Step 4: Return the final string
-    }
-};
-```
-- After exiting the loop (when `k` reaches 0), we return the constructed string `ans`.
+5. **String Update**
+	```cpp
+	        ans[--n] += min(25, k);
+	```
+	Adjusts the last unprocessed character in `ans` by increasing its value by the smaller of 25 or `k`, ensuring it remains a valid alphabet character.
 
-### Complexity
+6. **Mathematical Adjustment**
+	```cpp
+	        k -= min(25, k);
+	```
+	Decreases `k` by the value added to the character, reducing the remaining sum to be distributed.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the string. This is because we potentially modify each character in the string exactly once.
-  
-- **Space Complexity**: The space complexity is \(O(n)\) for storing the resulting string. This is necessary since we must construct a new string of length `n`.
+7. **Return**
+	```cpp
+	    return ans;
+	```
+	Returns the final adjusted string `ans`, which is the lexicographically smallest string meeting the criteria.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The `getSmallestString` method efficiently constructs the lexicographically smallest string given the constraints of the problem. The approach leverages a greedy strategy by filling the string with the smallest character initially and then making necessary adjustments. 
+The time complexity is O(n), as we modify the string in linear time.
 
-**Key Takeaways**:
-1. **Greedy Algorithm**: The solution exemplifies a greedy algorithm, where the locally optimal choice (starting with 'a's) leads to a globally optimal solution (the smallest string).
-2. **String Manipulation**: This implementation highlights effective string manipulation techniques in C++, ensuring both clarity and performance.
-3. **Problem Constraints**: Understanding character values and their contribution to the total sum is crucial in designing algorithms for similar problems in competitive programming.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-Overall, the approach is straightforward and can be applied to other problems requiring the construction of strings under specific constraints, making it a valuable technique in algorithm design and implementation.
+The space complexity is O(n) since we store the string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/description/)
 

@@ -14,109 +14,149 @@ img_src = ""
 youtube = "1gZinwGx3lk"
 youtube_upload_date="2021-11-21"
 youtube_thumbnail="https://i.ytimg.com/vi/1gZinwGx3lk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design a data structure that allows you to efficiently find the frequency of a given value in a subarray. Implement the class `RangeFreqQuery` with the following methods:
 
-{{< highlight cpp >}}
-class RangeFreqQuery {
-public:
-    map<int, vector<int>> mp;
-    RangeFreqQuery(vector<int>& arr) {
-        for(int i = 0; i < arr.size(); i++) {
-            mp[arr[i]].push_back(i);
-        }
+- `RangeFreqQuery(int[] arr)` initializes the data structure.
+- `int query(int left, int right, int value)` returns the frequency of `value` in the subarray from `left` to `right`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the following:
+
+- `arr`: a 0-indexed integer array.
+- `query`: a list of queries where each query is represented by three integers: `left`, `right`, and `value`.
+- **Example:** `[[1, 2, 3, 4, 2, 5, 3, 2], [2, 4, 2], [1, 6, 3]]`
+- **Constraints:**
+	- 1 <= arr.length <= 10^5
+	- 1 <= arr[i], value <= 10^4
+	- 0 <= left <= right < arr.length
+	- At most 10^5 calls will be made to query.
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each query, return the frequency of `value` in the subarray `arr[left...right]`.
+- **Example:** `[null, 2, 2]`
+- **Constraints:**
+	- The result for each query should be an integer representing the frequency of `value` in the subarray.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to efficiently find the frequency of a specific value in a given subarray.
+
+- Create a map to store the indices of each value in the array.
+- For each query, use binary search to find the range of indices where the value appears in the subarray.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is 0-indexed and the queries are based on 0-indexed positions.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1, 2, 3, 4, 2, 5, 3, 2], [2, 4, 2], [1, 6, 3]]`  \
+  **Explanation:** The first query returns `2` because the value `2` appears twice in the subarray [3, 4, 2]. The second query returns `2` because the value `3` appears twice in the subarray [2, 3, 4, 2, 5, 3].
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we store the indices of each element in the array. For each query, we perform binary search to find the range of indices where the element occurs, then count the number of occurrences in the given subarray.
+
+### Initial Thoughts 💭
+- Storing indices of each value allows us to quickly look up occurrences within a specific range.
+- We need to handle multiple queries efficiently by preprocessing the array.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, no queries should be processed.
+- Handle large arrays efficiently by using binary search for each query.
+- If the value does not appear in the subarray, return 0.
+- Ensure the solution can handle up to 10^5 queries efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+map<int, vector<int>> mp;
+RangeFreqQuery(vector<int>& arr) {
+    for(int i = 0; i < arr.size(); i++) {
+        mp[arr[i]].push_back(i);
     }
-    
-    int query(int left, int right, int value) {
-        return upper_bound(mp[value].begin(), mp[value].end(), right) -             
-            lower_bound(mp[value].begin(), mp[value].end(), left);
-    }
+}
+
+int query(int left, int right, int value) {
+    return upper_bound(mp[value].begin(), mp[value].end(), right) -             
+        lower_bound(mp[value].begin(), mp[value].end(), left);
+}
 };
 
 /**
  * Your RangeFreqQuery object will be instantiated and called as such:
  * RangeFreqQuery* obj = new RangeFreqQuery(arr);
  * int param_1 = obj->query(left,right,value);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves creating a data structure that allows for efficient range frequency queries. Given an array, we want to be able to quickly determine how many times a specific value appears within a specified range of indices. This functionality is particularly useful in applications where queries over static data need to be performed frequently, such as in statistical analysis or database queries.
-
-### Approach
-
-To solve this problem, we will implement a class called `RangeFreqQuery` that uses a hash map (specifically, a `std::map` in C++) to store the indices of each value in the array. By storing the indices, we can later use binary search to efficiently count occurrences of a value within any specified range.
-
-1. **Data Structure**: Use a `std::map<int, vector<int>>` to store each unique value from the input array as a key, and a vector of indices where that value appears as the corresponding value.
-
-2. **Constructor**: The constructor initializes the `RangeFreqQuery` object. It iterates over the input array and populates the map with the indices of each value.
-
-3. **Query Method**: The `query` method takes three parameters: the left index, the right index, and the target value. It calculates the number of occurrences of the target value between the given indices using binary search (`upper_bound` and `lower_bound`).
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code implementation:
-
-```cpp
-class RangeFreqQuery {
-public:
-    map<int, vector<int>> mp;  // Map to hold the indices of each value
-
-    RangeFreqQuery(vector<int>& arr) {
 ```
 
-1. **Class Definition**: The class `RangeFreqQuery` is defined with a public member, a map called `mp`, which maps integers to vectors of integers.
+This code defines a class for range frequency queries. It stores the indices of each element in a map for efficient range queries and implements a `query` function to return the frequency of a given value within a specific range.
 
-2. **Constructor**: The constructor accepts a vector of integers `arr`, which represents the initial array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	map<int, vector<int>> mp;
+	```
+	This line declares a map `mp` where each key is an integer and its value is a vector of integers, used to store the indices of occurrences of each number in the input array.
 
-```cpp
-        for(int i = 0; i < arr.size(); i++) {
-            mp[arr[i]].push_back(i);  // Store indices of each value in the map
-        }
-    }
-```
+2. **Constructor Definition**
+	```cpp
+	RangeFreqQuery(vector<int>& arr) {
+	```
+	This is the constructor for the `RangeFreqQuery` class, which initializes the map `mp` by iterating over the input array `arr`.
 
-3. **Index Storage**: As we iterate through the array, for each element `arr[i]`, we push the index `i` into the vector associated with the key `arr[i]`. This builds the map such that we can later quickly retrieve all indices for any value.
+3. **For Loop**
+	```cpp
+	    for(int i = 0; i < arr.size(); i++) {
+	```
+	This `for` loop iterates through the input array `arr` to populate the map `mp` with the indices of each element in the array.
 
-```cpp
-    int query(int left, int right, int value) {
-```
+4. **Map Update**
+	```cpp
+	        mp[arr[i]].push_back(i);
+	```
+	This line adds the current index `i` to the vector corresponding to the element `arr[i]` in the map `mp`. This helps track the positions where each value occurs in the array.
 
-4. **Query Method**: The `query` method is defined to handle the frequency count between the specified range.
+5. **Method Definition**
+	```cpp
+	int query(int left, int right, int value) {
+	```
+	This is the definition of the `query` method, which takes a range `[left, right]` and a target `value`, and returns the frequency of `value` within the specified range.
 
-```cpp
-        return upper_bound(mp[value].begin(), mp[value].end(), right) -             
-            lower_bound(mp[value].begin(), mp[value].end(), left);
-    }
-};
-```
+6. **Range Query Logic**
+	```cpp
+	    return upper_bound(mp[value].begin(), mp[value].end(), right) -             
+	```
+	This line uses `upper_bound` to find the first index greater than `right` for the target `value` in the map. It calculates the number of occurrences of `value` up to `right`.
 
-5. **Binary Search for Counting**:
-   - `upper_bound(mp[value].begin(), mp[value].end(), right)`: This function finds the first position in the vector of indices where the value exceeds `right`. This gives us the count of indices less than or equal to `right`.
-   - `lower_bound(mp[value].begin(), mp[value].end(), left)`: This function finds the first position in the vector where the index is not less than `left`, effectively providing the count of indices before `left`.
-   - The difference between these two results gives the number of occurrences of `value` in the range `[left, right]`.
+7. **Range Query Logic**
+	```cpp
+	        lower_bound(mp[value].begin(), mp[value].end(), left);
+	```
+	This line uses `lower_bound` to find the first index greater than or equal to `left`. The difference between the results of `upper_bound` and `lower_bound` gives the number of occurrences of `value` within the range `[left, right]`.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) if the value does not appear in the array.
+- **Average Case:** O(log n) per query due to binary search.
+- **Worst Case:** O(log n) per query, where n is the number of occurrences of the value.
 
-- **Time Complexity**:
-  - **Constructor**: \(O(n \log n)\) where \(n\) is the number of elements in the input array, due to the operations involved in inserting into the map.
-  - **Query**: \(O(\log m)\) where \(m\) is the number of indices stored for the queried value, due to the binary search operations.
+The time complexity is dominated by the binary search operations on the indices.
 
-- **Space Complexity**: \(O(n)\) for storing the indices of each unique element, where \(n\) is the total number of elements in the input array.
+### Space Complexity 💾
+- **Best Case:** O(n) if all values are unique and stored separately.
+- **Worst Case:** O(n) for storing the indices of each value in the map.
 
-### Conclusion
+Space complexity depends on the size of the input array and the number of distinct values.
 
-The `RangeFreqQuery` class provides an efficient solution for handling frequency queries over a static array. By utilizing a map to store indices and employing binary search for query operations, we achieve a balance between space and time efficiency. 
+**Happy Coding! 🎉**
 
-This implementation is particularly beneficial in scenarios where numerous frequency queries need to be executed on a dataset, such as in statistical computations or data analysis applications. The ability to perform range queries in logarithmic time allows for rapid responses even in larger datasets, making it a versatile tool for developers dealing with dynamic data environments.
-
-This technique of indexing values to their positions is a common strategy in many computational problems, demonstrating a powerful approach to optimizing search and retrieval operations. Understanding and implementing such data structures can significantly enhance performance in software applications that require quick access to frequently queried data.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/range-frequency-queries/description/)
 

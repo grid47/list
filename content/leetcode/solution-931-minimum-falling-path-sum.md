@@ -14,130 +14,160 @@ img_src = ""
 youtube = "b_F3mz9l-uQ"
 youtube_upload_date="2024-01-19"
 youtube_thumbnail="https://i.ytimg.com/vi/b_F3mz9l-uQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a square matrix of integers, your task is to find the minimum sum of any falling path through the matrix. A falling path starts at any element in the first row and chooses the next element from the row directly below it, which can be either directly below, diagonally left, or diagonally right.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an n x n matrix, where each element represents a value. You need to find the falling path with the minimum sum.
+- **Example:** `Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]`
+- **Constraints:**
+	- n == matrix.length == matrix[i].length
+	- 1 <= n <= 100
+	- -100 <= matrix[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minFallingPathSum(vector<vector<int>>& mtx) {
-        
-        int m = mtx.size(), n = mtx[0].size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum sum of a falling path.
+- **Example:** `Output: 13`
+- **Constraints:**
+	- The matrix will always be a square.
 
-        for(int i = 1; i < m; i++)
-        for(int j = 0; j < n; j++) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the falling path with the minimum sum, update the matrix values row by row, adding the smallest possible sum from the previous row to the current row.
 
-            int l = max(j - 1, 0);
-            int r = min(j + 1, n - 1);
+- 1. Start from the second row and update each element by adding the minimum of the three possible elements from the previous row (directly above, diagonally left, diagonally right).
+- 2. Once the matrix is updated, the minimum sum will be the smallest value in the last row.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is square, and all elements are integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]`  \
+  **Explanation:** To get the minimum falling path sum, start with any element in the first row, and for each subsequent row, pick the minimum value from the adjacent elements in the previous row. For this example, the minimum sum is 13, which is the path [1, 5, 7].
 
-            mtx[i][j] += min(mtx[i- 1][l], min(mtx[i - 1][j], mtx[i - 1][r]));
+- **Input:** `Input: matrix = [[-19,57],[-40,-5]]`  \
+  **Explanation:** For this example, the minimum falling path sum is -59, which follows the path [-19, -40].
 
-        }
+{{< dots >}}
+## Approach 🚀
+We solve the problem using dynamic programming by updating the matrix to store the minimum path sum at each position. This allows us to compute the minimum sum in a bottom-up manner.
 
-        int res = mtx[m - 1][0];
-        for(int j = 0; j < n; j++)
-        res = min(res, mtx[m - 1][j]);
+### Initial Thoughts 💭
+- The problem can be solved efficiently using dynamic programming, where each element in the matrix is updated to represent the minimum falling path sum up to that point.
+- By using dynamic programming, we avoid recalculating the same subproblems multiple times, making the solution more efficient.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will not be empty, as per the constraints.
+- The algorithm should handle matrices up to 100x100 efficiently.
+- The algorithm should work for matrices with negative numbers and ensure the minimum path sum is correctly calculated.
+- The matrix is always square, which simplifies the implementation.
+{{< dots >}}
+## Code 💻
+```cpp
+int minFallingPathSum(vector<vector<int>>& mtx) {
+    
+    int m = mtx.size(), n = mtx[0].size();
 
-        return res;
+    for(int i = 1; i < m; i++)
+    for(int j = 0; j < n; j++) {
+
+        int l = max(j - 1, 0);
+        int r = min(j + 1, n - 1);
+
+        mtx[i][j] += min(mtx[i- 1][l], min(mtx[i - 1][j], mtx[i - 1][r]));
+
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    int res = mtx[m - 1][0];
+    for(int j = 0; j < n; j++)
+    res = min(res, mtx[m - 1][j]);
 
-The problem asks to find the minimum sum of a falling path through a matrix. A falling path starts at any element in the first row and chooses one element from each row. For each element, the next row element must be chosen from one of the three possible positions: directly below, or diagonally left or right. The goal is to minimize the sum of the elements along the falling path.
+    return res;
+}
+```
 
-### Approach
+The function 'minFallingPathSum' calculates the minimum sum of a falling path from the top to the bottom of a matrix, where each step can only move to the left, down, or right from a given cell.
 
-This problem can be efficiently solved using **dynamic programming**. The idea is to build a solution incrementally, where each element in the matrix represents the minimum sum of the falling path to reach that element.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minFallingPathSum(vector<vector<int>>& mtx) {
+	```
+	Define the function 'minFallingPathSum', which takes a matrix 'mtx' and returns the minimum sum of a falling path.
 
-#### Key Steps to Solve the Problem:
+2. **Matrix Size**
+	```cpp
+	    int m = mtx.size(), n = mtx[0].size();
+	```
+	Store the number of rows 'm' and columns 'n' in the matrix 'mtx'.
 
-1. **Dynamic Programming Table (In-Place Modification)**:
-   We use the matrix itself to store the intermediate results. For each element in the matrix, the value is updated to represent the minimum sum of a falling path that ends at that element.
+3. **Outer Loop**
+	```cpp
+	    for(int i = 1; i < m; i++)
+	```
+	Loop through each row starting from the second row (index 1), as the first row does not require modification.
 
-2. **Transition**:
-   - For each element in the current row, the value is updated by adding the current element to the minimum of the three possible previous elements from the row above (directly above, left-diagonal, right-diagonal).
-   - This allows us to "fall" from row to row, choosing the best path while minimizing the sum.
+4. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	Loop through each column 'j' in the current row 'i'.
 
-3. **Boundary Considerations**:
-   - The first row has no previous row to consider, so it remains unchanged.
-   - For each element in a row, we calculate the minimum sum from the previous row, considering only the valid indices (left, center, and right).
+5. **Left Bound Calculation**
+	```cpp
+	        int l = max(j - 1, 0);
+	```
+	Calculate the index 'l' of the left cell. If 'j - 1' is less than 0, set 'l' to 0 to prevent out-of-bounds access.
 
-4. **Final Result**:
-   Once the matrix is updated, the final answer is the minimum value in the last row, as it represents the minimum sum of the falling paths that end in any column of the last row.
+6. **Initialize Result**
+	```cpp
+	    int res = mtx[m - 1][0];
+	```
+	Initialize 'res' to the value of the first element in the last row of the matrix, which will be used to track the minimum sum.
 
-### Code Breakdown (Step by Step)
+7. **Final Row Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Loop through each element in the last row of the matrix to find the minimum value.
 
-1. **Matrix Dimensions**:
-   First, we define `m` and `n` to represent the number of rows and columns in the matrix, respectively.
+8. **Update Minimum Result**
+	```cpp
+	    res = min(res, mtx[m - 1][j]);
+	```
+	Update 'res' to the minimum value between the current 'res' and the current element in the last row of the matrix.
 
-   ```cpp
-   int m = mtx.size(), n = mtx[0].size();
-   ```
+9. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the minimum falling path sum from the top to the bottom of the matrix.
 
-2. **Dynamic Programming Update**:
-   We start from the second row (since the first row doesn't need updating) and update each element. For each element, we consider the three possible positions from the row above (directly above, left-diagonal, right-diagonal). The value of the current element is updated by adding the minimum of these three values.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-   ```cpp
-   for(int i = 1; i < m; i++)
-   for(int j = 0; j < n; j++) {
-       int l = max(j - 1, 0);  // Left diagonal (with boundary check)
-       int r = min(j + 1, n - 1);  // Right diagonal (with boundary check)
+The time complexity is O(n^2), where n is the number of rows (or columns) in the matrix, as we traverse each element once and update it based on the previous row.
 
-       mtx[i][j] += min(mtx[i-1][l], min(mtx[i-1][j], mtx[i-1][r]));
-   }
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   Here, we use `max(j - 1, 0)` to ensure that the left diagonal doesn't go out of bounds, and `min(j + 1, n - 1)` ensures the right diagonal stays within bounds.
+The space complexity is O(1), as we update the matrix in place and do not use any extra space.
 
-3. **Result Calculation**:
-   Once the matrix is updated, the result is the minimum value from the last row, as it represents the smallest falling path sum from the first row to the last row.
+**Happy Coding! 🎉**
 
-   ```cpp
-   int res = mtx[m - 1][0];  // Start with the first element of the last row
-   for(int j = 0; j < n; j++) {
-       res = min(res, mtx[m - 1][j]);  // Find the minimum value in the last row
-   }
-   ```
-
-4. **Return the Result**:
-   Finally, we return the result, which is the minimum falling path sum.
-
-   ```cpp
-   return res;
-   ```
-
-### Time Complexity
-
-The time complexity of this solution is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the matrix. Here's why:
-- We loop through each element of the matrix exactly once.
-- For each element, we perform constant-time operations (comparing three values and updating the matrix).
-  
-Thus, the total time complexity is proportional to the size of the matrix.
-
-### Space Complexity
-
-The space complexity is **O(1)** if we modify the matrix in place (as done in this solution). Since we are not using any additional data structures that depend on the size of the input matrix, the space complexity remains constant.
-
-### Edge Cases
-
-- **Single Row Matrix**: If the matrix has only one row, there is no falling path to calculate, so the result is simply the minimum value from that row.
-- **Single Column Matrix**: If the matrix has only one column, there is only one path (straight down), and the result is the sum of the elements along that path.
-- **Matrix with All Positive Values**: In this case, the algorithm will simply return the minimal sum path based on the grid structure.
-- **Matrix with All Negative Values**: The algorithm still works for negative values, but it will find the path that results in the least negative sum.
-- **Empty Matrix**: The solution assumes a non-empty matrix, but handling an empty matrix can be done by checking for this case at the start and returning `0`.
-
-### Conclusion
-
-The solution to this problem efficiently computes the minimum sum of a falling path using dynamic programming. By modifying the input matrix in-place, we reduce the space complexity to **O(1)** while maintaining an **O(m * n)** time complexity, which is optimal for this problem. This method is not only efficient but also straightforward, making it an ideal approach for solving matrix-related dynamic programming problems involving path sums.
-
-By applying this approach, you can handle larger input sizes efficiently while maintaining clarity in the solution's logic. The use of the sliding window (for each element's left and right neighbors) ensures that we consider only valid transitions, which makes the solution robust and adaptable to various types of grid configurations.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-falling-path-sum/description/)
 

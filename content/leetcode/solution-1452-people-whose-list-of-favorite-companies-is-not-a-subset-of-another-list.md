@@ -14,157 +14,197 @@ img_src = ""
 youtube = "Ok0jYAMnvQI"
 youtube_upload_date="2020-05-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Ok0jYAMnvQI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of lists where `favoriteCompanies[i]` represents the favorite companies of the i-th person, find the indices of people whose favorite company lists are not subsets of any other person's list. Return these indices in increasing order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 2D array where each element is a list of strings representing the favorite companies of a person.
+- **Example:** `Input: favoriteCompanies = [["apple","google","amazon"],["apple","microsoft"],["google","apple"],["amazon"]]`
+- **Constraints:**
+	- 1 <= favoriteCompanies.length <= 100
+	- 1 <= favoriteCompanies[i].length <= 500
+	- 1 <= favoriteCompanies[i][j].length <= 20
+	- All strings in `favoriteCompanies[i]` are distinct.
+	- All lists are distinct.
+	- Strings consist of lowercase English letters only.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> peopleIndexes(vector<vector<string>>& comp) {
-        int n = comp.size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of indices of people whose favorite companies are not subsets of any other list, in increasing order.
+- **Example:** `Output: [0,1,3]`
+- **Constraints:**
+	- The output indices must be in sorted order.
+	- If a person's list is not a subset of any other, their index must be included.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify all people whose favorite company lists are unique and not subsets of other people's lists.
+
+- Sort each person's favorite company list for efficient subset checking.
+- For each person, compare their list with all other people's lists.
+- If their list is not a subset of any other list, mark their index for inclusion.
+- Return all such indices in increasing order.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input lists are valid and adhere to the constraints.
+- Subset checking is performed using sorted lists for efficiency.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: favoriteCompanies = [["apple","google"],["apple","microsoft"],["google"],["amazon"]]`  \
+  **Explanation:** Output: [0,1,3]. Person at index 2 has a list ["google"] which is a subset of ["apple","google"]. Others are unique.
+
+- **Input:** `Input: favoriteCompanies = [["facebook","instagram"],["instagram"],["twitter"],["facebook"]]`  \
+  **Explanation:** Output: [0,2,3]. The list at index 1 is a subset of the list at index 0.
+
+- **Input:** `Input: favoriteCompanies = [["youtube"],["netflix"],["amazon"],["hulu"]]`  \
+  **Explanation:** Output: [0,1,2,3]. All lists are unique and not subsets of one another.
+
+{{< dots >}}
+## Approach 🚀
+Use a combination of sorting and subset checking to identify non-subset lists efficiently.
+
+### Initial Thoughts 💭
+- The problem revolves around subset checking between lists.
+- Sorting each list ensures that the subset check can be efficiently done.
+- Direct comparisons between every pair of lists may lead to a quadratic time complexity.
+- Sort lists and use an efficient comparison method to minimize redundant checks.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: favoriteCompanies = [] -> Output: []. No input leads to an empty output.
+- Input: A list with 100 people each having 500 companies -> Verify performance.
+- Input: favoriteCompanies = [["a"],["a","b"],["b"]] -> Handle minimal string sizes and subsets correctly.
+- Input: favoriteCompanies = [["apple"]] -> Single list remains unchanged.
+- Handle cases where lists are identical after sorting but are not subsets.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> peopleIndexes(vector<vector<string>>& comp) {
+    int n = comp.size();
+    
+    for(auto &c : comp)
+        sort(c.begin(), c.end());
+    
+    vector<int> res;
+    for(int i = 0; i < n; i++) {
+        int notSubset = true;
         
-        for(auto &c : comp)
-            sort(c.begin(), c.end());
-        
-        vector<int> res;
-        for(int i = 0; i < n; i++) {
-            int notSubset = true;
+        for(int j = 0; j < n && notSubset; j++) {
+            if(i == j) continue;
             
-            for(int j = 0; j < n && notSubset; j++) {
-                if(i == j) continue;
-                
-                notSubset = !includes(comp[j].begin(), comp[j].end(), comp[i].begin(), comp[i].end());
-            }
-            if(notSubset)
-                res.push_back(i);
+            notSubset = !includes(comp[j].begin(), comp[j].end(), comp[i].begin(), comp[i].end());
         }
-        return res;
+        if(notSubset)
+            res.push_back(i);
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function returns a vector of indices from the input vector of vectors of strings 'comp', where each index corresponds to a vector of strings that is not a subset of any other vector in the input.
 
-The task is to find the indexes of individuals whose preferences are not subsets of other individuals' preferences in a given collection. Each individual's preferences are represented as a vector of strings, and an individual is considered "unique" if their preferences do not completely fall within the preferences of any other individual.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> peopleIndexes(vector<vector<string>>& comp) {
+	```
+	The function 'peopleIndexes' is declared, which takes a reference to a vector of vector of strings ('comp') and returns a vector of integers.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int n = comp.size();
+	```
+	The variable 'n' is initialized to the size of the input vector 'comp', which represents the number of elements in the input.
 
-To solve the problem, we can follow these steps:
+3. **Loop**
+	```cpp
+	    for(auto &c : comp)
+	```
+	A loop is started to iterate over each vector 'c' inside the vector of vectors 'comp'.
 
-1. **Sorting Preferences**: Sort the preferences of each individual to facilitate subset checking.
-2. **Checking Subset Inclusion**: For each individual's preferences, check if they are a subset of any other individual's preferences.
-3. **Collect Unique Indexes**: If an individual's preferences are not a subset of any other individual's preferences, their index will be collected in the result vector.
+4. **Sorting**
+	```cpp
+	        sort(c.begin(), c.end());
+	```
+	The current vector 'c' is sorted in lexicographical order using the sort function.
 
-### Code Breakdown (Step by Step)
+5. **Variable Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	An empty vector 'res' is initialized to store the result indices of vectors that are not subsets of any other vectors.
 
-Let’s analyze the provided code to understand how it implements this approach:
+6. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is started to iterate through each vector in 'comp' by index 'i'.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   ```
+7. **Variable Initialization**
+	```cpp
+	        int notSubset = true;
+	```
+	The variable 'notSubset' is initialized to true, which will be used to track whether the current vector is a subset of any other vector.
 
-   - The solution is defined within a class named `Solution`, which is typical for coding challenges.
+8. **Loop**
+	```cpp
+	        for(int j = 0; j < n && notSubset; j++) {
+	```
+	A nested loop starts to iterate through all other vectors in 'comp' by index 'j'. The 'notSubset' flag ensures that the loop stops once a subset is found.
 
-2. **Function Declaration**:
-   ```cpp
-   public:
-       vector<int> peopleIndexes(vector<vector<string>>& comp) {
-   ```
+9. **Conditional Check**
+	```cpp
+	            if(i == j) continue;
+	```
+	If the indices 'i' and 'j' are the same (i.e., comparing the same vector with itself), the loop skips to the next iteration.
 
-   - The function `peopleIndexes` takes a reference to a 2D vector `comp`, where each inner vector contains strings representing an individual's preferences.
+10. **Subset Check**
+	```cpp
+	            notSubset = !includes(comp[j].begin(), comp[j].end(), comp[i].begin(), comp[i].end());
+	```
+	The 'notSubset' flag is updated by checking if vector 'comp[i]' is included in vector 'comp[j]'. If it is, 'notSubset' is set to false.
 
-3. **Initialization**:
-   ```cpp
-       int n = comp.size();
-   ```
+11. **Conditional Check**
+	```cpp
+	        if(notSubset)
+	```
+	If the 'notSubset' flag is still true after checking all other vectors, it means 'comp[i]' is not a subset of any other vector.
 
-   - We first determine the number of individuals (i.e., the number of preference lists) by checking the size of the `comp` vector.
+12. **Vector Update**
+	```cpp
+	            res.push_back(i);
+	```
+	If 'comp[i]' is not a subset of any other vector, the index 'i' is added to the result vector 'res'.
 
-4. **Sorting Preferences**:
-   ```cpp
-       for(auto &c : comp)
-           sort(c.begin(), c.end());
-   ```
+13. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the vector 'res', which contains the indices of vectors that are not subsets of any other vectors.
 
-   - We loop through each individual's preferences (each inner vector in `comp`) and sort them. This sorting step is crucial because it allows us to easily check for subset inclusion later.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2 * m)
+- **Average Case:** O(n^2 * m)
+- **Worst Case:** O(n^2 * m)
 
-5. **Result Vector**:
-   ```cpp
-       vector<int> res;
-   ```
+Where n is the number of people and m is the average length of their favorite companies list. Sorting and subset checks dominate the complexity.
 
-   - We initialize an empty vector `res` to store the indexes of individuals whose preferences are unique.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n * m)
 
-6. **Checking for Unique Preferences**:
-   ```cpp
-       for(int i = 0; i < n; i++) {
-           int notSubset = true;
-   ```
+Space is used for storing the sorted lists and the result indices.
 
-   - We iterate over each individual's preferences using index `i`. The variable `notSubset` is set to `true` initially, assuming that the current individual's preferences might be unique.
+**Happy Coding! 🎉**
 
-7. **Subset Comparison Loop**:
-   ```cpp
-           for(int j = 0; j < n && notSubset; j++) {
-               if(i == j) continue;
-   ```
-
-   - We have a nested loop where we compare the preferences of the current individual (indexed by `i`) with every other individual (indexed by `j`). If `i` is equal to `j`, we skip the comparison to avoid self-comparison.
-
-8. **Subset Inclusion Check**:
-   ```cpp
-               notSubset = !includes(comp[j].begin(), comp[j].end(), comp[i].begin(), comp[i].end());
-           }
-   ```
-
-   - We use the `includes` function from the C++ Standard Library to check if the preferences of the current individual (from `comp[i]`) are a subset of the preferences of the other individual (from `comp[j]`). If they are, we set `notSubset` to `false`. This indicates that the preferences of individual `i` are not unique.
-
-9. **Storing Unique Indexes**:
-   ```cpp
-           if(notSubset)
-               res.push_back(i);
-       }
-   ```
-
-   - After checking against all other individuals, if `notSubset` remains `true`, we append the index `i` to the result vector `res`.
-
-10. **Returning the Result**:
-    ```cpp
-       return res;
-   }
-   ```
-
-   - Finally, the function returns the result vector containing the indexes of unique individuals.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution can be approximated as \(O(n^2 \cdot m \log m)\), where:
-  - \(n\) is the number of individuals (the size of `comp`).
-  - \(m\) is the maximum length of an individual's preferences. This accounts for the sorting of preferences (\(O(m \log m)\)) and the subset checking, which is done for every pair of individuals.
-
-- **Space Complexity**: The space complexity is \(O(n \cdot m)\) for storing the sorted preferences in the `comp` vector, where \(m\) is the average number of preferences for an individual.
-
-### Conclusion
-
-The provided code efficiently identifies individuals whose preferences are not subsets of any other individuals' preferences by utilizing sorting and subset checking. 
-
-#### Key Takeaways:
-
-1. **Subset Checking**: The use of the `includes` function is a powerful way to determine if one collection is a subset of another, simplifying the subset logic.
-
-2. **Sorting**: Sorting is essential in this solution as it enables easier comparison of preferences, making subset checking straightforward.
-
-3. **Efficiency**: While the approach has a polynomial time complexity due to nested loops, it is structured in a way that clearly separates concerns (sorting, checking, and collecting results).
-
-4. **Data Structures**: The choice of using vectors to store preferences and results is appropriate given the nature of the data, allowing for easy iteration and manipulation.
-
-In summary, this solution exemplifies a methodical approach to a problem involving comparisons among collections, showcasing both the utility of C++ STL functions and effective coding practices.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/people-whose-list-of-favorite-companies-is-not-a-subset-of-another-list/description/)
 

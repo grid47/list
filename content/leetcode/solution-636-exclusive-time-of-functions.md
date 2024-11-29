@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Rjcwy-Q2uDo"
 youtube_upload_date="2020-04-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Rjcwy-Q2uDo/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,136 +28,233 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/Rjcwy-Q2uDo/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a list of logs representing the execution of n functions on a single-threaded CPU. Each log contains a function's ID, whether the function has started or ended, and the timestamp of the event. The goal is to calculate the exclusive time of each function, which is the total time the function spends executing, excluding the time spent on other nested function calls.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of logs formatted as strings with the structure {function_id}:{start|end}:{timestamp}. The logs indicate when a function starts or ends at a given timestamp.
+- **Example:** `n = 2, logs = ["0:start:0", "1:start:2", "1:end:5", "0:end:6"]`
+- **Constraints:**
+	- 1 <= n <= 100
+	- 1 <= logs.length <= 500
+	- 0 <= function_id < n
+	- 0 <= timestamp <= 10^9
+	- No two start events will happen at the same timestamp.
+	- No two end events will happen at the same timestamp.
 
-{{< highlight cpp >}}
-struct Log {
-    int id;
-    string status;
-    int time;
-};
-class Solution {
-public:
-    vector<int> exclusiveTime(int n, vector<string>& logs) {
-        vector<int> ans(n, 0);
-        stack<Log> stk;
-        for(string log : logs) {
-            stringstream ss(log);
-            string num, adj, time;
-            getline(ss, num,  ':');
-            getline(ss, adj,  ':');
-            getline(ss, time, ':');
-            Log item = { stoi(num), adj, stoi(time) };
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the exclusive time for each function as an array, where the value at the ith index represents the exclusive time for function i.
+- **Example:** `[3, 4]`
+- **Constraints:**
+	- The output will be an array of n integers representing the exclusive times for each function.
 
-            if(item.status == "start") {
-                stk.push(item);
-            } else {
-                assert(stk.top().id == item.id);
-                int t = item.time - stk.top().time +1;
-                ans[item.id] += t;
-                stk.pop();
-                if(!stk.empty()){
-                    assert(stk.top().status == "start");
-                    ans[stk.top().id] -= t;
-                }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the exclusive time for each function based on the logs.
+
+- Iterate through the logs and simulate the execution of the functions using a stack.
+- Track the start and end times for each function call and compute the total time spent executing each function.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each function has a start and end log.
+- The logs will be given in chronological order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 2, logs = ["0:start:0", "1:start:2", "1:end:5", "0:end:6"]`  \
+  **Explanation:** Function 0 starts at time 0 and runs for 2 units of time, function 1 starts at time 2 and runs for 4 units. Function 0 resumes at time 6 and runs for 1 unit, making the total exclusive time of function 0 equal to 3, and function 1 equal to 4.
+
+{{< dots >}}
+## Approach 🚀
+We use a stack to simulate the function calls and calculate the exclusive time by tracking the start and end timestamps.
+
+### Initial Thoughts 💭
+- Each function's exclusive time needs to account for recursive calls and nested execution times.
+- By using a stack to keep track of function calls and their start times, we can easily calculate the total exclusive time for each function.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will not be empty, as logs always contain at least one function call.
+- The solution should be efficient enough to handle up to 500 logs.
+- Consider cases with recursive function calls where a function calls itself multiple times.
+- Ensure the solution is efficient for the given problem size.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> exclusiveTime(int n, vector<string>& logs) {
+    vector<int> ans(n, 0);
+    stack<Log> stk;
+    for(string log : logs) {
+        stringstream ss(log);
+        string num, adj, time;
+        getline(ss, num,  ':');
+        getline(ss, adj,  ':');
+        getline(ss, time, ':');
+        Log item = { stoi(num), adj, stoi(time) };
+
+        if(item.status == "start") {
+            stk.push(item);
+        } else {
+            assert(stk.top().id == item.id);
+            int t = item.time - stk.top().time +1;
+            ans[item.id] += t;
+            stk.pop();
+            if(!stk.empty()){
+                assert(stk.top().status == "start");
+                ans[stk.top().id] -= t;
             }
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
+This function calculates the exclusive time for each task in a set of logs, where each log represents a task's start or end time. It uses a stack to manage nested tasks and computes the total time spent on each task.
 
-The problem asks us to calculate the exclusive execution time of functions in a system where each log entry records the starting or stopping time of a function, along with its unique function ID. The logs are provided as strings where each log contains the function ID, the status (either "start" or "end"), and the timestamp of when the event occurred.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> exclusiveTime(int n, vector<string>& logs) {
+	```
+	This line defines the function `exclusiveTime` that takes an integer `n` (number of tasks) and a vector of logs. It returns a vector of integers representing the exclusive time for each task.
 
-Given `n` functions, our goal is to compute the exclusive execution time of each function. The exclusive execution time is defined as the total time a function spends executing minus the time it spends in functions that it calls.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> ans(n, 0);
+	```
+	A vector `ans` is initialized with size `n` (number of tasks), and all elements are set to 0. This will store the exclusive time for each task.
 
-### Approach
+3. **Stack Declaration**
+	```cpp
+	    stack<Log> stk;
+	```
+	A stack `stk` is declared to hold `Log` objects, which will track the tasks as they are being processed. The stack is used to manage nested tasks.
 
-To solve this problem, we need to simulate the execution of the functions and manage their start and end times. A stack data structure is ideal for this problem because it allows us to keep track of the functions that are currently executing.
+4. **Log Iteration**
+	```cpp
+	    for(string log : logs) {
+	```
+	A `for` loop is used to iterate through each log in the `logs` vector, where each log is processed to extract task information.
 
-The solution can be broken down into the following steps:
+5. **Log Parsing**
+	```cpp
+	        stringstream ss(log);
+	```
+	A stringstream `ss` is created from the current log to easily extract individual components (task ID, status, and time).
 
-1. **Parse the Logs**: Each log entry contains a function ID, a status ("start" or "end"), and a timestamp. We need to extract this information from the log.
-2. **Track Start and End Times**: Use a stack to keep track of functions that are currently executing. When a function starts, we push it onto the stack. When a function ends, we pop it from the stack and compute its exclusive execution time.
-3. **Adjust the Times**: For each "end" log, we calculate the time spent by the function and update the time of the function at the top of the stack, which represents the function that called the current function.
+6. **Log Variables Declaration**
+	```cpp
+	        string num, adj, time;
+	```
+	Three string variables `num`, `adj`, and `time` are declared to hold the task ID, status (start or end), and time values extracted from the log.
 
-### Code Breakdown (Step by Step)
+7. **Extract Task ID**
+	```cpp
+	        getline(ss, num,  ':');
+	```
+	The task ID (`num`) is extracted from the log by reading until the first colon `:`.
 
-Let's go through the code step by step to understand how it works:
+8. **Extract Status**
+	```cpp
+	        getline(ss, adj,  ':');
+	```
+	The task status (`adj`), which indicates whether the task has started or ended, is extracted by reading the next section of the log.
 
-#### 1. **Data Structures and Initialization**:
-   ```cpp
-   vector<int> ans(n, 0);
-   stack<Log> stk;
-   ```
-   - We initialize a `vector<int> ans` with size `n` to store the exclusive execution times of each function. The `vector` is initialized with zeros.
-   - A stack `stk` of type `Log` is used to track functions as they start. Each entry in the stack represents a function that is currently running, including its ID, status, and start time.
+9. **Extract Time**
+	```cpp
+	        getline(ss, time, ':');
+	```
+	The task time (`time`) is extracted by reading the final section of the log.
 
-#### 2. **Iterating Through the Logs**:
-   ```cpp
-   for(string log : logs) {
-       stringstream ss(log);
-       string num, adj, time;
-       getline(ss, num, ':');
-       getline(ss, adj, ':');
-       getline(ss, time, ':');
-       Log item = { stoi(num), adj, stoi(time) };
-   ```
-   - We iterate through each log in the `logs` vector. Each log string is passed to a stringstream `ss` to extract the function ID (`num`), status (`adj`), and timestamp (`time`) using `getline()`.
-   - We convert `num` and `time` to integers using `stoi()`, and create a `Log` structure with the parsed information.
+10. **Log Item Creation**
+	```cpp
+	        Log item = { stoi(num), adj, stoi(time) };
+	```
+	A `Log` object is created with the parsed task ID (`num`), status (`adj`), and time (`time`). The `stoi` function is used to convert the `num` and `time` from strings to integers.
 
-#### 3. **Processing the "Start" Log**:
-   ```cpp
-   if(item.status == "start") {
-       stk.push(item);
-   }
-   ```
-   - If the log represents a "start" event, we push the `Log` object onto the stack. This indicates that a function has started and is currently executing.
+11. **Start Task Handling**
+	```cpp
+	        if(item.status == "start") {
+	```
+	If the task status is 'start', the task is pushed onto the stack, indicating that it has started.
 
-#### 4. **Processing the "End" Log**:
-   ```cpp
-   else {
-       assert(stk.top().id == item.id);
-       int t = item.time - stk.top().time + 1;
-       ans[item.id] += t;
-       stk.pop();
-   ```
-   - If the log represents an "end" event, we first check that the function ID of the "end" log matches the function ID of the function at the top of the stack (i.e., the currently executing function).
-   - We calculate the time spent by the function using the formula `t = item.time - stk.top().time + 1`, where `item.time` is the timestamp of the "end" event and `stk.top().time` is the timestamp of the corresponding "start" event.
-   - We add this time to `ans[item.id]`, which stores the total exclusive execution time for the function `item.id`.
-   - We then pop the function from the stack because it has finished executing.
+12. **Push Task to Stack**
+	```cpp
+	            stk.push(item);
+	```
+	The `item` (task) is pushed onto the stack to keep track of the active task.
 
-#### 5. **Adjusting the Time of the Calling Function**:
-   ```cpp
-   if(!stk.empty()){
-       assert(stk.top().status == "start");
-       ans[stk.top().id] -= t;
-   }
-   ```
-   - If the stack is not empty (i.e., there is a function that called the current function), we subtract the execution time of the current function from the exclusive execution time of the function at the top of the stack. This ensures that the time spent in the current function is not counted as part of the calling function's exclusive time.
+13. **End Task Handling**
+	```cpp
+	        } else {
+	```
+	If the task status is not 'start' (i.e., it's 'end'), the function proceeds to handle the task completion.
 
-#### 6. **Returning the Result**:
-   ```cpp
-   return ans;
-   ```
-   - After processing all logs, the `ans` vector will contain the exclusive execution times of all functions, which we return.
+14. **Assert Task ID Match**
+	```cpp
+	            assert(stk.top().id == item.id);
+	```
+	This assertion checks that the task ID of the current log matches the task ID of the task at the top of the stack, ensuring that tasks are being ended in the correct order.
 
-### Complexity
+15. **Calculate Task Duration**
+	```cpp
+	            int t = item.time - stk.top().time +1;
+	```
+	The exclusive time for the task is calculated as the difference between the current time and the time of the task at the top of the stack, plus 1.
 
-#### Time Complexity:
-- **O(n)**: We iterate through each log exactly once, where `n` is the number of logs. Each operation inside the loop (such as parsing the log and pushing or popping from the stack) takes constant time.
+16. **Add Duration to Task**
+	```cpp
+	            ans[item.id] += t;
+	```
+	The calculated exclusive time `t` is added to the corresponding task ID in the `ans` vector.
 
-#### Space Complexity:
-- **O(n)**: The space complexity is determined by the stack, which can store at most `n` functions in the worst case (when no functions have finished executing).
+17. **Pop Task from Stack**
+	```cpp
+	            stk.pop();
+	```
+	The task is removed from the stack after processing its end time.
 
-### Conclusion
+18. **Handle Nested Task**
+	```cpp
+	            if(!stk.empty()){
+	```
+	If there are still tasks in the stack (indicating a nested task), the function continues to handle the exclusive time for the parent task.
 
-This solution efficiently computes the exclusive execution time of each function by simulating the function calls using a stack. The stack allows us to keep track of which function is currently running and ensures that we correctly account for the time spent in functions that are called. By maintaining the exclusive execution time of each function, we handle nested calls and accurately compute the total time spent by each function without counting the time spent in its child functions.
+19. **Assert Parent Task is Start**
+	```cpp
+	                assert(stk.top().status == "start");
+	```
+	This assertion checks that the task at the top of the stack is a 'start' task, ensuring the parent task is still active.
 
-This approach runs in **O(n)** time, where `n` is the number of log entries, and it uses **O(n)** space, making it optimal for solving the problem. The use of a stack ensures that the solution is both simple and efficient.
+20. **Subtract Duration from Parent Task**
+	```cpp
+	                ans[stk.top().id] -= t;
+	```
+	The exclusive time of the parent task is reduced by `t` to ensure the nested task's time is not counted in the parent.
+
+21. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The function returns the `ans` vector, which contains the exclusive time for each task.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(m)
+- **Worst Case:** O(m)
+
+The time complexity is linear in terms of the number of logs.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the call stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/exclusive-time-of-functions/description/)
 

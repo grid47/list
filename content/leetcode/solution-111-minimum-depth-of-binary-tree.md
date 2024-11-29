@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Ukbbnzxmd8o"
 youtube_upload_date="2023-07-10"
 youtube_thumbnail="https://i.ytimg.com/vi/Ukbbnzxmd8o/sddefault.jpg"
+comments = true
 +++
 
 
@@ -27,192 +28,159 @@ youtube_thumbnail="https://i.ytimg.com/vi/Ukbbnzxmd8o/sddefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a binary tree, find its minimum depth. The minimum depth is defined as the number of nodes along the shortest path from the root node down to the nearest leaf node. A leaf node is a node that does not have any children.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a binary tree represented by its root node.
+- **Example:** `root = [1,null,2,null,3,null,4]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [0, 10^5].
+	- -1000 <= Node.val <= 1000
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int minDepth(TreeNode* root) {
-        
-        if(root == NULL) return 0;
-        
-        int l = minDepth(root->left);
-        int r = minDepth(root->right);
-        
-        if(root->left && root->right) {
-            return 1 + ((l < r)? l: r);            
-        }
-        
-        if(root->left) {
-            return 1 + l;                        
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the minimum depth of the binary tree, which is the number of nodes along the shortest path from the root to a leaf node.
+- **Example:** `5`
+- **Constraints:**
+	- The minimum depth is always a positive integer if the tree is non-empty.
 
-        return 1 + r;                        
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum depth by recursively checking the depth of the left and right subtrees and choosing the minimum of them.
+
+- If the tree is empty, return 0.
+- Traverse the tree recursively to find the depths of the left and right subtrees.
+- If the left or right subtree is NULL, return the depth of the other subtree.
+- Return the minimum of the left and right subtree depths plus one to account for the current node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is a valid binary tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [10,5,15,null,null,12,20]`  \
+  **Explanation:** The tree is balanced and has a minimum depth of 2, as the shortest path from the root to a leaf is from 10 to 15.
+
+- **Input:** `Input: root = [1,null,2,null,3,null,4]`  \
+  **Explanation:** The tree is a straight line, and the minimum depth is 5, which corresponds to the path from 1 to 4.
+
+{{< dots >}}
+## Approach 🚀
+To find the minimum depth of the binary tree, we need to recursively traverse the tree and calculate the depth of each subtree, ensuring that we take the shortest path to a leaf node.
+
+### Initial Thoughts 💭
+- A recursive approach can be used where the base case checks for null nodes and returns a depth of 0.
+- At each step, we compare the depth of the left and right subtrees and return the smaller value.
+- We can optimize by handling cases where one of the subtrees is null separately to avoid unnecessary recursive calls.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input tree is empty, return 0, as there are no nodes in the tree.
+- The algorithm should efficiently handle large trees, up to the constraint of 10^5 nodes.
+- The algorithm should work even for edge cases like a tree with only one node, where the minimum depth is 1.
+- The algorithm should run in O(n) time, where n is the number of nodes in the tree, to handle large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int minDepth(TreeNode* root) {
+    
+    if(root == NULL) return 0;
+    
+    int l = minDepth(root->left);
+    int r = minDepth(root->right);
+    
+    if(root->left && root->right) {
+        return 1 + ((l < r)? l: r);            
     }
-};
-{{< /highlight >}}
----
+    
+    if(root->left) {
+        return 1 + l;                        
+    }
 
-### 🌳 **Problem Statement: Find the Minimum Depth of a Binary Tree**
-
-The task is to find the **minimum depth** of a binary tree. The **minimum depth** is defined as the length of the shortest path from the root node to any leaf node. A **leaf node** is a node with no children, meaning both its left and right children are `NULL`.
-
-For example, consider the binary tree:
-
-```
-        1
-       / \
-      2   3
-       \
-        4
-```
-
-In this case, the minimum depth is `2` (root → 3), since it’s the shortest path to a leaf node. For an empty tree, the minimum depth is `0`.
-
----
-
-### 🧠 **Approach to Solve the Minimum Depth Problem**
-
-To solve this problem, we use a **depth-first search (DFS)** approach. The algorithm recursively explores the tree’s nodes from top to bottom, calculating the depth of each subtree. Here’s the breakdown:
-
-1. **Base Case:**
-   - If the current node is `NULL` (i.e., the tree is empty), return `0`, as an empty tree has no depth.
-
-2. **Recursive Calculation of Depth:**
-   - If both left and right children of the node are present, compute the depth for both subtrees and return the minimum of the two.
-   - If only one child is present, return the depth of that subtree plus 1, as the path to the leaf will include that subtree.
-
-3. **Final Result:**
-   - The minimum depth will be the shortest path from the root to a leaf node, which is calculated recursively.
-
----
-
-### 🔧 **Code Breakdown: Step-by-Step**
-
-#### **Step 1: Handle the Empty Tree**
-
-```cpp
-if (root == NULL) return 0;
-```
-
-- If the root is `NULL`, the tree is empty, so we return `0` because an empty tree has no depth.
-
-#### **Step 2: Recursive Calculation for Left and Right Subtrees**
-
-```cpp
-int l = minDepth(root->left);
-int r = minDepth(root->right);
-```
-
-- We recursively calculate the minimum depth of the left (`l`) and right (`r`) subtrees. The recursion continues until the base case (a `NULL` node) is encountered.
-
-#### **Step 3: Calculate the Minimum Depth Based on Child Nodes**
-
-```cpp
-if (root->left && root->right) {
-    return 1 + ((l < r) ? l : r);
+    return 1 + r;                        
 }
 ```
 
-- If both left and right children are non-null, return `1 + min(l, r)`, where `l` and `r` are the depths of the left and right subtrees. This ensures we find the shortest path to a leaf.
+This solution computes the minimum depth of a binary tree using a recursive approach. It considers different cases based on the presence of left and right child nodes.
 
-#### **Step 4: Handle the Case When One Child Is Null**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minDepth(TreeNode* root) {
+	```
+	Define the main function to compute the minimum depth of a binary tree.
 
-```cpp
-if (root->left) {
-    return 1 + l;
-}
-```
+2. **Base Case**
+	```cpp
+	    if(root == NULL) return 0;
+	```
+	Base case: If the tree is empty, return 0 as the depth.
 
-- If the left child is `NULL`, the minimum depth will be `1 + depth of the right subtree`, as there is no left child to traverse.
+3. **Recursive Call**
+	```cpp
+	    int l = minDepth(root->left);
+	```
+	Recursively calculate the minimum depth of the left subtree.
 
-```cpp
-return 1 + r;
-```
+4. **Recursive Call**
+	```cpp
+	    int r = minDepth(root->right);
+	```
+	Recursively calculate the minimum depth of the right subtree.
 
-- Similarly, if the right child is `NULL`, the minimum depth will be `1 + depth of the left subtree`.
+5. **Condition Evaluation**
+	```cpp
+	    if(root->left && root->right) {
+	```
+	Check if both left and right children exist.
 
-#### **Final Result:**
-- The recursion continues until all nodes are visited, and the function returns the minimum depth from the root to any leaf node.
+6. **Return Statement**
+	```cpp
+	        return 1 + ((l < r)? l: r);            
+	```
+	Return the minimum depth of the left or right subtree plus 1 for the current node.
 
----
+7. **Condition Evaluation**
+	```cpp
+	    if(root->left) {
+	```
+	Check if only the left child exists.
 
-### ⏱️ **Time and Space Complexity**
+8. **Return Statement**
+	```cpp
+	        return 1 + l;                        
+	```
+	Return the depth of the left subtree plus 1 for the current node.
 
-#### **Time Complexity: O(n)**
+9. **Whitespace**
+	```cpp
+	
+	```
+	Add spacing for better readability.
 
-- The algorithm visits each node exactly once to compute its depth. The time complexity is linear with respect to the number of nodes `n` in the tree, so it is **O(n)**.
+10. **Return Statement**
+	```cpp
+	    return 1 + r;                        
+	```
+	If only the right child exists, return its depth plus 1 for the current node.
 
-#### **Space Complexity: O(h)**
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- The space complexity is dominated by the recursion stack. In the worst case, the tree is completely unbalanced, resulting in a recursion depth of `h = n`, giving a space complexity of **O(n)**.
-- In the best case, if the tree is balanced, the height `h` would be **O(log n)**, and the space complexity would be **O(log n)**.
+The time complexity is O(n), where n is the number of nodes, because we visit each node once.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
 
-### 🔍 **Example Walkthrough**
+The space complexity is O(h), where h is the height of the tree, due to the recursion stack.
 
-Let’s walk through an example to see how the solution works.
+**Happy Coding! 🎉**
 
-#### **Example 1: A Balanced Binary Tree**
-
-Consider the following tree:
-
-```
-        1
-       / \
-      2   3
-     / \
-    4   5
-```
-
-- The root is `1`, and its left child is `2` and right child is `3`.
-- We first call `minDepth(root)` for node `1`.
-- The left subtree (rooted at `2`) and the right subtree (rooted at `3`) are explored.
-- Recursively, the minimum depth of the left and right subtrees is computed:
-  - The left child of node `2` is `4` (leaf), and the right child is `5` (leaf). The minimum depth of this subtree is `2`.
-  - The right subtree rooted at `3` is a leaf node, so its depth is `1`.
-- The minimum depth of the entire tree is `1 + min(2, 1) = 2`.
-
-#### **Example 2: An Unbalanced Binary Tree**
-
-Consider the following tree:
-
-```
-        1
-       /
-      2
-     /
-    3
-   /
-  4
-```
-
-- The root is `1`, and its left child is `2`, which has a left child `3`, and so on.
-- We recursively find the minimum depth of each subtree:
-  - The left subtree continues until node `4`, which is a leaf node.
-- The minimum depth of the entire tree is `4`, since there is only one branch to follow (root → 2 → 3 → 4).
-
----
-
-### 🚀 **Conclusion**
-
-The solution to finding the minimum depth of a binary tree uses **depth-first search (DFS)** to explore each node’s depth recursively. The algorithm computes the depth of each subtree and returns the shortest path to a leaf node. With a time complexity of **O(n)** and a space complexity of **O(h)**, this solution is optimal for handling both balanced and unbalanced trees. The use of recursion makes the solution clean and efficient.
-
-Happy coding! 🌱
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-depth-of-binary-tree/description/)
 

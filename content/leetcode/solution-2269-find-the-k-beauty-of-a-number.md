@@ -14,138 +14,159 @@ img_src = ""
 youtube = "23-y60kKUdY"
 youtube_upload_date="2022-05-14"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/23-y60kKUdY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+The k-beauty of a number is defined as the number of contiguous substrings of length `k` that are divisors of the original number when it is read as a string. Your task is to determine the k-beauty of a given number `num`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer `num` and an integer `k`, where `num` is a number and `k` is the length of substrings to consider.
+- **Example:** `num = 150, k = 2`
+- **Constraints:**
+	- 1 <= num <= 10^9
+	- 1 <= k <= num.length (considering num as a string)
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int divisorSubstrings(int num, int k) {
-        int res = 0, cur = 0, pow = 1;
-        for (int n = num; n > 0; n /= 10) {
-            cur += (n % 10) * pow;
-            if (--k > 0)
-                pow *= 10;
-            else {
-                res += cur && !(num % cur);
-                cur /= 10;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the k-beauty of the number `num`, which is the number of valid divisors formed by its substrings of length `k`.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the number of divisors that can be formed by substrings of length `k` from the number `num`. These substrings should divide `num` without a remainder.
+
+- Convert `num` to a string and extract all substrings of length `k`.
+- Check each substring to see if it is a valid divisor of `num`.
+- Count how many substrings are divisors and return that count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input number `num` will always be positive, and the substring length `k` will not exceed the length of `num`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `num = 150, k = 2`  \
+  **Explanation:** The possible substrings of length 2 are '15', '50', '00'. Among them, '15' and '50' are divisors of 150. Therefore, the k-beauty is 2.
+
+- **Input:** `num = 430043, k = 3`  \
+  **Explanation:** The possible substrings of length 3 are '430', '300', '000', '043', '430', '043'. Only '430' is a divisor of 430043. Therefore, the k-beauty is 1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can iterate through the string representation of `num`, extract substrings of length `k`, convert them to integers, and check if they are divisors of `num`.
+
+### Initial Thoughts 💭
+- We need to extract all possible substrings of length `k` from the string representation of `num`.
+- Each extracted substring must be checked to see if it divides the original number `num`.
+- This can be done efficiently by iterating through the string and checking divisibility. The complexity is directly related to the number of substrings we need to check.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one digit in the input `num`.
+- The solution should handle large numbers efficiently, up to the constraint limits of 10^9.
+- Ensure that substrings representing '0' do not result in division errors since 0 is not a valid divisor.
+- The solution should work within the time limits and handle large numbers efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int divisorSubstrings(int num, int k) {
+    int res = 0, cur = 0, pow = 1;
+    for (int n = num; n > 0; n /= 10) {
+        cur += (n % 10) * pow;
+        if (--k > 0)
+            pow *= 10;
+        else {
+            res += cur && !(num % cur);
+            cur /= 10;
         }
-        return res;        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the number of **divisor substrings** of a given integer `num`. A divisor substring is a substring that divides the number `num` evenly. The problem is broken down as follows:
-
-- You are given an integer `num` and an integer `k`.
-- You need to consider all **k-digit substrings** of the integer `num`.
-- For each substring of length `k`, check if the integer value of that substring divides `num` evenly (i.e., `num % substring == 0`).
-- Count how many such substrings exist and return that count.
-
-### Approach
-
-We approach this problem by breaking it down step by step:
-1. **Extracting Substrings**: We need to extract all possible **substrings** of length `k` from the number `num`.
-2. **Checking Divisibility**: For each **k-digit substring**, we check whether it divides the original number `num` (i.e., if `num % substring == 0`).
-3. **Count the Divisor Substrings**: For each valid substring that divides `num`, we increment the count.
-
-We solve the problem efficiently by processing the number digit by digit rather than generating all substrings explicitly, making the solution optimal.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code:
-
-```cpp
-class Solution {
-public:
-    int divisorSubstrings(int num, int k) {
-        int res = 0, cur = 0, pow = 1;
-        for (int n = num; n > 0; n /= 10) {
-            cur += (n % 10) * pow;  // Build the current substring
-            if (--k > 0)             // Extend the length of the current substring
-                pow *= 10;
-            else {                   // When the substring reaches length k
-                res += cur && !(num % cur);  // Check if it's a divisor of num
-                cur /= 10;            // Remove the first digit from the current substring
-            }
-        }
-        return res;        
-    }
-};
-```
-
-### Step-by-Step Explanation
-
-#### 1. **Initial Variables**
-```cpp
-int res = 0, cur = 0, pow = 1;
-```
-- `res`: This variable stores the result, which is the count of valid divisor substrings.
-- `cur`: This stores the current substring of length `k` as we extract it from the number `num`.
-- `pow`: This keeps track of the positional value of the digits as we build the `cur` substring.
-
-#### 2. **Loop Through the Digits of `num`**
-```cpp
-for (int n = num; n > 0; n /= 10) {
-    cur += (n % 10) * pow;
-```
-- The loop iterates through each digit of the number `num`.
-- `n % 10`: Extracts the last digit of `n` (which is a digit of `num`).
-- `cur += (n % 10) * pow;`: Adds the digit to `cur`, adjusting its position by multiplying by `pow`.
-
-#### 3. **Extend the Substring and Track the Power of Ten**
-```cpp
-if (--k > 0)
-    pow *= 10;
-```
-- We decrement `k` to track how many digits we've added to the current substring. 
-- If `k` is still greater than 0, it means we need to add more digits, and we multiply `pow` by 10 to move to the next positional value (e.g., from ones to tens, tens to hundreds, etc.).
-
-#### 4. **Check Divisibility for Substrings of Length `k`**
-```cpp
-else {
-    res += cur && !(num % cur);
-    cur /= 10;
+    return res;        
 }
 ```
-- When `k` reaches 0, the length of the substring is exactly `k`.
-- We check if `cur` is a valid divisor of `num`:
-  - `cur && !(num % cur)`: This ensures that `cur` is not zero and checks if `num % cur == 0` (i.e., `cur` divides `num`).
-  - If the condition is true, we increment the result `res`.
-- After this check, we divide `cur` by 10 to remove the first digit of the substring. This allows the loop to check the next possible substring of length `k`.
 
-#### 5. **Return the Result**
-```cpp
-return res;
-```
-- Finally, we return the value of `res`, which contains the count of valid divisor substrings.
+This function calculates the number of k-length substrings of a given number `num` that divide `num` evenly. It processes the number by extracting digits and checking divisibility for substrings of length `k`.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int divisorSubstrings(int num, int k) {
+	```
+	This is the function header that defines `divisorSubstrings`, which takes two parameters: an integer `num` and an integer `k`, and returns the count of valid divisors.
 
-#### Time Complexity
-- **O(d)**, where `d` is the number of digits in `num` (i.e., the number of digits in the input integer `num`).
-  - We only need to loop through each digit of `num` once.
-  - For each digit, we perform a constant-time operation (adding digits to `cur`, checking divisibility, and adjusting `cur`).
-  - Therefore, the overall time complexity is linear in terms of the number of digits of `num`.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, cur = 0, pow = 1;
+	```
+	Initializes the variables: `res` to store the result, `cur` to store the current substring, and `pow` to calculate the place value of digits.
 
-#### Space Complexity
-- **O(1)**.
-  - The algorithm only uses a constant amount of extra space: `res`, `cur`, and `pow`.
-  - We do not use any additional data structures that grow with the input size, so the space complexity is constant.
+3. **Loop Start**
+	```cpp
+	    for (int n = num; n > 0; n /= 10) {
+	```
+	Starts a loop that processes each digit of `num` from right to left, using integer division to extract digits.
 
-### Conclusion
+4. **Update Current Substring**
+	```cpp
+	        cur += (n % 10) * pow;
+	```
+	Extracts the last digit of `n` and adds it to `cur`, multiplied by `pow` to account for the place value of the digit.
 
-The solution to this problem involves efficiently extracting k-digit substrings from a number and checking if each substring divides the original number. By processing each digit of the number and dynamically adjusting the substring value, we avoid the need to explicitly generate all possible substrings, ensuring an optimal solution. The algorithm is efficient, with a time complexity of **O(d)**, where `d` is the number of digits in the input number. This makes the solution well-suited for large inputs.
+5. **Condition to Continue Substring Building**
+	```cpp
+	        if (--k > 0)
+	```
+	Decreases `k` and checks if there are still digits to be added to the current substring (i.e., if the substring length is less than `k`).
 
-This approach provides an excellent balance between clarity and performance, making it an effective solution to the problem.
+6. **Place Value Update**
+	```cpp
+	            pow *= 10;
+	```
+	If the substring is not yet of length `k`, updates the place value (`pow`) to multiply the next digit by the correct power of 10.
+
+7. **Condition Block for Divisibility Check**
+	```cpp
+	        else {
+	```
+	If `k` is 0 (i.e., the substring has reached length `k`), the code block checks if the current substring divides `num`.
+
+8. **Divisibility Check**
+	```cpp
+	            res += cur && !(num % cur);
+	```
+	Checks if the current substring `cur` is a divisor of `num`. If so, increments the result `res`. The `cur && !(num % cur)` condition ensures `cur` is non-zero and divides `num` evenly.
+
+9. **Update Current Substring**
+	```cpp
+	            cur /= 10;
+	```
+	Removes the last digit from `cur` after the divisibility check to prepare for the next iteration.
+
+10. **Return Statement**
+	```cpp
+	    return res;        
+	```
+	Returns the final result `res`, which is the count of valid divisors found for `num`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where `n` is the length of the string representation of `num`.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we are only storing the result and iterating through the string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-k-beauty-of-a-number/description/)
 

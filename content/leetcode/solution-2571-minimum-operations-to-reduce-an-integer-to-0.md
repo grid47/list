@@ -14,137 +14,190 @@ img_src = ""
 youtube = "Z14XgQXPw2I"
 youtube_upload_date="2023-02-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Z14XgQXPw2I/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a positive integer n. You can perform the following operation any number of times: Add or subtract a power of 2 from n. Your goal is to find the minimum number of operations required to make n equal to 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a positive integer n.
+- **Example:** `For example, n = 15.`
+- **Constraints:**
+	- 1 <= n <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    int dp(int n) {
-        if(n == 0) return 0;
-        // cout << n << " " ;
-        int ans = 0;
-        if((n & 1) == 0) {
-            ans = dp(n >> 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to make n equal to 0.
+- **Example:** `For n = 15, the output is 4.`
+- **Constraints:**
+	- The result must be an integer representing the minimum number of operations.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of operations required to reduce the number n to 0 by adding or subtracting powers of 2.
+
+- 1. Use dynamic programming (or recursion) to evaluate the minimum number of operations needed to reach 0.
+- 2. In each operation, subtract or add the largest power of 2 that is less than or equal to n.
+{{< dots >}}
+### Problem Assumptions ✅
+- n is always a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For n = 15, the output is 4.`  \
+  **Explanation:** We subtract powers of 2 in the following steps: 15 - 8 = 7, 7 - 4 = 3, 3 - 2 = 1, 1 - 1 = 0. Thus, we need 4 operations.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses dynamic programming or recursion to break down the problem. By analyzing how powers of 2 can be added or subtracted, we can compute the minimum number of steps required.
+
+### Initial Thoughts 💭
+- Powers of 2 (such as 1, 2, 4, 8, etc.) are the key to solving the problem efficiently.
+- Dynamic programming allows us to minimize operations by storing intermediate results to avoid recomputation.
+{{< dots >}}
+### Edge Cases 🌐
+- n will always be positive as per the problem constraints.
+- Ensure that the solution can handle n up to 10^5 efficiently.
+- For n = 1, the answer is 1 since it's already a power of 2.
+- The operations must be minimized, making an efficient approach necessary.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int dp(int n) {
+    if(n == 0) return 0;
+    // cout << n << " " ;
+    int ans = 0;
+    if((n & 1) == 0) {
+        ans = dp(n >> 1);
+    } else {
+        if(((n >> 1) & 1)== 1) {
+        // if(n == 5) cout << "'" << n<< "'";                
+            n += 1;
+            // while((n & 1) == 0) n >>= 1;
+            ans = 1 + dp(n);
         } else {
-            if(((n >> 1) & 1)== 1) {
-            // if(n == 5) cout << "'" << n<< "'";                
-                n += 1;
-                // while((n & 1) == 0) n >>= 1;
-                ans = 1 + dp(n);
-            } else {
-                ans = 1 + dp(n >> 1);
-            }
+            ans = 1 + dp(n >> 1);
         }
-        return ans;
     }
-    
-    int minOperations(int n) {
-        // aggregate consecutive ones
-        // turn of one
-        return dp(n);
-    }
-};
-{{< /highlight >}}
----
+    return ans;
+}
 
-### Problem Statement
+int minOperations(int n) {
+    // aggregate consecutive ones
+    // turn off one
+    return dp(n);
+}
+```
 
-The problem requires finding the minimum number of operations to reduce a given integer `n` to `0`. The operations are as follows:
-- If the current number is even, divide it by 2.
-- If the current number is odd, either add 1 or subtract 1 to make it even.
+This code defines two functions: `dp`, which calculates the minimum number of operations to turn a number to zero using bit manipulation, and `minOperations`, which calls `dp` to calculate the operations for a given number.
 
-The goal is to determine the fewest number of steps required to reduce `n` to `0`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int dp(int n) {
+	```
+	Declares the function `dp`, which takes an integer `n` and recursively calculates the minimum number of operations to reduce it to 0.
 
-### Approach
+2. **Base Case**
+	```cpp
+	    if(n == 0) return 0;
+	```
+	Base case: If `n` is 0, return 0 as no operations are needed.
 
-1. **Recursive Approach with Memoization**:
-   - We can solve this problem using recursion. Starting from `n`, we apply the operations and recursively reduce the value of `n`.
-   - Since we need to consider both addition and subtraction when `n` is odd, it becomes important to evaluate the minimum operations needed for both cases and select the optimal one.
-   
-2. **Base Case**:
-   - When `n == 0`, the number is already reduced to `0`, so the number of operations is `0`.
-   
-3. **Recursive Case**:
-   - If `n` is even, the optimal choice is to divide it by 2 because this operation reduces the number efficiently, halving the value.
-   - If `n` is odd, we need to make it even first. To do this, we have two options:
-     - **Option 1**: Add 1 to `n`, making it even and allowing the division by 2 in the next step.
-     - **Option 2**: Subtract 1 from `n` to make it even and then divide it by 2 in the next step.
-   - The recursive function will then calculate the number of operations for both choices and return the minimum of the two.
+3. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize a variable `ans` to store the result of the recursive operations.
 
-4. **Memoization**:
-   - To improve the performance of the recursive solution, memoization can be used. This technique involves storing the results of subproblems (i.e., the number of operations for a given number) in a table (or a hash map) so that we do not recompute the results for the same input multiple times.
-   
-5. **Minimizing Operations**:
-   - We continue to reduce `n` until we reach `0`. The minimum number of operations is determined by recursively evaluating the operations for each even and odd case.
+4. **Condition Check**
+	```cpp
+	    if((n & 1) == 0) {
+	```
+	Check if the least significant bit of `n` is 0 (i.e., `n` is even).
 
-### Code Breakdown (Step by Step)
+5. **Recursive Call (Even Case)**
+	```cpp
+	        ans = dp(n >> 1);
+	```
+	If `n` is even, recursively call `dp` with `n` right-shifted by 1 bit (equivalent to dividing by 2).
 
-1. **Recursive Function Definition**:
-   ```cpp
-   int dp(int n) {
-       if (n == 0) return 0;
-   ```
-   - The function `dp(n)` takes an integer `n` and returns the minimum number of operations required to reduce `n` to `0`.
-   - The base case is when `n == 0`, in which case no operations are needed, so the function returns `0`.
+6. **Else Block**
+	```cpp
+	    } else {
+	```
+	If `n` is odd, enter the else block.
 
-2. **Handling Even Numbers**:
-   ```cpp
-   if ((n & 1) == 0) {
-       ans = dp(n >> 1);
-   }
-   ```
-   - If `n` is even, the optimal operation is to divide `n` by 2. The bitwise operation `(n & 1) == 0` checks if the number is even (since the least significant bit of an even number is `0`).
-   - The next step is to recursively call `dp(n >> 1)` where `n >> 1` shifts the bits of `n` to the right, effectively dividing it by 2.
+7. **Condition Check (Odd Case)**
+	```cpp
+	        if(((n >> 1) & 1) == 1) {
+	```
+	Check if the second least significant bit of `n` is 1 (i.e., the number is odd and the next bit is also set).
 
-3. **Handling Odd Numbers**:
-   ```cpp
-   else {
-       if (((n >> 1) & 1) == 1) {
-           n += 1;
-           ans = 1 + dp(n);
-       } else {
-           ans = 1 + dp(n >> 1);
-       }
-   }
-   ```
-   - If `n` is odd, we have two possible operations:
-     - **Option 1**: If the number obtained by shifting `n` to the right by one bit (`n >> 1`) is odd, we add 1 to `n` to make it even, then recursively call `dp(n + 1)`.
-     - **Option 2**: If the number obtained by shifting `n` to the right by one bit is even, we subtract 1 from `n` to make it even and then recursively call `dp(n - 1)`.
-   - The result of both operations is incremented by 1 (for the addition or subtraction operation) and the recursive call is made.
+8. **Increment n**
+	```cpp
+	            n += 1;
+	```
+	If the next least significant bit is 1, increment `n` by 1 to make it even, which will facilitate further bit manipulation.
 
-4. **Returning the Result**:
-   ```cpp
-   return ans;
-   ```
-   - The function returns `ans`, which holds the minimum number of operations for reducing `n` to `0`.
+9. **Recursive Call (Odd Case)**
+	```cpp
+	            ans = 1 + dp(n);
+	```
+	If `n` is odd, increment the operation count by 1 and recursively call `dp` on the modified `n`.
 
-5. **Main Function to Call `dp`**:
-   ```cpp
-   int minOperations(int n) {
-       return dp(n);
-   }
-   ```
-   - The function `minOperations(n)` is the entry point of the solution. It simply calls the recursive `dp` function and returns the result.
+10. **Else Block (Even Case)**
+	```cpp
+	        } else {
+	```
+	If the second least significant bit is not set (i.e., `n` is an odd number with the next bit cleared), enter this block.
 
-### Complexity Analysis
+11. **Recursive Call (Even Case)**
+	```cpp
+	            ans = 1 + dp(n >> 1);
+	```
+	If the second least significant bit is 0, right-shift `n` by 1 and recursively calculate the number of operations.
 
-- **Time Complexity**:
-   - Without memoization, the time complexity is exponential, as the function recursively calls itself multiple times for the same values of `n`.
-   - The recurrence tree grows exponentially, leading to a time complexity of \(O(2^n)\), where `n` is the size of the number.
-   - However, with memoization (not implemented here), the complexity would reduce to \(O(\log n)\) as each number would be computed only once.
+12. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the calculated result `ans`.
 
-- **Space Complexity**:
-   - The space complexity is \(O(\log n)\) due to the recursive call stack. This is because each recursive call divides `n` by 2, and the depth of the recursion tree is proportional to the logarithm of `n`.
+13. **Function Declaration**
+	```cpp
+	int minOperations(int n) {
+	```
+	Defines the `minOperations` function that calculates the minimum number of operations to reduce `n` to 0 by calling `dp`.
 
-### Conclusion
+14. **Return Statement**
+	```cpp
+	    return dp(n);
+	```
+	Call the `dp` function with `n` and return the result.
 
-This recursive solution calculates the minimum number of operations required to reduce a number `n` to `0` by using bitwise operations. The approach efficiently handles both even and odd cases, ensuring that the optimal number of operations is selected for each scenario. The solution can be further optimized by adding memoization to store previously computed results, which would significantly improve the time complexity.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n), where n is the input value, due to the logarithmic nature of powers of 2.
+- **Average Case:** O(log n), assuming the recursion depth is bounded by log n.
+- **Worst Case:** O(log n), as the problem is based on powers of 2 and can be solved within log n steps.
+
+The time complexity is logarithmic with respect to the input n, as each operation reduces n significantly.
+
+### Space Complexity 💾
+- **Best Case:** O(log n), if using recursion or memoization.
+- **Worst Case:** O(log n), due to the depth of recursion or the space needed for dynamic programming.
+
+The space complexity is logarithmic because of the recursive calls or memoization used to store intermediate results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-reduce-an-integer-to-0/description/)
 

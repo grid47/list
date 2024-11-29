@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "HAgLH58IgJQ"
 youtube_upload_date="2021-08-18"
 youtube_thumbnail="https://i.ytimg.com/vi/HAgLH58IgJQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,143 +28,161 @@ youtube_thumbnail="https://i.ytimg.com/vi/HAgLH58IgJQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Reverse the digits of a signed 32-bit integer. If the reversed integer is outside the range of a signed 32-bit integer, return 0. You are restricted from using 64-bit integers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a signed 32-bit integer.
+- **Example:** `Input: x = 456`
+- **Constraints:**
+	- -2^31 <= x <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int reverse(int x)
-    {
-        int rev=0, pop;
-        while(x != 0)
-        {
-            pop  = x % 10;
-            x   /= 10;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the reversed integer or 0 if the reversed integer exceeds the 32-bit signed integer range.
+- **Example:** `Output: 654`
+- **Constraints:**
+	- If reversing causes overflow, return 0.
 
-            if( (rev > INT_MAX/10 || (rev == INT_MAX/10 && pop > 7)) || 
-                (rev < INT_MIN/10 || (rev == INT_MIN/10 && pop < -8)) )
-                return 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Reverse the digits of the input integer while ensuring the result does not exceed the 32-bit integer range.
 
-            rev  = rev * 10 + pop;
-        }
-        return  rev;
-    }
-};
-{{< /highlight >}}
----
+- Extract digits one by one using modulus and division.
+- Check for potential overflow before appending the digit to the result.
+- Stop and return 0 if the next step would exceed the integer limits.
+- Return the reversed number.
+{{< dots >}}
+### Problem Assumptions ✅
+- Input integer will always be within the 32-bit signed range.
+- Negative numbers retain their sign after reversal.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: x = 456`  \
+  **Explanation:** Reverse the digits of 456 to get 654.
 
-### 💡 **Reverse Integer Problem** – Let's Reverse It!
+- **Input:** `Input: x = -890`  \
+  **Explanation:** Reverse the digits of -890 to get -98.
 
-The **Reverse Integer** problem is a great exercise to enhance your understanding of integer manipulation and overflow handling. The task is simple: reverse the digits of a 32-bit signed integer `x`, but be mindful of the edge cases where the reversal may cause an overflow. Let’s break it down step by step and explore the best approach.
+- **Input:** `Input: x = 0`  \
+  **Explanation:** The reversed digits of 0 is still 0.
 
-### 📝 **Problem Statement**
+{{< dots >}}
+## Approach 🚀
+Simulate the digit reversal process and manage overflow using checks before appending each digit.
 
-You are given a **32-bit signed integer `x`** and asked to reverse its digits. The catch? If the reversed integer overflows, or the result isn't a valid 32-bit integer, you should return `0`.
-
-### **Constraints**:
-- The reversed integer must be within the valid range for a 32-bit signed integer: **`[-2^31, 2^31 - 1]`**, i.e., from `-2147483648` to `2147483647`.
-
-### Example:
-- **Input**: `x = 123`  
-  **Output**: `321`
-
-- **Input**: `x = -123`  
-  **Output**: `-321`
-
-- **Input**: `x = 120`  
-  **Output**: `21`
-
-- **Input**: `x = 0`  
-  **Output**: `0`
-
-### 🚨 **Overflow Alert**:  
-Reversing large numbers may cause an overflow. For instance, reversing `1534236469` would cause an overflow, and the output should be `0`.
-
-### 🔍 **Approach: Reversing with Care**
-
-To solve this problem, we need to reverse the digits of `x` and check for overflow cases. The algorithm is straightforward but requires careful handling of potential overflows.
-
-1. **Reverse the Digits**: Extract the last digit of `x` using `x % 10`, append it to the reversed number, and divide `x` by `10` to remove the last digit.
-2. **Handle Overflow**: Ensure that the reversed number doesn’t exceed the 32-bit signed integer limits:
-   - **Overflow**: If the result goes beyond `INT_MAX` (`2147483647`), or below `INT_MIN` (`-2147483648`), return `0`.
-3. **Edge Case**: If `x` is `0`, simply return `0`.
-
----
-
-### **Code Breakdown (Step-by-Step)**
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- Reversing the digits is straightforward using modulus and division.
+- Overflow must be checked at each step before modifying the result.
+- Use conditions to handle cases where the next digit causes overflow or underflow.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as input is always provided.
+- Test with inputs close to the integer boundaries like -2147483648 and 2147483647.
+- Test with 0 and single-digit numbers.
+- Ensure that overflow cases return 0 as expected.
+{{< dots >}}
+## Code 💻
 ```cpp
-int rev = 0, pop;
-```
-
-- `rev`: Holds the reversed number as we build it.
-- `pop`: Temporarily stores the last digit of `x` in each iteration.
-
-#### Step 2: Loop to Reverse the Number
-
-```cpp
-while(x != 0)
+int reverse(int x)
 {
-    pop  = x % 10;
-    x   /= 10;
+    int rev=0, pop;
+    while(x != 0)
+    {
+        pop  = x % 10;
+        x   /= 10;
+
+        if( (rev > INT_MAX/10 || (rev == INT_MAX/10 && pop > 7)) || 
+            (rev < INT_MIN/10 || (rev == INT_MIN/10 && pop < -8)) )
+            return 0;
+
+        rev  = rev * 10 + pop;
+    }
+    return  rev;
+}
 ```
 
-- The loop continues as long as `x` is not `0`.
-- `pop = x % 10` extracts the last digit of `x`.
-- `x /= 10` removes the last digit by performing integer division.
+This code implements a function to reverse the digits of an integer `x`.
 
-#### Step 3: Check for Overflow Conditions
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int reverse(int x)
+	```
+	Declare the `reverse` function, which takes an integer `x` as input and returns the reversed integer.
 
-```cpp
-if( (rev > INT_MAX/10 || (rev == INT_MAX/10 && pop > 7)) || 
-    (rev < INT_MIN/10 || (rev == INT_MIN/10 && pop < -8)) )
-    return 0;
-```
+2. **Variable Initialization**
+	```cpp
+	    int rev=0, pop;
+	```
+	Initialize variables `rev` and `pop` to store the reversed integer and the popped digit, respectively.
 
-- **Overflow for Positive Numbers**: If `rev` exceeds `INT_MAX / 10`, multiplying by 10 will overflow. If `rev == INT_MAX / 10`, adding `pop` could exceed `INT_MAX` if `pop > 7`.
-  
-- **Overflow for Negative Numbers**: Similarly, if `rev < INT_MIN / 10`, it would underflow. If `rev == INT_MIN / 10`, adding `pop` could cause underflow if `pop < -8`.
+3. **Loop Iteration**
+	```cpp
+	    while(x != 0)
+	```
+	Start a loop that continues as long as `x` is not zero.
 
-If any of these conditions are met, the function returns `0` to indicate an overflow.
+4. **Modulo Operation**
+	```cpp
+	        pop  = x % 10;
+	```
+	Extract the last digit of `x` using the modulo operator and store it in `pop`.
 
-#### Step 4: Update the Reversed Number
+5. **Integer Division**
+	```cpp
+	        x   /= 10;
+	```
+	Remove the last digit from `x` by integer division.
 
-```cpp
-rev = rev * 10 + pop;
-```
+6. **Conditional Check**
+	```cpp
+	        if( (rev > INT_MAX/10 || (rev == INT_MAX/10 && pop > 7)) || 
+	```
+	Check if the reversed integer `rev` is about to exceed the maximum integer value.
 
-- The reversed number is built by multiplying `rev` by `10` (shifting its digits left) and adding `pop` (the extracted digit).
+7. **Conditional Check**
+	```cpp
+	            (rev < INT_MIN/10 || (rev == INT_MIN/10 && pop < -8)) )
+	```
+	Check if the reversed integer `rev` is about to go below the minimum integer value.
 
-#### Step 5: Return the Result
+8. **Return Value**
+	```cpp
+	            return 0;
+	```
+	If overflow or underflow occurs, return 0.
 
-```cpp
-return rev;
-```
+9. **Mathematical Operations**
+	```cpp
+	        rev  = rev * 10 + pop;
+	```
+	Multiply `rev` by 10 and add the popped digit `pop` to it.
 
-- Once `x` becomes `0`, the loop finishes and returns the reversed number.
+10. **Return Value**
+	```cpp
+	    return  rev;
+	```
+	Return the reversed integer `rev`.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(d)
+- **Average Case:** O(d)
+- **Worst Case:** O(d)
 
-### ⏱️ **Time and Space Complexity**
+Where 'd' is the number of digits in the integer, as each digit is processed once.
 
-#### Time Complexity: **O(log(x))**
-- The time complexity depends on the number of digits in `x`. Since each iteration removes one digit, the loop runs approximately `log(x)` times, where `x` is the absolute value of the number.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity: **O(1)**
-- We are using only a constant amount of space (`rev` and `pop`), so the space complexity is constant.
+The solution uses constant space for variables.
 
----
+**Happy Coding! 🎉**
 
-### 🎯 **Conclusion: Reverse with Precision**
-
-This approach efficiently reverses the digits of an integer while ensuring we handle potential overflow cases. The key takeaway? **Overflow checks** are crucial when working with large integers.
-
-- **Pro Tip**: Always ensure the result stays within the valid 32-bit range to avoid unexpected behaviors.
-- **Practice Makes Perfect**: This problem is an excellent exercise in integer manipulation and overflow handling, so try solving similar problems to sharpen your skills further.
-
-Keep coding, and don’t forget—**consistency** is the key to mastering algorithms! 🚀
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-integer/description/)
 

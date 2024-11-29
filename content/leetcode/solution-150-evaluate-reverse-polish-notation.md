@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ffgmKxRqiMc"
 youtube_upload_date="2024-02-26"
 youtube_thumbnail="https://i.ytimg.com/vi/ffgmKxRqiMc/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,139 +28,206 @@ youtube_thumbnail="https://i.ytimg.com/vi/ffgmKxRqiMc/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of strings tokens that represents an arithmetic expression in Reverse Polish Notation (RPN). Your task is to evaluate the expression and return the result as an integer.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of strings, where each string is either an operand (integer) or an operator (+, -, *, /).
+- **Example:** `tokens = ["3", "4", "-", "5", "*"]`
+- **Constraints:**
+	- 1 <= tokens.length <= 10^4
+	- tokens[i] is either an operator (+, -, *, /) or an integer between [-200, 200].
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int evalRPN(vector<string>& tokens) {
-        stack<int> stk;
-        int n = tokens.size();
-        for(int i = 0; i < n; i++) {
-            if(tokens[i] != "+" &&
-               tokens[i] != "-" &&
-               tokens[i] != "*" &&
-               tokens[i] != "/") {
-                stk.push(stoi(tokens[i]));
-            } else {
-                int x = stk.top(); stk.pop();
-                int y = stk.top(); stk.pop();
-                
-                    if(tokens[i] == "*"){ stk.push(y * x); }
-                    if(tokens[i] == "/"){ stk.push(y / x); }
-                    if(tokens[i] == "+"){ stk.push(y + x); }
-                    if(tokens[i] == "-"){ stk.push(y - x); }
-                
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the result of evaluating the RPN expression.
+- **Example:** `Result = -35`
+- **Constraints:**
+	- The answer can be represented as a 32-bit integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Evaluate the Reverse Polish Notation expression by using a stack to process operands and operators.
+
+- Initialize an empty stack.
+- Iterate through the tokens array:
+-   - If the token is an integer, push it onto the stack.
+-   - If the token is an operator (+, -, *, /), pop the top two elements from the stack, apply the operator, and push the result back onto the stack.
+- At the end of the iteration, the stack will contain only one element, which is the result of the expression.
+{{< dots >}}
+### Problem Assumptions ✅
+- The expression will always be valid and contain no division by zero.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `tokens = ["3", "4", "-", "5", "*"]`  \
+  **Explanation:** First, 3 - 4 = -1, then -1 * 5 = -35. So the result is -35.
+
+- **Input:** `tokens = ["2", "3", "*", "4", "+"]`  \
+  **Explanation:** First, 2 * 3 = 6, then 6 + 4 = 10. So the result is 10.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a stack to handle the Reverse Polish Notation (RPN) expression evaluation.
+
+### Initial Thoughts 💭
+- Using a stack is ideal for processing Reverse Polish Notation expressions, as operators act on the most recent operands.
+- We need to iterate through the tokens, handling both operands and operators, and update the stack as we go.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one token in the input.
+- The solution must handle large inputs efficiently, up to 10^4 tokens.
+- Handle negative numbers and division truncation towards zero correctly.
+- The solution should be efficient in terms of time and space complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+int evalRPN(vector<string>& tokens) {
+    stack<int> stk;
+    int n = tokens.size();
+    for(int i = 0; i < n; i++) {
+        if(tokens[i] != "+" &&
+           tokens[i] != "-" &&
+           tokens[i] != "*" &&
+           tokens[i] != "/") {
+            stk.push(stoi(tokens[i]));
+        } else {
+            int x = stk.top(); stk.pop();
+            int y = stk.top(); stk.pop();
+            
+                if(tokens[i] == "*"){ stk.push(y * x); }
+                if(tokens[i] == "/"){ stk.push(y / x); }
+                if(tokens[i] == "+"){ stk.push(y + x); }
+                if(tokens[i] == "-"){ stk.push(y - x); }
+            
         }
-        return stk.top();
     }
-};
-{{< /highlight >}}
----
-
-### 📝 **Problem Understanding: Reverse Polish Notation (RPN) Evaluation**
-
-In **Reverse Polish Notation (RPN)**, every operator follows its operands, and there is no need for parentheses to dictate the order of operations. We are given an expression in RPN, and the task is to evaluate and return the result.
-
-#### **Example**:
-- Expression: `["2", "1", "+", "3", "*"]`
-- Evaluation: `(2 + 1) * 3 = 9`
-
-#### **Operators**: `+`, `-`, `*`, `/`  
-#### **Operands**: Integers
-
----
-
-### 🔧 **Approach: Using a Stack**
-
-To solve the problem efficiently, we will use a **stack** data structure:
-1. **Push numbers** onto the stack.
-2. **When encountering an operator** (`+`, `-`, `*`, `/`), pop the top two operands from the stack, apply the operator, and push the result back onto the stack.
-3. After processing all tokens, the final result will be the only element left in the stack.
-
-This approach guarantees an efficient evaluation of the expression in **O(n)** time complexity, where `n` is the number of tokens.
-
----
-
-### 🧑‍💻 **Code Breakdown: Step by Step**
-
-#### **Step 1: Initialize the Stack and Iterate Over Tokens**
-
-```cpp
-stack<int> stk;
-int n = tokens.size();
-for (int i = 0; i < n; i++) {
-    ...
+    return stk.top();
 }
 ```
-- We initialize an empty stack `stk` to store the operands.
-- We iterate through each token in the given `tokens` list.
 
-#### **Step 2: Process Each Token**
+This code implements the Reverse Polish Notation (RPN) evaluation algorithm. It processes the given tokens using a stack to perform mathematical operations as specified in the RPN expression. The algorithm supports the four basic arithmetic operations: addition, subtraction, multiplication, and division.
 
-```cpp
-if (tokens[i] != "+" && tokens[i] != "-" && tokens[i] != "*" && tokens[i] != "/") {
-    stk.push(stoi(tokens[i]));
-} else {
-    ...
-}
-```
-- If the token is a number (i.e., not an operator), we convert the string to an integer using `stoi(tokens[i])` and push it onto the stack.
-- If the token is an operator, we perform the corresponding operation (explained below).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int evalRPN(vector<string>& tokens) {
+	```
+	Defines the function `evalRPN` that takes a vector of strings as input (tokens in Reverse Polish Notation) and returns the result of evaluating the expression.
 
-#### **Step 3: Handle Operators**
+2. **Variable Declaration**
+	```cpp
+	    stack<int> stk;
+	```
+	Declares a stack `stk` to store intermediate values while processing the RPN expression.
 
-```cpp
-int x = stk.top(); stk.pop();
-int y = stk.top(); stk.pop();
+3. **Variable Initialization**
+	```cpp
+	    int n = tokens.size();
+	```
+	Initializes `n` to the size of the tokens vector, which represents the number of elements in the RPN expression.
 
-if (tokens[i] == "*") { stk.push(y * x); }
-if (tokens[i] == "/") { stk.push(y / x); }
-if (tokens[i] == "+") { stk.push(y + x); }
-if (tokens[i] == "-") { stk.push(y - x); }
-```
-When an operator is encountered:
-- We pop the top two values from the stack. The first popped value `x` corresponds to the second operand, and `y` corresponds to the first operand.
-- Depending on the operator:
-  - **Multiplication (`*`)**: We calculate `y * x`.
-  - **Division (`/`)**: We calculate integer division `y / x` (truncating toward zero).
-  - **Addition (`+`)**: We calculate `y + x`.
-  - **Subtraction (`-`)**: We calculate `y - x`.
-- After each operation, the result is pushed back onto the stack.
+4. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through each token in the RPN expression.
 
-#### **Step 4: Return the Final Result**
+5. **Conditional Check**
+	```cpp
+	        if(tokens[i] != "+" &&
+	```
+	Checks if the current token is not an operator (i.e., `+`, `-`, `*`, or `/`). If it is not an operator, the token is assumed to be a number.
 
-```cpp
-return stk.top();
-```
-After processing all tokens, the stack will contain one element, which is the final result of the RPN expression. We return this element.
+6. **Conditional Check**
+	```cpp
+	           tokens[i] != "-" &&
+	```
+	Continues the check for other operators to ensure the current token is not one of the arithmetic operators.
 
----
+7. **Conditional Check**
+	```cpp
+	           tokens[i] != "*" &&
+	```
+	Further checks if the current token is not the multiplication operator.
 
-### 📊 **Time and Space Complexity**
+8. **Conditional Check**
+	```cpp
+	           tokens[i] != "/") {
+	```
+	Checks if the token is not the division operator.
 
-#### **Time Complexity**:
-- **O(n)** where `n` is the number of tokens.
-  - We process each token exactly once, either by pushing it onto the stack (if it's a number) or performing an operation (if it's an operator). Each stack operation (push and pop) takes constant time, so the overall time complexity is linear in the number of tokens.
+9. **Stack Operation**
+	```cpp
+	            stk.push(stoi(tokens[i]));
+	```
+	If the token is a number (not an operator), it is converted to an integer using `stoi` and pushed onto the stack.
 
-#### **Space Complexity**:
-- **O(n)** where `n` is the number of tokens.
-  - In the worst case, the stack could hold all the operands before any operators are processed, requiring space proportional to the number of tokens.
+10. **Else Block**
+	```cpp
+	        } else {
+	```
+	If the token is an operator, the algorithm proceeds to perform the corresponding arithmetic operation.
 
----
+11. **Stack Operation**
+	```cpp
+	            int x = stk.top(); stk.pop();
+	```
+	Pops the top value from the stack and assigns it to `x`. This represents the second operand for the operation.
 
-### 🎯 **Conclusion**
+12. **Stack Operation**
+	```cpp
+	            int y = stk.top(); stk.pop();
+	```
+	Pops the next value from the stack and assigns it to `y`. This represents the first operand for the operation.
 
-This solution efficiently evaluates an expression in Reverse Polish Notation (RPN) using a stack. By processing the tokens in a single pass, we achieve a time complexity of **O(n)** and a space complexity of **O(n)**. The stack-based approach accurately models the evaluation of postfix expressions, where operands are pushed onto the stack and operators are applied to the most recently encountered operands.
+13. **Arithmetic Operation**
+	```cpp
+	                if(tokens[i] == "*"){ stk.push(y * x); }
+	```
+	Performs multiplication if the current token is the `*` operator. The result is pushed onto the stack.
 
-This method is both time and space-efficient, making it suitable for evaluating complex RPN expressions quickly.
+14. **Arithmetic Operation**
+	```cpp
+	                if(tokens[i] == "/"){ stk.push(y / x); }
+	```
+	Performs division if the current token is the `/` operator. The result is pushed onto the stack.
 
-### 🔍 **Edge Cases Considered**
-- Correct handling of integer division (truncating towards zero).
-- Efficient processing of large inputs.
+15. **Arithmetic Operation**
+	```cpp
+	                if(tokens[i] == "+"){ stk.push(y + x); }
+	```
+	Performs addition if the current token is the `+` operator. The result is pushed onto the stack.
 
-This approach is optimal and robust, providing a clear solution to evaluating Reverse Polish Notation expressions.
+16. **Arithmetic Operation**
+	```cpp
+	                if(tokens[i] == "-"){ stk.push(y - x); }
+	```
+	Performs subtraction if the current token is the `-` operator. The result is pushed onto the stack.
+
+17. **Return Value**
+	```cpp
+	    return stk.top();
+	```
+	Returns the final result, which is the last remaining value on the stack after processing all the tokens.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We process each token in the input once, so the time complexity is linear in the number of tokens.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case due to the stack used for processing the tokens.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
 

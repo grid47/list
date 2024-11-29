@@ -14,124 +14,145 @@ img_src = ""
 youtube = "Lb4Dp6gwh6g"
 youtube_upload_date="2022-08-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Lb4Dp6gwh6g/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums` of length `n` and an integer array `queries` of length `m`. For each query, return the maximum size of a subsequence that can be selected from `nums` such that the sum of its elements is less than or equal to the query value. A subsequence is derived by deleting some or no elements from the array while keeping the relative order intact.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and an integer array `queries`.
+- **Example:** `Input: nums = [1,3,5,7], queries = [6,12,18]`
+- **Constraints:**
+	- n == nums.length
+	- m == queries.length
+	- 1 <= n, m <= 1000
+	- 1 <= nums[i], queries[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> answerQueries(vector<int> A, vector<int>& queries) {
-        sort(A.begin(), A.end());
-        vector<int> res;
-        for (int i = 1; i < A.size(); ++i)
-            A[i] += A[i - 1];
-        for (int& q: queries)
-            res.push_back(upper_bound(A.begin(), A.end(), q) - A.begin());
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each query, return the maximum size of the subsequence such that its sum is less than or equal to the query value.
+- **Example:** `Output: [2, 3, 4]`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum size of the subsequence for each query where the sum does not exceed the query value.
 
-In this problem, you are given an array `A` of integers and a list of `queries`. Each query represents a target sum, and you need to determine for each query the maximum number of elements from the sorted array `A` whose sum is less than or equal to the value of the query.
+- 1. Sort the array `nums` to easily select the smallest elements first.
+- 2. Compute the prefix sum of the sorted array to get the cumulative sum of elements.
+- 3. For each query, use binary search to find the maximum number of elements whose sum is less than or equal to the query value.
+{{< dots >}}
+### Problem Assumptions ✅
+- Queries are independent and each query needs to be answered individually.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 5, 7], queries = [6, 12, 18]`  \
+  **Explanation:** For the query 6, the subsequence [1, 3] has a sum of 4, which is the largest subsequence with a sum <= 6, hence the answer is 2. For the query 12, the subsequence [1, 3, 5] has a sum of 9, and for 18, the subsequence [1, 3, 5, 7] has a sum of 16, so the answers are [2, 3, 4].
 
-This problem can be efficiently solved using a combination of sorting and binary search. The challenge is to find the number of elements from the array that sum up to a value less than or equal to each query.
+- **Input:** `Input: nums = [2, 4, 6, 8], queries = [5]`  \
+  **Explanation:** For the query 5, the largest subsequence with a sum <= 5 is [2], so the answer is 1.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the array `nums`, calculating the prefix sums, and using binary search to efficiently answer each query.
 
-To solve this problem efficiently, we will use the following approach:
-
-1. **Sort the Array `A`**: First, we sort the array `A`. This will help us later on because the prefix sums will be in increasing order, making it easier to apply binary search.
-
-2. **Compute Prefix Sums**: Next, we calculate the prefix sum for the array `A`. The prefix sum at index `i` represents the sum of all elements in `A` from index `0` to `i`. This will allow us to efficiently find how many elements from the array sum up to less than or equal to a given query.
-
-3. **Binary Search**: For each query, we can use binary search to quickly find the position in the prefix sum array where the prefix sum is greater than the query value. The number of elements that sum up to less than or equal to the query is simply the index of that position in the array.
-
-4. **Result Construction**: For each query, we find the corresponding number of elements and add it to the result list.
-
-Now let's break the approach down step by step to understand it in more detail.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sort the Array `A`
-The first line of the `answerQueries` function sorts the input array `A` in ascending order:
-
+### Initial Thoughts 💭
+- We need to find the maximum subsequence for each query where the sum is within a given limit.
+- Sorting `nums` allows us to efficiently calculate the largest subsequence by accumulating smaller numbers first.
+- Prefix sums can help to efficiently check the sum of any subsequence. Binary search will help find the largest valid subsequence for each query.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` is empty, the answer for each query is 0.
+- Ensure the solution is efficient enough to handle the maximum input size of 1000 elements in `nums`.
+- Handle cases where the elements of `nums` are very large or queries are much smaller than the elements.
+- The binary search must work within O(log n) for each query to ensure overall efficiency.
+{{< dots >}}
+## Code 💻
 ```cpp
-sort(A.begin(), A.end());
+vector<int> answerQueries(vector<int> A, vector<int>& queries) {
+    sort(A.begin(), A.end());
+    vector<int> res;
+    for (int i = 1; i < A.size(); ++i)
+        A[i] += A[i - 1];
+    for (int& q: queries)
+        res.push_back(upper_bound(A.begin(), A.end(), q) - A.begin());
+    return res;
+}
 ```
 
-Sorting the array is crucial because the prefix sums are easier to compute and more useful when the array is ordered. Once sorted, the prefix sum of the array will be an increasing sequence of numbers, which is essential for the binary search in the next step.
+This function answers a series of queries based on a sorted prefix sum of an array.
 
-#### Step 2: Compute Prefix Sums
-After sorting the array, we calculate the prefix sums:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> answerQueries(vector<int> A, vector<int>& queries) {
+	```
+	Function declaration where the input is an array `A` and a reference to an array `queries`, and the return type is a vector of integers.
 
-```cpp
-for (int i = 1; i < A.size(); ++i)
-    A[i] += A[i - 1];
-```
+2. **Sort Array**
+	```cpp
+	    sort(A.begin(), A.end());
+	```
+	Sort the input array `A` in ascending order to prepare for efficient prefix sum calculation.
 
-The idea behind this loop is to update each element in the array `A` such that `A[i]` holds the sum of the elements from index `0` to `i`. This way, `A[i]` will represent the sum of the first `i+1` elements of the sorted array. This transformation allows us to answer each query in constant time.
+3. **Variable Declaration**
+	```cpp
+	    vector<int> res;
+	```
+	Declare a result vector `res` that will store the answers to the queries.
 
-For example, if the sorted array `A` is `[1, 2, 3, 4]`, the prefix sum array will be `[1, 3, 6, 10]`, where each element represents the sum of the elements up to that index in the sorted array.
+4. **Prefix Sum Calculation**
+	```cpp
+	    for (int i = 1; i < A.size(); ++i)
+	```
+	Start a loop from index 1 to calculate the prefix sum by adding each element to its previous one.
 
-#### Step 3: Handle the Queries Using Binary Search
-Once we have the prefix sum array, we handle each query. For each query, we need to find the maximum number of elements from the array whose sum is less than or equal to the query. We can do this efficiently using binary search.
+5. **Prefix Sum Update**
+	```cpp
+	        A[i] += A[i - 1];
+	```
+	Update the current element by adding the value of the previous element, thereby creating a running total.
 
-The line of code that does this is:
+6. **Query Processing**
+	```cpp
+	    for (int& q: queries)
+	```
+	Iterate over each query in the `queries` array.
 
-```cpp
-for (int& q: queries)
-    res.push_back(upper_bound(A.begin(), A.end(), q) - A.begin());
-```
+7. **Binary Search**
+	```cpp
+	        res.push_back(upper_bound(A.begin(), A.end(), q) - A.begin());
+	```
+	Use the `upper_bound` function to find the index of the first element greater than the current query value `q` and push it to the result vector.
 
-Here’s what this line does:
-- `upper_bound(A.begin(), A.end(), q)` performs a binary search to find the first element in the prefix sum array `A` that is strictly greater than the query value `q`. This is because we want to count how many elements in `A` have a sum less than or equal to `q`. The position of the first element greater than `q` will give us the number of elements that sum up to `<= q`.
-- Subtracting `A.begin()` from the result gives us the index (which is also the number of elements) that satisfies the condition.
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the result vector containing the answers to all the queries.
 
-For example, if the prefix sum array is `[1, 3, 6, 10]` and the query is `5`, `upper_bound` will return the iterator pointing to the element `6`. The number of elements whose sum is less than or equal to `5` is 2 (i.e., the first two elements).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) for sorting and O(m log n) for answering queries.
+- **Average Case:** O(n log n) for sorting and O(m log n) for answering queries.
+- **Worst Case:** O(n log n) for sorting and O(m log n) for answering queries.
 
-#### Step 4: Return the Results
-After processing all the queries, we return the `res` vector, which contains the answers to all the queries:
+Sorting the array `nums` takes O(n log n) time, and each query can be answered in O(log n) using binary search.
 
-```cpp
-return res;
-```
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the prefix sums and the result array.
+- **Worst Case:** O(n) for storing the prefix sums and the result array.
 
-### Complexity
+The space complexity is O(n) due to the storage required for the prefix sum and result arrays.
 
-Let’s analyze the time complexity of the solution.
+**Happy Coding! 🎉**
 
-1. **Sorting the Array**: Sorting the array `A` takes `O(n log n)`, where `n` is the length of the array.
-
-2. **Computing Prefix Sums**: The loop that computes the prefix sums runs in `O(n)` time, where `n` is the length of the array.
-
-3. **Handling Queries**: For each query, we perform a binary search on the prefix sum array, which takes `O(log n)` time. Since there are `m` queries, the total time for processing all queries is `O(m log n)`.
-
-Thus, the overall time complexity of the solution is:
-
-\[
-O(n \log n + m \log n)
-\]
-
-Here, `n` is the size of the array and `m` is the number of queries.
-
-### Space Complexity
-
-The space complexity of the solution is `O(n + m)`, where:
-- `O(n)` space is used for storing the sorted array `A` and its prefix sum.
-- `O(m)` space is used for storing the result vector `res`.
-
-### Conclusion
-
-This approach leverages sorting, prefix sums, and binary search to efficiently solve the problem. By sorting the array and using the prefix sum array, we reduce the problem to a series of binary searches for each query, which ensures that the solution is efficient even for large inputs. With a time complexity of `O(n log n + m log n)`, the solution is optimal for the given problem and works well for a variety of input sizes.
-
-In conclusion, this algorithm efficiently answers queries about prefix sums using well-known techniques like sorting and binary search, making it both time and space efficient.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-subsequence-with-limited-sum/description/)
 

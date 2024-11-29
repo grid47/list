@@ -14,108 +14,137 @@ img_src = ""
 youtube = "xBpYKQzjjnM"
 youtube_upload_date="2023-04-17"
 youtube_thumbnail="https://i.ytimg.com/vi/xBpYKQzjjnM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of integers representing the number of candies each kid has. You are also given an integer representing the number of extra candies. Your task is to return a boolean array indicating whether, after adding all the extra candies to each kid's total, they will have the greatest number of candies among all the kids.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers `candies` where each element represents the number of candies a kid has, and an integer `extraCandies` representing the extra candies to be distributed.
+- **Example:** `[3, 5, 8, 2], extraCandies = 4`
+- **Constraints:**
+	- 2 <= n <= 100
+	- 1 <= candies[i] <= 100
+	- 1 <= extraCandies <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<bool> kidsWithCandies(vector<int>& candies, int ext) {
-        int n = candies.size();
-        vector<bool> ans(n, false);
-        int mx = *max_element(candies.begin(), candies.end());
-        for(int i =0; i < n; i++)
-            ans[i] = (candies[i]+ ext>= mx);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean array of length `n` where each element is true if, after receiving the extra candies, that kid will have the greatest number of candies, otherwise false.
+- **Example:** `[true, true, true, false]`
+- **Constraints:**
+	- The output array has the same length as the input `candies` array.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine whether each kid, after receiving all the extra candies, will have as many or more candies than every other kid.
 
-The problem is to determine which kids can have the greatest number of candies after receiving some extra candies. You are given an array representing the number of candies each kid has, and a number representing the extra candies each kid can receive. The task is to find out if each kid can have the maximum number of candies compared to others after they receive the extra candies.
+- Step 1: Find the kid with the maximum number of candies.
+- Step 2: For each kid, check if adding `extraCandies` makes their total candies greater than or equal to the maximum number of candies.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be valid, with the number of kids being at least 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[3, 5, 8, 2], extraCandies = 4`  \
+  **Explanation:** Kid 1 will have 7 candies, Kid 2 will have 9 candies (greatest), Kid 3 will have 12 candies (greatest), and Kid 4 will have 6 candies.
 
-### Approach
+- **Input:** `[6, 2, 7, 5], extraCandies = 3`  \
+  **Explanation:** Kid 1 will have 9 candies (greatest), Kid 2 will have 5 candies, Kid 3 will have 10 candies (greatest), and Kid 4 will have 8 candies.
 
-The solution involves a straightforward approach:
-1. **Identify the Maximum Candies**: First, we need to find the maximum number of candies that any kid has. This will serve as the benchmark for determining whether a kid can reach this maximum after receiving extra candies.
-2. **Check Each Kid**: For each kid, we will check if the sum of their current candies and the extra candies they receive is greater than or equal to the maximum number of candies identified in the first step.
-3. **Store Results**: Store the results in a boolean array, where each entry corresponds to whether the respective kid can have the maximum number of candies after receiving the extra candies.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we first find the maximum number of candies any kid has. Then, for each kid, we check if their total candies after adding the extra candies will be greater than or equal to this maximum.
 
-### Code Breakdown (Step by Step)
+### Initial Thoughts 💭
+- The solution can be approached by finding the maximum number of candies first.
+- Then, we can compare each kid's total after adding the extra candies to the maximum.
+- The overall time complexity of this solution should be linear with respect to the number of kids.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that there will be at least two kids, so there will never be empty inputs.
+- Ensure the solution can handle the upper limits of `n` and the values of candies efficiently.
+- Consider scenarios where many kids have the same number of candies or when all kids receive the extra candies.
+- Ensure the solution works within time and space constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<bool> kidsWithCandies(vector<int>& candies, int ext) {
+    int n = candies.size();
+    vector<bool> ans(n, false);
+    int mx = *max_element(candies.begin(), candies.end());
+    for(int i =0; i < n; i++)
+        ans[i] = (candies[i]+ ext>= mx);
+    return ans;
+}
+```
 
-Now let’s analyze the provided code to see how it implements this approach effectively:
+The `kidsWithCandies` function takes in a vector `candies` representing the number of candies each child has and an integer `ext` representing the extra candies. The function returns a vector of boolean values where each value indicates whether the child can have the greatest number of candies after receiving the extra candies.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<bool> kidsWithCandies(vector<int>& candies, int ext) {
+	```
+	Defines the function `kidsWithCandies` that takes a vector `candies` and an integer `ext` and returns a vector of booleans indicating whether each child can have the greatest number of candies after receiving the extra candies.
 
-   - We declare a class named `Solution` which contains the method for solving the problem.
+2. **Variable Initialization**
+	```cpp
+	    int n = candies.size();
+	```
+	Initializes the variable `n` to hold the size of the `candies` vector, representing the number of children.
 
-2. **Function Declaration**:
-   ```cpp
-   vector<bool> kidsWithCandies(vector<int>& candies, int ext) {
-   ```
+3. **Vector Initialization**
+	```cpp
+	    vector<bool> ans(n, false);
+	```
+	Initializes a boolean vector `ans` of size `n` with all values set to `false`. This vector will store whether each child can have the greatest number of candies.
 
-   - The method `kidsWithCandies` takes a reference to a vector of integers `candies`, representing the number of candies each kid currently has, and an integer `ext`, representing the extra candies each kid can receive. It returns a vector of booleans.
+4. **Max Element Calculation**
+	```cpp
+	    int mx = *max_element(candies.begin(), candies.end());
+	```
+	Finds the maximum value in the `candies` vector, representing the greatest number of candies any child has.
 
-3. **Variable Initialization**:
-   ```cpp
-   int n = candies.size();
-   vector<bool> ans(n, false);
-   ```
+5. **Loop Constructs**
+	```cpp
+	    for(int i =0; i < n; i++)
+	```
+	Starts a loop to iterate over each element in the `candies` vector.
 
-   - We first store the size of the `candies` vector in `n`.
-   - We then initialize a boolean vector `ans` of size `n` with all values set to `false`. This vector will hold the result for each kid.
+6. **Condition Check**
+	```cpp
+	        ans[i] = (candies[i] + ext >= mx);
+	```
+	For each child, checks if the sum of their candies and the extra candies (`ext`) is greater than or equal to the maximum number of candies `mx`. If true, the corresponding entry in the `ans` vector is set to `true`.
 
-4. **Find the Maximum Candies**:
-   ```cpp
-   int mx = *max_element(candies.begin(), candies.end());
-   ```
+7. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the `ans` vector, which contains `true` or `false` for each child, indicating whether they can have the greatest number of candies.
 
-   - Using the `max_element` function from the Standard Library, we find the maximum value in the `candies` vector and store it in the variable `mx`. This value represents the highest number of candies held by any kid.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of kids.
+- **Average Case:** O(n), as we have to iterate through all the kids.
+- **Worst Case:** O(n), since we check each kid's total candies.
 
-5. **Evaluate Each Kid**:
-   ```cpp
-   for(int i = 0; i < n; i++)
-       ans[i] = (candies[i] + ext >= mx);
-   ```
+The time complexity is linear in the number of kids, i.e., O(n).
 
-   - We iterate through each kid using a for loop. 
-   - For each index `i`, we check if the sum of `candies[i]` (the current candies of the kid) and `ext` (the extra candies) is greater than or equal to `mx` (the maximum number of candies).
-   - The result of this condition is stored in `ans[i]`. If it’s true, `ans[i]` will be set to `true`, indicating that this kid can have the greatest number of candies. Otherwise, it remains `false`.
+### Space Complexity 💾
+- **Best Case:** O(n), as we store the result array.
+- **Worst Case:** O(n), where n is the number of kids.
 
-6. **Return Statement**:
-   ```cpp
-   return ans;
-   }
-   ```
+The space complexity is linear due to the result array.
 
-   - Finally, the method returns the boolean vector `ans`, which contains the results for each kid.
+**Happy Coding! 🎉**
 
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the number of kids (or the size of the `candies` vector). This is because we iterate through the list of candies to find the maximum and then again to fill the results.
-- **Space Complexity**: The space complexity is also \(O(n)\) due to the auxiliary space used for the result vector `ans`.
-
-### Conclusion
-
-The `kidsWithCandies` function effectively solves the problem of determining which kids can achieve the maximum number of candies after receiving additional candies. The implementation is efficient, making it suitable for a large number of kids and their respective candy counts.
-
-#### Key Takeaways:
-
-- **Utilization of STL Functions**: The solution demonstrates the use of the Standard Template Library (STL) in C++, specifically `max_element`, which simplifies the process of finding the maximum value in a collection.
-- **Boolean Logic**: The use of boolean conditions to determine if a kid can reach the maximum number of candies is a straightforward but powerful approach to this type of problem.
-- **Efficiency**: The approach is efficient in both time and space, ensuring that it performs well even with larger input sizes.
-
-Overall, the provided solution is not only correct but also well-structured and efficient, showcasing fundamental programming techniques that are widely applicable in competitive programming and software development.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/)
 

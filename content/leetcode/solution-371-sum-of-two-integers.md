@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "gVUrDV4tZfY"
 youtube_upload_date="2021-10-20"
 youtube_thumbnail="https://i.ytimg.com/vi/gVUrDV4tZfY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,150 +28,93 @@ youtube_thumbnail="https://i.ytimg.com/vi/gVUrDV4tZfY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two integers `a` and `b`. Return their sum without using the `+` or `-` operators. You must implement the solution using bitwise operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers `a` and `b`.
+- **Example:** `Input: a = 5, b = 7`
+- **Constraints:**
+	- -1000 <= a, b <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getSum(int a, int b) {
-        return b == 0? a: getSum(a^b, (a&b)<<1);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of `a` and `b` using bitwise operations without using the `+` or `-` operators.
+- **Example:** `Output: 12`
+- **Constraints:**
+	- The output should be the sum of the two integers using bitwise operations.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the sum of two integers without using the arithmetic operators `+` or `-`.
 
-In this challenge, we're asked to calculate the sum of two integers, `a` and `b`, without using the typical `+` or `-` arithmetic operators. Instead, we're going to solve this by utilizing bitwise operations—how cool is that? 😎
+- 1. Use the bitwise XOR operation (`^`) to add the numbers without carrying over.
+- 2. Use the bitwise AND operation (`&`) and shift the result left by one bit to handle the carry.
+- 3. Recursively repeat the process until there is no carry left.
+{{< dots >}}
+### Problem Assumptions ✅
+- The integers `a` and `b` are within the specified range of -1000 to 1000.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: a = 5, b = 7
+Output: 12`  \
+  **Explanation:** The sum of 5 and 7 is computed using bitwise operations. The final result is 12.
 
----
+{{< dots >}}
+## Approach 🚀
+The approach uses bitwise operations to add two integers without using `+` or `-`.
 
-### 🧠 Key Insights
-
-To tackle this problem, we need to understand how numbers are added at the **bit level**. Here’s how it works in binary addition:
-
-1. **XOR (exclusive OR)**: This operation gives us the sum of two bits **without considering the carry**. It’s like adding the bits as if there’s no carryover.
-2. **AND**: The AND operation helps us **detect where the carry** is. If both bits are 1, there’s a carry.
-
-By combining these two operations, we can compute the sum iteratively without using `+`.
-
----
-
-### 🔍 Approach
-
-The algorithm works by repeatedly simulating the addition process with the help of bitwise operations:
-
-1. **XOR (`^`)**: The XOR operation computes the sum of two numbers **without carrying over**.
-2. **AND (`&`)**: This operation helps **detect where the carry** occurs.
-3. **Left shift (`<<`)**: Once we know where the carry is, we shift it left by one bit to move it to the right place for the next addition.
-
-Here’s how the algorithm goes step by step:
-
-- **Step 1**: Compute the partial sum using `a^b` (XOR).
-- **Step 2**: Find the carry using `(a&b)`, then shift it left to the correct position with `<<`.
-- **Step 3**: Repeat this process until there’s no carry left (i.e., `b == 0`).
-
-Once the carry becomes zero, we have our result!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s walk through the code:
-
-#### Step 1: Base Case Check
+### Initial Thoughts 💭
+- Bitwise XOR can add numbers without considering carry.
+- Bitwise AND followed by a left shift can handle the carry during addition.
+- We can recursively apply the bitwise operations until there is no carry left, which ensures the correct sum.
+{{< dots >}}
+### Edge Cases 🌐
+- An input where both `a` and `b` are 0 should return 0.
+- Ensure the solution handles the largest and smallest inputs within the given constraints.
+- Consider the behavior when one of the numbers is negative or zero.
+- The solution should work efficiently within the constraints, handling up to the maximum and minimum values for `a` and `b`.
+{{< dots >}}
+## Code 💻
 ```cpp
-return b == 0? a : getSum(a^b, (a&b)<<1);
+int getSum(int a, int b) {
+    return b == 0? a: getSum(a^b, (a&b)<<1);
+}
 ```
-- If `b` is zero, the addition is done! We return `a` because no further calculation is needed.
-- If `b` isn’t zero, we call the function recursively with the new arguments:
-  - `a^b`: The sum without carry.
-  - `(a&b)<<1`: The carry, shifted to the right position.
 
-#### Step 2: XOR Operation (`a^b`)
-- The XOR operation gives the **sum without carry**:
-  - If the bits are the same (0,0 or 1,1), the result is 0.
-  - If the bits are different (0,1 or 1,0), the result is 1.
-- Example:
-  - `5 ^ 3 = 6` (because `0101 ^ 0011 = 0110`)
+The `getSum` method calculates the sum of two integers `a` and `b` without using the `+` operator. It uses bitwise operations: XOR (`^`) for addition without carry and AND (`&`) for calculating the carry, followed by a left shift to add the carry to the result.
 
-#### Step 3: AND and Left Shift Operation (`(a&b)<<1`)
-- The AND operation finds where the carry happens:
-  - `a&b`: A 1 where both `a` and `b` have 1 at the same position.
-  - Then, we shift the result left by one bit to move the carry to the right position for the next iteration.
-- Example:
-  - `(5 & 3) = 1`, and shifting left by one bit gives `2`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Declaration**
+	```cpp
+	int getSum(int a, int b) {
+	```
+	This line declares the method `getSum`, which takes two integers `a` and `b`, and returns their sum using bitwise operations.
 
-#### Step 4: Recursion
-- The function calls itself recursively with the new values:
-  - `a^b`: The new sum without carry.
-  - `(a&b)<<1`: The new carry, shifted to the correct position.
-- This continues until `b == 0`, and then the result is returned.
+2. **Recursive Call**
+	```cpp
+	    return b == 0? a: getSum(a^b, (a&b)<<1);
+	```
+	The function uses recursion to compute the sum. If `b` is zero, it returns `a` as the result. Otherwise, it recursively calls `getSum`, using the XOR of `a` and `b` for the sum and the left-shifted AND of `a` and `b` for the carry.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) if the sum is obtained in the first iteration.
+- **Average Case:** O(k), where k is the number of bits in the input values (bounded by the size of the integers).
+- **Worst Case:** O(k) as each recursive step involves bitwise operations on the integers.
 
-### 📊 Example Walkthrough
+The time complexity is determined by the number of bits in the input integers, as the process continues until there is no carry.
 
-Let’s walk through an example with `a = 5` and `b = 3`:
+### Space Complexity 💾
+- **Best Case:** O(1) as the solution requires a fixed amount of space for the operations.
+- **Worst Case:** O(1) because the space used is constant, regardless of the input size.
 
-1. **First Iteration**:
-   - `a = 5`, `b = 3`
-   - `a^b = 6` (sum without carry)
-   - `(a&b)<<1 = 2` (carry)
-   - Call `getSum(6, 2)`
+The space complexity is constant as the solution does not use additional space proportional to the input size.
 
-2. **Second Iteration**:
-   - `a = 6`, `b = 2`
-   - `a^b = 4` (sum without carry)
-   - `(a&b)<<1 = 4` (carry)
-   - Call `getSum(4, 4)`
+**Happy Coding! 🎉**
 
-3. **Third Iteration**:
-   - `a = 4`, `b = 4`
-   - `a^b = 0` (sum without carry)
-   - `(a&b)<<1 = 8` (carry)
-   - Call `getSum(0, 8)`
-
-4. **Fourth Iteration**:
-   - `a = 0`, `b = 8`
-   - `a^b = 8` (sum without carry)
-   - `(a&b)<<1 = 0` (carry)
-   - Call `getSum(8, 0)`
-
-5. **Base Case**:
-   - `a = 8`, `b = 0`
-   - Since `b == 0`, we return `a = 8`.
-
-The sum of `5` and `3` is `8`. 🎉
-
----
-
-### 📈 Time Complexity
-
-The time complexity of this algorithm is **O(log(max(a, b)))**. This is because each recursive call reduces the number of bits in the carry (`b`) by one. Since the number of bits in `a` and `b` is proportional to **log(max(a, b))**, the recursion depth is logarithmic.
-
----
-
-### 🛠️ Space Complexity
-
-The space complexity is **O(log(max(a, b)))**, as the recursion depth is proportional to the number of bits in `a` and `b`. Each recursive call consumes space on the call stack, leading to logarithmic space complexity.
-
----
-
-### 🏁 Conclusion
-
-This bitwise approach is a brilliant way to perform addition without using the standard `+` operator! By using XOR for the sum and AND (with a left shift) for the carry, we efficiently compute the result in **logarithmic time**. 🏆
-
-The algorithm is not only **elegant** but also **efficient**, demonstrating the power of bitwise operations. So next time you encounter a problem that seems to require regular arithmetic, remember that bitwise tricks can often come to the rescue! 🔥
-
----
-
-### 🎯 Quick Recap:
-
-- **Key Operations**: XOR for sum, AND for carry.
-- **Time Complexity**: O(log(max(a, b))).
-- **Space Complexity**: O(log(max(a, b))).
-- **Motivational Note**: You can solve this problem without relying on the typical addition operator, showing just how versatile bitwise operations can be! Keep exploring new techniques to make your solutions even more efficient. 💪
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-two-integers/description/)
 

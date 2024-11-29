@@ -14,151 +14,250 @@ img_src = ""
 youtube = "HZVMmKR0jZw"
 youtube_upload_date="2023-09-24"
 youtube_thumbnail="https://i.ytimg.com/vi/HZVMmKR0jZw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array maxHeights of n integers. Your task is to build n towers in the coordinate line where the height of the i-th tower is between 1 and maxHeights[i]. The configuration is beautiful if the heights form a mountain array, where heights increase to a peak and then decrease afterward. Return the maximum possible sum of the heights of a beautiful tower configuration.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers representing the maximum heights of the towers. You need to find a configuration of towers where the heights form a mountain shape.
+- **Example:** `maxHeights = [3, 5, 4, 1, 6]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= maxHeights[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maximumSumOfHeights(vector<int>& A) {
-        int n = A.size();
-        vector<long long> left(n), stack = {-1};
-        long long res = 0, cur = 0;
-        for (int i = 0; i < n; i++) {
-            while (stack.size() > 1 && A[stack.back()] > A[i]) {
-                int j = stack.back();
-                stack.pop_back();
-                cur -= 1L * (j - stack.back()) * A[j];
-            }
-            cur += 1L * (i - stack.back()) * A[i];
-            stack.push_back(i);
-            left[i] = cur;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum of the heights of the towers in a valid mountain configuration.
+- **Example:** `For input maxHeights = [3, 5, 4, 1, 6], the output is 14.`
+- **Constraints:**
 
-        stack = {n};
-        cur = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            while (stack.size() > 1 && A[stack.back()] > A[i]) {
-                int j = stack.back();
-                stack.pop_back();
-                cur -= 1L * -(j - stack.back()) * A[j];
-            }
-            cur += 1L * -(i - stack.back()) * A[i];
-            stack.push_back(i);
-            res = max(res, left[i] + cur - A[i]);
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum sum of tower heights such that the arrangement forms a valid mountain shape.
 
-        return res;
-    }
-};
-{{< /highlight >}}
----
+- For each possible peak, calculate the sum of the heights of the non-decreasing and non-increasing parts of the mountain array.
+- Iterate through the array to compute the possible configurations and find the one with the maximum sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will not be empty and will contain at least one tower.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For input maxHeights = [3, 5, 4, 1, 6], the output is 14.`  \
+  **Explanation:** The configuration heights = [3, 4, 4, 1, 2] is a valid mountain where the sum of heights is maximized.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+We will compute the maximum sum of the heights by iterating through all possible peaks and adjusting the tower heights accordingly.
 
-The problem requires us to calculate the maximum sum of heights of a subsequence derived from an array `A`. In this problem, the height of any subsequence is the sum of elements, where the contribution of each element is adjusted by the minimum height to the left and right of it. The task is to find the maximum sum of such a subsequence considering every element in the array and adjusting the heights in a way that maximizes the sum.
-
-### Approach
-
-To solve this problem efficiently, we employ the **monotonic stack** technique. The idea is to iterate over the array and for each element, calculate the maximum sum of heights considering it as the peak of the subsequence. We maintain two passes over the array to compute the sum of heights to the left and right of each element.
-
-The stack helps in maintaining the minimum value at any point by efficiently determining which elements can "extend" the height subsequence. The goal is to compute the maximum sum possible for any subsequence formed by these heights.
-
-### Code Breakdown
-
-#### Step 1: Initialize Variables
+### Initial Thoughts 💭
+- To form a mountain array, we need to consider the non-decreasing and non-increasing subsequences.
+- The sum of the tower heights must be maximized while respecting the maximum height constraints.
+- The challenge is finding an efficient way to calculate the sum for each possible peak.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty as per the constraints.
+- Ensure the solution handles large arrays efficiently (n up to 100,000).
+- If all towers have the same maximum height, any configuration with a peak in the middle will form a valid mountain.
+- The solution must respect the maximum height constraints while maximizing the sum.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = A.size();
-vector<long long> left(n), stack = {-1};
-long long res = 0, cur = 0;
-```
-- `n` stores the size of the input array `A`.
-- `left` is a vector used to store the sum of heights to the left of each index.
-- `stack` is initialized with `-1` to represent the boundary for processing elements.
-- `res` will store the final result, i.e., the maximum sum of heights found during the iterations.
-- `cur` keeps track of the current sum as we iterate through the array.
-
-#### Step 2: Compute Left Heights Using Monotonic Stack
-```cpp
-for (int i = 0; i < n; i++) {
-    while (stack.size() > 1 && A[stack.back()] > A[i]) {
-        int j = stack.back();
-        stack.pop_back();
-        cur -= 1L * (j - stack.back()) * A[j];
+long long maximumSumOfHeights(vector<int>& A) {
+    int n = A.size();
+    vector<long long> left(n), stack = {-1};
+    long long res = 0, cur = 0;
+    for (int i = 0; i < n; i++) {
+        while (stack.size() > 1 && A[stack.back()] > A[i]) {
+            int j = stack.back();
+            stack.pop_back();
+            cur -= 1L * (j - stack.back()) * A[j];
+        }
+        cur += 1L * (i - stack.back()) * A[i];
+        stack.push_back(i);
+        left[i] = cur;
     }
-    cur += 1L * (i - stack.back()) * A[i];
-    stack.push_back(i);
-    left[i] = cur;
+
+    stack = {n};
+    cur = 0;
+    for (int i = n - 1; i >= 0; i--) {
+        while (stack.size() > 1 && A[stack.back()] > A[i]) {
+            int j = stack.back();
+            stack.pop_back();
+            cur -= 1L * -(j - stack.back()) * A[j];
+        }
+        cur += 1L * -(i - stack.back()) * A[i];
+        stack.push_back(i);
+        res = max(res, left[i] + cur - A[i]);
+    }
+
+    return res;
 }
 ```
-- The first loop is responsible for calculating the heights to the left of each index. This is done by iterating from left to right across the array.
-- For each element `A[i]`, we adjust the stack by popping elements from the stack that are greater than `A[i]`. This ensures that the stack always maintains elements in increasing order.
-- The `cur` value is updated with the contribution of each element. The `1L * (i - stack.back()) * A[i]` term calculates the area (height * width) formed by the current element as a "rectangle."
-- We then store the current sum of heights for the left side in `left[i]`.
 
-#### Step 3: Compute Right Heights and Maximize Result
-```cpp
-stack = {n};
-cur = 0;
-for (int i = n - 1; i >= 0; i--) {
-    while (stack.size() > 1 && A[stack.back()] > A[i]) {
-        int j = stack.back();
-        stack.pop_back();
-        cur -= 1L * -(j - stack.back()) * A[j];
-    }
-    cur += 1L * -(i - stack.back()) * A[i];
-    stack.push_back(i);
-    res = max(res, left[i] + cur - A[i]);
-}
-```
-- In the second pass, we calculate the heights to the right of each index. This loop iterates from right to left across the array.
-- Similarly to the left pass, we maintain a stack and update the current sum (`cur`). The negative signs in the terms are used to handle the right side and maintain a correct calculation of heights.
-- The key step here is to calculate `left[i] + cur - A[i]`. This combines the sum of heights to the left of `i` with the sum to the right, adjusting for the contribution of the current element `A[i]` (as it was already considered in both directions).
+This function calculates the maximum sum of heights in an array using dynamic programming and a stack-based approach.
 
-#### Step 4: Return the Result
-```cpp
-return res;
-```
-- After both passes, `res` contains the maximum sum of heights that can be achieved. We return this as the final answer.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	long long maximumSumOfHeights(vector<int>& A) {
+	```
+	Defines the function signature, initializing the parameters and starting the function.
 
-### Example Walkthrough
+2. **Initialization**
+	```cpp
+	    int n = A.size();
+	```
+	Calculates the size of the array A and stores it in variable n.
 
-Let's go through an example to illustrate the process.
+3. **Initialization**
+	```cpp
+	    vector<long long> left(n), stack = {-1};
+	```
+	Initializes a vector `left` to store partial results and a stack with a single element -1.
 
-**Example 1**:
-Input: `A = [1, 3, 2, 4]`
+4. **Variables**
+	```cpp
+	    long long res = 0, cur = 0;
+	```
+	Declares two variables: `res` to store the final result and `cur` to store intermediate values.
 
-- **First Pass (Left Heights)**:
-  - We start with the stack initialized to `[-1]`.
-  - For `i = 0` (A[0] = 1), the stack becomes `[-1, 0]`. The left height sum is `1`.
-  - For `i = 1` (A[1] = 3), the stack becomes `[-1, 0, 1]`. The left height sum is updated to `1 + 3 = 4`.
-  - For `i = 2` (A[2] = 2), we pop elements until the stack contains `[0]`. The left height sum is updated to `1 + 3 + 2 = 6`.
-  - For `i = 3` (A[3] = 4), the stack becomes `[0, 1, 2, 3]`. The left height sum is updated to `1 + 3 + 2 + 4 = 10`.
+5. **Loop**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	Starts a loop over the array from index 0 to n-1.
 
-- **Second Pass (Right Heights)**:
-  - We start with the stack initialized to `[n]`.
-  - For `i = 3` (A[3] = 4), the stack becomes `[4, 3]`. The right height sum is `4`.
-  - For `i = 2` (A[2] = 2), the stack becomes `[4, 2]`. The right height sum is updated to `4 + 2 = 6`.
-  - For `i = 1` (A[1] = 3), the stack becomes `[4, 1]`. The right height sum is updated to `6 + 3 = 9`.
-  - For `i = 0` (A[0] = 1), the stack becomes `[4, 0]`. The right height sum is updated to `9 + 1 = 10`.
+6. **Stack Operation**
+	```cpp
+	        while (stack.size() > 1 && A[stack.back()] > A[i]) {
+	```
+	Checks if the stack contains more than one element and if the current element is smaller than the top element of the stack.
 
-- **Final Result**: The maximum sum of heights is `10`.
+7. **Stack Operation**
+	```cpp
+	            int j = stack.back();
+	```
+	Stores the index of the top element of the stack in variable `j`.
 
-### Complexity
+8. **Stack Operation**
+	```cpp
+	            stack.pop_back();
+	```
+	Removes the top element from the stack.
 
-#### Time Complexity:
-- **O(n)**: Both passes over the array each take linear time. The use of the monotonic stack ensures that each element is pushed and popped from the stack at most once, making each pass linear in complexity.
+9. **Calculation**
+	```cpp
+	            cur -= 1L * (j - stack.back()) * A[j];
+	```
+	Updates the `cur` variable by subtracting the contribution of the removed element.
 
-#### Space Complexity:
-- **O(n)**: The space used by the stack and the `left` array is proportional to the size of the input array.
+10. **Calculation**
+	```cpp
+	        cur += 1L * (i - stack.back()) * A[i];
+	```
+	Updates the `cur` variable by adding the contribution of the current element.
 
-### Conclusion
+11. **Stack Operation**
+	```cpp
+	        stack.push_back(i);
+	```
+	Adds the current index to the stack.
 
-The solution efficiently computes the maximum sum of heights by utilizing a monotonic stack to keep track of the minimum heights on both the left and right of each element in the array. This allows us to calculate the sum of heights in linear time, making the solution optimal for large input sizes. The two-pass approach ensures that we can calculate the contribution of each element in both directions, and the overall complexity is kept to **O(n)**, which is optimal for this type of problem.
+12. **Calculation**
+	```cpp
+	        left[i] = cur;
+	```
+	Stores the current value of `cur` in the `left` vector at index `i`.
+
+13. **Initialization**
+	```cpp
+	    stack = {n};
+	```
+	Reinitializes the stack with a single element `n`.
+
+14. **Initialization**
+	```cpp
+	    cur = 0;
+	```
+	Resets the `cur` variable to 0.
+
+15. **Loop**
+	```cpp
+	    for (int i = n - 1; i >= 0; i--) {
+	```
+	Starts a second loop over the array from index n-1 to 0.
+
+16. **Stack Operation**
+	```cpp
+	        while (stack.size() > 1 && A[stack.back()] > A[i]) {
+	```
+	Checks if the stack contains more than one element and if the current element is smaller than the top element of the stack.
+
+17. **Stack Operation**
+	```cpp
+	            int j = stack.back();
+	```
+	Stores the index of the top element of the stack in variable `j`.
+
+18. **Stack Operation**
+	```cpp
+	            stack.pop_back();
+	```
+	Removes the top element from the stack.
+
+19. **Calculation**
+	```cpp
+	            cur -= 1L * -(j - stack.back()) * A[j];
+	```
+	Updates the `cur` variable by subtracting the contribution of the removed element.
+
+20. **Calculation**
+	```cpp
+	        cur += 1L * -(i - stack.back()) * A[i];
+	```
+	Updates the `cur` variable by adding the contribution of the current element.
+
+21. **Stack Operation**
+	```cpp
+	        stack.push_back(i);
+	```
+	Adds the current index to the stack.
+
+22. **Calculation**
+	```cpp
+	        res = max(res, left[i] + cur - A[i]);
+	```
+	Updates the `res` variable with the maximum value between the current `res` and the sum of `left[i]`, `cur`, and `A[i]`.
+
+23. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the final result stored in `res`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, O(n), as we process each tower at most twice.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the need for storing intermediate results in arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/beautiful-towers-ii/description/)
 

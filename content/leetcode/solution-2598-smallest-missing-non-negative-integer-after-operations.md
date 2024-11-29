@@ -14,105 +14,169 @@ img_src = ""
 youtube = "NztQwlNn1XA"
 youtube_upload_date="2023-03-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/NztQwlNn1XA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums` and a positive integer `value`. In one operation, you can either add or subtract the integer `value` from any element of the array `nums`. The MEX (Minimum Excluded Value) of an array is the smallest non-negative integer that does not appear in the array. Your task is to determine the maximum possible MEX of the array `nums` after performing the mentioned operations any number of times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and an integer `value`.
+- **Example:** `For `nums = [3, -10, 9, 15, 8]` and `value = 4`.`
+- **Constraints:**
+	- 1 <= nums.length, value <= 10^5
+	- -10^9 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findSmallestInteger(vector<int>& nums, int value) {
-        map<int, int> mp;
-        int n = nums.size();
-        for(int i = 0; i < n; i++) {
-            mp[(nums[i] < 0? (nums[i] % value + value)%value: nums[i]%value)]++;
-        }
-        int idx = 0, mn = INT_MAX;
-        for(int i = 0; i < value; i++) {
-            if(mp[i] < mn) {
-                idx = i;
-                mn = mp[i];
-            }
-        }
-        return mn * value + idx;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum possible MEX of the array `nums` after applying the allowed operations.
+- **Example:** `For `nums = [3, -10, 9, 15, 8]` and `value = 4`, the output should be `5`.`
+- **Constraints:**
+	- The result will be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to apply the allowed operations to maximize the MEX of the array `nums`.
+
+- 1. For each element in `nums`, calculate the possible new values after adding or subtracting `value` any number of times.
+- 2. Track the occurrences of all numbers after the operations.
+- 3. Find the smallest non-negative integer not present in the array to determine the MEX.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` contains integers between -10^9 and 10^9.
+- The value of `value` is always a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `nums = [3, -10, 9, 15, 8]` and `value = 4``  \
+  **Explanation:** By applying the operations as described, you can achieve a maximum MEX of 5.
+
+- **Input:** `For `nums = [1, -15, 5, 14, 7]` and `value = 5``  \
+  **Explanation:** After applying the allowed operations, the maximum MEX of the array is 3.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves tracking the possible new values after applying the allowed operations and determining the MEX of the array.
+
+### Initial Thoughts 💭
+- The operation can add or subtract `value` multiple times.
+- The number of possible distinct numbers in the array will be limited by the size of the array and the value of `value`.
+- Efficiently track which numbers are present in the modified array.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always contain at least one element as per the problem constraints.
+- The solution should handle large arrays efficiently, with `nums.length` up to 10^5.
+- If `value` is large relative to the elements in `nums`, fewer operations may be needed.
+- Handle negative and large positive values in `nums` efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int findSmallestInteger(vector<int>& nums, int value) {
+    map<int, int> mp;
+    int n = nums.size();
+    for(int i = 0; i < n; i++) {
+        mp[(nums[i] < 0? (nums[i] % value + value)%value: nums[i]%value)]++;
     }
-};
-{{< /highlight >}}
----
+    int idx = 0, mn = INT_MAX;
+    for(int i = 0; i < value; i++) {
+        if(mp[i] < mn) {
+            idx = i;
+            mn = mp[i];
+        }
+    }
+    return mn * value + idx;
+}
+```
 
-### Problem Statement
+This function finds the smallest integer that can be formed by adjusting the values in the input vector 'nums' based on a modular operation with 'value'.
 
-Given an array of integers `nums` and an integer `value`, the goal is to find the smallest integer that can be formed by applying a transformation to the elements in `nums`. Each element `num` in `nums` undergoes the transformation of calculating its remainder when divided by `value` (i.e., `num % value`). However, there is a special rule for negative numbers: instead of directly using the negative remainder, we apply the transformation `((num % value) + value) % value` to get a non-negative remainder. The final answer should be the integer formed by adding the minimum remainder to the smallest remainder count, multiplied by `value`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findSmallestInteger(vector<int>& nums, int value) {
+	```
+	Defines the function 'findSmallestInteger' that takes an array of integers 'nums' and an integer 'value' as inputs.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a map 'mp' that will be used to count the occurrences of the modular results of the elements in 'nums'.
 
-The problem can be broken down into a few distinct steps:
+3. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	Calculates the size of the 'nums' vector and stores it in the variable 'n'.
 
-1. **Understanding the Transformation**: For each number in `nums`, we need to compute its remainder when divided by `value`. The key difference here is how negative numbers are handled. Normally, for negative numbers, the remainder might be negative, but we want it to be positive. This can be done by applying the formula `((num % value) + value) % value`.
+4. **Loop to Populate Map**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterates over each element in the 'nums' vector.
 
-2. **Counting Remainders**: The next step is to count how often each remainder appears. Since the remainders are between `0` and `value-1` (for positive and negative numbers), a map (`mp`) is used to keep track of the frequency of each remainder.
+5. **Map Update**
+	```cpp
+	        mp[(nums[i] < 0? (nums[i] % value + value)%value: nums[i]%value)]++;
+	```
+	Calculates the modular value of each element in 'nums' (adjusting for negative values) and increments its count in the map 'mp'.
 
-3. **Finding the Minimum Frequency**: After counting the frequency of each remainder, the next task is to identify the remainder with the minimum frequency. This will determine the smallest number we can form, which is the remainder with the least frequency, multiplied by `value` and then added to the smallest remainder itself.
+6. **Variable Initialization**
+	```cpp
+	    int idx = 0, mn = INT_MAX;
+	```
+	Initializes two variables, 'idx' to 0 and 'mn' to the maximum possible integer value, to track the smallest count and its index.
 
-4. **Final Calculation**: The final answer is calculated by multiplying the smallest remainder's frequency (`mn`) by `value` and then adding the corresponding remainder `idx` that has the minimum count.
+7. **Loop to Find Minimum**
+	```cpp
+	    for(int i = 0; i < value; i++) {
+	```
+	Iterates over the possible modular values (from 0 to value-1).
 
-### Code Breakdown (Step by Step)
+8. **Condition to Update Min**
+	```cpp
+	        if(mp[i] < mn) {
+	```
+	Checks if the count for the current modular value is less than the current minimum count.
 
-#### 1. **Initialization**:
-   ```cpp
-   map<int, int> mp;
-   int n = nums.size();
-   ```
-   - We create a map `mp` to store the count of each remainder.
-   - We also retrieve the size of the `nums` array, `n`, to iterate through the numbers.
+9. **Update Min Index**
+	```cpp
+	            idx = i;
+	```
+	Updates the index 'idx' to the current modular value if it has a smaller count.
 
-#### 2. **Calculate Remainders**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       mp[(nums[i] < 0? (nums[i] % value + value)%value: nums[i]%value)]++;
-   }
-   ```
-   - This loop iterates through the `nums` array. For each number `nums[i]`, we compute the remainder when divided by `value`.
-   - For negative numbers, we apply the formula `((num % value) + value) % value` to ensure that the remainder is non-negative.
-   - After calculating the remainder, we update the count of that remainder in the map `mp`.
+10. **Update Min Count**
+	```cpp
+	            mn = mp[i];
+	```
+	Updates the minimum count 'mn' to the count of the current modular value.
 
-#### 3. **Find the Minimum Frequency**:
-   ```cpp
-   int idx = 0, mn = INT_MAX;
-   for(int i = 0; i < value; i++) {
-       if(mp[i] < mn) {
-           idx = i;
-           mn = mp[i];
-       }
-   }
-   ```
-   - We initialize `idx` to track the remainder with the minimum count, and `mn` to store the minimum frequency found.
-   - We then iterate through all possible remainders from `0` to `value-1` and check if the current remainder has a lower frequency than the previously found minimum. If so, we update `idx` and `mn`.
+11. **Return Result**
+	```cpp
+	    return mn * value + idx;
+	```
+	Returns the smallest integer formed by multiplying the minimum count 'mn' by the 'value' and adding the index 'idx'.
 
-#### 4. **Final Calculation and Return**:
-   ```cpp
-   return mn * value + idx;
-   ```
-   - Once we have identified the remainder `idx` with the minimum count (`mn`), we calculate the final result by multiplying the count `mn` by `value` and adding the remainder `idx` to it. This gives the smallest integer formed by applying the transformation and counting the remainders.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity Analysis
+The time complexity is linear in terms of the size of the array `nums`.
 
-- **Time Complexity**:
-  - **Iterating over `nums`**: We iterate through the entire array `nums`, which takes \(O(n)\) time, where `n` is the size of the array.
-  - **Updating the Map**: For each number, we perform a constant-time operation to compute its remainder and update the map. This operation is \(O(1)\) for each element in `nums`, leading to a total of \(O(n)\).
-  - **Iterating over the remainders**: After processing the numbers, we iterate through all possible remainders from `0` to `value-1` to find the one with the minimum frequency. This takes \(O(value)\) time.
-  - Thus, the overall time complexity is \(O(n + value)\), which is linear with respect to the size of the input array and the possible range of remainders.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-- **Space Complexity**:
-  - The space complexity is determined by the space used to store the map `mp`, which holds the frequency of remainders. Since there are at most `value` possible remainders, the space complexity is \(O(value)\).
-  - The overall space complexity is \(O(value)\), which is the space needed to store the map and a few integer variables.
+The space complexity is proportional to the number of elements in `nums`.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently computes the smallest integer formed by applying the transformation and counting the remainders for each element in the array `nums`. By using a map to track the frequency of each remainder and then selecting the remainder with the minimum frequency, we can quickly calculate the final result. The algorithm runs in \(O(n + value)\) time, which makes it scalable even for larger input sizes. The space complexity is also efficient at \(O(value)\), making the approach well-suited for the problem constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description/)
 

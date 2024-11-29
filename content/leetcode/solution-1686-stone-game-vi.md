@@ -14,157 +14,208 @@ img_src = ""
 youtube = "D5uS2MXRhfk"
 youtube_upload_date="2020-12-12"
 youtube_thumbnail="https://i.ytimg.com/vi/D5uS2MXRhfk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice and Bob take turns playing a game with a pile of `n` stones, each having a value assigned by both players. They play optimally and aim to maximize their total points by choosing stones with the highest value for each player.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two arrays are given: `aliceValues` and `bobValues`. Both arrays represent how Alice and Bob value the stones, respectively. Each player will pick stones optimally to maximize their score.
+- **Example:** `aliceValues = [3, 2], bobValues = [1, 4]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= aliceValues[i], bobValues[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int stoneGameVI(vector<int>& alice, vector<int>& bob) {
-        int ap = 0, bp = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `1` if Alice wins, `-1` if Bob wins, or `0` if the game results in a draw.
+- **Example:** `Output: 1`
+- **Constraints:**
 
-        int n = alice.size();
-        
-        /*
-            Take out stones with max points (alice[i] + bob[i])
-            It either increase our winning chance
-            or reduces the opponents winning chance
-        */
-        
-        priority_queue<pair<int,int>, vector<pair<int,int>>, less<pair<int,int>>> pq;
-        
-        for(int i = 0; i < n; i++) {
-            pq.push({alice[i] + bob[i], i});
-        }
-        
-        bool isA = true;
-        while(!pq.empty()) {
-            auto tmp = pq.top();
-            pq.pop();
-            if(isA) {
-                ap += alice[tmp.second];
-            } else {
-                bp += bob[tmp.second];
-            }
-            isA = !isA;
-        }
-        // cout << ap << " " << bp;
-        return ap > bp ? 1 : ap < bp ? -1: 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the optimal moves for Alice and Bob and determine the winner based on the total scores.
+
+- Use a priority queue to prioritize stones based on their combined value to both players.
+- Simulate the turns, assigning points to Alice and Bob based on the stone they pick, starting with Alice.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both players play optimally and have full knowledge of each other's values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: aliceValues = [5, 1], bobValues = [3, 6]`  \
+  **Explanation:** Alice starts first and chooses the stone with value 5. Bob then takes the stone with value 6. The final score comparison shows Bob winning.
+
+{{< dots >}}
+## Approach 🚀
+The goal is to maximize the total points for each player by taking the stones with the highest combined value first.
+
+### Initial Thoughts 💭
+- Both players can see each other's values, and they will prioritize stones based on their combined value.
+- Simulate the game using a priority queue where each turn picks the stone with the maximum combined value for both players.
+{{< dots >}}
+### Edge Cases 🌐
+- The input arrays should never be empty as per the problem constraints.
+- For large inputs (up to 10^5 stones), ensure that the solution remains efficient.
+- If all the values in both arrays are the same, the game will always result in a draw.
+- The solution must efficiently handle the maximum array size of 10^5.
+{{< dots >}}
+## Code 💻
+```cpp
+int stoneGameVI(vector<int>& alice, vector<int>& bob) {
+    int ap = 0, bp = 0;
+
+    int n = alice.size();
+    
+    /*
+        Take out stones with max points (alice[i] + bob[i])
+        It either increase our winning chance
+        or reduces the opponents winning chance
+    */
+    
+    priority_queue<pair<int,int>, vector<pair<int,int>>, less<pair<int,int>>> pq;
+    
+    for(int i = 0; i < n; i++) {
+        pq.push({alice[i] + bob[i], i});
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is about simulating a game between two players, Alice and Bob, who take turns picking stones from a set of piles. Each pile `i` has two values: `alice[i]` and `bob[i]`, representing the points Alice and Bob would earn, respectively, if they pick stones from that pile. The objective is to determine the outcome of the game after all stones have been picked, where:
-
-- If Alice has more points, the result should be `1`.
-- If Bob has more points, the result should be `-1`.
-- If both players have equal points, the result should be `0`.
-
-The players will always choose the pile that maximizes their potential score, considering both their own score and minimizing the opponent's score.
-
-### Approach
-
-To determine the outcome, the approach is as follows:
-
-1. **Aggregate Points**: Calculate the total points for each pile by summing `alice[i]` and `bob[i]`. This helps in determining which pile has the highest combined score.
-
-2. **Use a Priority Queue**: Utilize a max-heap (priority queue) to always access the pile with the highest combined score efficiently.
-
-3. **Simulate the Game**:
-   - Alternate turns between Alice and Bob.
-   - On Alice's turn, she will pick the pile with the maximum points available for her.
-   - On Bob's turn, he will do the same.
-   - Update their scores accordingly after each turn.
-
-4. **Determine the Result**: After all piles have been picked, compare their final scores and return the appropriate result.
-
-### Code Breakdown (Step by Step)
-
-Here is a step-by-step breakdown of the implementation:
-
-```cpp
-class Solution {
-public:
-    int stoneGameVI(vector<int>& alice, vector<int>& bob) {
-```
-- **Class Definition**: We define a class named `Solution` and create a public method `stoneGameVI`, which takes two vectors of integers, `alice` and `bob`, as parameters.
-
-```cpp
-        int ap = 0, bp = 0;
-
-        int n = alice.size();
-```
-- **Variable Initialization**:
-  - We initialize `ap` and `bp` to store Alice's and Bob's scores, respectively.
-  - `n` holds the number of piles, which is the size of the `alice` vector.
-
-```cpp
-        priority_queue<pair<int,int>, vector<pair<int,int>>, less<pair<int,int>>> pq;
-        
-        for(int i = 0; i < n; i++) {
-            pq.push({alice[i] + bob[i], i});
+    
+    bool isA = true;
+    while(!pq.empty()) {
+        auto tmp = pq.top();
+        pq.pop();
+        if(isA) {
+            ap += alice[tmp.second];
+        } else {
+            bp += bob[tmp.second];
         }
-```
-- **Priority Queue Setup**:
-  - We define a priority queue `pq` that stores pairs of integers. The first element of the pair is the sum of points from both players for each pile, and the second element is the index of the pile.
-  - We iterate through all piles and push the combined scores into the priority queue.
-
-```cpp
-        bool isA = true;
-        while(!pq.empty()) {
-            auto tmp = pq.top();
-            pq.pop();
-```
-- **Game Simulation**:
-  - A boolean `isA` is initialized to track whose turn it is, starting with Alice.
-  - We enter a loop that continues until the priority queue is empty.
-
-```cpp
-            if(isA) {
-                ap += alice[tmp.second];
-            } else {
-                bp += bob[tmp.second];
-            }
-            isA = !isA;
-```
-- **Score Updating**:
-  - Depending on whose turn it is, we add the corresponding points from the selected pile to either Alice's or Bob's score using the index `tmp.second`.
-  - After each selection, we toggle the `isA` flag to switch turns.
-
-```cpp
-        return ap > bp ? 1 : ap < bp ? -1 : 0;
+        isA = !isA;
     }
-};
+    // cout << ap << " " << bp;
+    return ap > bp ? 1 : ap < bp ? -1: 0;
+}
 ```
-- **Result Evaluation**:
-  - Once all piles are processed, we return `1` if Alice has a higher score, `-1` if Bob has a higher score, and `0` if their scores are equal.
 
-### Complexity
+This function implements the stone game where two players, Alice and Bob, take turns picking stones. The goal is to maximize the player's score by selecting stones with the highest combined value (alice[i] + bob[i]). The function returns 1 if Alice wins, -1 if Bob wins, or 0 if it's a draw.
 
-- **Time Complexity**: The overall time complexity is \(O(n \log n)\), where \(n\) is the number of piles. This is due to the \(O(n)\) time required to insert elements into the priority queue and the \(O(\log n)\) time for each extraction.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int stoneGameVI(vector<int>& alice, vector<int>& bob) {
+	```
+	Define the function 'stoneGameVI' that takes two vectors 'alice' and 'bob', representing the points for each player on each stone, and returns the outcome of the game.
 
-- **Space Complexity**: The space complexity is \(O(n)\) because we are storing the combined scores of each pile in the priority queue.
+2. **Variable Initialization**
+	```cpp
+	    int ap = 0, bp = 0;
+	```
+	Initialize variables 'ap' and 'bp' to 0. These will hold the cumulative scores for Alice and Bob, respectively.
 
-### Conclusion
+3. **Size Calculation**
+	```cpp
+	    int n = alice.size();
+	```
+	Determine the size of the 'alice' vector, which is the same as the 'bob' vector, and store it in variable 'n'.
 
-This solution efficiently simulates the game between Alice and Bob using a priority queue to prioritize the selection of piles based on their total points. The algorithm ensures that both players play optimally, maximizing their scores while minimizing their opponent's score. 
+4. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<pair<int,int>, vector<pair<int,int>>, less<pair<int,int>>> pq;
+	```
+	Declare a priority queue 'pq' to store pairs of integers, where the first value is the combined score of a stone (alice[i] + bob[i]) and the second value is the index of the stone. The queue is sorted in descending order based on the combined score.
 
-Key highlights include:
+5. **Loop Through Stones**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop to iterate through all the stones.
 
-1. **Optimal Play**: The priority queue guarantees that both players will always pick the best possible option available to them at any turn.
+6. **Push to Priority Queue**
+	```cpp
+	        pq.push({alice[i] + bob[i], i});
+	```
+	Push a pair consisting of the combined score of the stone (alice[i] + bob[i]) and its index into the priority queue.
 
-2. **Efficiency**: The use of the priority queue allows for efficient score calculations, making the algorithm scalable for larger inputs.
+7. **Turn Indicator**
+	```cpp
+	    bool isA = true;
+	```
+	Initialize a boolean variable 'isA' to true, indicating that it's Alice's turn to pick a stone.
 
-3. **Game Simulation**: The solution effectively models the game dynamics while maintaining simplicity and clarity in code.
+8. **While Loop**
+	```cpp
+	    while(!pq.empty()) {
+	```
+	Start a while loop that continues until the priority queue is empty, meaning all stones have been picked.
 
-In summary, the code provides a clear, efficient, and effective way to determine the outcome of the stone game between Alice and Bob by leveraging optimal strategies in score maximization.
+9. **Get Top Stone**
+	```cpp
+	        auto tmp = pq.top();
+	```
+	Get the stone with the highest combined score (top of the priority queue).
+
+10. **Pop from Priority Queue**
+	```cpp
+	        pq.pop();
+	```
+	Remove the top stone from the priority queue.
+
+11. **Check Turn**
+	```cpp
+	        if(isA) {
+	```
+	If it's Alice's turn (isA is true), proceed to update Alice's score.
+
+12. **Update Alice's Score**
+	```cpp
+	            ap += alice[tmp.second];
+	```
+	Add the score of the current stone for Alice (alice[tmp.second]) to her total score (ap).
+
+13. **Else Condition**
+	```cpp
+	        } else {
+	```
+	If it's not Alice's turn (it's Bob's turn), update Bob's score.
+
+14. **Update Bob's Score**
+	```cpp
+	            bp += bob[tmp.second];
+	```
+	Add the score of the current stone for Bob (bob[tmp.second]) to his total score (bp).
+
+15. **Toggle Turn**
+	```cpp
+	        isA = !isA;
+	```
+	Toggle the turn indicator (isA) to switch turns between Alice and Bob.
+
+16. **Return Statement**
+	```cpp
+	    return ap > bp ? 1 : ap < bp ? -1: 0;
+	```
+	Return 1 if Alice has a higher score than Bob, -1 if Bob has a higher score, or 0 if their scores are equal (a draw).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) due to the priority queue operations.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) to store the priority queue and other intermediate data.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stone-game-vi/description/)
 

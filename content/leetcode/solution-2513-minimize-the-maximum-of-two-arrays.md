@@ -14,174 +14,243 @@ img_src = ""
 youtube = "g6L-jnW2n_4"
 youtube_upload_date="2022-12-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/g6L-jnW2n_4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two integers `divisor1` and `divisor2`, and two integers `uniqueCnt1` and `uniqueCnt2`, construct two arrays such that: `arr1` contains `uniqueCnt1` distinct integers that are not divisible by `divisor1`, `arr2` contains `uniqueCnt2` distinct integers that are not divisible by `divisor2`, and no integer appears in both arrays. Return the smallest possible maximum integer in either array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given 4 integers: `divisor1`, `divisor2`, `uniqueCnt1`, and `uniqueCnt2`.
+- **Example:** `divisor1 = 3, divisor2 = 5, uniqueCnt1 = 2, uniqueCnt2 = 1`
+- **Constraints:**
+	- 2 <= divisor1, divisor2 <= 105
+	- 1 <= uniqueCnt1, uniqueCnt2 < 109
+	- 2 <= uniqueCnt1 + uniqueCnt2 <= 109
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    bool isPossible(long long mx, long long div1, long long div2, long long unq1, long long unq2) {
-        long long a = mx / div1;
-        long long a_ = mx - a;
-        long long b = mx / div2;
-        long long b_ = mx - b;
-        long long aib = mx / (long long)lcm(div1, div2);
-        long long aub = a + b - aib;
-        long long a_ib_ = mx - aub;
-        long long neededA = (a_ - a_ib_ >= unq1) ? 0: unq1 - (a_ - a_ib_);
-        long long neededB = (b_ - a_ib_ >= unq2) ? 0: unq2 - (b_ - a_ib_);        
-        
-        return a_ib_ >= neededA + neededB;
-    }
-    
-    int minimizeSet(int div1, int div2, int unq1, int unq2) {
-        
-        long long l = 1, r = (long long) pow(10, 17), ans = 1;
-        
-        
-        while(l <= r) {
-            long long mid = l + (r - l + 1) / 2;
-            if(isPossible(mid, div1, div2, unq1, unq2)) {
-                ans = mid;
-                r = mid - 1;
-            } else {
-                l = mid + 1;
-            }
-        }
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest maximum integer that can appear in either array.
+- **Example:** `3`
+- **Constraints:**
+	- The answer will always be a positive integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Use binary search to find the minimum possible maximum integer that satisfies the conditions.
 
-The task is to minimize a set such that the set contains a certain number of unique numbers divisible by two given integers, `div1` and `div2`. Specifically, we are given:
-- `div1` and `div2`, two divisors.
-- `unq1` and `unq2`, the number of unique integers divisible by `div1` and `div2`, respectively.
+- Perform a binary search for the minimum possible maximum number.
+- For each mid-value, check if it's possible to fill both arrays with the required number of distinct integers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The divisors and counts are valid and within the provided constraints.
+- The solution must be efficient enough to handle large input sizes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `divisor1 = 2, divisor2 = 7, uniqueCnt1 = 1, uniqueCnt2 = 3`  \
+  **Explanation:** The arrays arr1 = [1] and arr2 = [2, 3, 4] satisfy all the conditions. The maximum value is 4.
 
-Our goal is to find the smallest integer `mx` such that:
-- There are at least `unq1` integers in the range `[1, mx]` that are divisible by `div1`.
-- There are at least `unq2` integers in the range `[1, mx]` that are divisible by `div2`.
+{{< dots >}}
+## Approach 🚀
+Use binary search to find the smallest number x such that we can fill both arrays with the required integers.
 
-Additionally, there might be some overlap between the two sets of numbers divisible by `div1` and `div2`. We aim to minimize the number `mx` while ensuring these conditions are met.
-
-### Approach
-
-We can solve this problem using **binary search** combined with **mathematical counting** techniques. Here's how:
-
-1. **Basic Counting Strategy**:
-   - For any given `mx`, the number of integers divisible by `div1` is `mx // div1`, where `//` represents integer division.
-   - Similarly, the number of integers divisible by `div2` is `mx // div2`.
-   - The number of integers divisible by both `div1` and `div2` can be counted using the Least Common Multiple (LCM) of `div1` and `div2`. The number of integers divisible by both `div1` and `div2` in the range `[1, mx]` is `mx // lcm(div1, div2)`.
-
-2. **Handling the Overlap**:
-   - If there is overlap (i.e., a number is divisible by both `div1` and `div2`), we need to adjust the counts to avoid double-counting. The total number of valid numbers for each divisor can be calculated as:
-     - `a = mx // div1` (total numbers divisible by `div1`).
-     - `b = mx // div2` (total numbers divisible by `div2`).
-     - The overlap is `aib = mx // lcm(div1, div2)` (numbers divisible by both).
-     - The combined set of numbers divisible by `div1` or `div2` is `a + b - aib`.
-
-3. **Binary Search for Optimization**:
-   - We use binary search to find the smallest `mx` that satisfies the constraints. For a given `mx`, we calculate how many unique numbers divisible by `div1` and `div2` can be included. If it's possible to satisfy the condition, we try smaller values of `mx` to minimize it.
-   - The binary search range starts with `l = 1` and `r = 10^17` (a large upper bound). We check the midpoint (`mid = (l + r) // 2`) in each iteration to decide whether we need to look for smaller or larger values.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Helper Function `isPossible`
+### Initial Thoughts 💭
+- Binary search can be used to minimize the maximum integer.
+- The challenge is calculating the number of valid integers in each range for a given x.
+- Consider how to compute the number of integers divisible by each divisor and the overlap of divisibility between the two.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs expected in this problem.
+- The solution must handle inputs where uniqueCnt1 + uniqueCnt2 is close to the upper limit.
+- Divisors and counts should always be positive integers within the provided bounds.
+- The solution must work within the given time and space limits for large inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 bool isPossible(long long mx, long long div1, long long div2, long long unq1, long long unq2) {
-    long long a = mx / div1;  // Number of numbers divisible by div1
-    long long a_ = mx - a;    // Numbers not divisible by div1
-    long long b = mx / div2;  // Number of numbers divisible by div2
-    long long b_ = mx - b;    // Numbers not divisible by div2
-    long long aib = mx / lcm(div1, div2);  // Numbers divisible by both div1 and div2
-    long long aub = a + b - aib;  // Total numbers divisible by div1 or div2
-    long long a_ib_ = mx - aub;  // Numbers neither divisible by div1 nor div2
-
-    // Calculate how many more numbers are needed for each set
-    long long neededA = (a_ - a_ib_ >= unq1) ? 0 : unq1 - (a_ - a_ib_);
-    long long neededB = (b_ - a_ib_ >= unq2) ? 0 : unq2 - (b_ - a_ib_);
-
-    // Check if the total count of remaining numbers can accommodate the additional needed numbers
+    long long a = mx / div1;
+    long long a_ = mx - a;
+    long long b = mx / div2;
+    long long b_ = mx - b;
+    long long aib = mx / (long long)lcm(div1, div2);
+    long long aub = a + b - aib;
+    long long a_ib_ = mx - aub;
+    long long neededA = (a_ - a_ib_ >= unq1) ? 0: unq1 - (a_ - a_ib_);
+    long long neededB = (b_ - a_ib_ >= unq2) ? 0: unq2 - (b_ - a_ib_);        
+    
     return a_ib_ >= neededA + neededB;
 }
-```
-- **Inputs**:
-  - `mx`: The current midpoint value in the binary search.
-  - `div1`, `div2`: The divisors.
-  - `unq1`, `unq2`: The required counts of unique numbers divisible by `div1` and `div2`.
-- **Process**:
-  - First, we calculate how many numbers are divisible by `div1`, `div2`, and both using integer division.
-  - We also calculate how many numbers are not divisible by either.
-  - Then, we compute how many more numbers are needed to satisfy the unique count requirements for `div1` and `div2`.
-- **Return**:
-  - If there are enough numbers available to meet the requirements, the function returns `true`. Otherwise, it returns `false`.
 
-#### Step 2: Main Function `minimizeSet`
-```cpp
 int minimizeSet(int div1, int div2, int unq1, int unq2) {
+    
     long long l = 1, r = (long long) pow(10, 17), ans = 1;
-
-    // Binary search to find the smallest value of mx that satisfies the condition
-    while (l <= r) {
-        long long mid = l + (r - l + 1) / 2;  // Calculate the midpoint
-        if (isPossible(mid, div1, div2, unq1, unq2)) {  // Check if it's possible to satisfy the condition
-            ans = mid;  // If possible, store the result and look for smaller values
-            r = mid - 1;  // Move the upper bound to search for a smaller valid mx
+    
+    
+    while(l <= r) {
+        long long mid = l + (r - l + 1) / 2;
+        if(isPossible(mid, div1, div2, unq1, unq2)) {
+            ans = mid;
+            r = mid - 1;
         } else {
-            l = mid + 1;  // Otherwise, increase the lower bound to find a valid mx
+            l = mid + 1;
         }
     }
-
-    return ans;  // Return the smallest valid mx
+    
+    return ans;
 }
 ```
-- **Inputs**:
-  - `div1`, `div2`: The divisors.
-  - `unq1`, `unq2`: The required number of unique integers divisible by `div1` and `div2`.
-- **Process**:
-  - Initialize the binary search range `l = 1` and `r = 10^17`.
-  - For each midpoint `mid` in the binary search, use the `isPossible` function to check if it's possible to satisfy the requirements.
-  - If it is possible, move the upper bound (`r`) to search for smaller values of `mx`. Otherwise, move the lower bound (`l`) to search for larger values.
-- **Return**:
-  - The smallest `mx` that satisfies the condition.
 
-### Example Walkthrough
+The complete code includes two functions: `isPossible` to check if the required unique students can be achieved with a given number of students, and `minimizeSet` to find the minimum number of students using binary search.
 
-Let’s go through an example to understand how the binary search works:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isPossible(long long mx, long long div1, long long div2, long long unq1, long long unq2) {
+	```
+	Declares the `isPossible` function, which checks if it is possible to have the required number of students based on given parameters.
 
-#### Example Input:
-```cpp
-int div1 = 2, div2 = 3, unq1 = 5, unq2 = 3;
-```
+2. **Variable Initialization**
+	```cpp
+	    long long a = mx / div1;
+	```
+	Calculates the number of students divisible by `div1` from `mx`.
 
-#### Binary Search Process:
-1. Start with `l = 1` and `r = 10^17`.
-2. For each `mid`, check if it’s possible to meet the required numbers of unique integers divisible by `div1` and `div2`.
-3. If `mid` is valid, reduce the range by adjusting the upper bound (`r`).
-4. If `mid` is invalid, increase the range by adjusting the lower bound (`l`).
-5. Continue until the smallest valid `mx` is found.
+3. **Variable Initialization**
+	```cpp
+	    long long a_ = mx - a;
+	```
+	Calculates the number of remaining students after accounting for those divisible by `div1`.
 
-### Complexity Analysis
+4. **Variable Initialization**
+	```cpp
+	    long long b = mx / div2;
+	```
+	Calculates the number of students divisible by `div2` from `mx`.
 
-#### Time Complexity:
-- **Binary Search**: The binary search operates over a range of size \(10^{17}\), so the number of iterations is \(O(\log(10^{17})) = O(58)\).
-- **`isPossible` Function**: Each time the `isPossible` function is called, it involves simple arithmetic and a call to `lcm`, which is \(O(\log(\min(div1, div2)))\). Since `lcm` is computed using the greatest common divisor (GCD), this operation is very efficient.
-- **Total Time Complexity**: The total time complexity is \(O(\log(10^{17}) \cdot \log(\min(div1, div2)))\), which is highly efficient.
+5. **Variable Initialization**
+	```cpp
+	    long long b_ = mx - b;
+	```
+	Calculates the number of remaining students after accounting for those divisible by `div2`.
 
-#### Space Complexity:
-- The space complexity is \(O(1)\) because we only use a few variables to store intermediate results.
+6. **Variable Initialization**
+	```cpp
+	    long long aib = mx / (long long)lcm(div1, div2);
+	```
+	Calculates the number of students divisible by both `div1` and `div2`.
 
-### Conclusion
+7. **Variable Initialization**
+	```cpp
+	    long long aub = a + b - aib;
+	```
+	Calculates the total number of students divisible by either `div1` or `div2`.
 
-This solution efficiently finds the smallest number `mx` that satisfies the required conditions using binary search and mathematical counting techniques. By leveraging the properties of divisibility and overlap using the `lcm` function, the solution optimizes the search space, ensuring it runs in logarithmic time. This approach is both time-efficient and space-efficient for large inputs.
+8. **Variable Initialization**
+	```cpp
+	    long long a_ib_ = mx - aub;
+	```
+	Calculates the remaining students after considering those divisible by either `div1` or `div2`.
+
+9. **Conditional Check**
+	```cpp
+	    long long neededA = (a_ - a_ib_ >= unq1) ? 0: unq1 - (a_ - a_ib_);
+	```
+	Checks how many more students are needed to satisfy the unique count for students divisible by `div1`.
+
+10. **Conditional Check**
+	```cpp
+	    long long neededB = (b_ - a_ib_ >= unq2) ? 0: unq2 - (b_ - a_ib_);
+	```
+	Checks how many more students are needed to satisfy the unique count for students divisible by `div2`.
+
+11. **Return Statement**
+	```cpp
+	    return a_ib_ >= neededA + neededB;
+	```
+	Returns whether the remaining students after satisfying the unique counts are enough.
+
+12. **Function Declaration**
+	```cpp
+	int minimizeSet(int div1, int div2, int unq1, int unq2) {
+	```
+	Declares the `minimizeSet` function to minimize the number of students while satisfying the unique student requirements.
+
+13. **Variable Initialization**
+	```cpp
+	    long long l = 1, r = (long long) pow(10, 17), ans = 1;
+	```
+	Initializes the binary search range (`l` to `r`) and the variable `ans` to store the result.
+
+14. **Binary Search Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	Starts the binary search loop to find the minimum number of students.
+
+15. **Binary Search Iteration**
+	```cpp
+	        long long mid = l + (r - l + 1) / 2;
+	```
+	Calculates the midpoint of the current search range.
+
+16. **Condition Check**
+	```cpp
+	        if(isPossible(mid, div1, div2, unq1, unq2)) {
+	```
+	Checks if it is possible to achieve the required unique students with the current midpoint value.
+
+17. **Result Update**
+	```cpp
+	            ans = mid;
+	```
+	Updates the result `ans` with the current midpoint value if it is possible.
+
+18. **Binary Search Update**
+	```cpp
+	            r = mid - 1;
+	```
+	Updates the search range to the lower half of the current range.
+
+19. **Binary Search Update**
+	```cpp
+	        } else {
+	```
+	If the current midpoint doesn't satisfy the condition, proceed with the upper half of the range.
+
+20. **Binary Search Update**
+	```cpp
+	            l = mid + 1;
+	```
+	Updates the search range to the upper half of the current range.
+
+21. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the result `ans`, which is the minimum number of students.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(max_integer))
+- **Average Case:** O(log(max_integer))
+- **Worst Case:** O(log(max_integer))
+
+Binary search over the possible values of the maximum integer ensures a logarithmic time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+Only a few variables are used for the binary search and calculations, so the space complexity is constant.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-the-maximum-of-two-arrays/description/)
 

@@ -14,133 +14,123 @@ img_src = ""
 youtube = "b-UBMai1bGM"
 youtube_upload_date="2024-06-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/b-UBMai1bGM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers `nums`. In each operation, you can either add or subtract 1 from any element in `nums`. Your task is to determine the minimum number of operations required to make all elements of `nums` divisible by 3.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` containing `n` elements.
+- **Example:** `Example 1:
+Input: nums = [2, 5, 8, 11]
+Output: 6
+Explanation: You need 6 operations to make each number divisible by 3: subtract 1 from 2, subtract 1 from 5, subtract 1 from 8, and subtract 1 from 11.`
+- **Constraints:**
+	- 1 <= nums.length <= 50
+	- 1 <= nums[i] <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumOperations(vector<int>& nums) {
-        int ans = 0;
-        for(int i=0;i<nums.size();i++) ans+=min(3-(nums[i]%3),nums[i]%3);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations to make all elements of `nums` divisible by 3.
+- **Example:** `Example 2:
+Input: nums = [3, 6, 9]
+Output: 0
+Explanation: All numbers are already divisible by 3, so no operations are needed.`
+- **Constraints:**
+	- The result is a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the minimum number of operations to make each number divisible by 3.
 
-The problem at hand involves finding the minimum number of operations needed to make each element in a given array divisible by 3. The operations allowed involve changing any number by adding or subtracting 1. Each number can be changed as many times as needed, and the goal is to achieve a state where every number in the array is divisible by 3.
+- For each element in the array, calculate the remainder when divided by 3 (i.e., `num % 3`).
+- If the remainder is 1, one operation is needed to either add or subtract 1 to make the number divisible by 3.
+- If the remainder is 2, two operations are needed (either subtract 2 or add 1).
+- Sum all the operations for the entire array and return the total.
+{{< dots >}}
+### Problem Assumptions ✅
+- All array elements are between 1 and 50.
+- The minimum number of operations will be calculated based on how much each element deviates from being divisible by 3.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** For `nums = [2, 5, 8, 11]`, the remainders when divided by 3 are [2, 2, 2, 2]. Each element needs 2 operations (subtracting 1) to become divisible by 3. Therefore, the total number of operations is 2 + 2 + 2 + 2 = 8.
 
-### Approach
+- **Input:** `Example 2:`  \
+  **Explanation:** For `nums = [3, 6, 9]`, all elements are already divisible by 3. Thus, no operations are needed, and the result is 0.
 
-To solve this problem, we need to reduce each number to its closest multiple of 3 using the fewest possible operations. Since the numbers are divisible by 3, we need to look at how far each number is from the nearest multiple of 3.
+{{< dots >}}
+## Approach 🚀
+The solution can be efficiently implemented by iterating through the array, calculating the remainder of each element when divided by 3, and applying the necessary number of operations based on the remainder.
 
-- For any number `n`, when divided by 3, we get a remainder `r = n % 3`.
-- Based on the value of the remainder, we determine the minimum number of operations required to make the number divisible by 3.
-  - If `r == 0`, the number is already divisible by 3, and no operation is needed.
-  - If `r == 1`, we can subtract 1 to make it divisible by 3 or add 2 to make it divisible by 3.
-  - If `r == 2`, we can subtract 2 to make it divisible by 3 or add 1 to make it divisible by 3.
-
-In both the cases where `r == 1` or `r == 2`, the minimum number of operations to make the number divisible by 3 is the minimum of adding or subtracting the required number.
-
-Thus, the task reduces to iterating over each number in the array and summing the minimum operations required for each.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The remainder of each number when divided by 3 determines how many operations are required to make it divisible by 3.
+- A straightforward approach will be to iterate over the array, sum up the required operations for each number, and return the total.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs in this problem, as `nums.length >= 1`.
+- The approach should handle the maximum input size efficiently.
+- When all elements are already divisible by 3 (i.e., when `nums[i] % 3 == 0`), no operations are needed.
+- The solution must work for arrays of size up to 50 and for numbers between 1 and 50.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int minimumOperations(vector<int>& nums) {
-        int ans = 0; // Initialize a variable to keep track of the total operations needed
-        for(int i = 0; i < nums.size(); i++) { // Loop through each element in the array
-            // Calculate the minimum operations needed for each number
-            ans += min(3 - (nums[i] % 3), nums[i] % 3); 
-        }
-        return ans; // Return the total number of operations
-    }
-};
+int minimumOperations(vector<int>& nums) {
+    int ans = 0;
+    for(int i=0;i<nums.size();i++) ans+=min(3-(nums[i]%3),nums[i]%3);
+    return ans;
+}
 ```
 
-#### Step-by-Step Breakdown of the Code:
+The function `minimumOperations` calculates the minimum number of operations required to make all elements of the array divisible by 3. For each element, it finds the minimum operations needed to make it divisible by 3, either by adding or subtracting a small value.
 
-1. **Function Definition**:
-   The function `minimumOperations` takes a reference to a vector of integers `nums` as input and returns an integer, which is the minimum number of operations needed to make each element in the array divisible by 3.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumOperations(vector<int>& nums) {
+	```
+	The function `minimumOperations` is defined, taking a reference to a vector of integers `nums` as its parameter.
 
-2. **Initializing the Result Variable**:
-   ```cpp
-   int ans = 0;
-   ```
-   The variable `ans` is initialized to 0, and it will be used to accumulate the total number of operations required.
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	The variable `ans` is initialized to `0` to store the total number of operations.
 
-3. **Iterating Over the Array**:
-   ```cpp
-   for(int i = 0; i < nums.size(); i++)
-   ```
-   The loop iterates over each element of the input vector `nums`.
+3. **Loop Start**
+	```cpp
+	    for(int i=0;i<nums.size();i++) ans+=min(3-(nums[i]%3),nums[i]%3);
+	```
+	A loop iterates over the elements of `nums`. For each element, the number of operations required to make it divisible by 3 is calculated and added to `ans`. The minimum between adding the difference to 3 or subtracting the element's remainder when divided by 3 is considered.
 
-4. **Calculating Operations for Each Number**:
-   ```cpp
-   ans += min(3 - (nums[i] % 3), nums[i] % 3);
-   ```
-   Inside the loop, for each number `nums[i]`, we calculate the remainder when the number is divided by 3 (`nums[i] % 3`). Based on the remainder:
-   - If the remainder is 1, the number can either be increased by 2 (to reach the next multiple of 3) or decreased by 1 (to reach the previous multiple of 3). The `min` function helps choose the optimal approach by selecting the smaller number of operations.
-   - If the remainder is 2, the number can either be increased by 1 (to reach the next multiple of 3) or decreased by 2 (to reach the previous multiple of 3). Similarly, the `min` function selects the optimal number of operations.
+4. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the total number of operations stored in `ans`.
 
-   The result of the `min` operation is added to `ans` for each element in the array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Returning the Final Result**:
-   ```cpp
-   return ans;
-   ```
-   After iterating over all the elements, the function returns the total number of operations required to make all elements divisible by 3.
+The time complexity is O(n), where n is the length of the array `nums`. We perform a constant-time operation for each element in the array.
 
-### Example Walkthrough
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-Let’s walk through an example to better understand how this algorithm works.
+The space complexity is O(1), as we only need a few variables to track the total number of operations.
 
-#### Input:
-```cpp
-vector<int> nums = {2, 5, 8};
-```
+**Happy Coding! 🎉**
 
-- For the first element, `nums[0] = 2`:
-  - The remainder when 2 is divided by 3 is `2 % 3 = 2`.
-  - To make 2 divisible by 3, we can subtract 2 (making it 0) or add 1 (making it 3). The minimum number of operations is 1.
-  
-- For the second element, `nums[1] = 5`:
-  - The remainder when 5 is divided by 3 is `5 % 3 = 2`.
-  - To make 5 divisible by 3, we can subtract 2 (making it 3) or add 1 (making it 6). The minimum number of operations is 1.
-
-- For the third element, `nums[2] = 8`:
-  - The remainder when 8 is divided by 3 is `8 % 3 = 2`.
-  - To make 8 divisible by 3, we can subtract 2 (making it 6) or add 1 (making it 9). The minimum number of operations is 1.
-
-#### Calculation:
-- The total number of operations is `1 + 1 + 1 = 3`.
-
-#### Output:
-```cpp
-3
-```
-
-### Complexity Analysis
-
-#### Time Complexity:
-- The function iterates over each element of the array exactly once, performing constant-time operations for each element. 
-- Therefore, the time complexity is **O(n)**, where `n` is the size of the input array.
-
-#### Space Complexity:
-- The space complexity is **O(1)** because we are using only a constant amount of extra space, regardless of the input size. The space used by the input array is not counted towards the space complexity.
-
-### Conclusion
-
-This solution efficiently computes the minimum number of operations required to make each element of the array divisible by 3 by leveraging the properties of the modulo operation. By iterating through the array once and using a simple formula to compute the number of operations, the solution runs in linear time and requires constant space. This makes the solution both time-efficient and space-efficient, suitable for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/description/)
 

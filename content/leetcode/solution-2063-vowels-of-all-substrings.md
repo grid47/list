@@ -14,91 +14,135 @@ img_src = ""
 youtube = "yVDIm1IfG2c"
 youtube_upload_date="2021-11-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/yVDIm1IfG2c/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string word consisting of lowercase English letters. Your task is to return the total sum of the number of vowels ('a', 'e', 'i', 'o', and 'u') present in every possible substring of word. A substring is any contiguous sequence of characters in the word.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the following input:
+- **Example:** `Input: word = "abcabc"`
+- **Constraints:**
+	- 1 <= word.length <= 10^5
+	- word consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long countVowels(string word) {
-        long long res = 0, n = word.size();
-        for(int i = 0; i < n; i++)
-        if(string("aeiou").find(word[i]) != string::npos)
-        res += (i + 1) * (n - i);
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the sum of vowels in every substring of the given string word.
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The result may be a large integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the sum of vowels in all substrings of the string word efficiently, considering that the string may be very large.
 
-The task is to count the total number of substrings of a given string `word` that contain at least one vowel. A substring is defined as any contiguous sequence of characters within a string. The vowels in consideration are 'a', 'e', 'i', 'o', and 'u'. The challenge is to compute this count efficiently without generating all possible substrings explicitly.
+- 1. Iterate through each character of the string.
+- 2. For each vowel encountered, calculate how many substrings it is part of.
+- 3. Add the contribution of each vowel to the total sum.
+- 4. Return the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The word consists of lowercase English letters.
+- The length of the word is at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: word = "aba"`  \
+  **Explanation:** The possible substrings are: 'a', 'ab', 'aba', 'b', 'ba', 'a'. The vowels are found in substrings 'a', 'ab', 'ba', 'a', 'aba', and contribute 6 vowels in total.
 
-### Approach
+- **Input:** `Input: word = "abc"`  \
+  **Explanation:** The possible substrings are: 'a', 'ab', 'abc', 'b', 'bc', and 'c'. Only 'a', 'ab', and 'abc' contain vowels, contributing 3 vowels in total.
 
-The approach to solving this problem relies on understanding how many substrings can be formed that include each vowel in the string. Instead of generating every possible substring, we can determine the contribution of each vowel in the string to the total count of substrings that contain it.
+- **Input:** `Input: word = "ltcd"`  \
+  **Explanation:** There are no vowels in the string 'ltcd', so the total sum of vowels is 0.
 
-For each vowel found at position `i` in the string:
-1. The number of ways to choose a starting point for a substring that includes the vowel is `i + 1`. This represents all the characters from the start of the string up to the current vowel position.
-2. The number of ways to choose an endpoint for a substring that includes the vowel is `n - i`, where `n` is the length of the string. This counts all characters from the vowel to the end of the string.
+{{< dots >}}
+## Approach 🚀
+The problem can be solved efficiently by calculating the contribution of each vowel to all substrings it appears in. The key observation is that a vowel at position i contributes to all substrings starting from indices 0 to i and ending from i to the end of the string.
 
-Therefore, the contribution of each vowel to the total count of substrings is given by the product of these two values: \((i + 1) \times (n - i)\). By iterating through the string and summing up these contributions for each vowel, we can compute the total number of substrings containing at least one vowel.
+### Initial Thoughts 💭
+- Each vowel appears in multiple substrings, and the number of such substrings can be calculated directly.
+- A brute force approach of generating all substrings would be too slow for large strings.
+- The efficient approach avoids generating substrings and directly computes the contribution of each vowel in the string.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the length of the string is guaranteed to be at least 1.
+- For large inputs (strings up to length 10^5), ensure the algorithm runs in linear time.
+- If the word contains no vowels, the result should be 0.
+- Ensure the solution handles edge cases such as very short or very long strings efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+long long countVowels(string word) {
+    long long res = 0, n = word.size();
+    for(int i = 0; i < n; i++)
+    if(string("aeiou").find(word[i]) != string::npos)
+    res += (i + 1) * (n - i);
+    return res;
+}
+```
 
-### Code Breakdown (Step by Step)
+This function calculates the number of substrings containing vowels in a given string 'word' by iterating through each character and checking if it is a vowel. It accumulates the count based on the position of vowels within the string.
 
-1. **Initialization**:
-   - We declare a variable `res` to hold the cumulative count of substrings containing vowels, initialized to zero.
-   - The variable `n` is assigned the size of the input string `word`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	long long countVowels(string word) {
+	```
+	Define the function 'countVowels' which takes a string 'word' as input and returns the total count of substrings containing vowels.
 
-   ```cpp
-   long long res = 0, n = word.size();
-   ```
+2. **Variable Initialization**
+	```cpp
+	    long long res = 0, n = word.size();
+	```
+	Initialize 'res' to 0, which will hold the result, and 'n' to the length of the input string 'word'.
 
-2. **Iterate Through the String**:
-   - A loop runs through each character of the string using the index `i`.
+3. **Looping**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Start a loop that iterates over each character in the string 'word'.
 
-   ```cpp
-   for(int i = 0; i < n; i++)
-   ```
+4. **Conditional Logic**
+	```cpp
+	    if(string("aeiou").find(word[i]) != string::npos)
+	```
+	Check if the current character 'word[i]' is a vowel by looking for it in the string 'aeiou'. If found, the character is a vowel.
 
-3. **Check for Vowel**:
-   - Inside the loop, we check if the current character is a vowel by searching for it in the string "aeiou". The `find` method returns the position of the character if found, or `string::npos` if not.
+5. **Mathematical Operation**
+	```cpp
+	    res += (i + 1) * (n - i);
+	```
+	If the character is a vowel, add to 'res' the product of the number of possible substrings starting with the current vowel position.
 
-   ```cpp
-   if(string("aeiou").find(word[i]) != string::npos)
-   ```
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the accumulated result 'res' which contains the total count of substrings with vowels.
 
-4. **Calculate Contribution**:
-   - If the character is a vowel, we calculate the contribution to the total count of substrings:
-     - The count of valid starting positions is `i + 1`.
-     - The count of valid ending positions is `n - i`.
-   - We then add the product of these two values to `res`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-   res += (i + 1) * (n - i);
-   ```
+The time complexity is O(n), where n is the length of the word, because we only need to iterate through the string once.
 
-5. **Return the Result**:
-   - Finally, after iterating through all characters in the string, we return the total count stored in `res`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   ```cpp
-   return res;
-   ```
+The space complexity is O(1), as the solution only requires a constant amount of extra space.
 
-### Complexity
+**Happy Coding! 🎉**
 
-- **Time Complexity**: O(N), where N is the length of the string. The solution requires a single pass through the string to check each character and determine if it is a vowel, leading to a linear time complexity.
-  
-- **Space Complexity**: O(1), as we are using a fixed amount of space regardless of the input size. The only variables used are for counting and indexing.
-
-### Conclusion
-
-This implementation efficiently counts the total number of substrings containing vowels without needing to generate each substring explicitly. By leveraging the mathematical relationship between the positions of vowels and substring boundaries, we obtain a solution that is both time-efficient and space-efficient. The use of a linear scan through the string ensures that our approach can handle large strings effectively, while the simple arithmetic calculations minimize computational overhead. Overall, this method provides a robust and effective solution to the problem of counting vowel-containing substrings in a given word.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/vowels-of-all-substrings/description/)
 

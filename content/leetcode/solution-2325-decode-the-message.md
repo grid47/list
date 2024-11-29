@@ -14,148 +14,146 @@ img_src = ""
 youtube = "4XXD2in1hwk"
 youtube_upload_date="2022-07-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/4XXD2in1hwk/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a cipher key and a secret message, decode the message by replacing each letter with the corresponding letter in the alphabet based on the first appearance of each letter in the key. Spaces in the message remain unchanged.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings: key, representing the cipher key, and message, representing the secret message to decode.
+- **Example:** `key = "jumping over hills in the park", message = "swm tlnh dbe"`
+- **Constraints:**
+	- The key will contain all 26 lowercase English letters at least once.
+	- The key may contain spaces, but they are ignored for decoding purposes.
+	- 1 <= message.length <= 2000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string decodeMessage(string key, string mess) {
-        char m[128] = {}, cur = 'a';
-        for (char k : key)
-            if (isalpha(k) && m[k] == 0)
-                m[k] = cur++;
-        for (int i = 0; i < mess.size(); ++i)
-            mess[i] = m[mess[i]] ?: mess[i];
-        return mess;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the decoded message by applying the substitution table derived from the key.
+- **Example:** `For key = "jumping over hills in the park" and message = "swm tlnh dbe", the output is "the quick fox".`
+- **Constraints:**
+	- The decoded message should be returned as a string.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To decode the message using the substitution table derived from the key.
 
-The problem requires us to decode a message using a given key. The key consists of a set of unique letters (including possible repetitions), and the task is to map each unique character in the key to the alphabet in the order of appearance. Then, using this key, we decode the message by replacing the characters in the message with the corresponding characters from the key.
+- 1. Create a substitution table based on the first occurrence of each letter in the key.
+- 2. Replace each letter in the message with the corresponding letter from the substitution table.
+- 3. Return the decoded message, ensuring spaces remain unchanged.
+{{< dots >}}
+### Problem Assumptions ✅
+- The key is a valid string of lowercase English letters containing all letters from 'a' to 'z'.
+- The message is also valid, containing only lowercase English letters and spaces.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `key = "jumping over hills in the park", message = "swm tlnh dbe"`  \
+  **Explanation:** Using the first occurrence of each letter in the key as a substitution table, we decode 'swm tlnh dbe' to 'the quick fox'.
 
-**Objective:**
-- We need to create a function that decodes a message where each character in the message corresponds to a letter in the key.
-- The message uses a simple cipher where each letter is replaced by the corresponding letter from the alphabet.
-  
-The decoded message will be returned.
+- **Input:** `key = "smart minds solve problems", message = "jqjc bmcms wbs"`  \
+  **Explanation:** Using the first occurrence of each letter in the key as a substitution table, we decode 'jqjc bmcms wbs' to 'the code works'.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by creating a substitution table from the cipher key and applying it to decode the message.
 
-To solve the problem efficiently, we need to utilize the following steps:
-
-1. **Mapping the Letters:**
-   We start by iterating over the key string and create a mapping for each unique letter in the key to the corresponding letter of the alphabet. For example, if the first unique character in the key is `'a'`, it will be mapped to `'a'`, the next unique letter will be mapped to `'b'`, and so on.
-
-2. **Decoding the Message:**
-   Once the mapping is established, we iterate over the message string and replace each character in the message using the map created in step 1. If the character is a space or any non-alphabetic character, it will remain unchanged.
-
-3. **Return the Decoded Message:**
-   After replacing all the characters, the message is decoded, and we return the decoded message.
-
-### Code Breakdown (Step by Step)
-
-Let’s go through the code step by step to understand the logic:
-
+### Initial Thoughts 💭
+- We need to map each letter from the key to the alphabet using its first occurrence.
+- This substitution table can then be applied to decode the message.
+- We can use a simple mapping approach to replace each character in the message based on the substitution table.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees a non-empty message, so no need to handle empty inputs.
+- The solution must handle message lengths up to 2000 efficiently.
+- Key strings may have multiple spaces, which should be ignored when forming the substitution table.
+- The message string will always have valid characters (lowercase letters and spaces).
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    string decodeMessage(string key, string mess) {
-        char m[128] = {}, cur = 'a';
+string decodeMessage(string key, string mess) {
+    char m[128] = {}, cur = 'a';
+    for (char k : key)
+        if (isalpha(k) && m[k] == 0)
+            m[k] = cur++;
+    for (int i = 0; i < mess.size(); ++i)
+        mess[i] = m[mess[i]] ?: mess[i];
+    return mess;
+}
 ```
 
-- The `m` array is used to store the mapping between characters. It is initialized with `0` for each index corresponding to ASCII values. The `cur` variable is initialized to `'a'` to keep track of the next available character in the alphabet for mapping.
-- The `key` is the input string containing the key, and `mess` is the input string containing the message to be decoded.
+This function decodes a given message based on a key, where each character in the key is mapped to a letter starting from 'a'. The function replaces characters in the message using this mapping.
 
-```cpp
-        for (char k : key)
-            if (isalpha(k) && m[k] == 0)
-                m[k] = cur++;
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string decodeMessage(string key, string mess) {
+	```
+	Declare the `decodeMessage` function, which takes two arguments: `key` (the mapping key) and `mess` (the message to decode). The function will return the decoded message.
 
-- Here, we iterate through each character in the `key` string.
-  - If the character `k` is an alphabetic character (checked using `isalpha(k)`), and if it hasn’t been mapped already (checked using `m[k] == 0`), we assign the next available character in the alphabet to `m[k]`.
-  - `m[k] = cur++` assigns the current available character to `m[k]` and then increments `cur` to point to the next letter in the alphabet.
+2. **Character Array Initialization**
+	```cpp
+	    char m[128] = {}, cur = 'a';
+	```
+	Initialize a character array `m[128]` to store the mappings for the characters. The variable `cur` is initialized to 'a' to start the mapping from 'a'.
 
-```cpp
-        for (int i = 0; i < mess.size(); ++i)
-            mess[i] = m[mess[i]] ?: mess[i];
-```
+3. **Key Iteration**
+	```cpp
+	    for (char k : key)
+	```
+	Loop through each character `k` in the `key` string.
 
-- In this loop, we go through the `mess` string.
-  - For each character `mess[i]`, we replace it with its corresponding character from the mapping `m[mess[i]]`. If the character is not a valid alphabetic character, the `?:` operator ensures that the original character is retained.
-  - The `?:` operator is a shorthand for a ternary operation, which checks if `m[mess[i]]` is a valid mapped character (i.e., not zero). If it is, the mapped character is used; otherwise, the original character remains unchanged.
-  
-```cpp
-        return mess;
-    }
-};
-```
+4. **Character Mapping Check**
+	```cpp
+	        if (isalpha(k) && m[k] == 0)
+	```
+	Check if the character `k` is alphabetic and if it has not already been mapped (i.e., `m[k] == 0`).
 
-- After decoding all characters in `mess`, we return the decoded message.
+5. **Character Mapping**
+	```cpp
+	            m[k] = cur++;
+	```
+	If the character `k` is alphabetic and not yet mapped, assign it the next available letter in the alphabet (starting from 'a') and increment `cur`.
 
-### Example Walkthrough
+6. **Message Decoding Loop**
+	```cpp
+	    for (int i = 0; i < mess.size(); ++i)
+	```
+	Loop through each character in the message `mess` and apply the character mapping to decode the message.
 
-Let’s walk through an example to better understand the code.
+7. **Character Replacement**
+	```cpp
+	        mess[i] = m[mess[i]] ?: mess[i];
+	```
+	For each character in the message, replace it with the mapped character from `m` if a mapping exists. If no mapping exists (i.e., the character is not in `key`), retain the original character.
 
-#### Input:
-- `key = "the quick brown fox jumps over the lazy dog"`
-- `mess = "vkbs bs t suepuv"`
+8. **Return Statement**
+	```cpp
+	    return mess;
+	```
+	Return the decoded message after all characters have been processed.
 
-#### Steps:
-1. **Create the Mapping:**
-   - Start with an empty map `m[128] = {}` and `cur = 'a'`.
-   - Iterate through the key:
-     - `'t'` is mapped to `'a'`.
-     - `'h'` is mapped to `'b'`.
-     - `'e'` is mapped to `'c'`.
-     - `' '` (space) is ignored.
-     - `'q'` is mapped to `'d'`, and so on.
-   
-   The resulting mapping will look like this:
-   ```
-   t -> a, h -> b, e -> c, q -> d, u -> e, i -> f, c -> g, k -> h, b -> i, r -> j, o -> k, w -> l,
-   n -> m, f -> n, x -> o, p -> p, s -> q, v -> r, j -> s, m -> t, z -> u, l -> v, y -> w, d -> x, g -> y
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Decode the Message:**
-   Now, we decode each character in the `mess` string:
-   - `'v'` maps to `'r'`.
-   - `'k'` maps to `'h'`.
-   - `'b'` maps to `'i'`, and so on.
-   
-   The decoded message will be `"this is a secret"`.
+The time complexity is O(n), where n is the length of the message, as we need to iterate through both the key and the message once.
 
-#### Final Output:
-```
-"this is a secret"
-```
+### Space Complexity 💾
+- **Best Case:** O(26 + n)
+- **Worst Case:** O(26 + n)
 
-### Time Complexity
+The space complexity is O(26 + n), where 26 accounts for the mapping and n is the space required for the decoded message.
 
-Let’s analyze the time complexity:
+**Happy Coding! 🎉**
 
-- **Mapping Creation:** Iterating over the `key` takes **O(K)** time, where `K` is the length of the `key` string.
-- **Message Decoding:** Iterating over the `mess` string takes **O(M)** time, where `M` is the length of the `mess` string.
-- The overall time complexity is therefore **O(K + M)**, where `K` is the length of the `key` and `M` is the length of the `mess`.
-
-### Space Complexity
-
-- We use a `char` array `m[128]` to store the character mappings, which takes **O(1)** space as it is fixed at 128 elements.
-- The space complexity of the solution is **O(1)**.
-
-### Conclusion
-
-This approach efficiently decodes the given message using a character mapping based on the provided key. By iterating through the key and message only once each, the algorithm achieves a linear time complexity, making it suitable for long strings. The use of a fixed-size array for storing mappings ensures minimal space usage.
-
-This solution is optimal in both time and space, leveraging the simplicity of mapping and the flexibility of the ternary operator to handle edge cases like spaces or already-decoded characters.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decode-the-message/description/)
 

@@ -14,178 +14,174 @@ img_src = ""
 youtube = "8s25uCT7vhY"
 youtube_upload_date="2022-05-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/8s25uCT7vhY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You have `n` bags, each capable of holding a certain number of rocks. You are given two arrays: `capacity` where `capacity[i]` is the maximum number of rocks that bag `i` can hold, and `rocks` where `rocks[i]` is the current number of rocks in bag `i`. You also have `additionalRocks` which represents the number of rocks you can distribute into the bags. Your goal is to determine the maximum number of bags that can be filled to their capacity after placing the additional rocks in any of the bags.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays `capacity` and `rocks`, where each represents the capacity and current number of rocks in each bag, respectively. You are also given an integer `additionalRocks` that represents the number of rocks you can place in the bags.
+- **Example:** `Input: capacity = [5, 7, 8, 3], rocks = [3, 2, 5, 2], additionalRocks = 4`
+- **Constraints:**
+	- n == capacity.length == rocks.length
+	- 1 <= n <= 5 * 10^4
+	- 1 <= capacity[i] <= 10^9
+	- 0 <= rocks[i] <= capacity[i]
+	- 1 <= additionalRocks <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumBags(vector<int>& cap, vector<int>& rock, int cnt) {
-        
-        priority_queue<int, vector<int>, greater<int>> pq;
-        
-        int n = rock.size();
-        
-        for(int i = 0; i < n; i++)
-            pq.push(cap[i] - rock[i]);
-        
-        int res = 0;
-        
-        while(!pq.empty() && cnt >= pq.top()) {
-            res++;
-            cnt -= pq.top();
-            pq.pop();
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of bags that can be filled to their full capacity after distributing the additional rocks.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the number of bags that can be filled to their full capacity by strategically distributing the additional rocks.
+
+- Calculate the number of additional rocks needed to fill each bag to its capacity.
+- Store the differences between the `capacity[i]` and `rocks[i]` in a sorted order to prioritize filling bags that require fewer rocks.
+- Distribute the additional rocks starting from the bag that needs the least amount of rocks.
+- Count how many bags can be filled completely with the available additional rocks.
+{{< dots >}}
+### Problem Assumptions ✅
+- You can place the additional rocks in any of the bags in any order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: capacity = [5, 7, 8, 3], rocks = [3, 2, 5, 2], additionalRocks = 4`  \
+  **Explanation:** In this case, the number of rocks required to fill each bag are [2, 5, 3, 1]. We can place 2 rocks in bag 0, 1 rock in bag 3, and 1 rock in bag 1. This allows us to fill 3 bags to their full capacity. The output is 3.
+
+- **Input:** `Input: capacity = [10, 5, 3], rocks = [4, 2, 1], additionalRocks = 6`  \
+  **Explanation:** Here, the required rocks to fill each bag are [6, 3, 2]. We can place 3 rocks in bag 1, and 3 rocks in bag 2, filling 2 bags. The output is 2.
+
+{{< dots >}}
+## Approach 🚀
+The strategy involves calculating the additional rocks needed for each bag and then sorting these requirements to fill as many bags as possible with the available rocks.
+
+### Initial Thoughts 💭
+- The problem is essentially about distributing resources (additional rocks) optimally across different bags.
+- The fewer the number of additional rocks needed to fill a bag, the higher the likelihood that bag will be filled.
+- The problem can be solved efficiently using a greedy approach, where we prioritize bags that require fewer rocks.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as n is guaranteed to be at least 1.
+- The solution must handle arrays of size up to 50,000 and values of capacity and additionalRocks up to 1 billion efficiently.
+- If additionalRocks is greater than or equal to the total sum of missing rocks across all bags, then all bags can be filled.
+- The solution should run in O(n log n) time due to the sorting step.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumBags(vector<int>& cap, vector<int>& rock, int cnt) {
+    
+    priority_queue<int, vector<int>, greater<int>> pq;
+    
+    int n = rock.size();
+    
+    for(int i = 0; i < n; i++)
+        pq.push(cap[i] - rock[i]);
+    
+    int res = 0;
+    
+    while(!pq.empty() && cnt >= pq.top()) {
+        res++;
+        cnt -= pq.top();
+        pq.pop();
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given two lists: `cap` and `rock`. `cap[i]` represents the capacity of the `i`-th bag, and `rock[i]` represents the number of rocks already present in that `i`-th bag. We are also given an integer `cnt` that denotes the number of additional rocks we can place into the bags.
-
-Our task is to find the maximum number of bags that can be completely filled using the available `cnt` rocks. We need to determine the maximum number of bags we can fill by utilizing the rocks, with the condition that the number of rocks we place in a bag should not exceed the capacity of the bag.
-
-### Approach
-
-The key idea behind solving this problem is to first determine the number of available spaces in each bag, which is the difference between the bag's capacity and the number of rocks already in it. After calculating the available space in each bag, we want to prioritize filling the bags that require fewer rocks to be filled.
-
-We can achieve this by sorting the bags based on the available space and trying to fill the bags starting from the one that requires the least amount of rocks. By doing so, we can maximize the number of bags filled with the available rocks.
-
-The steps for solving this problem are as follows:
-
-1. **Calculate the space left in each bag**: For each bag, calculate the difference between its capacity and the number of rocks already in it. This will give us the space available in each bag for more rocks.
-
-2. **Use a priority queue (min-heap)**: A priority queue can help efficiently retrieve the bags with the least space required. By using a min-heap, we can always pop the smallest available space, ensuring that we fill the bags with fewer requirements first.
-
-3. **Fill the bags**: While there are still rocks left (`cnt > 0`), we continue filling the bags in the order of the available space, as long as the number of rocks we have is enough to fill the current bag.
-
-4. **Return the result**: Once we have exhausted the available rocks or filled all possible bags, we return the number of bags filled.
-
-### Code Breakdown (Step by Step)
-
-Let’s go through the code step by step to understand how the solution is implemented.
-
-#### Step 1: Initialize the Priority Queue
-
-```cpp
-priority_queue<int, vector<int>, greater<int>> pq;
-```
-
-- We use a **priority queue** (min-heap) to efficiently manage the available spaces in the bags. In C++, the default behavior of `priority_queue` is a max-heap. To make it a min-heap (which allows us to access the smallest element first), we use `greater<int>` as the comparison function.
-
-#### Step 2: Populate the Priority Queue with Available Spaces
-
-```cpp
-for(int i = 0; i < n; i++)
-    pq.push(cap[i] - rock[i]);
-```
-
-- We iterate through all the bags (`i` from `0` to `n-1`).
-- For each bag, we calculate the available space as `cap[i] - rock[i]`, which is the number of rocks that can still be added to the bag.
-- We push this available space into the priority queue `pq`. The priority queue will store the available spaces in increasing order, with the smallest available space at the top.
-
-#### Step 3: Fill the Bags
-
-```cpp
-int res = 0;
-
-while(!pq.empty() && cnt >= pq.top()) {
-    res++;
-    cnt -= pq.top();
-    pq.pop();
+    return res;
 }
 ```
 
-- We initialize a variable `res` to track the number of bags we can fill.
-- In the `while` loop, we check whether there are still bags with available space (`pq.empty()`), and whether we have enough rocks to fill the smallest bag (`cnt >= pq.top()`).
-- If both conditions are true, we:
-  - Increment `res` to indicate that we are filling one more bag.
-  - Decrease the number of available rocks (`cnt -= pq.top()`).
-  - Remove the current bag from the priority queue (`pq.pop()`).
-- This loop continues until we run out of bags or we no longer have enough rocks to fill the next smallest bag.
+This function computes the maximum number of bags that can be filled given the capacity of each bag and the amount of rocks already in each bag. It uses a priority queue to prioritize filling bags with the least remaining space until the available capacity (cnt) is depleted.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maximumBags(vector<int>& cap, vector<int>& rock, int cnt) {
+	```
+	The function header for `maximumBags`, which takes the capacity (`cap`) and rock (`rock`) counts for each bag, as well as the available capacity (`cnt`). It returns an integer representing the maximum number of bags that can be filled.
 
-```cpp
-return res;
-```
+2. **Queue Initialization**
+	```cpp
+	    priority_queue<int, vector<int>, greater<int>> pq;
+	```
+	This initializes a priority queue `pq` that will store the available space in each bag (difference between capacity and rocks), ordered in increasing order. This allows us to process the bags with the smallest remaining space first.
 
-- After the loop finishes, we return the value of `res`, which represents the maximum number of bags that can be filled.
+3. **Size Calculation**
+	```cpp
+	    int n = rock.size();
+	```
+	This stores the number of bags (the size of the `rock` vector) in the variable `n`. We assume both `cap` and `rock` vectors are of the same size.
 
-### Complexity
+4. **Queue Population**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	This loop iterates over each bag to calculate the available space in each bag (capacity - rocks). This difference is pushed into the priority queue.
 
-#### Time Complexity
+5. **Queue Population (cont.)**
+	```cpp
+	        pq.push(cap[i] - rock[i]);
+	```
+	For each bag, the difference between the capacity and the rocks already in the bag is computed and pushed into the priority queue `pq`.
 
-1. **Filling the priority queue**: In the first loop, we iterate over all the bags to calculate the available space and push it into the priority queue. This takes **O(n log n)** time, where `n` is the number of bags, because each insertion into the priority queue takes **O(log n)** time.
-   
-2. **Popping from the priority queue**: In the second loop, we pop elements from the priority queue while we still have rocks and can fill bags. In the worst case, we will pop all the bags from the priority queue, which also takes **O(n log n)** time.
+6. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	The variable `res` is initialized to zero. This will store the total number of bags that can be filled.
 
-Thus, the total time complexity is:
-- **O(n log n)** due to both the insertion and popping operations on the priority queue.
+7. **Filling Bags**
+	```cpp
+	    while(!pq.empty() && cnt >= pq.top()) {
+	```
+	This `while` loop runs as long as the priority queue `pq` is not empty and there is enough capacity (`cnt`) to fill the current bag with the least remaining space.
 
-#### Space Complexity
+8. **Result Update**
+	```cpp
+	        res++;
+	```
+	Each time a bag is filled, the result counter `res` is incremented.
 
-- The space complexity is determined by the size of the priority queue, which stores the available spaces for each bag. Therefore, the space complexity is:
-- **O(n)**, where `n` is the number of bags.
+9. **Capacity Deduction**
+	```cpp
+	        cnt -= pq.top();
+	```
+	The available capacity `cnt` is reduced by the amount required to fill the current bag (the value at the top of the priority queue).
 
-### Example Walkthrough
+10. **Queue Pop**
+	```cpp
+	        pq.pop();
+	```
+	The current bag is removed from the priority queue after it is processed.
 
-Let’s go through an example to understand how the solution works.
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the total number of bags that were filled (`res`).
 
-#### Example 1
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-```cpp
-vector<int> cap = {5, 7, 3};
-vector<int> rock = {2, 5, 1};
-int cnt = 6;
-```
+The time complexity is O(n log n) due to the sorting of the required rock differences.
 
-1. First, we calculate the available space in each bag:
-   - Bag 1: `cap[0] - rock[0] = 5 - 2 = 3`
-   - Bag 2: `cap[1] - rock[1] = 7 - 5 = 2`
-   - Bag 3: `cap[2] - rock[2] = 3 - 1 = 2`
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-2. We then push these available spaces into the priority queue: `pq = [2, 2, 3]`.
+The space complexity is O(n) because we store the differences between capacities and rocks for each bag.
 
-3. We start filling the bags:
-   - First, we fill the bag with 2 available spaces. We have enough rocks (`cnt = 6`), so we fill the bag, reducing `cnt` to 4.
-   - Next, we fill another bag with 2 available spaces. We have enough rocks (`cnt = 4`), so we fill the bag, reducing `cnt` to 2.
-   - Finally, we fill the bag with 3 available spaces. We have enough rocks (`cnt = 2`), so we cannot fill this bag, and the process stops here.
+**Happy Coding! 🎉**
 
-4. The result is `res = 2` because we were able to fill two bags.
-
-#### Example 2
-
-```cpp
-vector<int> cap = {10, 20, 30};
-vector<int> rock = {1, 2, 3};
-int cnt = 50;
-```
-
-1. We calculate the available space:
-   - Bag 1: `cap[0] - rock[0] = 10 - 1 = 9`
-   - Bag 2: `cap[1] - rock[1] = 20 - 2 = 18`
-   - Bag 3: `cap[2] - rock[2] = 30 - 3 = 27`
-
-2. We push these available spaces into the priority queue: `pq = [9, 18, 27]`.
-
-3. We fill the bags:
-   - We fill the first bag with 9 available spaces (`cnt = 50`), reducing `cnt` to 41.
-   - We fill the second bag with 18 available spaces (`cnt = 41`), reducing `cnt` to 23.
-   - We fill the third bag with 27 available spaces (`cnt = 23`), reducing `cnt` to -4.
-
-4. The result is `res = 3` because we successfully filled all three bags.
-
-### Conclusion
-
-The solution efficiently calculates the maximum number of bags that can be filled using the available rocks by leveraging a priority queue (min-heap). This ensures that we always prioritize filling the bags with the least amount of required rocks. The solution has a time complexity of **O(n log n)**, making it scalable for larger input sizes. The space complexity is **O(n)** due to the priority queue used to store the available spaces of the bags. This solution is both efficient and easy to understand.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-bags-with-full-capacity-of-rocks/description/)
 

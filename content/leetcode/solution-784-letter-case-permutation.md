@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "qcWClV0FRTs"
 youtube_upload_date="2020-05-17"
 youtube_thumbnail="https://i.ytimg.com/vi/qcWClV0FRTs/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,145 +28,172 @@ youtube_thumbnail="https://i.ytimg.com/vi/qcWClV0FRTs/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string s, you can transform every letter individually to either lowercase or uppercase. Digits remain unchanged. Your task is to generate a list of all possible strings that can be created by changing the case of the letters in the string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s that contains lowercase English letters, uppercase English letters, and digits.
+- **Example:** `Input: s = 'xYz1'`
+- **Constraints:**
+	- 1 <= s.length <= 12
+	- s consists of lowercase English letters, uppercase English letters, and digits.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> letterCasePermutation(string s) {
-        vector<string> ans;
-        bt(ans, s, 0);
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of all possible strings that can be created by changing the case of the letters in the input string.
+- **Example:** `Output: ['xYz1', 'xYz1', 'XyZ1', 'XyZ1', 'xYZ1', 'xYZ1', 'XYz1', 'XYz1']`
+- **Constraints:**
+	- The output list contains all the possible case variations of the letters in the input string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate all possible case combinations for each letter in the input string.
+
+- Iterate over the string s and for each character, generate both the lowercase and uppercase versions if it is a letter.
+- For digits, keep them unchanged.
+- Use backtracking or recursive techniques to explore all possible combinations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will not be empty and will contain at least one character.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: s = 'xYz1'`  \
+  **Explanation:** The string contains both uppercase and lowercase letters. We can change each letter to either uppercase or lowercase, generating all the possible combinations of these case changes.
+
+- **Input:** `Example 2: Input: s = '9aB'`  \
+  **Explanation:** In this case, digits remain unchanged, while the letters 'a' and 'B' can be transformed to 'A' and 'b' or 'a' and 'B', respectively. Therefore, we generate all combinations of the letter cases.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will explore each character of the input string, and for each character, we will consider both the lowercase and uppercase options if it is a letter. If it's a digit, we will leave it unchanged. We will generate all combinations recursively.
+
+### Initial Thoughts 💭
+- The problem is based on string manipulation and involves case transformations.
+- Each letter in the string can be in one of two cases, so there are 2^n combinations for a string of length n.
+- We can use a backtracking approach to recursively generate all combinations by considering each character's case options.
+{{< dots >}}
+### Edge Cases 🌐
+- The string will always contain at least one character.
+- If the string length is large (up to 12 characters), we will handle it by limiting the maximum number of recursive calls.
+- If the string contains only digits, the result is simply the original string, as no case transformation is needed.
+- The input string's length is constrained to a maximum of 12 characters.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> letterCasePermutation(string s) {
+    vector<string> ans;
+    bt(ans, s, 0);
+    return ans;
+}
+
+void bt(vector<string> &ans, string &s, int i) {
+    if(i== s.size()) {
+        ans.push_back(s);
+        return;
     }
     
-    void bt(vector<string> &ans, string &s, int i) {
-        if(i== s.size()) {
-            ans.push_back(s);
-            return;
-        }
-        
-        bt(ans, s, i + 1);
-        if(isalpha(s[i])) {
-            s[i] ^= 1 << 5;
-            bt(ans, s, i+1);
-        }
-        
+    bt(ans, s, i + 1);
+    if(isalpha(s[i])) {
+        s[i] ^= 1 << 5;
+        bt(ans, s, i+1);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to generate all possible permutations of a string by changing the case of its alphabetic characters. For a given string, we need to consider each character and create new permutations by changing its case, while keeping the non-alphabetic characters (like digits or special characters) unchanged. 
-
-For example, given the input string `"a1b2"`, the output should be:
-
-```
-["a1b2", "A1b2", "a1B2", "A1B2"]
+    
+}
 ```
 
-The task is to implement a function that returns all such possible permutations.
+This function generates all possible letter case permutations of a given string `s` using backtracking. It recursively explores both lowercase and uppercase options for each alphabetic character.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> letterCasePermutation(string s) {
+	```
+	Defines the function `letterCasePermutation`, which takes a string `s` and returns a vector of all possible case permutations of the string.
 
-This problem can be effectively solved using **backtracking**, a popular algorithmic approach for generating all permutations or combinations of a set of elements. In this case, we can think of each character in the string as a position where we can either:
+2. **Initialization**
+	```cpp
+	    vector<string> ans;
+	```
+	Initializes a vector `ans` to store the resulting letter case permutations.
 
-- Keep the character as it is (if it's non-alphabetic).
-- Flip the case (if it's alphabetic) and explore that option.
+3. **Backtracking Call**
+	```cpp
+	    bt(ans, s, 0);
+	```
+	Calls the helper function `bt` to start the backtracking process from the first character of the string.
 
-We can use recursion to explore all possible case permutations, starting from the first character to the last character in the string. 
+4. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans` containing all the letter case permutations of the string `s`.
 
-### Backtracking Process:
+5. **Helper Function Definition**
+	```cpp
+	void bt(vector<string> &ans, string &s, int i) {
+	```
+	Defines the helper function `bt` (backtracking), which recursively generates letter case permutations by modifying the string `s`.
 
-1. **Base Case**: If we reach the end of the string, add the current permutation to the result list.
-2. **Recursive Case**: For each character in the string:
-   - If the character is alphabetic, recursively consider both the lowercase and uppercase versions of the character. 
-   - If the character is non-alphabetic, simply move to the next character without changing it.
-   
-By performing this process recursively, we explore all possible permutations.
+6. **Base Case**
+	```cpp
+	    if(i== s.size()) {
+	```
+	Checks if the current index `i` has reached the end of the string `s`.
 
-### Code Breakdown (Step by Step)
+7. **Add Permutation**
+	```cpp
+	        ans.push_back(s);
+	```
+	Adds the current permutation of the string `s` to the result vector `ans`.
 
-Here’s a step-by-step breakdown of the solution:
+8. **End Base Case**
+	```cpp
+	        return;
+	```
+	Returns from the recursive call, ending the current branch of backtracking.
 
-1. **Main Function**:
-   - The function `letterCasePermutation()` takes the string `s` as input and calls the helper function `bt()` to perform the backtracking and generate all permutations. It returns the list of permutations as the output.
-   
-   ```cpp
-   vector<string> letterCasePermutation(string s) {
-       vector<string> ans;
-       bt(ans, s, 0);
-       return ans;
-   }
-   ```
+9. **Recursive Call**
+	```cpp
+	    bt(ans, s, i + 1);
+	```
+	Recursively calls the `bt` function with the next index `i + 1`, exploring the next character in the string.
 
-2. **Backtracking Function**:
-   - The helper function `bt()` is where the backtracking happens. It takes three parameters:
-     - `ans`: A reference to the result vector where all valid permutations are stored.
-     - `s`: The string being modified during the recursion.
-     - `i`: The current index in the string that is being processed.
-   
-   The function starts by checking if `i == s.size()`, which is the base case. If this condition is true, it means we have reached the end of the string, and the current permutation is complete. Thus, we push the modified string `s` into the `ans` vector.
-   
-   ```cpp
-   void bt(vector<string> &ans, string &s, int i) {
-       if(i == s.size()) {
-           ans.push_back(s);
-           return;
-       }
-   ```
+10. **Toggle Case Check**
+	```cpp
+	    if(isalpha(s[i])) {
+	```
+	Checks if the current character `s[i]` is an alphabetic letter.
 
-3. **Recursion on Alphabetic Characters**:
-   - If the current character is alphabetic (`isalpha(s[i])`), we flip the case by XORing the character with `1 << 5`. This operation toggles the case of the character. We then make two recursive calls:
-     - One without changing the case.
-     - One after flipping the case.
-   
-   ```cpp
-   if (isalpha(s[i])) {
-       s[i] ^= 1 << 5;  // Toggle case
-       bt(ans, s, i + 1);  // Recursive call with the character in the new case
-       s[i] ^= 1 << 5;  // Toggle back to the original case
-   }
-   ```
+11. **Toggle Case**
+	```cpp
+	        s[i] ^= 1 << 5;
+	```
+	Toggles the case of the character `s[i]` using bitwise XOR. This flips between lowercase and uppercase.
 
-4. **Non-Alphabetic Characters**:
-   - If the character is not alphabetic, we simply proceed to the next character without making any case changes.
-   
-   ```cpp
-   bt(ans, s, i + 1);  // Recursive call without changing the character
-   ```
+12. **Recursive Call After Toggle**
+	```cpp
+	        bt(ans, s, i+1);
+	```
+	Recursively calls the `bt` function again with the case-toggled character at position `i`, exploring both case options.
 
-5. **Returning the Results**:
-   - After completing all recursive calls, the `letterCasePermutation()` function returns the final list of permutations stored in `ans`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(2^n), where n is the length of the input string, because each letter can either be in lowercase or uppercase, generating 2^n combinations.
+- **Average Case:** O(2^n), as we need to process each possible combination of letter cases.
+- **Worst Case:** O(2^n), as the worst case also involves generating all possible combinations of letter case transformations.
 
-   ```cpp
-   return ans;
-   ```
+The time complexity is exponential in the size of the string due to the 2^n combinations for n letters.
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1), if the string has no letters and only digits.
+- **Worst Case:** O(2^n), where n is the length of the input string, since we need to store all possible combinations.
 
-- **Time Complexity**:
-  - The function generates all possible permutations of the string by recursively toggling the case of alphabetic characters. For a string of length `n`, there are `2^k` possible permutations, where `k` is the number of alphabetic characters in the string (since each alphabetic character can either stay in its original case or change its case).
-  - Therefore, the time complexity is **O(2^k * n)**, where `n` is the length of the string and `k` is the number of alphabetic characters in the string. The factor `2^k` accounts for the different case combinations, and the `n` factor comes from the string manipulation (copying and modifying the string during the recursion).
-  
-- **Space Complexity**:
-  - The space complexity is determined by the recursion stack and the space required to store all the permutations.
-  - The recursion stack will have at most `n` levels (since we process each character of the string once).
-  - The result vector `ans` will store all the permutations, which are of length `n`. Therefore, the space complexity is **O(2^k * n)**, which is the space needed to store all the permutations.
+The space complexity is exponential due to the storage required for all possible combinations.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution uses a backtracking approach to generate all possible permutations of the string by changing the case of alphabetic characters. It handles both alphabetic and non-alphabetic characters appropriately, ensuring that non-alphabetic characters are not altered.
-
-- **Efficiency**: The solution is efficient in terms of time and space, given that the number of permutations grows exponentially with the number of alphabetic characters. However, it is well-suited for strings with relatively few alphabetic characters.
-- **Scalability**: This approach works well for moderate-sized strings, especially when the number of alphabetic characters is not too large.
-- **Edge Cases**:
-  - An empty string: The function will return a list with a single empty string.
-  - A string with no alphabetic characters: The function will return the original string as the only permutation.
-  - A string with all alphabetic characters: The function will generate all possible case combinations for those characters.
-
-This solution is a classic example of backtracking, where recursion allows us to explore all possible permutations, and bitwise XOR is used to efficiently toggle the case of alphabetic characters.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/letter-case-permutation/description/)
 

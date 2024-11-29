@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "K-RYzDZkzCI"
 youtube_upload_date="2020-12-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/K-RYzDZkzCI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,98 +28,147 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/K-RYzDZkzCI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a sorted array of distinct integers and a target value, return the index of the target if it is present. If the target is not in the array, return the index where it should be inserted to maintain the sorted order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A sorted array of distinct integers and a target value.
+- **Example:** `Input: nums = [1, 2, 4, 5, 7], target = 4`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -10^4 <= nums[i] <= 10^4
+	- nums contains distinct values sorted in ascending order.
+	- -10^4 <= target <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int searchInsert(vector<int>& nums, int target) {
-        int l = 0, r = nums.size() - 1;
-        while(l <= r) {
-            int mid = l + (r - l) / 2;
-            if(nums[mid] == target) return mid;
-            if(nums[mid] < target) l = mid + 1;
-            else r = mid - 1;
-        }
-        return l;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the index of the target if found, or the index where it should be inserted to keep the array sorted.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- Return an integer indicating the position of the target or where it should be inserted.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the target's index or the index for insertion using binary search for O(log n) time complexity.
+
+- Initialize two pointers, left and right, at the start and end of the array.
+- Perform a binary search: calculate mid and compare the value at mid with the target.
+- If the target is equal to the value at mid, return mid.
+- If the target is greater than the value at mid, move the left pointer to mid + 1.
+- If the target is smaller than the value at mid, move the right pointer to mid - 1.
+- If the loop ends without finding the target, return the position of left as the index for insertion.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always be sorted and contain distinct integers.
+- The target value is within the bounds of the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 4, 5, 7], target = 4`  \
+  **Explanation:** The target is present at index 2, so we return 2.
+
+- **Input:** `Input: nums = [1, 2, 4, 5, 7], target = 3`  \
+  **Explanation:** The target is not found, but it should be inserted at index 2 to keep the array sorted.
+
+- **Input:** `Input: nums = [1, 2, 4, 5, 7], target = 6`  \
+  **Explanation:** The target is not found, but it should be inserted at index 4 to keep the array sorted.
+
+{{< dots >}}
+## Approach 🚀
+Use binary search to find the target's position or determine where it should be inserted in the sorted array.
+
+### Initial Thoughts 💭
+- The problem can be solved efficiently with a binary search approach due to the sorted nature of the array.
+- Binary search ensures an O(log n) runtime, which is optimal for this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- The array may not be empty as per constraints.
+- Test with large arrays to ensure the O(log n) time complexity holds.
+- Test with a target value that is smaller or larger than all elements in the array.
+- Handle edge cases where the target is at the start or end of the array.
+{{< dots >}}
+## Code 💻
+```cpp
+int searchInsert(vector<int>& nums, int target) {
+    int l = 0, r = nums.size() - 1;
+    while(l <= r) {
+        int mid = l + (r - l) / 2;
+        if(nums[mid] == target) return mid;
+        if(nums[mid] < target) l = mid + 1;
+        else r = mid - 1;
     }
-};
-{{< /highlight >}}
----
-
-### 🏷️ **Problem Statement**
-
-Given a **sorted array of integers** and a **target value**, the task is to find the **index** where the target should be **inserted** in the array while maintaining the sorted order. If the target is already present, return its current index.
-
-For example:
-- **Input:** `nums = [1, 3, 5, 6]`, `target = 5`
-  - **Output:** `2` (because 5 is at index 2)
-  
-- **Input:** `nums = [1, 3, 5, 6]`, `target = 2`
-  - **Output:** `1` (because 2 should be inserted at index 1)
-
-- **Input:** `nums = [1, 3, 5, 6]`, `target = 7`
-  - **Output:** `4` (because 7 should be inserted at index 4)
-
-### 🧠 **Approach**
-
-To solve this problem efficiently, we can use **binary search**, which allows us to find the **insertion index** in **O(log n)** time. Here's how:
-
-1. **Binary Search Overview:**
-   - Binary search is an algorithm that repeatedly divides the search space in half based on comparisons with the middle element.
-   - Since the array is sorted, we can apply binary search to determine the insertion point for the target.
-
-2. **Steps to Solve:**
-   - Initialize two pointers `l` (left) and `r` (right) to represent the bounds of the search.
-   - Perform binary search while `l <= r`:
-     - Calculate the middle index `mid` as `l + (r - l) / 2` to avoid overflow.
-     - If `nums[mid]` is equal to the target, return `mid` as the target’s index.
-     - If `nums[mid]` is less than the target, move the left pointer (`l = mid + 1`) to search the right half.
-     - If `nums[mid]` is greater than the target, move the right pointer (`r = mid - 1`) to search the left half.
-   - After the loop ends, the left pointer `l` will point to the index where the target should be inserted.
-
-### 💻 **Code Breakdown**
-
-```cpp
-int l = 0, r = nums.size() - 1;
+    return l;
+}
 ```
-- **Step 1:** Initialize the left pointer `l` at 0 and the right pointer `r` at the last index of the array.
 
-```cpp
-while(l <= r) {
-    int mid = l + (r - l) / 2;
-```
-- **Step 2:** Start the binary search loop. Calculate the middle index `mid` as the average of `l` and `r`, ensuring no overflow.
+This code finds the index where the target element should be inserted in a sorted array to maintain the sorted order.
 
-```cpp
-if(nums[mid] == target) return mid;
-```
-- **Step 3:** If the middle element equals the target, return `mid` as the index of the target.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int searchInsert(vector<int>& nums, int target) {
+	```
+	This line declares a function named 'searchInsert' that takes a sorted array 'nums' and a target integer 'target' as input and returns the index where the target should be inserted.
 
-```cpp
-if(nums[mid] < target) l = mid + 1;
-else r = mid - 1;
-```
-- **Step 4:** Adjust the search bounds based on whether `nums[mid]` is less than or greater than the target:
-  - If `nums[mid] < target`, move `l` to `mid + 1` to search the right half.
-  - If `nums[mid] > target`, move `r` to `mid - 1` to search the left half.
+2. **Variable Initialization**
+	```cpp
+	    int l = 0, r = nums.size() - 1;
+	```
+	This line initializes two pointers, 'l' and 'r', to represent the left and right boundaries of the search range. 'l' is initialized to 0 (the start of the array), and 'r' is initialized to the index of the last element in the array.
 
-```cpp
-return l;
-```
-- **Step 5:** If the target is not found, return `l`, which now points to the insertion index.
+3. **Loop Iteration**
+	```cpp
+	    while(l <= r) {
+	```
+	This line starts a `while` loop that continues as long as the left pointer 'l' is less than or equal to the right pointer 'r'.
 
-### 📊 **Time and Space Complexity**
+4. **Calculation**
+	```cpp
+	        int mid = l + (r - l) / 2;
+	```
+	This line calculates the middle index 'mid' using a formula that avoids integer overflow for large values of 'l' and 'r'.
 
-#### Time Complexity:
-- **O(log n):** Since we are using binary search, the time complexity is **O(log n)**, where `n` is the number of elements in the array. Each iteration of the binary search reduces the search space by half.
+5. **Conditional Check**
+	```cpp
+	        if(nums[mid] == target) return mid;
+	```
+	This line checks if the element at the middle index 'mid' is equal to the target. If so, the function returns the index 'mid' as the target is already present in the array.
 
-#### Space Complexity:
-- **O(1):** The algorithm uses a constant amount of extra space because only a few integer variables (`l`, `r`, and `mid`) are used.
+6. **Conditional Check and Index Update**
+	```cpp
+	        if(nums[mid] < target) l = mid + 1;
+	```
+	This line checks if the element at the middle index 'mid' is less than the target. If so, it means the target should be inserted after the middle element, so the left pointer 'l' is updated to 'mid + 1'.
 
-### 🚀 **Conclusion**
+7. **Conditional Check and Index Update**
+	```cpp
+	        else r = mid - 1;
+	```
+	If the element at the middle index 'mid' is greater than the target, it means the target should be inserted before the middle element, so the right pointer 'r' is updated to 'mid - 1'.
 
-This solution efficiently finds the **insertion index** of the target value in a **sorted array** using **binary search**. The approach ensures an optimal **O(log n)** time complexity, making it ideal for large datasets. The space complexity is minimal, **O(1)**, as no additional data structures are required. This solution is well-suited for scenarios requiring fast insertion point search, especially when working with large arrays.
+8. **Return**
+	```cpp
+	    return l;
+	```
+	After the loop terminates, the left pointer 'l' will be pointing to the correct insertion index for the target element. The function returns 'l' as the result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
+
+The time complexity is O(log n) because binary search is performed on the sorted array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as no additional space is used beyond the input array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-insert-position/description/)
 

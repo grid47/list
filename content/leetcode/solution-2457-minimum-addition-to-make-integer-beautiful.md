@@ -14,114 +14,175 @@ img_src = ""
 youtube = "NoGK4582ey8"
 youtube_upload_date="2022-10-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/NoGK4582ey8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer n and a target sum, the task is to find the smallest non-negative integer x such that the sum of the digits of n + x is less than or equal to the given target. The solution is guaranteed to always be possible for the given constraints.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers, n and target, where n is a positive integer and target is the maximum allowed sum of the digits of n + x.
+- **Example:** `n = 25, target = 10`
+- **Constraints:**
+	- 1 <= n <= 10^12
+	- 1 <= target <= 150
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum non-negative integer x such that the sum of the digits of n + x is less than or equal to target. The result should be a single integer.
+- **Example:** `For n = 25 and target = 10, the output will be 5.`
+- **Constraints:**
 
-    int sum(long long n) {
-        int res = 0;
-        while(n > 0) {
-            res += n % 10;
-            n /= 10;
-        }
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the smallest integer x such that the sum of the digits of n + x is less than or equal to the target.
+
+- 1. Calculate the sum of digits of n.
+- 2. If the sum of digits of n is already less than or equal to target, return 0.
+- 3. Otherwise, find the smallest x by incrementing n in such a way that the sum of the digits becomes less than or equal to target.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is always possible to find a non-negative x such that n + x becomes beautiful.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 25, target = 10`  \
+  **Explanation:** Initially, the sum of the digits of n (25) is 2 + 5 = 7, which is less than target. After adding 5 to n, we get 30, and the sum of digits becomes 3 + 0 = 3, which is still less than target.
+
+- **Input:** `n = 467, target = 6`  \
+  **Explanation:** The sum of digits of n (467) is 4 + 6 + 7 = 17, which is greater than target. After adding 33, n becomes 500, and the sum of digits is 5 + 0 + 0 = 5, which satisfies the target.
+
+{{< dots >}}
+## Approach 🚀
+We will increment the integer n in such a way that the sum of its digits becomes less than or equal to the target. The approach works by checking the sum of digits of n and gradually adjusting it by incrementing the number until the sum meets the target condition.
+
+### Initial Thoughts 💭
+- We need to find a way to manipulate the digits of n to make their sum less than or equal to the target.
+- We can use a loop to increment n and calculate the sum of digits until the condition is met.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem ensures that n is always a positive integer, so there are no empty inputs.
+- Ensure the solution can handle n up to 10^12 efficiently.
+- If the sum of digits of n is already less than or equal to target, x will be 0.
+- The solution must handle large inputs and large numbers efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int sum(long long n) {
+    int res = 0;
+    while(n > 0) {
+        res += n % 10;
+        n /= 10;
     }
+    return res;
+}
 
-    long long makeIntegerBeautiful(long long n, int target) {
-        long long n0 = n, base = 1;
-        while(sum(n) > target) {
-            n = n / 10 + 1;
-            base *= 10;
-        }
-        return n * base - n0;
+long long makeIntegerBeautiful(long long n, int target) {
+    long long n0 = n, base = 1;
+    while(sum(n) > target) {
+        n = n / 10 + 1;
+        base *= 10;
     }
-};
-{{< /highlight >}}
----
+    return n * base - n0;
+}
+```
 
-### Problem Statement:
-In this problem, we are given a number `n` and a target sum `target`. The task is to transform the number `n` into a number such that the sum of its digits does not exceed the given `target`. The transformation must be achieved by increasing `n` minimally such that the sum of the digits of the new number is less than or equal to the target.
+This solution modifies a number to make its digit sum less than or equal to a target by increasing its value and scaling it up.
 
-We need to return the smallest positive integer that needs to be added to `n` to achieve the desired sum of digits.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sum(long long n) {
+	```
+	Defines a helper function to calculate the sum of the digits of a number.
 
-### Approach:
-The approach involves the following steps:
-1. **Calculate the sum of digits of the number `n`**: The first step is to calculate the sum of digits of the number `n`. If this sum is already less than or equal to the target, then no transformation is needed, and the answer is 0.
-2. **Increase the number minimally**: If the sum of digits is greater than the target, we need to increment `n` in such a way that the sum of its digits becomes less than or equal to the target. This is achieved by adjusting the least significant digits of `n` and then recalculating the sum.
-3. **Repeat the process**: This process continues until the sum of digits is less than or equal to the target, and the minimal increment to `n` is found.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the variable `res` to store the cumulative digit sum.
 
-### Code Breakdown (Step by Step):
+3. **Loop Through Digits**
+	```cpp
+	    while(n > 0) {
+	```
+	Loops through each digit of the number while `n` is greater than 0.
 
-Let’s break down the code to understand each part:
+4. **Digit Calculation**
+	```cpp
+	        res += n % 10;
+	```
+	Adds the last digit of `n` to the result `res`.
 
-1. **Helper Function to Calculate the Sum of Digits**:
-   ```cpp
-   int sum(long long n) {
-       int res = 0;
-       while(n > 0) {
-           res += n % 10;  // Add the last digit to the sum
-           n /= 10;         // Remove the last digit from n
-       }
-       return res;  // Return the sum of digits
-   }
-   ```
-   - The `sum` function takes a long long integer `n` as input and returns the sum of its digits.
-   - The function repeatedly extracts the last digit of `n` using the modulus operation (`n % 10`) and adds it to the result `res`.
-   - Then, the last digit is removed from `n` using integer division (`n /= 10`), and the process continues until all digits are processed.
-   - Finally, the sum of the digits is returned.
+5. **Digit Removal**
+	```cpp
+	        n /= 10;
+	```
+	Removes the last digit of `n` by performing integer division by 10.
 
-2. **Main Function to Make the Integer Beautiful**:
-   ```cpp
-   long long makeIntegerBeautiful(long long n, int target) {
-       long long n0 = n, base = 1;
-   ```
-   - `n0` is initialized to store the original value of `n`. This will be used later to calculate the result after the minimal increment is found.
-   - `base` is initialized to `1`. This variable is used to keep track of the place value of the digits being incremented as the number `n` is modified.
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the cumulative sum of the digits.
 
-3. **Main Loop to Adjust the Number**:
-   ```cpp
-   while(sum(n) > target) {
-       n = n / 10 + 1;
-       base *= 10;
-   }
-   ```
-   - The `while` loop continues as long as the sum of the digits of `n` is greater than the target.
-   - In each iteration:
-     - `n = n / 10 + 1`: This step removes the last digit of `n` by dividing it by 10, then adds 1 to the result. This operation effectively increments the number in such a way that it causes a carry-over to the next digit, reducing the sum of digits.
-     - `base *= 10`: This step increases the place value of `base`. It is multiplied by 10 in each iteration to adjust the place value correctly when calculating the minimal increment later.
-   - This loop continues until the sum of digits is less than or equal to the target.
+7. **Function Definition**
+	```cpp
+	long long makeIntegerBeautiful(long long n, int target) {
+	```
+	Defines the main function to modify the number `n` such that its digit sum is less than or equal to the target.
 
-4. **Calculate and Return the Result**:
-   ```cpp
-   return n * base - n0;
-   ```
-   - Once the sum of digits of `n` is less than or equal to the target, we calculate the difference between the modified number `n` and the original number `n0` multiplied by the place value `base`.
-   - The result represents the smallest number that needs to be added to `n` to achieve the target sum of digits.
-   - Finally, this result is returned.
+8. **Variable Initialization**
+	```cpp
+	    long long n0 = n, base = 1;
+	```
+	Stores the original value of `n` in `n0` and initializes a scaling factor `base` to 1.
 
-### Complexity:
+9. **Condition Loop**
+	```cpp
+	    while(sum(n) > target) {
+	```
+	Loops while the digit sum of `n` is greater than the target.
 
-1. **Time Complexity**:
-   - The time complexity is dominated by the number of digits in the number `n`. In the worst case, the number of digits in `n` is proportional to \( \log_{10}(n) \), where \( n \) is the size of the input number.
-   - The `sum` function processes each digit of `n` once, which takes \( O(\log_{10}(n)) \) time.
-   - The main loop runs while the sum of the digits exceeds the target. In each iteration, the number of digits is reduced, and the operation involves constant-time arithmetic operations and the call to the `sum` function.
-   - Hence, the time complexity of the solution is \( O(\log_{10}(n)) \), where \( n \) is the number being transformed.
+10. **Value Update**
+	```cpp
+	        n = n / 10 + 1;
+	```
+	Reduces `n` by removing the last digit, increments it, and prepares it for scaling.
 
-2. **Space Complexity**:
-   - The space complexity is \( O(1) \) because the algorithm uses a constant amount of extra space, irrespective of the size of the input number `n`. The space used is for storing variables such as `n0`, `base`, and `res` during the calculation.
+11. **Scaling**
+	```cpp
+	        base *= 10;
+	```
+	Increases the scaling factor by a factor of 10 with each iteration.
 
-### Conclusion:
+12. **Return Statement**
+	```cpp
+	    return n * base - n0;
+	```
+	Returns the scaled and modified value of `n` minus the original value `n0`.
 
-The `makeIntegerBeautiful` function efficiently solves the problem of transforming a number such that the sum of its digits does not exceed a given target. The algorithm works by iterating over the digits of `n` and adjusting the least significant digits minimally to reduce the sum of digits. The use of a helper function to calculate the sum of digits and a loop that increments the number until the sum is within the target makes the solution both simple and effective.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-The time complexity of the solution is logarithmic in the size of the number, making it efficient even for large inputs. The space complexity is constant, as no additional space proportional to the input size is used. This makes the solution highly scalable and efficient, suitable for large inputs.
+The time complexity depends on the number of digits in n, which is O(log n), and we perform operations on these digits.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only store a few variables during the calculation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-addition-to-make-integer-beautiful/description/)
 

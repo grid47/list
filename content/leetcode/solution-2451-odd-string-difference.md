@@ -14,138 +14,203 @@ img_src = ""
 youtube = "mxdN0xJiJDc"
 youtube_upload_date="2022-10-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mxdN0xJiJDc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of strings where each string is of the same length. Each string can be converted into a difference array where each element represents the difference between two consecutive characters' positions in the alphabet. All strings in the array have the same difference array except for one. Your task is to identify the string that has a unique difference array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `words` where each element is a string of lowercase English letters.
+- **Example:** `words = ["xyz", "abb", "dcz"]`
+- **Constraints:**
+	- 3 <= words.length <= 100
+	- 2 <= words[i].length <= 20
+	- words[i] consists of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-    string difference(string& s) {
-        string d;
-        
-        for (int i = 0; i < s.size() - 1; i++) {
-            d += s[i + 1] - s[i];
-        }
-        
-        return d;
-    }
-public:
-    string oddString(vector<string>& words) {
-        int  n = words[0].size();
-        unordered_map<string, vector<string>> mp;
-        for (auto &it : words) {
-            mp[difference(it)].push_back(it);
-        }
-        
-        for (auto &it : mp) {
-            if (it.second.size() == 1) return it.second[0];
-        }
-        
-        return "";
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the string that has a different difference array compared to all other strings in the input array.
+- **Example:** `Output: "abb"`
+- **Constraints:**
+	- There will be exactly one string with a unique difference array.
 
-The given code solves a problem where we need to identify a string in a list of strings that has a unique "difference pattern" compared to the other strings. The difference pattern refers to the differences between consecutive characters in the string. The problem is to find the string that has a unique pattern of character differences. Let's break down the problem, the approach, and the code in detail.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the string with the unique difference array.
 
-### Problem Statement
+- 1. Compute the difference array for each string in the input array.
+- 2. Store the difference arrays in a hash map where the key is the difference array and the value is a list of corresponding strings.
+- 3. Identify the difference array that is unique by checking the size of the list for each key in the hash map.
+- 4. Return the string corresponding to the unique difference array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The difference array calculation is based on alphabetic positions starting from 'a' = 0 to 'z' = 25.
+- The input array always has at least one string with a unique difference array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ["xyz", "abb", "dcz"]`  \
+  **Explanation:** The difference array for 'xyz' is [1, 1], for 'abb' is [1, 1], and for 'dcz' is [1, -1]. The unique difference array is [1, -1], so 'dcz' is the string with a unique difference array.
 
-We are provided with a list of strings where each string has the same length. Our task is to find the string in the list that has a unique pattern of character differences between consecutive characters compared to the other strings. A character difference is calculated as the difference between the ASCII values of two consecutive characters in the string.
+- **Input:** `words = ["abc", "def", "xyz"]`  \
+  **Explanation:** The difference array for 'abc' is [1, 1], for 'def' is [1, 1], and for 'xyz' is [1, 1]. No string has a unique difference array in this case.
 
-For example, given a string "abc", the differences between consecutive characters are:
-- Difference between 'b' and 'a' = 1
-- Difference between 'c' and 'b' = 1
+{{< dots >}}
+## Approach 🚀
+We will calculate the difference array for each string and store it in a hash map. The string with a unique difference array will be found by checking which difference array is not repeated.
 
-Thus, the difference pattern for "abc" would be [1, 1].
-
-If we have a list of strings such as ["abc", "abd", "aec"], the task is to find the string that has a unique pattern of differences. If "abc" and "abd" share the same difference pattern but "aec" has a different pattern, then "aec" is the string with the unique difference pattern.
-
-### Approach
-
-To solve this problem, we can break it down into the following steps:
-
-1. **Difference Calculation**: We calculate the difference pattern for each string by iterating over each pair of consecutive characters in the string and finding the difference in their ASCII values.
-   
-2. **Group Strings by Difference Patterns**: Once we calculate the difference pattern for each string, we can group the strings based on their respective difference patterns. This will allow us to identify the string with a unique pattern.
-
-3. **Identify the Odd String**: After grouping the strings, we check which group contains exactly one string. This string will be the one with the unique difference pattern.
-
-4. **Return the Odd String**: Once we identify the string with the unique difference pattern, we return it.
-
-### Code Breakdown
-
-#### `difference` Function
-
-This function calculates the difference pattern for a given string `s`. It iterates through the string and computes the difference between consecutive characters in terms of their ASCII values. The resulting differences are stored in a new string `d`.
-
+### Initial Thoughts 💭
+- The problem is a comparison of difference arrays, which can be efficiently handled with a hash map.
+- We can calculate the difference array in O(n) time for each string and use the hash map to store and track the frequency of each difference array.
+{{< dots >}}
+### Edge Cases 🌐
+- Input will not be empty as per the problem constraints.
+- With a large number of words, the solution should remain efficient, as each word's difference array is computed in linear time.
+- Special cases such as all words having the same difference array will not occur based on problem constraints.
+- The time complexity of the solution should be manageable for the given constraints (up to 100 words of length 20).
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
 string difference(string& s) {
     string d;
     
-    // Loop through the string to calculate differences
     for (int i = 0; i < s.size() - 1; i++) {
         d += s[i + 1] - s[i];
     }
     
     return d;
 }
-```
-
-**Explanation**:
-- We initialize an empty string `d` to store the difference pattern.
-- We loop through the string from the first character to the second last character (because we are comparing each character with its next neighbor).
-- In each iteration, we calculate the difference between consecutive characters (`s[i + 1] - s[i]`) and append this difference to the string `d`.
-- Finally, we return the string `d`, which contains the difference pattern for the string `s`.
-
-#### `oddString` Function
-
-This is the main function that solves the problem. It takes a vector of strings `words` as input and returns the string that has a unique difference pattern.
-
-```cpp
+public:
 string oddString(vector<string>& words) {
-    int  n = words[0].size();  // Get the length of the first word
-    unordered_map<string, vector<string>> mp;  // Map to store difference patterns as keys, with corresponding words as values
-    
-    // Loop through each word to calculate its difference pattern
+    int  n = words[0].size();
+    unordered_map<string, vector<string>> mp;
     for (auto &it : words) {
         mp[difference(it)].push_back(it);
     }
     
-    // Loop through the map to find the group with exactly one word
     for (auto &it : mp) {
-        if (it.second.size() == 1) return it.second[0];  // Return the word with unique difference pattern
+        if (it.second.size() == 1) return it.second[0];
     }
     
     return "";
 }
 ```
 
-**Explanation**:
-- First, we retrieve the length of the first word in the `words` vector (`n = words[0].size()`). This is useful for ensuring that all words in the list have the same length.
-- We then create an unordered map `mp`, where each key is a string representing a difference pattern, and the value is a vector of strings that share that pattern.
-- We iterate over each string in `words`, calculate its difference pattern using the `difference` function, and store the string in the map with its corresponding difference pattern as the key.
-- After grouping the strings by their difference patterns, we loop through the map and check for the group that contains exactly one string. This is the string with the unique difference pattern.
-- If we find such a string, we return it. If no such string exists, we return an empty string `""`.
+This code defines a solution to find the odd string in a given list of strings. It compares the differences between consecutive characters in the strings to identify the unique string.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class, which contains the function implementations for solving the problem.
 
-#### Time Complexity:
-- The time complexity of the `difference` function is **O(k)**, where `k` is the length of the string. This is because we iterate through the string once to calculate the differences.
-- The time complexity of the `oddString` function is **O(m * k)**, where `m` is the number of words in the `words` vector, and `k` is the length of each word. This is because for each word, we calculate its difference pattern, which takes `O(k)` time.
-- The loop that iterates through the unordered map `mp` takes **O(m)** time in the worst case, since there are at most `m` different difference patterns.
+2. **Difference Function**
+	```cpp
+	string difference(string& s) {
+	```
+	This function calculates the difference between consecutive characters in the string `s` and returns a string representing the differences.
 
-Thus, the overall time complexity of the algorithm is **O(m * k)**.
+3. **Variable Initialization**
+	```cpp
+	    string d;
+	```
+	Initializes an empty string `d` to store the differences between consecutive characters.
 
-#### Space Complexity:
-- The space complexity is **O(m * k)** because in the worst case, each word has a unique difference pattern and we need to store each string in the map. The total space used by the map and the difference patterns is proportional to the number of words and the length of each word.
+4. **Loop Setup**
+	```cpp
+	    for (int i = 0; i < s.size() - 1; i++) {
+	```
+	Starts a loop to iterate over the string `s`, excluding the last character.
 
-### Conclusion
+5. **Difference Calculation**
+	```cpp
+	        d += s[i + 1] - s[i];
+	```
+	Calculates the difference between the ASCII values of consecutive characters `s[i + 1]` and `s[i]`, and appends the result to string `d`.
 
-This solution effectively solves the problem by calculating the difference patterns for each word and grouping the words based on their patterns. The unique word is identified by checking the map for a group that contains exactly one word. The time and space complexities are both efficient, making this solution scalable for large inputs. The algorithm leverages the unordered map to efficiently group and search for the word with the unique difference pattern.
+6. **Return Statement**
+	```cpp
+	    return d;
+	```
+	Returns the string `d`, which contains the differences between consecutive characters of the input string `s`.
+
+7. **Public Access Modifier**
+	```cpp
+	public:
+	```
+	Specifies that the following function `oddString` is publicly accessible from outside the class.
+
+8. **Odd String Function**
+	```cpp
+	string oddString(vector<string>& words) {
+	```
+	This function finds the 'odd' string in the list of words, which differs in its pattern of consecutive character differences.
+
+9. **Variable Initialization**
+	```cpp
+	    int  n = words[0].size();
+	```
+	Initializes `n` to the length of the first word in the `words` list.
+
+10. **Map Initialization**
+	```cpp
+	    unordered_map<string, vector<string>> mp;
+	```
+	Initializes an unordered map `mp` to store groups of words, where the key is the string of differences between consecutive characters.
+
+11. **Map Population**
+	```cpp
+	    for (auto &it : words) {
+	```
+	Iterates through each word `it` in the list `words`.
+
+12. **Difference and Map Update**
+	```cpp
+	        mp[difference(it)].push_back(it);
+	```
+	Calls the `difference` function for each word and stores the word in the map `mp` under the key corresponding to its character differences.
+
+13. **Find Odd String**
+	```cpp
+	    for (auto &it : mp) {
+	```
+	Iterates through each entry in the map `mp`, where each entry contains a list of words with the same character differences.
+
+14. **Return Odd String**
+	```cpp
+	        if (it.second.size() == 1) return it.second[0];
+	```
+	If a group in the map has only one word, it is the 'odd' string, so the function returns it.
+
+15. **Return Empty String**
+	```cpp
+	    return "";
+	```
+	If no odd string is found, the function returns an empty string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m)
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
+
+For each word (n words), we calculate the difference array in O(m) time, where m is the length of the word.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n * m)
+
+The space complexity is determined by the number of words and the storage of their corresponding difference arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/odd-string-difference/description/)
 

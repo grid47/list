@@ -14,116 +14,156 @@ img_src = ""
 youtube = "uiCLUTepEJA"
 youtube_upload_date="2021-03-21"
 youtube_thumbnail="https://i.ytimg.com/vi/uiCLUTepEJA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of positive integers 'nums', return the maximum possible sum of an ascending subarray. A subarray is ascending if for each i, num[i] < num[i+1].
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array 'nums' of positive integers. Your task is to find the maximum sum of a strictly ascending subarray.
+- **Example:** `nums = [5, 10, 15, 2, 8, 30]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxAscendingSum(vector<int>& nums) {
-        int sum = nums[0];
-        int maxi = sum;
-        if(nums.size() == 1) return nums[0];
-        for(int i = 1; i < nums.size(); i++){
-            if(nums[i] <= nums[i-1]){
-                sum = 0;
-            }
-                sum += nums[i];
-                maxi = max(sum,maxi);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum of any strictly ascending subarray.
+- **Example:** `For nums = [5, 10, 15, 2, 8, 30], the output will be 55.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the sum of the maximum ascending subarray in 'nums'.
+
+- 1. Iterate through the array 'nums'.
+- 2. Track the sum of the current ascending subarray. Reset the sum whenever the sequence stops being strictly ascending.
+- 3. Keep a variable to track the maximum sum found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will contain at least one number.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [5, 10, 15, 2, 8, 30]`  \
+  **Explanation:** In this example, the ascending subarrays are [5, 10, 15] and [2, 8, 30]. The maximum sum is 5 + 10 + 15 + 30 = 55.
+
+{{< dots >}}
+## Approach 🚀
+We will iterate through the array and calculate the sum of all strictly ascending subarrays while updating the maximum sum whenever needed.
+
+### Initial Thoughts 💭
+- An ascending subarray is defined by consecutive elements where each element is greater than the previous one.
+- We need to check each subarray's sum and compare it with the maximum sum so far.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, return 0.
+- Ensure that the solution can handle arrays with up to 100 elements.
+- For arrays with only one element, the maximum sum is the value of that element.
+- Make sure the solution runs efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxAscendingSum(vector<int>& nums) {
+    int sum = nums[0];
+    int maxi = sum;
+    if(nums.size() == 1) return nums[0];
+    for(int i = 1; i < nums.size(); i++){
+        if(nums[i] <= nums[i-1]){
+            sum = 0;
         }
-            return maxi;
-        }
-    
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand requires us to find the maximum sum of an ascending subarray within a given array of integers. An ascending subarray is defined as a contiguous sequence of numbers where each subsequent number is strictly greater than the previous one. The task is to iterate through the array and calculate sums of all ascending subarrays, returning the maximum sum encountered during this process.
-
-### Approach
-
-The solution utilizes a simple linear traversal of the input array to keep track of the current sum of an ascending subarray and the maximum sum found so far. The key steps in the approach are as follows:
-
-1. **Initialize Variables**: Start by initializing variables to store the current sum of the ascending subarray (`sum`) and the maximum sum found (`maxi`). 
-
-2. **Iterate Through the Array**: Loop through each element in the array starting from the second element.
-
-3. **Check for Ascending Order**: During each iteration, compare the current element with the previous one:
-   - If the current element is greater than the previous one, it is part of the ascending subarray, so add it to the current sum.
-   - If the current element is not greater, reset the current sum to start a new ascending subarray.
-
-4. **Update the Maximum**: After updating the current sum, check if it is greater than the maximum sum found so far and update accordingly.
-
-5. **Return the Result**: After iterating through the entire array, return the maximum sum.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int maxAscendingSum(vector<int>& nums) {
-```
-- The class `Solution` is defined with a public method `maxAscendingSum` that takes a vector of integers `nums` as input.
-
-```cpp
-        int sum = nums[0];
-        int maxi = sum;
-        if(nums.size() == 1) return nums[0];
-```
-- Two variables, `sum` and `maxi`, are initialized to the first element of the array. This initializes the current sum to the first number and sets the maximum sum to that value.
-- A check is performed to see if the array has only one element. If it does, the function returns that single element as the maximum sum, since that is the only ascending subarray possible.
-
-```cpp
-        for(int i = 1; i < nums.size(); i++) {
-```
-- A `for` loop is initiated, starting from the second element (index 1) and iterating through the rest of the array.
-
-```cpp
-            if(nums[i] <= nums[i-1]){
-                sum = 0;
-            }
-```
-- Inside the loop, an `if` statement checks if the current element is less than or equal to the previous element. If this condition is true, it means the ascending order has been broken, so the current sum is reset to 0. 
-
-```cpp
-                sum += nums[i];
-                maxi = max(sum, maxi);
-```
-- The current element is added to the current sum regardless of whether the order was broken or not.
-- The maximum sum (`maxi`) is updated by comparing the current sum with the previously recorded maximum sum.
-
-```cpp
-        }
+            sum += nums[i];
+            maxi = max(sum,maxi);
+    }
         return maxi;
     }
-};
+
 ```
-- The loop continues until all elements have been processed.
-- After the loop concludes, the function returns the maximum sum found among all ascending subarrays.
 
-### Complexity
+The function `maxAscendingSum` calculates the maximum sum of a strictly increasing contiguous subarray from a given list of integers.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the number of elements in the input array. This is due to the single pass through the array to calculate the sums.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxAscendingSum(vector<int>& nums) {
+	```
+	This is the function definition. The input is a vector of integers, `nums`, and the output is an integer representing the maximum sum of an ascending subarray.
 
-- **Space Complexity**: The space complexity is \(O(1)\), as only a constant amount of additional space is used for variables (`sum`, `maxi`).
+2. **Variable Initialization**
+	```cpp
+	    int sum = nums[0];
+	```
+	Initialize `sum` to the first element of the `nums` array. This variable tracks the sum of the current ascending subarray.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    int maxi = sum;
+	```
+	Initialize `maxi` to the value of `sum`. This will track the maximum sum encountered during the iteration.
 
-The provided code efficiently calculates the maximum sum of ascending subarrays using a straightforward linear traversal approach. The algorithm is optimized for both time and space, making it suitable for large input sizes. This solution illustrates the effectiveness of a greedy algorithm approach combined with careful condition checking.
+4. **Edge Case Handling**
+	```cpp
+	    if(nums.size() == 1) return nums[0];
+	```
+	Handle the edge case where the input list has only one element. In this case, the only possible sum is the element itself.
 
-By focusing on the properties of ascending sequences, the code is able to elegantly and efficiently determine the maximum ascending sum. The clear and concise structure of the code allows for easy understanding and maintenance, reinforcing good coding practices.
+5. **Loop Start**
+	```cpp
+	    for(int i = 1; i < nums.size(); i++){
+	```
+	Start a loop from the second element to the last element of the `nums` array to evaluate each element in relation to its predecessor.
 
-In competitive programming and coding interviews, this type of problem helps hone skills in array manipulation, condition checking, and maintaining state across iterations. Understanding and implementing such algorithms is crucial for developers, particularly in scenarios involving performance optimization and algorithm design.
+6. **Condition Check**
+	```cpp
+	        if(nums[i] <= nums[i-1]){
+	```
+	Check if the current element is less than or equal to the previous element. If so, the ascending subarray has ended.
 
-In summary, the approach taken in this code exemplifies the principles of effective problem-solving in programming, showcasing how a clear understanding of the problem can lead to an elegant solution.
+7. **Reset Sum**
+	```cpp
+	            sum = 0;
+	```
+	Reset `sum` to 0 since the current subarray is no longer strictly increasing.
+
+8. **Sum Update**
+	```cpp
+	            sum += nums[i];
+	```
+	Add the current element to `sum` as part of the current ascending subarray.
+
+9. **Maximum Update**
+	```cpp
+	            maxi = max(sum,maxi);
+	```
+	Update `maxi` with the larger of the current sum (`sum`) or the previous maximum (`maxi`).
+
+10. **Return Statement**
+	```cpp
+	        return maxi;
+	```
+	Return the maximum sum of the strictly increasing subarray found during the iteration.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the length of the array, as we only iterate through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we only need a few variables to track the current sum and the maximum sum.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-ascending-subarray-sum/description/)
 

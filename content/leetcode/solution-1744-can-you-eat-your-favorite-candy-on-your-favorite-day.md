@@ -14,115 +14,210 @@ img_src = ""
 youtube = "F4JpJIntzbQ"
 youtube_upload_date="2021-01-31"
 youtube_thumbnail="https://i.ytimg.com/vi/F4JpJIntzbQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `candiesCount` where each element represents the number of candies of a particular type. You are also given a set of queries, each asking whether it's possible to eat a candy of a certain type on a specific day without exceeding a daily candy limit. You must follow these game rules:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<bool> canEat(vector<int>& nums, vector<vector<int>>& q) {
-        typedef long long ll;
-        vector<ll> cnt(nums.size() +1, 0);
-        
-        for(int i = 1; i < nums.size() +1; i++)
-            cnt[i] += cnt[i - 1] + nums[i -1];
-        
-        vector<bool> res;
-        for(auto & v : q) {
-            ll type = v[0], day = v[1], cap = v[2];
-            ll mn = cnt[type] / cap;
-            ll mx = cnt[type + 1] - 1;
+- You start eating candies on day 0.
+- You cannot eat candies of type `i` until you have eaten all candies of type `i-1`.
+- You must eat at least one candy per day.
+
+Your task is to return an array of booleans where each element indicates whether it's possible to eat a candy of the specified type on the given day, subject to the daily cap.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `candiesCount`, where `candiesCount[i]` indicates the number of candies of the ith type, and a 2D array `queries`, where each query specifies a favorite candy type, a day, and the daily cap of candies that can be eaten.
+- **Example:** `Input: candiesCount = [6, 3, 2, 4], queries = [[1, 2, 3], [2, 7, 5], [0, 5, 10]]`
+- **Constraints:**
+	- 1 <= candiesCount.length <= 10^5
+	- 1 <= candiesCount[i] <= 10^5
+	- 1 <= queries.length <= 10^5
+	- queries[i].length == 3
+	- 0 <= favoriteTypei < candiesCount.length
+	- 0 <= favoriteDayi <= 10^9
+	- 1 <= dailyCapi <= 10^9
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of booleans indicating whether it's possible to eat a candy of the specified type on the given day without exceeding the daily cap.
+- **Example:** `Output: [true, false, true]`
+- **Constraints:**
+	- For each query, the result should be `true` if it's possible to eat a candy of the favorite type on the specified day without exceeding the daily cap, otherwise `false`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if, given the daily candy limit, it's possible to eat a specific type of candy on a specific day while respecting the game rules.
+
+- 1. Compute the cumulative sum of the number of candies for each type.
+- 2. For each query, calculate the minimum and maximum possible days the candy of the favorite type can be eaten, based on the daily limit.
+- 3. Check if the specified day falls within the valid range of days for the favorite type and return the corresponding result.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each query is valid, meaning the favorite type and day are within the bounds of the candies array and the daily cap.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: candiesCount = [6, 3, 2, 4], queries = [[1, 2, 3], [2, 7, 5], [0, 5, 10]]`  \
+  **Explanation:** For the first query, you want to check if it's possible to eat a candy of type 1 on day 2 with a daily cap of 3 candies. If you eat 3 candies per day, by day 2, you've eaten 3 candies from type 0 and 3 from type 1, so the answer is `true`.
+For the second query, you cannot eat type 2 on day 7 without exceeding the daily cap of 5, so the answer is `false`.
+For the third query, if you eat 10 candies per day, you will eat a candy of type 0 on day 5, so the answer is `true`.
+
+- **Input:** `Input: candiesCount = [5, 2, 6, 4, 1], queries = [[3, 1, 2], [4, 10, 3], [3, 10, 100], [4, 100, 30], [1, 3, 1]]`  \
+  **Explanation:** The answers for the queries are `false`, `true`, `true`, `false`, and `false` because they depend on the daily cap and how candies accumulate over the days.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the cumulative sum of candies for each type and then determining if the favorite type can be consumed on the specified day based on the daily cap.
+
+### Initial Thoughts 💭
+- We need to ensure that the solution can handle large inputs efficiently.
+- The problem can be solved using prefix sums to efficiently calculate the range of possible days for each type of candy.
+{{< dots >}}
+### Edge Cases 🌐
+- Queries should not be empty, as there's at least one query in the problem.
+- The solution must handle the maximum input sizes efficiently.
+- Handle cases where the favorite day is very large or the daily cap is at its maximum.
+- The solution must be designed to handle the upper bounds of the constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<bool> canEat(vector<int>& nums, vector<vector<int>>& q) {
+    typedef long long ll;
+    vector<ll> cnt(nums.size() +1, 0);
+    
+    for(int i = 1; i < nums.size() +1; i++)
+        cnt[i] += cnt[i - 1] + nums[i -1];
+    
+    vector<bool> res;
+    for(auto & v : q) {
+        ll type = v[0], day = v[1], cap = v[2];
+        ll mn = cnt[type] / cap;
+        ll mx = cnt[type + 1] - 1;
 
 if (mn <= day && day <= mx) {
-    res.push_back(true); }
-            else {
-                res.push_back(false);
-            }
+res.push_back(true); }
+        else {
+            res.push_back(false);
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+The function `canEat` determines whether a certain type of food can be eaten on a particular day given the capacity limits and the total number of servings available for different food types.
 
-Given an array `nums` where `nums[i]` represents the number of candies of type `i`, and a list of queries `q`. Each query `q[i]` has three values `[type, day, cap]`, which asks if it is possible to eat a candy of type `type` on day `day` while consuming at most `cap` candies each day. The goal is to determine whether each query is feasible based on the candy consumption limits.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<bool> canEat(vector<int>& nums, vector<vector<int>>& q) {
+	```
+	This defines the function `canEat`, which takes two parameters: a vector `nums` representing the number of servings of each food type, and a vector `q` containing queries with details about food type, day, and capacity.
 
-### Approach
+2. **Type Definition**
+	```cpp
+	    typedef long long ll;
+	```
+	This line defines `ll` as an alias for `long long` to simplify the code when dealing with large integers.
 
-To solve this, a prefix sum array `cnt` is used to store cumulative counts of candies available up to each type. This allows for quickly determining the minimum and maximum range of days when a candy of a specific type can be eaten.
+3. **Array Initialization**
+	```cpp
+	    vector<ll> cnt(nums.size() +1, 0);
+	```
+	This initializes a vector `cnt` of size `nums.size() + 1` to store the cumulative sum of servings, with all elements set to 0 initially.
 
-For each query, given `type`, `day`, and `cap`, we:
-1. Calculate the minimum possible day (`mn`) and maximum possible day (`mx`) when a candy of the given type can be consumed.
-2. Check if the specified `day` falls within this range (`mn <= day <= mx`).
-3. If so, return `true` for that query; otherwise, return `false`.
+4. **Cumulative Sum Calculation**
+	```cpp
+	    for(int i = 1; i < nums.size() +1; i++)
+	```
+	This loop iterates over the `nums` vector to calculate the cumulative sum of servings for each food type.
 
-### Code Breakdown (Step by Step)
+5. **Cumulative Sum Update**
+	```cpp
+	        cnt[i] += cnt[i - 1] + nums[i -1];
+	```
+	For each food type, the cumulative count of servings is updated by adding the previous cumulative sum and the current number of servings.
 
-Let’s walk through the code in detail.
+6. **Query Processing**
+	```cpp
+	    vector<bool> res;
+	```
+	This initializes a vector `res` to store the results of the queries (whether the food can be eaten on a given day).
 
-1. **Prefix Sum Calculation**:
-   - Initialize a prefix sum array `cnt` of size `nums.size() + 1`.
-   - Populate `cnt` such that `cnt[i]` represents the cumulative number of candies from type `0` to `i-1`.
+7. **Loop Over Queries**
+	```cpp
+	    for(auto & v : q) {
+	```
+	This loop processes each query in the vector `q`.
 
-   ```cpp
-   typedef long long ll;
-   vector<ll> cnt(nums.size() + 1, 0);
-   for(int i = 1; i < nums.size() + 1; i++)
-       cnt[i] += cnt[i - 1] + nums[i - 1];
-   ```
+8. **Variable Extraction**
+	```cpp
+	        ll type = v[0], day = v[1], cap = v[2];
+	```
+	The query is unpacked into three variables: `type` (food type), `day` (the day in question), and `cap` (capacity limit for servings).
 
-   This ensures that `cnt[type]` gives the total number of candies available before type `type`, and `cnt[type + 1]` gives the cumulative count up to the next type.
+9. **Calculate Minimum Servings**
+	```cpp
+	        ll mn = cnt[type] / cap;
+	```
+	This calculates the minimum number of servings that can be eaten on the given day by dividing the cumulative servings by the capacity.
 
-2. **Processing Each Query**:
-   - For each query `v`, calculate:
-     - `type`: the type of candy in question.
-     - `day`: the specific day on which we wish to eat the candy.
-     - `cap`: the maximum number of candies that can be eaten per day.
-   
-   ```cpp
-   vector<bool> res;
-   for(auto & v : q) {
-       ll type = v[0], day = v[1], cap = v[2];
-       ll mn = cnt[type] / cap;
-       ll mx = cnt[type + 1] - 1;
-   ```
+10. **Calculate Maximum Servings**
+	```cpp
+	        ll mx = cnt[type + 1] - 1;
+	```
+	This calculates the maximum number of servings available for the given food type by using the cumulative sum.
 
-   - Calculate `mn`, the minimum possible day by dividing the cumulative candies up to `type` by the daily limit `cap`.
-   - Calculate `mx`, the maximum possible day by finding the last day before reaching the next type's candies.
+11. **Conditional Check**
+	```cpp
+	if (mn <= day && day <= mx) {
+	```
+	This checks if the day in the query falls within the allowable range of servings (between the minimum and maximum servings).
 
-3. **Checking Feasibility**:
-   - If `mn <= day <= mx`, it’s possible to eat a candy of the given type on `day` under the constraints, so `true` is added to `res`. Otherwise, `false` is added.
+12. **Result Update (True)**
+	```cpp
+	res.push_back(true); }
+	```
+	If the day is within the allowable range, `true` is added to the result vector, indicating that the food can be eaten on that day.
 
-   ```cpp
-   if (mn <= day && day <= mx) {
-       res.push_back(true); 
-   } else {
-       res.push_back(false);
-   }
-   ```
+13. **Result Update (False)**
+	```cpp
+	        else {
+	```
+	If the day is outside the allowable range, the code prepares to add `false` to the result vector.
 
-4. **Returning the Result**:
-   - The vector `res`, which holds the boolean results for each query, is returned.
+14. **Result Update (False)**
+	```cpp
+	            res.push_back(false);
+	```
+	This adds `false` to the result vector, indicating that the food cannot be eaten on that day.
 
-   ```cpp
-   return res;
-   ```
+15. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the result vector `res`, which contains the answers to each query (whether the food can be eaten on the specified day).
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + q), where `n` is the length of candiesCount and `q` is the number of queries.
+- **Average Case:** O(n + q), since we must compute the prefix sums and then process each query.
+- **Worst Case:** O(n + q), as we process all candies and all queries.
 
-- **Time Complexity**: \(O(N + Q)\), where \(N\) is the length of `nums` and \(Q\) is the number of queries. The prefix sum takes \(O(N)\), and each query check takes \(O(1)\), resulting in \(O(N + Q)\).
-  
-- **Space Complexity**: \(O(N + Q)\) for storing the prefix sums and results of each query.
+The time complexity is linear with respect to the number of candies and queries.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n), since we are storing the cumulative sum.
+- **Worst Case:** O(n), where `n` is the length of candiesCount, as we need space to store the cumulative sums.
 
-This solution efficiently checks the feasibility of each query by leveraging prefix sums for quick cumulative candy counts. This approach provides optimal performance with minimal computation per query, making it well-suited for large inputs.
+The space complexity is linear in the number of candy types.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/description/)
 

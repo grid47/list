@@ -14,105 +14,155 @@ img_src = ""
 youtube = "Lyesi93Z6_A"
 youtube_upload_date="2022-04-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Lyesi93Z6_A/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string of digits, `s`, and an integer `k`. Your task is to repeatedly process the string until its length becomes less than or equal to `k`. In each step, divide the string into consecutive groups of size `k`. If the last group is smaller than `k`, process it as is. For each group, calculate the sum of its digits, convert the result back to a string, and merge all groups to form a new string. Repeat the process until the string length is `≤ k`, and return the final string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` and an integer `k`.
+- **Example:** `For example, `s = "987654"` and `k = 2`.`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- 2 <= k <= 100
+	- The string `s` consists of digits only.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string digitSum(string s, int k) {
-    while(s.size() > k) {
-        string s1;
-        for (int i = 0; i < s.size(); i += k)
-            s1 += to_string(accumulate(begin(s) + i, begin(s) + min((int)s.size(), i + k), 0, 
-                [](int n, char ch){ return n + ch - '0'; }));
-        swap(s1, s);
-    }
-    return s;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function returns the final processed string after applying the digit-sum transformation until the length of `s` becomes less than or equal to `k`.
+- **Example:** `If `s = "987654"` and `k = 2`, the output will be `"3011"`.`
+- **Constraints:**
+	- The output string will have a length of at most `k`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Transform the string `s` iteratively by dividing it into groups of size `k`, summing the digits of each group, and merging the results until its length is less than or equal to `k`.
+
+- While the length of `s` is greater than `k`, perform the following:
+- 1. Divide `s` into groups of size `k`.
+- 2. For each group, calculate the sum of its digits.
+- 3. Replace the group with the sum as a string.
+- 4. Merge all groups to form the new string `s`.
+- Return `s` when its length is less than or equal to `k`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `s` is non-empty.
+- The value of `k` is always valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: `s = "987654321", k = 3``  \
+  **Explanation:** 1. Divide `s` into groups: `"987"`, `"654"`, `"321"`. 
+2. Sum digits in each group: `9+8+7=24`, `6+5+4=15`, `3+2+1=6`. 
+3. Merge results: `"24156"`. Repeat for `"24156"`. 
+4. Divide: `"241"`, `"56"`. Sum: `2+4+1=7`, `5+6=11`. Merge: `"711"`. Stop as length ≤ `k`.
+
+- **Input:** `Input: `s = "1234", k = 2``  \
+  **Explanation:** 1. Divide: `"12"`, `"34"`. Sum: `1+2=3`, `3+4=7`. Merge: `"37"`. Stop as length ≤ `k`.
+
+{{< dots >}}
+## Approach 🚀
+Iteratively process the string until its length is less than or equal to `k` by dividing into groups, summing digits, and merging results.
+
+### Initial Thoughts 💭
+- Each group can be processed independently.
+- The transformation involves simple arithmetic operations.
+- Use a loop to handle iterations.
+- Handle groups efficiently using slicing or indexing.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as `s` is guaranteed to be non-empty.
+- Ensure the implementation handles strings close to the maximum length of 100 efficiently.
+- `k` equals the length of `s`: return `s` immediately.
+- `s` contains only zeros: ensure the sum correctly results in zeros.
+- Ensure all calculations respect numeric constraints for digits.
+{{< dots >}}
+## Code 💻
+```cpp
+string digitSum(string s, int k) {
+while(s.size() > k) {
+    string s1;
+    for (int i = 0; i < s.size(); i += k)
+        s1 += to_string(accumulate(begin(s) + i, begin(s) + min((int)s.size(), i + k), 0, 
+            [](int n, char ch){ return n + ch - '0'; }));
+    swap(s1, s);
 }
-};
-{{< /highlight >}}
----
+return s;
+}
+```
 
-### Problem Statement
-The problem asks us to repeatedly reduce a string of digits by summing up groups of `k` digits until the string's length becomes less than or equal to `k`. After each sum operation, the resulting string should be formed by concatenating the sums as strings. The task is to return the final reduced string when its length is no longer greater than `k`.
+This function calculates the repeated digit sum of a given string of digits, reducing it until the string size is less than or equal to a specified integer 'k'.
 
-For example:
-- **Input**: `s = "11111222223"`, `k = 3`
-- **Output**: `"27"`
-  
-### Approach
-To solve this problem, we can break the string down into smaller groups of `k` characters, compute the sum of the digits in each group, and concatenate the sums into a new string. This process is repeated until the string's length is reduced to `k` or fewer characters.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string digitSum(string s, int k) {
+	```
+	This line defines the function 'digitSum', which takes a string 's' and an integer 'k' as input.
 
-Here’s how we approach the solution:
-1. **Repeated Summation**: We need to break the string into chunks of `k` characters. For each chunk, we compute the sum of the digits.
-2. **String Update**: After computing the sums for all chunks, we concatenate the results into a new string.
-3. **Stop When Length is Less Than or Equal to `k`**: We continue performing the above operation until the string’s length becomes less than or equal to `k`.
-4. **Edge Case Handling**: If the string length is already smaller than or equal to `k`, we simply return the string.
+2. **Loop Condition**
+	```cpp
+	while(s.size() > k) {
+	```
+	The while loop continues as long as the size of the string 's' is greater than 'k'.
 
-### Code Breakdown (Step by Step)
+3. **Variable Initialization**
+	```cpp
+	    string s1;
+	```
+	A temporary string 's1' is initialized to store the sum of digits in each segment.
 
-1. **Function Definition**:
-   ```cpp
-   string digitSum(string s, int k) {
-   ```
-   - The function `digitSum` takes two parameters: `s`, the string of digits, and `k`, the group size for summing digits.
+4. **For Loop**
+	```cpp
+	    for (int i = 0; i < s.size(); i += k)
+	```
+	This for loop iterates over the string 's' in steps of 'k', processing 'k' digits at a time.
 
-2. **Loop Until the Length is Less Than or Equal to `k`**:
-   ```cpp
-   while(s.size() > k) {
-   ```
-   - We continue iterating as long as the length of the string `s` is greater than `k`. Each iteration reduces the size of the string.
+5. **Accumulation**
+	```cpp
+	        s1 += to_string(accumulate(begin(s) + i, begin(s) + min((int)s.size(), i + k), 0, 
+	```
+	This line accumulates the sum of the 'k' digits starting from index 'i'. The 'accumulate' function adds each digit's numeric value to the total.
 
-3. **Initialize a Temporary String**:
-   ```cpp
-   string s1;
-   ```
-   - We initialize a new string `s1` to store the result of the sum operations for the current iteration.
+6. **Lambda Function**
+	```cpp
+	            [](int n, char ch){ return n + ch - '0'; }));
+	```
+	The lambda function inside 'accumulate' converts each character 'ch' to its corresponding integer value by subtracting '0'.
 
-4. **Break String Into Chunks of Size `k` and Compute Sums**:
-   ```cpp
-   for (int i = 0; i < s.size(); i += k)
-       s1 += to_string(accumulate(begin(s) + i, begin(s) + min((int)s.size(), i + k), 0, 
-           [](int n, char ch){ return n + ch - '0'; }));
-   ```
-   - We loop through the string `s` in increments of `k` and extract each chunk. The `accumulate` function is used to sum the digits of each chunk:
-     - `begin(s) + i` starts the chunk from index `i`.
-     - `begin(s) + min((int)s.size(), i + k)` ensures the chunk does not extend beyond the string's length.
-     - The lambda function `[](int n, char ch){ return n + ch - '0'; }` converts each character to an integer (`ch - '0'`), and the `accumulate` function calculates the sum of the digits in the chunk.
-   - The sum of each chunk is then converted to a string using `to_string` and added to `s1`.
+7. **Swap Operation**
+	```cpp
+	    swap(s1, s);
+	```
+	After each iteration, the new string 's1' is swapped with 's', so the process continues on the updated string.
 
-5. **Swap the New String to `s`**:
-   ```cpp
-   swap(s1, s);
-   ```
-   - After processing all chunks, `s1` contains the new string formed by concatenating the sums. We swap the contents of `s` with `s1`, so that `s` is updated with the reduced string.
+8. **Return Statement**
+	```cpp
+	return s;
+	```
+	Once the string size is less than or equal to 'k', the function returns the final string 's'.
 
-6. **Return the Final String**:
-   ```cpp
-   return s;
-   }
-   ```
-   - Once the loop finishes, meaning the length of the string `s` is less than or equal to `k`, we return `s` as the result.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-### Complexity
+Each iteration processes the string in linear time, and the length of `s` reduces logarithmically over iterations.
 
-#### Time Complexity:
-- The main work is done inside the `while` loop. In each iteration, we process the string in chunks of size `k`, so the time complexity of one iteration is proportional to the length of the string, `O(n)`, where `n` is the current length of the string.
-- The string length decreases in each iteration, but we do not have a direct formula for how many iterations will occur. In the worst case, each iteration reduces the string length significantly. However, since the string length can only decrease, the total number of iterations will be logarithmic with respect to the length of the string, i.e., `O(log n)`, where `n` is the original length of the string.
-- Hence, the overall time complexity is approximately `O(n * log n)`, where `n` is the initial length of the string.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
-- The space complexity is `O(n)` because in the worst case, we are storing an intermediate string `s1` that is the same length as the input string `s`.
+In-place modifications reduce space requirements; however, slicing may require extra memory proportional to the input size.
 
-### Conclusion
-This approach is efficient for reducing a string by summing groups of `k` digits until the string becomes sufficiently small. The use of the `accumulate` function for summing the digits in each chunk simplifies the process, and the loop reduces the string length iteratively. The solution runs in `O(n * log n)` time and uses `O(n)` space, making it suitable for moderately large strings. The solution is both intuitive and concise, leveraging built-in functions like `accumulate` and `to_string` for clarity and efficiency.
+**Happy Coding! 🎉**
 
-In summary, this problem demonstrates how to manipulate strings by performing repeated transformations, and this approach efficiently handles the task while adhering to the constraints provided.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/calculate-digit-sum-of-a-string/description/)
 

@@ -14,99 +14,139 @@ img_src = ""
 youtube = "I9ZXvpleMDk"
 youtube_upload_date="2022-03-20"
 youtube_thumbnail="https://i.ytimg.com/vi/I9ZXvpleMDk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums'. A number at index 'i' is part of a hill if its closest non-equal neighbors on both sides are smaller than the number at index 'i'. Similarly, an index 'i' is part of a valley if its closest non-equal neighbors on both sides are larger than the number at index 'i'. Adjacent indices 'i' and 'j' are part of the same hill or valley if the values at nums[i] and nums[j] are the same. An index must have non-equal neighbors on both sides to be part of a hill or valley. Your task is to count the total number of hills and valleys.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers.
+- **Example:** `nums = [3, 5, 1, 4, 2]`
+- **Constraints:**
+	- 3 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countHillValley(vector<int>& nums) {
-      int res = 0;
-        for(int j = 0, i = 1; i < nums.size() - 1; i++)
-          if ((nums[j] < nums[i] && nums[i] > nums[i + 1]) ||
-              (nums[j] > nums[i] && nums[i] < nums[i + 1])) {
-                res++;
-                j = i;
-              }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of hills and valleys in the array.
+- **Example:** `Output: 2`
+- **Constraints:**
 
-### Problem Statement
-The problem asks us to count the number of "hill" and "valley" elements in the array `nums`. A *hill* is defined as an element that is greater than both its adjacent elements, while a *valley* is an element that is smaller than both its adjacent elements. The challenge here is to count these hills and valleys efficiently.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify hills and valleys based on the given conditions.
 
-However, there are a few optimizations to consider:
-- Consecutive elements that are the same should be removed before counting.
-- We need to traverse the array and count hills and valleys while ignoring consecutive duplicates.
+- Iterate through the array and check for each element if it satisfies the hill or valley condition.
+- For each element, compare it with the closest non-equal neighbors to determine if it forms a hill or valley.
+- Count the number of hills and valleys.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array has at least three elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 5, 1, 4, 2]`  \
+  **Explanation:** In this example, index 1 is a hill (5 > 3 and 5 > 1), index 2 is a valley (1 < 5 and 1 < 4), and index 3 is a hill (4 > 1 and 4 > 2). Therefore, the total count of hills and valleys is 2.
 
-### Approach
-The solution can be efficiently implemented using a **single pass** through the array with the help of a pointer (`j`) that skips over consecutive duplicate elements. The approach ensures that we:
-1. Skip duplicate elements that would otherwise be counted as hills or valleys.
-2. Check each element in the array (except the first and last elements) to determine whether it qualifies as a hill or valley.
-3. Count the hills and valleys as we go through the array.
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over the array and identifying hills and valleys based on the given conditions. A hill is a number that is greater than both its neighbors, and a valley is smaller than both its neighbors.
 
-The strategy is:
-1. Start by iterating through the array, checking each element and its neighbors.
-2. Skip consecutive duplicate elements to ensure they don't affect the count.
-3. For each element, check if it forms a hill or valley by comparing it with its adjacent elements.
-4. Return the count of hills and valleys.
+### Initial Thoughts 💭
+- A hill is a local maximum, and a valley is a local minimum in the context of non-equal neighbors.
+- We can iterate through the array and check for each element if it satisfies the hill or valley conditions.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array must have at least 3 elements.
+- The solution should handle arrays of size up to 100 elements efficiently.
+- Arrays where all elements are equal will not have any hills or valleys.
+{{< dots >}}
+## Code 💻
+```cpp
+int countHillValley(vector<int>& nums) {
+  int res = 0;
+    for(int j = 0, i = 1; i < nums.size() - 1; i++)
+      if ((nums[j] < nums[i] && nums[i] > nums[i + 1]) ||
+          (nums[j] > nums[i] && nums[i] < nums[i + 1])) {
+            res++;
+            j = i;
+          }
+    return res;
+}
+```
 
-### Code Breakdown (Step by Step)
+This function counts the number of 'hill' and 'valley' points in an array. A point is a hill if it is greater than its adjacent points, and a valley if it is smaller than its adjacent points.
 
-1. **Initialization:**
-   ```cpp
-   int res = 0;
-   ```
-   - `res` is initialized to 0, which will hold the count of hills and valleys.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countHillValley(vector<int>& nums) {
+	```
+	Function definition begins. This function takes a vector of integers as input and will return an integer value.
 
-2. **Iterating through the Array:**
-   ```cpp
-   for(int j = 0, i = 1; i < nums.size() - 1; i++)
-   ```
-   - The loop starts with `j` pointing to the first element and `i` pointing to the second element.
-   - The loop will continue until `i` reaches the second-to-last element (`nums.size() - 1`), since the first and last elements can't be hills or valleys due to their lack of both neighbors.
+2. **Variable Initialization**
+	```cpp
+	  int res = 0;
+	```
+	Initialize the result variable `res` to 0. This will store the count of hill and valley points.
 
-3. **Skipping Duplicates:**
-   ```cpp
-   if ((nums[j] < nums[i] && nums[i] > nums[i + 1]) ||
-       (nums[j] > nums[i] && nums[i] < nums[i + 1])) {
-   ```
-   - This condition checks if the current element (`nums[i]`) is either a hill or a valley.
-   - If `nums[i]` is greater than both its neighbors (`nums[j]` and `nums[i + 1]`), it forms a hill. Similarly, if `nums[i]` is smaller than both its neighbors, it forms a valley.
-   - The condition is written to ensure that we only count the element as a hill or valley when its adjacent elements are not equal, effectively skipping over duplicate numbers.
+3. **Loop Setup**
+	```cpp
+	    for(int j = 0, i = 1; i < nums.size() - 1; i++)
+	```
+	Start a loop to iterate through the vector `nums`. The loop runs from index 1 to `size - 2` (excluding the first and last element). The variable `j` keeps track of the previous peak or valley.
 
-4. **Updating the Count:**
-   ```cpp
-   res++;
-   j = i;
-   ```
-   - If a hill or valley is found, increment `res` and update `j` to point to the current element (`i`).
-   - This ensures that we skip over consecutive duplicates and only check for hills and valleys after unique elements.
+4. **Condition Check**
+	```cpp
+	      if ((nums[j] < nums[i] && nums[i] > nums[i + 1]) ||
+	```
+	Check if the current point `i` is a 'hill'. A hill occurs when the current element is greater than both its neighbors.
 
-5. **Returning the Result:**
-   ```cpp
-   return res;
-   ```
-   - After completing the iteration, the function returns `res`, the total count of hills and valleys in the array.
+5. **Condition Check**
+	```cpp
+	          (nums[j] > nums[i] && nums[i] < nums[i + 1])) {
+	```
+	Check if the current point `i` is a 'valley'. A valley occurs when the current element is smaller than both its neighbors.
 
-### Complexity
+6. **Increment Result**
+	```cpp
+	            res++;
+	```
+	If the current point is either a hill or valley, increment the result count.
 
-#### Time Complexity:
-- **O(n)**: 
-  - The algorithm runs in O(n) time where `n` is the number of elements in the input array `nums`. This is because we only iterate through the array once and perform constant-time checks for each element.
+7. **Update Previous Point**
+	```cpp
+	            j = i;
+	```
+	Update `j` to the current index `i` to track the new reference point for the next hill/valley check.
 
-#### Space Complexity:
-- **O(1)**: 
-  - The space complexity is O(1) because we are using only a few additional variables (`res`, `j`, and `i`), and no additional space is used that grows with the input size.
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the final count of hills and valleys found in the vector.
 
-### Conclusion
-This solution efficiently counts the number of hills and valleys in the input array `nums` with a single pass. It avoids counting consecutive duplicates and ensures that only elements that form valid hills or valleys are counted. The use of a single iteration through the array ensures optimal time complexity of O(n), making this solution suitable for large input sizes. Additionally, the space complexity is O(1), meaning the solution uses constant space regardless of the input size, which makes it both time and space efficient.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We need to loop through each element once, making the time complexity O(n), where n is the length of the input array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution uses a constant amount of extra space since we are only tracking the count of hills and valleys.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-hills-and-valleys-in-an-array/description/)
 

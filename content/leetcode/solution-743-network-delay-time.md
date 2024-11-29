@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Bp7STMWMMQw"
 youtube_upload_date="2024-05-23"
 youtube_thumbnail="https://i.ytimg.com/vi/Bp7STMWMMQw/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,137 +28,217 @@ youtube_thumbnail="https://i.ytimg.com/vi/Bp7STMWMMQw/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a network of `n` nodes and a list of directed edges with travel times. You need to send a signal from a given node `k`. Return the minimum time it takes for all nodes to receive the signal, or return `-1` if it is impossible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of directed edges `times[i] = (ui, vi, wi)` representing the travel time from node `ui` to node `vi`, as well as the number of nodes `n` and the starting node `k`.
+- **Example:** `times = [[1, 2, 1], [1, 3, 2], [3, 4, 1]], n = 4, k = 1`
+- **Constraints:**
+	- 1 <= k <= n <= 100
+	- 1 <= times.length <= 6000
+	- times[i].length == 3
+	- 1 <= ui, vi <= n
+	- ui != vi
+	- 0 <= wi <= 100
+	- All (ui, vi) pairs are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        map<int, map<int, int>> mp;
-        
-        for(int i = 0; i < times.size(); i++) {
-            mp[times[i][0]][times[i][1]] = times[i][2];
-        }
-        
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int,int>>> pq;
-        vector<int> vis(n + 1, 0);
-        pq.push(make_pair(0, k));
-        
-        while(!pq.empty()) {
-            auto it = pq.top();
-            pq.pop();
-            if(vis[it.second]) continue;
-            vis[it.second] = true;
-            n--;
-            if(n == 0) return it.first;
-            
-            if(mp.count(it.second))
-                for(auto [key, val]: mp[it.second]) {
-                    pq.push(make_pair(val + it.first, key));
-                }
-        }
-        return -1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum time it takes for all `n` nodes to receive the signal, or return `-1` if it is impossible for all nodes to receive the signal.
+- **Example:** `For times = [[1, 2, 1], [1, 3, 2], [3, 4, 1]], n = 4, k = 1, the output is 3.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum time it takes for all nodes to receive the signal or determine if it is impossible.
 
-The problem at hand asks us to determine the **network delay time** in a directed graph, where each edge represents the time it takes for a signal to travel from one node to another. You are given:
-- A directed graph in the form of a list of edges where each edge is represented by `[u, v, w]`, which means there is a directed edge from node `u` to node `v` with a travel time of `w`.
-- A number `n` representing the total number of nodes in the graph.
-- A starting node `k` from where the signal starts to travel.
+- Use a graph representation to model the nodes and edges with the travel times.
+- Use Dijkstra's algorithm to find the shortest path from the starting node `k` to all other nodes.
+- If all nodes are reachable, return the maximum time taken by the farthest node.
+- If any node is unreachable, return `-1`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The network will be represented as a directed graph with unique edges.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For times = [[1, 2, 1], [1, 3, 2], [3, 4, 1]], n = 4, k = 1`  \
+  **Explanation:** By using Dijkstra's algorithm, we can calculate the shortest time for the signal to reach each node, and we find that the signal reaches all nodes in 3 units of time.
 
-The goal is to compute the time it will take for a signal to reach all nodes from the starting node `k`, or return `-1` if some nodes cannot be reached.
+{{< dots >}}
+## Approach 🚀
+This problem can be solved using Dijkstra's algorithm to find the shortest path from the starting node to all other nodes in the graph.
 
-### Approach
-
-To solve this problem efficiently, we can apply **Dijkstra's Algorithm** — a well-known algorithm for finding the shortest paths from a source node to all other nodes in a graph with non-negative weights. The idea behind Dijkstra’s Algorithm is to always choose the node with the shortest known path to expand next. We will use a **priority queue** (or min-heap) to implement this behavior.
-
-#### Key Steps:
-1. **Graph Representation**: We need a way to store the graph. The problem specifies that it’s a directed graph, and the weights (times) are given for each edge. We can use a **map of maps** to represent the graph efficiently. Each node will point to another map, which maps the neighboring nodes to the edge weights.
-   
-2. **Priority Queue (Min-Heap)**: Dijkstra’s algorithm relies on a priority queue to ensure we always process the node with the smallest current distance. In this case, we will use a **min-heap** (implemented with `priority_queue` in C++) to store pairs of `(time, node)` where `time` represents the current known shortest time to reach `node`.
-
-3. **Visited Set**: To avoid processing the same node more than once, we will maintain a visited set to mark the nodes that have already been processed.
-
-4. **Processing Nodes**: We start by pushing the source node `k` into the priority queue with a time of `0`. Then, we repeatedly extract the node with the smallest time from the priority queue and update the times of its neighbors. If a shorter path to a neighbor is found, it is pushed into the queue.
-
-5. **Termination**: The algorithm terminates when all nodes are visited, or if some nodes are unreachable (in which case we return `-1`).
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Graph
-
-We represent the graph using a map of maps where each key-value pair consists of:
-- The outer map's key represents a source node.
-- The inner map's key represents a destination node.
-- The inner map's value represents the weight (time) of the edge between the two nodes.
-
+### Initial Thoughts 💭
+- We need to find the shortest time for a signal to reach all nodes from the starting node.
+- The problem can be modeled as a shortest path problem in a weighted directed graph.
+- Since the graph can have up to 6000 edges, Dijkstra's algorithm with a priority queue should be efficient enough.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one node and one edge, so no empty graph cases.
+- For large inputs (with up to 6000 edges), the solution should be optimized to handle the upper limits efficiently.
+- If the starting node `k` is isolated or there are disconnected nodes, the function should return `-1`.
+- Ensure that the algorithm works efficiently for graphs with up to 6000 edges.
+{{< dots >}}
+## Code 💻
 ```cpp
-map<int, map<int, int>> mp;
-for (int i = 0; i < times.size(); i++) {
-    mp[times[i][0]][times[i][1]] = times[i][2];
-}
-```
-
-#### Step 2: Initialize the Priority Queue
-
-We initialize the priority queue with the source node `k` and set its initial travel time to `0`. We also initialize a visited array to keep track of whether a node has been processed.
-
-```cpp
-priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-vector<int> vis(n + 1, 0);
-pq.push(make_pair(0, k));  // Starting node k with time 0
-```
-
-#### Step 3: Process Nodes Using the Priority Queue
-
-While the priority queue is not empty, we extract the node with the smallest time from the queue and check if it has already been processed (i.e., if it's in the visited set). If it has, we continue to the next iteration. If not, we mark it as visited and decrease the number of nodes we need to visit.
-
-If all nodes are processed (i.e., `n == 0`), we return the current time of the top of the queue, which represents the latest time it took for all nodes to be visited.
-
-```cpp
-while (!pq.empty()) {
-    auto it = pq.top();
-    pq.pop();
-    if (vis[it.second]) continue;  // Skip already visited nodes
-    vis[it.second] = true;
-    n--;  // Decrement the remaining nodes
-    if (n == 0) return it.first;  // If all nodes are visited, return the current time
+int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+    map<int, map<int, int>> mp;
     
-    // Explore neighbors
-    if (mp.count(it.second))
-        for (auto [key, val] : mp[it.second]) {
-            pq.push(make_pair(val + it.first, key));  // Push the new path with updated time
-        }
+    for(int i = 0; i < times.size(); i++) {
+        mp[times[i][0]][times[i][1]] = times[i][2];
+    }
+    
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int,int>>> pq;
+    vector<int> vis(n + 1, 0);
+    pq.push(make_pair(0, k));
+    
+    while(!pq.empty()) {
+        auto it = pq.top();
+        pq.pop();
+        if(vis[it.second]) continue;
+        vis[it.second] = true;
+        n--;
+        if(n == 0) return it.first;
+        
+        if(mp.count(it.second))
+            for(auto [key, val]: mp[it.second]) {
+                pq.push(make_pair(val + it.first, key));
+            }
+    }
+    return -1;
 }
 ```
 
-#### Step 4: Handle Unreachable Nodes
+This is a C++ implementation of Dijkstra's algorithm to calculate the network delay time. It uses a priority queue to find the shortest time for all nodes to receive a signal starting from node k.
 
-If after processing all nodes, not all nodes have been visited (i.e., some nodes are still unreachable), we return `-1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+	```
+	Function that computes the time it takes for all nodes to receive the signal starting from node 'k'.
 
-```cpp
-return -1;
-```
+2. **Variable Initialization**
+	```cpp
+	    map<int, map<int, int>> mp;
+	```
+	This map stores the network connections where each node is mapped to another node with its travel time.
 
-### Complexity
+3. **Loop Setup**
+	```cpp
+	    for(int i = 0; i < times.size(); i++) {
+	```
+	Loop to iterate through the 'times' array and populate the map with edges (nodes and weights).
 
-#### Time Complexity:
-- **O((E + V) log V)**, where `E` is the number of edges and `V` is the number of nodes.
-  - `E` comes from processing each edge once.
-  - `V` comes from processing each node once, and the `log V` factor arises from the operations on the priority queue (inserting and extracting nodes).
+4. **Map Update**
+	```cpp
+	        mp[times[i][0]][times[i][1]] = times[i][2];
+	```
+	Updating the map with the source node, destination node, and the travel time between them.
 
-#### Space Complexity:
-- **O(V + E)**, where `V` is the number of nodes and `E` is the number of edges.
-  - We store the graph using a map of maps, which takes **O(E)** space.
-  - The priority queue and visited array also take **O(V)** space.
+5. **Priority Queue Setup**
+	```cpp
+	    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int,int>>> pq;
+	```
+	A priority queue to always process the node with the smallest time first.
 
-### Conclusion
+6. **Visited Nodes Setup**
+	```cpp
+	    vector<int> vis(n + 1, 0);
+	```
+	A vector to track which nodes have been visited.
 
-This solution uses a priority queue (min-heap) to efficiently find the shortest path from a starting node to all other nodes in the graph, making it an optimal solution to the network delay problem. By applying Dijkstra's Algorithm, we ensure that we can calculate the minimum time for a signal to reach all nodes or determine that some nodes are unreachable. The solution is efficient with a time complexity of **O((E + V) log V)**, making it suitable for large graphs, and provides an accurate and optimal result for the problem.
+7. **Push Initial Node**
+	```cpp
+	    pq.push(make_pair(0, k));
+	```
+	Push the starting node 'k' with an initial time of 0 into the priority queue.
+
+8. **While Loop**
+	```cpp
+	    while(!pq.empty()) {
+	```
+	While the priority queue is not empty, process each node.
+
+9. **Extract Minimum**
+	```cpp
+	        auto it = pq.top();
+	```
+	Extract the node with the smallest accumulated time from the priority queue.
+
+10. **Pop from Queue**
+	```cpp
+	        pq.pop();
+	```
+	Remove the top element (current node) from the priority queue.
+
+11. **Skip Visited**
+	```cpp
+	        if(vis[it.second]) continue;
+	```
+	Skip nodes that have already been visited to avoid unnecessary processing.
+
+12. **Mark as Visited**
+	```cpp
+	        vis[it.second] = true;
+	```
+	Mark the current node as visited.
+
+13. **Decrement Nodes**
+	```cpp
+	        n--;
+	```
+	Decrement the number of remaining nodes to be processed.
+
+14. **Check Completion**
+	```cpp
+	        if(n == 0) return it.first;
+	```
+	If all nodes are visited, return the accumulated time to reach the farthest node.
+
+15. **Edge Traversal Check**
+	```cpp
+	        if(mp.count(it.second))
+	```
+	Check if the current node has any outgoing edges.
+
+16. **Process Neighbors**
+	```cpp
+	            for(auto [key, val]: mp[it.second]) {
+	```
+	Iterate over all neighboring nodes of the current node.
+
+17. **Push Neighbors to Queue**
+	```cpp
+	                pq.push(make_pair(val + it.first, key));
+	```
+	Push the neighboring nodes into the priority queue with the updated accumulated time.
+
+18. **Return Failure**
+	```cpp
+	    return -1;
+	```
+	Return -1 if it's not possible to visit all nodes.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(E log V), where E is the number of edges and V is the number of nodes.
+- **Average Case:** O(E log V), as each edge and node is processed once.
+- **Worst Case:** O(E log V), where E is the number of edges and V is the number of nodes.
+
+The time complexity is O(E log V), where E is the number of edges and V is the number of nodes, due to the priority queue operations in Dijkstra's algorithm.
+
+### Space Complexity 💾
+- **Best Case:** O(V + E), for storing the graph and the priority queue.
+- **Worst Case:** O(V + E), where V is the number of nodes and E is the number of edges.
+
+The space complexity is O(V + E) due to the storage required for the graph and the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/network-delay-time/description/)
 

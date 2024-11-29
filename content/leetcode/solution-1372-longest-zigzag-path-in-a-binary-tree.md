@@ -14,111 +14,228 @@ img_src = ""
 youtube = "hbzdyIlvBKI"
 youtube_upload_date="2023-04-20"
 youtube_thumbnail="https://i.ytimg.com/vi/hbzdyIlvBKI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a binary tree, find the length of the longest ZigZag path in the tree. A ZigZag path is one where you move left and right alternately, starting from any node.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by the root node. Each node is an integer.
+- **Example:** `root = [1, null, 1, 1, 1, null, null, 1, 1, null, 1]`
+- **Constraints:**
+	- 1 <= Number of nodes <= 5 * 10^4
+	- 1 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the length of the longest ZigZag path in the tree.
+- **Example:** `3`
+- **Constraints:**
+	- The output will be a single integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the longest ZigZag path in the tree by alternating the direction of traversal.
+
+- Start from any node and traverse the tree using a recursive approach.
+- Keep track of the direction at each step (left or right).
+- For each node, calculate the maximum ZigZag path length by switching the direction at each step.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is well-formed and does not contain cycles.
+- Each node in the tree has at most two children (left and right).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [1, null, 1, 1, 1, null, null, 1, 1, null, 1]`  \
+  **Explanation:** The longest ZigZag path starts from the root, goes right, left, and then right again, with a length of 3.
+
+- **Input:** `root = [1,1,1,null,1,null,null,1,1,null,1]`  \
+  **Explanation:** The longest ZigZag path alternates between left and right, with a length of 4.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, use a depth-first search (DFS) approach to traverse the tree while alternating directions at each node.
+
+### Initial Thoughts 💭
+- The problem can be efficiently solved using a DFS approach with memoization.
+- We can calculate the ZigZag length by maintaining a state that tracks the current direction and depth of traversal.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty (root is null), the result should be 0.
+- The algorithm must efficiently handle trees with up to 50,000 nodes.
+- If the tree contains only one node, the ZigZag length is 0.
+- Ensure the solution is efficient for large trees with up to 50,000 nodes.
+{{< dots >}}
+## Code 💻
+```cpp
+int ans = 0;
+map<TreeNode*, map<bool, int>> mp;
+int zigzag(TreeNode* root, bool dir) {
+    if(!root) return -1;
+    if(mp.count(root) && mp[root].count(dir)) return mp[root][dir];
     int ans = 0;
-    map<TreeNode*, map<bool, int>> mp;
-    int zigzag(TreeNode* root, bool dir) {
-        if(!root) return -1;
-        if(mp.count(root) && mp[root].count(dir)) return mp[root][dir];
-        int ans = 0;
-        if(dir)
-            ans = 1 + zigzag(root->left, !dir);
-        if(!dir)
-            ans = 1 + zigzag(root->right, !dir);            
-        return mp[root][dir] = ans;
-    }
+    if(dir)
+        ans = 1 + zigzag(root->left, !dir);
+    if(!dir)
+        ans = 1 + zigzag(root->right, !dir);            
+    return mp[root][dir] = ans;
+}
+
+int longestZigZag(TreeNode* root) {
+    if(!root) return 0;
     
-    int longestZigZag(TreeNode* root) {
-        if(!root) return 0;
-        
-        ans = max(ans, zigzag(root, 1));
-        ans = max(ans, zigzag(root, 0));        
-        
-        if(root->left)
-        longestZigZag(root->left);
+    ans = max(ans, zigzag(root, 1));
+    ans = max(ans, zigzag(root, 0));        
+    
+    if(root->left)
+    longestZigZag(root->left);
 
-        if(root->right)
-        longestZigZag(root->right);
+    if(root->right)
+    longestZigZag(root->right);
 
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
+This code defines a solution to find the longest zigzag path in a binary tree, where the traversal alternates between left and right child nodes. The zigzag function recursively calculates the longest path, storing intermediate results in a map for efficiency.
 
-The problem at hand involves finding the longest ZigZag path in a binary tree. A ZigZag path starts at any node and alternates between left and right children. The objective is to return the length of the longest such path in the tree. The length is defined as the number of edges traversed in this alternating pattern.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int ans = 0;
+	```
+	Initialize the variable `ans` to store the maximum length of the zigzag path found.
 
-### Approach
+2. **Data Structures**
+	```cpp
+	map<TreeNode*, map<bool, int>> mp;
+	```
+	A map `mp` is used to store intermediate results for each node (`TreeNode*`) and direction (`bool`), optimizing the recursive approach.
 
-To tackle this problem, we can utilize a depth-first search (DFS) strategy combined with dynamic programming techniques to efficiently compute the lengths of ZigZag paths originating from each node in the binary tree. The solution can be divided into several key components:
+3. **Function Definition**
+	```cpp
+	int zigzag(TreeNode* root, bool dir) {
+	```
+	Define the recursive function `zigzag` that computes the zigzag length for a given node and direction.
 
-1. **Understanding ZigZag Movement**: The ZigZag path is defined such that from any node, we can move left and then right or right and then left. This means at each step, the direction of the traversal will alternate.
+4. **Base Case**
+	```cpp
+	    if(!root) return -1;
+	```
+	Base case: if the node is null, return -1 as there's no zigzag path from a null node.
 
-2. **Recursive Traversal**: We'll employ a recursive function that takes a node and a boolean variable indicating the current direction of the ZigZag movement. The function will return the maximum length of the ZigZag path starting from that node in the given direction.
+5. **Memoization Check**
+	```cpp
+	    if(mp.count(root) && mp[root].count(dir)) return mp[root][dir];
+	```
+	Check if the zigzag path for the current node and direction has already been calculated and stored in `mp`. If so, return the stored result.
 
-3. **Memoization**: To avoid recalculating the lengths for nodes we've already processed, we will use a memoization technique. We will store the results of previously computed ZigZag lengths in a map, allowing us to retrieve them in constant time.
+6. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize the local `ans` variable to store the zigzag length for the current node and direction.
 
-4. **Two Possible Directions**: From each node, we will consider both possible starting directions (left and right) and compute the maximum ZigZag path length from both. The overall result will be the maximum of these values.
+7. **Recursive Step - Left Direction**
+	```cpp
+	    if(dir)
+	```
+	If the current direction is left (true), compute the zigzag length by moving to the left child node in the opposite direction.
 
-5. **Final Computation**: After initiating the recursive process for the root node, we will traverse both left and right children of the tree to ensure that all possible ZigZag paths are considered.
+8. **Recursive Call**
+	```cpp
+	        ans = 1 + zigzag(root->left, !dir);
+	```
+	Recursively compute the zigzag length by moving to the left child with the opposite direction (right). Add 1 to account for the current node.
 
-### Code Breakdown (Step by Step)
+9. **Recursive Step - Right Direction**
+	```cpp
+	    if(!dir)
+	```
+	If the current direction is right (false), compute the zigzag length by moving to the right child node in the opposite direction.
 
-The provided C++ code implements the above approach. Here's a detailed breakdown of the code:
+10. **Recursive Call**
+	```cpp
+	        ans = 1 + zigzag(root->right, !dir);            
+	```
+	Recursively compute the zigzag length by moving to the right child with the opposite direction (left). Add 1 to account for the current node.
 
-1. **TreeNode Structure**: 
-   The structure `TreeNode` defines the binary tree nodes, each having a value, a left child, and a right child. It includes constructors to initialize these values.
+11. **Memoization**
+	```cpp
+	    return mp[root][dir] = ans;
+	```
+	Store the computed zigzag length for the current node and direction in the `mp` map and return the result.
 
-2. **Solution Class**:
-   The `Solution` class contains two primary methods: `zigzag` and `longestZigZag`.
+12. **Function Definition**
+	```cpp
+	int longestZigZag(TreeNode* root) {
+	```
+	Define the `longestZigZag` function, which computes the longest zigzag path starting from the root node.
 
-3. **Zigzag Method**:
-   - **Parameters**: The method `zigzag(TreeNode* root, bool dir)` takes a pointer to the current node (`root`) and a boolean (`dir`) indicating the direction of traversal.
-   - **Base Case**: If the current node is `nullptr`, it returns `-1`, indicating no path can be formed.
-   - **Memoization Check**: The code checks if the ZigZag length for the current node and direction has been computed before. If so, it returns the stored result.
-   - **Recursive Calls**: Depending on the direction:
-     - If moving left (`dir = true`), it recursively calls `zigzag` on the left child, changing the direction to right (`!dir`).
-     - If moving right (`dir = false`), it recursively calls `zigzag` on the right child, changing the direction to left.
-   - **Result Storage**: The result is stored in the map `mp` for future reference.
+13. **Base Case**
+	```cpp
+	    if(!root) return 0;
+	```
+	Base case: if the root is null, return 0 as there is no zigzag path.
 
-4. **LongestZigZag Method**:
-   - **Parameters**: The method `longestZigZag(TreeNode* root)` computes the longest ZigZag path in the binary tree rooted at `root`.
-   - **Base Case**: It first checks if the `root` is `nullptr`, returning `0` as the length.
-   - **Max Calculation**: It computes the maximum ZigZag lengths starting in both directions from the root and updates the `ans` variable.
-   - **Recursive Traversal**: It recursively computes the longest ZigZag path for the left and right subtrees of the current node.
-   - **Return Value**: The method returns the overall maximum ZigZag length.
+14. **Recursive Call**
+	```cpp
+	    ans = max(ans, zigzag(root, 1));
+	```
+	Compute the zigzag path starting from the root with the left direction (1) and update `ans` with the maximum value.
 
-### Complexity
+15. **Recursive Call**
+	```cpp
+	    ans = max(ans, zigzag(root, 0));        
+	```
+	Compute the zigzag path starting from the root with the right direction (0) and update `ans` with the maximum value.
 
-- **Time Complexity**: The time complexity of the solution is \(O(N)\), where \(N\) is the number of nodes in the binary tree. Each node is visited once, and the memoization ensures that we do not recompute ZigZag lengths unnecessarily.
+16. **Recursive Call**
+	```cpp
+	    if(root->left)
+	```
+	Check if the left child exists. If it does, recursively call `longestZigZag` on the left child.
 
-- **Space Complexity**: The space complexity is also \(O(N)\) due to the storage requirements of the memoization map and the recursive call stack. In the worst case, the depth of the recursion can go up to the height of the tree, which can be \(O(N)\) for a skewed tree.
+17. **Recursive Call**
+	```cpp
+	    longestZigZag(root->left);
+	```
+	Recursively call `longestZigZag` for the left child node.
 
-### Conclusion
+18. **Recursive Call**
+	```cpp
+	    if(root->right)
+	```
+	Check if the right child exists. If it does, recursively call `longestZigZag` on the right child.
 
-The solution efficiently calculates the longest ZigZag path in a binary tree by employing a combination of depth-first search and memoization techniques. By systematically exploring each node and considering both directions of movement, we ensure that all potential paths are evaluated. The approach not only optimizes performance through memoization but also provides a clear and understandable structure for tackling similar tree traversal problems in the future. This makes it a valuable reference for developers and computer science enthusiasts seeking to enhance their algorithmic problem-solving skills in binary trees.
+19. **Recursive Call**
+	```cpp
+	    longestZigZag(root->right);
+	```
+	Recursively call `longestZigZag` for the right child node.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in terms of the number of nodes, as each node is visited once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the recursion stack and memoization storage.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/description/)
 

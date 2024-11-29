@@ -14,142 +14,153 @@ img_src = ""
 youtube = "2AdOBLcj2wk"
 youtube_upload_date="2024-04-17"
 youtube_thumbnail="https://i.ytimg.com/vi/2AdOBLcj2wk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a binary tree, a node is considered 'good' if in the path from the root to that node, there are no nodes with a value greater than the node itself. Return the total number of good nodes in the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The binary tree is represented by its root node. Each node contains a value and pointers to its left and right child nodes.
+- **Example:** `Input: root = [4, 2, 7, 1, 3, 6, 9]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [1, 10^5].
+	- Each node's value lies in the range [-10^4, 10^4].
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int goodNodes(TreeNode* root) {
-        return good(root, -100000);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An integer representing the total count of good nodes in the tree.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The count must include the root node since it is always considered 'good'.
 
-    int good(TreeNode* node, int mx) {
-        if(node == NULL) return 0;
-        int res = (node->val >= mx) ? 1: 0;
-        res += good(node->left, max(mx, node->val));
-        res += good(node->right, max(mx, node->val));
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of nodes in the tree that are 'good' as per the defined criteria.
 
-### Problem Statement
+- Traverse the tree using Depth-First Search (DFS).
+- At each node, check if its value is greater than or equal to the maximum value encountered so far along the path from the root.
+- If the node satisfies the condition, increment the count of good nodes.
+- Update the maximum value encountered so far and recursively traverse the left and right subtrees.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is non-empty and has at least one node (the root).
+- Node values are integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [5, 3, 8, 2, 4, 7, 9]`  \
+  **Explanation:** Output: 5. Nodes 5, 8, 9, 3, and 4 are good. The path from the root to each of these nodes does not contain a value greater than the node.
 
-The problem is to count the number of "good" nodes in a binary tree. A node is considered "good" if, along the path from the root to that node, the value of that node is greater than or equal to the maximum value encountered along the path from the root to that node. 
+- **Input:** `Input: root = [10, 9, 11]`  \
+  **Explanation:** Output: 3. All nodes are good as there are no values greater than themselves in their respective paths.
 
-For example, in a binary tree where the root has a value of 3 and its left child has a value of 1, the left child is a good node because it is greater than the maximum value encountered so far (which is 3). 
+- **Input:** `Input: root = [6, 2, 8, 1, 4]`  \
+  **Explanation:** Output: 4. Nodes 6, 8, 4, and 1 are good. Node 2 is not good as 6 is greater than 2 in the path.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+Use a recursive Depth-First Search (DFS) algorithm to traverse the binary tree and count the good nodes.
 
-To solve this problem, we will use a depth-first search (DFS) approach, which will allow us to traverse the tree while keeping track of the maximum value encountered along the path. The main steps are as follows:
+### Initial Thoughts 💭
+- The root node is always good.
+- The condition for a node being good depends on the maximum value seen along the path from the root.
+- A recursive traversal is suitable to track the path's maximum value dynamically.
+- Using DFS ensures that we visit each node and evaluate its goodness efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: root = null -> Output: 0. An empty tree has no good nodes.
+- Input: A tree with 10^5 nodes -> Should handle efficiently within O(n) time complexity.
+- Input: root = [1] -> Output: 1. The single node is good by default.
+- Input: root = [3, 3, null, 4, 2] -> Special case where some nodes are not good due to a greater ancestor node.
+- Tree depth is large; ensure no stack overflow occurs with recursion.
+{{< dots >}}
+## Code 💻
+```cpp
+int goodNodes(TreeNode* root) {
+    return good(root, -100000);
+}
 
-1. **Recursive Traversal**: We will recursively traverse the binary tree, starting from the root.
-2. **Tracking Maximum Value**: At each node, we will compare the current node's value with the maximum value encountered so far on the path from the root.
-3. **Counting Good Nodes**: We will maintain a count of good nodes as we traverse the tree, incrementing the count whenever we encounter a good node.
+int good(TreeNode* node, int mx) {
+    if(node == NULL) return 0;
+    int res = (node->val >= mx) ? 1: 0;
+    res += good(node->left, max(mx, node->val));
+    res += good(node->right, max(mx, node->val));
+    return res;
+}
+```
 
-### Code Breakdown (Step by Step)
+This function computes the number of good nodes in a binary tree. A good node is a node whose value is greater than or equal to all the values in the path from the root to that node.
 
-Let's break down the provided code to understand how it works:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int goodNodes(TreeNode* root) {
+	```
+	This is the function header where the return type is an integer, and the parameter is a pointer to a TreeNode (the root of the tree).
 
-1. **Structure Definition**:
-   ```cpp
-   struct TreeNode {
-       int val;
-       TreeNode *left;
-       TreeNode *right;
-       TreeNode() : val(0), left(nullptr), right(nullptr) {}
-       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-       TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-   };
-   ```
+2. **Function Call**
+	```cpp
+	    return good(root, -100000);
+	```
+	This line calls the helper function 'good' with the root node and an initial value for 'mx' as a very low value (-100000) to start the comparison.
 
-   - This structure defines a binary tree node, including the value of the node (`val`) and pointers to the left and right children.
+3. **Helper Function Declaration**
+	```cpp
+	int good(TreeNode* node, int mx) {
+	```
+	This is the helper function 'good' that recursively counts the good nodes in the tree. It takes a TreeNode pointer (node) and an integer (mx) which keeps track of the maximum value encountered along the path from the root.
 
-2. **Class Definition**:
-   ```cpp
-   class Solution {
-   ```
+4. **Conditional Check**
+	```cpp
+	    if(node == NULL) return 0;
+	```
+	This is the base case for the recursion. If the current node is NULL (i.e., we've reached a leaf's child), return 0, meaning no good node here.
 
-   - The code is encapsulated within a class named `Solution`, which is common in competitive programming and coding challenges.
+5. **Conditional Assignment**
+	```cpp
+	    int res = (node->val >= mx) ? 1: 0;
+	```
+	Check if the current node's value is greater than or equal to the maximum value ('mx') encountered so far. If true, it is a good node, so set 'res' to 1, otherwise set it to 0.
 
-3. **Main Function**:
-   ```cpp
-   int goodNodes(TreeNode* root) {
-       return good(root, -100000);
-   }
-   ```
+6. **Recursive Call**
+	```cpp
+	    res += good(node->left, max(mx, node->val));
+	```
+	Recursively call the 'good' function for the left child, passing the maximum of the current node's value and 'mx' to ensure the path's maximum value is updated.
 
-   - The `goodNodes` function is the entry point, taking the root of the binary tree as input. 
-   - It calls the helper function `good`, initializing the maximum value `mx` to a very small number (e.g., `-100000`), which ensures that the first node is always counted as good.
+7. **Recursive Call**
+	```cpp
+	    res += good(node->right, max(mx, node->val));
+	```
+	Recursively call the 'good' function for the right child, again updating the maximum value encountered along the path.
 
-4. **Helper Function**:
-   ```cpp
-   int good(TreeNode* node, int mx) {
-       if(node == NULL) return 0;
-   ```
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the total count of good nodes found in the current subtree.
 
-   - The `good` function performs the actual traversal. If the current node is `NULL`, it returns `0`, indicating that there are no good nodes to count in this path.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Counting Good Nodes**:
-   ```cpp
-       int res = (node->val >= mx) ? 1: 0;
-   ```
+Each node is visited once, leading to linear time complexity relative to the number of nodes in the tree.
 
-   - We initialize `res` to `1` if the current node's value is greater than or equal to the maximum value `mx`, meaning it's a good node; otherwise, it's initialized to `0`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
 
-6. **Recursive Calls**:
-   ```cpp
-       res += good(node->left, max(mx, node->val));
-       res += good(node->right, max(mx, node->val));
-   ```
+The space complexity is determined by the recursion stack, which depends on the height of the tree (`h`). In the worst case (skewed tree), it could be O(n).
 
-   - We recursively call the `good` function on the left and right children of the current node. The maximum value is updated to be the greater of `mx` or the current node's value.
-   - The results from both recursive calls are added to `res`, counting good nodes from both subtrees.
+**Happy Coding! 🎉**
 
-7. **Return Statement**:
-   ```cpp
-       return res;
-   }
-   ```
-
-   - Finally, we return the count of good nodes found in the current subtree.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \(O(N)\), where \(N\) is the number of nodes in the binary tree. Each node is visited exactly once.
-
-- **Space Complexity**: The space complexity is \(O(H)\), where \(H\) is the height of the binary tree. This is due to the recursive call stack. In the worst case (for a skewed tree), this could be \(O(N)\), but for a balanced tree, it would be \(O(\log N)\).
-
-### Conclusion
-
-This code effectively counts the number of good nodes in a binary tree using a depth-first search approach, maintaining the maximum value along the path from the root. 
-
-#### Key Takeaways:
-
-1. **Depth-First Search (DFS)**: DFS is a common technique used to traverse trees and graphs, allowing us to explore all nodes efficiently.
-
-2. **Maintaining State**: By passing the maximum value encountered so far down through the recursive calls, we can make decisions based on the path history without requiring additional data structures.
-
-3. **Clear Logic**: The logic of counting good nodes based on comparisons is clear and concise, making the solution easy to understand.
-
-In summary, the provided code serves as a clear and efficient solution to the problem of counting good nodes in a binary tree, demonstrating the effectiveness of recursive algorithms in tree traversal tasks.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/)
 

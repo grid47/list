@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "HLZLwjzIVGo"
 youtube_upload_date="2021-05-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/HLZLwjzIVGo/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,104 +28,134 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/HLZLwjzIVGo/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, return the least number of perfect square numbers that sum to n. A perfect square is a number that is the square of an integer. Your goal is to determine the minimum number of perfect squares that sum up to the given integer n.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a positive integer n. Your task is to find the least number of perfect square numbers that sum up to n.
+- **Example:** `Input: n = 15`
+- **Constraints:**
+	- 1 <= n <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numSquares(int n) {
-        vector<long> cnt(n + 1, INT_MAX);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the least number of perfect square numbers that sum to n.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The returned number represents the minimum number of perfect squares that sum to n.
 
-        cnt[0] = 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Minimize the number of perfect square numbers that sum up to n.
 
-        for(int i = 1; i <= n; i++)
-        for(int j = 1; j * j <= i; j++)
-            cnt[i] = min(cnt[i], cnt[i - j * j] + 1);
+- Step 1: Initialize an array `cnt` where `cnt[i]` represents the least number of perfect squares that sum to i.
+- Step 2: Set `cnt[0] = 0` since no perfect squares are needed to sum to 0.
+- Step 3: For each number `i` from 1 to n, try subtracting all perfect squares less than or equal to `i` and update the value of `cnt[i]` by taking the minimum value.
+- Step 4: After iterating through all numbers, `cnt[n]` will store the least number of perfect square numbers that sum to n.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input n is always a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 12`  \
+  **Explanation:** The least number of perfect square numbers that sum up to 12 is 3, since 12 = 4 + 4 + 4.
 
-        return cnt[n];
+- **Input:** `Input: n = 15`  \
+  **Explanation:** The least number of perfect square numbers that sum up to 15 is 4, since 15 = 9 + 4 + 1 + 1.
 
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+The approach uses dynamic programming to solve the problem by iterating over all integers up to n and finding the minimum number of perfect squares that sum to each integer.
 
-### 🚀 Problem Statement
-
-You're tasked with finding the **least number of perfect squares** that sum up to a given number `n`. A **perfect square** is an integer that is the square of another integer. For example, the numbers `1`, `4`, `9`, `16`, `25`, and so on are perfect squares.
-
-Your goal is to determine the minimum number of these perfect squares that add up to `n`. Let's see a couple of examples:
-- If `n = 12`, the least number of perfect squares that sum up to `12` is `3`, because `12 = 4 + 4 + 4`.
-- If `n = 13`, the least number of perfect squares that sum up to `13` is `2`, because `13 = 9 + 4`.
-
-This is a classic **dynamic programming problem** where we break down the problem into smaller subproblems and use the results of these subproblems to build up to the final solution. Let's dive into how we can approach this!
-
----
-
-### 🧠 Approach
-
-To tackle this problem, we'll use **dynamic programming (DP)**. The core idea is to build a solution incrementally, solving smaller subproblems and using those solutions to solve the overall problem.
-
-We maintain an array `cnt` where `cnt[i]` will store the minimum number of perfect squares required to sum up to `i`. By considering all perfect squares smaller than or equal to `i`, we can iteratively fill out this array.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-#### Step 1: Initialize the `cnt` Array
+### Initial Thoughts 💭
+- The problem can be solved efficiently using dynamic programming by iterating over all numbers up to n and using the previous results to calculate the minimum for the current number.
+- By using dynamic programming, we avoid redundant calculations, making the solution scalable for large values of n.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty input is expected as n is always greater than or equal to 1.
+- For large values of n (e.g., up to 10^4), ensure that the dynamic programming approach efficiently calculates the solution.
+- If n is a perfect square (e.g., 1, 4, 9), the answer is 1.
+- The solution should handle inputs up to 10^4 efficiently, with an optimal time complexity.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<long> cnt(n + 1, INT_MAX);
-cnt[0] = 0;
-```
-- We start by creating a `cnt` array of size `n + 1` and initialize it to `INT_MAX` (which represents infinity) because initially, we don't know how to sum up to any number other than `0`.
-- We know that no perfect square is needed to sum up to `0`, so `cnt[0] = 0`.
+int numSquares(int n) {
+    vector<long> cnt(n + 1, INT_MAX);
 
-#### Step 2: Iterate Through All Numbers from `1` to `n`
-```cpp
-for (int i = 1; i <= n; i++) {
-    for (int j = 1; j * j <= i; j++) {
+    cnt[0] = 0;
+
+    for(int i = 1; i <= n; i++)
+    for(int j = 1; j * j <= i; j++)
         cnt[i] = min(cnt[i], cnt[i - j * j] + 1);
-    }
+
+    return cnt[n];
+
 }
 ```
-- Now, we loop through each number `i` from `1` to `n` (outer loop).
-- For each number `i`, we check all perfect squares `j * j` that are smaller than or equal to `i` (inner loop).
-- We then update `cnt[i]` by comparing its current value with the result of subtracting a square (`cnt[i - j * j]`) and adding `1`. This means we’re considering the square `j * j` and finding the best result for the remaining sum (`i - j * j`).
 
-#### Step 3: Return the Result for `n`
-```cpp
-return cnt[n];
-```
-- After completing the iteration, the value `cnt[n]` will contain the minimum number of perfect squares that sum up to `n`.
+This function calculates the least number of perfect square numbers that sum up to a given number `n` using dynamic programming.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numSquares(int n) {
+	```
+	Defines the function `numSquares`, which takes an integer `n` and returns the minimum number of perfect squares that sum up to `n`.
 
-### 📈 Complexity Analysis
+2. **Initialize DP Array**
+	```cpp
+	    vector<long> cnt(n + 1, INT_MAX);
+	```
+	Initializes a dynamic programming array `cnt` of size `n + 1` to store the minimum number of squares needed to sum up to each number. Initially, all values are set to `INT_MAX`, except `cnt[0]`.
 
-#### Time Complexity:
-- The outer loop runs from `1` to `n`, so it executes `n` iterations.
-- The inner loop iterates over all perfect squares less than or equal to `i`. For each `i`, the number of perfect squares less than or equal to `i` is approximately `sqrt(i)`. So, the inner loop runs at most `O(sqrt(i))` times.
-- The time complexity is then the sum of `sqrt(i)` for `i` from `1` to `n`, which can be approximated as **O(n * sqrt(n))**.
+3. **Base Case Initialization**
+	```cpp
+	    cnt[0] = 0;
+	```
+	Sets the base case `cnt[0] = 0`, as 0 requires 0 squares.
 
-#### Space Complexity:
-- The space complexity is **O(n)** because we store the minimum number of perfect squares for each number up to `n` in the `cnt` array.
+4. **Outer Loop - Iterate Through Numbers**
+	```cpp
+	    for(int i = 1; i <= n; i++)
+	```
+	Starts an outer loop to iterate through all numbers from 1 to `n`. Each `i` represents the target number to decompose into perfect squares.
 
----
+5. **Inner Loop - Check Perfect Squares**
+	```cpp
+	    for(int j = 1; j * j <= i; j++)
+	```
+	Starts an inner loop to check all possible perfect squares `j * j` less than or equal to the current number `i`.
 
-### 🏁 Conclusion
+6. **Update DP Array**
+	```cpp
+	        cnt[i] = min(cnt[i], cnt[i - j * j] + 1);
+	```
+	Updates the value of `cnt[i]` by considering the current perfect square `j * j` and finding the minimum number of squares required by checking `cnt[i - j * j] + 1`.
 
-This dynamic programming approach is a highly efficient method for solving the problem of finding the least number of perfect squares that sum up to a given number `n`. By breaking down the problem into smaller subproblems, we can solve it iteratively and store intermediate results for later use.
+7. **Return Result**
+	```cpp
+	    return cnt[n];
+	```
+	Returns the minimum number of perfect squares needed to sum up to `n` from the `cnt` array.
 
-#### Key Points:
-- **Time-efficient**: With a time complexity of **O(n * sqrt(n))**, this solution scales well for moderately large values of `n`.
-- **Space-efficient**: The space complexity of **O(n)** is manageable and doesn’t require too much memory.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * sqrt(n))
+- **Average Case:** O(n * sqrt(n))
+- **Worst Case:** O(n * sqrt(n))
 
-This approach ensures that we can compute the result optimally and handle large inputs effectively. So, whether you're solving coding challenges or just improving your dynamic programming skills, this method is a great example of how to use DP to solve problems efficiently!
+The time complexity is O(n * sqrt(n)) because we need to check each number from 1 to n and iterate over all perfect squares less than or equal to that number.
 
----
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### 🎯 Takeaway
+The space complexity is O(n) as we use an array to store the minimum number of perfect squares for each number from 0 to n.
 
-Dynamic programming is a powerful technique for breaking down complex problems into smaller, manageable pieces. By using the `cnt` array to store intermediate results, we avoid redundant calculations and achieve an optimal solution. Keep practicing, and soon you’ll be solving dynamic programming problems like a pro! 🚀
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/perfect-squares/description/)
 

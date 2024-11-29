@@ -14,151 +14,231 @@ img_src = ""
 youtube = "Ag3bur1amBs"
 youtube_upload_date="2022-01-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Ag3bur1amBs/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two arrays of strings, `startWords` and `targetWords`, determine how many strings in `targetWords` can be formed by appending a letter to any string in `startWords` and rearranging the letters.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two arrays of strings `startWords` and `targetWords`, each containing lowercase English letters.
+- **Example:** `startWords = ["rat", "tap", "part"], targetWords = ["trap", "pat", "partz"]`
+- **Constraints:**
+	- 1 <= startWords.length, targetWords.length <= 5 * 10^4
+	- 1 <= startWords[i].length, targetWords[j].length <= 26
+	- Each string consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int wordCount(vector<string>& start, vector<string>& end) {
-        set<int> bit;
-        for(auto it: start) {
-            int mask = 0;
-            for(char x: it)
-                mask |= 1 << (x - 'a');
-            bit.insert(mask);
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of strings in `targetWords` that can be formed by appending a letter to a string in `startWords` and rearranging the letters.
+- **Example:** `Output = 2`
+- **Constraints:**
+	- The result is a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify the number of words in `targetWords` that can be formed from `startWords` using the conversion operation.
+
+- Convert each word in `startWords` and `targetWords` to bitmasks.
+- For each word in `targetWords`, check if a matching word in `startWords` exists where only one additional letter is needed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings in both arrays consist of lowercase English letters only.
+- No string in `startWords` or `targetWords` contains duplicate letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `startWords = ["rat", "tap", "part"], targetWords = ["trap", "pat", "partz"]`  \
+  **Explanation:** From 'rat' we can form 'trap', from 'tap' we can form 'pat', but 'partz' cannot be formed.
+
+{{< dots >}}
+## Approach 🚀
+Use bitmasking to represent the sets of characters in the words and check if appending one character to a word from `startWords` can form a word in `targetWords`.
+
+### Initial Thoughts 💭
+- The conversion operation involves appending one new character and rearranging the letters, which suggests using a bitmask representation.
+- We can use a set to store the bitmasks of the start words and check for each target word if one of these masks can be transformed by adding a single bit.
+{{< dots >}}
+### Edge Cases 🌐
+- Both `startWords` and `targetWords` are non-empty by problem constraints.
+- Optimize the solution for large arrays with up to 50,000 strings.
+- Consider words in `startWords` that are already identical to words in `targetWords` (no conversion needed).
+- Ensure that no more than one letter is appended during the conversion operation.
+{{< dots >}}
+## Code 💻
+```cpp
+int wordCount(vector<string>& start, vector<string>& end) {
+    set<int> bit;
+    for(auto it: start) {
+        int mask = 0;
+        for(char x: it)
+            mask |= 1 << (x - 'a');
+        bit.insert(mask);
+    }
+    
+    int cnt = 0;
+    
+    for(auto it: end) {
+        int mask = 0;
+        for(char x: it)
+            mask |= 1 << (x - 'a');
         
-        int cnt = 0;
-        
-        for(auto it: end) {
-            int mask = 0;
-            for(char x: it)
-                mask |= 1 << (x - 'a');
-            
-            for(int i = 0; i < 26; i++) {
-                if(((mask >> i) & 1) == 0) continue;
-                int tmp = (mask ^ (1 << i));
-                if(bit.count(tmp)) {
-                    cnt++;
-                    break;
-                }
+        for(int i = 0; i < 26; i++) {
+            if(((mask >> i) & 1) == 0) continue;
+            int tmp = (mask ^ (1 << i));
+            if(bit.count(tmp)) {
+                cnt++;
+                break;
             }
         }
-        return cnt;
     }
-};
-{{< /highlight >}}
----
+    return cnt;
+}
+```
 
-### Problem Statement
+This function counts the number of words in the 'end' vector that have a similar mask in the 'start' vector by comparing bitwise operations on character masks.
 
-The goal of this problem is to count how many words from a given list (`end`) can be transformed into words from another list (`start`) by changing exactly one character in each word. This transformation is limited to the 26 lowercase letters of the English alphabet. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int wordCount(vector<string>& start, vector<string>& end) {
+	```
+	Declares the function `wordCount`, which takes two vectors of strings, `start` and `end`, and returns an integer count of words with similar masks.
 
-### Approach
+2. **Variable Declaration**
+	```cpp
+	    set<int> bit;
+	```
+	Declares a set `bit` to store unique masks representing characters in the strings from the `start` vector.
 
-To solve this problem, we use a bitmasking technique, which allows us to represent each word as an integer where each bit corresponds to the presence or absence of a character from 'a' to 'z'. By utilizing this representation, we can quickly check if a word can be transformed into another by changing a single character. The overall idea is to:
+3. **Iteration**
+	```cpp
+	    for(auto it: start) {
+	```
+	Iterates over each string in the `start` vector.
 
-1. Convert each word in the `start` list into a bitmask and store these masks in a set.
-2. For each word in the `end` list, create a bitmask and check if we can create a valid transformation by changing one character. This is done by iterating through each character in the word and toggling it, checking if the resulting mask exists in the set of start masks.
+4. **Mask Calculation**
+	```cpp
+	        int mask = 0;
+	```
+	Initializes a variable `mask` to 0, which will be used to store the bitwise representation of characters in the string.
 
-### Code Breakdown (Step by Step)
+5. **Character Iteration**
+	```cpp
+	        for(char x: it)
+	```
+	Iterates over each character `x` in the current string `it`.
 
-Here's a detailed breakdown of the code:
+6. **Mask Update**
+	```cpp
+	            mask |= 1 << (x - 'a');
+	```
+	Updates the mask by setting the bit corresponding to the character `x` in the range 'a' to 'z'.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - This defines the `Solution` class, which contains the method for counting the valid word transformations.
+7. **Mask Insertion**
+	```cpp
+	        bit.insert(mask);
+	```
+	Inserts the computed `mask` into the `bit` set.
 
-2. **Function Definition**:
-   ```cpp
-   int wordCount(vector<string>& start, vector<string>& end) {
-   ```
-   - The `wordCount` function is defined as a public member of the `Solution` class. It takes two vectors of strings: `start` and `end`.
+8. **Count Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes a counter `cnt` to 0, which will store the number of valid words found in the `end` vector.
 
-3. **Set Declaration**:
-   ```cpp
-   set<int> bit;
-   ```
-   - A `set` of integers named `bit` is declared to store the bitmask representations of words from the `start` list.
+9. **End Vector Iteration**
+	```cpp
+	    for(auto it: end) {
+	```
+	Iterates over each string in the `end` vector.
 
-4. **Bitmasking Start Words**:
-   ```cpp
-   for(auto it: start) {
-       int mask = 0;
-       for(char x: it)
-           mask |= 1 << (x - 'a');
-       bit.insert(mask);
-   }
-   ```
-   - This loop iterates over each word in the `start` vector.
-   - For each word, a `mask` variable is initialized to zero. The inner loop goes through each character `x` of the word and uses bitwise operations to set the corresponding bit in `mask` to `1`. The expression `1 << (x - 'a')` shifts `1` to the position corresponding to the character `x`.
-   - After constructing the bitmask for a word, it is inserted into the `bit` set.
+10. **Mask Calculation**
+	```cpp
+	        int mask = 0;
+	```
+	Initializes a new variable `mask` for the current string from the `end` vector.
 
-5. **Count Initialization**:
-   ```cpp
-   int cnt = 0;
-   ```
-   - A counter `cnt` is initialized to zero to keep track of how many valid transformations are found.
+11. **Character Iteration**
+	```cpp
+	        for(char x: it)
+	```
+	Iterates over each character `x` in the current string `it`.
 
-6. **Bitmasking End Words**:
-   ```cpp
-   for(auto it: end) {
-       int mask = 0;
-       for(char x: it)
-           mask |= 1 << (x - 'a');
-   ```
-   - This loop processes each word in the `end` vector in a similar manner. A bitmask is created for each word in `end`.
+12. **Mask Update**
+	```cpp
+	            mask |= 1 << (x - 'a');
+	```
+	Updates the mask for the current string `it` in the `end` vector.
 
-7. **Transformation Check**:
-   ```cpp
-   for(int i = 0; i < 26; i++) {
-       if(((mask >> i) & 1) == 0) continue;
-       int tmp = (mask ^ (1 << i));
-       if(bit.count(tmp)) {
-           cnt++;
-           break;
-       }
-   }
-   ```
-   - For each character in the current `end` word's mask, the algorithm checks if that character is present (`((mask >> i) & 1) == 0`).
-   - If the character is present, it creates a new temporary mask `tmp` by toggling that character using the XOR operation: `(mask ^ (1 << i))`. This effectively changes the bit corresponding to that character.
-   - The algorithm then checks if `tmp` exists in the `bit` set using `bit.count(tmp)`. If it does, it indicates that a transformation is possible, and the counter `cnt` is incremented. The loop is exited early using `break` to prevent counting multiple transformations for the same word.
+13. **Blank**
+	```cpp
+	        
+	```
+	Empty line for clarity.
 
-8. **Return Statement**:
-   ```cpp
-   return cnt;
-   ```
-   - Finally, the function returns the count of valid transformations found.
+14. **Bitwise Comparison**
+	```cpp
+	        for(int i = 0; i < 26; i++) {
+	```
+	Iterates through each bit position (0 to 25) to check for possible matches.
 
-9. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This closing brace signifies the end of the `Solution` class.
+15. **Skip if Bit Not Set**
+	```cpp
+	            if(((mask >> i) & 1) == 0) continue;
+	```
+	Skips the current iteration if the bit at position `i` is not set in the current mask.
 
-### Complexity Analysis
+16. **Mask Update**
+	```cpp
+	            int tmp = (mask ^ (1 << i));
+	```
+	Calculates a temporary mask by flipping the bit at position `i` in the current `mask`.
 
-- **Time Complexity**: \( O(n \cdot m) \)
-  - Here, \( n \) is the number of words in the `end` list and \( m \) is the average length of the words. Each word in both lists requires iterating through its characters and checking for transformations.
+17. **Match Check**
+	```cpp
+	            if(bit.count(tmp)) {
+	```
+	Checks if the modified `tmp` mask exists in the `bit` set.
 
-- **Space Complexity**: \( O(n) \)
-  - The space complexity arises from storing the bitmasks of the `start` words in the `set`, which could contain up to \( n \) unique masks.
+18. **Count Increment**
+	```cpp
+	                cnt++;
+	```
+	Increments the count `cnt` if a matching mask is found.
 
-### Conclusion
+19. **Break Loop**
+	```cpp
+	                break;
+	```
+	Breaks the inner loop as soon as a match is found.
 
-The `wordCount` function efficiently counts how many words from the `end` list can be formed by changing exactly one character in the words from the `start` list. By leveraging bitmasking, the solution achieves a compact representation of characters, allowing for quick transformations and lookups. This approach not only simplifies the problem but also enhances performance, making it suitable for larger datasets.
+20. **Return Count**
+	```cpp
+	    return cnt;
+	```
+	Returns the count of words in `end` that have matching masks in `start`.
 
-This code serves as a good example of using bitwise operations and sets in C++ to solve problems related to character manipulation and word transformations. The use of bitmasks significantly reduces the complexity of checking for character presence, resulting in a clean and efficient solution. 
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n * m)
 
-For those interested in algorithm design and competitive programming, understanding this approach can provide valuable insights into optimizing similar problems involving string manipulation and character comparisons. The clarity and efficiency of this solution make it an excellent choice for technical interviews and coding challenges.
+Where n is the number of words and m is the maximum word length. Time complexity is dominated by checking each target word against the set of bitmasks.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+Space complexity is proportional to the number of words and the size of the bitmask set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-words-obtained-after-adding-a-letter/description/)
 

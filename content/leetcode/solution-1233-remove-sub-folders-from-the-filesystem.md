@@ -14,166 +14,147 @@ img_src = ""
 youtube = "sFv6T_wLS4k"
 youtube_upload_date="2021-03-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/sFv6T_wLS4k/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of folder paths, where each path represents a folder in the file system. The task is to remove all sub-folders from the list, keeping only the main folders.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of folder paths. Each path starts with a '/' and may contain one or more sub-folder paths.
+- **Example:** `folders = ['/home/user/docs', '/home/user', '/home/user/docs/photos', '/home/user/music']`
+- **Constraints:**
+	- 1 <= folder.length <= 4 * 10^4
+	- 2 <= folder[i].length <= 100
+	- folder[i] contains only lowercase letters and '/'
+	- Each folder path is unique
 
-{{< highlight cpp >}}
-class TrieNode {
-    vector<TrieNode*> letter;
-    bool main;
-public:
-    TrieNode (bool m) {
-        letter.resize(27, NULL);
-        main = m;
-    }
-    
-    bool add(string key) {
-        TrieNode* root = this;
-        for (int i = 1; i < key.size(); i++) {
-            int nxt;
-            if (key[i] == '/') nxt = 26;
-            else               nxt = key[i] - 'a';
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of folder paths with all sub-folders removed.
+- **Example:** `["/home/user", "/home/user/music"]`
+- **Constraints:**
+	- The output should not contain any sub-folder paths.
 
-            if (root->letter[nxt] == NULL) {
-                if(nxt != 26) root->letter[nxt] = new TrieNode(false);
-                else {
-                    if (root->main) return false;
-                    root->letter[nxt] = new TrieNode(false);
-                }
-            }
-            root = root->letter[nxt];
-        }
-        if(!root->main) {
-            root->main = true;
-            root->letter.resize(27, NULL);
-        }
-        return true;
-    }
-};
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove any folder that is a sub-folder of another folder in the list.
 
-// plane sequence equated till they match
-//     sufix is a letter        - go head its new directory with prefix name natches
-//     sufix is a  : bar
-//          is current a main dir then cut else create new dir
-//                 - new folder - create it,
-//                 - sub dir    - stop do not proceed or add
+- Sort the folder paths lexicographically.
+- Use a trie structure to store and check for sub-folders.
+- Add a folder to the result list only if it is not a sub-folder of any other folder.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each folder path starts with a '/' and contains valid characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `folders = ['/home/user/docs', '/home/user', '/home/user/docs/photos', '/home/user/music']`  \
+  **Explanation:** The folders '/home/user/docs' and '/home/user/docs/photos' are sub-folders of '/home/user', so they are removed. The remaining folders are '/home/user' and '/home/user/music'.
 
-class Solution {
-public:
-    vector<string> removeSubfolders(vector<string>& folder) {
+- **Input:** `folders = ['/a/b/c', '/a/b', '/a/c', '/a']`  \
+  **Explanation:** The folders '/a/b/c', '/a/b', and '/a/c' are sub-folders of '/a', so only '/a' remains.
 
-        sort(folder.begin(), folder.end());
-        vector<string> ans;
-        TrieNode* root = new TrieNode(false);
-        for(int i = 0; i < folder.size(); i++) {
-            if(root->add(folder[i]))
-                ans.push_back(folder[i]);
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we first sort the folder paths lexicographically and then use a trie data structure to remove sub-folders.
 
-
-### Problem Statement
-The task is to take a list of folder paths and return a new list containing only the folder paths that do not contain any subfolders. A folder path is represented as a string, and subfolders are defined as any folder whose path starts with another folder's path followed by an additional forward slash (`/`). For example, if we have the folders `/a`, `/a/b`, and `/c`, then `/a/b` is a subfolder of `/a` and should not be included in the result.
-
-### Approach
-To solve this problem, we can utilize a Trie (prefix tree) data structure to efficiently store and manage the folder paths. The basic idea is to insert each folder path into the Trie and check if the current path is a subfolder of any previously inserted paths. The Trie will help us easily navigate through the folder structure and identify subfolders.
-
-1. **Sort the Folder Paths**: First, we sort the folder paths. This ensures that when we insert them into the Trie, any potential subfolder will be placed directly after its parent folder, making it easier to identify and ignore subfolders during insertion.
-
-2. **Use a Trie for Insertion**: We implement a Trie where each node represents a character in a folder path. When inserting a new folder path, we traverse the Trie:
-   - If we encounter a node that indicates the end of a previously added folder (meaning the current folder is a subfolder), we stop the insertion process and do not add the subfolder to the result.
-   - If we finish inserting the entire path without encountering such a node, we add it to the result.
-
-3. **Return the Result**: After processing all folder paths, we return the collected folder paths that are not subfolders.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Sorting the folder paths lexicographically ensures that sub-folders will appear after their parent folders.
+- Using a trie helps efficiently check if a folder is a sub-folder of another.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as the input will always contain at least one folder.
+- The solution should handle up to 40,000 folder paths efficiently.
+- Ensure that folder paths are unique, and no folder path starts with an empty string or contains invalid characters.
+- The folder paths are guaranteed to be well-formed and unique.
+{{< dots >}}
+## Code 💻
 ```cpp
-class TrieNode {
-    vector<TrieNode*> letter;
-    bool main;
-public:
-    TrieNode (bool m) {
-        letter.resize(27, NULL);
-        main = m;
+vector<string> removeSubfolders(vector<string>& folder) {
+
+    sort(folder.begin(), folder.end());
+    vector<string> ans;
+    TrieNode* root = new TrieNode(false);
+    for(int i = 0; i < folder.size(); i++) {
+        if(root->add(folder[i]))
+            ans.push_back(folder[i]);
     }
+    return ans;
+}
 ```
-- **Lines 1-7**: The `TrieNode` class is defined. It contains a vector of pointers to its children (representing the letters in the folder names) and a boolean indicating if the node represents the end of a main folder.
 
-```cpp
-    bool add(string key) {
-        TrieNode* root = this;
-        for (int i = 1; i < key.size(); i++) {
-            int nxt;
-            if (key[i] == '/') nxt = 26;  // Using index 26 for '/'
-            else                       nxt = key[i] - 'a'; // Convert char to index
+This function removes subfolders from a list of folder paths. It uses a Trie to efficiently check if a folder is a subfolder of another.
 
-            if (root->letter[nxt] == NULL) {
-                if(nxt != 26) root->letter[nxt] = new TrieNode(false);
-                else {
-                    if (root->main) return false; // Encountering a subfolder
-                    root->letter[nxt] = new TrieNode(false);
-                }
-            }
-            root = root->letter[nxt];
-        }
-```
-- **Lines 8-23**: The `add` method is defined for the `TrieNode` class, which handles inserting a folder path into the Trie.
-  - We iterate through each character of the folder path starting from the second character (since the first character is always `/`).
-  - The `nxt` variable determines the index of the current character. If it's a forward slash, it uses index 26.
-  - If the current character path does not exist in the Trie, we create a new node. If we hit an existing node that marks the end of a folder and we are trying to add a subfolder, we return false, indicating that the current path is a subfolder.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> removeSubfolders(vector<string>& folder) {
+	```
+	This is the function definition for `removeSubfolders`. It takes a vector of folder paths and returns a vector with subfolders removed.
 
-```cpp
-        if(!root->main) {
-            root->main = true; // Mark this node as a main folder
-            root->letter.resize(27, NULL);
-        }
-        return true;
-    }
-};
-```
-- **Lines 24-30**: After traversing the entire path, we check if the node does not already represent a main folder. If not, we mark it as a main folder and return true, indicating successful insertion.
+2. **Sorting**
+	```cpp
+	    sort(folder.begin(), folder.end());
+	```
+	The folder paths are sorted in lexicographical order to ensure that the parent folder always appears before its subfolder.
 
-```cpp
-class Solution {
-public:
-    vector<string> removeSubfolders(vector<string>& folder) {
-        sort(folder.begin(), folder.end());
-```
-- **Lines 31-33**: The `Solution` class is defined, and the `removeSubfolders` method is declared. The folder paths are sorted to ensure parent folders come before their subfolders.
+3. **Result Initialization**
+	```cpp
+	    vector<string> ans;
+	```
+	An empty vector `ans` is initialized to store the folder paths that are not subfolders of others.
 
-```cpp
-        vector<string> ans;
-        TrieNode* root = new TrieNode(false);
-        for(int i = 0; i < folder.size(); i++) {
-            if(root->add(folder[i]))
-                ans.push_back(folder[i]);
-        }
-```
-- **Lines 34-39**: A vector `ans` is initialized to store the resulting folder paths. A new Trie root node is created. We then iterate through each folder, attempting to add it to the Trie. If the folder is successfully added (i.e., it's not a subfolder), it gets pushed onto the result vector.
+4. **Trie Initialization**
+	```cpp
+	    TrieNode* root = new TrieNode(false);
+	```
+	A new TrieNode `root` is created to serve as the root of the Trie. The `false` parameter indicates that this node does not represent the end of a valid folder path.
 
-```cpp
-        return ans;
-    }
-};
-```
-- **Lines 40-42**: After processing all folders, the method returns the vector containing only the valid folders (non-subfolders).
+5. **Iterating Over Folders**
+	```cpp
+	    for(int i = 0; i < folder.size(); i++) {
+	```
+	A loop is started to iterate over each folder in the sorted `folder` vector.
 
-### Complexity
-1. **Time Complexity**: The time complexity is \( O(n \cdot m) \), where \( n \) is the number of folder paths and \( m \) is the average length of the folder paths. Sorting takes \( O(n \log n) \), and inserting each folder path into the Trie takes linear time relative to the path length.
+6. **Checking for Subfolders**
+	```cpp
+	        if(root->add(folder[i]))
+	```
+	The function `add` is called on the root TrieNode to check if the current folder is a subfolder of any previously processed folder. If it is not a subfolder, the folder is added to the result.
 
-2. **Space Complexity**: The space complexity is \( O(n \cdot m) \) due to the storage required for the Trie, which may hold a significant number of nodes based on the input folder paths.
+7. **Adding to Result**
+	```cpp
+	            ans.push_back(folder[i]);
+	```
+	If the folder is not a subfolder, it is added to the `ans` vector, which will be returned at the end.
 
-### Conclusion
-The `removeSubfolders` function efficiently removes subfolders from a list of folder paths using a Trie data structure. By sorting the folder paths and leveraging the properties of the Trie, the solution ensures that only main directories are retained. This approach is optimal in terms of time and space, making it suitable for handling a large number of folder paths in real-world applications. The implementation highlights the power of using data structures to solve complex problems efficiently and elegantly.
+8. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the `ans` vector, which contains the folder paths that are not subfolders of any other folder.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The solution primarily depends on sorting the folder paths and checking each folder using the trie structure.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is proportional to the number of folder paths and the trie storage.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/description/)
 

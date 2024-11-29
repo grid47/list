@@ -14,102 +14,147 @@ img_src = ""
 youtube = "pE6qW1KRl4A"
 youtube_upload_date="2021-04-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/pE6qW1KRl4A/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the logs of users' actions on a platform, calculate the number of users with each possible User Active Minutes (UAM) from 1 to k.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array where each log entry is a pair of [ID, time], and an integer k.
+- **Example:** `logs = [[0, 3], [1, 1], [0, 1], [0, 3], [1, 2]], k = 3`
+- **Constraints:**
+	- 1 <= logs.length <= 10^4
+	- 0 <= IDi <= 10^9
+	- 1 <= timei <= 10^5
+	- k is in the range [1, 100000].
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findingUsersActiveMinutes(vector<vector<int>>& logs, int k) {
-        unordered_map<int, unordered_set<int>> m;
-        vector<int> res(k);
-        for(auto &l : logs) 
-        m[l[0]].insert(l[1]);
-        for(auto &p: m)
-        ++res[p.second.size() - 1];
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a 1-indexed array where each index j corresponds to the number of users with exactly j User Active Minutes (UAM).
+- **Example:** `Output: [0, 2, 0]`
+- **Constraints:**
+	- The output array should have length k.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of users who have UAM equal to each value from 1 to k.
 
-The problem requires us to determine the number of users who have a specific number of active minutes in a given set of logs. Each log entry contains two pieces of information: a user ID and a timestamp representing the minute the user was active. The goal is to compute how many users had exactly `i` active minutes for each minute from 1 to `k`, where `k` is the maximum number of active minutes we are interested in.
+- Use a hashmap to track unique action times for each user.
+- Calculate the UAM for each user (the size of the unique action times).
+- Count the occurrences of each UAM and store them in the result array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The logs will contain valid user IDs and times within the given ranges.
+- Multiple actions at the same minute by the same user are counted as a single active minute.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `logs = [[0, 3], [1, 1], [0, 1], [0, 3], [1, 2]], k = 3`  \
+  **Explanation:** User 0 has a UAM of 2, User 1 has a UAM of 2, so the result is [0, 2, 0].
 
-### Approach
+- **Input:** `logs = [[2, 10], [1, 1], [1, 2], [2, 10], [2, 12]], k = 4`  \
+  **Explanation:** User 1 has UAM of 2, User 2 has UAM of 2, the result is [1, 1, 0, 1].
 
-To solve this problem, we will use the following approach:
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a hashmap to store the unique action times for each user and then calculate the UAM for each user.
 
-1. **Data Structure**: We will utilize a hash map to store user activity. Each user ID will map to a set of unique minutes they were active in. This will allow us to easily count the unique active minutes for each user.
-
-2. **Process Logs**: For each log entry, we will insert the timestamp (minute) into the user's corresponding set in the hash map. This ensures that we only count unique active minutes.
-
-3. **Count Active Minutes**: Once we have processed all logs, we will iterate over the hash map to count how many users have `i` active minutes, for all `i` from 1 to `k`.
-
-4. **Prepare the Result**: Finally, we will create a result vector to store the count of users for each number of active minutes.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code implementation:
-
+### Initial Thoughts 💭
+- We need to process each log entry and track the times when users perform actions.
+- The total number of unique minutes for each user is their UAM.
+- Once we have the UAM for each user, we can count how many users have a particular UAM.
+{{< dots >}}
+### Edge Cases 🌐
+- If the logs array is empty, the result should be an array of zeros.
+- Ensure the solution handles the maximum input size efficiently.
+- If all users have the same UAM, the result should reflect this distribution.
+- The solution must operate within time limits for input sizes up to the maximum allowed.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
+vector<int> findingUsersActiveMinutes(vector<vector<int>>& logs, int k) {
+    unordered_map<int, unordered_set<int>> m;
+    vector<int> res(k);
+    for(auto &l : logs) 
+    m[l[0]].insert(l[1]);
+    for(auto &p: m)
+    ++res[p.second.size() - 1];
+    return res;
+}
 ```
-- We define a class named `Solution` to encapsulate the function that will solve our problem.
 
-```cpp
-    vector<int> findingUsersActiveMinutes(vector<vector<int>>& logs, int k) {
-```
-- The method `findingUsersActiveMinutes` takes two parameters: a vector of log entries (`logs`), where each entry is itself a vector containing a user ID and a timestamp, and an integer `k`, which indicates the maximum number of active minutes we are interested in.
+The function `findingUsersActiveMinutes` takes in a vector of logs, where each log contains a user ID and a minute they were active, and an integer `k`. It returns a vector where the value at index `i` is the number of users who were active exactly `i + 1` distinct minutes.
 
-```cpp
-        unordered_map<int, unordered_set<int>> m;
-```
-- We declare a hash map `m`, where each key is an integer representing a user ID, and each value is an unordered set of integers representing the unique minutes that user was active. The unordered set is used to automatically handle duplicates.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findingUsersActiveMinutes(vector<vector<int>>& logs, int k) {
+	```
+	This is the function definition of `findingUsersActiveMinutes`. It takes a vector of vectors `logs`, where each log contains a user ID and a minute they were active, and an integer `k`. The function will return a vector of integers of size `k`.
 
-```cpp
-        vector<int> res(k);
-```
-- We initialize a result vector `res` of size `k` to zero. This vector will hold the count of users who have exactly `i` active minutes, with `i` ranging from 1 to `k`.
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<int, unordered_set<int>> m;
+	```
+	A hashmap `m` is initialized to store the distinct active minutes for each user. The key is the user ID, and the value is an unordered set of distinct minutes.
 
-```cpp
-        for(auto &l : logs) 
-            m[l[0]].insert(l[1]);
-```
-- We iterate over each log entry `l` in `logs`. For each log, we extract the user ID `l[0]` and the active minute `l[1]`, and we insert the minute into the unordered set corresponding to that user ID in our hash map `m`. This way, we ensure that each user ID only keeps track of unique active minutes.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> res(k);
+	```
+	A vector `res` of size `k` is initialized with all elements set to 0. This vector will store the number of users who were active in exactly `i + 1` distinct minutes.
 
-```cpp
-        for(auto &p: m)
-            ++res[p.second.size() - 1];
-```
-- We iterate over each entry `p` in the hash map `m`. For each user, we check the size of their set of active minutes (`p.second.size()`), which gives us the count of unique active minutes for that user. We increment the corresponding index in the result vector `res` by one. Since `res` is zero-indexed and counts from 1 to `k`, we subtract 1 from the size to place the count in the correct position.
+4. **Loop Over Logs**
+	```cpp
+	    for(auto &l : logs) 
+	```
+	This loop iterates over each log in the `logs` vector. Each log `l` contains a user ID and an active minute.
 
-```cpp
-        return res;
-    }
-};
-```
-- Finally, we return the result vector `res`, which contains the counts of users with exactly `i` active minutes.
+5. **Update User Activity**
+	```cpp
+	    m[l[0]].insert(l[1]);
+	```
+	For each log, the user's ID `l[0]` is used as the key in the map `m`. The corresponding minute `l[1]` is inserted into the unordered set of distinct active minutes for that user.
 
-### Complexity
+6. **Loop Over Map**
+	```cpp
+	    for(auto &p: m)
+	```
+	This loop iterates over each key-value pair `p` in the map `m`. Each pair represents a user and the set of distinct minutes they were active.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the number of log entries. This is because we process each log entry once to populate the hash map.
+7. **Update Result**
+	```cpp
+	    ++res[p.second.size() - 1];
+	```
+	The size of the set `p.second` represents the number of distinct minutes the user was active. This value is used to increment the appropriate index in the result vector `res`.
 
-- **Space Complexity**: The space complexity is \(O(m)\), where \(m\) is the number of unique users times the average number of unique active minutes per user. This is due to storing active minutes in the unordered set for each user.
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the result vector `res`, which contains the number of users who were active in exactly `i + 1` distinct minutes.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The `findingUsersActiveMinutes` function effectively counts the number of users based on their unique active minutes in a structured and efficient manner. By utilizing a hash map and unordered sets, we ensure that our solution remains efficient and straightforward, allowing for easy handling of duplicates and quick lookups.
+The time complexity is O(n) where n is the number of log entries, as we process each log once.
 
-This implementation demonstrates the power of hash maps and sets in managing and counting unique data in programming. It provides a solid foundation for tackling similar problems involving user activity tracking, logging systems, and statistical analyses of user engagement.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-In conclusion, this solution not only meets the problem's requirements but also showcases good practices in algorithm design, such as using appropriate data structures and maintaining clarity in the code. This makes it an excellent reference for anyone looking to understand how to manage user activity data efficiently.
+The space complexity is O(n) for storing the unique action times for each user.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/finding-the-users-active-minutes/description/)
 

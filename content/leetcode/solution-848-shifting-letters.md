@@ -14,120 +14,143 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` of lowercase English letters and an array `shifts`, where `shifts[i]` represents the number of times to shift the first `i + 1` characters of `s`. The shift operation for a letter means moving to the next letter in the alphabet, and if the letter is 'z', it wraps around to 'a'. After applying all the shifts, return the final string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` consisting of lowercase English letters and an integer array `shifts` of the same length. Each element of `shifts[i]` represents how many times you need to shift the first `i + 1` letters of `s`.
+- **Example:** `Input: s = 'abc', shifts = [3, 5, 9]`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists of lowercase English letters.
+	- shifts.length == s.length
+	- 0 <= shifts[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string shiftingLetters(string s, vector<int>& shifts) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the final string after applying all the shifts to `s` as specified by the array `shifts`.
+- **Example:** `Output: 'rpl'`
+- **Constraints:**
+	- The final string is derived by applying the shifts progressively to the characters of `s`.
 
-        int n = shifts.size();
-        for(int i = n - 2; i >= 0; i--)
-        shifts[i] = (shifts[i] + shifts[i + 1] ) % 26;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the final string after applying all the shifts to the string `s`.
 
-        for(int i = 0; i < s.size(); i++)
-        s[i] = 'a' + ((s[i] - 'a'+ shifts[i]) % 26);
+- Step 1: Process the shifts array by calculating cumulative shifts from the end of the string towards the beginning.
+- Step 2: For each character in `s`, apply the shift operation by moving the character forward in the alphabet by the corresponding number of shifts (considering the wrap-around).
+- Step 3: Return the resulting string after all shifts have been applied.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `s` contains only lowercase English letters.
+- The length of the string `s` and the array `shifts` will always match.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'abc', shifts = [3, 5, 9]`  \
+  **Explanation:** Initially, the string is 'abc'. After shifting the first 1 letter by 3, it becomes 'dbc'. Then, shifting the first 2 letters by 5 results in 'igc'. Finally, shifting the first 3 letters by 9 gives 'rpl'. Hence, the final result is 'rpl'.
 
-        return s;
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `Input: s = 'aaa', shifts = [1, 2, 3]`  \
+  **Explanation:** The string starts as 'aaa'. After shifting the first 1 letter by 1, it becomes 'b'. Then, shifting the first 2 letters by 2 gives 'd'. Finally, shifting the first 3 letters by 3 results in 'gfd'. Thus, the final result is 'gfd'.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we process the shifts in reverse order and apply cumulative shifts progressively to each character in the string.
 
-The problem requires us to perform a series of shifting operations on the characters of a string. Each shift operation moves a character in the string forward by a number of positions in the alphabet, with wrap-around from 'z' back to 'a'. The challenge is that each character in the string may have multiple shifts applied, and these shifts are defined by a vector of integers. 
-
-The task is to calculate the final string after applying all shifts. Each shift value in the vector represents how many positions to move a character in the string. The trick is that each character gets a different amount of shift based on its position and the subsequent characters' shifts.
-
-### Example:
-- **Input**: `s = "abc"`, `shifts = [3, 5, 9]`
-- **Output**: `"rpl"`
-
-In this case, the shifting operations are:
-1. The first character 'a' is shifted by `3` (it becomes 'd').
-2. The second character 'b' is shifted by `3 + 5 = 8` (it becomes 'j').
-3. The third character 'c' is shifted by `3 + 5 + 9 = 17` (it becomes 'r').
-
-Thus, the final string after all the shifts is `"rpl"`.
-
-### Approach
-
-The solution to this problem involves two main steps:
-1. **Cumulative Shifting**: The shifts provided are cumulative from the last character to the first. That is, each character's shift depends on the sum of shifts starting from that character to the end of the string.
-2. **Character Shifting**: After calculating the cumulative shifts, we apply the shift to each character in the string, adjusting the character by the appropriate number of positions in the alphabet.
-
-#### Step 1: Cumulative Shifting
-To efficiently compute the total shift for each character, we traverse the `shifts` array from right to left, accumulating the shifts for each character. By the time we reach the first character, the shift for that character will be the sum of all shifts applied to it (and subsequent characters).
-
-#### Step 2: Applying the Shifts to the String
-Once we have the cumulative shifts, we apply each shift to the corresponding character in the string. This is done by:
-- Taking the current character's ASCII value (e.g., `'a'` has a value of 97).
-- Adjusting it by adding the shift and wrapping around using modulo 26 to ensure the shift remains within the bounds of the alphabet.
-- Updating the string with the new shifted character.
-
-The solution performs these operations in a linear scan, which ensures that we handle the problem efficiently.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Cumulative Shifting
-
+### Initial Thoughts 💭
+- The shifts for each character depend on the sum of shifts from the previous positions.
+- Instead of repeatedly applying shifts from the start, we can accumulate shifts from the last character and apply them once in one pass.
+- By calculating cumulative shifts backwards, we avoid redundant calculations and reduce the complexity of applying shifts.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string `s` will not be empty as per the problem constraints.
+- Ensure the solution can handle the upper constraint where the length of `s` is 10^5 and shift values can be as large as 10^9.
+- If the shift value is 0 for any index, the corresponding character will not be altered.
+- The solution should be optimized to handle large shift values efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = shifts.size();
-for(int i = n - 2; i >= 0; i--)
-    shifts[i] = (shifts[i] + shifts[i + 1]) % 26;
+string shiftingLetters(string s, vector<int>& shifts) {
+
+    int n = shifts.size();
+    for(int i = n - 2; i >= 0; i--)
+    shifts[i] = (shifts[i] + shifts[i + 1] ) % 26;
+
+    for(int i = 0; i < s.size(); i++)
+    s[i] = 'a' + ((s[i] - 'a'+ shifts[i]) % 26);
+
+    return s;
+}
 ```
 
-In this loop, we traverse the `shifts` vector from the second-to-last element to the first. For each `i`, we accumulate the shifts from the right side:
-- The shift at `shifts[i]` is updated by adding the value of `shifts[i + 1]` to it, ensuring that it reflects the total shift for character `i` and all subsequent characters.
-- The `% 26` operation ensures that the total shift remains within the bounds of the alphabet (0 to 25, corresponding to 'a' to 'z').
+This function shifts the letters in the string `s` based on the shifts provided in the `shifts` vector, where each shift is cumulative from the end to the start.
 
-#### Step 2: Applying Shifts to the String
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string shiftingLetters(string s, vector<int>& shifts) {
+	```
+	The function `shiftingLetters` takes a string `s` and a vector `shifts` that specifies how much to shift each letter in `s`.
 
-```cpp
-for(int i = 0; i < s.size(); i++)
-    s[i] = 'a' + ((s[i] - 'a' + shifts[i]) % 26);
-```
+2. **Get Vector Size**
+	```cpp
+	    int n = shifts.size();
+	```
+	The size of the `shifts` vector is stored in `n`.
 
-This loop iterates over each character in the string:
-- For each character `s[i]`, we first convert it to a zero-based index (`s[i] - 'a'`), so 'a' becomes 0, 'b' becomes 1, and so on.
-- We then add the corresponding shift from the `shifts` array.
-- The `% 26` ensures that the shift wraps around the alphabet, i.e., after 'z', it will go back to 'a'.
-- Finally, we convert the zero-based index back to a character and update the string.
+3. **Backward Cumulative Shifts**
+	```cpp
+	    for(int i = n - 2; i >= 0; i--)
+	```
+	Iterate backward through the `shifts` vector, from second-to-last element to the first.
 
-#### Step 3: Return the Result
+4. **Cumulative Shift Update**
+	```cpp
+	    shifts[i] = (shifts[i] + shifts[i + 1] ) % 26;
+	```
+	Update each shift to include the shift of the next letter, making it cumulative. The modulo 26 ensures the shift stays within the bounds of the alphabet.
 
-```cpp
-return s;
-```
+5. **Iterate Through String**
+	```cpp
+	    for(int i = 0; i < s.size(); i++)
+	```
+	Loop through each character in the string `s`.
 
-After all characters have been shifted, the modified string is returned as the final result.
+6. **Apply Shift to Character**
+	```cpp
+	    s[i] = 'a' + ((s[i] - 'a'+ shifts[i]) % 26);
+	```
+	Shift each character in `s` by the corresponding value in the `shifts` vector, ensuring it wraps around the alphabet using modulo 26.
 
-### Complexity
+7. **Return Result**
+	```cpp
+	    return s;
+	```
+	Return the shifted string `s`.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n)**, where `n` is the length of the string `s`. The two main operations—computing the cumulative shifts and applying the shifts to the string—both take linear time.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. The first loop (computing cumulative shifts) runs in **O(n)**, as it processes each element of the `shifts` vector once.
-2. The second loop (applying the shifts to the string) also runs in **O(n)**, as it processes each character in the string once.
+The time complexity is O(n) as we only need to process the string once and calculate the shifts in one pass.
 
-Since both operations are linear, the overall time complexity is **O(n)**.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
-The space complexity is **O(1)** if we disregard the space used for the input and output. The `shifts` vector is modified in place, and no additional data structures are used (apart from a constant amount of space for temporary variables in the loops).
+The space complexity is O(n) due to the storage of the shifts array and the modified string `s`.
 
-If we count the input string as part of the space complexity, it would be **O(n)** because the string `s` is given as input and modified in place. However, the space used by the `shifts` array is already accounted for in the input, so the space complexity is constant beyond that.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-The solution to this problem efficiently computes the result by first calculating the cumulative shifts for each character in the string and then applying those shifts in a second loop. The use of modulo 26 ensures that the alphabet wraps around correctly, and the overall time complexity of **O(n)** makes this solution optimal for large inputs. By modifying the `shifts` array in place and performing a single pass through the string, the solution also maintains constant extra space, making it both time and space efficient.
-
-This approach ensures that the problem is solved with minimal overhead, making it ideal for scenarios where performance is crucial, such as in competitive programming or real-time systems.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shifting-letters/description/)
 

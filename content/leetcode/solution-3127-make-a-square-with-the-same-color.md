@@ -14,126 +14,177 @@ img_src = ""
 youtube = "6krFbmlIg94"
 youtube_upload_date="2024-04-27"
 youtube_thumbnail="https://i.ytimg.com/vi/6krFbmlIg94/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 3x3 matrix consisting of characters 'B' (black) and 'W' (white). Your task is to determine if it is possible to change the color of at most one cell to form a 2x2 square where all cells are of the same color. Return true if it is possible, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 3x3 matrix where each cell contains either 'B' or 'W'.
+- **Example:** `grid = [['B', 'W', 'B'], ['B', 'W', 'W'], ['B', 'W', 'B']]`
+- **Constraints:**
+	- grid.length == 3
+	- grid[i].length == 3
+	- grid[i][j] is either 'W' or 'B'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canMakeSquare(vector<vector<char>>& grid) {
-        
-        int m = grid.size(), n = grid[0].size();
-        
-        for(int i = 0; i + 1 < m; i++)
-        for(int j = 0; j + 1 < n; j++) {
-            
-            int white = (grid[i][j] == 'W') + (grid[i + 1][j] == 'W') +
-                (grid[i][j + 1] == 'W') + (grid[i + 1][j + 1] == 'W');
-            
-            int black = (grid[i][j] == 'B') + (grid[i + 1][j] == 'B') +
-                (grid[i][j + 1] == 'B') + (grid[i + 1][j + 1] == 'B');            
-            
-            if((white == 3 && black == 1) || (white == 1 && black == 3) || white == 4 || black == 4)
-                return true;
-        }
-        
-        return false;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to form a 2x2 square where all cells are of the same color, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if it's possible to form a 2x2 square of the same color by changing at most one cell.
 
-The problem asks us to determine if it is possible to make a square in a given grid by checking the 2x2 sub-grids. A square is made of 'W' (white) and 'B' (black) cells, and the objective is to see if any 2x2 sub-grid satisfies one of the following conditions:
-1. Three white cells and one black cell.
-2. Three black cells and one white cell.
-3. All four cells are white.
-4. All four cells are black.
+- 1. Loop through each possible 2x2 subgrid of the matrix.
+- 2. Count the occurrences of 'B' and 'W' in each 2x2 subgrid.
+- 3. Check if it's possible to change one cell to make all cells in the 2x2 subgrid the same color.
+- 4. Return true if such a subgrid is found, otherwise return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input grid will always be a 3x3 matrix.
+- The characters in the grid will always be 'B' or 'W'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [['B', 'W', 'B'], ['B', 'W', 'W'], ['B', 'W', 'B']]`  \
+  **Explanation:** By changing the color of grid[0][2] (B → W), we can create a 2x2 square with all cells the same color.
 
-If any of the 2x2 sub-grids satisfies one of these conditions, we should return `true`, indicating it is possible to make such a square. If no such sub-grid exists, return `false`.
+- **Input:** `grid = [['B', 'W', 'B'], ['W', 'B', 'W'], ['B', 'W', 'B']]`  \
+  **Explanation:** No matter which cell we change, we can't form a 2x2 square with the same color.
 
-### Approach
+- **Input:** `grid = [['B', 'W', 'B'], ['B', 'W', 'W'], ['B', 'W', 'W']]`  \
+  **Explanation:** The matrix already contains a 2x2 square with all cells the same color (grid[1][1], grid[1][2], grid[2][1], grid[2][2]).
 
-This problem involves checking every possible 2x2 sub-grid in the given grid to see if it satisfies the conditions. The solution follows a straightforward approach:
-1. **Iterate Through All 2x2 Sub-grids**: We loop through all possible positions where a 2x2 sub-grid can be formed in the grid.
-2. **Count White and Black Cells in Each Sub-grid**: For each 2x2 sub-grid, we count the number of white (`'W'`) and black (`'B'`) cells.
-3. **Check Validity of the Sub-grid**: We check if the number of white and black cells in the sub-grid matches any of the conditions mentioned in the problem statement:
-    - Exactly three white cells and one black cell.
-    - Exactly three black cells and one white cell.
-    - Four white cells.
-    - Four black cells.
-4. **Return the Result**: If we find a valid 2x2 sub-grid, we return `true`. If no such sub-grid exists after checking all possibilities, return `false`.
+{{< dots >}}
+## Approach 🚀
+We can iterate through all possible 2x2 subgrids in the matrix and check if it is possible to make all cells in the subgrid the same color by changing at most one cell.
 
-### Code Breakdown
-
-#### Step 1: Initialize the Grid Size
+### Initial Thoughts 💭
+- The problem is simple because the grid is always 3x3.
+- We can check each 2x2 subgrid and count how many 'B' and 'W' cells there are. If we find a 2x2 subgrid with 3 same-colored cells, we can change the fourth one.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid is always a 3x3 matrix, so this case does not apply.
+- The grid is fixed at 3x3 size, so this case does not apply.
+- All cells are the same color. This will automatically return true.
+- The grid will always be 3x3.
+{{< dots >}}
+## Code 💻
 ```cpp
-int m = grid.size(), n = grid[0].size();
-```
-- `m`: The number of rows in the grid.
-- `n`: The number of columns in the grid.
-- We use `m` and `n` to determine the boundaries for iterating over all possible 2x2 sub-grids.
-
-#### Step 2: Iterate Over Possible 2x2 Sub-Grids
-```cpp
-for(int i = 0; i + 1 < m; i++)
+bool canMakeSquare(vector<vector<char>>& grid) {
+    
+    int m = grid.size(), n = grid[0].size();
+    
+    for(int i = 0; i + 1 < m; i++)
     for(int j = 0; j + 1 < n; j++) {
-```
-- We iterate over each possible position for the top-left corner of a 2x2 sub-grid.
-- The loop conditions `i + 1 < m` and `j + 1 < n` ensure that we don't exceed the grid's bounds when considering 2x2 sub-grids.
-
-#### Step 3: Count the White and Black Cells in the Sub-grid
-```cpp
-int white = (grid[i][j] == 'W') + (grid[i + 1][j] == 'W') +
+        
+        int white = (grid[i][j] == 'W') + (grid[i + 1][j] == 'W') +
             (grid[i][j + 1] == 'W') + (grid[i + 1][j + 1] == 'W');
-            
-int black = (grid[i][j] == 'B') + (grid[i + 1][j] == 'B') +
-            (grid[i][j + 1] == 'B') + (grid[i + 1][j + 1] == 'B');
+        
+        int black = (grid[i][j] == 'B') + (grid[i + 1][j] == 'B') +
+            (grid[i][j + 1] == 'B') + (grid[i + 1][j + 1] == 'B');            
+        
+        if((white == 3 && black == 1) || (white == 1 && black == 3) || white == 4 || black == 4)
+            return true;
+    }
+    
+    return false;
+    
+}
 ```
-- `white`: The count of white (`'W'`) cells in the current 2x2 sub-grid.
-- `black`: The count of black (`'B'`) cells in the current 2x2 sub-grid.
-- For each sub-grid, we check the four cells: `(i, j)`, `(i+1, j)`, `(i, j+1)`, and `(i+1, j+1)` and increment the `white` or `black` counter based on whether the cell contains a `'W'` or `'B'`.
 
-#### Step 4: Check the Validity of the 2x2 Sub-grid
-```cpp
-if((white == 3 && black == 1) || (white == 1 && black == 3) || white == 4 || black == 4)
-    return true;
-```
-- We check if the sub-grid satisfies any of the valid conditions:
-  - Three white cells and one black cell (`white == 3 && black == 1`).
-  - Three black cells and one white cell (`white == 1 && black == 3`).
-  - Four white cells (`white == 4`).
-  - Four black cells (`black == 4`).
-- If any of these conditions is met, we immediately return `true`, indicating that it is possible to form a valid square.
+This function checks if a 2x2 square can be formed in the grid where the square has 3 cells of one color and 1 cell of another color.
 
-#### Step 5: Return the Result
-```cpp
-return false;
-```
-- If no valid 2x2 sub-grid is found after iterating over all possible positions, we return `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool canMakeSquare(vector<vector<char>>& grid) {
+	```
+	Defines the function that takes a 2D grid of characters as input.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Initializes the dimensions of the grid, with m representing the number of rows and n representing the number of columns.
 
-#### Time Complexity:
-- **O(m * n)**:
-  - We iterate over all possible 2x2 sub-grids in the grid. The number of sub-grids is proportional to `(m - 1) * (n - 1)`, which simplifies to O(m * n) for large grids.
-  - For each sub-grid, checking the validity requires a constant number of operations (a few comparisons), so the total time complexity is O(m * n).
+3. **Loop Structure**
+	```cpp
+	    for(int i = 0; i + 1 < m; i++)
+	```
+	A loop iterating over rows of the grid, ensuring that it doesn't go beyond the last row that can form a 2x2 square.
 
-#### Space Complexity:
-- **O(1)**:
-  - The solution uses only a constant amount of extra space, aside from the input grid. We do not use any additional data structures that grow with the size of the input.
+4. **Loop Structure**
+	```cpp
+	    for(int j = 0; j + 1 < n; j++) {
+	```
+	A nested loop iterating over columns of the grid, ensuring it doesn't exceed the last column for forming a 2x2 square.
 
-### Conclusion
+5. **Conditionals**
+	```cpp
+	        int white = (grid[i][j] == 'W') + (grid[i + 1][j] == 'W') +
+	```
+	Counts how many 'W' (white) cells are present in the 2x2 square.
 
-The solution efficiently checks whether a valid 2x2 sub-grid can be formed in the given grid by iterating over all possible 2x2 sub-grids and counting the number of white and black cells in each sub-grid. By checking the specified conditions for valid squares, the algorithm ensures that the solution is optimal and works in linear time relative to the size of the grid. The space complexity is minimal, making this solution both time-efficient and space-efficient.
+6. **Conditionals**
+	```cpp
+	            (grid[i][j + 1] == 'W') + (grid[i + 1][j + 1] == 'W');
+	```
+	Continues the count for the remaining positions in the 2x2 square for the color white.
 
-The use of simple counting and conditional checks within a nested loop allows the solution to work for grids of any reasonable size, making it suitable for competitive programming and real-world applications where grid-based problems are common.
+7. **Conditionals**
+	```cpp
+	        int black = (grid[i][j] == 'B') + (grid[i + 1][j] == 'B') +
+	```
+	Counts how many 'B' (black) cells are present in the 2x2 square.
+
+8. **Conditionals**
+	```cpp
+	            (grid[i][j + 1] == 'B') + (grid[i + 1][j + 1] == 'B');            
+	```
+	Completes the black cell count for the remaining positions in the 2x2 square.
+
+9. **Conditionals**
+	```cpp
+	        if((white == 3 && black == 1) || (white == 1 && black == 3) || white == 4 || black == 4)
+	```
+	Checks if the 2x2 square has either 3 white and 1 black cells, or vice versa, or if it is completely white or completely black.
+
+10. **Return Statement**
+	```cpp
+	            return true;
+	```
+	Returns true if a valid 2x2 square is found.
+
+11. **Return Statement**
+	```cpp
+	    return false;
+	```
+	Returns false if no valid 2x2 square is found in the entire grid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+Since the matrix is always 3x3, the time complexity is constant, O(1).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, O(1), as we only need a few variables to keep track of the counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-a-square-with-the-same-color/description/)
 

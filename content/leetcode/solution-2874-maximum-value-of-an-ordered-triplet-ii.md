@@ -14,169 +14,142 @@ img_src = ""
 youtube = "QBLw9bVFIDQ"
 youtube_upload_date="2023-10-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QBLw9bVFIDQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array nums of integers. Find the maximum value over all possible triplets of indices (i, j, k) such that i < j < k. The value of a triplet (i, j, k) is calculated as (nums[i] - nums[j]) * nums[k]. If all triplets produce a negative value, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums where 3 <= nums.length <= 10^5, and 1 <= nums[i] <= 10^6.
+- **Example:** `nums = [5, 3, 2, 4, 6]`
+- **Constraints:**
+	- 3 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maximumTripletValue(vector<int>& nums) {
-        long res = 0, n = nums.size();
-        long maxa = 0, maxab = 0;
-        for(int a: nums) {
-            res = max(res, 1L * maxab * a);
-            maxab = max(maxab, (long) maxa - a);
-            maxa = max(maxa, (long)a);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum value over all triplets of indices (i, j, k) such that i < j < k. If all values are negative, return 0.
+- **Example:** `For input nums = [5, 3, 2, 4, 6], the output is 24.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the value of (nums[i] - nums[j]) * nums[k] for triplets (i, j, k) where i < j < k.
+
+- Iterate through each element in the array.
+- For each element, calculate the value of all possible triplets using it as i, j, or k.
+- Track the maximum value found during the iteration.
+- Return the maximum value or 0 if no valid triplet exists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array has at least 3 elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For input nums = [5, 3, 2, 4, 6], the output is 24.`  \
+  **Explanation:** The triplet (0, 2, 4) results in the maximum value (5 - 2) * 6 = 24.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to iterate through all possible triplets and calculate their values. The maximum value can then be returned.
+
+### Initial Thoughts 💭
+- The problem requires examining every triplet (i, j, k).
+- The values of the triplets depend on the subtraction of nums[i] and nums[j] multiplied by nums[k].
+- Instead of checking all triplets brute force, we can iterate through the array while keeping track of the maximum possible values efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least 3 elements, so no need to handle empty inputs.
+- Ensure that the solution efficiently handles arrays with up to 100,000 elements.
+- Consider cases where no valid triplet results in a non-negative value.
+- The algorithm must run efficiently even for the largest inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+long long maximumTripletValue(vector<int>& nums) {
+    long res = 0, n = nums.size();
+    long maxa = 0, maxab = 0;
+    for(int a: nums) {
+        res = max(res, 1L * maxab * a);
+        maxab = max(maxab, (long) maxa - a);
+        maxa = max(maxa, (long)a);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the maximum value of a triplet `(a, b, c)` such that `a < b < c` in an array `nums`. The triplet value is defined as:
-
-\[ \text{Triplet Value} = (b - a) \times (c - b) \]
-
-Where:
-- `a`, `b`, and `c` are elements from the array `nums`.
-- `a`, `b`, and `c` must be chosen such that their indices satisfy `i < j < k` for elements `a = nums[i]`, `b = nums[j]`, and `c = nums[k]`.
-
-We are asked to maximize this triplet value.
-
-### Approach
-
-To solve the problem efficiently, we need to avoid brute-forcing through all possible triplets, which would have a time complexity of **O(n^3)**. Instead, we can solve the problem in linear time, **O(n)**, by using a greedy approach and iterating through the array while keeping track of relevant intermediate results.
-
-### Key Insights for the Solution
-
-- The problem asks us to maximize the triplet value based on differences between elements. For a triplet `(a, b, c)`, the value is computed as `(b - a) * (c - b)`. 
-- We can track the maximum values of `(b - a)` and `(c - b)` using dynamic updating of intermediate values. This avoids explicitly checking every triplet.
-- By iterating through the array, we can progressively compute the value of triplets as we encounter new elements and keep track of the best triplet found.
-
-### Key Variables
-1. **`res`**: This variable will store the maximum triplet value found during the iteration. Initially, it is set to `0`.
-2. **`maxa`**: This is the maximum value encountered in the array so far. It represents the maximum value of `a` (which will be used in computing `b - a`).
-3. **`maxab`**: This stores the maximum value of `maxa - a`, which is used in computing `c - b`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-long res = 0, n = nums.size();
-long maxa = 0, maxab = 0;
-```
-
-- **`res`**: It stores the maximum triplet value found. We initialize it to `0`.
-- **`maxa`**: This stores the maximum value of the array up to the current element. Initially, it is set to `0`.
-- **`maxab`**: This stores the maximum value of `maxa - nums[i]` for each element `i`. Initially, it is set to `0`.
-- **`n`**: This stores the size of the input array `nums`.
-
-#### Step 2: Iterate Over the Array
-
-```cpp
-for (int a: nums) {
-    res = max(res, 1L * maxab * a);
-    maxab = max(maxab, (long) maxa - a);
-    maxa = max(maxa, (long) a);
+    return res;
 }
 ```
 
-- **Iterate through each element in the array (`a`)**:
-  - For each element `a`, we compute the potential value of the triplet where `a` acts as `c`. This is done by calculating the product `maxab * a`, where `maxab` represents the maximum value of `(b - a)` up to the current index. We update `res` to store the maximum of the previous value of `res` and the newly calculated product.
-  - **`res = max(res, 1L * maxab * a);`**: This computes the value of the triplet `(b - a) * (c - b)` where `a` is treated as the `c` element, and `maxab` represents the maximum `(b - a)` value found so far.
-  - **`maxab = max(maxab, (long) maxa - a);`**: This updates `maxab`, which tracks the maximum value of `(b - a)`, by considering the current element `a` and subtracting it from `maxa`. The idea here is that `maxa` is the maximum value found so far, and `maxab` tracks the best possible value of `(b - a)` that can be paired with the current element.
-  - **`maxa = max(maxa, (long) a);`**: This updates `maxa` to be the maximum of the current value of `maxa` and the current element `a`. This ensures that `maxa` always holds the largest value encountered in the array up to the current index.
+This function computes the maximum triplet value from the input array by iterating through it and updating the result based on the current element and maximum values seen so far.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long maximumTripletValue(vector<int>& nums) {
+	```
+	This line declares the function, which takes a vector of integers 'nums' as input and returns a long integer representing the maximum triplet value.
 
-```cpp
-return res;
-```
+2. **Variable Initialization**
+	```cpp
+	    long res = 0, n = nums.size();
+	```
+	Here, 'res' is initialized to 0, which will store the maximum triplet value, and 'n' is set to the size of the input vector 'nums'.
 
-- After iterating through the entire array, the maximum value of the triplet `(b - a) * (c - b)` is stored in `res`. This value is then returned.
+3. **Variable Initialization**
+	```cpp
+	    long maxa = 0, maxab = 0;
+	```
+	'maxa' stores the maximum value seen so far during the iteration, and 'maxab' stores the maximum value of (maxa - current element). Both are initialized to 0.
 
-### Example Walkthrough
+4. **Loop Setup**
+	```cpp
+	    for(int a: nums) {
+	```
+	A for loop is initiated to iterate over each element 'a' in the input vector 'nums'.
 
-#### Example 1: `nums = [1, 2, 3]`
+5. **Max Calculation**
+	```cpp
+	        res = max(res, 1L * maxab * a);
+	```
+	The result 'res' is updated by comparing its current value with the product of 'maxab' and the current element 'a'. The multiplication is done with 1L to ensure that the result is calculated as a long integer.
 
-1. **Initialize**:
-   - `res = 0`, `maxa = 0`, `maxab = 0`
+6. **Update maxab**
+	```cpp
+	        maxab = max(maxab, (long) maxa - a);
+	```
+	The 'maxab' variable is updated to store the maximum value between its current value and the difference between 'maxa' and the current element 'a'. The cast to 'long' ensures proper handling of integer overflow.
 
-2. **First Iteration (a = 1)**:
-   - `res = max(0, 0 * 1) = 0`
-   - `maxab = max(0, 0 - 1) = 0`
-   - `maxa = max(0, 1) = 1`
+7. **Update maxa**
+	```cpp
+	        maxa = max(maxa, (long)a);
+	```
+	'maxa' is updated to hold the maximum value encountered so far, which is the greater of its current value or the current element 'a'.
 
-3. **Second Iteration (a = 2)**:
-   - `res = max(0, 0 * 2) = 0`
-   - `maxab = max(0, 1 - 2) = -1`
-   - `maxa = max(1, 2) = 2`
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	After iterating through all elements, the final result 'res', which holds the maximum triplet value, is returned.
 
-4. **Third Iteration (a = 3)**:
-   - `res = max(0, -1 * 3) = 0`
-   - `maxab = max(-1, 2 - 3) = -1`
-   - `maxa = max(2, 3) = 3`
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-5. **Final Result**:
-   - `res = 0`
+The time complexity is O(n^2) because we are considering all possible triplets.
 
-**Output:**
-```cpp
-0
-```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Example 2: `nums = [4, 3, 2, 1]`
+The space complexity is O(1) as we use a constant amount of extra space.
 
-1. **Initialize**:
-   - `res = 0`, `maxa = 0`, `maxab = 0`
+**Happy Coding! 🎉**
 
-2. **First Iteration (a = 4)**:
-   - `res = max(0, 0 * 4) = 0`
-   - `maxab = max(0, 0 - 4) = 0`
-   - `maxa = max(0, 4) = 4`
-
-3. **Second Iteration (a = 3)**:
-   - `res = max(0, 0 * 3) = 0`
-   - `maxab = max(0, 4 - 3) = 1`
-   - `maxa = max(4, 3) = 4`
-
-4. **Third Iteration (a = 2)**:
-   - `res = max(0, 1 * 2) = 2`
-   - `maxab = max(1, 4 - 2) = 2`
-   - `maxa = max(4, 2) = 4`
-
-5. **Fourth Iteration (a = 1)**:
-   - `res = max(2, 2 * 1) = 2`
-   - `maxab = max(2, 4 - 1) = 3`
-   - `maxa = max(4, 1) = 4`
-
-6. **Final Result**:
-   - `res = 2`
-
-**Output:**
-```cpp
-2
-```
-
-### Time Complexity
-
-- **Time Complexity**: The solution iterates through the array once, making it **O(n)**, where `n` is the size of the array. Each iteration involves constant-time operations, so the overall time complexity is linear.
-  
-### Space Complexity
-
-- **Space Complexity**: The solution uses a constant amount of extra space, **O(1)**. It only requires a few variables (`res`, `maxa`, `maxab`), independent of the size of the input array.
-
-### Conclusion
-
-This solution efficiently computes the maximum triplet value using a greedy approach that tracks intermediate values. By iterating through the array just once, we are able to compute the maximum value of the triplet without explicitly checking every combination. This results in a time complexity of **O(n)**, which is optimal for this problem. The space complexity is **O(1)** since we only use a few variables to store intermediate results.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/description/)
 

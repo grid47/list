@@ -14,140 +14,177 @@ img_src = ""
 youtube = "KN4WAH95RIo"
 youtube_upload_date="2021-07-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/KN4WAH95RIo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string consisting of lowercase English letters and an integer k. Your task is to convert the string into an integer by replacing each letter with its corresponding position in the alphabet (where 'a' = 1, 'b' = 2, ..., 'z' = 26), and then repeatedly sum its digits k times. The final result is the integer obtained after performing the digit sum operation k times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string s of lowercase English letters and an integer k. The string s represents the word to be converted into an integer, and k represents the number of times the digit sum operation should be performed.
+- **Example:** `s = "abcd", k = 2`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- 1 <= k <= 10
+	- s consists of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getLucky(string s, int k) {
-        string tmp;
-        for (char c : s) tmp += to_string(c - 'a' + 1);
-        int n = 0;
-        for (char c : tmp) n += c - '0';
-        for (int i = 1; i < k; ++i) {
-            int next = 0;
-            while (n) {
-                next += n % 10;
-                n /= 10;
-            }
-            n = next;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the integer obtained after performing the digit sum operation on the string's converted integer representation k times.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The result should be a single integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to convert each character in the string to its respective position in the alphabet, then repeatedly sum the digits of the resulting integer k times to get the final result.
+
+- Step 1: Convert each character in the string to its corresponding number in the alphabet.
+- Step 2: Concatenate the numbers to form a large integer.
+- Step 3: Perform the digit sum operation on the integer k times.
+- Step 4: Return the resulting integer after k digit sum operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will contain only lowercase English letters.
+- The value of k will be at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "abcd", k = 2`  \
+  **Explanation:** The string 'abcd' is converted to '1234'. First, we sum the digits: 1+2+3+4 = 10. Then, we sum the digits of 10: 1+0 = 1. After 2 transformations, the result is 1.
+
+- **Input:** `Input: s = "aaa", k = 1`  \
+  **Explanation:** The string 'aaa' becomes '111'. Summing the digits gives: 1+1+1 = 3. After 1 transformation, the result is 3.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to first map the letters of the string to their respective numeric values based on their position in the alphabet, and then perform digit sum transformations k times.
+
+### Initial Thoughts 💭
+- We need to map each letter to its respective position in the alphabet.
+- After forming the integer from these positions, we will repeatedly sum the digits.
+- This is a simple string manipulation and digit sum problem that can be solved in a straightforward manner using basic operations.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty string input is not valid as per the constraints.
+- If the string has a length close to the upper limit (100 characters), the solution should efficiently handle the large number formed.
+- Single character strings should return a simple transformation result.
+- Ensure that k is within the valid range of 1 to 10.
+{{< dots >}}
+## Code 💻
+```cpp
+int getLucky(string s, int k) {
+    string tmp;
+    for (char c : s) tmp += to_string(c - 'a' + 1);
+    int n = 0;
+    for (char c : tmp) n += c - '0';
+    for (int i = 1; i < k; ++i) {
+        int next = 0;
+        while (n) {
+            next += n % 10;
+            n /= 10;
         }
-        return n;
+        n = next;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to compute the "lucky" value of a given string `s` after performing a series of transformations. Each letter in the string corresponds to its position in the alphabet (with 'a' being 1, 'b' being 2, ..., 'z' being 26). The process involves converting the string into a number, summing its digits, and repeating this summation process a specified number of times, denoted by `k`. 
-
-The goal is to implement a function `getLucky` that takes a string `s` and an integer `k`, and returns the final lucky number after performing the transformation and summation process `k` times.
-
-### Approach
-
-The approach to solving this problem can be broken down into the following steps:
-
-1. **Convert Characters to Numbers**: Convert each character in the string to its corresponding numerical value based on its position in the alphabet.
-
-2. **Sum Digits**: After converting the characters, compute the sum of the digits of the resulting number.
-
-3. **Repeat the Summation**: For `k-1` times, repeat the summation of the digits of the current result.
-
-4. **Return the Result**: Finally, return the resulting number after all transformations and summations.
-
-### Code Breakdown (Step by Step)
-
-Let's take a closer look at the implementation:
-
-```cpp
-class Solution {
-public:
-    int getLucky(string s, int k) {
+    return n;
+}
 ```
-Here, we define a class `Solution` with a public method `getLucky` that takes two parameters: a string `s` and an integer `k`.
 
-```cpp
-        string tmp; // Initialize an empty string to store the numeric representation
-        for (char c : s) tmp += to_string(c - 'a' + 1);
-```
-We initialize a temporary string `tmp`. We then iterate over each character `c` in the string `s` and convert it to its corresponding numerical value using the expression `c - 'a' + 1`. This expression calculates the position of the character in the alphabet. The resulting numbers are concatenated into the `tmp` string.
+This function computes a transformation of the input string, calculates the sum of the digits derived from the string, and iterates a specified number of times to reduce the sum until it stabilizes.
 
-```cpp
-        int n = 0; // Initialize n to hold the sum of digits
-        for (char c : tmp) n += c - '0';
-```
-Next, we initialize an integer `n` to store the sum of the digits represented in the string `tmp`. We iterate over each character `c` in `tmp` and convert it back to an integer by subtracting `'0'`. We then add this integer value to `n`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int getLucky(string s, int k) {
+	```
+	The function definition begins with the input parameters: 's' (a string) and 'k' (an integer) representing the number of iterations for the digit reduction process.
 
-```cpp
-        for (int i = 1; i < k; ++i) {
-            int next = 0; // Initialize next to hold the sum of the digits for the next iteration
-            while (n) {
-                next += n % 10; // Add the last digit of n to next
-                n /= 10; // Remove the last digit from n
-            }
-            n = next; // Update n for the next iteration
-        }
-```
-After obtaining the initial sum of digits in `n`, we enter a loop that runs `k-1` times (since we have already performed one summation). Inside the loop:
-- We initialize `next` to store the sum of digits for the current iteration.
-- We then use a `while` loop to sum the digits of `n` by repeatedly taking the last digit (`n % 10`), adding it to `next`, and removing it from `n` (`n /= 10`).
-- After the inner loop, we update `n` with the new digit sum stored in `next`.
+2. **Variable Initialization**
+	```cpp
+	    string tmp;
+	```
+	A string 'tmp' is initialized to store the numeric string derived from the input string 's'.
 
-```cpp
-        return n; // Return the final lucky number
-    }
-};
-```
-Finally, we return the computed value of `n`, which represents the lucky number after performing all required transformations.
+3. **Loop over String**
+	```cpp
+	    for (char c : s) tmp += to_string(c - 'a' + 1);
+	```
+	Each character of the input string 's' is converted to a corresponding number ('a' -> 1, 'b' -> 2, ..., 'z' -> 26) and appended to 'tmp'.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int n = 0;
+	```
+	The variable 'n' is initialized to 0. It will hold the sum of the digits in the string 'tmp'.
 
-- **Time Complexity**: The time complexity of this solution can be analyzed as follows:
-  - Converting characters to numbers takes \(O(m)\), where \(m\) is the length of the string `s`.
-  - Summing the digits of the number takes \(O(d)\), where \(d\) is the number of digits in the numeric representation. This could be at most \(2m\) in the worst case (when all characters are 'z').
-  - The loop runs \(k-1\) times, and summing the digits inside this loop also takes \(O(d)\). Therefore, the overall time complexity is approximately \(O(m + (k-1) \cdot d)\).
+5. **Summing Digits**
+	```cpp
+	    for (char c : tmp) n += c - '0';
+	```
+	The digits in the string 'tmp' are summed up and stored in the variable 'n'. Each character is converted to its numeric value using 'c - '0'.
 
-- **Space Complexity**: The space complexity is \(O(m)\) due to the temporary string `tmp` that holds the numeric representation of the characters.
+6. **Loop for Reduction**
+	```cpp
+	    for (int i = 1; i < k; ++i) {
+	```
+	A loop is initiated that will run 'k' times, reducing the sum 'n' by repeatedly summing its digits.
 
-### Conclusion
+7. **Variable Initialization**
+	```cpp
+	        int next = 0;
+	```
+	A temporary variable 'next' is initialized to accumulate the sum of the digits of 'n'.
 
-The provided implementation of the `getLucky` function efficiently computes the lucky number derived from the string `s` through a series of transformations and digit summations. By leveraging simple string manipulations and arithmetic operations, this approach remains both straightforward and effective.
+8. **While Loop for Digit Summation**
+	```cpp
+	        while (n) {
+	```
+	A while loop is used to reduce 'n' by summing its digits. The loop continues until 'n' becomes 0.
 
-### Key Features
+9. **Digit Summation**
+	```cpp
+	            next += n % 10;
+	```
+	The last digit of 'n' is added to 'next'.
 
-1. **Character-to-Number Conversion**: The solution utilizes simple arithmetic to convert characters into their corresponding numerical values based on their positions in the alphabet.
+10. **Update n**
+	```cpp
+	            n /= 10;
+	```
+	The last digit of 'n' is removed by performing integer division by 10.
 
-2. **Digit Summation**: The algorithm effectively handles the digit summation process through a straightforward loop, ensuring that the final result adheres to the specified number of transformations.
+11. **Update n**
+	```cpp
+	        n = next;
+	```
+	'n' is updated to 'next', which is the sum of the digits of the previous 'n'.
 
-3. **Clarity and Efficiency**: The code is structured in a clear and logical manner, making it easy to understand and maintain.
+12. **Return Statement**
+	```cpp
+	    return n;
+	```
+	The final reduced value of 'n' is returned after 'k' iterations.
 
-### Use Cases
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of the string.
+- **Average Case:** O(n * k) where n is the length of the string and k is the number of digit sum operations.
+- **Worst Case:** O(n * k), the worst-case time complexity occurs when the input string is large and k is at its maximum value.
 
-This function can be useful in various scenarios, such as:
+The time complexity depends on both the string length and the number of times the transformation is performed.
 
-- **Numerological Analysis**: In applications that involve converting text into numerical representations for analysis, such as in numerology or symbolic interpretations.
+### Space Complexity 💾
+- **Best Case:** O(1), if we use constant space for digit summing operations.
+- **Worst Case:** O(n), as we need space for storing the converted string and the intermediate results.
 
-- **Game Mechanics**: In game development, where certain character attributes may be derived from strings (like player names) and need to be transformed into numeric values for scoring or leveling.
+The space complexity depends on the length of the input string and the storage required for intermediate results.
 
-- **Data Encoding**: In encoding schemes where strings must be transformed into numbers for storage or transmission, ensuring consistency in representation.
+**Happy Coding! 🎉**
 
-### Implementation Considerations
-
-When implementing this solution, consider the following:
-
-- **Input Validation**: Ensure that the input string `s` is not empty and that the integer `k` is positive to avoid unnecessary computations or errors.
-
-- **Performance Testing**: Given that the solution involves a potentially large number of iterations, testing the performance with various string lengths and values of `k` will help ensure robustness.
-
-- **Handling Edge Cases**: Consider special cases, such as strings consisting of the same character, which may affect the number of iterations and the resulting sum.
-
-By following these principles, one can adapt this approach to similar problems involving character transformations and numeric computations effectively.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-digits-of-string-after-convert/description/)
 

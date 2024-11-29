@@ -14,143 +14,196 @@ img_src = ""
 youtube = "o3H1ccp2ckc"
 youtube_upload_date="2021-03-21"
 youtube_thumbnail="https://i.ytimg.com/vi/o3H1ccp2ckc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with constructing an array `nums` of length `n` such that: all elements are positive integers, the difference between adjacent elements is at most 1, the sum of elements does not exceed `maxSum`, and the value at index `index` is maximized. Return the value at `index` in the array `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of three integers: `n`, `index`, and `maxSum`. These are the length of the array, the index whose value is to be maximized, and the maximum allowable sum of all elements in the array, respectively.
+- **Example:** `n = 5, index = 2, maxSum = 10`
+- **Constraints:**
+	- 1 <= n <= maxSum <= 10^9
+	- 0 <= index < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool can(long long pk, long long n, long long i, long long sum) {
-        sum -= n;
-        long j = n - i - 1;
-        
-    long long need = pk * pk - ((pk > i ? (pk - i - 1) * (pk - i) : 0) + (pk > j? (pk - j - 1) * (pk - j): 0)) / 2;
-        
-        return sum - need >= 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the value at the index `index` in the array `nums` after constructing it under the given conditions.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The value at `index` must be maximized while ensuring that the sum of the elements in the array does not exceed `maxSum`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Construct the array such that the value at `index` is maximized, while adhering to the constraints of adjacent element differences and sum limits.
+
+- Use binary search to determine the maximum possible value for `nums[index]`.
+- For each candidate value, calculate if the sum of the array can remain within `maxSum` while keeping the difference between adjacent elements at most 1.
+{{< dots >}}
+### Problem Assumptions ✅
+- We assume the values are large enough to require an efficient solution using binary search.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 5, index = 2, maxSum = 10`  \
+  **Explanation:** In this case, the array `[1, 2, 3, 2, 1]` satisfies all conditions, and the value at index 2 is maximized as 3, with a total sum of 10.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses binary search to determine the maximum possible value for the element at `index`, checking if the sum of the array remains within `maxSum`.
+
+### Initial Thoughts 💭
+- The problem involves finding the maximum possible value at a specific index in an array, while satisfying sum and adjacent element difference constraints.
+- Binary search is the most efficient method to maximize the value at the index since it allows us to narrow down the possible values for `nums[index]`.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since `n` is always at least 1.
+- For large values of `n` and `maxSum`, binary search ensures the solution runs efficiently even when the input values approach their upper bounds.
+- Consider the case where `index` is at either end of the array, or when `n` is equal to `maxSum`.
+- Ensure the solution efficiently handles the maximum constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+bool can(long long pk, long long n, long long i, long long sum) {
+    sum -= n;
+    long j = n - i - 1;
+    
+long long need = pk * pk - ((pk > i ? (pk - i - 1) * (pk - i) : 0) + (pk > j? (pk - j - 1) * (pk - j): 0)) / 2;
+    
+    return sum - need >= 0;
+}
+
+int maxValue(int n, int index, int mx) {
+    
+    int ans = 0, l = 0, r = mx;
+    
+    while(l <= r) {
+        long mid = l + (r - l + 1) / 2;
+        // cout << mid << " ";
+        if(can(mid, n, index, mx)) {
+            ans = mid;
+            l = mid + 1;
+        } else r = mid - 1;
     }
     
-    int maxValue(int n, int index, int mx) {
-        
-        int ans = 0, l = 0, r = mx;
-        
-        while(l <= r) {
-            long mid = l + (r - l + 1) / 2;
-            // cout << mid << " ";
-            if(can(mid, n, index, mx)) {
-                ans = mid;
-                l = mid + 1;
-            } else r = mid - 1;
-        }
-        
-        return ans + 1;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to determine the maximum value that can be assigned to a specific index in an array while adhering to certain constraints. Given an array of length `n`, the value at a specified index `index` must not exceed `mx`, and the values in the array must be adjusted such that the total sum does not exceed the maximum permissible value. The goal is to maximize the value at the `index` position while ensuring that the total of the array meets the required conditions.
-
-### Approach
-
-To tackle this problem, we employ a binary search technique. The core idea is to find the maximum value that can be assigned to the `index` while checking if the conditions imposed by the problem are satisfied.
-
-1. **Binary Search Initialization**: We set up a binary search between a lower bound (`l = 0`) and an upper bound (`r = mx`), where `mx` is the maximum value allowed at the specified index.
-
-2. **Feasibility Check**: For each midpoint value in the binary search (`mid`), we check if assigning this value to the index is feasible without violating the constraints. This check is performed by a helper function named `can`.
-
-3. **Helper Function - `can`**: The `can` function determines whether it is possible to assign the value `pk` (the candidate value for the index) to the specified `index` under the following conditions:
-   - It calculates how much value is needed to fill the array while ensuring that the values on either side of the `index` do not exceed the constraints.
-   - The function evaluates the total remaining sum and checks if the required value to maintain the constraints can be accommodated within that sum.
-
-4. **Binary Search Execution**: If assigning the current `mid` value is feasible, it is recorded as a potential answer, and the search continues in the upper half of the range. If not, the search continues in the lower half.
-
-5. **Final Result**: After the binary search completes, the maximum feasible value is returned, adjusted by adding 1 since we want to find the maximum possible value that can be set at the index.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    bool can(long long pk, long long n, long long i, long long sum) {
+    return ans + 1;
+}
 ```
-- The `can` function checks whether it is feasible to assign a value `pk` to the `index`. It takes four parameters:
-  - `pk`: the proposed value for the index.
-  - `n`: the size of the array.
-  - `i`: the specific index in question.
-  - `sum`: the total allowable sum for the array.
 
-```cpp
-        sum -= n;
-        long j = n - i - 1;
-```
-- We adjust the `sum` by subtracting `n` since the proposed value will occupy the `index`. The variable `j` represents the number of elements to the right of the `index`.
+This code defines two main functions. The `can` function checks if a certain value can be achieved based on the input parameters. The `maxValue` function utilizes a binary search algorithm to find the maximum value that can be achieved under given constraints.
 
-```cpp
-        long long need = pk * pk - ((pk > i ? (pk - i - 1) * (pk - i) : 0) + (pk > j? (pk - j - 1) * (pk - j): 0)) / 2;
-```
-- This line computes the total value needed to satisfy the constraints imposed by the assignment of `pk` to the `index`. It considers how much value can be added to the left and right of the `index` while adhering to the maximum limit of values.
-- The formula calculates the amount required for the left and right segments of the array, factoring in the diminishing returns as the distance from the index increases.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool can(long long pk, long long n, long long i, long long sum) {
+	```
+	Define the 'can' function which takes parameters pk, n, i, and sum to check if a certain value can be achieved based on the constraints.
 
-```cpp
-        return sum - need >= 0;
-    }
-```
-- The function checks if the remaining sum after assigning `pk` is non-negative after accounting for the `need`. If so, it returns `true`; otherwise, it returns `false`.
+2. **Mathematical Operations**
+	```cpp
+	    sum -= n;
+	```
+	Adjust the sum by subtracting the total number of elements.
 
-```cpp
-    int maxValue(int n, int index, int mx) {
-```
-- The main function `maxValue` begins here, which sets up the binary search for the maximum value.
+3. **Variable Initialization**
+	```cpp
+	    long j = n - i - 1;
+	```
+	Initialize the variable 'j' to represent the index of the second element in the range.
 
-```cpp
-        int ans = 0, l = 0, r = mx;
-```
-- Initialize `ans` to store the best answer found, and set `l` and `r` to the bounds for binary search.
+4. **Mathematical Operations**
+	```cpp
+	    
+	```
+	Blank line for separation.
 
-```cpp
-        while(l <= r) {
-            long mid = l + (r - l + 1) / 2;
-```
-- The binary search loop continues while the left bound is less than or equal to the right bound.
-- We calculate the midpoint `mid`.
+5. **Mathematical Operations**
+	```cpp
+	long long need = pk * pk - ((pk > i ? (pk - i - 1) * (pk - i) : 0) + (pk > j? (pk - j - 1) * (pk - j): 0)) / 2;
+	```
+	Calculate the amount needed based on the value of pk and the indices i and j.
 
-```cpp
-            if(can(mid, n, index, mx)) {
-                ans = mid;
-                l = mid + 1;
-            } else r = mid - 1;
-        }
-```
-- We use the `can` function to check if `mid` can be assigned to the index. If feasible, we update `ans` and adjust the left bound; otherwise, we adjust the right bound.
+6. **Return**
+	```cpp
+	    return sum - need >= 0;
+	```
+	Return whether the remaining sum is greater than or equal to the calculated need.
 
-```cpp
-        return ans + 1;
-    }
-};
-```
-- Finally, the function returns the maximum value found, incremented by 1 to reflect the maximum feasible assignment.
+7. **Function Definition**
+	```cpp
+	int maxValue(int n, int index, int mx) {
+	```
+	Define the 'maxValue' function which implements a binary search to find the maximum value.
 
-### Complexity
+8. **Variable Initialization**
+	```cpp
+	    int ans = 0, l = 0, r = mx;
+	```
+	Initialize variables for binary search: ans (answer), l (lower bound), and r (upper bound).
 
-- **Time Complexity**: The time complexity of this solution is \(O(\log(mx) \cdot k)\), where \(k\) is the complexity of the `can` function in terms of calculating the required values. Given the constraints and the logarithmic nature of the binary search, the overall complexity remains efficient.
+9. **Loop and Recursion**
+	```cpp
+	    while(l <= r) {
+	```
+	Start the binary search loop.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since the algorithm uses a constant amount of space for variables, independent of the input size.
+10. **Mathematical Operations**
+	```cpp
+	        long mid = l + (r - l + 1) / 2;
+	```
+	Calculate the midpoint for the binary search.
 
-### Conclusion
+11. **Flow Control**
+	```cpp
+	        if(can(mid, n, index, mx)) {
+	```
+	If the 'can' function returns true for the current mid value, adjust the binary search bounds.
 
-The algorithm provides an efficient method for determining the maximum value that can be assigned to a specified index within an array while adhering to the problem's constraints. By leveraging binary search and a carefully designed feasibility check, the solution balances efficiency with clarity.
+12. **Variable Initialization**
+	```cpp
+	            ans = mid;
+	```
+	Update the answer with the current value of mid.
 
-Understanding the interplay between binary search and condition checking is crucial for tackling similar problems in algorithm design. This approach not only optimizes the search for the maximum feasible value but also ensures that the constraints are respected throughout the process.
+13. **Mathematical Operations**
+	```cpp
+	            l = mid + 1;
+	```
+	Move the lower bound up to search the higher range.
 
-In summary, this solution exemplifies effective problem-solving in competitive programming contexts and highlights the importance of selecting appropriate data structures and algorithms for efficient computation. The use of binary search in conjunction with a helper function for feasibility checks serves as a robust technique for managing constraints in optimization problems.
+14. **Flow Control**
+	```cpp
+	        } else r = mid - 1;
+	```
+	Otherwise, move the upper bound down to search the lower range.
+
+15. **Return**
+	```cpp
+	    return ans + 1;
+	```
+	Return the final answer, incremented by 1 to match the problem's requirements.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(maxSum))
+- **Average Case:** O(log(maxSum))
+- **Worst Case:** O(log(maxSum))
+
+The binary search over the possible values for `nums[index]` results in a time complexity of O(log(maxSum)).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution only requires a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/description/)
 

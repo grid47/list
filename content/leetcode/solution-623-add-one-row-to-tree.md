@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,134 +28,210 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary tree, and two integers val and depth. You need to add a row of nodes with value val at the given depth depth. The root node is considered to be at depth 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You will be given the root of a binary tree, along with the value val to be inserted at the given depth.
+- **Example:** `root = [5,3,8,2,4,7,9], val = 10, depth = 2`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [1, 10^4].
+	- The depth of the tree is in the range [1, 10^4].
+	- -100 <= Node.val <= 100.
+	- -10^5 <= val <= 10^5.
+	- 1 <= depth <= the depth of tree + 1.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* addOneRow(TreeNode* root, int val, int d) {
-        if (d == 1) {
-            TreeNode* newroot = new TreeNode(val);
-            newroot->left = root;
-            return newroot;
-        }
-        if (d == 0) {
-            TreeNode* newroot = new TreeNode(val);
-            newroot->right = root;
-            return newroot;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the binary tree after adding the row at the specified depth.
+- **Example:** `[5,10,10,3,8,2,4,7,9]`
+- **Constraints:**
+	- Return the modified tree structure after adding the row.
 
-        if(!root) return nullptr;
-        else if(d == 2) {
-            root->left  = addOneRow(root->left, val, 1);
-            root->right = addOneRow(root->right, val, 0);            
-            return root;
-        } else if(d > 2) {
-            root->left  = addOneRow(root->left, val, d - 1);
-            root->right = addOneRow(root->right, val,d - 1);            
-        }
-        return root;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Insert nodes at the specified depth, ensuring that the left and right subtrees are properly connected.
+
+- If depth == 1, create a new root node with value val, and make the original tree its left child.
+- If depth > 1, traverse the tree to the parent nodes at depth-1 and insert new nodes with value val as their left and right children.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is well-formed and follows binary tree structure.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [1,2,3,4,5], val = 6, depth = 3`  \
+  **Explanation:** At depth 3, nodes with value `6` are inserted as the left and right children of the node `2`. The original left and right subtrees of `2` are attached to the new nodes.
+
+{{< dots >}}
+## Approach 🚀
+We recursively traverse the tree, inserting new nodes at the specified depth, adjusting the tree structure accordingly.
+
+### Initial Thoughts 💭
+- The depth of the tree and the number of nodes can vary significantly.
+- The solution requires efficient tree traversal and insertion at the specified depth.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty tree should be handled by directly returning the new root node.
+- Ensure the algorithm handles large trees efficiently.
+- When depth is 1, the new node becomes the root of the tree.
+- The solution must handle up to 10^4 nodes and depths efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+TreeNode* addOneRow(TreeNode* root, int val, int d) {
+    if (d == 1) {
+        TreeNode* newroot = new TreeNode(val);
+        newroot->left = root;
+        return newroot;
     }
-};
-{{< /highlight >}}
----
+    if (d == 0) {
+        TreeNode* newroot = new TreeNode(val);
+        newroot->right = root;
+        return newroot;
+    }
 
-### Problem Statement
-
-The task is to add a new row of nodes with a specific value at a given depth in a binary tree. The depth is specified as `d`, and the node values of the new row are set to `val`. There are two possible scenarios:
-1. The new row should be inserted at the specified depth `d`, meaning we need to add new nodes between existing nodes at the given depth.
-2. If `d` is 1, the new row is inserted at the root level, making the new node the root of the tree.
-
-This problem requires careful manipulation of the binary tree structure, ensuring that new nodes are added in the correct positions at the given depth.
-
-### Approach
-
-To solve the problem, we use a recursive depth-first search (DFS) approach. The basic idea is:
-1. If the depth `d` is 1, insert a new root node and adjust the structure accordingly.
-2. For any other depth `d`, recursively traverse the tree until we reach the desired depth, adding a new node at each level.
-3. When the required depth is reached, we insert the new row by creating new nodes and adjusting the child pointers.
-
-Here is the detailed step-by-step approach:
-
-1. **Base Case - Depth 1:**
-   If the given depth `d` is 1, the new row should be inserted at the root level. Therefore, a new node with the value `val` is created, and the current root becomes the left child of this new node. We return the new node as the new root of the tree.
-
-2. **Base Case - Depth 0:**
-   If the given depth `d` is 0, a new node is added as the rightmost child of the root.
-
-3. **Recursive Case - For Depths Greater Than 1:**
-   For depths greater than 1, we recursively traverse the left and right children of the current node. We adjust the child pointers at the specified depth to insert the new node at that level.
-
-4. **Recursive Function for Subtree Modification:**
-   The function `addOneRow` recursively traverses the tree. At each level, it decrements the depth until it reaches the base cases, where the row is added. This function is called on both the left and right children as we go deeper into the tree.
-
-### Code Breakdown (Step by Step)
-
-Let's go through the code implementation step by step:
-
-#### Step 1: Checking for Depth 1
-```cpp
-if (d == 1) {
-    TreeNode* newroot = new TreeNode(val);
-    newroot->left = root;
-    return newroot;
-}
-```
-- If the desired depth `d` is 1, we need to add a new node at the root. A new node with the value `val` is created, and the current root of the tree becomes the left child of this new node. The new node is returned as the new root.
-
-#### Step 2: Handling Depth 0
-```cpp
-if (d == 0) {
-    TreeNode* newroot = new TreeNode(val);
-    newroot->right = root;
-    return newroot;
-}
-```
-- If the depth `d` is 0 (or some other base case), we create a new node with the value `val` and set it as the right child of the root.
-
-#### Step 3: Recursive Case for Other Depths
-```cpp
-if(!root) return nullptr;
-else if(d == 2) {
-    root->left  = addOneRow(root->left, val, 1);
-    root->right = addOneRow(root->right, val, 0);            
+    if(!root) return nullptr;
+    else if(d == 2) {
+        root->left  = addOneRow(root->left, val, 1);
+        root->right = addOneRow(root->right, val, 0);            
+        return root;
+    } else if(d > 2) {
+        root->left  = addOneRow(root->left, val, d - 1);
+        root->right = addOneRow(root->right, val,d - 1);            
+    }
     return root;
-} else if(d > 2) {
-    root->left  = addOneRow(root->left, val, d - 1);
-    root->right = addOneRow(root->right, val, d - 1);            
 }
-return root;
 ```
-- If `d > 2`, we recursively call the `addOneRow` function on the left and right subtrees. In each recursive call, we decrease the depth by 1 (`d - 1`), traversing the tree until we reach the base case where a new row needs to be inserted.
-- For depth 2, we handle inserting new nodes specifically for the left and right child pointers at that depth.
 
-#### Step 4: Handling Recursion and Insertion at Deeper Levels
-- As the recursion unwinds, it correctly places the new row by adjusting the left and right child pointers of the nodes at the required depth.
+This code defines a function that adds a new row of nodes to a binary tree at a specified depth `d` with a given value `val`. The function handles different cases based on the depth `d`, such as adding a new root, adding a row at the first or second depth, and recursively adding nodes at deeper levels.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	TreeNode* addOneRow(TreeNode* root, int val, int d) {
+	```
+	This line declares the function `addOneRow`, which takes a root node, a value to be added, and the depth at which the row should be inserted. It returns the modified tree.
 
-#### Time Complexity:
-- **O(N):** The function traverses the entire tree once, where `N` is the number of nodes in the tree. At each node, it performs constant-time operations, resulting in an overall time complexity of O(N), where N is the number of nodes in the tree.
+2. **Base Case for Depth 1**
+	```cpp
+	    if (d == 1) {
+	```
+	This condition checks if the row needs to be added at the root level (depth 1).
 
-#### Space Complexity:
-- **O(H):** The space complexity is proportional to the depth of the recursion stack, where `H` is the height of the tree. In the worst case (when the tree is skewed), this will be O(N). However, in a balanced tree, the space complexity would be O(log N).
+3. **Create New Root for Depth 1**
+	```cpp
+	        TreeNode* newroot = new TreeNode(val);
+	```
+	A new root node is created with the given value `val`.
 
-### Conclusion
+4. **Set Left Child of New Root**
+	```cpp
+	        newroot->left = root;
+	```
+	The left child of the newly created root is set to the original root node.
 
-This solution efficiently adds a new row of nodes with a specified value at the given depth of a binary tree. By leveraging a recursive approach, we ensure that each level of the tree is processed correctly, and the nodes are inserted at the correct positions. The time complexity of O(N) makes this solution scalable to trees with large numbers of nodes. The use of recursion simplifies the logic, and the function handles edge cases such as adding nodes at the root level or at deeper levels with ease.
+5. **Return New Root**
+	```cpp
+	        return newroot;
+	```
+	The function returns the new root node with the added row.
 
-This solution is ideal for scenarios where tree structures need to be modified dynamically by adding rows at specific depths, and it performs well within the constraints of typical binary tree problems.
+6. **Base Case for Depth 0**
+	```cpp
+	    if (d == 0) {
+	```
+	This condition handles the case where the row needs to be added at the very bottom of the tree (depth 0).
+
+7. **Create New Root for Depth 0**
+	```cpp
+	        TreeNode* newroot = new TreeNode(val);
+	```
+	A new root node is created with the given value `val`.
+
+8. **Set Right Child of New Root**
+	```cpp
+	        newroot->right = root;
+	```
+	The right child of the newly created root is set to the original root node.
+
+9. **Return New Root for Depth 0**
+	```cpp
+	        return newroot;
+	```
+	The function returns the new root node with the added row.
+
+10. **Null Check**
+	```cpp
+	    if(!root) return nullptr;
+	```
+	This line ensures that if the current node is null (base case), the function returns null to prevent further recursion.
+
+11. **Recursive Case for Depth 2**
+	```cpp
+	    else if(d == 2) {
+	```
+	This condition handles the case where the row needs to be added at depth 2.
+
+12. **Recursive Add to Left Subtree**
+	```cpp
+	        root->left  = addOneRow(root->left, val, 1);
+	```
+	Recursively calls the function to add a new node to the left subtree at depth 1.
+
+13. **Recursive Add to Right Subtree**
+	```cpp
+	        root->right = addOneRow(root->right, val, 0);
+	```
+	Recursively calls the function to add a new node to the right subtree at depth 0.
+
+14. **Return Modified Root**
+	```cpp
+	        return root;
+	```
+	Returns the modified root node after adding the new row.
+
+15. **Recursive Case for Deeper Depths**
+	```cpp
+	    } else if(d > 2) {
+	```
+	This condition handles the case for depths greater than 2, where recursion continues deeper into the tree.
+
+16. **Recursive Add to Left Subtree at Deeper Depth**
+	```cpp
+	        root->left  = addOneRow(root->left, val, d - 1);
+	```
+	Recursively calls the function to continue adding rows in the left subtree at a decreased depth.
+
+17. **Recursive Add to Right Subtree at Deeper Depth**
+	```cpp
+	        root->right = addOneRow(root->right, val,d - 1);
+	```
+	Recursively calls the function to continue adding rows in the right subtree at a decreased depth.
+
+18. **Return Root at End**
+	```cpp
+	    return root;
+	```
+	Returns the root of the modified tree after adding the row.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+In the worst case, we need to traverse all nodes in the tree.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
+
+Space complexity is proportional to the height of the tree due to recursion.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-one-row-to-tree/description/)
 

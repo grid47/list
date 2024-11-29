@@ -14,137 +14,194 @@ img_src = ""
 youtube = "ebJiQrgumP4"
 youtube_upload_date="2023-06-03"
 youtube_thumbnail="https://i.ytimg.com/vi/ebJiQrgumP4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given the root of a binary tree, return the sum of values of its deepest leaves. The deepest leaves are the nodes found at the lowest level of the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree where each node is represented by a value.
+- **Example:** `Input: root = [10, 5, 15, 3, 7, null, 20, null, null, 18]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [1, 10^4].
+	- 1 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int deepestLeavesSum(TreeNode* root) {
-        if(root == NULL) return 0;
-        queue<TreeNode*> q;
-        q.push(root);
-        int sum = 0;
-        while(!q.empty()) {
-            int sz = q.size();
-            sum = 0;
-            while(sz--) {
-                sum += q.front()->val;
-                TreeNode* x = q.front();
-                q.pop();
-                if(x->left) q.push(x->left);
-                if(x->right) q.push(x->right);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the sum of the values of the deepest leaves in the binary tree.
+- **Example:** `Output: 38`
+- **Constraints:**
+	- The sum of the values of the deepest leaves.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the sum of the values of the deepest leaves of the binary tree.
+
+- Perform a level-order traversal (breadth-first search) of the binary tree to find the deepest level.
+- At each level, accumulate the values of all nodes. The sum of the last level's nodes will be the sum of the deepest leaves.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is valid and non-empty.
+- The number of nodes in the tree will always be within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [10, 5, 15, 3, 7, null, 20, null, null, 18]`  \
+  **Explanation:** The deepest leaves are 18 and 20. Their sum is 38.
+
+- **Input:** `Input: root = [12, 8, 20, 4, 10, 16, 25]`  \
+  **Explanation:** The deepest leaves are 16 and 25. Their sum is 41.
+
+{{< dots >}}
+## Approach 🚀
+The optimal approach involves performing a level-order traversal of the tree to access all levels. By iterating through each level, we can find the deepest level's nodes and sum their values.
+
+### Initial Thoughts 💭
+- The deepest leaves are located at the last level of the tree. We need to find the last level efficiently.
+- A breadth-first search is ideal for this problem, as it explores all nodes level by level.
+{{< dots >}}
+### Edge Cases 🌐
+- The input tree will not be empty, as the problem guarantees that there is at least one node.
+- For very large trees (up to 10^4 nodes), the solution must be optimized to avoid timeouts.
+- If all nodes are at the same level, the sum will be the sum of all nodes in the tree.
+- The solution must run in O(n) time where n is the number of nodes in the tree.
+{{< dots >}}
+## Code 💻
+```cpp
+int deepestLeavesSum(TreeNode* root) {
+    if(root == NULL) return 0;
+    queue<TreeNode*> q;
+    q.push(root);
+    int sum = 0;
+    while(!q.empty()) {
+        int sz = q.size();
+        sum = 0;
+        while(sz--) {
+            sum += q.front()->val;
+            TreeNode* x = q.front();
+            q.pop();
+            if(x->left) q.push(x->left);
+            if(x->right) q.push(x->right);
         }
-        return sum;
     }
-};
-{{< /highlight >}}
----
+    return sum;
+}
+```
 
+This function calculates the sum of the values of the deepest leaves of a binary tree using a level-order traversal. It uses a queue to explore each level of the tree and keeps updating the sum until it reaches the deepest level.
 
-### Problem Statement
-The task is to calculate the sum of the values of the deepest (or lowest) leaves in a binary tree. A "leaf" node is a node that does not have any children. We need to identify the nodes at the deepest level of the tree and then calculate their total sum. If the tree is empty, the function should return `0`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int deepestLeavesSum(TreeNode* root) {
+	```
+	This line defines the function 'deepestLeavesSum' that takes the root of a binary tree ('root') as input and returns the sum of the values of the deepest leaves.
 
-### Approach
-The approach to solving this problem uses a **breadth-first search (BFS)** or **level-order traversal** strategy:
-1. **Initialize BFS**: Begin the BFS traversal from the root node using a queue.
-2. **Process Level by Level**: At each level, reset the sum to `0`, then calculate the sum of values for all nodes at that level. This ensures that the `sum` variable always contains the sum of the values of nodes from the current, deepest level being processed.
-3. **Store the Deepest Level’s Sum**: By the end of the traversal, the `sum` variable holds the sum of the values of the nodes at the deepest level.
-4. **Return the Result**: After finishing the traversal, return the sum of the deepest leaves.
+2. **Base Case Check**
+	```cpp
+	    if(root == NULL) return 0;
+	```
+	Checks if the root is NULL (empty tree). If the tree is empty, it immediately returns 0 as there are no leaves to sum.
 
-### Code Breakdown (Step by Step)
+3. **Queue Initialization**
+	```cpp
+	    queue<TreeNode*> q;
+	```
+	Declares a queue to facilitate a level-order traversal (breadth-first search) of the tree.
 
-1. **Class and Method Definition**:
-   - We define a class `Solution` and a public method `deepestLeavesSum` that takes a `TreeNode` pointer `root` as input.
+4. **Enqueue Root**
+	```cpp
+	    q.push(root);
+	```
+	Pushes the root node into the queue to start the level-order traversal.
 
-   ```cpp
-   class Solution {
-   public:
-       int deepestLeavesSum(TreeNode* root) {
-   ```
+5. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initializes the 'sum' variable to 0. This will accumulate the sum of values of nodes at the deepest level.
 
-2. **Handle Edge Case**:
-   - If the root is `NULL`, the function returns `0`, which represents an empty tree.
+6. **While Loop - Tree Traversal**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Begins a while loop that continues as long as there are nodes in the queue to process.
 
-   ```cpp
-           if(root == NULL) return 0;
-   ```
+7. **Queue Size**
+	```cpp
+	        int sz = q.size();
+	```
+	Gets the size of the queue, which represents the number of nodes at the current level of the tree.
 
-3. **Initialize BFS**:
-   - A queue `q` is created to perform the BFS. Push the root node into this queue. Initialize `sum` to store the sum of the deepest leaves.
+8. **Sum Reset**
+	```cpp
+	        sum = 0;
+	```
+	Resets the 'sum' to 0 for each level of the tree, ensuring only the sum of the current level's nodes is calculated.
 
-   ```cpp
-           queue<TreeNode*> q;
-           q.push(root);
-           int sum = 0;
-   ```
+9. **Inner While Loop - Node Processing**
+	```cpp
+	        while(sz--) {
+	```
+	Processes each node at the current level by iterating over the queue until all nodes at this level have been visited.
 
-4. **Level Order Traversal**:
-   - Use a `while` loop to iterate through each level of the tree until the queue is empty.
+10. **Summing Node Values**
+	```cpp
+	            sum += q.front()->val;
+	```
+	Adds the value of the node at the front of the queue to the 'sum' variable.
 
-   ```cpp
-           while(!q.empty()) {
-   ```
+11. **Pop Front Node**
+	```cpp
+	            TreeNode* x = q.front();
+	```
+	Stores the front node of the queue in variable 'x' to process it.
 
-5. **Process Each Level**:
-   - For each level:
-     - Reset `sum` to `0` at the start of processing a level.
-     - Determine the number of nodes in the current level using `sz = q.size()`.
-     - Use a `while` loop to iterate through nodes of the current level, adding their values to `sum`.
+12. **Remove Processed Node**
+	```cpp
+	            q.pop();
+	```
+	Removes the front node from the queue after processing it.
 
-   ```cpp
-               int sz = q.size();
-               sum = 0;
-               while(sz--) {
-                   sum += q.front()->val;
-                   TreeNode* x = q.front();
-                   q.pop();
-   ```
+13. **Enqueue Left Child**
+	```cpp
+	            if(x->left) q.push(x->left);
+	```
+	Checks if the current node has a left child. If so, it adds the left child to the queue.
 
-6. **Add Child Nodes**:
-   - For each node, if it has a left child, push it into the queue. If it has a right child, push that as well.
+14. **Enqueue Right Child**
+	```cpp
+	            if(x->right) q.push(x->right);
+	```
+	Checks if the current node has a right child. If so, it adds the right child to the queue.
 
-   ```cpp
-                   if(x->left) q.push(x->left);
-                   if(x->right) q.push(x->right);
-               }
-           }
-   ```
+15. **Return Deepest Sum**
+	```cpp
+	    return sum;
+	```
+	Returns the sum of the node values at the deepest level of the tree, which was accumulated in the 'sum' variable.
 
-7. **Return the Result**:
-   - After processing all levels, the `sum` variable contains the sum of the values of nodes at the deepest level. Return this sum.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - In the best case, the traversal will visit all nodes once.
+- **Average Case:** O(n) - On average, we will still visit all nodes once during the level-order traversal.
+- **Worst Case:** O(n) - In the worst case, we visit every node in the tree.
 
-   ```cpp
-           return sum;
-       }
-   };
-   ```
+The time complexity is O(n), where n is the number of nodes in the binary tree.
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(n) - In the best case, the queue will hold all the nodes at the deepest level.
+- **Worst Case:** O(n) - Space complexity is O(n) due to the storage requirements for the queue during the level-order traversal.
 
-- **Time Complexity**: \(O(N)\), where \(N\) is the number of nodes in the tree. We visit each node exactly once during the BFS traversal.
-- **Space Complexity**: \(O(W)\), where \(W\) is the maximum width of the tree (i.e., the maximum number of nodes at any level). This is the space required to store nodes in the queue.
+The space complexity is O(n), where n is the number of nodes in the tree.
 
-### Conclusion
-This implementation efficiently calculates the sum of the deepest leaves in a binary tree by leveraging the level-order traversal (BFS) approach. By resetting `sum` at the beginning of each level and summing values only for nodes at the current depth, this solution ensures that the `sum` variable ultimately contains the values of the nodes at the deepest level. This approach works well for all tree structures, including highly unbalanced trees, and guarantees that only nodes at the lowest depth are included in the final sum calculation. 
+**Happy Coding! 🎉**
 
-This code effectively balances simplicity and efficiency, providing a quick and readable solution to the problem of calculating the sum of the deepest leaves in a binary tree.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/deepest-leaves-sum/description/)
 

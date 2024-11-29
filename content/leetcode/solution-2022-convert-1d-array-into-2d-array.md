@@ -14,95 +14,133 @@ img_src = ""
 youtube = "l-VLzZ2riTc"
 youtube_upload_date="2024-09-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/l-VLzZ2riTc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 1D integer array called 'original' and two integers 'm' and 'n'. Your task is to convert this 1D array into a 2D array with 'm' rows and 'n' columns. The elements from the 'original' array should be placed row-wise in the new 2D array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 1D integer array 'original' and two integers 'm' and 'n'.
+- **Example:** `original = [1, 2, 3, 4], m = 2, n = 2`
+- **Constraints:**
+	- 1 <= original.length <= 5 * 10^4
+	- 1 <= original[i] <= 10^5
+	- 1 <= m, n <= 4 * 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
-        if (m * n != original.size()) return {};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the newly constructed 2D array, or an empty array if it is impossible to fit the elements.
+- **Example:** `Output: [[1, 2], [3, 4]]`
+- **Constraints:**
+	- The 2D array must have m rows and n columns if possible.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To check if it's possible to fit the elements into a 2D array and construct it row-wise.
+
+- 1. Check if m * n equals the length of the original array. If not, return an empty array.
+- 2. Create a new 2D array and populate each row with 'n' elements from the original array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array has at least 1 element.
+- The integers m and n are both greater than or equal to 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `original = [1, 2, 3, 4], m = 2, n = 2`  \
+  **Explanation:** The original array has 4 elements, and it can be evenly split into 2 rows and 2 columns.
+
+- **Input:** `original = [1, 2], m = 1, n = 1`  \
+  **Explanation:** There are 2 elements in the original array, but it's impossible to fit them into a 1x1 matrix.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves first checking if the array can be split into a 2D array of the desired dimensions and then constructing it row-wise.
+
+### Initial Thoughts 💭
+- Check if the product of m and n equals the length of the array.
+- If not, return an empty array.
+- If m * n is equal to the length of the array, proceed to construct the 2D array.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return an empty 2D array.
+- Ensure that large inputs are handled efficiently by breaking the array into smaller rows.
+- Handle cases where m or n is larger than the array's length, or when it's impossible to fit the elements.
+- Ensure that the constructed array has m rows and n columns, or return an empty array.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
+    if (m * n != original.size()) return {};
+    
+    vector<vector<int>> res;
+    for (int i = 0; i < m*n; i+=n)
+        res.push_back(vector<int>(original.begin()+i, original.begin()+i+n));
         
-        vector<vector<int>> res;
-        for (int i = 0; i < m*n; i+=n)
-            res.push_back(vector<int>(original.begin()+i, original.begin()+i+n));
-            
-        return res;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to transform a one-dimensional array into a two-dimensional array with specified dimensions. Given an array named `original` and two integers `m` and `n`, the task is to check if it is possible to reshape the array into a two-dimensional array with `m` rows and `n` columns. If it is possible, the function should return the new 2D array; otherwise, it should return an empty array. This operation is commonly known as "reshaping an array."
-
-### Approach
-
-To solve this problem, we can follow these steps:
-
-1. **Check the Dimensions**: First, we need to ensure that the total number of elements in the original array is equal to the product of `m` and `n`. If this condition is not met, it is impossible to reshape the array, and we should return an empty array.
-
-2. **Constructing the 2D Array**: If the dimensions are valid, we will create a new 2D vector that will hold `m` rows, each containing `n` columns. We can achieve this by iterating through the `original` array and filling the new 2D vector with the appropriate elements.
-
-3. **Return the Result**: Finally, we return the newly constructed 2D array.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code implementation:
-
-```cpp
-class Solution {
+    return res;
+}
 ```
-- The `Solution` class encapsulates the method we will use to perform the array reshaping.
 
-```cpp
-public:
-    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
-```
-- We define a public method `construct2DArray` that takes three parameters: a reference to a vector of integers `original`, and two integers `m` and `n`, representing the desired dimensions of the new 2D array.
+This function takes a one-dimensional array 'original' and reconstructs it into a 2D array with dimensions m x n. If the number of elements in 'original' does not match the required size m * n, it returns an empty array.
 
-```cpp
-        if (m * n != original.size()) return {};
-```
-- The first step in the method is to check if the total number of elements (`m * n`) matches the size of the `original` array. If they do not match, it is impossible to reshape the array, so we return an empty vector (`{}`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
+	```
+	This defines the function 'construct2DArray', which takes a vector of integers 'original', and two integers 'm' and 'n' to form a 2D array.
 
-```cpp
-        vector<vector<int>> res;
-```
-- If the sizes match, we create a 2D vector `res` that will hold the resulting array.
+2. **Condition Check**
+	```cpp
+	    if (m * n != original.size()) return {};
+	```
+	This checks if the total number of elements in 'original' matches the required size of the 2D array (m * n). If not, it returns an empty vector.
 
-```cpp
-        for (int i = 0; i < m*n; i+=n)
-```
-- We then start a loop that will iterate through the `original` array. The loop index `i` will range from `0` to `m*n`, incrementing by `n` with each iteration. This allows us to pick segments of the `original` array corresponding to the rows of the new 2D array.
+3. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> res;
+	```
+	This initializes a 2D vector 'res' which will hold the result, i.e., the reconstructed 2D array.
 
-```cpp
-            res.push_back(vector<int>(original.begin()+i, original.begin()+i+n));
-```
-- Inside the loop, we create a new row of the 2D array by constructing a vector from a segment of the `original` array. Specifically, we use `original.begin() + i` as the starting point and `original.begin() + i + n` as the endpoint to extract the next `n` elements. This new vector is then added to the `res` 2D vector.
+4. **Loop Start**
+	```cpp
+	    for (int i = 0; i < m*n; i+=n)
+	```
+	This loop iterates over the original array in steps of size 'n', essentially breaking the 1D array into chunks of 'n' elements each to form the rows of the 2D array.
 
-```cpp
-        return res;
-    }
-};
-```
-- After the loop completes, we return the constructed 2D array `res`, which now contains `m` rows and `n` columns populated with the elements from the `original` array.
+5. **Row Construction**
+	```cpp
+	        res.push_back(vector<int>(original.begin()+i, original.begin()+i+n));
+	```
+	This line extracts a subarray from 'original' starting from index 'i' to 'i+n' and adds it as a new row in the result 2D array 'res'.
 
-### Complexity
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	This returns the 2D array 'res' after all rows have been constructed.
 
-- **Time Complexity**: The time complexity of this solution is O(m * n), as we iterate through the original array and fill the new 2D array, which requires visiting each element once.
-- **Space Complexity**: The space complexity is also O(m * n) because we are storing the newly constructed 2D array, which contains the same number of elements as the original array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-### Conclusion
+We need to iterate through the entire array to construct the 2D matrix.
 
-In summary, the `construct2DArray` method provides a straightforward and efficient way to reshape a one-dimensional array into a two-dimensional array given specific dimensions. The key aspects of the implementation include checking the validity of the reshape operation, constructing the new array using a loop, and utilizing C++ STL features such as vector initializers.
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-This solution not only adheres to good coding practices but also ensures that it handles edge cases gracefully. By returning an empty vector when the reshape is not feasible, it maintains clarity and predictability in its behavior. The use of vector operations simplifies memory management and enhances readability, making this implementation a robust example for similar array manipulation tasks in programming challenges and real-world applications.
+We use extra space for the 2D matrix, which has m * n elements.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-1d-array-into-2d-array/description/)
 

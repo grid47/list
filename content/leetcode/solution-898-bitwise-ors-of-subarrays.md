@@ -14,109 +14,169 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers, return the number of distinct bitwise OR results from all the non-empty subarrays. A subarray is a contiguous sequence of elements from the array, and the bitwise OR of a subarray is the bitwise OR of each of the integers in that subarray.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers. Your task is to find the number of distinct bitwise OR results from all non-empty subarrays.
+- **Example:** `Input: arr = [2, 4, 8]`
+- **Constraints:**
+	- 1 <= arr.length <= 50000
+	- 0 <= arr[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int subarrayBitwiseORs(vector<int>& arr) {
-        unordered_set<int> res, cur, cur2;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the number of distinct bitwise OR results from all non-empty subarrays.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The result should be an integer.
 
-        for(int x : arr) {
-            cur2 = { x };
-            for(int i : cur)        cur2.insert(i | x);
-            for(int j : cur = cur2)  res.insert(j);
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of distinct bitwise OR results from all the subarrays of the given array.
 
-        return res.size();
+- 1. Use two sets: one to track the current bitwise OR results for each subarray, and another to store the final distinct results.
+- 2. For each element in the array, calculate the bitwise OR with each element from the previous subarrays and update the results.
+- 3. Add the new results to the set of distinct results.
+- 4. After processing the entire array, return the size of the distinct results set.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will contain at least one element.
+- The elements can be large integers, up to 10^9.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [2, 4, 8]`  \
+  **Explanation:** The distinct bitwise OR results from all subarrays are: 2, 4, 8, 6 (2 | 4), 12 (4 | 8), and 14 (2 | 4 | 8). The result is 6 distinct values.
+
+- **Input:** `Input: arr = [0]`  \
+  **Explanation:** The only subarray is [0], and the result is 0. So the output is 1.
+
+- **Input:** `Input: arr = [1, 1, 2]`  \
+  **Explanation:** The subarrays and their results are: [1], [1], [2], [1, 1], [1, 2], [1, 1, 2]. These give the OR results: 1, 1, 2, 1, 3, 3. There are 3 distinct results.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the array and computing the bitwise OR for all possible subarrays. Using sets helps to track distinct results efficiently.
+
+### Initial Thoughts 💭
+- The bitwise OR of each subarray must be calculated and stored to ensure distinct results.
+- Using a set will help in eliminating duplicates while keeping track of the results.
+- The challenge is to efficiently compute the OR results for all subarrays without exceeding the time limits for large arrays.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array is not allowed based on the problem constraints.
+- For large arrays, the solution must efficiently compute the OR results without exceeding time limits.
+- Arrays with all elements as zero should still count as one distinct OR result (0).
+- The solution must be optimized to handle arrays with up to 50,000 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+int subarrayBitwiseORs(vector<int>& arr) {
+    unordered_set<int> res, cur, cur2;
+
+    for(int x : arr) {
+        cur2 = { x };
+        for(int i : cur)        cur2.insert(i | x);
+        for(int j : cur = cur2)  res.insert(j);
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    return res.size();
+}
+```
 
-The problem asks to find the number of unique bitwise OR values that can be obtained from all possible subarrays of a given integer array `arr`. A subarray is a contiguous part of the array, and the bitwise OR of a subarray is computed by performing a bitwise OR operation on all its elements.
+This function calculates the number of unique results that can be obtained by applying the bitwise OR operation on all subarrays of the given array `arr`.
 
-For example:
-- For an array `arr = [1, 2, 4]`, the possible subarrays and their corresponding bitwise ORs are:
-  - Subarrays: `[1]`, `[2]`, `[4]`, `[1, 2]`, `[2, 4]`, `[1, 2, 4]`
-  - Bitwise ORs: `1`, `2`, `4`, `3`, `6`, `7`
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int subarrayBitwiseORs(vector<int>& arr) {
+	```
+	The function `subarrayBitwiseORs` is defined, which takes a reference to a vector `arr` and returns an integer, representing the number of distinct bitwise OR results from all subarrays.
 
-The goal is to calculate the number of unique OR values from all subarrays.
+2. **Variable Initialization**
+	```cpp
+	    unordered_set<int> res, cur, cur2;
+	```
+	Three unordered sets are initialized: `res` will store the final distinct results, `cur` keeps track of the OR values of the current subarray, and `cur2` is used temporarily to hold new OR results during iteration.
 
-### Approach
+3. ****
+	```cpp
+	
+	```
+	
 
-The problem essentially boils down to finding the distinct results of bitwise OR operations across all subarrays of the input array `arr`. To do this efficiently, we need to use an iterative approach that considers the OR of each possible subarray, but in a way that avoids recalculating the OR for every possible subarray from scratch.
+4. **Main Loop**
+	```cpp
+	    for(int x : arr) {
+	```
+	The loop iterates through each element `x` of the array `arr`.
 
-1. **Bitwise OR Properties**:
-   - The result of a bitwise OR operation is cumulative, meaning that once a bit is set to 1 in the result of an OR operation, it remains 1 in all subsequent OR operations with additional numbers.
-   - For example, if the OR of `[1, 2]` is `3`, then the OR of `[1, 2, 4]` is `7`, because `3 | 4 = 7`.
+5. **Set Initialization**
+	```cpp
+	        cur2 = { x };
+	```
+	The set `cur2` is initialized with the current element `x`, starting a new subarray OR operation.
 
-2. **Efficient Calculation Using Sets**:
-   - Use two sets, `cur` and `cur2`, to keep track of the OR results of the current subarray and the subarrays ending at the current element, respectively.
-   - `cur` contains the OR results from the previous iteration, and `cur2` accumulates OR results for the current element.
-   - For each element in the array, we update the set `cur2` by performing a bitwise OR between the current element and each element in the previous set `cur`.
+6. **Bitwise OR Update**
+	```cpp
+	        for(int i : cur)        cur2.insert(i | x);
+	```
+	For each element `i` in the `cur` set, the bitwise OR operation between `i` and the current element `x` is computed, and the result is inserted into `cur2`.
 
-3. **Updating the Results**:
-   - After processing each element, we update the set `res` which stores all unique OR values encountered so far.
-   - The set `res` allows us to automatically discard duplicates, keeping only the distinct OR results.
+7. **Update Final Set**
+	```cpp
+	        for(int j : cur = cur2)  res.insert(j);
+	```
+	After updating `cur2`, the set `cur` is set to `cur2`, and the distinct results from `cur2` are inserted into the result set `res`.
 
-4. **Final Answer**:
-   - At the end of the iteration, the size of the set `res` gives the number of distinct OR results from all subarrays.
+8. **End of Loop**
+	```cpp
+	    }
+	```
+	The loop ends here, and the next element in the array will be processed.
 
-### Code Breakdown (Step by Step)
+9. ****
+	```cpp
+	
+	```
+	
 
-1. **Initial Setup**:
-   ```cpp
-   unordered_set<int> res, cur, cur2;
-   ```
-   We declare three sets:
-   - `res`: Stores all unique OR results from all subarrays.
-   - `cur`: Keeps track of the OR results of subarrays ending at the previous element.
-   - `cur2`: Accumulates the OR results for the current element.
+10. **Return Statement**
+	```cpp
+	    return res.size();
+	```
+	The function returns the size of the set `res`, which represents the number of distinct bitwise OR results from all subarrays.
 
-2. **Iterating Through the Array**:
-   ```cpp
-   for(int x : arr) {
-       cur2 = { x };
-   ```
-   For each element `x` in the array `arr`, we initialize `cur2` with a set containing only `x`. This represents the OR result of the subarray that consists of just the element `x`.
+11. **Function End**
+	```cpp
+	}
+	```
+	The function ends here.
 
-3. **Bitwise OR for Subarrays**:
-   ```cpp
-   for(int i : cur)        cur2.insert(i | x);
-   ```
-   For each OR result `i` in the set `cur` (representing OR results from subarrays ending at the previous element), we compute the OR of `i` with the current element `x`, and insert the result into `cur2`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-4. **Updating the Result Set**:
-   ```cpp
-   for(int j : cur = cur2)  res.insert(j);
-   ```
-   After processing the current element, the set `cur2` contains all the OR results from subarrays ending at the current element. We update `cur` to be equal to `cur2` and insert all elements of `cur2` into the result set `res`.
+The time complexity is O(n^2) in the worst case due to processing each element in all possible subarrays.
 
-5. **Return the Result**:
-   ```cpp
-   return res.size();
-   ```
-   Finally, we return the size of the result set `res`, which contains all distinct OR values from the subarrays of `arr`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-### Complexity
+The space complexity is O(n) due to the use of sets to track the distinct OR results for subarrays.
 
-- **Time Complexity**: O(n * m), where `n` is the number of elements in the array and `m` is the maximum number of unique OR values generated at each step. In the worst case, the number of unique OR values can grow exponentially with respect to the number of elements in the array, but typically the number of unique values grows much slower. This approach efficiently handles the subarrays without redundant calculations.
-  
-  Since the bitwise OR operation is generally inexpensive and the size of each set (`cur` and `cur2`) grows as we move through the array, the complexity is dominated by the number of iterations through the array and the number of OR results stored.
+**Happy Coding! 🎉**
 
-- **Space Complexity**: O(m), where `m` is the number of unique OR results stored in `res`. In the worst case, this can grow to the number of subarrays, but in practice, this will be much smaller due to the properties of the bitwise OR operation.
-
-### Conclusion
-
-This solution efficiently computes the number of distinct bitwise OR values from all subarrays by leveraging the properties of the bitwise OR operation and using sets to keep track of unique results. The approach ensures that we do not recompute ORs unnecessarily for each subarray, making it much faster than a naive approach. By using the iterative set-based accumulation of OR results, the solution achieves optimal performance while maintaining clarity and ease of understanding. The time and space complexity are well-suited for large input arrays, making this approach scalable and efficient.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bitwise-ors-of-subarrays/description/)
 

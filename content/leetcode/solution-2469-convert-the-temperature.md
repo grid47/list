@@ -14,112 +14,97 @@ img_src = ""
 youtube = "pJo95i-uamg"
 youtube_upload_date="2022-11-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/pJo95i-uamg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a non-negative floating point number `celsius` (rounded to two decimal places) representing a temperature in Celsius. Convert it to Kelvin and Fahrenheit and return the results in a list. The formulas are: Kelvin = Celsius + 273.15 and Fahrenheit = Celsius * 1.80 + 32.00. Return the results rounded to five decimal places.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a non-negative floating point number `celsius` representing the temperature in Celsius.
+- **Example:** `celsius = 25.30`
+- **Constraints:**
+	- 0 <= celsius <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<double> convertTemperature(double celsius) {
-        return { celsius + 273.15, celsius*1.80 + 32.00 };
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list containing the temperature in Kelvin and Fahrenheit, rounded to five decimal places.
+- **Example:** `[298.45000, 77.54000]`
+- **Constraints:**
+	- Answers within 10^-5 of the actual result will be accepted.
 
-### Problem Statement:
-The problem asks to convert a given temperature in Celsius to its equivalent in two different units: Kelvin and Fahrenheit. Given a temperature in Celsius, we are tasked with returning a vector containing the temperature in Kelvin and Fahrenheit.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to correctly apply the formulas for conversion from Celsius to Kelvin and Fahrenheit.
 
-- **Kelvin** is a unit of temperature that starts at absolute zero (0 K). The formula for converting Celsius to Kelvin is:  
-  \[
-  K = C + 273.15
-  \]
-  where \( C \) is the temperature in Celsius.
-  
-- **Fahrenheit** is another unit of temperature, commonly used in the United States. The formula for converting Celsius to Fahrenheit is:  
-  \[
-  F = C \times 1.80 + 32.00
-  \]
-  where \( C \) is the temperature in Celsius.
+- First, calculate the Kelvin value by adding 273.15 to the Celsius value.
+- Next, calculate the Fahrenheit value using the formula Fahrenheit = Celsius * 1.80 + 32.00.
+- Return the results as a list, rounding each to five decimal places.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input temperature `celsius` is always a valid non-negative floating point number.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: celsius = 25.30`  \
+  **Explanation:** The Kelvin value is calculated by adding 273.15 to the Celsius value, giving 298.45. The Fahrenheit value is calculated by multiplying 25.30 by 1.80 and adding 32, which gives 77.54.
 
-The function needs to return a vector containing these two values.
+{{< dots >}}
+## Approach 🚀
+This problem is a straightforward application of the conversion formulas. First, we convert Celsius to Kelvin and then to Fahrenheit.
 
-### Approach:
-To solve this problem, we need to convert a given temperature from Celsius to both Kelvin and Fahrenheit. The approach is straightforward:
+### Initial Thoughts 💭
+- The formulas for Kelvin and Fahrenheit are linear and simple to compute.
+- This problem requires basic arithmetic and handling floating point numbers.
+{{< dots >}}
+### Edge Cases 🌐
+- The input `celsius` will never be empty as per the problem's constraints.
+- For very large values of `celsius`, the formulas will still work within the provided constraints.
+- If `celsius` is 0, the results should correctly return 273.15 Kelvin and 32.00 Fahrenheit.
+- The solution needs to handle floating-point arithmetic carefully, especially with rounding to five decimal places.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<double> convertTemperature(double celsius) {
+    return { celsius + 273.15, celsius*1.80 + 32.00 };
+}
+```
 
-1. **Conversion to Kelvin**: We add 273.15 to the Celsius temperature.
-2. **Conversion to Fahrenheit**: We multiply the Celsius temperature by 1.80 and then add 32.00.
+This function converts a given temperature in Celsius to both Kelvin and Fahrenheit. It returns a vector containing two values: the temperature in Kelvin and the temperature in Fahrenheit.
 
-Once both values are calculated, we need to return them in a vector of type `double`, where the first element is the temperature in Kelvin and the second element is the temperature in Fahrenheit.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<double> convertTemperature(double celsius) {
+	```
+	The function `convertTemperature` is declared, taking one parameter `celsius` which represents the temperature in Celsius.
 
-The approach works in constant time, as the conversion formulas do not depend on the size of the input or any iterations over data structures. The time complexity for the conversion is \( O(1) \), meaning the function will always execute in constant time, regardless of the input.
+2. **Return Statement**
+	```cpp
+	    return { celsius + 273.15, celsius*1.80 + 32.00 };
+	```
+	The function returns a vector containing two converted temperatures: the first value is the temperature in Kelvin (Celsius + 273.15), and the second value is the temperature in Fahrenheit (Celsius * 1.80 + 32).
 
-### Code Breakdown (Step by Step):
-Let's walk through the provided C++ code and break it down into individual components to understand how the function works.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-1. **Function Declaration**:
-   ```cpp
-   vector<double> convertTemperature(double celsius)
-   ```
-   The function `convertTemperature` takes a single argument:
-   - `celsius`: a `double` representing the temperature in Celsius that needs to be converted.
-   
-   It returns a vector of `double` values containing the converted temperatures in Kelvin and Fahrenheit.
+The time complexity is constant since the solution involves a fixed number of arithmetic operations.
 
-2. **Return Statement**:
-   ```cpp
-   return { celsius + 273.15, celsius*1.80 + 32.00 };
-   ```
-   The return statement directly computes and returns a vector with two elements:
-   
-   - The first element is the Celsius temperature converted to Kelvin, calculated as `celsius + 273.15`.
-   - The second element is the Celsius temperature converted to Fahrenheit, calculated as `celsius * 1.80 + 32.00`.
-   
-   The result is returned as a vector of `double` values, with the first element being the Kelvin temperature and the second being the Fahrenheit temperature.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Code Explanation:
-1. **Input Parameter**: 
-   - The function takes in one input parameter: a `double` value representing the temperature in Celsius.
+The space complexity is constant as we only need to store two results (Kelvin and Fahrenheit).
 
-2. **Vector Return Type**:
-   - The function returns a `vector<double>`, which is a container from the C++ Standard Library that stores a collection of double-precision floating-point numbers.
-   
-   - The vector returned will contain exactly two values: the temperature converted to Kelvin and the temperature converted to Fahrenheit.
+**Happy Coding! 🎉**
 
-3. **Temperature Conversion**:
-   - To convert Celsius to Kelvin, we add 273.15 to the given Celsius temperature. This is based on the definition of the Kelvin scale, which is offset by 273.15 from the Celsius scale.
-   
-   - To convert Celsius to Fahrenheit, we multiply the Celsius temperature by 1.80 (which is equivalent to \( \frac{9}{5} \)) and then add 32.00. This follows the formula for converting between Celsius and Fahrenheit.
-   
-4. **Returning the Result**:
-   - After performing the two conversions, the result is returned as a vector. The syntax `{ ... }` is used to create a temporary `vector<double>` that contains the two results.
-
-### Complexity:
-Let’s analyze the time and space complexity of the function:
-
-- **Time Complexity**:
-  - The function performs only two arithmetic operations: adding 273.15 and multiplying by 1.80 (then adding 32.00). These are constant time operations.
-  - There are no loops or recursive calls. The conversion process for each Celsius value is done in constant time.
-  
-  Therefore, the time complexity of the function is \( O(1) \), meaning that the function will always execute in constant time, regardless of the input value.
-
-- **Space Complexity**:
-  - The function returns a `vector<double>`, which stores exactly two double values. The space used by the vector is constant because it holds only two values, irrespective of the size of the input.
-  
-  Therefore, the space complexity is also \( O(1) \), as the space usage does not depend on the input size and remains constant.
-
-### Conclusion:
-The function `convertTemperature` efficiently converts a temperature given in Celsius to both Kelvin and Fahrenheit. It uses simple arithmetic formulas to perform the conversions and returns the results in a `vector<double>`. The approach is optimal in terms of both time and space, as the function runs in constant time and uses constant space.
-
-This function is ideal for applications that require quick temperature conversions without needing complex data structures or algorithms. Its simplicity and efficiency make it highly suitable for scenarios where multiple temperature conversions are needed in a fast and scalable manner.
-
-Moreover, the use of a `vector<double>` allows the result to be easily accessed and manipulated if needed. Since the conversion formulas themselves are well-established and straightforward, this solution is both easy to understand and implement.
-
-In conclusion, this function provides a simple yet effective solution to the problem of converting temperatures between different units, with a time and space complexity that is optimal for most real-world scenarios.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-the-temperature/description/)
 

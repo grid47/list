@@ -14,81 +14,104 @@ img_src = ""
 youtube = "l5akOAKERoY"
 youtube_upload_date="2022-11-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/l5akOAKERoY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a circle, and you need to divide it into 'n' equal slices using the minimum number of straight cuts. A valid cut can either be through the center of the circle touching two points on the edge or touching just one point and the center.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a single integer, n, which represents the number of slices the circle should be divided into.
+- **Example:** `n = 6`
+- **Constraints:**
+	- 1 <= n <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfCuts(int n) {
-        if (n == 1) return 0;
-        return n % 2 ? n : n / 2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of cuts needed to divide the circle into 'n' equal slices.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be a single integer representing the minimum cuts needed.
 
-### Problem Statement:
-The problem asks to find the minimum number of straight cuts required to divide a circle into `n` equal pieces. The number of cuts should be minimized such that each piece is an equal size. If the number of pieces `n` is odd, each cut will increase the number of pieces in the circle, and if the number of pieces is even, fewer cuts will be necessary. The task is to compute the minimum number of cuts based on the value of `n`.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the fewest number of cuts needed to divide a circle into exactly 'n' equal parts using valid cuts.
 
-### Approach:
-To approach this problem, we need to determine how the number of cuts increases as we attempt to divide the circle into equal parts. The key observation here is:
-- **If `n == 1`**, no cuts are required because the circle is already in one piece.
-- **If `n` is even**, the minimum number of cuts required to divide the circle into `n` equal pieces is `n / 2`. This is because a single cut can create two equal pieces, and each additional cut can create two more pieces. So, for even `n`, we need exactly `n / 2` cuts.
-- **If `n` is odd**, each cut can only increase the number of pieces by 1. To divide the circle into `n` pieces, we need exactly `n` cuts.
+- If n is 1, no cuts are required.
+- For even numbers, cuts can be made in half, and for odd numbers, each cut should be made to increase the number of equal slices incrementally.
+{{< dots >}}
+### Problem Assumptions ✅
+- The circle is perfectly symmetric, and the goal is to divide it into equal slices.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 2: n = 5`  \
+  **Explanation:** Since 5 is an odd number, 5 cuts are needed to divide the circle into 5 equal parts, as no other number of cuts can evenly divide it.
 
-This gives us the following insights:
-- For even `n`, we can cut the circle into two equal parts each time and continue halving until we have `n` parts. The number of cuts required will be `n / 2`.
-- For odd `n`, each cut can only add one additional piece, so we need `n` cuts to reach `n` pieces.
+{{< dots >}}
+## Approach 🚀
+The solution involves calculating the minimum number of cuts based on whether the number of slices is odd or even.
 
-### Code Breakdown (Step by Step):
-Let’s break down the code line by line:
-
+### Initial Thoughts 💭
+- If n is even, a smaller number of cuts can be used by cutting through the center of the circle symmetrically.
+- If n is odd, each cut must be added incrementally to get the required number of slices.
+- For even values of n, the answer is n/2. For odd values of n, the answer is simply n.
+{{< dots >}}
+### Edge Cases 🌐
+- n will always be greater than or equal to 1, so no empty inputs are possible.
+- The largest value for n is 100, which is manageable in terms of time complexity.
+- If n = 1, no cuts are needed.
+- Ensure that n always falls within the bounds of 1 to 100.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int numberOfCuts(int n) {
-        if (n == 1) return 0;
-        return n % 2 ? n : n / 2;
-    }
-};
+int numberOfCuts(int n) {
+    if (n == 1) return 0;
+    return n % 2 ? n : n / 2;
+}
 ```
 
-1. **Class Definition**:
-   - The class `Solution` encapsulates the function that calculates the number of cuts.
+This function calculates the number of cuts needed to divide a given number of pieces based on the number `n`. If `n` is odd, the result is `n`; if `n` is even, it returns `n / 2`. The case for `n = 1` is handled separately by returning 0, as no cuts are needed.
 
-2. **Function Definition**:
-   - `int numberOfCuts(int n)` is the function that calculates and returns the minimum number of cuts required to divide the circle into `n` pieces.
-   - The function takes a single parameter `n`, which represents the number of pieces we want to divide the circle into.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numberOfCuts(int n) {
+	```
+	This is the declaration of the function `numberOfCuts`, which takes an integer `n` as input and returns the number of cuts (an integer) needed to divide `n` into pieces.
 
-3. **Base Case**:
-   ```cpp
-   if (n == 1) return 0;
-   ```
-   - This condition checks if `n` is 1. If `n` is 1, it means the circle is already in one piece, so no cuts are required. The function immediately returns 0 in this case.
+2. **Base Case**
+	```cpp
+	    if (n == 1) return 0;
+	```
+	Checks if `n` is 1. If it is, no cuts are needed, so the function returns 0.
 
-4. **Even or Odd Case**:
-   ```cpp
-   return n % 2 ? n : n / 2;
-   ```
-   - This line uses the ternary operator to determine whether `n` is odd or even.
-   - **If `n` is odd**: The expression `n % 2` will be true (non-zero), and the function will return `n`. This means that we need exactly `n` cuts to divide the circle into `n` equal pieces when `n` is odd.
-   - **If `n` is even**: The expression `n % 2` will be false (zero), and the function will return `n / 2`. This means that when `n` is even, we only need `n / 2` cuts to divide the circle into `n` equal pieces.
+3. **Return Statement**
+	```cpp
+	    return n % 2 ? n : n / 2;
+	```
+	If `n` is odd, the function returns `n` itself (since no further division is possible). If `n` is even, it returns `n / 2`, indicating that the number of cuts required is half of `n`.
 
-### Complexity:
-- **Time Complexity**: 
-  - The function performs a constant-time operation for both the base case check (`n == 1`) and for the decision to return either `n` or `n / 2` based on whether `n` is odd or even. Both of these operations are \(O(1)\).
-  - Therefore, the time complexity of this solution is **O(1)**.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Space Complexity**: 
-  - The space complexity is also **O(1)** because the function only uses a constant amount of space to store variables (i.e., no data structures that grow with the input size are used).
+The time complexity is O(1) since we are simply performing a constant-time check on whether n is odd or even.
 
-### Conclusion:
-The function `numberOfCuts` efficiently calculates the minimum number of straight cuts required to divide a circle into `n` equal pieces. The solution leverages a simple condition to check whether `n` is even or odd and computes the result accordingly in constant time. The algorithm’s time and space complexities are both \(O(1)\), making it extremely efficient and scalable even for large inputs. This makes the solution ideal for scenarios where performance is crucial, and the problem size can be large. The simplicity of the solution ensures that it runs with minimal computational overhead.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only use a constant amount of space for the computation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/description/)
 

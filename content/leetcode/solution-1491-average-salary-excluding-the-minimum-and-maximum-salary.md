@@ -14,110 +14,147 @@ img_src = ""
 youtube = "hTEVGYRGLsQ"
 youtube_upload_date="2020-06-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/hTEVGYRGLsQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array salary where each element represents the salary of an employee. The salaries are all unique. Return the average salary of the employees, excluding the minimum and maximum salary. Your answer should be correct to an absolute error of no more than 10^-5.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of unique integers, where each integer represents the salary of an employee. The array length will be at least 3.
+- **Example:** `salary = [5000, 3000, 1500, 3500]`
+- **Constraints:**
+	- 3 <= salary.length <= 100
+	- 1000 <= salary[i] <= 10^6
+	- All salary values are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double average(vector<int>& nums) {
-        int n = nums.size();
-        double sum = 0, mx = nums[0], mn = nums[0];
-        for(int i = 0; i < n; i++) {
-            sum += nums[i];
-            mx = max((double)nums[i], mx);
-            mn = min((double)nums[i], mn);
-        }
-        return (sum - mx - mn) / (n - 2);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the average salary, excluding the minimum and maximum salaries in the list. The result should be correct up to an absolute error of no more than 10^-5.
+- **Example:** `Output: 3000.00000`
+- **Constraints:**
+	- The output should be a floating-point value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the average of all salaries, excluding the smallest and largest salaries.
+
+- Identify the minimum and maximum salaries from the array.
+- Sum the remaining salaries (excluding the minimum and maximum).
+- Divide the sum by the number of remaining salaries to get the average.
+{{< dots >}}
+### Problem Assumptions ✅
+- The salary array is guaranteed to have at least 3 unique elements.
+- The solution should avoid using any complex operations that will affect performance.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `salary = [5000, 3000, 1500, 3500]`  \
+  **Explanation:** The minimum salary is 1500, and the maximum salary is 5000. Excluding these, the average of 3000 and 3500 is 3250.
+
+- **Input:** `salary = [1200, 2200, 3200]`  \
+  **Explanation:** The minimum salary is 1200, and the maximum salary is 3200. The only remaining salary is 2200.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to find the minimum and maximum salaries, exclude them from the total sum, and compute the average of the remaining salaries.
+
+### Initial Thoughts 💭
+- We only need to calculate the sum of salaries excluding the minimum and maximum.
+- We can use basic list operations to find the minimum and maximum values.
+- This is a straightforward problem, where identifying the extreme values (min and max) is crucial to solving it efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will never be empty, as the minimum length is 3.
+- For large input sizes (close to 100), the algorithm must be efficient and should work within time limits.
+- Salary values are guaranteed to be unique, so we don't need to account for duplicates.
+- Ensure that the solution handles edge cases efficiently, such as when the array has exactly 3 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+double average(vector<int>& nums) {
+    int n = nums.size();
+    double sum = 0, mx = nums[0], mn = nums[0];
+    for(int i = 0; i < n; i++) {
+        sum += nums[i];
+        mx = max((double)nums[i], mx);
+        mn = min((double)nums[i], mn);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to compute the average of an array of integers after removing the maximum and minimum values from the array. The average should be calculated based on the remaining elements, which means if the input array has less than three elements, it's impossible to compute the average in the required manner (since both the max and min would need to be removed). In such cases, the function should handle it gracefully, perhaps by returning a specific value or indicating the impossibility.
-
-### Approach
-
-To solve this problem, the solution follows these steps:
-
-1. **Initialization**: Start by initializing variables to store the sum of elements, the maximum value, and the minimum value in the array.
-
-2. **Iteration**: Loop through the array to calculate the sum of all elements, as well as to find the maximum and minimum values.
-
-3. **Average Calculation**: After identifying the maximum and minimum values, calculate the average by subtracting these two values from the total sum and dividing by the count of the remaining elements.
-
-4. **Return the Result**: Finally, return the computed average.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the provided code snippet into manageable parts to understand how it functions:
-
-```cpp
-class Solution {
-public:
-    double average(vector<int>& nums) {
+    return (sum - mx - mn) / (n - 2);
+}
 ```
-This defines the `Solution` class and its method `average`, which takes a vector of integers as input.
 
-#### Step 1: Variable Initialization
+The `average` function calculates the average of an array of integers, excluding the maximum and minimum values.
 
-```cpp
-        int n = nums.size();
-        double sum = 0, mx = nums[0], mn = nums[0];
-```
-- `n`: Stores the number of elements in the input vector `nums`.
-- `sum`: Initializes the sum of the elements to zero.
-- `mx` and `mn`: Set to the first element of the array, which will later be updated to reflect the maximum and minimum values respectively.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method**
+	```cpp
+	double average(vector<int>& nums) {
+	```
+	The function `average` calculates the average of numbers in the `nums` vector, excluding the largest and smallest values.
 
-#### Step 2: Iteration and Calculating Sum, Max, and Min
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	The variable `n` stores the number of elements in the `nums` vector.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-            sum += nums[i];
-            mx = max((double)nums[i], mx);
-            mn = min((double)nums[i], mn);
-        }
-```
-- A loop iterates over each element in the `nums` array.
-- In each iteration:
-  - The current element `nums[i]` is added to `sum`.
-  - The maximum value `mx` is updated using the `max` function, casting `nums[i]` to `double` to ensure correct type comparisons.
-  - The minimum value `mn` is updated similarly using the `min` function.
+3. **Variable Initialization**
+	```cpp
+	    double sum = 0, mx = nums[0], mn = nums[0];
+	```
+	The variables `sum`, `mx`, and `mn` are initialized. `sum` tracks the total sum of numbers, `mx` stores the maximum value, and `mn` stores the minimum value.
 
-#### Step 3: Calculating the Average
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	The loop iterates over each element in the `nums` vector to compute the sum and track the maximum and minimum values.
 
-```cpp
-        return (sum - mx - mn) / (n - 2);
-    }
-};
-```
-- The average is calculated by subtracting `mx` and `mn` from `sum` and then dividing the result by `(n - 2)`, which accounts for the two values that have been excluded (the maximum and minimum).
-- Finally, the computed average is returned as a `double`.
+5. **Sum Calculation**
+	```cpp
+	        sum += nums[i];
+	```
+	Adds the current element `nums[i]` to the `sum` variable.
 
-### Complexity
+6. **Maximum Calculation**
+	```cpp
+	        mx = max((double)nums[i], mx);
+	```
+	Updates the `mx` variable to be the larger of the current number and the existing maximum value.
 
-#### Time Complexity
-- The time complexity of this algorithm is **O(n)**, where `n` is the number of elements in the input array. This is because we iterate through the array once to calculate the sum, maximum, and minimum values.
+7. **Minimum Calculation**
+	```cpp
+	        mn = min((double)nums[i], mn);
+	```
+	Updates the `mn` variable to be the smaller of the current number and the existing minimum value.
 
-#### Space Complexity
-- The space complexity is **O(1)**, as the algorithm only uses a fixed amount of additional space for variables `sum`, `mx`, and `mn`, regardless of the input size.
+8. **Return**
+	```cpp
+	    return (sum - mx - mn) / (n - 2);
+	```
+	Returns the average after excluding the maximum and minimum values. The formula subtracts the maximum and minimum from the total sum, then divides by `n - 2` to account for the removed values.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution effectively calculates the average of an array after excluding the maximum and minimum values. It uses a single pass through the array to gather the necessary information, ensuring efficiency in both time and space. 
+The solution requires iterating through the entire array once to calculate the minimum, maximum, and sum of salaries.
 
-**Key Points**:
-- **Robustness**: The algorithm assumes the input array contains at least three elements. If it doesn't, the function should ideally handle such cases, perhaps by throwing an exception or returning a predefined value indicating the invalid input.
-- **Performance**: The linear time complexity ensures that the function performs well even for large datasets, making it suitable for real-world applications.
-- **Numerical Stability**: By using `double` for the calculations, the solution minimizes the risk of integer overflow, especially when dealing with large sums.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This method can be particularly useful in scenarios where data cleaning or preprocessing is needed before performing further statistical analysis, allowing for a cleaner representation of the data by focusing on the central tendencies after removing outliers.
+The solution only needs a constant amount of space, aside from the input array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/description/)
 

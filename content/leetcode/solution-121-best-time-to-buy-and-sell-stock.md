@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "kJZrMGpyWpk"
 youtube_upload_date="2024-06-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/kJZrMGpyWpk/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,129 +28,126 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/kJZrMGpyWpk/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of prices where prices[i] represents the price of a stock on the i-th day. You want to maximize your profit by buying the stock on one day and selling it on a future day. Return the maximum profit you can achieve from this transaction. If no profit can be made, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array prices where prices[i] is the price of the stock on the i-th day.
+- **Example:** `Input: prices = [10, 3, 15, 8, 12, 5]`
+- **Constraints:**
+	- 1 <= prices.length <= 10^5
+	- 0 <= prices[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxProfit(vector<int>& prices) {
-        int l = prices[0], g = 0;
-        for(int x: prices) {
-            l = min(l, x);
-            g = max(g, x - l);
-        }
-        return g;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a single integer representing the maximum profit you can achieve from buying and selling the stock.
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The profit should be the difference between the selling price and the buying price, where the selling day is after the buying day.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the profit by choosing the best day to buy and the best day to sell in the future.
+
+- Start by initializing the lowest price (l) as the price of the first day.
+- Iterate through the prices and update the lowest price (l) as the minimum price encountered so far.
+- For each price, calculate the potential profit by subtracting the lowest price (l) from the current price.
+- Keep track of the maximum profit (g) encountered during the iteration.
+- Return the maximum profit after processing all prices.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array prices contains valid values with at least one price.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: prices = [10, 3, 15, 8, 12, 5]`  \
+  **Explanation:** The maximum profit can be achieved by buying the stock on day 2 (price = 3) and selling it on day 3 (price = 15). The profit is 15 - 3 = 12.
+
+- **Input:** `Input: prices = [7, 6, 4, 3, 1]`  \
+  **Explanation:** In this case, no profit can be made as prices keep decreasing, so the maximum profit is 0.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating through the prices while tracking the minimum price seen so far and calculating the potential profit for each day. The maximum profit is then updated accordingly.
+
+### Initial Thoughts 💭
+- The approach involves iterating over the array once to keep track of the minimum price and maximum profit.
+- The key observation is that the best profit comes from buying at the lowest price before a higher price in the future.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs allowed, as prices array has at least one element.
+- The algorithm should efficiently handle inputs up to 100,000 prices.
+- If all prices are the same or decreasing, the maximum profit will be 0.
+- The array length will always be between 1 and 100,000, inclusive.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxProfit(vector<int>& prices) {
+    int l = prices[0], g = 0;
+    for(int x: prices) {
+        l = min(l, x);
+        g = max(g, x - l);
     }
-};
-{{< /highlight >}}
----
-
-### 📈 **Max Profit from Stock Trading** – Let’s Maximize Your Gains!
-
-The **Max Profit** problem asks you to find the maximum profit you can make from buying and selling a stock, given an array of stock prices where each element represents the stock's price on a particular day. Your objective is to buy at one point and sell later for the highest possible profit. If no profit can be made, return `0`.
-
-#### **Example Walkthrough**:
-
-- **Input**: `prices = [7, 1, 5, 3, 6, 4]`
-- **Output**: `5`
-  - **Explanation**: Buy on day 2 (price = 1), sell on day 5 (price = 6), resulting in a profit of `6 - 1 = 5`.
-
-- **Input**: `prices = [7, 6, 4, 3, 1]`
-- **Output**: `0`
-  - **Explanation**: No transaction can be made as prices are always decreasing.
-
-### 💡 **Approach to Solve the Problem**
-
-To solve this efficiently, we need to track the minimum stock price observed so far and calculate the maximum profit by selling at each day’s price. Here’s how we can approach it:
-
-1. **Track the Minimum Price** (`l`): Start by setting the minimum price to the first price in the array.
-2. **Calculate the Potential Profit**: For each price, subtract the minimum price from the current price to determine the potential profit.
-3. **Track the Maximum Profit** (`g`): Update the maximum profit whenever we find a higher profit than the previous maximum.
-
-This approach ensures we only need to traverse the array once.
-
-### 🖥️ **Code Breakdown (Step-by-Step)**
-
-#### **Function Signature**
-```cpp
-int maxProfit(vector<int>& prices)
-```
-This function takes a vector of integers, `prices`, which represent stock prices over several days, and returns an integer representing the maximum profit from a single buy and sell transaction.
-
-#### **Initialize Variables**
-```cpp
-int l = prices[0], g = 0;
-```
-- `l`: Stores the minimum price observed so far.
-- `g`: Stores the maximum profit encountered so far, initialized to `0`.
-
-#### **Iterate Over Prices**
-```cpp
-for(int x: prices) {
-    l = min(l, x); // Update the minimum price
-    g = max(g, x - l); // Update the maximum profit
+    return g;
 }
 ```
-- **Updating `l`**: For each price `x`, update `l` to be the minimum of the current price and `l`.
-- **Updating `g`**: Calculate the potential profit (`x - l`) and update `g` if the current profit is greater than the previous maximum.
 
-#### **Return the Maximum Profit**
-```cpp
-return g;
-```
-After iterating through all prices, return `g`, which holds the maximum profit.
+This function calculates the maximum profit from a single buy-and-sell stock transaction using a greedy approach.
 
-### 🎬 **Example Walkthrough**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxProfit(vector<int>& prices) {
+	```
+	Declare a function to compute the maximum profit from stock prices given as input.
 
-Let’s walk through an example to see the algorithm in action.
+2. **Variable Initialization**
+	```cpp
+	    int l = prices[0], g = 0;
+	```
+	Initialize `l` to the first price (representing the lowest price seen so far) and `g` to 0 (representing the maximum profit).
 
-#### **Input**: `prices = [7, 1, 5, 3, 6, 4]`
+3. **Loop Iteration**
+	```cpp
+	    for(int x: prices) {
+	```
+	Iterate over all stock prices to compute the lowest price and maximum profit dynamically.
 
-1. **Initialization**:
-   - `l = 7`, `g = 0`.
+4. **Minimum Update**
+	```cpp
+	        l = min(l, x);
+	```
+	Update `l` to the minimum of the current price and the previously seen lowest price.
 
-2. **Iterate Over Prices**:
+5. **Profit Update**
+	```cpp
+	        g = max(g, x - l);
+	```
+	Update `g` to the maximum profit seen so far by subtracting the lowest price from the current price.
 
-   - **Price 7**: 
-     - `l = min(7, 7) = 7`
-     - `g = max(0, 7 - 7) = 0`
+6. **Return Statement**
+	```cpp
+	    return g;
+	```
+	Return the maximum profit calculated.
 
-   - **Price 1**: 
-     - `l = min(7, 1) = 1`
-     - `g = max(0, 1 - 1) = 0`
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   - **Price 5**: 
-     - `l = min(1, 5) = 1`
-     - `g = max(0, 5 - 1) = 4`
+The time complexity is O(n) because we process each element of the prices array once.
 
-   - **Price 3**: 
-     - `l = min(1, 3) = 1`
-     - `g = max(4, 3 - 1) = 4`
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   - **Price 6**: 
-     - `l = min(1, 6) = 1`
-     - `g = max(4, 6 - 1) = 5`
+The space complexity is O(1) because we only need a constant amount of space to store the variables for the minimum price and maximum profit.
 
-   - **Price 4**: 
-     - `l = min(1, 4) = 1`
-     - `g = max(5, 4 - 1) = 5`
+**Happy Coding! 🎉**
 
-3. **Final Output**: 
-   - The maximum profit is `5`.
-
-### ⏱️ **Time and Space Complexity**
-
-- **Time Complexity**: `O(n)`
-  - We iterate through the array once, performing constant-time operations for each price.
-
-- **Space Complexity**: `O(1)`
-  - We only use a few integer variables (`l` and `g`), so the space complexity remains constant.
-
-### 🏆 **Conclusion**
-
-This solution efficiently solves the problem of finding the maximum profit from a single buy and sell transaction. By iterating through the prices once and tracking the minimum price and maximum profit encountered, we achieve an optimal solution with time complexity `O(n)` and space complexity `O(1)`. This makes the algorithm both **time-efficient** and **space-efficient**, perfect for handling large inputs.
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
 

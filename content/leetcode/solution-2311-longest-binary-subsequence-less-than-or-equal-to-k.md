@@ -14,119 +14,145 @@ img_src = ""
 youtube = "xgpPuMjET9c"
 youtube_upload_date="2022-06-19"
 youtube_thumbnail="https://i.ytimg.com/vi/xgpPuMjET9c/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string s and a positive integer k. Your task is to find the length of the longest subsequence of s that represents a binary number less than or equal to k when converted to decimal.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary string s and an integer k.
+- **Example:** `s = '1101011', k = 6`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- 1 <= k <= 10^9
+	- s[i] is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestSubsequence(string s, int k) {
-        int val = 0, cnt = 0, pow = 1;
-        for(int i = s.size() - 1; i >= 0 && val + pow <= k; i--) {
-            if(s[i] == '1') {
-                ++cnt;
-                val += pow;
-            }
-            pow <<= 1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest subsequence of s that forms a binary number less than or equal to k.
+- **Example:** `For s = '1101011', k = 6, the output is 5.`
+- **Constraints:**
+	- The subsequence should form a binary number less than or equal to k.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the longest subsequence of binary digits that represents a number less than or equal to k.
+
+- Start from the rightmost character in the string and traverse towards the left.
+- Maintain a running total of the binary number formed and the length of the subsequence.
+- For each '1', add its value to the running total and increment the subsequence length if the number is still less than or equal to k.
+- Include all the '0's in the subsequence as they don't affect the binary value.
+- Stop when you can no longer include '1's without exceeding k.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string contains only '0's and '1's.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = '1101011', k = 6`  \
+  **Explanation:** The longest subsequence of s that forms a binary number less than or equal to 6 is '00010', which is 2 in decimal. The length of the subsequence is 5.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to find the longest subsequence of binary digits that does not exceed the value of k when converted to decimal.
+
+### Initial Thoughts 💭
+- We need to track both the length of the subsequence and the value of the binary number formed as we traverse the string.
+- Starting from the least significant bit (rightmost), we can check whether adding the current '1' keeps the number within bounds.
+{{< dots >}}
+### Edge Cases 🌐
+- The string will never be empty as per the problem constraints.
+- Handle inputs of up to 1000 characters efficiently.
+- If k is very large, ensure that we don't exceed it by adding bits.
+- Ensure that the subsequence's value does not exceed k.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestSubsequence(string s, int k) {
+    int val = 0, cnt = 0, pow = 1;
+    for(int i = s.size() - 1; i >= 0 && val + pow <= k; i--) {
+        if(s[i] == '1') {
+            ++cnt;
+            val += pow;
         }
-        return count(s.begin(), s.end(), '0') + cnt;  
+        pow <<= 1;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the longest subsequence in a binary string `s` such that the subsequence, when interpreted as a binary number, is less than or equal to a given integer `k`. A subsequence is formed by deleting some or no elements from the string, without changing the order of the remaining characters. The goal is to return the length of the longest subsequence that can be selected, which satisfies the condition that its binary representation is less than or equal to `k`.
-
-### Approach
-
-The main challenge of this problem is to find the longest subsequence where the binary number formed by the subsequence is less than or equal to `k`. To achieve this, we can take advantage of the binary representation of `k` and consider each character of the string from the rightmost side (starting from the least significant bit) to maximize the subsequence length.
-
-Here’s the approach step-by-step:
-
-1. **Binary Representation of `k`:**
-   - Since we are working with binary numbers, the key observation is that the binary representation of `k` plays an important role in determining which bits can be part of the subsequence.
-
-2. **Iterate from the Rightmost Bit:**
-   - We start by iterating through the string `s` from right to left. This allows us to consider the least significant bits first, which gives us more flexibility in adding bits to the subsequence.
-   
-3. **Construct the Binary Number:**
-   - As we iterate, we maintain a variable `val` that stores the current value of the binary number formed by the subsequence considered so far.
-   - We also maintain a variable `pow`, which represents the value of the current bit position. This is initialized as 1 and doubled at each step (i.e., shifted left) as we move from right to left through the string.
-
-4. **Add `1` Bits:**
-   - Each time we encounter a '1' in the string, we try to add it to the subsequence, increasing the subsequence value. If adding this '1' results in the binary number exceeding `k`, we stop considering further bits and move to the next part of the string.
-
-5. **Count `0` Bits:**
-   - The '0' bits in the string can always be included in the subsequence because they do not increase the binary number’s value. Therefore, we simply count the '0' bits in the string and add them to the final subsequence length.
-
-6. **Return the Result:**
-   - The length of the longest subsequence is the sum of the number of '0' bits and the number of '1' bits that were successfully added to the subsequence.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int val = 0, cnt = 0, pow = 1;
-```
-
-- `val` is used to store the current value of the subsequence as we build it from right to left. It starts at 0.
-- `cnt` counts how many '1' bits are successfully added to the subsequence.
-- `pow` represents the value of the current bit position (starts at 1 for the least significant bit).
-
-#### Step 2: Iterate Through the String
-
-```cpp
-for(int i = s.size() - 1; i >= 0 && val + pow <= k; i--) {
-    if(s[i] == '1') {
-        ++cnt;
-        val += pow;
-    }
-    pow <<= 1;
+    return count(s.begin(), s.end(), '0') + cnt;  
 }
 ```
 
-- The loop starts from the rightmost character of the string `s` and moves to the left. The condition `val + pow <= k` ensures that we do not exceed the value of `k` while building the subsequence.
-- For each bit, if it is '1', we increment the count `cnt` (indicating that this '1' is part of the subsequence) and add its corresponding value (`pow`) to `val`.
-- `pow <<= 1` shifts the value of `pow` to the next bit position (multiplying by 2).
+This function calculates the length of the longest subsequence of binary digits that, when interpreted as a binary number, is less than or equal to a given value `k`. The function counts the number of zeros and the number of selected ones from the string.
 
-#### Step 3: Count `0` Bits
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int longestSubsequence(string s, int k) {
+	```
+	Define the function `longestSubsequence` which takes a binary string `s` and an integer `k` as input. The function returns an integer representing the length of the longest subsequence whose binary value is less than or equal to `k`.
 
-```cpp
-return count(s.begin(), s.end(), '0') + cnt;
-```
+2. **Variable Initialization**
+	```cpp
+	    int val = 0, cnt = 0, pow = 1;
+	```
+	Initialize three variables: `val` to store the current value of the selected binary digits, `cnt` to count the number of selected '1' digits, and `pow` to represent the current power of 2 for the binary number.
 
-- The function `count(s.begin(), s.end(), '0')` counts the number of '0' bits in the string `s`. Since '0' bits can always be included in the subsequence without changing its value, we add this count to `cnt` to get the total length of the longest subsequence.
-- The total subsequence length is returned as the final result.
+3. **For Loop**
+	```cpp
+	    for(int i = s.size() - 1; i >= 0 && val + pow <= k; i--) {
+	```
+	Start a loop from the last character of the string `s` and move towards the beginning. Continue the loop as long as the current value `val` plus the next power of 2 does not exceed `k`.
 
-### Complexity
+4. **If Condition Check**
+	```cpp
+	        if(s[i] == '1') {
+	```
+	Check if the current character in the string is '1'. If it is, include this '1' in the subsequence.
 
-#### Time Complexity:
-- **Iterating Over the String:**
-  - The main loop iterates over the string `s` once, starting from the last character and moving to the first. This loop runs in `O(n)` time, where `n` is the length of the string `s`.
-  
-- **Counting `0` Bits:**
-  - The `count(s.begin(), s.end(), '0')` function also iterates over the string once to count the number of '0' bits, which takes `O(n)` time.
-  
-- **Overall Time Complexity:**
-  - Since both operations (iterating over the string and counting '0' bits) are linear, the overall time complexity of the solution is `O(n)`.
+5. **Increment Count**
+	```cpp
+	            ++cnt;
+	```
+	Increment the counter `cnt` to account for the '1' that is selected as part of the subsequence.
 
-#### Space Complexity:
-- **Auxiliary Variables:**
-  - The solution uses a constant amount of extra space for the variables `val`, `cnt`, and `pow`, which are all scalar values.
-  
-- **Overall Space Complexity:**
-  - The space complexity is `O(1)` since the amount of extra space used does not depend on the size of the input string.
+6. **Update Value**
+	```cpp
+	            val += pow;
+	```
+	Add the current power of 2 (`pow`) to the value `val` to update the total value of the subsequence.
 
-### Conclusion
+7. **Shift Power of 2**
+	```cpp
+	        pow <<= 1;
+	```
+	Shift the power of 2 (`pow`) left by 1 (equivalent to multiplying by 2) to account for the next bit in the binary number.
 
-This solution efficiently calculates the longest subsequence of a binary string whose binary representation is less than or equal to a given integer `k`. The algorithm makes a single pass through the string to construct the valid subsequence and counts the '0' bits, ensuring optimal performance. The time complexity of `O(n)` makes this approach suitable for large input sizes, and the space complexity of `O(1)` ensures minimal memory usage. The solution is both time-efficient and space-efficient, making it well-suited for practical use cases involving binary strings.
+8. **Return Statement**
+	```cpp
+	    return count(s.begin(), s.end(), '0') + cnt;  
+	```
+	Return the sum of the count of '0' characters in the string `s` (using `count` function) and the count of '1' characters that were selected for the subsequence.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the length of the string, as we traverse the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we only use a constant amount of space to store the binary number value and subsequence length.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "s7AvT7cGdSo"
 youtube_upload_date="2020-12-17"
 youtube_thumbnail="https://i.ytimg.com/vi/s7AvT7cGdSo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,59 +28,61 @@ youtube_thumbnail="https://i.ytimg.com/vi/s7AvT7cGdSo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a list of distinct integers, generate and return all possible permutations of the elements. The result can be returned in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of distinct integers.
+- **Example:** `[1, 2, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 6
+	- -10 <= nums[i] <= 10
+	- All elements of nums are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> permute(vector<int>& nums) {
-        map<int, bool> mp;
-        vector<vector<int>> ans;
-        vector<int> tmp;
-        bt(ans, tmp, nums, 0, mp);
-        return ans;
-    }
-    
-    void bt(vector<vector<int>> &ans, vector<int> &tmp, vector<int> &nums, int idx, map<int, bool> &mp) {
-        if(idx == nums.size()) {
-            ans.push_back(tmp);
-            return;
-        }
-        
-        for(int i = 0; i < nums.size(); i++) {
-            if(mp.count(nums[i])) continue;
-            mp[nums[i]] = true;
-            tmp.push_back(nums[i]);
-            bt(ans, tmp, nums, idx + 1, mp);
-            tmp.pop_back();
-            mp.erase(nums[i]);
-        }
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return all possible permutations of the input list.
+- **Example:** `[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]`
+- **Constraints:**
+	- The number of permutations is n!, where n is the length of the input list.
 
-### 🔄 **Unique Permutations of Integers**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate all possible permutations of the input list of distinct integers.
 
-The problem asks to generate all unique permutations of a list of integers, `nums`. The challenge is to handle potential duplicates in the input array and ensure that only distinct permutations are returned.
+- 1. Use a backtracking approach to explore all permutations of the input list.
+- 2. At each step, keep track of elements used and backtrack when a permutation is completed.
+- 3. Once a valid permutation is found, store it in the result list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The integers in the input array are distinct.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[1, 2, 3]`  \
+  **Explanation:** For the input [1, 2, 3], all possible permutations include [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], and [3, 2, 1].
 
----
+- **Input:** `[4, 5]`  \
+  **Explanation:** For the input [4, 5], the two possible permutations are [4, 5] and [5, 4].
 
-### 🚀 **Approach**
+- **Input:** `[8]`  \
+  **Explanation:** For the input [8], the only possible permutation is [8].
 
-To solve this, we'll use **backtracking** with a **map** to avoid duplicate permutations. Backtracking is a technique that explores all possible combinations recursively, and here, it will help generate all permutations. We will also keep track of which elements have been used in the current permutation to avoid repetitions.
+{{< dots >}}
+## Approach 🚀
+The solution uses backtracking to generate all possible permutations of the input list. At each step, we explore every element that hasn't been used in the current permutation.
 
-1. **Backtracking**: We recursively build permutations by exploring each element, adding it to the current permutation until the permutation reaches the length of the original array.
-2. **Avoiding Duplicates**: We use a `map` (or a similar structure) to ensure that each element is used only once in the current permutation, which prevents duplicates.
-3. **Base Case**: Once the current permutation reaches the length of the input array, we add it to the result list.
-4. **Recursive Case**: For each element, if it hasn’t been used yet, we include it in the current permutation, recurse, and backtrack once done.
-
----
-
-### 🖥️ **Code Breakdown (Step-by-Step)**
-
-#### Step 1: `permute` Function
-
+### Initial Thoughts 💭
+- The number of permutations grows factorially with the size of the input list.
+- Backtracking is a good approach for generating all possible combinations.
+- To generate the permutations, we can use recursion and backtrack once we find a valid permutation.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty because the constraints specify a minimum length of 1.
+- The maximum input size is 6, so the solution should handle the factorial growth of the number of permutations.
+- The elements are distinct, so no duplicates will occur in the input.
+- Ensure efficient backtracking, especially as the number of permutations grows with input size.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> permute(vector<int>& nums) {
     map<int, bool> mp;
@@ -88,18 +91,7 @@ vector<vector<int>> permute(vector<int>& nums) {
     bt(ans, tmp, nums, 0, mp);
     return ans;
 }
-```
 
-- **Input**: `nums` is the vector of integers to generate permutations from.
-- **Variables**:
-  - `mp`: A `map` to track whether an element is used in the current permutation.
-  - `ans`: A vector to store the result list of unique permutations.
-  - `tmp`: A temporary vector used to build the current permutation.
-- **Return**: The function calls the backtracking helper `bt` to start generating permutations. Once complete, the list `ans` with unique permutations is returned.
-
-#### Step 2: `bt` (Backtracking) Function
-
-```cpp
 void bt(vector<vector<int>> &ans, vector<int> &tmp, vector<int> &nums, int idx, map<int, bool> &mp) {
     if(idx == nums.size()) {
         ans.push_back(tmp);
@@ -107,78 +99,139 @@ void bt(vector<vector<int>> &ans, vector<int> &tmp, vector<int> &nums, int idx, 
     }
     
     for(int i = 0; i < nums.size(); i++) {
-        if(mp.count(nums[i])) continue;  // Skip if element is already used
-        
-        mp[nums[i]] = true;  // Mark element as used
-        tmp.push_back(nums[i]);  // Add to current permutation
-        bt(ans, tmp, nums, idx + 1, mp);  // Recurse to build next element
-        
-        tmp.pop_back();  // Backtrack: Remove last element
-        mp.erase(nums[i]);  // Mark element as unused
+        if(mp.count(nums[i])) continue;
+        mp[nums[i]] = true;
+        tmp.push_back(nums[i]);
+        bt(ans, tmp, nums, idx + 1, mp);
+        tmp.pop_back();
+        mp.erase(nums[i]);
     }
 }
 ```
 
-- **Base Case**: When the current index `idx` matches the size of `nums`, the temporary permutation `tmp` is complete. We then add it to `ans` and return.
-  
-  ```cpp
-  if(idx == nums.size()) {
-      ans.push_back(tmp);
-      return;
-  }
-  ```
+This code generates all possible permutations of a given array of integers using backtracking.
 
-- **Loop through `nums`**: For each element in `nums`, if it has already been used (i.e., found in the `map`), we skip it to avoid duplicate permutations.
-  
-  ```cpp
-  for(int i = 0; i < nums.size(); i++) {
-      if(mp.count(nums[i])) continue;
-  }
-  ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> permute(vector<int>& nums) {
+	```
+	This line declares a function named `permute` that takes a vector of integers `nums` as input and returns a vector of vectors representing all possible permutations of the input array.
 
-- **Adding Elements**: If an element has not been used yet, it is added to `tmp`, and the function recursively calls itself to generate the next element of the permutation.
-  
-  ```cpp
-  mp[nums[i]] = true;
-  tmp.push_back(nums[i]);
-  bt(ans, tmp, nums, idx + 1, mp);
-  ```
+2. **Map Initialization**
+	```cpp
+	    map<int, bool> mp;
+	```
+	This line initializes a map `mp` to keep track of which numbers have already been used in the current permutation.
 
-- **Backtracking**: After the recursion call, the element is removed from `tmp` and marked as unused in the `map`. This allows us to explore other possibilities.
-  
-  ```cpp
-  tmp.pop_back();
-  mp.erase(nums[i]);
-  ```
+3. **Vector Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	This line initializes a 2D vector `ans` to store the resulting permutations.
 
-#### Step 3: Recursion Termination
+4. **Vector Initialization**
+	```cpp
+	    vector<int> tmp;
+	```
+	This line initializes a vector `tmp` to store the current permutation being built.
 
-Once the recursion explores all elements and permutations, the base case is reached, and the result `ans` contains all unique permutations.
+5. **Backtracking Function Call**
+	```cpp
+	    bt(ans, tmp, nums, 0, mp);
+	```
+	This line calls the helper function `bt` to perform the backtracking process. The `ans`, `tmp`, `nums`, `0`, and `mp` are passed as arguments.
 
-### 🧮 **Complexity Analysis**
+6. **Return Result**
+	```cpp
+	    return ans;
+	```
+	This line returns the `ans` vector containing all possible permutations.
 
-#### Time Complexity
+7. **Backtracking Function Declaration**
+	```cpp
+	void bt(vector<vector<int>> &ans, vector<int> &tmp, vector<int> &nums, int idx, map<int, bool> &mp) {
+	```
+	This line declares a recursive backtracking function `bt` that takes the following parameters: `ans` to store the result, `tmp` to store the current permutation, `nums` the input array, `idx` to track the current index in the permutation, and `mp` to keep track of used numbers.
 
-- The number of unique permutations of an array of length `n` is `n!`. Since we generate each permutation and process each of its `n` elements, the time complexity is:
-  - **Time Complexity:** `O(n * n!)`, where `n` is the length of the input array `nums`.
+8. **Base Case and Result Addition**
+	```cpp
+	    if(idx == nums.size()) {
+	```
+	This line checks the base case: if the current index `idx` reaches the end of the array, it means a complete permutation has been formed. The current permutation `tmp` is added to the `ans` vector.
 
-#### Space Complexity
+9. **Base Case and Result Addition**
+	```cpp
+	        ans.push_back(tmp);
+	```
+	This line adds the current permutation `tmp` to the `ans` vector.
 
-- **Result Storage**: The result list `ans` stores `n!` permutations, and each permutation has `n` elements, contributing `O(n * n!)` space complexity.
-- **Recursion Stack**: The maximum depth of the recursion tree is `n`, with each call using `O(n)` space for the temporary vector `tmp` and the `map` to track used elements. Thus, the space complexity due to recursion is `O(n)`.
-  
-- **Total Space Complexity:** `O(n * n!)` for storing the result, plus `O(n)` for the recursion stack.
+10. **Base Case and Result Addition**
+	```cpp
+	        return;
+	```
+	This line returns from the function as a complete permutation has been found.
 
----
+11. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	This line starts a `for` loop to iterate over each number in the `nums` array.
 
-### 🏁 **Conclusion**
+12. **Skip Used Numbers**
+	```cpp
+	        if(mp.count(nums[i])) continue;
+	```
+	This line checks if the current number `nums[i]` has already been used in the current permutation. If so, it skips to the next number.
 
-This solution uses **backtracking** to efficiently generate all unique permutations of a list of integers while avoiding duplicates. By maintaining a map to track used elements, we ensure that we don’t generate repeated permutations.
+13. **Mark Number as Used**
+	```cpp
+	        mp[nums[i]] = true;
+	```
+	This line marks the current number `nums[i]` as used in the `mp` map.
 
-- **Time Complexity:** `O(n * n!)`
-- **Space Complexity:** `O(n * n!)`
+14. **Add Number to Current Permutation**
+	```cpp
+	        tmp.push_back(nums[i]);
+	```
+	This line adds the current number `nums[i]` to the current permutation `tmp`.
 
-This approach is optimal for generating permutations and is suitable for relatively small to moderate-sized input arrays. The backtracking technique ensures all possibilities are explored while maintaining distinct permutations.
+15. **Recursive Call**
+	```cpp
+	        bt(ans, tmp, nums, idx + 1, mp);
+	```
+	This line recursively calls the `bt` function with the updated `idx` to explore the next position in the permutation.
+
+16. **Backtrack**
+	```cpp
+	        tmp.pop_back();
+	```
+	This line removes the last added number from the `tmp` permutation to backtrack to the previous state.
+
+17. **Mark Number as Unused**
+	```cpp
+	        mp.erase(nums[i]);
+	```
+	This line removes the current number `nums[i]` from the `mp` map, indicating that it can be used again in other permutations.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n!)
+- **Average Case:** O(n!)
+- **Worst Case:** O(n!)
+
+The time complexity is O(n!) due to the need to generate all possible permutations of n elements.
+
+### Space Complexity 💾
+- **Best Case:** O(n!)
+- **Worst Case:** O(n!)
+
+The space complexity is O(n!) due to the storage of all permutations and the recursive stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/permutations/description/)
 

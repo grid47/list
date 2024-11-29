@@ -14,127 +14,173 @@ img_src = ""
 youtube = "jor18pkf9EE"
 youtube_upload_date="2020-11-07"
 youtube_thumbnail="https://i.ytimg.com/vi/jor18pkf9EE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a matrix of integers, where each element represents a value, you need to calculate the sum of all elements in a sub-matrix for each cell. For each cell, the sub-matrix includes all elements within a square grid of size (2k+1) x (2k+1) centered at that cell. If the sub-matrix extends beyond the boundaries of the matrix, only the valid elements within the matrix should be considered.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D matrix of integers and an integer k. The matrix is represented as a list of lists, where each list represents a row. The integer k represents the size of the square grid to calculate the sum for each cell.
+- **Example:** `mat = [[1,2,3],[4,5,6],[7,8,9]], k = 1`
+- **Constraints:**
+	- 1 <= m, n, k <= 100
+	- 1 <= mat[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a matrix where each element represents the sum of the valid sub-matrix for that position in the original matrix.
+- **Example:** `For mat = [[1,2,3],[4,5,6],[7,8,9]] and k = 1, the output is [[12, 21, 16], [27, 45, 33], [24, 39, 28]]`
+- **Constraints:**
 
-        int m = mat.size(), n = mat[0].size();
-        vector<vector<int>> sum(m + 1, vector<int>(n + 1, 0));
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the sum of each sub-matrix centered at each cell in the matrix while considering the bounds of the matrix.
 
-        for(int i = 1; i < m + 1; i++)
-        for(int j = 1; j < n + 1; j++)
-        sum[i][j] = mat[i - 1][j - 1] + (sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1]);
-        
-        vector<vector<int>> res(m, vector<int>(n));
+- 1. Use dynamic programming to calculate prefix sums of the matrix.
+- 2. For each cell in the matrix, calculate the sum of its sub-matrix using the prefix sum array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input matrix is always valid, with at least one row and one column.
+- The integer k will be chosen such that the sub-matrix can be calculated within the matrix bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For mat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] and k = 1, the sum of the 3x3 grid surrounding each element is calculated. For example, for the element at mat[1][1] (which is 5), the sum of the 3x3 grid is 45.`  \
+  **Explanation:** The sum is calculated by considering the elements within a 3x3 grid centered around each element, ensuring that any invalid positions outside the matrix bounds are ignored.
 
-        for(int i = 1; i < m + 1; i++)
-        for(int j = 1; j < n + 1; j++) {
+{{< dots >}}
+## Approach 🚀
+The approach utilizes a prefix sum technique to efficiently calculate the sum of each sub-matrix by avoiding recalculation of overlapping sub-matrices.
 
-            int r1 = min(i + k, m);
-            int c1 = min(j + k, n);
-            int r2 = max(i - k, 1);
-            int c2 = max(j - k, 1);
+### Initial Thoughts 💭
+- The brute force solution could involve recalculating sums for each cell, but this would be inefficient.
+- By using a prefix sum array, we can quickly compute the sum of any sub-matrix in constant time.
+- We will first compute the prefix sum array for the entire matrix, and then for each element, calculate the sum of its surrounding grid using this array.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty matrix (0x0 matrix) should return an empty result.
+- The solution should handle large matrices up to size 100x100 efficiently.
+- All elements in the matrix could be the same, or the matrix could contain very large or small values.
+- The size of the matrix and the value of k are constrained to ensure that the solution remains efficient.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k) {
 
-            res[i - 1][j - 1] = sum[r1][c1] - sum[r1][c2 - 1] - sum[r2 - 1][c1] + sum[r2 - 1][c2 - 1];
+    int m = mat.size(), n = mat[0].size();
+    vector<vector<int>> sum(m + 1, vector<int>(n + 1, 0));
 
-        }
-        
-        return res;
+    for(int i = 1; i < m + 1; i++)
+    for(int j = 1; j < n + 1; j++)
+    sum[i][j] = mat[i - 1][j - 1] + (sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1]);
+    
+    vector<vector<int>> res(m, vector<int>(n));
+
+    for(int i = 1; i < m + 1; i++)
+    for(int j = 1; j < n + 1; j++) {
+
+        int r1 = min(i + k, m);
+        int c1 = min(j + k, n);
+        int r2 = max(i - k, 1);
+        int c2 = max(j - k, 1);
+
+        res[i - 1][j - 1] = sum[r1][c1] - sum[r1][c2 - 1] - sum[r2 - 1][c1] + sum[r2 - 1][c2 - 1];
+
     }
-};
-{{< /highlight >}}
----
+    
+    return res;
+}
+```
 
+This function calculates the sum of elements in a k x k block surrounding each element in a matrix, using a prefix sum approach to optimize the computation.
 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k) {
+	```
+	The function 'matrixBlockSum' is declared, which takes a matrix 'mat' and an integer 'k' as input. The goal of the function is to calculate the sum of each element's block of size k x k.
 
-### Problem Statement
-Given a matrix `mat` of integers and an integer `k`, for each cell in `mat`, compute the sum of elements within a distance of `k` (Manhattan distance) from that cell. The result is a new matrix `res` where each `res[i][j]` is the sum of elements in the submatrix surrounding `mat[i][j]` within this `k` range.
+2. **Variable Initialization**
+	```cpp
+	    int m = mat.size(), n = mat[0].size();
+	```
+	The variables 'm' and 'n' are initialized to represent the number of rows and columns in the matrix 'mat', respectively.
 
-### Approach
-To solve this efficiently, we use a **prefix sum matrix**. The prefix sum matrix, `sum[i][j]`, will store the cumulative sum of elements from the top-left corner `(0, 0)` to `(i-1, j-1)` in the matrix. Using this prefix sum, we can calculate the sum of any submatrix in constant time, allowing us to efficiently compute the block sums.
+3. **Prefix Sum Initialization**
+	```cpp
+	    vector<vector<int>> sum(m + 1, vector<int>(n + 1, 0));
+	```
+	A 'sum' matrix is initialized to store the prefix sum of the input matrix 'mat'. It has dimensions (m + 1) x (n + 1), with all values initialized to zero.
 
-#### Steps:
-1. **Build Prefix Sum Matrix**:
-   - Create a matrix `sum` of size `(m+1) x (n+1)` where `m` is the number of rows and `n` is the number of columns in `mat`. Initialize all entries to 0.
-   - For each cell `(i, j)`, compute `sum[i][j]` as the value in `mat[i-1][j-1]` plus the cumulative sums from neighboring cells.
-   - This cumulative sum formula is:  
-     \[
-     \text{sum}[i][j] = \text{mat}[i-1][j-1] + \text{sum}[i-1][j] + \text{sum}[i][j-1] - \text{sum}[i-1][j-1]
-     \]
+4. **Prefix Sum Calculation**
+	```cpp
+	    for(int i = 1; i < m + 1; i++)
+	    for(int j = 1; j < n + 1; j++)
+	    sum[i][j] = mat[i - 1][j - 1] + (sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1]);
+	```
+	This nested loop computes the prefix sum for each element of the 'sum' matrix. The value at each position is the sum of elements from the top-left corner of the matrix.
 
-2. **Calculate Block Sum Using Prefix Sum Matrix**:
-   - Initialize a result matrix `res` of size `m x n`.
-   - For each cell `(i, j)`, compute the submatrix boundaries based on `k`:
-     - Define `r1` and `c1` as the bottom-right boundary using `min(i + k, m)` and `min(j + k, n)`.
-     - Define `r2` and `c2` as the top-left boundary using `max(i - k, 1)` and `max(j - k, 1)`.
-   - Use the prefix sum matrix to compute the block sum for `(i, j)`:
-     \[
-     \text{res}[i-1][j-1] = \text{sum}[r1][c1] - \text{sum}[r1][c2-1] - \text{sum}[r2-1][c1] + \text{sum}[r2-1][c2-1]
-     \]
-   - This formula efficiently calculates the sum of the block using only four values from the prefix sum matrix.
+5. **Result Matrix Initialization**
+	```cpp
+	    vector<vector<int>> res(m, vector<int>(n));
+	```
+	A 'res' matrix is initialized to store the final result, which will hold the sum of each k x k block around every element in the matrix.
 
-3. **Return the Result**:
-   - Return `res`, which contains the block sum for each cell in `mat`.
+6. **Outer Loop for Rows**
+	```cpp
+	    for(int i = 1; i < m + 1; i++)
+	```
+	The outer loop iterates over each row of the matrix to calculate the k x k sum block for each element.
 
-### Code Breakdown (Step by Step)
+7. **Inner Loop for Columns**
+	```cpp
+	    for(int j = 1; j < n + 1; j++) {
+	```
+	The inner loop iterates over each column of the matrix, processing every element to calculate its k x k sum block.
 
-1. **Initialize Variables and Prefix Sum Matrix**:
-   - Set up the `sum` matrix with one extra row and column.
-   - Calculate prefix sums in `sum` matrix using a nested loop for each element in `mat`.
+8. **Boundary Calculation**
+	```cpp
+	        int r1 = min(i + k, m);
+	        int c1 = min(j + k, n);
+	        int r2 = max(i - k, 1);
+	        int c2 = max(j - k, 1);
+	```
+	These lines calculate the boundaries of the k x k block surrounding the current element. The boundaries are adjusted to ensure they stay within the matrix dimensions.
 
-   ```cpp
-   int m = mat.size(), n = mat[0].size();
-   vector<vector<int>> sum(m + 1, vector<int>(n + 1, 0));
+9. **Block Sum Calculation**
+	```cpp
+	        res[i - 1][j - 1] = sum[r1][c1] - sum[r1][c2 - 1] - sum[r2 - 1][c1] + sum[r2 - 1][c2 - 1];
+	```
+	Using the prefix sum array, this line computes the sum of elements within the k x k block for the current matrix element, and stores the result in the 'res' matrix.
 
-   for(int i = 1; i < m + 1; i++)
-       for(int j = 1; j < n + 1; j++)
-           sum[i][j] = mat[i - 1][j - 1] + (sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1]);
-   ```
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the 'res' matrix, which contains the sum of elements for each k x k block surrounding each element in the matrix.
 
-2. **Compute Block Sum for Each Cell**:
-   - For each cell `(i, j)`, define the boundaries and use the prefix sum matrix to get the block sum.
-   - Store the block sum in the result matrix `res`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-   ```cpp
-   vector<vector<int>> res(m, vector<int>(n));
+The time complexity is O(m * n) because we compute the prefix sum array in O(m * n) time, and for each cell, we calculate the sub-matrix sum in constant time.
 
-   for(int i = 1; i < m + 1; i++)
-       for(int j = 1; j < n + 1; j++) {
-           int r1 = min(i + k, m);
-           int c1 = min(j + k, n);
-           int r2 = max(i - k, 1);
-           int c2 = max(j - k, 1);
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-           res[i - 1][j - 1] = sum[r1][c1] - sum[r1][c2 - 1] - sum[r2 - 1][c1] + sum[r2 - 1][c2 - 1];
-       }
-   ```
+The space complexity is O(m * n) due to the storage of the prefix sum array and the result matrix.
 
-3. **Return Result**:
-   - Return the `res` matrix containing the block sums.
+**Happy Coding! 🎉**
 
-   ```cpp
-   return res;
-   ```
-
-### Complexity Analysis
-
-- **Time Complexity**: \(O(m \times n)\)  
-  - Constructing the prefix sum matrix takes \(O(m \times n)\).
-  - Calculating each block sum also takes \(O(m \times n)\) since each cell is computed in constant time.
-
-- **Space Complexity**: \(O(m \times n)\)  
-  - Additional space is used for the `sum` and `res` matrices.
-
-### Conclusion
-This solution uses a prefix sum approach to efficiently compute the block sum for each cell in `mat` within a specified distance `k`. The prefix sum matrix optimizes the calculation by allowing constant-time queries for submatrices, making it an optimal solution for large matrices. This technique is widely applicable to problems involving cumulative sums over ranges and enables efficient processing of multi-dimensional data.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/matrix-block-sum/description/)
 

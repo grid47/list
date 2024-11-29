@@ -14,161 +14,178 @@ img_src = ""
 youtube = "nsgqVWeUI24"
 youtube_upload_date="2023-10-04"
 youtube_thumbnail="https://i.ytimg.com/vi/nsgqVWeUI24/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array nums and an integer target. The array infinite_nums is created by infinitely appending nums to itself. You need to find the length of the shortest contiguous subarray in infinite_nums whose sum equals the target. If no such subarray exists, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums, and an integer target.
+- **Example:** `nums = [4, 5, 6], target = 9`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^5
+	- 1 <= target <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minSizeSubarray(vector<int>& A, int target) {
-        long sumA = accumulate(A.begin(), A.end(), 0L), su = 0;
-        int n = A.size(), k = target / sumA, res = n;
-        target %= sumA;
-        if (target == 0)
-            return k * n;
-        unordered_map<long, int> dp{{0L, -1}};
-        for (int i = 0; i < 2 * n; ++i) {
-            su += A[i % n];
-            if (dp.count(su - target))
-                res = min(res, i - dp[su - target]);
-            dp[su] = i;
-        }
-        return res < n ? res + k * n : -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the shortest contiguous subarray with a sum equal to target. If no such subarray exists, return -1.
+- **Example:** `For input nums = [4, 5, 6], target = 9, the output is 2.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the shortest subarray in infinite_nums whose sum equals target.
+
+- First, identify the minimum length subarray that satisfies the sum condition.
+- Utilize sliding window or prefix sum techniques to efficiently find the subarrays.
+- Consider the fact that the array repeats infinitely when calculating possible subarrays.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always have at least one element.
+- The target will always be a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For input nums = [4, 5, 6], target = 9, the output is 2.`  \
+  **Explanation:** The subarray [5, 6] (from index 1 to 2) has a sum of 9, and its length is 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a sliding window or prefix sum technique to efficiently find the shortest subarray in the infinite array whose sum equals the target.
+
+### Initial Thoughts 💭
+- The array is infinite, but we can work with just 2 copies of the array.
+- We need an efficient method to handle large arrays and large target values.
+- A sliding window or prefix sum approach can help reduce the complexity from brute force.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one element, so no need to handle empty inputs.
+- Ensure the algorithm works efficiently for arrays with lengths up to 10^5.
+- Consider cases where no subarray exists that meets the target.
+- The algorithm should handle large inputs within the time limits.
+{{< dots >}}
+## Code 💻
+```cpp
+int minSizeSubarray(vector<int>& A, int target) {
+    long sumA = accumulate(A.begin(), A.end(), 0L), su = 0;
+    int n = A.size(), k = target / sumA, res = n;
+    target %= sumA;
+    if (target == 0)
+        return k * n;
+    unordered_map<long, int> dp{{0L, -1}};
+    for (int i = 0; i < 2 * n; ++i) {
+        su += A[i % n];
+        if (dp.count(su - target))
+            res = min(res, i - dp[su - target]);
+        dp[su] = i;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an array `A` of integers and an integer `target`, the goal is to find the length of the shortest subarray whose sum is at least `target`. The challenge is to find this subarray efficiently, potentially using elements multiple times in a circular manner.
-
-### Approach
-
-The solution to this problem requires an efficient strategy due to the constraints. A naive approach of checking all possible subarrays would be too slow for large arrays, so we need a more optimal solution. Here's the approach:
-
-1. **Total Sum Computation**: First, compute the total sum of the entire array. This helps in determining how many full cycles of the array are needed to reach or exceed the target.
-
-2. **Circular Array Handling**: The array is treated as circular, meaning we can wrap around and start from the beginning of the array again. To handle this efficiently, the array is traversed twice, using the modulus operation to simulate wrapping around.
-
-3. **Prefix Sum with HashMap**: To optimize the sum computation for subarrays, a prefix sum is maintained, and we use a hashmap (`dp`) to store the first occurrence of each prefix sum. This allows us to efficiently compute the sum of any subarray and check if it satisfies the condition (i.e., if the subarray sum is at least `target`).
-
-4. **Modulo Logic**: By using modulo and handling prefix sums, we avoid recalculating sums repeatedly, which significantly improves efficiency.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Compute Total Sum and Adjust Target
-
-```cpp
-long sumA = accumulate(A.begin(), A.end(), 0L), su = 0;
-int n = A.size(), k = target / sumA, res = n;
-target %= sumA;
-```
-
-- **`sumA`**: This stores the total sum of the array `A`. It's calculated using `accumulate`, which efficiently sums up all the elements in the array.
-- **`su`**: This is the running sum, initialized to `0`. It's used to track the sum of elements as we traverse the array.
-- **`n`**: The length of the array `A`, used to determine the maximum possible size of a subarray.
-- **`k`**: This variable stores how many full cycles of the array are needed to potentially exceed the target. It is calculated by dividing the target by the total sum `sumA`. This represents how many times we can repeat the entire array to achieve a sum greater than or equal to the target.
-- **`target %= sumA;`**: This adjusts the target by taking the remainder when divided by `sumA`, which effectively reduces the problem size. After this step, we need to find a subarray whose sum is at least `target`, and this sum can be achieved within one or more cycles of the array.
-
-#### Step 2: Handle Special Case for Target == 0
-
-```cpp
-if (target == 0)
-    return k * n;
-```
-
-- **Special Case**: If the target is `0`, it means that even zero subarray elements are sufficient to achieve the target. Thus, we return `k * n`, which gives the number of full cycles needed to achieve the target.
-
-#### Step 3: Initialize HashMap for Prefix Sums
-
-```cpp
-unordered_map<long, int> dp{{0L, -1}};
-```
-
-- **`dp`**: This hashmap is used to store the first occurrence of each prefix sum. It maps the prefix sum to the index where this sum occurred. Initially, we store the value `0` with index `-1` to handle cases where the subarray starts from the first element.
-
-#### Step 4: Traverse the Array Twice to Simulate Circularity
-
-```cpp
-for (int i = 0; i < 2 * n; ++i) {
-    su += A[i % n];
-    if (dp.count(su - target))
-        res = min(res, i - dp[su - target]);
-    dp[su] = i;
+    return res < n ? res + k * n : -1;
 }
 ```
 
-- **Loop over the array twice**: We iterate `i` from `0` to `2n-1`. The `i % n` ensures that when `i` exceeds the length of the array, we loop back to the beginning of the array to simulate the circular nature.
-  
-- **`su += A[i % n];`**: This updates the running sum `su` by adding the value of the current element in the array. We use `i % n` to ensure we stay within the bounds of the array and simulate the circular behavior.
+This function calculates the minimum size of a subarray whose sum is equal to the target value by using a sliding window and dynamic programming approach. It also handles circular arrays where the subarray can wrap around.
 
-- **Check for valid subarrays**:
-  - **`if (dp.count(su - target))`**: This checks whether we have previously seen a prefix sum that, when subtracted from `su`, equals `target`. If such a prefix sum exists, it means the subarray starting from the index after the previously recorded index to the current index has a sum of at least `target`.
-  - **`res = min(res, i - dp[su - target]);`**: If a valid subarray is found, we compute the length of this subarray by subtracting the index where `su - target` was first seen from the current index `i`. We update `res` to store the smallest such subarray length.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minSizeSubarray(vector<int>& A, int target) {
+	```
+	This line declares the function that takes a vector of integers 'A' and an integer 'target' as inputs and returns an integer representing the minimum size of the subarray.
 
-- **Store the current prefix sum**: After processing the current element, we store the current prefix sum `su` in the hashmap `dp` with its index `i`.
+2. **Variable Initialization**
+	```cpp
+	    long sumA = accumulate(A.begin(), A.end(), 0L), su = 0;
+	```
+	This line computes the sum of all elements in 'A' and stores it in 'sumA'. It also initializes 'su', which will track the sum of the current subarray, to 0.
 
-#### Step 5: Return the Result
+3. **Variable Initialization**
+	```cpp
+	    int n = A.size(), k = target / sumA, res = n;
+	```
+	'n' stores the size of the array 'A', 'k' is the number of times 'sumA' fits into 'target', and 'res' is initialized to 'n', which is the worst-case size of the subarray.
 
-```cpp
-return res < n ? res + k * n : -1;
-```
+4. **Modulus Operation**
+	```cpp
+	    target %= sumA;
+	```
+	This line reduces the target value to the remainder when divided by 'sumA'. This ensures the target is within the bounds of the sum of one cycle of the array.
 
-- **Return the result**: After processing the array twice, if `res` is still less than `n`, it means a valid subarray of the desired sum was found, and we add the number of full cycles `k * n` to `res`. If no such subarray was found, we return `-1`.
+5. **Condition Check**
+	```cpp
+	    if (target == 0)
+	```
+	This condition checks if the target is zero after the modulus operation. If true, the entire array sum can form the target, and the function will return the result immediately.
 
-### Example Walkthrough
+6. **Early Return**
+	```cpp
+	        return k * n;
+	```
+	If the target is zero, it means the subarray can simply consist of the entire array repeated 'k' times, and the minimum size of the subarray is 'k * n'.
 
-#### Example 1: `A = [1, 2, 3], target = 6`
+7. **Map Initialization**
+	```cpp
+	    unordered_map<long, int> dp{{0L, -1}};
+	```
+	This initializes a hashmap 'dp' that stores the cumulative sum up to each index and its respective index. The key-value pair (0L, -1) represents the base case for the sum starting at index -1.
 
-1. **Initial Setup**:
-   - `sumA = 6`, `su = 0`, `n = 3`, `k = 1`, `target = 0`
+8. **Loop Setup**
+	```cpp
+	    for (int i = 0; i < 2 * n; ++i) {
+	```
+	This for loop iterates over the array twice (2*n) to account for possible circular subarrays.
 
-2. **Handle Special Case (`target == 0`)**:
-   - Since `target == 0`, we directly return `k * n = 1 * 3 = 3`.
+9. **Sliding Window Update**
+	```cpp
+	        su += A[i % n];
+	```
+	The current element of the array 'A' is added to 'su', where 'i % n' ensures that the index wraps around if it exceeds the size of the array.
 
-**Output**:
-```cpp
-3
-```
+10. **Check for Previous Subarray**
+	```cpp
+	        if (dp.count(su - target))
+	```
+	This condition checks if the difference between the current cumulative sum 'su' and the target exists in the 'dp' map. If true, it means a subarray that sums up to 'target' exists.
 
-#### Example 2: `A = [1, 2, 3], target = 7`
+11. **Result Update**
+	```cpp
+	            res = min(res, i - dp[su - target]);
+	```
+	If a valid subarray is found, 'res' is updated to the smaller of its current value or the length of the subarray (i - dp[su - target]).
 
-1. **Initial Setup**:
-   - `sumA = 6`, `su = 0`, `n = 3`, `k = 1`, `target = 1`
+12. **Update Map**
+	```cpp
+	        dp[su] = i;
+	```
+	The current cumulative sum 'su' and its index 'i' are stored in the 'dp' map to track the first occurrence of the sum.
 
-2. **HashMap Initialization**:
-   - `dp = {0L: -1}`
+13. **Return Result**
+	```cpp
+	    return res < n ? res + k * n : -1;
+	```
+	The function returns 'res' if a valid subarray is found. If no subarray is found, it returns -1. If 'res' is less than 'n', it adds the number of full cycles 'k * n' to the result.
 
-3. **Iterate over array twice**:
-   - For `i = 0`, `su = 1`, `dp = {0L: -1, 1: 0}`
-   - For `i = 1`, `su = 3`, `dp = {0L: -1, 1: 0, 3: 1}`
-   - For `i = 2`, `su = 6`, `dp = {0L: -1, 1: 0, 3: 1, 6: 2}`
-   - For `i = 3`, `su = 7`, `dp = {0L: -1, 1: 0, 3: 1, 6: 2, 7: 3}`
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Final Result**:
-   - We find that the smallest subarray length is `3`, and since `res` is less than `n`, we return `res + k * n = 3 + 3 = 6`.
+The time complexity is O(n) due to the efficient use of sliding window or prefix sum.
 
-**Output**:
-```cpp
-6
-```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Time Complexity
+The space complexity is O(n) for storing the extended array and prefix sums.
 
-- **Time Complexity**: The solution iterates through the array twice, making the time complexity **O(n)**, where `n` is the size of the input array. Each operation inside the loop, including the hashmap lookup and update, is constant time on average.
-  
-### Space Complexity
+**Happy Coding! 🎉**
 
-- **Space Complexity**: The space complexity is **O(n)** because we store prefix sums in the hashmap `dp`, which could store up to `n` distinct values in the worst case.
-
-### Conclusion
-
-This solution efficiently solves the problem of finding the minimum size subarray whose sum is at least the target, even when considering circular arrays. By using prefix sums and a hashmap to track previously seen sums, we reduce the problem to linear time complexity **O(n)**. This approach ensures that the solution can handle large input sizes within time limits. The space complexity is **O(n)** due to the storage of prefix sums in the hashmap.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/description/)
 

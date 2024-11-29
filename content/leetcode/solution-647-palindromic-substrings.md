@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "EU5xSa5ZHGY"
 youtube_upload_date="2023-06-21"
 youtube_thumbnail="https://i.ytimg.com/vi/EU5xSa5ZHGY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,122 +28,186 @@ youtube_thumbnail="https://i.ytimg.com/vi/EU5xSa5ZHGY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string s, return the number of palindromic substrings in it. A palindrome is a string that reads the same forward and backward. A substring is a contiguous sequence of characters within the string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s, which contains lowercase English letters.
+- **Example:** `s = "abc"`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> mem;
-    string s;
-    int dp(int i, int j) {
-        if(i >= j) return 1;
-        if(mem[i][j] != -1) return mem[i][j];
-        return mem[i][j] = (s[i] == s[j])? dp(i + 1, j - 1): 0;
-    }
-    
-    int countSubstrings(string s) {
-        this->s = s;
-        int n = s.size();
-        mem.resize(n, vector<int>(n, -1));
-        int ans = 0;
-        for(int i = 0; i < s.size(); i++)
-        for(int j = i; j < s.size(); j++)
-            ans += dp(i, j);        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of palindromic substrings in the given string s.
+- **Example:** `3`
+- **Constraints:**
+	- The result will be a single integer representing the count of palindromic substrings.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of palindromic substrings in the string.
 
-The problem asks us to count all the palindromic substrings in a given string `s`. A substring is defined as any contiguous sequence of characters in the string, and a palindrome is a string that reads the same forward as backward. For example, the string `"aba"` contains three palindromic substrings: `"a"`, `"b"`, and `"aba"`.
+- 1. Initialize a dynamic programming (DP) table to store whether a substring is a palindrome.
+- 2. Iterate over all possible substrings and use the DP table to check if they are palindromes.
+- 3. Count the palindromes by summing up the number of valid palindromic substrings.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string is not empty.
+- The solution must handle strings up to length 1000 efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "abc"`  \
+  **Explanation:** The palindromic substrings are: 'a', 'b', 'c'. Hence, the total count is 3.
 
-Our goal is to return the total number of palindromic substrings in the string `s`.
+{{< dots >}}
+## Approach 🚀
+The approach uses dynamic programming (DP) to efficiently count all palindromic substrings by building up from smaller substrings.
 
-### Approach
-
-To solve this problem, we will use **dynamic programming (DP)**, specifically focusing on recognizing palindromic substrings and efficiently counting them. Here's how we can approach this:
-
-1. **Understanding Palindromes**:
-   - A string is a palindrome if the first and last characters are the same, and the substring in between is also a palindrome.
-   - For example, `"aba"` is a palindrome because `s[0] == s[2]` and the substring `s[1]` (which is `"b"`) is trivially a palindrome.
-
-2. **Dynamic Programming (DP)**:
-   - We define `dp(i, j)` as a function that returns `1` if the substring `s[i..j]` is a palindrome and `0` otherwise.
-   - The recurrence for `dp(i, j)` is:
-     - If `i >= j`, then `s[i..j]` is trivially a palindrome (a single character or an empty string).
-     - If `s[i] == s[j]` and `dp(i + 1, j - 1) == 1`, then `s[i..j]` is a palindrome.
-     - Otherwise, it's not a palindrome.
-
-3. **Memoization**:
-   - Instead of recalculating `dp(i, j)` for the same indices repeatedly, we use memoization to store the results of subproblems.
-   - We initialize a 2D memoization table `mem[i][j]` where `mem[i][j]` stores the result of whether `s[i..j]` is a palindrome.
-   - Initially, we fill this table with `-1` (indicating uncalculated subproblems), and we calculate it as needed.
-
-4. **Count Palindromic Substrings**:
-   - We iterate over all possible substrings in the string using two nested loops: one for the starting index `i` and one for the ending index `j`.
-   - For each pair `(i, j)`, we use the `dp(i, j)` function to determine whether the substring `s[i..j]` is a palindrome. If it is, we increment our count.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code step by step to understand its logic:
-
-#### 1. **Helper Function - `dp(i, j)`**:
+### Initial Thoughts 💭
+- A palindrome substring must have the same first and last characters, and the substring excluding the first and last characters must also be a palindrome.
+- By using dynamic programming, we can efficiently keep track of which substrings are palindromes and count them.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always have at least one character.
+- Ensure that the solution can handle strings of length up to 1000 efficiently.
+- Consider strings where all characters are the same or strings with no palindromic substrings.
+- Efficiently handle large inputs with a time complexity of O(n^2).
+{{< dots >}}
+## Code 💻
 ```cpp
+vector<vector<int>> mem;
+string s;
 int dp(int i, int j) {
-    if(i >= j) return 1;  // Base case: single character or empty string
-    if(mem[i][j] != -1) return mem[i][j];  // If already calculated, return the result
-    return mem[i][j] = (s[i] == s[j]) ? dp(i + 1, j - 1) : 0;  // Check if characters match and inner substring is palindrome
+    if(i >= j) return 1;
+    if(mem[i][j] != -1) return mem[i][j];
+    return mem[i][j] = (s[i] == s[j])? dp(i + 1, j - 1): 0;
 }
-```
-- This function takes two indices `i` and `j` and returns `1` if the substring `s[i..j]` is a palindrome, and `0` otherwise.
-- The base case is when `i >= j`, meaning we have a single character or an empty substring, which is always a palindrome.
-- If `s[i] == s[j]`, the substring `s[i..j]` is a palindrome if the inner substring `s[i+1..j-1]` is also a palindrome. Thus, we recursively call `dp(i + 1, j - 1)`.
-- Memoization is used to avoid recalculating the same values, making the algorithm more efficient.
 
-#### 2. **Main Function - `countSubstrings(s)`**:
-```cpp
 int countSubstrings(string s) {
-    this->s = s;  // Assign input string to class member
+    this->s = s;
     int n = s.size();
-    mem.resize(n, vector<int>(n, -1));  // Initialize memoization table with -1
-    int ans = 0;  // Variable to count the palindromic substrings
-    for(int i = 0; i < s.size(); i++)  // Iterate over all starting indices
-        for(int j = i; j < s.size(); j++)  // Iterate over all ending indices
-            ans += dp(i, j);  // Add result of dp(i, j) to count
-    return ans;  // Return total number of palindromic substrings
+    mem.resize(n, vector<int>(n, -1));
+    int ans = 0;
+    for(int i = 0; i < s.size(); i++)
+    for(int j = i; j < s.size(); j++)
+        ans += dp(i, j);        
+    return ans;
 }
 ```
-- The `countSubstrings` function initializes the memoization table `mem` and iterates over all possible pairs of start and end indices `(i, j)` in the string `s`.
-- For each pair, it calls `dp(i, j)` to check if the substring `s[i..j]` is a palindrome.
-- It accumulates the results of these checks in the variable `ans`, which is eventually returned as the total count of palindromic substrings.
 
-#### 3. **Memoization Table**:
-```cpp
-mem.resize(n, vector<int>(n, -1));  // Initialize memoization table with -1
-```
-- The memoization table `mem` is a 2D vector of size `n x n` (where `n` is the size of the string `s`), initialized to `-1`. This ensures that all subproblems start as uncomputed.
-- As we calculate `dp(i, j)`, we store the result in `mem[i][j]`, so subsequent calls for the same pair `(i, j)` can return the result in constant time.
+This solution finds the number of palindromic substrings in a given string using dynamic programming and memoization.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<vector<int>> mem;
+	```
+	Declares a 2D vector 'mem' to store the results of subproblems for memoization. This will be used to avoid redundant calculations of the palindrome checks.
 
-#### Time Complexity:
-- **Filling the memoization table**: For each pair `(i, j)`, we check if `s[i] == s[j]` and recursively check if the inner substring is a palindrome. This gives a time complexity of `O(1)` for each `dp(i, j)` because of memoization.
-- We iterate over all pairs `(i, j)` where `i <= j`. There are `n(n + 1) / 2` pairs, which simplifies to `O(n^2)` operations.
-- Thus, the overall time complexity is **O(n^2)**.
+2. **Variable Initialization**
+	```cpp
+	string s;
+	```
+	Declares a string 's' to store the input string for which the number of palindromic substrings will be counted.
 
-#### Space Complexity:
-- We use a 2D memoization table of size `n x n` to store the results of all subproblems. Therefore, the space complexity is **O(n^2)**.
-- Additionally, we store the string `s`, but this doesn’t impact the space complexity significantly as the main space usage comes from the memoization table.
+3. **Recursive Function Definition**
+	```cpp
+	int dp(int i, int j) {
+	```
+	Defines the recursive function 'dp' that checks whether the substring from index 'i' to 'j' is a palindrome. It returns 1 if the substring is a palindrome, otherwise 0.
 
-### Conclusion
+4. **Base Case**
+	```cpp
+	    if(i >= j) return 1;
+	```
+	Checks if the substring length is 1 or 0 (i.e., i >= j), in which case it is a palindrome by definition, so it returns 1.
 
-This solution efficiently counts the number of palindromic substrings in a given string `s` using dynamic programming with memoization. The time complexity is **O(n^2)**, where `n` is the length of the string, and the space complexity is also **O(n^2)** due to the memoization table.
+5. **Memoization Check**
+	```cpp
+	    if(mem[i][j] != -1) return mem[i][j];
+	```
+	Checks if the result for the substring from 'i' to 'j' has already been computed (stored in 'mem'). If it has, it returns the stored result.
 
-The approach leverages the properties of palindromes and ensures that we only calculate the results for each substring once. This makes it much more efficient than a brute-force solution that might involve checking each substring independently. The use of memoization optimizes the recursive solution and ensures that overlapping subproblems are not recomputed, leading to a significant performance boost. 
+6. **Recursion**
+	```cpp
+	    return mem[i][j] = (s[i] == s[j])? dp(i + 1, j - 1): 0;
+	```
+	Recursively checks if the substring is a palindrome. If the characters at positions 'i' and 'j' are equal, it calls 'dp' on the next inner substring. If not, it returns 0.
 
-This solution works well for strings of moderate length and is a good example of how dynamic programming can be applied to problems involving substrings and palindromes.
+7. **Function Definition**
+	```cpp
+	int countSubstrings(string s) {
+	```
+	Defines the main function 'countSubstrings' which takes the string 's' and returns the total number of palindromic substrings.
+
+8. **Input Assignment**
+	```cpp
+	    this->s = s;
+	```
+	Assigns the input string 's' to the class member variable 's'.
+
+9. **Variable Initialization**
+	```cpp
+	    int n = s.size();
+	```
+	Stores the size of the string 's' in the variable 'n'.
+
+10. **Memoization Setup**
+	```cpp
+	    mem.resize(n, vector<int>(n, -1));
+	```
+	Resizes the 'mem' vector to a 2D array of size n x n, initializing all values to -1. This will be used to store results of the 'dp' function.
+
+11. **Result Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes the variable 'ans' to 0, which will store the total count of palindromic substrings.
+
+12. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < s.size(); i++)
+	```
+	Starts an outer loop to iterate through each character of the string 's'.
+
+13. **Inner Loop**
+	```cpp
+	    for(int j = i; j < s.size(); j++)
+	```
+	Starts an inner loop to consider all substrings starting at index 'i' and ending at index 'j'.
+
+14. **Counting Palindromes**
+	```cpp
+	        ans += dp(i, j);        
+	```
+	Calls the 'dp' function to check if the substring from 'i' to 'j' is a palindrome. Adds the result (1 or 0) to 'ans'.
+
+15. **Final Return**
+	```cpp
+	    return ans;
+	```
+	Returns the final count of palindromic substrings stored in 'ans'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) due to the nested loops used to check each substring.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the DP table storing results for all substrings.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/palindromic-substrings/description/)
 

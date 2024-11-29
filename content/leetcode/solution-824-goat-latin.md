@@ -14,117 +14,169 @@ img_src = ""
 youtube = "pTLNHVWiQk0"
 youtube_upload_date="2020-03-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/pTLNHVWiQk0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a sentence with words separated by spaces. Each word consists of only lowercase and uppercase letters. Your task is to convert the sentence into a new language called 'Goat Latin' by following the rules below:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string toGoatLatin(string str) {
-        stringstream iss(str), oss;
-        set<char> s = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
-        string word;
-        string a;
-        while(iss >> word) {
-            a.push_back('a');
-            if(s.count(word[0])) {
-                oss << ' ' << word << "ma" << a;
-            } else {
-                oss << ' ' << word.substr(1) << word[0]  << "ma" << a;                
-            }
+1. If a word begins with a vowel ('a', 'e', 'i', 'o', or 'u'), append 'ma' to the end of the word.
+2. If a word begins with a consonant, remove the first letter, move it to the end, and add 'ma'.
+3. Add one letter 'a' to the end of each word depending on its position in the sentence (1st word gets 'a', 2nd gets 'aa', 3rd gets 'aaa', etc.).
+
+Return the final sentence in Goat Latin.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string, sentence, which contains words separated by spaces.
+- **Example:** `Input: sentence = 'The quick brown fox'`
+- **Constraints:**
+	- 1 <= sentence.length <= 150
+	- The sentence consists of English letters and spaces.
+	- There are no leading or trailing spaces in the sentence.
+	- All words are separated by a single space.
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a string representing the sentence after converting it to Goat Latin.
+- **Example:** `Output: 'heTmaa uickqmaaa rownbmaaaa oxfmaaaaa'`
+- **Constraints:**
+	- The output must be a string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to convert the sentence into Goat Latin according to the specified rules. Each word must be processed based on whether it starts with a vowel or consonant, and the appropriate suffix must be added based on the word's position in the sentence.
+
+- Step 1: Split the input sentence into words.
+- Step 2: For each word, check if it starts with a vowel or consonant.
+- Step 3: Modify the word accordingly (append 'ma' or move the first letter to the end and append 'ma').
+- Step 4: Add the correct number of 'a's to the end of the word based on its position in the sentence.
+- Step 5: Join all words back together into a final sentence.
+{{< dots >}}
+### Problem Assumptions ✅
+- All words in the sentence are valid words made up of lowercase and uppercase English letters.
+- There are no punctuation marks or special characters in the sentence.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: sentence = 'The quick brown fox'`  \
+  **Explanation:** The sentence 'The quick brown fox' would be converted to Goat Latin as 'heTmaa uickqmaaa rownbmaaaa oxfmaaaaa'. The first word starts with a consonant, so 'T' is moved to the end and 'ma' is added. The second word starts with a consonant, so 'q' is moved to the end, 'ma' is added, and one 'a' is appended. This continues for all words in the sentence.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by iterating through each word in the sentence, applying the Goat Latin rules for vowels and consonants, and adding the appropriate number of 'a's based on the word's index. We then return the modified sentence.
+
+### Initial Thoughts 💭
+- The problem is straightforward, with simple string manipulations.
+- We need to handle each word based on its initial letter and word position in the sentence. String operations like checking the first letter and modifying words are key here.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one word, so empty input is not a concern.
+- The sentence length could be up to 150 characters, which is manageable.
+- Single-word sentences should be handled correctly.
+- Ensure that all the words are correctly modified and that the number of 'a's corresponds to their position in the sentence.
+{{< dots >}}
+## Code 💻
+```cpp
+string toGoatLatin(string str) {
+    stringstream iss(str), oss;
+    set<char> s = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+    string word;
+    string a;
+    while(iss >> word) {
+        a.push_back('a');
+        if(s.count(word[0])) {
+            oss << ' ' << word << "ma" << a;
+        } else {
+            oss << ' ' << word.substr(1) << word[0]  << "ma" << a;                
         }
-        return oss.str().substr(1);
     }
-};
-{{< /highlight >}}
----
+    return oss.str().substr(1);
+}
+```
 
-### Problem Statement
+This function converts a given string to Goat Latin by modifying the string according to specific rules. For each word, it checks if it starts with a vowel or consonant and appends appropriate suffixes.
 
-The problem requires transforming a given sentence into a new format known as **Goat Latin**. Goat Latin follows these simple rules:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string toGoatLatin(string str) {
+	```
+	This line declares the function `toGoatLatin` that takes a string as an argument and returns a string.
 
-1. If a word starts with a vowel (a, e, i, o, u), we append "ma" to the end of the word.
-2. If a word starts with a consonant, we remove the first letter, move it to the end of the word, and then append "ma".
-3. After applying the rule to each word, we append an increasing number of 'a' characters corresponding to each word’s position in the sentence (1 'a' for the first word, 2 'a's for the second, and so on).
+2. **Variable Initialization**
+	```cpp
+	    stringstream iss(str), oss;
+	```
+	Initializes two stringstreams, `iss` for reading from the input string and `oss` for building the output string.
 
-### Approach
+3. **Set Declaration**
+	```cpp
+	    set<char> s = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+	```
+	Defines a set of characters `s` containing vowels (both lowercase and uppercase) for checking the first letter of each word.
 
-To achieve this transformation efficiently, we can break down the task into a series of straightforward steps:
+4. **Variable Declaration**
+	```cpp
+	    string word;
+	```
+	Declares a string variable `word` to temporarily store each word from the input string.
 
-1. **Identifying the Vowels**:
-   - First, identify the vowels in both lowercase and uppercase. This can be done by using a set for quick look-up.
-   
-2. **Processing Each Word**:
-   - For each word, check if it starts with a vowel or consonant.
-   - If it starts with a vowel, simply append "ma" followed by the appropriate number of 'a' characters for that word's position.
-   - If it starts with a consonant, move the first letter to the end of the word, append "ma", and then append the appropriate number of 'a's.
+5. **Variable Declaration**
+	```cpp
+	    string a;
+	```
+	Declares a string variable `a` to hold the 'a's appended to the word in the process of converting it to Goat Latin.
 
-3. **Word Position and Transformation**:
-   - Keep track of the position of each word to determine how many 'a' characters should be appended.
+6. **Loop**
+	```cpp
+	    while(iss >> word) {
+	```
+	Starts a loop that reads each word from the input string using the stringstream `iss`.
 
-4. **Efficient String Construction**:
-   - Use a `stringstream` to efficiently process and construct the result string. This is better than using simple string concatenation in a loop since `stringstream` is optimized for such tasks.
-   
-5. **Final Formatting**:
-   - After processing all words, ensure that the final result does not start with a space, which can be achieved by removing the first space using `substr(1)`.
+7. **String Operation**
+	```cpp
+	        a.push_back('a');
+	```
+	Appends an 'a' to the string `a` for each word processed, helping to create the Goat Latin suffix.
 
-### Code Breakdown (Step by Step)
+8. **Condition Check**
+	```cpp
+	        if(s.count(word[0])) {
+	```
+	Checks if the first letter of the word is a vowel by checking membership in the set `s`.
 
-1. **Initialize Key Data Structures**:
-   ```cpp
-   stringstream iss(str), oss;
-   set<char> s = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
-   string word;
-   string a;
-   ```
-   - `iss`: A stringstream object used to read individual words from the input string.
-   - `oss`: A stringstream object used to build the resulting Goat Latin string.
-   - `s`: A set that contains all the vowels (both lowercase and uppercase) for quick lookup.
-   - `word`: A string used to hold each word as it is read from `str`.
-   - `a`: A string used to append the correct number of 'a' characters for each word.
+9. **Else Clause**
+	```cpp
+	        } else {
+	```
+	If the word does not start with a vowel, process it as follows.
 
-2. **Iterate Through Words in the Input String**:
-   ```cpp
-   while(iss >> word) {
-       a.push_back('a');
-   ```
-   - This loop processes each word in the input string. The `iss >> word` operation extracts one word at a time.
-   - `a.push_back('a')` ensures that for each word processed, the appropriate number of 'a's is added to `a`.
+10. **Return Statement**
+	```cpp
+	    return oss.str().substr(1);
+	```
+	Returns the output string, removing the first space that was added before the first word.
 
-3. **Check if the Word Starts with a Vowel or Consonant**:
-   ```cpp
-   if(s.count(word[0])) {
-       oss << ' ' << word << "ma" << a;
-   } else {
-       oss << ' ' << word.substr(1) << word[0]  << "ma" << a;
-   }
-   ```
-   - If the first character of the word is a vowel (checked using `s.count(word[0])`), we append the word followed by "ma" and the string `a` (the correct number of 'a' characters).
-   - If the word starts with a consonant, we move the first character to the end of the word (`word.substr(1) + word[0]`), then append "ma" and the appropriate number of 'a's.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of words in the sentence.
+- **Average Case:** O(n), where n is the number of words in the sentence.
+- **Worst Case:** O(n), where n is the number of words in the sentence.
 
-4. **Construct and Return the Result**:
-   ```cpp
-   return oss.str().substr(1);
-   ```
-   - Once all words are processed, `oss.str()` gives the entire result string with an extra leading space. We remove this space by calling `substr(1)`.
+The time complexity is linear because we process each word in the sentence once.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the number of words in the sentence, for storing the modified words.
+- **Worst Case:** O(n), where n is the number of words in the sentence, for storing the modified words.
 
-- **Time Complexity**: 
-  - The time complexity of this solution is \(O(n)\), where \(n\) is the number of characters in the input string `str`.
-  - The key operations—splitting the string into words, checking the first character for vowels, and constructing the result—are linear in terms of the number of characters.
+The space complexity is linear as we need space to store the modified sentence.
 
-- **Space Complexity**: 
-  - The space complexity is \(O(n)\), where \(n\) is the number of characters in the input string.
-  - We use additional space for the stringstream objects and the resulting string, both of which can be at most of size \(O(n)\).
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution efficiently transforms a given sentence into Goat Latin by processing each word based on whether it starts with a vowel or consonant. The approach leverages the power of the `stringstream` class to handle string manipulation in a clean and efficient manner, ensuring that the time and space complexities remain optimal. By using a set for vowel lookup, we can quickly check whether a word starts with a vowel or consonant. This solution meets the problem requirements while ensuring that the format of the output string adheres to the rules of Goat Latin.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/goat-latin/description/)
 

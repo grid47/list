@@ -14,104 +14,156 @@ img_src = ""
 youtube = "kizI7M64xXQ"
 youtube_upload_date="2023-02-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/kizI7M64xXQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string word consisting of digits and an integer m, return an array where each element is 1 if the numeric value of the prefix word[0,...,i] is divisible by m, otherwise 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string word and an integer m.
+- **Example:** `For example, word = '2020', m = 4.`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- word consists of digits from 0 to 9
+	- 1 <= m <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> divisibilityArray(string word, int m) {
-        int n = word.size();
-        vector<int> ans(n, 0);
-        long num = 0;
-        for(int i = 0; i < n; i++) {
-            num = num * 10 + (word[i] - '0');
-            num %= m;
-            if(num % m == 0) ans[i] = 1;
-            else ans[i] = 0;
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array of 0s and 1s where each element denotes whether the corresponding prefix of word is divisible by m.
+- **Example:** `For word = '123456789' and m = 7, the output is [0, 0, 0, 0, 0, 0, 0, 1, 0].`
+- **Constraints:**
+	- The length of the divisibility array is the same as the length of word.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if each prefix of the string word is divisible by m.
+
+- 1. Initialize a variable num to store the current numeric value of the prefix.
+- 2. For each digit in word, update num by multiplying the previous value by 10 and adding the current digit.
+- 3. Check if num is divisible by m, if yes, set div[i] = 1, otherwise div[i] = 0.
+{{< dots >}}
+### Problem Assumptions ✅
+- The word string is non-empty and consists of digits from '0' to '9'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For word = '2020' and m = 4, the output is [0, 1, 0, 1].`  \
+  **Explanation:** The prefixes '20' and '2020' are divisible by 4.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses the cumulative computation of the prefix numeric values and checks for divisibility with m.
+
+### Initial Thoughts 💭
+- The problem requires checking divisibility for multiple prefixes efficiently.
+- We can compute each prefix number iteratively and check divisibility in constant time.
+{{< dots >}}
+### Edge Cases 🌐
+- The input word will always have at least one character.
+- For large inputs (word length up to 10^5), the approach ensures efficient computation by processing each character in linear time.
+- If m is a large number, ensure the calculations do not overflow (use modulo operation).
+- Handle edge cases such as very small or very large values of m.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> divisibilityArray(string word, int m) {
+    int n = word.size();
+    vector<int> ans(n, 0);
+    long num = 0;
+    for(int i = 0; i < n; i++) {
+        num = num * 10 + (word[i] - '0');
+        num %= m;
+        if(num % m == 0) ans[i] = 1;
+        else ans[i] = 0;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given a string `word` representing a non-negative integer. We are also given an integer `m`. Our task is to determine, for each index in the string, whether the number formed by the substring of `word` from index `0` to `i` is divisible by `m`. The output should be a vector of binary values (0 or 1), where each value at index `i` is `1` if the number formed by the substring from index `0` to `i` is divisible by `m`, and `0` otherwise.
-
-### Approach
-
-To solve this problem, we need to iterate over each digit in the input string `word` and calculate the number formed by the digits from the start of the string up to the current index. We then check if this number is divisible by `m`. However, directly forming such large numbers could be inefficient and unnecessary, especially since the number of digits grows rapidly. Instead, we can calculate this number progressively without forming it explicitly using modular arithmetic.
-
-#### Key Concepts:
-
-1. **Modular Arithmetic**: Instead of forming the number as an integer, we can compute the remainder of the number modulo `m` progressively as we iterate through each digit. This prevents the number from becoming too large to handle.
-   
-2. **Progressive Calculation of the Number**:
-   - We start with `num = 0`, which represents the number formed by no digits initially.
-   - For each digit in the string `word`, we update `num` by multiplying it by `10` (shifting the digits to the left) and adding the value of the current digit (converted from character to integer).
-   - After updating `num`, we take the remainder of `num` modulo `m`. This ensures that we are always working with manageable numbers and avoids overflow.
-   
-3. **Divisibility Check**:
-   - For each index `i`, after calculating the number modulo `m`, we check if the result is `0`. If it is, then the number is divisible by `m` and we set `ans[i] = 1`, otherwise, we set `ans[i] = 0`.
-
-By using modular arithmetic, we ensure that the solution is efficient and handles even very large input sizes without overflow.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization**:
-```cpp
-int n = word.size();
-vector<int> ans(n, 0);
-long num = 0;
-```
-- `n`: We store the size of the string `word`.
-- `ans`: A vector of size `n` is initialized to store the result. Each entry will be either `0` or `1`, indicating whether the number formed by the substring up to that index is divisible by `m`.
-- `num`: A variable to store the current number (in modular form) formed by the digits up to the current index. We initialize it to `0`.
-
-#### 2. **Iterating through the String**:
-```cpp
-for (int i = 0; i < n; i++) {
-    num = num * 10 + (word[i] - '0');
-    num %= m;
-    if (num % m == 0) ans[i] = 1;
-    else ans[i] = 0;
+    return ans;
 }
 ```
-- We loop through each digit of the string `word` from index `0` to `n-1`.
-- For each digit at index `i`, we update the `num` variable:
-  - We multiply the current value of `num` by `10` to shift it left by one digit.
-  - We add the integer value of the current digit `(word[i] - '0')`.
-  - We take the result modulo `m` to keep the value of `num` within the bounds of the modulus and avoid handling large numbers.
-  
-- After updating `num`, we check if `num % m == 0`. If this condition is true, it means that the number formed by the substring `word[0..i]` is divisible by `m`, and we set `ans[i] = 1`. Otherwise, we set `ans[i] = 0`.
 
-#### 3. **Return the Result**:
-```cpp
-return ans;
-```
-- After completing the loop, we return the `ans` vector, which contains the divisibility information for each index.
+This function computes an array where each index corresponds to whether the number formed by the prefix of the input string is divisible by a given integer `m`. It iterates through each character of the string and performs modular arithmetic to check divisibility.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> divisibilityArray(string word, int m) {
+	```
+	Declares the function `divisibilityArray` with a string input `word` and integer `m` as parameters. Returns a vector of integers.
 
-#### Time Complexity:
-- **Iteration through the string**: The loop iterates over each character of the string `word`. The time complexity of this operation is O(n), where `n` is the length of the string.
-- **Modular updates**: Each update involves a constant number of operations: multiplication, addition, and modulo. All of these operations take constant time O(1).
-- Overall, the time complexity is **O(n)**, where `n` is the size of the string `word`.
+2. **Initialize Length**
+	```cpp
+	    int n = word.size();
+	```
+	Calculates the size of the input string `word` and stores it in variable `n`.
 
-#### Space Complexity:
-- **Auxiliary space**: The algorithm uses a vector `ans` to store the result. The space complexity of the solution is O(n), where `n` is the size of the string `word`.
-- The space used for the variable `num` is constant O(1), as it only stores the current number modulo `m`.
-- Overall, the space complexity is **O(n)**.
+3. **Initialize Result Array**
+	```cpp
+	    vector<int> ans(n, 0);
+	```
+	Creates a vector `ans` of size `n`, initialized with zeros, to store the divisibility results.
 
-### Conclusion
+4. **Initialize Variable**
+	```cpp
+	    long num = 0;
+	```
+	Initializes a variable `num` to 0, which will be used to compute the cumulative number modulo `m`.
 
-This solution efficiently determines the divisibility of the number formed by each substring of the string `word`. By leveraging modular arithmetic, we avoid the need to handle large numbers directly and keep the calculations manageable. The time complexity of O(n) ensures that the solution can handle large inputs efficiently. The space complexity is also optimal at O(n), as we only need an array to store the results and a few variables for the intermediate calculations. This approach is both time-efficient and space-efficient, making it suitable for large inputs.
+5. **Iterate String**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through each character of the string `word`.
+
+6. **Update Cumulative Value**
+	```cpp
+	        num = num * 10 + (word[i] - '0');
+	```
+	Updates the cumulative number `num` by adding the current character's numerical value.
+
+7. **Apply Modulo Operation**
+	```cpp
+	        num %= m;
+	```
+	Applies the modulo operation to `num` to ensure it remains within the range of `m`.
+
+8. **Check Divisibility**
+	```cpp
+	        if(num % m == 0) ans[i] = 1;
+	```
+	Checks if `num` is divisible by `m`. If true, sets the corresponding index in `ans` to 1.
+
+9. **Set Non Divisible**
+	```cpp
+	        else ans[i] = 0;
+	```
+	If `num` is not divisible by `m`, sets the corresponding index in `ans` to 0.
+
+10. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans` containing the divisibility results.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) as we process each character of the word exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the array storing the divisibility results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-divisibility-array-of-a-string/description/)
 

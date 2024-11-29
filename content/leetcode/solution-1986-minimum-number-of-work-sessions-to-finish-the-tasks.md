@@ -14,168 +14,266 @@ img_src = ""
 youtube = "8TU3WceDlzI"
 youtube_upload_date="2021-09-03"
 youtube_thumbnail="https://i.ytimg.com/vi/8TU3WceDlzI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are assigned several tasks, each with a specified time required to complete. A work session allows you to work continuously for up to sessionTime consecutive hours before taking a break. Your goal is to determine the minimum number of work sessions required to complete all tasks under the following conditions: 
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> task;
-    // map<int, map<int, int>> memo; map is costly
-    int memo[1<<15][16];
-    int minSessions(vector<int>& tasks, int sessionTime) {
-        this->task = tasks;
-        map<int, int> mp;
-        int mask = 0;
-        int tgt = ~(~0u << task.size());
-        memset(memo, -1, sizeof(memo));
-        // for(int i = 0; i < task.size(); i++)
-        //     tgt |= 1 << i;
-        return bt(tgt, 0, sessionTime, mask);
-        
-    }
+- If a task is started in a session, it must be completed within that same session.
+- You may complete the tasks in any order.
+- You can begin a new task immediately after finishing the previous one.
+
+Return the minimum number of work sessions needed to complete all tasks.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers 'tasks' where each element represents the time required to complete a task and an integer 'sessionTime' which defines the maximum allowed duration for each work session.
+- **Example:** `tasks = [3, 1, 3, 2], sessionTime = 7`
+- **Constraints:**
+	- 1 <= n <= 14
+	- 1 <= tasks[i] <= 10
+	- max(tasks[i]) <= sessionTime <= 15
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of work sessions required to complete all tasks.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output should be an integer representing the minimum number of work sessions.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of work sessions required to finish all tasks while adhering to the constraints of session time.
+
+- Use a backtracking approach to explore different task orderings and configurations for work sessions.
+- For each combination of tasks, track the time spent in the current work session and check if the session time limit is exceeded.
+- Memoize results to avoid redundant calculations and improve efficiency.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number of tasks is small enough (up to 14 tasks) that backtracking and memoization will be efficient.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: tasks = [3, 1, 3, 2], sessionTime = 7`  \
+  **Explanation:** By sorting and grouping tasks, you can complete the tasks in two work sessions. The first session can handle tasks 3, 2, and 1 (3 + 2 + 1 = 6 hours). The second session handles the remaining task of 3 hours.
+
+- **Input:** `Input: tasks = [4, 2, 5], sessionTime = 6`  \
+  **Explanation:** You can complete all tasks in one session, as the sum of 4 + 2 = 6 hours is exactly equal to the session time.
+
+{{< dots >}}
+## Approach 🚀
+We will solve this problem using backtracking, where we explore different ways to assign tasks to work sessions and use memoization to store the results of subproblems for efficiency.
+
+### Initial Thoughts 💭
+- The problem has a small number of tasks (up to 14), making backtracking feasible.
+- Each session can handle a set of tasks as long as their total time does not exceed sessionTime.
+- Using a recursive approach with memoization can reduce the number of redundant calculations, making the solution efficient.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one task, so no need to handle an empty input array.
+- For larger inputs (up to 14 tasks), the algorithm should be efficient enough due to the constraints.
+- When all tasks have the same time, it should be easy to group tasks together into fewer sessions.
+- The number of tasks is small, so the solution needs to handle up to 14 tasks with backtracking.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> task;
+// map<int, map<int, int>> memo; map is costly
+int memo[1<<15][16];
+int minSessions(vector<int>& tasks, int sessionTime) {
+    this->task = tasks;
+    map<int, int> mp;
+    int mask = 0;
+    int tgt = ~(~0u << task.size());
+    memset(memo, -1, sizeof(memo));
+    // for(int i = 0; i < task.size(); i++)
+    //     tgt |= 1 << i;
+    return bt(tgt, 0, sessionTime, mask);
     
-    int bt(int tgt, int net, int st, int mask) {
-        if(tgt == mask) {
-            return 1;
-        }
-        if(memo[mask][net] != -1) return memo[mask][net];
-        
-        int ans = task.size();
-        for(int i = 0; i < task.size(); i++) {
-            if((mask >> i) & 1) continue;
-            mask |= (1 << i);
-            if(net + task[i] > st)
-                ans = min(ans, 1 + bt(tgt, task[i], st, mask));
-            else
-                ans = min(ans, bt(tgt, net + task[i], st, mask));
-            mask ^= (1 << i);
-        }
-        return memo[mask][net] = ans;
-    }
-    
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to minimize the number of sessions needed to complete a list of tasks, where each session has a specific time limit. Each task takes a certain amount of time to complete, and multiple tasks can be combined within a single session as long as their total time does not exceed the session limit. The goal is to determine the minimum number of sessions required to finish all tasks.
-
-### Approach
-
-To solve this problem, we can use a **backtracking approach** combined with **bitmasking** to efficiently explore all possible combinations of tasks that can fit within the given session time. The key steps of the approach are as follows:
-
-1. **Bitmask Representation**: We represent the state of tasks using a bitmask where each bit indicates whether a task has been completed (1) or not (0). This allows us to track the completion of tasks easily.
-
-2. **Memoization**: To avoid recalculating results for the same state, we use memoization. A 2D array `memo` is used where `memo[mask][net]` stores the minimum number of sessions needed to complete tasks represented by `mask`, with the current session having a total time of `net`.
-
-3. **Backtracking Function**: The backtracking function `bt` tries to assign tasks to sessions:
-   - If all tasks are completed (indicated by the mask), it returns 1 (indicating one more session is needed).
-   - If the current session exceeds the time limit, it starts a new session and continues the process.
-   - It iteratively tries adding each task to the current session and explores the next state recursively.
-
-4. **Base Cases**: 
-   - When all tasks are assigned (the mask equals the target mask), we return the number of sessions.
-   - Memoization checks help avoid redundant calculations.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<int> task;
-    int memo[1<<15][16]; // Memoization array
-```
-We define a class `Solution`, with a vector to store tasks and a memoization array to store the results of subproblems.
-
-```cpp
-    int minSessions(vector<int>& tasks, int sessionTime) {
-        this->task = tasks; // Store tasks in the class member variable
-        map<int, int> mp; // This map is unnecessary
-        int mask = 0; // Initialize the mask
-        int tgt = ~(~0u << task.size()); // Target mask to indicate all tasks completed
-        memset(memo, -1, sizeof(memo)); // Initialize memoization array
-```
-In the `minSessions` method, we store the input tasks and initialize variables. The target mask is calculated to represent all tasks being completed.
-
-```cpp
-        return bt(tgt, 0, sessionTime, mask); // Call the backtracking function
-    }
-```
-The `bt` function is called with initial parameters, including the target mask.
-
-```cpp
-    int bt(int tgt, int net, int st, int mask) {
-        if(tgt == mask) {
-            return 1; // All tasks are completed
-        }
-        if(memo[mask][net] != -1) return memo[mask][net]; // Return memoized result if available
-```
-The `bt` function checks if all tasks are completed and returns 1 if true. It also checks if the current state has already been computed.
-
-```cpp
-        int ans = task.size(); // Initialize the answer with the maximum possible sessions
-        for(int i = 0; i < task.size(); i++) {
-            if((mask >> i) & 1) continue; // Skip if the task is already included in the mask
-            mask |= (1 << i); // Include the current task in the mask
-```
-We initialize `ans` to the number of tasks, as this is the upper limit for the number of sessions. The loop iterates through each task.
-
-```cpp
-            if(net + task[i] > st)
-                ans = min(ans, 1 + bt(tgt, task[i], st, mask)); // Start a new session if the limit is exceeded
-            else
-                ans = min(ans, bt(tgt, net + task[i], st, mask)); // Continue in the same session
-            mask ^= (1 << i); // Backtrack and remove the task from the mask
-        }
-        return memo[mask][net] = ans; // Memoize the result
-    }
-```
-The code checks if adding the current task exceeds the session limit. If it does, it starts a new session; otherwise, it continues in the current session. After exploring both options, it backtracks by removing the task from the mask and updates the memoization array with the result.
-
-### Complexity
-
-- **Time Complexity**: The worst-case scenario involves exploring all possible combinations of tasks, leading to a time complexity of \(O(2^n \cdot n)\), where \(n\) is the number of tasks. The bitmask allows us to efficiently track the state of tasks.
-
-- **Space Complexity**: The space complexity is \(O(2^n \cdot k)\) due to the memoization array, where \(k\) is the maximum number of sessions. The additional space used by the recursion stack may also contribute to space complexity.
-
-### Conclusion
-
-This solution efficiently computes the minimum number of sessions needed to complete all tasks by employing a combination of backtracking and memoization with bitmasking. This approach optimizes the exploration of task combinations while ensuring that previously computed results are reused to reduce computation time.
-
-### Example Usage
-
-Here's an example of how you can utilize the `minSessions` method:
-
-```cpp
-#include <vector>
-#include <iostream>
-using namespace std;
-
-int main() {
-    Solution sol;
-    vector<int> tasks = {1, 2, 3, 4, 5};
-    int sessionTime = 5;
-    int result = sol.minSessions(tasks, sessionTime);
-    cout << "Minimum sessions needed: " << result << endl; // Example output
-    return 0;
 }
+
+int bt(int tgt, int net, int st, int mask) {
+    if(tgt == mask) {
+        return 1;
+    }
+    if(memo[mask][net] != -1) return memo[mask][net];
+    
+    int ans = task.size();
+    for(int i = 0; i < task.size(); i++) {
+        if((mask >> i) & 1) continue;
+        mask |= (1 << i);
+        if(net + task[i] > st)
+            ans = min(ans, 1 + bt(tgt, task[i], st, mask));
+        else
+            ans = min(ans, bt(tgt, net + task[i], st, mask));
+        mask ^= (1 << i);
+    }
+    return memo[mask][net] = ans;
+}
+
 ```
 
-### Potential Improvements
+This solution minimizes the number of sessions needed to complete all tasks where each task takes a certain amount of time, and each session can only have a total time up to `sessionTime`. The solution uses bitmasking and memoization for optimization.
 
-1. **Optimization of Memoization**: The current memoization could be optimized further by using only necessary states to reduce space complexity.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<int> task;
+	```
+	Declares a vector `task` to store the time for each task.
 
-2. **Task Sorting**: Sorting the tasks based on their duration could potentially speed up the backtracking process by prioritizing larger tasks first.
+2. **Memoization Array Initialization**
+	```cpp
+	int memo[1<<15][16];
+	```
+	Declares a 2D array `memo` to store the results of previously computed states, optimizing the recursive calls.
 
-3. **Iterative Approach**: While the backtracking approach is elegant, an iterative dynamic programming solution could be explored for potentially better performance, especially for larger datasets.
+3. **Function Definition**
+	```cpp
+	int minSessions(vector<int>& tasks, int sessionTime) {
+	```
+	Defines the function `minSessions` which calculates the minimum number of sessions required to complete the tasks.
 
-This solution demonstrates a thoughtful application of bitmasking and dynamic programming techniques to solve a challenging combinatorial optimization problem.
+4. **Assign Task Array**
+	```cpp
+	    this->task = tasks;
+	```
+	Assigns the input `tasks` vector to the member variable `task` for further use in the function.
+
+5. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declares a map `mp` to store intermediate states, though it's not used in the solution.
+
+6. **Mask Initialization**
+	```cpp
+	    int mask = 0;
+	```
+	Initializes the bitmask `mask` to represent the state of tasks that have been assigned to sessions.
+
+7. **Target Mask Calculation**
+	```cpp
+	    int tgt = ~(~0u << task.size());
+	```
+	Calculates the target bitmask `tgt` that represents all tasks having been completed.
+
+8. **Memoization Setup**
+	```cpp
+	    memset(memo, -1, sizeof(memo));
+	```
+	Initializes the memoization array `memo` to `-1`, indicating that no state has been computed yet.
+
+9. **Recursive Call**
+	```cpp
+	    return bt(tgt, 0, sessionTime, mask);
+	```
+	Returns the result of the recursive function `bt`, which solves the problem using backtracking.
+
+10. **Recursive Function Definition**
+	```cpp
+	int bt(int tgt, int net, int st, int mask) {
+	```
+	Defines the recursive function `bt` that performs backtracking to calculate the minimum number of sessions.
+
+11. **Base Case Check**
+	```cpp
+	    if(tgt == mask) {
+	```
+	Checks if all tasks have been assigned to sessions by comparing the `tgt` and `mask` bitmasks.
+
+12. **Base Case Return**
+	```cpp
+	        return 1;
+	```
+	Returns 1 if all tasks are completed, indicating that one session is sufficient.
+
+13. **Memoization Check**
+	```cpp
+	    if(memo[mask][net] != -1) return memo[mask][net];
+	```
+	Checks if the result for the current state has already been computed and stored in `memo`.
+
+14. **Variable Initialization**
+	```cpp
+	    int ans = task.size();
+	```
+	Initializes the variable `ans` to the maximum possible number of sessions (one session per task).
+
+15. **Loop Through Tasks**
+	```cpp
+	    for(int i = 0; i < task.size(); i++) {
+	```
+	Iterates over each task in the `task` vector.
+
+16. **Skip Already Assigned Task**
+	```cpp
+	        if((mask >> i) & 1) continue;
+	```
+	Checks if the task `i` has already been assigned by inspecting the corresponding bit in `mask`.
+
+17. **Assign Task to Session**
+	```cpp
+	        mask |= (1 << i);
+	```
+	Assigns the task `i` to a session by setting the corresponding bit in `mask`.
+
+18. **Check Session Time**
+	```cpp
+	        if(net + task[i] > st)
+	```
+	Checks if the task `i` can fit into the current session without exceeding `sessionTime`.
+
+19. **Recursive Call with New Session**
+	```cpp
+	            ans = min(ans, 1 + bt(tgt, task[i], st, mask));
+	```
+	If the task does not fit in the current session, a new session is started and the recursive function is called.
+
+20. **Recursive Call with Continued Session**
+	```cpp
+	        else
+	```
+	If the task fits in the current session, continue with the same session.
+
+21. **Recursive Call with Updated State**
+	```cpp
+	            ans = min(ans, bt(tgt, net + task[i], st, mask));
+	```
+	Continues with the current session and the updated total time `net` after adding task `i`.
+
+22. **Backtrack Task Assignment**
+	```cpp
+	        mask ^= (1 << i);
+	```
+	Backtracks by removing the task `i` from the session (resetting the corresponding bit in `mask`).
+
+23. **Memoization Save**
+	```cpp
+	    return memo[mask][net] = ans;
+	```
+	Stores the result of the current state in `memo` to avoid redundant calculations.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n!)
+- **Average Case:** O(n!)
+- **Worst Case:** O(2^n)
+
+The recursive approach explores all possible task groupings. However, memoization reduces redundant calculations, leading to faster results.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(2^n)
+
+The space complexity is influenced by the memoization storage and the depth of the recursion stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/description/)
 

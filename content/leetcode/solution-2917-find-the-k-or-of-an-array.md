@@ -14,146 +14,175 @@ img_src = ""
 youtube = "jNPKX6McyCg"
 youtube_upload_date="2023-10-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/jNPKX6McyCg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums` and an integer `k`. We define the **K-or** operation as follows: for each bit position, the bit in the result will be set to 1 if at least `k` numbers in the array `nums` have a 1 in that position. Return the **K-or** of the array `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and an integer `k`.
+- **Example:** `nums = [6, 15, 9, 8, 7, 14], k = 4`
+- **Constraints:**
+	- 1 <= nums.length <= 50
+	- 0 <= nums[i] < 231
+	- 1 <= k <= nums.length
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the **K-or** of the array `nums`.
+- **Example:** `Output: 14`
+- **Constraints:**
+	- The result must be an integer.
 
-class Solution {
-public:
-    int findKOr(vector<int>& nums, int k) {
-        int ans = 0; // Initialize the answer to 0.
-        
-        for (int i = 0; i < 31; i++) {
-            // Bit position represented by 2^i.
-            int rep = (1 << i); 
-            int cnt = 0; // Initialize a counter to count set bits at this position.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to find the bitwise OR of all bits that appear in at least `k` numbers from `nums`.
 
-            // Iterate through the input vector 'nums'.
-            for (auto ele : nums) {
-                if (rep & ele) {
-                    // If the i-th bit is set in 'ele', increment the count.
-                    cnt++;
-                }
-            }
+- Iterate through each bit position from 0 to 30 (since nums[i] < 2^31).
+- For each bit position, count how many numbers have that bit set to 1.
+- If the count is greater than or equal to `k`, set that bit in the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least 1 element.
+- k is always less than or equal to the number of elements in `nums`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [6, 15, 9, 8, 7, 14], k = 4`  \
+  **Explanation:** For each bit position, we check how many numbers have that bit set to 1. In this example, the result is 14 because the 2nd, 3rd, and 4th bits appear in at least 4 numbers.
 
-            // If the count of set bits at this position is greater than or equal to 'k', set the corresponding bit in the answer.
-            if (cnt >= k) {
-                ans = ans | rep;
+{{< dots >}}
+## Approach 🚀
+We use bitwise operations to determine which bits appear in at least `k` numbers in the array.
+
+### Initial Thoughts 💭
+- We are dealing with bitwise operations, and the solution involves counting the number of 1s in each bit position.
+- This problem can be solved efficiently by iterating through each bit position and counting how many numbers have a 1 at that position.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least one element.
+- If `nums` contains the maximum number of elements (50), the solution will still perform efficiently.
+- When `k == 1`, the result will be the bitwise OR of all elements.
+- We assume that the constraints are within the range of the problem.
+{{< dots >}}
+## Code 💻
+```cpp
+int findKOr(vector<int>& nums, int k) {
+    int ans = 0; // Initialize the answer to 0.
+    
+    for (int i = 0; i < 31; i++) {
+        // Bit position represented by 2^i.
+        int rep = (1 << i); 
+        int cnt = 0; // Initialize a counter to count set bits at this position.
+
+        // Iterate through the input vector 'nums'.
+        for (auto ele : nums) {
+            if (rep & ele) {
+                // If the i-th bit is set in 'ele', increment the count.
+                cnt++;
             }
         }
 
-        return ans; // Return the final answer, which is the result of the OR operation on selected bits.
+        // If the count of set bits at this position is greater than or equal to 'k', set the corresponding bit in the answer.
+        if (cnt >= k) {
+            ans = ans | rep;
+        }
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-Given an array of integers `nums`, and an integer `k`, we are to find the bitwise OR of all the numbers in the array that have a bit set at a particular position (indexed from `0` to `30` assuming a 32-bit integer). For each bit position, if the count of numbers with that bit set is greater than or equal to `k`, we will set that bit in the result. The goal is to return the result after performing this bitwise operation for all positions.
-
-### Approach
-
-The core approach here revolves around bitwise operations, specifically bitwise OR (`|`), which combines bits in a manner where the bit is set if either of the corresponding bits in the operands is set. We can break down the problem into smaller steps:
-
-1. **Iterate Over Bit Positions**:
-   - We need to check each bit from position `0` to `30` (assuming we are dealing with 32-bit integers, which is typically sufficient for most practical applications).
-   
-2. **Count the Set Bits**:
-   - For each bit position `i`, we count how many numbers in the array `nums` have that bit set. This is done by checking if the number ANDed with `2^i` (which isolates the `i`-th bit) is non-zero.
-
-3. **Decision on Setting the Bit in the Result**:
-   - If the count of set bits at position `i` is greater than or equal to `k`, we set that bit in the result. We achieve this by using the bitwise OR (`|`) operation on the result.
-
-4. **Final Result**:
-   - After iterating through all the bit positions, the final result will contain the OR-ed values of the selected bits.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Initialize Variables
-
-The code starts by initializing `ans` to `0`. This variable will hold the final result after performing the OR operation on all selected bits.
-
-```cpp
-int ans = 0; // Initialize the answer to 0.
-```
-
-Here, `ans` is the cumulative result of the OR operation across all bits that satisfy the given condition.
-
-#### 2. Loop Over All Bit Positions
-
-The next step involves iterating through each bit position from `0` to `30`. This is achieved by using a loop that runs for 31 iterations.
-
-```cpp
-for (int i = 0; i < 31; i++) {
-```
-
-In each iteration, the `i`-th bit position of each number in the array will be checked.
-
-#### 3. Set the Current Bit for Comparison
-
-Within the loop, the code calculates the `rep` variable, which represents the value of `2^i`. This is the bit mask that isolates the `i`-th bit of any number. The bitwise shift operator (`<<`) is used to compute `2^i`.
-
-```cpp
-int rep = (1 << i); // Bit position represented by 2^i.
-```
-
-#### 4. Count Set Bits at the Current Bit Position
-
-Next, we initialize a counter `cnt` to `0`. This counter will be used to count how many numbers in the array have the `i`-th bit set. The code iterates over each number in the array, checking if the `i`-th bit is set by performing a bitwise AND operation with `rep`.
-
-```cpp
-int cnt = 0; // Initialize a counter to count set bits at this position.
-
-for (auto ele : nums) {
-    if (rep & ele) {
-        // If the i-th bit is set in 'ele', increment the count.
-        cnt++;
-    }
+    return ans; // Return the final answer, which is the result of the OR operation on selected bits.
 }
 ```
 
-In the inner loop, for each number `ele`, the condition `rep & ele` checks whether the `i`-th bit of `ele` is set. If it is, the counter `cnt` is incremented.
+This function performs a bitwise OR operation on the selected bits after counting the set bits for each bit position and checking if the count is greater than or equal to 'k'.
 
-#### 5. Set the Bit in the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findKOr(vector<int>& nums, int k) {
+	```
+	Defines the function 'findKOr' that takes a vector of integers and an integer k as input.
 
-Once the count `cnt` for the current bit position is determined, the next step is to check if `cnt >= k`. If this condition is true, it means that enough numbers have the `i`-th bit set, and we should set this bit in the result `ans`. The bitwise OR operation `ans = ans | rep` is used to set the corresponding bit in the answer.
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0; // Initialize the answer to 0.
+	```
+	Initializes the answer variable 'ans' to 0.
 
-```cpp
-if (cnt >= k) {
-    ans = ans | rep;
-}
-```
+3. **Loop Setup**
+	```cpp
+	    for (int i = 0; i < 31; i++) {
+	```
+	Begins a loop to iterate through 31 possible bit positions.
 
-This ensures that if at least `k` numbers have the `i`-th bit set, the `i`-th bit in the result will be set.
+4. **Bitwise Shift**
+	```cpp
+	        int rep = (1 << i); 
+	```
+	Performs a left bitwise shift to calculate the value of 2^i and assigns it to 'rep'.
 
-#### 6. Return the Final Answer
+5. **Variable Initialization**
+	```cpp
+	        int cnt = 0; // Initialize a counter to count set bits at this position.
+	```
+	Initializes a counter 'cnt' to track the number of set bits at the current position.
 
-After completing all 31 iterations (for all possible bit positions), the final result stored in `ans` is returned.
+6. **Loop through Input**
+	```cpp
+	        for (auto ele : nums) {
+	```
+	Begins a loop to iterate through each element in the 'nums' vector.
 
-```cpp
-return ans; // Return the final answer, which is the result of the OR operation on selected bits.
-```
+7. **Conditional Check**
+	```cpp
+	            if (rep & ele) {
+	```
+	Checks if the i-th bit of the element 'ele' is set using a bitwise AND operation.
 
-### Complexity Analysis
+8. **Increment Counter**
+	```cpp
+	                cnt++;
+	```
+	Increments the counter 'cnt' if the i-th bit of 'ele' is set.
 
-1. **Time Complexity**:
-   - The outer loop runs for `31` iterations (since we are considering the bit positions from `0` to `30`).
-   - The inner loop iterates over all `n` elements in the `nums` array. Thus, the time complexity is `O(31 * n)` or simplified as `O(n)`, where `n` is the number of elements in the array.
-   - Since `31` is a constant, the time complexity can be considered linear, `O(n)`.
+9. **Conditional Check**
+	```cpp
+	        if (cnt >= k) {
+	```
+	Checks if the count of set bits at the current bit position is greater than or equal to 'k'.
 
-2. **Space Complexity**:
-   - The space complexity is `O(1)`, as the only extra space used is for a few integer variables (`ans`, `rep`, `cnt`, etc.), which do not depend on the input size `n`.
+10. **Bitwise OR**
+	```cpp
+	            ans = ans | rep;
+	```
+	Performs a bitwise OR operation to set the corresponding bit in 'ans'.
 
-### Conclusion
+11. **Return Statement**
+	```cpp
+	    return ans; // Return the final answer, which is the result of the OR operation on selected bits.
+	```
+	Returns the final result of the OR operation on selected bits.
 
-The solution is an efficient approach to solving the problem using bitwise operations. By iterating over each bit position and counting how many numbers in the array have that bit set, we can dynamically decide which bits to set in the result. This method leverages the power of bit manipulation, which is both time-efficient and space-efficient for large input arrays.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * 31), where n is the number of elements in `nums`.
+- **Average Case:** O(n * 31)
+- **Worst Case:** O(n * 31)
 
-The approach is particularly useful in scenarios where we need to evaluate conditions based on specific bit positions across multiple numbers, making it a common technique in problems related to bitwise operations. The time complexity of `O(n)` ensures that the solution scales well even for large input sizes, making it a good choice for competitive programming or real-world applications involving bitwise operations.
+We iterate over each bit position (31 positions) for each element in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1), since the space used is constant.
+
+We only use a few variables to track the result and bit counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-k-or-of-an-array/description/)
 

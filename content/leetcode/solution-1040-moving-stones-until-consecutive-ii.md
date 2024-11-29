@@ -14,141 +14,169 @@ img_src = ""
 youtube = "4Xhq2NDbA-I"
 youtube_upload_date="2020-01-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/4Xhq2NDbA-I/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of stones placed at different positions along the X-axis. A stone is considered an endpoint if it has the smallest or largest position. In one move, you can pick an endpoint stone and move it to any unoccupied position. The game ends when no more moves are possible, which occurs when the stones are in three consecutive positions. The goal is to find the minimum and maximum number of moves that can be made to achieve this configuration.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array 'stones' where each element represents the position of a stone on the X-axis. The values are unique.
+- **Example:** `Input: stones = [8, 3, 15]`
+- **Constraints:**
+	- 3 <= stones.length <= 10^4
+	- 1 <= stones[i] <= 10^9
+	- All stone positions are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> numMovesStonesII(vector<int>& pos) {
-        sort(pos.begin(), pos.end());
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array with two integers. The first integer is the minimum number of moves to make the stones consecutive, and the second integer is the maximum number of moves.
+- **Example:** `Output: [2, 3]`
+- **Constraints:**
+	- The output array should contain exactly two integers, representing the minimum and maximum possible moves.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the minimum and maximum number of moves needed to make the stones consecutive.
+
+- 1. Sort the stone positions in ascending order.
+- 2. Find the largest gap between consecutive stones, which helps in determining the maximum number of moves.
+- 3. Calculate the number of stones that need to be moved by checking the gaps in the sorted array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The stones are initially placed in unique positions along the X-axis.
+- The goal is to achieve three consecutive positions for all the stones.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: stones = [8, 3, 15]`  \
+  **Explanation:** We can move stone at position 3 to 6, which results in a configuration of [6, 8, 15], completing the game in 2 moves. The maximum moves would involve moving stones in a way that stretches the positions out before finally bringing them together.
+
+- **Input:** `Input: stones = [12, 10, 6, 4, 15]`  \
+  **Explanation:** We can move stone at position 4 to 7, and stone at position 15 to 13, for a total of 3 moves to make the stones consecutive. For the maximum number of moves, we would take a more staggered approach before finally making the stones consecutive.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves calculating both the minimum and maximum number of moves needed to make the stones consecutive. The approach uses sorting and gap calculation to determine how many moves are needed for each stone.
+
+### Initial Thoughts 💭
+- The problem requires determining the smallest and largest gaps between stones after sorting them, which helps in deciding the optimal moves.
+- We can use sorting to simplify the problem. Once sorted, calculating gaps between consecutive stones will reveal how many moves are required to bring all stones together.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least three stones, so no need to handle empty inputs.
+- The algorithm should handle large inputs efficiently, with up to 10^4 stones and positions as large as 10^9.
+- Ensure that the solution handles cases where the positions are already close to each other, requiring minimal or no moves.
+- Make sure to avoid illegal moves, such as moving a stone to a position already occupied by another stone.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> numMovesStonesII(vector<int>& pos) {
+    sort(pos.begin(), pos.end());
+    
+    int low = INT_MAX;
+    int j = 0, n = pos.size();
+    for(int i = 0; i < n; i++) {
+        while(pos[i] - pos[j] + 1 > n) j++;
         
-        int low = INT_MAX;
-        int j = 0, n = pos.size();
-        for(int i = 0; i < n; i++) {
-            while(pos[i] - pos[j] + 1 > n) j++;
-            
-            int cnt = i - j + 1;
-            
-            if(cnt == n - 1 && pos[i] - pos[j] + 1 == n - 1)
-                low = min(low, 2);
-            else low = min(low, n - cnt);
-        }
-        return vector<int>{low, max(pos[n - 1] - pos[1] + 1 - (n - 1), pos[n - 2] - pos[0] + 1 - (n - 1))};
+        int cnt = i - j + 1;
+        
+        if(cnt == n - 1 && pos[i] - pos[j] + 1 == n - 1)
+            low = min(low, 2);
+        else low = min(low, n - cnt);
     }
-};
-{{< /highlight >}}
----
+    return vector<int>{low, max(pos[n - 1] - pos[1] + 1 - (n - 1), pos[n - 2] - pos[0] + 1 - (n - 1))};
+}
+```
 
+This code solves the problem of finding the minimum and maximum number of moves required to align stones in a specific order within a given range. The input 'pos' is a vector of stone positions, and the code uses sorting and a sliding window approach to calculate the results.
 
-### Problem Statement
-The problem involves moving stones positioned at distinct integers along a line. Each stone can be moved to an adjacent position, and we aim to determine two values:
-1. The minimum number of moves required to arrange the stones in a continuous segment.
-2. The maximum number of moves possible when rearranging the stones under specific constraints.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> numMovesStonesII(vector<int>& pos) {
+	```
+	Define the function 'numMovesStonesII' that calculates the minimum and maximum number of moves required to move stones to a valid configuration.
 
-### Approach
-To solve the problem, we can break it down into several key steps:
+2. **Sorting**
+	```cpp
+	    sort(pos.begin(), pos.end());
+	```
+	Sort the positions of the stones to make sure they are in increasing order, which is necessary for the sliding window approach.
 
-1. **Sorting the Positions**: The first step is to sort the array of stone positions. This will help us easily calculate the number of stones in any segment of the line.
+3. **Initialization**
+	```cpp
+	    int low = INT_MAX;
+	```
+	Initialize 'low' to store the minimum number of moves, starting with the highest possible value.
 
-2. **Finding the Minimum Moves**:
-   - Use a sliding window approach to calculate how many stones can fit in a continuous segment of length equal to the total number of stones.
-   - Maintain a variable to track the minimum number of moves needed to achieve the goal. 
-   - Check for special conditions where moving only one stone might yield a quicker solution.
+4. **Variable Initialization**
+	```cpp
+	    int j = 0, n = pos.size();
+	```
+	Initialize 'j' (the start of the sliding window) and 'n' (the total number of stones).
 
-3. **Calculating Maximum Moves**: The maximum number of moves is determined by the gaps between the outermost stones. Specifically, evaluate how many positions can be left empty on the ends after filling in the middle.
+5. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop to iterate over each stone position, checking possible ranges of positions.
 
-### Code Breakdown (Step by Step)
+6. **Sliding Window**
+	```cpp
+	        while(pos[i] - pos[j] + 1 > n) j++;
+	```
+	Adjust the sliding window by moving the start index 'j' to ensure the number of stones within the window does not exceed the total number of stones.
 
-1. **Class Definition**: The solution is encapsulated within a class named `Solution`.
+7. **Count Stones in Window**
+	```cpp
+	        int cnt = i - j + 1;
+	```
+	Calculate the number of stones within the current sliding window.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+8. **Condition Check for Minimum Moves**
+	```cpp
+	        if(cnt == n - 1 && pos[i] - pos[j] + 1 == n - 1)
+	```
+	Check if the number of stones within the window is one less than the total number of stones and if the distance between the first and last stone in the window is also 'n - 1'.
 
-2. **Function Signature**: 
-   - The `numMovesStonesII` function takes a vector of integers `pos`, which represents the positions of the stones, and returns a vector of two integers representing the minimum and maximum moves.
+9. **Update Minimum Moves**
+	```cpp
+	            low = min(low, 2);
+	```
+	If the condition is met, set the minimum number of moves to 2, since only two moves are required to align the stones.
 
-   ```cpp
-   vector<int> numMovesStonesII(vector<int>& pos) {
-   ```
+10. **Update Minimum Moves**
+	```cpp
+	        else low = min(low, n - cnt);
+	```
+	If the condition is not met, set the minimum moves to 'n - cnt', where 'cnt' is the number of stones in the window.
 
-3. **Sorting the Positions**:
-   - The positions of the stones are sorted in ascending order to facilitate easier calculations for continuous segments.
+11. **Return Statement**
+	```cpp
+	    return vector<int>{low, max(pos[n - 1] - pos[1] + 1 - (n - 1), pos[n - 2] - pos[0] + 1 - (n - 1))};
+	```
+	Return a vector containing the minimum and maximum moves, where the maximum is calculated based on the largest gap between consecutive stones.
 
-   ```cpp
-   sort(pos.begin(), pos.end());
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-4. **Initializing Variables**:
-   - We initialize `low` to `INT_MAX` to keep track of the minimum moves.
-   - Two pointers `j` and `n` are set, where `j` is for the sliding window, and `n` is the size of the positions vector.
+The time complexity is dominated by the sorting step, which is O(n log n), where n is the number of stones.
 
-   ```cpp
-   int low = INT_MAX;
-   int j = 0, n = pos.size();
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Iterating Through Stone Positions**:
-   - We use a loop to iterate through each stone position with index `i`.
+The space complexity is O(n) due to the space required to store the stone positions.
 
-   ```cpp
-   for(int i = 0; i < n; i++) {
-   ```
-
-6. **Adjusting the Sliding Window**:
-   - For each position, adjust the sliding window with `j` to ensure the segment of stones can fit within a continuous block of size `n`. This is done by checking if the current stone's position minus the starting stone's position plus one exceeds `n`.
-
-   ```cpp
-   while(pos[i] - pos[j] + 1 > n) j++;
-   ```
-
-7. **Calculating Count of Stones in the Segment**:
-   - The variable `cnt` calculates how many stones fit in the current segment from `j` to `i`.
-
-   ```cpp
-   int cnt = i - j + 1;
-   ```
-
-8. **Determining Minimum Moves**:
-   - If we have `n - 1` stones in the current segment and they exactly fill the space, we set `low` to 2 (special case where one stone can be moved out). 
-   - Otherwise, the minimum moves would be the number of gaps.
-
-   ```cpp
-   if(cnt == n - 1 && pos[i] - pos[j] + 1 == n - 1)
-       low = min(low, 2);
-   else 
-       low = min(low, n - cnt);
-   ```
-
-9. **Calculating Maximum Moves**:
-   - The maximum number of moves is calculated based on the largest gaps between the outermost stones, ensuring we consider the positions of the first two and the last two stones.
-
-   ```cpp
-   return vector<int>{
-       low, 
-       max(pos[n - 1] - pos[1] + 1 - (n - 1), pos[n - 2] - pos[0] + 1 - (n - 1))
-   };
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The overall time complexity of this solution is \(O(n \log n)\), where \(n\) is the number of stones. This complexity arises primarily from the sorting step.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) in terms of extra space since we are not using any additional data structures that grow with input size (excluding the input and output).
-
-### Conclusion
-The provided code effectively calculates the minimum and maximum number of moves required to align stones positioned along a line using a sorting and sliding window approach. 
-
-By first sorting the positions and then utilizing a two-pointer technique, we can efficiently determine how many moves are necessary to create a continuous segment of stones. The sliding window technique ensures that we only examine feasible segments of positions, thus optimizing our calculations.
-
-This solution is not only efficient but also clearly structured, making it easy to understand and maintain. The use of the minimum and maximum moves calculations provides a comprehensive overview of the possible configurations of the stones, demonstrating the effectiveness of algorithmic problem-solving in combinatorial scenarios.
-
-In summary, the `numMovesStonesII` function presents a robust and efficient method for addressing the challenge of stone positioning, which can be applicable in various scenarios within computational geometry and optimization problems.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/moving-stones-until-consecutive-ii/description/)

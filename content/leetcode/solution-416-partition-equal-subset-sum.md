@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ZFuagJEpeEU"
 youtube_upload_date="2023-07-02"
 youtube_thumbnail="https://i.ytimg.com/vi/ZFuagJEpeEU/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,141 +28,220 @@ youtube_thumbnail="https://i.ytimg.com/vi/ZFuagJEpeEU/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array, determine if it is possible to partition the array into two subsets with equal sum. Return true if such a partition exists, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers 'nums'.
+- **Example:** `For nums = [2, 6, 7, 4], the output is true.`
+- **Constraints:**
+	- 1 <= nums.length <= 200
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> nums;
-    int memo[201][10001];
-    
-    bool dp(int idx, int sum) {
-        
-        if(idx == nums.size()) return sum == 0;
-        
-        if(memo[idx][sum] != -1) return memo[idx][sum];
-        
-        bool res = dp(idx + 1, sum);
-        
-        if(sum >= nums[idx])
-            res |= dp(idx + 1, sum - nums[idx]);
-        
-        return memo[idx][sum] = res;
-        
-    }
-    
-    bool canPartition(vector<int>& nums) {
-        this->nums = nums;
-        int sum = 0;
-        for(int x: nums)
-            sum += x;
-        
-        if(sum & 1) return false;
-        
-        sum = sum / 2;
-        
-        memset(memo, -1, sizeof(memo));
-        
-        return dp(0, sum);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the array can be partitioned into two subsets with equal sum, otherwise return false.
+- **Example:** `For nums = [1, 2, 3, 9], the output is false.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To check if an array can be partitioned into two subsets with equal sum.
 
-The problem asks us to determine if a given array of integers can be partitioned into two subsets such that the sum of the elements in both subsets is the same. This is a classical problem known as the **Partition Problem**. 
+- 1. Calculate the total sum of the array.
+- 2. If the sum is odd, return false (since two equal subsets cannot be formed).
+- 3. If the sum is even, check if there exists a subset whose sum is half of the total sum using dynamic programming.
+- 4. Use a dynamic programming approach to check if it's possible to form a subset with the target sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains only positive integers.
+- The array length is within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [2, 6, 7, 4], the output is true.`  \
+  **Explanation:** The array can be partitioned as [2, 6] and [7, 4], both with a sum of 8, making the partition possible.
 
-Given a list `nums` of integers, we are required to return `true` if it is possible to partition the list into two subsets with equal sum, and `false` otherwise.
+- **Input:** `For nums = [1, 2, 3, 9], the output is false.`  \
+  **Explanation:** The sum of the elements is 15, which is odd, so it's impossible to partition the array into two subsets with equal sum.
 
-For example:
-- **Input:** `nums = [1, 5, 11, 5]`
-- **Output:** `true`
-- **Explanation:** The array can be partitioned into two subsets: `[1, 5, 5]` and `[11]`, both having a sum of `11`.
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we need to first check if the sum of the array is even. If it's even, we will use dynamic programming to determine if a subset with half the sum exists.
 
-- **Input:** `nums = [1, 2, 3, 5]`
-- **Output:** `false`
-- **Explanation:** The array cannot be partitioned into two subsets with equal sum.
-
-### Approach
-
-To solve this problem, we can utilize **dynamic programming (DP)**, which is a typical approach for subset sum problems. The key idea is to reduce the problem to determining if there is a subset of the array that sums up to half of the total sum of the array.
-
-1. **Sum Calculation**:
-   - If the sum of all elements in the array is odd, it's impossible to split the array into two equal subsets, so we can immediately return `false`.
-   - If the sum is even, we aim to find a subset whose sum equals half of the total sum, i.e., `sum / 2`.
-
-2. **Subset Sum Problem**:
-   - This problem can be reduced to a **0/1 knapsack problem**, where we try to determine if we can form a subset with a specific sum (which is `sum / 2`).
-   - We will use dynamic programming to check whether it's possible to achieve this sum.
-
-3. **Memoization**:
-   - To efficiently calculate the solution, we can use a recursive approach with **memoization** to store the results of overlapping subproblems. This avoids recomputing the same results multiple times.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initial Setup
-
+### Initial Thoughts 💭
+- The total sum must be even for the array to be partitioned into two subsets with equal sum.
+- A dynamic programming approach can be used to check if a subset sum of half the total sum is achievable.
+{{< dots >}}
+### Edge Cases 🌐
+- For large inputs, ensure the dynamic programming approach runs efficiently by considering the time and space complexity.
+- If the array has only one element, it cannot be partitioned into two subsets.
+- Handle cases where the sum is odd, or the array has a small number of elements.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<int> nums;
 int memo[201][10001];
-```
-- The array `nums` stores the input numbers.
-- The 2D array `memo` is used to store the results of the subproblems. We initialize `memo` with `-1` to indicate that a result has not been computed for a particular subproblem.
 
-#### Step 2: Recursive Function with Memoization
-
-```cpp
 bool dp(int idx, int sum) {
+    
     if(idx == nums.size()) return sum == 0;
+    
     if(memo[idx][sum] != -1) return memo[idx][sum];
     
     bool res = dp(idx + 1, sum);
-    if(sum >= nums[idx]) res |= dp(idx + 1, sum - nums[idx]);
+    
+    if(sum >= nums[idx])
+        res |= dp(idx + 1, sum - nums[idx]);
     
     return memo[idx][sum] = res;
+    
 }
-```
-- The function `dp(idx, sum)` is a recursive function that checks if a subset with the specified sum can be formed from the first `idx` elements of the array.
-- **Base Case**: If we have processed all elements (`idx == nums.size()`), we return `true` if the `sum` is `0` (meaning we have found a valid subset), and `false` otherwise.
-- **Memoization**: If the result for the subproblem `dp(idx, sum)` has already been computed (i.e., `memo[idx][sum] != -1`), we simply return the stored result.
-- **Recursive Case**:
-  - We first try to exclude the current element `nums[idx]` and check if we can achieve the target sum from the remaining elements: `dp(idx + 1, sum)`.
-  - If the current element can be included (i.e., `sum >= nums[idx]`), we also try including it and check if we can achieve the remaining sum `sum - nums[idx]` from the rest of the elements.
-- Finally, the result is stored in `memo[idx][sum]` to avoid redundant calculations in future calls.
 
-#### Step 3: Checking for Partition
-
-```cpp
 bool canPartition(vector<int>& nums) {
     this->nums = nums;
     int sum = 0;
-    for(int x: nums) sum += x;
+    for(int x: nums)
+        sum += x;
+    
     if(sum & 1) return false;
+    
     sum = sum / 2;
+    
     memset(memo, -1, sizeof(memo));
+    
     return dp(0, sum);
 }
 ```
-- The `canPartition` function is the main entry point of the solution.
-- First, we calculate the total sum of the elements in the array.
-- If the sum is odd (`sum & 1`), we return `false` immediately because it’s not possible to split the array into two subsets with equal sum.
-- We then set `sum = sum / 2`, which is the target sum for the subset we need to find.
-- We initialize the `memo` array with `-1` using `memset` to reset it before starting the DP calculations.
-- Finally, we call the `dp` function with the initial index `0` and the target sum.
 
-### Complexity
+The `canPartition` function checks if an array can be partitioned into two subsets with equal sum using dynamic programming. It uses memoization to avoid redundant calculations and reduces time complexity.
 
-#### Time Complexity:
-- **Time Complexity of `dp`**: The function `dp(idx, sum)` is called with `idx` from `0` to `nums.size()` and `sum` from `0` to `sum / 2`. Hence, the number of unique subproblems is proportional to `n * (sum / 2)`, where `n` is the size of the array.
-- Since each subproblem is solved at most once due to memoization, the overall time complexity is **O(n * sum)**, where `n` is the number of elements and `sum` is half of the total sum.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<int> nums;
+	```
+	Declare a vector `nums` to hold the input array of integers that needs to be partitioned.
 
-#### Space Complexity:
-- **Space Complexity**: The space complexity is dominated by the memoization array, which is a 2D array with dimensions `[n][sum / 2]`. Thus, the space complexity is **O(n * sum)**, where `n` is the number of elements and `sum` is half of the total sum.
+2. **Array Initialization**
+	```cpp
+	int memo[201][10001];
+	```
+	Initialize a 2D array `memo` with dimensions to store computed results for each index and sum to avoid redundant calculations in the dynamic programming solution.
 
-### Conclusion
+3. **Base Case, Recursion**
+	```cpp
+	bool dp(int idx, int sum) {
+	```
+	Define the function `dp` that takes two parameters: `idx`, the current index of the element being considered, and `sum`, the remaining sum we need to achieve.
 
-The solution to the **Partition Problem** efficiently uses **dynamic programming** with **memoization** to determine if a subset with sum equal to half of the total sum can be found in the array. This approach ensures that we only solve each subproblem once, improving performance compared to a naive recursive approach. With a time complexity of **O(n * sum)** and a space complexity of **O(n * sum)**, this solution is both time-efficient and space-efficient, making it suitable for large inputs. The use of memoization significantly reduces redundant calculations, allowing the algorithm to solve the problem optimally.
+4. **Base Case Check**
+	```cpp
+	    if(idx == nums.size()) return sum == 0;
+	```
+	If we've reached the end of the array (`idx == nums.size()`), return `true` if the remaining `sum` is 0, meaning we've successfully partitioned the array.
+
+5. **Memoization Check**
+	```cpp
+	    if(memo[idx][sum] != -1) return memo[idx][sum];
+	```
+	Check if the current state (`idx`, `sum`) has already been computed by looking up the value in the `memo` table. If it has, return the stored result.
+
+6. **Recursive Call**
+	```cpp
+	    bool res = dp(idx + 1, sum);
+	```
+	Make a recursive call to `dp` by moving to the next index (`idx + 1`) without including the current element in the sum.
+
+7. **Conditional Check**
+	```cpp
+	    if(sum >= nums[idx])
+	```
+	Check if the current element (`nums[idx]`) can be included in the subset, i.e., if the remaining `sum` is greater than or equal to the current element.
+
+8. **Recursive Call with Element Inclusion**
+	```cpp
+	        res |= dp(idx + 1, sum - nums[idx]);
+	```
+	Make a recursive call to `dp` including the current element (`nums[idx]`) by subtracting it from the remaining `sum`.
+
+9. **Return Memoized Result**
+	```cpp
+	    return memo[idx][sum] = res;
+	```
+	Store the result of the current state (`idx`, `sum`) in the `memo` table and return it.
+
+10. **Main Function Definition**
+	```cpp
+	bool canPartition(vector<int>& nums) {
+	```
+	Define the main function `canPartition` that takes a vector `nums` and determines whether it is possible to partition the array into two subsets with equal sum.
+
+11. **Assign Input Vector**
+	```cpp
+	    this->nums = nums;
+	```
+	Assign the input `nums` to the class member variable `nums` for use in the `dp` function.
+
+12. **Sum Calculation**
+	```cpp
+	    int sum = 0;
+	```
+	Initialize a variable `sum` to store the total sum of the elements in `nums`.
+
+13. **Loop Iteration**
+	```cpp
+	    for(int x: nums)
+	```
+	Iterate through each element `x` in the `nums` array.
+
+14. **Sum Calculation**
+	```cpp
+	        sum += x;
+	```
+	Accumulate the value of each element `x` to compute the total sum of the elements in the array.
+
+15. **Odd Sum Check**
+	```cpp
+	    if(sum & 1) return false;
+	```
+	Check if the sum is odd (`sum & 1`). If it is, return `false` since an odd sum cannot be partitioned into two equal subsets.
+
+16. **Divide Sum by Two**
+	```cpp
+	    sum = sum / 2;
+	```
+	Since the array needs to be split into two equal subsets, divide the total `sum` by 2 to determine the target sum for one subset.
+
+17. **Memoization Initialization**
+	```cpp
+	    memset(memo, -1, sizeof(memo));
+	```
+	Initialize the `memo` table by setting all values to `-1`, indicating that no state has been computed yet.
+
+18. **Return DP Function Call**
+	```cpp
+	    return dp(0, sum);
+	```
+	Call the `dp` function starting from index 0 with the target sum (`sum`). Return the result of this call.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * sum)
+- **Average Case:** O(n * sum)
+- **Worst Case:** O(n * sum)
+
+The time complexity is O(n * sum), where n is the number of elements in the array and sum is the total sum of the array.
+
+### Space Complexity 💾
+- **Best Case:** O(sum)
+- **Worst Case:** O(sum)
+
+The space complexity is O(sum), where sum is the total sum of the array, due to the dynamic programming array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-equal-subset-sum/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "dE88fgc73jQ"
 youtube_upload_date="2021-05-27"
 youtube_thumbnail="https://i.ytimg.com/vi/dE88fgc73jQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,120 +28,178 @@ youtube_thumbnail="https://i.ytimg.com/vi/dE88fgc73jQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a list of words, return the maximum product of lengths of two words such that the two words do not share common letters. If no such pair exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of words, where each word consists of lowercase English letters.
+- **Example:** `words = ["abc", "xyz", "foo", "bar", "pqr", "abcdef"]`
+- **Constraints:**
+	- 2 <= words.length <= 1000
+	- 1 <= words[i].length <= 1000
+	- words[i] consists of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxProduct(vector<string>& words) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum product of lengths of two words that do not share common letters.
+- **Example:** `15`
+- **Constraints:**
+	- If no such pair exists, return 0.
 
-        int len = words.size();
-        vector<int> mask(len, 0);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the maximum product of lengths of two words where the words do not share any common letters.
 
-        int res = 0;
-        for(int i = 0; i < len; i++) {
-            string word = words[i];
-            int sz = word.size();
-            for(int j = 0; j < sz; j++)
-            mask[i] |= (1 << (word[j] - 'a'));
+- For each word, calculate its bitmask where each bit represents whether a letter is present in the word.
+- For each pair of words, check if the bitmasks do not overlap (i.e., they share no common letters).
+- Calculate the product of the lengths of words that do not share any common letters, and track the maximum product.
+{{< dots >}}
+### Problem Assumptions ✅
+- The words are non-empty and consist of lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ["abc", "xyz", "foo", "bar", "pqr", "abcdef"]`  \
+  **Explanation:** The two words with no common letters are 'abc' and 'xyz'. The product of their lengths is 15, which is the maximum.
 
-            for(int j = 0; j < i; j++) {
-                if((mask[i] & mask[j]) == 0)
-                res = max(res, int (words[i].size() * words[j].size() ));
-            }
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `words = ["a", "ab", "ac", "b", "bc"]`  \
+  **Explanation:** The maximum product is 2, obtained by the words 'a' and 'bc'.
 
-### 🚀 Problem Statement
+{{< dots >}}
+## Approach 🚀
+Use bitmasking to represent the letters in each word, and calculate the maximum product of lengths of words that do not share common letters.
 
-We're tackling a fun challenge today! The goal is to find **two words in a list** that have no common letters and to maximize the **product of their lengths**. So, if we have words like `"abcw"`, `"baz"`, `"foo"`, and `"bar"`, we need to find pairs where **no letters overlap** and calculate the best possible length product. Let's dive into how we can solve this effectively!
-
----
-
-### 🧠 Approach
-
-To solve this, we'll take a unique approach using **bitwise operations**. Here’s the game plan:
-
-1. **Create a Bitmask for Each Word** 🧩:
-   - For each word, we’ll create a bitmask where each **bit represents a letter**. If a letter is present in the word, we set that bit to 1. This lets us compactly store all the letters in the word in a single integer.
-  
-2. **Check for Overlapping Letters with Bitwise AND** 🔍:
-   - Two words have no shared letters if their **bitwise AND** results in 0. This way, we can instantly know if two words share any letters without looping through each character. Super efficient!
-  
-3. **Pair Comparison for Maximum Product** 🎯:
-   - We’ll compare each pair of words, checking if their bitmasks overlap. If not, we calculate their length product and track the maximum product we find.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down each part of the code for clarity.
-
-#### Step 1: Bitmask Setup for Each Word
-
+### Initial Thoughts 💭
+- Each word can be represented by a bitmask, where each bit represents a character.
+- We can compare two words by checking if their bitmasks have no common bits set, indicating no common letters.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees at least two words in the input.
+- The solution must efficiently handle up to 1000 words, each with a length up to 1000.
+- If no words share no common letters, the answer should be 0.
+- Ensure the solution has a time complexity of O(n^2) or better to handle the problem's input size.
+{{< dots >}}
+## Code 💻
 ```cpp
-int len = words.size();
-vector<int> mask(len, 0);
-```
+int maxProduct(vector<string>& words) {
 
-- **Initialize a Mask Array**: We'll use `mask` to store the bitmask of each word in the list.
+    int len = words.size();
+    vector<int> mask(len, 0);
 
-#### Step 2: Generate Each Word’s Bitmask 🎲
-
-```cpp
-for(int i = 0; i < len; i++) {
-    string word = words[i];
-    for(int j = 0; j < word.size(); j++)
+    int res = 0;
+    for(int i = 0; i < len; i++) {
+        string word = words[i];
+        int sz = word.size();
+        for(int j = 0; j < sz; j++)
         mask[i] |= (1 << (word[j] - 'a'));
-}
-```
 
-- **Loop Through Each Word**: For every letter in each word, we set the appropriate bit in that word’s mask.
-- **Bit Position Calculation**: We calculate the position as `word[j] - 'a'` and set the bit using `|= (1 << position)`. Each bit in the bitmask represents a letter in the alphabet.
-
-#### Step 3: Compare Each Pair for Maximum Product 📊
-
-```cpp
-int res = 0;
-for(int i = 0; i < len; i++) {
-    for(int j = 0; j < i; j++) {
-        if((mask[i] & mask[j]) == 0) {
-            res = max(res, int(words[i].size() * words[j].size()));
+        for(int j = 0; j < i; j++) {
+            if((mask[i] & mask[j]) == 0)
+            res = max(res, int (words[i].size() * words[j].size() ));
         }
     }
+    return res;
 }
-return res;
 ```
 
-- **Pairwise Comparison**: For every pair of words, we check if they share any letters by checking `(mask[i] & mask[j]) == 0`.
-- **Update Maximum Product**: If there are no shared letters, we calculate the product of their lengths and update our maximum product if this new one is larger.
+This function takes a vector of words and returns the maximum product of lengths of two words that do not share any common letters.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxProduct(vector<string>& words) {
+	```
+	The function `maxProduct` accepts a vector of strings `words` as input and returns an integer representing the maximum product of lengths of two words that do not share common characters.
 
-### 📈 Complexity Analysis
+2. **Variable Initialization**
+	```cpp
+	    int len = words.size();
+	```
+	This line initializes `len` to hold the number of words in the vector.
 
-**Time Complexity**:
-- Generating bitmasks takes **O(n \* L)**, where `L` is the average word length.
-- Comparing each pair of words takes **O(n^2)**. Each comparison is quick due to bitwise operations, making this efficient enough for moderately large inputs.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> mask(len, 0);
+	```
+	A vector `mask` of integers is initialized, where each element corresponds to a word in the input and will hold a bitmask of the characters in that word.
 
-**Space Complexity**:
-- We only use extra space for the `mask` array, so **O(n)** in space.
+4. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	The variable `res` is initialized to store the maximum product of lengths found during the iteration.
 
----
+5. **Iteration**
+	```cpp
+	    for(int i = 0; i < len; i++) {
+	```
+	A loop is started to iterate over each word in the `words` vector.
 
-### 🏁 Conclusion
+6. **Variable Declaration**
+	```cpp
+	        string word = words[i];
+	```
+	For each iteration, the word at index `i` is extracted and stored in the variable `word`.
 
-This solution gives us a smart and efficient way to find the maximum product of two non-overlapping words! By leveraging bitwise operations, we can speed through comparisons without wasting time checking each letter individually. Here’s what we achieved:
+7. **Variable Declaration**
+	```cpp
+	        int sz = word.size();
+	```
+	The variable `sz` stores the length of the current word to assist with looping over its characters.
 
-1. **Optimized Comparisons** 🛠️: Bitwise AND lets us check for common letters in constant time!
-2. **Clear Structure** 📐: Our approach combines bitmasks with simple logic to calculate maximums efficiently.
-3. **Scalable for Moderate Inputs** 🌐: With an **O(n^2)** complexity, this solution is ready to handle reasonably large lists of words.
+8. **Looping**
+	```cpp
+	        for(int j = 0; j < sz; j++)
+	```
+	This inner loop iterates over each character of the current word.
 
-**Keep up the great work on cracking these tricky challenges! 🏆 Each bitwise technique learned is one step closer to becoming a DSA master!**
+9. **Bit Manipulation**
+	```cpp
+	        mask[i] |= (1 << (word[j] - 'a'));
+	```
+	For each character, the corresponding bit in the `mask[i]` is set to 1. This represents the characters present in the word using a bitmask.
+
+10. **Iteration**
+	```cpp
+	        for(int j = 0; j < i; j++) {
+	```
+	This loop compares the bitmask of the current word `i` with the words before it.
+
+11. **Bitwise Operation**
+	```cpp
+	            if((mask[i] & mask[j]) == 0)
+	```
+	This condition checks whether the two words `i` and `j` share any common characters using a bitwise AND operation.
+
+12. **Max Calculation**
+	```cpp
+	            res = max(res, int (words[i].size() * words[j].size() ));
+	```
+	If the words do not share any characters, the product of their lengths is calculated and stored in `res` if it is the maximum product found so far.
+
+13. **Return**
+	```cpp
+	    return res;
+	```
+	The function returns the maximum product of word lengths found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) due to comparing each word with every other word.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the bitmasks of the words.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-of-word-lengths/description/)
 

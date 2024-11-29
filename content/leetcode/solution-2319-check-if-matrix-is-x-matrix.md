@@ -14,149 +14,155 @@ img_src = ""
 youtube = "l7O_4za547A"
 youtube_upload_date="2022-06-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/l7O_4za547A/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A matrix is called an X-Matrix if all elements along the diagonals are non-zero, and all elements outside the diagonals are zero. Given a 2D integer array grid representing a matrix, return true if it is an X-Matrix, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an n x n matrix grid, where n is the number of rows and columns. The elements in the grid are integers.
+- **Example:** `grid = [[1, 0, 0], [0, 2, 0], [0, 0, 3]]`
+- **Constraints:**
+	- 3 <= n <= 100
+	- 0 <= grid[i][j] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkXMatrix(vector<vector<int>>& g) {
-    for (int i = 0; i < g.size(); ++i)
-        for (int j = 0; j < g[i].size(); ++j) {
-            if (i == j || i + j == g.size() - 1) {
-                if (g[i][j] == 0)
-                    return false;
-            }
-            else if (g[i][j] > 0)
-                return false;
-        }
-    return true;
-}
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the grid is an X-Matrix, otherwise return false.
+- **Example:** `For grid = [[1, 0, 0], [0, 2, 0], [0, 0, 3]], the output is true.`
+- **Constraints:**
+	- The result should be a boolean value.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if the matrix is an X-Matrix by checking if all diagonal elements are non-zero and all non-diagonal elements are zero.
 
-The task is to check if a given matrix `g` is an "X-Matrix". An "X-Matrix" has the following properties:
+- 1. Iterate through the matrix elements.
+- 2. For each element at position (i, j):
+-    a. If the element is on a diagonal (i == j or i + j == n - 1), check if it is non-zero.
+-    b. If the element is not on a diagonal, check if it is zero.
+- 3. If any condition fails, return false. If all conditions hold, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is always square (n x n).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[1, 0, 0], [0, 2, 0], [0, 0, 3]]`  \
+  **Explanation:** In this case, the matrix is an X-Matrix because the diagonal elements (1, 2, 3) are non-zero, and all other elements are zero.
 
-- All elements on the main diagonal (top-left to bottom-right) and the anti-diagonal (top-right to bottom-left) must be non-zero.
-- All elements that are not on the diagonals must be zero.
+- **Input:** `grid = [[1, 0, 0], [0, 0, 0], [0, 0, 3]]`  \
+  **Explanation:** Here, the matrix is not an X-Matrix because the diagonal element at position (1,1) is 0, while it should be non-zero.
 
-For example, the matrix:
-```
-[
-  [2, 0, 0, 1],
-  [0, 3, 3, 0],
-  [0, 3, 3, 0],
-  [1, 0, 0, 2]
-]
-```
-is a valid "X-Matrix", but the matrix:
-```
-[
-  [1, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 1]
-]
-```
-is not, because the middle element is zero, which violates the "X-Matrix" condition.
+{{< dots >}}
+## Approach 🚀
+To determine whether the matrix is an X-Matrix, check if all diagonal elements are non-zero and all other elements are zero.
 
-### Approach
-
-To solve this problem, we need to verify two conditions for each element in the matrix:
-1. If the element is on the main diagonal or the anti-diagonal, it should be non-zero.
-2. If the element is not on either diagonal, it should be zero.
-
-**Steps for solving:**
-- Traverse through each element of the matrix.
-- For each element, check its position relative to the main diagonal and anti-diagonal:
-  - **Main diagonal**: If the row index and column index are the same (`i == j`), it's on the main diagonal.
-  - **Anti-diagonal**: If the sum of the row and column indices equals the size of the matrix minus one (`i + j == n - 1`), it's on the anti-diagonal.
-- If the element is not on either diagonal, check that the value is zero. If it's not, return `false`.
-- If any element on the diagonals is zero, return `false`.
-- If all checks pass, return `true`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Loop for Traversing the Matrix
+### Initial Thoughts 💭
+- The diagonal elements are important, and we need to check if they are non-zero.
+- All non-diagonal elements must be zero.
+- The check can be performed by iterating through the matrix once and validating the diagonal and non-diagonal elements.
+{{< dots >}}
+### Edge Cases 🌐
+- There should always be at least a 3x3 matrix, so no need to handle empty matrices.
+- The solution should be efficient enough to handle a matrix of size up to 100x100.
+- If any diagonal element is zero or any non-diagonal element is non-zero, return false.
+- Ensure that the solution works efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
+bool checkXMatrix(vector<vector<int>>& g) {
 for (int i = 0; i < g.size(); ++i)
     for (int j = 0; j < g[i].size(); ++j) {
-```
-- We start by iterating over all elements in the matrix `g`. The outer loop iterates over the rows (`i`), and the inner loop iterates over the columns (`j`).
-
-#### Step 2: Check Diagonal Elements
-```cpp
-if (i == j || i + j == g.size() - 1) {
-    if (g[i][j] == 0)
-        return false;
+        if (i == j || i + j == g.size() - 1) {
+            if (g[i][j] == 0)
+                return false;
+        }
+        else if (g[i][j] > 0)
+            return false;
+    }
+return true;
 }
 ```
-- Inside the loops, we check if the current element `g[i][j]` lies on either the **main diagonal** (`i == j`) or the **anti-diagonal** (`i + j == g.size() - 1`).
-- If the element is on either diagonal, it should be non-zero. If it is zero, we immediately return `false`.
 
-#### Step 3: Check Non-Diagonal Elements
-```cpp
-else if (g[i][j] > 0)
-    return false;
-```
-- If the current element is not on the diagonal, we check if the value is greater than zero. Any non-zero element outside the diagonals makes the matrix invalid, so we return `false`.
+This function checks if a given matrix `g` satisfies the conditions of an 'X Matrix'. The matrix must have non-zero values on its diagonals (top-left to bottom-right and top-right to bottom-left) and zero values elsewhere.
 
-#### Step 4: Return True if All Checks Pass
-```cpp
-return true;
-```
-- If the loops finish without returning `false`, it means the matrix satisfies all conditions for being an "X-Matrix", so we return `true`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Declaration**
+	```cpp
+	bool checkXMatrix(vector<vector<int>>& g) {
+	```
+	Declare the method `checkXMatrix` that takes a 2D vector `g` (the matrix) as input and returns a boolean indicating whether it forms a valid 'X Matrix'.
 
-### Example Walkthrough
+2. **Outer Loop Initialization**
+	```cpp
+	for (int i = 0; i < g.size(); ++i)
+	```
+	Start an outer loop to iterate over the rows of the matrix `g`, using the variable `i` as the row index.
 
-Let's walk through an example to better understand how the code works:
+3. **Inner Loop Initialization**
+	```cpp
+	    for (int j = 0; j < g[i].size(); ++j) {
+	```
+	Start an inner loop to iterate over the columns of the matrix `g`, using the variable `j` as the column index.
 
-#### Example 1: Valid "X-Matrix"
-- Input:
-  ```
-  [
-    [2, 0, 0, 1],
-    [0, 3, 3, 0],
-    [0, 3, 3, 0],
-    [1, 0, 0, 2]
-  ]
-  ```
-- The matrix has non-zero elements on both the main diagonal (elements at positions `[0,0]`, `[1,1]`, `[2,2]`, and `[3,3]`) and the anti-diagonal (elements at positions `[0,3]`, `[1,2]`, `[2,1]`, and `[3,0]`).
-- All other elements are zero, so the matrix satisfies the "X-Matrix" condition and the function returns `true`.
+4. **Diagonal Check**
+	```cpp
+	        if (i == j || i + j == g.size() - 1) {
+	```
+	Check if the current element `g[i][j]` lies on either of the two diagonals: top-left to bottom-right (`i == j`) or top-right to bottom-left (`i + j == g.size() - 1`).
 
-#### Example 2: Invalid "X-Matrix"
-- Input:
-  ```
-  [
-    [1, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 1]
-  ]
-  ```
-- The matrix has zeros on the main diagonal, specifically at `[1,1]`, which violates the "X-Matrix" condition.
-- The function detects this violation and returns `false`.
+5. **Zero Check on Diagonals**
+	```cpp
+	            if (g[i][j] == 0)
+	```
+	If the current element on the diagonal is 0, return `false` because diagonals must contain non-zero values.
 
-### Complexity Analysis
+6. **Return False for Invalid Element**
+	```cpp
+	                return false;
+	```
+	Return `false` if a diagonal element is found to be zero, invalidating the 'X Matrix'.
 
-#### Time Complexity:
-- The time complexity is **O(n^2)**, where `n` is the number of rows (and columns) in the matrix. This is because we are iterating through each element of the matrix once, performing constant-time operations for each element.
+7. **Non-Diagonal Check**
+	```cpp
+	        else if (g[i][j] > 0)
+	```
+	If the current element is not on a diagonal and is greater than 0, return `false` because all non-diagonal elements must be 0.
 
-#### Space Complexity:
-- The space complexity is **O(1)** because we are not using any additional data structures that depend on the size of the input matrix. We are only using a few variables for traversal and checks, so the space complexity is constant.
+8. **Return False for Invalid Non-Diagonal Element**
+	```cpp
+	            return false;
+	```
+	Return `false` if a non-diagonal element is greater than 0, invalidating the 'X Matrix'.
 
-### Conclusion
+9. **Return True for Valid Matrix**
+	```cpp
+	return true;
+	```
+	Return `true` if the entire matrix is validated as an 'X Matrix' (i.e., all diagonal elements are non-zero, and all other elements are zero).
 
-This solution efficiently checks whether a given matrix is an "X-Matrix" by using a two-step condition check for each element in the matrix. The approach is straightforward, and the algorithm runs in **O(n^2)** time, which is optimal for matrix-related problems of this type. The space complexity is **O(1)**, making this solution both time and space efficient.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-By iterating through all elements and checking if they meet the criteria for the diagonals and off-diagonal positions, the algorithm ensures correctness while minimizing complexity. This makes the solution suitable for matrices of any reasonable size, ensuring it can handle a wide range of inputs efficiently.
+Since we need to check each element of the n x n matrix, the time complexity is O(n^2).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only need a constant amount of space to store the result.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-matrix-is-x-matrix/description/)
 

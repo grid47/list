@@ -14,75 +14,101 @@ img_src = ""
 youtube = "uj_B91ycSGo"
 youtube_upload_date="2023-07-09"
 youtube_thumbnail="https://i.ytimg.com/vi/uj_B91ycSGo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two integers num and t, determine the maximum achievable number after performing at most t operations, where each operation allows simultaneous increments or decrements of num and the target number by 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers num and t.
+- **Example:** `Input: num = 5, t = 2`
+- **Constraints:**
+	- 1 <= num, t <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int theMaximumAchievableX(int num, int t) {
-        return num + 2 * t;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum achievable number after at most t operations.
+- **Example:** `Output: 9 for num = 5, t = 2`
+- **Constraints:**
+	- Output is a single integer representing the maximum achievable number.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Compute the maximum achievable number after at most t operations.
 
-The problem asks to compute the maximum achievable value of `x` after performing a set number of operations on an integer `num`. The operations consist of adding `2` to `num` for a total of `t` times. Your goal is to return the final value of `num` after performing these operations.
+- The maximum achievable number is equal to num + 2 * t.
+- Each operation increases both the number and num by 1 or decreases both by 1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The values of num and t are positive integers.
+- Operations are limited to increasing or decreasing both num and the number simultaneously.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num = 5, t = 2`  \
+  **Explanation:** After two operations, the maximum achievable number is 9. Each operation increases num and the target number by 1.
 
-The challenge is to compute the result of this transformation, given the initial value of `num` and the number of allowed operations `t`.
+- **Input:** `Input: num = 2, t = 3`  \
+  **Explanation:** After three operations, the maximum achievable number is 8. Each operation increases num and the target number by 1.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution calculates the maximum achievable number using a direct mathematical formula based on the given constraints.
 
-This problem is very straightforward, as it boils down to simple arithmetic. The problem's approach involves adding a value of `2` to the integer `num`, `t` times. Each operation adds `2`, so the total increase in `num` will be `2 * t`.
-
-### Step-by-Step Code Breakdown
-
-Let's break down the code to understand the operations:
-
+### Initial Thoughts 💭
+- Each operation allows the target number to diverge from num by at most 2 units per operation.
+- The problem can be solved using simple arithmetic.
+- The maximum achievable number is calculated as num + 2 * t.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as num and t are always provided.
+- Test for maximum values of num = 50 and t = 50 to ensure correctness.
+- Smallest values of num = 1 and t = 1.
+- Ensure no invalid input scenarios.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int theMaximumAchievableX(int num, int t) {
-        return num + 2 * t;
-    }
-};
+int theMaximumAchievableX(int num, int t) {
+    return num + 2 * t;
+}
 ```
 
-1. **Function Definition:**
-   - The function `theMaximumAchievableX` is defined to accept two arguments: `num` and `t`. 
-     - `num` is the starting integer.
-     - `t` is the number of operations to perform.
-   
-2. **Arithmetic Operation:**
-   - The core of the function is the expression `num + 2 * t`. This computes the maximum achievable value of `x` after performing `t` operations.
-     - For each operation, we add `2` to the value of `num`. Thus, after `t` operations, the value of `num` will have increased by `2 * t`.
-   
-3. **Return Statement:**
-   - The result is directly returned by the function. This is the final value of `num` after adding `2 * t` to it.
+This function calculates the maximum achievable value of `X` by adding twice the value of `t` to the initial value of `num`.
 
-Since the operations and computations are straightforward and involve only a single arithmetic operation, the code executes efficiently with a constant time complexity.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int theMaximumAchievableX(int num, int t) {
+	```
+	Defines the function `theMaximumAchievableX`, which takes two integers `num` and `t` as input and calculates the maximum achievable value by adding twice `t` to `num`.
 
-### Complexity
+2. **Return Statement**
+	```cpp
+	    return num + 2 * t;
+	```
+	Calculates the result by adding `2 * t` to `num` and returns this value as the output of the function.
 
-#### Time Complexity:
-The time complexity of this solution is constant, i.e., \( O(1) \). This is because the function only performs a simple arithmetic calculation (`num + 2 * t`), and there are no loops or recursive calls involved. The operation takes the same amount of time regardless of the values of `num` or `t`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
-The space complexity is also constant, i.e., \( O(1) \). The function uses a fixed amount of memory to store the input arguments (`num` and `t`) and the result. No additional data structures (such as arrays, lists, or hash maps) are used, so the space used by the function does not scale with the size of the inputs.
+The computation involves a single arithmetic operation.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution efficiently computes the maximum achievable value of `x` after applying the allowed operations. The time and space complexities are both \( O(1) \), making it an optimal solution for this problem.
+No additional space is required beyond input storage.
 
-The problem itself is straightforward, requiring just the addition of `2 * t` to the initial number. There are no complex loops, recursive calls, or additional data structures needed, making this an elegant and simple solution for the task at hand.
+**Happy Coding! 🎉**
 
-This solution is ideal for situations where the problem involves a fixed number of operations that can be computed directly via arithmetic. Since the logic is simple and executes in constant time, it is well-suited for competitive programming, coding interviews, and applications that need to process large numbers of test cases efficiently.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-maximum-achievable-number/description/)
 

@@ -14,113 +14,154 @@ img_src = ""
 youtube = "CFa2TgIHMN0"
 youtube_upload_date="2024-09-12"
 youtube_thumbnail="https://i.ytimg.com/vi/CFa2TgIHMN0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `allowed` consisting of distinct characters, and an array of strings `words`. A string is consistent if all characters in the string appear in the string `allowed`. Return the number of consistent strings in the array `words`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `allowed` and an array `words`.
+- **Example:** `allowed = 'abc', words = ['a', 'ab', 'abc', 'abcd', 'bc']`
+- **Constraints:**
+	- 1 <= words.length <= 10^4
+	- 1 <= allowed.length <= 26
+	- 1 <= words[i].length <= 10
+	- The characters in allowed are distinct.
+	- words[i] and allowed contain only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countConsistentStrings(string allowed, vector<string>& words) {
-        int res = words.size();
-        bool mp[26] = {};
-        for (char c: allowed) mp[c - 'a'] = true;
-        for (string word: words) {
-            for (char c: word) if (!mp[c - 'a']) {
-                res--;
-                break;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of consistent strings in the array `words`.
+- **Example:** `Output: 5`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count how many strings in the array `words` consist solely of characters from the `allowed` string.
+
+- Initialize a variable to store the count of consistent strings.
+- Create a boolean array to track which characters are allowed.
+- Iterate through each string in `words` and check if all its characters are present in the `allowed` string.
+- For each word, if any character is not in the `allowed` string, it is not consistent, so skip counting it.
+- Return the count of consistent strings.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `allowed` contains distinct lowercase English characters.
+- All input strings and arrays will be valid as per the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: allowed = 'abc', words = ['a', 'ab', 'abc', 'abcd', 'bc']`  \
+  **Explanation:** All strings are consistent because they contain only characters from 'abc'.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to check if each string in the array `words` contains only characters that are present in the `allowed` string.
+
+### Initial Thoughts 💭
+- The `allowed` string has a small length (at most 26 characters), so we can use a boolean array to efficiently check for membership.
+- We need to check each word in `words` for consistency by checking if every character in the word exists in the `allowed` string.
+{{< dots >}}
+### Edge Cases 🌐
+- If `words` is empty, the answer should be 0.
+- For large arrays of strings (`words.length` up to 10^4), ensure the solution is efficient.
+- If `allowed` is empty, no words can be consistent.
+- The solution should handle the maximum input size within reasonable time limits.
+{{< dots >}}
+## Code 💻
+```cpp
+int countConsistentStrings(string allowed, vector<string>& words) {
+    int res = words.size();
+    bool mp[26] = {};
+    for (char c: allowed) mp[c - 'a'] = true;
+    for (string word: words) {
+        for (char c: word) if (!mp[c - 'a']) {
+            res--;
+            break;
         }
-        return res;        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine the number of strings in a list (or vector) that are considered "consistent." A string is defined as consistent if all of its characters are present in a specified set of allowed characters. Given a string of allowed characters and a vector of words, the task is to count how many of these words are consistent according to the defined criteria.
-
-### Approach
-
-To solve the problem, we can utilize a straightforward approach leveraging a boolean array (or a map) to keep track of which characters are allowed. Here's the step-by-step breakdown of the approach:
-
-1. **Initialization**: We will initialize a variable to count the number of consistent strings (initially set to the total number of words). We will also create a boolean array to mark the allowed characters.
-
-2. **Mark Allowed Characters**: Iterate through the allowed string, marking the corresponding indices in the boolean array to indicate which characters are permitted.
-
-3. **Count Consistent Strings**: For each word in the list of words:
-   - Check each character of the word against the boolean array.
-   - If any character is not allowed, decrement the count of consistent strings and break out of the loop for that word.
-
-4. **Return Result**: After checking all words, return the count of consistent strings.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the implementation:
-
-```cpp
-class Solution {
-public:
-    int countConsistentStrings(string allowed, vector<string>& words) {
+    return res;        
+}
 ```
-- **Class Definition**: We define a class named `Solution` and create a public method `countConsistentStrings`, which takes a string `allowed` and a vector of strings `words` as parameters.
 
-```cpp
-        int res = words.size();
-        bool mp[26] = {};
-```
-- **Initialization**: 
-  - We initialize `res` with the size of `words`, assuming all words are consistent initially.
-  - We also declare a boolean array `mp` of size 26 (for each letter of the alphabet) to track the allowed characters.
+This function counts how many strings in the 'words' vector consist only of characters that are present in the 'allowed' string.
 
-```cpp
-        for (char c: allowed) mp[c - 'a'] = true;
-```
-- **Mark Allowed Characters**: We iterate through each character in the `allowed` string. For each character `c`, we set `mp[c - 'a']` to `true`, indicating that this character is allowed. This allows us to use the character's ASCII value to index into the boolean array, where 'a' corresponds to index 0, 'b' to index 1, and so on.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countConsistentStrings(string allowed, vector<string>& words) {
+	```
+	Define the function 'countConsistentStrings' that takes an allowed string and a vector of words as input and returns the count of words consisting only of allowed characters.
 
-```cpp
-        for (string word: words) {
-            for (char c: word) if (!mp[c - 'a']) {
-                res--;
-                break;
-            }
-        }
-```
-- **Count Consistent Strings**: 
-  - We loop through each `word` in the `words` vector.
-  - For each `word`, we check each character `c`.
-  - If `c` is not allowed (i.e., `mp[c - 'a']` is `false`), we decrement `res` since this word is not consistent, and we break out of the inner loop to stop checking the rest of the characters in that word.
+2. **Variable Initialization**
+	```cpp
+	    int res = words.size();
+	```
+	Initialize the result variable 'res' to the number of words in the 'words' vector, as each word is initially assumed to be consistent.
 
-```cpp
-        return res;        
-    }
-};
-```
-- **Return Result**: After checking all words, we return `res`, which now contains the number of consistent strings.
+3. **Array Initialization**
+	```cpp
+	    bool mp[26] = {};
+	```
+	Declare and initialize a boolean array 'mp' of size 26 to track which characters are allowed, where each index corresponds to a letter of the alphabet.
 
-### Complexity
+4. **Loop Through Allowed Characters**
+	```cpp
+	    for (char c: allowed) mp[c - 'a'] = true;
+	```
+	Loop through each character in the 'allowed' string and mark its corresponding index in the 'mp' array as 'true' to indicate that the character is allowed.
 
-- **Time Complexity**: The time complexity of this solution is \( O(n \times m) \), where \( n \) is the number of words in the `words` vector and \( m \) is the average length of the words. We check each character of each word against the allowed characters.
+5. **Loop Through Words**
+	```cpp
+	    for (string word: words) {
+	```
+	Start a loop to process each word in the 'words' vector.
 
-- **Space Complexity**: The space complexity is \( O(1) \) since the size of the boolean array `mp` is fixed at 26, regardless of the input size. 
+6. **Loop Through Word Characters**
+	```cpp
+	        for (char c: word) if (!mp[c - 'a']) {
+	```
+	Loop through each character of the current word and check if it is allowed by referencing the 'mp' array. If a character is not allowed, exit the loop.
 
-### Conclusion
+7. **Decrement Result**
+	```cpp
+	            res--;
+	```
+	If a character in the word is not allowed, decrement the 'res' variable since this word is not consistent with the allowed characters.
 
-This solution effectively counts the number of consistent strings in the given list of words using a boolean array to track allowed characters. 
+8. **Break Loop**
+	```cpp
+	            break;
+	```
+	Exit the inner loop once an invalid character is found in the word to stop further processing of that word.
 
-Key highlights include:
+9. **Return Statement**
+	```cpp
+	    return res;        
+	```
+	Return the final value of 'res', which represents the count of words that are consistent with the allowed characters.
 
-1. **Simplicity**: The approach is intuitive and easy to understand, utilizing basic data structures to achieve the desired result.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m), where n is the number of words and m is the length of the longest word.
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
 
-2. **Efficiency**: The algorithm efficiently checks each character against allowed characters, ensuring optimal performance even with larger inputs.
+The time complexity is O(n * m), where n is the number of words and m is the length of the longest word.
 
-3. **Versatility**: The solution can handle any combination of allowed characters and words, making it adaptable to different scenarios.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-Overall, the code demonstrates a clear and efficient method to solve the problem, focusing on leveraging simple data structures to manage and verify character consistency.
+The space complexity is O(1) since we only use a fixed-size boolean array of length 26.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-consistent-strings/description/)
 

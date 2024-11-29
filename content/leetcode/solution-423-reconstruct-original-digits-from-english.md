@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "cGgG0A__wNQ"
 youtube_upload_date="2021-03-28"
 youtube_thumbnail="https://i.ytimg.com/vi/cGgG0A__wNQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,127 +28,188 @@ youtube_thumbnail="https://i.ytimg.com/vi/cGgG0A__wNQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a string representing an out-of-order English representation of digits from 0 to 9. Your task is to rearrange the characters of the string in such a way that you can extract the digits in ascending order. The string will only contain valid letters corresponding to the English representations of digits.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string s that contains characters representing the out-of-order English words for digits 0-9.
+- **Example:** `Input: s = "enionzotwo"
+`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s[i] is one of the characters from a predefined set representing the letters in digit words.
+	- The input string will always be valid and contain only characters from the English digit words.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string originalDigits(string s) {
-        vector<string> words = {"zero", "two", "four", "six", "eight", "one", "three", "five", "seven", "nine"};
-        vector<int> nums = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
-        vector<int> distinct_char = {'z', 'w', 'u', 'x', 'g', 'o', 'r', 'f', 'v', 'i'};
-        vector<int> counts(26, 0);
-        string result;
-        for(auto ch : s){ counts[ch-'a']++;}
-        for(int i = 0; i < 10; i++){
-            int count = counts[distinct_char[i]-'a'];
-            for(int j = 0; j < words[i].size(); j++)
-                counts[words[i][j]-'a'] -= count;
-            while(count--)
-                result += to_string(nums[i]);
-        }
-        sort(result.begin(), result.end());
-        return result;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a string containing the digits, sorted in ascending order, as a result of extracting the digits from the input string.
+- **Example:** `Output: "012"`
+- **Constraints:**
+	- The output string should contain the digits in ascending order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to extract the digits from the scrambled string based on their English word representations, utilizing the distinct characters in each word to identify and count the digits.
+
+- Identify the distinct characters that can be used to determine the presence of certain digits (e.g., 'z' for zero, 'w' for two, etc.).
+- Count the occurrences of each character in the input string.
+- Using the character counts, determine how many of each digit appears in the string.
+- Rebuild the string by adding the digits in ascending order.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always be valid and contain only the necessary letters to form digit words.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: s = "owoztneoer"`  \
+  **Explanation:** In this case, the string contains the letters for the words 'zero', 'one', and 'two'. Extracting these gives the digits '0', '1', and '2', resulting in the output "012".
+
+{{< dots >}}
+## Approach 🚀
+We solve the problem by counting the occurrences of specific characters that are unique to certain digits. This allows us to determine the number of each digit and then sort them in ascending order.
+
+### Initial Thoughts 💭
+- Certain digits have unique characters that can help identify them (e.g., 'z' for zero, 'w' for two).
+- Once we identify and count the digits, we can arrange them in ascending order.
+- Using the frequency of characters, we can iteratively determine which digits are present in the string and construct the result.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will not be empty, as per the constraints.
+- For large strings with many repeated characters, ensure that the solution is efficient enough to handle the input size.
+- Ensure that the solution correctly handles inputs with all digits from 0 to 9.
+- The solution should handle inputs with a length up to 100,000 characters efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+string originalDigits(string s) {
+    vector<string> words = {"zero", "two", "four", "six", "eight", "one", "three", "five", "seven", "nine"};
+    vector<int> nums = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
+    vector<int> distinct_char = {'z', 'w', 'u', 'x', 'g', 'o', 'r', 'f', 'v', 'i'};
+    vector<int> counts(26, 0);
+    string result;
+    for(auto ch : s){ counts[ch-'a']++;}
+    for(int i = 0; i < 10; i++){
+        int count = counts[distinct_char[i]-'a'];
+        for(int j = 0; j < words[i].size(); j++)
+            counts[words[i][j]-'a'] -= count;
+        while(count--)
+            result += to_string(nums[i]);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to reconstruct the original digits (0-9) from a scrambled string containing letters that represent these digits' names. The goal is to return a string of digits in ascending order, using the letters in the given string exactly once.
-
-### Approach
-
-To approach this problem, we need to leverage the unique characters found in the English words representing each digit. By focusing on characters that only appear in one digit's name, we can uniquely identify and count occurrences of each digit.
-
-1. **Distinct Characters in Digit Names**: 
-   - Each number from 0 to 9 is represented by a word in English. Some of these words have unique characters that appear only in one number's name.
-     - For example, the letter 'z' only appears in "zero" (0), 'w' only appears in "two" (2), 'u' only appears in "four" (4), etc.
-   - By iterating through the string and focusing on these distinct characters, we can isolate the counts of each digit.
-
-2. **Step-by-Step Process**:
-   - First, count the occurrences of each letter in the input string.
-   - Then, for each digit from 0 to 9, use the count of the distinct characters to identify how many times that digit appears in the input string.
-   - After identifying a digit, subtract the letters that form that digit's name from the letter count.
-   - Repeat the process until all digits are identified.
-
-3. **Sorting the Result**:
-   - Once we have identified and recorded all the digits, sort them in ascending order to return the final answer.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Required Variables
-
-```cpp
-vector<string> words = {"zero", "two", "four", "six", "eight", "one", "three", "five", "seven", "nine"};
-vector<int> nums = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
-vector<int> distinct_char = {'z', 'w', 'u', 'x', 'g', 'o', 'r', 'f', 'v', 'i'};
-vector<int> counts(26, 0);
-```
-
-- **`words`**: A vector containing the English names for the digits 0 through 9.
-- **`nums`**: A vector mapping the indices to their corresponding digits.
-- **`distinct_char`**: A vector of characters that appear uniquely in the names of each digit (e.g., 'z' for "zero", 'w' for "two").
-- **`counts`**: A vector initialized to zero, used to store the frequency of each character (from 'a' to 'z') in the input string.
-
-#### Step 2: Count Character Occurrences
-
-```cpp
-for(auto ch : s){ counts[ch-'a']++;}
-```
-
-- This loop iterates over the input string `s` and counts the occurrences of each character by updating the `counts` vector. The character 'a' corresponds to index 0, 'b' to index 1, and so on.
-
-#### Step 3: Identify and Count Each Digit
-
-```cpp
-for(int i = 0; i < 10; i++){
-    int count = counts[distinct_char[i]-'a'];
-    for(int j = 0; j < words[i].size(); j++)
-        counts[words[i][j]-'a'] -= count;
-    while(count--)
-        result += to_string(nums[i]);
+    sort(result.begin(), result.end());
+    return result;
 }
 ```
 
-- This loop iterates through each digit from 0 to 9.
-- For each digit, we use the `distinct_char` array to find the number of occurrences of the unique character for that digit. This tells us how many times the digit appears.
-- Then, for each character in the word corresponding to that digit, we decrement the count in the `counts` vector to ensure we don't recount those letters.
-- The `while(count--)` loop adds the current digit to the result string as many times as it appears in the input string.
+The function `originalDigits` takes a string of characters and returns a string representing the digits (0-9) that can be formed by rearranging the characters. It utilizes a set of distinct characters to identify digits and subtracts character occurrences to form the result.
 
-#### Step 4: Sort the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string originalDigits(string s) {
+	```
+	This line declares the function `originalDigits`, which accepts a string `s` as input and will return a string containing the digits formed from the characters in `s`.
 
-```cpp
-sort(result.begin(), result.end());
-```
+2. **Word List Initialization**
+	```cpp
+	    vector<string> words = {"zero", "two", "four", "six", "eight", "one", "three", "five", "seven", "nine"};
+	```
+	This line initializes a vector `words` that contains the string representations of the numbers 0 to 9.
 
-- After accumulating the digits in the result string, we sort them to ensure the digits appear in ascending order.
+3. **Number List Initialization**
+	```cpp
+	    vector<int> nums = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
+	```
+	Here, a vector `nums` is initialized with the digits corresponding to the numbers represented in the `words` vector.
 
-#### Step 5: Return the Result
+4. **Distinct Character List Initialization**
+	```cpp
+	    vector<int> distinct_char = {'z', 'w', 'u', 'x', 'g', 'o', 'r', 'f', 'v', 'i'};
+	```
+	This vector `distinct_char` contains the distinct characters that help identify each number from 0 to 9 in the string `s`.
 
-```cpp
-return result;
-```
+5. **Count Array Initialization**
+	```cpp
+	    vector<int> counts(26, 0);
+	```
+	This initializes a vector `counts` of size 26 to store the frequency of each character in the input string `s`.
 
-- Finally, the sorted result string is returned as the output.
+6. **Result String Initialization**
+	```cpp
+	    string result;
+	```
+	A string `result` is initialized to store the final digits that will be returned.
 
-### Complexity
+7. **Character Frequency Count**
+	```cpp
+	    for(auto ch : s){ counts[ch-'a']++;}
+	```
+	This loop iterates over each character in the string `s` and increments its corresponding count in the `counts` array.
 
-#### Time Complexity:
-- **Counting Characters**: The first step counts the occurrences of each character in the string, which takes `O(n)`, where `n` is the length of the string `s`.
-- **Identifying Digits**: The second step involves iterating over each of the 10 digits and processing the letters in each word. Each word contains a constant number of characters, so the time complexity for this step is `O(10)`, or effectively `O(1)`.
-- **Sorting the Result**: The sorting step involves sorting a string of digits, which at most has a length of 10 (since there are only 10 digits). Sorting a string of length 10 takes `O(10 log 10)`, which simplifies to `O(1)`.
-- **Overall Time Complexity**: The overall time complexity is dominated by the counting step, which is `O(n)`.
+8. **Main Loop for Digit Construction**
+	```cpp
+	    for(int i = 0; i < 10; i++){
+	```
+	This loop iterates over the 10 digits (0-9), processing each one by identifying the number of occurrences of its distinct characters.
 
-#### Space Complexity:
-- **Character Count Array**: The `counts` array has a fixed size of 26, representing the 26 letters of the alphabet, so it takes `O(1)` space.
-- **Result String**: The result string stores the digits, which at most has a length of 10, so it takes `O(1)` space.
-- **Overall Space Complexity**: The space complexity is `O(1)`.
+9. **Count Extraction**
+	```cpp
+	        int count = counts[distinct_char[i]-'a'];
+	```
+	This line extracts the count of the distinct character associated with the current digit, which indicates how many times this digit can be formed from `s`.
 
-### Conclusion
+10. **Character Removal**
+	```cpp
+	        for(int j = 0; j < words[i].size(); j++)
+	```
+	This loop iterates over each character in the corresponding word (e.g., 'zero', 'one') for the current digit.
 
-This solution efficiently reconstructs the original digits from a scrambled string by focusing on unique characters in the English words representing each digit. By counting the occurrences of these unique characters, we can identify the digits and reconstruct them in the correct order. The time complexity of `O(n)` makes this approach highly efficient, even for large input strings. The space complexity is also optimal, using only a constant amount of additional space. This solution is both simple and effective for solving the problem.
+11. **Character Frequency Update**
+	```cpp
+	            counts[words[i][j]-'a'] -= count;
+	```
+	This updates the `counts` array by decrementing the frequency of each character in the current digit's word, as those characters are now used.
+
+12. **Digit Addition**
+	```cpp
+	        while(count--)
+	```
+	This loop adds the current digit to the `result` string as many times as it was identified in the input string `s`.
+
+13. **Result Update**
+	```cpp
+	            result += to_string(nums[i]);
+	```
+	This line converts the current digit (from `nums[i]`) to a string and appends it to the `result` string.
+
+14. **Result Sorting**
+	```cpp
+	    sort(result.begin(), result.end());
+	```
+	This sorts the `result` string in ascending order to ensure the digits are returned in a lexicographically sorted order.
+
+15. **Return Statement**
+	```cpp
+	    return result;
+	```
+	This returns the final string `result`, which contains the digits in sorted order.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the input string.
+- **Average Case:** O(n), as we process each character in the string and identify digits in a single pass.
+- **Worst Case:** O(n), as the solution requires only a few linear scans over the input string.
+
+The time complexity is linear because we only process the string a constant number of times.
+
+### Space Complexity 💾
+- **Best Case:** O(1), since the space complexity does not depend on the input size.
+- **Worst Case:** O(1), as the space used for counting the characters is constant.
+
+The space complexity is constant because we only need a fixed amount of space to store the counts of characters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reconstruct-original-digits-from-english/description/)
 

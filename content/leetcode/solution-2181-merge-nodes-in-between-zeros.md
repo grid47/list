@@ -14,136 +14,144 @@ img_src = ""
 youtube = "jrSav7fulJY"
 youtube_upload_date="2024-07-04"
 youtube_thumbnail="https://i.ytimg.com/vi/jrSav7fulJY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the head of a linked list where each segment of the list is separated by nodes with the value `0`. Merge the nodes between two consecutive `0` nodes and replace them with a single node whose value is the sum of the nodes in between. The list should not contain any `0` nodes.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a linked list where each segment is separated by `0` nodes.
+- **Example:** `[0, 5, 2, 0, 3, 4, 1, 0]`
+- **Constraints:**
+	- The number of nodes in the list is in the range [3, 2 * 10^5].
+	- 0 <= Node.val <= 1000
+	- There are no two consecutive nodes with Node.val == 0.
+	- The beginning and end of the linked list have Node.val == 0.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* mergeNodes(ListNode* head) {
-        if(!head->next) return nullptr;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the modified linked list where each group of nodes between consecutive `0` nodes is replaced with a single node containing the sum of those nodes.
+- **Example:** `[7, 8]`
+- **Constraints:**
+	- The modified list contains no `0` nodes.
 
-        ListNode* ptr = head->next;
-        int sum = 0;
-        while(ptr->val!=0) sum += ptr->val, ptr = ptr->next;
-        head->next->val = sum;
-        head->next->next= mergeNodes(ptr);
-        return head->next;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to merge the nodes between consecutive `0` nodes by summing their values and removing the `0` nodes.
 
-### Problem Statement
+- Start from the head of the linked list.
+- For each segment of nodes between two `0` nodes, sum their values.
+- Replace the first `0` node with the sum and remove the rest of the `0` nodes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is valid and adheres to the specified constraints.
+- The list will not have consecutive `0` nodes except for the first and last.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[0, 5, 2, 0, 3, 4, 1, 0]`  \
+  **Explanation:** In this example, the nodes between the first `0` and the next `0` are summed to form the node with value 7, and the nodes between the second and third `0` are summed to form the node with value 8.
 
-The problem asks to merge consecutive nodes in a singly linked list that are separated by a node with value `0`. Specifically, given a singly linked list where:
-- Each node contains an integer value.
-- The values in the list are separated by `0`, which signifies the end of a block of nodes that need to be summed together.
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the linked list and summing the nodes between each pair of consecutive `0` nodes, replacing the first `0` node with the sum.
 
-The task is to remove the zeros and merge consecutive nodes by calculating their sum. After summing, the result should be stored in the node immediately following the `0` node.
-
-### Approach
-
-To solve this problem, we need to:
-1. Traverse the list while looking for blocks of nodes that are between two consecutive `0` nodes.
-2. Sum the values of nodes in each block and replace the node with the first value of the block with the calculated sum.
-3. Once we reach a node with a value of `0`, we recursively repeat the process for the remaining nodes in the list, removing the `0` separator in the process.
-
-By using recursion, we can simplify the merging of nodes in each block and handle the traversal through the linked list efficiently. This method allows for a clean solution without requiring multiple loops or complex logic.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The problem is mainly about traversing the linked list and calculating sums for segments between `0` nodes.
+- A recursive or iterative approach can be used to traverse the list, accumulating sums between `0` nodes.
+{{< dots >}}
+### Edge Cases 🌐
+- The input list will never be empty or contain fewer than 3 nodes.
+- For larger inputs (up to 200,000 nodes), ensure the solution is efficient.
+- Handle cases where the segments between `0` nodes have only one node.
+- The solution should run efficiently within the input constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    ListNode* mergeNodes(ListNode* head) {
-        // Base case: If there is no node after the head (empty or only one element in the list)
-        if (!head->next) return nullptr;
+ListNode* mergeNodes(ListNode* head) {
+    if(!head->next) return nullptr;
+
+    ListNode* ptr = head->next;
+    int sum = 0;
+    while(ptr->val!=0) sum += ptr->val, ptr = ptr->next;
+    head->next->val = sum;
+    head->next->next= mergeNodes(ptr);
+    return head->next;
+}
 ```
-- We start by checking if the `head->next` is `nullptr`, indicating that there are no further nodes after the `head`. In this case, we return `nullptr`, signaling the end of the list. This check acts as a base case for the recursion.
 
-```cpp
-        ListNode* ptr = head->next;
-        int sum = 0;
-```
-- We initialize a pointer `ptr` to `head->next`, which represents the first node after the initial zero node. We also initialize `sum` to 0, which will hold the sum of the values between consecutive zeros.
+This function, `mergeNodes`, takes a linked list starting at `head` and sums the values of nodes between the zero-valued nodes. It recursively merges the nodes by accumulating the sums, adjusting the values, and returning the modified list.
 
-```cpp
-        while(ptr->val != 0) sum += ptr->val, ptr = ptr->next;
-```
-- Here, we use a `while` loop to traverse the list starting from `ptr`. The loop continues until we encounter a node with a value of `0`. During the traversal, we keep adding the values of the nodes to `sum`. This accumulates the values between the zeros, essentially summing the block of numbers.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	ListNode* mergeNodes(ListNode* head) {
+	```
+	Define the function `mergeNodes` that processes a linked list to merge nodes by summing values between zero-valued nodes.
 
-```cpp
-        head->next->val = sum;
-```
-- Once we've summed all the values between the zeros, we assign the accumulated `sum` to `head->next->val`. This replaces the first node of the block with the calculated sum.
+2. **Base Case Check**
+	```cpp
+	    if(!head->next) return nullptr;
+	```
+	Check if the next node of `head` is null (base case). If so, return `nullptr` to end the recursion.
 
-```cpp
-        head->next->next = mergeNodes(ptr);
-```
-- Now that we've merged the first block of nodes, we recursively call `mergeNodes(ptr)`, passing the pointer `ptr` (which now points to the node with value `0` after the sum block). This recursive call will handle the next block of nodes that appear after the first zero.
+3. **Pointer Initialization**
+	```cpp
+	    ListNode* ptr = head->next;
+	```
+	Initialize a pointer `ptr` to point to the node following `head`.
 
-```cpp
-        return head->next;
-    }
-};
-```
-- Finally, we return `head->next` which now points to the newly modified list with merged sums. This will be the new head of the list.
+4. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initialize a variable `sum` to accumulate the sum of node values between zero-valued nodes.
 
-### Example Walkthrough
+5. **Sum Calculation Loop**
+	```cpp
+	    while(ptr->val!=0) sum += ptr->val, ptr = ptr->next;
+	```
+	Iterate through the list, summing node values (`ptr->val`) until a zero-valued node is encountered. Move the pointer `ptr` to the next node after each iteration.
 
-Let’s walk through an example to better understand how the solution works.
+6. **Assign Sum to Node**
+	```cpp
+	    head->next->val = sum;
+	```
+	Assign the calculated sum to the `val` of the node immediately following `head`.
 
-#### Example 1: 
-Input: `head = [0, 1, 2, 3, 0, 4, 5, 6, 0]`
+7. **Recursive Call**
+	```cpp
+	    head->next->next= mergeNodes(ptr);
+	```
+	Recursively call `mergeNodes` with the next node (`ptr`) and update the `next` pointer of the node following `head` with the result of this recursive call.
 
-**Step-by-Step Execution:**
-- Initially, `head = [0, 1, 2, 3, 0, 4, 5, 6, 0]`.
-- First block (between `0` and `0`):
-  - Sum: `1 + 2 + 3 = 6`.
-  - Replace the first node with value `6`.
-  - New list: `head = [0, 6, 0, 4, 5, 6, 0]`.
-- Second block (between `0` and `0`):
-  - Sum: `4 + 5 + 6 = 15`.
-  - Replace the first node with value `15`.
-  - New list: `head = [0, 6, 15, 0]`.
+8. **Return Statement**
+	```cpp
+	    return head->next;
+	```
+	Return the modified list starting from the node following `head`.
 
-At the end, the resulting list will be `head = [6, 15]`, with all zeros removed and blocks summed.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Example 2:
-Input: `head = [0, 3, 5, 0]`
+The time complexity is linear, as we traverse the list once.
 
-**Step-by-Step Execution:**
-- First block (between `0` and `0`):
-  - Sum: `3 + 5 = 8`.
-  - Replace the first node with value `8`.
-  - New list: `head = [0, 8, 0]`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The final result will be `head = [8]`.
+The space complexity is constant, as we only need a few pointers for traversal.
 
-### Time Complexity
+**Happy Coding! 🎉**
 
-- **Time Complexity**: The time complexity is **O(n)**, where `n` is the number of nodes in the linked list. In the worst case, the algorithm must traverse all the nodes of the linked list once, visiting each node to accumulate the sum and merge the blocks.
-
-- **Space Complexity**: The space complexity is **O(n)** due to the recursive calls, where each recursive call adds a new frame to the call stack. In the worst case, if the list contains no zeros and we have to process the entire list recursively, this could lead to a recursion depth equal to the number of nodes in the list.
-
-### Conclusion
-
-The solution uses recursion to merge blocks of nodes in the singly linked list that are separated by zeros. By traversing the list and summing the values between consecutive zeros, we replace the first zero node in each block with the calculated sum, effectively reducing the problem size at each step. The solution is efficient, with a time complexity of **O(n)**, and handles various edge cases, such as empty lists or lists with no zeros, seamlessly. This recursive approach makes the problem both intuitive and elegant to solve, ensuring that the list is merged correctly as specified in the problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/merge-nodes-in-between-zeros/description/)
 

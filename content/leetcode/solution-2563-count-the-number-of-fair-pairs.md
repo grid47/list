@@ -14,113 +14,174 @@ img_src = ""
 youtube = "Z9hOAQFSQ_I"
 youtube_upload_date="2023-02-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Z9hOAQFSQ_I/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `nums` of size `n` and two integers `lower` and `upper`, find the number of fair pairs. A pair `(i, j)` is considered fair if it satisfies the following conditions:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long countFairPairs(vector<int>& nums, int lower, int upper) {
-        int n = nums.size();
-        sort(nums.begin(), nums.end());
-        long long cnt = 0;
-        for(int i = 0; i < n; i++) {
-            int l = lower - nums[i];
-            int r = upper - nums[i];
-            int u = upper_bound(nums.begin(), nums.end(), r) - nums.begin();
-            int b = max((int)(lower_bound(nums.begin(), nums.end(), l) - nums.begin()), i + 1);
-            cnt +=  (u < b)? 0: u - b;
-        }
-        return cnt;
+- `0 <= i < j < n`
+- `lower <= nums[i] + nums[j] <= upper`
+
+Return the number of such pairs.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers `nums` of size `n`, and two integers `lower` and `upper`.
+- **Example:** `nums = [0,1,7,4,4,5], lower = 3, upper = 6`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^9 <= nums[i] <= 10^9
+	- -10^9 <= lower <= upper <= 10^9
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of fair pairs (i, j) satisfying the given conditions.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The output should be a single integer representing the number of fair pairs.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To count the number of fair pairs (i, j) such that the sum of `nums[i] + nums[j]` lies within the range [lower, upper].
+
+- Sort the array `nums` to efficiently check pairs.
+- For each element in the array, calculate the range [lower - nums[i], upper - nums[i]] for the second element of the pair.
+- Use binary search to find the bounds for valid second elements in the array.
+- Count the number of pairs (i, j) that satisfy the condition `lower <= nums[i] + nums[j] <= upper`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums is 0-indexed.
+- The integers lower and upper are inclusive and must satisfy lower <= upper.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** Given the array nums = [0,1,7,4,4,5], lower = 3, upper = 6, we can form 6 valid pairs. The pairs are: (0,3), (0,4), (0,5), (1,3), (1,4), and (1,5).
+
+- **Input:** `Example 2:`  \
+  **Explanation:** Given the array nums = [1,7,9,2,5], lower = 11, upper = 11, there is only one valid pair: (2,3), where the sum of nums[2] + nums[3] equals 11.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves sorting the array and using binary search to efficiently count valid pairs that satisfy the condition.
+
+### Initial Thoughts 💭
+- Sorting the array helps in quickly finding valid pairs using binary search.
+- For each element, we need to check a range of possible values for the second element of the pair.
+- Sorting the array allows us to efficiently find pairs using binary search, reducing the time complexity.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array should return 0, as there are no pairs to check.
+- The approach should efficiently handle arrays of size up to 10^5, as specified in the constraints.
+- If nums contains very large or very small numbers, the approach must still work within the given bounds of [-10^9, 10^9].
+- The solution must handle inputs efficiently to avoid timeouts, particularly when nums is large.
+{{< dots >}}
+## Code 💻
+```cpp
+long long countFairPairs(vector<int>& nums, int lower, int upper) {
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    long long cnt = 0;
+    for(int i = 0; i < n; i++) {
+        int l = lower - nums[i];
+        int r = upper - nums[i];
+        int u = upper_bound(nums.begin(), nums.end(), r) - nums.begin();
+        int b = max((int)(lower_bound(nums.begin(), nums.end(), l) - nums.begin()), i + 1);
+        cnt +=  (u < b)? 0: u - b;
     }
-};
-{{< /highlight >}}
----
+    return cnt;
+}
+```
 
-### Problem Statement
+This function counts the number of fair pairs in the given vector `nums` such that the sum of any two elements lies between the specified `lower` and `upper` bounds. It uses sorting and binary search to efficiently calculate the number of pairs.
 
-Given an array of integers `nums`, a pair of indices `(i, j)` is considered "fair" if:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long countFairPairs(vector<int>& nums, int lower, int upper) {
+	```
+	The function `countFairPairs` is defined to take a vector `nums` of integers and two integers `lower` and `upper` that represent the bounds for the sum of pairs.
 
-1. `i < j`
-2. The sum of `nums[i]` and `nums[j]` lies between two given values `lower` and `upper`, inclusive.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	The variable `n` is initialized to store the size of the input array `nums`.
 
-The task is to count all fair pairs in the array.
+3. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	The vector `nums` is sorted in ascending order to facilitate efficient searching of pairs later.
 
-### Approach
+4. **Variable Initialization**
+	```cpp
+	    long long cnt = 0;
+	```
+	The variable `cnt` is initialized to 0, which will be used to count the number of fair pairs.
 
-1. **Sorting the Array**: The first step is to sort the `nums` array. Sorting helps us use binary search techniques to efficiently find pairs within a specified range. By sorting, we can locate elements that add up to a sum within our desired bounds much faster.
+5. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is set up to iterate through each element of the sorted vector `nums`.
 
-2. **Iterate through Each Element**: For each element `nums[i]` in the array (from index `0` to `n-1`), we aim to find pairs where `i < j` such that the sum `nums[i] + nums[j]` lies within the `[lower, upper]` range.
+6. **Calculating Lower Bound**
+	```cpp
+	        int l = lower - nums[i];
+	```
+	For each element `nums[i]`, calculate the value `l`, which is the difference between the `lower` bound and `nums[i]`. This represents the smallest possible value for the second element in the pair.
 
-3. **Define Bounds**:
-   - Set `l` as `lower - nums[i]`, which represents the minimum required value for `nums[j]` so that `nums[i] + nums[j] >= lower`.
-   - Set `r` as `upper - nums[i]`, representing the maximum allowable value for `nums[j]` so that `nums[i] + nums[j] <= upper`.
+7. **Calculating Upper Bound**
+	```cpp
+	        int r = upper - nums[i];
+	```
+	Similarly, calculate the value `r`, which is the difference between the `upper` bound and `nums[i]`. This represents the largest possible value for the second element in the pair.
 
-4. **Binary Search for Bounds**:
-   - Use `lower_bound` to find the first position `b` where `nums[b] >= l`. Since we are only interested in pairs with `i < j`, we ensure `b > i` by taking `b = max(b, i + 1)`.
-   - Use `upper_bound` to find the first position `u` where `nums[u] > r`. This means elements up to `u - 1` are valid pairs with `nums[i]`.
+8. **Binary Search for Upper Bound**
+	```cpp
+	        int u = upper_bound(nums.begin(), nums.end(), r) - nums.begin();
+	```
+	Using binary search, the `upper_bound` function is used to find the position in the sorted array where the value `r` should be inserted. The result is stored in `u`.
 
-5. **Calculate the Number of Fair Pairs**:
-   - If `u < b`, there are no valid pairs for `nums[i]`.
-   - Otherwise, the count of valid pairs with `nums[i]` is `u - b`.
+9. **Binary Search for Lower Bound**
+	```cpp
+	        int b = max((int)(lower_bound(nums.begin(), nums.end(), l) - nums.begin()), i + 1);
+	```
+	Similarly, the `lower_bound` function is used to find the position in the sorted array where the value `l` should be inserted. The result is stored in `b`, but it's adjusted to ensure that the pair starts after the current element `i`.
 
-6. **Accumulate the Result**: Add the count of valid pairs for each `i` to a total counter `cnt`.
+10. **Counting Valid Pairs**
+	```cpp
+	        cnt +=  (u < b)? 0: u - b;
+	```
+	If `u` is less than `b`, there are no valid pairs for the current element `i`, so 0 is added to `cnt`. Otherwise, the number of valid pairs is `u - b`, which is added to `cnt`.
 
-### Code Breakdown (Step by Step)
+11. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	Return the final count of fair pairs stored in `cnt`.
 
-1. **Sort the Array**:  
-   ```cpp
-   sort(nums.begin(), nums.end());
-   ```
-   Sorting helps us efficiently locate elements within the target range for each `nums[i]`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-2. **Initialize Count and Loop Through Elements**:
-   ```cpp
-   long long cnt = 0;
-   for(int i = 0; i < n; i++) { ... }
-   ```
-   Initialize `cnt` to store the number of fair pairs. We loop through each element in the sorted array to treat it as the first element of each potential fair pair.
+The time complexity is dominated by the sorting step (O(n log n)) and binary search for each element (O(log n)).
 
-3. **Define Lower and Upper Bounds**:
-   ```cpp
-   int l = lower - nums[i];
-   int r = upper - nums[i];
-   ```
-   For each `nums[i]`, calculate `l` and `r` to set the bounds for potential values of `nums[j]` that would make a fair pair with `nums[i]`.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Binary Search for Bounds**:
-   ```cpp
-   int u = upper_bound(nums.begin(), nums.end(), r) - nums.begin();
-   int b = max((int)(lower_bound(nums.begin(), nums.end(), l) - nums.begin()), i + 1);
-   ```
-   - `upper_bound` finds the first position where `nums[u] > r`, giving the index of the smallest element that would exceed the upper limit for `nums[j]`.
-   - `lower_bound` finds the first position where `nums[b] >= l`, ensuring `nums[j]` is at least `l`. We use `max(b, i + 1)` to enforce `i < j`.
+The space complexity is O(n) due to the need to store the sorted array.
 
-5. **Count Valid Pairs**:
-   ```cpp
-   cnt += (u < b) ? 0 : u - b;
-   ```
-   If `u < b`, no fair pairs are found. Otherwise, `u - b` gives the count of fair pairs for the current `nums[i]`.
+**Happy Coding! 🎉**
 
-6. **Return Result**:
-   ```cpp
-   return cnt;
-   ```
-   Finally, return the accumulated count of fair pairs.
-
-### Complexity Analysis
-
-- **Time Complexity**: Sorting the array takes \(O(n \log n)\). For each element, finding bounds using `lower_bound` and `upper_bound` is \(O(\log n)\), leading to an overall time complexity of \(O(n \log n)\).
-  
-- **Space Complexity**: The algorithm uses \(O(1)\) additional space for counters and indices, making it space-efficient.
-
-### Conclusion
-
-This solution efficiently counts all fair pairs in the array by combining sorting with binary search for rapid range checks, leveraging the power of `lower_bound` and `upper_bound`. This reduces the need for nested loops, enabling a more scalable solution for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-fair-pairs/description/)
 

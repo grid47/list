@@ -14,102 +14,145 @@ img_src = ""
 youtube = "-VVN0FI0KFo"
 youtube_upload_date="2024-10-15"
 youtube_thumbnail="https://i.ytimg.com/vi/-VVN0FI0KFo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string s of length n, where each character represents a ball: '1' for black and '0' for white. The goal is to arrange the balls such that all the white balls are on the left side and all the black balls are on the right side, by swapping two adjacent balls in each step. You need to find the minimum number of adjacent swaps required to achieve this arrangement.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a binary string s of length n where each character is either '1' or '0'.
+- **Example:** `s = '110'`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- s[i] is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long minimumSteps(string s) {
-        long long res = 0;
-        for (int i = 0, cnt = 0; i < s.size(); ++i) {
-            if (s[i] == '1')
-                ++cnt;
-            else
-                res += cnt;
-        }
-        return res;        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of adjacent swaps required to group all black balls to the right and all white balls to the left.
+- **Example:** `For s = '110', the output is 1.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the minimum number of adjacent swaps required to sort all black balls to the right and all white balls to the left.
+
+- Iterate through the string while counting the number of white balls ('0') encountered.
+- For each black ball ('1'), count how many white balls are to the left of it, as this indicates how many swaps are needed to move the black ball to its correct position.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string contains at least one ball, and no more than 100,000 balls.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = '110'`  \
+  **Explanation:** One swap is needed to move the black ball at position 1 to the right.
+
+- **Input:** `s = '01010'`  \
+  **Explanation:** Four swaps are needed to move all black balls to the right.
+
+- **Input:** `s = '000111'`  \
+  **Explanation:** No swaps are needed because all black balls are already grouped to the right.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the string, counting how many swaps are needed to move each black ball to its correct position by counting the number of white balls before it.
+
+### Initial Thoughts 💭
+- The problem is about calculating the number of swaps needed to order the black and white balls correctly.
+- We can keep a running count of the number of white balls encountered so far, and for each black ball, we add this count to the total number of swaps.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input string is empty, return 0 as no swaps are needed.
+- The solution must efficiently handle strings with lengths up to 100,000.
+- If the string is already in the desired arrangement (all white balls on the left and black balls on the right), return 0.
+- The input string will not be empty.
+{{< dots >}}
+## Code 💻
+```cpp
+long long minimumSteps(string s) {
+    long long res = 0;
+    for (int i = 0, cnt = 0; i < s.size(); ++i) {
+        if (s[i] == '1')
+            ++cnt;
+        else
+            res += cnt;
     }
-};
-{{< /highlight >}}
----
+    return res;        
+}
+```
 
-### Problem Statement:
-Given a binary string `s` consisting of characters `'0'` and `'1'`, the task is to find the number of steps required to change all `'0'` characters to `'1'`. The problem specifies that the steps must be counted in a way that each step involves flipping a `'0'` to `'1'` by considering all previous `'1'`s to the left of it. Each flip adds a number of steps equal to the number of `'1'`s seen before the current `'0'`.
+This function calculates the minimum number of steps needed to transform a binary string into another, where each step is defined as the number of '1's encountered before a '0'. The result is the total count of such steps in the input string.
 
-In simpler terms, we need to count how many `'1'`s are to the left of each `'0'`, and the total number of flips is the sum of these counts for all `'0'`s in the string.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long minimumSteps(string s) {
+	```
+	Defines the function 'minimumSteps' which takes a binary string 's' as input and returns the minimum number of steps required to transform it based on the logic described.
 
-### Approach:
-The key to solving this problem efficiently lies in iterating over the string and keeping track of how many `'1'`s we've encountered as we go through the string. For each `'0'` encountered, the number of `'1'`s that have been encountered up to that point is added to the result. This is because every `'1'` before a `'0'` represents a valid flip step that will change that `'0'` into a `'1'`.
+2. **Result Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Initializes a variable 'res' to zero, which will store the total number of steps (sum of '1's encountered before each '0').
 
-To summarize, the approach can be outlined as follows:
-1. Traverse the string from left to right.
-2. Keep a running count of how many `'1'`s have been seen up to each position.
-3. For each `'0'` encountered, add the count of `'1'`s to the result, as these represent the number of flips needed to convert that `'0'`.
-4. The total result will be the sum of all flips needed to convert every `'0'` to `'1'` based on the previous `'1'`s.
+3. **Loop Setup**
+	```cpp
+	    for (int i = 0, cnt = 0; i < s.size(); ++i) {
+	```
+	Sets up a loop to iterate through the characters of the string 's'. The variable 'cnt' tracks the number of '1's encountered during the iteration.
 
-### Code Breakdown (Step by Step):
+4. **Check for '1'**
+	```cpp
+	        if (s[i] == '1')
+	```
+	Checks if the current character is a '1'. If true, it increments the 'cnt' variable.
 
-#### 1. **Variable Initialization**:
-   We start by initializing two variables:
-   - `res`: This will store the total number of steps required to flip all `'0'`s to `'1'`s.
-   - `cnt`: This will keep track of the number of `'1'`s encountered so far in the string.
+5. **Increment Count of '1's**
+	```cpp
+	            ++cnt;
+	```
+	Increments the 'cnt' variable by 1, tracking the number of '1's encountered so far.
 
-   ```cpp
-   long long res = 0;
-   for (int i = 0, cnt = 0; i < s.size(); ++i) {
-   ```
+6. **Check for '0'**
+	```cpp
+	        else
+	```
+	If the current character is not '1', meaning it's a '0', the code inside this block is executed.
 
-#### 2. **Iterating Over the String**:
-   We iterate over each character in the string `s`. The loop variable `i` is used to track the index of the current character.
+7. **Add Steps for '0'**
+	```cpp
+	            res += cnt;
+	```
+	Adds the value of 'cnt' to 'res', indicating that each '1' encountered before the '0' adds to the total steps.
 
-   ```cpp
-   for (int i = 0, cnt = 0; i < s.size(); ++i) {
-   ```
+8. **Return Statement**
+	```cpp
+	    return res;        
+	```
+	Returns the total number of steps stored in 'res'. This is the final result after iterating through the entire string.
 
-#### 3. **Handling `'1'` Characters**:
-   Whenever we encounter a `'1'`, we simply increment the `cnt` variable because each `'1'` encountered represents an additional valid flip that can be used for any subsequent `'0'`s.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-   if (s[i] == '1')
-       ++cnt;
-   ```
+The solution requires a single pass over the string, which is O(n) in all cases.
 
-#### 4. **Handling `'0'` Characters**:
-   If the current character is `'0'`, we add the number of `'1'`s encountered so far (`cnt`) to the result `res`. This is because each `'1'` before this `'0'` represents a valid flip operation that will change this `'0'` into `'1'`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   ```cpp
-   else
-       res += cnt;
-   ```
+The space complexity is constant since only a few variables are used to track the count of white balls and the swaps.
 
-#### 5. **Return the Result**:
-   Once the entire string is processed, the variable `res` contains the total number of flip steps required to convert all `'0'`s to `'1'`s. The function then returns `res`.
+**Happy Coding! 🎉**
 
-   ```cpp
-   return res;
-   ```
-
-### Complexity:
-
-#### Time Complexity:
-- We are iterating over the string `s` once, and for each character, we perform constant time operations (incrementing variables or adding to the result). Therefore, the time complexity is \(O(n)\), where `n` is the length of the string `s`.
-
-#### Space Complexity:
-- We are using only a constant amount of extra space to store the variables `res` and `cnt`. Therefore, the space complexity is \(O(1)\).
-
-### Conclusion:
-This solution efficiently computes the minimum number of steps required to change all `'0'`s to `'1'`s in a binary string. By keeping track of the number of `'1'`s encountered as we traverse the string, we can quickly calculate the number of steps for each `'0'` encountered. The overall time complexity is linear in the size of the input string, and the space complexity is constant. This makes the solution optimal and well-suited for large strings. 
-
-In summary:
-- **Time Complexity**: \(O(n)\), where `n` is the length of the input string `s`.
-- **Space Complexity**: \(O(1)\).
-
-This solution ensures that we count the number of steps required in an efficient manner, making it a great fit for competitive programming and scenarios where performance is critical.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/separate-black-and-white-balls/description/)
 

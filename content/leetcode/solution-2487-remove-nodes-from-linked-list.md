@@ -14,113 +14,120 @@ img_src = ""
 youtube = "y783sRTezDg"
 youtube_upload_date="2024-05-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/y783sRTezDg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the head of a linked list. Your task is to remove every node that has a node with a greater value to its right. The modified linked list should be returned after the removal of such nodes.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the head of a singly linked list, where each node contains a single integer value.
+- **Example:** `head = [4, 3, 9, 1, 7]`
+- **Constraints:**
+	- 1 <= Number of nodes <= 10^5
+	- 1 <= Node.val <= 10^5
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* removeNodes(ListNode* head) {
-        if(head == NULL) return NULL;
-        head->next = removeNodes(head->next);
-        return head->next != NULL && head->val < head->next->val ? head->next: head;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the head of the modified linked list after removing the nodes that have a greater value node to the right.
+- **Example:** `Output: [9, 7]`
+- **Constraints:**
+	- The returned linked list will not have any node with a value smaller than any node to its right.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to iterate through the list and identify nodes whose values are smaller than any of the nodes that appear to their right. Remove those nodes.
 
-The problem involves removing nodes from a singly linked list such that for any node, if its value is less than the value of the node that comes after it, it should be removed. This task is often referred to as eliminating nodes that are "less than" the next node in the list, ensuring that the resulting linked list remains in non-decreasing order.
+- 1. Start from the head of the list and recursively process the right part of the list.
+- 2. For each node, compare its value with the maximum value found in the remaining list.
+- 3. If the node's value is less than the maximum value on its right, remove the node. Otherwise, keep the node in the list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is a valid singly linked list.
+- All nodes are distinct or may have duplicate values, but values are within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `head = [4, 3, 9, 1, 7]`  \
+  **Explanation:** In this case, the nodes with values 4, 3, and 1 should be removed. 9 and 7 remain because no larger nodes exist to the right of these.
 
-Given a singly linked list where each node has a value and a pointer to the next node, the goal is to remove nodes such that the remaining nodes form a list where the value of each node is greater than or equal to the node that follows it.
+- **Input:** `head = [10, 20, 30, 40]`  \
+  **Explanation:** No nodes need to be removed in this case as each node is larger than all nodes to its right.
 
-For example, consider the list:
+- **Input:** `head = [1, 2, 3, 2, 1]`  \
+  **Explanation:** In this case, only the node with value 1 should remain as the others have greater nodes to their right.
 
-`1 -> 3 -> 2 -> 5 -> 4 -> NULL`
+{{< dots >}}
+## Approach 🚀
+We use a recursive approach to solve this problem. As we traverse the list from right to left, we compare the current node with the maximum value on the right side. Nodes that are smaller than the maximum are removed.
 
-After removing the nodes that are less than the next node, the list should become:
-
-`3 -> 5 -> NULL`
-
-### Approach
-
-The approach to solving this problem can be broken down into the following steps:
-
-1. **Recursive Traversal**: Since the problem involves checking consecutive nodes in a list, it is well-suited for a recursive approach. We will recursively process the list from the end to the beginning.
-  
-2. **Reverse Order Processing**: In a recursive approach, we first reach the end of the list (base case), and then process the nodes while "unwinding" the recursive stack. This reverse order allows us to compare each node with its next node, making it easier to determine if the current node needs to be removed based on the value of the next node.
-
-3. **Node Removal Condition**: As we traverse, we check if the current node's value is less than the value of the next node. If it is, the current node is removed. If it isn’t, we keep the current node in the list.
-
-4. **Returning the Head**: The base case is when the list is empty (`head == NULL`), in which case we simply return `NULL`. For each recursive call, we decide whether to keep or remove the current node, and finally return the updated head of the list.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Base Case Handling**
-
+### Initial Thoughts 💭
+- We need to efficiently remove nodes that have a greater value node to their right.
+- We can traverse the list recursively to achieve this.
+- By processing the list from the rightmost node to the left, we can ensure that we always compare the current node with the maximum value on its right.
+{{< dots >}}
+### Edge Cases 🌐
+- If the linked list contains only one node, return the list as is.
+- Ensure the solution runs efficiently with input sizes of up to 10^5 nodes.
+- If all nodes have the same value, no nodes should be removed.
+- Handle lists with large input sizes efficiently, with a linear time complexity.
+{{< dots >}}
+## Code 💻
 ```cpp
-if (head == NULL) return NULL;
+ListNode* removeNodes(ListNode* head) {
+    if(head == NULL) return NULL;
+    head->next = removeNodes(head->next);
+    return head->next != NULL && head->val < head->next->val ? head->next: head;
+}
 ```
 
-- This is the base case of the recursion. If the `head` of the list is `NULL`, it means we have reached the end of the list. In this case, we return `NULL`, signaling the end of the modified list.
+This function removes nodes from a linked list where the value of the node is smaller than the value of the next node, recursively processing the list from the end to the beginning.
 
-#### 2. **Recursive Call**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* removeNodes(ListNode* head) {
+	```
+	This line declares the function `removeNodes` which takes a pointer to a `ListNode` (`head`) as input and returns a pointer to a `ListNode` after potentially removing certain nodes.
 
-```cpp
-head->next = removeNodes(head->next);
-```
+2. **Base Case Check**
+	```cpp
+	    if(head == NULL) return NULL;
+	```
+	This is the base case of the recursion. If the current node is NULL (i.e., the end of the list is reached), the function returns NULL.
 
-- This line recursively calls `removeNodes` on the next node in the list. It keeps calling the function until the end of the list is reached (base case). As the recursion unwinds, it starts comparing nodes and deciding whether to keep or remove them.
+3. **Recursive Call**
+	```cpp
+	    head->next = removeNodes(head->next);
+	```
+	This line recursively calls the `removeNodes` function on the next node (`head->next`), processing the entire list from end to start.
 
-#### 3. **Node Removal Decision**
+4. **Condition for Node Removal**
+	```cpp
+	    return head->next != NULL && head->val < head->next->val ? head->next: head;
+	```
+	After the recursive call, this line checks if the current node's value is smaller than the next node's value. If it is, the current node is skipped, and the next node becomes the new head. Otherwise, the current node is retained.
 
-```cpp
-return head->next != NULL && head->val < head->next->val ? head->next : head;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- Once the recursive call is made and the next node is processed, we compare the current node (`head`) with the next node (`head->next`).
-- The condition `head->next != NULL && head->val < head->next->val` checks if the current node’s value is smaller than the next node’s value.
-  - If the condition is true, it means the current node should be removed. We return `head->next`, effectively removing the current node.
-  - If the condition is false, the current node is kept in the list, and we return `head`.
+The time complexity is O(n) where n is the number of nodes in the linked list. We traverse the list once.
 
-#### 4. **Function Return**
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-At the end of the recursion, the head of the modified list is returned. This head will either be the same as the initial head or will have changed based on the removal of certain nodes.
+The space complexity is O(n) due to recursion stack space in the worst case. In the best case, no extra space is needed.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-#### Time Complexity:
-The time complexity of the solution is **O(n)**, where `n` is the number of nodes in the linked list. This is because the function makes one pass through the entire list, and each node is processed once. Specifically:
-- Each recursive call processes a single node.
-- The list is traversed once to modify the nodes.
-
-Therefore, the time complexity is **O(n)**, where `n` is the number of nodes in the list.
-
-#### Space Complexity:
-The space complexity is **O(n)** due to the recursive call stack. In the worst case, the recursion depth can go as deep as the number of nodes in the linked list. Thus, the space complexity is proportional to the number of nodes.
-
-### Conclusion
-
-This solution efficiently solves the problem by using a recursive approach to traverse the list in reverse order. By using recursion, we process each node starting from the end of the list, making it easy to decide whether to remove a node based on the value of the node that follows it. 
-
-The algorithm operates with linear time complexity **O(n)** and space complexity **O(n)** due to the recursive stack. This approach ensures that nodes which violate the condition (having a value smaller than the next node) are removed, and the resulting list maintains a non-decreasing order. 
-
-The solution is both simple and effective for problems that require processing linked lists in a sequential manner, especially when recursion provides a natural way to traverse the list.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-nodes-from-linked-list/description/)
 

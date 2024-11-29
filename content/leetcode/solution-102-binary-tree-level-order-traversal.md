@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "6ZnyEApgFYg"
 youtube_upload_date="2021-03-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/6ZnyEApgFYg/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,157 +28,207 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/6ZnyEApgFYg/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, your task is to return the level order traversal of its nodes' values. This means you should traverse the tree level by level, from left to right at each level.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the root of a binary tree, where each node has a value and pointers to its left and right children.
+- **Example:** `root = [5,3,8,1,4,null,9]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [0, 2000].
+	- -1000 <= Node.val <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> ans;
-        if(!root) return ans;
-        queue<TreeNode*> q;
-        q.push(root);
-        while(!q.empty()) {
-            int sz = q.size();
-            vector<int> res;
-            while(sz--) {
-                TreeNode* tmp = q.front();
-                res.push_back(tmp->val);
-                q.pop();
-                if(tmp->left) q.push(tmp->left);
-                if(tmp->right) q.push(tmp->right);
-            }
-            ans.push_back(res);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a 2D array where each element represents a level in the binary tree. Each level is a list of node values at that level, traversed from left to right.
+- **Example:** `Output: [[5], [3, 8], [1, 4, 9]]`
+- **Constraints:**
+	- The output should be an array of arrays where each inner array contains the values of the nodes at that level.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to perform a level order traversal of the binary tree using a queue to process nodes level by level.
+
+- Start by checking if the root is null. If it is, return an empty list.
+- Initialize a queue with the root node.
+- While the queue is not empty, process each node at the current level.
+- For each level, create a list of node values and add the left and right children of each node to the queue.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always a valid binary tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [3,9,20,null,null,15,7]`  \
+  **Explanation:** The binary tree has the following structure:
+
+       3
+      / \
+     9  20
+        /  \
+       15   7
+
+The level order traversal is: [[3], [9, 20], [15, 7]]
+
+- **Input:** `root = [1]`  \
+  **Explanation:** The binary tree consists of just one node, which is the root node. The level order traversal is: [[1]]
+
+- **Input:** `root = []`  \
+  **Explanation:** An empty tree has no nodes, so the level order traversal is: []
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using a breadth-first search (BFS) approach where we explore the tree level by level, ensuring nodes at each level are processed from left to right.
+
+### Initial Thoughts 💭
+- Level order traversal can be efficiently implemented using a queue.
+- By using a queue, we can ensure that we process nodes level by level, which is the key to solving this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty (i.e., the root is null), return an empty list.
+- For large trees with up to 2000 nodes, ensure the solution handles the input efficiently.
+- If a node has only one child (either left or right), make sure it is properly handled during the level order traversal.
+- The tree must be processed within the provided constraints (2000 nodes).
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> ans;
+    if(!root) return ans;
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        int sz = q.size();
+        vector<int> res;
+        while(sz--) {
+            TreeNode* tmp = q.front();
+            res.push_back(tmp->val);
+            q.pop();
+            if(tmp->left) q.push(tmp->left);
+            if(tmp->right) q.push(tmp->right);
         }
-        return ans;
+        ans.push_back(res);
     }
-};
-{{< /highlight >}}
----
-
-
-### 🌳 **Level Order Traversal of Binary Tree**
-
-The problem asks us to return the **level order traversal** of a binary tree. In level order traversal, nodes are visited level by level from left to right. The result should be a list of lists, where each inner list contains the values of the nodes at a specific level of the tree.
-
----
-
-### 🔑 **Approach:**
-
-To solve this problem, we will utilize a **Breadth-First Search (BFS)** algorithm, which is ideal for level-order traversal of trees. This can be efficiently implemented using a **queue**, which processes nodes level by level:
-1. Start with the root node in the queue.
-2. Process all nodes at the current level, dequeueing them from the queue and adding their values to the result.
-3. For each node, enqueue its left and right children (if they exist).
-4. Repeat the process until all nodes have been processed, ensuring the nodes are visited in the correct order.
-
----
-
-### 💻 **Code Breakdown (Step by Step):**
-
-#### **1. Function Definition**
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+    return ans;
+}
 ```
 
-- The function `levelOrder` is part of the `Solution` class. It takes a pointer to the root of the binary tree as input and returns a vector of vectors of integers, where each inner vector represents the values of nodes at each level of the tree.
+This function performs a level-order traversal (BFS) on a binary tree, returning the values of each level in separate vectors.
 
-#### **2. Initializing the Result Container**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> levelOrder(TreeNode* root) {
+	```
+	Define the function 'levelOrder' which takes the root of the tree and returns a 2D vector of integers, representing the tree's level-order traversal.
 
-```cpp
-        vector<vector<int>> ans;
-        if(!root) return ans;
-```
+2. **Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	Initialize an empty 2D vector 'ans' to store the values of each level of the tree.
 
-- `ans` is a vector of vectors that will store the result of the level-order traversal.
-- The condition checks if the root is `NULL`. If the root is `NULL`, it means the tree is empty, and we return an empty result immediately.
+3. **Base Case**
+	```cpp
+	    if(!root) return ans;
+	```
+	If the tree is empty (root is NULL), return the empty result vector.
 
-#### **3. Initializing the Queue**
+4. **Queue Initialization**
+	```cpp
+	    queue<TreeNode*> q;
+	```
+	Create a queue to assist in performing a breadth-first search (BFS). The queue will hold nodes at each level.
 
-```cpp
-        queue<TreeNode*> q;
-        q.push(root);
-```
+5. **Push Root to Queue**
+	```cpp
+	    q.push(root);
+	```
+	Push the root node to the queue to begin the level-order traversal.
 
-- A queue `q` is used to manage the nodes during the level-order traversal.
-- The root node is pushed into the queue to begin the traversal.
+6. **Main BFS Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	While the queue is not empty, continue processing the nodes level by level.
 
-#### **4. Processing the Tree Level by Level**
+7. **Level Size**
+	```cpp
+	        int sz = q.size();
+	```
+	Store the current size of the queue, which represents the number of nodes at the current level.
 
-```cpp
-        while(!q.empty()) {
-            int sz = q.size();
-            vector<int> res;
-```
+8. **Result Vector**
+	```cpp
+	        vector<int> res;
+	```
+	Initialize a temporary vector 'res' to hold the node values for the current level.
 
-- The `while` loop continues as long as there are nodes in the queue, meaning there are still levels to process.
-- `sz` stores the number of nodes at the current level (i.e., the size of the queue).
-- `res` is a temporary vector that will hold the values of nodes at the current level.
+9. **Level Nodes Processing**
+	```cpp
+	        while(sz--) {
+	```
+	Process each node at the current level by looping through the queue until all nodes at this level are visited.
 
-#### **5. Processing Each Node at the Current Level**
+10. **Queue Front**
+	```cpp
+	            TreeNode* tmp = q.front();
+	```
+	Get the front node from the queue, which is the current node to be processed.
 
-```cpp
-            while(sz--) {
-                TreeNode* tmp = q.front();
-                res.push_back(tmp->val);
-                q.pop();
-```
+11. **Add Node Value**
+	```cpp
+	            res.push_back(tmp->val);
+	```
+	Add the value of the current node to the 'res' vector.
 
-- The inner `while` loop iterates over all nodes at the current level. The loop runs `sz` times, corresponding to the number of nodes at the current level.
-- For each node, we dequeue it from the front of the queue, add its value to the `res` vector, and check its left and right children.
+12. **Queue Pop**
+	```cpp
+	            q.pop();
+	```
+	Pop the processed node from the queue.
 
-#### **6. Enqueueing the Children of the Current Node**
+13. **Left Child Check**
+	```cpp
+	            if(tmp->left) q.push(tmp->left);
+	```
+	If the current node has a left child, push it onto the queue for the next level.
 
-```cpp
-                if(tmp->left) q.push(tmp->left);
-                if(tmp->right) q.push(tmp->right);
-            }
-```
+14. **Right Child Check**
+	```cpp
+	            if(tmp->right) q.push(tmp->right);
+	```
+	If the current node has a right child, push it onto the queue for the next level.
 
-- After processing the current node, we enqueue its left and right children (if they exist) to be processed in the next iteration of the outer loop.
-- This ensures that the nodes are processed level by level, starting from the root.
+15. **Push Level to Result**
+	```cpp
+	        ans.push_back(res);
+	```
+	After processing all nodes at the current level, add the 'res' vector to the final result vector 'ans'.
 
-#### **7. Adding the Current Level’s Result to the Final Answer**
+16. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the final 2D vector 'ans' which contains the level-order traversal of the tree.
 
-```cpp
-            ans.push_back(res);
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- After processing all nodes at the current level, the `res` vector, which contains the values of nodes at that level, is added to the `ans` vector.
+In all cases, we must visit each node in the tree once, so the time complexity is O(n), where n is the number of nodes in the tree.
 
-#### **8. Returning the Final Result**
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-```cpp
-        return ans;
-    }
-};
-```
+In the worst case, the queue may hold all the nodes at the last level of the tree, resulting in a space complexity of O(n). In the best case, when the tree is perfectly balanced, the space complexity could be reduced to O(log n).
 
-- Once all levels have been processed and the queue is empty, we return the `ans` vector containing the level-order traversal of the tree.
+**Happy Coding! 🎉**
 
----
-
-### 🧠 **Time and Space Complexity:**
-
-#### **Time Complexity:**
-
-The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the binary tree. Each node is processed exactly once, and each operation (enqueuing and dequeuing a node) takes constant time. Therefore, the overall time complexity is linear in the number of nodes.
-
-#### **Space Complexity:**
-
-The space complexity is **O(n)**, where `n` is the number of nodes in the tree. In the worst case, the queue will store all the nodes at the last level, which could be half of the nodes in a perfectly balanced binary tree. Additionally, the result vector `ans` stores all the node values, which requires `O(n)` space.
-
----
-
-### 🎯 **Conclusion:**
-
-This solution efficiently solves the problem of level-order traversal by utilizing the **Breadth-First Search (BFS)** algorithm. It uses a queue to process the nodes level by level, ensuring that the nodes are visited in the correct order. The time complexity is **O(n)**, and the space complexity is **O(n)**, making this solution both time and space efficient. By storing the node values at each level, the solution provides the desired output: a list of lists where each inner list represents the values of nodes at a specific level of the tree.
-
----
-
-**Happy coding!** 🌱✨
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
 

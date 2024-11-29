@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,108 +28,137 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a sorted array `letters` containing lowercase English letters and a character `target`. Return the smallest character in `letters` that is lexicographically greater than `target`. If no such character exists, return the first character in `letters`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sorted array of lowercase English characters `letters` and a character `target`. The array `letters` has at least two distinct characters.
+- **Example:** `letters = ["b", "e", "h", "m", "t"], target = "a"`
+- **Constraints:**
+	- 2 <= letters.length <= 10^4
+	- letters[i] is a lowercase English letter.
+	- letters is sorted in non-decreasing order.
+	- letters contains at least two different characters.
+	- target is a lowercase English letter.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    char nextGreatestLetter(vector<char>& letters, char target) {
-        char ans = letters[0];
-        for(int i = 0; i < letters.size(); i++) {
-            if(letters[i] > target) {
-                ans = letters[i];
-                break;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest character from `letters` that is greater than `target`. If no such character exists, return the first character in `letters`.
+- **Example:** `For letters = ["b", "e", "h", "m", "t"], target = "a", the output is "b".`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the smallest character in `letters` that is greater than `target`, or return the first character if no such character exists.
+
+- Iterate over the `letters` array to find the first character that is greater than `target`.
+- If such a character is found, return it.
+- If no such character is found, return the first character of `letters`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `letters` is sorted in non-decreasing order and contains at least two distinct characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For letters = ["b", "e", "h", "m", "t"], target = "a"`  \
+  **Explanation:** The smallest character in `letters` that is greater than 'a' is 'b'.
+
+- **Input:** `For letters = ["b", "e", "h", "m", "t"], target = "h"`  \
+  **Explanation:** The smallest character in `letters` that is greater than 'h' is 'm'.
+
+- **Input:** `For letters = ["a", "b", "d", "f"], target = "z"`  \
+  **Explanation:** There is no character in `letters` greater than 'z', so we return the first character 'a'.
+
+{{< dots >}}
+## Approach 🚀
+This problem can be solved by iterating through the sorted array `letters` to find the first character greater than `target`.
+
+### Initial Thoughts 💭
+- The input array is sorted, which allows us to use a simple iteration to find the smallest character greater than `target`.
+- Since the array is sorted, we can stop as soon as we find a character greater than `target`, which optimizes the solution.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that `letters` has at least two distinct characters, so there will be no empty array cases.
+- For large inputs with up to 10^4 characters in `letters`, the solution should still be efficient, using linear time to find the result.
+- If `target` is the largest character in `letters`, the solution will return the first character from the array.
+- The solution should handle the constraints efficiently with a time complexity of O(n), where n is the length of `letters`.
+{{< dots >}}
+## Code 💻
+```cpp
+char nextGreatestLetter(vector<char>& letters, char target) {
+    char ans = letters[0];
+    for(int i = 0; i < letters.size(); i++) {
+        if(letters[i] > target) {
+            ans = letters[i];
+            break;
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the **next greatest letter** in a sorted list of letters that is strictly greater than a given target character. The list of letters is sorted in **non-decreasing** order, and the target is a single character. The goal is to determine the smallest letter in the list that is strictly greater than the target. If no such letter exists, the next greatest letter should be the smallest letter in the list.
-
-For example:
-- Given the letters `['c', 'f', 'j']` and the target `a`, the next greatest letter is `c`.
-- Given the letters `['c', 'f', 'j']` and the target `c`, the next greatest letter is `f`.
-- Given the letters `['c', 'f', 'j']` and the target `k`, the next greatest letter is `c`, because there are no letters greater than `k` in the list.
-
-### Approach
-
-To solve this problem, we need to:
-1. **Iterate through the list** of letters.
-2. **Find the first letter** that is strictly greater than the given target.
-3. If no such letter is found, return the **first letter** in the list, as the list is sorted and wrapping around should give us the smallest letter.
-
-The key observation here is:
-- The list is sorted, which allows us to efficiently search for the next greatest letter.
-- We can perform a **linear scan** of the list because we are only required to find the first letter greater than the target, which avoids the complexity of binary search for this problem.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialization
-
-We begin by initializing `ans` to the first letter in the list. This is a fallback value in case the target is greater than or equal to the largest element in the list, which will ensure that the smallest letter is returned.
-
-```cpp
-char ans = letters[0];  // Initialize answer to the first letter
-```
-
-#### Step 2: Iterate Through the List
-
-We loop through the `letters` vector and compare each letter with the target character. If we find a letter that is greater than the target, we set it as our answer and **break** the loop.
-
-```cpp
-for (int i = 0; i < letters.size(); i++) {
-    if (letters[i] > target) {
-        ans = letters[i];  // Update the answer
-        break;  // Stop the loop once we find the first letter greater than the target
-    }
+    return ans;
 }
 ```
 
-#### Step 3: Return the Answer
+This function finds the smallest letter in the vector 'letters' that is strictly greater than the given 'target'.
 
-After completing the loop, we return the character stored in `ans`. If no letter was found greater than the target (i.e., the target is greater than or equal to the largest letter in the list), `ans` will still contain the first letter of the list, as initialized.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	char nextGreatestLetter(vector<char>& letters, char target) {
+	```
+	This line declares the function nextGreatestLetter, which takes a vector of characters and a target character as input and returns a character.
 
-```cpp
-return ans;
-```
+2. **Variable Initialization**
+	```cpp
+	    char ans = letters[0];
+	```
+	Initialize the variable 'ans' to the first character in the 'letters' vector, which will be updated with the next greater letter.
 
-#### Full Code:
+3. **For Loop Start**
+	```cpp
+	    for(int i = 0; i < letters.size(); i++) {
+	```
+	Start of a loop that iterates over each character in the 'letters' vector.
 
-```cpp
-class Solution {
-public:
-    char nextGreatestLetter(vector<char>& letters, char target) {
-        char ans = letters[0];  // Default answer if no greater letter is found
-        for(int i = 0; i < letters.size(); i++) {
-            if(letters[i] > target) {
-                ans = letters[i];  // Update the answer
-                break;  // Exit the loop as soon as we find the first greater letter
-            }
-        }
-        return ans;  // Return the next greatest letter
-    }
-};
-```
+4. **Conditional Check**
+	```cpp
+	        if(letters[i] > target) {
+	```
+	Check if the current character in 'letters' is greater than the 'target'.
 
-### Complexity
+5. **Variable Update**
+	```cpp
+	            ans = letters[i];
+	```
+	If the condition is true, update 'ans' to the current letter in the vector.
 
-#### Time Complexity:
-- **O(n)** where `n` is the number of elements in the `letters` list.
-  - In the worst case, we iterate through all `n` letters once to find the first one that is greater than the target. This is a linear scan, which ensures an optimal time complexity for this approach.
+6. **Break Statement**
+	```cpp
+	            break;
+	```
+	Exit the loop once the first letter greater than the target is found.
 
-#### Space Complexity:
-- **O(1)** because we only use a few extra variables (`ans`, `i`) to store intermediate results. We are not using any additional data structures that grow with the input size.
+7. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the result stored in 'ans', which is the first character greater than the 'target'.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), if the first character is greater than `target`.
+- **Average Case:** O(n), where n is the length of the `letters` array.
+- **Worst Case:** O(n), where n is the length of the `letters` array.
 
-This solution efficiently solves the problem of finding the next greatest letter in a sorted list. By leveraging a **linear scan**, we ensure that we find the first letter greater than the target in **O(n)** time, which is optimal for this problem given the constraints. The simplicity of the approach and the constant space usage makes it an effective solution for a variety of input sizes.
+The time complexity is O(n) because we iterate over the array once.
 
-By iterating through the sorted list and breaking early when a valid answer is found, this approach ensures both clarity and performance. The solution is easy to implement and read, making it ideal for understanding and quick usage in similar problems.
+### Space Complexity 💾
+- **Best Case:** O(1), since we do not use any additional data structures.
+- **Worst Case:** O(1), the space complexity is constant as we only store a few variables.
+
+The space complexity is O(1), as we are only using a few variables for the iteration.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/)
 

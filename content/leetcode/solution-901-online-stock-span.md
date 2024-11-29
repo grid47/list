@@ -14,158 +14,181 @@ img_src = ""
 youtube = "slYh0ZNEqSw"
 youtube_upload_date="2022-02-12"
 youtube_thumbnail="https://i.ytimg.com/vi/slYh0ZNEqSw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design a system that processes daily stock price quotes and computes the price span for the current day. The price span for a day is defined as the maximum number of consecutive days (including today) where the price of the stock was less than or equal to today's price.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sequence of operations where a 'next' operation receives the stock price of the current day.
+- **Example:** `Input: ["StockSpanner", "next", "next", "next", "next", "next", "next"]
+[[], [120], [95], [100], [90], [130], [125]]`
+- **Constraints:**
+	- 1 <= price <= 100000
+	- At most 10000 calls to the 'next' function.
 
-{{< highlight cpp >}}
-class StockSpanner {
-    stack<pair<int, int>> cp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each 'next' operation, output the price span for the provided stock price.
+- **Example:** `Output: [null, 1, 1, 2, 1, 5, 2]`
+- **Constraints:**
+	- Output is an integer for each 'next' operation, except the initialization which outputs null.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Compute the price span efficiently using a stack-based approach.
+
+- 1. Maintain a stack of price-span pairs.
+- 2. For each new price, pop elements from the stack if they are less than or equal to the current price.
+- 3. Sum the spans of the popped elements and include today's span (1).
+- 4. Push the current price and its computed span onto the stack.
+- 5. Return the span for the current day.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input price is always a valid integer within the given range.
+- The operations will always follow the sequence provided in the example.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["StockSpanner", "next", "next", "next", "next", "next", "next"]
+[[], [90], [85], [95], [85], [110], [105]]`  \
+  **Explanation:** Output: [null, 1, 1, 3, 1, 5, 2]
+Explanation: The span for each price is computed as follows:
+1. [90]: Span = 1
+2. [85]: Span = 1
+3. [95]: Span = 3 (90, 85, 95)
+4. [85]: Span = 1
+5. [110]: Span = 5 (90, 85, 95, 85, 110)
+6. [105]: Span = 2 (110, 105)
+
+{{< dots >}}
+## Approach 🚀
+Use a stack-based approach to efficiently compute the span for each day's stock price.
+
+### Initial Thoughts 💭
+- Brute force computation for each day's span would result in O(n^2) time complexity.
+- We can optimize using a stack to track previous prices and spans.
+- A stack allows us to efficiently manage and compute spans by keeping track of relevant previous days.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs, as 'next' operations always receive a valid price.
+- Handles maximum constraints with 10^4 operations and prices up to 10^5.
+- Test cases with consecutive equal prices.
+- Test cases with strictly increasing or decreasing prices.
+- Input adheres to constraints and does not exceed operational limits.
+{{< dots >}}
+## Code 💻
+```cpp
 public:
-    StockSpanner() {
-        
+StockSpanner() {
+    
+}
+
+int next(int price) {
+    
+    int res = 1;
+    
+    while(!cp.empty() && cp.top().first <= price) {
+        res += cp.top().second;
+        cp.pop();
     }
     
-    int next(int price) {
-        
-        int res = 1;
-        
-        while(!cp.empty() && cp.top().first <= price) {
-            res += cp.top().second;
-            cp.pop();
-        }
-        
-        cp.push(make_pair(price, res));
-        
-        return res;
-    }
+    cp.push(make_pair(price, res));
+    
+    return res;
+}
 };
 
 /**
  * Your StockSpanner object will be instantiated and called as such:
  * StockSpanner* obj = new StockSpanner();
  * int param_1 = obj->next(price);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to design a **StockSpanner** class that supports the following method:
-- `next(price)` — this method will receive an integer `price` representing the current day's stock price. It should return an integer that represents the **span** of the stock's price, defined as the number of consecutive days (including today) where the stock price was less than or equal to `price`.
-
-The **span** of a stock is the number of consecutive days up to the current day where the stock price was greater than or equal to today's price. For example, if the stock prices for the last 5 days are `[100, 80, 60, 70, 60]`, and today's price is 75, then the stock span for the day with price 75 would be 2, since the price was greater than or equal to 75 on the two previous days.
-
-We are to implement the class `StockSpanner` that efficiently calculates the span for each price on each call to `next(price)`.
-
-### Approach
-
-To solve this problem efficiently, we can use a **monotonic stack** to track the indices of the stock prices in a way that allows us to efficiently calculate the span for each price.
-
-#### **Explanation of Approach**
-
-1. **Monotonic Stack**:
-   - We use a stack to store pairs of stock prices and their corresponding spans. Each pair contains:
-     - The stock price on a particular day.
-     - The span of that stock price, which is how many consecutive days (including the current day) the stock price has been greater than or equal to the price on that day.
-   
-2. **Pop from Stack**:
-   - For each new price, we compare it with the price at the top of the stack. If the price at the top of the stack is less than or equal to the new price, we pop that price from the stack and add its span to the span of the new price.
-   - This is because the span of the current price will include the span of the prices that are less than or equal to it (as we can include all consecutive days where the price was less than or equal to the current price).
-
-3. **Update Span**:
-   - If we pop items from the stack, we continue adding their spans to the current span until we find a price greater than the current price or the stack becomes empty. 
-   - Once the stack is empty or we find a price greater than the current price, the span for the current price is calculated and pushed onto the stack.
-
-4. **Efficiency**:
-   - Each price is pushed and popped from the stack at most once, making the time complexity of each `next(price)` call **O(1)**, leading to an overall **O(n)** time complexity for a sequence of `n` price inputs.
-
-### Code Breakdown (Step by Step)
-
-#### **Class Definition**
-```cpp
-class StockSpanner {
-    stack<pair<int, int>> cp;
-public:
-    StockSpanner() {
-        
-    }
-    
-    int next(int price) {
-        int res = 1;
-        
-        while(!cp.empty() && cp.top().first <= price) {
-            res += cp.top().second;
-            cp.pop();
-        }
-        
-        cp.push(make_pair(price, res));
-        
-        return res;
-    }
-};
 ```
 
-1. **StockSpanner Class**:
-   - We define the class `StockSpanner` with a private member `cp`, which is a stack of pairs.
-     - The stack stores pairs of `(price, span)`, where `price` is the stock price on a given day, and `span` is the stock span for that price.
+This is the implementation of the StockSpanner class. The next method computes the span of stock prices using a stack.
 
-2. **Constructor**:
-   - The constructor initializes the stack `cp` to be empty. It does not need to take any parameters since we initialize the stack when a new `StockSpanner` object is created.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Access Specifier**
+	```cpp
+	public:
+	```
+	Defines the access specifier for the following class methods and variables, making them accessible outside the class.
 
-3. **`next(price)` Method**:
-   - **Initialize Span**: We initialize `res` to 1 because the span of the current day's price is at least 1 (the price itself).
-     ```cpp
-     int res = 1;
-     ```
-   
-   - **Pop Prices from the Stack**:
-     - We enter a loop where we check if the stack is non-empty and the price at the top of the stack is less than or equal to the current price (`cp.top().first <= price`).
-     - If this condition is true, we add the span of the top element (`cp.top().second`) to the result (`res`) and pop the top element off the stack.
-     ```cpp
-     while(!cp.empty() && cp.top().first <= price) {
-         res += cp.top().second;
-         cp.pop();
-     }
-     ```
-   
-   - **Push Current Price and Span onto the Stack**:
-     - After processing any prices from the stack, we push the current price and its span onto the stack.
-     ```cpp
-     cp.push(make_pair(price, res));
-     ```
-   
-   - **Return the Span**:
-     - Finally, we return the span for the current price, which is stored in `res`.
-     ```cpp
-     return res;
-     ```
+2. **Constructor**
+	```cpp
+	StockSpanner() {
+	```
+	Constructor for the StockSpanner class. Initializes the stack and prepares the object.
 
-4. **Example Usage**:
-   - An instance of the `StockSpanner` class is created, and we repeatedly call `next(price)` to get the span for each stock price.
-   ```cpp
-   StockSpanner* obj = new StockSpanner();
-   int param_1 = obj->next(price);
-   ```
+3. **Constructor Body**
+	```cpp
+	    
+	```
+	Placeholder for constructor body if needed in the future.
 
-### Complexity
+4. **Function Definition**
+	```cpp
+	int next(int price) {
+	```
+	Defines the next method, which calculates the span of stock prices for the current price.
 
-#### **Time Complexity**
+5. **Variable Initialization**
+	```cpp
+	    int res = 1;
+	```
+	Initializes the result variable to 1, which represents the span of the current stock price.
 
-- Each price is pushed onto the stack and popped from the stack at most once. As a result, the time complexity for each `next(price)` call is **O(1)**, and for a sequence of `n` price inputs, the overall time complexity is **O(n)**.
+6. **Loop**
+	```cpp
+	    while(!cp.empty() && cp.top().first <= price) {
+	```
+	Starts a loop that pops elements from the stack as long as the stack is not empty and the stock price is greater than the top element of the stack.
 
-#### **Space Complexity**
+7. **Update Result**
+	```cpp
+	        res += cp.top().second;
+	```
+	Updates the result by adding the span value of the top element of the stack.
 
-- The space complexity of the solution is **O(n)**, where `n` is the number of stock prices in the sequence. This is because, in the worst case, all prices could be stored in the stack, each having a corresponding span.
+8. **Pop Stack**
+	```cpp
+	        cp.pop();
+	```
+	Pops the top element from the stack, as its span has been added to the result.
 
-### Conclusion
+9. **Push Stack**
+	```cpp
+	    cp.push(make_pair(price, res));
+	```
+	Pushes the current stock price and its corresponding span into the stack.
 
-The `StockSpanner` class provides an efficient solution for calculating the span of stock prices using a **monotonic stack**. By leveraging the stack to store pairs of stock prices and their corresponding spans, we can efficiently compute the span for each price with each `next(price)` call in constant time, resulting in an overall time complexity of **O(n)** for `n` price inputs.
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the calculated span for the current stock price.
 
-The solution is both space-efficient and time-efficient, handling even large sequences of stock prices efficiently. The stack-based approach ensures that we only need to process each stock price once, making it an optimal solution for this problem.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) per operation when most prices are decreasing.
+- **Average Case:** O(1) amortized per operation due to stack operations.
+- **Worst Case:** O(n) for n operations, where all elements are popped once.
+
+Each element is pushed and popped from the stack at most once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), when prices decrease consistently.
+- **Worst Case:** O(n), where n is the number of operations.
+
+Stack space depends on the number of elements stored.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/online-stock-span/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "x-dYOtIudzc"
 youtube_upload_date="2024-02-28"
 youtube_thumbnail="https://i.ytimg.com/vi/x-dYOtIudzc/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,112 +28,183 @@ youtube_thumbnail="https://i.ytimg.com/vi/x-dYOtIudzc/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an m x n matrix where each row is sorted in non-decreasing order, and the first integer of each row is greater than the last integer of the previous row. Given a target integer, return true if the target exists in the matrix or false otherwise. The solution must have a time complexity of O(log(m * n)).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a matrix of size m x n with sorted rows and specific order between consecutive rows.
+- **Example:** `matrix = [[2, 4, 6], [8, 10, 12], [14, 16, 18]], target = 10`
+- **Constraints:**
+	- 1 <= m, n <= 100
+	- -104 <= matrix[i][j], target <= 104
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool searchMatrix(vector<vector<int>>& mtx, int target) {
-        int m = mtx.size(), n = mtx[0].size();
-        int l = 0, r = m * n - 1;
-        while(l <= r) {
-            int mid = l + (r - l) /2;
-            int rw = mid / n, c = mid % n, val = mtx[rw][c];
-                 if(val == target) return true;
-            else if(val  > target) r = mid - 1;
-            else                   l = mid + 1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the target is present in the matrix; otherwise, return false.
+- **Example:** `true`
+- **Constraints:**
+	- The function should return a boolean value indicating the presence of the target in the matrix.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Efficiently search for the target in the matrix using binary search.
+
+- Flatten the matrix into a 1D array (conceptually).
+- Use binary search to check if the target exists within the range of the flattened matrix.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix has at least one element.
+- Matrix rows and columns are sorted in non-decreasing order, and no elements are repeated across rows.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `matrix = [[2, 4, 6], [8, 10, 12], [14, 16, 18]], target = 10`  \
+  **Explanation:** The target 10 is present at the second row and second column, so the answer is true.
+
+- **Input:** `matrix = [[1, 5, 9], [11, 13, 15], [17, 19, 21]], target = 8`  \
+  **Explanation:** The target 8 is not present in the matrix, so the answer is false.
+
+{{< dots >}}
+## Approach 🚀
+To achieve the required time complexity of O(log(m * n)), we can treat the matrix as a flattened array and apply binary search over it.
+
+### Initial Thoughts 💭
+- The matrix has sorted rows and columns.
+- A simple binary search over the matrix could help find the target efficiently.
+- By viewing the matrix as a 1D array, binary search can be applied directly to find the target with O(log(m * n)) complexity.
+{{< dots >}}
+### Edge Cases 🌐
+- If the matrix is empty, return false immediately.
+- Consider the performance of the binary search when the matrix size is at the upper limit (100 x 100).
+- Ensure that the target value falls within the allowed range (-104 to 104).
+- The function must run in O(log(m * n)) time.
+{{< dots >}}
+## Code 💻
+```cpp
+bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    int m = matrix.size(), n = matrix[0].size();
+    int left = 0, right = m * n - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        int row = mid / n, col = mid % n;
+        if (matrix[row][col] == target) {
+            return true;
+        } else if (matrix[row][col] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
         }
-        return false;
     }
-};
-{{< /highlight >}}
----
 
-
-### 🔍 **Search in a 2D Matrix (Sorted Rows and Columns)**
-
-In this problem, you are asked to search for a target value in a **2D matrix** where each row and each column is sorted in ascending order. The goal is to determine whether the target value exists in the matrix using an efficient approach without having to check every element.
-
-Given the following constraints:
-1. **Rows are sorted in ascending order**.
-2. **Columns are sorted in ascending order**.
-
-### 🚀 **Approach**
-
-The structure of the matrix — where both rows and columns are sorted — allows us to search for the target efficiently, using **binary search**, rather than checking every single element (which would be inefficient).
-
-The idea is to **flatten the 2D matrix into a 1D array**, and then perform **binary search** on this 1D representation. By doing this, we take advantage of the sorted order of both the rows and columns, significantly improving the search time.
-
-#### Key Insights:
-1. **Sorted Rows and Columns**: The matrix is sorted such that each row and each column increases in value.
-2. **Binary Search**: Flattening the matrix into a 1D array allows us to apply binary search, which is optimal for sorted sequences.
-3. **Index Mapping**: The index in the 1D array corresponds to a position in the 2D matrix, so we can efficiently search across both dimensions.
-
-### 📝 **Code Breakdown**
-
-#### Step 1: Define Matrix Dimensions
-```cpp
-int m = mtx.size(), n = mtx[0].size();
-```
-- We first get the number of rows `m` and the number of columns `n` from the matrix. This will help us calculate the correct index mapping in the flattened 1D array.
-
-#### Step 2: Initialize Binary Search Range
-```cpp
-int l = 0, r = m * n - 1;
-```
-- We initialize two pointers `l` (left) and `r` (right) representing the search range in the 1D array.
-- The total number of elements in the matrix is `m * n`, so `l = 0` and `r = m * n - 1`.
-
-#### Step 3: Perform Binary Search
-```cpp
-while(l <= r) {
-    int mid = l + (r - l) / 2;
-    int rw = mid / n, c = mid % n, val = mtx[rw][c];
-    if(val == target) return true;
-    else if(val > target) r = mid - 1;
-    else l = mid + 1;
+    return false;
 }
 ```
-- **Binary Search Loop**:
-    - While `l` is less than or equal to `r`, we calculate the middle index `mid`.
-    - `mid / n` gives the row index `rw` in the matrix, and `mid % n` gives the column index `c`.
-    - We then check the value at this position (`mtx[rw][c]`) against the target value.
-    - If `val == target`, we return `true` as the target is found.
-    - If `val > target`, we search in the left half by adjusting `r` to `mid - 1`.
-    - If `val < target`, we search in the right half by adjusting `l` to `mid + 1`.
 
-#### Step 4: Return False if Target is Not Found
-```cpp
-return false;
-```
-- If the binary search completes without finding the target, return `false` to indicate that the target is not present in the matrix.
+This code efficiently searches for a target value in a 2D matrix using a modified binary search approach.
 
-### 📊 **Complexity Analysis**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool searchMatrix(vector<vector<int>>& matrix, int target) {
+	```
+	Declares a function `searchMatrix` that takes a 2D matrix and a target value as input and returns a boolean indicating whether the target is found.
 
-#### Time Complexity:
-- **O(log(m * n))**:
-    - We perform **binary search** on the 1D flattened array with `m * n` elements.
-    - The time complexity of binary search on a sequence of size `m * n` is `O(log(m * n))`.
+2. **Variable Initialization**
+	```cpp
+	    int m = matrix.size(), n = matrix[0].size();
+	```
+	Initializes variables `m` and `n` to store the number of rows and columns in the matrix.
 
-#### Space Complexity:
-- **O(1)**:
-    - The algorithm uses a constant amount of space to store the binary search pointers (`l`, `r`) and the index calculations.
-    - No additional space is used, making the space complexity **O(1)**.
+3. **Variable Initialization**
+	```cpp
+	    int left = 0, right = m * n - 1;
+	```
+	Initializes two pointers `left` and `right` to represent the search range within the matrix, treated as a 1D array.
 
-### 🎯 **Conclusion**
+4. **Loop Iteration**
+	```cpp
+	    while (left <= right) {
+	```
+	Starts a `while` loop to perform binary search.
 
-This solution efficiently searches for the target element in a 2D matrix by applying **binary search** on a flattened 1D array representation of the matrix. The sorted order of the matrix rows and columns allows us to utilize the binary search to reduce the time complexity to **O(log(m * n))**, which is optimal for large matrices. With **O(1)** space complexity, the solution avoids using extra memory, making it ideal for memory-constrained environments.
+5. **Calculation**
+	```cpp
+	        int mid = left + (right - left) / 2;
+	```
+	Calculates the middle index `mid` using integer division to prevent overflow.
 
-This approach highlights the power of leveraging sorting properties in data structures like matrices to improve search efficiency. By transforming the matrix into a sequence suitable for binary search, we achieve faster results and can handle larger datasets effectively.
+6. **Index Calculation**
+	```cpp
+	        int row = mid / n, col = mid % n;
+	```
+	Calculates the row and column indices corresponding to the `mid` index in the 1D representation.
 
----
+7. **Condition**
+	```cpp
+	        if (matrix[row][col] == target) {
+	```
+	Checks if the element at the `mid` index is equal to the target value.
 
-### 🌟 **Key Takeaways**
-- **Binary search** is highly efficient for sorted arrays and matrices.
-- Flattening a 2D matrix into a 1D array allows you to apply binary search without extra space usage.
-- Always consider how the structure of your data (like sorted rows and columns) can help optimize your search or sorting algorithms.
+8. **Return**
+	```cpp
+	            return true;
+	```
+	If the target is found, returns `true`.
 
----
+9. **Conditional**
+	```cpp
+	        } else if (matrix[row][col] < target) {
+	```
+	If the element at `mid` is less than the target, the target must be in the right half of the search space.
+
+10. **Index Update**
+	```cpp
+	            left = mid + 1;
+	```
+	Adjusts the `left` pointer to the middle index plus 1.
+
+11. **Conditional**
+	```cpp
+	        } else {
+	```
+	If the element at `mid` is greater than the target, the target must be in the left half of the search space.
+
+12. **Index Update**
+	```cpp
+	            right = mid - 1;
+	```
+	Adjusts the `right` pointer to the middle index minus 1.
+
+13. **Loop Iteration**
+	```cpp
+	    }
+	```
+	Continues the loop until the target is found or the search space is exhausted.
+
+14. **Return**
+	```cpp
+	    return false;
+	```
+	If the target is not found after the loop, returns `false`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(m * n))
+- **Average Case:** O(log(m * n))
+- **Worst Case:** O(log(m * n))
+
+The time complexity is O(log(m * n)) because we perform binary search over the matrix treated as a 1D array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as the binary search is performed in place with no extra space required.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-a-2d-matrix/description/)
 

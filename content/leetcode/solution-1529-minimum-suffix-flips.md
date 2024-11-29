@@ -14,103 +14,145 @@ img_src = ""
 youtube = "qaAFcG4ORqM"
 youtube_upload_date="2020-07-26"
 youtube_thumbnail="https://i.ytimg.com/vi/qaAFcG4ORqM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string `target` and another string `s` initialized to all zeros. In one operation, you can flip all bits in the inclusive range starting from index `i` to `n-1`. The task is to determine the minimum number of operations needed to make `s` equal to `target`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A binary string `target` of length `n`.
+- **Example:** `target = '10010'`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- target[i] is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minFlips(string target) {
-        int flips = 0;
-        char status = '0';
-        for(int i = 0; i < target.size(); i++) {
-            if(status != target[i]) {
-                flips++;
-                status = status == '0'? '1':'0';
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to make `s` equal to `target`.
+- **Example:** `For target = '10010', the output is 3.`
+- **Constraints:**
+	- The output is the minimum number of operations required.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Minimize the number of operations by choosing the correct index `i` to flip bits.
+
+- Start with the string `s` initialized to all zeros.
+- Iterate over the `target` string, flipping bits only when needed to match the target.
+- Count the number of flip operations required.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `s` is initially all zeros.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `target = '10010'`  \
+  **Explanation:** We need to perform 3 operations to transform the string `s = '00000'` to the target `10010`.
+
+- **Input:** `target = '110'`  \
+  **Explanation:** 2 operations are enough to transform `s = '000'` to `110`.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves flipping the bits of `s` strategically to match `target` while minimizing the number of operations.
+
+### Initial Thoughts 💭
+- We only flip bits when the bit in `s` doesn't match `target`.
+- We can track the changes in the string `s` while iterating through `target` and perform flips only when necessary.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty string inputs as `n >= 1`.
+- The solution should be efficient enough to handle up to 10^5 characters.
+- If `target` is already equal to `s`, no flips are needed.
+- The solution should work within the given time and space constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int minFlips(string target) {
+    int flips = 0;
+    char status = '0';
+    for(int i = 0; i < target.size(); i++) {
+        if(status != target[i]) {
+            flips++;
+            status = status == '0'? '1':'0';
         }
-        return flips;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine the minimum number of flips required to convert a binary string consisting of only '0's and '1's into a target binary string. A flip changes a '0' to a '1' or vice versa. The challenge lies in finding the minimum number of such operations needed to achieve the desired target string from an initial string of all '0's.
-
-For example, if the target string is "101", we start from "000" and need to flip the first character to '1', then flip the second character to '0', and finally flip the third character to '1'. This results in a total of 3 flips.
-
-### Approach
-
-To solve this problem efficiently, we can utilize a straightforward strategy that involves a single pass through the target string. Here’s the step-by-step approach:
-
-1. **Initialization**: Start with a variable to count flips, initialized to zero. Set an initial character status (representing the current state of the binary string) to '0' since we start with all '0's.
-
-2. **Iterate Through Target String**: Loop through each character in the target string:
-   - Whenever the current character in the target string differs from the current status, a flip is needed. Increment the flip counter and update the current status to reflect the flipped character.
-
-3. **Return the Result**: The final count of flips after examining the entire target string will be the result.
-
-This approach effectively counts the transitions between '0' and '1' in the target string, as each transition signifies a required flip.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code provided:
-
-```cpp
-class Solution {
-public:
-    int minFlips(string target) {
-        int flips = 0;  // Step 1: Initialize flips counter
-        char status = '0';  // Step 2: Start with initial status of '0'
+    return flips;
+}
 ```
-- We define the `Solution` class and the public method `minFlips`, which takes a binary string `target` as input.
-- We initialize a counter `flips` to zero, which will keep track of the number of flips required.
-- We set the variable `status` to '0' to represent the starting state of our binary string.
 
-```cpp
-        for(int i = 0; i < target.size(); i++) {
-            if(status != target[i]) {  // Step 3: Check for flip condition
-                flips++;  // Increment flip counter
-                status = status == '0'? '1':'0';  // Update status
-            }
-        }
-```
-- We start a loop that goes through each character of the `target` string.
-- Inside the loop, we check if the current character in `target` differs from the current `status`:
-  - If they are different, we have identified a required flip, so we increment the `flips` counter.
-  - We then update `status` to the opposite character (if it was '0', we change it to '1', and vice versa). This reflects the current state of the binary string after the flip.
+The function `minFlips` calculates the minimum number of flips required to convert a binary string to the target binary string. The function iterates through the string and counts the flips needed when the `status` doesn't match the target character.
 
-```cpp
-        return flips;  // Step 4: Return the total number of flips
-    }
-};
-```
-- After iterating through the entire target string, we return the total count of flips.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minFlips(string target) {
+	```
+	This line declares the function `minFlips`, which takes a string `target` and returns an integer representing the minimum number of flips needed to convert a binary string to match the `target` string.
 
-### Complexity
+2. **Initialize Flips Counter**
+	```cpp
+	    int flips = 0;
+	```
+	The variable `flips` is initialized to zero. It will count the number of flips required to match the target binary string.
 
-#### Time Complexity
-- The time complexity of this solution is \(O(n)\), where \(n\) is the length of the target string. This is because we perform a single pass through the string to count the necessary flips.
+3. **Initialize Status**
+	```cpp
+	    char status = '0';
+	```
+	The `status` variable is initialized to '0', representing the starting state of the binary string. This will be compared to each character in the `target` string to determine if a flip is required.
 
-#### Space Complexity
-- The space complexity is \(O(1)\) since we are using only a constant amount of space for the flip counter and the status variable, regardless of the input size.
+4. **Iterate Over Target String**
+	```cpp
+	    for(int i = 0; i < target.size(); i++) {
+	```
+	This loop iterates through the `target` string, checking each character to see if a flip is required to match the `status`.
 
-### Conclusion
+5. **Check for Flip Condition**
+	```cpp
+	        if(status != target[i]) {
+	```
+	This condition checks if the current `status` (either '0' or '1') does not match the character at `target[i]`. If they don't match, it means a flip is needed.
 
-This solution efficiently determines the minimum number of flips required to transform a binary string of all '0's into a given target string using a simple and effective approach. By counting transitions between '0' and '1', we can quickly compute the number of flips needed.
+6. **Increment Flip Counter**
+	```cpp
+	            flips++;
+	```
+	If a flip is required, the `flips` counter is incremented.
 
-**Key Insights**:
-- **Single Pass Algorithm**: The approach relies on a single iteration over the target string, which is optimal for this problem.
-- **State Tracking**: By maintaining a state variable (`status`), we can easily determine when a flip is required, allowing us to minimize unnecessary computations.
-- **Clarity and Efficiency**: The simplicity of the solution contributes to both its clarity and efficiency, making it easy to understand and implement.
+7. **Toggle Status**
+	```cpp
+	            status = status == '0'? '1':'0';
+	```
+	This line toggles the `status` variable. If the current `status` is '0', it changes to '1', and vice versa. This simulates the flipping process.
 
-Overall, the method demonstrated here can be broadly applied to similar problems involving binary strings, and it highlights the importance of efficiently tracking state changes within a sequence.
+8. **Return Result**
+	```cpp
+	    return flips;
+	```
+	The function returns the total number of flips (`flips`) required to convert the initial binary string (starting with '0') to match the target binary string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution requires one pass through the string, resulting in a time complexity of O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we are only using a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-suffix-flips/description/)
 

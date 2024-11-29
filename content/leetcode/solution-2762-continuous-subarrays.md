@@ -14,143 +14,194 @@ img_src = ""
 youtube = "TDB2fGaYzMg"
 youtube_upload_date="2023-07-02"
 youtube_thumbnail="https://i.ytimg.com/vi/TDB2fGaYzMg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array 'nums'. A subarray of 'nums' is called continuous if the absolute difference between any two elements in the subarray is less than or equal to 2. Return the total number of continuous subarrays.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer array 'nums'.
+- **Example:** `nums = [3, 5, 4, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long continuousSubarrays(vector<int>& nums) {
-        long long res = 0;
-        int i = 0, j = 0,n=nums.size();
-        map<int,int> mp;
-        while(j<n) {
-            mp[nums[j]]++;
-            while(mp.size()>3 || abs(mp.begin()->first - mp.rbegin()->first) > 2) {
-                mp[nums[i]]--;
-                if(mp[nums[i]] == 0)
-                    mp.erase(nums[i]);
-                i++;
-            }
-            long long temp = j-i+1;
-            res = res + temp;
-            j++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of continuous subarrays.
+- **Example:** `For nums = [3, 5, 4, 2], the output is 10.`
+- **Constraints:**
+	- The output should be a single integer representing the count of continuous subarrays.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the total number of continuous subarrays where the absolute difference between any two elements is less than or equal to 2.
+
+- Use a sliding window approach with two pointers, i and j.
+- Track the frequency of elements within the window using a map.
+- Adjust the window to ensure the condition |nums[i] - nums[j]| <= 2 is met.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always have at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [3, 5, 4, 2]`  \
+  **Explanation:** The valid subarrays are of size 1, 2, and 3, totaling 10 continuous subarrays.
+
+- **Input:** `For nums = [7, 8, 9, 10]`  \
+  **Explanation:** The valid subarrays are of size 1, 2, 3, and 4, totaling 10 continuous subarrays.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves using a sliding window to count continuous subarrays that satisfy the condition.
+
+### Initial Thoughts 💭
+- We need to ensure that the absolute difference between any two elements in the subarray is less than or equal to 2.
+- Using a sliding window approach will allow us to count valid subarrays efficiently by adjusting the window as we iterate through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always contain at least one element, so no need to handle empty arrays.
+- For large arrays (up to 10^5 elements), ensure that the solution runs efficiently.
+- When all elements are the same, the entire array is valid.
+- Ensure that the solution handles arrays with large values (up to 10^9) efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+long long continuousSubarrays(vector<int>& nums) {
+    long long res = 0;
+    int i = 0, j = 0,n=nums.size();
+    map<int,int> mp;
+    while(j<n) {
+        mp[nums[j]]++;
+        while(mp.size()>3 || abs(mp.begin()->first - mp.rbegin()->first) > 2) {
+            mp[nums[i]]--;
+            if(mp[nums[i]] == 0)
+                mp.erase(nums[i]);
+            i++;
         }
-        return res;
+        long long temp = j-i+1;
+        res = res + temp;
+        j++;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the total number of continuous subarrays within a given vector `nums` where the subarrays contain at most 3 distinct elements, and the difference between the maximum and minimum values in the subarray is no more than 2.
 
-The problem asks us to find the total number of subarrays in an integer array `nums` such that:
-1. The subarray contains no more than 3 distinct elements.
-2. The difference between the maximum and minimum elements of the subarray is no greater than 2.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long continuousSubarrays(vector<int>& nums) {
+	```
+	Defines the function `continuousSubarrays`, which takes a vector `nums` and returns the total count of valid continuous subarrays that satisfy the given conditions.
 
-We are to return the count of all such valid subarrays.
+2. **Variable Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Initializes a variable `res` to store the result, which will hold the total number of valid subarrays.
 
-### Approach
+3. **Index Initialization**
+	```cpp
+	    int i = 0, j = 0, n = nums.size();
+	```
+	Initializes the indices `i` and `j` to 0, and `n` to the size of the `nums` vector. These indices will define the current window of subarray being considered.
 
-To solve this problem, we can use a sliding window approach combined with a hash map (or a frequency map) to efficiently track the elements inside the window.
+4. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a map `mp` to track the frequency of elements in the current window. The key is the element, and the value is its count.
 
-#### Key Observations:
-1. **Sliding Window**: We maintain a sliding window where we can expand the right end of the window (`j`) and contract the left end (`i`) to ensure the subarray satisfies the given conditions.
-2. **Valid Subarray Conditions**:
-   - The subarray must contain at most 3 distinct integers.
-   - The absolute difference between the maximum and minimum values in the subarray should not exceed 2.
-   
-3. **Sliding Window Expansion**:
-   - We increment the right pointer (`j`) and include `nums[j]` in the window, updating its frequency in the map.
-   - If the window becomes invalid (i.e., it contains more than 3 distinct elements or the difference between the maximum and minimum elements exceeds 2), we move the left pointer (`i`) to the right, removing elements from the window until the window becomes valid again.
+5. **Outer While Loop**
+	```cpp
+	    while(j < n) {
+	```
+	Starts a while loop that iterates as long as `j` is within the bounds of the vector. This loop expands the window by incrementing `j`.
 
-4. **Count of Valid Subarrays**:
-   - For every valid window, all subarrays ending at `j` and starting from any index `i` to `j` are valid. The number of such subarrays is `j - i + 1`, and we add this to our result.
+6. **Map Update**
+	```cpp
+	        mp[nums[j]]++;
+	```
+	Increments the count of the current element `nums[j]` in the map `mp`.
 
-#### Code Breakdown (Step by Step)
+7. **Inner While Loop (Check Validity)**
+	```cpp
+	        while(mp.size() > 3 || abs(mp.begin()->first - mp.rbegin()->first) > 2) {
+	```
+	Checks if the current subarray has more than 3 distinct elements or if the difference between the max and min elements exceeds 2. If so, reduces the window size by moving `i` forward.
 
-1. **Variable Initialization**:
-   ```cpp
-   long long res = 0;
-   int i = 0, j = 0, n = nums.size();
-   map<int, int> mp;
-   ```
-   - `res` will store the result, i.e., the total count of valid subarrays.
-   - `i` and `j` are pointers representing the left and right ends of the sliding window.
-   - `n` stores the size of the input array `nums`.
-   - `mp` is a frequency map to keep track of the elements in the current window.
+8. **Adjust Map (Remove Element)**
+	```cpp
+	            mp[nums[i]]--;
+	```
+	Decrements the count of the element at index `i` in the map `mp`.
 
-2. **Sliding Window Loop**:
-   ```cpp
-   while (j < n) {
-       mp[nums[j]]++;  // Add the current element to the frequency map
-   ```
-   - We start iterating with the right pointer `j` from 0 to `n-1`.
-   - For each element `nums[j]`, we increment its count in the map.
+9. **Erase Element from Map**
+	```cpp
+	            if(mp[nums[i]] == 0)
+	```
+	Checks if the count of the element `nums[i]` is 0, and if so, removes it from the map `mp`.
 
-3. **Window Validation**:
-   ```cpp
-   while (mp.size() > 3 || abs(mp.begin()->first - mp.rbegin()->first) > 2) {
-       mp[nums[i]]--;  // Reduce the frequency of nums[i]
-       if (mp[nums[i]] == 0)
-           mp.erase(nums[i]);  // If the frequency becomes 0, remove the element from the map
-       i++;  // Move the left pointer to the right to shrink the window
-   }
-   ```
-   - If the window becomes invalid, we move the left pointer `i` to the right, reducing the frequency of the element `nums[i]` in the map.
-   - If the frequency of `nums[i]` becomes 0, we remove it from the map.
-   - We continue adjusting `i` until the window becomes valid again (i.e., it contains at most 3 distinct elements, and the difference between the maximum and minimum values in the window is no greater than 2).
+10. **Increment Index i**
+	```cpp
+	                mp.erase(nums[i]);
+	```
+	Erases the element `nums[i]` from the map `mp`.
 
-4. **Counting Valid Subarrays**:
-   ```cpp
-   long long temp = j - i + 1;
-   res = res + temp;  // Add the number of valid subarrays to the result
-   ```
-   - For every valid window, the number of valid subarrays is equal to the length of the current window, which is `j - i + 1`.
-   - We add this value to the result.
+11. **Increment Index i**
+	```cpp
+	            i++;
+	```
+	Increments the index `i` to shrink the window from the left side.
 
-5. **Increment the Right Pointer**:
-   ```cpp
-   j++;  // Move the right pointer to expand the window
-   ```
-   - We then increment the right pointer `j` to expand the window and continue the process.
+12. **Calculate Subarray Length**
+	```cpp
+	        long long temp = j - i + 1;
+	```
+	Calculates the length of the current valid subarray, which is `j - i + 1`, and stores it in `temp`.
 
-6. **Return the Final Result**:
-   ```cpp
-   return res;
-   ```
-   - Once the loop ends, the result `res` will contain the total count of all valid subarrays, and we return this value.
+13. **Update Result**
+	```cpp
+	        res = res + temp;
+	```
+	Adds the length of the current valid subarray (`temp`) to the total result `res`.
 
-### Complexity Analysis
+14. **Increment Index j**
+	```cpp
+	        j++;
+	```
+	Increments the index `j` to expand the window to the next element.
 
-#### Time Complexity:
+15. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the total number of valid subarrays stored in `res`.
 
-1. **Sliding Window Expansion and Contraction**:
-   - The main loop iterates through each element once with the right pointer `j`, and for each `j`, we may increment the left pointer `i` multiple times. However, each element is added and removed from the map at most once.
-   - Therefore, the total time complexity of the sliding window approach is \( O(n) \), where `n` is the length of the input array `nums`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Operations on the Map**:
-   - Inserting and removing elements from the map takes \( O(\log k) \), where `k` is the number of distinct elements in the map. Since the map size is constrained by the number of distinct elements (which is at most 3 in the window), the operations on the map take \( O(\log 3) = O(1) \).
+The time complexity is O(n), where n is the length of the array. We iterate through the array with two pointers.
 
-Thus, the overall time complexity is \( O(n) \).
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
+The space complexity is O(n) due to the map storing the frequencies of elements in the window.
 
-1. **Map Storage**:
-   - The map `mp` stores at most 3 distinct elements at any point in time (due to the constraint on the number of distinct elements in the window), so the space complexity for the map is \( O(3) = O(1) \).
+**Happy Coding! 🎉**
 
-2. **Result Variable**:
-   - The result variable `res` stores the total number of valid subarrays, which requires \( O(1) \) space.
-
-Thus, the overall space complexity is \( O(1) \).
-
-### Conclusion
-
-The solution uses an efficient sliding window approach to count the number of valid subarrays that meet the given conditions. By maintaining a frequency map of the elements in the current window and adjusting the window dynamically, the algorithm ensures that we count all valid subarrays in linear time, with a space complexity of constant space. This makes the solution highly efficient and suitable for large input sizes.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/continuous-subarrays/description/)
 

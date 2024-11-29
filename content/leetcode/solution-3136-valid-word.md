@@ -14,143 +14,220 @@ img_src = ""
 youtube = "-sU51QkOwLY"
 youtube_upload_date="2024-05-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/-sU51QkOwLY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `word`. The word is considered valid if it satisfies the following conditions:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isValid(string word) {
-        set<char> st;
-        bool upper = false, lower = false;
-        bool vowel = false, conso = false, number = false;
+1. It contains at least 3 characters.
+2. It contains only digits (0-9) and English letters (both uppercase and lowercase).
+3. It must include at least one vowel ('a', 'e', 'i', 'o', 'u' and their uppercase counterparts).
+4. It must include at least one consonant (an English letter that is not a vowel).
+
+Return `true` if the word is valid, otherwise return `false`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `word` containing English letters, digits, and special characters.
+- **Example:** `Example 1:
+Input: word = "234Abcd"
+Output: true`
+- **Constraints:**
+	- 1 <= word.length <= 20
+	- word consists of English uppercase and lowercase letters, digits, '@', '#', and '$'.
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the word satisfies the conditions for a valid word, otherwise return `false`.
+- **Example:** `Example 1:
+Input: word = "234Abcd"
+Output: true`
+- **Constraints:**
+	- The result must be either `true` or `false`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the word satisfies all the conditions for being a valid word. We need to check the length, the presence of vowels and consonants, and that the word contains only the allowed characters.
+
+- Check if the word length is at least 3.
+- Check if the word contains only digits and English letters.
+- Check for at least one vowel and at least one consonant in the word.
+- Return `true` if all conditions are satisfied, otherwise return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The word contains only the allowed characters (digits, letters, and specified special characters).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** The word '234Abcd' satisfies the conditions: it has 7 characters, it contains a vowel ('A'), a consonant ('b'), and only valid characters (digits and letters).
+
+- **Input:** `Example 2:`  \
+  **Explanation:** The word 'a3' fails because it has fewer than 3 characters and does not contain a consonant.
+
+- **Input:** `Example 3:`  \
+  **Explanation:** The word 'a3$e' fails because it contains an invalid character ('$') and does not have a consonant.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by iterating through the string and checking each condition: length, allowed characters, presence of vowels, and consonants.
+
+### Initial Thoughts 💭
+- The problem requires checking several conditions in a single pass over the string.
+- We can use boolean flags to track the presence of vowels, consonants, and other necessary checks as we iterate through the string.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the word length is always at least 1.
+- The word length will not exceed 20 characters, so the input size is small enough for a simple linear pass.
+- The presence of special characters like '@', '#', or '$' should be checked to ensure they are invalid.
+- Ensure that the word length is at least 3 and that all characters are valid (only digits and English letters).
+{{< dots >}}
+## Code 💻
+```cpp
+bool isValid(string word) {
+    set<char> st;
+    bool upper = false, lower = false;
+    bool vowel = false, conso = false, number = false;
+    
+    for(char x : word) {
         
-        for(char x : word) {
-            
-            if(x >= 'a' && x <= 'z') lower = true;
-            if(x >= 'A' && x <= 'Z') upper = true;
-            st.insert(x);
-            if(x == 'A' || x == 'E' || x == 'I' || x == 'O' || x == 'U' ||
-               x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u')
-                    vowel = true;
-            else if((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
-                    conso  = true;
-            else if(isdigit(x)) {}
-            else    return false;
-            
-        }
-        
-        return vowel && conso && st.size() >= 3;
+        if(x >= 'a' && x <= 'z') lower = true;
+        if(x >= 'A' && x <= 'Z') upper = true;
+        st.insert(x);
+        if(x == 'A' || x == 'E' || x == 'I' || x == 'O' || x == 'U' ||
+           x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u')
+                vowel = true;
+        else if((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
+                conso  = true;
+        else if(isdigit(x)) {}
+        else    return false;
         
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to check if a given word is **valid** based on a series of conditions:
-1. The word must contain at least one lowercase letter.
-2. The word must contain at least one uppercase letter.
-3. The word must contain at least one vowel and at least one consonant.
-4. The word must have at least three distinct characters.
-5. The word can contain letters and digits but should not contain any special characters.
-
-We need to implement a function `isValid` that takes a string `word` and returns a boolean indicating whether the word satisfies all the above conditions.
-
-### Approach
-
-To solve this problem, we can iterate through each character of the word and keep track of the following:
-- Whether the word contains a lowercase letter (`lower`).
-- Whether the word contains an uppercase letter (`upper`).
-- Whether the word contains a vowel (`vowel`).
-- Whether the word contains a consonant (`conso`).
-- A set to ensure the word contains at least three distinct characters (`st`).
-
-The conditions can be checked during the iteration as follows:
-- For lowercase letters, set the `lower` flag to `true`.
-- For uppercase letters, set the `upper` flag to `true`.
-- For vowels (both uppercase and lowercase), set the `vowel` flag to `true`.
-- For consonants (letters that are not vowels), set the `conso` flag to `true`.
-- For any other character (digits and special characters), ignore the character or immediately return `false` if the character is invalid.
-
-After processing all characters, we check the following conditions:
-1. Both `vowel` and `conso` should be `true` (the word must contain both a vowel and a consonant).
-2. The size of the set `st` must be at least `3` (the word must have at least three distinct characters).
-3. Both `lower` and `upper` should be `true` (the word must contain both lowercase and uppercase letters).
-
-If all these conditions are met, return `true`, otherwise return `false`.
-
-### Code Breakdown
-
-#### Step 1: Initialize Variables
-
-```cpp
-set<char> st;
-bool upper = false, lower = false;
-bool vowel = false, conso = false, number = false;
+    
+    return vowel && conso && st.size() >= 3;
+    
+}
 ```
-Here, we initialize:
-- `st` as a set to track distinct characters.
-- `upper` and `lower` as booleans to track the presence of uppercase and lowercase letters, respectively.
-- `vowel` and `conso` as booleans to track the presence of vowels and consonants, respectively.
-- `number` is unused and could be removed, as we only need to check for vowels, consonants, and distinct characters.
 
-#### Step 2: Iterate Through Each Character in the Word
+This function `isValid` validates a string based on several conditions: it must contain at least one vowel, one consonant, and at least 3 distinct characters. It also checks for the presence of upper and lower case letters and numbers.
 
-```cpp
-for(char x : word) {
-    if(x >= 'a' && x <= 'z') lower = true;
-    if(x >= 'A' && x <= 'Z') upper = true;
-    st.insert(x);
-```
-- We loop through each character `x` in the word.
-- If `x` is a lowercase letter, set `lower = true`.
-- If `x` is an uppercase letter, set `upper = true`.
-- Add `x` to the set `st` to track distinct characters.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isValid(string word) {
+	```
+	Defines the function `isValid`, which takes a string `word` and checks its validity according to specific criteria (presence of vowels, consonants, and distinct characters).
 
-#### Step 3: Check for Vowels, Consonants, and Invalid Characters
+2. **Variable Initialization**
+	```cpp
+	    set<char> st;
+	```
+	Initializes a set `st` to store unique characters from the string to check the condition that the string contains at least 3 distinct characters.
 
-```cpp
-if(x == 'A' || x == 'E' || x == 'I' || x == 'O' || x == 'U' ||
-   x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u')
-    vowel = true;
-else if((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
-    conso  = true;
-else if(isdigit(x)) {}
-else return false;
-```
-- If `x` is a vowel (either uppercase or lowercase), set `vowel = true`.
-- If `x` is a consonant (any letter that is not a vowel), set `conso = true`.
-- If `x` is a digit, we do nothing (we can ignore digits as they are allowed).
-- If `x` is neither a letter nor a digit (i.e., it's a special character), we immediately return `false` because the word contains an invalid character.
+3. **Variable Initialization**
+	```cpp
+	    bool upper = false, lower = false;
+	```
+	Initializes two boolean variables `upper` and `lower` to track the presence of uppercase and lowercase characters in the string.
 
-#### Step 4: Check Final Conditions
+4. **Variable Initialization**
+	```cpp
+	    bool vowel = false, conso = false, number = false;
+	```
+	Initializes three boolean variables: `vowel` to check for vowels, `conso` for consonants, and `number` to track digits in the string.
 
-```cpp
-return vowel && conso && st.size() >= 3;
-```
-After the loop:
-- We check if the word contains both a vowel and a consonant (`vowel && conso`).
-- We check if the word contains at least three distinct characters by checking the size of the set `st` (`st.size() >= 3`).
+5. **Iteration**
+	```cpp
+	    for(char x : word) {
+	```
+	Starts a loop to iterate through each character `x` in the string `word`.
 
-If both conditions are met, the function returns `true`, indicating that the word is valid. Otherwise, it returns `false`.
+6. **Conditional Check**
+	```cpp
+	        if(x >= 'a' && x <= 'z') lower = true;
+	```
+	Checks if the character `x` is a lowercase letter and updates the `lower` flag accordingly.
 
-### Complexity
+7. **Conditional Check**
+	```cpp
+	        if(x >= 'A' && x <= 'Z') upper = true;
+	```
+	Checks if the character `x` is an uppercase letter and updates the `upper` flag accordingly.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the length of the string `word`. We iterate through each character in the word once, performing constant-time operations (set insertions, comparisons, etc.) for each character.
+8. **Set Insertion**
+	```cpp
+	        st.insert(x);
+	```
+	Inserts the character `x` into the set `st` to ensure that only unique characters are considered for the condition of having at least 3 distinct characters.
 
-#### Space Complexity:
-- **O(k)**, where `k` is the number of distinct characters in the word (in the worst case, `k` could be `n`, the length of the word). The space complexity comes from the set `st` that stores distinct characters.
+9. **Conditional Check**
+	```cpp
+	        if(x == 'A' || x == 'E' || x == 'I' || x == 'O' || x == 'U' ||
+	```
+	Checks if the character `x` is a vowel (either uppercase or lowercase).
 
-### Conclusion
+10. **Conditional Check**
+	```cpp
+	           x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u')
+	```
+	Continues the check for vowels, considering both uppercase and lowercase vowels.
 
-This approach efficiently checks if a given word satisfies all the required conditions for being "valid". By iterating through the word once and using boolean flags to track whether the word contains the necessary components (uppercase, lowercase, vowels, consonants), the algorithm ensures that we make the necessary checks with minimal computational overhead. The use of a set helps track distinct characters, and the logic is designed to immediately exit early if an invalid character is found. This solution is simple, clear, and has linear time complexity, making it suitable for handling reasonably large input strings.
+11. **Flag Update**
+	```cpp
+	                vowel = true;
+	```
+	If the character `x` is a vowel, updates the `vowel` flag to true.
+
+12. **Conditional Check**
+	```cpp
+	        else if((x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z'))
+	```
+	Checks if the character `x` is a consonant (i.e., a letter that is not a vowel).
+
+13. **Flag Update**
+	```cpp
+	                conso  = true;
+	```
+	If the character `x` is a consonant, updates the `conso` flag to true.
+
+14. **Digit Check**
+	```cpp
+	        else if(isdigit(x)) {}
+	```
+	Checks if the character `x` is a digit. If it is, it does nothing (as the problem does not require any action for digits).
+
+15. **Invalid Character Check**
+	```cpp
+	        else    return false;
+	```
+	If the character `x` is neither a letter nor a digit, returns `false`, indicating an invalid character.
+
+16. **Return Statement**
+	```cpp
+	    return vowel && conso && st.size() >= 3;
+	```
+	Returns `true` if the string contains at least one vowel, one consonant, and 3 or more distinct characters. Otherwise, returns `false`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, where n is the length of the input string.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant since we are using only a few variables to track the conditions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-word/description/)
 

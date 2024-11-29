@@ -14,103 +14,137 @@ img_src = ""
 youtube = "PjIWjV-Y5YQ"
 youtube_upload_date="2023-12-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/PjIWjV-Y5YQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed string word. In each operation, you can change any character of word to a lowercase English letter. Two characters are considered almost-equal if they are the same or adjacent in the alphabet. Your task is to remove all adjacent almost-equal characters with the minimum number of operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A 0-indexed string 'word' containing lowercase English letters.
+- **Example:** `word = 'aaaaa'`
+- **Constraints:**
+	- 1 <= word.length <= 100
+	- word consists only of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int removeAlmostEqualCharacters(string s) {
-        int n = s.size();
-        int i = 1, cnt = 0;
-        while(i < n) {
-            if(s[i] == s[i - 1] || abs(s[i] - s[i - 1]) == 1) cnt++, i += 2;
-            else i++;
-        }
-        return cnt;        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to remove all adjacent almost-equal characters from the string.
+- **Example:** `2`
+- **Constraints:**
 
-### Problem Statement:
-The problem asks to remove "almost equal" characters from a string. Two adjacent characters are considered almost equal if:
-- They are the same character (i.e., `s[i] == s[i - 1]`).
-- They differ by exactly 1 in their ASCII values (i.e., `abs(s[i] - s[i - 1]) == 1`).
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the minimum number of operations needed to ensure no adjacent characters are almost-equal.
 
-The goal is to remove all pairs of such characters, counting how many such pairs exist, and returning the total count of removals. Once a pair is removed, skip the next adjacent character because it's part of a valid removal operation.
+- Iterate through the string, checking each pair of adjacent characters.
+- If two adjacent characters are almost-equal, increment the operation counter and skip the next character.
+- Repeat the process until the end of the string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will have at least one character.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: word = 'aaaaa'`  \
+  **Explanation:** The adjacent characters 'a' and 'a' are almost-equal. By changing characters at alternate positions (e.g., 'a' to 'c'), we can remove all adjacent almost-equal characters.
 
-### Approach:
-This problem can be solved using a **greedy approach** where we traverse the string while checking each pair of adjacent characters:
-1. For each character, check if it forms a valid "almost equal" pair with the previous character.
-2. If it does, increment a counter (`cnt`), and skip the next character by advancing the index by 2.
-3. If it doesn't form a valid pair, simply move to the next character.
-4. The process continues until the entire string is processed.
+- **Input:** `Input: word = 'abcde'`  \
+  **Explanation:** All adjacent characters are distinct and not almost-equal, so no changes are needed.
 
-This approach ensures that we efficiently check for pairs and remove them, while also keeping track of how many pairs we removed.
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the string and check each adjacent pair of characters, counting how many changes are needed to avoid adjacent almost-equal characters.
 
-### Code Breakdown:
-
-#### 1. **Initialization**:
-The first step in the code is to initialize two variables:
-- `n`: The length of the string `s`, which will be used to ensure we do not exceed the string bounds.
-- `i`: A pointer (index) used to traverse through the string.
-- `cnt`: A counter initialized to 0. This will track how many "almost equal" character pairs we remove from the string.
-
+### Initial Thoughts 💭
+- Adjacent almost-equal characters can be removed by changing one of them.
+- We need to avoid adjacent almost-equal pairs by modifying characters one at a time.
+- Using a greedy approach, we can process each character and decide whether to change it based on its adjacency to the previous character.
+{{< dots >}}
+### Edge Cases 🌐
+- The string will always have at least one character.
+- Ensure the solution works efficiently when the string length is at its maximum of 100 characters.
+- All characters being the same will require the maximum number of operations to break adjacent almost-equal pairs.
+- The string length is always between 1 and 100.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = s.size();
-int i = 1, cnt = 0;
-```
-- `i` starts from `1` because we will compare each character `s[i]` with its previous character `s[i - 1]`.
-- `cnt` will count the number of pairs removed.
-
-#### 2. **While Loop to Traverse the String**:
-A `while` loop is used to traverse the string `s`. The loop continues until `i` is less than `n`, ensuring that we do not go beyond the string length.
-
-```cpp
-while (i < n) {
-    // Check if current and previous characters are almost equal
-    if (s[i] == s[i - 1] || abs(s[i] - s[i - 1]) == 1) {
-        cnt++, i += 2;  // If so, increment cnt and skip the next character
+int removeAlmostEqualCharacters(string s) {
+    int n = s.size();
+    int i = 1, cnt = 0;
+    while(i < n) {
+        if(s[i] == s[i - 1] || abs(s[i] - s[i - 1]) == 1) cnt++, i += 2;
+        else i++;
     }
-    else {
-        i++;  // Otherwise, just move to the next character
-    }
+    return cnt;        
 }
 ```
 
-- Inside the loop, we check if the character `s[i]` is either the same as the previous character `s[i-1]` or if the difference between their ASCII values is 1 (i.e., `abs(s[i] - s[i - 1]) == 1`).
-- If either of these conditions is true, we have found an "almost equal" pair. Therefore:
-  - Increment the `cnt` counter to signify that we've removed a pair.
-  - Skip the next character by incrementing `i` by `2` (since both characters are part of the removal).
-- If the characters don't form a valid pair, we simply move to the next character by incrementing `i` by 1.
+This function removes pairs of adjacent characters in the string 's' that are either equal or have ASCII values differing by 1, and returns the number of pairs removed.
 
-#### 3. **Return the Result**:
-Once the loop is finished, the total number of "almost equal" pairs removed is stored in `cnt`. The final result is returned as the output.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int removeAlmostEqualCharacters(string s) {
+	```
+	Defines the function 'removeAlmostEqualCharacters', which takes a string 's' and removes adjacent character pairs that are either the same or have a difference of 1 in their ASCII values.
 
-```cpp
-return cnt;
-```
+2. **String Size**
+	```cpp
+	    int n = s.size();
+	```
+	Calculates the size of the string 's' and stores it in 'n'. This helps to determine the length of the string for iteration purposes.
 
-This value represents the total number of removals.
+3. **Variable Initialization**
+	```cpp
+	    int i = 1, cnt = 0;
+	```
+	Initializes two variables: 'i' to 1 for iterating through the string, and 'cnt' to 0 to count the number of pairs removed.
 
-### Complexity:
+4. **While Loop Start**
+	```cpp
+	    while(i < n) {
+	```
+	Starts a while loop that continues as long as 'i' is less than 'n', the length of the string. This loop will iterate over each character in the string.
 
-#### Time Complexity:
-- **Traversal of the string**: The string is traversed once, and for each character, we either increment `i` by 1 or 2. Thus, the total number of iterations is linear, i.e., O(n), where `n` is the length of the string.
-- The operations inside the loop (such as checking for equality or the difference between ASCII values) are constant time operations, i.e., O(1).
-  
-Thus, the **time complexity** is **O(n)**, where `n` is the length of the input string `s`.
+5. **Check Adjacent Characters**
+	```cpp
+	        if(s[i] == s[i - 1] || abs(s[i] - s[i - 1]) == 1) cnt++, i += 2;
+	```
+	Checks if the current character is equal to the previous character, or if their ASCII values differ by 1. If either condition is true, increments 'cnt' (the count of pairs removed), and skips the next character by increasing 'i' by 2.
 
-#### Space Complexity:
-- We only use a few extra variables (`n`, `i`, and `cnt`), and the space used does not depend on the input size. Therefore, the **space complexity** is **O(1)**, i.e., constant space.
+6. **Skip to Next Character**
+	```cpp
+	        else i++;
+	```
+	If the current character does not meet the conditions (not equal or not differing by 1), simply increments 'i' to move to the next character.
 
-### Conclusion:
-This solution efficiently solves the problem by using a greedy approach with a single pass through the string. It correctly handles the removal of "almost equal" character pairs while maintaining a low time complexity of O(n) and constant space complexity. This approach ensures that the problem is solved efficiently even for large input strings.
+7. **Return Result**
+	```cpp
+	    return cnt;        
+	```
+	Returns the total count of pairs of characters that were removed from the string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we process each character in the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only use a few variables for tracking the state.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-adjacent-almost-equal-characters/description/)
 

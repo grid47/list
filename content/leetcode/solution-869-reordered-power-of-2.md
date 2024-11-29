@@ -14,120 +14,158 @@ img_src = ""
 youtube = "rJu123dgDy8"
 youtube_upload_date="2019-08-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rJu123dgDy8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer `n`, check if it is possible to reorder its digits (in any order, including the original order) to form a number that is a power of two. Leading digits cannot be zero in the reordered number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A single positive integer `n`.
+- **Example:** `Input: n = 32`
+- **Constraints:**
+	- 1 <= n <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool reorderedPowerOf2(int n) {
-        int c = counter(n);
-        for(int i = 0; i < 32; i++)
-            if(counter(1<<i) == c) return true;
-        return false;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if it is possible to reorder the digits of `n` to form a power of two, otherwise return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output is a boolean value.
 
-    int counter(int N) {
-        int res = 0;
-        for(;N; N/=10) res += pow(10, N%10);
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if a permutation of the digits of `n` can result in a power of two.
 
-### Problem Statement
+- Count the frequency of each digit in `n`.
+- Iterate through all powers of two up to the maximum possible value within the constraints.
+- Check if the frequency of digits in any power of two matches the frequency of digits in `n`.
+- If a match is found, return `true`; otherwise, return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input `n` is always a valid positive integer within the specified range.
+- The number can be represented in base 10 without truncation.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 46`  \
+  **Explanation:** The number 46 can be reordered to form 64, which is 2^6. Therefore, the output is `true`.
 
-The problem asks us to determine if a given integer `n` can be reordered to form a power of 2. A power of 2 is any number that can be expressed as `2^x` for some integer `x`. The goal is to check whether there exists any permutation of the digits of `n` that forms a number which is a power of 2.
+- **Input:** `Input: n = 123`  \
+  **Explanation:** The number 123 cannot be reordered to form any power of two. Therefore, the output is `false`.
 
-For example:
-- **Input**: `n = 1`
-- **Output**: `True`
-  - `1` is already a power of 2 (`2^0 = 1`).
-  
-- **Input**: `n = 10`
-- **Output**: `False`
-  - `10` cannot be rearranged to form a power of 2.
+- **Input:** `Input: n = 8`  \
+  **Explanation:** The number 8 is already a power of two (2^3). Therefore, the output is `true`.
 
-The task is to return `true` if a permutation of the digits of `n` is a power of 2, and `false` otherwise.
+{{< dots >}}
+## Approach 🚀
+Use a frequency-based approach to compare the digit counts of `n` with the digit counts of all powers of two within the constraints.
 
-### Approach
-
-To solve this problem, we can use the following steps:
-1. **Generate all powers of 2 up to the maximum possible integer**: We need to generate all the powers of 2 that could potentially match the number `n`. For a 32-bit integer, the largest possible power of 2 is `2^30`, since `2^31` exceeds the integer range.
-  
-2. **Check the digit permutations**: To determine if any permutation of the digits of `n` matches a power of 2, we can count the frequency of each digit in `n` and compare it against the frequencies of the digits in each power of 2.
-
-3. **Efficiency considerations**: Instead of generating all permutations of the digits of `n`, we can simplify the problem by comparing the digit frequencies directly. We compute a "signature" of the number's digits by counting the frequency of each digit and compare it to the signatures of all powers of 2.
-
-4. **Digit counting**: A function (`counter`) is created to convert a number into a frequency signature based on its digits. We use this signature to check if any power of 2 has the same digit frequency as `n`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Function `reorderedPowerOf2`
-
+### Initial Thoughts 💭
+- A number can only be a power of two if its digits can be reordered to match the digits of an actual power of two.
+- There are only 31 powers of two to consider since 2^30 is slightly over 10^9.
+- Compare the digit frequencies of `n` with precomputed digit frequencies of all powers of two.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as `n` is always provided.
+- Inputs near the upper limit of 10^9 should be handled efficiently.
+- Inputs like `n = 1` should return `true` since 1 is 2^0.
+- Inputs like `n = 0` (if allowed) should return `false` since 0 cannot be a power of two.
+- Ensure that leading zeros in permutations are not allowed.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool reorderedPowerOf2(int n) {
-    int c = counter(n);  // Get the digit signature of the number
-    for(int i = 0; i < 32; i++)  // Iterate through powers of 2
-        if(counter(1 << i) == c)  // Check if any power of 2 has the same digit signature
-            return true;
-    return false;  // No match found
+    int c = counter(n);
+    for(int i = 0; i < 32; i++)
+        if(counter(1<<i) == c) return true;
+    return false;
 }
-```
 
-- We first compute the "signature" of the input number `n` using the `counter` function.
-- We then loop through all the powers of 2 from `2^0` to `2^31`. For each power of 2 (`1 << i`), we check if its digit signature matches that of `n`.
-- If a match is found, we return `true`, indicating that `n` can be reordered to form a power of 2. Otherwise, we return `false`.
-
-#### Step 2: Function `counter`
-
-```cpp
 int counter(int N) {
     int res = 0;
-    for (; N; N /= 10)  // Loop through the digits of N
-        res += pow(10, N % 10);  // Add each digit as a place value
-    return res;  // Return the computed signature
+    for(;N; N/=10) res += pow(10, N%10);
+    return res;
 }
 ```
 
-- This function computes the "digit signature" of the number `N`.
-- We iterate over the digits of `N` by repeatedly dividing `N` by 10. For each digit, we use `pow(10, N % 10)` to create a unique number that represents the position of the digit.
-- We sum these values to produce a unique signature that represents the digits of the number.
-  
-For example:
-- `counter(122)` would return a value that represents the frequency of the digits `1`, `2`, and `2`.
+This code defines a function `reorderedPowerOf2` to check if a number can be rearranged into a power of 2 by comparing the digit counts of the number and powers of 2.
 
-#### Step 3: Comparing the Digit Signatures
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool reorderedPowerOf2(int n) {
+	```
+	Defines the `reorderedPowerOf2` function, which checks if the number `n` can be rearranged into a power of 2.
 
-In the main function `reorderedPowerOf2`, the `counter` function is used to get the digit signature of both `n` and each power of 2. If any power of 2 has the same digit signature as `n`, the function returns `true`.
+2. **Counter Function Call**
+	```cpp
+	    int c = counter(n);
+	```
+	Calls the helper function `counter` to calculate the digit count signature of `n`.
 
-### Complexity
+3. **Loop Setup**
+	```cpp
+	    for(int i = 0; i < 32; i++)
+	```
+	Starts a loop to check the 32 possible powers of 2 (from 2^0 to 2^31).
 
-#### Time Complexity:
-- **Generating powers of 2**: We loop over all powers of 2 from `2^0` to `2^30`, so there are 31 powers of 2 to check.
-- **Counting digits for each power of 2**: For each power of 2, we compute its digit signature. In the worst case, a power of 2 could have 10 digits (e.g., `1073741824` for `2^30`).
-- **Checking digit signature of `n`**: We also compute the digit signature for `n`.
-  
-Thus, the time complexity is `O(31 * D)`, where `D` is the number of digits in `n`. Since the maximum number of digits is around 10 (for `2^30`), the overall time complexity is approximately `O(310)` which is constant.
+4. **Condition Check**
+	```cpp
+	        if(counter(1<<i) == c) return true;
+	```
+	Compares the digit count of `n` with the digit count of each power of 2 (calculated as `1 << i`). If they match, returns `true`.
 
-#### Space Complexity:
-- The space complexity is `O(1)` because we are only using a few integer variables (`c`, `res`) and we are not using any additional data structures that grow with the input size. The space used to store the powers of 2 is constant as well.
+5. **Return False**
+	```cpp
+	    return false;
+	```
+	If no power of 2 matches the digit count of `n`, returns `false`.
 
-### Conclusion
+6. **Helper Function Definition**
+	```cpp
+	int counter(int N) {
+	```
+	Defines the helper function `counter`, which calculates the 'digit count signature' of a number `N`.
 
-The algorithm effectively solves the problem of determining whether a number `n` can be reordered to form a power of 2. It uses a "digit signature" approach, where we compute a unique identifier for the digits of both `n` and the powers of 2. By comparing these signatures, we can efficiently check if any permutation of the digits of `n` can form a power of 2.
+7. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the result variable `res` to store the computed signature of the digits of `N`.
 
-Key Points:
-- **Digit Signature**: The main idea is to compute a "signature" for the digits of a number. This allows us to avoid checking all permutations of the digits.
-- **Efficient Checking**: By only comparing digit signatures instead of checking permutations directly, we reduce the time complexity significantly.
-- **Optimal Complexity**: The time complexity is constant in practice, making this solution highly efficient even for large inputs.
+8. **Loop For Digit Counting**
+	```cpp
+	    for(;N; N/=10) res += pow(10, N%10);
+	```
+	Uses a loop to process each digit of `N`. For each digit, it adds `10^digit` to the result `res`.
 
-This solution demonstrates an elegant way to solve a problem by leveraging digit manipulation and frequency counting to avoid costly operations like generating permutations.
+9. **Return Signature**
+	```cpp
+	    return res;
+	```
+	Returns the computed digit signature `res`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n * k), where k is the number of powers of two to check
+- **Worst Case:** O(log n * k)
+
+The complexity is determined by the number of digits in `n` (log n) and the number of powers of two to compare (k).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(k)
+
+Space is used for storing the precomputed digit frequencies of powers of two.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reordered-power-of-2/description/)
 

@@ -14,136 +14,212 @@ img_src = ""
 youtube = "crVb-Fubs0w"
 youtube_upload_date="2020-07-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/crVb-Fubs0w/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers. Your task is to determine if the array can be rearranged to form an arithmetic progression. The array can be rearranged in any order, and the common difference between consecutive elements should be the same.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers, arr.
+- **Example:** `[10, 20, 30]`
+- **Constraints:**
+	- 2 <= arr.length <= 1000
+	- -10^6 <= arr[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canMakeArithmeticProgression(vector<int>& arr) {
-        if (arr.size() <= 2) return true;
-        int min = INT_MAX, max = INT_MIN;
-        for (int num : arr) {
-            min = std::min(min, num);
-            max = std::max(max, num);
-        }
-        if ((max - min) % (arr.size() - 1) != 0) return false;
-        int d = (max - min) / (arr.size() - 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean indicating whether the array can be rearranged to form an arithmetic progression.
+- **Example:** `true`
+- **Constraints:**
+	- The array can have negative or positive numbers, and it may be sorted or unsorted initially.
 
-        int i = 0;
-        while (i < arr.size()) {
-            if (arr[i] == min + i * d) i++;
-            else if ((arr[i] - min) % d != 0) return false;
-            else {
-                int pos = (arr[i] - min) / d;
-                if (pos < i || arr[pos] == arr[i]) return false;
-                std::swap(arr[i], arr[pos]);
-            }
-        }
-        return true;        
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if the array can be rearranged into an arithmetic progression with a constant difference between consecutive elements.
+
+- Find the minimum and maximum values in the array.
+- Check if the difference between the maximum and minimum values is divisible by the number of elements minus one.
+- Calculate the common difference (d) using the formula (max - min) / (arr.size() - 1).
+- Try to place each element in its correct position according to the common difference. If any element cannot be placed correctly, return false.
+- If all elements are placed correctly, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least two elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[10, 20, 30]`  \
+  **Explanation:** The elements can be rearranged to form an arithmetic progression with a common difference of 10.
+
+- **Input:** `[1, 2, 4]`  \
+  **Explanation:** The elements cannot be rearranged to form an arithmetic progression, as the difference between 2 and 4 is not consistent with any other pair of elements.
+
+{{< dots >}}
+## Approach 🚀
+We will first find the minimum and maximum values in the array and then check if the difference between these two values is divisible by the number of elements minus one. Using this difference, we can determine if the array can be rearranged to form an arithmetic progression.
+
+### Initial Thoughts 💭
+- An arithmetic progression requires that the difference between any two consecutive elements is constant.
+- By calculating the common difference and checking if we can place the elements in positions that respect this difference, we can solve the problem.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least two elements, as per the problem constraints.
+- The solution should efficiently handle arrays with up to 1000 elements.
+- The array may contain both positive and negative numbers.
+- Ensure the solution works for arrays with the minimum and maximum integer values.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canMakeArithmeticProgression(vector<int>& arr) {
+    if (arr.size() <= 2) return true;
+    int min = INT_MAX, max = INT_MIN;
+    for (int num : arr) {
+        min = std::min(min, num);
+        max = std::max(max, num);
     }
-};
-{{< /highlight >}}
----
+    if ((max - min) % (arr.size() - 1) != 0) return false;
+    int d = (max - min) / (arr.size() - 1);
 
-### Problem Statement
-
-The task is to determine if a given array can be rearranged to form an arithmetic progression (AP). An arithmetic progression is a sequence of numbers in which the difference between consecutive terms is constant. Given an array of integers, we need to ascertain whether it's possible to rearrange these integers to form such a sequence.
-
-### Approach
-
-To solve this problem, we can break it down into several key steps:
-
-1. **Handle Edge Cases**: If the array has two or fewer elements, it can always form an AP, so we return `true` immediately.
-2. **Find Minimum and Maximum**: Determine the minimum and maximum values in the array to compute the required common difference `d` for the AP.
-3. **Check Difference Condition**: Verify whether the difference between the maximum and minimum values is divisible by the number of terms minus one (i.e., `(max - min) % (n - 1) == 0`). If not, it's impossible to form an AP.
-4. **Determine Common Difference**: Calculate the common difference `d` as `(max - min) / (n - 1)`.
-5. **Rearrangement Verification**: Using a greedy approach, try to rearrange the elements such that they match the expected AP sequence derived from the minimum value and the common difference.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool canMakeArithmeticProgression(vector<int>& arr) {
-        if (arr.size() <= 2) return true;
-```
-- We start by defining a class `Solution` and a method `canMakeArithmeticProgression`.
-- If the size of the array `arr` is less than or equal to 2, we return `true`, as any two numbers can form an AP.
-
-```cpp
-        int min = INT_MAX, max = INT_MIN;
-        for (int num : arr) {
-            min = std::min(min, num);
-            max = std::max(max, num);
+    int i = 0;
+    while (i < arr.size()) {
+        if (arr[i] == min + i * d) i++;
+        else if ((arr[i] - min) % d != 0) return false;
+        else {
+            int pos = (arr[i] - min) / d;
+            if (pos < i || arr[pos] == arr[i]) return false;
+            std::swap(arr[i], arr[pos]);
         }
-```
-- We initialize two variables, `min` and `max`, to find the minimum and maximum values in the array.
-- We iterate over each number in the array, updating `min` and `max` accordingly.
-
-```cpp
-        if ((max - min) % (arr.size() - 1) != 0) return false;
-        int d = (max - min) / (arr.size() - 1);
-```
-- We check if the difference between `max` and `min` is divisible by the number of elements minus one. If not, we return `false`, as it indicates that a uniform difference `d` cannot be established.
-- If it is divisible, we calculate the common difference `d`.
-
-```cpp
-        int i = 0;
-        while (i < arr.size()) {
-            if (arr[i] == min + i * d) i++;
-```
-- We initialize a pointer `i` to traverse the array.
-- The while loop continues until all elements are processed. For each `i`, we check if the current element matches the expected value in the AP sequence (`min + i * d`). If it does, we move to the next index.
-
-```cpp
-            else if ((arr[i] - min) % d != 0) return false;
-```
-- If the current element does not match the expected value, we check if the difference from `min` is not a multiple of `d`. If this condition is met, we return `false`.
-
-```cpp
-            else {
-                int pos = (arr[i] - min) / d;
-                if (pos < i || arr[pos] == arr[i]) return false;
-                std::swap(arr[i], arr[pos]);
-            }
-        }
-```
-- If the previous conditions are not met, we compute the expected position `pos` for the current element.
-- We check whether `pos` is less than `i` or if the element at `pos` is already equal to `arr[i]`. If either condition is true, it means that the sequence cannot be rearranged into an AP, and we return `false`.
-- If all checks are passed, we swap the current element with the element at its computed position to continue rearranging.
-
-```cpp
-        return true;        
     }
-};
+    return true;        
+}
 ```
-- If the loop completes without returning false, we return `true`, indicating that the array can be rearranged to form an AP.
 
-### Complexity
+This code checks if an array can be rearranged to form an arithmetic progression. It calculates the minimum and maximum values, checks divisibility, and swaps elements as necessary.
 
-#### Time Complexity
-- The algorithm performs a single pass to find the minimum and maximum, which takes \(O(n)\).
-- It processes the array again to verify the arrangement and potential swapping, which also takes \(O(n)\).
-- Overall, the time complexity is \(O(n)\), where \(n\) is the number of elements in the array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	bool canMakeArithmeticProgression(vector<int>& arr) {
+	```
+	Defines the function that checks whether an array can form an arithmetic progression.
 
-#### Space Complexity
-- The space complexity is \(O(1)\) since we are using a constant amount of extra space regardless of the input size.
+2. **Edge Case Handling**
+	```cpp
+	    if (arr.size() <= 2) return true;
+	```
+	Handles edge case where the array has 2 or fewer elements, in which case it trivially forms an arithmetic progression.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    int min = INT_MAX, max = INT_MIN;
+	```
+	Initializes variables to track the minimum and maximum values in the array.
 
-This solution efficiently checks whether a given array can be rearranged to form an arithmetic progression by utilizing properties of the sequence and performing necessary checks and rearrangements in linear time. The combination of finding the minimum and maximum values, calculating the common difference, and verifying the arrangement provides a robust approach to solving this problem. 
+4. **Loop**
+	```cpp
+	    for (int num : arr) {
+	```
+	Iterates over each element in the array to find the minimum and maximum values.
 
-**Key Takeaways**:
-- **Early Return**: For small arrays, the solution can terminate early.
-- **Modular Checks**: Utilizing modular arithmetic helps determine the feasibility of creating an AP.
-- **Greedy Approach**: Swapping elements based on expected positions allows for in-place rearrangements without requiring additional data structures.
+5. **Mathematical Operations**
+	```cpp
+	        min = std::min(min, num);
+	```
+	Updates the minimum value encountered in the array.
 
-This method is efficient and easy to understand, making it suitable for problems involving arithmetic properties in sequences.
+6. **Mathematical Operations**
+	```cpp
+	        max = std::max(max, num);
+	```
+	Updates the maximum value encountered in the array.
+
+7. **Mathematical Operations**
+	```cpp
+	    if ((max - min) % (arr.size() - 1) != 0) return false;
+	```
+	Checks if the difference between the max and min values is divisible by the size of the array minus one.
+
+8. **Mathematical Operations**
+	```cpp
+	    int d = (max - min) / (arr.size() - 1);
+	```
+	Calculates the common difference (d) for the arithmetic progression.
+
+9. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	Initializes a counter variable to track the current index while checking the array elements.
+
+10. **Loop**
+	```cpp
+	    while (i < arr.size()) {
+	```
+	Begins a while loop to traverse the array and check the condition for an arithmetic progression.
+
+11. **Conditionals**
+	```cpp
+	        if (arr[i] == min + i * d) i++;
+	```
+	If the current element matches the expected value for the arithmetic progression, increment the index.
+
+12. **Conditionals**
+	```cpp
+	        else if ((arr[i] - min) % d != 0) return false;
+	```
+	Checks if the current element can be part of the progression. If not, returns false.
+
+13. **Conditionals**
+	```cpp
+	        else {
+	```
+	If neither condition is met, attempt to swap elements to help form the arithmetic progression.
+
+14. **Mathematical Operations**
+	```cpp
+	            int pos = (arr[i] - min) / d;
+	```
+	Calculates the target position for the current element in the progression.
+
+15. **Conditionals**
+	```cpp
+	            if (pos < i || arr[pos] == arr[i]) return false;
+	```
+	Checks if the position is valid and whether the element has already been placed correctly.
+
+16. **Array Operations**
+	```cpp
+	            std::swap(arr[i], arr[pos]);
+	```
+	Swaps the current element with the element at the calculated position to form the progression.
+
+17. **Return**
+	```cpp
+	    return true;        
+	```
+	Returns true if the array can be rearranged into an arithmetic progression.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+Finding the minimum and maximum values takes O(n), and sorting the array takes O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+We only use a few variables for computation, so the space complexity is constant.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "bHZkCAcj3dc"
 youtube_upload_date="2020-07-17"
 youtube_thumbnail="https://i.ytimg.com/vi/bHZkCAcj3dc/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGMgZShMMA8=&rs=AOn4CLCuVJe9ynceDrU12Sdzi3WrnCQ1Pg"
+comments = true
 +++
 
 
@@ -27,123 +28,171 @@ youtube_thumbnail="https://i.ytimg.com/vi/bHZkCAcj3dc/hqdefault.jpg?sqp=-oaymwEm
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string `s` and an integer `k`, return the length of the longest substring of `s` such that the frequency of each character in this substring is greater than or equal to `k`. If no such substring exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` and an integer `k` where `s` is the given string and `k` is the minimum frequency of characters required in the substring.
+- **Example:** `Input: s = 'aabbbc', k = 2`
+- **Constraints:**
+	- 1 <= s.length <= 10^4
+	- s consists of only lowercase English letters.
+	- 1 <= k <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestSubstring(string s, int k) {
-        if(s.size() == 0 || k > s.size()) return 0;
-        if(k == 0) return s.size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the length of the longest valid substring, where every character appears at least `k` times. If no such substring exists, return 0.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The solution should return the length of the longest valid substring.
 
-        unordered_map<char, int> mp;
-        for(int i = 0; i < s.size(); i++) {
-            mp[s[i]]++;
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify and return the length of the longest substring where each character appears at least `k` times.
 
-        int idx = 0;
-        while(idx < s.size() && mp[s[idx]] >= k) idx++;
-        if(idx == s.size()) return s.size();
+- Count the frequency of each character in the string.
+- If a character appears less than `k` times, it cannot be part of the valid substring.
+- Recursively divide the string into parts, ignoring characters that appear less than `k` times, and find the longest valid substring in the remaining parts.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `s` is valid and contains only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'aabbbc', k = 2`  \
+  **Explanation:** The string can be split into two parts: 'aab' and 'bbc'. 'aab' is valid as 'a' appears 2 times, and 'bbc' is valid as 'b' appears 3 times. The longest valid substring is 'aabbb'.
 
-        int left = longestSubstring(s.substr(0, idx), k);
-        int right = longestSubstring(s.substr(idx + 1), k);
+- **Input:** `Input: s = 'abcde', k = 2`  \
+  **Explanation:** None of the characters appear at least 2 times, so there is no valid substring. The output is 0.
 
-        return max(left, right);
+{{< dots >}}
+## Approach 🚀
+The approach uses recursion to break down the string and check if each character meets the frequency requirement. We divide the string into substrings and solve each part independently.
+
+### Initial Thoughts 💭
+- We can count the frequency of each character in the string and recursively divide the string based on this frequency.
+- The problem can be approached by dividing the string into smaller substrings where the characters meet the required frequency condition.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will not be empty as it has a minimum length of 1.
+- Ensure the solution handles input strings with lengths up to 10^4 efficiently.
+- Handle cases where `k` is greater than the length of the string, resulting in no valid substrings.
+- Handle cases where all characters are distinct and where all characters appear the same number of times.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestSubstring(string s, int k) {
+    if(s.size() == 0 || k > s.size()) return 0;
+    if(k == 0) return s.size();
+
+    unordered_map<char, int> mp;
+    for(int i = 0; i < s.size(); i++) {
+        mp[s[i]]++;
     }
-};
-{{< /highlight >}}
----
 
-### 🚀 Problem Statement
+    int idx = 0;
+    while(idx < s.size() && mp[s[idx]] >= k) idx++;
+    if(idx == s.size()) return s.size();
 
-The challenge here is to find the longest substring in a string `s` where every character in that substring appears **at least `k` times**. If no such substring exists, the function should return `0`.
+    int left = longestSubstring(s.substr(0, idx), k);
+    int right = longestSubstring(s.substr(idx + 1), k);
 
-For example:
-- Given the string `"aaabb"`, and `k = 3`, the longest substring is `"aaa"`, as it is the only substring where each character appears at least 3 times.
-- For the string `"ababbc"`, with `k = 2`, the longest substring is `"abb"`, as both 'a' and 'b' appear at least 2 times.
-
----
-
-### 🧠 Approach
-
-We’ll solve this using a **divide and conquer** strategy to break the string down into manageable parts. The main idea is to recursively find substrings where each character appears at least `k` times.
-
-#### Key Steps:
-1. **Base Cases**: 
-   - If the string is empty or `k` exceeds the string’s length, we immediately return `0`.
-   - If `k == 0`, we can consider the entire string as valid, so we return the entire string's length.
-2. **Frequency Map**: Build a frequency map to count how often each character appears in the string.
-3. **Split the String**: As we traverse the string, we split it wherever we encounter a character that appears fewer than `k` times.
-4. **Recursion**: For each substring, we apply the same process recursively.
-5. **Combine Results**: After splitting, we combine the results by finding the longest valid substring from the split parts.
-
-This approach narrows down the search space efficiently, focusing only on parts of the string that might contain valid substrings.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's dive into how the code works, step by step:
-
-#### Step 1: Base Cases
-```cpp
-if(s.size() == 0 || k > s.size()) return 0;
-if(k == 0) return s.size();
-```
-- If the string is empty or `k` is greater than the string’s length, we can’t have any valid substring, so we return `0`.
-- If `k == 0`, every substring is valid, so we return the size of the entire string.
-
-#### Step 2: Frequency Map
-```cpp
-unordered_map<char, int> mp;
-for(int i = 0; i < s.size(); i++) {
-    mp[s[i]]++;
+    return max(left, right);
 }
 ```
-- We create a frequency map `mp` to count how many times each character appears in the string.
-- This allows us to quickly check if a character meets the required frequency.
 
-#### Step 3: Splitting the String
-```cpp
-int idx = 0;
-while(idx < s.size() && mp[s[idx]] >= k) idx++;
-if(idx == s.size()) return s.size();
-```
-- We initialize an index `idx` to find the first character that appears less than `k` times.
-- We move `idx` forward until we find a character that doesn’t meet the frequency requirement. If `idx` reaches the end of the string, it means all characters are valid, and we return the length of the entire string.
+The function `longestSubstring` solves the problem using a divide-and-conquer approach by recursively checking for the longest substring where every character appears at least `k` times. It uses a map to count character frequencies and divides the string based on characters that do not meet the frequency condition.
 
-#### Step 4: Recursive Call on Substrings
-```cpp
-int left = longestSubstring(s.substr(0, idx), k);
-int right = longestSubstring(s.substr(idx + 1), k);
-```
-- When we find a character that appears fewer than `k` times, we split the string at that point.
-- We recursively call `longestSubstring` on the left and right substrings, splitting the problem into smaller pieces.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestSubstring(string s, int k) {
+	```
+	The function `longestSubstring` takes a string `s` and an integer `k`, and returns the length of the longest substring where each character appears at least `k` times.
 
-#### Step 5: Combine Results
-```cpp
-return max(left, right);
-```
-- After recursively solving the left and right substrings, we take the maximum of their results because we want the longest valid substring.
-- The result is then returned.
+2. **Edge Case Handling**
+	```cpp
+	    if(s.size() == 0 || k > s.size()) return 0;
+	```
+	This checks if the string is empty or if `k` is greater than the size of the string, returning 0 as there is no valid substring in such cases.
 
----
+3. **Edge Case Handling**
+	```cpp
+	    if(k == 0) return s.size();
+	```
+	If `k` is 0, the entire string is a valid substring, so the function returns the size of the string.
 
-### 📈 Complexity Analysis
+4. **Character Frequency Calculation**
+	```cpp
+	    unordered_map<char, int> mp;
+	```
+	An unordered map `mp` is initialized to store the frequency of each character in the string `s`.
 
-#### Time Complexity:
-- **Time Complexity**: `O(n)`, where `n` is the length of the string. The algorithm scans through the string once to build the frequency map, and each recursive call works on progressively smaller substrings. So, the overall time complexity remains linear in terms of the length of the string.
+5. **Frequency Counting**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Iterating over the string to count the frequency of each character.
 
-#### Space Complexity:
-- **Space Complexity**: `O(n)`. We use a frequency map to store the counts of characters, and the recursion stack can also go as deep as `n` in the worst case.
+6. **Frequency Counting**
+	```cpp
+	        mp[s[i]]++;
+	```
+	Each character's frequency is incremented in the map.
 
----
+7. **Identifying Invalid Character**
+	```cpp
+	    int idx = 0;
+	```
+	A variable `idx` is initialized to track the index where the string can no longer be split.
 
-### 🏁 Conclusion
+8. **Identifying Invalid Character**
+	```cpp
+	    while(idx < s.size() && mp[s[idx]] >= k) idx++;
+	```
+	The loop continues as long as characters at `s[idx]` appear at least `k` times. If a character fails this condition, `idx` is incremented.
 
-This solution effectively solves the problem by using a divide-and-conquer approach. By recursively splitting the string and focusing only on the parts that could potentially contain valid substrings, we efficiently find the longest substring where each character appears at least `k` times. With a time complexity of `O(n)` and space complexity of `O(n)`, this solution is optimal for large inputs.
+9. **Base Case Check**
+	```cpp
+	    if(idx == s.size()) return s.size();
+	```
+	If `idx` reaches the end of the string, it means all characters meet the frequency requirement, so the function returns the size of the string.
 
-Remember, breaking down the problem into smaller subproblems is key here! 🌟 Keep up the good work, and don’t forget to practice more to strengthen your problem-solving skills! 💪
+10. **Recursion**
+	```cpp
+	    int left = longestSubstring(s.substr(0, idx), k);
+	```
+	Recursively call `longestSubstring` on the left part of the string, from the start to `idx`.
+
+11. **Recursion**
+	```cpp
+	    int right = longestSubstring(s.substr(idx + 1), k);
+	```
+	Recursively call `longestSubstring` on the right part of the string, starting from `idx + 1`.
+
+12. **Returning Result**
+	```cpp
+	    return max(left, right);
+	```
+	The function returns the maximum length of the valid substrings found in both the left and right parts.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n) in the best and average cases when most characters meet the frequency requirement. In the worst case, the string might be split repeatedly.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case due to the recursion stack and temporary storage for substrings.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/)
 

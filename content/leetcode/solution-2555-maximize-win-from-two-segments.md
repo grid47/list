@@ -14,132 +14,155 @@ img_src = ""
 youtube = "trj4pn5uzZ0"
 youtube_upload_date="2023-02-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/trj4pn5uzZ0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a sorted array `prizePositions` containing positions of prizes along a line and an integer `k`. Your task is to select two segments of length `k` such that you can maximize the number of prizes collected. The two segments may overlap, and you can collect all prizes within either of the segments.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `prizePositions` sorted in non-decreasing order, and an integer `k` representing the length of the two segments.
+- **Example:** `prizePositions = [1, 1, 2, 2, 3, 3, 5], k = 2`
+- **Constraints:**
+	- 1 <= prizePositions.length <= 10^5
+	- 1 <= prizePositions[i] <= 10^9
+	- 0 <= k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximizeWin(vector<int>& pos, int k) {
-        
-        int n = pos.size(), res = 0;
-        
-        vector<int> dp(n + 1, 0);
-        
-        int j = 0;
-        for(int i = 0; i < n; i++) {
-            while(pos[j] < pos[i] - k) j++;
-            dp[i + 1] = max(dp[i], i - j + 1);
-            res = max(res, i - j + 1+ dp[j]);
-        }
-        
-        
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of prizes you can collect by selecting two segments of length `k` optimally.
+- **Example:** `7`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the number of prizes collected by optimally selecting two segments.
+
+- 1. Iterate through the array `prizePositions` while maintaining a dynamic programming array `dp` to track the maximum number of prizes collectable with one segment.
+- 2. For each position, calculate the maximum number of prizes you can win by selecting a segment ending at that position.
+- 3. Update the result by considering the combination of the second segment after the first segment, ensuring the total number of prizes is maximized.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `prizePositions` is sorted in non-decreasing order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `prizePositions = [1, 1, 2, 2, 3, 3, 5], k = 2`  \
+  **Explanation:** By selecting two segments: [1, 3] and [3, 5], all 7 prizes are covered.
+
+- **Input:** `prizePositions = [1, 2, 3, 4], k = 0`  \
+  **Explanation:** With `k = 0`, the segments can only cover a single prize, so the maximum is 2 prizes with segments [3, 3] and [4, 4].
+
+{{< dots >}}
+## Approach 🚀
+We aim to maximize the number of prizes collected by optimally choosing two segments. We use dynamic programming to track the best selection of prizes for each segment.
+
+### Initial Thoughts 💭
+- We need to select the maximum possible number of prizes within two non-overlapping segments.
+- We can use dynamic programming to track the maximum number of prizes we can win by selecting one segment and combining it with the next segment.
+{{< dots >}}
+### Edge Cases 🌐
+- The array `prizePositions` will always contain at least one element, according to the constraints.
+- Ensure that the solution works efficiently with large inputs where `prizePositions.length` can go up to 100,000.
+- Handle cases where `k = 0`, which means the segments can only cover a single prize.
+- The solution should handle large numbers up to the maximum constraint of `10^9`.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximizeWin(vector<int>& pos, int k) {
+    
+    int n = pos.size(), res = 0;
+    
+    vector<int> dp(n + 1, 0);
+    
+    int j = 0;
+    for(int i = 0; i < n; i++) {
+        while(pos[j] < pos[i] - k) j++;
+        dp[i + 1] = max(dp[i], i - j + 1);
+        res = max(res, i - j + 1 + dp[j]);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to maximize the number of non-overlapping intervals of positions in the array `pos`, where the difference between any two positions in the same interval does not exceed a given integer `k`. The goal is to find the maximum number of positions that can be grouped into intervals, ensuring that each group has a difference between the smallest and largest number less than or equal to `k`.
-
-For example:
-- Input: `pos = [1, 2, 3, 4, 5]`, `k = 2`
-- Output: The maximum number of non-overlapping intervals that can be formed is `4`, because the intervals could be `[1, 2, 3]` and `[4, 5]`, both satisfying the condition.
-
-### Approach
-
-This problem can be solved using a **dynamic programming** approach combined with a **sliding window technique** to efficiently manage the positions and check the possible intervals.
-
-#### Step-by-Step Breakdown
-
-1. **Initialization**:
-   - We are given an array `pos` that represents the positions in the sequence. The goal is to partition these positions into the maximum number of subarrays (or intervals) where the difference between the smallest and largest element in each subarray does not exceed `k`.
-   - We will use a dynamic programming array `dp` to store the maximum number of positions we can select up to index `i` (inclusive).
-
-2. **Sliding Window (Two Pointers)**:
-   - We maintain two pointers (`i` and `j`) to represent the current interval under consideration.
-   - The pointer `i` iterates through the positions, and `j` is used to find the valid starting position of the current interval such that the difference between the positions at `i` and `j` does not exceed `k`.
-   - As `i` moves, we adjust `j` so that the interval formed by `pos[j]` to `pos[i]` is valid (i.e., `pos[i] - pos[j] <= k`).
-
-3. **Dynamic Programming Update**:
-   - For each `i`, we calculate `dp[i + 1]`, which represents the maximum number of positions we can select up to index `i`:
-     - Either we don't select `pos[i]` and carry over the value from `dp[i]`, or we select `pos[i]`, and the size of the current interval is `i - j + 1` where `j` is the starting point of the current interval.
-     - Update `dp[i + 1]` as the maximum of these two options.
-   - Additionally, we calculate the result (`res`) by checking the value of `dp[i + 1] + dp[j]`, which represents the total number of positions that can be selected when combining the interval from `j` to `i` and the maximum number of positions selected before `j`.
-
-4. **Return the Result**:
-   - The final result is stored in `res`, which represents the maximum number of positions that can be selected under the given constraints.
-
-### Code Breakdown (Step by Step)
-
-Let's break the code into manageable parts to understand each segment:
-
-#### Step 1: Function and Variable Initialization
-
-```cpp
-int n = pos.size(), res = 0;
-vector<int> dp(n + 1, 0);
+    
+    return res;
+}
 ```
-- `n` is the size of the `pos` array.
-- `res` will store the final result, i.e., the maximum number of positions that can be selected.
-- `dp` is a dynamic programming array, where `dp[i]` stores the maximum number of positions that can be selected from positions `0` to `i`.
 
-#### Step 2: Sliding Window with Two Pointers
+The function 'maximizeWin' aims to find the maximum number of wins a player can achieve given the list of positions in the game and a constraint 'k'. The code uses dynamic programming with a sliding window approach to calculate the result efficiently.
 
-```cpp
-int j = 0;
-for(int i = 0; i < n; i++) {
-    while(pos[j] < pos[i] - k) j++;
-```
-- `j` is a pointer used to represent the start of the current valid interval.
-- The inner `while` loop ensures that the difference between `pos[i]` and `pos[j]` does not exceed `k`. We increment `j` until the condition `pos[i] - pos[j] <= k` is satisfied.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximizeWin(vector<int>& pos, int k) {
+	```
+	This is the function definition for 'maximizeWin'. It takes a vector 'pos' representing the positions and an integer 'k' representing the constraint.
 
-#### Step 3: Dynamic Programming Update
+2. **Variable Initialization**
+	```cpp
+	    int n = pos.size(), res = 0;
+	```
+	Here, the integer 'n' is initialized to the size of the 'pos' vector, and 'res' is initialized to 0 to store the result (maximum number of wins).
 
-```cpp
-dp[i + 1] = max(dp[i], i - j + 1);
-```
-- We update `dp[i + 1]` by either:
-  - Not including `pos[i]` and taking the value from `dp[i]`.
-  - Including `pos[i]`, and the size of the current valid interval is `i - j + 1`.
+3. **Dynamic Programming Array Initialization**
+	```cpp
+	    vector<int> dp(n + 1, 0);
+	```
+	A dynamic programming (DP) array 'dp' is initialized with size 'n + 1' and all elements set to 0. This array will store the maximum number of wins up to each position.
 
-#### Step 4: Calculate the Result
+4. **Variable Initialization**
+	```cpp
+	    int j = 0;
+	```
+	The variable 'j' is initialized to 0 and will be used as the sliding window pointer to track the range of valid positions for counting wins.
 
-```cpp
-res = max(res, i - j + 1 + dp[j]);
-```
-- For each position `i`, we calculate the number of positions that can be selected if we combine the current interval `[j, i]` with the maximum number of positions selected before `j`. We update `res` with the maximum value of this combination.
+5. **Loop Through Positions**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This for loop iterates over the positions in the 'pos' vector, processing each position one by one.
 
-#### Step 5: Return the Result
+6. **Sliding Window Movement**
+	```cpp
+	        while(pos[j] < pos[i] - k) j++;
+	```
+	The while loop shifts the window pointer 'j' to the right until the condition 'pos[j] < pos[i] - k' is no longer true, maintaining the valid range of positions.
 
-```cpp
-return res;
-```
-- After iterating through all positions, `res` will contain the maximum number of positions that can be selected.
+7. **Update DP Array**
+	```cpp
+	        dp[i + 1] = max(dp[i], i - j + 1);
+	```
+	This line updates the DP array at index 'i + 1', calculating the maximum wins between the current value 'dp[i]' and the number of wins in the valid window (i - j + 1).
 
-### Complexity
+8. **Update Result**
+	```cpp
+	        res = max(res, i - j + 1 + dp[j]);
+	```
+	This line updates the result 'res' to the maximum value between the current 'res' and the sum of the number of wins in the current window (i - j + 1) plus the previously computed wins up to position 'j'.
 
-#### Time Complexity:
-- **Sliding Window**: The outer loop runs `n` times, and for each iteration of the outer loop, the inner `while` loop also runs at most `n` times in total (since each position is processed at most once). Hence, the overall time complexity is \( O(n) \).
-- **Dynamic Programming Update**: The `dp` array is updated in constant time for each iteration, so this part contributes \( O(n) \) time complexity.
-- **Overall Time Complexity**: The total time complexity is \( O(n) \), where `n` is the number of elements in `pos`.
+9. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the value of 'res', which is the maximum number of wins a player can achieve given the positions and constraint 'k'.
 
-#### Space Complexity:
-- **Dynamic Programming Array**: The `dp` array stores values for each position in the array, contributing \( O(n) \) space complexity.
-- **Other Variables**: The other variables (`j`, `res`, etc.) use constant space \( O(1) \).
-- **Overall Space Complexity**: The total space complexity is \( O(n) \).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the `prizePositions` array.
+- **Average Case:** O(n), since we iterate through the array once and use dynamic programming to compute the result.
+- **Worst Case:** O(n), as we need to iterate over the entire array to calculate the best result.
 
-### Conclusion
 
-The solution uses a **greedy approach** combined with **dynamic programming** and a **sliding window technique** to efficiently solve the problem. The sliding window technique ensures that we can find the maximum valid intervals without rechecking all previous intervals for each position, while the dynamic programming array tracks the best possible result up to each position.
 
-The time complexity of \( O(n) \) ensures that the solution can handle large inputs efficiently, making it suitable for real-world applications. The space complexity of \( O(n) \) is manageable, and the algorithm ensures that we compute the result in an optimal manner.
+### Space Complexity 💾
+- **Best Case:** O(1), if no additional space is used.
+- **Worst Case:** O(n), since we need to store the dynamic programming array `dp` of size n.
+
+Space complexity is dominated by the `dp` array used for dynamic programming.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-win-from-two-segments/description/)
 

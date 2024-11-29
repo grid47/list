@@ -14,120 +14,192 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+An ugly number is a positive integer that is divisible by at least one of the integers a, b, or c. Your task is to return the nth ugly number in the sequence formed by the integers divisible by a, b, or c.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given four integers n, a, b, and c. You need to return the nth ugly number, where an ugly number is divisible by a, b, or c.
+- **Example:** `Input: n = 3, a = 2, b = 3, c = 5`
+- **Constraints:**
+	- 1 <= n, a, b, c <= 10^9
+	- 1 <= a * b * c <= 10^18
+	- It is guaranteed that the result will be in range [1, 2 * 10^9].
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int nthUglyNumber(int k, int A, int B, int C) {
-        int lo = 1, hi = 2* (int)1e9;
-        long a = long(A), b = long(B), c = long(C);
-        long ab = a * b / __gcd(a, b);
-        long bc = b * c / __gcd(b, c);
-        long ac = a * c / __gcd(a, c);
-        long abc = a * bc / __gcd(a, bc);
-        while (lo < hi ) {
-            int mid = lo + (hi - lo)/2;
-            int cnt = mid / a + mid / b + mid / c - mid / ab - mid / bc - mid / ac + mid / abc;
-            
-            if (cnt < k) {
-                lo = mid + 1;
-            } else hi = mid;
-        }
-        return lo;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the nth ugly number from the sequence.
+- **Example:** `Output: 4`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the nth ugly number in the sequence formed by numbers divisible by a, b, or c.
+
+- Perform a binary search to find the nth ugly number.
+- At each step, calculate the number of ugly numbers less than or equal to the mid-point of the search range.
+- Adjust the range based on the count of ugly numbers found and repeat until the correct ugly number is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is assumed that the integers a, b, and c are not equal to zero.
+- The given values are large but within the range allowed by the solution approach.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 3, a = 2, b = 3, c = 5`  \
+  **Explanation:** The ugly numbers are 2, 3, 4, 5, 6, 8, 9, 10, 12... The 3rd ugly number is 4.
+
+- **Input:** `Input: n = 4, a = 2, b = 3, c = 4`  \
+  **Explanation:** The ugly numbers are 2, 3, 4, 6, 8, 9, 10... The 4th ugly number is 6.
+
+- **Input:** `Input: n = 5, a = 2, b = 11, c = 13`  \
+  **Explanation:** The ugly numbers are 2, 4, 6, 8, 10, 11, 12, 13... The 5th ugly number is 10.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, a binary search approach is used to find the nth ugly number. The idea is to calculate how many ugly numbers are there less than or equal to a given number using the formula for counting divisibility by a, b, and c.
+
+### Initial Thoughts 💭
+- The problem is constrained by large values, so a brute-force approach of checking all numbers is inefficient.
+- A binary search allows for efficient narrowing of the range of possible ugly numbers.
+- Binary search is optimal for this kind of problem, where the answer lies within a specific range.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure all inputs are positive integers.
+- Ensure the solution handles large values of n, a, b, and c efficiently.
+- Consider edge cases where a, b, or c might be large prime numbers or powers of each other.
+- The constraints allow us to use a binary search approach because the range of possible ugly numbers is manageable.
+{{< dots >}}
+## Code 💻
+```cpp
+int nthUglyNumber(int k, int A, int B, int C) {
+    int lo = 1, hi = 2* (int)1e9;
+    long a = long(A), b = long(B), c = long(C);
+    long ab = a * b / __gcd(a, b);
+    long bc = b * c / __gcd(b, c);
+    long ac = a * c / __gcd(a, c);
+    long abc = a * bc / __gcd(a, bc);
+    while (lo < hi ) {
+        int mid = lo + (hi - lo)/2;
+        int cnt = mid / a + mid / b + mid / c - mid / ab - mid / bc - mid / ac + mid / abc;
+        
+        if (cnt < k) {
+            lo = mid + 1;
+        } else hi = mid;
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The problem requires us to find the k-th "ugly number," where an ugly number is defined as a positive integer whose prime factors only include the integers `A`, `B`, and `C`. The task can be challenging, especially given the potential size of `k` and the values of `A`, `B`, and `C`. The challenge is to implement an efficient solution to compute this k-th ugly number without generating all possible ugly numbers up to that point.
-
-### Approach
-To find the k-th ugly number, the algorithm employs a binary search strategy combined with the principle of inclusion-exclusion. This method is efficient because it allows us to count how many ugly numbers exist less than or equal to a certain threshold efficiently. Here are the steps involved:
-
-1. **Binary Search Setup**: We define a search space for the k-th ugly number starting from `1` to `2 * 10^9`. This is the maximum limit because the k-th ugly number cannot exceed this value for reasonable inputs.
-
-2. **Counting Ugly Numbers**: For a mid-point in our search, we calculate how many ugly numbers are less than or equal to `mid`. This is done using the inclusion-exclusion principle:
-   - Count the multiples of `A`, `B`, and `C`.
-   - Subtract the counts of the least common multiples (LCMs) of pairs to avoid double counting.
-   - Add the count of the LCM of all three to adjust for over-subtraction.
-
-3. **Binary Search Execution**: The search continues by adjusting the low and high bounds based on whether the count of ugly numbers at the mid-point is less than or greater than `k`.
-
-4. **Return Result**: When the bounds converge, the low index will point to the k-th ugly number.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int nthUglyNumber(int k, int A, int B, int C) {
-        int lo = 1, hi = 2 * (int)1e9;
+    return lo;
+}
 ```
-- **Lines 1-3**: The `nthUglyNumber` function is defined with parameters for `k`, `A`, `B`, and `C`. The search space is initialized with `lo` set to `1` and `hi` set to `2 * 10^9`, which is a safe upper limit for the k-th ugly number.
 
-```cpp
-        long a = long(A), b = long(B), c = long(C);
-```
-- **Line 4**: The values of `A`, `B`, and `C` are cast to `long` to avoid potential overflow when calculating LCMs.
+This function calculates the k-th ugly number that is divisible by any of A, B, or C. It uses binary search to efficiently compute the result by considering least common multiples and avoiding overcounting.
 
-```cpp
-        long ab = a * b / __gcd(a, b);
-        long bc = b * c / __gcd(b, c);
-        long ac = a * c / __gcd(a, c);
-        long abc = a * bc / __gcd(a, bc);
-```
-- **Lines 5-8**: Here, the LCMs of the combinations of `A`, `B`, and `C` are calculated using the relationship between LCM and GCD:
-  - `lcm(x, y) = (x * y) / gcd(x, y)`
-  - `ab`, `bc`, `ac`, and `abc` represent the LCM of pairs and the triplet.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function**
+	```cpp
+	int nthUglyNumber(int k, int A, int B, int C) {
+	```
+	Defines the function that calculates the k-th ugly number based on inputs A, B, and C.
 
-```cpp
-        while (lo < hi) {
-            int mid = lo + (hi - lo) / 2;
-```
-- **Lines 9-10**: A while loop begins to perform the binary search. The `mid` point is calculated to avoid overflow using `lo + (hi - lo) / 2`.
+2. **Variable Initialization**
+	```cpp
+	    int lo = 1, hi = 2* (int)1e9;
+	```
+	Initializes the search range for the binary search algorithm.
 
-```cpp
-            int cnt = mid / a + mid / b + mid / c 
-                      - mid / ab - mid / bc - mid / ac 
-                      + mid / abc;
-```
-- **Lines 11-12**: The count of ugly numbers less than or equal to `mid` is calculated using the inclusion-exclusion principle. This counts multiples of `A`, `B`, and `C`, subtracts the overlapping counts from pairs, and adds back the count for the triplet.
+3. **Variable Initialization**
+	```cpp
+	    long a = long(A), b = long(B), c = long(C);
+	```
+	Converts the inputs A, B, and C to long type for arithmetic operations.
 
-```cpp
-            if (cnt < k) {
-                lo = mid + 1;
-            } else {
-                hi = mid;
-            }
-```
-- **Lines 13-16**: The count is compared with `k`. If the count of ugly numbers is less than `k`, we adjust the lower bound to `mid + 1`. Otherwise, we set the upper bound to `mid`.
+4. **Mathematical Calculation**
+	```cpp
+	    long ab = a * b / __gcd(a, b);
+	```
+	Computes the least common multiple (LCM) of A and B using their GCD.
 
-```cpp
-        }
-        return lo;
-    }
-};
-```
-- **Lines 17-19**: The loop continues until the bounds converge. Finally, the function returns `lo`, which points to the k-th ugly number.
+5. **Mathematical Calculation**
+	```cpp
+	    long bc = b * c / __gcd(b, c);
+	```
+	Computes the LCM of B and C using their GCD.
 
-### Complexity
-1. **Time Complexity**:
-   - The time complexity of this algorithm is \(O(\log(\text{hi}))\), where `hi` is \(2 \times 10^9\). This is due to the binary search, which reduces the search space logarithmically. Each check involves calculating the count of ugly numbers, which is done in constant time \(O(1)\).
+6. **Mathematical Calculation**
+	```cpp
+	    long ac = a * c / __gcd(a, c);
+	```
+	Computes the LCM of A and C using their GCD.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(1)\) because we use a constant amount of space for variables, regardless of the input size.
+7. **Mathematical Calculation**
+	```cpp
+	    long abc = a * bc / __gcd(a, bc);
+	```
+	Computes the LCM of A, B, and C using the LCM of B and C.
 
-### Conclusion
-The `nthUglyNumber` function efficiently finds the k-th ugly number using a binary search approach combined with the inclusion-exclusion principle. This implementation is optimal for the given problem constraints and handles the potentially large size of `k` and values of `A`, `B`, and `C` with ease. By leveraging mathematical properties of numbers, the function avoids the need for generating large sequences, making it suitable for competitive programming and real-world applications where performance is crucial. This solution highlights the importance of understanding number theory in algorithm design and optimization.
+8. **Loop**
+	```cpp
+	    while (lo < hi ) {
+	```
+	Begins the binary search loop to narrow down the k-th ugly number.
+
+9. **Binary Search**
+	```cpp
+	        int mid = lo + (hi - lo)/2;
+	```
+	Calculates the midpoint of the current range in binary search.
+
+10. **Counting**
+	```cpp
+	        int cnt = mid / a + mid / b + mid / c - mid / ab - mid / bc - mid / ac + mid / abc;
+	```
+	Counts how many numbers up to mid are divisible by A, B, or C, adjusting for overlaps.
+
+11. **Conditional Check**
+	```cpp
+	        if (cnt < k) {
+	```
+	If the count of valid numbers is less than k, adjust the lower bound.
+
+12. **Adjust Bound**
+	```cpp
+	            lo = mid + 1;
+	```
+	Moves the lower bound up when the count is less than k.
+
+13. **Adjust Bound**
+	```cpp
+	        } else hi = mid;
+	```
+	Moves the upper bound down when the count meets or exceeds k.
+
+14. **Return**
+	```cpp
+	    return lo;
+	```
+	Returns the k-th ugly number after narrowing down the search range.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(2 * 10^9))
+- **Average Case:** O(log(2 * 10^9))
+- **Worst Case:** O(log(2 * 10^9))
+
+The binary search narrows the range logarithmically, ensuring a fast solution even for large inputs.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution only requires a few variables, making it space-efficient.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/ugly-number-iii/description/)
 

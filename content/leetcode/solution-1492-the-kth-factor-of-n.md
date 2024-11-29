@@ -14,98 +14,127 @@ img_src = ""
 youtube = "eD7-AQ2nUsI"
 youtube_upload_date="2020-06-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/eD7-AQ2nUsI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two positive integers n and k. A factor of an integer n is defined as an integer i where n % i == 0. Consider a sorted list of all factors of n in ascending order. Return the kth factor from this list or return -1 if n has less than k factors.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers n and k. The integer n represents the number for which we need to find the factors, and k represents the position of the factor to return.
+- **Example:** `n = 18, k = 4`
+- **Constraints:**
+	- 1 <= k <= n <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int kthFactor(int n, int k) {
-        for(int i = 1; i <= n; i++) {
-            if(n % i == 0) k--;
-            if(k == 0) return i;
-        }
-        return -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the kth factor in the list of factors of n, or -1 if n has fewer than k factors.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- If n has less than k factors, return -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the kth factor of n by iterating through its divisors and returning the kth one.
+
+- Iterate through integers from 1 to n.
+- Check if each integer divides n without a remainder.
+- Count the divisors and return the kth divisor if it exists.
+- If fewer than k divisors are found, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values of n and k will always be valid integers within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 18, k = 4`  \
+  **Explanation:** The factors of 18 are [1, 2, 3, 6, 9, 18]. The 4th factor is 6.
+
+- **Input:** `n = 9, k = 3`  \
+  **Explanation:** The factors of 9 are [1, 3, 9]. The 3rd factor is 9.
+
+- **Input:** `n = 10, k = 5`  \
+  **Explanation:** The factors of 10 are [1, 2, 5, 10]. There are only 4 factors, so the result is -1.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, iterate through potential factors of n and check for divisibility. Return the kth factor if found.
+
+### Initial Thoughts 💭
+- The factors of n are the integers from 1 to n that divide n without leaving a remainder.
+- We can check each integer in this range to see if it's a factor of n.
+- We need to find the kth factor, so tracking the count of factors is essential to solving this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be valid input with n >= 1.
+- For larger values of n (up to 1000), the solution must be efficient enough to handle the full range of factors.
+- If k exceeds the number of factors of n, return -1.
+- Ensure the solution handles all edge cases efficiently, especially when k is larger than the number of factors.
+{{< dots >}}
+## Code 💻
+```cpp
+int kthFactor(int n, int k) {
+    for(int i = 1; i <= n; i++) {
+        if(n % i == 0) k--;
+        if(k == 0) return i;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The goal of this problem is to find the **k-th factor** of a given integer `n`. A factor of `n` is any integer `i` such that `n` can be evenly divided by `i` (i.e., `n % i == 0`). If `n` has fewer than `k` factors, the function should return `-1` to indicate that the k-th factor does not exist.
-
-### Approach
-
-To achieve this, the solution involves iterating through all integers from `1` to `n`, counting the factors as they are found. The algorithm can be outlined as follows:
-
-1. **Iterate through possible factors**: Check every integer `i` from `1` to `n` to see if it is a factor of `n`.
-2. **Count factors**: Maintain a counter to track how many factors have been found.
-3. **Return the k-th factor**: When the counter reaches `k`, return the current factor. If the loop completes without finding `k` factors, return `-1`.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code snippet to understand its components and logic:
-
-```cpp
-class Solution {
-public:
-    int kthFactor(int n, int k) {
+    return -1;
+}
 ```
-This defines the `Solution` class and its method `kthFactor`, which takes two integers as input: `n` (the number for which we want to find factors) and `k` (the index of the desired factor).
 
-#### Step 1: Iterate Through Possible Factors
+The `kthFactor` function returns the k-th divisor of a given integer `n`. If the k-th divisor doesn't exist, it returns -1.
 
-```cpp
-        for(int i = 1; i <= n; i++) {
-```
-- A for loop begins, starting from `1` and iterating up to `n`. This is necessary because any integer from `1` to `n` can be a factor of `n`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method**
+	```cpp
+	int kthFactor(int n, int k) {
+	```
+	The function `kthFactor` is designed to find the k-th divisor of a given integer `n`.
 
-#### Step 2: Check for Factors
+2. **Loop**
+	```cpp
+	    for(int i = 1; i <= n; i++) {
+	```
+	A loop is used to iterate through all integers from 1 to `n` to check for divisibility.
 
-```cpp
-            if(n % i == 0) k--;
-```
-- Inside the loop, the code checks whether `i` is a factor of `n` using the modulus operator. If `n` is divisible by `i`, it decrements `k` by one, indicating that one more factor has been found.
+3. **Divisibility Check**
+	```cpp
+	        if(n % i == 0) k--;
+	```
+	This condition checks if `i` is a divisor of `n`. If it is, it decrements the value of `k`.
 
-#### Step 3: Return the k-th Factor
+4. **Return Divisor**
+	```cpp
+	        if(k == 0) return i;
+	```
+	If `k` reaches 0, it means the current number `i` is the k-th divisor of `n`, and it is returned.
 
-```cpp
-            if(k == 0) return i;
-```
-- After decrementing `k`, the code checks if `k` has reached zero. If it has, this means the current integer `i` is the k-th factor of `n`, and it is returned immediately.
+5. **Return -1**
+	```cpp
+	    return -1;
+	```
+	If no k-th divisor is found, the function returns -1 to indicate that the k-th divisor does not exist.
 
-#### Step 4: Handle the Case When k-th Factor Doesn't Exist
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-```cpp
-        return -1;
-    }
-};
-```
-- If the loop completes and no k-th factor has been found (i.e., `k` is still greater than zero), the function returns `-1` to indicate that there are not enough factors.
+The worst-case time complexity occurs when we check every integer from 1 to n for divisibility.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Time Complexity
-- The time complexity of this algorithm is **O(n)**, where `n` is the input integer. This is because, in the worst-case scenario, we may need to check all integers up to `n` to find its factors.
+The space complexity is constant, as we are only using a few variables for tracking the factors.
 
-#### Space Complexity
-- The space complexity is **O(1)** since the algorithm uses a fixed amount of extra space for variables (`k`, `i`), regardless of the input size.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution effectively finds the k-th factor of an integer `n` through a straightforward iteration method. It maintains a simple yet effective logic that ensures clarity and correctness.
-
-**Key Points**:
-- **Simplicity**: The algorithm is easy to understand and implement, making it suitable for introductory programming exercises focused on factors and modular arithmetic.
-- **Performance**: While the time complexity of O(n) may not be the most efficient approach for very large values of `n`, it is adequate for many practical scenarios and sufficiently straightforward for teaching purposes.
-- **Edge Cases**: The solution correctly handles edge cases, such as when `k` exceeds the number of factors present for the given `n`.
-
-This method is beneficial in various mathematical contexts, including number theory, where understanding the factors of a number can provide insights into its properties and divisibility. It also forms the basis for more complex algorithms that rely on factorization, such as those used in cryptography and advanced number theory.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-kth-factor-of-n/description/)
 

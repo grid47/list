@@ -14,73 +14,72 @@ img_src = ""
 youtube = "QEvLvINq730"
 youtube_upload_date="2022-10-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QEvLvINq730/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `nums` and an integer `k`, return the number of subarrays in which the greatest common divisor (GCD) of all the elements is exactly `k`. A subarray is a contiguous non-empty sequence of elements within the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` and an integer `k`.
+- **Example:** `nums = [6, 3, 9, 12], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i], k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    int subarrayGCD(vector<int>& nums, int k) {        
-        int cnt = 0, n = nums.size();
-        
-        for(int i = 0; i < n; i++) {
-            for(int j = i; j < n && nums[j] % k == 0; j++) {
-                nums[i] = __gcd(nums[i], nums[j]);
-                cnt += (nums[i] == k);
-            }
-        }
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of subarrays where the greatest common divisor of all elements is equal to `k`.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- All elements in the array are non-negative integers.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find subarrays whose GCD equals `k`.
 
-Given an array of integers `nums` and an integer `k`, the problem asks to find the number of contiguous subarrays of `nums` such that the greatest common divisor (GCD) of the elements in the subarray is equal to `k`. 
+- Iterate through the array to find subarrays.
+- For each subarray, calculate the GCD of the elements.
+- Count the subarrays where the GCD is equal to `k`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The GCD operation can handle large values efficiently.
+- The subarrays are contiguous.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [9, 3, 1, 6], k = 3`  \
+  **Explanation:** The subarrays where the GCD of elements is 3 are [9, 3], [3], [3, 1, 6], and [9, 3, 1, 6]. Hence, the answer is 4.
 
-In other words, for each contiguous subarray of `nums`, we need to check if the GCD of its elements is exactly `k`, and count how many such subarrays exist.
+- **Input:** `nums = [10, 20, 30, 40], k = 5`  \
+  **Explanation:** The subarrays where the GCD of elements is 5 are [10, 20, 30, 40], [10, 20], [20, 30], and [30, 40]. So, the answer is 4.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating through all possible subarrays, calculating the GCD of each subarray, and counting the subarrays that have a GCD equal to `k`.
 
-The key challenge in this problem is calculating the GCD of elements in subarrays efficiently and comparing it with `k`. A brute-force approach would involve calculating the GCD for every possible subarray, which could be computationally expensive. To optimize the process, we can take advantage of the properties of the GCD:
-
-1. **GCD Properties**:
-   - The GCD of any two numbers divides both numbers, so for a subarray to have a GCD equal to `k`, every element in that subarray must be divisible by `k`.
-   - Once we know that all elements of a subarray are divisible by `k`, we can divide each element of the subarray by `k` and check if the GCD of the resulting numbers equals `1`. This is equivalent to checking if the GCD of the original elements is equal to `k`.
-
-2. **Iterative Approach**:
-   - Start by iterating over all possible starting points of subarrays (`i`).
-   - For each starting point `i`, iterate over all subarrays ending at position `j` where the elements are divisible by `k`.
-   - For each such subarray, compute the GCD of the elements and check if it equals `k`.
-   - If the GCD of the subarray equals `k`, increment the count.
-
-3. **Efficient GCD Calculation**:
-   - The GCD of two numbers can be computed efficiently using the Euclidean algorithm, which is implemented by the function `__gcd` in C++.
-   - To calculate the GCD of a subarray efficiently, we can iteratively update the GCD of the current subarray by including one new element at a time.
-
-4. **Breaking Condition**:
-   - If the GCD of a subarray becomes less than `k` at any point, we can break the inner loop early since adding more elements will not increase the GCD.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- We need an efficient way to compute GCDs for subarrays.
+- Naively checking all subarrays might lead to high computational overhead for larger arrays.
+- We can use a nested loop to generate all subarrays, compute their GCD, and check if it matches `k`.
+{{< dots >}}
+### Edge Cases 🌐
+- Input will never be empty as per the problem constraints.
+- When the array is large (close to 1000 elements), the time complexity should be kept in mind.
+- When `k` is larger than all elements in the array, there will be no subarrays with GCD equal to `k`.
+- We assume the time complexity is efficient enough to handle the constraints provided.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 int subarrayGCD(vector<int>& nums, int k) {        
     int cnt = 0, n = nums.size();
     
-    // Outer loop for starting index of the subarray
     for(int i = 0; i < n; i++) {
-        // Inner loop for ending index of the subarray
         for(int j = i; j < n && nums[j] % k == 0; j++) {
-            // Update the GCD of the current subarray from nums[i] to nums[j]
             nums[i] = __gcd(nums[i], nums[j]);
-            
-            // If GCD equals k, increment the counter
             cnt += (nums[i] == k);
         }
     }
@@ -88,71 +87,69 @@ int subarrayGCD(vector<int>& nums, int k) {
 }
 ```
 
-#### Step 1: Initialization
-```cpp
-int cnt = 0, n = nums.size();
-```
-- `cnt`: This variable keeps track of the number of subarrays whose GCD is equal to `k`.
-- `n`: The size of the `nums` array.
+The function `subarrayGCD` computes the number of contiguous subarrays of `nums` where the greatest common divisor (GCD) of the elements in the subarray equals `k`.
 
-#### Step 2: Outer Loop for Subarray Starting Index
-```cpp
-for(int i = 0; i < n; i++) {
-```
-- This loop iterates over all possible starting indices `i` for subarrays.
-- For each starting index `i`, we will explore all subarrays starting at `i` and ending at `j` (where `i <= j < n`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int subarrayGCD(vector<int>& nums, int k) {
+	```
+	This line defines the function `subarrayGCD`, which takes a vector of integers `nums` and an integer `k`, and returns the count of subarrays whose GCD equals `k`.
 
-#### Step 3: Inner Loop for Subarray Ending Index
-```cpp
-for(int j = i; j < n && nums[j] % k == 0; j++) {
-```
-- This loop iterates over all possible ending indices `j` of subarrays starting at index `i`.
-- The condition `nums[j] % k == 0` ensures that we only consider elements that are divisible by `k`. If an element is not divisible by `k`, we can skip it since it will never contribute to a valid subarray with a GCD of `k`.
+2. **Variable Initialization**
+	```cpp
+	    int cnt = 0, n = nums.size();
+	```
+	This line initializes the counter `cnt` to 0, which will track the number of valid subarrays, and `n`, which stores the size of the input array `nums`.
 
-#### Step 4: Update GCD for the Current Subarray
-```cpp
-nums[i] = __gcd(nums[i], nums[j]);
-```
-- The `__gcd(nums[i], nums[j])` function computes the GCD of the current subarray from index `i` to `j`.
-- The value of `nums[i]` is updated to the GCD of the current subarray as we iterate over `j`.
-  
-#### Step 5: Check if the GCD Equals `k`
-```cpp
-cnt += (nums[i] == k);
-```
-- After updating the GCD for the current subarray, we check if the GCD is equal to `k`.
-- If it is, we increment the counter `cnt` to keep track of the number of valid subarrays.
+3. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	The outer loop starts at index `i` and iterates through each element of the array `nums`.
 
-#### Step 6: Return the Result
-```cpp
-return cnt;
-```
-- After processing all possible subarrays, we return the total count of subarrays where the GCD equals `k`.
+4. **Inner Loop Condition**
+	```cpp
+	        for(int j = i; j < n && nums[j] % k == 0; j++) {
+	```
+	The inner loop starts at index `i` and continues as long as the current element `nums[j]` is divisible by `k`. This ensures that we only consider elements that can potentially form a valid subarray.
 
-### Complexity
+5. **GCD Calculation**
+	```cpp
+	            nums[i] = __gcd(nums[i], nums[j]);
+	```
+	This line computes the greatest common divisor (GCD) of `nums[i]` and `nums[j]` and stores it back in `nums[i]`. This process updates the GCD as we extend the subarray.
 
-#### Time Complexity
+6. **Count Increment**
+	```cpp
+	            cnt += (nums[i] == k);
+	```
+	If the GCD of the current subarray equals `k`, we increment the counter `cnt`.
 
-The time complexity of the solution is **O(n^2 log m)**, where `n` is the size of the input array `nums`, and `m` is the maximum value of an element in the array. 
+7. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	This line returns the count `cnt` of valid subarrays whose GCD equals `k`.
 
-1. **Outer Loop**: The outer loop runs `n` times, where `n` is the size of the array.
-2. **Inner Loop**: The inner loop runs for each possible subarray starting at `i`. In the worst case, this loop will run up to `n` times.
-3. **GCD Calculation**: The GCD of two numbers is calculated using the Euclidean algorithm, which takes **O(log m)** time where `m` is the value of the numbers. Since we update the GCD for each subarray, the GCD calculation is performed multiple times.
-   
-Thus, the overall time complexity is **O(n^2 log m)**, where `n` is the length of the array and `m` is the magnitude of the values in the array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2 * log(max(nums)))
+- **Worst Case:** O(n^2 * log(max(nums)))
 
-#### Space Complexity
+In the worst case, we have to check all subarrays, and computing GCD for each subarray takes logarithmic time relative to the values involved.
 
-The space complexity is **O(1)**, as we are only using a few variables to store intermediate results like `cnt`, and no extra space is used beyond the input array.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Conclusion
+We are only using a counter variable, so the space complexity is constant.
 
-This solution solves the problem of counting subarrays with a GCD equal to `k` by iterating through all possible subarrays, calculating the GCD incrementally, and checking if it equals `k`. The approach is straightforward but requires careful handling of GCD calculations and divisibility conditions to ensure efficient processing of the subarrays.
+**Happy Coding! 🎉**
 
-- **Time Complexity**: **O(n^2 log m)**, where `n` is the length of the array and `m` is the value of the numbers.
-- **Space Complexity**: **O(1)**, as no additional space is used besides the input array.
-
-This approach guarantees correctness and handles small to moderate input sizes efficiently, though it may be suboptimal for very large arrays or large numbers.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-subarrays-with-gcd-equal-to-k/description/)
 

@@ -14,156 +14,205 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of positive integers called `queries`, each between 1 and `m`. You need to process each element in `queries` sequentially according to the following rules:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> processQueries(vector<int>& q, int m) {
-        vector<int> ans;
-        for(int i = 1; i <= m; i++)
-            ans.push_back(i);
-        map<int, int> mp;
-        for(int i = 0; i < ans.size(); i++)
-            mp[ans[i]] = i;
-        
-        vector<int> res;
-        for(int i = 0; i < q.size(); i++) {
-            int x = mp[q[i]];
-            res.push_back(x);
-            for(auto it: mp) {
-                if(it.second < x)
-                mp[it.first]++; // shit to right
-            }
-            mp[q[i]] = 0;
+1. Initially, the permutation `P` is `[1, 2, 3, ..., m]`.
+2. For each `queries[i]`, find the index of `queries[i]` in the permutation `P`.
+3. After locating `queries[i]` in `P`, move it to the beginning of the list.
+4. Return the list of indices (positions) for each element in `queries` as they are processed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `m` and an array `queries` of positive integers between 1 and `m`.
+- **Example:** `queries = [3, 1, 2, 1], m = 5`
+- **Constraints:**
+	- 1 <= m <= 10^3
+	- 1 <= queries.length <= m
+	- 1 <= queries[i] <= m
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array containing the result for the given queries. The result array consists of the indices of each element in `queries` after processing according to the rules described.
+- **Example:** `[2, 1, 2, 1]`
+- **Constraints:**
+	- The output array will have the same length as `queries`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Process each query and return the resulting list of indices after adjusting the permutation.
+
+- 1. Initialize the permutation `P` as `[1, 2, ..., m]`.
+- 2. For each element in `queries`, find its position in `P` and store the result.
+- 3. Move the current element to the beginning of `P` after finding its position.
+{{< dots >}}
+### Problem Assumptions ✅
+- The `queries` array will always have positive integers between 1 and `m`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `queries = [3, 1, 2, 1], m = 5`  \
+  **Explanation:** The processing steps for each query are explained, and the final result `[2, 1, 2, 1]` is derived.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves simulating the movement of elements in the permutation after each query.
+
+### Initial Thoughts 💭
+- We can maintain the permutation using an array or list and keep track of the position of each element.
+- Since we need to frequently shift elements to the beginning of the permutation, an efficient way to track positions and update them is essential.
+{{< dots >}}
+### Edge Cases 🌐
+- The `queries` array will not be empty, so this case does not need to be considered.
+- When `m` is large (near 10^3), ensure that the approach is efficient enough to handle the maximum constraints.
+- Handle cases where `queries` consists of repetitive or sequential queries.
+- The number of queries is always between 1 and `m`, and each query is a valid integer within this range.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> processQueries(vector<int>& q, int m) {
+    vector<int> ans;
+    for(int i = 1; i <= m; i++)
+        ans.push_back(i);
+    map<int, int> mp;
+    for(int i = 0; i < ans.size(); i++)
+        mp[ans[i]] = i;
+    
+    vector<int> res;
+    for(int i = 0; i < q.size(); i++) {
+        int x = mp[q[i]];
+        res.push_back(x);
+        for(auto it: mp) {
+            if(it.second < x)
+            mp[it.first]++; // shift to right
         }
-        return res;
+        mp[q[i]] = 0;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function, `processQueries`, processes a list of queries and returns a list of positions of each query in a sequence. It also adjusts the sequence positions after each query is processed.
 
-The problem at hand is about processing a series of queries on a list of integers that represent positions in a permutation. Given an initial permutation of integers from 1 to \( m \), the goal is to determine the position of each queried integer in the current permutation after each query is processed. Once an integer is queried, it should be moved to the front of the permutation, while the other integers shift accordingly.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	vector<int> processQueries(vector<int>& q, int m) {
+	```
+	Defines the method `processQueries` which takes a vector `q` of queries and an integer `m` representing the size of the sequence. It returns a vector of integers representing the positions of each query in the sequence.
 
-### Approach
+2. **Vector Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	Initializes a vector `ans` to hold the sequence from 1 to `m`.
 
-To tackle this problem, we can follow a structured approach:
+3. **Loop to Initialize Sequence**
+	```cpp
+	    for(int i = 1; i <= m; i++)
+	```
+	Starts a `for` loop to iterate from 1 to `m` and populate the `ans` vector with integers.
 
-1. **Initialization of Permutation**: Start with a vector that contains integers from 1 to \( m \).
+4. **Push Values to Vector**
+	```cpp
+	        ans.push_back(i);
+	```
+	Adds each integer `i` from 1 to `m` to the `ans` vector.
 
-2. **Mapping Positions**: Utilize a map (or dictionary) to track the current positions of each integer in the permutation. This allows for efficient updates and lookups.
+5. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a map `mp` to store each element in `ans` along with its index.
 
-3. **Processing Queries**: For each query, perform the following steps:
-   - Retrieve the current index of the queried integer.
-   - Store this index in the result.
-   - Update the positions of the other integers that will shift to the right as a result of moving the queried integer to the front.
-   - Finally, update the queried integer’s position to the front.
+6. **Map Population**
+	```cpp
+	    for(int i = 0; i < ans.size(); i++)
+	```
+	Starts a loop to populate the map `mp` where the key is the element from `ans` and the value is its corresponding index.
 
-4. **Returning Results**: Once all queries are processed, return the accumulated results.
+7. **Insert into Map**
+	```cpp
+	        mp[ans[i]] = i;
+	```
+	Inserts each element from the `ans` vector along with its index into the map `mp`.
 
-### Code Breakdown (Step by Step)
+8. **Vector Initialization for Result**
+	```cpp
+	    vector<int> res;
+	```
+	Initializes an empty vector `res` to store the results of the query processing.
 
-Below is a detailed breakdown of the provided C++ code that implements the above logic:
+9. **Loop through Queries**
+	```cpp
+	    for(int i = 0; i < q.size(); i++) {
+	```
+	Starts a loop to process each query in the `q` vector.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+10. **Get Position from Map**
+	```cpp
+	        int x = mp[q[i]];
+	```
+	Gets the position of the current query element `q[i]` from the map `mp`.
 
-   - A class named `Solution` is defined, containing the method `processQueries`.
+11. **Push Result Position**
+	```cpp
+	        res.push_back(x);
+	```
+	Adds the position `x` of the current query to the result vector `res`.
 
-2. **Function Declaration**:
-   ```cpp
-       vector<int> processQueries(vector<int>& q, int m) {
-   ```
+12. **Loop through Map**
+	```cpp
+	        for(auto it: mp) {
+	```
+	Starts a loop to iterate through each key-value pair in the map `mp`.
 
-   - The `processQueries` function takes two parameters:
-     - `q`: a vector of integers representing the queries.
-     - `m`: an integer representing the size of the initial permutation (1 to \( m \)).
+13. **Shift Elements in Map**
+	```cpp
+	            if(it.second < x)
+	```
+	Checks if the current index in the map is less than the position of the query element. If so, shifts that element to the right.
 
-3. **Initializing the Answer Vector**:
-   ```cpp
-           vector<int> ans;
-           for(int i = 1; i <= m; i++)
-               ans.push_back(i);
-   ```
+14. **Update Map Values**
+	```cpp
+	            mp[it.first]++; // shift to right
+	```
+	Increases the index of the element in the map to shift it to the right.
 
-   - The `ans` vector is initialized to hold the integers from 1 to \( m \). This vector represents the initial state of the permutation.
+15. **Update Position for Query**
+	```cpp
+	        mp[q[i]] = 0;
+	```
+	Sets the position of the processed query element `q[i]` to 0 in the map, as it has been processed.
 
-4. **Mapping Positions**:
-   ```cpp
-           map<int, int> mp;
-           for(int i = 0; i < ans.size(); i++)
-               mp[ans[i]] = i;
-   ```
+16. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the `res` vector which contains the positions of each query after processing.
 
-   - A map named `mp` is declared to track the current positions of the integers in the permutation.
-   - A loop populates the map with the initial positions of the integers, where each integer maps to its index.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m) - when queries only refer to elements already at the beginning of the permutation.
+- **Average Case:** O(m * n) - for typical cases where each query results in a shift in the permutation.
+- **Worst Case:** O(m * n) - when every query requires a major shift in the permutation.
 
-5. **Processing Each Query**:
-   ```cpp
-           vector<int> res;
-           for(int i = 0; i < q.size(); i++) {
-               int x = mp[q[i]];
-               res.push_back(x);
-   ```
+Time complexity depends on the number of elements in the permutation and the number of queries.
 
-   - A result vector `res` is declared to store the results of the queries.
-   - The outer loop iterates over each query in `q`.
+### Space Complexity 💾
+- **Best Case:** O(m) - the space usage is proportional to the size of the permutation.
+- **Worst Case:** O(m) - space used by the permutation and the mapping of positions.
 
-6. **Updating Positions**:
-   ```cpp
-               for(auto it: mp) {
-                   if(it.second < x)
-                       mp[it.first]++; // shift to right
-               }
-               mp[q[i]] = 0;
-           }
-   ```
+Space complexity is dominated by the space needed to store the permutation and auxiliary data structures.
 
-   - The current index of the queried integer is retrieved from the map and stored in `x`.
-   - The index is added to the `res` vector.
-   - A nested loop iterates over the entries in the map, checking if the current position is less than `x`. If so, it increments that position to account for the shift caused by moving the queried integer to the front.
-   - Finally, the position of the queried integer is reset to 0, indicating that it is now at the front.
+**Happy Coding! 🎉**
 
-7. **Returning Results**:
-   ```cpp
-           return res;
-       }
-   };
-   ```
-
-   - Once all queries have been processed, the function returns the result vector `res`.
-
-### Complexity
-
-- **Time Complexity**:
-  - The time complexity of this solution can be considered \( O(n \cdot m) \), where \( n \) is the number of queries and \( m \) is the size of the initial permutation. Each query involves updating the positions of the integers in the map, which can take time proportional to the number of integers present in the map.
-
-- **Space Complexity**:
-  - The space complexity is \( O(m) \), which accounts for the storage of the map and the answer vector.
-
-### Conclusion
-
-The implementation of the `processQueries` function provides a straightforward yet efficient way to handle a series of integer position queries within a dynamically changing permutation. By utilizing a combination of a vector and a map, the solution effectively manages the current state of the permutation and allows for efficient updates and lookups.
-
-#### Key Takeaways:
-
-- **Data Structures**: The choice of using a map for position tracking is crucial for the efficiency of the algorithm, allowing for constant-time updates and queries.
-
-- **Complexity Management**: Although the time complexity may seem high for larger values of \( m \) and \( n \), the method remains efficient due to the linear structure of the updates.
-
-- **Dynamic Updates**: The algorithm demonstrates a practical application of dynamic data management, reflecting real-world scenarios where positions of items need to be updated frequently based on user interactions.
-
-This solution exemplifies how to approach dynamic programming problems that involve changing states based on a series of inputs, making it a valuable method in algorithm design and problem-solving.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)
 

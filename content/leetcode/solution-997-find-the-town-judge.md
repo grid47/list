@@ -14,109 +14,152 @@ img_src = ""
 youtube = "xR2Qg9ENtKQ"
 youtube_upload_date="2020-05-10"
 youtube_thumbnail="https://i.ytimg.com/vi/xR2Qg9ENtKQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a town with n people, one person may be the judge. The judge trusts no one and is trusted by everyone else. Given a list of trust relationships, identify the town judge or return -1 if no judge exists.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a number n (the total number of people) and an array trust where trust[i] = [a, b] means that person a trusts person b.
+- **Example:** `n = 2, trust = [[1, 2]]`
+- **Constraints:**
+	- 1 <= n <= 1000
+	- 0 <= trust.length <= 104
+	- trust[i].length == 2
+	- ai != bi
+	- 1 <= ai, bi <= n
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the label of the town judge if one exists, or return -1 if no judge can be identified.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The label of the town judge should be between 1 and n, inclusive.
 
-class Solution {
-public:
-    int findJudge(int n, vector<vector<int>>& trust) {
-        vector<int> deg(n + 1, 0);
-        for(auto x: trust) {
-            deg[x[1]]++;
-            deg[x[0]]--;
-        }
-        for(int i = 1; i <= n; i++)
-            if(deg[i] == n - 1) return i;
-        
-        return -1;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify the person who satisfies the judge's conditions of being trusted by everyone and trusting no one.
+
+- Step 1: Create an array to track the trust levels of each person.
+- Step 2: Update the trust levels based on the trust relationships.
+- Step 3: Identify the person who has trust level n-1 (trusted by everyone else and trusts no one).
+- Step 4: Return the person if found, or -1 if no such person exists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid of trust relationships is sparse and doesn't contain redundant pairs.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 2, trust = [[1, 2]]`  \
+  **Explanation:** Person 2 is the town judge because they are trusted by person 1 and trust no one else.
+
+- **Input:** `n = 3, trust = [[1, 3], [2, 3]]`  \
+  **Explanation:** Person 3 is trusted by both person 1 and person 2, and trusts no one else, making them the town judge.
+
+- **Input:** `n = 3, trust = [[1, 3], [2, 3], [3, 1]]`  \
+  **Explanation:** Person 3 cannot be the judge because they trust person 1, violating the condition that the judge trusts no one.
+
+{{< dots >}}
+## Approach 🚀
+We can solve the problem by using a degree array to track the net trust level of each person.
+
+### Initial Thoughts 💭
+- We need to identify the person who is trusted by everyone but trusts no one.
+- A simple solution would be to use an array to track the trust level of each person, and then check if any person has a trust level of n-1.
+{{< dots >}}
+### Edge Cases 🌐
+- If trust array is empty, return -1 as no one trusts anyone.
+- For large inputs, the solution should efficiently handle trust relationships up to the limit of 10^4.
+- If all people trust each other, no town judge exists.
+- The solution should work for input sizes up to the maximum constraint of 10^4 trust relationships.
+{{< dots >}}
+## Code 💻
+```cpp
+int findJudge(int n, vector<vector<int>>& trust) {
+    vector<int> deg(n + 1, 0);
+    for(auto x: trust) {
+        deg[x[1]]++;
+        deg[x[0]]--;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to identify the "judge" in a town where there are `n` people. The town judge is defined as follows:
-- The judge is trusted by everyone else (i.e., all `n-1` other people trust the judge).
-- The judge trusts no one.
-We are given a list `trust` where each element `[a, b]` indicates that person `a` trusts person `b`. The task is to find the person who satisfies the above conditions, if such a person exists. If no such person exists, we return `-1`.
-
-### Approach
-
-To solve this problem efficiently, we can take advantage of a **degree-based approach**. The idea is to use an array (or list) to track the trust relationship for each person. This can be done by adjusting the "trust count" for each person:
-1. **Increase the trust count** for person `b` when `a` trusts `b`.
-2. **Decrease the trust count** for person `a` since they trust someone (indicating they cannot be the judge).
-
-At the end, the judge will be the person who:
-- Has a trust count of `n-1` (trusted by everyone except themselves).
-- Has a trust value of `0` for themselves (since they trust no one).
-
-If no such person exists, return `-1`.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int findJudge(int n, vector<vector<int>>& trust) {
-        vector<int> deg(n + 1, 0);  // Initialize an array to track trust/degrees of each person
+    for(int i = 1; i <= n; i++)
+        if(deg[i] == n - 1) return i;
+    
+    return -1;
+}
 ```
 
-1. **Initialization**:
-   - We create a vector `deg` of size `n + 1` (because people are numbered from `1` to `n`), where each element represents the "trust degree" of a person. Initially, all values are set to `0`.
-   - The index of the vector corresponds to the person number.
+This function determines the town judge in a town of 'n' people based on the trust relationships provided. It returns the town judge if one exists, otherwise it returns -1.
 
-```cpp
-        for(auto x: trust) {
-            deg[x[1]]++;  // Person `x[1]` is trusted by `x[0]`, so increase their trust degree
-            deg[x[0]]--;  // Person `x[0]` trusts someone, so decrease their trust degree
-        }
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findJudge(int n, vector<vector<int>>& trust) {
+	```
+	Defines the function `findJudge` which takes the total number of people (`n`) and a 2D vector `trust` representing trust relationships between people in the town.
 
-2. **Updating Trust Degrees**:
-   - For each pair in the `trust` array, we do the following:
-     - We increment `deg[x[1]]` to indicate that person `x[1]` is trusted by `x[0]`.
-     - We decrement `deg[x[0]]` to indicate that person `x[0]` is trusting someone, so they cannot be the judge.
-   - This allows us to track the "trust degree" for each person — the net trust value (number of people who trust them minus the number of people they trust).
+2. **Array Initialization**
+	```cpp
+	    vector<int> deg(n + 1, 0);
+	```
+	Initializes a vector `deg` to track the net trust score for each person. Each index represents a person, where the value indicates how many people trust them and how many they trust.
 
-```cpp
-        for(int i = 1; i <= n; i++)
-            if(deg[i] == n - 1) return i;  // If a person has trust degree of n-1, they are the judge
-```
+3. **Trust Relationships Processing**
+	```cpp
+	    for(auto x: trust) {
+	```
+	Loops through each trust relationship in the `trust` vector.
 
-3. **Identifying the Judge**:
-   - After processing all trust relationships, we loop through the `deg` array from `1` to `n`.
-   - If a person has a trust degree of `n-1` (i.e., they are trusted by everyone except themselves), we return that person as the judge.
-   - The condition `deg[i] == n - 1` ensures that the person is trusted by everyone else, and `deg[i]` is `0` for the person because they trust no one.
+4. **Trust Score Update**
+	```cpp
+	        deg[x[1]]++;
+	```
+	Increments the trust score of the person being trusted (`x[1]`) as they gain one more trust.
 
-```cpp
-        return -1;  // If no judge is found, return -1
-    }
-};
-```
+5. **Trust Score Update**
+	```cpp
+	        deg[x[0]]--;
+	```
+	Decrements the trust score of the person who is trusting (`x[0]`) as they lose one trust.
 
-4. **Return the Result**:
-   - If we have gone through all the people and found no one who satisfies the conditions of being a judge, we return `-1`.
+6. **Judge Identification**
+	```cpp
+	    for(int i = 1; i <= n; i++)
+	```
+	Loops through each person in the town (from 1 to n).
 
-### Complexity
+7. **Judge Identification**
+	```cpp
+	        if(deg[i] == n - 1) return i;
+	```
+	Checks if the current person `i` has a trust score of `n - 1`, indicating that they are trusted by everyone else and trust no one. If true, returns this person as the town judge.
 
-- **Time Complexity**: The time complexity of this solution is **O(T + n)**, where `T` is the number of trust relationships and `n` is the number of people. This is because:
-  - We iterate through the `trust` list once, which takes `O(T)` time to update the `deg` array.
-  - We then iterate through the `deg` array, which takes `O(n)` time to check for the judge.
-  
-- **Space Complexity**: The space complexity is **O(n)**, which comes from the `deg` array of size `n + 1` used to track the trust degrees of each person.
+8. **Function Return**
+	```cpp
+	    return -1;
+	```
+	Returns `-1` if no judge is found, meaning no person satisfies the conditions to be the town judge.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - If no trust relationships exist, the solution only needs to check each person once.
+- **Average Case:** O(n + t) - The time complexity is proportional to the number of people and the trust relationships.
+- **Worst Case:** O(n + t) - In the worst case, we process all trust relationships and check each person's trust level.
 
-The solution efficiently solves the problem by leveraging a degree-based approach to track the trust relationships between people. By updating the "trust degree" for each person as we process the `trust` array, we can quickly identify the judge (if one exists) by checking for a person with a trust degree of `n-1` and a self-trust degree of `0`. The algorithm has an optimal time complexity of `O(T + n)` and a space complexity of `O(n)`, making it well-suited to handle large input sizes. 
+The time complexity is linear with respect to the number of people and trust relationships.
 
-This approach avoids the need for complex graph traversal or nested loops, providing a simple and effective solution to the problem.
+### Space Complexity 💾
+- **Best Case:** O(n) - Even if there are no trust relationships, the space complexity remains linear.
+- **Worst Case:** O(n) - We use an array to track the trust levels of n people.
+
+The space complexity is linear in terms of the number of people.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-town-judge/description/)
 

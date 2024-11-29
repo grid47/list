@@ -14,133 +14,203 @@ img_src = ""
 youtube = "kWhy4ZUBdOY"
 youtube_upload_date="2024-02-03"
 youtube_thumbnail="https://i.ytimg.com/vi/kWhy4ZUBdOY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers, partition the array into contiguous subarrays where each subarray has a length of at most k. After partitioning, transform each subarray such that all its elements are replaced by the maximum element of that subarray. Your goal is to return the maximum sum of the transformed array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array arr and an integer k, the maximum length of a subarray.
+- **Example:** `Input: arr = [2, 7, 3, 4, 8], k = 3`
+- **Constraints:**
+	- 1 <= arr.length <= 500
+	- 0 <= arr[i] <= 10^9
+	- 1 <= k <= arr.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> memo;
-    vector<int> arr;
-    int k;
-    int dp(int i) {
-        if(i == arr.size()) return 0;
-        if(memo[i] != -1) return memo[i];
-        int res = 0, mx = 0;
-        for(int j = i; j < min((int)arr.size(), i + k); j++) {
-            mx = max(mx, arr[j]);
-            res = max(res, mx * (j - i + 1) + dp(j + 1));
-        }
-        return memo[i] = res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest sum of the given array after partitioning, where each subarray is replaced by its maximum value.
+- **Example:** `Output: 30`
+- **Constraints:**
+	- The answer is guaranteed to fit within a 32-bit integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the largest possible sum after partitioning the array into subarrays, each with a maximum length of k, and transforming the elements of each subarray by replacing them with the maximum value of that subarray.
+
+- 1. Use dynamic programming to store the results of subproblems.
+- 2. For each possible partition point, calculate the sum of the maximum values of the subarrays formed.
+- 3. Apply a greedy approach to maximize the sum by selecting the optimal partitioning of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array can have at most 500 elements.
+- The maximum value for each element is 10^9.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [2, 7, 3, 4, 8], k = 3`  \
+  **Explanation:** In this case, the array can be partitioned as [2, 7, 3] and [4, 8]. After replacing each subarray with its maximum value, the transformed array becomes [7, 8]. The sum of this transformed array is 30.
+
+- **Input:** `Input: arr = [1, 4, 1, 5, 7, 3, 6, 1, 9, 9, 3], k = 4`  \
+  **Explanation:** Here, we can partition the array into subarrays such as [1, 4, 1, 5], [7, 3, 6, 1], and [9, 9, 3]. The transformed array becomes [5, 7, 9], and the maximum sum is 83.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved efficiently using dynamic programming where we try to partition the array at different points and calculate the sum of the maximum values of the subarrays. The key idea is to iteratively calculate the maximum sum by considering all possible partitions of the array.
+
+### Initial Thoughts 💭
+- This problem is a dynamic programming problem where we need to maximize the sum by dividing the array into subarrays and transforming them.
+- The dynamic programming solution will help us avoid redundant calculations by storing intermediate results for subproblems.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least one element, so no need to handle empty arrays.
+- For larger arrays (up to 500 elements), the dynamic programming approach should be efficient enough.
+- If k equals the length of the array, then the whole array is a single subarray.
+- The array will always contain at least one element and will never exceed 500 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> memo;
+vector<int> arr;
+int k;
+int dp(int i) {
+    if(i == arr.size()) return 0;
+    if(memo[i] != -1) return memo[i];
+    int res = 0, mx = 0;
+    for(int j = i; j < min((int)arr.size(), i + k); j++) {
+        mx = max(mx, arr[j]);
+        res = max(res, mx * (j - i + 1) + dp(j + 1));
     }
-    
-    int maxSumAfterPartitioning(vector<int>& arr, int k) {
-        this->arr = arr;
-        this->k = k;
-        memo.resize(arr.size(), -1);
-        return dp(0);
-    }
-};
-{{< /highlight >}}
----
+    return memo[i] = res;
+}
 
+int maxSumAfterPartitioning(vector<int>& arr, int k) {
+    this->arr = arr;
+    this->k = k;
+    memo.resize(arr.size(), -1);
+    return dp(0);
+}
+```
 
-### Problem Statement
-The problem involves an array of integers and an integer \( k \). The goal is to partition the array into contiguous subarrays of size at most \( k \) such that the sum of each subarray is maximized. The sum of each partition is defined as the maximum element in that partition multiplied by the size of that partition. The objective is to find the maximum possible sum after performing the partitioning.
+This function implements a dynamic programming solution to the problem of partitioning an array into subarrays such that the sum of the maximum elements in each subarray, multiplied by the subarray's length, is maximized. The function utilizes memoization to optimize overlapping subproblems.
 
-### Approach
-To tackle this problem, we utilize a dynamic programming approach. The main idea is to keep track of the best possible sum we can obtain starting from each index in the array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<int> memo;
+	```
+	Declare a memoization vector 'memo' to store the results of subproblems and avoid redundant calculations.
 
-1. **Dynamic Programming Array**: We maintain a memoization array `memo` to store the maximum sum for each index to avoid redundant calculations.
+2. **Variable Declaration**
+	```cpp
+	vector<int> arr;
+	```
+	Declare a vector 'arr' to hold the input array.
 
-2. **Recursion with Memoization**: The function `dp(i)` computes the maximum sum starting from index `i` and considers partitions of size up to `k`.
+3. **Variable Declaration**
+	```cpp
+	int k;
+	```
+	Declare an integer 'k' to store the maximum length of subarrays that can be created during the partitioning process.
 
-3. **Iterative Calculation of Maximums**: For each starting index, we calculate the maximum value of the subarrays, updating the results as we expand the size of the subarray.
+4. **Function Definition**
+	```cpp
+	int dp(int i) {
+	```
+	Define the recursive function 'dp' that solves the problem for subarrays starting at index 'i'.
 
-### Code Breakdown (Step by Step)
+5. **Base Case**
+	```cpp
+	    if(i == arr.size()) return 0;
+	```
+	If the index 'i' has reached the end of the array, return 0 since no further partitions can be made.
 
-1. **Class Definition**: The code is wrapped in a class named `Solution`.
+6. **Memoization**
+	```cpp
+	    if(memo[i] != -1) return memo[i];
+	```
+	Check if the subproblem for index 'i' has been solved before. If so, return the stored result from the 'memo' vector.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+7. **Variable Initialization**
+	```cpp
+	    int res = 0, mx = 0;
+	```
+	Initialize the variables 'res' to store the maximum result and 'mx' to store the maximum value of the current subarray.
 
-2. **Member Variables**:
-   - `memo`: A vector to store results of computed states to facilitate memoization.
-   - `arr`: The input array passed to the function.
-   - `k`: The maximum allowed size of any subarray.
+8. **Loop Through Subarrays**
+	```cpp
+	    for(int j = i; j < min((int)arr.size(), i + k); j++) {
+	```
+	Start a loop to explore all possible subarrays starting at index 'i' with a length of at most 'k'.
 
-   ```cpp
-   vector<int> memo;
-   vector<int> arr;
-   int k;
-   ```
+9. **Update Maximum Value**
+	```cpp
+	        mx = max(mx, arr[j]);
+	```
+	Update 'mx' to the maximum value between the current element 'arr[j]' and the previous maximum 'mx'.
 
-3. **Recursive Function**:
-   - The `dp(int i)` function calculates the maximum sum starting from index `i`.
-   - It first checks if it has reached the end of the array; if so, it returns 0.
+10. **Calculate Result**
+	```cpp
+	        res = max(res, mx * (j - i + 1) + dp(j + 1));
+	```
+	For each subarray, calculate the potential result by multiplying the maximum value 'mx' by the subarray length and adding the result of the next subarray (recursively).
 
-   ```cpp
-   int dp(int i) {
-       if(i == arr.size()) return 0;
-   ```
+11. **Memoization Update**
+	```cpp
+	    return memo[i] = res;
+	```
+	Store the result of the current subproblem in the 'memo' vector and return it.
 
-4. **Memoization Check**:
-   - If the result for the current index `i` is already computed (i.e., not equal to -1), it returns that result.
+12. **Function Definition**
+	```cpp
+	int maxSumAfterPartitioning(vector<int>& arr, int k) {
+	```
+	Define the function 'maxSumAfterPartitioning' which serves as the entry point to initialize variables and call the recursive 'dp' function.
 
-   ```cpp
-       if(memo[i] != -1) return memo[i];
-   ```
+13. **Variable Initialization**
+	```cpp
+	    this->arr = arr;
+	```
+	Assign the input array 'arr' to the class variable for use in the recursive function.
 
-5. **Iterative Calculation**:
-   - Two variables `res` and `mx` are initialized to track the best result and the maximum value of the current subarray, respectively.
-   - A loop iterates from the current index `i` to the smaller of the array size or \( i + k \) (to ensure subarrays do not exceed size \( k \)).
+14. **Variable Initialization**
+	```cpp
+	    this->k = k;
+	```
+	Assign the value of 'k' (maximum subarray length) to the class variable.
 
-   ```cpp
-       int res = 0, mx = 0;
-       for(int j = i; j < min((int)arr.size(), i + k); j++) {
-           mx = max(mx, arr[j]);
-           res = max(res, mx * (j - i + 1) + dp(j + 1));
-       }
-   ```
+15. **Memoization Initialization**
+	```cpp
+	    memo.resize(arr.size(), -1);
+	```
+	Resize the 'memo' vector to match the size of the input array and initialize all values to -1, indicating that no subproblems have been solved yet.
 
-6. **Updating Memoization**:
-   - The maximum result for the current index is stored in `memo[i]` for future reference.
+16. **Return Result**
+	```cpp
+	    return dp(0);
+	```
+	Call the 'dp' function starting from index 0 to compute and return the maximum sum after partitioning the array.
 
-   ```cpp
-       return memo[i] = res;
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n * k)
+- **Worst Case:** O(n * k)
 
-7. **Main Function**:
-   - The `maxSumAfterPartitioning(vector<int>& arr, int k)` function initializes member variables and starts the recursive process from index 0.
+The time complexity is O(n * k) because for each element, we check up to k previous elements.
 
-   ```cpp
-   int maxSumAfterPartitioning(vector<int>& arr, int k) {
-       this->arr = arr;
-       this->k = k;
-       memo.resize(arr.size(), -1);
-       return dp(0);
-   }
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this solution is \(O(n \cdot k)\), where \(n\) is the length of the array. For each index, we consider partitions of length up to \(k\). The memoization helps in optimizing repeated calls to the same index.
+The space complexity is O(n) for storing the dp array.
 
-- **Space Complexity**: The space complexity is \(O(n)\) due to the `memo` vector and the function call stack for recursion.
-
-### Conclusion
-The provided code effectively solves the problem of maximizing the sum after partitioning an array. By employing a dynamic programming approach with memoization, it ensures that each state is computed only once, leading to efficient execution.
-
-The algorithm iteratively evaluates potential partitions, maintaining the maximum value of each subarray. This guarantees that the solution adheres to the constraints of the problem while providing an optimal result.
-
-In summary, the `maxSumAfterPartitioning` function demonstrates how dynamic programming can be leveraged to solve complex problems involving partitioning and optimization. The approach not only provides an efficient solution but also serves as a practical example of applying recursion and memoization in algorithm design.
-
-The code exemplifies best practices in competitive programming and algorithm development, offering clarity and efficiency that can be utilized in various contexts involving similar problems.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-array-for-maximum-sum/description/)

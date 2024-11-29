@@ -14,142 +14,199 @@ img_src = ""
 youtube = "MT7Qo0LmoFo"
 youtube_upload_date="2021-03-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/MT7Qo0LmoFo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an even integer `n` and a permutation `perm` of size `n` where initially `perm[i] = i` (0-indexed). In each operation, you create a new array `arr` based on certain rules and update `perm` to `arr`. The goal is to determine the minimum number of operations required to restore `perm` to its initial state.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an even integer `n` and a permutation `perm` of size `n` where initially `perm[i] = i` (0-indexed).
+- **Example:** `n = 4`
+- **Constraints:**
+	- 2 <= n <= 1000
+	- n is even.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int reinitializePermutation(int n) {
-        
-        vector<int> prem(n, 0), arr(n, 0);
-        
-        for(int i = 0; i < n; i++) {
-            prem[i] = i;
-        }
-        int cnt = 1;
-        while(1) {
-        
-            for(int i = 0; i < n; i++) {
-                arr[i] = (i % 2) ? prem[n/2 + (i - 1)/2] : prem[i/2];
-            }
-            
-            bool x = false;
-            for(int i= 0; i < n; i++)
-                if(arr[i] != i) x = true;
-            
-            if(!x) break;
-            
-            prem = arr;
-            cnt++;
-        }
-        return cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to restore the permutation to its initial state.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The solution should handle all even integers n within the given range.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of operations required to restore the permutation `perm` to its original state.
+
+- Initialize the permutation `perm` as [0, 1, 2, ..., n-1].
+- Perform operations to generate a new array `arr` based on the rules described.
+- Check if `arr` matches the initial permutation. If not, update `perm` to `arr` and repeat until the match is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be an even integer n.
+- The permutation `perm` is initially [0, 1, 2, ..., n-1].
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 4`  \
+  **Explanation:** The initial permutation is `[0, 1, 2, 3]`. After the first operation, the permutation becomes `[0, 2, 1, 3]`. After the second operation, the permutation returns to `[0, 1, 2, 3]`, so it takes 2 operations.
+
+{{< dots >}}
+## Approach 🚀
+We will simulate the process of performing the operations and count how many operations it takes to return to the original permutation.
+
+### Initial Thoughts 💭
+- We need to find a way to efficiently check when the permutation returns to the original state.
+- Simulating the operation and checking for equality after each step is a straightforward approach to solve the problem.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be an input value for `n` which is even.
+- For large inputs, the solution should handle the operations efficiently, especially since n can go up to 1000.
+- Consider the smallest value of n (n = 2) and ensure the solution works for that edge case.
+- The solution should operate efficiently with time complexity proportional to n.
+{{< dots >}}
+## Code 💻
+```cpp
+int reinitializePermutation(int n) {
+    
+    vector<int> prem(n, 0), arr(n, 0);
+    
+    for(int i = 0; i < n; i++) {
+        prem[i] = i;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine the number of operations needed to reinitialize a permutation of integers from `0` to `n-1` back to its original order after repeatedly applying a specific rearrangement operation. This operation consists of rearranging the elements based on their indices, effectively reshuffling the permutation in a defined manner.
-
-### Approach
-
-To solve this problem, we can follow these steps:
-
-1. **Initialize the Original Permutation**: Create an array that holds the initial permutation of integers from `0` to `n-1`.
-
-2. **Perform the Rearrangement Operation**: Implement the rearrangement operation, which involves rearranging the elements based on their indices according to specific rules. The rules state that:
-   - For even indices, take the element from the front half of the original array.
-   - For odd indices, take the element from the back half of the original array.
-
-3. **Check for Completion**: After performing the rearrangement, check if the array has been restored to the original permutation. 
-
-4. **Count the Operations**: Repeat the rearrangement operation until the original permutation is restored, counting the number of operations performed.
-
-5. **Return the Count**: Finally, return the count of operations needed to return to the original permutation.
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int reinitializePermutation(int n) {
-```
-- We define a class `Solution` with a public method `reinitializePermutation` that accepts an integer `n`, representing the size of the permutation.
-
-```cpp
-        vector<int> prem(n, 0), arr(n, 0);
-        
+    int cnt = 1;
+    while(1) {
+    
         for(int i = 0; i < n; i++) {
-            prem[i] = i;
+            arr[i] = (i % 2) ? prem[n/2 + (i - 1)/2] : prem[i/2];
         }
-```
-- Two vectors, `prem` and `arr`, are initialized to hold the current permutation and the rearranged version, respectively.
-- The original permutation `prem` is filled with integers from `0` to `n-1`.
-
-```cpp
-        int cnt = 1;
-```
-- A counter variable `cnt` is initialized to `1` to account for the first state of the permutation (the original permutation).
-
-```cpp
-        while(1) {
-```
-- A `while` loop is started that will run indefinitely until a break condition is met.
-
-```cpp
-            for(int i = 0; i < n; i++) {
-                arr[i] = (i % 2) ? prem[n/2 + (i - 1)/2] : prem[i/2];
-            }
-```
-- Inside the loop, the rearrangement is applied:
-  - For each index `i`, if `i` is odd, we take the element from the second half of the original array; if `i` is even, we take the element from the first half.
-- This effectively reshuffles the `prem` array into the `arr` array.
-
-```cpp
-            bool x = false;
-            for(int i= 0; i < n; i++)
-                if(arr[i] != i) x = true;
-```
-- A boolean variable `x` is used to track whether the rearranged array matches the original permutation.
-- We loop through `arr` to check if each element is in its correct position (matching the original indices).
-
-```cpp
-            if(!x) break;
-```
-- If `x` remains `false`, it indicates that the rearranged array matches the original permutation, and we exit the loop.
-
-```cpp
-            prem = arr;
-            cnt++;
-        }
-        return cnt;
+        
+        bool x = false;
+        for(int i= 0; i < n; i++)
+            if(arr[i] != i) x = true;
+        
+        if(!x) break;
+        
+        prem = arr;
+        cnt++;
     }
-};
+    return cnt;
+}
 ```
-- If the arrays do not match, we set `prem` to `arr` for the next iteration and increment the counter `cnt`.
-- Once the loop exits, the method returns the total count of operations performed.
 
-### Complexity
+The function `reinitializePermutation` performs a series of reinitializations on the input array `prem` based on a specific rule, and returns the number of operations required to revert `prem` to its original state.
 
-- **Time Complexity**: The time complexity of this algorithm can be approximated as \(O(n \cdot k)\), where \(n\) is the size of the permutation and \(k\) is the number of operations until the permutation is reinitialized. The exact value of \(k\) depends on \(n\) and can vary based on the rearrangement rules.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int reinitializePermutation(int n) {
+	```
+	Define the function `reinitializePermutation` which takes an integer `n` representing the size of the array and returns an integer representing the number of reinitializations required.
 
-- **Space Complexity**: The space complexity is \(O(n)\) due to the usage of the two vectors `prem` and `arr`, each of size \(n\).
+2. **Variable Initialization**
+	```cpp
+	    vector<int> prem(n, 0), arr(n, 0);
+	```
+	Initialize two vectors `prem` and `arr` of size `n` to store the current and new permutation values respectively.
 
-### Conclusion
+3. **Loop and Recursion**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop to iterate through all indices of the vector.
 
-This solution effectively demonstrates the use of array manipulation to solve a problem related to permutations and their reinitialization. By utilizing a systematic approach to rearranging the array and checking for completion, we can efficiently determine how many operations are needed to return to the original permutation state.
+4. **Variable Initialization**
+	```cpp
+	        prem[i] = i;
+	```
+	Initialize the `prem` array such that each index `i` holds the value `i`.
 
-The clarity and straightforwardness of this approach make it an excellent example of how to handle permutation-related problems in algorithm design. The code is optimized for readability while maintaining a clear structure, making it easier for future modifications or adaptations to similar problems. 
+5. **Variable Initialization**
+	```cpp
+	    int cnt = 1;
+	```
+	Initialize the counter variable `cnt` to 1, representing the number of reinitializations performed.
 
-In summary, the `reinitializePermutation` method provides a robust solution to count the number of operations required to restore a permutation to its original order, showcasing effective algorithmic thinking in handling index-based manipulations.
+6. **Loop and Recursion**
+	```cpp
+	    while(1) {
+	```
+	Start an infinite loop to continuously apply the reinitialization process until the condition is met.
+
+7. **Loop and Recursion**
+	```cpp
+	        for(int i = 0; i < n; i++) {
+	```
+	Start a loop to apply the reinitialization rule to each index of the array `arr`.
+
+8. **Mathematical Operations**
+	```cpp
+	            arr[i] = (i % 2) ? prem[n/2 + (i - 1)/2] : prem[i/2];
+	```
+	Reinitialize each index of the array `arr` according to a specific rule: if `i` is odd, use the second half of `prem`, otherwise use the first half.
+
+9. **Conditionals**
+	```cpp
+	        bool x = false;
+	```
+	Initialize a boolean variable `x` to track whether the array `arr` is different from the original `prem`.
+
+10. **Loop and Recursion**
+	```cpp
+	        for(int i= 0; i < n; i++)
+	```
+	Start a loop to compare each index of `arr` to its original value in `prem`.
+
+11. **Conditionals**
+	```cpp
+	            if(arr[i] != i) x = true;
+	```
+	If any index in `arr` is not equal to its corresponding index `i`, set `x` to true, indicating that reinitialization is still incomplete.
+
+12. **Flow Control**
+	```cpp
+	        if(!x) break;
+	```
+	If `x` remains false (indicating the array is in its final state), break out of the infinite loop.
+
+13. **Variable Initialization**
+	```cpp
+	        prem = arr;
+	```
+	Update the `prem` array to match the newly reinitialized `arr` for the next iteration.
+
+14. **Mathematical Operations**
+	```cpp
+	        cnt++;
+	```
+	Increment the counter `cnt` to reflect the number of reinitialization steps taken.
+
+15. **Return**
+	```cpp
+	    return cnt;
+	```
+	Return the counter `cnt`, which represents the total number of reinitialization steps required.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Each operation requires O(n) time for generating the new array and checking for equality. The worst-case scenario is when the solution requires multiple operations to restore the original permutation.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the permutation and the intermediate array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation/description/)
 

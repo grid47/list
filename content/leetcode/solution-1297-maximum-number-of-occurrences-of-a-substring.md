@@ -14,112 +14,193 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string `s`, return the maximum number of occurrences of any substring that satisfies the following conditions: The number of unique characters in the substring must be less than or equal to `maxLetters`, and the substring length must be between `minSize` and `maxSize` inclusive.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` and three integers: `maxLetters`, `minSize`, and `maxSize`.
+- **Example:** `Input: s = "abcabcabc", maxLetters = 2, minSize = 2, maxSize = 3`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- 1 <= maxLetters <= 26
+	- 1 <= minSize <= maxSize <= min(26, s.length)
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPossibleDivide(vector<int>& nums, int k) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of occurrences of any substring that satisfies the given conditions.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- Return an integer representing the maximum number of occurrences of a valid substring.
 
-        map<int, int> cnt;
-        int n = nums.size();
-        for(int num : nums)
-            cnt[num]++;
-        
-        for(auto it : cnt) {
-            int frq = it.second;
-            if(frq > 0)
-            for(int i = 0; i < k; i++) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the maximum number of occurrences of a valid substring.
 
-                  if(cnt[it.first + i] < frq) return false;
-                else cnt[it.first + i] -= frq;
+- Generate all substrings of length between `minSize` and `maxSize`.
+- For each substring, check if it has unique characters less than or equal to `maxLetters`.
+- Count the occurrences of valid substrings and track the maximum count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `s` consists of lowercase English letters only.
+- The input is valid, and constraints are adhered to.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "abcabcabc", maxLetters = 2, minSize = 2, maxSize = 3`  \
+  **Explanation:** The substring 'ab' appears twice in the string and satisfies the condition of having 2 unique letters and a size of 2.
 
-            }
+- **Input:** `Input: s = "xxxyyy", maxLetters = 1, minSize = 2, maxSize = 3`  \
+  **Explanation:** The substring 'xx' appears twice and satisfies the condition of having 1 unique letter and a size of 2.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by generating all possible substrings of valid lengths and counting their occurrences. We need to ensure that only valid substrings are considered.
+
+### Initial Thoughts 💭
+- We need to generate substrings of different lengths between `minSize` and `maxSize`.
+- The number of unique characters in each substring must be tracked to check if it is valid.
+- A sliding window approach or hashing can be used to efficiently count occurrences of substrings while ensuring they meet the conditions.
+{{< dots >}}
+### Edge Cases 🌐
+- The string is non-empty, as per the problem constraints.
+- The solution must efficiently handle strings up to length 10^5.
+- If `maxLetters` is larger than the number of unique letters in the string, all substrings are valid.
+- The solution should be optimized to run within time limits for large input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isPossibleDivide(vector<int>& nums, int k) {
+
+    map<int, int> cnt;
+    int n = nums.size();
+    for(int num : nums)
+        cnt[num]++;
+    
+    for(auto it : cnt) {
+        int frq = it.second;
+        if(frq > 0)
+        for(int i = 0; i < k; i++) {
+
+              if(cnt[it.first + i] < frq) return false;
+            else cnt[it.first + i] -= frq;
+
         }
-        
-        return true;
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The problem at hand is to determine if an array of integers can be divided into `n` groups of size `k`, where each group contains consecutive integers. This means that if we start with the smallest integer in a group, the group must contain that integer and the next `k-1` integers. For example, given an input array like `[1, 2, 3, 3, 4, 4, 5, 6]` and `k = 4`, the function should return `true` because it is possible to form groups such as `[1, 2, 3, 4]` and `[3, 4, 5, 6]`. Conversely, for an input like `[1, 2, 3, 4, 5]` with `k = 4`, the function would return `false`, as it is not possible to create two groups of four consecutive integers.
-
-### Approach
-To determine if the division into groups is possible, we can follow these steps:
-
-1. **Count Frequencies**: Use a `map` to count the frequency of each integer in the array. This allows us to track how many times each number appears.
-
-2. **Iterate Through Unique Numbers**: Loop through the sorted unique numbers in the map and attempt to form groups starting with each number that has a positive frequency.
-
-3. **Form Groups**: For each unique number, check if we can form a complete group of `k` consecutive integers. If any of the required integers is not available in the necessary frequency, return `false`.
-
-4. **Adjust Frequencies**: If a group is successfully formed, decrease the frequency counts of all integers in that group.
-
-5. **Return Result**: If all groups are formed without issues, return `true`; otherwise, return `false`.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool isPossibleDivide(vector<int>& nums, int k) {
+    
+    return true;
+}
 ```
-- **Line 1-2**: The `Solution` class is declared, and the `isPossibleDivide` function starts, accepting a vector of integers `nums` and an integer `k`.
 
-```cpp
-        map<int, int> cnt;
-        int n = nums.size();
-        for(int num : nums)
-            cnt[num]++;
-```
-- **Lines 3-6**: We create a `map` named `cnt` to store the frequency of each integer in `nums`. The variable `n` captures the size of the input array. The loop iterates through each number in `nums`, incrementing its corresponding count in the map.
+This function checks whether an array of integers can be divided into consecutive groups of size 'k'. It does so by counting the frequency of each number and then greedily forming groups of consecutive integers.
 
-```cpp
-        for(auto it : cnt) {
-            int frq = it.second;
-            if(frq > 0)
-```
-- **Lines 7-9**: The next loop iterates through the entries in the frequency map. For each unique number, we assign its frequency to the variable `frq`. We check if `frq` is greater than zero, which indicates that we still have available integers to form groups.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isPossibleDivide(vector<int>& nums, int k) {
+	```
+	This is the function header, where the function is defined with two parameters: 'nums' (a vector of integers) and 'k' (the size of each group).
 
-```cpp
-            for(int i = 0; i < k; i++) {
-                if(cnt[it.first + i] < frq) return false;
-```
-- **Lines 10-12**: A nested loop runs `k` times to check for all integers starting from `it.first`. If the count of any required consecutive integer (i.e., `it.first + i`) is less than `frq`, we return `false`, as it means we cannot form a complete group.
+2. **Map Initialization**
+	```cpp
+	    map<int, int> cnt;
+	```
+	This creates a map to store the frequency of each integer in the input array 'nums'. The key is the integer, and the value is its frequency.
 
-```cpp
-                else cnt[it.first + i] -= frq;
-            }
-        }
-        
-        return true;
-    }
-};
-```
-- **Lines 13-16**: If the check passes, we decrease the count for each integer in the group by `frq`, indicating that we've used these integers to create a group. If all checks are successful and all required groups can be formed, we return `true`.
+3. **Array Length**
+	```cpp
+	    int n = nums.size();
+	```
+	This stores the size of the input array 'nums' in the variable 'n'.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The overall time complexity of this function is \(O(n + m \cdot k)\), where \(n\) is the number of elements in the `nums` array and \(m\) is the number of unique integers in `nums`. The initial loop for counting frequencies operates in \(O(n)\), while the subsequent loops for checking group formation run in \(O(m \cdot k)\).
+4. **Iterate Through Numbers**
+	```cpp
+	    for(int num : nums)
+	```
+	This loop iterates through each integer in the input array 'nums'.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(m)\) because we store the frequency counts in a `map`, where \(m\) represents the number of unique integers in the input array.
+5. **Update Frequency Map**
+	```cpp
+	        cnt[num]++;
+	```
+	This increments the frequency of the current number in the map 'cnt'.
 
-### Conclusion
-The `isPossibleDivide` function efficiently determines whether an array can be divided into groups of consecutive integers of a specified size. It utilizes a counting approach that ensures all necessary conditions for forming groups are met. By leveraging a map to keep track of the occurrences of each integer, the function provides a clear and straightforward solution.
+6. **Frequency Map Iteration**
+	```cpp
+	
+	```
+	Now, we begin iterating through the frequency map to check if it is possible to form groups.
 
-This implementation is particularly valuable in competitive programming and coding interviews, where such problems involving number grouping and frequency counting are common. Understanding this method enhances problem-solving skills, especially when working with collections of integers under specific constraints.
+7. **Iterate Through Frequency Map**
+	```cpp
+	    for(auto it : cnt) {
+	```
+	This loop iterates through each key-value pair in the frequency map, where 'it.first' is the number and 'it.second' is its frequency.
 
-In summary, this explanation offers a detailed look at how the `isPossibleDivide` function operates, providing insights into its algorithmic design while ensuring it is accessible for those looking to improve their understanding of similar programming challenges.
+8. **Get Frequency of Current Number**
+	```cpp
+	        int frq = it.second;
+	```
+	Extracts the frequency of the current number from the map.
+
+9. **Frequency Check**
+	```cpp
+	        if(frq > 0)
+	```
+	Checks if the current frequency is greater than 0 before attempting to form a group.
+
+10. **Loop for Consecutive Numbers**
+	```cpp
+	        for(int i = 0; i < k; i++) {
+	```
+	This inner loop iterates over the next 'k' consecutive numbers starting from the current number.
+
+11. **Condition for Group Formation**
+	```cpp
+	
+	```
+	Here, we check if the group of consecutive numbers can be formed.
+
+12. **Check for Sufficient Frequency**
+	```cpp
+	              if(cnt[it.first + i] < frq) return false;
+	```
+	If the frequency of any of the consecutive numbers is less than the required frequency, it returns false as the group cannot be formed.
+
+13. **Update Frequency for Used Numbers**
+	```cpp
+	            else cnt[it.first + i] -= frq;
+	```
+	If the consecutive number can be used, its frequency is decreased by 'frq'.
+
+14. **Return Statement**
+	```cpp
+	    return true;
+	```
+	If the loop completes without returning false, it means it's possible to divide the array into consecutive groups of size 'k', so we return true.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - In the best case, no substrings need to be checked or all substrings are valid.
+- **Average Case:** O(n^2) - Substring generation and uniqueness checks dominate the complexity.
+- **Worst Case:** O(n^2) - In the worst case, we need to check all possible substrings for validity.
+
+The time complexity is O(n^2) due to the need to generate and check all substrings.
+
+### Space Complexity 💾
+- **Best Case:** O(n) - Space complexity remains O(n) even in the best case.
+- **Worst Case:** O(n) - Space complexity is O(n) due to storage of substring counts and temporary sets.
+
+The space complexity is O(n) due to the temporary storage of unique substrings.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/description/)
 

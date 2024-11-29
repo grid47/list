@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "IWLpZbu1wco"
 youtube_upload_date="2020-06-26"
 youtube_thumbnail="https://i.ytimg.com/vi/IWLpZbu1wco/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,171 +28,262 @@ youtube_thumbnail="https://i.ytimg.com/vi/IWLpZbu1wco/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a set of courses and a list of prerequisites. Each prerequisite is a pair of courses where the second course must be taken before the first one. Determine if it is possible to complete all courses based on these prerequisites. If there are cycles in the dependencies, it would be impossible to finish all courses.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer numCourses representing the total number of courses and an array prerequisites where each element [a, b] indicates that course b must be completed before course a.
+- **Example:** `numCourses = 3, prerequisites = [[1, 0], [2, 1]]`
+- **Constraints:**
+	- 1 <= numCourses <= 2000
+	- 0 <= prerequisites.length <= 5000
+	- prerequisites[i].length == 2
+	- 0 <= ai, bi < numCourses
+	- All prerequisites pairs are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canFinish(int n, vector<vector<int>>& pre) {
-        vector<vector<int>> graph(n);
-        vector<int> cnt(n, 0);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to finish all the courses. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The returned value must indicate whether it is possible to complete all courses given the prerequisites.
 
-        // Created graph and dependecy counter
-        for(int i = 0; i < pre.size(); i++) {
-            graph[pre[i][1]].push_back(pre[i][0]);
-            cnt[pre[i][0]]++;
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if there is a cycle in the prerequisite graph. If there is no cycle, return true. If a cycle exists, return false.
 
-         queue<int> q;
+- Create a graph where each course points to its dependent courses.
+- Use a counter to track the number of prerequisites for each course.
+- Start with the courses that have no prerequisites and reduce the count of prerequisites for their dependent courses.
+- If all courses can be completed (i.e., the prerequisite counter reaches zero for all), return true. Otherwise, return false if any course cannot be completed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input graph is well-formed with valid course numbers and prerequisites.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: numCourses = 2, prerequisites = [[1, 0]]`  \
+  **Explanation:** There are 2 courses. To take course 1, you must first take course 0. This is possible, so the output is true.
 
-        // Triaged course which does not have any dependency.
-        for(int i = 0; i < n; i++)
-            if(cnt[i] == 0)
-                q.push(i);
-       
+- **Input:** `Input: numCourses = 2, prerequisites = [[1, 0], [0, 1]]`  \
+  **Explanation:** There are 2 courses. Course 1 requires course 0, and course 0 requires course 1. This forms a cycle, so it is impossible to complete all courses. The output is false.
 
-        while(!q.empty()) {
-            int size = q.size();
-            while(size-- > 0) {
-                int course = q.front();
-                q.pop();
-                for(int dep: graph[course]) {
+{{< dots >}}
+## Approach 🚀
+The solution involves topological sorting of the graph formed by courses and their prerequisites. If there is a cycle in the graph, it is impossible to complete all courses.
 
-                    cnt[dep]--;
+### Initial Thoughts 💭
+- The problem can be viewed as a cycle detection problem in a directed graph.
+- Topological sorting using Kahn's algorithm can be used to detect cycles efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no prerequisites, you can finish all courses.
+- The solution should handle up to 2000 courses and 5000 prerequisites efficiently.
+- If there is only one course, it can always be completed.
+- Ensure that the solution handles cycles efficiently, especially with a large number of courses.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canFinish(int n, vector<vector<int>>& pre) {
+    vector<vector<int>> graph(n);
+    vector<int> cnt(n, 0);
 
-                    if(cnt[dep] == 0) {
-                        q.push(dep);
-                    }
-                }                
-            }
-        }
-
-        for(int i = 0; i < n; i++)
-            if(cnt[i] != 0)
-                return false;   
-
-        return true;
+    // Created graph and dependecy counter
+    for(int i = 0; i < pre.size(); i++) {
+        graph[pre[i][1]].push_back(pre[i][0]);
+        cnt[pre[i][0]]++;
     }
-};
-{{< /highlight >}}
----
 
-### 🚀 Problem Statement
+     queue<int> q;
 
-Imagine you're trying to figure out if you can finish all your courses in a university system. 🎓📚 Each course has prerequisites, and these prerequisites form a directed graph. Each course is a node, and a directed edge from course A to course B means you must take course A before course B.
+    // Triaged course which does not have any dependency.
+    for(int i = 0; i < n; i++)
+        if(cnt[i] == 0)
+            q.push(i);
+   
 
-Given `n` courses and a list of prerequisite pairs, we need to determine if it’s possible to finish all the courses. If there's a cycle (i.e., one course depends on another, which depends on the first), it’s impossible to complete all the courses. Your task is to return `true` if you can finish all courses, and `false` if a cycle exists or if some courses cannot be completed due to unmet prerequisites. 🚫
+    while(!q.empty()) {
+        int size = q.size();
+        while(size-- > 0) {
+            int course = q.front();
+            q.pop();
+            for(int dep: graph[course]) {
 
-#### Example:
-- **Input:** `n = 2`, `pre = [[1, 0]]`
-- **Output:** `true`
+                cnt[dep]--;
 
-In this example, course 0 must be taken before course 1, and there’s no cycle, so it’s possible to finish all courses! ✅
+                if(cnt[dep] == 0) {
+                    q.push(dep);
+                }
+            }                
+        }
+    }
 
----
+    for(int i = 0; i < n; i++)
+        if(cnt[i] != 0)
+            return false;   
 
-### 🧠 Approach
-
-To solve this, we’ll use **topological sorting**. The idea is:
-1. **Build the graph:** Treat the courses as nodes and the prerequisites as directed edges.
-2. **Use Kahn’s Algorithm:** This algorithm helps by removing nodes (courses) with no incoming edges (i.e., no prerequisites). If we can process all courses, there’s no cycle. If some courses remain unprocessed, we have a cycle!
-
-Let’s break it down step by step. ⬇️
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-#### Step 1: Initialize Data Structures
-```cpp
-vector<vector<int>> graph(n);
-vector<int> cnt(n, 0);
-```
-- **`graph[n]`**: A vector of vectors to represent the directed graph. Each `graph[i]` holds the list of courses that depend on course `i`.
-- **`cnt[n]`**: A vector to store the number of prerequisites (in-degree) for each course.
-
-#### Step 2: Build the Graph and Count Dependencies
-```cpp
-for(int i = 0; i < pre.size(); i++) {
-    graph[pre[i][1]].push_back(pre[i][0]);
-    cnt[pre[i][0]]++;
+    return true;
 }
 ```
-- For each prerequisite pair `[a, b]`, course `b` must be taken before course `a`. So, we add an edge from `b` to `a`.
-- Also, we increase the dependency count (`cnt[a]`) for each course `a` because it depends on another course (`b`).
 
-#### Step 3: Queue Initialization (Courses with No Prerequisites)
-```cpp
-queue<int> q;
-for(int i = 0; i < n; i++)
-    if(cnt[i] == 0)
-        q.push(i);
-```
-- We initialize a queue with courses that have no prerequisites (i.e., `cnt[i] == 0`). These courses can be taken first! 🎓
+This function checks whether it's possible to finish all courses given the prerequisites. It uses a graph and dependency counter to simulate course ordering, employing a queue for processing courses that can be taken next.
 
-#### Step 4: Process Courses and Reduce Dependencies
-```cpp
-while(!q.empty()) {
-    int size = q.size();
-    while(size-- > 0) {
-        int course = q.front();
-        q.pop();
-        for(int dep: graph[course]) {
-            cnt[dep]--;
-            if(cnt[dep] == 0) {
-                q.push(dep);
-            }
-        }                
-    }
-}
-```
-- We process each course in the queue. For each course, we reduce the dependency count for its dependent courses.
-- If the dependency count for a dependent course becomes 0, it means all its prerequisites are now completed, so we add it to the queue to process next.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool canFinish(int n, vector<vector<int>>& pre) {
+	```
+	Define the function `canFinish` which takes the number of courses `n` and a vector of prerequisites `pre` representing course dependencies.
 
-#### Step 5: Check for Cycles (Unprocessed Courses)
-```cpp
-for(int i = 0; i < n; i++)
-    if(cnt[i] != 0)
-        return false;
-```
-- If any course still has a non-zero dependency count, it means we couldn’t process it (due to unmet prerequisites), which indicates a cycle. 🚫 In this case, we return `false`.
+2. **Graph Initialization**
+	```cpp
+	    vector<vector<int>> graph(n);
+	```
+	Initialize a graph where each course is represented by an index, and the corresponding vector stores its dependent courses.
 
-#### Step 6: Return True (All Courses Can Be Finished)
-```cpp
-return true;
-```
-- If we processed all the courses without encountering a cycle, we return `true`, meaning it's possible to finish all the courses! 🎉
+3. **Dependency Counter Initialization**
+	```cpp
+	    vector<int> cnt(n, 0);
+	```
+	Initialize a counter array `cnt` to track the number of prerequisites (dependencies) each course has.
 
----
+4. **Graph and Dependency Counter Update**
+	```cpp
+	    for(int i = 0; i < pre.size(); i++) {
+	```
+	Iterate through each prerequisite pair in the `pre` list.
 
-### 📈 Complexity Analysis
+5. **Graph Update**
+	```cpp
+	        graph[pre[i][1]].push_back(pre[i][0]);
+	```
+	For each prerequisite, add the dependent course to the corresponding graph entry.
 
-Let’s analyze the time and space complexity of this solution. ⏱️💾
+6. **Dependency Counter Update**
+	```cpp
+	        cnt[pre[i][0]]++;
+	```
+	Increment the counter for the dependent course, indicating it has one more prerequisite.
 
-#### Time Complexity:
-- **O(V + E):** 
-  - **V (vertices)**: We process each course once, so that’s `n` courses.
-  - **E (edges)**: For each prerequisite pair, we add an edge, resulting in `E` edges. We process each edge once when adjusting the in-degrees and when iterating over the course’s dependencies.
-  - So, the overall time complexity is **O(V + E)**, which is efficient for this problem!
+7. **Queue Declaration**
+	```cpp
+	     queue<int> q;
+	```
+	Declare a queue `q` to hold the courses that are ready to be taken (i.e., those with zero dependencies).
 
-#### Space Complexity:
-- **O(V + E):**
-  - **Graph Storage:** We store the graph with `V` vertices and `E` edges.
-  - **Dependency Count:** We store the in-degrees for each course, which requires an array of size `V`.
-  - **Queue:** The queue stores at most `V` courses at any time, in the worst case.
-  - Therefore, the space complexity is **O(V + E)**.
+8. **Queue Population**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loop through all courses to find those with no prerequisites.
 
----
+9. **Queue Population Condition**
+	```cpp
+	        if(cnt[i] == 0)
+	```
+	Check if a course has no dependencies by examining its counter value.
 
-### 🏁 Conclusion
+10. **Enqueue Course**
+	```cpp
+	            q.push(i);
+	```
+	Add the course with no dependencies to the queue.
 
-We’ve successfully solved the problem of determining if all courses can be completed using **Kahn’s Algorithm** for **topological sorting**. 🔄🎓 Here’s the recap:
+11. **While Queue Not Empty**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start a `while` loop to process courses in the queue until it's empty.
 
-1. **Time Efficiency:** The algorithm runs in **O(V + E)**, where `V` is the number of courses and `E` is the number of prerequisite pairs.
-2. **Space Efficiency:** The space complexity is also **O(V + E)**, which is required to store the graph and auxiliary structures.
-3. **Simplicity:** Using Kahn’s algorithm ensures that the solution is both simple and effective, avoiding recursion and handling large inputs easily.
+12. **Queue Size Calculation**
+	```cpp
+	        int size = q.size();
+	```
+	Get the current number of courses in the queue, which need to be processed.
 
-This approach is perfect for resolving dependency-related problems like course scheduling or task ordering in a directed acyclic graph (DAG). Keep up the great work, and you’ll be mastering graph algorithms in no time! 🚀💪
+13. **Inner While Loop**
+	```cpp
+	        while(size-- > 0) {
+	```
+	Iterate through all the courses in the queue.
+
+14. **Dequeue Course**
+	```cpp
+	            int course = q.front();
+	```
+	Get the course at the front of the queue to process.
+
+15. **Pop Course from Queue**
+	```cpp
+	            q.pop();
+	```
+	Remove the course from the queue after processing it.
+
+16. **Process Dependencies**
+	```cpp
+	            for(int dep: graph[course]) {
+	```
+	For each dependent course of the current course, reduce its dependency count.
+
+17. **Dependency Counter Decrement**
+	```cpp
+	                cnt[dep]--;
+	```
+	Decrement the counter for each dependent course, indicating one less prerequisite.
+
+18. **Check If Course Is Ready**
+	```cpp
+	                if(cnt[dep] == 0) {
+	```
+	If a course now has no dependencies, it can be added to the queue.
+
+19. **Enqueue Ready Course**
+	```cpp
+	                    q.push(dep);
+	```
+	Enqueue the course that has no remaining prerequisites.
+
+20. **Final Check Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loop through all courses to check for any remaining prerequisites.
+
+21. **Cycle Detection**
+	```cpp
+	        if(cnt[i] != 0)
+	```
+	If any course has remaining prerequisites, return `false` as there's a cycle.
+
+22. **Return False**
+	```cpp
+	            return false;   
+	```
+	Return `false` indicating it's not possible to finish all courses due to a cycle.
+
+23. **Final Return**
+	```cpp
+	    return true;
+	```
+	Return `true` if all courses can be finished without any cycles.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + e)
+- **Average Case:** O(n + e)
+- **Worst Case:** O(n + e)
+
+The time complexity is O(n + e), where n is the number of courses and e is the number of prerequisites.
+
+### Space Complexity 💾
+- **Best Case:** O(n + e)
+- **Worst Case:** O(n + e)
+
+The space complexity is O(n + e) due to the graph representation and the prerequisite count array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/course-schedule/description/)
 

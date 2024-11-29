@@ -14,109 +14,121 @@ img_src = ""
 youtube = "Rl-JOgrVru0"
 youtube_upload_date="2021-08-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Rl-JOgrVru0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer n, return true if n has exactly three distinct positive divisors. Otherwise, return false. A divisor of n is a positive integer that divides n without leaving a remainder.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer n. Your task is to determine if n has exactly three positive divisors.
+- **Example:** `n = 9`
+- **Constraints:**
+	- 1 <= n <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isThree(int n) {
-    int d = 2;
-    for (int i = 2; i < n && d <= 3; i += 1)
-        d += n % i == 0;
-    return d == 3;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if n has exactly three divisors, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean value indicating whether n has exactly three divisors.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the given integer n has exactly three distinct divisors.
+
+- Step 1: Find all divisors of n by iterating through integers from 1 to sqrt(n).
+- Step 2: Count the number of divisors.
+- Step 3: If the count of divisors is exactly 3, return true; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input integer n will always be a valid integer within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 9`  \
+  **Explanation:** The divisors of 9 are 1, 3, and 9, so it has exactly 3 divisors. Therefore, the output is true.
+
+- **Input:** `Input: n = 10`  \
+  **Explanation:** The divisors of 10 are 1, 2, 5, and 10, so it has 4 divisors. Therefore, the output is false.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to check the divisors of the given number n and verify if there are exactly three distinct divisors.
+
+### Initial Thoughts 💭
+- The number of divisors of n depends on its prime factorization. For n to have exactly three divisors, n must be a square of a prime number.
+- If n is a perfect square and its square root is prime, then n will have exactly three divisors: 1, the prime number, and n itself.
+{{< dots >}}
+### Edge Cases 🌐
+- n cannot be 0, as the problem constraints specify that 1 <= n.
+- When n is large (up to 10^4), the approach should efficiently handle checking if n is a perfect square and if its square root is prime.
+- For prime numbers, n will never have exactly three divisors, so the output should be false.
+- Ensure that n is checked within the valid range of 1 to 10^4.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isThree(int n) {
+int d = 2;
+for (int i = 2; i < n && d <= 3; i += 1)
+    d += n % i == 0;
+return d == 3;
 }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to determine if a given integer \( n \) has exactly three distinct positive divisors. A number with exactly three divisors can only be a square of a prime number. For example:
-- The number \( 4 \) (which is \( 2^2 \)) has divisors \( 1, 2, 4 \).
-- The number \( 9 \) (which is \( 3^2 \)) has divisors \( 1, 3, 9 \).
-
-In contrast, numbers that are not perfect squares or squares of primes do not meet this criterion. 
-
-### Approach
-
-To solve the problem, we need to count the number of divisors of \( n \). The logic for determining the number of divisors involves iterating from \( 2 \) up to \( n-1 \) and checking how many numbers can divide \( n \) without a remainder. For each divisor found, we increase our count. At the end of the iteration, if the count of divisors equals three, we return true; otherwise, we return false.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
 ```
-The class `Solution` is defined, and the method `isThree` is declared as a public member function.
 
-```cpp
-    bool isThree(int n) {
-```
-The `isThree` function takes an integer \( n \) as input and returns a boolean indicating whether \( n \) has exactly three distinct positive divisors.
+This function checks if a number 'n' has exactly three divisors.
 
-```cpp
-    int d = 2;
-```
-We initialize a variable `d` to \( 2 \). This represents the count of divisors, starting with \( 1 \) (which is a divisor of all integers) and \( n \) itself. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isThree(int n) {
+	```
+	The function is defined with a boolean return type, indicating it will return true if 'n' has exactly three divisors, and false otherwise.
 
-```cpp
-    for (int i = 2; i < n && d <= 3; i += 1)
-```
-We use a `for` loop to iterate through potential divisors starting from \( 2 \) up to \( n-1 \). The loop will also terminate early if the count of divisors \( d \) exceeds \( 3 \).
+2. **Variable Initialization**
+	```cpp
+	int d = 2;
+	```
+	The variable 'd' is initialized to 2, as we start by assuming that 'n' has at least two divisors: 1 and 'n' itself.
 
-```cpp
-        d += n % i == 0;
-```
-Within the loop, we check if \( i \) is a divisor of \( n \) by evaluating the expression `n % i == 0`. If true, \( i \) divides \( n \) without a remainder, and we increment the divisor count \( d \) by \( 1 \).
+3. **Loop for Divisor Check**
+	```cpp
+	for (int i = 2; i < n && d <= 3; i += 1)
+	```
+	A loop starts from 2 and iterates until 'n' or until 'd' exceeds 3. The loop checks if there are additional divisors of 'n'.
 
-```cpp
-    return d == 3;
-```
-Finally, after exiting the loop, we return whether \( d \) equals \( 3 \). This indicates whether \( n \) has exactly three distinct positive divisors.
+4. **Divisor Check**
+	```cpp
+	    d += n % i == 0;
+	```
+	For each iteration, the condition 'n % i == 0' checks if 'i' is a divisor of 'n'. If it is, 'd' is incremented by 1.
 
-### Complexity
+5. **Return Statement**
+	```cpp
+	return d == 3;
+	```
+	The function returns true if 'd' equals 3, meaning 'n' has exactly three divisors. Otherwise, it returns false.
 
-- **Time Complexity**: 
-  - The time complexity of this solution is \( O(n) \) in the worst case because the algorithm checks all integers from \( 2 \) to \( n-1 \). However, since we terminate early if \( d \) exceeds \( 3 \), in practice, the number of iterations could be much smaller, especially for larger values of \( n \).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(sqrt(n))
+- **Worst Case:** O(sqrt(n))
 
-- **Space Complexity**: 
-  - The space complexity is \( O(1) \) since we are using a constant amount of space for variables and do not utilize any additional data structures.
+The time complexity is O(sqrt(n)) due to checking if n is a perfect square and verifying the primality of sqrt(n).
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The `isThree` function effectively determines if a given integer has exactly three distinct positive divisors. This is done by counting the divisors in a straightforward manner. While this brute-force approach is easy to understand and implement, it may not be the most efficient for very large values of \( n \).
+The space complexity is O(1) as only a constant amount of space is required for storing intermediate results.
 
-### Key Features
+**Happy Coding! 🎉**
 
-1. **Direct Counting of Divisors**: The approach directly counts divisors by checking potential candidates from \( 2 \) to \( n-1 \).
-
-2. **Early Termination**: The algorithm benefits from an early termination condition which can help reduce the number of iterations in practice.
-
-3. **Simplicity**: The solution is simple and straightforward, making it easy to understand and modify if needed.
-
-### Use Cases
-
-This function can be useful in various mathematical applications, including:
-- **Number Theory**: Determining properties of numbers, particularly when studying prime numbers and their powers.
-- **Cryptography**: Some cryptographic algorithms may rely on properties of numbers and their factors.
-- **Mathematical Puzzles**: This kind of function can be a part of larger problems in programming competitions or educational tools focused on mathematics.
-
-### Implementation Considerations
-
-When implementing this solution, consider the following:
-
-- **Edge Cases**: Handle cases where \( n \) is less than \( 1 \) (e.g., negative numbers or zero), as they do not have positive divisors.
-
-- **Optimization for Large Numbers**: For very large integers, a more sophisticated method for counting divisors might be necessary, such as using prime factorization or a sieve method to reduce the search space.
-
-By understanding this approach, one can apply similar logic to other problems involving divisor counting and number properties.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/three-divisors/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "0E8Xxu6LV9o"
 youtube_upload_date="2020-11-30"
 youtube_thumbnail="https://i.ytimg.com/vi/0E8Xxu6LV9o/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,168 +28,183 @@ youtube_thumbnail="https://i.ytimg.com/vi/0E8Xxu6LV9o/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the head of a singly linked list where elements are sorted in ascending order, convert it into a height-balanced binary search tree. A height-balanced binary search tree is one where the depth of the two subtrees of every node never differs by more than 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a singly linked list with sorted elements.
+- **Example:** `head = [-5, -2, 0, 3, 7, 10, 15]`
+- **Constraints:**
+	- The number of nodes in the linked list is in the range [0, 20000].
+	- -10^5 <= Node.val <= 10^5
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a height-balanced binary search tree represented by its root node.
+- **Example:** `[0, -2, 10, -5, 3, 7, null]`
+- **Constraints:**
+	- The binary search tree must be balanced in height, meaning that the depth of the subtrees at each node should not differ by more than 1.
 
-class Solution {
-public:
-    TreeNode* toBST(ListNode* start, ListNode* end) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to create a balanced binary search tree from a sorted singly linked list.
 
-        if(start == end) return NULL;
+- To create the height-balanced BST, recursively pick the middle element of the list as the root, and recursively do the same for the left and right sublists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is sorted in ascending order and contains no duplicates.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [-10, -3, 0, 5, 9]`  \
+  **Explanation:** The linked list has 5 elements. The middle element, 0, will be the root. The left part of the list, [-10, -3], will form the left subtree, and the right part of the list, [5, 9], will form the right subtree.
 
-        ListNode* slw = start;
-        ListNode* fst = start;
+- **Input:** `Input: head = []`  \
+  **Explanation:** If the linked list is empty, the resulting binary search tree will also be empty.
 
-        while(fst != end && fst->next != end) {
-            slw = slw->next;
-            fst = fst->next->next;
-        }
+{{< dots >}}
+## Approach 🚀
+The approach involves recursively selecting the middle element from the sorted linked list to ensure the resulting tree is height-balanced. This is done by finding the middle node of the list and making it the root, then applying the same process to the left and right halves.
 
-        TreeNode* node = new TreeNode(slw->val);
-        node->left = toBST(start, slw);
-        node->right = toBST(slw->next, end);
-        return node;
-    }
-
-    TreeNode* sortedListToBST(ListNode* head) {
-        if(head == NULL) return NULL;
-        return toBST(head, NULL);
-    }
-};
-{{< /highlight >}}
----
-
-### 🌟 **Problem Statement: Convert a Sorted Linked List to a Balanced BST**
-
-Given a **sorted singly linked list**, the goal is to convert it into a **balanced binary search tree (BST)**. A balanced BST is one where the height difference between the left and right subtrees of any node is at most one. The challenge is to preserve the sorted order of the linked list while ensuring that the tree remains balanced.
-
----
-
-### 🧠 **Approach: Turning a Sorted List into a Balanced BST**
-
-To solve this problem, we need to construct the BST in a way that ensures:
-- The **middle element** of the linked list becomes the **root** of the tree, ensuring balance.
-- The **left subtree** contains elements smaller than the root, and the **right subtree** contains elements larger than the root.
-
-Here’s how we can break it down:
-
-#### 1. **Divide and Conquer:**
-   - Select the **middle element** of the linked list as the root. This guarantees balance, as it divides the list into two equal halves for the left and right subtrees.
-   
-#### 2. **Recursive Approach:**
-   - Recursively apply the same logic to both the left and right halves of the list to build the left and right subtrees.
-
-#### 3. **Linked List Traversal:**
-   - Use the **slow and fast pointer technique** (tortoise and hare algorithm) to efficiently find the middle node. This helps us traverse the list while maintaining references to the start and end nodes.
-
----
-
-### 🔧 **Code Breakdown: Step-by-Step**
-
-#### **Step 1: Helper Function `toBST`**
-
+### Initial Thoughts 💭
+- Since the list is already sorted, we can easily identify the middle element to ensure the tree is balanced.
+- The recursion ensures that each level of the tree remains balanced by selecting the middle of the list, dividing it into two smaller balanced subtrees.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input linked list is empty, return null as the result.
+- The algorithm should efficiently handle large lists with up to 20,000 elements.
+- Ensure that the solution handles negative values and large numbers within the specified range.
+- Ensure that the function works correctly with both small and large inputs, efficiently processing lists with up to 20,000 elements.
+{{< dots >}}
+## Code 💻
 ```cpp
 TreeNode* toBST(ListNode* start, ListNode* end) {
+
     if(start == end) return NULL;
+
     ListNode* slw = start;
     ListNode* fst = start;
-```
 
-- **`toBST`** takes `start` and `end` pointers as input and recursively divides the linked list into halves to construct the BST.
-- The **slow pointer** (`slw`) and **fast pointer** (`fst`) help us find the middle node of the list.
-
-#### **Step 2: Finding the Middle Node**
-
-```cpp
     while(fst != end && fst->next != end) {
         slw = slw->next;
         fst = fst->next->next;
     }
-```
 
-- The **slow and fast pointers** traverse the list. The **slow pointer** moves one step at a time, while the **fast pointer** moves two steps at a time.
-- By the time the fast pointer reaches the end, the slow pointer will be at the middle node. This node becomes the root of the current subtree.
-
-#### **Step 3: Constructing the Node and Recursive Calls**
-
-```cpp
     TreeNode* node = new TreeNode(slw->val);
     node->left = toBST(start, slw);
     node->right = toBST(slw->next, end);
     return node;
 }
-```
 
-- Create a new `TreeNode` with the value of the middle node.
-- Recursively build the left subtree (`start` to `slw`) and the right subtree (`slw->next` to `end`).
-- Return the newly created node.
-
-#### **Step 4: Main Function `sortedListToBST`**
-
-```cpp
 TreeNode* sortedListToBST(ListNode* head) {
     if(head == NULL) return NULL;
     return toBST(head, NULL);
 }
 ```
 
-- **`sortedListToBST`** initiates the process by calling `toBST` with the head of the linked list.
-- If the linked list is empty, return `NULL`.
+This solution converts a sorted linked list to a height-balanced BST using recursion to divide the list into subtrees.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Conditional Function Call**
+	```cpp
+	TreeNode* toBST(ListNode* start, ListNode* end) {
+	```
+	Define a recursive helper function to convert list segments into a BST.
 
-### 💡 **Time and Space Complexity**
+2. **Base Case**
+	```cpp
+	if(start == end) return NULL;
+	```
+	Base case: If the start equals the end, return NULL as there are no nodes to process.
 
-#### **Time Complexity: O(n)**
+3. **Pointer Initialization**
+	```cpp
+	ListNode* slw = start;
+	```
+	Initialize a slow pointer to find the middle element of the linked list.
 
-- Each node in the linked list is visited once. The **slow and fast pointer technique** allows us to find the middle node in **O(n)** time.
-- The tree is built recursively for each half of the list. Since each node is processed once, the total time complexity is **O(n)**.
+4. **Pointer Initialization**
+	```cpp
+	ListNode* fst = start;
+	```
+	Initialize a fast pointer to traverse the list twice as fast as the slow pointer.
 
-#### **Space Complexity: O(log n)**
+5. **Loop Iteration**
+	```cpp
+	while(fst != end && fst->next != end) {
+	```
+	Move the slow and fast pointers until the fast pointer reaches the end of the segment.
 
-- The space is used by the **recursive call stack**. In the case of a balanced tree, the maximum recursion depth is **O(log n)**, where `n` is the number of nodes in the linked list.
+6. **Pointer Movement**
+	```cpp
+	slw = slw->next;
+	```
+	Move the slow pointer one step forward.
 
----
+7. **Pointer Movement**
+	```cpp
+	fst = fst->next->next;
+	```
+	Move the fast pointer two steps forward.
 
-### 🔍 **Example Walkthrough**
+8. **Tree Initialization**
+	```cpp
+	TreeNode* node = new TreeNode(slw->val);
+	```
+	Create a new tree node with the value of the middle element (slow pointer).
 
-Let’s walk through an example with the following sorted linked list:
+9. **Recursive Call**
+	```cpp
+	node->left = toBST(start, slw);
+	```
+	Recursively construct the left subtree from the list segment before the middle element.
 
-```
--10 -> -3 -> 0 -> 5 -> 9
-```
+10. **Recursive Call**
+	```cpp
+	node->right = toBST(slw->next, end);
+	```
+	Recursively construct the right subtree from the list segment after the middle element.
 
-1. **Step 1:** The `toBST` function is called with the entire list. The slow and fast pointers find `0` as the middle node, which becomes the root.
-2. **Step 2:** We recursively call `toBST` for the left half (`-10 -> -3`) and right half (`5 -> 9`):
-   - The middle of the left half is `-3`, which becomes the left child of `0`.
-   - The middle of the right half is `5`, which becomes the right child of `0`.
-3. **Step 3:** Continue recursively for the sublists:
-   - For the left subtree (`-10`), `-10` becomes the left child of `-3`.
-   - For the right subtree (`9`), `9` becomes the right child of `5`.
-4. **Step 4:** The recursion terminates when the sublist is empty, and the tree is fully constructed.
+11. **Return Value**
+	```cpp
+	return node;
+	```
+	Return the constructed tree node as the root of the current subtree.
 
-The resulting BST is:
+12. **Function Declaration**
+	```cpp
+	TreeNode* sortedListToBST(ListNode* head) {
+	```
+	Define the main function to convert the sorted list to a BST.
 
-```
-         0
-       /   \
-     -3     5
-    /       \
-  -10        9
-```
+13. **Base Case**
+	```cpp
+	if(head == NULL) return NULL;
+	```
+	Handle the edge case where the input list is empty.
 
----
+14. **Recursive Call**
+	```cpp
+	return toBST(head, NULL);
+	```
+	Call the helper function to build the BST, starting with the entire list.
 
-### 🚀 **Conclusion**
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This approach efficiently converts a **sorted singly linked list** into a **balanced binary search tree**. By leveraging the **divide and conquer** strategy, the tree remains balanced, and the in-order traversal of the tree will yield the original sorted list. The solution is both **time-efficient** (O(n)) and **space-efficient** (O(log n)), making it suitable for large inputs.
+The time complexity is O(n) since we traverse the entire linked list once to construct the tree.
 
-The **slow and fast pointer technique** ensures that we find the middle node in a single pass through the list, guaranteeing optimal performance.
+### Space Complexity 💾
+- **Best Case:** O(log n)
+- **Worst Case:** O(log n)
 
-Happy coding, and enjoy building your BST! 🌱
+The space complexity is O(log n) due to the recursive stack for the tree construction.
 
---- 
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/)

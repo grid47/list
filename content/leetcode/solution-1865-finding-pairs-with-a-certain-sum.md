@@ -14,43 +14,92 @@ img_src = ""
 youtube = "T4yZIHISIYY"
 youtube_upload_date="2021-05-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/T4yZIHISIYY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays nums1 and nums2. Your task is to implement a data structure that supports two types of operations: 1) Add a value to an element in nums2. 2) Count the number of pairs (i, j) such that nums1[i] + nums2[j] equals a given total value.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integer arrays nums1 and nums2. The operations you will perform on these arrays are add(index, val) and count(tot).
+- **Example:** `[[2, 2, 3, 3, 3, 4], [2, 5, 6, 3, 6, 5]]`
+- **Constraints:**
+	- 1 <= nums1.length <= 1000
+	- 1 <= nums2.length <= 10^5
+	- 1 <= nums1[i], nums2[i] <= 10^9
+	- 0 <= index < nums2.length
+	- 1 <= val <= 10^5
+	- 1 <= tot <= 10^9
+	- At most 1000 calls to add and count
 
-{{< highlight cpp >}}
-class FindSumPairs {
-public:
-    vector<int> nums1, nums2;
-    vector<vector<int>> mtx;
-    map<int, int> mp;
-    int m, n;
-    FindSumPairs(vector<int>& nums1, vector<int>& nums2) {
-        this->nums1 = nums1;
-        this->nums2 = nums2;
-        m = nums2.size(), n = nums1.size();
-        for(int i = 0; i < nums2.size(); i++) {
-                mp[nums2[i]]++;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output consists of results for each count operation, representing the number of valid pairs where nums1[i] + nums2[j] equals the given total.
+- **Example:** `[null, 10, null, 3, 2, null, null, 15]`
+- **Constraints:**
+	- For each count operation, return the count of valid pairs.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Efficiently count pairs for each query and update the nums2 array with add operations.
+
+- Use a hash map to store the frequency of elements in nums2.
+- For each count operation, iterate through nums1 and check how many values in nums2 match the required sum.
+- For add operations, update the corresponding value in nums2 and adjust the frequency map.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays nums1 and nums2 are valid and within the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[2, 2, 3, 3, 3, 4], [2, 5, 6, 3, 6, 5]]`  \
+  **Explanation:** In this example, there are multiple pairs that sum to the target values, and after performing add operations, the pairs change.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a hash map to track the frequencies of elements in nums2 and efficiently counting pairs using this map.
+
+### Initial Thoughts 💭
+- We need an efficient way to count pairs where nums1[i] + nums2[j] == tot.
+- The add operation needs to efficiently update the frequency map for nums2.
+{{< dots >}}
+### Edge Cases 🌐
+- If nums2 is empty, the count will always return 0.
+- For very large arrays, the algorithm needs to efficiently handle updates and counts.
+- Handle cases where the sum of nums1[i] and nums2[j] is very large.
+- Ensure that the frequency map is updated correctly for each add operation.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> nums1, nums2;
+vector<vector<int>> mtx;
+map<int, int> mp;
+int m, n;
+FindSumPairs(vector<int>& nums1, vector<int>& nums2) {
+    this->nums1 = nums1;
+    this->nums2 = nums2;
+    m = nums2.size(), n = nums1.size();
+    for(int i = 0; i < nums2.size(); i++) {
+            mp[nums2[i]]++;
     }
-    
-    void add(int index, int val) {
-        int key = nums2[index];
-        nums2[index] += val;
-        mp[key]--;
-        mp[nums2[index]]++;
+}
+
+void add(int index, int val) {
+    int key = nums2[index];
+    nums2[index] += val;
+    mp[key]--;
+    mp[nums2[index]]++;
+}
+
+int count(int tot) {
+    int res = 0;
+    for(int i = 0; i < n; i++) {
+        res += mp[tot - nums1[i]];
     }
-    
-    int count(int tot) {
-        int res = 0;
-        for(int i = 0; i < n; i++) {
-            res += mp[tot - nums1[i]];
-        }
-        return res;
-    }
+    return res;
+}
 };
 
 /**
@@ -58,104 +107,149 @@ public:
  * FindSumPairs* obj = new FindSumPairs(nums1, nums2);
  * obj->add(index,val);
  * int param_2 = obj->count(tot);
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This code defines a class `FindSumPairs` that is used to manage two integer vectors `nums1` and `nums2`. The class provides two main operations: adding a value to an element in `nums2` and counting the number of pairs that sum up to a given total. The internal data structure `map<int, int> mp` is used to store the frequency of each number in `nums2`.
 
-The task involves designing a class called `FindSumPairs` that allows us to efficiently manage two arrays (`nums1` and `nums2`) and to count how many pairs of elements from these two arrays sum up to a given target value. The class should support two primary operations:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<int> nums1, nums2;
+	```
+	Declare two integer vectors `nums1` and `nums2`, which will be used to store the input arrays.
 
-1. **Adding a value** to an element in `nums2` at a specified index.
-2. **Counting the pairs** from `nums1` and `nums2` that sum to a given target value.
+2. **Variable Declaration**
+	```cpp
+	vector<vector<int>> mtx;
+	```
+	Declare a 2D vector `mtx`, although it is not used in the current code snippet.
 
-This requires a structure that can dynamically update and query pairs efficiently.
+3. **Variable Declaration**
+	```cpp
+	map<int, int> mp;
+	```
+	Declare a map `mp` that will store the frequency of each element in `nums2`.
 
-### Approach
+4. **Variable Declaration**
+	```cpp
+	int m, n;
+	```
+	Declare two integer variables `m` and `n` to store the sizes of `nums2` and `nums1` respectively.
 
-To solve this problem, we will take advantage of a hashmap (or dictionary) to store counts of elements in `nums2`. This allows for quick lookups when counting pairs. Here’s a step-by-step breakdown of our approach:
+5. **Constructor Definition**
+	```cpp
+	FindSumPairs(vector<int>& nums1, vector<int>& nums2) {
+	```
+	Define the constructor for the `FindSumPairs` class, which initializes the vectors `nums1` and `nums2`, and populates the map `mp` with the frequency of elements in `nums2`.
 
-1. **Initialization**: Store the provided `nums1` and `nums2` in the class. Use a hashmap to count occurrences of each value in `nums2`. This will help us quickly determine how many times a particular value needed to reach the target exists in `nums2`.
+6. **Member Initialization**
+	```cpp
+	    this->nums1 = nums1;
+	```
+	Initialize the member variable `nums1` with the value of the input vector `nums1`.
 
-2. **Adding Values**: When a value is added to an element in `nums2`, update both the original value’s count (decrement) and the new value’s count (increment) in the hashmap.
+7. **Member Initialization**
+	```cpp
+	    this->nums2 = nums2;
+	```
+	Initialize the member variable `nums2` with the value of the input vector `nums2`.
 
-3. **Counting Pairs**: To count pairs that sum up to a target value, iterate through `nums1` and for each element, compute the value needed from `nums2` to reach the target. Look up this needed value in the hashmap to get its count, which represents how many valid pairs can be formed with that particular element from `nums1`.
+8. **Size Assignment**
+	```cpp
+	    m = nums2.size(), n = nums1.size();
+	```
+	Assign the size of `nums2` to `m` and the size of `nums1` to `n`.
 
-### Code Breakdown (Step by Step)
+9. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < nums2.size(); i++) {
+	```
+	Start a loop to iterate through the elements of `nums2` to populate the frequency map `mp`.
 
-1. **Class Definition**: The implementation starts with defining the `FindSumPairs` class.
+10. **Map Update**
+	```cpp
+	            mp[nums2[i]]++;
+	```
+	For each element in `nums2`, increment its corresponding frequency in the map `mp`.
 
-    ```cpp
-    class FindSumPairs {
-    public:
-    ```
+11. **Function Definition**
+	```cpp
+	void add(int index, int val) {
+	```
+	Define the `add` function, which modifies an element in `nums2` at the specified index and updates the frequency map `mp`.
 
-2. **Member Variables**: The class has member variables to store the two arrays, the size of these arrays, a hashmap for counting occurrences in `nums2`, and a matrix placeholder that is not used in the current implementation.
+12. **Retrieve Key**
+	```cpp
+	    int key = nums2[index];
+	```
+	Retrieve the value at the given index in `nums2` and store it in `key`.
 
-    ```cpp
-    vector<int> nums1, nums2;
-    vector<vector<int>> mtx; // Not used in the current implementation
-    map<int, int> mp; // Map to count occurrences in nums2
-    int m, n; // Sizes of nums1 and nums2
-    ```
+13. **Modify Element**
+	```cpp
+	    nums2[index] += val;
+	```
+	Increase the value of the element in `nums2` at the given index by `val`.
 
-3. **Constructor**: The constructor takes two integer vectors (`nums1` and `nums2`) as input. It initializes the class variables and populates the hashmap with the counts of each number in `nums2`.
+14. **Map Update (Decrement)**
+	```cpp
+	    mp[key]--;
+	```
+	Decrement the frequency of the old value in the map `mp`.
 
-    ```cpp
-    FindSumPairs(vector<int>& nums1, vector<int>& nums2) {
-        this->nums1 = nums1;
-        this->nums2 = nums2;
-        m = nums2.size();
-        n = nums1.size();
-        for(int i = 0; i < nums2.size(); i++) {
-            mp[nums2[i]]++; // Count occurrences of each number in nums2
-        }
-    }
-    ```
+15. **Map Update (Increment)**
+	```cpp
+	    mp[nums2[index]]++;
+	```
+	Increment the frequency of the new value in the map `mp` after the modification.
 
-4. **Adding Values**: The `add` method allows modification of the `nums2` array. It updates the element at the specified index by adding a value to it, while also updating the hashmap to reflect the changes in counts.
+16. **Function Definition**
+	```cpp
+	int count(int tot) {
+	```
+	Define the `count` function, which returns the number of pairs of elements from `nums1` and `nums2` whose sum equals `tot`.
 
-    ```cpp
-    void add(int index, int val) {
-        int key = nums2[index]; // Original value at the index
-        nums2[index] += val; // Update nums2
-        mp[key]--; // Decrement the count of the old value
-        mp[nums2[index]]++; // Increment the count of the new value
-    }
-    ```
+17. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize the result variable `res` to store the number of pairs found.
 
-5. **Counting Pairs**: The `count` method counts how many pairs from `nums1` and `nums2` sum to the specified total. For each element in `nums1`, it calculates the required counterpart from `nums2` and adds up the counts of how many times that counterpart exists.
+18. **Loop Through nums1**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Loop through the elements of `nums1` to check for pairs with elements from `nums2`.
 
-    ```cpp
-    int count(int tot) {
-        int res = 0;
-        for(int i = 0; i < n; i++) {
-            res += mp[tot - nums1[i]]; // Add counts of the required counterpart
-        }
-        return res;
-    }
-    ```
+19. **Map Lookup**
+	```cpp
+	        res += mp[tot - nums1[i]];
+	```
+	For each element in `nums1`, check if the complement (i.e., `tot - nums1[i]`) exists in the map `mp`. If it does, add its frequency to `res`.
 
-6. **Class Usage Example**: The class can be instantiated and used as shown in the provided comment.
+20. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the total count of pairs whose sum equals `tot`.
 
-    ```cpp
-    /**
-     * Your FindSumPairs object will be instantiated and called as such:
-     * FindSumPairs* obj = new FindSumPairs(nums1, nums2);
-     * obj->add(index, val);
-     * int param_2 = obj->count(tot);
-     */
-    ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for add operation if no counting is needed.
+- **Average Case:** O(n) for count operation, where n is the length of nums1.
+- **Worst Case:** O(n) for each count operation, where n is the length of nums1.
 
-### Complexity
+The count operation iterates through nums1 to find matching pairs, while the add operation updates nums2 in constant time.
 
-The time complexity for the constructor is \(O(m)\), where \(m\) is the size of `nums2`, as we are populating the hashmap. The `add` method operates in \(O(1)\) time for the update operation, given that hashmap operations (insertions and deletions) are average \(O(1)\). The `count` method has a time complexity of \(O(n)\), where \(n\) is the size of `nums1`, since we iterate through all elements of `nums1` to compute the count.
+### Space Complexity 💾
+- **Best Case:** O(1) if no updates are needed to the frequency map.
+- **Worst Case:** O(m) for the frequency map, where m is the length of nums2.
 
-In terms of space complexity, the storage for the hashmap is \(O(m)\) in the worst case (when all elements in `nums2` are unique).
+The space complexity depends on the size of nums2 and the number of unique elements in it.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-In conclusion, the `FindSumPairs` class provides an efficient way to manage two integer arrays and perform operations to count valid pairs that sum to a specific target. By leveraging a hashmap to store counts of elements in `nums2`, the implementation ensures quick updates and lookups, which is essential for maintaining performance. The approach is straightforward yet effective, demonstrating the usefulness of data structures in solving combinatorial problems efficiently. This solution is suitable for applications where dynamic updates and quick queries are required, making it a robust choice for similar problems in algorithm design and competitive programming. The clarity and organization of the code enhance its readability and maintainability, solidifying its value as a reference for similar implementations.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/finding-pairs-with-a-certain-sum/description/)
 

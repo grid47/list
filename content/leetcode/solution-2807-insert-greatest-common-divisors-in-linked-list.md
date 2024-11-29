@@ -14,147 +14,154 @@ img_src = ""
 youtube = "SVnSiD95r-0"
 youtube_upload_date="2024-04-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/SVnSiD95r-0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the head of a linked list, where each node contains an integer. For each pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor (GCD) of the two nodes. Return the modified linked list after performing this operation.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a linked list where each node has an integer value. The linked list is represented as a sequence of integers.
+- **Example:** `Input: head = [12, 8, 24, 36]`
+- **Constraints:**
+	- 1 <= Node.val <= 1000
+	- The number of nodes in the list is between 1 and 5000.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* insertGreatestCommonDivisors(ListNode* head) {
-        
-        ListNode* res = head;
-        
-        while(head && head->next) {
-            ListNode* node = new ListNode(__gcd(head->val, head->next->val));
-            ListNode* tmp = head->next;
-            head->next = node;
-            node->next = tmp;
-            head = tmp;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the linked list after inserting new nodes with the GCD between adjacent nodes.
+- **Example:** `Output: [12, 4, 8, 4, 24, 12, 36]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to iterate through the linked list, compute the GCD of every pair of adjacent nodes, and insert a new node with the GCD value in between them.
+
+- 1. Iterate through the linked list.
+- 2. For each pair of adjacent nodes, compute the GCD of their values.
+- 3. Create a new node with the GCD value and insert it between the two adjacent nodes.
+- 4. Continue this process until the end of the list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list contains at least one node.
+- Adjacent nodes will always be present unless the list has only one node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [12, 8, 24, 36]`  \
+  **Explanation:** Between 12 and 8, the GCD is 4. Between 8 and 24, the GCD is 8. Between 24 and 36, the GCD is 12. So, the final linked list is [12, 4, 8, 4, 24, 12, 36].
+
+- **Input:** `Input: head = [5]`  \
+  **Explanation:** Since there is only one node in the list, no insertions are made, and the original list remains unchanged.
+
+{{< dots >}}
+## Approach 🚀
+We will iterate through the list, compute the GCD for each pair of adjacent nodes, and insert the new node with the GCD value between them.
+
+### Initial Thoughts 💭
+- The problem is straightforward, involving GCD calculations and linked list manipulation.
+- The main challenge lies in correctly inserting the new nodes between existing nodes while maintaining the integrity of the linked list.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as the list will always have at least one node.
+- The function needs to handle up to 5000 nodes, but the logic remains efficient with a linear time complexity.
+- If the list contains only one node, no new nodes will be inserted.
+- Ensure that all GCD calculations are performed correctly and efficiently for each pair of nodes.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* insertGreatestCommonDivisors(ListNode* head) {
+    
+    ListNode* res = head;
+    
+    while(head && head->next) {
+        ListNode* node = new ListNode(__gcd(head->val, head->next->val));
+        ListNode* tmp = head->next;
+        head->next = node;
+        node->next = tmp;
+        head = tmp;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function inserts greatest common divisors (GCDs) between each adjacent pair of nodes in the linked list.
 
-The task is to insert the greatest common divisor (GCD) of every two consecutive nodes into a singly linked list. The given linked list has nodes containing integer values. The objective is to insert a new node containing the GCD of each pair of consecutive nodes right after the first node of the pair. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	ListNode* insertGreatestCommonDivisors(ListNode* head) {
+	```
+	Function definition: Starts the function to insert GCDs into a linked list.
 
-For example:
-- Given the linked list: `4 -> 10 -> 20`, we insert the GCD of `4` and `10` (which is `2`), then the GCD of `10` and `20` (which is `10`), resulting in the new list: `4 -> 2 -> 10 -> 10 -> 20`.
+2. **Initialization**
+	```cpp
+	    ListNode* res = head;
+	```
+	Initializes a pointer 'res' to keep track of the head of the linked list.
 
-### Approach
+3. **Loop**
+	```cpp
+	    while(head && head->next) {
+	```
+	Starts a while loop that continues as long as there are at least two nodes.
 
-The main idea behind this solution is to traverse through the linked list and compute the GCD of each pair of consecutive nodes. Once the GCD is computed, a new node is created and inserted between the current node and the next node.
+4. **GCD Calculation**
+	```cpp
+	        ListNode* node = new ListNode(__gcd(head->val, head->next->val));
+	```
+	Creates a new node containing the GCD of the current node and the next node.
 
-1. **Traverse the linked list**:
-   - We need to process each consecutive pair of nodes in the linked list.
-   - For each pair, the GCD of the values of the current node and the next node is computed.
+5. **Node Manipulation**
+	```cpp
+	        ListNode* tmp = head->next;
+	```
+	Stores a temporary reference to the next node in the list.
 
-2. **Insert the new node**:
-   - After computing the GCD of two consecutive nodes, create a new node with the GCD value.
-   - Insert this new node between the current node and the next node by adjusting the pointers.
+6. **Node Manipulation**
+	```cpp
+	        head->next = node;
+	```
+	Updates the current node to point to the new GCD node.
 
-3. **Move to the next pair**:
-   - After inserting the new node, we move the `head` pointer two steps ahead to continue the process with the next pair.
+7. **Node Manipulation**
+	```cpp
+	        node->next = tmp;
+	```
+	Sets the next pointer of the GCD node to the original next node.
 
-4. **Edge Cases**:
-   - The list may have only one node, in which case no insertion is needed.
-   - The list may be empty, but this is handled implicitly by the function’s checks on `head`.
+8. **Pointer Update**
+	```cpp
+	        head = tmp;
+	```
+	Moves the 'head' pointer to the next original node for the next iteration.
 
-### Code Breakdown (Step by Step)
+9. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the head of the modified linked list with the inserted GCDs.
 
-1. **ListNode Definition**:
-   The `ListNode` structure represents a node in the singly linked list:
-   ```cpp
-   struct ListNode {
-       int val;
-       ListNode *next;
-       ListNode() : val(0), next(nullptr) {}
-       ListNode(int x) : val(x), next(nullptr) {}
-       ListNode(int x, ListNode *next) : val(x), next(next) {}
-   };
-   ```
-   - Each node holds an integer value `val` and a pointer `next` pointing to the next node in the list.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Function Definition**:
-   The `insertGreatestCommonDivisors` function is defined to insert nodes with the GCD of consecutive pairs:
-   ```cpp
-   ListNode* insertGreatestCommonDivisors(ListNode* head) {
-   ```
-   - The function takes the head of the singly linked list as an argument and returns the modified head of the list.
+The time complexity is O(n) where n is the number of nodes, as we iterate through the list once and perform constant-time GCD calculations for each adjacent pair.
 
-3. **Initialize `res` Pointer**:
-   ```cpp
-   ListNode* res = head;
-   ```
-   - We keep a reference to the original head of the list in `res`, so we can return it after the list is modified.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-4. **Traverse the List**:
-   ```cpp
-   while (head && head->next) {
-   ```
-   - This loop iterates through the list while there are at least two nodes left (i.e., `head` and `head->next`).
-   - The loop continues until we reach the end of the list.
+The space complexity is O(n) due to the extra nodes being inserted into the list.
 
-5. **Create a New Node with GCD**:
-   ```cpp
-   ListNode* node = new ListNode(__gcd(head->val, head->next->val));
-   ```
-   - For each pair of consecutive nodes, we compute the GCD of their values using the built-in C++ function `__gcd()`.
-   - A new node `node` is created with the value of the computed GCD.
+**Happy Coding! 🎉**
 
-6. **Insert the New Node**:
-   ```cpp
-   ListNode* tmp = head->next;
-   head->next = node;
-   node->next = tmp;
-   ```
-   - We save the pointer to the next node (`tmp = head->next`).
-   - The `next` pointer of the current node (`head`) is set to point to the new node `node`.
-   - The `next` pointer of the new node `node` is set to point to the original next node (`tmp`), ensuring that the rest of the list remains connected.
-
-7. **Move to the Next Pair**:
-   ```cpp
-   head = tmp;
-   ```
-   - After inserting the new node, we move the `head` pointer two steps forward: first to the original next node (`tmp`) and then the next iteration will handle the next pair.
-
-8. **Return the Modified List**:
-   ```cpp
-   return res;
-   ```
-   - After the loop completes, the modified list (with the inserted GCD nodes) is returned by returning the original head (`res`).
-
-### Complexity
-
-1. **Time Complexity**:
-   - The main work in this solution is the traversal of the linked list and computing the GCD for each pair of consecutive nodes.
-   - The time complexity for traversing the list is **O(n)**, where `n` is the number of nodes in the list, as we visit each node once.
-   - The time complexity for calculating the GCD of two integers is **O(log(min(a, b)))**, where `a` and `b` are the values of the two nodes. Since we do this for each pair, the overall time complexity for GCD computations is **O(log(V))**, where `V` is the maximum value of the node values in the list.
-   - Therefore, the overall time complexity of the function is **O(n log(V))**, where `n` is the number of nodes and `V` is the maximum value in the list.
-
-2. **Space Complexity**:
-   - The space complexity is dominated by the newly created nodes. For every two nodes in the original list, one new node is inserted. Thus, the space complexity is **O(n)**, where `n` is the number of nodes in the original list (since the number of newly created nodes is proportional to the original list size).
-
-### Conclusion
-
-This solution effectively solves the problem of inserting the greatest common divisor (GCD) of consecutive nodes into a singly linked list. By iterating through the list and inserting the computed GCD between each pair of nodes, the function modifies the list as required. The time complexity of **O(n log(V))** and space complexity of **O(n)** make this approach efficient for reasonably sized lists. This solution is optimal in terms of both time and space for the problem at hand.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description/)
 

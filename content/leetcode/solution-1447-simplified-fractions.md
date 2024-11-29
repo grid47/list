@@ -14,137 +14,191 @@ img_src = ""
 youtube = "xAPYdvSkcF8"
 youtube_upload_date="2020-05-17"
 youtube_thumbnail="https://i.ytimg.com/vi/xAPYdvSkcF8/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGUgZSgVMA8=&rs=AOn4CLA8kfJhe38vkPWigQhNMfXCO873lw"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer `n`, return a list of all unique simplified fractions between 0 and 1 (exclusive) where the denominator is less than or equal to `n`. A fraction is simplified if the greatest common divisor (GCD) of the numerator and denominator is 1. The result can be returned in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer `n` representing the maximum allowed value for the denominator.
+- **Example:** `Input: n = 4`
+- **Constraints:**
+	- 1 <= n <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> simplifiedFractions(int n) {
-        if(n == 1) return {};
-        vector<string> res;
-        queue<tuple<int, int, int, int>> q;
-        q.emplace(0, 1, 1, 1);
-        while(!q.empty()) {
-            auto [num1, den1, num2, den2] = q.front();
-            q.pop();
-            int num = num1 + num2;
-            int den = den1 + den2;
-            res.push_back(to_string(num) + "/" + to_string(den));
-            if(den + den1 <= n) q.emplace(num1, den1, num, den);
-            if(den + den2 <= n) q.emplace(num, den, num2, den2);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** A list of strings representing all unique simplified fractions between 0 and 1 with denominators up to `n`.
+- **Example:** `Output: ["1/2", "1/3", "1/4", "2/3", "3/4"]`
+- **Constraints:**
+	- The list can be in any order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate all unique simplified fractions with denominators up to `n`.
+
+- Iterate through all possible denominators from 2 to `n`.
+- For each denominator, iterate through numerators from 1 to denominator-1.
+- Check if the GCD of the numerator and denominator is 1. If true, add the fraction to the result list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The denominator of the fraction is always greater than the numerator.
+- Fractions must be strictly between 0 and 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 5`  \
+  **Explanation:** Output: ["1/2", "1/3", "1/4", "1/5", "2/3", "2/5", "3/4", "3/5", "4/5"]. These are all the simplified fractions between 0 and 1 with denominators less than or equal to 5.
+
+- **Input:** `Input: n = 2`  \
+  **Explanation:** Output: ["1/2"]. Only one unique fraction exists with denominator less than or equal to 2.
+
+- **Input:** `Input: n = 3`  \
+  **Explanation:** Output: ["1/2", "1/3", "2/3"]. The fraction "2/3" is included as it is simplified and lies between 0 and 1.
+
+{{< dots >}}
+## Approach 🚀
+Use nested loops to generate fractions and filter out non-simplified ones using the GCD.
+
+### Initial Thoughts 💭
+- Each denominator can produce multiple numerators, but only some result in simplified fractions.
+- The GCD function is useful for checking if a fraction is simplified.
+- Iterating over all possible combinations and filtering based on the GCD is an efficient approach for the given constraints.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: n = 1 -> Output: []. No valid fractions exist for n = 1.
+- Input: n = 100 -> Should return all valid simplified fractions between 0 and 1 with denominators up to 100 efficiently.
+- Input: n = 2 -> Output: ["1/2"]. Only one valid fraction.
+- Input: n = 10 -> Output: Should include fractions such as "1/10" and "9/10".
+- Ensure proper handling of GCD calculations for large values.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> simplifiedFractions(int n) {
+    if(n == 1) return {};
+    vector<string> res;
+    queue<tuple<int, int, int, int>> q;
+    q.emplace(0, 1, 1, 1);
+    while(!q.empty()) {
+        auto [num1, den1, num2, den2] = q.front();
+        q.pop();
+        int num = num1 + num2;
+        int den = den1 + den2;
+        res.push_back(to_string(num) + "/" + to_string(den));
+        if(den + den1 <= n) q.emplace(num1, den1, num, den);
+        if(den + den2 <= n) q.emplace(num, den, num2, den2);
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates all simplified fractions for a given integer n, returning them as strings in the form of 'num/den'. It uses a breadth-first search to explore fractions formed by adding pairs of fractions.
 
-The goal is to generate all simplified fractions between `0` and `1` for a given integer `n`. A fraction is represented as `num/den` where `num` is the numerator and `den` is the denominator. The fractions should be in their simplest form, meaning that the greatest common divisor (GCD) of the numerator and denominator should be `1`. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<string> simplifiedFractions(int n) {
+	```
+	This is the function header where the return type is a vector of strings and the parameter is an integer n, representing the maximum denominator for the fractions.
 
-### Approach
+2. **Conditional Check**
+	```cpp
+	    if(n == 1) return {};
+	```
+	If n equals 1, return an empty vector since no simplified fractions exist for this case.
 
-To solve the problem, we will use a breadth-first search (BFS) strategy to explore all possible fractions. The main steps in our approach include:
+3. **Variable Declaration**
+	```cpp
+	    vector<string> res;
+	```
+	Declare a vector of strings to store the resulting simplified fractions.
 
-1. **Queue for BFS**: We will use a queue to explore all possible fractions in a systematic manner, starting from the smallest fractions and building up to larger ones.
-2. **Tuple Representation**: Each fraction will be represented as a tuple of numerators and denominators so we can efficiently compute new fractions.
-3. **Constraints on Denominators**: We need to ensure that the denominators do not exceed `n` and are always larger than the numerators to maintain the fraction between `0` and `1`.
+4. **Queue Initialization**
+	```cpp
+	    queue<tuple<int, int, int, int>> q;
+	```
+	Initialize a queue to store tuples of integers representing the numerators and denominators of two fractions being added.
 
-### Code Breakdown (Step by Step)
+5. **Queue Operation**
+	```cpp
+	    q.emplace(0, 1, 1, 1);
+	```
+	Add the initial fraction (0/1) and (1/1) to the queue for further processing.
 
-Let’s break down the provided code to understand how it works:
+6. **While Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Begin a while loop that continues as long as there are items in the queue.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   ```
+7. **Queue Pop**
+	```cpp
+	        auto [num1, den1, num2, den2] = q.front();
+	```
+	Extract the front element of the queue, which contains the numerators and denominators of two fractions.
 
-   - The code is encapsulated within a class named `Solution`, which is a common practice in competitive programming and coding challenges.
+8. **Queue Operation**
+	```cpp
+	        q.pop();
+	```
+	Remove the front element from the queue after it has been processed.
 
-2. **Main Function**:
-   ```cpp
-   vector<string> simplifiedFractions(int n) {
-   ```
+9. **Mathematical Operation**
+	```cpp
+	        int num = num1 + num2;
+	```
+	Calculate the numerator of the new fraction by adding the numerators of the two fractions.
 
-   - The method `simplifiedFractions` takes an integer `n` as an argument and returns a vector of strings representing the simplified fractions.
+10. **Mathematical Operation**
+	```cpp
+	        int den = den1 + den2;
+	```
+	Calculate the denominator of the new fraction by adding the denominators of the two fractions.
 
-3. **Edge Case for `n = 1`**:
-   ```cpp
-   if(n == 1) return {};
-   ```
+11. **Vector Operation**
+	```cpp
+	        res.push_back(to_string(num) + "/" + to_string(den));
+	```
+	Convert the new fraction to a string and add it to the result vector.
 
-   - If `n` is `1`, there are no fractions between `0` and `1` that can be formed, so the function immediately returns an empty vector.
+12. **Conditional Check**
+	```cpp
+	        if(den + den1 <= n) q.emplace(num1, den1, num, den);
+	```
+	If the sum of the denominator of the new fraction and the first fraction's denominator is less than or equal to n, add this new fraction to the queue for further processing.
 
-4. **Initialization**:
-   ```cpp
-   vector<string> res;
-   queue<tuple<int, int, int, int>> q;
-   q.emplace(0, 1, 1, 1);
-   ```
+13. **Conditional Check**
+	```cpp
+	        if(den + den2 <= n) q.emplace(num, den, num2, den2);
+	```
+	If the sum of the denominator of the new fraction and the second fraction's denominator is less than or equal to n, add this new fraction to the queue for further processing.
 
-   - We create a vector `res` to hold the resulting fractions.
-   - We initialize a queue `q` that will hold tuples representing the fractions in the form `(num1, den1, num2, den2)`. This is initialized with the tuple `(0, 1, 1, 1)`, representing the fractions `0/1` and `1/1`.
+14. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the vector containing all the simplified fractions.
 
-5. **BFS Loop**:
-   ```cpp
-   while(!q.empty()) {
-       auto [num1, den1, num2, den2] = q.front();
-       q.pop();
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-   - We enter a loop that continues until the queue is empty. In each iteration, we pop the front tuple from the queue and unpack it into `num1`, `den1`, `num2`, and `den2`.
+Iterating over all possible numerator and denominator pairs up to `n`.
 
-6. **Create New Fraction**:
-   ```cpp
-   int num = num1 + num2;
-   int den = den1 + den2;
-   res.push_back(to_string(num) + "/" + to_string(den));
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n^2)
 
-   - We compute a new fraction by adding the numerators and denominators from the two fractions represented by the current tuple.
-   - The new fraction `num/den` is then converted to a string and added to the result vector `res`.
+Storing the result list requires space proportional to the number of valid fractions.
 
-7. **Enqueue New Fractions**:
-   ```cpp
-   if(den + den1 <= n) q.emplace(num1, den1, num, den);
-   if(den + den2 <= n) q.emplace(num, den, num2, den2);
-   ```
+**Happy Coding! 🎉**
 
-   - We check if we can create new fractions by combining the current fraction with the existing ones. 
-   - If the denominator of the new fraction does not exceed `n`, we enqueue the new tuples for further exploration.
-
-8. **Return Result**:
-   ```cpp
-   return res;
-   ```
-
-   - After the BFS completes, we return the vector `res` containing all the simplified fractions.
-
-### Complexity
-
-- **Time Complexity**: The time complexity is primarily determined by the number of fractions we can generate, which is related to the values of `n`. The exact complexity may vary, but it generally grows with the size of `n`.
-
-- **Space Complexity**: The space complexity is \(O(N)\), where \(N\) is the number of fractions generated. This includes space for the result vector and the queue.
-
-### Conclusion
-
-This code provides an efficient and straightforward method to generate all simplified fractions between `0` and `1` for a given integer `n`. The BFS approach allows us to systematically explore the possible fractions while ensuring they remain in their simplest form.
-
-#### Key Takeaways:
-
-1. **Breadth-First Search (BFS)**: BFS is a powerful technique for exploring combinatorial structures in a systematic way, ensuring all possible combinations are explored.
-
-2. **Tuple Utilization**: Using tuples to represent multiple related values (numerators and denominators) simplifies the process of generating new fractions.
-
-3. **Efficiency Considerations**: The checks to limit denominators ensure we only generate valid fractions, helping keep our solution efficient.
-
-In summary, the provided code effectively demonstrates a method to compute all simplified fractions within a specific range, making it a valuable reference for similar problems involving combinatorial generation and simplification.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/simplified-fractions/description/)
 

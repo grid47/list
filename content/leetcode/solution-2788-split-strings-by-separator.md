@@ -14,134 +14,213 @@ img_src = ""
 youtube = "DdjLhSeodGs"
 youtube_upload_date="2023-07-23"
 youtube_thumbnail="https://i.ytimg.com/vi/DdjLhSeodGs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array 'words' of strings and a character 'separator'. Your task is to split each string in 'words' by the separator. After the split, return an array of strings containing the new substrings, excluding any empty strings.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of strings 'words' and a character 'separator'.
+- **Example:** `Input: words = ['apple.orange.banana', 'pear.grape', 'peach'], separator = '.'`
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length <= 20
+	- characters in words[i] are either lowercase English letters or characters from the string '.,|$#@'.
+	- separator is a character from the string '.,|$#@'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> splitWordsBySeparator(vector<string>& words, char sep) {
-        
-        vector<string> ans;
-        
-        for(int i = 0; i < words.size(); i++) {
-            string cur = "";
-            
-            for(int j = 0; j < words[i].size(); j++) {
-                if(words[i][j] == sep) {
-                    if(cur != "")
-                    ans.push_back(cur);
-                    cur = "";
-                } else if(j == words[i].size() - 1) {
-                    cur += words[i][j];                    
-                    ans.push_back(cur);
-                    cur = "";
-                } else 
-                cur += words[i][j];
-            }
-            
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array containing the resulting substrings formed after splitting by the separator, excluding empty strings.
+- **Example:** `Output: ['apple', 'orange', 'banana', 'pear', 'grape', 'peach']`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Split each word in the array by the separator and exclude any empty strings.
 
-The problem at hand is to split a list of words by a specified separator character. Each word in the list is a string, and the goal is to split each word into substrings wherever the separator appears. The solution should return a new list of strings, where each string is a segment of a word split by the separator.
+- Iterate through each word in the 'words' array.
+- For each word, split it by the 'separator' character.
+- Push non-empty substrings into the result array.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each string in 'words' contains only lowercase English letters or characters from the set '.,|$#@'.
+- The separator character is one of the allowed characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: words = ['apple.orange.banana', 'pear.grape', 'peach'], separator = '.'`  \
+  **Explanation:** Split each string by the '.' character, and exclude empty strings. Resulting strings: ['apple', 'orange', 'banana', 'pear', 'grape', 'peach'].
 
-### Approach
+- **Input:** `Input: words = ['###'], separator = '#' `  \
+  **Explanation:** The string '###' contains only separators, so the result is an empty array [] because no valid substrings are formed.
 
-We are tasked with splitting each word in the input list based on a separator character `sep`. For each word, we traverse through each character, checking if it matches the separator. If it does, we push the substring formed so far to the result list. If we reach the end of a word, the last substring (which does not end with a separator) is added to the result. This way, we ensure that every segment of the word separated by the given separator is correctly placed in the result list.
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating over each string in the input array and using the separator to split them into substrings.
 
-Here is the step-by-step breakdown of how the algorithm works:
-
-1. **Input Iteration:** Iterate through each word in the input list `words`.
-2. **Character Iteration:** For each word, iterate through its characters one by one.
-3. **Separator Detection:** If a separator is encountered, the current accumulated substring is added to the result list.
-4. **Segment Completion:** After encountering a separator or reaching the end of the word, finalize the current substring and push it to the result list.
-5. **Return Result:** After processing all words, return the list of all the segments (substrings) formed by splitting each word by the separator.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The input array is small, so iterating through each string and splitting them by a separator is efficient.
+- I will split each string and discard empty results to avoid unnecessary entries.
+{{< dots >}}
+### Edge Cases 🌐
+- If 'words' contains empty strings, make sure to exclude them after splitting.
+- Ensure that the algorithm handles the upper bounds of the input size efficiently.
+- If all characters are separators (e.g., '###'), the result should be an empty array.
+- Make sure to handle all specified edge cases within the constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<string> splitWordsBySeparator(vector<string>& words, char sep) {
-    vector<string> ans; // Vector to store the final answer (substrings)
-```
-- The function `splitWordsBySeparator` takes in a list of words (`vector<string> words`) and a separator character (`char sep`).
-- A vector `ans` is initialized to store the substrings after splitting each word by the separator.
-
-```cpp
+    
+    vector<string> ans;
+    
     for(int i = 0; i < words.size(); i++) {
-        string cur = "";  // Initialize an empty string to hold the current substring
-```
-- We start by iterating over each word in the list `words`. For each word, we initialize an empty string `cur`, which will be used to build each substring between separators.
-
-```cpp
+        string cur = "";
+        
         for(int j = 0; j < words[i].size(); j++) {
-```
-- Inside the loop for each word, we start iterating through each character of the word.
-
-```cpp
             if(words[i][j] == sep) {
-                if(cur != "")  // If separator is found and cur is not empty
-                    ans.push_back(cur); // Add current substring to the answer list
-                cur = "";  // Reset the current substring to start a new one
-            }
-```
-- If the current character is equal to the separator (`words[i][j] == sep`), we check if the current substring `cur` is non-empty.
-- If it is non-empty, we add it to the result list `ans`.
-- After adding the substring, we reset `cur` to an empty string to start collecting the next segment.
-
-```cpp
+                if(cur != "")
+                ans.push_back(cur);
+                cur = "";
             } else if(j == words[i].size() - 1) {
-                cur += words[i][j];  // Add the last character to the current substring
-                ans.push_back(cur);   // Add the last substring to the answer list
-                cur = "";  // Reset the current substring
-            }
-```
-- If the current character is not the separator, we check if it's the last character in the word (`j == words[i].size() - 1`).
-- If it is the last character, we add it to `cur` and then push the final `cur` substring to the result list `ans`.
-- Afterward, `cur` is reset to an empty string.
-
-```cpp
-            else
-                cur += words[i][j]; // If not separator and not last character, keep building current substring
+                cur += words[i][j];                    
+                ans.push_back(cur);
+                cur = "";
+            } else 
+            cur += words[i][j];
         }
-```
-- If the character is not a separator and it's not the last character, we continue adding the current character to `cur` to build the current substring.
-
-```cpp
+        
     }
-    return ans;  // Return the final list of substrings
+    return ans;
 }
 ```
-- After processing all the words in the input list `words`, we return the result list `ans`, which contains all the substrings split by the separator.
 
-### Complexity
+This function splits words from a vector of strings `words` by a given separator `sep` and returns a vector of split substrings. It iterates through each word, checking for occurrences of the separator and creating substrings.
 
-#### Time Complexity:
-- The time complexity is **O(n * m)**, where:
-  - `n` is the number of words in the input list `words`.
-  - `m` is the average length of the words in `words`.
-  
-  This is because we are iterating through each character of every word in the input list once, checking each character and performing operations like adding substrings to the result list.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<string> splitWordsBySeparator(vector<string>& words, char sep) {
+	```
+	The function `splitWordsBySeparator` is declared, accepting a vector of strings `words` and a character separator `sep`. It returns a vector of strings containing the substrings created by splitting each word at the separator.
 
-#### Space Complexity:
-- The space complexity is **O(k)**, where `k` is the total number of substrings formed after splitting all the words.
-  - We store all the resulting substrings in the `ans` vector, which requires space proportional to the number of substrings.
-  - Additionally, we store the `cur` string at each step, but it is used to build substrings incrementally, so the space overhead is mainly from the final result list `ans`.
+2. **Variable Initialization**
+	```cpp
+	    vector<string> ans;
+	```
+	A vector `ans` is initialized to store the resulting substrings after splitting the words.
 
-### Conclusion
+3. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < words.size(); i++) {
+	```
+	A for loop starts to iterate through each word in the vector `words`.
 
-This solution efficiently splits each word in the input list by a specified separator character and returns the substrings. The algorithm works by iterating through each word and checking each character. It dynamically builds substrings and adds them to the result whenever a separator is encountered or at the end of the word. The time complexity of **O(n * m)** ensures that this approach works efficiently for relatively large inputs, while the space complexity is dominated by the number of substrings formed. 
+4. **Variable Initialization**
+	```cpp
+	        string cur = "";
+	```
+	A string variable `cur` is initialized to temporarily hold each substring as we iterate through the characters of each word.
 
-This solution is simple and direct, making it suitable for handling cases where splitting words by a separator is required, and it ensures that all edge cases (such as empty words or multiple consecutive separators) are handled appropriately.
+5. **Inner Loop Initialization**
+	```cpp
+	        for(int j = 0; j < words[i].size(); j++) {
+	```
+	A nested for loop starts to iterate through each character of the current word `words[i]`.
+
+6. **Separator Check**
+	```cpp
+	            if(words[i][j] == sep) {
+	```
+	An if condition checks whether the current character is equal to the separator `sep`.
+
+7. **Substring Addition**
+	```cpp
+	                if(cur != "")
+	```
+	A check to ensure the current substring `cur` is not empty before adding it to the result vector `ans`.
+
+8. **Push Substring**
+	```cpp
+	                ans.push_back(cur);
+	```
+	If the current substring `cur` is non-empty, it is added to the result vector `ans`.
+
+9. **Reset Current Substring**
+	```cpp
+	                cur = "";
+	```
+	The current substring `cur` is reset to an empty string to start building the next substring.
+
+10. **End Separator Check**
+	```cpp
+	            } else if(j == words[i].size() - 1) {
+	```
+	An else if condition checks if the current character is the last one in the word.
+
+11. **Add Last Character**
+	```cpp
+	                cur += words[i][j];                    
+	```
+	If it is the last character, it is added to the current substring `cur`.
+
+12. **Push Last Substring**
+	```cpp
+	                ans.push_back(cur);
+	```
+	Once the last character is added, the current substring `cur` is pushed into the result vector `ans`.
+
+13. **Reset Current Substring**
+	```cpp
+	                cur = "";
+	```
+	The current substring `cur` is reset to an empty string after processing the last character.
+
+14. **Else Condition**
+	```cpp
+	            } else 
+	```
+	The else condition handles the case when the current character is not the separator.
+
+15. **Build Substring**
+	```cpp
+	            cur += words[i][j];
+	```
+	If the current character is not the separator, it is appended to the current substring `cur`.
+
+16. **End Outer Loop**
+	```cpp
+	    }
+	```
+	End of the outer loop that iterates over each word in `words`.
+
+17. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The result vector `ans`, containing the split substrings, is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Time complexity is linear in relation to the total length of the input strings.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+Space complexity is linear since we store the resulting substrings in a separate array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-strings-by-separator/description/)
 

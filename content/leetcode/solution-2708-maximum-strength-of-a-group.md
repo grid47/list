@@ -14,185 +14,291 @@ img_src = ""
 youtube = "Kqv0-lRVYwM"
 youtube_upload_date="2023-05-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Kqv0-lRVYwM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array representing the scores of students in an exam. Your task is to form a non-empty group of students such that the group's strength, defined as the product of their scores, is maximized. The goal is to return the maximum possible strength that can be achieved by choosing an optimal group of students.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers representing the scores of the students.
+- **Example:** `Input: nums = [1, -3, 2, -1, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 13
+	- -9 <= nums[i] <= 9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maxStrength(vector<int>& nums) {
-        
-        bool zero = false, allneg = true, allzero = true, pos = false;
-        
-        int ncnt = 0, pcnt = 0;
-        
-        long long ans = 1, neg = 1;
-        int mxn = -10;
-        int n = nums.size();
-        
-        for(int i = 0; i < n; i++) {
-            if(nums[i] > 0) {
-                pcnt++;
-                pos = true;
-                allzero = false;
-                allneg = false;
-                ans *= nums[i];
-            } else if(nums[i] == 0) {
-                zero = true;
-            } else {
-                ncnt++;
-                allzero = false;                
-                mxn= max(mxn, nums[i]);
-                neg *= nums[i];
-            }
-        }
-        
-        if(allzero) return 0;
-        
-        if(ncnt > 0 && (ncnt %2)) {
-            if(pcnt == 0 && ncnt == 1) return zero? 0: neg; 
-            neg = neg / mxn;
-        }
-        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum possible strength of a group of students formed from the input array.
+- **Example:** `Output: 72`
+- **Constraints:**
+	- The result must be the maximum product of selected scores.
 
-        if(pcnt == 0) {
-            return neg;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the product of scores by selecting an optimal subset of the array elements.
+
+- Step 1: Calculate the product of positive numbers and the product of negative numbers in the array.
+- Step 2: Handle special cases where the number of negative numbers is odd.
+- Step 3: If there are zeros, consider excluding the negative numbers or zeros to maximize the product.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, -2, 4, -1]`  \
+  **Explanation:** We can select the elements [3, -2, 4] to maximize the product. The strength would be 3 * -2 * 4 = -24.
+
+- **Input:** `Input: nums = [5, -6, 3, -2, -1]`  \
+  **Explanation:** The maximum strength can be achieved by selecting the elements [5, -6, 3], with a product of 5 * -6 * 3 = 90.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to consider the potential of both positive and negative numbers in the array to maximize the product.
+
+### Initial Thoughts 💭
+- A product of negative numbers can be positive if the number of negative numbers is even.
+- If there is a zero in the array, we might use it to avoid negative products.
+- The optimal solution will involve careful consideration of negative and positive numbers, and possibly excluding negative products if they would decrease the overall strength.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty, as per constraints.
+- The solution should work within the constraints, considering arrays with up to 13 elements.
+- If all numbers are zero, the result should be 0.
+- If there is only one element, return that element.
+- Ensure handling of negative numbers and zeros in the array.
+{{< dots >}}
+## Code 💻
+```cpp
+long long maxStrength(vector<int>& nums) {
+    
+    bool zero = false, allneg = true, allzero = true, pos = false;
+    
+    int ncnt = 0, pcnt = 0;
+    
+    long long ans = 1, neg = 1;
+    int mxn = -10;
+    int n = nums.size();
+    
+    for(int i = 0; i < n; i++) {
+        if(nums[i] > 0) {
+            pcnt++;
+            pos = true;
+            allzero = false;
+            allneg = false;
+            ans *= nums[i];
+        } else if(nums[i] == 0) {
+            zero = true;
+        } else {
+            ncnt++;
+            allzero = false;                
+            mxn= max(mxn, nums[i]);
+            neg *= nums[i];
         }
-        
-        return ans * neg;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks you to find the maximum product of a subset of an array `nums` where the subset contains at least one number. The subset can include both positive and negative numbers, and it can also include zeros. You need to return the maximum strength, which is defined as the product of the selected subset. 
-
-### Approach
-
-To solve this problem, we need to carefully consider the impact of positive numbers, negative numbers, and zero on the product of the subset. Here is a breakdown of the key observations:
-
-1. **Handling Positive Numbers**:
-   - Positive numbers will always increase the product, so we should always include all positive numbers in the product.
-
-2. **Handling Negative Numbers**:
-   - Negative numbers, when taken in even quantities, will result in a positive product. However, if there is an odd count of negative numbers, the product will be negative. Therefore, we need to either exclude the smallest negative number (if we have an odd number of them) or include all negative numbers (if we have an even number of them).
-
-3. **Handling Zeros**:
-   - Zeros do not affect the product (i.e., multiplying by zero results in zero), but they can be useful when there are only negative numbers in the array and we cannot form a positive product. In such cases, including a zero might allow us to get a non-negative product.
-
-4. **Final Strategy**:
-   - Multiply all positive numbers.
-   - For negative numbers, if their count is odd, exclude the smallest (least negative) one to make the product positive.
-   - If the count of negative numbers is even, include all of them.
-   - If there are zero values, we can use one zero if necessary to avoid a negative product when there are no positive numbers.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Initializing Variables
-
-```cpp
-bool zero = false, allneg = true, allzero = true, pos = false;
-int ncnt = 0, pcnt = 0;
-long long ans = 1, neg = 1;
-int mxn = -10;
-int n = nums.size();
-```
-
-- **`zero`**: Tracks whether there's a zero in the array.
-- **`allneg`**: Tracks whether all the numbers are negative (used later to check if there are any positive numbers).
-- **`allzero`**: Tracks whether the array consists only of zeros.
-- **`pos`**: Indicates whether there are any positive numbers in the array.
-- **`ncnt`**: The count of negative numbers.
-- **`pcnt`**: The count of positive numbers.
-- **`ans`**: The variable that will store the final result, initialized to `1` because we're multiplying numbers.
-- **`neg`**: The product of negative numbers, initialized to `1`.
-- **`mxn`**: Tracks the maximum negative number (the least negative) to handle cases where we need to exclude it.
-- **`n`**: The size of the input array.
-
-#### 2. Loop through the Array
-
-```cpp
-for(int i = 0; i < n; i++) {
-    if(nums[i] > 0) {
-        pcnt++;
-        pos = true;
-        allzero = false;
-        allneg = false;
-        ans *= nums[i];
-    } else if(nums[i] == 0) {
-        zero = true;
-    } else {
-        ncnt++;
-        allzero = false;
-        mxn = max(mxn, nums[i]);
-        neg *= nums[i];
+    
+    if(allzero) return 0;
+    
+    if(ncnt > 0 && (ncnt %2)) {
+        if(pcnt == 0 && ncnt == 1) return zero? 0: neg; 
+        neg = neg / mxn;
     }
+    
+
+    if(pcnt == 0) {
+        return neg;
+    }
+    
+    return ans * neg;
 }
 ```
 
-- This loop iterates over the entire array and performs the following:
-  - If the number is positive (`nums[i] > 0`), it increments the `pcnt` counter, sets the `pos` flag to true, and includes this number in the product (`ans`).
-  - If the number is zero (`nums[i] == 0`), it sets the `zero` flag to true.
-  - If the number is negative (`nums[i] < 0`), it increments the `ncnt` counter, updates `mxn` with the least negative number, and multiplies `neg` by this number.
+This function `maxStrength` takes a vector of integers `nums` and calculates the maximum strength of the array by considering the product of positive, negative, and zero values with special handling for edge cases like all elements being zero or the presence of an odd number of negative values.
 
-#### 3. All Zeros Case
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long maxStrength(vector<int>& nums) {
+	```
+	Start of the `maxStrength` function that takes a vector of integers `nums` and returns a long long value representing the maximum strength.
 
-```cpp
-if(allzero) return 0;
-```
+2. **Variable Initialization**
+	```cpp
+	    bool zero = false, allneg = true, allzero = true, pos = false;
+	```
+	Initialize variables: `zero` to track if there are any zeros, `allneg` to check if all numbers are negative, `allzero` to check if all numbers are zero, and `pos` to check if there are any positive numbers.
 
-- If all numbers in the array are zero, the result is `0` because no non-zero product can be formed.
+3. **Counter Variables**
+	```cpp
+	    int ncnt = 0, pcnt = 0;
+	```
+	Initialize counters: `ncnt` for negative numbers and `pcnt` for positive numbers.
 
-#### 4. Handling Negative Numbers
+4. **Initialization of Answer Variables**
+	```cpp
+	    long long ans = 1, neg = 1;
+	```
+	Initialize variables `ans` and `neg` to 1 to hold the product of positive numbers and negative numbers, respectively.
 
-```cpp
-if(ncnt > 0 && (ncnt % 2)) {
-    if(pcnt == 0 && ncnt == 1) return zero ? 0 : neg; 
-    neg = neg / mxn;
-}
-```
+5. **Empty Line**
+	```cpp
+	    int mxn = -10;
+	```
+	Initialize `mxn` to -10 to keep track of the largest negative number.
 
-- If there are negative numbers and their count is odd (`ncnt % 2`), we must exclude the smallest negative number (i.e., the least negative) to make the product positive.
-- If there are no positive numbers and only one negative number, then we return `0` if there's a zero in the array. Otherwise, the result is just the negative number itself (`neg`).
-- Otherwise, we divide `neg` by the least negative number (`mxn`), effectively removing it from the product to make the product positive.
+6. **Initialize Array Size**
+	```cpp
+	    int n = nums.size();
+	```
+	Get the size of the input vector `nums` and store it in the variable `n`.
 
-#### 5. Handling No Positive Numbers
+7. **Loop Through Array**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop to iterate over each element of the vector `nums`.
 
-```cpp
-if(pcnt == 0) {
-    return neg;
-}
-```
+8. **Check Positive Value**
+	```cpp
+	        if(nums[i] > 0) {
+	```
+	Check if the current number is positive.
 
-- If there are no positive numbers (`pcnt == 0`), the result is simply the product of negative numbers (`neg`).
+9. **Increment Positive Counter**
+	```cpp
+	            pcnt++;
+	```
+	Increment the `pcnt` counter for positive numbers.
 
-#### 6. Final Calculation
+10. **Set Positive Flag**
+	```cpp
+	            pos = true;
+	```
+	Set the `pos` flag to true indicating that a positive number has been found.
 
-```cpp
-return ans * neg;
-```
+11. **Update Zero Flag**
+	```cpp
+	            allzero = false;
+	```
+	Set `allzero` to false as we have found a non-zero number.
 
-- If there are positive numbers, we return the product of positive numbers (`ans`) multiplied by the product of negative numbers (`neg`).
+12. **Update Negative Flag**
+	```cpp
+	            allneg = false;
+	```
+	Set `allneg` to false as we have found a non-negative number.
 
-### Complexity
+13. **Multiply Positive Value**
+	```cpp
+	            ans *= nums[i];
+	```
+	Multiply the current positive number with `ans` to accumulate the product.
 
-#### Time Complexity
+14. **Check for Zero**
+	```cpp
+	        } else if(nums[i] == 0) {
+	```
+	Check if the current number is zero.
 
-The time complexity of this algorithm is **O(n)**, where `n` is the size of the input array. We loop through the array once, performing constant time operations for each element, resulting in a linear time complexity.
+15. **Set Zero Flag**
+	```cpp
+	            zero = true;
+	```
+	Set the `zero` flag to true indicating that a zero has been found.
 
-#### Space Complexity
+16. **Handle Negative Value**
+	```cpp
+	        } else {
+	```
+	Handle the case where the current number is negative.
 
-The space complexity is **O(1)**, as we only use a constant amount of extra space for the variables, regardless of the size of the input array.
+17. **Increment Negative Counter**
+	```cpp
+	            ncnt++;
+	```
+	Increment the `ncnt` counter for negative numbers.
 
-### Conclusion
+18. **Update Zero Flag Again**
+	```cpp
+	            allzero = false;                
+	```
+	Set `allzero` to false again as we found a non-zero number.
 
-This solution efficiently computes the maximum product of a subset of the input array by considering the effects of positive and negative numbers on the product. It handles the cases for negative numbers, positive numbers, and zeros by carefully excluding or including elements to maximize the product. The time complexity is linear, making it efficient for large inputs.
+19. **Update Maximum Negative**
+	```cpp
+	            mxn= max(mxn, nums[i]);
+	```
+	Update `mxn` to keep track of the largest negative number.
+
+20. **Multiply Negative Value**
+	```cpp
+	            neg *= nums[i];
+	```
+	Multiply the current negative number with `neg` to accumulate the product of negative numbers.
+
+21. **Check if All Zeroes**
+	```cpp
+	    if(allzero) return 0;
+	```
+	Check if all numbers in the array were zero and return 0 in that case.
+
+22. **Handle Odd Number of Negatives**
+	```cpp
+	    if(ncnt > 0 && (ncnt %2)) {
+	```
+	If there are negative numbers and their count is odd, handle by excluding the largest negative number.
+
+23. **Handle Special Case for One Negative**
+	```cpp
+	        if(pcnt == 0 && ncnt == 1) return zero? 0: neg; 
+	```
+	If there are no positive numbers and exactly one negative number, return the product (either zero or the negative value).
+
+24. **Update Negative Product**
+	```cpp
+	        neg = neg / mxn;
+	```
+	Remove the largest negative number from the product of negative numbers.
+
+25. **Check for No Positive Numbers**
+	```cpp
+	    if(pcnt == 0) {
+	```
+	Check if there are no positive numbers in the array.
+
+26. **Return Negative Product**
+	```cpp
+	        return neg;
+	```
+	Return the product of negative numbers if there are no positive numbers.
+
+27. **Return Maximum Strength**
+	```cpp
+	    return ans * neg;
+	```
+	Return the final product of positive and negative values as the maximum strength.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we are iterating through the array only once to compute the necessary product and handle special cases.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we are only using a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-strength-of-a-group/description/)
 

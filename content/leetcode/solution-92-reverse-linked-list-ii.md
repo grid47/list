@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "RF_M9tX4Eag"
 youtube_upload_date="2021-10-01"
 youtube_thumbnail="https://i.ytimg.com/vi/RF_M9tX4Eag/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,138 +28,196 @@ youtube_thumbnail="https://i.ytimg.com/vi/RF_M9tX4Eag/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the head of a singly linked list and two integers `left` and `right` where `left <= right`, reverse the nodes of the linked list starting at position `left` and ending at position `right`. Return the modified linked list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The function receives the head of a singly linked list and two integers `left` and `right` representing the positions in the list to reverse.
+- **Example:** `Input: head = [7,9,11,5,2], left = 3, right = 5`
+- **Constraints:**
+	- The number of nodes in the list is n.
+	- 1 <= n <= 500
+	- -500 <= Node.val <= 500
+	- 1 <= left <= right <= n
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* reverseBetween(ListNode* head, int left, int right) {
-        if (head == NULL) return head;
-        ListNode* dummy = new ListNode(0);
-        dummy->next     = head;
-        ListNode* pre   = dummy;
-        for(int i = 1; i < left; i++)
-            pre = pre->next;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the head of the modified singly linked list after reversing the specified section.
+- **Example:** `Output: [7,9,2,5,11]`
+- **Constraints:**
+	- The output list retains all nodes from the original list.
+	- The reversed portion is accurately modified while the rest remains untouched.
 
-        ListNode* start =   pre->next;
-        ListNode* then  = start->next;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Reverse the nodes of a singly linked list between positions `left` and `right` in a single traversal.
 
-        for(int i = 0; i < right - left; i++) {
-            start->next =  then->next;
-             then->next =   pre->next;
-              pre->next = then;
-            then        = start->next;
-        }
-        return dummy->next;        
+- Create a dummy node pointing to the head of the list.
+- Traverse to the node immediately before position `left`.
+- Perform in-place node re-linking to reverse the sublist between `left` and `right`.
+- Reconnect the reversed sublist to the remaining parts of the list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is non-circular and contains valid node values.
+- `left` and `right` are always within valid bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [3,6,1,8,5], left = 2, right = 4`  \
+  **Explanation:** Reverse the sublist from position 2 to 4. Resulting list is [3,8,1,6,5].
+
+- **Input:** `Input: head = [10], left = 1, right = 1`  \
+  **Explanation:** Since the list contains a single node and `left == right`, the list remains [10].
+
+{{< dots >}}
+## Approach 🚀
+Reverse a sublist in the linked list using in-place re-linking. Maintain pointers to manage the reversed sublist and the unaffected portions efficiently.
+
+### Initial Thoughts 💭
+- Reversing a sublist can be done by adjusting the next pointers of the nodes within the range.
+- A dummy node helps handle edge cases cleanly, such as reversing from the head of the list.
+- Minimize traversal by reversing the sublist in-place.
+- Optimize space usage to O(1) by not using additional data structures.
+{{< dots >}}
+### Edge Cases 🌐
+- Input list is NULL.
+- List has 500 nodes and requires reversing a large sublist.
+- Input values at the boundary of valid ranges, e.g., `left = 1`, `right = n`.
+- Ensure nodes outside the reversal range remain unmodified.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* reverseBetween(ListNode* head, int left, int right) {
+    if (!head) return head;
+
+    ListNode* dummy = new ListNode(0);
+    dummy->next = head;
+
+    ListNode* prev = dummy;
+    for (int i = 0; i < left - 1; ++i) {
+        prev = prev->next;
     }
-};
-{{< /highlight >}}
----
 
-### 🔄 **Reverse Linked List Between Positions**
+    ListNode* curr = prev->next;
+    ListNode* next = curr->next;
 
-The problem asks us to reverse a portion of a singly linked list between two given positions `left` and `right`. Specifically, the nodes from position `left` to `right` (both inclusive) should be reversed while the rest of the list remains unchanged.
+    for (int i = 0; i < right - left; ++i) {
+        curr->next = next->next;
+        next->next = prev->next;
+        prev->next = next;
+        next = curr->next;
+    }
 
-#### Example Walkthrough:
-- **Input**: `head = [1, 2, 3, 4, 5], left = 2, right = 4`
-- **Output**: `[1, 4, 3, 2, 5]`
-
-In this example, the sublist from position 2 to 4 is reversed, resulting in `[4, 3, 2]` while the rest of the list remains `[1, 5]`.
-
-### Approach
-
-To solve this problem efficiently, we use **pointer manipulation** to reverse the sublist in-place. This approach leverages the flexibility of pointers to manipulate the list directly, reversing only the desired portion while keeping the rest of the list intact.
-
-#### Key Steps:
-1. **Dummy Node**: Introduce a dummy node to simplify boundary cases, particularly when the reversal includes the first node of the list.
-2. **Pointer Traversal**: Traverse the list to reach the node just before the `left` position and the node at the `left` position (where the reversal begins).
-3. **Sublist Reversal**: Reverse the portion of the list by adjusting the `next` pointers in the sublist.
-4. **Return the Modified List**: After performing the reversal, return the head of the modified list, which might have changed due to the manipulation.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Create a Dummy Node
-
-```cpp
-ListNode* dummy = new ListNode(0);
-dummy->next = head;
-```
-
-- A **dummy node** with value `0` is introduced. This node points to the head of the list. The dummy node simplifies boundary cases, particularly when the reversal involves the first node of the list.
-
-#### Step 2: Move `pre` to the Node Before `left`
-
-```cpp
-ListNode* pre = dummy;
-for (int i = 1; i < left; i++) {
-    pre = pre->next;
+    return dummy->next;
 }
 ```
 
-- We initialize `pre` at the dummy node and move it to the node just before the `left` position by iterating `left-1` times.
+This code reverses a linked list between the given positions `left` and `right`.
 
-#### Step 3: Identify `start` and `then`
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* reverseBetween(ListNode* head, int left, int right) {
+	```
+	Declares a function `reverseBetween` that takes a linked list `head`, a starting position `left`, and an ending position `right` as input and returns the modified linked list.
 
-```cpp
-ListNode* start = pre->next;
-ListNode* then = start->next;
-```
+2. **Edge Case Check**
+	```cpp
+	    if (!head) return head;
+	```
+	Checks if the input linked list is empty. If so, returns the head directly.
 
-- The node at `pre->next` is the first node of the sublist to reverse, called `start`.
-- The node at `start->next` is referred to as `then`. This node will be moved during each iteration of the reversal.
+3. **Dummy Node Initialization**
+	```cpp
+	    ListNode* dummy = new ListNode(0);
+	```
+	Creates a dummy node to simplify the reversal process, especially when reversing from the beginning of the list.
 
-#### Step 4: Reversing the Sublist
+4. **Pointer Assignment**
+	```cpp
+	    dummy->next = head;
+	```
+	Sets the `next` pointer of the dummy node to the head of the original linked list.
 
-```cpp
-for (int i = 0; i < right - left; i++) {
-    start->next = then->next;
-    then->next = pre->next;
-    pre->next = then;
-    then = start->next;
-}
-```
+5. **Pointer Initialization**
+	```cpp
+	    ListNode* prev = dummy;
+	```
+	Initializes a `prev` pointer to the dummy node, which will be used to track the node before the reversal range.
 
-- We iterate `right - left` times, reversing the sublist in-place. In each iteration:
-  - **Remove `then` from its current position** by updating `start->next = then->next`.
-  - **Insert `then` after `pre`** by setting `then->next = pre->next`.
-  - Move `pre->next` to point to `then`, effectively placing it in the reversed portion.
-  - Finally, update `then` to the next node to continue the reversal.
+6. **Loop Iteration, Pointer Update**
+	```cpp
+	    for (int i = 0; i < left - 1; ++i) {
+	        prev = prev->next;
+	    }
+	```
+	Iterates `left - 1` times to move the `prev` pointer to the node just before the start of the reversal range.
 
-#### Step 5: Return the New Head
+7. **Pointer Initialization**
+	```cpp
+	    ListNode* curr = prev->next;
+	```
+	Initializes a `curr` pointer to the first node in the reversal range.
 
-```cpp
-return dummy->next;
-```
+8. **Pointer Initialization**
+	```cpp
+	    ListNode* next = curr->next;
+	```
+	Initializes a `next` pointer to the node after `curr`, which will be used to temporarily store the next node during the reversal process.
 
-- After completing the reversal, the head of the list is now `dummy->next`, as the dummy node's next pointer points to the new head of the list.
+9. **Loop Iteration, Pointer Manipulation**
+	```cpp
+	    for (int i = 0; i < right - left; ++i) {
+	```
+	Iterates `right - left` times to reverse the nodes in the specified range.
 
-### Complexity Analysis
+10. **Pointer Manipulation**
+	```cpp
+	        curr->next = next->next;
+	```
+	Sets the `next` pointer of the current node `curr` to the node after the next node.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the number of nodes in the list. We traverse the list once to move the `pre` pointer and perform a constant amount of work for each of the `right - left` iterations to reverse the sublist. Thus, the overall time complexity is linear in the size of the list.
+11. **Pointer Manipulation**
+	```cpp
+	        next->next = prev->next;
+	```
+	Sets the `next` pointer of the next node `next` to the node that `prev` currently points to, effectively reversing the link.
 
-#### Space Complexity:
-- **O(1)**. We only use a constant amount of extra space: the dummy node and a few pointers (`pre`, `start`, and `then`). No additional space is required for storing or creating new nodes.
+12. **Pointer Manipulation**
+	```cpp
+	        prev->next = next;
+	```
+	Sets the `next` pointer of the `prev` node to the current `next` node, linking it to the reversed portion.
 
-### Conclusion
+13. **Pointer Update**
+	```cpp
+	        next = curr->next;
+	```
+	Moves the `next` pointer to the next node to be reversed in the next iteration.
 
-This solution efficiently reverses a portion of a singly linked list in **O(n)** time with **O(1)** space complexity. By using a dummy node and manipulating pointers, we reverse the desired sublist without creating new nodes or altering the structure of the rest of the list. The algorithm is optimal and handles all edge cases, including when the `left` position is the head of the list or when the sublist to reverse is at the start or end of the list.
+14. **Return**
+	```cpp
+	    return dummy->next;
+	```
+	Returns the head of the modified linked list, which is the `next` pointer of the dummy node.
 
-This method showcases the power of pointer manipulation to modify linked lists in-place and is a great technique for problems involving sublist manipulations.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-Happy coding! 🚀
+The entire list may need to be traversed in the worst case, where `right = n`.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution uses constant space for pointers and variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-linked-list-ii/description/)
 

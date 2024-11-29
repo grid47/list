@@ -14,143 +14,260 @@ img_src = ""
 youtube = "2FIK7F0Qs38"
 youtube_upload_date="2023-03-26"
 youtube_thumbnail="https://i.ytimg.com/vi/2FIK7F0Qs38/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an undirected graph with n nodes and a list of edges connecting the nodes. The goal is to find the number of pairs of distinct nodes that are unreachable from each other.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer n representing the number of nodes, followed by a list of edges where each edge is a pair of integers representing nodes connected by an edge.
+- **Example:** `n = 4, edges = [[0,1],[1,2],[2,3]]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 0 <= edges.length <= 2 * 10^5
+	- Each edge connects two different nodes, and there are no repeated edges.
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of pairs of distinct nodes that are unreachable from each other.
+- **Example:** `For n = 7 and edges = [[0,2],[0,5],[2,4],[1,6],[5,4]], the output is 14.`
+- **Constraints:**
+	- The output should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the number of unreachable pairs by finding the connected components in the graph and calculating how many pairs exist between nodes that do not belong to the same component.
+
+- 1. Build an adjacency list representation of the graph.
+- 2. Perform a DFS or BFS to find all connected components.
+- 3. For each connected component, calculate the number of unreachable pairs.
+- 4. Subtract the reachable pairs from the total possible pairs (n * (n-1) / 2).
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph is undirected.
+- The nodes are numbered from 0 to n-1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 4, edges = [[0,1],[1,2],[2,3]]`  \
+  **Explanation:** In this example, all nodes are connected, so there are no unreachable pairs. Hence, the output is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves finding connected components and calculating unreachable pairs based on the sizes of those components.
+
+### Initial Thoughts 💭
+- The problem boils down to finding connected components in an undirected graph and counting how many node pairs belong to different components.
+- We need to calculate the total possible pairs and subtract the pairs that belong to the same component, which are reachable.
+{{< dots >}}
+### Edge Cases 🌐
+- If no edges are given, all nodes are isolated, and the number of unreachable pairs is the maximum number of pairs.
+- The algorithm must handle graphs with up to 10^5 nodes and 2 * 10^5 edges efficiently.
+- If there is only one node, no pairs exist, so the result is 0.
+- Ensure that edge cases such as graphs with no edges or all nodes in one component are handled.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    typedef long long ll;
+typedef long long ll;
 public:
-    long long countPairs(int n, vector<vector<int>>& es) {
-        
-        vector<vector<int>> g(n, vector<int>());
-        for(vector<int> e: es){
-            g[e[0]].push_back(e[1]);
-            g[e[1]].push_back(e[0]);
-            
-        }
-        vector<bool> vis(n, false);
-        ll res = (ll) n * (n - 1) /2;
-            
-        for(int i = 0; i < n; i++) {
-            ll ret = 0;
-      if(!vis[i])
-      ret = dfs(i, g, vis);
-      res -= (ret * (ret -1)/2);
-        }
-        
-        return res;
+long long countPairs(int n, vector<vector<int>>& es) {
+    
+    vector<vector<int>> g(n, vector<int>());
+    for(vector<int> e: es){
+        g[e[0]].push_back(e[1]);
+        g[e[1]].push_back(e[0]);
         
     }
-    
-    ll dfs(int i, vector<vector<int>> &g, vector<bool> &vis) {
+    vector<bool> vis(n, false);
+    ll res = (ll) n * (n - 1) /2;
         
-        if(vis[i]) return 0;
-        vis[i] = true;
-        ll res = 1;
-        for(int v : g[i]) {
-            res += dfs(v, g, vis);
-        }
-        return res;
+    for(int i = 0; i < n; i++) {
+        ll ret = 0;
+  if(!vis[i])
+  ret = dfs(i, g, vis);
+  res -= (ret * (ret -1)/2);
     }
     
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding the number of pairs of nodes in a graph that are not connected by an edge. We are given an undirected graph with `n` nodes and `m` edges, and we need to determine the number of pairs of nodes that are not connected either directly or indirectly through other nodes (i.e., not part of the same connected component).
-
-### Approach
-
-The approach to solving this problem involves:
-1. **Graph Construction**: Constructing an adjacency list to represent the graph from the input edges.
-2. **DFS for Connected Components**: Using Depth-First Search (DFS) to traverse the graph and identify connected components. Each connected component is a subset of nodes where every pair of nodes is reachable either directly or through other nodes.
-3. **Counting Pairs**: The total number of pairs of nodes in the graph can be calculated as `n * (n - 1) / 2`. Once we have the sizes of the connected components, we can calculate the number of pairs within each connected component and subtract them from the total number of pairs.
-
-#### Key Ideas:
-- **Total Pairs**: The total number of possible pairs of nodes in the graph is given by the formula `n * (n - 1) / 2`, where `n` is the number of nodes.
-- **Connected Pairs**: For each connected component, the number of pairs within that component can be calculated using the formula `size * (size - 1) / 2`, where `size` is the number of nodes in that component. These pairs are **connected**.
-- **Disconnected Pairs**: The number of pairs that are not connected is the total number of pairs minus the number of connected pairs.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Graph Representation
-```cpp
-vector<vector<int>> g(n, vector<int>());
-for (vector<int> e : es) {
-    g[e[0]].push_back(e[1]);
-    g[e[1]].push_back(e[0]);
+    return res;
+    
 }
-```
-- We create an adjacency list `g` where `g[i]` contains a list of nodes that are directly connected to node `i`. The input edges are used to populate this adjacency list. For each edge `[u, v]`, we add `v` to the adjacency list of `u`, and vice versa because the graph is undirected.
 
-#### Step 2: Initialize Variables
-```cpp
-vector<bool> vis(n, false);
-ll res = (ll)n * (n - 1) / 2;
-```
-- **`vis`**: A boolean vector `vis` is used to keep track of which nodes have been visited during the DFS traversal.
-- **`res`**: The initial number of total pairs of nodes is calculated as `n * (n - 1) / 2`, where `n` is the number of nodes in the graph. This is the upper bound, i.e., the number of possible pairs if no nodes were connected.
-
-#### Step 3: DFS Traversal to Find Connected Components
-```cpp
-for (int i = 0; i < n; i++) {
-    ll ret = 0;
-    if (!vis[i])
-        ret = dfs(i, g, vis);
-    res -= (ret * (ret - 1) / 2);
-}
-```
-- We iterate through each node `i`. If it has not been visited (`!vis[i]`), we perform a DFS traversal starting from `i`.
-- The result from DFS (`ret`) is the size of the connected component that includes node `i`.
-- The number of connected pairs within this component is calculated as `ret * (ret - 1) / 2`, and this is subtracted from the total number of pairs (`res`).
-
-#### Step 4: DFS Function to Compute Component Size
-```cpp
 ll dfs(int i, vector<vector<int>> &g, vector<bool> &vis) {
-    if (vis[i]) return 0;
+    
+    if(vis[i]) return 0;
     vis[i] = true;
     ll res = 1;
-    for (int v : g[i]) {
+    for(int v : g[i]) {
         res += dfs(v, g, vis);
     }
     return res;
 }
+
 ```
-- The DFS function starts from node `i` and explores all nodes that are reachable from `i` (i.e., all nodes in the same connected component).
-- **`res`**: The `res` variable keeps track of the size of the connected component.
-- We recursively call DFS on all neighbors of the current node. For each unvisited neighbor `v`, the size of the connected component is increased by calling `dfs(v, g, vis)` and adding the result.
 
-#### Step 5: Return Final Result
-```cpp
-return res;
-```
-- After processing all nodes, the final value of `res` represents the number of pairs of nodes that are not connected directly or indirectly.
+This class provides a solution for counting the number of valid pairs in a graph. The function `countPairs` calculates the number of pairs that can be formed from nodes in the graph where no two nodes in a pair are connected by an edge. It uses Depth First Search (DFS) to identify connected components and subtracts invalid pairs formed within the same component.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	Define the `Solution` class that contains the method to solve the problem of counting pairs in a graph.
 
-#### Time Complexity:
-- **Graph Construction**: Building the adjacency list takes **O(m)** time, where `m` is the number of edges.
-- **DFS Traversal**: Each node and edge is visited exactly once during the DFS, so the DFS traversal takes **O(n + m)** time.
-- Therefore, the total time complexity is **O(n + m)**, which is optimal for this problem.
+2. **Type Alias**
+	```cpp
+	typedef long long ll;
+	```
+	Define a type alias `ll` for `long long` to simplify the code and make it more readable.
 
-#### Space Complexity:
-- **Adjacency List**: Storing the graph requires **O(n + m)** space.
-- **Visited Array**: The `vis` array requires **O(n)** space.
-- **Recursion Stack**: In the worst case, the recursion stack for DFS can go as deep as the number of nodes in the graph, requiring **O(n)** space.
-- Therefore, the total space complexity is **O(n + m)**.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Declare the following members of the class as public so that they can be accessed externally.
 
-### Conclusion
+4. **Method Declaration**
+	```cpp
+	long long countPairs(int n, vector<vector<int>>& es) {
+	```
+	Declare the method `countPairs` which takes an integer `n` (the number of nodes) and a reference to a 2D vector `es` (representing the edges) and returns a `long long` value representing the count of valid pairs.
 
-The algorithm solves the problem efficiently by first building the graph using an adjacency list and then performing a DFS traversal to find the sizes of the connected components. The number of pairs of nodes that are not connected is then calculated by subtracting the number of connected pairs from the total possible pairs. The solution runs in linear time relative to the size of the graph, making it well-suited for large inputs. The space complexity is also optimal, using only a few additional data structures for storing the graph and tracking visited nodes.
+5. **Graph Initialization**
+	```cpp
+	    vector<vector<int>> g(n, vector<int>());
+	```
+	Initialize an adjacency list `g` of size `n`, where each element is a vector to store the nodes adjacent to each node.
 
-This approach leverages Depth-First Search (DFS) to identify connected components, making it a robust and effective method for solving graph-related problems involving connectivity.
+6. **Edge Insertion**
+	```cpp
+	    for(vector<int> e: es){
+	```
+	Iterate through each edge `e` in the `es` list.
+
+7. **Bidirectional Edge Creation**
+	```cpp
+	        g[e[0]].push_back(e[1]);
+	```
+	For each edge `e`, add the destination node `e[1]` to the adjacency list of the source node `e[0]`.
+
+8. **Bidirectional Edge Creation**
+	```cpp
+	        g[e[1]].push_back(e[0]);
+	```
+	Similarly, add the source node `e[0]` to the adjacency list of the destination node `e[1]` to ensure bidirectional connectivity.
+
+9. **Visited Array Initialization**
+	```cpp
+	    vector<bool> vis(n, false);
+	```
+	Initialize a `vis` array of size `n` to keep track of whether each node has been visited during the DFS.
+
+10. **Total Pairs Calculation**
+	```cpp
+	    ll res = (ll) n * (n - 1) /2;
+	```
+	Calculate the total number of pairs that can be formed from the `n` nodes using the formula `n * (n - 1) / 2`.
+
+11. **DFS Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Loop through each node `i` in the graph to perform DFS on unvisited nodes.
+
+12. **Temporary Result Variable**
+	```cpp
+	        ll ret = 0;
+	```
+	Initialize a temporary variable `ret` to store the size of the connected component found by DFS.
+
+13. **DFS Call**
+	```cpp
+	  if(!vis[i])
+	```
+	Check if the node `i` has not been visited yet.
+
+14. **DFS Execution**
+	```cpp
+	  ret = dfs(i, g, vis);
+	```
+	If node `i` is not visited, perform DFS starting from node `i` to find all nodes in its connected component and store the result in `ret`.
+
+15. **Invalid Pair Subtraction**
+	```cpp
+	  res -= (ret * (ret -1)/2);
+	```
+	Subtract the number of invalid pairs within the current connected component from the total valid pairs. This is calculated as `(ret * (ret - 1) / 2)`.
+
+16. **Return Final Result**
+	```cpp
+	    return res;
+	```
+	Return the final count of valid pairs after subtracting invalid pairs from the total.
+
+17. **DFS Method Declaration**
+	```cpp
+	ll dfs(int i, vector<vector<int>> &g, vector<bool> &vis) {
+	```
+	Declare the helper method `dfs` which performs Depth First Search (DFS) to find the size of a connected component starting from node `i`.
+
+18. **DFS Base Case**
+	```cpp
+	    if(vis[i]) return 0;
+	```
+	If the node `i` has already been visited, return 0 to prevent reprocessing.
+
+19. **Mark Node as Visited**
+	```cpp
+	    vis[i] = true;
+	```
+	Mark the node `i` as visited to avoid revisiting it during DFS.
+
+20. **Result Initialization**
+	```cpp
+	    ll res = 1;
+	```
+	Initialize the result variable `res` to 1, as the starting node is counted as part of the connected component.
+
+21. **DFS Recursion**
+	```cpp
+	    for(int v : g[i]) {
+	```
+	For each neighboring node `v` of node `i`, recursively perform DFS to explore the entire connected component.
+
+22. **DFS Call**
+	```cpp
+	        res += dfs(v, g, vis);
+	```
+	Add the result of the DFS call on the neighboring node `v` to the total count `res`.
+
+23. **Return DFS Result**
+	```cpp
+	    return res;
+	```
+	Return the size of the connected component found by DFS.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The time complexity is O(n + m), where n is the number of nodes and m is the number of edges, as we need to traverse all nodes and edges.
+
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The space complexity is O(n + m), as we store the adjacency list and visited nodes.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/description/)
 

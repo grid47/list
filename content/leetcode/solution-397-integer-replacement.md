@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "5ksn2Myjlig"
 youtube_upload_date="2020-11-20"
 youtube_thumbnail="https://i.ytimg.com/vi/5ksn2Myjlig/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,165 +28,152 @@ youtube_thumbnail="https://i.ytimg.com/vi/5ksn2Myjlig/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a positive integer `n`, you can perform one of the following operations: If `n` is even, divide `n` by 2. If `n` is odd, you can either add 1 to `n` or subtract 1 from `n`. Your task is to return the minimum number of operations required to reduce `n` to 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer `n` (1 <= n <= 2^31 - 1).
+- **Example:** `Input: n = 6`
+- **Constraints:**
+	- 1 <= n <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int integerReplacement(int n) {
-        if(n == INT_MAX) return 32;
-        int cnt = 0;
-        while(n > 1) {
-            if(n % 2 == 0) n /= 2;
-            else {
-                if((n + 1) %4 == 0 && (n - 1) != 2) n++;
-                else n--;
-            }
-            cnt++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the minimum number of operations required to reduce `n` to 1.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The solution must return the minimum number of operations required.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of operations required to reduce `n` to 1 by strategically choosing the best operation at each step.
+
+- If `n` is even, divide by 2.
+- If `n` is odd, choose either `n + 1` or `n - 1` based on which operation leads to a smaller number of operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input integer `n` is always a valid positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 6`  \
+  **Explanation:** We perform operations on `6`: 6 -> 3 -> 2 -> 1, taking 3 steps.
+
+- **Input:** `Input: n = 15`  \
+  **Explanation:** We perform operations on `15`: 15 -> 16 -> 8 -> 4 -> 2 -> 1, taking 5 steps.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses a greedy algorithm to perform the optimal operation at each step, choosing either `n + 1` or `n - 1` based on the parity of the number.
+
+### Initial Thoughts 💭
+- For even numbers, dividing by 2 is always optimal.
+- For odd numbers, we need to decide whether adding or subtracting 1 leads to fewer steps.
+- We need to use the parity of `n` to decide the most efficient operation for odd numbers.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is always a valid integer `n` between 1 and 2^31 - 1.
+- Ensure the solution can handle large values of `n` (up to 2^31 - 1) efficiently.
+- Handle small inputs like `n = 1` directly (no operations needed).
+- Handle edge cases where `n` is very small or very large.
+{{< dots >}}
+## Code 💻
+```cpp
+int integerReplacement(int n) {
+    if(n == INT_MAX) return 32;
+    int cnt = 0;
+    while(n > 1) {
+        if(n % 2 == 0) n /= 2;
+        else {
+            if((n + 1) %4 == 0 && (n - 1) != 2) n++;
+            else n--;
         }
-        return cnt;
+        cnt++;
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-The problem asks us to determine the **minimum number of operations** required to reduce a given integer `n` to 1 using the following operations:
-
-1. If `n` is **even**, divide `n` by 2.
-2. If `n` is **odd**, either increment or decrement `n` by 1.
-
-Our goal is to return the minimum number of operations needed to reach `1` from `n`. Let's dive into the approach to tackle this problem efficiently! 😎
-
----
-
-### 🧠 Approach
-
-To solve this problem, we can use a **greedy strategy** that aims to reduce the number `n` as efficiently as possible:
-
-- If `n` is **even**, we divide `n` by 2, as it's the most efficient operation.
-- If `n` is **odd**, we have two options:
-  - **Increment `n`**: If `(n + 1) % 4 == 0` (i.e., `n + 1` is divisible by 4), this will potentially allow us to reach a number that can be halved more quickly in the next steps.
-  - **Decrement `n`**: If the condition is not met, we decrement `n` to make it even, allowing us to use the division operation.
-
-By making these decisions, we aim to minimize the number of steps to reach 1. Let's break it down! 💡
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s walk through the code and understand how it works:
-
-#### Step 1: Handle the Edge Case for `INT_MAX`
-```cpp
-if(n == INT_MAX) return 32;
-```
-- If `n` is equal to **`INT_MAX`** (i.e., `2^31 - 1`), we can directly return `32`, since we know from its binary structure that it will always take exactly 32 steps to reach 1. This is a shortcut for efficiency. 🚀
-
----
-
-#### Step 2: Initialize the Counter
-```cpp
-int cnt = 0;
-```
-- We initialize a counter `cnt` to **track** the number of operations we perform. Every time we modify `n`, we increase this counter.
-
----
-
-#### Step 3: Main Loop to Reduce `n`
-```cpp
-while(n > 1) {
-    if(n % 2 == 0) n /= 2;
-    else {
-        if((n + 1) % 4 == 0 && (n - 1) != 2) n++;
-        else n--;
-    }
-    cnt++;
+    return cnt;
 }
 ```
-- We enter a loop that continues **until `n` becomes 1**.
-- If `n` is **even**, we simply divide it by 2. This operation drastically reduces the value of `n`. 📉
-- If `n` is **odd**, we decide whether to increment or decrement:
-  - **Increment** `n` if `(n + 1) % 4 == 0` and `(n - 1) != 2`, because making `n + 1` divisible by 4 can potentially lead to faster halving.
-  - **Decrement** `n` otherwise, so it becomes even and we can divide it in the next step. 🔄
-- After each operation, we increment `cnt` to keep track of the number of steps taken. ⏳
 
----
+The function `integerReplacement` aims to return the minimum number of operations required to reduce a number `n` to 1. The operations allowed are either halving the number if it is even or incrementing or decrementing it when it is odd, with some specific conditions for choosing increment over decrement.
 
-#### Step 4: Return the Result
-```cpp
-return cnt;
-```
-- Once `n` becomes 1, we return `cnt`, which holds the **minimum number of operations** required to reduce `n` to 1. 🏁
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int integerReplacement(int n) {
+	```
+	This line defines the function `integerReplacement`, which takes an integer `n` as input and returns an integer representing the minimum number of steps to reduce `n` to 1.
 
----
+2. **Edge Case Check**
+	```cpp
+	    if(n == INT_MAX) return 32;
+	```
+	If `n` is the maximum integer value (`INT_MAX`), the function returns 32 directly, as it would require 32 operations to reduce it to 1.
 
-### 📈 Example Walkthrough
+3. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	The variable `cnt` is initialized to count the number of operations performed to reduce `n` to 1.
 
-Let's go through a couple of examples to see how the algorithm works in action! 🎬
+4. **Loop Setup**
+	```cpp
+	    while(n > 1) {
+	```
+	A `while` loop is used to continue the process until `n` becomes 1.
 
-#### Example 1: `n = 8`
-```cpp
-integerReplacement(8);
-```
-1. **Initial value of `n = 8`**:
-   - `n` is **even**, so divide by 2: `n = 8 / 2 = 4` (1 operation)
-   - `cnt = 1`
-   
-2. **`n = 4`**:
-   - `n` is **even**, so divide by 2: `n = 4 / 2 = 2` (1 operation)
-   - `cnt = 2`
-   
-3. **`n = 2`**:
-   - `n` is **even**, so divide by 2: `n = 2 / 2 = 1` (1 operation)
-   - `cnt = 3`
-   
-**Result**: The function returns `cnt = 3`, meaning it took **3 operations** to reduce `n = 8` to 1. 🏆
+5. **Even Case Handling**
+	```cpp
+	        if(n % 2 == 0) n /= 2;
+	```
+	If `n` is even (i.e., divisible by 2), it is halved as the next operation.
 
----
+6. **Odd Case Handling**
+	```cpp
+	        else {
+	```
+	If `n` is odd, we need to either increment or decrement it.
 
-#### Example 2: `n = 7`
-```cpp
-integerReplacement(7);
-```
-1. **Initial value of `n = 7`**:
-   - `n` is **odd**, and `(n + 1) % 4 == 0` (because 8 is divisible by 4), so **increment** `n`: `n = 7 + 1 = 8` (1 operation)
-   - `cnt = 1`
-   
-2. **`n = 8`**:
-   - `n` is **even**, so divide by 2: `n = 8 / 2 = 4` (1 operation)
-   - `cnt = 2`
-   
-3. **`n = 4`**:
-   - `n` is **even**, so divide by 2: `n = 4 / 2 = 2` (1 operation)
-   - `cnt = 3`
-   
-4. **`n = 2`**:
-   - `n` is **even**, so divide by 2: `n = 2 / 2 = 1` (1 operation)
-   - `cnt = 4`
-   
-**Result**: The function returns `cnt = 4`, meaning it took **4 operations** to reduce `n = 7` to 1. 🏅
+7. **Increment Case**
+	```cpp
+	            if((n + 1) % 4 == 0 && (n - 1) != 2) n++;
+	```
+	If incrementing `n` leads to a number divisible by 4 and it is not equal to 2, the function increments `n`.
 
----
+8. **Decrement Case**
+	```cpp
+	            else n--;
+	```
+	If the condition for incrementing is not satisfied, the function decrements `n`.
 
-### 📊 Complexity Analysis
+9. **Operation Count**
+	```cpp
+	        cnt++;
+	```
+	Increment the counter `cnt` to keep track of the number of operations performed.
 
-Let’s analyze the time and space complexity of this solution:
+10. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	After reducing `n` to 1, the function returns the total number of operations performed.
 
-#### ⏱️ Time Complexity:
-- **Time Complexity**: `O(log n)`. In each iteration, `n` is halved (for even numbers) or adjusted by 1 and halved in the next step (for odd numbers). This logarithmic reduction continues until `n` becomes 1, so the time complexity is proportional to the logarithm of `n`, i.e., `O(log n)`. 📉
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-#### 🧠 Space Complexity:
-- **Space Complexity**: `O(1)`. The solution uses a constant amount of space because we only store a few variables like `cnt`, `n`, and a few temporary values. No additional data structures are used. 🧳
+The time complexity is logarithmic because each operation reduces the number by at least half.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### 🏁 Conclusion
+The space complexity is constant as we only need a few variables to track the current state.
 
-In conclusion, this approach provides an **efficient way** to reduce a given integer `n` to 1 by using a greedy strategy. By deciding whether to increment or decrement `n` based on the structure of the number, we minimize the number of operations. With a time complexity of `O(log n)` and space complexity of `O(1)`, this solution is both **time-efficient** and **space-efficient**! 🚀
+**Happy Coding! 🎉**
 
-So, no matter how large `n` is, you can now reduce it to 1 in a minimal number of operations. Keep coding, and don’t forget to challenge yourself with new problems! 💪
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/integer-replacement/description/)
 

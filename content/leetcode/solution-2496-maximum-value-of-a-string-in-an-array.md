@@ -14,132 +14,154 @@ img_src = ""
 youtube = "uGUaazmui2k"
 youtube_upload_date="2022-12-10"
 youtube_thumbnail="https://i.ytimg.com/vi/uGUaazmui2k/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of alphanumeric strings, you are tasked with determining the maximum value of any string in the array. The value of a string is determined in the following way: If the string consists only of digits, its value is its numeric representation in base 10. If it contains any letters, its value is the length of the string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of alphanumeric strings, where each string is composed of digits and lowercase English letters.
+- **Example:** `Input: strs = ["hello1", "abc", "9", "010"]`
+- **Constraints:**
+	- 1 <= strs.length <= 100
+	- 1 <= strs[i].length <= 9
+	- strs[i] consists of only lowercase English letters and digits.
 
-{{< highlight cpp >}}
-class Solution 
-{
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum value of any string in the array, based on the aforementioned rules.
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The maximum value is calculated by evaluating the numeric value for strings with only digits, and the length for strings containing letters.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the maximum value by checking if each string consists of digits or contains letters, and then applying the respective rule for value calculation.
+
+- 1. Iterate through the list of strings.
+- 2. For each string, check if it consists only of digits or contains letters.
+- 3. If the string consists of digits, convert it to an integer and compare it with the maximum value found so far.
+- 4. If the string contains letters, compare its length with the maximum value.
+- 5. Return the maximum value after processing all strings.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is guaranteed to be valid and conforms to the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: strs = ["hello1", "abc", "9", "010"]`  \
+  **Explanation:** In this case, the string "hello1" has a length of 6, "abc" has a length of 3, "9" has a value of 9, and "010" has a value of 10. The maximum value is 10.
+
+- **Input:** `Input: strs = ["1", "2", "01", "3"]`  \
+  **Explanation:** Each string contains only digits, so the values are 1, 2, 1, and 3, respectively. The maximum value is 3.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to evaluate each string based on whether it consists only of digits or contains letters. We can then calculate its value and track the maximum value.
+
+### Initial Thoughts 💭
+- The challenge lies in correctly differentiating between strings containing digits and those containing letters.
+- We can leverage built-in functions like all_of to check for digit-only strings and handle the string length calculation for others.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no edge cases for empty input since the constraints guarantee at least one string in the array.
+- Ensure the solution handles up to 100 strings, each with a maximum length of 9 characters.
+- Be cautious of strings with leading zeros, which should still be evaluated correctly as numeric values.
+- The function should efficiently handle the constraints and provide the correct result.
+{{< dots >}}
+## Code 💻
+```cpp
 public:
-    int maximumValue(vector<string>& strs) 
-    {
-        int m = 0;
-        for (string s : strs)
-            if (all_of(s.begin(), s.end(), ::isdigit))
-                m = max(m, stoi(s));
-            else
-                m = max(m, (int)s.size());
-        return m;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the maximum value among a given list of strings. Each string can either be:
-1. A numerical string (composed entirely of digits), in which case its value is the integer it represents.
-2. A non-numerical string, in which case its value is determined by its length (the number of characters it contains).
-
-The goal is to determine the largest value, either by converting the string to an integer if it's numerical or by using the length of the string if it's non-numerical.
-
-### Approach
-
-To solve this problem efficiently, we need to iterate through all the strings in the input list and, based on the content of each string, calculate its value. We will check:
-1. **If a string is numerical**: This can be determined using the `all_of` function in C++ which checks if all characters in the string are digits.
-2. **If a string is non-numerical**: In this case, we simply calculate the length of the string.
-   
-For each string, we compute the value (either the integer value or the string length) and keep track of the maximum value encountered.
-
-The steps involved are:
-1. Initialize a variable `m` to store the maximum value encountered, initially set to zero.
-2. For each string in the input list, determine if it is a numerical string or a non-numerical string.
-3. If it is a numerical string, convert it to an integer and compare it with the current maximum value.
-4. If it is a non-numerical string, compute its length and compare it with the current maximum value.
-5. Finally, return the maximum value after processing all the strings.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Maximum Value
-
-```cpp
-int m = 0;
+int maximumValue(vector<string>& strs) 
+{
+    int m = 0;
+    for (string s : strs)
+        if (all_of(s.begin(), s.end(), ::isdigit))
+            m = max(m, stoi(s));
+        else
+            m = max(m, (int)s.size());
+    return m;
+}
 ```
 
-We start by initializing the variable `m` to zero. This variable will hold the maximum value encountered while processing the strings in the list.
+The code defines a function `maximumValue` that computes the maximum value from a list of strings. It checks if each string contains only digits or if it represents a number and compares their sizes accordingly.
 
-#### Step 2: Loop Over Each String in the Input List
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	public:
+	```
+	Marks the beginning of the function definition in C++ syntax, where the function is defined as a public member function.
 
-```cpp
-for (string s : strs)
-```
+2. **Function Definition**
+	```cpp
+	int maximumValue(vector<string>& strs) 
+	```
+	Defines the function `maximumValue`, which takes a vector of strings as an argument and returns an integer, which will be the maximum value determined by the function logic.
 
-We iterate through each string `s` in the list `strs`. The list contains a collection of strings, and we need to evaluate each string one by one.
+3. **Variable Initialization**
+	```cpp
+	    int m = 0;
+	```
+	Initializes a variable `m` to 0, which will hold the maximum value found during the iteration over the input strings.
 
-#### Step 3: Check if the String is Numeric
+4. **Looping**
+	```cpp
+	    for (string s : strs)
+	```
+	Starts a loop that iterates through each string `s` in the vector `strs`.
 
-```cpp
-if (all_of(s.begin(), s.end(), ::isdigit))
-```
+5. **Condition Checking**
+	```cpp
+	        if (all_of(s.begin(), s.end(), ::isdigit))
+	```
+	Checks if every character in the string `s` is a digit. The `all_of` function verifies this condition.
 
-To determine if the string `s` consists entirely of digits, we use the C++ function `all_of` from the `<algorithm>` library. This function checks if all characters in the string satisfy the condition provided (in this case, being a digit).
+6. **Mathematical Operations**
+	```cpp
+	            m = max(m, stoi(s));
+	```
+	If the string `s` consists only of digits, the value is converted to an integer using `stoi()` and compared with `m`. The maximum value is assigned to `m`.
 
-- `s.begin()` and `s.end()` provide iterators to the start and end of the string, respectively.
-- `::isdigit` is a standard library function that returns `true` if a character is a digit.
+7. **Else Condition**
+	```cpp
+	        else
+	```
+	Executes the following block of code if the string `s` is not fully numeric.
 
-If the string is numeric (i.e., it contains only digits), the `if` block is executed.
+8. **Mathematical Operations**
+	```cpp
+	            m = max(m, (int)s.size());
+	```
+	If the string is not numeric, the function compares the length of the string `s` (converted to an integer) with `m` and updates `m` to the larger value.
 
-#### Step 4: Convert the Numeric String to an Integer
+9. **Return Statement**
+	```cpp
+	    return m;
+	```
+	Returns the maximum value found, either the largest integer found or the maximum length of any non-numeric string.
 
-```cpp
-m = max(m, stoi(s));
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-If the string is numeric, we convert it to an integer using the `stoi` function, which converts a string to an integer. We then compare this integer with the current maximum value `m` and update `m` to the larger of the two values.
+The time complexity is O(n), where n is the number of strings in the input array, as each string is processed once.
 
-#### Step 5: Handle Non-Numeric Strings
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-```cpp
-else
-    m = max(m, (int)s.size());
-```
+The space complexity is O(1), as we only use a few variables to track the maximum value.
 
-If the string is not numeric, it must be a non-numeric string. In this case, we compute the length of the string using the `size()` function, which returns the number of characters in the string. We then compare the length of the string with the current maximum value `m` and update `m` to the larger value.
+**Happy Coding! 🎉**
 
-#### Step 6: Return the Maximum Value
-
-```cpp
-return m;
-```
-
-Once all strings have been processed, the function returns the maximum value `m`, which contains the largest value found—whether it was from a numerical string or the length of a non-numeric string.
-
-### Complexity Analysis
-
-#### Time Complexity:
-- The time complexity of the solution is **O(n * k)**, where `n` is the number of strings in the list `strs`, and `k` is the average length of the strings.
-  - For each string, the function checks if all characters are digits using `all_of(s.begin(), s.end(), ::isdigit)`, which has a time complexity of **O(k)** for each string.
-  - The `stoi(s)` operation also runs in **O(k)**, as it needs to parse each character in the string to convert it to an integer.
-  - The total time complexity is thus **O(n * k)**, where we process each string and perform operations proportional to the length of the string.
-
-#### Space Complexity:
-- The space complexity of the solution is **O(1)**. The algorithm only uses a constant amount of extra space for the variable `m` and does not require additional space proportional to the input size.
-- The space used for storing the strings in the input list `strs` is not counted in the space complexity since it is part of the input.
-
-### Conclusion
-
-This solution effectively solves the problem by iterating over the list of strings and calculating the maximum value based on whether the string is numeric or not. The use of `all_of` to check for numeric strings and `stoi` to convert numeric strings to integers ensures that we handle both numeric and non-numeric strings efficiently.
-
-The time complexity of **O(n * k)** makes this approach feasible for lists containing a large number of strings or strings of varying lengths. The space complexity of **O(1)** indicates that the solution uses minimal extra space, making it efficient in terms of memory usage.
-
-In summary:
-- **Time Complexity**: O(n * k)
-- **Space Complexity**: O(1)
-- **Efficiency**: The solution is both time and space efficient, with the ability to handle large inputs effectively.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-value-of-a-string-in-an-array/description/)
 

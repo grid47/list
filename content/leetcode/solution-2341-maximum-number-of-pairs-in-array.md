@@ -14,83 +14,120 @@ img_src = ""
 youtube = "9KeeDZ6tcy4"
 youtube_upload_date="2022-07-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/9KeeDZ6tcy4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums`. In one operation, you can choose two integers in the array that are the same and remove both. The operation is repeated as many times as possible. Return an array where the first element is the number of pairs formed, and the second element is the number of leftover integers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` of length `n`.
+- **Example:** `nums = [4, 2, 7, 4, 2, 7, 7]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 0 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array where the first element is the number of pairs formed, and the second element is the number of leftover integers.
+- **Example:** `[3, 1]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of pairs and leftover elements in the input array.
+
+- Use a frequency count to track the occurrence of each integer in the array.
+- For each integer, calculate how many pairs can be formed by dividing the frequency by 2.
+- Count the leftover integers, which are the remainder after pairing.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is valid and contains integers within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 2, 7, 4, 2, 7, 7]`  \
+  **Explanation:** We form pairs with the identical integers and count the number of leftover elements. This example results in 3 pairs and 1 leftover element.
+
+{{< dots >}}
+## Approach 🚀
+We will count the frequency of each number and then calculate how many pairs can be formed and how many leftover elements remain.
+
+### Initial Thoughts 💭
+- We can efficiently count the frequency of each integer using a hashmap or an array.
+- The problem boils down to counting pairs and calculating the leftover elements.
+- We can use an array of size 101 to store the counts of each number, and then calculate the pairs and leftovers.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty input is not valid as per the problem constraints.
+- The solution should efficiently handle arrays of length up to 100.
+- If all elements are the same, the number of pairs will be `nums.length // 2`.
+- The length of `nums` is at least 1, and the integers are between 0 and 100.
+{{< dots >}}
+## Code 💻
+```cpp
   // even counter
   vector<int> numberOfPairs(vector<int>& nums) {
-      int cnt[101] = {}, pairs = 0;
-      for (int n : nums)
-          pairs += ++cnt[n] % 2 == 0 ? 1 : 0;
-      return { pairs, (int)nums.size() - pairs * 2 };
+  int cnt[101] = {}, pairs = 0;
+  for (int n : nums)
+      pairs += ++cnt[n] % 2 == 0 ? 1 : 0;
+  return { pairs, (int)nums.size() - pairs * 2 };
   }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires determining how many pairs of identical elements can be formed from an array of integers, and how many elements remain unpaired. The goal is to return two values:
-1. **The number of pairs**: A pair is defined as two identical elements.
-2. **The number of leftover elements**: These are the elements that cannot form a pair.
-
-### Approach
-
-To solve the problem efficiently, we use the following steps:
-1. **Count the Occurrences of Each Element**: We need to keep track of how many times each element appears in the input array.
-2. **Pairing Process**: As we count the occurrences of elements, we can form pairs. Specifically, for each element that appears an even number of times, we can form pairs, while the remainder will be left as unpaired elements.
-3. **Remaining Elements**: For elements that appear an odd number of times, one element will remain unpaired after forming as many pairs as possible.
-
-We will use a fixed-size array `cnt` where each index represents a possible value in the range [0, 100] (since the problem statement assumes the elements of `nums` lie in this range).
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization**
-```cpp
-int cnt[101] = {}, pairs = 0;
 ```
-- **`cnt[101]`:** This array is used to store the count of each integer in the input array. Since the elements of `nums` are guaranteed to be between 0 and 100, an array of size 101 (for indices 0 to 100) is enough to track the frequency of each number.
-- **`pairs`:** This variable keeps track of the total number of pairs formed. Initially, it's set to 0.
 
-#### 2. **Counting Occurrences and Forming Pairs**
-```cpp
-for (int n : nums)
-    pairs += ++cnt[n] % 2 == 0 ? 1 : 0;
-```
-- **`for (int n : nums)`:** This loop iterates over each number `n` in the input array `nums`.
-- **`++cnt[n]`:** We increment the count for the number `n` in the array `cnt`. This increases the count for the number `n` by 1.
-- **`% 2 == 0 ? 1 : 0`:** After updating the count of `n`, we check if the new count is even. If it is even, it means we have successfully formed a pair (since two identical elements form a pair). If the count becomes even, we increment the `pairs` counter by 1.
-- **`pairs += ...`:** This adds 1 to the `pairs` counter whenever a pair is formed.
+This code defines a function `numberOfPairs` that counts the number of pairs in the input array `nums`. It returns a vector containing two values: the number of pairs and the remaining unpaired elements.
 
-#### 3. **Return the Result**
-```cpp
-return { pairs, (int)nums.size() - pairs * 2 };
-```
-- **`pairs`:** This value is the number of pairs formed, which has been counted in the previous step.
-- **`(int)nums.size() - pairs * 2`:** The total number of leftover elements is calculated as the total number of elements in the input array (`nums.size()`) minus twice the number of pairs (`pairs * 2`). Since each pair consists of two elements, multiplying `pairs` by 2 gives the total number of elements used in pairs. The difference gives the number of leftover unpaired elements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	  vector<int> numberOfPairs(vector<int>& nums) {
+	```
+	The function `numberOfPairs` takes a vector of integers `nums` as input and returns a vector of two integers: the number of pairs and the remaining unpaired elements.
 
-The result is returned as a vector containing two elements:
-1. The first element is the number of pairs.
-2. The second element is the number of leftover unpaired elements.
+2. **Variable Declaration**
+	```cpp
+	  int cnt[101] = {}, pairs = 0;
+	```
+	The array `cnt` is used to count the occurrences of each element in `nums`. `pairs` is initialized to 0 to count the number of even pairs.
 
-### Complexity
+3. **Loop**
+	```cpp
+	  for (int n : nums)
+	```
+	A for-each loop that iterates over each element `n` in the `nums` array.
 
-#### Time Complexity:
-- **O(n):** The algorithm processes each element of the input array `nums` once. For each element, it performs a constant-time operation of updating the count and checking if a pair is formed. Therefore, the time complexity is linear in terms of the size of the input array.
+4. **Pair Counting**
+	```cpp
+	      pairs += ++cnt[n] % 2 == 0 ? 1 : 0;
+	```
+	For each element `n`, we increment its count in `cnt[n]` and check if the count is even. If it is, we increase the `pairs` counter.
 
-#### Space Complexity:
-- **O(1):** The space used by the solution is constant because the size of the `cnt` array is fixed at 101, regardless of the size of the input array. The space used does not depend on the input size, so the space complexity is constant.
+5. **Return**
+	```cpp
+	  return { pairs, (int)nums.size() - pairs * 2 };
+	```
+	The function returns a vector with two elements: the number of pairs (`pairs`) and the number of remaining unpaired elements (calculated as the total size of the array minus twice the number of pairs).
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution efficiently solves the problem of counting pairs and leftover elements in an array. By using a counting array (`cnt`) to track the occurrences of each element, we can easily calculate the number of pairs and unpaired elements in a single pass through the input array. This approach works in linear time O(n), making it very efficient for large input sizes. The solution also uses constant space O(1), which is optimal for this problem.
+The time complexity is O(n), where n is the length of the input array `nums`, as we iterate over the array once and perform constant-time operations for each element.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only use a fixed-size array of 101 elements for the frequency count.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-pairs-in-array/description/)
 

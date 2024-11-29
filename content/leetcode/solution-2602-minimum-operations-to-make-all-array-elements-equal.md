@@ -14,121 +14,213 @@ img_src = ""
 youtube = "UGx5NwAqXZk"
 youtube_upload_date="2023-03-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/UGx5NwAqXZk/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array nums consisting of positive integers. You are also given an array queries, and for each query, you need to determine the minimum number of operations required to make all elements of nums equal to the query value. The allowed operation is to either increase or decrease an element by 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array nums and an integer array queries. The nums array represents the initial state of the numbers, and the queries array contains the target values to which the elements of nums should be transformed.
+- **Example:** `nums = [3,1,6,8], queries = [1,5]`
+- **Constraints:**
+	- 1 <= nums.length, queries.length <= 100000
+	- 1 <= nums[i], queries[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<long long> minOperations(vector<int>& nums, vector<int>& q) {
-        sort(nums.begin(), nums.end());
-        int n = nums.size();
-        vector<long long> ans(q.size(), 0);
-        vector<long long> pre(n, 0);
-        pre[0] = nums[0];
-        for(int i = 1; i < n; i++)
-            pre[i] = pre[i - 1] + nums[i];
-        
-        for(int i = 0; i < q.size(); i++) {
-            auto it = lower_bound(nums.begin(), nums.end(), q[i]);
-            if(it == nums.end()) {
-                ans[i] = (long long)q[i] * n - pre[n - 1];
-            } else {
-                int idx = it - nums.begin();
-                long long right = pre[n - 1] - ((idx > 0)?pre[idx - 1]: 0);
-                long long left  = idx > 0? pre[idx - 1] : 0;
-                ans[i] = (long long)q[i] * idx - (long long)left + (long long)right - (long long)q[i] * ((long long)n - idx);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of size m, where each element of the output corresponds to the minimum number of operations needed to transform all elements of nums to the corresponding query value.
+- **Example:** `[14, 10]`
+- **Constraints:**
+	- Output array size will be the same as the queries array size.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the minimum operations required to make all elements of nums equal to the target value from the queries array.
+
+- Sort the nums array to ensure efficient calculation of the operations needed for each query.
+- For each query value, calculate how many operations are needed to change each element of nums to the query value by iterating through the sorted nums array.
+- Use prefix sum arrays to efficiently compute the total number of operations for each query.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums may be unsorted, and queries may contain any target values within the specified constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3,1,6,8], queries = [1,5]`  \
+  **Explanation:** For the query 1, we need to make the array [3, 1, 6, 8] equal to [1, 1, 1, 1] using the minimum number of operations. For each element of nums, we compute the number of operations required to make it 1 and sum them up. The result is 14.
+
+{{< dots >}}
+## Approach 🚀
+Sort the nums array and use prefix sums to optimize the computation of the operations for each query value.
+
+### Initial Thoughts 💭
+- We need to minimize the total operations for each query value by making efficient calculations for each target.
+- Using sorted nums array and prefix sums will reduce the computational complexity when processing each query.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle cases where nums or queries arrays are empty.
+- Ensure that the algorithm efficiently handles large inputs where n and m are close to 10^5.
+- Check for cases where all elements in nums are already equal to the query value.
+- Ensure the algorithm handles values of nums[i] and queries[i] up to 10^9 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<long long> minOperations(vector<int>& nums, vector<int>& q) {
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    vector<long long> ans(q.size(), 0);
+    vector<long long> pre(n, 0);
+    pre[0] = nums[0];
+    for(int i = 1; i < n; i++)
+        pre[i] = pre[i - 1] + nums[i];
+    
+    for(int i = 0; i < q.size(); i++) {
+        auto it = lower_bound(nums.begin(), nums.end(), q[i]);
+        if(it == nums.end()) {
+            ans[i] = (long long)q[i] * n - pre[n - 1];
+        } else {
+            int idx = it - nums.begin();
+            long long right = pre[n - 1] - ((idx > 0)?pre[idx - 1]: 0);
+            long long left  = idx > 0? pre[idx - 1] : 0;
+            ans[i] = (long long)q[i] * idx - (long long)left + (long long)right - (long long)q[i] * ((long long)n - idx);
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
+This function calculates the minimum operations needed based on given queries and the list of numbers. It calculates prefix sums and uses binary search to handle each query efficiently.
 
-The problem involves calculating the minimum number of operations needed to make all elements of an array `nums` greater than or equal to the values specified in an array `q`. Each operation consists of incrementing or decrementing the values in the `nums` array to meet the conditions specified in `q`. The task is to compute the number of operations for each query efficiently.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<long long> minOperations(vector<int>& nums, vector<int>& q) {
+	```
+	This line declares the `minOperations` function which takes two vectors of integers: `nums` (the list of numbers) and `q` (the queries to be processed).
 
-### Approach
+2. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sort the `nums` vector to facilitate efficient processing of queries using binary search.
 
-To solve this problem, we need to efficiently compute how many operations are required for each query in the array `q` to modify the array `nums` such that all elements of `nums` are greater than or equal to the query value. The core challenge is efficiently determining how to make all elements of `nums` meet the specified threshold and calculating the operations needed.
+3. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Store the size of the `nums` vector in variable `n`.
 
-The steps in the approach are as follows:
+4. **Result Vector Initialization**
+	```cpp
+	    vector<long long> ans(q.size(), 0);
+	```
+	Initialize a vector `ans` of size equal to the number of queries (`q`), all elements set to 0.
 
-1. **Sorting the Array**: We first sort the array `nums`. Sorting helps us efficiently find the elements in `nums` that are greater than or equal to each query value using binary search. Sorting ensures that we can process the array efficiently with the help of the `lower_bound` function.
+5. **Prefix Sum Initialization**
+	```cpp
+	    vector<long long> pre(n, 0);
+	```
+	Initialize a prefix sum vector `pre` of size `n` (size of `nums`), with all elements set to 0.
 
-2. **Prefix Sum Array**: We compute a prefix sum array `pre`, where `pre[i]` stores the sum of the first `i+1` elements of the sorted `nums` array. This helps us quickly compute the sum of elements less than or equal to a query value and those greater than the query value.
+6. **First Prefix Sum Calculation**
+	```cpp
+	    pre[0] = nums[0];
+	```
+	Set the first element of the prefix sum array `pre` to the first element of `nums`.
 
-3. **Binary Search**: For each query value `q[i]`, we use the `lower_bound` function to find the first index in `nums` where the value is greater than or equal to `q[i]`. This binary search helps us efficiently partition the array into two sections: one where elements are smaller than `q[i]`, and the other where elements are greater than or equal to `q[i]`.
+7. **Prefix Sum Iteration**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	Loop through the remaining elements of `nums` to compute the cumulative sum in the `pre` array.
 
-4. **Calculating Operations**: For each query:
-   - If all elements of `nums` are smaller than `q[i]`, we calculate the operations by multiplying `q[i]` with the total number of elements in `nums` and subtracting the sum of all elements.
-   - If there are elements greater than or equal to `q[i]`, we calculate the operations required for each partition using the prefix sum array. The operations for the left section (smaller elements) involve incrementing them to `q[i]`, and the operations for the right section (larger elements) involve decrementing them to `q[i]`.
+8. **Prefix Sum Calculation**
+	```cpp
+	        pre[i] = pre[i - 1] + nums[i];
+	```
+	For each element `i`, add the current element of `nums` to the previous prefix sum and store it in `pre[i]`.
 
-5. **Return the Results**: After processing each query, we return the results in the form of an array.
+9. **Query Processing Loop**
+	```cpp
+	    for(int i = 0; i < q.size(); i++) {
+	```
+	Start a loop to process each query in `q`.
 
-### Code Breakdown (Step by Step)
+10. **Binary Search for Lower Bound**
+	```cpp
+	        auto it = lower_bound(nums.begin(), nums.end(), q[i]);
+	```
+	Use `lower_bound` to find the first position in `nums` where the value is greater than or equal to the query value `q[i]`.
 
-#### 1. **Sorting the Array**:
-   ```cpp
-   sort(nums.begin(), nums.end());
-   ```
-   - The first step is to sort the array `nums`. Sorting helps us later apply binary search efficiently and ensures we can compute the results for each query in an optimized manner.
+11. **End Condition Check**
+	```cpp
+	        if(it == nums.end()) {
+	```
+	Check if the iterator `it` has reached the end of the vector, meaning no element in `nums` is greater than or equal to `q[i]`.
 
-#### 2. **Initializing Prefix Sum Array**:
-   ```cpp
-   vector<long long> pre(n, 0);
-   pre[0] = nums[0];
-   for(int i = 1; i < n; i++)
-       pre[i] = pre[i - 1] + nums[i];
-   ```
-   - We create a prefix sum array `pre` of size `n`. This array stores the cumulative sum of the sorted elements of `nums`. This allows us to efficiently compute the sum of elements less than or equal to a query value and those greater than the query value.
+12. **No Valid Element Found**
+	```cpp
+	            ans[i] = (long long)q[i] * n - pre[n - 1];
+	```
+	If no valid element is found, calculate the result for this query based on the entire sum of the `nums` vector and store it in `ans[i]`.
 
-#### 3. **Processing Each Query**:
-   ```cpp
-   for(int i = 0; i < q.size(); i++) {
-       auto it = lower_bound(nums.begin(), nums.end(), q[i]);
-   ```
-   - We iterate over each query in the array `q`. For each query `q[i]`, we use the `lower_bound` function to find the position of the first element in `nums` that is greater than or equal to `q[i]`. This helps us partition the array into elements smaller than `q[i]` and those that are greater than or equal to it.
+13. **Element Found**
+	```cpp
+	        } else {
+	```
+	If a valid element is found, process it further.
 
-#### 4. **Calculating the Operations**:
-   ```cpp
-   if(it == nums.end()) {
-       ans[i] = (long long)q[i] * n - pre[n - 1];
-   } else {
-       int idx = it - nums.begin();
-       long long right = pre[n - 1] - ((idx > 0) ? pre[idx - 1] : 0);
-       long long left = idx > 0 ? pre[idx - 1] : 0;
-       ans[i] = (long long)q[i] * idx - (long long)left + (long long)right - (long long)q[i] * ((long long)n - idx);
-   }
-   ```
-   - If the `lower_bound` returns `nums.end()`, it means all elements in `nums` are smaller than the query value. In this case, we compute the operations as the difference between `q[i]` multiplied by the number of elements in `nums` and the sum of all elements in `nums`.
-   - If `lower_bound` finds a position within `nums`, we compute the operations for both the left section (smaller elements) and the right section (larger elements). The left section needs to be incremented to meet `q[i]`, and the right section needs to be decremented. We calculate the total operations as the difference between `q[i]` and the elements in `nums`.
+14. **Index Calculation**
+	```cpp
+	            int idx = it - nums.begin();
+	```
+	Calculate the index `idx` of the element found by `lower_bound`.
 
-#### 5. **Returning the Results**:
-   ```cpp
-   return ans;
-   ```
-   - After processing all the queries, we return the results array `ans`, which contains the minimum number of operations required for each query in `q`.
+15. **Right Side Calculation**
+	```cpp
+	            long long right = pre[n - 1] - ((idx > 0)?pre[idx - 1]: 0);
+	```
+	Calculate the sum of the elements to the right of `idx` using the prefix sum array `pre`.
 
-### Complexity Analysis
+16. **Left Side Calculation**
+	```cpp
+	            long long left  = idx > 0? pre[idx - 1] : 0;
+	```
+	Calculate the sum of the elements to the left of `idx` using the prefix sum array `pre`.
 
-- **Time Complexity**:
-  - Sorting the array `nums` takes \(O(n \log n)\), where `n` is the size of `nums`.
-  - For each query, finding the position using `lower_bound` takes \(O(\log n)\). Since there are `m` queries, processing all queries takes \(O(m \log n)\).
-  - Therefore, the overall time complexity is \(O(n \log n + m \log n)\), where `n` is the size of `nums` and `m` is the size of `q`.
+17. **Final Answer Calculation**
+	```cpp
+	            ans[i] = (long long)q[i] * idx - (long long)left + (long long)right - (long long)q[i] * ((long long)n - idx);
+	```
+	Calculate the final answer for this query based on the left and right sums and store it in `ans[i]`.
 
-- **Space Complexity**:
-  - The space complexity is \(O(n + m)\), as we store the prefix sum array `pre` of size `n` and the result array `ans` of size `m`.
+18. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the result vector `ans`, which contains the answers for all queries.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n + m log n)
+- **Average Case:** O(n log n + m log n)
+- **Worst Case:** O(n log n + m log n)
 
-This solution efficiently calculates the minimum number of operations needed to make all elements in `nums` greater than or equal to the query values in `q`. By sorting `nums` and using binary search, we ensure that each query is processed in logarithmic time with respect to the size of `nums`. The use of a prefix sum array further optimizes the calculation of required operations. The overall time complexity of \(O(n \log n + m \log n)\) ensures that the solution is efficient for large input sizes.
+Sorting nums takes O(n log n) time, and processing each query requires O(log n) due to binary search on the sorted nums array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We store the prefix sums and the sorted nums array, requiring O(n) space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-make-all-array-elements-equal/description/)
 

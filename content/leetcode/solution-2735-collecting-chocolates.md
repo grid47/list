@@ -14,131 +14,161 @@ img_src = ""
 youtube = "FPkaxgatwoI"
 youtube_upload_date="2023-06-11"
 youtube_thumbnail="https://i.ytimg.com/vi/FPkaxgatwoI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` where each element represents the cost of collecting a chocolate of a specific type. You can perform an operation to change the types of chocolates, and each operation incurs a cost. Your task is to determine the minimum total cost to collect all types of chocolates.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and an integer `x`, where `nums[i]` represents the cost of collecting chocolate type `i` and `x` is the cost of performing one operation.
+- **Example:** `nums = [10, 5, 20], x = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i] <= 10^9
+	- 1 <= x <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long minCost(vector<int>& A, int x) {
-        int n = A.size();
-        vector<long long> res(n);
-        for (int i = 0; i < n; i++) {
-            res[i] += 1L * i * x;
-            int cur = A[i];
-            for (int k = 0; k < n; k++) {
-                cur = min(cur, A[(i - k + n) % n]);
-                res[k] += cur;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum total cost to collect chocolates of all types, given that you can perform the operation any number of times.
+- **Example:** `Output: 11`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To minimize the total cost by strategically performing the operation while collecting chocolates.
+
+- Loop over all types of chocolates and calculate the minimum cost for collecting them with the operations applied.
+- For each type, calculate the cost of the operation and the cost of collecting the chocolate.
+- Return the minimum total cost obtained.
+{{< dots >}}
+### Problem Assumptions ✅
+- You can perform the operation any number of times, but the total cost of performing operations should be minimized.
+- The array `nums` represents the cost of chocolates of distinct types.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [10, 5, 20], x = 3`  \
+  **Explanation:** The initial cost is 35 (10 + 5 + 20). Performing the operation results in the following costs for collecting chocolates, ultimately yielding the minimum cost of 11.
+
+- **Input:** `nums = [5, 1, 5], x = 2`  \
+  **Explanation:** Here, the best strategy is to perform one operation to reduce the total cost, resulting in a minimum total of 6.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by calculating the minimum cost by performing operations optimally and collecting chocolates based on the incurred costs.
+
+### Initial Thoughts 💭
+- The operation can be repeated, so we need to find the optimal number of times to perform it.
+- It is beneficial to minimize the total cost of collecting chocolates.
+- We need to consider all possible shifts of the chocolate types and calculate the total cost for each shift.
+{{< dots >}}
+### Edge Cases 🌐
+- The array `nums` contains only one type of chocolate.
+- The array `nums` has the maximum allowed length, and `x` is very large.
+- The array `nums` contains chocolates with the same cost.
+- The array `nums` is always non-empty.
+{{< dots >}}
+## Code 💻
+```cpp
+long long minCost(vector<int>& A, int x) {
+    int n = A.size();
+    vector<long long> res(n);
+    for (int i = 0; i < n; i++) {
+        res[i] += 1L * i * x;
+        int cur = A[i];
+        for (int k = 0; k < n; k++) {
+            cur = min(cur, A[(i - k + n) % n]);
+            res[k] += cur;
         }
-        return *std::min_element(res.begin(), res.end());
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an array `A` of size `n` and an integer `x`, we are tasked with finding the minimum cost of performing a series of operations on the array. The cost is computed as follows:
-
-1. For each element in the array, we can perform an operation that shifts the element's value.
-2. The value is shifted by choosing the minimum between the element and a previous element in the array.
-3. The operation incurs a cost, which is based on the index of the element being modified, as well as the integer `x`.
-
-The goal is to find the minimum total cost for applying these operations to all elements in the array.
-
-### Approach
-
-The problem can be solved efficiently by considering the cost calculation for each element and utilizing dynamic programming to avoid redundant calculations. Here’s a breakdown of the approach:
-
-1. **Initialization**:
-   - We are given an array `A` and an integer `x`. The goal is to compute the cost of modifying each element and then select the smallest possible cost.
-   
-2. **Cost Calculation**:
-   - The cost for modifying the element at index `i` is influenced by both the index itself (multiplied by `x`) and the smallest element encountered in the array as we iterate over it. This means that for each index, we compute the minimum value encountered up to that index, and we adjust the cost accordingly.
-
-3. **Iterating Over the Array**:
-   - For each element `A[i]`, we first calculate the base cost of modifying this element. Then, we calculate the effect of each subsequent operation by considering the previous elements in the array and determining the smallest possible value for each index.
-
-4. **Dynamic Programming**:
-   - Instead of recomputing the costs for each element repeatedly, we store the result of each computation in a vector `res`. This way, we can avoid recalculating values that have already been computed for previous indices.
-
-5. **Final Result**:
-   - Once the costs have been computed for all elements, the result is the minimum value in the `res` vector, which represents the least cost required to perform the operations.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code to understand how it works:
-
-```cpp
-int n = A.size();
-vector<long long> res(n);
+    return *std::min_element(res.begin(), res.end());
+}
 ```
 
-- `n` stores the size of the input array `A`.
-- `res` is a vector of size `n`, initialized to store the result of the cost calculations. Each entry in this vector will store the accumulated cost for each element.
+This function calculates the minimum cost based on the input vector `A` and an integer `x`. It iterates over the elements of `A` to compute and accumulate costs, ultimately returning the minimum value from the accumulated results.
 
-```cpp
-for (int i = 0; i < n; i++) {
-    res[i] += 1L * i * x;
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long minCost(vector<int>& A, int x) {
+	```
+	The function `minCost` is defined, which takes a vector `A` and an integer `x` as input and returns a `long long` result.
 
-- This loop iterates over each element in the array `A`. For each element at index `i`, we add the base cost of modifying this element. The base cost is calculated as `i * x`, where `i` is the index of the element, and `x` is the given parameter.
+2. **Variable Initialization**
+	```cpp
+	    int n = A.size();
+	```
+	The size of the input vector `A` is stored in the variable `n`.
 
-```cpp
-    int cur = A[i];
-```
+3. **Variable Initialization**
+	```cpp
+	    vector<long long> res(n);
+	```
+	A vector `res` of size `n` is initialized to store the accumulated results.
 
-- The variable `cur` is initialized to the value of the current element `A[i]`. This variable will be used to track the minimum value encountered as we iterate over the array.
+4. **Loop - Outer**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	An outer loop iterates over each index `i` in the range [0, n-1].
 
-```cpp
-    for (int k = 0; k < n; k++) {
-        cur = min(cur, A[(i - k + n) % n]);
-        res[k] += cur;
-    }
-```
+5. **Cost Calculation**
+	```cpp
+	        res[i] += 1L * i * x;
+	```
+	For each index `i`, the value `1L * i * x` is added to the corresponding element in the `res` vector.
 
-- The inner loop calculates the effect of each operation on the cost. It starts from the current element `A[i]` and looks at each subsequent element, comparing it to the current minimum value. The goal is to update `cur` with the smallest value encountered in the array, starting from `A[i]` and wrapping around using modulo arithmetic to handle the circular nature of the array.
-  
-- The result vector `res[k]` is updated by adding the current value of `cur` to it, which represents the accumulated cost for the modification of the element at index `k`.
+6. **Variable Initialization**
+	```cpp
+	        int cur = A[i];
+	```
+	A variable `cur` is initialized to the current element `A[i]`.
 
-```cpp
-return *std::min_element(res.begin(), res.end());
-```
+7. **Loop - Inner**
+	```cpp
+	        for (int k = 0; k < n; k++) {
+	```
+	An inner loop iterates over each index `k` in the range [0, n-1].
 
-- Finally, the function returns the smallest element in the `res` vector, which represents the minimum total cost for performing the operations on the array.
+8. **Min Calculation**
+	```cpp
+	            cur = min(cur, A[(i - k + n) % n]);
+	```
+	In each iteration of the inner loop, the variable `cur` is updated to the minimum of its current value and the element `A[(i - k + n) % n]` (ensuring circular indexing).
 
-### Complexity Analysis
+9. **Cost Update**
+	```cpp
+	            res[k] += cur;
+	```
+	The updated value of `cur` is added to `res[k]` in the `res` vector.
 
-#### Time Complexity
+10. **Return Statement**
+	```cpp
+	    return *std::min_element(res.begin(), res.end());
+	```
+	The function returns the smallest value from the `res` vector, which is found using `std::min_element`.
 
-To analyze the time complexity, let’s look at the loops:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2) where n is the length of the array.
+- **Average Case:** O(n^2) due to iterating over all possible shifts.
+- **Worst Case:** O(n^2) since we need to check every shift and calculate the associated cost.
 
-1. **Outer Loop (Iterating Over Array)**:
-   - The outer loop iterates over each element in the array `A`. Since the size of the array is `n`, this loop runs `n` times.
+The time complexity is quadratic because for each chocolate type, we are calculating the cost for all possible shifts.
 
-2. **Inner Loop (Updating Results for Each Element)**:
-   - For each element in the outer loop, the inner loop iterates `n` times as well. This is because we check the effect of each previous element in the array, which is wrapped around using modulo arithmetic.
+### Space Complexity 💾
+- **Best Case:** O(n) if minimal space is used for calculations.
+- **Worst Case:** O(n) due to the additional storage for the result array.
 
-Thus, the time complexity is \(O(n^2)\), where `n` is the size of the input array `A`.
+The space complexity is linear since we use a result array to store the computed costs for each shift.
 
-#### Space Complexity
+**Happy Coding! 🎉**
 
-The space complexity is determined by the space used to store the results:
-
-- We use an array `res` of size `n` to store the accumulated costs for each element. Therefore, the space complexity is \(O(n)\).
-
-### Conclusion
-
-The algorithm successfully computes the minimum cost required to transform the array according to the given rules. By using dynamic programming and storing intermediate results, it avoids redundant calculations, ensuring an efficient solution.
-
-However, the time complexity of \(O(n^2)\) may not be optimal for very large arrays, especially when `n` is large. For such cases, further optimizations may be necessary to reduce the complexity.
-
-The solution efficiently handles the problem by considering both the index-based cost and the minimum value encountered during the transformation, making it a good approach for handling arrays of moderate size.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/collecting-chocolates/description/)
 

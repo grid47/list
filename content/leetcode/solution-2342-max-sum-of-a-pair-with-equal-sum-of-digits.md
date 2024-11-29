@@ -14,116 +14,195 @@ img_src = ""
 youtube = "uOPtnfVSFuQ"
 youtube_upload_date="2022-07-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/uOPtnfVSFuQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` of positive integers. You need to find two indices `i` and `j` such that `i != j`, and the sum of digits of the numbers `nums[i]` and `nums[j]` is the same. Return the maximum sum of `nums[i] + nums[j]` that you can obtain over all valid pairs of indices. If no such pair exists, return `-1`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` of length `n` where `n` is between 1 and 10^5.
+- **Example:** `nums = [28, 17, 45, 64, 23]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumSum(vector<int>& nums) {
-        
-        map<int, int> mp;
-        
-        int ans = -1;
-        
-        for(int x: nums) {
-            int sum = 0;
-            int tmp = x;
-            while(tmp > 0) {
-                sum += (tmp % 10);
-                tmp /= 10;
-            }
-            if(mp.count(sum)) {
-                ans = max(ans, x + mp[sum]);
-                mp[sum] = max(x, mp[sum]);
-            } else {
-                mp[sum] = x;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum of `nums[i] + nums[j]` for two indices `i` and `j` where the sum of the digits of `nums[i]` equals the sum of the digits of `nums[j]`. If no such pair exists, return `-1`.
+- **Example:** `93`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find pairs of integers whose sum of digits are the same, and return the maximum sum of such pairs.
+
+- For each number in the array, calculate the sum of its digits.
+- Store the largest number encountered for each sum of digits.
+- For each new number, if its sum of digits has been seen before, calculate the sum of the current number and the previously encountered number with the same sum of digits, and update the maximum sum if necessary.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is valid and contains positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [28, 17, 45, 64, 23]`  \
+  **Explanation:** The sum of digits of 28 is 10, the sum of digits of 64 is 10 as well, so the pair (28, 64) gives the maximum sum of 93.
+
+{{< dots >}}
+## Approach 🚀
+We calculate the sum of digits of each number in the array and then find the maximum sum for numbers that share the same sum of digits.
+
+### Initial Thoughts 💭
+- We can calculate the sum of digits of a number by repeatedly dividing by 10 and summing the remainders.
+- The key observation is that we only need to track the largest numbers for each sum of digits.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will not be empty according to the constraints.
+- The solution should efficiently handle arrays of length up to 10^5.
+- If no two numbers have the same sum of digits, the output should be -1.
+- The numbers are positive and at most 10^9, so care must be taken to handle large numbers.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumSum(vector<int>& nums) {
+    
+    map<int, int> mp;
+    
+    int ans = -1;
+    
+    for(int x: nums) {
+        int sum = 0;
+        int tmp = x;
+        while(tmp > 0) {
+            sum += (tmp % 10);
+            tmp /= 10;
         }
-        
-        return ans;
+        if(mp.count(sum)) {
+            ans = max(ans, x + mp[sum]);
+            mp[sum] = max(x, mp[sum]);
+        } else {
+            mp[sum] = x;
+        }
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the **maximum sum of two numbers** from a list such that the sum of the digits of the two numbers is the same. The goal is to return this maximum sum. If no such pair exists, the answer should be `-1`.
-
-### Approach
-
-To solve this problem, we need to:
-1. **Iterate through the input array (`nums`)**: For each number, we need to calculate the sum of its digits.
-2. **Store the maximum number for each sum of digits**: For each unique sum of digits, we track the largest number that has this sum.
-3. **Update the maximum sum**: Whenever we find another number with the same sum of digits, we check if adding it to the previously stored number results in a higher sum than the current maximum.
-4. **Return the maximum sum**: After iterating through all the numbers, return the maximum sum found. If no valid pair is found, return `-1`.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization**
-```cpp
-map<int, int> mp;
-int ans = -1;
-```
-- **`map<int, int> mp;`**: This map will store the sum of digits as the key and the largest number corresponding to that sum as the value.
-- **`int ans = -1;`**: This variable will store the maximum sum of any pair of numbers with the same sum of digits. If no valid pair is found, `ans` will remain `-1`.
-
-#### 2. **Iterate Through Each Number**
-```cpp
-for(int x: nums) {
-    int sum = 0;
-    int tmp = x;
-    while(tmp > 0) {
-        sum += (tmp % 10);
-        tmp /= 10;
-    }
-```
-- **`for(int x: nums)`**: This loop iterates over each number `x` in the input array `nums`.
-- **`int sum = 0;`**: This variable will store the sum of digits of the current number `x`.
-- **`int tmp = x;`**: We use a temporary variable `tmp` to extract the digits of `x` without modifying `x` directly.
-- **`while(tmp > 0)`**: This loop extracts digits from the number `tmp` one by one.
-    - **`sum += (tmp % 10);`**: This adds the last digit of `tmp` to `sum`.
-    - **`tmp /= 10;`**: This removes the last digit from `tmp` by dividing it by 10.
-
-#### 3. **Check if Sum of Digits Exists in Map**
-```cpp
-if(mp.count(sum)) {
-    ans = max(ans, x + mp[sum]);
-    mp[sum] = max(x, mp[sum]);
-} else {
-    mp[sum] = x;
+    
+    return ans;
 }
 ```
-- **`if(mp.count(sum))`**: This checks if the sum of digits `sum` already exists as a key in the map `mp`.
-    - **`ans = max(ans, x + mp[sum]);`**: If a number with the same sum of digits already exists in the map, we calculate the sum of the current number `x` and the previously stored number `mp[sum]` (which is the largest number with this sum of digits). We update `ans` with the maximum of the current `ans` and the new sum.
-    - **`mp[sum] = max(x, mp[sum]);`**: After updating `ans`, we update the map to store the maximum of `x` and the existing value for `mp[sum]` (i.e., store the largest number with the sum of digits `sum`).
-- **`else`**: If `sum` is not already a key in the map, we simply store `x` as the value for the key `sum` in the map `mp`.
 
-#### 4. **Return the Result**
-```cpp
-return ans;
-```
-- After iterating through all the numbers in the array, we return the value of `ans`. If no valid pair was found, `ans` will remain `-1`.
+This code defines a function `maximumSum` that takes a vector of integers and calculates the maximum sum of a pair of integers in the vector such that the sum of their digits is the same.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int maximumSum(vector<int>& nums) {
+	```
+	The function `maximumSum` is initialized with a vector of integers `nums`.
 
-#### Time Complexity:
-- **O(n * d)**: The time complexity of this solution is **O(n * d)**, where:
-  - **n** is the number of elements in the input array `nums`.
-  - **d** is the number of digits in the largest number in the array.
-- For each number, we compute the sum of its digits in **O(d)** time. Since the number of digits `d` is proportional to the logarithm of the number size, the time complexity becomes **O(n * log(max(nums)))**.
+2. **Variable Declaration**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map `mp` is declared to store the sum of digits as the key and the corresponding number as the value.
 
-#### Space Complexity:
-- **O(n)**: The space complexity is **O(n)** because, in the worst case, all numbers in the array could have unique sums of digits. The map `mp` stores at most `n` unique sums.
+3. **Variable Declaration**
+	```cpp
+	    int ans = -1;
+	```
+	The variable `ans` is initialized to -1 to keep track of the maximum sum.
 
-### Conclusion
+4. **Loop Start**
+	```cpp
+	    for(int x: nums) {
+	```
+	A loop is initiated to iterate over each element `x` in the vector `nums`.
 
-This solution is efficient and works well even for large arrays. By calculating the sum of digits for each number and using a map to track the largest number for each sum, we can quickly find the maximum sum of two numbers with the same sum of digits. The solution runs in **O(n * log(max(nums)))** time, which is optimal for this type of problem. The space complexity is also **O(n)**, making this solution suitable for large inputs. If no valid pair of numbers is found, the solution correctly returns `-1`, ensuring that edge cases are handled.
+5. **Variable Initialization**
+	```cpp
+	        int sum = 0;
+	```
+	A variable `sum` is initialized to 0 to store the sum of digits of the current element `x`.
+
+6. **Variable Initialization**
+	```cpp
+	        int tmp = x;
+	```
+	The variable `tmp` is initialized with the value of `x` to compute the sum of its digits.
+
+7. **Loop Start**
+	```cpp
+	        while(tmp > 0) {
+	```
+	A while loop is started to iterate through each digit of `tmp`.
+
+8. **Digit Extraction**
+	```cpp
+	            sum += (tmp % 10);
+	```
+	The last digit of `tmp` is extracted and added to `sum`.
+
+9. **Digit Extraction**
+	```cpp
+	            tmp /= 10;
+	```
+	The last digit is removed from `tmp` by integer division by 10.
+
+10. **Condition Check**
+	```cpp
+	        if(mp.count(sum)) {
+	```
+	A condition checks if the sum of digits `sum` is already present in the map `mp`.
+
+11. **Max Calculation**
+	```cpp
+	            ans = max(ans, x + mp[sum]);
+	```
+	If the sum is found in the map, the maximum sum is updated using the current element `x` and the value stored in `mp[sum]`.
+
+12. **Map Update**
+	```cpp
+	            mp[sum] = max(x, mp[sum]);
+	```
+	The value in the map `mp` for the current `sum` is updated to be the larger of the current element `x` and the previous value.
+
+13. **Condition Else**
+	```cpp
+	        } else {
+	```
+	If the sum of digits is not found in the map, a new entry is added.
+
+14. **Map Insertion**
+	```cpp
+	            mp[sum] = x;
+	```
+	The value `x` is inserted into the map `mp` with `sum` as the key.
+
+15. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the value of `ans`, which holds the maximum sum of pairs with the same digit sum.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the input array `nums`, as we iterate over the array once and perform a constant-time operation to calculate the sum of digits for each number.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we use a hashmap to store the largest number for each sum of digits.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-sum-of-a-pair-with-equal-sum-of-digits/description/)
 

@@ -14,109 +14,150 @@ img_src = ""
 youtube = "mQAoeYaE3Xk"
 youtube_upload_date="2024-06-10"
 youtube_thumbnail="https://i.ytimg.com/vi/mQAoeYaE3Xk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A school is arranging students in a line for an annual photograph. The students are required to stand in a non-decreasing order of height. The expected order is represented by an array, where each element corresponds to the expected height of the student at that position. Given the current arrangement of the students' heights, determine the number of positions where the height of the student does not match the expected height.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array 'heights' which represents the current arrangement of students, and another array 'expected' which represents the expected arrangement of students in non-decreasing order.
+- **Example:** `Input: heights = [4, 2, 3, 5, 1], expected = [1, 2, 3, 4, 5]`
+- **Constraints:**
+	- 1 <= heights.length <= 100
+	- 1 <= heights[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int heightChecker(vector<int>& h) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of positions where the height in the 'heights' array does not match the corresponding value in the 'expected' array.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result will be a non-negative integer.
 
-        auto m = max_element(h.begin(), h.end());
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify and count the indices where the current heights do not match the expected sorted order.
 
-        vector<int> exp(*m + 1);
+- 1. Sort the 'heights' array to create the 'expected' array.
+- 2. Compare the 'heights' array with the 'expected' array.
+- 3. Count the number of indices where the two arrays differ.
+{{< dots >}}
+### Problem Assumptions ✅
+- The heights array contains positive integers that represent valid heights.
+- The input array will not be empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: heights = [4, 2, 3, 5, 1], expected = [1, 2, 3, 4, 5]`  \
+  **Explanation:** In this example, after sorting, the heights array becomes [1, 2, 3, 4, 5]. The differences are at indices 0, 3, and 4, so the output is 3.
 
-        for (int height : h) exp[height]++;
+- **Input:** `Input: heights = [1, 2, 3, 4, 5], expected = [1, 2, 3, 4, 5]`  \
+  **Explanation:** In this case, the 'heights' array is already in the expected order, so there are no differences. The output is 0.
 
-        int res = 0;
+{{< dots >}}
+## Approach 🚀
+The task is to find how many students are standing out of the expected order. This can be achieved by sorting the 'heights' array and comparing it with the 'expected' array.
 
-        for (int j = 1, i = 0; j < exp.size(); j++)
-            while (exp[j]--) res += (h[i++] != j);
+### Initial Thoughts 💭
+- The problem can be solved by comparing the current arrangement with the sorted arrangement.
+- A direct approach would involve sorting the heights and then comparing the sorted list with the original list to count the mismatches.
+{{< dots >}}
+### Edge Cases 🌐
+- There will be no empty input arrays as per the constraints.
+- The solution should handle up to 100 students efficiently, as the maximum number of students is 100.
+- If all students are already in the expected order, the output will be 0.
+- The problem will always have at least one student, as the constraints guarantee the length of 'heights' is >= 1.
+{{< dots >}}
+## Code 💻
+```cpp
+int heightChecker(vector<int>& h) {
 
-        return res;
+    auto m = max_element(h.begin(), h.end());
 
-    }
-};
-{{< /highlight >}}
----
+    vector<int> exp(*m + 1);
 
+    for (int height : h) exp[height]++;
 
+    int res = 0;
 
-### Problem Statement
-The task at hand is to determine how many students are standing in the wrong heights in a class when compared to their expected heights in a non-decreasing order. Given an array of integers representing the heights of students, the goal is to count the number of positions where the actual height differs from the expected height if the heights were sorted in ascending order.
+    for (int j = 1, i = 0; j < exp.size(); j++)
+        while (exp[j]--) res += (h[i++] != j);
 
-### Approach
-To solve this problem, we can employ the following steps:
-1. Identify the maximum height in the array to determine the range of possible heights.
-2. Create an array to count the frequency of each height.
-3. Compare the original array with the expected sorted order by iterating through the counted frequencies, incrementing a mismatch counter when heights differ.
+    return res;
 
-### Code Breakdown (Step by Step)
+}
+```
 
-1. **Function Declaration**:
-   The function `heightChecker` takes a vector of integers `h`, which represents the heights of the students.
+This function checks how many students are standing in the wrong order based on their heights. It uses an efficient approach with frequency counting to track and compare expected versus actual positions.
 
-   ```cpp
-   int heightChecker(vector<int>& h) {
-   ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int heightChecker(vector<int>& h) {
+	```
+	Define the function 'heightChecker' which takes a vector of integers 'h' representing the heights of students and returns the number of students who are standing in the wrong order.
 
-2. **Finding Maximum Height**:
-   We first find the maximum height using `max_element` from the standard library. This gives us the highest value present in the heights array, which helps us define the size of our frequency array.
+2. **Find Maximum Element**
+	```cpp
+	    auto m = max_element(h.begin(), h.end());
+	```
+	Find the maximum height in the 'h' vector using the 'max_element' function, which returns an iterator to the maximum element.
 
-   ```cpp
-   auto m = max_element(h.begin(), h.end());
-   ```
+3. **Frequency Array Initialization**
+	```cpp
+	    vector<int> exp(*m + 1);
+	```
+	Initialize a frequency array 'exp' where the index represents a possible height, and the value at each index represents the count of students with that height.
 
-3. **Initializing Frequency Array**:
-   Next, we initialize a frequency array `exp` with a size of `*m + 1` (to account for heights ranging from 0 to maximum height). This array will keep track of the counts of each height.
+4. **Populate Frequency Array**
+	```cpp
+	    for (int height : h) exp[height]++;
+	```
+	Populate the 'exp' array by iterating through the 'h' vector, incrementing the count for each height.
 
-   ```cpp
-   vector<int> exp(*m + 1);
-   ```
+5. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize the result variable 'res' to 0, which will keep track of how many students are standing in the wrong order.
 
-4. **Counting Heights**:
-   We then iterate through the original heights array `h`, populating the frequency array. For each height encountered, we increment the corresponding index in `exp`.
+6. **Outer Loop Setup**
+	```cpp
+	    for (int j = 1, i = 0; j < exp.size(); j++)
+	```
+	Start an outer loop that iterates through all possible heights, from 1 to the maximum height in the 'exp' array.
 
-   ```cpp
-   for (int height : h) exp[height]++;
-   ```
+7. **Count Wrong Positions**
+	```cpp
+	        while (exp[j]--) res += (h[i++] != j);
+	```
+	For each height, check if the student at position 'i' in the 'h' vector is in the wrong position. If they are, increment the result counter 'res'.
 
-5. **Mismatch Counting**:
-   We initialize a result variable `res` to store the count of mismatches. Using a nested loop, we compare the expected heights (represented by the indices of `exp`) to the original heights in `h`. For each expected height, we check if the current height matches. If it does not match, we increment the mismatch counter.
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the final result, which is the total number of students standing in the wrong order.
 
-   ```cpp
-   int res = 0;
-   for (int j = 1, i = 0; j < exp.size(); j++)
-       while (exp[j]--) res += (h[i++] != j);
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-   - The outer loop iterates over the possible heights (from 1 to the maximum height).
-   - The inner loop iterates as many times as the count of that height (from `exp`).
-   - The comparison `(h[i++] != j)` checks if the actual height differs from the expected height `j`.
+The time complexity is O(n log n) due to the sorting of the heights array, where n is the number of students.
 
-6. **Returning the Result**:
-   Finally, we return the total number of mismatches counted.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-   return res;
-   }
-   ```
+The space complexity is O(n) to store the heights and expected arrays.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of the solution is \(O(n)\), where \(n\) is the number of students (or the length of the heights array). This is because we make a single pass to count the heights and another pass to count the mismatches.
-
-- **Space Complexity**: The space complexity is \(O(k)\), where \(k\) is the range of heights, which is determined by the maximum height found in the input array. In the worst case, this space complexity is proportional to the maximum height value.
-
-### Conclusion
-The `heightChecker` function effectively counts the number of students standing in the wrong order according to their heights. By utilizing a frequency array to track height counts, the function avoids the need for explicitly sorting the heights, thereby optimizing both time and space efficiency. 
-
-This approach can be particularly beneficial when working with a large dataset, as it provides a clear and direct method of identifying discrepancies in expected versus actual heights without incurring the overhead of sorting algorithms. As a result, this function serves as a robust solution to the problem of verifying students' height alignment in an educational setting.
-
-Overall, this code snippet showcases the effectiveness of using counting techniques combined with basic array operations to solve problems related to sorting and order verification efficiently.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/height-checker/description/)

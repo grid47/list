@@ -14,114 +14,129 @@ img_src = ""
 youtube = "LoUAGs8fqB0"
 youtube_upload_date="2021-07-04"
 youtube_thumbnail="https://i.ytimg.com/vi/LoUAGs8fqB0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a zero-based permutation nums (0-indexed), build a new array ans of the same length where for each i, ans[i] = nums[nums[i]]. Return the array ans. A zero-based permutation means that the array consists of distinct integers from 0 to nums.length - 1 (inclusive).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums, which is a zero-based permutation of distinct integers from 0 to nums.length - 1.
+- **Example:** `nums = [2, 0, 1, 4, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 0 <= nums[i] < nums.length
+	- The elements in nums are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> buildArray(vector<int>& nums) {
-        int n=nums.size();
-        vector<int> ans(n);
-        for(int i=0;i<n;i++){
-            ans[i]=nums[nums[i]];
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the array ans, where each element is nums[nums[i]].
+- **Example:** `[1, 2, 0, 3, 4]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** For each index i in the array nums, compute nums[nums[i]] and store it in the result array ans.
+
+- Iterate over the array nums.
+- For each index i, compute ans[i] = nums[nums[i]].
+- Return the resulting array ans.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is a valid zero-based permutation of integers.
+- The length of the array will not exceed 1000.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [2, 0, 1, 4, 3]`  \
+  **Explanation:** In the array nums = [2, 0, 1, 4, 3], the new array ans is computed as follows: ans[0] = nums[nums[0]] = nums[2] = 1, ans[1] = nums[nums[1]] = nums[0] = 2, ans[2] = nums[nums[2]] = nums[1] = 0, ans[3] = nums[nums[3]] = nums[4] = 3, ans[4] = nums[nums[4]] = nums[3] = 4. Thus, the final ans is [1, 2, 0, 3, 4].
+
+{{< dots >}}
+## Approach 🚀
+We can simply iterate over the input array nums and use the given formula to compute the result for each index i.
+
+### Initial Thoughts 💭
+- The problem asks us to compute the value nums[nums[i]] for each index i.
+- Since the array elements are distinct and within a specific range, we don't need additional data structures.
+- This approach is straightforward and requires just one iteration through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as per problem constraints.
+- Ensure the solution efficiently handles inputs with the maximum size, i.e., nums.length = 1000.
+- For the smallest array length (nums.length = 1), the result will be [nums[nums[0]]], which is just nums[0].
+- The input array will always contain distinct integers from 0 to nums.length - 1.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> buildArray(vector<int>& nums) {
+    int n=nums.size();
+    vector<int> ans(n);
+    for(int i=0;i<n;i++){
+        ans[i]=nums[nums[i]];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to transform an array based on a specific indexing pattern. Given an integer array `nums`, the task is to build a new array `ans` such that for each index `i`, the value of `ans[i]` is equal to `nums[nums[i]]`. The challenge lies in efficiently constructing this new array while adhering to the given transformation rule.
-
-### Approach
-
-To solve this problem, we can follow these steps:
-
-1. **Understanding the Transformation**: For each element in the input array `nums`, we need to access the value at the index specified by the current element. This means that we are essentially mapping values from one index to another based on the values present in the original array.
-
-2. **Initializing the Result Array**: We will create an output array `ans` of the same size as `nums` to store the results of our transformation.
-
-3. **Iterating Through the Array**: We will loop through each index of the input array `nums`, compute the new value for `ans[i]` by accessing `nums[nums[i]]`, and store this in the output array.
-
-4. **Returning the Result**: Finally, we return the constructed array `ans`.
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    vector<int> buildArray(vector<int>& nums) {
+    return ans;
+}
 ```
-This line defines a class `Solution` with a public method `buildArray` that takes a vector of integers `nums` as input and returns a vector of integers.
 
-```cpp
-        int n = nums.size();
-        vector<int> ans(n);
-```
-Here, we calculate the size of the input array `nums` and initialize a new vector `ans` of the same size to hold our results.
+This function builds an array where each element at index 'i' is replaced by the element at the index 'nums[i]' in the original array.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-```
-We start a loop that will iterate through each index `i` from `0` to `n-1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> buildArray(vector<int>& nums) {
+	```
+	Defines the function 'buildArray' which takes a vector of integers 'nums' and returns a new vector where each element is replaced by another element indexed by its own value.
 
-```cpp
-            ans[i] = nums[nums[i]];
-```
-Within the loop, for each index `i`, we set `ans[i]` to `nums[nums[i]]`. This line performs the transformation as described, where the first index accesses `nums`, and the value retrieved from `nums` is then used as the index for a second access into `nums`.
+2. **Variable Initialization**
+	```cpp
+	    int n=nums.size();
+	```
+	Initializes the variable 'n' to store the size of the input vector 'nums'.
 
-```cpp
-        }
-```
-This closing brace signifies the end of the for loop.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> ans(n);
+	```
+	Initializes a vector 'ans' of size 'n' to store the result.
 
-```cpp
-        return ans;
-    }
-};
-```
-Finally, we return the constructed array `ans`, and the class definition is closed.
+4. **Loop Start**
+	```cpp
+	    for(int i=0;i<n;i++){
+	```
+	Begins a loop that iterates over each index of the input vector 'nums'.
 
-### Complexity
+5. **Array Assignment**
+	```cpp
+	        ans[i]=nums[nums[i]];
+	```
+	For each index 'i', assigns the value at 'nums[nums[i]]' to 'ans[i]', effectively building the new array by accessing the element indexed by 'nums[i]'.
 
-- **Time Complexity**: The time complexity of this algorithm is O(n), where n is the length of the input array `nums`. We perform a single pass through the array to compute the values for the output array.
+6. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the newly constructed vector 'ans' that contains the elements at the indices specified by 'nums'.
 
-- **Space Complexity**: The space complexity is O(n) as well, since we are creating a new array `ans` of the same size as the input array.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The solution iterates over the array exactly once, which results in a time complexity of O(n), where n is the length of the input array.
 
-The `buildArray` function efficiently transforms an input array based on the specified index mapping rule. The implementation is straightforward and leverages simple array indexing to achieve the desired output.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Key Features
+We use an additional array of size n to store the result, so the space complexity is O(n).
 
-1. **Direct Index Mapping**: The solution effectively demonstrates how to map values based on index references in an array, a common requirement in various programming challenges.
+**Happy Coding! 🎉**
 
-2. **Efficiency**: The O(n) time complexity ensures that the solution scales well even for larger input sizes, making it suitable for competitive programming and real-world applications.
-
-3. **Simplicity**: The code is concise and easy to understand, making it accessible to programmers at all skill levels.
-
-### Use Cases
-
-1. **Array Transformations**: This technique can be employed in scenarios where array elements need to be transformed based on their values, such as in data processing or feature engineering in machine learning.
-
-2. **Index-Based Operations**: The approach can be adapted to solve problems involving index-based lookups and transformations, which are common in algorithmic challenges.
-
-3. **Game Development**: In games that involve elements with properties mapped to indices, this method can streamline operations that require transforming arrays based on player interactions or game mechanics.
-
-4. **Data Analysis**: The logic can be extended to analyze and transform datasets where values are interdependent based on their positions in an array, enabling more complex data manipulation tasks.
-
-5. **Competitive Programming**: Understanding and implementing this kind of indexing and transformation is essential for success in programming contests, where efficient solutions to array manipulation problems are frequently tested.
-
-By mastering this pattern, developers can enhance their problem-solving toolkit, making it easier to tackle various algorithmic challenges related to arrays and indexing. The simplicity of this approach, combined with its effectiveness, makes it a valuable addition to any programmer’s repertoire.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/build-array-from-permutation/description/)
 

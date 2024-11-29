@@ -14,129 +14,192 @@ img_src = ""
 youtube = "vFxVjspTM-0"
 youtube_upload_date="2021-11-14"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/vFxVjspTM-0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an encoded string and the number of rows used to encode the original text, recover the original string. The encoded text is produced by filling a matrix in a slanted transposition cipher and reading it row by row.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an encoded string `encodedText` and an integer `rows` representing the number of rows used to encode the original text.
+- **Example:** `encodedText = 'hello    wor  ld   ', rows = 3`
+- **Constraints:**
+	- 0 <= encodedText.length <= 10^6
+	- encodedText consists of lowercase English letters and spaces
+	- encodedText is a valid encoding of some originalText that does not have trailing spaces
+	- 1 <= rows <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string decodeCiphertext(string et, int rows) {
-        cout << et.size() << " " << rows;
-        string res = "";
-        int col = et.size() / rows;
-        int idx = 0;
-        string space = "";
-        // cout << col << " " << rows << " ";
-        while(idx < col - rows + 2) {
-            for(int i = 0; i < rows && idx + i + i * col < et.size(); i++) {
-                if(et[idx + i + i * col] == ' ')
-                    space += ' ';
-                else {
-                    res += (space + et[idx + i + i * col]);                    
-                    space = "";
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the decoded original text as a string.
+- **Example:** `Output: 'helloworld'`
+- **Constraints:**
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To decode the encoded text back to its original form using the given number of rows.
+
+- Calculate the number of columns in the matrix from the length of the encoded text and the number of rows.
+- Reconstruct the matrix by placing the characters of the encoded text according to the slanted transposition cipher pattern.
+- Read the matrix diagonally and reconstruct the original text.
+{{< dots >}}
+### Problem Assumptions ✅
+- The encoded text does not contain trailing spaces.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this example, the encoded string is 'hello    wor  ld   ' with 3 rows. By filling the matrix diagonally, we can recover the original string 'helloworld'.
+
+- **Input:** `Example 2`  \
+  **Explanation:** For the input 'abc   defghi' and 3 rows, the matrix looks like: 'abc', 'def', 'ghi'. Reading diagonally, we recover 'abcdefghi'.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves reconstructing the matrix from the encoded string and reading it diagonally to recover the original string.
+
+### Initial Thoughts 💭
+- We need to reverse the encoding process by filling a matrix with the encoded text and reading it diagonally.
+- The problem can be solved by calculating the matrix dimensions and then reversing the transposition cipher to get the original string.
+{{< dots >}}
+### Edge Cases 🌐
+- If the encoded text is empty, the original text is also empty.
+- Ensure that the algorithm works efficiently for the maximum input size (encodedText.length up to 10^6).
+- When there is only one row, the encoded text is the same as the original text.
+- The algorithm must handle the given constraints and ensure that the reconstructed text is valid.
+{{< dots >}}
+## Code 💻
+```cpp
+string decodeCiphertext(string et, int rows) {
+    cout << et.size() << " " << rows;
+    string res = "";
+    int col = et.size() / rows;
+    int idx = 0;
+    string space = "";
+    // cout << col << " " << rows << " ";
+    while(idx < col - rows + 2) {
+        for(int i = 0; i < rows && idx + i + i * col < et.size(); i++) {
+            if(et[idx + i + i * col] == ' ')
+                space += ' ';
+            else {
+                res += (space + et[idx + i + i * col]);                    
+                space = "";
             }
-            idx++;
+
         }
-        return res;
+        idx++;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function decodes a ciphered string by re-arranging characters according to the specified number of rows, essentially reversing the process of encoding characters into a matrix.
 
-The task is to decode a ciphered text that has been formatted into a grid with a specified number of rows. Given a string `et` (the encoded text) and an integer `rows`, the goal is to reconstruct the original message by reading the characters in a specific zigzag pattern from the grid. The text is filled in column-wise from the top down and then continues to the next column, which introduces spaces that need to be handled appropriately.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string decodeCiphertext(string et, int rows) {
+	```
+	This is the function signature for `decodeCiphertext`, which accepts a string `et` (the encoded text) and an integer `rows` (the number of rows in the cipher matrix). It returns the decoded string.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    string res = "";
+	```
+	This line initializes an empty string `res`, which will hold the decoded result.
 
-To decode the text effectively, we follow these steps:
+3. **Column Calculation**
+	```cpp
+	    int col = et.size() / rows;
+	```
+	This line calculates the number of columns in the cipher matrix by dividing the size of the encoded string `et` by the number of rows.
 
-1. **Input Interpretation**: The encoded text is represented by a string `et`, and we know how many rows were used to format this string into a grid. The columns can be inferred based on the length of `et` divided by `rows`.
+4. **Index Initialization**
+	```cpp
+	    int idx = 0;
+	```
+	This line initializes an index `idx` to track the position of the current character being processed in the cipher.
 
-2. **Determine Grid Dimensions**: Calculate the number of columns in the grid by dividing the total length of the encoded text by the number of rows.
+5. **Space Initialization**
+	```cpp
+	    string space = "";
+	```
+	This initializes a `space` string to hold spaces that are encountered during decoding, ensuring that they are correctly placed in the result.
 
-3. **Iterative Decoding**: We iterate through the encoded text in a loop to reconstruct the original message. The decoding involves reading characters from the encoded string in a manner that respects the row structure, specifically:
-   - Reading the characters at intervals determined by the grid layout.
-   - Collecting characters while managing spaces that separate words.
+6. **While Loop**
+	```cpp
+	    while(idx < col - rows + 2) {
+	```
+	This `while` loop iterates over the columns and adjusts the `idx` value to ensure we process the matrix correctly for decoding.
 
-4. **Handle Spaces**: As we reconstruct the message, we need to ensure that spaces are preserved correctly. If a character is a space, we need to manage it by adding it to a temporary string, which can be appended to the result once a non-space character is encountered.
+7. **For Loop**
+	```cpp
+	        for(int i = 0; i < rows && idx + i + i * col < et.size(); i++) {
+	```
+	This nested `for` loop iterates through the rows and checks if the current character index falls within the bounds of the encoded string.
 
-5. **Return the Result**: After completing the iterations, we return the decoded string as the final output.
+8. **Space Check**
+	```cpp
+	            if(et[idx + i + i * col] == ' ')
+	```
+	This checks if the current character in the encoded string is a space.
 
-### Code Breakdown (Step by Step)
+9. **Space Accumulation**
+	```cpp
+	                space += ' ';
+	```
+	If the character is a space, it is added to the `space` string to maintain the spaces in the decoded message.
 
-1. **Function Definition**: The function `decodeCiphertext` is defined to accept the encoded string `et` and an integer `rows`.
+10. **Character Processing**
+	```cpp
+	            else {
+	```
+	If the character is not a space, it is added to the decoded result string `res`.
 
-   ```cpp
-   string decodeCiphertext(string et, int rows) {
-   ```
+11. **Result Update**
+	```cpp
+	                res += (space + et[idx + i + i * col]);
+	```
+	This line appends the current character (along with any accumulated spaces) to the result string `res`.
 
-2. **Initialization**: We initialize the resultant string (`res`), calculate the number of columns (`col`), and set the starting index (`idx`). We also prepare a string to handle spaces.
+12. **Space Reset**
+	```cpp
+	                space = "";
+	```
+	This resets the `space` string after processing a non-space character.
 
-   ```cpp
-   string res = "";
-   int col = et.size() / rows;
-   int idx = 0;
-   string space = "";
-   ```
+13. **Index Increment**
+	```cpp
+	        idx++;
+	```
+	This increments the `idx` value to move to the next character in the encoded string.
 
-3. **Main Loop**: A while loop is initiated to iterate over potential starting points in the grid. This loop continues as long as `idx` is less than `col - rows + 2`, which ensures that we stay within the bounds of the encoded text.
+14. **Return Statement**
+	```cpp
+	    return res;
+	```
+	This line returns the decoded string stored in `res`.
 
-   ```cpp
-   while(idx < col - rows + 2) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Nested Loop**: Inside the while loop, we have a nested for loop that iterates through the number of rows. For each row, we compute the corresponding character position in the encoded string using the formula `idx + i + i * col`.
+The time complexity is linear in terms of the size of the input string, as we process each character exactly once.
 
-   ```cpp
-   for(int i = 0; i < rows && idx + i + i * col < et.size(); i++) {
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-5. **Character Handling**:
-   - If the character at the calculated position is a space, we add a space to the `space` string.
-   - If it is not a space, we append any accumulated spaces to the result followed by the current character, and reset the `space` string.
+The space complexity is linear in terms of the size of the input string, as we store the matrix and the result.
 
-   ```cpp
-   if(et[idx + i + i * col] == ' ')
-       space += ' ';
-   else {
-       res += (space + et[idx + i + i * col]);                    
-       space = "";
-   }
-   ```
+**Happy Coding! 🎉**
 
-6. **Incrementing Index**: After processing the current index, we increment `idx` to move to the next starting point in the grid.
-
-   ```cpp
-   idx++;
-   ```
-
-7. **Return Statement**: Finally, we return the constructed string `res`.
-
-   ```cpp
-   return res;
-   }
-   ```
-
-### Complexity
-
-- **Time Complexity**: The overall time complexity of this approach is \(O(n)\), where \(n\) is the length of the encoded text. This is because each character is processed at most once in the nested loops.
-
-- **Space Complexity**: The space complexity is \(O(m)\), where \(m\) is the size of the resulting decoded string. Additional space is used for temporary variables, but it does not grow with input size.
-
-### Conclusion
-
-The `decodeCiphertext` function effectively reconstructs the original message from an encoded string formatted in a grid layout. By iterating through the string in a structured manner and managing spaces properly, the solution demonstrates a clear and efficient way to decode text based on specified dimensions.
-
-This solution is applicable in various scenarios, such as deciphering encoded messages in communication protocols or processing formatted data that requires careful arrangement and extraction of meaningful information. Its linear time complexity ensures that it can handle larger inputs efficiently, making it a robust choice for similar decoding problems.
-
-Overall, this implementation serves as a solid example of how to manipulate and decode strings in a structured format, highlighting the importance of understanding the underlying data representation and the strategies needed to extract useful information from it. Future improvements could focus on optimizing space usage or extending the functionality to handle more complex decoding schemes.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decode-the-slanted-ciphertext/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "B5uvxUfQxN4"
 youtube_upload_date="2023-05-20"
 youtube_thumbnail="https://i.ytimg.com/vi/B5uvxUfQxN4/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,180 +28,258 @@ youtube_thumbnail="https://i.ytimg.com/vi/B5uvxUfQxN4/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a list of equations and their corresponding values, where each equation represents a division between two variables. Your task is to determine the result of several queries asking for the division result of two given variables.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two lists: `equations` representing division relations and `values` representing the results of those divisions. You are also given a list of `queries` that you need to evaluate.
+- **Example:** `Input: equations = [['a', 'b'], ['b', 'c']], values = [2.0, 3.0], queries = [['a', 'c'], ['b', 'a']]`
+- **Constraints:**
+	- 1 <= equations.length <= 20
+	- 1 <= queries.length <= 20
+	- Each equation contains two strings with lengths from 1 to 5.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<double> calcEquation(vector<vector<string>>& eqn, vector<double>& val, vector<vector<string>>& q) {
-        map<string, vector<pair<string, double>>> graph;
-        
-        for(int i = 0; i < eqn.size(); i++) {
-            double w = val[i];
-            graph[eqn[i][0]].push_back(make_pair(eqn[i][1], w));
-            if (w == 0) continue;
-            graph[eqn[i][1]].push_back(make_pair(eqn[i][0], 1 / w));
-        }
-        
-        vector<double> ans;
-        
-        for(int i = 0; i < q.size(); i++) {
-            set<string> vis;
-            double res = dfs(q[i][0], q[i][1], vis, graph);
-            if(res < 0) res = -1;
-            ans.push_back(res);
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each query, return the result of the division if it can be determined, otherwise return -1.0.
+- **Example:** `Output: [6.0, 0.5, -1.0, 1.0, -1.0]`
+- **Constraints:**
+	- The division is guaranteed to be valid for each equation.
+	- Queries asking for divisions between undefined variables must return -1.0.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Use depth-first search (DFS) to explore possible paths in the graph and compute the result of each query.
+
+- Construct a graph where each variable is a node, and each equation provides an edge with a weight representing the division result.
+- For each query, use DFS to explore the graph from the starting node (variable) to the target node and compute the division result along the path.
+{{< dots >}}
+### Problem Assumptions ✅
+- All equations are valid and there are no contradictions.
+- Evaluating queries will not result in division by zero.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For the equations [['a', 'b'], ['b', 'c']] and values [2.0, 3.0], the query ['a', 'c'] will return 6.0 because a / b = 2 and b / c = 3, so a / c = 2 * 3 = 6.`  \
+  **Explanation:** We first find the direct relations between variables and then use those relations to compute the result for each query.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be approached by constructing a graph from the equations, where each node represents a variable, and each edge represents a division relation. DFS is then used to traverse the graph to find answers to the queries.
+
+### Initial Thoughts 💭
+- Equations form a graph structure, with variables as nodes and division results as edge weights.
+- We need to perform DFS to explore possible paths and compute the result for each query.
+{{< dots >}}
+### Edge Cases 🌐
+- Queries for undefined variables should return -1.0.
+- Handle large numbers of equations and queries efficiently.
+- Return -1.0 for queries involving variables that do not appear in the equations.
+- Queries involving variables not present in the equations are invalid and should return -1.0.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<double> calcEquation(vector<vector<string>>& eqn, vector<double>& val, vector<vector<string>>& q) {
+    map<string, vector<pair<string, double>>> graph;
+    
+    for(int i = 0; i < eqn.size(); i++) {
+        double w = val[i];
+        graph[eqn[i][0]].push_back(make_pair(eqn[i][1], w));
+        if (w == 0) continue;
+        graph[eqn[i][1]].push_back(make_pair(eqn[i][0], 1 / w));
     }
     
-    double dfs(string start, string end, set<string> &vis, map<string, vector<pair<string, double>>> &gph) {
-        
-        if(start == end) return gph.count(start)? 1: -1;
-        vis.insert(start);
-        double ans = -1;
-        for(pair<string, double> x: gph[start]) {
-            if(vis.count(x.first)) continue;
-
-            double res = x.second * dfs(x.first, end, vis, gph);
-            if(res < 0) continue;
-            return res;
-        }
-        return ans;
+    vector<double> ans;
+    
+    for(int i = 0; i < q.size(); i++) {
+        set<string> vis;
+        double res = dfs(q[i][0], q[i][1], vis, graph);
+        if(res < 0) res = -1;
+        ans.push_back(res);
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-Given a list of equations, each in the form `A / B = value`, and a list of queries in the form `A / B`, the task is to evaluate the result of each query based on the provided equations. If the query can be evaluated, return the result; otherwise, return `-1` if it is not possible to evaluate the expression.
-
-To solve this, we can treat the problem as a graph traversal issue where:
-- Each variable (like `A`, `B`, etc.) is a **node** in the graph.
-- Each equation represents an **edge** with a weight that corresponds to the ratio between two variables.
-
----
-
-### 🧠 Approach
-
-This problem boils down to finding paths between nodes in a graph, where the path represents the division between variables. Let's break down the approach:
-
-1. **Graph Representation**: 
-   - We build a graph where each variable is a node. Each equation is represented as an edge with a weight that denotes the division ratio between two nodes.
-   
-2. **Graph Traversal with DFS**: 
-   - For each query, perform a **Depth-First Search (DFS)** starting from the numerator variable. We aim to find a path to the denominator, accumulating the division ratios along the way.
-
-3. **Edge Cases**:
-   - If the numerator and denominator are the same variable (like `A / A`), return `1` if they exist in the graph.
-   - If there is no valid path between the numerator and denominator, return `-1`.
-
-This method efficiently answers the queries based on the given equations!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's dive into the code to see how we implement this approach:
-
-#### Step 1: **Graph Construction**
-
-First, we need to build the graph:
-
-```cpp
-map<string, vector<pair<string, double>>> graph;
-
-for (int i = 0; i < eqn.size(); i++) {
-    double w = val[i];
-    graph[eqn[i][0]].push_back(make_pair(eqn[i][1], w));
-    if (w == 0) continue;
-    graph[eqn[i][1]].push_back(make_pair(eqn[i][0], 1 / w));
+    return ans;
 }
-```
 
-- We use a map (`graph`) where each key is a variable (string), and the value is a list of pairs. Each pair contains a connected variable and the division ratio.
-- For every equation `A / B = value`, we add two edges:
-  - `A` to `B` with weight `value`
-  - `B` to `A` with weight `1 / value`
-
-This way, we represent the entire set of equations as a graph!
-
----
-
-#### Step 2: **Processing Queries**
-
-Now that we have the graph, let's process each query:
-
-```cpp
-vector<double> ans;
-
-for (int i = 0; i < q.size(); i++) {
-    set<string> vis;
-    double res = dfs(q[i][0], q[i][1], vis, graph);
-    if (res < 0) res = -1;
-    ans.push_back(res);
-}
-```
-
-- We iterate through each query, and for each one, we perform a DFS search from the numerator to the denominator.
-- A set `vis` tracks the nodes we've already visited to avoid cycles and unnecessary re-traversals.
-
----
-
-#### Step 3: **DFS Traversal**
-
-Here's the core part of the algorithm where DFS is used to search for the path between variables:
-
-```cpp
 double dfs(string start, string end, set<string> &vis, map<string, vector<pair<string, double>>> &gph) {
-    if (start == end) return gph.count(start) ? 1 : -1;
+    
+    if(start == end) return gph.count(start)? 1: -1;
     vis.insert(start);
     double ans = -1;
-    for (pair<string, double> x : gph[start]) {
-        if (vis.count(x.first)) continue;
-        
+    for(pair<string, double> x: gph[start]) {
+        if(vis.count(x.first)) continue;
+
         double res = x.second * dfs(x.first, end, vis, gph);
-        if (res < 0) continue;
+        if(res < 0) continue;
         return res;
     }
     return ans;
 }
 ```
 
-- **Base Case**: If `start == end`, return `1` if the node exists in the graph (indicating that `A / A = 1`).
-- **DFS Traversal**: For each adjacent node, we recursively search for a path, accumulating the product of the ratios.
-- If a valid path is found, we return the accumulated ratio; otherwise, we return `-1`.
+This solution calculates the result of equations represented as pairs of strings using a graph structure and depth-first search (DFS). The graph stores each variable's relationships, and DFS explores possible paths to compute the result of a given equation.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<double> calcEquation(vector<vector<string>>& eqn, vector<double>& val, vector<vector<string>>& q) {
+	```
+	Define the main function `calcEquation` that takes the list of equations (`eqn`), their corresponding values (`val`), and queries (`q`) as input.
 
-### 📈 Complexity Analysis
+2. **Graph Representation**
+	```cpp
+	    map<string, vector<pair<string, double>>> graph;
+	```
+	Create a graph to represent the equations where each node is a string (variable) and each edge is a pair (connected variable and the corresponding value).
 
-#### Time Complexity:
-1. **Graph Construction**:
-   - Constructing the graph takes `O(E)`, where `E` is the number of equations (edges).
-   
-2. **Query Processing**:
-   - For each query, the DFS might visit all nodes and edges in the graph. Hence, for each query, the time complexity is `O(V + E)`, where `V` is the number of variables (nodes) and `E` is the number of edges.
-   
-3. **Overall Complexity**:
-   - For `Q` queries, the overall complexity is `O(Q * (V + E))`.
+3. **Graph Construction**
+	```cpp
+	    for(int i = 0; i < eqn.size(); i++) {
+	```
+	Loop through the list of equations to build the graph with the given relationships between variables.
 
-#### Space Complexity:
-1. **Graph Storage**:
-   - The space complexity for the graph is `O(V + E)` where `V` is the number of variables and `E` is the number of edges.
+4. **Graph Construction**
+	```cpp
+	        double w = val[i];
+	```
+	Extract the weight (value) associated with the current equation.
 
-2. **DFS Stack**:
-   - The DFS recursion stack depth is at most `O(V)`, leading to a space complexity of `O(V)` for the DFS.
+5. **Graph Construction**
+	```cpp
+	        graph[eqn[i][0]].push_back(make_pair(eqn[i][1], w));
+	```
+	For each equation, add the relationship between the first variable and the second variable with the corresponding value to the graph.
 
-Thus, the overall space complexity is `O(V + E)`.
+6. **Edge Case Handling**
+	```cpp
+	        if (w == 0) continue;
+	```
+	Skip equations where the value is zero to avoid division by zero.
 
----
+7. **Graph Construction**
+	```cpp
+	        graph[eqn[i][1]].push_back(make_pair(eqn[i][0], 1 / w));
+	```
+	Add the inverse relationship to the graph for the second variable.
 
-### 🏁 Conclusion
+8. **Initialization**
+	```cpp
+	    vector<double> ans;
+	```
+	Initialize a vector `ans` to store the results of the queries.
 
-This solution effectively solves the problem of evaluating division queries using a graph traversal technique. By representing the equations as a graph and using DFS, we can find paths between variables and calculate their ratios. The algorithm is efficient and works well even for large inputs, with time complexity of `O(Q * (V + E))` and space complexity of `O(V + E)`.
+9. **Query Loop**
+	```cpp
+	    for(int i = 0; i < q.size(); i++) {
+	```
+	Loop through the queries to calculate the result for each pair of variables.
 
-✨ **Tip**: With this approach, you're not just solving queries—you're mastering graph traversal! Keep practicing, and these concepts will become second nature!
+10. **Visited Set**
+	```cpp
+	        set<string> vis;
+	```
+	Create a set `vis` to keep track of visited nodes (variables) during the DFS traversal.
+
+11. **DFS Call**
+	```cpp
+	        double res = dfs(q[i][0], q[i][1], vis, graph);
+	```
+	Call the `dfs` function to compute the result of the query.
+
+12. **Edge Case Handling**
+	```cpp
+	        if(res < 0) res = -1;
+	```
+	If the result is negative (meaning no path was found), set the result to -1.
+
+13. **Store Result**
+	```cpp
+	        ans.push_back(res);
+	```
+	Store the result of the query in the `ans` vector.
+
+14. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the vector `ans` containing the results of all queries.
+
+15. **DFS Function**
+	```cpp
+	double dfs(string start, string end, set<string> &vis, map<string, vector<pair<string, double>>> &gph) {
+	```
+	Define the `dfs` function that performs a depth-first search to find the path between two variables.
+
+16. **DFS Base Case**
+	```cpp
+	    if(start == end) return gph.count(start)? 1: -1;
+	```
+	If the start and end variables are the same, return 1 if the variable exists in the graph, or -1 if not.
+
+17. **Mark Visited**
+	```cpp
+	    vis.insert(start);
+	```
+	Mark the current node (variable) as visited.
+
+18. **DFS Initialization**
+	```cpp
+	    double ans = -1;
+	```
+	Initialize a variable `ans` to store the result of the DFS traversal.
+
+19. **DFS Traversal**
+	```cpp
+	    for(pair<string, double> x: gph[start]) {
+	```
+	Iterate through all neighbors of the current node (variable).
+
+20. **DFS Pruning**
+	```cpp
+	        if(vis.count(x.first)) continue;
+	```
+	Skip already visited nodes to avoid infinite loops.
+
+21. **Recursive DFS**
+	```cpp
+	        double res = x.second * dfs(x.first, end, vis, gph);
+	```
+	Recursively call the `dfs` function for the neighboring node and calculate the result.
+
+22. **DFS Result Check**
+	```cpp
+	        if(res < 0) continue;
+	```
+	If the result of the recursive call is negative (no path found), continue to the next neighbor.
+
+23. **Return Result**
+	```cpp
+	        return res;
+	```
+	If a valid result is found, return it.
+
+24. **Return Default**
+	```cpp
+	    return ans;
+	```
+	If no valid result was found, return the default value (-1).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(V + E) where V is the number of vertices (variables) and E is the number of edges (equations).
+- **Average Case:** O(V + E) per query.
+- **Worst Case:** O(V + E) per query.
+
+The time complexity is linear with respect to the number of variables and equations, and each query requires traversal of the graph.
+
+### Space Complexity 💾
+- **Best Case:** O(V + E) for storing the graph.
+- **Worst Case:** O(V + E) where V is the number of vertices and E is the number of edges.
+
+The space complexity is proportional to the size of the graph created from the equations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/evaluate-division/description/)
 

@@ -14,89 +14,129 @@ img_src = ""
 youtube = "YB-A6OUj98o"
 youtube_upload_date="2021-02-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/YB-A6OUj98o/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, `word1` and `word2`. You need to construct a string `merge` by choosing characters from both strings. At each step, you can either append the first character of `word1` to `merge` (if `word1` is non-empty) or append the first character of `word2` to `merge` (if `word2` is non-empty). The goal is to form the lexicographically largest string possible from these choices.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings, `word1` and `word2`, both consisting of lowercase English letters.
+- **Example:** `Input: word1 = 'abcde', word2 = 'acd'`
+- **Constraints:**
+	- 1 <= word1.length, word2.length <= 3000
+	- word1 and word2 consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string largestMerge(string w1, string w2) {
-        if (w1 == "" || w2 == "")
-            return w1 + w2;
-        else if (w1 < w2)
-            return w2[0] + largestMerge(w1, w2.substr(1));
-        else return w1[0] + largestMerge(w1.substr(1), w2);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically largest merge string you can construct.
+- **Example:** `Output: 'abcdeacd'`
+- **Constraints:**
+	- The resulting string is guaranteed to be lexicographically the largest possible merge.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the lexicographically largest merge string, we need to make the optimal choice at each step of picking from `word1` or `word2`.
 
-The goal of this problem is to merge two strings, `w1` and `w2`, in such a way that the resulting string is the lexicographically largest possible. This means that when both strings are compared, we want to form a new string that is greater than or equal to any possible combination of these two strings when arranged.
+- 1. Compare the first characters of `word1` and `word2`.
+- 2. If the character in `word1` is larger, append it to `merge`. Otherwise, append the character from `word2`.
+- 3. If one string becomes empty, append the remaining characters from the other string to `merge`.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both `word1` and `word2` are non-empty strings consisting of lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: word1 = 'abcd', word2 = 'acef'`  \
+  **Explanation:** At each step, we compare the first characters of `word1` and `word2`. The largest lexicographical choice is appended to `merge`. The result is 'abcdeaf'.
 
-### Approach
+- **Input:** `Input: word1 = 'abc', word2 = 'aaa'`  \
+  **Explanation:** Here, we always take from `word1` as its characters are larger than those in `word2`, resulting in 'abcaaa'.
 
-To achieve this, the solution uses a recursive approach. The key idea is to compare the two strings at each step and append the larger of the two prefixes to the result string. If one string is exhausted, the remaining characters of the other string will be appended directly to the result. The steps can be outlined as follows:
+{{< dots >}}
+## Approach 🚀
+The approach involves comparing the first characters of both strings and greedily choosing the lexicographically larger one, ensuring the largest possible merge string.
 
-1. **Base Case**: If either string is empty, return the other string. This serves as the termination condition for the recursion.
+### Initial Thoughts 💭
+- We can use a greedy approach to always select the larger character between the two strings at each step.
+- The solution is based on the principle of comparing characters in a lexicographical manner.
+{{< dots >}}
+### Edge Cases 🌐
+- If either `word1` or `word2` is empty, simply return the other string.
+- The solution should handle cases where `word1` and `word2` are close to 3000 characters in length.
+- If both strings are identical, the result is the string concatenated to itself.
+- The solution should perform efficiently with the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+string largestMerge(string w1, string w2) {
+    if (w1 == "" || w2 == "")
+        return w1 + w2;
+    else if (w1 < w2)
+        return w2[0] + largestMerge(w1, w2.substr(1));
+    else return w1[0] + largestMerge(w1.substr(1), w2);
+}
+```
 
-2. **Comparison**: Compare the two strings:
-   - If `w1` is less than `w2` lexicographically, append the first character of `w2` to the result and recursively call the function with `w1` and the remaining characters of `w2`.
-   - Otherwise, append the first character of `w1` to the result and recursively call the function with the remaining characters of both strings.
+The function generates the lexicographically largest merge of two strings by recursively comparing and selecting characters from the inputs.
 
-3. **Recursion**: This process continues recursively until both strings are completely merged into the final result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string largestMerge(string w1, string w2) {
+	```
+	Declares the recursive function to create the largest lexicographical merge of two strings.
 
-### Code Breakdown (Step by Step)
+2. **Base Case**
+	```cpp
+	    if (w1 == "" || w2 == "")
+	```
+	Checks if either string is empty, which serves as the base case for recursion.
 
-Here’s a step-by-step breakdown of the implementation in the `largestMerge` function:
+3. **Return Statement**
+	```cpp
+	        return w1 + w2;
+	```
+	If one string is empty, appends the other string and ends the recursion.
 
-1. **Class Definition**: The function is defined within a class called `Solution`.
+4. **Conditional Check**
+	```cpp
+	    else if (w1 < w2)
+	```
+	Checks if the first string is lexicographically smaller than the second string.
 
-   ```cpp
-   class Solution {
-   ```
+5. **Recursive Call**
+	```cpp
+	        return w2[0] + largestMerge(w1, w2.substr(1));
+	```
+	Appends the first character of `w2` and makes a recursive call with the remaining part of `w2`.
 
-2. **Public Method**: The `largestMerge` method takes two strings as input and returns a single string as output.
+6. **Recursive Call**
+	```cpp
+	    else return w1[0] + largestMerge(w1.substr(1), w2);
+	```
+	Appends the first character of `w1` and makes a recursive call with the remaining part of `w1`.
 
-   ```cpp
-   public:
-       string largestMerge(string w1, string w2) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m), where n is the length of `word1` and m is the length of `word2`.
+- **Average Case:** O(n + m), as each character from both strings is processed once.
+- **Worst Case:** O(n + m), where n and m are the lengths of the strings.
 
-3. **Base Case**: The first conditional checks if either `w1` or `w2` is empty. If so, it returns the concatenation of the two strings, effectively returning the non-empty string.
+The time complexity is linear in the sum of the lengths of the two strings, as each character is processed once.
 
-   ```cpp
-   if (w1 == "" || w2 == "")
-       return w1 + w2;
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n + m), as the space used is proportional to the length of the result string.
+- **Worst Case:** O(n + m), where n and m are the lengths of `word1` and `word2`.
 
-4. **Lexicographical Comparison**: The next conditional compares `w1` and `w2`. If `w1` is lexicographically smaller than `w2`, it means that `w2` should contribute more to the final merged string. Thus, the function appends the first character of `w2` and makes a recursive call with the remaining characters of `w1` and the substring of `w2` starting from the second character.
+The space complexity is linear, as the merge string needs to store all the characters from both input strings.
 
-   ```cpp
-   else if (w1 < w2)
-       return w2[0] + largestMerge(w1, w2.substr(1));
-   ```
+**Happy Coding! 🎉**
 
-5. **Default Case**: If `w1` is not less than `w2`, the first character of `w1` is appended to the result. The function then makes a recursive call with the substring of `w1` starting from the second character and the entire `w2`.
-
-   ```cpp
-   else return w1[0] + largestMerge(w1.substr(1), w2);
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution can be approximated to \(O(n + m)\), where \(n\) and \(m\) are the lengths of the input strings `w1` and `w2`, respectively. This is because each character of both strings will be processed once in the recursion.
-
-- **Space Complexity**: The space complexity is \(O(n + m)\) as well, due to the recursion stack space used for the function calls and the substring creations in each recursive call.
-
-### Conclusion
-
-In conclusion, the `largestMerge` function effectively demonstrates a straightforward recursive strategy to merge two strings into the lexicographically largest possible string. By leveraging string comparison at each recursive step, the solution ensures that the characters are selected optimally to create the desired result. This method is not only efficient but also easy to understand, showcasing how recursion can simplify complex problems involving string manipulations. The approach can be useful in various scenarios where order and combination of elements are crucial, particularly in algorithm design and competitive programming contexts.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-merge-of-two-strings/description/)
 

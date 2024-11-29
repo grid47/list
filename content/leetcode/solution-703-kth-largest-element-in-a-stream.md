@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "hOjcdrqMoQ8"
 youtube_upload_date="2021-10-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/hOjcdrqMoQ8/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,124 +28,194 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/hOjcdrqMoQ8/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are tasked with implementing a class that helps track the kth highest score in a dynamic list of test scores. Each time a new score is submitted, you need to return the kth highest score in the list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The class should be initialized with an integer k (the desired ranking) and a list of test scores. For each new score added to the stream, return the kth highest score in the list.
+- **Example:** `KthLargest kthLargest = new KthLargest(2, [1, 3, 5, 7, 9]); kthLargest.add(6);`
+- **Constraints:**
+	- 0 <= nums.length <= 10^4
+	- 1 <= k <= nums.length + 1
+	- -10^4 <= nums[i] <= 10^4
+	- -10^4 <= val <= 10^4
+	- At most 10^4 calls will be made to the add method.
 
-{{< highlight cpp >}}
-class KthLargest {
-public:
-    priority_queue<int, vector<int>, greater<int>> pq;
-    int k;
-    KthLargest(int k, vector<int>& nums) {
-        this->k = k;
-        for(auto x: nums) {
-            pq.push(x);
-            if(pq.size() > k) {
-                cout << pq.top();
-                pq.pop();
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The method should return the kth largest number in the list after each new score is added.
+- **Example:** `Output: [null, 5, 6, 7, 7]`
+- **Constraints:**
+	- The result after each call to add should be the kth largest score in the current list of test scores.
 
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Track the kth largest score dynamically using a priority queue or a min-heap to efficiently maintain the list of the top k scores.
 
-    }
-    
-    int add(int val) {
-        pq.push(val);
+- 1. Initialize a priority queue (min-heap) to store the top k elements.
+- 2. Add each score to the heap.
+- 3. If the heap exceeds k elements, remove the smallest element.
+- 4. After each addition, the top of the heap will be the kth largest score.
+{{< dots >}}
+### Problem Assumptions ✅
+- The list will be dynamically updated with new scores.
+- The kth largest element should be returned after each new score is added.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: KthLargest(2, [1, 3, 5, 7, 9])`  \
+  **Explanation:** When the 2nd largest element is requested after each new score is added, the following occurs: add(6) => 6 becomes the 2nd largest number, add(8) => 7 becomes the 2nd largest number, etc.
+
+{{< dots >}}
+## Approach 🚀
+The goal is to efficiently manage a dynamic list of scores and find the kth largest element after each insertion. A priority queue or min-heap can be used to keep track of the top k elements in the stream.
+
+### Initial Thoughts 💭
+- A heap is a good choice to manage a dynamic list of top k elements efficiently.
+- Since we are only interested in the kth largest element, using a min-heap of size k ensures that the smallest element in the heap is always the kth largest.
+{{< dots >}}
+### Edge Cases 🌐
+- The list of scores may be empty initially, but k will always be valid.
+- If the number of scores is very large, ensure that the heap operations are optimized to handle up to 10,000 elements.
+- If multiple scores have the same value, they should be treated as equal for the purposes of finding the kth largest score.
+- Ensure the heap is only storing the top k elements at all times to maintain efficiency.
+{{< dots >}}
+## Code 💻
+```cpp
+priority_queue<int, vector<int>, greater<int>> pq;
+int k;
+KthLargest(int k, vector<int>& nums) {
+    this->k = k;
+    for(auto x: nums) {
+        pq.push(x);
         if(pq.size() > k) {
+            cout << pq.top();
             pq.pop();
         }
-        return pq.top();
+
     }
+
+}
+
+int add(int val) {
+    pq.push(val);
+    if(pq.size() > k) {
+        pq.pop();
+    }
+    return pq.top();
+}
 };
 
 /**
  * Your KthLargest object will be instantiated and called as such:
  * KthLargest* obj = new KthLargest(k, nums);
  * int param_1 = obj->add(val);
- */
-{{< /highlight >}}
----
-
-### Problem Statement:
-The problem is to design a class `KthLargest` that efficiently supports two operations:
-1. **Initialization**: It should accept an integer `k` and a list of integers `nums`. The class should store the k-th largest element from the list of numbers provided.
-2. **Addition**: Given a number `val`, it should be added to the list, and the class should return the k-th largest number after this insertion.
-
-This problem typically involves using a data structure like a heap (or priority queue) to efficiently manage and retrieve the k-th largest element. The solution should be optimized for both the initial list and future additions.
-
-### Approach:
-The most efficient way to solve this problem is to use a **min-heap** (priority queue). The idea is to maintain a heap of size `k`, where:
-- The root of the heap is the k-th largest element in the current list of numbers.
-- As we add new numbers, if the size of the heap exceeds `k`, we remove the smallest element (i.e., the root of the heap).
-
-This approach ensures that after every insertion, the heap always maintains the k largest elements, and the root will represent the k-th largest element in the array.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Define the Data Members
-```cpp
-priority_queue<int, vector<int>, greater<int>> pq;  // Min-heap to store the k largest elements
-int k;  // The k-th largest element to track
 ```
-- `pq` is a priority queue (min-heap) implemented using a vector. The third argument `greater<int>` ensures that the priority queue behaves as a min-heap (i.e., the smallest element is at the top).
-- `k` stores the value of `k`, indicating the k-th largest element that we need to track.
 
-#### Step 2: Constructor to Initialize the KthLargest Object
-```cpp
-KthLargest(int k, vector<int>& nums) {
-    this->k = k;  // Set the value of k
-    for(auto x: nums) {  // Iterate over each number in the input list
-        pq.push(x);  // Add the number to the heap
-        if(pq.size() > k) {  // If the heap size exceeds k, remove the smallest element
-            cout << pq.top();  // Debugging line to print the top element (not part of the final solution)
-            pq.pop();  // Remove the smallest element
-        }
-    }
-}
-```
-- **Initialization**: The constructor accepts an integer `k` and a vector `nums` containing the initial list of numbers.
-- We iterate over each element in `nums` and insert it into the min-heap.
-- After inserting each number, we check if the heap size exceeds `k`. If it does, we remove the smallest element (`pq.pop()`), ensuring that the heap always stores only the k largest elements. The root of the heap (`pq.top()`) will always be the k-th largest element.
-- The `cout` statement prints the current smallest element in the heap for debugging purposes.
+This code defines a class KthLargest that finds the Kth largest element in a stream of integers. It uses a priority queue (min-heap) to keep track of the largest K elements, ensuring efficient updates as new values are added.
 
-#### Step 3: Add Method to Insert New Elements
-```cpp
-int add(int val) {
-    pq.push(val);  // Add the new value to the heap
-    if(pq.size() > k) {  // If the heap size exceeds k, remove the smallest element
-        pq.pop();  // Remove the smallest element to maintain the heap size as k
-    }
-    return pq.top();  // Return the k-th largest element (the root of the min-heap)
-}
-```
-- The `add()` function accepts an integer `val` and inserts it into the min-heap.
-- After inserting the new value, we check if the heap size exceeds `k`. If it does, we remove the smallest element (i.e., the root of the heap) to ensure that the heap size remains `k`.
-- Finally, we return the root of the heap (`pq.top()`), which represents the current k-th largest element.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Priority Queue Initialization**
+	```cpp
+	priority_queue<int, vector<int>, greater<int>> pq;
+	```
+	A min-heap priority queue 'pq' is initialized to keep track of the K largest elements. The 'greater<int>' ensures the smallest element is at the top.
 
-#### Step 4: Notes on `cout` in the Constructor
-The line `cout << pq.top();` inside the constructor is not necessary for the final solution. It seems like a debugging step to print the k-th largest element during the initialization phase. This should be removed in the production version to avoid unnecessary output.
+2. **Variable Declaration**
+	```cpp
+	int k;
+	```
+	The variable 'k' holds the value of K, which represents the number of largest elements to track.
 
-### Complexity Analysis:
+3. **Constructor Definition**
+	```cpp
+	KthLargest(int k, vector<int>& nums) {
+	```
+	Constructor for the KthLargest class. It initializes 'k' and populates the priority queue 'pq' with the values from the input vector 'nums'.
 
-#### Time Complexity:
-- **Constructor (`KthLargest`)**: 
-  - Inserting an element into the min-heap takes **O(log k)** time.
-  - Since there are `n` elements in `nums`, the total time for the constructor is **O(n log k)**, where `n` is the size of the input array `nums`.
-  
-- **Add Method (`add`)**:
-  - Inserting a new element into the min-heap takes **O(log k)** time.
-  - If the size of the heap exceeds `k`, we remove the smallest element, which also takes **O(log k)** time.
-  - Therefore, the time complexity of the `add` method is **O(log k)**.
+4. **Variable Initialization**
+	```cpp
+	    this->k = k;
+	```
+	Assign the input value 'k' to the class variable 'k'.
 
-#### Space Complexity:
-- **O(k)**: The priority queue stores at most `k` elements at any given time. Hence, the space complexity is **O(k)**, where `k` is the size of the heap.
+5. **Loop Over Input Array**
+	```cpp
+	    for(auto x: nums) {
+	```
+	Iterate over each element in the input array 'nums' to populate the priority queue.
 
-### Conclusion:
+6. **Push to Priority Queue**
+	```cpp
+	        pq.push(x);
+	```
+	Push the current element 'x' from the input array into the priority queue.
 
-The solution efficiently manages the k-th largest element using a min-heap (priority queue). This ensures that:
-- Insertion of elements and maintaining the heap is done in **O(log k)** time.
-- The space used by the heap is proportional to `k`, making it scalable even for large values of `n` (the number of elements to be processed).
-  
-This approach is highly efficient for problems involving dynamic insertion of elements while keeping track of the k-th largest value. The use of a min-heap ensures that the algorithm remains optimal, making it a preferred solution for similar problems in competitive programming and real-world applications.
+7. **Check Priority Queue Size**
+	```cpp
+	        if(pq.size() > k) {
+	```
+	Check if the priority queue contains more than 'k' elements.
+
+8. **Remove Smallest Element**
+	```cpp
+	            cout << pq.top();
+	```
+	Output the smallest element in the priority queue, which is at the top.
+
+9. **Pop Top Element**
+	```cpp
+	            pq.pop();
+	```
+	Remove the smallest element from the priority queue to maintain only the K largest elements.
+
+10. **Method Definition**
+	```cpp
+	int add(int val) {
+	```
+	Method that adds a new value 'val' to the priority queue and returns the current Kth largest element.
+
+11. **Push Value to Queue**
+	```cpp
+	    pq.push(val);
+	```
+	Push the new value 'val' into the priority queue.
+
+12. **Check Queue Size**
+	```cpp
+	    if(pq.size() > k) {
+	```
+	Check if the size of the priority queue exceeds 'k'.
+
+13. **Pop Smallest Element**
+	```cpp
+	        pq.pop();
+	```
+	Pop the smallest element from the priority queue to ensure it only contains the largest 'k' elements.
+
+14. **Return Kth Largest Element**
+	```cpp
+	    return pq.top();
+	```
+	Return the top element of the priority queue, which is the Kth largest element.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log k) for each add operation when the heap is not full.
+- **Average Case:** O(log k) for each add operation.
+- **Worst Case:** O(log k) for each add operation, where k is the number of elements in the heap.
+
+The time complexity of adding a new score is logarithmic relative to k, the size of the heap.
+
+### Space Complexity 💾
+- **Best Case:** O(k), since the space required does not depend on the number of operations but only on k.
+- **Worst Case:** O(k), as we only need to store the top k elements in the heap.
+
+The space complexity is determined by the size of the heap, which stores the top k elements.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-largest-element-in-a-stream/description/)
 

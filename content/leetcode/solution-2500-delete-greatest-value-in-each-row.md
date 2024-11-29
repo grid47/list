@@ -14,120 +14,158 @@ img_src = ""
 youtube = "xWRu1KHVAIo"
 youtube_upload_date="2022-12-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/xWRu1KHVAIo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix grid with positive integers. In each operation, remove the greatest value from each row, and if multiple elements have the same greatest value, remove any one of them. After removing the greatest value from all rows, add the maximum of these values to the answer. The number of columns decreases by one after each operation. Perform these operations until the grid is empty, and return the sum of the maximum values from all operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D grid where each row contains positive integers. The grid has m rows and n columns, and the values in the grid are sorted within each row in ascending order.
+- **Example:** `Input: grid = [[1, 3, 4], [2, 5, 6]]`
+- **Constraints:**
+	- 1 <= m, n <= 50
+	- 1 <= grid[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of the maximum values removed from the grid in each operation.
+- **Example:** `Output: 13`
+- **Constraints:**
+	- The sum is calculated by adding the maximum value removed in each operation.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the sum of the maximum values from the elements removed from each row during each operation, by reducing the grid by one column at a time.
+
+- 1. For each row in the grid, sort the values to easily access the greatest value.
+- 2. In each operation, remove the greatest element from each row and find the maximum among them.
+- 3. Keep track of the sum of these maximum values until the grid becomes empty.
+{{< dots >}}
+### Problem Assumptions ✅
+- All rows are not empty and contain at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[1, 3, 4], [2, 5, 6]]`  \
+  **Explanation:** In the first operation, we remove 4 from the first row and 6 from the second row, adding 6 to the result. In the second operation, we remove 3 from the first row and 5 from the second row, adding 5 to the result. In the final operation, we remove 1 and 2, adding 2 to the result. The total sum is 6 + 5 + 2 = 13.
+
+- **Input:** `Input: grid = [[10]]`  \
+  **Explanation:** In this case, there is only one element, 10, and it is removed in the first operation. The total sum is 10.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves sorting each row to easily access the maximum element and then performing the operation of removing the largest elements until the grid is empty. The result is the sum of the maximum values removed in each operation.
+
+### Initial Thoughts 💭
+- Sorting each row will allow easy access to the maximum element.
+- By sorting the rows, we can directly pick the maximum element and track the maximum values in each operation.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one row and one column, so this case is not applicable.
+- Ensure the solution can handle grids of the largest size, with m and n up to 50.
+- Handle cases where the grid has only one row or one column.
+- The solution should efficiently handle cases with maximum values for m and n.
+{{< dots >}}
+## Code 💻
+```cpp
   int deleteGreatestValue(vector<vector<int>>& g) {
-      int res = 0, si = g.size(), sj = g[0].size();
-      for (auto &r : g)
-          sort(begin(r), end(r));
-      for (int j = 0; j < sj; ++j) {
-          int max_row = 0;
-          for (int i = 0; i < si; ++i) 
-              max_row = max(max_row, g[i][j]);
-          res += max_row;
-      }
-      return res;
+  int res = 0, si = g.size(), sj = g[0].size();
+  for (auto &r : g)
+      sort(begin(r), end(r));
+  for (int j = 0; j < sj; ++j) {
+      int max_row = 0;
+      for (int i = 0; i < si; ++i) 
+          max_row = max(max_row, g[i][j]);
+      res += max_row;
   }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to delete the greatest value from each column in a given 2D grid and return the sum of the deleted values. The process of deleting the greatest value involves sorting the rows of the grid in non-decreasing order and then iterating over each column to pick the largest remaining element. This needs to be done efficiently, and the result should be the sum of the greatest values deleted from each column.
-
-### Approach
-
-The key idea here is to:
-1. **Sort the rows of the grid**: Sorting each row ensures that for every column, the maximum value is the last element in each row.
-2. **Iterate through each column**: For each column, pick the largest element from the sorted rows (which will be the last element after sorting each row).
-3. **Sum the largest values**: The sum of the maximum values from each column will be the final result.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int res = 0, si = g.size(), sj = g[0].size();
+  return res;
+  }
 ```
 
-The first step initializes two variables:
-- `res`: This will store the sum of the maximum values that are "deleted" from each column.
-- `si`: This stores the number of rows in the grid `g` (i.e., the number of elements in the outer vector).
-- `sj`: This stores the number of columns in the grid `g` (i.e., the number of elements in the inner vectors).
+The function `deleteGreatestValue` calculates the sum of the greatest values in each column of a 2D matrix after sorting each row in ascending order.
 
-#### Step 2: Sort Each Row
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	  int deleteGreatestValue(vector<vector<int>>& g) {
+	```
+	Defines the function `deleteGreatestValue` that takes a 2D vector `g` (a matrix) and returns an integer representing the sum of the greatest values in each column.
 
-```cpp
-for (auto &r : g)
-    sort(begin(r), end(r));
-```
+2. **Variable Initialization**
+	```cpp
+	  int res = 0, si = g.size(), sj = g[0].size();
+	```
+	Initializes the variable `res` to store the result, and calculates the number of rows (`si`) and columns (`sj`) in the 2D vector `g`.
 
-The next step sorts each row of the grid in non-decreasing order. The `sort` function is applied to each row `r` of the grid `g`, ensuring that for any column, the largest value will be the last element of the row after sorting.
+3. **Looping**
+	```cpp
+	  for (auto &r : g)
+	```
+	Loops through each row of the 2D vector `g`.
 
-- **Why sort each row?** Sorting each row ensures that when we pick the value from each row at any column index, it will always be the largest remaining value in that row.
-  
-For example, if a row initially contains the elements `[3, 1, 2]`, sorting it will make it `[1, 2, 3]`. The largest element in that row will then be at the end (`3`), which is what we need to "delete."
+4. **Sorting**
+	```cpp
+	      sort(begin(r), end(r));
+	```
+	Sorts each row of the 2D vector `g` in ascending order.
 
-#### Step 3: Iterate Over Columns and Find Maximum Value
+5. **Looping**
+	```cpp
+	  for (int j = 0; j < sj; ++j) {
+	```
+	Starts a loop to iterate through each column (`j`) of the sorted 2D vector.
 
-```cpp
-for (int j = 0; j < sj; ++j) {
-    int max_row = 0;
-    for (int i = 0; i < si; ++i) 
-        max_row = max(max_row, g[i][j]);
-    res += max_row;
-}
-```
+6. **Variable Initialization**
+	```cpp
+	      int max_row = 0;
+	```
+	Initializes a variable `max_row` to store the maximum value in the current column during the iteration.
 
-After sorting each row, the algorithm iterates over each column `j` and finds the maximum value for that column across all rows:
+7. **Looping**
+	```cpp
+	      for (int i = 0; i < si; ++i) 
+	```
+	Starts a loop to iterate through each row (`i`) in the current column (`j`).
 
-- **Outer loop**: The outer loop runs through each column `j` (from `0` to `sj - 1`).
-- **Inner loop**: The inner loop iterates through all rows `i` (from `0` to `si - 1`) and compares the value in column `j` of the current row `g[i][j]` with the current maximum value `max_row`.
-- **Finding max for column**: For each column, the algorithm computes the maximum value from all rows and stores it in `max_row`.
+8. **Mathematical Operations**
+	```cpp
+	          max_row = max(max_row, g[i][j]);
+	```
+	Calculates the maximum value between the current `max_row` and the current element `g[i][j]` in the column.
 
-Once the maximum value for a column is determined, it is added to `res` to track the sum of the greatest values deleted from each column.
+9. **Result Calculation**
+	```cpp
+	      res += max_row;
+	```
+	Adds the maximum value found in the current column (`max_row`) to the result `res`.
 
-#### Step 4: Return the Result
+10. **Return Statement**
+	```cpp
+	  return res;
+	```
+	Returns the final result `res`, which is the sum of the greatest values from each column.
 
-```cpp
-return res;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n log n)
+- **Average Case:** O(m * n log n)
+- **Worst Case:** O(m * n log n)
 
-Once all columns have been processed and the maximum values have been accumulated in `res`, the function returns the total sum of these values. This sum is the desired result.
+The time complexity is dominated by the sorting step for each row, which takes O(n log n) per row, resulting in a total complexity of O(m * n log n).
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-#### Time Complexity:
+The space complexity is O(m * n) since we need to store the grid, and the sorting operation requires additional space.
 
-- **Sorting each row**: Sorting each row takes \(O(n \log n)\), where \(n\) is the number of columns in the row. The sorting operation is applied to every row, so for `m` rows, the total time complexity for sorting is \(O(m \cdot n \log n)\).
-- **Finding the maximum for each column**: For each column, we check every row to find the maximum value. This operation takes \(O(m)\) time per column, and since there are `n` columns, the total time complexity for this step is \(O(m \cdot n)\).
+**Happy Coding! 🎉**
 
-Thus, the overall time complexity is dominated by the sorting step, which is \(O(m \cdot n \log n)\), where `m` is the number of rows and `n` is the number of columns.
-
-#### Space Complexity:
-
-- **Space for the grid**: The grid `g` itself requires \(O(m \cdot n)\) space, where `m` is the number of rows and `n` is the number of columns.
-- **Auxiliary space for sorting**: The sorting operation itself requires extra space, but this depends on the sorting algorithm used. If we use the standard C++ `sort` function, which uses a form of quicksort, the extra space used for sorting each row is \(O(\log n)\) per row. Since sorting is done in place, the space complexity for sorting is \(O(m \cdot \log n)\).
-
-Therefore, the overall space complexity is \(O(m \cdot n)\) due to the storage required for the grid.
-
-### Conclusion
-
-In conclusion, the solution efficiently computes the sum of the greatest values deleted from each column of a 2D grid. By sorting each row and then iterating over the columns to find the largest value, the algorithm ensures that the task is completed in an optimal manner. The time complexity of \(O(m \cdot n \log n)\) makes the solution suitable for moderate-sized grids, and the space complexity of \(O(m \cdot n)\) is acceptable given that we only store the grid itself.
-
-- **Time Complexity**: \(O(m \cdot n \log n)\), where `m` is the number of rows and `n` is the number of columns in the grid.
-- **Space Complexity**: \(O(m \cdot n)\), due to the storage required for the grid.
-
-This solution is both time-efficient and space-efficient for the problem at hand.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-greatest-value-in-each-row/description/)
 

@@ -14,149 +14,163 @@ img_src = ""
 youtube = "ViliZpbLtbE"
 youtube_upload_date="2022-03-13"
 youtube_thumbnail="https://i.ytimg.com/vi/ViliZpbLtbE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums` representing a pile, where `nums[0]` is the topmost element. You can perform the following operations in exactly `k` moves:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumTop(vector<int>& nums, int k) {
+1. Remove the topmost element of the pile (if it's not empty).
+2. If any elements have been removed, you can add any one of them back onto the pile as the new topmost element.
 
-        int ans = 0;
-        
-        int n = nums.size();
-        
-        if (k == 0) return (n >= 1) ? nums[0] : -1;
-        if (k == 1) return (n == 1) ? -1 : nums[1];
-        if (n == 1) return (k % 2 == 1) ? -1 : nums[0];
-        
-        int mx = *max_element(begin(nums), begin(nums) + min(n, k - 1));
-        if(k < n) mx = max(mx, nums[k]);
-        
-        return mx;
-    }
-};
-{{< /highlight >}}
----
+Your goal is to determine the maximum value that can be at the top of the pile after exactly `k` moves. If it is not possible to have any elements left in the pile after `k` moves, return `-1`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two inputs: `nums`, a list of integers representing the pile, and `k`, the number of moves you are allowed to make.
+- **Example:** `Input: nums = [3, 1, 4, 6, 2], k = 4`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i], k <= 10^9
 
-### Problem Statement
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** You must return the maximum value that can be at the top of the pile after exactly `k` moves. If it is not possible to have any elements left in the pile after `k` moves, return -1.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- If `k` is less than the number of elements in the pile, it's possible to remove and add elements back.
+	- If `k` is greater than or equal to the size of the pile and the pile becomes empty, return -1.
 
-The task is to find the maximum element from a given array `nums` of integers after performing exactly `k` operations. Each operation consists of removing the top element from the array, but the top element can either be discarded or pushed back into the array. The objective is to determine the maximum element that can be obtained after performing these operations under the constraint of exactly `k` operations.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the maximum value that can be on top of the pile after exactly `k` moves.
 
-Given:
-- An array `nums` of integers.
-- An integer `k` representing the number of operations to perform.
+- 1. If `k` is 0, return the first element of `nums` if it's not empty.
+- 2. If `k` is 1 and the pile has only one element, return -1 since it will be removed.
+- 3. For other cases, check the elements that can be accessed by performing the `k` moves and return the maximum among them.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is guaranteed that `nums` is a valid list of integers with at least one element.
+- You are required to make exactly `k` moves, no more or less.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this example, after performing the four moves (removing the first three elements and then adding 6 back onto the pile), the largest element on top of the pile is 6.
 
-We are to return the maximum value achievable after performing exactly `k` operations.
+- **Input:** `Example 2`  \
+  **Explanation:** In this case, the only element in the pile is removed, and thus, no elements are left to add back, resulting in -1.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The strategy involves simulating the sequence of operations based on the value of `k`. Depending on the number of moves allowed, we calculate which element can be placed at the top after performing the moves.
 
-To solve this problem, the algorithm needs to account for several edge cases and strategically choose how to handle the array after performing up to `k` operations. The approach is broken down as follows:
-
-1. **Edge Case Handling**:
-   - If `k == 0`, no operations can be performed, and thus the maximum element is the first element of the array (if the array is non-empty).
-   - If `k == 1`, only one operation can be performed, so if there's only one element, the answer is `-1` (since the only element is discarded).
-   - If the array contains only one element and `k` is odd, the element is discarded, and the result is `-1`. If `k` is even, the single element remains intact.
-
-2. **When `k > 1`**:
-   - If `k` is less than or equal to the length of the array, we can look at the first `k-1` elements to determine the maximum value that can remain after some operations. Specifically, we consider removing and potentially returning the first `k-1` elements, and the maximum element among those should be the result.
-   - If `k` is greater than or equal to the length of the array, we can consider the possibility of also including the element at index `k` (if the array is long enough).
-
-3. **Efficient Maximum Calculation**:
-   - To find the maximum efficiently, we can compute the maximum of the first `k-1` elements, and if `k` is smaller than the length of the array, also compare the element at index `k` itself.
-
-4. **Optimization**:
-   - The algorithm avoids unnecessary iterations by limiting the scope of the array elements to be considered, thereby ensuring that the solution is efficient even for larger input sizes.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- When `k` is less than the number of elements in the pile, it's possible to remove elements and potentially add them back.
+- If `k` exceeds the number of elements in the pile, the pile will become empty after `k` moves, and the answer will be -1.
+- We should identify the maximum value that can remain at the top based on the number of moves left.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` is empty, return -1.
+- If the input size is large (up to 10^5 elements), ensure the solution is efficient.
+- If `k` is 0, we return the topmost element without performing any operations.
+- Ensure that the solution respects the constraints on `nums.length` and `k`.
+{{< dots >}}
+## Code 💻
 ```cpp
 int maximumTop(vector<int>& nums, int k) {
-    int ans = 0;  // Initialize the answer variable.
-    int n = nums.size();  // Get the size of the nums array.
 
-    // Edge case 1: If no operations are performed.
-    if (k == 0) return (n >= 1) ? nums[0] : -1;
-
-    // Edge case 2: If only one operation can be performed.
-    if (k == 1) return (n == 1) ? -1 : nums[1];
-
-    // Edge case 3: If the array contains only one element.
-    if (n == 1) return (k % 2 == 1) ? -1 : nums[0];
-
-    // Case when we have more than one element and k > 1
-    int mx = *max_element(begin(nums), begin(nums) + min(n, k - 1));
+    int ans = 0;
     
-    // If there are more elements and the array's length is greater than k, consider nums[k].
-    if (k < n) mx = max(mx, nums[k]);
+    int n = nums.size();
+    
+    if (k == 0) return (n >= 1) ? nums[0] : -1;
+    if (k == 1) return (n == 1) ? -1 : nums[1];
+    if (n == 1) return (k % 2 == 1) ? -1 : nums[0];
+    
+    int mx = *max_element(begin(nums), begin(nums) + min(n, k - 1));
+    if(k < n) mx = max(mx, nums[k]);
     
     return mx;
 }
 ```
 
-**Step 1: Initialize Answer and Array Size**
-```cpp
-int ans = 0;
-int n = nums.size();
-```
-- `ans` will store the maximum value that can be obtained after performing `k` operations.
-- `n` stores the size of the `nums` array.
+This function aims to find the maximum possible number after performing at most 'k' operations. The operations involve removing the first element in the array, so the task is to maximize the top number after performing these operations.
 
-**Step 2: Handle Special Cases**
-- **Case when `k == 0`**:
-```cpp
-if (k == 0) return (n >= 1) ? nums[0] : -1;
-```
-If no operations can be performed (`k == 0`), simply return the first element of the array (if the array is non-empty). If the array is empty, return `-1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumTop(vector<int>& nums, int k) {
+	```
+	This line defines the function 'maximumTop' which takes a vector 'nums' and an integer 'k' as input parameters. The function aims to return the maximum possible number after performing at most 'k' operations on the input array.
 
-- **Case when `k == 1`**:
-```cpp
-if (k == 1) return (n == 1) ? -1 : nums[1];
-```
-If exactly one operation is allowed, then we discard the first element and return the second element, unless the array only contains one element, in which case the answer is `-1`.
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	This line initializes the variable 'ans' which will hold the result of the maximum number after 'k' operations.
 
-- **Case when `n == 1`**:
-```cpp
-if (n == 1) return (k % 2 == 1) ? -1 : nums[0];
-```
-If there is only one element, the behavior depends on whether `k` is odd or even. If `k` is odd, the single element is discarded; if `k` is even, the single element remains.
+3. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	This line stores the size of the vector 'nums' in the variable 'n', which is used to determine the bounds of the input array.
 
-**Step 3: Case for General Scenarios (k > 1)**
-```cpp
-int mx = *max_element(begin(nums), begin(nums) + min(n, k - 1));
-```
-- For the general case where `k > 1`, find the maximum value from the first `k-1` elements of the array. We use `min(n, k-1)` to ensure that we do not go beyond the bounds of the array.
+4. **Edge Case Check**
+	```cpp
+	    if (k == 0) return (n >= 1) ? nums[0] : -1;
+	```
+	This checks if 'k' is 0, meaning no operations are allowed. It then returns the first element of the array if there is at least one element; otherwise, it returns -1.
 
-**Step 4: Handle Case when `k` Exceeds Array Length**
-```cpp
-if (k < n) mx = max(mx, nums[k]);
-```
-- If `k` is less than the size of the array, we need to consider the element at index `k` since it could still be part of the result.
+5. **Edge Case Check**
+	```cpp
+	    if (k == 1) return (n == 1) ? -1 : nums[1];
+	```
+	This checks if 'k' is 1, meaning only one operation is allowed. It returns -1 if there's only one element in the array; otherwise, it returns the second element.
 
-**Step 5: Return the Maximum**
-```cpp
-return mx;
-```
-- Finally, return the maximum value obtained after performing up to `k` operations.
+6. **Edge Case Check**
+	```cpp
+	    if (n == 1) return (k % 2 == 1) ? -1 : nums[0];
+	```
+	This checks if there's only one element in the array. If 'k' is odd, it returns -1, otherwise it returns the first element.
 
-### Complexity
+7. **Main Logic**
+	```cpp
+	    int mx = *max_element(begin(nums), begin(nums) + min(n, k - 1));
+	```
+	This line calculates the maximum value in the first 'k-1' elements of the vector 'nums', ensuring that the index does not exceed the size of the array.
 
-#### Time Complexity:
-- **O(k)** for calculating the maximum over the first `k-1` elements using `max_element`.
-- The final solution thus runs in **O(k)** time, which is optimal for this problem.
+8. **Main Logic**
+	```cpp
+	    if(k < n) mx = max(mx, nums[k]);
+	```
+	This checks if 'k' is less than the size of the array. If true, it compares the current maximum with the element at index 'k' and updates the maximum value.
 
-#### Space Complexity:
-- **O(1)**, as the algorithm uses only a constant amount of extra space (excluding the input).
+9. **Return Statement**
+	```cpp
+	    return mx;
+	```
+	This returns the maximum value found during the algorithm.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The algorithm efficiently solves the problem of finding the maximum element obtainable after performing exactly `k` operations on the array. It handles edge cases such as no operations, a single element in the array, and scenarios where `k` is larger than the array's length. The solution ensures optimal performance with a time complexity of **O(k)** and space complexity of **O(1)**, making it suitable for large inputs.
+The time complexity is linear in terms of the number of elements in `nums` because we check a subset of the array.
 
-This approach can be useful for problems that involve selecting elements based on specific operations or constraints and demonstrates the importance of handling edge cases correctly.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we do not require extra space apart from variables used to store the result.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-the-topmost-element-after-k-moves/description/)
 

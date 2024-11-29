@@ -14,124 +14,201 @@ img_src = ""
 youtube = "HKc9PcSzNic"
 youtube_upload_date="2023-01-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/HKc9PcSzNic/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of positive integers `nums`, find the number of distinct prime factors in the product of all the elements in the array. A prime factor of a number is a number that divides it evenly, and only divisible by 1 and itself. The goal is to calculate the distinct prime factors present in the prime factorization of the product of all elements in `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array `nums` containing positive integers. You need to calculate the number of distinct prime factors of the product of all elements in `nums`.
+- **Example:** `nums = [3, 9, 12, 15]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- 2 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    set<int> cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct prime factors of the product of all elements in `nums`.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be an integer representing the number of distinct prime factors.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find how many distinct prime factors are present in the prime factorization of the product of all elements in the `nums` array.
+
+- Initialize a set to store prime factors.
+- Iterate through each number in the `nums` array.
+- For each number, find its prime factors and add them to the set.
+- After processing all numbers, the size of the set will give the number of distinct prime factors.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in `nums` are positive integers and greater than 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 9, 12, 15]`  \
+  **Explanation:** The product of these numbers is `4860`. The prime factorization of `4860` is `2^2 * 3^5 * 5`. Hence, there are 3 distinct prime factors: `2`, `3`, and `5`.
+
+- **Input:** `nums = [4, 16, 64]`  \
+  **Explanation:** The product of these numbers is `4096`, which has the prime factorization `2^12`. Hence, there is only 1 distinct prime factor: `2`.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves iterating through each element in the array, finding its prime factors, and storing them in a set to ensure distinctness. The final answer is the size of the set.
+
+### Initial Thoughts 💭
+- We need to find all prime factors of numbers in `nums` and ensure that we count distinct prime factors only.
+- We can use a set to store prime factors as they are discovered. This ensures that each prime factor is counted only once.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not require handling empty inputs as `nums` will always contain at least one element.
+- The solution should handle arrays with up to 10^4 elements efficiently.
+- Special attention is needed when elements in `nums` are powers of a single prime (e.g., `4, 16, 64`).
+- Ensure that the prime factorization process works efficiently for numbers up to 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+set<int> cnt;
+
+void fact(int num) {
+    while(num % 2 == 0) {
+        cnt.insert(2);
+        num /= 2;
+    }
+    for(int i = 3; i <= num; i+=2) {
+        while(num % i == 0) {
+            cnt.insert(i);
+            num /= i;
+        }
+    }
+}
+
+int distinctPrimeFactors(vector<int>& nums) {
     
-    void fact(int num) {
-        while(num % 2 == 0) {
-            cnt.insert(2);
-            num /= 2;
-        }
-        for(int i = 3; i <= num; i+=2) {
-            while(num % i == 0) {
-                cnt.insert(i);
-                num /= i;
-            }
-        }
-    }
+    int n = nums.size();
+    for(int i = 0; i < n; i++)
+        fact(nums[i]);
     
-    int distinctPrimeFactors(vector<int>& nums) {
-        
-        int n = nums.size();
-        for(int i = 0; i < n; i++)
-            fact(nums[i]);
-        
-        
-        return cnt.size() ;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an array of integers `nums`, the task is to find the number of distinct prime factors that appear in at least one element of the array. Each integer in the array can have multiple prime factors, but we are only interested in the distinct prime factors across all elements of the array. The goal is to return the total number of unique prime factors that appear across all the numbers in the array.
-
-### Approach
-
-The problem requires us to find all the prime factors for each number in the array and count the distinct ones. To solve this, we need to:
-1. **Prime Factorization:** Decompose each number into its prime factors.
-2. **Tracking Distinct Primes:** As we find prime factors, we should store them in a set to automatically handle duplicates.
-3. **Efficient Factorization:** Use an efficient algorithm to factorize each number by checking divisibility starting from the smallest primes (2 and then odd numbers).
-4. **Final Count:** After processing all numbers, the size of the set will give us the count of distinct prime factors.
-
-The solution involves two main steps:
-1. For each number in the `nums` array, perform prime factorization and add the prime factors to a set.
-2. Finally, return the size of the set, which contains only distinct prime factors.
-
-### Code Breakdown (Step by Step)
-
-#### Class Definition:
-```cpp
-class Solution {
-public:
-    set<int> cnt;
+    
+    return cnt.size() ;
+}
 ```
-- Here, we define a class `Solution` that will hold a set `cnt` which will store distinct prime factors. The `set` is ideal because it automatically handles duplicate entries and stores only unique values.
 
-#### Prime Factorization Function:
-```cpp
-    void fact(int num) {
-        while(num % 2 == 0) {
-            cnt.insert(2);
-            num /= 2;
-        }
-```
-- The `fact` function is responsible for finding the prime factors of a number.
-- **Dividing by 2**: We first check if `num` is divisible by 2 (the smallest prime). While it is divisible by 2, we insert 2 into the set `cnt` and divide `num` by 2.
-- This loop will ensure that we eliminate all factors of 2 from `num`.
+This code defines a function to calculate the number of distinct prime factors of integers in a vector `nums`. The `fact` function factors each number and inserts the prime factors into a set `cnt`. The `distinctPrimeFactors` function iterates over the input numbers, calling `fact` on each, and returns the number of distinct prime factors.
 
-```cpp
-        for(int i = 3; i <= num; i+=2) {
-            while(num % i == 0) {
-                cnt.insert(i);
-                num /= i;
-            }
-        }
-```
-- After removing factors of 2, we continue with the odd numbers starting from 3.
-- **Dividing by odd numbers**: The loop checks all odd numbers from 3 upwards. For each number `i`, we check if `num` is divisible by `i`. If it is, we insert `i` into the set `cnt` and divide `num` by `i` until it is no longer divisible.
-- This ensures we capture all prime factors. The loop stops once `i` exceeds `num`, at which point `num` itself must be a prime number if it is greater than 2.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Set Initialization**
+	```cpp
+	set<int> cnt;
+	```
+	Define a set `cnt` to store the distinct prime factors of the input numbers.
 
-#### Main Function to Count Distinct Prime Factors:
-```cpp
-    int distinctPrimeFactors(vector<int>& nums) {
-        int n = nums.size();
-        for(int i = 0; i < n; i++)
-            fact(nums[i]);
-```
-- The function `distinctPrimeFactors` takes a vector `nums` as input. We first determine the size of the vector `n`.
-- Then, we iterate over each element in the `nums` array and call the `fact` function to find its prime factors. For each element, `fact` adds the prime factors to the `cnt` set.
+2. **Empty Line**
+	```cpp
+	
+	```
+	An empty line for visual separation in the code.
 
-```cpp
-        return cnt.size();
-    }
-};
-```
-- Finally, the function returns the size of the set `cnt`, which represents the total number of distinct prime factors across all numbers in the array. Since a set automatically handles duplicates, it ensures that only unique prime factors are counted.
+3. **Function Definition**
+	```cpp
+	void fact(int num) {
+	```
+	Define the function `fact` which takes an integer `num` as input and factors it into prime factors.
 
-### Complexity
+4. **While Loop (Even Factor)**
+	```cpp
+	    while(num % 2 == 0) {
+	```
+	Check if `num` is divisible by 2. If true, continue dividing `num` by 2 and insert 2 into the set `cnt`.
 
-#### Time Complexity:
-- The prime factorization process for each number involves dividing the number by all integers starting from 2 and moving upwards. The complexity of finding the prime factors of a number is approximately \( O(\sqrt{num}) \), where `num` is the value of the number being factored.
-- For each number `nums[i]` in the array, we perform a factorization that takes \( O(\sqrt{nums[i]}) \).
-- If `n` is the number of elements in the array `nums`, and `max_num` is the largest number in the array, the overall time complexity is \( O(n \times \sqrt{max\_num}) \), where `max_num` is the largest number in the array.
+5. **Set Insertion**
+	```cpp
+	        cnt.insert(2);
+	```
+	Insert the prime factor 2 into the set `cnt`.
 
-#### Space Complexity:
-- The space complexity is \( O(k) \), where `k` is the number of distinct prime factors across all numbers in the array. This is because we are storing the distinct prime factors in a `set`. The set will have a size proportional to the number of distinct prime factors.
+6. **Division**
+	```cpp
+	        num /= 2;
+	```
+	Divide `num` by 2 and continue checking if it is divisible by 2 until it is no longer divisible.
 
-### Conclusion
+7. **For Loop (Odd Factors)**
+	```cpp
+	    for(int i = 3; i <= num; i+=2) {
+	```
+	Start a for loop to check divisibility by odd numbers starting from 3, incrementing by 2 each time.
 
-This solution efficiently calculates the number of distinct prime factors across all elements of the array. By using prime factorization and a set to store unique primes, we ensure that the solution handles duplicate factors and efficiently counts distinct primes. The solution is optimal for a wide range of input sizes, with a time complexity of \( O(n \times \sqrt{max\_num}) \) and a space complexity of \( O(k) \), where `n` is the number of elements and `k` is the number of distinct prime factors. The use of a set guarantees that duplicate prime factors are not counted, ensuring the correctness of the result.
+8. **While Loop (Odd Factor)**
+	```cpp
+	        while(num % i == 0) {
+	```
+	Check if `num` is divisible by the current odd number `i`. If true, continue dividing `num` by `i` and insert `i` into the set `cnt`.
+
+9. **Set Insertion**
+	```cpp
+	            cnt.insert(i);
+	```
+	Insert the prime factor `i` into the set `cnt`.
+
+10. **Division**
+	```cpp
+	            num /= i;
+	```
+	Divide `num` by `i` and continue checking if it is divisible by `i` until it is no longer divisible.
+
+11. **Function Definition**
+	```cpp
+	int distinctPrimeFactors(vector<int>& nums) {
+	```
+	Define the function `distinctPrimeFactors`, which takes a vector of integers `nums` as input and calculates the number of distinct prime factors of all the numbers in the vector.
+
+12. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	Calculate the size of the input vector `nums` and store it in the variable `n`.
+
+13. **For Loop (Iterating Over Numbers)**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Start a for loop to iterate over each element of the input vector `nums`.
+
+14. **Function Call**
+	```cpp
+	        fact(nums[i]);
+	```
+	Call the `fact` function on each element of `nums` to calculate its prime factors and insert them into the set `cnt`.
+
+15. **Return Statement**
+	```cpp
+	    return cnt.size();
+	```
+	Return the size of the set `cnt`, which contains the distinct prime factors of all the numbers in the vector `nums`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log m), where n is the length of `nums` and m is the largest number in `nums`.
+- **Average Case:** O(n log m), where n is the length of `nums` and m is the largest number in `nums`.
+- **Worst Case:** O(n log m), where n is the length of `nums` and m is the largest number in `nums`.
+
+Finding prime factors for each number requires trial division up to the square root of the number, which is logarithmic in nature.
+
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the number of distinct prime factors found.
+- **Worst Case:** O(n), where n is the number of distinct prime factors found.
+
+We store each prime factor in a set, so space complexity depends on the number of distinct prime factors.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/description/)
 

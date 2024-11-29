@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "rl_hXXzvTiM"
 youtube_upload_date="2021-09-01"
 youtube_thumbnail="https://i.ytimg.com/vi/rl_hXXzvTiM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,88 +28,156 @@ youtube_thumbnail="https://i.ytimg.com/vi/rl_hXXzvTiM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array nums, a permutation of numbers from [0, n-1], and for each index k, you need to build a set s[k] by repeatedly selecting elements based on the rule nums[k] -> nums[nums[k]] -> nums[nums[nums[k]]], stopping when a duplicate is found. Return the longest length of any such set s[k].
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums containing a permutation of numbers from [0, n-1].
+- **Example:** `Input: nums = [3, 1, 4, 0, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] < nums.length
+	- All values of nums are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int arrayNesting(vector<int>& nums) {
-        int mxsize = 0;
-        for(int i = 0; i < nums.size(); i++) {
-            int size = 0;
-            for(int k = i; nums[k] >= 0; size++) {
-                int ak = nums[k];
-                nums[k] = -1;
-                k = ak;
-            }
-            mxsize = max(size, mxsize);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the longest length of any set s[k].
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result should be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the longest set s[k] for any index k in the array nums.
+
+- Initialize a variable to store the maximum size of the set found.
+- Iterate over the array, for each index k, follow the rule of building the set until a duplicate is found.
+- Mark the visited elements as processed (e.g., by setting nums[k] to -1).
+- Update the maximum set size during the iteration.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty and contains unique values.
+- The size of the array is within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 1, 4, 0, 2]`  \
+  **Explanation:** Starting from nums[0] = 3, we build the set {3, 0}. The length of the longest set is 3.
+
+- **Input:** `Input: nums = [0, 1, 2]`  \
+  **Explanation:** Each element points to itself, so the longest set has a length of 1.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating through the array and, for each element, following the chain of elements until a repeat is found. The challenge is to avoid revisiting elements unnecessarily.
+
+### Initial Thoughts 💭
+- The process of following the chain of elements from any starting point is deterministic and involves tracking visited elements to avoid infinite loops.
+- The solution will involve visiting each element once and marking it as visited to ensure no duplicates are counted in the chain.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty as per the problem constraints.
+- The solution should efficiently handle input sizes up to 100,000 elements.
+- If all elements point to themselves (like in a sorted array), the solution should return 1.
+- The solution should handle large inputs efficiently and avoid unnecessary recomputations.
+{{< dots >}}
+## Code 💻
+```cpp
+int arrayNesting(vector<int>& nums) {
+    int mxsize = 0;
+    for(int i = 0; i < nums.size(); i++) {
+        int size = 0;
+        for(int k = i; nums[k] >= 0; size++) {
+            int ak = nums[k];
+            nums[k] = -1;
+            k = ak;
         }
-        return mxsize;
+        mxsize = max(size, mxsize);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-The problem requires finding the largest set of indices such that each index points to the next index in the set. More formally, we are given an array `nums` where each element `nums[i]` represents a pointer to another index in the array. We need to find the largest cycle of elements where starting from any element, we keep following the next index until we revisit an element. The task is to find the maximum length of such a cycle in the array.
-
-### Approach:
-This problem is often referred to as an array nesting problem. The challenge is to identify the longest cycle of indices where each index points to another within the array. This is achieved through the following approach:
-
-1. **Cycle Detection:** The goal is to detect the cycles in the array where each element points to another index. Once an index is visited, we mark it as visited to avoid revisiting it.
-2. **Modification of Input:** The given array is modified in-place to mark visited elements by setting them to `-1`. This helps in detecting cycles effectively while traversing through the array.
-3. **Iterating Over Each Element:** For each unvisited index, we start a new cycle and count the length of the cycle by following the pointers until we reach a previously visited index.
-4. **Track Maximum Cycle Size:** We continuously track the largest cycle encountered during the traversal and return the size of the largest cycle.
-
-By following this approach, the problem can be efficiently solved with a time complexity of O(n), where n is the size of the array. This is because each element is visited at most once, and we are updating the array in-place to track the visited elements.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Initialize Variables
-```cpp
-int mxsize = 0;  // Variable to store the size of the largest cycle found
-```
-Here, `mxsize` will be used to keep track of the maximum size of the cycle encountered during the traversal of the array. It starts at 0, and as we find larger cycles, it will be updated.
-
-#### Step 2: Loop Over the Array Elements
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    int size = 0;  // Variable to store the size of the current cycle
-```
-We start a loop that iterates over all elements in the array `nums`. For each element, we check whether it has already been visited (if its value is `-1`), and if it hasn’t, we start a new cycle from that element. `size` is used to count the number of elements in the current cycle.
-
-#### Step 3: Inner Loop for Cycle Detection
-```cpp
-for(int k = i; nums[k] >= 0; size++) {
-    int ak = nums[k];  // Store the next index to visit
-    nums[k] = -1;  // Mark the current index as visited by setting it to -1
-    k = ak;  // Move to the next index in the cycle
+    return mxsize;
 }
 ```
-Within this inner loop, we follow the cycle starting from the current index `i`. We update the value of `nums[k]` to `-1` to mark it as visited. The next index to visit is stored in `ak`. We then set `k = ak` to move to the next index in the cycle. The loop continues until we revisit an already visited index, i.e., until `nums[k]` is less than 0.
 
-#### Step 4: Update Maximum Cycle Size
-```cpp
-mxsize = max(size, mxsize);  // Update the maximum cycle size found so far
-```
-After the inner loop finishes (i.e., after we have counted the size of the current cycle), we update `mxsize` to store the larger of the current cycle size (`size`) and the previously found largest cycle size.
+The function `arrayNesting` calculates the largest set of numbers that form a cycle in the array. It uses a greedy approach and modifies the input array to mark visited elements.
 
-#### Step 5: Return the Result
-```cpp
-return mxsize;  // Return the size of the largest cycle found
-```
-Once the outer loop finishes iterating through all elements, the function returns `mxsize`, which holds the size of the largest cycle encountered during the traversal of the array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int arrayNesting(vector<int>& nums) {
+	```
+	Defines the function `arrayNesting` that takes a vector of integers `nums` and returns the size of the largest cycle (set of elements that point to each other).
 
-### Complexity:
+2. **Variable Initialization**
+	```cpp
+	    int mxsize = 0;
+	```
+	Initializes the variable `mxsize` to store the size of the largest set found. This will be updated as the function iterates through the array.
 
-#### Time Complexity:
-- **O(n):** We iterate through each element in the array exactly once. For each unvisited element, we traverse its cycle, marking each element in the cycle as visited (i.e., setting it to `-1`). Each element is part of exactly one cycle, and therefore, we visit each element once. The total number of operations is proportional to the size of the array, so the time complexity is O(n), where `n` is the number of elements in the array.
+3. **Outer Loop - Iterate Through Array**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Starts an outer loop to iterate through each element in the array `nums`.
 
-#### Space Complexity:
-- **O(1):** The algorithm modifies the input array `nums` in place by marking visited elements with `-1`. Therefore, no additional space is required beyond the input array, and the space complexity is O(1).
+4. **Size Initialization**
+	```cpp
+	        int size = 0;
+	```
+	Initializes the variable `size` to 0 for each new cycle. This variable will store the number of elements in the current cycle.
 
-### Conclusion:
-This approach provides an efficient solution to the array nesting problem. By using cycle detection and modifying the input array in place, we avoid the need for additional data structures like hash maps, resulting in a solution with linear time complexity and constant space complexity. The algorithm ensures that we only visit each element once, making it highly efficient for large arrays. This technique is particularly useful for problems that involve finding cycles in arrays or graphs, where in-place modification and efficient traversal are key to achieving optimal performance.
+5. **Inner Loop - Cycle Traversal**
+	```cpp
+	        for(int k = i; nums[k] >= 0; size++) {
+	```
+	Starts an inner loop to traverse the cycle starting from index `i`. It continues as long as the element at index `k` has not been visited (i.e., it's non-negative).
+
+6. **Cycle Element Access**
+	```cpp
+	            int ak = nums[k];
+	```
+	Stores the current value of the element at index `k` in `ak`. This is used to track the next element in the cycle.
+
+7. **Mark Element as Visited**
+	```cpp
+	            nums[k] = -1;
+	```
+	Marks the element at index `k` as visited by setting it to `-1`. This prevents revisiting the same element in future iterations.
+
+8. **Move to Next Element in Cycle**
+	```cpp
+	            k = ak;
+	```
+	Sets `k` to the value stored in `ak`, which represents the index of the next element in the cycle.
+
+9. **Update Maximum Size**
+	```cpp
+	        mxsize = max(size, mxsize);
+	```
+	Updates `mxsize` to the larger value between the current cycle size (`size`) and the largest cycle size found so far (`mxsize`).
+
+10. **Return Maximum Size**
+	```cpp
+	    return mxsize;
+	```
+	Returns the largest cycle size found during the traversal of the array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in the size of the input array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the need to store the visited elements and the intermediate sets.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/array-nesting/description/)
 

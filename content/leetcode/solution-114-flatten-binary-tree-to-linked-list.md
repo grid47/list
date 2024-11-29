@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "rKnD7rLT0lI"
 youtube_upload_date="2021-09-16"
 youtube_thumbnail="https://i.ytimg.com/vi/rKnD7rLT0lI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,223 +28,151 @@ youtube_thumbnail="https://i.ytimg.com/vi/rKnD7rLT0lI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, flatten the tree into a 'linked list' where each node's right pointer points to the next node in pre-order traversal, and the left pointer of all nodes is null. The 'linked list' should maintain the same order as a pre-order traversal of the binary tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary tree. The tree is represented as an array of node values, with null indicating missing nodes.
+- **Example:** `Input: root = [3, 2, 5, 1, null, null, 6]`
+- **Constraints:**
+	- The number of nodes in the tree is between 0 and 2000.
+	- Node values are between -100 and 100.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void flatten(TreeNode* root) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the flattened tree represented as a linked list, where each node points to the next node in pre-order traversal, and the left pointer of each node is null.
+- **Example:** `Output: [3,null,2,null,1,null,5,null,6]`
+- **Constraints:**
+	- The right child pointer of each node should point to the next node in pre-order traversal.
+	- The left child pointer of each node should be null.
 
-        if( root == NULL) return;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to flatten the binary tree such that it behaves like a linked list, while maintaining the pre-order traversal order.
 
-        TreeNode* tmp = root->right;
-        root->right = root->left;
-        root->left = nullptr;
+- Start from the root node and recursively flatten the left subtree.
+- Rearrange the tree so that the right child points to the flattened left subtree.
+- Set the left child of all nodes to null.
+- Repeat the process for the right subtree.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a valid binary tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [3,2,5,1,null,null,6]`  \
+  **Explanation:** In pre-order traversal, the tree will be visited in this order: 3, 2, 1, 5, 6. The flattened tree should thus look like [3,null,2,null,1,null,5,null,6].
 
-        TreeNode* node = root;
-        while(node->right) node = node->right;
+- **Input:** `Input: root = []`  \
+  **Explanation:** If the input is an empty tree (root is null), the output should also be an empty list.
 
-        node->right = tmp;
-        flatten(root->right); 
+{{< dots >}}
+## Approach 🚀
+We can flatten the binary tree in-place using a depth-first traversal. At each node, we will adjust its right pointer to point to its left child (if any), and then recursively flatten the right subtree.
 
-    }
-};
-{{< /highlight >}}
----
-
-### 🌳 **Problem Statement: Flatten a Binary Tree into a Linked List**
-
-The task is to **flatten a binary tree** into a linked list, **in-place**. This means that the binary tree should be modified such that:
-- The left child of every node is set to `nullptr`.
-- The right child points to the next node in the pre-order traversal sequence.
-
-Consider the following binary tree:
-
-```
-          1
-         / \
-        2   5
-       / \   \
-      3   4   6
-```
-
-After flattening, the tree should look like this:
-
-```
-1
- \
-  2
-   \
-    3
-     \
-      4
-       \
-        5
-         \
-          6
-```
-
-In essence, we are transforming the tree into a linked list where each node points to the next node in a pre-order sequence, and all left children are removed.
-
----
-
-### 🚀 **Approach: Pre-Order Traversal to Flatten the Tree**
-
-The goal is to flatten the tree using **pre-order traversal** while modifying the tree in place. Here's how we approach the problem:
-
-1. **Start from the root:** Begin by checking if the root is `NULL`. If it is, the tree is already empty, and we don't need to do anything.
-
-2. **Flatten the left subtree:** Recursively flatten the left child. Before doing that, we store the right child temporarily, since we'll need it after flattening the left subtree.
-
-3. **Rearrange the nodes:** After flattening the left subtree:
-   - Set the current node's left child to `nullptr` (since it's now part of a linked list).
-   - Move the flattened left subtree to the right child of the current node.
-
-4. **Go to the end of the right subtree:** Traverse the new right subtree (which now contains the flattened left subtree) to find the last node. We’ll attach the original right subtree to the end of this new right subtree.
-
-5. **Flatten the right subtree:** Recursively flatten the right child of the current node.
-
----
-
-### 🧑‍💻 **Code Breakdown (Step-by-Step)**
-
-#### 1. Function Definition:
-
+### Initial Thoughts 💭
+- We can achieve this using a recursive depth-first search.
+- The solution can be implemented without using extra space by flattening the tree in-place.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input tree is empty (root is null), the output should be an empty list.
+- The solution should efficiently handle large trees, up to 2000 nodes.
+- Handle trees where the left and right subtrees are null, as well as trees where all nodes are on the left or right side.
+- The tree can have up to 2000 nodes.
+{{< dots >}}
+## Code 💻
 ```cpp
 void flatten(TreeNode* root) {
+
     if( root == NULL) return;
-```
 
-- This is the base case of our recursion. If the root is `NULL`, we don't need to do anything, so the function simply returns.
-
-#### 2. Temporarily Save the Right Child:
-
-```cpp
     TreeNode* tmp = root->right;
-```
-
-- Before we modify the tree structure, we temporarily store the right child in a variable `tmp`. This ensures that we don’t lose access to the original right child while rearranging the nodes.
-
-#### 3. Move the Left Subtree to the Right:
-
-```cpp
     root->right = root->left;
     root->left = nullptr;
-```
 
-- Here, we move the left subtree to the right of the current node. This is the key step in flattening the tree — the left child is no longer needed, so we set it to `nullptr`.
-
-#### 4. Traverse to the End of the New Right Subtree:
-
-```cpp
     TreeNode* node = root;
     while(node->right) node = node->right;
-```
 
-- After moving the left subtree to the right, we need to find the last node in this newly modified right subtree. We do this by traversing through the right children until we reach the last node.
-
-#### 5. Attach the Original Right Subtree:
-
-```cpp
     node->right = tmp;
-```
+    flatten(root->right); 
 
-- Once we find the last node in the new right subtree, we attach the original right subtree (stored in `tmp`) to the end of the new right subtree.
-
-#### 6. Recursively Flatten the Right Subtree:
-
-```cpp
-    flatten(root->right);
 }
 ```
 
-- Finally, we recursively flatten the right subtree. This ensures that the entire tree gets flattened, starting from the modified right child.
+This function transforms a binary tree into a flattened linked list using in-place modifications. The right pointers represent the list structure.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	void flatten(TreeNode* root) {
+	```
+	Declare the function to flatten the binary tree into a linked list.
 
-### ⏱️ **Time and Space Complexity**
+2. **Base Case**
+	```cpp
+	    if( root == NULL) return;
+	```
+	Handle the base case where the root is null.
 
-#### **Time Complexity: O(n)**
+3. **Temporary Storage**
+	```cpp
+	    TreeNode* tmp = root->right;
+	```
+	Store the original right subtree temporarily.
 
-- The time complexity is **O(n)**, where `n` is the number of nodes in the binary tree. This is because each node is visited once during the traversal, and each operation inside the function (like setting pointers) takes constant time.
+4. **Pointer Update**
+	```cpp
+	    root->right = root->left;
+	```
+	Assign the left subtree to the right pointer.
 
-#### **Space Complexity: O(h)**
+5. **Pointer Update**
+	```cpp
+	    root->left = nullptr;
+	```
+	Set the left pointer to null.
 
-- The space complexity is **O(h)**, where `h` is the height of the tree, because of the recursion stack.
-  - In the worst case (a completely unbalanced tree), the height is `n`, and the space complexity is **O(n)**.
-  - In the best case (a balanced tree), the height is `log n`, leading to a space complexity of **O(log n)**.
+6. **Node Traversal**
+	```cpp
+	    TreeNode* node = root;
+	```
+	Initialize a pointer to traverse the right subtree.
 
----
+7. **Node Traversal**
+	```cpp
+	    while(node->right) node = node->right;
+	```
+	Traverse to the last node of the current right subtree.
 
-### 🌟 **Example Walkthrough**
+8. **Pointer Update**
+	```cpp
+	    node->right = tmp;
+	```
+	Reconnect the stored right subtree to the end of the current subtree.
 
-#### Example 1: Balanced Binary Tree
+9. **Recursive Call**
+	```cpp
+	    flatten(root->right); 
+	```
+	Recursively flatten the right subtree.
 
-Consider this tree:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-```
-        1
-       / \
-      2   3
-     / \
-    4   5
-```
+In all cases, each node is visited once, so the time complexity is O(n), where n is the number of nodes in the tree.
 
-- Start from the root node `1`, flatten the left subtree (`2 → 4 → 5`), and move it to the right.
-- Then, recursively flatten the right subtree of node `1` (which is just `3`).
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
 
-The result is the flattened tree:
+The space complexity is O(h), where h is the height of the tree, due to the recursion stack. In the worst case (a skewed tree), h can be O(n).
 
-```
-1
- \
-  2
-   \
-    4
-     \
-      5
-       \
-        3
-```
+**Happy Coding! 🎉**
 
-#### Example 2: Unbalanced Tree
-
-Consider the following tree:
-
-```
-        1
-       /
-      2
-     /
-    3
-   /
-  4
-```
-
-- Flatten the left subtree (`2 → 3 → 4`), and move it to the right of `1`.
-- Then, flatten the right subtree (which is `NULL`).
-
-The result is the flattened tree:
-
-```
-1
- \
-  2
-   \
-    3
-     \
-      4
-```
-
----
-
-### 🏁 **Conclusion**
-
-This solution efficiently flattens a binary tree into a linked list in place using **pre-order traversal**. The time complexity is **O(n)**, and the space complexity is **O(h)**, where `n` is the number of nodes and `h` is the height of the tree. The algorithm avoids extra space by modifying the tree directly, making it space-efficient.
-
-The recursive approach is both intuitive and elegant, flattening the tree step-by-step by moving the left subtree to the right and recursively processing the right children. This solution handles edge cases such as empty trees and trees with only one node seamlessly.
-
-In summary, this approach provides an optimal and clean solution to flattening a binary tree into a linked list, with both time and space complexities suitable for large trees.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/)
 

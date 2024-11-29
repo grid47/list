@@ -14,107 +14,142 @@ img_src = ""
 youtube = "2T14Nl0I69A"
 youtube_upload_date="2023-10-29"
 youtube_thumbnail="https://i.ytimg.com/vi/2T14Nl0I69A/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums` of length `n` and an integer `k`. You can perform an operation where you pick an index `i` in the range `[0, n - 1]` and increment `nums[i]` by 1. You can perform this operation any number of times (including zero). A subarray is considered beautiful if, for every subarray of size 3 or more, the maximum element in that subarray is greater than or equal to `k`. Your task is to return the minimum number of increment operations needed to make the array beautiful.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 0-indexed integer array `nums` and an integer `k`.
+- **Example:** `nums = [4, 1, 0, 3, 0], k = 6`
+- **Constraints:**
+	- 3 <= n == nums.length <= 10^5
+	- 0 <= nums[i] <= 10^9
+	- 0 <= k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long minIncrementOperations(vector<int>& A, int k) {
-        long long dp1 = 0, dp2 = 0, dp3 = 0, dp;
-        for (int& a: A) {
-            dp = min(dp1, min(dp2, dp3)) + max(k - a, 0);
-            dp1 = dp2;
-            dp2 = dp3;
-            dp3 = dp;
-        }
-        return min(dp1, min(dp2, dp3));
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of increment operations needed to make the array beautiful.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output must be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to increment values in the array such that for every subarray of size 3 or more, the maximum value is greater than or equal to `k`.
+
+- For each element in the array, check how many increments are needed to make it greater than or equal to `k`.
+- For each element, determine the minimum number of operations required to ensure all subarrays with size 3 or more satisfy the condition.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array has at least three elements.
+- The value of `k` is non-negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [4, 1, 0, 3, 0], k = 6`  \
+  **Explanation:** We perform the minimum number of increment operations to ensure that all subarrays of size 3 or more have a maximum value of at least 6. The answer is 4.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by iterating over the array and counting the minimum number of operations required to ensure that every subarray of size 3 or more has a maximum value that meets or exceeds `k`.
+
+### Initial Thoughts 💭
+- The solution needs to minimize the number of operations while ensuring the condition is met for every subarray of size 3 or more.
+- We can achieve this by iterating over the array and performing the minimum number of increments necessary to make every element greater than or equal to `k` where required.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least three elements.
+- The solution should be optimized to handle up to 10^5 elements efficiently.
+- When `k` is 0, no increments are needed if all elements are already non-negative.
+- We assume that the constraints are satisfied as given.
+{{< dots >}}
+## Code 💻
+```cpp
+long long minIncrementOperations(vector<int>& A, int k) {
+    long long dp1 = 0, dp2 = 0, dp3 = 0, dp;
+    for (int& a: A) {
+        dp = min(dp1, min(dp2, dp3)) + max(k - a, 0);
+        dp1 = dp2;
+        dp2 = dp3;
+        dp3 = dp;
     }
-};
-{{< /highlight >}}
----
+    return min(dp1, min(dp2, dp3));
+}
+```
 
-### Problem Statement:
-The problem involves finding the minimum number of increment operations required to reach a target value for each element in a given list, `A`. For each element in the list, the value needs to be incremented by a certain amount such that it reaches at least `k`. The challenge is to efficiently calculate the total number of operations using dynamic programming, ensuring the result is the minimum possible number of operations after considering all elements.
+This function calculates the minimum increment operations needed to make all elements in the array greater than or equal to a value 'k'. It uses dynamic programming to track the minimum number of operations for each step and returns the result.
 
-Given the constraints and the number of operations needed, dynamic programming is a suitable method to minimize the overall number of operations. We aim to track the minimum number of operations needed to adjust each element of the list to the desired target value, while considering possible state transitions.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long minIncrementOperations(vector<int>& A, int k) {
+	```
+	Defines the function 'minIncrementOperations' which takes an array 'A' and an integer 'k', returning the minimum number of operations to make each element of the array greater than or equal to 'k'.
 
-### Approach:
-To solve the problem, we employ a dynamic programming approach that involves keeping track of the minimum number of increment operations needed at each stage. The approach can be broken down into the following steps:
+2. **Variable Initialization**
+	```cpp
+	    long long dp1 = 0, dp2 = 0, dp3 = 0, dp;
+	```
+	Initializes four long long variables: dp1, dp2, dp3 for dynamic programming state storage and dp for the current operation calculation.
 
-1. **Dynamic Programming State Representation**:
-   We use three variables, `dp1`, `dp2`, and `dp3`, to keep track of the minimum number of operations required for the previous three elements of the list. This helps in finding the optimal solution by considering the state of each element and transitioning between these states.
+3. **Loop Over Array**
+	```cpp
+	    for (int& a: A) {
+	```
+	Iterates through the array 'A', using reference to modify each element if necessary.
 
-2. **Increment Calculation**:
-   For each element `a` in the list, we calculate the number of increments needed to reach `k` from `a`. This is done by subtracting `a` from `k`, but ensuring that the result is non-negative. If `a` is already greater than or equal to `k`, no increments are required.
+4. **Dynamic Programming Update**
+	```cpp
+	        dp = min(dp1, min(dp2, dp3)) + max(k - a, 0);
+	```
+	Calculates the minimum number of operations needed by considering the previous dynamic programming states (dp1, dp2, dp3) and the difference between 'k' and the current element 'a'.
 
-3. **State Transitions**:
-   As we iterate through the list, we transition the states (`dp1`, `dp2`, and `dp3`) to keep track of the optimal number of operations at each step. The transition involves choosing the minimum of the previous states, ensuring that we always consider the most optimal number of operations from the previous three elements.
+5. **State Transition**
+	```cpp
+	        dp1 = dp2;
+	```
+	Updates dp1 to the value of dp2 for the next iteration, preparing for the dynamic programming transition.
 
-4. **Final Result**:
-   After iterating through all elements, the final result is obtained by taking the minimum of the three states (`dp1`, `dp2`, and `dp3`), which represents the least number of operations required to achieve the target for all elements.
+6. **State Transition**
+	```cpp
+	        dp2 = dp3;
+	```
+	Updates dp2 to the value of dp3 for the next iteration, continuing the dynamic programming state transition.
 
-### Code Breakdown (Step by Step):
+7. **State Transition**
+	```cpp
+	        dp3 = dp;
+	```
+	Sets dp3 to the current value of dp, completing the state transition for dynamic programming.
 
-1. **Variable Initialization**:
-   The solution starts by initializing four variables, `dp1`, `dp2`, `dp3`, and `dp`, which will hold the minimum number of operations required for each state:
-   - `dp1`, `dp2`, and `dp3` represent the minimum operations for the previous three elements.
-   - `dp` represents the current state, which will be calculated during each iteration.
+8. **Return Result**
+	```cpp
+	    return min(dp1, min(dp2, dp3));
+	```
+	Returns the minimum value among dp1, dp2, and dp3, which represents the minimum number of operations needed to make each element of 'A' greater than or equal to 'k'.
 
-   ```cpp
-   long long dp1 = 0, dp2 = 0, dp3 = 0, dp;
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Iterating Through the List**:
-   The solution iterates over each element `a` in the input list `A`. For each element, we compute the number of operations required to increment the element to at least `k`.
+We iterate over the array once, performing constant-time operations for each element.
 
-   ```cpp
-   for (int& a: A) {
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1), since no extra space is used beyond a few variables.
 
-3. **Calculating Increment Operations**:
-   Inside the loop, we calculate the number of increments required to make `a` greater than or equal to `k`. This is done by taking the maximum of `k - a` and 0, ensuring that we never subtract below zero (i.e., if `a` is already greater than or equal to `k`, no increment is needed).
+The solution uses constant space.
 
-   ```cpp
-   dp = min(dp1, min(dp2, dp3)) + max(k - a, 0);
-   ```
+**Happy Coding! 🎉**
 
-   Here, `min(dp1, min(dp2, dp3))` represents the optimal number of operations from the previous states, and `max(k - a, 0)` ensures we add the required increments.
-
-4. **State Transitions**:
-   After calculating the current state `dp`, we update the previous states (`dp1`, `dp2`, `dp3`) for the next iteration. The values of `dp1`, `dp2`, and `dp3` are shifted as we move through the list.
-
-   ```cpp
-   dp1 = dp2;
-   dp2 = dp3;
-   dp3 = dp;
-   ```
-
-5. **Returning the Result**:
-   After completing the iteration, we return the minimum of the final three states (`dp1`, `dp2`, and `dp3`), which represents the least number of operations required to achieve the target for all elements.
-
-   ```cpp
-   return min(dp1, min(dp2, dp3));
-   ```
-
-### Complexity:
-
-1. **Time Complexity**:
-   The time complexity of this solution is \(O(n)\), where `n` is the number of elements in the input list `A`. This is because the algorithm iterates through the list once, performing a constant amount of work for each element. Since the number of operations for each element is constant (calculating the minimum and maximum of a few values), the overall time complexity is linear.
-
-2. **Space Complexity**:
-   The space complexity is \(O(1)\), as the solution uses only a fixed number of variables (`dp1`, `dp2`, `dp3`, and `dp`) to store intermediate results. No additional space is required, regardless of the size of the input list.
-
-### Conclusion:
-This solution efficiently calculates the minimum number of increment operations required to make each element in the input list at least `k`. By using dynamic programming, it tracks the optimal number of operations needed to adjust each element, ensuring that the result is obtained in linear time with constant space complexity.
-
-The use of dynamic programming allows the solution to efficiently handle the problem by minimizing redundant calculations. The state transitions ensure that we always consider the optimal solution for each element, resulting in the minimum number of operations required.
-
-Overall, the algorithm is well-suited for large inputs due to its time efficiency and space conservation, making it an excellent solution for this type of problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-increment-operations-to-make-array-beautiful/description/)
 

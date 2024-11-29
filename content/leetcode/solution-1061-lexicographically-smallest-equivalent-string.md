@@ -14,179 +14,181 @@ img_src = ""
 youtube = "YQ-q0oydRl4"
 youtube_upload_date="2024-04-07"
 youtube_thumbnail="https://i.ytimg.com/vi/YQ-q0oydRl4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, s1 and s2, which contain the same length, and a third string baseStr. Each pair of corresponding characters from s1 and s2 represent equivalent characters. Your task is to return the lexicographically smallest equivalent string for baseStr, where each character is replaced with its lexicographically smallest equivalent based on the equivalency information from s1 and s2.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings s1 and s2 of the same length, and a string baseStr. The strings s1 and s2 represent equivalency information where corresponding characters in the two strings are considered equivalent. The baseStr is the string that needs to be transformed according to these equivalencies.
+- **Example:** `Input: s1 = "abc", s2 = "xyz", baseStr = "def"`
+- **Constraints:**
+	- 1 <= s1.length, s2.length, baseStr <= 1000
+	- s1.length == s2.length
+	- s1, s2, and baseStr consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class UF {
-public:
-    vector<int> par;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the lexicographically smallest equivalent string derived from baseStr, with each character transformed according to the equivalency information provided by s1 and s2.
+- **Example:** `Output: "dff"`
+- **Constraints:**
+	- The output string must be a valid transformation of baseStr, following the equivalency rules from s1 and s2.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the lexicographically smallest string by transforming baseStr, using the equivalency relationships defined by s1 and s2.
+
+- 1. Create a union-find (disjoint set) data structure to track equivalencies between characters.
+- 2. Process each pair of characters from s1 and s2, linking them in the union-find structure to establish equivalency.
+- 3. For each character in baseStr, find its equivalent character from the union-find structure and replace it with the lexicographically smallest option.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings s1, s2, and baseStr are all valid and follow the specified constraints.
+- The equivalency relations form an equivalence relation (reflexive, symmetric, and transitive).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s1 = "parker", s2 = "morris", baseStr = "parser"`  \
+  **Explanation:** The equivalency groups are [m, p], [a, o], [k, r, s], and [e, i]. The smallest lexicographically equivalent string is 'makkek'.
+
+- **Input:** `Input: s1 = "hello", s2 = "world", baseStr = "hold"`  \
+  **Explanation:** The equivalency groups are [h, w], [d, e, o], and [l, r]. The transformed base string is 'hdld'.
+
+{{< dots >}}
+## Approach 🚀
+We solve this problem by modeling equivalencies using a union-find data structure. This helps efficiently group equivalent characters and ensures that we can replace each character in baseStr with its lexicographically smallest equivalent.
+
+### Initial Thoughts 💭
+- Each pair of corresponding characters in s1 and s2 represents an equivalency relation.
+- We can use a union-find data structure to group equivalent characters efficiently.
+- The problem is essentially about finding equivalence classes of characters, and then replacing characters in baseStr with their lexicographically smallest representatives.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem does not expect empty inputs, as the length of strings is at least 1.
+- The solution must be efficient enough to handle inputs of up to 1000 characters.
+- In cases where all characters in baseStr are already equivalent, the baseStr remains unchanged.
+- The solution must adhere to the time and space complexity constraints to handle inputs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int cnv(char x) {
+    return x - 'a';
+}
+
+string smallestEquivalentString(string s1, string s2, string base) {
     
-    UF(int n) {
-        par.resize(n, 0);
-        for(int i = 0; i < n; i++)
-            par[i] = i;
+    int n = s1.size();
+    UF* uf = new UF(26);
+    
+    for(int i = 0; i < n; i++) {
+        uf->uni(cnv(s1[i]), cnv(s2[i]));
+        uf->uni(cnv(s2[i]), cnv(s1[i]));            
     }
     
-    bool uni(int x, int y) {
-        int i = find(x);
-        int j = find(y);
-        if(i != j) {
-            if(i < j)   par[j] = i;
-            else        par[i] = j;
-            return true;
-        } else return false;
+    string res = "";
+    for(int i = 0; i < base.size(); i++) {
+        res += uf->find(cnv(base[i])) + 'a';
     }
-    
-    int find(int x) {
-        if(x == par[x]) return x;
-        return par[x] = find(par[x]);
-    }
-};
+    return res;
+}
+```
 
+This code implements a function that returns the smallest equivalent string by converting each character in the base string to its equivalent based on the relationships given by strings s1 and s2. A union-find (disjoint-set) data structure is used to group equivalent characters.
 
-class Solution {
-public:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int cnv(char x) {
+	```
+	This function `cnv` converts a character `x` to an integer corresponding to its position in the alphabet (0 for 'a', 1 for 'b', etc.).
 
-    int cnv(char x) {
-        return x - 'a';
-    }
+2. **Character Conversion**
+	```cpp
+	    return x - 'a';
+	```
+	The `cnv` function subtracts the ASCII value of 'a' from the character `x`, effectively mapping 'a' to 0, 'b' to 1, and so on.
 
-    string smallestEquivalentString(string s1, string s2, string base) {
-        
-        int n = s1.size();
-        UF* uf = new UF(26);
-        
-        for(int i = 0; i < n; i++) {
-            uf->uni(cnv(s1[i]), cnv(s2[i]));
-            uf->uni(cnv(s2[i]), cnv(s1[i]));            
-        }
-        
-        string res = "";
-        for(int i = 0; i < base.size(); i++) {
-            res += uf->find(cnv(base[i])) + 'a';
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+3. **Function Definition**
+	```cpp
+	string smallestEquivalentString(string s1, string s2, string base) {
+	```
+	This line defines the function `smallestEquivalentString`, which takes two strings `s1`, `s2`, and a `base` string, and returns the smallest equivalent string according to the character relationships defined in `s1` and `s2`.
 
+4. **String Length Calculation**
+	```cpp
+	    int n = s1.size();
+	```
+	This line calculates the length of the string `s1` (which is the same as `s2`) and stores it in `n`.
 
-### Problem Statement
-Given two strings `s1` and `s2`, where each character in `s1` is equivalent to the character at the same position in `s2`, and a third string `base`, the goal is to convert the `base` string into the lexicographically smallest equivalent string using the equivalence relations defined by `s1` and `s2`.
+5. **Union-Find Initialization**
+	```cpp
+	    UF* uf = new UF(26);
+	```
+	An instance of the Union-Find (disjoint-set) data structure is created. It is initialized to handle 26 elements, one for each letter of the alphabet.
 
-### Approach
-The solution employs the Union-Find data structure to group equivalent characters. The process can be summarized in the following steps:
-1. **Union-Find Initialization**: Create a Union-Find structure to manage the equivalence classes of characters.
-2. **Union Operation**: For each pair of characters in `s1` and `s2`, perform union operations to establish the equivalences.
-3. **Find Smallest Equivalent**: Traverse the `base` string and replace each character with its smallest equivalent character by using the union-find structure to find the root representative.
+6. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This loop iterates through each pair of characters from `s1` and `s2`.
 
-### Code Breakdown (Step by Step)
+7. **Union Operation**
+	```cpp
+	        uf->uni(cnv(s1[i]), cnv(s2[i]));
+	```
+	For each character pair from `s1` and `s2`, the `uni` function is called to unify the corresponding sets of the two characters.
 
-1. **Union-Find Class Definition**:
-   The `UF` class represents the union-find structure, which maintains a list of parents for each character.
-   
-   ```cpp
-   class UF {
-   public:
-       vector<int> par;
-       
-       UF(int n) {
-           par.resize(n, 0);
-           for(int i = 0; i < n; i++)
-               par[i] = i;
-       }
-   ```
+8. **Symmetric Union Operation**
+	```cpp
+	        uf->uni(cnv(s2[i]), cnv(s1[i]));
+	```
+	This line ensures that the relationship is symmetric by also unifying the sets of `s2[i]` and `s1[i]`.
 
-   - The constructor initializes the `par` array, where each character initially points to itself.
+9. **String Initialization**
+	```cpp
+	    string res = "";
+	```
+	The result string `res` is initialized as an empty string, which will store the smallest equivalent string.
 
-2. **Union Operation**:
-   The `uni` function connects two characters by linking their roots.
+10. **Base String Loop**
+	```cpp
+	    for(int i = 0; i < base.size(); i++) {
+	```
+	This loop iterates over each character in the base string `base`.
 
-   ```cpp
-   bool uni(int x, int y) {
-       int i = find(x);
-       int j = find(y);
-       if(i != j) {
-           if(i < j)   par[j] = i;
-           else        par[i] = j;
-           return true;
-       } else return false;
-   }
-   ```
+11. **Character Conversion & Find**
+	```cpp
+	        res += uf->find(cnv(base[i])) + 'a';
+	```
+	For each character in `base`, the function `find` is used to find the representative of the character's set, and the result is converted back to a character. This character is then appended to the result string `res`.
 
-   - It checks the root of both characters. If they are different, it unions them based on their root values to keep the structure balanced.
+12. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the result string `res`, which contains the smallest equivalent string.
 
-3. **Find Operation**:
-   The `find` function retrieves the root representative for a character.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-   ```cpp
-   int find(int x) {
-       if(x == par[x]) return x;
-       return par[x] = find(par[x]);
-   }
-   ```
+The time complexity is O(n log n) due to the union-find operations and character transformations.
 
-   - It uses path compression to flatten the structure, ensuring efficient future queries.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Solution Class Implementation**:
-   The `Solution` class contains the method to generate the smallest equivalent string.
+The space complexity is O(n) due to the storage required for the union-find structure and baseStr.
 
-   ```cpp
-   class Solution {
-   public:
-       int cnv(char x) {
-           return x - 'a'; // Convert character to an index
-       }
-   ```
-
-   - The `cnv` function maps a character to its corresponding index (0 for 'a', 1 for 'b', etc.).
-
-5. **Processing Input Strings**:
-   The `smallestEquivalentString` function processes the input strings `s1` and `s2`.
-
-   ```cpp
-   string smallestEquivalentString(string s1, string s2, string base) {
-       int n = s1.size();
-       UF* uf = new UF(26); // Create a Union-Find for 26 letters
-       
-       for(int i = 0; i < n; i++) {
-           uf->uni(cnv(s1[i]), cnv(s2[i]));
-           uf->uni(cnv(s2[i]), cnv(s1[i]));            
-       }
-   ```
-
-   - It iterates through the pairs of characters in `s1` and `s2`, applying the union operation to link them together.
-
-6. **Building the Result**:
-   After establishing the equivalences, the function constructs the result string.
-
-   ```cpp
-   string res = "";
-   for(int i = 0; i < base.size(); i++) {
-       res += uf->find(cnv(base[i])) + 'a';
-   }
-   return res;
-   ```
-
-   - For each character in `base`, it finds its root and appends the corresponding smallest character to the result string.
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity is \(O(n \cdot \alpha(m))\), where \(n\) is the length of the strings and \(m\) is the number of characters (26 for lowercase letters). The \(\alpha\) function is the inverse Ackermann function, which grows very slowly and can be considered nearly constant for practical purposes.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) for the fixed size of the Union-Find structure (26 characters). The additional space used for the result string is \(O(m)\), where \(m\) is the length of the `base` string.
-
-### Conclusion
-The provided solution effectively addresses the problem of finding the smallest equivalent string using a union-find data structure. By establishing equivalence classes and efficiently managing them, the approach allows for quick lookups and results in a lexicographically minimal output.
-
-This method is particularly valuable in problems involving character substitutions, equivalence relationships, or connectivity issues. The union-find technique demonstrates its power in handling such equivalences efficiently, showcasing the effectiveness of data structures in algorithm design.
-
-In summary, this implementation not only solves the problem at hand but also exemplifies best practices in using union-find for managing relationships between elements in a structured way.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lexicographically-smallest-equivalent-string/description/)

@@ -14,95 +14,120 @@ img_src = ""
 youtube = "cVmS9N6kf2Y"
 youtube_upload_date="2024-04-09"
 youtube_thumbnail="https://i.ytimg.com/vi/cVmS9N6kf2Y/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a queue of `n` people, where each person wants to buy a specific number of tickets. The task is to determine the time taken for the person at index `k` to finish buying all their tickets.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array `tickets` of length `n` where each element represents the number of tickets the i-th person wants to buy, and an integer `k` representing the position of the person for whom we need to calculate the time.
+- **Example:** `tickets = [3, 2, 5], k = 1`
+- **Constraints:**
+	- 1 <= n <= 100
+	- 1 <= tickets[i] <= 100
+	- 0 <= k < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int timeRequiredToBuy(vector<int>& nums, int k) {
-        int res = 0, key = nums[k];
-        for(int i = 0; i < nums.size(); i++) {
-          res += min(key - (i > k), nums[i]);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the time taken for the person at position `k` to finish buying all their tickets.
+- **Example:** `Output: 8`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the total time it takes for the k-th person to finish buying their tickets based on the ticket queue process.
+
+- Start by simulating the process of people buying tickets.
+- For each person, allow them to buy 1 ticket at a time and move to the back of the queue until they finish all their tickets.
+- Keep track of the time it takes for the person at position k to complete the process.
+{{< dots >}}
+### Problem Assumptions ✅
+- The people in the queue take 1 second to buy 1 ticket.
+- Once a person finishes buying all their tickets, they leave the queue.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this example, the queue initially has the values [3, 2, 5], with the person at index 1 needing to buy tickets. After several rounds of buying tickets, the total time taken for the k-th person to finish is 8 seconds.
+
+{{< dots >}}
+## Approach 🚀
+The problem is solved by simulating the process of people buying tickets. The k-th person’s time is tracked as the queue progresses.
+
+### Initial Thoughts 💭
+- We need to process each person in the queue until the person at index k has finished buying tickets.
+- We can iterate over the queue repeatedly, subtracting 1 ticket from each person in each round, until the person at k finishes.
+{{< dots >}}
+### Edge Cases 🌐
+- The queue must not be empty (n >= 1).
+- For larger inputs, the algorithm should still work efficiently within the given constraints.
+- When k is 0, the first person in the queue, they will finish earlier as they are at the front.
+{{< dots >}}
+## Code 💻
+```cpp
+int timeRequiredToBuy(vector<int>& nums, int k) {
+    int res = 0, key = nums[k];
+    for(int i = 0; i < nums.size(); i++) {
+      res += min(key - (i > k), nums[i]);
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the total time required to buy all items in the `nums` array where each item's purchase time depends on the relative position of the index `k`.
 
-The problem at hand involves determining the total time required to buy items from a queue, given specific purchasing behavior and constraints. In this scenario, a customer will buy items in the queue sequentially, with the target item represented by the index `k`. Each item has a specified quantity, and the goal is to compute the time it takes for the customer to buy their target item considering the quantities of the other items in the queue.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int timeRequiredToBuy(vector<int>& nums, int k) {
+	```
+	This is the function signature for `timeRequiredToBuy`, which takes two inputs: `nums`, a vector representing the time required to buy each item, and `k`, the index of the item for which the time to purchase is calculated. It returns an integer representing the total time.
 
-### Approach
+2. **Variable Declaration**
+	```cpp
+	    int res = 0, key = nums[k];
+	```
+	This line declares two variables: `res` (the variable to accumulate the total time required) and `key` (the time required to buy the item at index `k`).
 
-To solve this problem, we take the following steps:
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	This loop iterates over the `nums` vector, processing each item to calculate the total time.
 
-1. **Understanding Input**: We receive a vector of integers (`nums`), where each integer represents the quantity of items in the queue, and an integer `k`, which indicates the index of the item we are particularly interested in.
+4. **Calculation**
+	```cpp
+	      res += min(key - (i > k), nums[i]);
+	```
+	This line updates the total time `res`. It adds the smaller of two values: the time required for the item at index `i`, considering whether `i` is greater than `k`, and the actual time of the item.
 
-2. **Identifying the Target Item**: The key item is identified as `nums[k]`, which signifies the quantity of the item at the k-th index that the customer wishes to purchase.
+5. **Return**
+	```cpp
+	    return res;
+	```
+	This line returns the total accumulated time, which is the result of the calculation done in the loop.
 
-3. **Calculating the Time**: The customer buys items from the front of the queue and moves toward the back. We need to sum the time spent purchasing each item until reaching the k-th item. However, we have to account for the fact that the customer will not buy the target item (`nums[k]`) until all preceding items have been fully purchased.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Iterating through the Queue**: We loop through each item in the queue:
-   - If the current item's index is greater than `k`, the effective quantity to consider for the time calculation is limited by the target item (`key`). This is because the customer can only purchase up to that amount from the target item before moving on.
-   - For items before the k-th item, the full quantity of those items is added to the total time.
+The worst case occurs when each person buys at least 1 ticket, resulting in a time complexity of O(n).
 
-5. **Return Result**: Finally, we return the total time calculated.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Code Breakdown (Step by Step)
+We use O(n) space to store the tickets array and track the time.
 
-1. **Function Definition**: The function `timeRequiredToBuy` takes a vector `nums` and an integer `k` as arguments.
+**Happy Coding! 🎉**
 
-   ```cpp
-   int timeRequiredToBuy(vector<int>& nums, int k) {
-   ```
-
-2. **Initialization**: We initialize the total time (`res`) to 0 and store the quantity of the target item (`key`) for easy access.
-
-   ```cpp
-   int res = 0, key = nums[k];
-   ```
-
-3. **Loop Through Items**: We loop through each index `i` in the `nums` vector to calculate the total time.
-
-   ```cpp
-   for(int i = 0; i < nums.size(); i++) {
-   ```
-
-4. **Time Calculation**:
-   - If the current index `i` is greater than `k`, we can only purchase up to the remaining amount of the target item.
-   - Otherwise, we add the full amount of the current item to the total time.
-
-   ```cpp
-   res += min(key - (i > k), nums[i]);
-   ```
-
-5. **Return Result**: After the loop completes, we return the total time calculated.
-
-   ```cpp
-   return res;
-   }
-   ```
-
-### Complexity
-
-- **Time Complexity**: The overall time complexity of this approach is \(O(n)\), where \(n\) is the number of items in the queue (`nums.size()`). This is because we only traverse the list of items once, performing constant-time operations within the loop.
-
-- **Space Complexity**: The space complexity is \(O(1)\) since we are only using a fixed amount of additional space for the integer variables, regardless of the input size.
-
-### Conclusion
-
-The `timeRequiredToBuy` function efficiently calculates the time required for a customer to buy items in a queue based on their purchasing strategy. By iterating through the items and leveraging the target item's quantity, the function provides a quick and effective means of solving the problem.
-
-This solution is particularly useful in scenarios involving queues where items are purchased sequentially, such as checkout lines in stores or ticket counters. The algorithm's linear complexity ensures that it can handle larger inputs efficiently without significant performance degradation.
-
-In summary, this implementation offers a straightforward yet powerful solution to the problem, providing insights into the mechanics of queue operations and customer behavior. Future enhancements might include adapting the solution for varying purchase rules or scenarios where items can be purchased out of order, adding further complexity and real-world applicability to the model.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/time-needed-to-buy-tickets/description/)
 

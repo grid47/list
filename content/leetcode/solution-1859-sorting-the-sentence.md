@@ -14,139 +14,218 @@ img_src = ""
 youtube = "MCPhGg_vedE"
 youtube_upload_date="2021-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/MCPhGg_vedE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a shuffled sentence where each word is tagged with a number that represents its position in the original sentence. Your task is to reconstruct the sentence in its original order and return it.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a shuffled sentence containing words followed by a number that represents the word's original position in the sentence.
+- **Example:** `s = "apple2 banana1 cherry4 mango3"`
+- **Constraints:**
+	- 2 <= s.length <= 200
+	- s contains lowercase and uppercase English letters, spaces, and digits from 1 to 9.
+	- The number of words in s is between 1 and 9.
+	- Words in the sentence are separated by a single space.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string sortSentence(string s) 
-    {
-        stringstream words(s); 
-        string word;
-        pair<int, string> m;
-        vector<pair<int, string> > sent;
-        
-        //SECTION 1
-        while(words>>word)
-        {
-            int len = word.size();
-            int i = int(word[len-1]) - 48;
-            sent.push_back(make_pair(i, word.substr(0, len-1)));
-        }
-        
-        //SECTION 2
-        sort(sent.begin(), sent.end());
-        
-        //SECTION 3
-        string ans = "";
-        int len = sent.size();
-        for(int i=0; i<len; i++)
-        {
-            ans += sent[i].second;
-            if(i!= len-1)
-                ans += " ";
-        }
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the original sentence with the words placed in their correct order and the numbers removed.
+- **Example:** `s = "banana apple mango cherry"`
+- **Constraints:**
+	- The output sentence must contain no leading or trailing spaces.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Reconstruct the original sentence by sorting the words based on their attached numbers and removing the numbers.
 
-The objective of this problem is to sort the words in a sentence based on their order specified by a number at the end of each word. Each word in the input string ends with a digit that indicates its position in the sorted order. The goal is to rearrange the words into a correctly ordered sentence while omitting the trailing numbers.
+- Iterate over the shuffled sentence and extract each word and its attached position number.
+- Store each word along with its number in a pair.
+- Sort the words based on their numerical positions.
+- Remove the position number from each word and reconstruct the sentence.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input sentence is well-formed and contains no leading or trailing spaces.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "apple2 banana1 cherry4 mango3"`  \
+  **Explanation:** In the shuffled sentence, the words are 'apple2', 'banana1', 'cherry4', 'mango3'. When sorted by their numbers (1, 2, 3, 4), the original sentence is 'banana apple mango cherry'.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The problem can be approached by first extracting the word-position pairs, sorting them based on the position number, and then reconstructing the sentence.
 
-To solve this problem, we will follow a structured approach:
-
-1. **Parsing the Input**: We will use a string stream to break the input sentence into individual words.
-2. **Extracting Positions**: For each word, we will extract the number at the end to determine its position and store the word without the number.
-3. **Sorting Words**: We will sort the words based on their extracted positions.
-4. **Constructing the Result**: Finally, we will concatenate the sorted words back into a single string to produce the final result.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: The implementation starts by defining a class named `Solution`, which encapsulates our method.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: The method `sortSentence` takes a string `s` as input and returns the rearranged string.
-
-    ```cpp
-    string sortSentence(string s) 
-    {
-    ```
-
-3. **Using String Stream**: We declare a string stream `words` initialized with the input string `s`. This allows us to read the words from the string conveniently.
-
-    ```cpp
+### Initial Thoughts 💭
+- The sentence is shuffled, but each word contains its original position number.
+- The core task is to extract and sort based on the number and then reconstruct the original sentence.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no edge cases involving empty inputs as the sentence will always have at least two characters.
+- Ensure that the sentence length does not exceed 200 characters.
+- There are no special values to handle other than ensuring that the number attached to the word is correctly removed.
+- The words are between 1 and 9, so sorting will not be computationally expensive.
+{{< dots >}}
+## Code 💻
+```cpp
+string sortSentence(string s) 
+{
     stringstream words(s); 
     string word;
-    ```
-
-4. **Vector Initialization**: We define a vector `sent` to store pairs of integers and strings. Each pair will consist of the position (from the number at the end of the word) and the word itself without that number.
-
-    ```cpp
+    pair<int, string> m;
     vector<pair<int, string> > sent;
-    ```
-
-5. **SECTION 1: Parsing Words**: We enter a while loop that continues as long as there are words to read from the string stream. For each word, we perform the following steps:
-
-    - Calculate the length of the word and determine the position by converting the last character (a digit) to an integer.
-    - Store the position and the word (without the last character) in the `sent` vector.
-
-    ```cpp
-    while(words >> word)
+    
+    //SECTION 1
+    while(words>>word)
     {
         int len = word.size();
-        int i = int(word[len-1]) - 48; // Convert character to integer
-        sent.push_back(make_pair(i, word.substr(0, len-1))); // Store the position and word
+        int i = int(word[len-1]) - 48;
+        sent.push_back(make_pair(i, word.substr(0, len-1)));
     }
-    ```
-
-6. **SECTION 2: Sorting the Words**: After all words have been parsed and stored in the `sent` vector, we use the `sort` function to sort the vector based on the first element of the pairs (the positions).
-
-    ```cpp
+    
+    //SECTION 2
     sort(sent.begin(), sent.end());
-    ```
-
-7. **SECTION 3: Constructing the Result**: We initialize an empty string `ans` to build the final output. We then loop through the sorted vector to concatenate the words into the result string, ensuring to add a space between words but not at the end.
-
-    ```cpp
+    
+    //SECTION 3
     string ans = "";
     int len = sent.size();
     for(int i=0; i<len; i++)
     {
-        ans += sent[i].second; // Append the word
-        if(i != len - 1)
-            ans += " "; // Append space if not the last word
+        ans += sent[i].second;
+        if(i!= len-1)
+            ans += " ";
     }
-    ```
-
-8. **Returning the Result**: After constructing the ordered sentence, we return the result string.
-
-    ```cpp
+    
     return ans;
-    }
-    ```
+}
+```
 
-### Complexity
+The function `sortSentence` sorts the words in the sentence based on the number at the end of each word. It uses the `stringstream` class to split the sentence into words, then creates a vector of pairs to store the word and its position based on the number. The words are then sorted and reassembled into the correctly ordered sentence.
 
-The time complexity of this solution is \(O(n \log n)\), where \(n\) is the number of words in the sentence. This complexity arises from the sorting step. The space complexity is \(O(n)\) due to the additional storage used for the pairs in the vector.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string sortSentence(string s) 
+	```
+	Define the function `sortSentence`, which takes a string `s` as input and returns a sorted sentence.
 
-### Conclusion
+2. **Stringstream Initialization**
+	```cpp
+	    stringstream words(s); 
+	```
+	Create a `stringstream` object to split the input sentence into individual words.
 
-In conclusion, the provided code effectively rearranges the words in a sentence based on the numerical suffixes attached to each word. By utilizing a combination of string parsing, data structures, and sorting algorithms, the solution efficiently constructs a new string that reflects the correct word order. This approach not only demonstrates effective problem-solving skills in handling string manipulations but also illustrates the utility of standard library features in C++. The implementation is concise, clear, and achieves the desired outcome with optimal performance, making it a robust solution for similar problems involving word ordering based on embedded numeric information.
+3. **Variable Declaration**
+	```cpp
+	    string word;
+	```
+	Declare a variable `word` to hold each individual word from the sentence.
+
+4. **Pair Declaration**
+	```cpp
+	    pair<int, string> m;
+	```
+	Declare a pair `m` to store an integer (position of the word) and the word itself.
+
+5. **Vector Initialization**
+	```cpp
+	    vector<pair<int, string> > sent;
+	```
+	Create a vector `sent` to store pairs of integers and words. This will help in sorting the words based on their position number.
+
+6. **While Loop**
+	```cpp
+	    while(words>>word)
+	```
+	Start a `while` loop to extract each word from the sentence using the `stringstream` object.
+
+7. **Word Length Calculation**
+	```cpp
+	        int len = word.size();
+	```
+	Calculate the length of the current word.
+
+8. **Extract Position**
+	```cpp
+	        int i = int(word[len-1]) - 48;
+	```
+	Extract the number from the last character of the word and convert it into an integer. This number determines the word's position in the sentence.
+
+9. **Store Word with Position**
+	```cpp
+	        sent.push_back(make_pair(i, word.substr(0, len-1)));
+	```
+	Store the word (without the number) and its extracted position in the `sent` vector as a pair.
+
+10. **Sorting**
+	```cpp
+	    sort(sent.begin(), sent.end());
+	```
+	Sort the `sent` vector of pairs based on the position of each word.
+
+11. **String Initialization**
+	```cpp
+	    string ans = "";
+	```
+	Initialize an empty string `ans` to store the final sorted sentence.
+
+12. **Length Calculation**
+	```cpp
+	    int len = sent.size();
+	```
+	Calculate the length of the sorted `sent` vector to determine how many words are in the sentence.
+
+13. **For Loop**
+	```cpp
+	    for(int i=0; i<len; i++)
+	```
+	Loop through each word in the sorted `sent` vector.
+
+14. **Concatenate Word**
+	```cpp
+	        ans += sent[i].second;
+	```
+	Add the current word (without the position number) to the result string `ans`.
+
+15. **Add Space**
+	```cpp
+	        if(i!= len-1)
+	```
+	Check if the current word is not the last word in the sentence.
+
+16. **Add Space**
+	```cpp
+	            ans += " ";
+	```
+	If it's not the last word, add a space after the word.
+
+17. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the final sorted sentence as the result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) where n is the number of words in the sentence.
+- **Average Case:** O(n log n) due to sorting the words.
+- **Worst Case:** O(n log n) where n is the number of words in the sentence.
+
+The sorting step dominates the time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(n) as we still need to store the words and their positions.
+- **Worst Case:** O(n) where n is the number of words, as we are storing them in a list.
+
+Space complexity is linear in terms of the number of words in the sentence.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sorting-the-sentence/description/)
 

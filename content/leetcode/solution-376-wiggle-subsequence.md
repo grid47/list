@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "IpWoZvKzpug"
 youtube_upload_date="2021-03-18"
 youtube_thumbnail="https://i.ytimg.com/vi/IpWoZvKzpug/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,148 +28,215 @@ youtube_thumbnail="https://i.ytimg.com/vi/IpWoZvKzpug/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+A wiggle subsequence is a sequence where the differences between successive numbers strictly alternate between positive and negative. The first difference (if one exists) may be either positive or negative. A sequence with one element and a sequence with two non-equal elements are trivially wiggle sequences. Given an integer array `nums`, return the length of the longest wiggle subsequence of `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `nums`.
+- **Example:** `nums = [1, 8, 3, 5, 2, 7]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 0 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int wiggleMaxLength(vector<int> nums) {
-        if(nums.size() == 0) return 0;
-        
-        int n = nums.size();
-        
-        vector<int> up(n, 0);
-        vector<int> down(n, 0);        
-        
-        up[0] = 1;
-        down[0] = 1;
-        
-        for(int i = 1; i < n; i++) {
-                 if(nums[i] < nums[i - 1]) {
-                down[i] = up[i - 1] + 1;
-                up[i] = up[i - 1];
-            }
-            else if(nums[i] > nums[i - 1]) {            
-                up[i] = down[i - 1] + 1;
-                down[i] = down[i - 1];                
-            }
-            else {
-                down[i] = down[i - 1];
-                up[i]   =   up[i - 1];                
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest subsequence that forms a wiggle sequence.
+- **Example:** `Output: 6`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the longest subsequence that alternates between increasing and decreasing differences.
+
+- Create two arrays to store the lengths of the wiggle subsequences that end in an upward or downward direction.
+- Iterate through the array and for each element, update the subsequence lengths based on the current and previous elements.
+- The final answer is the maximum value between the two subsequence lengths at the end of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` is non-empty and contains at least one integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 8, 3, 5, 2, 7]`  \
+  **Explanation:** In this case, the entire sequence is a valid wiggle sequence, and the differences between consecutive elements alternate between positive and negative.
+
+- **Input:** `nums = [10, 15, 12, 9, 18, 7, 11, 13]`  \
+  **Explanation:** In this case, a valid wiggle subsequence can be formed as `[10, 15, 9, 18, 7, 13]`.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we can use dynamic programming.
+
+### Initial Thoughts 💭
+- We can maintain two states: one where the current element is part of an increasing subsequence, and one where it is part of a decreasing subsequence.
+- Dynamic programming can be used to store the lengths of subsequences that end in an increasing or decreasing direction.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as per the constraints.
+- The algorithm should efficiently handle inputs up to the size of 1000.
+- The input may contain repeated elements, but this does not affect the logic since we are only concerned with the differences between consecutive elements.
+- The array should not contain negative numbers or be empty.
+{{< dots >}}
+## Code 💻
+```cpp
+int wiggleMaxLength(vector<int> nums) {
+    if(nums.size() == 0) return 0;
+    
+    int n = nums.size();
+    
+    vector<int> up(n, 0);
+    vector<int> down(n, 0);        
+    
+    up[0] = 1;
+    down[0] = 1;
+    
+    for(int i = 1; i < n; i++) {
+             if(nums[i] < nums[i - 1]) {
+            down[i] = up[i - 1] + 1;
+            up[i] = up[i - 1];
         }
-        
-        return max(down[n - 1], up[n - 1]);
+        else if(nums[i] > nums[i - 1]) {            
+            up[i] = down[i - 1] + 1;
+            down[i] = down[i - 1];                
+        }
+        else {
+            down[i] = down[i - 1];
+            up[i]   =   up[i - 1];                
+        }
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, we're tasked with determining the length of the longest "wiggle subsequence" in an integer array. A **wiggle subsequence** is defined as one where the differences between consecutive elements strictly alternate between positive and negative.
-
-For example:
-- In the sequence `[1, 7, 4, 9, 2, 5]`, the longest wiggle subsequence is `[1, 7, 4, 9, 2, 5]` because the differences between consecutive numbers alternate in sign.
-- In the sequence `[1, 2, 3, 4, 5]`, the longest wiggle subsequence is `[1, 2]` or `[1, 5]`, as there are no alternating differences between all the elements.
-
-Our goal is to find the length of the longest subsequence that forms a wiggle pattern.
-
----
-
-### 🧠 Approach
-
-This problem can be efficiently solved using **dynamic programming**. We’ll track two possible scenarios for each element:
-1. **Upward movement**: The difference between the current element and the previous one is positive.
-2. **Downward movement**: The difference between the current element and the previous one is negative.
-
-#### Key Observations:
-- We need two arrays to represent the dynamic programming states:
-  - `up[i]`: The length of the longest wiggle subsequence that ends with an upward movement at index `i`.
-  - `down[i]`: The length of the longest wiggle subsequence that ends with a downward movement at index `i`.
-
-If the current element is greater than the previous one, the sequence continues upward. If it’s smaller, the sequence continues downward. If it’s equal, no change occurs.
-
-The result will be the maximum of the last values in the `up` and `down` arrays.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-#### 1. **Check for Empty Array**
-
-```cpp
-if(nums.size() == 0) return 0;
-```
-- If the array is empty, there is no subsequence to form, so we immediately return `0`.
-
----
-
-#### 2. **Initialize the DP Arrays**
-
-```cpp
-int n = nums.size();
-vector<int> up(n, 0);
-vector<int> down(n, 0);
-
-up[0] = 1;
-down[0] = 1;
-```
-- We initialize two vectors, `up` and `down`, to store the lengths of the longest subsequences that end at each index with an upward or downward movement.
-- The first element (`up[0]` and `down[0]`) is set to `1` because any single element is a valid subsequence of length 1.
-
----
-
-#### 3. **Loop Through the Array**
-
-```cpp
-for(int i = 1; i < n; i++) {
-    if(nums[i] < nums[i - 1]) {
-        down[i] = up[i - 1] + 1;
-        up[i] = up[i - 1];
-    }
-    else if(nums[i] > nums[i - 1]) {
-        up[i] = down[i - 1] + 1;
-        down[i] = down[i - 1];
-    }
-    else {
-        down[i] = down[i - 1];
-        up[i] = up[i - 1];
-    }
+    
+    return max(down[n - 1], up[n - 1]);
 }
 ```
-- We iterate through the array starting from the second element.
-- For each element, we compare it with the previous element:
-  - If it's smaller, we update `down[i]` to be the length of the longest subsequence with a downward movement (`up[i-1] + 1`).
-  - If it’s larger, we update `up[i]` to reflect the longest subsequence with an upward movement (`down[i-1] + 1`).
-  - If the elements are equal, no updates are made since there’s no wiggle.
 
----
+This code computes the length of the longest wiggle subsequence from the given input array `nums`. The approach uses dynamic programming to track the longest wiggle sequence in both upward and downward directions at each point.
 
-#### 4. **Return the Maximum Wiggle Length**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int wiggleMaxLength(vector<int> nums) {
+	```
+	This is the function definition for `wiggleMaxLength`, which computes the maximum length of a wiggle subsequence. It takes a vector `nums` as input.
 
-```cpp
-return max(down[n - 1], up[n - 1]);
-```
-- After the loop finishes, the longest wiggle subsequence can either end with an upward or downward movement. So, we return the maximum of `up[n-1]` and `down[n-1]`.
+2. **Edge Case Handling**
+	```cpp
+	    if(nums.size() == 0) return 0;
+	```
+	Checks if the input array `nums` is empty. If it is, the function returns 0 as there is no wiggle subsequence possible.
 
----
+3. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	Calculates the size `n` of the input vector `nums`, which is used to initialize dynamic programming tables.
 
-### 📈 Complexity Analysis
+4. **Dynamic Programming Array Initialization**
+	```cpp
+	    vector<int> up(n, 0);
+	```
+	Declares a vector `up` of size `n` initialized to zero, which will track the length of the longest subsequence ending in an upward direction.
 
-#### Time Complexity:
-- **O(n)**: We only need one pass through the array to calculate the values of the `up` and `down` arrays, making the time complexity linear.
+5. **Dynamic Programming Array Initialization**
+	```cpp
+	    vector<int> down(n, 0);        
+	```
+	Declares a vector `down` of size `n` initialized to zero, which will track the length of the longest subsequence ending in a downward direction.
 
-#### Space Complexity:
-- **O(n)**: We use two arrays (`up` and `down`), each of size `n`, to store the lengths of subsequences for each index.
+6. **Initial Condition Setup**
+	```cpp
+	    up[0] = 1;
+	```
+	Sets the base case: the first element of the `nums` array is considered to be part of a wiggle sequence of length 1, starting with an upward direction.
 
----
+7. **Initial Condition Setup**
+	```cpp
+	    down[0] = 1;
+	```
+	Sets the base case: the first element of the `nums` array is considered to be part of a wiggle sequence of length 1, starting with a downward direction.
 
-### 🏁 Conclusion
+8. **Loop Iteration**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	This loop iterates through the `nums` array starting from the second element, checking whether each element is part of an increasing or decreasing subsequence.
 
-This dynamic programming approach efficiently finds the length of the longest wiggle subsequence in an integer array. By keeping track of subsequences that end with upward and downward movements, we ensure that each step builds on the previous ones. The time complexity is **O(n)**, which makes this solution optimal for large inputs.
+9. **Condition Check (Decrease)**
+	```cpp
+	             if(nums[i] < nums[i - 1]) {
+	```
+	Checks if the current number `nums[i]` is less than the previous number `nums[i - 1]`. If true, it signifies a downward direction in the wiggle subsequence.
 
-Stay motivated and keep practicing! With dynamic programming, you can solve many such interesting problems by breaking them down into smaller, manageable subproblems!
+10. **Dynamic Programming Update (Decrease)**
+	```cpp
+	            down[i] = up[i - 1] + 1;
+	```
+	Updates the `down[i]` value, representing the longest subsequence ending in a downward direction, considering the previous subsequence's upward direction.
+
+11. **Dynamic Programming Update (Maintain Up)**
+	```cpp
+	            up[i] = up[i - 1];
+	```
+	Maintains the previous `up[i - 1]` value since the current number does not extend the upward sequence.
+
+12. **Condition Check (Increase)**
+	```cpp
+	        else if(nums[i] > nums[i - 1]) {            
+	```
+	Checks if the current number `nums[i]` is greater than the previous number `nums[i - 1]`. If true, it signifies an upward direction in the wiggle subsequence.
+
+13. **Dynamic Programming Update (Increase)**
+	```cpp
+	            up[i] = down[i - 1] + 1;
+	```
+	Updates the `up[i]` value, representing the longest subsequence ending in an upward direction, considering the previous subsequence's downward direction.
+
+14. **Dynamic Programming Update (Maintain Down)**
+	```cpp
+	            down[i] = down[i - 1];                
+	```
+	Maintains the previous `down[i - 1]` value since the current number does not extend the downward sequence.
+
+15. **Condition Check (No Change)**
+	```cpp
+	        else {
+	```
+	Handles the case where the current number is equal to the previous number, meaning the sequence does not change direction.
+
+16. **Dynamic Programming Update (No Change)**
+	```cpp
+	            down[i] = down[i - 1];
+	```
+	Maintains the previous `down[i - 1]` value since there is no change in direction.
+
+17. **Dynamic Programming Update (Maintain Up)**
+	```cpp
+	            up[i]   =   up[i - 1];                
+	```
+	Maintains the previous `up[i - 1]` value since there is no change in direction.
+
+18. **Return Result**
+	```cpp
+	    return max(down[n - 1], up[n - 1]);
+	```
+	Returns the maximum value between `down[n - 1]` and `up[n - 1]`, which represents the length of the longest wiggle subsequence.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear because we only need to iterate through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the `up` and `down` arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/wiggle-subsequence/description/)
 

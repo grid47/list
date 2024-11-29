@@ -14,140 +14,216 @@ img_src = ""
 youtube = "PLNDfB0Vg9Y"
 youtube_upload_date="2021-03-01"
 youtube_thumbnail="https://i.ytimg.com/vi/PLNDfB0Vg9Y/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of unique product names and a search word. As each character of the search word is typed, you need to suggest up to three products that have a prefix matching the current search word. If there are more than three products with the same prefix, return the three lexicographically smallest products.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A list of unique product names and a search word string.
+- **Example:** `products = ["tablet","telescope","test","terrace","time"]
+searchWord = "test"`
+- **Constraints:**
+	- 1 <= products.length <= 1000
+	- 1 <= products[i].length <= 3000
+	- 1 <= sum(products[i].length) <= 2 * 10^4
+	- All the strings in products are unique.
+	- 1 <= searchWord.length <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<string>> suggestedProducts(vector<string>& A, string w) {
-        auto it = A.begin();
-        sort(it, A.end());
-        vector<vector<string>> res;
-        string cur = "";
-        for (char c : w) {
-            cur += c;
-            vector<string> sdg;
-            it = lower_bound(it, A.end(), cur);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of lists where each list contains at most three products that start with the prefix corresponding to the characters typed so far in searchWord.
+- **Example:** `[["tablet", "telescope", "test"], ["tablet", "telescope", "test"], ["test", "telescope"], ["test", "telescope"], ["test"]]`
+- **Constraints:**
+	- Each list in the output should contain at most three products.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the products that match the current prefix and return the three lexicographically smallest products at each step.
+
+- 1. Sort the product names lexicographically.
+- 2. For each character in the search word, create the current prefix.
+- 3. Find products that match the current prefix and return at most three of them.
+{{< dots >}}
+### Problem Assumptions ✅
+- The products list contains unique strings.
+- The search word is a non-empty string.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `products = ["tablet","telescope","test","terrace","time"]
+searchWord = "test"`  \
+  **Explanation:** As each character of 'test' is typed, the system suggests products that start with the corresponding prefix. At each step, it returns up to three products, sorted lexicographically.
+
+- **Input:** `products = ["banana","berry","cherry","date"]
+searchWord = "berry"`  \
+  **Explanation:** In this case, the search word is 'berry'. Since 'berry' is the only product starting with 'b', after each character is typed, only 'berry' will be suggested.
+
+{{< dots >}}
+## Approach 🚀
+We can implement the system by sorting the product list lexicographically and finding products that match the current prefix at each step.
+
+### Initial Thoughts 💭
+- Sorting the products lexicographically allows us to easily get the smallest lexicographical products when a prefix matches.
+- After each character of the search word, we can use binary search to quickly find products that start with the current prefix.
+{{< dots >}}
+### Edge Cases 🌐
+- If the product list is empty, return an empty list.
+- The solution should efficiently handle large inputs with up to 1000 products and long search words.
+- If there are fewer than three products matching a prefix, return all matching products.
+- Ensure that the solution efficiently handles sorting and finding products for each prefix.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<string>> suggestedProducts(vector<string>& A, string w) {
+    auto it = A.begin();
+    sort(it, A.end());
+    vector<vector<string>> res;
+    string cur = "";
+    for (char c : w) {
+        cur += c;
+        vector<string> sdg;
+        it = lower_bound(it, A.end(), cur);
 for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
-                
-        string& s = *(i + it);
-        if(s.find(cur)) break;
-        sdg.push_back(s);
-                
-            }
-            res.push_back(sdg);
+            
+    string& s = *(i + it);
+    if(s.find(cur)) break;
+    sdg.push_back(s);
+            
         }
-        
-        return res;
+        res.push_back(sdg);
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The goal is to provide product suggestions based on a prefix derived from a given input string. Given a list of product names and a string `w`, you need to return a list of suggested products for each prefix of `w`. Each suggestion list should contain up to three products that start with the corresponding prefix.
-
-For example, if the product list is `["mobile", "mouse", "moneypot", "monitor", "mousepad"]` and the input string is `"mouse"`, the function should return:
-- For prefix `"m"`: `["mobile", "moneypot", "monitor"]`
-- For prefix `"mo"`: `["mobile", "moneypot", "monitor"]`
-- For prefix `"mou"`: `["mouse", "mousepad"]`
-- For prefix `"mous"`: `["mouse"]`
-- For prefix `"mouse"`: `["mouse"]`
-
-The function should efficiently return these suggestions even as the prefixes grow longer.
-
-### Approach
-To achieve the desired results efficiently, we can use the following approach:
-1. **Sorting the Product List**: First, sort the product names lexicographically. This enables efficient searching and makes it easy to find products that start with a given prefix.
-2. **Prefix Iteration**: For each character in the input string `w`, construct the current prefix and find the range of products that match this prefix.
-3. **Binary Search**: Use binary search to find the starting position of products that match the current prefix using `lower_bound`.
-4. **Gather Suggestions**: Collect up to three products that start with the current prefix and store them in the result list.
-
-This method ensures that we can efficiently find suggestions with minimal comparisons.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<vector<string>> suggestedProducts(vector<string>& A, string w) {
+    
+    return res;
+}
 ```
-- **Line 1-2**: The `Solution` class is defined with a public member function `suggestedProducts`, which takes a vector of strings `A` (the product list) and a string `w` (the input string) as arguments.
 
-```cpp
-        auto it = A.begin();
-        sort(it, A.end());
-        vector<vector<string>> res;
-        string cur = "";
-```
-- **Line 3-6**: 
-  - `it` is initialized to the beginning of the vector `A`. 
-  - The products are sorted to prepare for binary search.
-  - A 2D vector `res` is initialized to store the lists of suggested products for each prefix.
-  - An empty string `cur` is initialized to build prefixes.
+This code defines the function `suggestedProducts` which takes a list of products and a prefix string. It returns a list of up to three products that match each prefix in the string `w`.
 
-```cpp
-        for (char c : w) {
-            cur += c;
-            vector<string> sdg;
-```
-- **Line 7-9**: A loop iterates over each character `c` in the string `w`:
-  - The current character `c` is appended to the prefix `cur`.
-  - A temporary vector `sdg` is initialized to hold the suggestions for the current prefix.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<string>> suggestedProducts(vector<string>& A, string w) {
+	```
+	This defines the function `suggestedProducts`, which takes a vector of strings `A` and a string `w` representing the prefix. The function returns a vector of vectors of strings, where each vector contains up to 3 suggestions for the corresponding prefix of `w`.
 
-```cpp
-            it = lower_bound(it, A.end(), cur);
-```
-- **Line 10**: We find the position of the first product that is not less than the current prefix `cur` using `lower_bound`. This ensures that we start checking for matches from this position onwards.
+2. **Iterator Initialization**
+	```cpp
+	    auto it = A.begin();
+	```
+	This initializes an iterator `it` to the beginning of the list `A` (the product list).
 
-```cpp
-            for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
-```
-- **Line 11**: A loop iterates up to 3 times to gather suggestions:
-  - We check if we are within the bounds of the vector `A`.
+3. **Sorting**
+	```cpp
+	    sort(it, A.end());
+	```
+	This sorts the vector `A` in lexicographical order to make it easier to find matching products for each prefix.
 
-```cpp
-                string& s = *(i + it);
-                if(s.find(cur)) break;
-                sdg.push_back(s);
-```
-- **Line 12-14**:
-  - We access the string at position `it + i`.
-  - We check if the string `s` contains the current prefix `cur` using `find`. Note that this should ideally check if `s` starts with `cur` (i.e., `s.find(cur) == 0`), as the current implementation checks if the prefix exists anywhere in the string.
-  - If the prefix is found, we break the loop. Otherwise, we add `s` to the suggestions vector `sdg`.
+4. **Result Initialization**
+	```cpp
+	    vector<vector<string>> res;
+	```
+	This initializes the result vector `res` to store the list of product suggestions for each prefix.
 
-```cpp
-            res.push_back(sdg);
-        }
-```
-- **Line 15-16**: After checking for the current prefix, the collected suggestions `sdg` are added to the results `res`.
+5. **Prefix Initialization**
+	```cpp
+	    string cur = "";
+	```
+	This initializes the string `cur` as an empty string, which will be used to store the current prefix being considered.
 
-```cpp
-        return res;
-    }
-};
-```
-- **Line 17-18**: Finally, the function returns the result vector `res`, containing all suggested products for each prefix of `w`.
+6. **Prefix Iteration**
+	```cpp
+	    for (char c : w) {
+	```
+	This begins a loop that iterates through each character `c` in the string `w`.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - Sorting the product list takes \(O(n \log n)\), where \(n\) is the number of products in `A`.
-   - For each character in `w`, the function performs a binary search (`lower_bound`) and then checks up to 3 products for each prefix, resulting in a linear complexity relative to the length of `w`. Thus, the overall complexity is \(O(n \log n + m)\), where \(m\) is the length of `w`.
+7. **Building Prefix**
+	```cpp
+	        cur += c;
+	```
+	This adds the current character `c` to the string `cur`, building the prefix incrementally.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(m + n)\) for storing the result and temporary variables.
+8. **Suggestion Vector Initialization**
+	```cpp
+	        vector<string> sdg;
+	```
+	This initializes an empty vector `sdg` that will hold the suggestions for the current prefix.
 
-### Conclusion
-The `suggestedProducts` function efficiently provides product suggestions based on prefixes derived from the input string `w`. By leveraging sorting and binary search, the function minimizes the number of comparisons needed to find matching products, ensuring optimal performance even for larger inputs. This solution illustrates the power of combining data structures with algorithmic techniques to solve problems effectively in a competitive programming context.
+9. **Lower Bound Search**
+	```cpp
+	        it = lower_bound(it, A.end(), cur);
+	```
+	This uses `lower_bound` to find the first product in `A` that is greater than or equal to the current prefix `cur`.
 
-In summary, this implementation is a prime example of how to handle string prefix searching efficiently while maintaining clear and readable code. The use of STL functions like `sort` and `lower_bound` showcases the elegance of C++'s Standard Library, making it a valuable approach for developers seeking to optimize their solutions.
+10. **Suggestion Loop**
+	```cpp
+	for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
+	```
+	This begins a loop that tries to find up to 3 products matching the current prefix `cur`.
+
+11. **End Suggestion Loop**
+	```cpp
+	            
+	```
+	This section marks the continuation of the loop for adding suggestions, but there is no actual code inside.
+
+12. **Checking Prefix Match**
+	```cpp
+	    string& s = *(i + it);
+	```
+	This dereferences the iterator `it + i` to get the product string `s` and checks if it matches the current prefix.
+
+13. **Breaking on No Match**
+	```cpp
+	    if(s.find(cur)) break;
+	```
+	If the product string `s` does not start with the current prefix `cur`, the loop breaks as no further products will match.
+
+14. **Adding Valid Suggestions**
+	```cpp
+	    sdg.push_back(s);
+	```
+	This adds the valid product `s` to the suggestion vector `sdg`.
+
+15. **End Suggestion Loop**
+	```cpp
+	            
+	```
+	This section marks the continuation of the loop, but no additional code is inside this block.
+
+16. **Appending Suggestions to Result**
+	```cpp
+	        res.push_back(sdg);
+	```
+	This appends the current suggestion vector `sdg` to the result vector `res`.
+
+17. **Returning Result**
+	```cpp
+	    return res;
+	```
+	This returns the final result vector `res`, which contains the product suggestions for each prefix.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n + m)
+- **Average Case:** O(n log n + m)
+- **Worst Case:** O(n log n + m)
+
+The time complexity is dominated by the sorting step (O(n log n)) and the time to find matching products for each prefix (O(m)).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the sorted list of products.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/search-suggestions-system/description/)
 

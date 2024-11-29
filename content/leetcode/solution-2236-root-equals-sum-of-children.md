@@ -14,114 +14,106 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary tree with three nodes: the root, its left child, and its right child. Determine whether the value of the root node is equal to the sum of the values of its two children.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree with exactly three nodes: a root node, a left child, and a right child. Each node contains an integer value.
+- **Example:** `Input: root = [7, 3, 4]`
+- **Constraints:**
+	- The binary tree always has three nodes: root, left child, and right child.
+	- -100 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool checkTree(TreeNode* root) {
-        return (root->left->val)+(root->right->val)==root->val;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a boolean value indicating whether the value of the root node is equal to the sum of the values of its two children.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be either true or false.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if the sum of the values of the left and right children equals the value of the root node.
 
-The problem requires us to check whether a given binary tree satisfies a specific condition: the value of the root node must be equal to the sum of the values of its left and right child nodes. Specifically, for a given binary tree with root node `root`, we need to verify if:
+- 1. Access the value of the root node.
+- 2. Access the values of the left and right child nodes.
+- 3. Compute the sum of the left and right child node values.
+- 4. Compare the computed sum with the value of the root node.
+- 5. Return true if they are equal; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree input will always be valid with three nodes.
+- No additional nodes or structures are present in the input.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [7, 3, 4]`  \
+  **Explanation:** The value of the root is 7, and the sum of the left and right children is 3 + 4 = 7. Since they are equal, the output is true.
 
-```
-root->val == root->left->val + root->right->val
-```
+- **Input:** `Input: root = [8, 5, 2]`  \
+  **Explanation:** The value of the root is 8, and the sum of the left and right children is 5 + 2 = 7. Since they are not equal, the output is false.
 
-If the condition holds true, return `true`; otherwise, return `false`. This problem tests our understanding of basic tree traversal and node value comparison.
+{{< dots >}}
+## Approach 🚀
+The approach involves simple arithmetic comparisons to validate the relationship between the root and its children.
 
-### Approach
-
-The solution to this problem is straightforward:
-1. We are given a binary tree represented by the root node `root`.
-2. The root node has two child nodes: a left child and a right child.
-3. The task is to check whether the sum of the left child's value and the right child's value is equal to the value of the root node.
-4. If the sum of the values of the left and right child nodes equals the root node's value, return `true`. Otherwise, return `false`.
-
-This problem is simple because we are only concerned with the root node and its immediate children, without needing to traverse the entire tree. The solution requires direct access to the root's left and right children to perform the comparison.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool checkTree(TreeNode* root) {
-        return (root->left->val) + (root->right->val) == root->val;
-    }
-};
-```
-
-#### 1. **Class Declaration**:
-```cpp
-class Solution {
-```
-- We begin by declaring a class `Solution`. The class encapsulates the solution for this problem. In C++, class declarations group related functions and variables together.
-- We define the `checkTree` function inside this class, which will be used to solve the problem.
-
-#### 2. **Function Definition**:
+### Initial Thoughts 💭
+- The tree is small with only three nodes, so the logic is straightforward.
+- The problem only requires basic comparison of integer values.
+- Accessing and comparing node values directly should be sufficient to solve this problem efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as the input always contains three nodes.
+- Not applicable, as the input size is fixed to three nodes.
+- All node values are zeros, e.g., root = [0, 0, 0].
+- The root value is negative, and its children sum to match it.
+- Ensure comparisons handle both negative and positive integers correctly.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool checkTree(TreeNode* root) {
+    return (root->left->val)+(root->right->val)==root->val;
+}
 ```
-- The function `checkTree` is defined with a single parameter `root`, which is a pointer to the root of the binary tree (`TreeNode*`).
-- The return type of this function is `bool`, indicating that it will return either `true` or `false` based on the condition evaluated inside the function.
 
-#### 3. **Node Value Comparison**:
-```cpp
-return (root->left->val) + (root->right->val) == root->val;
-```
-- This line performs the core operation of the solution: it checks whether the sum of the values of the left and right children of the root node is equal to the value of the root node.
-- `root->left->val`: accesses the value of the left child node.
-- `root->right->val`: accesses the value of the right child node.
-- `root->val`: accesses the value of the root node.
-- The condition compares whether the sum of the left and right child values equals the root node's value.
-- If the condition holds true, the function will return `true`; otherwise, it will return `false`.
+This function checks if the sum of the values of the left and right child nodes of a binary tree's root node equals the value of the root node itself.
 
-#### 4. **Conclusion of Function**:
-```cpp
-};
-```
-- The function is complete after this line. If the condition is met, the function returns `true`, and if it is not met, the function returns `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkTree(TreeNode* root) {
+	```
+	Defines the 'checkTree' function that takes a pointer to the root of a binary tree and returns a boolean value.
 
-### Complexity
+2. **Return Statement**
+	```cpp
+	    return (root->left->val)+(root->right->val)==root->val;
+	```
+	Returns 'true' if the sum of the values of the left and right children of the root node equals the root's value; otherwise, returns 'false'.
 
-#### Time Complexity:
-- The time complexity of this function is **O(1)**, which means it takes constant time to execute.
-- This is because the function simply accesses the left and right children of the root node and compares their sum with the root node's value, which takes a constant amount of time.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
-- The space complexity is also **O(1)**, as the function does not use any additional space that scales with the size of the input. It only uses a constant amount of space for the comparison.
+The time complexity is constant because the binary tree always contains exactly three nodes.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution efficiently solves the problem of checking if the root node’s value equals the sum of its children’s values. The approach is simple and optimal because:
-- The problem only requires us to examine the root node and its immediate children.
-- The function is direct and uses constant time and space, making it an optimal solution for this problem.
+The solution uses constant space as no additional memory is required beyond the input.
 
-In a broader context, this problem is an example of basic tree manipulation and traversal, where we focus on accessing specific nodes in the tree (in this case, the root and its children) and performing a comparison. Understanding this problem is essential for developing familiarity with binary trees and solving more complex tree-based problems.
+**Happy Coding! 🎉**
 
-This solution works in constant time and space, which is highly efficient for the given task.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/root-equals-sum-of-children/description/)
 

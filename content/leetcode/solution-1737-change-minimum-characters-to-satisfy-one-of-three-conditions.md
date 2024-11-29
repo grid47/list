@@ -14,149 +14,264 @@ img_src = ""
 youtube = "RRiBv833lVQ"
 youtube_upload_date="2021-01-24"
 youtube_thumbnail="https://i.ytimg.com/vi/RRiBv833lVQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, `a` and `b`, consisting of lowercase letters. In one operation, you can change any character in either string to any lowercase letter. Your goal is to perform the minimum number of operations to satisfy one of the following three conditions:
 
-{{< highlight cpp >}}
+1) Every character in string `a` is strictly less than every character in string `b` alphabetically.
+2) Every character in string `b` is strictly less than every character in string `a` alphabetically.
+3) Both `a` and `b` consist of only one distinct character.
+
+Return the minimum number of operations needed to achieve one of these conditions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings `a` and `b` that consist of lowercase letters.
+- **Example:** `Input: a = "cbd", b = "bbf"`
+- **Constraints:**
+	- 1 <= a.length, b.length <= 10^5
+	- Strings `a` and `b` consist only of lowercase letters.
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to satisfy one of the three conditions mentioned above.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The number of operations should be minimized while achieving one of the valid conditions.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the minimum number of operations needed to achieve one of the valid conditions by analyzing the frequency of characters in both strings.
+
+- 1. Calculate the frequency of characters in both strings `a` and `b`.
+- 2. Check each of the three conditions and calculate the number of operations needed for each.
+- 3. Return the minimum number of operations required.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings will always be valid, containing only lowercase letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: a = "aba", b = "caa"`  \
+  **Explanation:** We can achieve a valid condition in 2 operations: Change `b` to `ccc` (operation 1), making all characters in `a` less than those in `b`.
+
+- **Input:** `Input: a = "dabadd", b = "cda"`  \
+  **Explanation:** The best solution is to change all characters in `b` to 'e' (operation 3), making every character in `a` less than those in `b`.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by analyzing the frequency of each character in both strings `a` and `b`. Then, we calculate the number of operations required for each condition and return the minimum number.
+
+### Initial Thoughts 💭
+- We need to compare the characters in both strings to find the best way to satisfy one of the conditions.
+- Instead of modifying characters one by one, we can analyze the frequency distribution to determine the minimum number of operations needed.
+{{< dots >}}
+### Edge Cases 🌐
+- The input strings will always have at least one character.
+- For large inputs (e.g., 10^5 characters), ensure that the solution handles the character counting efficiently.
+- Consider edge cases where the strings already satisfy one of the conditions.
+- The solution must work within the constraints where `a` and `b` can have lengths up to 10^5.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    typedef long long ll;
+typedef long long ll;
 public:
-    int minCharacters(string a, string b) {
-        int m = a.size(), n = b.size();
-        vector<int> ca(26, 0), cb(26, 0);
-        for(int i = 0; i < m; i++) {
-            ca[a[i] - 'a']++; }
-        for(int j = 0; j < n; j++) {
-            cb[b[j] - 'a']++; }
-        
-        int res = m + n;
-        for(int i = 0; i < 26; i++) {
-            res = min(res, m + n - ca[i] - cb[i]);
-            if(i > 0) {
+int minCharacters(string a, string b) {
+    int m = a.size(), n = b.size();
+    vector<int> ca(26, 0), cb(26, 0);
+    for(int i = 0; i < m; i++) {
+        ca[a[i] - 'a']++; }
+    for(int j = 0; j < n; j++) {
+        cb[b[j] - 'a']++; }
+    
+    int res = m + n;
+    for(int i = 0; i < 26; i++) {
+        res = min(res, m + n - ca[i] - cb[i]);
+        if(i > 0) {
 
-         ca[i] += ca[i - 1];
-         cb[i] += cb[i - 1];
-                }
-            if(i < 25) {
+     ca[i] += ca[i - 1];
+     cb[i] += cb[i - 1];
+            }
+        if(i < 25) {
 res = min(res, m - ca[i] + cb[i]);
 res = min(res, n - cb[i] + ca[i]);
 
-            }
-            
-            }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+        }
+        
+        }
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the minimum number of changes needed to make two strings distinct by modifying one character at a time. It calculates the frequency of each character in both strings, and then computes the minimum number of changes based on those frequencies.
 
-The problem requires determining the minimum number of character modifications needed to make two given strings, `a` and `b`, such that all characters in `a` are strictly less than those in `b` or vice versa. This can be achieved by changing characters in either string to any other character, and we aim to minimize the total number of such modifications.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	This line defines the class `Solution`, which contains the main logic for solving the problem.
 
-### Approach
+2. **Type Alias**
+	```cpp
+	typedef long long ll;
+	```
+	Here, a type alias `ll` is defined for `long long` to simplify the code and make it more readable.
 
-To solve this problem, we can utilize the following approach:
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	This access modifier makes the following methods accessible outside the class.
 
-1. **Count Character Frequencies**: First, we will count the frequency of each character in both strings. This is done using arrays where the index corresponds to the character ('a' to 'z').
+4. **Function Declaration**
+	```cpp
+	int minCharacters(string a, string b) {
+	```
+	The function `minCharacters` is declared, taking two string inputs `a` and `b`. It returns the minimum number of changes required to make the strings distinct.
 
-2. **Calculate Modifications**: We will evaluate the number of modifications required to achieve the following:
-   - Making all characters in `a` less than all characters in `b`.
-   - Making all characters in `b` less than all characters in `a`.
-   - Finding the scenario that requires the least number of modifications.
+5. **Variable Initialization**
+	```cpp
+	    int m = a.size(), n = b.size();
+	```
+	Here, the sizes of the input strings `a` and `b` are stored in variables `m` and `n` respectively.
 
-3. **Iterate through Characters**: By iterating through each character, we can compute:
-   - The number of modifications needed to make all characters in `a` and `b` conform to a particular character.
-   - The accumulated counts of characters from both strings up to the current character to assist in calculations.
+6. **Array Initialization**
+	```cpp
+	    vector<int> ca(26, 0), cb(26, 0);
+	```
+	Two vectors `ca` and `cb` are initialized to store the frequency of each character (from 'a' to 'z') in the strings `a` and `b`.
 
-4. **Determine the Minimum Modifications**: Finally, we compare the number of modifications calculated for the different scenarios and return the minimum.
+7. **Loop Start**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	This loop iterates through the characters in string `a`.
 
-### Code Breakdown (Step by Step)
+8. **Character Counting**
+	```cpp
+	        ca[a[i] - 'a']++; }
+	```
+	For each character in `a`, the frequency count in vector `ca` is incremented based on the character's position in the alphabet.
 
-Let's dissect the code provided for better understanding:
+9. **Loop Start**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	This loop iterates through the characters in string `b`.
 
-1. **Class and Function Definition**: The class `Solution` encapsulates the solution logic, and the method `minCharacters` takes two strings as input.
+10. **Character Counting**
+	```cpp
+	        cb[b[j] - 'a']++; }
+	```
+	For each character in `b`, the frequency count in vector `cb` is incremented based on the character's position in the alphabet.
 
-   ```cpp
-   class Solution {
-       typedef long long ll; // Defining long long type for future use
-   public:
-       int minCharacters(string a, string b) {
-   ```
+11. **Blank**
+	```cpp
+	    
+	```
+	A blank line used for clarity between code sections.
 
-2. **Variable Initialization**: The sizes of the strings `m` and `n` are stored, and two vectors are created to count the frequency of each character in the strings.
+12. **Initial Result Calculation**
+	```cpp
+	    int res = m + n;
+	```
+	The variable `res` is initialized to the sum of the lengths of `a` and `b`, representing the worst case where all characters need to be modified.
 
-   ```cpp
-       int m = a.size(), n = b.size();
-       vector<int> ca(26, 0), cb(26, 0); // Frequency arrays for a and b
-   ```
+13. **Loop Start**
+	```cpp
+	    for(int i = 0; i < 26; i++) {
+	```
+	This loop iterates through each character (from 'a' to 'z') to calculate the minimum number of changes.
 
-3. **Counting Character Frequencies**: A loop iterates through each character in both strings to populate the frequency arrays `ca` and `cb`.
+14. **Frequency Comparison**
+	```cpp
+	        res = min(res, m + n - ca[i] - cb[i]);
+	```
+	For each character, this line updates `res` to the minimum number of changes by comparing the sum of `m + n` and the frequency counts in `ca` and `cb`.
 
-   ```cpp
-       for(int i = 0; i < m; i++) {
-           ca[a[i] - 'a']++; // Increment count for string a
-       }
-       for(int j = 0; j < n; j++) {
-           cb[b[j] - 'a']++; // Increment count for string b
-       }
-   ```
+15. **Condition Check**
+	```cpp
+	        if(i > 0) {
+	```
+	This condition checks if `i` is greater than 0 to avoid out-of-bounds errors when updating the frequencies.
 
-4. **Initializing Result Variable**: The result variable `res` is initialized to the total length of both strings, assuming that in the worst case all characters may need to be changed.
+16. **Blank**
+	```cpp
+	
+	```
+	An empty line for better readability.
 
-   ```cpp
-       int res = m + n; // Maximum possible modifications (change all characters)
-   ```
+17. **Prefix Sum Calculation**
+	```cpp
+	     ca[i] += ca[i - 1];
+	```
+	This line accumulates the frequencies in `ca` to create a prefix sum for efficient range queries.
 
-5. **Iterating through Each Character**: The outer loop iterates through each possible character (from 'a' to 'z') and calculates the required modifications.
+18. **Prefix Sum Calculation**
+	```cpp
+	     cb[i] += cb[i - 1];
+	```
+	This line accumulates the frequencies in `cb` to create a prefix sum for efficient range queries.
 
-   ```cpp
-       for(int i = 0; i < 26; i++) {
-           res = min(res, m + n - ca[i] - cb[i]); // Making all chars < i
-   ```
+19. **Condition Check**
+	```cpp
+	        if(i < 25) {
+	```
+	This condition checks if `i` is less than 25 to ensure no out-of-bounds error occurs when accessing elements beyond the last valid index.
 
-   - **Calculating Modifications**: The number of changes needed to ensure all characters in `a` are less than `i` and all characters in `b` are greater than or equal to `i`.
+20. **Frequency Comparison**
+	```cpp
+	res = min(res, m - ca[i] + cb[i]);
+	```
+	This line updates `res` by considering the frequency of characters between the two strings after the prefix sums have been calculated.
 
-6. **Accumulating Counts**: The counts of characters are accumulated to facilitate quick calculations for the next character.
+21. **Frequency Comparison**
+	```cpp
+	res = min(res, n - cb[i] + ca[i]);
+	```
+	This line updates `res` again by considering the reversed situation, checking the frequency differences.
 
-   ```cpp
-           if(i > 0) {
-               ca[i] += ca[i - 1]; // Accumulate counts for string a
-               cb[i] += cb[i - 1]; // Accumulate counts for string b
-           }
-   ```
+22. **Blank**
+	```cpp
+	
+	```
+	An empty line for readability.
 
-7. **Updating Results for Cases**: The results are updated for scenarios where characters in one string are converted to characters in another string.
+23. **Block End**
+	```cpp
+	        }
+	```
+	Closing the block of code that compares the frequencies and updates the result `res`.
 
-   ```cpp
-           if(i < 25) {
-               res = min(res, m - ca[i] + cb[i]); // Making all chars > i for b
-               res = min(res, n - cb[i] + ca[i]); // Making all chars < i for a
-           }
-       }
-       return res; // Return the minimum modifications required
-   ```
+24. **Return**
+	```cpp
+	    return res;
+	```
+	This line returns the calculated result `res`, which represents the minimum number of changes required.
 
-8. **Return Statement**: The function returns the minimum number of modifications calculated.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m), where `n` and `m` are the lengths of strings `a` and `b`, respectively.
+- **Average Case:** O(n + m), as we need to process both strings.
+- **Worst Case:** O(n + m), due to the same reasons above.
 
-   ```cpp
-       return res;
-   }
-   ```
+The time complexity is linear in the length of the input strings, O(n + m), where `n` and `m` are the lengths of the strings `a` and `b`.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(1), as the space required does not change with the input size.
+- **Worst Case:** O(1), as the space required is constant and depends only on the size of the character frequency array (26 elements).
 
-- **Time Complexity**: The time complexity of this solution is \(O(m + n + 26)\), where \(m\) is the length of string `a`, \(n\) is the length of string `b`, and 26 accounts for iterating through each character in the alphabet. Since 26 is a constant, the effective time complexity is \(O(m + n)\).
+The space complexity is constant, O(1), since we only store the frequency counts for the 26 lowercase letters.
 
-- **Space Complexity**: The space complexity is \(O(1)\) for storing character counts since the size of the frequency arrays is fixed at 26 (for each character of the English alphabet).
+**Happy Coding! 🎉**
 
-### Conclusion
-
-The provided solution effectively calculates the minimum number of character modifications needed to ensure that all characters in one string are less than those in another. By leveraging character frequency counts and systematically evaluating various scenarios, it provides an efficient and clear approach to solving the problem. This method is both time-efficient and space-efficient, making it suitable for competitive programming scenarios. The logic demonstrates an understanding of string manipulation and the combinatorial aspect of character arrangements, showcasing the versatility of algorithmic thinking in problem-solving.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/change-minimum-characters-to-satisfy-one-of-three-conditions/description/)
 

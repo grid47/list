@@ -14,135 +14,179 @@ img_src = ""
 youtube = "v1HpZUnQ4Yo"
 youtube_upload_date="2021-05-23"
 youtube_thumbnail="https://i.ytimg.com/vi/v1HpZUnQ4Yo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string `s` and two integers `minJump` and `maxJump`. Initially, you are at index `0` of the string `s`, which is guaranteed to be '0'. You can move from index `i` to index `j` if: i + minJump <= j <= min(i + maxJump, s.length - 1), and s[j] == '0'. Return `true` if it’s possible to reach the last index of the string (`s.length - 1`), or `false` otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with a binary string `s` and two integers `minJump` and `maxJump`. The string `s` contains only '0' and '1'.
+- **Example:** `For s = "011010", minJump = 2, maxJump = 3.`
+- **Constraints:**
+	- 2 <= s.length <= 105
+	- s[i] is either '0' or '1'.
+	- s[0] == '0'
+	- 1 <= minJump <= maxJump < s.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canReach(string s, int mnj, int mxj) {
-        int n = s.length();
-        vector<bool> dp(n, false);
-        dp[0] = true;
-        int pre = 0;
-        for(int i = 0; i < n; i++) {
-        
-            if(i >= mnj && dp[i - mnj])
-                pre++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if it’s possible to reach the last index, or `false` if it’s impossible.
+- **Example:** `For the input s = "011010", minJump = 2, maxJump = 3, the output is `true`.`
+- **Constraints:**
+	- The output must be a boolean value.
 
-            if(i > mxj && dp[i - mxj -1])
-                pre--;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to determine if there exists a valid sequence of jumps that reaches the last index.
 
-            if (pre > 0) dp[i] = s[i] == '0';       
-        }
-        return dp[n - 1];
-    }
-};
-{{< /highlight >}}
----
+- Initialize a dynamic programming array `dp` to track which indices can be reached.
+- Iterate through the string and use the previous `dp` values to determine if the current index can be reached.
+- Use sliding window technique to efficiently update the reachable indices based on `minJump` and `maxJump`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string always starts with '0' at index 0.
+- At least one valid path exists in some test cases.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For the input s = "011010", minJump = 2, maxJump = 3.`  \
+  **Explanation:** The first move can be from index 0 to index 3 (using minJump = 2). From there, you can move from index 3 to index 5, reaching the last index.
 
-### Problem Statement
+- **Input:** `For the input s = "01101110", minJump = 2, maxJump = 3.`  \
+  **Explanation:** No valid jumps exist because there’s no way to reach the last index.
 
-The problem involves determining if a person can reach the end of a binary string by making jumps of varying lengths, specifically between a minimum and maximum number of jumps. Each character in the string can be either '0' or '1', and the condition for jumping to the next position is that it can only land on '0'. The task is to decide if it's possible to start from the beginning of the string and reach the last character while adhering to the jump constraints.
+{{< dots >}}
+## Approach 🚀
+We use a dynamic programming approach where we maintain a sliding window to efficiently track the reachable indices based on `minJump` and `maxJump`.
 
-### Approach
-
-To tackle this problem, we utilize a dynamic programming approach, where we maintain a boolean array `dp` to represent whether reaching each position in the string is possible under the defined jump conditions. The key steps involved in the approach are as follows:
-
-1. **Initialization**: 
-   - Create a boolean array `dp` of size equal to the length of the string `s`. 
-   - Set `dp[0]` to `true`, indicating that the starting position is always reachable.
-   - Maintain a counter `pre` to track the number of valid positions from which a jump can be made to the current index.
-
-2. **Iterate Through the String**: 
-   - Loop through each index of the string. For each index `i`, check if it is reachable from previous positions.
-   - Adjust the `pre` counter based on the defined jump limits:
-     - If `i` is at least as far as the minimum jump length (`mnj`), increment the `pre` counter if the position `i - mnj` is reachable.
-     - If `i` exceeds the maximum jump length (`mxj`), decrement the `pre` counter if the position `i - mxj - 1` is reachable.
-
-3. **Set the Current Position's Reachability**: 
-   - If `pre` is greater than 0, it indicates that there is at least one reachable position that can jump to the current index, and we can mark `dp[i]` as reachable if the current character `s[i]` is '0'.
-
-4. **Return the Result**: 
-   - After completing the iteration, the value of `dp[n - 1]` will indicate whether the last character can be reached.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: The solution is encapsulated within a class named `Solution`.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Function Declaration**: Define the function `canReach` that accepts a string `s` and two integers `mnj` and `mxj`.
-
-    ```cpp
-    bool canReach(string s, int mnj, int mxj) {
-    ```
-
-3. **Initialization**: Inside the function, initialize variables:
-   - `n` to hold the length of the string.
-   - A boolean vector `dp` to track reachable positions, initialized to `false`.
-   - The first element `dp[0]` is set to `true`, indicating that the starting position is reachable.
-   - An integer `pre` to keep track of valid positions.
-
-    ```cpp
+### Initial Thoughts 💭
+- We need to efficiently calculate which indices are reachable from each position.
+- Using a sliding window of reachable indices helps avoid unnecessary recalculations.
+- The goal is to minimize the time complexity while ensuring correctness by checking each possible jump within the given constraints.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as the string length is at least 2.
+- Ensure that the algorithm scales for larger values of `s.length`.
+- Test with a string of length 2, where only the first and last index can be reached.
+- Check edge cases for large values of `minJump` and `maxJump`.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canReach(string s, int mnj, int mxj) {
     int n = s.length();
     vector<bool> dp(n, false);
     dp[0] = true;
     int pre = 0;
-    ```
-
-4. **Iterate Through the String**: Loop through each character of the string using a for loop.
-
-    ```cpp
     for(int i = 0; i < n; i++) {
-    ```
+    
+        if(i >= mnj && dp[i - mnj])
+            pre++;
 
-5. **Update Pre Counter**: 
-   - If the current index `i` is greater than or equal to `mnj`, check if the position `i - mnj` is reachable and increment `pre` accordingly.
+        if(i > mxj && dp[i - mxj -1])
+            pre--;
 
-    ```cpp
-    if(i >= mnj && dp[i - mnj])
-        pre++;
-    ```
-
-6. **Adjust Pre for Maximum Jump**: 
-   - If `i` exceeds `mxj`, decrement `pre` if the position `i - mxj - 1` is reachable.
-
-    ```cpp
-    if(i > mxj && dp[i - mxj - 1])
-        pre--;
-    ```
-
-7. **Set Reachability for Current Position**: 
-   - If `pre` is greater than 0, it means there are reachable positions that can jump to `i`. Set `dp[i]` to `true` if `s[i]` is '0'.
-
-    ```cpp
-    if (pre > 0) dp[i] = s[i] == '0';       
-    ```
-
-8. **Return the Result**: Finally, return the value of `dp[n - 1]`, which indicates whether the last position is reachable.
-
-    ```cpp
-    return dp[n - 1];
+        if (pre > 0) dp[i] = s[i] == '0';       
     }
-    ```
+    return dp[n - 1];
+}
+```
 
-### Complexity
+This code checks if it's possible to reach the last index of a binary string using a sliding window-based dynamic programming approach, constrained by minimum and maximum jump values.
 
-The time complexity of this solution is \(O(n)\), where \(n\) is the length of the string. This is because we make a single pass through the string to fill the `dp` array. The space complexity is also \(O(n)\) due to the additional storage required for the `dp` vector.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	bool canReach(string s, int mnj, int mxj) {
+	```
+	Define the function to determine reachability in a binary string with jump constraints.
 
-### Conclusion
+2. **Initialization**
+	```cpp
+	    int n = s.length();
+	```
+	Calculate the length of the binary string.
 
-In conclusion, the `canReach` function effectively determines whether it's possible to reach the last character of a binary string while adhering to specific jump constraints. By utilizing a dynamic programming approach, the solution efficiently tracks the reachability of each position in the string, taking into account both minimum and maximum jump lengths. This method not only ensures clarity and maintainability in the code but also allows for optimal performance, making it suitable for handling larger input sizes. 
+3. **Initialization**
+	```cpp
+	    vector<bool> dp(n, false);
+	```
+	Initialize a DP array to track reachable indices, all set to false initially.
 
-This solution can be particularly useful in various competitive programming scenarios and algorithmic challenges involving pathfinding and constraints on movement, providing a robust foundation for tackling similar problems in the future. Overall, the approach exemplifies the application of dynamic programming principles in solving complex reachability problems efficiently.
+4. **Initialization**
+	```cpp
+	    dp[0] = true;
+	```
+	Mark the starting index as reachable.
+
+5. **Sliding Window**
+	```cpp
+	    int pre = 0;
+	```
+	Initialize a variable to track the sliding window sum for reachability.
+
+6. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterate through each index of the binary string.
+
+7. **Sliding Window**
+	```cpp
+	        if(i >= mnj && dp[i - mnj])
+	```
+	If within range, increment the sliding window sum if the jump from a reachable index is valid.
+
+8. **Sliding Window**
+	```cpp
+	            pre++;
+	```
+	Increase the sliding window sum for valid jumps.
+
+9. **Sliding Window**
+	```cpp
+	        if(i > mxj && dp[i - mxj -1])
+	```
+	If the jump exceeds the maximum constraint, decrement the sliding window sum.
+
+10. **Sliding Window**
+	```cpp
+	            pre--;
+	```
+	Decrease the sliding window sum for invalid jumps.
+
+11. **Condition**
+	```cpp
+	        if (pre > 0) dp[i] = s[i] == '0';
+	```
+	Mark the current index as reachable if the sliding window sum is positive and the index is valid ('0').
+
+12. **Return**
+	```cpp
+	    return dp[n - 1];
+	```
+	Return whether the last index is reachable based on the DP array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution iterates over the string once while updating reachable indices, resulting in a time complexity of O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use a DP array of size n to store the reachable states, hence the space complexity is O(n).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/jump-game-vii/description/)
 

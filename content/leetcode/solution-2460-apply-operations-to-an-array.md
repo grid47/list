@@ -14,104 +14,138 @@ img_src = ""
 youtube = "SykhaokFEIM"
 youtube_upload_date="2022-11-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/SykhaokFEIM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of non-negative integers. You need to perform a series of operations on this array where, in each operation, you compare adjacent elements. If the elements are equal, you double the value of the first element and set the second element to zero. After performing these operations on all pairs, shift all the zeros to the end of the array. Return the resulting array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array nums containing non-negative integers.
+- **Example:** `nums = [3, 3, 1, 1, 2, 0]`
+- **Constraints:**
+	- 2 <= nums.length <= 2000
+	- 0 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the array after performing the operations and moving all zeros to the end.
+- **Example:** `For nums = [3, 3, 1, 1, 2, 0], the output should be [6, 2, 1, 1, 0, 0].`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to perform the operations as described and shift zeros to the end.
+
+- 1. Iterate through the array and compare adjacent elements.
+- 2. If elements are equal, double the first one and set the second to zero.
+- 3. After all operations, shift all zeros in the array to the end.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is guaranteed that the operations will be valid and will not lead to any invalid state.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 3, 1, 1, 2, 0]`  \
+  **Explanation:** The operations proceed as follows:
+- For i = 0, nums[0] and nums[1] are equal, so we double nums[0] and set nums[1] to 0. The array becomes [6, 0, 1, 1, 2, 0].
+- For i = 1, nums[1] and nums[2] are not equal, so no operation is performed.
+- For i = 2, nums[2] and nums[3] are equal, so we double nums[2] and set nums[3] to 0. The array becomes [6, 0, 2, 0, 2, 0].
+- Finally, we shift all the zeros to the end, resulting in [6, 2, 1, 1, 0, 0].
+
+{{< dots >}}
+## Approach 🚀
+We will perform the operations sequentially and adjust the array. The approach works by iterating over the array, applying the operations on adjacent elements, and shifting the zeros at the end once the operations are complete.
+
+### Initial Thoughts 💭
+- We need to identify and apply operations only when adjacent elements are equal.
+- We can apply the operation in a single pass over the array, followed by another pass to move the zeros to the end.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least two elements, so there will never be an empty array.
+- The algorithm should work efficiently for arrays up to the maximum length of 2000.
+- If no adjacent elements are equal, no operations will be performed.
+- The solution should be able to handle large inputs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
 vector<int> applyOperations(vector<int>& A) {
-    for (int i = 0, j = 0; i < size(A); ++i){
-        if (i + 1 < size(A) and A[i] == A[i + 1]){
-            A[i] *= 2;
-            A[i + 1] = 0;
-        }
-        if (A[i]) swap(A[j++], A[i]);
-    }   
-    return A;
+for (int i = 0, j = 0; i < size(A); ++i){
+    if (i + 1 < size(A) and A[i] == A[i + 1]){
+        A[i] *= 2;
+        A[i + 1] = 0;
+    }
+    if (A[i]) swap(A[j++], A[i]);
+}   
+return A;
 }
-};
-{{< /highlight >}}
----
+```
 
-### Problem Statement:
-In this problem, we are given an array `A` of integers. We need to apply a series of operations on this array with the goal of doubling the values of consecutive elements that are equal and setting the second element of the pair to zero. After performing the operations, all non-zero elements should be shifted to the left side of the array, while the zeros should be moved to the right side.
+This function modifies an array by combining consecutive equal values into their double and shifting all non-zero values to the left.
 
-The task is to return the modified array after applying these operations.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> applyOperations(vector<int>& A) {
+	```
+	Defines the function to process the array and return the modified version.
 
-### Approach:
-The approach for solving this problem involves iterating through the array and performing two main actions for each element:
-1. **Doubling Consecutive Equal Elements**: If two consecutive elements are equal, we double the first one and set the second element to zero.
-2. **Shifting Non-Zero Elements**: After performing the doubling operation, we need to shift the non-zero elements to the left side and move the zeros to the right side of the array.
+2. **Loop Initialization**
+	```cpp
+	for (int i = 0, j = 0; i < size(A); ++i){
+	```
+	Initializes a loop to iterate through the array, with `i` as the current index and `j` to track the position of non-zero elements.
 
-This needs to be done in a single pass through the array, and the goal is to maintain an efficient solution.
+3. **Condition Check**
+	```cpp
+	    if (i + 1 < size(A) and A[i] == A[i + 1]){
+	```
+	Checks if the current element is equal to the next element to combine their values.
 
-### Code Breakdown (Step by Step):
+4. **Value Update**
+	```cpp
+	        A[i] *= 2;
+	```
+	Doubles the value of the current element when it matches the next element.
 
-Let’s break down the code to understand the operations and logic:
+5. **Set Zero**
+	```cpp
+	        A[i + 1] = 0;
+	```
+	Sets the next element to zero after combining its value with the current element.
 
-1. **Function Definition**:
-   ```cpp
-   vector<int> applyOperations(vector<int>& A) {
-   ```
-   The function `applyOperations` takes a reference to a vector `A` as input, which contains the integers that need to be processed. It returns a vector of integers that contains the result after applying the specified operations.
+6. **Swap Non-Zero**
+	```cpp
+	    if (A[i]) swap(A[j++], A[i]);
+	```
+	Swaps non-zero elements to the left of the array, maintaining their relative order.
 
-2. **Initial Setup of Variables**:
-   ```cpp
-   for (int i = 0, j = 0; i < size(A); ++i){
-   ```
-   The loop iterates over each element in the array `A`. Two variables are used in the loop:
-   - `i`: It represents the current index in the array while iterating.
-   - `j`: It represents the index where the next non-zero element should be placed. Initially, `j` is set to 0.
+7. **Return Statement**
+	```cpp
+	return A;
+	```
+	Returns the modified array after processing.
 
-3. **Doubling Consecutive Equal Elements**:
-   ```cpp
-   if (i + 1 < size(A) and A[i] == A[i + 1]){
-       A[i] *= 2;
-       A[i + 1] = 0;
-   }
-   ```
-   Inside the loop, we check if the current element `A[i]` is equal to the next element `A[i + 1]`. If this condition is true, it means these two consecutive elements are equal and need to be merged:
-   - `A[i] *= 2`: The first element of the pair is doubled.
-   - `A[i + 1] = 0`: The second element of the pair is set to zero since it is merged with the first.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Shifting Non-Zero Elements to the Left**:
-   ```cpp
-   if (A[i]) swap(A[j++], A[i]);
-   ```
-   After checking for consecutive equal elements and potentially performing the doubling operation, we now ensure that non-zero elements are moved to the left side:
-   - `if (A[i])`: This condition checks if the current element is non-zero.
-   - `swap(A[j++], A[i])`: If the element is non-zero, we swap it with the element at the `j`-th index, which is where the next non-zero element should be placed. After the swap, `j` is incremented to point to the next position for a non-zero element.
+The time complexity is O(n) because we iterate through the array twice, once to apply the operations and once to shift the zeros.
 
-   By using the `swap` operation, we ensure that all non-zero elements are shifted to the left side while maintaining their order, and all zeros are moved to the right side.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-5. **Return the Result**:
-   ```cpp
-   return A;
-   ```
-   After the loop finishes iterating through all elements, the function returns the modified array `A`, which contains the result of the operations.
+The space complexity is O(1) as we use only a constant amount of extra space.
 
-### Complexity:
+**Happy Coding! 🎉**
 
-1. **Time Complexity**:
-   - The loop runs for each element of the array `A`, iterating exactly once over the array. Each operation inside the loop (doubling elements, setting elements to zero, and swapping) takes constant time.
-   - Hence, the time complexity of the algorithm is \( O(n) \), where \( n \) is the number of elements in the array.
-
-2. **Space Complexity**:
-   - The algorithm operates in-place, meaning no extra space is used other than the input array `A` and a couple of integer variables (`i` and `j`).
-   - Therefore, the space complexity is \( O(1) \), as the space used does not grow with the size of the input.
-
-### Conclusion:
-
-The `applyOperations` function efficiently applies the specified operations to the array `A` in a single pass. It performs the following:
-- Merges consecutive equal elements by doubling the first element and setting the second element to zero.
-- Shifts non-zero elements to the left while moving zeros to the right.
-
-This approach ensures that the array is processed in linear time, making it optimal for large arrays. The algorithm operates in-place with constant space complexity, making it memory efficient as well. The result is a modified array with the desired properties, where the non-zero elements are compacted to the left side, and the zeros are moved to the right side.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-operations-to-an-array/description/)
 

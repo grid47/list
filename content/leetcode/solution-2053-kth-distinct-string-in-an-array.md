@@ -14,99 +14,144 @@ img_src = ""
 youtube = "1KOnvGPv9Mo"
 youtube_upload_date="2024-08-05"
 youtube_thumbnail="https://i.ytimg.com/vi/1KOnvGPv9Mo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Find the k-th unique string in an array based on its first occurrence. If fewer than k unique strings exist, return an empty string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of strings and an integer k.
+- **Example:** `Input: arr = ["apple", "banana", "cherry", "banana", "apple", "date"], k = 2`
+- **Constraints:**
+	- 1 <= k <= arr.length <= 1000
+	- 1 <= arr[i].length <= 5
+	- arr[i] consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string kthDistinct(vector<string>& arr, int k) {
-        unordered_map<string, int> mp;
-        for (auto &s : arr)
-            ++mp[s];
-        for (auto &s : arr)
-            if (mp[s] == 1 && --k == 0)
-                return s;
-        return "";
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The k-th unique string based on order of appearance, or an empty string if fewer than k unique strings exist.
+- **Example:** `Output: "date" for the given input arr and k.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify and return the k-th unique string.
 
-The task is to find the k-th "distinct" string in an array of strings, where a string is considered distinct if it only appears once in the array. The input is a list of strings `arr` and an integer `k`, representing the position of the distinct string to return. If there are fewer than `k` distinct strings, we should return an empty string.
+- Iterate through the array and count the occurrences of each string.
+- Filter the strings that appear only once, maintaining their original order.
+- Return the k-th unique string if it exists; otherwise, return an empty string.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in the array are strings.
+- Strings are considered case-sensitive.
+- The array may contain duplicate strings.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `arr = ["apple", "banana", "cherry", "banana", "apple", "date"], k = 2`  \
+  **Explanation:** Unique strings are ["cherry", "date"]. The 2nd unique string is "date".
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+Use a hash map to count occurrences, and then filter strings appearing exactly once.
 
-This solution uses a two-pass approach:
-1. **Count Occurrences**: In the first pass, count the occurrences of each string in `arr` using a hash map.
-2. **Identify the k-th Distinct String**: In the second pass, iterate through `arr` again, checking for distinct strings. For each distinct string encountered, decrement `k`. When `k` reaches zero, we have found the k-th distinct string.
-
-### Code Breakdown (Step by Step)
-
-1. **Class and Method Definition**: The class `Solution` contains the function `kthDistinct`, which accepts a vector of strings `arr` and an integer `k`.
-
-    ```cpp
-    class Solution {
-    public:
-        string kthDistinct(vector<string>& arr, int k) {
-    ```
-
-2. **Count Each String's Occurrence**: We define a hash map `mp` to store the count of each string in `arr`. For each string `s` in `arr`, increment its count in `mp`.
-
-    ```cpp
+### Initial Thoughts 💭
+- Strings appearing multiple times can be ignored.
+- Order of appearance matters for uniqueness.
+- A hash map is ideal for counting occurrences efficiently.
+- The result should maintain the original order of the array.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: arr = [], k = 1; Output: ""
+- Input: arr contains 1000 strings with no duplicates, k = 1000; Output: Last string in arr.
+- Input: arr = ["a", "b", "a"], k = 2; Output: ""
+- Input: arr = ["x", "x"], k = 1; Output: ""
+{{< dots >}}
+## Code 💻
+```cpp
+string kthDistinct(vector<string>& arr, int k) {
     unordered_map<string, int> mp;
     for (auto &s : arr)
         ++mp[s];
-    ```
-
-3. **Second Pass to Find the k-th Distinct String**: After counting, we make another pass through `arr`. For each string `s`:
-   - If `mp[s]` equals `1`, the string is distinct.
-   - Decrement `k` for each distinct string encountered.
-   - When `k` reaches zero, we return the current string `s` as the k-th distinct string.
-
-    ```cpp
     for (auto &s : arr)
         if (mp[s] == 1 && --k == 0)
             return s;
-    ```
-
-4. **Return Empty String if k-th Distinct Not Found**: If the loop completes without finding the k-th distinct string, return an empty string.
-
-    ```cpp
     return "";
-    ```
+}
+```
 
-5. **Complete Code**: The full code structure is as follows:
+This function finds the k-th distinct string in the input list 'arr' where the string appears exactly once. The function uses an unordered map to store the frequency of each string, then traverses the list to find the k-th string that occurs only once.
 
-    ```cpp
-    class Solution {
-    public:
-        string kthDistinct(vector<string>& arr, int k) {
-            unordered_map<string, int> mp;
-            for (auto &s : arr)
-                ++mp[s];
-            for (auto &s : arr)
-                if (mp[s] == 1 && --k == 0)
-                    return s;
-            return "";
-        }
-    };
-    ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string kthDistinct(vector<string>& arr, int k) {
+	```
+	This line declares the function 'kthDistinct' which takes a vector of strings and an integer k, and returns the k-th distinct string that appears exactly once in the list.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<string, int> mp;
+	```
+	This line initializes an unordered map 'mp' to keep track of the frequency of each string in the array.
 
-- **Time Complexity**: O(N), where N is the number of strings in `arr`. Both passes over `arr` are O(N), and accessing or updating the hash map is O(1) on average.
-- **Space Complexity**: O(N), due to the hash map `mp` storing counts for each unique string in `arr`.
+3. **Loop**
+	```cpp
+	    for (auto &s : arr)
+	```
+	This loop iterates over each string 's' in the input array 'arr'.
 
-### Conclusion
+4. **Map Update**
+	```cpp
+	        ++mp[s];
+	```
+	For each string 's', this line increments its frequency in the unordered map 'mp'.
 
-This solution effectively finds the k-th distinct string by counting occurrences and filtering distinct entries. The use of a hash map ensures efficient lookups and counting, making this approach optimal for large arrays. By minimizing operations and handling both distinct string filtering and index tracking in a single pass, this method provides a clear, concise solution for finding the k-th distinct element in any given list of strings. This code structure is well-suited for quick lookups and frequency-based filtering tasks in competitive programming or real-world scenarios.
+5. **Loop**
+	```cpp
+	    for (auto &s : arr)
+	```
+	This loop iterates again through the array 'arr', now checking each string to see if it has appeared exactly once.
+
+6. **Condition Check**
+	```cpp
+	        if (mp[s] == 1 && --k == 0)
+	```
+	Checks if the current string appears exactly once in the array (i.e., its count in 'mp' is 1) and whether it is the k-th such string by decrementing 'k'.
+
+7. **Return Statement**
+	```cpp
+	            return s;
+	```
+	If the current string 's' is the k-th distinct string, return it as the result.
+
+8. **Return Statement**
+	```cpp
+	    return "";
+	```
+	If no such k-th distinct string is found, return an empty string to indicate no result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Traversing the array twice contributes to O(n) time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The hash map requires O(n) space to store frequencies of all strings.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-distinct-string-in-an-array/description/)
 

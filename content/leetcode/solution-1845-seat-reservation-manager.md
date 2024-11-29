@@ -14,43 +14,90 @@ img_src = ""
 youtube = "ahobllKXEEY"
 youtube_upload_date="2021-05-01"
 youtube_thumbnail="https://i.ytimg.com/vi/ahobllKXEEY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design a system to manage the reservation state of n seats numbered from 1 to n. Implement the SeatManager class to handle reserving and unreserving seats. The class should be able to return the smallest available seat when reserved, and make seats available again when unreserved.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer n, which represents the number of seats. The operations are called as a sequence of commands where reserve() reserves the smallest available seat and unreserve(seatNumber) unreserves a seat.
+- **Example:** `[5], [], [], [2], [], [], [], [], [5]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= seatNumber <= n
+	- At least one unreserved seat will be available for each reserve call.
+	- seatNumber will always refer to a reserved seat for each unreserve call.
 
-{{< highlight cpp >}}
-class SeatManager {
-public:
-    int i, n;
-    priority_queue<int, vector<int>, greater<int>> pq;
-    SeatManager(int n) {
-        i = 1;
-        this->n = n;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each call to reserve, return the smallest available seat number. For each call to unreserve, no return value is expected, but the seat is made available again.
+- **Example:** `[null, 1, 2, null, 2, 3, 4, 5, null]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The system should efficiently handle reserving and unreserving seats while keeping track of the smallest available seat number.
+
+- Use a priority queue to keep track of available seats.
+- Initialize the seats from 1 to n, making them all available initially.
+- On calling reserve(), pop the smallest seat from the queue.
+- On calling unreserve(), push the seat back into the priority queue.
+{{< dots >}}
+### Problem Assumptions ✅
+- The SeatManager class is initialized correctly with n seats.
+- The input operations are valid according to the problem constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[5], [], [], [2], [], [], [], [], [5]`  \
+  **Explanation:** The SeatManager starts with 5 seats. After reserving and unreserving as per the sequence, the smallest available seats are allocated, and seats are made available again after unreserving.
+
+{{< dots >}}
+## Approach 🚀
+We can use a priority queue to efficiently manage seat reservations. The smallest seat number can be retrieved in O(log n) time, and unreserving a seat also takes O(log n) time.
+
+### Initial Thoughts 💭
+- A priority queue (min-heap) is a suitable data structure to manage the smallest available seat.
+- We will maintain a priority queue for unreserved seats and use a simple counter to track the next available seat.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain a valid n and a valid sequence of operations.
+- The solution must handle the largest value of n (100,000) efficiently.
+- Consider cases where unreserving a seat happens immediately after reserving the last available one.
+- The operations are guaranteed to follow valid rules, with no unreserve called on an unreserved seat.
+{{< dots >}}
+## Code 💻
+```cpp
+int i, n;
+priority_queue<int, vector<int>, greater<int>> pq;
+SeatManager(int n) {
+    i = 1;
+    this->n = n;
+}
+
+int reserve() {
+    if(pq.empty() && i > n) {
+        return -1;
     }
-    
-    int reserve() {
-        if(pq.empty() && i > n) {
-            return -1;
-        }
-        if(pq.empty()) {
-            i++;
-            return i - 1;
-        }
-        int tmp = pq.top();
-        pq.pop();
-        return tmp;
+    if(pq.empty()) {
+        i++;
+        return i - 1;
     }
-    
-    void unreserve(int no) {
-        if(no == i - 1) {
-            i--;
-            return;
-        }
-        pq.push(no);
+    int tmp = pq.top();
+    pq.pop();
+    return tmp;
+}
+
+void unreserve(int no) {
+    if(no == i - 1) {
+        i--;
+        return;
     }
+    pq.push(no);
+}
 };
 
 /**
@@ -58,94 +105,149 @@ public:
  * SeatManager* obj = new SeatManager(n);
  * int param_1 = obj->reserve();
  * obj->unreserve(seatNumber);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to manage seat reservations in a theater or an event venue. We need to implement a `SeatManager` class that supports two primary operations: reserving a seat and unreserving a seat. The goal is to efficiently manage available seats, ensuring that when a seat is reserved, it's marked as unavailable, and when it is unreserved, it becomes available for future reservations. The reservation system should allow for a maximum number of seats, and the operations should be efficient in terms of time complexity.
-
-### Approach
-
-To solve this problem, we can use a combination of a priority queue and a simple counter. The priority queue will help manage the available seats efficiently, while the counter will track the next available seat number. The operations can be outlined as follows:
-
-1. **Initialization**: When the `SeatManager` is instantiated, we initialize the total number of seats and set up a priority queue to manage unreserved seats.
-
-2. **Reserve Seat**:
-   - If there are no available seats in the priority queue, we check if there are still seats left to reserve using the counter. If so, we increment the counter and return the next seat number.
-   - If there are available seats in the priority queue, we pop the top element (the smallest available seat number) and return it as the reserved seat.
-
-3. **Unreserve Seat**:
-   - When a seat is unreserved, we need to add it back to the pool of available seats. If the seat being unreserved is the last reserved seat (tracked by the counter), we simply decrement the counter.
-   - If it's not the last reserved seat, we push the seat number back into the priority queue to make it available for future reservations.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class SeatManager {
-public:
-    int i, n;
-    priority_queue<int, vector<int>, greater<int>> pq;
 ```
-- We define the `SeatManager` class. It has two member variables: `i`, which tracks the next available seat number, and `n`, which stores the total number of seats. A priority queue `pq` is used to keep track of unreserved seats.
 
-```cpp
-    SeatManager(int n) {
-        i = 1; // Start seat numbering from 1
-        this->n = n; // Set the total number of seats
-    }
-```
-- The constructor initializes the number of seats (`n`) and sets the counter `i` to 1, indicating that the first seat is available for reservation.
+This code defines a `SeatManager` class with functions to reserve and unreserve seats using a priority queue. It handles seat assignment by tracking available seats and handling edge cases where no seats are available.
 
-```cpp
-    int reserve() {
-        if(pq.empty() && i > n) {
-            return -1; // No available seats
-        }
-        if(pq.empty()) {
-            i++; // Increment the counter for the next seat
-            return i - 1; // Return the last reserved seat
-        }
-```
-- The `reserve` method first checks if there are no available seats. If the priority queue is empty and the counter has exceeded the number of seats, it returns -1 indicating no seats are available.
-- If there are no seats in the priority queue, we increment the counter and return the last reserved seat number.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int i, n;
+	```
+	Defines two variables: `i` (current seat index) and `n` (total number of seats).
 
-```cpp
-        int tmp = pq.top();
-        pq.pop(); // Pop the top available seat from the priority queue
-        return tmp; // Return the reserved seat number
-    }
-```
-- If there are available seats in the priority queue, we retrieve and remove the smallest seat number, which indicates an available seat, and return it.
+2. **Priority Queue Declaration**
+	```cpp
+	priority_queue<int, vector<int>, greater<int>> pq;
+	```
+	Declares a priority queue `pq` to manage available seat numbers in increasing order.
 
-```cpp
-    void unreserve(int no) {
-        if(no == i - 1) {
-            i--; // If unreserving the last reserved seat, decrement the counter
-            return;
-        }
-        pq.push(no); // Otherwise, push the seat number back into the priority queue
-    }
-};
-```
-- The `unreserve` method checks if the seat number being unreserved is the last one reserved (tracked by `i`). If so, it simply decrements the counter. Otherwise, it adds the seat back into the priority queue to mark it as available.
+3. **Constructor**
+	```cpp
+	SeatManager(int n) {
+	```
+	Constructor that initializes the `SeatManager` object with a total of `n` seats.
 
-### Complexity
+4. **Constructor Logic**
+	```cpp
+	    i = 1;
+	```
+	Sets the starting seat index `i` to 1.
 
-- **Time Complexity**:
-  - The time complexity for both `reserve` and `unreserve` operations is \( O(\log m) \), where \( m \) is the number of unreserved seats. This is due to the priority queue operations of inserting and removing elements.
-  
-- **Space Complexity**:
-  - The space complexity is \( O(m) \) for storing the unreserved seats in the priority queue.
+5. **Constructor Logic**
+	```cpp
+	    this->n = n;
+	```
+	Sets the total number of seats `n` based on the input argument.
 
-### Conclusion
+6. **Reserve Function Start**
+	```cpp
+	int reserve() {
+	```
+	Defines the `reserve` function that reserves a seat and returns its seat number.
 
-The `SeatManager` class efficiently manages seat reservations using a priority queue, allowing for quick allocation and deallocation of seats. By employing a simple counter to track the next available seat and a priority queue for managing unreserved seats, the implementation provides optimal performance for both reservation and unreservation operations.
+7. **Condition Check for Empty Queue and Full Seats**
+	```cpp
+	    if(pq.empty() && i > n) {
+	```
+	Checks if the priority queue is empty and all seats have been reserved.
 
-This design is particularly beneficial in scenarios such as theaters, concert halls, or any event where seat management is crucial. The logic is easy to understand, and the code is concise, making it suitable for real-world applications. The flexibility of the priority queue allows for a dynamic approach to managing available seats, ensuring that the operations remain efficient even as the number of reservations fluctuates. 
+8. **Return Statement**
+	```cpp
+	        return -1;
+	```
+	Returns -1 if no seats are available.
 
-In conclusion, the `SeatManager` implementation exemplifies an effective combination of data structures to solve a practical problem in seat management, showcasing good coding practices and a robust approach to handling dynamic state changes in a system.
+9. **Condition Check for Empty Queue**
+	```cpp
+	    }
+	```
+	End of the first if-condition.
+
+10. **Reserve Logic**
+	```cpp
+	    if(pq.empty()) {
+	```
+	Checks if the priority queue is empty and there are still unreserved seats.
+
+11. **Seat Allocation**
+	```cpp
+	        i++;
+	```
+	Increments the seat index `i` to allocate the next available seat.
+
+12. **Seat Return**
+	```cpp
+	        return i - 1;
+	```
+	Returns the seat number `i - 1` after allocating it.
+
+13. **Priority Queue Logic**
+	```cpp
+	    int tmp = pq.top();
+	```
+	Gets the seat number at the top of the priority queue (the smallest available seat).
+
+14. **Priority Queue Update**
+	```cpp
+	    pq.pop();
+	```
+	Removes the seat number from the priority queue after it has been reserved.
+
+15. **Seat Return**
+	```cpp
+	    return tmp;
+	```
+	Returns the reserved seat number from the priority queue.
+
+16. **Unreserve Function Start**
+	```cpp
+	void unreserve(int no) {
+	```
+	Defines the `unreserve` function that releases a reserved seat.
+
+17. **Condition Check for Last Reserved Seat**
+	```cpp
+	    if(no == i - 1) {
+	```
+	Checks if the seat to be unreserved is the last reserved seat.
+
+18. **Seat Release**
+	```cpp
+	        i--;
+	```
+	Decrements the seat index `i` to reflect that the last reserved seat is now available.
+
+19. **Unreserve Completion**
+	```cpp
+	        return;
+	```
+	Exits the function since the seat has been unreserved.
+
+20. **Priority Queue Insertion**
+	```cpp
+	    pq.push(no);
+	```
+	Adds the unreserved seat number back to the priority queue.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
+
+Both reserve and unreserve operations take O(log n) time due to the priority queue operations.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) as we store up to n seats in the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/seat-reservation-manager/description/)
 

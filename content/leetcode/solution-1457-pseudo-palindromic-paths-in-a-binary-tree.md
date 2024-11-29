@@ -14,139 +14,156 @@ img_src = ""
 youtube = "MBsSpQnaFzg"
 youtube_upload_date="2024-01-24"
 youtube_thumbnail="https://i.ytimg.com/vi/MBsSpQnaFzg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary tree where each node contains a digit from 1 to 9. A path from the root to a leaf node is considered pseudo-palindromic if at least one permutation of the node values in the path can form a palindrome. Your task is to return the number of pseudo-palindromic paths in the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root node of a binary tree, where each node contains an integer from 1 to 9.
+- **Example:** `Input: root = [4, 5, 3, 3, 2, null, 2]`
+- **Constraints:**
+	- The number of nodes in the tree is between 1 and 100,000.
+	- Each node contains an integer between 1 and 9.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int pseudoPalindromicPaths (TreeNode* root) {
-        return dfs(root, 0);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the number of pseudo-palindromic paths from the root to leaf nodes.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output must be a single integer representing the count of pseudo-palindromic paths.
 
-    int dfs(TreeNode* root, int cnt){
-        if(!root) return 0;
-        cnt ^= (1 << (root->val - 1));
-        int res = dfs(root->left, cnt) + dfs(root->right, cnt);
-        if(root->left == NULL && root->right == NULL && (cnt &(cnt -1)) == 0)
-            res++;
-        return res;
-    }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify the number of pseudo-palindromic paths in the tree.
 
-};
-{{< /highlight >}}
----
+- Use depth-first search (DFS) to traverse the tree from the root to the leaves.
+- Keep track of the path from the root to the current node using bitwise operations to track the frequency of digits.
+- A path is pseudo-palindromic if at most one digit occurs an odd number of times in the path.
+- Count how many paths are pseudo-palindromic as you traverse the tree.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is a valid binary tree with nodes containing digits from 1 to 9.
+- There will be no more than 100,000 nodes in the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [2, 3, 1, 3, 1, null, 1]`  \
+  **Explanation:** Output: 2. There are three paths: [2, 3, 3], [2, 1, 1], and [2, 3, 1]. The paths [2, 3, 3] and [2, 1, 1] are pseudo-palindromic, as they can be rearranged to form palindromes.
 
-### Problem Statement
+- **Input:** `Input: root = [5, 6, 6, null, null, 5, 5]`  \
+  **Explanation:** Output: 1. Only the path [5, 6, 6] is pseudo-palindromic, as it can be rearranged to [6, 5, 6].
 
-The problem involves finding the number of pseudo-palindromic paths in a binary tree. A path is considered pseudo-palindromic if the values along the path can be rearranged to form a palindrome. In terms of character counts, a path can be rearranged into a palindrome if at most one character has an odd count. The task is to count how many such paths exist from the root of the tree to the leaves.
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, use a depth-first search (DFS) approach to traverse the binary tree while keeping track of node values using bitwise operations. Each node value is mapped to a bit, and the presence of a digit in the path is tracked using a bitmask.
 
-### Approach
+### Initial Thoughts 💭
+- We need to identify if the digits in a path can form a palindrome, which requires checking the frequency of digits in that path.
+- A path can be pseudo-palindromic if at most one digit occurs an odd number of times.
+- We can use a bitmask to track how many times each digit appears in the path and easily check if the path is pseudo-palindromic.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty, the output should be 0.
+- For trees with a large number of nodes (up to 100,000), ensure the solution runs within time limits.
+- A single-node tree with a digit from 1 to 9 should return 1, as the path is trivially pseudo-palindromic.
+- Ensure that the solution handles edge cases like trees with no pseudo-palindromic paths.
+{{< dots >}}
+## Code 💻
+```cpp
+int pseudoPalindromicPaths (TreeNode* root) {
+    return dfs(root, 0);
+}
 
-To solve this problem, we can utilize a Depth-First Search (DFS) traversal of the binary tree. The main idea is to keep track of the counts of each digit (representing the values of the nodes) as we traverse down the tree. We can use a bit manipulation technique to efficiently track which digits have odd counts.
+int dfs(TreeNode* root, int cnt){
+    if(!root) return 0;
+    cnt ^= (1 << (root->val - 1));
+    int res = dfs(root->left, cnt) + dfs(root->right, cnt);
+    if(root->left == NULL && root->right == NULL && (cnt &(cnt -1)) == 0)
+        res++;
+    return res;
+}
 
-1. **Bitmasking for Count Tracking**: We can use an integer as a bitmask to represent the count of values from 1 to 9 (assuming node values are in this range). Each bit in this integer represents whether a particular number appears an odd number of times along the current path.
-2. **Recursive DFS Traversal**: As we traverse the tree recursively, we update our bitmask when we encounter a node. We toggle the corresponding bit for the node’s value.
-3. **Leaf Node Check**: Upon reaching a leaf node, we check if the path can form a pseudo-palindrome by ensuring that the bitmask has at most one bit set (indicating that at most one value appears an odd number of times).
-4. **Count Pseudo-Palindromic Paths**: If the conditions for a pseudo-palindrome are satisfied at a leaf node, we increase our count.
+```
 
-### Code Breakdown (Step by Step)
+This code defines a function 'pseudoPalindromicPaths' to count the number of pseudo-palindromic paths in a binary tree. A path is pseudo-palindromic if at most one character has an odd count in its binary representation.
 
-Here’s a detailed breakdown of the code:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int pseudoPalindromicPaths (TreeNode* root) {
+	```
+	This function is the entry point for counting pseudo-palindromic paths. It calls the helper function 'dfs' starting from the root of the tree with an initial count of '0'.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   ```
+2. **Function Call**
+	```cpp
+	    return dfs(root, 0);
+	```
+	This line calls the 'dfs' function to perform a depth-first search, passing the root of the tree and an initial value of 'cnt' (0). The result from 'dfs' is returned.
 
-   - The solution is encapsulated in a class named `Solution`, which is a common structure in competitive programming and coding interviews.
+3. **Function Declaration**
+	```cpp
+	int dfs(TreeNode* root, int cnt){
+	```
+	The 'dfs' function is a recursive helper function that traverses the tree. It takes the current node ('root') and the bitmask 'cnt' which tracks the parity of the values of the nodes visited along the path.
 
-2. **Function to Count Pseudo-Palindromic Paths**:
-   ```cpp
-   int pseudoPalindromicPaths(TreeNode* root) {
-       return dfs(root, 0);
-   }
-   ```
+4. **Base Case**
+	```cpp
+	    if(!root) return 0;
+	```
+	Base case of the recursion. If the current node is NULL, it returns 0 (no pseudo-palindromic path).
 
-   - The function `pseudoPalindromicPaths` takes the root of the binary tree as an argument and initializes the DFS traversal by calling the `dfs` helper function with an initial bitmask of `0`.
+5. **Bit Manipulation**
+	```cpp
+	    cnt ^= (1 << (root->val - 1));
+	```
+	This line updates the 'cnt' bitmask by toggling the bit corresponding to the value of the current node. The bitmask tracks which values have odd counts.
 
-3. **DFS Helper Function**:
-   ```cpp
-   int dfs(TreeNode* root, int cnt){
-       if(!root) return 0;
-   ```
+6. **Recursive Call**
+	```cpp
+	    int res = dfs(root->left, cnt) + dfs(root->right, cnt);
+	```
+	This line recursively calls 'dfs' for both the left and right children of the current node. The results are accumulated in 'res'.
 
-   - The `dfs` function is defined to traverse the tree. It takes a `TreeNode* root` and an integer `cnt` (the current bitmask) as arguments.
-   - If the current node is `nullptr`, it means we've reached a null child and we return `0` as there are no paths through this node.
+7. **Leaf Node Check**
+	```cpp
+	    if(root->left == NULL && root->right == NULL && (cnt &(cnt -1)) == 0)
+	```
+	At a leaf node, if the bitmask 'cnt' has at most one bit set (which means at most one value has an odd count), the path is pseudo-palindromic.
 
-4. **Update the Bitmask**:
-   ```cpp
-       cnt ^= (1 << (root->val - 1));
-   ```
+8. **Result Update**
+	```cpp
+	        res++;
+	```
+	If the current path is pseudo-palindromic, increment the result 'res'.
 
-   - For each node, the value of `root->val` is used to update the bitmask. The expression `1 << (root->val - 1)` shifts the bit corresponding to the node's value to the left. The XOR operation (`^=`) toggles the bit—if it was `0`, it becomes `1`, and if it was `1`, it becomes `0`.
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The result 'res', which is the total count of pseudo-palindromic paths found in the current subtree, is returned.
 
-5. **Recursive Calls**:
-   ```cpp
-       int res = dfs(root->left, cnt) + dfs(root->right, cnt);
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   - The function recursively calls itself for the left and right children of the current node, passing the updated bitmask `cnt`.
-   - The results of these recursive calls are summed to get the total number of pseudo-palindromic paths from this node.
+The DFS traversal visits every node exactly once, so the time complexity is linear in terms of the number of nodes, `n`.
 
-6. **Check for Leaf Node and Pseudo-Palindrome Condition**:
-   ```cpp
-       if(root->left == NULL && root->right == NULL && (cnt &(cnt -1)) == 0)
-           res++;
-   ```
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
 
-   - A check is performed to see if the current node is a leaf node (both left and right children are `NULL`).
-   - The condition `(cnt & (cnt - 1)) == 0` checks if at most one bit is set in the bitmask, which indicates that the path can be rearranged into a pseudo-palindrome. If this condition is satisfied, we increment the result counter `res`.
+The space complexity is O(h), where `h` is the height of the tree. This is due to the recursion stack used in the DFS traversal.
 
-7. **Return the Result**:
-   ```cpp
-       return res;
-   }
-   ```
+**Happy Coding! 🎉**
 
-   - Finally, the function returns the total count of pseudo-palindromic paths found from this subtree.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of the algorithm is \( O(N) \), where \( N \) is the number of nodes in the binary tree. This is because we traverse each node exactly once during the DFS.
-  
-- **Space Complexity**: The space complexity is \( O(H) \), where \( H \) is the height of the tree. This is due to the space used by the recursion stack during the DFS traversal.
-
-### Conclusion
-
-This solution effectively counts the number of pseudo-palindromic paths in a binary tree using a depth-first search approach combined with bit manipulation for efficient counting of node values.
-
-#### Key Takeaways:
-
-1. **DFS Traversal**: The depth-first search is a natural choice for tree problems, allowing us to explore all paths systematically.
-
-2. **Bit Manipulation**: Utilizing bitmasking for counting occurrences of node values is an efficient strategy that reduces the complexity of tracking odd/even counts.
-
-3. **Leaf Node Detection**: The condition to check if we are at a leaf node is crucial for counting valid paths.
-
-4. **Efficiency**: The solution is both time-efficient and space-efficient, making it suitable for large binary trees.
-
-In summary, this code serves as an excellent demonstration of how to approach tree traversal problems efficiently while leveraging bit manipulation techniques to solve complex counting problems. The structure and clarity of the implementation also make it easily understandable and maintainable.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/description/)
 

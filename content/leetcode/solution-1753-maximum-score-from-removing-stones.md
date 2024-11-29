@@ -14,91 +14,130 @@ img_src = ""
 youtube = "PfcEkLJ725o"
 youtube_upload_date="2021-02-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/PfcEkLJ725o/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given three piles of stones, with sizes `a`, `b`, and `c` respectively. In each turn, you can choose two different non-empty piles, remove one stone from each, and add 1 point to your score. The game stops when there are fewer than two non-empty piles left, meaning no more valid moves are available. Your task is to return the maximum score you can achieve.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three integers, `a`, `b`, and `c`, representing the sizes of the three piles.
+- **Example:** `Input: a = 3, b = 5, c = 7`
+- **Constraints:**
+	- 1 <= a, b, c <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumScore(int a, int b, int c) {
-        // a > b > c
-        if(a < b)
-        return maximumScore(b, a, c);
-        if(b < c)
-        return maximumScore(a, c, b);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum score that can be achieved in the game.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The returned score is a non-negative integer.
 
-        return b == 0? 0 : 1 + maximumScore(a - 1, b - 1, c);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the maximum score, we need to perform moves in an optimal way by always selecting the two largest piles.
 
-### Problem Statement
+- 1. Sort the piles so that the largest pile is always chosen first.
+- 2. Continuously remove stones from the two largest piles until fewer than two piles remain non-empty.
+- 3. Keep a count of each move to compute the score.
+{{< dots >}}
+### Problem Assumptions ✅
+- There are always at least one stone in each pile initially.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: a = 3, b = 5, c = 7`  \
+  **Explanation:** Starting with piles (3, 5, 7), the optimal sequence of moves is to take stones from the largest two piles (5, 7) for 5 turns, then from the remaining two piles (3, 6) for 3 turns. This results in a total of 7 points.
 
-The task is to calculate the maximum score obtainable by repeatedly performing a specific operation on three integers \(a\), \(b\), and \(c\). The operation consists of selecting two of the three integers (let's say \(a\) and \(b\)), reducing both of them by 1, and adding 1 to the score. This process continues until it is no longer possible to perform the operation, meaning at least one of the integers becomes zero.
+- **Input:** `Input: a = 2, b = 4, c = 6`  \
+  **Explanation:** With piles (2, 4, 6), one optimal sequence is to take from the 1st and 3rd piles for 2 turns, then from the 2nd and 3rd piles for 4 turns. This gives a total score of 6.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+To achieve the maximum score, we should always pick the two largest piles, ensuring that we make as many moves as possible.
 
-To tackle this problem, the solution relies on a recursive approach that ensures we always work with the integers in a specific order, specifically ensuring \(a \geq b \geq c\) throughout the calculations. The core idea is to recursively reduce the counts of the two largest integers until one of them reaches zero. The steps can be outlined as follows:
+### Initial Thoughts 💭
+- The problem revolves around efficiently selecting the two largest piles in each step.
+- If we sort the piles at the start, we can always easily select the two largest piles.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that all piles will have at least one stone.
+- The solution must handle cases where each pile contains up to 100,000 stones.
+- If two piles are empty after several moves, the game ends immediately.
+- The solution must be optimized for large input values.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumScore(int a, int b, int c) {
+    // a > b > c
+    if(a < b)
+    return maximumScore(b, a, c);
+    if(b < c)
+    return maximumScore(a, c, b);
 
-1. **Ordering the Integers**: If the integers are not in the desired order (\(a\), \(b\), and \(c\)), we swap them to ensure the largest integer is always first.
+    return b == 0? 0 : 1 + maximumScore(a - 1, b - 1, c);
+}
+```
 
-2. **Base Case**: If the second largest integer \(b\) is zero, no further operations can be performed, and the score is zero.
+The function calculates the maximum score by repeatedly selecting the two largest numbers and decrementing them until one of them becomes zero.
 
-3. **Recursive Case**: If both \(a\) and \(b\) are greater than zero, we can perform the operation, reducing both by one and incrementing the score by one, followed by a recursive call to continue the process.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maximumScore(int a, int b, int c) {
+	```
+	Declares a recursive function to compute the maximum score by decrementing the two largest numbers repeatedly.
 
-### Code Breakdown (Step by Step)
+2. **Conditional Check**
+	```cpp
+	    if(a < b)
+	```
+	Checks if `a` is smaller than `b` to rearrange the values.
 
-Here’s a step-by-step breakdown of the implementation in the `maximumScore` function:
+3. **Recursive Call**
+	```cpp
+	    return maximumScore(b, a, c);
+	```
+	Swaps `a` and `b` to maintain the condition `a >= b >= c` and recursively calls the function.
 
-1. **Class Definition**: The function is defined within a class called `Solution`.
+4. **Conditional Check**
+	```cpp
+	    if(b < c)
+	```
+	Checks if `b` is smaller than `c` to rearrange the values.
 
-   ```cpp
-   class Solution {
-   ```
+5. **Recursive Call**
+	```cpp
+	    return maximumScore(a, c, b);
+	```
+	Swaps `b` and `c` to maintain the condition `a >= b >= c` and recursively calls the function.
 
-2. **Public Method**: The `maximumScore` method takes three integers as input and returns the maximum score achievable.
+6. **Base Case**
+	```cpp
+	    return b == 0? 0 : 1 + maximumScore(a - 1, b - 1, c);
+	```
+	Base case: If the second largest number `b` is zero, returns 0; otherwise, decrements the two largest numbers and adds 1 to the score.
 
-   ```cpp
-   public:
-       int maximumScore(int a, int b, int c) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(n)) for sorting the piles, followed by linear time processing.
+- **Average Case:** O(n) as we make one move per iteration.
+- **Worst Case:** O(n) where n is the maximum number of stones.
 
-3. **Ordering the Integers**: The first conditional checks if \(a\) is less than \(b\) and swaps their values if necessary. This ensures that \(a\) is always the largest.
+The time complexity is dominated by the sorting step, and the rest of the operations are linear.
 
-   ```cpp
-   if(a < b)
-       return maximumScore(b, a, c);
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1), as no additional space is required beyond the input piles.
+- **Worst Case:** O(1) for a constant number of variables used for computation.
 
-4. **Further Ordering**: The second conditional checks if \(b\) is less than \(c\) and swaps their values accordingly to maintain the order \(a \geq b \geq c\).
+The space complexity is constant, as the solution uses only a few variables to keep track of the piles and score.
 
-   ```cpp
-   if(b < c)
-       return maximumScore(a, c, b);
-   ```
+**Happy Coding! 🎉**
 
-5. **Base Case**: If \(b\) is zero, this means no more operations can be performed, and the score is zero.
-
-   ```cpp
-   return b == 0 ? 0 : 1 + maximumScore(a - 1, b - 1, c);
-   ```
-
-6. **Recursive Call**: If the base case is not reached, the function proceeds to reduce both \(a\) and \(b\) by one and adds one to the score, recursively calling `maximumScore` with the new values.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \(O(a + b + c)\) in the worst case because each recursive call reduces at least one of the integers \(a\) or \(b\) by one, leading to a total of at most \(a + b\) recursive calls until one of them reaches zero.
-
-- **Space Complexity**: The space complexity is \(O(h)\), where \(h\) is the height of the recursion stack. In the worst case, this could also be \(O(a + b + c)\) if the recursion goes deep without hitting a base case.
-
-### Conclusion
-
-In conclusion, this solution provides an elegant way to compute the maximum score achievable by reducing the two largest integers among three given integers through a series of operations. The recursive approach ensures that the calculations remain straightforward and efficient by maintaining the order of the integers. Additionally, this method handles various input scenarios, including cases where one or more integers may initially be zero. Overall, the algorithm effectively demonstrates how recursion can be utilized to simplify problems involving iterative reductions, making it a valuable technique in both competitive programming and algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-score-from-removing-stones/description/)
 

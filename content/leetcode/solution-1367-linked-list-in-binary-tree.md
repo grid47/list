@@ -14,111 +14,146 @@ img_src = ""
 youtube = "OaA9MgG00AE"
 youtube_upload_date="2024-09-07"
 youtube_thumbnail="https://i.ytimg.com/vi/OaA9MgG00AE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary tree and a linked list. Determine if there exists a downward path in the binary tree that matches all elements of the linked list starting from its head node. A downward path means starting from any node in the binary tree and following child nodes downwards.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a linked list and a binary tree. The linked list is represented as an array of values and the binary tree is represented as a root node of a binary tree structure.
+- **Example:** `head = [4, 2, 8], root = [1, 4, 4, null, 2, 2, null, 1, null, 6, 8, null, null, null, null, 1, 3]`
+- **Constraints:**
+	- The number of nodes in the binary tree will be in the range [1, 2500].
+	- The number of nodes in the linked list will be in the range [1, 100].
+	- 1 <= Node.val <= 100 for each node in both the linked list and binary tree.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool isSubPath(ListNode* head, TreeNode* root) {
-        if(head == NULL) return true;
-        if(root == NULL) return false;
-        return dfs(head, root) || isSubPath(head, root->left) || isSubPath(head, root->right);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return True if there exists a downward path in the binary tree that matches all elements of the linked list starting from its head node, otherwise return False.
+- **Example:** `True`
+- **Constraints:**
+	- The result will be a boolean value: True or False.
 
-    bool dfs(ListNode* head, TreeNode* root) {
-        if(head == NULL) return true;
-        if(root == NULL) return false;
-        return (head->val == root->val) && (dfs(head->next, root->left) || dfs(head->next, root->right));
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if there exists a downward path in the binary tree that matches all elements of the linked list starting from the head node.
 
+- Perform a depth-first search (DFS) to check if the current node value matches the head of the linked list.
+- If a match is found, recursively check the left and right child nodes to see if the subsequent linked list elements match the downward path.
+- If no match is found at any step, return False.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree and linked list contain valid values as per the problem constraints.
+- The input tree and linked list are not null.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `head = [4, 2, 8], root = [1, 4, 4, null, 2, 2, null, 1, null, 6, 8, null, null, null, null, 1, 3]`  \
+  **Explanation:** The linked list elements [4, 2, 8] correspond to a downward path starting from node 4, then node 2, and then node 8 in the binary tree.
 
-### Problem Statement
-The task is to determine if a linked list is represented as a path in a binary tree. A path in a binary tree is defined as a sequence of nodes starting from any node and proceeding down to any leaf node, following child nodes. The goal is to find if there exists a path in the binary tree where the values of the nodes match the values in the linked list in the same order.
+- **Input:** `head = [1, 4, 2, 6], root = [1, 4, 4, null, 2, 2, null, 1, null, 6, 8, null, null, null, null, 1, 3]`  \
+  **Explanation:** The linked list elements [1, 4, 2, 6] form a valid downward path in the binary tree, matching the nodes from root down to 6.
 
-### Approach
-To solve this problem, we can use a recursive depth-first search (DFS) strategy. The main steps involved are:
-1. **Recursion through the Tree**: For each node in the binary tree, check if there is a path that matches the linked list starting from that node.
-2. **Match the Linked List**: If the current node value in the binary tree matches the current node value in the linked list, proceed to the next node in the linked list while continuing the search in the left and right children of the binary tree.
-3. **Base Cases**: Handle the cases where either the linked list or the binary tree is exhausted, returning true or false accordingly.
+{{< dots >}}
+## Approach 🚀
+The approach is to perform a depth-first search (DFS) to check for downward paths in the binary tree that match the linked list values.
 
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- A DFS approach can be used to search the binary tree for matching downward paths.
+- At each node, check if it matches the current head of the linked list. If so, recursively check the left and right subtrees.
+{{< dots >}}
+### Edge Cases 🌐
+- If the binary tree is empty, return False.
+- Ensure the solution handles trees with up to 2500 nodes efficiently.
+- If there is only one element in the linked list, check if that element exists as a downward path in the tree.
+- The solution must efficiently handle the maximum constraints for both tree and list sizes.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool isSubPath(ListNode* head, TreeNode* root) {
-        // If the linked list is empty, it is considered a subpath
-        if(head == NULL) return true;
-        // If the binary tree is empty, the linked list cannot be a subpath
-        if(root == NULL) return false;
-        // Check if the current tree node matches the head of the list and recursively check both subtrees
-        return dfs(head, root) || isSubPath(head, root->left) || isSubPath(head, root->right);
-    }
+bool isSubPath(ListNode* head, TreeNode* root) {
+    if(head == NULL) return true;
+    if(root == NULL) return false;
+    return dfs(head, root) || isSubPath(head, root->left) || isSubPath(head, root->right);
+}
 
-    bool dfs(ListNode* head, TreeNode* root) {
-        // If we've reached the end of the linked list, we've found a valid path
-        if(head == NULL) return true;
-        // If the binary tree node is null but the linked list isn't, return false
-        if(root == NULL) return false;
-        // Check for value match and continue DFS in both left and right child nodes of the binary tree
-        return (head->val == root->val) && (dfs(head->next, root->left) || dfs(head->next, root->right));
-    }
-};
+bool dfs(ListNode* head, TreeNode* root) {
+    if(head == NULL) return true;
+    if(root == NULL) return false;
+    return (head->val == root->val) && (dfs(head->next, root->left) || dfs(head->next, root->right));
+}
 ```
 
-1. **Class Definition**:
-   - The `Solution` class encapsulates the solution with two public methods: `isSubPath` and `dfs`.
+This code checks if there is a path in a binary tree that matches the values of a linked list from head to tail, recursively comparing values along the tree nodes and the linked list nodes.
 
-2. **The `isSubPath` Method**:
-   - **Base Case for Linked List**: If `head` is `NULL`, return `true` since an empty linked list is trivially a subpath.
-   - **Base Case for Tree**: If `root` is `NULL` but `head` is not, return `false`, indicating that the linked list cannot be a subpath in an empty tree.
-   - **DFS Call**: Call the `dfs` function to check if the linked list matches the path starting from the current tree node, and also recursively check the left and right subtrees of the current node in the binary tree using `isSubPath`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isSubPath(ListNode* head, TreeNode* root) {
+	```
+	The function 'isSubPath' takes two parameters: a linked list 'head' and a binary tree 'root'. It returns true if a path from the linked list exists in the binary tree.
 
-3. **The `dfs` Method**:
-   - **Base Case for Linked List**: If `head` is `NULL`, return `true`, as we have successfully matched all values in the linked list.
-   - **Base Case for Tree**: If `root` is `NULL` but `head` is not, return `false`, indicating the path does not match.
-   - **Value Matching and Recursion**: Check if the values of the current linked list node (`head->val`) and the current tree node (`root->val`) match. If they do, recursively check both the left and right children of the tree node, moving to the next node in the linked list (`head->next`).
+2. **Base Case for Linked List**
+	```cpp
+	    if(head == NULL) return true;
+	```
+	This is a base case where if the linked list 'head' is NULL, it indicates the end of the list has been reached, and thus the path has been successfully matched.
 
-### Complexity Analysis
-- **Time Complexity**:
-  - The worst-case time complexity can be approximated as \(O(N \times M)\), where \(N\) is the number of nodes in the binary tree and \(M\) is the number of nodes in the linked list. This is because we might explore every path in the tree for each node in the linked list.
-  
-- **Space Complexity**:
-  - The space complexity is \(O(H)\), where \(H\) is the height of the binary tree due to the recursion stack. In the worst case of a skewed tree, this can be \(O(N)\).
+3. **Base Case for Binary Tree**
+	```cpp
+	    if(root == NULL) return false;
+	```
+	This is a base case where if the binary tree 'root' is NULL, it means there is no path to follow, so we return false.
 
-### Conclusion
-The provided solution efficiently checks if a linked list is a subpath of a binary tree using a depth-first search approach. By systematically exploring each node in the binary tree and matching it against the linked list, the algorithm successfully determines the presence of the linked list within the tree. This method is both straightforward and effective, showcasing the utility of recursion in tree traversal problems. The code is well-structured and optimized for clarity, making it an excellent reference for similar problems involving linked lists and binary trees.
+4. **Recursive Search**
+	```cpp
+	    return dfs(head, root) || isSubPath(head, root->left) || isSubPath(head, root->right);
+	```
+	The function recursively checks if the linked list matches starting from the current node in the binary tree or its left or right children.
 
-This thorough explanation outlines the functionality and logic of the code, making it easier for readers to understand how the solution operates and how it can be applied in practice.
+5. **Function Declaration**
+	```cpp
+	bool dfs(ListNode* head, TreeNode* root) {
+	```
+	The function 'dfs' is a helper function that recursively checks whether the linked list starting from 'head' can match the binary tree starting from 'root'.
+
+6. **Base Case for Linked List**
+	```cpp
+	    if(head == NULL) return true;
+	```
+	This is a base case where if the linked list 'head' is NULL, it indicates that the linked list has been completely matched.
+
+7. **Base Case for Binary Tree**
+	```cpp
+	    if(root == NULL) return false;
+	```
+	This base case checks if the binary tree 'root' is NULL, which means the tree path has ended without matching the linked list.
+
+8. **Recursive Matching**
+	```cpp
+	    return (head->val == root->val) && (dfs(head->next, root->left) || dfs(head->next, root->right));
+	```
+	The function compares the current node values of the linked list and the binary tree. If they match, it recursively checks the next node in the list against the left or right children of the current tree node.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+In the worst case, the algorithm must visit every node in the tree.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
+
+The space complexity is determined by the height of the binary tree due to recursive calls, where h is the height of the tree.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/linked-list-in-binary-tree/description/)

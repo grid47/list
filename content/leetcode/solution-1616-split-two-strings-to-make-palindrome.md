@@ -14,108 +14,173 @@ img_src = ""
 youtube = "s0UlCe7icxs"
 youtube_upload_date="2020-10-11"
 youtube_thumbnail="https://i.ytimg.com/vi/s0UlCe7icxs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, a and b, of the same length. You need to split both strings at the same index into two parts: one prefix and one suffix for each string. Then, check if concatenating one prefix from one string with the suffix of the other string forms a palindrome. Specifically, you need to check if either `aprefix + bsuffix` or `bprefix + asuffix` forms a palindrome.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings, a and b, both of the same length.
+- **Example:** `a = 'abc', b = 'cba'`
+- **Constraints:**
+	- 1 <= a.length, b.length <= 10^5
+	- a.length == b.length
+	- a and b consist of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkPalindromeFormation(string a, string b) {
-        return check(a, b) || check(b, a);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to form a palindrome string by concatenating either `aprefix + bsuffix` or `bprefix + asuffix`. Otherwise, return false.
+- **Example:** `For a = 'abc' and b = 'cba', the output would be true.`
+- **Constraints:**
+	- The output should be a boolean value, true or false.
 
-    bool check(string a, string b) {
-        int i = 0, j = a.size() -1;
-        while(i < j && a[i] == b[j])
-        i++, j--;
-        return isPalindrom(a, i, j) || isPalindrom(b, i, j);
-    }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if it is possible to form a palindrome by choosing a split index for both strings and combining the corresponding parts.
 
-    bool isPalindrom(string a, int i , int j) {
-        while(i < j && a[i] == a[j])
-        i++, j--;
-        return i >= j;
-    }
-};
-{{< /highlight >}}
----
+- For each possible split point, split both strings into two parts: a prefix and a suffix.
+- Check if either concatenation of `aprefix + bsuffix` or `bprefix + asuffix` forms a palindrome.
+- Return true if either concatenation forms a palindrome, otherwise return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The two input strings are guaranteed to have the same length.
+- You can split the strings at any valid index.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: a = 'abc', b = 'cba'`  \
+  **Explanation:** In this case, we can split both strings at index 1: aprefix = 'a', asuffix = 'bc', bprefix = 'c', and bsuffix = 'ba'. Concatenating `aprefix + bsuffix = 'a' + 'ba' = 'aba'`, which is a palindrome.
 
-### Problem Statement
+- **Input:** `Input: a = 'ab', b = 'ba'`  \
+  **Explanation:** Here, splitting the strings at index 1: aprefix = 'a', asuffix = 'b', bprefix = 'b', and bsuffix = 'a'. Concatenating `aprefix + bsuffix = 'a' + 'a' = 'aa'`, which is a palindrome.
 
-The problem at hand is to determine whether it is possible to form a palindrome by concatenating two given strings \(a\) and \(b\). The process allows for removing zero or more characters from either string as necessary. In simpler terms, we want to check if there exists any combination of characters from both strings that can create a palindrome.
+- **Input:** `Input: a = 'abc', b = 'def'`  \
+  **Explanation:** In this case, no matter how we split the strings, no combination of prefix and suffix will form a palindrome.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through all possible split points, checking the formed concatenations for palindrome properties.
 
-The solution utilizes the following approach:
-
-1. **Character Matching**: We will compare characters from both strings starting from their respective ends and moving towards the center. This helps in identifying how many characters from each string can be matched while still maintaining their palindrome properties.
-   
-2. **Palindrome Checking**: If mismatches are found during the matching process, we will check whether either of the substrings (from both strings) can form a palindrome when ignoring the characters that mismatched.
-
-3. **Function Decomposition**: The logic is divided into several helper functions for clarity:
-   - A main function `checkPalindromeFormation` that initiates the process for both strings.
-   - A function `check` that compares characters and manages mismatches.
-   - A function `isPalindrome` that checks if a given substring can form a palindrome.
-
-### Code Breakdown (Step by Step)
-
-Let’s examine the provided code closely:
-
+### Initial Thoughts 💭
+- We need to check both concatenations (`aprefix + bsuffix` and `bprefix + asuffix`) for each possible split.
+- If a combination forms a palindrome, we return true; otherwise, we return false.
+{{< dots >}}
+### Edge Cases 🌐
+- If either string is empty, the result should be false as there are no valid splits.
+- For large strings, the approach needs to be efficient enough to handle up to 100,000 characters.
+- Strings that are already palindromes can be split trivially.
+- The algorithm needs to check possible splits efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool checkPalindromeFormation(string a, string b) {
-        return check(a, b) || check(b, a);
-    }
+bool checkPalindromeFormation(string a, string b) {
+    return check(a, b) || check(b, a);
+}
+
+bool check(string a, string b) {
+    int i = 0, j = a.size() -1;
+    while(i < j && a[i] == b[j])
+    i++, j--;
+    return isPalindrom(a, i, j) || isPalindrom(b, i, j);
+}
+
+bool isPalindrom(string a, int i , int j) {
+    while(i < j && a[i] == a[j])
+    i++, j--;
+    return i >= j;
+}
 ```
-- The class `Solution` contains the method `checkPalindromeFormation`, which takes two strings \( a \) and \( b \) as input.
-- It invokes the `check` function in both possible orders of the strings. This is necessary because we want to explore if concatenating one string in front of the other can yield a palindrome.
 
-```cpp
-    bool check(string a, string b) {
-        int i = 0, j = a.size() - 1;
-        while(i < j && a[i] == b[j])
-            i++, j--;
-```
-- Inside the `check` function, we initialize two pointers, `i` (starting from the beginning of string \( a \)) and `j` (starting from the end of string \( b \)).
-- The `while` loop continues as long as the characters at the current positions of both strings match. It increments `i` and decrements `j` to move towards the center of the strings.
+This solution checks if it's possible to form a palindrome by rearranging two given strings, `a` and `b`. The core logic uses helper functions to check if one string can match the reverse of the other, and to verify if a substring is a palindrome.
 
-```cpp
-        return isPalindrom(a, i, j) || isPalindrom(b, i, j);
-    }
-```
-- Once a mismatch is found (or if the pointers cross each other), the function checks if either of the substrings (from the current positions \( i \) and \( j \)) can form a palindrome using the `isPalindrom` function.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkPalindromeFormation(string a, string b) {
+	```
+	Define the function `checkPalindromeFormation` that takes two strings `a` and `b` and returns true if a palindrome can be formed by rearranging them.
 
-```cpp
-    bool isPalindrom(string a, int i, int j) {
-        while(i < j && a[i] == a[j])
-            i++, j--;
-        return i >= j;
-    }
-```
-- The `isPalindrom` function checks if the substring of \( a \) between the indices \( i \) and \( j \) can form a palindrome.
-- It iterates through the substring, moving inward until the pointers cross. If they do, it indicates that the substring is a palindrome.
+2. **Function Logic**
+	```cpp
+	    return check(a, b) || check(b, a);
+	```
+	Call the `check` function for both possible combinations of the strings `a` and `b`. If either combination can form a palindrome, return true.
 
-### Complexity
+3. **Helper Function Definition**
+	```cpp
+	bool check(string a, string b) {
+	```
+	Define the helper function `check` that will determine if the strings `a` and `b` can form a palindrome by checking character matches from both ends.
 
-- **Time Complexity**: The time complexity for this solution is \( O(n) \), where \( n \) is the length of the longer of the two strings \( a \) or \( b \). This is because we may have to traverse the strings linearly a couple of times (once for each string pairing).
-  
-- **Space Complexity**: The space complexity is \( O(1) \) since we only use a constant amount of space for the pointers and do not require any additional data structures that grow with the input size.
+4. **Variable Initialization**
+	```cpp
+	    int i = 0, j = a.size() -1;
+	```
+	Initialize two pointers `i` at the start of string `a` and `j` at the end to check for palindrome conditions.
 
-### Conclusion
+5. **While Loop**
+	```cpp
+	    while(i < j && a[i] == b[j])
+	```
+	Use a while loop to compare characters of the two strings from both ends (`a[i]` with `b[j]`). Continue as long as they match.
 
-The provided solution efficiently checks whether two strings can be combined in such a way to form a palindrome. By breaking down the problem into manageable parts and utilizing a character matching approach, the algorithm maintains clarity and simplicity while remaining performant.
+6. **Pointer Adjustment**
+	```cpp
+	    i++, j--;
+	```
+	If characters match, move the pointers towards the center (`i++` and `j--`) to check the next pair of characters.
 
-**Key Takeaways**:
-1. **Palindrome Properties**: Understanding the nature of palindromes (character symmetry) is crucial for solving this problem.
-2. **Efficiency**: The approach is linear in complexity, making it suitable for handling large strings.
-3. **Function Decomposition**: Splitting the problem into smaller functions enhances readability and maintainability, allowing for easier debugging and testing.
+7. **Return Statement**
+	```cpp
+	    return isPalindrom(a, i, j) || isPalindrom(b, i, j);
+	```
+	Return the result of checking if either string from the updated pointers forms a palindrome using the helper function `isPalindrom`.
 
-This algorithm is applicable in scenarios where palindromic structures are significant, such as in text processing, DNA sequencing, and various computational linguistics problems. By examining character sequences and their relationships, we can uncover deeper insights into the patterns within strings.
+8. **Palindrome Check Function Definition**
+	```cpp
+	bool isPalindrom(string a, int i , int j) {
+	```
+	Define the function `isPalindrom` that checks whether the substring from index `i` to `j` in string `a` is a palindrome.
+
+9. **While Loop**
+	```cpp
+	    while(i < j && a[i] == a[j])
+	```
+	Use a while loop to compare characters from both ends of the substring in string `a` (`a[i]` with `a[j]`). Continue as long as they match.
+
+10. **Pointer Adjustment**
+	```cpp
+	    i++, j--;
+	```
+	If characters match, move the pointers towards the center (`i++` and `j--`) to check the next pair of characters.
+
+11. **Return Statement**
+	```cpp
+	    return i >= j;
+	```
+	If the pointers have crossed or met, it means the substring is a palindrome. Return true, else false.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The worst case occurs when we check palindrome properties at each split for strings of length n.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case for storing prefixes and suffixes.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-two-strings-to-make-palindrome/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "0EVQluJY224"
 youtube_upload_date="2021-02-01"
 youtube_thumbnail="https://i.ytimg.com/vi/0EVQluJY224/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,146 +28,206 @@ youtube_thumbnail="https://i.ytimg.com/vi/0EVQluJY224/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, return an array of the largest value in each row of the tree (0-indexed).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root of a binary tree, represented as an array in level order.
+- **Example:** `root = [3, 5, 2, 8, 6, 4]`
+- **Constraints:**
+	- The number of nodes in the tree will be in the range [0, 10^4].
+	- Node values range from -231 to 231 - 1.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    vector<int> largestValues(TreeNode* root) {
-            queue<TreeNode*> q;
-        vector<int> res;        
-        if(!root) return res;
-        q.push(root);
-        int mx;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an array of the largest value in each row of the tree.
+- **Example:** `[3, 5, 8]`
+- **Constraints:**
+	- The output should be an array of integers, where each integer is the largest value in the corresponding row of the tree.
 
-        while(!q.empty()) {
-            int sz = q.size();
-            mx = INT_MIN;
-            while(sz-- > 0) {
-                root = q.front();
-                q.pop();
-                mx = max(mx, root->val);                
-                if(root->left)  q.push(root->left);
-                if(root->right) q.push(root->right);                
-            }
-            res.push_back(mx);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To traverse each level of the tree and find the maximum value at that level.
+
+- 1. Perform a level order traversal using a queue.
+- 2. For each level, calculate the maximum value by comparing all the nodes at that level.
+- 3. Store the maximum value for each level.
+- 4. Return the array of maximum values.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree will be represented as an array using level order traversal.
+- The tree will not be empty unless specified.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [3, 5, 2, 8, 6, 4]`  \
+  **Explanation:** For the tree [3, 5, 2, 8, 6, 4], the largest values at each level are: Level 0 = 3, Level 1 = 5, Level 2 = 8.
+
+- **Input:** `root = [7, 1, 9, 4, null, 10]`  \
+  **Explanation:** For the tree [7, 1, 9, 4, null, 10], the largest values at each level are: Level 0 = 7, Level 1 = 9, Level 2 = 10.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to use a level order traversal to traverse the tree and find the largest value at each level.
+
+### Initial Thoughts 💭
+- We need to process nodes level by level to find the maximum value in each row.
+- A queue is ideal for this kind of level order traversal.
+- For each level, we can find the maximum value by comparing all nodes at that level.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty, return an empty array.
+- The algorithm should efficiently handle up to 10^4 nodes.
+- Ensure the solution works with trees that have both positive and negative node values.
+- The solution should handle up to 10^4 nodes in the tree.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> largestValues(TreeNode* root) {
+        queue<TreeNode*> q;
+    vector<int> res;        
+    if(!root) return res;
+    q.push(root);
+    int mx;
+
+    while(!q.empty()) {
+        int sz = q.size();
+        mx = INT_MIN;
+        while(sz-- > 0) {
+            root = q.front();
+            q.pop();
+            mx = max(mx, root->val);                
+            if(root->left)  q.push(root->left);
+            if(root->right) q.push(root->right);                
         }
-        return res;    
+        res.push_back(mx);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to find the largest value in each level of a binary tree. Given a binary tree, we are tasked with returning a list of integers where each integer corresponds to the largest value found in each level of the tree.
-
-For example, for the binary tree:
-
-```
-         1
-        / \
-       3   2
-      / \   \
-     5   3   9
+    return res;    
+}
 ```
 
-The output should be `[1, 3, 9]`, as:
-- Level 1 has only the node `1`.
-- Level 2 has the nodes `3` and `2`, with the largest value being `3`.
-- Level 3 has the nodes `5`, `3`, and `9`, with the largest value being `9`.
+This function finds the largest value in each row of a binary tree. It uses a breadth-first search (BFS) traversal to process each level of the tree and keeps track of the largest value at each level.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> largestValues(TreeNode* root) {
+	```
+	Defines the `largestValues` function, which returns a vector containing the largest value from each row in the binary tree.
 
-To solve this problem, we can use a **breadth-first search (BFS)** approach, where we traverse the tree level by level. The idea is to traverse the tree starting from the root node, and for each level, we keep track of the largest value. The BFS is ideal for this scenario because it naturally processes nodes level by level.
+2. **Queue Initialization**
+	```cpp
+	        queue<TreeNode*> q;
+	```
+	Initializes a queue to store nodes for the breadth-first traversal of the tree.
 
-Here’s a step-by-step explanation of the approach:
+3. **Result Vector Initialization**
+	```cpp
+	    vector<int> res;        
+	```
+	Creates a vector `res` to store the largest value for each level of the tree.
 
-1. **Breadth-First Search (BFS)**: We use a queue to store the nodes of the tree. The queue helps in processing nodes level by level. We start by pushing the root node into the queue.
-   
-2. **Iterate Through Levels**: For each level of the tree, we:
-   - Track the number of nodes at that level (`sz`).
-   - Traverse all nodes at the current level and find the maximum value.
-   - If a node has left or right children, push those children into the queue to be processed in the next level.
-   
-3. **Store Maximum Value for Each Level**: After processing all nodes in a level, we store the largest value of that level.
+4. **Check for Empty Tree**
+	```cpp
+	    if(!root) return res;
+	```
+	Checks if the tree is empty. If it is, returns the empty result vector.
 
-4. **Return Result**: After all levels are processed, the result is a list of maximum values for each level of the tree.
+5. **Push Root to Queue**
+	```cpp
+	    q.push(root);
+	```
+	Pushes the root node of the tree into the queue to begin the breadth-first traversal.
 
-### Code Breakdown (Step by Step)
+6. **Initialize Max Value**
+	```cpp
+	    int mx;
+	```
+	Declares a variable `mx` to store the largest value at each level of the tree during traversal.
 
-The solution uses a breadth-first search to process the tree level by level and track the largest values for each level:
+7. **BFS Loop Start**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Starts the outer while loop, which will run as long as there are nodes in the queue.
 
-1. **Initialize a Queue and Result Vector**:
-   ```cpp
-   queue<TreeNode*> q;
-   vector<int> res;
-   if(!root) return res;
-   q.push(root);
-   ```
-   - We initialize a queue `q` that will hold the nodes to be processed.
-   - The `res` vector is used to store the largest value at each level.
-   - If the tree is empty (i.e., the root is `nullptr`), we return an empty result.
+8. **Level Size Calculation**
+	```cpp
+	        int sz = q.size();
+	```
+	Calculates the number of nodes at the current level by checking the size of the queue.
 
-2. **Process Each Level**:
-   ```cpp
-   while(!q.empty()) {
-       int sz = q.size();
-       mx = INT_MIN;
-   ```
-   - We enter a loop that processes each level of the tree. The variable `sz` holds the number of nodes in the current level.
-   - `mx` is initialized to `INT_MIN` to keep track of the maximum value at the current level.
+9. **Initialize Max Value for Level**
+	```cpp
+	        mx = INT_MIN;
+	```
+	Initializes `mx` to the minimum possible integer value before comparing it with node values at the current level.
 
-3. **Process Nodes at Current Level**:
-   ```cpp
-   while(sz-- > 0) {
-       root = q.front();
-       q.pop();
-       mx = max(mx, root->val);
-       if(root->left)  q.push(root->left);
-       if(root->right) q.push(root->right);
-   }
-   ```
-   - We process each node at the current level by popping it from the front of the queue.
-   - For each node, we compare its value with `mx` to track the maximum value at the current level.
-   - If the node has a left or right child, we push them into the queue for processing in the next level.
+10. **Level Traversal Loop**
+	```cpp
+	        while(sz-- > 0) {
+	```
+	Begins an inner loop to process all nodes at the current level.
 
-4. **Store Maximum Value for the Current Level**:
-   ```cpp
-   res.push_back(mx);
-   ```
-   - After processing all nodes at the current level, we push the maximum value found (`mx`) into the `res` vector.
+11. **Process Current Node**
+	```cpp
+	            root = q.front();
+	```
+	Retrieves the front node from the queue for processing.
 
-5. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - Once all levels have been processed, we return the `res` vector, which contains the largest values for each level of the tree.
+12. **Pop Node from Queue**
+	```cpp
+	            q.pop();
+	```
+	Removes the front node from the queue after processing it.
 
-### Complexity
+13. **Update Max Value**
+	```cpp
+	            mx = max(mx, root->val);                
+	```
+	Updates the `mx` variable to hold the maximum value between the current value of `mx` and the current node's value.
 
-#### Time Complexity:
-- **O(n)**: We traverse each node of the tree exactly once, and at each node, we perform constant-time operations such as comparing values and enqueuing child nodes. Here `n` is the number of nodes in the tree.
+14. **Push Left Child**
+	```cpp
+	            if(root->left)  q.push(root->left);
+	```
+	Pushes the left child of the current node to the queue if it exists.
 
-#### Space Complexity:
-- **O(n)**: In the worst case, the queue will contain all nodes at the last level of the tree. In a balanced binary tree, this would be roughly `n / 2` nodes, but in the worst case (e.g., a skewed tree), it could contain up to `n` nodes.
+15. **Push Right Child**
+	```cpp
+	            if(root->right) q.push(root->right);                
+	```
+	Pushes the right child of the current node to the queue if it exists.
 
-### Conclusion
+16. **Store Max Value for Level**
+	```cpp
+	        res.push_back(mx);
+	```
+	Stores the largest value of the current level (`mx`) into the result vector.
 
-In conclusion, this solution efficiently computes the largest value at each level of a binary tree using a breadth-first search (BFS) approach. The BFS ensures that we process each level of the tree sequentially, and by tracking the largest value in each level, we can build the result in linear time and space. This approach is optimal and well-suited for problems involving tree traversal where levels and node relationships are crucial, such as in binary tree level-order traversals. 
+17. **Return Result**
+	```cpp
+	    return res;    
+	```
+	Returns the result vector containing the largest value from each level of the binary tree.
 
-This solution is both time-efficient and space-efficient, making it a great choice for handling large binary trees where we need to compute level-based information, such as finding the largest values at each level.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the number of nodes in the tree because we process each node exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case due to the queue storing nodes at each level. In the best case (a skewed tree), the space complexity is O(1).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/)
 

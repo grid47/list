@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "g9YQyYi4IQQ"
 youtube_upload_date="2021-08-21"
 youtube_thumbnail="https://i.ytimg.com/vi/g9YQyYi4IQQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,103 +28,115 @@ youtube_thumbnail="https://i.ytimg.com/vi/g9YQyYi4IQQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a number `x` and an integer `n`. Your task is to compute `x` raised to the power `n` (i.e., `x^n`). Handle cases where the exponent is negative by returning the reciprocal of the result.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a number `x` (float) and an integer `n` (int).
+- **Example:** `["x = 3.00000, n = 4"]`
+- **Constraints:**
+	- -100.0 < x < 100.0
+	- -231 <= n <= 231-1
+	- n is an integer.
+	- Either x is not zero or n > 0.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double myPow(double x, int n) {
-        if(n== 0) return 1;
-        if(n < 0) return 1/x * myPow(1/x, -(n + 1));
-        
-        return (n % 2) ? x * myPow(x * x, n / 2) : myPow(x * x, n/ 2);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a float value, which is `x` raised to the power `n`.
+- **Example:** `["81.00000"]`
+- **Constraints:**
+	- The result must be computed within the constraints of the problem.
 
-### ⚡ Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate `x^n` efficiently, especially for large `n` values.
 
-Implement the `myPow` function to calculate `x^n` (x raised to the power of n), where `x` is a floating-point number and `n` is an integer. The function must be efficient and handle both positive and negative exponents, as well as edge cases such as `n = 0`.
+- 1. Check if the exponent `n` is zero. If so, return 1.
+- 2. If `n` is negative, compute the power of the reciprocal of `x` raised to the positive exponent.
+- 3. Use fast exponentiation (divide-and-conquer) for optimal computation, where the power is halved for each recursive step.
+{{< dots >}}
+### Problem Assumptions ✅
+- The function should handle both positive and negative exponents correctly.
+- The input constraints guarantee that no invalid values (such as x = 0 when n <= 0) will be provided.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["x = 3.00000, n = 4"]`  \
+  **Explanation:** In this example, `3^4` is calculated, resulting in `81.00000`.
 
-### 💡 Approach
+- **Input:** `["x = 2.50000, n = -2"]`  \
+  **Explanation:** Here, `2.5^-2` is computed as the reciprocal of `2.5^2`, resulting in `0.16000`.
 
-To efficiently compute `x^n`, we use **exponentiation by squaring**, a fast algorithm that reduces the time complexity from `O(n)` to `O(log n)`.
+{{< dots >}}
+## Approach 🚀
+The approach uses a divide-and-conquer strategy to calculate the power efficiently. If the exponent is negative, we compute the reciprocal of the power of the positive exponent.
 
-- **For even `n`:**
-  \[
-  x^n = (x^{n/2})^2
-  \]
-  
-- **For odd `n`:**
-  \[
-  x^n = x \times (x^{n/2})^2
-  \]
-
-Additionally, we need to handle the case when `n` is negative:
-\[
-x^{-n} = \frac{1}{x^n}
-\]
-
-### 🧑‍💻 Code Breakdown
-
+### Initial Thoughts 💭
+- Exponentiation can be computed efficiently using recursion or iteration with halving the exponent.
+- Handling negative exponents requires computing the reciprocal of the result.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty input values as per the constraints.
+- For large inputs, the algorithm needs to handle large exponentiation efficiently without overflow.
+- Handling zero as an exponent (e.g., `x^0` should always return 1).
+- Handle negative exponents by computing the reciprocal of the result.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    double myPow(double x, int n) {
-        if (n == 0) return 1;  // Base case: x^0 = 1 for any x
-        
-        if (n < 0) return 1 / x * myPow(1 / x, -(n + 1));  // Handle negative exponents
-        
-        return (n % 2) ? x * myPow(x * x, n / 2) : myPow(x * x, n / 2);  // Apply exponentiation by squaring
-    }
-};
+double myPow(double x, int n) {
+    if(n== 0) return 1;
+    if(n < 0) return 1/x * myPow(1/x, -(n + 1));
+    
+    return (n % 2) ? x * myPow(x * x, n / 2) : myPow(x * x, n/ 2);
+}
 ```
 
-#### Step 1: Base Case for `n == 0`
+This code implements the `myPow` function to calculate the power of a number `x` raised to the power of `n`.
 
-```cpp
-if (n == 0) return 1;
-```
-- **Explanation**: By definition, any non-zero number raised to the power of `0` equals `1`. This handles the edge case where `n` is 0.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	double myPow(double x, int n) {
+	```
+	This line declares a function named `myPow` that takes a double `x` and an integer `n` as input and returns the result of `x` raised to the power of `n`.
 
-#### Step 2: Handling Negative Exponents
+2. **Base Case: Zero Power**
+	```cpp
+	    if(n== 0) return 1;
+	```
+	This line checks if the exponent `n` is 0. If so, the function returns 1, as any number raised to the power of 0 is 1.
 
-```cpp
-if (n < 0) return 1 / x * myPow(1 / x, -(n + 1));
-```
-- **Explanation**: When `n` is negative, we use the identity \( x^{-n} = \frac{1}{x^n} \). The recursive call adjusts `n` to handle the negative exponent. This modification ensures no overflow issues for the minimum integer value (`INT_MIN`), as `-(n + 1)` ensures proper handling of `n` in recursive calls.
+3. **Base Case: Negative Power**
+	```cpp
+	    if(n < 0) return 1/x * myPow(1/x, -(n + 1));
+	```
+	This line handles the case where the exponent `n` is negative. It calculates the reciprocal of `x` and recursively calls the function with the absolute value of `n` incremented by 1.
 
-#### Step 3: Exponentiation by Squaring (Recursive Case)
+4. **Recursive Calculation**
+	```cpp
+	    return (n % 2) ? x * myPow(x * x, n / 2) : myPow(x * x, n/ 2);
+	```
+	This line implements the core recursive calculation. It leverages the fact that `x^n` can be calculated efficiently using the following properties:
+1. **Even Power:** If `n` is even, `x^n = (x^2)^(n/2)`.
+2. **Odd Power:** If `n` is odd, `x^n = x * (x^2)^((n-1)/2)`.
 
-```cpp
-return (n % 2) ? x * myPow(x * x, n / 2) : myPow(x * x, n / 2);
-```
-- **Explanation**: This step applies exponentiation by squaring:
-  - **Even `n`**: If `n` is even, we compute `myPow(x * x, n / 2)`, since \( x^n = (x^{n/2})^2 \).
-  - **Odd `n`**: If `n` is odd, we compute `myPow(x * x, n / 2)` first, then multiply the result by `x`, as \( x^n = x \times (x^{n/2})^2 \).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-### ⏱️ **Time Complexity**
+The time complexity is logarithmic due to the halving of the exponent in each recursive step.
 
-The time complexity of this approach is **O(log n)**, where `n` is the exponent. This is because at each step, the size of the problem is reduced by half, leading to a logarithmic number of recursive calls.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(log n)
 
-- **Why `log n`?**  
-  In each recursive call, the exponent `n` is halved, reducing the problem size logarithmically.
+The space complexity is logarithmic due to the recursive calls. In the best case (no recursion), it is constant.
 
-### 🧠 **Space Complexity**
+**Happy Coding! 🎉**
 
-The space complexity is **O(log n)** due to the recursive call stack. The depth of the recursion is proportional to `log(n)` since we are halving `n` with each recursive call.
-
-### 📝 **Conclusion**
-
-This implementation of `myPow` efficiently computes `x^n` using **exponentiation by squaring**, which reduces the time complexity to **O(log n)**. The recursive structure handles both positive and negative exponents efficiently, and the base case ensures proper handling of `n = 0`.
-
-- **Advantages**:
-  - **Efficient**: The logarithmic time complexity makes this approach suitable even for large values of `n`.
-  - **Simplicity**: The recursive approach is both simple to understand and implement.
-  - **Handles Negative Exponents**: The solution correctly handles negative exponents without special cases.
-
-This approach is ideal for computing powers efficiently in problems where large exponents are involved.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/powx-n/description/)
 

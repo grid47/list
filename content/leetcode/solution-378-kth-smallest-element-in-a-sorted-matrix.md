@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "PKj4LyF5iCk"
 youtube_upload_date="2021-01-24"
 youtube_thumbnail="https://i.ytimg.com/vi/PKj4LyF5iCk/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,153 +28,189 @@ youtube_thumbnail="https://i.ytimg.com/vi/PKj4LyF5iCk/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an n x n matrix where each row and column is sorted in ascending order, find the kth smallest element in the matrix. The matrix is sorted in both rows and columns, but the kth smallest element is the one in the sorted order, not necessarily distinct.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a matrix with n rows and n columns, where each element in the matrix is sorted in non-decreasing order. You are also given a value k.
+- **Example:** `matrix = [[1, 5, 9], [10, 11, 13], [12, 13, 15]], k = 8`
+- **Constraints:**
+	- n == matrix.length == matrix[i].length
+	- 1 <= n <= 300
+	- -10^9 <= matrix[i][j] <= 10^9
+	- All the rows and columns of matrix are sorted in non-decreasing order.
+	- 1 <= k <= n^2
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int kthSmallest(vector<vector<int>>& mtx, int k) {
-        int m = mtx.size(), n = mtx[0].size();
-        
-        priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
-        for(int r = 0; r < min(m, k); r++)
-            pq.push({mtx[r][0], r, 0});
-        
-        vector<int> cur;
-        while(k-- > 1 && !pq.empty()) {
-            
-            cur = pq.top();
-            pq.pop();
-            
-            if(cur[2] + 1 < n)
-            pq.push({ mtx[cur[1]][cur[2] + 1], cur[1], cur[2] + 1 });
-            
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the kth smallest element from the matrix.
+- **Example:** `Output: 13`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Use a min-heap (priority queue) to efficiently find the kth smallest element from the matrix.
+
+- Initialize a priority queue and push the first element from each row along with its position in the row.
+- Pop the top element from the priority queue, and push the next element from the same row (if it exists) into the priority queue.
+- Repeat the process until you pop the kth element, which is the kth smallest element in the matrix.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is sorted both row-wise and column-wise.
+- The value of k is valid and within the range of the total number of elements in the matrix.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `matrix = [[1, 5, 9], [10, 11, 13], [12, 13, 15]], k = 8`  \
+  **Explanation:** The sorted matrix elements are [1, 5, 9, 10, 11, 12, 13, 13, 15]. The 8th smallest element is 13.
+
+- **Input:** `matrix = [[-5]], k = 1`  \
+  **Explanation:** The only element in the matrix is -5, so the 1st smallest element is -5.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by using a priority queue (min-heap) to efficiently track the smallest elements in the matrix.
+
+### Initial Thoughts 💭
+- Since the matrix is sorted, we can use a priority queue to extract the smallest elements efficiently.
+- The priority queue will allow us to track the smallest element and ensure that we find the kth smallest element without having to sort the entire matrix.
+{{< dots >}}
+### Edge Cases 🌐
+- The input matrix will always be non-empty as per the problem constraints.
+- The algorithm should handle up to the maximum constraints efficiently, with matrix size up to 300 x 300.
+- The matrix may contain negative values, and the kth smallest element can be negative as well.
+- The value of k will always be valid, and the matrix is guaranteed to be sorted.
+{{< dots >}}
+## Code 💻
+```cpp
+int kthSmallest(vector<vector<int>>& mtx, int k) {
+    int m = mtx.size(), n = mtx[0].size();
+    
+    priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
+    for(int r = 0; r < min(m, k); r++)
+        pq.push({mtx[r][0], r, 0});
+    
+    vector<int> cur;
+    while(k-- > 1 && !pq.empty()) {
         
         cur = pq.top();
+        pq.pop();
         
-        return cur[0];
+        if(cur[2] + 1 < n)
+        pq.push({ mtx[cur[1]][cur[2] + 1], cur[1], cur[2] + 1 });
+        
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, we're tasked with finding the **kth smallest element** in a **sorted 2D matrix**. The matrix is sorted both row-wise and column-wise, meaning:
-- Each row is sorted in ascending order.
-- Each column is also sorted in ascending order.
-
-Given the matrix and a number `k`, we need to return the **kth smallest element** from the entire matrix.
-
-For example, consider the matrix:
-```
-[[1, 5, 9],
- [10, 11, 13],
- [12, 13, 15]]
-```
-If `k = 8`, the 8th smallest element is `13`.
-
----
-
-### 🧠 Approach
-
-To solve this problem efficiently, we’ll use a **min-heap** (priority queue). The key here is to take advantage of the matrix's sorted properties. By pushing the smallest elements into the heap and extracting them one by one, we can track the smallest elements in ascending order.
-
-#### Key Insights:
-1. **Min-Heap (Priority Queue)**:
-   - The heap allows us to efficiently extract the smallest element.
-   - Each heap entry is a tuple: the element value, the row index, and the column index.
-   
-2. **Efficient Traversal**:
-   - We begin by pushing the first element of each row into the heap. Since each row is sorted, the smallest element in the matrix will always be at the top of the heap.
-   - After extracting the smallest element, we push the next element from the same row into the heap. This ensures the heap always holds the next smallest element.
-
-3. **Heap Size**:
-   - The heap will store at most `k` elements at any time, ensuring that the algorithm remains efficient.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-#### Step 1: Define the Solution Class and Method
-```cpp
-class Solution {
-public:
-    int kthSmallest(vector<vector<int>>& mtx, int k) {
-        int m = mtx.size(), n = mtx[0].size();
-```
-- We define a `Solution` class with a method `kthSmallest` that takes the matrix `mtx` and the integer `k`.
-- We first get the number of rows (`m`) and columns (`n`) of the matrix.
-
-#### Step 2: Initialize Min-Heap (Priority Queue)
-```cpp
-priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
-```
-- We initialize a **min-heap** using a priority queue. The heap will store vectors containing:
-  - The element value.
-  - The row index.
-  - The column index.
-
-#### Step 3: Push First Element from Each Row
-```cpp
-for(int r = 0; r < min(m, k); r++)
-    pq.push({mtx[r][0], r, 0});
-```
-- We push the first element of each row into the heap, along with its row and column indices. This step ensures that the heap will initially hold the smallest elements from each row.
-
-#### Step 4: Extract Elements from the Heap
-```cpp
-vector<int> cur;
-while(k-- > 1 && !pq.empty()) {
+    
     cur = pq.top();
-    pq.pop();
+    
+    return cur[0];
+}
 ```
-- We begin extracting the smallest element from the heap (`pq.top()`), storing it in `cur`. Each extraction brings us one step closer to finding the `kth` smallest element.
-- After each extraction, we decrement `k`.
 
-#### Step 5: Push the Next Element in the Row into the Heap
-```cpp
-if(cur[2] + 1 < n)
-    pq.push({mtx[cur[1]][cur[2] + 1], cur[1], cur[2] + 1});
-```
-- After extracting an element, we check if there’s another element in the same row (i.e., `cur[2] + 1 < n`). If so, we push the next element from that row into the heap.
+This code finds the kth smallest element in a sorted matrix using a priority queue (min-heap). The matrix is sorted row-wise, and the algorithm efficiently selects the smallest elements from each row to compute the kth smallest.
 
-#### Step 6: Return the kth Smallest Element
-```cpp
-cur = pq.top();
-return cur[0];
-```
-- Once we’ve extracted `k-1` smallest elements, the next element at the top of the heap (`pq.top()`) will be the `kth` smallest element in the matrix.
-- We return the value of `cur[0]` as the result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int kthSmallest(vector<vector<int>>& mtx, int k) {
+	```
+	Declares the function `kthSmallest` which takes a matrix `mtx` and an integer `k` as inputs, and returns the kth smallest element from the matrix.
 
----
+2. **Matrix Dimensions**
+	```cpp
+	    int m = mtx.size(), n = mtx[0].size();
+	```
+	Extracts the number of rows (`m`) and columns (`n`) from the matrix `mtx`.
 
-### 📈 Complexity Analysis
+3. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
+	```
+	Initializes a min-heap priority queue `pq` to store elements in ascending order. Each element in the queue is a vector containing a matrix element, its row index, and its column index.
 
-#### Time Complexity
-- **O(k log m)**, where `k` is the number of elements to extract and `m` is the number of rows in the matrix.
-  - We perform `k` extractions from the heap, and for each extraction, we may push a new element into the heap.
-  - The heap can hold at most `m` elements at any time, and each heap operation (insertion and extraction) takes **O(log m)** time.
-  - Thus, the time complexity is **O(k log m)**.
+4. **Loop Initialization**
+	```cpp
+	    for(int r = 0; r < min(m, k); r++)
+	```
+	Loops through the first `k` rows (or less if the matrix has fewer rows) and pushes the first element of each row into the priority queue.
 
-#### Space Complexity
-- **O(m)**, where `m` is the number of rows in the matrix.
-  - The heap stores at most `m` elements at any given time, so the space complexity is **O(m)**.
+5. **Heap Insertion**
+	```cpp
+	        pq.push({mtx[r][0], r, 0});
+	```
+	Pushes a triplet (value, row index, column index) for the first element of each row into the priority queue.
 
----
+6. **Vector Declaration**
+	```cpp
+	    vector<int> cur;
+	```
+	Declares a vector `cur` to temporarily store the current smallest element and its indices from the priority queue.
 
-### 🏁 Conclusion
+7. **Main Loop**
+	```cpp
+	    while(k-- > 1 && !pq.empty()) {
+	```
+	Runs a loop to extract the smallest element from the heap `k-1` times, ensuring that the heap contains the next smallest elements.
 
-This solution efficiently finds the `kth` smallest element in a sorted 2D matrix using a **min-heap**. By pushing and extracting elements from the heap, we ensure that we always have access to the next smallest element in the matrix, and by maintaining a heap of size `m`, we make sure the solution is both time and space efficient.
+8. **Heap Top Extraction**
+	```cpp
+	        cur = pq.top();
+	```
+	Extracts the top (smallest) element from the priority queue into the `cur` vector.
 
-#### Quick Recap:
-- **Time Complexity**: O(k log m)
-- **Space Complexity**: O(m)
-- **Efficient solution using min-heap**
-- **Great for large matrices with sorted rows and columns!**
+9. **Heap Pop**
+	```cpp
+	        pq.pop();
+	```
+	Removes the extracted top element from the priority queue.
 
-This approach is perfect for large matrices, ensuring that we can efficiently find the `kth` smallest element without having to search the entire matrix. Keep up the great work, and happy coding! 💻✨
+10. **Next Element Insertion**
+	```cpp
+	        if(cur[2] + 1 < n)
+	```
+	Checks if the next element in the current row exists (i.e., the current column index is within bounds).
+
+11. **Heap Push**
+	```cpp
+	        pq.push({ mtx[cur[1]][cur[2] + 1], cur[1], cur[2] + 1 });
+	```
+	Pushes the next element from the current row into the priority queue.
+
+12. **End of Main Loop**
+	```cpp
+	    }
+	```
+	Marks the end of the main while loop that processes the next smallest elements from the heap.
+
+13. **Final Result**
+	```cpp
+	    cur = pq.top();
+	```
+	Extracts the top element from the priority queue, which is now the kth smallest element after `k-1` extractions.
+
+14. **Return Statement**
+	```cpp
+	    return cur[0];
+	```
+	Returns the value of the kth smallest element from the top of the priority queue.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k log n)
+- **Average Case:** O(k log n)
+- **Worst Case:** O(k log n)
+
+The time complexity is O(k log n) because we are performing k operations with a priority queue of size n.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the elements in the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)
 

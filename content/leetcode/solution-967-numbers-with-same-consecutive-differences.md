@@ -14,134 +14,180 @@ img_src = ""
 youtube = "TAfXh2l9FyA"
 youtube_upload_date="2020-08-18"
 youtube_thumbnail="https://i.ytimg.com/vi/TAfXh2l9FyA/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHSBoAC4AOKAgwIABABGHIgYygcMA8=&rs=AOn4CLAoEY7qSAKZyDcVLs0164H3CuKvvg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Generate all numbers of length n such that the absolute difference between every two consecutive digits is exactly k. The generated numbers must not have leading zeros, and all digits should be valid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, n and k, where n is the length of the numbers to generate and k is the required difference between consecutive digits.
+- **Example:** `"n": 4, "k": 2`
+- **Constraints:**
+	- 2 <= n <= 9
+	- 0 <= k <= 9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> numsSameConsecDiff(int n, int k) {
-        vector<int> cur = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        for(int i = 2; i <= n; i++) {
-            vector<int> cur2;
-            for(int x: cur) {
-                int y = x % 10;
-                if(y + k < 10)
-                    cur2.push_back(x * 10 + y + k);
-                if(k>0 && y - k >= 0)
-                    cur2.push_back(x * 10 + y - k);
-                
-            }
-            cur = cur2;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of integers of length n that satisfy the conditions. The order of the integers in the output does not matter.
+- **Example:** `[1232, 3210, 3454, 5656]`
+- **Constraints:**
+	- The integers must have exactly n digits.
+	- No leading zeros are allowed.
+	- All integers in the output must adhere to the given difference condition.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Construct all valid integers of length n such that the difference between consecutive digits is k.
+
+- Start with all one-digit numbers (1-9) as potential candidates for valid numbers.
+- For each candidate, iteratively add a new digit to its right, ensuring the absolute difference between the last digit and the new digit is k.
+- If adding a new digit creates an invalid number (e.g., leading zeroes or out-of-bound digits), discard it.
+- Repeat the process until all numbers reach the required length n.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values n and k are valid and within the specified range.
+- The output must include all valid numbers that meet the criteria.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"n": 3, "k": 3`  \
+  **Explanation:** For n=3 and k=3, valid numbers include 141, 258, 303, etc. Numbers like 012 are invalid due to leading zeros, and numbers like 123 are invalid because the difference between digits does not match k.
+
+{{< dots >}}
+## Approach 🚀
+Use a breadth-first search (BFS) or iterative construction to build numbers digit by digit. Maintain a list of current valid numbers and extend each by adding a digit that satisfies the difference condition.
+
+### Initial Thoughts 💭
+- Each number starts with one digit from 1-9.
+- To extend a number, the last digit determines the next valid digits.
+- Leading zeros are not allowed, so the first digit must always be non-zero.
+- Iterative construction allows tracking and extending only valid numbers.
+- Handling the case k=0 separately simplifies the logic since all digits would repeat.
+{{< dots >}}
+### Edge Cases 🌐
+- N/A (n and k are always provided as per constraints).
+- Maximum n=9 and k=9. Ensure the algorithm handles a potentially large output efficiently.
+- k=0, where consecutive digits must be identical.
+- k=9, where differences between digits can only occur at the extreme bounds of valid digits.
+- Ensure numbers do not exceed the digit limit.
+- Numbers starting with zero should be discarded.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> numsSameConsecDiff(int n, int k) {
+    vector<int> cur = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for(int i = 2; i <= n; i++) {
+        vector<int> cur2;
+        for(int x: cur) {
+            int y = x % 10;
+            if(y + k < 10)
+                cur2.push_back(x * 10 + y + k);
+            if(k>0 && y - k >= 0)
+                cur2.push_back(x * 10 + y - k);
+            
         }
-        return cur;
+        cur = cur2;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to generate all numbers of `n` digits that have the same absolute difference `k` between every two consecutive digits. Specifically, we are given two inputs:
-1. `n`: The number of digits in the desired numbers.
-2. `k`: The absolute difference between every two consecutive digits.
-
-Our task is to return a list of all such `n`-digit numbers that satisfy the condition. The digits of each number should follow the condition that the absolute difference between every two consecutive digits is exactly `k`. For example, if `k = 2`, then the number `202` satisfies the condition because the absolute difference between consecutive digits (`|2-0| = 2` and `|0-2| = 2`) is `2`.
-
-### Approach
-
-We can solve this problem efficiently by building the numbers digit by digit. Let's break down the process:
-
-1. **Initialization**:
-   - We start with all one-digit numbers between `1` and `9` because we are interested in valid `n`-digit numbers, and a valid number cannot start with `0`.
-
-2. **Iterative Construction**:
-   - For each subsequent digit, we check if it is valid based on the previous digit. Specifically, if the current number ends with a digit `y`, we can append a new digit to it by ensuring the absolute difference between the current and the new digit is exactly `k`.
-   - We calculate the possible new digits by adding `k` to `y` or subtracting `k` from `y`, provided these new digits are within the valid range (`0` to `9`).
-
-3. **Loop Over Digits**:
-   - The process is repeated until we reach `n` digits. Each time we add a digit, we generate all possible numbers from the current list of valid numbers.
-
-4. **Final Output**:
-   - Once we have built all valid numbers of `n` digits, we return the list of those numbers.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<int> numsSameConsecDiff(int n, int k) {
-        vector<int> cur = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    return cur;
+}
 ```
 
-1. **Initialization**:
-   - We start by initializing a vector `cur` containing all one-digit numbers from `1` to `9`. These are the potential starting points for the numbers we will construct. This step ensures we don’t consider numbers starting with `0` (which is invalid for `n`-digit numbers).
+This function generates all numbers of length `n` such that the absolute difference between any two consecutive digits is `k`. It uses dynamic programming to progressively build the numbers.
 
-```cpp
-        for(int i = 2; i <= n; i++) {
-            vector<int> cur2;
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> numsSameConsecDiff(int n, int k) {
+	```
+	The main function definition to compute numbers with specified properties.
 
-2. **Loop Over Number Length**:
-   - We begin a loop that will run from `i = 2` to `i = n`. In each iteration, we will extend the numbers in the current list `cur` to the next number, ensuring that they still satisfy the condition of having consecutive digits with the absolute difference `k`.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> cur = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	```
+	Initialize the current list of numbers to all single-digit numbers (1-9).
 
-   - `cur2` is the new list that will store all the valid numbers that can be generated from the current `cur`.
+3. **Loop Construct**
+	```cpp
+	    for(int i = 2; i <= n; i++) {
+	```
+	Iterate to build numbers of increasing length from 2 to `n`.
 
-```cpp
-            for(int x: cur) {
-                int y = x % 10;
-```
+4. **Variable Initialization**
+	```cpp
+	        vector<int> cur2;
+	```
+	Initialize a temporary vector to store numbers of the current length.
 
-3. **Iterating Over Current Numbers**:
-   - We iterate over each number `x` in the current list `cur`. For each number, we extract the last digit `y` by calculating `x % 10`. This will help us determine the next digit to append to `x`.
+5. **Iteration**
+	```cpp
+	        for(int x: cur) {
+	```
+	Iterate over all numbers in the current list to build new numbers.
 
-```cpp
-                if(y + k < 10)
-                    cur2.push_back(x * 10 + y + k);
-                if(k > 0 && y - k >= 0)
-                    cur2.push_back(x * 10 + y - k);
-```
+6. **Mathematical Operation**
+	```cpp
+	            int y = x % 10;
+	```
+	Extract the last digit of the current number.
 
-4. **Generating Next Digits**:
-   - **Adding `k`**: If the digit `y + k` is less than `10`, we append this digit to `x` to form a new number. This means we are generating a valid number by adding `k` to the last digit of `x`.
-   - **Subtracting `k`**: If `k > 0` and `y - k` is greater than or equal to `0`, we append this digit to `x` to form another valid number by subtracting `k` from the last digit of `x`. The condition `k > 0` ensures we don’t generate invalid numbers when `k = 0`.
+7. **Conditional Check**
+	```cpp
+	            if(y + k < 10)
+	```
+	Check if adding `k` to the last digit yields a valid single digit.
 
-```cpp
-            cur = cur2;
-        }
-```
+8. **Vector Insertion**
+	```cpp
+	                cur2.push_back(x * 10 + y + k);
+	```
+	Add the new number formed by appending `(y + k)` to `x`.
 
-5. **Updating `cur`**:
-   - After processing all numbers in the current `cur`, we assign `cur2` back to `cur`. This means that in the next iteration, we will work with the new list of numbers that are one digit longer.
+9. **Conditional Check**
+	```cpp
+	            if(k>0 && y - k >= 0)
+	```
+	Check if subtracting `k` from the last digit yields a valid single digit.
 
-```cpp
-        return cur;
-    }
-};
-```
+10. **Vector Insertion**
+	```cpp
+	                cur2.push_back(x * 10 + y - k);
+	```
+	Add the new number formed by appending `(y - k)` to `x`.
 
-6. **Return Final Result**:
-   - Once the loop ends, `cur` contains all the valid numbers that have exactly `n` digits, and we return this list as the final result.
+11. **Variable Update**
+	```cpp
+	        cur = cur2;
+	```
+	Update `cur` to hold numbers of the current length for the next iteration.
 
-### Complexity
+12. **Return Statement**
+	```cpp
+	    return cur;
+	```
+	Return the final list of numbers meeting the criteria.
 
-- **Time Complexity**: 
-  - The time complexity is **O(n * 9 * 2^(n-1))**, where:
-    - `n` is the number of digits.
-    - The factor `9 * 2^(n-1)` represents the potential number of valid numbers that need to be generated for each `n`. For each number, at most two new digits can be appended (either by adding or subtracting `k`), and there are at most 9 starting digits.
-  
-  The complexity grows exponentially with `n`, but since each number is only evaluated once in each iteration, this approach is efficient for typical constraints.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(2^n)
+- **Average Case:** O(2^n)
+- **Worst Case:** O(2^n)
 
-- **Space Complexity**:
-  - The space complexity is **O(9 * 2^n)** because we need to store the list of valid numbers in each iteration, which can grow exponentially.
+Each number can branch into at most two new numbers at each step, resulting in 2^(n-1) numbers for length n.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(2^n)
 
-This solution provides an efficient approach to solving the problem of generating `n`-digit numbers where the absolute difference between every two consecutive digits is exactly `k`. The algorithm generates these numbers by building them iteratively, ensuring that we maintain the desired difference between consecutive digits at each step. This approach is highly efficient in terms of time complexity, as it avoids redundant checks and directly generates valid numbers. The space complexity is manageable for typical input sizes, and the solution is designed to scale well with the input constraints.
+Space used to store the current and next list of numbers during the iterative process.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/numbers-with-same-consecutive-differences/description/)
 

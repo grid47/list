@@ -14,126 +14,188 @@ img_src = ""
 youtube = "i89fYz8JX7U"
 youtube_upload_date="2024-04-06"
 youtube_thumbnail="https://i.ytimg.com/vi/i89fYz8JX7U/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are in a building with multiple rooms, each containing a set of keys to unlock other rooms. Initially, only the first room (room 0) is unlocked. You are tasked with determining whether you can visit all the rooms, starting from room 0. To enter a locked room, you must have its corresponding key, which can only be obtained by visiting other rooms.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D array 'rooms' where each rooms[i] contains a list of keys that can be obtained by visiting room i. Each key in the list unlocks a specific room in the building. Your goal is to check if it's possible to visit all rooms starting from room 0.
+- **Example:** `Input: rooms = [[1, 2], [3], [3], [0]]`
+- **Constraints:**
+	- 2 <= n <= 1000
+	- 0 <= rooms[i].length <= 1000
+	- 1 <= sum(rooms[i].length) <= 3000
+	- 0 <= rooms[i][j] < n
+	- All the values in rooms[i] are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        vector<bool> vis(rooms.size(), false);
-        vis[0] = true;
-        dfs(rooms, vis, 0);
-        
-        for(auto x: vis)
-            if(!x) return x;
-        
-        return true;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it's possible to visit all rooms starting from room 0; otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean value: true if all rooms can be visited, false otherwise.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to use a depth-first search (DFS) approach to simulate visiting each room and collecting keys. Keep track of which rooms have been visited, and ensure all rooms can be visited by collecting the necessary keys.
+
+- Step 1: Initialize a 'visited' array to track rooms that have been visited.
+- Step 2: Use DFS starting from room 0, visiting all rooms that can be unlocked by the keys you collect.
+- Step 3: Once all rooms are visited, return true. If there are any rooms that remain unvisited, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each room contains a list of keys, which might allow access to other rooms.
+- Starting at room 0, it is possible to gather keys to unlock additional rooms.
+- The solution assumes that a DFS approach will help in determining whether all rooms can be visited.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [[1, 2], [3], [3], [0]]`  \
+  **Explanation:** Starting from room 0, we can collect key 1 and visit room 1. From room 1, we collect key 3 and visit room 3. Finally, from room 3, we collect key 0 and can visit all rooms.
+
+- **Input:** `Input: [[1,3],[3,0,1],[2],[0]]`  \
+  **Explanation:** Here, starting from room 0, we collect key 1 and visit room 1. However, we cannot access room 2 because the only key to room 2 is located in room 2 itself, which remains locked.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a depth-first search (DFS) strategy. Starting at room 0, we explore all accessible rooms by collecting keys. The DFS approach will ensure we cover all possible rooms that can be reached by following the key-paths.
+
+### Initial Thoughts 💭
+- We need to visit rooms iteratively, collecting keys along the way.
+- DFS is a good fit for this problem, as it allows us to explore all reachable rooms from room 0.
+- It is crucial to maintain a visited set to ensure we do not revisit rooms and fall into an infinite loop.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input or a grid with fewer than 2 rooms would not be valid according to the constraints.
+- If the number of rooms is large, ensure the DFS traversal is efficient enough to handle up to 1000 rooms.
+- Ensure that rooms with no keys and rooms that cannot be unlocked are handled properly.
+- The grid dimensions and key relationships should be carefully handled to ensure correctness.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canVisitAllRooms(vector<vector<int>>& rooms) {
+    vector<bool> vis(rooms.size(), false);
+    vis[0] = true;
+    dfs(rooms, vis, 0);
     
-    void dfs(vector<vector<int>>& rooms, vector<bool> &vis, int cur) {
-        vis[cur] = true;
-        for(auto x: rooms[cur]) {
-            if(!vis[x])
-                dfs(rooms, vis, x);
-        }
+    for(auto x: vis)
+        if(!x) return x;
+    
+    return true;
+}
+
+void dfs(vector<vector<int>>& rooms, vector<bool> &vis, int cur) {
+    vis[cur] = true;
+    for(auto x: rooms[cur]) {
+        if(!vis[x])
+            dfs(rooms, vis, x);
     }
-};
-{{< /highlight >}}
----
+}
+```
 
-### Problem Statement
+This function checks if all rooms can be visited, utilizing depth-first search (DFS) to explore the rooms recursively.
 
-The problem asks whether it is possible to visit all rooms starting from room 0 in a house represented by a 2D array, where each room contains a list of keys to other rooms. Specifically, the problem involves determining whether starting from room 0, we can use the keys in each room to unlock all other rooms. Each key in a room allows you to open a specific other room, and once opened, you can access the keys from that room and continue your exploration.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool canVisitAllRooms(vector<vector<int>>& rooms) {
+	```
+	This is the function declaration for `canVisitAllRooms`, which checks if all rooms can be visited starting from room 0.
 
-The task is to return `true` if it is possible to visit all rooms starting from room 0, and `false` otherwise.
+2. **Variable Initialization**
+	```cpp
+	    vector<bool> vis(rooms.size(), false);
+	```
+	A vector `vis` is initialized to track whether each room has been visited. All rooms are initially marked as not visited.
 
-### Approach
+3. **Set Start Room**
+	```cpp
+	    vis[0] = true;
+	```
+	The starting room (room 0) is marked as visited.
 
-To solve this problem, we can treat the house as a graph, where each room is a node, and the keys represent edges between the rooms. The goal is to check if, starting from room 0, we can reach all other rooms. This problem can be solved using graph traversal techniques, specifically Depth-First Search (DFS), since it allows us to explore all reachable nodes from a starting node.
+4. **DFS Call**
+	```cpp
+	    dfs(rooms, vis, 0);
+	```
+	The depth-first search (DFS) function is called to explore all rooms starting from room 0.
 
-Here’s how we approach the solution:
+5. **Loop Through Visited Rooms**
+	```cpp
+	    for(auto x: vis)
+	```
+	A loop iterates through the `vis` vector to check if all rooms have been visited.
 
-1. **Graph Representation**: 
-   - The rooms are represented as a 2D vector where each index corresponds to a room, and each entry in a room is a list of keys (room indices) that the room provides.
-   - We start at room 0 and aim to explore all rooms by visiting each room’s keys.
+6. **Return False if Any Room is Unvisited**
+	```cpp
+	        if(!x) return x;
+	```
+	If any room has not been visited, the function immediately returns `false`.
 
-2. **Tracking Visited Rooms**:
-   - To track the rooms we’ve already visited, we use a `visited` vector initialized to `false` for all rooms. When we visit a room, we mark it as `true` in the `visited` array.
-   - The traversal is initiated from room 0, and we explore all connected rooms by visiting each room’s keys.
+7. **Return True if All Rooms are Visited**
+	```cpp
+	    return true;
+	```
+	If all rooms are visited, the function returns `true`.
 
-3. **Depth-First Search (DFS)**:
-   - The DFS algorithm is ideal for this problem because it explores as far as possible along each branch before backtracking. Starting from room 0, we recursively visit all rooms that can be unlocked by the keys in each room.
-   - If, at the end of the traversal, all rooms are marked as visited, then all rooms are reachable, and we return `true`. If any room is not visited, we return `false`.
+8. **Empty Line**
+	```cpp
+	
+	```
+	An empty line for code separation.
 
-4. **Termination**:
-   - After performing DFS, we simply check if all rooms are visited. If any room is unvisited, it means that room is inaccessible from room 0, and the answer should be `false`.
+9. **DFS Function Declaration**
+	```cpp
+	void dfs(vector<vector<int>>& rooms, vector<bool> &vis, int cur) {
+	```
+	This is the function declaration for `dfs`, which performs depth-first search to visit rooms recursively.
 
-### Code Breakdown (Step by Step)
+10. **Mark Current Room as Visited**
+	```cpp
+	    vis[cur] = true;
+	```
+	The current room is marked as visited.
 
-Let’s break down the code into its main components:
+11. **Loop Through Current Room's Neighbors**
+	```cpp
+	    for(auto x: rooms[cur]) {
+	```
+	The function loops through the rooms connected to the current room (`cur`) and recursively visits them if they haven't been visited.
 
-1. **Function Signature**:
-   ```cpp
-   bool canVisitAllRooms(vector<vector<int>>& rooms)
-   ```
-   This function takes a 2D vector `rooms`, where each subvector represents the list of keys available in each room. It returns `true` if all rooms are accessible from room 0, and `false` otherwise.
+12. **Check if Neighbor is Visited**
+	```cpp
+	        if(!vis[x])
+	```
+	The function checks if a neighboring room has been visited. If not, it proceeds to visit it.
 
-2. **Initialize Visited Vector**:
-   ```cpp
-   vector<bool> vis(rooms.size(), false);
-   vis[0] = true;
-   ```
-   - `vis` is a boolean vector of size equal to the number of rooms. It tracks whether each room has been visited during DFS.
-   - We initialize all rooms as not visited (`false`), and we set room 0 as visited (`true`) because we start from there.
+13. **Recursive DFS Call**
+	```cpp
+	            dfs(rooms, vis, x);
+	```
+	A recursive call to the DFS function is made to visit the neighboring room (`x`).
 
-3. **Perform Depth-First Search (DFS)**:
-   ```cpp
-   dfs(rooms, vis, 0);
-   ```
-   - We call the DFS function to start the exploration from room 0. This will visit all reachable rooms from room 0.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n + k)
+- **Worst Case:** O(n + k)
 
-4. **DFS Function**:
-   ```cpp
-   void dfs(vector<vector<int>>& rooms, vector<bool>& vis, int cur) {
-       vis[cur] = true;
-       for (auto x : rooms[cur]) {
-           if (!vis[x]) {
-               dfs(rooms, vis, x);
-           }
-       }
-   }
-   ```
-   - The DFS function takes the `rooms` array, the `visited` vector `vis`, and the current room index `cur` as arguments.
-   - We first mark the current room as visited (`vis[cur] = true`).
-   - Then, for each key in the current room (`rooms[cur]`), we recursively call DFS for any room that has not been visited yet (`if (!vis[x])`).
+The time complexity is proportional to the number of rooms (n) and the number of keys (k) that need to be processed during the DFS traversal.
 
-5. **Check if All Rooms are Visited**:
-   ```cpp
-   for (auto x : vis)
-       if (!x) return x;
-   return true;
-   ```
-   - After the DFS traversal, we check if all rooms have been visited. If any room is unvisited (`!x`), we return `false`. If all rooms have been visited, we return `true`.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n + k)
 
-6. **Return Result**:
-   - Finally, we return `true` if all rooms are visited, meaning all rooms can be accessed starting from room 0.
+The space complexity is dependent on the space needed to track the visited rooms and the keys collected, which is O(n + k).
 
-### Complexity
+**Happy Coding! 🎉**
 
-1. **Time Complexity**:
-   - The time complexity of this solution is **O(R + K)**, where `R` is the number of rooms, and `K` is the total number of keys (i.e., the total number of elements in all the rooms' key lists). This is because, in the worst case, we visit each room once and each key once while performing DFS. Therefore, the time complexity is linear in terms of the number of rooms and keys in total.
-
-2. **Space Complexity**:
-   - The space complexity is **O(R + K)** as well because we store the `visited` vector of size `R` and the recursive call stack for DFS, which can be at most `R` deep. Additionally, the space required to store the keys in each room contributes to the total space complexity.
-
-### Conclusion
-
-In conclusion, this solution efficiently checks whether all rooms can be visited starting from room 0 using Depth-First Search (DFS). By marking rooms as visited and recursively exploring each room’s keys, we ensure that we only visit each room once. The time and space complexities of the solution are both linear in terms of the number of rooms and keys, making this approach efficient for solving the problem even for large grids. This method leverages standard graph traversal techniques and is well-suited for problems involving connectivity in graphs or grids.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/keys-and-rooms/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Pzg3bCDY87w"
 youtube_upload_date="2022-01-19"
 youtube_thumbnail="https://i.ytimg.com/vi/Pzg3bCDY87w/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,130 +28,245 @@ youtube_thumbnail="https://i.ytimg.com/vi/Pzg3bCDY87w/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a lock with 4 rotating wheels, each containing 10 slots labeled '0' to '9'. The wheels can rotate freely and wrap around. You must determine the minimum number of moves required to reach a target lock configuration, avoiding certain deadends.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of deadends and a target string, representing the lock's target configuration.
+- **Example:** `deadends = ['0201', '0101', '0102', '1212', '2002'], target = '0202'`
+- **Constraints:**
+	- 1 <= deadends.length <= 500
+	- deadends[i].length == 4
+	- target.length == 4
+	- target will not be in the list of deadends
+	- target and deadends[i] consist of digits only
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int openLock(vector<string>& deadends, string target) {
-        unordered_set<string> dead(deadends.begin(), deadends.end());
-        if (dead.count("0000")) return -1;
-        queue<string> q({"0000"});
-        
-        for(int turn = 0;!q.empty(); turn++) {
-            for(int i = q.size(); i > 0; i--) {
-                auto curr = q.front(); q.pop();
-                cout << curr << ' ' << target << endl;
-                if (curr == target) return turn;
-                for(auto it : neighbours(curr)) {
-                    if(dead.count(it)) continue;
-                    dead.insert(it);
-                    q.push(it);
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of turns required to reach the target configuration, or -1 if it is impossible.
+- **Example:** `For deadends = ['0201', '0101', '0102', '1212', '2002'] and target = '0202', the output is 6.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the shortest path from '0000' to the target configuration, avoiding deadends.
+
+- Use a breadth-first search (BFS) starting from '0000'.
+- At each step, generate all possible valid configurations by rotating one of the wheels.
+- If the generated configuration is a deadend, skip it.
+- If the configuration matches the target, return the number of moves taken to reach it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input deadends and target strings consist only of digits between '0' and '9'.
+- The target configuration is not present in the list of deadends.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `deadends = ['0201', '0101', '0102', '1212', '2002'], target = '0202'`  \
+  **Explanation:** Starting from '0000', the sequence '0000' -> '1000' -> '1100' -> '1200' -> '1201' -> '1202' -> '0202' leads to the target, taking 6 moves.
+
+- **Input:** `deadends = ['8888'], target = '0009'`  \
+  **Explanation:** Starting from '0000', the sequence '0000' -> '0009' requires just 1 move.
+
+- **Input:** `deadends = ['8887', '8889', '8878', '8898', '8788', '8988', '7888', '9888'], target = '8888'`  \
+  **Explanation:** It is impossible to reach the target without hitting a deadend.
+
+{{< dots >}}
+## Approach 🚀
+Use BFS to explore all possible configurations starting from '0000', avoiding deadends, and tracking the number of moves to reach the target.
+
+### Initial Thoughts 💭
+- BFS is an ideal approach for finding the shortest path in an unweighted graph of configurations.
+- Each valid configuration can be viewed as a node, and each move as an edge connecting nodes. The BFS ensures the shortest path to the target.
+{{< dots >}}
+### Edge Cases 🌐
+- The constraints guarantee at least one deadend and one target configuration, so empty inputs are not possible.
+- The BFS approach handles up to 500 deadends efficiently.
+- The initial configuration '0000' cannot be a deadend.
+- The algorithm should efficiently handle up to 500 deadends and a target of length 4.
+{{< dots >}}
+## Code 💻
+```cpp
+int openLock(vector<string>& deadends, string target) {
+    unordered_set<string> dead(deadends.begin(), deadends.end());
+    if (dead.count("0000")) return -1;
+    queue<string> q({"0000"});
+    
+    for(int turn = 0;!q.empty(); turn++) {
+        for(int i = q.size(); i > 0; i--) {
+            auto curr = q.front(); q.pop();
+            cout << curr << ' ' << target << endl;
+            if (curr == target) return turn;
+            for(auto it : neighbours(curr)) {
+                if(dead.count(it)) continue;
+                dead.insert(it);
+                q.push(it);
             }
         }
-        return -1;
     }
+    return -1;
+}
 
-    vector<string> neighbours(const string &code) {
-        vector<string> res;
-        for(int i = 0; i < 4; i++) {
-            for(int diff = -1; diff <= 1; diff++) {
-                string nei = code;
-                nei[i] = (nei[i] - '0' + diff + 10) % 10 + '0';
-                res.push_back(nei);
-            }
+vector<string> neighbours(const string &code) {
+    vector<string> res;
+    for(int i = 0; i < 4; i++) {
+        for(int diff = -1; diff <= 1; diff++) {
+            string nei = code;
+            nei[i] = (nei[i] - '0' + diff + 10) % 10 + '0';
+            res.push_back(nei);
         }
-        return res;
     }
+    return res;
+}
 
-};
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This function solves the problem of opening a lock with a set of deadends, using a breadth-first search (BFS) approach to explore all possible states. It returns the minimum number of turns required to reach the target lock combination, or -1 if it's impossible.
 
-The problem asks us to find the minimum number of turns required to unlock a combination lock, starting from the "0000" combination and aiming to reach a target combination, while avoiding certain "deadends." Each turn allows us to change one digit of the combination by either increasing or decreasing it by one, and we are provided with a list of "deadends," which are combinations that we should avoid. The task is to return the minimum number of turns required to reach the target combination or `-1` if it's not possible.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int openLock(vector<string>& deadends, string target) {
+	```
+	Defines the main function 'openLock' which takes a list of deadends and the target string. It attempts to open the lock by exploring all valid moves.
 
-### Approach
+2. **Initialization**
+	```cpp
+	    unordered_set<string> dead(deadends.begin(), deadends.end());
+	```
+	Initializes the 'dead' set with the deadends, preventing any movement into these states during the BFS traversal.
 
-To solve this problem, we can use **Breadth-First Search (BFS)**. BFS is ideal for problems like this because it explores all possibilities level by level, ensuring that the first time we encounter the target combination, we have found the shortest path (minimum number of turns).
+3. **Edge Case**
+	```cpp
+	    if (dead.count("0000")) return -1;
+	```
+	Checks if the starting point ('0000') is in the deadends. If it is, the lock cannot be opened, and the function returns -1.
 
-Here’s a step-by-step breakdown of how we can apply BFS to this problem:
+4. **Initialization**
+	```cpp
+	    queue<string> q({"0000"});
+	```
+	Initializes the queue with the starting point ('0000'), which is the initial state of the lock.
 
-1. **Initial State**: Start with the combination "0000."
-2. **Queue**: Use a queue to explore all possible combinations. Each element in the queue represents a combination we can reach from the current state, and the queue will hold combinations for which we still need to explore their neighbors.
-3. **Deadends**: Maintain a set of "deadends" (combinations we should avoid), and skip any combination that is in the "deadends" set.
-4. **Neighbor Exploration**: For each combination, generate all its neighbors by changing one digit at a time, either increasing or decreasing it by 1. This step generates the next valid combinations we can explore.
-5. **Track Turns**: Track the number of turns or levels of BFS that have been completed to reach a particular combination.
-6. **Termination**: If we reach the target combination, return the number of turns. If the queue is empty and we haven’t reached the target, return `-1` to indicate that it's impossible to reach the target.
+5. **BFS Loop**
+	```cpp
+	    for(int turn = 0;!q.empty(); turn++) {
+	```
+	A loop that continues as long as the queue is not empty, incrementing the 'turn' at each level of BFS.
 
-### Code Breakdown (Step by Step)
+6. **BFS Iteration**
+	```cpp
+	        for(int i = q.size(); i > 0; i--) {
+	```
+	Iterates over all elements in the queue at the current level (turn), processing each one by one.
 
-1. **Initialization**:
-   - We first convert the `deadends` vector into an unordered set for fast lookup. This allows us to quickly check if a combination is a deadend.
-   - If "0000" is a deadend, immediately return `-1` since we can't start from there.
-   - Initialize the queue with the starting combination "0000" and begin BFS.
-   ```cpp
-   unordered_set<string> dead(deadends.begin(), deadends.end());
-   if (dead.count("0000")) return -1;
-   queue<string> q({"0000"});
-   ```
+7. **Queue Operation**
+	```cpp
+	            auto curr = q.front(); q.pop();
+	```
+	Pops the front element from the queue and assigns it to 'curr', representing the current lock state.
 
-2. **BFS Loop**:
-   - The BFS loop continues until the queue is empty. Each iteration of BFS represents a "turn" or level of exploration.
-   - For each turn, we process each element in the queue. For every combination in the queue, we generate its neighbors and add them to the queue if they are not deadends and haven’t been visited yet.
-   ```cpp
-   for (int turn = 0; !q.empty(); turn++) {
-       for (int i = q.size(); i > 0; i--) {
-           auto curr = q.front(); q.pop();
-           cout << curr << ' ' << target << endl;  // For debugging
-           if (curr == target) return turn;
-           for (auto it : neighbours(curr)) {
-               if (dead.count(it)) continue;
-               dead.insert(it);  // Mark as visited
-               q.push(it);
-           }
-       }
-   }
-   return -1;  // If the queue is empty and target is not found
-   ```
+8. **Goal Check**
+	```cpp
+	            if (curr == target) return turn;
+	```
+	Checks if the current state matches the target. If so, returns the number of turns taken to reach it.
 
-3. **Generating Neighbors**:
-   - For each combination, the function `neighbours()` generates all the possible combinations by changing one digit at a time, either increasing or decreasing that digit by one. This is done for each of the four digits in the combination.
-   - Each change is computed in the following way: for each digit, we add 1 (clockwise) or subtract 1 (counterclockwise) and apply modulo 10 to wrap around the digit. This ensures we can handle changes from '9' to '0' and vice versa.
-   ```cpp
-   vector<string> neighbours(const string &code) {
-       vector<string> res;
-       for (int i = 0; i < 4; i++) {
-           for (int diff = -1; diff <= 1; diff++) {
-               string nei = code;
-               nei[i] = (nei[i] - '0' + diff + 10) % 10 + '0';
-               res.push_back(nei);
-           }
-       }
-       return res;
-   }
-   ```
+9. **Exploration**
+	```cpp
+	            for(auto it : neighbours(curr)) {
+	```
+	Loops through all the possible neighbouring states of the current state by calling the 'neighbours' function.
 
-4. **Termination**:
-   - The BFS loop terminates either when we find the target combination, in which case we return the number of turns taken, or when the queue is empty and the target is not found, indicating it's impossible to reach the target.
+10. **Deadend Check**
+	```cpp
+	                if(dead.count(it)) continue;
+	```
+	Checks if a neighbouring state is a deadend. If it is, it is skipped.
 
-### Complexity Analysis
+11. **State Exploration**
+	```cpp
+	                dead.insert(it);
+	```
+	Marks the neighbouring state as visited by inserting it into the 'dead' set.
 
-- **Time Complexity**:
-  - Each combination is explored at most once. There are 10,000 possible combinations (from "0000" to "9999"). For each combination, we generate up to 8 neighbors (changing each of the 4 digits by +1 or -1). Thus, the time complexity is **O(10,000 * 8)**, which simplifies to **O(1)** since the number of possible combinations is constant.
-  
-- **Space Complexity**:
-  - The space complexity is dominated by the storage of combinations in the queue and the set of deadends. The queue can hold at most all possible combinations, and the set of deadends can store up to 10,000 combinations. Therefore, the space complexity is **O(10,000)**, which is also considered constant for practical purposes.
+12. **State Exploration**
+	```cpp
+	                q.push(it);
+	```
+	Pushes the valid neighbouring state into the queue to be processed in subsequent turns.
 
-### Conclusion
+13. **Failure**
+	```cpp
+	    return -1;
+	```
+	If the queue is empty and the target hasn't been reached, the function returns -1, indicating the lock cannot be opened.
 
-This solution efficiently solves the problem of finding the minimum number of turns to open the lock using a BFS approach. The key advantage of BFS is that it guarantees the shortest path to the target combination by exploring all possibilities level by level. By avoiding deadends and efficiently generating neighbors, the algorithm ensures that we can solve the problem in an optimal manner.
+14. **Neighbouring Function**
+	```cpp
+	vector<string> neighbours(const string &code) {
+	```
+	Defines the 'neighbours' function that takes a lock code and returns all the possible states that are one turn away.
 
-The solution is both time-efficient and space-efficient, leveraging BFS to explore all possible combinations while ensuring that we don’t revisit states unnecessarily. Additionally, using a set to track deadends and visited combinations ensures that the algorithm avoids cycles and redundant computations.
+15. **Neighbouring Function**
+	```cpp
+	    vector<string> res;
+	```
+	Initializes a vector to store the neighbouring states.
 
-This approach is scalable and well-suited for problems involving search spaces with limited size, such as this one where there are only 10,000 possible combinations. It can be extended or adapted to similar problems where BFS or graph traversal is applicable.
+16. **Loop Over Digits**
+	```cpp
+	    for(int i = 0; i < 4; i++) {
+	```
+	Iterates over each digit in the 4-digit lock code.
+
+17. **Loop Over Digits**
+	```cpp
+	        for(int diff = -1; diff <= 1; diff++) {
+	```
+	For each digit, it iterates over the possible changes (-1, 0, 1), representing turning the dial.
+
+18. **State Change**
+	```cpp
+	            string nei = code;
+	```
+	Creates a copy of the current lock code to modify.
+
+19. **State Change**
+	```cpp
+	            nei[i] = (nei[i] - '0' + diff + 10) % 10 + '0';
+	```
+	Modifies the i-th digit of the lock code by applying the change, ensuring the new digit is valid.
+
+20. **Neighbouring Function**
+	```cpp
+	            res.push_back(nei);
+	```
+	Adds the newly generated neighbour state to the results vector.
+
+21. **Neighbouring Function**
+	```cpp
+	    return res;
+	```
+	Returns the vector of all valid neighbouring states.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), when the target is '0000'.
+- **Average Case:** O(n), where n is the number of configurations explored (bounded by 10^4).
+- **Worst Case:** O(10^4), when the BFS explores all possible configurations.
+
+The time complexity is O(n) where n is the number of explored configurations, and there are at most 10^4 configurations.
+
+### Space Complexity 💾
+- **Best Case:** O(1), for trivial cases.
+- **Worst Case:** O(10^4), for the queue and visited configurations.
+
+The space complexity is O(n) where n is the number of configurations being tracked in BFS.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/open-the-lock/description/)
 

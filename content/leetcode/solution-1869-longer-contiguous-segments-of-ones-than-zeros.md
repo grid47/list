@@ -14,114 +14,156 @@ img_src = ""
 youtube = "K0WT66cPNmo"
 youtube_upload_date="2021-05-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/K0WT66cPNmo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string s. Your task is to determine whether the longest contiguous segment of 1's is strictly longer than the longest contiguous segment of 0's. Return true if this condition holds, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary string s containing only '0' and '1'.
+- **Example:** `"101100101"`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- s[i] is either '0' or '1'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkZeroOnes(string s) {
-        int z = 0, o = 0, gz = 0, oz = 0, res = 1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the longest contiguous segment of 1's is strictly longer than the longest contiguous segment of 0's; otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The result is a boolean value (true or false).
 
-        for(int i = 0; i < s.size(); i++) {
-            if(s[i] == '0') z++;
-            else z = 0;
-            if(s[i] == '1') o++;
-            else o = 0;
-            gz = max(gz, z);
-            oz = max(oz, o);
-        }
-        return oz > gz;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the longest contiguous segments of 1's and 0's in the binary string and compare their lengths.
 
-### Problem Statement
+- Iterate through the string to identify the lengths of contiguous segments of 1's and 0's.
+- Track the maximum length of the 1's and 0's segments.
+- Return true if the longest 1's segment is longer than the longest 0's segment; otherwise return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string s is valid, containing only '0' or '1'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"10101"`  \
+  **Explanation:** In this example, the longest contiguous segment of 1's is 2, and the longest contiguous segment of 0's is 1, so the answer is true.
 
-The objective of this problem is to analyze a binary string composed of '0's and '1's and determine whether the maximum consecutive occurrences of '1's are greater than the maximum consecutive occurrences of '0's. Essentially, we need to identify the longest sequence of '1's and '0's in the string and compare their lengths. If the length of the longest sequence of '1's exceeds that of '0's, the function should return `true`; otherwise, it should return `false`.
+{{< dots >}}
+## Approach 🚀
+The approach is to scan through the binary string, track the longest contiguous segments of 1's and 0's, and then compare their lengths.
 
-### Approach
-
-To efficiently solve this problem, we will employ a single-pass algorithm that traverses the binary string only once. During this traversal, we will maintain counters for the current streak of '1's and '0's. We will also keep track of the maximum streaks found for both characters. Here are the main steps involved in our approach:
-
-1. **Initialization**: Start by initializing counters for the current counts of '0's and '1's as well as the maximum counts found during the traversal.
-
-2. **Single Pass through the String**: Iterate through each character in the string:
-   - If the character is '0', increment the zero counter and reset the one counter.
-   - If the character is '1', increment the one counter and reset the zero counter.
-   - After updating the counters, compare the current counts with the maximum counts found so far and update them accordingly.
-
-3. **Final Comparison**: After traversing the entire string, compare the maximum counts of '1's and '0's. Return `true` if the maximum count of '1's is greater than that of '0's; otherwise, return `false`.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: The implementation begins by defining the class `Solution`, which contains the method to solve the problem.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: We declare the public method `checkZeroOnes`, which takes a string as input and returns a boolean value.
-
-    ```cpp
-    bool checkZeroOnes(string s) {
-    ```
-
-3. **Variable Initialization**: We initialize several integer variables:
-   - `z` to keep track of the current count of '0's.
-   - `o` to keep track of the current count of '1's.
-   - `gz` to store the maximum count of '0's found during the traversal.
-   - `oz` to store the maximum count of '1's found during the traversal.
-   - `res` is initialized to 1 but is unused in the final implementation.
-
-    ```cpp
+### Initial Thoughts 💭
+- We need to handle both the 1's and 0's segments efficiently.
+- It would be efficient to iterate through the string once and calculate the maximum lengths of both 1's and 0's.
+{{< dots >}}
+### Edge Cases 🌐
+- The string is never empty based on the given constraints.
+- For large strings, the approach should still work in O(n) time complexity.
+- When the string consists entirely of 0's or 1's, the answer should be determined based on the other segment's length being 0.
+- Handle strings with a mix of 1's and 0's, as well as strings consisting of only 1's or only 0's.
+{{< dots >}}
+## Code 💻
+```cpp
+bool checkZeroOnes(string s) {
     int z = 0, o = 0, gz = 0, oz = 0, res = 1;
-    ```
 
-4. **Iterating through the String**: A `for` loop iterates through each character of the string `s`.
-
-    ```cpp
     for(int i = 0; i < s.size(); i++) {
-    ```
-
-5. **Counting '0's and '1's**: Inside the loop, we check the character at the current position:
-   - If it is '0', we increment the zero counter (`z`) and reset the one counter (`o`).
-   - If it is '1', we increment the one counter (`o`) and reset the zero counter (`z`).
-
-    ```cpp
-    if(s[i] == '0') z++;
-    else z = 0;
-    if(s[i] == '1') o++;
-    else o = 0;
-    ```
-
-6. **Updating Maximum Counts**: After updating the counts, we compare the current counts with the maximum counts found so far and update them if the current counts exceed the maximums.
-
-    ```cpp
-    gz = max(gz, z);
-    oz = max(oz, o);
-    ```
-
-7. **Returning the Result**: After exiting the loop, we compare the maximum counts of '1's and '0's. If the maximum count of '1's (`oz`) is greater than that of '0's (`gz`), we return `true`; otherwise, we return `false`.
-
-    ```cpp
-    return oz > gz;
+        if(s[i] == '0') z++;
+        else z = 0;
+        if(s[i] == '1') o++;
+        else o = 0;
+        gz = max(gz, z);
+        oz = max(oz, o);
     }
-    ```
+    return oz > gz;
+}
+```
 
-### Complexity
+This code defines a function `checkZeroOnes` that checks if the longest contiguous sequence of 1's in a given binary string is longer than the longest contiguous sequence of 0's. The function keeps track of the count of consecutive 0's and 1's, updates the maximum counts, and returns whether the sequence of 1's is longer than the sequence of 0's.
 
-The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input string. This is because we perform a single traversal of the string, making constant-time operations at each step. The space complexity is \(O(1)\) since we are using a fixed amount of extra space for the counters and do not depend on the size of the input.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkZeroOnes(string s) {
+	```
+	Define the `checkZeroOnes` function, which accepts a string `s` representing a binary number and returns a boolean indicating whether the longest sequence of 1's is longer than the longest sequence of 0's.
 
-### Conclusion
+2. **Variable Declaration**
+	```cpp
+	    int z = 0, o = 0, gz = 0, oz = 0, res = 1;
+	```
+	Declare integer variables to track the number of consecutive 0's (`z`), 1's (`o`), and their respective maximum counts (`gz` for 0's and `oz` for 1's). A variable `res` is also initialized but not used in this implementation.
 
-In conclusion, the provided implementation of the `checkZeroOnes` method effectively determines if the longest sequence of '1's in a binary string exceeds the longest sequence of '0's. The algorithm is optimized for performance, operating in linear time with constant space usage, making it suitable for large input strings. By leveraging simple counting mechanisms and a single traversal approach, this solution is both straightforward and efficient. This implementation can serve as a reference for similar problems involving counting or comparing sequences in strings, showcasing the utility of linear traversal techniques in solving combinatorial challenges effectively. Overall, this code exemplifies clarity and efficiency, making it a solid contribution to algorithm design discussions.
+3. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Start a loop that iterates over each character in the input string `s`.
+
+4. **Condition Check (Zero)**
+	```cpp
+	        if(s[i] == '0') z++;
+	```
+	Check if the current character is '0'. If true, increment the count of consecutive 0's (`z`).
+
+5. **Reset Zero Count**
+	```cpp
+	        else z = 0;
+	```
+	If the current character is not '0', reset the count of consecutive 0's (`z`) to 0.
+
+6. **Condition Check (One)**
+	```cpp
+	        if(s[i] == '1') o++;
+	```
+	Check if the current character is '1'. If true, increment the count of consecutive 1's (`o`).
+
+7. **Reset One Count**
+	```cpp
+	        else o = 0;
+	```
+	If the current character is not '1', reset the count of consecutive 1's (`o`) to 0.
+
+8. **Update Max Zero Count**
+	```cpp
+	        gz = max(gz, z);
+	```
+	Update the maximum count of consecutive 0's (`gz`) to the greater of the current `gz` and the current count of consecutive 0's (`z`).
+
+9. **Update Max One Count**
+	```cpp
+	        oz = max(oz, o);
+	```
+	Update the maximum count of consecutive 1's (`oz`) to the greater of the current `oz` and the current count of consecutive 1's (`o`).
+
+10. **Return Statement**
+	```cpp
+	    return oz > gz;
+	```
+	Return a boolean indicating whether the longest sequence of 1's (`oz`) is greater than the longest sequence of 0's (`gz`).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of the string.
+- **Average Case:** O(n) for each scan through the string.
+- **Worst Case:** O(n) for a string of length n, as we must traverse the entire string.
+
+The time complexity is linear because we only iterate through the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1) for the same reason.
+- **Worst Case:** O(1) since we are using only a few variables to track the maximum segment lengths.
+
+The space complexity is constant because no additional data structures are needed.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longer-contiguous-segments-of-ones-than-zeros/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,136 +28,225 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+In a file system where both directories and files are stored, we are given a string representation of the system. The string includes the directory structure, with tab characters ('\t') representing subdirectories and newline characters ('\n') representing file and directory boundaries. Each directory and file has a unique absolute path. Compute the length of the longest absolute path to a file. If no file exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string representing the file system's directory and file structure, with directories and files separated by newline ('\n') characters, and subdirectories indicated by tab ('\t') characters.
+- **Example:** `input = "root\n\tsubfolder1\n\tsubfolder2\n\t\tfile1.txt"`
+- **Constraints:**
+	- 1 <= input.length <= 10^4
+	- The input may contain lowercase and uppercase English letters, newline ('\n') and tab ('\t') characters, a dot ('.'), space (' '), and digits.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int lengthLongestPath(string ipt) {
-        
-        vector<int> levels(300, 0);
-        
-        int level = 0;
-        bool isFile = false;
-        int ans = 0;
-        int len = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest absolute path to a file. If no file exists, return 0.
+- **Example:** `Output: 21`
+- **Constraints:**
+	- The path length should include the full path to the file, including directory names separated by '/'.
 
-        for(char c: ipt) {
-            switch(c) {
-                case '\n':
-                    level = 0, isFile = false, len = 0; break;
-                case '\t':
-                    level++; break;
-                case '.':
-                    isFile = true;
-                default:
-                    len++;
-                    levels[level] = len;
-                    if(isFile) {
-                        ans = max(ans, accumulate(levels.begin(), levels.begin() + level + 1, 0) + level); 
-                    }
-            }
-        }
-        return ans;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the absolute path length of the longest file in the system.
 
-    }
-};
-{{< /highlight >}}
----
+- Parse the string input to identify directory levels and files.
+- Track the current directory level using a stack-like structure.
+- Calculate the absolute path for each file and track the longest path found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input represents a valid file system structure with no file or directory names having length 0.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: "root\n\tsubfolder1\n\tsubfolder2\n\t\tfile1.txt"`  \
+  **Explanation:** The longest file path is 'root/subfolder2/file1.txt', which has a length of 21.
 
-### 🚀 Problem Statement
+{{< dots >}}
+## Approach 🚀
+We will use a stack to track the length of the current path as we process each directory or file. When we encounter a file, we calculate its total path length and check if it is the longest file path encountered so far.
 
-The task is to find the **length of the longest absolute path to a file** in a file system, represented as a string. The string includes file and directory names, with each level of the file system being separated by a newline (`\n`). Directories are represented by names with possible tabs (`\t`) indicating their depth. A file is identified by the presence of a dot (`.`) in its name. 
-
-We need to compute the longest path to any file, where the path is the sum of the lengths of directory and file names along the way from the root.
-
-For example, given `s = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"`, the longest path is `"dir/subdir2/file.ext"`, which has a length of 18.
-
----
-
-### 🧠 Approach
-
-We can solve this problem by simulating a **file system traversal**. Here's the step-by-step breakdown:
-
-1. **Track Depth Levels**: 
-   Every directory or file name is indented by tabs (`\t`). The number of tabs tells us the depth of the item in the file system hierarchy.
-   
-2. **Accumulate Path Lengths**: 
-   As we process each line, we maintain the cumulative length of the path up to that level in the file system using an array called `levels`. This array keeps track of the path length at each depth level.
-
-3. **Detect Files**: 
-   Files are identified by the presence of a dot (`.`) in their name. Whenever we encounter a file, we compute the total path length by summing the path lengths of its parent directories and adding the length of the file name itself.
-
-4. **Track Maximum Length**: 
-   The key goal is to find the longest possible path. So, we continuously update the maximum path length as we encounter files.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Here’s the code that implements the above approach:
-
+### Initial Thoughts 💭
+- We need to differentiate between directories and files, which can be done by checking for a dot ('.') in the name.
+- We can iterate through the string, updating the current path length as we encounter new levels of directories and calculating the file's path length when we find a file.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty input will not be provided as per the problem statement.
+- Ensure that the algorithm handles inputs with the maximum allowed length efficiently.
+- The input may consist only of directories, in which case the result should be 0.
+- Ensure the algorithm handles deeply nested structures and large numbers of files.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int lengthLongestPath(string input) {
-        vector<int> levels(300, 0);  // Array to store path lengths at each level
-        int level = 0;  // Current depth level in the file system
-        int ans = 0;  // Store the longest path length found
-        int len = 0;  // Length of the current directory or file name
-        bool isFile = false;  // Flag to check if the current item is a file
+int lengthLongestPath(string ipt) {
+    
+    vector<int> levels(300, 0);
+    
+    int level = 0;
+    bool isFile = false;
+    int ans = 0;
+    int len = 0;
 
-        // Iterate through each character of the input string
-        for (char c : input) {
-            switch (c) {
-                case '\n':  // Newline indicates a new entry
-                    level = 0, isFile = false, len = 0;  // Reset for new line
-                    break;
-                case '\t':  // Tab indicates a deeper level
-                    level++;  // Increase the depth level
-                    break;
-                case '.':  // Dot indicates a file
-                    isFile = true;  // Mark as a file
-                    // No need for default case here
-                default:
-                    len++;  // Increment the length of the current name
-                    levels[level] = len;  // Update the path length at this level
-                    // If it's a file, calculate the total path length
-                    if (isFile) {
-                        ans = max(ans, accumulate(levels.begin(), levels.begin() + level + 1, 0) + level);
-                    }
-            }
+    for(char c: ipt) {
+        switch(c) {
+            case '\n':
+                level = 0, isFile = false, len = 0; break;
+            case '\t':
+                level++; break;
+            case '.':
+                isFile = true;
+            default:
+                len++;
+                levels[level] = len;
+                if(isFile) {
+                    ans = max(ans, accumulate(levels.begin(), levels.begin() + level + 1, 0) + level); 
+                }
         }
-        return ans;  // Return the longest path length found
     }
-};
+    return ans;
+
+}
 ```
 
----
+This code finds the longest file path in a directory structure. The input is a string representing the directory structure, and it returns the length of the longest file path.
 
-### 📈 Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int lengthLongestPath(string ipt) {
+	```
+	Define the function 'lengthLongestPath' that takes a string 'ipt' representing a directory structure and returns the length of the longest path to a file.
 
-- **Time Complexity**: **O(n)**, where `n` is the length of the input string. 
-  - We loop through each character in the input string once. 
-  - The `accumulate` function is called only when a file is encountered, and since there are at most `O(n)` files, the total time complexity remains linear.
+2. **Data Structure**
+	```cpp
+	    vector<int> levels(300, 0);
+	```
+	Declare a vector 'levels' to store the length of the current path at each level (up to 300 levels).
 
-- **Space Complexity**: **O(1)** (constant space).
-  - The `levels` array is fixed in size (`300`), so its space usage does not depend on the input size.
-  - The input string takes up `O(n)` space, but this space is provided by the problem and does not count toward the algorithm’s space complexity.
+3. **Variable Initialization**
+	```cpp
+	    int level = 0;
+	```
+	Initialize 'level' to keep track of the current level in the directory structure.
 
----
+4. **Variable Initialization**
+	```cpp
+	    bool isFile = false;
+	```
+	Initialize 'isFile' to check if the current string represents a file.
 
-### 🏁 Conclusion
+5. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize 'ans' to store the length of the longest file path.
 
-This solution efficiently finds the **longest absolute path to a file** in a file system represented as a string. The key idea is to simulate a file system traversal while maintaining cumulative path lengths for each directory level. By updating the longest path each time we encounter a file, we ensure that the solution remains efficient with a time complexity of **O(n)**.
+6. **Variable Initialization**
+	```cpp
+	    int len = 0;
+	```
+	Initialize 'len' to store the current length of the path being processed.
 
-### 🎯 Key Takeaways:
-- **Two main operations**: Track depth with tabs and accumulate path lengths dynamically.
-- **File detection** is easy with the dot (`.`) character.
-- **Optimal Time Complexity** of **O(n)** for large inputs.
-- **Constant Space Complexity** of **O(1)** due to the fixed-size array used for path tracking.
+7. **Loop Iteration**
+	```cpp
+	    for(char c: ipt) {
+	```
+	Start a loop to iterate through each character in the input string 'ipt'.
 
-With this approach, you’re ready to tackle any file system structure efficiently! 🚀 Happy coding! 💻
+8. **Switch Case**
+	```cpp
+	        switch(c) {
+	```
+	Use a switch-case statement to handle different types of characters (newlines, tabs, periods, and others).
+
+9. **Case Handling**
+	```cpp
+	            case '\n':
+	```
+	Handle the case when a newline character is encountered.
+
+10. **Reset Variables**
+	```cpp
+	                level = 0, isFile = false, len = 0; break;
+	```
+	Reset the variables 'level', 'isFile', and 'len' when encountering a newline character.
+
+11. **Case Handling**
+	```cpp
+	            case '\t':
+	```
+	Handle the case when a tab character is encountered.
+
+12. **Level Increase**
+	```cpp
+	                level++; break;
+	```
+	Increase the 'level' when a tab character is encountered (indicating a deeper directory level).
+
+13. **Case Handling**
+	```cpp
+	            case '.':
+	```
+	Handle the case when a period character is encountered (indicating a file).
+
+14. **File Check**
+	```cpp
+	                isFile = true;
+	```
+	Set 'isFile' to true when a period character is encountered, indicating that the current string is a file.
+
+15. **Default Case**
+	```cpp
+	            default:
+	```
+	Handle the default case for non-special characters (normal directory or file name characters).
+
+16. **Path Length Calculation**
+	```cpp
+	                len++;
+	```
+	Increment the 'len' for each character that is part of a directory or file name.
+
+17. **Path Length Calculation**
+	```cpp
+	                levels[level] = len;
+	```
+	Store the current path length at the given 'level'.
+
+18. **File Path Calculation**
+	```cpp
+	                if(isFile) {
+	```
+	Check if the current string is a file.
+
+19. **Max Path Length Calculation**
+	```cpp
+	                    ans = max(ans, accumulate(levels.begin(), levels.begin() + level + 1, 0) + level); 
+	```
+	If it's a file, calculate the path length by summing up the path lengths at each level and update 'ans' if it's the longest path.
+
+20. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the longest file path length stored in 'ans'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the input string.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the path lengths for each directory level in a stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-absolute-file-path/description/)
 

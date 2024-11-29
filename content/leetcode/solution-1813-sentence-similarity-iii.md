@@ -14,140 +14,201 @@ img_src = ""
 youtube = "MMMd7dMv4Ak"
 youtube_upload_date="2021-04-12"
 youtube_thumbnail="https://i.ytimg.com/vi/MMMd7dMv4Ak/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two sentences, sentence1 and sentence2, which consist of words separated by spaces. Two sentences are considered similar if you can insert any number of words (including none) into one of the sentences to make them identical. The inserted words must be separated by spaces.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Each input consists of two strings, sentence1 and sentence2, which are sentences made up of words separated by spaces.
+- **Example:** `sentence1 = "I am learning", sentence2 = "I learning"`
+- **Constraints:**
+	- sentence1.length, sentence2.length <= 100
+	- sentence1 and sentence2 consist of lowercase and uppercase English letters and spaces.
+	- The words in sentence1 and sentence2 are separated by a single space.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool areSentencesSimilar(string s1, string s2) {
-        
-        deque<string> a, b;
-        string tmp = "";
-        
-        for(char c: s1) {
-            if(c == ' ') a.push_back(tmp), tmp = "";
-            else tmp += c;
-        }
-        a.push_back(tmp), tmp = "";
-        for(char c: s2) {
-            if(c == ' ') b.push_back(tmp), tmp = "";
-            else tmp += c;
-        }        
-        b.push_back(tmp), tmp = "";
-        
-        while(a.size() != 0 && b.size() != 0 && (a.front() == b.front())) a.pop_front(), b.pop_front();
-        while(a.size() != 0 && b.size() != 0 && (a.back() == b.back())) a.pop_back(), b.pop_back();
-        
-        if(a.size() == 0 || b.size() == 0) return true;
-        return false;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the sentences can be made equal by inserting words into one of the sentences. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean indicating if the sentences are similar.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To check if one sentence can be transformed into the other by inserting words in between.
+
+- Split both sentence1 and sentence2 into individual words.
+- Find the longest common prefix and suffix between the two lists of words.
+- If one sentence can be made equal by inserting words from the other sentence in the middle, return true. Otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The sentences consist of only uppercase and lowercase English letters and spaces.
+- The words in the sentences are separated by a single space.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `sentence1 = "I am learning", sentence2 = "I learning"`  \
+  **Explanation:** The words 'I' and 'learning' are common in both sentences. You can insert 'am' between them to make the sentences identical.
+
+- **Input:** `sentence1 = "Hi there", sentence2 = "Hi"`  \
+  **Explanation:** The word 'Hi' is common in both sentences, and we can insert 'there' after 'Hi' in sentence2 to make the sentences identical.
+
+{{< dots >}}
+## Approach 🚀
+To determine if one sentence can be made identical to another, we will check for common prefix and suffix of words and allow insertion of words in between.
+
+### Initial Thoughts 💭
+- We can solve this problem by splitting the sentences into words.
+- Then, we can compare common prefixes and suffixes of the two sentences.
+- If the two sentences have a common prefix and suffix, we can insert the remaining words from one sentence into the other to make them identical.
+{{< dots >}}
+### Edge Cases 🌐
+- The sentences will not be empty as per the given constraints.
+- The solution should work efficiently within the constraint that sentence length is <= 100.
+- Consider cases where one sentence is a subset of the other or where the sentences have no common words.
+- The input strings will not contain leading or trailing spaces.
+{{< dots >}}
+## Code 💻
+```cpp
+bool areSentencesSimilar(string s1, string s2) {
+    
+    deque<string> a, b;
+    string tmp = "";
+    
+    for(char c: s1) {
+        if(c == ' ') a.push_back(tmp), tmp = "";
+        else tmp += c;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to determine whether two sentences are similar. Two sentences are considered similar if they can be made identical by removing some words from the beginning and/or the end of each sentence. 
-
-For example:
-- "My name is John" and "John" are similar.
-- "I love coding" and "I coding" are not similar.
-
-The input will consist of two strings representing the sentences, and the goal is to evaluate their similarity based on the aforementioned criteria.
-
-### Approach
-
-To solve this problem, the following approach can be employed:
-
-1. **Tokenization**: Split both sentences into individual words. This can be accomplished by iterating over each character of the strings and identifying spaces to determine where words start and end.
-
-2. **Comparison**: Utilize two pointers (or deques in this case) to compare the words from both sentences. Start from both the front and the back of the word lists and compare the words:
-   - Remove matching words from the front of both lists until a mismatch is found.
-   - Remove matching words from the back of both lists similarly.
-
-3. **Final Evaluation**: After trimming matching words from both ends, if either of the lists is empty, then the sentences are considered similar. If both lists still contain words, they are not similar.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
+    a.push_back(tmp), tmp = "";
+    for(char c: s2) {
+        if(c == ' ') b.push_back(tmp), tmp = "";
+        else tmp += c;
+    }        
+    b.push_back(tmp), tmp = "";
+    
+    while(a.size() != 0 && b.size() != 0 && (a.front() == b.front())) a.pop_front(), b.pop_front();
+    while(a.size() != 0 && b.size() != 0 && (a.back() == b.back())) a.pop_back(), b.pop_back();
+    
+    if(a.size() == 0 || b.size() == 0) return true;
+    return false;
+}
 ```
-- The `Solution` class is defined, which will contain the method for solving the problem.
 
-```cpp
-    bool areSentencesSimilar(string s1, string s2) {
-```
-- This method, `areSentencesSimilar`, takes two string parameters `s1` and `s2`, representing the sentences to be compared. The method returns a boolean value indicating whether the sentences are similar.
+This function `areSentencesSimilar` compares two sentences to check if they are similar by stripping the matching words from the start and end of both sentences. It uses two deques to split each sentence into words and removes matching words from both ends until a mismatch is found or one of the sentences is empty.
 
-```cpp
-        deque<string> a, b;
-        string tmp = "";
-```
-- Two deques `a` and `b` are declared to store the words of each sentence.
-- A temporary string `tmp` is initialized to build words as we parse through the sentences.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool areSentencesSimilar(string s1, string s2) {
+	```
+	This line defines the function `areSentencesSimilar`, which takes two strings `s1` and `s2` as input and returns a boolean value indicating whether the two sentences are similar based on their words.
 
-```cpp
-        for(char c: s1) {
-            if(c == ' ') a.push_back(tmp), tmp = "";
-            else tmp += c;
-        }
-        a.push_back(tmp), tmp = "";
-```
-- This loop iterates over each character `c` in the first sentence `s1`:
-  - If the character is a space, the current word stored in `tmp` is added to the deque `a`, and `tmp` is reset for the next word.
-  - If the character is not a space, it is appended to `tmp`.
-- After the loop, the last word is pushed into the deque to ensure no words are missed.
+2. **Deque Initialization**
+	```cpp
+	    deque<string> a, b;
+	```
+	Two deques `a` and `b` are initialized to store words from the two input sentences `s1` and `s2`.
 
-```cpp
-        for(char c: s2) {
-            if(c == ' ') b.push_back(tmp), tmp = "";
-            else tmp += c;
-        }        
-        b.push_back(tmp), tmp = "";
-```
-- A similar process is repeated for the second sentence `s2`, where words are added to the deque `b`.
+3. **Temporary Variable**
+	```cpp
+	    string tmp = "";
+	```
+	A temporary string `tmp` is initialized to accumulate characters of each word as we traverse the sentences.
 
-```cpp
-        while(a.size() != 0 && b.size() != 0 && (a.front() == b.front())) a.pop_front(), b.pop_front();
-```
-- This loop checks and removes matching words from the front of both deques until a mismatch is found or one of the deques is empty.
+4. **Splitting Sentence 1**
+	```cpp
+	    for(char c: s1) {
+	```
+	This loop iterates over each character of the first sentence `s1` to split it into individual words.
 
-```cpp
-        while(a.size() != 0 && b.size() != 0 && (a.back() == b.back())) a.pop_back(), b.pop_back();
-```
-- A second loop does the same for the back of the deques, removing matching words until a mismatch is found or one of the deques is empty.
+5. **Word Separation**
+	```cpp
+	        if(c == ' ') a.push_back(tmp), tmp = "";
+	```
+	When a space is encountered, the current word `tmp` is added to deque `a`, and `tmp` is reset to an empty string for the next word.
 
-```cpp
-        if(a.size() == 0 || b.size() == 0) return true;
-```
-- After trimming, if either deque is empty, it indicates that one sentence can be made identical to the other by removing words, so the method returns `true`.
+6. **Word Accumulation**
+	```cpp
+	        else tmp += c;
+	```
+	If the character is not a space, it is added to the temporary string `tmp`.
 
-```cpp
-        return false;
-    }
-};
-```
-- If neither deque is empty after the trimming process, it means there are remaining words that prevent the sentences from being similar, and the method returns `false`.
+7. **Final Word in Sentence 1**
+	```cpp
+	    a.push_back(tmp), tmp = "";
+	```
+	After the loop ends, the last word in `tmp` is pushed to deque `a`.
 
-### Complexity
+8. **Splitting Sentence 2**
+	```cpp
+	    for(char c: s2) {
+	```
+	This loop iterates over each character of the second sentence `s2` to split it into individual words.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n + m)\), where \(n\) is the number of characters in `s1` and \(m\) is the number of characters in `s2`. This is because we need to iterate through both strings to split them into words and then potentially iterate through the words again to compare them.
+9. **Word Separation for Sentence 2**
+	```cpp
+	        if(c == ' ') b.push_back(tmp), tmp = "";
+	```
+	When a space is encountered in the second sentence, the current word `tmp` is added to deque `b`, and `tmp` is reset.
 
-- **Space Complexity**: The space complexity is \(O(n + m)\) as well, since we are storing the words from both sentences in deques.
+10. **Word Accumulation for Sentence 2**
+	```cpp
+	        else tmp += c;
+	```
+	If the character is not a space, it is added to the temporary string `tmp`.
 
-### Conclusion
+11. **Final Word in Sentence 2**
+	```cpp
+	    b.push_back(tmp), tmp = "";
+	```
+	The last word of `tmp` is added to deque `b` after the loop ends.
 
-The `areSentencesSimilar` method effectively determines whether two sentences are similar by employing a straightforward approach based on word tokenization and comparison from both ends of the sentences. The algorithm's efficiency, combined with its clarity, makes it suitable for evaluating sentence similarity in various applications.
+12. **Removing Matching Words from Front**
+	```cpp
+	    while(a.size() != 0 && b.size() != 0 && (a.front() == b.front())) a.pop_front(), b.pop_front();
+	```
+	This loop compares and removes matching words from the front of both deques `a` and `b`.
 
-In summary, this solution illustrates how to manipulate strings and data structures like deques to solve problems involving word comparisons. It also highlights the importance of understanding string parsing and basic data structures in algorithm design. By leveraging these concepts, the solution achieves a clear and efficient method for solving the problem at hand.
+13. **Removing Matching Words from Back**
+	```cpp
+	    while(a.size() != 0 && b.size() != 0 && (a.back() == b.back())) a.pop_back(), b.pop_back();
+	```
+	This loop compares and removes matching words from the back of both deques `a` and `b`.
+
+14. **Final Check for Similarity**
+	```cpp
+	    if(a.size() == 0 || b.size() == 0) return true;
+	```
+	If either deque is empty (indicating all words have been matched), the function returns `true`, indicating the sentences are similar.
+
+15. **Return False**
+	```cpp
+	    return false;
+	```
+	If neither deque is empty, the sentences are not similar, and the function returns `false`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of words in the longest sentence.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), where n is the number of words in the sentences, since we need to store the words in separate lists.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sentence-similarity-iii/description/)
 

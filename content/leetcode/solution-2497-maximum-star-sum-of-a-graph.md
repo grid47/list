@@ -14,138 +14,210 @@ img_src = ""
 youtube = "fmTiTN7Raek"
 youtube_upload_date="2022-12-10"
 youtube_thumbnail="https://i.ytimg.com/vi/fmTiTN7Raek/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a graph with n nodes, each node having a value, and a list of edges connecting the nodes, your task is to determine the maximum star sum that can be obtained. A star graph is a subgraph where all edges are connected to a central node. The star sum is the sum of the values of the central node and the nodes connected by edges to it. You are allowed to include at most k edges in the star graph.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array vals representing the values of the nodes, a 2D integer array edges representing the undirected edges, and an integer k representing the maximum number of edges that can be included in the star graph.
+- **Example:** `Input: vals = [1,2,3,4,10,-10,-20], edges = [[0,1],[1,2],[1,3],[3,4],[3,5],[3,6]], k = 2`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- -10^4 <= vals[i] <= 10^4
+	- 0 <= edges.length <= min(n * (n - 1) / 2, 10^5)
+	- edges[i].length == 2
+	- 0 <= ai, bi <= n - 1
+	- ai != bi
+	- 0 <= k <= n - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxStarSum(vector<int>& vals, vector<vector<int>>& edges, int k) {
-        int n = vals.size();
-        vector<priority_queue<int>> grid(n);
-        
-        for(auto it: edges) {
-            grid[it[0]].push(vals[it[1]]);
-            grid[it[1]].push(vals[it[0]]);
-        }
-        
-        int sum = INT_MIN;
-        for(int i = 0; i < n; i++) {
-            int net = vals[i];
-            int tmp = k;
-            sum = max(net, sum);            
-            while(tmp-- && !grid[i].empty()) {
-                net += grid[i].top();
-                grid[i].pop();
-                sum = max(net, sum);                
-            }
-        }
-        return sum;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum star sum that can be obtained from any star graph in the input graph, with at most k edges.
+- **Example:** `Output: 16`
+- **Constraints:**
+	- The sum should include the value of the central node and the values of the nodes connected by at most k edges.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the maximum possible sum of a star graph, centered at any node, using at most k edges.
+
+- 1. Initialize a priority queue for each node to store the values of its neighbors.
+- 2. Iterate over the nodes and calculate the sum of the node's value and the maximum values from the neighbors' values, considering at most k neighbors.
+- 3. For each node, compute the net sum and update the maximum star sum encountered.
+- 4. Return the maximum star sum after processing all nodes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input graph is connected and the values of nodes and edges are within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: vals = [1,2,3,4,10,-10,-20], edges = [[0,1],[1,2],[1,3],[3,4],[3,5],[3,6]], k = 2`  \
+  **Explanation:** In this case, the star graph with the maximum sum is centered at node 3, with neighbors 1 and 4. The sum is 4 (value of node 3) + 2 (value of node 1) + 10 (value of node 4) = 16.
+
+- **Input:** `Input: vals = [-5], edges = [], k = 0`  \
+  **Explanation:** Here, the only possible star graph is the node itself (node 0). Since there are no edges and k = 0, the star sum is just the value of node 0, which is -5.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we need to use a greedy approach where we consider each node as the center of a potential star graph and evaluate the maximum possible sum by selecting at most k neighboring nodes with the highest values.
+
+### Initial Thoughts 💭
+- We need to prioritize nodes with higher values in order to maximize the star sum.
+- A priority queue can help us efficiently select the highest values from a node's neighbors.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no edges in the graph, the maximum star sum is just the value of any single node.
+- For large graphs with up to 100,000 nodes, the algorithm must be efficient in handling edge cases and ensuring the process runs within time limits.
+- Handle cases where nodes have negative values effectively, ensuring that the star sum is correctly calculated even when all nodes have negative values.
+- Ensure that the algorithm respects the constraint of selecting at most k neighbors for the star graph.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxStarSum(vector<int>& vals, vector<vector<int>>& edges, int k) {
+    int n = vals.size();
+    vector<priority_queue<int>> grid(n);
+    
+    for(auto it: edges) {
+        grid[it[0]].push(vals[it[1]]);
+        grid[it[1]].push(vals[it[0]]);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to compute the maximum sum possible for a star-shaped subgraph, where:
-- We are given a list of node values (`vals`) for a graph.
-- A set of edges (`edges`) connecting these nodes.
-- A number `k` which denotes the maximum number of edges we can use to form a star (a node and its neighboring nodes).
-
-In a star graph, a central node has edges connected to surrounding nodes. The goal is to select a node as the central node and choose at most `k` of its neighboring nodes, in such a way that the total sum of their values (including the central node) is maximized.
-
-### Approach
-
-We can solve this problem by utilizing a greedy approach:
-1. **Understanding the Star Graph**: For each node, we consider it as the center of a star. We then try to add its neighboring nodes (connected by edges) and compute the total sum of the node's value plus the values of its neighbors. The neighboring nodes should be selected based on the highest values to maximize the sum.
-  
-2. **Using Priority Queues**: To efficiently find the largest neighboring nodes' values, we can use a max-heap (priority queue). For each node, we store the values of its neighbors in a priority queue. The highest values can then be easily accessed.
-
-3. **Greedy Selection**: Starting from a given node, we always select the largest `k` values (neighbors) and sum them with the node's value. The goal is to find the maximum sum for each node and return the highest possible sum across all nodes.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Data Structures
-
-```cpp
-int n = vals.size();
-vector<priority_queue<int>> grid(n);
-```
-
-Here, we initialize `n` as the number of nodes in the graph. `grid` is a vector of priority queues where each priority queue will store the values of the neighbors for each node. The reason we use a priority queue is that it allows us to efficiently retrieve the highest value neighbors when we process the node.
-
-#### Step 2: Populate Neighbor Values
-
-```cpp
-for(auto it: edges) {
-    grid[it[0]].push(vals[it[1]]);
-    grid[it[1]].push(vals[it[0]]);
+    
+    int sum = INT_MIN;
+    for(int i = 0; i < n; i++) {
+        int net = vals[i];
+        int tmp = k;
+        sum = max(net, sum);            
+        while(tmp-- && !grid[i].empty()) {
+            net += grid[i].top();
+            grid[i].pop();
+            sum = max(net, sum);                
+        }
+    }
+    return sum;
 }
 ```
 
-For each edge in the graph (represented as a pair of nodes `[u, v]`), we push the value of the neighboring node into the priority queue of the other node. This ensures that for every node, we can access the values of its neighbors.
+The code defines a function `maxStarSum` that computes the maximum possible sum for a node in a graph where each node has a value, and edges connect them. The function considers up to `k` highest values from the neighbors of each node to maximize the sum.
 
-#### Step 3: Initialize the Sum and Start Calculating
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxStarSum(vector<int>& vals, vector<vector<int>>& edges, int k) {
+	```
+	Defines the function `maxStarSum` which accepts a vector of integers `vals`, a 2D vector `edges`, and an integer `k` representing the maximum number of neighboring node values to add to the sum.
 
-```cpp
-int sum = INT_MIN;
-for(int i = 0; i < n; i++) {
-    int net = vals[i];
-    int tmp = k;
-    sum = max(net, sum);
-```
+2. **Array Operations**
+	```cpp
+	    int n = vals.size();
+	```
+	Gets the size of the `vals` vector, which represents the number of nodes in the graph.
 
-For each node `i`, we start by setting the initial sum as its value `vals[i]`. We also initialize `tmp` to `k`, which represents the maximum number of neighbors we can select. The initial sum is then compared with the current maximum (`sum`), ensuring we start with the best possible sum.
+3. **Data Structure Initialization**
+	```cpp
+	    vector<priority_queue<int>> grid(n);
+	```
+	Initializes a vector of priority queues to store the neighboring node values for each node. The priority queue will help to easily fetch the highest values.
 
-#### Step 4: Add Neighbors to the Central Node
+4. **Looping**
+	```cpp
+	    for(auto it: edges) {
+	```
+	Iterates through each edge in the `edges` list, where each edge is a pair of connected nodes.
 
-```cpp
-while(tmp-- && !grid[i].empty()) {
-    net += grid[i].top();
-    grid[i].pop();
-    sum = max(net, sum);
-}
-```
+5. **Priority Queue Operations**
+	```cpp
+	        grid[it[0]].push(vals[it[1]]);
+	```
+	For each edge, pushes the value of the neighboring node (`it[1]`) into the priority queue of the first node (`it[0]`).
 
-While we have not yet selected all `k` neighbors and there are still neighbors available in the priority queue (`grid[i]`), we keep adding the highest values from the priority queue to the total sum `net`. Each time a neighbor is added, the sum is updated, and we check if it is the new maximum sum.
+6. **Priority Queue Operations**
+	```cpp
+	        grid[it[1]].push(vals[it[0]]);
+	```
+	Similarly, for the reverse direction of the edge, pushes the value of the first node (`it[0]`) into the priority queue of the second node (`it[1]`).
 
-#### Step 5: Return the Maximum Sum
+7. **Variable Initialization**
+	```cpp
+	    int sum = INT_MIN;
+	```
+	Initializes `sum` to the smallest possible integer value to track the maximum sum encountered during the calculations.
 
-```cpp
-return sum;
-```
+8. **Looping**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to process each node in the graph.
 
-After processing all nodes and selecting the best possible set of neighbors for each node, we return the maximum sum obtained.
+9. **Variable Initialization**
+	```cpp
+	        int net = vals[i];
+	```
+	Initializes `net` with the value of the current node (`vals[i]`). This variable will store the sum for the current node.
 
-### Complexity Analysis
+10. **Variable Initialization**
+	```cpp
+	        int tmp = k;
+	```
+	Initializes `tmp` to `k`, which tracks the remaining number of neighboring nodes to consider for the sum.
 
-#### Time Complexity:
-1. **Edge Processing**: For each edge, we add two values into the priority queues (one for each of the two nodes involved in the edge). The total number of edges is `m`, so this part takes **O(m)** time.
-2. **Priority Queue Operations**: For each node, we process its neighbors stored in the priority queue. Each priority queue can have at most `n-1` neighbors (one for each other node). The operation of inserting and extracting values from the priority queue takes **O(log n)** time. Since we are processing at most `k` neighbors per node, the total time complexity for each node is **O(k log n)**.
-3. The overall time complexity is therefore **O(m + n * k log n)**.
+11. **Mathematical Operations**
+	```cpp
+	        sum = max(net, sum);            
+	```
+	Compares the current node's value (`net`) with the overall `sum` and updates `sum` with the larger value.
 
-#### Space Complexity:
-1. **Space for Priority Queues**: We store the neighbors for each node in a priority queue, and the total space used is proportional to the number of edges. Since each edge connects two nodes, the space complexity is **O(m)**.
-2. **Additional Variables**: The additional variables used for storing the sum and iterating through the nodes require constant space, i.e., **O(1)**.
+12. **Looping**
+	```cpp
+	        while(tmp-- && !grid[i].empty()) {
+	```
+	Enters a while loop to add the largest neighbor values to `net`, as long as there are remaining neighbors (`tmp--`) and the priority queue for the node is not empty.
 
-Thus, the overall space complexity is **O(m)**.
+13. **Priority Queue Operations**
+	```cpp
+	            net += grid[i].top();
+	```
+	Adds the largest value from the current node's priority queue to `net`.
 
-### Conclusion
+14. **Priority Queue Operations**
+	```cpp
+	            grid[i].pop();
+	```
+	Removes the largest value from the current node's priority queue after it has been added to `net`.
 
-This solution efficiently computes the maximum star sum by employing a greedy approach and utilizing priority queues. The algorithm:
-- Ensures that for each node, we always pick the highest `k` neighbors.
-- Maximizes the sum for each node by considering both the node's value and the values of its neighbors.
-- Processes each edge only once and leverages priority queues for optimal neighbor selection, making it both time and space efficient.
+15. **Mathematical Operations**
+	```cpp
+	            sum = max(net, sum);                
+	```
+	Updates the `sum` to the larger value between `net` and the previous `sum`.
 
-In summary:
-- **Time Complexity**: **O(m + n * k log n)**
-- **Space Complexity**: **O(m)**
-- The approach efficiently handles large graphs, making it well-suited for competitive programming and other applications involving graph-based optimization.
+16. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	Returns the final maximum sum after processing all nodes.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) because we process each node and each edge, and the priority queue operations take logarithmic time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) as we store a priority queue for each node, which can store up to n neighbor values.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-star-sum-of-a-graph/description/)
 

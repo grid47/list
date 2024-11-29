@@ -14,108 +14,149 @@ img_src = ""
 youtube = "wdTRu9sarFA"
 youtube_upload_date="2024-05-12"
 youtube_thumbnail="https://i.ytimg.com/vi/wdTRu9sarFA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a square matrix grid of size n x n. Your task is to generate a new matrix maxLocal of size (n - 2) x (n - 2) where each element maxLocal[i][j] represents the largest value from a 3 x 3 submatrix in grid centered at (i + 1, j + 1). In other words, for each element of the new matrix, find the maximum value from its surrounding 3 x 3 region in the original grid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an n x n matrix grid.
+- **Example:** `grid = [[3, 1, 2, 7], [6, 5, 8, 3], [9, 4, 0, 1], [7, 6, 5, 9]]`
+- **Constraints:**
+	- 3 <= n <= 100
+	- 1 <= grid[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the generated matrix maxLocal, where each element is the largest value from the corresponding 3x3 region in the original grid.
+- **Example:** `Output: [[8, 8], [9, 8]]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute a new matrix where each element is the maximum of a 3x3 submatrix from the original matrix.
+
+- 1. Iterate through each possible 3x3 submatrix in the input matrix.
+- 2. For each submatrix, find the maximum value within the 3x3 region.
+- 3. Store the maximum value in the corresponding position in the new matrix.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input grid will always have a size of at least 3x3.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[9, 9, 8, 1], [5, 6, 2, 6], [8, 2, 6, 4], [6, 2, 2, 2]]`  \
+  **Explanation:** For this input, the largest 3x3 values are: [[9, 9], [8, 6]]. This corresponds to the largest values from every 3x3 region in the original grid.
+
+- **Input:** `Input: grid = [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 2, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]`  \
+  **Explanation:** In this case, every 3x3 region contains a 2, so the output matrix is filled with 2.
+
+{{< dots >}}
+## Approach 🚀
+This problem can be efficiently solved by iterating through each 3x3 submatrix and finding the maximum value within that submatrix.
+
+### Initial Thoughts 💭
+- We need to handle the edge of the matrix carefully as the 3x3 submatrix can't extend beyond the grid boundaries.
+- A brute-force solution that checks every 3x3 submatrix is feasible, as the matrix size is constrained to be at most 100x100.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty inputs are not possible since n >= 3.
+- Ensure the solution handles the largest grid size (100x100) within the time limits.
+- If all elements of the grid are the same, the output will be a matrix filled with the same value.
+- The solution should efficiently handle grids up to size 100x100.
+{{< dots >}}
+## Code 💻
+```cpp
 vector<vector<int>> largestLocal(vector<vector<int>>& g) {
-    int n = g.size();
-    vector<vector<int>> res(n - 2, vector<int>(n - 2));
-    for (int i = 0; i < n - 2; ++i)
-        for (int j = 0; j < n - 2; ++j)
-            for (int ii = i; ii < i + 3; ++ii)
-                for (int jj = j; jj < j + 3; ++jj)
-                    res[i][j] = max(res[i][j], g[ii][jj]);
-    return res;
+int n = g.size();
+vector<vector<int>> res(n - 2, vector<int>(n - 2));
+for (int i = 0; i < n - 2; ++i)
+    for (int j = 0; j < n - 2; ++j)
+        for (int ii = i; ii < i + 3; ++ii)
+            for (int jj = j; jj < j + 3; ++jj)
+                res[i][j] = max(res[i][j], g[ii][jj]);
+return res;
 }
-};
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This function calculates the maximum value in each 3x3 subgrid of the given grid `g` and stores the result in the `res` vector.
 
-The problem requires us to find the largest local value in a 3x3 subgrid for each position in a given 2D grid `g`. For each cell `(i, j)` in the grid (excluding the borders), we need to consider the 3x3 subgrid centered at that cell, and return the maximum value within that subgrid.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> largestLocal(vector<vector<int>>& g) {
+	```
+	Defines a function `largestLocal` that takes a 2D grid `g` and returns a 2D vector with the largest value in each 3x3 subgrid.
 
-The grid is an `n x n` matrix, and we need to compute the maximum of all 3x3 subgrids (excluding borders) and store these values in a new matrix. The size of the resulting matrix will be `(n-2) x (n-2)` since the borders are excluded from the local subgrids.
+2. **Size Calculation**
+	```cpp
+	int n = g.size();
+	```
+	Calculates the size of the grid `g` and stores it in `n`.
 
-### Approach
+3. **Result Vector Initialization**
+	```cpp
+	vector<vector<int>> res(n - 2, vector<int>(n - 2));
+	```
+	Initializes a result vector `res` of size `(n-2) x (n-2)` to store the maximum values from each 3x3 subgrid.
 
-This problem can be efficiently solved by iterating through each possible center of the 3x3 subgrid, and finding the maximum value within that subgrid. The approach can be broken down into the following steps:
+4. **Outer Loop (i)**
+	```cpp
+	for (int i = 0; i < n - 2; ++i)
+	```
+	Outer loop that iterates over the rows of the grid, limiting the index to `n-2` to avoid going out of bounds when considering 3x3 subgrids.
 
-1. **Iterate through all possible centers**: The center of the 3x3 subgrid should be a position `(i, j)` where `1 <= i <= n-2` and `1 <= j <= n-2`. This ensures that the 3x3 subgrid has complete coverage without going out of bounds.
+5. **Outer Loop (j)**
+	```cpp
+	    for (int j = 0; j < n - 2; ++j)
+	```
+	Inner loop that iterates over the columns of the grid, limiting the index to `n-2` to avoid going out of bounds when considering 3x3 subgrids.
 
-2. **Check the 3x3 subgrid for each center**: For each valid position `(i, j)`, we examine all the elements of the 3x3 subgrid, which spans from `g[i-1][j-1]` to `g[i+1][j+1]`, and find the maximum element within this subgrid.
+6. **Inner Loop (ii)**
+	```cpp
+	        for (int ii = i; ii < i + 3; ++ii)
+	```
+	Inner loop that iterates through the rows of the 3x3 subgrid, starting from the current `i` position.
 
-3. **Store the result**: For each center `(i, j)`, store the maximum value found in the corresponding position of the result matrix `res`.
+7. **Inner Loop (jj)**
+	```cpp
+	            for (int jj = j; jj < j + 3; ++jj)
+	```
+	Inner loop that iterates through the columns of the 3x3 subgrid, starting from the current `j` position.
 
-4. **Return the result matrix**: Once the iteration is complete, the matrix `res` will contain the largest local values for each 3x3 subgrid.
+8. **Update Result**
+	```cpp
+	                res[i][j] = max(res[i][j], g[ii][jj]);
+	```
+	Updates the value at `res[i][j]` with the maximum of its current value and the value in the current 3x3 subgrid (`g[ii][jj]`).
 
-### Code Breakdown (Step by Step)
+9. **Return Statement**
+	```cpp
+	return res;
+	```
+	Returns the 2D result vector `res` that contains the largest value for each 3x3 subgrid.
 
-1. **Class Definition**:
-    ```cpp
-    class Solution {
-    public:
-        vector<vector<int>> largestLocal(vector<vector<int>>& g) {
-    ```
-    The `Solution` class contains the method `largestLocal`, which takes a 2D matrix `g` as input and returns the resulting 2D matrix with the largest values of each 3x3 subgrid.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-2. **Initialize the Result Matrix**:
-    ```cpp
-        int n = g.size();  // Get the size of the input grid
-        vector<vector<int>> res(n - 2, vector<int>(n - 2));  // Initialize the result matrix
-    ```
-    First, we retrieve the size `n` of the input matrix `g`. Then, we initialize the result matrix `res`, which will store the largest values from each 3x3 subgrid. The size of `res` is `(n-2) x (n-2)` because we exclude the borders of the grid.
+The time complexity is O(n^2) since we examine each 3x3 submatrix once, and n is the grid's side length.
 
-3. **Nested Loops to Traverse the Grid**:
-    ```cpp
-        for (int i = 0; i < n - 2; ++i) {
-            for (int j = 0; j < n - 2; ++j) {
-    ```
-    The outer two loops iterate through each possible top-left corner of a 3x3 subgrid. We loop through the rows and columns of the grid, ensuring that the current position `(i, j)` can be the top-left corner of a valid 3x3 subgrid.
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-4. **Find Maximum in the 3x3 Subgrid**:
-    ```cpp
-                for (int ii = i; ii < i + 3; ++ii) {
-                    for (int jj = j; jj < j + 3; ++jj) {
-                        res[i][j] = max(res[i][j], g[ii][jj]);  // Update the result with the maximum value
-                    }
-                }
-    ```
-    The innermost loops iterate through each element of the 3x3 subgrid centered at `(i, j)`. The range of `ii` is from `i` to `i+2`, and the range of `jj` is from `j` to `j+2`, ensuring we cover all 9 elements in the 3x3 grid. During each iteration, we update the `res[i][j]` with the maximum value found so far in this subgrid.
+The space complexity is O(n^2) as we store the result matrix of size (n-2) x (n-2).
 
-5. **Return the Result Matrix**:
-    ```cpp
-            }
-        }
-        return res;  // Return the result matrix containing the largest values
-    }
-    ```
-    After all the 3x3 subgrids have been processed, the result matrix `res` is returned, which contains the maximum values from each of the local 3x3 grids.
+**Happy Coding! 🎉**
 
-### Complexity
-
-1. **Time Complexity**:
-    - The algorithm uses four nested loops:
-        - The outer two loops iterate over the rows and columns of the grid, with each loop running `O(n-2)` times (i.e., `O(n)` where `n` is the grid size).
-        - The two inner loops iterate over the 3x3 subgrid, running `O(9)` times.
-    
-    Therefore, the time complexity of the solution is **O(n^2)**, where `n` is the size of the grid. The two outer loops contribute `O(n^2)` operations, and the inner loops contribute a constant factor of 9 for each 3x3 subgrid.
-
-2. **Space Complexity**:
-    - The space complexity is determined by the space used for the result matrix `res`, which has dimensions `(n-2) x (n-2)`. Hence, the space complexity is **O(n^2)** for storing the result matrix.
-
-### Conclusion
-
-This solution effectively solves the problem of finding the largest value in each 3x3 subgrid by iterating through the grid and checking each subgrid in constant time. The use of nested loops allows us to check all possible subgrids and calculate the maximum value efficiently. The overall time complexity of **O(n^2)** makes this solution suitable for reasonably sized grids. The space complexity is also **O(n^2)** due to the result matrix.
-
-In summary, this approach provides an efficient and straightforward solution to finding the largest values in local 3x3 grids for a given input matrix. It works optimally for grids of various sizes and ensures that we can process large matrices in a reasonable amount of time.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-local-values-in-a-matrix/description/)
 

@@ -14,138 +14,243 @@ img_src = ""
 youtube = "o17MBWparrI"
 youtube_upload_date="2024-09-15"
 youtube_thumbnail="https://i.ytimg.com/vi/o17MBWparrI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string s, find the size of the longest substring containing each vowel ('a', 'e', 'i', 'o', 'u') an even number of times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single string s, containing only lowercase English letters.
+- **Example:** `s = 'amazingtime'`
+- **Constraints:**
+	- 1 <= s.length <= 5 * 10^5
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findTheLongestSubstring(string s) {
-        map<char, int> id = {
-            {'a' , 1},
-            {'e' , 2},
-            {'i' , 3},
-            {'o' , 4},
-            {'u' , 5},
-            };
-        int res = 0, msk = 0;
-        map<int, int> mp;
- 
-        mp[0] = -1;
-        for (int i = 0; i < s.length(); i++) {
-            int x = id[s[i]];
-            
-            if(x != 0)
-            msk ^= (1 << x);
-            if(mp.count(msk)) {
-            res = max(res, i - mp[msk]);
-                }
-            else {
-            mp[msk] = i;}
-        }
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the size of the longest substring where each vowel ('a', 'e', 'i', 'o', 'u') appears an even number of times.
+- **Example:** `6`
+- **Constraints:**
+	- The output will be a single integer.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the longest substring where vowels appear an even number of times.
 
-### Problem Statement
-The problem is to find the length of the longest substring of a given string `s` that contains an even number of each vowel: 'a', 'e', 'i', 'o', and 'u'. A substring is defined as a contiguous sequence of characters within the string. The challenge lies in efficiently tracking the occurrences of vowels and ensuring that each vowel appears an even number of times within any considered substring.
+- Iterate through the string while keeping track of the count of each vowel.
+- Use a bitmask to represent the count of each vowel appearing in the string so far.
+- Track the first occurrence of each bitmask in a map and calculate the longest substring where the bitmask repeats.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string is non-empty and contains only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'amazingtime'`  \
+  **Explanation:** The longest substring 'amazi' contains two 'a's and two 'i's, so both appear an even number of times.
 
-### Approach
-To solve this problem, we can utilize a bitmasking technique combined with a hash map to track the state of vowel occurrences. The key steps are as follows:
-1. **Bitmask Representation**: Use a bitmask to represent the even or odd occurrence of each vowel. For example, if 'a' has been encountered an odd number of times, the corresponding bit in the mask will be set to 1.
-2. **Map to Track Indices**: Use a map to store the first occurrence of each unique mask encountered while traversing the string. This allows us to calculate the length of substrings with matching masks efficiently.
-3. **Iterate Through the String**: As we iterate through the string, update the mask and check if it has been seen before. If it has, compute the length of the substring and update the maximum length accordingly.
+- **Input:** `s = 'applepie'`  \
+  **Explanation:** The substring 'appl' contains an even number of 'e's, so the result is 5.
 
-### Code Breakdown (Step by Step)
+{{< dots >}}
+## Approach 🚀
+We use a bitmask to track the parity of the vowel counts as we traverse the string. Each vowel corresponds to a unique bit, allowing us to efficiently check when all vowels appear an even number of times.
 
+### Initial Thoughts 💭
+- The problem can be solved efficiently using a bitmask representation for vowel counts.
+- A bitmask will allow us to track which vowels have appeared an odd or even number of times, enabling efficient substring length calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, return 0.
+- Ensure that the algorithm runs efficiently even for strings of maximum length (500,000).
+- Strings with no vowels should return the length of the entire string.
+- The solution must handle up to 500,000 characters efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int findTheLongestSubstring(string s) {
-        // Map to assign a unique number for each vowel
-        map<char, int> id = {
-            {'a' , 1},
-            {'e' , 2},
-            {'i' , 3},
-            {'o' , 4},
-            {'u' , 5},
+int findTheLongestSubstring(string s) {
+    map<char, int> id = {
+        {'a' , 1},
+        {'e' , 2},
+        {'i' , 3},
+        {'o' , 4},
+        {'u' , 5},
         };
+    int res = 0, msk = 0;
+    map<int, int> mp;
+ 
+    mp[0] = -1;
+    for (int i = 0; i < s.length(); i++) {
+        int x = id[s[i]];
         
-        int res = 0; // Variable to store the result (maximum length)
-        int msk = 0; // Bitmask to track vowel parity
-        map<int, int> mp; // Map to store the first occurrence of each mask
-
-        mp[0] = -1; // Initial condition: mask 0 corresponds to index -1
-        for (int i = 0; i < s.length(); i++) {
-            int x = id[s[i]]; // Get the bit position for the current character
-
-            // If the character is a vowel, toggle its corresponding bit in the mask
-            if(x != 0)
-                msk ^= (1 << x);
-            
-            // Check if this mask has been seen before
-            if(mp.count(msk)) {
-                // Calculate the length of the substring
-                res = max(res, i - mp[msk]);
-            } else {
-                // Store the first occurrence of this mask
-                mp[msk] = i;
+        if(x != 0)
+        msk ^= (1 << x);
+        if(mp.count(msk)) {
+        res = max(res, i - mp[msk]);
             }
-        }
-        
-        return res; // Return the maximum length found
+        else {
+        mp[msk] = i;}
     }
-};
+    
+    return res;
+}
 ```
 
-1. **Class Definition**:
-   - The `Solution` class contains the public method `findTheLongestSubstring`.
+This code finds the longest substring that contains an even number of vowels ('a', 'e', 'i', 'o', 'u') by using bitwise operations and dynamic programming techniques.
 
-2. **Vowel Mapping**:
-   - The `id` map assigns a unique bit position for each vowel: 
-     - 'a' → 1
-     - 'e' → 2
-     - 'i' → 3
-     - 'o' → 4
-     - 'u' → 5
-   - The bitmask uses these positions to track the parity of vowel occurrences.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int findTheLongestSubstring(string s) {
+	```
+	The function 'findTheLongestSubstring' takes a string 's' and aims to find the longest substring that contains an even number of each vowel.
 
-3. **Initialization**:
-   - `res`: This variable will store the maximum length of the substring found that satisfies the conditions.
-   - `msk`: The bitmask initialized to zero. This will be updated as we iterate through the string.
-   - `mp`: A map initialized to contain the entry `{0: -1}`, representing the default state (no vowels seen) at an imaginary index before the start of the string.
+2. **Map Initialization**
+	```cpp
+	    map<char, int> id = {
+	```
+	A map 'id' is initialized to associate vowels ('a', 'e', 'i', 'o', 'u') with unique integer values to track their occurrence status.
 
-4. **Iterating Through the String**:
-   - For each character in the string:
-     - Check if it’s a vowel by looking it up in the `id` map.
-     - If it is a vowel, toggle the corresponding bit in the `msk` using the XOR operation: `msk ^= (1 << x)`. This effectively flips the bit, allowing us to track even/odd occurrences.
-     - Use `mp.count(msk)` to check if this mask has been seen before. If it has:
-       - Calculate the length of the substring from the index stored in `mp[msk]` to the current index `i`.
-       - Update `res` with the maximum length found.
-     - If the mask has not been seen before, store the current index `i` in the map with the key `msk`.
+3. **Map Initialization**
+	```cpp
+	        {'a' , 1},
+	```
+	Maps the vowel 'a' to the value 1.
 
-5. **Return the Result**:
-   - After processing the entire string, return the maximum length stored in `res`.
+4. **Map Initialization**
+	```cpp
+	        {'e' , 2},
+	```
+	Maps the vowel 'e' to the value 2.
 
-### Complexity Analysis
-- **Time Complexity**:
-  - The algorithm runs in \(O(N)\), where \(N\) is the length of the string `s`. This is due to the single pass through the string and constant-time operations for bit manipulation and map accesses.
-  
-- **Space Complexity**:
-  - The space complexity is \(O(1)\) for the bitmask since it uses a fixed number of bits (5 bits for vowels). The space for the map `mp` could be considered \(O(N)\) in the worst case, where each state is unique.
+5. **Map Initialization**
+	```cpp
+	        {'i' , 3},
+	```
+	Maps the vowel 'i' to the value 3.
 
-### Conclusion
-The provided solution effectively utilizes bit manipulation and hashing to find the longest substring containing an even number of each vowel. This approach is efficient and elegant, leveraging the properties of binary representation to manage the counting of vowel occurrences. By iterating through the string only once and maintaining a hash map for quick lookups, the solution achieves optimal performance. This methodology can serve as a useful reference for tackling similar substring problems involving character frequency conditions.
+6. **Map Initialization**
+	```cpp
+	        {'o' , 4},
+	```
+	Maps the vowel 'o' to the value 4.
 
-This comprehensive explanation highlights the key components of the code while ensuring clarity and detail, making it suitable for readers looking to understand or implement similar solutions.
+7. **Map Initialization**
+	```cpp
+	        {'u' , 5},
+	```
+	Maps the vowel 'u' to the value 5.
+
+8. **Map Initialization**
+	```cpp
+	        };
+	```
+	The map initialization completes the vowel-to-value mappings.
+
+9. **Variable Initialization**
+	```cpp
+	    int res = 0, msk = 0;
+	```
+	Two integer variables 'res' and 'msk' are initialized. 'res' will store the length of the longest valid substring, and 'msk' will track the bitwise state of vowel occurrences.
+
+10. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map 'mp' is initialized to store the first occurrence index of each bitmask 'msk'.
+
+11. **Empty Line**
+	```cpp
+	 
+	```
+	An empty line used for separation.
+
+12. **Base Case**
+	```cpp
+	    mp[0] = -1;
+	```
+	The map 'mp' is initialized with the bitmask value 0 mapping to -1. This serves as the base case, representing an even number of vowels before any characters are processed.
+
+13. **Loop Iteration**
+	```cpp
+	    for (int i = 0; i < s.length(); i++) {
+	```
+	A loop is initiated to iterate over each character in the input string 's'.
+
+14. **Character Processing**
+	```cpp
+	        int x = id[s[i]];
+	```
+	Each character 's[i]' is checked in the map 'id'. The corresponding value is stored in 'x'. If the character is a vowel, 'x' will be non-zero.
+
+15. **Empty Line**
+	```cpp
+	        
+	```
+	An empty line for separation.
+
+16. **Bitwise Operation**
+	```cpp
+	        if(x != 0)
+	```
+	If 'x' is non-zero (meaning the character is a vowel), the bitwise XOR operation is performed on 'msk'.
+
+17. **Bitwise Operation**
+	```cpp
+	        msk ^= (1 << x);
+	```
+	This operation flips the bit corresponding to the vowel found at 's[i]'.
+
+18. **Check for Previous Bitmask**
+	```cpp
+	        if(mp.count(msk)) {
+	```
+	The code checks if the current bitmask 'msk' has been seen before by checking the map 'mp'.
+
+19. **Update Result**
+	```cpp
+	        res = max(res, i - mp[msk]);
+	```
+	If the bitmask has been seen before, the length of the valid substring is updated by calculating the difference between the current index 'i' and the stored index of the previous occurrence of 'msk'.
+
+20. **Store First Occurrence**
+	```cpp
+	        else {
+	```
+	If the bitmask has not been seen before, the current index 'i' is stored in the map 'mp' with 'msk' as the key.
+
+21. **Store First Occurrence**
+	```cpp
+	        mp[msk] = i;}
+	```
+	Store the current index 'i' as the first occurrence of the bitmask 'msk'.
+
+22. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the value of 'res', which is the length of the longest substring with an even number of vowels.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The algorithm runs in linear time, where n is the length of the input string.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(32)
+
+The space complexity is constant, as we only store bitmask values and the first occurrences of these bitmasks.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/description/)

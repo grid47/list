@@ -14,146 +14,211 @@ img_src = ""
 youtube = "FVjKrhdMutc"
 youtube_upload_date="2024-10-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/FVjKrhdMutc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D array of intervals, where each interval is represented as a pair of integers [left, right], denoting an inclusive range. Your task is to divide these intervals into the minimum number of groups such that no two intervals within the same group overlap. Two intervals overlap if there is at least one common number between them.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array `intervals` where each element `intervals[i]` is an array of two integers, left and right, representing the start and end of an interval.
+- **Example:** `intervals = [[1, 5], [6, 10], [3, 7], [8, 12], [15, 18]]`
+- **Constraints:**
+	- 1 <= intervals.length <= 10^5
+	- Each interval is represented by two integers where 1 <= lefti <= righti <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minGroups(vector<vector<int>>& list) {
-        sort(list.begin(), list.end());
-        
-        int res = 1, cnt = 1;
-        priority_queue<int, vector<int>, greater<int>> pq;
-                
-        int n = list.size();
-        
-        pq.push(list[0][1]);
-        
-        if(n == 1) return 1;
-        for(int i = 1; i < n; i++) {
-            int next = list[i][0];            
-            while(!pq.empty() && next > pq.top()) {
-                pq.pop();
-                cnt--;
-            }
-            pq.push(list[i][1]);
-            cnt++;
-            res = max(res, cnt);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of groups required to partition the intervals such that no two intervals within the same group overlap.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of groups while ensuring that no two intervals within the same group overlap.
+
+- 1. Sort the intervals by their start times.
+- 2. Use a priority queue (min-heap) to track the end times of intervals in each group.
+- 3. For each interval, check if it can be added to an existing group (i.e., its start time is greater than the smallest end time in the heap).
+- 4. If it can, update the group's end time; otherwise, start a new group.
+- 5. Keep track of the maximum number of groups at any time.
+{{< dots >}}
+### Problem Assumptions ✅
+- Intervals are inclusive of both left and right endpoints.
+- The input list will not contain empty intervals.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `intervals = [[5, 10], [6, 8], [1, 5], [2, 3], [1, 10]]`  \
+  **Explanation:** We can divide the intervals into the following groups: Group 1: [1, 5], [6, 8]; Group 2: [2, 3], [5, 10]; Group 3: [1, 10]. Thus, 3 groups are needed.
+
+- **Input:** `intervals = [[1, 3], [5, 6], [8, 10], [11, 13]]`  \
+  **Explanation:** Since none of the intervals overlap, all intervals can be placed in one group.
+
+- **Input:** `intervals = [[1, 4], [3, 5], [5, 6], [7, 8]]`  \
+  **Explanation:** The optimal partition is: Group 1: [1, 4], [5, 6]; Group 2: [3, 5], [7, 8]. We need 2 groups.
+
+{{< dots >}}
+## Approach 🚀
+We will use a greedy approach, sorting the intervals and using a priority queue (min-heap) to track the current end times of intervals in each group. By efficiently managing the end times, we can minimize the number of groups.
+
+### Initial Thoughts 💭
+- Sorting the intervals will allow us to process them in order of their start times.
+- Using a priority queue will allow us to efficiently manage and track the end times of intervals in each group.
+- A greedy strategy works well here, as we only need to track the end times and adjust the groups accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty input is not possible as per the problem constraints, but handling zero intervals would result in zero groups.
+- For large inputs with up to 10^5 intervals, the solution should perform efficiently in O(n log n) time due to sorting and priority queue operations.
+- Intervals with the same start and end time (e.g., [1, 1], [1, 1]) should be handled correctly as separate intervals.
+- The solution must efficiently handle intervals where the length of the list is large (up to 10^5).
+{{< dots >}}
+## Code 💻
+```cpp
+int minGroups(vector<vector<int>>& list) {
+    sort(list.begin(), list.end());
+    
+    int res = 1, cnt = 1;
+    priority_queue<int, vector<int>, greater<int>> pq;
+            
+    int n = list.size();
+    
+    pq.push(list[0][1]);
+    
+    if(n == 1) return 1;
+    for(int i = 1; i < n; i++) {
+        int next = list[i][0];            
+        while(!pq.empty() && next > pq.top()) {
+            pq.pop();
+            cnt--;
         }
-        return res;
+        pq.push(list[i][1]);
+        cnt++;
+        res = max(res, cnt);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to determine the **minimum number of meeting rooms** required to schedule a series of meetings, where each meeting has a start and end time. The objective is to find the smallest number of rooms needed to accommodate all meetings such that no two meetings overlap in the same room.
-
-### Approach
-
-The solution follows the **greedy algorithm** approach combined with a **priority queue (min-heap)** to track and manage the meetings efficiently. The key idea is to keep track of the ongoing meetings and when one meeting ends, reuse that room for the next meeting that starts.
-
-#### Key Insights:
-
-1. **Sorting by Start Time**: We first sort the meetings by their start times. This allows us to process the meetings in the order they appear, ensuring that we can efficiently manage their room assignments.
-
-2. **Min-Heap for Room Management**: We use a priority queue (min-heap) to track the earliest available room (i.e., the meeting that finishes the earliest). By keeping the room that gets free the soonest at the top, we can always reuse it for the next meeting that starts after the previous one ends.
-
-3. **Greedy Allocation**: For each meeting, we check if it can fit into an existing room (by comparing its start time with the earliest available room's end time). If it fits, we assign it to that room; otherwise, we need a new room.
-
-4. **Optimal Solution**: By processing meetings one by one and managing room allocations greedily, we ensure that the number of rooms used is minimized.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sorting the Meetings
-
-```cpp
-sort(list.begin(), list.end());
-```
-
-- First, we sort the meetings in ascending order by their start time. Sorting is necessary because it allows us to process the meetings in the order they appear and efficiently manage room assignments.
-- The sorting step ensures that we always consider the earliest starting meeting first, which is crucial for the greedy approach.
-
-#### Step 2: Initializing Variables
-
-```cpp
-int res = 1, cnt = 1;
-priority_queue<int, vector<int>, greater<int>> pq;
-```
-
-- **`res`**: This variable keeps track of the maximum number of rooms used at any point in time. We initialize it to `1` because we are guaranteed to need at least one room.
-- **`cnt`**: This variable tracks the current number of rooms being used.
-- **`pq`**: This priority queue (min-heap) is used to store the end times of the ongoing meetings. It helps us efficiently find the room that gets free the earliest.
-
-#### Step 3: Processing the First Meeting
-
-```cpp
-int n = list.size();
-pq.push(list[0][1]);
-```
-
-- We start by pushing the end time of the first meeting (`list[0][1]`) into the priority queue.
-- This initializes the room allocation process by assuming that the first meeting occupies the first room.
-
-#### Step 4: Handling Subsequent Meetings
-
-```cpp
-if (n == 1) return 1;
-for (int i = 1; i < n; i++) {
-    int next = list[i][0];
-    while (!pq.empty() && next > pq.top()) {
-        pq.pop();
-        cnt--;
-    }
-    pq.push(list[i][1]);
-    cnt++;
-    res = max(res, cnt);
+    return res;
 }
 ```
 
-- **If there's only one meeting**: We immediately return `1` because only one room is needed.
-  
-- **For each subsequent meeting**:
-  - We first check if the next meeting can be assigned to an existing room. To do this, we compare its start time (`next = list[i][0]`) with the earliest finishing meeting (the top of the priority queue).
-  - If the current meeting starts after the earliest meeting ends (i.e., `next > pq.top()`), we pop the earliest meeting from the priority queue (indicating that its room is now available) and decrement the count of rooms in use (`cnt--`).
-  - Regardless of whether a room was reused, we add the current meeting's end time to the priority queue, indicating that a room is now occupied by this meeting.
-  - We increment the number of rooms used (`cnt++`) and update the maximum number of rooms used (`res`).
+This function calculates the minimum number of meeting groups that can be formed given a list of meeting time intervals. It sorts the intervals and uses a priority queue to manage the intervals and calculate the maximum number of overlapping meetings at any point in time.
 
-#### Step 5: Returning the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minGroups(vector<vector<int>>& list) {
+	```
+	Define the function `minGroups` which takes a vector of vectors representing meeting time intervals and returns the minimum number of meeting groups.
 
-```cpp
-return res;
-```
+2. **Sorting**
+	```cpp
+	    sort(list.begin(), list.end());
+	```
+	Sort the meeting intervals based on their start times to facilitate easier management of overlapping intervals.
 
-- After processing all meetings, we return `res`, which holds the maximum number of rooms needed at any point in time.
+3. **Variable Declaration**
+	```cpp
+	    int res = 1, cnt = 1;
+	```
+	Initialize the result variable `res` to 1 and the counter `cnt` to 1, representing the number of ongoing meetings.
 
-### Complexity
+4. **Priority Queue**
+	```cpp
+	    priority_queue<int, vector<int>, greater<int>> pq;
+	```
+	Define a priority queue `pq` to store the end times of the ongoing meetings in ascending order.
 
-#### Time Complexity:
-- **Sorting**: The sorting step takes **O(n log n)**, where `n` is the number of meetings.
-- **Priority Queue Operations**: Each meeting is pushed and popped from the priority queue once. Each heap operation (push and pop) takes **O(log n)**. Since there are `n` meetings, the total complexity for heap operations is **O(n log n)**.
-- Overall, the time complexity of the solution is dominated by the sorting and heap operations, which gives an overall time complexity of **O(n log n)**.
+5. **Size Calculation**
+	```cpp
+	    int n = list.size();
+	```
+	Get the size of the list of meeting intervals, `n`, to determine the number of intervals.
 
-#### Space Complexity:
-- **O(n)**: We store the end times of the ongoing meetings in the priority queue. In the worst case, the priority queue will hold `n` meeting end times, so the space complexity is **O(n)**.
+6. **First Interval Push**
+	```cpp
+	    pq.push(list[0][1]);
+	```
+	Push the end time of the first meeting interval into the priority queue.
 
-### Conclusion
+7. **Early Return**
+	```cpp
+	    if(n == 1) return 1;
+	```
+	If there is only one interval, return 1 as only one group is needed.
 
-This solution efficiently determines the minimum number of rooms required to accommodate all meetings by leveraging a greedy approach combined with a priority queue (min-heap). The solution processes the meetings in sorted order, reuses rooms when possible, and tracks the maximum number of rooms used.
+8. **Main Loop**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	Start a loop to iterate over the remaining intervals starting from index 1.
 
-#### Key Points:
-- **Greedy Strategy**: We always reuse rooms as soon as they become available to minimize the number of rooms used.
-- **Priority Queue**: A priority queue helps us efficiently manage room availability by always keeping track of the earliest finishing meeting.
-- **Time Complexity**: The solution runs in **O(n log n)**, making it efficient for large input sizes.
-- **Space Complexity**: The space complexity is **O(n)**, as we store meeting end times in the priority queue.
+9. **Next Start Time**
+	```cpp
+	        int next = list[i][0];            
+	```
+	Get the start time of the next meeting interval.
 
-This approach is optimal for solving the problem of meeting room allocation and can be applied to various scheduling problems where resource management is required.
+10. **While Loop**
+	```cpp
+	        while(!pq.empty() && next > pq.top()) {
+	```
+	While the priority queue is not empty and the next start time is greater than the earliest ending meeting time, pop meetings from the queue.
+
+11. **Priority Queue Pop**
+	```cpp
+	            pq.pop();
+	```
+	Pop the earliest ending meeting time from the priority queue.
+
+12. **Decrease Counter**
+	```cpp
+	            cnt--;
+	```
+	Decrement the ongoing meetings count since one meeting has ended.
+
+13. **Push End Time**
+	```cpp
+	        pq.push(list[i][1]);
+	```
+	Push the end time of the current meeting interval into the priority queue.
+
+14. **Increase Counter**
+	```cpp
+	        cnt++;
+	```
+	Increment the ongoing meetings count as a new meeting has started.
+
+15. **Update Maximum**
+	```cpp
+	        res = max(res, cnt);
+	```
+	Update the result to keep track of the maximum number of overlapping meetings.
+
+16. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the result, which is the maximum number of overlapping meetings.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n), where n is the number of intervals, due to sorting.
+- **Average Case:** O(n log n), as sorting dominates the time complexity.
+- **Worst Case:** O(n log n), as the sorting step is the most time-consuming operation.
+
+The solution efficiently handles large inputs due to the O(n log n) time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(n), as we always need space for storing the intervals and their end times.
+- **Worst Case:** O(n), where n is the number of intervals, as we store the intervals and the priority queue.
+
+The space complexity is linear due to the storage of intervals and the priority queue used to manage the end times.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/description/)
 

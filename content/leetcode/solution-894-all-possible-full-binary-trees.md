@@ -14,127 +14,215 @@ img_src = ""
 youtube = "nZtrZPTTCAo"
 youtube_upload_date="2021-09-20"
 youtube_thumbnail="https://i.ytimg.com/vi/nZtrZPTTCAo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer n, return all possible full binary trees with exactly n nodes. Each node of the tree must have the value 0. A full binary tree is defined as a binary tree where each node has either 0 or 2 children.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a single integer n which represents the number of nodes in the full binary trees. n will always be an odd integer.
+- **Example:** `Input: n = 5`
+- **Constraints:**
+	- 1 <= n <= 20
+	- n is always an odd integer.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    vector<TreeNode*> allPossibleFBT(int n) {
-        
-        vector<vector<TreeNode*>> dp(n + 1);
-        dp[1].push_back(new TreeNode(0));
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of all possible full binary trees with n nodes. Each tree in the list should be represented by its root node, where each node has the value 0. The trees can be returned in any order.
+- **Example:** `Output: [[0,0,0,null,null,0,0],[0,0,0,0,0,0,0]]`
+- **Constraints:**
+	- The output should contain all unique full binary trees with n nodes.
 
-        for(int i = 3; i <= n; i += 2) {
-            for(int l = 1; l < i; l += 2) {
-                // cout << l;
-                for(auto it: dp[l])
-                for(auto it2: dp[i - l - 1]) {
-                    TreeNode* node = new TreeNode(0);
-                    node->left = it;
-                    node->right = it2;
-                    dp[i].push_back(node);
-                }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate all unique full binary trees for a given number of nodes n.
+
+- 1. Use dynamic programming (DP) to generate all possible full binary trees with n nodes.
+- 2. For each odd number of nodes i (1, 3, 5, ..., n), split the nodes into two subtrees by considering all possible left and right subtree sizes.
+- 3. Recursively generate full binary trees for smaller subproblems and combine them into larger trees.
+- 4. Store the root node of each tree and ensure the trees are unique.
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of n will always be odd.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 5`  \
+  **Explanation:** In this case, there are two possible full binary trees with 5 nodes. The trees are constructed by considering all possible ways to split the nodes into left and right subtrees.
+
+- **Input:** `Input: n = 7`  \
+  **Explanation:** For n = 7, there are several possible full binary trees. Each tree has 3 nodes in the left and right subtrees, with a root node connecting them.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses dynamic programming (DP) to build all possible full binary trees for n nodes. For each odd number n, recursively generate the left and right subtrees and combine them into full binary trees.
+
+### Initial Thoughts 💭
+- Each tree must have an odd number of nodes, as each non-leaf node must have exactly two children.
+- Dynamic programming can be used to efficiently generate all possible full binary trees for smaller values of n and combine them.
+- We can use a bottom-up approach, starting with small values of n and incrementally constructing larger trees.
+{{< dots >}}
+### Edge Cases 🌐
+- If n = 1, the only possible tree is a single node.
+- The solution should efficiently handle values of n up to 20.
+- Since n is always an odd number, the solution can be designed to only process odd numbers.
+- The solution should handle n up to 20 without performance issues.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<TreeNode*> allPossibleFBT(int n) {
+    
+    vector<vector<TreeNode*>> dp(n + 1);
+    dp[1].push_back(new TreeNode(0));
+
+    for(int i = 3; i <= n; i += 2) {
+        for(int l = 1; l < i; l += 2) {
+            // cout << l;
+            for(auto it: dp[l])
+            for(auto it2: dp[i - l - 1]) {
+                TreeNode* node = new TreeNode(0);
+                node->left = it;
+                node->right = it2;
+                dp[i].push_back(node);
             }
         }
-        return dp[n];        
     }
-};
-{{< /highlight >}}
----
+    return dp[n];        
+}
+```
 
-### Problem Statement
+This code defines the function `allPossibleFBT`, which generates all possible full binary trees with `n` nodes. It uses dynamic programming to build solutions progressively by combining smaller trees into larger ones.
 
-The problem asks us to generate all **possible full binary trees (FBT)** with `n` nodes, where `n` is an odd number. A full binary tree is defined as a binary tree where every node has either **two children** (both left and right) or **no children** (i.e., it is a leaf node). For this problem, we need to return a list of all distinct full binary trees that can be constructed with exactly `n` nodes.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<TreeNode*> allPossibleFBT(int n) {
+	```
+	Define the function `allPossibleFBT`, which takes an integer `n` as input and returns a vector of pointers to TreeNode, representing all possible full binary trees with `n` nodes.
 
-A full binary tree must always have an odd number of nodes, and every non-leaf node must have exactly two children. We are tasked with finding all possible full binary trees with `n` nodes.
+2. **Empty Line**
+	```cpp
+	    
+	```
+	This line is empty and used for formatting purposes.
 
-### Approach
+3. **Dynamic Programming Table Initialization**
+	```cpp
+	    vector<vector<TreeNode*>> dp(n + 1);
+	```
+	Initialize a 2D vector `dp` where `dp[i]` will store all possible full binary trees with `i` nodes.
 
-The approach to solve this problem involves utilizing **dynamic programming (DP)**. We will iteratively build the full binary trees for smaller numbers of nodes and use these to construct larger trees.
+4. **Base Case Initialization**
+	```cpp
+	    dp[1].push_back(new TreeNode(0));
+	```
+	For the base case, initialize `dp[1]` with a single node tree. This is the only full binary tree with 1 node.
 
-#### Key Insights:
-1. **Base Case**: The simplest full binary tree is a tree with just one node, i.e., a single root node with no children. This is the only configuration for `n = 1`, and we initialize this base case with a tree containing only the root node.
-  
-2. **Recursive Construction**: For any odd number `n`, a full binary tree can be constructed by combining two smaller full binary trees:
-   - The left subtree will have `l` nodes, and the right subtree will have `n - l - 1` nodes. Both `l` and `n - l - 1` must be odd numbers since a full binary tree with an even number of nodes is not possible.
-   - For each combination of left and right subtrees, we create a new root node, with the left and right subtrees as its children.
+5. **Outer Loop (Iterating over odd numbers)**
+	```cpp
+	    for(int i = 3; i <= n; i += 2) {
+	```
+	Start a loop from `i = 3` to `n`, incrementing by 2. This ensures that only odd values of `i` are considered, as full binary trees can only have an odd number of nodes.
 
-3. **Dynamic Programming Array (`dp`)**:
-   - We maintain a DP array `dp[i]` where `dp[i]` holds a list of all possible full binary trees with `i` nodes.
-   - For each odd number `i` (starting from 3 and incrementing by 2), we generate all full binary trees by combining smaller trees from previously computed values in `dp`.
+6. **Inner Loop (Iterating over left subtree sizes)**
+	```cpp
+	        for(int l = 1; l < i; l += 2) {
+	```
+	Start a loop to iterate over possible sizes of the left subtree, where `l` is the size of the left subtree, and it must be odd.
 
-4. **Combinations of Subtrees**:
-   - For each number `l` of nodes in the left subtree, the right subtree will contain `n - l - 1` nodes. We combine every tree in `dp[l]` with every tree in `dp[n - l - 1]` and create a new tree with these two subtrees as children of a new root node.
+7. **Comment**
+	```cpp
+	            // cout << l;
+	```
+	This line is a commented-out debug statement that would print the current size of the left subtree.
 
-5. **Return the Final Result**: After filling the DP array, the result for `n` nodes will be stored in `dp[n]`.
+8. **Loop Through Left Subtree Trees**
+	```cpp
+	            for(auto it: dp[l])
+	```
+	Iterate over all trees in `dp[l]`, which represent possible left subtrees for a tree with `i` nodes.
 
-### Code Breakdown (Step by Step)
+9. **Loop Through Right Subtree Trees**
+	```cpp
+	            for(auto it2: dp[i - l - 1]) {
+	```
+	Iterate over all trees in `dp[i - l - 1]`, which represent possible right subtrees for a tree with `i` nodes.
 
-1. **Initialize DP Array**:
-   ```cpp
-   vector<vector<TreeNode*>> dp(n + 1);
-   dp[1].push_back(new TreeNode(0));  // Base case: only one node in the tree.
-   ```
-   - We create a DP array `dp` with `n + 1` elements, where each element is a vector of `TreeNode*`. The first element, `dp[1]`, contains one tree with just a single node.
+10. **TreeNode Creation**
+	```cpp
+	                TreeNode* node = new TreeNode(0);
+	```
+	Create a new tree node to serve as the root of the current full binary tree.
 
-2. **Iterating Over Odd Numbers (i)**:
-   ```cpp
-   for (int i = 3; i <= n; i += 2) {
-   ```
-   - The outer loop starts from `i = 3` and increments by 2, considering only odd values of `i`. We build full binary trees for each odd `i`.
+11. **Assign Left Subtree**
+	```cpp
+	                node->left = it;
+	```
+	Assign the left child of the current node to be one of the trees from `dp[l]`.
 
-3. **Generating Combinations of Left and Right Subtrees**:
-   ```cpp
-   for (int l = 1; l < i; l += 2) {
-       for (auto it : dp[l]) {
-           for (auto it2 : dp[i - l - 1]) {
-               TreeNode* node = new TreeNode(0);
-               node->left = it;
-               node->right = it2;
-               dp[i].push_back(node);
-           }
-       }
-   }
-   ```
-   - For each value of `l`, we consider all pairs of left and right subtrees. The left subtree has `l` nodes, and the right subtree has `i - l - 1` nodes.
-   - We then create a new root node, assign the left and right subtrees to it, and push this new tree into `dp[i]`.
+12. **Assign Right Subtree**
+	```cpp
+	                node->right = it2;
+	```
+	Assign the right child of the current node to be one of the trees from `dp[i - l - 1]`.
 
-4. **Returning the Result**:
-   ```cpp
-   return dp[n];
-   ```
-   - Finally, we return the list of all possible full binary trees for `n` nodes, which is stored in `dp[n]`.
+13. **Store Created Tree**
+	```cpp
+	                dp[i].push_back(node);
+	```
+	Add the newly created full binary tree to `dp[i]`, which stores all possible full binary trees with `i` nodes.
 
-### Complexity
+14. **End Inner Loop**
+	```cpp
+	            }
+	```
+	End the loop that iterates over possible right subtree trees.
 
-#### Time Complexity:
-- **Outer Loop**: The outer loop runs from `i = 3` to `i = n`, and it iterates with a step size of 2, which means it runs approximately `n/2` times.
-- **Inner Loops**: For each value of `i`, the inner loops iterate over all combinations of `l` (where `l` is odd and less than `i`). For each pair of `l` and `n - l - 1`, we combine all trees from `dp[l]` and `dp[n - l - 1]`. The number of trees in `dp[l]` and `dp[n - l - 1]` grows exponentially with `l` and `n`.
-  - The total number of operations in the worst case is roughly the **number of possible full binary trees** up to `n`, which follows the structure of **Catalan numbers**. The Catalan number for `n` is approximately `O(4^n / n^(3/2))`.
-  - Therefore, the time complexity of this approach is **O(4^n / n^(3/2))**.
+15. **End Left Subtree Loop**
+	```cpp
+	        }
+	```
+	End the loop that iterates over possible left subtree sizes.
 
-#### Space Complexity:
-- The space complexity is dominated by the storage of the trees in `dp[i]`. Since each tree is represented as a `TreeNode` object and there are at most **Catalan number** of trees for each `i`, the space complexity is **O(4^n / n^(3/2))**, similar to the time complexity.
+16. **End Outer Loop**
+	```cpp
+	    }
+	```
+	End the loop that iterates over all possible tree sizes `i`.
 
-### Conclusion
+17. **Return Result**
+	```cpp
+	    return dp[n];        
+	```
+	Return the vector `dp[n]`, which contains all possible full binary trees with `n` nodes.
 
-This solution efficiently computes all possible full binary trees for a given number `n` using dynamic programming. By constructing trees recursively from smaller subproblems, the solution avoids the inefficiencies of brute force tree generation. Although the time and space complexities grow exponentially with `n`, the algorithm leverages the properties of full binary trees and dynamic programming to handle the problem in a more optimized way compared to generating every tree individually. The approach works efficiently for smaller values of `n` and provides a clear and methodical way to generate all full binary trees.
+18. **End Function**
+	```cpp
+	}
+	```
+	End the function definition.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^3)
+- **Worst Case:** O(n^3)
+
+The time complexity is O(n^3) in the worst case, where n is the number of nodes. The dynamic programming approach generates and combines trees for each odd value of n.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) in the worst case, where n is the number of nodes. This is due to the storage required for the DP array and the binary trees generated.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-possible-full-binary-trees/description/)
 

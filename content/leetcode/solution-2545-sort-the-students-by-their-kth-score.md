@@ -14,107 +14,95 @@ img_src = ""
 youtube = "YwAAwSzIavU"
 youtube_upload_date="2023-01-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/YwAAwSzIavU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix of scores, where each row represents a student and each column represents an exam. You need to sort the students based on their scores in the k-th exam, from the highest to the lowest. Return the sorted matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an m x n matrix `score` representing the scores of m students in n exams. You are also given an integer k, the index of the exam to use for sorting.
+- **Example:** `score = [[20, 5, 11], [10, 9, 14], [15, 18, 7]], k = 1`
+- **Constraints:**
+	- 1 <= m, n <= 250
+	- 1 <= score[i][j] <= 10^5
+	- score contains distinct integers
+	- 0 <= k < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int k;
-    int partition(vector<vector<int>>& score, int low, int high) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the matrix of students sorted by their scores in the k-th exam from highest to lowest.
+- **Example:** `[[15, 18, 7], [10, 9, 14], [20, 5, 11]]`
+- **Constraints:**
 
-      // select the rightmost element as pivot
-      vector<int> pivot = score[high];
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Sort the students based on the score in the k-th exam.
 
-      // pointer for greater element
-      int i = (low - 1);
+- 1. Extract the score for the k-th exam for each student.
+- 2. Sort the students based on their k-th exam score in descending order.
+- 3. Return the sorted matrix.
+{{< dots >}}
+### Problem Assumptions ✅
+- All exam scores are distinct across students.
+- The number of students and exams are within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `score = [[20, 5, 11], [10, 9, 14], [15, 18, 7]], k = 1`  \
+  **Explanation:** In this example, the students are sorted by their score in the second exam (k = 1). The sorted order is based on the scores: 18, 9, and 5.
 
-      // traverse each element of the array
-      // compare them with the pivot
-      for (int j = low; j < high; j++) {
-        if (score[j][k] > pivot[k]) {
+- **Input:** `score = [[30, 40], [20, 50], [10, 30]], k = 0`  \
+  **Explanation:** Here, the sorting is done by the scores in the first exam (k = 0), resulting in the order: 30, 20, and 10.
 
-          // if element smaller than pivot is found
-          // swap it with the greater element pointed by i
-          i++;
+{{< dots >}}
+## Approach 🚀
+We need to sort the students based on the score in the k-th exam using sorting algorithms.
 
-          // swap element at i with element at j
-          swap(score[i], score[j]);
-        }
-      }
-
-      // swap pivot with the greater element at i
-      swap(score[i + 1], score[high]);
-
-      // return the partition point
-      return (i + 1);
-    }
-    void quickSort(vector<vector<int>>& score, int low, int high) {
-        if (low < high) {
-            int pi = partition(score, low, high);
-            quickSort(score, low, pi - 1);
-            quickSort(score, pi + 1, high);
-        }
-    }
-    vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
-        this->k = k;
-        quickSort(score, 0, score.size() - 1);
-        return score;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to sort a list of students based on their scores in a specific subject. Each student has a list of scores, and you need to sort the students by their scores in a given subject (indexed by `k`). The sorting should be done in descending order, meaning students with higher scores in the `k`-th subject should come first.
-
-### Approach
-
-The approach used to solve this problem is based on the **QuickSort** algorithm, which is an efficient sorting algorithm. QuickSort is a divide-and-conquer algorithm that works by selecting a **pivot** element and partitioning the array into two subarrays: one with elements greater than the pivot and the other with elements less than the pivot. The array is then recursively sorted by applying the same process to the subarrays.
-
-In this problem, the key observation is that we need to sort based on the `k`-th score of each student, which corresponds to the `k`-th element of each student’s score list. The sorting will be done in descending order. This approach leverages the QuickSort algorithm to efficiently sort the students based on their `k`-th score.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Define the `k` variable
+### Initial Thoughts 💭
+- We need a way to extract and compare scores based on the k-th exam for each student.
+- This can be done efficiently by using sorting techniques.
+- We can use a sorting function that sorts by the k-th exam score in descending order.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle cases where the matrix is empty, though it is unlikely in this problem due to constraints.
+- Handle cases with maximum values of m and n (e.g., m = 250, n = 250).
+- Handle cases where the scores in the k-th exam are close in value.
+- Ensure that the solution works efficiently with the maximum constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
 int k;
-```
-The variable `k` stores the index of the score by which we want to sort the students. This is passed to the `sortTheStudents` method, which assigns it to the class member `k` for use during the sorting process.
-
-#### Step 2: Partitioning function
-```cpp
 int partition(vector<vector<int>>& score, int low, int high) {
-    vector<int> pivot = score[high];
-    int i = (low - 1);
 
-    for (int j = low; j < high; j++) {
-        if (score[j][k] > pivot[k]) {
-            i++;
-            swap(score[i], score[j]);
-        }
+  // select the rightmost element as pivot
+  vector<int> pivot = score[high];
+
+  // pointer for greater element
+  int i = (low - 1);
+
+  // traverse each element of the array
+  // compare them with the pivot
+  for (int j = low; j < high; j++) {
+    if (score[j][k] > pivot[k]) {
+
+      // if element smaller than pivot is found
+      // swap it with the greater element pointed by i
+      i++;
+
+      // swap element at i with element at j
+      swap(score[i], score[j]);
     }
+  }
 
-    swap(score[i + 1], score[high]);
-    return (i + 1);
+  // swap pivot with the greater element at i
+  swap(score[i + 1], score[high]);
+
+  // return the partition point
+  return (i + 1);
 }
-```
-- The `partition` function takes the list of scores and splits it into two parts: elements that are greater than the pivot (at the `k`-th score index) and elements that are less than or equal to the pivot.
-- **Pivot selection**: The rightmost element (`score[high]`) is selected as the pivot. The pivot will be used to partition the array into two halves.
-- **Partitioning logic**: 
-  - The index `i` is initialized to `low - 1`. It tracks the position of the last element that is smaller than or equal to the pivot.
-  - For each element `score[j]` (from `low` to `high-1`), if the `k`-th score of `score[j]` is greater than the pivot's `k`-th score, the element is moved to the left side of the pivot, and `i` is incremented.
-  - Finally, the pivot is swapped with the element at `i + 1`, placing it in its correct position.
-
-The `partition` function returns the index of the pivot, which is now in its correct sorted position.
-
-#### Step 3: QuickSort recursive function
-```cpp
 void quickSort(vector<vector<int>>& score, int low, int high) {
     if (low < high) {
         int pi = partition(score, low, high);
@@ -122,39 +110,148 @@ void quickSort(vector<vector<int>>& score, int low, int high) {
         quickSort(score, pi + 1, high);
     }
 }
-```
-- The `quickSort` function is the recursive part of the algorithm. It recursively partitions the list of scores and sorts the two subarrays created after partitioning.
-- The recursion continues until the subarray has only one element or is empty (when `low` is greater than or equal to `high`).
-
-#### Step 4: Sorting function `sortTheStudents`
-```cpp
 vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
     this->k = k;
     quickSort(score, 0, score.size() - 1);
     return score;
 }
 ```
-- The `sortTheStudents` function is the main entry point for sorting the students.
-- It receives the `score` list and the index `k`. The `k` is stored as a class member so it can be accessed in the `partition` function.
-- The `quickSort` function is then called to sort the `score` list based on the `k`-th score in descending order.
 
-Finally, the sorted list of students is returned.
+This code implements the QuickSort algorithm to sort students' scores based on a specific column 'k'. The main function 'sortTheStudents' sorts the students by the score at column 'k', using the 'quickSort' helper function, which internally uses a partition method to organize the elements.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int k;
+	```
+	A variable 'k' is declared to hold the column index used to sort the students' scores.
 
-#### Time Complexity:
-The time complexity of the QuickSort algorithm is **O(n log n)** on average, where `n` is the number of students in the `score` list. This is because QuickSort works by dividing the list into two sublists and sorting each sublist recursively. Each partition operation takes **O(n)** time, and there are **O(log n)** levels of recursion in the average case.
+2. **Function Definition**
+	```cpp
+	int partition(vector<vector<int>>& score, int low, int high) {
+	```
+	The 'partition' function is defined to perform the partitioning step of the QuickSort algorithm, which divides the dataset based on a pivot element.
 
-However, the worst-case time complexity of QuickSort is **O(n^2)**, which occurs when the pivot selection is poor, such as when the pivot is always the smallest or largest element. This can be mitigated by using strategies like choosing a random pivot or using the median of three elements as the pivot.
+3. **Pivot Initialization**
+	```cpp
+	  vector<int> pivot = score[high];
+	```
+	The pivot is initialized as the last element in the current sub-array of 'score'.
 
-#### Space Complexity:
-The space complexity is **O(log n)** due to the recursive call stack in QuickSort. Each recursive call creates a new stack frame, and the depth of the recursion is proportional to the logarithm of the number of elements in the list. The partition function uses **O(1)** extra space because it modifies the list in place without using any additional storage.
+4. **Pointer Setup**
+	```cpp
+	  int i = (low - 1);
+	```
+	The pointer 'i' is initialized to 'low - 1'. It is used to track where to place elements greater than the pivot.
 
-### Conclusion
+5. **For Loop**
+	```cpp
+	  for (int j = low; j < high; j++) {
+	```
+	A for loop is used to iterate over each element of the array from index 'low' to 'high' (excluding the pivot).
 
-In this solution, the problem of sorting students based on their `k`-th score is efficiently solved using the **QuickSort** algorithm. The code implements the partitioning strategy for QuickSort and recursively sorts the students by their scores. The time complexity is optimal on average, and the space complexity is minimal, making the solution both time and space efficient.
+6. **Condition Check**
+	```cpp
+	    if (score[j][k] > pivot[k]) {
+	```
+	If the element at index 'j' is greater than the pivot, we need to swap it with the element at position 'i'.
 
-This approach leverages QuickSort's divide-and-conquer mechanism to sort students quickly and efficiently based on their scores, and the overall performance is suitable for handling large datasets.
+7. **Increment Pointer**
+	```cpp
+	      i++;
+	```
+	The pointer 'i' is incremented, indicating that a new element has been placed in the 'greater than pivot' section.
+
+8. **Swap Operation**
+	```cpp
+	      swap(score[i], score[j]);
+	```
+	The elements at indices 'i' and 'j' are swapped if the condition is met.
+
+9. **Pivot Final Swap**
+	```cpp
+	  swap(score[i + 1], score[high]);
+	```
+	The pivot is swapped with the element at position 'i + 1', which is the correct position for the pivot in the sorted array.
+
+10. **Partition End**
+	```cpp
+	  return (i + 1);
+	```
+	The partition function returns the index of the pivot after placing it in its correct position.
+
+11. **Function Definition**
+	```cpp
+	void quickSort(vector<vector<int>>& score, int low, int high) {
+	```
+	The 'quickSort' function is defined, which recursively sorts the elements by dividing them into smaller partitions.
+
+12. **Base Case**
+	```cpp
+	    if (low < high) {
+	```
+	Checks if the low index is less than the high index, which is a condition to continue sorting.
+
+13. **Recursive Call**
+	```cpp
+	        int pi = partition(score, low, high);
+	```
+	Calls the partition function to return the index of the pivot element, which divides the array into two sub-arrays.
+
+14. **Left Subarray Sort**
+	```cpp
+	        quickSort(score, low, pi - 1);
+	```
+	Recursively calls 'quickSort' to sort the left sub-array.
+
+15. **Right Subarray Sort**
+	```cpp
+	        quickSort(score, pi + 1, high);
+	```
+	Recursively calls 'quickSort' to sort the right sub-array.
+
+16. **Function Definition**
+	```cpp
+	vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
+	```
+	Defines the 'sortTheStudents' function that initializes 'k' and calls the 'quickSort' function to sort the student scores.
+
+17. **Sorting Call**
+	```cpp
+	    this->k = k;
+	```
+	The value of 'k' is assigned to the instance variable to be used during sorting.
+
+18. **Sorting Operation**
+	```cpp
+	    quickSort(score, 0, score.size() - 1);
+	```
+	Calls 'quickSort' to start sorting the entire array of student scores.
+
+19. **Return Sorted Scores**
+	```cpp
+	    return score;
+	```
+	Returns the sorted array of student scores.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m log m), where m is the number of students.
+- **Average Case:** O(m log m), since sorting will dominate the time complexity.
+- **Worst Case:** O(m log m), since the sorting algorithm will take O(m log m) in the worst case.
+
+The time complexity is determined by the sorting step, which is O(m log m), where m is the number of students.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if the sorting is done in-place.
+- **Worst Case:** O(m), where m is the number of students, due to the space required for sorting.
+
+The space complexity is O(m), where m is the number of students, if we use additional space for sorting.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-the-students-by-their-kth-score/description/)
 

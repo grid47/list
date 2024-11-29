@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,143 +28,200 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two sorted integer arrays `nums1` and `nums2` and an integer `k`, return the k pairs with the smallest sums. Each pair consists of one element from `nums1` and one element from `nums2`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two sorted arrays, `nums1` and `nums2`, and an integer `k`.
+- **Example:** `Input: nums1 = [1, 7, 11], nums2 = [2, 4, 6], k = 3`
+- **Constraints:**
+	- 1 <= nums1.length, nums2.length <= 10^5
+	- -10^9 <= nums1[i], nums2[i] <= 10^9
+	- nums1 and nums2 are sorted in non-decreasing order.
+	- 1 <= k <= 10^4
+	- k <= nums1.length * nums2.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
-        vector<vector<int>> ans;
-        int n1 = nums1.size(), n2 = nums2.size();
-        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;        
-        for(int i = 0; i < n1 && i < k; i++) {
-            pq.push({nums1[i] + nums2[0], nums1[i], nums2[0], 0});
-        }
-        while(!pq.empty() && ans.size() < k) {
-            auto it = pq.top();
-            pq.pop();
-            ans.push_back({it[1], it[2]});
-            if(it[3] == n2 - 1) continue;            
-            it[0] = it[1] + nums2[it[3] + 1];
-            it[2] = nums2[it[3] + 1];
-            it[3] = it[3] + 1;
-            pq.push(it);
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of the `k` pairs with the smallest sums.
+- **Example:** `Output: [[1, 2], [1, 4], [1, 6]]`
+- **Constraints:**
+	- The pairs must be returned in non-decreasing order of their sums.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the `k` smallest sum pairs efficiently, leveraging the sorted order of the input arrays.
+
+- 1. Initialize a priority queue (min-heap) to track the smallest sums.
+- 2. Push the first pair from each element in `nums1` and the first element in `nums2` into the priority queue.
+- 3. Continue popping the smallest pairs and pushing the next possible pairs until `k` pairs are found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays `nums1` and `nums2` are both sorted in non-decreasing order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums1 = [1, 7, 11], nums2 = [2, 4, 6], k = 3
+Output: [[1, 2], [1, 4], [1, 6]]`  \
+  **Explanation:** The smallest pairs are (1, 2), (1, 4), and (1, 6) because their sums are 3, 5, and 7, respectively.
+
+- **Input:** `Input: nums1 = [1, 1, 2], nums2 = [1, 2, 3], k = 2
+Output: [[1, 1], [1, 1]]`  \
+  **Explanation:** The first two pairs are (1, 1) and (1, 1) because their sums are both 2.
+
+{{< dots >}}
+## Approach 🚀
+We use a priority queue to keep track of the smallest sum pairs and efficiently find the k smallest pairs.
+
+### Initial Thoughts 💭
+- We are given two sorted arrays, which suggests that we can efficiently use a priority queue to find the smallest pairs.
+- Using a min-heap (priority queue) will allow us to efficiently extract the smallest sums and generate the next potential pairs.
+{{< dots >}}
+### Edge Cases 🌐
+- If either of the arrays `nums1` or `nums2` is empty, the result should be an empty list.
+- For large arrays, the solution should efficiently compute the k smallest pairs without exceeding time limits.
+- If `k = 1`, the output should be the pair with the smallest sum.
+- Ensure that the priority queue is efficiently managed to avoid excessive computational overhead.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+    vector<vector<int>> ans;
+    int n1 = nums1.size(), n2 = nums2.size();
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;        
+    for(int i = 0; i < n1 && i < k; i++) {
+        pq.push({nums1[i] + nums2[0], nums1[i], nums2[0], 0});
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-Given two sorted integer arrays, `nums1` and `nums2`, and an integer `k`, we need to find the `k` smallest pairs `(x, y)` where `x` is from `nums1` and `y` is from `nums2`. The pairs should be returned in ascending order of their sum. 
-
-For example:
-- Input: `nums1 = [1,7,11]`, `nums2 = [2,4,6]`, `k = 3`
-- Output: `[[1,2],[1,4],[1,6]]`
-
-If there are fewer than `k` pairs, return all the possible pairs.
-
----
-
-### 🧠 Approach
-
-To solve this problem efficiently, we use a **Min-Heap** (priority queue) to extract the smallest pairs dynamically. Here's how:
-
-1. **Min-Heap**: Since we need to find the smallest elements in a sorted order, the Min-Heap helps us do that efficiently by always giving us the pair with the smallest sum.
-   
-2. **Iterative Pairing**: We begin by pushing the smallest pair (`nums1[i]` paired with `nums2[0]`) into the heap. As we pop pairs from the heap, we push the next possible pair formed by the current element from `nums1` and the next element in `nums2`. This ensures that pairs with smaller sums are processed first.
-
-3. **Efficient Pair Management**: Since `nums1` and `nums2` are already sorted, pairing the smallest elements first gives us a clear path to finding the smallest sums in ascending order.
-
-4. **Optimization**: To ensure we don't generate more pairs than needed, we keep the heap size limited to `k`, which allows us to efficiently compute the smallest `k` pairs without any unnecessary operations.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Here's a detailed breakdown of the code:
-
-#### 1. **Initial Setup**
-
-```cpp
-vector<vector<int>> ans;
-int n1 = nums1.size(), n2 = nums2.size();
-priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
-```
-
-- `ans`: This stores the result (the smallest pairs).
-- `n1` and `n2`: The sizes of `nums1` and `nums2`.
-- `pq`: A Min-Heap (priority queue) to store the pairs in the order of their sum.
-
-#### 2. **Push the First `k` Pairs**
-
-```cpp
-for(int i = 0; i < n1 && i < k; i++) {
-    pq.push({nums1[i] + nums2[0], nums1[i], nums2[0], 0});
+    while(!pq.empty() && ans.size() < k) {
+        auto it = pq.top();
+        pq.pop();
+        ans.push_back({it[1], it[2]});
+        if(it[3] == n2 - 1) continue;            
+        it[0] = it[1] + nums2[it[3] + 1];
+        it[2] = nums2[it[3] + 1];
+        it[3] = it[3] + 1;
+        pq.push(it);
+    }
+    return ans;
 }
 ```
 
-- We loop through the elements of `nums1` and push pairs of the form `(nums1[i], nums2[0])` into the heap. This ensures that the heap is initialized with the smallest element from `nums1` paired with the smallest element from `nums2`.
+This function returns the k smallest sum pairs from two sorted arrays `nums1` and `nums2` using a min-heap (priority queue). It pushes the sum of the first element from `nums1` with each element from `nums2` into the priority queue and pops the smallest sums while iterating through the arrays.
 
-Each entry in the heap is a vector of four integers:
-1. The sum of the pair (`nums1[i] + nums2[0]`).
-2. The current element from `nums1` (`nums1[i]`).
-3. The current element from `nums2` (`nums2[0]`).
-4. The index in `nums2` that is being paired with `nums1[i]` (initially `0`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+	```
+	This line declares the function `kSmallestPairs`, which takes two vectors `nums1` and `nums2` and an integer `k` to find the k smallest sum pairs.
 
-#### 3. **Heap Extraction and Pair Generation**
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	A vector `ans` is declared to store the k smallest sum pairs that will be returned by the function.
 
-```cpp
-while(!pq.empty() && ans.size() < k) {
-    auto it = pq.top();
-    pq.pop();
-    ans.push_back({it[1], it[2]});
-    if(it[3] == n2 - 1) continue;
-    it[0] = it[1] + nums2[it[3] + 1];
-    it[2] = nums2[it[3] + 1];
-    it[3] = it[3] + 1;
-    pq.push(it);
-}
-```
+3. **Variable Initialization**
+	```cpp
+	    int n1 = nums1.size(), n2 = nums2.size();
+	```
+	The sizes of `nums1` and `nums2` are stored in `n1` and `n2` respectively to avoid repeatedly calculating their sizes.
 
-- We pop the smallest pair from the heap and add it to the result `ans`.
-- If the index in `nums2` is the last element (`n2 - 1`), we skip pushing further pairs for that element of `nums1`.
-- Otherwise, we generate the next pair by moving one step forward in `nums2` and push it back into the heap.
+4. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;        
+	```
+	A min-heap (priority queue) `pq` is initialized, which will store vectors containing the sum of pairs and the corresponding elements from `nums1` and `nums2`.
 
-#### 4. **Return the Result**
+5. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < n1 && i < k; i++) {
+	```
+	This loop iterates over `nums1` and adds the first element of each pair from `nums1[i]` and `nums2[0]` into the priority queue.
 
-```cpp
-return ans;
-```
+6. **Priority Queue Push**
+	```cpp
+	        pq.push({nums1[i] + nums2[0], nums1[i], nums2[0], 0});
+	```
+	The sum of `nums1[i]` and `nums2[0]` is pushed into the priority queue along with the corresponding elements and the index `0` (representing the first element of `nums2`).
 
-Finally, we return the `k` smallest pairs stored in `ans`.
+7. **Loop Condition**
+	```cpp
+	    while(!pq.empty() && ans.size() < k) {
+	```
+	The while loop continues as long as there are elements in the priority queue and the number of pairs found is less than `k`.
 
----
+8. **Priority Queue Pop**
+	```cpp
+	        auto it = pq.top();
+	```
+	The smallest sum pair is popped from the priority queue.
 
-### 📈 Complexity Analysis
+9. **Priority Queue Pop**
+	```cpp
+	        pq.pop();
+	```
+	The smallest element is removed from the priority queue after it has been retrieved.
 
-#### Time Complexity
+10. **Answer Update**
+	```cpp
+	        ans.push_back({it[1], it[2]});
+	```
+	The pair `it[1]` and `it[2]` (the elements from `nums1` and `nums2`) is added to the result `ans`.
 
-- **Heap Operations**: Each push and pop operation in the heap takes `O(log k)` time, where `k` is the number of pairs we need to extract. The heap size is at most `k` at any time, and we perform these operations at most `k` times.
-  
-Thus, the overall time complexity is:
-- **O(k log k)**, where `k` is the number of pairs we need to return.
+11. **Condition Check**
+	```cpp
+	        if(it[3] == n2 - 1) continue;            
+	```
+	If the index `it[3]` has reached the last element of `nums2`, the loop continues to the next iteration without making any changes, as no further pairs are available from `nums2` for this particular element of `nums1`.
 
-#### Space Complexity
+12. **Element Update**
+	```cpp
+	        it[0] = it[1] + nums2[it[3] + 1];
+	```
+	The sum of `it[1]` (current element of `nums1`) and the next element of `nums2` is updated in the vector.
 
-- We use a heap of size at most `k` to store pairs, so the space complexity is:
-- **O(k)**.
+13. **Element Update**
+	```cpp
+	        it[2] = nums2[it[3] + 1];
+	```
+	The next element of `nums2` is updated in the vector `it`.
 
-Additionally, we store the result in a vector, which can hold up to `k` pairs, so the overall space complexity remains:
-- **O(k)**.
+14. **Index Update**
+	```cpp
+	        it[3] = it[3] + 1;
+	```
+	The index `it[3]` is incremented to reflect the movement to the next element of `nums2`.
 
----
+15. **Priority Queue Push**
+	```cpp
+	        pq.push(it);
+	```
+	The updated vector is pushed back into the priority queue to continue processing.
 
-### 🏁 Conclusion
+16. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The result `ans`, containing the k smallest pairs, is returned.
 
-The `kSmallestPairs` function efficiently computes the `k` smallest pairs from two sorted arrays using a Min-Heap and iterative pairing. By leveraging the sorted nature of the arrays and a priority queue, the solution efficiently generates the desired pairs with optimal time and space complexity. This approach is particularly well-suited for problems where the arrays are large and the number of pairs to return (`k`) is relatively small.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k log k)
+- **Average Case:** O(k log k)
+- **Worst Case:** O(k log n2)
+
+In the worst case, we push and pop from the priority queue for `k` pairs, each involving logarithmic operations in relation to the size of the second array `nums2`.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is determined by the storage used for the priority queue and the resulting pairs.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/)
 

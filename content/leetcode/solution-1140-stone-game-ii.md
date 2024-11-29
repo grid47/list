@@ -14,172 +14,233 @@ img_src = ""
 youtube = "I-z-u0zfQtg"
 youtube_upload_date="2023-05-26"
 youtube_thumbnail="https://i.ytimg.com/vi/I-z-u0zfQtg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice and Bob are playing a game with piles of stones. Each pile contains a positive integer number of stones. On each player's turn, they can take stones from the first X remaining piles, where 1 <= X <= 2M. The goal is to maximize the number of stones Alice can collect assuming both play optimally.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list `piles`, where each element `piles[i]` represents the number of stones in the ith pile.
+- **Example:** `Input: piles = [3, 5, 8, 7, 6]`
+- **Constraints:**
+	- 1 <= piles.length <= 100
+	- 1 <= piles[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    /*
-    
-    Taking postfix sum to count pile is new concept - residual count
-    
-    Thinking like, I had taken this much and pick what you
-    require out of remaining, from how much ever you picked
-    the rest is mine
-    
-    each call is others turn
-    
-    */
-    vector<int> piles;
-    vector<vector<int>> memo;
-    int n;
-    int dp(int idx, int m) {
-        if(idx + 2* m >= piles.size()) return piles[idx];
-        if(memo[idx][m] != -1) return memo[idx][m];
-        int ans = 0;
-        int tmp = 0;
-        for(int x = 1; x <= 2 * m; x++) {
-            int tmp = piles[idx] - piles[idx + x];
-            ans = max(ans, tmp + piles[idx + x] - dp(idx + x, max(m, x)) );
-        }
-        return memo[idx][m] = ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of stones Alice can collect if both players play optimally.
+- **Example:** `Output: 14`
+- **Constraints:**
+	- The result will be an integer representing the maximum number of stones Alice can collect.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the optimal strategy for Alice to collect the maximum number of stones, while simulating the game with Bob's optimal strategy.
+
+- 1. Calculate the cumulative sum of the piles in reverse order (postfix sum).
+- 2. Use dynamic programming (DP) to store the optimal results for different states (index and M).
+- 3. Recursively calculate the maximum number of stones Alice can collect given the current state and optimal plays of both players.
+{{< dots >}}
+### Problem Assumptions ✅
+- The players take turns and Alice always plays first.
+- Both players play optimally, i.e., they maximize their score while minimizing the opponent's score.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: piles = [3, 5, 8, 7, 6]`  \
+  **Explanation:** In this example, Alice starts by taking 1 pile. Then Bob takes 2 piles, Alice takes 2 more piles, and Bob takes the remaining piles. Alice's total is 3 + 7 + 6 = 14.
+
+- **Input:** `Input: piles = [1, 2, 3, 4, 6, 80]`  \
+  **Explanation:** In this example, Alice can maximize her score by taking the first pile, Bob takes 2 piles, Alice then takes 2 piles, and Bob takes the remaining stones. Alice collects 1 + 4 + 6 + 80 = 84.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using dynamic programming to simulate the optimal play of both Alice and Bob.
+
+### Initial Thoughts 💭
+- Dynamic programming is needed to handle the optimal play decisions and recursive choices for both players.
+- I need to consider the remaining stones after each move and calculate the possible outcomes for Alice based on Bob's optimal response.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input will not occur as per the problem constraints.
+- The algorithm should efficiently handle cases where the length of the piles is large (up to 100).
+- The case where all piles have the same number of stones or where one player can take all the stones at the beginning should be considered.
+- Ensure the algorithm handles the upper constraint where the number of stones in each pile can be as large as 10,000.
+{{< dots >}}
+## Code 💻
+```cpp
+/*
+
+Taking postfix sum to count pile is new concept - residual count
+
+Thinking like, I had taken this much and pick what you
+require out of remaining, from how much ever you picked
+the rest is mine
+
+each call is others turn
+
+*/
+vector<int> piles;
+vector<vector<int>> memo;
+int n;
+int dp(int idx, int m) {
+    if(idx + 2* m >= piles.size()) return piles[idx];
+    if(memo[idx][m] != -1) return memo[idx][m];
+    int ans = 0;
+    int tmp = 0;
+    for(int x = 1; x <= 2 * m; x++) {
+        int tmp = piles[idx] - piles[idx + x];
+        ans = max(ans, tmp + piles[idx + x] - dp(idx + x, max(m, x)) );
     }
-    int stoneGameII(vector<int>& p) {
-        n = p.size();
-        piles = p;
-        memo.resize(n, vector<int>(n, -1));
-        for(int i = p.size() - 2; i >= 0; i--)
-            piles[i] += piles[i + 1];
-        return dp(0, 1);
-    }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The Stone Game II is a two-player game where players take turns to pick stones from a pile. The goal is to maximize the number of stones collected. The game starts with a pile of stones, represented as an array, and the players can choose to take a certain number of stones based on a given set of rules.
-
-**Rules:**
-1. Players take turns to pick stones.
-2. On each turn, a player can take between `1` and `2 * m` stones, where `m` is the maximum number of stones the previous player took.
-3. The game ends when there are no stones left to take.
-
-The task is to determine the maximum number of stones that the first player can collect if both players play optimally.
-
-### Approach
-The solution employs a dynamic programming approach to analyze the game. It maintains a memoization table to store the results of subproblems, reducing redundant calculations. The key steps of the approach are:
-
-1. **Postfix Sum Calculation**: Compute the cumulative sum of stones from the end of the list to the beginning. This allows efficient calculation of the stones remaining after certain moves.
-
-2. **Dynamic Programming Recursive Function**: The recursive function `dp(idx, m)` is defined to determine the maximum number of stones the first player can collect starting from the index `idx` and with a maximum of `m` stones that can be taken in the next move.
-
-3. **Memoization**: Store the results of previously computed states in a 2D array `memo` to avoid recalculating them.
-
-4. **Optimal Moves Calculation**: For each possible number of stones taken (ranging from `1` to `2 * m`), compute the resultant score and update the maximum possible score.
-
-### Code Breakdown (Step by Step)
-Here’s a detailed breakdown of the code:
-
-```cpp
-class Solution {
-public:
+    return memo[idx][m] = ans;
+}
+int stoneGameII(vector<int>& p) {
+    n = p.size();
+    piles = p;
+    memo.resize(n, vector<int>(n, -1));
+    for(int i = p.size() - 2; i >= 0; i--)
+        piles[i] += piles[i + 1];
+    return dp(0, 1);
+}
 ```
-- **Line 1-2**: A class named `Solution` is defined, marking the start of the implementation.
 
-```cpp
-    vector<int> piles;
-    vector<vector<int>> memo;
-    int n;
-```
-- **Line 3-5**: Three member variables are declared:
-  - `piles`: A vector to store the initial pile of stones.
-  - `memo`: A 2D vector to store previously computed results for the recursive function.
-  - `n`: An integer to store the size of the pile.
+This is the solution for the Stone Game II problem. It uses dynamic programming with memoization to calculate the optimal strategy for the player. The `dp` function calculates the maximum stones that can be taken from any given index, and the final result is computed from the first index.
 
-```cpp
-    int dp(int idx, int m) {
-```
-- **Line 6**: The `dp` function is defined, taking the current index `idx` and the maximum stones `m` as parameters. This function will compute the maximum stones collectible from the current state.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<int> piles;
+	```
+	This line declares a vector `piles` to store the number of stones in each pile.
 
-```cpp
-        if(idx + 2 * m >= piles.size()) return piles[idx];
-```
-- **Line 7**: This condition checks if the index plus twice the maximum stones exceeds the size of the pile. If true, it means all remaining stones can be taken, so the function returns the total stones from the current index onward.
+2. **Variable Declaration**
+	```cpp
+	vector<vector<int>> memo;
+	```
+	This line declares a 2D vector `memo` to store the results of subproblems, which will be used for memoization to avoid redundant calculations.
 
-```cpp
-        if(memo[idx][m] != -1) return memo[idx][m];
-```
-- **Line 8**: This line checks if the current state has already been computed. If it has (i.e., `memo[idx][m]` is not -1), it returns the stored result.
+3. **Variable Declaration**
+	```cpp
+	int n;
+	```
+	This line declares an integer variable `n` to store the number of piles.
 
-```cpp
-        int ans = 0;
-        int tmp = 0;
-```
-- **Line 9-10**: Initializes variables:
-  - `ans`: This will store the maximum stones collectible from the current state.
-  - `tmp`: A temporary variable used to store intermediate calculations.
+4. **Function Definition**
+	```cpp
+	int dp(int idx, int m) {
+	```
+	This defines the recursive function `dp`, which calculates the maximum stones that can be taken starting from index `idx` with a maximum number of piles `m` to be taken.
 
-```cpp
-        for(int x = 1; x <= 2 * m; x++) {
-```
-- **Line 11**: A for loop iterates over the possible number of stones `x` that can be taken, which ranges from `1` to `2 * m`.
+5. **Base Case**
+	```cpp
+	    if(idx + 2* m >= piles.size()) return piles[idx];
+	```
+	This is the base case where if the current index `idx` plus `2 * m` exceeds or equals the total number of piles, it returns the remaining stones in the current pile.
 
-```cpp
-            int tmp = piles[idx] - piles[idx + x];
-```
-- **Line 12**: This calculates the stones left after taking `x` stones. It uses the cumulative sum to determine how many stones remain in the pile.
+6. **Memoization Check**
+	```cpp
+	    if(memo[idx][m] != -1) return memo[idx][m];
+	```
+	This checks if the result for the current subproblem has already been computed and stored in `memo`. If so, it returns the cached result.
 
-```cpp
-            ans = max(ans, tmp + piles[idx + x] - dp(idx + x, max(m, x)) );
-```
-- **Line 13**: The maximum score is updated by comparing the current `ans` with the potential score if `x` stones are taken. It adds the stones left after the current move and subtracts the result of the subsequent player’s optimal move from the new index.
+7. **Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	This line initializes the variable `ans` to store the result for the current subproblem.
 
-```cpp
-        return memo[idx][m] = ans;
-```
-- **Line 14**: The computed result for the current state is stored in the `memo` table before returning it.
+8. **Initialization**
+	```cpp
+	    int tmp = 0;
+	```
+	This line initializes the variable `tmp` to store intermediate results during the calculations.
 
-```cpp
-    int stoneGameII(vector<int>& p) {
-```
-- **Line 15**: The main function `stoneGameII` is defined, which takes a vector `p` as input representing the initial pile of stones.
+9. **Loop for Possible Choices**
+	```cpp
+	    for(int x = 1; x <= 2 * m; x++) {
+	```
+	This loop iterates over all possible choices of stones that can be picked, from 1 to `2 * m` stones.
 
-```cpp
-        n = p.size();
-        piles = p;
-```
-- **Line 16-17**: The size of the pile is stored in `n`, and the input vector `p` is assigned to the member variable `piles`.
+10. **Calculate Stones Left**
+	```cpp
+	        int tmp = piles[idx] - piles[idx + x];
+	```
+	This line calculates the stones left after picking `x` stones from the current pile.
 
-```cpp
-        memo.resize(n, vector<int>(n, -1));
-```
-- **Line 18**: The `memo` table is resized to `n x n` and initialized with `-1` to indicate that no states have been computed yet.
+11. **Recursion for Next Step**
+	```cpp
+	        ans = max(ans, tmp + piles[idx + x] - dp(idx + x, max(m, x)) );
+	```
+	This line recursively calculates the maximum stones that can be taken by the current player, updating the result `ans` accordingly.
 
-```cpp
-        for(int i = p.size() - 2; i >= 0; i--)
-            piles[i] += piles[i + 1];
-```
-- **Line 19-21**: A loop computes the postfix sum, updating `piles[i]` to include the stones from `piles[i + 1]`. This prepares the `piles` vector for efficient score calculations.
+12. **Memoization Store**
+	```cpp
+	    return memo[idx][m] = ans;
+	```
+	This stores the result of the current subproblem in `memo` to avoid redundant calculations in future calls.
 
-```cpp
-        return dp(0, 1);
-    }
-};
-```
-- **Line 22-23**: The function initiates the recursive DP process starting from index `0` with a maximum of `1` stone that can be taken. The computed maximum stones collectible is returned, and the class definition is closed.
+13. **Main Function**
+	```cpp
+	int stoneGameII(vector<int>& p) {
+	```
+	This defines the main function `stoneGameII`, which initializes the problem and calls the `dp` function.
 
-### Complexity
-- **Time Complexity**: The time complexity of the algorithm is \( O(n^2) \), where \( n \) is the number of stones in the input vector. This arises from the double recursive nature of the `dp` function, where each state is computed based on possible moves.
-- **Space Complexity**: The space complexity is \( O(n) \) due to the memoization table and the `piles` vector. Both require space proportional to the size of the input.
+14. **Initialization in Main**
+	```cpp
+	    n = p.size();
+	```
+	This initializes the variable `n` with the size of the input vector `p`, representing the number of piles.
 
-### Conclusion
-The provided C++ solution effectively solves the Stone Game II problem using dynamic programming and memoization techniques. By leveraging the concept of cumulative sums, the algorithm efficiently computes the maximum number of stones that the first player can collect, even when faced with optimal plays from the second player. This approach ensures clarity and efficiency, making it suitable for competitive programming and algorithmic challenges.
+15. **Initialization in Main**
+	```cpp
+	    piles = p;
+	```
+	This assigns the input vector `p` to the `piles` vector, which will be used for calculation.
+
+16. **Memoization Initialization**
+	```cpp
+	    memo.resize(n, vector<int>(n, -1));
+	```
+	This resizes the `memo` vector to store the results for all subproblems, initializing all values to -1, indicating that they haven't been computed yet.
+
+17. **Prefix Sum Calculation**
+	```cpp
+	    for(int i = p.size() - 2; i >= 0; i--)
+	```
+	This loop calculates the prefix sum of the piles in reverse order, storing the cumulative sum in the `piles` vector.
+
+18. **Prefix Sum Calculation**
+	```cpp
+	        piles[i] += piles[i + 1];
+	```
+	This adds the stones in the next pile to the current pile to build the prefix sum.
+
+19. **Return Final Result**
+	```cpp
+	    return dp(0, 1);
+	```
+	This calls the `dp` function starting from index 0 with a maximum pile count of 1, and returns the result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) because we are using dynamic programming with two nested loops to calculate the optimal solution.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the memoization table that stores results for each state (index and max piles Alice can take).
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stone-game-ii/description/)

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Vam9gldRapY"
 youtube_upload_date="2020-08-08"
 youtube_thumbnail="https://i.ytimg.com/vi/Vam9gldRapY/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGIgZSgsMA8=&rs=AOn4CLByu4Pnq9YHL4GumLlrHVQp65TWqQ"
+comments = true
 +++
 
 
@@ -27,126 +28,201 @@ youtube_thumbnail="https://i.ytimg.com/vi/Vam9gldRapY/hqdefault.jpg?sqp=-oaymwEm
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary tree and an integer targetSum. Your task is to count the total number of paths in the tree where the sum of node values along the path equals targetSum. The path does not need to start or end at the root or a leaf, but it must go downwards (from parent to child nodes).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by the root node and an integer targetSum.
+- **Example:** `root = [3, 5, -2, 3, 1, null, 4], targetSum = 7`
+- **Constraints:**
+	- 1 <= number of nodes <= 1000
+	- -10^9 <= Node.val <= 10^9
+	- -1000 <= targetSum <= 1000
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-    int cnt = 0;
-public:
-    int pathSum(TreeNode* root, int sum) {
-        dfs(root, sum);
-        return cnt;
-    }
-    
-    void dfs(TreeNode* root, long sum) {
-        if(root == NULL) return;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of paths in the tree that sum to targetSum.
+- **Example:** `2`
+- **Constraints:**
+	- The output should be a non-negative integer representing the number of valid paths.
 
-        test(root, sum);
-        dfs(root->left,  sum);
-        dfs(root->right, sum);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of paths that sum to targetSum while only moving downwards in the tree.
 
-    }
-    
-    void test(TreeNode* root, long sum) {
-        if  (root     == NULL) return;
-        if  (root->val == sum ) cnt++;
-        test(root->left,  sum - root->val);
-        test(root->right, sum - root->val);
-    }
-};
-{{< /highlight >}}
----
+- 1. Perform a Depth-First Search (DFS) traversal of the tree.
+- 2. For each node, calculate the sum for all paths starting from that node.
+- 3. Recursively check all possible paths for the sum matching the targetSum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is a valid binary tree.
+- The tree is not necessarily balanced.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [3, 5, -2, 3, 1, null, 4], targetSum = 7`  \
+  **Explanation:** There are two paths in the tree that sum to 7: `5 -> 3 -> -2` and `3 -> 1 -> 4`.
 
-### Problem Statement
+- **Input:** `Input: [10, 5, -3, 3, 2, null, 11, 3, -2, null, 1], targetSum = 8`  \
+  **Explanation:** The three paths that sum to 8 are: `5 -> 3`, `5 -> 2 -> 1`, and `-3 -> 11`.
 
-The problem asks us to find the number of paths in a binary tree where the sum of the node values equals a given target sum. A path can start and end at any node in the tree, and the path can go downwards to any child node. Specifically, we need to count how many paths in the binary tree sum up to the given target sum.
+{{< dots >}}
+## Approach 🚀
+The approach uses DFS to explore all possible paths in the binary tree and checks whether the sum of the values along the path equals targetSum.
 
-### Approach
-
-To solve this problem, we need to break it down into two main parts:
-
-1. **Recursive Search for Paths**: The main goal is to traverse the tree and, for each node, look for paths that sum to the target value.
-2. **Backtracking with Path Sum Calculation**: For each node, we recursively check all possible paths that can start from that node, both through the left and right subtrees. Every time we encounter a node whose value matches the target sum, we increase the count.
-
-The key insight here is to utilize depth-first search (DFS) to traverse the binary tree and backtrack on each node to check all possible paths for the sum. We'll recursively explore each node and attempt to find paths by subtracting the node value from the target sum. If we reach a node where the remaining sum is zero, we know we've found a valid path.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: The `pathSum` Function
-
+### Initial Thoughts 💭
+- DFS is a suitable approach to explore all potential paths in a binary tree.
+- We need to perform DFS starting from each node to explore all paths from that node downwards.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty (i.e., root is null), return 0.
+- Ensure that the algorithm works efficiently for trees with up to 1000 nodes.
+- If targetSum is 0, consider paths where the sum of values along the path equals 0.
+- Handle large integer values within the specified range of [-10^9, 10^9].
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
+int cnt = 0;
+public:
 int pathSum(TreeNode* root, int sum) {
     dfs(root, sum);
     return cnt;
 }
-```
 
-- This function is the entry point for counting the paths. It starts by calling the `dfs` (depth-first search) function, which will recursively explore the tree.
-- The variable `cnt` is a global counter that will keep track of how many paths satisfy the condition of summing up to the target value (`sum`).
-  
-#### Step 2: The `dfs` Function
-
-```cpp
 void dfs(TreeNode* root, long sum) {
     if(root == NULL) return;
+
     test(root, sum);
-    dfs(root->left, sum);
+    dfs(root->left,  sum);
     dfs(root->right, sum);
+
 }
-```
 
-- The `dfs` function is a recursive function that traverses the entire binary tree.
-- The base case is when `root` is `NULL`. In that case, we simply return as there's no path to process.
-- The function first calls the `test` function, which checks whether there is a path starting at the current node that sums to the target `sum`.
-- Then, the function recursively calls `dfs` on the left and right children of the current node.
-
-#### Step 3: The `test` Function
-
-```cpp
 void test(TreeNode* root, long sum) {
-    if (root == NULL) return;
-    if (root->val == sum) cnt++;
-    test(root->left, sum - root->val);
+    if  (root     == NULL) return;
+    if  (root->val == sum ) cnt++;
+    test(root->left,  sum - root->val);
     test(root->right, sum - root->val);
 }
 ```
 
-- The `test` function checks if there is a path starting from the given node that matches the target `sum`.
-- If the current node's value is equal to the target `sum`, it means we've found a valid path, and we increment the `cnt` variable.
-- The function then recursively explores the left and right children of the current node, adjusting the target sum by subtracting the current node's value from the remaining sum. This ensures we're looking for paths that subtract the node's value from the target sum at each step.
-  
-#### Recursion and Backtracking
+This implementation calculates the number of paths in a binary tree that sum to a given value using depth-first search (DFS). The 'test' function explores all paths starting from a given node.
 
-- The `dfs` function performs a depth-first traversal of the tree, checking each node for valid paths.
-- The `test` function performs backtracking, checking if the current path from a node to its descendants sums to the target value.
-  
-By calling `dfs(root, sum)` for the root node, the algorithm explores all paths in the tree, checking for paths starting at every node, both from the left and right subtrees.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	Declares the Solution class where the methods and variables are defined.
 
-### Complexity
+2. **Variable Declaration**
+	```cpp
+	int cnt = 0;
+	```
+	Initializes a counter to store the number of valid paths with the desired sum.
 
-#### Time Complexity:
-- The time complexity of this solution is `O(n^2)`, where `n` is the number of nodes in the binary tree.
-- The `dfs` function explores every node in the tree, and for each node, the `test` function is called. The `test` function checks the path sum for each node, which requires exploring the entire path from that node to its descendants. As a result, this leads to a quadratic time complexity.
+3. **Access Specifier**
+	```cpp
+	public:
+	```
+	Defines the public section of the class to include accessible methods.
 
-#### Space Complexity:
-- The space complexity is `O(h)`, where `h` is the height of the binary tree, due to the recursive stack. In the worst case, if the tree is skewed, the height will be `n`, leading to a space complexity of `O(n)`. For balanced trees, the space complexity will be `O(log n)`.
+4. **Function Declarations And Calls**
+	```cpp
+	int pathSum(TreeNode* root, int sum) {
+	```
+	Declares the main function to calculate the total number of paths that sum to a target value.
 
-### Conclusion
+5. **Recursive Call**
+	```cpp
+	    dfs(root, sum);
+	```
+	Calls the helper function 'dfs' to traverse the tree starting from the root node.
 
-This solution efficiently counts the number of valid paths in a binary tree where the sum of node values equals the given target sum. By using a depth-first search (DFS) approach and backtracking with the `test` function, the algorithm explores all potential paths in the tree and checks if they sum up to the target.
+6. **Return At End**
+	```cpp
+	    return cnt;
+	```
+	Returns the total count of paths with the desired sum.
 
-Although the time complexity is `O(n^2)`, which can be slow for large trees, the solution works well for smaller to moderately sized trees and demonstrates a clear and recursive approach to solving path sum problems. Additionally, optimizations could be made to improve the time complexity, such as using dynamic programming or caching, though this solution provides a simple yet effective approach to the problem.
+7. **Recursive Function Definition**
+	```cpp
+	void dfs(TreeNode* root, long sum) {
+	```
+	Defines the DFS function to traverse the binary tree and test each node for valid paths.
+
+8. **Base Condition**
+	```cpp
+	    if(root == NULL) return;
+	```
+	Checks if the current node is null to terminate the recursion.
+
+9. **Function Call**
+	```cpp
+	    test(root, sum);
+	```
+	Calls the 'test' function to check paths starting from the current node.
+
+10. **Recursive Call**
+	```cpp
+	    dfs(root->left,  sum);
+	```
+	Recursively calls 'dfs' for the left child of the current node.
+
+11. **Recursive Call**
+	```cpp
+	    dfs(root->right, sum);
+	```
+	Recursively calls 'dfs' for the right child of the current node.
+
+12. **Recursive Function Definition**
+	```cpp
+	void test(TreeNode* root, long sum) {
+	```
+	Defines the 'test' function to check all paths starting at the current node for the target sum.
+
+13. **Base Condition**
+	```cpp
+	    if  (root     == NULL) return;
+	```
+	Terminates the recursion when the node is null.
+
+14. **Conditional Checks**
+	```cpp
+	    if  (root->val == sum ) cnt++;
+	```
+	Increments the counter if the current node value equals the remaining sum.
+
+15. **Recursive Call**
+	```cpp
+	    test(root->left,  sum - root->val);
+	```
+	Recursively checks the left subtree for paths with the updated remaining sum.
+
+16. **Recursive Call**
+	```cpp
+	    test(root->right, sum - root->val);
+	```
+	Recursively checks the right subtree for paths with the updated remaining sum.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N), where N is the number of nodes in the tree, if all paths meet the targetSum immediately.
+- **Average Case:** O(N^2), where N is the number of nodes, due to the DFS for each node and the exploration of all paths.
+- **Worst Case:** O(N^2), where N is the number of nodes, as every node can lead to a path traversal that checks all remaining nodes.
+
+The time complexity involves performing DFS and recursively checking all paths from each node, leading to an overall complexity of O(N^2).
+
+### Space Complexity 💾
+- **Best Case:** O(H), for the recursive stack space.
+- **Worst Case:** O(H), where H is the height of the tree, due to the recursion stack in DFS.
+
+The space complexity is determined by the recursion depth of the DFS traversal.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-sum-iii/description/)
 

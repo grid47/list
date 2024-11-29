@@ -14,121 +14,191 @@ img_src = ""
 youtube = "vzjMGYUG7qY"
 youtube_upload_date="2021-03-13"
 youtube_thumbnail="https://i.ytimg.com/vi/vzjMGYUG7qY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of unique integers, where each integer is greater than 1, we can create a binary tree using these integers. The value of each non-leaf node must be the product of the values of its children. The goal is to return the number of distinct binary trees that can be constructed. Since the result may be large, return the answer modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array of unique integers, arr, where each integer is strictly greater than 1.
+- **Example:** `Input: arr = [3, 6]`
+- **Constraints:**
+	- 1 <= arr.length <= 1000
+	- 2 <= arr[i] <= 10^9
+	- All the values of arr are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numFactoredBinaryTrees(vector<int>& arr) {
-        sort(arr.begin(), arr.end());
-        unordered_map<int, long> rootWithCount;
-        rootWithCount[arr[0]] = 1;
-        for(int i = 0; i < arr.size(); i++) {
-            long count = 1;
-            for(auto j : rootWithCount) {
-                int root = j.first;
-                if((arr[i] % root == 0) && (rootWithCount.find(arr[i]/root) != rootWithCount.end())) {
-                    count += rootWithCount[root] * rootWithCount[arr[i]/root];
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the number of distinct binary trees that can be constructed, modulo 10^9 + 7.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The output must be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To solve this problem, we need to calculate the number of valid binary trees that can be formed by using the integers from the input array. The non-leaf nodes should be the product of their children, and each integer in the array can be used multiple times.
+
+- Step 1: Sort the array of integers.
+- Step 2: Use dynamic programming to calculate the number of valid binary trees for each number in the array, considering that each number can be the product of other integers in the array.
+- Step 3: Use a map to store the number of binary trees for each number. For each number, check if it can be the product of any two smaller numbers in the array, and update the count accordingly.
+- Step 4: Return the sum of all the counts modulo 10^9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains unique integers, and each integer is greater than 1.
+- The binary tree structure allows for repeated use of the integers from the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [3, 6]`  \
+  **Explanation:** In this case, the number of distinct binary trees that can be constructed is 5. The possible trees are [3], [6], [3, 3, 3], [6, 3, 2], and [6, 2, 3].
+
+- **Input:** `Input: arr = [2, 4, 5, 10]`  \
+  **Explanation:** Here, the possible binary trees are: [2], [4], [5], [10], [4, 2, 2], [10, 2, 5], and [10, 5, 2]. The total count is 7.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using dynamic programming to count the number of binary trees that can be made from each number in the array. By considering each number as a possible root and checking for valid products among smaller numbers, we can efficiently compute the solution.
+
+### Initial Thoughts 💭
+- We need to calculate how many ways we can factor each number in the array using smaller numbers from the array.
+- Dynamic programming is ideal for this problem since we can build the solution incrementally by considering smaller subproblems first.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem does not have empty input cases since the array always contains at least one element.
+- The solution should handle arrays with up to 1000 elements efficiently.
+- Consider cases where the array has only one element, or where no valid products can be formed.
+- The solution must compute the result efficiently even for large arrays and large integer values.
+{{< dots >}}
+## Code 💻
+```cpp
+int numFactoredBinaryTrees(vector<int>& arr) {
+    sort(arr.begin(), arr.end());
+    unordered_map<int, long> rootWithCount;
+    rootWithCount[arr[0]] = 1;
+    for(int i = 0; i < arr.size(); i++) {
+        long count = 1;
+        for(auto j : rootWithCount) {
+            int root = j.first;
+            if((arr[i] % root == 0) && (rootWithCount.find(arr[i]/root) != rootWithCount.end())) {
+                count += rootWithCount[root] * rootWithCount[arr[i]/root];
             }
-            rootWithCount[arr[i]] = count;
         }
-        int no = 0;
-        for(auto it: rootWithCount) no = (no + it.second) % (int)(1e9+7);
-        return no;
+        rootWithCount[arr[i]] = count;
     }
-};
-{{< /highlight >}}
----
+    int no = 0;
+    for(auto it: rootWithCount) no = (no + it.second) % (int)(1e9+7);
+    return no;
+}
+```
 
-### Problem Statement
+This function calculates the number of binary trees that can be formed using the given factors. The function first sorts the array, then computes the number of ways each element can be a root of a binary tree, storing the results in a map.
 
-The problem at hand asks for the number of distinct binary trees that can be formed where each node’s value is an integer from a given list `arr`. The binary tree must be a valid binary tree in the sense that the value of each node must be a factor of its parent node's value.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numFactoredBinaryTrees(vector<int>& arr) {
+	```
+	The function `numFactoredBinaryTrees` is defined to take an array `arr` as input, where each element represents a potential factor to form binary trees.
 
-The goal is to compute the total number of such valid binary trees modulo \(10^9 + 7\). The binary trees must be constructed such that the structure of each tree is valid according to the conditions, and the values at each node must be from the array `arr`.
+2. **Sorting**
+	```cpp
+	    sort(arr.begin(), arr.end());
+	```
+	The array `arr` is sorted in ascending order, which helps in ensuring that smaller numbers (potential roots) are considered first when counting possible trees.
 
-### Approach
+3. **Map Initialization**
+	```cpp
+	    unordered_map<int, long> rootWithCount;
+	```
+	An unordered map `rootWithCount` is initialized to store the number of binary trees that can be rooted at each element in the array.
 
-To solve this problem efficiently, we need to utilize dynamic programming and factorization. The steps involved in solving the problem are:
+4. **Base Case**
+	```cpp
+	    rootWithCount[arr[0]] = 1;
+	```
+	The first element in the sorted array is initialized with a count of 1, meaning that it can form one tree by itself.
 
-1. **Sorting the Input Array**:
-   - Sorting the array ensures that we can work with smaller factors first, which is important because if a number is divisible by another, it will always be placed after it in the sorted array.
-   - By processing the numbers in increasing order, we can ensure that when considering a number, we have already counted all possible trees that use smaller factors.
+5. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < arr.size(); i++) {
+	```
+	The loop iterates over each element `arr[i]` in the sorted array, calculating how many binary trees can be rooted at that element.
 
-2. **Dynamic Programming with Hash Map**:
-   - Use a hash map, `rootWithCount`, where the key is a number from `arr`, and the value is the number of binary trees that can be formed with that number as the root.
-   - Initially, every number is considered as a potential root of one tree (itself). So, we start by setting the count of each number in the map to `1`.
+6. **Count Initialization**
+	```cpp
+	        long count = 1;
+	```
+	A variable `count` is initialized to 1, representing the minimum number of binary trees that can be rooted at `arr[i]` (itself as a single node tree).
 
-3. **Factorization for Tree Formation**:
-   - For each number in `arr`, check its divisors from the earlier processed numbers.
-   - If the number `arr[i]` is divisible by some `root`, and if the quotient `arr[i] / root` is also in `arr`, then a binary tree can be formed by using `root` as one of the children of `arr[i]`.
-   - The number of binary trees that can be formed with `arr[i]` as the root is updated by adding the product of the counts of `root` and `arr[i] / root`.
+7. **Inner Loop**
+	```cpp
+	        for(auto j : rootWithCount) {
+	```
+	This inner loop iterates over the map `rootWithCount` to check which previously encountered roots can combine with `arr[i]` to form a binary tree.
 
-4. **Modulo Operation**:
-   - The answer to the problem may be a large number, so the result is computed modulo \(10^9 + 7\) to prevent overflow and meet problem requirements.
+8. **Root Assignment**
+	```cpp
+	            int root = j.first;
+	```
+	The `root` variable is assigned the key from the map `rootWithCount`, representing a previously encountered potential root for binary trees.
 
-5. **Final Summation**:
-   - Once all numbers in `arr` are processed, sum the values in the `rootWithCount` map to get the total number of distinct binary trees.
+9. **Factor Check**
+	```cpp
+	            if((arr[i] % root == 0) && (rootWithCount.find(arr[i]/root) != rootWithCount.end())) {
+	```
+	This condition checks if `arr[i]` can be factored by the current `root` and if the factor `arr[i] / root` also exists in the map `rootWithCount`.
 
-### Code Breakdown (Step by Step)
+10. **Count Update**
+	```cpp
+	                count += rootWithCount[root] * rootWithCount[arr[i]/root];
+	```
+	If the factorization condition holds, the number of binary trees rooted at `arr[i]` is updated by adding the product of the tree counts for `root` and `arr[i] / root`.
 
-1. **Sorting the Array**:
-   ```cpp
-   sort(arr.begin(), arr.end());
-   ```
-   - We first sort the array `arr` to ensure that smaller numbers are processed first. This is important because smaller numbers can potentially be used as factors for larger numbers.
+11. **Store Result**
+	```cpp
+	        rootWithCount[arr[i]] = count;
+	```
+	After processing all possible factors, the final count of binary trees rooted at `arr[i]` is stored in the map `rootWithCount`.
 
-2. **Initialize the Hash Map**:
-   ```cpp
-   unordered_map<int, long> rootWithCount;
-   rootWithCount[arr[0]] = 1;
-   ```
-   - We initialize an unordered map `rootWithCount` to store the number of binary trees that can be rooted at each value. Initially, the first number in `arr` is assigned a count of `1`, because it can form one tree by itself.
+12. **Final Result Initialization**
+	```cpp
+	    int no = 0;
+	```
+	The variable `no` is initialized to 0, which will hold the final result — the total number of binary trees that can be formed.
 
-3. **Dynamic Programming Loop**:
-   ```cpp
-   for(int i = 0; i < arr.size(); i++) {
-       long count = 1;
-       for(auto j : rootWithCount) {
-           int root = j.first;
-           if((arr[i] % root == 0) && (rootWithCount.find(arr[i]/root) != rootWithCount.end())) {
-               count += rootWithCount[root] * rootWithCount[arr[i]/root];
-           }
-       }
-       rootWithCount[arr[i]] = count;
-   }
-   ```
-   - For each number `arr[i]`, we initialize `count` to `1` because the number itself can form a binary tree.
-   - We then iterate through all previously processed numbers in `rootWithCount`. For each `root`, we check if `arr[i]` is divisible by `root` and if the quotient `arr[i] / root` is also in `rootWithCount`. If both conditions are met, it means we can form a binary tree by using `root` and `arr[i] / root` as children.
-   - The count for `arr[i]` is updated by adding the product of the counts of `root` and `arr[i] / root`, which represents the number of trees formed with `root` and `arr[i] / root` as children.
+13. **Final Sum Calculation**
+	```cpp
+	    for(auto it: rootWithCount) no = (no + it.second) % (int)(1e9+7);
+	```
+	The map `rootWithCount` is iterated over, and the total count of binary trees is calculated by summing up all the values. The result is taken modulo 1e9 + 7 to avoid overflow.
 
-4. **Final Result Calculation**:
-   ```cpp
-   int no = 0;
-   for(auto it: rootWithCount) no = (no + it.second) % (int)(1e9+7);
-   return no;
-   ```
-   - After processing all numbers, the final result is the sum of the values in `rootWithCount`. This sum represents the total number of distinct binary trees that can be formed.
-   - The result is taken modulo \(10^9 + 7\) to handle large numbers and to meet the problem's requirements.
+14. **Return Statement**
+	```cpp
+	    return no;
+	```
+	The final result `no`, which contains the total number of binary trees, is returned.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2), where n is the number of integers in the array.
+- **Average Case:** O(n^2), where n is the number of integers in the array.
+- **Worst Case:** O(n^2), where n is the number of integers in the array.
 
-- **Time Complexity**: 
-  - Sorting the array takes \(O(n \log n)\), where \(n\) is the size of the array.
-  - The nested loops for each element in `arr` take \(O(n^2)\) in the worst case because for each number, we may check all the numbers before it.
-  - Thus, the overall time complexity is \(O(n^2)\), where \(n\) is the number of elements in `arr`.
+The time complexity is quadratic due to the nested loop that checks for factor pairs for each number in the array.
 
-- **Space Complexity**:
-  - The space complexity is \(O(n)\), as we use an unordered map `rootWithCount` to store counts for each number in `arr`, and the size of this map is proportional to the number of elements in `arr`.
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the number of integers in the array, for storing the number of binary trees for each number.
+- **Worst Case:** O(n), where n is the number of integers in the array, for storing the number of binary trees for each number.
 
-### Conclusion
+The space complexity is linear because we need to store the number of valid binary trees for each number.
 
-This solution efficiently calculates the number of distinct binary trees that can be formed by using the numbers in the input array `arr` as nodes. By leveraging dynamic programming and factorization, it avoids redundant calculations and ensures an optimal solution. The algorithm processes each number and its possible divisors, building the solution progressively, which makes it well-suited for handling large inputs. The use of modular arithmetic ensures that the result fits within the required bounds, making the solution both time-efficient and space-efficient.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-trees-with-factors/description/)
 

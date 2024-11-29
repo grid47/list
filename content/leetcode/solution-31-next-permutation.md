@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "6qXO72FkqwM"
 youtube_upload_date="2021-05-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/6qXO72FkqwM/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,136 +28,184 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/6qXO72FkqwM/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of integers 'nums'. Find the next lexicographically greater permutation of the array. If no such permutation exists, return the smallest possible arrangement (sorted in ascending order). The result must be computed in place with no extra space.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an array of integers 'nums' where each element is a non-negative integer.
+- **Example:** `nums = [1,2,3]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 0 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void nextPermutation(vector<int>& nums) {
-        int idx = -1;
-        for(int i = nums.size() - 2; i >= 0; i--) {
-            if(nums[i] < nums[i+1]) { 
-                idx = i;
-                break;
-            }
-        }
-        if(idx ==-1) {
-            reverse(nums.begin(), nums.end());
-            return;
-        }
-        for(int i = nums.size() - 1; i > idx; i--) {
-            if(nums[i] > nums[idx]) {
-                swap(nums[idx], nums[i]);
-                break;
-            }
-        }
-        reverse(nums.begin() + idx + 1, nums.end());
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the next lexicographically greater permutation of the input array, or the smallest possible permutation if no greater permutation exists.
+- **Example:** `For nums = [1,2,3], the output is [1,3,2].`
+- **Constraints:**
 
-### 🌟 **Next Lexicographically Greater Permutation**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the next permutation of the input array by modifying the array in place.
 
-This problem involves finding the next lexicographically greater permutation of a list of numbers. If no greater permutation exists (i.e., the input is already the largest permutation), the list should be rearranged into the smallest permutation possible (sorted in ascending order).
+- Find the largest index 'i' such that nums[i] < nums[i+1]. If no such index exists, reverse the entire array.
+- Find the largest index 'j' such that nums[j] > nums[i]. Swap nums[i] and nums[j].
+- Reverse the sub-array from nums[i+1] to the end of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array may contain repeated elements, which should be handled appropriately.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1,2,3]`  \
+  **Explanation:** The next permutation of [1,2,3] is [1,3,2] because 3 is the next greater number after 2 in the lexicographical order.
 
----
+- **Input:** `nums = [3,2,1]`  \
+  **Explanation:** The next permutation of [3,2,1] is [1,2,3] because no greater permutation exists, so the array is sorted in ascending order.
 
-### 🧠 **Approach Overview**
+{{< dots >}}
+## Approach 🚀
+The approach involves modifying the array in place to find the next lexicographically greater permutation.
 
-To find the next permutation, we use a well-defined approach that optimizes the process. We work by examining the permutation from right to left, identifying a point where the current arrangement can be increased, then making the smallest possible increase to ensure we generate the next permutation in lexicographical order.
-
-#### **Steps to Solve the Problem:**
-
-1. **Find the Rightmost Ascending Pair:**  
-   Identify the first position from the right where the sequence stops increasing. This tells us where we can make the permutation larger.
-
-2. **Find the Next Larger Element:**  
-   Find the smallest element to the right of this position that is larger than the element at that position.
-
-3. **Swap the Elements:**  
-   Swap the two identified elements to create a larger permutation.
-
-4. **Reverse the Suffix:**  
-   Reverse the elements after the swapped position to ensure the resulting sequence is the smallest possible permutation (sorted in ascending order).
-
-5. **Edge Case (Largest Permutation):**  
-   If no such pair exists, the permutation is the largest possible. In this case, simply reverse the entire list to get the smallest permutation.
-
----
-
-### 👇 **Breaking Down the Code:**
-
-#### **Step 1: Find the Rightmost Ascending Pair**
+### Initial Thoughts 💭
+- To find the next permutation, we need to identify the correct positions to swap and reverse.
+- The process involves finding a 'pivot' point, performing a swap, and reversing the remaining elements.
+- The algorithm should operate with a time complexity of O(n) since we only need to scan the array a few times.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty arrays; the array will have at least one element.
+- Given that the array can contain up to 100 elements, the approach should work efficiently within this limit.
+- If the array is already in descending order, the next permutation is the array sorted in ascending order.
+- The array will not exceed 100 elements, and each element will not exceed 100.
+{{< dots >}}
+## Code 💻
 ```cpp
-int idx = -1;
-for(int i = nums.size() - 2; i >= 0; i--) {
-    if(nums[i] < nums[i+1]) { 
-        idx = i;
-        break;
+void nextPermutation(vector<int>& nums) {
+    int idx = -1;
+    for(int i = nums.size() - 2; i >= 0; i--) {
+        if(nums[i] < nums[i+1]) { 
+            idx = i;
+            break;
+        }
     }
+    if(idx ==-1) {
+        reverse(nums.begin(), nums.end());
+        return;
+    }
+    for(int i = nums.size() - 1; i > idx; i--) {
+        if(nums[i] > nums[idx]) {
+            swap(nums[idx], nums[i]);
+            break;
+        }
+    }
+    reverse(nums.begin() + idx + 1, nums.end());
 }
 ```
-- We scan from right to left to find the first element `nums[i]` that is smaller than `nums[i+1]`. This marks the point where the order breaks, indicating that the permutation can still be increased.
 
-#### **Step 2: Handle the Edge Case (Largest Permutation)**
-```cpp
-if(idx == -1) {
-    reverse(nums.begin(), nums.end());
-    return;
-}
-```
-- If no such ascending pair is found (i.e., the list is in descending order), we reverse the entire list to obtain the smallest permutation.
+This code finds the next lexicographically greater permutation of a given array of integers.
 
-#### **Step 3: Find the Next Larger Element**
-```cpp
-for(int i = nums.size() - 1; i > idx; i--) {
-    if(nums[i] > nums[idx]) {
-        swap(nums[idx], nums[i]);
-        break;
-    }
-}
-```
-- We now look for the smallest element larger than `nums[idx]` from the right side. Once found, we swap them to ensure the next permutation is as close as possible to the current one but larger.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	void nextPermutation(vector<int>& nums) {
+	```
+	This line declares a function named 'nextPermutation' that takes a vector of integers 'nums' by reference and modifies it to the next lexicographically greater permutation.
 
-#### **Step 4: Reverse the Suffix**
-```cpp
-reverse(nums.begin() + idx + 1, nums.end());
-```
-- After swapping, the sublist from `idx+1` to the end of the list is in descending order. Reversing this part ensures that the list is in the smallest lexicographical order after the change.
+2. **Variable Initialization**
+	```cpp
+	    int idx = -1;
+	```
+	This line initializes an integer variable 'idx' to -1. This variable will be used to store the index of the pivot element, which is the element that will be swapped.
 
----
+3. **Loop Iteration**
+	```cpp
+	    for(int i = nums.size() - 2; i >= 0; i--) {
+	```
+	This line starts a loop to iterate through the array from the second-to-last element to the beginning.
 
-### ⏳ **Complexity Breakdown**
+4. **Conditional Check**
+	```cpp
+	        if(nums[i] < nums[i+1]) { 
+	```
+	This line checks if the current element is smaller than the next element. If so, it means we've found the pivot element.
 
-- **Time Complexity: O(n)**  
-  The algorithm involves:
-  1. A linear scan from right to left to find the first ascending pair (O(n)).
-  2. Another linear scan from the right side to find the element to swap with `nums[idx]` (O(n)).
-  3. A reverse operation (O(n)) on the portion of the list after the swap.
-  
-  Thus, the overall time complexity is **O(n)**, where `n` is the number of elements in the list.
+5. **Variable Update**
+	```cpp
+	            idx = i;
+	```
+	If the pivot element is found, its index is stored in the 'idx' variable.
 
-- **Space Complexity: O(1)**  
-  The algorithm uses only a constant amount of extra space (excluding the input list), which is required for the index `idx` and the loop variables.
+6. **Early Termination**
+	```cpp
+	            break;
+	```
+	Once the pivot element is found, the loop is broken.
 
----
+7. **Conditional Check**
+	```cpp
+	    if(idx ==-1) {
+	```
+	This line checks if the pivot element was not found. If not, it means the array is already in descending order, and the next permutation is the reverse of the current array.
 
-### 💡 **Key Insights**
+8. **Array Manipulation**
+	```cpp
+	        reverse(nums.begin(), nums.end());
+	```
+	This line reverses the entire array to get the next permutation.
 
-- **In-Place Algorithm:** The algorithm works by modifying the input list in place, meaning it doesn’t require any additional space beyond the variables needed for the calculation.
-  
-- **Efficient:** This solution operates in **O(n)** time, making it suitable for large input sizes. The use of **constant space** ensures minimal memory usage.
+9. **Return**
+	```cpp
+	        return;
+	```
+	The function returns after reversing the array.
 
-- **Edge Case Handling:** The algorithm efficiently handles the case when the input is already the largest permutation by reversing the entire list.
+10. **Loop Iteration**
+	```cpp
+	    for(int i = nums.size() - 1; i > idx; i--) {
+	```
+	This line starts another loop to find the smallest element greater than the pivot element.
 
----
+11. **Conditional Check**
+	```cpp
+	        if(nums[i] > nums[idx]) {
+	```
+	This line checks if the current element is greater than the pivot element.
 
-### 🚀 **Conclusion**
+12. **Array Manipulation**
+	```cpp
+	            swap(nums[idx], nums[i]);
+	```
+	If a suitable element is found, it's swapped with the pivot element.
 
-This solution provides an optimal way to generate the next lexicographically greater permutation of a list of numbers. By using an efficient in-place algorithm with a time complexity of **O(n)** and a space complexity of **O(1)**, it ensures that the next permutation is computed quickly and with minimal memory usage.
+13. **Early Termination**
+	```cpp
+	            break;
+	```
+	The loop is broken after the swap.
 
-This approach is ideal for problems involving permutations or order constraints, and the techniques used here (finding ascending pairs, swapping, and reversing) are commonly applied in various algorithmic challenges related to permutations.
+14. **Array Manipulation**
+	```cpp
+	    reverse(nums.begin() + idx + 1, nums.end());
+	```
+	This line reverses the subarray from the pivot element to the end to get the next lexicographically greater permutation.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we scan the array from right to left and perform constant-time operations like swaps and reversals.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because the solution is implemented in place with no additional space used.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/next-permutation/description/)
 

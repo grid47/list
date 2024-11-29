@@ -14,121 +14,176 @@ img_src = ""
 youtube = "mrK37adgvjo"
 youtube_upload_date="2019-12-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mrK37adgvjo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two numbers represented in base -2. Each number is given as an array of binary digits (0s and 1s), where the most significant bit is at the beginning of the array. Your task is to add these two numbers together and return the result in the same format, as an array of 0s and 1s in base -2, without leading zeros.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays, arr1 and arr2, each representing a number in base -2. The arrays contain binary digits, where arr1[i] and arr2[i] are either 0 or 1, and there are no leading zeros in either array.
+- **Example:** `Input: arr1 = [1, 0, 1], arr2 = [1, 1]`
+- **Constraints:**
+	- 1 <= arr1.length, arr2.length <= 1000
+	- arr1[i] and arr2[i] are 0 or 1
+	- arr1 and arr2 have no leading zeros
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> addNegabinary(vector<int>& arr1, vector<int>& arr2) {
-        int carry = 0, i = arr1.size() -1, j = arr2.size() -1;
-        vector<int> res;
-        while(carry || i >= 0 || j >= 0) {
-            if(i >= 0) carry += arr1[i--];
-            if(j >= 0) carry += arr2[j--];
-            res.push_back(carry&1);
-            carry = -(carry>>1);
-        }
-        while(res.size() > 1 && res.back() == 0)
-            res.pop_back();
-        reverse(res.begin(), res.end());
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an array of binary digits representing the sum of the two input numbers in base -2, with no leading zeros.
+- **Example:** `Output: [1, 0, 0, 0]`
+- **Constraints:**
+	- The output should be a binary array representing the sum of the numbers in base -2.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To add two numbers in base -2 and return the result in base -2 format without leading zeros.
+
+- 1. Initialize a carry variable to store any carryover during the addition process.
+- 2. Traverse both arrays from the least significant bit to the most significant bit.
+- 3. Add the corresponding bits from both arrays along with the carry, and store the result in the result array.
+- 4. If the sum of bits results in a carry, update the carry variable.
+- 5. Continue this process until all bits have been added, and ensure the result array has no leading zeros.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays represent valid binary numbers in base -2.
+- The solution should handle arrays of varying lengths efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr1 = [1, 0, 1], arr2 = [1, 1]`  \
+  **Explanation:** The number represented by arr1 is 5 and the number represented by arr2 is 3. Their sum is 8, which is represented as [1, 0, 0, 0] in base -2.
+
+- **Input:** `Input: arr1 = [1, 0, 1], arr2 = [0]`  \
+  **Explanation:** The number represented by arr1 is 5 and arr2 is 0. The sum is 5, represented as [1, 0, 1].
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by simulating the addition of binary digits with base -2. The carry needs to be handled as we traverse through the arrays, and the result should be constructed accordingly.
+
+### Initial Thoughts 💭
+- Each array is a representation of a number in base -2, and we need to perform addition similarly to binary addition, but with negative powers of 2.
+- We need to handle carries properly, as base -2 has alternating signs for powers of 2.
+- The solution should process each digit from least significant to most significant and adjust for carries using the base -2 arithmetic.
+{{< dots >}}
+### Edge Cases 🌐
+- Both input arrays cannot be empty. Each array must represent a valid binary number in base -2.
+- Ensure that the solution is efficient and handles arrays with lengths up to 1000 elements.
+- If one of the input arrays represents zero, the other array should be returned as the result.
+- The solution should handle arrays of varying lengths and ensure correct handling of carries.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> addNegabinary(vector<int>& arr1, vector<int>& arr2) {
+    int carry = 0, i = arr1.size() -1, j = arr2.size() -1;
+    vector<int> res;
+    while(carry || i >= 0 || j >= 0) {
+        if(i >= 0) carry += arr1[i--];
+        if(j >= 0) carry += arr2[j--];
+        res.push_back(carry&1);
+        carry = -(carry>>1);
     }
-};
-{{< /highlight >}}
----
+    while(res.size() > 1 && res.back() == 0)
+        res.pop_back();
+    reverse(res.begin(), res.end());
+    return res;
+}
+```
 
+This code defines the function `addNegabinary` which adds two binary numbers represented as vectors in negabinary (base -2) system. The result is returned as a vector of integers representing the sum in the same negabinary format.
 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> addNegabinary(vector<int>& arr1, vector<int>& arr2) {
+	```
+	This line defines the function `addNegabinary` that takes two vectors `arr1` and `arr2`, representing binary numbers in negabinary format, and returns the result of their sum as a vector.
 
-### Problem Statement
-The task is to add two binary numbers represented as arrays in negabinary format. In negabinary, digits can be either 0 or 1, and the base is -2. Each element in the input arrays represents a digit, with the least significant digit at the end of the array. The goal is to compute the sum and return the result in the same array format, ensuring that any leading zeros in the result are removed.
+2. **Variable Initialization**
+	```cpp
+	    int carry = 0, i = arr1.size() -1, j = arr2.size() -1;
+	```
+	This line initializes the carry variable to store the carry during addition. It also initializes indices `i` and `j` to point to the last elements of `arr1` and `arr2`, respectively.
 
-### Approach
-To solve this problem, we can simulate the addition of two numbers digit by digit, accounting for the unique characteristics of negabinary. We need to handle carryovers carefully since the base is negative. The key steps in the approach are as follows:
-1. Initialize pointers for both input arrays and a variable to store the carry.
-2. Loop through both arrays from the least significant digit to the most significant digit, adding corresponding digits along with the carry.
-3. Determine the resulting digit and the new carry based on the sum.
-4. After processing all digits, handle any remaining carry.
-5. Clean up the resulting array by removing leading zeros and reversing the result to return it in the correct order.
+3. **Result Vector Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	This line initializes the vector `res` which will store the result of the negabinary sum.
 
-### Code Breakdown (Step by Step)
+4. **Main While Loop**
+	```cpp
+	    while(carry || i >= 0 || j >= 0) {
+	```
+	This loop continues until there are no more digits left to add in either of the input vectors or there is no carry left.
 
-1. **Class Definition**:
-   The `Solution` class encapsulates the method to perform the negabinary addition.
+5. **Adding from First Vector**
+	```cpp
+	        if(i >= 0) carry += arr1[i--];
+	```
+	This line adds the current digit from `arr1` to the carry (if `i` is valid), and then decrements the index `i`.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+6. **Adding from Second Vector**
+	```cpp
+	        if(j >= 0) carry += arr2[j--];
+	```
+	This line adds the current digit from `arr2` to the carry (if `j` is valid), and then decrements the index `j`.
 
-2. **Function Signature**:
-   The method `addNegabinary` takes two vectors (arrays) of integers as inputs and returns a vector representing the sum.
+7. **Store Result Bit**
+	```cpp
+	        res.push_back(carry&1);
+	```
+	This line adds the least significant bit of `carry` to the result vector `res`. The bit is obtained by performing a bitwise AND operation with 1.
 
-   ```cpp
-   vector<int> addNegabinary(vector<int>& arr1, vector<int>& arr2) {
-   ```
+8. **Update Carry**
+	```cpp
+	        carry = -(carry>>1);
+	```
+	This line updates the carry for the next iteration by right-shifting the carry by one position (effectively dividing by 2) and then negating the result, as negabinary uses base -2.
 
-3. **Initialization**:
-   We initialize the carry variable to 0 and set two pointers, `i` and `j`, to point to the last elements of `arr1` and `arr2`, respectively. An empty vector `res` is created to store the result.
+9. **Remove Leading Zeros**
+	```cpp
+	    while(res.size() > 1 && res.back() == 0)
+	```
+	This loop removes leading zeros from the result vector `res` by checking if the last element is 0 and the vector has more than one element.
 
-   ```cpp
-   int carry = 0, i = arr1.size() - 1, j = arr2.size() - 1;
-   vector<int> res;
-   ```
+10. **Pop Back Zeros**
+	```cpp
+	        res.pop_back();
+	```
+	This line removes the last element of the result vector, which is a leading zero.
 
-4. **Main Loop for Addition**:
-   We use a while loop that continues as long as there is a carry or there are remaining digits in either array. Inside the loop:
-   - We check if there are still digits left in `arr1` or `arr2` and add them to the carry.
-   - We calculate the current result digit using the bitwise AND operation and store it in the `res` vector.
-   - We then update the carry for the next iteration by right-shifting and negating the carry value, as this handles the transition due to the negabinary base.
+11. **Reverse Result**
+	```cpp
+	    reverse(res.begin(), res.end());
+	```
+	This line reverses the result vector `res` so that the digits are in the correct order, as the least significant bit was added first.
 
-   ```cpp
-   while(carry || i >= 0 || j >= 0) {
-       if(i >= 0) carry += arr1[i--];
-       if(j >= 0) carry += arr2[j--];
-       res.push_back(carry & 1);
-       carry = -(carry >> 1);
-   }
-   ```
+12. **Return Statement**
+	```cpp
+	    return res;
+	```
+	This line returns the final result vector `res`, which contains the negabinary sum of the input vectors.
 
-5. **Removing Leading Zeros**:
-   After the main addition loop, we check if the resulting vector has more than one element and if the last element is 0 (indicating a leading zero). We then remove any trailing zeros.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(max(m, n))
+- **Average Case:** O(max(m, n))
+- **Worst Case:** O(max(m, n))
 
-   ```cpp
-   while(res.size() > 1 && res.back() == 0)
-       res.pop_back();
-   ```
+The time complexity is O(max(m, n)) because we process each digit of both arrays at most once.
 
-6. **Reversing the Result**:
-   Since we constructed the result from the least significant to the most significant digit, we need to reverse the `res` vector to get the correct order.
+### Space Complexity 💾
+- **Best Case:** O(max(m, n))
+- **Worst Case:** O(max(m, n))
 
-   ```cpp
-   reverse(res.begin(), res.end());
-   ```
+The space complexity is O(max(m, n)) due to the space required to store the result array.
 
-7. **Returning the Result**:
-   Finally, the method returns the `res` vector containing the sum in negabinary format.
-
-   ```cpp
-   return res;
-   }
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The overall time complexity is \(O(n + m)\), where \(n\) is the length of `arr1` and \(m\) is the length of `arr2`. This complexity arises because we traverse both arrays entirely during the addition process.
-  
-- **Space Complexity**: The space complexity is \(O(k)\), where \(k\) is the maximum possible length of the result array. In the worst-case scenario, the result could be as long as the longer input array plus one additional digit (if there's a carry).
-
-### Conclusion
-The provided C++ code effectively solves the problem of adding two numbers in negabinary format by simulating the addition process as one would do in standard binary addition but adjusting for the unique properties of a negative base. The approach uses a straightforward iterative method, and the implementation is clean and efficient.
-
-By carefully managing the carry and utilizing bitwise operations, this solution efficiently constructs the sum while handling potential leading zeros in the final output. The algorithm's time and space complexity are optimal for the problem at hand, making this solution suitable for competitive programming and practical applications where negabinary arithmetic is required.
-
-In summary, this method offers a clear and concise way to perform negabinary addition, showcasing the importance of understanding numerical systems and their properties in algorithm design.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/adding-two-negabinary-numbers/description/)

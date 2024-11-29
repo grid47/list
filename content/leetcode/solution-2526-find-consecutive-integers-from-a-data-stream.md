@@ -14,140 +14,155 @@ img_src = ""
 youtube = "3VXPkJ8bInY"
 youtube_upload_date="2023-01-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/3VXPkJ8bInY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You need to implement a DataStream class that processes a stream of integers and checks whether the last k integers in the stream are equal to a specified value.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers: `value`, the target value to check for, and `k`, the number of consecutive integers to be checked.
+- **Example:** `[3, 4]`
+- **Constraints:**
+	- 1 <= value, num <= 10^9
+	- 1 <= k <= 10^5
+	- At most 10^5 calls will be made to consec.
 
-{{< highlight cpp >}}
-class DataStream {
-public:
-    int val, k, cnt = 0;
-    DataStream(int value, int k) {
-        val = value;
-        this->k = k;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a boolean value: `true` if the last k integers are equal to the target value, otherwise `false`. If fewer than k integers have been parsed, return `false`.
+- **Example:** `false`
+- **Constraints:**
+	- The output is a boolean value representing the result of the consec method.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if the last k integers in the stream are equal to the target value.
+
+- Store the target value and the integer k.
+- Maintain a count of consecutive integers equal to the target value.
+- For each call to consec(), add the integer to the stream and update the count. If the count reaches k, return true. If not, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values are within the given constraints.
+- The number of consec calls will not exceed 10^5.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[3, 4], [3], [3], [3], [4]`  \
+  **Explanation:** The DataStream object is initialized with value 3 and k = 4. It returns false until 4 consecutive values of 3 are encountered.
+
+- **Input:** `[5, 2], [5], [5]`  \
+  **Explanation:** The DataStream object is initialized with value 5 and k = 2. It returns false initially, then returns true after two consecutive values of 5.
+
+{{< dots >}}
+## Approach 🚀
+Use a counter to track the number of consecutive occurrences of the target value. Reset the counter when the current value is not equal to the target.
+
+### Initial Thoughts 💭
+- A simple solution involves tracking consecutive integers and resetting the count when the condition fails.
+- We will use a counter to store the number of consecutive target values and return true when the counter reaches k.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no cases with empty inputs as each consec method call requires a number to be added.
+- Ensure that the solution can handle large inputs efficiently, especially when there are up to 10^5 consec calls.
+- Handle cases where k is 1 or the input numbers are equal to the target value.
+- Ensure that the solution meets the time complexity constraints and handles the maximum number of consec calls.
+{{< dots >}}
+## Code 💻
+```cpp
+int val, k, cnt = 0;
+DataStream(int value, int k) {
+    val = value;
+    this->k = k;
+}
+
+bool consec(int num) {
+    if(val == num) cnt = min(k, cnt+1);
+    else {
+        cnt = 0;
     }
-    
-    bool consec(int num) {
-        if(val == num) cnt = min(k, cnt+1);
-        else {
-            cnt = 0;
-        }
-        return k == cnt;
-    }
+    return k == cnt;
+}
 };
 
 /**
  * Your DataStream object will be instantiated and called as such:
  * DataStream* obj = new DataStream(value, k);
  * bool param_1 = obj->consec(num);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to design a class `DataStream` that is able to process a stream of integers. Specifically, the class must allow for checking if there are `k` consecutive occurrences of a given value `val` in the stream.
-
-The problem boils down to:
-1. **Initialization**: You are given an integer `val` (the value that we want to check for consecutive occurrences) and an integer `k` (the number of consecutive occurrences of `val` that must be seen in the stream).
-2. **Stream Processing**: As the stream of integers is processed, for each integer `num`, you need to check if there have been `k` consecutive occurrences of `val` in the stream up to that point.
-
-The class should support the following:
-- **Initialization**: A constructor that takes the value `val` and the threshold `k` for consecutive occurrences.
-- **Stream Processing**: A method `consec(int num)` that returns `true` if the current number `num` continues the streak of `k` consecutive occurrences of `val`, and `false` otherwise.
-
-### Approach
-
-To solve this problem, we need to maintain a count of how many consecutive occurrences of the value `val` we have encountered. The process can be broken down as follows:
-
-1. **Initialization**:
-   - We define a constructor that takes the target value `val` and the threshold `k`.
-   - The constructor initializes two variables: 
-     - `val` stores the target value that we are tracking.
-     - `k` stores the number of consecutive occurrences of `val` that we need to detect.
-     - `cnt` is initialized to 0 and keeps track of the current count of consecutive occurrences of `val` in the stream.
-
-2. **Processing Stream**:
-   - The method `consec(int num)` is invoked each time a new number from the stream is processed.
-   - Inside `consec`, we first check if the current number `num` is equal to `val`:
-     - If it is, we increment the `cnt` variable, ensuring that `cnt` does not exceed the value `k`. This is done using `min(k, cnt + 1)`.
-     - If the current number `num` is not equal to `val`, we reset `cnt` to 0 because the streak is broken.
-   - After updating `cnt`, we check if it equals `k`. If it does, this means we have encountered `k` consecutive occurrences of `val`, so we return `true`. Otherwise, we return `false`.
-
-3. **Edge Case Handling**:
-   - If the current number `num` is not equal to `val`, the consecutive streak is reset, and `cnt` is set back to 0.
-   - If the stream continues and the count reaches `k`, `true` is returned to indicate that we have detected `k` consecutive occurrences of `val`.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Class Definition and Constructor
-
-```cpp
-class DataStream {
-public:
-    int val, k, cnt = 0;
-    DataStream(int value, int k) {
-        val = value;
-        this->k = k;
-    }
 ```
 
-- The `DataStream` class is defined with three member variables:
-  - `val`: Stores the target value that we want to track for consecutive occurrences.
-  - `k`: Stores the threshold for consecutive occurrences of `val`.
-  - `cnt`: Keeps track of the current streak of consecutive occurrences of `val`. It is initialized to 0.
+This code implements a DataStream class that tracks consecutive occurrences of a value. The 'consec' function returns true when the value has appeared consecutively 'k' times.
 
-The constructor initializes `val` and `k` with the provided values and sets `cnt` to 0.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int val, k, cnt = 0;
+	```
+	This initializes three integer variables: 'val' to store the value, 'k' for the threshold number of consecutive appearances, and 'cnt' to track the current count of consecutive appearances, initially set to 0.
 
-#### 2. Consecutive Occurrence Check Method
+2. **Constructor**
+	```cpp
+	DataStream(int value, int k) {
+	```
+	This is the constructor of the DataStream class, which initializes the 'val' and 'k' variables when an instance of the class is created.
 
-```cpp
-    bool consec(int num) {
-        if(val == num) cnt = min(k, cnt+1);
-        else {
-            cnt = 0;
-        }
-        return k == cnt;
-    }
-```
+3. **Variable Assignment**
+	```cpp
+	    val = value;
+	```
+	This assigns the passed 'value' to the 'val' variable, which will be the number tracked for consecutive occurrences.
 
-- The method `consec` is designed to process a new number `num` from the stream:
-  - **Check if the number matches `val`**: 
-    - If `num` equals `val`, we increment `cnt` by 1, ensuring that `cnt` does not exceed `k` using `min(k, cnt + 1)`.
-    - If `num` is not equal to `val`, we reset `cnt` to 0 because the consecutive streak is broken.
-  - **Return the result**: After updating `cnt`, we check if `cnt` equals `k`. If it does, it means we have seen `k` consecutive occurrences of `val`, so we return `true`. Otherwise, we return `false`.
+4. **Variable Assignment**
+	```cpp
+	    this->k = k;
+	```
+	This assigns the passed 'k' value (threshold for consecutive occurrences) to the instance variable 'k'.
 
-#### 3. Object Instantiation and Method Usage
+5. **Method Definition**
+	```cpp
+	bool consec(int num) {
+	```
+	This is the definition of the 'consec' method, which checks if the given number 'num' has appeared consecutively 'k' times.
 
-```cpp
-/**
- * Your DataStream object will be instantiated and called as such:
- * DataStream* obj = new DataStream(value, k);
- * bool param_1 = obj->consec(num);
- */
-```
+6. **Condition Check**
+	```cpp
+	    if(val == num) cnt = min(k, cnt+1);
+	```
+	This checks if the current 'num' matches 'val'. If true, it increments 'cnt' (count of consecutive appearances), but ensures that 'cnt' does not exceed the threshold 'k'.
 
-- The class `DataStream` is instantiated with a target value `val` and a threshold `k`.
-- The method `consec(num)` is called on the `DataStream` object, passing the current number `num` from the stream to check if it results in `k` consecutive occurrences of `val`.
+7. **Reset Count**
+	```cpp
+	        cnt = 0;
+	```
+	If 'num' is not equal to 'val', the count of consecutive appearances is reset to 0.
 
-### Time Complexity
+8. **Return Statement**
+	```cpp
+	    return k == cnt;
+	```
+	This checks if 'cnt' (the current consecutive count) equals 'k'. If true, the method returns true, indicating that 'num' has appeared 'k' times consecutively.
 
-- **Constructor Complexity**: The constructor simply initializes three variables and takes constant time, i.e., \( O(1) \).
-  
-- **`consec` Method Complexity**: Each call to `consec` involves checking if the number `num` is equal to `val`, incrementing a counter, and performing a comparison, all of which are constant-time operations. Therefore, the time complexity of `consec(num)` is \( O(1) \).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Overall Complexity**: The overall time complexity of each operation is \( O(1) \), as both the constructor and method `consec` execute in constant time.
+The time complexity is constant for each consec call as it involves updating a counter and checking a condition.
 
-### Space Complexity
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- The class uses a few integer variables (`val`, `k`, and `cnt`), all of which occupy constant space. Therefore, the space complexity of the `DataStream` class is \( O(1) \).
+The space complexity is constant as we only store a few integer variables.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution provides an efficient way to track consecutive occurrences of a given value in a data stream. By using a counter (`cnt`) to track the streak of consecutive values and resetting it whenever the streak is broken, the solution offers constant-time complexity for each stream processing step. The space complexity is also constant, making this a highly efficient approach for handling large streams of data. This class is ideal for scenarios where we need to track consecutive occurrences of a specific value in a stream in real-time.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-consecutive-integers-from-a-data-stream/description/)
 

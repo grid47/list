@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "I-R1XsECJu8"
 youtube_upload_date="2024-06-01"
 youtube_thumbnail="https://i.ytimg.com/vi/I-R1XsECJu8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,94 +28,141 @@ youtube_thumbnail="https://i.ytimg.com/vi/I-R1XsECJu8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You need to climb a ladder with n steps to reach the top. Each time, you can either climb 1 step or 2 steps. Find the number of distinct ways to climb to the top.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A single integer n, representing the total number of steps in the ladder.
+- **Example:** `Input: n = 4`
+- **Constraints:**
+	- 1 <= n <= 45
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int climbStairs(int n) {
-        vector<int> dp(n  + 1, 0);
-        dp[0] = 1;
-        dp[1] = 1;
-        for(int i = 2; i < n + 1; i++)
-        dp[i] = dp[i - 1] + dp[i - 2];
-        
-        return dp[n];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the total number of distinct ways to climb the ladder.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The output must be a valid integer that corresponds to the number of distinct ways.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the total number of ways to climb the ladder using a dynamic programming approach.
+
+- Define an array dp, where dp[i] represents the number of ways to climb to the ith step.
+- Initialize dp[0] = 1 (1 way to stay at the start) and dp[1] = 1 (1 way to climb the first step).
+- Iteratively calculate dp[i] for 2 <= i <= n using the relation dp[i] = dp[i-1] + dp[i-2].
+- Return dp[n] as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input n is a valid integer.
+- There are no additional environmental constraints affecting the problem.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 4`  \
+  **Explanation:** The number of distinct ways to climb 4 steps is 5, as shown in the example above.
+
+- **Input:** `Input: n = 5`  \
+  **Explanation:** The number of distinct ways to climb 5 steps is 8, as shown in the example above.
+
+{{< dots >}}
+## Approach 🚀
+Use dynamic programming to calculate the number of ways to climb the ladder iteratively.
+
+### Initial Thoughts 💭
+- The problem can be broken down recursively: the number of ways to climb n steps depends on the number of ways to climb n-1 and n-2 steps.
+- This is similar to the Fibonacci sequence.
+- Use an iterative approach with an array to store intermediate results for efficiency.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable since the input n is guaranteed to be within the constraints.
+- n = 45, the upper limit of the constraint.
+- n = 1, the smallest number of steps.
+- Ensure the implementation works for both small and large values of n within the range.
+{{< dots >}}
+## Code 💻
+```cpp
+int climbStairs(int n) {
+    if (n <= 2) {
+        return n;
     }
-};
-{{< /highlight >}}
----
 
-### 🪜 **Climbing Stairs**
+    int first = 1, second = 2;
+    for (int i = 3; i <= n; i++) {
+        int third = first + second;
+        first = second;
+        second = third;
+    }
 
-The problem is to determine the number of distinct ways to climb a staircase with `n` steps, given that you can take either 1 or 2 steps at a time. For example, if there are 3 steps, you could reach the top by taking 1+1+1 steps, 1+2 steps, or 2+1 steps, which totals three distinct ways. This is a classic dynamic programming problem that builds on smaller solutions to form an efficient approach to counting all possible ways to reach the top.
-
-### 🧠 **Approach**
-
-We can solve this problem efficiently using dynamic programming (DP). The idea is to store the number of ways to reach each step in an array, where each entry is calculated as the sum of the previous two entries. This is because, to reach step `i`, you can either:
-- Come from step `i-1` (by taking a single step), or
-- Come from step `i-2` (by taking a double step).
-
-#### Detailed Approach:
-
-1. **Define a DP Array**: 
-   - We initialize an array `dp` of size `n+1` to store the number of ways to reach each step.
-   - `dp[i]` will hold the number of ways to reach the `i`-th step.
-
-2. **Set Base Cases**:
-   - `dp[0] = 1`: There is one way to stay at the starting point (step 0).
-   - `dp[1] = 1`: There is only one way to reach the first step (by taking a single step).
-
-3. **Fill the DP Array Using a Recurrence Relation**:
-   - For each step `i` from 2 to `n`, calculate the number of ways to reach that step as `dp[i] = dp[i-1] + dp[i-2]`.
-   - This recurrence is derived from the fact that you can reach step `i` either from `i-1` or `i-2`.
-
-4. **Return the Result**: The final answer is stored in `dp[n]`, which gives the total number of ways to reach the `n`-th step.
-
-### 💻 **Code Breakdown**
-
-#### Step 1: Define the DP Array and Initialize Base Cases
-
-```cpp
-vector<int> dp(n + 1, 0);
-dp[0] = 1;
-dp[1] = 1;
-```
-- We create a `dp` array of size `n+1` with all elements initialized to 0.
-- `dp[0] = 1` and `dp[1] = 1` are the base cases:
-  - There's one way to stay at step 0 (no movement).
-  - There's one way to reach step 1 (take a single step).
-
-#### Step 2: Populate the DP Array Using the Recurrence Relation
-
-```cpp
-for(int i = 2; i <= n; i++) {
-    dp[i] = dp[i - 1] + dp[i - 2];
+    return second;
 }
 ```
-- This loop starts from step `i = 2` and goes up to step `n`.
-- For each step `i`, the number of ways to reach it is calculated by adding the number of ways to reach the previous step (`dp[i-1]`) and the step before that (`dp[i-2]`).
 
-#### Step 3: Return the Result
+This code calculates the number of distinct ways to climb n stairs, where you can either take 1 or 2 steps at a time.
 
-```cpp
-return dp[n];
-```
-- After populating the `dp` array, the function returns `dp[n]`, which holds the total number of ways to reach the `n`-th step.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int climbStairs(int n) {
+	```
+	This line declares a function named `climbStairs` that takes an integer `n` representing the number of stairs as input and returns the number of distinct ways to climb them.
 
-### 📊 **Complexity Analysis**
+2. **Base Cases**
+	```cpp
+	    if (n <= 2) {
+	        return n;
+	    }
+	```
+	This block handles the base cases: if `n` is 1 or 2, there's only one way to climb the stairs.
 
-#### Time Complexity:
-- **O(n)**: The algorithm iterates through the steps from `2` to `n`, and each operation inside the loop takes constant time.
+3. **Initialize Variables**
+	```cpp
+	    int first = 1, second = 2;
+	```
+	Initialize `first` and `second` to represent the number of ways to climb 1 and 2 stairs, respectively.
 
-#### Space Complexity:
-- **O(n)**: We use an array `dp` of size `n+1` to store the number of ways to reach each step, resulting in a space complexity of `O(n)`.
+4. **Iterative Calculation**
+	```cpp
+	    for (int i = 3; i <= n; i++) {
+	```
+	This loop iterates from 3 to `n`, calculating the number of ways to climb `i` stairs.
 
-### 🌟 **Conclusion**
+5. **Calculate Ways to Climb i Stairs**
+	```cpp
+	        int third = first + second;
+	```
+	Calculate the number of ways to climb `i` stairs by adding the ways to climb `i-1` and `i-2` stairs.
 
-This dynamic programming solution efficiently solves the problem of counting the ways to climb a staircase with `n` steps, using only 1 or 2 steps at a time. By breaking the problem down into smaller sub-problems and storing intermediate results, the algorithm avoids redundant calculations, achieving optimal performance with linear time complexity. This approach is a great example of using dynamic programming to solve combinatorial problems that involve overlapping sub-problems.
+6. **Update Variables**
+	```cpp
+	        first = second;
+	        second = third;
+	```
+	Update `first` and `second` for the next iteration.
 
----
+7. **Return Result**
+	```cpp
+	    return second;
+	```
+	After the loop, `second` will hold the number of ways to climb `n` stairs, so return it.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Each step from 2 to n is computed once.
+
+### Space Complexity 💾
+- **Best Case:** O(1) with optimization (using two variables instead of an array).
+- **Worst Case:** O(n)
+
+The space required depends on whether an array or two variables are used.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/climbing-stairs/description/)
 

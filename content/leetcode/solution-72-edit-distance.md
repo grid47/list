@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "XYi2-LPrwm4"
 youtube_upload_date="2021-05-08"
 youtube_thumbnail="https://i.ytimg.com/vi/XYi2-LPrwm4/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,141 +28,213 @@ youtube_thumbnail="https://i.ytimg.com/vi/XYi2-LPrwm4/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two strings str1 and str2, your task is to determine the minimum number of operations required to transform str1 into str2. The allowed operations are: Insert a character, Delete a character, and Replace a character.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings str1 and str2.
+- **Example:** `str1 = 'kitten', str2 = 'sitting'`
+- **Constraints:**
+	- 0 <= str1.length, str2.length <= 500
+	- str1 and str2 consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string a, b;
-    vector<vector<int>> memo;
-    
-    int dp(int i, int j) {
-        if(i == a.size() && j == b.size()) return 0;
-        if(i == a.size()) return b.size() - j;
-        if(j == b.size()) return a.size() - i;
-        if(memo[i][j] != -1) return memo[i][j];
-        int ans = 0;
-        if(a[i] != b[j]) {
-            ans = min({dp(i+1,j), dp(i,j+1), dp(i+1,j+1)}) + 1;
-        } else {
-            ans = dp(i + 1, j+ 1);
-        }
-        return memo[i][j] = ans;
-    }
-    
-    int minDistance(string word1, string word2) {
-        this->a = word1;
-        this->b = word2;
-        memo.resize(a.size(), vector<int>(b.size(), -1));
-        return dp(0, 0);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to transform str1 into str2.
+- **Example:** `3`
+- **Constraints:**
+	- The output should be a single integer.
 
-### 💡 **Edit Distance Problem (Levenshtein Distance)** – Let's Solve It Together!
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the minimum number of operations needed.
 
-The **Edit Distance** problem is a classic challenge in string manipulation. The task is to find the **minimum number of operations** required to convert one string into another using three operations:
-1. **Insert a character**
-2. **Delete a character**
-3. **Replace a character**
+- Use dynamic programming to store the results of subproblems.
+- For each pair of indices (i, j), consider the operations: insert, delete, or replace.
+- Build the solution iteratively using the recurrence relation.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings are non-empty.
+- Both strings contain only lowercase alphabets.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `str1 = 'kitten', str2 = 'sitting'`  \
+  **Explanation:** We need 3 operations to convert 'kitten' into 'sitting': 1) Replace 'k' with 's', 2) Replace 'e' with 'i', 3) Insert 'g'.
 
-Given two strings `word1` and `word2`, our goal is to return the minimum number of operations to transform `word1` into `word2`.
+- **Input:** `str1 = 'flaw', str2 = 'lawn'`  \
+  **Explanation:** We need 2 operations to convert 'flaw' into 'lawn': 1) Remove 'f', 2) Insert 'n'.
 
-### 📝 **Problem Breakdown**
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using dynamic programming, where we calculate the minimum number of operations to transform substrings of str1 into substrings of str2.
 
-You are given:
-- **`word1`** and **`word2`** — two strings that you need to transform.
-  
-The goal is to compute the **minimum number of operations** required to convert `word1` into `word2`.
-
-### 🔍 **Approach: Dynamic Programming**
-
-This problem can be efficiently solved using **Dynamic Programming (DP)**. We will maintain a table (2D array) `dp`, where each entry `dp(i, j)` represents the minimum number of operations required to convert the substring `word1[0..i-1]` to `word2[0..j-1]`. This allows us to break the problem into smaller sub-problems and solve it recursively.
-
-#### Step-by-Step Explanation:
-
-1. **State Representation**:
-   - Let `dp(i, j)` represent the minimum number of operations required to convert the substring `word1[0..i-1]` to `word2[0..j-1]`.
-   - Our goal is to compute `dp(a.size(), b.size())`, where `a` and `b` are `word1` and `word2` respectively.
-
-2. **Base Cases**:
-   - If either string is empty:
-     - `dp(i, 0)` represents converting `word1[0..i-1]` to an empty string, requiring `i` deletions.
-     - `dp(0, j)` represents converting an empty string to `word2[0..j-1]`, requiring `j` insertions.
-
-3. **Recurrence Relation**:
-   - If `a[i]` equals `b[j]`, no operation is needed, so we move diagonally: `dp(i, j) = dp(i+1, j+1)`.
-   - If the characters are different, we compute the minimum of the following:
-     - **Insertion**: Insert `b[j]` into `word1`, giving `dp(i, j+1) + 1`.
-     - **Deletion**: Delete `a[i]`, giving `dp(i+1, j) + 1`.
-     - **Replacement**: Replace `a[i]` with `b[j]`, giving `dp(i+1, j+1) + 1`.
-   - We take the minimum of these three options.
-
-4. **Memoization**:
-   - We use memoization to avoid redundant calculations, storing results of sub-problems in a 2D array `memo[i][j]`. If `memo[i][j]` is not `-1`, we return the stored value directly.
-
-5. **Final Result**:
-   - The final result will be stored in `memo[0][0]`, which gives the minimum number of operations to convert `word1` to `word2`.
-
-### 🧑‍💻 **Let’s Look at the Code!**
-
-Here’s how we can implement this approach in C++:
-
+### Initial Thoughts 💭
+- The problem can be broken down into smaller subproblems.
+- We can use dynamic programming to solve this efficiently.
+- Use a 2D array to store intermediate results.
+{{< dots >}}
+### Edge Cases 🌐
+- If either str1 or str2 is empty, the minimum operations are the length of the other string.
+- Handle the case when both strings are of maximum length (500).
+- Consider cases where str1 and str2 are already equal, in which case the answer is 0.
+- Ensure the solution is optimized for the problem's constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
+string a, b;
+vector<vector<int>> memo;
 
-int dp(int i, int j, const string& a, const string& b, vector<vector<int>>& memo) {
-    if(i == a.size() && j == b.size()) return 0;  // Both strings are at the end
-    if(i == a.size()) return b.size() - j;  // Insert remaining characters of b
-    if(j == b.size()) return a.size() - i;  // Delete remaining characters of a
-    if(memo[i][j] != -1) return memo[i][j];  // Return already computed result
-    
+int dp(int i, int j) {
+    if(i == a.size() && j == b.size()) return 0;
+    if(i == a.size()) return b.size() - j;
+    if(j == b.size()) return a.size() - i;
+    if(memo[i][j] != -1) return memo[i][j];
     int ans = 0;
     if(a[i] != b[j]) {
-        ans = min({dp(i+1, j, a, b, memo), dp(i, j+1, a, b, memo), dp(i+1, j+1, a, b, memo)}) + 1;  // Min of insert, delete, replace
+        ans = min({dp(i+1,j), dp(i,j+1), dp(i+1,j+1)}) + 1;
     } else {
-        ans = dp(i + 1, j + 1, a, b, memo);  // No operation needed if chars are equal
+        ans = dp(i + 1, j+ 1);
     }
-    return memo[i][j] = ans;  // Store the result in memo table
+    return memo[i][j] = ans;
 }
 
 int minDistance(string word1, string word2) {
-    vector<vector<int>> memo(word1.size() + 1, vector<int>(word2.size() + 1, -1));
-    return dp(0, 0, word1, word2, memo);  // Start the recursive DP function
+    this->a = word1;
+    this->b = word2;
+    memo.resize(a.size(), vector<int>(b.size(), -1));
+    return dp(0, 0);
 }
 ```
 
-### 🌟 **Handling Edge Cases**
+This code calculates the minimum number of operations required to convert one word into another using insertion, deletion, or substitution operations.
 
-- If one of the strings is empty, the result is the length of the other string, as we would need to insert or delete all the characters.
-- If both strings are identical, no operations are needed, and the result will be `0`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	string a, b;
+	```
+	Declares two string variables `a` and `b` to store the input words.
 
-### ⏱️ **Time and Space Complexity**
+2. **Array Initialization**
+	```cpp
+	vector<vector<int>> memo;
+	```
+	Declares a 2D vector `memo` to store memoized results for the `dp` function.
 
-- **Time Complexity**:  
-  **O(m * n)** — where `m` is the length of `word1` and `n` is the length of `word2`. The algorithm computes the result for every pair `(i, j)` in the `m x n` memoization table, and each computation takes constant time.
+3. **Function Declaration**
+	```cpp
+	int dp(int i, int j) {
+	```
+	Declares a recursive function `dp` to calculate the minimum edit distance between two substrings starting at indices `i` and `j`.
 
-- **Space Complexity**:  
-  **O(m * n)** — The space complexity is also **O(m * n)** due to the memoization table storing results for all sub-problems.
+4. **Base Case**
+	```cpp
+	    if(i == a.size() && j == b.size()) return 0;
+	```
+	Base case: If both strings are exhausted, the edit distance is 0.
 
-### 💡 **Why This Approach is Efficient**
+5. **Base Case**
+	```cpp
+	    if(i == a.size()) return b.size() - j;
+	```
+	Base case: If `a` is exhausted, the remaining edit distance is the length of `b`.
 
-By using **Dynamic Programming with memoization**, we avoid redundant calculations and efficiently solve the problem in **O(m * n)** time. This approach ensures that we only compute each sub-problem once, storing the results to be reused when needed.
+6. **Base Case**
+	```cpp
+	    if(j == b.size()) return a.size() - i;
+	```
+	Base case: If `b` is exhausted, the remaining edit distance is the length of `a`.
 
-### 🏁 **You Got This!**
+7. **Memoization**
+	```cpp
+	    if(memo[i][j] != -1) return memo[i][j];
+	```
+	Checks if the result for the current `i` and `j` is already memoized.
 
-The Edit Distance problem is a great example of how breaking a problem into smaller sub-problems can simplify the solution. By using Dynamic Programming, you can efficiently solve string transformation problems. Keep practicing, and soon you’ll be mastering more complex challenges!
+8. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes `ans` to store the minimum edit distance.
 
----
+9. **Conditional**
+	```cpp
+	    if(a[i] != b[j]) {
+	```
+	Checks if the current characters at indices `i` and `j` are different.
 
-#### 🌟 **Final Thoughts**: Keep Coding, Keep Growing!
+10. **Min Calculation**
+	```cpp
+	        ans = min({dp(i+1,j), dp(i,j+1), dp(i+1,j+1)}) + 1;
+	```
+	If the characters are different, calculates the minimum edit distance by considering insertion, deletion, and substitution operations.
 
-Every problem you solve helps build your coding skills. Keep pushing yourself, and you’ll continue to improve. Coding isn’t just about solving problems—it’s about enjoying the process and learning every step of the way. Keep going, coder! 🚀
+11. **Conditional**
+	```cpp
+	    } else {
+	```
+	If the characters are the same.
 
-Happy coding, and remember: **every small step brings you closer to mastery!** ✨
+12. **Recursive Call**
+	```cpp
+	        ans = dp(i + 1, j+ 1);
+	```
+	If the characters are the same, move to the next characters in both strings.
+
+13. **Memoization**
+	```cpp
+	    return memo[i][j] = ans;
+	```
+	Stores the calculated minimum edit distance in the memoization table and returns it.
+
+14. **Function Declaration**
+	```cpp
+	int minDistance(string word1, string word2) {
+	```
+	Declares the main function `minDistance` to calculate the minimum edit distance between two words.
+
+15. **Variable Assignment**
+	```cpp
+	    this->a = word1;
+	```
+	Assigns the input word1 to the class member variable `a`.
+
+16. **Variable Assignment**
+	```cpp
+	    this->b = word2;
+	```
+	Assigns the input word2 to the class member variable `b`.
+
+17. **Array Initialization**
+	```cpp
+	    memo.resize(a.size(), vector<int>(b.size(), -1));
+	```
+	Initializes the `memo` array with -1 to indicate uncalculated values.
+
+18. **Function Call**
+	```cpp
+	    return dp(0, 0);
+	```
+	Calls the `dp` function to calculate the minimum edit distance starting from the beginning of both words.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+Where m and n are the lengths of str1 and str2, respectively.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+We need to store the dp array of size m * n.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/edit-distance/description/)
 

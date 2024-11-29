@@ -14,128 +14,173 @@ img_src = ""
 youtube = "L86PHNze5RM"
 youtube_upload_date="2023-06-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/L86PHNze5RM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A number of robots are standing on an infinite number line with their initial positions given in the array `nums`. Each robot will move based on a command string `s` where 'L' means left and 'R' means right. If two robots collide, they instantly reverse their directions. Your task is to calculate the sum of the distances between all pairs of robots `d` seconds after the command.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` representing the initial positions of robots, a string `s` representing the movement directions, and an integer `d` representing the number of seconds after the command.
+- **Example:** ``nums = [2, 5, 8]`, `s = 'LLR'`, `d = 2``
+- **Constraints:**
+	- 2 <= nums.length <= 10^5
+	- -2 * 10^9 <= nums[i] <= 2 * 10^9
+	- 0 <= d <= 10^9
+	- nums.length == s.length
+	- s consists of 'L' and 'R' only
+	- nums[i] are unique
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sumDistance(vector<int>& nums, string s, int d) {
-        for(int i = 0; i < nums.size(); i++) {
-            if(s[i] == 'L') nums[i] -= d;
-            else nums[i] += d;
-        }
-        sort(nums.begin(), nums.end());
-        int n = nums.size();
-        long long ans = 0, dist = 0, mod = (int) 1e9 + 7;
-        for(int i = 1; i < n; i++) {
-            dist += ((long)nums[i] - nums[i - 1]) * (i);
-            ans = (ans + dist) % mod;
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of distances between all pairs of robots after `d` seconds. The result should be returned modulo 10^9 + 7.
+- **Example:** `For `nums = [2, 5, 8]`, `s = 'LLR'`, and `d = 2`, the output is `24`.`
+- **Constraints:**
+	- The result should be returned modulo 10^9 + 7.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the sum of distances between all pairs of robots after moving for `d` seconds.
+
+- For each robot, adjust its position based on its movement direction and the time `d`.
+- Sort the final positions of the robots.
+- For each pair of robots, calculate the absolute distance between them.
+- Sum the distances and return the result modulo 10^9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always valid with no duplicates in the positions.
+- The robots move in exactly one direction as specified by the string `s`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** For `nums = [2, 5, 8]`, `s = 'LLR'`, and `d = 2`, the positions of the robots will be updated each second and we compute the sum of the distances after `d` seconds.
+
+- **Input:** `Example 2`  \
+  **Explanation:** For `nums = [1, 0]`, `s = 'RL'`, and `d = 1`, after one second, the robots are at positions `[2, -1]` and we calculate the distance between them.
+
+{{< dots >}}
+## Approach 🚀
+We can first update the positions of the robots based on the time `d` and their respective directions, then calculate the sum of distances between all pairs of robots.
+
+### Initial Thoughts 💭
+- After `d` seconds, the positions of all robots will be determined.
+- The sum of distances can be calculated using a sorted list of the final positions of robots.
+- A direct calculation of the pairwise distances might be inefficient, so sorting the positions will help simplify the distance calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the number of robots is always at least 2.
+- For large inputs, we ensure the solution scales efficiently, especially with sorting and distance calculations.
+- Handle cases where robots start at extreme positions or where `d = 0`.
+- Ensure that the operations respect the constraints, especially the modulus for large numbers.
+{{< dots >}}
+## Code 💻
+```cpp
+int sumDistance(vector<int>& nums, string s, int d) {
+    for(int i = 0; i < nums.size(); i++) {
+        if(s[i] == 'L') nums[i] -= d;
+        else nums[i] += d;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given a list of integers, a string representing movement directions, and a number `d` indicating how far the positions should change. Our task is to compute the total distance between all pairs of numbers after applying the changes described in the string.
-
-The string `s` consists of characters 'L' and 'R', where:
-- 'L' means that the corresponding number in the `nums` array will decrease by `d`.
-- 'R' means that the corresponding number will increase by `d`.
-
-After modifying the numbers based on the string `s`, we need to calculate the total distance between all pairs of numbers in the modified list, modulo \(10^9 + 7\).
-
-### Approach
-
-We can break the problem into the following steps:
-
-1. **Adjust the `nums` Array**: 
-   - For each element in the `nums` array, we modify it based on the corresponding character in the string `s`. If the character is 'L', we decrease the value by `d`; if the character is 'R', we increase the value by `d`.
-
-2. **Sort the Array**:
-   - After applying the modifications, the next step is to sort the modified array. This will help us easily compute the distance between all pairs of elements in an ordered manner, reducing the complexity of the distance computation.
-
-3. **Compute the Total Distance**:
-   - Once the array is sorted, we can compute the sum of distances between all pairs. This can be done efficiently by observing that the total distance between pairs can be broken down as a sum of differences between each element and all elements before it in the sorted array.
-
-4. **Modulo Operation**:
-   - Since the result could be large, we need to return the answer modulo \(10^9 + 7\).
-
-### Step-by-Step Code Breakdown
-
-#### Step 1: Adjust the `nums` Array
-
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    if(s[i] == 'L') nums[i] -= d;
-    else nums[i] += d;
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    long long ans = 0, dist = 0, mod = (int) 1e9 + 7;
+    for(int i = 1; i < n; i++) {
+        dist += ((long)nums[i] - nums[i - 1]) * (i);
+        ans = (ans + dist) % mod;
+    }
+    return ans;
 }
 ```
 
-- We loop over the entire `nums` array.
-- For each element, we check the corresponding character in string `s`. 
-  - If the character is 'L', we subtract `d` from the element at index `i`.
-  - If the character is 'R', we add `d` to the element at index `i`.
-- This modifies the `nums` array based on the given movement directions.
+This function calculates the sum of the distances between elements in a vector `nums` based on a string `s` that determines whether to add or subtract a given value `d` to each element. The result is returned modulo (10^9 + 7).
 
-#### Step 2: Sort the `nums` Array
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sumDistance(vector<int>& nums, string s, int d) {
+	```
+	The function `sumDistance` is defined, taking a vector of integers `nums`, a string `s`, and an integer `d` as parameters.
 
-```cpp
-sort(nums.begin(), nums.end());
-```
+2. **Loop Start**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	A for-loop is started to iterate over all elements in the `nums` vector.
 
-- After adjusting all the values in the `nums` array, we sort the array.
-- Sorting helps in calculating the distance between all pairs efficiently. In a sorted array, for any pair of elements `nums[i]` and `nums[j]` (where `i < j`), the distance between them can be calculated directly by subtracting the smaller element from the larger one.
+3. **Conditional Operation**
+	```cpp
+	        if(s[i] == 'L') nums[i] -= d;
+	```
+	If the character at index `i` in string `s` is 'L', the value at `nums[i]` is decreased by `d`.
 
-#### Step 3: Compute the Total Distance Between All Pairs
+4. **Conditional Operation**
+	```cpp
+	        else nums[i] += d;
+	```
+	Otherwise, if the character is not 'L', the value at `nums[i]` is increased by `d`.
 
-```cpp
-int n = nums.size();
-long long ans = 0, dist = 0, mod = (int) 1e9 + 7;
-for(int i = 1; i < n; i++) {
-    dist += ((long)nums[i] - nums[i - 1]) * (i);
-    ans = (ans + dist) % mod;
-}
-```
+5. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	The `nums` vector is sorted in ascending order.
 
-- We first initialize variables: `n` to the size of the array, `ans` to store the total distance, `dist` to track the intermediate distances, and `mod` to store \(10^9 + 7\) for the modulo operation.
-- We then iterate over the array starting from the second element (`i = 1`).
-- For each element `nums[i]`, we calculate the difference between `nums[i]` and `nums[i-1]`. This represents the distance between the current element and the previous element in the sorted array.
-- We then multiply this difference by `i`, the index of the element, to account for how many times this difference will appear in the total distance sum. The reason we multiply by `i` is because for each `nums[i]`, it contributes to the distance between itself and all previous elements in the sorted array (from index `0` to `i-1`).
-- We add this result to `dist`, which accumulates the total distance for the current index.
-- Finally, we update `ans` with the accumulated distance modulo \(10^9 + 7\).
+6. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	The variable `n` is initialized to the size of the `nums` vector.
 
-#### Step 4: Return the Result
+7. **Variable Initialization**
+	```cpp
+	    long long ans = 0, dist = 0, mod = (int) 1e9 + 7;
+	```
+	The variables `ans` (to store the final result), `dist` (to store intermediate distances), and `mod` (set to (10^9 + 7) for modulo operations) are initialized.
 
-```cpp
-return ans;
-```
+8. **Loop Start**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	A for-loop starts, iterating through the sorted `nums` vector from index 1 to `n-1`.
 
-- After processing all elements in the sorted `nums` array, we return the accumulated distance `ans`, which contains the total distance between all pairs modulo \(10^9 + 7\).
+9. **Distance Calculation**
+	```cpp
+	        dist += ((long)nums[i] - nums[i - 1]) * (i);
+	```
+	The distance between the current and the previous element in the sorted vector is multiplied by the index `i`, and the result is added to `dist`.
 
-### Complexity Analysis
+10. **Result Update**
+	```cpp
+	        ans = (ans + dist) % mod;
+	```
+	The accumulated distance is added to the result `ans`, and the result is taken modulo `mod` to prevent overflow.
 
-#### Time Complexity
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The final result `ans` is returned, which is the sum of the distances modulo (10^9 + 7).
 
-- **Adjusting the `nums` array**: This takes \(O(n)\) time, where `n` is the length of the `nums` array, because we iterate over all the elements once and modify them based on the corresponding character in the string `s`.
-- **Sorting the `nums` array**: Sorting the array takes \(O(n \log n)\) time, which is the most time-consuming operation in this solution.
-- **Computing the total distance**: After sorting, we compute the total distance in a single pass through the array, which takes \(O(n)\) time.
-- Therefore, the overall time complexity is dominated by the sorting step, so the total time complexity is **O(n \log n)**.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-#### Space Complexity
+The most time-consuming step is sorting the positions, which is O(n log n).
 
-- We use additional space for the input `nums` and the string `s`, but no other significant space is used. The space complexity is **O(n)** due to the space used by the `nums` array and the intermediate variables used for computation.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The space complexity is O(n) due to the storage needed for positions and other variables.
 
-This solution efficiently computes the total distance between all pairs of modified integers in the array after applying the given movement directions. The sliding window approach reduces the complexity of the problem to **O(n \log n)** due to the sorting step, and the modulo operation ensures that we return the result within the required bounds. This approach is both time-efficient and space-efficient, making it suitable for large input sizes.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/movement-of-robots/description/)
 

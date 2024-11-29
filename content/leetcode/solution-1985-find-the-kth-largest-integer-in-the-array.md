@@ -14,155 +14,145 @@ img_src = ""
 youtube = "lRCaNiqO3xI"
 youtube_upload_date="2021-08-29"
 youtube_thumbnail="https://i.ytimg.com/vi/lRCaNiqO3xI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of strings nums, where each string represents a non-negative integer. You need to find the kth largest integer in the array. Note that duplicates should be considered distinctly. For example, if the array is ['1', '2', '2'], the first largest integer is '2', the second largest is also '2', and the third largest is '1'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of strings nums, where each string represents an integer, and an integer k that represents the kth largest number to return.
+- **Example:** `nums = ['5', '12', '15', '9'], k = 2`
+- **Constraints:**
+	- 1 <= k <= nums.length <= 10^4
+	- 1 <= nums[i].length <= 100
+	- nums[i] consists of only digits
+	- nums[i] will not have any leading zeros
 
-{{< highlight cpp >}}
-class cmp {
-   
-public:
-    bool operator () (string &b, string &a) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the string that represents the kth largest integer from the input array.
+- **Example:** `Output: '12'`
+- **Constraints:**
+	- The output should be the kth largest number, as a string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the kth largest integer in the list, where duplicates are counted distinctly.
+
+- Use a priority queue (min-heap) to maintain the top k largest numbers.
+- For each number in the array, insert it into the priority queue.
+- If the size of the heap exceeds k, remove the smallest element.
+- After processing all numbers, the root of the heap will be the kth largest number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty and contains valid numbers as strings.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = ['5', '12', '15', '9'], k = 2`  \
+  **Explanation:** After sorting the array in non-decreasing order, we get ['5', '9', '12', '15']. The 2nd largest number is '12'.
+
+- **Input:** `Input: nums = ['2', '1', '2'], k = 3`  \
+  **Explanation:** The sorted array is ['1', '2', '2']. The 3rd largest number is '1'.
+
+{{< dots >}}
+## Approach 🚀
+We will use a priority queue (min-heap) to efficiently track the kth largest element as we process each element in the array.
+
+### Initial Thoughts 💭
+- We can maintain a heap of size k to efficiently keep track of the largest numbers seen so far.
+- Using a heap will allow us to remove the smallest number efficiently when the heap size exceeds k, ensuring the heap always holds the k largest numbers.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always contain at least one number, so this case doesn't need to be handled explicitly.
+- For large arrays, ensure that the priority queue is implemented efficiently to handle up to 10,000 numbers.
+- If k equals the length of the array, the kth largest number is the smallest element in the array.
+- The algorithm should operate within O(n log k) time complexity, where n is the length of the array.
+{{< dots >}}
+## Code 💻
+```cpp
+string kthLargestNumber(vector<string>& nums, int k) {
+    priority_queue<string, vector<string>, cmp> pq;
+    for(int i = 0; i < nums.size(); i++) {
         
-        if (a.size() != b.size())
-            return a.length() < b.length();
-        
-        return a < b;
-        
+        pq.push(nums[i]);
+        while(pq.size() > k) {
+            pq.pop();
+        }
+
+
     }
     
-};
-
-class Solution {
-public:
-    string kthLargestNumber(vector<string>& nums, int k) {
-        priority_queue<string, vector<string>, cmp> pq;
-        for(int i = 0; i < nums.size(); i++) {
-            
-            pq.push(nums[i]);
-            while(pq.size() > k) {
-                pq.pop();
-            }
-
-
-        }
-        
-        return pq.top();
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding the k-th largest number from a list of numbers represented as strings. Given the nature of string comparison, where numbers of different lengths do not directly compare in value when treated as strings, we need a method to compare and sort them accurately. The goal is to efficiently determine the k-th largest string representation of a number from the input list.
-
-### Approach
-
-To solve this problem, we will use a **priority queue** (or a max-heap) that allows us to efficiently manage the top k largest elements. The main steps of the approach are as follows:
-
-1. **Custom Comparator**: Implement a custom comparator to ensure that strings are compared based on their numeric value rather than their lexicographic order. This is important since '100' is larger than '99' but would be incorrectly evaluated if compared purely as strings.
-  
-2. **Priority Queue**: Use a max-heap to store the k largest numbers found so far. As we iterate through the list of numbers, we will keep the size of the heap to k, ensuring that it only contains the k largest elements.
-
-3. **Iterate and Push**: For each number in the input, we push it onto the heap. If the heap size exceeds k, we remove the smallest element (which would be at the top of the heap).
-
-4. **Return Result**: Once all numbers are processed, the top of the heap will contain the k-th largest number.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class cmp {
-public:
-    bool operator () (string &b, string &a) {
-```
-Here we define a custom comparator class `cmp` that overloads the `operator()` to compare two strings, `a` and `b`.
-
-```cpp
-        if (a.size() != b.size())
-            return a.length() < b.length();
-        
-        return a < b;
-```
-In the comparator, we first compare the lengths of the strings. If they are not of the same length, we consider the longer string to be greater. If they are of the same length, we perform a lexicographic comparison.
-
-```cpp
-class Solution {
-public:
-    string kthLargestNumber(vector<string>& nums, int k) {
-```
-The `Solution` class defines a method `kthLargestNumber` which takes a vector of strings (`nums`) and an integer (`k`).
-
-```cpp
-        priority_queue<string, vector<string>, cmp> pq;
-```
-We declare a max-heap priority queue `pq` using our custom comparator `cmp`.
-
-```cpp
-        for(int i = 0; i < nums.size(); i++) {
-            pq.push(nums[i]);
-```
-We iterate through each number in `nums`, pushing each number onto the priority queue.
-
-```cpp
-            while(pq.size() > k) {
-                pq.pop();
-            }
-```
-If the size of the priority queue exceeds k, we pop the smallest element, ensuring that the queue maintains only the k largest numbers.
-
-```cpp
-        }
-        
-        return pq.top();
-    }
-};
-```
-After processing all numbers, we return the top element of the priority queue, which is the k-th largest number.
-
-### Complexity
-
-- **Time Complexity**: 
-  - Pushing an element onto the priority queue takes \(O(\log k)\) time, and we do this for \(n\) elements, leading to a total time complexity of \(O(n \log k)\). 
-  - The maximum size of the priority queue is \(k\), so the operations on the heap remain efficient.
-
-- **Space Complexity**: The space complexity is \(O(k)\) due to the storage of up to k elements in the priority queue.
-
-### Conclusion
-
-The solution efficiently finds the k-th largest number represented as a string by leveraging a custom comparator and a priority queue. This approach ensures that we accurately account for numeric values even when represented as strings, thus providing an effective solution to the problem.
-
-### Example Usage
-
-Here's an example of how you can utilize the `kthLargestNumber` method:
-
-```cpp
-#include <vector>
-#include <iostream>
-using namespace std;
-
-int main() {
-    Solution sol;
-    vector<string> nums = {"3", "6", "7", "10", "2", "5"};
-    int k = 3;
-    string result = sol.kthLargestNumber(nums, k);
-    cout << "The " << k << "-th largest number is: " << result << endl; // Example output
-    return 0;
+    return pq.top();
 }
 ```
 
-### Potential Improvements
+This function finds the k-th largest number in a list of string numbers using a priority queue to maintain the top k largest elements.
 
-1. **Input Validation**: Additional checks can be introduced to handle edge cases, such as when `k` is greater than the size of the input vector or when the input vector is empty.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string kthLargestNumber(vector<string>& nums, int k) {
+	```
+	Defines the function `kthLargestNumber` which takes a vector of strings `nums` and an integer `k` to find the k-th largest number.
 
-2. **Custom Data Structures**: If the list of numbers is very large and k is small, other data structures like sorted lists or binary search trees could be explored for potentially better performance.
+2. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<string, vector<string>, cmp> pq;
+	```
+	Initializes a priority queue `pq` that will store strings in descending order based on the custom comparator `cmp`.
 
-3. **Memory Optimization**: The implementation could be further optimized in terms of memory if required, especially if the maximum number of strings is known and fixed.
+3. **Looping**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Starts a loop that iterates through each element in the vector `nums`.
 
-This solution effectively balances clarity, efficiency, and correctness, making it a good candidate for competitive programming challenges where performance is essential.
+4. **Queue Operation**
+	```cpp
+	        pq.push(nums[i]);
+	```
+	Pushes the current string from `nums` into the priority queue.
+
+5. **Queue Size Check**
+	```cpp
+	        while(pq.size() > k) {
+	```
+	Checks if the size of the priority queue exceeds `k`, and if so, removes the smallest element.
+
+6. **Queue Operation**
+	```cpp
+	            pq.pop();
+	```
+	Removes the smallest element from the priority queue to maintain only the top `k` largest elements.
+
+7. **Return Statement**
+	```cpp
+	    return pq.top();
+	```
+	Returns the top element of the priority queue, which will be the k-th largest number.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log k)
+- **Average Case:** O(n log k)
+- **Worst Case:** O(n log k)
+
+We insert each element into the heap, which takes O(log k) time. The total time complexity is O(n log k), where n is the number of elements.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+We use a heap of size k, so the space complexity is O(k).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-kth-largest-integer-in-the-array/description/)
 

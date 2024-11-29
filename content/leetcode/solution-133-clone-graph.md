@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "mQeF6bN8hMk"
 youtube_upload_date="2021-02-01"
 youtube_thumbnail="https://i.ytimg.com/vi/mQeF6bN8hMk/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,180 +28,185 @@ youtube_thumbnail="https://i.ytimg.com/vi/mQeF6bN8hMk/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a reference to a node in a connected, undirected graph. Each node in the graph contains a value (integer) and a list of its neighbors. Your task is to return a deep copy of the entire graph starting from the given node.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a graph represented by an adjacency list, where each list describes the neighbors of a node.
+- **Example:** `[[2,4],[1,3],[2,4],[1,3]]`
+- **Constraints:**
+	- 0 <= adjList.length <= 100
+	- Each node in the graph is unique.
+	- There are no repeated edges or self-loops in the graph.
 
-{{< highlight cpp >}}
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    vector<Node*> neighbors;
-    Node() {
-        val = 0;
-        neighbors = vector<Node*>();
-    }
-    Node(int _val) {
-        val = _val;
-        neighbors = vector<Node*>();
-    }
-    Node(int _val, vector<Node*> _neighbors) {
-        val = _val;
-        neighbors = _neighbors;
-    }
-};
-*/
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the deep copy of the graph starting from the given node.
+- **Example:** `[[2,4],[1,3],[2,4],[1,3]]`
+- **Constraints:**
+	- The output will be the same structure as the input graph, but with distinct node objects.
 
-class Solution {
-public:
-    map<int, Node*> mp;
-    Node* cloneGraph(Node* node) {
-        if(node == NULL) return node;
-        Node * ans;
-        ans = copy(node);
-        return ans;
-    }
-    
-    Node* copy(Node* node) {
-        if(mp.count(node->val)) return mp[node->val];
-        Node* ans = new Node(node->val);
-        mp[node->val] = ans;
-        for(auto it: node->neighbors) {
-            Node* n = copy(it);
-            ans->neighbors.push_back(n);
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to create a deep copy of the graph by copying each node and its neighbors while ensuring that no node is visited more than once.
 
-### 📝 **Problem Statement**
+- 1. Create a hashmap to store copies of each node as they are encountered.
+- 2. Use a recursive approach to visit each node and copy it.
+- 3. For each node, create a new copy and recursively copy its neighbors.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph is always connected.
+- There are no duplicate edges or self-loops.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[2,4],[1,3],[2,4],[1,3]]`  \
+  **Explanation:** The graph has 4 nodes and 4 edges, where each node is connected to its respective neighbors.
 
-The problem asks us to **clone a graph**, where each node has an integer value and a list of neighbors (edges). The goal is to create a **deep copy** (or clone) of the graph, ensuring that each node's value is preserved, and all edges are correctly replicated.
+- **Input:** `[[]]`  \
+  **Explanation:** This graph consists of a single node with no neighbors.
 
-We are provided with a graph where each node is represented by a `Node` class, and the graph can contain cycles. The task is to construct an identical graph where each node is a new instance, and no references point to the original nodes.
+{{< dots >}}
+## Approach 🚀
+The solution uses a depth-first search (DFS) approach, leveraging recursion and a hashmap to track visited nodes and avoid revisiting nodes during the copy process.
 
----
-
-### 💡 **Approach**
-
-To solve the problem of cloning a graph, we need to ensure:
-1. Each node's value is copied correctly.
-2. The edges (connections to neighbors) are also replicated, but without referencing the original nodes.
-3. We handle cycles properly by avoiding revisiting nodes and preventing infinite recursion.
-
-We'll use a **depth-first search (DFS)** approach to traverse and clone each node. A **map** (or dictionary) will track which nodes have already been cloned to prevent revisiting and infinite recursion.
-
----
-
-### 🔨 **Code Breakdown (Step by Step)**
-
-#### 1️⃣ **Node Class Definition**
-We begin by defining the `Node` class, which represents each node in the graph. Each node contains:
-- `val`: The value of the node.
-- `neighbors`: A list of adjacent nodes (neighbors).
-
-The constructors allow creating nodes with default or specified values and neighbors.
-
+### Initial Thoughts 💭
+- We need to create a new node for each existing node in the graph.
+- We need to ensure that we don't revisit nodes that have already been copied.
+- A recursive DFS approach will be efficient for this problem as we need to traverse the entire graph and copy each node and its neighbors.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input graph is empty, return an empty list.
+- The solution should handle up to 100 nodes and avoid stack overflow or memory issues.
+- If the graph contains only one node, return a copy of that single node with no neighbors.
+- The graph is always connected, so no need to handle disconnected graphs.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Node {
-public:
-    int val;
-    vector<Node*> neighbors;
-    Node() {
-        val = 0;
-        neighbors = vector<Node*>();
-    }
-    Node(int _val) {
-        val = _val;
-        neighbors = vector<Node*>();
-    }
-    Node(int _val, vector<Node*> _neighbors) {
-        val = _val;
-        neighbors = _neighbors;
-    }
-};
-```
+map<int, Node*> mp;
+Node* cloneGraph(Node* node) {
+    if(node == NULL) return node;
+    Node * ans;
+    ans = copy(node);
+    return ans;
+}
 
----
-
-#### 2️⃣ **Main Solution Class**
-The main `Solution` class contains the method `cloneGraph`, which is responsible for cloning the graph.
-
-```cpp
-class Solution {
-public:
-    map<int, Node*> mp; // Maps node value to its cloned node
-    Node* cloneGraph(Node* node) {
-        if(node == NULL) return node;  // Handle the edge case where the node is NULL
-        Node * ans;
-        ans = copy(node);  // Start the graph cloning process by calling the copy function
-        return ans;  // Return the cloned graph
-    }
-};
-```
-
-- **cloneGraph Function**:
-  - Accepts a pointer to a node (`Node* node`).
-  - If the node is `NULL`, it directly returns `NULL`.
-  - Calls the helper method `copy(node)` to initiate the cloning process and returns the root of the cloned graph.
-
----
-
-#### 3️⃣ **Recursive Copy Function**
-The recursive `copy` function is responsible for copying each node and its neighbors.
-
-```cpp
 Node* copy(Node* node) {
-    if(mp.count(node->val)) return mp[node->val];  // Return the already cloned node if it exists in the map
-    Node* ans = new Node(node->val);  // Create a new node for the clone
-    mp[node->val] = ans;  // Store the cloned node in the map using its value as the key
-    for(auto it: node->neighbors) {  // Recursively clone each neighbor of the current node
-        Node* n = copy(it);  // Call copy for each neighbor
-        ans->neighbors.push_back(n);  // Add the cloned neighbor to the current node's neighbors list
+    if(mp.count(node->val)) return mp[node->val];
+    Node* ans = new Node(node->val);
+    mp[node->val] = ans;
+    for(auto it: node->neighbors) {
+        Node* n = copy(it);
+        ans->neighbors.push_back(n);
     }
-    return ans;  // Return the cloned node
+    return ans;
 }
 ```
 
-- **Base Case**: 
-  - If the node has already been cloned (exists in the `mp` map), return the cloned node to avoid infinite recursion.
-  
-- **Cloning the Node**: 
-  - If the node hasn't been cloned, create a new node with the same value as the original node.
-  - Store the cloned node in the map (`mp`) using its value as the key.
-  
-- **Recursively Cloning Neighbors**:
-  - For each neighbor, recursively call `copy` to clone them.
-  - Add the cloned neighbor to the current node’s neighbors list.
+This is a solution to clone a graph. The graph is represented using a Node class that has a value and a list of neighbors. A map is used to store previously copied nodes to avoid infinite loops and redundant copying.
 
-- **Return the Cloned Node**: 
-  - After cloning the node and its neighbors, return the cloned node.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Map Insertion**
+	```cpp
+	map<int, Node*> mp;
+	```
+	Declare a map to store the copied nodes. The key is the node's value, and the value is the node object itself.
 
----
+2. **Function Definition**
+	```cpp
+	Node* cloneGraph(Node* node) {
+	```
+	Define the function `cloneGraph` that takes a `Node` pointer and returns a cloned graph.
 
-### ⏱️ **Complexity Analysis**
+3. **Null Check**
+	```cpp
+	    if(node == NULL) return node;
+	```
+	Check if the input node is NULL. If it is, return NULL as there is nothing to clone.
 
-#### 🧮 **Time Complexity**:
-- **Time to Clone Each Node**: Each node is visited once, and for each node, we examine all of its neighbors.
-- **Time to Clone Each Neighbor**: Recursion is called for each neighbor.
-- Overall, the time complexity is **O(V + E)**, where `V` is the number of nodes and `E` is the number of edges. Each node and edge is processed at most once.
+4. **Variable Declaration**
+	```cpp
+	    Node * ans;
+	```
+	Declare a pointer `ans` which will store the cloned graph.
 
-#### 💾 **Space Complexity**:
-- **Map for Cloned Nodes**: The `map<int, Node*>` stores each node’s value and its corresponding cloned node. This requires **O(V)** space.
-- **Recursive Call Stack**: The recursive calls on the graph nodes can lead to a call stack depth of **O(V)** in the worst case (for graphs that are essentially long chains).
-- Thus, the overall space complexity is **O(V)**.
+5. **Function Call**
+	```cpp
+	    ans = copy(node);
+	```
+	Call the helper function `copy` to clone the graph starting from the given node.
 
----
+6. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the cloned graph.
 
-### ✅ **Conclusion**
+7. **Helper Function Definition**
+	```cpp
+	Node* copy(Node* node) {
+	```
+	Define the helper function `copy` that clones the graph recursively.
 
-This solution efficiently clones an undirected graph using a **depth-first search (DFS)** approach with recursion. The `map` ensures that each node is cloned only once, and the graph's structure is correctly preserved. The solution handles cycles effectively by avoiding revisiting already cloned nodes. The time complexity is linear in terms of the number of nodes and edges, making this approach suitable for large graphs.
+8. **Map Lookup**
+	```cpp
+	    if(mp.count(node->val)) return mp[node->val];
+	```
+	Check if the node has already been cloned (present in the map). If it is, return the existing clone.
 
-This method can be adapted for other graph-related problems that involve creating deep copies or performing graph traversals. The use of recursion and mapping nodes ensures that the cloned graph is a valid copy with the correct structure and no infinite loops.
+9. **Node Creation**
+	```cpp
+	    Node* ans = new Node(node->val);
+	```
+	Create a new node with the same value as the input node.
 
---- 
+10. **Map Insertion**
+	```cpp
+	    mp[node->val] = ans;
+	```
+	Insert the new node into the map to store it for future reference.
+
+11. **Graph Traversal**
+	```cpp
+	    for(auto it: node->neighbors) {
+	```
+	Loop through each neighbor of the current node to clone them.
+
+12. **Recursive Call**
+	```cpp
+	        Node* n = copy(it);
+	```
+	Recursively call `copy` on each neighbor to clone it.
+
+13. **List Insertion**
+	```cpp
+	        ans->neighbors.push_back(n);
+	```
+	Add the cloned neighbor to the `neighbors` list of the current cloned node.
+
+14. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the cloned node after its neighbors have been cloned and added.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N), where N is the number of nodes in the graph.
+- **Average Case:** O(N + E), where E is the number of edges in the graph, as every edge needs to be visited once.
+- **Worst Case:** O(N + E), where N is the number of nodes and E is the number of edges.
+
+The time complexity is linear in terms of nodes and edges because we traverse each node and each edge once.
+
+### Space Complexity 💾
+- **Best Case:** O(N), as we store a copy of each node in the hashmap.
+- **Worst Case:** O(N), where N is the number of nodes, for the space used by the recursive stack and the hashmap storing copies of the nodes.
+
+The space complexity is O(N) due to the storage requirements for the copied nodes and the recursion stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/clone-graph/description/)
 

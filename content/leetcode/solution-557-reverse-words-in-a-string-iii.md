@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "_I57bpDMWnY"
 youtube_upload_date="2022-06-27"
 youtube_thumbnail="https://i.ytimg.com/vi/_I57bpDMWnY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,126 +28,164 @@ youtube_thumbnail="https://i.ytimg.com/vi/_I57bpDMWnY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string s that contains words separated by a single space. It is guaranteed that there are no leading or trailing spaces.
+- **Example:** `Input: s = "Coding is fun"`
+- **Constraints:**
+	- 1 <= s.length <= 5 * 10^4
+	- s contains printable ASCII characters.
+	- s does not contain any leading or trailing spaces.
+	- There is at least one word in s.
+	- All the words in s are separated by a single space.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string reverseWords(string s) {
-        int n = s.size(), prv = 0;
-        for(int i = 0; i < n; i++)
-            if(s[i] == ' ')
-                rev(s, prv, i - 1), prv = i + 1;
-            else if(i == n - 1)
-                rev(s, prv, i);        
-        return s;
-    }
-    
-    void rev(string &s, int i, int j) {
-        while(i <= j)
-            swap(s[i++], s[j--]);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a string where each word is reversed, but the word order and spaces remain unchanged.
+- **Example:** `Output: "gnidoC si nuf"`
+- **Constraints:**
+	- The returned string should preserve the spacing and order of the words.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to reverse the characters of each word in the input string while keeping the overall word order and spacing intact.
 
-The task is to reverse the words in a given string. A word is defined as a sequence of non-space characters separated by spaces. For instance, the string `"The sky is blue"` should be transformed into `"ehT yks si eulb"`, where each word in the string is reversed, but the words remain in their original positions. Additionally, leading and trailing spaces in the input string should be ignored, and multiple spaces between words should not appear in the output.
+- Traverse through the input string word by word.
+- For each word, reverse the characters and store the result.
+- Join the reversed words back together with a single space between them.
+- Return the resulting string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is valid, containing words separated by a single space.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "Coding is fun"`  \
+  **Explanation:** Each word in the sentence is reversed, giving the output 'gnidoC si nuf', while the word order is preserved.
 
-**Example 1:**
+- **Input:** `Input: s = "Hello World"`  \
+  **Explanation:** After reversing each word, the output is 'olleH dlroW'.
 
-Input: `"The sky is blue"`  
-Output: `"ehT yks si eulb"`
+{{< dots >}}
+## Approach 🚀
+The approach involves splitting the string into words, reversing each word, and then reassembling the string while maintaining the order.
 
-**Example 2:**
-
-Input: `"  Hello  world "`  
-Output: `"olleH dlrow"`
-
-### Approach
-
-The problem requires reversing each word in the string while preserving the order of the words. To achieve this, we need to:
-
-1. **Iterate through the string**: We need to go through each character in the string and identify the start and end of each word.
-2. **Reverse each word**: Once a word is identified, we reverse it.
-3. **Skip spaces**: While iterating, we need to skip over spaces and ensure that only valid words are reversed.
-4. **Handle edge cases**: The solution should handle multiple spaces, empty strings, and strings that only contain spaces.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Iterate Through the String**
-
+### Initial Thoughts 💭
+- Reversing each word is a straightforward task that can be done by manipulating the string's characters.
+- The challenge lies in maintaining the correct order of the words and spaces between them.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs, as the problem guarantees at least one word in the input string.
+- The solution should handle large input strings efficiently.
+- If the input contains a single word, that word will be reversed.
+- The solution should not exceed time or space limits when processing input of size 5 * 10^4.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = s.size(), prv = 0;
-for (int i = 0; i < n; i++)
-```
+string reverseWords(string s) {
+    int n = s.size(), prv = 0;
+    for(int i = 0; i < n; i++)
+        if(s[i] == ' ')
+            rev(s, prv, i - 1), prv = i + 1;
+        else if(i == n - 1)
+            rev(s, prv, i);        
+    return s;
+}
 
-- First, we determine the length of the string (`n`), and initialize a variable `prv` to track the starting index of each word. `prv` will be updated whenever a space is encountered to indicate the start of the next word.
-
-#### 2. **Identify and Reverse Words**
-
-```cpp
-if (s[i] == ' ') 
-    rev(s, prv, i - 1), prv = i + 1;
-else if (i == n - 1) 
-    rev(s, prv, i);
-```
-
-- If we encounter a space (`s[i] == ' '`), we reverse the word that we have encountered from the position stored in `prv` (the start of the word) to the position just before the space (`i - 1`). After reversing the word, we update `prv` to the position after the space, so it can point to the start of the next word.
-  
-- If we encounter the last character of the string (`i == n - 1`), we need to reverse the last word. Since there is no space at the end of the string, we reverse the word from `prv` to `i`.
-
-#### 3. **Reversing Each Word**
-
-```cpp
 void rev(string &s, int i, int j) {
-    while (i <= j)
+    while(i <= j)
         swap(s[i++], s[j--]);
 }
 ```
 
-- The `rev` function takes the string `s`, and two indices (`i` and `j`) that represent the boundaries of the word to be reversed. 
-- The function swaps the characters at indices `i` and `j`, incrementing `i` and decrementing `j` after each swap. This process continues until `i` exceeds `j`, effectively reversing the word in place.
-  
-#### 4. **Return the Final String**
+This function reverses each word in a given string. It processes the string character by character, identifying words by spaces and reversing each word in-place using the helper function `rev`. The `rev` function swaps characters within a given range to reverse the word.
 
-```cpp
-return s;
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string reverseWords(string s) {
+	```
+	Defines the function `reverseWords`, which takes a string `s` and returns the string with each word reversed in place.
 
-- After iterating through the entire string and reversing all the words, the modified string `s` is returned, which contains the reversed words but in the original order.
+2. **Variable Initialization**
+	```cpp
+	    int n = s.size(), prv = 0;
+	```
+	Initializes the size of the string `n` and a variable `prv` to keep track of the starting index of the current word.
 
-### Complexity
+3. **Loop Through String**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts a loop to iterate through each character of the string `s`.
 
-#### Time Complexity:
+4. **Word Boundary Detection**
+	```cpp
+	        if(s[i] == ' ')
+	```
+	Checks if the current character is a space, indicating the end of a word.
 
-The time complexity of the solution is **O(n)**, where `n` is the length of the string. This is because:
-- We iterate through the string once to identify the start and end of each word.
-- Each word is reversed using the `rev` function, and the reversal itself takes linear time relative to the length of the word. In the worst case, the total number of characters we reverse is equal to the length of the entire string.
+5. **Reverse Word**
+	```cpp
+	            rev(s, prv, i - 1), prv = i + 1;
+	```
+	Calls the `rev` function to reverse the word from index `prv` to `i-1`, and updates `prv` to point to the start of the next word.
 
-Thus, the total time complexity is linear, **O(n)**.
+6. **Final Word Handling**
+	```cpp
+	        else if(i == n - 1)
+	```
+	Checks if the current character is the last character in the string, indicating the end of the final word.
 
-#### Space Complexity:
+7. **Reverse Last Word**
+	```cpp
+	            rev(s, prv, i);        
+	```
+	Reverses the final word in the string, as there is no space after it.
 
-The space complexity is **O(1)**, assuming that the space used by the string `s` is not counted. We are performing the reversal in place, so no additional space is used other than the space needed for the input string. Therefore, the space complexity is constant, **O(1)**.
+8. **Return Result**
+	```cpp
+	    return s;
+	```
+	Returns the modified string with all words reversed.
 
-### Conclusion
+9. **Helper Function Definition**
+	```cpp
+	void rev(string &s, int i, int j) {
+	```
+	Defines the helper function `rev`, which takes a string `s` and two indices `i` and `j`, and reverses the substring from index `i` to `j`.
 
-The solution provided efficiently solves the problem of reversing the words in a string while maintaining the order of the words. The steps are straightforward: we iterate through the string, identify words, reverse them, and return the modified string.
+10. **In-place Reversal**
+	```cpp
+	    while(i <= j)
+	```
+	Starts a while loop to reverse the characters of the substring as long as `i` is less than or equal to `j`.
 
-**Key Points:**
-- **In-place word reversal**: The solution performs word reversal in place without needing extra space for a new string.
-- **Handles multiple spaces**: Multiple spaces between words and leading/trailing spaces are properly handled.
-- **Efficient**: The algorithm runs in **O(n)** time complexity and uses **O(1)** space, making it efficient and suitable for large input sizes.
+11. **Swap Characters**
+	```cpp
+	        swap(s[i++], s[j--]);
+	```
+	Swaps the characters at indices `i` and `j`, then increments `i` and decrements `j` to continue swapping until the entire substring is reversed.
 
-**Edge Cases Handled:**
-- Strings with multiple spaces between words.
-- Empty strings.
-- Strings with only spaces.
-- Strings with a single word.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This approach is simple yet highly effective for reversing the words in a string. By using a two-pointer approach and performing the reversal in place, the solution minimizes space complexity while ensuring correctness.
+The time complexity is linear in the size of the input string, as we process each character once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), where n is the length of the input string, due to the storage of the words and the reversed string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-words-in-a-string-iii/description/)
 

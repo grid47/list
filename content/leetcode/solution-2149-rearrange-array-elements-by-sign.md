@@ -14,109 +14,166 @@ img_src = ""
 youtube = "SoPmcGzz9-E"
 youtube_upload_date="2024-02-14"
 youtube_thumbnail="https://i.ytimg.com/vi/SoPmcGzz9-E/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums' of even length consisting of an equal number of positive and negative integers. Rearrange the array such that every consecutive pair of integers has opposite signs, the order of integers with the same sign is preserved, and the array begins with a positive integer.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 0-indexed integer array 'nums' of even length.
+- **Example:** `nums = [6, 3, -1, -5, 2, -4]`
+- **Constraints:**
+	- 2 <= nums.length <= 2 * 10^5
+	- nums.length is even
+	- 1 <= |nums[i]| <= 10^5
+	- nums consists of an equal number of positive and negative integers.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> rearrangeArray(vector<int>& nums) {
-        vector<int> ans(nums.size(), 0);
-        int idxpos = 0, idxneg = 1;
-        for(int num: nums) {
-            if(num > 0) {
-                ans[idxpos] = num;
-                idxpos += 2;
-            }
-            if(num < 0) {
-                ans[idxneg] = num;
-                idxneg += 2;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the rearranged array where consecutive elements have opposite signs and the order of same-signed integers is preserved.
+- **Example:** `Output: [6, -1, 3, -5, 2, -4]`
+- **Constraints:**
+	- The array must start with a positive integer and alternate between positive and negative integers.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to rearrange the elements such that positive and negative integers alternate, and the order of elements with the same sign remains intact.
+
+- Iterate over the 'nums' array and segregate the positive and negative integers.
+- Place positive integers at even indices and negative integers at odd indices.
+- Return the rearranged array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is guaranteed to contain an equal number of positive and negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [6, 3, -1, -5, 2, -4]`  \
+  **Explanation:** The positive integers are [6, 3, 2] and the negative integers are [-1, -5, -4]. The only valid rearrangement is [6, -1, 3, -5, 2, -4] which alternates signs while preserving the order of positive and negative integers.
+
+{{< dots >}}
+## Approach 🚀
+The goal is to rearrange the array such that positive and negative integers alternate while keeping the order of the same-signed integers intact.
+
+### Initial Thoughts 💭
+- The input guarantees an equal number of positive and negative integers, which simplifies the process.
+- We need a way to efficiently place the positive integers at even indices and negative integers at odd indices.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array is not possible based on the problem constraints.
+- The solution should efficiently handle arrays with a length up to 2 * 10^5.
+- Arrays with the minimum possible length of 2 will follow the same rearrangement logic.
+- The input array is guaranteed to have an equal number of positive and negative integers.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> rearrangeArray(vector<int>& nums) {
+    vector<int> ans(nums.size(), 0);
+    int idxpos = 0, idxneg = 1;
+    for(int num: nums) {
+        if(num > 0) {
+            ans[idxpos] = num;
+            idxpos += 2;
         }
-        return ans;
+        if(num < 0) {
+            ans[idxneg] = num;
+            idxneg += 2;
+        }
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
+This function rearranges an array such that positive numbers are placed in the even indices and negative numbers in the odd indices.
 
-The problem at hand involves rearranging the elements of an array such that positive and negative integers are placed alternately. The rearranged array must maintain the relative order of the positive and negative numbers, meaning that within their respective categories, the order of numbers should be preserved. The key challenge here is to ensure that no two positive or negative numbers appear consecutively. If this is not possible, we return an array where positive and negative integers are still rearranged, but the ordering constraint may not hold.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> rearrangeArray(vector<int>& nums) {
+	```
+	Function declaration to rearrange the array with positive numbers at even indices and negative numbers at odd indices.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    vector<int> ans(nums.size(), 0);
+	```
+	Initialize a vector 'ans' of the same size as the input 'nums', with all elements set to 0.
 
-To solve this problem efficiently, we can use a two-pointer approach that helps us place positive and negative integers alternately. Here's a breakdown of the approach:
+3. **Variable Initialization**
+	```cpp
+	    int idxpos = 0, idxneg = 1;
+	```
+	Initialize two indices, 'idxpos' to place positive numbers at even indices and 'idxneg' to place negative numbers at odd indices.
 
-1. **Create a Result Array**: Start by creating a new array `ans` of the same size as the input array, initialized to zeros. This will be used to store the rearranged elements.
-  
-2. **Initialize Two Indices**: We use two indices, `idxpos` and `idxneg`. The index `idxpos` will be used to place the positive integers starting from the first position (0, 2, 4, etc.), and the index `idxneg` will be used to place the negative integers starting from position 1 (1, 3, 5, etc.).
+4. **Loop**
+	```cpp
+	    for(int num: nums) {
+	```
+	Iterate through each number in the input 'nums' array.
 
-3. **Iterate through the Input Array**: We loop through the original array `nums`. For each element:
-   - If the element is positive, place it in the `ans` array at the index `idxpos` and increment `idxpos` by 2 (to skip to the next available position for positive integers).
-   - If the element is negative, place it in the `ans` array at the index `idxneg` and increment `idxneg` by 2 (to skip to the next available position for negative integers).
+5. **Condition Check**
+	```cpp
+	        if(num > 0) {
+	```
+	Check if the current number is positive.
 
-4. **Return the Result Array**: After iterating through all the elements, return the rearranged array `ans`.
+6. **Array Assignment**
+	```cpp
+	            ans[idxpos] = num;
+	```
+	Place the positive number at the current 'idxpos' index in the 'ans' array.
 
-This approach ensures that positive and negative integers are alternated while preserving their relative order. The two-pointer technique allows for a single pass through the input array, making the solution efficient in terms of both time and space.
+7. **Index Update**
+	```cpp
+	            idxpos += 2;
+	```
+	Increment the 'idxpos' index by 2 to move to the next even index.
 
-### Code Breakdown (Step by Step)
+8. **Condition Check**
+	```cpp
+	        if(num < 0) {
+	```
+	Check if the current number is negative.
 
-The following is a detailed explanation of how the code works step-by-step:
+9. **Array Assignment**
+	```cpp
+	            ans[idxneg] = num;
+	```
+	Place the negative number at the current 'idxneg' index in the 'ans' array.
 
-1. **Initialize the Result Array**:
-   ```cpp
-   vector<int> ans(nums.size(), 0);
-   ```
-   Here, we create an array `ans` with the same size as `nums` and initialize all elements to 0. This array will store the final rearranged elements.
+10. **Index Update**
+	```cpp
+	            idxneg += 2;
+	```
+	Increment the 'idxneg' index by 2 to move to the next odd index.
 
-2. **Set Initial Indices for Positive and Negative Numbers**:
-   ```cpp
-   int idxpos = 0, idxneg = 1;
-   ```
-   We initialize two indices: `idxpos` starts at 0 (the first position for positive numbers), and `idxneg` starts at 1 (the first position for negative numbers).
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the rearranged array 'ans' with positive numbers at even indices and negative numbers at odd indices.
 
-3. **Iterate Through the Input Array**:
-   ```cpp
-   for(int num: nums) {
-       if(num > 0) {
-           ans[idxpos] = num;
-           idxpos += 2;
-       }
-       if(num < 0) {
-           ans[idxneg] = num;
-           idxneg += 2;
-       }
-   }
-   ```
-   This loop iterates through each number in the input array `nums`. For each number:
-   - If the number is positive (`num > 0`), it is placed in the `ans` array at the `idxpos` position. Then, `idxpos` is incremented by 2 to move to the next available position for positive numbers.
-   - If the number is negative (`num < 0`), it is placed in the `ans` array at the `idxneg` position. Then, `idxneg` is incremented by 2 to move to the next available position for negative numbers.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   The condition `num < 0` and `num > 0` ensures that we only place positive and negative integers in their respective slots.
+The time complexity is linear, as we are iterating through the array once.
 
-4. **Return the Result Array**:
-   ```cpp
-   return ans;
-   ```
-   Finally, after processing all the numbers in the input array, the `ans` array is returned, which now contains the positive and negative numbers alternately arranged.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity
+We use an extra array of size n to store the rearranged elements.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n)**, where `n` is the length of the input array `nums`. This is because we iterate through the array only once to rearrange the elements, and the operations inside the loop (checking if a number is positive or negative and placing it in the result array) are constant time operations.
+**Happy Coding! 🎉**
 
-#### Space Complexity:
-The space complexity is also **O(n)**, as we create a new array `ans` of the same size as the input array to store the rearranged elements. Additionally, no extra data structures or space beyond this are required.
-
-This solution is optimal in terms of both time and space for this problem.
-
-### Conclusion
-
-In conclusion, the provided solution is an efficient way to rearrange an array such that positive and negative integers alternate while maintaining their relative order. By using the two-pointer approach, we can solve the problem in linear time and space, making it well-suited for larger input sizes. This method guarantees that we adhere to the problem constraints while keeping the implementation simple and easy to understand. The code is both effective and efficient, making it a great choice for solving similar array rearrangement problems.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rearrange-array-elements-by-sign/description/)
 

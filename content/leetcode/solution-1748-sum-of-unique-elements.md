@@ -14,89 +14,152 @@ img_src = ""
 youtube = "MXQyGU493vE"
 youtube_upload_date="2021-02-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/MXQyGU493vE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums`. Your task is to find the sum of all elements that appear only once in the array. Elements that appear more than once should be excluded from the sum.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums`, where each element is a positive integer.
+- **Example:** `Input: nums = [5, 7, 8, 7, 9]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sumOfUnique(vector<int>& nums) {
-        unordered_map<int,int> mpp;
-        int sum= 0;
-        for(int i=0; i<nums.size(); i++){
-            mpp[nums[i]]++;
-        }
-        for(int i=0; i<nums.size(); i++){
-            if(mpp[nums[i]] <= 1)
-                sum+= nums[i];
-        }
-        return sum;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of all the unique elements in the given array.
+- **Example:** `Output: 22`
+- **Constraints:**
+	- The result should be the sum of elements that appear exactly once in the array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the sum of all unique elements in the array.
+
+- 1. Create a frequency map (hashmap) to count the occurrences of each element in the array.
+- 2. Iterate over the array and sum the elements that appear exactly once.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty and contains only integers between 1 and 100.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [5, 7, 8, 7, 9]`  \
+  **Explanation:** The unique elements in the array are 5, 8, and 9. Their sum is 22.
+
+- **Input:** `Input: nums = [1, 1, 1, 1, 1]`  \
+  **Explanation:** There are no unique elements in this array, so the sum is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem is to first count the occurrences of each number in the array and then sum the numbers that appear exactly once.
+
+### Initial Thoughts 💭
+- We need an efficient way to count the occurrences of elements.
+- The constraints are small enough to allow for a straightforward hashmap solution.
+- We will use a hashmap to store the frequency of each element and then iterate through the hashmap to sum the unique elements.
+{{< dots >}}
+### Edge Cases 🌐
+- The array is guaranteed to have at least one element, so this edge case is not applicable.
+- Although the array can have up to 100 elements, the problem constraints are small enough that the solution can handle the largest input size efficiently.
+- If all elements in the array are the same, the result should be 0.
+- Ensure that the solution works efficiently even with the largest possible input size.
+{{< dots >}}
+## Code 💻
+```cpp
+int sumOfUnique(vector<int>& nums) {
+    unordered_map<int,int> mpp;
+    int sum= 0;
+    for(int i=0; i<nums.size(); i++){
+        mpp[nums[i]]++;
     }
-};
-{{< /highlight >}}
----
+    for(int i=0; i<nums.size(); i++){
+        if(mpp[nums[i]] <= 1)
+            sum+= nums[i];
+    }
+    return sum;
+}
+```
 
-### Problem Statement
+The function `sumOfUnique` calculates the sum of all unique numbers in the input vector `nums`. It uses a hash map to count the frequency of each number and adds numbers to the sum only if they appear exactly once.
 
-The problem is to calculate the sum of unique elements in an array `nums`. A unique element is one that appears exactly once in the array. If an element appears multiple times, it should not contribute to the sum.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sumOfUnique(vector<int>& nums) {
+	```
+	This defines the function `sumOfUnique` which takes a reference to a vector of integers `nums` as input and returns the sum of the unique numbers in it.
 
-### Approach
+2. **Data Structure Initialization**
+	```cpp
+	    unordered_map<int,int> mpp;
+	```
+	This initializes an unordered map `mpp` to store the frequency of each number in the vector `nums`.
 
-This solution utilizes a hash map to count the occurrences of each element in the array. By counting frequencies, we can identify which elements appear only once. Once we know the frequency of each element, we calculate the sum by adding up only those elements that have a frequency of one in the hash map.
+3. **Variable Initialization**
+	```cpp
+	    int sum= 0;
+	```
+	This initializes an integer variable `sum` to 0, which will accumulate the sum of the unique numbers.
 
-### Code Breakdown (Step by Step)
+4. **Loop Over Vector**
+	```cpp
+	    for(int i=0; i<nums.size(); i++){
+	```
+	This loop iterates over each element in the input vector `nums`.
 
-Let’s go through the code in detail to understand each step.
+5. **Frequency Count**
+	```cpp
+	        mpp[nums[i]]++;
+	```
+	This line increments the count of the current element `nums[i]` in the unordered map `mpp`.
 
-1. **Frequency Counting Using Hash Map**:
-   - Initialize an empty hash map `mpp` to store frequencies of each element in `nums`.
-   - Loop through each element in `nums` and update its count in the map.
-  
-   ```cpp
-   unordered_map<int, int> mpp;
-   for(int i = 0; i < nums.size(); i++) {
-       mpp[nums[i]]++;
-   }
-   ```
-   
-   After this loop, `mpp` will hold the count of occurrences for each number in `nums`.
+6. **Second Loop Over Vector**
+	```cpp
+	    for(int i=0; i<nums.size(); i++){
+	```
+	This loop iterates over the vector `nums` again to check the frequency of each number.
 
-2. **Summing Unique Elements**:
-   - Initialize `sum` to zero to store the sum of unique elements.
-   - Loop through the elements in `nums` again, and for each element, check if it has a count of 1 in `mpp`.
-   - If so, add it to `sum` since it is unique.
+7. **Condition for Unique Numbers**
+	```cpp
+	        if(mpp[nums[i]] <= 1)
+	```
+	This checks if the current element `nums[i]` appears only once in the vector. If its frequency is less than or equal to 1, it is considered unique.
 
-   ```cpp
-   int sum = 0;
-   for(int i = 0; i < nums.size(); i++) {
-       if(mpp[nums[i]] == 1) {
-           sum += nums[i];
-       }
-   }
-   ```
+8. **Sum Update**
+	```cpp
+	            sum+= nums[i];
+	```
+	If the number is unique (appears only once), it is added to the `sum`.
 
-   This step ensures that only unique elements contribute to the final sum.
+9. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	The function returns the sum of all unique numbers stored in the `sum` variable.
 
-3. **Returning the Result**:
-   - Finally, return the calculated sum.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where `n` is the length of the array. In the best case, the array contains only unique elements.
+- **Average Case:** O(n), since we need to process each element in the array once.
+- **Worst Case:** O(n), as the time complexity is linear even in the worst case.
 
-   ```cpp
-   return sum;
-   ```
+The time complexity is linear with respect to the length of the array.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(n), as we need space for the frequency map.
+- **Worst Case:** O(n), where `n` is the length of the array, since we store the frequency of each element.
 
-- **Time Complexity**: \(O(N)\), where \(N\) is the number of elements in `nums`. The code iterates through `nums` twice: once to fill the hash map and once to calculate the sum, making the overall complexity \(O(N)\).
-  
-- **Space Complexity**: \(O(N)\) for the hash map `mpp`, as it stores the frequency of each unique element in `nums`.
+The space complexity is linear in the number of unique elements in the array.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently calculates the sum of unique elements in an array using a hash map to count occurrences. By isolating elements with a count of 1, we ensure that only unique elements are included in the sum. This approach provides a straightforward and optimal solution to the problem of summing unique elements.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-unique-elements/description/)
 

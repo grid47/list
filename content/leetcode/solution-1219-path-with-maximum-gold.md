@@ -14,141 +14,217 @@ img_src = ""
 youtube = "I1wllM_pozY"
 youtube_upload_date="2024-05-14"
 youtube_thumbnail="https://i.ytimg.com/vi/I1wllM_pozY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a gold mine grid of size m x n, each cell contains an integer representing the amount of gold in that cell. A cell with 0 means no gold is present. The task is to find the maximum amount of gold that can be collected by following certain movement rules: You can move one step in any of the four directions (left, right, up, down), but you cannot visit the same cell twice, and you cannot move to a cell that contains 0 gold.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D grid where each cell contains an integer representing the amount of gold. A value of 0 means no gold is present in the cell.
+- **Example:** `Input: grid = [[0, 6, 0], [5, 8, 7], [0, 9, 0]]`
+- **Constraints:**
+	- 1 <= m, n <= 15
+	- 0 <= grid[i][j] <= 100
+	- There are at most 25 cells containing gold.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getMaximumGold(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        int maxGold = 0;
-        for(int i = 0; i < m; i++)
-            for(int j = 0; j < n; j++)
-                maxGold = max(maxGold, findMax(grid, m, n, i, j));
-        return maxGold;
-    }
-    
-    int dir[5] = {0,1,0,-1,0};
-    
-    int findMax(vector<vector<int>> &grid, int m,int n, int r, int c) {
-        if(r < 0 || r == m || c < 0 || c == n || grid[r][c] == 0)
-            return 0;
-        int origin = grid[r][c];
-        grid[r][c] = 0;
-        int mx = 0;
-        for(int i = 0; i < 4; i++)
-            mx = max(mx, findMax(grid, m, n, r+dir[i], c+dir[i+1]));
-        grid[r][c]=origin;
-        return mx+origin;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum amount of gold that can be collected under the given movement constraints.
+- **Example:** `Output: 24`
+- **Constraints:**
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the maximum amount of gold that can be collected, we need to explore the grid and recursively calculate the maximum gold collected from each valid starting point.
 
-### Problem Statement
-The goal of the problem is to find the maximum amount of gold that can be collected from a grid. The grid is represented as a 2D vector where each cell can contain either gold (denoted by a positive integer) or be empty (denoted by `0`). You can start collecting gold from any cell that contains gold, and you can move in any of the four cardinal directions (up, down, left, right). The challenge lies in the fact that once you leave a cell (i.e., collect gold from it), you cannot return to it during the same path.
+- Traverse each cell in the grid. If the cell contains gold, recursively explore all four directions (up, down, left, right).
+- Track the gold collected along the path and ensure that you don't revisit cells or step on a cell with 0 gold.
+- Return the maximum gold collected from any starting cell.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will always contain at least one cell with gold.
+- The grid size will not exceed 15 x 15.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[0, 6, 0], [5, 8, 7], [0, 9, 0]]`  \
+  **Explanation:** The path to collect the maximum gold is 9 → 8 → 7, collecting a total of 24 units of gold.
 
-For example, given a grid like the following:
+- **Input:** `Input: grid = [[1, 0, 7], [2, 0, 6], [3, 4, 5], [0, 3, 0], [9, 0, 20]]`  \
+  **Explanation:** The path to collect the maximum gold is 1 → 2 → 3 → 4 → 5 → 6 → 7, collecting a total of 28 units of gold.
 
-```
-[[0,6,0],
- [5,8,7],
- [0,9,0]]
-```
+{{< dots >}}
+## Approach 🚀
+We will use a Depth-First Search (DFS) to explore all potential paths starting from each cell with gold, keeping track of the maximum gold collected along the way.
 
-You would want to calculate the maximum gold you could collect by starting from any gold-containing cell and moving to adjacent cells without revisiting any cell.
-
-### Approach
-To solve the problem, we employ a depth-first search (DFS) strategy. The idea is to explore all possible paths starting from each cell containing gold and track the amount of gold collected along each path. The steps involved in the approach are:
-
-1. **Initialize Variables**: Track the maximum gold found using a variable `maxGold`.
-2. **Iterate Through Grid**: Loop through each cell in the grid and for each cell containing gold, invoke the `findMax` function to explore all possible paths and calculate the total gold collected.
-3. **DFS Traversal**: The `findMax` function will recursively explore all four possible directions from the current cell, collect the gold, and backtrack to try different paths.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Each cell can be a potential starting point, and we need to explore all four directions recursively.
+- We should mark cells as visited while exploring to avoid revisiting them, then backtrack once we've explored all possible paths from a given cell.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid will never be empty, as there will always be at least one cell containing gold.
+- The grid can have a maximum size of 15x15, which is manageable for a DFS approach.
+- Handle grids where all non-zero cells are isolated or surrounded by cells with no gold.
+- The solution must operate within the given grid size and constraints, ensuring it runs efficiently even for the largest grids.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int getMaximumGold(vector<vector<int>>& grid) {
+int getMaximumGold(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    int maxGold = 0;
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            maxGold = max(maxGold, findMax(grid, m, n, i, j));
+    return maxGold;
+}
+
+int dir[5] = {0,1,0,-1,0};
+
+int findMax(vector<vector<int>> &grid, int m,int n, int r, int c) {
+    if(r < 0 || r == m || c < 0 || c == n || grid[r][c] == 0)
+        return 0;
+    int origin = grid[r][c];
+    grid[r][c] = 0;
+    int mx = 0;
+    for(int i = 0; i < 4; i++)
+        mx = max(mx, findMax(grid, m, n, r+dir[i], c+dir[i+1]));
+    grid[r][c]=origin;
+    return mx+origin;
+}
 ```
-- **Line 1-2**: Define the `Solution` class and the `getMaximumGold` method that takes a 2D vector `grid` as input.
 
-```cpp
-        int m = grid.size(), n = grid[0].size();
-        int maxGold = 0;
-```
-- **Lines 3-4**: Calculate the dimensions of the grid, `m` (rows) and `n` (columns), and initialize a variable `maxGold` to store the maximum gold collected.
+This solution finds the maximum amount of gold that can be collected from a grid of cells, where each cell contains a certain amount of gold. The algorithm uses depth-first search (DFS) to explore the grid and calculate the maximum gold that can be collected starting from any valid cell.
 
-```cpp
-        for(int i = 0; i < m; i++)
-            for(int j = 0; j < n; j++)
-                maxGold = max(maxGold, findMax(grid, m, n, i, j));
-```
-- **Lines 5-7**: Iterate through each cell in the grid. If a cell contains gold, call the `findMax` function to calculate the maximum gold collectible starting from that cell. Update `maxGold` accordingly.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int getMaximumGold(vector<vector<int>>& grid) {
+	```
+	Define the function `getMaximumGold`, which takes a 2D grid representing the map of gold amounts, and returns the maximum amount of gold that can be collected by traversing the grid.
 
-```cpp
-        return maxGold;
-    }
-```
-- **Lines 8-9**: Return the maximum gold collected after checking all possible starting points.
+2. **Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Store the number of rows (`m`) and columns (`n`) of the grid in variables for later use.
 
-```cpp
-    int dir[5] = {0,1,0,-1,0};
-```
-- **Line 10**: Define a direction array `dir` to facilitate movement in the four cardinal directions (right, down, left, up).
+3. **Max Gold Initialization**
+	```cpp
+	    int maxGold = 0;
+	```
+	Initialize a variable `maxGold` to 0. This will store the maximum amount of gold collected from any starting cell.
 
-```cpp
-    int findMax(vector<vector<int>> &grid, int m, int n, int r, int c) {
-```
-- **Line 11**: Define the `findMax` function, which performs the DFS. This function takes the grid and the current position `(r, c)` as input parameters.
+4. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Start an outer loop that iterates over each row in the grid.
 
-```cpp
-        if(r < 0 || r == m || c < 0 || c == n || grid[r][c] == 0)
-            return 0;
-```
-- **Lines 12-13**: Check for boundary conditions. If the current position is out of bounds or if the cell is empty (contains `0`), return `0` as no gold can be collected from this path.
+5. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < n; j++)
+	```
+	Start an inner loop that iterates over each column in the current row.
 
-```cpp
-        int origin = grid[r][c];
-        grid[r][c] = 0;
-```
-- **Lines 14-15**: Store the amount of gold in the current cell `origin` and mark the cell as visited by setting its value to `0`.
+6. **Max Gold Update**
+	```cpp
+	            maxGold = max(maxGold, findMax(grid, m, n, i, j));
+	```
+	For each cell in the grid, call the helper function `findMax` to calculate the maximum amount of gold that can be collected from that starting cell, and update `maxGold` accordingly.
 
-```cpp
-        int mx = 0;
-        for(int i = 0; i < 4; i++)
-            mx = max(mx, findMax(grid, m, n, r+dir[i], c+dir[i+1]));
-```
-- **Lines 16-19**: Initialize a variable `mx` to keep track of the maximum gold collectible from this cell. For each of the four possible directions, recursively call `findMax` to explore adjacent cells and update `mx`.
+7. **Return Max Gold**
+	```cpp
+	    return maxGold;
+	```
+	Return the value of `maxGold`, which contains the maximum amount of gold that can be collected from the grid.
 
-```cpp
-        grid[r][c] = origin;
-```
-- **Line 20**: Backtrack by restoring the original value of the current cell after all paths have been explored. This is crucial to allow other paths to access this cell again.
+8. **Direction Array Initialization**
+	```cpp
+	int dir[5] = {0,1,0,-1,0};
+	```
+	Initialize an array `dir` to represent the four possible directions of movement in the grid: right, down, left, and up.
 
-```cpp
-        return mx + origin;
-    }
-};
-```
-- **Line 21**: Return the total amount of gold collected from this path, which is the maximum found in the adjacent cells plus the gold from the current cell.
+9. **Helper Function Definition**
+	```cpp
+	int findMax(vector<vector<int>> &grid, int m,int n, int r, int c) {
+	```
+	Define the helper function `findMax`, which performs depth-first search (DFS) starting from the cell at coordinates `(r, c)` in the grid.
 
-### Complexity
-1. **Time Complexity**:
-   - The time complexity of this solution is \(O(m \cdot n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. In the worst case, we may visit every cell multiple times during the DFS, but each cell will only contribute to the result once due to backtracking.
+10. **Base Case Check**
+	```cpp
+	    if(r < 0 || r == m || c < 0 || c == n || grid[r][c] == 0)
+	```
+	Check if the current cell is out of bounds or contains a value of 0 (no gold). If any of these conditions is true, return 0, as no gold can be collected from this cell.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(m \cdot n)\) due to the recursion stack in the DFS. In the worst-case scenario, the depth of recursion could reach \(O(m \cdot n)\) when the grid is fully filled with gold.
+11. **Store Origin Value**
+	```cpp
+	        return 0;
+	```
+	Return 0 if the cell is out of bounds or empty, ending the current DFS exploration.
 
-### Conclusion
-The `getMaximumGold` function effectively utilizes a depth-first search algorithm to explore all possible paths for collecting gold in a grid. By marking cells as visited and backtracking, it ensures that each path is calculated accurately without revisiting cells. This method demonstrates an efficient approach to solving pathfinding problems in grids, making it a valuable technique in competitive programming and algorithm design. Overall, the solution is both intuitive and efficient, providing a clear way to maximize gold collection in a structured environment.
+12. **Save Current Cell Value**
+	```cpp
+	    int origin = grid[r][c];
+	```
+	Store the current value of the cell (amount of gold) in the `origin` variable, as we will modify the grid during DFS.
+
+13. **Mark Cell as Visited**
+	```cpp
+	    grid[r][c] = 0;
+	```
+	Mark the current cell as visited by setting its value to 0, preventing revisiting the same cell during DFS.
+
+14. **Max Gold Initialization in DFS**
+	```cpp
+	    int mx = 0;
+	```
+	Initialize a variable `mx` to track the maximum gold that can be collected from neighboring cells during the DFS.
+
+15. **DFS Loop**
+	```cpp
+	    for(int i = 0; i < 4; i++)
+	```
+	Start a loop to explore the four possible directions from the current cell.
+
+16. **Recursive DFS Call**
+	```cpp
+	        mx = max(mx, findMax(grid, m, n, r+dir[i], c+dir[i+1]));
+	```
+	Recursively call the `findMax` function for each direction, updating `mx` with the maximum value returned by each DFS exploration.
+
+17. **Restore Cell Value**
+	```cpp
+	    grid[r][c]=origin;
+	```
+	Restore the original value of the current cell to ensure the grid is unchanged for other DFS explorations.
+
+18. **Return Max Gold from Current Cell**
+	```cpp
+	    return mx+origin;
+	```
+	Return the maximum amount of gold that can be collected starting from the current cell, including the gold in the current cell.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+In the worst case, we may need to explore each cell multiple times for each DFS call, leading to a time complexity of O(m * n).
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the recursive call stack and the need to store the grid's state during exploration.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-with-maximum-gold/description/)
 

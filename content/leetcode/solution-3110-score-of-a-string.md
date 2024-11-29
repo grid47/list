@@ -14,84 +14,124 @@ img_src = ""
 youtube = "imbrLFL20tQ"
 youtube_upload_date="2024-06-01"
 youtube_thumbnail="https://i.ytimg.com/vi/imbrLFL20tQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s. The score of a string is defined as the sum of the absolute difference between the ASCII values of adjacent characters. Return the score of the string s.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s of length n.
+- **Example:** `s = "abc"`
+- **Constraints:**
+	- 2 <= s.length <= 100
+	- s consists only of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int scoreOfString(string s) {
-        int sum=0;
-        for(int i=0;i<s.size()-1;i++){
-            sum+=abs(s[i]-s[i+1]);
-        }
-        return sum;        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the score of the string s.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the score of the string by summing the absolute differences between ASCII values of adjacent characters.
+
+- 1. Initialize a variable to store the sum of absolute differences.
+- 2. Loop through the string, comparing each pair of adjacent characters.
+- 3. For each pair, compute the absolute difference in ASCII values and add it to the sum.
+- 4. Return the total sum as the score.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain at least two characters.
+- The string will only contain lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "abc"`  \
+  **Explanation:** The ASCII values of the characters are: 'a' = 97, 'b' = 98, 'c' = 99. The score is |97 - 98| + |98 - 99| = 3.
+
+- **Input:** `s = "zyx"`  \
+  **Explanation:** The ASCII values of the characters are: 'z' = 122, 'y' = 121, 'x' = 120. The score is |122 - 121| + |121 - 120| = 6.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can iterate through the string, calculate the absolute differences between ASCII values of adjacent characters, and sum them.
+
+### Initial Thoughts 💭
+- The problem asks for a simple iteration over the string and calculation of differences.
+- By iterating through the string and summing the absolute differences of ASCII values, we can compute the score efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least two characters, as per the constraints.
+- The solution should efficiently handle strings of length up to 100 characters.
+- When the string consists of repeated characters (e.g., "aaaa"), the score will be 0.
+- The solution must handle strings of length between 2 and 100.
+{{< dots >}}
+## Code 💻
+```cpp
+int scoreOfString(string s) {
+    int sum=0;
+    for(int i=0;i<s.size()-1;i++){
+        sum+=abs(s[i]-s[i+1]);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given a string `s`, and we are tasked with computing a score based on the absolute differences between the ASCII values of consecutive characters in the string. The score is defined as the sum of the absolute differences between each pair of consecutive characters. We need to return the computed score.
-
-For example:
-- For the string `"abc"`, the score will be `abs('a' - 'b') + abs('b' - 'c') = 1 + 1 = 2`.
-- For the string `"xyz"`, the score will be `abs('x' - 'y') + abs('y' - 'z') = 1 + 1 = 2`.
-
-### Approach
-
-The problem requires calculating the score of a string by summing up the absolute differences of the ASCII values of consecutive characters. This can be done efficiently by iterating through the string once and performing the necessary calculations.
-
-#### Approach Outline:
-1. **Iterate through the string**: We need to traverse through the string and compute the absolute difference between the ASCII values of each pair of consecutive characters.
-2. **Calculate the absolute difference**: For each pair of consecutive characters, we calculate the absolute difference between their ASCII values.
-3. **Accumulate the score**: Sum all the absolute differences to get the final score.
-4. **Return the score**: After iterating through the string, return the accumulated score.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Sum
-```cpp
-int sum = 0;
-```
-- A variable `sum` is initialized to store the accumulated score. Initially, it's set to zero because the score starts from zero and will be incremented as we calculate the differences.
-
-#### Step 2: Loop Through the String
-```cpp
-for(int i = 0; i < s.size() - 1; i++) {
-    sum += abs(s[i] - s[i + 1]);
+    return sum;        
 }
 ```
-- The loop iterates through the string from the first character (`i = 0`) to the second-last character (`i < s.size() - 1`). 
-- We stop at `s.size() - 1` because we are comparing consecutive characters, so the last character doesn't have a next character to compare with.
-- **Inside the loop**: For each character at position `i` and its consecutive character at position `i+1`, the absolute difference between their ASCII values is calculated using the `abs` function. This difference is added to the running total `sum`.
 
-#### Step 3: Return the Final Score
-```cpp
-return sum;
-```
-- After finishing the iteration through the string, we return the accumulated sum as the result. This value represents the score of the string.
+This function calculates the score of a string based on the absolute differences between each consecutive character's ASCII values.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int scoreOfString(string s) {
+	```
+	Defines the function `scoreOfString` that takes a string `s` and returns the total score as an integer. The score is calculated based on the absolute differences between consecutive characters.
 
-#### Time Complexity:
-- **O(n)**: The time complexity is **O(n)**, where `n` is the length of the string `s`. We only need to iterate through the string once to calculate the score. In each iteration, we perform constant-time operations (computing the absolute difference and updating the sum). Thus, the time complexity is linear with respect to the size of the input string.
+2. **Variable Initialization**
+	```cpp
+	    int sum=0;
+	```
+	Initializes the variable `sum` to 0. This variable will hold the total score of the string as the absolute differences between consecutive characters are accumulated.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is **O(1)**, as we are using only a constant amount of extra space. The only extra memory used is for the `sum` variable, and there are no additional data structures that grow with the input size. Therefore, the space complexity is constant.
+3. **For Loop Setup**
+	```cpp
+	    for(int i=0;i<s.size()-1;i++){
+	```
+	Starts a `for` loop that iterates through each character in the string `s`, except for the last character (since it's compared with the next one).
 
-### Conclusion
+4. **Score Calculation**
+	```cpp
+	        sum+=abs(s[i]-s[i+1]);
+	```
+	For each consecutive pair of characters, calculates the absolute difference of their ASCII values using `abs(s[i] - s[i+1])`, and adds the result to `sum`.
 
-This problem involves calculating the score of a string based on the absolute differences between the ASCII values of consecutive characters. The solution leverages a simple linear pass through the string, making it both time-efficient and space-efficient.
+5. **Return Statement**
+	```cpp
+	    return sum;        
+	```
+	Returns the final value of `sum`, which represents the total score of the string based on the absolute differences of consecutive characters.
 
-By iterating through the string once and summing up the absolute differences of consecutive characters, we achieve a solution with **O(n)** time complexity and **O(1)** space complexity. This is optimal for this type of problem, as every character in the string must be inspected to compute the score.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The solution is straightforward and efficiently solves the problem by using a simple loop and the built-in `abs` function to calculate absolute differences. This makes the implementation clean and easy to understand while ensuring good performance even for larger input sizes.
+The time complexity is O(n), where n is the length of the string. We need to iterate through the string once to calculate the score.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only use a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/score-of-a-string/description/)
 

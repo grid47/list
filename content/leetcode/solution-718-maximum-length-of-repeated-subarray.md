@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "MynhR1bMtWY"
 youtube_upload_date="2021-07-08"
 youtube_thumbnail="https://i.ytimg.com/vi/MynhR1bMtWY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,114 +28,184 @@ youtube_thumbnail="https://i.ytimg.com/vi/MynhR1bMtWY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two integer arrays `nums1` and `nums2`, your task is to find the maximum length of a contiguous subarray that appears in both arrays.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays `nums1` and `nums2` of integers.
+- **Example:** `nums1 = [4, 5, 6, 7, 8], nums2 = [1, 2, 3, 4, 5]`
+- **Constraints:**
+	- 1 <= nums1.length, nums2.length <= 1000
+	- 0 <= nums1[i], nums2[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findLength(vector<int>& nums1, vector<int>& nums2) {
-        int n1 = nums1.size(), n2 = nums2.size();
-        vector<vector<int>> dp(n1 + 1, vector<int>(n2 + 1));
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum length of a contiguous subarray that appears in both `nums1` and `nums2`.
+- **Example:** `2`
+- **Constraints:**
+	- The result should be a non-negative integer representing the length of the longest common subarray.
 
-        for(int i = 0; i < n1 + 1; i++) dp[i][0] = 0;
-        for(int i = 0; i < n2 + 1; i++) dp[0][i] = 0;
-        // dp[0][0] = 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the maximum length of a contiguous subarray that appears in both arrays using dynamic programming.
 
-        // subseq - !subarr
-        int mx = 0;
-        for(int i = 1; i < n1 + 1; i++)
-        for(int j = 1; j < n2 + 1; j++) {
-            if (nums1[i - 1] == nums2[j - 1]) {
-                 dp[i][j] = dp[i - 1][j - 1] + 1;
-                mx = max(mx, dp[i][j]);
-            }
+- Create a 2D array `dp` where `dp[i][j]` represents the length of the longest common subarray ending at `nums1[i-1]` and `nums2[j-1]`.
+- If `nums1[i-1] == nums2[j-1]`, then `dp[i][j] = dp[i-1][j-1] + 1`.
+- Track the maximum value in the `dp` array during the iteration.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays will contain non-negative integers.
+- The length of the arrays is guaranteed to be at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums1 = [4, 5, 6, 7, 8], nums2 = [1, 2, 3, 4, 5]`  \
+  **Explanation:** The longest common subarray is [4, 5], which has a length of 2.
+
+- **Input:** `nums1 = [1, 2, 3, 4], nums2 = [2, 3, 4, 5]`  \
+  **Explanation:** The longest common subarray is [2, 3, 4], which has a length of 3.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using dynamic programming to efficiently calculate the longest common subarray.
+
+### Initial Thoughts 💭
+- We need to keep track of the common subarrays between `nums1` and `nums2`.
+- Dynamic programming will help us store the results of overlapping subproblems and avoid redundant calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- If one of the arrays is empty, the result should be 0.
+- Ensure that the solution works efficiently for large arrays with lengths up to 1000.
+- Handle cases where all elements in the arrays are the same.
+- Handle cases where no common subarray exists, in which case the result will be 0.
+{{< dots >}}
+## Code 💻
+```cpp
+int findLength(vector<int>& nums1, vector<int>& nums2) {
+    int n1 = nums1.size(), n2 = nums2.size();
+    vector<vector<int>> dp(n1 + 1, vector<int>(n2 + 1));
+
+    for(int i = 0; i < n1 + 1; i++) dp[i][0] = 0;
+    for(int i = 0; i < n2 + 1; i++) dp[0][i] = 0;
+    // dp[0][0] = 0;
+
+    // subseq - !subarr
+    int mx = 0;
+    for(int i = 1; i < n1 + 1; i++)
+    for(int j = 1; j < n2 + 1; j++) {
+        if (nums1[i - 1] == nums2[j - 1]) {
+             dp[i][j] = dp[i - 1][j - 1] + 1;
+            mx = max(mx, dp[i][j]);
         }
-        return mx;
     }
-};
-{{< /highlight >}}
----
+    return mx;
+}
+```
 
-### Problem Statement
+The function finds the maximum length of a common subarray between two given arrays. It uses dynamic programming to build a table where each entry stores the length of the common subarray ending at that index.
 
-The problem asks us to find the length of the longest common subarray between two given arrays, `nums1` and `nums2`. A **subarray** is defined as a contiguous segment of an array. The goal is to identify the longest contiguous segment that appears in both arrays and return its length. 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int findLength(vector<int>& nums1, vector<int>& nums2) {
+	```
+	Define the function 'findLength' that takes two vectors of integers 'nums1' and 'nums2' and returns an integer representing the maximum length of a common subarray.
 
-This problem can be viewed as a variation of the **longest common subsequence** problem, but with the additional restriction that the matching elements must be contiguous in both arrays.
+2. **Variable Initialization**
+	```cpp
+	    int n1 = nums1.size(), n2 = nums2.size();
+	```
+	Initialize two variables, 'n1' and 'n2', to store the sizes of 'nums1' and 'nums2', respectively.
 
-### Approach
+3. **Array Initialization**
+	```cpp
+	    vector<vector<int>> dp(n1 + 1, vector<int>(n2 + 1));
+	```
+	Initialize a 2D vector 'dp' with dimensions (n1+1) by (n2+1), where each entry will store the length of the common subarray ending at that position.
 
-To solve this problem, we can utilize **dynamic programming (DP)**. The idea is to use a two-dimensional DP table to store the length of the longest common subarray found so far at any pair of indices in the two arrays.
+4. **Base Case Initialization**
+	```cpp
+	
+	```
+	Base cases for dynamic programming are initialized in the following steps. The first row and first column of the DP table will be set to zero.
 
-We define a DP table `dp[i][j]` where:
-- `dp[i][j]` represents the length of the longest common subarray ending at `nums1[i-1]` and `nums2[j-1]`.
+5. **Filling DP Table - Row Initialization**
+	```cpp
+	    for(int i = 0; i < n1 + 1; i++) dp[i][0] = 0;
+	```
+	Set the first column of the DP table to zero since there is no common subarray with an empty second array.
 
-The key idea is to iterate through both arrays and update the DP table based on whether the elements `nums1[i-1]` and `nums2[j-1]` are equal. If they are, the longest common subarray ending at `i` and `j` is one longer than the longest common subarray ending at `i-1` and `j-1`. Otherwise, the common subarray length is zero.
+6. **Filling DP Table - Column Initialization**
+	```cpp
+	    for(int i = 0; i < n2 + 1; i++) dp[0][i] = 0;
+	```
+	Set the first row of the DP table to zero since there is no common subarray with an empty first array.
 
-At each step, we track the maximum length of the common subarray encountered so far.
+7. **Comment**
+	```cpp
+	    // dp[0][0] = 0;
+	```
+	This line is a redundant initialization since dp[0][0] is already set to 0 in the previous loops.
 
-### Code Breakdown (Step by Step)
+8. **Dynamic Programming Loop Start**
+	```cpp
+	    int mx = 0;
+	```
+	Initialize 'mx' to store the maximum length of the common subarray found during the iterations.
 
-Let’s break down the code to understand how it works:
+9. **Outer Loop - Iterating Over nums1**
+	```cpp
+	    for(int i = 1; i < n1 + 1; i++)
+	```
+	Start the outer loop to iterate over each element of 'nums1', from index 1 to n1.
 
-1. **Initialization**:
-   - We first compute the sizes of the two input arrays:
-   ```cpp
-   int n1 = nums1.size(), n2 = nums2.size();
-   ```
-   - We then create a 2D DP table `dp` of size `(n1 + 1) x (n2 + 1)` initialized to 0. The extra row and column are used to handle the base case when one of the arrays is empty:
-   ```cpp
-   vector<vector<int>> dp(n1 + 1, vector<int>(n2 + 1));
-   ```
+10. **Inner Loop - Iterating Over nums2**
+	```cpp
+	    for(int j = 1; j < n2 + 1; j++) {
+	```
+	Start the inner loop to iterate over each element of 'nums2', from index 1 to n2.
 
-2. **Base Case**:
-   - The first row (`dp[0][*]`) and the first column (`dp[*][0]`) are initialized to zero because if either array is empty, the longest common subarray is of length 0. This is done using two loops:
-   ```cpp
-   for(int i = 0; i < n1 + 1; i++) dp[i][0] = 0;
-   for(int i = 0; i < n2 + 1; i++) dp[0][i] = 0;
-   ```
+11. **Condition Check - Matching Elements**
+	```cpp
+	        if (nums1[i - 1] == nums2[j - 1]) {
+	```
+	Check if the elements at the current indices of 'nums1' and 'nums2' match. If they do, the common subarray is extended.
 
-3. **Dynamic Programming Transition**:
-   - We then iterate through both arrays starting from index 1 to compute the values in the DP table:
-   ```cpp
-   int mx = 0;  // This will hold the maximum length of the common subarray.
-   for(int i = 1; i < n1 + 1; i++)
-       for(int j = 1; j < n2 + 1; j++) {
-           if (nums1[i - 1] == nums2[j - 1]) {
-               dp[i][j] = dp[i - 1][j - 1] + 1;
-               mx = max(mx, dp[i][j]);
-           }
-       }
-   ```
-   - For each pair of indices `i` and `j`, if `nums1[i - 1] == nums2[j - 1]`, it means we have found a common element. The length of the longest common subarray ending at `i` and `j` is `dp[i-1][j-1] + 1`, which is the length of the subarray ending at `i-1` and `j-1` extended by one element.
-   - If `nums1[i - 1] != nums2[j - 1]`, the value of `dp[i][j]` remains 0, as no common subarray ends at those indices.
-   - At each step, we update `mx` to track the maximum length of any common subarray encountered so far:
-   ```cpp
-   mx = max(mx, dp[i][j]);
-   ```
+12. **DP Update - Matching Elements**
+	```cpp
+	             dp[i][j] = dp[i - 1][j - 1] + 1;
+	```
+	If the elements match, update the DP table by adding 1 to the value from the previous diagonal entry, representing the length of the common subarray ending at that point.
 
-4. **Return the Result**:
-   - After iterating through the entire array, the maximum length of the longest common subarray is stored in `mx`, and we return this value:
-   ```cpp
-   return mx;
-   ```
+13. **Max Length Update**
+	```cpp
+	            mx = max(mx, dp[i][j]);
+	```
+	Update 'mx' to store the maximum length of the common subarray found so far.
 
-### Complexity Analysis
+14. **Return Maximum Length**
+	```cpp
+	    return mx;
+	```
+	Return the maximum length of the common subarray found, stored in 'mx'.
 
-- **Time Complexity**:
-  - The algorithm uses two nested loops to fill the DP table, where the outer loop runs `n1` times and the inner loop runs `n2` times, where `n1` and `n2` are the lengths of the two input arrays `nums1` and `nums2`. Thus, the time complexity is **O(n1 * n2)**, which is optimal for this type of problem.
-  
-- **Space Complexity**:
-  - The algorithm uses a 2D DP table of size `(n1 + 1) x (n2 + 1)`, which requires **O(n1 * n2)** space. This is the space complexity of the solution. The extra space is necessary to store the intermediate results of the DP computation.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n1 * n2)
+- **Average Case:** O(n1 * n2)
+- **Worst Case:** O(n1 * n2)
 
-  If space is a concern, one could optimize the space complexity by using only two rows of the DP table, reducing the space complexity to **O(min(n1, n2))**, since only the previous row is needed at each step.
+The time complexity is quadratic due to the two nested loops iterating over both arrays.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n1 * n2)
+- **Worst Case:** O(n1 * n2)
 
-This solution leverages dynamic programming to find the longest common subarray between two arrays. By using a 2D DP table, we track the length of the longest subarray ending at each pair of indices in `nums1` and `nums2`. The algorithm is efficient, with a time complexity of **O(n1 * n2)** and a space complexity of **O(n1 * n2)**, making it well-suited for solving problems involving finding common subarrays or subsequences.
+The space complexity is quadratic because we are using a 2D array to store the results.
 
-This method ensures that we explore all possible matching subarrays and compute the longest one efficiently. The use of dynamic programming eliminates the need for brute-force solutions, which would be much slower for large inputs. This approach can be easily adapted to other problems involving common subsequences or subarrays.
+**Happy Coding! 🎉**
 
-In summary, the dynamic programming approach used here is a robust and optimal way to solve the problem of finding the longest common subarray. It provides a clear, systematic approach that can be applied to a variety of related problems in string and array manipulation.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)
 

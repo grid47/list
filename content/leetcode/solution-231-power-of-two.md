@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "lGxiqzurnNU"
 youtube_upload_date="2020-06-08"
 youtube_thumbnail="https://i.ytimg.com/vi/lGxiqzurnNU/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,92 +28,100 @@ youtube_thumbnail="https://i.ytimg.com/vi/lGxiqzurnNU/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, determine if it is a power of two. An integer n is considered a power of two if there exists an integer x such that n == 2^x.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer n (−2^31 <= n <= 2^31 − 1).
+- **Example:** `Input: n = 8`
+- **Constraints:**
+	- -2^31 <= n <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPowerOfTwo(int n) {
-        if(n <= 0) return false;
-        return !(n & (n - 1));
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if n is a power of two, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to verify whether the number n is a power of two using bit manipulation.
 
-In this problem, you need to check if a given integer `n` is a power of two. A number is a power of two if it can be expressed as \( 2^k \) where \( k \) is a non-negative integer. For example, the numbers 1, 2, 4, 8, 16, 32, etc., are all powers of two. Your task is to find an efficient way to determine if the number `n` is one of these powers.
+- Check if n is less than or equal to zero, in which case it is not a power of two.
+- Perform a bitwise AND operation between n and (n - 1). If the result is zero, then n is a power of two.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will be a valid integer within the specified range.
+- n may be negative or zero, but only positive values can be a power of two.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 8`  \
+  **Explanation:** Since 8 can be written as 2^3, it is a power of two. Thus, the output is true.
 
----
+- **Input:** `Input: n = 5`  \
+  **Explanation:** 5 cannot be written as 2^x for any integer x, so the output is false.
 
-### 🧠 Approach
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using bit manipulation to determine if n is a power of two.
 
-We can solve this problem efficiently using **binary manipulation**. Powers of two have a very distinct property in their binary representation: they only have **one bit set to 1**. For example:
-- \( 1 \) in binary is `0001`
-- \( 2 \) in binary is `0010`
-- \( 4 \) in binary is `0100`
-- \( 8 \) in binary is `1000`
-
-This pattern holds true for all powers of two. When you subtract 1 from any of these numbers, all the bits to the right of the leftmost `1` bit (including the leftmost `1` bit) become `1`. For example:
-- \( 4 - 1 = 3 \), which is `0011` in binary.
-- A bitwise **AND** between `4` (binary `0100`) and `3` (binary `0011`) gives `0000`.
-
-This property can be leveraged in our solution. Specifically:
-- If `n` is a power of two, the result of `n & (n - 1)` will be `0`. This is because the number `n` will only have one `1` bit in its binary form.
-
-So, the steps to solve the problem are:
-1. Check if `n` is greater than 0 (because powers of two are always positive integers).
-2. Perform the bitwise operation `n & (n - 1)`.
-3. If the result is `0`, then `n` is a power of two. Otherwise, it's not.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code to make sure it’s crystal clear:
-
+### Initial Thoughts 💭
+- A number n is a power of two if it has exactly one bit set in its binary representation.
+- Using the bitwise AND operation (n & (n - 1)), we can quickly check if a number is a power of two. This operation will return zero only for numbers that are powers of two.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs are possible since the input is an integer.
+- For large values of n, ensure the solution works within the given integer range.
+- If n is 0 or negative, it cannot be a power of two.
+- Ensure that the solution works efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool isPowerOfTwo(int n) {
+bool isPowerOfTwo(int n) {
+    if(n <= 0) return false;
+    return !(n & (n - 1));
+}
 ```
-- The function `isPowerOfTwo` takes an integer `n` and returns `true` if `n` is a power of two, otherwise it returns `false`.
 
-```cpp
-        if(n <= 0) return false;
-```
-- First, we handle the edge case where `n` is less than or equal to 0. Since powers of two are always positive integers, any non-positive number cannot be a power of two, so we return `false`.
+This function checks if a number is a power of two using a bitwise operation.
 
-```cpp
-        return !(n & (n - 1));
-```
-- Here comes the magic! The **bitwise AND** operation `n & (n - 1)` checks if `n` is a power of two. If the result is `0`, we return `true` (indicating that `n` is indeed a power of two). If it's not `0`, we return `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isPowerOfTwo(int n) {
+	```
+	Defines the function `isPowerOfTwo` that takes an integer `n` as input and returns a boolean value indicating whether `n` is a power of two.
 
----
+2. **Condition Check**
+	```cpp
+	    if(n <= 0) return false;
+	```
+	Checks if `n` is less than or equal to 0, in which case it cannot be a power of two. If true, returns `false`.
 
-### 📈 Complexity Analysis
+3. **Bitwise Operation**
+	```cpp
+	    return !(n & (n - 1));
+	```
+	Uses a bitwise AND operation between `n` and `n-1` to check if only one bit is set in `n`. If true, the number is a power of two, and it returns `true`; otherwise, it returns `false`.
 
-#### Time Complexity:
-- **Time Complexity**: `O(1)`
-  - The solution performs a single bitwise operation (`n & (n - 1)`) and a comparison. These are constant-time operations, meaning the algorithm runs in **constant time** regardless of the size of `n`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
-- **Space Complexity**: `O(1)`
-  - We only use a fixed amount of space (the integer `n`). There are no additional data structures or recursion involved, so the space complexity is constant.
+The time complexity is constant, O(1), because we are performing only one bitwise operation to check if the number is a power of two.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### 🏁 Conclusion
+The space complexity is constant, O(1), because we are using only a few variables and no additional data structures.
 
-This solution is both **simple** and **efficient**, checking if a number is a power of two in **constant time** and with **constant space**. The trick lies in the binary representation of powers of two, which can be detected using the **bitwise AND** operation. It’s an elegant way to solve the problem without the need for loops or complex logic.
+**Happy Coding! 🎉**
 
-#### Key Takeaways:
-- **Fast and Efficient**: This approach runs in constant time `O(1)` and uses constant space.
-- **Simplicity**: The logic is based on a straightforward binary property that’s easy to implement.
-- **Practical**: This method is ideal for checking powers of two, which appears frequently in problems involving binary manipulation, computer science, and competitive programming.
-
-This solution is a **great example of leveraging bitwise operations** to create compact and fast solutions for common computational problems! 🚀
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/power-of-two/description/)
 

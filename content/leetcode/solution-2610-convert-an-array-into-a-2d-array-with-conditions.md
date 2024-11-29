@@ -14,117 +14,171 @@ img_src = ""
 youtube = "9pl1QiaGgmI"
 youtube_upload_date="2024-01-02"
 youtube_thumbnail="https://i.ytimg.com/vi/9pl1QiaGgmI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array, your task is to create a 2D array from the input array satisfying the following conditions:
+1. The 2D array should contain all the elements of the input array.
+2. Each row of the 2D array should contain distinct integers.
+3. The number of rows in the 2D array should be minimal.
+Return the resulting array. If there are multiple valid answers, return any of them.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers nums. The array consists of integers, and some integers may appear more than once.
+- **Example:** `nums = [3, 1, 2, 3, 1, 4, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 200
+	- 1 <= nums[i] <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> findMatrix(vector<int>& nums) {
-        map<int, int> mp;
-        int mx = 0;
-        for(int x: nums) {
-            mp[x]++;
-            mx = max(mp[x], mx);
-        }
-        vector<vector<int>> grid(mx);
-        for(auto it: mp) {
-            for(int i = 0; i < it.second; i++) {
-                grid[i].push_back(it.first);
-            }
-        }
-        return grid;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a 2D array where each row contains distinct integers and all elements of the input array are used. The number of rows should be minimal.
+- **Example:** `Output: [[3, 1, 2, 4], [3, 1], [2]]`
+- **Constraints:**
+	- The output should be a valid 2D array where each row contains distinct integers.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to arrange the elements of the input array into a minimal 2D array where each row contains distinct integers and all the elements of the input array are used.
 
-The problem asks us to organize a list of integers into a matrix, where each row contains one or more numbers from the original list, and the number of rows in the matrix should be as small as possible. Additionally, each number in the matrix should appear the same number of times across all rows, if possible. Specifically, the matrix should have the following properties:
-1. Each row contains a number of integers.
-2. The integers in each row are taken from the original list.
-3. The number of rows should be minimized.
-4. Each integer should appear the same number of times in each row as much as possible.
+- Count the frequency of each integer in the input array.
+- Create a 2D array where each row contains distinct integers from the input array.
+- Ensure that each row has as few elements as possible while still containing distinct integers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains integers that may repeat.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 3, 4, 1, 2, 3, 1]`  \
+  **Explanation:** We can create a 2D array like [[1, 3, 4, 2], [1, 3], [1]], where each row contains distinct integers, and all elements of the array are used.
 
-### Approach
+- **Input:** `nums = [1, 2, 3, 4]`  \
+  **Explanation:** Since all integers are distinct, we can simply place all of them in the first row, resulting in [[4, 3, 2, 1]].
 
-To solve this problem, we need to:
-1. **Count the frequency of each number**: First, we count how many times each number appears in the list.
-2. **Determine the number of rows required**: The number of rows required will be equal to the highest frequency of any number.
-3. **Distribute the numbers into rows**: Distribute the numbers into rows so that each row contains the numbers in the original order, while ensuring that the number of rows matches the maximum frequency of any number. We will aim to have each number appear the same number of times across rows as much as possible.
-4. **Return the matrix**: Finally, return the matrix where each row is a list of numbers, and the number of rows corresponds to the maximum frequency of the numbers.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to group repeated numbers into rows and ensure that each row has distinct integers, while minimizing the number of rows.
 
-### Code Breakdown (Step by Step)
-
-1. **Counting Occurrences of Each Number**:
-   
+### Initial Thoughts 💭
+- We need to find the frequency of each integer in the input array and ensure that each integer appears in a different row for each repetition.
+- A possible approach is to first calculate the frequency of each number in the array. Then, we can iterate through the array and add the number to different rows based on how many times it appears.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array should return an empty 2D array.
+- For larger input arrays, ensure the algorithm handles the size within the given constraints.
+- Arrays with only distinct values will have a single row, containing all elements.
+- Handle arrays with a mix of unique and repeated values efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-map<int, int> mp;
-int mx = 0;
-for(int x: nums) {
-    mp[x]++;
-    mx = max(mp[x], mx);
+vector<vector<int>> findMatrix(vector<int>& nums) {
+    map<int, int> mp;
+    int mx = 0;
+    for(int x: nums) {
+        mp[x]++;
+        mx = max(mp[x], mx);
+    }
+    vector<vector<int>> grid(mx);
+    for(auto it: mp) {
+        for(int i = 0; i < it.second; i++) {
+            grid[i].push_back(it.first);
+        }
+    }
+    return grid;
 }
 ```
 
-- **Explanation**: 
-  - We first declare a map `mp` to store the frequency of each number in `nums`. The key is the number, and the value is its frequency.
-  - We then iterate over each number in the `nums` list and increment its count in the map.
-  - While iterating, we also track the maximum frequency of any number in `mx` to determine the number of rows required for the matrix.
+This function takes a vector of integers and returns a 2D grid where each column contains occurrences of integers from the input vector.
 
-2. **Initialize the Matrix**:
-   
-```cpp
-vector<vector<int>> grid(mx);
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> findMatrix(vector<int>& nums) {
+	```
+	Defines the function that takes a reference to a vector of integers and returns a 2D vector of integers.
 
-- **Explanation**:
-  - We initialize a 2D vector `grid` with `mx` rows. Each row will correspond to a list of numbers, and the number of rows will be equal to the maximum frequency found in the previous step.
+2. **Variable Declaration**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declares a map to store the frequency of each integer from the input vector.
 
-3. **Distribute the Numbers into Rows**:
-   
-```cpp
-for(auto it: mp) {
-    for(int i = 0; i < it.second; i++) {
-        grid[i].push_back(it.first);
-    }
-}
-```
+3. **Variable Initialization**
+	```cpp
+	    int mx = 0;
+	```
+	Initializes the variable 'mx' to keep track of the maximum frequency of any number in the input vector.
 
-- **Explanation**:
-  - We iterate over the map `mp` where each entry contains a number and its frequency.
-  - For each number, we add it to the rows in the `grid`. Specifically, we add `it.second` (the frequency of the number) copies of `it.first` (the number itself) into the appropriate rows.
-  - We loop from `i = 0` to `i < it.second` to add the current number to the appropriate row in the grid, ensuring that the matrix is filled with each number the correct number of times.
+4. **Loop - Iteration**
+	```cpp
+	    for(int x: nums) {
+	```
+	Starts a loop to iterate through each integer 'x' in the input vector.
 
-4. **Return the Matrix**:
-   
-```cpp
-return grid;
-```
+5. **Map Update**
+	```cpp
+	        mp[x]++;
+	```
+	Increments the frequency count of the integer 'x' in the map.
 
-- **Explanation**: 
-  - After distributing the numbers into rows, we return the matrix `grid` as the result.
+6. **Maximum Frequency Update**
+	```cpp
+	        mx = max(mp[x], mx);
+	```
+	Updates the maximum frequency 'mx' if the frequency of the current integer 'x' is greater.
 
-### Time and Space Complexity
+7. **Grid Initialization**
+	```cpp
+	    vector<vector<int>> grid(mx);
+	```
+	Initializes a 2D vector 'grid' with 'mx' rows to hold the elements grouped by their frequencies.
 
-#### Time Complexity:
-1. **Counting the Occurrences**: We loop through the input list `nums`, which has `n` elements. Therefore, counting the occurrences takes \(O(n)\).
-2. **Filling the Matrix**: We iterate over the map `mp` to distribute the numbers into rows. The total number of operations is proportional to the sum of the frequencies of all the numbers in `nums`, which is also \(O(n)\) since the total frequency counts across all numbers will sum to `n`.
-3. **Overall Time Complexity**: The total time complexity is \(O(n)\), where \(n\) is the size of the input list `nums`.
+8. **Loop - Mapping Elements**
+	```cpp
+	    for(auto it: mp) {
+	```
+	Starts a loop to iterate through each key-value pair in the map 'mp'.
 
-#### Space Complexity:
-1. **Space for the Map**: The map `mp` stores the frequency of each unique number, which requires \(O(k)\) space, where \(k\) is the number of distinct elements in `nums`.
-2. **Space for the Matrix**: The matrix `grid` stores all the elements in `nums` distributed into rows. Therefore, the space required for the matrix is \(O(n)\).
-3. **Overall Space Complexity**: The total space complexity is \(O(n)\), considering both the space required for the map and the matrix.
+9. **Inner Loop - Frequency Processing**
+	```cpp
+	        for(int i = 0; i < it.second; i++) {
+	```
+	Starts an inner loop to iterate based on the frequency of the current element.
 
-### Conclusion
+10. **Grid Update**
+	```cpp
+	            grid[i].push_back(it.first);
+	```
+	Adds the current integer (it.first) to the corresponding row in the 'grid'.
 
-This solution efficiently creates a matrix with a minimal number of rows where the numbers from the original list are distributed as evenly as possible across the rows. The algorithm runs in linear time \(O(n)\), making it suitable for large input sizes. By counting the frequency of each number and organizing the numbers into rows based on their frequency, we ensure that each number appears the correct number of times in each row while minimizing the number of rows. The space complexity is also linear, as we only need to store the input list and the resulting matrix.
+11. **Return Statement**
+	```cpp
+	    return grid;
+	```
+	Returns the 2D grid containing the elements grouped by their frequencies.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in the size of the input array as we iterate through the array to count the frequency and then create the 2D array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is linear as we store the frequency of the elements and the 2D array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/description/)
 

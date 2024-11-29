@@ -14,103 +14,169 @@ img_src = ""
 youtube = "ao6glAa0ljY"
 youtube_upload_date="2023-09-03"
 youtube_thumbnail="https://i.ytimg.com/vi/ao6glAa0ljY/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers 'nums', a positive integer 'modulo', and a non-negative integer 'k'. Your task is to count the number of subarrays in 'nums' that are interesting. A subarray 'nums[l..r]' is interesting if the count of elements 'nums[i]' such that 'nums[i] % modulo == k' satisfies the condition 'cnt % modulo == k'. Return the total count of such interesting subarrays.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer array 'nums', a positive integer 'modulo', and a non-negative integer 'k'.
+- **Example:** `nums = [2, 4, 6], modulo = 2, k = 0`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 1 <= modulo <= 10^9
+	- 0 <= k < modulo
 
-{{< highlight cpp >}}
-    class Solution {
-public:
-    long long countInterestingSubarrays(vector<int>& nums, int mod, int k) {        
-        unordered_map<long long,long long> mp;
-        long long ans = 0, prefix = 0, n = nums.size();
-        mp[0]++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The count of interesting subarrays in the given input.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output should be a single integer representing the count of interesting subarrays.
 
-        for(int i=0;i<n;i++) {
-            if(nums[i]%mod==k) prefix++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of subarrays that satisfy the condition where the count of elements divisible by 'modulo' and equal to 'k' satisfies 'cnt % modulo == k'.
 
-            prefix%=mod;
+- Initialize a map to store the frequency of prefix sums modulo 'modulo'.
+- Iterate through the array, updating the prefix sum and checking if the current prefix sum satisfies the condition with previously encountered prefix sums.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty.
+- The modulo and k values are valid as per the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [2, 4, 6], modulo = 2, k = 0`  \
+  **Explanation:** The subarrays that satisfy the condition are those where the count of elements divisible by 2 and equal to 0 gives a remainder of 0 when divided by 2.
 
-            if(mp.find((prefix-k+mod)%mod)!=mp.end()) 
-                ans += mp[(prefix-k+mod)%mod];
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the array and using a map to track the frequency of prefix sums modulo 'modulo' to count the interesting subarrays.
 
-            mp[prefix]++;
-        }
-        return ans;
+### Initial Thoughts 💭
+- We need to track the count of elements that satisfy 'nums[i] % modulo == k'.
+- The condition 'cnt % modulo == k' can be verified by maintaining a prefix sum modulo 'modulo'.
+- The problem can be solved efficiently by using a map to count the prefix sum modulo occurrences.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty input arrays are expected as per the problem statement.
+- The algorithm should handle large arrays efficiently, up to the length of 10^5.
+- Handle cases where no subarrays satisfy the condition.
+- The approach should work within the time and space constraints provided.
+{{< dots >}}
+## Code 💻
+```cpp
+long long countInterestingSubarrays(vector<int>& nums, int mod, int k) {        
+    unordered_map<long long,long long> mp;
+    long long ans = 0, prefix = 0, n = nums.size();
+    mp[0]++;
+
+    for(int i=0;i<n;i++) {
+        if(nums[i]%mod==k) prefix++;
+
+        prefix%=mod;
+
+        if(mp.find((prefix-k+mod)%mod)!=mp.end()) 
+            ans += mp[(prefix-k+mod)%mod];
+
+        mp[prefix]++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an array `nums` of integers, we are asked to find the number of subarrays in `nums` such that the sum of the subarray elements satisfies a certain condition. Specifically, the sum of the subarray elements, when taken modulo `mod`, must equal a given value `k`.
-
-The task is to efficiently compute the number of such subarrays.
-
-### Approach
-
-To solve the problem efficiently, we can use the concept of prefix sums combined with a hash map (unordered_map). The key observation is that we can use the prefix sum modulo `mod` to track how many times a particular modulo has occurred before, and this helps us determine when we have found a valid subarray.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Data Structures
-```cpp
-unordered_map<long long, long long> mp;
-long long ans = 0, prefix = 0, n = nums.size();
-mp[0]++;
+    return ans;
+}
 ```
-- `mp` is an unordered map used to store the count of prefix sums modulo `mod`. The key is the prefix sum modulo `mod`, and the value is the count of how many times this modulo has occurred.
-- `ans` is the variable that will store the final result, which is the number of valid subarrays.
-- `prefix` keeps track of the current prefix sum modulo `mod`.
-- `n` stores the length of the input array `nums`.
-- `mp[0] = 1` is initialized to handle the case where the prefix sum modulo `mod` itself equals `k` without needing to look at previous values.
 
-#### Step 2: Loop Through the Array
-```cpp
-for (int i = 0; i < n; i++) {
-    if (nums[i] % mod == k) prefix++;
-    prefix %= mod;
-```
-- We iterate through each element `nums[i]` of the array.
-- If the current element `nums[i]` modulo `mod` equals `k`, we increment the `prefix`. This increment tracks how many elements so far have met the condition (i.e., having `nums[i] % mod == k`).
-- We then update `prefix` to keep it in the range `[0, mod-1]` by taking the modulo of the current `prefix` with `mod`.
+This function calculates the number of interesting subarrays from a list of integers where the subarrays satisfy certain conditions based on modulo arithmetic.
 
-#### Step 3: Check for Valid Subarrays
-```cpp
-if (mp.find((prefix - k + mod) % mod) != mp.end())
-    ans += mp[(prefix - k + mod) % mod];
-```
-- We check if there is a previously encountered prefix sum that, when added to the current `prefix`, results in a sum that is congruent to `k` modulo `mod`.
-- Specifically, we check if `(prefix - k + mod) % mod` has appeared before in the `mp` map. If it has, the number of such occurrences is added to the answer `ans`.
-- This step works because if a certain prefix sum modulo `mod` has appeared earlier, it means there exists a subarray (from that earlier position to the current position) whose sum modulo `mod` equals `k`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	long long countInterestingSubarrays(vector<int>& nums, int mod, int k) {
+	```
+	Defines the function 'countInterestingSubarrays' which takes a vector of integers, and two integers 'mod' and 'k'.
 
-#### Step 4: Update the Map
-```cpp
-mp[prefix]++;
-```
-- After checking for valid subarrays, we increment the count of the current `prefix` modulo `mod` in the map `mp`. This allows us to track how many times this particular modulo has been encountered, enabling future subarray checks.
+2. **Variable Declaration**
+	```cpp
+	    unordered_map<long long,long long> mp;
+	```
+	Initializes an unordered map 'mp' to store frequencies of mod values encountered during the iteration.
 
-#### Step 5: Return the Result
-```cpp
-return ans;
-```
-- Finally, after iterating through the entire array, we return the value of `ans`, which contains the number of subarrays that satisfy the condition.
+3. **Variable Initialization**
+	```cpp
+	    long long ans = 0, prefix = 0, n = nums.size();
+	```
+	Declares and initializes the variables 'ans' to store the result, 'prefix' to track the current modulo sum, and 'n' for the number of elements in the input array.
 
-### Complexity
+4. **Map Initialization**
+	```cpp
+	    mp[0]++;
+	```
+	Increments the count of mod 0 in the map to account for an initial base case.
 
-#### Time Complexity:
-- **O(n)**: The algorithm loops through each element of the array exactly once. Inside the loop, the operations (updating the map and checking for valid subarrays) take constant time on average. Thus, the overall time complexity is linear in the size of the input array `nums`.
+5. **Loop Setup**
+	```cpp
+	    for(int i=0;i<n;i++) {
+	```
+	Begins a loop that iterates through each element in the input array 'nums'.
 
-#### Space Complexity:
-- **O(mod)**: The space complexity is determined by the size of the map `mp`, which stores counts for each possible value of `prefix % mod`. Since there are `mod` possible values for the prefix sum modulo `mod`, the space complexity is proportional to `mod`. In the worst case, this is a constant space usage, as `mod` is typically small compared to the size of the input array `nums`.
+6. **Conditional Check**
+	```cpp
+	        if(nums[i]%mod==k) prefix++;
+	```
+	Checks if the current element of 'nums' modulo 'mod' equals 'k', and increments the 'prefix' if true.
 
-### Conclusion
+7. **Prefix Modulo**
+	```cpp
+	        prefix%=mod;
+	```
+	Calculates the prefix modulo to ensure the prefix is within the bounds of the modulo value.
 
-This solution leverages the power of prefix sums and hash maps to efficiently count the number of subarrays that satisfy the given condition. By maintaining a running `prefix` sum modulo `mod` and using a hash map to track how often each prefix modulo has been seen, we can efficiently compute the number of valid subarrays. The algorithm runs in linear time and uses constant space relative to the modulus, making it highly efficient for large arrays. This approach is much more optimal than a brute force solution, which would involve checking all possible subarrays directly, leading to a much higher time complexity.
+8. **Condition Check**
+	```cpp
+	        if(mp.find((prefix-k+mod)%mod)!=mp.end()) 
+	```
+	Checks if the adjusted prefix value exists in the map, indicating a valid subarray has been found.
+
+9. **Update Answer**
+	```cpp
+	            ans += mp[(prefix-k+mod)%mod];
+	```
+	Adds the frequency of the adjusted prefix to 'ans' to accumulate the number of interesting subarrays.
+
+10. **Update Map**
+	```cpp
+	        mp[prefix]++;
+	```
+	Increments the count of the current 'prefix' value in the map.
+
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the total count of interesting subarrays stored in 'ans'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only iterate over the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the map used for storing prefix sums modulo.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-of-interesting-subarrays/description/)
 

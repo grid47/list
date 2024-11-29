@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Tuc-rjJbsXU"
 youtube_upload_date="2021-11-24"
 youtube_thumbnail="https://i.ytimg.com/vi/Tuc-rjJbsXU/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,135 +28,216 @@ youtube_thumbnail="https://i.ytimg.com/vi/Tuc-rjJbsXU/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array `nums`, return the number of distinct longest increasing subsequences.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers `nums`.
+- **Example:** `nums = [3, 2, 6, 4, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 2000
+	- -10^6 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findNumberOfLIS(vector<int>& nums) {
-        
-        int res = 0, n = nums.size(), max_len = 0;
-        vector<int> len(n, 0), cnt(n, 0);
-        
-        for(int i = 0; i < n; i++) {
-            cnt[i] = 1;
-            len[i] = 1;
-            for(int j = 0; j < i; j++) {
-                if(nums[j] < nums[i]) {
-                    if(len[j] + 1 == len[i]) cnt[i] += cnt[j];
-                    if(len[j] + 1 >  len[i]) {
-                        len[i] = len[j] + 1;
-                        cnt[i] = cnt[j];
-                    }
-                }   
-            }
-            if(max_len == len[i]) res += cnt[i];
-            if(max_len < len[i]) {
-                res = cnt[i];
-                max_len = len[i];
-            }
-            
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct longest increasing subsequences.
+- **Example:** `3`
+- **Constraints:**
+	- The answer is guaranteed to fit within a 32-bit integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the number of distinct longest increasing subsequences.
+
+- 1. Use dynamic programming to track the length of the longest increasing subsequences ending at each element.
+- 2. Maintain a count of how many subsequences achieve the longest length for each element.
+- 3. Sum the counts for the subsequences that have the maximum length.
+{{< dots >}}
+### Problem Assumptions ✅
+- Subsequences are strictly increasing, meaning each element in a subsequence must be greater than the previous element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 3, 5, 4, 7]`  \
+  **Explanation:** The two longest increasing subsequences are [1, 3, 4, 7] and [1, 3, 5, 7], both of length 4.
+
+- **Input:** `nums = [2, 2, 2, 2, 2]`  \
+  **Explanation:** Since there are no strictly increasing subsequences, the longest subsequences are of length 1, and there are 5 such subsequences.
+
+{{< dots >}}
+## Approach 🚀
+We use dynamic programming to track the length of the longest increasing subsequences at each index and count the number of such subsequences.
+
+### Initial Thoughts 💭
+- We can iterate through the array and for each element, compare it with previous elements to build subsequences.
+- The key observation is that we need to track both the length and the count of subsequences for each element.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem doesn't have an empty input as `nums` is guaranteed to have at least one element.
+- Ensure the solution can handle arrays up to the maximum size (2000 elements).
+- If all elements in `nums` are equal, the longest subsequence length is 1, and the answer is the number of elements in `nums`.
+- Handle large input sizes efficiently using dynamic programming.
+{{< dots >}}
+## Code 💻
+```cpp
+int findNumberOfLIS(vector<int>& nums) {
+    
+    int res = 0, n = nums.size(), max_len = 0;
+    vector<int> len(n, 0), cnt(n, 0);
+    
+    for(int i = 0; i < n; i++) {
+        cnt[i] = 1;
+        len[i] = 1;
+        for(int j = 0; j < i; j++) {
+            if(nums[j] < nums[i]) {
+                if(len[j] + 1 == len[i]) cnt[i] += cnt[j];
+                if(len[j] + 1 >  len[i]) {
+                    len[i] = len[j] + 1;
+                    cnt[i] = cnt[j];
+                }
+            }   
+        }
+        if(max_len == len[i]) res += cnt[i];
+        if(max_len < len[i]) {
+            res = cnt[i];
+            max_len = len[i];
         }
         
-        return res;
-        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-
-Given an unsorted array of integers `nums`, the goal is to find the number of longest increasing subsequences (LIS). A subsequence is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements. The longest increasing subsequence is the subsequence that has the maximum length, and we need to return how many such subsequences exist.
-
-### Approach:
-
-The problem is about finding the number of distinct longest increasing subsequences (LIS) in an array. The key observations are:
-1. **LIS Length**: A subsequence is considered increasing if each element is greater than the previous one.
-2. **Multiple LIS**: The same LIS may appear in multiple distinct ways. For example, the array `[1, 2, 3]` has one LIS, but the array `[1, 2, 3, 2]` has two LIS: `[1, 2, 3]` and `[1, 2, 3]` again.
-
-We can solve this problem using dynamic programming to find the length of the LIS and also track the count of different LIS of that length at each index.
-
-### Code Breakdown (Step by Step):
-
-The algorithm uses dynamic programming (DP) with two arrays:
-1. **len[i]**: This array stores the length of the longest increasing subsequence that ends at index `i`.
-2. **cnt[i]**: This array stores the number of distinct longest increasing subsequences that end at index `i`.
-
-We then calculate these values iteratively, ensuring that we properly track the longest subsequence and its frequency.
-
-#### Step 1: Initialize the variables
-```cpp
-int res = 0, n = nums.size(), max_len = 0;
-vector<int> len(n, 0), cnt(n, 0);
-```
-- `res`: Stores the total count of LIS.
-- `n`: The length of the input array `nums`.
-- `max_len`: Tracks the maximum length of the increasing subsequences.
-- `len`: A vector initialized to `0`, representing the LIS length at each index.
-- `cnt`: A vector initialized to `0`, representing the count of LIS of the length `len[i]` at each index.
-
-#### Step 2: Iterating through the array
-```cpp
-for(int i = 0; i < n; i++) {
-    cnt[i] = 1;
-    len[i] = 1;
-```
-For each element `i` in the array, we initialize `len[i] = 1` (the minimum length of LIS ending at `i` is 1, the element itself) and `cnt[i] = 1` (initially, there's only one subsequence of length 1, the element itself).
-
-#### Step 3: Finding subsequences ending at index `i`
-```cpp
-for(int j = 0; j < i; j++) {
-    if(nums[j] < nums[i]) {
-```
-For each `i`, we check all previous elements `j` (from `0` to `i-1`). If `nums[j] < nums[i]`, it means `nums[i]` can extend an increasing subsequence that ends at `j`.
-
-#### Step 4: Updating `len[i]` and `cnt[i]`
-```cpp
-    if(len[j] + 1 == len[i]) cnt[i] += cnt[j];
-    if(len[j] + 1 >  len[i]) {
-        len[i] = len[j] + 1;
-        cnt[i] = cnt[j];
-    }
+    
+    return res;
+    
 }
 ```
-- If `len[j] + 1 == len[i]`, it means `nums[i]` is part of a subsequence of the same length as `len[i]`, so we add the number of subsequences ending at `j` to `cnt[i]`.
-- If `len[j] + 1 > len[i]`, it means we've found a longer subsequence ending at `i`, so we update `len[i]` to `len[j] + 1` and reset `cnt[i]` to `cnt[j]`, meaning that the count of LIS ending at `i` is now equal to the count of LIS ending at `j`.
 
-#### Step 5: Tracking the maximum length and the total count
-```cpp
-if(max_len == len[i]) res += cnt[i];
-if(max_len < len[i]) {
-    res = cnt[i];
-    max_len = len[i];
-}
-```
-- If `len[i] == max_len`, it means we've found another subsequence of the maximum length, so we add the count of such subsequences (`cnt[i]`) to the result `res`.
-- If `len[i] > max_len`, we update `max_len` to `len[i]` and set `res` to `cnt[i]` because we've found a new longest subsequence, and the count of these subsequences is `cnt[i]`.
+This code implements a solution for finding the number of longest increasing subsequences (LIS) in a given sequence of integers. The algorithm calculates the length of the longest increasing subsequences and their counts using dynamic programming.
 
-#### Step 6: Return the final result
-```cpp
-return res;
-```
-The function finally returns `res`, which contains the total count of longest increasing subsequences.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findNumberOfLIS(vector<int>& nums) {
+	```
+	This is the function definition for `findNumberOfLIS`, which calculates the number of longest increasing subsequences (LIS) in the input array `nums`.
 
-### Complexity:
+2. **Variable Initialization**
+	```cpp
+	    
+	```
+	Initialize necessary variables to store the result, the size of the input array `nums`, the maximum length of increasing subsequences found, and two vectors `len` and `cnt` to store the lengths and counts of LIS for each element.
 
-#### Time Complexity:
-- **O(n^2)**: The algorithm iterates through each element `i` and compares it with every previous element `j` to find the LIS and count the subsequences. This results in a nested loop, making the time complexity `O(n^2)`, where `n` is the length of the array `nums`.
+3. **Variable Initialization**
+	```cpp
+	    int res = 0, n = nums.size(), max_len = 0;
+	```
+	Here, we initialize `res` to 0 (to store the number of LIS), `n` to the size of the input array `nums`, and `max_len` to 0 (to store the maximum length of LIS found so far).
 
-#### Space Complexity:
-- **O(n)**: The space complexity is dominated by the two arrays `len` and `cnt`, which each require `O(n)` space. Thus, the overall space complexity is `O(n)`.
+4. **Array Initialization**
+	```cpp
+	    vector<int> len(n, 0), cnt(n, 0);
+	```
+	The vectors `len` and `cnt` are initialized to size `n` with all elements set to 0. `len[i]` will store the length of the LIS ending at index `i`, and `cnt[i]` will store the count of such LIS.
 
-### Conclusion:
+5. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	The outer loop iterates through each element of the array `nums`.
 
-This approach uses dynamic programming to efficiently compute the number of distinct longest increasing subsequences (LIS). By maintaining two arrays, `len` and `cnt`, we can track the length of the LIS and the number of ways to form such subsequences ending at each index. The algorithm performs well for arrays of moderate size with a time complexity of `O(n^2)`.
+6. **Set Initial Values for Each Element**
+	```cpp
+	        cnt[i] = 1;
+	```
+	For each element `i`, we initialize `cnt[i]` to 1, as the minimum count of LIS that ends at `i` is 1 (the element itself).
 
-Key observations include:
-- Each element is processed in relation to every previous element to build the longest subsequence ending at that element.
-- The algorithm efficiently counts how many distinct LIS can end at each position in the array and tracks the global maximum length.
+7. **Set Initial Values for Each Element**
+	```cpp
+	        len[i] = 1;
+	```
+	Similarly, we initialize `len[i]` to 1, as the minimum length of LIS ending at `i` is 1 (the element itself).
 
-This solution works effectively for finding the number of LIS in an array and can handle typical input sizes in competitive programming and real-world applications.
+8. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < i; j++) {
+	```
+	The inner loop checks all previous elements `j` before index `i` to see if they form an increasing subsequence with `nums[i]`.
+
+9. **Condition: Check for Increasing Subsequence**
+	```cpp
+	            if(nums[j] < nums[i]) {
+	```
+	This condition checks if `nums[j]` is less than `nums[i]`, meaning that `nums[i]` can extend an increasing subsequence ending at `j`.
+
+10. **Update Count for Equal Lengths**
+	```cpp
+	                if(len[j] + 1 == len[i]) cnt[i] += cnt[j];
+	```
+	If the length of the LIS ending at `j` plus one equals the length of the LIS ending at `i`, we add the count of LIS ending at `j` to the count for `i`.
+
+11. **Update Length and Count for Longer LIS**
+	```cpp
+	                if(len[j] + 1 >  len[i]) {
+	```
+	If the length of the LIS ending at `j` plus one is greater than the current length at `i`, we update `len[i]` and set `cnt[i]` to the count of LIS at `j`.
+
+12. **Update Length and Count for Longer LIS**
+	```cpp
+	                    len[i] = len[j] + 1;
+	```
+	Update the length of the LIS ending at `i` to be the length of the LIS at `j` plus one.
+
+13. **Update Length and Count for Longer LIS**
+	```cpp
+	                    cnt[i] = cnt[j];
+	```
+	Set the count of LIS ending at `i` to the count of LIS at `j`.
+
+14. **Update Result for Maximum Length**
+	```cpp
+	        if(max_len == len[i]) res += cnt[i];
+	```
+	If the length of the LIS at `i` is equal to the maximum length found so far, add the count of LIS at `i` to the result `res`.
+
+15. **Update Result for New Maximum Length**
+	```cpp
+	        if(max_len < len[i]) {
+	```
+	If the length of the LIS at `i` is greater than the current maximum length, update `res` and `max_len`.
+
+16. **Update Result for New Maximum Length**
+	```cpp
+	            res = cnt[i];
+	```
+	Set `res` to the count of LIS at `i` since it's the new maximum length.
+
+17. **Update Result for New Maximum Length**
+	```cpp
+	            max_len = len[i];
+	```
+	Update `max_len` to the length of the LIS at `i`.
+
+18. **Return Result**
+	```cpp
+	    return res;
+	```
+	The final step is to return the number of LIS.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The worst-case time complexity is O(n^2) due to two nested loops iterating over the array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the `len[]` and `cnt[]` arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/)
 

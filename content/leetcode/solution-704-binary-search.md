@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "PissfOvEH7Q"
 youtube_upload_date="2023-04-01"
 youtube_thumbnail="https://i.ytimg.com/vi/PissfOvEH7Q/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,105 +28,145 @@ youtube_thumbnail="https://i.ytimg.com/vi/PissfOvEH7Q/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a sorted array of integers and a target value. Your task is to search for the target in the array. If the target exists, return its index. If it does not exist, return -1. You must achieve a time complexity of O(log n).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sorted array of integers and a target integer. The array is sorted in ascending order.
+- **Example:** `nums = [1, 3, 5, 7, 9, 11], target = 5`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -10^4 < nums[i], target < 10^4
+	- All integers in nums are unique.
+	- nums is sorted in ascending order.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int search(vector<int>& nums, int target) {
-        int l = 0, r = nums.size() -1;
-        
-        while(l <= r) {
-            int mid = l + (r - l) / 2;
-            if(nums[mid] == target) return mid;
-            if(nums[mid] < target) l = mid + 1;
-            else r = mid - 1;
-        }
-        return -1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function should return the index of the target if it exists in the array. If the target does not exist, return -1.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The result should be the index of the target value in the sorted array.
 
-### Problem Statement:
-The problem is to implement a function `search` that performs a binary search on a sorted array of integers `nums` to find a target element. The function should return the index of the target element if found, or `-1` if the target is not present in the array. Binary search is an efficient algorithm that allows us to search for an element in a sorted array in **O(log n)** time complexity.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Implement an efficient search algorithm to find the target in the sorted array using binary search.
 
-### Approach:
-This problem leverages the **binary search algorithm**, which works by repeatedly dividing the search interval in half. The basic idea is to start with the entire array, check the middle element, and then decide whether to continue searching in the left half or the right half based on the comparison between the middle element and the target. The key advantage of binary search is its logarithmic time complexity, making it very efficient for large datasets.
+- 1. Initialize two pointers: left and right, pointing to the first and last elements of the array.
+- 2. Calculate the middle index as the average of left and right.
+- 3. If the middle element is equal to the target, return the middle index.
+- 4. If the middle element is less than the target, update the left pointer to mid + 1.
+- 5. If the middle element is greater than the target, update the right pointer to mid - 1.
+- 6. If the left pointer exceeds the right, return -1 indicating the target is not in the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The target is a valid integer within the given range.
+- The array is sorted and contains unique integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 5, 7, 9, 11], target = 5`  \
+  **Explanation:** The target 5 exists at index 2 in the sorted array, so the function will return 2.
 
-#### Steps:
-1. **Initialization**: Define two pointers, `l` (left) and `r` (right), to represent the boundaries of the current search range.
-2. **Middle Element**: Calculate the middle index `mid` of the current search range.
-3. **Comparison**:
-   - If `nums[mid]` is equal to the target, return the index `mid`.
-   - If `nums[mid]` is less than the target, adjust the left pointer `l` to `mid + 1`, narrowing the search to the right half.
-   - If `nums[mid]` is greater than the target, adjust the right pointer `r` to `mid - 1`, narrowing the search to the left half.
-4. **Termination**: The loop continues as long as `l <= r`, and the search ends when the target is found or the search range becomes invalid (`l > r`).
-5. **Return -1**: If the target is not found after the loop terminates, return `-1`.
+- **Input:** `Input: nums = [1, 3, 5, 7, 9, 11], target = 8`  \
+  **Explanation:** The target 8 does not exist in the array, so the function will return -1.
 
-### Code Breakdown (Step by Step):
+{{< dots >}}
+## Approach 🚀
+The optimal solution for this problem is binary search, which allows searching in O(log n) time complexity. We will iteratively narrow down the search range by updating the left and right pointers based on the comparison with the middle element.
 
-#### Step 1: Define the Function Signature
+### Initial Thoughts 💭
+- Since the array is sorted, binary search is ideal for this problem to achieve O(log n) time complexity.
+- We can solve this efficiently by halving the search space at each step.
+{{< dots >}}
+### Edge Cases 🌐
+- The array is never empty in this problem, as the constraint guarantees that nums.length >= 1.
+- For very large arrays, ensure that the binary search approach handles the input efficiently.
+- The target could be the first or last element of the array.
+- Ensure that the binary search efficiently narrows down the search space for large arrays.
+{{< dots >}}
+## Code 💻
 ```cpp
 int search(vector<int>& nums, int target) {
+    int l = 0, r = nums.size() -1;
+    
+    while(l <= r) {
+        int mid = l + (r - l) / 2;
+        if(nums[mid] == target) return mid;
+        if(nums[mid] < target) l = mid + 1;
+        else r = mid - 1;
+    }
+    return -1;
+}
 ```
-The function `search` takes two parameters:
-- A vector `nums` representing the sorted array of integers.
-- An integer `target` representing the element we need to search for.
 
-#### Step 2: Initialize Left and Right Pointers
-```cpp
-int l = 0, r = nums.size() - 1;
-```
-We initialize two pointers:
-- `l` (left) starts at index `0`, which represents the beginning of the array.
-- `r` (right) starts at index `nums.size() - 1`, representing the end of the array.
+This code implements the binary search algorithm to find the index of a target element in a sorted array. The function iteratively narrows down the search range based on comparisons, reducing the search space by half each time.
 
-#### Step 3: Implement the Binary Search Loop
-```cpp
-while(l <= r) {
-```
-We enter a `while` loop, which continues as long as `l` is less than or equal to `r`. The loop keeps halving the search range until the target is found or the range becomes invalid (i.e., `l > r`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int search(vector<int>& nums, int target) {
+	```
+	Define a function 'search' that takes a vector of integers 'nums' and an integer 'target' to return the index of the target element, or -1 if not found.
 
-#### Step 4: Calculate the Middle Element
-```cpp
-int mid = l + (r - l) / 2;
-```
-To prevent potential overflow issues when calculating the middle index, we use the formula `mid = l + (r - l) / 2`. This ensures that we correctly calculate the middle index without exceeding the bounds of the array.
+2. **Variable Initialization**
+	```cpp
+	    int l = 0, r = nums.size() -1;
+	```
+	Initialize two variables, 'l' for the left pointer and 'r' for the right pointer, which represent the range of indices to search within the array.
 
-#### Step 5: Compare the Middle Element with the Target
-```cpp
-if(nums[mid] == target) return mid;
-```
-We compare `nums[mid]` with `target`. If they are equal, we return the index `mid`, which represents the position of the target element in the array.
+3. **While Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	Start a while loop that will execute as long as the left pointer is less than or equal to the right pointer, meaning there is still a search range to explore.
 
-#### Step 6: Adjust the Left or Right Pointer
-```cpp
-if(nums[mid] < target) l = mid + 1;
-else r = mid - 1;
-```
-- If `nums[mid]` is less than `target`, it means the target must be in the right half of the array, so we adjust `l` to `mid + 1`.
-- If `nums[mid]` is greater than `target`, the target must be in the left half of the array, so we adjust `r` to `mid - 1`.
+4. **Midpoint Calculation**
+	```cpp
+	        int mid = l + (r - l) / 2;
+	```
+	Calculate the midpoint index 'mid' to divide the search space in half. Using 'l + (r - l) / 2' prevents potential overflow that could happen with large values of 'l' and 'r'.
 
-#### Step 7: Return -1 if Target is Not Found
-```cpp
-return -1;
-```
-If the loop terminates without finding the target (i.e., `l > r`), we return `-1` to indicate that the target is not in the array.
+5. **Target Comparison**
+	```cpp
+	        if(nums[mid] == target) return mid;
+	```
+	If the element at the midpoint is equal to the target, return the index 'mid' where the target is located.
 
-### Complexity Analysis:
+6. **Left Pointer Update**
+	```cpp
+	        if(nums[mid] < target) l = mid + 1;
+	```
+	If the value at the midpoint is less than the target, update the left pointer 'l' to 'mid + 1' to search the right half of the array.
 
-#### Time Complexity:
-- **O(log n)**: In each iteration of the binary search, we cut the search range in half. Therefore, the time complexity is logarithmic in terms of the size of the input array. If the array has `n` elements, the binary search algorithm takes **O(log n)** time to search for the target.
+7. **Right Pointer Update**
+	```cpp
+	        else r = mid - 1;
+	```
+	If the value at the midpoint is greater than the target, update the right pointer 'r' to 'mid - 1' to search the left half of the array.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because the algorithm only uses a fixed amount of extra space (i.e., the variables `l`, `r`, and `mid`), regardless of the size of the input array. No additional data structures (like stacks or queues) are used.
+8. **Return Not Found**
+	```cpp
+	    return -1;
+	```
+	If the target element is not found within the array, return -1 indicating that the search was unsuccessful.
 
-### Conclusion:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), if the target is found at the middle of the array.
+- **Average Case:** O(log n), for each search operation.
+- **Worst Case:** O(log n), in the case where the search space is halved at each step.
 
-The binary search algorithm is a highly efficient method for searching in sorted arrays. By repeatedly halving the search space, it quickly narrows down the possible locations of the target element. This implementation achieves **O(log n)** time complexity, making it suitable for large datasets. Its constant space complexity ensures minimal memory usage. This approach is widely used in problems involving sorted arrays or ranges, and it is a fundamental algorithm in computer science. 
+The time complexity is logarithmic due to the binary search algorithm.
 
-This code is ideal for applications that require quick lookups in sorted data, such as search engines, databases, and other systems where fast access to information is critical.
+### Space Complexity 💾
+- **Best Case:** O(1), as binary search does not require additional space.
+- **Worst Case:** O(1), as the space complexity is constant for binary search.
+
+The space complexity is constant since we only use a few pointers to track the search range.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-search/description/)
 

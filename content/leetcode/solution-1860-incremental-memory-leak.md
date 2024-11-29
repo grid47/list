@@ -14,107 +14,141 @@ img_src = ""
 youtube = "BoIe1HDe83c"
 youtube_upload_date="2021-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/BoIe1HDe83c/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two memory sticks with certain amounts of available memory. A program runs and allocates increasing amounts of memory to the stick with more available memory. If neither stick has enough memory to allocate the required amount, the program crashes. Determine when the program crashes and the remaining memory on each stick.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, memory1 and memory2, representing the available memory on the two sticks.
+- **Example:** `memory1 = 5, memory2 = 6`
+- **Constraints:**
+	- 0 <= memory1, memory2 <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> memLeak(int mem1, int mem2) {
-        int i = 1;
-        while(i <= mem1 || i <= mem2) {
-            if(mem1 >= mem2) {
-                mem1 -= i;
-            } else mem2 -= i;
-            i++;
-        }
-        return vector<int>{i, mem1, mem2};
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array with three elements: the crash time (the second at which the program crashes), the remaining memory on the first stick, and the remaining memory on the second stick.
+- **Example:** `[4, 0, 2]`
+- **Constraints:**
+	- The program crashes when one of the memory sticks cannot allocate the required memory.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Simulate the memory allocation process until the program crashes. At each second, allocate memory to the stick with more available memory, or to the first stick if both sticks have the same available memory. Stop when neither stick has enough memory to allocate.
 
-The problem is to determine the point at which two memory banks, `mem1` and `mem2`, will run out of memory when allocating memory sequentially. Each round of memory allocation consists of allocating an increasing amount of memory starting from 1 and incrementing by 1 in each subsequent round. The allocation should always occur in the bank that has enough memory available, and when a bank runs out of memory, the process stops. The goal is to find out how many rounds of memory allocation can be performed before one or both memory banks can no longer accommodate the next allocation. The function should return a vector containing the total number of allocation rounds completed, along with the remaining memory in both banks.
+- At each second, compare the available memory on both sticks.
+- Allocate i bits to the stick with more available memory.
+- If both sticks have the same available memory, allocate to the first stick.
+- If neither stick has enough memory to allocate i bits, return the crash time and the remaining memory on both sticks.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both memory sticks have a non-negative amount of memory.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: memory1 = 5, memory2 = 6`  \
+  **Explanation:** The memory is allocated as follows: At the 1st second, 1 bit is allocated to stick 2 (memory2 = 5). At the 2nd second, 2 bits are allocated to stick 2 (memory2 = 3). At the 3rd second, 3 bits are allocated to stick 1 (memory1 = 2). At the 4th second, 4 bits are allocated to stick 2 (memory2 = -1). The program crashes here.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution involves simulating the memory allocation process, allocating memory in increasing amounts, and stopping when the program crashes due to insufficient memory.
 
-To solve this problem, we can follow a straightforward simulation approach:
-
-1. **Initialization**: Start with a round counter initialized to 1. This counter will track how many allocation rounds have been completed.
-
-2. **Memory Allocation Simulation**: Use a while loop that continues as long as at least one of the memory banks has sufficient memory to accommodate the current round's allocation. 
-
-3. **Determine Which Bank to Allocate From**: In each iteration, compare the available memory in both banks. Allocate memory from the bank that has more available memory. If both banks have equal memory available, prioritize `mem1`.
-
-4. **Update Remaining Memory**: Subtract the allocated amount from the respective bank's available memory.
-
-5. **Increment the Round Counter**: Increase the round counter for the next allocation.
-
-6. **Return the Result**: Once a round cannot be completed due to insufficient memory in both banks, return a vector containing the total rounds completed, and the remaining memory in both banks.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: The implementation begins by defining a class named `Solution`, which houses the main method.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: We define a public method `memLeak` that takes two integers as input parameters representing the initial memory of each bank.
-
-    ```cpp
-    vector<int> memLeak(int mem1, int mem2) {
-    ```
-
-3. **Round Counter Initialization**: We initialize an integer variable `i` to 1, which will represent the current round of memory allocation.
-
-    ```cpp
+### Initial Thoughts 💭
+- The program allocates memory to the stick with more available memory.
+- By simulating the memory allocation process and checking if both sticks have enough memory, we can determine when the program crashes.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs to handle, as memory1 and memory2 will always be non-negative.
+- If the values for memory1 or memory2 are extremely large, the loop may run for a large number of iterations.
+- The program should handle cases where one memory stick has zero memory.
+- The program should return the correct result even for edge cases.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> memLeak(int mem1, int mem2) {
     int i = 1;
-    ```
-
-4. **Memory Allocation Simulation**: We enter a while loop that checks whether either `mem1` or `mem2` has enough memory to accommodate the current allocation (`i`).
-
-    ```cpp
     while(i <= mem1 || i <= mem2) {
-    ```
-
-5. **Conditional Allocation**: Inside the loop, we use a conditional statement to determine from which memory bank to allocate. If `mem1` has greater or equal memory compared to `mem2`, we allocate from `mem1`; otherwise, we allocate from `mem2`.
-
-    ```cpp
-    if(mem1 >= mem2) {
-        mem1 -= i; // Allocate from mem1
-    } else {
-        mem2 -= i; // Allocate from mem2
+        if(mem1 >= mem2) {
+            mem1 -= i;
+        } else mem2 -= i;
+        i++;
     }
-    ```
-
-6. **Increment Round Counter**: After performing the allocation, we increment the round counter `i` for the next allocation round.
-
-    ```cpp
-    i++;
-    ```
-
-7. **Returning the Result**: Once the loop completes (when neither memory bank can accommodate the next allocation), we return a vector containing the total rounds completed (`i`), and the remaining memory in both banks.
-
-    ```cpp
     return vector<int>{i, mem1, mem2};
-    }
-    ```
+}
+```
 
-### Complexity
+The function `memLeak` simulates a memory leak process where two memory blocks are reduced iteratively by increasing amounts, starting from 1. The function returns the iteration count `i` and the remaining memory for both blocks once no further reduction is possible.
 
-The time complexity of this solution is \(O(\sqrt{n})\), where \(n\) is the maximum of `mem1` and `mem2`. This is due to the nature of the allocation, as the amount of memory allocated increases linearly with each iteration. The space complexity is \(O(1)\) since we are only using a fixed number of variables for computations.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> memLeak(int mem1, int mem2) {
+	```
+	Define the function `memLeak`, which takes two integer inputs `mem1` and `mem2`, representing the memory blocks.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	    int i = 1;
+	```
+	Initialize the variable `i` to 1, which represents the amount of memory to be subtracted in each iteration.
 
-In conclusion, the provided code efficiently simulates memory allocation from two memory banks, keeping track of how many rounds of allocation can be performed until neither bank can accommodate the next required allocation. This solution is both intuitive and straightforward, leveraging a simple loop and conditionals to manage the allocation logic. By returning the number of rounds and the remaining memory in each bank, the code effectively meets the problem's requirements while ensuring clarity and efficiency. This implementation serves as a good example of managing resource allocation problems and can be extended or modified to address similar challenges in memory management and allocation scenarios. Overall, it exemplifies effective problem-solving techniques within the realm of programming and algorithm design.
+3. **While Loop Condition**
+	```cpp
+	    while(i <= mem1 || i <= mem2) {
+	```
+	Start a `while` loop that continues as long as either memory block has sufficient memory to subtract (i.e., `i` is less than or equal to `mem1` or `mem2`).
+
+4. **If Condition**
+	```cpp
+	        if(mem1 >= mem2) {
+	```
+	Check if `mem1` is greater than or equal to `mem2`. If true, reduce `mem1` by `i`.
+
+5. **Memory Reduction (mem1)**
+	```cpp
+	            mem1 -= i;
+	```
+	Subtract the value of `i` from `mem1`.
+
+6. **Else Condition**
+	```cpp
+	        } else mem2 -= i;
+	```
+	If the `if` condition is false, subtract the value of `i` from `mem2`.
+
+7. **Increment i**
+	```cpp
+	        i++;
+	```
+	Increment the value of `i` to gradually increase the memory reduction in each iteration.
+
+8. **Return Statement**
+	```cpp
+	    return vector<int>{i, mem1, mem2};
+	```
+	Return a vector containing the iteration count `i`, and the remaining memory in both `mem1` and `mem2`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+In the worst case, the program runs for n seconds, where n is the time before the program crashes.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only store the memory values and the current second.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/incremental-memory-leak/description/)
 

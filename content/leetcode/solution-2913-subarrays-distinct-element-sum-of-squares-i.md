@@ -14,91 +14,172 @@ img_src = ""
 youtube = "vBSxcFdwcQU"
 youtube_upload_date="2023-10-28"
 youtube_thumbnail="https://i.ytimg.com/vi/vBSxcFdwcQU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums`. A subarray of `nums` is a contiguous sequence of elements. The distinct count of a subarray is defined as the number of unique values within that subarray. Your task is to return the sum of the squares of the distinct counts for all possible subarrays of `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array `nums` of size `n` where `1 <= n <= 100`. Each element of `nums` is an integer between 1 and 100.
+- **Example:** `nums = [2, 3, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sumCounts(vector<int>& ar) {
-        int n=ar.size();
-        int ans=0;
-        map<int,int>fr;
-        //sort(ar.begin(),ar.end());
-        for(int i=0;i<n;i++){
-            int val=0;
-             map<int,int>fr;
-            for(int j=i;j<n;j++){
-                if(fr[ar[j]]==0) val++;
-                fr[ar[j]]++;
-                ans=ans+val*val;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of the squares of distinct counts of all subarrays of `nums`.
+- **Example:** `For the input `nums = [2, 3, 2]`, the output is 14.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the sum of the squares of the distinct counts of all subarrays of the input array `nums`.
+
+- For each subarray starting from index `i` and ending at index `j`, calculate the number of distinct values in the subarray.
+- Square the number of distinct values and accumulate the result.
+- Repeat this for all possible subarrays in the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will contain only integers between 1 and 100.
+- The array will not be empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [2, 3, 2]`  \
+  **Explanation:** The possible subarrays are: [2], [3], [2], [2, 3], [3, 2], and [2, 3, 2]. The distinct values for each subarray are: 1, 1, 1, 2, 2, and 2 respectively. The sum of the squares of the distinct counts is: 1^2 + 1^2 + 1^2 + 2^2 + 2^2 + 2^2 = 1 + 1 + 1 + 4 + 4 + 4 = 15.
+
+{{< dots >}}
+## Approach 🚀
+The key idea is to calculate the distinct count for all subarrays of the given array and then sum the squares of these counts. A map can be used to keep track of the distinct elements as we slide through each subarray.
+
+### Initial Thoughts 💭
+- The problem involves iterating over all possible subarrays of the array and calculating their distinct counts.
+- Using a sliding window approach and updating the count of distinct elements for each subarray will help achieve an efficient solution.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will not be empty as per the problem constraints.
+- For larger arrays, the solution needs to efficiently handle up to 100 elements.
+- Consider the case where all elements in the array are the same.
+- The array length is between 1 and 100.
+- Each element in the array is between 1 and 100.
+{{< dots >}}
+## Code 💻
+```cpp
+int sumCounts(vector<int>& ar) {
+    int n=ar.size();
+    int ans=0;
+    map<int,int>fr;
+    //sort(ar.begin(),ar.end());
+    for(int i=0;i<n;i++){
+        int val=0;
+         map<int,int>fr;
+        for(int j=i;j<n;j++){
+            if(fr[ar[j]]==0) val++;
+            fr[ar[j]]++;
+            ans=ans+val*val;
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement:
-The problem is about calculating a particular sum from an array of integers. Specifically, the task is to compute a sum where each element’s contribution depends on how many unique integers have appeared up to that point in a given subarray. The sum is weighted by the square of the number of distinct integers encountered in each subarray.
+The code defines the `sumCounts` function, which calculates a sum based on unique element counts in the array `ar`. It uses nested loops to iterate over the array and tracks occurrences of each element using a map. The sum is updated by squaring the count of unique elements at each step.
 
-### Approach:
-The approach taken in this code aims to iterate over every possible subarray of the given array `ar`. The goal is to track the number of distinct integers in each subarray and compute the sum based on their contribution. Specifically, for each subarray, the number of distinct integers is calculated, and the square of this count is added to the running total.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sumCounts(vector<int>& ar) {
+	```
+	Defines the `sumCounts` function that takes a reference to a vector `ar` and returns an integer result, representing a sum based on element frequency calculations.
 
-The strategy employs a `map` (or hash map) to track the frequency of each number in the subarray, which is then used to compute the distinct count. The code also utilizes a nested loop to explore all possible subarrays and sum the required values.
+2. **Variable Initialization**
+	```cpp
+	    int n=ar.size();
+	```
+	Initializes variable `n` to store the size of the input vector `ar`.
 
-### Code Breakdown (Step by Step):
-1. **Function Definition and Variable Initialization:**
-   ```cpp
-   int sumCounts(vector<int>& ar) {
-       int n = ar.size();  // Get the size of the array.
-       int ans = 0;  // Initialize the variable `ans` to store the result.
-       map<int, int> fr;  // Declare a map to track the frequency of integers in the subarray.
-   ```
-   In this step, the function `sumCounts` takes a vector `ar` of integers as input. We initialize the size of the array `n` and a variable `ans` that will store the sum of the desired values. A `map` named `fr` is used to keep track of how many times each element appears in the current subarray.
+3. **Variable Initialization**
+	```cpp
+	    int ans=0;
+	```
+	Initializes variable `ans` to store the final sum, which will be calculated as the function progresses.
 
-2. **Outer Loop (Iterating over the starting index of subarrays):**
-   ```cpp
-   for (int i = 0; i < n; i++) {
-       int val = 0;  // Initialize the variable `val` to count distinct integers.
-       map<int, int> fr;  // Reset the map for each new subarray starting at index `i`.
-   ```
-   The outer loop runs through every index `i` from `0` to `n-1`. Each iteration of this loop represents the starting point of a new subarray. Inside the loop, the variable `val` is initialized to zero, and the map `fr` is reset to track the frequencies of integers for the new subarray starting at index `i`.
+4. **Map Initialization**
+	```cpp
+	    map<int,int>fr;
+	```
+	Initializes a map `fr` to track the frequency of each element in the vector `ar` during the iteration.
 
-3. **Inner Loop (Iterating over the ending index of subarrays):**
-   ```cpp
-   for (int j = i; j < n; j++) {
-       if (fr[ar[j]] == 0) val++;  // If the element at `ar[j]` hasn't appeared yet, increment `val`.
-       fr[ar[j]]++;  // Increment the frequency of `ar[j]` in the map.
-       ans = ans + val * val;  // Add the square of the distinct count to the result.
-   }
-   ```
-   The inner loop iterates over all possible subarrays starting from index `i` and ending at index `j`. It checks whether the current element `ar[j]` has been seen before in the subarray using the map `fr`. If it is a new element, the distinct count `val` is incremented. The frequency of the element is then updated in the map. Finally, the square of the distinct count `val` is added to the running total `ans`.
+5. **Loop: Iterate Over Array**
+	```cpp
+	    for(int i=0;i<n;i++){
+	```
+	Begins a loop that iterates through each element in the array `ar` using the index `i`.
 
-4. **Returning the Result:**
-   ```cpp
-   return ans;
-   ```
-   After both loops complete, the function returns the calculated sum `ans`.
+6. **Variable Initialization**
+	```cpp
+	        int val=0;
+	```
+	Initializes the variable `val` to track the count of unique elements for each subarray starting at index `i`.
 
-### Complexity:
-1. **Time Complexity:**
-   The time complexity of this approach is determined by the nested loops. The outer loop runs `n` times, where `n` is the size of the input array `ar`. The inner loop also runs up to `n` times for each iteration of the outer loop, resulting in a total of `n * n = n^2` iterations. Inside the inner loop, the operations such as checking the frequency in the map and updating the map are logarithmic in complexity, i.e., `O(log n)` for each operation. Therefore, the overall time complexity is:
-   \[
-   O(n^2 \log n)
-   \]
-   This makes the solution inefficient for large arrays.
+7. **Map Initialization**
+	```cpp
+	         map<int,int>fr;
+	```
+	Initializes a local map `fr` inside the loop to track the frequencies of elements for each subarray.
 
-2. **Space Complexity:**
-   The space complexity of the code is primarily determined by the space used by the map `fr` to store the frequencies of the integers in the subarray. In the worst case, the map might store all the unique integers from the array, leading to a space complexity of `O(n)`.
+8. **Inner Loop: Iterate Over Subarray**
+	```cpp
+	        for(int j=i;j<n;j++){
+	```
+	Begins an inner loop that iterates over the subarray starting from index `i` to the end of the array `ar`.
 
-### Conclusion:
-The provided code calculates the sum of squared counts of distinct integers in all subarrays of a given array. While the approach is correct and follows a brute-force method, its efficiency is suboptimal for large input arrays due to the time complexity of `O(n^2 log n)`. For small arrays, this solution might work fine, but for larger datasets, more efficient algorithms such as those using advanced data structures (e.g., segment trees or binary indexed trees) could be considered for optimization. Additionally, techniques like dynamic programming or sliding window could be explored to potentially reduce the time complexity of the algorithm.
+9. **Frequency Check: Unique Element Count**
+	```cpp
+	            if(fr[ar[j]]==0) val++;
+	```
+	Checks if the element at `ar[j]` has been encountered before in the current subarray. If not, it increments `val` to count the unique element.
+
+10. **Update Frequency Map**
+	```cpp
+	            fr[ar[j]]++;
+	```
+	Increments the count of the element `ar[j]` in the frequency map `fr`.
+
+11. **Update Result**
+	```cpp
+	            ans=ans+val*val;
+	```
+	Updates the result `ans` by adding the square of the count of unique elements (`val`) for the current subarray.
+
+12. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the final result `ans`, which is the sum of squared unique element counts for all subarrays of `ar`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) because we iterate over all possible subarrays and calculate the distinct count for each.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the frequency map used to track distinct elements in each subarray.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/description/)
 

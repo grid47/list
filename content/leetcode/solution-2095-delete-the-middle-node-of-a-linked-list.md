@@ -14,135 +14,148 @@ img_src = ""
 youtube = "gwel0eQ0MhA"
 youtube_upload_date="2021-12-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gwel0eQ0MhA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the head of a linked list. Your task is to remove the middle node from the linked list and return the modified list. The middle node is defined as the ⌊n / 2⌋th node, where n is the number of nodes in the list, using 0-based indexing.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a linked list where each node has a value and a pointer to the next node. The linked list has at least one node.
+- **Example:** `head = [4, 8, 6, 2, 7, 3]`
+- **Constraints:**
+	- The number of nodes in the list is in the range [1, 10^5].
+	- 1 <= Node.val <= 10^5
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* deleteMiddle(ListNode* head) {
-        if(!head->next) return nullptr;
-        ListNode* slw = head, *fst = head->next->next;
-        while(fst && fst->next) {
-            fst = fst->next->next;
-            slw = slw->next;
-        }
-        slw->next = slw->next->next;
-        return head;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the linked list after removing the middle node. The list should be modified in place.
+- **Example:** `Output: [4, 8, 2, 7, 3]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove the middle node from the linked list and return the modified list.
+
+- Use two pointers: one slow and one fast.
+- Move the fast pointer two steps at a time and the slow pointer one step at a time.
+- When the fast pointer reaches the end, the slow pointer will be at the middle.
+- Remove the middle node by linking the previous node of the slow pointer to the next node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list is not empty.
+- The values in the list are distinct.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: head = [4, 8, 6, 2, 7, 3]`  \
+  **Explanation:** The list has 6 nodes. The middle node is 6 (index 2). After removing it, the list becomes [4, 8, 2, 7, 3].
+
+- **Input:** `Example 2: head = [10, 20, 30, 40]`  \
+  **Explanation:** The list has 4 nodes. The middle node is 30 (index 2). After removing it, the list becomes [10, 20, 40].
+
+- **Input:** `Example 3: head = [5, 3]`  \
+  **Explanation:** The list has 2 nodes. The middle node is 3 (index 1). After removing it, the list becomes [5].
+
+{{< dots >}}
+## Approach 🚀
+The key approach to solving this problem involves using two pointers: a slow pointer and a fast pointer. The slow pointer will point to the middle node, while the fast pointer will traverse the list at double the speed to help locate the middle.
+
+### Initial Thoughts 💭
+- We need to find the middle node efficiently, ideally with a time complexity of O(n).
+- Using a slow and fast pointer technique ensures we can find the middle node in a single pass through the list.
+{{< dots >}}
+### Edge Cases 🌐
+- If the list has only one node, removing the middle node should return an empty list.
+- Ensure the solution works for lists with up to 10^5 nodes.
+- If there are only two nodes, remove the second node as it is the middle node.
+- The input list will always have at least one node.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* deleteMiddle(ListNode* head) {
+    if(!head->next) return nullptr;
+    ListNode* slw = head, *fst = head->next->next;
+    while(fst && fst->next) {
+        fst = fst->next->next;
+        slw = slw->next;
     }
-};
-{{< /highlight >}}
----
+    slw->next = slw->next->next;
+    return head;
+}
+```
 
-### Problem Statement
+This function removes the middle node from a linked list. It uses two pointers: a slow pointer and a fast pointer, to find the middle node, and adjusts the links to remove it.
 
-The problem is to delete the middle node of a singly linked list and return the modified list. The middle node is defined as the node at the middle position of the list. If the list has an even number of nodes, the second of the two middle nodes should be removed. For instance, given a linked list with the values `[1, 2, 3, 4, 5]`, the middle node `3` should be removed, resulting in the modified list `[1, 2, 4, 5]`. If the list has only one node, the function should return `nullptr`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	ListNode* deleteMiddle(ListNode* head) {
+	```
+	Defines the function 'deleteMiddle' that takes a ListNode pointer as input and returns a ListNode pointer.
 
-### Approach
+2. **Base Condition**
+	```cpp
+	    if(!head->next) return nullptr;
+	```
+	Checks if the linked list contains only one node. If true, it returns nullptr, as there's no middle node to delete.
 
-To solve this problem, we can use a two-pointer technique, commonly referred to as the "tortoise and hare" approach. The steps involved in this approach are as follows:
+3. **Pointer Initialization**
+	```cpp
+	    ListNode* slw = head, *fst = head->next->next;
+	```
+	Initializes two pointers: 'slw' (slow pointer) starting at the head, and 'fst' (fast pointer) starting two nodes ahead.
 
-1. **Edge Case Handling**: First, we check if the list has only one node. If it does, we return `nullptr` since removing the middle node from a single-node list leaves nothing.
+4. **Loop Condition**
+	```cpp
+	    while(fst && fst->next) {
+	```
+	The loop continues as long as 'fst' and 'fst->next' are not null, ensuring we don't exceed the bounds of the list.
 
-2. **Two Pointers Initialization**: We initialize two pointers, `slow` and `fast`. The `slow` pointer will traverse the list one node at a time, while the `fast` pointer will traverse two nodes at a time. This allows us to determine when the `fast` pointer reaches the end of the list, which indicates that the `slow` pointer is at or just before the middle node.
+5. **Pointer Update**
+	```cpp
+	        fst = fst->next->next;
+	```
+	Moves the 'fst' pointer two nodes ahead in each iteration of the loop.
 
-3. **Traverse the List**: We move both pointers forward in a loop until the `fast` pointer reaches the end of the list. By doing this, the `slow` pointer will end up pointing to the node just before the middle node.
+6. **Pointer Update**
+	```cpp
+	        slw = slw->next;
+	```
+	Moves the 'slw' pointer one node ahead in each iteration of the loop.
 
-4. **Delete the Middle Node**: Once we identify the node just before the middle node (using the `slow` pointer), we can update its `next` pointer to skip over the middle node, effectively removing it from the list.
+7. **Middle Node Removal**
+	```cpp
+	    slw->next = slw->next->next;
+	```
+	Removes the middle node by adjusting the 'next' pointer of the 'slw' pointer to skip the middle node.
 
-5. **Return the Modified List**: Finally, we return the head of the modified list.
+8. **Return Statement**
+	```cpp
+	    return head;
+	```
+	Returns the modified linked list with the middle node removed.
 
-This method is efficient and runs in linear time, O(n), while using constant space, O(1), since we do not require any additional data structures to hold the nodes.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Code Breakdown (Step by Step)
+The time complexity is O(n) because we are traversing the linked list once to find and remove the middle node.
 
-Let's examine the provided code to understand how it implements the approach:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-1. **ListNode Structure Definition**:
-   ```cpp
-   struct ListNode {
-       int val;
-       ListNode *next;
-       ListNode() : val(0), next(nullptr) {}
-       ListNode(int x) : val(x), next(nullptr) {}
-       ListNode(int x, ListNode *next) : val(x), next(next) {}
-   };
-   ```
-   This structure defines a node in a singly linked list, containing an integer value `val` and a pointer `next` to the next node in the list. The constructors allow for creating nodes with different initializations.
+The space complexity is O(1) because we are using only a constant amount of extra space.
 
-2. **Delete Middle Function**:
-   ```cpp
-   class Solution {
-   public:
-       ListNode* deleteMiddle(ListNode* head) {
-           if(!head->next) return nullptr;
-           ListNode* slw = head, *fst = head->next->next;
-           while(fst && fst->next) {
-               fst = fst->next->next;
-               slw = slw->next;
-           }
-           slw->next = slw->next->next;
-           return head;
-       }
-   };
-   ```
+**Happy Coding! 🎉**
 
-3. **Edge Case Check**:
-   ```cpp
-   if(!head->next) return nullptr;
-   ```
-   Here, we check if the list has only one node by evaluating whether `head->next` is `nullptr`. If this condition is true, we return `nullptr`, indicating that the list will be empty after the middle node is deleted.
-
-4. **Two Pointers Initialization**:
-   ```cpp
-   ListNode* slw = head, *fst = head->next->next;
-   ```
-   The `slow` pointer (`slw`) is initialized to point to the head of the list, while the `fast` pointer (`fst`) starts at the node after the next one. This setup prepares us to traverse the list.
-
-5. **Traverse the List**:
-   ```cpp
-   while(fst && fst->next) {
-       fst = fst->next->next;
-       slw = slw->next;
-   }
-   ```
-   In this while loop, we continue moving both pointers until the `fast` pointer reaches the end of the list (when `fst` or `fst->next` is `nullptr`). For every iteration:
-   - The `fast` pointer moves two steps forward (`fst = fst->next->next`).
-   - The `slow` pointer moves one step forward (`slw = slw->next`).
-
-6. **Delete the Middle Node**:
-   ```cpp
-   slw->next = slw->next->next;
-   ```
-   Once the loop completes, the `slow` pointer will be positioned just before the middle node. We update the `next` pointer of the `slow` node to skip over the middle node, effectively deleting it from the linked list.
-
-7. **Return the Modified List**:
-   ```cpp
-   return head;
-   ```
-   Finally, we return the head of the modified linked list, which now has the middle node removed.
-
-### Complexity
-
-The time complexity of this algorithm is O(n), where `n` is the number of nodes in the linked list. This complexity arises from the need to traverse the list to find the middle node. The space complexity is O(1) because we only use a constant amount of additional space for the pointers and do not require any extra data structures to store the nodes.
-
-### Conclusion
-
-In summary, the solution effectively removes the middle node from a singly linked list using a two-pointer technique, achieving an optimal time complexity of O(n) and a space complexity of O(1). This method is efficient and straightforward, making it suitable for handling linked list manipulation problems in competitive programming and technical interviews. Understanding this approach and its implementation helps in mastering linked list operations and contributes to a solid foundation in data structure manipulation.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/)
 

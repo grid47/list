@@ -14,133 +14,247 @@ img_src = ""
 youtube = "XMF3HhULMbM"
 youtube_upload_date="2022-08-07"
 youtube_thumbnail="https://i.ytimg.com/vi/XMF3HhULMbM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a tree with n nodes and n - 1 edges, where nodes are labeled from 0 to n - 1. Additionally, a list of restricted nodes is provided. Your goal is to determine the maximum number of nodes that can be visited starting from node 0, without passing through any restricted node. Node 0 itself is not restricted.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the number of nodes n, a list of edges describing the tree, and a list of restricted nodes.
+- **Example:** `n = 6, edges = [[0,1], [0,2], [2,3], [3,4], [4,5]], restricted = [2, 5]`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- edges.length == n - 1
+	- edges[i].length == 2
+	- 0 <= ai, bi < n
+	- ai != bi
+	- edges represents a valid tree
+	- 1 <= restricted.length < n
+	- 1 <= restricted[i] < n
+	- All restricted nodes are unique
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of nodes that can be reached from node 0 without passing through any restricted node.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum reachable nodes starting from node 0 while avoiding restricted nodes.
+
+- Construct an adjacency list from the given edges.
+- Mark all restricted nodes as visited.
+- Perform a Depth First Search (DFS) or Breadth First Search (BFS) starting from node 0, skipping any restricted nodes.
+- Count the number of nodes visited during the traversal.
+{{< dots >}}
+### Problem Assumptions ✅
+- Node 0 will not be restricted.
+- The given tree is valid, and each node can only have a unique set of neighbors.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 6, edges = [[0,1], [0,2], [2,3], [3,4], [4,5]], restricted = [2, 5]`  \
+  **Explanation:** In this example, the nodes that can be visited from node 0 are 1, 3, and 4. Node 2 and node 5 are restricted, so they cannot be visited. Hence, the output is 3.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use DFS or BFS to traverse the tree from node 0, skipping the restricted nodes and counting how many nodes are reachable.
+
+### Initial Thoughts 💭
+- We need to traverse the tree while avoiding restricted nodes.
+- The tree structure ensures no cycles, so DFS/BFS will suffice for traversal.
+- This is a graph traversal problem where we need to avoid certain nodes while counting the reachable ones.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least 2 nodes, so empty inputs are not possible.
+- For very large inputs (n up to 10^5), the solution should be efficient, ideally O(n) time complexity.
+- If there is a large number of restricted nodes, the number of reachable nodes might be significantly reduced.
+- Make sure the solution handles the upper limits of constraints effectively.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    int ans;
+int ans;
 public:
-    void solve(vector<vector<int>>& gph, vector<bool> &vis, int i) {
-        vis[i] = true;
-        for(int n: gph[i]) {
-            if(!vis[n]) {
-                ans++;
-                vis[n] = true;
-                solve(gph, vis, n);
-            }
+void solve(vector<vector<int>>& gph, vector<bool> &vis, int i) {
+    vis[i] = true;
+    for(int n: gph[i]) {
+        if(!vis[n]) {
+            ans++;
+            vis[n] = true;
+            solve(gph, vis, n);
         }
     }
+}
 
-    int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
-        ans = 1;
-        vector<vector<int>> gph(n);
-        for(auto e: edges) {
-            int u = e[0], v = e[1];
-            gph[u].push_back(v);
-            gph[v].push_back(u);
-        }
-
-        vector<bool> vis(n, false);
-        for(auto i: restricted) vis[i] = true;
-
-        solve(gph, vis, 0);
-        return ans;
+int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
+    ans = 1;
+    vector<vector<int>> gph(n);
+    for(auto e: edges) {
+        int u = e[0], v = e[1];
+        gph[u].push_back(v);
+        gph[v].push_back(u);
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    vector<bool> vis(n, false);
+    for(auto i: restricted) vis[i] = true;
 
-The problem asks to count the number of nodes that are reachable from a starting node, with certain restricted nodes that cannot be visited. The graph is represented as an undirected graph with `n` nodes and `edges` that connect pairs of nodes. Additionally, a list of restricted nodes is given, and these nodes are considered inaccessible in the graph traversal. Your task is to implement a function that returns the number of reachable nodes, excluding the restricted nodes.
+    solve(gph, vis, 0);
+    return ans;
+}
+```
 
-### Approach
+This solution counts the number of reachable nodes in a graph starting from node 0, excluding restricted nodes. It uses depth-first search (DFS) to traverse the graph, marking visited nodes and incrementing the reachable node count.
 
-This problem is essentially a graph traversal problem where we need to visit nodes using a Depth First Search (DFS) or Breadth First Search (BFS) while ignoring the restricted nodes. The goal is to determine how many nodes can be reached from a given starting node (in this case, node 0) under the constraint that some nodes are restricted.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the Solution class that encapsulates the logic for the problem.
 
-The key steps involved in solving this problem are:
+2. **Variable Declaration**
+	```cpp
+	int ans;
+	```
+	Declares an integer variable 'ans' to keep track of the count of reachable nodes.
 
-1. **Graph Representation**: We represent the graph as an adjacency list, where each node points to a list of its neighbors.
-2. **Initialization**: Mark the restricted nodes as visited initially, because they cannot be traversed.
-3. **DFS Traversal**: Start from the given node (node 0 in this case) and traverse through the graph using DFS. Each time a node is visited, we increment the count of reachable nodes.
-4. **Return the Result**: Once all reachable nodes are visited, return the count of reachable nodes.
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Indicates the start of the public section where the function definitions are located.
 
-### Code Breakdown (Step by Step)
+4. **DFS Function Definition**
+	```cpp
+	void solve(vector<vector<int>>& gph, vector<bool> &vis, int i) {
+	```
+	Defines the 'solve' function which performs a depth-first search (DFS) to explore the graph.
 
-1. **Class Definition**:
-    ```cpp
-    class Solution {
-        int ans;  // To store the count of reachable nodes
-    ```
-    Here, `ans` is an integer that stores the count of nodes reachable from node 0. It starts from 1 because node 0 is considered reachable by default.
+5. **Mark Current Node as Visited**
+	```cpp
+	    vis[i] = true;
+	```
+	Marks the current node 'i' as visited to prevent revisiting it.
 
-2. **Solve Function (DFS)**:
-    ```cpp
-    void solve(vector<vector<int>>& gph, vector<bool> &vis, int i) {
-        vis[i] = true;  // Mark the current node as visited
-        for (int n : gph[i]) {
-            if (!vis[n]) {
-                ans++;  // Increment reachable node count
-                vis[n] = true;  // Mark the neighbor node as visited
-                solve(gph, vis, n);  // Recursively visit all connected nodes
-            }
-        }
-    }
-    ```
-    This is a recursive function that performs the DFS traversal. The function takes the graph (`gph`), a visitation status vector (`vis`), and the current node (`i`). It marks the current node as visited and then recursively visits all its neighbors that are not visited yet. Each time a new node is visited, the reachable node count (`ans`) is incremented.
+6. **Iterate Over Neighbors**
+	```cpp
+	    for(int n: gph[i]) {
+	```
+	Iterates over all the neighboring nodes of the current node 'i'.
 
-3. **reachableNodes Function (Main Function)**:
-    ```cpp
-    int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
-        ans = 1;  // Start with 1 because node 0 is reachable
-        vector<vector<int>> gph(n);  // Graph represented as an adjacency list
-        
-        for (auto e : edges) {
-            int u = e[0], v = e[1];
-            gph[u].push_back(v);  // Add edge from u to v
-            gph[v].push_back(u);  // Add edge from v to u (undirected graph)
-        }
-    ```
-    The `reachableNodes` function starts by initializing the graph and marking the restricted nodes. The graph is created using an adjacency list, where each edge is added in both directions since the graph is undirected. 
+7. **Check for Unvisited Neighbors**
+	```cpp
+	        if(!vis[n]) {
+	```
+	Checks if the neighboring node 'n' has not been visited yet.
 
-    ```cpp
-        vector<bool> vis(n, false);  // Visitation status vector
-        for (auto i : restricted) {
-            vis[i] = true;  // Mark restricted nodes as visited
-        }
-    ```
-    We initialize the `vis` vector to `false` for all nodes. Then, we mark the restricted nodes as visited by setting their corresponding positions in `vis` to `true`. This ensures that these nodes are ignored during the DFS traversal.
+8. **Increment Reachable Node Count**
+	```cpp
+	            ans++;
+	```
+	Increments the count of reachable nodes if the neighboring node is valid.
 
-    ```cpp
-        solve(gph, vis, 0);  // Start DFS traversal from node 0
-        return ans;  // Return the count of reachable nodes
-    }
-    ```
-    The DFS traversal starts from node 0, and the `solve` function is invoked. Finally, the function returns the value of `ans`, which contains the number of reachable nodes.
+9. **Mark Neighbor as Visited**
+	```cpp
+	            vis[n] = true;
+	```
+	Marks the neighboring node 'n' as visited.
 
-### Complexity
+10. **Recursive DFS Call**
+	```cpp
+	            solve(gph, vis, n);
+	```
+	Recursively calls the 'solve' function for the unvisited neighbor 'n'.
 
-1. **Time Complexity**:
-    - **Building the Graph**: Constructing the graph from the list of edges takes O(E), where `E` is the number of edges.
-    - **DFS Traversal**: The DFS traversal visits each node and each edge exactly once. Therefore, the time complexity of the DFS is O(V + E), where `V` is the number of nodes and `E` is the number of edges.
-    
-    Thus, the overall time complexity of the `reachableNodes` function is O(V + E).
+11. **Main Function Definition**
+	```cpp
+	int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
+	```
+	Defines the 'reachableNodes' function which is the main function that calculates the number of reachable nodes.
 
-2. **Space Complexity**:
-    - The space complexity is determined by the graph representation and the visitation status vector:
-        - The adjacency list `gph` requires O(V + E) space.
-        - The `vis` vector requires O(V) space.
-    
-    Therefore, the overall space complexity is O(V + E).
+12. **Initialize Answer**
+	```cpp
+	    ans = 1;
+	```
+	Initializes 'ans' to 1, counting the starting node (node 0) as reachable.
 
-### Conclusion
+13. **Graph Initialization**
+	```cpp
+	    vector<vector<int>> gph(n);
+	```
+	Initializes an adjacency list 'gph' to represent the graph with 'n' nodes.
 
-This approach efficiently solves the problem of counting reachable nodes in an undirected graph with restricted nodes. By using DFS and maintaining a visitation status for each node, the solution ensures that restricted nodes are excluded from the traversal. The algorithm operates within the time and space limits, making it suitable for large graphs with multiple nodes and edges. The solution's time complexity of O(V + E) ensures scalability, while the space complexity of O(V + E) keeps the algorithm's memory usage manageable.
+14. **Build Graph**
+	```cpp
+	    for(auto e: edges) {
+	```
+	Iterates over the edges and builds the undirected graph by adding each edge to the adjacency list.
+
+15. **Edge Processing**
+	```cpp
+	        int u = e[0], v = e[1];
+	```
+	Extracts the nodes 'u' and 'v' from the current edge 'e'.
+
+16. **Add Edge to Graph**
+	```cpp
+	        gph[u].push_back(v);
+	```
+	Adds node 'v' to the adjacency list of node 'u', creating an undirected edge.
+
+17. **Add Reverse Edge**
+	```cpp
+	        gph[v].push_back(u);
+	```
+	Adds node 'u' to the adjacency list of node 'v', ensuring the graph is undirected.
+
+18. **Initialize Visited Vector**
+	```cpp
+	    vector<bool> vis(n, false);
+	```
+	Initializes a boolean vector 'vis' to track which nodes have been visited.
+
+19. **Mark Restricted Nodes**
+	```cpp
+	    for(auto i: restricted) vis[i] = true;
+	```
+	Marks the restricted nodes as visited in the 'vis' vector.
+
+20. **Start DFS Traversal**
+	```cpp
+	    solve(gph, vis, 0);
+	```
+	Starts the DFS traversal from node 0, passing the graph and visited vector.
+
+21. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the count of reachable nodes, which is stored in 'ans'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Since we traverse all nodes once, the time complexity is O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the adjacency list and visited nodes array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reachable-nodes-with-restrictions/description/)
 

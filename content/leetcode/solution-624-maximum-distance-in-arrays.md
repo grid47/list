@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "J0yYlj_oVTI"
 youtube_upload_date="2024-08-16"
 youtube_thumbnail="https://i.ytimg.com/vi/J0yYlj_oVTI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,95 +28,126 @@ youtube_thumbnail="https://i.ytimg.com/vi/J0yYlj_oVTI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given m sorted arrays. Your task is to pick two integers, each from a different array, and calculate the maximum distance between them, where the distance is defined as the absolute difference of the two numbers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given m sorted arrays, each with an integer value.
+- **Example:** `arrays = [[3,6,9], [1,4,7], [8,10,15]]`
+- **Constraints:**
+	- m == arrays.length
+	- 2 <= m <= 10^5
+	- 1 <= arrays[i].length <= 500
+	- -10^4 <= arrays[i][j] <= 10^4
+	- arrays[i] is sorted in ascending order.
+	- There will be at most 10^5 integers in all the arrays.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxDistance(vector<vector<int>>& arrays) {
-        int res = 0, mn = 10000, mx = -10000;
-        for (auto& a : arrays) {
-            res = max(res, max(a.back()-mn, mx-a.front()));
-            mn = min(mn, a.front()), mx = max(mx, a.back());
-        }
-        return res;        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum distance that can be achieved by selecting one integer from each of two different arrays.
+- **Example:** `14`
+- **Constraints:**
+	- Return a single integer representing the maximum distance.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the maximum distance by comparing the largest and smallest elements across arrays.
+
+- Initialize variables to track the minimum and maximum values across the arrays.
+- For each array, calculate the potential maximum distance using the largest value from the current array and the smallest value from the previous array, as well as vice versa.
+- Update the result with the maximum distance found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays are correctly sorted in ascending order.
+- Arrays may vary in size, and elements can be negative or positive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `arrays = [[3,6,9], [1,4,7], [8,10,15]]`  \
+  **Explanation:** In this case, the maximum distance is obtained by selecting the smallest value from the second array (1) and the largest value from the third array (15), resulting in a distance of 14.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves tracking the minimum and maximum values across arrays and calculating the potential distances for each pair of arrays.
+
+### Initial Thoughts 💭
+- We need an efficient way to calculate the maximum distance between two different arrays.
+- By keeping track of the smallest and largest values across the arrays, we can calculate the maximum distance in linear time.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that there will always be at least two arrays, so empty inputs do not need to be handled.
+- Ensure the solution works efficiently even for the maximum constraint of 10^5 arrays.
+- Handle arrays containing negative and positive numbers.
+- The solution must handle arrays of different sizes and values, including edge cases like arrays with only one element.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxDistance(vector<vector<int>>& arrays) {
+    int res = 0, mn = 10000, mx = -10000;
+    for (auto& a : arrays) {
+        res = max(res, max(a.back()-mn, mx-a.front()));
+        mn = min(mn, a.front()), mx = max(mx, a.back());
     }
-};
-{{< /highlight >}}
----
+    return res;        
+}
+```
 
-### Problem Statement
+This code defines a function `maxDistance` that calculates the maximum distance between the first and last elements of different arrays within a 2D vector. It keeps track of the minimum and maximum values encountered as it iterates through each sub-array to compute the maximum distance efficiently.
 
-The task is to find the maximum distance between two elements in two different arrays that are part of a 2D array `arrays`. The arrays are sorted in non-decreasing order. The distance between two elements, one from each array, is defined as the absolute difference between those elements. The objective is to maximize this distance across all possible pairs of elements, each coming from a different array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxDistance(vector<vector<int>>& arrays) {
+	```
+	This line declares the function `maxDistance`, which takes a reference to a 2D vector `arrays` and returns an integer representing the maximum distance between the first and last elements of the arrays.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, mn = 10000, mx = -10000;
+	```
+	Three integer variables are initialized: `res` to store the result, `mn` to track the minimum value encountered, and `mx` to track the maximum value encountered.
 
-To solve this problem efficiently, we can use a linear pass through the arrays, maintaining two variables that store the minimum and maximum elements encountered so far. This will allow us to calculate the maximum possible difference as we move through the arrays. By only considering the first and last elements of each subarray (since the arrays are sorted), we can minimize the number of comparisons needed.
+3. **Loop Through Arrays**
+	```cpp
+	    for (auto& a : arrays) {
+	```
+	A `for` loop iterates through each sub-array `a` in the 2D vector `arrays`.
 
-Here's a step-by-step breakdown of the approach:
+4. **Calculate Maximum Distance for Each Sub-array**
+	```cpp
+	        res = max(res, max(a.back()-mn, mx-a.front()));
+	```
+	For each sub-array, the function calculates the distance between the current minimum value (`mn`) and the last element of the sub-array (`a.back()`), and the distance between the current maximum value (`mx`) and the first element of the sub-array (`a.front()`). The result is updated with the maximum of these values.
 
-1. **Initialize the Result Variables:**
-   - We define a variable `res` to store the maximum distance found so far. Initially, `res` is set to 0.
-   - We also define `mn` and `mx` to keep track of the minimum and maximum values encountered in the previous subarrays. These are initialized to a large value (10000 for `mn` to ensure it starts larger than any potential array values) and a small value (`mx` is initialized to -10000 to start smaller than any element in the arrays).
+5. **Update Min and Max Values**
+	```cpp
+	        mn = min(mn, a.front()), mx = max(mx, a.back());
+	```
+	The function updates `mn` to the minimum of the current `mn` and the first element of the sub-array (`a.front()`), and `mx` to the maximum of the current `mx` and the last element of the sub-array (`a.back()`), ensuring that the minimum and maximum values are kept up to date.
 
-2. **Iterate Over Each Array:**
-   - For each array `a` in the input 2D array `arrays`, we calculate two possible distances:
-     - The distance between the maximum element encountered so far (`mx`) and the minimum element of the current array (`a.front()`).
-     - The distance between the minimum element encountered so far (`mn`) and the maximum element of the current array (`a.back()`).
-   - Update `res` to store the maximum of these two distances.
+6. **Return Result**
+	```cpp
+	    return res;        
+	```
+	The function returns the value of `res`, which contains the maximum distance found between the first and last elements of any sub-array.
 
-3. **Update Minimum and Maximum Values:**
-   - After processing the current array, we update the `mn` and `mx` to keep track of the smallest and largest elements seen across all arrays processed so far. `mn` is updated to the minimum of the current `mn` and the first element of the current array (`a.front()`), and `mx` is updated to the maximum of the current `mx` and the last element of the current array (`a.back()`).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m)
+- **Average Case:** O(m)
+- **Worst Case:** O(m)
 
-4. **Return the Maximum Distance:**
-   - After iterating through all arrays, the value stored in `res` represents the maximum distance between two elements from different arrays. This is the final result, which is returned.
+The solution iterates over the arrays once, so the time complexity is linear with respect to the number of arrays.
 
-### Code Breakdown (Step by Step)
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-1. **Initial Setup:**
-   ```cpp
-   int res = 0, mn = 10000, mx = -10000;
-   ```
-   - `res` holds the maximum distance found.
-   - `mn` holds the smallest value encountered across all arrays.
-   - `mx` holds the largest value encountered across all arrays.
+The space complexity is constant as we only use a few variables to track the minimum and maximum values.
 
-2. **Loop Over Each Array:**
-   ```cpp
-   for (auto& a : arrays) {
-       res = max(res, max(a.back()-mn, mx-a.front()));
-       mn = min(mn, a.front()), mx = max(mx, a.back());
-   }
-   ```
-   - For each array `a`, the maximum possible distance is computed by comparing:
-     - The difference between the last element of the current array (`a.back()`) and the smallest element encountered so far (`mn`).
-     - The difference between the largest element encountered so far (`mx`) and the first element of the current array (`a.front()`).
-   - The maximum of these two distances is stored in `res`.
+**Happy Coding! 🎉**
 
-3. **Update Minimum and Maximum Values:**
-   - After computing the potential maximum distance for the current array, the `mn` and `mx` values are updated:
-     - `mn` is updated to be the smaller of the current `mn` and the first element of the current array (`a.front()`).
-     - `mx` is updated to be the larger of the current `mx` and the last element of the current array (`a.back()`).
-
-4. **Return the Result:**
-   ```cpp
-   return res;
-   ```
-   - After processing all arrays, the maximum distance (`res`) is returned.
-
-### Complexity
-
-#### Time Complexity:
-- **O(N):** The solution iterates through each array exactly once. For each array, only a constant number of operations (comparisons and assignments) are performed. Thus, the time complexity is linear with respect to the total number of arrays in the input.
-
-#### Space Complexity:
-- **O(1):** The solution uses a fixed amount of extra space (variables `res`, `mn`, and `mx`). The space complexity is constant because the space used does not depend on the size of the input.
-
-### Conclusion
-
-This solution efficiently computes the maximum distance between two elements from different arrays using a linear pass through the input arrays. By maintaining the smallest and largest elements encountered so far, we ensure that each comparison is done in constant time. The approach is optimal, with a time complexity of O(N) and a constant space complexity. This makes the solution well-suited for handling large inputs, and it avoids the need for any nested loops or complex operations, which would have made the solution less efficient.
-
-This approach is ideal for problems where you need to calculate the maximum or minimum difference between elements from different subarrays, and it works particularly well with sorted data. The algorithm is both simple and efficient, ensuring that the problem is solved with minimal computational overhead.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-distance-in-arrays/description/)
 

@@ -14,136 +14,221 @@ img_src = ""
 youtube = "2LRnTMOiqSI"
 youtube_upload_date="2021-05-17"
 youtube_thumbnail="https://i.ytimg.com/vi/2LRnTMOiqSI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n matrix of characters `box`, where each cell is a stone (`#`), a stationary obstacle (`*`), or an empty space (`.`). After rotating the box 90 degrees clockwise, gravity will cause stones to fall down until they land on an obstacle, another stone, or the bottom. Return the updated matrix after the stones have fallen.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an m x n matrix of characters where each cell can either be a stone (`#`), a stationary obstacle (`*`), or an empty space (`.`).
+- **Example:** `box = [[# , ., *], [#, *, #]]`
+- **Constraints:**
+	- 1 <= m, n <= 500
+	- Each box[i][j] is either '#', '*', or '.'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
-        
-        reverse(box.begin(), box.end());
-        
-        int m = box.size(), n = box[0].size();
-        vector<vector<char>> tmp(n, vector<char>(m));
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            tmp[j][i] = box[i][j];
-        
-        for(int i = 0; i < m; i++) {
-            int k = n - 1;
-            for(int j = n - 1; j >= 0; j--) {
-                if(tmp[j][i] == '#') {
-                    tmp[j][i] = '.'; // o
-                    tmp[k][i] = '#'; // order is important
-                    k--;
-                } else if(tmp[j][i] == '*') {
-                    k = j - 1;
-                }else if(tmp[j][i] == '.') {
-                    
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the updated matrix representing the box after the stones have fallen due to gravity, while obstacles remain stationary.
+- **Example:** `Output = [[#, .], [#, #], [*, *], [., .]]`
+- **Constraints:**
+	- The output is an m x n matrix of characters, representing the new arrangement after the stones have fallen.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Simulate the rotation and gravity effect to correctly place the stones.
+
+- Step 1: Reverse the rows of the matrix to simulate a 90-degree clockwise rotation.
+- Step 2: Iterate over each column, from bottom to top, and move the stones downwards, stopping at obstacles or other stones.
+- Step 3: Rebuild the matrix by placing stones at the bottom, obstacles where they are, and empty spaces above the stones.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is guaranteed to contain at least one row and one column.
+- The stones are already placed in a valid position, meaning they will rest on an obstacle, another stone, or the bottom of the box.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [[., ., #]]`  \
+  **Explanation:** After rotating the box 90 degrees and applying gravity, the stone falls to the bottom.
+
+- **Input:** `Input: [[., *, ., #], [., #, *, #]]`  \
+  **Explanation:** The stones fall to the bottom after rotation, and the obstacles remain in place, causing the stones to settle above them.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves simulating the 90-degree rotation of the matrix and applying gravity to the stones. We will reverse the rows of the matrix and then process each column to move stones down while respecting obstacles and other stones.
+
+### Initial Thoughts 💭
+- This is a simulation problem where we need to handle gravity and rotation.
+- Reversing the matrix rows will simulate the rotation. Then, we need to handle gravity by checking each column from bottom to top.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix cannot be empty, as it is guaranteed to have at least one stone or obstacle.
+- The algorithm should be efficient enough to handle matrices with the maximum size of 500x500.
+- Consider cases where there are no stones in a column or when all stones are already at the bottom.
+- The matrix is guaranteed to have at least one row and one column.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
+    
+    reverse(box.begin(), box.end());
+    
+    int m = box.size(), n = box[0].size();
+    vector<vector<char>> tmp(n, vector<char>(m));
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        tmp[j][i] = box[i][j];
+    
+    for(int i = 0; i < m; i++) {
+        int k = n - 1;
+        for(int j = n - 1; j >= 0; j--) {
+            if(tmp[j][i] == '#') {
+                tmp[j][i] = '.'; // o
+                tmp[k][i] = '#'; // order is important
+                k--;
+            } else if(tmp[j][i] == '*') {
+                k = j - 1;
+            }else if(tmp[j][i] == '.') {
+                
             }
         }
-        return tmp; 
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves rotating a 2D grid (or box) of characters representing a game board, which contains three types of elements: `'#'` representing rocks, `'.'` representing empty spaces, and `'*'` representing obstacles. The goal is to rotate the box 90 degrees clockwise and adjust the positions of the rocks and empty spaces according to gravity. When rotated, rocks should fall down to the lowest available position, stopping when they hit either the bottom of the box or an obstacle.
-
-### Approach
-
-To solve this problem, we can break the task into several systematic steps:
-
-1. **Reverse the Rows**: Since we are rotating the box clockwise, the first step is to reverse the order of the rows. This step is crucial because it simulates the effect of the box being rotated.
-
-2. **Transpose the Box**: Next, we need to transpose the rows and columns of the box. In essence, we convert each row into a column and each column into a row. This step represents the rotation of the box.
-
-3. **Gravity Simulation**: After transposing, we need to simulate the effect of gravity on the rocks. For each column in the transposed box, we move the rocks down, filling empty spaces above them and stopping when we encounter an obstacle.
-
-4. **Return the Result**: Finally, we return the modified box that reflects the correct positions of the rocks after rotation and gravity adjustment.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: The implementation begins by defining a class named `Solution`, which will contain our main method.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: We declare a public method `rotateTheBox` that takes a 2D vector of characters (the box) as input and returns the rotated box.
-
-    ```cpp
-    vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
-    ```
-
-3. **Reverse the Rows**: We reverse the rows of the box using the `reverse` function from the STL. This step simulates the first part of the rotation.
-
-    ```cpp
-    reverse(box.begin(), box.end());
-    ```
-
-4. **Initialization of Dimensions**: We determine the dimensions of the box, storing the number of rows in `m` and the number of columns in `n`.
-
-    ```cpp
-    int m = box.size(), n = box[0].size();
-    ```
-
-5. **Transposing the Box**: We create a new 2D vector `tmp` to hold the transposed version of the box. We then use nested loops to transpose the box.
-
-    ```cpp
-    vector<vector<char>> tmp(n, vector<char>(m)); // New box for transposed data
-    for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            tmp[j][i] = box[i][j]; // Transposing the box
-    ```
-
-6. **Gravity Simulation**: We iterate over each column in the transposed box. For each column, we initialize a variable `k` to keep track of the position where the next rock should fall.
-
-    ```cpp
-    for(int i = 0; i < m; i++) {
-        int k = n - 1; // Start placing rocks from the bottom
-        for(int j = n - 1; j >= 0; j--) {
-    ```
-
-7. **Handling Rocks and Obstacles**: Inside the inner loop, we check the content of each cell in the column:
-
-    - If the cell contains a rock (`'#'`), we move it down to the position indicated by `k`, replace the original position with an empty space (`'.'`), and decrement `k`.
-    - If the cell contains an obstacle (`'*'`), we reset `k` to stop the falling rocks above the obstacle.
-    - If the cell is empty (`'.'`), we do nothing.
-
-    ```cpp
-        if(tmp[j][i] == '#') {
-            tmp[j][i] = '.'; // Rock falls
-            tmp[k][i] = '#'; // Place rock at new position
-            k--;
-        } else if(tmp[j][i] == '*') {
-            k = j - 1; // Reset position above the obstacle
-        } // Else do nothing if it's an empty space
-    ```
-
-8. **Returning the Result**: After processing all columns and adjusting for gravity, we return the modified box.
-
-    ```cpp
     return tmp; 
-    }
-    ```
+}
+```
 
-### Complexity
+The function `rotateTheBox` rotates a 2D box represented by a grid, performing a series of operations including flipping the box vertically, transposing it, and shifting the elements to simulate gravity for non-empty cells (represented by `#`). The function returns the rotated and updated grid.
 
-The time complexity of this solution is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the box. This is due to the need to process each element in the box multiple times during the reversing, transposing, and gravity simulation steps. The space complexity is also \(O(m \times n)\) because we are using an additional 2D vector to store the transposed box.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<char>> rotateTheBox(vector<vector<char>>& box) {
+	```
+	Define the function `rotateTheBox`, which takes a reference to a 2D vector `box` representing a grid.
 
-### Conclusion
+2. **Reverse Grid**
+	```cpp
+	    reverse(box.begin(), box.end());
+	```
+	Reverse the rows of the grid to simulate a vertical flip of the box.
 
-In conclusion, the provided code effectively rotates a box of characters representing rocks and obstacles while simulating gravity. By using a methodical approach that involves reversing the rows, transposing the box, and then applying gravity, the solution ensures that rocks settle into their correct positions after the rotation. This implementation is a clear example of applying fundamental algorithms and data structures to solve a problem in a straightforward and efficient manner. It demonstrates the utility of nested loops and conditionals in manipulating 2D arrays, making it a practical solution for similar grid-based problems involving rotation and gravity effects. Overall, the code is well-structured and concise, successfully achieving the desired outcome while maintaining clarity in logic and flow.
+3. **Variable Initialization**
+	```cpp
+	    int m = box.size(), n = box[0].size();
+	```
+	Store the dimensions of the grid: `m` for the number of rows and `n` for the number of columns.
+
+4. **Matrix Initialization**
+	```cpp
+	    vector<vector<char>> tmp(n, vector<char>(m));
+	```
+	Create a new grid `tmp` with dimensions transposed from the original grid (`n` rows and `m` columns).
+
+5. **Outer Loop (Rows)**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Start an outer loop to iterate over the rows of the original grid.
+
+6. **Inner Loop (Columns)**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Start an inner loop to iterate over the columns of the original grid.
+
+7. **Transposition**
+	```cpp
+	        tmp[j][i] = box[i][j];
+	```
+	Transpose the grid, storing the element at `box[i][j]` into the transposed grid `tmp[j][i]`.
+
+8. **Loop through Transposed Grid**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Start a loop to process each column of the transposed grid.
+
+9. **Initialize k**
+	```cpp
+	        int k = n - 1;
+	```
+	Initialize `k` to point to the last row in the current column of the transposed grid.
+
+10. **Inner Loop (Process Elements)**
+	```cpp
+	        for(int j = n - 1; j >= 0; j--) {
+	```
+	Start an inner loop to process each element of the column, from bottom to top.
+
+11. **If Condition (Non-empty Cell)**
+	```cpp
+	            if(tmp[j][i] == '#') {
+	```
+	Check if the current cell contains a non-empty element (`#`).
+
+12. **Move Cell Down (Empty)**
+	```cpp
+	                tmp[j][i] = '.'; // o
+	```
+	Set the current cell to empty (`.`) to simulate the removal of the non-empty element.
+
+13. **Move Cell Down (Non-empty)**
+	```cpp
+	                tmp[k][i] = '#'; // order is important
+	```
+	Place the non-empty element (`#`) into the first available position (at `k`) in the column.
+
+14. **Update k**
+	```cpp
+	                k--;
+	```
+	Decrease `k` to move to the next available position for the next non-empty element.
+
+15. **Else If Condition (Obstacle)**
+	```cpp
+	            } else if(tmp[j][i] == '*') {
+	```
+	Check if the current cell contains an obstacle (`*`).
+
+16. **Update k (Obstacle)**
+	```cpp
+	                k = j - 1;
+	```
+	If the current cell is an obstacle, update `k` to the row before the obstacle.
+
+17. **Else If Condition (Empty Cell)**
+	```cpp
+	            }else if(tmp[j][i] == '.') {
+	```
+	Check if the current cell is empty (`.`).
+
+18. **Return Result**
+	```cpp
+	    return tmp; 
+	```
+	Return the rotated grid `tmp` after performing all the necessary operations.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix. We process each element once.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the new matrix used to store the updated box state.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotating-the-box/description/)
 

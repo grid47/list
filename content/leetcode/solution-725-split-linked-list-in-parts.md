@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ZITsHLE5mbE"
 youtube_upload_date="2023-09-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ZITsHLE5mbE/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,165 +28,277 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/ZITsHLE5mbE/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the head of a singly linked list and an integer k, split the linked list into k consecutive parts. The parts should have as equal size as possible, with no two parts differing by more than one element. Some parts may be null.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a singly linked list and an integer k.
+- **Example:** `Input: head = [1, 2, 3], k = 5`
+- **Constraints:**
+	- The number of nodes in the list is between 0 and 1000.
+	- 0 <= Node.val <= 1000
+	- 1 <= k <= 50
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    vector<ListNode*> splitListToParts(ListNode* head, int k) {
-        int len = 0;
-        ListNode* temp = head;
-        while(temp) {
-            len++;
-            temp = temp->next;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array of k parts, where each part is a singly linked list. Some parts may be null if there aren't enough nodes to split the list into k parts.
+- **Example:** `Output: [[1], [2], [3], [], []]`
+- **Constraints:**
+	- The parts should appear in the order of the original linked list.
 
-        int numNodes = len/k;
-        int ext = len % k;
-        int i = 0;
-        vector<ListNode*> res;
-        temp = head;
-        while(temp) {
-            res.push_back(temp);
-            int curLen = 1;
-            while(curLen < numNodes) {
-                temp =  temp->next;
-                curLen++;
-            }
-            if(ext > 0 && len > k) {
-                temp = temp->next;
-                ext--;
-            }
-            ListNode* x = temp->next;
-            temp->next = NULL;
-            temp = x;
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to split the given linked list into k consecutive parts of as equal size as possible.
 
-        while(len < k) {
-            res.push_back(NULL);
-            len++;
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+- 1. Calculate the total number of nodes in the linked list.
+- 2. Determine the base size of each part and the extra nodes that should be distributed.
+- 3. Iterate through the linked list, splitting it into parts and linking each part accordingly.
+- 4. If there are more parts than nodes, append null parts.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked list is non-empty, unless specified.
+- The value of k is always valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [1, 2, 3], k = 5`  \
+  **Explanation:** The linked list [1, 2, 3] is split into 5 parts, with the first three parts containing the elements 1, 2, and 3, respectively, and the last two parts being null.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the total number of nodes and then distributing them across k parts in such a way that the parts are as evenly sized as possible.
 
-The problem asks us to split a singly linked list into **k parts** of approximately equal size. If the list cannot be evenly divided, the extra nodes should be distributed across the first few parts. Each part should be represented by the head of a sublist, and if there are fewer nodes than parts, some parts should be `NULL`.
-
-### Approach
-
-To approach this problem, we need to break the linked list into **k parts**, while maintaining the size constraints. Specifically, we want to:
-
-1. **Calculate the length of the list**: We need to determine how many nodes are in the linked list.
-2. **Divide nodes into approximately equal parts**: If the total number of nodes is not divisible by `k`, then the first few parts will contain one extra node.
-3. **Iterate through the list**: We can split the list by adjusting the `next` pointers and creating new heads for each part.
-4. **Edge cases**: Handle cases where the list is shorter than `k` by returning `NULL` for the remaining parts.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code step by step to understand how it works:
-
-#### Step 1: Calculate the length of the list
-
+### Initial Thoughts 💭
+- We need to distribute the nodes across the parts while maintaining the relative order.
+- If there are more parts than nodes, we need to append null parts.
+{{< dots >}}
+### Edge Cases 🌐
+- If the linked list is empty, the output will be k null parts.
+- Ensure the solution handles large lists with up to 1000 nodes efficiently.
+- Consider cases where k is larger than the number of nodes in the list.
+- Ensure the solution works within the given constraints of up to 1000 nodes and 50 parts.
+{{< dots >}}
+## Code 💻
 ```cpp
-int len = 0;
-ListNode* temp = head;
-while(temp) {
-    len++;
-    temp = temp->next;
-}
-```
-- We initialize `len` to 0 to track the number of nodes in the linked list.
-- We traverse the entire list, incrementing `len` with each node.
-- After the loop finishes, `len` will hold the total number of nodes in the list.
-
-#### Step 2: Determine the size of each part and the remainder
-
-```cpp
-int numNodes = len / k;
-int ext = len % k;
-```
-- `numNodes`: This is the base number of nodes in each part, calculated by dividing the total length of the list by `k`.
-- `ext`: This is the remainder when dividing the list length by `k`, indicating how many parts should contain one extra node. These extra nodes will be distributed across the first `ext` parts.
-
-#### Step 3: Split the list into parts
-
-```cpp
-vector<ListNode*> res;
-temp = head;
-while(temp) {
-    res.push_back(temp);
-    int curLen = 1;
-    while(curLen < numNodes) {
-        temp =  temp->next;
-        curLen++;
-    }
-    if(ext > 0 && len > k) {
+vector<ListNode*> splitListToParts(ListNode* head, int k) {
+    int len = 0;
+    ListNode* temp = head;
+    while(temp) {
+        len++;
         temp = temp->next;
-        ext--;
     }
-    ListNode* x = temp->next;
-    temp->next = NULL;
-    temp = x;
+
+    int numNodes = len/k;
+    int ext = len % k;
+    int i = 0;
+    vector<ListNode*> res;
+    temp = head;
+    while(temp) {
+        res.push_back(temp);
+        int curLen = 1;
+        while(curLen < numNodes) {
+            temp =  temp->next;
+            curLen++;
+        }
+        if(ext > 0 && len > k) {
+            temp = temp->next;
+            ext--;
+        }
+        ListNode* x = temp->next;
+        temp->next = NULL;
+        temp = x;
+    }
+
+    while(len < k) {
+        res.push_back(NULL);
+        len++;
+    }
+    return res;
 }
 ```
-- **Initialize an empty vector `res`**: This will store the heads of the resulting sublists.
-- **Iterate through the list**: We start at the head of the list and keep adding parts to `res`. In each iteration:
-  - We push the current node (`temp`) to `res`.
-  - We traverse `numNodes` nodes for the current part, and if the current part is one of the `ext` parts that needs one extra node, we handle that.
-  - After reaching the last node of the current part, we set the `next` pointer to `NULL` to terminate the part.
-  - We move `temp` to the next node in the list to start the next part.
-  
-#### Step 4: Handle the case where there are fewer nodes than parts
 
-```cpp
-while(len < k) {
-    res.push_back(NULL);
-    len++;
-}
-```
-- If the list is shorter than `k`, we need to append `NULL` to the result vector to ensure that the final output has exactly `k` parts.
+This function splits a linked list into k parts as evenly as possible.
 
-#### Step 5: Return the result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<ListNode*> splitListToParts(ListNode* head, int k) {
+	```
+	Defines a function that splits a linked list into k parts.
 
-```cpp
-return res;
-```
-- After splitting the list into parts, we return the vector `res`, which contains the heads of the sublists.
+2. **Variable Initialization**
+	```cpp
+	    int len = 0;
+	```
+	Initializes the length of the linked list to zero.
 
-### Complexity Analysis
+3. **Pointer Initialization**
+	```cpp
+	    ListNode* temp = head;
+	```
+	Initializes a temporary pointer 'temp' to the head of the linked list.
 
-#### Time Complexity: **O(n)**
+4. **Loop**
+	```cpp
+	    while(temp) {
+	```
+	Starts a while loop to traverse the linked list and calculate its length.
 
-- We traverse the linked list twice: once to calculate its length and once to split it into parts. Each traversal takes O(n) time, where `n` is the number of nodes in the linked list.
-- Other operations inside the loop (such as pushing elements into the vector) are O(1) operations.
-- Therefore, the overall time complexity is **O(n)**, where `n` is the number of nodes in the linked list.
+5. **Operation**
+	```cpp
+	        len++;
+	```
+	Increments the length of the linked list for each node encountered.
 
-#### Space Complexity: **O(k)**
+6. **Pointer Update**
+	```cpp
+	        temp = temp->next;
+	```
+	Moves the temporary pointer to the next node in the linked list.
 
-- We are storing the resulting sublists in a vector of size `k`. This is the primary space usage.
-- The space complexity is independent of the length of the list, but depends on the number of parts (`k`), and is therefore **O(k)**.
+7. **Calculation**
+	```cpp
+	    int numNodes = len/k;
+	```
+	Calculates the number of nodes in each part, ignoring any remainder.
 
-### Conclusion
+8. **Calculation**
+	```cpp
+	    int ext = len % k;
+	```
+	Calculates the number of extra nodes to distribute across the parts.
 
-The solution efficiently splits a singly linked list into **k parts** while maintaining the required size constraints. It calculates the total length of the list, divides it into parts of approximately equal size, and then adjusts for the remainder by adding extra nodes to the first few parts. The solution handles edge cases such as when the list is shorter than `k` or when the list length is not evenly divisible by `k`.
+9. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	Initializes a counter variable 'i'.
 
-By iterating through the list once and using a few auxiliary variables to track the division of nodes, the algorithm achieves an optimal time complexity of **O(n)** and space complexity of **O(k)**, making it efficient for large input sizes.
+10. **Container Initialization**
+	```cpp
+	    vector<ListNode*> res;
+	```
+	Initializes a vector to store the resulting k parts of the linked list.
 
-This approach provides a clear, scalable way to split a list into multiple parts while ensuring that the list is divided as evenly as possible, and it elegantly handles the edge cases by appending `NULL` for any extra parts that do not have nodes.
+11. **Pointer Update**
+	```cpp
+	    temp = head;
+	```
+	Resets the temporary pointer to the head of the linked list.
+
+12. **Loop**
+	```cpp
+	    while(temp) {
+	```
+	Starts a while loop to process the nodes of the linked list and split them into k parts.
+
+13. **Operation**
+	```cpp
+	        res.push_back(temp);
+	```
+	Adds the current node to the result vector.
+
+14. **Variable Initialization**
+	```cpp
+	        int curLen = 1;
+	```
+	Initializes a variable to track the length of the current part.
+
+15. **Loop**
+	```cpp
+	        while(curLen < numNodes) {
+	```
+	Starts a loop to traverse the nodes in the current part.
+
+16. **Pointer Update**
+	```cpp
+	            temp =  temp->next;
+	```
+	Moves the temporary pointer to the next node in the current part.
+
+17. **Variable Update**
+	```cpp
+	            curLen++;
+	```
+	Increments the length of the current part.
+
+18. **Condition**
+	```cpp
+	        if(ext > 0 && len > k) {
+	```
+	Checks if there are remaining extra nodes to be distributed.
+
+19. **Pointer Update**
+	```cpp
+	            temp = temp->next;
+	```
+	Moves the temporary pointer to the next node to account for the extra nodes.
+
+20. **Variable Update**
+	```cpp
+	            ext--;
+	```
+	Decrements the count of remaining extra nodes.
+
+21. **Pointer Update**
+	```cpp
+	        ListNode* x = temp->next;
+	```
+	Stores the next node after the current node in the variable 'x'.
+
+22. **Pointer Update**
+	```cpp
+	        temp->next = NULL;
+	```
+	Sets the next pointer of the current node to NULL to end the current part.
+
+23. **Pointer Update**
+	```cpp
+	        temp = x;
+	```
+	Moves the temporary pointer to the next node, which is stored in 'x'.
+
+24. **Condition**
+	```cpp
+	    while(len < k) {
+	```
+	Starts a loop to handle the case where there are fewer nodes than k.
+
+25. **Operation**
+	```cpp
+	        res.push_back(NULL);
+	```
+	Adds NULL to the result vector to represent an empty part.
+
+26. **Variable Update**
+	```cpp
+	        len++;
+	```
+	Increments the length to match the number of k parts.
+
+27. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the resulting vector containing k parts of the linked list.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the number of nodes in the linked list, as we traverse the list twice.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is O(k), as we store the k parts in an array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-linked-list-in-parts/description/)
 

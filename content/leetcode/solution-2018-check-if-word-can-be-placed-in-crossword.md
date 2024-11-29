@@ -14,197 +14,294 @@ img_src = ""
 youtube = "l28OqpotdbU"
 youtube_upload_date="2021-09-26"
 youtube_thumbnail="https://i.ytimg.com/vi/l28OqpotdbU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n matrix representing a crossword puzzle. The matrix contains lowercase English letters, empty spaces (' '), and blocked cells ('#'). Given a word, determine if it can be placed horizontally or vertically in the crossword while adhering to the following constraints.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a matrix board of size m x n, where each element is either a lowercase letter, an empty space (' '), or a blocked cell ('#'). A string word is also provided, representing the word that needs to be placed on the board.
+- **Example:** `[['#', ' ', '#'], [' ', ' ', '#'], ['#', 'c', ' ']]`
+- **Constraints:**
+	- m == board.length
+	- n == board[i].length
+	- 1 <= m * n <= 2 * 10^5
+	- board[i][j] will be ' ', '#', or a lowercase English letter.
+	- 1 <= word.length <= max(m, n)
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the word can be placed on the board, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The output will be a boolean value indicating whether the word can be placed on the board.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the word can be placed horizontally or vertically on the crossword puzzle, considering all given constraints.
+
+- For each row and column, check if the word fits in either direction (horizontal or vertical) with the given constraints.
+- Ensure that the word does not overlap any blocked cells.
+- Verify that there are no conflicting adjacent cells before and after placing the word.
+{{< dots >}}
+### Problem Assumptions ✅
+- The word can be placed horizontally or vertically.
+- The grid is a crossword puzzle containing blocked cells, empty spaces, and already placed words.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[['#', ' ', '#'], [' ', ' ', '#'], ['#', 'c', ' ']]`  \
+  **Explanation:** The word 'abc' can be placed vertically starting at (0, 1) without conflicting with other letters or blocked cells.
+
+- **Input:** `[[' ', '#', 'a'], [' ', '#', 'c'], [' ', '#', 'a']]`  \
+  **Explanation:** It is impossible to place the word 'ac' because of the blocked cells and no available continuous empty space.
+
+- **Input:** `[['#', ' ', '#'], [' ', ' ', '#'], ['#', ' ', 'c']]`  \
+  **Explanation:** The word 'ca' can be placed horizontally from right to left in the third row.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate over each possible starting position in the matrix and check if the word can be placed both horizontally and vertically at that position while satisfying all constraints.
+
+### Initial Thoughts 💭
+- We need to check both horizontal and vertical placements of the word at each valid position in the matrix.
+- We can break down the problem by checking whether the word fits and adheres to the constraints at each possible position.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure the solution handles cases where the board has empty cells but is large in size.
+- Ensure the solution works efficiently for large boards with up to 2 * 10^5 cells.
+- Handle cases where the word is longer than the board dimensions (m or n).
+- Handle grids with only blocked cells or only empty cells.
+{{< dots >}}
+## Code 💻
+```cpp
+
+bool same(vector<char> &row, int start, int end, string &s) {
     
-    bool same(vector<char> &row, int start, int end, string &s) {
-        
-        if(end - start + 1 != s.size()) return false;
-        
-        int i = 0, n = s.size();
-        while(i < n && (row[start + i] == ' ' || row[start + i] == s[i])) {
-            i++;
-        }
-        if(i == n) return true;
-        i = 0;
-        while(i < n && (row[end - i] == ' ' || row[end - i] == s[i]))
-              i++;
-        if(i == n) return true;             
-             
-        return false;
-    }
+    if(end - start + 1 != s.size()) return false;
     
-    bool match(vector<vector<char>> &mtx, string &word) {
-        int n = mtx[0].size();
-        for(auto &row: mtx) {
-            for(int i = 0; i < n; ) {
-                int start;
-                while(i < n && row[i] == '#') i++;
-                start = i;
-                while(i < n && row[i] != '#') i++;
-                if(same(row, start, i - 1, word))
-                    return true;
-            }
-        }
-
-        return false;
+    int i = 0, n = s.size();
+    while(i < n && (row[start + i] == ' ' || row[start + i] == s[i])) {
+        i++;
     }
+    if(i == n) return true;
+    i = 0;
+    while(i < n && (row[end - i] == ' ' || row[end - i] == s[i]))
+          i++;
+    if(i == n) return true;             
+         
+    return false;
+}
+
+bool match(vector<vector<char>> &mtx, string &word) {
+    int n = mtx[0].size();
+    for(auto &row: mtx) {
+        for(int i = 0; i < n; ) {
+            int start;
+            while(i < n && row[i] == '#') i++;
+            start = i;
+            while(i < n && row[i] != '#') i++;
+            if(same(row, start, i - 1, word))
+                return true;
+        }
+    }
+
+    return false;
+}
+
+bool placeWordInCrossword(vector<vector<char>>& board, string word) {
+    int m = board.size(), n = board[0].size();
+    vector<vector<char>> trns(n, vector<char>(m));
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        trns[j][i] = board[i][j];
     
-    bool placeWordInCrossword(vector<vector<char>>& board, string word) {
-        int m = board.size(), n = board[0].size();
-        vector<vector<char>> trns(n, vector<char>(m));
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            trns[j][i] = board[i][j];
-        
-        return match(trns, word) || match(board, word);
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to determine whether a given word can be placed into a crossword puzzle represented by a board, adhering to certain constraints. The board is a grid of characters where empty spaces are represented by `' '` (spaces) and filled spaces by `'#'`. The word can be placed horizontally or vertically, and it must either fit entirely in the space without exceeding the boundaries or match the existing characters in the grid where it overlaps. Additionally, the placement should respect the following conditions:
-
-1. The word can replace spaces but cannot replace any filled characters.
-2. The word should fit entirely within a continuous sequence of spaces, or if it overlaps with existing letters, those letters must match the corresponding letters in the word.
-
-### Approach
-
-To solve this problem, we will follow a systematic approach:
-
-1. **Define Helper Functions**:
-   - A helper function `same()` that checks whether a given word can fit into a segment of the row, either starting from the beginning of that segment or from the end.
-   - A helper function `match()` that checks all rows (both horizontally and vertically) of the grid to see if the word can fit according to the rules defined above.
-
-2. **Transpose the Board**:
-   - Since the word can be placed horizontally or vertically, we will create a transposed version of the board. This allows us to check for potential placements without duplicating the logic for both orientations.
-
-3. **Check Each Orientation**:
-   - Use the `match()` function on both the original and transposed board to determine if the word can be placed in any valid configuration.
-
-4. **Return the Result**:
-   - If the word can be placed in either orientation, we return `true`; otherwise, we return `false`.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the code implementation:
-
-```cpp
-class Solution {
-public:
+    return match(trns, word) || match(board, word);
+}
 ```
-- We define a class `Solution` that contains all the necessary methods to solve the problem.
 
-```cpp
-    bool same(vector<char> &row, int start, int end, string &s) {
-```
-- The `same()` function checks if the word can fit into the given segment of the row defined by `start` and `end`.
+This function places a word into a crossword board, checking both row-wise and column-wise placements. It verifies whether the word can fit within the constraints of the board.
 
-```cpp
-        if(end - start + 1 != s.size()) return false;
-```
-- We first check if the length of the segment matches the length of the word. If not, we return `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool same(vector<char> &row, int start, int end, string &s) {
+	```
+	This defines the function `same`, which checks if a substring in the `row` matches the given string `s` with allowance for spaces.
 
-```cpp
-        int i = 0, n = s.size();
-        while(i < n && (row[start + i] == ' ' || row[start + i] == s[i])) {
-            i++;
-        }
-```
-- This loop checks from the start of the segment if each character matches the word's character or if it's an empty space. If we reach the end of the word, we return `true`.
+2. **Condition Check**
+	```cpp
+	    if(end - start + 1 != s.size()) return false;
+	```
+	This checks if the length of the substring from `start` to `end` is equal to the size of the string `s`. If not, it returns false.
 
-```cpp
-        if(i == n) return true;
-        i = 0;
-        while(i < n && (row[end - i] == ' ' || row[end - i] == s[i]))
-              i++;
-        if(i == n) return true;             
-             
-        return false;
-    }
-```
-- If we don't find a match from the start, we check from the end of the segment. If either check succeeds, we can place the word in that segment.
+3. **Variable Initialization**
+	```cpp
+	    int i = 0, n = s.size();
+	```
+	This initializes the loop counter `i` and stores the size of the string `s` in `n`.
 
-```cpp
-    bool match(vector<vector<char>> &mtx, string &word) {
-```
-- The `match()` function checks each row in the matrix `mtx` to see if the word can fit.
+4. **Loop for Matching from Start**
+	```cpp
+	    while(i < n && (row[start + i] == ' ' || row[start + i] == s[i])) {
+	```
+	This starts a loop that checks if each character in the substring starting from `start` matches the corresponding character in `s`, allowing for spaces.
 
-```cpp
-        int n = mtx[0].size();
-        for(auto &row: mtx) {
-            for(int i = 0; i < n; ) {
-```
-- We iterate through each row and process it to find segments of continuous spaces.
+5. **Increment Counter**
+	```cpp
+	        i++;
+	```
+	This increments the counter `i` to check the next character in the string and the row.
 
-```cpp
-                int start;
-                while(i < n && row[i] == '#') i++;
-                start = i;
-                while(i < n && row[i] != '#') i++;
-```
-- We skip over filled cells (`'#'`) and note the start of a segment of empty cells.
+6. **Matching Check**
+	```cpp
+	    if(i == n) return true;
+	```
+	If the entire string `s` has been matched, this returns true.
 
-```cpp
-                if(same(row, start, i - 1, word))
-                    return true;
-            }
-        }
-```
-- For each segment of empty cells found, we call the `same()` function to check if the word can fit. If it can, we return `true`.
+7. **Reset Loop Counter**
+	```cpp
+	    i = 0;
+	```
+	This resets the counter `i` to start the second matching attempt from the end of the substring.
 
-```cpp
-        return false;
-    }
-```
-- If no suitable segment is found in the current matrix, we return `false`.
+8. **Loop for Matching from End**
+	```cpp
+	    while(i < n && (row[end - i] == ' ' || row[end - i] == s[i]))
+	```
+	This starts a loop that checks if each character in the substring from `end` matches the corresponding character in `s`, allowing for spaces.
 
-```cpp
-    bool placeWordInCrossword(vector<vector<char>>& board, string word) {
-```
-- The main function `placeWordInCrossword` is defined to handle the overall logic of the word placement.
+9. **Increment Counter**
+	```cpp
+	          i++;
+	```
+	This increments the counter `i` to check the next character in the row and the string.
 
-```cpp
-        int m = board.size(), n = board[0].size();
-        vector<vector<char>> trns(n, vector<char>(m));
-```
-- We determine the size of the board and create a transposed matrix `trns` to check vertical placements.
+10. **Matching Check**
+	```cpp
+	    if(i == n) return true;             
+	```
+	If the entire string `s` is matched in the reverse direction, this returns true.
 
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            trns[j][i] = board[i][j];
-```
-- The nested loop fills the transposed matrix with the corresponding values from the original board.
+11. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If neither the forward nor reverse match succeeds, it returns false.
 
-```cpp
-        return match(trns, word) || match(board, word);
-    }
-};
-```
-- Finally, we check both the transposed and the original board for a valid placement of the word and return the result.
+12. **Function Definition**
+	```cpp
+	bool match(vector<vector<char>> &mtx, string &word) {
+	```
+	This defines the function `match`, which checks whether a word can be placed on the given 2D matrix (either horizontally or vertically).
 
-### Complexity
+13. **Grid Size Calculation**
+	```cpp
+	    int n = mtx[0].size();
+	```
+	This calculates the number of columns in the matrix `mtx`, which will be used as the upper bound for column-wise iteration.
 
-The time complexity of this solution is O(m * n), where m is the number of rows and n is the number of columns in the board. This is because we need to traverse each cell in the board for checking valid placements. The space complexity is O(m * n) for the transposed board.
+14. **Matrix Iteration**
+	```cpp
+	    for(auto &row: mtx) {
+	```
+	This iterates over each row of the matrix `mtx`.
 
-### Conclusion
+15. **Column Iteration**
+	```cpp
+	        for(int i = 0; i < n; ) {
+	```
+	This iterates through the columns in the row.
 
-In conclusion, this implementation effectively determines if a word can be placed in a crossword board by leveraging helper functions for clarity and efficiency. The approach of transposing the board allows us to use the same logic for both horizontal and vertical placements without duplicating code.
+16. **Start of Substring**
+	```cpp
+	            int start;
+	```
+	This declares a variable `start` to store the starting index of the substring in the row.
 
-This solution not only handles the core functionality required but also adheres to best practices by maintaining clear separation of concerns with helper methods. Such techniques are valuable in real-world applications, especially in scenarios involving grid manipulations and word placements, such as in puzzles, games, or layout designs.
+17. **Skip '#' Characters**
+	```cpp
+	            while(i < n && row[i] == '#') i++;
+	```
+	This skips any `#` characters in the row.
 
-By encapsulating the placement logic within well-defined functions, we enhance the readability and maintainability of the code, making it easier to extend or modify in the future if needed. This is a great example of how a systematic approach can lead to elegant solutions in programming challenges.
+18. **Record Start Position**
+	```cpp
+	            start = i;
+	```
+	This sets `start` to the current index `i` where the word could potentially start.
+
+19. **Skip Non- '#' Characters**
+	```cpp
+	            while(i < n && row[i] != '#') i++;
+	```
+	This skips any non-`#` characters in the row, as they mark the end of a potential word placement.
+
+20. **Match Check**
+	```cpp
+	            if(same(row, start, i - 1, word))
+	```
+	This calls the `same` function to check if the substring from `start` to `i-1` matches the given word.
+
+21. **Return Result**
+	```cpp
+	                return true;
+	```
+	If a match is found, it immediately returns `true`.
+
+22. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If no match is found after processing all rows, it returns `false`.
+
+23. **Main Function**
+	```cpp
+	bool placeWordInCrossword(vector<vector<char>>& board, string word) {
+	```
+	This defines the main function `placeWordInCrossword`, which calls the `match` function for both the original and transposed board.
+
+24. **Matrix Transposition**
+	```cpp
+	    vector<vector<char>> trns(n, vector<char>(m));
+	```
+	This initializes a transposed version of the matrix `board`.
+
+25. **Transpose Logic**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	    for(int j = 0; j < n; j++)
+	        trns[j][i] = board[i][j];
+	```
+	This transposes the matrix `board` to facilitate checking column-wise word placements.
+
+26. **Final Match Check**
+	```cpp
+	    return match(trns, word) || match(board, word);
+	```
+	This checks if the word can be placed in either the transposed or original matrix.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+We need to check each cell in the board for possible placements of the word.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only need a few variables to track the word placements and their validity.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/description/)
 

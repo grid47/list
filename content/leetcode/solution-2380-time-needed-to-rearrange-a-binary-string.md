@@ -14,116 +14,175 @@ img_src = ""
 youtube = "fP5kg4ETjUc"
 youtube_upload_date="2022-08-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/fP5kg4ETjUc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string `s`. In one second, all occurrences of the substring '01' are simultaneously replaced with '10'. This process repeats until no occurrences of '01' exist in the string. The task is to return the number of seconds required to complete this process.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary string `s` where each character is either '0' or '1'.
+- **Example:** `s = '0101011'`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s[i] is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int secondsToRemoveOccurrences(string s) {
-        int seconds = 0;
-        bool changed = true;
-        while(changed) {
-            changed = false;
-            for(int i = 0; i < s.size() - 1; i++) {
-                if(s[i] == '0' && s[i + 1] == '1') {
-                    swap(s[i], s[i + 1]);
-                    changed = true;
-                    i++;
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of seconds required to ensure that no occurrences of '01' exist in the string.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to simulate the process of replacing all occurrences of '01' with '10' and count the number of seconds until no such occurrences remain.
+
+- 1. Traverse the string and look for occurrences of '01'.
+- 2. Swap every occurrence of '01' to '10'.
+- 3. Count each second where at least one swap occurs.
+- 4. Repeat until no '01' substrings remain in the string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is valid and consists only of '0' and '1'.
+- The number of operations will not exceed the time limit for strings of length up to 1000.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = '0101011'`  \
+  **Explanation:** After one second, the string becomes '1010110'. After another second, it becomes '1101100'. Finally, after the third second, the string becomes '1111000'. The process requires 3 seconds in total.
+
+- **Input:** `Input: s = '11100'`  \
+  **Explanation:** No occurrence of '01' exists in the string, so no swaps are needed, and the process takes 0 seconds.
+
+{{< dots >}}
+## Approach 🚀
+We can simulate the process of replacing all occurrences of '01' with '10' using a loop. After each iteration, we count the number of swaps that occurred and repeat the process until no more '01' substrings are found.
+
+### Initial Thoughts 💭
+- This problem involves repetitive operations on a string, making it suitable for simulation.
+- We can solve the problem efficiently by counting the occurrences of '01' in each iteration and performing swaps until no occurrences are left.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will never be empty.
+- For large strings, ensure that the solution is optimized to avoid unnecessary recomputations.
+- If the string already contains no '01' substrings, the answer will be 0.
+- Ensure the solution can handle strings of length up to 1000 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int secondsToRemoveOccurrences(string s) {
+    int seconds = 0;
+    bool changed = true;
+    while(changed) {
+        changed = false;
+        for(int i = 0; i < s.size() - 1; i++) {
+            if(s[i] == '0' && s[i + 1] == '1') {
+                swap(s[i], s[i + 1]);
+                changed = true;
+                i++;
             }
-            seconds += changed;
         }
-        return seconds;
+        seconds += changed;
     }
-};
-{{< /highlight >}}
----
+    return seconds;
+}
+```
 
-### Problem Statement
+This function counts the minimum number of seconds required to remove all occurrences of '01' in the string `s`. In each second, all consecutive '01' pairs are swapped to '10', and the process continues until no more swaps are possible.
 
-The problem requires us to determine the minimum number of seconds required to remove all occurrences of the string "01" in a given binary string `s`. The string consists of only `'0'` and `'1'` characters. In one second, you can remove one occurrence of "01" by swapping the `'0'` and `'1'`. The goal is to repeatedly perform this operation until no more "01" pairs exist in the string.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int secondsToRemoveOccurrences(string s) {
+	```
+	Defines the function `secondsToRemoveOccurrences` that takes a string `s` containing '0' and '1' characters. The function returns the number of seconds needed to remove all occurrences of '01' by swapping them into '10'.
 
-For example:
-- For `s = "0110101"`, the output would be `4`.
-- For `s = "111"`, the output would be `0`, as there are no "01" pairs to remove.
+2. **Variable Initialization**
+	```cpp
+	    int seconds = 0;
+	```
+	Initializes the `seconds` variable to track the number of seconds (or iterations) taken to remove all '01' pairs in the string `s`.
 
-The challenge is to calculate the number of seconds it will take to remove all such "01" pairs using the fewest steps possible.
+3. **Flag Initialization**
+	```cpp
+	    bool changed = true;
+	```
+	Initializes the `changed` flag to `true` to start the while loop, which will continue iterating as long as there are swaps performed.
 
-### Approach
+4. **While Loop Start**
+	```cpp
+	    while(changed) {
+	```
+	Starts the `while` loop that continues as long as any swap occurs in the current iteration (i.e., as long as `changed` is `true`).
 
-To solve this problem, we use a **greedy approach** combined with **simulation**. The key observation is that each second we can swap one occurrence of the pair "01" to become "10". By swapping, we reduce the number of "01" occurrences, but after each swap, a new configuration is created, which could introduce new "01" pairs that were not previously present.
+5. **Flag Reset**
+	```cpp
+	        changed = false;
+	```
+	Resets the `changed` flag to `false` at the beginning of each iteration to track whether any swap happens in this cycle.
 
-#### Key Steps:
-1. **Track Changes**: We need to iterate over the string and identify all instances of the pair "01". Every time such a pair is found, we swap them to create "10" and mark that the string has changed.
-2. **Repeat Until No Changes**: Once a swap is made, we need to continue checking the string to see if further swaps can be performed. This process continues until no more swaps can be made.
-3. **Count the Seconds**: Each time we find and swap a "01" pair, it counts as one second. We keep track of the total number of seconds taken to perform all the swaps.
+6. **For Loop Start**
+	```cpp
+	        for(int i = 0; i < s.size() - 1; i++) {
+	```
+	Starts a for loop to iterate over each character in the string `s`, up to the second-to-last character, checking for '01' pairs.
 
-### Code Breakdown (Step by Step)
+7. **Condition Check for '01' Pair**
+	```cpp
+	            if(s[i] == '0' && s[i + 1] == '1') {
+	```
+	Checks if the current character `s[i]` is '0' and the next character `s[i + 1]` is '1', indicating a '01' pair that can be swapped.
 
-1. **Class Definition**:
-    ```cpp
-    class Solution {
-    public:
-        int secondsToRemoveOccurrences(string s) {
-    ```
-    - The method `secondsToRemoveOccurrences` is defined inside the `Solution` class. This method takes a string `s` as input and returns an integer representing the number of seconds required to remove all "01" pairs.
+8. **Swap '01' to '10'**
+	```cpp
+	                swap(s[i], s[i + 1]);
+	```
+	Swaps the '0' and '1' characters in the pair, changing '01' to '10'.
 
-2. **Initialization**:
-    ```cpp
-        int seconds = 0;
-        bool changed = true;
-    ```
-    - `seconds` keeps track of the number of seconds (or swaps) that have been made.
-    - `changed` is a flag that determines whether any swaps were made in the current iteration of the loop. Initially, it's set to `true` to ensure the loop runs at least once.
+9. **Flag Set**
+	```cpp
+	                changed = true;
+	```
+	Sets the `changed` flag to `true` to indicate that a swap has been performed, and another iteration will be needed.
 
-3. **Main Loop**:
-    ```cpp
-        while(changed) {
-            changed = false;
-            for(int i = 0; i < s.size() - 1; i++) {
-                if(s[i] == '0' && s[i + 1] == '1') {
-                    swap(s[i], s[i + 1]);
-                    changed = true;
-                    i++;
-                }
-            }
-            seconds += changed;
-        }
-    ```
-    - The `while(changed)` loop continues as long as any swaps occur in the current iteration.
-    - Within the loop, we initialize `changed = false` to track if any swaps occur during this iteration. If no swaps are made during a full pass, the loop will terminate.
-    - The `for` loop iterates over the string (up to `s.size() - 1` to avoid accessing out-of-bounds elements). It checks for occurrences of the pair "01".
-    - When a "01" pair is found, we perform a swap to change it to "10", set `changed = true` to indicate that a swap occurred, and increment `i` by 1 to skip checking the next adjacent pair (as the swapped "1" will not participate in a further swap).
-    - The `seconds += changed;` statement adds 1 second to the count if any swap was made during this iteration.
+10. **Skip Next Character**
+	```cpp
+	                i++;
+	```
+	Increments `i` by an extra step to skip the next character, as it has already been swapped and does not need to be checked again in this cycle.
 
-4. **Return the Result**:
-    ```cpp
-        return seconds;
-    }
-    ```
-    - Once the loop ends (no more swaps are possible), the method returns the total number of seconds it took to remove all occurrences of "01".
+11. **Increment Seconds**
+	```cpp
+	        seconds += changed;
+	```
+	If any swap was made during the current iteration, the `seconds` counter is incremented by 1.
 
-### Complexity
+12. **Return Result**
+	```cpp
+	    return seconds;
+	```
+	Returns the total number of seconds (iterations) taken to remove all '01' pairs in the string.
 
-1. **Time Complexity**:
-    - The time complexity of this solution is **O(n)**, where `n` is the length of the string `s`. The reason for this is that in each iteration of the `while` loop, we are making a single pass over the string (with at most one swap per iteration), and this pass can be done in linear time. The number of iterations is at most `n` because in each iteration, we can remove one "01" pair, reducing the string size effectively.
-    - Thus, the overall time complexity is linear with respect to the length of the string.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Space Complexity**:
-    - The space complexity of the solution is **O(1)**, as we are only using a constant amount of extra space (the variables `seconds`, `changed`, and `i`). The string `s` is modified in place, so no additional space is required for storage.
+The time complexity remains O(n) even in the worst case, as each pass through the string only requires linear time to detect and replace occurrences of '01'.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution uses a **greedy approach** combined with **simulation** to determine the minimum number of seconds required to remove all "01" pairs from the binary string `s`. The idea of repeatedly scanning the string and performing swaps ensures that each operation reduces the number of "01" pairs in the string, and the process continues until no more swaps can be made.
+The space complexity is O(1) because we are modifying the string in place and using only a few extra variables for counting and controlling the loop.
 
-The algorithm is efficient with a time complexity of **O(n)**, where `n` is the length of the input string, which makes it suitable for large inputs. The space complexity is **O(1)**, making it memory efficient as well. By keeping track of changes during each iteration and counting the number of swaps, the solution efficiently solves the problem with minimal overhead.
+**Happy Coding! 🎉**
 
-This approach is simple and intuitive, leveraging basic string operations and the sliding window technique to handle the problem efficiently. It's a great example of how greedy algorithms can be used in combination with simulation to solve real-world problems involving sequence manipulation.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/time-needed-to-rearrange-a-binary-string/description/)
 

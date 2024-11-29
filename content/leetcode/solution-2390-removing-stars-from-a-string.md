@@ -14,112 +14,138 @@ img_src = ""
 youtube = "Qln1aXh2kvQ"
 youtube_upload_date="2023-04-11"
 youtube_thumbnail="https://i.ytimg.com/vi/Qln1aXh2kvQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` that contains lowercase English letters and stars (`*`). In each operation, you can choose a star in `s`, remove the closest non-star character to its left, and remove the star itself. Perform this operation until all stars are removed and return the resulting string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` that contains lowercase English letters and stars (`*`).
+- **Example:** `Input: s = 'abc*def*gh*'`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists of lowercase English letters and stars `*`.
+	- The operation above can be performed on s.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string removeStars(string s) {
-        int j = 0;
-        for(int i = 0; i < s.size(); i++) {
-            if(s[i] != '*') s[j++] = s[i];
-            else {
-                j--;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the string after all stars have been removed by performing the operation as described.
+- **Example:** `Output: 'abgh'`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove the closest character to each star from left to right until all stars are removed.
+
+- 1. Traverse the string and for each star, remove the closest non-star character to its left.
+- 2. After each removal, adjust the string accordingly and continue the operation.
+- 3. Repeat the process until all stars are removed.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will always be a non-star character to remove before each star.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'abc*def*gh*'`  \
+  **Explanation:** In the first operation, remove 'c' before the first star, resulting in 'ab*def*gh*'. Then remove 'f' before the second star, resulting in 'abdef*gh*'. Finally, remove 'g' before the last star, leaving 'abgh'.
+
+- **Input:** `Input: s = 'abc*****'`  \
+  **Explanation:** In this case, all characters are removed sequentially one by one before each star, resulting in an empty string.
+
+{{< dots >}}
+## Approach 🚀
+We will iterate through the string, maintain a pointer for the current position, and simulate the removal of the closest characters before each star.
+
+### Initial Thoughts 💭
+- We need to efficiently track the position of each star and remove the correct character from left to right.
+- A stack-like approach would be useful to track the characters as we traverse through the string. When encountering a star, we can pop the last added character.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input string is empty, return an empty string.
+- Ensure the solution can handle the maximum input size efficiently (up to 100,000 characters).
+- Handle cases where stars are placed at the beginning or end of the string.
+- Make sure the solution works within the time limits for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+string removeStars(string s) {
+    int j = 0;
+    for(int i = 0; i < s.size(); i++) {
+        if(s[i] != '*') s[j++] = s[i];
+        else {
+            j--;
         }
-        return s.substr(0, j);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given a string `s` that may contain asterisks (`*`). Each asterisk in the string indicates the need to remove the previous character in the string. You are tasked with removing characters according to this rule and returning the resulting string. If an asterisk appears at the beginning of the string or after another asterisk, it should be ignored because there is no character to remove.
-
-For example:
-- Input: `"leet**cod*e"`
-- Output: `"lecoe"`
-
-The challenge is to process the string and efficiently remove characters based on the asterisk rules.
-
-### Approach
-
-To solve this problem efficiently, we need to traverse the string and handle each character depending on whether it is an asterisk or a regular character. The main idea is to maintain a pointer or an index (`j`) that will track where the characters in the final string will go.
-
-1. **Iterate Through the String**: We loop through the string character by character.
-2. **Character Handling**: 
-   - If the current character is not an asterisk (`*`), we add it to the result at the position tracked by `j` and then increment `j`.
-   - If the current character is an asterisk, we decrement `j`, effectively removing the last valid character added to the result (since the asterisk indicates that the previous character should be deleted).
-3. **Construct the Final String**: After processing all characters in the string, the first `j` characters of the string will form the final result.
-
-This approach ensures that we traverse the string only once, making the solution both time and space efficient.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the Index Tracker
-The first thing we do in the function is initialize a variable `j` to 0. This variable will act as a pointer that tracks where we should insert the next character in the result string.
-
-```cpp
-int j = 0;
-```
-
-#### Step 2: Iterate Through the String
-Next, we loop over each character in the string `s` using a `for` loop. The loop runs from `i = 0` to `i < s.size()`, where `i` is the index of the current character.
-
-```cpp
-for(int i = 0; i < s.size(); i++) {
-```
-
-#### Step 3: Handle Non-Asterisk Characters
-Inside the loop, we check if the current character `s[i]` is not an asterisk (`*`). If it is not an asterisk, we insert the character at the position `j` in the string and then increment `j`.
-
-```cpp
-if(s[i] != '*') s[j++] = s[i];
-```
-
-Here, `s[j++] = s[i]` means we store `s[i]` at the index `j` and then increment `j`. This allows us to build the resultant string by overwriting characters in the string `s`.
-
-#### Step 4: Handle Asterisk Characters
-If the current character is an asterisk (`*`), we need to "remove" the previous character by decrementing the `j` index. This indicates that the last valid character added to the result should be erased.
-
-```cpp
-else {
-    j--;
+    return s.substr(0, j);
 }
 ```
 
-By decrementing `j`, we essentially "undo" the last valid character insertion, simulating the removal of the character before the asterisk.
+This function removes all '*' characters from the input string `s`, handling the removal by using a pointer `j` that tracks the position of the remaining valid characters.
 
-#### Step 5: Construct the Final String
-After processing all the characters in the string, we now need to return the result. The final string will consist of the first `j` characters of the string `s`, which we obtain using `substr(0, j)`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string removeStars(string s) {
+	```
+	Function declaration that takes a string `s` and returns a modified string with all '*' characters removed.
 
-```cpp
-return s.substr(0, j);
-```
+2. **Variable Initialization**
+	```cpp
+	    int j = 0;
+	```
+	Initialize an integer `j` to track the position where valid characters should be placed in the string.
 
-This returns a substring of `s` from index 0 to `j`, which contains the valid characters after all asterisks have been processed.
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Loop through the string `s`, from the beginning to the end, using `i` as the index.
 
-### Complexity
+4. **Character Check**
+	```cpp
+	        if(s[i] != '*') s[j++] = s[i];
+	```
+	If the current character is not '*', copy it to the position `j` and increment `j` to the next valid position.
 
-#### Time Complexity
-The time complexity of this algorithm is **O(n)**, where `n` is the length of the string `s`. This is because we iterate through the string exactly once, performing constant-time operations (character comparisons and assignments) for each character in the string.
+5. **Star Removal**
+	```cpp
+	        else {
+	```
+	If the current character is a '*', enter the else block to handle its removal.
 
-#### Space Complexity
-The space complexity of this solution is **O(1)**, meaning the algorithm uses constant extra space. We only use a single variable `j` to track the position of the result string, and we modify the input string `s` in-place (without requiring additional storage for a result string).
+6. **Pointer Adjustment**
+	```cpp
+	            j--;
+	```
+	Decrement `j` to overwrite the last valid character, effectively removing the '*' character.
 
-### Conclusion
+7. **Return Substring**
+	```cpp
+	    return s.substr(0, j);
+	```
+	Return the modified string by extracting the substring from the beginning up to the position `j`, which contains all valid characters.
 
-This solution efficiently solves the problem of removing characters based on asterisk rules with a single pass through the string. By maintaining a pointer `j` to track the position of the result string and modifying the string `s` in-place, we avoid the need for additional space and ensure the solution is optimal in terms of both time and space complexity.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of the string.
+- **Average Case:** O(n) where n is the length of the string.
+- **Worst Case:** O(n) where n is the length of the string.
 
-The key to solving this problem lies in recognizing that each asterisk simply undoes the last character added to the result, and by iterating through the string and maintaining this rule, we can construct the final string without needing to repeatedly modify or rebuild the string from scratch.
+The algorithm processes each character exactly once, resulting in a time complexity of O(n).
 
-The simplicity and efficiency of this solution make it an ideal approach for this problem, ensuring it works well even for long strings. The linear time complexity ensures that the solution scales well with input size, while the constant space complexity guarantees minimal memory usage.
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the intermediate results in the stack.
+- **Worst Case:** O(n) for storing the intermediate results in the stack.
+
+The space complexity is O(n) due to the storage needed for the stack that holds the resulting characters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/removing-stars-from-a-string/description/)
 

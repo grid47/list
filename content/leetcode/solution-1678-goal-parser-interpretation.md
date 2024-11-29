@@ -14,133 +14,175 @@ img_src = ""
 youtube = "l-w3i4_PNUw"
 youtube_upload_date="2020-12-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/l-w3i4_PNUw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `command` consisting of the characters 'G', '()', and '(al)' in some order. The Goal Parser interprets the following patterns: 'G' as the string 'G', '()' as the string 'o', and '(al)' as the string 'al'. Return the interpreted string after replacing all instances of '()', '(al)', and 'G' according to the above rules.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `command` that can contain the characters 'G', '()', and '(al)'.
+- **Example:** `command = 'G()(al)'`
+- **Constraints:**
+	- 1 <= command.length <= 100
+	- command consists of 'G', '()', and/or '(al)' in some order.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string interpret(string command) {
-        string result= "";
-        for(int i=0; i<command.size(); i++)
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the interpreted string after replacing '()', '(al)', and 'G' according to the specified rules.
+- **Example:** `Output: 'Goal'`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to convert the input string into a new string based on the specified patterns.
+
+- Iterate through the input string `command` and check each character or sequence of characters.
+- If 'G' is encountered, append 'G' to the result.
+- If '()' is encountered, append 'o' to the result.
+- If '(al)' is encountered, append 'al' to the result.
+- Return the concatenated result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `command` will always be valid and will follow the given structure.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: command = 'G()(al)'`  \
+  **Explanation:** The Goal Parser interprets 'G' as 'G', '()' as 'o', and '(al)' as 'al', resulting in the concatenated string 'Goal'.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to scan through the input string `command`, identify the patterns, and replace them with their corresponding interpretations.
+
+### Initial Thoughts 💭
+- The string can be interpreted by scanning for specific patterns ('G', '()', and '(al)').
+- We can use a loop to iterate through the string and handle the patterns accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always have at least one character.
+- The input size will not exceed 100 characters, so performance concerns are minimal.
+- There are no special values other than the given patterns 'G', '()', and '(al)'.
+- The input string will always consist of valid characters.
+{{< dots >}}
+## Code 💻
+```cpp
+string interpret(string command) {
+    string result= "";
+    for(int i=0; i<command.size(); i++)
+    {
+        if(command[i] == '(')
         {
-            if(command[i] == '(')
+            if(command[i+1] == ')')
+                result += "o";
+            if(command[i+1] == 'a' && command[i+2] == 'l')
             {
-                if(command[i+1] == ')')
-                    result += "o";
-                if(command[i+1] == 'a' && command[i+2] == 'l')
-                {
-                    result += "al";
-                    i += 2;
-                }
+                result += "al";
+                i += 2;
             }
-            if(command[i] == 'G')
-                result += "G";
         }
-        return result;
+        if(command[i] == 'G')
+            result += "G";
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand requires us to interpret a command string that consists of specific patterns representing characters. The input string can contain:
-
-- The letter 'G' which remains 'G'.
-- The sequence "()" which translates to 'o'.
-- The sequence "(al)" which translates to 'al'.
-
-The goal is to parse the command string and construct the output string based on these rules.
-
-### Approach
-
-To solve this problem, we can employ a straightforward character iteration technique. We will loop through each character of the input string, checking for specific sequences and building the result string accordingly. The process involves:
-
-1. **Initialization**: Start with an empty result string to accumulate the interpreted characters.
-2. **Character Traversal**: Iterate through the command string character by character.
-3. **Pattern Matching**: 
-   - When encountering 'G', simply add 'G' to the result.
-   - When encountering '(', check the next characters:
-     - If the next character is ')', append 'o' to the result and move the index forward.
-     - If the next characters are 'a' followed by 'l', append 'al' to the result and adjust the index accordingly.
-4. **Return the Result**: After processing the entire string, return the constructed result.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the implementation:
-
-```cpp
-class Solution {
-public:
-    string interpret(string command) {
-        string result = "";
+    return result;
+}
 ```
-- **Class Definition**: We define a class `Solution` and create a public method `interpret`, which accepts a string parameter `command`.
-- **Initialization**: A string `result` is initialized as an empty string to accumulate the interpreted output.
 
-```cpp
-        for(int i = 0; i < command.size(); i++) {
-```
-- **Iteration**: We start a loop that goes through each character of the `command` string using an integer index `i`.
+This function interprets a given command string by transforming specific patterns such as '()', 'al', and 'G'. It returns the modified string based on these transformations.
 
-```cpp
-            if(command[i] == '(') {
-```
-- **Check for Opening Parenthesis**: Inside the loop, we check if the current character is an opening parenthesis '('.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string interpret(string command) {
+	```
+	Define the function 'interpret' that takes a string 'command' as input and returns a modified string.
 
-```cpp
-                if(command[i + 1] == ')')
-                    result += "o";
-```
-- **Check for Closing Parenthesis**: If the next character is a closing parenthesis ')', we append 'o' to the `result`.
+2. **Variable Initialization**
+	```cpp
+	    string result= "";
+	```
+	Initialize an empty string 'result' to store the final modified output.
 
-```cpp
-                if(command[i + 1] == 'a' && command[i + 2] == 'l') {
-                    result += "al";
-                    i += 2;
-                }
-```
-- **Check for "al" Sequence**: If the next character is 'a' and the following one is 'l', we append 'al' to the `result` and increment the index `i` by 2 to skip over the 'a' and 'l' characters, since they have been processed.
+3. **Loop Setup**
+	```cpp
+	    for(int i=0; i<command.size(); i++)
+	```
+	Start a loop to iterate over each character in the input string 'command'.
 
-```cpp
-            }
-            if(command[i] == 'G')
-                result += "G";
-```
-- **Direct Addition of 'G'**: Outside the parentheses condition, we check if the current character is 'G'. If it is, we add 'G' directly to the `result`.
+4. **Condition Check**
+	```cpp
+	        if(command[i] == '(')
+	```
+	Check if the current character is an opening parenthesis '(' to begin interpreting a command.
 
-```cpp
-        }
-        return result;
-    }
-};
-```
-- **Completion**: After the loop has processed all characters in the `command`, we return the `result` string containing the fully interpreted command.
+5. **Condition Check**
+	```cpp
+	            if(command[i+1] == ')')
+	```
+	Check if the next character is a closing parenthesis ')'. If so, it represents '()' and we append 'o' to the result.
 
-### Complexity
+6. **String Manipulation**
+	```cpp
+	                result += "o";
+	```
+	Append 'o' to the 'result' string when encountering the '()' pattern.
 
-- **Time Complexity**: The time complexity of this solution is \( O(n) \), where \( n \) is the length of the `command` string. We traverse the string once, and for each character, we perform a constant amount of work.
-  
-- **Space Complexity**: The space complexity is also \( O(n) \) in the worst case, as the result string could potentially grow to the same size as the input string in scenarios where there are no parentheses.
+7. **Condition Check**
+	```cpp
+	            if(command[i+1] == 'a' && command[i+2] == 'l')
+	```
+	Check if the characters after '(' are 'al'. If so, append 'al' to the result and skip the next two characters.
 
-### Conclusion
+8. **String Manipulation**
+	```cpp
+	                result += "al";
+	```
+	Append 'al' to the 'result' string when encountering the '(al)' pattern.
 
-This solution effectively interprets the given command string based on defined patterns through a single pass iteration, making it both efficient and straightforward. 
+9. **Variable Update**
+	```cpp
+	                i += 2;
+	```
+	Skip the next two characters ('a' and 'l') after processing the '(al)' pattern.
 
-The key points of this implementation include:
+10. **Condition Check**
+	```cpp
+	        if(command[i] == 'G')
+	```
+	Check if the current character is 'G'. If so, append 'G' to the result.
 
-1. **Simplicity**: The logic is clear and easy to follow. It leverages simple conditions to determine how to process different parts of the string.
-  
-2. **Efficiency**: The use of a single loop ensures that we handle each character of the input string in linear time, which is optimal for this problem.
+11. **String Manipulation**
+	```cpp
+	            result += "G";
+	```
+	Append 'G' to the 'result' string when encountering the 'G' character.
 
-3. **Scalability**: The approach is robust enough to handle variations in the command string length, maintaining performance as the size increases.
+12. **Return Statement**
+	```cpp
+	    return result;
+	```
+	Return the final modified string 'result'.
 
-Overall, the code provides a clear and effective solution to interpreting a formatted command string, ensuring that it adheres to the specified translation rules while maintaining clarity and efficiency in its execution.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The algorithm iterates through the string once, processing each character or sequence in constant time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space used to store the resulting string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/goal-parser-interpretation/description/)
 

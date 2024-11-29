@@ -14,162 +14,179 @@ img_src = ""
 youtube = "RWQ8Q_ID23c"
 youtube_upload_date="2024-05-26"
 youtube_thumbnail="https://i.ytimg.com/vi/RWQ8Q_ID23c/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `word`. Compress the string using the following algorithm:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string compressedString(string word) {
-        
-        int i = 0, n = word.size();
-        char cur;
-        
-        string res = "";
-        while(i < n) {
-            int cnt = 0;
-            cur = word[i];
-            while(i < n && cnt < 9 && cur == word[i])
-                cnt++, i++;
-            res += to_string(cnt) + cur;
-        }
-        return res;
-        
+Begin with an empty string `comp`. While `word` is not empty, perform the following operation:
+1. Remove the longest prefix from `word` that consists of the same character repeating up to 9 times.
+2. Append the length of this prefix followed by the character to `comp`.
+Return the resulting string `comp`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `word` that contains only lowercase English letters.
+- **Example:** `Example 1:
+Input: word = "xyz"
+Output: "1x1y1z"`
+- **Constraints:**
+	- 1 <= word.length <= 2 * 10^5
+	- word consists only of lowercase English letters.
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the string `comp` which is the compressed version of the input string `word`.
+- **Example:** `Example 1:
+Input: word = "xyz"
+Output: "1x1y1z"`
+- **Constraints:**
+	- The output will be a string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compress the string by iterating through it, identifying prefixes, and appending their length and character to the result.
+
+- Initialize an empty string `comp`.
+- Iterate through the string `word`.
+- For each group of consecutive identical characters (up to 9), append the length of the group followed by the character to `comp`.
+- Return the resulting compressed string `comp`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will not be empty.
+- The input string contains only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** For `word = "xyz"`, since there are no repeating characters, each character is treated as a separate group of length 1. Hence, the output is `"1x1y1z"`.
+
+- **Input:** `Example 2:`  \
+  **Explanation:** For `word = "aaaaaaaaaaaaaabb"`, we compress the string by grouping consecutive 'a's and 'b's. The first group has 9 'a's, the second has 5 'a's, and the last group has 2 'b's. Thus, the output is `"9a5a2b"`.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate over the string, count the consecutive identical characters, and append the count and character to the result string. Continue this process until the entire string is compressed.
+
+### Initial Thoughts 💭
+- We need to ensure that we correctly handle sequences of repeated characters, especially those that repeat more than 9 times.
+- By iterating over the string and counting consecutive characters, we can easily build the compressed string.
+{{< dots >}}
+### Edge Cases 🌐
+- There will never be an empty string as input.
+- The solution should handle strings with lengths up to 200,000 efficiently.
+- Ensure the solution works with strings that have many repeated characters (e.g., 'aaaaaaaaaaaaaaaaaaaaaaaaaaa').
+- Ensure that the solution works within time and space constraints for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+string compressedString(string word) {
+    
+    int i = 0, n = word.size();
+    char cur;
+    
+    string res = "";
+    while(i < n) {
+        int cnt = 0;
+        cur = word[i];
+        while(i < n && cnt < 9 && cur == word[i])
+            cnt++, i++;
+        res += to_string(cnt) + cur;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to compress a given string `word` by reducing sequences of the same character into a substring that consists of the character followed by the number of its consecutive occurrences. The maximum number of consecutive characters to be represented is 9. If a character appears more than 9 times consecutively, it will still be compressed into a maximum of 9 occurrences followed by the character.
-
-For example:
-- Input: `"aaabbbccccc"`
-- Output: `"3a3b5c"`
-
-The goal of the algorithm is to implement an efficient solution that produces this compressed version of the input string `word`.
-
-### Approach
-
-To solve this problem, we can utilize the following approach:
-1. **Iterate through the String**: We start by iterating through the string `word` to check for consecutive occurrences of each character.
-2. **Count Consecutive Characters**: As we go through the string, we maintain a count of consecutive occurrences of each character. Every time the character changes, we append the count and the character to the result string.
-3. **Handle Edge Cases**: For sequences of characters that appear more than 9 times, the count should be capped at 9 as per the problem statement.
-4. **Return the Result**: After iterating through the entire string, we return the resultant compressed string.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code step by step:
-
-1. **Initialize Variables**:
-   - `i`: The index that keeps track of our current position in the string `word`.
-   - `n`: The size of the input string `word`.
-   - `cur`: A variable that stores the current character we are processing.
-   - `res`: The result string that will contain the compressed version of the input string.
-
-   ```cpp
-   int i = 0, n = word.size();
-   char cur;
-   string res = "";
-   ```
-
-2. **Iterate Over the String**:
-   - The main logic of the function revolves around iterating through the string to count consecutive occurrences of characters.
-   - We use a `while` loop, which continues until `i` reaches the end of the string (i.e., `i < n`).
-
-   ```cpp
-   while (i < n) {
-   ```
-
-3. **Count Consecutive Characters**:
-   - For each character in the string, we initialize `cnt` to 0, which will store the count of consecutive occurrences of the current character `cur`.
-   - We then use another `while` loop to increment the count of `cnt` while the current character `cur` is equal to the next character and `cnt` is less than 9. This ensures that we do not exceed 9 consecutive occurrences for any character.
-
-   ```cpp
-   int cnt = 0;
-   cur = word[i];
-   while (i < n && cnt < 9 && cur == word[i])
-       cnt++, i++;
-   ```
-
-   Here, the inner loop continues as long as:
-   - We haven't reached the end of the string (`i < n`).
-   - The character at the current index is the same as the character `cur`.
-   - The count `cnt` is less than 9 (to prevent counting more than 9 occurrences).
-
-4. **Update the Result**:
-   - Once the inner loop finishes (i.e., we’ve counted the consecutive occurrences of `cur`), we add the count and the character to the result string `res`.
-   - We use the `to_string(cnt)` function to convert the count (an integer) into a string and concatenate it with the character `cur`.
-
-   ```cpp
-   res += to_string(cnt) + cur;
-   ```
-
-   The result string `res` gradually builds up with each character and its corresponding count of consecutive occurrences.
-
-5. **Return the Compressed String**:
-   - After the main loop has processed all characters in the string, we return the `res` string, which contains the compressed version of the input string.
-
-   ```cpp
-   return res;
-   ```
-
-### Example Walkthrough
-
-Let's walk through an example to see how the function works:
-
-#### Input:
-```cpp
-string word = "aaabbbccccc";
+    return res;
+    
+}
 ```
 
-#### Process:
+This function 'compressedString' compresses a given string by counting consecutive occurrences of characters, appending the count followed by the character to the result string.
 
-1. **Initial Setup**:
-   - `i = 0`, `n = 11` (since the string has 11 characters), and `res = ""`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string compressedString(string word) {
+	```
+	Defines the function 'compressedString' that accepts a string 'word' and returns its compressed form.
 
-2. **First Iteration (`i = 0`)**:
-   - The first character is `'a'`.
-   - We start counting the occurrences of `'a'`. The count becomes `3` (`aaa`).
-   - We add `"3a"` to the result string, so `res = "3a"`.
-   - `i` is now updated to `3` (since we've processed 3 characters).
+2. **Variable Initialization**
+	```cpp
+	    int i = 0, n = word.size();
+	```
+	Initializes the index 'i' to 0 and 'n' to the length of the input string 'word'.
 
-3. **Second Iteration (`i = 3`)**:
-   - The next character is `'b'`.
-   - We start counting the occurrences of `'b'`. The count becomes `3` (`bbb`).
-   - We add `"3b"` to the result string, so `res = "3a3b"`.
-   - `i` is now updated to `6` (since we've processed 3 characters).
+3. **Character Declaration**
+	```cpp
+	    char cur;
+	```
+	Declares a variable 'cur' of type char to store the current character during the iteration.
 
-4. **Third Iteration (`i = 6`)**:
-   - The next character is `'c'`.
-   - We start counting the occurrences of `'c'`. The count becomes `5` (`ccccc`).
-   - We add `"5c"` to the result string, so `res = "3a3b5c"`.
-   - `i` is now updated to `11`, and the loop terminates.
+4. **Result String Initialization**
+	```cpp
+	    string res = "";
+	```
+	Initializes an empty string 'res' to store the result of the compressed string.
 
-5. **Final Result**:
-   - The function returns `"3a3b5c"`, which is the compressed version of the input string.
+5. **Outer While Loop**
+	```cpp
+	    while(i < n) {
+	```
+	Starts a while loop that runs as long as 'i' is less than the length of the string 'n'.
 
-#### Output:
-```cpp
-"3a3b5c"
-```
+6. **Count Initialization**
+	```cpp
+	        int cnt = 0;
+	```
+	Initializes a counter 'cnt' to 0 to keep track of consecutive occurrences of a character.
 
-### Complexity
+7. **Character Assignment**
+	```cpp
+	        cur = word[i];
+	```
+	Assigns the current character at position 'i' in the string 'word' to the variable 'cur'.
 
-#### Time Complexity:
-- **O(n)**: The time complexity of the solution is **O(n)**, where `n` is the length of the input string `word`. This is because we only iterate over the string once. Each character is processed in the main `while` loop, and the inner loop counts consecutive characters. Each character is visited only once, and the string is processed in linear time.
+8. **Inner While Loop**
+	```cpp
+	        while(i < n && cnt < 9 && cur == word[i])
+	```
+	Starts a nested while loop that continues as long as the character at 'i' is the same as 'cur' and 'cnt' is less than 9.
 
-#### Space Complexity:
-- **O(n)**: The space complexity is **O(n)** because the result string `res` will, in the worst case, store a compressed version of the input string. The size of `res` depends on the number of characters in the input string, but it will never be larger than the original string.
+9. **Counter Increment**
+	```cpp
+	            cnt++, i++;
+	```
+	Increments the counter 'cnt' and the index 'i' as long as the current character matches 'cur'.
 
-### Conclusion
+10. **Result String Update**
+	```cpp
+	        res += to_string(cnt) + cur;
+	```
+	Appends the count 'cnt' (converted to a string) followed by the character 'cur' to the result string 'res'.
 
-This solution efficiently compresses the input string `word` by counting consecutive occurrences of each character and appending the count followed by the character to the result string. It uses a linear time complexity approach, making it suitable for processing large strings. The function handles edge cases, such as characters occurring more than 9 times consecutively, and ensures that the result remains within the specified constraints.
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the compressed string 'res' as the output.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where `n` is the length of the string `word`. We traverse the string once, processing each character.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the compressed string `comp` which could have a length up to the input string length in the worst case.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/string-compression-iii/description/)
 

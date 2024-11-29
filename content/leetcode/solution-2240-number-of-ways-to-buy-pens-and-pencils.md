@@ -14,136 +14,139 @@ img_src = ""
 youtube = "WzmIQmBNa0A"
 youtube_upload_date="2022-04-16"
 youtube_thumbnail="https://i.ytimg.com/vi/WzmIQmBNa0A/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You have a certain amount of money and want to buy pens and pencils. Given their costs, determine the number of distinct ways you can buy some combination of pens and pencils, including buying none.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer total representing your total budget, and two integers cost1 and cost2 representing the cost of a pen and a pencil respectively.
+- **Example:** `Input: total = 15, cost1 = 6, cost2 = 4`
+- **Constraints:**
+	- 1 <= total, cost1, cost2 <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long waysToBuyPensPencils(int total, int cost1, int cost2) {
-        long long cnt = 0;
-        int sum = total;
-        while(sum >= 0 || sum/cost2 > 0) {
-            cnt+= (sum/cost2 + 1);
-            sum -= cost1;
-        }
-        return cnt;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct ways to buy pens and pencils while not exceeding the total budget.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The output must be a single integer representing the number of valid combinations.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the number of distinct ways to purchase pens and pencils such that the total cost is less than or equal to the budget.
 
-The problem asks to determine how many different ways we can buy pens and pencils with a given amount of money. The user is provided with a total amount of money (`total`) and the costs of a single pen (`cost1`) and a single pencil (`cost2`). The task is to calculate how many ways the user can buy these items in such a way that the total cost does not exceed the available money.
+- 1. Iterate over the number of pens that can be purchased, ranging from 0 to total/cost1.
+- 2. For each number of pens, calculate the remaining budget after buying the pens.
+- 3. Determine the maximum number of pencils that can be purchased within the remaining budget.
+- 4. Accumulate the total number of valid combinations.
+{{< dots >}}
+### Problem Assumptions ✅
+- At least one valid combination is possible, even if it means buying nothing.
+- The costs of pens and pencils are not necessarily multiples of each other.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: total = 15, cost1 = 6, cost2 = 4`  \
+  **Explanation:** You can buy 0 pens and 0-3 pencils (4 ways), 1 pen and 0-1 pencils (2 ways), or 2 pens and 0 pencils (1 way). Total: 4 + 2 + 1 = 7.
 
-### Approach
+- **Input:** `Input: total = 7, cost1 = 3, cost2 = 4`  \
+  **Explanation:** You can buy 0 pens and 0-1 pencils (2 ways) or 1 pen and 0 pencils (1 way). Total: 2 + 1 = 3.
 
-To solve this problem, we need to compute all possible combinations of buying pens and pencils such that the total cost does not exceed the given `total`. Specifically:
+{{< dots >}}
+## Approach 🚀
+Use a simple loop to iterate through possible purchases of pens and calculate the corresponding combinations for pencils.
 
-1. **Understanding the Constraints**: 
-   - We can buy multiple pens and multiple pencils as long as the total cost doesn't exceed the total amount of money (`total`). The pens cost `cost1` each, and pencils cost `cost2` each.
-   
-2. **Iterative Approach**:
-   - The goal is to calculate how many ways we can buy pens and pencils. We can iterate over all possible numbers of pens we can buy (ranging from 0 to the maximum number of pens we can afford). For each number of pens, we calculate how many pencils can be bought with the remaining money.
-   - The total number of ways we can buy pens and pencils can be determined by iterating through all possible numbers of pens and calculating how many pencils we can buy for each.
-
-3. **Breakdown of the Steps**:
-   - **First, calculate how many pens can be bought**: For each possible number of pens (starting from 0 up to the total amount of money divided by the cost of a pen), we subtract the cost of the pens from the total money to get the remaining money.
-   - **Then calculate how many pencils can be bought with the remaining money**: Using the remaining money after buying the pens, calculate how many pencils can be bought by dividing the remaining money by the cost of a pencil. Each iteration contributes a possible combination of pens and pencils.
-
-4. **Optimization Consideration**:
-   - Instead of recalculating the possible number of pencils for every iteration, we can directly calculate it by dividing the remaining money by the cost of the pencil in each iteration, making the solution efficient.
-
-5. **Counting Combinations**:
-   - For each number of pens, we count how many pencils can be bought. This is done by calculating `(remaining money / cost of a pencil) + 1`. The `+1` accounts for the possibility of buying zero pencils if no money remains after buying pens.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    long long waysToBuyPensPencils(int total, int cost1, int cost2) {
-        long long cnt = 0;  // This will store the total number of combinations
-        int sum = total;    // Variable to track the remaining money
-        
-        // While the remaining money is non-negative or we can still buy at least one pencil
-        while(sum >= 0 || sum/cost2 > 0) {
-            // Add the number of pencils that can be bought with the remaining money
-            cnt += (sum/cost2 + 1);  // +1 to account for the case where we buy 0 pencils
-            
-            // Subtract the cost of one pen from the remaining money
-            sum -= cost1;
-        }
-        
-        // Return the total number of combinations
-        return cnt;
-    }
-};
-```
-
-#### 1. **Function Declaration**:
+### Initial Thoughts 💭
+- The problem can be broken into two nested loops: the outer loop iterates over the possible numbers of pens, and the inner logic calculates the maximum number of pencils for the remaining budget.
+- Each iteration of the loop corresponds to a possible number of pens.
+- Using a single loop is possible because we only calculate the maximum number of pencils for a given budget.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as the inputs are always positive integers.
+- total = 10^6, cost1 = 1, cost2 = 2
+- cost1 or cost2 is greater than total, e.g., total = 5, cost1 = 10, cost2 = 3.
+- Ensure calculations do not overflow for large inputs within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
 long long waysToBuyPensPencils(int total, int cost1, int cost2) {
+    long long cnt = 0;
+    int sum = total;
+    while(sum >= 0 || sum/cost2 > 0) {
+        cnt+= (sum/cost2 + 1);
+        sum -= cost1;
+    }
+    return cnt;
+}
 ```
-- The function `waysToBuyPensPencils` takes three arguments: `total` (the total money available), `cost1` (the cost of a single pen), and `cost2` (the cost of a single pencil).
-- The return type is `long long`, as the result can be a large number depending on the input values.
 
-#### 2. **Initialization**:
-```cpp
-long long cnt = 0;
-int sum = total;
-```
-- `cnt` is initialized to `0` and will keep track of the total number of ways we can buy pens and pencils.
-- `sum` is initialized with the value of `total` to keep track of the remaining money as we iterate through the possible purchases of pens and pencils.
+This function calculates how many pens and pencils can be bought given the total amount of money, the cost of a pen, and the cost of a pencil. The process is repeated while there are enough funds to buy at least one pencil.
 
-#### 3. **While Loop**:
-```cpp
-while(sum >= 0 || sum/cost2 > 0) {
-```
-- The `while` loop continues as long as `sum` is non-negative or there is enough money left to buy at least one pencil (`sum/cost2 > 0`).
-- The condition ensures that we keep checking for all valid combinations until we can no longer afford any items.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long waysToBuyPensPencils(int total, int cost1, int cost2) {
+	```
+	This is the function definition for 'waysToBuyPensPencils', which takes three parameters: total money, cost of a pen, and cost of a pencil. It returns a long long value representing the total number of items that can be bought.
 
-#### 4. **Calculating Pencils**:
-```cpp
-cnt += (sum/cost2 + 1);
-```
-- For the current amount of money in `sum`, we calculate how many pencils can be bought (`sum/cost2`).
-- We add `1` to this result to account for the possibility of buying zero pencils (if no money is left for pencils after buying pens).
-- This counts how many combinations are possible for the current number of pens we are considering.
+2. **Variable Initialization**
+	```cpp
+	    long long cnt = 0;
+	```
+	This initializes the variable 'cnt' to store the total number of pens and pencils that can be bought.
 
-#### 5. **Update the Remaining Money**:
-```cpp
-sum -= cost1;
-```
-- After considering how many pencils can be bought for the current amount of money, we subtract the cost of one pen (`cost1`) from `sum` to check how many more combinations are possible if we buy one more pen.
+3. **Setting Initial Sum**
+	```cpp
+	    int sum = total;
+	```
+	This sets the 'sum' variable to the total amount of money available for purchase.
 
-#### 6. **Returning the Result**:
-```cpp
-return cnt;
-```
-- Once the loop finishes, we return the value of `cnt`, which contains the total number of combinations of pens and pencils that can be bought with the available money.
+4. **Loop for Buying Items**
+	```cpp
+	    while(sum >= 0 || sum/cost2 > 0) {
+	```
+	This while loop continues as long as there is enough money to buy at least one pencil (based on the cost of a pencil).
 
-### Complexity
+5. **Counting Possible Purchases**
+	```cpp
+	        cnt+= (sum/cost2 + 1);
+	```
+	This line calculates the maximum number of pencils that can be bought with the current 'sum' and adds it to the 'cnt' variable.
 
-#### Time Complexity:
-- **O(total/cost1)**: The `while` loop runs approximately `total/cost1` times, as in each iteration we subtract the cost of one pen (`cost1`) from the total money (`total`).
-- For each iteration, the calculation of how many pencils can be bought (i.e., `sum/cost2 + 1`) takes constant time, so the time complexity is linear in terms of how many iterations are needed.
+6. **Reducing Total Money**
+	```cpp
+	        sum -= cost1;
+	```
+	This subtracts the cost of one pen from 'sum', reducing the available money after each purchase.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant, as we only use a few variables (`cnt`, `sum`) to store intermediate values, and no additional data structures are created that depend on the input size.
+7. **Returning Result**
+	```cpp
+	    return cnt;
+	```
+	This returns the total count of pens and pencils that can be bought with the available money.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(total/cost1)
+- **Average Case:** O(total/cost1)
+- **Worst Case:** O(total/cost1)
 
-The solution efficiently calculates how many ways pens and pencils can be bought within the available budget using an iterative approach. The logic ensures that we account for all possible combinations of purchases, including the case where no pencils are bought for a given number of pens. By iterating through the possible number of pens and calculating the number of pencils that can be bought for each, the algorithm efficiently computes the total number of valid combinations.
+The time complexity is proportional to the number of iterations for possible pen purchases.
 
-This solution performs well with a time complexity of **O(total/cost1)**, which is optimal for this problem, and the space complexity of **O(1)** ensures that the solution uses a constant amount of memory.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The approach is intuitive, easy to understand, and efficient, making it suitable for a wide range of input sizes. This algorithm is a good example of how to solve problems involving combinations or iterations over possible values efficiently.
+Only a few variables are used for tracking state, making space usage constant.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-buy-pens-and-pencils/description/)
 

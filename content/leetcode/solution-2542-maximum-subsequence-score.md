@@ -14,156 +14,225 @@ img_src = ""
 youtube = "vJ7ZWmfO1Rw"
 youtube_upload_date="2023-05-25"
 youtube_thumbnail="https://i.ytimg.com/vi/vJ7ZWmfO1Rw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays nums1 and nums2, both of size n, and a positive integer k. Your task is to select k indices from the array nums1, where the sum of the selected elements from nums1 is multiplied by the minimum element from the corresponding selected indices in nums2. The objective is to maximize this score.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays, nums1 and nums2 of length n and a positive integer k. You need to choose k indices from nums1.
+- **Example:** `nums1 = [1, 3, 3, 2], nums2 = [2, 1, 3, 4], k = 3`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 0 <= nums1[i], nums2[j] <= 10^5
+	- 1 <= k <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<pair<int, int>> nums;
-    int n;
-    priority_queue<int, vector<int>, greater<int>> pq;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum possible score that can be achieved by selecting k indices. If no subsequence can be selected, return 0.
+- **Example:** `16`
+- **Constraints:**
 
-    long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum score by selecting k indices from nums1.
 
-        n = nums2.size(); 
-        for(int i = 0; i < n; i++)
-            nums.push_back({nums2[i], nums1[i]});
-        
-        sort(nums.rbegin(), nums.rend());
-        
-        long long score = 0, sum = 0;
+- 1. Create a list of pairs (nums2[i], nums1[i]) for each element.
+- 2. Sort this list in descending order based on nums2 values.
+- 3. Use a priority queue to select the k largest nums1 values while keeping track of their sum.
+- 4. Calculate the score and update the maximum score.
+- 5. Return the maximum score.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays are of equal length.
+- The integer k is a valid index count for the arrays.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums1 = [2, 4, 5, 1], nums2 = [3, 6, 2, 8], k = 2`  \
+  **Explanation:** The maximum score is achieved by selecting indices 1 and 3 with a score of 16. We are multiplying the sum of selected nums1 values by the minimum corresponding nums2 value.
 
-        for(auto& [n2, n1]: nums) {
-            
-            pq.push(n1);
-            sum += n1;
-            
-            if(pq.size() > k) {
-                sum -= pq.top();
-                pq.pop();
-            }
-            
-            if(pq.size() == k)
-            score = max(score, sum * n2);
-        }
+{{< dots >}}
+## Approach 🚀
+The approach is to use a greedy strategy to select the k indices that maximize the score. We first sort the pairs based on the nums2 values and then calculate the score using a priority queue to maintain the sum of the k largest nums1 values.
 
-        return score;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to maximize the score of a pair of sequences, `nums1` and `nums2`, by selecting exactly `k` elements from both arrays. The score is calculated by multiplying the sum of the selected elements from `nums1` by the corresponding element in `nums2` at the same index. The goal is to compute the maximum possible score that can be achieved by selecting exactly `k` elements from the arrays.
-
-### Approach
-
-The approach involves leveraging sorting and a priority queue (min-heap) to efficiently select the `k` largest values from `nums1` while ensuring that we maintain the largest possible sum for these elements. Here's a step-by-step breakdown of the solution:
-
-1. **Pairing and Sorting**: 
-   - We begin by pairing the elements of `nums1` and `nums2` as tuples, where each pair is `(nums2[i], nums1[i])`. This allows us to treat the values of `nums2` as weights for the corresponding elements of `nums1`. 
-   - The next step is to sort these pairs in descending order based on the values of `nums2`. This sorting step ensures that we prioritize higher weights (`nums2[i]`) when making selections, which can maximize the score.
-
-2. **Priority Queue (Min-Heap)**: 
-   - We use a priority queue (min-heap) to keep track of the `k` largest values from `nums1`. The reason we use a min-heap is that it allows us to efficiently remove the smallest element whenever we exceed the `k` selections.
-
-3. **Iterating through Sorted Pairs**: 
-   - For each pair `(n2, n1)`, where `n2` is from `nums2` and `n1` is from `nums1`, we push `n1` (the corresponding value from `nums1`) into the priority queue and add it to the `sum` of selected values from `nums1`.
-   - If the size of the priority queue exceeds `k`, we remove the smallest element (the root of the min-heap) and subtract it from the `sum`. This ensures that only the `k` largest elements are retained in the heap.
-   
-4. **Maximizing the Score**: 
-   - After adding an element to the heap and updating the `sum`, we check if the size of the heap is exactly `k`. If it is, we compute the score by multiplying the current sum of selected elements from `nums1` with the value `n2` from `nums2` (which is the weight for these elements). We keep track of the maximum score observed so far.
-   
-5. **Returning the Result**: 
-   - After iterating through all the pairs, the maximum score is returned as the result.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Data Structures
+### Initial Thoughts 💭
+- We need to maximize the score based on the sum of selected nums1 values and the minimum of corresponding nums2 values.
+- Sorting the pairs based on nums2 will help us maximize the score efficiently.
+- Use a greedy algorithm to select the best possible subsequence based on the sorted nums2 values.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle cases where the input arrays are empty or k = 0.
+- Ensure the solution works within the time limits for large values of n.
+- Handle cases where the nums1 or nums2 contains only zeroes or large numbers.
+- Ensure the algorithm can handle cases where the elements in nums1 and nums2 have extreme values.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<pair<int, int>> nums;
 int n;
 priority_queue<int, vector<int>, greater<int>> pq;
-```
-In this part of the code, we initialize the data structures:
-- `nums`: a vector of pairs to store the elements of `nums2` and `nums1` as tuples.
-- `n`: an integer to store the size of the arrays.
-- `pq`: a priority queue (min-heap) to store the `k` largest values from `nums1`.
 
-#### Step 2: Pairing and Sorting the Elements
-```cpp
-n = nums2.size(); 
-for(int i = 0; i < n; i++)
-    nums.push_back({nums2[i], nums1[i]});
-    
-sort(nums.rbegin(), nums.rend());
-```
-Here, we:
-- Pair each element from `nums2` with its corresponding element from `nums1`.
-- Store the pairs in `nums`, with the first element of each pair being from `nums2` and the second being from `nums1`.
-- Sort the pairs in descending order based on the values of `nums2` (i.e., the first element of each pair).
+long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
 
-#### Step 3: Initialize Variables for Score and Sum
-```cpp
-long long score = 0, sum = 0;
-```
-We initialize two variables:
-- `score`: to keep track of the maximum score found during the iteration.
-- `sum`: to store the sum of the selected elements from `nums1` as we iterate through the pairs.
+    n = nums2.size(); 
+    for(int i = 0; i < n; i++)
+        nums.push_back({nums2[i], nums1[i]});
+    
+    sort(nums.rbegin(), nums.rend());
+    
+    long long score = 0, sum = 0;
 
-#### Step 4: Iterating Through the Sorted Pairs and Building the Heap
-```cpp
-for(auto& [n2, n1]: nums) {
-    pq.push(n1);
-    sum += n1;
-    
-    if(pq.size() > k) {
-        sum -= pq.top();
-        pq.pop();
-    }
-    
-    if(pq.size() == k)
+    for(auto& [n2, n1]: nums) {
+        
+        pq.push(n1);
+        sum += n1;
+        
+        if(pq.size() > k) {
+            sum -= pq.top();
+            pq.pop();
+        }
+        
+        if(pq.size() == k)
         score = max(score, sum * n2);
+    }
+
+    return score;
 }
 ```
-In this part, we:
-- Iterate through each pair `(n2, n1)` in the sorted `nums` vector.
-- Push `n1` (the corresponding value from `nums1`) into the priority queue and add it to the `sum`.
-- If the size of the priority queue exceeds `k`, we remove the smallest element (the root of the min-heap) and subtract it from the `sum`. This ensures that we always retain the `k` largest elements in the priority queue.
-- If the size of the priority queue is exactly `k`, we compute the score by multiplying the current `sum` with `n2` and update `score` to the maximum value.
 
-#### Step 5: Returning the Maximum Score
-```cpp
-return score;
-```
-Finally, after iterating through all the pairs, we return the `score`, which holds the maximum possible score computed during the iteration.
+This is a function that calculates the maximum score by performing k operations on two lists of integers, nums1 and nums2. It uses a priority queue to maintain the largest elements and computes the score by multiplying the sum of selected elements with corresponding elements from nums2.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<pair<int, int>> nums;
+	```
+	Here, a vector of pairs is initialized to store pairs of elements from nums1 and nums2. This will help in pairing the corresponding elements from both arrays.
 
-#### Time Complexity:
-- **Sorting**: The sorting step takes `O(n log n)` where `n` is the number of elements in `nums2` (or `nums1`).
-- **Priority Queue Operations**: Each insertion and removal operation on the priority queue takes `O(log k)`, and since we process each element once, the total time for priority queue operations is `O(n log k)`.
-- **Overall Time Complexity**: The overall time complexity is dominated by the sorting step and the priority queue operations, resulting in a total time complexity of `O(n log n + n log k)`. This is efficient for large inputs.
+2. **Variable Initialization**
+	```cpp
+	int n;
+	```
+	An integer variable 'n' is declared to store the size of the nums2 array. It will be used to iterate through the arrays.
 
-#### Space Complexity:
-- **Storing Pairs**: The space required to store the pairs in `nums` is `O(n)`.
-- **Priority Queue**: The space used by the priority queue is `O(k)` because it holds at most `k` elements at any time.
-- **Overall Space Complexity**: The overall space complexity is `O(n + k)`.
+3. **Priority Queue Initialization**
+	```cpp
+	priority_queue<int, vector<int>, greater<int>> pq;
+	```
+	A min-heap priority queue 'pq' is initialized to store elements from nums1. It is used to maintain the largest elements up to k elements.
 
-### Conclusion
+4. **Function Definition**
+	```cpp
+	long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
+	```
+	The function 'maxScore' is defined to calculate the maximum score. It takes two vectors nums1 and nums2 and an integer k as input parameters.
 
-This solution efficiently computes the maximum score by:
-- Pairing elements of `nums1` and `nums2` and sorting them based on the values of `nums2` to prioritize higher weights.
-- Using a priority queue to maintain the `k` largest values from `nums1`, ensuring that we always compute the best possible sum for each possible selection of `k` elements.
-- The algorithm runs in `O(n log n + n log k)` time, which is optimal for large inputs.
+5. **Size Calculation**
+	```cpp
+	    n = nums2.size(); 
+	```
+	The size of the nums2 vector is assigned to variable 'n'. This will be used to iterate over the elements of both arrays.
 
-By combining sorting and a priority queue, the solution is both time and space efficient, making it a robust approach for this problem.
+6. **Array Pairing**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	A loop is initiated to iterate over the elements of nums2.
+
+7. **Array Pairing**
+	```cpp
+	        nums.push_back({nums2[i], nums1[i]});
+	```
+	For each iteration, a pair of elements from nums2 and nums1 is added to the 'nums' vector. This pairs corresponding elements from both arrays.
+
+8. **Sorting**
+	```cpp
+	    sort(nums.rbegin(), nums.rend());
+	```
+	The 'nums' vector is sorted in descending order based on the first element of each pair. This allows us to prioritize larger elements from nums2 during the calculation.
+
+9. **Score Initialization**
+	```cpp
+	    long long score = 0, sum = 0;
+	```
+	The variables 'score' and 'sum' are initialized. 'score' will track the maximum score, and 'sum' will keep the running sum of selected elements.
+
+10. **Iterating Over Pairs**
+	```cpp
+	    for(auto& [n2, n1]: nums) {
+	```
+	A loop is initiated to iterate over the sorted 'nums' vector. Each pair contains elements from nums2 (n2) and nums1 (n1).
+
+11. **Priority Queue Operations**
+	```cpp
+	        pq.push(n1);
+	```
+	The element n1 from the current pair is added to the priority queue.
+
+12. **Sum Calculation**
+	```cpp
+	        sum += n1;
+	```
+	The value of n1 is added to the running total 'sum'. This keeps track of the sum of elements selected so far.
+
+13. **Priority Queue Size Check**
+	```cpp
+	        if(pq.size() > k) {
+	```
+	A check is performed to ensure that the size of the priority queue does not exceed k. If it does, the smallest element is removed.
+
+14. **Priority Queue Operations**
+	```cpp
+	            sum -= pq.top();
+	```
+	The smallest element is removed from the priority queue, and its value is subtracted from 'sum'.
+
+15. **Priority Queue Operations**
+	```cpp
+	            pq.pop();
+	```
+	The smallest element is popped from the priority queue to maintain its size.
+
+16. **Score Update**
+	```cpp
+	        if(pq.size() == k)
+	```
+	If the size of the priority queue equals k, the score is updated by calculating the product of the sum of selected elements and the current n2 value.
+
+17. **Score Update**
+	```cpp
+	        score = max(score, sum * n2);
+	```
+	The score is updated by taking the maximum of the current score and the product of the sum of selected elements and n2.
+
+18. **Return Statement**
+	```cpp
+	    return score;
+	```
+	The function returns the maximum score calculated by the algorithm.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by sorting the nums2 array, which is O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for sorting and the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-subsequence-score/description/)
 

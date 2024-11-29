@@ -14,104 +14,83 @@ img_src = ""
 youtube = "qn2ABHbRNnQ"
 youtube_upload_date="2023-04-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/qn2ABHbRNnQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D matrix `grid` of size m x n, where each cell can either be a land cell (represented by 0) or a water cell (represented by a positive integer indicating the number of fish present in that cell). A fisher can start at any water cell and perform two operations any number of times: catch all the fish in the current cell or move to an adjacent water cell. Your task is to determine the maximum number of fish the fisher can catch if they start at the optimal water cell.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D grid of integers, where 0 represents a land cell and a positive integer represents a water cell containing that many fish.
+- **Example:** `Input: grid = [[0, 3, 2], [4, 0, 0], [1, 0, 3]]`
+- **Constraints:**
+	- 1 <= m, n <= 10
+	- 0 <= grid[i][j] <= 10
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int m, n;
-    vector<vector<int>> grid;
-    int findMaxFish(vector<vector<int>>& grid) {
-        m = grid.size(), n = grid[0].size();
-        this->grid = grid;
-        int mx = 0;
-        
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] != 0) {
-                mx = max(mx, dfs(i, j));
-            }
-        return mx;
-    }
-    
-    int dfs(int i, int j) {
-        if(i >= m || j >= n || i < 0 || j < 0 || grid[i][j] == 0) return 0;
-        int ans = grid[i][j];
-        grid[i][j] = 0;
-        
-        ans += dfs(i + 1, j);
-        ans += dfs(i - 1, j);
-        ans += dfs(i, j + 1);
-        ans += dfs(i, j - 1);
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of fish the fisher can catch by starting at the optimal water cell.
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The output should be a single integer representing the maximum number of fish the fisher can catch.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum number of fish that can be caught starting from any water cell, including moving through adjacent water cells.
 
-The problem at hand is to find the maximum amount of fish that can be collected from any connected group of cells in a given grid. The grid is a 2D array where each cell contains an integer, which represents the number of fish in that cell. A connected group of cells is defined as those cells that are adjacent either horizontally or vertically. We need to return the maximum number of fish that can be collected by any such connected group.
+- Step 1: Iterate over each water cell in the grid.
+- Step 2: For each water cell, perform a Depth-First Search (DFS) to count the total number of fish that can be caught starting from that cell and moving through adjacent water cells.
+- Step 3: Track the maximum fish count found during the search.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will contain at least one water cell.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[0, 3, 2], [4, 0, 0], [1, 0, 3]]`  \
+  **Explanation:** Starting at cell (0, 1), the fisher can catch 3 fish. Then, they can move to (1, 0) and catch 4 more fish. A total of 9 fish can be caught.
 
-### Approach
+- **Input:** `Input: grid = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]`  \
+  **Explanation:** The fisher can start at either (0, 0) or (2, 2) and catch 1 fish.
 
-To solve this problem, we can approach it as a **Depth-First Search (DFS)** problem. Each cell in the grid can be viewed as a node, and the problem boils down to finding the largest connected component in the grid. Since we are interested in the maximum number of fish in any connected component, we can perform a DFS on each unvisited cell containing fish. During the DFS traversal, we accumulate the number of fish from all cells in that component and keep track of the maximum value found.
+{{< dots >}}
+## Approach 🚀
+The approach involves performing a Depth-First Search (DFS) from each water cell to find the maximum number of fish the fisher can catch. We explore all adjacent water cells recursively to accumulate the number of fish and track the maximum fish count.
 
-**Key Insights**:
-1. **DFS Traversal**: Start from each unvisited cell that contains fish, and use DFS to explore all connected cells that contain fish.
-2. **Grid Constraints**: Ensure that the DFS stays within the bounds of the grid and only visits cells that have fish.
-3. **Maximization**: Keep track of the largest sum of fish encountered during any DFS traversal.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- We need to explore the grid cell by cell, performing a DFS to count fish from each starting point.
+- The DFS will help us explore all possible reachable water cells from any starting cell to accumulate the maximum fish count.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty grid should not be passed as per the constraints.
+- The grid size is small (maximum 10x10), so large input grids are not a concern.
+- A grid with no fish should return 0.
+- Ensure to handle cases where there are no water cells (i.e., the grid only contains land cells).
+{{< dots >}}
+## Code 💻
 ```cpp
 int m, n;
 vector<vector<int>> grid;
-```
-- **Line 1**: Declare two variables `m` and `n` to store the number of rows and columns of the grid, respectively.
-- **Line 2**: Declare a 2D vector `grid` to hold the grid of fish, where each element represents the number of fish at that cell.
-
-```cpp
 int findMaxFish(vector<vector<int>>& grid) {
     m = grid.size(), n = grid[0].size();
     this->grid = grid;
     int mx = 0;
-```
-- **Line 4-6**: The `findMaxFish` function is the main driver of the algorithm. It initializes `m` and `n` to represent the grid dimensions. We also store the grid passed as an argument in the class member variable `grid`. The variable `mx` is initialized to `0`, which will store the maximum number of fish found in any connected group.
-  
-```cpp
+    
     for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] != 0) {
-                mx = max(mx, dfs(i, j));
-            }
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] != 0) {
+            mx = max(mx, dfs(i, j));
+        }
     return mx;
 }
-```
-- **Line 7-11**: The double `for` loop iterates over each cell in the grid. If a cell contains fish (i.e., `grid[i][j] != 0`), we perform a DFS starting from that cell.
-  - The DFS function `dfs(i, j)` explores all connected cells and returns the total number of fish in that connected component.
-  - The `max` function ensures that `mx` always holds the maximum value of fish collected from any connected component.
-- **Line 12**: Once all the cells are processed, return `mx`, which contains the maximum number of fish from any connected component.
 
-```cpp
 int dfs(int i, int j) {
     if(i >= m || j >= n || i < 0 || j < 0 || grid[i][j] == 0) return 0;
-```
-- **Line 14-15**: The `dfs` function performs a depth-first traversal starting from the cell at position `(i, j)`. First, we check whether the cell is out of bounds or contains no fish (`grid[i][j] == 0`). If so, return 0 to terminate the DFS for that branch.
-  
-```cpp
     int ans = grid[i][j];
     grid[i][j] = 0;
-```
-- **Line 16-17**: If the current cell contains fish, we store the number of fish in `ans` and mark the cell as visited by setting `grid[i][j] = 0` to avoid revisiting the same cell.
-  
-```cpp
+    
     ans += dfs(i + 1, j);
     ans += dfs(i - 1, j);
     ans += dfs(i, j + 1);
@@ -120,27 +99,148 @@ int dfs(int i, int j) {
     return ans;
 }
 ```
-- **Line 18-21**: We recursively call `dfs` for all four possible directions (down, up, right, left) from the current cell. The results are added to `ans`, accumulating the number of fish in all connected cells.
-- **Line 22**: Once all connected cells have been visited, return `ans`, which now contains the total number of fish in the connected component.
 
-### Complexity
+This function calculates the maximum amount of fish that can be collected from a given grid by starting at any position and collecting fish in adjacent cells using a depth-first search (DFS) approach. The function tracks the maximum amount of fish collected across all potential starting points.
 
-#### Time Complexity:
-- **DFS Complexity**: Each cell in the grid is visited at most once by the DFS, and each DFS operation takes constant time to process each cell (for marking it as visited and checking its neighbors). Therefore, the time complexity of the DFS is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the grid.
-- **Overall Complexity**: The algorithm runs a DFS for every cell that contains fish. Since each cell is visited only once, the overall time complexity is **O(m * n)**.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int m, n;
+	```
+	This line declares two integer variables 'm' and 'n' to store the dimensions of the grid.
 
-#### Space Complexity:
-- **Space for Grid**: The space required for storing the grid is **O(m * n)**.
-- **Recursive Stack**: The depth of the recursive stack in the worst case can be **O(m * n)** if all the cells are connected in one large component.
-- **Overall Space Complexity**: Therefore, the overall space complexity is **O(m * n)** due to the grid storage and the recursive stack.
+2. **Grid Declaration**
+	```cpp
+	vector<vector<int>> grid;
+	```
+	A 2D vector 'grid' is declared to store the fish grid values.
 
-### Conclusion
+3. **Function Definition**
+	```cpp
+	int findMaxFish(vector<vector<int>>& grid) {
+	```
+	This defines the function 'findMaxFish', which takes the 2D grid as input and returns the maximum amount of fish that can be collected.
 
-This solution effectively utilizes **Depth-First Search (DFS)** to explore all connected components in the grid and calculate the total number of fish in each connected group. By maintaining a maximum value of the fish count during the DFS traversals, we are able to find the largest connected group of cells containing fish.
+4. **Grid Initialization**
+	```cpp
+	    m = grid.size(), n = grid[0].size();
+	```
+	The dimensions of the grid are calculated and stored in 'm' and 'n'.
 
-The algorithm is efficient with a time complexity of **O(m * n)**, where `m` and `n` are the dimensions of the grid, making it suitable for reasonably sized grids. The space complexity is also **O(m * n)** due to the storage of the grid and the recursive call stack.
+5. **Grid Assignment**
+	```cpp
+	    this->grid = grid;
+	```
+	The input grid is assigned to the member variable 'grid' for later use in the DFS function.
 
-Overall, this approach is optimal for solving problems involving connected components in grids and can be easily adapted for similar scenarios where other types of objects or values need to be collected from a grid structure.
+6. **Variable Initialization**
+	```cpp
+	    int mx = 0;
+	```
+	A variable 'mx' is initialized to 0, which will store the maximum number of fish collected during the DFS search.
+
+7. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	An outer loop starts to iterate through each row of the grid.
+
+8. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	An inner loop iterates through each column in the current row of the grid.
+
+9. **Fish Check**
+	```cpp
+	        if(grid[i][j] != 0) {
+	```
+	This checks if the current grid cell contains fish (value is not 0).
+
+10. **DFS Call**
+	```cpp
+	            mx = max(mx, dfs(i, j));
+	```
+	If the current cell contains fish, the DFS function is called from this cell, and the maximum number of fish collected is updated.
+
+11. **Return Maximum Fish**
+	```cpp
+	    return mx;
+	```
+	The function returns the maximum number of fish collected.
+
+12. **DFS Function Definition**
+	```cpp
+	int dfs(int i, int j) {
+	```
+	This defines the DFS function that explores the grid and collects fish from the adjacent cells.
+
+13. **DFS Boundary Check**
+	```cpp
+	    if(i >= m || j >= n || i < 0 || j < 0 || grid[i][j] == 0) return 0;
+	```
+	This line checks for out-of-bounds indices or cells that don't contain fish (value 0), and returns 0 if any condition is met.
+
+14. **Fish Collection**
+	```cpp
+	    int ans = grid[i][j];
+	```
+	The variable 'ans' is initialized to the current cell's value (the amount of fish at that cell).
+
+15. **Grid Update**
+	```cpp
+	    grid[i][j] = 0;
+	```
+	The current grid cell is marked as visited by setting its value to 0.
+
+16. **Recursive DFS Calls**
+	```cpp
+	    ans += dfs(i + 1, j);
+	```
+	The DFS function is called recursively for the adjacent cell below the current one.
+
+17. **Recursive DFS Calls**
+	```cpp
+	    ans += dfs(i - 1, j);
+	```
+	The DFS function is called recursively for the adjacent cell above the current one.
+
+18. **Recursive DFS Calls**
+	```cpp
+	    ans += dfs(i, j + 1);
+	```
+	The DFS function is called recursively for the adjacent cell to the right of the current one.
+
+19. **Recursive DFS Calls**
+	```cpp
+	    ans += dfs(i, j - 1);
+	```
+	The DFS function is called recursively for the adjacent cell to the left of the current one.
+
+20. **Return Fish Count**
+	```cpp
+	    return ans;
+	```
+	The total number of fish collected from the current cell and its adjacent cells is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The worst-case time complexity is O(m * n) due to the DFS traversal of all grid cells in the grid of size m x n.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the stack used by the DFS to explore all cells.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-fish-in-a-grid/description/)
 

@@ -14,135 +14,176 @@ img_src = ""
 youtube = "rEM1dS0cKFc"
 youtube_upload_date="2023-07-02"
 youtube_thumbnail="https://i.ytimg.com/vi/rEM1dS0cKFc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer 'n'. Your task is to find all pairs of prime numbers [x, y] such that 1 <= x <= y <= n, x + y = n, and both x and y are prime numbers. Return a 2D sorted list of such prime pairs. If no such pairs exist, return an empty array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer 'n'.
+- **Example:** `n = 12`
+- **Constraints:**
+	- 1 <= n <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a 2D list of prime pairs [x, y], sorted by x. If no pairs exist, return an empty list.
+- **Example:** `For n = 12, the output is [[5, 7]].`
+- **Constraints:**
+	- The pairs must be sorted in increasing order of x.
 
-    vector<vector<int>> findPrimePairs(int n) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find all prime pairs such that their sum is equal to n.
 
-        vector<int> net(n + 1, true);
-        net[1] = false;
-        for(int i = 2; i < n / 2 + 1; i++)
-        for(int j = 2; j * i < n; j++)
-            net[j * i] = false;
+- Generate all prime numbers up to n using the Sieve of Eratosthenes.
+- Iterate through the list of primes and check for each pair (x, y) where x + y = n.
+- Store all such valid pairs and return them sorted by x.
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of n is always a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For n = 12`  \
+  **Explanation:** The prime numbers less than or equal to 12 are [2, 3, 5, 7, 11]. The valid prime pairs that sum up to 12 are [5, 7].
 
-        map<int, int> mp;
-        vector<vector<int>> res;
+- **Input:** `For n = 30`  \
+  **Explanation:** The prime numbers less than or equal to 30 are [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]. The valid prime pairs that sum up to 30 are [7, 23], [11, 19], and [13, 17].
 
-        for(int i = 1; i < n / 2 + 1; i++)
-            if(net[i] && net[n - i]) 
-            res.push_back({i, n - i});
+{{< dots >}}
+## Approach 🚀
+The solution involves finding all prime numbers up to n and checking for prime pairs that sum up to n.
 
-        return res;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given an integer `n`, the task is to find all pairs of prime numbers `(p1, p2)` such that `p1 + p2 = n`, where `p1` and `p2` are prime numbers. The function should return a list of these prime pairs in any order.
-
-### Approach
-
-To solve this problem, we will use the **Sieve of Eratosthenes** method to find all prime numbers up to `n`. Then, we will iterate through the numbers and for each prime number `p1`, check if `n - p1` is also prime. If both `p1` and `n - p1` are prime numbers, we add the pair to the result list.
-
-#### Steps:
-
-1. **Generate all primes up to `n`**:
-   - Use the Sieve of Eratosthenes to mark all numbers up to `n` as prime or non-prime. This is done by iterating over numbers and marking their multiples as non-prime.
-   
-2. **Find prime pairs**:
-   - After generating all prime numbers up to `n`, iterate through the numbers from 1 to `n / 2`. For each number `i`, check if both `i` and `n - i` are prime. If so, add the pair `(i, n - i)` to the result.
-
-3. **Return the result**:
-   - Return the list of prime pairs that sum to `n`.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Sieve of Eratosthenes Initialization**
-
+### Initial Thoughts 💭
+- We need to identify all prime numbers up to n.
+- The Sieve of Eratosthenes is an efficient algorithm to find primes up to a large number.
+- Using the Sieve of Eratosthenes, we can generate a list of primes, and then check which pairs of primes sum to n.
+{{< dots >}}
+### Edge Cases 🌐
+- If no prime pairs sum up to n, return an empty list.
+- For large values of n (up to 10^6), the solution should efficiently handle the prime generation using the Sieve of Eratosthenes.
+- For n = 2, there are no prime pairs that sum up to 2.
+- Ensure that the solution works efficiently even for large values of n.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<int> net(n + 1, true);
-net[1] = false;
-```
 
-- We create a vector `net` of size `n + 1` initialized to `true`. This array will represent whether a number is prime (`true`) or not (`false`).
-- We initialize `net[1]` as `false` since `1` is not a prime number.
+vector<vector<int>> findPrimePairs(int n) {
 
-#### 2. **Marking Non-Primes Using Sieve**
-
-```cpp
-for(int i = 2; i < n / 2 + 1; i++)
+    vector<int> net(n + 1, true);
+    net[1] = false;
+    for(int i = 2; i < n / 2 + 1; i++)
     for(int j = 2; j * i < n; j++)
         net[j * i] = false;
-```
 
-- The outer loop starts from `i = 2` and runs up to `n / 2`. The reason we only go up to `n / 2` is because the larger multiples of `i` are already covered by smaller prime numbers.
-- The inner loop marks all multiples of `i` as non-prime (`net[j * i] = false`). This is the core of the Sieve of Eratosthenes algorithm, which eliminates non-prime numbers by marking their multiples.
+    map<int, int> mp;
+    vector<vector<int>> res;
 
-#### 3. **Create the Result Vector**
-
-```cpp
-map<int, int> mp;
-vector<vector<int>> res;
-```
-
-- A map `mp` is initialized but not used in this code. It seems unnecessary for this particular solution.
-- `res` is the result vector, which will store all the prime pairs.
-
-#### 4. **Iterate Through the Numbers and Check for Pairs**
-
-```cpp
-for(int i = 1; i < n / 2 + 1; i++)
-    if(net[i] && net[n - i]) 
+    for(int i = 1; i < n / 2 + 1; i++)
+        if(net[i] && net[n - i]) 
         res.push_back({i, n - i});
+
+    return res;
+}
 ```
 
-- We loop through numbers `i` from 1 to `n / 2`. The reason for stopping at `n / 2` is that we only need to check pairs where `p1 <= p2`. This ensures we avoid duplicate pairs like `(p1, p2)` and `(p2, p1)`.
-- For each `i`, we check if both `i` and `n - i` are prime numbers (`net[i] && net[n - i]`).
-- If both numbers are prime, we add the pair `{i, n - i}` to the result vector `res`.
+This function finds all prime pairs that sum up to a given number `n`. It uses the Sieve of Eratosthenes to identify prime numbers up to `n`, then checks for pairs of prime numbers that add up to `n`.
 
-#### 5. **Return the Result**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> findPrimePairs(int n) {
+	```
+	Defines the function `findPrimePairs` that takes an integer `n` and returns a vector of vector pairs of prime numbers that sum to `n`.
 
-```cpp
-return res;
-```
+2. **Variable Initialization**
+	```cpp
+	    vector<int> net(n + 1, true);
+	```
+	Initializes a boolean vector `net` of size `n + 1`, where each element is initially set to `true`, representing the assumption that each number is prime.
 
-- After the loop finishes, we return the list of prime pairs that sum up to `n`.
+3. **Marking Non-Primes**
+	```cpp
+	    net[1] = false;
+	```
+	Sets `net[1]` to `false` because 1 is not a prime number.
 
-### Complexity Analysis
+4. **Sieve of Eratosthenes Loop 1**
+	```cpp
+	    for(int i = 2; i < n / 2 + 1; i++)
+	```
+	Starts a loop from `i = 2` to `n / 2 + 1`, iterating through potential prime numbers.
 
-#### Time Complexity
+5. **Sieve of Eratosthenes Loop 2**
+	```cpp
+	    for(int j = 2; j * i < n; j++)
+	```
+	Starts an inner loop for each multiple of `i`, marking these multiples as `false` (non-prime).
 
-1. **Sieve of Eratosthenes**:
-   - The time complexity of the Sieve of Eratosthenes is \( O(n \log \log n) \). This is because we are marking multiples of each prime number starting from 2 up to `n / 2`, and the complexity of the sieve is dominated by the number of multiples marked for each prime number.
-   
-2. **Finding Prime Pairs**:
-   - After calculating the sieve, we loop through all numbers from `1` to `n / 2`. For each number `i`, we check if both `i` and `n - i` are prime. This check takes constant time \( O(1) \) for each iteration. Therefore, this part has a time complexity of \( O(n) \).
+6. **Marking Multiples as Non-Primes**
+	```cpp
+	        net[j * i] = false;
+	```
+	Marks the multiples of `i` as `false` in the `net` vector, indicating they are not prime numbers.
 
-Thus, the overall time complexity is \( O(n \log \log n) \) due to the sieve.
+7. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declares a map `mp`, which is not used in this implementation but could be used for further optimization or storing prime counts.
 
-#### Space Complexity
+8. **Result Vector Initialization**
+	```cpp
+	    vector<vector<int>> res;
+	```
+	Initializes an empty vector `res` to store pairs of primes that sum up to `n`.
 
-1. **Sieve Array**:
-   - We use a vector `net` of size \( n + 1 \) to store whether each number from `1` to `n` is prime. The space complexity for this array is \( O(n) \).
+9. **Prime Pair Search Loop**
+	```cpp
+	    for(int i = 1; i < n / 2 + 1; i++)
+	```
+	Starts a loop to iterate through numbers `i` from 1 to `n / 2`. This is to find pairs where `i` and `n - i` are both prime.
 
-2. **Result Vector**:
-   - The result vector `res` will store pairs of prime numbers, and in the worst case, it will store approximately \( n / 2 \) pairs. Thus, the space complexity for the result vector is \( O(n) \).
+10. **Prime Pair Check**
+	```cpp
+	        if(net[i] && net[n - i]) 
+	```
+	Checks if both `i` and `n - i` are prime numbers by checking their corresponding values in the `net` array.
 
-Overall, the space complexity is \( O(n) \), as the largest space usage comes from the sieve array and the result vector.
+11. **Store Valid Prime Pair**
+	```cpp
+	        res.push_back({i, n - i});
+	```
+	If both `i` and `n - i` are prime, the pair is added to the result vector `res`.
 
-### Conclusion
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the vector `res`, which contains all pairs of prime numbers that sum to `n`.
 
-The solution efficiently finds all pairs of prime numbers that sum to a given number `n`. By using the Sieve of Eratosthenes to identify primes up to `n`, and then checking for prime pairs, this solution works in \( O(n \log \log n) \) time and \( O(n) \) space. The algorithm is well-suited for solving this problem even with relatively large values of `n`, and it guarantees that all prime pairs are found without duplication.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log log n) for the Sieve of Eratosthenes.
+- **Average Case:** O(n log log n).
+- **Worst Case:** O(n log log n).
+
+The time complexity is dominated by the Sieve of Eratosthenes, which runs in O(n log log n). Checking pairs takes O(n) time.
+
+### Space Complexity 💾
+- **Best Case:** O(n).
+- **Worst Case:** O(n).
+
+The space complexity is O(n) for storing the prime numbers and their sieve.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-pairs-with-target-sum/description/)
 

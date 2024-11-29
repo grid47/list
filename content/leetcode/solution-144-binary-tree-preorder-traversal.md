@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "WIfjmUTXnlE"
 youtube_upload_date="2022-06-29"
 youtube_thumbnail="https://i.ytimg.com/vi/WIfjmUTXnlE/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,144 @@ youtube_thumbnail="https://i.ytimg.com/vi/WIfjmUTXnlE/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary tree. The task is to return the preorder traversal of the tree. Preorder traversal means visiting the root node first, followed by the left subtree, and then the right subtree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by its root node, where each node has a value, a left child, and a right child.
+- **Example:** `Input: root = [10, null, 20, 30]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [0, 100].
+	- -100 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    void pre(TreeNode* root, vector<int> &ans) {
-        if(!root) return;
-        ans.push_back(root->val);
-        pre(root->left, ans);
-        pre(root->right, ans);
-    }
-    vector<int> preorderTraversal(TreeNode* root) {
-        vector<int> ans;
-        pre(root, ans);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of node values representing the preorder traversal of the binary tree.
+- **Example:** `Output: [10, 20, 30]`
+- **Constraints:**
+	- The output should be a list of integers representing the node values in the correct preorder traversal order.
 
-### 📝 **Problem Understanding: Preorder Traversal of a Binary Tree**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to return a list of node values in preorder traversal order, where each node is visited starting with the root node, followed by the left subtree, and then the right subtree.
 
-We are asked to perform a **preorder traversal** on a binary tree. In preorder traversal, we visit the node first, then recursively visit its left subtree, and finally, its right subtree.
+- 1. Start at the root of the tree.
+- 2. Add the value of the current node to the result list.
+- 3. Traverse the left subtree recursively.
+- 4. Traverse the right subtree recursively.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree may be empty (i.e., root is null).
+- The tree contains nodes with values between -100 and 100.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [10, null, 20, 30]`  \
+  **Explanation:** The tree is: 10 -> 20 -> 30. The preorder traversal visits the root (10), then the right child (20), and its right child (30), resulting in the output [10, 20, 30].
 
-#### Example:
-- **Input**: `root = [1, null, 2, 3]`
-  - **Output**: `[1, 2, 3]`
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a recursive approach where we first visit the root, then recursively visit the left and right subtrees.
 
-In this traversal:
-1. Visit the root node.
-2. Traverse the left subtree.
-3. Traverse the right subtree.
-
----
-
-### 🔧 **Approach: Recursive Preorder Traversal**
-
-To implement this, we can use a **recursive approach**:
-1. **Base Case**: If the node is `NULL`, we return (i.e., nothing more to process).
-2. **Recursive Case**: If the node is not `NULL`, we:
-   - Process the node (add its value to the result).
-   - Recursively call the function for the left child.
-   - Recursively call the function for the right child.
-
-This approach follows the standard definition of preorder traversal.
-
----
-
-### 🖥️ **Code Breakdown: Step-by-Step**
-
-#### Step 1: Define the TreeNode Structure
+### Initial Thoughts 💭
+- A simple recursive solution can be used to achieve the preorder traversal.
+- While the recursive solution is simple, an iterative solution using a stack can also be implemented to avoid recursion.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input tree is empty (root is null), return an empty list.
+- For larger trees, the solution should efficiently handle all nodes within the time complexity of O(n).
+- Handle trees with negative node values, as node values can range from -100 to 100.
+- The solution must operate in linear time, O(n), where n is the number of nodes in the tree.
+{{< dots >}}
+## Code 💻
 ```cpp
-struct TreeNode {
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-};
-```
-- `TreeNode` represents a node in the binary tree, with:
-  - `val`: The value stored in the node.
-  - `left`: Pointer to the left child.
-  - `right`: Pointer to the right child.
-  
-#### Step 2: Define the Recursive Preorder Traversal Function
-```cpp
-void pre(TreeNode* root, vector<int>& ans) {
-    if (!root) return;  // Base case: if the node is null, do nothing.
-    ans.push_back(root->val);  // Visit the root node (process it).
-    pre(root->left, ans);  // Recursively traverse the left subtree.
-    pre(root->right, ans);  // Recursively traverse the right subtree.
+void pre(TreeNode* root, vector<int> &ans) {
+    if(!root) return;
+    ans.push_back(root->val);
+    pre(root->left, ans);
+    pre(root->right, ans);
 }
-```
-- **Base Case**: If the node is `NULL`, return without doing anything.
-- **Recursive Case**: Process the node (add `root->val` to `ans`), then recursively traverse the left and right children.
-
-#### Step 3: Define the Preorder Traversal Wrapper Function
-```cpp
 vector<int> preorderTraversal(TreeNode* root) {
-    vector<int> ans;  // Initialize an empty vector to store the result.
-    pre(root, ans);  // Call the recursive preorder function.
-    return ans;  // Return the result vector.
+    vector<int> ans;
+    pre(root, ans);
+    return ans;
 }
 ```
-- This function initializes an empty vector `ans` to hold the preorder traversal result.
-- It then calls the recursive function `pre` to process the tree, starting from the root.
-- Finally, it returns the result stored in `ans`.
 
----
+This function implements a preorder tree traversal. It recursively visits the root node first, then the left subtree, followed by the right subtree, collecting node values along the way.
 
-### 🧮 **Time and Space Complexity**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	void pre(TreeNode* root, vector<int> &ans) {
+	```
+	This defines a helper function `pre` that performs a recursive preorder traversal of a binary tree, storing the visited node values in the `ans` vector.
 
-#### ⏱️ **Time Complexity**:
-- **O(n)**: In the worst case, we visit each node exactly once, where `n` is the number of nodes in the binary tree. Thus, the time complexity is linear, **O(n)**.
+2. **Base Case**
+	```cpp
+	    if(!root) return;
+	```
+	Checks if the current node is null. If it is, the function returns immediately, ending the current recursive branch.
 
-#### 🧳 **Space Complexity**:
-- **O(n)**: The space complexity is determined by:
-  - The space required to store the result vector `ans`, which holds `n` values.
-  - The recursive call stack. In the worst case (for a completely unbalanced tree), the recursion depth can be `O(n)`.
+3. **Visit Node**
+	```cpp
+	    ans.push_back(root->val);
+	```
+	Adds the value of the current node (`root->val`) to the `ans` vector, which stores the result of the preorder traversal.
 
-Thus, the overall space complexity is **O(n)**.
+4. **Recurse Left Subtree**
+	```cpp
+	    pre(root->left, ans);
+	```
+	Recursively calls the `pre` function on the left child of the current node to traverse the left subtree.
 
----
+5. **Recurse Right Subtree**
+	```cpp
+	    pre(root->right, ans);
+	```
+	Recursively calls the `pre` function on the right child of the current node to traverse the right subtree.
 
-### 🎯 **Conclusion: Efficient Recursive Solution**
+6. **Main Function Definition**
+	```cpp
+	vector<int> preorderTraversal(TreeNode* root) {
+	```
+	Defines the main function `preorderTraversal`, which initializes the result container (`ans`) and calls the helper function `pre` to start the traversal.
 
-This recursive solution provides a straightforward and efficient way to perform a preorder traversal on a binary tree. It works by visiting the node first, then recursively traversing its left and right subtrees, ensuring the correct order of traversal.
+7. **Initialize Result Container**
+	```cpp
+	    vector<int> ans;
+	```
+	Initializes the vector `ans`, which will store the result of the preorder traversal.
 
-#### Key Insights:
-- **Simple Recursive Solution**: The algorithm uses recursion to process each node, making the solution easy to understand and implement.
-- **Optimal Time Complexity**: The time complexity is linear **O(n)**, which is optimal for traversing every node in the tree.
-- **Space Complexity Considerations**: The space complexity is **O(n)** due to the result vector and the recursive call stack.
+8. **Call Helper Function**
+	```cpp
+	    pre(root, ans);
+	```
+	Calls the `pre` helper function, passing the root of the tree and the `ans` vector to begin the preorder traversal.
 
-This approach is highly effective for handling medium to large binary trees and ensures minimal memory usage with a clear and concise implementation.
+9. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the `ans` vector containing the node values collected during the preorder traversal.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), when the tree has no empty branches.
+- **Average Case:** O(n), the tree is traversed once.
+- **Worst Case:** O(n), the tree will always need to be fully traversed.
+
+The time complexity is O(n) because each node in the tree is visited once during the preorder traversal.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if an iterative solution is used with a stack.
+- **Worst Case:** O(h), where h is the height of the tree, due to the recursive call stack.
+
+The space complexity depends on the recursion depth (height of the tree), or the space used by the stack in the iterative approach.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-preorder-traversal/description/)
 

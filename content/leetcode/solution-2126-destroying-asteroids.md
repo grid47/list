@@ -14,116 +14,153 @@ img_src = ""
 youtube = "e9FIRRXjKJI"
 youtube_upload_date="2022-01-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/e9FIRRXjKJI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a planet with an initial mass. There are asteroids approaching the planet, each with its own mass. The planet can destroy an asteroid if its current mass is greater than or equal to the asteroid's mass. After destroying an asteroid, the planet's mass increases by the asteroid's mass. You need to determine if the planet can destroy all the asteroids by strategically choosing the order of the collisions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer representing the planet's mass and an array of integers representing the mass of each asteroid.
+- **Example:** `mass = 15, asteroids = [7, 4, 9, 3, 2]`
+- **Constraints:**
+	- 1 <= mass <= 10^5
+	- 1 <= asteroids.length <= 10^5
+	- 1 <= asteroids[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool asteroidsDestroyed(int mass, vector<int>& ast) {
-        sort(ast.begin(), ast.end());
-        int n = ast.size();
-        long long mss = mass;
-        for(int i = 0;i < n; i++) {
-            if(mss >= ast[i])
-                mss += ast[i];
-            else return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if all the asteroids can be destroyed, otherwise return false.
+- **Example:** `Input: mass = 15, asteroids = [7, 4, 9, 3, 2] Output: true`
+- **Constraints:**
+	- The mass of the planet and asteroids is within the specified range.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if the planet can destroy all the asteroids, we need to check if the planet's mass is sufficient for each asteroid as we go through the list.
+
+- Sort the asteroids in ascending order.
+- Iterate over each asteroid and check if the planet's current mass is greater than or equal to the asteroid's mass.
+- If the planet can destroy the asteroid, increase the planet's mass by the asteroid's mass.
+- If at any point the planet cannot destroy an asteroid, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The asteroids are processed in a way that allows the planet to destroy them in the most efficient order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: mass = 15, asteroids = [7, 4, 9, 3, 2]`  \
+  **Explanation:** The planet starts with a mass of 15. By sorting the asteroids, the planet can destroy them in the order [2, 3, 4, 7, 9]. After destroying all asteroids, the planet's mass will be 15 + 2 + 3 + 4 + 7 + 9 = 40. Since the planet can destroy all asteroids, the output is true.
+
+- **Input:** `Input: mass = 10, asteroids = [4, 9, 8, 6]`  \
+  **Explanation:** The planet starts with a mass of 10. By sorting the asteroids, the planet can destroy them in the order [4, 6, 8]. However, after destroying the asteroid with mass 8, the planet's mass is still only 18, which is not enough to destroy the asteroid with mass 9. Therefore, the output is false.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can first sort the asteroids by mass in ascending order, then iterate through them to check if the planet can destroy each asteroid. If the planet cannot destroy an asteroid, we return false.
+
+### Initial Thoughts 💭
+- Sorting the asteroids allows the planet to destroy the smaller ones first, maximizing its chances of surviving.
+- We need to ensure that the planet's mass is always sufficient to destroy the next asteroid.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no asteroids, return true since there is nothing to destroy.
+- Ensure that the solution efficiently handles up to 10^5 asteroids.
+- If the planet's mass is very small compared to the asteroids, it may not be able to destroy even the smallest asteroid.
+- The solution should be able to handle the maximum number of asteroids and mass values.
+{{< dots >}}
+## Code 💻
+```cpp
+bool asteroidsDestroyed(int mass, vector<int>& ast) {
+    sort(ast.begin(), ast.end());
+    int n = ast.size();
+    long long mss = mass;
+    for(int i = 0;i < n; i++) {
+        if(mss >= ast[i])
+            mss += ast[i];
+        else return false;
     }
-};
-{{< /highlight >}}
----
+    return true;
+}
+```
 
-### Problem Statement
+This function determines if a spacecraft can destroy all asteroids in the array. Starting with an initial mass, it checks if the mass is enough to destroy each asteroid, updating the mass after each destruction. If at any point the mass is insufficient, it returns false.
 
-The problem requires us to determine whether a spacecraft can destroy all incoming asteroids based on its initial mass. Each asteroid has a specific mass, and if the spacecraft's mass is greater than or equal to the mass of an asteroid, it can destroy that asteroid and increase its own mass by the mass of the destroyed asteroid. The spacecraft starts with a certain initial mass, and the goal is to decide if it can successfully destroy all asteroids without failing.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool asteroidsDestroyed(int mass, vector<int>& ast) {
+	```
+	This line defines the function 'asteroidsDestroyed', which takes an integer 'mass' (the initial mass) and a reference to a vector 'ast' (representing the asteroid sizes) as input. The function returns a boolean indicating whether all asteroids can be destroyed.
 
-### Approach
+2. **Sorting**
+	```cpp
+	    sort(ast.begin(), ast.end());
+	```
+	This line sorts the asteroid sizes in ascending order, ensuring the spacecraft will destroy the smallest asteroids first, which maximizes the chance of success.
 
-To solve this problem, we will use the following approach:
+3. **Variable Initialization**
+	```cpp
+	    int n = ast.size();
+	```
+	This line stores the number of asteroids in the variable 'n', which will be used in the subsequent loop to iterate over all asteroids.
 
-1. **Sort the Asteroids**: Begin by sorting the asteroids in ascending order of their mass. This allows us to handle the smaller asteroids first, maximizing the chance of the spacecraft surviving against larger ones later on.
-2. **Iterate Through Asteroids**: For each asteroid, check if the spacecraft's current mass is sufficient to destroy the asteroid. If it is, we will add the asteroid's mass to the spacecraft's mass; if not, the spacecraft cannot destroy the asteroid, and we will return false.
-3. **Return Success**: If we manage to iterate through all asteroids without failing to destroy any, we return true.
+4. **Variable Initialization**
+	```cpp
+	    long long mss = mass;
+	```
+	This line initializes 'mss' with the spacecraft's initial mass. The variable 'mss' will be updated as asteroids are destroyed.
 
-This greedy approach ensures that we always deal with the smallest threat first, allowing the spacecraft to grow its mass as quickly as possible.
+5. **Loop Start**
+	```cpp
+	    for(int i = 0;i < n; i++) {
+	```
+	This line starts a loop that iterates over each asteroid in the sorted 'ast' vector.
 
-### Code Breakdown (Step by Step)
+6. **Check Mass Sufficiency**
+	```cpp
+	        if(mss >= ast[i])
+	```
+	This line checks if the spacecraft's current mass ('mss') is greater than or equal to the mass of the current asteroid ('ast[i]'). If the mass is sufficient, it proceeds to destroy the asteroid.
 
-Here’s a detailed explanation of the implementation:
+7. **Update Mass**
+	```cpp
+	            mss += ast[i];
+	```
+	This line updates the spacecraft's mass by adding the mass of the destroyed asteroid to 'mss'.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class is defined, which contains the method to determine whether the spacecraft can destroy all asteroids.
+8. **Return False**
+	```cpp
+	        else return false;
+	```
+	If at any point the spacecraft's mass is insufficient to destroy the asteroid, this line returns false, indicating the spacecraft cannot destroy all asteroids.
 
-2. **Function Definition**:
-   ```cpp
-   bool asteroidsDestroyed(int mass, vector<int>& ast) {
-   ```
-   - The public member function `asteroidsDestroyed` is declared, which takes an integer `mass` (the initial mass of the spacecraft) and a vector of integers `ast` (the masses of the asteroids) as arguments. It returns a boolean indicating whether all asteroids can be destroyed.
+9. **Return True**
+	```cpp
+	    return true;
+	```
+	If the loop completes without returning false, this line returns true, indicating the spacecraft was able to destroy all asteroids.
 
-3. **Sorting the Asteroids**:
-   ```cpp
-   sort(ast.begin(), ast.end());
-   ```
-   - We sort the `ast` vector in ascending order using the standard `sort` function from the STL (Standard Template Library). This allows us to efficiently process the smallest asteroids first.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-4. **Variable Initialization**:
-   ```cpp
-   int n = ast.size();
-   long long mss = mass;
-   ```
-   - We initialize `n` to the size of the asteroids vector and create a variable `mss` of type `long long` to store the spacecraft's mass. Using `long long` prevents overflow when adding asteroid masses.
+The sorting step takes O(n log n), and the iteration over the asteroids takes O(n). Thus, the overall time complexity is O(n log n), where n is the number of asteroids.
 
-5. **Iterating Through the Asteroids**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       if(mss >= ast[i])
-           mss += ast[i];
-       else return false;
-   }
-   ```
-   - We start a loop to iterate over each asteroid.
-   - For each asteroid, we check if the spacecraft's current mass `mss` is greater than or equal to the mass of the asteroid `ast[i]`.
-     - If `true`, we add the asteroid's mass to the spacecraft's mass (i.e., `mss += ast[i]`).
-     - If `false`, we return `false` immediately since the spacecraft cannot destroy this asteroid.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-6. **Return Result**:
-   ```cpp
-   return true;
-   }
-   ```
-   - If the loop completes without returning `false`, it means the spacecraft successfully destroyed all asteroids. We return `true`.
+The space complexity is O(n) due to the storage required for the sorted list of asteroids, but can be O(1) if sorting is done in-place.
 
-7. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This curly brace marks the end of the `Solution` class definition.
+**Happy Coding! 🎉**
 
-### Complexity Analysis
-
-- **Time Complexity**: \(O(n \log n)\)
-  - The time complexity is dominated by the sorting step, which is \(O(n \log n)\), where \(n\) is the number of asteroids.
-
-- **Space Complexity**: \(O(1)\)
-  - The space complexity is \(O(1)\) since we are using a constant amount of extra space for variables, regardless of the input size.
-
-### Conclusion
-
-The `asteroidsDestroyed` function effectively determines whether a spacecraft can destroy all incoming asteroids based on its initial mass. By employing a greedy approach that processes smaller asteroids first, the function maximizes the spacecraft's chances of survival against larger asteroids.
-
-This solution is optimal for the problem and efficiently handles various input scenarios, ensuring that the spacecraft either accumulates enough mass to destroy all asteroids or fails gracefully by returning false at the first instance of inability to destroy an asteroid.
-
-The straightforward logic of sorting and iterating over the asteroids allows for a clear understanding of the underlying mechanics of the problem, making the implementation both effective and easy to comprehend. Overall, this solution exemplifies the utility of greedy algorithms in optimizing outcomes based on given constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/destroying-asteroids/description/)
 

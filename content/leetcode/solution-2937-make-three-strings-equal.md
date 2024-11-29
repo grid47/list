@@ -14,123 +14,154 @@ img_src = ""
 youtube = "7F8GNWVlYgM"
 youtube_upload_date="2023-11-19"
 youtube_thumbnail="https://i.ytimg.com/vi/7F8GNWVlYgM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given three strings: s1, s2, and s3. In each operation, you can choose one of these strings and remove its rightmost character. The goal is to determine the minimum number of operations required to make all three strings identical. If it's impossible to make them equal, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three strings, s1, s2, and s3.
+- **Example:** `s1 = 'hello', s2 = 'heco', s3 = 'heo'`
+- **Constraints:**
+	- 1 <= s1.length, s2.length, s3.length <= 100
+	- s1, s2, and s3 consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findMinimumOperations(string s1, string s2, string s3) {
-        int l1=s1.length(), l2=s2.length(), l3=s3.length();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to make all strings equal, or -1 if it is impossible.
+- **Example:** `For s1 = 'hello', s2 = 'heco', s3 = 'heo', the output is 2.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of operations to make the strings identical by removing the rightmost character from one of the strings in each operation.
+
+- Start by comparing the longest common prefix among the three strings.
+- For each common prefix, calculate how many characters need to be removed from each string to make them equal to the prefix.
+- Return the smallest number of operations or -1 if no common prefix exists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings contain only lowercase English letters.
+- Strings will not be empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s1 = 'hello', s2 = 'heco', s3 = 'heo'`  \
+  **Explanation:** By removing the rightmost character from both s1 and s2, all three strings become 'he'. Therefore, it takes 2 operations to make them equal.
+
+- **Input:** `s1 = 'cat', s2 = 'dog', s3 = 'bat'`  \
+  **Explanation:** The strings cannot be made equal because the first characters are different, so the answer is -1.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to find the longest common prefix of all three strings and calculate the minimum number of deletions required to make the strings equal.
+
+### Initial Thoughts 💭
+- The problem boils down to finding the longest common prefix.
+- If the longest common prefix is of length k, the number of operations required will be the length of each string minus k.
+{{< dots >}}
+### Edge Cases 🌐
+- If any of the strings is empty, return -1 as it is impossible to make them equal.
+- The solution should work for strings of length up to 100.
+- If all strings are already equal, no operations are needed.
+- The strings must not be empty.
+{{< dots >}}
+## Code 💻
+```cpp
+int findMinimumOperations(string s1, string s2, string s3) {
+    int l1=s1.length(), l2=s2.length(), l3=s3.length();
 		int len=min({l1,l2,l3});
-        
-        int ans=INT_MAX;
-        for(int i=0;i<len;i++){
-            if(s1.substr(0,i+1) == s2.substr(0,i+1) && s2.substr(0,i+1) == s3.substr(0,i+1)){
-                int c=l1-(i+1)+l2-(i+1)+l3-(i+1);
-                ans=min(ans,c);
-            }
+    
+    int ans=INT_MAX;
+    for(int i=0;i<len;i++){
+        if(s1.substr(0,i+1) == s2.substr(0,i+1) && s2.substr(0,i+1) == s3.substr(0,i+1)){
+            int c=l1-(i+1)+l2-(i+1)+l3-(i+1);
+            ans=min(ans,c);
         }
-        
-        return (ans==INT_MAX ? -1:ans);
     }
-};
-{{< /highlight >}}
----
+    
+    return (ans==INT_MAX ? -1:ans);
+}
+```
 
-### Problem Statement:
-Given three strings `s1`, `s2`, and `s3`, the task is to find the minimum number of operations required to make all three strings identical. The only allowed operation is to remove characters from the end of the strings, meaning we can perform a number of deletions on each string, but no insertions or rearrangements are allowed. 
+The function calculates the minimum number of operations required to make three input strings, s1, s2, and s3, identical by deleting characters from each string. It computes the minimum number of deletions needed to achieve this, or returns -1 if it's not possible.
 
-The goal is to determine the smallest number of deletions required such that the three strings become the same. If it is impossible to make the strings identical, the function should return `-1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findMinimumOperations(string s1, string s2, string s3) {
+	```
+	Defines the function 'findMinimumOperations' that takes three strings as input and returns the minimum number of deletions required to make all three strings equal, or -1 if it's not possible.
 
-### Approach:
-To solve the problem efficiently, we can use the following strategy:
+2. **Length Calculation**
+	```cpp
+	    int l1=s1.length(), l2=s2.length(), l3=s3.length();
+	```
+	Calculates the lengths of the three input strings, s1, s2, and s3, and stores them in l1, l2, and l3 respectively.
 
-1. **Identify the Longest Common Prefix**:
-   The key observation is that the minimum deletions required will be based on the longest common prefix among the three strings. The longer the common prefix, the fewer deletions are needed.
+3. **Minimum Length Calculation**
+	```cpp
+			int len=min({l1,l2,l3});
+	```
+	Finds the minimum length of the three strings to limit the loop iteration to the shortest string.
 
-2. **Iterate Over Possible Prefixes**:
-   We need to check all possible common prefixes between the three strings. Starting from the first character, we compare the corresponding characters of `s1`, `s2`, and `s3`. As soon as the characters don't match, we stop and consider the previous matching prefix as the longest common prefix.
+4. **Answer Initialization**
+	```cpp
+	    int ans=INT_MAX;
+	```
+	Initializes the variable 'ans' to the maximum integer value, representing the minimum number of deletions, which will be updated during the loop.
 
-3. **Calculate the Number of Deletions**:
-   Once we find the longest common prefix (say of length `i`), we can calculate the number of deletions required:
-   - We delete characters from `s1` starting from position `i + 1` to the end of the string.
-   - Similarly, we delete characters from `s2` and `s3` starting from position `i + 1` to their respective ends.
-   The total deletions required is the sum of the characters that need to be deleted from each string.
+5. **Loop Setup**
+	```cpp
+	    for(int i=0;i<len;i++){
+	```
+	Sets up a loop to iterate through the characters of the strings up to the length of the shortest string.
 
-4. **Find the Minimum Deletions**:
-   To minimize the deletions, we check all prefixes of increasing length. We compute the deletions for each valid prefix and keep track of the minimum value.
+6. **Substring Comparison**
+	```cpp
+	        if(s1.substr(0,i+1) == s2.substr(0,i+1) && s2.substr(0,i+1) == s3.substr(0,i+1)){
+	```
+	Compares the substrings of s1, s2, and s3 from the beginning up to index i. If all three substrings match, the code inside the if block is executed.
 
-5. **Handle Edge Cases**:
-   - If no common prefix exists (i.e., no prefix results in all three strings being the same), then it is impossible to make the strings identical, and the function should return `-1`.
+7. **Operation Count Calculation**
+	```cpp
+	            int c=l1-(i+1)+l2-(i+1)+l3-(i+1);
+	```
+	Calculates the number of deletions required to make the substrings match by subtracting (i+1) from the length of each string and summing them.
 
-### Code Breakdown (Step by Step):
+8. **Answer Update**
+	```cpp
+	            ans=min(ans,c);
+	```
+	Updates the answer with the minimum value between the current answer and the calculated deletions.
 
-#### 1. **Variable Initialization**:
-   - `l1`, `l2`, `l3`: These store the lengths of the three input strings `s1`, `s2`, and `s3`.
-   - `len`: This stores the minimum length among the three strings. We can only consider prefixes up to this length.
-   - `ans`: This is initialized to `INT_MAX`, which will hold the minimum number of deletions required.
+9. **Final Answer**
+	```cpp
+	    return (ans==INT_MAX ? -1:ans);
+	```
+	Returns the minimum number of deletions needed, or -1 if no such operation was found.
 
-   ```cpp
-   int l1 = s1.length(), l2 = s2.length(), l3 = s3.length();
-   int len = min({l1, l2, l3});
-   int ans = INT_MAX;
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(min(s1.length, s2.length, s3.length))
+- **Average Case:** O(min(s1.length, s2.length, s3.length))
+- **Worst Case:** O(min(s1.length, s2.length, s3.length))
 
-#### 2. **Loop Through Possible Prefixes**:
-   The for loop starts from `i = 0` and iterates through each possible prefix length from `0` to `len - 1`. For each `i`, we check if the first `i + 1` characters of all three strings match.
+The complexity is dominated by the comparison of the strings.
 
-   - If they do, we calculate the number of deletions needed to make the strings identical by removing the characters after the first `i + 1` characters from each string.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   ```cpp
-   for (int i = 0; i < len; i++) {
-       if (s1.substr(0, i + 1) == s2.substr(0, i + 1) && s2.substr(0, i + 1) == s3.substr(0, i + 1)) {
-           int c = l1 - (i + 1) + l2 - (i + 1) + l3 - (i + 1);
-           ans = min(ans, c);
-       }
-   }
-   ```
+The space complexity is constant as we only need a few variables to store intermediate results.
 
-   - `s1.substr(0, i + 1)`, `s2.substr(0, i + 1)`, and `s3.substr(0, i + 1)` extract the first `i + 1` characters from each string. If these substrings match for all three strings, then they share a common prefix of length `i + 1`.
+**Happy Coding! 🎉**
 
-   - The number of deletions required for each string is calculated by subtracting the length of the common prefix (`i + 1`) from the total length of each string. The total deletions is the sum of deletions for all three strings.
-
-   - The `ans` variable is updated to track the minimum deletions required.
-
-#### 3. **Return the Result**:
-   After checking all possible prefixes, if no valid common prefix was found (i.e., `ans` remains `INT_MAX`), return `-1` to indicate it is impossible to make the strings identical. Otherwise, return the minimum number of deletions.
-
-   ```cpp
-   return (ans == INT_MAX ? -1 : ans);
-   ```
-
-### Complexity:
-
-#### Time Complexity:
-- The loop iterates through all possible prefixes of length from `1` to `min(l1, l2, l3)`. In each iteration, we check if the substrings of `s1`, `s2`, and `s3` of length `i + 1` are equal. The substring comparison has a time complexity of \(O(i)\).
-- The total time complexity is the sum of substring comparisons for each possible prefix, which is:
-  \[
-  O(1 + 2 + 3 + \dots + min(l1, l2, l3)) = O(n)
-  \]
-  where `n = min(l1, l2, l3)` is the length of the shortest string.
-
-Thus, the overall time complexity is \(O(n)\), where `n` is the length of the shortest string among `s1`, `s2`, and `s3`.
-
-#### Space Complexity:
-- The space complexity is \(O(1)\) because we are using only a constant amount of extra space for variables such as `l1`, `l2`, `l3`, `ans`, and `len`.
-- The space used by the substrings in the loop is temporary and does not increase the space complexity.
-
-Thus, the space complexity is \(O(1)\).
-
-### Conclusion:
-This solution efficiently computes the minimum number of deletions required to make the three strings identical by finding the longest common prefix. It iterates through all possible prefixes and calculates the deletions needed for each valid prefix. The time complexity is linear in the length of the shortest string, and the space complexity is constant. This approach ensures that we minimize the number of deletions while ensuring that the three strings become identical, or it returns `-1` if no solution is possible. 
-
-- **Time Complexity**: \(O(n)\), where `n` is the length of the shortest string among `s1`, `s2`, and `s3`.
-- **Space Complexity**: \(O(1)\).
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-three-strings-equal/description/)
 

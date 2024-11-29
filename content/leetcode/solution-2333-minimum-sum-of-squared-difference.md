@@ -14,162 +14,242 @@ img_src = ""
 youtube = "wp8lV0aP6aU"
 youtube_upload_date="2022-07-09"
 youtube_thumbnail="https://i.ytimg.com/vi/wp8lV0aP6aU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays, nums1 and nums2, each of length n. You are also given two integers k1 and k2. Modify any element of nums1 or nums2 at most k1 or k2 times, respectively, to minimize the sum of squared differences between the two arrays.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two integer arrays nums1 and nums2 of length n, and two integers k1 and k2.
+- **Example:** `nums1 = [10, 20, 30], nums2 = [1, 15, 35], k1 = 2, k2 = 3`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 0 <= nums1[i], nums2[i] <= 10^5
+	- 0 <= k1, k2 <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long minSumSquareDiff(vector<int>& nums1, vector<int>& nums2, int k1, int k2) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum possible sum of squared differences after modifying the elements of nums1 and nums2 as described.
+- **Example:** `50`
+- **Constraints:**
+	- The result must be a non-negative integer.
 
-        int n = nums1.size();
-        vector<long long> diff(n, 0);
-        for(int i = 0; i < n; i++)
-        diff[i] = abs(nums1[i] - nums2[i]);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Minimize the sum of squared differences by adjusting elements of nums1 and nums2 under given constraints.
 
-        long long m = *max_element(diff.begin(), diff.end());
-        int k = k1 + k2;
+- Calculate the initial squared differences between nums1 and nums2.
+- Determine the amount of adjustment possible based on k1 and k2 for each element.
+- Apply the adjustments in a way that minimizes the overall squared difference.
+{{< dots >}}
+### Problem Assumptions ✅
+- You are allowed to modify the elements of nums1 and nums2 within the provided limits of k1 and k2.
+- The arrays nums1 and nums2 can be modified independently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums1 = [5, 12, 8], nums2 = [3, 9, 5], k1 = 1, k2 = 2`  \
+  **Explanation:** By adjusting nums1[0] by +1 and nums2[2] by -2, the minimum sum of squared differences is achieved.
 
-        vector<long long> bck(m + 1, 0);
-        for(int i = 0; i < n; i++)
-            bck[diff[i]]++;
+{{< dots >}}
+## Approach 🚀
+To minimize the sum of squared differences, adjust the elements of nums1 and nums2 intelligently using k1 and k2 to reduce the largest differences first.
 
-        for(int i = m; i > 0; i--)
-            if (bck[i] > 0) {
-                long long num     = min(bck[i], (long long) k);
-                bck[i]     -= num;
-                bck[i - 1] += num;
-                k -= num;
-                if (k == 0) break;
-            }
-
-        long long res = 0;
-        for(long long i = 0; i < m + 1; i++)
-         res += bck[i] * (i * i);
-
-        return res;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to minimize the sum of squared differences between two arrays, `nums1` and `nums2`, after performing at most `k1` and `k2` operations, respectively, on each of the arrays. In each operation, we can reduce the difference between the two corresponding elements of the arrays by one. The goal is to determine the minimum sum of squares of differences after these operations.
-
-### Approach
-
-To solve this problem efficiently, the approach is as follows:
-
-1. **Calculate the Initial Differences**: First, we calculate the absolute differences between the corresponding elements of `nums1` and `nums2` and store them in a `diff` array.
-  
-2. **Maximize Reduction in Differences**: The main objective is to reduce the largest differences to minimize the sum of squares. We can reduce the differences iteratively, but we should always target the largest differences for reduction to maximize the impact on the final sum.
-
-3. **Greedy Approach**: Use a greedy approach to reduce the largest differences first. To do this:
-   - Track the frequency of each possible difference using a frequency array (`bck`).
-   - Apply the operations on the largest available differences, reducing the largest differences as much as possible in each step.
-
-4. **Final Calculation**: After applying all the operations, compute the sum of the squares of the remaining differences, as this will be the minimized sum.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code and understand its working:
-
-#### Step 1: Calculate Initial Differences
-
+### Initial Thoughts 💭
+- The sum of squared differences is sensitive to large differences between corresponding elements.
+- The optimal approach involves reducing these differences while respecting the available modification limits.
+- Start by computing the initial sum of squared differences.
+- Determine which elements can be adjusted most effectively with the given k1 and k2 values.
+{{< dots >}}
+### Edge Cases 🌐
+- If nums1 and nums2 are empty, the result should be 0.
+- For very large inputs, the solution should handle the constraints efficiently.
+- If k1 or k2 is 0, no modifications can be made, and the sum of squared differences remains unchanged.
+- Handle cases where the elements in nums1 and nums2 are already very close.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<long long> diff(n, 0);
-for(int i = 0; i < n; i++)
+long long minSumSquareDiff(vector<int>& nums1, vector<int>& nums2, int k1, int k2) {
+
+    int n = nums1.size();
+    vector<long long> diff(n, 0);
+    for(int i = 0; i < n; i++)
     diff[i] = abs(nums1[i] - nums2[i]);
+
+    long long m = *max_element(diff.begin(), diff.end());
+    int k = k1 + k2;
+
+    vector<long long> bck(m + 1, 0);
+    for(int i = 0; i < n; i++)
+        bck[diff[i]]++;
+
+    for(int i = m; i > 0; i--)
+        if (bck[i] > 0) {
+            long long num     = min(bck[i], (long long) k);
+            bck[i]     -= num;
+            bck[i - 1] += num;
+            k -= num;
+            if (k == 0) break;
+        }
+
+    long long res = 0;
+    for(long long i = 0; i < m + 1; i++)
+     res += bck[i] * (i * i);
+
+    return res;
+}
 ```
 
-- We initialize a `diff` array where `diff[i]` represents the absolute difference between `nums1[i]` and `nums2[i]`.
-- This array stores the differences between corresponding elements of `nums1` and `nums2`.
+This function calculates the minimum sum of squared differences between two lists `nums1` and `nums2` after performing up to `k1` and `k2` operations to adjust the values of the lists. It uses a greedy approach with a counting strategy to minimize the difference.
 
-#### Step 2: Determine Maximum Difference and Initialize Frequency Array
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long minSumSquareDiff(vector<int>& nums1, vector<int>& nums2, int k1, int k2) {
+	```
+	Declares the function `minSumSquareDiff` that calculates the minimum sum of squared differences between two integer arrays after adjusting their values using up to `k1` and `k2` operations.
 
-```cpp
-long long m = *max_element(diff.begin(), diff.end());
-int k = k1 + k2;
-vector<long long> bck(m + 1, 0);
-```
+2. **Array Size Calculation**
+	```cpp
+	    int n = nums1.size();
+	```
+	Calculates the size of the input arrays `nums1` and `nums2`, storing it in variable `n`.
 
-- We find the maximum value from the `diff` array, which represents the largest difference between any two corresponding elements in `nums1` and `nums2`. This value `m` will be used to determine the size of our frequency array `bck`.
-- We also initialize the variable `k` to represent the total number of operations allowed (sum of `k1` and `k2`).
-- The frequency array `bck` is initialized to track the count of each difference value from `0` to `m`.
+3. **Difference Array Initialization**
+	```cpp
+	    vector<long long> diff(n, 0);
+	```
+	Initializes an array `diff` to store the absolute differences between the elements of `nums1` and `nums2`.
 
-#### Step 3: Populate the Frequency Array
+4. **Loop Through Arrays**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loops through the arrays `nums1` and `nums2` to calculate the absolute differences.
 
-```cpp
-for(int i = 0; i < n; i++)
-    bck[diff[i]]++;
-```
+5. **Calculate Differences**
+	```cpp
+	    diff[i] = abs(nums1[i] - nums2[i]);
+	```
+	Calculates the absolute difference between corresponding elements in `nums1` and `nums2` and stores it in the `diff` array.
 
-- We iterate over the `diff` array and count the occurrences of each difference value by updating the frequency array `bck`. This helps us know how many times each particular difference appears.
+6. **Find Maximum Difference**
+	```cpp
+	    long long m = *max_element(diff.begin(), diff.end());
+	```
+	Finds the maximum difference in the `diff` array to determine the range of possible values for adjustments.
 
-#### Step 4: Apply Operations to Reduce the Largest Differences
+7. **Total Operations Calculation**
+	```cpp
+	    int k = k1 + k2;
+	```
+	Calculates the total number of operations (`k1` and `k2`) available to adjust the values.
 
-```cpp
-for(int i = m; i > 0; i--)
-    if (bck[i] > 0) {
-        long long num = min(bck[i], (long long) k);
-        bck[i] -= num;
-        bck[i - 1] += num;
-        k -= num;
-        if (k == 0) break;
-    }
-```
+8. **Count Occurrences of Differences**
+	```cpp
+	    vector<long long> bck(m + 1, 0);
+	```
+	Initializes a backup array `bck` to store the count of each difference value.
 
-- Starting from the largest difference (`m`), we attempt to reduce it. For each difference `i`, if there are `bck[i]` occurrences, we try to reduce as many of them as possible by using the remaining operations (`k`).
-- For each reduction, we decrease the frequency of the current difference and increase the frequency of the next smallest difference (`i - 1`). This simulates reducing the difference by one.
-- After applying the operations, we decrement `k` by the number of operations used (`num`). If `k` becomes `0`, we stop further operations.
+9. **Loop Through Differences**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loops through the `diff` array to count the occurrences of each difference value.
 
-#### Step 5: Compute the Resulting Sum of Squares
+10. **Update Count Array**
+	```cpp
+	        bck[diff[i]]++;
+	```
+	Increments the count of the current difference in the backup array `bck`.
 
-```cpp
-long long res = 0;
-for(long long i = 0; i < m + 1; i++)
-    res += bck[i] * (i * i);
-```
+11. **Loop Through Differences in Reverse**
+	```cpp
+	    for(int i = m; i > 0; i--)
+	```
+	Starts a loop from the maximum difference down to 1 to try and minimize the differences with available operations.
 
-- After applying the operations, the `bck` array contains the frequencies of each difference value. To compute the result, we sum up the squares of each difference value, weighted by their frequencies.
-- This gives us the minimum sum of squares after the allowed operations.
+12. **Check if Adjustments are Possible**
+	```cpp
+	        if (bck[i] > 0) {
+	```
+	Checks if there are any occurrences of the current difference `i` that can be adjusted.
 
-#### Step 6: Return the Result
+13. **Calculate Number of Adjustments**
+	```cpp
+	            long long num     = min(bck[i], (long long) k);
+	```
+	Calculates the number of adjustments that can be made for the current difference, based on the available operations.
 
-```cpp
-return res;
-```
+14. **Update Count Array After Adjustments**
+	```cpp
+	            bck[i]     -= num;
+	```
+	Decreases the count of the current difference by the number of adjustments made.
 
-- Finally, the computed result (`res`) is returned, which is the minimum sum of squared differences after performing all the allowed operations.
+15. **Update Lower Difference Count**
+	```cpp
+	            bck[i - 1] += num;
+	```
+	Increases the count of the next lower difference by the number of adjustments made.
 
-### Complexity
+16. **Update Remaining Operations**
+	```cpp
+	            k -= num;
+	```
+	Reduces the remaining number of operations by the number of adjustments made.
 
-#### Time Complexity:
-- **O(n + m)**: 
-  - The initial computation of the `diff` array takes `O(n)` time, where `n` is the length of the input arrays.
-  - Finding the maximum difference (`m`) takes `O(n)` time.
-  - Populating the frequency array `bck` takes `O(n)` time.
-  - The loop that applies operations to reduce differences runs in `O(m)` time, as we iterate over all possible difference values from `m` down to `0`.
+17. **Check if Operations Are Exhausted**
+	```cpp
+	            if (k == 0) break;
+	```
+	Checks if all available operations have been used, and if so, breaks out of the loop.
 
-Thus, the total time complexity is **O(n + m)**, where `n` is the size of the input arrays, and `m` is the largest difference between the elements of the arrays.
+18. **Initialize Result**
+	```cpp
+	    long long res = 0;
+	```
+	Initializes the result variable `res` to store the final sum of squared differences.
 
-#### Space Complexity:
-- **O(m)**: 
-  - The space complexity is dominated by the `bck` array, which has a size of `m + 1`, where `m` is the maximum difference between any two elements in `nums1` and `nums2`. Therefore, the space complexity is **O(m)**.
+19. **Sum of Squared Differences**
+	```cpp
+	    for(long long i = 0; i < m + 1; i++)
+	```
+	Loops through the `bck` array to calculate the sum of squared differences.
 
-### Conclusion
+20. **Accumulate Squared Differences**
+	```cpp
+	     res += bck[i] * (i * i);
+	```
+	Accumulates the sum of squared differences using the counts from the `bck` array.
 
-This approach efficiently solves the problem of minimizing the sum of squared differences between two arrays by:
-- Calculating the initial differences between corresponding elements.
-- Using a greedy strategy to apply the available operations to reduce the largest differences.
-- Finally, calculating the sum of squares of the remaining differences to get the minimized result.
+21. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the final result, which is the minimum sum of squared differences after the adjustments.
 
-The solution works in linear time with respect to the size of the input arrays and is optimal for handling large inputs. By using a greedy approach combined with frequency counting, we ensure that the operations are applied in the most impactful way, leading to the smallest possible sum of squares.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) for sorting and calculating differences.
+- **Average Case:** O(n log n) for sorting and updating the elements.
+- **Worst Case:** O(n log n) due to sorting, which is the most time-consuming operation.
+
+The complexity is dominated by the sorting step.
+
+### Space Complexity 💾
+- **Best Case:** O(n) for storing differences and counts.
+- **Worst Case:** O(n) for storing differences and counts.
+
+Space complexity is linear in terms of the number of elements in nums1 and nums2.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-sum-of-squared-difference/description/)
 

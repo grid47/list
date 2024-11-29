@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "AXaPmVMkVAE"
 youtube_upload_date="2019-11-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/AXaPmVMkVAE/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,96 +28,147 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/AXaPmVMkVAE/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are a parent with several children and a set of cookies. Each child has a greed factor, which is the minimum size of a cookie they will be happy with. Each cookie also has a size. Your task is to distribute the cookies such that you maximize the number of content children. Each child can receive at most one cookie, and each cookie can only be given to one child.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: one representing the greed factors of children and another representing the sizes of cookies.
+- **Example:** `g = [1, 2, 3], s = [1, 1]`
+- **Constraints:**
+	- 1 <= g.length <= 3 * 10^4
+	- 0 <= s.length <= 3 * 10^4
+	- 1 <= g[i], s[j] <= 231 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findContentChildren(vector<int>& g, vector<int>& s) {
-        sort(g.begin(),g.end());
-        sort(s.begin(),s.end());
-        int i = 0, j=0;
-        while(i<g.size() && j<s.size()){
-            if(s[j]>=g[i])
-                i++; // when the child get the cookie, foward child by 1
-            j++;
-        }
-        return i;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of content children that can be satisfied by the cookies.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The result should be the number of content children that can be satisfied.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum number of children that can be satisfied by distributing the cookies.
+
+- 1. Sort both the greed factors and the sizes of cookies in ascending order.
+- 2. Use a two-pointer approach: one pointer for the children and one for the cookies.
+- 3. Iterate through the sorted arrays and try to match the smallest available cookie that can satisfy each child. If a match is found, move to the next child and the next cookie.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each child and cookie has a non-negative greed factor and size respectively.
+- Cookies may not be large enough to satisfy all children.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `g = [1, 2, 3], s = [1, 1]`  \
+  **Explanation:** In this case, you can only satisfy one child, as both cookies are too small to satisfy the children with greed factors of 2 and 3.
+
+- **Input:** `g = [1, 2], s = [1, 2, 3]`  \
+  **Explanation:** Here, both children can be satisfied because there are enough cookies of suitable size.
+
+{{< dots >}}
+## Approach 🚀
+This approach aims to maximize the number of children that can be satisfied by greedily assigning the smallest possible cookie that satisfies each child's greed.
+
+### Initial Thoughts 💭
+- Sorting the greed factors and cookie sizes will allow for an efficient greedy approach.
+- Using a two-pointer technique ensures that we can match children to cookies in O(n log n) time.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no cookies (s.length = 0), the result is 0.
+- The algorithm must be optimized to handle large inputs efficiently, ensuring time complexity remains manageable for large arrays.
+- If all cookies are too small to satisfy any child, the result should be 0.
+- The solution should run in O(n log n) time due to sorting.
+{{< dots >}}
+## Code 💻
+```cpp
+int findContentChildren(vector<int>& g, vector<int>& s) {
+    sort(g.begin(),g.end());
+    sort(s.begin(),s.end());
+    int i = 0, j=0;
+    while(i<g.size() && j<s.size()){
+        if(s[j]>=g[i])
+            i++; // when the child get the cookie, foward child by 1
+        j++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given two arrays `g` and `s`:
-- `g[i]` represents the greed factor of the i-th child, which indicates the minimum size of the cookie that the child will be content with.
-- `s[i]` represents the size of the i-th cookie.
-
-Our goal is to maximize the number of children who can be content by giving them a cookie from the available cookies. A child is content if the size of the cookie they receive is greater than or equal to their greed factor. Each child can receive at most one cookie, and each cookie can only be assigned to one child.
-
-The challenge is to implement an efficient algorithm that finds the maximum number of content children given the greed factors and the cookie sizes.
-
-### Approach
-
-The approach to solving this problem involves:
-1. **Sorting**: Sorting both the greed factors array `g` and the cookies array `s` ensures that we can efficiently match children with cookies, starting from the least greedy child and the smallest cookie that can satisfy them.
-2. **Greedy Algorithm**: We use a greedy approach to assign cookies. The basic idea is to match the smallest available cookie that can satisfy the current child, starting with the child with the least greed. If the current cookie can satisfy the current child, we move on to the next child; otherwise, we move on to the next cookie. This ensures we maximize the number of satisfied children.
-3. **Two-Pointer Technique**: We use two pointers, one for the greed factor array (`g`) and one for the cookie sizes array (`s`). The pointer for `g` tracks the children, and the pointer for `s` tracks the available cookies. We iterate over both arrays, assigning cookies to children whenever possible.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sort the Greed Factors and Cookie Sizes
-
-```cpp
-sort(g.begin(), g.end());
-sort(s.begin(), s.end());
-```
-
-- The first step in the approach is to sort both arrays: `g` (greed factors of children) and `s` (sizes of cookies). Sorting ensures that we can start assigning cookies from the smallest available size to the least greedy child.
-- Sorting is crucial because it allows us to efficiently match the smallest cookie that satisfies the child's greed.
-
-#### Step 2: Initialize Pointers and Start Matching
-
-```cpp
-int i = 0, j = 0;
-while(i < g.size() && j < s.size()) {
-    if(s[j] >= g[i])
-        i++; // when the child gets the cookie, forward child by 1
-    j++;
+    return i;
 }
 ```
 
-- We initialize two pointers: `i` for the greed factor array (`g`) and `j` for the cookie sizes array (`s`).
-- The `while` loop continues as long as there are children left (`i < g.size()`) and there are cookies left (`j < s.size()`).
-- Inside the loop:
-  - If the current cookie `s[j]` can satisfy the current child `g[i]` (i.e., `s[j] >= g[i]`), we move the pointer `i` to the next child (`i++`), because the current child is content with the current cookie.
-  - Regardless of whether the current child is satisfied, we always move the pointer `j` to the next cookie (`j++`), as each cookie can only be used once.
+The `findContentChildren` function solves the problem where children with a certain greed factor are trying to get cookies of various sizes. The goal is to maximize the number of children that can be satisfied with the available cookies using a greedy algorithm.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findContentChildren(vector<int>& g, vector<int>& s) {
+	```
+	Defines the function `findContentChildren` that takes two integer vectors `g` (greed factors of children) and `s` (sizes of cookies), and returns the maximum number of children that can be satisfied.
 
-```cpp
-return i;
-```
+2. **Sorting**
+	```cpp
+	    sort(g.begin(),g.end());
+	```
+	Sorts the greed factors of the children in ascending order so that the child with the smallest greed factor gets the smallest available cookie.
 
-- The variable `i` tracks how many children have been satisfied. Since we increment `i` each time we successfully match a child with a cookie, `i` will hold the number of content children when the loop finishes.
-- We return `i` as the final result, which represents the maximum number of content children.
+3. **Sorting**
+	```cpp
+	    sort(s.begin(),s.end());
+	```
+	Sorts the sizes of the cookies in ascending order, ensuring that we start from the smallest available cookie to try to satisfy the children.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int i = 0, j=0;
+	```
+	Initializes two indices: `i` for the children array `g` and `j` for the cookies array `s`. Both indices start from 0.
 
-#### Time Complexity:
-- **Sorting the Greed Factors and Cookie Sizes**: The time complexity of sorting both `g` and `s` is `O(n log n + m log m)`, where `n` is the number of children and `m` is the number of cookies. This is the most expensive operation in the solution.
-- **Iterating Over Both Arrays**: After sorting, the while loop runs in `O(n + m)` time, where `n` is the number of children and `m` is the number of cookies. In the worst case, we will iterate through both arrays once.
-- Therefore, the overall time complexity is `O(n log n + m log m)`, which is dominated by the sorting steps.
+5. **Loop**
+	```cpp
+	    while(i<g.size() && j<s.size()){
+	```
+	Starts a while loop that continues as long as there are unprocessed children and cookies.
 
-#### Space Complexity:
-- The space complexity of the algorithm is `O(1)` since we only use a few additional integer variables (`i` and `j`) and no extra data structures that depend on the input size. The space complexity remains constant.
+6. **Condition Check**
+	```cpp
+	        if(s[j]>=g[i])
+	```
+	Checks if the current cookie `s[j]` can satisfy the child `i` (i.e., if the size of the cookie is greater than or equal to the child's greed factor).
 
-### Conclusion
+7. **Greedy Algorithm**
+	```cpp
+	            i++; // when the child get the cookie, foward child by 1
+	```
+	If the cookie satisfies the child, increments `i` to move to the next child.
 
-This solution efficiently solves the problem of maximizing the number of content children by employing a greedy algorithm with sorting and a two-pointer approach. The main steps involve sorting the greed factors and cookie sizes and then iterating over both arrays to assign cookies to children. The algorithm runs in `O(n log n + m log m)` time, making it efficient even for larger inputs. The space complexity is constant, ensuring minimal memory usage.
+8. **Greedy Algorithm**
+	```cpp
+	        j++;
+	```
+	Increments `j` to check the next available cookie.
 
-By sorting both the greed factors and cookie sizes, we ensure that we always give the smallest available cookie to a child who can be content, thereby maximizing the number of content children. This approach is optimal and easy to understand, making it an excellent solution to the problem.
+9. **Return Statement**
+	```cpp
+	    return i;
+	```
+	Returns the value of `i`, which represents the number of children that were satisfied with cookies.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) due to the sorting step.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) to store the greed factors and cookie sizes.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/assign-cookies/description/)
 

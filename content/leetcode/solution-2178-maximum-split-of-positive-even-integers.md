@@ -14,129 +14,164 @@ img_src = ""
 youtube = "fM7MJFhrm-8"
 youtube_upload_date="2022-02-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/fM7MJFhrm-8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer `finalSum`, split it into a sum of as many unique positive even integers as possible. If such a split is not possible, return an empty array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer `finalSum`.
+- **Example:** `18`
+- **Constraints:**
+	- 1 <= finalSum <= 10^10
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<long long> ans;
-    vector<long long> maximumEvenSplit(long long sum) {
-        vector<long long> tmp;
-        if(sum % 2 == 1) return ans;
-        
-        int cur = 2;
-        while(sum >= cur) {
-            ans.push_back(cur);
-            sum -= cur;
-            cur += 2;
-        }
-        if(sum > 0) ans[ans.size() - 1] += sum;
-        
-        return ans;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a list of unique even integers that sum up to `finalSum`. If no valid split is possible, return an empty array.
+- **Example:** `[2, 4, 6, 8]`
+- **Constraints:**
+	- The integers must be positive, even, and unique.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum number of unique positive even integers that sum up to `finalSum`.
+
+- Check if `finalSum` is even. If it is not, return an empty array.
+- Start with the smallest even integer (2), and keep adding the next even integers (4, 6, 8, ...) until the sum exceeds `finalSum`.
+- If there is any remaining sum, adjust the last integer in the list to make the total sum equal to `finalSum`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The integer `finalSum` is positive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `18`  \
+  **Explanation:** The number 18 can be expressed as the sum of four unique even integers: 2 + 4 + 6 + 8.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves adding consecutive even integers until the sum reaches or exceeds `finalSum`, and then adjusting the last integer if necessary.
+
+### Initial Thoughts 💭
+- The sum of unique positive even integers grows quickly, so we can stop once we reach or exceed `finalSum`.
+- Start from the smallest even integer and continue adding consecutive even integers until the sum is close to `finalSum`.
+{{< dots >}}
+### Edge Cases 🌐
+- If `finalSum` is an odd number, return an empty list.
+- Ensure the solution works efficiently for large inputs, up to 10^10.
+- For very small values like `finalSum = 1`, the result should be an empty list since no even numbers can sum to 1.
+- Ensure the solution handles large values of `finalSum` efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<long long> ans;
+vector<long long> maximumEvenSplit(long long sum) {
+    vector<long long> tmp;
+    if(sum % 2 == 1) return ans;
     
-};
-{{< /highlight >}}
----
+    int cur = 2;
+    while(sum >= cur) {
+        ans.push_back(cur);
+        sum -= cur;
+        cur += 2;
+    }
+    if(sum > 0) ans[ans.size() - 1] += sum;
+    
+    return ans;
+}
 
-### Problem Statement
+```
 
-The problem asks to split a given sum into a series of distinct even numbers. The task is to find the largest set of even integers whose sum equals the given `sum`. Additionally, if it is not possible to split the sum into distinct even numbers, return an empty list.
+This function, `maximumEvenSplit`, takes a number `sum` and splits it into even parts (starting from 2) such that their sum equals the original `sum`. If `sum` is odd, an empty vector is returned. The result is returned as a vector of long long integers.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<long long> ans;
+	```
+	Initialize an empty vector `ans` to store the result.
 
-This problem can be approached by iterating through even numbers starting from 2 and subtracting them from the `sum`. We continue this until we can no longer subtract the next even number. If there is any remaining sum left that cannot be used to form a valid distinct even number, we adjust the last number in the sequence to account for the remaining sum.
+2. **Function Definition**
+	```cpp
+	vector<long long> maximumEvenSplit(long long sum) {
+	```
+	Define the function `maximumEvenSplit` that takes a long long integer `sum` and returns a vector of long long integers.
 
-The key observation is that:
-- Only even sums can be split into distinct even numbers.
-- The even numbers need to be distinct and should add up to the given `sum`.
+3. **Variable Initialization**
+	```cpp
+	    vector<long long> tmp;
+	```
+	Declare an unused vector `tmp`. This line doesn't impact the algorithm and could be removed.
 
-### Code Breakdown (Step by Step)
+4. **Condition Check**
+	```cpp
+	    if(sum % 2 == 1) return ans;
+	```
+	Check if `sum` is odd. If true, return the empty vector `ans`.
 
-1. **Function Declaration**:
-   ```cpp
-   vector<long long> maximumEvenSplit(long long sum) {
-   ```
-   - The function `maximumEvenSplit` is defined to return a vector of `long long` integers. It takes a `long long` number `sum` as input.
+5. **Variable Initialization**
+	```cpp
+	    int cur = 2;
+	```
+	Initialize the variable `cur` to 2, which will be used to split the sum into even numbers.
 
-2. **Check for Odd Sum**:
-   ```cpp
-   if(sum % 2 == 1) return ans;
-   ```
-   - The first check verifies if the sum is odd (`sum % 2 == 1`).
-   - If the sum is odd, it is impossible to split it into distinct even numbers because the sum of even numbers is always even.
-   - In this case, we return an empty vector `ans`, which is initialized at the beginning.
+6. **Loop**
+	```cpp
+	    while(sum >= cur) {
+	```
+	Start a while loop that continues as long as `sum` is greater than or equal to `cur`.
 
-3. **Initialize Variables**:
-   ```cpp
-   int cur = 2;
-   ```
-   - The variable `cur` is initialized to `2`, the smallest even number. This will represent the current even number being considered in the sequence.
+7. **Vector Modification**
+	```cpp
+	        ans.push_back(cur);
+	```
+	Push the current value of `cur` into the `ans` vector.
 
-4. **Loop to Subtract Even Numbers**:
-   ```cpp
-   while(sum >= cur) {
-       ans.push_back(cur);
-       sum -= cur;
-       cur += 2;
-   }
-   ```
-   - The `while` loop continues as long as `sum` is greater than or equal to `cur`. This ensures that we can keep subtracting even numbers from `sum`.
-   - In each iteration, the current even number (`cur`) is added to the result vector `ans`.
-   - The value of `sum` is reduced by `cur` and then `cur` is incremented by 2 to move to the next even number (e.g., 2, 4, 6, 8, etc.).
+8. **Update Sum**
+	```cpp
+	        sum -= cur;
+	```
+	Reduce `sum` by the value of `cur`.
 
-5. **Handle Remaining Sum**:
-   ```cpp
-   if(sum > 0) ans[ans.size() - 1] += sum;
-   ```
-   - After the loop ends, if there is any remaining `sum` greater than zero, it means that we cannot form another distinct even number.
-   - In this case, we adjust the last number in the vector by adding the remaining `sum` to it.
-   - This ensures that the total sum of the elements in the vector is equal to the original `sum`, while keeping the numbers distinct and even.
+9. **Update Variable**
+	```cpp
+	        cur += 2;
+	```
+	Increase `cur` by 2 to maintain the even sequence (2, 4, 6, 8, ...).
 
-6. **Return the Result**:
-   ```cpp
-   return ans;
-   ```
-   - Finally, the function returns the vector `ans`, which contains the distinct even numbers whose sum is equal to the original `sum`.
+10. **Final Adjustment**
+	```cpp
+	    if(sum > 0) ans[ans.size() - 1] += sum;
+	```
+	If there's any remaining `sum` (less than the next even number), add it to the last element of the `ans` vector.
 
-### Example Walkthrough
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the `ans` vector, which contains the even splits of `sum`.
 
-#### Example 1: `sum = 10`
-- **Step 1**: Check if `sum` is odd. Since `10 % 2 == 0`, we proceed.
-- **Step 2**: Initialize `cur = 2`.
-- **Step 3**: Subtract `2` from `10`, resulting in a sum of `8`. Add `2` to the result vector: `ans = {2}`. Increment `cur` to `4`.
-- **Step 4**: Subtract `4` from `8`, resulting in a sum of `4`. Add `4` to the result vector: `ans = {2, 4}`. Increment `cur` to `6`.
-- **Step 5**: Subtract `6` from `4`, resulting in a sum of `-2`. Since the sum is less than `cur`, the loop terminates.
-- **Step 6**: Adjust the last number: the remaining sum is `4`. Add this to the last element (`4`), resulting in `ans = {2, 8}`.
-- **Step 7**: Return `ans = {2, 8}`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Example 2: `sum = 11`
-- **Step 1**: Check if `sum` is odd. Since `11 % 2 == 1`, return an empty vector: `[]`.
+The time complexity is linear with respect to the number of integers required to reach `finalSum`.
 
-#### Example 3: `sum = 16`
-- **Step 1**: Check if `sum` is odd. Since `16 % 2 == 0`, we proceed.
-- **Step 2**: Initialize `cur = 2`.
-- **Step 3**: Subtract `2` from `16`, resulting in a sum of `14`. Add `2` to the result vector: `ans = {2}`. Increment `cur` to `4`.
-- **Step 4**: Subtract `4` from `14`, resulting in a sum of `10`. Add `4` to the result vector: `ans = {2, 4}`. Increment `cur` to `6`.
-- **Step 5**: Subtract `6` from `10`, resulting in a sum of `4`. Add `6` to the result vector: `ans = {2, 4, 6}`. Increment `cur` to `8`.
-- **Step 6**: Subtract `8` from `4`, resulting in a sum of `-4`. The loop terminates.
-- **Step 7**: Adjust the last number by adding the remaining sum (`4`) to the last element, resulting in `ans = {2, 4, 10}`.
-- **Step 8**: Return `ans = {2, 4, 10}`.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Time Complexity
+The space complexity is linear because we store the list of even integers.
 
-- **Time Complexity**: The time complexity is **O(n)**, where `n` is the number of even numbers that can be added to the vector. In the worst case, the loop runs `n` times, where `n` is proportional to the size of the input `sum`. Each iteration involves constant-time operations such as pushing to the vector, subtraction, and incrementing `cur`.
+**Happy Coding! 🎉**
 
-- **Space Complexity**: The space complexity is **O(n)**, where `n` is the number of even numbers added to the result vector. The space used is proportional to the number of even numbers included in the solution, which can be at most `sum / 2`.
-
-### Conclusion
-
-The solution efficiently solves the problem of splitting a given sum into distinct even numbers. By leveraging the properties of even numbers and iterating through them in increasing order, the solution minimizes the number of operations required. The algorithm ensures that the sum of the even numbers is equal to the original sum, and adjusts the last number if necessary. This solution is optimal in terms of both time and space complexity, making it a robust approach for large sums.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-split-of-positive-even-integers/description/)
 

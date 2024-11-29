@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "jwt5mTjEXGc"
 youtube_upload_date="2021-10-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/jwt5mTjEXGc/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,121 +28,149 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/jwt5mTjEXGc/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary search tree (BST) and two integer values `low` and `high`. Trim the tree such that all its elements lie within the inclusive range `[low, high]`. The tree's relative structure should remain unchanged, and the root may change depending on the given bounds.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary search tree and two integer values `low` and `high`, representing the boundaries within which all elements of the tree should lie.
+- **Example:** `root = [4,2,6,1,3,5,7], low = 3, high = 6`
+- **Constraints:**
+	- 1 <= Number of nodes <= 10^4
+	- 0 <= Node.val <= 10^4
+	- low <= high <= 10^4
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* trimBST(TreeNode* root, int low, int high) {
-        if(root == NULL) return NULL;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root of the trimmed binary search tree. The structure of the tree must remain intact, with nodes lying within the range `[low, high]`.
+- **Example:** `[4,3,6,null,null,5]`
+- **Constraints:**
+	- The output tree must have the same structure as the input tree, but with only the nodes that fall within the specified range.
 
-       if(root->val < low) {
-           return trimBST(root->right, low, high);
-       } else if(root->val > high) {
-            return trimBST(root->left, low, high);
-       }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Trim the binary search tree by removing nodes that fall outside the range [low, high]. The relative structure of the tree should be maintained.
 
-        root->left = trimBST(root->left, low, high);
-        root->right= trimBST(root->right, low, high);
-        return root;
-    }
-};
-{{< /highlight >}}
----
+- 1. Check if the current node’s value is less than low, in which case we only need to trim the right subtree.
+- 2. If the current node’s value is greater than high, trim the left subtree.
+- 3. If the current node's value lies within the range [low, high], recursively trim both the left and right subtrees.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary search tree is valid and follows the properties of a BST.
+- The node values are unique, ensuring there is only one possible valid trimming of the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [4,2,6,1,3,5,7], low = 3, high = 6`  \
+  **Explanation:** After trimming, the tree only contains nodes with values between 3 and 6. The final tree is [4,3,6,null,null,5].
 
-### Problem Statement
+- **Input:** `root = [10,5,15,3,7,null,18], low = 5, high = 15`  \
+  **Explanation:** After trimming, the tree contains nodes with values between 5 and 15. The final tree is [10,5,null,null,7].
 
-The problem requires trimming a binary search tree (BST) such that all node values are within a specified range. Specifically, given the root of a BST and two integers `low` and `high`, you need to return the root of the tree after removing all nodes that don't satisfy the condition: `low <= node->val <= high`.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, recursively trim the binary search tree by ensuring each node falls within the given range. Nodes outside the range should be removed, and the structure should be preserved.
 
-A binary search tree is a tree data structure where each node follows the condition that:
-1. The left subtree of a node contains only nodes with values less than the node’s value.
-2. The right subtree of a node contains only nodes with values greater than the node’s value.
-
-### Approach
-
-The core idea behind this solution is to traverse the tree recursively and prune nodes whose values are outside the range `[low, high]`. The pruning process involves adjusting pointers for subtrees that are either too small or too large.
-
-#### Key Steps:
-1. **Base Case**: If the current node is `NULL`, simply return `NULL`. This occurs when the node is outside the tree or when we reach the end of a branch.
-2. **Pruning the Left and Right Subtrees**: 
-   - If the current node's value is less than `low`, this means the left subtree (and any of its descendants) cannot be part of the valid tree. Therefore, we skip the left subtree and recurse on the right subtree.
-   - If the current node's value is greater than `high`, this means the right subtree (and any of its descendants) cannot be part of the valid tree. Therefore, we skip the right subtree and recurse on the left subtree.
-3. **Valid Node**: If the node’s value is within the range, we recursively trim both the left and right subtrees of the node, ensuring all values in the subtrees are also within the specified range.
-4. **Returning the Node**: Once a node has been validated (its value is within the specified range and its subtrees have been pruned), return the node.
-
-This approach ensures that all nodes outside the range are removed and that the tree structure remains a valid binary search tree.
-
-### Code Breakdown (Step by Step)
-
-The implementation of this solution in C++ uses a recursive approach to trim the BST. Below is a detailed breakdown of the code.
-
-#### 1. **Function Definition and Base Case**
-
+### Initial Thoughts 💭
+- The problem requires a modification of the tree structure while maintaining the order of the remaining nodes.
+- The key observation is that trimming a BST can be done using a simple recursive approach by comparing each node's value with the given range.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one node in the tree, so no need to handle empty tree cases.
+- For large trees with up to 10^4 nodes, ensure the solution handles recursion efficiently.
+- Ensure that nodes with values at the boundaries of the range [low, high] are correctly included.
+- The tree is a valid BST with unique node values.
+{{< dots >}}
+## Code 💻
 ```cpp
 TreeNode* trimBST(TreeNode* root, int low, int high) {
     if(root == NULL) return NULL;
-```
-- The function `trimBST` takes three parameters: the root of the BST, and two integers `low` and `high` that define the allowed range for node values.
-- The first check is for the base case where the `root` is `NULL`. If this is the case, we simply return `NULL` because there are no nodes to process at this point.
 
-#### 2. **Pruning Nodes Less than `low`**
+   if(root->val < low) {
+       return trimBST(root->right, low, high);
+   } else if(root->val > high) {
+        return trimBST(root->left, low, high);
+   }
 
-```cpp
-if(root->val < low) {
-    return trimBST(root->right, low, high);
+    root->left = trimBST(root->left, low, high);
+    root->right= trimBST(root->right, low, high);
+    return root;
 }
 ```
-- If the current node’s value is less than `low`, then all nodes in the left subtree of the current node must also be smaller than `low` (because it’s a binary search tree). Hence, the left subtree is entirely invalid, and we recursively trim the right subtree by calling `trimBST(root->right, low, high)`.
 
-#### 3. **Pruning Nodes Greater than `high`**
+This function trims a binary search tree (BST) such that all nodes with values outside the given range `[low, high]` are removed, and the tree is returned with the remaining nodes within the range.
 
-```cpp
-else if(root->val > high) {
-    return trimBST(root->left, low, high);
-}
-```
-- If the current node’s value is greater than `high`, then all nodes in the right subtree of the current node must also be greater than `high` (because of the BST property). Therefore, we prune the right subtree and recursively call `trimBST(root->left, low, high)` to trim the left subtree.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	TreeNode* trimBST(TreeNode* root, int low, int high) {
+	```
+	This is the function definition for `trimBST`, which trims a binary search tree (BST) such that only nodes with values within the specified range `[low, high]` are kept.
 
-#### 4. **Valid Node within Range**
+2. **Base Case**
+	```cpp
+	    if(root == NULL) return NULL;
+	```
+	If the root is `NULL`, return `NULL` as there is no tree to trim.
 
-```cpp
-root->left = trimBST(root->left, low, high);
-root->right = trimBST(root->right, low, high);
-```
-- If the current node’s value is within the allowed range (`low <= node->val <= high`), we recursively trim both the left and right subtrees.
-- The result of the recursive calls for the left and right subtrees is assigned to `root->left` and `root->right`, respectively.
+3. **Left Subtree Trimming**
+	```cpp
+	   if(root->val < low) {
+	```
+	If the value of the current node is smaller than `low`, this node and everything in its left subtree should be discarded, so we recursively call `trimBST` on the right child.
 
-#### 5. **Return the Valid Node**
+4. **Trim Right Subtree**
+	```cpp
+	       return trimBST(root->right, low, high);
+	```
+	Return the result of recursively trimming the right subtree, as all values in the left subtree are too small.
 
-```cpp
-return root;
-```
-- Once the left and right subtrees have been trimmed, the current node is returned as part of the pruned tree.
+5. **Right Subtree Trimming Check**
+	```cpp
+	   } else if(root->val > high) {
+	```
+	If the value of the current node is greater than `high`, this node and everything in its right subtree should be discarded, so we recursively call `trimBST` on the left child.
 
-### Complexity
+6. **Trim Left Subtree**
+	```cpp
+	        return trimBST(root->left, low, high);
+	```
+	Return the result of recursively trimming the left subtree, as all values in the right subtree are too large.
 
-#### Time Complexity:
-- The time complexity of the solution is **O(n)**, where `n` is the number of nodes in the binary search tree. In the worst case, we visit every node in the tree exactly once.
+7. **Trim Left Subtree Call**
+	```cpp
+	    root->left = trimBST(root->left, low, high);
+	```
+	Recursively call `trimBST` to trim the left child of the current node, ensuring the left subtree only contains nodes within the range.
 
-#### Space Complexity:
-- The space complexity is **O(h)**, where `h` is the height of the tree. This is because we are using recursion, and the maximum depth of recursion depends on the height of the tree. In the case of an unbalanced tree, this could be up to `O(n)` in the worst case, but for a balanced tree, the space complexity would be `O(log n)`.
+8. **Right Subtree Recursion**
+	```cpp
+	    root->right= trimBST(root->right, low, high);
+	```
+	Recursively call `trimBST` to trim the right child of the current node, ensuring the right subtree only contains nodes within the range.
 
-### Conclusion
+9. **Return Root**
+	```cpp
+	    return root;
+	```
+	Return the current node (root) after its left and right subtrees have been trimmed, ensuring all nodes in the subtree are within the given range.
 
-This approach is a simple yet effective way of trimming a binary search tree based on a specified range. By using recursion, we can traverse the tree and prune it in-place, ensuring that the tree remains a valid binary search tree after the operation. The solution efficiently handles both small and large trees with a time complexity of **O(n)** and space complexity that depends on the tree’s height.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The algorithm's core idea is to ensure that only nodes with values within the given range `[low, high]` are retained, and all other nodes are removed, keeping the tree structure valid. The recursive pruning of the left and right subtrees ensures correctness while maintaining the binary search tree properties. This approach is ideal for scenarios where you need to dynamically trim a tree based on variable conditions.
+The time complexity is O(n) as we may need to visit every node in the tree once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
+
+The space complexity is O(h), where h is the height of the tree, due to recursive calls on the call stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/trim-a-binary-search-tree/description/)
 

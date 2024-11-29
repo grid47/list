@@ -14,57 +14,103 @@ img_src = ""
 youtube = "ARhX-jazvSY"
 youtube_upload_date="2022-12-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ARhX-jazvSY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design a memory allocator class with functions to allocate and free blocks of memory. The allocator should efficiently handle consecutive memory requests and be able to free blocks based on their identifiers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a series of operations that initialize the allocator and perform memory allocations and deallocations. The first operation initializes the allocator with a specified size. Each subsequent operation is either an allocate or free operation.
+- **Example:** `["Allocator", "allocate", "allocate", "allocate", "free", "allocate", "allocate", "allocate", "free", "allocate", "free"]`
+- **Constraints:**
+	- 1 <= n, size, mID <= 1000
+	- At most 1000 calls will be made to allocate and free.
 
-{{< highlight cpp >}}
-class Allocator {
-public:
-    vector<int> mem;
-    map<int, vector<vector<int>>> mp;
-    Allocator(int n) {
-        mem.resize(n, 0);
-        
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should contain the results of the allocate and free operations. For allocate, return the starting index of the allocated block or -1 if no space is available. For free, return the number of units freed.
+- **Example:** `[null, 0, 1, 2, 1, 3, 1, 6, 3, -1, 0]`
+- **Constraints:**
+	- Output should match the expected values as described in the examples.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To allocate memory blocks of a specified size and to free them efficiently based on the given mID.
+
+- Initialize a memory array of size n with all elements set to 0 (free).
+- For each allocate request, find the first consecutive free memory block of the requested size and mark those blocks as allocated.
+- For each free request, free all memory blocks that were allocated with the specified mID.
+{{< dots >}}
+### Problem Assumptions ✅
+- The allocator should be able to handle both large and small allocation requests efficiently.
+- Freeing an mID will only free the blocks allocated with that specific mID.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["Allocator", "allocate", "allocate", "allocate", "free", "allocate", "allocate", "allocate", "free", "allocate", "free"]`  \
+  **Explanation:** In this example, we start with an allocator of size 10, perform allocations of size 1 for mIDs 1, 2, and 3, and free some of the memory as specified. We observe the allocation and freeing processes, and track the memory usage and results for each operation.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses an array to represent the memory and a map to track memory allocations by mID. For allocation, we find the first free block of the required size. For deallocation, we use the map to free all blocks associated with the given mID.
+
+### Initial Thoughts 💭
+- Efficient searching for free memory blocks is crucial.
+- Memory allocation should be quick, but freeing memory may require scanning the entire array.
+- We can implement this using a greedy approach to find the first available block for each allocation.
+{{< dots >}}
+### Edge Cases 🌐
+- What if no allocation requests are made?
+- Ensure that the allocator can handle up to 1000 operations efficiently.
+- Handle cases where an allocation size exceeds the available free memory.
+- The allocator should not perform inefficient operations even when the memory is full or almost full.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> mem;
+map<int, vector<vector<int>>> mp;
+Allocator(int n) {
+    mem.resize(n, 0);
     
-    int allocate(int size, int mID) {
-        int idx = 0;
-        int cnt = 0;
-        while(idx < mem.size()) {
-            int j = idx;
-            while(j < mem.size() && mem[j] == 0 && cnt < size) {
-                cnt++;
-                j++;
-            }
-            if(cnt == size) {
-                for(int i = idx; i < idx + size; i++)
-                    mem[i] = 1;
-                mp[mID].push_back({idx, size});
-                return idx;
-            }
-            while(j < mem.size() && mem[j] == 1) j++;
-            cnt = 0;
-            idx = j;
+}
+
+int allocate(int size, int mID) {
+    int idx = 0;
+    int cnt = 0;
+    while(idx < mem.size()) {
+        int j = idx;
+        while(j < mem.size() && mem[j] == 0 && cnt < size) {
+            cnt++;
+            j++;
         }
-        return -1;
-    }
-    
-    int free(int mID) {
-        int cnt = 0;
-        for(int i = 0; i < mp[mID].size(); i++) {
-            auto it = mp[mID][i];
-            for(int j = it[0]; j < it[0] + it[1]; j++) {
-                mem[j] = 0;                
-                cnt++;
-            }
+        if(cnt == size) {
+            for(int i = idx; i < idx + size; i++)
+                mem[i] = 1;
+            mp[mID].push_back({idx, size});
+            return idx;
         }
-        mp.erase(mID);
-        return cnt;
+        while(j < mem.size() && mem[j] == 1) j++;
+        cnt = 0;
+        idx = j;
     }
+    return -1;
+}
+
+int free(int mID) {
+    int cnt = 0;
+    for(int i = 0; i < mp[mID].size(); i++) {
+        auto it = mp[mID][i];
+        for(int j = it[0]; j < it[0] + it[1]; j++) {
+            mem[j] = 0;                
+            cnt++;
+        }
+    }
+    mp.erase(mID);
+    return cnt;
+}
 };
 
 /**
@@ -72,123 +118,209 @@ public:
  * Allocator* obj = new Allocator(n);
  * int param_1 = obj->allocate(size,mID);
  * int param_2 = obj->free(mID);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves creating a memory allocator that can allocate and free blocks of memory. The allocator works on a contiguous memory space, and the allocator can allocate a block of memory of a specified size if it's available. When a block of memory is freed, it should be marked as free, and the memory block should be available for future allocations.
-
-The allocator supports two main operations:
-1. **allocate(size, mID)**: This operation tries to allocate a contiguous block of memory of a specified size. If successful, it should return the starting index of the allocated block. If no such block is available, it should return `-1`.
-2. **free(mID)**: This operation frees the memory allocated for the given memory ID `mID`. It should return the number of bytes freed.
-
-The goal is to efficiently manage memory allocation and deallocation while supporting these operations.
-
-### Approach
-
-The approach for solving this problem involves:
-1. **Memory Representation**: We maintain an array `mem` to represent the memory, where each index holds `0` for free memory and `1` for allocated memory. This helps us efficiently track which parts of memory are available.
-2. **Map for Allocations**: We use a map `mp` to store the allocated memory blocks for each memory ID. Each entry in the map is a vector of vectors, where each vector stores the starting index and size of an allocated block.
-3. **Allocate Memory**: The `allocate` function tries to find a contiguous block of free memory of the required size. If found, it updates the `mem` array to mark the allocated block and stores the allocation information in the map.
-4. **Free Memory**: The `free` function retrieves all memory blocks allocated to the given memory ID, updates the `mem` array to mark those blocks as free, and removes the corresponding entries from the map.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Constructor
-
-```cpp
-Allocator(int n) {
-    mem.resize(n, 0);  // Initialize a vector of size n with all elements set to 0 (representing free memory)
-}
 ```
 
-- The constructor initializes the memory with size `n`. The vector `mem` is of size `n`, with all elements initially set to `0` to represent free memory. This ensures that all memory slots are available for allocation when the allocator is created.
+This is the implementation of a memory allocator system, where memory blocks are allocated and freed based on the given size and memory ID. The allocator uses an array `mem` to track allocated and free spaces, and a map `mp` to store the allocation details for each memory ID.
 
-#### Step 2: Allocate Function
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<int> mem;
+	```
+	Initializes a vector `mem` to track the memory allocation status. Each element represents a memory block, where 0 indicates a free block and 1 indicates an allocated block.
 
-```cpp
-int allocate(int size, int mID) {
-    int idx = 0;
-    int cnt = 0;
-    while (idx < mem.size()) {
-        int j = idx;
-        while (j < mem.size() && mem[j] == 0 && cnt < size) {
-            cnt++;
-            j++;
-        }
-        if (cnt == size) {
-            for (int i = idx; i < idx + size; i++)
-                mem[i] = 1;  // Mark memory as allocated
-            mp[mID].push_back({idx, size});  // Store allocation details for the given mID
-            return idx;  // Return the starting index of the allocated memory block
-        }
-        while (j < mem.size() && mem[j] == 1) j++;  // Skip allocated blocks
-        cnt = 0;
-        idx = j;  // Start looking from the next free block
-    }
-    return -1;  // If no space is available, return -1
-}
-```
+2. **Variable Initialization**
+	```cpp
+	map<int, vector<vector<int>>> mp;
+	```
+	Declares a map `mp` to store the memory allocation details for each memory ID. The key is the memory ID, and the value is a list of pairs representing the starting index and size of each allocated block.
 
-- **Finding Space**: The `allocate` function iterates over the `mem` array to find a contiguous block of free memory. It uses two pointers: `idx` (the current starting index of the free block) and `j` (the end index of the free block). The variable `cnt` counts the number of contiguous free blocks.
-- **Allocating Memory**: When a block of size `size` is found, the memory is marked as allocated by setting `mem[i]` to `1` for the range of indices corresponding to the block. The allocation details (starting index and size) are stored in the `mp` map, with the memory ID `mID` as the key.
-- **Failure Case**: If no block large enough for the allocation is found, the function returns `-1`.
+3. **Constructor**
+	```cpp
+	Allocator(int n) {
+	```
+	Constructor that initializes the memory allocator with `n` blocks, where each block is initially set to 0 (free).
 
-#### Step 3: Free Function
+4. **Memory Initialization**
+	```cpp
+	    mem.resize(n, 0);
+	```
+	Resizes the `mem` vector to `n` blocks, initializing all blocks to 0 (free).
 
-```cpp
-int free(int mID) {
-    int cnt = 0;
-    for (int i = 0; i < mp[mID].size(); i++) {
-        auto it = mp[mID][i];
-        for (int j = it[0]; j < it[0] + it[1]; j++) {
-            mem[j] = 0;  // Mark memory as free
-            cnt++;
-        }
-    }
-    mp.erase(mID);  // Remove the allocation details for the given mID
-    return cnt;  // Return the number of bytes freed
-}
-```
+5. **Function Definition**
+	```cpp
+	int allocate(int size, int mID) {
+	```
+	Defines the `allocate` function, which attempts to allocate a block of memory of the given `size` to the memory ID `mID`.
 
-- **Freeing Memory**: The `free` function goes through the list of memory allocations for the given `mID` and marks the corresponding memory slots in the `mem` array as free (set to `0`). The `mp` map is updated by removing the entry corresponding to `mID`.
-- **Returning Freed Space**: The function returns the total number of memory bytes that were freed.
+6. **Variable Initialization**
+	```cpp
+	    int idx = 0;
+	```
+	Initializes the index `idx` to 0, which will be used to track the current position in the memory vector.
 
-#### Step 4: Managing Allocations
+7. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes the counter `cnt` to 0, which will be used to track the number of consecutive free blocks found.
 
-- The map `mp` keeps track of all memory allocations for each `mID`. The key is the memory ID, and the value is a vector of pairs, each containing the starting index and size of an allocated block. This allows us to easily retrieve and update the allocated blocks when freeing memory.
+8. **Loop Structure**
+	```cpp
+	    while(idx < mem.size()) {
+	```
+	Begins a while loop that iterates through the `mem` vector to find available memory blocks for allocation.
 
-### Complexity Analysis
+9. **Variable Initialization**
+	```cpp
+	        int j = idx;
+	```
+	Initializes the variable `j` to the current index `idx`, which will be used to check consecutive free blocks.
 
-#### Time Complexity:
+10. **Loop Structure**
+	```cpp
+	        while(j < mem.size() && mem[j] == 0 && cnt < size) {
+	```
+	Inner loop that checks for consecutive free blocks starting from the index `idx`. It increments the counter `cnt` as long as free blocks are found.
 
-- **Allocate Function**: 
-  - In the worst case, we may need to traverse the entire memory array to find a free block of the required size. This gives a time complexity of \(O(n)\), where \(n\) is the size of the memory.
-  - The inner while loops involve a linear scan of the memory to find contiguous free blocks, and the memory update operations are \(O(k)\), where \(k\) is the size of the block being allocated.
-  
-  Therefore, the time complexity of the `allocate` function is \(O(n)\).
+11. **Variable Update**
+	```cpp
+	            cnt++;
+	```
+	Increments the counter `cnt` as a free block is found.
 
-- **Free Function**:
-  - The `free` function iterates over the list of allocations for a given memory ID and frees each block. For each allocation, we mark the corresponding memory slots as free, which takes \(O(k)\), where \(k\) is the size of the block being freed.
-  - The time complexity for the `free` function is proportional to the total size of the allocated blocks for the given `mID`.
+12. **Variable Update**
+	```cpp
+	            j++;
+	```
+	Increments `j` to check the next memory block.
 
-#### Space Complexity:
+13. **Conditional Check**
+	```cpp
+	        if(cnt == size) {
+	```
+	Checks if the required number of consecutive free blocks (`size`) has been found.
 
-- **Memory Array**: The `mem` array takes \(O(n)\) space, where \(n\) is the size of the memory.
-- **Allocation Map**: The `mp` map stores the allocation information for each memory ID. In the worst case, it could store allocations for each block, so it requires \(O(n)\) space.
+14. **Memory Allocation**
+	```cpp
+	            for(int i = idx; i < idx + size; i++)
+	```
+	Iterates over the `mem` vector from index `idx` to allocate memory for the given `size`.
 
-Thus, the overall space complexity is \(O(n)\).
+15. **Memory Allocation**
+	```cpp
+	                mem[i] = 1;
+	```
+	Marks the blocks as allocated by setting them to 1 in the `mem` vector.
 
-### Conclusion
+16. **Data Structure Manipulation**
+	```cpp
+	            mp[mID].push_back({idx, size});
+	```
+	Records the memory allocation details in the `mp` map for the given memory ID `mID`.
 
-In conclusion, this memory allocator efficiently handles allocation and deallocation of memory blocks using an array to represent the memory and a map to track allocations. It provides a simple but effective mechanism to manage memory, ensuring that the `allocate` and `free` functions perform within acceptable time and space limits.
+17. **Return Statement**
+	```cpp
+	            return idx;
+	```
+	Returns the starting index `idx` of the allocated memory block.
 
-- **Time Complexity**: \(O(n)\) for the `allocate` function and \(O(k)\) for the `free` function, where \(n\) is the memory size and \(k\) is the block size.
-- **Space Complexity**: \(O(n)\), due to the memory array and the map storing allocation information.
+18. **Loop Structure**
+	```cpp
+	        while(j < mem.size() && mem[j] == 1) j++;
+	```
+	Moves the index `j` to the next available free block by skipping over allocated blocks.
 
-This approach is efficient for memory allocation problems where we need to manage contiguous memory blocks dynamically.
+19. **Variable Update**
+	```cpp
+	        cnt = 0;
+	```
+	Resets the counter `cnt` to 0 as the loop moves to the next potential free block sequence.
+
+20. **Variable Update**
+	```cpp
+	        idx = j;
+	```
+	Updates `idx` to `j` to continue searching from the next free block.
+
+21. **Return Statement**
+	```cpp
+	    return -1;
+	```
+	Returns -1 if no suitable block of free memory is found.
+
+22. **Function Definition**
+	```cpp
+	int free(int mID) {
+	```
+	Defines the `free` function, which frees the memory blocks previously allocated for the given memory ID `mID`.
+
+23. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes a counter `cnt` to 0, which will be used to track the number of freed blocks.
+
+24. **Loop Structure**
+	```cpp
+	    for(int i = 0; i < mp[mID].size(); i++) {
+	```
+	Iterates over the list of allocated blocks for the given memory ID `mID`.
+
+25. **Variable Initialization**
+	```cpp
+	        auto it = mp[mID][i];
+	```
+	Gets the allocation details (starting index and size) for the current block.
+
+26. **Loop Structure**
+	```cpp
+	        for(int j = it[0]; j < it[0] + it[1]; j++) {
+	```
+	Frees the memory blocks by iterating over the range of indices allocated to the current memory ID.
+
+27. **Memory Deallocation**
+	```cpp
+	            mem[j] = 0;
+	```
+	Sets the memory block to 0 (free).
+
+28. **Variable Update**
+	```cpp
+	            cnt++;
+	```
+	Increments the counter `cnt` for each freed block.
+
+29. **Memory Deallocation**
+	```cpp
+	    mp.erase(mID);
+	```
+	Removes the entry for the given memory ID `mID` from the map `mp`.
+
+30. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	Returns the total number of freed blocks.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) for a quick allocation or deallocation.
+- **Average Case:** O(n) for finding a free block and deallocating memory.
+- **Worst Case:** O(n) for allocating or freeing memory in the worst case.
+
+The worst-case time complexity occurs when searching for memory blocks or freeing large blocks of memory.
+
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the memory array and tracking allocations by mID.
+- **Worst Case:** O(n) for storing the memory array and tracking allocations by mID.
+
+Space complexity is linear in terms of the number of memory units, as we store the memory array and allocation information.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-memory-allocator/description/)
 

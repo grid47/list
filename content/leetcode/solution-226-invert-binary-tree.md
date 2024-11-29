@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "JUyhWTDT2YI"
 youtube_upload_date="2022-06-25"
 youtube_thumbnail="https://i.ytimg.com/vi/JUyhWTDT2YI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,152 +28,129 @@ youtube_thumbnail="https://i.ytimg.com/vi/JUyhWTDT2YI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, invert the tree by swapping the left and right subtrees of every node, and return its root.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root of a binary tree, where each node contains an integer value and references to its left and right children.
+- **Example:** `Input: root = [3,1,4,null,2,null,5]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [0, 100].
+	- -100 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* invertTree(TreeNode* root) {
-        if(!root) return NULL;
-        TreeNode* tmp = root->left;
-        root->left = invertTree(root->right);
-        root->right = invertTree(tmp);
-        return root;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the root of the inverted binary tree, where the left and right subtrees of every node are swapped.
+- **Example:** `Output: [3,4,1,5,null,null,2]`
+- **Constraints:**
+	- The structure of the tree must maintain binary tree properties during inversion.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Swap the left and right subtrees recursively for every node in the binary tree.
 
-In this problem, we are tasked with **inverting a binary tree**! In simpler terms, our job is to **swap the left and right child nodes** for every node in the tree. This inversion should be done recursively, and we must return the **root** of the inverted tree. 🌳🔄
+- Base Case: If the current node is null, return null.
+- Recursively invert the left subtree.
+- Recursively invert the right subtree.
+- Swap the left and right children of the current node.
+- Return the root node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is well-formed and adheres to binary tree properties.
+- Node values can include negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [5,3,8,1,4,7,9]`  \
+  **Explanation:** The tree is inverted by swapping the left and right children of each node. Output: [5,8,3,9,7,4,1]
 
-The binary tree node structure is given as:
+- **Input:** `Input: root = []`  \
+  **Explanation:** An empty tree remains empty after inversion. Output: []
+
+{{< dots >}}
+## Approach 🚀
+The approach uses a recursive algorithm to traverse the binary tree and swap the left and right subtrees of every node.
+
+### Initial Thoughts 💭
+- Inverting a tree requires swapping child nodes at each level.
+- A depth-first traversal is suitable for recursive inversion.
+- Recursion is a natural fit for this problem as it aligns with the tree structure.
+- Handling the base case (null nodes) ensures no invalid accesses occur.
+{{< dots >}}
+### Edge Cases 🌐
+- An input tree with no nodes.
+- A complete binary tree with 100 nodes.
+- A tree where all nodes have the same value.
+- A tree with only left or right subtrees.
+- Ensure the function works with nodes containing the minimum and maximum possible values.
+{{< dots >}}
+## Code 💻
 ```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
+TreeNode* invertTree(TreeNode* root) {
+    if(!root) return NULL;
+    TreeNode* tmp = root->left;
+    root->left = invertTree(root->right);
+    root->right = invertTree(tmp);
+    return root;
+}
 ```
 
-### 🧠 Approach
+This function recursively inverts a binary tree by swapping the left and right children of each node.
 
-To solve this, we can use a **recursive depth-first traversal** approach to invert the binary tree. Here's how it works:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	TreeNode* invertTree(TreeNode* root) {
+	```
+	Defines the `invertTree` function, which takes the root of a binary tree and returns the root of the inverted tree.
 
-1. **Base Case**: If the current node is `NULL`, return `NULL`. We don’t need to do anything for empty subtrees.
-2. **Recursive Step**: For each node:
-   - Swap its left and right children.
-   - Recursively invert both left and right subtrees.
-   - Finally, return the current node after performing these operations.
+2. **Base Case**
+	```cpp
+	    if(!root) return NULL;
+	```
+	Checks if the root is NULL (base case for recursion). If it is NULL, the function returns NULL, ending the recursion.
 
-This method efficiently handles the inversion process by visiting each node and flipping its children, ensuring the tree is inverted from top to bottom.
+3. **Temporary Variable**
+	```cpp
+	    TreeNode* tmp = root->left;
+	```
+	Stores the left child of the current node in a temporary variable `tmp` to facilitate swapping the left and right children.
 
----
+4. **Recursive Call 1**
+	```cpp
+	    root->left = invertTree(root->right);
+	```
+	Recursively inverts the right subtree of the current node and assigns it to the left child of the current node.
 
-### 🔨 Step-by-Step Code Breakdown
+5. **Recursive Call 2**
+	```cpp
+	    root->right = invertTree(tmp);
+	```
+	Recursively inverts the left subtree (stored in `tmp`) and assigns it to the right child of the current node.
 
-Here’s how we can implement this solution in C++:
+6. **Return Inverted Tree**
+	```cpp
+	    return root;
+	```
+	Returns the root node of the inverted tree.
 
-```cpp
-class Solution {
-public:
-    // Function to invert a binary tree
-    TreeNode* invertTree(TreeNode* root) {
-        // Step 1: Base case - if the current node is NULL, return NULL
-        if (!root) return NULL;
-        
-        // Step 2: Temporarily store the left child
-        TreeNode* tmp = root->left;
-        
-        // Step 3: Recursively invert the right subtree and assign it to the left child
-        root->left = invertTree(root->right);
-        
-        // Step 4: Recursively invert the left subtree (which was temporarily stored) and assign it to the right child
-        root->right = invertTree(tmp);
-        
-        // Step 5: Return the root node after inversion
-        return root;
-    }
-};
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### 📌 Step-by-Step Explanation
+Each node is visited exactly once during the inversion process.
 
-1. **Base Case**:
-   ```cpp
-   if (!root) return NULL;
-   ```
-   If the current node is `NULL`, we return `NULL` to stop further recursion.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
 
-2. **Temporary Storage**:
-   ```cpp
-   TreeNode* tmp = root->left;
-   ```
-   We store the left child of the current node in `tmp` before swapping.
+The space complexity is determined by the recursion stack, which is O(h), where h is the height of the tree.
 
-3. **Invert Right Subtree**:
-   ```cpp
-   root->left = invertTree(root->right);
-   ```
-   We recursively invert the right subtree and assign it to the left child.
+**Happy Coding! 🎉**
 
-4. **Invert Left Subtree**:
-   ```cpp
-   root->right = invertTree(tmp);
-   ```
-   We recursively invert the left subtree (originally the right subtree) and assign it to the right child.
-
-5. **Return the Root**:
-   ```cpp
-   return root;
-   ```
-   After inverting the children, we return the current node, which is now the root of the inverted tree.
-
----
-
-### 📈 Complexity Analysis
-
-#### 🕒 Time Complexity
-
-The **time complexity** of this solution is **O(n)**, where `n` is the number of nodes in the binary tree. We visit each node exactly once, performing constant-time operations (swapping and recursion) at each step.
-
-#### 💻 Space Complexity
-
-The **space complexity** is **O(h)**, where `h` is the height of the tree. This is due to the space required by the recursion stack. 
-
-- In the worst case (a skewed tree), the height of the tree is **O(n)**, so the space complexity would be **O(n)**.
-- In the best case (a balanced tree), the height of the tree is **O(log n)**, so the space complexity is **O(log n)**.
-
----
-
-### 🏁 Conclusion
-
-In this solution, we’ve successfully inverted a binary tree using a recursive approach. By swapping the left and right children of each node and recursively inverting the subtrees, we achieve the desired result. 🌲🔄
-
-#### Key Points:
-- **Time Complexity**: **O(n)** — Each node is visited once.
-- **Space Complexity**: **O(h)** — Determined by the height of the tree due to recursion.
-
-This approach is elegant, simple to implement, and uses recursion to break the problem into manageable subproblems. Perfect for working with binary trees! 💡
-
-### 🌟 Motivational Ending
-
-Great job for tackling this problem! Remember, recursive solutions are often the key to solving tree-based problems efficiently. Keep practicing, and you'll continue mastering the art of recursion! ✨
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/invert-binary-tree/description/)
 

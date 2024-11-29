@@ -14,147 +14,229 @@ img_src = ""
 youtube = "r_kn18dmnNo"
 youtube_upload_date="2022-07-31"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/r_kn18dmnNo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a positive integer array grades which represents the grades of students. Your goal is to group these students into ordered non-empty groups where:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumGroups(vector<int>& nums) {
-        
-        sort(nums.begin(), nums.end());
-        
-        int cur_people = 1;
-        int cur_grade  = nums[0];
-        int tmp_people = 0;
-        int tmp_grade = 0;
-        int total = 1;
-        int n = nums.size();
-        for(int i = 1; i < n; i++) {
-            if(tmp_people <= cur_people || tmp_grade <= cur_grade) {
-                tmp_grade += nums[i];
-                tmp_people += 1;
-            } else {
-                total += 1;
-                cur_people = tmp_people;
-                cur_grade = tmp_grade;
-                tmp_people = 1;
-                tmp_grade = nums[i];
-            }
+1. The sum of the grades in the i-th group is less than the sum of the grades in the (i + 1)-th group.
+2. The number of students in the i-th group is less than the number of students in the (i + 1)-th group.
+Return the maximum number of groups that can be formed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array grades representing the grades of students.
+- **Example:** `Input: grades = [4, 1, 8, 3, 6, 7]`
+- **Constraints:**
+	- 1 <= grades.length <= 100
+	- 1 <= grades[i] <= 100
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of groups that can be formed.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output will always be a positive integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Group students such that the total number of students and the sum of their grades satisfy the given conditions for each group.
+
+- Sort the grades array.
+- Iterate through the grades, keeping track of the number of students and the sum of their grades for each group.
+- Check whether the current group satisfies the condition for being formed. If it does, increment the total number of groups.
+{{< dots >}}
+### Problem Assumptions ✅
+- All grades are positive integers.
+- There are enough students to form at least one group.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: grades = [4, 1, 8, 3, 6, 7]`  \
+  **Explanation:** In this case, the array is sorted, and the students can be grouped as follows: Group 1: [8] (Sum: 8, Students: 1), Group 2: [6, 7] (Sum: 13, Students: 2), Group 3: [4, 1, 3] (Sum: 8, Students: 3).
+
+- **Input:** `Example 2: grades = [3, 3]`  \
+  **Explanation:** In this case, only one group can be formed, as dividing it into two would violate the condition of having a different number of students in each group.
+
+{{< dots >}}
+## Approach 🚀
+Sort the grades array and try to form the maximum number of groups by checking if each group satisfies the conditions.
+
+### Initial Thoughts 💭
+- Sorting the array helps us easily form groups with increasing sums and sizes.
+- We need to iterate through the array and ensure that each new group meets the sum and size conditions.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no grades provided, no groups can be formed.
+- Even with the largest input (100 students), sorting and iterating through the array will be efficient.
+- If all grades are equal, only one group can be formed.
+- Ensure that the groups formed have increasing sizes and sums.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumGroups(vector<int>& nums) {
+    
+    sort(nums.begin(), nums.end());
+    
+    int cur_people = 1;
+    int cur_grade  = nums[0];
+    int tmp_people = 0;
+    int tmp_grade = 0;
+    int total = 1;
+    int n = nums.size();
+    for(int i = 1; i < n; i++) {
+        if(tmp_people <= cur_people || tmp_grade <= cur_grade) {
+            tmp_grade += nums[i];
+            tmp_people += 1;
+        } else {
+            total += 1;
+            cur_people = tmp_people;
+            cur_grade = tmp_grade;
+            tmp_people = 1;
+            tmp_grade = nums[i];
         }
-        return (tmp_people > cur_people && tmp_grade > cur_grade)? total + 1: total;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to find the maximum number of groups that can be formed from a list of grades such that each subsequent group has:
-1. More members than the previous group.
-2. A higher sum of grades than the previous group.
-
-Given an array of integers representing grades, the task is to partition this list into groups following these rules and return the maximum number of valid groups.
-
-### Approach
-
-The solution uses a greedy approach, sorting the grades and then iteratively forming groups. By starting with a small group and building up, the solution maintains the two required properties (increasing number of people and increasing sum of grades). Here’s a detailed breakdown of the approach:
-
-1. **Sorting the Grades:**  
-   - First, we sort the `nums` array in ascending order. This makes it easier to form groups with increasing grades, as we can simply add elements from left to right to maintain the order.
-
-2. **Tracking Current and Temporary Groups:**  
-   - We initialize two sets of variables:
-     - `cur_people` and `cur_grade`: Track the number of people and sum of grades in the last completed group.
-     - `tmp_people` and `tmp_grade`: Track the number of people and sum of grades in the current group being formed.
-   - These variables help ensure that each new group being formed (`tmp_people` and `tmp_grade`) has more people and a higher grade sum than the previous group.
-
-3. **Building Groups:**  
-   - As we iterate through `nums`, we add each grade to the current group (`tmp_people` and `tmp_grade`).
-   - Once `tmp_people` is greater than `cur_people` and `tmp_grade` is greater than `cur_grade`, we complete the current group.
-   - At this point, we:
-     - Increment the group count (`total`).
-     - Set `cur_people` and `cur_grade` to `tmp_people` and `tmp_grade`, marking the new group as completed.
-     - Reset `tmp_people` and `tmp_grade` to start forming the next group.
-
-4. **Final Check:**  
-   - After completing the loop, we check if the last group in progress (`tmp_people` and `tmp_grade`) can be counted as a valid group. If `tmp_people` and `tmp_grade` both exceed `cur_people` and `cur_grade`, we increment the group count by 1.
-
-5. **Return Result:**  
-   - Finally, we return `total`, the maximum number of valid groups that can be formed.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sort the Array
-
-```cpp
-sort(nums.begin(), nums.end());
-```
-
-- Sorting the grades array ensures that we can easily build groups with an increasing order of grades by iterating from left to right.
-
-#### Step 2: Initialize Variables
-
-```cpp
-int cur_people = 1;
-int cur_grade = nums[0];
-int tmp_people = 0;
-int tmp_grade = 0;
-int total = 1;
-int n = nums.size();
-```
-
-- We initialize `cur_people` and `cur_grade` with the first grade’s values since the first group will start with this value.
-- `tmp_people` and `tmp_grade` are set to 0, as these will hold values for the next group being formed.
-- `total` is set to 1, as we start with at least one group (the first grade).
-
-#### Step 3: Iterate Over the Array to Form Groups
-
-```cpp
-for(int i = 1; i < n; i++) {
-    if(tmp_people <= cur_people || tmp_grade <= cur_grade) {
-        tmp_grade += nums[i];
-        tmp_people += 1;
-    } else {
-        total += 1;
-        cur_people = tmp_people;
-        cur_grade = tmp_grade;
-        tmp_people = 1;
-        tmp_grade = nums[i];
-    }
+    return (tmp_people > cur_people && tmp_grade > cur_grade)? total + 1: total;
 }
 ```
 
-- **Inside the Loop:**
-  - For each grade, if `tmp_people` is less than or equal to `cur_people` or `tmp_grade` is less than or equal to `cur_grade`, we add the grade to the current group by incrementing `tmp_people` and `tmp_grade`.
-  - If both conditions are met, we finalize the group, increment the total group count (`total`), and reset `cur_people` and `cur_grade` to `tmp_people` and `tmp_grade` for the next group.
+This function calculates the maximum number of groups that can be formed based on a set of grades where the groups are formed with the constraint that the number of people and the sum of grades in each group cannot be smaller than the previous group.
 
-#### Step 4: Final Check for the Last Group
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumGroups(vector<int>& nums) {
+	```
+	Defines the function `maximumGroups`, which takes a vector of integers `nums` and returns an integer representing the maximum number of groups that can be formed.
 
-```cpp
-return (tmp_people > cur_people && tmp_grade > cur_grade) ? total + 1 : total;
-```
+2. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the vector `nums` in ascending order to allow for the grouping of values based on increasing order of grades.
 
-- After the loop, we check if the last group (`tmp_people` and `tmp_grade`) satisfies the conditions for a valid group.
-- If it does, we increment `total` by 1; otherwise, `total` remains the same.
+3. **Variable Initialization**
+	```cpp
+	    int cur_people = 1;
+	```
+	Initializes `cur_people` to track the number of people in the current group.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int cur_grade  = nums[0];
+	```
+	Initializes `cur_grade` to the first grade in the sorted array to start building the first group.
 
-#### Time Complexity:
-- **Sorting:** Sorting the array takes \(O(n \log n)\), where \(n\) is the length of `nums`.
-- **Looping through the array:** We loop through `nums` once to form groups, which is \(O(n)\).
-- Thus, the overall time complexity is \(O(n \log n)\).
+5. **Variable Initialization**
+	```cpp
+	    int tmp_people = 0;
+	```
+	Initializes `tmp_people` to track the number of people in the temporary group during iteration.
 
-#### Space Complexity:
-- The space complexity is \(O(1)\) for additional variables, as we only use a few integers to track the group properties.
+6. **Variable Initialization**
+	```cpp
+	    int tmp_grade = 0;
+	```
+	Initializes `tmp_grade` to track the sum of grades in the temporary group during iteration.
 
-### Conclusion
+7. **Variable Initialization**
+	```cpp
+	    int total = 1;
+	```
+	Initializes `total` to 1, since the first group is always formed before the loop starts.
 
-This solution effectively uses a greedy approach to form the maximum number of valid groups from a sorted list of grades. By maintaining cumulative sums and people counts for each group and ensuring each new group is larger in both size and sum, the solution achieves the required goal in optimal time. Sorting the grades helps ensure that we can efficiently build up groups without needing complex comparisons, resulting in a simple yet efficient algorithm to solve the problem.
+8. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	Calculates the size of the `nums` vector to be used in the loop iteration.
+
+9. **Loop**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	Starts a loop from the second element to the last in the sorted `nums` array to attempt grouping people.
+
+10. **Condition Check**
+	```cpp
+	        if(tmp_people <= cur_people || tmp_grade <= cur_grade) {
+	```
+	Checks if the number of people and the sum of grades in the current group are still less than or equal to the previous group's values.
+
+11. **Group Update**
+	```cpp
+	            tmp_grade += nums[i];
+	```
+	Adds the current grade to the `tmp_grade` for the current temporary group.
+
+12. **Group Update**
+	```cpp
+	            tmp_people += 1;
+	```
+	Increments the number of people in the current temporary group.
+
+13. **Else Block**
+	```cpp
+	        } else {
+	```
+	If the condition is not satisfied, the current temporary group is complete, and a new group is formed.
+
+14. **Group Transition**
+	```cpp
+	            total += 1;
+	```
+	Increments the `total` count of groups when a new group is formed.
+
+15. **Group Transition**
+	```cpp
+	            cur_people = tmp_people;
+	```
+	Sets `cur_people` to the number of people in the temporary group to start tracking the new group.
+
+16. **Group Transition**
+	```cpp
+	            cur_grade = tmp_grade;
+	```
+	Sets `cur_grade` to the sum of grades in the temporary group to start tracking the new group.
+
+17. **Group Reset**
+	```cpp
+	            tmp_people = 1;
+	```
+	Resets `tmp_people` to 1 for the new group starting with the current person.
+
+18. **Group Reset**
+	```cpp
+	            tmp_grade = nums[i];
+	```
+	Resets `tmp_grade` to the current person's grade for the new group.
+
+19. **Return Result**
+	```cpp
+	    return (tmp_people > cur_people && tmp_grade > cur_grade)? total + 1: total;
+	```
+	Returns the total number of groups formed, adding 1 if the last group formed is valid based on the condition.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which is O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the sorted array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-groups-entering-a-competition/description/)
 

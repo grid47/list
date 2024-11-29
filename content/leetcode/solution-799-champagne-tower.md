@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "LQ8TuG_QADM"
 youtube_upload_date="2023-09-24"
 youtube_thumbnail="https://i.ytimg.com/vi/LQ8TuG_QADM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,128 +28,163 @@ youtube_thumbnail="https://i.ytimg.com/vi/LQ8TuG_QADM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a champagne tower in the shape of a pyramid. The topmost glass is filled with a specified amount of champagne. When a glass is full, the excess champagne spills equally into the two glasses directly beneath it. Given the total amount of champagne poured, determine how full a particular glass at row `query_row` and glass `query_glass` will be after the champagne has spilled.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of three values: `poured`, the total amount of champagne poured into the topmost glass, and `query_row` and `query_glass`, which specify the row and position of the glass to query.
+- **Example:** `Input: poured = 3, query_row = 2, query_glass = 1`
+- **Constraints:**
+	- 0 <= poured <= 10^9
+	- 0 <= query_glass <= query_row < 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double champagneTower(int poured, int query_row, int query_glass) {
-        vector<double> currRow(1, poured);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the amount of champagne in the queried glass, ensuring the result is rounded to five decimal places.
+- **Example:** `Output: 0.50000`
+- **Constraints:**
+	- The returned result must be accurate to five decimal places.
 
-        for(int i = 0; i <= query_row; i++) {
-            vector<double> nextrow(i + 2, 0);
-            for(int j = 0; j <= i; j++) {
-                if(currRow[j] >= 1) {
-                    nextrow[j]      += (currRow[j] - 1)/2.0;
-                    nextrow[j + 1]  += (currRow[j] - 1)/2.0;
-                    currRow[j]       = 1;
-                }
-            }
-            if(i != query_row) currRow = nextrow;
-        }
-        return currRow[query_glass];
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to simulate the pouring and spilling process and determine how full a specific glass is.
 
-### Problem Statement
+- Initialize an array to represent the glasses, starting with the topmost glass filled with the specified amount of champagne.
+- For each row, calculate the champagne that overflows from each glass, and distribute it equally between the two glasses directly beneath it.
+- Repeat the process until the row of interest is reached, ensuring each glass's content is capped at 1 unit of champagne.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number of glasses in each row is incremental, with the ith row containing i+1 glasses.
+- Champagne only spills to the glasses directly beneath, left and right.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: poured = 3, query_row = 2, query_glass = 1`  \
+  **Explanation:** After pouring 3 cups of champagne, the first row has 1 cup, the second row has 1.5 cups (with each glass receiving 0.5 cups), and the third row has the second glass with 0.5 cups (because it receives a portion of the excess from the second row).
 
-The problem is a simulation of pouring champagne into a triangular tower of glasses. The tower consists of rows of glasses, where each glass can hold at most 1 unit of champagne. The goal is to determine how much champagne will be in a specific glass after pouring a certain amount of champagne into the topmost glass.
+- **Input:** `Input: poured = 6, query_row = 2, query_glass = 0`  \
+  **Explanation:** Pouring 6 cups results in the first row having 1 cup, the second row having 2 cups (with each glass full), and the third row has the two outer glasses each filled to 0.5 cups.
 
-### Problem Details:
-- We are given an integer `poured` representing the amount of champagne to be poured into the topmost glass.
-- We are also given `query_row` and `query_glass`, which specify the row and glass in the tower for which we need to determine the amount of champagne remaining after the pour.
+{{< dots >}}
+## Approach 🚀
+The solution simulates the process of pouring champagne into the tower row by row, from top to bottom, and computes how much champagne remains in a given glass.
 
-The tower follows a specific structure:
-- The first row contains one glass.
-- The second row contains two glasses.
-- The third row contains three glasses.
-- And so on.
-
-When champagne is poured into a glass, any excess champagne (overflow) is evenly distributed into the two glasses directly below it. If a glass exceeds its maximum capacity of 1 unit, the excess champagne overflows equally to the two glasses directly below it.
-
-### Objective:
-Determine the amount of champagne in the glass at the position `[query_row][query_glass]` after pouring `poured` units of champagne into the topmost glass.
-
-### Approach
-
-The problem requires simulating the pouring process into the champagne tower. We can break down the approach as follows:
-
-1. **Simulate the pouring process**:
-   - Start by pouring the champagne into the topmost glass.
-   - For each row, calculate the overflow and distribute it equally into the glasses below.
-   - The glasses below the current one can receive overflow from the current glass if it exceeds its capacity of 1 unit.
-
-2. **Tracking the champagne in each glass**:
-   - The glasses are modeled as rows of a list where each row contains an array representing the glasses in that row.
-   - For each glass, if the amount of champagne exceeds 1, the excess champagne is split equally between the two glasses in the next row directly beneath it.
-
-3. **Iterate through each row until reaching the row of interest**:
-   - Each row has one more glass than the previous row, so it is important to track the pouring process row by row.
-   - Once the simulation reaches the `query_row`, return the amount of champagne in the specified `query_glass` of that row.
-
-4. **Optimized space usage**:
-   - The solution avoids storing the entire tower structure for all rows. Instead, only the current row and the next row are kept in memory at any given time to reduce the space complexity.
-
-### Code Breakdown (Step by Step)
-
-Let’s walk through the code:
-
+### Initial Thoughts 💭
+- The amount of champagne poured can be very large, so efficient simulation is necessary to avoid excessive computations.
+- We can maintain an array of glasses for each row and keep track of the overflow from each glass, distributing it to the next row.
+{{< dots >}}
+### Edge Cases 🌐
+- If poured equals 0, no champagne is poured, and all glasses remain empty.
+- If poured is very large (e.g., 10^9), ensure the simulation still runs efficiently within time limits.
+- If query_row is 0, the only glass of interest is the topmost glass, which will contain all the poured champagne if it's less than 1 cup.
+- Make sure not to exceed the maximum capacity of any glass, as each glass can hold a maximum of 1 cup.
+{{< dots >}}
+## Code 💻
 ```cpp
 double champagneTower(int poured, int query_row, int query_glass) {
-    vector<double> currRow(1, poured);  // Initialize the top row with poured champagne.
+    vector<double> currRow(1, poured);
 
-    // Loop through each row up to the query_row
     for(int i = 0; i <= query_row; i++) {
-        vector<double> nextrow(i + 2, 0);  // Initialize the next row with 0 champagne.
-```
-- We start by initializing the `currRow` vector, which represents the glasses in the current row, and set the topmost glass to the amount of poured champagne.
-- For each row up to the `query_row`, we create the next row (`nextrow`), which has one more glass than the current row.
-
-```cpp
+        vector<double> nextrow(i + 2, 0);
         for(int j = 0; j <= i; j++) {
-            // Check if the current glass has more than 1 unit of champagne.
             if(currRow[j] >= 1) {
-                nextrow[j]      += (currRow[j] - 1) / 2.0;  // Overflow to the left glass in the next row.
-                nextrow[j + 1]  += (currRow[j] - 1) / 2.0;  // Overflow to the right glass in the next row.
-                currRow[j]       = 1;  // Set current glass to 1 (maximum capacity).
+                nextrow[j]      += (currRow[j] - 1)/2.0;
+                nextrow[j + 1]  += (currRow[j] - 1)/2.0;
+                currRow[j]       = 1;
             }
         }
-```
-- In this loop, we check each glass in the current row (`currRow`). If a glass contains more than 1 unit of champagne, the excess is distributed equally to the two glasses directly below it (in the next row).
-- We update the `currRow` to reflect that the current glass has reached its maximum capacity of 1.
-
-```cpp
-        if(i != query_row) currRow = nextrow;  // Update the current row to the next row.
+        if(i != query_row) currRow = nextrow;
     }
-```
-- Once we have processed the current row, we update `currRow` to `nextrow` for the next iteration. If we've reached the row of interest (`query_row`), we stop updating `currRow`.
-
-```cpp
-    return currRow[query_glass];  // Return the amount of champagne in the queried glass.
+    return currRow[query_glass];
 }
 ```
-- After the loop finishes, `currRow` contains the amount of champagne in each glass of the `query_row`. We simply return the amount in the `query_glass`.
 
-### Complexity
+This code solves the champagne tower problem, simulating how champagne flows from a source glass to lower glasses. The function calculates the amount of champagne in a specific glass at a particular row in the tower after pouring a given amount of champagne.
 
-#### Time Complexity:
-The time complexity of the solution is **O(query_row)**, where `query_row` is the row we are interested in. This is because:
-- For each row, we process each glass in the row, and the number of glasses in each row is `i + 1` (where `i` is the current row index).
-- The total number of glasses we process is approximately the sum of the first `query_row` integers, which is O(query_row^2).
-- Since we only need to process up to `query_row` and not all rows, the time complexity is O(query_row).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	double champagneTower(int poured, int query_row, int query_glass) {
+	```
+	This is the function definition for `champagneTower`, which takes in three arguments: `poured` (total champagne poured), `query_row` (the row of the glass to query), and `query_glass` (the specific glass in that row).
 
-#### Space Complexity:
-The space complexity is **O(query_row)** because:
-- We only store the `currRow` and `nextrow` arrays, each of which can have at most `query_row + 1` elements.
-- Thus, the space complexity is linear in the number of rows, i.e., O(query_row).
+2. **Initialization**
+	```cpp
+	    vector<double> currRow(1, poured);
+	```
+	Initializes a vector `currRow` to hold the current row of glasses, with the first glass containing all the poured champagne.
 
-### Conclusion
+3. **Loop**
+	```cpp
+	    for(int i = 0; i <= query_row; i++) {
+	```
+	A loop that iterates through each row from the top to the queried row (`query_row`).
 
-The solution efficiently simulates the pouring process in the champagne tower using two arrays (`currRow` and `nextrow`) to track the amount of champagne in each glass at each stage. By iterating over each row up to the `query_row`, the solution determines the amount of champagne in the specified glass without needing to store the entire tower structure.
+4. **Row Initialization**
+	```cpp
+	        vector<double> nextrow(i + 2, 0);
+	```
+	Creates a new row `nextrow` with `i + 2` glasses initialized to 0.0, where `i + 2` accounts for the maximum glasses at that row.
 
-This approach is both time and space efficient, with a time complexity of O(query_row) and a space complexity of O(query_row). It effectively handles the problem constraints and provides the correct result for any valid input values.
+5. **Inner Loop**
+	```cpp
+	        for(int j = 0; j <= i; j++) {
+	```
+	A nested loop that iterates through each glass in the current row `i`.
+
+6. **Champagne Overflow Check**
+	```cpp
+	            if(currRow[j] >= 1) {
+	```
+	Checks if the current glass `currRow[j]` contains more than or equal to 1 unit of champagne, indicating overflow.
+
+7. **Champagne Redistribution**
+	```cpp
+	                nextrow[j]      += (currRow[j] - 1)/2.0;
+	```
+	Redistributes the overflow champagne to the left glass in the next row.
+
+8. **Champagne Redistribution**
+	```cpp
+	                nextrow[j + 1]  += (currRow[j] - 1)/2.0;
+	```
+	Redistributes the overflow champagne to the right glass in the next row.
+
+9. **Champagne Overflow Adjustment**
+	```cpp
+	                currRow[j]       = 1;
+	```
+	Sets the current glass to 1, as it can only hold a maximum of 1 unit of champagne.
+
+10. **Row Transition**
+	```cpp
+	        if(i != query_row) currRow = nextrow;
+	```
+	Transfers the `nextrow` as `currRow` for the next iteration, unless the queried row has been reached.
+
+11. **Return Statement**
+	```cpp
+	    return currRow[query_glass];
+	```
+	Returns the amount of champagne in the glass specified by `query_glass` in the `query_row`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(query_row), as we only need to process up to the queried row.
+- **Average Case:** O(query_row), which is linear in terms of the number of rows up to the queried row.
+- **Worst Case:** O(query_row), since we must process all glasses in each row up to the queried row.
+
+The time complexity is linear with respect to the number of rows, as we process each row once.
+
+### Space Complexity 💾
+- **Best Case:** O(query_row), since we need space for each row's glasses.
+- **Worst Case:** O(query_row), as we need to store the glasses for each row.
+
+The space complexity is linear, as we need space to store the glasses for each row up to the queried row.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/champagne-tower/description/)
 

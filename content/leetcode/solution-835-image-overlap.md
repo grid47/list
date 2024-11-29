@@ -14,137 +14,207 @@ img_src = ""
 youtube = "zfjBapE3Y6E"
 youtube_upload_date="2020-09-06"
 youtube_thumbnail="https://i.ytimg.com/vi/zfjBapE3Y6E/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGCwgTih_MA8=&rs=AOn4CLDYXzk8BIj-n6f1vDE8kuCRNpZ81A"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two square binary matrices img1 and img2, both of size n x n. Each matrix consists of 0s and 1s. You are allowed to slide img1 over img2 in any direction (up, down, left, or right) without rotating the matrix. Your task is to find the maximum number of overlapping positions where both img1 and img2 have a 1 in the same position after performing a translation.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two n x n binary matrices img1 and img2, both representing images with 0s and 1s.
+- **Example:** `Input: img1 = [[1,0,0], [1,0,0], [0,0,0]], img2 = [[0,1,0], [0,1,0], [0,0,0]]`
+- **Constraints:**
+	- 1 <= n <= 30
+	- img1[i][j] is either 0 or 1.
+	- img2[i][j] is either 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int largestOverlap(vector<vector<int>>& img1, vector<vector<int>>& img2) {
-        vector<int> la, lb;
-        int n = img1.size();
-        for(int i = 0; i < n*n; i++)
-            if(img1[i/n][i%n] == 1)
-            la.push_back(i/n*100+ i%n);
-        for(int i = 0; i < n*n; i++)
-            if(img2[i/n][i%n] == 1)
-            lb.push_back(i/n*100+ i%n);
-        unordered_map<int, int> mp;
-        for(int i : la)
-        for(int j : lb)
-            mp[i-j]++;
-        int res = 0;
-        for(auto it: mp)
-        res = max(res, it.second);
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the largest number of overlapping 1s after translating img1 over img2.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The largest overlap can be calculated as the maximum number of 1s overlapping in both matrices after translation.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the maximum number of 1s that overlap after translating img1 over img2.
 
-Given two binary images `img1` and `img2` of size `n x n`, we are tasked with finding the largest overlap of ones between the two images after performing a 2D translation. Specifically, the problem asks us to determine the maximum number of overlapping 1's when one image is translated (shifted) over the other by some amount in both the vertical and horizontal directions.
+- Step 1: Extract the positions of 1s in both img1 and img2.
+- Step 2: For each possible translation (i.e., shifts in horizontal and vertical directions), calculate the number of overlapping 1s.
+- Step 3: Return the maximum overlap found across all translations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrices img1 and img2 are always of the same size.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: img1 = [[1,0,0], [1,0,0], [0,0,0]], img2 = [[0,1,0], [0,1,0], [0,0,0]]`  \
+  **Explanation:** In this example, the translation that aligns the 1s in both images gives a maximum overlap of 2.
 
-**Translation** means moving the elements of `img1` and `img2` in any direction. The goal is to calculate how many `1's` overlap between the two images after the translation.
+- **Input:** `Input: img1 = [[1,1,0], [0,1,0], [0,1,0]], img2 = [[0,0,0], [0,1,1], [0,0,1]]`  \
+  **Explanation:** After translating img1 right and down by 1 unit, we obtain a maximum overlap of 3.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The key approach is to iterate over all possible translations of img1 and compute the overlap with img2. This can be achieved by iterating through all combinations of shifts along both axes and checking for the overlap of 1s.
 
-To solve this problem, we need to evaluate every possible translation of `img1` relative to `img2`. The key insight here is that the maximum overlap occurs when the `1's` from both images align after some translation. To efficiently calculate the maximum overlap, the solution breaks the problem into the following steps:
-
-1. **Identify the positions of the `1` pixels**: 
-   - First, extract the coordinates of all `1's` from both `img1` and `img2`. Each `1` is located at some index `(i, j)` in the matrix.
-
-2. **Translate `img1` relative to `img2`**:
-   - For each pair of positions `(x1, y1)` from `img1` and `(x2, y2)` from `img2`, calculate the vector `(dx, dy)` representing the translation required to align `(x1, y1)` with `(x2, y2)`.
-   - This vector will represent a potential translation of `img1` relative to `img2`.
-
-3. **Count overlaps**:
-   - For each translation vector `(dx, dy)`, shift all the `1's` in `img1` by `(dx, dy)` and check if they align with `1's` from `img2`.
-   - Use a hashmap to count the number of times each translation vector results in overlapping `1's`.
-
-4. **Find the maximum overlap**:
-   - The result is the maximum count of overlapping `1's` for any translation vector.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Identifying the Positions of `1's` in `img1` and `img2`
-
+### Initial Thoughts 💭
+- We need to check all possible translations by sliding img1 over img2 in both horizontal and vertical directions.
+- By extracting the positions of 1s and counting the overlaps for each translation, we can find the largest overlap efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty matrix (with all 0s) will result in no overlap.
+- Ensure that the solution can handle the maximum input size (n=30).
+- Consider cases where one matrix is completely filled with 1s and the other with 0s.
+- Ensure that translations do not cause indices to go out of bounds.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<int> la, lb;
-int n = img1.size();
-```
-- We create two vectors `la` and `lb` to store the positions of the `1's` in `img1` and `img2`, respectively. `n` is the size of the `n x n` image.
-
-```cpp
-for(int i = 0; i < n*n; i++)
-    if(img1[i/n][i%n] == 1)
-        la.push_back(i/n*100 + i%n);
-for(int i = 0; i < n*n; i++)
-    if(img2[i/n][i%n] == 1)
-        lb.push_back(i/n*100 + i%n);
-```
-- These loops iterate through each element in both `img1` and `img2`, checking if the element is `1`. 
-- We store the positions of the `1's` in a compact form by encoding the row and column of the element into a single number (`i/n * 100 + i%n`). This encoding is used to uniquely represent the position of a `1` in the matrix.
-
-#### Step 2: Counting Overlaps for Each Translation
-
-```cpp
-unordered_map<int, int> mp;
-```
-- We use a hashmap `mp` to store the count of each translation. The key is the translation vector `(dx, dy)` and the value is the number of overlaps that occur for that particular translation.
-
-```cpp
-for(int i : la)
+int largestOverlap(vector<vector<int>>& img1, vector<vector<int>>& img2) {
+    vector<int> la, lb;
+    int n = img1.size();
+    for(int i = 0; i < n*n; i++)
+        if(img1[i/n][i%n] == 1)
+        la.push_back(i/n*100+ i%n);
+    for(int i = 0; i < n*n; i++)
+        if(img2[i/n][i%n] == 1)
+        lb.push_back(i/n*100+ i%n);
+    unordered_map<int, int> mp;
+    for(int i : la)
     for(int j : lb)
-        mp[i - j]++;
-```
-- This nested loop iterates through each combination of `1` positions from `img1` and `img2`.
-- For each pair of positions `(i, j)` from `img1` and `img2`, we calculate the translation vector `(dx, dy)` as the difference between `i` and `j`. 
-- We then increment the count of this translation vector in the hashmap `mp`. The key here is that the value in `mp[i - j]` represents how many overlaps occur with a specific translation.
-
-#### Step 3: Finding the Maximum Overlap
-
-```cpp
-int res = 0;
-for(auto it : mp)
+        mp[i-j]++;
+    int res = 0;
+    for(auto it: mp)
     res = max(res, it.second);
+    return res;
+}
 ```
-- We iterate through the hashmap `mp` and track the maximum value. This value represents the maximum number of overlapping `1's` for any translation.
 
-#### Step 4: Return the Result
+This function computes the largest overlap between two binary matrices by comparing their 1's at different relative positions.
 
-```cpp
-return res;
-```
-- Finally, we return the maximum overlap found.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int largestOverlap(vector<vector<int>>& img1, vector<vector<int>>& img2) {
+	```
+	Function declaration: This function takes two 2D vectors `img1` and `img2` representing binary matrices, and returns an integer, the size of the largest overlap.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    vector<int> la, lb;
+	```
+	Initialization of two vectors `la` and `lb` to store the positions of 1's in `img1` and `img2` respectively.
 
-#### Time Complexity
+3. **Matrix Size**
+	```cpp
+	    int n = img1.size();
+	```
+	Here, `n` stores the size of the matrix, assuming both `img1` and `img2` are square matrices.
 
-- **Extracting positions of `1's`**: In the worst case, we are iterating over all `n x n` elements in both `img1` and `img2`. This gives a time complexity of `O(n^2)` for this step.
-- **Counting overlaps**: In the worst case, we will compare every pair of positions from `img1` and `img2`. If both matrices contain `m` `1's`, then there will be `O(m^2)` comparisons. 
-- Given that `m` can be at most `n^2`, the overall time complexity of counting overlaps is `O(n^4)` in the worst case.
+4. **Loop Through img1**
+	```cpp
+	    for(int i = 0; i < n*n; i++)
+	```
+	Looping over each index of the matrix `img1` to identify positions of 1's.
 
-Thus, the overall time complexity of the algorithm is **O(n^4)**, which is not optimal for large images. However, the complexity can be reduced further using advanced techniques like spatial hashing or Fourier transforms.
+5. **Check Condition img1**
+	```cpp
+	        if(img1[i/n][i%n] == 1)
+	```
+	Checking if the current element in `img1` is 1.
 
-#### Space Complexity
+6. **Store Position in la**
+	```cpp
+	        la.push_back(i/n*100+ i%n);
+	```
+	If the element is 1, store the position of 1 in `la` by encoding the row and column.
 
-- We store the positions of `1's` in both `img1` and `img2` in two vectors. This requires `O(m)` space, where `m` is the number of `1's` in the images.
-- We also store the translation vectors and their counts in a hashmap `mp`, which requires `O(m^2)` space in the worst case.
+7. **Loop Through img2**
+	```cpp
+	    for(int i = 0; i < n*n; i++)
+	```
+	Looping over each index of the matrix `img2` to identify positions of 1's.
 
-Therefore, the overall space complexity is **O(m^2)**, where `m` is the number of `1's` in the images.
+8. **Check Condition img2**
+	```cpp
+	        if(img2[i/n][i%n] == 1)
+	```
+	Checking if the current element in `img2` is 1.
 
-### Conclusion
+9. **Store Position in lb**
+	```cpp
+	        lb.push_back(i/n*100+ i%n);
+	```
+	If the element is 1, store the position of 1 in `lb` by encoding the row and column.
 
-This solution efficiently finds the largest overlap of `1's` between two binary images after a translation. The algorithm works by first identifying the positions of `1's` in both images, then computing the translation vectors for each pair of positions from `img1` and `img2`, and finally counting the overlaps for each translation. The result is the translation that produces the maximum number of overlapping `1's`.
+10. **Map Initialization**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	Create an unordered map `mp` to store the differences of positions between `la` and `lb` and their frequencies.
 
-Although the algorithm's time complexity can be high (`O(n^4)`), it provides a straightforward and intuitive approach to solving the problem. For larger datasets, further optimizations using techniques like spatial hashing or Fourier transforms could be explored to reduce the time complexity.
+11. **Nested Loop**
+	```cpp
+	    for(int i : la)
+	```
+	Loop through the elements in `la`.
+
+12. **Nested Loop lb**
+	```cpp
+	    for(int j : lb)
+	```
+	For each element in `la`, loop through elements in `lb`.
+
+13. **Update Map**
+	```cpp
+	        mp[i-j]++;
+	```
+	For each pair of positions from `la` and `lb`, calculate the difference and increment its count in the map `mp`.
+
+14. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize the result variable `res` to store the maximum frequency of position differences.
+
+15. **Loop Through Map**
+	```cpp
+	    for(auto it: mp)
+	```
+	Loop through the entries in the map `mp`.
+
+16. **Update Result**
+	```cpp
+	    res = max(res, it.second);
+	```
+	Update the result `res` to store the maximum frequency of the position difference.
+
+17. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the result `res`, which represents the largest overlap of 1's between `img1` and `img2`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2), when there are minimal 1s and no significant overlap.
+- **Average Case:** O(n^4), due to iterating over all possible translations and computing overlaps.
+- **Worst Case:** O(n^4), in the case where there are many 1s and the number of comparisons is large.
+
+The time complexity is dominated by the nested loops that check each possible translation and overlap.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2), in case we store all the positions of 1s from both matrices.
+- **Worst Case:** O(n^2), to store the positions of the 1s in both matrices.
+
+The space complexity is determined by the storage of the positions of 1s in both img1 and img2.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/image-overlap/description/)
 

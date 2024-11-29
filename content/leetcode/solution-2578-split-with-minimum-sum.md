@@ -14,132 +14,213 @@ img_src = ""
 youtube = "rRksdLnCAqI"
 youtube_upload_date="2023-03-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rRksdLnCAqI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a positive integer num, split it into two non-negative integers num1 and num2 such that the concatenation of num1 and num2 is a permutation of the digits of num. The goal is to minimize the sum of num1 and num2.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a positive integer num.
+- **Example:** `For example, num = 8657.`
+- **Constraints:**
+	- 10 <= num <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int splitNum(int num) {
-        int num1 = 0, num2 = 0, x = 1;
-        vector<int> v;
-        while(num){
-            v.push_back(num%10);
-            num /= 10;
-        }
-        sort(v.begin(),v.end());
-        num = 0;
-        for(auto &i: v){
-            num *= 10;
-            num += i;
-        }
-        while(num){
-            num1 += x*(num%10);
-            num /= 10;
-            num2 += x*(num%10);
-            num /= 10;
-            x *= 10;
-        }
-        return num1+num2;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer, the minimum possible sum of num1 and num2 after splitting the digits of num.
+- **Example:** `For num = 592, the output is 56.`
+- **Constraints:**
+	- The output is an integer representing the minimal possible sum.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum sum after splitting the digits of num into two valid numbers.
+
+- 1. Extract the digits of num.
+- 2. Sort the digits in ascending order to minimize the sum.
+- 3. Distribute the digits alternatively between num1 and num2 to form two valid numbers.
+- 4. Compute and return the sum of num1 and num2.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number num will always have at least two digits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For num = 592, the output is 56.`  \
+  **Explanation:** We split 592 into num1 = 5 and num2 = 9. The sum of 5 and 9 is 56, which is the minimum possible sum.
+
+{{< dots >}}
+## Approach 🚀
+We approach this problem by first extracting and sorting the digits of num. Then, we distribute the digits between num1 and num2 in an alternating manner to ensure the minimal sum.
+
+### Initial Thoughts 💭
+- The digits need to be rearranged optimally to form the smallest possible sum.
+- Sorting the digits in ascending order and then distributing them alternately between num1 and num2 should give the minimal sum.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always be a valid integer with at least two digits.
+- For large inputs (up to 10^9), ensure the algorithm handles large integers efficiently.
+- If all digits in num are the same, num1 and num2 should be split equally to minimize the sum.
+- Ensure that the final sum is the minimal possible value.
+{{< dots >}}
+## Code 💻
+```cpp
+int splitNum(int num) {
+    int num1 = 0, num2 = 0, x = 1;
+    vector<int> v;
+    while(num){
+        v.push_back(num%10);
+        num /= 10;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires you to split the digits of a given integer `num` into two numbers such that the sum of these two numbers is minimized. The approach involves sorting the digits of the number and then distributing them in an alternating manner between the two numbers, where each number is constructed from the digits to ensure the sum is minimized.
-
-### Approach
-
-To solve this problem, the goal is to divide the digits of the input number into two integers in such a way that their sum is minimized. The strategy is to sort the digits in ascending order and then alternate the digits between the two numbers. This ensures that the smaller digits are placed in the higher place values, which minimizes the overall sum of the two numbers. Here's a breakdown of the approach:
-
-1. **Extract digits**: Extract all digits from the given number.
-2. **Sort digits**: Sort the digits in ascending order to ensure the smallest digits are used in the most significant positions for the final numbers.
-3. **Distribute digits**: Distribute the digits alternatively between two numbers, ensuring that digits are added to the numbers in a way that minimizes the sum of these two numbers.
-4. **Reconstruct numbers**: After distributing the digits, reconstruct the two numbers.
-5. **Calculate the sum**: The final result will be the sum of these two reconstructed numbers.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code step by step to understand the logic:
-
-#### 1. **Extracting Digits**:
-```cpp
-int num1 = 0, num2 = 0, x = 1;
-vector<int> v;
-while(num){
-    v.push_back(num%10);
-    num /= 10;
+    sort(v.begin(),v.end());
+    num = 0;
+    for(auto &i: v){
+        num *= 10;
+        num += i;
+    }
+    while(num){
+        num1 += x*(num%10);
+        num /= 10;
+        num2 += x*(num%10);
+        num /= 10;
+        x *= 10;
+    }
+    return num1+num2;
 }
 ```
-- The code begins by initializing two variables `num1` and `num2` to hold the two numbers we will form.
-- The variable `x` is used to track the place value (1, 10, 100, etc.) for the digits in the final numbers.
-- A vector `v` is used to store the digits of the given number `num`.
-- The `while` loop extracts the digits of `num` one by one, using the modulus operator (`% 10`) to get the least significant digit and dividing `num` by 10 to remove the digit. This continues until `num` becomes 0.
 
-#### 2. **Sorting Digits**:
-```cpp
-sort(v.begin(), v.end());
-```
-- After extracting the digits, they are stored in the vector `v`. We then sort the digits in ascending order using the `sort` function. This ensures that the smallest digits are positioned at the beginning of the vector, which is crucial for minimizing the final sum of the two numbers.
+This function takes an integer 'num', splits its digits, sorts them, and then processes them in a specific manner to return a modified sum.
 
-#### 3. **Reconstructing the Numbers**:
-```cpp
-num = 0;
-for(auto &i: v){
-    num *= 10;
-    num += i;
-}
-```
-- After sorting the digits, the code reconstructs the number by iterating through the sorted vector `v` and adding each digit to the variable `num`.
-- The variable `num` is multiplied by 10 each time to shift the previously added digits to the left, and the current digit `i` is added to `num` to form the reconstructed number.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Code Block**
+	```cpp
+	int splitNum(int num) {
+	```
+	Function declaration: Starts the splitNum function with an integer input.
 
-#### 4. **Distributing the Digits**:
-```cpp
-while(num){
-    num1 += x*(num%10);
-    num /= 10;
-    num2 += x*(num%10);
-    num /= 10;
-    x *= 10;
-}
-```
-- Now that we have the sorted number, the code proceeds to distribute the digits between `num1` and `num2`. This is done by alternating the digits between the two numbers.
-- The `while(num)` loop iterates through the digits of `num`, and in each iteration:
-  - The least significant digit (`num % 10`) is added to `num1` and multiplied by `x` to maintain the correct place value.
-  - The number is divided by 10 to remove the digit just added.
-  - The next digit is added to `num2` and similarly processed.
-  - The `x` value is multiplied by 10 in each iteration to adjust the place value (1, 10, 100, etc.) for the digits.
+2. **Variable Initialization**
+	```cpp
+	    int num1 = 0, num2 = 0, x = 1;
+	```
+	Initializes variables num1, num2 for storing results, and x for scaling the digits during the second loop.
 
-#### 5. **Return the Final Result**:
-```cpp
-return num1 + num2;
-```
-- After distributing all the digits, the function returns the sum of `num1` and `num2`, which is the final result.
+3. **Variable Initialization**
+	```cpp
+	    vector<int> v;
+	```
+	Creates a vector 'v' to store individual digits of the number.
 
-### Complexity Analysis
+4. **Loop**
+	```cpp
+	    while(num){
+	```
+	Begins a loop that continues as long as there are digits in the number.
 
-#### Time Complexity:
-1. **Extracting digits**: Extracting the digits of `num` requires iterating through the number's digits, which takes `O(d)`, where `d` is the number of digits in the number. Since the number has at most `O(log(num))` digits, this step takes `O(log(num))` time.
-2. **Sorting digits**: Sorting the digits in the vector `v` takes `O(d log d)`, where `d` is the number of digits. Again, since `d` is proportional to `log(num)`, the sorting step takes `O(log(num) * log(log(num)))` time.
-3. **Distributing digits**: The distribution of digits between `num1` and `num2` requires iterating through all the digits, which takes `O(d)` time. This step takes `O(log(num))` time.
+5. **Action**
+	```cpp
+	        v.push_back(num%10);
+	```
+	Extracts the last digit of 'num' and adds it to the vector 'v'.
 
-Thus, the total time complexity is dominated by the sorting step and is **O(log(num) * log(log(num)))**.
+6. **Action**
+	```cpp
+	        num /= 10;
+	```
+	Divides 'num' by 10 to remove the last digit.
 
-#### Space Complexity:
-- The space complexity is mainly due to the vector `v` that stores the digits of `num`. The space required for `v` is proportional to the number of digits in `num`, which is `O(log(num))`.
-- There are no other significant space requirements in the algorithm.
+7. **Action**
+	```cpp
+	    sort(v.begin(),v.end());
+	```
+	Sorts the vector 'v' containing digits in ascending order.
 
-Thus, the space complexity is **O(log(num))**.
+8. **Variable Initialization**
+	```cpp
+	    num = 0;
+	```
+	Resets 'num' to 0 before processing the sorted digits.
 
-### Conclusion
+9. **Loop**
+	```cpp
+	    for(auto &i: v){
+	```
+	Starts a loop to process each digit in the sorted vector.
 
-This solution efficiently solves the problem by extracting the digits from the given number, sorting them, and distributing them between two numbers. The final result is the sum of these two numbers, which minimizes the sum due to the optimal distribution of digits. The time complexity of **O(log(num) * log(log(num)))** and space complexity of **O(log(num))** make this approach scalable and efficient for large input sizes.
+10. **Action**
+	```cpp
+	        num *= 10;
+	```
+	Multiplies 'num' by 10 to shift left by one digit.
+
+11. **Action**
+	```cpp
+	        num += i;
+	```
+	Adds the current digit 'i' from the sorted vector to 'num'.
+
+12. **Loop**
+	```cpp
+	    while(num){
+	```
+	Starts a loop to process the number with sorted digits.
+
+13. **Action**
+	```cpp
+	        num1 += x*(num%10);
+	```
+	Extracts the last digit of 'num' and adds it to 'num1' scaled by 'x'.
+
+14. **Action**
+	```cpp
+	        num /= 10;
+	```
+	Divides 'num' by 10 to remove the last digit.
+
+15. **Action**
+	```cpp
+	        num2 += x*(num%10);
+	```
+	Extracts the last digit of 'num' again and adds it to 'num2' scaled by 'x'.
+
+16. **Action**
+	```cpp
+	        num /= 10;
+	```
+	Divides 'num' by 10 again to remove the last digit.
+
+17. **Action**
+	```cpp
+	        x *= 10;
+	```
+	Multiplies 'x' by 10 to scale the next digit in the next iteration.
+
+18. **Return**
+	```cpp
+	    return num1+num2;
+	```
+	Returns the sum of 'num1' and 'num2' as the result of the function.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(d log d)
+- **Average Case:** O(d log d)
+- **Worst Case:** O(d log d)
+
+The time complexity is dominated by the sorting step, where d is the number of digits in num.
+
+### Space Complexity 💾
+- **Best Case:** O(d)
+- **Worst Case:** O(d)
+
+The space complexity is O(d) due to the storage of the digits of num.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/split-with-minimum-sum/description/)
 

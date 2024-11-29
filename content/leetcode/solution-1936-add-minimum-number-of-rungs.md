@@ -14,160 +14,220 @@ img_src = ""
 youtube = "f_KA5C_13Oc"
 youtube_upload_date="2021-07-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/f_KA5C_13Oc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are at the bottom of a ladder with several rungs already placed. The distance between consecutive rungs should not exceed a given value 'dist'. If the gap between any two rungs exceeds 'dist', you can insert additional rungs to make the ladder climbable. Return the minimum number of rungs that need to be added.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two parameters: a list of integers 'rungs', where each element represents the height of a rung, and an integer 'dist' which represents the maximum allowed distance between consecutive rungs.
+- **Example:** `rungs = [2, 5, 8, 14], dist = 3`
+- **Constraints:**
+	- 1 <= rungs.length <= 10^5
+	- 1 <= rungs[i] <= 10^9
+	- 1 <= dist <= 10^9
+	- rungs is strictly increasing.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of rungs that need to be added to make the ladder climbable.
+- **Example:** `2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the minimum number of rungs that must be inserted to ensure that the gap between any two consecutive rungs does not exceed the maximum allowed distance 'dist'.
+
+- Iterate through the rungs and check the distance between each consecutive pair.
+- If the gap is greater than 'dist', calculate how many rungs need to be added to fill the gap.
+- Accumulate the total number of rungs that need to be added.
+{{< dots >}}
+### Problem Assumptions ✅
+- The rungs are always strictly increasing.
+- The ladder can have gaps larger than the maximum climbing distance, requiring additional rungs to be inserted.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `rungs = [2, 5, 8, 14], dist = 3`  \
+  **Explanation:** There is a gap of 3 between rung 5 and rung 8. This gap exceeds the allowed distance, so we need to insert two rungs (at heights 11 and 12) to make the ladder climbable. Hence, the answer is 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to iterate over the rungs and check the gap between each consecutive pair. If the gap is larger than the allowed climbing distance, we calculate how many rungs to add to fill the gap.
+
+### Initial Thoughts 💭
+- The number of rungs that need to be added can be calculated by dividing the gap by the allowed distance and rounding up.
+- We will process each gap one by one, and accumulate the number of rungs to be added.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no rungs, the ladder cannot be climbed, so the number of rungs to add is zero.
+- The solution should efficiently handle large input sizes, with up to 100,000 rungs.
+- If the gap between any two rungs is exactly 'dist', no new rungs need to be added.
+- The solution should run in linear time relative to the number of rungs to handle the upper limit efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int rec(int cur, int idx, int dist, vector<int> &node) {
+    if(cur + dist >= node[node.size() - 1]) return 0;
     
-    int rec(int cur, int idx, int dist, vector<int> &node) {
-        if(cur + dist >= node[node.size() - 1]) return 0;
+    if(cur + dist < node[idx]) {
+        cur += dist;
+        return 1 + rec(cur, idx, dist, node);
         
-        if(cur + dist < node[idx]) {
-            cur += dist;
-            return 1 + rec(cur, idx, dist, node);
-            
-        } else {
-            cur = node[idx];
-            return rec(cur, idx + 1, dist, node);
+    } else {
+        cur = node[idx];
+        return rec(cur, idx + 1, dist, node);
+    }
+}
+
+int addRungs(vector<int>& node, int dist) {
+    int cur = 0, idx = 0, res = 0;
+    
+    int prv = 0;
+    
+    for(int i = 0; i < node.size(); i++) {
+        if(node[i] - prv > dist) {
+            res += (node[i] - prv - 1) / dist;
         }
+        prv = node[i];
     }
     
-    int addRungs(vector<int>& node, int dist) {
-        int cur = 0, idx = 0, res = 0;
-        
-        int prv = 0;
-        
-        for(int i = 0; i < node.size(); i++) {
-            if(node[i] - prv > dist) {
-                res += (node[i] - prv - 1) / dist;
-            }
-            prv = node[i];
-        }
-        
-        // while(cur + dist < node[node.size() - 1]) {
-        //     if(cur + dist < node[idx]) {
-        //         cur += dist;
-        //         res++;
-        //     } else {
-        //         cur = node[idx];
-        //         idx++;
-        //     }
-        // }
-        
-        return res;//rec(cur, idx, dist, node);
-        
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to determine the minimum number of rungs needed to be added to a ladder, given the current positions of the existing rungs and the maximum distance one can jump between rungs. The goal is to ensure that one can reach the top of the ladder, which is defined by the position of the last rung.
-
-### Approach
-
-To solve this problem, we will take the following approach:
-
-1. **Initialization**: Start from the ground level (position 0) and track the last rung position (previous rung) as we iterate through the given list of rungs.
-
-2. **Iterate Through Rungs**: For each rung in the list, calculate the distance from the previous rung (or the ground) to the current rung. If this distance exceeds the maximum allowed jump distance, we will calculate how many additional rungs need to be added.
-
-3. **Calculate Additional Rungs**: If the distance to the next rung is greater than the maximum distance allowed, compute the number of additional rungs needed to ensure that the jump to the next rung does not exceed the maximum distance.
-
-4. **Return the Result**: Finally, return the total number of additional rungs required.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
+    // while(cur + dist < node[node.size() - 1]) {
+    //     if(cur + dist < node[idx]) {
+    //         cur += dist;
+    //         res++;
+    //     } else {
+    //         cur = node[idx];
+    //         idx++;
+    //     }
+    // }
+    
+    return res;//rec(cur, idx, dist, node);
+    
+}
 ```
-Here we declare a class named `Solution` that contains the methods necessary to compute the result.
 
-```cpp
-    int rec(int cur, int idx, int dist, vector<int> &node) {
-        if(cur + dist >= node[node.size() - 1]) return 0;
-```
-This function `rec` is defined to recursively determine the additional rungs needed based on the current position (`cur`), the index of the current rung (`idx`), the maximum distance that can be jumped (`dist`), and the list of rungs (`node`). The first line checks if the current position plus the jump distance is greater than or equal to the last rung position; if so, no more rungs need to be added, and it returns 0.
+The code is an implementation of a recursive function to calculate the number of rungs needed to bridge gaps between elements in the input array `node`, where `dist` is the maximum gap between two rungs. It also provides an iterative version that calculates the total number of required rungs.
 
-```cpp
-        if(cur + dist < node[idx]) {
-            cur += dist;
-            return 1 + rec(cur, idx, dist, node);
-        } else {
-            cur = node[idx];
-            return rec(cur, idx + 1, dist, node);
-        }
-    }
-```
-In this part, we check if the current position plus the distance is less than the position of the current rung. If true, we simulate a jump to the new position and make a recursive call while incrementing the count of additional rungs needed. If the jump would land on or beyond the current rung, we update `cur` to the position of the current rung and move to the next rung by incrementing `idx`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int rec(int cur, int idx, int dist, vector<int> &node) {
+	```
+	Define the recursive function `rec` that takes the current position (`cur`), the current index (`idx`), the maximum distance (`dist`), and the list of positions (`node`).
 
-```cpp
-    int addRungs(vector<int>& node, int dist) {
-        int cur = 0, idx = 0, res = 0;
-        int prv = 0;
-```
-In this method `addRungs`, we initialize several variables: `cur` is set to 0 (ground level), `idx` to 0 (index of the current rung), and `res` to 0 (total additional rungs needed). We also declare `prv` to track the position of the last rung visited.
+2. **Condition Check**
+	```cpp
+	    if(cur + dist >= node[node.size() - 1]) return 0;
+	```
+	If the current position plus the distance exceeds or reaches the last node, return 0 as no more rungs are needed.
 
-```cpp
-        for(int i = 0; i < node.size(); i++) {
-            if(node[i] - prv > dist) {
-                res += (node[i] - prv - 1) / dist;
-            }
-            prv = node[i];
-        }
-```
-Here, we iterate through each rung in the `node` vector. If the distance between the current rung and the last visited rung (`prv`) exceeds the maximum jump distance (`dist`), we calculate the number of additional rungs required by the formula `(node[i] - prv - 1) / dist` and add it to `res`. We then update `prv` to the current rung's position.
+3. **Decision**
+	```cpp
+	    if(cur + dist < node[idx]) {
+	```
+	If the current position plus the distance is less than the current node position, continue to move forward by adding the distance.
 
-```cpp
-        return res; // rec(cur, idx, dist, node);
-    }
-};
-```
-Finally, we return the total number of additional rungs needed (`res`). The commented-out line shows a recursive approach, but we will not use it in this iteration.
+4. **Action**
+	```cpp
+	        cur += dist;
+	```
+	Move the current position forward by the specified distance.
 
-### Complexity
+5. **Recursive Call**
+	```cpp
+	        return 1 + rec(cur, idx, dist, node);
+	```
+	Recursively call the function to check for the next gap after moving the current position forward.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the number of existing rungs, since we are iterating through the list of rungs once.
+6. **Else Condition**
+	```cpp
+	    } else {
+	```
+	If the current position plus the distance is not less than the current node, proceed to the next node.
 
-- **Space Complexity**: The space complexity is \(O(1)\) as we are using a fixed amount of space for our variables and not utilizing any additional data structures proportional to the input size.
+7. **Action**
+	```cpp
+	        cur = node[idx];
+	```
+	Set the current position to the current node's position.
 
-### Conclusion
+8. **Recursive Call**
+	```cpp
+	        return rec(cur, idx + 1, dist, node);
+	```
+	Recursively call the function, advancing the index to check the next node.
 
-The `addRungs` function efficiently calculates the minimum number of rungs needed to make the ladder accessible according to the specified jump distance. By iterating through the list of rungs and checking the distances, we can determine how many rungs to add without resorting to complex recursive logic, thus maintaining both clarity and efficiency.
+9. **Function Definition**
+	```cpp
+	int addRungs(vector<int>& node, int dist) {
+	```
+	Define the main function `addRungs`, which calculates the total number of rungs needed based on the positions in the `node` list and the given `dist`.
 
-### Key Features
+10. **Variable Initialization**
+	```cpp
+	    int cur = 0, idx = 0, res = 0;
+	```
+	Initialize variables: `cur` to track the current position, `idx` for the current index in the node array, and `res` for counting the required rungs.
 
-1. **Efficiency**: The solution is efficient with a linear time complexity, making it suitable for large inputs.
+11. **Variable Initialization**
+	```cpp
+	    int prv = 0;
+	```
+	Initialize the variable `prv` to track the previous position in the node array.
 
-2. **Simplicity**: The implementation is straightforward, focusing on the essential logic without unnecessary complexity.
+12. **Loop**
+	```cpp
+	    for(int i = 0; i < node.size(); i++) {
+	```
+	Iterate through each element in the `node` array.
 
-3. **Iterative Approach**: The use of an iterative approach rather than recursion simplifies the logic and enhances performance by avoiding potential stack overflow issues with deep recursion.
+13. **Condition Check**
+	```cpp
+	        if(node[i] - prv > dist) {
+	```
+	Check if the gap between the current node and the previous node exceeds the given distance.
 
-### Use Cases
+14. **Action**
+	```cpp
+	            res += (node[i] - prv - 1) / dist;
+	```
+	Calculate how many rungs are needed to fill the gap and add that to the result.
 
-This function can be applied in various real-world scenarios, such as:
+15. **Update**
+	```cpp
+	        prv = node[i];
+	```
+	Update the previous position to the current node.
 
-- **Construction Planning**: Determining the number of additional steps needed for staircases or ladders.
-- **Game Development**: Calculating jump distances in platform games to ensure player accessibility.
-- **Robotics**: Planning paths for robots that need to traverse uneven terrain or structures.
+16. **Return**
+	```cpp
+	    return res;
+	```
+	Return the final result of the number of rungs required.
 
-### Implementation Considerations
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-When implementing the function, consider the following:
+The time complexity is O(n), where n is the number of rungs, because we are iterating through the rungs only once.
 
-- **Input Validation**: Ensure the input arrays and parameters are valid and within expected ranges.
-- **Handling Edge Cases**: Test with edge cases, such as when no rungs exist or when all rungs are within jumping distance.
-- **Performance Testing**: Verify performance under large inputs to ensure the algorithm remains efficient.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-By understanding and applying the concepts in this solution, developers can effectively handle similar problems across various domains, enhancing their programming and algorithmic skills.
+The space complexity is O(1), since we only need a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-minimum-number-of-rungs/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "P68JPXtFyYg"
 youtube_upload_date="2020-01-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/P68JPXtFyYg/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,106 +28,110 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/P68JPXtFyYg/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a list of characters s. Your task is to reverse the order of characters in the list in-place, modifying the input list directly and without using any extra memory.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of characters.
+- **Example:** `s = ["a", "b", "c", "d"]`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- Each character in the list is a printable ASCII character.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void reverseString(vector<char>& s) {
-        int i = 0, j = s.size() - 1;
-        while(i <= j) {
-            swap(s[i++], s[j--]);
-        }
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the input list with the characters reversed in place.
+- **Example:** `["d", "c", "b", "a"]`
+- **Constraints:**
+	- The input list must be modified in-place.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to reverse the list of characters in place, without using extra memory.
 
-In this problem, you're given a string represented as a vector of characters. Your task is to **reverse the string in-place** without using additional space for another string (aside from a few auxiliary variables). The string is mutable, so you’ll be modifying it directly. Can you come up with an efficient solution?
+- Initialize two pointers, one at the start and the other at the end of the list.
+- Swap the characters at these two pointers and move the pointers towards each other.
+- Continue swapping until the pointers meet or cross.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is a valid list of printable ASCII characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = ["a","b","c","d"]`  \
+  **Explanation:** The list is reversed in place, resulting in ["d","c","b","a"].
 
-#### Example:
-- For `s = ["h", "e", "l", "l", "o"]`, after reversing, the result should be `s = ["o", "l", "l", "e", "h"]`.
+- **Input:** `s = ["r","e","v","e","r","s","e"]`  \
+  **Explanation:** The list is reversed in place, resulting in ["e","s","r","e","v","e","r"].
 
----
+{{< dots >}}
+## Approach 🚀
+The solution involves reversing the input list in place by swapping elements from both ends towards the center.
 
-### 🧠 Approach
-
-To solve this problem, we can take advantage of a **two-pointer technique**. The idea is simple: place one pointer at the start of the string and another at the end, then swap the characters at these positions. After each swap, move the pointers towards the center until they meet.
-
-This approach is both efficient and simple, as it uses:
-1. **In-place reversal**: No extra space is needed for a second string, making the solution space-efficient.
-2. **Constant time swaps**: Swapping two elements is a constant-time operation, meaning that the solution runs quickly.
-
-The process of swapping characters from both ends toward the middle ensures that the string is reversed effectively.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's break down the code into digestible steps:
-
+### Initial Thoughts 💭
+- The problem requires modifying the list directly, using two pointers to swap elements in place.
+- The approach should use constant space and iterate through the list in a linear fashion.
+{{< dots >}}
+### Edge Cases 🌐
+- The input list should not be empty as the length is guaranteed to be >= 1.
+- The solution must be efficient enough to handle input sizes up to 100,000.
+- When the list has only one character, the list remains unchanged after reversal.
+- The solution must operate in O(n) time complexity and O(1) space complexity.
+{{< dots >}}
+## Code 💻
 ```cpp
 void reverseString(vector<char>& s) {
-    int i = 0, j = s.size() - 1;  // Initialize two pointers
-
-    // Step 1: Start swapping characters until the pointers meet
-    while (i < j) {
-        swap(s[i], s[j]);  // Swap characters at positions i and j
-        i++;               // Move pointer i to the right
-        j--;               // Move pointer j to the left
+    int i = 0, j = s.size() - 1;
+    while(i <= j) {
+        swap(s[i++], s[j--]);
     }
 }
 ```
 
-#### Step 1: Initialize Two Pointers
+This function reverses a string in-place by swapping characters from both ends until the entire string is reversed. The time complexity is O(n), where n is the number of characters in the string.
 
-```cpp
-int i = 0, j = s.size() - 1;
-```
-- We initialize two pointers: `i` at the start of the string (`0`) and `j` at the end (`s.size() - 1`).
-- These pointers will help us traverse the string from both ends and swap characters as we move toward the middle.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	void reverseString(vector<char>& s) {
+	```
+	This is the function declaration for `reverseString`. The function takes a reference to a vector of characters, `s`, and modifies it to reverse the characters in place.
 
-#### Step 2: Start the Reversal Loop
+2. **Variable Initialization**
+	```cpp
+	    int i = 0, j = s.size() - 1;
+	```
+	Initialize two pointers: `i` starts at the beginning of the vector, and `j` starts at the end of the vector. These pointers will be used to swap characters from both ends.
 
-```cpp
-while (i < j) {
-    swap(s[i], s[j]);
-    i++;
-    j--;
-}
-```
-- The `while` loop runs as long as `i` is less than `j`. This ensures that the pointers meet in the middle, and the string is reversed by the time they do.
-- Inside the loop, we perform a `swap(s[i], s[j])` to exchange the characters at the positions `i` and `j`. Then:
-  - `i++` moves the `i` pointer towards the center.
-  - `j--` moves the `j` pointer towards the center.
+3. **Loop Until Pointers Meet**
+	```cpp
+	    while(i <= j) {
+	```
+	The while loop continues as long as `i` is less than or equal to `j`. This ensures that we are swapping characters until the pointers meet or cross.
 
-#### Step 3: End of Function
-- Once the loop finishes, the string has been reversed in-place, and no return is necessary because we modified the input vector directly.
+4. **Swap Characters**
+	```cpp
+	        swap(s[i++], s[j--]);
+	```
+	Swap the characters at positions `i` and `j`. The `i++` and `j--` increment and decrement the pointers after each swap to move toward the center of the vector.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### 📈 Complexity Analysis
+The time complexity is linear since the solution requires a single pass over the list.
 
-#### Time Complexity:
-- **O(n)**: The time complexity is **O(n)**, where `n` is the length of the string. The `while` loop runs for `n / 2` iterations, swapping characters in constant time, so the total number of operations is proportional to the length of the string.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
-- **O(1)**: The space complexity is **O(1)** because the reversal happens in-place. We only use a fixed amount of extra space for the two pointers (`i` and `j`), regardless of the size of the input.
+The space complexity is constant since the solution only uses two pointers.
 
----
+**Happy Coding! 🎉**
 
-### 🏁 Conclusion
-
-This solution is an optimal way to reverse a string in-place using the two-pointer technique. Here's a quick recap:
-
-#### Key Points:
-- **Greedy Approach**: By swapping characters from both ends towards the middle, we can reverse the string efficiently.
-- **Efficiency**: The algorithm runs in linear time (**O(n)**) and uses constant space (**O(1)**).
-- **Simplicity**: The solution is easy to implement, and the two-pointer technique is an elegant way to reverse a string in-place.
-
-Reversing a string doesn’t need to be complicated — just swap, move the pointers, and you’re done! Keep practicing and mastering these efficient techniques! 💡🎉
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reverse-string/description/)
 

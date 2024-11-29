@@ -14,93 +14,142 @@ img_src = ""
 youtube = "noP_AsQlgQc"
 youtube_upload_date="2021-09-18"
 youtube_thumbnail="https://i.ytimg.com/vi/noP_AsQlgQc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums and an integer k, return the number of pairs (i, j) where i < j such that |nums[i] - nums[j]| == k.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer k.
+- **Example:** `nums = [3, 5, 2, 6, 7], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 200
+	- 1 <= nums[i] <= 100
+	- 1 <= k <= 99
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countKDifference(vector<int>& nums, int k) {
-        int cnt[101] = {}, res = 0;
-        for (auto n : nums)
-            ++cnt[n];
-        for (int i = k + 1; i < 101; ++i)
-            res += cnt[i] * cnt[i - k];
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of pairs (i, j) where i < j such that |nums[i] - nums[j]| == k.
+- **Example:** `2`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of pairs with an absolute difference of k.
 
-The task is to count the number of pairs of integers in a given list (`nums`) such that the absolute difference between the two integers in each pair equals a specified value `k`. This problem is a common one in algorithm challenges, often referred to as "counting pairs with a specific difference." For instance, if `nums = [1, 2, 2, 1]` and `k = 1`, the pairs that satisfy this condition are `(1, 2)` and `(2, 1)`, which makes the total count 4.
+- 1. Create a frequency count of the elements in the array.
+- 2. For each element x, check if x + k or x - k exists in the array.
+- 3. Add the count of valid pairs for each element.
+- 4. Return the total count of valid pairs.
+{{< dots >}}
+### Problem Assumptions ✅
+- The solution should be efficient given the constraints.
+- Handling of duplicate elements is necessary to avoid over-counting pairs.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 5, 2, 6, 7], k = 3`  \
+  **Explanation:** The valid pairs with an absolute difference of 3 are (3, 6) and (5, 2). Thus, the output is 2.
 
-### Approach
+- **Input:** `nums = [1, 1, 3, 5], k = 2`  \
+  **Explanation:** The valid pair with an absolute difference of 2 is (3, 5). Hence, the output is 1.
 
-To solve this problem efficiently, we can leverage the concept of counting frequencies. Instead of checking every possible pair (which would result in a time complexity of O(n²)), we can use a frequency array to count occurrences of each number in `nums`. Here's a step-by-step approach:
+- **Input:** `nums = [8, 2, 5, 6, 9], k = 4`  \
+  **Explanation:** The valid pairs with an absolute difference of 4 are (8, 4) and (5, 9). The output is 2.
 
-1. **Frequency Counting**: Create an array (`cnt`) to count the occurrences of each integer from 0 to 100 (since the problem specifies that the integers in `nums` will range between 0 and 100).
-   
-2. **Counting Valid Pairs**: For each possible integer from `k + 1` to 100, we will find the number of occurrences of that integer and its corresponding pair integer (which would be `number - k`). The product of these counts will give us the total number of valid pairs for that specific integer.
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we can use a hash map to count the occurrences of each number in the array and use it to check if the corresponding pairs exist that satisfy the condition.
 
-3. **Summation**: Accumulate these products to get the final result, which represents the total number of pairs that have an absolute difference of `k`.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code step by step to clarify how this approach is implemented:
-
-1. **Class Definition**: The code is encapsulated within a class named `Solution`.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: The method `countKDifference` is declared to take a vector of integers (`nums`) and an integer `k` as parameters, returning the count of valid pairs.
-
-    ```cpp
-    int countKDifference(vector<int>& nums, int k) {
-    ```
-
-3. **Frequency Array Initialization**: We initialize a frequency array `cnt` of size 101 (to cover integers 0 through 100) and a result variable `res` to hold the final count.
-
-    ```cpp
+### Initial Thoughts 💭
+- We need to check each element's potential to form a valid pair with another element based on the given difference k.
+- Handling multiple occurrences of the same number requires careful counting.
+- A hash map will help in efficiently checking if a number exists that satisfies the absolute difference condition.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, the result should be 0 since there are no elements to form pairs.
+- If the array has a large number of elements, ensure the solution handles them efficiently with linear or near-linear time complexity.
+- If the array contains duplicate elements, ensure not to double-count pairs that are the same but occur at different indices.
+- Make sure the solution handles arrays of size up to 200 elements efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int countKDifference(vector<int>& nums, int k) {
     int cnt[101] = {}, res = 0;
-    ```
-
-4. **Counting Frequencies**: We loop through the `nums` vector, incrementing the corresponding index in the `cnt` array for each number found.
-
-    ```cpp
     for (auto n : nums)
         ++cnt[n];
-    ```
-
-5. **Counting Valid Pairs**: We then iterate from `k + 1` to 100. For each integer `i` in this range, we compute the total valid pairs by multiplying the count of `i` (`cnt[i]`) with the count of its corresponding pair integer (`cnt[i - k]`).
-
-    ```cpp
     for (int i = k + 1; i < 101; ++i)
         res += cnt[i] * cnt[i - k];
-    ```
-
-6. **Returning the Result**: Finally, we return the total count of pairs found.
-
-    ```cpp
     return res;
-    }
-    ```
+}
+```
 
-### Complexity
+The function calculates the number of pairs in the `nums` array where the absolute difference between the elements is equal to a given value `k`. It uses an array `cnt` to store the frequency of each number and then iterates to find the number of valid pairs.
 
-The time complexity of this algorithm is O(n + m), where `n` is the number of elements in `nums` and `m` is a constant (101 in this case due to the range of numbers). The space complexity is O(m) for the frequency array, which is manageable since `m` is fixed. This efficient approach significantly reduces the computation time compared to a naive O(n²) solution, especially for larger arrays.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countKDifference(vector<int>& nums, int k) {
+	```
+	Defines the function `countKDifference` which takes a vector `nums` and an integer `k` as inputs, and returns the number of pairs with the absolute difference of `k`.
 
-### Conclusion
+2. **Variable Declaration**
+	```cpp
+	    int cnt[101] = {}, res = 0;
+	```
+	Declares an array `cnt` of size 101 to store the frequency count of each element in the range [0, 100] and an integer `res` to store the final result.
 
-In conclusion, the provided code offers an efficient solution to the problem of counting pairs with a specific difference in a list of integers. By utilizing a frequency array, we effectively reduce the number of operations needed to find valid pairs, resulting in a time-efficient algorithm that can handle larger datasets gracefully. The implementation showcases a clear and logical approach to a common computational problem, making it not only efficient but also easy to understand. This method serves as an excellent example of how frequency counting can simplify complex pairing problems in algorithm design. Overall, the solution is robust, and its elegance lies in its simplicity and effectiveness in counting valid pairs efficiently.
+3. **Loop Iteration**
+	```cpp
+	    for (auto n : nums)
+	```
+	Starts a loop to iterate through each element `n` in the input vector `nums`.
+
+4. **Frequency Counting**
+	```cpp
+	        ++cnt[n];
+	```
+	Increments the count of the number `n` in the `cnt` array, effectively counting the frequency of each number in `nums`.
+
+5. **Loop Iteration**
+	```cpp
+	    for (int i = k + 1; i < 101; ++i)
+	```
+	Starts another loop that iterates through numbers starting from `k+1` up to 100 to check if there exists a corresponding pair with the difference of `k`.
+
+6. **Result Calculation**
+	```cpp
+	        res += cnt[i] * cnt[i - k];
+	```
+	For each `i`, it calculates the number of valid pairs by multiplying the count of `i` and the count of `i-k`, adding this to the result `res`.
+
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the final result, which is the number of valid pairs with the absolute difference equal to `k`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we loop over the array once to count elements and then check for pairs in constant time using a frequency map.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we use a frequency map to store counts of each element in the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/description/)
 

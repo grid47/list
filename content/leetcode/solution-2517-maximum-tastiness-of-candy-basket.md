@@ -14,109 +14,65 @@ img_src = ""
 youtube = "mEZRRvBqSB0"
 youtube_upload_date="2022-12-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mEZRRvBqSB0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of positive integers `price` where `price[i]` denotes the price of the `i`-th candy and a positive integer `k`. The store sells baskets containing `k` distinct candies. The tastiness of a candy basket is defined as the smallest absolute difference between the prices of any two candies in the basket. Your task is to return the maximum tastiness of a candy basket that can be formed by selecting `k` distinct candies.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of positive integers `price` where each element represents the price of a candy, and a positive integer `k` which denotes the number of candies to be selected.
+- **Example:** `price = [15, 3, 10, 8, 25, 4], k = 3`
+- **Constraints:**
+	- 2 <= k <= price.length <= 10^5
+	- 1 <= price[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool can(vector<int> nums, int mid, int k) {
-        int cnt = 1, n = nums.size();
-        int i = 1;
-        int prv = nums[0];
-        while(i < n) {
-            if(nums[i] - prv >= mid) {
-                cnt++;
-                prv = nums[i];
-            }
-            if(cnt >= k) return true;
-            i++;
-        }
-        return false;
-    }
-    
-    int maximumTastiness(vector<int>& nums, int k) {
-        sort(nums.begin(), nums.end());
-        int n = nums.size();
-        
-        int l = 0, r = nums[n - 1] - nums[0];
-        int ans = r;
-        
-        while(l <= r) {
-            
-            int mid = l + (r - l + 1) / 2;
-            // cout << mid << " " << can(nums, mid, k) << "\n";
-            if(can(nums, mid, k)) {
-                ans = mid;
-                l = mid + 1;
-            } else r = mid - 1;
-            
-        }
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum tastiness of the candy basket that can be formed, or -1 if it is not possible.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The output should be the maximum tastiness of a candy basket.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to find the maximum tastiness for a basket of `k` distinct candies from the given prices.
 
-The problem asks to determine the maximum "tastiness" of a set of `k` distinct items selected from a list of integers representing some measure of tastiness. The tastiness is defined as the minimum difference between the items in the set, and we want to maximize this minimum difference.
+- Sort the array of prices.
+- Use binary search to determine the maximum tastiness.
+- Check if a basket with `k` candies can have the desired tastiness using a helper function.
+- Return the maximum tastiness found.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in `price` are positive integers.
+- The number of candies `k` is valid and at least 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `price = [15, 3, 10, 8, 25, 4], k = 3`  \
+  **Explanation:** After sorting the prices, the array becomes [3, 4, 8, 10, 15, 25]. The maximum tastiness is achieved by selecting the basket with prices [15, 10, 25], where the smallest absolute difference is 7.
 
-In simpler terms, we are given an array of integers `nums` and a number `k`. We need to select `k` elements from `nums` such that the minimum difference between any two selected elements is as large as possible. The goal is to find this maximum possible minimum difference.
+- **Input:** `price = [5, 6, 7, 5, 7], k = 2`  \
+  **Explanation:** The array of prices is [5, 5, 6, 7, 7]. The maximum tastiness of a basket formed by selecting two candies is 1, which occurs by selecting prices [5, 6].
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We will use binary search on the tastiness value to find the maximum tastiness for a basket of `k` distinct candies.
 
-To solve this problem, we can apply a **binary search** technique to optimize the search for the largest minimum difference between selected elements. The key idea is to test different values for the minimum difference and check whether it's possible to select `k` elements that satisfy that difference.
-
-#### Step-by-Step Explanation
-
-We can break down the approach into two major parts:
-
-1. **Binary Search for Maximum Minimum Difference**:
-   - The idea is to maximize the minimum difference between the selected elements. 
-   - The possible minimum differences can range from `0` (when all elements are the same) to `nums[n-1] - nums[0]` (the difference between the smallest and largest elements in the sorted array).
-   - We perform a binary search between these two bounds (`0` and `nums[n-1] - nums[0]`), checking for each mid-point if it is possible to select `k` elements with at least that much difference between any two selected elements.
-
-2. **Greedy Check for a Given Minimum Difference**:
-   - For each value of `mid` (the current minimum difference being tested), we use a greedy approach to check if we can select `k` elements that satisfy this condition. We start by selecting the first element and then greedily select the next element that is at least `mid` units away from the previously selected element.
-   - If we can select `k` elements this way, it means the current `mid` value is feasible, and we can attempt to increase it. Otherwise, we try smaller values for `mid`.
-
-### Code Breakdown
-
-#### Step 1: Binary Search Setup
-```cpp
-sort(nums.begin(), nums.end());
-int n = nums.size();
-int l = 0, r = nums[n - 1] - nums[0];
-int ans = r;
-```
-- **Sorting**: The first step is to sort the array `nums`. Sorting ensures that we can efficiently check the difference between consecutive elements. After sorting, the largest possible minimum difference will be between the smallest and largest element (`nums[n-1] - nums[0]`), so we start with `l = 0` and `r = nums[n - 1] - nums[0]` as the binary search bounds.
-- **Binary Search**: We initialize `l` and `r` to represent the lower and upper bounds of the search space for the minimum difference. We also initialize `ans` to hold the maximum minimum difference found during the search.
-
-#### Step 2: Binary Search Loop
-```cpp
-while(l <= r) {
-    int mid = l + (r - l + 1) / 2;
-    if(can(nums, mid, k)) {
-        ans = mid;
-        l = mid + 1;
-    } else {
-        r = mid - 1;
-    }
-}
-```
-- **Midpoint Calculation**: In each iteration of the binary search, we calculate the midpoint `mid` between `l` and `r`. This `mid` represents the minimum difference we are testing.
-- **Greedy Check**: We then call the `can` function to check if it's possible to select `k` elements such that the minimum difference between any two selected elements is at least `mid`.
-- **Adjust Search Bounds**: 
-  - If `can(nums, mid, k)` returns `true`, it means we can select `k` elements with at least `mid` difference, so we try to increase `mid` by setting `l = mid + 1`.
-  - If `can(nums, mid, k)` returns `false`, it means we cannot select `k` elements with the current `mid`, so we try smaller values by setting `r = mid - 1`.
-
-#### Step 3: Greedy Function (Checking Feasibility of a Given Difference)
+### Initial Thoughts 💭
+- The problem requires finding the maximum tastiness of a basket of `k` distinct candies.
+- Binary search can be used to efficiently find the maximum tastiness.
+- We can use binary search to minimize the tastiness and check if it is possible to create a valid basket.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array `price` is empty or contains fewer than `k` elements, return -1.
+- Ensure the solution is efficient enough to handle large inputs, up to 10^5 elements.
+- If all elements in the `price` array are the same, the tastiness will always be 0.
+- Ensure the solution handles cases where `k` is equal to the length of the `price` array.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool can(vector<int> nums, int mid, int k) {
     int cnt = 1, n = nums.size();
@@ -132,66 +88,188 @@ bool can(vector<int> nums, int mid, int k) {
     }
     return false;
 }
-```
-- **Greedy Selection**: This function checks if it's possible to select `k` elements such that the minimum difference between any two selected elements is at least `mid`.
-  - We start by selecting the first element (`prv = nums[0]`).
-  - Then, for each subsequent element, we check if it satisfies the condition `nums[i] - prv >= mid`. If it does, we select this element, update `prv`, and increment the count (`cnt`).
-  - If at any point `cnt` reaches `k`, we return `true`, indicating that it's possible to select `k` elements with at least `mid` difference.
-  - If we exhaust the list and can't select `k` elements, we return `false`.
 
-#### Step 4: Final Result
-```cpp
-return ans;
-```
-- Once the binary search completes, the value of `ans` will hold the maximum possible minimum difference between the selected elements.
-
-### Example Walkthrough
-
-#### Example 1:
-**Input**:
-```cpp
-vector<int> nums = {1, 3, 6, 19, 20};
-int k = 2;
-```
-- After sorting `nums`, we get `[1, 3, 6, 19, 20]`.
-- We perform binary search to find the maximum possible minimum difference. 
-  - Start with `l = 0` and `r = 19`.
-  - After performing the binary search, the maximum minimum difference is found to be `17`.
-
-**Output**:
-```cpp
-17
+int maximumTastiness(vector<int>& nums, int k) {
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    
+    int l = 0, r = nums[n - 1] - nums[0];
+    int ans = r;
+    
+    while(l <= r) {
+        
+        int mid = l + (r - l + 1) / 2;
+        // cout << mid << " " << can(nums, mid, k) << "\n";
+        if(can(nums, mid, k)) {
+            ans = mid;
+            l = mid + 1;
+        } else r = mid - 1;
+        
+    }
+    
+    return ans;
+}
 ```
 
-#### Example 2:
-**Input**:
-```cpp
-vector<int> nums = {5, 10, 15, 20};
-int k = 3;
-```
-- After sorting `nums`, we get `[5, 10, 15, 20]`.
-- The binary search proceeds, and the largest possible minimum difference for `k = 3` is found to be `5`.
+This code defines two functions, `can` and `maximumTastiness`. The `can` function checks if it is possible to select `k` elements from a sorted list of numbers where the minimum difference between any two selected elements is at least `mid`. The `maximumTastiness` function uses binary search to find the largest possible value of `mid` for which `can` returns true.
 
-**Output**:
-```cpp
-5
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool can(vector<int> nums, int mid, int k) {
+	```
+	Define the `can` function that checks if it's possible to select `k` elements from the list `nums` where the minimum difference between consecutive selected elements is at least `mid`.
 
-### Time Complexity
+2. **Variable Initialization**
+	```cpp
+	    int cnt = 1, n = nums.size();
+	```
+	Initialize `cnt` to 1 (since we select the first element), and `n` to the size of the input list `nums`.
 
-1. **Sorting the array**: Sorting the array `nums` takes \(O(n \log n)\), where `n` is the size of the array.
-2. **Binary Search**: The binary search loop runs in \(O(\log(\text{max} - \text{min}))\), where `max` and `min` are the largest and smallest elements in `nums`. This is typically \(O(\log(\text{max}))\), where `max` is the range of values in the array.
-3. **Greedy Check**: For each binary search step, the `can` function runs in \(O(n)\), as it iterates through the array once.
+3. **Variable Initialization**
+	```cpp
+	    int i = 1;
+	```
+	Initialize the variable `i` to 1 to start the iteration from the second element in the list.
 
-Thus, the overall time complexity is \(O(n \log n + n \log(\text{max}))\), which simplifies to \(O(n \log n)\) in the worst case.
+4. **Variable Initialization**
+	```cpp
+	    int prv = nums[0];
+	```
+	Store the first element of `nums` in the variable `prv` to track the previously selected element.
 
-### Space Complexity
+5. **Loop**
+	```cpp
+	    while(i < n) {
+	```
+	Start a `while` loop that iterates over the list `nums` starting from the second element.
 
-The space complexity is \(O(n)\) due to the storage used for sorting the array and performing the binary search.
+6. **Condition Check**
+	```cpp
+	        if(nums[i] - prv >= mid) {
+	```
+	Check if the difference between the current element `nums[i]` and the previously selected element `prv` is greater than or equal to `mid`.
 
-### Conclusion
+7. **Count Update**
+	```cpp
+	            cnt++;
+	```
+	Increment `cnt` to reflect the selection of another element that meets the condition.
 
-This approach efficiently solves the problem of selecting `k` elements with the largest possible minimum difference by combining binary search and a greedy selection strategy. The time complexity of \(O(n \log n)\) makes this approach scalable for large inputs, while the space complexity of \(O(n)\) ensures that the solution is memory-efficient.
+8. **Update Previous Element**
+	```cpp
+	            prv = nums[i];
+	```
+	Update the `prv` variable to store the current selected element `nums[i]`.
+
+9. **Early Exit**
+	```cpp
+	        if(cnt >= k) return true;
+	```
+	If `cnt` reaches `k`, return `true` as we have successfully selected `k` elements with the desired property.
+
+10. **Increment Iterator**
+	```cpp
+	        i++;
+	```
+	Increment `i` to move to the next element in the list.
+
+11. **Return Statement**
+	```cpp
+	    return false;
+	```
+	Return `false` if it's not possible to select `k` elements with the desired property.
+
+12. **Function Definition**
+	```cpp
+	int maximumTastiness(vector<int>& nums, int k) {
+	```
+	Define the `maximumTastiness` function that aims to find the maximum possible value of `mid` for which `can(nums, mid, k)` is true.
+
+13. **Sort Array**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sort the input list `nums` to facilitate the selection of elements with a minimum difference.
+
+14. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Store the size of the sorted `nums` list in `n`.
+
+15. **Binary Search Setup**
+	```cpp
+	    int l = 0, r = nums[n - 1] - nums[0];
+	```
+	Initialize the binary search bounds: `l` to 0 and `r` to the difference between the largest and smallest elements in `nums`.
+
+16. **Variable Initialization**
+	```cpp
+	    int ans = r;
+	```
+	Initialize `ans` to `r`, which represents the current best answer for the maximum tastiness.
+
+17. **Binary Search Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	Start the binary search loop with the condition `l <= r`.
+
+18. **Midpoint Calculation**
+	```cpp
+	        int mid = l + (r - l + 1) / 2;
+	```
+	Calculate the midpoint `mid` to check the possible value of tastiness.
+
+19. **Condition Check**
+	```cpp
+	        if(can(nums, mid, k)) {
+	```
+	Check if the current value of `mid` satisfies the condition by calling the `can` function.
+
+20. **Update Answer**
+	```cpp
+	            ans = mid;
+	```
+	Update the best answer `ans` to the current value of `mid` if the condition is satisfied.
+
+21. **Adjust Search Bounds**
+	```cpp
+	            l = mid + 1;
+	```
+	Adjust the lower bound `l` to search for larger values of `mid`.
+
+22. **Adjust Search Bounds**
+	```cpp
+	        } else r = mid - 1;
+	```
+	Adjust the upper bound `r` to search for smaller values of `mid` if the condition is not satisfied.
+
+23. **Return Answer**
+	```cpp
+	    return ans;
+	```
+	Return the final answer `ans`, which is the maximum possible tastiness.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+Sorting the array takes O(n log n) time, and the binary search is O(log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use O(n) space for sorting the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-tastiness-of-candy-basket/description/)
 

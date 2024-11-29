@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "u89i60lYx8U"
 youtube_upload_date="2021-12-29"
 youtube_thumbnail="https://i.ytimg.com/vi/u89i60lYx8U/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,87 +28,137 @@ youtube_thumbnail="https://i.ytimg.com/vi/u89i60lYx8U/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of integers, find the pivot index where the sum of elements to the left equals the sum of elements to the right.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers nums.
+- **Example:** `nums = [5, 6, 4, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -1000 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int pivotIndex(vector<int>& nums) {
-        int left = 0;
-        int right = accumulate(nums.begin(), nums.end(), 0);
-        for(int i = 0; i < nums.size(); i++) {
-            right -= nums[i];
-            if(right == left) return i;
-            left  += nums[i];
-        }
-        return -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the leftmost pivot index where the sum of elements on the left equals the sum of elements on the right.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- Return -1 if no pivot index exists.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the index where the sum of the left side of the array equals the sum of the right side.
+
+- 1. Compute the total sum of the array.
+- 2. Traverse the array, updating the left sum and comparing it to the right sum (initially the total sum).
+- 3. If the left sum equals the right sum at any index, return that index.
+- 4. If no such index exists, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will not be empty.
+- The pivot index will be calculated by comparing sums of integers on both sides.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [2, 4, 1, 3, 5]`  \
+  **Explanation:** The sum to the left of index 2 is 6 (2 + 4), and the sum to the right is 8 (3 + 5). Thus, the pivot index is 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the total sum and iterating through the array while maintaining running sums of the left and right sides.
+
+### Initial Thoughts 💭
+- We can use a running left sum and calculate the right sum by subtracting the current element from the total sum.
+- If the left sum equals the right sum at any index, return that index. Otherwise, continue the search.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle cases where the input array has only one element.
+- Ensure the solution works efficiently for large arrays (up to 10^4 elements).
+- Consider arrays with negative numbers or zeros.
+- Handle arrays with both positive and negative values.
+{{< dots >}}
+## Code 💻
+```cpp
+int pivotIndex(vector<int>& nums) {
+    int left = 0;
+    int right = accumulate(nums.begin(), nums.end(), 0);
+    for(int i = 0; i < nums.size(); i++) {
+        right -= nums[i];
+        if(right == left) return i;
+        left  += nums[i];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to find the **pivot index** of an array of integers. The pivot index is defined as the index where the sum of the elements to the left of it is equal to the sum of the elements to the right. If no such index exists, return -1.
-
-### Approach
-
-To solve this problem, we need to use an efficient approach that does not involve recalculating the left and right sums for each index, as that could lead to an O(n^2) time complexity. Instead, we can leverage the following strategy:
-
-1. **Calculate Total Sum**: Start by calculating the total sum of the array.
-2. **Iterate and Maintain Left and Right Sums**: Iterate through the array, maintaining a running sum of the left side and computing the right sum by subtracting the left sum and the current element from the total sum.
-3. **Check for Pivot Index**: For each index, if the left sum equals the right sum, that index is the pivot index, and we return it immediately.
-4. **Return -1 if No Pivot Found**: If no pivot index is found by the end of the loop, return -1.
-
-By maintaining a running left sum and adjusting the right sum dynamically, we can solve the problem in O(n) time with O(1) space, which is optimal for this problem.
-
-### Code Breakdown (Step by Step)
-
-#### Initialization
-```cpp
-int left = 0;
-int right = accumulate(nums.begin(), nums.end(), 0);
-```
-- **left**: This variable will maintain the sum of elements to the left of the current index.
-- **right**: This variable is initialized to the total sum of all elements in the array. We can calculate this using the `accumulate` function from the C++ standard library.
-
-#### Iteration Through the Array
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    right -= nums[i];  // Subtract the current element from right
-    if(right == left) return i;  // Check if the sums on both sides are equal
-    left  += nums[i];  // Add the current element to left
+    return -1;
 }
 ```
-- In each iteration, we adjust the `right` sum by subtracting the current element (`nums[i]`), since we are moving the pivot point from the left to the right.
-- After adjusting `right`, we check if the `left` sum is equal to `right`. If they are equal, it means the current index `i` is the pivot index, so we return `i`.
-- We also update the `left` sum by adding the current element (`nums[i]`), which will represent the sum of elements to the left of the next index in the next iteration.
 
-#### Return -1 if No Pivot Found
-```cpp
-return -1;
-```
-- If the loop completes without finding a pivot index, we return -1 to indicate that no pivot index exists.
+This function finds the pivot index in an array where the sum of the elements to the left equals the sum of the elements to the right.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int pivotIndex(vector<int>& nums) {
+	```
+	Defines a function called pivotIndex that accepts a reference to a vector of integers.
 
-#### Time Complexity: **O(n)**
-- The function iterates through the array only once.
-- The calculation of the total sum using `accumulate()` takes O(n) time.
-- In each iteration, the algorithm performs constant time operations (subtracting from `right`, comparing `left` and `right`, and updating `left`).
-- Hence, the overall time complexity is **O(n)**, where `n` is the number of elements in the array.
+2. **Variable Initialization**
+	```cpp
+	    int left = 0;
+	```
+	Initializes a variable 'left' to 0, representing the sum of elements to the left of the pivot.
 
-#### Space Complexity: **O(1)**
-- The algorithm uses a constant amount of extra space. The only extra space used is for the variables `left` and `right`, which store integer values, regardless of the input size.
-- Thus, the space complexity is **O(1)**.
+3. **Variable Initialization**
+	```cpp
+	    int right = accumulate(nums.begin(), nums.end(), 0);
+	```
+	Initializes 'right' to the total sum of all elements in the vector 'nums'.
 
-### Conclusion
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Starts a loop that iterates through each element of the vector 'nums'.
 
-This solution efficiently finds the pivot index in an array in linear time **O(n)** and constant space **O(1)**. It uses the concept of dynamically maintaining the sums of the left and right parts of the array, thus avoiding the need for redundant calculations. The algorithm's approach of using a total sum and adjusting the left and right sums during the iteration ensures that we can solve the problem optimally.
+5. **Operation**
+	```cpp
+	        right -= nums[i];
+	```
+	Subtracts the current element from the 'right' sum to exclude it from the right side of the pivot.
 
-This method is both **time-efficient** and **space-efficient**, making it suitable for large arrays. If no pivot index exists, the function returns `-1`, which satisfies the problem's requirement. 
+6. **Condition**
+	```cpp
+	        if(right == left) return i;
+	```
+	Checks if the sum of elements to the left is equal to the sum of elements to the right. If so, returns the index.
 
-This approach leverages simple arithmetic operations and makes the problem-solving process straightforward and clean. The solution is optimal and scalable, ensuring that it works even for large inputs, and provides a great example of how careful use of running totals can simplify problems that involve balancing sums or other similar patterns.
+7. **Operation**
+	```cpp
+	        left  += nums[i];
+	```
+	Adds the current element to the 'left' sum to include it in the left side of the pivot.
+
+8. **Return**
+	```cpp
+	    return -1;
+	```
+	Returns -1 if no pivot index is found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear because we need to traverse the array once to compute the total sum and then once more to find the pivot index.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, as we only use a few extra variables for sum calculations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-pivot-index/description/)
 

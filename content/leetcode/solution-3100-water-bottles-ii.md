@@ -14,123 +14,185 @@ img_src = ""
 youtube = "Ll_mTkG1rEc"
 youtube_upload_date="2024-03-31"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Ll_mTkG1rEc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integers: numBottles, representing the number of full water bottles you initially have, and numExchange, representing the number of empty bottles required to exchange for a full bottle. In one operation, you can drink any number of full water bottles, turning them into empty bottles, or exchange numExchange empty bottles for one full bottle, with numExchange increasing by 1 after each exchange. Return the maximum number of water bottles you can drink.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers: numBottles (1 <= numBottles <= 100) and numExchange (1 <= numExchange <= 100).
+- **Example:** `numBottles = 12, numExchange = 4`
+- **Constraints:**
+	- 1 <= numBottles <= 100
+	- 1 <= numExchange <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxBottlesDrunk(int bot, int ex) {
-        
-        int full = bot;
-        int empty = 0;
-        int drunk = 0;
-        
-        
-        while((empty + full) >= ex) {
-            drunk   += full;
-            empty   += full;
-            full     = 0;
-            while(empty >= ex) {
-                empty   -= ex;
-                full    += 1;
-                ex      += 1;                
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of water bottles you can drink after performing all possible operations.
+- **Example:** `Output: 15`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the number of water bottles consumed by performing exchanges while possible.
+
+- 1. Start by drinking all the initial full bottles.
+- 2. After drinking, accumulate empty bottles and attempt to exchange them for full bottles if possible.
+- 3. Increase numExchange by 1 after each exchange.
+- 4. Repeat the process until no further exchanges can be made.
+{{< dots >}}
+### Problem Assumptions ✅
+- numBottles and numExchange will always be within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `numBottles = 12, numExchange = 4`  \
+  **Explanation:** You drink 12 full bottles initially, exchange empty bottles for full bottles while possible, and keep track of the total number of bottles drunk, which amounts to 15.
+
+- **Input:** `numBottles = 8, numExchange = 3`  \
+  **Explanation:** You drink 8 full bottles initially, then exchange empty bottles for full bottles and continue until no more exchanges can be made, resulting in 10 bottles drunk.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can simulate the process of drinking and exchanging bottles, keeping track of the full and empty bottles after each operation.
+
+### Initial Thoughts 💭
+- We need to track the full and empty bottles separately, and perform exchanges while possible.
+- The number of bottles drunk can be maximized by continuously performing exchanges as long as there are enough empty bottles.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem doesn't have any empty inputs as numBottles and numExchange are always positive.
+- The input limits of 1 <= numBottles <= 100 and 1 <= numExchange <= 100 are small, so performance is not an issue.
+- The case where numBottles is exactly divisible by numExchange should be handled to ensure that exchanges are performed optimally.
+- The solution should efficiently handle the given input constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxBottlesDrunk(int bot, int ex) {
+    
+    int full = bot;
+    int empty = 0;
+    int drunk = 0;
+    
+    
+    while((empty + full) >= ex) {
+        drunk   += full;
+        empty   += full;
+        full     = 0;
+        while(empty >= ex) {
+            empty   -= ex;
+            full    += 1;
+            ex      += 1;                
         }
-        
-        return drunk + full;
-        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given two integers: `bot` (the initial number of full bottles) and `ex` (the number of empty bottles required to exchange for a new full bottle). Our goal is to determine the maximum number of bottles that can be drunk. For each empty bottle, you can exchange it for one full bottle and continue drinking until no more exchanges can be made. 
-
-### Approach
-
-The problem requires us to simulate the process of drinking bottles and exchanging the empty bottles for full ones. Initially, we have a certain number of full bottles, and as we drink them, we accumulate empty bottles. These empty bottles can be exchanged for more full bottles, which allows us to continue drinking.
-
-The core idea is to continue exchanging empty bottles for full ones as long as we have enough empty bottles to make an exchange. We need to account for the fact that each exchange increases the number of full bottles, and drinking the bottles increases the number of empty bottles again.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code step by step:
-
-#### Step 1: Initialize Variables
-
-```cpp
-int full = bot;
-int empty = 0;
-int drunk = 0;
-```
-
-- **full:** This variable represents the number of full bottles available at the start. Initially, it’s equal to `bot`, which is the number of full bottles provided as input.
-- **empty:** This variable keeps track of the number of empty bottles. Initially, it is set to 0.
-- **drunk:** This variable counts the total number of bottles that have been drunk. It starts at 0 and will be updated as the simulation progresses.
-
-#### Step 2: While Loop for Drinking and Exchanging Bottles
-
-```cpp
-while((empty + full) >= ex) {
-    drunk += full;
-    empty += full;
-    full = 0;
-```
-
-- The `while` loop checks if the total number of bottles (full + empty) is enough to perform at least one exchange (`(empty + full) >= ex`). If this condition is true, it means we can exchange some empty bottles for full ones.
-- In this block:
-  - We add all the current full bottles (`full`) to the `drunk` count because all full bottles will be drunk.
-  - The number of empty bottles is updated by adding the number of full bottles (`empty += full`).
-  - After drinking all the full bottles, we set `full = 0`, since all full bottles have been consumed.
-
-#### Step 3: Inner Loop for Exchanging Empty Bottles
-
-```cpp
-while(empty >= ex) {
-    empty -= ex;
-    full += 1;
-    ex += 1;
+    
+    return drunk + full;
+    
 }
 ```
 
-- After drinking the full bottles, we enter the inner `while` loop, where we attempt to exchange the empty bottles for new full bottles.
-- Each time we enter the loop:
-  - We decrease the number of empty bottles by `ex` (`empty -= ex`) because we are exchanging `ex` empty bottles for one full bottle.
-  - We increase the number of full bottles by 1 (`full += 1`).
-  - The value of `ex` is increased by 1 (`ex += 1`), which means the required number of empty bottles for the next exchange is increased. This simulates the increasing difficulty of exchanging bottles as the process continues.
+This function simulates drinking a set number of bottles based on the current number of full and empty bottles, and the number of empty bottles required to get a new full bottle. It returns the total number of drunk bottles.
 
-#### Step 4: Final Return Statement
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxBottlesDrunk(int bot, int ex) {
+	```
+	Defines the function `maxBottlesDrunk` that takes two integers, `bot` (the number of full bottles) and `ex` (the number of empty bottles needed to get a full bottle), and returns the total number of drunk bottles.
 
-```cpp
-return drunk + full;
-```
+2. **Variable Initialization**
+	```cpp
+	    int full = bot;
+	```
+	Initializes the `full` variable to the number of full bottles (`bot`).
 
-- After the loops are completed, we return the total number of bottles that were drunk (`drunk + full`).
-- The value `drunk` represents the total number of full bottles that were consumed, and the remaining `full` bottles represent the last set of full bottles that couldn’t be exchanged anymore but were still drunk.
+3. **Variable Initialization**
+	```cpp
+	    int empty = 0;
+	```
+	Initializes the `empty` variable to 0, which will keep track of the number of empty bottles.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int drunk = 0;
+	```
+	Initializes the `drunk` variable to 0, which will accumulate the total number of drunk bottles.
 
-#### Time Complexity:
-- **O(n):** The time complexity of the solution is **O(n)**, where `n` is the total number of bottles. The process of drinking and exchanging bottles is handled using a loop that iterates over the number of full and empty bottles.
-- The outer `while` loop runs while there are enough bottles to exchange, and the inner `while` loop is executed as long as we have enough empty bottles to perform exchanges. Since each full bottle is consumed and exchanged at most once, the overall time complexity is linear with respect to the number of bottles.
+5. **While Loop**
+	```cpp
+	    while((empty + full) >= ex) {
+	```
+	Enters the `while` loop as long as the total number of full and empty bottles is greater than or equal to `ex`, the number of empty bottles needed to get one full bottle.
 
-#### Space Complexity:
-- **O(1):** The space complexity is constant because we are only using a fixed amount of space for the variables (`full`, `empty`, `drunk`, and `ex`). We are not using any additional data structures that grow with the input size, so the space complexity is **O(1)**.
+6. **Bottle Consumption**
+	```cpp
+	        drunk   += full;
+	```
+	Adds all the current full bottles to the `drunk` count, as all full bottles will be consumed.
 
-### Conclusion
+7. **Bottle Movement**
+	```cpp
+	        empty   += full;
+	```
+	Adds the consumed full bottles to the `empty` count, since they are now empty after being drunk.
 
-In conclusion, this algorithm simulates the process of drinking bottles and exchanging empty bottles for new full ones. By iterating over the process of drinking and exchanging bottles, we can determine the maximum number of bottles that can be drunk. The solution effectively handles the dynamic nature of the exchanges and accounts for the increasing difficulty of getting new full bottles as the process continues.
+8. **Bottle Reset**
+	```cpp
+	        full     = 0;
+	```
+	Resets the `full` variable to 0, since all full bottles have been consumed.
 
-The time complexity of **O(n)** ensures that the solution will efficiently handle large inputs, and the space complexity of **O(1)** makes it very space-efficient. This approach is optimal for solving the problem and provides the correct result by following the given conditions and constraints.
+9. **Inner While Loop Setup**
+	```cpp
+	        while(empty >= ex) {
+	```
+	Enters a nested `while` loop, which continues as long as there are enough empty bottles to exchange for full ones.
 
-By using a systematic approach of exchanging empty bottles and increasing the required number of empty bottles after each exchange, this algorithm efficiently calculates the maximum number of bottles that can be drunk.
+10. **Empty Bottle Reduction**
+	```cpp
+	            empty   -= ex;
+	```
+	Reduces the `empty` count by `ex`, the number of empty bottles required to obtain one full bottle.
+
+11. **Full Bottle Increase**
+	```cpp
+	            full    += 1;
+	```
+	Increases the `full` count by 1, since a new full bottle has been obtained.
+
+12. **Empty Bottle Exchange**
+	```cpp
+	            ex      += 1;                
+	```
+	Increases the value of `ex` (the number of empty bottles required to exchange for a full one) by 1, simulating a change in exchange rules or a progressive difficulty.
+
+13. **Return Statement**
+	```cpp
+	    return drunk + full;
+	```
+	Returns the total number of drunk bottles (`drunk`) plus any remaining full bottles (`full`).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of full bottles. This is because we simulate each drink and exchange operation.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we use a constant amount of extra space to track the bottles.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/water-bottles-ii/description/)
 

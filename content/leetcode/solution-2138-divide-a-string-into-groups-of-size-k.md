@@ -14,106 +14,121 @@ img_src = ""
 youtube = "J_aEpIkTv4k"
 youtube_upload_date="2022-01-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/J_aEpIkTv4k/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string `s` and an integer `k`, partition the string into groups of size `k`. If the last group has fewer than `k` characters, append a `fill` character to complete it. Return an array of the groups.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` of lowercase English letters, an integer `k` representing the group size, and a `fill` character to complete the last group if necessary.
+- **Example:** `Input: s = "hello", k = 3, fill = "z"`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- 1 <= k <= 100
+	- fill is a lowercase English letter.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> divideString(string s, int k, char fill) {
-        vector<string> res((s.size() + k - 1) / k, string(k, fill));
-        for (int i = 0; i < s.size(); ++i)
-            res[i / k][i % k] = s[i];
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array of strings, each representing a group formed by partitioning the input string `s` into parts of size `k`, with the last group potentially filled using the `fill` character.
+- **Example:** `Output: ["hel", "loz"]`
+- **Constraints:**
+	- The returned array will have as many elements as necessary to divide the string into groups of size `k`.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Partition the string into groups and handle the last group by appending the `fill` character if necessary.
 
-The goal of this problem is to take a given string `s`, divide it into substrings of length `k`, and if the last substring is shorter than `k`, fill it with a specified character `fill`. This results in a vector of strings, each having a uniform length of `k`, except possibly for the last one, which will be padded as needed.
+- Initialize an empty list for the result.
+- Iterate through the string and divide it into groups of size `k`.
+- If the last group contains fewer than `k` characters, append `fill` characters to complete it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string contains only lowercase English letters.
+- The input values for `k` and `fill` are valid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "hello", k = 3, fill = "z"`  \
+  **Explanation:** The string is divided into two groups. The first group is 'hel'. The second group is 'lo', but since the length is less than `k`, we append 'z' to make it 'loz'.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+To solve the problem, iterate through the string in steps of size `k`, create the groups, and handle the last group by filling it if necessary.
 
-To solve this problem, we can follow these steps:
+### Initial Thoughts 💭
+- We need to divide the string into smaller chunks of size `k`. The last chunk may need additional characters to complete.
+- Using a simple loop with string slicing or manual indexing will help form the groups. Special attention is needed for the last group to ensure it is filled properly.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string should return an empty list of groups.
+- Test cases with maximum string lengths should be handled efficiently.
+- When `k` is 1, each group is just a single character of the string.
+- Ensure that the number of groups and the size of the last group are computed correctly.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> divideString(string s, int k, char fill) {
+    vector<string> res((s.size() + k - 1) / k, string(k, fill));
+    for (int i = 0; i < s.size(); ++i)
+        res[i / k][i % k] = s[i];
+    return res;
+}
+```
 
-1. Calculate the total number of substrings that can be formed from the string `s` when divided into segments of length `k`. This can be done using integer division.
-2. Create a vector of strings where each string has a length of `k` initialized with the `fill` character.
-3. Iterate through the string `s`, filling the appropriate positions in the vector with the characters from `s`.
-4. Return the resulting vector of strings.
+This function divides a string `s` into a 2D vector of strings, where each string has a length `k`. If the string `s` is shorter than `k` for the last part, it fills it with the specified `fill` character.
 
-This approach ensures that the string is divided correctly, and the use of a pre-initialized vector allows for efficient filling of characters.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> divideString(string s, int k, char fill) {
+	```
+	This is the function definition for `divideString`. It takes three parameters: a string `s`, an integer `k` (the size of each chunk), and a character `fill` to pad the chunks if necessary.
 
-### Code Breakdown (Step by Step)
+2. **Initialization**
+	```cpp
+	    vector<string> res((s.size() + k - 1) / k, string(k, fill));
+	```
+	This line initializes a vector `res` with enough rows to store the divided strings. The size of each row is `k`, and it is filled with the `fill` character. The number of rows is calculated by dividing the size of the input string by `k` and rounding up.
 
-Let’s break down the provided code step by step:
+3. **Iteration**
+	```cpp
+	    for (int i = 0; i < s.size(); ++i)
+	```
+	This loop iterates over each character in the input string `s`.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - This defines the `Solution` class, which will contain our method for solving the problem.
+4. **Filling the Matrix**
+	```cpp
+	        res[i / k][i % k] = s[i];
+	```
+	This line places the character `s[i]` into the appropriate position in the 2D vector `res`. The row is determined by `i / k` and the column by `i % k`.
 
-2. **Function Definition**:
-   ```cpp
-   vector<string> divideString(string s, int k, char fill) {
-   ```
-   - The `divideString` function is defined as a public member of the `Solution` class. It takes three parameters:
-     - `s`: The input string to be divided.
-     - `k`: The length of each substring.
-     - `fill`: The character used to fill the last substring if it is shorter than `k`.
+5. **Return**
+	```cpp
+	    return res;
+	```
+	Once all characters have been placed into the vector, the function returns the 2D vector `res`.
 
-3. **Vector Initialization**:
-   ```cpp
-   vector<string> res((s.size() + k - 1) / k, string(k, fill));
-   ```
-   - This line creates a vector `res` that will hold the resulting substrings. The size of the vector is calculated by `(s.size() + k - 1) / k`, which effectively computes the number of substrings needed to accommodate all characters in `s`.
-   - Each string in `res` is initialized to a string of length `k`, filled with the specified character `fill`. This means that every substring will initially have the `fill` character.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Filling the Vector**:
-   ```cpp
-   for (int i = 0; i < s.size(); ++i)
-       res[i / k][i % k] = s[i];
-   ```
-   - This loop iterates through each character in the string `s` using the index `i`.
-   - The expression `i / k` determines which substring (row in `res`) we are currently filling, and `i % k` gives the index within that substring.
-   - The character `s[i]` is placed in the appropriate position in the `res` vector. This fills the substrings with characters from `s` in a row-wise manner.
+The time complexity is linear in relation to the size of the string, as we process each character exactly once.
 
-5. **Return Statement**:
-   ```cpp
-   return res;
-   ```
-   - Finally, the function returns the filled vector `res`, which now contains the substrings of `s` properly divided and filled.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-6. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This closing brace signifies the end of the `Solution` class.
+The space complexity is also linear, as we store the result array, which has a size proportional to the input string.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-- **Time Complexity**: \(O(n)\)
-  - The time complexity is linear with respect to the length of the string `s`, as we iterate through the string once to fill the resulting substrings.
-
-- **Space Complexity**: \(O(m)\)
-  - The space complexity is proportional to the number of substrings created, where \(m\) is the number of substrings. Each substring is of size \(k\), leading to an overall space usage of approximately \(m \cdot k\), where \(m\) is the number of resulting substrings.
-
-### Conclusion
-
-The `divideString` function provides an efficient way to segment a given string into fixed-length substrings, utilizing a simple yet effective approach. By pre-initializing a vector with `fill` characters and iterating through the input string, we can easily fill the substrings as needed.
-
-This solution is straightforward and demonstrates key programming concepts such as vector manipulation and indexing. It is a great example for beginners learning about strings, vectors, and loops in C++.
-
-For developers and programmers, understanding how to manipulate strings and data structures efficiently is crucial, especially in competitive programming and algorithm design. The approach taken in this code is both efficient and easy to understand, making it suitable for various applications where string formatting or manipulation is required.
-
-The function could serve as a utility in applications like text processing, where structured output is often necessary, or in games and applications that require formatted data. Overall, the clarity and efficiency of this implementation make it a valuable addition to any programmer's toolkit.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "HaoudL9xEHA"
 youtube_upload_date="2020-05-16"
 youtube_thumbnail="https://i.ytimg.com/vi/HaoudL9xEHA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,137 +28,153 @@ youtube_thumbnail="https://i.ytimg.com/vi/HaoudL9xEHA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the head of a singly linked list. Your task is to reorder the list such that all nodes at odd indices are grouped together followed by all nodes at even indices. The first node is considered to have an odd index, the second node is considered to have an even index, and so on. The relative order inside the odd and even groups should remain unchanged.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the head of a singly linked list.
+- **Example:** `head = [1, 2, 3, 4, 5]`
+- **Constraints:**
+	- The number of nodes in the linked list is between 0 and 10^4.
+	- Each node's value is between -10^6 and 10^6.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* oddEvenList(ListNode* head) {
-        if(!head) return NULL;
-        ListNode *odd = head, *ehead = head->next, *even = head->next;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the reordered linked list where all odd-indexed nodes appear first, followed by the even-indexed nodes, while maintaining the relative order within each group.
+- **Example:** `[1, 3, 5, 2, 4]`
+- **Constraints:**
+	- The solution must operate in O(n) time complexity and use O(1) extra space.
 
-        while(even && even->next) {
-            odd->next = odd->next->next;
-            even->next = even->next->next;
-            odd = odd->next;
-            even = even->next;
-        }
-        odd->next = ehead;
-        return head;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To reorder the linked list such that all odd-indexed nodes come first, followed by the even-indexed nodes, while maintaining the relative order within both groups.
+
+- Initialize two pointers, one for odd-indexed nodes and one for even-indexed nodes.
+- Traverse the list, separating the nodes into two lists: one for odd indices and one for even indices.
+- Connect the last node of the odd list to the head of the even list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input linked list always has a valid solution.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `head = [1, 2, 3, 4, 5]`  \
+  **Explanation:** The list groups nodes with odd indices first (1, 3, 5), followed by the nodes with even indices (2, 4).
+
+- **Input:** `head = [5, 10, 15, 20, 25, 30]`  \
+  **Explanation:** The list groups nodes with odd indices first (5, 15, 25), followed by the nodes with even indices (10, 20, 30).
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a two-pointer technique to separate the odd and even indexed nodes while preserving their relative order.
+
+### Initial Thoughts 💭
+- We need to maintain the relative order of both odd and even indexed nodes.
+- By splitting the list into two parts (odd and even indexed nodes), we can efficiently reorder them and connect them in the correct order.
+{{< dots >}}
+### Edge Cases 🌐
+- If the list is empty, return NULL.
+- For very large lists (up to 10^4 nodes), ensure that the solution runs efficiently in O(n) time.
+- Consider cases where all nodes have the same value.
+- The solution must handle edge cases like empty lists and lists with a single node.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* oddEvenList(ListNode* head) {
+    if(!head) return NULL;
+    ListNode *odd = head, *ehead = head->next, *even = head->next;
+
+    while(even && even->next) {
+        odd->next = odd->next->next;
+        even->next = even->next->next;
+        odd = odd->next;
+        even = even->next;
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, we are tasked with rearranging the nodes of a singly linked list such that all the nodes at **odd positions** (1st, 3rd, 5th, etc.) come first, followed by the nodes at **even positions** (2nd, 4th, 6th, etc.). The relative order of nodes within both the odd and even groups should remain unchanged.
-
-For example:
-- **Input**: `1 -> 2 -> 3 -> 4 -> 5`
-- **Output**: `1 -> 3 -> 5 -> 2 -> 4`
-
-We are aiming to solve this in **O(n)** time complexity, where `n` is the number of nodes, and **O(1)** space complexity, meaning we shouldn't use extra space beyond a constant amount.
-
----
-
-### 🧠 Approach
-
-To tackle this efficiently, we’ll use two pointers:
-- One pointer will handle the **odd indexed nodes**.
-- The other pointer will manage the **even indexed nodes**.
-
-Here’s a step-by-step breakdown of the approach:
-
-1. **Odd and Even List Segregation**: We maintain two separate lists:
-   - One for the odd indexed nodes.
-   - Another for the even indexed nodes.
-   
-2. **Pointer Movement**: As we traverse through the list, we update the pointers alternately:
-   - Odd indexed nodes will link to the next odd indexed node.
-   - Even indexed nodes will link to the next even indexed node.
-   
-3. **Termination**: The loop ends once we reach the end of the list. Afterward, we connect the last node of the odd list to the head of the even list.
-
-4. **Return the New List**: Finally, the rearranged list is returned starting from the head of the odd list.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s walk through the code implementation:
-
-```cpp
-if (!head) return NULL;
-```
-- **Edge Case**: If the list is empty (`head == NULL`), we return `NULL`. This handles cases where there are no nodes.
-
-```cpp
-ListNode *odd = head, *ehead = head->next, *even = head->next;
-```
-- **Pointer Initialization**:
-  - `odd`: Points to the first node (odd index).
-  - `ehead`: Points to the second node (even index).
-  - `even`: Tracks the current even indexed node during iteration.
-
-```cpp
-while (even && even->next) {
-    odd->next = odd->next->next;
-    even->next = even->next->next;
-    odd = odd->next;
-    even = even->next;
+    odd->next = ehead;
+    return head;
 }
 ```
-- **Main Loop**:
-  - This loop runs while there are still even indexed nodes to process.
-  - The `odd->next` pointer is updated to point to the next odd indexed node.
-  - The `even->next` pointer is updated to point to the next even indexed node.
-  - Both `odd` and `even` pointers then move forward.
 
-```cpp
-odd->next = ehead;
-```
-- **Connecting Odd and Even Lists**: After the loop ends, all odd nodes are linked together and all even nodes are linked together. Now, we connect the last odd node to the head of the even list.
+This function reorders the nodes of a singly linked list by separating the odd-indexed nodes and even-indexed nodes. The odd nodes will be placed first, followed by the even nodes. The linked list is rearranged in-place without using extra space.
 
-```cpp
-return head;
-```
-- **Return the Rearranged List**: Finally, we return the head of the rearranged list, which starts with the odd indexed nodes followed by the even indexed ones.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* oddEvenList(ListNode* head) {
+	```
+	This is the declaration of the `oddEvenList` function, which takes a pointer to the head of a singly linked list and returns a pointer to the reordered list.
 
----
+2. **Base Case**
+	```cpp
+	    if(!head) return NULL;
+	```
+	If the head is NULL, it means the list is empty, so we return NULL immediately.
 
-### 📈 Complexity Analysis
+3. **Variable Initialization**
+	```cpp
+	    ListNode *odd = head, *ehead = head->next, *even = head->next;
+	```
+	Here, three pointers are initialized: `odd` points to the first node (head), `ehead` points to the first even node (head->next), and `even` also points to the first even node.
 
-#### ⏱️ Time Complexity:
-- **O(n)**: We only traverse the linked list once, with each node being processed exactly once. Therefore, the time complexity is **O(n)**, where `n` is the number of nodes in the linked list.
+4. **Loop Condition**
+	```cpp
+	    while(even && even->next) {
+	```
+	This while loop continues as long as there are more even nodes to process (i.e., as long as `even` and `even->next` are not NULL).
 
-#### 💾 Space Complexity:
-- **O(1)**: We only use a constant amount of extra space for the `odd`, `even`, and `ehead` pointers, and do not create any additional data structures. Thus, the space complexity is **O(1)**.
+5. **Odd Node Re-linking**
+	```cpp
+	        odd->next = odd->next->next;
+	```
+	The next pointer of the odd node is updated to point to the next odd node, skipping over the even node.
 
----
+6. **Even Node Re-linking**
+	```cpp
+	        even->next = even->next->next;
+	```
+	Similarly, the next pointer of the even node is updated to point to the next even node.
 
-### 🏁 Conclusion
+7. **Pointer Advancing**
+	```cpp
+	        odd = odd->next;
+	```
+	The `odd` pointer is advanced to the next odd node.
 
-This approach solves the problem of rearranging a singly linked list in a very efficient manner. The key idea is to use two pointers — one for odd indexed nodes and one for even indexed nodes — and traverse the list only once. By doing this in-place, we achieve **O(n)** time complexity and **O(1)** space complexity, making it both time-efficient and space-efficient.
+8. **Pointer Advancing**
+	```cpp
+	        even = even->next;
+	```
+	The `even` pointer is advanced to the next even node.
 
----
+9. **Reconnecting Odd and Even Lists**
+	```cpp
+	    odd->next = ehead;
+	```
+	After processing all odd and even nodes, the last odd node's `next` pointer is set to the head of the even nodes (`ehead`), effectively linking the two sub-lists.
 
-### 🔥 Key Takeaways
-- **Time complexity**: O(n)
-- **Space complexity**: O(1)
-- The solution is efficient and suitable for large linked lists.
+10. **Return Statement**
+	```cpp
+	    return head;
+	```
+	Finally, the head of the modified list is returned, which now starts with all odd nodes followed by all even nodes.
 
-Great job reaching the end! 🎉 Keep practicing and refining your problem-solving skills. You'll master these concepts in no time! 😄
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, as we only need to traverse the list once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, as we are not using any additional data structures that grow with the input size.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/odd-even-linked-list/description/)
 

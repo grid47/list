@@ -14,124 +14,157 @@ img_src = ""
 youtube = "B5affGy4mCs"
 youtube_upload_date="2020-07-25"
 youtube_thumbnail="https://i.ytimg.com/vi/B5affGy4mCs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers `arr`. Your task is to count the number of subarrays whose sum is odd. Since the answer can be a large number, return it modulo (10^9 + 7).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of integers `arr` is given as input.
+- **Example:** `arr = [1, 3, 5]`
+- **Constraints:**
+	- 1 <= arr.length <= 10^5
+	- 1 <= arr[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numOfSubarrays(vector<int>& arr) {
-      int odd = 0, even = 0, sum = 0;
-        for(int x : arr) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of subarrays whose sum is odd, modulo (10^9 + 7).
+- **Example:** `For arr = [1, 3, 5], the output is 4.`
+- **Constraints:**
+	- The output is the number of subarrays with an odd sum modulo (10^9 + 7).
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count the number of subarrays with odd sums.
+
+- Iterate through the array and track the odd and even subarray sums.
+- Swap the odd and even counts when an odd number is encountered.
+- Sum the odd subarrays and return the result modulo (10^9 + 7).
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is not empty and contains at least one element.
+- The array contains integers within the given range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `arr = [1, 3, 5]`  \
+  **Explanation:** The subarrays are [1], [1, 3], [1, 3, 5], [3], [3, 5], [5]. Their sums are [1, 4, 9, 3, 8, 5], and the odd sums are [1, 9, 3, 5]. Thus, the answer is 4.
+
+- **Input:** `arr = [2, 4, 6]`  \
+  **Explanation:** All subarrays have even sums, so there are no odd-sum subarrays. Thus, the answer is 0.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, track the number of odd and even subarrays as we iterate through the array.
+
+### Initial Thoughts 💭
+- The sum of any subarray depends on whether the individual elements are odd or even.
+- We need to count the odd sums by keeping track of the odd and even subarray counts at each step.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs allowed; the array has at least one element.
+- Ensure the solution can handle large input sizes up to 10^5 elements.
+- All elements are even or all elements are odd, which will affect the odd subarray count.
+- Ensure to return the result modulo (10^9 + 7).
+{{< dots >}}
+## Code 💻
+```cpp
+int numOfSubarrays(vector<int>& arr) {
+  int odd = 0, even = 0, sum = 0;
+    for(int x : arr) {
+        
+        if (x % 2) {
             
-            if (x % 2) {
-                
-                swap(odd, even);
-                odd++;
-                
-                } else even++;
+            swap(odd, even);
+            odd++;
             
-            sum = (sum + odd) % 1000000007;
-            
-            }
-        return sum;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to count the number of subarrays in a given array of integers that have an odd sum. A subarray is defined as a contiguous portion of the array. The challenge is to efficiently determine how many of these subarrays exist without explicitly generating all possible subarrays, which would be computationally expensive.
-
-### Approach
-
-To tackle this problem, we will use a mathematical observation regarding the sum of numbers based on their parity (odd or even). 
-
-#### Key Concepts
-
-1. **Sum Parity**: 
-   - An odd number added to an even number results in an odd sum.
-   - An even number added to another even number or an odd number added to another odd number results in an even sum.
-
-2. **Prefix Sums and Counting**:
-   - As we traverse the array, we maintain counts of how many subarrays end at each index with odd and even sums. 
-   - For each element, based on its parity, we update our counts and determine how many valid subarrays can be formed ending at that index.
-
-3. **Modulo Operation**: Since the result can be large, we will use the modulo operation to keep our sum within limits, specifically \(10^9 + 7\).
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int numOfSubarrays(vector<int>& arr) {
-        int odd = 0, even = 0, sum = 0;
-```
-- We define the class `Solution` with a public method `numOfSubarrays` that takes a vector of integers as input.
-- We initialize three integer variables:
-  - `odd`: Counts the number of subarrays with an odd sum.
-  - `even`: Counts the number of subarrays with an even sum.
-  - `sum`: This will store the total number of subarrays with an odd sum.
-
-```cpp
-        for(int x : arr) {
-```
-- We iterate through each element `x` in the input array `arr`.
-
-```cpp
-            if (x % 2) {
-                swap(odd, even);
-                odd++;
-            } else {
-                even++;
-            }
-```
-- For each element, we check its parity:
-  - If `x` is odd (`x % 2` evaluates to true), we perform the following:
-    - We swap the counts of `odd` and `even`. This is because adding an odd number flips the parity of all previous subarray sums:
-      - All subarrays that had an even sum will now have an odd sum after adding this odd number.
-      - All subarrays that had an odd sum will now have an even sum after adding this odd number.
-    - We then increment the `odd` count by one to account for the subarray that consists solely of the odd number `x`.
-  - If `x` is even, we simply increment the `even` count since adding an even number does not change the parity of the sums.
-
-```cpp
-            sum = (sum + odd) % 1000000007;
-```
-- After processing each element, we update our `sum` variable by adding the current count of `odd` subarrays. The modulo operation ensures that `sum` does not exceed \(10^9 + 7\).
-
-```cpp
+            } else even++;
+        
+        sum = (sum + odd) % 1000000007;
+        
         }
-        return sum;
-    }
-};
+    return sum;
+}
 ```
-- Once all elements have been processed, we return the total count of subarrays with odd sums stored in `sum`.
 
-### Complexity
+This code defines a function `numOfSubarrays` that calculates the number of subarrays with an odd sum in a given array `arr`. It uses two counters, `odd` and `even`, to track the number of odd and even sums encountered during iteration, ensuring efficient calculation with a time complexity of O(n).
 
-#### Time Complexity
-- The time complexity of this solution is \(O(n)\), where \(n\) is the number of elements in the input array. We only make a single pass through the array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numOfSubarrays(vector<int>& arr) {
+	```
+	This line declares the function `numOfSubarrays`, which takes a reference to an integer vector `arr` and returns an integer representing the number of subarrays with an odd sum.
 
-#### Space Complexity
-- The space complexity is \(O(1)\), as we only use a fixed number of integer variables for counting.
+2. **Variable Initialization**
+	```cpp
+	  int odd = 0, even = 0, sum = 0;
+	```
+	Here, three variables are initialized: `odd` (counts odd subarrays), `even` (counts even subarrays), and `sum` (holds the total sum of odd subarrays encountered so far).
 
-### Conclusion
+3. **Looping Through Array**
+	```cpp
+	    for(int x : arr) {
+	```
+	This line starts a loop to iterate over each element `x` in the array `arr`.
 
-This solution efficiently counts the number of subarrays with an odd sum by leveraging the properties of number parity. 
+4. **Condition Check (Odd Number)**
+	```cpp
+	        if (x % 2) {
+	```
+	This condition checks if the current number `x` is odd by checking the remainder when divided by 2.
 
-**Key Insights**:
-- **Parity Logic**: Understanding how the parity of sums works allows us to dynamically count subarrays without generating them explicitly.
-- **Space Efficiency**: The algorithm operates in constant space, making it highly efficient for large datasets.
-- **Scalability**: This approach is easily scalable to other similar problems involving sums and counts, showcasing the versatility of parity-based methods in competitive programming.
+5. **Swap Odd and Even Counters**
+	```cpp
+	            swap(odd, even);
+	```
+	Swaps the values of `odd` and `even` to switch the roles, as an odd number flips the parity of subarrays.
 
-In summary, by using an iterative counting approach combined with properties of odd and even sums, we can solve the problem effectively and efficiently, demonstrating a solid understanding of both algorithm design and numerical properties.
+6. **Increment Odd Counter**
+	```cpp
+	            odd++;
+	```
+	Increments the `odd` counter since the current element `x` is odd, meaning the subarrays formed with this element will have odd sums.
+
+7. **Increment Even Counter**
+	```cpp
+	            } else even++;
+	```
+	If the number is even, the `even` counter is incremented, as the subarrays formed with even numbers will continue to have even sums.
+
+8. **Update Sum**
+	```cpp
+	        sum = (sum + odd) % 1000000007;
+	```
+	Updates the total `sum` by adding the current `odd` count and taking the result modulo 1000000007 to prevent overflow and ensure large number handling.
+
+9. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	Returns the final result stored in `sum`, which represents the number of subarrays with an odd sum.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution processes each element in the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution uses a constant amount of extra space for counting odd and even sums.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/)
 

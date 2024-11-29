@@ -14,164 +14,293 @@ img_src = ""
 youtube = "nAVKrpJ8LUI"
 youtube_upload_date="2024-05-09"
 youtube_thumbnail="https://i.ytimg.com/vi/nAVKrpJ8LUI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n grid where each cell can be empty, contain a fresh orange, or a rotten orange. Every minute, any fresh orange that is adjacent to a rotten orange becomes rotten. The task is to determine the minimum number of minutes required for all fresh oranges to rot. If this is not possible, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a grid represented by a 2D array, where each element can be 0, 1, or 2.
+- **Example:** `grid = [[2,1,1],[1,1,0],[0,1,1]]`
+- **Constraints:**
+	- 1 <= m, n <= 10
+	- grid[i][j] can be 0, 1, or 2.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int orangesRotting(vector<vector<int>>& grid) {
-        queue<vector<int>> q;
-        int m = grid.size(), n = grid[0].size();
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 2) {
-                q.push({i, j});
-            }
-        vector<vector<int>> vis(m, vector<int>(n, 0));
-        int t = 0;
-        int dir[] = {0, 1, 0, -1, 0};
-        while(!q.empty()) {
-            int sz = q.size();
-            while(sz--) {
-                auto it = q.front();
-                q.pop();
-                if(vis[it[0]][it[1]]) continue;
-                vis[it[0]][it[1]] = 1;
-                for(int i = 0; i < 4; i++) {
-                    int x = it[0] + dir[i], y = it[1] + dir[i + 1];
-                    if(x < 0 || y < 0 || x == m || y == n || vis[x][y] || grid[x][y] != 1)
-                        continue;
-                    grid[x][y] = grid[it[0]][it[1]] + 1;
-                    q.push({x, y});
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of minutes required for all fresh oranges to rot. If it's impossible, return -1.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The grid has at least one cell and at most 100 cells.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the minimum time required to rot all the fresh oranges using breadth-first search (BFS) from the rotten oranges.
+
+- Initialize a queue with all the positions of rotten oranges.
+- Perform BFS, and for each rotten orange, check its 4-directional neighbors.
+- If a fresh orange is found, make it rotten and add its position to the queue.
+- Keep track of the minutes elapsed while processing each level of BFS.
+- Return the number of minutes, or -1 if some fresh oranges cannot be rotted.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will always contain at least one cell.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[2,1,1],[1,1,0],[0,1,1]]`  \
+  **Explanation:** In this example, after 4 minutes all fresh oranges rot. The rotten orange at (0,0) spreads to adjacent cells and eventually rots all the fresh oranges.
+
+{{< dots >}}
+## Approach 🚀
+This problem can be solved using a breadth-first search (BFS) algorithm to simulate the spreading of the rot from all initially rotten oranges.
+
+### Initial Thoughts 💭
+- This problem is a variant of multi-source BFS where the rotten oranges are the sources.
+- We will need to perform BFS from each rotten orange, updating the grid as fresh oranges become rotten.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem doesn't have empty inputs since the grid is always provided.
+- The grid size is small enough (maximum 10x10) that BFS will work efficiently.
+- If the grid contains no fresh oranges, the result is 0.
+- The grid size is constrained (maximum 10x10), ensuring that a BFS approach is feasible.
+{{< dots >}}
+## Code 💻
+```cpp
+int orangesRotting(vector<vector<int>>& grid) {
+    queue<vector<int>> q;
+    int m = grid.size(), n = grid[0].size();
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] == 2) {
+            q.push({i, j});
+        }
+    vector<vector<int>> vis(m, vector<int>(n, 0));
+    int t = 0;
+    int dir[] = {0, 1, 0, -1, 0};
+    while(!q.empty()) {
+        int sz = q.size();
+        while(sz--) {
+            auto it = q.front();
+            q.pop();
+            if(vis[it[0]][it[1]]) continue;
+            vis[it[0]][it[1]] = 1;
+            for(int i = 0; i < 4; i++) {
+                int x = it[0] + dir[i], y = it[1] + dir[i + 1];
+                if(x < 0 || y < 0 || x == m || y == n || vis[x][y] || grid[x][y] != 1)
+                    continue;
+                grid[x][y] = grid[it[0]][it[1]] + 1;
+                q.push({x, y});
             }
         }
-        int mx = 2;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] > mx) mx = grid[i][j];
-            else if(grid[i][j] == 1) return -1;
-        return mx - 2;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem revolves around a grid where each cell can represent an orange: fresh (`1`), rotten (`2`), or empty (`0`). The goal is to determine the minimum time required for all fresh oranges to rot, given that rotten oranges can rot adjacent fresh oranges in all four directions (up, down, left, right) every minute. If there are any fresh oranges that cannot rot due to isolation from rotten ones, the function should return `-1` as it is impossible to rot all oranges.
-
-### Approach
-
-To solve this problem efficiently, we can employ a **Breadth-First Search (BFS)** approach. BFS is ideal for problems involving spreading or propagation, such as this one where rotten oranges spread rot to their neighboring fresh oranges. The BFS approach ensures that we process the freshest (or closest) rot first, and then work our way outward, minute by minute, as rotten oranges spread their effect.
-
-### Key Steps in the Approach:
-
-1. **Identify Initial Rotten Oranges**: We start by identifying all the rotten oranges (represented by `2`) in the grid. These will be the starting points for our BFS.
-2. **BFS Traversal**: We perform a BFS starting from all the rotten oranges simultaneously, propagating the rot to their adjacent fresh oranges (represented by `1`). As we propagate the rot, we keep track of the time it takes for each fresh orange to become rotten.
-3. **Tracking Rotting Process**: We track the time step by step as the rot spreads, ensuring that each fresh orange becomes rotten at the earliest possible minute.
-4. **Final Check**: After BFS completes, we check if there are any remaining fresh oranges that could not be rotted. If any such oranges remain, it implies they were isolated from the rotten oranges, and we return `-1`. Otherwise, the result will be the maximum time it took for the last fresh orange to rot.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int orangesRotting(vector<vector<int>>& grid) {
-        queue<vector<int>> q;  // A queue to store the positions of rotten oranges
-        int m = grid.size(), n = grid[0].size();  // Dimensions of the grid
+    int mx = 2;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] > mx) mx = grid[i][j];
+        else if(grid[i][j] == 1) return -1;
+    return mx - 2;
+}
 ```
 
-1. **Initialize the Queue**:
-   - We initialize a queue `q` that will store the positions of the rotten oranges. These positions are used as starting points for the BFS.
-   - We also retrieve the grid dimensions `m` and `n`.
+This function simulates the rotting of oranges in a grid where 1 represents a fresh orange, 2 represents a rotten orange, and 0 represents an empty space. It uses breadth-first search (BFS) to spread the rot to adjacent fresh oranges and returns the minimum time required to rot all oranges, or -1 if it's impossible.
 
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 2) {
-                q.push({i, j});  // Add the positions of all rotten oranges to the queue
-            }
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int orangesRotting(vector<vector<int>>& grid) {
+	```
+	Defines the function `orangesRotting` which takes a 2D vector grid representing the oranges and their states (fresh, rotten, or empty). The goal is to compute the minimum time required to rot all fresh oranges.
 
-2. **Push Rotten Oranges to the Queue**:
-   - We iterate through the entire grid. Whenever we encounter a rotten orange (value `2`), we add its position (row and column) to the queue. These will serve as the initial rotten orange points for BFS.
+2. **Queue Initialization**
+	```cpp
+	    queue<vector<int>> q;
+	```
+	Initializes a queue to hold the positions of the rotten oranges, which will be used to perform the BFS.
 
-```cpp
-        vector<vector<int>> vis(m, vector<int>(n, 0));  // A 2D vector to keep track of visited cells
-        int t = 0;  // Initialize the time counter
-        int dir[] = {0, 1, 0, -1, 0};  // Directions for BFS (right, down, left, up)
-```
+3. **Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Gets the dimensions of the grid, where `m` is the number of rows and `n` is the number of columns.
 
-3. **Visited Array and Direction Array**:
-   - We create a `vis` 2D vector initialized to 0, which will be used to track whether a cell has already been visited during the BFS.
-   - The `dir` array contains the directional deltas (right, down, left, up) used to explore neighboring cells.
+4. **Queue Population - Rotten Oranges**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Loops through each row of the grid.
 
-```cpp
-        while(!q.empty()) {  // Perform BFS until the queue is empty
-            int sz = q.size();  // Get the number of rotten oranges in the current round
-            while(sz--) {
-                auto it = q.front();  // Get the front element in the queue
-                q.pop();  // Pop the element from the queue
-```
+5. **Queue Population - Rotten Oranges**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Loops through each column of the grid.
 
-4. **BFS Loop**:
-   - The outer `while` loop continues as long as there are rotten oranges in the queue.
-   - For each level of BFS (each minute), we process the current batch of rotten oranges, indicated by the `sz` variable, which holds the number of elements in the queue for that minute.
+6. **Queue Population - Rotten Oranges**
+	```cpp
+	        if(grid[i][j] == 2) {
+	```
+	Checks if the current cell contains a rotten orange (represented by 2).
 
-```cpp
-                if(vis[it[0]][it[1]]) continue;  // Skip if the cell is already visited
-                vis[it[0]][it[1]] = 1;  // Mark the cell as visited
-```
+7. **Queue Population - Rotten Oranges**
+	```cpp
+	            q.push({i, j});
+	```
+	Adds the position of the rotten orange to the queue.
 
-5. **Mark Visited**:
-   - Before processing a rotten orange, we check if it has been visited already. If it has, we skip the processing. Otherwise, we mark it as visited to avoid revisiting the same cell in future iterations.
+8. **Visited Array Initialization**
+	```cpp
+	    vector<vector<int>> vis(m, vector<int>(n, 0));
+	```
+	Initializes a 2D vector `vis` to track visited positions to avoid revisiting cells during the BFS.
 
-```cpp
-                for(int i = 0; i < 4; i++) {  // Explore all four directions (right, down, left, up)
-                    int x = it[0] + dir[i], y = it[1] + dir[i + 1];
-                    if(x < 0 || y < 0 || x == m || y == n || vis[x][y] || grid[x][y] != 1)
-                        continue;  // Skip if the cell is out of bounds, already visited, or not a fresh orange
-                    grid[x][y] = grid[it[0]][it[1]] + 1;  // Mark the fresh orange as rotten (increment the time)
-                    q.push({x, y});  // Push the newly rotten orange into the queue
-                }
-            }
-        }
-```
+9. **Time Initialization**
+	```cpp
+	    int t = 0;
+	```
+	Initializes a time counter `t` to track the time taken for all fresh oranges to rot.
 
-6. **Rotting Spread**:
-   - For each rotten orange, we explore its four neighbors. If a neighbor is a fresh orange (`1`), we turn it into a rotten orange by updating its value to `grid[it[0]][it[1]] + 1` (indicating the time step).
-   - We then push the newly rotten orange’s position to the queue for further processing in the next minute.
+10. **Direction Array Initialization**
+	```cpp
+	    int dir[] = {0, 1, 0, -1, 0};
+	```
+	Defines an array `dir` representing the four possible directions to move in the grid: up, right, down, and left.
 
-```cpp
-        int mx = 2;  // Initialize `mx` to track the maximum time
-        for(int i = 0; i < m; i++)  // Traverse the grid to check for unrotted fresh oranges and track the maximum time
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] > mx) mx = grid[i][j];  // Update the maximum time
-            else if(grid[i][j] == 1) return -1;  // If any fresh orange is left, return -1
-        return mx - 2;  // The time taken is the maximum time minus 2 (to account for the initial rotten oranges)
-    }
-};
-```
+11. **BFS Loop Start**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Starts a while loop to perform BFS as long as there are rotten oranges in the queue.
 
-7. **Final Check**:
-   - After BFS completes, we check if there are any fresh oranges (`grid[i][j] == 1`). If such oranges exist, it means they couldn’t be rotted, and we return `-1`.
-   - If all fresh oranges have been rotted, we calculate the maximum time it took to rot the last orange (`mx`) and return `mx - 2`, as the initial rotten oranges are marked with a value of `2`.
+12. **BFS - Queue Size**
+	```cpp
+	        int sz = q.size();
+	```
+	Gets the current size of the queue, which corresponds to the number of oranges to process at the current time step.
 
-### Complexity
+13. **BFS - Processing Each Orange**
+	```cpp
+	        while(sz--) {
+	```
+	Processes each rotten orange in the current level of the BFS.
 
-- **Time Complexity**: The time complexity is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the grid. This is because each cell is visited at most once during the BFS, and we perform constant time operations for each cell.
-  
-- **Space Complexity**: The space complexity is **O(m * n)** due to the queue and the `vis` 2D vector used for marking visited cells. The size of the queue can grow to the maximum number of cells in the grid, and the visited array stores the state of each cell.
+14. **BFS - Dequeue**
+	```cpp
+	            auto it = q.front();
+	```
+	Retrieves the position of the current rotten orange from the front of the queue.
 
-### Conclusion
+15. **BFS - Dequeue**
+	```cpp
+	            q.pop();
+	```
+	Removes the processed rotten orange from the queue.
 
-This solution efficiently solves the problem of rotting oranges by utilizing a **Breadth-First Search (BFS)** approach. By treating the rotting process as a multi-source BFS where all rotten oranges spread rot simultaneously, we ensure that the time to rot all oranges is minimized. The solution accounts for edge cases such as isolated fresh oranges that cannot be rotted, returning `-1` in such cases. The approach is both time and space efficient, making it an ideal solution for this problem.
+16. **BFS - Visited Check**
+	```cpp
+	            if(vis[it[0]][it[1]]) continue;
+	```
+	Checks if the current orange has already been visited. If true, skips further processing.
+
+17. **BFS - Mark Visited**
+	```cpp
+	            vis[it[0]][it[1]] = 1;
+	```
+	Marks the current orange as visited.
+
+18. **BFS - Spread the Rot**
+	```cpp
+	            for(int i = 0; i < 4; i++) {
+	```
+	Loops through each direction to spread the rot to adjacent oranges.
+
+19. **BFS - Spread the Rot**
+	```cpp
+	                int x = it[0] + dir[i], y = it[1] + dir[i + 1];
+	```
+	Calculates the new position (x, y) of the adjacent orange.
+
+20. **BFS - Spread the Rot**
+	```cpp
+	                if(x < 0 || y < 0 || x == m || y == n || vis[x][y] || grid[x][y] != 1)
+	```
+	Checks if the new position is out of bounds, already visited, or not a fresh orange (i.e., not 1). If any condition is true, skips further processing.
+
+21. **BFS - Spread the Rot**
+	```cpp
+	                    continue;
+	```
+	If any condition is true, continue to the next adjacent orange.
+
+22. **BFS - Update and Queue**
+	```cpp
+	                grid[x][y] = grid[it[0]][it[1]] + 1;
+	```
+	Updates the state of the adjacent orange, marking it as rotting (incrementing the value from 1 to 2).
+
+23. **BFS - Update and Queue**
+	```cpp
+	                q.push({x, y});
+	```
+	Adds the new rotten orange to the queue.
+
+24. **Max Time Calculation**
+	```cpp
+	    int mx = 2;
+	```
+	Initializes `mx` to 2 (since rotten oranges have a value of 2) to keep track of the maximum time required.
+
+25. **Max Time Calculation**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Loops through each row of the grid to calculate the maximum time required for all oranges to rot.
+
+26. **Max Time Calculation**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Loops through each column of the grid.
+
+27. **Max Time Calculation**
+	```cpp
+	        if(grid[i][j] > mx) mx = grid[i][j];
+	```
+	Updates the maximum time if a more rotten orange is found.
+
+28. **Max Time Calculation**
+	```cpp
+	        else if(grid[i][j] == 1) return -1;
+	```
+	Checks if there are still fresh oranges left. If true, returns -1 to indicate it's impossible to rot all oranges.
+
+29. **Return Result**
+	```cpp
+	    return mx - 2;
+	```
+	Returns the time taken to rot all oranges by subtracting 2 (the initial rotten state) from the maximum time.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n) - In the best case, every cell is processed once.
+- **Average Case:** O(m * n) - The algorithm will process every cell in the grid.
+- **Worst Case:** O(m * n) - All cells need to be visited during the BFS.
+
+The time complexity is linear in terms of the grid size.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n) - The space complexity is also linear in terms of the grid size.
+- **Worst Case:** O(m * n) - In the worst case, the BFS queue will contain all the cells.
+
+The space complexity is linear as we use extra space for the BFS queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotting-oranges/description/)
 

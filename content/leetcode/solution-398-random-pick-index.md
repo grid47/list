@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "1rDRyxPcmvY"
 youtube_upload_date="2020-03-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/1rDRyxPcmvY/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,139 +28,166 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/1rDRyxPcmvY/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array `nums` with potential duplicates, you need to randomly select an index `i` where `nums[i] == target`. If there are multiple indices with the same value, the selection should be made with equal probability for each valid index.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers `nums` and a target integer. The target integer is guaranteed to exist in the array.
+- **Example:** `Input: [4, 3, 2, 3, 5], target: 3`
+- **Constraints:**
+	- 1 <= nums.length <= 2 * 10^4
+	- -2^31 <= nums[i] <= 2^31 - 1
+	- At most 10^4 calls will be made to `pick`.
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the randomly selected index where `nums[i] == target`. If there are multiple indices with the same value, the selection should be random.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The function must return an index where `nums[i] == target`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to select a random index where the value matches the target. If there are multiple valid indices, ensure equal probability for all of them.
+
+- Store the indices of all occurrences of each number in the array.
+- When `pick(target)` is called, randomly select an index from the stored list of indices for that number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` will contain at least one occurrence of the target number when `pick(target)` is called.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [4, 3, 2, 3, 5], target: 3`  \
+  **Explanation:** In this case, there are two occurrences of the number 3 (at indices 1 and 3), and the function `pick(3)` can randomly return either 1 or 3 with equal probability.
+
+- **Input:** `Input: [1, 1, 2, 2, 3, 3], target: 2`  \
+  **Explanation:** There are two occurrences of the number 2 (at indices 2 and 3), and the function `pick(2)` can randomly return either 2 or 3 with equal probability.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves creating a map that stores the indices of each number in the array. When `pick(target)` is called, the list of indices for the target number is accessed and a random index is selected from the list.
+
+### Initial Thoughts 💭
+- The key challenge is to ensure that all indices of the target number are selected with equal probability.
+- Using a hash map to store the indices of each number will allow for efficient lookup and random selection.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array is not possible since the problem guarantees that `target` exists in `nums`.
+- Ensure the solution handles arrays with up to 20,000 elements efficiently.
+- Handle arrays where all elements are the same number, as the function should still select a random index from the array.
+- Ensure that the random selection of indices is efficient and can handle up to 10^4 calls to `pick`.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    unordered_map<int, vector<int>> mp;
+unordered_map<int, vector<int>> mp;
 public:
-    Solution(vector<int>& nums) {
-        int n = nums.size();
-        for(int i = 0; i < n; i++)
-        mp[nums[i]].push_back(i);
-    }
-    
-    int pick(int target) { 
-        int sz = mp[target].size();
-        int res = mp[target][rand()%sz];
-        return res;
-    }
+Solution(vector<int>& nums) {
+    int n = nums.size();
+    for(int i = 0; i < n; i++)
+    mp[nums[i]].push_back(i);
+}
+
+int pick(int target) { 
+    int sz = mp[target].size();
+    int res = mp[target][rand()%sz];
+    return res;
+}
 };
 
 /**
  * Your Solution object will be instantiated and called as such:
  * Solution* obj = new Solution(nums);
  * int param_1 = obj->pick(target);
- */
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-The task is to create an efficient solution for picking a random index from an array `nums` where a specific target value occurs. We need to implement a `pick` method that, given a target value, randomly returns an index from the array `nums` where the target exists. The solution should be time and space-efficient, especially when dealing with multiple occurrences of the target value.
-
----
-
-### 🧠 Approach
-
-To tackle this problem, we need to focus on:
-1. **Efficient Storage**: Storing the indices of all occurrences of each value in the array. This allows us to quickly retrieve all indices corresponding to a target value.
-2. **Efficient Retrieval**: The goal is to pick a random index from the stored list of indices for the target value. By using a random number generator, we can easily select a random index from the list.
-3. **Time Complexity**: The `pick` method should ideally run in constant time (`O(1)`), after initializing the storage.
-4. **Space Complexity**: The space required for storing indices must be managed effectively, without consuming excessive memory.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s walk through the code to understand how this problem is solved efficiently:
-
-#### Step 1: Class Definition
-```cpp
-class Solution {
-    unordered_map<int, vector<int>> mp;
 ```
-- The `Solution` class contains an unordered map `mp`. The key is an integer, and the value is a vector that stores the indices where that integer appears in the array.
 
-#### Step 2: Constructor to Initialize the Map
-```cpp
-public:
-    Solution(vector<int>& nums) {
-        int n = nums.size();
-        for(int i = 0; i < n; i++)
-            mp[nums[i]].push_back(i);
-    }
-```
-- The constructor takes a reference to a vector `nums`, which is the input array.
-- The loop iterates over the array, and for each element `nums[i]`, it adds its index `i` to the vector corresponding to `nums[i]` in the `mp` map.
-  - Example: For `nums = [1, 2, 3, 1, 2]`, the map `mp` will look like:
-    ```cpp
-    {
-      1: [0, 3],
-      2: [1, 4],
-      3: [2]
-    }
-    ```
+The `Solution` class implements a way to pick a random index of a given `target` number in a vector `nums`. It stores indices of each number in an unordered map for efficient lookup and retrieval. The `pick` method randomly selects one of these indices for the given target.
 
-#### Step 3: Pick Method to Randomly Select an Index
-```cpp
-    int pick(int target) { 
-        int sz = mp[target].size();
-        int res = mp[target][rand() % sz];
-        return res;
-    }
-```
-- The `pick` method takes an integer `target` and performs the following:
-  1. **Find the Size of the Target’s Index List**:
-     - `sz = mp[target].size()` gets the number of indices where the target value occurs.
-  2. **Generate a Random Index**:
-     - `rand() % sz` generates a random index between `0` and `sz - 1`.
-  3. **Return the Random Index**:
-     - The random index is selected from `mp[target]`, and that index is returned.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	The class `Solution` is defined to solve the problem of randomly picking an index for a target number from a given list of numbers.
 
-#### Step 4: Example Usage
-```cpp
-/**
- * Your Solution object will be instantiated and called as such:
- * Solution* obj = new Solution(nums);
- * int param_1 = obj->pick(target);
- */
-```
-- You instantiate the `Solution` object with `nums` and then call `pick` with a target value to get a random index of that target.
+2. **Data Structure Initialization**
+	```cpp
+	unordered_map<int, vector<int>> mp;
+	```
+	An unordered map `mp` is declared, where the key is an integer (the target number) and the value is a vector of indices where the target appears in the list.
 
----
+3. **Constructor**
+	```cpp
+	public:
+	```
+	The `public` access modifier is used to allow public access to the methods of the class.
 
-### 📈 Complexity Analysis
+4. **Constructor**
+	```cpp
+	Solution(vector<int>& nums) {
+	```
+	The constructor `Solution` initializes the object by accepting a vector of integers `nums` and populating the map `mp` with the indices of each number.
 
-#### Time Complexity:
-- **Constructor**: The constructor iterates through the array `nums` to build the map. This takes `O(n)` time, where `n` is the size of the array.
-- **Pick Method**: Accessing the list of indices for a target is `O(1)`, and generating a random index using `rand()` is also `O(1)`. So, the `pick` method runs in constant time, i.e., `O(1)`.
+5. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	The size of the input vector `nums` is stored in the variable `n`.
 
-Thus, the time complexity is:
-- **Initialization**: `O(n)`
-- **Pick Operation**: `O(1)`
+6. **Map Population**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	A loop is run to iterate over each element in the vector `nums`.
 
-#### Space Complexity:
-- The space complexity is determined by the size of the map `mp`, which stores the indices of each value in the array. In the worst case, the map stores all `n` indices if all elements in `nums` are unique.
-  
-Thus, the space complexity is `O(n)`.
+7. **Map Population**
+	```cpp
+	    mp[nums[i]].push_back(i);
+	```
+	For each number in `nums`, its index `i` is pushed into the vector corresponding to the number in the unordered map `mp`.
 
----
+8. **Pick Method Definition**
+	```cpp
+	int pick(int target) { 
+	```
+	The `pick` method is defined to randomly select an index from the vector of indices corresponding to the `target` number.
 
-### 🏁 Conclusion
+9. **Size Calculation**
+	```cpp
+	    int sz = mp[target].size();
+	```
+	The size of the vector corresponding to the `target` in the map `mp` is calculated and stored in the variable `sz`.
 
-This approach efficiently handles the problem of picking a random index for a target value in an array. By storing all the indices of each value in a map, we can quickly retrieve the list of indices for any target. Using a random number generator allows us to pick a random index in constant time. 
+10. **Random Index Selection**
+	```cpp
+	    int res = mp[target][rand()%sz];
+	```
+	A random index from the vector `mp[target]` is selected using the `rand()` function. The modulo operation ensures the index is within bounds of the vector size.
 
-With a time complexity of `O(n)` for initialization and `O(1)` for each pick operation, and a space complexity of `O(n)` to store the indices, this solution is both time-efficient and space-efficient. It’s an ideal choice for large datasets!
+11. **Return Random Index**
+	```cpp
+	    return res;
+	```
+	The randomly selected index `res` is returned.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-### 🔑 Key Takeaways:
-- Efficient storage of indices using a map allows fast access and random index selection.
-- Time complexity for initialization is linear (`O(n)`), while each pick operation is constant time (`O(1)`).
-- Space complexity is linear (`O(n)`), based on the storage of indices in the map.
+Both the initialization of the map and the `pick(target)` method have constant time complexity.
 
-With this solution, you're all set to handle any large array and pick random indices with ease! 💡🎯
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is linear, as we store a list of indices for each unique number in the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/random-pick-index/description/)
 

@@ -14,111 +14,177 @@ img_src = ""
 youtube = "prI82maTivg"
 youtube_upload_date="2024-03-04"
 youtube_thumbnail="https://i.ytimg.com/vi/prI82maTivg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of tokens and an initial amount of power. The goal is to maximize the score by playing the tokens strategically. In each turn, you can either play a token face-up or face-down. Playing a token face-up costs you power but increases your score, while playing a token face-down gains you power but decreases your score. Your task is to determine the maximum score you can achieve after playing the tokens.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array 'tokens' representing the values of tokens, and an integer 'power' representing the initial power.
+- **Example:** `Input: tokens = [50, 100, 200], power = 150`
+- **Constraints:**
+	- 0 <= tokens.length <= 1000
+	- 0 <= tokens[i], power < 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int bagOfTokensScore(vector<int>& tokens, int power) {
-        sort(tokens.begin(), tokens.end());
-        int res = 0, pts = 0, i = 0, j = tokens.size() - 1;
-        while(i <= j) {
-            if(power >= tokens[i]) {
-                power -= tokens[i++];
-                res = max(res, ++pts);
-            } else if(pts > 0) {
-                power += tokens[j--];
-                pts--;
-            } else break;
-        }
-        
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum score that can be achieved by strategically playing the tokens.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The result will always be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the score by playing tokens in a way that maximizes the score, considering the constraints of power and score.
+
+- 1. Sort the tokens in ascending order.
+- 2. Use two pointers: one pointing to the smallest token and the other to the largest token.
+- 3. If your current power is sufficient to play the smallest token face-up, play it and increase the score.
+- 4. If your score is at least 1, consider playing the largest token face-down to regain power.
+- 5. Continue playing tokens in this manner until no more valid moves can be made.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tokens are played in a way that maximizes the score.
+- The player can only play tokens when the conditions (either power or score) are met.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: tokens = [50, 100], power = 150`  \
+  **Explanation:** In this case, you can play token0 (50) face-up, reducing power to 100 and increasing the score to 1. The maximum score achievable is 1 because playing token1 (100) would require more power than you currently have.
+
+- **Input:** `Input: tokens = [100, 200, 300], power = 250`  \
+  **Explanation:** Play token0 (100) face-up, reducing power to 150 and increasing score to 1. Then, play token1 (200) face-up, reducing power to 0 and increasing score to 2. The maximum score achievable is 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach focuses on sorting the tokens and using a two-pointer technique to maximize the score while managing power and score constraints efficiently.
+
+### Initial Thoughts 💭
+- The problem can be viewed as optimizing a process where tokens are played based on the current state of power and score.
+- Sorting the tokens helps in efficiently choosing the smallest and largest tokens to play.
+- By using a greedy strategy with two pointers, we can maximize the score while managing power efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the result should be 0.
+- Ensure the solution efficiently handles large input sizes, especially with the maximum number of tokens.
+- If all tokens are larger than the initial power, no tokens can be played face-up.
+- The solution should run within the time limits for up to 1000 tokens.
+{{< dots >}}
+## Code 💻
+```cpp
+int bagOfTokensScore(vector<int>& tokens, int power) {
+    sort(tokens.begin(), tokens.end());
+    int res = 0, pts = 0, i = 0, j = tokens.size() - 1;
+    while(i <= j) {
+        if(power >= tokens[i]) {
+            power -= tokens[i++];
+            res = max(res, ++pts);
+        } else if(pts > 0) {
+            power += tokens[j--];
+            pts--;
+        } else break;
     }
-};
-{{< /highlight >}}
----
+    
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the maximum score in the 'Bag of Tokens' problem. It sorts the tokens and uses a greedy approach with two pointers, maximizing score by spending tokens when possible and gaining points when necessary, while maintaining a balance of power.
 
-In this problem, you are given a list of tokens and an initial amount of power. Each token can be used in one of two ways:
-1. **Gain Points**: You can spend power equal to the value of the token to gain one point.
-2. **Lose Points**: You can lose one point to gain power equal to the value of the token.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int bagOfTokensScore(vector<int>& tokens, int power) {
+	```
+	The function `bagOfTokensScore` takes in a vector of tokens and a power value, returning the maximum score that can be achieved based on the given rules.
 
-The objective is to maximize the total points you can accumulate using the available power. The goal is to design an efficient algorithm to determine the maximum points achievable, given the tokens and the initial power.
+2. **Sorting Tokens**
+	```cpp
+	    sort(tokens.begin(), tokens.end());
+	```
+	Sort the tokens in ascending order to facilitate a greedy approach. This ensures that the smallest tokens are considered first to maximize the score.
 
-### Approach
+3. **Variable Initialization**
+	```cpp
+	    int res = 0, pts = 0, i = 0, j = tokens.size() - 1;
+	```
+	Initialize variables: `res` to track the maximum score, `pts` to track the current points, `i` as the left pointer, and `j` as the right pointer for the token array.
 
-To solve this problem optimally, we can use a **greedy approach**. Here's the rationale behind the approach:
+4. **Main Loop Start**
+	```cpp
+	    while(i <= j) {
+	```
+	Start a while loop that continues as long as the left pointer `i` does not surpass the right pointer `j`.
 
-1. **Sorting Tokens**: The first step is to sort the tokens in ascending order. Sorting helps us access the smallest and largest tokens easily, which is key for efficiently managing the available power.
-   - The **smallest tokens** allow us to spend minimal power for gaining points.
-   - The **largest tokens** allow us to regain power by spending points.
+5. **If Enough Power to Spend Token**
+	```cpp
+	        if(power >= tokens[i]) {
+	```
+	If there is enough power to spend the token at position `i` (the smallest available token), proceed with the action to gain points.
 
-2. **Two Pointers Strategy**: We use a two-pointer approach:
-   - One pointer, `i`, starts at the beginning of the sorted list (representing the smallest token).
-   - The other pointer, `j`, starts at the end of the list (representing the largest token).
-   
-   This allows us to make decisions based on the token values at both extremes of the list.
+6. **Spend Token**
+	```cpp
+	            power -= tokens[i++];
+	```
+	Spend the token at position `i` (decrease power) and increment the left pointer `i`.
 
-3. **Greedy Decisions**: 
-   - **Gain Points**: If the current power is greater than or equal to the value of the token at index `i`, we can spend the power to gain one point. We then increment the pointer `i` to the next token, subtract the token value from the available power, and increase the points.
-   - **Lose Points**: If we can no longer gain points (i.e., if the remaining power is less than the smallest remaining token), we check if we have any points to lose. If we do, we can lose a point and gain power equal to the value of the largest remaining token. We then decrement the pointer `j` and decrease the points.
-   
-4. **Stopping Condition**: The loop continues as long as there are tokens left to process (`i <= j`). If neither of the conditions (gaining points or losing points) is possible, the loop terminates.
+7. **Update Maximum Score**
+	```cpp
+	            res = max(res, ++pts);
+	```
+	Increase the points (`pts`) and update the maximum score (`res`) if the new score exceeds the previous maximum.
 
-### Code Breakdown (Step by Step)
+8. **Else If Points Available to Re-gain Power**
+	```cpp
+	        } else if(pts > 0) {
+	```
+	If points are available (i.e., `pts > 0`), you can trade points to gain power by taking a token from the right side of the array.
 
-1. **Sorting the Tokens**:
-   ```cpp
-   sort(tokens.begin(), tokens.end());
-   ```
-   - The tokens array is sorted in ascending order to facilitate easy access to the smallest and largest token values. Sorting ensures that we can efficiently make greedy decisions.
+9. **Re-gain Power by Trading Points**
+	```cpp
+	            power += tokens[j--];
+	```
+	Gain power by taking the token at position `j` (the largest available token) and decrementing the right pointer `j`.
 
-2. **Initial Variables**:
-   ```cpp
-   int res = 0, pts = 0, i = 0, j = tokens.size() - 1;
-   ```
-   - `res` keeps track of the maximum points that can be achieved.
-   - `pts` tracks the current number of points the player has.
-   - `i` is the left pointer, pointing to the smallest token.
-   - `j` is the right pointer, pointing to the largest token.
+10. **Reduce Points**
+	```cpp
+	            pts--;
+	```
+	Reduce the points (`pts`) as one point is used to gain power.
 
-3. **Main Loop**:
-   ```cpp
-   while(i <= j) {
-       if(power >= tokens[i]) {
-           power -= tokens[i++];
-           res = max(res, ++pts);
-       } else if(pts > 0) {
-           power += tokens[j--];
-           pts--;
-       } else break;
-   }
-   ```
-   - **Gain Points**: If the remaining power is greater than or equal to the token at position `i`, the player spends that power to gain a point. The pointer `i` moves to the next token, the power is reduced by the token value, and the points are incremented. The maximum points achieved (`res`) are updated.
-   - **Lose Points**: If we can't gain points but have points to lose (`pts > 0`), we use one point to gain power from the token at position `j`. The pointer `j` moves leftward, and the points are decremented.
-   - **Exit Condition**: If neither gaining nor losing points is possible, the loop breaks.
+11. **End Loop Condition**
+	```cpp
+	        } else break;
+	```
+	If neither condition is satisfied (i.e., there is not enough power and no points to trade), break out of the loop.
 
-4. **Return Result**:
-   ```cpp
-   return res;
-   ```
-   After the loop ends, the variable `res` contains the maximum points achieved, which is then returned.
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the maximum score (`res`) achieved.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-- **Time Complexity**: The time complexity is dominated by the sorting step, which takes O(n log n), where `n` is the number of tokens. The subsequent loop runs in linear time, O(n), as each token is processed at most once. Therefore, the overall time complexity is O(n log n).
-  
-- **Space Complexity**: The space complexity is O(1) because the solution only uses a constant amount of extra space, regardless of the input size. We only store a few integer variables (`res`, `pts`, `i`, and `j`).
+The time complexity is dominated by the sorting step, which takes O(n log n), where n is the number of tokens.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-This solution efficiently maximizes the number of points achievable by using a greedy approach with a two-pointer technique. By sorting the tokens and making decisions based on the smallest and largest tokens, we ensure that we maximize the points while managing the available power. The time complexity of O(n log n) makes this solution suitable for large inputs, while the space complexity of O(1) ensures it runs efficiently with minimal additional memory usage. This approach strikes a balance between clarity and performance, making it an optimal solution for the problem at hand.
+The space complexity is O(n) due to the storage required for the sorted list of tokens.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bag-of-tokens/description/)
 

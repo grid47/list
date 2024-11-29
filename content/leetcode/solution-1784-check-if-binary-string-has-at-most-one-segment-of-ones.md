@@ -14,88 +14,106 @@ img_src = ""
 youtube = "CRjRphrOkNA"
 youtube_upload_date="2021-03-07"
 youtube_thumbnail="https://i.ytimg.com/vi/CRjRphrOkNA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a binary string s without leading zeros, return true if the string contains at most one contiguous block of 1s. Otherwise, return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a binary string s that does not have leading zeros. The string is made up of '0's and '1's.
+- **Example:** `s = '101'`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- s[i] is either '0' or '1'
+	- s[0] is '1'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkOnesSegment(string s) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the string contains at most one contiguous block of '1's. Otherwise, return false.
+- **Example:** `Input: s = '111', Output: true`
+- **Constraints:**
 
-        // without leading zeros mean starting with 1s
-        // if another set of one comes, there be definitely a 01
-        // thats all
-        return string::npos == s.find("01");
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if there is only one contiguous block of '1's in the string.
 
-### Problem Statement
+- 1. Search for the substring '01' in the string.
+- 2. If the substring '01' is found, return false since there are multiple blocks of '1's.
+- 3. If no such substring is found, return true as the '1's form one contiguous block.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary string s starts with a '1'.
+- The string contains only '0's and '1's.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = '101'`  \
+  **Explanation:** The ones in the string are not contiguous, as there is a '0' between them. Hence, the result is false.
 
-The problem at hand is to determine whether a binary string contains a single contiguous segment of `1`s. The string consists only of characters `0` and `1`. A string is considered to have a single segment of `1`s if:
-- It starts with `1` (without leading zeros).
-- It contains only one uninterrupted series of `1`s, with `0`s either at the beginning, end, or between the segments but not splitting the `1`s into multiple segments.
+- **Input:** `Input: s = '111'`  \
+  **Explanation:** The ones form a single contiguous block, so the result is true.
 
-For example:
-- The string `"110"` has a single segment of `1`s.
-- The string `"1001"` does not have a single segment of `1`s, as it contains two segments separated by `0`s.
-- The string `"000"` has no segments of `1`s and is considered valid because it doesn't contradict the condition.
+{{< dots >}}
+## Approach 🚀
+We can simply check for the presence of the substring '01' in the string. If it exists, it indicates that the '1's are not contiguous.
 
-### Approach
-
-The solution to this problem can be approached using a straightforward string manipulation technique. Specifically, the key insight is to identify if the string contains the substring `"01"`. The presence of this substring indicates that there is a transition from a segment of `1`s to `0`s, followed by another segment of `1`s, thus violating the condition for a single contiguous segment of `1`s.
-
-The steps involved in the approach are:
-1. Use the `find` function to search for the substring `"01"` in the input string.
-2. If `"01"` is found, return `false`, indicating that there are multiple segments of `1`s.
-3. If `"01"` is not found, return `true`, indicating that the string contains a single contiguous segment of `1`s or none at all.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The problem can be solved by checking for the '01' substring.
+- The solution relies on recognizing that once the first block of '1's ends, if another '1' starts after a '0', the blocks are separate.
+{{< dots >}}
+### Edge Cases 🌐
+- Input string s will not be empty as per the constraints.
+- Ensure that the solution handles strings of maximum length (100 characters).
+- If the string contains only one '1', it should return true.
+- The string must contain at least one '1' due to the constraint that s[0] is '1'.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool checkOnesSegment(string s) {
+bool checkOnesSegment(string s) {
+
+    // without leading zeros mean starting with 1s
+    // if another set of one comes, there be definitely a 01
+    // thats all
+    return string::npos == s.find("01");
+}
 ```
-- A class `Solution` is defined with a public method `checkOnesSegment` that takes a string `s` as input.
 
-```cpp
-        // without leading zeros mean starting with 1s
-        // if another set of one comes, there be definitely a 01
-        // thats all
-```
-- A comment explaining the logic of the solution: if there is no leading zero and the string has another segment of `1`s, then it will definitely contain the substring `"01"`.
+This function checks if a string `s` consists of a single contiguous segment of 1's, without any interruptions or leading zeros. It returns `true` if the string only contains a single set of 1's, and `false` otherwise.
 
-```cpp
-        return string::npos == s.find("01");
-    }
-};
-```
-- The line utilizes the `find` method of the string class to check for the occurrence of the substring `"01"`.
-- `string::npos` is a constant representing a non-position, which indicates that the substring was not found. 
-- The expression `string::npos == s.find("01")` evaluates to `true` if `"01"` is not found in the string, meaning there is a single segment of `1`s or none.
-- The method returns `true` if there is only one segment of `1`s; otherwise, it returns `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkOnesSegment(string s) {
+	```
+	Define the function `checkOnesSegment`, which takes a string `s` as input and returns a boolean indicating whether the string contains a single contiguous segment of 1's.
 
-### Complexity
+2. **Return Statement**
+	```cpp
+	    return string::npos == s.find("01");
+	```
+	The function checks if the string 's' contains the substring '01' (indicating a break in the segment of 1's). If '01' is found, the function returns `false`. Otherwise, it returns `true`.
 
-- **Time Complexity**: 
-  - The time complexity of this solution is \(O(n)\), where \(n\) is the length of the string. The `find` method scans through the string to locate the substring `"01"`, which requires examining each character in the worst case.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- **Space Complexity**: 
-  - The space complexity is \(O(1)\) as we are not using any additional data structures that grow with the size of the input string. The only memory used is for the string itself and a few local variables.
+The time complexity is O(n) because we perform a single scan of the string to find the substring.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The solution effectively solves the problem of checking for a single contiguous segment of `1`s in a binary string with minimal complexity. By leveraging string manipulation techniques, it achieves the desired functionality in an efficient manner.
+The space complexity is O(1) since no additional space is required apart from the input string.
 
-This implementation provides a clear example of how to apply basic string operations to solve a problem related to segments in binary representations. The simplicity of the approach also highlights the importance of understanding string properties, especially in programming challenges involving sequences of characters. 
+**Happy Coding! 🎉**
 
-Overall, this code serves as a strong reference for similar problems involving string segments and is beneficial for individuals looking to enhance their understanding of string manipulation and efficient problem-solving strategies.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-binary-string-has-at-most-one-segment-of-ones/description/)
 

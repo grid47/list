@@ -14,136 +14,158 @@ img_src = ""
 youtube = "rOnTeyl_njo"
 youtube_upload_date="2022-07-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rOnTeyl_njo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+On day 1, one person discovers a secret. Each person will share the secret after a delay and forget it after a certain number of days. Return the number of people who know the secret at the end of day n, modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given integers n (number of days), delay (days after which a person starts sharing the secret), and forget (days after which a person forgets the secret).
+- **Example:** `n = 6, delay = 2, forget = 4`
+- **Constraints:**
+	- 2 <= n <= 1000
+	- 1 <= delay < forget <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int peopleAwareOfSecret(int n, int delay, int forget) {
-        
-        int res = 0, share = 0;
-        vector<long> dp(n + 2, 0);
-        dp[1] = 1;
-        int mod = 1e9 + 7;
-        for(int i = 2; i <= n; i++)
-            dp[i] = share = (share + dp[max(i - delay, 0)] - dp[max(i - forget, 0)] + mod) % mod;
-        
-        for(int i = n + 1 - forget; i <= n; i++)
-            res = (res + dp[i]) % mod;
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of people who know the secret at the end of day n, modulo 10^9 + 7.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The answer can be very large, so return it modulo 10^9 + 7.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Simulate the process of sharing and forgetting the secret over n days.
 
-The problem is to calculate the number of people who are aware of a secret after `n` days, where people can start sharing the secret, and others can learn it over time. The key rules are:
-1. A person starts sharing the secret after a delay of `delay` days.
-2. Once a person learns the secret, they can forget it after `forget` days.
+- Initialize an array to track the number of people sharing the secret each day.
+- Use dynamic programming to calculate how the secret spreads over time, considering the delay and forget intervals.
+- Return the sum of the people who know the secret at the end of day n.
+{{< dots >}}
+### Problem Assumptions ✅
+- There is at least one person who knows the secret on day 1.
+- Each person can share the secret only once during the period they know it.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 6, delay = 2, forget = 4`  \
+  **Explanation:** This example demonstrates how the secret spreads over 6 days, with the delay and forget intervals affecting how many people eventually learn the secret.
 
-Given the constraints, we are tasked with computing how many people are aware of the secret after `n` days, using a dynamic programming approach. The result must be taken modulo \(10^9 + 7\).
+{{< dots >}}
+## Approach 🚀
+The goal is to simulate the process of how a secret is shared and forgotten over time using dynamic programming.
 
-### Approach
-
-This problem is a dynamic programming (DP) problem where we need to track the number of people who are aware of the secret at each day, taking into account the delay and forget intervals.
-
-We can approach the problem step-by-step as follows:
-
-1. **Initial Setup:**
-   - The first person is aware of the secret on day 1.
-   - The secret-sharing behavior follows two main intervals:
-     - **Delay Interval:** A person can start sharing the secret after `delay` days.
-     - **Forget Interval:** A person forgets the secret after `forget` days.
-
-2. **Dynamic Programming Array:**
-   - We use a dynamic programming array `dp[]` where `dp[i]` represents the number of people who learn the secret on day `i`.
-   - The total number of people aware of the secret at any point in time is the cumulative sum of values in the `dp[]` array up to that day.
-
-3. **Transition Logic:**
-   - On each day `i`, the people who are aware of the secret are those who learned it on the previous days, but after considering the delay and forget intervals:
-     - People who start sharing the secret on day `i` (i.e., `dp[max(i - delay, 0)]`).
-     - People who stop sharing the secret on day `i` (i.e., `dp[max(i - forget, 0)]`).
-   - We adjust the values to account for these intervals, ensuring the number of people aware of the secret is updated correctly.
-
-4. **Final Answer Calculation:**
-   - After computing the `dp[]` values, the final answer is the sum of all people who are still aware of the secret on the last `forget` days.
-   - The result must be taken modulo \(10^9 + 7\) to avoid overflow and meet the problem's constraints.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code into key steps:
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- Each person can only share the secret once, and they will forget after a certain number of days.
+- We need to track how many people share the secret each day, considering the delay and forget intervals.
+{{< dots >}}
+### Edge Cases 🌐
+- n = 2, delay = 1, forget = 2
+- n = 1000, delay = 500, forget = 800
+- delay = 1, forget = 3
+- The number of people sharing the secret and forgetting it must be correctly managed with respect to the provided constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-int res = 0, share = 0;
-vector<long> dp(n + 2, 0);
-dp[1] = 1;
-int mod = 1e9 + 7;
+int peopleAwareOfSecret(int n, int delay, int forget) {
+    
+    int res = 0, share = 0;
+    vector<long> dp(n + 2, 0);
+    dp[1] = 1;
+    int mod = 1e9 + 7;
+    for(int i = 2; i <= n; i++)
+        dp[i] = share = (share + dp[max(i - delay, 0)] - dp[max(i - forget, 0)] + mod) % mod;
+    
+    for(int i = n + 1 - forget; i <= n; i++)
+        res = (res + dp[i]) % mod;
+    
+    return res;
+}
 ```
 
-- We initialize `res` to store the final result, which will be the number of people aware of the secret after `n` days.
-- `share` is used to keep track of the cumulative number of people who are sharing the secret on any given day.
-- The `dp` vector is initialized with `n + 2` elements to represent days from 1 to `n` and one extra index to handle boundary conditions. Initially, all values are set to 0.
-- `dp[1] = 1` indicates that on day 1, only the first person is aware of the secret.
-- `mod = 1e9 + 7` is the modulo used to ensure the result is within the bounds of typical integer limits.
+This function calculates how many people are aware of a secret after `n` days, with a delay of `delay` days before a person can share the secret and a forget period of `forget` days after which a person forgets the secret. It uses dynamic programming to calculate the number of people aware on each day.
 
-#### Step 2: Iterate Over Each Day
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int peopleAwareOfSecret(int n, int delay, int forget) {
+	```
+	Declares the function `peopleAwareOfSecret` that takes three parameters: `n` (the total number of days), `delay` (the number of days before a person can share the secret), and `forget` (the number of days after which a person forgets the secret). It returns the total number of people aware of the secret modulo `1e9 + 7`.
 
-```cpp
-for(int i = 2; i <= n; i++)
-    dp[i] = share = (share + dp[max(i - delay, 0)] - dp[max(i - forget, 0)] + mod) % mod;
-```
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, share = 0;
+	```
+	Initializes two variables: `res` to store the result (number of people aware of the secret) and `share` to track the number of people who can share the secret on any given day.
 
-- We iterate from day 2 to day `n`, calculating how many people are aware of the secret on each day.
-- For each day `i`:
-  - We calculate the number of people who start sharing the secret by considering the day `max(i - delay, 0)`. This is the day people who were initially aware start sharing the secret.
-  - We calculate how many people forget the secret on day `i` by considering the day `max(i - forget, 0)`. These are the people who stop sharing the secret after `forget` days.
-  - We update the `dp[i]` array with the total number of people aware on day `i`, using the variable `share` to keep track of the ongoing cumulative count.
+3. **Dynamic Programming Setup**
+	```cpp
+	    vector<long> dp(n + 2, 0);
+	```
+	Initializes a dynamic programming (DP) vector `dp` of size `n + 2` to store the number of people who are aware of the secret on each day. The extra space is for handling boundary conditions safely.
 
-#### Step 3: Calculate the Final Result
+4. **Base Case**
+	```cpp
+	    dp[1] = 1;
+	```
+	Sets the base case: on day 1, one person knows the secret.
 
-```cpp
-for(int i = n + 1 - forget; i <= n; i++)
-    res = (res + dp[i]) % mod;
-```
+5. **Modular Arithmetic**
+	```cpp
+	    int mod = 1e9 + 7;
+	```
+	Defines a constant `mod` with the value `1e9 + 7` for performing modular arithmetic to prevent overflow and ensure the result fits within standard integer limits.
 
-- After calculating the number of people aware of the secret each day, we need to sum up the number of people still aware of the secret in the last `forget` days.
-- This is done by summing `dp[i]` for `i` from `n + 1 - forget` to `n` to account for all people who are still sharing the secret at the end of the `n` days.
-- We use modulo \(10^9 + 7\) to ensure the result doesn't overflow.
+6. **Dynamic Programming Loop**
+	```cpp
+	    for(int i = 2; i <= n; i++)
+	```
+	Iterates through each day from 2 to `n` to calculate the number of people who are aware of the secret on that day.
 
-#### Step 4: Return the Result
+7. **State Transition**
+	```cpp
+	        dp[i] = share = (share + dp[max(i - delay, 0)] - dp[max(i - forget, 0)] + mod) % mod;
+	```
+	Updates the value of `dp[i]`, which represents the number of people who become aware of the secret on day `i`. It adds the number of people who can share the secret (after the `delay` period) and subtracts those who forget it (after the `forget` period). The result is taken modulo `mod`.
 
-```cpp
-return res;
-```
+8. **Final Summation**
+	```cpp
+	    for(int i = n + 1 - forget; i <= n; i++)
+	```
+	Iterates through the last `forget` days to sum the number of people who are still aware of the secret.
 
-- Finally, the result `res` is returned, which represents the number of people who are aware of the secret after `n` days.
+9. **Result Update**
+	```cpp
+	        res = (res + dp[i]) % mod;
+	```
+	Adds the number of people aware of the secret on day `i` to `res`, taking care to apply modular arithmetic to avoid overflow.
 
-### Complexity
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total number of people who are aware of the secret, modulo `1e9 + 7`.
 
-#### Time Complexity:
-- **Initialization:** The initialization of the `dp` array and the setting of the first element takes constant time `O(1)`.
-- **Main Loop:** The main loop runs for `n` iterations (from day 2 to day `n`). In each iteration, we perform constant-time operations such as accessing the `dp` array and updating the `share` value. Therefore, the time complexity for this loop is `O(n)`.
-- **Final Sum Calculation:** The second loop calculates the sum of people still aware of the secret on the last `forget` days. This loop runs at most `forget` iterations, which is bounded by `n`, so it is also `O(n)` in the worst case.
-  
-Thus, the overall time complexity is **O(n)**.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
-- The `dp` array requires space to store the values for `n + 2` days, which is **O(n)** in terms of space complexity.
-  
-Thus, the space complexity is **O(n)**.
+The time complexity is linear in terms of n, as we iterate through each day once.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution efficiently computes the number of people who are aware of a secret after `n` days, taking into account the delay and forget intervals. By using dynamic programming, we track the number of people who are sharing the secret on each day and adjust for people forgetting the secret. The approach runs in linear time, making it suitable for large values of `n`, and the result is calculated modulo \(10^9 + 7\) to prevent overflow. The solution is space-efficient, with a space complexity of **O(n)**.
+The space complexity is also linear, as we need an array to track people each day.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-people-aware-of-a-secret/description/)
 

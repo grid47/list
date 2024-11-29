@@ -14,102 +14,146 @@ img_src = ""
 youtube = "jb1IbKe3bPE"
 youtube_upload_date="2023-12-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/jb1IbKe3bPE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays, nums1 and nums2, with sizes n and m respectively. Your task is to find the number of indices i such that nums1[i] exists in nums2 and the number of indices i such that nums2[i] exists in nums1. Return both values as an array [answer1, answer2].
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two integer arrays nums1 and nums2.
+- **Example:** `nums1 = [2, 3, 2], nums2 = [1, 2]`
+- **Constraints:**
+	- 1 <= n, m <= 100
+	- 1 <= nums1[i], nums2[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) {
-        set<int> n1, n2;
-        for(int x: nums1) n1.insert(x);
-        for(int x: nums2) n2.insert(x);
-        int cnt1 = 0;
-        for(int x: nums1) if(n2.count(x)) cnt1++;
-        int cnt2 = 0;
-        for(int x: nums2) if(n1.count(x)) cnt2++;        
-        return vector<int>{cnt1, cnt2};
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of two integers: [answer1, answer2]. answer1 is the number of elements from nums1 that are present in nums2, and answer2 is the number of elements from nums2 that are present in nums1.
+- **Example:** `[2, 1]`
+- **Constraints:**
 
-### Problem Statement:
-The problem asks to find how many numbers from two arrays, `nums1` and `nums2`, are common between the two arrays. Specifically, we need to calculate two values:
-1. The number of elements in `nums1` that also exist in `nums2`.
-2. The number of elements in `nums2` that also exist in `nums1`.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the count of matching elements between the two arrays in both directions.
 
-### Approach:
-This problem can be solved using set-based operations for fast lookups and comparisons. The idea is to leverage the properties of sets to count how many numbers from one array appear in the other array. By using sets, we can ensure efficient membership checks and avoid duplicate elements.
+- Convert nums1 and nums2 into sets for efficient lookup.
+- Iterate through nums1 and count how many of its elements exist in nums2.
+- Similarly, iterate through nums2 and count how many of its elements exist in nums1.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both input arrays will have at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums1 = [2, 3, 2], nums2 = [1, 2]`  \
+  **Explanation:** The elements in nums1 that exist in nums2 are 2 and 2, so answer1 is 2. The element 2 in nums2 exists in nums1, so answer2 is 1.
 
-Here’s a breakdown of the approach:
+{{< dots >}}
+## Approach 🚀
+The approach is to count the number of matching elements between nums1 and nums2 by using set lookups for efficient matching.
 
-1. **Convert Both Arrays to Sets**: By converting both arrays into sets (`n1` and `n2`), we can ensure that there are no duplicate elements in each array. This is crucial because we want to count distinct numbers that appear in both arrays.
-   
-2. **Count Common Elements from `nums1` in `nums2`**: Loop through each element of `nums1` and check if it exists in `n2` (the set created from `nums2`). If it does, we increment the count `cnt1`.
-
-3. **Count Common Elements from `nums2` in `nums1`**: Similarly, loop through each element of `nums2` and check if it exists in `n1` (the set created from `nums1`). If it does, we increment the count `cnt2`.
-
-4. **Return the Results**: After counting the common elements in both directions, we return the two counts as a vector.
-
-This approach ensures we don’t count duplicate elements, and by using sets, membership checks are efficient (average time complexity of O(1) for `count()` operations).
-
-### Code Breakdown:
-
-#### 1. **Initialize Sets**:
-The first step is to create two sets, `n1` and `n2`, which will hold the unique elements of `nums1` and `nums2`, respectively. By using a set, we automatically ensure that each element appears only once, thus avoiding any duplicates in the final count.
-
+### Initial Thoughts 💭
+- Using sets will allow for O(1) average-time lookups.
+- We can use two sets to check how many elements from nums1 exist in nums2 and vice versa.
+{{< dots >}}
+### Edge Cases 🌐
+- If one or both arrays are empty, the result will be [0, 0].
+- Ensure the solution runs efficiently when n and m are at their maximum size of 100.
+- Arrays with no common elements should return [0, 0].
+- n and m are guaranteed to be between 1 and 100.
+{{< dots >}}
+## Code 💻
 ```cpp
-set<int> n1, n2;
-for (int x : nums1) n1.insert(x);
-for (int x : nums2) n2.insert(x);
+vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) {
+    set<int> n1, n2;
+    for(int x: nums1) n1.insert(x);
+    for(int x: nums2) n2.insert(x);
+    int cnt1 = 0;
+    for(int x: nums1) if(n2.count(x)) cnt1++;
+    int cnt2 = 0;
+    for(int x: nums2) if(n1.count(x)) cnt2++;        
+    return vector<int>{cnt1, cnt2};
+}
 ```
-- We use a for-loop to iterate through each element in `nums1` and `nums2` and insert them into their respective sets.
 
-#### 2. **Count Elements from `nums1` in `nums2`**:
-Next, we iterate over `nums1` and for each element, we check if it is present in `n2` using the `count()` method of the set. If it is, we increment the counter `cnt1`.
+This function calculates the number of common elements between two arrays, 'nums1' and 'nums2', and returns a vector with the counts of common elements for each array.
 
-```cpp
-int cnt1 = 0;
-for (int x : nums1) if (n2.count(x)) cnt1++;
-```
-- For each element `x` in `nums1`, `n2.count(x)` checks if `x` exists in `n2`. If the element is found, we increment `cnt1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findIntersectionValues(vector<int>& nums1, vector<int>& nums2) {
+	```
+	Defines the function 'findIntersectionValues', which takes two vectors of integers, 'nums1' and 'nums2', and returns a vector of integers with the counts of common elements from each array.
 
-#### 3. **Count Elements from `nums2` in `nums1`**:
-Similarly, we now check for elements in `nums2` that are present in `n1`.
+2. **Declare Sets**
+	```cpp
+	    set<int> n1, n2;
+	```
+	Declares two sets, 'n1' and 'n2', to store the unique elements from 'nums1' and 'nums2', respectively. Sets automatically handle duplicates.
 
-```cpp
-int cnt2 = 0;
-for (int x : nums2) if (n1.count(x)) cnt2++;
-```
-- For each element `x` in `nums2`, `n1.count(x)` checks if `x` exists in `n1`. If the element is found, we increment `cnt2`.
+3. **Populate Set n1**
+	```cpp
+	    for(int x: nums1) n1.insert(x);
+	```
+	Iterates over 'nums1' and inserts each element into the set 'n1'. This ensures all elements in 'nums1' are unique.
 
-#### 4. **Return the Results**:
-Finally, we return the two counts as a vector.
+4. **Populate Set n2**
+	```cpp
+	    for(int x: nums2) n2.insert(x);
+	```
+	Iterates over 'nums2' and inserts each element into the set 'n2'. This ensures all elements in 'nums2' are unique.
 
-```cpp
-return vector<int>{cnt1, cnt2};
-```
-- We return a vector containing the counts `cnt1` and `cnt2`, which represent the number of common elements in `nums1` that are in `nums2`, and the number of common elements in `nums2` that are in `nums1`.
+5. **Initialize Count Variables**
+	```cpp
+	    int cnt1 = 0;
+	```
+	Initializes 'cnt1' to zero. This variable will keep track of the number of common elements between 'nums1' and 'nums2'.
 
-### Complexity:
+6. **Count Common Elements from nums1**
+	```cpp
+	    for(int x: nums1) if(n2.count(x)) cnt1++;
+	```
+	Iterates over 'nums1' and checks if each element exists in 'n2'. If it does, it increments 'cnt1', counting how many elements in 'nums1' are also in 'nums2'.
 
-#### Time Complexity:
-- **Insertion into sets (`n1.insert(x)` and `n2.insert(x)`)**: The time complexity for inserting an element into a set is O(log n), where `n` is the number of elements in the set. Since we are iterating over `nums1` and `nums2` and inserting each element into the respective sets, the total time complexity for this step is O(n1 log n1 + n2 log n2), where `n1` and `n2` are the sizes of `nums1` and `nums2`, respectively.
-  
-- **Counting common elements**: For each element in `nums1`, we check if it is present in `n2` (which takes O(log n2) time for each lookup), and similarly for each element in `nums2` with `n1`. Therefore, the time complexity for counting is O(n1 log n2 + n2 log n1).
+7. **Initialize Second Count Variable**
+	```cpp
+	    int cnt2 = 0;
+	```
+	Initializes 'cnt2' to zero. This variable will keep track of the number of common elements between 'nums2' and 'nums1'.
 
-Thus, the total time complexity is O(n1 log n1 + n2 log n2 + n1 log n2 + n2 log n1), which simplifies to O(n1 log n1 + n2 log n2) due to the logarithmic lookups in the sets.
+8. **Count Common Elements from nums2**
+	```cpp
+	    for(int x: nums2) if(n1.count(x)) cnt2++;
+	```
+	Iterates over 'nums2' and checks if each element exists in 'n1'. If it does, it increments 'cnt2', counting how many elements in 'nums2' are also in 'nums1'.
 
-#### Space Complexity:
-- The space complexity is dominated by the space used to store the sets `n1` and `n2`. Each set stores at most `n1` and `n2` elements, so the space complexity is O(n1 + n2).
+9. **Return Result**
+	```cpp
+	    return vector<int>{cnt1, cnt2};
+	```
+	Returns a vector containing the counts of common elements: 'cnt1' (common elements from 'nums1') and 'cnt2' (common elements from 'nums2').
 
-### Conclusion:
-This solution efficiently finds the number of common elements between two arrays by leveraging the properties of sets. The use of sets ensures that each element is counted only once, and the time complexity is dominated by the sorting operations in the set insertions and lookups. This approach guarantees correctness while maintaining a reasonable time and space complexity.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+Converting arrays into sets takes O(n) and O(m) time, and each lookup is O(1).
+
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The space complexity is O(n + m) due to the storage of the sets.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-common-elements-between-two-arrays/description/)
 

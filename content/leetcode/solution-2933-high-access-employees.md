@@ -14,179 +14,281 @@ img_src = ""
 youtube = "r4DlEjNCYE0"
 youtube_upload_date="2023-11-14"
 youtube_thumbnail="https://i.ytimg.com/vi/r4DlEjNCYE0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D array, access_times, where each entry contains an employee's name and their system access time in 24-hour format (HHMM). An employee is considered 'high-access' if they accessed the system at least three times within any one-hour window. The task is to identify all such high-access employees and return their names.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of lists, where each sublist contains a string representing an employee's name and another string representing their access time.
+- **Example:** `[['a', '0549'], ['b', '0457'], ['a', '0532'], ['a', '0621'], ['b', '0540']]`
+- **Constraints:**
+	- 1 <= access_times.length <= 100
+	- access_times[i].length == 2
+	- 1 <= access_times[i][0].length <= 10
+	- access_times[i][0] consists only of English lowercase letters
+	- access_times[i][1].length == 4
+	- access_times[i][1] is in 'HHMM' 24-hour format
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of employee names who are considered high-access. The order of the names does not matter.
+- **Example:** `['a']`
+- **Constraints:**
+	- The list should contain names of high-access employees only.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify employees who accessed the system at least three times within any one-hour window.
+
+- Convert the access times into minutes.
+- Sort the times for each employee.
+- Use a sweep-line approach to check if three or more accesses occur within any 60-minute period.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each access time entry is guaranteed to be a valid four-digit time string in 24-hour format.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[['a', '0549'], ['b', '0457'], ['a', '0532'], ['a', '0621'], ['b', '0540']]`  \
+  **Explanation:** 'a' has three access times (05:32, 05:49, and 06:21) within the one-hour period from 05:32 to 06:31, making them a high-access employee. 'b' does not have three access times in any one-hour period, so they are not included in the result.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves sorting the access times for each employee, converting the times to minutes, and applying a sweep-line algorithm to identify high-access employees.
+
+### Initial Thoughts 💭
+- We need to convert time into minutes for easier manipulation.
+- A sweep-line approach is ideal for checking overlapping time periods.
+- Sorting the access times is important for efficiently checking access within a one-hour window.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input should return an empty list.
+- The algorithm should perform well with the maximum allowed input size of 100 records.
+- If there are exactly three accesses in a one-hour period, the employee should be considered high-access.
+- The solution should work within the given time and space complexity constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int string_to_int(string s){
+    int val=0;
+    for(int i=0;i<s.length();i++) val = val*10 + (s[i]-'0');
     
-    int string_to_int(string s){
-        int val=0;
-        for(int i=0;i<s.length();i++) val = val*10 + (s[i]-'0');
-        
-        return val;
-    }
-    
-    vector<string> findHighAccessEmployees(vector<vector<string>>& access_times) {
+    return val;
+}
+
+vector<string> findHighAccessEmployees(vector<vector<string>>& access_times) {
 		map<string, vector<int>> times;
-        for(vector<string> v : access_times){
-            string s=v[1];
-            
-            int minutes = string_to_int(s.substr(0,2))*60 + string_to_int(s.substr(2));
-            times[v[0]].push_back(minutes);
-        }
+    for(vector<string> v : access_times){
+        string s=v[1];
         
-        vector<string> ans;
-        for(auto it=times.begin();it!=times.end();it++){
-            string ch = it->first;
-            vector<int> time = it->second;
-            
-            vector<int> sweep(1441,0);
-            for(int t : time){
-				// contribution of each access for next 59 minutes
-                sweep[t]++;
-                if(t+60 < 1441) sweep[t+60]--;
-            }
-            
-			// check for at least 3 overlapping access times
-            int c=0;
-            for(int i=0;i<1441;i++){
-                c += sweep[i];
-                
-                if(c>=3){
-                    ans.push_back(ch);
-                    break;
-                }
-            }
-        }
-        
-        return ans;
+        int minutes = string_to_int(s.substr(0,2))*60 + string_to_int(s.substr(2));
+        times[v[0]].push_back(minutes);
     }
-};
-{{< /highlight >}}
----
+    
+    vector<string> ans;
+    for(auto it=times.begin();it!=times.end();it++){
+        string ch = it->first;
+        vector<int> time = it->second;
+        
+        vector<int> sweep(1441,0);
+        for(int t : time){
+				// contribution of each access for next 59 minutes
+            sweep[t]++;
+            if(t+60 < 1441) sweep[t+60]--;
+        }
+        
+			// check for at least 3 overlapping access times
+        int c=0;
+        for(int i=0;i<1441;i++){
+            c += sweep[i];
+            
+            if(c>=3){
+                ans.push_back(ch);
+                break;
+            }
+        }
+    }
+    
+    return ans;
+}
+```
 
-### Problem Statement:
-The problem asks us to identify employees who have had high access activity. Specifically, we are given a list of access times for various employees, where each entry contains an employee ID and a time they accessed a system. We need to find employees who have had at least three overlapping access times during any 60-minute window.
+This function takes a list of employee access times and returns the names of employees who have at least 3 overlapping access times within any given hour.
 
-For example, if an employee accessed the system at 09:15, 09:45, and 10:05, these access times overlap within the 60-minute window from 09:00 to 10:00. We are tasked with identifying such employees who have at least three overlapping access times in any 60-minute span.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Helper Function**
+	```cpp
+	int string_to_int(string s){
+	```
+	Defines a helper function to convert a string representation of a number to an integer.
 
-### Approach:
-To solve this problem efficiently, we can follow these steps:
+2. **Variable Initialization**
+	```cpp
+	    int val=0;
+	```
+	Initializes a variable 'val' to 0, which will store the resulting integer value.
 
-1. **Convert Time to Minutes**: Since the access times are provided in the format `HHMM`, we need to convert these times into minutes since midnight. This simplifies the comparison process since we can work with integers representing the number of minutes passed since the start of the day.
+3. **String Parsing**
+	```cpp
+	    for(int i=0;i<s.length();i++) val = val*10 + (s[i]-'0');
+	```
+	Iterates through the string and converts each character to its integer equivalent, updating 'val' by multiplying the current value by 10 and adding the digit.
 
-2. **Track Overlapping Access Times**: For each employee, we need to track how many times they accessed the system at each specific minute. We can use a sweep line technique, where we increment and decrement a count at specific minutes to track the number of simultaneous accesses.
+4. **Return Statement**
+	```cpp
+	    return val;
+	```
+	Returns the final integer value after processing all characters of the string.
 
-3. **Sweep Line Technique**: For each access time, we increment the count for the starting minute and decrement it 60 minutes later. This allows us to efficiently track the number of accesses at any given time, without needing to check each pair of accesses individually.
+5. **Main Function Definition**
+	```cpp
+	vector<string> findHighAccessEmployees(vector<vector<string>>& access_times) {
+	```
+	Defines the function that will identify employees with high access times.
 
-4. **Count Overlaps**: After updating the sweep line for all access times of each employee, we check if there is any 60-minute window where the total number of accesses is greater than or equal to 3. If such a window exists, the employee is considered to have high access activity.
+6. **Data Structure Setup**
+	```cpp
+			map<string, vector<int>> times;
+	```
+	Declares a map 'times' where each employee's name (string) maps to a vector of access times (integers).
 
-5. **Return Employees with High Access Activity**: Finally, we return a list of employee IDs who have at least three overlapping access times in any 60-minute window.
+7. **Iterate Through Access Times**
+	```cpp
+	    for(vector<string> v : access_times){
+	```
+	Iterates over the list of employee access times.
 
-### Code Breakdown (Step by Step):
+8. **Extract Time**
+	```cpp
+	        string s=v[1];
+	```
+	Extracts the access time as a string from the second element of the current vector.
 
-1. **`string_to_int` Function**:
-   This helper function converts a string representing time (in the format "HHMM") into an integer representing the total number of minutes since midnight. The function takes a string `s` and processes it by splitting the hours and minutes, converting them to integers, and calculating the total minutes.
+9. **Time Conversion**
+	```cpp
+	        int minutes = string_to_int(s.substr(0,2))*60 + string_to_int(s.substr(2));
+	```
+	Converts the access time from a string (HHMM format) to an integer representing minutes since midnight.
 
-   ```cpp
-   int string_to_int(string s) {
-       int val = 0;
-       for (int i = 0; i < s.length(); i++) 
-           val = val * 10 + (s[i] - '0');
-       return val;
-   }
-   ```
+10. **Store Access Time**
+	```cpp
+	        times[v[0]].push_back(minutes);
+	```
+	Stores the calculated minutes for the current employee in the 'times' map under their name.
 
-   For example, for an input `"0930"`, the function calculates `9 * 60 + 30 = 570` minutes.
+11. **Result Setup**
+	```cpp
+	    vector<string> ans;
+	```
+	Declares a vector 'ans' to store the names of employees who meet the criteria.
 
-2. **Main Function `findHighAccessEmployees`**:
-   The function `findHighAccessEmployees` takes as input a 2D vector `access_times`, where each entry contains an employee ID and an access time.
+12. **Iterate Through Employees**
+	```cpp
+	    for(auto it=times.begin();it!=times.end();it++){
+	```
+	Iterates through the 'times' map to process each employee and their corresponding access times.
 
-   ```cpp
-   vector<string> findHighAccessEmployees(vector<vector<string>>& access_times) {
-       map<string, vector<int>> times;
-   ```
+13. **Extract Employee Info**
+	```cpp
+	        string ch = it->first;
+	```
+	Extracts the employee's name from the map entry.
 
-   Here, `times` is a map that associates each employee (represented by a string) with a list of access times (in minutes) that are stored in the vector.
+14. **Access Time Vector**
+	```cpp
+	        vector<int> time = it->second;
+	```
+	Extracts the vector of access times for the current employee.
 
-3. **Convert Access Times to Minutes**:
-   For each entry in `access_times`, we extract the employee ID and convert the access time from "HHMM" format to total minutes using the `string_to_int` function. This is done in the loop:
+15. **Setup Sweep Array**
+	```cpp
+	        vector<int> sweep(1441,0);
+	```
+	Initializes an array 'sweep' of size 1441 to track the number of access times at each minute during the day (minutes 0 to 1440).
 
-   ```cpp
-   for (vector<string> v : access_times) {
-       string s = v[1];  // access time string
-       int minutes = string_to_int(s.substr(0, 2)) * 60 + string_to_int(s.substr(2));
-       times[v[0]].push_back(minutes);
-   }
-   ```
+16. **Iterate Through Access Times**
+	```cpp
+	        for(int t : time){
+	```
+	Iterates over each access time for the current employee.
 
-4. **Sweep Line Approach**:
-   For each employee, we initialize a sweep array `sweep` of size 1441 (since there are 1440 minutes in a day, and the index 1440 represents the minute after 23:59). We then update the `sweep` array to track the start and end of each access event:
+17. **Mark Access Time**
+	```cpp
+	            sweep[t]++;
+	```
+	Increments the corresponding minute in the 'sweep' array to indicate that the employee accessed the system at this time.
 
-   ```cpp
-   vector<int> sweep(1441, 0);
-   for (int t : time) {
-       sweep[t]++;
-       if (t + 60 < 1441) 
-           sweep[t + 60]--;
-   }
-   ```
+18. **Handle Access Expiry**
+	```cpp
+	            if(t+60 < 1441) sweep[t+60]--;
+	```
+	Decrements the minute that marks the expiration of the access time (one hour later).
 
-   Here, we increment `sweep[t]` for the start of the access and decrement `sweep[t + 60]` to mark the end of the access after 60 minutes.
+19. **Check for Overlapping Access Times**
+	```cpp
+	        int c=0;
+	```
+	Initializes a counter 'c' to track the number of overlapping access times at each minute.
 
-5. **Check for Overlapping Access Times**:
-   After updating the sweep array for all access times, we iterate through the array and check for any 60-minute period with at least three accesses. If such a period exists, we add the employee ID to the result:
+20. **Sweep Through Time**
+	```cpp
+	        for(int i=0;i<1441;i++){
+	```
+	Sweeps through the entire 24-hour period (1441 minutes) to check for overlapping access times.
 
-   ```cpp
-   int c = 0;
-   for (int i = 0; i < 1441; i++) {
-       c += sweep[i];
-       if (c >= 3) {
-           ans.push_back(ch);
-           break;
-       }
-   }
-   ```
+21. **Count Overlapping Accesses**
+	```cpp
+	            c += sweep[i];
+	```
+	Adds the number of accesses at the current minute to the counter 'c'.
 
-6. **Return the Result**:
-   After processing all employees, we return the list of employee IDs who had high access activity:
+22. **Check Overlap Condition**
+	```cpp
+	            if(c>=3){
+	```
+	Checks if the number of overlapping access times at the current minute is greater than or equal to 3.
 
-   ```cpp
-   return ans;
-   }
-   ```
+23. **Record Employee**
+	```cpp
+	                ans.push_back(ch);
+	```
+	If the overlap condition is met, adds the employee's name to the 'ans' vector.
 
-### Complexity:
+24. **End Overlap Check**
+	```cpp
+	                break;
+	```
+	Breaks out of the loop once the employee has been recorded.
 
-1. **Time Complexity**:
-   The time complexity of this solution is primarily determined by the processing of the `access_times` array and the sweep line technique:
-   - Converting the access times for each employee to minutes takes \(O(m)\), where \(m\) is the total number of access times across all employees.
-   - The sweep line approach for each employee involves iterating through their list of access times, updating the `sweep` array, and checking for overlapping access times, which also takes \(O(n)\) for each employee (where \(n\) is the number of employees).
-   
-   Therefore, the overall time complexity is \(O(m + n \times 1441)\), where:
-   - \(m\) is the number of total access times across all employees.
-   - \(n\) is the number of employees.
+25. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the list of employee names who have at least 3 overlapping access times.
 
-2. **Space Complexity**:
-   The space complexity of this solution is \(O(n + 1441)\), where:
-   - \(n\) is the number of employees (as each employee has a list of access times).
-   - 1441 represents the size of the `sweep` array (for tracking access counts across all minutes in a day).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) where n is the number of access times (due to sorting).
+- **Average Case:** O(n log n) due to the sorting step.
+- **Worst Case:** O(n log n) where n is the number of access times, because the sorting dominates the complexity.
 
-   Thus, the space complexity is linear with respect to the number of employees and the fixed size of the sweep array.
+The time complexity is driven by the sorting step for each employee's access times.
 
-### Conclusion:
-This approach provides an efficient solution to the problem by utilizing a sweep line technique to track overlapping access times. The solution is optimized by converting access times into minutes and efficiently counting overlapping access events in constant time using the sweep array.
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the list of access times and results.
+- **Worst Case:** O(n) where n is the number of access times (due to storing the times for each employee).
 
-- **Time Complexity**: \(O(m + n \times 1441)\), where \(m\) is the total number of access times and \(n\) is the number of employees.
-- **Space Complexity**: \(O(n + 1441)\), where \(n\) is the number of employees and 1441 is the size of the sweep array.
+The space complexity is primarily determined by the storage of employee access times and the result list.
 
-This method works well even for large datasets, where brute force solutions would be inefficient. The solution guarantees correctness by efficiently checking for overlapping access times without explicitly comparing each pair of access times. It’s a scalable solution suitable for real-world applications where access logs need to be analyzed for suspicious or high-activity behavior.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/high-access-employees/description/)
 

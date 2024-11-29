@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "XbPJhrkROfI"
 youtube_upload_date="2020-03-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/XbPJhrkROfI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,126 +28,189 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/XbPJhrkROfI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two non-negative integers represented as strings, return the sum of these numbers as a string. The solution should avoid converting the strings to integers directly or using any built-in libraries for large integers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings num1 and num2, each representing a non-negative integer.
+- **Example:** `For num1 = '5' and num2 = '789', the output is '794'.`
+- **Constraints:**
+	- 1 <= num1.length, num2.length <= 10^4
+	- num1 and num2 consist of only digits.
+	- num1 and num2 don't have leading zeros except for '0'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of the two numbers as a string.
+- **Example:** `For num1 = '1234' and num2 = '876', the output is '2110'.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To add two large numbers represented as strings and return their sum as a string.
+
+- 1. Initialize a carry variable to 0 and an empty string to store the result.
+- 2. Start from the rightmost digits of both strings and sum corresponding digits, including the carry from the previous sum.
+- 3. If there are remaining digits in either string, continue summing them.
+- 4. If there is any carry left after processing both strings, add it to the result.
+- 5. Return the final result, ensuring that the digits are in the correct order.
+{{< dots >}}
+### Problem Assumptions ✅
+- The inputs are valid strings representing non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For num1 = '0' and num2 = '0', the output is '0'.`  \
+  **Explanation:** The sum of two zeros is zero, which is handled correctly by the algorithm.
+
+{{< dots >}}
+## Approach 🚀
+Iterate through the strings from right to left, adding corresponding digits and managing carry to compute the sum of the two numbers.
+
+### Initial Thoughts 💭
+- We need to process the digits of both numbers one by one starting from the least significant digit.
+- The strings may have different lengths, so we need to handle cases where one number has more digits than the other.
+- Use two pointers to traverse both strings, and maintain a carry to handle overflow during addition.
+{{< dots >}}
+### Edge Cases 🌐
+- If num1 or num2 is a very large number (e.g., 10^4 digits), the solution should still run efficiently.
+- If either num1 or num2 is '0', the result should be the other number.
+- Handle cases where the input strings have different lengths.
+{{< dots >}}
+## Code 💻
+```cpp
    string addStrings(string num1, string num2) {
-        int carry=0,i=num1.length()-1,j=num2.length()-1;
-        string ans="";
-        while(i>=0||j>=0||carry>0){
-            if(i>=0){
-                carry=carry+num1[i]-'0';
-                i--;
-            }
-            if(j>=0){
-                carry=carry+num2[j]-'0';
-                j--;
-            }
-            
-             ans += char(carry % 10 + '0');
-            carry =carry/ 10;
+    int carry=0,i=num1.length()-1,j=num2.length()-1;
+    string ans="";
+    while(i>=0||j>=0||carry>0){
+        if(i>=0){
+            carry=carry+num1[i]-'0';
+            i--;
         }
-        reverse(ans.begin(),ans.end());
-        return ans;
-
+        if(j>=0){
+            carry=carry+num2[j]-'0';
+            j--;
+        }
+        
+         ans += char(carry % 10 + '0');
+        carry =carry/ 10;
     }
-};
-{{< /highlight >}}
----
+    reverse(ans.begin(),ans.end());
+    return ans;
 
-### Problem Statement
-
-The problem at hand involves adding two non-negative integers, represented as strings, and returning the sum as a string. Since the numbers are provided as strings, there is no direct support for large integer arithmetic, especially if the sum exceeds the bounds of typical integer data types. Therefore, we need to perform the addition manually by simulating the standard column addition approach.
-
-### Approach
-
-The solution involves performing the addition of two numbers digit by digit from the least significant to the most significant digit. This is similar to how we perform addition by hand, starting from the rightmost digits, handling carry-over, and moving towards the leftmost digits. The approach is broken down into the following steps:
-
-1. **Reverse Traversal**: Start from the least significant digit (rightmost) and move left. This allows us to handle carry-over easily, just like how we add digits from the right side in traditional addition.
-
-2. **Carry Handling**: While adding, if the sum of two digits exceeds 9, we need to carry over the extra value to the next column. For instance, if the sum of two digits is 15, we store 5 in the current position and carry over 1 to the next digit.
-
-3. **End Condition**: If one number is shorter than the other, we continue processing the remaining digits of the longer number, along with any carry from previous additions.
-
-4. **Final Result**: Once the addition is complete, we reverse the result to get the sum in the correct order since we've been building the sum from right to left.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int carry = 0, i = num1.length() - 1, j = num2.length() - 1;
-string ans = "";
-```
-
-- We initialize a `carry` variable to store the carry-over from each addition.
-- `i` and `j` are set to the last indices of `num1` and `num2` respectively, since we want to start adding from the rightmost digits (least significant digits).
-- `ans` is an empty string that will hold the result of the addition.
-
-#### Step 2: Loop Through the Digits
-
-```cpp
-while (i >= 0 || j >= 0 || carry > 0) {
-```
-
-- The `while` loop continues as long as there are more digits to add from either `num1`, `num2`, or there is still a carry left. The loop ensures that we process every digit, even if one of the numbers has fewer digits than the other.
-  
-#### Step 3: Add Digits from `num1`
-
-```cpp
-if (i >= 0) {
-    carry = carry + num1[i] - '0';  // Convert char to int and add to carry
-    i--;
 }
 ```
 
-- If there are remaining digits in `num1` (i.e., `i >= 0`), we convert the character `num1[i]` to an integer by subtracting `'0'` (since ASCII values of digits are contiguous, and `'0'` corresponds to 48 in ASCII). We then add this value to `carry`, which holds the accumulated sum and carry-over from previous digits.
+This function adds two non-negative integers represented as strings and returns their sum as a string. The function performs the addition digit by digit, handling the carry and ensuring the result is returned in the correct order.
 
-#### Step 4: Add Digits from `num2`
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	   string addStrings(string num1, string num2) {
+	```
+	Define the function `addStrings` which takes two strings, `num1` and `num2`, representing two non-negative integers, and returns their sum as a string.
 
-```cpp
-if (j >= 0) {
-    carry = carry + num2[j] - '0';  // Convert char to int and add to carry
-    j--;
-}
-```
+2. **Variable Initialization**
+	```cpp
+	    int carry=0,i=num1.length()-1,j=num2.length()-1;
+	```
+	Initialize the `carry` variable to 0, and set `i` and `j` to the last indices of `num1` and `num2`, respectively, to start adding from the rightmost digits.
 
-- Similarly, if there are remaining digits in `num2` (i.e., `j >= 0`), we perform the same conversion and addition to `carry`.
+3. **String Initialization**
+	```cpp
+	    string ans="";
+	```
+	Initialize an empty string `ans` to store the result of the addition as the digits are processed.
 
-#### Step 5: Handle the Result for This Digit
+4. **Loop Iteration**
+	```cpp
+	    while(i>=0||j>=0||carry>0){
+	```
+	Start a `while` loop that continues as long as there are more digits to process or there is a carry left to add.
 
-```cpp
-ans += char(carry % 10 + '0');  // Store the current digit in the result
-carry = carry / 10;  // Update the carry for the next iteration
-```
+5. **Conditional Check**
+	```cpp
+	        if(i>=0){
+	```
+	If there are still digits in `num1` (i.e., `i` is non-negative), process the current digit.
 
-- After adding the digits and the carry, we compute the digit to store in the result. Since we are adding digits, the result might exceed 9, so we use `carry % 10` to get the last digit of the current sum.
-- We then convert this digit back into a character and append it to `ans`.
-- The carry for the next digit is updated by dividing `carry` by 10 (essentially, removing the last digit).
+6. **Digit Processing**
+	```cpp
+	            carry=carry+num1[i]-'0';
+	```
+	Add the current digit of `num1` (converted to an integer) to the `carry`.
 
-#### Step 6: Reverse the Result
+7. **Index Decrement**
+	```cpp
+	            i--;
+	```
+	Decrement the index `i` to move to the next left digit in `num1`.
 
-```cpp
-reverse(ans.begin(), ans.end());  // Reverse the result to correct the order
-return ans;
-```
+8. **Conditional Check**
+	```cpp
+	        }
+	```
+	End the `if` block for processing digits in `num1`.
 
-- After exiting the loop, the `ans` string contains the sum, but in reverse order. We use the `reverse` function to reverse the string and return the final result.
+9. **Conditional Check**
+	```cpp
+	        if(j>=0){
+	```
+	If there are still digits in `num2` (i.e., `j` is non-negative), process the current digit.
 
-### Complexity
+10. **Digit Processing**
+	```cpp
+	            carry=carry+num2[j]-'0';
+	```
+	Add the current digit of `num2` (converted to an integer) to the `carry`.
 
-#### Time Complexity:
-- **Iterating Through the Digits**: We loop through both `num1` and `num2` once, processing each digit. Since the maximum number of iterations is determined by the length of the longer string, the time complexity is `O(max(n, m))`, where `n` and `m` are the lengths of `num1` and `num2`, respectively.
-- **Reversing the Result**: After building the result, we reverse it, which takes `O(n + m)` time. Thus, the overall time complexity is `O(max(n, m))`.
+11. **Index Decrement**
+	```cpp
+	            j--;
+	```
+	Decrement the index `j` to move to the next left digit in `num2`.
 
-#### Space Complexity:
-- **Storing the Result**: We use an additional string `ans` to store the result, which can be at most `max(n, m) + 1` characters long (to account for the carry). Therefore, the space complexity is `O(max(n, m))`.
+12. **Answer Construction**
+	```cpp
+	         ans += char(carry % 10 + '0');
+	```
+	Append the current digit (obtained by taking the remainder of `carry` divided by 10) to the result string `ans`.
 
-### Conclusion
+13. **Carry Update**
+	```cpp
+	        carry =carry/ 10;
+	```
+	Update the `carry` by dividing it by 10 to ensure it contains only the carry-over for the next iteration.
 
-This approach efficiently adds two large numbers represented as strings. The key idea is to simulate the manual addition process, handling the carry and digit-by-digit addition. The solution is optimal with a time complexity of `O(max(n, m))`, which is linear with respect to the length of the input strings. The space complexity is also linear in terms of the size of the input, making this solution both time and space-efficient for large numbers. The solution is easy to understand, follows the standard algorithm for adding numbers, and handles edge cases, such as different-length inputs and carry-over, effectively.
+14. **Reverse Operation**
+	```cpp
+	    reverse(ans.begin(),ans.end());
+	```
+	Reverse the string `ans` to ensure the digits are in the correct order (since they were processed from right to left).
+
+15. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the final result string `ans` containing the sum of `num1` and `num2`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the maximum length of the two input strings, since we iterate through both strings once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), where n is the number of digits in the resulting sum, since we store the result in a string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-strings/description/)
 

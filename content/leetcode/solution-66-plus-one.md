@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "tDjI08W1I7g"
 youtube_upload_date="2022-03-07"
 youtube_thumbnail="https://i.ytimg.com/vi/tDjI08W1I7g/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,97 +28,157 @@ youtube_thumbnail="https://i.ytimg.com/vi/tDjI08W1I7g/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a large integer represented as an array of digits. Each digits[i] represents the ith digit of the integer, arranged from most significant to least significant. The task is to increment the integer by one and return the resulting digits as an array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer array digits where each element is a single digit of a number.
+- **Example:** `Input: digits = [2,4,6]`
+- **Constraints:**
+	- 1 <= digits.length <= 100
+	- 0 <= digits[i] <= 9
+	- digits[0] != 0 (no leading zeros)
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> plusOne(vector<int>& d) {
-        int sum = 1;
-        list<int> lst;
-        for(int i = d.size() - 1; i >= 0; i--) {
-            sum += d[i];
-            lst.push_front(sum % 10);
-            sum = sum /10;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array representing the incremented value of the given integer.
+- **Example:** `Output: [2,4,7]`
+- **Constraints:**
+	- The output array should be of size digits.length or digits.length + 1, depending on whether a carry was generated.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Increment the integer represented by the array by one and return the resulting digits as an array.
+
+- Initialize a variable to handle the carry, starting with a value of 1 (representing the increment).
+- Iterate over the digits array from the least significant digit to the most significant.
+- Add the carry to the current digit. Update the digit to the modulo 10 of the sum, and update the carry as the integer division of the sum by 10.
+- If the carry remains after the iteration, prepend it to the array.
+- Return the resulting array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always represent a valid non-negative integer.
+- The result will fit within the array size constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: digits = [2,4,6]`  \
+  **Explanation:** The array represents the number 246. Adding one gives 246 + 1 = 247, so the output is [2,4,7].
+
+- **Input:** `Input: digits = [5,9,9]`  \
+  **Explanation:** The array represents the number 599. Adding one gives 599 + 1 = 600, so the output is [6,0,0].
+
+{{< dots >}}
+## Approach 🚀
+Use an iterative approach starting from the least significant digit, handling any carry generated at each step. If there's a carry left after iterating through all digits, prepend it to the array.
+
+### Initial Thoughts 💭
+- The task involves managing carries as you increment the number represented by the array.
+- The most significant digit might need to expand the array if a carry remains after processing all digits.
+- Start with the least significant digit and propagate the carry towards the most significant digit.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as digits.length >= 1 is guaranteed.
+- A 100-digit array with the last digit causing a carry that propagates through all digits.
+- A single-digit array [9], which becomes [1,0].
+- An array with all digits being 9, such as [9,9,9], which becomes [1,0,0,0].
+- Ensure the output correctly reflects carry propagation, even for very large arrays.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> plusOne(vector<int>& digits) {
+    int n = digits.size();
+    for (int i = n - 1; i >= 0; i--) {
+        if (digits[i] < 9) {
+            digits[i]++;
+            return digits;
         }
-        if(sum > 0) lst.push_front(sum);
-        vector<int> res(lst.begin(), lst.end());
-        return res;
+        digits[i] = 0;
     }
-};
-{{< /highlight >}}
----
 
-### ➕ **Add One to a Number Represented by Digits**
-
-This problem involves adding one to a non-negative integer represented as a list of digits. For example, if the input list `d` represents the number `129`, the output should be `130`, represented as `[1, 3, 0]`. The task is to handle potential carryover, where adding one may affect multiple digits, especially in cases like `999`, which becomes `1000`.
-
-### 🧠 **Approach**
-
-The solution iterates backward from the least significant digit (last element in the array) to the most significant digit (first element). It adds one to the least significant digit, and if a carry is generated (i.e., a digit becomes `10`), it continues to propagate this carry towards the most significant digit. To keep track of the carry, the algorithm:
-- Uses a variable `sum` initialized to `1`, representing the "plus one" operation.
-- For each digit, it adds the carry to the digit, determines the resulting digit (using modulo `10`), and updates `sum` to be the carry for the next iteration.
-
-This approach efficiently updates each digit in a single pass through the array, handling carries as they occur.
-
-### 🔍 **Code Breakdown (Step by Step)**
-
-#### Step 1: Initialize Carry
-
-```cpp
-int sum = 1;
-list<int> lst;
-```
-- The `sum` variable is initialized to `1`, representing the initial addition. A `list<int>` named `lst` is used to build the result, allowing efficient addition of elements at the front.
-
-#### Step 2: Loop Through Digits from Right to Left
-
-```cpp
-for(int i = d.size() - 1; i >= 0; i--) {
-    sum += d[i];
-    lst.push_front(sum % 10);
-    sum = sum / 10;
+    // If we reach here, all digits were 9, so we need to add a new digit
+    vector<int> result(n + 1, 0);
+    result[0] = 1;
+    return result;
 }
 ```
-- For each digit starting from the last:
-  - Adds `d[i]` to `sum`.
-  - Adds the unit place of `sum` (i.e., `sum % 10`) to the front of `lst`.
-  - Updates `sum` to be the carry (i.e., `sum / 10`) for the next digit.
 
-#### Step 3: Handle Remaining Carry
+This code adds one to a given number represented as an array of digits.
 
-```cpp
-if(sum > 0) lst.push_front(sum);
-```
-- If `sum` is greater than zero after processing all digits, a leftover carry is added to the front of `lst`, covering cases like `999` becoming `1000`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> plusOne(vector<int>& digits) {
+	```
+	This line declares a function named `plusOne` that takes a vector of digits `digits` as input and returns a vector representing the incremented number.
 
-#### Step 4: Convert Linked List to Vector
+2. **Get Number of Digits**
+	```cpp
+	    int n = digits.size();
+	```
+	This line gets the number of digits in the input number.
 
-```cpp
-vector<int> res(lst.begin(), lst.end());
-```
-- Converts `lst` to a `vector<int>` for the final output, as the return type is a vector.
+3. **Iterate from Rightmost Digit**
+	```cpp
+	    for (int i = n - 1; i >= 0; i--) {
+	```
+	This loop iterates through the digits of the number from right to left.
 
-#### Step 5: Return Result
+4. **Check for Carryover**
+	```cpp
+	        if (digits[i] < 9) {
+	```
+	This condition checks if the current digit is less than 9. If so, it means we can simply increment it and return the result.
 
-```cpp
-return res;
-```
-- The final result is returned as a vector representing the number after adding one.
+5. **Increment Digit**
+	```cpp
+	            digits[i]++;
+	```
+	This line increments the current digit by 1.
 
-### 📊 **Complexity Analysis**
+6. **Return the Result**
+	```cpp
+	            return digits;
+	```
+	This line returns the modified `digits` vector, which now represents the incremented number.
 
-#### Time Complexity:
-- **O(n)**: The algorithm iterates through the list of digits once, where `n` is the number of digits.
+7. **Handle Carryover**
+	```cpp
+	        digits[i] = 0;
+	```
+	If the current digit is 9, we set it to 0 and continue to the next digit, carrying over the 1.
 
-#### Space Complexity:
-- **O(n)**: The space used by the list and the resulting vector is proportional to the number of digits.
+8. **Handle Carryover to the Leftmost Digit**
+	```cpp
+	    // If we reach here, all digits were 9, so we need to add a new digit
+	    vector<int> result(n + 1, 0);
+	    result[0] = 1;
+	```
+	If we reach the end of the loop without finding a digit less than 9, it means all digits were 9. In this case, we need to create a new vector with one extra digit, set the first digit to 1, and return it.
 
-### 🌟 **Conclusion**
+9. **Return the Result**
+	```cpp
+	    return result;
+	```
+	This line returns the newly created vector representing the incremented number.
 
-This solution is efficient for adding one to a large integer represented by an array of digits. It effectively handles carries through the linked list’s flexibility, allowing easy addition at the front. This approach is optimal, with a single traversal of the digits and minimal auxiliary space, making it suitable for cases with large numbers or multiple carries.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
----
+We process each digit once, resulting in a linear time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+Space is O(1) if the input can be modified in-place; otherwise, O(n) for the output array in case of carry propagation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/plus-one/description/)
 

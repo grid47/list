@@ -14,198 +14,169 @@ img_src = ""
 youtube = "xiY9ORyGnDk"
 youtube_upload_date="2022-06-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/xiY9ORyGnDk/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of distinct positive integers, `nums`, and a list of operations. Each operation consists of two elements: `operations[i][0]` and `operations[i][1]`. In each operation, you need to replace the element `operations[i][0]` in `nums` with the new value `operations[i][1]`. The number `operations[i][1]` is guaranteed to not already be in `nums`. After performing all the operations, return the final array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list `nums` consisting of distinct integers and a list `operations` with each operation consisting of two integers `operations[i][0]` and `operations[i][1]`.
+- **Example:** `Input: nums = [10, 20, 30, 40], operations = [[10, 50], [30, 60], [40, 70]]`
+- **Constraints:**
+	- 1 <= n, m <= 10^5
+	- 1 <= nums[i], operations[i][0], operations[i][1] <= 10^6
+	- All elements in nums are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> arrayChange(vector<int>& nums, vector<vector<int>>& ops) {
-        
-        map<int, int> mp;
-        
-        int n = nums.size();
-        for(int i = 0; i < n; i++)
-            mp[nums[i]] = i;
-        
-        for(auto it: ops) {
-            int idx = mp[it[0]];
-            mp.erase(it[0]);
-            nums[idx] = it[1];
-            mp[it[1]] = idx;
-        }
-        return nums;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the modified `nums` after applying all the operations in order.
+- **Example:** `Output: [50, 20, 60, 70]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to replace elements in the list `nums` based on the given operations, while ensuring no duplication occurs during the replacement process.
+
+- Step 1: Create a mapping of each number in `nums` to its index.
+- Step 2: For each operation, find the index of the element to replace and update it with the new value.
+- Step 3: After all operations are performed, return the final array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list `nums` contains distinct integers.
+- Each operation replaces an element that exists in `nums` with a new number that does not exist in the list.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 3], operations = [[1, 4], [2, 5], [3, 6]]`  \
+  **Explanation:** After the first operation, the list becomes [4, 2, 3]. After the second operation, it becomes [4, 5, 3], and finally, after the third operation, the list becomes [4, 5, 6].
+
+- **Input:** `Input: nums = [100, 200, 300], operations = [[100, 500], [200, 600], [300, 700]]`  \
+  **Explanation:** The operations replace 100 with 500, 200 with 600, and 300 with 700, resulting in the final array [500, 600, 700].
+
+{{< dots >}}
+## Approach 🚀
+We will approach this problem by maintaining a map that tracks the index of each number in `nums` to efficiently replace values during the operations.
+
+### Initial Thoughts 💭
+- The replacement operation involves direct lookup and update, so using a map can provide O(1) access time for each replacement.
+- The algorithm will perform each operation in constant time, making the overall complexity O(m), where m is the number of operations.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as the number of elements in `nums` and the number of operations are both guaranteed to be at least 1.
+- For very large inputs (up to 10^5 elements and operations), the solution should ensure that operations are performed efficiently, ideally in O(1) for each operation.
+- The constraints guarantee that no element will be replaced by an already existing element in `nums`.
+- The size of `nums` and the number of operations will not exceed 10^5, ensuring the approach remains efficient.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> arrayChange(vector<int>& nums, vector<vector<int>>& ops) {
+    
+    map<int, int> mp;
+    
+    int n = nums.size();
+    for(int i = 0; i < n; i++)
+        mp[nums[i]] = i;
+    
+    for(auto it: ops) {
+        int idx = mp[it[0]];
+        mp.erase(it[0]);
+        nums[idx] = it[1];
+        mp[it[1]] = idx;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are tasked with modifying a given array of integers by applying a sequence of operations. Each operation consists of replacing a specific number in the array with another number. The challenge is to apply these operations efficiently and return the final modified array after all operations have been applied.
-
-- We are given an integer array `nums` and a list of operations `ops`.
-- Each operation `ops[i]` is represented as a pair `[a, b]`, meaning that all occurrences of `a` in the array should be replaced with `b`.
-- We need to perform all operations and return the resulting array.
-
-### Approach
-
-The solution relies on efficient lookups and updates, which are key to handling multiple operations without repeatedly searching through the array.
-
-#### Key Ideas:
-
-1. **Use a Map for Fast Lookups**:
-   - Instead of searching through the array every time we need to find the index of a value `a`, we use a map `mp` to store the indices of the values.
-   - The map is used to quickly locate where each number is in the array so we can replace it efficiently.
-
-2. **Efficient Updates**:
-   - When an operation `[a, b]` is encountered, we find the index of `a` in the array using the map.
-   - We then replace `a` with `b` and update the map so that `b` points to the same index that `a` had in the array. Additionally, we remove `a` from the map since it's no longer relevant.
-
-3. **Final Array**:
-   - After applying all operations, the `nums` array will be updated accordingly. We simply return the updated array.
-
-### Code Breakdown (Step by Step)
-
-The following C++ code implements this approach:
-
-```cpp
-class Solution {
-public:
-    vector<int> arrayChange(vector<int>& nums, vector<vector<int>>& ops) {
-        
-        map<int, int> mp;  // Map to store the value and its index in nums
-        
-        int n = nums.size();
-        
-        // Initialize the map with the values and their corresponding indices in nums
-        for(int i = 0; i < n; i++) {
-            mp[nums[i]] = i;  // Map the value to its index
-        }
-        
-        // Process each operation in ops
-        for(auto it: ops) {
-            int idx = mp[it[0]];  // Get the index of the number to be replaced
-            mp.erase(it[0]);  // Remove the old value from the map
-            nums[idx] = it[1];  // Replace the number at the index with the new value
-            mp[it[1]] = idx;  // Add the new value to the map, pointing to the same index
-        }
-        
-        // Return the updated array
-        return nums;
-    }
-};
+    return nums;
+}
 ```
 
-#### Detailed Explanation:
+The function `arrayChange` modifies a given vector `nums` by applying a series of operations in `ops`, where each operation replaces an element in `nums` with a new value. A map is used to efficiently track the indices of the elements for quick updates.
 
-1. **Map Initialization**:
-   - The map `mp` is initialized to store the value of each element in `nums` as the key and the corresponding index in the array as the value. This step ensures that we can look up any value in constant time.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> arrayChange(vector<int>& nums, vector<vector<int>>& ops) {
+	```
+	The function `arrayChange` is declared, which takes a reference to a vector of integers `nums` and a reference to a 2D vector `ops` that contains operations to be applied to `nums`. It returns a modified vector of integers.
 
-   ```cpp
-   map<int, int> mp;  // Map to store the value and its index
-   int n = nums.size();
-   for(int i = 0; i < n; i++) {
-       mp[nums[i]] = i;  // Initialize map with the values and their indices
-   }
-   ```
+2. **Map Declaration**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map `mp` is declared to store the value of elements from `nums` as keys and their corresponding indices as values. This helps in quick look-up and modification of elements during operations.
 
-2. **Processing Operations**:
-   - For each operation `[a, b]` in `ops`, we perform the following steps:
-     - Find the index of `a` in the `nums` array using `mp[it[0]]`.
-     - Erase `a` from the map because it is no longer relevant after the replacement.
-     - Update the array by replacing `a` with `b` at the found index.
-     - Add `b` to the map, associating it with the index where `a` was previously located.
-     
-   ```cpp
-   for(auto it: ops) {
-       int idx = mp[it[0]];  // Find the index of a in nums
-       mp.erase(it[0]);  // Remove a from the map
-       nums[idx] = it[1];  // Replace a with b in the array
-       mp[it[1]] = idx;  // Add b to the map with the same index
-   }
-   ```
+3. **Get Array Size**
+	```cpp
+	    int n = nums.size();
+	```
+	The size of the input vector `nums` is calculated and stored in the variable `n`.
 
-3. **Returning the Result**:
-   - Once all operations are applied, the modified `nums` array is returned.
+4. **Loop Through Array**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	A for-loop is initiated to iterate through each element in the `nums` array.
 
-   ```cpp
-   return nums;  // Return the updated array
-   ```
+5. **Map Population**
+	```cpp
+	        mp[nums[i]] = i;
+	```
+	The map `mp` is populated with each element of `nums` as the key and its index as the value.
 
-### Example Walkthrough
+6. **Loop Through Operations**
+	```cpp
+	    for(auto it: ops) {
+	```
+	A for-loop is initiated to iterate through each operation in the `ops` array, where each operation consists of two values: the old value and the new value.
 
-#### Example 1:
-**Input**:
-```cpp
-vector<int> nums = {1, 2, 3, 4};
-vector<vector<int>> ops = {{1, 10}, {3, 30}, {2, 20}};
-```
+7. **Find Index of Old Value**
+	```cpp
+	        int idx = mp[it[0]];
+	```
+	The index of the element to be replaced (old value) is retrieved from the map `mp` using `it[0]`, the old value in the operation.
 
-**Steps**:
+8. **Erase Old Value from Map**
+	```cpp
+	        mp.erase(it[0]);
+	```
+	The old value is erased from the map `mp` as it is no longer needed.
 
-1. Initial `nums = {1, 2, 3, 4}`.
-2. Initialize the map: `mp = {1: 0, 2: 1, 3: 2, 4: 3}`.
-3. Process the operation `[1, 10]`:
-   - Replace `1` at index 0 with `10`, update `mp` to `{2: 1, 3: 2, 4: 3, 10: 0}`.
-   - Updated `nums = {10, 2, 3, 4}`.
-4. Process the operation `[3, 30]`:
-   - Replace `3` at index 2 with `30`, update `mp` to `{2: 1, 4: 3, 10: 0, 30: 2}`.
-   - Updated `nums = {10, 2, 30, 4}`.
-5. Process the operation `[2, 20]`:
-   - Replace `2` at index 1 with `20`, update `mp` to `{4: 3, 10: 0, 30: 2, 20: 1}`.
-   - Final `nums = {10, 20, 30, 4}`.
+9. **Update Element in Array**
+	```cpp
+	        nums[idx] = it[1];
+	```
+	The element at the found index `idx` in the array `nums` is replaced with the new value `it[1]` from the operation.
 
-**Output**:
-```cpp
-{10, 20, 30, 4}
-```
+10. **Update Map with New Value**
+	```cpp
+	        mp[it[1]] = idx;
+	```
+	The map `mp` is updated to associate the new value `it[1]` with the index `idx`.
 
-#### Example 2:
-**Input**:
-```cpp
-vector<int> nums = {5, 6, 7};
-vector<vector<int>> ops = {{5, 15}, {7, 17}};
-```
+11. **Return Modified Array**
+	```cpp
+	    return nums;
+	```
+	After applying all operations, the modified array `nums` is returned.
 
-**Steps**:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m)
+- **Average Case:** O(m)
+- **Worst Case:** O(m)
 
-1. Initial `nums = {5, 6, 7}`.
-2. Initialize the map: `mp = {5: 0, 6: 1, 7: 2}`.
-3. Process the operation `[5, 15]`:
-   - Replace `5` at index 0 with `15`, update `mp` to `{6: 1, 7: 2, 15: 0}`.
-   - Updated `nums = {15, 6, 7}`.
-4. Process the operation `[7, 17]`:
-   - Replace `7` at index 2 with `17`, update `mp` to `{6: 1, 15: 0, 17: 2}`.
-   - Final `nums = {15, 6, 17}`.
+The time complexity is O(m) where m is the number of operations, since each operation involves a constant-time map lookup and update.
 
-**Output**:
-```cpp
-{15, 6, 17}
-```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Time Complexity
+The space complexity is O(n), where n is the number of elements in `nums`, due to the map storing the indices of all elements.
 
-- **Building the map**: This takes `O(n)`, where `n` is the size of `nums`.
-- **Processing each operation**: For each operation, we perform constant-time operations (lookups, erases, and insertions into the map) — each operation takes `O(log n)` time due to the underlying balanced binary search tree (BST) used in `map`. 
-  - If there are `m` operations, the total time for processing all operations is `O(m log n)`.
-  
-Thus, the overall time complexity is **O(n + m log n)**, where `n` is the size of the array and `m` is the number of operations.
+**Happy Coding! 🎉**
 
-### Space Complexity
-
-- **Space for the map**: The map stores up to `n` unique values, so the space complexity is **O(n)**.
-- **Space for the array**: The `nums` array takes **O(n)** space.
-
-Thus, the overall space complexity is **O(n)**.
-
-### Conclusion
-
-The provided solution efficiently handles the task of applying multiple operations on an array by utilizing a map for fast lookups and updates. This approach ensures that each operation is performed in logarithmic time, making the solution suitable for large arrays and numerous operations. The time complexity of **O(n + m log n)** and space complexity of **O(n)** make the solution scalable and optimal for the given problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-elements-in-an-array/description/)
 

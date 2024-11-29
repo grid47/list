@@ -14,151 +14,226 @@ img_src = ""
 youtube = "PVsRUVGHVCY"
 youtube_upload_date="2024-04-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/PVsRUVGHVCY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given three positive integers: `zero`, `one`, and `limit`. A binary array is called stable if it satisfies the following conditions:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<vector<vector<int>>>> mem;
-    int limit, mod = 1000000007;
-    int dp(int z, int o, int p, int lmt, vector<vector<vector<vector<int>>>> &mem) {
-        if(z == 0 && o == 0) return 1;
-        if(mem[p][o][lmt][z] != -1) return mem[p][o][lmt][z];
-        long ans = 0;
-        if(p == 0) {
-            if(z > 0 && lmt < limit)    ans += dp(z - 1, o, 0, lmt + 1, mem) % mod;
-            if(o > 0)                   ans += dp(z, o - 1, 1, 1, mem)% mod;
-        } else {
-            if(o > 0 && lmt < limit)    ans += dp(z, o - 1, 1, lmt + 1, mem)% mod;
-            if(z > 0)                   ans += dp(z - 1, o, 0, 1, mem)% mod;
-        }
-        return mem[p][o][lmt][z] = ans % mod;
-    }
-    int numberOfStableArrays(int zero, int one, int limit) {
-        vector<vector<vector<vector<int>>>> mem(2, vector<vector<vector<int>>>(one + 1, vector<vector<int>>(limit + 1, vector<int>(zero + 1, -1))));
-        this->limit = limit;
-        long res  = (dp(zero - 1, one, 0, 1, mem) +
-                     dp(zero, one - 1, 1, 1, mem)) % mod;
-        return res;
-    }
-};
-{{< /highlight >}}
----
+1. It contains exactly one occurrence of the number 1.
+2. It contains exactly zero occurrences of the number 0.
+3. Any subarray of size greater than `limit` must contain both 0 and 1.
 
-### Problem Statement
+Return the total number of stable binary arrays that can be formed. Since the answer can be large, return it modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three positive integers: `zero`, `one`, and `limit`.
+- **Example:** `Example 1:
+Input: zero = 1, one = 1, limit = 2
+Output: 2`
+- **Constraints:**
+	- 1 <= zero, one, limit <= 200
 
-The problem requires us to count the number of **stable arrays** that can be formed from a given number of `0`s and `1`s. A **stable array** is defined by a specific set of rules:
-1. The number of `1`s and `0`s in the array is given as input.
-2. There is a constraint on the maximum number of consecutive `0`s (`limit`) that can be in the array.
-3. The array must alternate between `1`s and `0`s, and if `0`s appear consecutively, the number must not exceed the specified `limit`.
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of stable binary arrays modulo 10^9 + 7.
+- **Example:** `Example 1:
+Input: zero = 1, one = 1, limit = 2
+Output: 2`
+- **Constraints:**
+	- The result must be returned modulo 10^9 + 7.
 
-The task is to count how many such stable arrays can be formed while adhering to the given constraints.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the number of stable binary arrays that can be formed based on the given inputs `zero`, `one`, and `limit`.
 
-### Approach
+- Define a dynamic programming function that tracks the current state of the binary array with values for `zero`, `one`, and the array's length constraint `limit`.
+- Use memoization to store intermediate results to optimize the computation.
+- At each step, calculate the number of valid arrays by considering valid transitions between states of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary array must contain exactly one occurrence of 1 and exactly zero occurrences of 0.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** The binary arrays [1, 0] and [0, 1] are both stable because both satisfy the conditions: they have exactly one 1 and zero 0s, and no subarray of size greater than 2 violates the condition of containing both 0 and 1.
 
-To solve this problem, we can use a **dynamic programming (DP)** approach with memoization. The key idea is to break the problem down into smaller subproblems and use previously computed results to build up the solution for the larger problem.
+- **Input:** `Example 2:`  \
+  **Explanation:** In this case, the only valid stable binary array is [1, 0, 1]. The arrays [1, 1, 0] and [0, 1, 1] are not stable because they contain a subarray of size 2 with identical elements.
 
-1. **Dynamic Programming Representation**: We define a 4-dimensional DP array `mem` to store the results of subproblems. The state of the DP can be defined as:
-   - `z`: The number of `0`s left to place in the array.
-   - `o`: The number of `1`s left to place in the array.
-   - `p`: A binary value (0 or 1) representing whether the last element placed was `0` or `1`.
-   - `lmt`: The current count of consecutive `0`s placed in the array.
-   
-   The value of the DP state represents the number of ways to form a valid stable array with these parameters.
+{{< dots >}}
+## Approach 🚀
+We will use dynamic programming and memoization to efficiently calculate the number of valid stable binary arrays. The key idea is to track the current state of the binary array and count the valid transitions between states while respecting the size constraint `limit`.
 
-2. **Recursion**: The recursive function `dp(z, o, p, lmt, mem)` computes the number of valid stable arrays that can be formed by placing the remaining `z` `0`s and `o` `1`s under the condition that the last placed element was `p` (either `0` or `1`) and `lmt` is the current number of consecutive `0`s.
-
-   The function computes:
-   - If the last placed element was `0`, then we can place a `0` again if the number of consecutive `0`s (`lmt`) is less than the `limit`, or we can place a `1` if any `0` is already placed.
-   - If the last placed element was `1`, then we can place a `0` or a `1`, with the appropriate constraints.
-
-3. **Base Case**: When `z == 0` and `o == 0`, this means all `0`s and `1`s have been placed in the array, and the array is valid. Hence, we return `1`.
-
-4. **Memoization**: We store the results of subproblems in the `mem` array to avoid redundant calculations and improve efficiency.
-
-5. **Final Calculation**: The result is obtained by calling the `dp` function for the initial state with `zero - 1` `0`s, `one` `1`s, and the first element being a `0` or `1`.
-
-### Code Breakdown
-
-#### Step 1: Initialize DP Array
-
+### Initial Thoughts 💭
+- The problem involves binary arrays, so it is important to track the occurrences of 0s and 1s.
+- Memoization will help avoid redundant calculations and improve the efficiency of the solution.
+{{< dots >}}
+### Edge Cases 🌐
+- The inputs should always be non-zero integers, so there are no edge cases involving empty inputs.
+- The algorithm should be optimized to handle the upper limits of `zero`, `one`, and `limit` efficiently.
+- Consider the case where `zero` and `one` are both equal to 1, which results in a single valid binary array.
+- Ensure that the result is returned modulo 10^9 + 7.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<vector<vector<vector<int>>>> mem(2, vector<vector<vector<int>>>(one + 1, vector<vector<int>>(limit + 1, vector<int>(zero + 1, -1))));
-```
-- Here, we initialize a 4-dimensional vector `mem` to store the memoized results. The dimensions are:
-  - `2`: This corresponds to the binary state `p`, which can either be `0` (last element placed was `0`) or `1` (last element placed was `1`).
-  - `one + 1`: The number of `1`s left to place.
-  - `limit + 1`: The number of consecutive `0`s that can be placed.
-  - `zero + 1`: The number of `0`s left to place.
-
-#### Step 2: Define Recursive DP Function
-
-```cpp
+vector<vector<vector<vector<int>>>> mem;
+int limit, mod = 1000000007;
 int dp(int z, int o, int p, int lmt, vector<vector<vector<vector<int>>>> &mem) {
     if(z == 0 && o == 0) return 1;
     if(mem[p][o][lmt][z] != -1) return mem[p][o][lmt][z];
-```
-- We first check if the number of `0`s and `1`s left to place is zero. If it is, we return `1` because we have successfully placed all elements.
-- If the result for the current state `(z, o, p, lmt)` has already been computed (i.e., `mem[p][o][lmt][z] != -1`), we return the previously computed value to avoid redundant calculations.
-
-#### Step 3: Recursive Transitions
-
-```cpp
-long ans = 0;
-if(p == 0) {
-    if(z > 0 && lmt < limit)    ans += dp(z - 1, o, 0, lmt + 1, mem) % mod;
-    if(o > 0)                   ans += dp(z, o - 1, 1, 1, mem)% mod;
-} else {
-    if(o > 0 && lmt < limit)    ans += dp(z, o - 1, 1, lmt + 1, mem)% mod;
-    if(z > 0)                   ans += dp(z - 1, o, 0, 1, mem)% mod;
+    long ans = 0;
+    if(p == 0) {
+        if(z > 0 && lmt < limit)    ans += dp(z - 1, o, 0, lmt + 1, mem) % mod;
+        if(o > 0)                   ans += dp(z, o - 1, 1, 1, mem)% mod;
+    } else {
+        if(o > 0 && lmt < limit)    ans += dp(z, o - 1, 1, lmt + 1, mem)% mod;
+        if(z > 0)                   ans += dp(z - 1, o, 0, 1, mem)% mod;
+    }
+    return mem[p][o][lmt][z] = ans % mod;
+}
+int numberOfStableArrays(int zero, int one, int limit) {
+    vector<vector<vector<vector<int>>>> mem(2, vector<vector<vector<int>>>(one + 1, vector<vector<int>>(limit + 1, vector<int>(zero + 1, -1))));
+    this->limit = limit;
+    long res  = (dp(zero - 1, one, 0, 1, mem) +
+                 dp(zero, one - 1, 1, 1, mem)) % mod;
+    return res;
 }
 ```
-- If the last element placed was a `0` (`p == 0`), we have two choices:
-  - We can place another `0` if there are remaining `0`s and the number of consecutive `0`s (`lmt`) is less than the `limit`.
-  - We can place a `1` if there are remaining `1`s.
-  
-- If the last element placed was a `1` (`p == 1`), we again have two choices:
-  - We can place another `1` if there are remaining `1`s.
-  - We can place a `0` if there are remaining `0`s.
 
-Each transition is recursive, and we accumulate the results in `ans`.
+This code defines a dynamic programming approach to solve the problem of counting stable arrays with given constraints. It utilizes memoization to efficiently calculate the number of stable arrays possible, given the number of zeros, ones, and a limit.
 
-#### Step 4: Store and Return Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<vector<vector<vector<int>>>> mem;
+	```
+	Initializes a 4-dimensional vector `mem` to store the results of subproblems for memoization, avoiding redundant calculations.
 
-```cpp
-return mem[p][o][lmt][z] = ans % mod;
-```
-- After calculating the number of valid arrays for the current state `(z, o, p, lmt)`, we store the result in the `mem` array to be used later.
+2. **Variable Initialization**
+	```cpp
+	int limit, mod = 1000000007;
+	```
+	Initializes the variable `limit` for the maximum number of allowed operations and `mod` to handle large numbers using modulo arithmetic.
 
-#### Step 5: Final Calculation in `numberOfStableArrays`
+3. **Function Definition**
+	```cpp
+	int dp(int z, int o, int p, int lmt, vector<vector<vector<vector<int>>>> &mem) {
+	```
+	Defines the recursive dynamic programming function `dp` which computes the number of stable arrays based on the current state of zeros (`z`), ones (`o`), and the limit (`lmt`).
 
-```cpp
-long res  = (dp(zero - 1, one, 0, 1, mem) +
-             dp(zero, one - 1, 1, 1, mem)) % mod;
-```
-- Finally, we calculate the result by calling the `dp` function for the initial state with one less `0` and `1` and the first element being either `0` or `1`.
+4. **Base Case**
+	```cpp
+	    if(z == 0 && o == 0) return 1;
+	```
+	Base case: if both zeros and ones are exhausted, return 1 as there is one valid configuration (an empty array).
 
-```cpp
-return res;
-```
-- The result is returned, which is the number of stable arrays modulo `1000000007`.
+5. **Memoization Check**
+	```cpp
+	    if(mem[p][o][lmt][z] != -1) return mem[p][o][lmt][z];
+	```
+	Checks if the current subproblem has already been solved by looking it up in the `mem` table. If so, returns the stored result to avoid redundant computation.
 
-### Complexity
+6. **Variable Initialization**
+	```cpp
+	    long ans = 0;
+	```
+	Initializes the variable `ans` to accumulate the result of valid stable arrays for the current state.
 
-#### Time Complexity:
-- The time complexity is **O(zero * one * limit)**. This is because, for each state `(z, o, p, lmt)`, we perform a constant amount of work (either transitioning to another state or returning the result). The number of states is bounded by the product of the number of `0`s, the number of `1`s, and the limit on consecutive `0`s.
+7. **Conditional Logic**
+	```cpp
+	    if(p == 0) {
+	```
+	Checks if the parity (`p`) is 0, determining how the recursive calls should branch for the current state.
 
-#### Space Complexity:
-- The space complexity is **O(zero * one * limit)**, primarily due to the storage of the `mem` array.
+8. **Recursive Call**
+	```cpp
+	        if(z > 0 && lmt < limit)    ans += dp(z - 1, o, 0, lmt + 1, mem) % mod;
+	```
+	If there are remaining zeros (`z > 0`) and the limit hasn't been reached (`lmt < limit`), recursively calls `dp` to add the result for a configuration where the next element is a zero.
 
-### Conclusion
+9. **Recursive Call**
+	```cpp
+	        if(o > 0)                   ans += dp(z, o - 1, 1, 1, mem)% mod;
+	```
+	If there are remaining ones (`o > 0`), recursively calls `dp` to add the result for a configuration where the next element is a one.
 
-This approach leverages dynamic programming with memoization to efficiently calculate the number of stable arrays that can be formed given the constraints. By breaking down the problem into smaller subproblems and using memoization to store intermediate results, the solution avoids redundant calculations and ensures optimal performance. The use of recursion allows us to explore all possible valid sequences of `0`s and `1`s while adhering to the limit on consecutive `0`s, providing an elegant and efficient solution to the problem.
+10. **Else Condition**
+	```cpp
+	    } else {
+	```
+	If `p` is not 0, it switches the roles of zeros and ones, making recursive calls accordingly.
+
+11. **Recursive Call**
+	```cpp
+	        if(o > 0 && lmt < limit)    ans += dp(z, o - 1, 1, lmt + 1, mem)% mod;
+	```
+	If there are remaining ones (`o > 0`) and the limit is not exceeded, recursively calls `dp` for configurations with a one as the next element.
+
+12. **Recursive Call**
+	```cpp
+	        if(z > 0)                   ans += dp(z - 1, o, 0, 1, mem)% mod;
+	```
+	If there are remaining zeros (`z > 0`), recursively calls `dp` for configurations with a zero as the next element.
+
+13. **Memoization Store**
+	```cpp
+	    return mem[p][o][lmt][z] = ans % mod;
+	```
+	Stores the result of the current subproblem in the `mem` table to prevent redundant calculations in future recursive calls.
+
+14. **Function Definition**
+	```cpp
+	int numberOfStableArrays(int zero, int one, int limit) {
+	```
+	Defines the main function `numberOfStableArrays` which sets up the problem parameters, initializes the memoization table, and calls the `dp` function.
+
+15. **Memoization Initialization**
+	```cpp
+	    vector<vector<vector<vector<int>>>> mem(2, vector<vector<vector<int>>>(one + 1, vector<vector<int>>(limit + 1, vector<int>(zero + 1, -1))));
+	```
+	Initializes the 4-dimensional memoization table `mem` to store results for subproblems. The dimensions represent the state variables: parity (`p`), number of ones (`o`), limit (`lmt`), and number of zeros (`z`).
+
+16. **Set Limit**
+	```cpp
+	    this->limit = limit;
+	```
+	Sets the `limit` variable for the problem instance.
+
+17. **Recursive Call**
+	```cpp
+	    long res  = (dp(zero - 1, one, 0, 1, mem) +
+	                 dp(zero, one - 1, 1, 1, mem)) % mod;
+	```
+	Calls the `dp` function with initial conditions to compute the result, summing the contributions from configurations starting with either a zero or one.
+
+18. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the final result for the number of stable arrays.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(zero * one * limit)
+- **Average Case:** O(zero * one * limit)
+- **Worst Case:** O(zero * one * limit)
+
+The time complexity is determined by the number of states and transitions in the dynamic programming solution.
+
+### Space Complexity 💾
+- **Best Case:** O(zero * one * limit)
+- **Worst Case:** O(zero * one * limit)
+
+The space complexity is dominated by the memoization table that stores intermediate results for all possible states.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/description/)
 

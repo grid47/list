@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "HLr_OnShK4s"
 youtube_upload_date="2021-02-21"
 youtube_thumbnail="https://i.ytimg.com/vi/HLr_OnShK4s/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,115 +28,148 @@ youtube_thumbnail="https://i.ytimg.com/vi/HLr_OnShK4s/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array `prices` where `prices[i]` represents the price of a stock on the `i`-th day, and an integer `fee` that represents a transaction fee for each transaction. The task is to calculate the maximum profit you can achieve. You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `prices` of integers representing the prices of the stock for each day and an integer `fee` representing the transaction fee.
+- **Example:** `prices = [2, 6, 4, 7, 5, 9], fee = 3`
+- **Constraints:**
+	- 1 <= prices.length <= 5 * 10^4
+	- 1 <= prices[i] < 5 * 10^4
+	- 0 <= fee < 5 * 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxProfit(vector<int>& prices, int fee) {
-        if(prices.size() <= 1) return 0;
-        int days = prices.size();
-        vector<int> buy(days, 0), sell(days, 0);
-        buy[0]= -prices[0]-fee;
-        for(int i = 1; i < days; i++) {
-            buy[i] = max(buy[i -1], sell[i -1]-prices[i]-fee);
-            sell[i] = max(sell[i -1], buy[i - 1]+prices[i]);
-        }
-        return sell[days - 1];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum profit that can be achieved after completing as many transactions as possible, where each transaction is subject to a transaction fee.
+- **Example:** `9`
+- **Constraints:**
+	- The result should be a non-negative integer representing the maximum profit.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the maximum profit by applying a dynamic programming approach.
+
+- Use two arrays, `buy` and `sell`, where `buy[i]` stores the maximum profit at day `i` when buying the stock, and `sell[i]` stores the maximum profit at day `i` when selling the stock.
+- Initialize `buy[0]` as `-prices[0] - fee` since you can buy the stock on the first day with the fee applied.
+- Iterate through the `prices` array, and for each day, compute the maximum profit from either holding the stock or selling it (while considering the transaction fee).
+- Finally, the value in `sell[n-1]` will hold the maximum profit at the end of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains at least one price.
+- The transaction fee is applied once for every transaction (buying and selling).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `prices = [2, 6, 4, 7, 5, 9], fee = 3`  \
+  **Explanation:** The best strategy is to buy on day 1, sell on day 2, buy again on day 3, and sell on day 4. Then, buy on day 5 and sell on day 6. The total profit is 9.
+
+- **Input:** `prices = [3, 2, 5, 1, 7], fee = 1`  \
+  **Explanation:** The maximum profit can be obtained by buying at day 2 and selling at day 3, and then buying at day 4 and selling at day 5. The total profit is 6.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using dynamic programming with a space optimization technique.
+
+### Initial Thoughts 💭
+- We need to track the profit for both holding and selling stocks for each day.
+- By maintaining two variables (buy and sell), we can optimize space while computing the maximum profit.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the result should be 0.
+- Ensure the solution works efficiently for large inputs (up to 50,000 days).
+- If the fee is 0, no fee is deducted from transactions.
+- Handle cases where all prices are either constant or decrease across the days.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxProfit(vector<int>& prices, int fee) {
+    if(prices.size() <= 1) return 0;
+    int days = prices.size();
+    vector<int> buy(days, 0), sell(days, 0);
+    buy[0]= -prices[0]-fee;
+    for(int i = 1; i < days; i++) {
+        buy[i] = max(buy[i -1], sell[i -1]-prices[i]-fee);
+        sell[i] = max(sell[i -1], buy[i - 1]+prices[i]);
     }
-};
-{{< /highlight >}}
----
+    return sell[days - 1];
+}
+```
 
-### Problem Statement
+The function calculates the maximum profit that can be obtained from buying and selling stocks with a transaction fee. It uses dynamic programming to track the profit states of 'buy' and 'sell' on each day.
 
-The problem is about maximizing profit from a series of stock prices, where each price is given as an array `prices`. The goal is to determine the maximum profit that can be earned by completing multiple transactions, but with the restriction that each transaction incurs a fee (`fee`). 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxProfit(vector<int>& prices, int fee) {
+	```
+	Define the function 'maxProfit' which takes a vector of integers 'prices' representing stock prices and an integer 'fee' representing the transaction fee.
 
-A transaction involves buying one stock and selling it later. The challenge is to determine the maximum profit that can be obtained by performing any number of transactions, subject to the fee on each sale.
+2. **Edge Case Handling**
+	```cpp
+	    if(prices.size() <= 1) return 0;
+	```
+	Handle the edge case where the number of prices is less than or equal to 1, meaning no profit can be made, thus return 0.
 
-### Approach
+3. **Variable Initialization**
+	```cpp
+	    int days = prices.size();
+	```
+	Initialize 'days' to store the number of days (or prices), which is the size of the 'prices' vector.
 
-To solve this problem optimally, we can use **dynamic programming** (DP). The idea is to track two states for each day:
+4. **Array Initialization**
+	```cpp
+	    vector<int> buy(days, 0), sell(days, 0);
+	```
+	Initialize two vectors, 'buy' and 'sell', each of size 'days', to keep track of the maximum profit for buying and selling on each day.
 
-- **Buy state**: The maximum profit if we bought the stock on that day (or carried over from a previous transaction).
-- **Sell state**: The maximum profit if we sold the stock on that day.
+5. **Initial State Setup**
+	```cpp
+	    buy[0]= -prices[0]-fee;
+	```
+	Set the initial 'buy' state on the first day, where the first element represents the cost of buying the stock with the transaction fee deducted.
 
-We can use two arrays:
-- `buy[i]`: Maximum profit on day `i` if we have bought the stock.
-- `sell[i]`: Maximum profit on day `i` if we have sold the stock.
+6. **Loop**
+	```cpp
+	    for(int i = 1; i < days; i++) {
+	```
+	Start a loop from day 1 to the last day (index 1 to 'days-1') to calculate the maximum profit on each day.
 
-The two core transitions are:
-1. **Buy State**: On day `i`, we can either:
-   - Stay in the same "buy" state (carry over from the previous day).
-   - Buy the stock on day `i` after selling the stock on day `i-1`. This means we subtract the stock price and the fee from the profit made by selling on day `i-1`.
-   
-2. **Sell State**: On day `i`, we can either:
-   - Stay in the same "sell" state (carry over the previous day's profit from selling).
-   - Sell the stock on day `i` after buying it on day `i-1`. This adds the price of the stock on day `i` to the profit made by buying on day `i-1`.
+7. **State Transition - Buy**
+	```cpp
+	        buy[i] = max(buy[i -1], sell[i -1]-prices[i]-fee);
+	```
+	Calculate the maximum profit for the 'buy' state by considering either the previous day's 'buy' state or the profit from selling the previous day's stock and buying on the current day (with the fee).
 
-By maintaining these two states, we can compute the maximum profit possible by day `n` (the last day).
+8. **State Transition - Sell**
+	```cpp
+	        sell[i] = max(sell[i -1], buy[i - 1]+prices[i]);
+	```
+	Calculate the maximum profit for the 'sell' state by considering either the previous day's 'sell' state or the profit from buying the previous day's stock and selling it on the current day.
 
-### Code Breakdown (Step by Step)
+9. **Return Statement**
+	```cpp
+	    return sell[days - 1];
+	```
+	Return the maximum profit at the last day, which is stored in the 'sell' array for the final day.
 
-Here’s the detailed step-by-step breakdown of the solution:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. **Base Case**:
-   - First, we check if the length of the `prices` array is less than or equal to 1. If so, we return 0 because no transaction can be made. This avoids unnecessary computations for edge cases:
-   ```cpp
-   if(prices.size() <= 1) return 0;
-   ```
+The time complexity is linear since we process each price exactly once.
 
-2. **Initialization**:
-   - We initialize the number of days (`days`) to the length of the `prices` array.
-   - We create two arrays `buy` and `sell` of size `days` initialized to 0. These will hold the maximum profit on each day for the respective states (buy and sell):
-   ```cpp
-   vector<int> buy(days, 0), sell(days, 0);
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-3. **Initial Values**:
-   - On day 0, if we buy the stock, our profit is negative because we spent money on buying the stock, and we also incur the fee. Hence, we set:
-   ```cpp
-   buy[0] = -prices[0] - fee;
-   ```
+The space complexity is constant as we only need a few variables to store the maximum profit.
 
-4. **Dynamic Programming Transition**:
-   - From day 1 onwards, we compute the `buy` and `sell` values for each day using the previously mentioned transitions:
-   - The `buy[i]` on day `i` can either be:
-     - The previous day's `buy[i-1]` value (i.e., carrying over the previous buy state).
-     - Or the profit from selling on day `i-1` (i.e., `sell[i-1]`), minus the cost of buying on day `i` and the transaction fee.
-     ```cpp
-     buy[i] = max(buy[i-1], sell[i-1] - prices[i] - fee);
-     ```
-   - The `sell[i]` on day `i` can either be:
-     - The previous day's `sell[i-1]` value (i.e., carrying over the previous sell state).
-     - Or the profit from buying on day `i-1` (i.e., `buy[i-1]`), plus the price of selling on day `i`.
-     ```cpp
-     sell[i] = max(sell[i-1], buy[i-1] + prices[i]);
-     ```
+**Happy Coding! 🎉**
 
-5. **Final Answer**:
-   - After filling out the `buy` and `sell` arrays, the maximum profit that can be obtained by the last day is stored in `sell[days - 1]`. This is because the last action should be selling the stock, so the maximum profit will be in the `sell` state on the last day.
-   ```cpp
-   return sell[days - 1];
-   ```
-
-### Complexity Analysis
-
-- **Time Complexity**:
-  - The algorithm iterates over the `prices` array once, performing constant-time operations for each element. Therefore, the time complexity is **O(n)**, where `n` is the number of days (length of the `prices` array). This is optimal for this type of problem.
-  
-- **Space Complexity**:
-  - The space complexity is **O(n)** due to the two arrays `buy` and `sell`, each of size `n`. This space is required to store the maximum profit states for each day.
-
-  If we wanted to optimize space further, we could use two variables instead of the arrays, reducing the space complexity to **O(1)**. However, the time complexity would remain **O(n)**.
-
-### Conclusion
-
-This solution provides an efficient way to compute the maximum profit from stock transactions with a fee using dynamic programming. By maintaining the `buy` and `sell` states for each day, the algorithm computes the optimal solution in linear time. This is much more efficient than the brute-force approach, which would involve checking all possible subarrays or combinations of buy and sell days, leading to a higher time complexity.
-
-The algorithm's simplicity and efficiency make it suitable for large input sizes, and it leverages dynamic programming to avoid redundant calculations. It ensures that we can handle complex scenarios such as fees on each transaction while still maintaining optimal performance.
-
-In summary, the dynamic programming approach used here is optimal for the problem, ensuring that the solution is both time-efficient and space-efficient. This makes it ideal for solving real-world stock trading problems where performance and scalability are critical.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/)
 

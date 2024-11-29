@@ -14,87 +14,138 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n matrix grid, sorted in non-increasing order both row-wise and column-wise. Your task is to determine how many negative numbers are present in the grid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a matrix grid where each row and each column is sorted in non-increasing order.
+- **Example:** `For example, [[7,5,3,-1], [6,4,2,-1], [3,1,-2,-3], [-1,-2,-3,-4]].`
+- **Constraints:**
+	- 1 <= m, n <= 100
+	- -100 <= grid[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countNegatives(vector<vector<int>>& grid) {
-        int res = 0, m = grid.size();
-        for(int i = 0; i < m; i++) {
-            auto it = upper_bound(grid[i].rbegin(), grid[i].rend(), -1);
-            if(*grid[i].rbegin() > -1) continue;
-            res += it - grid[i].rbegin();
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the count of negative numbers in the grid.
+- **Example:** `For example, in the matrix [[7,5,3,-1], [6,4,2,-1], [3,1,-2,-3], [-1,-2,-3,-4]], the output would be 8.`
+- **Constraints:**
+	- The result should be an integer representing the number of negative numbers.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To count the number of negative numbers in the grid by efficiently checking each row and column.
+
+- 1. Iterate through each row of the matrix.
+- 2. For each row, use binary search or a direct check to count how many negative numbers are present.
+- 3. Sum the results for each row to get the total count of negative numbers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is always sorted in non-increasing order both row-wise and column-wise.
+- All values in the grid are integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: grid = [[7, 5, 3, -1], [6, 4, 2, -1], [3, 1, -2, -3], [-1, -2, -3, -4]]`  \
+  **Explanation:** In this matrix, there are 8 negative numbers, which are counted and returned as the result.
+
+- **Input:** `Example 2: grid = [[1, 0], [0, 0]]`  \
+  **Explanation:** This matrix has no negative numbers, so the result is 0.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we can leverage the sorted nature of the matrix. By using binary search or row-wise iteration, we can quickly count the number of negative numbers.
+
+### Initial Thoughts 💭
+- The matrix is sorted both row-wise and column-wise, which provides an opportunity for optimization.
+- We can use binary search to quickly locate the first negative number in each row.
+- Iterating over the rows and applying binary search to count negative numbers in each row would reduce the time complexity.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty grid: No numbers, so the result should be 0.
+- Grid with the maximum size (100x100): The algorithm should handle this efficiently.
+- Grids with no negative numbers: Ensure the result is 0.
+- Ensure that the solution handles both small and large grids within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int countNegatives(vector<vector<int>>& grid) {
+    int res = 0, m = grid.size();
+    for(int i = 0; i < m; i++) {
+        auto it = upper_bound(grid[i].rbegin(), grid[i].rend(), -1);
+        if(*grid[i].rbegin() > -1) continue;
+        res += it - grid[i].rbegin();
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The objective is to count the number of negative integers in a given 2D grid (matrix) where each row is sorted in non-increasing order. This means that each row's elements are sorted from highest to lowest, and there are negative numbers at the end of each row. The solution should efficiently traverse this grid and return the total count of negative integers.
-
-### Approach
-To solve the problem, we can leverage the sorted property of the rows. Since each row is sorted, we can efficiently find the count of negative numbers by using binary search techniques.
-
-1. **Iterate Through Each Row**: We will traverse each row of the grid.
-2. **Binary Search**: For each row, we will use `upper_bound` to find the first element that is less than or equal to -1. The position returned by `upper_bound` allows us to determine how many elements are negative in that row.
-3. **Count the Negatives**: The difference between the position returned and the beginning of the row will give the count of negative numbers for that row.
-4. **Aggregate the Count**: Sum the counts from all rows to get the total number of negative integers in the grid.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int countNegatives(vector<vector<int>>& grid) {
-        int res = 0, m = grid.size();
+    return res;
+}
 ```
-- The `countNegatives` function begins by initializing a variable `res` to hold the total count of negative numbers and retrieves the number of rows in the grid using `m = grid.size()`.
 
-```cpp
-        for(int i = 0; i < m; i++) {
-            auto it = upper_bound(grid[i].rbegin(), grid[i].rend(), -1);
-```
-- A loop iterates through each row of the grid.
-- The `upper_bound` function is called with `grid[i].rbegin()` and `grid[i].rend()` as iterators for the current row, searching for `-1`. This function returns an iterator pointing to the first element in the row that is greater than `-1`.
+This function calculates the count of negative numbers in a sorted 2D grid by iterating through each row and using reverse iterators with the `upper_bound` function to identify negative values efficiently.
 
-```cpp
-            if(*grid[i].rbegin() > -1) continue;
-```
-- This conditional checks if the last element of the row (the smallest) is greater than `-1`. If it is, that means there are no negative numbers in the row, and we can skip further calculations for that row.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int countNegatives(vector<vector<int>>& grid) {
+	```
+	Declares a function that takes a 2D vector grid as input and returns the count of negative numbers.
 
-```cpp
-            res += it - grid[i].rbegin();
-        }
-        return res;
-    }
-};
-```
-- If there are negative numbers, the difference `it - grid[i].rbegin()` gives the count of negative numbers in that row, which is then added to `res`.
-- After processing all rows, the function returns the total count of negative integers.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, m = grid.size();
+	```
+	Initializes a result variable to store the count of negative numbers and retrieves the number of rows in the grid.
 
-### Complexity Analysis
-- **Time Complexity**:
-  - The overall time complexity of the function is \(O(m \log n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. This complexity arises from performing a binary search (`upper_bound`) on each row.
+3. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Iterates through each row of the grid using a for loop.
 
-- **Space Complexity**:
-  - The space complexity is \(O(1)\) since we are using a constant amount of additional space for the counters and iterators.
+4. **Upper Bound Search**
+	```cpp
+	        auto it = upper_bound(grid[i].rbegin(), grid[i].rend(), -1);
+	```
+	Uses the `upper_bound` function on the reversed row to locate the first element greater than -1.
 
-### Conclusion
-The `countNegatives` function in this `Solution` class efficiently counts the number of negative integers in a 2D grid with rows sorted in non-increasing order. By utilizing binary search, it optimizes the search for negative numbers in each row, significantly reducing the time complexity compared to a naive approach of iterating through every element in the grid.
+5. **Condition Check**
+	```cpp
+	        if(*grid[i].rbegin() > -1) continue;
+	```
+	Skips processing the row if the last element is greater than -1, as it indicates no negatives are present.
 
-This implementation is particularly useful in coding interviews and competitive programming scenarios where efficiency is crucial. The ability to recognize and utilize the properties of sorted data structures to enhance performance is a valuable skill for software developers. 
+6. **Negative Count Update**
+	```cpp
+	        res += it - grid[i].rbegin();
+	```
+	Adds the count of negative numbers in the current row to the result by calculating the difference between iterators.
 
-In practical applications, counting elements based on specific conditions is a common task, and mastering such techniques can lead to improved problem-solving strategies and more efficient algorithms. This method exemplifies how to leverage data organization to achieve optimal results, making it a valuable addition to a developer's toolkit.
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total count of negative numbers found in the grid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m log n) where m is the number of rows and n is the number of columns.
+- **Average Case:** O(m log n) for each row search.
+- **Worst Case:** O(m log n) due to the binary search for each row.
+
+The binary search reduces the time complexity of checking each row from O(n) to O(log n), making it more efficient for larger grids.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1) as we are only using a constant amount of extra space.
+
+The space complexity is constant, as we only need a few variables to keep track of the count.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/description/)

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "o811TZLAWOo"
 youtube_upload_date="2020-12-31"
 youtube_thumbnail="https://i.ytimg.com/vi/o811TZLAWOo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,140 +28,164 @@ youtube_thumbnail="https://i.ytimg.com/vi/o811TZLAWOo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the head of a singly linked list. Your task is to swap every two adjacent nodes in the list and return its head. The nodes themselves should be swapped, not just the values.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the head of a singly linked list, where each node has a `val` representing its value.
+- **Example:** `Input: head = [1, 2, 3, 4]`
+- **Constraints:**
+	- 0 <= Node.val <= 100
+	- The number of nodes in the list is between 0 and 100.
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* swapPairs(ListNode* head) {
-        if(head == NULL || head->next == NULL) return head;
-        
-        
-        ListNode* cur = head, *nxt = head->next, *ret = nxt, *prv = NULL;
-        
-        while(cur != NULL && nxt != NULL) {
-            if(prv != NULL) prv->next = nxt;
-            prv = cur;            
-            cur->next = nxt->next;
-            nxt->next = cur;
-            cur = cur->next;
-            if(cur != NULL) nxt = cur->next;
-        }
-        return ret;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the head of the modified linked list where every two adjacent nodes have been swapped.
+- **Example:** `Output: [2, 1, 4, 3]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to swap every two adjacent nodes while maintaining the rest of the list unchanged.
+
+- 1. Traverse the list with two pointers.
+- 2. For each pair of adjacent nodes, swap their positions.
+- 3. Ensure the swapped pairs maintain the linkage to the rest of the list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list will always have at least zero nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [1, 2, 3, 4]`  \
+  **Explanation:** In this example, after swapping every two adjacent nodes, the list becomes [2, 1, 4, 3]. The first two nodes are swapped and the next pair is also swapped.
+
+- **Input:** `Input: head = [1]`  \
+  **Explanation:** In this case, there is only one node, so no swap is possible. The output will be the same single node list: [1].
+
+- **Input:** `Input: head = []`  \
+  **Explanation:** If the input list is empty, the output should also be empty.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to traverse the list and swap every two adjacent nodes while ensuring the list structure is preserved.
+
+### Initial Thoughts 💭
+- This problem requires adjusting the pointers of adjacent nodes without changing their values.
+- We can perform this in one pass over the list while keeping track of the previous and next nodes to ensure the linkage is correct after each swap.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input is an empty list, return an empty list.
+- The solution should work efficiently for lists with up to 100 nodes.
+- If the list contains only one node, no swap is needed and the same list should be returned.
+- The solution must preserve the list's structure and ensure no values are modified.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* swapPairs(ListNode* head) {
+    if(head == NULL || head->next == NULL) return head;
+    
+    
+    ListNode* cur = head, *nxt = head->next, *ret = nxt, *prv = NULL;
+    
+    while(cur != NULL && nxt != NULL) {
+        if(prv != NULL) prv->next = nxt;
+        prv = cur;            
+        cur->next = nxt->next;
+        nxt->next = cur;
+        cur = cur->next;
+        if(cur != NULL) nxt = cur->next;
     }
-};
-{{< /highlight >}}
----
+    return ret;
+}
+```
 
-### 🌟 **Swapping Every Two Adjacent Nodes in a Linked List**
+This code swaps the nodes of a linked list in pairs.
 
-This problem is a fun and practical exercise to manipulate linked lists. The goal is to swap every two adjacent nodes in a singly linked list. If the list contains an odd number of nodes, the last node stays as it is.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* swapPairs(ListNode* head) {
+	```
+	This line declares a function named 'swapPairs' that takes a pointer to the head of a linked list as input and returns a pointer to the head of the modified linked list.
 
----
+2. **Base Case**
+	```cpp
+	    if(head == NULL || head->next == NULL) return head;
+	```
+	This line checks if the list is empty or has only one node. In these cases, no swapping is needed, and the original head is returned.
 
-#### 🧠 **The Simple Idea**
+3. **Variable Initialization**
+	```cpp
+	    ListNode* cur = head, *nxt = head->next, *ret = nxt, *prv = NULL;
+	```
+	This line initializes four pointers: 'cur' to the current node, 'nxt' to the next node, 'ret' to the new head (which will be the second node), and 'prv' to the previous node (initially NULL).
 
-Imagine you’re working with a chain of nodes, and you want to swap every two neighboring links. The challenge is to do this efficiently, without losing track of any part of the list.
+4. **Loop Iteration**
+	```cpp
+	    while(cur != NULL && nxt != NULL) {
+	```
+	This line starts a loop that continues as long as both 'cur' and 'nxt' are not NULL.
 
-#### 👇 **Steps to Solve the Problem:**
+5. **Conditional Update**
+	```cpp
+	        if(prv != NULL) prv->next = nxt;
+	```
+	If there's a previous node 'prv', its 'next' pointer is updated to point to the current 'nxt' node.
 
-1. **Check Base Cases**  
-   If the list is empty or contains only one node, there’s no need for any swaps. Just return the list as it is. ✋
+6. **Pointer Update**
+	```cpp
+	        prv = cur;            
+	```
+	The 'prv' pointer is updated to point to the current 'cur' node.
 
-2. **Set up the Pointers**  
-   We’ll need a few pointers to help with the swaps:  
-   - `cur`: Points to the current node.
-   - `nxt`: Points to the next node.
-   - `prv`: Keeps track of the previous node (to link the swapped nodes).
+7. **Node Manipulation**
+	```cpp
+	        cur->next = nxt->next;
+	```
+	The 'next' pointer of the current node 'cur' is updated to point to the node after 'nxt'.
 
-3. **Iterate Through the List**  
-   Start at the beginning, and swap every two adjacent nodes:  
-   - Link the previous node (`prv`) to the new first node of the swapped pair.
-   - Make sure to update the `next` pointers after each swap so we don’t lose any nodes. 🔄
+8. **Node Manipulation**
+	```cpp
+	        nxt->next = cur;
+	```
+	The 'next' pointer of the 'nxt' node is updated to point to the current 'cur' node, effectively swapping the two nodes.
 
-4. **Handle Edge Cases**  
-   When you reach the last pair (if there’s an odd number of nodes), leave it as it is and return the modified list.
+9. **Pointer Update**
+	```cpp
+	        cur = cur->next;
+	```
+	The 'cur' pointer is moved to the next node, which is the original 'nxt' node after the swap.
 
----
+10. **Pointer Update**
+	```cpp
+	        if(cur != NULL) nxt = cur->next;
+	```
+	If 'cur' is not NULL, the 'nxt' pointer is updated to point to the next node after 'cur'.
 
-#### 🛠 **Breaking Down the Code:**
+11. **Return**
+	```cpp
+	    return ret;
+	```
+	After the loop, the function returns the new head of the linked list, which is stored in the 'ret' pointer.
 
-1. **Handle Edge Cases Early**  
-   ```cpp
-   if (head == NULL || head->next == NULL) return head;
-   ```
-   If the list is empty or has only one node, no swaps are needed. This is a simple check to save unnecessary work. 👍
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Initialize the Pointers**  
-   ```cpp
-   ListNode* cur = head, *nxt = head->next, *ret = nxt, *prv = NULL;
-   ```
-   - `cur` starts at the first node.
-   - `nxt` starts at the second node (we’ll swap these first!).
-   - `prv` is `NULL` at first, as there’s no previous node yet. But we'll use it to maintain the link after the swap.
+Since we process each node once, the time complexity is linear, where n is the number of nodes in the list.
 
-3. **Iterate and Swap**  
-   ```cpp
-   while(cur != NULL && nxt != NULL) {
-       if(prv != NULL) prv->next = nxt;
-       prv = cur;
-       cur->next = nxt->next;
-       nxt->next = cur;
-       cur = cur->next;
-       if(cur != NULL) nxt = cur->next;
-   }
-   ```
-   - First, check if both `cur` and `nxt` are valid. If not, we're done with the list.
-   - Swap the nodes by adjusting the `next` pointers:
-     - `cur->next = nxt->next`: Make `cur` point to the node after `nxt`.
-     - `nxt->next = cur`: Point `nxt` to `cur`, completing the swap.
-   - Move `cur` and `nxt` forward to the next pair, and repeat until done.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-4. **Return the Modified List**  
-   ```cpp
-   return ret;
-   ```
-   The new head of the list is now stored in `ret`, which points to the second node from the original list (after the first swap).
+The space complexity is constant since we are only using a few extra pointers for traversal and swapping.
 
----
+**Happy Coding! 🎉**
 
-#### ⏳ **Complexity Breakdown**
-
-- **Time Complexity: O(n)**  
-  We traverse the list once, and each swap operation takes constant time. Hence, the overall time complexity is linear, **O(n)**, where `n` is the number of nodes in the list. 🏃‍♀️
-
-- **Space Complexity: O(1)**  
-  We use a fixed amount of extra space to keep track of the pointers. No extra data structures are used, so the space complexity is constant. 🎯
-
----
-
-#### 💡 **Why This Approach Works**
-
-- **One Pass, Efficient**: By modifying the `next` pointers in a single traversal, we achieve the desired swaps without needing to traverse the list multiple times.
-- **Simplicity in Design**: The use of a few simple pointers (`cur`, `nxt`, `prv`) allows us to swap nodes effectively without complicated logic. Practice makes perfect, and this approach keeps it simple and clean.
-
----
-
-#### 🚀 **Conclusion**
-
-Swapping adjacent nodes in a linked list may seem tricky at first, but with the right approach and a bit of pointer manipulation, it becomes a straightforward task! 🎉
-
-- **Key Takeaways**:
-  - Efficiently swapping nodes in one pass is the key to keeping this problem in **O(n)** time.
-  - Always remember to handle edge cases like empty lists or single-node lists right away.
-  - This approach is space-efficient (**O(1)**), so it works well even for large lists!
-
-By mastering this technique, you’ll be able to solve similar linked list problems with ease. Happy coding! 💻
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/swap-nodes-in-pairs/description/)
 

@@ -14,176 +14,274 @@ img_src = ""
 youtube = "0BNHd7a_ozc"
 youtube_upload_date="2021-02-20"
 youtube_thumbnail="https://i.ytimg.com/vi/0BNHd7a_ozc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 2D grid where each cell is either water (1) or land (0), assign heights to the land cells such that the height difference between adjacent cells is at most 1. The goal is to maximize the height values of land cells while ensuring the height of water cells is 0. Return the grid with assigned heights.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a matrix where each element is either 0 (land) or 1 (water).
+- **Example:** `isWater = [[0,0,1],[1,0,0],[0,0,0]]`
+- **Constraints:**
+	- m == isWater.length
+	- n == isWater[i].length
+	- 1 <= m, n <= 1000
+	- isWater[i][j] is 0 or 1
+	- There is at least one water cell
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
-        int m = isWater.size(), n = isWater[0].size();
-        
-        vector<vector<int>> ans(m, vector<int>(n, 0)), vis(m, vector<int>(n, 0));
-        
-        queue<vector<int>> q;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(isWater[i][j] == 1)
-                q.push({i, j});
-        
-        int rot[] = {0, 1, 0, -1, 0};
-        
-        int cur = 0;
-        while(!q.empty()) {
-            int sz = q.size();
-            while(sz--) {
-                auto it = q.front();
-                q.pop();
-                if(vis[it[0]][it[1]]) continue;
-                vis[it[0]][it[1]] = 1;
-                
-                ans[it[0]][it[1]] = cur;
-                
-                for(int i = 0; i < 4; i++) {
-                    int x = it[0] + rot[i], y = it[1] + rot[i + 1];
-                    if(x < 0 || y < 0 || x == m || y == n || vis[x][y]) continue;
-                    q.push({x, y});
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a matrix of the same size where each land cell has a height and the height difference between adjacent cells is at most 1.
+- **Example:** `Output: [[1,1,0],[0,1,1],[1,2,2]]`
+- **Constraints:**
+	- Each cell's height is non-negative
+	- The height difference between adjacent cells is at most 1
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To assign the maximum possible height to each land cell while ensuring the height difference between adjacent cells is at most 1.
+
+- Initialize a queue with the positions of all water cells, and set their heights to 0.
+- Perform a breadth-first search (BFS) from each water cell to assign heights to adjacent land cells.
+- Ensure that the height difference rule is satisfied while maximizing the heights.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is guaranteed that there is at least one water cell in the matrix.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `isWater = [[0,1],[0,0]]`  \
+  **Explanation:** In this case, the water cell has height 0, and the adjacent land cell is assigned the maximum possible height of 1. The next land cell is assigned height 2, adhering to the height difference rule.
+
+- **Input:** `isWater = [[0,0,1],[1,0,0],[0,0,0]]`  \
+  **Explanation:** The water cells are at positions (0,2) and (1,0). Heights are assigned starting from the water cells, ensuring that the maximum height is 2 for the land cells.
+
+{{< dots >}}
+## Approach 🚀
+This problem requires assigning heights to land cells while respecting the height difference rule. A breadth-first search (BFS) is suitable for this, as it ensures we propagate heights from water cells to adjacent land cells.
+
+### Initial Thoughts 💭
+- The BFS approach will allow us to propagate heights efficiently from the water cells.
+- We need to ensure that the maximum possible height is assigned to each land cell while keeping the height differences between adjacent cells at most 1.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that there will be at least one water cell, so empty inputs do not need to be handled.
+- The algorithm should be efficient enough to handle matrices up to the size of 1000x1000.
+- Ensure that water cells are correctly assigned height 0.
+- The matrix will always contain at least one water cell, and its size will not exceed 1000x1000.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+    int m = isWater.size(), n = isWater[0].size();
+    
+    vector<vector<int>> ans(m, vector<int>(n, 0)), vis(m, vector<int>(n, 0));
+    
+    queue<vector<int>> q;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(isWater[i][j] == 1)
+            q.push({i, j});
+    
+    int rot[] = {0, 1, 0, -1, 0};
+    
+    int cur = 0;
+    while(!q.empty()) {
+        int sz = q.size();
+        while(sz--) {
+            auto it = q.front();
+            q.pop();
+            if(vis[it[0]][it[1]]) continue;
+            vis[it[0]][it[1]] = 1;
+            
+            ans[it[0]][it[1]] = cur;
+            
+            for(int i = 0; i < 4; i++) {
+                int x = it[0] + rot[i], y = it[1] + rot[i + 1];
+                if(x < 0 || y < 0 || x == m || y == n || vis[x][y]) continue;
+                q.push({x, y});
             }
-            cur++;
         }
-        return ans;
+        cur++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to find the heights of a grid based on the location of water cells. Given a 2D grid `isWater`, where cells containing `1` represent water and cells containing `0` represent land, the goal is to compute the height of each cell such that:
-1. Water cells are at height `0`.
-2. Each land cell's height is defined as the minimum distance to any water cell. 
-3. The height increases by `1` for each step away from a water cell.
-
-### Approach
-
-To solve this problem, we can use a breadth-first search (BFS) algorithm. BFS is suitable for this scenario because it explores all cells at the current height before moving on to the next height level. This guarantees that each land cell will receive its correct height based on the shortest distance to the nearest water cell.
-
-The steps of the approach are as follows:
-
-1. **Initialization**: 
-   - Create a result matrix `ans` initialized to zero for all cells, which will eventually hold the heights.
-   - Create a visitation matrix `vis` to track whether a cell has been processed.
-   - Initialize a queue to hold the coordinates of the water cells.
-
-2. **Enqueue Water Cells**: 
-   - Traverse the grid and enqueue the coordinates of all water cells into the queue. These will serve as the starting points for BFS.
-
-3. **BFS Exploration**: 
-   - While the queue is not empty, perform the following:
-     - For each cell in the queue, retrieve its coordinates and mark it as visited.
-     - Set the height of this cell in the `ans` matrix to the current BFS level.
-     - For each of the four possible directions (up, down, left, right), check if the neighboring cell is within bounds and not yet visited. If valid, enqueue the neighboring cell for further exploration.
-   
-4. **Height Increment**: 
-   - After processing all cells at the current level, increment the height level for the next iteration.
-
-5. **Return Result**: 
-   - Finally, return the populated `ans` matrix, which now contains the heights of all cells.
-
-### Code Breakdown (Step by Step)
-
-The code is implemented in the `Solution` class with a public method `highestPeak`. Below is a detailed breakdown of the code:
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+    return ans;
+}
 ```
-- The class `Solution` is defined, and the method `highestPeak` is declared, taking the `isWater` grid as input.
 
-```cpp
-        int m = isWater.size(), n = isWater[0].size();
-        
-        vector<vector<int>> ans(m, vector<int>(n, 0)), vis(m, vector<int>(n, 0));
-```
-- The dimensions of the grid are stored in `m` and `n`.
-- Two matrices are created:
-  - `ans` to store the heights, initialized to zero.
-  - `vis` to keep track of visited cells, also initialized to zero.
+This is the full code for finding the highest peak in a grid of water and land cells, where water cells are marked as 1, and land cells as 0. The algorithm uses a breadth-first search (BFS) approach to calculate the elevation for each cell in the grid.
 
-```cpp
-        queue<vector<int>> q;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(isWater[i][j] == 1)
-                q.push({i, j});
-```
-- A queue `q` is declared to facilitate BFS.
-- A nested loop is used to identify all water cells, which are then enqueued with their coordinates.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+	```
+	The function starts by declaring a 2D vector `highestPeak` which takes the `isWater` grid as input.
 
-```cpp
-        int rot[] = {0, 1, 0, -1, 0};
-```
-- An array `rot` is defined to assist with the movement in the four possible directions (down, right, up, left).
+2. **Variable Initialization**
+	```cpp
+	    int m = isWater.size(), n = isWater[0].size();
+	```
+	Here, the number of rows (`m`) and columns (`n`) of the `isWater` grid are stored.
 
-```cpp
-        int cur = 0;
-        while(!q.empty()) {
-            int sz = q.size();
-            while(sz--) {
-                auto it = q.front();
-                q.pop();
-                if(vis[it[0]][it[1]]) continue;
-                vis[it[0]][it[1]] = 1;
-                
-                ans[it[0]][it[1]] = cur;
-```
-- A variable `cur` is initialized to zero, representing the current height level.
-- The outer while loop continues until the queue is empty.
-- The size of the queue is stored in `sz`, and an inner loop processes each cell in the queue:
-  - The current cell's coordinates are retrieved from the front of the queue, and the cell is popped from the queue.
-  - If the cell has already been visited, it is skipped.
-  - Mark the cell as visited and set its height in the `ans` matrix to `cur`.
+3. **2D Grid Initialization**
+	```cpp
+	    
+	```
+	Initializing variables for storing the result (`ans`) and a visited status grid (`vis`).
 
-```cpp
-                for(int i = 0; i < 4; i++) {
-                    int x = it[0] + rot[i], y = it[1] + rot[i + 1];
-                    if(x < 0 || y < 0 || x == m || y == n || vis[x][y]) continue;
-                    q.push({x, y});
-                }
-            }
-            cur++;
-        }
-```
-- After processing the current cell, the algorithm checks each of the four possible neighboring cells:
-  - If a neighboring cell is valid (within bounds and not visited), it is enqueued for further processing.
-- Once all cells at the current height have been processed, the height `cur` is incremented for the next iteration.
+4. **Grid Initialization**
+	```cpp
+	    vector<vector<int>> ans(m, vector<int>(n, 0)), vis(m, vector<int>(n, 0));
+	```
+	Two 2D grids `ans` and `vis` are initialized. `ans` stores the highest peak at each grid position, and `vis` keeps track of whether a cell has been visited in BFS.
 
-```cpp
-        return ans;
-    }
-};
-```
-- The method returns the populated `ans` matrix containing the heights of all cells.
+5. **Queue Initialization**
+	```cpp
+	    queue<vector<int>> q;
+	```
+	A queue `q` is initialized for the breadth-first search (BFS) traversal.
 
-### Complexity
+6. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	This loop iterates over each row of the grid.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. Each cell is processed once in the BFS.
+7. **Loop Initialization**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	This loop iterates over each column of the grid.
 
-- **Space Complexity**: The space complexity is also \(O(m \times n)\) due to the `ans`, `vis`, and queue structures used during the BFS process.
+8. **Conditional Check**
+	```cpp
+	        if(isWater[i][j] == 1)
+	```
+	This condition checks if the current cell is water (value 1). If true, it adds the cell to the queue for BFS.
 
-### Conclusion
+9. **Queue Operation**
+	```cpp
+	            q.push({i, j});
+	```
+	If the cell is water, the current coordinates are added to the queue.
 
-The `highestPeak` method effectively computes the height of each cell in a grid based on the proximity to water cells using a breadth-first search approach. By leveraging BFS, the algorithm guarantees that each land cell is assigned the correct height corresponding to its distance from the nearest water cell, ensuring that the heights increase appropriately.
+10. **Array Initialization**
+	```cpp
+	    int rot[] = {0, 1, 0, -1, 0};
+	```
+	This array represents the possible four directions (right, down, left, up) for BFS traversal.
 
-This solution is efficient and straightforward, making it suitable for similar problems involving grid traversal and distance calculations. Understanding and implementing BFS in this context not only solves the problem at hand but also reinforces valuable concepts applicable to a wide range of graph-based problems in computer science. 
+11. **BFS Loop**
+	```cpp
+	    int cur = 0;
+	```
+	Set the current BFS level to 0.
 
-Overall, this implementation illustrates the power of breadth-first search as a method for exploring grid-based problems and provides an optimal solution for calculating cell heights in a structured manner.
+12. **BFS Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start the BFS loop, which continues until the queue is empty.
+
+13. **Queue Size Calculation**
+	```cpp
+	        int sz = q.size();
+	```
+	Get the size of the queue for the current level of BFS.
+
+14. **BFS Level Loop**
+	```cpp
+	        while(sz--) {
+	```
+	Process each element in the current BFS level.
+
+15. **Queue Dequeue**
+	```cpp
+	            auto it = q.front();
+	```
+	Extract the first element of the queue to process.
+
+16. **Queue Dequeue**
+	```cpp
+	            q.pop();
+	```
+	Remove the processed element from the queue.
+
+17. **Visited Check**
+	```cpp
+	            if(vis[it[0]][it[1]]) continue;
+	```
+	If the current cell has already been visited, skip it.
+
+18. **Visited Mark**
+	```cpp
+	            vis[it[0]][it[1]] = 1;
+	```
+	Mark the current cell as visited.
+
+19. **Answer Assignment**
+	```cpp
+	            ans[it[0]][it[1]] = cur;
+	```
+	Set the current elevation for the cell.
+
+20. **Direction Check**
+	```cpp
+	            for(int i = 0; i < 4; i++) {
+	```
+	Loop through the four possible directions.
+
+21. **Direction Update**
+	```cpp
+	                int x = it[0] + rot[i], y = it[1] + rot[i + 1];
+	```
+	Calculate the next cell's coordinates based on the direction.
+
+22. **Boundary Check**
+	```cpp
+	                if(x < 0 || y < 0 || x == m || y == n || vis[x][y]) continue;
+	```
+	Ensure the next cell is within bounds and has not been visited.
+
+23. **Queue Operation**
+	```cpp
+	                q.push({x, y});
+	```
+	Push the next cell into the queue for BFS processing.
+
+24. **Level Increment**
+	```cpp
+	        cur++;
+	```
+	Increment the BFS level after processing one level.
+
+25. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the final `ans` grid containing the highest peak elevations.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The BFS processes each cell in the matrix once.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+We use two matrices (the result matrix and the visited matrix), each of size m x n.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/map-of-highest-peak/description/)
 

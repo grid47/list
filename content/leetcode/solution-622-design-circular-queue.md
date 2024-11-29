@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "aBbsfn863oA"
 youtube_upload_date="2022-02-19"
 youtube_thumbnail="https://i.ytimg.com/vi/aBbsfn863oA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,56 +28,101 @@ youtube_thumbnail="https://i.ytimg.com/vi/aBbsfn863oA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design and implement a Circular Queue. A circular queue is a linear data structure where the operations follow the FIFO principle, and the last position is connected to the first, forming a circle. This design allows better space utilization.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You will be provided with an integer `k`, the size of the circular queue. The operations available are enQueue, deQueue, Front, Rear, isEmpty, and isFull.
+- **Example:** `['MyCircularQueue', 'enQueue', 'enQueue', 'deQueue', 'Front', 'Rear', 'isEmpty', 'isFull'] [[5], [1], [2], [], [], [], [], []]`
+- **Constraints:**
+	- 1 <= k <= 1000
+	- 0 <= value <= 1000
+	- At most 3000 calls will be made to enQueue, deQueue, Front, Rear, isEmpty, and isFull.
 
-{{< highlight cpp >}}
-class MyCircularQueue {
-    vector<int> q;
-    int frd, bck;
-    int sz, cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each operation, return the appropriate result: true/false for enQueue, deQueue, isEmpty, isFull; the element for Front and Rear operations.
+- **Example:** `[null, true, true, true, false, 3, true, true, true, 4]`
+- **Constraints:**
+	- Return true if the operation is successful, otherwise false.
+	- Return the front or rear element, or -1 if the queue is empty.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Implement a circular queue that efficiently reuses space when elements are dequeued.
+
+- 1. Initialize the queue with size k.
+- 2. Implement methods for enQueue, deQueue, Front, Rear, isEmpty, and isFull.
+- 3. Use modular arithmetic to handle the circular behavior of the queue.
+{{< dots >}}
+### Problem Assumptions ✅
+- The operations will be called within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `['MyCircularQueue', 'enQueue', 'enQueue', 'enQueue', 'enQueue', 'Rear', 'isFull', 'deQueue', 'enQueue', 'Rear']`  \
+  **Explanation:** This example demonstrates the behavior of the queue when full, showing the operations enQueue, deQueue, and the correct handling of the queue size limit.
+
+{{< dots >}}
+## Approach 🚀
+We will use a circular array with two pointers to track the front and rear of the queue, ensuring efficient insertion and removal of elements.
+
+### Initial Thoughts 💭
+- Circular queues provide better space utilization by reusing the front space once elements are dequeued.
+- We will use modular arithmetic to wrap the indices around when the front or rear reaches the end of the array.
+{{< dots >}}
+### Edge Cases 🌐
+- Trying to dequeue or get the front/rear of an empty queue should return -1.
+- The queue size can go up to 1000, but the implementation should still be efficient.
+- When the queue is full, trying to enqueue an element should return false.
+- Ensure the number of operations does not exceed 3000.
+{{< dots >}}
+## Code 💻
+```cpp
+int frd, bck;
+int sz, cnt;
 public:
-    MyCircularQueue(int k): sz(k), frd(0), bck(-1), q(k, 0), cnt(0) {
-        
-    }
+MyCircularQueue(int k): sz(k), frd(0), bck(-1), q(k, 0), cnt(0) {
     
-    bool enQueue(int value) {
-        if(isFull()) return false;        
-        bck = (bck + 1) % sz;
-        q[bck] = value;
-        
-        cnt++;
-        
-        return true;
-    }
-    
-    bool deQueue() {
-        if(isEmpty()) return false;        
+}
 
-        frd = (frd +1) %sz;        
-        cnt--;
-        
-        return true;        
-    }
+bool enQueue(int value) {
+    if(isFull()) return false;        
+    bck = (bck + 1) % sz;
+    q[bck] = value;
     
-    int Front() {
-        if(isEmpty()) return -1;
-        
-        return q[frd];
-    }
+    cnt++;
     
-    int Rear() {
-        if(isEmpty()) return -1;
-        
-        return q[bck];        
-    }
+    return true;
+}
+
+bool deQueue() {
+    if(isEmpty()) return false;        
+
+    frd = (frd +1) %sz;        
+    cnt--;
     
-    bool isEmpty() {
-        return cnt == 0;
-    }
+    return true;        
+}
+
+int Front() {
+    if(isEmpty()) return -1;
     
-    bool isFull() {
-        return cnt == sz;
-    }
+    return q[frd];
+}
+
+int Rear() {
+    if(isEmpty()) return -1;
+    
+    return q[bck];        
+}
+
+bool isEmpty() {
+    return cnt == 0;
+}
+
+bool isFull() {
+    return cnt == sz;
+}
 };
 
 /**
@@ -88,133 +134,179 @@ public:
  * int param_4 = obj->Rear();
  * bool param_5 = obj->isEmpty();
  * bool param_6 = obj->isFull();
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand involves implementing a **circular queue** data structure. A **circular queue** is a type of queue that efficiently handles the operations of adding and removing elements while maintaining a fixed size, such that the first element of the queue can wrap around and reuse space freed by dequeuing elements. The task is to design a class `MyCircularQueue` that supports the following operations:
-
-1. **Enqueue (insert):** Adds an element to the rear of the queue.
-2. **Dequeue (remove):** Removes an element from the front of the queue.
-3. **Front:** Retrieves the element at the front of the queue without removing it.
-4. **Rear:** Retrieves the element at the rear of the queue without removing it.
-5. **isEmpty:** Returns whether the queue is empty or not.
-6. **isFull:** Returns whether the queue is full or not.
-
-### Approach
-
-In a **circular queue**, instead of shifting the elements every time an element is dequeued, we use modular arithmetic to "wrap around" the queue’s array. The approach follows these steps:
-
-1. **Initialization:**
-   - We initialize a queue with a fixed size (`sz`) using a vector `q` of size `sz`.
-   - We maintain two pointers: `frd` (front pointer) and `bck` (back pointer) to track the positions of the front and rear elements in the queue.
-   - A counter `cnt` is used to track the current number of elements in the queue, ensuring that we can check if the queue is full or empty efficiently.
-
-2. **Enqueue (Insert Operation):**
-   - We first check if the queue is full using the `isFull()` function. If it is full, we return `false`.
-   - If not full, we increment the rear pointer (`bck`) by 1 (with modulo operation to handle wrap-around) and add the element at that position in the array.
-   - We increase the count `cnt` to reflect the new element.
-
-3. **Dequeue (Remove Operation):**
-   - We check if the queue is empty using the `isEmpty()` function. If the queue is empty, we return `false`.
-   - If not empty, we increment the front pointer (`frd`) by 1 (again with modulo to handle wrap-around) and decrease the counter `cnt`.
-
-4. **Front and Rear Operations:**
-   - The `Front()` function simply returns the element at the front pointer `frd`, or `-1` if the queue is empty.
-   - The `Rear()` function returns the element at the rear pointer `bck`, or `-1` if the queue is empty.
-
-5. **isEmpty and isFull:**
-   - The `isEmpty()` function returns `true` if `cnt == 0`, indicating that there are no elements in the queue.
-   - The `isFull()` function returns `true` if `cnt == sz`, indicating that the queue has reached its maximum capacity.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Class Initialization
-```cpp
-MyCircularQueue(int k): sz(k), frd(0), bck(-1), q(k, 0), cnt(0) {}
 ```
-- **sz:** This is the size of the circular queue. We allocate a vector `q` with `k` elements initialized to zero.
-- **frd:** The front pointer, initialized to 0. It tracks the front of the queue.
-- **bck:** The back pointer, initialized to `-1`. It tracks the rear of the queue.
-- **q:** The vector holding the actual elements of the queue.
-- **cnt:** The counter for the number of elements in the queue, initialized to 0.
 
-#### Step 2: Enqueue Operation
-```cpp
-bool enQueue(int value) {
-    if(isFull()) return false;        
-    bck = (bck + 1) % sz;
-    q[bck] = value;
-    cnt++;
-    return true;
-}
-```
-- **isFull():** Checks if the queue is full. If true, it returns `false`.
-- **bck = (bck + 1) % sz:** This handles the circular nature of the queue. If the back pointer reaches the end of the queue, it wraps around to the beginning.
-- **q[bck] = value:** Assigns the given value to the rear of the queue.
-- **cnt++:** Increments the counter as we added a new element.
+This code implements a circular queue with methods for enqueue, dequeue, checking the front and rear elements, and checking if the queue is empty or full.
 
-#### Step 3: Dequeue Operation
-```cpp
-bool deQueue() {
-    if(isEmpty()) return false;        
-    frd = (frd +1) % sz;
-    cnt--;
-    return true;        
-}
-```
-- **isEmpty():** Checks if the queue is empty. If true, it returns `false`.
-- **frd = (frd + 1) % sz:** This moves the front pointer forward, wrapping around if necessary.
-- **cnt--:** Decreases the counter as we removed an element from the queue.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declarations**
+	```cpp
+	int frd, bck;
+	```
+	Declares two integer variables, `frd` (front) and `bck` (back), which track the front and back indices of the circular queue.
 
-#### Step 4: Front Operation
-```cpp
-int Front() {
-    if(isEmpty()) return -1;
-    return q[frd];
-}
-```
-- **isEmpty():** Checks if the queue is empty. If true, returns `-1` to indicate no elements.
-- **q[frd]:** Returns the element at the front of the queue.
+2. **Variable Declarations**
+	```cpp
+	int sz, cnt;
+	```
+	Declares two integer variables, `sz` (size) for the capacity of the queue and `cnt` (count) for the current number of elements in the queue.
 
-#### Step 5: Rear Operation
-```cpp
-int Rear() {
-    if(isEmpty()) return -1;
-    return q[bck];        
-}
-```
-- **isEmpty():** Checks if the queue is empty. If true, returns `-1` to indicate no elements.
-- **q[bck]:** Returns the element at the rear of the queue.
+3. **Constructor Declaration**
+	```cpp
+	public:
+	```
+	Marks the start of the public member functions for the `MyCircularQueue` class.
 
-#### Step 6: isEmpty and isFull Operations
-```cpp
-bool isEmpty() {
-    return cnt == 0;
-}
+4. **Constructor Implementation**
+	```cpp
+	MyCircularQueue(int k): sz(k), frd(0), bck(-1), q(k, 0), cnt(0) {
+	```
+	Constructor that initializes the circular queue with a given size `k`, setting the front index (`frd`) to 0, the back index (`bck`) to -1, and initializing the queue array `q` with `k` zeros. The element count (`cnt`) is also set to 0.
 
-bool isFull() {
-    return cnt == sz;
-}
-```
-- **isEmpty():** Returns `true` if `cnt == 0`, meaning the queue is empty.
-- **isFull():** Returns `true` if `cnt == sz`, meaning the queue is full.
+5. **Enqueue Method**
+	```cpp
+	bool enQueue(int value) {
+	```
+	Defines the `enQueue` method that adds an element to the circular queue if it's not full.
 
-### Complexity
+6. **Enqueue Check Full**
+	```cpp
+	    if(isFull()) return false;
+	```
+	Checks if the queue is full. If true, returns `false` to indicate the enqueue operation failed.
 
-#### Time Complexity:
-- **O(1)** for all operations: `enQueue`, `deQueue`, `Front`, `Rear`, `isEmpty`, and `isFull`. Each operation only involves constant-time arithmetic or indexing operations.
+7. **Enqueue Update Back Index**
+	```cpp
+	    bck = (bck + 1) % sz;
+	```
+	Updates the back index (`bck`) to the next position in the circular queue, wrapping around if necessary.
 
-#### Space Complexity:
-- **O(k):** We store the queue elements in a vector `q` of size `k`. Therefore, the space complexity is proportional to the size of the queue.
+8. **Enqueue Insert Value**
+	```cpp
+	    q[bck] = value;
+	```
+	Inserts the given value into the queue at the current back index.
 
-### Conclusion
+9. **Enqueue Increment Count**
+	```cpp
+	    cnt++;
+	```
+	Increments the count (`cnt`) of elements in the queue after successfully inserting the value.
 
-The `MyCircularQueue` class effectively implements a circular queue with constant-time operations for enqueue, dequeue, checking the front, and checking the rear. The use of modular arithmetic for wrapping around the front and rear pointers ensures that the queue behaves circularly and efficiently manages memory usage. This implementation also handles edge cases such as empty or full queues, ensuring that the queue operates reliably under various conditions.
+10. **Enqueue Return**
+	```cpp
+	    return true;
+	```
+	Returns `true` to indicate that the enqueue operation was successful.
 
-The solution is highly efficient, with **O(1)** time complexity for all major operations, making it suitable for real-time applications where performance and memory efficiency are critical. This approach ensures that the queue operates in a consistent and predictable manner even as elements are added and removed cyclically.
+11. **Dequeue Method**
+	```cpp
+	bool deQueue() {
+	```
+	Defines the `deQueue` method that removes an element from the front of the circular queue if it's not empty.
+
+12. **Dequeue Check Empty**
+	```cpp
+	    if(isEmpty()) return false;
+	```
+	Checks if the queue is empty. If true, returns `false` to indicate the dequeue operation failed.
+
+13. **Dequeue Update Front Index**
+	```cpp
+	    frd = (frd + 1) % sz;
+	```
+	Updates the front index (`frd`) to the next position in the circular queue, wrapping around if necessary.
+
+14. **Dequeue Decrement Count**
+	```cpp
+	    cnt--;
+	```
+	Decrements the count (`cnt`) of elements in the queue after successfully removing an element.
+
+15. **Dequeue Return**
+	```cpp
+	    return true;
+	```
+	Returns `true` to indicate that the dequeue operation was successful.
+
+16. **Front Method**
+	```cpp
+	int Front() {
+	```
+	Defines the `Front` method that returns the element at the front of the circular queue, or -1 if empty.
+
+17. **Front Check Empty**
+	```cpp
+	    if(isEmpty()) return -1;
+	```
+	Checks if the queue is empty. If true, returns `-1` to indicate there is no front element.
+
+18. **Front Return**
+	```cpp
+	    return q[frd];
+	```
+	Returns the element at the front of the queue.
+
+19. **Rear Method**
+	```cpp
+	int Rear() {
+	```
+	Defines the `Rear` method that returns the element at the rear of the circular queue, or -1 if empty.
+
+20. **Rear Check Empty**
+	```cpp
+	    if(isEmpty()) return -1;
+	```
+	Checks if the queue is empty. If true, returns `-1` to indicate there is no rear element.
+
+21. **Rear Return**
+	```cpp
+	    return q[bck];
+	```
+	Returns the element at the rear of the queue.
+
+22. **isEmpty Method**
+	```cpp
+	bool isEmpty() {
+	```
+	Defines the `isEmpty` method that checks if the queue is empty.
+
+23. **isEmpty Return**
+	```cpp
+	    return cnt == 0;
+	```
+	Returns `true` if the queue is empty, i.e., if the element count (`cnt`) is 0.
+
+24. **isFull Method**
+	```cpp
+	bool isFull() {
+	```
+	Defines the `isFull` method that checks if the queue is full.
+
+25. **isFull Return**
+	```cpp
+	    return cnt == sz;
+	```
+	Returns `true` if the queue is full, i.e., if the element count (`cnt`) is equal to the queue size (`sz`).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+All operations (enQueue, deQueue, Front, Rear, isEmpty, isFull) take constant time.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+Space complexity is proportional to the size of the queue, which is `k`.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-circular-queue/description/)
 

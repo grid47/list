@@ -14,136 +14,214 @@ img_src = ""
 youtube = "Sh-IqBIg9dU"
 youtube_upload_date="2024-10-22"
 youtube_thumbnail="https://i.ytimg.com/vi/Sh-IqBIg9dU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array of strings `words` and two integers `left` and `right`. A string is considered a vowel string if it starts and ends with a vowel character (vowels are 'a', 'e', 'i', 'o', 'u'). Your task is to return the number of vowel strings in the array `words` where the indices fall within the range [left, right].
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `words` and two integers `left` and `right`.
+- **Example:** `For example, `words = ["apple", "banana", "oreo"], left = 0, right = 2`.`
+- **Constraints:**
+	- 1 <= words.length <= 1000
+	- 1 <= words[i].length <= 10
+	- words[i] consists of only lowercase English letters
+	- 0 <= left <= right < words.length
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    long long kthLargestLevelSum(TreeNode* root, int k) {
-        priority_queue<long long, vector<long long>, greater<long long>> pq;
-        if(!root) return 0;
-        queue<TreeNode*> q;
-        q.push(root);
-        while(!q.empty()) {
-            int sz = q.size();
-            long long sum = 0;
-            while(sz--) {
-                auto it = q.front();
-                sum += it->val;
-                q.pop();
-                if(it->left) q.push(it->left);
-                if(it->right) q.push(it->right);
-            }
-            pq.push(sum);
-            if(pq.size() > k) pq.pop();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer that represents the number of vowel strings within the specified range of indices.
+- **Example:** `For input `words = ["apple", "banana", "oreo"], left = 0, right = 2`, the output is `2`.`
+- **Constraints:**
+	- The result will always be a valid integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the number of vowel strings in the given range of indices.
+
+- 1. Iterate through the array `words` from index `left` to index `right`.
+- 2. For each word, check if the first and last characters are vowels.
+- 3. Count how many words meet the condition of being a vowel string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is valid, containing only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `words = ["apple", "banana", "oreo"], left = 0, right = 2``  \
+  **Explanation:** The valid vowel strings in the range are "apple" and "oreo", so the result is 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we can loop through the array `words` within the specified range, and for each word, check if it starts and ends with a vowel. This can be achieved using basic string operations.
+
+### Initial Thoughts 💭
+- We can easily check the start and end characters of each word to see if they are vowels.
+- By iterating over the range and checking each word, we can count the number of valid vowel strings efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the input will contain at least one word.
+- The solution should handle arrays with up to 1000 words efficiently.
+- If `left` equals `right`, we are checking only one word, which should be handled accordingly.
+- The given range [left, right] will always be valid for the input array.
+{{< dots >}}
+## Code 💻
+```cpp
+long long kthLargestLevelSum(TreeNode* root, int k) {
+    priority_queue<long long, vector<long long>, greater<long long>> pq;
+    if(!root) return 0;
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        int sz = q.size();
+        long long sum = 0;
+        while(sz--) {
+            auto it = q.front();
+            sum += it->val;
+            q.pop();
+            if(it->left) q.push(it->left);
+            if(it->right) q.push(it->right);
         }
-        if(pq.size() < k) return -1;
-        return pq.top();
+        pq.push(sum);
+        if(pq.size() > k) pq.pop();
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding the `k`-th largest sum of node values at any level in a binary tree. The levels of the tree are defined by the depth of the nodes, where the root is at level 0, its children are at level 1, and so on. The goal is to calculate the sum of node values at each level and return the `k`-th largest sum. If there are fewer than `k` levels, the function should return `-1`.
-
-### Approach
-
-To solve this problem efficiently, we need to perform a level-order traversal of the tree to calculate the sum of nodes at each level. For this, we can use a **breadth-first search (BFS)** algorithm, which is well-suited for exploring a tree level by level.
-
-Once we have the sum for each level, we need to track the largest sums in order to find the `k`-th largest. A **priority queue (min-heap)** is a good choice for this task because it allows us to efficiently keep track of the largest sums by maintaining a heap of size `k`. The smallest element in the heap will always be the `k`-th largest sum, as the heap is structured in a way that the smallest element is at the top. We will push each level's sum into the heap and, if the heap exceeds size `k`, remove the smallest element.
-
-#### Key Steps:
-1. **Level-order Traversal**: Using BFS, we will traverse the binary tree level by level, calculating the sum of nodes at each level.
-2. **Maintain Top k Sums**: Use a priority queue to track the top `k` sums.
-3. **Return the k-th Largest Sum**: After traversing all levels, if we have fewer than `k` sums, return `-1`. Otherwise, return the smallest element in the heap, which represents the `k`-th largest sum.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Priority Queue Setup**:
-```cpp
-priority_queue<long long, vector<long long>, greater<long long>> pq;
-```
-Here, we create a min-heap (`priority_queue`) to store the sums of node values at each level. The `greater<long long>` comparator ensures that the smallest sum is at the top of the heap, which allows us to efficiently track the `k`-th largest sum by maintaining a heap of size `k`.
-
-#### 2. **Initial Check for Empty Tree**:
-```cpp
-if(!root) return 0;
-```
-If the tree is empty (i.e., `root` is `nullptr`), we immediately return `0` since there are no levels to calculate sums for.
-
-#### 3. **Queue Initialization for Level-order Traversal**:
-```cpp
-queue<TreeNode*> q;
-q.push(root);
-```
-We initialize a queue (`q`) to store the nodes of the tree as we traverse it level by level. We begin by pushing the root node into the queue.
-
-#### 4. **BFS Traversal**:
-```cpp
-while(!q.empty()) {
-    int sz = q.size();
-    long long sum = 0;
-    while(sz--) {
-        auto it = q.front();
-        sum += it->val;
-        q.pop();
-        if(it->left) q.push(it->left);
-        if(it->right) q.push(it->right);
-    }
-    pq.push(sum);
-    if(pq.size() > k) pq.pop();
+    if(pq.size() < k) return -1;
+    return pq.top();
 }
 ```
-This loop represents the BFS traversal:
-- We first get the size of the current level (`sz = q.size()`), which tells us how many nodes are at this level.
-- For each node at the current level, we:
-  - Add its value to `sum`.
-  - Remove the node from the queue and add its left and right children (if any) to the queue for the next level.
-- After calculating the sum for the current level, we push it into the priority queue (`pq.push(sum)`).
-- If the size of the priority queue exceeds `k`, we remove the smallest element (`pq.pop()`). This ensures that the heap always contains the `k` largest sums.
 
-#### 5. **Final Check**:
-```cpp
-if(pq.size() < k) return -1;
-return pq.top();
-```
-After all levels have been processed:
-- If the priority queue contains fewer than `k` sums (meaning there are fewer than `k` levels), we return `-1`.
-- Otherwise, the smallest element in the heap (`pq.top()`) represents the `k`-th largest sum, which we return.
+This function calculates the kth largest sum of nodes at a level in a binary tree, using a priority queue to store the sums of levels while traversing the tree level by level.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long kthLargestLevelSum(TreeNode* root, int k) {
+	```
+	Define the function `kthLargestLevelSum` which takes a `TreeNode* root` (the root of the binary tree) and an integer `k` (the level number to find the kth largest sum for).
 
-- **Time Complexity**:
-  - The time complexity is dominated by the level-order traversal of the tree. Each node is processed once, so the traversal takes \(O(n)\), where `n` is the number of nodes in the tree.
-  - For each level, we insert the sum into the priority queue. Inserting an element into a priority queue takes \(O(\log k)\) time. Since there are at most `n` levels, the total time complexity for heap operations is \(O(n \log k)\).
-  - Overall, the time complexity is \(O(n \log k)\).
+2. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<long long, vector<long long>, greater<long long>> pq;
+	```
+	Create a min-heap priority queue `pq` to store the sums of levels, which will help track the kth largest sum.
 
-- **Space Complexity**:
-  - The space complexity is \(O(n)\) for the queue used in the level-order traversal, as in the worst case (a fully balanced tree), the queue can hold up to `n/2` nodes at the last level.
-  - Additionally, the priority queue can hold up to `k` sums, so the space complexity for the heap is \(O(k)\).
-  - Therefore, the total space complexity is \(O(n + k)\).
+3. **Edge Case Check**
+	```cpp
+	    if(!root) return 0;
+	```
+	Check if the root is null. If the tree is empty, return 0 since there are no level sums.
 
-### Conclusion
+4. **Queue Initialization**
+	```cpp
+	    queue<TreeNode*> q;
+	```
+	Initialize a queue `q` to perform a breadth-first search (BFS) on the binary tree.
 
-This solution efficiently calculates the `k`-th largest sum of nodes at any level in a binary tree. By utilizing BFS for level-order traversal and a priority queue to maintain the top `k` largest sums, we achieve a time complexity of \(O(n \log k)\), which is optimal for this problem. The algorithm handles both balanced and unbalanced trees efficiently and ensures that we correctly return the `k`-th largest sum or `-1` if there are fewer than `k` levels.
+5. **Add Root to Queue**
+	```cpp
+	    q.push(root);
+	```
+	Push the root node into the queue to start the BFS traversal.
+
+6. **BFS Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start a while loop that runs until the queue is empty, ensuring that we process each level of the binary tree.
+
+7. **Level Size Calculation**
+	```cpp
+	        int sz = q.size();
+	```
+	Store the number of nodes at the current level (`sz`) in the variable `sz`.
+
+8. **Level Sum Initialization**
+	```cpp
+	        long long sum = 0;
+	```
+	Initialize a variable `sum` to store the sum of the node values at the current level.
+
+9. **Process Each Node at the Level**
+	```cpp
+	        while(sz--) {
+	```
+	Loop through all nodes at the current level.
+
+10. **Node Processing**
+	```cpp
+	            auto it = q.front();
+	```
+	Get the front node from the queue (`it`).
+
+11. **Sum Accumulation**
+	```cpp
+	            sum += it->val;
+	```
+	Add the value of the current node (`it->val`) to the `sum`.
+
+12. **Queue Update**
+	```cpp
+	            q.pop();
+	```
+	Remove the current node from the queue.
+
+13. **Left Child Check**
+	```cpp
+	            if(it->left) q.push(it->left);
+	```
+	If the current node has a left child, add it to the queue for processing in the next iteration.
+
+14. **Right Child Check**
+	```cpp
+	            if(it->right) q.push(it->right);
+	```
+	If the current node has a right child, add it to the queue for processing in the next iteration.
+
+15. **Push Sum to Priority Queue**
+	```cpp
+	        pq.push(sum);
+	```
+	Push the sum of the current level to the priority queue.
+
+16. **Priority Queue Size Check**
+	```cpp
+	        if(pq.size() > k) pq.pop();
+	```
+	If the priority queue exceeds size `k`, pop the smallest sum to ensure we only keep the top `k` largest sums.
+
+17. **Check for kth Largest**
+	```cpp
+	    if(pq.size() < k) return -1;
+	```
+	Check if the priority queue has fewer than `k` sums. If so, return -1 as there are not enough levels.
+
+18. **Return kth Largest Sum**
+	```cpp
+	    return pq.top();
+	```
+	Return the top element of the priority queue, which is the kth largest sum of a level.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the length of the range [left, right]. For each word, we perform constant time operations to check if the first and last characters are vowels.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) since we only use a few extra variables for counting and checking the vowels.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/description/)
 

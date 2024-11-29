@@ -14,132 +14,193 @@ img_src = ""
 youtube = "9wZ-TWBreTg"
 youtube_upload_date="2021-03-15"
 youtube_thumbnail="https://i.ytimg.com/vi/9wZ-TWBreTg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` and two integers `x` and `y`. You can perform two types of operations any number of times:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumGain(string s, int x, int y, char a = 'a', char b = 'b') {
-        if(y > x) {
-            swap(a, b);
-            swap(x, y);
-        }
-        
-        auto s1 = greedy(s, a, b), s2 = greedy(s1,  b, a);
-        
-        return ((s.size() - s1.size()) / 2) * x + ((s1.size() - s2.size()) / 2) * y;
-    }
-    string greedy(string s, char a, char b) {
-        
-        string st;
-        
-        for(char c : s) {
-            if(!st.empty() && st.back() == a && c == b)
-                st.pop_back();
-            else st.push_back(c);
-        }
-        return st;
-    }
-    
-};
-{{< /highlight >}}
----
+1. Remove the substring "ab" and gain `x` points.
+2. Remove the substring "ba" and gain `y` points.
 
-### Problem Statement
+Each time a substring is removed, the characters are deleted from the string, and the corresponding points are added to your total score. Your task is to maximize the total score after applying these operations any number of times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` of lowercase English letters and two integers `x` and `y`.
+- **Example:** `Input: s = "dcbaba", x = 3, y = 4`
+- **Constraints:**
+	- 1 <= s.length <= 100000
+	- 1 <= x, y <= 10000
+	- s consists of lowercase English letters.
 
-The problem involves maximizing the gain from removing pairs of characters from a given string based on specified point values for the pairs. The character pairs that can be removed are specified by two characters, \( a \) and \( b \). Each time a pair \( (a, b) \) is removed, the gain is \( x \), and each time a pair \( (b, a) \) is removed, the gain is \( y \). The goal is to determine the maximum gain possible by optimally removing these character pairs from the string.
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum points you can gain after applying the operations.
+- **Example:** `Output: 12`
+- **Constraints:**
+	- The result will be an integer.
 
-For example, given the string `"ababcb"`, if \( x = 5 \) and \( y = 3 \), and the pairs to consider are \( a = 'a' \) and \( b = 'b' \), the solution will find how many pairs can be removed and calculate the total gain accordingly.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the score by performing the optimal sequence of substring removal operations.
 
-### Approach
+- 1. Check which substring, 'ab' or 'ba', gives the higher points and prioritize removing that.
+- 2. Use a greedy approach to simulate the removals of 'ab' or 'ba' from the string, adjusting the score accordingly.
+- 3. After each removal, check if further operations can be performed until no more 'ab' or 'ba' can be removed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `s` will always be valid and consist of lowercase English letters.
+- The operations on 'ab' and 'ba' are independent, and they can be performed multiple times.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "dcbaba", x = 3, y = 4`  \
+  **Explanation:** In this case, removing 'ba' first (giving 4 points) and then 'ab' (giving 3 points) results in a total score of 12.
 
-To solve this problem, we can adopt the following strategy:
+- **Input:** `Input: s = "aabbab", x = 5, y = 4`  \
+  **Explanation:** First, remove 'ab' (5 points), then remove 'ba' (4 points), giving a total score of 9.
 
-1. **Identify the Character Gain Order**: First, determine whether to prioritize removing pairs of \( (a, b) \) or \( (b, a) \) based on the gain values \( x \) and \( y \). If \( y \) is greater than \( x \), swap the characters and their respective gain values.
+{{< dots >}}
+## Approach 🚀
+The solution involves applying a greedy approach to remove the highest scoring substrings first, maximizing the total score.
 
-2. **Greedily Remove Pairs**: Use a greedy approach to remove pairs from the string. The greedy function will iterate through the string, maintaining a stack where it pushes characters unless it finds a removable pair. When it encounters the characters \( a \) followed by \( b \), it pops \( a \) from the stack, effectively removing the pair.
-
-3. **Calculate Total Gain**: The total gain is calculated based on the number of pairs removed and their respective gain values. The process involves running the greedy function twice: first to remove \( (a, b) \) pairs, and then to remove \( (b, a) \) pairs from the resulting string.
-
-4. **Return Result**: Finally, return the total calculated gain as the result.
-
-### Code Breakdown (Step by Step)
-
-Let’s analyze the provided code to understand its functionality in detail:
-
-1. **Class Declaration**: The solution is encapsulated within a class named `Solution`.
-
-    ```cpp
-    class Solution {
-    ```
-
-2. **Method Declaration**: The public method `maximumGain` takes the input string `s`, the gain values `x` and `y`, and two optional characters \( a \) and \( b \) (defaulting to 'a' and 'b').
-
-    ```cpp
-    public:
-    int maximumGain(string s, int x, int y, char a = 'a', char b = 'b') {
-    ```
-
-3. **Prioritize Gain Values**: The first step inside the method is to compare \( x \) and \( y \). If \( y \) is greater than \( x \), swap the characters and their corresponding gains to ensure that we always start with the highest priority pair.
-
-    ```cpp
+### Initial Thoughts 💭
+- We need to remove substrings in the most beneficial order (either 'ab' or 'ba').
+- Since we can perform operations on the string repeatedly, using a greedy approach will help us maximize the points.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one character.
+- Ensure that the solution handles strings with lengths up to 100,000 characters efficiently.
+- If the string contains no 'ab' or 'ba', the total score should be 0.
+- The algorithm should handle both small and large inputs efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumGain(string s, int x, int y, char a = 'a', char b = 'b') {
     if(y > x) {
         swap(a, b);
         swap(x, y);
     }
-    ```
-
-4. **Greedy Removal of Pairs**: The first call to the `greedy` function attempts to remove pairs \( (a, b) \). The resulting string `s1` will contain the characters that remain after all possible \( (a, b) \) pairs have been removed.
-
-    ```cpp
+    
     auto s1 = greedy(s, a, b), s2 = greedy(s1,  b, a);
-    ```
-
-5. **Second Pass for Remaining Pairs**: A second call to the `greedy` function is made to remove any remaining pairs \( (b, a) \) from the intermediate string `s1`, resulting in `s2`.
-
-6. **Calculate Total Gain**: The total gain is calculated based on how many pairs were removed. The formula for calculating the gain is as follows:
-   - For pairs \( (a, b) \): The number of pairs removed is \( \frac{s.size() - s1.size()}{2} \), which is multiplied by \( x \).
-   - For pairs \( (b, a) \): The number of pairs removed is \( \frac{s1.size() - s2.size()}{2} \), which is multiplied by \( y \).
-
-    ```cpp
+    
     return ((s.size() - s1.size()) / 2) * x + ((s1.size() - s2.size()) / 2) * y;
-    ```
-
-7. **Greedy Function Implementation**: The `greedy` function processes the string to remove pairs as described.
-
-    ```cpp
-    string greedy(string s, char a, char b) {
-        string st;
-        
-        for(char c : s) {
-            if(!st.empty() && st.back() == a && c == b)
-                st.pop_back();
-            else st.push_back(c);
-        }
-        return st;
+}
+string greedy(string s, char a, char b) {
+    
+    string st;
+    
+    for(char c : s) {
+        if(!st.empty() && st.back() == a && c == b)
+            st.pop_back();
+        else st.push_back(c);
     }
-    ```
+    return st;
+}
 
-    - The function uses a string `st` as a stack to hold characters.
-    - For each character in the string `s`, it checks if the last character in the stack is \( a \) and the current character is \( b \). If so, it pops \( a \) from the stack, effectively removing the pair.
-    - If not, the current character is pushed onto the stack.
+```
 
-8. **Return to Class Scope**: After the greedy method completes its execution, the control returns to the main method, leading to the final result.
+This function calculates the maximum gain from a string of characters by repeatedly removing pairs of specific characters. The greedy function processes the string to perform the removal, and the main function computes the total gain from these operations.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumGain(string s, int x, int y, char a = 'a', char b = 'b') {
+	```
+	Defines the `maximumGain` function that computes the maximum gain by repeatedly removing pairs of characters (`a`, `b`) from the string `s`.
 
-- **Time Complexity**: The time complexity of the solution is \(O(n)\), where \(n\) is the length of the string \(s\). The greedy algorithm processes each character in the string once.
+2. **Condition Check**
+	```cpp
+	    if(y > x) {
+	```
+	Checks if the value of `y` is greater than `x`. If true, it swaps the characters `a` and `b`, as well as their respective values `x` and `y`, to ensure the correct order of operations.
 
-- **Space Complexity**: The space complexity is also \(O(n)\) due to the use of a stack to store characters during the greedy process.
+3. **Swap Characters**
+	```cpp
+	        swap(a, b);
+	```
+	Swaps the characters `a` and `b` to prioritize the character associated with the larger gain (either `x` or `y`).
 
-### Conclusion
+4. **Swap Gains**
+	```cpp
+	        swap(x, y);
+	```
+	Swaps the values of `x` and `y` to ensure the correct association with characters `a` and `b` after the swap.
 
-In conclusion, this solution efficiently maximizes the gain from removing character pairs from a string by strategically prioritizing the removal based on given gain values. The use of a greedy algorithm ensures that the solution is optimal while maintaining clarity and efficiency. The implementation is straightforward and can handle a variety of cases effectively. Overall, the code demonstrates a solid understanding of string manipulation and algorithm design, providing a robust solution to the problem of maximizing gains from character removals.
+5. **Greedy Function Call 1**
+	```cpp
+	    auto s1 = greedy(s, a, b), s2 = greedy(s1,  b, a);
+	```
+	Calls the `greedy` function twice: first with characters `a` and `b`, and then with characters `b` and `a` to maximize the number of pair removals from the string.
+
+6. **Return Calculation**
+	```cpp
+	    return ((s.size() - s1.size()) / 2) * x + ((s1.size() - s2.size()) / 2) * y;
+	```
+	Calculates and returns the total gain by multiplying the number of pair removals with their respective gains (`x` for `a`, `y` for `b`).
+
+7. **Greedy Function Definition**
+	```cpp
+	string greedy(string s, char a, char b) {
+	```
+	Defines the `greedy` function that processes the string `s`, removing pairs of characters `a` and `b` using a stack-based approach.
+
+8. **Initialize Stack**
+	```cpp
+	    string st;
+	```
+	Initializes an empty stack `st` to store characters as they are processed.
+
+9. **Iterate Through String**
+	```cpp
+	    for(char c : s) {
+	```
+	Starts a loop to iterate through each character `c` in the string `s`.
+
+10. **Condition to Remove Pair**
+	```cpp
+	        if(!st.empty() && st.back() == a && c == b)
+	```
+	Checks if the stack is not empty and if the last character in the stack is `a` and the current character is `b`. If true, it removes the pair from the stack.
+
+11. **Pop Pair**
+	```cpp
+	            st.pop_back();
+	```
+	Pops the last character (`a`) from the stack, effectively removing the pair `a, b`.
+
+12. **Push Character**
+	```cpp
+	        else st.push_back(c);
+	```
+	If the condition to remove a pair is not met, it adds the current character `c` to the stack.
+
+13. **Return Stack**
+	```cpp
+	    return st;
+	```
+	Returns the final stack, which contains the string after all possible pairs of characters `a` and `b` have been removed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string. In the best case, we only process the string once.
+- **Average Case:** O(n), as we process each character in the string linearly.
+- **Worst Case:** O(n), since we iterate over the string to check and remove 'ab' and 'ba' substrings.
+
+The time complexity is O(n), as we iterate through the string at most once, performing constant time operations.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no changes to the string are needed.
+- **Worst Case:** O(n), since we store a modified version of the string during processing.
+
+The space complexity is O(n), as the string is processed and stored in memory during the solution.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-score-from-removing-substrings/description/)
 

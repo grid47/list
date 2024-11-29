@@ -14,116 +14,158 @@ img_src = ""
 youtube = "z0InhrjK3es"
 youtube_upload_date="2024-04-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/z0InhrjK3es/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums sorted in non-decreasing order, return an array of the squares of each element, sorted in non-decreasing order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer array nums sorted in non-decreasing order.
+- **Example:** `nums = [-6, -3, 0, 2, 8]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- -10^4 <= nums[i] <= 10^4
+	- nums is sorted in non-decreasing order.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> sortedSquares(vector<int>& nums) {
-        vector<int> ans(nums.size());
-        int l = 0, r = nums.size() - 1;
-        int ll, rr;
-        for(int i = nums.size() - 1; i >= 0; i--) {
-            ll = nums[l] * nums[l];
-            rr = nums[r] * nums[r];
-            if(ll < rr) ans[i] = rr, r--;
-            else ans[i] = ll, l++;
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An array containing the squares of each number from nums, sorted in non-decreasing order.
+- **Example:** `[0, 9, 36, 64, 81]`
+- **Constraints:**
+	- The output should be sorted in non-decreasing order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Square each element and sort the resulting array.
+
+- Square each element of the array.
+- Use a two-pointer approach to combine the negative and positive elements efficiently, leveraging their positions in the sorted array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums is already sorted in non-decreasing order.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [-6, -3, 0, 2, 8]`  \
+  **Explanation:** Squaring each element results in [36, 9, 0, 4, 64]. After sorting, we get [0, 9, 36, 64, 81].
+
+- **Input:** `nums = [-10, -5, 1, 4, 7]`  \
+  **Explanation:** Squaring each element results in [100, 25, 1, 16, 49]. After sorting, we get [1, 16, 25, 49, 100].
+
+{{< dots >}}
+## Approach 🚀
+Use a two-pointer technique to process the squares of the sorted array efficiently in O(n) time.
+
+### Initial Thoughts 💭
+- The array is already sorted, so we can efficiently merge the positive and negative squares using a two-pointer approach.
+- We can avoid sorting by directly placing the largest squares at the correct positions from the end of the result array.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array, which should return an empty result.
+- A large input array, ensuring that the solution handles up to the maximum input size efficiently.
+- All elements being zero.
+- The array must be sorted in non-decreasing order.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> sortedSquares(vector<int>& nums) {
+    vector<int> ans(nums.size());
+    int l = 0, r = nums.size() - 1;
+    int ll, rr;
+    for(int i = nums.size() - 1; i >= 0; i--) {
+        ll = nums[l] * nums[l];
+        rr = nums[r] * nums[r];
+        if(ll < rr) ans[i] = rr, r--;
+        else ans[i] = ll, l++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to return a **sorted array** of the squares of each number in the given array `nums`. The input array `nums` may contain both negative and non-negative integers, and the output should have the squares in non-decreasing order.
-
-For example:
-- **Input**: `nums = [-4, -1, 0, 3, 10]`
-- **Output**: `[0, 1, 9, 16, 100]`
-
-### Approach
-
-This problem can be solved efficiently using the **two-pointer technique**. The key observation here is that the absolute values of the elements in the array increase as we move away from the center towards the edges in a sorted array. Therefore, by focusing on the largest values (in terms of absolute magnitude) from both the left and right sides of the array, we can directly build the sorted squares array without needing to sort the entire array afterward.
-
-#### Key Insights:
-
-1. **Squared Values**: When squaring both negative and positive numbers, the absolute value of negative numbers becomes positive. However, larger numbers will result in larger squared values. Therefore, for an array that contains both negative and positive values, the largest squares will come from either the largest negative number or the largest positive number.
-
-2. **Two-pointer Approach**:
-   - We can use a **left pointer (`l`)** starting at the beginning of the array, and a **right pointer (`r`)** starting at the end of the array.
-   - At each step, we compare the absolute values of the elements at the `l` and `r` positions. The larger absolute value will give us the largest square.
-   - The squared value is placed at the current position in the result array, and the pointer corresponding to the larger absolute value is moved inward.
-   - This process continues until all positions in the result array are filled.
-
-3. **Efficient Sorting**: 
-   - By iterating from the end of the result array (starting at the largest index) and always choosing the largest squared value, we ensure that the array is populated in sorted order from the largest to the smallest value.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<int> sortedSquares(vector<int>& nums) {
-        vector<int> ans(nums.size());  // Create a result vector to store squared values
-        int l = 0, r = nums.size() - 1;  // Initialize two pointers: one at the start (l) and one at the end (r)
-        int ll, rr;
+    return ans;
+}
 ```
 
-1. **Initialization**:
-   - `ans`: A result vector that will hold the squares of the elements from the `nums` array in sorted order.
-   - `l`: A pointer initialized to the first element of the array.
-   - `r`: A pointer initialized to the last element of the array.
-   - `ll` and `rr`: Temporary variables to store the squared values of `nums[l]` and `nums[r]`.
+This function takes a sorted array of integers, squares each element, and returns a new array sorted in non-decreasing order. It uses a two-pointer approach, comparing squares of the largest and smallest elements from both ends.
 
-```cpp
-        for(int i = nums.size() - 1; i >= 0; i--) {  // Iterate from the end of the result array
-            ll = nums[l] * nums[l];  // Square the value at the left pointer
-            rr = nums[r] * nums[r];  // Square the value at the right pointer
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> sortedSquares(vector<int>& nums) {
+	```
+	Defines the function `sortedSquares`, which takes a reference to a vector of integers `nums` and returns a vector of integers containing the squares of each element in sorted order.
 
-2. **Squaring the Values**:
-   - The loop starts at the last index of the result array (`i = nums.size() - 1`) and moves backwards to fill the result array.
-   - `ll` and `rr` store the squared values of the elements at positions `l` and `r`.
+2. **Initialize Answer Vector**
+	```cpp
+	    vector<int> ans(nums.size());
+	```
+	Initializes a vector `ans` with the same size as `nums` to store the squared values of the elements in sorted order.
 
-```cpp
-            if(ll < rr) ans[i] = rr, r--;  // If the square at the right pointer is larger, place it in the result and move the right pointer
-            else ans[i] = ll, l++;  // Otherwise, place the square at the left pointer in the result and move the left pointer
-        }
-```
+3. **Initialize Pointers**
+	```cpp
+	    int l = 0, r = nums.size() - 1;
+	```
+	Initializes two pointers `l` and `r` to point to the beginning and end of the `nums` array, respectively.
 
-3. **Comparing Squared Values**:
-   - We compare the squared values at the left (`ll`) and right (`rr`) pointers.
-   - If `ll` (square of `nums[l]`) is smaller than `rr` (square of `nums[r]`), we place `rr` in the current position of the result array (`ans[i]`) and move the `r` pointer inward (`r--`).
-   - If `ll` is greater than or equal to `rr`, we place `ll` in the result array and move the `l` pointer inward (`l++`).
-   - This ensures that the largest values are placed in the result array first, in decreasing order of their magnitude.
+4. **Variable Declarations**
+	```cpp
+	    int ll, rr;
+	```
+	Declares two integer variables `ll` and `rr` to store the squared values of the elements at the `l` and `r` pointers.
 
-```cpp
-        return ans;  // Return the sorted array of squares
-    }
-};
-```
+5. **Loop Over Array**
+	```cpp
+	    for(int i = nums.size() - 1; i >= 0; i--) {
+	```
+	Starts a loop to iterate from the end of the `ans` array towards the beginning. The loop continues as long as there are elements left to process.
 
-4. **Return the Result**:
-   - After the loop finishes, all the elements of the array `nums` have been squared and placed in the `ans` array in sorted order. We return this array as the result.
+6. **Calculate Square of Left Element**
+	```cpp
+	        ll = nums[l] * nums[l];
+	```
+	Calculates the square of the element at the `l` pointer and stores it in `ll`.
 
-### Time and Space Complexity
+7. **Calculate Square of Right Element**
+	```cpp
+	        rr = nums[r] * nums[r];
+	```
+	Calculates the square of the element at the `r` pointer and stores it in `rr`.
 
-- **Time Complexity**:
-  - The algorithm iterates over the `nums` array once with a two-pointer approach. Each element is processed exactly once. Therefore, the time complexity is **O(n)**, where `n` is the size of the input array `nums`.
+8. **Choose Larger Square**
+	```cpp
+	        if(ll < rr) ans[i] = rr, r--;
+	```
+	Compares the squares `ll` and `rr`. If `ll` is smaller, assigns `rr` to `ans[i]` and moves the `r` pointer one step left.
 
-- **Space Complexity**:
-  - The space complexity is **O(n)**, where `n` is the size of the input array `nums`. This is due to the result array `ans` that stores the squared values.
+9. **Choose Smaller Square**
+	```cpp
+	        else ans[i] = ll, l++;
+	```
+	If `ll` is greater than or equal to `rr`, assigns `ll` to `ans[i]` and moves the `l` pointer one step right.
 
-### Conclusion
+10. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the sorted `ans` array, which contains the squares of the elements in `nums` sorted in non-decreasing order.
 
-This solution leverages the **two-pointer technique** to efficiently solve the problem of finding the sorted squares of an array. By iterating from both ends of the array and placing the largest squared values first, we avoid the need for sorting the entire array afterward. This approach provides an optimal solution with a time complexity of **O(n)** and space complexity of **O(n)**, making it highly efficient even for large arrays. The algorithm efficiently handles both negative and non-negative integers in the input array by focusing on the magnitude of their squared values.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The two-pointer approach processes each element once, leading to a time complexity of O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the result array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/squares-of-a-sorted-array/description/)
 

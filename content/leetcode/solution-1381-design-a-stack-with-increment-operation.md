@@ -14,42 +14,88 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design a stack that supports increment operations on its elements. Implement the CustomStack class, which supports adding elements, popping the top element, and incrementing the bottom k elements.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a series of operations to be performed on the stack, such as push, pop, and increment.
+- **Example:** `Input: ["CustomStack", "push", "push", "pop", "push", "push", "push", "increment", "increment", "pop", "pop", "pop", "pop"]
+Input Data: [[3], [1], [2], [], [2], [3], [4], [5, 100], [2, 100], [], [], [], []]`
+- **Constraints:**
+	- The stack can have a maximum of 1000 operations.
+	- The stack size will be between 1 and 1000 elements.
 
-{{< highlight cpp >}}
-class CustomStack {
-    vector<int> stk;
-    int ptr, m;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the results of each operation as a list. For 'push', the result is null, for 'pop', the result is the popped element, and for 'increment', the result is null.
+- **Example:** `[null, null, null, 2, null, null, null, null, null, 103, 202, 201, -1]`
+- **Constraints:**
+	- Each output corresponds to the respective input operation.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to implement a stack with operations to push elements, pop elements, and increment the bottom k elements by a specified value.
+
+- 1. Initialize the stack with a maximum size.
+- 2. Implement push operation to add elements to the stack.
+- 3. Implement pop operation to remove and return the top element.
+- 4. Implement increment operation to increment the bottom k elements by a specified value.
+{{< dots >}}
+### Problem Assumptions ✅
+- The stack will always have enough capacity to handle the specified operations.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["CustomStack", "push", "push", "pop", "push", "push", "push", "increment", "increment", "pop", "pop", "pop", "pop"]`  \
+  **Explanation:** The operations are performed on a stack with a maximum size of 3. The push operations add elements, pop operations remove elements, and the increment operations modify the bottom k elements by adding the specified value.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to implement a dynamic stack that supports the basic operations (push, pop) and an increment operation that modifies the bottom k elements.
+
+### Initial Thoughts 💭
+- The stack needs to handle an increment operation that modifies multiple elements efficiently.
+- We can use an array to store the stack and perform the increment operation by directly modifying the bottom k elements.
+{{< dots >}}
+### Edge Cases 🌐
+- If no operations are performed, the stack remains empty.
+- Ensure the solution works for the maximum allowed size of the stack and number of operations.
+- The increment value should be between 0 and 100, and the number of elements to increment should be within the size of the stack.
+- The stack should never exceed the maximum size, and operations should be efficient.
+{{< dots >}}
+## Code 💻
+```cpp
+int ptr, m;
 public:
-    
-    CustomStack(int mx) {
-        stk.resize(mx);
-        ptr = -1;
-        m = mx;
+
+CustomStack(int mx) {
+    stk.resize(mx);
+    ptr = -1;
+    m = mx;
+}
+
+void push(int x) {
+    if (ptr < m - 1) {
+        ptr++;
+        stk[ptr] = x;
     }
+}
+
+int pop() {
+    if(ptr == -1) return -1;
+    return stk[ptr--];
+}
+
+void increment(int k, int val) {
     
-    void push(int x) {
-        if (ptr < m - 1) {
-            ptr++;
-            stk[ptr] = x;
-        }
-    }
-    
-    int pop() {
-        if(ptr == -1) return -1;
-        return stk[ptr--];
-    }
-    
-    void increment(int k, int val) {
-        
-        for(int i = 0; i < min(m, k); i++)
-            stk[i] += val;
-    }
+    for(int i = 0; i < min(m, k); i++)
+        stk[i] += val;
+}
 };
 
 /**
@@ -58,90 +104,125 @@ public:
  * obj->push(x);
  * int param_2 = obj->pop();
  * obj->increment(k,val);
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This is the complete code for implementing a custom stack. It includes methods for pushing elements onto the stack, popping elements, and incrementing elements up to a specified position in the stack.
 
-The task is to design a custom stack data structure that supports three primary operations: pushing an element onto the stack, popping the top element from the stack, and incrementing the bottom `k` elements of the stack by a given value. The stack has a fixed maximum size, and any attempts to push elements beyond this limit should be ignored. The main goal is to implement these functionalities efficiently while adhering to the stack's LIFO (Last In First Out) principle.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int ptr, m;
+	```
+	Initialize the pointer `ptr` for stack manipulation and the maximum size `m` of the stack.
 
-### Approach
+2. **Access Control**
+	```cpp
+	public:
+	```
+	Public access to the methods and constructor of the class.
 
-To implement the `CustomStack` class, we can utilize a vector to store the stack elements, along with an integer pointer to track the current top of the stack. The operations can be defined as follows:
+3. **Constructor**
+	```cpp
+	CustomStack(int mx) {
+	```
+	Constructor to initialize the stack with a maximum size.
 
-1. **Constructor**: Initialize the stack with a maximum size and set the pointer to indicate an empty stack.
+4. **Stack Initialization**
+	```cpp
+	    stk.resize(mx);
+	```
+	Resize the stack `stk` to the given size `mx`.
 
-2. **Push Operation**: Add an element to the top of the stack, ensuring that the stack does not exceed its maximum size.
+5. **Variable Initialization**
+	```cpp
+	    ptr = -1;
+	```
+	Initialize the pointer `ptr` to -1 to indicate the stack is empty.
 
-3. **Pop Operation**: Remove and return the top element from the stack, checking if the stack is empty beforehand.
+6. **Variable Initialization**
+	```cpp
+	    m = mx;
+	```
+	Set the maximum size of the stack to the provided value `mx`.
 
-4. **Increment Operation**: Increment the bottom `k` elements of the stack by a specified value. This operation should be carefully implemented to respect the current number of elements in the stack.
+7. **Method Definition**
+	```cpp
+	void push(int x) {
+	```
+	Define the `push` method to add an element to the stack.
 
-### Code Breakdown (Step by Step)
+8. **Conditional Check**
+	```cpp
+	    if (ptr < m - 1) {
+	```
+	Check if the stack is not full.
 
-The provided C++ code implements the `CustomStack` class with the described functionalities. Here’s a detailed breakdown of how it works:
+9. **Pointer Manipulation**
+	```cpp
+	        ptr++;
+	```
+	Increment the pointer `ptr` to add an element to the stack.
 
-1. **Class Definition**:
-   ```cpp
-   class CustomStack {
-       vector<int> stk;
-       int ptr, m;
-   public:
-   ```
-   - The `CustomStack` class contains a vector `stk` to hold the stack elements, an integer `ptr` to keep track of the current top index, and an integer `m` for the maximum size of the stack.
+10. **Stack Operation**
+	```cpp
+	        stk[ptr] = x;
+	```
+	Assign the value `x` to the stack at position `ptr`.
 
-2. **Constructor**:
-   ```cpp
-       CustomStack(int mx) {
-           stk.resize(mx);
-           ptr = -1;
-           m = mx;
-       }
-   ```
-   - The constructor takes an integer `mx` which represents the maximum size of the stack. It initializes the vector `stk` with the specified size, sets the pointer `ptr` to `-1` (indicating an empty stack), and assigns `m` to `mx`.
+11. **Method Definition**
+	```cpp
+	int pop() {
+	```
+	Define the `pop` method to remove an element from the stack.
 
-3. **Push Method**:
-   ```cpp
-       void push(int x) {
-           if (ptr < m - 1) {
-               ptr++;
-               stk[ptr] = x;
-           }
-       }
-   ```
-   - The `push` method takes an integer `x` and checks if the stack can accommodate more elements (i.e., if `ptr` is less than `m - 1`). If there is space, it increments the pointer `ptr` and assigns the value `x` to `stk[ptr]`.
+12. **Conditional Check**
+	```cpp
+	    if(ptr == -1) return -1;
+	```
+	Check if the stack is empty and return -1 if true.
 
-4. **Pop Method**:
-   ```cpp
-       int pop() {
-           if(ptr == -1) return -1;
-           return stk[ptr--];
-       }
-   ```
-   - The `pop` method checks if the stack is empty (i.e., if `ptr` is `-1`). If the stack is not empty, it returns the top element (`stk[ptr]`) and decrements the pointer.
+13. **Pointer Manipulation**
+	```cpp
+	    return stk[ptr--];
+	```
+	Return the top element of the stack and decrement the pointer `ptr`.
 
-5. **Increment Method**:
-   ```cpp
-       void increment(int k, int val) {
-           for(int i = 0; i < min(m, k); i++)
-               stk[i] += val;
-       }
-   ```
-   - The `increment` method takes two parameters: `k`, the number of bottom elements to increment, and `val`, the value to increment by. It uses a loop to iterate through the bottom `k` elements (up to the current maximum size of the stack) and adds `val` to each of those elements. The loop runs for `min(m, k)` to ensure that we do not exceed the bounds of the vector.
+14. **Method Definition**
+	```cpp
+	void increment(int k, int val) {
+	```
+	Define the `increment` method to increment the first `k` elements by the value `val`.
 
-### Complexity
+15. **Looping**
+	```cpp
+	    for(int i = 0; i < min(m, k); i++)
+	```
+	Loop through the first `k` elements, but no more than the stack size `m`.
 
-- **Time Complexity**:
-  - **Push Operation**: The `push` operation runs in \(O(1)\) time since it only involves checking a condition and updating a pointer.
-  - **Pop Operation**: The `pop` operation also runs in \(O(1)\) time, as it involves checking the pointer and returning an element.
-  - **Increment Operation**: The `increment` operation has a time complexity of \(O(k)\), where \(k\) is the number of elements to increment. In the worst case, this could be up to \(O(m)\) if all elements need to be incremented.
+16. **Stack Manipulation**
+	```cpp
+	        stk[i] += val;
+	```
+	Increment each element in the stack by the value `val`.
 
-- **Space Complexity**: The space complexity is \(O(m)\) due to the storage of the stack elements in the vector.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for push and pop operations.
+- **Average Case:** O(k) for the increment operation, where k is the number of elements to increment.
+- **Worst Case:** O(k) for the increment operation.
 
-### Conclusion
+The increment operation has a time complexity of O(k) because we need to modify the bottom k elements.
 
-The `CustomStack` class is an efficient implementation of a stack with additional functionalities, including a push operation, a pop operation, and an increment operation that modifies the bottom elements of the stack. The use of a vector allows dynamic management of the stack size, while the pointer helps maintain the current state of the stack efficiently. The operations are designed to be efficient and straightforward, adhering to the principles of stack data structures. This implementation serves as a practical reference for developers and students learning about data structures, particularly for applications requiring dynamic array management and stack operations. Furthermore, understanding this design can provide a foundation for exploring more complex data structure implementations and algorithms in computer science.
+### Space Complexity 💾
+- **Best Case:** O(n) in all cases since we store the stack elements.
+- **Worst Case:** O(n) where n is the maximum size of the stack.
+
+The space complexity is O(n), where n is the number of elements in the stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-a-stack-with-increment-operation/description/)
 

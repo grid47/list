@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "2MjVm-hwyxs"
 youtube_upload_date="2022-06-29"
 youtube_thumbnail="https://i.ytimg.com/vi/2MjVm-hwyxs/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,135 +28,147 @@ youtube_thumbnail="https://i.ytimg.com/vi/2MjVm-hwyxs/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of an n-ary tree, return the preorder traversal of its nodes' values. In one step, the node is visited first, followed by its children from left to right. The input is serialized in a level order format where each group of children is separated by a null value.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The root of an n-ary tree, represented in a serialized level order format, where each node and its children are listed sequentially. Each group of children is separated by a null value.
+- **Example:** `Input: root = [10, null, 20, 30, 40, null, 50, 60]`
+- **Constraints:**
+	- 0 <= number of nodes <= 10^4
+	- 0 <= Node.val <= 10^4
+	- The height of the n-ary tree is <= 1000.
 
-{{< highlight cpp >}}
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    vector<Node*> children;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** A list of integers representing the nodes' values in preorder traversal order.
+- **Example:** `Output: [10, 20, 50, 60, 30, 40]`
+- **Constraints:**
+	- The output list contains integers in preorder traversal order of the tree.
 
-    Node() {}
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Return the nodes' values in preorder traversal order.
 
-    Node(int _val) {
-        val = _val;
-    }
+- Start from the root node.
+- Visit the node, then recursively visit its children in left to right order.
+- Return the list of visited nodes' values.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is represented in level order format, with groups of children separated by null.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [10, null, 20, 30, 40, null, 50, 60]`  \
+  **Explanation:** Preorder traversal starts with the root node (10), followed by its children (20, 30, 40), and then recursively visits each child's children in the same manner.
 
-    Node(int _val, vector<Node*> _children) {
-        val = _val;
-        children = _children;
-    }
-};
-*/
+- **Input:** `Input: root = [1, null, 2, 3, 4, 5, null, null, 6, 7, null, 8, null, 9, 10, null, null, 11, null, 12, null, 13, null, null, 14]`  \
+  **Explanation:** This tree visits the root node (1), then its children (2, 3, 4), and continues recursively with the children of each node.
 
-class Solution {
-public:
-    vector<int> ans;
-    void pre(Node* root) {
-        if(root == NULL) return;
-        ans.push_back(root->val);
-        for(auto x: root->children)
-            pre(x);
-    }
-    vector<int> preorder(Node* root) {
-        pre(root);
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a recursive approach to traverse the tree in preorder.
 
-### Problem Statement:
-
-The problem at hand is to traverse a n-ary tree (a tree where each node can have an arbitrary number of children) in **preorder**. The goal is to return a list of node values following a **preorder traversal**. 
-
-In **preorder traversal**, for each node, we:
-1. Visit the node itself.
-2. Recursively visit all its children (from left to right).
-
-We are given a node structure that is defined as a class with a value and a list of children. The objective is to implement a method that returns the values of the tree nodes as they are visited in preorder.
-
-### Approach:
-
-To solve this problem, we can use a **Depth First Search (DFS)** approach. The preorder traversal follows a clear recursive pattern:
-1. Visit the current node.
-2. Recursively visit each child node, which involves applying the same logic at each step.
-
-The recursive traversal guarantees that we visit the root node before its children, and each child node is visited before its children (left to right).
-
-Given that the tree is an n-ary tree (i.e., nodes can have multiple children), we will apply this recursive method for each child of the current node.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Node Class Definition
+### Initial Thoughts 💭
+- Preorder traversal visits the node first and then its children.
+- We can use a recursive function to perform the preorder traversal.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty (root is null), return an empty list.
+- The solution should be efficient enough to handle up to 10^4 nodes.
+- If the tree has only one node, return that node.
+- The tree height is less than or equal to 1000, so a recursive solution should work efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Node {
-public:
-    int val;
-    vector<Node*> children;
-
-    Node() {}
-
-    Node(int _val) {
-        val = _val;
-    }
-
-    Node(int _val, vector<Node*> _children) {
-        val = _val;
-        children = _children;
-    }
-};
-```
-- The `Node` class defines the structure of each node in the tree. Each node has:
-  - An integer value `val`, which represents the value of the node.
-  - A vector of pointers `children` that stores the child nodes of the current node. This vector can store an arbitrary number of children, which is why the tree is considered n-ary.
-  
-This is the basic structure that the tree will use.
-
-#### Step 2: Preorder Traversal Recursive Function
-```cpp
+vector<int> ans;
 void pre(Node* root) {
     if(root == NULL) return;
     ans.push_back(root->val);
     for(auto x: root->children)
         pre(x);
 }
-```
-- The function `pre(Node* root)` is a helper method used to implement the preorder traversal. It follows these steps:
-  1. **Base Case**: If `root` is `NULL`, meaning the node does not exist (this can occur if we reach beyond the leaves of the tree), we return immediately without doing anything.
-  2. **Visit the Current Node**: If the node exists, we push its value `root->val` into the `ans` vector, which will store the final result.
-  3. **Visit Children**: We recursively call the `pre` function for each of the children of the current node. This ensures that we visit all children from left to right.
-
-#### Step 3: Main Function to Start Traversal
-```cpp
 vector<int> preorder(Node* root) {
     pre(root);
+    
     return ans;
 }
 ```
-- The `preorder` function is the main entry point of the solution. It takes the root node of the tree as input and:
-  1. Calls the `pre` helper function to perform the recursive preorder traversal and populate the `ans` vector with the visited node values.
-  2. Returns the `ans` vector, which now contains the node values in the order they were visited during the traversal.
 
-### Complexity:
+This code defines a preorder traversal for a tree using a recursive helper function `pre`, which stores the node values in the global vector `ans`. The main function `preorder` calls this helper and returns the result.
 
-#### Time Complexity:
-- **O(N)**, where `N` is the number of nodes in the tree. This is because in preorder traversal, each node is visited exactly once, and we perform constant-time operations (push to the `ans` vector) for each node.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<int> ans;
+	```
+	Declares a global variable `ans`, a vector of integers, which will store the node values in preorder during the traversal.
 
-#### Space Complexity:
-- **O(N)**, where `N` is the number of nodes in the tree. The space complexity is dominated by the recursive call stack (for DFS) and the storage for the `ans` vector, both of which can grow linearly with the size of the tree.
+2. **Function Declaration**
+	```cpp
+	void pre(Node* root) {
+	```
+	Declares the recursive helper function `pre`, which takes a pointer to the root of a node in the tree and performs the preorder traversal.
 
-### Conclusion:
+3. **Base Case**
+	```cpp
+	    if(root == NULL) return;
+	```
+	Checks if the current node is null (base case). If it is, the function returns immediately without doing any further processing.
 
-This solution effectively implements the preorder traversal of a n-ary tree using a recursive Depth First Search (DFS) approach. By visiting each node first, then recursively visiting all its children, the solution adheres to the standard preorder traversal pattern. The time and space complexity are both linear with respect to the number of nodes, making the solution efficient and scalable for large trees. This implementation is simple and clear, leveraging recursion to handle the tree structure efficiently.
+4. **Push Current Node Value**
+	```cpp
+	    ans.push_back(root->val);
+	```
+	Pushes the current node's value to the `ans` vector to record it in the preorder sequence.
 
-In summary:
-- We use DFS to traverse the tree recursively.
-- Each node is processed exactly once, ensuring the algorithm runs in linear time.
-- The recursive approach keeps the code concise and easy to follow.
+5. **Recursive Traversal**
+	```cpp
+	    for(auto x: root->children)
+	```
+	Iterates over each child of the current node (since it is assumed to be a tree or n-ary tree). The function recursively calls `pre` on each child.
+
+6. **Recursive Call**
+	```cpp
+	        pre(x);
+	```
+	Recursively calls the `pre` function on the child node `x` to traverse deeper into the tree.
+
+7. **Function Declaration**
+	```cpp
+	vector<int> preorder(Node* root) {
+	```
+	Declares the main `preorder` function, which initializes the preorder traversal by calling the helper function `pre` and then returns the result stored in the `ans` vector.
+
+8. **Initial Traversal Call**
+	```cpp
+	    pre(root);
+	```
+	Calls the helper function `pre` to start the preorder traversal from the root node.
+
+9. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans`, which contains the values of the nodes in preorder.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of nodes in the tree.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
+
+The space complexity is O(h), where h is the height of the tree, due to the recursive call stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/n-ary-tree-preorder-traversal/description/)
 

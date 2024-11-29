@@ -14,106 +14,133 @@ img_src = ""
 youtube = "vcrOpJQHsSE"
 youtube_upload_date="2023-12-04"
 youtube_thumbnail="https://i.ytimg.com/vi/vcrOpJQHsSE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `num` representing a large integer. A 'good' integer is defined as a substring of length 3, consisting of only one unique digit. Your task is to find the largest 'good' integer in the string. If no such integer exists, return an empty string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `num` representing a large integer.
+- **Example:** `num = "98711111234"`
+- **Constraints:**
+	- 3 <= num.length <= 1000
+	- num only consists of digits.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string largestGoodInteger(string num) {
-        char res = 0;
-    for(int i = 2; i < num.size(); ++i)
-        if (num[i] == num[i - 1] && num[i] == num[i - 2])
-            res = max(res, num[i]);
-    return res == 0 ? "" : string(3, res);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest good integer as a string. If no such integer exists, return an empty string.
+- **Example:** `Output: "111"`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the maximum substring of length 3 that consists of only one unique digit.
 
-In this problem, you are given a string `num` representing a non-negative integer. The task is to find the largest good integer that appears consecutively in the string. A good integer is a three-digit integer in which all three digits are the same. For example, `111`, `222`, `333`, etc., are good integers. 
+- Iterate through the string starting from index 2 to check all possible substrings of length 3.
+- For each substring, check if all characters are the same.
+- If a valid substring is found, compare it with the current maximum substring to keep the largest.
+- Return the largest valid substring or an empty string if no such substring is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `num` will not be empty, as its length is always at least 3.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `num = "98711111234"`  \
+  **Explanation:** In this case, the valid good integers are '111'. The largest good integer is '111', so the output is '111'.
 
-Your goal is to find the largest good integer that appears in `num`. If no such integer exists, return an empty string.
+- **Input:** `num = "223335"`  \
+  **Explanation:** Here, the good integers are '333' and '222'. The largest good integer is '333', so the output is '333'.
 
-### Approach
+- **Input:** `num = "12345"`  \
+  **Explanation:** There are no substrings of length 3 that consist of only one unique digit. Therefore, the output is an empty string.
 
-To solve this problem, we need to:
-1. **Identify All Possible Good Integers**: A good integer is a three-digit integer where all the digits are identical. Therefore, we are looking for substrings of length 3 where the first, second, and third characters are the same.
-2. **Find the Largest Good Integer**: After identifying all possible good integers in the string, we need to determine which one is the largest.
-3. **Edge Cases**: If there is no valid good integer, return an empty string.
+{{< dots >}}
+## Approach 🚀
+We will iterate through the string and check for substrings of length 3. If all the characters in the substring are the same, we will check if it's the largest one found so far.
 
-To efficiently approach this:
-- **Iterate Through the String**: Traverse the string from left to right, checking for any sequence of three consecutive digits that are the same.
-- **Track the Maximum Good Integer**: As we identify each good integer, compare it with the largest one we’ve found so far.
-- **Return the Result**: After scanning the entire string, if a good integer was found, return the largest one. Otherwise, return an empty string.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize a variable to track the result
-
+### Initial Thoughts 💭
+- We need to consider every substring of length 3 in the given string.
+- The condition to check for a 'good' integer is simple: all characters in the substring must be the same.
+- We can use a sliding window approach to check every substring of length 3 in one pass through the string.
+{{< dots >}}
+### Edge Cases 🌐
+- The string `num` is guaranteed to have a length of at least 3, so there are no empty inputs.
+- The solution should handle large strings efficiently, especially up to 1000 characters.
+- Consider strings that have repeated digits like '000' or strings with no valid good integers.
+- The solution should work within the time complexity constraints of strings with lengths up to 1000.
+{{< dots >}}
+## Code 💻
 ```cpp
-char res = 0;
-```
-
-- `res` is initialized to `0`. It will store the largest good integer found during the traversal of the string. If no good integer is found, `res` will remain `0`.
-
-#### Step 2: Traverse through the string
-
-```cpp
+string largestGoodInteger(string num) {
+    char res = 0;
 for(int i = 2; i < num.size(); ++i)
-```
-
-- We start the loop from `i = 2` because we need at least three characters to form a three-digit good integer. We will check if the current digit and the two previous digits are identical.
-
-#### Step 3: Check if the current triplet is a good integer
-
-```cpp
-if (num[i] == num[i - 1] && num[i] == num[i - 2])
-```
-
-- This condition checks if the current digit (`num[i]`) is the same as the previous two digits (`num[i-1]` and `num[i-2]`). If they are equal, we have found a good integer.
-
-#### Step 4: Track the largest good integer
-
-```cpp
-res = max(res, num[i]);
-```
-
-- If a good integer is found, we compare it with the current largest good integer (`res`). The `max()` function ensures that `res` always holds the largest good integer found so far.
-
-#### Step 5: Return the result
-
-```cpp
+    if (num[i] == num[i - 1] && num[i] == num[i - 2])
+        res = max(res, num[i]);
 return res == 0 ? "" : string(3, res);
+}
 ```
 
-- After traversing the string, if `res` is still `0`, it means no good integer was found, so we return an empty string.
-- If `res` holds a valid digit (the largest good integer), we return a string consisting of three identical digits (`string(3, res)`).
+This function finds the largest good integer in a string, where a good integer is a substring of three consecutive identical digits. If found, it returns the good integer as a string; otherwise, it returns an empty string.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string largestGoodInteger(string num) {
+	```
+	The function `largestGoodInteger` takes a string `num` as input and returns the largest good integer, which is a substring of three consecutive identical digits.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n)**, where `n` is the length of the string `num`. The reason is that we are iterating through the string exactly once, performing constant-time operations (comparisons and assignments) in each iteration.
+2. **Variable Initialization**
+	```cpp
+	    char res = 0;
+	```
+	The variable `res` is initialized to 0. It will hold the largest digit found that forms a good integer.
 
-#### Space Complexity:
-The space complexity is **O(1)** because we are only using a fixed amount of extra space (`res` to store the largest good integer) regardless of the input size.
+3. **For Loop**
+	```cpp
+	for(int i = 2; i < num.size(); ++i)
+	```
+	A for loop starts from index 2, iterating through the string `num` from the third character onward. This is to check for triplets of consecutive characters.
 
-### Conclusion
+4. **Condition Check**
+	```cpp
+	    if (num[i] == num[i - 1] && num[i] == num[i - 2])
+	```
+	This condition checks if the current character and the previous two characters in the string are identical, indicating a good integer (a substring of three consecutive identical digits).
 
-This solution is an efficient way to find the largest good integer in a given string `num`. It has a linear time complexity of **O(n)**, which is optimal for this type of problem where we need to examine every character in the string. The space complexity is constant, as we only need a single variable (`res`) to track the largest good integer found. The solution is both time and space efficient, making it well-suited for large input sizes.
+5. **Update Largest Good Integer**
+	```cpp
+	        res = max(res, num[i]);
+	```
+	If a good integer is found (three consecutive identical digits), the maximum of the current largest good integer (`res`) and the new character `num[i]` is stored in `res`.
 
-This approach ensures that we:
-1. Efficiently scan the string for good integers.
-2. Track the largest good integer in constant time.
-3. Return the correct result based on the conditions outlined in the problem statement.
+6. **Return Result**
+	```cpp
+	return res == 0 ? "" : string(3, res);
+	```
+	After the loop, if no good integer was found (`res == 0`), the function returns an empty string. Otherwise, it returns a string consisting of the largest good integer, repeated three times.
 
-Overall, this solution is both simple and effective for solving the problem of finding the largest good integer in a string.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we check each substring of length 3 once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only need a constant amount of space for tracking the largest good integer.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-3-same-digit-number-in-string/description/)
 

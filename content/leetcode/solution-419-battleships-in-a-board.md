@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "gKhvVHd8ihI"
 youtube_upload_date="2020-07-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gKhvVHd8ihI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,103 +28,138 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/gKhvVHd8ihI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a grid representing a battleship field, where 'X' marks the location of a part of a battleship and '.' represents an empty sea cell. A battleship is either placed horizontally or vertically on the grid, with no adjacent battleships (there must be at least one empty cell between any two battleships). Your task is to count the number of distinct battleships on the grid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 2D character grid where each cell contains either 'X' (part of a battleship) or '.' (empty sea).
+- **Example:** `Input: board = [['X', '.', '.', 'X'], ['.', '.', '.', 'X'], ['.', '.', '.', 'X']]`
+- **Constraints:**
+	- 1 <= m, n <= 200
+	- board[i][j] is either '.' or 'X'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countBattleships(vector<vector<char>>& board) {
-        if(board.empty() || board[0].empty()) return 0;
-        int m = board.size(), n = board[0].size();
-        int cnt = 0;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the number of distinct battleships on the board.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output is an integer indicating the number of distinct battleships.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of distinct battleships by identifying connected parts of 'X' (either horizontally or vertically).
+
+- Iterate through the grid cell by cell.
+- For each 'X', check if it is the start of a new battleship (i.e., if there is no 'X' directly above or to the left of it).
+- Count it as a new battleship if it is the start of one, and continue scanning the grid.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid contains valid characters (either 'X' or '.').
+- There is at least one row and one column in the grid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: board = [['X', '.', '.', 'X'], ['.', '.', '.', 'X'], ['.', '.', '.', 'X']]`  \
+  **Explanation:** In this case, there are two distinct battleships. The first one is placed horizontally from (0,0) to (0,3), and the second one is placed vertically from (0,3) to (2,3). Thus, the output is 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, iterate through each cell of the grid. For each 'X', check if it is the start of a new battleship by ensuring there are no other 'X' directly above or to the left of it. If it is, increment the battleship count.
+
+### Initial Thoughts 💭
+- We need to avoid counting the same battleship multiple times.
+- Each battleship can only be counted once, either from the start of the row or the start of the column.
+- By checking the adjacent cells (above and to the left), we can avoid double-counting parts of the same battleship.
+{{< dots >}}
+### Edge Cases 🌐
+- If the board is empty (no rows or columns), the output should be 0.
+- For large grids (up to 200x200), ensure the solution can handle the maximum input size efficiently.
+- A grid where all cells are empty should return 0, as there are no battleships.
+- The solution should work within the problem's constraints, with a maximum grid size of 200x200.
+{{< dots >}}
+## Code 💻
+```cpp
+int countBattleships(vector<vector<char>>& board) {
+    if(board.empty() || board[0].empty()) return 0;
+    int m = board.size(), n = board[0].size();
+    int cnt = 0;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++) {
  cnt += (board[i][j] == 'X') && (i == 0 || board[i - 1][j] != 'X') && (j == 0 || board[i][j - 1] != 'X'); 
 
-        }
-        return cnt;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to count the number of battleships in a given 2D grid, where each battleship is represented by a series of connected 'X' cells. Battleships are either positioned horizontally or vertically, and they do not touch each other, meaning there is at least one empty cell (denoted by '.') between any two battleships.
-
-The task is to find the number of distinct battleships in the grid.
-
-### Approach
-
-To solve this problem, we need to iterate through the grid and check each cell to determine if it marks the beginning of a new battleship. A battleship is represented by consecutive 'X' cells either horizontally or vertically. The key observation is that for each 'X' that forms part of a battleship, we only need to count it if it's the first 'X' in its row or column.
-
-The idea is to avoid double-counting cells that belong to the same battleship. For example, if there is a vertical sequence of 'X' cells in a column, the first 'X' in that column should be counted, but the subsequent 'X' cells in that column should not be counted again.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Check for an Empty Grid
-
-```cpp
-if(board.empty() || board[0].empty()) return 0;
+    return cnt;
+}
 ```
 
-- First, we check if the grid is empty or if the first row is empty. If either is true, we return 0, as there are no battleships to count.
+This code counts the number of battleships in a given board. Each battleship is represented by 'X', and it is considered a single unit if no other 'X' cells are adjacent horizontally or vertically.
 
-#### Step 2: Initialize Variables
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int countBattleships(vector<vector<char>>& board) {
+	```
+	This line declares the `countBattleships` function, which takes a 2D vector of characters representing the board and returns an integer representing the number of battleships.
 
-```cpp
-int m = board.size(), n = board[0].size();
-int cnt = 0;
-```
+2. **Edge Case Handling**
+	```cpp
+	    if(board.empty() || board[0].empty()) return 0;
+	```
+	This checks if the board is empty or if the first row is empty. If either condition is true, it returns 0 as there are no battleships to count.
 
-- We retrieve the number of rows `m` and columns `n` in the grid.
-- We initialize a variable `cnt` to keep track of the number of distinct battleships.
+3. **Variable Initialization**
+	```cpp
+	    int m = board.size(), n = board[0].size();
+	```
+	Here, we initialize the variables `m` and `n` to represent the number of rows and columns in the board.
 
-#### Step 3: Iterate Through the Grid
+4. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	This initializes the `cnt` variable to keep track of the number of battleships found on the board.
 
-```cpp
-for(int i = 0; i < m; i++)
-    for(int j = 0; j < n; j++) {
-        cnt += (board[i][j] == 'X') && (i == 0 || board[i - 1][j] != 'X') && (j == 0 || board[i][j - 1] != 'X');
-    }
-```
+5. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	This starts a loop to iterate over each row of the board.
 
-- We loop through each cell in the grid using a nested for loop where `i` represents the row index and `j` represents the column index.
-- Inside the loop, we check the following conditions for each cell:
-  1. `board[i][j] == 'X'`: The cell must be part of a battleship.
-  2. `(i == 0 || board[i - 1][j] != 'X')`: The cell must either be in the first row, or the cell above it must not be part of a battleship. This ensures that we count the first 'X' in a vertical battleship.
-  3. `(j == 0 || board[i][j - 1] != 'X')`: The cell must either be in the first column, or the cell to the left must not be part of a battleship. This ensures that we count the first 'X' in a horizontal battleship.
-  
-  If all these conditions are satisfied, we increment the `cnt` variable by 1, indicating that we have found a new battleship.
+6. **Loop Initialization**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	This starts a nested loop to iterate over each column within the current row.
 
-#### Step 4: Return the Result
+7. **Condition Check**
+	```cpp
+	 cnt += (board[i][j] == 'X') && (i == 0 || board[i - 1][j] != 'X') && (j == 0 || board[i][j - 1] != 'X'); 
+	```
+	This line checks if the current cell is an 'X' (part of a battleship). It also ensures that the current cell is not part of a battleship that has already been counted (i.e., no adjacent 'X' cells to the left or above). If both conditions are true, it increments the `cnt` variable.
 
-```cpp
-return cnt;
-```
+8. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	This returns the final count of battleships found on the board.
 
-- After iterating through the entire grid, we return the value of `cnt`, which represents the number of distinct battleships.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where m is the number of rows and n is the number of columns in the grid.
+- **Average Case:** O(m * n), as we must inspect every cell in the grid.
+- **Worst Case:** O(m * n), since we iterate through the entire grid once.
 
-### Complexity
+The time complexity is linear with respect to the size of the grid.
 
-#### Time Complexity:
+### Space Complexity 💾
+- **Best Case:** O(1), since no additional space is required besides the input grid.
+- **Worst Case:** O(1), as the solution uses only a constant amount of extra memory.
 
-- The time complexity is determined by the double for loop that iterates through all the cells in the grid. The grid has `m` rows and `n` columns, so the time complexity is `O(m * n)`, where `m` is the number of rows and `n` is the number of columns.
+The space complexity is constant because we do not use any extra data structures that depend on the size of the grid.
 
-#### Space Complexity:
+**Happy Coding! 🎉**
 
-- The space complexity is `O(1)` since we are not using any additional data structures that depend on the size of the input. The only extra space used is for the `cnt` variable.
-
-### Conclusion
-
-The provided solution efficiently counts the number of distinct battleships in a given grid by checking each 'X' cell and ensuring that it represents the start of a new battleship, either horizontally or vertically. This approach works in `O(m * n)` time, making it scalable for larger grids, and uses constant extra space, making it both time and space efficient.
-
-Key highlights of the solution:
-- **Efficiency**: The solution runs in linear time with respect to the size of the grid.
-- **Simplicity**: The approach directly checks each cell while avoiding double-counting.
-- **Optimal Space Usage**: The solution only uses a constant amount of extra space.
-
-This method provides an optimal solution for counting battleships in a grid and can handle grids of varying sizes effectively.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/battleships-in-a-board/description/)
 

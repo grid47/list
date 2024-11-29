@@ -14,96 +14,124 @@ img_src = ""
 youtube = "le-u0OA8HMM"
 youtube_upload_date="2023-07-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/le-u0OA8HMM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Determine if an integer array nums is a permutation of a special array base[n], defined as [1, 2, ..., n - 1, n, n], where 1 to n-1 appear once and n appears twice.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums.
+- **Example:** `Input: nums = [4, 2, 1, 4, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 200
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isGood(vector<int>& nums) {
-        int cnt[201] = {}, n = nums.size() - 1;
-        for (auto num : nums)
-            ++cnt[num];
-        return all_of(begin(cnt) + 1, begin(cnt) + n, [](int c){ return c == 1; }) && cnt[n] == 2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if nums can be rearranged to form any base[n] array; otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if nums matches the structure of a valid base[n] array.
 
-The problem asks us to determine whether a given array `nums` is "good". An array is considered good if:
-1. All the elements in the array, except for the last one, appear exactly once.
-2. The last element in the array must appear exactly twice.
+- Identify the maximum value n in nums.
+- Verify that nums contains exactly two occurrences of n.
+- Verify that nums contains all integers from 1 to n-1 exactly once.
+- Ensure the length of nums is n+1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array may contain duplicates.
+- The maximum value in the array determines the candidate base[n].
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [4, 2, 1, 4, 3]`  \
+  **Explanation:** The array matches base[4] = [1, 2, 3, 4, 4], so the output is true.
 
-Your task is to implement a function that checks if the array satisfies these conditions.
+- **Input:** `Input: nums = [2, 1, 3]`  \
+  **Explanation:** The array does not match any valid base[n] structure, so the output is false.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+Iterate through the array to validate its structure against a possible base[n].
 
-To solve the problem, we need to verify two main conditions for the array:
-- All elements, except the last one, must appear exactly once.
-- The last element must appear exactly twice.
-
-### Steps to Solve:
-
-1. **Count the occurrences of elements**:
-   - First, we need to count how many times each element appears in the array. This can be efficiently done using a frequency counter (a simple array or map).
-   
-2. **Check the conditions**:
-   - We then check that each element in the array (except the last one) appears exactly once.
-   - Finally, we ensure that the last element appears exactly twice.
-
-### Code Breakdown
-
-#### Step 1: Frequency Count Array
+### Initial Thoughts 💭
+- The array must have a specific structure to be valid.
+- The maximum value in nums determines the potential base[n].
+- We need to check counts of numbers in nums to validate the match.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: nums = []. Output: false.
+- Input: nums = [1, 2, ..., 99, 100, 100]. Output: true.
+- Input: nums = [1, 1]. Output: true.
+- Handling arrays where nums.length != n+1 should return false.
+{{< dots >}}
+## Code 💻
 ```cpp
-int cnt[201] = {};
+bool isGood(vector<int>& nums) {
+    int cnt[201] = {}, n = nums.size() - 1;
+    for (auto num : nums)
+        ++cnt[num];
+    return all_of(begin(cnt) + 1, begin(cnt) + n, [](int c){ return c == 1; }) && cnt[n] == 2;
+}
 ```
-- **`cnt[201]`**: An array `cnt` is used to store the frequency of each element in the array `nums`. Since the problem states that the elements in the array are between 1 and `n` (where `n` is the size of the array minus 1), the size of the array `cnt` is set to 201 to accommodate all possible values.
 
-#### Step 2: Counting Element Frequencies
-```cpp
-for (auto num : nums)
-    ++cnt[num];
-```
-- We loop through each element in the input array `nums` and increment its corresponding count in the `cnt` array. For each element `num`, we increment `cnt[num]` by 1. This gives us the frequency of each element in the array.
+The `isGood` function checks if a given vector `nums` contains a specific set of values. It ensures that all elements except the largest one occur exactly once, and the largest element occurs exactly twice.
 
-#### Step 3: Checking the Conditions
-```cpp
-return all_of(begin(cnt) + 1, begin(cnt) + n, [](int c){ return c == 1; }) && cnt[n] == 2;
-```
-- **`all_of(begin(cnt) + 1, begin(cnt) + n, [](int c){ return c == 1; })`**:
-    - This uses the `all_of` function to check if all elements in the `cnt` array (from index `1` to `n-1`) have a count of exactly `1`. These represent the elements that must appear exactly once in the array (except for the last one).
-    - The condition `c == 1` ensures that the count for each element is 1.
-    - The range `begin(cnt) + 1` to `begin(cnt) + n` skips the first index (`cnt[0]`) as it is not part of the element values.
-  
-- **`cnt[n] == 2`**:
-    - This checks that the last element of the array `nums` (which is indexed at `n` in the array) appears exactly twice. The last element is treated specially, so we directly check if its count is `2`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isGood(vector<int>& nums) {
+	```
+	This line defines the function `isGood` which takes a vector of integers `nums` and returns a boolean value indicating if the array meets the specified condition.
 
-- The `&&` operator combines these two conditions, so the function returns `true` only if both conditions are satisfied:
-    1. All elements, except for the last one, appear exactly once.
-    2. The last element appears exactly twice.
+2. **Variable Initialization**
+	```cpp
+	    int cnt[201] = {}, n = nums.size() - 1;
+	```
+	Here, an array `cnt` of size 201 is initialized to track the frequency of each number in the `nums` vector. The variable `n` stores the size of the vector minus one, representing the largest number in the vector.
 
-#### Step 4: Returning the Result
-The result of the `all_of` check and the check for the last element's count is returned directly as a boolean value.
+3. **Looping**
+	```cpp
+	    for (auto num : nums)
+	```
+	This for-each loop iterates through each element `num` in the `nums` vector.
 
-### Complexity
+4. **Frequency Update**
+	```cpp
+	        ++cnt[num];
+	```
+	For each number `num`, its corresponding frequency in the `cnt` array is incremented by one.
 
-#### Time Complexity:
-- **O(n)**: The time complexity is linear because we iterate through the array `nums` once to count the frequency of elements, and we check the conditions using the `all_of` function, which operates in linear time with respect to the size of the `cnt` array (which is a fixed size of 201). Therefore, the overall time complexity is **O(n)**, where `n` is the size of the input array `nums`.
+5. **Return Statement**
+	```cpp
+	    return all_of(begin(cnt) + 1, begin(cnt) + n, [](int c){ return c == 1; }) && cnt[n] == 2;
+	```
+	This return statement checks two conditions: 1) that all elements in the `cnt` array (except the last one) occur exactly once, using `all_of`, and 2) that the largest number occurs exactly twice. If both conditions are true, the function returns true, otherwise, it returns false.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because we use an array `cnt` of size 201, which is independent of the size of the input array. The size of this array is fixed and does not grow with the input size, so the space complexity is constant **O(1)**.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+Iterate through the array and validate counts.
 
-This approach provides an efficient solution to the problem by leveraging a frequency counter to ensure that the array meets the specified conditions for being "good". The algorithm operates in linear time, **O(n)**, where `n` is the size of the input array, and uses constant space, **O(1)**, to store the frequency counts. This makes it a highly efficient solution suitable for large arrays.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-By using a simple frequency count array and performing checks on the elements of the array, the solution is both easy to understand and implement. The use of the `all_of` function makes the code more concise and readable, improving the clarity of the solution.
+Use a count array or hashmap to store counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-array-is-good/description/)
 

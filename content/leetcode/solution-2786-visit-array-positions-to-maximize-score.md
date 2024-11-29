@@ -14,98 +14,135 @@ img_src = ""
 youtube = "JtogyeIxGWE"
 youtube_upload_date="2023-07-22"
 youtube_thumbnail="https://i.ytimg.com/vi/JtogyeIxGWE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums' and a positive integer 'x'. Starting at index 0, you can move to any position j (where i < j). For each position i that you visit, you get a score of nums[i]. If the parities of nums[i] and nums[j] differ, you lose a score of 'x'. Your goal is to find the maximum score you can accumulate by visiting positions in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array nums and a positive integer x.
+- **Example:** `Input: nums = [5, 10, 3, 7], x = 4`
+- **Constraints:**
+	- 2 <= nums.length <= 10^5
+	- 1 <= nums[i], x <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long maxScore(vector<int>& n, int x) {
-        long long eve = n[0] - (n[0] % 2 ? x : 0);
-        long long odd = n[0] - (n[0] % 2 ? 0 : x);
-        for (int i = 1; i < n.size(); ++i)
-            if (n[i] % 2)   odd = n[i] + max(odd, eve - x);
-            else            eve = n[i] + max(eve, odd - x);
-        return max(eve, odd);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum score you can achieve by visiting positions in the array according to the given rules.
+- **Example:** `Output: 19`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the total score by choosing the optimal positions to visit based on the parity conditions.
 
-The task is to find the maximum score that can be achieved by considering a sequence of numbers where you alternate between adding even and odd numbers. You can apply a penalty to an odd number when it is added to the score. The problem specifies a score calculation where:
-- If the number is **even**, you can add it without penalty.
-- If the number is **odd**, you can add it to the score but you incur a penalty of `x` if it has been preceded by an even number, and no penalty if the odd number follows another odd number.
+- Initialize the scores for the even and odd cases based on nums[0].
+- Iterate through the array, updating the scores based on the parity of nums[i] and the maximum possible score from previous positions.
+- Return the maximum score from the even or odd score variable.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array nums contains integers and is not empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [5, 10, 3, 7], x = 4`  \
+  **Explanation:** Starting at index 0, we first gain 5 points. Then moving to index 1, we gain 10 but lose 4 points because the parities of 5 (odd) and 10 (even) differ. Then, moving to index 3, we gain 7 but lose another 4 points because the parities of 10 (even) and 7 (odd) differ. The final score is 5 + 10 + 7 - 4 - 4 = 19.
 
-Given an array of integers `n` and a penalty value `x`, the goal is to maximize the total score based on these rules.
+- **Input:** `Input: [2, 4, 6, 8], x = 2`  \
+  **Explanation:** All values are even, so no penalties are incurred. The total score is 2 + 4 + 6 + 8 = 20.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We will use dynamic programming to track the maximum possible score at each position based on the parity of the current and previous positions.
 
-To solve this problem, we need to manage the alternating sequence of even and odd numbers while accounting for penalties when switching between them. We use dynamic programming to maintain two potential outcomes for the score:
-- The first is the score if the last number we added is even (`eve`).
-- The second is the score if the last number we added is odd (`odd`).
-
-We iterate through the numbers in the array, updating these two possibilities at each step depending on whether the current number is even or odd.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The problem can be solved by maintaining separate scores for even and odd parities as we iterate through the array.
+- I will track the maximum score for both even and odd parities as I move through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- Input: []. Output: 0 (empty array should not be a valid input, but could return 0 if handled).
+- Input: A large array with 10^5 elements. The solution should work within time limits.
+- Input: All numbers are the same. The result will be the sum of all numbers.
+- The solution should run efficiently for up to 10^5 elements.
+{{< dots >}}
+## Code 💻
 ```cpp
 long long maxScore(vector<int>& n, int x) {
-    long long eve = n[0] - (n[0] % 2 ? x : 0);  // Initial score if first number is even
-    long long odd = n[0] - (n[0] % 2 ? 0 : x);  // Initial score if first number is odd
-```
-- **Initialization:**
-    - We start by considering the first number in the array, `n[0]`.
-    - If `n[0]` is even, the score `eve` is simply `n[0]`.
-    - If `n[0]` is odd, a penalty of `x` is applied, so the score `odd` starts as `n[0] - x`.
-    - These two variables `eve` and `odd` will represent the best possible scores for an alternating sequence of even and odd numbers starting with `n[0]`.
-
-```cpp
+    long long eve = n[0] - (n[0] % 2 ? x : 0);
+    long long odd = n[0] - (n[0] % 2 ? 0 : x);
     for (int i = 1; i < n.size(); ++i)
-        if (n[i] % 2)   // If n[i] is odd
-            odd = n[i] + max(odd, eve - x);  // Choose best outcome: add n[i] or subtract penalty
-        else            // If n[i] is even
-            eve = n[i] + max(eve, odd - x);  // Choose best outcome: add n[i] or subtract penalty
-```
-- **Iteration and Dynamic Updates:**
-    - We loop over the rest of the elements in the array starting from index 1.
-    - If `n[i]` is **odd**, we compute the new possible `odd` score. We take the maximum of:
-        - Adding `n[i]` to the previous `odd` score (no penalty since the last number was odd).
-        - Adding `n[i]` to the `eve` score and subtracting the penalty `x` (because we are switching from even to odd).
-    - If `n[i]` is **even**, we compute the new possible `eve` score. We take the maximum of:
-        - Adding `n[i]` to the previous `eve` score (no penalty since the last number was even).
-        - Adding `n[i]` to the `odd` score and subtracting the penalty `x` (because we are switching from odd to even).
-        
-    This dynamic updating ensures that we always choose the maximum possible score at each step, considering the penalties and alternations between even and odd numbers.
-
-```cpp
+        if (n[i] % 2)   odd = n[i] + max(odd, eve - x);
+        else            eve = n[i] + max(eve, odd - x);
     return max(eve, odd);
 }
 ```
-- **Return Result:**
-    - After processing all the numbers in the array, we return the maximum of `eve` and `odd`.
-    - This gives us the maximum possible score after considering all numbers in the array while alternating between even and odd numbers, applying penalties when necessary.
 
-### Complexity
+This function calculates the maximum score for a sequence of integers `n` while alternating between adding or subtracting a value `x` based on whether the integer is even or odd. The two scores, `eve` and `odd`, track the scores depending on whether the last element was even or odd.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(n)**, where `n` is the number of elements in the input array `n`.
-    - We iterate over the array exactly once, and at each step, we perform constant time operations (comparisons, additions, and subtractions).
-    - Hence, the time complexity is linear with respect to the size of the input array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long maxScore(vector<int>& n, int x) {
+	```
+	The function `maxScore` is declared, taking a vector `n` of integers and an integer `x` as inputs. It returns a long long value, representing the maximum score that can be achieved.
 
-#### Space Complexity:
-- The space complexity is **O(1)**, since we only use a constant amount of extra space to store the variables `eve`, `odd`, and a few temporary variables for computation. No additional data structures are required, making this a space-efficient solution.
+2. **Variable Initialization**
+	```cpp
+	    long long eve = n[0] - (n[0] % 2 ? x : 0);
+	```
+	The variable `eve` is initialized to the first element of the array `n`. If the element is odd, it subtracts `x`; if the element is even, no subtraction occurs.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    long long odd = n[0] - (n[0] % 2 ? 0 : x);
+	```
+	Similarly, the variable `odd` is initialized to the first element of `n`. If the element is even, it subtracts `x`; if the element is odd, no subtraction occurs.
 
-The solution leverages dynamic programming principles to track the maximum score achievable by alternating between even and odd numbers. We maintain two variables, `eve` and `odd`, which represent the best scores for sequences ending in an even or odd number, respectively. As we iterate through the array, we update these variables based on whether the current number is odd or even, considering the penalties for switching between odd and even numbers. 
+4. **Loop Initialization**
+	```cpp
+	    for (int i = 1; i < n.size(); ++i)
+	```
+	A for loop is initialized starting from index 1 to iterate through the elements of the vector `n` from the second element onward.
 
-The time complexity is **O(n)**, where `n` is the length of the array, and the space complexity is **O(1)**, making this approach both time-efficient and space-efficient. This solution provides an optimal way to maximize the score while adhering to the rules of penalties for odd numbers and the alternation between even and odd numbers.
+5. **Odd Case Calculation**
+	```cpp
+	        if (n[i] % 2)   odd = n[i] + max(odd, eve - x);
+	```
+	If the current element `n[i]` is odd (i.e., `n[i] % 2` evaluates to true), the `odd` variable is updated. It takes the maximum of the current `odd` value and the `eve` value minus `x`, then adds the current element `n[i]`.
+
+6. **Even Case Calculation**
+	```cpp
+	        else            eve = n[i] + max(eve, odd - x);
+	```
+	If the current element `n[i]` is even, the `eve` variable is updated by adding the maximum of the current `eve` value and the `odd` value minus `x`.
+
+7. **Returning Result**
+	```cpp
+	    return max(eve, odd);
+	```
+	After the loop finishes, the function returns the maximum of the `eve` and `odd` scores, which represents the highest achievable score after considering all elements.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear since we only iterate through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant since we only need to store two variables for tracking scores.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/visit-array-positions-to-maximize-score/description/)
 

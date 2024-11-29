@@ -14,278 +14,390 @@ img_src = ""
 youtube = "qK4PtjrVD0U"
 youtube_upload_date="2021-09-04"
 youtube_thumbnail="https://i.ytimg.com/vi/qK4PtjrVD0U/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a tree with `n` nodes numbered from `0` to `n - 1` represented by a `parent` array. You need to implement the `LockingTree` class with methods for locking, unlocking, and upgrading nodes in the tree based on certain conditions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the following operations in order: initialization of the tree with the `parent` array, followed by the `lock`, `unlock`, and `upgrade` operations.
+- **Example:** `[[-1, 0, 0, 1, 1, 2, 2]], [2, 2], [2, 3], [2, 2], [4, 5], [0, 1], [0, 1]]`
+- **Constraints:**
+	- 2 <= n <= 2000
+	- 0 <= num <= n - 1
+	- 1 <= user <= 104
+	- parent[0] == -1
+	- At most 2000 calls in total will be made.
 
-{{< highlight cpp >}}
-class LockingTree {
-    vector<int> nodes;
-    vector<vector<int>> chd;
-    map<int, int> mp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output for each operation is a boolean indicating whether the operation was successful or not.
+- **Example:** `[null, true, false, true, true, true, false]`
+- **Constraints:**
+	- The return value should be `null` for the initialization of the tree.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Implement the methods to manage the locking, unlocking, and upgrading of tree nodes based on the conditions provided.
+
+- 1. Initialize the tree using the `parent` array.
+- 2. Implement the `lock`, `unlock`, and `upgrade` methods to modify the locking state of nodes.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree structure is valid and represents a tree with no cycles.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[-1, 0, 0, 1, 1, 2, 2]], [2, 2], [2, 3], [2, 2], [4, 5], [0, 1], [0, 1]]`  \
+  **Explanation:** This sequence of operations first initializes the tree, then locks and unlocks nodes as per the conditions, with an upgrade operation successfully locking node 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves implementing a class with the methods for locking, unlocking, and upgrading nodes. Each operation checks the conditions before performing the action.
+
+### Initial Thoughts 💭
+- Each node can be locked or unlocked by different users.
+- The upgrade operation is a combination of locking a node and unlocking its descendants.
+- The challenge lies in efficiently checking the conditions for each operation.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no nodes in the tree, the operations should handle the empty state.
+- With `n` up to 2000, ensure the solution can handle large trees efficiently.
+- Handle cases where the root node is involved in locking or upgrading.
+- Ensure that operations respect the constraints regarding locked nodes and ancestors.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> chd;
+map<int, int> mp;
 public:
-    LockingTree(vector<int>& parent) {
-        nodes = parent;
-        // chd.resize(parent.size(), vector<int>());
-        // for(int i = 1; i < parent.size(); i++) 
-        //     chd[parent[i]].push_back(i);
-
-        vector<vector<int>>temp(parent.size());
-        
-        for(int i=1;i<parent.size();i++){
-            temp[parent[i]].push_back(i);
-        }
-        
-        chd=temp;
-            
+LockingTree(vector<int>& parent) {
+    nodes = parent;
+    vector<vector<int>>temp(parent.size());
+    for(int i=1;i<parent.size();i++){
+        temp[parent[i]].push_back(i);
     }
-    
-    bool lock(int num, int user) {
-        if(mp.find(num)==mp.end()){
-            mp[num]=user;
-            return true;
-        }
-        
-        return false;;
+    chd=temp;
+}
 
-       //  if(mp.count(num)) return false;
-       //  
-       //  mp[num] = user;
-       //  return true;
-    }
-    
-    bool unlock(int num, int user) {
-        if(mp.find(num)!=mp.end()){
-            if(mp[num]==user){
-                mp.erase(num);
-                return true;
-            }
-            return false;
-        }
-        return false;        
-        // if(!mp[num]) return false;
-        // if(mp[num] != user) return false;
-        // mp.erase(num);
-        // return true;
-    }
-    
-    bool check(int num) {
-        // cout<< num << mp[num];        
-        if(mp.find(num)!=mp.end()) return true;
-        if(mp.count(num)) return true;
-        // cout<< num << "-"<< nodes[num];
-        if(nodes[num] != -1 && check(nodes[num])) return true;
-
-        return false;
-    }
-
-    void desc(int num, int &total) {
-        for(int n : chd[num]) {
-            if(mp.count(n)) 
-            {
-                mp.erase(n);
-                total++;
-            }
-            desc(n, total);
-        }
-    }
-
-    bool upgrade(int num, int user) {
-        if(mp.find(num)!=mp.end()) return false;
-        
-        cout<< "hi";
-        if(check(num)) return false;
-        cout<< "hi1";
-        int total = 0;
-        desc(num, total);
-        if(total == 0) return false;
-
-        mp[num] = user;
+bool lock(int num, int user) {
+    if(mp.find(num)==mp.end()){
+        mp[num]=user;
         return true;
     }
-};
+    return false;
+}
 
-/**
- * Your LockingTree object will be instantiated and called as such:
- * LockingTree* obj = new LockingTree(parent);
- * bool param_1 = obj->lock(num,user);
- * bool param_2 = obj->unlock(num,user);
- * bool param_3 = obj->upgrade(num,user);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves creating a locking tree data structure that allows for the management of node locking and unlocking operations in a tree. The tree is defined by a parent array where each index represents a node, and the value at that index represents its parent. The locking mechanism includes three main operations:
-1. **Lock a Node**: A user can lock a node if it is not already locked.
-2. **Unlock a Node**: A user can unlock a node if they are the one who locked it.
-3. **Upgrade a Node**: A node can be upgraded if it is not locked and at least one of its descendants is locked. During an upgrade, the node becomes locked, and all locked descendants are unlocked.
-
-The objective is to implement these functionalities efficiently in the `LockingTree` class.
-
-### Approach
-
-To implement the `LockingTree`, we can use the following approach:
-
-1. **Data Structures**:
-   - **Parent Array**: To store the parent of each node.
-   - **Children List**: A list of vectors to maintain the children of each node for easy traversal.
-   - **Map for Locks**: A map that tracks the current user who has locked each node.
-
-2. **Operations**:
-   - **Lock**: Check if the node is already locked. If not, lock it by adding it to the map.
-   - **Unlock**: Check if the node is locked by the same user. If so, remove it from the map.
-   - **Check**: Traverse up the tree to check if any ancestor is locked.
-   - **Descendants**: Traverse down the tree to count and unlock all descendants.
-   - **Upgrade**: Ensure the node is not locked and check if any descendants are locked. If valid, lock the node and unlock all its locked descendants.
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed explanation of the provided code:
-
-```cpp
-class LockingTree {
-    vector<int> nodes;
-    vector<vector<int>> chd;
-    map<int, int> mp; // Map to track locked nodes and their user IDs
-```
-We define a class `LockingTree` with three member variables: `nodes` to store the parent information, `chd` for the children of each node, and `mp` which maps locked nodes to the users who locked them.
-
-```cpp
-public:
-    LockingTree(vector<int>& parent) {
-        nodes = parent;
-        vector<vector<int>>temp(parent.size());
-        
-        for(int i=1;i<parent.size();i++){
-            temp[parent[i]].push_back(i);
-        }
-        
-        chd=temp;
-    }
-```
-The constructor initializes the tree based on the parent array. It creates a children list by iterating through the parent array and adding child nodes to their respective parents.
-
-#### Lock Operation
-
-```cpp
-    bool lock(int num, int user) {
-        if(mp.find(num)==mp.end()){
-            mp[num]=user; // Lock the node for the user
+bool unlock(int num, int user) {
+    if(mp.find(num)!=mp.end()){
+        if(mp[num]==user){
+            mp.erase(num);
             return true;
         }
-        
         return false;
     }
-```
-The `lock` method checks if the node `num` is already locked. If it is not, it locks the node by inserting it into the map with the user's ID and returns `true`. If it is locked, it returns `false`.
+    return false;
+}
 
-#### Unlock Operation
+bool check(int num) {
+    if(mp.find(num)!=mp.end()) return true;
+    if(mp.count(num)) return true;
+    if(nodes[num] != -1 && check(nodes[num])) return true;
+    return false;
+}
 
-```cpp
-    bool unlock(int num, int user) {
-        if(mp.find(num)!=mp.end()){
-            if(mp[num]==user){ // Check if the unlocking user matches
-                mp.erase(num); // Unlock the node
-                return true;
-            }
-            return false; // User does not match
+void desc(int num, int &total) {
+    for(int n : chd[num]) {
+        if(mp.count(n)) {
+            mp.erase(n);
+            total++;
         }
-        return false;        
+        desc(n, total);
     }
-```
-The `unlock` method checks if the node is locked and whether the user unlocking it is the same one who locked it. If both conditions are met, it unlocks the node by removing it from the map and returns `true`. Otherwise, it returns `false`.
+}
 
-#### Check Operation
-
-```cpp
-    bool check(int num) {
-        if(mp.find(num)!=mp.end()) return true; // Node is locked
-        if(nodes[num] != -1 && check(nodes[num])) return true; // Check parent
-        return false;
-    }
-```
-The `check` method verifies if a node or any of its ancestors are locked. It returns `true` if it finds a locked ancestor, otherwise `false`.
-
-#### Descendants Traversal
-
-```cpp
-    void desc(int num, int &total) {
-        for(int n : chd[num]) {
-            if(mp.count(n)) {
-                mp.erase(n); // Unlock the descendant
-                total++;
-            }
-            desc(n, total); // Recursive call for children
-        }
-    }
-```
-The `desc` method is used to count and unlock all locked descendants of a given node. It iterates through the children, unlocking each one and incrementing the total count.
-
-#### Upgrade Operation
-
-```cpp
-    bool upgrade(int num, int user) {
-        if(mp.find(num)!=mp.end()) return false; // Cannot upgrade if locked
-        
-        if(check(num)) return false; // Cannot upgrade if an ancestor is locked
-        
-        int total = 0;
-        desc(num, total); // Count locked descendants
-        if(total == 0) return false; // No locked descendants to upgrade
-
-        mp[num] = user; // Lock the current node
-        return true;
-    }
-};
-```
-The `upgrade` method checks if the node is already locked or has locked ancestors. If neither is true, it counts locked descendants using `desc`. If at least one locked descendant is found, it locks the current node and returns `true`; otherwise, it returns `false`.
-
-### Complexity
-
-- **Time Complexity**: 
-  - **Lock**: \(O(1)\) – checking and inserting into the map takes constant time.
-  - **Unlock**: \(O(1)\) – checking and removing from the map also takes constant time.
-  - **Check**: \(O(h)\) where \(h\) is the height of the tree, as it may need to traverse up to the root.
-  - **Descendants**: \(O(n)\) in the worst case if all nodes are descendants.
-  - **Upgrade**: \(O(n + h)\) due to counting descendants and checking for locked ancestors.
-
-- **Space Complexity**: 
-  - The space complexity is \(O(n)\) for storing the tree structure and the lock map.
-
-### Conclusion
-
-The `LockingTree` class efficiently manages locking and unlocking operations in a tree structure. By using a combination of a parent array for structure and a map for tracking locked nodes, the implementation allows for quick operations while maintaining the integrity of the tree. This structure is particularly useful for scenarios where resource locking and hierarchical relationships are important.
-
-### Example Usage
-
-Here’s how you can utilize the `LockingTree` class:
-
-```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
-
-int main() {
-    vector<int> parent = {-1, 0, 0, 1, 1}; // Example parent array
-    LockingTree* tree = new LockingTree(parent);
-
-    cout << tree->lock(2, 1) << endl; // Should return true
-    cout << tree->lock(3, 2) << endl; // Should return true
-    cout << tree->unlock(2, 1) << endl; // Should return true
-    cout << tree->upgrade(0, 3) << endl; // Should return true
-    cout << tree->lock(1, 4) << endl; // Should return false (already locked)
-    
-    delete tree; // Clean up
-    return 0;
+bool upgrade(int num, int user) {
+    if(mp.find(num)!=mp.end()) return false;
+    if(check(num)) return false;
+    int total = 0;
+    desc(num, total);
+    if(total == 0) return false;
+    mp[num] = user;
+    return true;
 }
 ```
 
-This example initializes a `LockingTree`, performs various lock and unlock operations, and demonstrates how the locking mechanism works effectively in a hierarchical structure.
+This is the implementation of a LockingTree data structure, which supports three main operations: lock, unlock, and upgrade. It uses a map to store the locks and a tree structure to check conditions for upgrades.
+
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<vector<int>> chd;
+	```
+	This initializes a 2D vector to store the child nodes for each node in the tree.
+
+2. **Variable Initialization**
+	```cpp
+	map<int, int> mp;
+	```
+	This initializes a map to store the locked nodes, where the key is the node number and the value is the user who locked it.
+
+3. **Constructor Definition**
+	```cpp
+	public:
+	```
+	This marks the beginning of the public section of the class, where the main functions are defined.
+
+4. **Constructor Initialization**
+	```cpp
+	LockingTree(vector<int>& parent) {
+	```
+	The constructor that initializes the LockingTree object using the parent vector to define the tree structure.
+
+5. **Constructor Logic**
+	```cpp
+	    nodes = parent;
+	```
+	Assigns the provided parent vector to the nodes vector, representing the parent of each node.
+
+6. **Tree Construction**
+	```cpp
+	    vector<vector<int>>temp(parent.size());
+	```
+	Creates a temporary 2D vector to store the child nodes of each node.
+
+7. **Tree Construction**
+	```cpp
+	    for(int i=1;i<parent.size();i++){
+	```
+	Starts a loop to iterate through each node in the parent array.
+
+8. **Tree Construction**
+	```cpp
+	        temp[parent[i]].push_back(i);
+	```
+	Adds the current node as a child of its parent in the temporary vector.
+
+9. **Tree Assignment**
+	```cpp
+	    chd=temp;
+	```
+	Assigns the constructed tree (temporary vector) to the chd variable.
+
+10. **Lock Function**
+	```cpp
+	bool lock(int num, int user) {
+	```
+	Defines the lock function to lock a node if it's not already locked.
+
+11. **Lock Logic**
+	```cpp
+	    if(mp.find(num)==mp.end()){
+	```
+	Checks if the node is not already locked by any user.
+
+12. **Lock Logic**
+	```cpp
+	        mp[num]=user;
+	```
+	Locks the node by associating it with the user.
+
+13. **Lock Success**
+	```cpp
+	        return true;
+	```
+	Returns true if the node was successfully locked.
+
+14. **Lock Failure**
+	```cpp
+	    return false;;
+	```
+	Returns false if the node is already locked.
+
+15. **Unlock Function**
+	```cpp
+	bool unlock(int num, int user) {
+	```
+	Defines the unlock function to unlock a node if it is locked by the user.
+
+16. **Unlock Check**
+	```cpp
+	    if(mp.find(num)!=mp.end()){
+	```
+	Checks if the node is locked.
+
+17. **Unlock Check**
+	```cpp
+	        if(mp[num]==user){
+	```
+	Checks if the user is the one who locked the node.
+
+18. **Unlock Success**
+	```cpp
+	            mp.erase(num);
+	```
+	Removes the lock from the node.
+
+19. **Unlock Success**
+	```cpp
+	            return true;
+	```
+	Returns true if the node was successfully unlocked.
+
+20. **Unlock Failure**
+	```cpp
+	        }
+	```
+	Ends the if block for checking if the user is the one who locked the node.
+
+21. **Unlock Failure**
+	```cpp
+	        return false;
+	```
+	Returns false if the node is locked by another user.
+
+22. **Unlock End**
+	```cpp
+	    return false;
+	```
+	Returns false if the node is not locked.
+
+23. **Check Function**
+	```cpp
+	bool check(int num) {
+	```
+	Defines the check function to verify if a node is locked.
+
+24. **Check Logic**
+	```cpp
+	    if(mp.find(num)!=mp.end()) return true;
+	```
+	Returns true if the node is locked.
+
+25. **Check Logic**
+	```cpp
+	    if(mp.count(num)) return true;
+	```
+	Checks if the node is locked by any user.
+
+26. **Check Logic**
+	```cpp
+	    if(nodes[num] != -1 && check(nodes[num])) return true;
+	```
+	Checks recursively if any parent node is locked.
+
+27. **Check Failure**
+	```cpp
+	    return false;
+	```
+	Returns false if the node or any parent node is not locked.
+
+28. **Desc Function**
+	```cpp
+	void desc(int num, int &total) {
+	```
+	Defines a recursive function to descend through the tree and count unlocked nodes.
+
+29. **Desc Logic**
+	```cpp
+	    for(int n : chd[num]) {
+	```
+	Iterates over all child nodes.
+
+30. **Desc Logic**
+	```cpp
+	        if(mp.count(n)) {
+	```
+	Checks if the current child node is locked.
+
+31. **Desc Logic**
+	```cpp
+	            mp.erase(n);
+	```
+	Removes the lock from the child node.
+
+32. **Desc Logic**
+	```cpp
+	            total++;
+	```
+	Increments the total count of unlocked nodes.
+
+33. **Desc Recursion**
+	```cpp
+	        }
+	        desc(n, total);
+	```
+	Recursively calls desc function for each child node.
+
+34. **Upgrade Function**
+	```cpp
+	bool upgrade(int num, int user) {
+	```
+	Defines the upgrade function to lock a node if its conditions are met.
+
+35. **Upgrade Failure**
+	```cpp
+	    if(mp.find(num)!=mp.end()) return false;
+	```
+	Checks if the node is already locked.
+
+36. **Upgrade Failure**
+	```cpp
+	    if(check(num)) return false;
+	```
+	Checks if any parent of the node is locked.
+
+37. **Upgrade Success**
+	```cpp
+	    int total = 0;
+	```
+	Initializes a counter to track the number of child nodes unlocked.
+
+38. **Upgrade Success**
+	```cpp
+	    desc(num, total);
+	```
+	Calls the desc function to count unlocked nodes in the tree.
+
+39. **Upgrade Success**
+	```cpp
+	    if(total == 0) return false;
+	```
+	Checks if no nodes were unlocked.
+
+40. **Upgrade Success**
+	```cpp
+	    mp[num] = user;
+	```
+	Locks the node and assigns the user to it.
+
+41. **Upgrade End**
+	```cpp
+	    return true;
+	```
+	Returns true if the node was successfully upgraded.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for simple lock/unlock operations.
+- **Average Case:** O(n) for checking descendants in upgrade operations.
+- **Worst Case:** O(n) for operations involving the entire tree.
+
+The time complexity is influenced by the need to check multiple nodes, especially for the upgrade operation.
+
+### Space Complexity 💾
+- **Best Case:** O(1) for small trees with minimal operations.
+- **Worst Case:** O(n) for storing locked nodes and their users.
+
+Space complexity is determined by the number of locked nodes and the tree structure.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/operations-on-tree/description/)
 

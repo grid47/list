@@ -14,179 +14,201 @@ img_src = ""
 youtube = "5Hie-4QPNtI"
 youtube_upload_date="2020-06-07"
 youtube_thumbnail="https://i.ytimg.com/vi/5Hie-4QPNtI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers and an integer k, you need to find the strongest k elements in the array. The strength of each element is determined by how far it is from the median of the array. If two elements are equidistant from the median, the larger element is considered stronger. Return the k strongest elements in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers and an integer k.
+- **Example:** `Input: arr = [4, 8, 1, 6, 3], k = 3`
+- **Constraints:**
+	- 1 <= arr.length <= 10^5
+	- -10^5 <= arr[i] <= 10^5
+	- 1 <= k <= arr.length
 
-{{< highlight cpp >}}
-class cmp {
-    public:
-     bool operator() (pair<float,int> &a, pair<float, int> &b) {
-        if(a.first == b.first) return a.second < b.second;
-        else return a.first < b.first;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of the k strongest elements from the array, sorted by strength. If two elements are equally strong, the larger one comes first.
+- **Example:** `Output: [8, 6, 4]`
+- **Constraints:**
+	- The answer can be returned in any arbitrary order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the strongest k elements by comparing the distance of each element from the median and resolving ties based on the element's value.
+
+- Sort the array to calculate the median.
+- Calculate the strength of each element as the absolute difference from the median.
+- If two elements have the same strength, the larger element is considered stronger.
+- Use a priority queue to efficiently extract the k strongest elements.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is assumed that all inputs are valid and that the array contains at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [4, 8, 1, 6, 3], k = 3`  \
+  **Explanation:** The median of the array is 4, so the elements sorted by their distance from the median are [8, 6, 4, 3, 1]. The strongest 3 elements are [8, 6, 4].
+
+- **Input:** `Input: arr = [1, 1, 2, 3, 3], k = 2`  \
+  **Explanation:** The median of the array is 2. The elements sorted by their strength are [3, 3, 1, 1, 2]. The strongest 2 elements are [3, 3].
+
+{{< dots >}}
+## Approach 🚀
+The problem involves finding the k strongest elements by first sorting the array to calculate the median and then sorting the elements based on their distance from the median.
+
+### Initial Thoughts 💭
+- The median can be calculated by sorting the array.
+- The strength of each element is defined as the absolute difference between the element and the median.
+- After calculating the strength, we can sort the array based on strength and return the top k elements.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least one element, so there is no need to handle empty arrays.
+- For large inputs, the solution needs to efficiently calculate the strength of each element and extract the strongest k elements.
+- If all elements are the same, the strongest elements will be the largest values based on the number of occurrences.
+- The input size can go up to 10^5, so the solution must be optimized for time efficiency.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> getStrongest(vector<int>& arr, int k) {
+    sort(arr.begin(), arr.end());
+    int n = arr.size();
+    float m;
+    if(n & 1) {
+        m = arr[n / 2];
+    } else {
+        m = arr[n/2-1];
     }
-};
-
-class Solution {
-public:
-    vector<int> getStrongest(vector<int>& arr, int k) {
-        sort(arr.begin(), arr.end());
-        int n = arr.size();
-        float m;
-        if(n & 1) {
-            m = arr[n / 2];
-        } else {
-            m = arr[n/2-1];
-        }
-        priority_queue<pair<float, int>, vector<pair<float, int>>, cmp> pq;
-        
-        for(int i = 0; i < n; i++) {
-            // cout << abs(arr[i] - m) << " " << arr[i] << " ";
-            pq.push({abs(arr[i] - m), arr[i]});
-        }
-        vector<int> res;
-        while(k--) {
-            res.push_back(pq.top().second);
-            pq.pop();
-        }
-        return res;
+    priority_queue<pair<float, int>, vector<pair<float, int>>, cmp> pq;
+    
+    for(int i = 0; i < n; i++) {
+        // cout << abs(arr[i] - m) << " " << arr[i] << " ";
+        pq.push({abs(arr[i] - m), arr[i]});
     }
-};
-{{< /highlight >}}
----
+    vector<int> res;
+    while(k--) {
+        res.push_back(pq.top().second);
+        pq.pop();
+    }
+    return res;
+}
+```
 
-### Problem Statement
+The provided solution solves the problem of finding the strongest `k` elements in the array. It uses sorting to identify the median and a priority queue to efficiently select the strongest elements based on their distance from the median.
 
-The objective of this problem is to find the `k` strongest elements in an array. The "strength" of an element is defined as the absolute difference between the element and the median of the array. The median is determined as the middle value of the sorted array, or the average of the two middle values when the array has an even length. The final output should be a list of the `k` strongest elements, sorted in descending order.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> getStrongest(vector<int>& arr, int k) {
+	```
+	This line defines the function `getStrongest` which takes an integer vector `arr` and an integer `k` as inputs, and returns a vector of the `k` strongest integers.
 
-### Approach
+2. **Sorting**
+	```cpp
+	    sort(arr.begin(), arr.end());
+	```
+	This line sorts the input array `arr` in ascending order.
 
-To achieve the goal, we can break the solution into the following steps:
+3. **Variable Initialization**
+	```cpp
+	    int n = arr.size();
+	```
+	This line initializes the variable `n` to the size of the sorted array.
 
-1. **Sorting the Array**: First, we sort the input array to easily compute the median.
+4. **Variable Declaration**
+	```cpp
+	    float m;
+	```
+	A float variable `m` is declared to store the median value of the array.
 
-2. **Finding the Median**: The median is determined based on whether the number of elements in the array is odd or even.
+5. **Conditional Expression**
+	```cpp
+	    if(n & 1) {
+	```
+	This checks if the number of elements `n` is odd by using the bitwise AND operation.
 
-3. **Calculating Strength**: For each element in the array, calculate its strength, which is the absolute difference from the median.
+6. **Median Calculation**
+	```cpp
+	        m = arr[n / 2];
+	```
+	If `n` is odd, the median value `m` is set to the middle element of the sorted array.
 
-4. **Using a Custom Comparator**: Utilize a custom comparator to prioritize elements with greater strength. In cases where two elements have the same strength, we should prioritize the larger element.
+7. **Median Calculation**
+	```cpp
+	    } else {
+	```
+	This part handles the case when `n` is even.
 
-5. **Selecting the Strongest Elements**: Extract the top `k` strongest elements from a max-heap (priority queue) based on the computed strengths.
+8. **Median Calculation**
+	```cpp
+	        m = arr[n/2-1];
+	```
+	If `n` is even, the median is taken as the element just before the middle.
 
-6. **Sorting the Result**: Finally, the selected `k` strongest elements should be sorted in descending order before returning.
+9. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<pair<float, int>, vector<pair<float, int>>, cmp> pq;
+	```
+	This line declares a priority queue `pq` which stores pairs of float values (representing the absolute difference from the median) and integers (the array elements).
 
-### Code Breakdown (Step by Step)
+10. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This loop iterates through each element of the sorted array to calculate its distance from the median.
 
-Here’s a detailed breakdown of the provided code:
+11. **Priority Queue Push**
+	```cpp
+	        pq.push({abs(arr[i] - m), arr[i]});
+	```
+	This pushes each element and its absolute difference from the median into the priority queue.
 
-1. **Custom Comparator Class**:
-   ```cpp
-   class cmp {
-   public:
-       bool operator() (pair<float,int> &a, pair<float, int> &b) {
-           if(a.first == b.first) return a.second < b.second;
-           else return a.first < b.first;
-       }
-   };
-   ```
+12. **Result Vector Declaration**
+	```cpp
+	    vector<int> res;
+	```
+	This line initializes an empty vector `res` to store the `k` strongest elements.
 
-   - The custom comparator `cmp` is defined to compare pairs of float and int. The first element is the strength (absolute difference from the median), and the second element is the actual value.
-   - The comparator ensures that when two elements have the same strength, the one with the higher value is prioritized.
+13. **While Loop**
+	```cpp
+	    while(k--) {
+	```
+	This while loop continues until `k` strongest elements are selected.
 
-2. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+14. **Result Collection**
+	```cpp
+	        res.push_back(pq.top().second);
+	```
+	This line pops the top element from the priority queue and adds its second value (the original array element) to the result vector.
 
-   - The solution class encapsulates the functionality for finding the strongest elements.
+15. **Priority Queue Pop**
+	```cpp
+	        pq.pop();
+	```
+	This line removes the top element from the priority queue after it has been added to the result vector.
 
-3. **Main Function**:
-   ```cpp
-   vector<int> getStrongest(vector<int>& arr, int k) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-   - The `getStrongest` function takes a vector of integers `arr` and an integer `k` as input, returning a vector of the `k` strongest elements.
+The time complexity is dominated by the sorting step, which is O(n log n). Calculating the strength of each element and extracting the k strongest elements both take linear time.
 
-4. **Sorting the Array**:
-   ```cpp
-   sort(arr.begin(), arr.end());
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-   - The input array is sorted in ascending order, which is essential for finding the median.
+The space complexity is O(n) due to the storage of the input array and the priority queue used for sorting the elements by strength.
 
-5. **Finding the Median**:
-   ```cpp
-   int n = arr.size();
-   float m;
-   if(n & 1) {
-       m = arr[n / 2];
-   } else {
-       m = arr[n/2-1];
-   }
-   ```
+**Happy Coding! 🎉**
 
-   - The size of the array `n` is determined. The median is then computed:
-     - If `n` is odd, the median is the middle element.
-     - If `n` is even, the median is the element before the middle.
-
-6. **Priority Queue Initialization**:
-   ```cpp
-   priority_queue<pair<float, int>, vector<pair<float, int>>, cmp> pq;
-   ```
-
-   - A max-heap priority queue `pq` is initialized to store pairs of strength and the corresponding element.
-
-7. **Calculating Strength**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       pq.push({abs(arr[i] - m), arr[i]});
-   }
-   ```
-
-   - For each element in the array, its strength (absolute difference from the median) is calculated and pushed into the priority queue.
-
-8. **Selecting the Strongest Elements**:
-   ```cpp
-   vector<int> res;
-   while(k--) {
-       res.push_back(pq.top().second);
-       pq.pop();
-   }
-   ```
-
-   - The top `k` strongest elements are extracted from the priority queue and added to the result vector `res`.
-
-9. **Returning the Result**:
-   ```cpp
-   return res;
-   ```
-
-   - Finally, the function returns the vector containing the strongest elements.
-
-### Complexity
-
-- **Time Complexity**: The overall time complexity of this solution is \(O(n \log n + k \log k)\):
-  - \(O(n \log n)\) for sorting the array.
-  - \(O(n \log n)\) for inserting elements into the priority queue.
-  - \(O(k \log k)\) for extracting the top `k` elements from the priority queue.
-
-- **Space Complexity**: The space complexity is \(O(n)\) due to the storage of the priority queue and the result vector.
-
-### Conclusion
-
-The provided solution effectively identifies the `k` strongest elements from an input array by leveraging sorting and a priority queue. This solution not only showcases an efficient approach to finding and sorting elements based on their strength relative to the median but also demonstrates good practices in using custom comparators for priority queues.
-
-Key highlights of this approach include:
-
-1. **Efficiency**: The method optimally balances sorting and retrieval of the strongest elements.
-2. **Clarity**: The structured breakdown of steps makes the code easy to follow and understand.
-3. **Custom Comparator**: The use of a custom comparator for the priority queue ensures the desired ordering of elements based on their strengths and values.
-
-Overall, this solution serves as an excellent reference for tackling similar problems involving array manipulations and prioritization in competitive programming and algorithmic challenges.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-k-strongest-values-in-an-array/description/)
 

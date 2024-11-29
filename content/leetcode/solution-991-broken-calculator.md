@@ -14,121 +14,113 @@ img_src = ""
 youtube = "XIiLnBV664A"
 youtube_upload_date="2021-02-21"
 youtube_thumbnail="https://i.ytimg.com/vi/XIiLnBV664A/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a broken calculator that displays an integer 'startValue'. In each operation, you can either multiply the number by 2 or subtract 1. Your task is to determine the minimum number of operations needed to transform 'startValue' into 'target'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, 'startValue' and 'target'.
+- **Example:** `startValue = 2, target = 5`
+- **Constraints:**
+	- 1 <= startValue, target <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int brokenCalc(int startValue, int target) {
-        if(startValue >= target) return startValue - target;
-        
-        if(target % 2 == 0) return 1 + brokenCalc(startValue, target / 2);
-        
-        return 1 + brokenCalc(startValue, target +1);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the minimum number of operations required to convert 'startValue' to 'target'.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result will always be a positive integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of operations by strategically choosing whether to subtract or multiply by 2 based on the relationship between 'startValue' and 'target'.
 
-The problem asks us to find the minimum number of operations required to convert a given **start value** to a **target value**. The allowed operations are:
-1. **Multiply by 2**.
-2. **Subtract 1**.
+- If the startValue is greater than or equal to target, the only operation is to repeatedly subtract 1.
+- If the target is even, it's optimal to divide the target by 2 to minimize the number of operations.
+- If the target is odd, incrementing or decrementing by 1 helps make it even for the next step.
+{{< dots >}}
+### Problem Assumptions ✅
+- The operations always aim to reach the target from the startValue with minimal steps.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `startValue = 2, target = 5`  \
+  **Explanation:** Starting at 2, we can subtract twice (2 -> 1 -> 0) and then multiply by 2 to reach 5.
 
-You need to determine the least number of operations to transform the **start value** into the **target value**. In this problem, the transformation may involve both increasing and decreasing the target value, using a combination of these operations.
+{{< dots >}}
+## Approach 🚀
+The approach is to recursively or iteratively determine the minimal steps to reach target from startValue. If the target is larger, try halving it, if smaller, increment or decrement until the value matches.
 
-### Approach
-
-To solve this problem, we need to work backwards from the **target value** to the **start value**. This strategy is commonly used in problems where operations may work in both directions. By reversing the operations, we can determine the fewest steps needed to reach the target.
-
-#### Key Observations:
-1. If the target value is **greater than** or equal to the start value, the problem reduces to simply subtracting the start value from the target value (`target - startValue`), because we can always decrease the target to match the start value in `target - startValue` steps.
-2. If the target value is **less than** the start value, the solution becomes more complicated. We need to think about whether we can multiply the target by 2 or subtract 1 from the target to move towards the start value.
-3. If the target is **even**, the reverse operation of multiplying by 2 is dividing by 2. Hence, we can keep dividing the target by 2 until we can't.
-4. If the target is **odd**, the only option is to add 1 (because adding 1 will turn an odd number into an even one, which can then be halved in the next step).
-
-Using these observations, we can recursively transform the target back to the start value using a greedy approach:
-- If the target is even, we divide the target by 2.
-- If the target is odd, we add 1 to the target.
-
-This leads us to a solution where we reduce the target value step by step, keeping track of the number of operations required.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The problem is about reducing the difference between startValue and target using the minimum number of operations.
+- We can approach this by checking if the target is greater than or less than startValue, and apply the operations accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not involve empty inputs.
+- Ensure that the solution handles cases where startValue and target are both large (up to 10^9).
+- Consider edge cases where startValue is equal to target or where startValue is much larger than target.
+- The solution should handle large values efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int brokenCalc(int startValue, int target) {
-        // Base case: if the startValue is greater than or equal to the target
-        if(startValue >= target) return startValue - target;
-        
-        // If the target is even, divide the target by 2
-        if(target % 2 == 0) return 1 + brokenCalc(startValue, target / 2);
-        
-        // If the target is odd, increment the target by 1
-        return 1 + brokenCalc(startValue, target + 1);
-    }
-};
+int brokenCalc(int startValue, int target) {
+    if(startValue >= target) return startValue - target;
+    
+    if(target % 2 == 0) return 1 + brokenCalc(startValue, target / 2);
+    
+    return 1 + brokenCalc(startValue, target +1);
+}
 ```
 
-#### Step-by-Step Explanation:
+This function implements a broken calculator to transform the start value into the target value using a minimal number of operations. It uses recursive logic to either halve the target or increment it, depending on the value of the target.
 
-1. **Base Case**:
-   - First, we check if the `startValue` is greater than or equal to the `target`. In this case, we don't need to do anything but subtract 1 repeatedly, so the number of operations required is simply the difference between `startValue` and `target`.
-   - If `startValue >= target`, return `startValue - target`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int brokenCalc(int startValue, int target) {
+	```
+	Defines the `brokenCalc` function, which takes two integer inputs: `startValue` (the starting value) and `target` (the target value to reach).
 
-2. **Recursive Case**:
-   - If the `target` is even, it means that the last operation we performed was multiplying by 2. To reverse this, we divide the `target` by 2 and add 1 to the operation count.
-   - If `target % 2 == 0`, return `1 + brokenCalc(startValue, target / 2)`.
+2. **Base Case - Subtraction**
+	```cpp
+	    if(startValue >= target) return startValue - target;
+	```
+	Checks if the starting value is greater than or equal to the target value. If true, returns the difference between `startValue` and `target`, which represents the minimal number of operations needed.
 
-   - If the `target` is odd, the only valid operation is to add 1 (since subtracting 1 from an odd number would make it even, which can then be halved in subsequent operations). We add 1 to the `target` and continue recursively.
-   - If `target % 2 != 0`, return `1 + brokenCalc(startValue, target + 1)`.
+3. **Recursive Case - Halving**
+	```cpp
+	    if(target % 2 == 0) return 1 + brokenCalc(startValue, target / 2);
+	```
+	Checks if the target is even. If true, recursively calls `brokenCalc` with the target halved, and adds 1 to account for the halving operation.
 
-3. **Recursive Nature**:
-   - The recursive function reduces the problem by halving the target when it's even, or by incrementing it when it's odd. This reduces the problem size by a factor of 2 or 1 step at a time.
-   - The recursion continues until the base case (`startValue >= target`) is reached.
+4. **Recursive Case - Incrementing**
+	```cpp
+	    return 1 + brokenCalc(startValue, target +1);
+	```
+	If the target is odd, the function increments the target by 1 and recursively calls `brokenCalc` with the new target, adding 1 to the operation count.
 
-### Example Walkthrough:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(target)) - when halving the target
+- **Average Case:** O(log(target))
+- **Worst Case:** O(log(target))
 
-#### Example 1: `startValue = 2, target = 10`
+The time complexity is logarithmic because the target is halved at each step when it's even.
 
-1. **First Step**: `target = 10` (even) → divide by 2 → `target = 5`, operation count: 1
-2. **Second Step**: `target = 5` (odd) → add 1 → `target = 6`, operation count: 2
-3. **Third Step**: `target = 6` (even) → divide by 2 → `target = 3`, operation count: 3
-4. **Fourth Step**: `target = 3` (odd) → add 1 → `target = 4`, operation count: 4
-5. **Fifth Step**: `target = 4` (even) → divide by 2 → `target = 2`, operation count: 5
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1) - The space complexity is constant, as we only need a few variables to keep track of the target and startValue.
 
-We now have reached the `startValue` with 5 operations.
+The space complexity is constant as no extra data structures are used.
 
-#### Example 2: `startValue = 3, target = 12`
+**Happy Coding! 🎉**
 
-1. **First Step**: `target = 12` (even) → divide by 2 → `target = 6`, operation count: 1
-2. **Second Step**: `target = 6` (even) → divide by 2 → `target = 3`, operation count: 2
-
-We now have reached the `startValue` with 2 operations.
-
-### Time and Space Complexity Analysis
-
-#### Time Complexity:
-
-The time complexity of this solution depends on the number of recursive calls required to reduce the `target` to the `startValue`.
-
-- **Recursive Calls**: In the worst case, each recursive call either divides the `target` by 2 (when the `target` is even) or increments the `target` by 1 (when the `target` is odd). This results in a logarithmic reduction of the target value when the target is even.
-- **Worst-Case Time Complexity**: Since each operation reduces the target in some form, the time complexity of the recursion is **O(log(target))**.
-
-#### Space Complexity:
-
-- **Space Complexity**: Since we are using recursion, each recursive call consumes space on the call stack. The depth of recursion is **O(log(target))**, as the target is halved in each recursive step. Therefore, the space complexity is also **O(log(target))**.
-
-### Conclusion
-
-This solution provides an efficient way to calculate the minimum number of operations required to transform the `startValue` into the `target`. By recursively reducing the target value (either by dividing by 2 or adding 1), we ensure that the solution is optimal and works in logarithmic time. The use of recursion allows the solution to be both simple and effective, leveraging the properties of even and odd numbers to determine the minimal transformation path. The time and space complexities of the solution are logarithmic, making it suitable for large input sizes.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/broken-calculator/description/)
 

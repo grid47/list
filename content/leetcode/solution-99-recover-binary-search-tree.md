@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "bJBwOMPhe6Y"
 youtube_upload_date="2020-10-31"
 youtube_thumbnail="https://i.ytimg.com/vi/bJBwOMPhe6Y/sddefault.jpg"
+comments = true
 +++
 
 
@@ -27,129 +28,170 @@ youtube_thumbnail="https://i.ytimg.com/vi/bJBwOMPhe6Y/sddefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary search tree (BST), but two nodes in the tree were swapped by mistake. Your task is to recover the tree by swapping the two nodes back, without changing the structure of the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root node of a binary search tree.
+- **Example:** `Input: root = [2, 4, 3, 1]`
+- **Constraints:**
+	- The tree contains between 2 and 1000 nodes.
+	- -2^31 <= Node.val <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-    TreeNode *prv = NULL, * fst = NULL , *scd = NULL;
-    void inorder(TreeNode* node)
-    {
-        if(!node) return;
-        inorder(node->left);
-        if (prv && node->val < prv->val) {
-            if (!fst)  fst = prv;
-            scd = node; 
-        }
-        prv = node;
-        inorder(node->right);
-    }
-public:
-    void recoverTree(TreeNode* node) {
-        inorder(node);
-        swap(fst->val, scd->val);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the root of the binary search tree after recovering the swapped nodes.
+- **Example:** `Output: [3, 4, 2, 1]`
+- **Constraints:**
+	- The function should return the corrected BST.
 
-### 🌳 **Recover Binary Search Tree (BST)**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the two swapped nodes and swap them back to restore the BST's validity.
 
-The problem asks us to recover a **binary search tree (BST)** where two of its nodes have been swapped by mistake. Given a binary tree with exactly two swapped nodes, the goal is to identify these nodes and swap them back to restore the tree’s validity as a BST.
+- Perform an inorder traversal of the tree while keeping track of the previously visited node.
+- Identify the two nodes that are out of order during the traversal.
+- Once both swapped nodes are found, swap their values to restore the tree.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree is a valid BST, except for the two swapped nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [2, 4, 3, 1]`  \
+  **Explanation:** In this case, nodes 2 and 4 were swapped, so swapping them back will restore the binary search tree to [3, 4, 2, 1].
 
----
+- **Input:** `Input: root = [3, 1, 4, null, null, 2]`  \
+  **Explanation:** Here, nodes 2 and 3 were swapped. Swapping them back restores the binary search tree to [2, 1, 4, null, null, 3].
 
-### 🔑 **Approach:**
+{{< dots >}}
+## Approach 🚀
+To recover the tree, we will perform an inorder traversal of the tree to identify the two nodes that are out of order and swap them back to their correct positions.
 
-To solve this problem, we need to identify the two nodes that were swapped in the tree and swap them back. The core property of a BST is that during an **in-order traversal**, the node values should be in **strictly increasing order**.
-
-#### **Steps:**
-1. **Perform an in-order traversal** of the tree.
-2. During the traversal, if we find a node whose value is smaller than the previous node’s value, it indicates a violation of the BST property.
-3. The nodes involved in the violation will be:
-   - The **first node** that violates the property (`fst`).
-   - The **second node** that violates the property (`scd`).
-4. After identifying the swapped nodes, swap their values to restore the tree.
-
----
-
-### 💻 **Code Breakdown (Step by Step):**
-
-#### **1. Class Definition and Variable Declaration**
-
+### Initial Thoughts 💭
+- During an inorder traversal of a valid BST, the nodes should appear in increasing order.
+- We need to identify the two nodes that are swapped and restore their positions by swapping their values.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs in this problem as the tree always contains at least 2 nodes.
+- The solution should be efficient enough to handle trees with up to 1000 nodes.
+- Ensure that node values are handled correctly even for extreme values such as -2^31 and 2^31 - 1.
+- The tree must contain at least 2 nodes, and values must lie within the specified range.
+{{< dots >}}
+## Code 💻
 ```cpp
 class Solution {
-    TreeNode *prv = NULL, *fst = NULL, *scd = NULL;
-```
-
-- **`prv`**: A pointer used to track the previous node during the in-order traversal.
-- **`fst`**: A pointer that will store the first node involved in the swap violation.
-- **`scd`**: A pointer that will store the second node involved in the swap violation.
-
-#### **2. In-Order Traversal Function**
-
-```cpp
-    void inorder(TreeNode* node) {
-        if (!node) return;
-        inorder(node->left);
-```
-
-- The function `inorder` performs an in-order traversal of the tree starting from the `node` passed as an argument.
-- If the `node` is `NULL`, the function returns without doing anything.
-
-```cpp
-        if (prv && node->val < prv->val) {
-            if (!fst)  fst = prv;
-            scd = node;
-        }
-        prv = node;
-        inorder(node->right);
+TreeNode *prv = NULL, * fst = NULL , *scd = NULL;
+void inorder(TreeNode* node)
+{
+    if(!node) return;
+    inorder(node->left);
+    if (prv && node->val < prv->val) {
+        if (!fst)  fst = prv;
+        scd = node; 
     }
-```
-
-- The **in-order traversal** of the left subtree is done first, and then the value of the current node (`node->val`) is compared to the previous node’s value (`prv->val`).
-- If the current node’s value is less than the previous node’s value (`node->val < prv->val`), this indicates a violation of the BST property.
-  - The **first violation** occurs when we encounter the first node that is out of order, which is stored in `fst`.
-  - The **second violation** node is stored in `scd`.
-- The `prv` pointer is updated to point to the current node (`node`) to continue the traversal.
-- The traversal then proceeds to the right child of the current node (`node->right`).
-
-#### **3. Recover the Tree**
-
-```cpp
+    prv = node;
+    inorder(node->right);
+}
 public:
-    void recoverTree(TreeNode* node) {
-        inorder(node);
-        swap(fst->val, scd->val);
-    }
+void recoverTree(TreeNode* node) {
+    inorder(node);
+    swap(fst->val, scd->val);
+}
 ```
 
-- The `recoverTree` function is the entry point. It takes the root of the tree as an argument (`node`).
-- The function calls the `inorder` function to identify the swapped nodes.
-- After identifying the swapped nodes, the values are swapped back using the `swap(fst->val, scd->val)` statement.
+This code fixes a binary search tree (BST) where two nodes' values have been swapped. It uses an in-order traversal to detect and swap the nodes back.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	TreeNode *prv = NULL, * fst = NULL , *scd = NULL;
+	```
+	Here we declare three pointers: 'prv' (previous node), 'fst' (first wrong node), and 'scd' (second wrong node) to track the swapped nodes.
 
-### 🧠 **Time and Space Complexity:**
+2. **Function Definition**
+	```cpp
+	void inorder(TreeNode* node)
+	```
+	We define the inorder function that will traverse the tree and detect swapped nodes.
 
-#### **Time Complexity:**
+3. **Base Case**
+	```cpp
+	    if(!node) return;
+	```
+	This is the base case. If the current node is null, we return from the function.
 
-The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we perform a single in-order traversal, visiting each node exactly once.
+4. **Left Subtree Traversal**
+	```cpp
+	    inorder(node->left);
+	```
+	We recursively call the inorder function on the left child of the current node to traverse the left subtree.
 
-#### **Space Complexity:**
+5. **BST Violation Check**
+	```cpp
+	    if (prv && node->val < prv->val) {
+	```
+	We check if the current node's value is less than the previous node's value, indicating a violation of BST properties.
 
-The space complexity is **O(h)**, where `h` is the height of the tree. This space is used by the recursion stack during the in-order traversal. In the worst case (unbalanced tree), the height `h` could be equal to `n`, so the space complexity would be **O(n)**. However, for a balanced tree, the space complexity would be **O(log n)**.
+6. **Identify First Swapped Node**
+	```cpp
+	        if (!fst)  fst = prv;
+	```
+	If we haven't found the first swapped node yet, we set 'fst' to the previous node.
 
----
+7. **Identify Second Swapped Node**
+	```cpp
+	        scd = node; 
+	```
+	We set 'scd' to the current node as it is the second wrong node.
 
-### 🎯 **Conclusion:**
+8. **Update Previous Node**
+	```cpp
+	    prv = node;
+	```
+	We update the 'prv' pointer to the current node for future comparisons.
 
-This solution efficiently solves the problem of recovering a BST with two swapped nodes by performing an **in-order traversal** of the tree. The **in-order traversal** ensures that we can identify the two swapped nodes in a single pass through the tree, making this approach time-efficient with a complexity of **O(n)**.
+9. **Right Subtree Traversal**
+	```cpp
+	    inorder(node->right);
+	```
+	We recursively call the inorder function on the right child of the current node to continue the traversal.
 
-The solution uses constant space, aside from the recursion stack, ensuring space efficiency with a worst-case space complexity of **O(h)**. This approach efficiently restores the validity of the binary search tree, ensuring the tree structure is properly recovered.
+10. **Tree Recovery Function**
+	```cpp
+	void recoverTree(TreeNode* node) {
+	```
+	We define the public method 'recoverTree' that will initiate the inorder traversal to detect swapped nodes.
 
----
+11. **Recover Swapped Nodes**
+	```cpp
+	    inorder(node);
+	```
+	We call the inorder function to detect and set 'fst' and 'scd' as the swapped nodes.
 
-**Happy coding!** 🌱✨
+12. **Swap Nodes**
+	```cpp
+	    swap(fst->val, scd->val);
+	```
+	We swap the values of the two detected swapped nodes to restore the BST.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of nodes in the tree, because we need to traverse all nodes to identify the swapped nodes.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+In the worst case, the space complexity is O(n) due to the recursion stack. However, for an iterative approach, the space complexity can be reduced to O(1).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/recover-binary-search-tree/description/)
 

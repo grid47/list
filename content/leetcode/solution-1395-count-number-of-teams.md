@@ -14,185 +14,228 @@ img_src = ""
 youtube = "zONHzIqCr-o"
 youtube_upload_date="2024-07-29"
 youtube_thumbnail="https://i.ytimg.com/vi/zONHzIqCr-o/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of soldiers, each with a unique rating. You need to form teams of 3 soldiers from this list. A valid team is one where the soldiers' ratings are either strictly increasing or strictly decreasing as we move from left to right in the team. The team must satisfy the condition that the indices (i, j, k) follow 0 <= i < j < k < n.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers representing the soldiers' ratings.
+- **Example:** `rating = [3, 6, 1, 4, 5]`
+- **Constraints:**
+	- n == rating.length
+	- 3 <= n <= 1000
+	- 1 <= rating[i] <= 105
+	- All the integers in rating are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the total number of valid teams of size 3 that can be formed based on the ratings.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output will be an integer.
 
-    int memo[1001][1001][4];
-    vector<int> rate;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To count the number of valid teams that can be formed.
+
+- For each combination of three indices (i, j, k), check if the ratings are in increasing or decreasing order.
+- Sum up all valid teams.
+{{< dots >}}
+### Problem Assumptions ✅
+- The ratings are given in an array, and no two soldiers have the same rating.
+- You can form multiple teams with the same soldiers in different orders.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `rating = [3, 6, 1, 4, 5]`  \
+  **Explanation:** The valid teams are: (3, 4, 5), (6, 1, 4), (6, 1, 5), and (6, 4, 1).
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by brute force, where we check each possible triplet of indices (i, j, k) and verify if they form a valid team.
+
+### Initial Thoughts 💭
+- We need to check all combinations of 3 soldiers from the list.
+- We can optimize by using dynamic programming or a memoization approach to reduce redundant checks.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable as n is always at least 3.
+- Ensure that the approach scales for large inputs, up to n = 1000.
+- Consider inputs where the ratings are in strictly increasing or strictly decreasing order.
+- Avoid brute force solutions that involve checking all possible triplets for larger inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int memo[1001][1001][4];
+vector<int> rate;
+
+int dp(int idx, int prv, int cnt) {
+    if(cnt == 3) return 1;
+    if(idx == rate.size()) return 0;
+    if(memo[idx][prv + 1][cnt] != -1) return memo[idx][prv + 1][cnt];
+    int ans = 0;
+    if(prv == -1 || rate[idx] > rate[prv]) {
+        ans += dp(idx + 1, idx, cnt + 1);
+    }
+    ans += dp(idx + 1, prv, cnt);
     
-    int dp(int idx, int prv, int cnt) {
-        if(cnt == 3) return 1;
-        if(idx == rate.size()) return 0;
-        if(memo[idx][prv + 1][cnt] != -1) return memo[idx][prv + 1][cnt];
-        int ans = 0;
-        if(prv == -1 || rate[idx] > rate[prv]) {
-            ans += dp(idx + 1, idx, cnt + 1);
-        }
-        ans += dp(idx + 1, prv, cnt);
-        
-        return memo[idx][prv + 1][cnt] = ans;
-    }
+    return memo[idx][prv + 1][cnt] = ans;
+}
 
-    int numTeams(vector<int>& rate) {
-        this->rate = rate;
-        memset(memo, -1, sizeof(memo));
-        int res1 = dp(0, -1, 0);
+int numTeams(vector<int>& rate) {
+    this->rate = rate;
+    memset(memo, -1, sizeof(memo));
+    int res1 = dp(0, -1, 0);
 
-        reverse(this->rate.begin(),this->rate.end());
+    reverse(this->rate.begin(),this->rate.end());
 
-        memset(memo, -1, sizeof(memo));        
-        int res2 = dp(0, -1, 0);
+    memset(memo, -1, sizeof(memo));        
+    int res2 = dp(0, -1, 0);
 
-        return res1 + res2;
-    }
-};
-{{< /highlight >}}
----
+    return res1 + res2;
+}
+```
 
-### Problem Statement
+This function calculates the number of possible teams that can be formed based on certain conditions using dynamic programming with memoization.
 
-The problem at hand is to count the number of teams that can be formed based on the ratings of players, given specific constraints on team composition. A team is defined as a trio of players \( (i, j, k) \) such that \( i < j < k \). The ratings of the players must satisfy one of two conditions:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int memo[1001][1001][4];
+	```
+	We create a memoization table 'memo' to store intermediate results of subproblems.
 
-1. The ratings are in increasing order: \( \text{rate}[i] < \text{rate}[j] < \text{rate}[k] \).
-2. The ratings are in decreasing order: \( \text{rate}[i] > \text{rate}[j] > \text{rate}[k] \).
+2. **Variable Initialization**
+	```cpp
+	vector<int> rate;
+	```
+	We declare a vector 'rate' to store the ratings of the players.
 
-The objective is to find the total number of valid teams that can be formed from the given list of player ratings.
+3. **Base Case Check**
+	```cpp
+	int dp(int idx, int prv, int cnt) {
+	```
+	The function takes three arguments: the current index 'idx', the previous index 'prv', and the count of players in the current team 'cnt'.
 
-### Approach
+4. **Base Case Check**
+	```cpp
+	    if(cnt == 3) return 1;
+	```
+	If we have selected three players, we return 1, as a valid team has been formed.
 
-To tackle this problem, we utilize a dynamic programming (DP) approach. The key idea is to recursively explore the possibilities of forming valid teams while using memoization to avoid redundant calculations. Here are the steps involved in our approach:
+5. **Base Case Check**
+	```cpp
+	    if(idx == rate.size()) return 0;
+	```
+	If we have processed all the ratings and haven’t formed a team, we return 0.
 
-1. **Recursive Function**: We define a recursive function that tries to build teams starting from a given player index. This function will keep track of the current player's index, the previous player's index, and the count of players chosen so far.
+6. **Memoization Check**
+	```cpp
+	    if(memo[idx][prv + 1][cnt] != -1) return memo[idx][prv + 1][cnt];
+	```
+	If the result for the current state is already computed, we return the stored result to avoid redundant calculations.
 
-2. **Base Cases**:
-   - If three players have been selected (i.e., the count reaches three), we return 1 to signify that a valid team has been formed.
-   - If the index exceeds the size of the rating list, we return 0 since no more players are left to choose from.
+7. **Recursive Case**
+	```cpp
+	    int ans = 0;
+	```
+	We initialize a variable 'ans' to store the number of valid teams.
 
-3. **Memoization**: We maintain a memoization table to store previously computed results based on the current index, the previous index, and the count of selected players. This significantly speeds up the computation by avoiding recalculating results for the same state.
+8. **Recursive Case**
+	```cpp
+	    if(prv == -1 || rate[idx] > rate[prv]) {
+	```
+	If the current rating is greater than the previous player's rating, we proceed to form a team.
 
-4. **Choices**:
-   - For each player at the current index, we can either include them in the team (if they can form a valid increasing or decreasing sequence with previously selected players) or skip them.
-   - We recursively call our function to explore both choices.
+9. **Recursive Case**
+	```cpp
+	        ans += dp(idx + 1, idx, cnt + 1);
+	```
+	We call the 'dp' function recursively to include the current player and increase the team count.
 
-5. **Combining Results**: Since we want to count both increasing and decreasing teams, we reverse the list of ratings and apply the same logic to count decreasing teams.
+10. **Recursive Case**
+	```cpp
+	    ans += dp(idx + 1, prv, cnt);
+	```
+	We also recursively check if the current player can be skipped (no change in team).
 
-### Code Breakdown (Step by Step)
+11. **Memoization Storage**
+	```cpp
+	    return memo[idx][prv + 1][cnt] = ans;
+	```
+	Return the computed result and store it in the memoization table for future reference.
 
-Here’s a detailed explanation of the provided C++ code:
+12. **Main Function**
+	```cpp
+	int numTeams(vector<int>& rate) {
+	```
+	The 'numTeams' function calculates the total number of valid teams.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class is defined, encapsulating the solution method.
+13. **Variable Setup**
+	```cpp
+	    this->rate = rate;
+	```
+	We store the input ratings in the class variable 'rate'.
 
-2. **Memoization Table**:
-   ```cpp
-       int memo[1001][1001][4];
-   ```
-   - A 3D array `memo` is initialized to store results of subproblems, where:
-     - The first dimension represents the current index of the player being considered.
-     - The second dimension represents the index of the previously selected player.
-     - The third dimension indicates how many players have been selected so far (0 to 3).
+14. **Memoization Setup**
+	```cpp
+	    memset(memo, -1, sizeof(memo));
+	```
+	We initialize the memoization table with -1 to signify that no subproblem has been solved yet.
 
-3. **Ratings Vector**:
-   ```cpp
-       vector<int> rate;
-   ```
-   - A vector to hold the ratings of the players is defined.
+15. **Recursive Call**
+	```cpp
+	    int res1 = dp(0, -1, 0);
+	```
+	We call the 'dp' function to calculate the result for the first order of ratings.
 
-4. **Dynamic Programming Function**:
-   ```cpp
-       int dp(int idx, int prv, int cnt) {
-   ```
-   - The recursive function `dp` takes the current index `idx`, the previous selected player index `prv`, and the count of selected players `cnt`.
+16. **Reverse Setup**
+	```cpp
+	    reverse(this->rate.begin(),this->rate.end());
+	```
+	We reverse the 'rate' vector to handle the reversed case.
 
-5. **Base Cases**:
-   ```cpp
-           if(cnt == 3) return 1;
-           if(idx == rate.size()) return 0;
-           if(memo[idx][prv + 1][cnt] != -1) return memo[idx][prv + 1][cnt];
-   ```
-   - If three players are selected, it returns 1.
-   - If the index exceeds the number of players, it returns 0.
-   - If the result for the current state is already computed, it is returned from the memoization table.
+17. **Memoization Setup**
+	```cpp
+	    memset(memo, -1, sizeof(memo));        
+	```
+	Reinitialize the memoization table before calling the 'dp' function again.
 
-6. **Selecting Current Player**:
-   ```cpp
-           int ans = 0;
-           if(prv == -1 || rate[idx] > rate[prv]) {
-               ans += dp(idx + 1, idx, cnt + 1);
-           }
-   ```
-   - If no previous player has been selected or the current player can form an increasing sequence with the previous player, we recursively count the teams that can be formed by including the current player.
+18. **Recursive Call**
+	```cpp
+	    int res2 = dp(0, -1, 0);
+	```
+	We calculate the result for the reversed ratings.
 
-7. **Skipping Current Player**:
-   ```cpp
-           ans += dp(idx + 1, prv, cnt);
-   ```
-   - Regardless of the choice made, we also consider the scenario where we skip the current player.
+19. **Final Calculation**
+	```cpp
+	    return res1 + res2;
+	```
+	Return the total number of valid teams from both the original and reversed rating order.
 
-8. **Memoization**:
-   ```cpp
-           return memo[idx][prv + 1][cnt] = ans;
-       }
-   ```
-   - The result is stored in the memoization table before returning.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^3)
+- **Average Case:** O(n^3)
+- **Worst Case:** O(n^3)
 
-9. **Counting Teams**:
-   ```cpp
-       int numTeams(vector<int>& rate) {
-           this->rate = rate;
-           memset(memo, -1, sizeof(memo));
-           int res1 = dp(0, -1, 0);
-   ```
-   - The `numTeams` function initializes the ratings and the memoization table.
-   - It computes the count of increasing teams starting from the first player.
+Since we are checking each combination of 3 soldiers, the time complexity is cubic in the worst case.
 
-10. **Reversing Ratings for Decreasing Teams**:
-    ```cpp
-           reverse(this->rate.begin(), this->rate.end());
-           memset(memo, -1, sizeof(memo));        
-           int res2 = dp(0, -1, 0);
-    ```
-    - The ratings are reversed to count decreasing teams.
-    - The memoization table is reset, and the count of decreasing teams is computed.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-11. **Returning Total Teams**:
-    ```cpp
-           return res1 + res2;
-       }
-   };
-    ```
-    - The total number of valid teams is returned by adding both counts.
+We use a constant amount of space beyond the input list, so the space complexity is O(1).
 
-### Complexity
+**Happy Coding! 🎉**
 
-- **Time Complexity**:
-  - The time complexity is \( O(n^2) \), where \( n \) is the size of the ratings array. This is due to the double recursion where we explore choices based on player indices and previously selected players.
-
-- **Space Complexity**:
-  - The space complexity is \( O(n) \) due to the memoization table used for storing results of subproblems.
-
-### Conclusion
-
-This code effectively solves the problem of counting the number of valid teams that can be formed from player ratings using a dynamic programming approach combined with memoization. 
-
-Key insights from the solution include:
-- The importance of systematically exploring choices in a recursive manner while avoiding redundant computations through memoization.
-- The ability to count distinct configurations (increasing and decreasing) by leveraging the same logic with slight modifications (reversing the input).
-- Understanding how to structure the recursive function to handle base cases and choices intuitively.
-
-Such techniques are crucial for tackling combinatorial problems and can be extended to similar challenges in competitive programming and algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-teams/description/)
 

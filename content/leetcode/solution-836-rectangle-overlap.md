@@ -14,116 +14,182 @@ img_src = ""
 youtube = "o6hHUk4DOW0"
 youtube_upload_date="2020-01-14"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/o6hHUk4DOW0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two axis-aligned rectangles represented by two lists, rec1 and rec2. Each list contains four integers: [x1, y1, x2, y2], where (x1, y1) represents the bottom-left corner and (x2, y2) represents the top-right corner of the rectangle. You need to determine if the two rectangles overlap. Two rectangles overlap if their intersection area is positive. Rectangles that only touch at the edges or corners do not count as overlapping.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two lists representing two axis-aligned rectangles. Each list contains four integers: [x1, y1, x2, y2].
+- **Example:** `Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]`
+- **Constraints:**
+	- rec1.length == 4
+	- rec2.length == 4
+	- -10^9 <= rec1[i], rec2[i] <= 10^9
+	- Both rec1 and rec2 represent valid rectangles with a non-zero area.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isRectangleOverlap(vector<int>& rect1, vector<int>& rect2) {
-        int fx1=rect1[0];
-        int fx2=rect1[2];
-        int fy1=rect1[1];
-        int fy2=rect1[3];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the two rectangles overlap, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean value indicating whether the rectangles overlap.
 
-        int sx1=rect2[0];
-        int sx2=rect2[2];
-        int sy1=rect2[1];
-        int sy2=rect2[3];
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if there is a positive intersection area between the two given rectangles.
 
-        return !((sy1>=fy2) ||
-               (fy1>=sy2) ||
-               (fx1>=sx2) ||
-               (fx2<=sx1));
-    }
-};
-{{< /highlight >}}
----
+- Step 1: Compare the horizontal and vertical ranges of both rectangles.
+- Step 2: Check if there is no overlap by ensuring the rectangles do not meet in either direction (horizontal or vertical).
+- Step 3: Return true if there is an overlap, otherwise return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both rec1 and rec2 represent valid axis-aligned rectangles.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]`  \
+  **Explanation:** These two rectangles overlap because their intersection has a positive area.
 
-### Problem Statement
+- **Input:** `Input: rec1 = [0,0,1,1], rec2 = [1,0,2,1]`  \
+  **Explanation:** These rectangles do not overlap because they only touch at the edges, not overlapping in area.
 
-In this problem, you are given two rectangles defined by their corner coordinates in a 2D plane. The task is to determine whether the two rectangles overlap or not.
+{{< dots >}}
+## Approach 🚀
+The approach is to compare the boundaries of both rectangles and check for any overlap. If one rectangle is entirely to the left, right, above, or below the other, then they do not overlap.
 
-Each rectangle is represented by an array of four integers:
-- `rect1 = [x1, y1, x2, y2]` and `rect2 = [x3, y3, x4, y4]`.
-  - `(x1, y1)` and `(x2, y2)` are the coordinates of the bottom-left and top-right corners of the first rectangle.
-  - Similarly, `(x3, y3)` and `(x4, y4)` represent the coordinates of the bottom-left and top-right corners of the second rectangle.
-
-The problem asks to return a boolean value:
-- `true` if the two rectangles overlap.
-- `false` if they do not overlap.
-
-### Approach
-
-To solve this problem, the key observation is that two rectangles will **not overlap** if any of the following conditions are met:
-1. One rectangle is completely to the left of the other (i.e., the right edge of one rectangle is to the left of the left edge of the other).
-2. One rectangle is completely to the right of the other (i.e., the left edge of one rectangle is to the right of the right edge of the other).
-3. One rectangle is completely above the other (i.e., the bottom edge of one rectangle is above the top edge of the other).
-4. One rectangle is completely below the other (i.e., the top edge of one rectangle is below the bottom edge of the other).
-
-If none of these conditions are true, then the rectangles overlap. The algorithm will check these conditions and return the appropriate result.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Assign Variables for Rectangle Coordinates
-
+### Initial Thoughts 💭
+- The rectangles will overlap if and only if their projections on both the x and y axes intersect.
+- If either the horizontal or vertical projections do not overlap, the rectangles do not overlap.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty rectangles (with zero area) should not be considered valid inputs.
+- Ensure that large input values (up to 10^9) are handled efficiently.
+- Consider edge cases where the rectangles touch at the edges or corners but do not overlap.
+- Check that both rectangles are valid and the coordinates form a non-zero area.
+{{< dots >}}
+## Code 💻
 ```cpp
-int fx1 = rect1[0];
-int fx2 = rect1[2];
-int fy1 = rect1[1];
-int fy2 = rect1[3];
+bool isRectangleOverlap(vector<int>& rect1, vector<int>& rect2) {
+    int fx1=rect1[0];
+    int fx2=rect1[2];
+    int fy1=rect1[1];
+    int fy2=rect1[3];
 
-int sx1 = rect2[0];
-int sx2 = rect2[2];
-int sy1 = rect2[1];
-int sy2 = rect2[3];
-```
-- Here, we extract the coordinates of both rectangles `rect1` and `rect2`:
-  - For `rect1`, we extract the bottom-left corner `(fx1, fy1)` and the top-right corner `(fx2, fy2)`.
-  - For `rect2`, we extract the bottom-left corner `(sx1, sy1)` and the top-right corner `(sx2, sy2)`.
+    int sx1=rect2[0];
+    int sx2=rect2[2];
+    int sy1=rect2[1];
+    int sy2=rect2[3];
 
-#### Step 2: Check for Overlap Conditions
-
-```cpp
-return !((sy1 >= fy2) ||
-         (fy1 >= sy2) ||
-         (fx1 >= sx2) ||
-         (fx2 <= sx1));
+    return !((sy1>=fy2) ||
+           (fy1>=sy2) ||
+           (fx1>=sx2) ||
+           (fx2<=sx1));
+}
 ```
 
-- The condition checks if **none** of the following overlap conditions are true:
-  - **Condition 1**: `(sy1 >= fy2)` — This checks if `rect2` is completely above `rect1`. If the bottom of `rect2` (`sy1`) is greater than or equal to the top of `rect1` (`fy2`), then there is no overlap.
-  - **Condition 2**: `(fy1 >= sy2)` — This checks if `rect2` is completely below `rect1`. If the top of `rect2` (`sy2`) is less than or equal to the bottom of `rect1` (`fy1`), then there is no overlap.
-  - **Condition 3**: `(fx1 >= sx2)` — This checks if `rect2` is completely to the left of `rect1`. If the right of `rect2` (`sx2`) is to the left of the left of `rect1` (`fx1`), then there is no overlap.
-  - **Condition 4**: `(fx2 <= sx1)` — This checks if `rect2` is completely to the right of `rect1`. If the left of `rect2` (`sx1`) is to the right of the right of `rect1` (`fx2`), then there is no overlap.
+This function checks if two rectangles overlap by comparing their coordinates.
 
-- If **any** of these conditions is `true`, then there is no overlap, and the function will return `false`. If **none** of these conditions is true, the rectangles overlap, and the function returns `true`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isRectangleOverlap(vector<int>& rect1, vector<int>& rect2) {
+	```
+	This line defines the function 'isRectangleOverlap' which takes two vectors representing the coordinates of two rectangles.
 
-- The `!` operator negates the condition. Therefore, if any of these four conditions are true (i.e., no overlap), we return `false`. Otherwise, we return `true`, indicating that the rectangles do overlap.
+2. **Variable Declaration**
+	```cpp
+	    int fx1=rect1[0];
+	```
+	This line extracts the x-coordinate of the bottom-left corner of the first rectangle (rect1).
 
-### Complexity
+3. **Variable Declaration**
+	```cpp
+	    int fx2=rect1[2];
+	```
+	This line extracts the x-coordinate of the top-right corner of the first rectangle (rect1).
 
-#### Time Complexity
+4. **Variable Declaration**
+	```cpp
+	    int fy1=rect1[1];
+	```
+	This line extracts the y-coordinate of the bottom-left corner of the first rectangle (rect1).
 
-The solution performs a constant number of comparisons (just four in total) between the coordinates of the two rectangles. Each comparison involves only basic arithmetic operations, which are constant time operations. Therefore, the time complexity is:
+5. **Variable Declaration**
+	```cpp
+	    int fy2=rect1[3];
+	```
+	This line extracts the y-coordinate of the top-right corner of the first rectangle (rect1).
 
-- **O(1)** — constant time.
+6. **Variable Declaration**
+	```cpp
+	    int sx1=rect2[0];
+	```
+	This line extracts the x-coordinate of the bottom-left corner of the second rectangle (rect2).
 
-#### Space Complexity
+7. **Variable Declaration**
+	```cpp
+	    int sx2=rect2[2];
+	```
+	This line extracts the x-coordinate of the top-right corner of the second rectangle (rect2).
 
-The algorithm uses a fixed amount of extra space to store the coordinates of the two rectangles (`fx1, fx2, fy1, fy2, sx1, sx2, sy1, sy2`). No additional space is needed that depends on the size of the input. Therefore, the space complexity is:
+8. **Variable Declaration**
+	```cpp
+	    int sy1=rect2[1];
+	```
+	This line extracts the y-coordinate of the bottom-left corner of the second rectangle (rect2).
 
-- **O(1)** — constant space.
+9. **Variable Declaration**
+	```cpp
+	    int sy2=rect2[3];
+	```
+	This line extracts the y-coordinate of the top-right corner of the second rectangle (rect2).
 
-### Conclusion
+10. **Return Statement**
+	```cpp
+	    return !((sy1>=fy2) ||
+	```
+	This checks if the second rectangle is to the left, right, above, or below the first rectangle. If any of these conditions are true, there is no overlap.
 
-The solution efficiently determines whether two rectangles overlap by checking the basic geometric properties of their positions. By breaking down the problem into simple conditions that test for non-overlapping cases, we can determine the result in constant time. This approach is optimal and works well even for large inputs since the time and space complexities are both constant. 
+11. **Return Statement**
+	```cpp
+	           (fy1>=sy2) ||
+	```
+	This checks if the second rectangle is entirely below the first rectangle.
 
-This solution provides a clear and intuitive method to solve the problem of determining whether two rectangles overlap, and it is computationally efficient with constant time and space complexities.
+12. **Return Statement**
+	```cpp
+	           (fx1>=sx2) ||
+	```
+	This checks if the second rectangle is entirely to the right of the first rectangle.
+
+13. **Return Statement**
+	```cpp
+	           (fx2<=sx1));
+	```
+	This checks if the second rectangle is entirely to the left of the first rectangle.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), the solution involves constant time checks.
+- **Average Case:** O(1), the solution requires only constant time comparisons.
+- **Worst Case:** O(1), only a fixed number of comparisons are made.
+
+The time complexity is constant, as we are only performing a few comparisons.
+
+### Space Complexity 💾
+- **Best Case:** O(1), the space complexity remains constant.
+- **Worst Case:** O(1), the space complexity is constant as we only store the rectangle coordinates.
+
+The space complexity is constant since only a fixed amount of data is needed to perform the checks.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rectangle-overlap/description/)
 

@@ -14,146 +14,183 @@ img_src = ""
 youtube = "k4YsQgeJBt0"
 youtube_upload_date="2020-04-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/k4YsQgeJBt0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D array `nums`, where each sub-array represents a row in the grid. Your task is to return all the elements of `nums` in diagonal order, starting from the top-left to bottom-right diagonals, where the sum of the row and column indices is constant.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array `nums` where each sub-array represents a row in the grid.
+- **Example:** `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i].length <= 10^5
+	- 1 <= sum(nums[i].length) <= 10^5
+	- 1 <= nums[i][j] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
-        int m = nums.size(), n = nums[0].size(), mx = 0;
-        unordered_map<int, vector<int>> mp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a list of integers representing the elements of `nums` traversed in diagonal order.
+- **Example:** `[1, 4, 2, 7, 5, 3, 8, 6, 9]`
+- **Constraints:**
+	- The output contains the elements of `nums` in the diagonal order.
 
-        for(int i = 0; i < nums.size(); i++)
-        for(int j = 0; j < nums[i].size(); j++) {
-            mp[i + j].push_back(nums[i][j]);
-            mx = max(mx, i + j);
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to collect the elements of `nums` in diagonal order, where diagonals are formed by elements with the same sum of row and column indices.
 
-        vector<int> ans;
-        for(int i = 0; i <= mx; i++) {
-            for(auto x = mp[i].rbegin(); x != mp[i].rend(); x++)
-            ans.push_back(*x);
-        }
-        return ans;
+- Step 1: Group the elements of `nums` by the sum of their row and column indices.
+- Step 2: Traverse the diagonals in reverse order to maintain the required diagonal pattern.
+- Step 3: Collect the elements in the desired order and return them.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input grid is non-empty, and each sub-array represents a valid row of elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`  \
+  **Explanation:** The elements are collected diagonally starting from the top-left corner: 1, 4, 2, 7, 5, 3, 8, 6, 9.
+
+- **Input:** `[[1, 2, 3, 4, 5], [6, 7], [8], [9, 10, 11], [12, 13, 14, 15, 16]]`  \
+  **Explanation:** The elements are collected diagonally starting from the top-left: 1, 6, 2, 8, 7, 3, 9, 4, 12, 10, 5, 13, 11, 14, 15, 16.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves grouping the elements by their diagonal indices and then processing the diagonals from top-left to bottom-right.
+
+### Initial Thoughts 💭
+- Each diagonal consists of elements where the sum of their row and column indices is constant.
+- To achieve the diagonal order, we can utilize a map to store the diagonals and process them accordingly.
+- We can utilize a hashmap to group the diagonals and then traverse them in reverse order to achieve the desired output.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the length of the grid is at least 1.
+- For large inputs, ensure that the solution handles up to the maximum allowed grid size efficiently.
+- Ensure the solution handles cases where the grid has rows of varying lengths.
+- The space complexity should be managed to handle up to the maximum allowed input size.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
+    int m = nums.size(), n = nums[0].size(), mx = 0;
+    unordered_map<int, vector<int>> mp;
+
+    for(int i = 0; i < nums.size(); i++)
+    for(int j = 0; j < nums[i].size(); j++) {
+        mp[i + j].push_back(nums[i][j]);
+        mx = max(mx, i + j);
     }
+
+    vector<int> ans;
+    for(int i = 0; i <= mx; i++) {
+        for(auto x = mp[i].rbegin(); x != mp[i].rend(); x++)
+        ans.push_back(*x);
+    }
+    return ans;
+}
 };
 
 /*
-    Primary attempt can redirect to two pointer simulation
-    But right attempt is, queueing over a map which shares same diagonals
-*/
-{{< /highlight >}}
----
+Primary attempt can redirect to two pointer simulation
+But right attempt is, queueing over a map which shares same diagonals
+```
 
-### Problem Statement
+The `findDiagonalOrder` function takes a 2D vector `nums` as input and returns a vector containing the diagonal elements in a specific order. It maps the diagonal sums using a map, then retrieves the elements by reversing the order of elements for each diagonal to get the correct diagonal traversal.
 
-The problem at hand is to return the elements of a 2D vector in a diagonal order. The input is a vector of vectors, where each inner vector may have different lengths, representing rows of a matrix. The desired output is a single vector that contains the elements traversed in diagonal order, starting from the top-left corner and moving towards the bottom-right corner.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
+	```
+	Defines the `findDiagonalOrder` function which takes a 2D vector of integers `nums` and returns a 1D vector of integers representing the diagonal order.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int m = nums.size(), n = nums[0].size(), mx = 0;
+	```
+	Initializes variables `m` (number of rows), `n` (number of columns), and `mx` (to track the maximum diagonal index) for further processing.
 
-To solve this problem, we can utilize the concept of grouping elements based on their diagonal indices. Here's how we can break down the approach:
+3. **Data Structure Initialization**
+	```cpp
+	    unordered_map<int, vector<int>> mp;
+	```
+	Declares an unordered map `mp` where each key corresponds to a diagonal index and the value is a vector of integers that stores the diagonal elements.
 
-1. **Mapping Diagonal Indices**:
-   - Each element in the matrix can be identified by a diagonal index defined as the sum of its row index and column index (`i + j`).
-   - For example, elements in the same diagonal will have the same sum value. For the diagonal containing `(0,0)`, `(0,1)`, `(1,0)`, and so forth, the sums would be `0`, `1`, and `2` respectively.
+4. **Loop Constructs**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++)
+	```
+	Begins a loop that iterates over the rows of the `nums` vector.
 
-2. **Using a Map for Storage**:
-   - We will use an unordered map to store vectors corresponding to each diagonal index. Each key will be the diagonal index, and the value will be a vector of elements found at that diagonal.
+5. **Loop Constructs**
+	```cpp
+	    for(int j = 0; j < nums[i].size(); j++) {
+	```
+	Nested loop that iterates over the columns of the current row `i` of `nums`.
 
-3. **Filling the Map**:
-   - We will iterate through each element of the input matrix, calculate its diagonal index, and push the element into the respective vector in the map.
+6. **Map Operations**
+	```cpp
+	        mp[i + j].push_back(nums[i][j]);
+	```
+	Inserts the current element `nums[i][j]` into the map `mp` under the key `i + j`, which represents the diagonal index.
 
-4. **Constructing the Result**:
-   - Once the map is populated, we will traverse the map in order of diagonal indices and reverse the order of elements in each vector to achieve the desired bottom-to-top traversal for each diagonal.
+7. **Variable Update**
+	```cpp
+	        mx = max(mx, i + j);
+	```
+	Updates the `mx` variable to track the maximum diagonal index encountered so far.
 
-5. **Returning the Result**:
-   - Finally, we will concatenate all elements from the vectors in the correct order into a single output vector.
+8. **Vector Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	Declares a vector `ans` that will hold the final result of the diagonal traversal.
 
-### Code Breakdown (Step by Step)
+9. **Loop Constructs**
+	```cpp
+	    for(int i = 0; i <= mx; i++) {
+	```
+	Begins a loop that iterates over each diagonal index from `0` to `mx`.
 
-Now, let's examine the provided code step by step to understand how it implements the above approach:
+10. **Loop Constructs**
+	```cpp
+	        for(auto x = mp[i].rbegin(); x != mp[i].rend(); x++)
+	```
+	Iterates over the elements of each diagonal in reverse order using a reverse iterator (`rbegin` to `rend`).
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+11. **Vector Operations**
+	```cpp
+	        ans.push_back(*x);
+	```
+	Adds each element `*x` from the current diagonal to the `ans` vector.
 
-   - We declare a class `Solution` which will contain our method for diagonal traversal.
+12. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the `ans` vector, which contains the elements of the matrix in diagonal order.
 
-2. **Function Declaration**:
-   ```cpp
-   vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the total number of elements in the grid.
+- **Average Case:** O(n), as we process each element once and traverse the diagonals.
+- **Worst Case:** O(n), as we process each element and diagonal once.
 
-   - The method `findDiagonalOrder` takes a reference to a vector of vectors `nums` as input and returns a vector of integers.
+The time complexity is linear in relation to the number of elements in the grid.
 
-3. **Variable Initialization**:
-   ```cpp
-   int m = nums.size(), n = nums[0].size(), mx = 0;
-   unordered_map<int, vector<int>> mp;
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n), since we store the elements in the hashmap based on their diagonal indices.
+- **Worst Case:** O(n), where n is the total number of elements in the grid.
 
-   - We initialize `m` to represent the number of rows in the input matrix and `n` for the number of columns (assuming all rows have at least one column).
-   - `mx` is used to track the maximum diagonal index encountered.
-   - We declare an unordered map `mp` to store the elements by their diagonal index.
+The space complexity is linear, as we store the elements based on their diagonals.
 
-4. **Populating the Map**:
-   ```cpp
-   for(int i = 0; i < nums.size(); i++)
-   for(int j = 0; j < nums[i].size(); j++) {
-       mp[i + j].push_back(nums[i][j]);
-       mx = max(mx, i + j);
-   }
-   ```
+**Happy Coding! 🎉**
 
-   - We iterate through each element of the `nums` matrix using two nested loops.
-   - For each element `nums[i][j]`, we calculate its diagonal index (`i + j`) and append the element to the corresponding vector in `mp`.
-   - We also update `mx` to ensure we know the highest diagonal index present.
-
-5. **Constructing the Result Vector**:
-   ```cpp
-   vector<int> ans;
-   for(int i = 0; i <= mx; i++) {
-       for(auto x = mp[i].rbegin(); x != mp[i].rend(); x++)
-           ans.push_back(*x);
-   }
-   ```
-
-   - We declare a result vector `ans`.
-   - We iterate from `0` to `mx` to process each diagonal index.
-   - For each diagonal, we use a reverse iterator (`rbegin` and `rend`) to traverse the elements in reverse order and append them to `ans`.
-
-6. **Return Statement**:
-   ```cpp
-   return ans;
-   }
-   ```
-
-   - Finally, we return the populated `ans` vector.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \(O(N)\), where \(N\) is the total number of elements across all rows in the input vector. Each element is processed exactly once during the population of the map and once during the final traversal.
-
-- **Space Complexity**: The space complexity is also \(O(N)\) due to the use of the map to store vectors of diagonal elements.
-
-### Conclusion
-
-The `findDiagonalOrder` function efficiently constructs a diagonal traversal of a 2D matrix represented as a vector of vectors. By grouping elements based on their diagonal indices and using a map for storage, the solution maintains clarity and efficiency. The use of reverse iteration ensures that elements are added to the result in the correct order, adhering to the problem requirements.
-
-#### Key Takeaways:
-
-- **Diagonal Traversal**: Understanding how to leverage the properties of indices in a matrix allows for efficient traversal strategies.
-- **Data Structures**: The use of unordered maps and vectors showcases the flexibility of C++ STL containers in managing collections of elements with dynamic sizes.
-- **Efficiency**: This method effectively combines the simplicity of nested loops with efficient data storage and retrieval, resulting in an optimal solution.
-
-Overall, the provided solution not only solves the problem at hand but also illustrates essential concepts in programming, data structures, and algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/diagonal-traverse-ii/description/)
 

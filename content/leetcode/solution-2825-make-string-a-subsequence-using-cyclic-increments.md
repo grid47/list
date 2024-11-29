@@ -14,97 +14,127 @@ img_src = ""
 youtube = "SfXj_8QoeL8"
 youtube_upload_date="2023-08-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/SfXj_8QoeL8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two strings, `str1` and `str2`, you can perform an operation on `str1` where you select a set of indices and increment the characters at those indices cyclically. The task is to check if it is possible to make `str2` a subsequence of `str1` by performing the operation at most once.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two strings `str1` and `str2` consisting only of lowercase English letters.
+- **Example:** `str1 = 'abc', str2 = 'ad'`
+- **Constraints:**
+	- 1 <= str1.length <= 10^5
+	- 1 <= str2.length <= 10^5
+	- str1 and str2 consist of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canMakeSubsequence(string s1, string s2) {
-        int j = 0, n = s1.size(), m = s2.size();
-        for (int i = 0; i < n && j < m; ++i)
-            if (s1[i] == s2[j] || s1[i] + 1 == s2[j] || s1[i] - 25 == s2[j])
-                ++j;
-        return j == m;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if it is possible to make `str2` a subsequence of `str1` by performing the operation at most once, otherwise return `false`.
+- **Example:** `For `str1 = 'abc'`, `str2 = 'ad'`, the output should be `true`.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The task is to check if `str2` can be a subsequence of `str1` after performing the operation once.
 
-The problem requires determining if string `s2` can be made a subsequence of string `s1` under a specific condition: each character in `s1` can either match exactly with the corresponding character in `s2`, or it can be the "next" character or the "previous" character in a cyclic alphabet.
+- Loop through the characters of `str1` and try to match them with `str2`.
+- If a match is found, check if the character in `str1` can be incremented to match the character in `str2`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings consist only of lowercase English letters.
+- The operation can be applied at most once.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `str1 = 'abc'`, `str2 = 'ad'``  \
+  **Explanation:** By incrementing the character at index 2 in `str1` to 'd', `str1` becomes 'abd' and `str2` is now a subsequence of `str1`.
 
-- The alphabet is considered cyclic, meaning after 'z' comes 'a', and before 'a' comes 'z'.
-- A subsequence of a string is formed by deleting some or no characters without changing the order of the remaining characters.
+{{< dots >}}
+## Approach 🚀
+The solution involves checking if the characters in `str2` can be matched with `str1` by performing the operation at most once.
 
-In other words, we are checking if we can transform `s1` into `s2` by matching characters in a specific way while maintaining the order of characters in `s1`. Specifically, the character in `s1` can match:
-1. The character in `s2` directly.
-2. The next character in the alphabet (considering wrap-around from 'z' to 'a').
-3. The previous character in the alphabet (considering wrap-around from 'a' to 'z').
-
-### Approach
-
-The approach is to iterate through both strings `s1` and `s2` and check if we can match the characters of `s1` with the characters of `s2` by the rules described. We need to ensure that the order of characters is maintained in both strings. The process can be broken down into the following steps:
-
-1. **Initial Setup**: We will initialize two pointers, one for each string, `i` for `s1` and `j` for `s2`.
-2. **Character Matching**: Iterate through `s1` with pointer `i`. For each character in `s1`, check if it matches the character in `s2` pointed by `j` directly, or if it's one character before or after it in the alphabet.
-3. **Subsequence Condition**: If a match is found, move the pointer `j` to the next character in `s2`. If we have processed all characters in `s2` (i.e., `j` reaches the length of `s2`), then `s2` can be formed as a subsequence of `s1`, and we return true.
-4. **Termination Condition**: If we finish iterating through `s1` and haven't matched all characters of `s2`, we return false because `s2` cannot be formed as a subsequence of `s1`.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Both strings consist of lowercase English letters.
+- We can increment characters in `str1` to try and match `str2`.
+- The matching needs to be done in sequence, and we should only increment characters when necessary.
+{{< dots >}}
+### Edge Cases 🌐
+- If `str2` is empty, return `true` immediately.
+- Ensure the solution works efficiently for the maximum input sizes.
+- If `str1` and `str2` are already the same, return `true`.
+- Handle large inputs within time limits.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool canMakeSubsequence(string s1, string s2) {
     int j = 0, n = s1.size(), m = s2.size();
-```
-
-1. **Initialization**:
-   - `j = 0`: This is the pointer for string `s2`, starting from the first character.
-   - `n = s1.size()`, `m = s2.size()`: These variables store the lengths of `s1` and `s2` for ease of reference.
-
-```cpp
     for (int i = 0; i < n && j < m; ++i)
-```
-
-2. **Main Loop**:
-   - The loop iterates through the string `s1` using the index `i` from `0` to `n - 1`. At the same time, we check if we've processed all of `s2` by ensuring `j < m`. If `j` reaches the length of `s2`, we know that all characters of `s2` have been matched.
-
-```cpp
         if (s1[i] == s2[j] || s1[i] + 1 == s2[j] || s1[i] - 25 == s2[j])
             ++j;
-```
-
-3. **Character Matching**:
-   - This condition checks whether the character at `s1[i]` can match the character at `s2[j]`. There are three possibilities:
-     - `s1[i] == s2[j]`: The characters match exactly.
-     - `s1[i] + 1 == s2[j]`: The character in `s1` is one step before `s2[j]` in the alphabet (i.e., the next character).
-     - `s1[i] - 25 == s2[j]`: The character in `s1` is one step after `s2[j]` in the alphabet (i.e., the previous character, considering cyclic behavior from 'a' to 'z' and vice versa).
-   - If any of these conditions is true, it means a match is found, and we move to the next character in `s2` by incrementing `j`.
-
-```cpp
     return j == m;
 }
 ```
 
-4. **Final Check**:
-   - After the loop finishes, if `j == m`, it means all characters of `s2` have been matched in `s1` in order, so we return `true`. Otherwise, we return `false`, indicating that it is not possible to form `s2` as a subsequence of `s1`.
+This function checks whether string 's2' can be formed as a subsequence of string 's1'. It iterates through both strings and matches characters under specific conditions.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool canMakeSubsequence(string s1, string s2) {
+	```
+	The function 'canMakeSubsequence' is defined, taking two strings 's1' and 's2' as input. It returns a boolean value indicating whether 's2' can be formed as a subsequence of 's1'.
 
-1. **Time Complexity**:
-   - The time complexity is O(n), where `n` is the length of string `s1`. In the worst case, we need to iterate through all characters in `s1` once. The pointer `j` for `s2` only advances when a match is found, so it can never exceed the length of `s2`. Therefore, the algorithm will run in linear time with respect to the length of `s1`, which is O(n).
+2. **Variable Initialization**
+	```cpp
+	    int j = 0, n = s1.size(), m = s2.size();
+	```
+	Variables 'j', 'n', and 'm' are initialized. 'j' is used to track the position in 's2', while 'n' and 'm' store the lengths of 's1' and 's2', respectively.
 
-2. **Space Complexity**:
-   - The space complexity is O(1), as we are only using a few integer variables to store the pointers and the sizes of the strings. No additional data structures are used that grow with the input size.
+3. **Loop Start**
+	```cpp
+	    for (int i = 0; i < n && j < m; ++i)
+	```
+	A for loop starts, iterating through each character of 's1'. The loop continues as long as 'j' is less than the length of 's2' and 'i' is within the bounds of 's1'.
 
-### Conclusion
+4. **Condition Check**
+	```cpp
+	        if (s1[i] == s2[j] || s1[i] + 1 == s2[j] || s1[i] - 25 == s2[j])
+	```
+	A condition checks if the current character in 's1' is equal to the current character in 's2', or if they are consecutive characters in the alphabet (either 's1[i] + 1' or 's1[i] - 25' equals 's2[j]').
 
-This solution is efficient and straightforward, leveraging a single loop to iterate over `s1` while maintaining a pointer `j` to track the progress through `s2`. The use of cyclic behavior in character comparisons allows for a flexible matching condition, which is a key feature of this solution. The algorithm runs in linear time relative to the size of `s1`, making it well-suited for handling relatively large inputs efficiently. The solution’s simplicity and clarity make it easy to understand and apply to similar problems involving subsequences and character transformations.
+5. **Update Index**
+	```cpp
+	            ++j;
+	```
+	If the condition is true, increment 'j' to move to the next character in 's2'.
+
+6. **Return Statement**
+	```cpp
+	    return j == m;
+	```
+	Return true if all characters in 's2' have been matched in sequence; otherwise, return false.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of `str1`.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we only use a few extra variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/description/)
 

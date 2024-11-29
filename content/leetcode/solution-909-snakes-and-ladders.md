@@ -14,64 +14,68 @@ img_src = ""
 youtube = "6lH4nO3JfLk"
 youtube_upload_date="2022-01-08"
 youtube_thumbnail="https://i.ytimg.com/vi/6lH4nO3JfLk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an n x n integer matrix `board` where the cells are numbered from 1 to n² in a zigzag pattern starting from the bottom-left corner. Each cell may contain either `-1` (indicating no special feature) or a number indicating a snake or ladder destination. You start at square 1 and can roll a 6-sided die to move between 1 and 6 steps. If you land on a square with a snake or ladder, you must move to its destination. Determine the minimum number of dice rolls needed to reach the final square `n²`. Return -1 if it is not possible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An `n x n` matrix `board` where each cell represents a square in the game, containing either `-1` or a number indicating a snake or ladder destination.
+- **Example:** `Input: board = [[-1,-1,-1],[-1,-1,-1],[-1,-1,2]]`
+- **Constraints:**
+	- n == board.length == board[i].length
+	- 2 <= n <= 20
+	- board[i][j] is either -1 or in the range [1, n²]
+	- Squares 1 and n² are not the start of any snake or ladder.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void getCoordinate(int n, int s, int &row, int &col) {
-        row = n-1-(s-1)/n;
-        col = (s-1)%n;
-        if((n%2 ==1 && row%2==1) || (n%2==0 && row%2==0))
-            col= n-1-col;
-    }
-    int snakesAndLadders(vector<vector<int>>& board) {
-        int n = board.size();
-        vector<bool> seen(n*n+1, false);
-        seen[1] = true;
-        queue<pair<int, int>> q;
-        q.push({1, 0});
-        while(!q.empty()) {
-            pair<int, int> p = q.front();
-            q.pop();
-            int row, col, s = p.first, dist = p.second;
-            if(s == n*n) 
-                return dist;
-            for(int i = 1; s+i<= n *n && i<=6;i++) {
-                getCoordinate(n, s+i, row, col);
-                int sfinal = board[row][col] == -1? s+i:board[row][col];
-                if(seen[sfinal] == false) {
-                    seen[sfinal] = true;
-                    q.push({sfinal, dist + 1});
-                }
-            }
-        }
-        return -1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The minimum number of dice rolls required to reach the final square `n²`. If unreachable, return -1.
+- **Example:** `Output: 3`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Use Breadth-First Search (BFS) to calculate the minimum steps to reach square `n²`.
 
-In this problem, you are tasked with simulating a game of **Snakes and Ladders** on an `n x n` board, where the positions are numbered sequentially from 1 to `n*n`. The goal is to start at position 1 and reach the last position `n*n` with the minimum number of dice rolls. Each dice roll can land on a number between 1 and 6. If a player lands on a snake, they are forced to slide back to another position, and if they land on a ladder, they are immediately transported to a higher position. The goal is to return the minimum number of dice rolls required to reach the last position, or -1 if it is not possible.
+- Convert the 2D matrix to a 1D representation for easier traversal.
+- Use BFS starting from square 1, keeping track of visited squares to avoid revisits.
+- For each square, simulate a dice roll (1 to 6 steps) and determine the next position.
+- If a square has a snake or ladder, move to its destination; otherwise, move normally.
+- If the final square `n²` is reached, return the current roll count. If the queue is empty and `n²` is not reached, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The board dimensions are valid (n x n).
+- Dice rolls always provide up to 6 possible moves unless constrained by board size.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: board = [[-1,-1,-1],[6,-1,-1],[-1,-1,2]]`  \
+  **Explanation:** Start at square 1. Move to square 2 and follow the ladder to square 6. Then, roll to square 7 and follow the snake to square 2. Finally, roll to square 9 to win in 3 moves.
 
-### Approach
+- **Input:** `Input: board = [[-1,-1],[-1,-1]]`  \
+  **Explanation:** There are no snakes or ladders. The quickest path is to roll the dice 2 times to reach square 4.
 
-To solve this problem, we can model the game as a **shortest path problem** on a graph:
-1. **Board as Graph**: Each square on the board can be thought of as a node in a graph, where edges represent dice rolls from 1 to 6.
-2. **Breadth-First Search (BFS)**: Since we want to find the shortest path (minimum number of dice rolls), we can use **BFS**. BFS guarantees that the first time we reach the last position (`n*n`), we have done so in the fewest number of steps.
-3. **Handling Snakes and Ladders**: If a player lands on a square with a snake or ladder, they are immediately transported to a different square. This can be handled by checking the board value at that square, and if it's not `-1` (which indicates no snake or ladder), we move the player to the new square.
+{{< dots >}}
+## Approach 🚀
+Use BFS to explore the shortest path to square `n²` in terms of dice rolls, accounting for snakes and ladders.
 
-### Code Breakdown (Step by Step)
-
-#### **Helper Function: `getCoordinate`**
-
+### Initial Thoughts 💭
+- This problem can be modeled as a shortest-path problem in an unweighted graph.
+- Snakes and ladders alter the natural progression, requiring specific handling.
+- Using BFS ensures we explore the shortest path first due to its level-order traversal.
+{{< dots >}}
+### Edge Cases 🌐
+- The board has the smallest possible size (2x2).
+- The board has the largest possible size (20x20) with complex snake and ladder placements.
+- The board has no snakes or ladders.
+- The board is entirely filled with snakes or ladders, forcing specific paths.
+- The dice roll moves beyond the board's bounds.
+{{< dots >}}
+## Code 💻
 ```cpp
 void getCoordinate(int n, int s, int &row, int &col) {
     row = n-1-(s-1)/n;
@@ -79,44 +83,21 @@ void getCoordinate(int n, int s, int &row, int &col) {
     if((n%2 ==1 && row%2==1) || (n%2==0 && row%2==0))
         col= n-1-col;
 }
-```
-
-- The helper function `getCoordinate` converts the linear position `s` into the corresponding row and column on the board.
-- The position is calculated by dividing and taking the modulo with respect to the size of the board `n`.
-- The board has a **zig-zag** pattern where the rows alternate in direction. If the row number is odd, the board's direction is reversed.
-- The function updates the `row` and `col` by using these rules, ensuring we can correctly map a linear index to the 2D board.
-
-#### **Main Function: `snakesAndLadders`**
-
-```cpp
 int snakesAndLadders(vector<vector<int>>& board) {
     int n = board.size();
     vector<bool> seen(n*n+1, false);
     seen[1] = true;
     queue<pair<int, int>> q;
     q.push({1, 0});
-```
-
-- The function starts by initializing the board's size `n` and a `seen` array to track which positions have been visited.
-- We initialize BFS with the first position (1) and a distance of 0 (since we start at position 1).
-- A queue is used to process the BFS, where each element is a pair of the form `{position, distance}`.
-
-```cpp
     while(!q.empty()) {
         pair<int, int> p = q.front();
         q.pop();
         int row, col, s = p.first, dist = p.second;
         if(s == n*n) 
             return dist;
-```
-
-- The main BFS loop dequeues the front of the queue and extracts the current position `s` and the current distance `dist`.
-- If the current position `s` is equal to `n*n`, we've reached the goal, and we return the distance, which represents the minimum number of dice rolls.
-
-```cpp
-        for(int i = 1; s+i<= n *n && i<=6; i++) {
+        for(int i = 1; s+i<= n *n && i<=6;i++) {
             getCoordinate(n, s+i, row, col);
-            int sfinal = board[row][col] == -1 ? s+i : board[row][col];
+            int sfinal = board[row][col] == -1? s+i:board[row][col];
             if(seen[sfinal] == false) {
                 seen[sfinal] = true;
                 q.push({sfinal, dist + 1});
@@ -127,25 +108,171 @@ int snakesAndLadders(vector<vector<int>>& board) {
 }
 ```
 
-- For each position, we attempt to roll the dice and move to the next 6 possible positions.
-- We use `getCoordinate` to determine the row and column corresponding to the new position.
-- If the board value at the new position is not `-1`, this means there is a snake or ladder, and we move to the new position specified by the board value.
-- If the final position (after accounting for any snakes or ladders) hasn't been visited yet, we mark it as visited and enqueue it with an incremented distance.
-- If no solution is found (i.e., we exhaust the queue without reaching `n*n`), we return -1.
+This code implements the solution to the Snakes and Ladders game problem using breadth-first search (BFS) to find the minimum number of moves required to reach the last cell from the first cell.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	void getCoordinate(int n, int s, int &row, int &col) {
+	```
+	Define the function `getCoordinate` to compute the row and column based on the given board size and the cell number.
 
-#### **Time Complexity**
+2. **Formula**
+	```cpp
+	    row = n-1-(s-1)/n;
+	```
+	Calculate the row of the cell based on the board size and the cell number.
 
-- **O(n^2)**: We visit each square on the board at most once. In each iteration of the BFS, we process up to 6 potential moves (dice rolls). Therefore, the time complexity is proportional to the number of squares on the board, which is \( O(n^2) \).
+3. **Formula**
+	```cpp
+	    col = (s-1)%n;
+	```
+	Calculate the column of the cell based on the board size and the cell number.
 
-#### **Space Complexity**
+4. **Conditional**
+	```cpp
+	    if((n%2 ==1 && row%2==1) || (n%2==0 && row%2==0))
+	```
+	Check if the row needs to be reversed based on the board size and row parity.
 
-- **O(n^2)**: We need space for the `seen` array to track visited positions, as well as a queue for BFS. In the worst case, the queue can store all positions, so the space complexity is also \( O(n^2) \).
+5. **Action**
+	```cpp
+	        col= n-1-col;
+	```
+	Reverse the column if the row direction is reversed.
 
-### Conclusion
+6. **Function Definition**
+	```cpp
+	int snakesAndLadders(vector<vector<int>>& board) {
+	```
+	Define the `snakesAndLadders` function to solve the problem using BFS.
 
-This solution efficiently solves the Snakes and Ladders problem using a **Breadth-First Search (BFS)** approach to simulate the process of rolling dice and moving across the board. By modeling the problem as a shortest-path graph problem, we ensure that we can find the minimum number of moves required to reach the final position. The BFS approach guarantees that we always explore the shortest paths first, and the use of a queue helps in processing each potential dice roll step-by-step. This method efficiently handles the constraints of the problem and provides an optimal solution with a time complexity of \( O(n^2) \).
+7. **Variable Initialization**
+	```cpp
+	    int n = board.size();
+	```
+	Initialize `n` as the size of the board.
+
+8. **Data Structure**
+	```cpp
+	    vector<bool> seen(n*n+1, false);
+	```
+	Create a vector `seen` to track visited cells.
+
+9. **Action**
+	```cpp
+	    seen[1] = true;
+	```
+	Mark the first cell as visited.
+
+10. **Queue**
+	```cpp
+	    queue<pair<int, int>> q;
+	```
+	Initialize a queue to store the current cell and the number of moves taken to reach it.
+
+11. **Queue Operation**
+	```cpp
+	    q.push({1, 0});
+	```
+	Push the starting cell (1, 0 moves) into the queue.
+
+12. **Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start a while loop to process cells in the queue.
+
+13. **Queue Operation**
+	```cpp
+	        pair<int, int> p = q.front();
+	```
+	Retrieve the front element of the queue.
+
+14. **Queue Operation**
+	```cpp
+	        q.pop();
+	```
+	Pop the front element from the queue.
+
+15. **Variable Assignment**
+	```cpp
+	        int row, col, s = p.first, dist = p.second;
+	```
+	Extract the current cell and distance from the pair.
+
+16. **Conditional**
+	```cpp
+	        if(s == n*n) 
+	```
+	Check if the current cell is the last cell.
+
+17. **Return**
+	```cpp
+	            return dist;
+	```
+	Return the current distance if the last cell is reached.
+
+18. **Loop**
+	```cpp
+	        for(int i = 1; s+i<= n *n && i<=6;i++) {
+	```
+	Loop through the next possible cells (dice rolls 1 to 6).
+
+19. **Function Call**
+	```cpp
+	            getCoordinate(n, s+i, row, col);
+	```
+	Call `getCoordinate` to compute the row and column for the new cell.
+
+20. **Action**
+	```cpp
+	            int sfinal = board[row][col] == -1? s+i:board[row][col];
+	```
+	Determine the final cell based on ladders or snakes.
+
+21. **Conditional**
+	```cpp
+	            if(seen[sfinal] == false) {
+	```
+	Check if the final cell has already been visited.
+
+22. **Action**
+	```cpp
+	                seen[sfinal] = true;
+	```
+	Mark the final cell as visited.
+
+23. **Queue Operation**
+	```cpp
+	                q.push({sfinal, dist + 1});
+	```
+	Push the final cell into the queue with the updated distance.
+
+24. **Return**
+	```cpp
+	    return -1;
+	```
+	Return -1 if no solution is found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n²)
+- **Average Case:** O(n²)
+- **Worst Case:** O(n²)
+
+Each square is visited once, and up to 6 moves are checked for each square.
+
+### Space Complexity 💾
+- **Best Case:** O(n²)
+- **Worst Case:** O(n²)
+
+The BFS queue and visited array each store up to n² elements.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/snakes-and-ladders/description/)
 

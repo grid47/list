@@ -14,130 +14,156 @@ img_src = ""
 youtube = "B1JUo4KREiU"
 youtube_upload_date="2023-06-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/B1JUo4KREiU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a three-digit integer n. We define a number as fascinating if, when you concatenate n, 2 * n, and 3 * n, the resulting number contains all digits from 1 to 9 exactly once and does not contain any zeros.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A three-digit integer n.
+- **Example:** `n = 192`
+- **Constraints:**
+	- 100 <= n <= 999
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isFascinating(int n) {
-        int n1 = 2 * n;
-        int n2 = 3 * n;
-        vector<bool> yes(10, false); 
-        string s = to_string(n) + to_string(n1) + to_string(n2);
-        for(int i = 0; i < s.size(); i++) {
-            if(s[i] == '0') return false;
-            if(yes[s[i] - '0']) return false;
-            yes[s[i] - '0'] = true;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the number is fascinating, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The result will be a boolean value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if the concatenated number contains all digits from 1 to 9 exactly once without zeros.
+
+- Concatenate n, 2 * n, and 3 * n into a single string.
+- Check if the string contains exactly the digits 1 to 9 with no repetitions or zeros.
+{{< dots >}}
+### Problem Assumptions ✅
+- n is always a valid three-digit number.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** For n = 192, concatenating 192, 384, and 576 gives 192384576, which contains all digits from 1 to 9 exactly once.
+
+- **Input:** `Example 2`  \
+  **Explanation:** For n = 100, concatenating 100, 200, and 300 gives 100200300, which contains zeros and doesn't satisfy the conditions.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to check if the concatenated number contains all the digits from 1 to 9 exactly once without any zeros.
+
+### Initial Thoughts 💭
+- The concatenated result must contain exactly the digits 1 through 9.
+- We need to check if the concatenated string has the correct digits and no zeros.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since n is always a three-digit number.
+- n is always between 100 and 999, so no large inputs to consider.
+- Check for numbers like 100 or multiples that result in zeros in the concatenation.
+- n must be a valid three-digit number.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isFascinating(int n) {
+    int n1 = 2 * n;
+    int n2 = 3 * n;
+    vector<bool> yes(10, false); 
+    string s = to_string(n) + to_string(n1) + to_string(n2);
+    for(int i = 0; i < s.size(); i++) {
+        if(s[i] == '0') return false;
+        if(yes[s[i] - '0']) return false;
+        yes[s[i] - '0'] = true;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to check if a given integer `n` is a "fascinating number". A fascinating number is defined as follows:
-
-- The number `n` must form a concatenated sequence when multiplied by 2 and 3.
-- Specifically, if we concatenate the number `n`, `2 * n`, and `3 * n` as strings, the sequence should consist of the digits from 1 to 9 exactly once, in any order. Importantly, no digit should be repeated, and no digit should be zero.
-
-The task is to return `true` if the number is fascinating, and `false` otherwise.
-
-### Approach
-
-The approach to solving this problem involves these key steps:
-1. **Concatenate the Numbers**: First, we generate three values:
-   - `n`: the given number.
-   - `2 * n`: double of `n`.
-   - `3 * n`: triple of `n`.
-   These values are then concatenated into a single string.
-   
-2. **Check for Fascinating Properties**: The concatenated string must:
-   - Contain only the digits from 1 to 9.
-   - Contain each of these digits exactly once.
-   - Not contain any zeros or repeating digits.
-
-3. **Implementation Details**:
-   - Convert the numbers into strings to easily manipulate their digits.
-   - Use a boolean array `yes` of size 10 to track which digits have already been encountered, ensuring there are no duplicates.
-   - As we loop through the concatenated string, we check if a zero is encountered or if any digit is repeated. If either condition is true, return `false`.
-   - If no issues are found, check if all digits from 1 to 9 are present. If so, return `true`.
-
-### Code Breakdown
-
-#### Step 1: Multiply `n` by 2 and 3
-
-```cpp
-int n1 = 2 * n;
-int n2 = 3 * n;
-```
-
-- These two lines compute the values `2 * n` and `3 * n`, which are needed for forming the concatenated sequence. The number `n` is the base value, and we calculate its double (`n1`) and triple (`n2`).
-
-#### Step 2: Create the Concatenated String
-
-```cpp
-string s = to_string(n) + to_string(n1) + to_string(n2);
-```
-
-- We concatenate the string representations of `n`, `2 * n` (`n1`), and `3 * n` (`n2`). The `to_string()` function is used to convert each of these numbers into their string representations, and the `+` operator concatenates them into one string `s`. The string `s` now contains the digits of `n`, `n1`, and `n2` in that order.
-
-#### Step 3: Create a Boolean Array to Track Digits
-
-```cpp
-vector<bool> yes(10, false);
-```
-
-- We create a boolean array `yes` of size 10 (for digits 0 through 9), initially set to `false`. This array will help us track whether each digit has been seen in the concatenated string `s`. If a digit is encountered, we mark it as `true`.
-
-#### Step 4: Loop Through the String and Check Digits
-
-```cpp
-for(int i = 0; i < s.size(); i++) {
-    if(s[i] == '0') return false;
-    if(yes[s[i] - '0']) return false;
-    yes[s[i] - '0'] = true;
+    return true;
 }
 ```
 
-- We loop through each character of the string `s`.
-- First, we check if the character is `'0'`. If it is, we immediately return `false` because `0` is not allowed in a fascinating number.
-- Next, we check if the current digit has already been seen using the `yes` array. If the digit has been encountered before, we return `false` because duplicates are not allowed.
-- If the digit has not been seen before, we mark it as `true` in the `yes` array to ensure that we don't encounter it again in the future.
+This function checks if a number `n` is a fascinating number. A number is fascinating if the concatenation of `n`, `2*n`, and `3*n` contains all digits from 1 to 9 exactly once.
 
-#### Step 5: Return True if All Conditions are Met
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isFascinating(int n) {
+	```
+	The function `isFascinating` is defined, taking an integer `n` and returning a boolean indicating whether `n` is a fascinating number.
 
-```cpp
-return true;
-```
+2. **Variable Initialization**
+	```cpp
+	    int n1 = 2 * n;
+	```
+	The variable `n1` is initialized to `2 * n`, which is used to create the concatenated string for further checks.
 
-- If we have successfully looped through all the digits and there were no zeros or duplicates, we return `true`, indicating that the number `n` is fascinating.
+3. **Variable Initialization**
+	```cpp
+	    int n2 = 3 * n;
+	```
+	The variable `n2` is initialized to `3 * n`, representing the third part of the concatenated string.
 
-### Complexity Analysis
+4. **Array Initialization**
+	```cpp
+	    vector<bool> yes(10, false); 
+	```
+	A vector `yes` is initialized with 10 elements, all set to `false`. This will be used to track whether a digit from 1 to 9 has already appeared in the concatenated string.
 
-#### Time Complexity
+5. **String Concatenation**
+	```cpp
+	    string s = to_string(n) + to_string(n1) + to_string(n2);
+	```
+	The integers `n`, `n1`, and `n2` are converted to strings and concatenated together to form the string `s`.
 
-The time complexity of this solution is **O(k)**, where `k` is the total number of digits in the concatenated string `s`. Since `s` is formed by concatenating `n`, `2 * n`, and `3 * n`, the number of digits is proportional to the length of `n`. Specifically:
-- If `n` has `d` digits, then `n1` and `n2` will also have roughly `d` digits.
-- Therefore, the total number of digits in `s` is approximately `3 * d`.
+6. **Loop Start**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	A loop is initiated to iterate over each character of the concatenated string `s`.
 
-Since we loop through each digit of `s` once and perform constant-time operations within the loop (checking and updating the boolean array), the overall time complexity is **O(d)**, where `d` is the number of digits in the input number `n`.
+7. **Zero Check**
+	```cpp
+	        if(s[i] == '0') return false;
+	```
+	If any character in the string is '0', the function returns `false`, as a fascinating number cannot contain the digit '0'.
 
-#### Space Complexity
+8. **Repetition Check**
+	```cpp
+	        if(yes[s[i] - '0']) return false;
+	```
+	If the digit has already appeared in the string (tracked by the `yes` array), the function returns `false`, ensuring all digits are unique.
 
-The space complexity is **O(1)**, as the only extra space used is for the boolean array `yes` of size 10. This space is constant, regardless of the size of `n`.
+9. **Mark Digit as Seen**
+	```cpp
+	        yes[s[i] - '0'] = true;
+	```
+	The corresponding index in the `yes` vector is set to `true` to mark that digit as seen.
 
-### Conclusion
+10. **Return True**
+	```cpp
+	    return true;
+	```
+	If the loop completes without returning `false`, the function returns `true`, indicating that the number `n` is a fascinating number.
 
-This solution efficiently checks if a number is fascinating by leveraging string manipulation and a boolean array to track the occurrence of digits. The approach runs in linear time relative to the number of digits in the input number, and it uses constant space for the digit tracking array. This makes it both time and space efficient, suitable for large input numbers within reasonable limits.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-The key insight in solving this problem is recognizing the need to form a concatenated string and checking for digit uniqueness and absence of zeros, which ensures the number is fascinating.
+The time complexity is constant since the operations do not depend on the size of the input beyond simple arithmetic and string checks.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only store a few integer variables and a string of fixed length.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-the-number-is-fascinating/description/)
 

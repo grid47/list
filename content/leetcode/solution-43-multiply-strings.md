@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "6k2PdSDX-1w"
 youtube_upload_date="2024-01-12"
 youtube_thumbnail="https://i.ytimg.com/vi/6k2PdSDX-1w/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,139 +28,150 @@ youtube_thumbnail="https://i.ytimg.com/vi/6k2PdSDX-1w/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two non-negative integers represented as strings, return their product as a string. You must not use any built-in BigInteger library or convert the inputs to integers directly.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two non-negative integers 'num1' and 'num2' represented as strings.
+- **Example:** `Input: num1 = "3", num2 = "4"`
+- **Constraints:**
+	- 1 <= num1.length, num2.length <= 200
+	- num1 and num2 consist of digits only.
+	- Both num1 and num2 do not contain any leading zero, except the number 0 itself.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string multiply(string num1, string num2) {
-        if (num1 == "0" || num2 == "0") return "0";
-        
-        vector<int> res(num1.size()+num2.size(), 0);
-        
-        for (int i = num1.size()-1; i >= 0; i--) {
-            for (int j = num2.size()-1; j >= 0; j--) {
-                res[i + j + 1] += (num1[i]-'0') * (num2[j]-'0');
-                res[i + j] += res[i + j + 1] / 10;
-                res[i + j + 1] %= 10;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the product of num1 and num2 as a string.
+- **Example:** `Output: "12"`
+- **Constraints:**
+	- The output should be a valid representation of the product as a string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to simulate the multiplication of two numbers represented as strings and return the result as a string.
+
+- Initialize an array to hold the product of the two numbers.
+- Multiply each digit of num1 with each digit of num2, and store the result in the appropriate position of the array.
+- Handle the carry-over values from multiplication and adjust the positions accordingly.
+- Convert the array back to a string, ensuring there are no leading zeroes.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both num1 and num2 are valid non-negative integer strings.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num1 = "3", num2 = "4"`  \
+  **Explanation:** In this case, the multiplication of 3 and 4 results in 12.
+
+- **Input:** `Input: num1 = "45", num2 = "23"`  \
+  **Explanation:** The result of multiplying 45 and 23 is 1035.
+
+- **Input:** `Input: num1 = "99", num2 = "99"`  \
+  **Explanation:** Multiplying 99 by 99 results in 9801.
+
+{{< dots >}}
+## Approach 🚀
+We simulate the multiplication of the two numbers by multiplying each digit of num1 with each digit of num2, and handle the carries appropriately.
+
+### Initial Thoughts 💭
+- We cannot directly convert the strings to integers, so we need to simulate the multiplication process manually.
+- This problem can be solved by iterating over the digits of the two strings and performing traditional multiplication, while storing the intermediate results in an array.
+{{< dots >}}
+### Edge Cases 🌐
+- If either num1 or num2 is '0', return '0' as the result.
+- For large inputs, ensure that the solution efficiently handles up to 200 digits without exceeding time limits.
+- Handle the case where either num1 or num2 is a single digit, or where one of them is zero.
+- Ensure the output string represents the correct result without leading zeros, except when the result is zero.
+{{< dots >}}
+## Code 💻
+```cpp
+string multiply(string num1, string num2) {
+    if (num1 == "0" || num2 == "0") return "0";
+    
+    vector<int> res(num1.size()+num2.size(), 0);
+    
+    for (int i = num1.size()-1; i >= 0; i--) {
+        for (int j = num2.size()-1; j >= 0; j--) {
+            res[i + j + 1] += (num1[i]-'0') * (num2[j]-'0');
+            res[i + j] += res[i + j + 1] / 10;
+            res[i + j + 1] %= 10;
         }
-        
-        int i = 0;
-        string ans = "";
-        while (res[i] == 0) i++;
-        while (i < res.size()) ans += to_string(res[i++]);
-        
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### 📊 **Multiplying Two Large Numbers Represented as Strings**
-
-The problem requires multiplying two non-negative integers that are represented as strings. Since the result can be extremely large, it's not feasible to convert the strings to integers directly. We must implement an algorithm that simulates the multiplication of large numbers using their string representations.
-
----
-
-### 🚀 **Approach**
-
-The multiplication will be handled in a way that mirrors how we multiply large numbers by hand, breaking it down into smaller steps:
-
-1. **Check for Zero:**  
-   If either of the input strings is "0", return "0" immediately because the result of any number multiplied by zero is zero.
-
-2. **Initialize a Result Array:**  
-   We create a result array (or vector) `res` to hold the intermediate results of the multiplication. The maximum possible size of this array will be the sum of the lengths of the two input strings, since multiplying a number with `m` digits by a number with `n` digits can produce a result with at most `m + n` digits.
-
-3. **Multiply Digit by Digit:**  
-   We simulate the traditional manual multiplication where we multiply each digit of the first number by each digit of the second number, and store the result at the appropriate position in the result array. For each multiplication, we handle carry-overs as we move through the result array.
-
-4. **Normalize the Result Vector:**  
-   After all multiplications, some positions in the result array may contain values larger than 9, which require "carry" to the next position. This is handled by dividing the value by 10 and adding the quotient to the next position.
-
-5. **Convert the Result Array to a String:**  
-   Finally, we convert the result array back into a string, skipping any leading zeros, and return the final result.
-
----
-
-### 🖥️ **Code Breakdown (Step-by-Step)**
-
-#### Step 1: Handle Special Case of Zero Multiplication
-
-```cpp
-if (num1 == "0" || num2 == "0") return "0";
-```
-
-- If either input number is "0", return "0" as the product of any number and zero is zero.
-
-#### Step 2: Initialize the Result Array
-
-```cpp
-vector<int> res(num1.size() + num2.size(), 0);
-```
-
-- Create a result array `res` to store the intermediate results. The size of the array is the sum of the lengths of `num1` and `num2`, to handle the largest possible product.
-
-#### Step 3: Perform the Multiplication
-
-```cpp
-for (int i = num1.size() - 1; i >= 0; i--) {
-    for (int j = num2.size() - 1; j >= 0; j--) {
-        res[i + j + 1] += (num1[i] - '0') * (num2[j] - '0');
-        res[i + j] += res[i + j + 1] / 10;
-        res[i + j + 1] %= 10;
-    }
+    
+    int i = 0;
+    string ans = "";
+    while (res[i] == 0) i++;
+    while (i < res.size()) ans += to_string(res[i++]);
+    
+    return ans;
 }
 ```
 
-- Loop through each digit of `num1` and `num2` starting from the least significant digit.
-- Multiply the digits and add the result to the appropriate position in the result array `res[i + j + 1]`.
-- Handle the carry-over by updating the next higher position in the result array (`res[i + j]`).
+This code multiplies two large numbers represented as strings and returns the product as a string.
 
-#### Step 4: Construct the Final Result String
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string multiply(string num1, string num2) {
+	```
+	This line declares a function named `multiply` that takes two strings `num1` and `num2` representing large numbers as input and returns a string representing their product.
 
-```cpp
-int i = 0;
-string ans = "";
-while (res[i] == 0) i++;
-while (i < res.size()) ans += to_string(res[i++]);
-```
+2. **Base Case**
+	```cpp
+	    if (num1 == "0" || num2 == "0") return "0";
+	```
+	This line handles the base case where either `num1` or `num2` is "0". In this case, the product is "0", so the function returns "0".
 
-- After multiplication, skip any leading zeros in the result array by advancing the index `i`.
-- Convert the digits from the result array to a string and append them to `ans`.
+3. **Vector Initialization**
+	```cpp
+	    vector<int> res(num1.size()+num2.size(), 0);
+	```
+	This line initializes a vector `res` of size `num1.size() + num2.size()` to store the intermediate results of the multiplication. It is initialized with zeros.
 
-#### Step 5: Return the Final Result
+4. **Nested Loops for Multiplication**
+	```cpp
+	    for (int i = num1.size()-1; i >= 0; i--) {
+	        for (int j = num2.size()-1; j >= 0; j--) {
+	            res[i + j + 1] += (num1[i]-'0') * (num2[j]-'0');
+	            res[i + j] += res[i + j + 1] / 10;
+	            res[i + j + 1] %= 10;
+	        }
+	    }
+	```
+	This nested loop performs the multiplication digit by digit. 1. **Digit-wise Multiplication:** The product of the digits at positions `i` and `j` in `num1` and `num2`, respectively, is added to the corresponding position in the `res` vector. 2. **Carry Handling:** If the sum at a position exceeds 9, the carry-over digit is added to the next higher position in the `res` vector. 3. **Modulo Operation:** The current position in the `res` vector is updated to store only the single-digit remainder after the carry-over.
 
-```cpp
-return ans;
-```
+5. **Result String Construction**
+	```cpp
+	    int i = 0;
+	    string ans = "";
+	    while (res[i] == 0) i++;
+	    while (i < res.size()) ans += to_string(res[i++]);
+	```
+	This part constructs the final result string `ans` from the `res` vector. 1. **Skip Leading Zeros:** The loop skips leading zeros in the `res` vector. 2. **Convert Digits to String:** The remaining digits in `res` are converted to strings and appended to the `ans` string.
 
-- Return the final result as a string, which represents the product of the two input numbers.
+6. **Return Result**
+	```cpp
+	    return ans;
+	```
+	This line returns the final result string `ans`.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N * M)
+- **Average Case:** O(N * M)
+- **Worst Case:** O(N * M)
 
-### 🧮 **Time and Space Complexity**
+The time complexity is proportional to the product of the lengths of num1 and num2, since we multiply each digit of num1 with each digit of num2.
 
-#### Time Complexity:
-- **Multiplication Loop:**  
-  The main multiplication loop runs for every pair of digits from `num1` and `num2`. Since the outer loop iterates over `num1` and the inner loop iterates over `num2`, the time complexity is `O(n * m)`, where `n` and `m` are the lengths of `num1` and `num2`, respectively.
-  
-- **Final String Construction:**  
-  The final result construction involves processing the result array, which is at most `n + m` digits long, leading to a time complexity of `O(n + m)`.
+### Space Complexity 💾
+- **Best Case:** O(N + M)
+- **Worst Case:** O(N + M)
 
-- Overall, the time complexity is **O(n * m)**.
+The space complexity depends on the size of the result array, which can be at most the sum of the lengths of num1 and num2.
 
-#### Space Complexity:
-- We use a result array `res` of size `n + m` to store the intermediate results. Therefore, the space complexity is **O(n + m)**.
+**Happy Coding! 🎉**
 
----
-
-### 🏁 **Conclusion**
-
-This solution efficiently handles the multiplication of two large numbers represented as strings by simulating traditional multiplication. The time complexity is **O(n * m)**, which is optimal for this type of problem, and the space complexity is **O(n + m)** due to the result array.
-
-By breaking down the problem into smaller steps, including handling carries and building the result string, we ensure the solution works for arbitrarily large inputs. This approach avoids integer overflow and works seamlessly even for large numbers represented as strings.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/multiply-strings/description/)
 

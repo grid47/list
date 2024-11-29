@@ -14,133 +14,225 @@ img_src = ""
 youtube = "sl4thQAqnJg"
 youtube_upload_date="2021-10-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/sl4thQAqnJg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A sentence consists of lowercase letters ('a' to 'z'), digits ('0' to '9'), hyphens ('-'), punctuation marks ('!', '.', and ','), and spaces (' ') only. A token is any sequence of characters separated by spaces. A token is considered a valid word if all the following conditions are met:
 
-{{< highlight cpp >}}
-// Time: O(N)
-// Space: O(N)
+1. It does not contain any digits.
+2. It contains at most one hyphen ('-'), and if present, the hyphen must be surrounded by lowercase letters.
+3. It contains at most one punctuation mark, and if present, the punctuation mark must be at the end of the token.
+
+Given a sentence, count the number of tokens that are valid words.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string `sentence` consisting of lowercase English letters, digits, spaces, hyphens, and punctuation marks.
+- **Example:** `Input: sentence = "hello world! test-case 1234, valid-word."`
+- **Constraints:**
+	- 1 <= sentence.length <= 1000
+	- sentence contains at least one token.
+	- Sentence characters are limited to 'a'-'z', '0'-'9', '-', '!', '.', ',', and ' '.
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An integer representing the count of valid words in the sentence.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The output is always a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the number of valid words in the given sentence.
+
+- Split the sentence into tokens based on spaces.
+- For each token, check if it satisfies the conditions for being a valid word.
+- Count the tokens that are valid words.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input sentence always contains at least one token.
+- Characters are limited to the defined set of letters, digits, and special characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: sentence = "word1 -a invalid! valid-word."`  \
+  **Explanation:** The valid words are "valid-word.". Other tokens fail due to digits, improper hyphen usage, or invalid punctuation placement. Output: 1.
+
+- **Input:** `Input: sentence = "a-b test valid! example."`  \
+  **Explanation:** The valid words are "a-b", "test", "valid!", and "example.". Output: 4.
+
+{{< dots >}}
+## Approach 🚀
+Use a helper function to validate tokens according to the rules and iterate through the tokens of the sentence to count valid words.
+
+### Initial Thoughts 💭
+- A token is valid if it adheres to strict rules regarding digits, hyphens, and punctuation marks.
+- Each token can be evaluated independently of others.
+- The solution can efficiently process the sentence by splitting it into tokens and checking each token's validity using a helper function.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty input cases as the sentence is guaranteed to have at least one token.
+- Sentences with maximum length (1000 characters).
+- Tokens with only special characters like '---' or '...'.
+- Tokens with mixed valid and invalid combinations like 'a--b' or 'a,b.'
+- Ensure proper handling of edge cases like multiple spaces or trailing/leading spaces.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    bool valid(string &s) {
-        int hyphen = 0, N = s.size();
-        for (int i = 0; i < N; ++i) {
-            if (isdigit(s[i])) return false; // no digit
-            if (isalpha(s[i])) continue; // skip letters
-            if (s[i] == '-') {
-                if (++hyphen > 1) return false; // at most one hyphen allowed
-                if (i - 1 < 0 || !isalpha(s[i - 1]) || i + 1 >= N || !isalpha(s[i + 1])) return false; // hyphen must be surrounded by letters
-            } else if (i != N - 1) return false; // punctuation, if any, must be the last character of token
-        }
-        return true;
-    }
-public:
-    int countValidWords(string s) {
-        string w;
-        istringstream ss(s);
-        int ans = 0;
-        while (ss >> w) ans += valid(w);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires counting "valid" words in a given string `s`. A word is considered valid if it meets these criteria:
-1. **No Digits**: The word must not contain any digits.
-2. **Hyphens**: The word can have at most one hyphen, and if it has a hyphen, it must be surrounded by alphabetic characters on both sides.
-3. **Punctuation**: If there is punctuation (like `!`, `,`, or `.`), it must appear at the end of the word.
-
-### Approach
-
-This code utilizes a two-step approach: first breaking down the input string into individual words and then validating each word based on the criteria. A helper function, `valid`, is used to check if each word meets all required conditions. If a word is valid, it contributes to the final count.
-
-### Code Breakdown (Step by Step)
-
-Let’s look at each part of the code in detail:
-
-1. **Class and Helper Function Definition**: We define a class `Solution` with two main components: 
-   - A helper function `valid` that checks if a word meets all criteria.
-   - The main function `countValidWords` that counts and returns the number of valid words.
-
-    ```cpp
-    class Solution {
-    ```
-
-2. **Helper Function `valid`**: This function takes a reference to a string `s` and checks if it meets the requirements. Inside `valid`, we use a variable `hyphen` to count hyphens in the word and `N` to store the word’s length.
-
-    ```cpp
-    bool valid(string &s) {
-        int hyphen = 0, N = s.size();
-    ```
-
-3. **Loop Over Each Character**: The function iterates over each character in `s`, applying the validation rules.
-
-    ```cpp
+bool valid(string &s) {
+    int hyphen = 0, N = s.size();
     for (int i = 0; i < N; ++i) {
-    ```
-
-4. **Check for Digits**: If a character is a digit, the word is invalid, so the function immediately returns `false`.
-
-    ```cpp
-    if (isdigit(s[i])) return false; // no digit
-    ```
-
-5. **Handle Alphabetic Characters**: If the character is a letter, we simply continue to the next character, as letters are allowed without any special checks.
-
-    ```cpp
-    if (isalpha(s[i])) continue; // skip letters
-    ```
-
-6. **Handle Hyphens**: If the character is a hyphen, we perform additional checks:
-   - **One Hyphen Limit**: We increment `hyphen` to keep track of the number of hyphens. If it exceeds 1, the function returns `false`.
-   - **Position Check**: If there is a hyphen, it must be surrounded by alphabetic characters on both sides. If not, we return `false`.
-
-    ```cpp
-    if (s[i] == '-') {
-        if (++hyphen > 1) return false; // at most one hyphen allowed
-        if (i - 1 < 0 || !isalpha(s[i - 1]) || i + 1 >= N || !isalpha(s[i + 1])) return false; // hyphen must be surrounded by letters
+        if (isdigit(s[i])) return false; // no digit
+        if (isalpha(s[i])) continue; // skip letters
+        if (s[i] == '-') {
+            if (++hyphen > 1) return false; // at most one hyphen allowed
+            if (i - 1 < 0 || !isalpha(s[i - 1]) || i + 1 >= N || !isalpha(s[i + 1])) return false; // hyphen must be surrounded by letters
+        } else if (i != N - 1) return false; // punctuation, if any, must be the last character of token
     }
-    ```
-
-7. **Punctuation Check**: If the character is not a letter or hyphen, it is considered punctuation, which must be the last character in the word. If punctuation appears anywhere else, the function returns `false`.
-
-    ```cpp
-    else if (i != N - 1) return false; // punctuation, if any, must be the last character of token
-    ```
-
-8. **Return True if All Conditions are Met**: If none of the above conditions are violated, the word is valid, and we return `true`.
-
-    ```cpp
     return true;
-    }
-    ```
+}
+public:
+int countValidWords(string s) {
+    string w;
+    istringstream ss(s);
+    int ans = 0;
+    while (ss >> w) ans += valid(w);
+    return ans;
+}
+```
 
-9. **Count Valid Words**: The main function `countValidWords` initializes a string `w` and an input string stream `ss` to read each word from the input string `s`. It then iterates over each word in `s`, incrementing the result `ans` if `valid(w)` returns `true`.
+This code defines a solution for counting the number of valid words in a given string. A valid word is one that does not contain digits, has at most one hyphen that is surrounded by letters, and may have punctuation only as the last character.
 
-    ```cpp
-    int countValidWords(string s) {
-        string w;
-        istringstream ss(s);
-        int ans = 0;
-        while (ss >> w) ans += valid(w);
-        return ans;
-    }
-    ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	This defines the `Solution` class, which contains the method `countValidWords` to solve the problem of counting valid words in a string.
 
-### Complexity
+2. **Helper Function Declaration**
+	```cpp
+	bool valid(string &s) {
+	```
+	This declares the `valid` helper function that checks if a given string `s` is a valid word.
 
-- **Time Complexity**: The code operates in O(N), where N is the length of the input string `s`. Each word in the string is checked individually for validity, which involves iterating over its characters at most once.
-- **Space Complexity**: The space complexity is O(N), where `N` is the number of words in the input string `s`, as we store the words in the string stream `ss` and count them if valid.
+3. **Variable Initialization**
+	```cpp
+	    int hyphen = 0, N = s.size();
+	```
+	Initializes `hyphen` to count the number of hyphens and `N` to store the size of the string `s`.
 
-### Conclusion
+4. **Loop Start**
+	```cpp
+	    for (int i = 0; i < N; ++i) {
+	```
+	This loop iterates through each character of the string `s`.
 
-In summary, this solution provides an efficient and systematic approach to count valid words in a sentence by employing straightforward character-based checks in each word. The `valid` helper function ensures that each word meets the conditions for validity, and `countValidWords` effectively counts each valid word. By leveraging the properties of alphabetic, numeric, hyphen, and punctuation characters, this code achieves its goal with optimized time and space complexity. This solution provides a strong, reliable foundation for processing input sentences in applications that require validation of complex word structures.
+5. **Digit Check**
+	```cpp
+	        if (isdigit(s[i])) return false; // no digit
+	```
+	Checks if the current character is a digit. If so, returns `false` because digits are not allowed in valid words.
+
+6. **Alpha Check**
+	```cpp
+	        if (isalpha(s[i])) continue; // skip letters
+	```
+	If the character is a letter, it is valid, so the loop continues to the next character.
+
+7. **Hyphen Check**
+	```cpp
+	        if (s[i] == '-') {
+	```
+	Checks if the current character is a hyphen.
+
+8. **Hyphen Count Check**
+	```cpp
+	            if (++hyphen > 1) return false; // at most one hyphen allowed
+	```
+	If there is more than one hyphen in the word, returns `false` since only one hyphen is allowed.
+
+9. **Hyphen Surrounding Check**
+	```cpp
+	            if (i - 1 < 0 || !isalpha(s[i - 1]) || i + 1 >= N || !isalpha(s[i + 1])) return false; // hyphen must be surrounded by letters
+	```
+	Checks if the hyphen is properly surrounded by letters (both before and after). If not, returns `false`.
+
+10. **Punctuation Check**
+	```cpp
+	        } else if (i != N - 1) return false; // punctuation, if any, must be the last character of token
+	```
+	If the character is not a letter or hyphen and it is not the last character, returns `false` because punctuation should only appear at the end of the word.
+
+11. **Return True**
+	```cpp
+	    return true;
+	```
+	Returns `true` if the string `s` passed all validity checks, indicating it is a valid word.
+
+12. **Public Section**
+	```cpp
+	public:
+	```
+	Marks the beginning of the public section of the class where the main solution method resides.
+
+13. **Main Function Declaration**
+	```cpp
+	int countValidWords(string s) {
+	```
+	This is the declaration of the `countValidWords` function that counts the valid words in the given string `s`.
+
+14. **String Initialization**
+	```cpp
+	    string w;
+	```
+	Initializes the string `w`, which will be used to store individual words as the string `s` is processed.
+
+15. **Stream Initialization**
+	```cpp
+	    istringstream ss(s);
+	```
+	Initializes an input string stream `ss` to process the input string `s` word by word.
+
+16. **Result Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes the integer `ans` to store the count of valid words.
+
+17. **Loop Through Words**
+	```cpp
+	    while (ss >> w) ans += valid(w);
+	```
+	This loop extracts words from the string stream `ss` and adds to `ans` the number of valid words using the `valid` function.
+
+18. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the total count of valid words.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of characters in the sentence.
+- **Average Case:** O(n), where n is the number of characters in the sentence.
+- **Worst Case:** O(n), where n is the number of characters in the sentence.
+
+Each token is processed in linear time relative to its length, and all tokens are processed sequentially.
+
+### Space Complexity 💾
+- **Best Case:** O(1) if token processing is done in place.
+- **Worst Case:** O(n) for storing tokens.
+
+Space is used for splitting the sentence into tokens and temporary storage during validation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-valid-words-in-a-sentence/description/)
 

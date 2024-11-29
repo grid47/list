@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "5Y2EiZST97Y"
 youtube_upload_date="2021-03-05"
 youtube_thumbnail="https://i.ytimg.com/vi/5Y2EiZST97Y/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,112 +28,69 @@ youtube_thumbnail="https://i.ytimg.com/vi/5Y2EiZST97Y/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a linked list where each node contains a value, a next pointer, and a random pointer (which can point to any node in the list or be null), create a deep copy of the list. The deep copy should consist of exactly n new nodes where each node has its value set to the value of its corresponding original node, and the next and random pointers of the new nodes should represent the same list state as the original. None of the pointers in the new list should point to nodes in the original list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A linked list of nodes, each containing two pointers: a next pointer and a random pointer, which can point to any node or be null.
+- **Example:** `head = [[5,null],[10,0],[15,4],[20,2],[25,1]]`
+- **Constraints:**
+	- 0 <= n <= 1000
+	- -10^4 <= Node.val <= 10^4
+	- Node.random is null or points to some node in the linked list.
 
-{{< highlight cpp >}}
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    Node* next;
-    Node* random;
-    
-    Node(int _val) {
-        val = _val;
-        next = NULL;
-        random = NULL;
-    }
-};
-*/
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the head of the deep copied linked list, where the copied list has the same values, next pointers, and random pointers as the original list.
+- **Example:** `Output: [[5,null],[10,0],[15,4],[20,2],[25,1]]`
+- **Constraints:**
+	- The copied list should have no shared nodes with the original list.
 
-class Solution {
-public:
-    map<Node*, Node*> mp;
-    Node* copyRandomList(Node* head) {
-        mp.clear();
-        return copy(head);
-        
-    }
-    
-    Node* copy(Node* head) {
-        if(!head) return head;
-        if(mp.count(head)) return mp[head];
-        
-        Node* node = new Node(head->val);
-        mp[head] = node;
-        node->next = copy(head->next);
-        node->random = copy(head->random);
-        
-        return node;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Create a deep copy of the linked list by ensuring that both the next and random pointers of the new nodes represent the same list structure as the original list.
 
-### 🌟 **Problem Overview: Deep Copying a Linked List with Random Pointers**
+- 1. Iterate through the original list and create new nodes for each node in the original list.
+- 2. Set the next pointer of each new node to match the corresponding next pointer in the original list.
+- 3. Set the random pointer of each new node to match the corresponding random pointer in the original list.
+- 4. Use a map or hash table to store mappings between the original nodes and their corresponding new nodes to handle random pointers efficiently.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list contains nodes with valid random pointers that either point to a valid node or are null.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `head = [[5,null],[10,0],[15,4],[20,2],[25,1]]`  \
+  **Explanation:** The original list contains five nodes with random pointers. The deep copy should have the same structure, where the next and random pointers of the new nodes match the original list.
 
-In this challenge, you are given a **linked list**, where each node has an additional **random pointer**. The task is to **clone** or **deep copy** the linked list, ensuring both the `next` and `random` pointers are copied. The random pointer can point to any node in the list, or be `NULL`, adding complexity to the task. But don't worry, we're going to break this down step by step! 😎
+- **Input:** `head = [[1,1],[2,1]]`  \
+  **Explanation:** This example contains a two-node list where both nodes have random pointers pointing to each other. The deep copy should replicate the same structure.
 
----
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will create a deep copy of the list by iterating through the original list and using a map to maintain references to the new nodes.
 
-### 🔍 **Understanding the Key Challenges**
-
-To solve this problem, we need to perform a **deep copy** of the linked list. Here are the main obstacles:
-1. **Copying the `next` pointers**: The next pointers will just form a straightforward chain in the new list.
-2. **Copying the `random` pointers**: This is trickier because the random pointer can point anywhere in the list, or even be `NULL`. The key is to ensure the random pointers in the cloned list point to the corresponding nodes in the original list.
-
-Our solution approach will leverage a **hash map (or dictionary)** to keep track of the correspondence between the original nodes and their cloned counterparts. This map will allow us to handle the copying of both the `next` and `random` pointers effectively. 
-
----
-
-### 🛠️ **Step-by-Step Breakdown of the Solution**
-
-#### 1️⃣ **Node Structure Definition**
-
-```cpp
-class Node {
-public:
-    int val;
-    Node* next;
-    Node* random;
-    
-    Node(int _val) {
-        val = _val;
-        next = NULL;
-        random = NULL;
-    }
-};
-```
-
-- This `Node` class represents a node in the linked list. Each node has:
-  - `val`: The node’s value.
-  - `next`: A pointer to the next node.
-  - `random`: A pointer to any random node, or `NULL`.
-
----
-
-#### 2️⃣ **Initializing the Copying Process**
-
+### Initial Thoughts 💭
+- We need to handle the random pointers, which require mapping original nodes to new nodes to ensure the correct structure.
+- We will use a hash map to store the relationship between the original nodes and the copied nodes, allowing us to efficiently update the random pointers.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input list is empty (null head), return null.
+- The solution should handle lists with up to 1000 nodes efficiently.
+- If a node's random pointer is null, the corresponding new node's random pointer should also be null.
+- The solution should maintain a linear time complexity and constant space for the mapping.
+{{< dots >}}
+## Code 💻
 ```cpp
 map<Node*, Node*> mp;
 Node* copyRandomList(Node* head) {
     mp.clear();
     return copy(head);
+    
 }
-```
 
-- We declare a **map (`mp`)** to store the mapping between the original nodes and their corresponding clones.
-- The function `copyRandomList` starts the deep copy process by calling the `copy` function, passing the `head` of the list. We clear the map before starting to ensure no old mappings are carried over.
-
----
-
-#### 3️⃣ **Recursive Copying Function**
-
-```cpp
 Node* copy(Node* head) {
-    if (!head) return head;
-    if (mp.count(head)) return mp[head];
+    if(!head) return head;
+    if(mp.count(head)) return mp[head];
     
     Node* node = new Node(head->val);
     mp[head] = node;
@@ -143,45 +101,99 @@ Node* copy(Node* head) {
 }
 ```
 
-- **Base Case**: If `head` is `NULL`, we return `NULL` as there’s nothing to copy.
-- **Check if Node is Already Copied**: Before creating a new node, we check if it's already been copied by looking it up in the `mp` map. If it has, we return the existing clone.
-- **Create a New Node**: If the node hasn't been copied yet, we create a new node with the same value.
-- **Store the Mapping**: We store the new node in the map with the original node as the key. This lets us efficiently retrieve the copied node later.
-- **Copy the `next` Pointer**: We recursively copy the `next` pointer by calling `copy(head->next)`.
-- **Copy the `random` Pointer**: Similarly, we recursively copy the `random` pointer using `copy(head->random)`.
-- **Return the Copied Node**: After copying both the `next` and `random` pointers, we return the new node.
+This code defines a solution to clone a linked list where each node contains a `next` pointer to the next node and a `random` pointer to any node in the list. It uses a map to store previously copied nodes to handle cycles and avoid duplication.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	map<Node*, Node*> mp;
+	```
+	A map `mp` is declared to store the mapping between the original node and the newly copied node.
 
-#### 4️⃣ **Handling Special Cases**
+2. **Function Definition (copyRandomList)**
+	```cpp
+	Node* copyRandomList(Node* head) {
+	```
+	This is the definition of the `copyRandomList` function, which will clone the entire list starting from the given head node.
 
-- **Empty List**: If the input list is empty (`head == NULL`), we simply return `NULL`.
-- **Circular Random Pointers**: Even if the random pointers form a circular reference, our map ensures that each node is copied only once, so no infinite loops occur during recursion.
+3. **Clear Map**
+	```cpp
+	    mp.clear();
+	```
+	The map `mp` is cleared to ensure that no previous data remains before starting the copy process.
 
----
+4. **Recursive Call (copyRandomList)**
+	```cpp
+	    return copy(head);
+	```
+	The `copyRandomList` function calls the helper function `copy`, passing the head node to begin the cloning process.
 
-### 📊 **Time and Space Complexity**
+5. **Helper Function Definition (copy)**
+	```cpp
+	Node* copy(Node* head) {
+	```
+	This is the definition of the helper function `copy`, which handles the actual node cloning process for each individual node.
 
-#### ⏱️ Time Complexity:
-- **O(n)**: We process each node exactly once. Since the algorithm only makes recursive calls for the `next` and `random` pointers, each node is copied only once, making the overall time complexity **O(n)**, where `n` is the number of nodes in the linked list.
+6. **Base Case (null)**
+	```cpp
+	    if(!head) return head;
+	```
+	If the input `head` is null, return null. This is the base case of the recursion.
 
-#### 🧳 Space Complexity:
-- **O(n)**: We use a map to store the correspondence between the original nodes and their copied nodes. In the worst case, the map stores one entry for each node, so the space complexity is **O(n)**.
+7. **Check if Node is Already Copied**
+	```cpp
+	    if(mp.count(head)) return mp[head];
+	```
+	If the node has already been copied (i.e., it exists in the map `mp`), return the corresponding copied node.
 
----
+8. **Node Creation**
+	```cpp
+	    Node* node = new Node(head->val);
+	```
+	A new node is created with the same value as the original node.
 
-### 🎯 **Conclusion: The Power of Recursive Cloning**
+9. **Store Copy in Map**
+	```cpp
+	    mp[head] = node;
+	```
+	The newly created node is stored in the map `mp`, with the original node as the key.
 
-This solution efficiently clones the linked list, handling both the `next` and `random` pointers. By using a **recursive approach** and a **hash map**, we ensure that:
-- **Each node is copied exactly once**.
-- The algorithm works even with **circular random pointers** or **empty lists**.
+10. **Recursive Copy (Next Pointer)**
+	```cpp
+	    node->next = copy(head->next);
+	```
+	Recursively copy the `next` pointer of the current node by calling `copy` on the next node.
 
-#### Key Takeaways:
-- **Recursive Deep Copying**: We recursively copy both the `next` and `random` pointers.
-- **Map for Tracking**: The map ensures no node is copied more than once and allows us to efficiently handle the random pointer connections.
-- **Optimal Time and Space Complexity**: With **O(n)** time and **O(n)** space complexity, this approach is optimal for large linked lists.
+11. **Recursive Copy (Random Pointer)**
+	```cpp
+	    node->random = copy(head->random);
+	```
+	Recursively copy the `random` pointer of the current node by calling `copy` on the random node.
 
-With this solution, you’re equipped to tackle linked lists with random pointers like a pro! Keep practicing and improving your skills—you’re one step closer to becoming a coding superstar! ✨🚀
+12. **End Function (copy)**
+	```cpp
+	    return node;
+	```
+	Return the newly created and fully cloned node.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) as we need to traverse the entire linked list once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the map used to store the original-to-new node mapping.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/copy-list-with-random-pointer/description/)
 

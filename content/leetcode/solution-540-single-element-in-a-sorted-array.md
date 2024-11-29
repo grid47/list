@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "T4nRgIxka18"
 youtube_upload_date="2020-05-13"
 youtube_thumbnail="https://i.ytimg.com/vi/T4nRgIxka18/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,150 +28,121 @@ youtube_thumbnail="https://i.ytimg.com/vi/T4nRgIxka18/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a sorted array where every element appears exactly twice, except for one element which appears only once. Find and return the single element that does not have a pair.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a sorted array of integers where every element appears exactly twice, except for one element.
+- **Example:** `Input: nums = [1, 1, 2, 3, 3, 4, 4, 8, 8]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int singleNonDuplicate(vector<int>& nums) {
-        int res =0;
-        for(int num : nums)
-        res ^= num;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the single element that appears only once in the array.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The returned element will be the one that appears only once.
 
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the single element that appears only once in the sorted array.
 
-### Problem Statement
+- Initialize a result variable to 0.
+- Iterate through the array and XOR each element with the result.
+- After completing the loop, the result will contain the single element that appears only once.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always contain at least one element.
+- The array is sorted.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 1, 2, 3, 3, 4, 4, 8, 8]`  \
+  **Explanation:** The only element that doesn't have a pair is 2, so the output is 2.
 
-The problem asks to validate whether a given string is a valid IPv4 address, IPv6 address, or neither. The input string will be in the form of a query, and the solution needs to determine if it is a valid representation of an IPv4 address, an IPv6 address, or neither. The goal is to return one of three possible results:
-- "IPv4" if the address is a valid IPv4 address.
-- "IPv6" if the address is a valid IPv6 address.
-- "Neither" if it is neither.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we use the XOR operation which helps to cancel out duplicate elements. Since every element except one appears exactly twice, XORing all elements will result in the unique element.
 
-### Approach
-
-The solution involves parsing the string and checking its structure based on the rules for valid IPv4 and IPv6 addresses. 
-
-1. **IPv4 Address**:
-   - An IPv4 address consists of four decimal numbers, each between 0 and 255, separated by periods (e.g., `192.168.1.1`).
-   - Each number must not have leading zeros unless the number is exactly `0`.
-   - The address should contain exactly four segments, and each segment should be a valid integer between 0 and 255.
-
-2. **IPv6 Address**:
-   - An IPv6 address consists of eight groups of four hexadecimal digits, separated by colons (e.g., `2001:0db8:85a3:0000:0000:8a2e:0370:7334`).
-   - Each group must contain 1 to 4 hexadecimal characters (digits 0-9 and letters a-f or A-F).
-   - The address should contain exactly eight groups.
-
-3. **General Approach**:
-   - The solution first checks the character that separates the segments of the address (either a period for IPv4 or a colon for IPv6).
-   - Based on the separator, it calls specific functions to validate the format of the address:
-     - `checkIPv4` to validate an IPv4 address.
-     - `checkIPv6` to validate an IPv6 address.
-   - If neither of these conditions are met, the answer is "Neither".
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: `validIPAddress` Function
-The `validIPAddress` function processes the input string and decides whether it’s an IPv4, IPv6, or neither.
-
+### Initial Thoughts 💭
+- The XOR operation can be used to identify the unique element because it cancels out identical numbers.
+- Since the array is sorted, and we only need to find one unique element, XOR provides a time-efficient way to solve this problem in O(n) time with constant space.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will not be empty, as the problem guarantees at least one element.
+- Ensure the solution handles up to 10^5 elements efficiently.
+- Handle arrays with the smallest and largest values, ensuring the XOR operation works for all integers within the given range.
+- The input list contains valid integers within the specified range.
+{{< dots >}}
+## Code 💻
 ```cpp
-for(char ch: queryIP) {
-    if (ch == '.') {
-        if(checkIPv4(queryIP))
-            return "IPv4";
-        return "Neither";
-    } else if (ch == ':') {
-        if(checkIPv6(queryIP))                
-            return "IPv6";
-        return "Neither";
-    }
+int singleNonDuplicate(vector<int>& nums) {
+    int res = 0;
+    for(int num : nums)
+    res ^= num;
+
+    return res;
 }
-return "Neither";
 ```
 
-- The function iterates through each character of the string `queryIP`.
-- If the character is a period (`.`), it checks whether the address is a valid IPv4 address by calling `checkIPv4()`. If valid, it returns "IPv4", otherwise it returns "Neither".
-- Similarly, if the character is a colon (`:`), it checks for a valid IPv6 address using `checkIPv6()`. If valid, it returns "IPv6", otherwise it returns "Neither".
-- If the string doesn’t match the format for either IPv4 or IPv6, the function returns "Neither".
+This function uses the XOR operation to find the single non-duplicate element in a vector. Every element in the vector appears twice except for one, which is the non-duplicate element.
 
-#### Step 2: `checkIPv4` Function
-The `checkIPv4` function validates an IPv4 address.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int singleNonDuplicate(vector<int>& nums) {
+	```
+	Defines the function `singleNonDuplicate`, which takes a vector of integers `nums` as input and returns the single non-duplicate element using the XOR bit manipulation technique.
 
-```cpp
-s += '.';
-stringstream ss(s);
-string str;
-int n_mark = 0;
-while(getline(ss, str, '.')) {
-    if(str.size() < 1 || str.size() > 3) return false;
-    for(char ip: str) {
-        if(ip<='9' && ip >= '0') continue;
-        else return false;
-    }
-    if((str[0] == '0' && str[1] == '0') || (str[0] == '0' && str[1] >= '0' && str[1] <= '9'))
-        return false;
-    if(stoi(str) > 255) return false;
-    n_mark++;
-}
-if(n_mark != 4) return false;
-return true;
-```
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes a variable `res` to 0, which will store the result of the XOR operations. This will eventually hold the single non-duplicate element.
 
-- The function first appends a period (`.`) to the end of the string `s` to simplify processing.
-- A `stringstream` object `ss` is created to split the string by the period (`.`).
-- Each part of the split string is checked:
-  - The part must have a length between 1 and 3 characters.
-  - The part must consist only of digits (0-9).
-  - If the part starts with a `0` and has more than one digit, it’s invalid (e.g., `01` is not valid).
-  - The number formed by the part must be less than or equal to 255.
-- If the address contains exactly 4 segments, the function returns `true`, indicating a valid IPv4 address; otherwise, it returns `false`.
+3. **Loop**
+	```cpp
+	    for(int num : nums)
+	```
+	Begins a loop that iterates over each element in the `nums` vector.
 
-#### Step 3: `checkIPv6` Function
-The `checkIPv6` function validates an IPv6 address.
+4. **XOR Operation**
+	```cpp
+	    res ^= num;
+	```
+	Applies the XOR operation between `res` and the current element `num`. The XOR operation helps to cancel out duplicate elements, leaving only the non-duplicate element.
 
-```cpp
-s += ':';
-stringstream ss(s);
-string str;
-int n_mark = 0;
-while(getline(ss, str, ':')) {
-    if(str.size() < 1 || str.size() > 4)
-        return false;
-    for(char ip: str) {
-        if((ip >= '0' && ip <= '9') || (ip >= 'a' && ip <= 'f') || (ip >= 'A' && ip <= 'F'))
-            continue;
-        else return false;
-    }
-    n_mark++;
-}
-if(n_mark != 8) return false;
-return true;
-```
+5. **Empty Line**
+	```cpp
+	
+	```
+	Represents an empty line in the code, separating different sections.
 
-- The function appends a colon (`:`) to the string `s` to simplify processing.
-- It uses a `stringstream` to split the string by colons (`:`).
-- Each part is checked:
-  - The part must have a length between 1 and 4 characters.
-  - The part must consist only of hexadecimal characters (0-9, a-f, A-F).
-- The address must contain exactly 8 segments. If all conditions are met, it returns `true`, indicating a valid IPv6 address; otherwise, it returns `false`.
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the result stored in `res`, which is the single non-duplicate element in the array.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Time Complexity:
-- The `validIPAddress` function processes each character of the input string exactly once. Thus, the time complexity for this function is `O(n)`, where `n` is the length of the string `queryIP`.
-- The `checkIPv4` and `checkIPv6` functions iterate through the address segments, and each function processes each segment once, which is proportional to the number of segments (IPv4 has 4 segments, and IPv6 has 8 segments). Therefore, the time complexity for each of these functions is `O(m)`, where `m` is the number of segments.
-- The overall time complexity is `O(n)`, where `n` is the length of the input string `queryIP`.
+The time complexity is O(n), where n is the number of elements in the array.
 
-#### Space Complexity:
-- The `checkIPv4` and `checkIPv6` functions use a `stringstream` and some auxiliary variables, which require `O(m)` space for each function.
-- The space complexity of the entire solution is `O(m)`, where `m` is the number of segments.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Conclusion
+The space complexity is O(1), as we only need a constant amount of extra space for the result.
 
-This solution efficiently checks if a given IP address is valid as either an IPv4 or IPv6 address. The approach utilizes string parsing and basic validation rules for each address type. By handling both formats in separate functions (`checkIPv4` and `checkIPv6`), the solution ensures clear and concise code. The solution has a time complexity of `O(n)` and space complexity of `O(m)`, making it suitable for handling typical input sizes. This method is both efficient and easy to understand, ensuring the correct identification of valid IP addresses.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/single-element-in-a-sorted-array/description/)
 

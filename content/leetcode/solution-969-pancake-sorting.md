@@ -14,138 +14,178 @@ img_src = ""
 youtube = "O8YUmSwQ2WU"
 youtube_upload_date="2021-04-23"
 youtube_thumbnail="https://i.ytimg.com/vi/O8YUmSwQ2WU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with sorting an array of integers by performing a series of pancake flips. A pancake flip involves reversing the order of elements from the start of the array up to a specified index. The goal is to determine the sequence of flips needed to sort the array in ascending order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of integers where each integer is unique and represents a permutation of numbers from 1 to n.
+- **Example:** `Input: arr = [5, 1, 4, 2, 3]`
+- **Constraints:**
+	- 1 <= arr.length <= 100
+	- 1 <= arr[i] <= arr.length
+	- All integers in arr are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> pancakeSort(vector<int>& arr) {
-        
-        
-        // find next largest
-        // flip its index so that largest come first
-        // flip one more time, so that the first goes to end
-        
-        vector<int> res;
-        int i;
-        for(int x = arr.size(); x > 0; x--) {
-            for(i = 0; arr[i] != x; i++) {};
-            reverse(arr.begin(), arr.begin() + i + 1);
-            res.push_back(i + 1);
-            reverse(arr.begin(), arr.begin() + x);
-            res.push_back(x);
-        }
-        
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An array of integers where each value corresponds to the position up to which a pancake flip is performed. The sequence of flips must sort the input array.
+- **Example:** `Output: [5, 3, 4, 3, 2]`
+- **Constraints:**
+	- The number of flips should not exceed 10 * arr.length.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Sort the array using a series of pancake flips.
+
+- Identify the largest unsorted element in the array.
+- Perform a flip to bring the largest element to the beginning of the array.
+- Perform another flip to move the largest element to its correct position in the sorted part of the array.
+- Repeat until the entire array is sorted.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains only integers.
+- Each integer in the array is within the range [1, arr.length].
+- The input array is a permutation of numbers from 1 to arr.length.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [3, 1, 4, 2]`  \
+  **Explanation:** We perform the following flips: 
+1. Flip at k = 3: arr = [4, 1, 3, 2]
+2. Flip at k = 4: arr = [2, 3, 1, 4]
+3. Flip at k = 3: arr = [3, 1, 2, 4]
+4. Flip at k = 2: arr = [1, 3, 2, 4]
+5. Flip at k = 3: arr = [1, 2, 3, 4]
+Final Output: [3, 4, 3, 2, 3]
+
+- **Input:** `Input: arr = [1, 2, 3]`  \
+  **Explanation:** The array is already sorted, so no flips are needed. Output: []
+
+{{< dots >}}
+## Approach 🚀
+The solution involves iteratively moving the largest unsorted element to its correct position using at most two flips per element.
+
+### Initial Thoughts 💭
+- A flip only changes the order of elements in the prefix of the array.
+- To sort the array, we can repeatedly position the largest unsorted element at its correct location.
+- Identify the position of the largest unsorted element.
+- Perform a flip to move it to the beginning of the array.
+- Perform another flip to place it at its correct position.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array would not require any flips.
+- For an array with maximum length (100), ensure the algorithm completes within 1000 flips.
+- An already sorted array should result in no flips.
+- Verify that the input is a permutation of integers from 1 to n.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> pancakeSort(vector<int>& arr) {
+    
+    
+    // find next largest
+    // flip its index so that largest come first
+    // flip one more time, so that the first goes to end
+    
+    vector<int> res;
+    int i;
+    for(int x = arr.size(); x > 0; x--) {
+        for(i = 0; arr[i] != x; i++) {};
+        reverse(arr.begin(), arr.begin() + i + 1);
+        res.push_back(i + 1);
+        reverse(arr.begin(), arr.begin() + x);
+        res.push_back(x);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to sort an array using a specific operation called the "pancake flip." The operation consists of choosing an index `i` and flipping the subarray from index `0` to `i`, reversing the order of the elements in that subarray. The goal is to return the sequence of flips required to sort the array in ascending order.
-
-### Approach
-
-To solve this problem, we can employ a greedy approach by always placing the largest unsorted element at its correct position through two flips:
-1. **Find the largest element**: Identify the largest unsorted element.
-2. **Flip the largest element to the front**: Move the largest element to the front of the array by flipping the portion of the array up to that element.
-3. **Flip the largest element to its correct position**: Then, flip the entire portion of the array up to the current unsorted boundary to move the largest element to its correct sorted position.
-4. **Repeat**: After each flip, reduce the unsorted boundary by 1, since the largest element is now correctly placed at the end.
-
-This approach ensures that we gradually build the sorted array, starting from the largest element and progressively moving smaller elements into place.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<int> pancakeSort(vector<int>& arr) {
+    
+    return res;
+}
 ```
-1. **Function Declaration**:
-   - We declare the function `pancakeSort`, which takes a reference to a vector `arr` (the array to be sorted) and returns a vector of integers that represents the sequence of flips performed.
 
-```cpp
-        vector<int> res;
-```
-2. **Result Vector**:
-   - We initialize an empty vector `res`, which will store the sequence of flip indices.
+The `pancakeSort` function sorts an array by flipping segments. The algorithm repeatedly finds the largest unsorted element, flips it to the front, and then flips it into its final position.
 
-```cpp
-        int i;
-```
-3. **Variable Declaration**:
-   - The variable `i` will be used to store the index of the largest unsorted element during each iteration of the loop.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> pancakeSort(vector<int>& arr) {
+	```
+	The function definition begins the implementation of the pancake sorting algorithm.
 
-```cpp
-        for(int x = arr.size(); x > 0; x--) {
-```
-4. **Outer Loop**:
-   - We start an outer loop with `x` iterating from the size of the array down to `1`. The value `x` represents the current size of the unsorted portion of the array.
-   - The loop continues until `x` becomes 1, indicating that the entire array is sorted.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	Initialize a vector `res` to store the sequence of flip operations.
 
-```cpp
-            for(i = 0; arr[i] != x; i++) {};
-```
-5. **Finding the Largest Element**:
-   - In each iteration of the outer loop, we search for the index `i` of the largest unsorted element, which is `x`. We do this by iterating through the array until we find the element `x`. 
-   - This ensures that we can perform the necessary flips to place the largest unsorted element at its correct position.
+3. **Variable Declaration**
+	```cpp
+	    int i;
+	```
+	Declare an integer `i` for use in loops and iteration.
 
-```cpp
-            reverse(arr.begin(), arr.begin() + i + 1);
-```
-6. **Flip the Largest Element to the Front**:
-   - Once we have identified the largest unsorted element at index `i`, we flip the portion of the array from index `0` to `i`. This moves the largest element to the front of the array.
+4. **Loop Construct**
+	```cpp
+	    for(int x = arr.size(); x > 0; x--) {
+	```
+	Start a loop from the size of the array down to 1 to process all unsorted elements.
 
-```cpp
-            res.push_back(i + 1);
-```
-7. **Record the First Flip**:
-   - After performing the flip, we record the index `i + 1` (since the flip is from index 0 to index `i`) in the result vector `res`.
+5. **Loop Iteration**
+	```cpp
+	        for(i = 0; arr[i] != x; i++) {};
+	```
+	Find the index `i` of the current largest unsorted element `x`.
 
-```cpp
-            reverse(arr.begin(), arr.begin() + x);
-```
-8. **Flip the Largest Element to Its Correct Position**:
-   - Next, we flip the entire unsorted portion of the array, from index `0` to index `x-1`. This places the largest element at its correct sorted position at index `x-1`.
+6. **Reverse Operation**
+	```cpp
+	        reverse(arr.begin(), arr.begin() + i + 1);
+	```
+	Reverse the segment of the array from the start to index `i` to bring the largest element to the front.
 
-```cpp
-            res.push_back(x);
-```
-9. **Record the Second Flip**:
-   - After the second flip, we record the index `x` in the result vector `res`, which indicates the flip operation that places the largest element in its correct position.
+7. **Vector Operation**
+	```cpp
+	        res.push_back(i + 1);
+	```
+	Record the flip operation by adding `i + 1` (1-based index) to the result vector.
 
-```cpp
-        }
-```
-10. **End of Outer Loop**:
-   - This ends the outer loop. At the end of each iteration, the largest unsorted element is correctly placed at the end of the current unsorted portion of the array.
+8. **Reverse Operation**
+	```cpp
+	        reverse(arr.begin(), arr.begin() + x);
+	```
+	Reverse the segment of the array from the start to index `x`, moving the largest element to its final position.
 
-```cpp
-        return res;
-    }
-};
-```
-11. **Return the Result**:
-   - After completing the sorting process, we return the result vector `res`, which contains the sequence of flip indices required to sort the array.
+9. **Vector Operation**
+	```cpp
+	        res.push_back(x);
+	```
+	Record the second flip operation by adding `x` (the size of the remaining unsorted segment) to the result vector.
 
-### Complexity
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the result vector containing the sequence of flip operations.
 
-- **Time Complexity**: 
-  - The time complexity is **O(N^2)**, where `N` is the number of elements in the array. This is because, in each iteration of the outer loop, we perform a linear scan to find the largest element (`O(N)`), and each flip operation (`reverse`) also takes linear time (`O(N)`). Thus, the total time complexity is `O(N * N)`, which is quadratic.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-- **Space Complexity**: 
-  - The space complexity is **O(N)** due to the space used by the result vector `res` that stores the sequence of flip operations. No additional space is used except for the result and a few helper variables (`i` and `x`), so the space complexity is linear.
+The worst case involves performing two flips for each of the n elements, resulting in O(n^2) complexity.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The pancake sorting problem provides an interesting challenge where we are tasked with sorting an array using only "flip" operations. This approach leverages a greedy strategy to iteratively place the largest unsorted element at its correct position by using two flips: one to bring the largest element to the front and another to move it to its correct position. Although the solution has a quadratic time complexity, it is simple and intuitive, making it a good approach for small to medium-sized arrays. The space complexity is linear, which is optimal for this problem.
+The solution operates in-place, so the space complexity is O(1).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pancake-sorting/description/)
 

@@ -14,131 +14,182 @@ img_src = ""
 youtube = "lSr-tKjbiAM"
 youtube_upload_date="2022-04-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/lSr-tKjbiAM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of non-negative integers and an integer k. In one operation, you can choose any element from the array and increment it by 1. Your task is to determine the maximum product of the array elements after at most k operations. The result should be returned modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums of integers and an integer k. The array nums contains non-negative integers.
+- **Example:** `nums = [1, 2, 3], k = 4`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^6
+	- 1 <= k <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumProduct(vector<int>& nums, int k) {
-        priority_queue<int, vector<int>, greater<int>> pq(nums.begin(), nums.end());
-        
-        while(k--) {
-            int mini = pq.top();
-            pq.pop();
-            pq.push(mini + 1);
-        }
-        
-        long long ans = 1, mod = (long) 1e9 + 7;
-        
-        while(!pq.empty()) {
-            ans = ((ans % mod) * (pq.top() % mod)) % mod;
-            pq.pop();
-        }
-        
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum product of the array after performing at most k operations, modulo 10^9 + 7.
+- **Example:** `Output: 72`
+- **Constraints:**
+	- The result should fit within the 32-bit signed integer range after taking the modulo.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the product of the array elements by distributing k increments across the elements. To achieve this, we want to increment the smallest elements first, as this maximizes the overall product.
+
+- 1. Use a priority queue (min-heap) to store the elements in the array, ensuring that the smallest element can be incremented efficiently.
+- 2. Increment the smallest element by 1 at each operation, and reinsert it back into the priority queue.
+- 3. After performing all k operations, compute the product of all the elements in the array.
+- 4. Return the product modulo 10^9 + 7.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty and contains at least one element.
+- The value of k is guaranteed to be a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 3], k = 4`  \
+  **Explanation:** To maximize the product, we first increment 1 to 2, then 2 to 3, and finally increment 3 to 4. The array becomes [2, 3, 4], and the product is 2 * 3 * 4 = 24.
+
+- **Input:** `Input: nums = [5, 1, 2], k = 3`  \
+  **Explanation:** To maximize the product, we first increment 1 to 2, then 2 to 3, and finally 3 to 4. The array becomes [5, 3, 4], and the product is 5 * 3 * 4 = 60.
+
+- **Input:** `Input: nums = [10, 20], k = 10`  \
+  **Explanation:** Here, we increment the smaller number, 10, 10 times. The array becomes [20, 20], and the product is 20 * 20 = 400.
+
+{{< dots >}}
+## Approach 🚀
+We approach the problem using a greedy strategy where we increment the smallest elements first to maximize the product. This can be efficiently achieved using a priority queue.
+
+### Initial Thoughts 💭
+- The product will be maximized by focusing on increasing the smallest numbers in the array.
+- Using a priority queue (min-heap) allows us to efficiently increment the smallest element and track changes as we proceed with the operations.
+{{< dots >}}
+### Edge Cases 🌐
+- The array is guaranteed to have at least one element.
+- The algorithm must handle up to 100,000 elements and efficiently perform up to 100,000 operations.
+- The array elements could be zero, which would require handling increment operations to avoid multiplication by zero.
+- The priority queue approach is efficient enough to handle the constraints within the time limit.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumProduct(vector<int>& nums, int k) {
+    priority_queue<int, vector<int>, greater<int>> pq(nums.begin(), nums.end());
+    
+    while(k--) {
+        int mini = pq.top();
+        pq.pop();
+        pq.push(mini + 1);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given a list of integers `nums` and an integer `k`, you are tasked with maximizing the product of the elements in `nums` after performing exactly `k` operations. In each operation, you can increment any of the elements of the list by `1`. You need to return the result of this maximum product modulo `10^9 + 7`.
-
-For example:
-- Input: `nums = [1, 2, 3], k = 3`
-- Output: `27`
-
-The problem is to maximize the product of the list after applying exactly `k` operations, and the result should be taken modulo `10^9 + 7`.
-
-### Approach
-
-To solve this problem efficiently, we need to focus on the following points:
-1. **Understanding the Operation**:
-   - In each operation, we can increment an element of the list `nums`. The goal is to maximize the product of the array after `k` such operations.
-   - To achieve the maximum product, we should always increment the smallest element in the list because it will provide the greatest increase in the product.
-   
-2. **Optimal Strategy**:
-   - Since we want to maximize the product, the best approach is to always increment the smallest number in the array. This will ensure that we distribute the increments in the most optimal way.
-   - A priority queue (min-heap) is ideal for this task because it allows us to efficiently retrieve and modify the smallest element.
-   
-3. **Modulo Operation**:
-   - Since the result could be very large, we are asked to return the result modulo `10^9 + 7` to avoid overflow and ensure the result fits within the required limits.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int maximumProduct(vector<int>& nums, int k) {
-        // Create a min-heap from the given array.
-        priority_queue<int, vector<int>, greater<int>> pq(nums.begin(), nums.end());
-```
-- **Min-Heap Initialization**: 
-  - We use a priority queue to efficiently access the smallest element in the list.
-  - The priority queue is initialized with the elements from the input array `nums` sorted in ascending order (since by default, the `priority_queue` in C++ is a max-heap, we specify `greater<int>` to make it behave like a min-heap).
-
-```cpp
-        // Increment the smallest element k times.
-        while(k--) {
-            int mini = pq.top();  // Get the smallest element.
-            pq.pop();  // Remove it from the heap.
-            pq.push(mini + 1);  // Increment the element and push it back to the heap.
-        }
-```
-- **Performing Operations**:
-  - We execute `k` operations, where in each operation:
-    - We extract the smallest element (`pq.top()`).
-    - We increment this smallest element by 1.
-    - We push the incremented value back into the min-heap.
-  - This ensures that after all operations, the product of the array is maximized by distributing the increments optimally.
-
-```cpp
-        // Calculate the product of the elements in the heap.
-        long long ans = 1, mod = (long) 1e9 + 7;  // Initialize the answer and modulus.
-```
-- **Modulo Setup**:
-  - The result will be large, so we define `mod = 1e9 + 7` to handle the modulo operation at each step.
-  - We also define `ans = 1` to store the cumulative product of the elements in the heap.
-
-```cpp
-        // Multiply the remaining elements in the heap to get the maximum product.
-        while(!pq.empty()) {
-            ans = ((ans % mod) * (pq.top() % mod)) % mod;  // Multiply the current element with the result.
-            pq.pop();  // Remove the element from the heap.
-        }
-```
-- **Product Calculation**:
-  - We iterate through the min-heap, multiplying each element with the current `ans` and taking modulo `mod` at each step to prevent overflow and ensure that the result fits within the required bounds.
-  - After multiplying, we remove the element from the heap.
-
-```cpp
-        return ans;  // Return the final result.
+    
+    long long ans = 1, mod = (long) 1e9 + 7;
+    
+    while(!pq.empty()) {
+        ans = ((ans % mod) * (pq.top() % mod)) % mod;
+        pq.pop();
     }
-};
+    
+    return ans;
+}
 ```
-- **Return the Result**:
-  - Finally, after processing all elements, we return the result stored in `ans`, which is the maximum product modulo `10^9 + 7`.
 
-### Complexity
+This function calculates the maximum product that can be obtained by performing 'k' increment operations on the smallest elements of the array. It uses a priority queue to always increment the smallest element and calculates the product of the final elements modulo 1e9+7.
 
-1. **Time Complexity**:
-   - **Building the Min-Heap**: Building a heap from `n` elements takes O(n log n), where `n` is the size of the input array `nums`.
-   - **Processing the Operations**: Each of the `k` operations requires extracting the smallest element (O(log n)) and pushing the incremented value back into the heap (O(log n)). This gives a time complexity of O(k log n) for the `k` operations.
-   - **Calculating the Final Product**: After the operations, we iterate over all elements in the heap to compute the product, which takes O(n) time.
-   - Overall, the total time complexity is **O(n log n + k log n)**.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumProduct(vector<int>& nums, int k) {
+	```
+	Defines the function 'maximumProduct', which takes a vector of integers 'nums' and an integer 'k', and returns the maximum product after performing 'k' increments on the smallest elements in 'nums'.
 
-2. **Space Complexity**:
-   - We use a min-heap to store the elements, which requires O(n) space. Thus, the space complexity is **O(n)**.
+2. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<int, vector<int>, greater<int>> pq(nums.begin(), nums.end());
+	```
+	Initializes a priority queue 'pq' to store the elements of 'nums' in ascending order, allowing easy access to the smallest element.
 
-### Conclusion
+3. **Loop Initialization**
+	```cpp
+	    
+	```
+	The next step involves performing a loop to increment the smallest elements in the priority queue.
 
-This solution effectively maximizes the product by always incrementing the smallest number in the list, ensuring the result is optimal. Using a priority queue (min-heap) makes it easy to efficiently retrieve and update the smallest element. The time and space complexity are manageable, making this approach suitable for large inputs. Additionally, the modulo operation ensures that the result is within the required range, preventing overflow issues.
+4. **Loop Control**
+	```cpp
+	    while(k--) {
+	```
+	This loop will run 'k' times, decrementing 'k' each time to perform the increment operation on the smallest element.
+
+5. **Priority Queue Operations**
+	```cpp
+	        int mini = pq.top();
+	```
+	Extracts the smallest element from the priority queue and stores it in 'mini'.
+
+6. **Priority Queue Operations**
+	```cpp
+	        pq.pop();
+	```
+	Removes the smallest element (stored in 'mini') from the priority queue.
+
+7. **Priority Queue Operations**
+	```cpp
+	        pq.push(mini + 1);
+	```
+	Increments the smallest element and pushes it back into the priority queue.
+
+8. **Variable Initialization**
+	```cpp
+	    long long ans = 1, mod = (long) 1e9 + 7;
+	```
+	Initializes 'ans' to 1 for storing the product result, and 'mod' to 1e9+7 to perform modulo operations and avoid overflow.
+
+9. **Loop Control**
+	```cpp
+	    while(!pq.empty()) {
+	```
+	This loop will continue until the priority queue is empty, multiplying the elements to compute the product.
+
+10. **Product Calculation**
+	```cpp
+	        ans = ((ans % mod) * (pq.top() % mod)) % mod;
+	```
+	Calculates the product of the current 'ans' and the top element of the priority queue, applying modulo to prevent overflow.
+
+11. **Priority Queue Operations**
+	```cpp
+	        pq.pop();
+	```
+	Removes the top element from the priority queue after it has been used in the product calculation.
+
+12. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the final result of the product of all elements in the priority queue after performing 'k' increments, modulo 1e9+7.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(k log n)
+
+Each of the k operations involves extracting and inserting an element into the priority queue, which takes O(log n) time. Hence, the total time complexity is O(k log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the array in the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-after-k-increments/description/)
 

@@ -14,80 +14,116 @@ img_src = ""
 youtube = "rk82ArzlPHM"
 youtube_upload_date="2021-04-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rk82ArzlPHM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string `sentence` consisting of lowercase English letters, determine whether the sentence contains every letter of the English alphabet at least once.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `sentence` containing only lowercase English letters.
+- **Example:** `sentence = "abcdefghijklmnopqrstuvwxyz"`
+- **Constraints:**
+	- 1 <= sentence.length <= 1000
+	- sentence consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkIfPangram(string set) {
-        bitset<26> bit;
-        for(char x: set) bit.set(x - 'a');
-        return bit.count() == 26;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the sentence is a pangram, otherwise return `false`.
+- **Example:** `true`
+- **Constraints:**
+	- The output will be a boolean value indicating whether the sentence is a pangram.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if all the letters of the alphabet are present in the given sentence.
 
-The problem is to determine if a given string contains every letter of the English alphabet at least once. Such a string is known as a "pangram." For example, the sentence "The quick brown fox jumps over the lazy dog" is a well-known pangram because it includes all 26 letters from 'a' to 'z'. The goal is to implement a function that checks if the provided string meets this criteria.
+- Initialize a set or bitmask to track the unique letters in the sentence.
+- Iterate through each character in the sentence and update the set or bitmask.
+- If all 26 letters are present, return `true`; otherwise, return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `sentence` contains lowercase English letters and is not empty.
+- The sentence length is within the given constraint.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `sentence = "abcdefghijklmnopqrstuvwxyz"`  \
+  **Explanation:** The sentence contains every letter from 'a' to 'z', so the output is `true`.
 
-### Approach
+- **Input:** `sentence = "hello"`  \
+  **Explanation:** The sentence does not contain every letter of the alphabet, so the output is `false`.
 
-To solve the problem of checking if a string is a pangram, we can use the following approach:
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will check if the sentence contains every letter of the alphabet using a set or bitmask.
 
-1. **Character Representation**: Since the English alphabet consists of 26 letters, we can represent the presence of each letter using a bitset, which allows us to efficiently track the presence of each character.
-
-2. **Iterate Through the String**: Loop through each character in the input string and update the bitset to indicate which characters are present.
-
-3. **Count the Set Bits**: After processing the string, check if all 26 bits in the bitset are set. If they are, the string is a pangram; otherwise, it is not.
-
-4. **Return the Result**: Based on the count of set bits, return `true` if the string is a pangram and `false` otherwise.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The problem can be efficiently solved using a set or bitmask to track the presence of each letter.
+- We can utilize a bitmask of 26 bits to represent each letter of the alphabet. Each bit corresponds to a letter, and if the bit is set, it means that letter is present in the sentence.
+{{< dots >}}
+### Edge Cases 🌐
+- The sentence will always have at least one character, based on the constraints.
+- For large inputs, the solution should efficiently check for the presence of all alphabet letters.
+- If the sentence is too short to contain all 26 letters, the result will be `false`.
+- Ensure the solution works efficiently within the provided input size constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool checkIfPangram(string set) {
+bool checkIfPangram(string set) {
+    bitset<26> bit;
+    for(char x: set) bit.set(x - 'a');
+    return bit.count() == 26;
+}
 ```
-- We define a class `Solution` that contains the method `checkIfPangram`, which takes a string `set` as input. This string represents the characters we want to analyze.
 
-```cpp
-        bitset<26> bit; // Create a bitset of size 26 to track letters
-```
-- We initialize a `bitset` of size 26. Each bit in this bitset will correspond to one letter of the English alphabet, with bit position 0 representing 'a', bit position 1 representing 'b', and so on, up to bit position 25 representing 'z'.
+This function `checkIfPangram` checks if the given string `set` contains all 26 letters of the alphabet. It uses a bitset to track the presence of each letter.
 
-```cpp
-        for(char x: set) bit.set(x - 'a'); // Set the bit for each character
-```
-- We loop through each character `x` in the input string `set`. For each character, we calculate its corresponding bit position by subtracting the ASCII value of 'a' from the ASCII value of `x`. The `bit.set()` function is called to mark this position in the bitset as "set," indicating that the corresponding letter is present in the string.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkIfPangram(string set) {
+	```
+	Defines the function `checkIfPangram`, which takes a string `set` as input and returns a boolean indicating whether the string contains all 26 letters of the alphabet.
 
-```cpp
-        return bit.count() == 26; // Check if all 26 letters are present
-    }
-};
-```
-- Finally, we use the `bit.count()` function, which returns the number of bits that are set in the bitset. If this count equals 26, it means all letters from 'a' to 'z' are present, and we return `true`. If not, we return `false`.
+2. **Bitset Initialization**
+	```cpp
+	    bitset<26> bit;
+	```
+	Initializes a bitset of size 26, where each bit represents one of the 26 letters of the alphabet. A set bit indicates the presence of that letter.
 
-### Complexity
+3. **Loop Through Characters**
+	```cpp
+	    for(char x: set) bit.set(x - 'a');
+	```
+	Loops through each character `x` in the string `set` and sets the corresponding bit in the bitset. The expression `x - 'a'` maps each letter to an index between 0 and 25.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input string `set`. We traverse the string once, performing constant-time operations for each character.
+4. **Bitset Count Check**
+	```cpp
+	    return bit.count() == 26;
+	```
+	Checks if all 26 bits in the bitset are set. If all bits are set (i.e., all letters are present), the count will be 26, and the function returns `true`; otherwise, it returns `false`.
 
-- **Space Complexity**: The space complexity is \(O(1)\) because the size of the bitset is fixed at 26, regardless of the input size. Thus, the space used by the bitset does not scale with the input.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The time complexity is O(n), where n is the length of the sentence. We only need one pass through the sentence to check for the presence of all letters.
 
-The provided solution efficiently checks if a string is a pangram by leveraging a bitset to track the presence of each letter of the English alphabet. This approach is optimal in terms of both time and space complexity, making it suitable for scenarios where performance is a concern.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-In summary, the `checkIfPangram` function effectively determines if a string contains every letter from 'a' to 'z', thus verifying if it is a pangram. Its simplicity and efficiency make it an excellent solution for this common problem in string processing and character recognition tasks.
+The space complexity is O(1) since we are only using a fixed-size bitset or set for tracking the letters, regardless of the sentence length.
 
-By using this method, we ensure that our solution remains concise and efficient, which is particularly beneficial in competitive programming and real-world applications where performance is critical.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-the-sentence-is-pangram/description/)
 

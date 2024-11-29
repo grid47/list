@@ -14,131 +14,146 @@ img_src = ""
 youtube = "uNv8XvliP0o"
 youtube_upload_date="2022-09-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/uNv8XvliP0o/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting of lowercase English letters where each letter appears exactly twice. You are also given an array `distance` of length 26, where each element represents the number of characters between the two occurrences of the corresponding letter (0-indexed, 'a' corresponds to index 0, 'b' to index 1, etc.). Your task is to determine if the string `s` is a 'well-spaced' string. A string is well-spaced if, for each letter in `s`, the number of characters between its two occurrences matches the corresponding value in the `distance` array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` of length `n` and an array `distance` of size 26, representing the spacing rules for each letter in the alphabet.
+- **Example:** `s = 'abcdbf', distance = [1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`
+- **Constraints:**
+	- 2 <= s.length <= 52
+	- Each letter appears exactly twice in `s`.
+	- The `distance` array has length 26.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if `s` is a well-spaced string, otherwise return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to verify if the string is well-spaced according to the spacing rules defined by the `distance` array.
+
+- 1. Iterate through each character in the string `s`.
+- 2. For each character, check if the number of characters between its two occurrences matches the value in the `distance` array.
+- 3. If for any character, the spacing condition is violated, return `false`.
+- 4. If all characters satisfy their spacing conditions, return `true`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `s` contains only lowercase English letters.
+- The array `distance` provides valid values for each letter, where values represent the number of letters between the two occurrences.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abaccb', distance = [1, 3, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`  \
+  **Explanation:** In this example, the spacing between occurrences of 'a' is 1 (distance[0] = 1), between 'b' is 3 (distance[1] = 3), and 'c' has no spacing (distance[2] = 0). The string meets the well-spaced condition, so the output is true.
+
+- **Input:** `s = 'aa', distance = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`  \
+  **Explanation:** In this case, 'a' appears at indices 0 and 1, but the distance condition for 'a' (distance[0] = 1) is not satisfied, as there are no letters between them. Therefore, the output is false.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves checking the distance between occurrences of each character in the string `s` and ensuring that it satisfies the conditions specified in the `distance` array.
+
+### Initial Thoughts 💭
+- Each character in `s` appears exactly twice, so we only need to check the distance between the two occurrences of each character.
+- We can efficiently track the positions of each character in the string and verify if the distance condition holds for each letter.
+{{< dots >}}
+### Edge Cases 🌐
+- Although `s` will always have a length of at least 2, it is important to consider cases where `s` contains only one unique character repeated twice.
+- The problem ensures that `s.length` will not exceed 52, so the solution must efficiently handle this input size.
+- When `distance` contains zeros, it signifies that there are no characters between the occurrences of a letter.
+- We can safely assume that the constraints guarantee a valid input string `s` and a well-formed `distance` array.
+{{< dots >}}
+## Code 💻
+```cpp
   bool checkDistances(string s, vector<int>& distance) {
-    int pos[26] = {};
-    for (int i = 0; i < s.size(); ++i) {
-        int n = s[i] - 'a';
-        if (pos[n] > 0 && distance[n] != i - pos[n])
-            return false;
-        pos[n] = i + 1;
-    }
-    return true;
-  }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to determine whether the characters in a string `s` satisfy certain distance constraints. Specifically, for each character `ch` in the alphabet (from 'a' to 'z'), we are provided a corresponding distance value in the `distance` array. The task is to check if, for every character in the string `s`, the distance between two occurrences of the same character matches the value specified in the `distance` array.
-
-In simpler terms, for each character in `s`, the difference between the indices of its first and second occurrence must be equal to the value given in the `distance` array for that character. If the string satisfies this condition for all characters that appear more than once, the function should return `true`; otherwise, it should return `false`.
-
-### Approach
-
-The key idea is to track the positions of characters as we iterate through the string and check if the distance between two occurrences of the same character matches the value specified in the `distance` array.
-
-1. **Initial Thoughts**:
-   - We are given a string `s` and an array `distance` of size 26 (for each letter of the English alphabet).
-   - The goal is to check if, for each character `ch` that appears more than once in the string, the difference between the positions of its first and second occurrence is exactly equal to the corresponding value in the `distance` array.
-   
-2. **Approach**:
-   - Use an array `pos` to store the position of the last occurrence of each character.
-   - As we iterate over the string, if we encounter a character that has appeared before, check if the distance between the current index and the previous occurrence matches the value in the `distance` array.
-   - If any character violates the distance condition, return `false`.
-   - If we finish iterating through the string without any violations, return `true`.
-
-3. **Plan**:
-   - Initialize an array `pos` of size 26 (to track positions of characters) and set all values to 0.
-   - Iterate through the string. For each character, check if it has been seen before.
-   - If the character has been seen before, check if the distance between its first occurrence and the current occurrence matches the value in the `distance` array.
-   - Update the position of the character in the `pos` array after each iteration.
-   - Return `true` if all checks pass, otherwise `false`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Data Structures
-
-We initialize an array `pos` to store the position of the most recent occurrence of each character in the string. The size of the array is 26, corresponding to the 26 letters of the English alphabet. Initially, we set all elements of `pos` to 0.
-
-```cpp
 int pos[26] = {};
-```
-
-#### Step 2: Iterate Through the String
-
-We loop through each character in the string `s`. The loop index `i` represents the current position in the string.
-
-```cpp
 for (int i = 0; i < s.size(); ++i) {
-```
-
-#### Step 3: Calculate the Index for the Character
-
-For each character in the string, we compute its corresponding index by subtracting the ASCII value of `'a'` from the character's ASCII value. This gives us a number between 0 and 25, where 0 corresponds to 'a', 1 corresponds to 'b', and so on.
-
-```cpp
-int n = s[i] - 'a';
-```
-
-#### Step 4: Check the Distance Condition
-
-If the character has already been encountered (i.e., `pos[n] > 0`), we check if the distance between the current position `i` and the last occurrence of the character (which is stored in `pos[n]`) matches the expected value in the `distance` array.
-
-If the condition is violated (i.e., the actual distance does not match the expected distance), we return `false`.
-
-```cpp
-if (pos[n] > 0 && distance[n] != i - pos[n])
-    return false;
-```
-
-#### Step 5: Update the Position of the Character
-
-After checking the distance condition, we update the position of the character by setting `pos[n]` to `i + 1` (since we are using 1-based indexing to indicate the position of a character). This ensures that the next occurrence of the same character can be correctly compared.
-
-```cpp
-pos[n] = i + 1;
-```
-
-#### Step 6: Return the Final Result
-
-Once we finish iterating through the string, we return `true` if no violations were found. This indicates that all the characters in the string satisfy the distance constraints.
-
-```cpp
+    int n = s[i] - 'a';
+    if (pos[n] > 0 && distance[n] != i - pos[n])
+        return false;
+    pos[n] = i + 1;
+}
 return true;
+  }
 ```
 
-### Complexity
+This function checks whether the distances between identical characters in a string match the corresponding values provided in the distance vector.
 
-#### Time Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **FunctionDefinition**
+	```cpp
+	  bool checkDistances(string s, vector<int>& distance) {
+	```
+	This line defines the function checkDistances, which takes a string 's' and a vector 'distance' as parameters. The function returns a boolean value.
 
-- We iterate through the string `s` once, which takes **O(n)** time, where `n` is the length of the string.
-- For each character, checking the distance condition and updating the position array takes constant time **O(1)**.
-- Thus, the overall time complexity is **O(n)**.
+2. **VariableInitialization**
+	```cpp
+	int pos[26] = {};
+	```
+	An array 'pos' of size 26 is initialized to zero to keep track of the last seen position of each letter in the string. The array indexes correspond to the letters of the alphabet.
 
-#### Space Complexity
+3. **LoopStart**
+	```cpp
+	for (int i = 0; i < s.size(); ++i) {
+	```
+	A for loop is started that iterates through each character of the string 's'.
 
-- We use an array `pos` of size 26 to track the positions of characters, which takes **O(1)** space since the size of the array is fixed (26 elements).
-- The space complexity is therefore **O(1)**.
+4. **CharacterToIndex**
+	```cpp
+	    int n = s[i] - 'a';
+	```
+	Each character of the string 's' is converted into an index (0 for 'a', 1 for 'b', etc.) by subtracting 'a' from the character.
 
-### Conclusion
+5. **ConditionalCheck**
+	```cpp
+	    if (pos[n] > 0 && distance[n] != i - pos[n])
+	```
+	This condition checks whether the character has appeared before and if the distance between this occurrence and the previous one matches the corresponding value in the 'distance' vector.
 
-This solution efficiently solves the problem by iterating through the string once and keeping track of the most recent occurrence of each character. By leveraging a simple position array and checking the distance condition, we can determine whether the string satisfies the distance constraints for all characters in **O(n)** time. The space complexity is constant, as we only use a fixed-size array for tracking positions.
+6. **ReturnFalse**
+	```cpp
+	        return false;
+	```
+	If the condition in the previous step is true, the function immediately returns false, indicating that the distances do not match.
 
-Key Takeaways:
-- The problem boils down to verifying the distance condition for each character in the string.
-- The solution utilizes a simple array to track the last occurrence of each character and ensures the conditions are met in linear time.
-- The time and space complexity of the solution are optimal, making it suitable for large input sizes.
+7. **UpdatePosition**
+	```cpp
+	    pos[n] = i + 1;
+	```
+	The position of the current character is updated in the 'pos' array. The index is incremented by 1 to indicate that this character has been seen at the current index.
+
+8. **ReturnTrue**
+	```cpp
+	return true;
+	```
+	If no mismatched distances were found during the loop, the function returns true, indicating that the distances between identical characters match the given values.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string `s`. This is the case when all characters are well-spaced.
+- **Average Case:** O(n), where n is the length of the string `s`. We need to check each character's spacing.
+- **Worst Case:** O(n), where n is the length of the string `s`. We check every character's distance condition.
+
+The time complexity is linear in terms of the length of `s`, as we perform a single pass through the string.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as space usage is independent of input size.
+- **Worst Case:** O(1), as we are using a constant amount of space to track positions of characters.
+
+The space complexity is constant, as we only need a fixed-size array to store the first occurrence of each character.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-distances-between-same-letters/description/)
 

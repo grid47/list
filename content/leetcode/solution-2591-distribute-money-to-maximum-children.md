@@ -14,183 +14,252 @@ img_src = ""
 youtube = "rCLdAlt05XE"
 youtube_upload_date="2023-03-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rCLdAlt05XE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer `money` and an integer `children`. You need to distribute the money to the children such that everyone gets at least 1 dollar, nobody gets exactly 4 dollars, and you maximize the number of children receiving exactly 8 dollars. Return the maximum number of children who receive 8 dollars, or `-1` if it's not possible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers: `money` (the total amount of money) and `children` (the number of children).
+- **Example:** `For example, `money = 18, children = 3`.`
+- **Constraints:**
+	- 1 <= money <= 200
+	- 2 <= children <= 30
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int distMoney(int num, int kid) {
-        if(num < kid) return -1;
-        int avg = num / kid;
-        if(avg > 8) return kid - 1;
-        if(avg == 8) {
-            if(num % kid == 0) return kid;
-            return kid - 1;
-        }
-        if(avg > 4) {
-            num -= kid;
-            int sol = num / 7;
-            if(num % 7 == 3 && sol == kid - 1) sol--;
-            return sol;
-        }
-        
-        if(avg == 4) {
-            num -= kid;
-            int sol = num / 7;
-            if(num % 7 == 3 && sol == kid - 1) sol--;
-            return sol;
-        }
-        
-        if(avg < 4) {
-            num -= kid;
-            int sol = num / 7;
-            if(num % 7 == 3 && sol == kid - 1) sol--;
-            return sol;            
-        }
-        
-        return -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum number of children who can receive exactly 8 dollars, or `-1` if it is not possible to distribute the money accordingly.
+- **Example:** `For `money = 18, children = 3`, the output is `1`.`
+- **Constraints:**
+	- The result will always be a valid integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to distribute the money optimally such that the maximum number of children receive 8 dollars, considering the constraints of the problem.
+
+- 1. Check if it is possible to distribute at least 1 dollar to each child.
+- 2. Maximize the number of children who can receive 8 dollars by distributing the remaining money after giving each child 1 dollar.
+- 3. Return the number of children who can receive exactly 8 dollars, or return `-1` if it is not possible.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values are valid, and the money can be divided among children according to the given rules.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `money = 18, children = 3``  \
+  **Explanation:** In this example, we give 8 dollars to the first child, 6 dollars to the second child, and the remaining 4 dollars to the third child. Only one child can receive exactly 8 dollars.
+
+{{< dots >}}
+## Approach 🚀
+We start by giving each child at least 1 dollar. Then, we maximize the number of children receiving exactly 8 dollars by distributing the remaining money accordingly.
+
+### Initial Thoughts 💭
+- To maximize the number of children receiving 8 dollars, the total money must be sufficiently large to distribute to the children in such a way.
+- We need to consider the remainder after distributing the money and check how many children can receive 8 dollars.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees valid input values and there will be no empty inputs.
+- The solution must handle cases where `money` is large (up to 200) and `children` is small (up to 30).
+- If `money` is exactly equal to `children`, then every child can receive exactly 1 dollar.
+- The problem constraints ensure that the number of children and the amount of money will always fall within the specified ranges.
+{{< dots >}}
+## Code 💻
+```cpp
+int distMoney(int num, int kid) {
+    if(num < kid) return -1;
+    int avg = num / kid;
+    if(avg > 8) return kid - 1;
+    if(avg == 8) {
+        if(num % kid == 0) return kid;
+        return kid - 1;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to determine how to distribute a given number of money (denoted as `num`) among a specified number of kids (denoted as `kid`) such that each child gets as much as possible under certain constraints. The distribution must follow specific rules to maximize fairness while avoiding giving certain amounts.
-
-The main goal is to calculate how many kids receive exactly 8 units, and then handle any remaining units optimally. The rules for distribution depend on whether the average amount each child should receive is above 8, 4, or below 4, and whether there is a remainder when dividing the money among the kids.
-
-### Approach
-
-The approach to solving the problem involves calculating how many full amounts of money each child can receive, then adjusting based on remainders and specific constraints to ensure fairness. The solution requires multiple conditional checks to ensure the correct allocation.
-
-Here is a breakdown of the approach:
-
-1. **Check for Impossible Distribution**:
-   - If the total money `num` is less than the number of kids `kid`, it's impossible to distribute the money at all, and the function should return -1.
-
-2. **Calculate the Average Distribution**:
-   - Divide the total money `num` by the number of kids `kid` to calculate the average amount each child would receive if the money were distributed evenly. Based on this, decide how to allocate the money in the following steps.
-
-3. **Handle the Case where the Average is Greater than 8**:
-   - If each child would receive more than 8 units (i.e., `avg > 8`), then the maximum number of kids that can receive 8 units each is `kid - 1`, because one child would receive the remaining amount.
-
-4. **Handle the Case where the Average is Exactly 8**:
-   - If the average amount per child is exactly 8, further checks are required. If the total money can be evenly divided by the number of kids, then all kids receive exactly 8 units. Otherwise, one less kid receives 8 units.
-
-5. **Handle the Case where the Average is Between 5 and 8**:
-   - If the average is between 4 and 8, we need to check how many kids can receive the maximum possible amount of 7 units each, and account for any remainder money left.
-
-6. **Handle the Case where the Average is Exactly 4**:
-   - If the average is exactly 4, similar checks are performed, but in this case, the remaining money is handled in a specific way by looking at the remainder of money when dividing by 7.
-
-7. **Handle the Case where the Average is Less than 4**:
-   - If the average is less than 4, we still need to handle how the money can be distributed optimally, ensuring that as many kids as possible receive 7 units each, with adjustments made based on the remainder.
-
-### Code Breakdown
-
-1. **Initial Check for Impossibility**:
-   ```cpp
-   if(num < kid) return -1;
-   ```
-   - The first condition checks if the total amount of money is less than the number of kids. If so, it is impossible to distribute the money, so the function immediately returns `-1`.
-
-2. **Calculate Average Distribution**:
-   ```cpp
-   int avg = num / kid;
-   ```
-   - We calculate the average amount each kid should receive by dividing the total amount of money by the number of kids.
-
-3. **Handle Case Where Average is Greater than 8**:
-   ```cpp
-   if(avg > 8) return kid - 1;
-   ```
-   - If the average exceeds 8, the maximum number of kids who can receive 8 units each is `kid - 1`. Therefore, the function returns `kid - 1`.
-
-4. **Handle Case Where Average is Exactly 8**:
-   ```cpp
-   if(avg == 8) {
-       if(num % kid == 0) return kid;
-       return kid - 1;
-   }
-   ```
-   - If the average is exactly 8, we check if the total money can be evenly divided among the kids. If `num % kid == 0`, all kids can receive 8 units, so we return `kid`. Otherwise, we return `kid - 1` because one kid would not receive exactly 8 units.
-
-5. **Handle Case Where Average is Between 5 and 8**:
-   ```cpp
-   if(avg > 4) {
-       num -= kid;
-       int sol = num / 7;
-       if(num % 7 == 3 && sol == kid - 1) sol--;
-       return sol;
-   }
-   ```
-   - If the average is between 4 and 8, we first reduce the total amount of money by the number of kids (as each kid gets at least 1 unit). Then, we calculate how many kids can receive 7 units each (`num / 7`). We handle the special case where the remainder is 3 and the number of kids is one less than the total (`sol == kid - 1`), in which case we subtract 1 from the solution.
-
-6. **Handle Case Where Average is Exactly 4**:
-   ```cpp
-   if(avg == 4) {
-       num -= kid;
-       int sol = num / 7;
-       if(num % 7 == 3 && sol == kid - 1) sol--;
-       return sol;
-   }
-   ```
-   - If the average is exactly 4, we again reduce the total amount of money by the number of kids. Then, we check how many kids can receive 7 units each. We account for the special case where the remainder is 3 and the number of kids is `kid - 1`, and adjust the solution accordingly.
-
-7. **Handle Case Where Average is Less Than 4**:
-   ```cpp
-   if(avg < 4) {
-       num -= kid;
-       int sol = num / 7;
-       if(num % 7 == 3 && sol == kid - 1) sol--;
-       return sol;
-   }
-   ```
-   - If the average is less than 4, we perform the same steps as in the previous cases, reducing the total amount of money by the number of kids and then calculating how many kids can receive 7 units each.
-
-8. **Return -1 if No Other Condition is Met**:
-   ```cpp
-   return -1;
-   ```
-   - If none of the conditions above were satisfied, return `-1` indicating an invalid scenario.
-
-### Time Complexity
-
-- **Time Complexity**: \(O(1)\)
-  - The function consists of only a few constant-time operations: basic arithmetic operations, comparisons, and modulus calculations. Since there are no loops or recursive calls, the time complexity is constant.
-
-### Space Complexity
-
-- **Space Complexity**: \(O(1)\)
-  - The space complexity is constant, as the function only uses a few integer variables to store intermediate results. There is no use of additional data structures or recursive calls.
-
-### Example Walkthrough
-
-#### Input:
-```cpp
-int num = 100, kid = 7;
+    if(avg > 4) {
+        num -= kid;
+        int sol = num / 7;
+        if(num % 7 == 3 && sol == kid - 1) sol--;
+        return sol;
+    }
+    
+    if(avg == 4) {
+        num -= kid;
+        int sol = num / 7;
+        if(num % 7 == 3 && sol == kid - 1) sol--;
+        return sol;
+    }
+    
+    if(avg < 4) {
+        num -= kid;
+        int sol = num / 7;
+        if(num % 7 == 3 && sol == kid - 1) sol--;
+        return sol;            
+    }
+    
+    return -1;
+}
 ```
 
-- **Step 1**: Calculate average:
-  - `avg = num / kid = 100 / 7 = 14`.
+This function calculates how money can be distributed between a given number of kids while ensuring some constraints are met. It takes two arguments: the total money available (`num`) and the number of kids (`kid`).
 
-- **Step 2**: Check if average is greater than 8:
-  - Since `avg > 8`, the function returns `kid - 1 = 7 - 1 = 6`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int distMoney(int num, int kid) {
+	```
+	Function definition for `distMoney`, taking `num` (total money) and `kid` (number of kids) as arguments.
 
-#### Output:
-```cpp
-6
-```
+2. **Conditional Check**
+	```cpp
+	    if(num < kid) return -1;
+	```
+	Checks if there is less money than kids, returns -1 if true.
 
-### Conclusion
+3. **Average Calculation**
+	```cpp
+	    int avg = num / kid;
+	```
+	Calculates the average money each kid would get.
 
-The `distMoney` function provides a highly efficient solution for distributing money among kids, based on a series of checks for various ranges of average money per kid. By sorting out the cases where the average amount is greater than 8, exactly 8, between 4 and 8, or less than 4, the solution ensures that the distribution is as fair as possible under the given constraints. The function runs in constant time and uses constant space, making it optimal for this problem.
+4. **Comparison**
+	```cpp
+	    if(avg > 8) return kid - 1;
+	```
+	Checks if the average is greater than 8; if true, returns the number of kids minus one.
+
+5. **Nested Condition**
+	```cpp
+	    if(avg == 8) {
+	```
+	Checks if the average is exactly 8.
+
+6. **Division Check**
+	```cpp
+	        if(num % kid == 0) return kid;
+	```
+	If the money is exactly divisible by the number of kids, all kids receive 8 units.
+
+7. **Else Case**
+	```cpp
+	        return kid - 1;
+	```
+	If the money is not exactly divisible, return one less than the number of kids.
+
+8. **Condition for Larger Averages**
+	```cpp
+	    if(avg > 4) {
+	```
+	Checks if the average is greater than 4.
+
+9. **Adjustment**
+	```cpp
+	        num -= kid;
+	```
+	Reduces the total money by the number of kids, assuming each kid gets at least 1 unit.
+
+10. **Solution Calculation**
+	```cpp
+	        int sol = num / 7;
+	```
+	Calculates the number of 7 units that can be distributed to the remaining money.
+
+11. **Edge Case Handling**
+	```cpp
+	        if(num % 7 == 3 && sol == kid - 1) sol--;
+	```
+	Handles a special case when the remaining money modulo 7 equals 3 and the solution is one less than the total kids.
+
+12. **Return Solution**
+	```cpp
+	        return sol;
+	```
+	Returns the final calculated solution.
+
+13. **Check for avg == 4**
+	```cpp
+	    if(avg == 4) {
+	```
+	Checks if the average is exactly 4.
+
+14. **Adjustment for avg == 4**
+	```cpp
+	        num -= kid;
+	```
+	Reduces the total money by the number of kids for the case when the average is 4.
+
+15. **Solution Calculation for avg == 4**
+	```cpp
+	        int sol = num / 7;
+	```
+	Calculates the number of 7 units that can be distributed to the remaining money when the average is 4.
+
+16. **Edge Case Handling for avg == 4**
+	```cpp
+	        if(num % 7 == 3 && sol == kid - 1) sol--;
+	```
+	Handles the special case when the remaining money modulo 7 equals 3 and the solution is one less than the total kids.
+
+17. **Return Solution for avg == 4**
+	```cpp
+	        return sol;
+	```
+	Returns the calculated solution for when the average is 4.
+
+18. **Check for avg < 4**
+	```cpp
+	    if(avg < 4) {
+	```
+	Checks if the average is less than 4.
+
+19. **Adjustment for avg < 4**
+	```cpp
+	        num -= kid;
+	```
+	Reduces the total money by the number of kids for the case when the average is less than 4.
+
+20. **Solution Calculation for avg < 4**
+	```cpp
+	        int sol = num / 7;
+	```
+	Calculates the number of 7 units that can be distributed to the remaining money when the average is less than 4.
+
+21. **Edge Case Handling for avg < 4**
+	```cpp
+	        if(num % 7 == 3 && sol == kid - 1) sol--;
+	```
+	Handles the special case when the remaining money modulo 7 equals 3 and the solution is one less than the total kids.
+
+22. **Return Solution for avg < 4**
+	```cpp
+	        return sol;            
+	```
+	Returns the calculated solution for when the average is less than 4.
+
+23. **Final Return**
+	```cpp
+	    return -1;
+	```
+	Returns -1 if no valid distribution is found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution works in constant time as it only involves basic arithmetic operations.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as no additional space is used apart from the input and output.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/distribute-money-to-maximum-children/description/)
 

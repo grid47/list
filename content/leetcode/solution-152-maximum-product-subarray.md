@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "lXVy6YWFcRM"
 youtube_upload_date="2021-01-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/lXVy6YWFcRM/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,127 +28,153 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/lXVy6YWFcRM/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array nums. Find the subarray that has the largest product, and return the product.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer array nums where each element is an integer between -10 and 10.
+- **Example:** `nums = [1, 2, -1, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 2 * 10^4
+	- -10 <= nums[i] <= 10
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxProduct(vector<int>& nums) {
-        int mx = 1, mn = 1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the largest product of any subarray.
+- **Example:** `8`
+- **Constraints:**
+	- The product of any subarray will fit within a 32-bit integer.
 
-        int res = INT_MIN;
-        for(int i = 0; i < nums.size(); i++) {
-            if(nums[i] < 0) swap(mx, mn);
-            mx = max(nums[i], mx * nums[i]);
-            mn = min(nums[i], mn * nums[i]);
-            
-            res = max(res, mx);
-        }
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the maximum product of a subarray, we can track the maximum and minimum products up to the current index.
+
+- Initialize two variables, mx and mn, to store the maximum and minimum products so far.
+- Initialize a result variable to store the maximum product encountered.
+- Iterate through the array, updating mx, mn, and result at each step by considering the current number and its product with the previous mx and mn.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is not empty.
+- The product of any subarray will fit within a 32-bit integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, -1, 4]`  \
+  **Explanation:** The subarray [1, 2, -1, 4] has the largest product, which is 8.
+
+- **Input:** `nums = [-1, 0, -3, 4]`  \
+  **Explanation:** The subarray [4] has the largest product, which is 4.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will iterate through the array while keeping track of the maximum and minimum products at each step.
+
+### Initial Thoughts 💭
+- When we multiply a negative number by a negative number, it could result in a large positive product.
+- By keeping track of both the maximum and minimum products at each index, we can handle the case of negative numbers efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty.
+- The solution must handle large inputs efficiently, up to 2 * 10^4 elements.
+- Handle negative numbers and zeros correctly.
+- The product of any subarray must fit in a 32-bit integer.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxProduct(vector<int>& nums) {
+    int mx = 1, mn = 1;
+
+    int res = INT_MIN;
+    for(int i = 0; i < nums.size(); i++) {
+        if(nums[i] < 0) swap(mx, mn);
+        mx = max(nums[i], mx * nums[i]);
+        mn = min(nums[i], mn * nums[i]);
+        
+        res = max(res, mx);
     }
-};
-{{< /highlight >}}
----
-
-Your explanation is well-structured and thorough! Here’s a version with added emojis for readability and a slightly more engaging tone:
-
----
-
-### 💥 Problem Statement
-
-The goal is to find the **maximum product** of any **contiguous subarray** within a given array of integers. The array may contain both positive and negative integers, and we should consider subarrays of any length. A **subarray** is any continuous section of the array, and our task is to return the maximum product we can achieve from any such subarray.
-
-For example, given an input array like `[-2, 3, -4]`, the subarray with the maximum product is `[3, -4]`, and its product is `12`. This problem becomes particularly intriguing because of **negative numbers**, which can flip the product's sign and potentially create larger products when combined with other negatives!
-
----
-
-### 💡 Approach
-
-To tackle this efficiently, we use a dynamic programming-inspired approach, keeping track of two variables:
-1. **`mx`** (maximum product up to the current index)
-2. **`mn`** (minimum product up to the current index)
-
-Why track both `mx` and `mn`? Because a **negative number** can flip the sign of a product. The idea is:
-- If the current number is **positive**, the maximum product can either be the current number itself or the product of `mx` and the current number.
-- If the current number is **negative**, the **minimum product** can flip to become the maximum when multiplied by this negative number, and vice versa.
-
-By tracking both values at each step, we can efficiently compute the maximum product of any subarray in just one pass!
-
----
-
-### 📝 Code Breakdown (Step-by-Step)
-
-#### 🔹 Step 1: Initialize Variables
-
-```cpp
-int mx = 1, mn = 1;
-int res = INT_MIN;
+    return res;
+}
 ```
 
-Here’s what each variable means:
-- `mx`: Holds the **maximum product** up to the current index. We initialize it to `1` since the product of no numbers is `1`.
-- `mn`: Holds the **minimum product** up to the current index. We also initialize this to `1`.
-- `res`: Stores the **global maximum product** so far, starting at `INT_MIN` to ensure any product is larger.
+This code implements the algorithm to find the maximum product subarray in an array of integers. It uses dynamic tracking of the maximum and minimum products ending at each index, accounting for negative values that could flip the product's sign.
 
-#### 🔹 Step 2: Traverse the Array
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxProduct(vector<int>& nums) {
+	```
+	Defines the function `maxProduct`, which takes a vector of integers and returns the maximum product of any contiguous subarray.
 
-```cpp
-for (int i = 0; i < nums.size(); i++) {
-    if (nums[i] < 0) swap(mx, mn);
-```
+2. **Variable Initialization**
+	```cpp
+	    int mx = 1, mn = 1;
+	```
+	Initializes two variables `mx` and `mn` to 1, representing the maximum and minimum products ending at the current index.
 
-We loop through `nums` one element at a time. If the current number is negative, we **swap `mx` and `mn`**. This is because multiplying a negative number by a smaller negative can make it the **largest product**!
+3. **Variable Declaration**
+	```cpp
+	    int res = INT_MIN;
+	```
+	Declares `res` and initializes it to the minimum integer value (`INT_MIN`) to track the maximum product found during the loop.
 
-#### 🔹 Step 3: Update `mx` and `mn`
+4. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Starts a loop to iterate through the elements of the `nums` vector.
 
-```cpp
-    mx = max(nums[i], mx * nums[i]);
-    mn = min(nums[i], mn * nums[i]);
-```
+5. **Conditional Check**
+	```cpp
+	        if(nums[i] < 0) swap(mx, mn);
+	```
+	Checks if the current number is negative. If it is, it swaps `mx` and `mn`, as a negative number could flip the product's sign.
 
-Here’s why this works:
-- `mx = max(nums[i], mx * nums[i])`: The new `mx` is either the current number itself or the product of `mx` and the current number, extending the subarray.
-- `mn = min(nums[i], mn * nums[i])`: Similarly, `mn` is either the current number or the product of `mn` and the current number, for future flips.
+6. **Dynamic Programming**
+	```cpp
+	        mx = max(nums[i], mx * nums[i]);
+	```
+	Updates `mx` to the maximum of the current number itself or the product of `mx` and the current number. This keeps track of the largest product of any subarray ending at the current index.
 
-#### 🔹 Step 4: Update the Global Maximum
+7. **Dynamic Programming**
+	```cpp
+	        mn = min(nums[i], mn * nums[i]);
+	```
+	Updates `mn` to the minimum of the current number itself or the product of `mn` and the current number. This helps to track the smallest product, which can be important for handling negative numbers.
 
-```cpp
-    res = max(res, mx);
-```
+8. **Result Update**
+	```cpp
+	        res = max(res, mx);
+	```
+	Updates the result `res` by comparing it with the current `mx` to keep track of the maximum product encountered so far.
 
-At each step, we check if `mx` is the largest product so far and update `res` accordingly.
+9. **End of Loop**
+	```cpp
+	    }
+	```
+	Marks the end of the loop that processes each number in the input array.
 
-#### 🔹 Step 5: Return the Result
+10. **Return Value**
+	```cpp
+	    return res;
+	```
+	Returns the final value of `res`, which holds the maximum product of any subarray.
 
-```cpp
-return res;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-When the loop ends, `res` will contain the maximum product of any contiguous subarray, so we return it!
+We iterate through the array once, so the time complexity is linear in the number of elements.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### ⚙️ Complexity Analysis
+We use a constant amount of space, so the space complexity is O(1).
 
-#### Time Complexity
-- **O(n)**, where `n` is the size of `nums`. We only traverse the array once, performing constant-time operations at each step.
-
-#### Space Complexity
-- **O(1)**, as we only need a constant amount of extra space to store `mx`, `mn`, and `res`.
-
----
-
-### 🔍 Key Insights
-
-1. **Handling Negatives:** A negative number can flip the sign of the product, so tracking both the minimum and maximum is key.
-2. **Efficient DP Approach:** By using a DP-like approach and two variables, we avoid explicitly storing subarrays, keeping the space complexity low.
-
----
-
-### 🎉 Conclusion
-
-This solution is optimal for this problem, combining an efficient **O(n)** time complexity with a **O(1)** space complexity. It handles mixed arrays with positives and negatives effectively, computing the maximum product in one pass while using minimal space!
-
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-subarray/description/)

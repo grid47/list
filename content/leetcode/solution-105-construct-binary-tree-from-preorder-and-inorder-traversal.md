@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "GeltTz3Z1rw"
 youtube_upload_date="2020-01-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/GeltTz3Z1rw/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,150 +28,193 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/GeltTz3Z1rw/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two integer arrays, `preorder` and `inorder`, representing the preorder and inorder traversals of a binary tree, your task is to reconstruct and return the binary tree. The values in the arrays are unique, and the preorder traversal provides the sequence in which nodes are visited before their children, while the inorder traversal provides the order in which nodes are visited between their children.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: `preorder` and `inorder`. `preorder` represents the preorder traversal of a binary tree, and `inorder` represents the inorder traversal of the same tree.
+- **Example:** `preorder = [4,2,1,3,6,5], inorder = [1,2,3,4,5,6]`
+- **Constraints:**
+	- 1 <= preorder.length <= 3000
+	- inorder.length == preorder.length
+	- -3000 <= preorder[i], inorder[i] <= 3000
+	- preorder and inorder consist of unique values.
+	- Each value of inorder also appears in preorder.
+	- preorder is guaranteed to be the preorder traversal of the tree.
+	- inorder is guaranteed to be the inorder traversal of the tree.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    map<int, int> mp;
-    vector<int> preorder, inorder;
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        this->preorder = preorder;
-        this->inorder = inorder;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** You should return the root node of the binary tree constructed from the given preorder and inorder traversal arrays.
+- **Example:** `Output: [4,2,6,1,3,5]`
+- **Constraints:**
+	- The output should be the root node of the reconstructed binary tree.
 
-        for(int i = 0; i < inorder.size(); i++) mp[inorder[i]] = i;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to rebuild the binary tree by leveraging the properties of preorder and inorder traversals. In preorder, the first element is always the root, and the elements before it in inorder represent the left subtree, while the elements after it represent the right subtree.
 
-        return helper(0, 0, inorder.size() - 1);
-    }
-    
-    TreeNode* helper(int ps, int is, int ie) {
-        if(ps >= preorder.size() || is > ie) return NULL;
+- First, create a mapping of each element's index in the inorder array.
+- Then recursively pick elements from the preorder array to form the root, left, and right subtrees using the mapping from inorder.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input arrays represent valid preorder and inorder traversals of the same binary tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]`  \
+  **Explanation:** The binary tree can be reconstructed as follows: root is 3 (first in preorder), the left subtree is [9], and the right subtree is [20,15,7]. The resulting tree is:
 
-        TreeNode* root = new TreeNode(preorder[ps]);
-        root->left  = helper(ps + 1, is, mp[root->val] - 1);
-        root->right = helper(ps + mp[root->val] - is + 1, mp[root->val] + 1, ie);
+       3
+      / \
+     9   20
+          /  \
+         15   7
 
-        return root;
-    }
-    
-};
-{{< /highlight >}}
----
+This tree matches the given preorder and inorder traversals.
 
-### **🌱 Let's Build a Tree!**
+- **Input:** `preorder = [1], inorder = [1]`  \
+  **Explanation:** The tree consists of a single node with value 1, forming a trivial tree where the preorder and inorder arrays both contain just the value [1].
 
-Constructing a binary tree from **preorder** and **inorder** traversal is like solving a puzzle, and once we understand the rules, it becomes easy to fit all the pieces together.
+- **Input:** `preorder = [10,5,1,7,15,12,20], inorder = [1,5,7,10,12,15,20]`  \
+  **Explanation:** The tree can be reconstructed by recognizing the root (10) from the preorder array, and the left and right subtrees by dividing the inorder array based on the root value.
 
-#### **✨ Step 1: The Magic of Preorder & Inorder**
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we use a recursive approach. By using the preorder array to determine the root nodes and the inorder array to determine the left and right subtrees, we can efficiently reconstruct the binary tree.
 
-In **preorder** traversal, the root comes first, followed by the left subtree and then the right. Imagine you're reading a list of steps: *root → left → right*. 🧩
-
-In **inorder** traversal, the order is: *left → root → right*. It’s like you’re first visiting the left side, then the root, and finally the right. 🌲
-
----
-
-#### **🗺️ Step 2: Preprocessing with a Map**
-
-We’ll start by creating a quick lookup map for the **inorder** array. This helps us locate the position of any node in constant time. ⚡
-
+### Initial Thoughts 💭
+- The first element of preorder is always the root, and inorder helps us identify the left and right subtrees.
+- We can use a hashmap to quickly find the index of a node in the inorder array, allowing us to divide the array and construct the tree recursively.
+{{< dots >}}
+### Edge Cases 🌐
+- If either the preorder or inorder array is empty, return NULL as there is no tree to construct.
+- Ensure the algorithm can handle arrays with up to 3000 elements efficiently.
+- Handle trees where all nodes are either to the left or right (skewed trees).
+- The arrays must contain unique values, ensuring no ambiguity when building the tree.
+{{< dots >}}
+## Code 💻
 ```cpp
-map<int, int> mp;  // This stores the index of each element in inorder
+map<int, int> mp;
+vector<int> preorder, inorder;
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    this->preorder = preorder;
+    this->inorder = inorder;
+
+    for(int i = 0; i < inorder.size(); i++) mp[inorder[i]] = i;
+
+    return helper(0, 0, inorder.size() - 1);
+}
+
+TreeNode* helper(int ps, int is, int ie) {
+    if(ps >= preorder.size() || is > ie) return NULL;
+
+    TreeNode* root = new TreeNode(preorder[ps]);
+    root->left  = helper(ps + 1, is, mp[root->val] - 1);
+    root->right = helper(ps + mp[root->val] - is + 1, mp[root->val] + 1, ie);
+
+    return root;
+}
 ```
 
-We fill this map so we can find each root's position in **inorder** quickly. Remember, the root splits the array into the left and right subtrees. 🧠
+This code reconstructs a binary tree from its preorder and inorder traversals using a recursive approach.
 
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	map<int, int> mp;
+	```
+	Declare a map to store the index of each element from the inorder traversal for efficient look-up.
 
-#### **🔨 Step 3: Recursive Construction — Divide & Conquer**
+2. **Variable Declaration**
+	```cpp
+	vector<int> preorder, inorder;
+	```
+	Declare vectors to store the preorder and inorder traversal sequences of the tree.
 
-Now, let’s dive into the heart of it all: recursion. 🎯
+3. **Function Definition**
+	```cpp
+	TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+	```
+	Define the function 'buildTree' which takes in preorder and inorder vectors and returns the root of the constructed binary tree.
 
-For the **preorder** array, the first element is always the root. Once we have the root, we can divide the **inorder** array into two parts: the left and right subtrees.
+4. **Assignment**
+	```cpp
+	    this->preorder = preorder;
+	```
+	Store the input preorder vector into the class-level preorder variable.
 
-Here’s how we build the tree step-by-step:
+5. **Assignment**
+	```cpp
+	    this->inorder = inorder;
+	```
+	Store the input inorder vector into the class-level inorder variable.
 
-```cpp
-TreeNode* root = new TreeNode(preorder[ps]);  // Create the root node from preorder
-```
+6. **Map Population**
+	```cpp
+	    for(int i = 0; i < inorder.size(); i++) mp[inorder[i]] = i;
+	```
+	Populate the map 'mp' with each element from the inorder traversal as the key and its index as the value.
 
-👉 **Explain Simply:** We're using the first node from **preorder** as the root. Now we know where to "split" the **inorder** array based on where this root appears.
+7. **Recursive Function Call**
+	```cpp
+	    return helper(0, 0, inorder.size() - 1);
+	```
+	Call the recursive 'helper' function to construct the tree, passing the initial indices for the preorder and inorder arrays.
 
----
+8. **Helper Function Definition**
+	```cpp
+	TreeNode* helper(int ps, int is, int ie) {
+	```
+	Define the 'helper' function that recursively constructs the binary tree by using preorder and inorder indices.
 
-#### **🌳 Step 4: Recursive Call for Left & Right Subtrees**
+9. **Base Case Check**
+	```cpp
+	    if(ps >= preorder.size() || is > ie) return NULL;
+	```
+	Base case: If the current indices are out of bounds, return NULL to terminate the recursion.
 
-Now, we recursively build the left and right subtrees by slicing the **inorder** array. Let's see the magic happen:
+10. **Node Creation**
+	```cpp
+	    TreeNode* root = new TreeNode(preorder[ps]);
+	```
+	Create a new tree node with the value from the preorder array at the current position (ps).
 
-```cpp
-root->left = helper(ps + 1, is, mp[root->val] - 1);  // Left subtree
-root->right = helper(ps + mp[root->val] - is + 1, mp[root->val] + 1, ie);  // Right subtree
-```
+11. **Recursive Call**
+	```cpp
+	    root->left  = helper(ps + 1, is, mp[root->val] - 1);
+	```
+	Recursively build the left subtree by updating the preorder and inorder indices.
 
-- **Left Subtree:** We use the portion of **inorder** to the left of the root (identified earlier).
-- **Right Subtree:** We use the portion of **inorder** to the right of the root.
+12. **Recursive Call**
+	```cpp
+	    root->right = helper(ps + mp[root->val] - is + 1, mp[root->val] + 1, ie);
+	```
+	Recursively build the right subtree by updating the preorder and inorder indices.
 
-Every recursion narrows down the problem to smaller chunks. The key is breaking down each part of the tree recursively and processing one node at a time. 📚
+13. **Return Node**
+	```cpp
+	    return root;
+	```
+	Return the root node of the current subtree.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### **💡 Why This Works:**
+In all cases, we traverse each node once and use the hashmap lookup to find indices in O(1) time, resulting in O(n) time complexity.
 
-- The **preorder** array tells us the root in the beginning.
-- The **inorder** array helps us split the tree into two parts (left and right).
-- The map lets us find the root's position in **inorder** in constant time, making the process super efficient. 🏎️
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### **🧠 Harmonic Thought:**  
-> *"The more you practice, the more you master the art of tree-building!"* 🌳
+We use O(n) space to store the hashmap and the recursive stack. In the worst case (a skewed tree), the depth of the recursion is O(n).
 
----
+**Happy Coding! 🎉**
 
-### **⏱️ Performance: Time & Space Complexity**
-
-- **🕰️ Time Complexity:** **O(n)**  
-  We visit each node exactly once, and our map lookups are done in constant time.
-
-- **🧠 Space Complexity:** **O(n)**  
-  We store the map, the arrays, and the recursive call stack, making the overall space complexity **O(n)**. This is efficient, as each node only contributes a constant amount of space. 🎯
-
----
-
-### **💥 Example Walkthrough: Let's Break it Down!**
-
-Given:
-
-- **Preorder:** `[3, 9, 20, 15, 7]`
-- **Inorder:** `[9, 3, 15, 20, 7]`
-
-1. The root is `3` (from **preorder[0]**). 🎉
-2. Find `3` in **inorder**: 
-   - Left subtree: `[9]`  
-   - Right subtree: `[15, 20, 7]`  
-   Split the tree in two halves! 🛠️
-   
-3. Recursively build the left and right subtrees:
-   - Left subtree is `9` (from **preorder[1]**).
-   - Right subtree: Now we're dealing with `[20, 15, 7]` and its corresponding **preorder** nodes.
-
-This leads us to the final tree structure:  
-
-```
-        3
-       / \
-      9   20
-         /  \
-        15   7
-```
-
----
-
-### **🌟 Conclusion: Simple but Powerful!**
-
-This approach combines the beauty of recursion with the power of indexing via a map. The time complexity is **O(n)**, making it a fast solution, and the space complexity is also **O(n)**, keeping it manageable.  
-
-### **🌳 Harmonic Thought:**  
-> *"Great things are not achieved through shortcuts. Step-by-step, we build trees!"* 🌳
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/)
 

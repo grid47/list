@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "9z2BunfoZ5Y"
 youtube_upload_date="2021-08-16"
 youtube_thumbnail="https://i.ytimg.com/vi/9z2BunfoZ5Y/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,121 +28,76 @@ youtube_thumbnail="https://i.ytimg.com/vi/9z2BunfoZ5Y/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an m x n matrix board containing letters 'X' and 'O'. Capture all regions that are surrounded by 'X'. A region is captured if it is surrounded by 'X' cells and cannot reach the edges of the board.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an m x n matrix containing 'X' and 'O'. Each element represents a cell of the board.
+- **Example:** `[['X','X','X','X'], ['X','O','O','X'], ['X','X','O','X'], ['X','O','X','X']]`
+- **Constraints:**
+	- 1 <= m, n <= 200
+	- board[i][j] is either 'X' or 'O'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void solve(vector<vector<char>>& board) {
-        int m = board.size(), n = board[0].size();
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(i == 0 || j == 0 || i == m - 1|| j == n -1)
-                if(board[i][j] == 'O')
-                    dfs(board, i, j);
-        
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a matrix where all 'O' regions that are surrounded by 'X' cells are captured by replacing 'O' with 'X'.
+- **Example:** `[['X','X','X','X'], ['X','X','X','X'], ['X','X','X','X'], ['X','O','X','X']]`
+- **Constraints:**
+	- The output will be a modified version of the input board with captured 'O' regions.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to capture the regions of 'O' surrounded by 'X'.
+
+- 1. Traverse the entire board to identify 'O' cells on the borders (edges).
+- 2. Use a depth-first search (DFS) to mark the 'O' cells connected to the borders as safe.
+- 3. After the traversal, replace all remaining 'O' cells (surrounded regions) with 'X'.
+- 4. Restore all 'O' cells marked as safe back to 'O'.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be a valid matrix where m and n are within the specified constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[['X','X','X','X'], ['X','O','O','X'], ['X','X','O','X'], ['X','O','X','X']]`  \
+  **Explanation:** In this case, 'O's that are surrounded by 'X's (not touching the edge) are captured and turned into 'X's.
+
+- **Input:** `[['X']]`  \
+  **Explanation:** This board has no 'O's, so no cells are captured and the board remains unchanged.
+
+{{< dots >}}
+## Approach 🚀
+Use depth-first search (DFS) to mark all 'O' cells connected to the borders, then modify the matrix accordingly.
+
+### Initial Thoughts 💭
+- The 'O' cells on the borders and connected to them are safe, and need to be preserved.
+- The remaining 'O' cells are surrounded and need to be captured.
+- The problem can be solved efficiently by marking the border-connected 'O' cells as safe using DFS, and then replacing all remaining 'O's with 'X'.
+{{< dots >}}
+### Edge Cases 🌐
+- If the board is empty or contains only 'X', no changes are made.
+- The algorithm should be efficient enough to handle the maximum constraints of m, n <= 200.
+- If the board contains no 'O' cells, no modifications will occur.
+- The board will contain at least one row and one column.
+{{< dots >}}
+## Code 💻
+```cpp
+void solve(vector<vector<char>>& board) {
+    int m = board.size(), n = board[0].size();
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(i == 0 || j == 0 || i == m - 1|| j == n -1)
             if(board[i][j] == 'O')
-                board[i][j] = 'X';
-            else if(board[i][j] == '1')
-                board[i][j] = 'O';
-        
-    }
+                dfs(board, i, j);
     
-    void dfs(vector<vector<char>> &grid, int i, int j) {
-        if(i < 0 || j < 0 || i == grid.size() || 
-           j == grid[0].size() || grid[i][j] != 'O')
-            return;
-        grid[i][j] = '1';
-        dfs(grid, i + 1, j);
-        dfs(grid, i, j + 1);
-        dfs(grid, i - 1, j);
-        dfs(grid, i, j - 1);
-    }
-};
-{{< /highlight >}}
----
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(board[i][j] == 'O')
+            board[i][j] = 'X';
+        else if(board[i][j] == '1')
+            board[i][j] = 'O';
+    
+}
 
-### 💡 **Surrounded Regions Problem: Protecting the Boundary**
-
-The "Surrounded Regions" problem is a fascinating challenge where we need to modify a board of characters represented by 'X' and 'O'. The goal is to change all 'O' characters that are **completely surrounded** by 'X' characters into 'X'. However, any 'O' that is **connected to the boundary** should remain unchanged. This problem is a great example of how we can use depth-first search (DFS) to traverse and modify connected regions efficiently.
-
-#### **Problem Statement**
-Given a board represented by a 2D grid of characters, where 'O' represents regions of interest and 'X' represents boundary or filled areas, we need to:
-- Modify the board such that any 'O' that is **completely surrounded** by 'X' characters should be changed to 'X'.
-- Any 'O' that is connected to the **boundary** (either directly or indirectly) should remain unchanged.
-
-### **Example**
-
-Given the following board:
-
-```
-X X X X
-X O O X
-X X O X
-X O X X
-```
-
-After applying the solution, the board should be modified as follows:
-
-```
-X X X X
-X X X X
-X X X X
-X O X X
-```
-
----
-
-### 🛠️ **Approach: Using Depth-First Search (DFS)**
-
-To solve this problem efficiently, we'll utilize **DFS** to explore and modify the board. The idea is to:
-1. **Identify Boundary 'O's**: Start by identifying all 'O' regions connected to the boundary, as these should remain unchanged.
-2. **Mark Safe 'O' Regions**: Use DFS to mark all 'O' regions connected to the boundary as safe (we temporarily mark them with a different character like '1').
-3. **Flip Surrounded 'O's to 'X'**: After marking all safe regions, flip all unmarked 'O's to 'X', as they are surrounded by 'X'. Finally, restore the safe regions from '1' back to 'O'.
-
----
-
-### ✨ **Code Breakdown**
-
-#### 1️⃣ **Solve Function**
-```cpp
-void solve(vector<vector<char>>& board)
-```
-This function processes the entire board, marking the boundary-connected 'O' regions and flipping the surrounded 'O' regions.
-
-1. **Initialize Board Dimensions**:
-   ```cpp
-   int m = board.size(), n = board[0].size();
-   ```
-   Here, `m` represents the number of rows, and `n` represents the number of columns in the grid.
-
-2. **Mark Boundary-Connected 'O' Regions**:
-   ```cpp
-   for(int i = 0; i < m; i++)
-   for(int j = 0; j < n; j++)
-       if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
-           if(board[i][j] == 'O')
-               dfs(board, i, j);
-   ```
-   This loop checks all cells in the first and last rows and columns (the boundaries). If an 'O' is found, we initiate DFS to explore and mark all connected 'O' regions.
-
-3. **Flip Surrounded 'O' Regions**:
-   ```cpp
-   for(int i = 0; i < m; i++)
-   for(int j = 0; j < n; j++)
-       if(board[i][j] == 'O')
-           board[i][j] = 'X';
-       else if(board[i][j] == '1')
-           board[i][j] = 'O';
-   ```
-   After marking boundary-connected regions, this loop traverses the entire board:
-   - Any 'O' that is not marked as '1' (i.e., surrounded) is flipped to 'X'.
-   - Any cell marked as '1' (connected to the boundary) is restored to 'O'.
-
-#### 2️⃣ **DFS Function**
-```cpp
 void dfs(vector<vector<char>> &grid, int i, int j) {
     if(i < 0 || j < 0 || i == grid.size() || 
        j == grid[0].size() || grid[i][j] != 'O')
@@ -153,56 +109,160 @@ void dfs(vector<vector<char>> &grid, int i, int j) {
     dfs(grid, i, j - 1);
 }
 ```
-- The `dfs` function recursively explores all connected 'O' cells from a given cell `(i, j)`.
-- If an 'O' is found, it is marked as '1' to indicate it is part of a safe region connected to the boundary.
-- The DFS continues exploring in four directions (up, down, left, right) until no more connected 'O' cells are found.
 
----
+This solution marks all regions surrounded by 'X' on a 2D board, transforming all 'O's that are not connected to the border into 'X'. It uses Depth-First Search (DFS) to explore the connected 'O' cells.
 
-### 🔍 **Time and Space Complexity**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	void solve(vector<vector<char>>& board) {
+	```
+	Define the function `solve` that takes a 2D grid `board` as input and modifies it in-place to solve the problem.
 
-- **Time Complexity**: `O(m * n)`
-  - The DFS will visit each 'O' cell at most once. Since we perform DFS for all cells on the boundary and then process the entire board, the time complexity is proportional to the total number of cells (`m * n`), where `m` is the number of rows and `n` is the number of columns.
+2. **Matrix Dimensions**
+	```cpp
+	    int m = board.size(), n = board[0].size();
+	```
+	Get the dimensions of the grid: `m` represents the number of rows and `n` represents the number of columns.
 
-- **Space Complexity**: `O(m * n)`
-  - The recursion stack in the DFS function can be as deep as the number of 'O' cells connected to the boundary. In the worst case, the space complexity is proportional to the number of cells in the grid (`m * n`), due to the depth of the recursion stack.
+3. **Outer Loop Iteration**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Start an outer loop to iterate over each row of the board.
 
----
+4. **Inner Loop Iteration**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Start an inner loop to iterate over each column of the current row.
 
-### 🧑‍💻 **Example Walkthrough**
+5. **Boundary Check**
+	```cpp
+	        if(i == 0 || j == 0 || i == m - 1|| j == n -1)
+	```
+	Check if the current position is at the border of the grid (first or last row/column).
 
-Let’s walk through the example with the board:
+6. **O Check**
+	```cpp
+	            if(board[i][j] == 'O')
+	```
+	Check if the current cell is 'O', indicating a potential region to explore.
 
-```
-X X X X
-X O O X
-X X O X
-X O X X
-```
+7. **DFS Call**
+	```cpp
+	                dfs(board, i, j);
+	```
+	Call the `dfs` function to perform Depth-First Search and mark all connected 'O's starting from the current cell.
 
-1. **Initial Board**:
-   - The boundary cells are checked, and DFS is initiated from boundary 'O's at `(1, 1)`, `(1, 2)`, and `(3, 1)`.
-2. **DFS Marks Boundary Connected Regions**:
-   - The 'O' at `(1, 1)` is connected to `(1, 2)` and `(3, 1)`. These are marked as '1'.
-3. **Final Board**:
-   - All other 'O' cells not connected to the boundary are surrounded by 'X' and are flipped.
-   
-   The final modified board is:
+8. **Second Outer Loop Iteration**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Start the second iteration over the rows of the grid to modify the cells based on DFS results.
 
-   ```
-   X X X X
-   X X X X
-   X X X X
-   X O X X
-   ```
+9. **Second Inner Loop Iteration**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Iterate over the columns of each row in the second pass.
 
----
+10. **O Replacement**
+	```cpp
+	        if(board[i][j] == 'O')
+	```
+	Check if the current cell is 'O' that was not connected to the border (should be surrounded by 'X').
 
-### 🏁 **Conclusion**
+11. **Mark X**
+	```cpp
+	            board[i][j] = 'X';
+	```
+	Change the isolated 'O' to 'X' since it is surrounded by 'X'.
 
-This solution effectively handles the "Surrounded Regions" problem by utilizing **DFS** to explore and mark the regions connected to the boundary. By marking the safe regions and flipping only the surrounded regions, we ensure optimal performance while maintaining clarity in the solution. With a time complexity of `O(m * n)` and a space complexity of `O(m * n)`, this approach is both efficient and suitable for large boards.
+12. **Restore O**
+	```cpp
+	        else if(board[i][j] == '1')
+	```
+	Check if the current cell was marked as '1' during the DFS, indicating it is part of a border-connected region.
 
-Keep practicing these techniques, and you’ll get better at identifying optimal solutions for different problems! Keep going, you’ve got this! 💪✨
+13. **Restore O**
+	```cpp
+	            board[i][j] = 'O';
+	```
+	Restore the 'O' at this position since it was connected to the border.
+
+14. **DFS Function Declaration**
+	```cpp
+	void dfs(vector<vector<char>> &grid, int i, int j) {
+	```
+	Define the `dfs` function that performs Depth-First Search to explore connected regions of 'O'.
+
+15. **Base Case Check**
+	```cpp
+	    if(i < 0 || j < 0 || i == grid.size() || 
+	```
+	Check if the current position is out of bounds of the grid.
+
+16. **DFS Exit Condition**
+	```cpp
+	       j == grid[0].size() || grid[i][j] != 'O')
+	```
+	Check if the current cell is not 'O' (i.e., already visited or not a valid cell for DFS).
+
+17. **Return Statement**
+	```cpp
+	        return;
+	```
+	Exit the DFS function if the base case is met.
+
+18. **Mark as Visited**
+	```cpp
+	    grid[i][j] = '1';
+	```
+	Mark the current cell as visited by changing it to '1'.
+
+19. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid, i + 1, j);
+	```
+	Recursively call `dfs` to explore the cell below the current one.
+
+20. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid, i, j + 1);
+	```
+	Recursively call `dfs` to explore the cell to the right of the current one.
+
+21. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid, i - 1, j);
+	```
+	Recursively call `dfs` to explore the cell above the current one.
+
+22. **Recursive DFS Calls**
+	```cpp
+	    dfs(grid, i, j - 1);
+	```
+	Recursively call `dfs` to explore the cell to the left of the current one.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where m is the number of rows and n is the number of columns.
+- **Average Case:** O(m * n), since we traverse all cells at least once.
+- **Worst Case:** O(m * n), since we may need to explore all cells in the matrix.
+
+The time complexity is linear with respect to the size of the board.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no extra space is used (except for temporary marking).
+- **Worst Case:** O(m * n), since we might use extra space for the DFS stack in the worst case.
+
+The space complexity is dependent on the recursion depth of DFS, but in practice it is O(m * n).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/surrounded-regions/description/)
 

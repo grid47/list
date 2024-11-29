@@ -14,95 +14,127 @@ img_src = ""
 youtube = "zatlKoGhxCQ"
 youtube_upload_date="2023-12-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/zatlKoGhxCQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list called `mountain`, which contains integers. Your task is to find all the indices that represent peaks in the list. A peak is defined as an element that is strictly greater than its immediate left and right neighbors. The first and last elements of the list cannot be peaks. Return a list of indices that correspond to the peaks in the `mountain` array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A 0-indexed list of integers, `mountain`, representing the array.
+- **Example:** `mountain = [3, 2, 3, 4, 1]`
+- **Constraints:**
+	- 3 <= mountain.length <= 100
+	- 1 <= mountain[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findPeaks(vector<int>& nums) {
-        vector<int> res;
-        for(int i = 1; i < nums.size() - 1; i++) {
-            if((nums[i] > nums[i - 1]) && (nums[i] > nums[i + 1]))
-                res.push_back(i);            
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of indices corresponding to the peaks in the array.
+- **Example:** `[2]`
+- **Constraints:**
 
-        return res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify indices where the corresponding value is greater than its neighbors.
+
+- Loop through the list from index 1 to n-2.
+- For each index, check if the value is greater than the previous and next values.
+- If true, add the index to the result list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list will always contain at least 3 elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: mountain = [3, 2, 3, 4, 1]`  \
+  **Explanation:** The peak is at index 2 because the value at index 2 (3) is greater than both its neighbors (2 and 4).
+
+{{< dots >}}
+## Approach 🚀
+The approach to solve this problem involves checking each element (except the first and last) to see if it is greater than both its left and right neighbors.
+
+### Initial Thoughts 💭
+- The problem only requires checking elements that are not the first or last.
+- To find the peak, I will iterate through the array from the second to the second-last element and compare each element with its neighbors.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as the array has at least 3 elements.
+- For larger arrays (up to 100 elements), ensure that the logic performs efficiently.
+- If all elements are in increasing or decreasing order, the result should be an empty list.
+- The array will always have at least 3 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> findPeaks(vector<int>& nums) {
+    vector<int> res;
+    for(int i = 1; i < nums.size() - 1; i++) {
+        if((nums[i] > nums[i - 1]) && (nums[i] > nums[i + 1]))
+            res.push_back(i);            
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement:
-The problem requires finding the indices of the "peaks" in an array. A peak is defined as an element in the array that is strictly greater than both its left and right neighbors. The goal is to return a list of indices where the peaks occur in the given array `nums`.
-
-### Approach:
-To solve this problem efficiently, we need to iterate through the array and identify positions where an element is greater than both its adjacent elements. We can solve this problem in a single pass through the array, starting from the second element and ending at the second-to-last element. This ensures that we don’t go out of bounds when checking neighboring elements.
-
-#### Step-by-Step Approach:
-
-1. **Initial Setup**: We initialize an empty vector `res` to store the indices of the peaks.
-
-2. **Iterate through the Array**: We start from the second element and continue until the second-to-last element. This is because a peak must have both a left and a right neighbor to compare against, so the first and last elements cannot be peaks.
-
-3. **Check for Peaks**: For each element `nums[i]`, we check if it is greater than both its left neighbor (`nums[i - 1]`) and its right neighbor (`nums[i + 1]`). If this condition is satisfied, it means that `nums[i]` is a peak, and we add the index `i` to the result vector `res`.
-
-4. **Return the Result**: Once we finish iterating through the array, we return the vector `res` containing the indices of all the peaks.
-
-### Code Breakdown:
-
-#### 1. **Initialization of Result Vector**:
-At the beginning of the function, we create an empty vector `res` to store the indices of the peaks.
-```cpp
-vector<int> res;
-```
-This will hold the result that will be returned at the end of the function.
-
-#### 2. **Loop through the Array**:
-We iterate over the array starting from the second element (`i = 1`) and ending at the second-to-last element (`nums.size() - 1`).
-```cpp
-for(int i = 1; i < nums.size() - 1; i++) {
-```
-This ensures that we check each element's left and right neighbors.
-
-#### 3. **Check for Peak**:
-Inside the loop, we check if the current element `nums[i]` is greater than both its left neighbor `nums[i - 1]` and its right neighbor `nums[i + 1]`.
-```cpp
-if((nums[i] > nums[i - 1]) && (nums[i] > nums[i + 1]))
-```
-If this condition is true, it means that `nums[i]` is a peak.
-
-#### 4. **Add the Peak Index**:
-If the current element is a peak, we push the index `i` into the result vector `res`.
-```cpp
-res.push_back(i);
+    return res;
+}
 ```
 
-#### 5. **Return the Result**:
-After the loop ends, we return the vector `res` that contains the indices of all the peaks found in the array.
-```cpp
-return res;
-```
+This function takes an array 'nums' and finds the indices where the elements are greater than their neighbors (a peak). It returns these indices as a vector.
 
-### Complexity:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findPeaks(vector<int>& nums) {
+	```
+	Defines the function 'findPeaks' that takes a reference to a vector 'nums' and returns a vector containing the indices of the peak elements.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n)**, where `n` is the size of the input array `nums`. This is because we iterate through the array once, checking each element and its neighbors. The number of comparisons made for each element is constant, and we perform these comparisons only once per element.
+2. **Result Vector Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	Initializes an empty vector 'res' that will store the indices of the peak elements found in the array.
 
-- Iterating through the array takes **O(n)** time.
-- Checking each element and its neighbors is done in constant time, so the total complexity is **O(n)**.
+3. **Loop Initialization**
+	```cpp
+	    for(int i = 1; i < nums.size() - 1; i++) {
+	```
+	Starts a loop to iterate through the elements of 'nums', excluding the first and last elements, since they can't be peaks.
 
-#### Space Complexity:
-The space complexity of this solution is **O(1)** if we exclude the space used for the output. The only extra space we use is the `res` vector, which stores the indices of the peaks. Since we only store indices and the maximum number of peaks will be at most `n - 2` (because the first and last elements cannot be peaks), the space used by `res` is proportional to the number of peaks, which is at most `O(n)` in the worst case.
+4. **Peak Condition**
+	```cpp
+	        if((nums[i] > nums[i - 1]) && (nums[i] > nums[i + 1]))
+	```
+	Checks if the current element 'nums[i]' is greater than both its left neighbor 'nums[i - 1]' and right neighbor 'nums[i + 1]', indicating that 'nums[i]' is a peak.
 
-Thus, the space complexity is **O(n)** due to the storage of the result vector. If we exclude this output storage, the space complexity is **O(1)**.
+5. **Store Peak Index**
+	```cpp
+	            res.push_back(i);            
+	```
+	If the current element is a peak, its index 'i' is added to the 'res' vector.
 
-### Conclusion:
-This solution efficiently finds the indices of the peaks in the given array `nums` in linear time. It only requires a single pass through the array and performs a constant number of operations for each element. The space complexity is also minimal, only requiring space for the output vector, making this approach both time and space efficient. This method is well-suited for large arrays where we need to quickly identify the peaks without unnecessary computations.
+6. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the 'res' vector, which contains the indices of all the peak elements found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The best, average, and worst case time complexities are all O(n), where n is the length of the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the indices of peaks in a result list. In the best case, the list could be empty, so space complexity could be O(1).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-peaks/description/)
 

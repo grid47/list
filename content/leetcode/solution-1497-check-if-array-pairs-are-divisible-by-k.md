@@ -14,120 +14,161 @@ img_src = ""
 youtube = "lLEmqIblivA"
 youtube_upload_date="2020-06-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/lLEmqIblivA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers arr of even length n and an integer k. The task is to check if you can divide the array into exactly n / 2 pairs such that the sum of each pair is divisible by k. Return true if it's possible to divide the array into valid pairs, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array arr of even length n and an integer k.
+- **Example:** `arr = [3, 1, 2, 6, 4, 10], k = 5`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- n is even.
+	- -10^9 <= arr[i] <= 10^9
+	- 1 <= k <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canArrange(vector<int>& arr, int k) {
-        vector<int> frq(k, 0);
-        for(int num : arr) {
-            num %= k;
-            if (num < 0) num += k;
-            frq[num]++;
-        }
-        if(frq[0]%2 != 0) return false;
-        for(int i = 1; i <= k/2; i++)
-            if(frq[i] != frq[k - i]) return false;
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to divide the array into valid pairs such that the sum of each pair is divisible by k. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The length of the array is even.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check whether each element of the array can be paired with another element such that their sum is divisible by k.
+
+- Initialize an array to count the frequency of the remainders when dividing each element by k.
+- For each element, compute its remainder when divided by k, and store this in the frequency array.
+- Check if the frequency of elements with remainder 0 is even.
+- For each non-zero remainder, check if the frequency of elements with remainder r is equal to the frequency of elements with remainder k-r.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array always has an even number of elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `arr = [3, 1, 2, 6, 4, 10], k = 5`  \
+  **Explanation:** The valid pairs are (3, 7), (1, 9), (2, 8), and (4, 10), all of which sum to multiples of 5.
+
+- **Input:** `arr = [1, 2, 3, 4, 5, 6], k = 10`  \
+  **Explanation:** There are no valid pairs whose sum is divisible by 10.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a frequency map to track the remainders of the array elements when divided by k. By checking the frequencies of complementary remainders, we can determine if it's possible to form the required pairs.
+
+### Initial Thoughts 💭
+- The problem boils down to checking remainders when dividing elements by k.
+- If the frequency of remainders can be paired correctly, then the array can be divided as required.
+{{< dots >}}
+### Edge Cases 🌐
+- The array cannot be empty as its length is guaranteed to be even.
+- The solution must handle arrays with sizes up to 10^5.
+- If k is 1, any pair of numbers will satisfy the condition since any sum is divisible by 1.
+- The array must always have an even number of elements.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canArrange(vector<int>& arr, int k) {
+    vector<int> frq(k, 0);
+    for(int num : arr) {
+        num %= k;
+        if (num < 0) num += k;
+        frq[num]++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine if an array of integers can be divided into pairs such that the sum of each pair is divisible by a given integer \( k \). This problem requires us to assess the modular properties of the elements in the array to identify whether such pairings can be formed.
-
-### Approach
-
-To solve the problem, we can leverage the concept of modular arithmetic. The main idea is to track the frequency of each remainder when the elements of the array are divided by \( k \). By analyzing these frequencies, we can ascertain if the elements can be paired correctly.
-
-1. **Calculate Remainders**: For each element in the array, compute the remainder when divided by \( k \).
-2. **Frequency Counting**: Use a frequency array to count how many times each remainder appears.
-3. **Check Conditions**:
-   - Ensure that the number of elements with a remainder of 0 is even, as they can only pair with themselves.
-   - For other remainders, check if the count of elements with remainder \( i \) is equal to the count of elements with remainder \( k - i \).
-4. **Return Result**: If all conditions are satisfied, return `true`; otherwise, return `false`.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool canArrange(vector<int>& arr, int k) {
+    if(frq[0]%2 != 0) return false;
+    for(int i = 1; i <= k/2; i++)
+        if(frq[i] != frq[k - i]) return false;
+    return true;
+}
 ```
-This line defines a class `Solution` with a public member function `canArrange`, which takes a vector of integers `arr` and an integer `k` as inputs.
 
-#### Step 1: Initialize Frequency Array
+The `canArrange` function checks whether it's possible to rearrange the elements in an array such that the sum of pairs is divisible by a given integer `k`. It uses the frequency of remainders when each element is divided by `k` to ensure the pairing condition is satisfied.
 
-```cpp
-        vector<int> frq(k, 0);
-```
-Here, we initialize a frequency array `frq` of size \( k \) filled with zeros. This array will be used to count how many numbers produce each remainder when divided by \( k \).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool canArrange(vector<int>& arr, int k) {
+	```
+	The function `canArrange` takes an array `arr` and an integer `k` as input, and returns a boolean indicating whether the array can be rearranged such that the sum of any two elements is divisible by `k`.
 
-#### Step 2: Count Frequencies of Remainders
+2. **Vector Initialization**
+	```cpp
+	    vector<int> frq(k, 0);
+	```
+	Initialize a vector `frq` of size `k` to store the frequency of remainders when elements of the array are divided by `k`. Each element in `frq` is initially set to 0.
 
-```cpp
-        for(int num : arr) {
-            num %= k;
-            if (num < 0) num += k;
-            frq[num]++;
-        }
-```
-- We iterate through each number in the array `arr`.
-- For each number, we compute the remainder using `num % k`. 
-- If the remainder is negative (which can occur for negative integers), we adjust it to ensure it's in the range `[0, k-1]` by adding \( k \).
-- The frequency of this remainder is incremented in the `frq` array.
+3. **Loop**
+	```cpp
+	    for(int num : arr) {
+	```
+	Loop through each element `num` in the array `arr`.
 
-#### Step 3: Check for Even Count of Remainders
+4. **Modulo Operation**
+	```cpp
+	        num %= k;
+	```
+	Take the remainder when `num` is divided by `k` and update `num` to this value.
 
-```cpp
-        if(frq[0] % 2 != 0) return false;
-```
-- We first check if the count of numbers that are perfectly divisible by \( k \) (i.e., remainder 0) is even. If it's odd, it is impossible to pair all such numbers, and we return `false`.
+5. **Negative Adjustment**
+	```cpp
+	        if (num < 0) num += k;
+	```
+	If `num` is negative after the modulo operation, adjust it by adding `k` to ensure the remainder is non-negative.
 
-#### Step 4: Validate Pairing of Other Remainders
+6. **Frequency Update**
+	```cpp
+	        frq[num]++;
+	```
+	Increment the frequency of the remainder `num` in the vector `frq`.
 
-```cpp
-        for(int i = 1; i <= k / 2; i++)
-            if(frq[i] != frq[k - i]) return false;
-```
-- Next, we loop through all possible remainders from 1 to \( k/2 \). For each remainder \( i \), we check if its frequency matches the frequency of its complement \( k - i \).
-- If any mismatch occurs, it means that there aren't enough numbers to form pairs for that remainder, so we return `false`.
+7. **Check Zero Frequency**
+	```cpp
+	    if(frq[0] % 2 != 0) return false;
+	```
+	Check if the frequency of elements that give a remainder of 0 when divided by `k` is even. If it's odd, return `false` because pairs can't be formed.
 
-#### Step 5: Return True if All Conditions Met
+8. **Pairing Check**
+	```cpp
+	    for(int i = 1; i <= k / 2; i++)
+	```
+	Loop through each possible remainder from 1 to `k/2` to check if the frequency of elements with remainder `i` matches the frequency of elements with remainder `k - i`.
 
-```cpp
-        return true;
-    }
-};
-```
-- If all checks pass, we conclude that the elements can be arranged in pairs that satisfy the condition and return `true`.
+9. **Pair Frequency Check**
+	```cpp
+	        if(frq[i] != frq[k - i]) return false;
+	```
+	If the frequency of elements with remainder `i` does not match the frequency of elements with remainder `k - i`, return `false` because they can't be paired.
 
-### Complexity
+10. **Return True**
+	```cpp
+	    return true;
+	```
+	If all checks pass, return `true` indicating that the array can be rearranged to satisfy the pairing condition.
 
-#### Time Complexity
-- The time complexity of this algorithm is **O(n)**, where \( n \) is the number of elements in the input array `arr`. We process each element once to compute its remainder and count frequencies.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity
-- The space complexity is **O(k)** due to the storage of the frequency array, which has a size of \( k \).
+The time complexity is O(n) as we only iterate through the array once and perform constant time operations for each element.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
 
-This solution effectively determines whether it is possible to pair elements of an array such that the sum of each pair is divisible by a given integer \( k \). By using a frequency array to track remainders, the algorithm simplifies the pairing conditions into straightforward checks.
+The space complexity is O(k) to store the frequency map of remainders modulo k.
 
-**Key Points**:
-- **Efficient Pairing Check**: The use of modular arithmetic allows for a clear and efficient way to assess pair compatibility.
-- **Handles Negatives**: The algorithm is robust enough to handle negative integers by normalizing remainders.
-- **Direct Condition Checks**: By reducing the problem to frequency checks of remainders, we avoid unnecessary complexities in pair selection.
+**Happy Coding! 🎉**
 
-In summary, the `canArrange` function is a powerful implementation of modular arithmetic that simplifies the problem of pairing integers in an array based on divisibility conditions, making it an effective solution to the problem statement.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k/description/)
 

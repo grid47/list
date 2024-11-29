@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "zZA5KskfMuQ"
 youtube_upload_date="2023-05-04"
 youtube_thumbnail="https://i.ytimg.com/vi/zZA5KskfMuQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,102 +28,154 @@ youtube_thumbnail="https://i.ytimg.com/vi/zZA5KskfMuQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+In a Senate made up of senators from two parties, Radiant and Dire, senators can either ban another senator from voting or announce victory if only one party remains with active senators. Predict which party will announce the victory and change the game.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string representing the parties of each senator, where 'R' represents Radiant and 'D' represents Dire. The length of the string represents the number of senators.
+- **Example:** `senate = "DRD"`
+- **Constraints:**
+	- 1 <= n <= 10^4
+	- senate[i] is either 'R' or 'D'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string predictPartyVictory(string sen) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the party that will eventually announce victory: either 'Radiant' or 'Dire'.
+- **Example:** `Output: 'Dire'`
+- **Constraints:**
+	- The output will be either 'Radiant' or 'Dire'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine which party will be the last to have active senators left after the rounds of banning.
+
+- 1. Initialize two queues, one for each party, to represent the senators' positions.
+- 2. In each round, allow the senator with the smallest index in the queue to ban an opponent.
+- 3. Repeat the rounds until all remaining senators are from the same party.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each senator can ban the other party's senator in each round.
+- A senator can only announce the victory when all remaining senators belong to the same party.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `senate = "DRD"`  \
+  **Explanation:** The first senator from Dire bans the second senator from Radiant. In the next round, the second senator from Radiant bans the remaining senator from Dire, allowing Radiant to announce victory.
+
+{{< dots >}}
+## Approach 🚀
+Use two queues to simulate the round-based banning of senators. Each senator from the two parties will take turns banning the opponent until one party remains.
+
+### Initial Thoughts 💭
+- This is a simulation problem, so we can use queues to efficiently manage the senators in each round.
+- We need to ensure that in each round, the senator with the smallest index bans an opponent and moves to the end of the queue.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will not be empty, as there will always be at least one senator.
+- Handle cases with the maximum number of senators (10^4) efficiently.
+- If all senators belong to the same party, that party wins immediately.
+- Ensure that the solution handles cases with large inputs within the time limits.
+{{< dots >}}
+## Code 💻
+```cpp
+string predictPartyVictory(string sen) {
+    
+    queue<int> q1, q2;
+    int n = sen.size();
+    for(int i = 0; i < sen.size(); i++)
+    (sen[i] == 'R')? q1.push(i) : q2.push(i);
+
+    while(!q1.empty() && !q2.empty()) {
+        int r = q1.front(); q1.pop();
+        int l = q2.front(); q2.pop();
         
-        queue<int> q1, q2;
-        int n = sen.size();
-        for(int i = 0; i < sen.size(); i++)
-        (sen[i] == 'R')? q1.push(i) : q2.push(i);
-
-        while(!q1.empty() && !q2.empty()) {
-            int r = q1.front(); q1.pop();
-            int l = q2.front(); q2.pop();
-            
-            (r < l) ? q1.push(r + n) : q2.push(l + n);
-            
-        }
-        return q1.size() > q2.size()  ?  "Radiant" : "Dire" ;
+        (r < l) ? q1.push(r + n) : q2.push(l + n);
+        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to predict the winner of a party battle based on a sequence of party affiliations. The sequence consists of two types of characters:
-- **'R'**: Represents the Radiant party.
-- **'D'**: Represents the Dire party.
-
-The battle is conducted in rounds, where in each round:
-- The first person of each party (from their respective queues) fights.
-- The person with the smaller index wins and the winner goes to the end of their respective queue with an index increased by the size of the input sequence.
-- The process continues until one party has no members left in the queue.
-
-The task is to return the name of the winning party.
-
-### Approach
-
-To solve this problem, we can use a **queue** to simulate the battle process. The queue will help us easily manage the order of participants from each party and simulate the competition effectively. The algorithm works by:
-1. Iterating through the given sequence, adding each participant's index to the appropriate queue.
-2. Then, simulate the rounds of battle by dequeuing participants, comparing their indices, and placing the winner back at the end of their respective queue.
-3. Continue until one party has no remaining participants.
-4. The party with the non-empty queue at the end is declared the winner.
-
-Using a queue efficiently tracks the flow of the battle, and by adding the total number of participants (`n`) to the winning participant's index, we ensure they will re-enter the queue at the appropriate point for the next round.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Queue Initialization**:
-```cpp
-queue<int> q1, q2;
-int n = sen.size();
-for(int i = 0; i < sen.size(); i++)
-    (sen[i] == 'R') ? q1.push(i) : q2.push(i);
-```
-- We define two queues, `q1` and `q2`, to represent the Radiant and Dire parties, respectively.
-- We iterate over the string `sen` to populate these queues based on whether the character is 'R' or 'D'. The index `i` of the party affiliation is pushed to the corresponding queue.
-
-#### 2. **Battle Simulation**:
-```cpp
-while(!q1.empty() && !q2.empty()) {
-    int r = q1.front(); q1.pop();
-    int l = q2.front(); q2.pop();
-
-    (r < l) ? q1.push(r + n) : q2.push(l + n);
+    return q1.size() > q2.size()  ?  "Radiant" : "Dire" ;
 }
 ```
-- While both queues are non-empty, we continue simulating the battle.
-- We dequeue the first participants from each party (`r` from `q1` for Radiant and `l` from `q2` for Dire).
-- We compare the indices `r` and `l`. The participant with the smaller index wins, and their index is pushed back into the queue with an updated value (`r + n` or `l + n`). This updated index ensures that the winner’s turn will come later in subsequent rounds.
-- The loop continues until one of the queues becomes empty.
 
-#### 3. **Determine the Winner**:
-```cpp
-return q1.size() > q2.size() ? "Radiant" : "Dire";
-```
-- Once the battle simulation ends (i.e., one of the queues becomes empty), we check which party still has members in its queue.
-- If the Radiant queue (`q1`) is larger, the Radiant party wins, otherwise, the Dire party wins.
+This function simulates a game where two parties, 'Radiant' (denoted by 'R') and 'Dire' (denoted by 'D'), take turns, and the one with more remaining players at the end wins. The function uses two queues to manage the players and determines the winner based on the queue sizes after all matchups.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	string predictPartyVictory(string sen) {
+	```
+	The method `predictPartyVictory` is defined to determine the winning party in a game based on the string `sen`, where each character represents a player from either the 'Radiant' or 'Dire' team.
 
-#### Time Complexity:
-- **Queue Initialization**: The first loop runs for each character in the string `sen`, so it takes **O(n)** time where `n` is the size of the input string.
-- **Battle Simulation**: In the worst case, each participant will have to fight `n` rounds before they are eliminated or placed back in the queue. Each battle involves two dequeue operations and one enqueue operation. Therefore, the time complexity of the battle simulation is **O(n)**.
-- Overall, the time complexity is **O(n)**, where `n` is the size of the input string.
+2. **Queue Initialization**
+	```cpp
+	    queue<int> q1, q2;
+	```
+	Two queues, `q1` and `q2`, are initialized to store the indices of the players for the 'Radiant' and 'Dire' teams, respectively.
 
-#### Space Complexity:
-- We use two queues (`q1` and `q2`), each storing the indices of the participants. In the worst case, both queues may store `n` elements. Therefore, the space complexity is **O(n)**.
+3. **Determine Number of Players**
+	```cpp
+	    int n = sen.size();
+	```
+	The total number of players is determined by the length of the input string `sen`, which represents the players.
 
-### Conclusion
+4. **Queue Population**
+	```cpp
+	    for(int i = 0; i < sen.size(); i++)
+	```
+	A loop iterates over the string `sen` to populate the two queues based on whether the character is 'R' (Radiant) or 'D' (Dire).
 
-This solution efficiently simulates the party battle using two queues to represent the two parties (Radiant and Dire). The core logic involves simulating each round by dequeuing the first participant from each party, comparing their indices, and placing the winner back into the queue. The time complexity is linear, making this approach efficient for large input sizes.
+5. **Character Check**
+	```cpp
+	    (sen[i] == 'R')? q1.push(i) : q2.push(i);
+	```
+	For each character in `sen`, if it is 'R', the index is pushed to the Radiant queue `q1`, otherwise it is pushed to the Dire queue `q2`.
 
-By using the queue data structure, we ensure that the problem is solved in an optimal way with a simple and clear approach. This solution is well-suited for simulating real-world processes, such as rounds of competition or battles, and can easily be adapted to similar problems involving queues and circular behaviors.
+6. **Main Simulation Loop**
+	```cpp
+	    while(!q1.empty() && !q2.empty()) {
+	```
+	A while loop runs as long as both teams have players remaining in their respective queues.
+
+7. **Queue Operations**
+	```cpp
+	        int r = q1.front(); q1.pop();
+	```
+	The first player from the Radiant team is retrieved and removed from `q1`.
+
+8. **Queue Operations**
+	```cpp
+	        int l = q2.front(); q2.pop();
+	```
+	The first player from the Dire team is retrieved and removed from `q2`.
+
+9. **Match Decision**
+	```cpp
+	        (r < l) ? q1.push(r + n) : q2.push(l + n);
+	```
+	A match is simulated by comparing the indices of the players. The player with the smaller index loses, and the losing player is sent to the back of the opposing team's queue, with their index incremented by the total number of players (to simulate their return in the next round).
+
+10. **Determine Winner**
+	```cpp
+	    return q1.size() > q2.size()  ?  "Radiant" : "Dire" ;
+	```
+	After the while loop ends, the team with more players remaining in their queue is declared the winner. If `q1` (Radiant) has more players, 'Radiant' is returned; otherwise, 'Dire' is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Each senator is processed exactly once, so the time complexity is linear with respect to the number of senators.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the two queues representing the two parties.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/dota2-senate/description/)
 

@@ -14,73 +14,131 @@ img_src = ""
 youtube = "EAHOzX67VB8"
 youtube_upload_date="2024-03-27"
 youtube_thumbnail="https://i.ytimg.com/vi/EAHOzX67VB8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a binary string s and a positive integer n, determine if the binary representation of all integers from 1 to n (inclusive) are substrings of s. A substring is defined as a contiguous sequence of characters within a string. Return true if all the binary representations of the integers in the range [1, n] are present as substrings of s, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a binary string s and a positive integer n.
+- **Example:** `s = '110101', n = 4`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s[i] is either '0' or '1'.
+	- 1 <= n <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool queryString(string s, int n) {
-        for(int i = n; i > n / 2; i--) {
-            string b = bitset<32>(i).to_string();
-            if(s.find(b.substr(b.find('1'))) == string::npos)
-                return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the binary representation of all integers from 1 to n are substrings of s, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output is a boolean value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the binary representation of all integers from 1 to n are substrings of s.
+
+- For each number i from 1 to n, convert the number to its binary representation.
+- Check if the binary representation of i is a substring of s.
+- If any number’s binary representation is not a substring of s, return false.
+- If all numbers’ binary representations are substrings of s, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string s is guaranteed to be valid and consist only of '0's and '1's.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = '0110', n = 3`  \
+  **Explanation:** The binary representations of 1, 2, and 3 are '1', '10', and '11', respectively. All these are substrings of '0110', so the output is true.
+
+- **Input:** `Input: s = '0110', n = 4`  \
+  **Explanation:** The binary representation of 4 is '100', which is not a substring of '0110', so the output is false.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves converting numbers from 1 to n into their binary representations and checking if each of these representations exists as a substring within s.
+
+### Initial Thoughts 💭
+- This problem requires checking the presence of binary representations as substrings, which can be done efficiently using string operations.
+- We need to consider how to handle the large range of n values efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs in this case, as s is a non-empty binary string and n is a positive integer.
+- If n is very large (e.g., 10^9), it is impractical to check all numbers, and the solution should use an optimized approach to avoid performance issues.
+- When n is 1, the only number to check is 1, which is always a substring of any valid binary string s.
+- For large values of n, an optimized solution that reduces unnecessary checks should be used.
+{{< dots >}}
+## Code 💻
+```cpp
+bool queryString(string s, int n) {
+    for(int i = n; i > n / 2; i--) {
+        string b = bitset<32>(i).to_string();
+        if(s.find(b.substr(b.find('1'))) == string::npos)
+            return false;
     }
-};
-{{< /highlight >}}
----
+    return true;
+}
+```
 
+The function `queryString` checks whether all binary representations of numbers from `n` to `n/2` are substrings of the given string `s`. It iterates through these numbers in descending order, converts them to binary, and checks if each binary string is found within `s`.
 
-### Problem Statement
-The task requires checking if the binary representations of all integers from 1 to \( n \) are present as substrings within a given binary string \( s \). For example, if \( s \) is "0110" and \( n \) is 3, the binary representations of 1 ("1") and 2 ("10") are found in \( s \), but we must also check for 3 ("11"), which is also present. Therefore, the output for this case would be `true`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool queryString(string s, int n) {
+	```
+	Declares the function `queryString` which takes a string `s` and an integer `n`, and returns a boolean value indicating whether all binary representations of numbers from `n` to `n/2` are substrings of `s`.
 
-The challenge is to efficiently determine if every integer from 1 to \( n \) has its binary form included in \( s \).
+2. **For Loop Initialization**
+	```cpp
+	    for(int i = n; i > n / 2; i--) {
+	```
+	Initializes a for loop to iterate through all numbers from `n` down to `n/2`.
 
-### Approach
-To solve this problem, we can utilize the properties of binary representation and substring searching:
-1. **Iterate Over Numbers**: We will iterate from \( n \) down to \( n/2 \) because any number greater than \( n/2 \) will have its binary representation containing more leading zeros.
-2. **Binary Conversion**: For each number, convert it to its binary representation.
-3. **Substring Check**: Use the `find` method to check if the binary representation exists as a substring within \( s \). 
-4. **Return Result**: If all binary representations from \( n \) down to \( n/2 \) are found, return `true`; otherwise, return `false`.
+3. **Binary Conversion**
+	```cpp
+	        string b = bitset<32>(i).to_string();
+	```
+	Converts the current integer `i` into its 32-bit binary string representation using `bitset<32>`, ensuring the binary string is of fixed length.
 
-### Code Breakdown (Step by Step)
+4. **Substring Check**
+	```cpp
+	        if(s.find(b.substr(b.find('1'))) == string::npos)
+	```
+	Checks if the binary string `b` (after removing leading zeros) is found as a substring in the given string `s`. If it is not found, the function returns `false`.
 
-1. **Function Declaration**:
-   - The function `queryString` is defined as a public member of the `Solution` class, taking a string \( s \) and an integer \( n \) as input parameters.
+5. **Return False**
+	```cpp
+	            return false;
+	```
+	Returns `false` if any binary representation from `n` to `n/2` is not found as a substring in `s`.
 
-2. **Iterating Through Numbers**:
-   - A `for` loop is initiated, iterating \( i \) from \( n \) down to \( n/2 \). This range is chosen because the binary representations of numbers larger than \( n/2 \) can be determined without leading zeros.
+6. **Return True**
+	```cpp
+	    return true;
+	```
+	Returns `true` if all binary representations from `n` to `n/2` are found as substrings in `s`.
 
-3. **Binary Conversion**:
-   - Within the loop, the current number \( i \) is converted to a binary string using `bitset<32>(i).to_string()`. This constructs a 32-bit binary representation of \( i \).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-4. **Extracting Relevant Substring**:
-   - The line `b.substr(b.find('1'))` extracts the relevant substring of the binary string \( b \) that starts from the first occurrence of '1'. This is done to eliminate any leading zeros which would not affect substring matching in \( s \).
+The time complexity is O(n log n) because for each number up to n, its binary representation takes O(log n) time to compute and check as a substring.
 
-5. **Substring Check**:
-   - The `find` method is then used to determine if the extracted substring exists within the string \( s \). If the substring is not found (i.e., `string::npos`), it means that the binary representation for \( i \) is missing from \( s \), and the function returns `false`.
+### Space Complexity 💾
+- **Best Case:** O(log n)
+- **Worst Case:** O(log n)
 
-6. **Returning True**:
-   - If the loop completes without returning `false`, the function returns `true`, indicating that all required binary representations have been found in \( s \).
+The space complexity is O(log n) due to the space needed for storing the binary representation of each number.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this function is \( O(n \cdot k) \), where \( k \) is the average length of the binary representations of the integers being checked (approximately \( \log_2 n \)). The outer loop runs \( n/2 \) times, and each binary conversion and substring check can take \( O(k) \).
-- **Space Complexity**: The space complexity is \( O(1) \) if we disregard the input storage since we are using only a fixed number of additional variables for computation, regardless of the input size.
-
-### Conclusion
-The `queryString` function efficiently checks whether all binary representations of numbers from 1 to \( n \) are present as substrings within the given binary string \( s \). By iterating only through relevant numbers and utilizing binary conversion combined with substring searching, the solution achieves a balance between clarity and performance.
-
-This implementation highlights the practical application of binary representation and substring searching techniques in algorithm design. Understanding such techniques can significantly enhance problem-solving capabilities, particularly in competitive programming and coding interviews.
-
-Furthermore, the approach can be adapted to similar problems involving substring checks or binary manipulations, reinforcing the versatility and utility of this solution. The function exemplifies a straightforward yet effective method for solving a common class of problems related to binary strings and numeric representations.
-
-In summary, the `queryString` function showcases an intelligent application of number theory and string manipulation, making it a valuable addition to any programmer’s toolkit. The function's efficiency, combined with its clear logic, makes it a strong candidate for use in a variety of scenarios where substring presence is a critical factor in determining the validity of numeric properties.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-string-with-substrings-representing-1-to-n/description/)

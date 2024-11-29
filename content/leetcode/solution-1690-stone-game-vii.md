@@ -14,119 +14,159 @@ img_src = ""
 youtube = "cOGliK5brbQ"
 youtube_upload_date="2020-12-16"
 youtube_thumbnail="https://i.ytimg.com/vi/cOGliK5brbQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice and Bob are playing a game with a row of `n` stones. On each player's turn, they can remove the leftmost or the rightmost stone, and their score is the sum of the remaining stones. Alice tries to maximize the score difference, while Bob aims to minimize it. Calculate the score difference between Alice and Bob when both play optimally.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `stones`, where each element represents the value of a stone.
+- **Example:** `Input: stones = [4, 2, 7, 5, 3]`
+- **Constraints:**
+	- 2 <= n <= 1000
+	- 1 <= stones[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int memo[1001][1001] = {};
-    int dp(vector<int>& s, int i, int j, int sum) {
-        
-        if(i == j) {
-            return 0;
-        }
-        
-        
-        return memo[i][j] ? memo[i][j] : memo[i][j] = max(sum - s[i] - dp(s, i + 1, j, sum - s[i]),
-                                            sum - s[j] - dp(s, i, j - 1, sum - s[j]));
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer, representing the difference in scores between Alice and Bob.
+- **Example:** `Output: 8`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the difference in scores between Alice and Bob when both play optimally.
+
+- Start by calculating the total sum of the stones.
+- Use dynamic programming to simulate the optimal plays of both players.
+- At each step, choose either the leftmost or rightmost stone to remove and update the score accordingly.
+- Track the difference in scores until all stones are removed.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both players always play optimally.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: stones = [4, 2, 7, 5, 3]`  \
+  **Explanation:** The game proceeds through multiple turns, with Alice and Bob alternately removing stones. The final score difference is the result of their optimal decisions.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will use dynamic programming to simulate the game, where we compute the optimal score difference for each possible subarray of stones.
+
+### Initial Thoughts 💭
+- The players make decisions based on the remaining stones in the row.
+- We can use a memoization table to store intermediate results and avoid redundant calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least two stones, so empty inputs are not possible.
+- Ensure the algorithm can handle the maximum input size of `n = 1000`.
+- When there are only two stones, the game will involve removing both stones in turn.
+- The input will always be a valid array of integers as per the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int memo[1001][1001] = {};
+int dp(vector<int>& s, int i, int j, int sum) {
+    
+    if(i == j) {
+        return 0;
     }
     
-    int stoneGameVII(vector<int>& s) {
-        int n = s.size();
-        return dp(s, 0,n-1, accumulate(begin(s), end(s), 0));
-    }
-};
-{{< /highlight >}}
----
+    
+    return memo[i][j] ? memo[i][j] : memo[i][j] = max(sum - s[i] - dp(s, i + 1, j, sum - s[i]),
+                                        sum - s[j] - dp(s, i, j - 1, sum - s[j]));
+}
 
-### Problem Statement
-
-The problem at hand is from a game theory context where two players, Alice and Bob, play a game with stones arranged in a line. Each player can remove either the leftmost or the rightmost stone in their turn, and their goal is to maximize their total score. The score is calculated based on the values of the stones removed. The objective is to determine the maximum score difference that Alice can achieve over Bob by strategically removing stones.
-
-### Approach
-
-To solve this problem, we can use a dynamic programming approach, specifically memoization to optimize our recursive solution. The key ideas behind our approach are:
-
-1. **Recursive Function**: We define a recursive function `dp(i, j)` that calculates the maximum score difference between Alice and Bob if Alice is playing optimally with the remaining stones from index `i` to index `j`.
-
-2. **Base Case**: When there is only one stone left (i.e., `i == j`), the player cannot make a move, resulting in a score difference of `0`.
-
-3. **State Transition**: For each state defined by the indices `i` and `j`, we calculate the maximum score difference by considering the two options available to Alice:
-   - If Alice removes the leftmost stone (s[i]), then Bob will have the remaining stones from `i + 1` to `j`.
-   - If Alice removes the rightmost stone (s[j]), then Bob will have the remaining stones from `i` to `j - 1`.
-
-   We calculate the scores accordingly, keeping in mind the total sum of the stones left after each move.
-
-4. **Memoization**: We store the results of subproblems in a 2D array `memo` to avoid redundant calculations.
-
-5. **Final Calculation**: The final score difference is obtained by calling the `dp` function with the initial indices and the total sum of stones.
-
-### Code Breakdown (Step by Step)
-
-Here is the complete breakdown of the code:
-
-```cpp
-class Solution {
-public:
-    int memo[1001][1001] = {};
+int stoneGameVII(vector<int>& s) {
+    int n = s.size();
+    return dp(s, 0,n-1, accumulate(begin(s), end(s), 0));
+}
 ```
-- **Class Definition**: We define a class `Solution` containing a member array `memo` for memoization.
 
-```cpp
-    int dp(vector<int>& s, int i, int j, int sum) {
-```
-- **Recursive Function**: We define the `dp` function that takes a vector of stones `s`, the current indices `i` and `j`, and the `sum` of the values of remaining stones.
+This code defines a dynamic programming solution to the problem of maximizing the score in the Stone Game VII. It uses memoization to optimize overlapping subproblems and calculates the maximum score by making optimal choices to remove either the left or right stone at each step.
 
-```cpp
-        if(i == j) {
-            return 0;
-        }
-```
-- **Base Case**: If there is only one stone left (when `i` equals `j`), the function returns `0`, as no score can be obtained.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Memoization Table Initialization**
+	```cpp
+	int memo[1001][1001] = {};
+	```
+	Initialize a memoization table `memo` to store the results of subproblems. This avoids recalculating the same subproblems multiple times and speeds up the solution using dynamic programming.
 
-```cpp
-        return memo[i][j] ? memo[i][j] : memo[i][j] = max(sum - s[i] - dp(s, i + 1, j, sum - s[i]),
-                                            sum - s[j] - dp(s, i, j - 1, sum - s[j]));
-```
-- **Memoization Check**: We check if the result for this state `memo[i][j]` has already been computed. If it has, we return that value.
-- **Score Calculation**:
-  - If Alice removes the leftmost stone (`s[i]`), Bob will play optimally with the remaining stones, so we subtract `s[i]` from the total `sum` and call `dp` with the new indices `(i + 1, j)`.
-  - If Alice removes the rightmost stone (`s[j]`), we similarly update the sum and call `dp` with `(i, j - 1)`.
-- **Maximum Calculation**: We take the maximum of the two scenarios to ensure Alice is playing optimally.
+2. **DP Function Definition**
+	```cpp
+	int dp(vector<int>& s, int i, int j, int sum) {
+	```
+	Define the recursive dynamic programming function `dp` that computes the maximum score between the indices `i` and `j` of the array `s`, with the remaining total `sum` of the stones.
 
-```cpp
-    int stoneGameVII(vector<int>& s) {
-        int n = s.size();
-        return dp(s, 0,n-1, accumulate(begin(s), end(s), 0));
-    }
-};
-```
-- **Main Function**: The `stoneGameVII` function initializes the game by calculating the total sum of the stones and calling the `dp` function with the full range of indices (from `0` to `n-1`).
+3. **Base Case Check**
+	```cpp
+	    if(i == j) {
+	```
+	Check if there is only one stone left (i.e., `i == j`). In this case, no more matches can be made, and the score is 0.
 
-### Complexity
+4. **Base Case Return**
+	```cpp
+	        return 0;
+	```
+	Return 0 as there are no more stones to remove, so no points can be gained.
 
-- **Time Complexity**: The time complexity is \(O(n^2)\) due to the nested recursive calls for each state defined by indices `i` and `j`. Each subproblem is computed once thanks to memoization.
+5. **Memoization Check**
+	```cpp
+	    return memo[i][j] ? memo[i][j] : memo[i][j] = max(sum - s[i] - dp(s, i + 1, j, sum - s[i]),
+	```
+	Check if the result for the current subproblem (`i`, `j`) is already computed and stored in `memo`. If not, calculate it by choosing the optimal move: remove the stone at index `i` or `j`.
 
-- **Space Complexity**: The space complexity is \(O(n^2)\) for the memoization table, in addition to the space used for the input vector.
+6. **Recursive Call (Left Stone Removed)**
+	```cpp
+	                                        sum - s[i] - dp(s, i + 1, j, sum - s[i]),
+	```
+	Make a recursive call to calculate the score if the leftmost stone (`s[i]`) is removed. The remaining sum of stones is updated accordingly.
 
-### Conclusion
+7. **Recursive Call (Right Stone Removed)**
+	```cpp
+	                                        sum - s[j] - dp(s, i, j - 1, sum - s[j]));
+	```
+	Make a recursive call to calculate the score if the rightmost stone (`s[j]`) is removed. The remaining sum of stones is updated accordingly.
 
-The solution effectively utilizes dynamic programming with memoization to solve the stone game problem, allowing Alice to maximize her score against Bob. 
+8. **Main Function Definition**
+	```cpp
+	int stoneGameVII(vector<int>& s) {
+	```
+	Define the main function `stoneGameVII` that initializes the memoization table and calls the recursive `dp` function to calculate the maximum score.
 
-Key insights from the solution include:
+9. **Size Calculation**
+	```cpp
+	    int n = s.size();
+	```
+	Calculate the size `n` of the input array `s`, which represents the number of stones.
 
-1. **Optimal Play Strategy**: The recursive structure captures the optimal choices made by Alice at each step, ensuring that she minimizes Bob's potential score while maximizing her own.
+10. **Final Calculation and Return**
+	```cpp
+	    return dp(s, 0, n - 1, accumulate(begin(s), end(s), 0));
+	```
+	Call the `dp` function with the initial indices `0` and `n - 1` and the total sum of all stones (calculated using `accumulate`). Return the result of the dynamic programming computation.
 
-2. **Efficiency Through Memoization**: By storing the results of previously computed states, we significantly reduce the computational overhead, allowing the solution to handle larger input sizes effectively.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-3. **Understanding Game Theory**: The problem illustrates fundamental concepts in game theory, including optimal strategies, decision making, and the impact of choices on future outcomes.
+The time complexity is O(n^2) because we compute the score difference for each subarray using dynamic programming.
 
-In summary, this code serves as a robust example of applying recursive strategies and dynamic programming to solve competitive scenarios, providing valuable insights into optimizing player strategies in game-theoretic contexts.
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the memoization table used to store the score differences for subarrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stone-game-vii/description/)
 

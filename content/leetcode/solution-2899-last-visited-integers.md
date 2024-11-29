@@ -14,117 +14,203 @@ img_src = ""
 youtube = "vWwJsOGGKu8"
 youtube_upload_date="2023-10-14"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/vWwJsOGGKu8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array `nums`, where each element is either a positive integer or -1. For each -1, find the respective last visited positive integer. The 'last visited integer' refers to the most recent positive integer seen before each -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` where each element is either a positive integer or -1.
+- **Example:** `[7,-1,8,-1,-1]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- nums[i] == -1 or 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> lastVisitedIntegers(vector<string>& words) {
-        vector<int>v;
-        vector<int>ans;
-        int count=0;
-        for(int i=0;i<words.size();i++){
-            if(words[i]=="prev"){
-                count++;
-                if(count>v.size()){
-                    ans.push_back(-1);
-                }
-                else{
-                    ans.push_back(v[v.size()-count]);
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array `ans` where for each `-1` in the input, the corresponding element in `ans` is the last positive integer seen before it. If there aren't enough positive integers, append `-1`.
+- **Example:** `[7,8,7]`
+- **Constraints:**
+	- The length of the output array should be the same as the input array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To keep track of the most recent positive integers and assign them to the respective `-1` based on the count of consecutive `-1` encountered.
+
+- Initialize an empty array `seen` and an empty array `ans`.
+- Iterate through the array `nums`.
+- For each positive integer, prepend it to `seen`.
+- For each `-1`, find the `k`-th element in `seen` and append it to `ans`. If `k` exceeds the length of `seen`, append `-1`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` is non-empty.
+- Each `-1` in the array has a respective 'last visited integer' if enough positive integers precede it.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[7,-1,8,-1,-1]`  \
+  **Explanation:** For each `-1`, find the respective last positive integer based on the elements seen so far. If there aren't enough integers, append `-1`.
+
+{{< dots >}}
+## Approach 🚀
+Iterate through the array `nums`, keep track of the positive integers in a `seen` list, and for each `-1`, append the respective 'last visited integer' to the result array.
+
+### Initial Thoughts 💭
+- Each `-1` is followed by a check for the number of previous integers.
+- If there are enough integers in `seen`, return the last one; otherwise, return `-1`.
+- This problem involves maintaining a stack-like structure for the integers seen so far.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will not be empty according to the constraints.
+- For large inputs, the algorithm should efficiently handle up to 100 elements in `nums`.
+- If there are no positive integers before a `-1`, return `-1` for that position.
+- The length of the input is limited to 100, which is manageable.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> lastVisitedIntegers(vector<string>& words) {
+    vector<int>v;
+    vector<int>ans;
+    int count=0;
+    for(int i=0;i<words.size();i++){
+        if(words[i]=="prev"){
+            count++;
+            if(count>v.size()){
+                ans.push_back(-1);
             }
             else{
-                count=0;
-                v.push_back(stoi(words[i]));
+                ans.push_back(v[v.size()-count]);
             }
         }
-        return ans;
+        else{
+            count=0;
+            v.push_back(stoi(words[i]));
+        }
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The function `lastVisitedIntegers` takes a vector of strings called `words`. Each element in `words` represents either an integer (stored as a string) or the keyword `"prev"`. If the element is an integer, it is added to a history of previously encountered integers. When `"prev"` appears, the function should return the last visited integer based on how many `"prev"` commands have been issued consecutively. If there is no valid last integer for a `"prev"` command, it should return `-1`. 
-
-### Approach
-
-This function manages a history of integers and allows for quick lookup of previous values in that history. It utilizes a vector `v` to store integer values and another vector `ans` to store the results for each `"prev"` command or integer in the input `words`. The approach involves iterating through the list of `words` and processing each word according to whether it’s an integer or the command `"prev"`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Helper Variables
-
-```cpp
-vector<int>v;          // Stores the history of integers.
-vector<int>ans;        // Stores the result for each word in words.
-int count=0;           // Tracks consecutive "prev" commands.
-```
-
-- `v` holds the history of integers added from `words`.
-- `ans` stores the output values, which will be returned at the end.
-- `count` is used to track the number of consecutive `"prev"` commands, allowing access to previously visited integers in `v`.
-
-#### Step 2: Iterate Through `words` Vector
-
-```cpp
-for(int i=0; i < words.size(); i++) {
-    if(words[i] == "prev") {
-```
-
-- We iterate through each word in `words`. If the current word is `"prev"`, we need to retrieve the previously visited integer based on `count`.
-
-#### Step 3: Handle "prev" Commands
-
-```cpp
-count++;
-if(count > v.size()) {
-    ans.push_back(-1);
-} else {
-    ans.push_back(v[v.size() - count]);
+    return ans;
 }
 ```
 
-- For each `"prev"` command:
-  - Increment `count` to keep track of how far back to look.
-  - If `count` exceeds the size of `v`, it means we are trying to access an out-of-bounds index in the history, so we add `-1` to `ans`.
-  - Otherwise, we access the element `v[v.size() - count]`, representing the integer `count` positions back in history, and add it to `ans`.
+This code solves the problem of keeping track of the last visited integers based on a sequence of commands. If the command is 'prev', it returns the last visited integer, otherwise, it adds a new integer to the list.
 
-#### Step 4: Handle Integer Words
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> lastVisitedIntegers(vector<string>& words) {
+	```
+	Function to process a list of commands (words) and return a list of integers corresponding to the last visited integers based on the commands.
 
-```cpp
-} else {
-    count = 0;
-    v.push_back(stoi(words[i]));
-}
-```
+2. **Variable Initialization**
+	```cpp
+	    vector<int>v;
+	```
+	This initializes an empty vector to store the visited integers.
 
-- If the current word is an integer, `count` is reset to zero, indicating that the history lookup (`"prev"` commands) has been interrupted.
-- The integer is converted from string to integer using `stoi()` and added to `v`.
+3. **Variable Initialization**
+	```cpp
+	    vector<int>ans;
+	```
+	This initializes an empty vector to store the answers (last visited integers or -1).
 
-#### Step 5: Return the Result
+4. **Variable Initialization**
+	```cpp
+	    int count=0;
+	```
+	This variable keeps track of how many times 'prev' has been encountered in the list.
 
-```cpp
-return ans;
-```
+5. **Loop**
+	```cpp
+	    for(int i=0;i<words.size();i++){
+	```
+	Loop through each word in the input list to process the commands.
 
-- After processing all words, `ans` contains the result for each `"prev"` command or integer entry in `words`. It is returned as the final result.
+6. **Condition Check**
+	```cpp
+	        if(words[i]=="prev"){
+	```
+	Check if the current command is 'prev'.
 
-### Complexity
+7. **Increment Counter**
+	```cpp
+	            count++;
+	```
+	Increment the count when 'prev' is encountered.
 
-- **Time Complexity**: The time complexity is `O(n)`, where `n` is the number of words in the `words` vector. We iterate through `words` once, and operations like accessing elements in a vector or converting strings to integers are constant time.
-  
-- **Space Complexity**: The space complexity is `O(n)` because we store both `v` and `ans`, each of which can grow to a size of `n` in the worst case.
+8. **Condition Check**
+	```cpp
+	            if(count>v.size()){
+	```
+	Check if the count exceeds the number of integers stored in the vector.
 
-### Conclusion
+9. **Action**
+	```cpp
+	                ans.push_back(-1);
+	```
+	If count exceeds the size of the vector, add -1 to the answer list.
 
-This solution effectively manages a history of integers, allowing efficient retrieval of previously visited values based on consecutive `"prev"` commands. It achieves this with minimal complexity by leveraging a vector and efficient conditional checks to manage edge cases (such as accessing out-of-bounds indices). The solution’s simplicity and efficiency make it well-suited for scenarios requiring retrieval of recently encountered values with interruptions.
+10. **Action**
+	```cpp
+	            }
+	```
+	End the if condition.
+
+11. **Action**
+	```cpp
+	            else{
+	```
+	If count is within bounds, proceed to retrieve the last visited integer.
+
+12. **Action**
+	```cpp
+	                ans.push_back(v[v.size()-count]);
+	```
+	Add the last visited integer to the answer list, based on the count.
+
+13. **Else Condition**
+	```cpp
+	        else{
+	```
+	If the current command is not 'prev', proceed to add a new integer to the visited list.
+
+14. **Action**
+	```cpp
+	            count=0;
+	```
+	Reset the count to 0 when a new integer is encountered.
+
+15. **Action**
+	```cpp
+	            v.push_back(stoi(words[i]));
+	```
+	Convert the current word to an integer and add it to the visited integers list.
+
+16. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the list of last visited integers or -1 for invalid commands.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Each element is processed once, leading to a time complexity of O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We store the integers encountered in `seen`, so the space complexity is O(n).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/last-visited-integers/description/)
 

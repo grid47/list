@@ -14,125 +14,182 @@ img_src = ""
 youtube = "dy15GcCBdOc"
 youtube_upload_date="2020-11-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/dy15GcCBdOc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer n, an array nums of length n+1 is generated with the following rules:
 
-{{< highlight cpp >}}
+- nums[0] = 0
+- nums[1] = 1
+- nums[2 * i] = nums[i] when 2 <= 2 * i <= n
+- nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
+
+Return the maximum value in the array nums.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An integer n.
+- **Example:** `n = 6`
+- **Constraints:**
+	- 0 <= n <= 100
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum integer in the generated array.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate the array nums based on the given rules and find the maximum integer in the array.
+
+- Initialize an array nums of length n+1.
+- Iterate through the array to generate values based on the given rules.
+- Return the maximum value in the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input integer n will always be a valid non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 6`  \
+  **Explanation:** Following the given rules, the array nums is generated as [0, 1, 1, 2, 1, 3, 2], and the maximum value in the array is 3.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, generate the array nums using the rules provided and track the maximum value while populating the array.
+
+### Initial Thoughts 💭
+- We need to iterate through the array and fill in the values based on specific conditions.
+- We will need to calculate and compare the values as we go.
+- The problem can be solved in linear time by iterating once through the array and maintaining the maximum value.
+{{< dots >}}
+### Edge Cases 🌐
+- If n = 0, the array will only contain one element, which is 0.
+- For the maximum value of n = 100, the solution should handle the array efficiently.
+- When n = 1, the array will be [0, 1], and the maximum will be 1.
+- Ensure that the array size does not exceed the constraints given (n <= 100).
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    public int getMaximumGenerated(int n) {
-        if (n == 0) return 0;
-        int[] nums = new int[n + 1];
-        nums[0] = 0;
-        nums[1] = 1;
-        int max = 1;
-        for(int i = 1; 2 * i + 1 < n + 1; i++) {
-            nums[2 * i]     = nums[i];
-            max = Math.max(nums[2 * i],     max);
-            nums[2 * i + 1] = nums[i] + nums[i + 1];
-            max = Math.max(nums[2 * i + 1], max);
-        }
-        return max;
+public int getMaximumGenerated(int n) {
+    if (n == 0) return 0;
+    int[] nums = new int[n + 1];
+    nums[0] = 0;
+    nums[1] = 1;
+    int max = 1;
+    for(int i = 1; 2 * i + 1 < n + 1; i++) {
+        nums[2 * i]     = nums[i];
+        max = Math.max(nums[2 * i],     max);
+        nums[2 * i + 1] = nums[i] + nums[i + 1];
+        max = Math.max(nums[2 * i + 1], max);
     }
-}
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to generate a sequence of numbers based on the input integer \( n \) and find the maximum number in that sequence. The sequence is defined as follows:
-
-- \( nums[0] = 0 \)
-- \( nums[1] = 1 \)
-- For each integer \( i \) starting from 1, the following rules apply:
-  - \( nums[2 \times i] = nums[i] \)
-  - \( nums[2 \times i + 1] = nums[i] + nums[i + 1] \)
-
-Your goal is to compute the maximum value in the generated sequence up to index \( n \).
-
-### Approach
-
-To solve this problem, we can take the following steps:
-
-1. **Initialization**: Create an array `nums` to store the values of the sequence up to the \( n \)th index.
-
-2. **Base Cases**: Set the base values \( nums[0] \) and \( nums[1] \).
-
-3. **Iterative Calculation**: Use a loop to calculate values for even and odd indices based on the rules specified above. Maintain a variable to track the maximum value encountered in the process.
-
-4. **Return the Result**: Finally, return the maximum value found in the array.
-
-### Code Breakdown (Step by Step)
-
-Let’s go through the provided code to explain how it works:
-
-```java
-class Solution {
-    public int getMaximumGenerated(int n) {
-```
-- We define a class `Solution` and a public method `getMaximumGenerated` that takes an integer \( n \) as input.
-
-```java
-        if (n == 0) return 0;
-```
-- If \( n \) is 0, we immediately return 0 since that is the only element in the generated sequence.
-
-```java
-        int[] nums = new int[n + 1];
-        nums[0] = 0;
-        nums[1] = 1;
-```
-- We create an array `nums` of size \( n + 1 \) to store the sequence values. We initialize the first two values of the array according to the defined rules.
-
-```java
-        int max = 1;
-```
-- We initialize a variable `max` to keep track of the maximum value found in the sequence. Since \( nums[1] \) is initialized to 1, we start with `max` as 1.
-
-```java
-        for(int i = 1; 2 * i + 1 < n + 1; i++) {
-```
-- We use a `for` loop to iterate through the indices. The loop continues until \( 2 \times i + 1 \) exceeds \( n \), ensuring that we stay within the bounds of the array.
-
-```java
-            nums[2 * i]     = nums[i];
-            max = Math.max(nums[2 * i],     max);
-```
-- For each \( i \), we calculate the value for the even index \( 2 \times i \) by assigning it the value of \( nums[i] \). We also update `max` if this new value is greater than the current maximum.
-
-```java
-            nums[2 * i + 1] = nums[i] + nums[i + 1];
-            max = Math.max(nums[2 * i + 1], max);
-```
-- Next, we calculate the value for the odd index \( 2 \times i + 1 \) by summing \( nums[i] \) and \( nums[i + 1] \). Again, we update `max` if the newly calculated value exceeds the current maximum.
-
-```java
-        }
-        return max;
-    }
+    return max;
 }
 ```
-- The loop continues until all applicable indices are calculated, and finally, we return the maximum value found in the sequence.
 
-### Complexity
+This function generates a sequence of numbers based on a given integer `n` and calculates the maximum value in that sequence. The sequence is generated by following a specific pattern where every element at index `2*i` is the same as the element at index `i`, and the element at index `2*i + 1` is the sum of elements at index `i` and `i+1`. The maximum value is tracked throughout the process.
 
-- **Time Complexity**: The time complexity of this solution is \( O(n) \). This is because we are iterating through the array of size \( n \) and performing a constant amount of work for each index.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	This defines a class named `Solution`, which contains the method to compute the maximum value generated by the sequence.
 
-- **Space Complexity**: The space complexity is also \( O(n) \) due to the additional array `nums` that stores the generated sequence values.
+2. **Method Definition**
+	```cpp
+	public int getMaximumGenerated(int n) {
+	```
+	This line defines the method `getMaximumGenerated` that takes an integer `n` as input and returns the maximum value in the generated sequence.
 
-### Conclusion
+3. **Base Case Check**
+	```cpp
+	    if (n == 0) return 0;
+	```
+	If `n` is 0, the function returns 0 because the generated sequence has no elements.
 
-This solution effectively generates a sequence of numbers based on the specified rules and determines the maximum value in a single pass through the sequence. 
+4. **Array Initialization**
+	```cpp
+	    int[] nums = new int[n + 1];
+	```
+	An array `nums` is initialized with `n+1` elements to store the generated sequence.
 
-**Key Points**:
-1. **Dynamic Programming Insight**: The approach leverages the properties of dynamic programming by building up the solution iteratively from smaller subproblems (previous indices) to solve for larger ones (the current index).
-2. **Efficiency**: The algorithm efficiently computes the maximum value in linear time, making it suitable for larger inputs within practical limits.
-3. **Clarity**: The separation of logic into distinct steps (initialization, calculation, and result retrieval) enhances code clarity and maintainability.
+5. **Base Case Assignment**
+	```cpp
+	    nums[0] = 0;
+	```
+	The first element of the sequence is set to 0, as per the problem definition.
 
-This method can serve as a foundational example for solving similar problems that involve generating sequences based on mathematical rules, allowing for intuitive expansions and adaptations for more complex scenarios.
+6. **Base Case Assignment**
+	```cpp
+	    nums[1] = 1;
+	```
+	The second element of the sequence is set to 1, as per the problem definition.
+
+7. **Variable Initialization**
+	```cpp
+	    int max = 1;
+	```
+	The variable `max` is initialized to 1, which will track the maximum value encountered in the sequence.
+
+8. **Loop**
+	```cpp
+	    for(int i = 1; 2 * i + 1 < n + 1; i++) {
+	```
+	A loop starts to iterate from index 1 to generate the sequence values until `2*i + 1` exceeds `n`.
+
+9. **Sequence Generation**
+	```cpp
+	        nums[2 * i] = nums[i];
+	```
+	The element at index `2*i` is assigned the value of `nums[i]`, following the pattern defined in the problem.
+
+10. **Max Update**
+	```cpp
+	        max = Math.max(nums[2 * i], max);
+	```
+	The maximum value is updated if the value at `nums[2*i]` is greater than the current `max`.
+
+11. **Sequence Generation**
+	```cpp
+	        nums[2 * i + 1] = nums[i] + nums[i + 1];
+	```
+	The element at index `2*i + 1` is assigned the sum of `nums[i]` and `nums[i + 1]`, as per the pattern.
+
+12. **Max Update**
+	```cpp
+	        max = Math.max(nums[2 * i + 1], max);
+	```
+	The maximum value is updated again if the value at `nums[2*i + 1]` is greater than the current `max`.
+
+13. **Return Statement**
+	```cpp
+	    return max;
+	```
+	The method returns the maximum value found in the sequence.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution iterates through the array once to generate the values and track the maximum.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the nums array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/get-maximum-in-generated-array/description/)
 

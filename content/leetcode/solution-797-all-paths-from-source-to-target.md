@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "MQU2IIWwaOg"
 youtube_upload_date="2024-04-06"
 youtube_thumbnail="https://i.ytimg.com/vi/MQU2IIWwaOg/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,126 +28,186 @@ youtube_thumbnail="https://i.ytimg.com/vi/MQU2IIWwaOg/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a directed acyclic graph (DAG) with `n` nodes, labeled from 0 to n-1. Find all possible paths from node 0 to node n-1 and return these paths in any order. The graph is represented such that each node has a list of other nodes that can be visited directly from it.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of lists, where `graph[i]` contains all the nodes you can visit directly from node `i`.
+- **Example:** `Input: graph = [[1, 2], [3], [3], []]`
+- **Constraints:**
+	- 2 <= n <= 15
+	- 0 <= graph[i][j] < n
+	- graph[i][j] != i (no self-loops)
+	- All elements in graph[i] are unique
+	- The input graph is guaranteed to be a DAG
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
-        vector<vector<int>> ans;
-        queue<pair<int, vector<int>>> q;
-        q.push({0, {0}});
-        while(!q.empty()) {
-            int x = q.front().first;
-            vector<int> t = q.front().second;
-            q.pop();
-            if(x == graph.size() - 1) ans.push_back(t);
-            for(int k: graph[x]) {
-                t.push_back(k);
-                q.push({k, t});
-                t.pop_back();
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of all possible paths from node 0 to node n-1. Each path is represented as a list of nodes, starting from node 0 and ending at node n-1.
+- **Example:** `Output: [[0, 1, 3], [0, 2, 3]]`
+- **Constraints:**
+	- The answer will be a list of lists, where each list represents a valid path from node 0 to node n-1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find all paths starting from node 0 to node n-1, respecting the directed edges in the graph.
+
+- Use a breadth-first search (BFS) or depth-first search (DFS) approach to explore the graph starting from node 0.
+- For each node, explore all possible nodes it can lead to by following the directed edges.
+- Once you reach node n-1, add the path to the result.
+- If a node cannot lead to node n-1, backtrack and explore other paths.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph is non-cyclic, meaning it does not contain any cycles.
+- The graph has at least two nodes (i.e., node 0 and node n-1).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: graph = [[1, 2], [3], [3], []]`  \
+  **Explanation:** In this graph, node 0 can reach nodes 1 and 2, node 1 can reach node 3, and node 2 can also reach node 3. The two possible paths from node 0 to node 3 are [0, 1, 3] and [0, 2, 3].
+
+- **Input:** `Input: graph = [[4, 3, 1], [3, 2, 4], [3], [4], []]`  \
+  **Explanation:** This graph has multiple paths from node 0 to node 4: [0, 4], [0, 3, 4], [0, 1, 3, 4], [0, 1, 2, 3, 4], and [0, 1, 4].
+
+{{< dots >}}
+## Approach 🚀
+A depth-first search (DFS) approach is used to explore all possible paths from node 0 to node n-1. Starting from node 0, recursively visit each neighboring node, adding it to the current path. When node n-1 is reached, add the path to the result.
+
+### Initial Thoughts 💭
+- We need to explore all possible paths in the DAG from node 0 to node n-1.
+- DFS or BFS can be used for exploring the graph, as both approaches allow us to find all paths.
+{{< dots >}}
+### Edge Cases 🌐
+- If the graph is empty or contains no edges, no paths can be found.
+- If the graph is very large, ensure the solution can handle it efficiently, particularly considering the constraint of n <= 15.
+- If all nodes except for node 0 have no outgoing edges, there will be no paths from node 0 to node n-1.
+- The graph must have at least two nodes (node 0 and node n-1).
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+    vector<vector<int>> ans;
+    queue<pair<int, vector<int>>> q;
+    q.push({0, {0}});
+    while(!q.empty()) {
+        int x = q.front().first;
+        vector<int> t = q.front().second;
+        q.pop();
+        if(x == graph.size() - 1) ans.push_back(t);
+        for(int k: graph[x]) {
+            t.push_back(k);
+            q.push({k, t});
+            t.pop_back();
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-In this problem, we are given a directed graph represented as an adjacency list `graph`, where each node is a non-negative integer. The task is to find all possible paths from the source node (node 0) to the target node (the last node in the graph). Each path must be a sequence of nodes that starts at node 0 and ends at the last node, following the directed edges of the graph.
-
-This problem is essentially about finding all possible paths in a directed graph, starting from the source and ending at the target. The challenge is to explore all paths efficiently while adhering to the structure of the graph.
-
-### Approach
-The approach to solve this problem is to use **breadth-first search (BFS)** with a queue. The BFS technique is ideal for exploring all paths from the source to the target because it processes nodes level by level, ensuring that all possible paths are considered. By maintaining the path as we traverse the graph, we can capture all valid paths from the source to the target.
-
-Here’s how we can break the problem into smaller steps:
-
-1. **Use a Queue for BFS**: We'll utilize a queue where each element contains a node and the path taken to reach that node. This ensures that when we reach a node, we know the exact sequence of nodes leading up to it.
-  
-2. **Traverse the Graph**: From the source node, explore all adjacent nodes recursively, adding them to the current path.
-
-3. **Capture Valid Paths**: Once we reach the target node (the last node in the graph), we add the current path to our result.
-
-4. **Backtrack Efficiently**: Since we are using BFS, we will not need to explicitly backtrack. The queue takes care of processing the nodes in the correct order.
-
-By using this BFS-based approach, we ensure that we explore all potential paths from the source to the target while maintaining efficiency.
-
-### Code Breakdown (Step by Step)
-
-Let’s go through the code step by step to understand its implementation:
-
-#### Step 1: Initialize the Result and Queue
-```cpp
-vector<vector<int>> ans;
-queue<pair<int, vector<int>>> q;
-q.push({0, {0}});
-```
-- `ans`: A vector of vectors that will store all valid paths from the source to the target.
-- `q`: A queue used to perform the breadth-first search (BFS). Each element in the queue is a pair, where:
-  - The first element is a node `x`.
-  - The second element is a vector of integers representing the current path taken to reach node `x`.
-- Initially, we push the source node (node 0) into the queue, with the path being `{0}`.
-
-#### Step 2: Start BFS Loop
-```cpp
-while(!q.empty()) {
-    int x = q.front().first;
-    vector<int> t = q.front().second;
-    q.pop();
-```
-- The loop continues as long as there are elements in the queue. This ensures that we process all nodes and paths.
-- We pop the front element of the queue to get the current node `x` and the path `t` taken to reach that node.
-  
-#### Step 3: Check for Target Node
-```cpp
-if(x == graph.size() - 1) ans.push_back(t);
-```
-- If the current node `x` is the target node (the last node in the graph, which is `graph.size() - 1`), we add the current path `t` to the result `ans`. This indicates that we’ve found a valid path from the source to the target.
-
-#### Step 4: Explore Adjacent Nodes
-```cpp
-for(int k: graph[x]) {
-    t.push_back(k);
-    q.push({k, t});
-    t.pop_back();
+    return ans;
 }
 ```
-- For each adjacent node `k` to the current node `x` (i.e., each node that can be reached directly from node `x`), we do the following:
-  - Add node `k` to the current path `t`.
-  - Push the new node `k` and the updated path `t` into the queue. This ensures that we continue exploring paths from node `k`.
-  - After the push, we backtrack by removing node `k` from the path `t` using `t.pop_back()`. This is necessary because we need to keep `t` intact for future iterations, maintaining the correct path sequence.
 
-#### Step 5: Return the Result
-```cpp
-return ans;
-```
-- Once the BFS loop has processed all possible paths, we return the result `ans`, which contains all valid paths from the source to the target node.
+This function finds all paths from the source node (0) to the target node (graph.size() - 1) in a directed graph using a BFS approach.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+	```
+	The function starts by defining the return type as a 2D vector of integers, which will store all the possible paths from the source to the target.
 
-#### Time Complexity:
-The time complexity of this solution is **O(N + E)**, where:
-- `N` is the number of nodes in the graph (i.e., `graph.size()`).
-- `E` is the total number of edges in the graph (i.e., the sum of the lengths of the adjacency lists in the `graph`).
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	This line initializes a 2D vector 'ans' which will store the valid paths found from source to target.
 
-This is because each node and edge is processed at most once during the BFS. For each node, we explore all of its neighbors (edges), and for each edge, we push a new path into the queue. Therefore, the overall time complexity depends on the number of nodes and edges in the graph.
+3. **Queue Initialization**
+	```cpp
+	    queue<pair<int, vector<int>>> q;
+	```
+	A queue is initialized to facilitate BFS traversal. Each element in the queue is a pair consisting of a node index and a partial path leading up to that node.
 
-#### Space Complexity:
-The space complexity is **O(N + E)** due to:
-- The space required for storing the graph, which is `O(N + E)` as it is represented as an adjacency list.
-- The space required for the queue, which could store paths for each possible traversal of the graph. In the worst case, the queue can hold a number of paths proportional to the number of edges.
+4. **Initial Push**
+	```cpp
+	    q.push({0, {0}});
+	```
+	The starting node (0) is pushed onto the queue, along with an initial path that only contains the source node.
 
-Thus, the space complexity is dominated by the graph's adjacency list and the queue that stores the paths during BFS.
+5. **While Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	This while loop continues until the queue is empty, processing each node in the graph in a breadth-first manner.
 
-### Conclusion
+6. **Extract Node**
+	```cpp
+	        int x = q.front().first;
+	```
+	The node index 'x' is extracted from the front of the queue.
 
-This solution uses breadth-first search (BFS) to explore all possible paths from the source node (0) to the target node (the last node in the graph). The BFS approach is suitable because it ensures that all paths are considered without unnecessary recomputation. By maintaining the path along with the node being processed, we are able to efficiently capture all valid paths from the source to the target.
+7. **Extract Path**
+	```cpp
+	        vector<int> t = q.front().second;
+	```
+	The path leading to node 'x' is extracted from the front of the queue.
 
-The algorithm is efficient, with a time complexity of O(N + E) and space complexity of O(N + E), making it scalable to large graphs. The use of a queue allows us to explore the graph level by level, ensuring that every potential path is processed correctly. The backtracking step (via `t.pop_back()`) ensures that paths are managed efficiently without modifying the paths prematurely.
+8. **Pop Queue**
+	```cpp
+	        q.pop();
+	```
+	The front element (node and path) is removed from the queue to continue processing the next element.
 
-This method is optimal for finding all paths in a directed graph from a given source to a target, and its clear and straightforward implementation ensures that it can be easily adapted for similar graph traversal problems.
+9. **Check Target**
+	```cpp
+	        if(x == graph.size() - 1) ans.push_back(t);
+	```
+	If the current node 'x' is the target node, the current path 't' is added to the result set 'ans'.
+
+10. **For Loop**
+	```cpp
+	        for(int k: graph[x]) {
+	```
+	This for loop iterates over all the neighbors 'k' of the current node 'x'.
+
+11. **Push Neighbor**
+	```cpp
+	            t.push_back(k);
+	```
+	The neighbor node 'k' is added to the current path 't'.
+
+12. **Queue Push**
+	```cpp
+	            q.push({k, t});
+	```
+	The new pair, consisting of the neighbor 'k' and the updated path 't', is pushed onto the queue.
+
+13. **Pop Last Node**
+	```cpp
+	            t.pop_back();
+	```
+	After processing the neighbor, the last node is removed from the path 't' to backtrack.
+
+14. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The function returns the 2D vector 'ans', which contains all the valid paths from the source to the target node.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of nodes in the graph.
+- **Average Case:** O(2^n), considering that in the worst case, there can be an exponential number of paths.
+- **Worst Case:** O(2^n), where n is the number of nodes, since each node could potentially lead to multiple paths.
+
+The time complexity is exponential because we need to explore all possible paths from node 0 to node n-1.
+
+### Space Complexity 💾
+- **Best Case:** O(n), as the space used depends on the recursion depth and the number of paths stored.
+- **Worst Case:** O(n), where n is the number of nodes, for storing the current path during DFS.
+
+The space complexity is linear in the worst case, due to recursion and storing the paths.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-paths-from-source-to-target/description/)
 

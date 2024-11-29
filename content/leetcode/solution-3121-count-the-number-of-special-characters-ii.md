@@ -14,149 +14,242 @@ img_src = ""
 youtube = "aIR3Iem0jQM"
 youtube_upload_date="2024-04-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/aIR3Iem0jQM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `word`. A letter `c` is called special if it appears both in lowercase and uppercase in `word`, and every lowercase occurrence of `c` appears before the first uppercase occurrence of `c`. Return the number of special letters in `word`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `word` of length n.
+- **Example:** `word = "abcABca"`
+- **Constraints:**
+	- 1 <= word.length <= 2 * 10^5
+	- word consists of only lowercase and uppercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfSpecialChars(string word) {
-        vector<int> ch(26, 0);
-        for(char x: word) {
-            if(isupper(x)) {
-                if(ch[x - 'A'] == -1) continue;
-                if(ch[x - 'A'] != 1 && ch[x - 'A'] != 2)  {
-                  ch[x - 'A'] = -1;
-                    continue;  
-                }
-                ch[x - 'A'] = 2;
-            } else {
-                if(ch[x - 'a'] == -1) continue;                
-                if(ch[x - 'a'] == 2) {
-                  ch[x - 'a'] = -1;
-                    continue;  
-                } 
-                ch[x - 'a'] = 1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of special letters in the string `word`.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify letters that appear in both lowercase and uppercase in the string and check if every lowercase occurrence precedes the first uppercase occurrence.
+
+- 1. Initialize a vector of size 26 to keep track of the occurrences of each letter in `word`.
+- 2. Loop through the string and update the vector to mark the status of each character.
+- 3. After processing the string, check which letters have both lowercase and uppercase occurrences where all lowercase letters precede the uppercase ones.
+- 4. Count and return the total number of such special letters.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will only contain lowercase and uppercase English letters.
+- The string will have a length between 1 and 2 * 10^5 characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word = "abcABca"`  \
+  **Explanation:** The special characters are 'a' and 'b', because they appear in both lowercase and uppercase, and all lowercase occurrences precede the uppercase ones.
+
+- **Input:** `word = "hello"`  \
+  **Explanation:** No special characters exist in this string, as no letter appears in both uppercase and lowercase.
+
+- **Input:** `word = "AaaBcAB"`  \
+  **Explanation:** The letter 'a' appears both in lowercase and uppercase, but the lowercase 'a' occurs after the uppercase 'A', so it's not special.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by iterating through the string, marking occurrences of each character in a vector, and then checking the conditions for special letters.
+
+### Initial Thoughts 💭
+- We need to check the order of lowercase and uppercase occurrences of each letter.
+- By using a vector to track the occurrences and then validating the conditions for each letter, we can efficiently solve the problem.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one character, as per the problem constraints.
+- The solution should efficiently handle strings of up to 2 * 10^5 characters.
+- If the string contains only lowercase or only uppercase letters, the output should be 0.
+- The string consists only of lowercase and uppercase English letters.
+{{< dots >}}
+## Code 💻
+```cpp
+int numberOfSpecialChars(string word) {
+    vector<int> ch(26, 0);
+    for(char x: word) {
+        if(isupper(x)) {
+            if(ch[x - 'A'] == -1) continue;
+            if(ch[x - 'A'] != 1 && ch[x - 'A'] != 2)  {
+              ch[x - 'A'] = -1;
+                continue;  
             }
-            // cout << x << " ";
-            // for(int i = 0; i < 26; i++) {
-            //     cout << ch[i] << " ";
-            // }
-            // cout << "\n";
+            ch[x - 'A'] = 2;
+        } else {
+            if(ch[x - 'a'] == -1) continue;                
+            if(ch[x - 'a'] == 2) {
+              ch[x - 'a'] = -1;
+                continue;  
+            } 
+            ch[x - 'a'] = 1;
         }
-        int cnt = 0;
-        for(int i = 0; i < 26; i++) {
-            // cout << ch[i] << " ";
-            if(ch[i] == 2)
-                cnt++;
-        }
-        return cnt;        
+        // cout << x << " ";
+        // for(int i = 0; i < 26; i++) {
+        //     cout << ch[i] << " ";
+        // }
+        // cout << "\n";
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine how many characters in a given string appear both in uppercase and lowercase forms. These characters are termed "special characters". For example, if a string contains both 'a' and 'A', 'a' is a special character. We need to count how many such "special characters" exist in the string.
-
-Given the string `word`, the function should return the count of characters that appear both in their lowercase and uppercase forms.
-
-For example:
-- For the string `"aAabB"`, the answer is `2` because `'a'` and `'b'` both appear in both lowercase and uppercase forms.
-- For the string `"abc"`, the answer is `0` because no characters appear in both forms.
-
-### Approach
-
-The approach is to use an array (or vector) to track whether a character has appeared in its lowercase or uppercase form. Here's a step-by-step breakdown of the approach:
-
-1. **Character Tracking**: For each character in the string, we track whether its lowercase version or uppercase version has been encountered:
-    - When we encounter an uppercase letter, we check if its lowercase version has been seen. If both the uppercase and lowercase versions have been seen, we mark the character as "special".
-    - Similarly, when we encounter a lowercase letter, we check if its uppercase counterpart has already been seen.
-    
-2. **Marking and Checking**: We use a `vector` of size 26 (corresponding to the 26 letters in the English alphabet) to track the state of each character:
-    - `1` indicates that the lowercase version of the character has been encountered.
-    - `2` indicates that both the lowercase and uppercase versions have been encountered, making it a "special character".
-    - `-1` indicates that the character cannot be part of a special character pair.
-    
-3. **Count Special Characters**: After processing the string, we count how many characters are marked as `2`, which indicates that both the uppercase and lowercase versions of that character exist in the string.
-
-### Code Breakdown
-
-#### Step 1: Initialize a Vector to Track Character States
-```cpp
-vector<int> ch(26, 0);
-```
-- We initialize a vector `ch` of size 26, with all elements set to 0. This vector will track the state of each letter in the alphabet. Each element corresponds to a letter, with the index `0` representing 'a', `1` representing 'b', and so on up to `25` for 'z'.
-
-#### Step 2: Iterate Over the String to Update Character States
-```cpp
-for(char x: word) {
-    if(isupper(x)) {
-        if(ch[x - 'A'] == -1) continue;
-        if(ch[x - 'A'] != 1 && ch[x - 'A'] != 2) {
-            ch[x - 'A'] = -1;
-            continue;
-        }
-        ch[x - 'A'] = 2;
-    } else {
-        if(ch[x - 'a'] == -1) continue;                
-        if(ch[x - 'a'] == 2) {
-            ch[x - 'a'] = -1;
-            continue;
-        } 
-        ch[x - 'a'] = 1;
+    int cnt = 0;
+    for(int i = 0; i < 26; i++) {
+        // cout << ch[i] << " ";
+        if(ch[i] == 2)
+            cnt++;
     }
+    return cnt;        
 }
 ```
-- We iterate through each character `x` in the string `word`.
-- **Handling Uppercase Letters**:
-  - If the character is uppercase (checked using `isupper(x)`), we check the corresponding index in the `ch` array.
-  - If its lowercase counterpart has already been encountered (i.e., `ch[x - 'A'] == 1`), we mark it as a special character by setting `ch[x - 'A'] = 2`.
-  - If the uppercase version appears before its lowercase counterpart or if the character is not yet valid, we mark it as invalid (`ch[x - 'A'] = -1`).
-- **Handling Lowercase Letters**:
-  - If the character is lowercase, we perform similar checks:
-    - If the uppercase counterpart has already been encountered (i.e., `ch[x - 'a'] == 2`), we mark it as invalid (`ch[x - 'a'] = -1`).
-    - If it is the first appearance of the lowercase version, we mark it as seen (`ch[x - 'a'] = 1`).
 
-#### Step 3: Count Special Characters
-```cpp
-int cnt = 0;
-for(int i = 0; i < 26; i++) {
-    if(ch[i] == 2)
-        cnt++;
-}
-```
-- After processing the entire string, we iterate through the `ch` array to count how many characters have been marked with `2`, indicating that both their lowercase and uppercase versions were found.
-- The variable `cnt` is incremented each time a special character is encountered.
+This function calculates the number of special characters in the string `word`, considering both uppercase and lowercase letter pairs. A letter pair is considered special if both the uppercase and lowercase forms of the letter appear in the string.
 
-#### Step 4: Return the Result
-```cpp
-return cnt;
-```
-- Finally, the function returns the count of special characters, stored in `cnt`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfSpecialChars(string word) {
+	```
+	Defines the function `numberOfSpecialChars` that takes a string `word` as input and returns the count of special characters, where a special character is a pair of the same letter in both lowercase and uppercase.
 
-### Complexity
+2. **Array Initialization**
+	```cpp
+	    vector<int> ch(26, 0);
+	```
+	Initializes a vector `ch` of size 26 to keep track of the status of each letter. The vector elements will hold values representing the status of each character (0 = not encountered, 1 = lowercase encountered, 2 = uppercase encountered, -1 = both encountered and invalid).
 
-#### Time Complexity:
-- **O(n)**, where `n` is the length of the input string `word`.
-  - We iterate through each character in the string once and perform constant-time operations (array lookups, assignments, and condition checks) for each character. Therefore, the time complexity is **O(n)**.
+3. **Loop Through String**
+	```cpp
+	    for(char x: word) {
+	```
+	Iterates through each character `x` in the string `word`.
 
-#### Space Complexity:
-- **O(1)**, as the space used by the `ch` vector is constant (it always has 26 elements). The space complexity does not depend on the size of the input string but on the fixed size of the alphabet (26 characters).
-- The space complexity is **O(1)** because the additional space required does not grow with the input size.
+4. **Check Uppercase Character**
+	```cpp
+	        if(isupper(x)) {
+	```
+	Checks if the current character `x` is uppercase.
 
-### Conclusion
+5. **Handle Invalid Uppercase**
+	```cpp
+	            if(ch[x - 'A'] == -1) continue;
+	```
+	If the uppercase version of the character has already been invalidated, skips to the next character.
 
-This solution efficiently counts the number of special characters in a string, where a special character is defined as a character that appears both in its lowercase and uppercase forms. The algorithm runs in linear time relative to the size of the input string, making it highly efficient. 
+6. **Check Uppercase Validity**
+	```cpp
+	            if(ch[x - 'A'] != 1 && ch[x - 'A'] != 2) {
+	```
+	Checks if the uppercase character has been encountered in an invalid state or hasn't been encountered yet.
 
-The use of a vector of fixed size (26) to track character states ensures that the solution is space-efficient, requiring constant space regardless of the input string length. This solution is optimal for this problem and works well within the constraints typically found in such problems.
+7. **Invalidate Uppercase**
+	```cpp
+	              ch[x - 'A'] = -1;
+	```
+	Marks the uppercase version of the character as invalid.
 
-By leveraging simple state tracking and condition checking for each character, the solution provides an intuitive and effective approach to solving the problem of counting special characters.
+8. **Continue to Next Character**
+	```cpp
+	                continue;  
+	```
+	Skips to the next character in the loop if the current character has been invalidated.
+
+9. **Mark Uppercase Valid**
+	```cpp
+	            ch[x - 'A'] = 2;
+	```
+	Marks the uppercase version of the character as encountered and valid.
+
+10. **Handle Lowercase Character**
+	```cpp
+	        } else {
+	```
+	If the character is lowercase, execute the following logic for lowercase characters.
+
+11. **Handle Invalid Lowercase**
+	```cpp
+	            if(ch[x - 'a'] == -1) continue;
+	```
+	If the lowercase version of the character has already been invalidated, skips to the next character.
+
+12. **Check Lowercase Validity**
+	```cpp
+	            if(ch[x - 'a'] == 2) {
+	```
+	Checks if the lowercase character has been encountered in a valid state (both cases present).
+
+13. **Invalidate Lowercase**
+	```cpp
+	              ch[x - 'a'] = -1;
+	```
+	Marks the lowercase version of the character as invalid.
+
+14. **Continue to Next Character**
+	```cpp
+	                continue;  
+	```
+	Skips to the next character in the loop if the current character has been invalidated.
+
+15. **Set Lowercase to 1**
+	```cpp
+	            ch[x - 'a'] = 1;
+	```
+	Marks the lowercase character as encountered.
+
+16. **Count Special Characters**
+	```cpp
+	    int cnt = 0;
+	```
+	Initializes the counter `cnt` to count the number of special characters (pairs of both uppercase and lowercase versions of the same letter).
+
+17. **Loop Through Alphabet**
+	```cpp
+	    for(int i = 0; i < 26; i++) {
+	```
+	Iterates through the `ch` array to count the special characters.
+
+18. **Check Special Character**
+	```cpp
+	        if(ch[i] == 2)
+	```
+	Checks if both uppercase and lowercase versions of the letter are present, which indicates a special character.
+
+19. **Increment Counter**
+	```cpp
+	            cnt++;
+	```
+	Increments the counter `cnt` when a special character is found.
+
+20. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the total count of special characters.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the string. We process each character in the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we only store information for each letter in a fixed-size vector.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-special-characters-ii/description/)
 

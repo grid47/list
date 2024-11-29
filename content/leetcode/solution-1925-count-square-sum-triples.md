@@ -14,116 +14,147 @@ img_src = ""
 youtube = "rWLEDxwWwiU"
 youtube_upload_date="2021-07-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rWLEDxwWwiU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer n, count how many square triples (a, b, c) satisfy the equation a^2 + b^2 = c^2 where 1 <= a, b, c <= n. The order of a, b, and c matters.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a single integer n.
+- **Example:** `n = 6`
+- **Constraints:**
+	- 1 <= n <= 250
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countTriples(int n) {
-    vector<bool> squares(n * n + 1);
-    for (int i = 1; i <= n; ++i)
-        squares[i * i] = true;
-    int res = 0;
-    for (int i = 1; i <= n; ++i)
-        for (int j = i; i * i + j * j <= n * n; ++j)
-            res += squares[i * i + j * j] * 2;
-    return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of square triples (a, b, c) where 1 <= a, b, c <= n and a^2 + b^2 = c^2.
+- **Example:** `2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find pairs (a, b) where a^2 + b^2 = c^2 and check if c is within the range of 1 to n.
+
+- Iterate through all pairs (a, b) where 1 <= a, b <= n.
+- For each pair, compute a^2 + b^2.
+- Check if the result is a perfect square and if the corresponding c value is within the range 1 to n.
+- Count such pairs where the condition holds.
+{{< dots >}}
+### Problem Assumptions ✅
+- The problem assumes that n is always positive and within the given range.
+- The solution should be able to handle the maximum value of n efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 6`  \
+  **Explanation:** For n = 6, the valid square triples are (3, 4, 5) and (4, 3, 5), which gives the output 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through all possible pairs (a, b) and check if the sum of their squares is a perfect square. If it is, check if the resulting c value lies within the range of 1 to n.
+
+### Initial Thoughts 💭
+- We need to efficiently check if a^2 + b^2 is a perfect square.
+- The solution needs to check for all pairs (a, b), and for each pair, verify if c^2 exists in the range of 1 to n. This involves calculating squares and checking for perfect squares.
+{{< dots >}}
+### Edge Cases 🌐
+- The input n will always be positive, so no empty inputs will occur.
+- Since n can be as large as 250, ensure the solution is efficient enough to handle the maximum input size.
+- The smallest valid input is n = 1, which will have no valid square triples.
+- Ensure the algorithm efficiently handles up to 250 iterations for n.
+{{< dots >}}
+## Code 💻
+```cpp
+int countTriples(int n) {
+vector<bool> squares(n * n + 1);
+for (int i = 1; i <= n; ++i)
+    squares[i * i] = true;
+int res = 0;
+for (int i = 1; i <= n; ++i)
+    for (int j = i; i * i + j * j <= n * n; ++j)
+        res += squares[i * i + j * j] * 2;
+return res;
 }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves counting the number of unique triples \((a, b, c)\) where \(a\), \(b\), and \(c\) are integers ranging from \(1\) to \(n\) such that \(a^2 + b^2 = c^2\). In other words, we need to identify the Pythagorean triples formed by these integers within the given range.
-
-### Approach
-
-To solve this problem, we can utilize the following steps:
-
-1. **Identify Perfect Squares**: We will create a boolean array to track which values are perfect squares up to \(n^2\).
-
-2. **Iterate Over Possible Values**: We will iterate through pairs of integers \(a\) and \(b\) to compute \(a^2 + b^2\).
-
-3. **Check for Valid Triples**: For each sum \(a^2 + b^2\), we will check if it is a perfect square and whether the square root \(c\) falls within the specified range.
-
-4. **Count Unique Triples**: To ensure we count unique triples, we will treat \((a, b, c)\) and \((b, a, c)\) as the same when \(a \neq b\).
-
-5. **Return the Result**: Finally, we will return the total count of such unique triples.
-
-### Code Breakdown (Step by Step)
-
-Let’s analyze the provided code step by step:
-
-```cpp
-class Solution {
-public:
-    int countTriples(int n) {
 ```
-This line begins the definition of the `Solution` class and the `countTriples` method, which takes an integer \(n\) as input.
 
-```cpp
-        vector<bool> squares(n * n + 1);
-        for (int i = 1; i <= n; ++i)
-            squares[i * i] = true;
-```
-Here, we initialize a boolean vector `squares` of size \(n^2 + 1\) to keep track of perfect squares. The loop populates this vector by setting `squares[i * i]` to true for all integers \(i\) from \(1\) to \(n\). This effectively marks all perfect squares up to \(n^2\).
+This function calculates the number of valid Pythagorean triples up to a given limit 'n'. It uses a vector to track square numbers and iterates over pairs of integers to find combinations that satisfy the Pythagorean theorem.
 
-```cpp
-        int res = 0;
-```
-We declare an integer variable `res` to hold the count of valid triples.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countTriples(int n) {
+	```
+	Defines the function 'countTriples' that takes an integer 'n' as input and returns the count of valid Pythagorean triples less than or equal to 'n'.
 
-```cpp
-        for (int i = 1; i <= n; ++i)
-            for (int j = i; i * i + j * j <= n * n; ++j)
-                res += squares[i * i + j * j] * 2;
-```
-In this nested loop, we iterate through all pairs of integers \(a\) and \(b\) (where \(b\) starts from \(i\) to avoid counting duplicates). We compute \(a^2 + b^2\) and check if this sum is a perfect square by referring to our `squares` array. If it is, we increment our count by \(2\) because \((a, b, c)\) and \((b, a, c)\) are considered the same valid triple (except for the case when \(a = b\), which is inherently handled as it counts only once).
+2. **Array Initialization**
+	```cpp
+	vector<bool> squares(n * n + 1);
+	```
+	Initializes a vector 'squares' of size 'n * n + 1' to store boolean values, where each index represents whether the index is a perfect square.
 
-```cpp
-        return res;
-    }
-};
-```
-Finally, the method returns the result `res`, which contains the total count of unique Pythagorean triples.
+3. **Loop Start**
+	```cpp
+	for (int i = 1; i <= n; ++i)
+	```
+	Begins a loop to iterate over integers 'i' from 1 to 'n' to mark squares in the 'squares' vector.
 
-### Complexity
+4. **Square Marking**
+	```cpp
+	    squares[i * i] = true;
+	```
+	Marks 'squares[i * i]' as true to indicate that 'i * i' is a perfect square.
 
-- **Time Complexity**: The overall time complexity of this algorithm is \(O(n^2)\). This is due to the two nested loops where we iterate through all pairs of integers up to \(n\). The inner loop runs until \(a^2 + b^2\) exceeds \(n^2\).
+5. **Variable Initialization**
+	```cpp
+	int res = 0;
+	```
+	Initializes the result variable 'res' to 0, which will store the number of valid Pythagorean triples.
 
-- **Space Complexity**: The space complexity is \(O(n^2)\) due to the boolean array `squares`, which holds information for all perfect squares up to \(n^2\).
+6. **Outer Loop Start**
+	```cpp
+	for (int i = 1; i <= n; ++i)
+	```
+	Begins the outer loop over integer 'i' to iterate through possible sides of the Pythagorean triple.
 
-### Conclusion
+7. **Inner Loop Start**
+	```cpp
+	    for (int j = i; i * i + j * j <= n * n; ++j)
+	```
+	Begins the inner loop with integer 'j' starting from 'i' to ensure 'i <= j' and continues while 'i * i + j * j' is less than or equal to 'n * n'.
 
-The `countTriples` function effectively counts the number of unique Pythagorean triples formed by integers in the range from \(1\) to \(n\). The approach of leveraging perfect squares allows us to efficiently check for valid combinations while ensuring we do not count duplicates.
+8. **Count Triples**
+	```cpp
+	        res += squares[i * i + j * j] * 2;
+	```
+	Checks if 'i * i + j * j' is a perfect square by looking up its value in the 'squares' vector. If it is, it increments 'res' by 2 (accounting for both (i, j) and (j, i) pairs).
 
-### Key Features
+9. **Return**
+	```cpp
+	return res;
+	```
+	Returns the final count of Pythagorean triples.
 
-1. **Use of Boolean Array**: The use of a boolean array to mark perfect squares simplifies the checking process, allowing for quick verification.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-2. **Efficiency**: The algorithm runs in polynomial time, making it efficient enough for relatively larger values of \(n\).
+The time complexity is O(n^2) due to the two nested loops that iterate over all pairs (a, b).
 
-3. **Unique Counting Logic**: The method carefully avoids counting duplicate triples by controlling the range of the second integer in the pairs.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Use Cases
+The space complexity is O(1) since we only need a few variables to store intermediate results.
 
-1. **Mathematical Computations**: This algorithm can be beneficial in mathematical software or libraries that deal with number theory, especially concerning Pythagorean triples.
+**Happy Coding! 🎉**
 
-2. **Game Development**: In games that involve puzzles or challenges based on geometric principles, this logic could be applied to create challenges based on triplet formations.
-
-3. **Educational Tools**: The function can be part of educational software that helps students understand the properties of numbers and geometry.
-
-4. **Competitive Programming**: Understanding this type of problem can enhance skills in solving complex algorithmic challenges efficiently.
-
-5. **Scientific Simulations**: In simulations where spatial relationships are analyzed, counting such geometric relationships could be necessary.
-
-By comprehending the inner workings of this solution, developers and programmers can enhance their knowledge of combinatorial problems and improve their proficiency in implementing similar algorithms in various programming challenges.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-square-sum-triples/description/)
 

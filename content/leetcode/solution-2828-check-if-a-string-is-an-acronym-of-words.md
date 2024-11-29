@@ -14,103 +14,121 @@ img_src = ""
 youtube = "GcgV-AtAmkg"
 youtube_upload_date="2023-08-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/GcgV-AtAmkg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of strings `words` and a string `s`, determine if `s` is an acronym of `words`. The string `s` is considered an acronym of `words` if it can be formed by concatenating the first character of each string in `words` in order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `words` of strings and a string `s`.
+- **Example:** `For example, `words = ['orange', 'pear', 'grape']` and `s = 'opg'``
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length <= 10
+	- 1 <= s.length <= 100
+	- words[i] and s consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isAcronym(vector<string>& words, string s) {
-        string res = "";
-        for(string w: words)
-            res += w[0];
-        return s == res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if `s` is an acronym of `words`, otherwise return `false`.
+- **Example:** `For `words = ['dog', 'cat', 'fish']` and `s = 'dcf'`, the output is `true`.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the string `s` matches the concatenation of the first characters from each string in `words`.
 
-The problem requires determining if a given string `s` is an acronym formed from a list of words in `words`. An acronym is formed by concatenating the first letter of each word in the list. Given a list of words and a string `s`, we need to check if `s` matches the acronym formed by the first letter of each word in the list. The input consists of a vector of strings `words` and a string `s`, and the task is to return `true` if `s` is the acronym of the words in `words`, otherwise return `false`.
+- Initialize an empty string to store the acronym.
+- For each word in `words`, add its first character to the acronym string.
+- Compare the acronym with `s` and return `true` if they match, otherwise return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings only contain lowercase English letters.
+- The solution should work within the constraints for both the `words` array and string `s`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `words = ['orange', 'pear', 'grape']` and `s = 'opg'``  \
+  **Explanation:** The first characters of the words 'orange', 'pear', and 'grape' are 'o', 'p', and 'g', respectively. Hence, `s = 'opg'` is the acronym.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution involves creating the acronym by concatenating the first characters of the strings in `words` and comparing it with `s`.
 
-To solve this problem, we can break it down into the following steps:
-1. **Extract the First Letters**: The acronym is formed by concatenating the first letter of each word in the list `words`. Thus, the first step is to iterate through each word in the list and take the first character.
-2. **Compare with the Target String**: Once we have the acronym formed by the first letters, we simply compare it with the given string `s`. If the two strings are equal, return `true`; otherwise, return `false`.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Function Declaration
-
+### Initial Thoughts 💭
+- The task is simple: extract the first letter of each word and compare it with the given string `s`.
+- By iterating over the list of words and constructing the acronym, we can efficiently check if `s` matches.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input for `words` would not happen due to the problem constraints.
+- Ensure that the algorithm can handle the maximum input size of `words`.
+- Handle cases where `s` has fewer characters than the total number of words.
+- The solution should run efficiently within the time and space constraints for the given problem.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool isAcronym(vector<string>& words, string s) {
-```
-
-- The function `isAcronym` is defined with two parameters:
-  - `words`: a vector of strings, where each string represents a word.
-  - `s`: a string which is the acronym that we need to check.
-
-#### 2. Initialize an Empty String `res`
-
-```cpp
     string res = "";
-```
-
-- We declare a string `res` to store the acronym formed by the first letter of each word in the `words` vector.
-
-#### 3. Iterate Over the Words to Build the Acronym
-
-```cpp
     for(string w: words)
         res += w[0];
-```
-
-- We loop through each word `w` in the `words` vector.
-  - `w[0]` retrieves the first character of the word `w`.
-  - The character `w[0]` is then appended to the `res` string using the `+=` operator.
-- After this loop, `res` will contain the concatenated first letters of all words in the `words` list.
-
-#### 4. Return the Comparison Result
-
-```cpp
     return s == res;
 }
 ```
 
-- Finally, we compare the string `s` with the string `res` formed from the first letters of the words.
-  - If they are equal (`s == res`), the function returns `true`, indicating that `s` is indeed the acronym.
-  - Otherwise, it returns `false`.
+This function checks if the given string 's' is an acronym formed by the first letter of each word in the 'words' vector.
 
-#### Summary of the Code Execution
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isAcronym(vector<string>& words, string s) {
+	```
+	The function 'isAcronym' is defined, taking a vector of strings 'words' and a string 's'. It checks whether 's' is an acronym formed by the first letter of each word in 'words'.
 
-1. **Initialization**: A string `res` is initialized to an empty string to store the acronym.
-2. **Acronym Formation**: A loop iterates through the `words` vector, appending the first letter of each word to `res`.
-3. **Comparison**: The function then checks if the string `s` is equal to the formed acronym `res` and returns the result.
+2. **Variable Initialization**
+	```cpp
+	    string res = "";
+	```
+	A string variable 'res' is initialized as an empty string. This variable will store the concatenated first letters of each word in the 'words' vector.
 
-### Complexity
+3. **Loop Start**
+	```cpp
+	    for(string w: words)
+	```
+	A for loop is initiated, iterating over each word 'w' in the 'words' vector. This loop will extract the first character of each word.
 
-1. **Time Complexity**:
-   - The time complexity of this algorithm is **O(n)**, where `n` is the number of words in the `words` vector. 
-     - The loop that iterates through the vector `words` takes **O(n)** time, where each word is processed in constant time.
-     - Concatenating characters to the string `res` is a constant time operation for each word since we only append a single character at a time.
-   - The final comparison (`s == res`) also takes **O(n)** time in the worst case, where `n` is the length of the strings being compared. Since the length of `s` will be the same as the number of words in `words`, this comparison step is also linear in terms of the number of words.
+4. **Concatenate First Letter**
+	```cpp
+	        res += w[0];
+	```
+	The first character of each word 'w' is concatenated to the 'res' string, effectively forming the acronym.
 
-2. **Space Complexity**:
-   - The space complexity is **O(n)**, where `n` is the number of words in the `words` vector, because we are storing the acronym in the string `res`. The space used by `res` will be proportional to the number of words in `words`.
+5. **Return Statement**
+	```cpp
+	    return s == res;
+	```
+	The function compares the formed acronym 'res' with the input string 's'. If they are equal, it returns true; otherwise, false.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This problem is solved efficiently using a simple approach that:
-1. **Builds the Acronym**: By concatenating the first letter of each word in the `words` vector.
-2. **Compares the Acronym with the Target String**: We compare the constructed acronym (`res`) with the given string `s` to determine if they are identical.
+The time complexity is O(n), where n is the length of the `words` array.
 
-The solution runs in **O(n)** time, where `n` is the number of words in the input vector, making it efficient for large input sizes. The space complexity is also **O(n)** due to the space required to store the acronym string. This approach is optimal for the problem, offering a clear and straightforward solution using basic string operations.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), where n is the number of words, as we store the acronym string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-a-string-is-an-acronym-of-words/description/)
 

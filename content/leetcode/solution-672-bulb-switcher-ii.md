@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "wx272jQLwkA"
 youtube_upload_date="2022-12-30"
 youtube_thumbnail="https://i.ytimg.com/vi/wx272jQLwkA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,120 +28,144 @@ youtube_thumbnail="https://i.ytimg.com/vi/wx272jQLwkA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are in a room with `n` bulbs, all initially turned on. There are four buttons on the wall, each with a different functionality: flip all bulbs, flip even-numbered bulbs, flip odd-numbered bulbs, and flip bulbs with labels `j = 3k + 1`. You need to make exactly `presses` presses. For each press, you can choose any button. Return the number of distinct possible configurations of the bulbs after performing all the presses.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers `n` (the number of bulbs) and `presses` (the number of presses to make).
+- **Example:** `n = 3, presses = 1`
+- **Constraints:**
+	- 1 <= n <= 1000
+	- 0 <= presses <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int flipLights(int n, int m) {
-        if(m==0) return 1;
-        if(n==1) return 2;
-        if(n==2&&m==1) return 3;
-        if(n==2) return 4;
-        if(m==1) return 4;
-        if(m==2) return 7;
-        if(m>=3) return 8;
-        return 8;        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct possible configurations of the bulbs after performing exactly `presses` presses.
+- **Example:** `4`
+- **Constraints:**
+	- The result should be a non-negative integer.
 
-### Problem Statement:
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the number of distinct possible configurations after exactly `presses` presses.
 
-The problem asks us to determine how many distinct states a set of lights can be in after performing a sequence of operations. The operations consist of flipping one or more lights at a time, and we are given two parameters:
-- **n**: The number of lights.
-- **m**: The number of operations.
+- 1. Identify the effect of each button on the bulbs' states.
+- 2. Calculate the number of distinct configurations possible based on the combination of button presses.
+- 3. Return the number of distinct configurations as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The problem assumes that all bulbs are initially on and that presses are made sequentially.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 1, presses = 1`  \
+  **Explanation:** With one bulb and one press, the bulb can either be off (by pressing button 1) or stay on (by pressing button 2).
 
-The goal is to compute the total number of distinct states the lights can be in after performing the given number of operations. The light states can be flipped according to the following rules:
-1. Flip all the lights.
-2. Flip the odd-indexed lights.
-3. Flip the even-indexed lights.
-4. Flip exactly one light.
+- **Input:** `n = 2, presses = 1`  \
+  **Explanation:** With two bulbs and one press, the three possible configurations are [off, off], [on, off], and [off, on].
 
-### Approach:
+{{< dots >}}
+## Approach 🚀
+The solution involves simulating the effect of pressing the buttons and calculating the number of unique configurations.
 
-This problem can be broken down into analyzing the different states the lights can reach based on the number of lights `n` and the number of operations `m`. The key insight is that the number of distinct states of the lights after flipping operations depends on the number of lights and how many times we are allowed to flip them.
-
-The flipping operations on the lights can be grouped into several categories:
-- **No flip**: The lights remain in their initial state.
-- **One flip**: A single flip operation that affects all or specific lights (odd/even indexed lights).
-- **Two flips**: Multiple flips can create distinct configurations, such as flipping all lights twice, which brings the lights back to the initial state.
-
-To compute the number of distinct light configurations, we need to consider how many unique combinations of flips can result from `n` and `m`. The key observations that lead to the solution are:
-1. If no operations are performed (`m=0`), the lights stay in their initial state, so there is only one distinct state.
-2. With one flip operation, we can generate up to four distinct configurations for `n >= 2`.
-3. With two or more flip operations, the number of distinct states increases, but the upper limit is constrained by the number of lights and operations.
-
-By examining these observations, we can summarize the problem into specific cases based on `n` and `m`.
-
-### Code Breakdown (Step by Step):
-
-The code is a simple function that uses conditional statements to return the number of distinct states based on the values of `n` and `m`. Here's the breakdown of each case:
-
-#### Case 1: No Operations (`m == 0`)
+### Initial Thoughts 💭
+- Each button press can affect different bulbs, and some presses may result in the same configuration.
+- We need to calculate the number of unique bulb configurations after all presses.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs in this problem.
+- Ensure the solution can handle the maximum values of `n` and `presses` (1000 each).
+- If `presses` is 0, the configuration remains unchanged, and the result is 1.
+- Handle edge cases where `n` is very small or `presses` is 0.
+{{< dots >}}
+## Code 💻
 ```cpp
-if(m == 0) return 1;
+int flipLights(int n, int m) {
+    if(m==0) return 1;
+    if(n==1) return 2;
+    if(n==2&&m==1) return 3;
+    if(n==2) return 4;
+    if(m==1) return 4;
+    if(m==2) return 7;
+    if(m>=3) return 8;
+    return 8;        
+}
 ```
-- If no operations are performed (`m == 0`), the lights remain in their initial state, so there is only one possible configuration.
 
-#### Case 2: One Light (`n == 1`)
-```cpp
-if(n == 1) return 2;
-```
-- If there is only one light (`n == 1`), there are two possible configurations: the light can either be on or off. This means there are two distinct states.
+The `flipLights` function calculates the number of distinct light configurations that can be achieved by flipping `n` lights `m` times, based on a series of conditions.
 
-#### Case 3: Two Lights, One Operation (`n == 2 && m == 1`)
-```cpp
-if(n == 2 && m == 1) return 3;
-```
-- If there are two lights (`n == 2`) and one operation (`m == 1`), the possible configurations are:
-  1. Both lights are off.
-  2. Both lights are on.
-  3. Only one light is on (either the first or the second light).
-  This gives three distinct states.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int flipLights(int n, int m) {
+	```
+	This is the function definition for `flipLights`, which calculates the number of distinct configurations of `n` lights after `m` flips.
 
-#### Case 4: Two Lights, More than One Operation (`n == 2`)
-```cpp
-if(n == 2) return 4;
-```
-- If there are two lights (`n == 2`), regardless of how many operations are performed (`m >= 1`), there are four possible states:
-  1. Both lights are off.
-  2. Both lights are on.
-  3. Only the first light is on.
-  4. Only the second light is on.
+2. **Check if m is 0**
+	```cpp
+	    if(m==0) return 1;
+	```
+	If `m` is 0, meaning no flips are performed, the function returns 1, representing the initial configuration of the lights.
 
-#### Case 5: One Operation (`m == 1`)
-```cpp
-if(m == 1) return 4;
-```
-- If there is exactly one operation (`m == 1`), there are four distinct configurations, similar to the case for `n == 2` with multiple lights.
+3. **Check if n is 1**
+	```cpp
+	    if(n==1) return 2;
+	```
+	If there is only one light (`n == 1`), there are two possible configurations: on or off, so the function returns 2.
 
-#### Case 6: Two Operations (`m == 2`)
-```cpp
-if(m == 2) return 7;
-```
-- If there are two operations (`m == 2`), the possible configurations are expanded to seven distinct states. This is because performing two flips on a larger set of lights creates more distinct configurations, such as flipping all lights twice or flipping specific sets of lights.
+4. **Handle Case for n=2 and m=1**
+	```cpp
+	    if(n==2&&m==1) return 3;
+	```
+	If there are two lights (`n == 2`) and one flip (`m == 1`), there are three possible configurations: both off, one on and the other off, or both on, so the function returns 3.
 
-#### Case 7: Three or More Operations (`m >= 3`)
-```cpp
-if(m >= 3) return 8;
-```
-- If there are three or more operations (`m >= 3`), the number of distinct configurations stabilizes at 8. This is the maximum number of distinct configurations that can be reached with multiple flips, since flipping the lights in different combinations results in no more than 8 unique configurations.
+5. **Handle Case for n=2**
+	```cpp
+	    if(n==2) return 4;
+	```
+	If there are two lights (`n == 2`), and no other conditions are met, the function returns 4, representing all possible configurations (both off, one on, both on, and the reverse order of the previous configuration).
 
-### Complexity:
+6. **Handle Case for m=1**
+	```cpp
+	    if(m==1) return 4;
+	```
+	If there is only one flip (`m == 1`), and no other conditions are met, the function returns 4, representing the configurations after one flip.
 
-#### Time Complexity:
-- **O(1)**: The time complexity of the function is constant because the solution is based purely on conditional checks. It does not involve any loops or recursion, and it simply returns the number of distinct configurations based on the values of `n` and `m`.
+7. **Handle Case for m=2**
+	```cpp
+	    if(m==2) return 7;
+	```
+	If there are exactly two flips (`m == 2`), the function returns 7, representing the distinct light configurations that can be achieved with two flips.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because no additional space is used that grows with the input size. The function only uses a few variables for the conditional checks, so the space complexity is O(1).
+8. **Handle Case for m>=3**
+	```cpp
+	    if(m>=3) return 8;
+	```
+	If there are three or more flips (`m >= 3`), the function returns 8, representing all possible configurations of the lights.
 
-### Conclusion:
+9. **Return Default Case**
+	```cpp
+	    return 8;        
+	```
+	If none of the above conditions are met, return 8 as the default case, representing all possible configurations.
 
-This solution is efficient with constant time and space complexity. The number of distinct light configurations is determined based on a few simple rules about how flips affect the state of the lights. The approach is optimal for this problem, as it avoids unnecessary calculations and directly returns the result based on the values of `n` and `m`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * presses)
+- **Average Case:** O(n * presses)
+- **Worst Case:** O(n * presses)
 
-By examining different scenarios (such as the number of lights and the number of operations), we conclude that the maximum number of distinct light configurations for a set of lights is 8, which occurs when there are 3 or more operations. This solution is both simple and effective for solving the problem within the given constraints.
+The time complexity is based on simulating each press, which can involve looping through `n` bulbs for each of the `presses`.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to storing the states of the bulbs.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/bulb-switcher-ii/description/)
 

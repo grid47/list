@@ -14,116 +14,177 @@ img_src = ""
 youtube = "iu8AnEQH4U8"
 youtube_upload_date="2024-05-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/iu8AnEQH4U8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `word` of length `n`, and an integer `k` such that `k` divides `n`. In one operation, you can pick any two indices `i` and `j`, both divisible by `k`, and swap the substrings starting from `i` and `j`, each of length `k`. The goal is to transform `word` into a `k`-periodic string, meaning that the string can be represented as multiple concatenations of a substring of length `k`. Your task is to determine the minimum number of operations required to make the string `k`-periodic.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `word` and an integer `k`.
+- **Example:** `Example 1:
+Input: word = "abcdefabcdef", k = 3
+Output: 1`
+- **Constraints:**
+	- 1 <= n == word.length <= 10^5
+	- 1 <= k <= word.length
+	- k divides word.length.
+	- word consists only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumOperationsToMakeKPeriodic(string s, int k) {
-        
-        int n = s.size();
-        map<string, int> mp;
-        
-        for(int i = 0; i < n / k; i++) {
-            mp[s.substr(i * k, k)]++;
-        }
-        
-        int lg = 0, net = 0;
-        for(auto it: mp) {
-            lg = max(lg, it.second);
-            net += it.second;
-        }
-        
-        return net - lg;
-        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to make the word `k`-periodic.
+- **Example:** `Example 1:
+Input: word = "abcdefabcdef", k = 3
+Output: 1`
+- **Constraints:**
+	- The result must be an integer representing the minimum number of operations.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to make the word `k`-periodic with the fewest number of substring swaps.
+
+- For each block of size `k` in the string, group the substrings and count how many times each substring appears.
+- The fewer the number of unique substrings in the blocks, the fewer the swaps needed to make the word periodic.
+- To minimize the operations, swap the most frequent substrings to align the other blocks.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string consists only of lowercase English letters.
+- The value of k divides the length of the string.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** In the word 'abcdefabcdef' with k=3, there are two substrings 'abc' and 'def'. Since they repeat, we need just one operation to make the word periodic by swapping the second 'abc' with the first 'def'.
+
+- **Input:** `Example 2:`  \
+  **Explanation:** In the word 'aabbccaabbcc' with k=2, there are three unique substrings: 'aa', 'bb', and 'cc'. We need to swap substrings to make them align, requiring 3 operations.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to count the frequency of substrings of length k and minimize the number of operations required to make the string k-periodic.
+
+### Initial Thoughts 💭
+- The solution involves counting the frequency of each substring and minimizing the operations based on these frequencies.
+- A greedy approach could help by choosing the most frequent substrings to minimize the number of swaps.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the length of the word is at least 1.
+- The solution must efficiently handle inputs where the length of the word is up to 100,000.
+- Ensure that the solution works when there are multiple unique substrings or when all substrings are the same.
+- Ensure that k divides the length of the word.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumOperationsToMakeKPeriodic(string s, int k) {
+    
+    int n = s.size();
+    map<string, int> mp;
+    
+    for(int i = 0; i < n / k; i++) {
+        mp[s.substr(i * k, k)]++;
     }
-};
-{{< /highlight >}}
----
+    
+    int lg = 0, net = 0;
+    for(auto it: mp) {
+        lg = max(lg, it.second);
+        net += it.second;
+    }
+    
+    return net - lg;
+    
+}
+```
 
-### Problem Statement
+This function calculates the minimum number of operations required to make a string `s` periodic with period `k`. It does so by counting the occurrences of substrings of length `k` and finding the most frequent substring to minimize the operations.
 
-The problem asks us to determine the minimum number of operations required to make a string **k-periodic**. A string is said to be **k-periodic** if it consists of the same substring of length `k` repeated multiple times. For example, if the string is `"ababab"`, it is 2-periodic because `"ab"` repeats three times.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumOperationsToMakeKPeriodic(string s, int k) {
+	```
+	Defines the function `minimumOperationsToMakeKPeriodic`, which takes a string `s` and an integer `k` to determine the minimum number of operations required to make the string periodic with period `k`.
 
-Given a string `s` of length `n` and an integer `k`, the goal is to determine how many operations are required to change characters in `s` such that `s` becomes `k-periodic`. An operation consists of changing a single character in the string.
+2. **Variable Initialization**
+	```cpp
+	    int n = s.size();
+	```
+	Initializes `n` to the length of the string `s` to help in determining the range for substring operations.
 
-### Approach
+3. **Map Initialization**
+	```cpp
+	    map<string, int> mp;
+	```
+	Initializes a map `mp` to store substrings of length `k` as keys and their corresponding frequency as values.
 
-The main goal is to make the string consist of repeated blocks of size `k`. We can achieve this by analyzing the string in blocks of `k` characters and then modifying the blocks to make them all identical. The minimal number of changes will be determined by how frequently each substring of length `k` appears and how we can choose the most frequent substring as the base for the repetition.
+4. **Loop Structure**
+	```cpp
+	    for(int i = 0; i < n / k; i++) {
+	```
+	Starts a loop that iterates through the string `s`, dividing it into segments of length `k`.
 
-The solution can be broken down into the following steps:
+5. **Map Update**
+	```cpp
+	        mp[s.substr(i * k, k)]++;
+	```
+	For each substring of length `k` starting at index `i * k`, it updates the frequency count in the map `mp`.
 
-1. **Dividing the String into Substrings of Length `k`**:
-   We divide the string into substrings of length `k` (for example, if `k = 3`, divide the string into chunks like `s[0:3]`, `s[3:6]`, etc.).
+6. **Variable Initialization**
+	```cpp
+	    
+	```
+	The next block of code initializes variables for calculating the final result.
 
-2. **Counting the Frequency of Each Substring**:
-   We use a hashmap to count how many times each substring of length `k` appears. This helps us identify which substring appears most frequently.
+7. **Variable Initialization**
+	```cpp
+	    int lg = 0, net = 0;
+	```
+	Initializes two integer variables: `lg` to store the largest frequency of any substring, and `net` to store the total number of substrings.
 
-3. **Calculating the Number of Changes**:
-   The optimal strategy to make the string `k-periodic` is to convert all substrings to the one that appears most frequently. Thus, the minimum number of changes will be the total number of substrings minus the frequency of the most frequent substring.
+8. **Iteration Over Map**
+	```cpp
+	    for(auto it: mp) {
+	```
+	Starts a loop to iterate through the map `mp`, which contains the frequencies of substrings.
 
-4. **Returning the Result**:
-   Finally, the number of operations required is calculated as the difference between the total number of substrings and the number of times the most frequent substring appears.
+9. **Max Frequency Update**
+	```cpp
+	        lg = max(lg, it.second);
+	```
+	Updates `lg` with the maximum frequency of any substring in the map.
 
-### Code Breakdown (Step by Step)
+10. **Net Frequency Update**
+	```cpp
+	        net += it.second;
+	```
+	Adds the frequency of the current substring to the total count `net`.
 
-1. **Initial Setup**:
-   We first initialize the size of the string `n` and a hashmap `mp` to store the frequency of each substring of length `k`.
-   
-   ```cpp
-   int n = s.size();
-   map<string, int> mp;
-   ```
+11. **Return Statement**
+	```cpp
+	    return net - lg;
+	```
+	Returns the result of `net - lg`, which represents the minimum number of operations needed to make the string periodic.
 
-2. **Dividing the String into Substrings and Counting Frequencies**:
-   We loop through the string in steps of `k`, extracting substrings of length `k` and counting their frequencies in the map `mp`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-   for(int i = 0; i < n / k; i++) {
-       mp[s.substr(i * k, k)]++;
-   }
-   ```
+The time complexity is linear, where n is the length of the word, since we iterate over the string and process substrings of length k.
 
-   Here, `s.substr(i * k, k)` extracts the substring starting from index `i * k` of length `k`. The frequency of each substring is incremented in the map.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n/k)
 
-3. **Finding the Maximum Frequency**:
-   We now find the most frequent substring by iterating through the map. `lg` stores the highest frequency, while `net` keeps the total number of substrings.
+The space complexity is linear in terms of the number of distinct substrings of length k, which is O(n/k).
 
-   ```cpp
-   int lg = 0, net = 0;
-   for(auto it: mp) {
-       lg = max(lg, it.second);
-       net += it.second;
-   }
-   ```
+**Happy Coding! 🎉**
 
-   Here, `lg` is updated with the maximum frequency, and `net` is the sum of all frequencies (i.e., the total number of substrings).
-
-4. **Calculating the Result**:
-   The minimum number of operations is the total number of substrings (`net`) minus the number of substrings that are already the most frequent (`lg`).
-
-   ```cpp
-   return net - lg;
-   ```
-
-   This is the final step where the result is returned.
-
-### Complexity
-
-#### Time Complexity:
-- **O(n/k)**, where `n` is the length of the string `s`. We iterate through the string in chunks of size `k` to extract substrings. The number of iterations is `n/k`, and for each iteration, extracting the substring and updating the map takes constant time (since we are working with substrings of fixed length `k`).
-
-#### Space Complexity:
-- **O(n/k)**, where `n` is the length of the string `s`. The space complexity arises from the map `mp` that stores the frequency of each substring of length `k`. In the worst case, there could be `n/k` unique substrings, so the map would require space proportional to `n/k`.
-
-### Conclusion
-
-This solution efficiently computes the minimum number of operations required to make the string `k-periodic`. By breaking the string into substrings of length `k` and counting the frequency of each substring, the problem is reduced to finding the most frequent substring and calculating how many changes are needed to make all substrings identical to the most frequent one. The time complexity of the solution is linear in terms of the size of the string, and the space complexity is proportional to the number of unique substrings, making this approach both time and space efficient.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-make-word-k-periodic/description/)
 

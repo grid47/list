@@ -14,108 +14,145 @@ img_src = ""
 youtube = "RRmSKRsT9tg"
 youtube_upload_date="2022-08-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/RRmSKRsT9tg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `blocks` consisting of the characters 'W' and 'B', where 'W' represents a white block and 'B' represents a black block. You are also given an integer `k` representing the desired length of consecutive black blocks. You can recolor white blocks to black in one operation. The task is to determine the minimum number of operations required to ensure there is at least one occurrence of `k` consecutive black blocks.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `blocks` of length `n`, containing characters 'W' and 'B'. You are also given an integer `k` which is the desired number of consecutive black blocks.
+- **Example:** `blocks = 'BBWWBWBW', k = 4`
+- **Constraints:**
+	- 1 <= blocks.length <= 100
+	- blocks[i] is either 'W' or 'B'.
+	- 1 <= k <= blocks.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to ensure there is at least one occurrence of `k` consecutive black blocks.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of operations required to change some white blocks to black in order to have at least one sequence of `k` consecutive black blocks.
+
+- 1. Traverse through the string `blocks` and count the number of black blocks in each sliding window of length `k`.
+- 2. For each window, calculate the number of white blocks (W) and track the minimum number of changes required.
+- 3. Return the minimum number of recoloring operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `blocks` will consist only of the characters 'W' and 'B'.
+- The integer `k` is valid and will not exceed the length of the input string.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: blocks = 'BBWWBWBW', k = 4`  \
+  **Explanation:** Here, the desired sequence is 4 consecutive black blocks. The minimum number of operations required to achieve this is 2, as we can change the 3rd and 6th blocks to 'B'.
+
+- **Input:** `Input: blocks = 'WBBWWBB', k = 3`  \
+  **Explanation:** In this case, the sequence already contains 3 consecutive black blocks, so no operations are needed. The result is 0.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we can use a sliding window technique to calculate the number of black blocks in each window of size `k`. For each window, we count the number of white blocks and track the minimum count across all possible windows.
+
+### Initial Thoughts 💭
+- The problem asks for the minimum recoloring operations, so we should focus on finding the windows with the most black blocks already present.
+- By using a sliding window of size `k`, we can efficiently calculate the number of black blocks in each segment and determine the minimum changes required.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string `blocks` will never be empty.
+- The input string can be as large as 100 characters, so the algorithm should handle this efficiently.
+- If the string already contains `k` consecutive black blocks, no operations are needed.
+- Ensure that `k` is always less than or equal to the length of the input string.
+{{< dots >}}
+## Code 💻
+```cpp
 int minimumRecolors(string blocks, int k) {
-    int b = 0, mb = 0;
-    for (int i = 0; i < blocks.size(); ++i) {
-        b += blocks[i] == 'B';
-        if (i >= k)
-            b -= blocks[i - k] == 'B';
-        mb = max(b, mb);
-    }
-    return k - mb;
+int b = 0, mb = 0;
+for (int i = 0; i < blocks.size(); ++i) {
+    b += blocks[i] == 'B';
+    if (i >= k)
+        b -= blocks[i - k] == 'B';
+    mb = max(b, mb);
 }
-};
-{{< /highlight >}}
----
+return k - mb;
+}
+```
 
-### Problem Statement
+This function calculates the minimum number of recolors needed in a substring of length `k` in the string `blocks` to make all characters either 'B' or 'W'. It uses a sliding window approach to efficiently compute the result.
 
-The problem requires us to determine the minimum number of recolors (changes from `'B'` to `'W'`) needed to make a contiguous subarray of length `k` in the given string `blocks` consist only of `'W'`. The string `blocks` contains characters `'B'` and `'W'`, where:
-- `'B'` represents a black block, and
-- `'W'` represents a white block.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumRecolors(string blocks, int k) {
+	```
+	Defines the function `minimumRecolors` that accepts a string `blocks` representing a sequence of 'B' and 'W' and an integer `k` representing the length of the window. The function returns the minimum number of recolors needed in any substring of length `k` to make it all 'B'.
 
-The task is to find the contiguous subarray of length `k` that contains the maximum number of `'B'` blocks and then return the difference between `k` and the count of `'B'` blocks in that subarray. This difference represents the minimum number of recolors required to turn that subarray into all `'W'`.
+2. **Variable Initialization**
+	```cpp
+	int b = 0, mb = 0;
+	```
+	Initializes two integer variables: `b` to count the number of 'B's in the current window, and `mb` to store the maximum number of 'B's in any valid window of size `k` encountered so far.
 
-### Approach
+3. **Loop Start**
+	```cpp
+	for (int i = 0; i < blocks.size(); ++i) {
+	```
+	Starts a for loop to iterate over each character in the string `blocks`. This loop will examine each position to update the count of 'B's in the current window.
 
-To solve this problem efficiently, we can use the **sliding window technique**. The key idea is to keep track of the number of `'B'` blocks in a sliding window of size `k` and then determine the minimum number of recolors required to make that window all `'W'`.
+4. **Count 'B's**
+	```cpp
+	    b += blocks[i] == 'B';
+	```
+	Increments the counter `b` each time a 'B' is encountered at the current position `i`.
 
-Here is the step-by-step breakdown of the approach:
+5. **Window Size Check**
+	```cpp
+	    if (i >= k)
+	```
+	Checks if the current index `i` has reached or exceeded the window size `k`. This is to ensure that the sliding window approach begins to remove elements as it moves forward.
 
-1. **Sliding Window**: The goal is to check every possible contiguous subarray of size `k` in the given string `blocks`. As we move the window, we can update the count of `'B'` blocks by removing the effect of the block that is left behind and adding the effect of the new block that enters the window.
-2. **Count the `'B'` Blocks**: For each window of size `k`, count how many `'B'` blocks are present. Since we need the smallest number of recolors, we want to find the window that has the fewest `'B'` blocks, and thus the minimum recolors required will be `k - (number of 'B's in that window)`.
-3. **Sliding Window Efficiency**: By maintaining a running count of `'B'` blocks in the current window, we can move the window one block at a time in constant time. This makes the algorithm efficient, with a time complexity of **O(n)**, where `n` is the length of the string `blocks`.
-4. **Return the Result**: Once we have determined the maximum number of `'B'` blocks in any window of size `k`, the result is simply `k - mb`, where `mb` is the maximum number of `'B'` blocks found in any window of size `k`.
+6. **Adjust Window**
+	```cpp
+	        b -= blocks[i - k] == 'B';
+	```
+	If the window has moved past `k`, subtracts the count of 'B' at the position `i - k` (the element that is no longer in the window).
 
-### Code Breakdown (Step by Step)
+7. **Update Max 'B' Count**
+	```cpp
+	    mb = max(b, mb);
+	```
+	Updates the maximum count of 'B's found in any window of size `k` so far by comparing the current count `b` with `mb`.
 
-1. **Class Definition**:
-    ```cpp
-    class Solution {
-    public:
-        int minimumRecolors(string blocks, int k) {
-    ```
-    The method `minimumRecolors` is defined within the `Solution` class. This method takes two parameters: a string `blocks` representing the blocks of color, and an integer `k` representing the length of the contiguous subarray we are considering.
+8. **Return Result**
+	```cpp
+	return k - mb;
+	```
+	Returns the minimum number of recolors required by subtracting the maximum number of 'B's found in any valid window (`mb`) from the total window size `k`. The result represents the number of 'W's that need to be recolored to 'B'.
 
-2. **Initialize Variables**:
-    ```cpp
-        int b = 0, mb = 0;
-    ```
-    - `b`: This variable keeps track of the number of `'B'` blocks in the current sliding window of size `k`.
-    - `mb`: This variable stores the maximum number of `'B'` blocks found in any sliding window of size `k`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-3. **Sliding Window Loop**:
-    ```cpp
-        for (int i = 0; i < blocks.size(); ++i) {
-            b += blocks[i] == 'B';  // Add 1 if the current block is 'B'
-    ```
-    - The loop iterates over each index `i` of the string `blocks`. For each index, it checks if the block is `'B'`. If so, it increments the count `b` by 1.
+The time complexity is O(n) as we only pass through the string once, adjusting the sliding window as we go.
 
-4. **Adjust Window Size**:
-    ```cpp
-            if (i >= k)
-                b -= blocks[i - k] == 'B';  // Remove the effect of the block that is sliding out of the window
-    ```
-    - When `i >= k`, the window has reached its full size of `k`. To maintain the sliding window, we subtract the effect of the block that is sliding out of the window (i.e., the block at index `i - k`). If this block is `'B'`, we decrement `b` by 1.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-5. **Update Maximum 'B' Count**:
-    ```cpp
-            mb = max(b, mb);  // Update the maximum 'B' count in any window
-    ```
-    - After adjusting the window, we check if the current window has more `'B'` blocks than the previously recorded maximum (`mb`). If so, we update `mb`.
+The space complexity is O(1) because we only need a fixed amount of space for counting and the sliding window.
 
-6. **Return Result**:
-    ```cpp
-        return k - mb;  // Return the minimum number of recolors required
-    }
-    ```
-    - Finally, we return `k - mb`, which represents the minimum number of recolors needed to make the window with the maximum `'B'` count into a window of all `'W'` blocks.
+**Happy Coding! 🎉**
 
-### Complexity
-
-1. **Time Complexity**:
-    - The time complexity of this solution is **O(n)**, where `n` is the length of the string `blocks`. The loop iterates over the entire string once, and within each iteration, only constant-time operations (comparison and updating variables) are performed. This makes the time complexity linear with respect to the size of the input string.
-
-2. **Space Complexity**:
-    - The space complexity of the solution is **O(1)**. We only use a few integer variables (`b`, `mb`) to keep track of the number of `'B'` blocks in the current window and the maximum number of `'B'` blocks found in any window. Therefore, the space used by the algorithm is constant.
-
-### Conclusion
-
-This solution efficiently calculates the minimum number of recolors required to make a contiguous subarray of length `k` in the string `blocks` consist of only `'W'`. By utilizing the sliding window technique, the algorithm maintains a running count of the number of `'B'` blocks in the current window and updates the result in constant time as it moves through the string.
-
-The time complexity of **O(n)** ensures that the solution works efficiently even for larger input sizes, making it suitable for competitive programming and real-world applications. Additionally, the constant space complexity ensures that the solution is memory-efficient, which is important when working with large inputs.
-
-This approach is a great example of how sliding windows can be used to optimize problems that involve finding a subset or subarray with specific properties, such as the number of `'B'` blocks in this case. The simplicity and elegance of this solution make it both easy to understand and implement, while also offering optimal performance.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-recolors-to-get-k-consecutive-black-blocks/description/)
 

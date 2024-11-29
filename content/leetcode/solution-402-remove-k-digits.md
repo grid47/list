@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "cFabMOnJaq0"
 youtube_upload_date="2022-02-18"
 youtube_thumbnail="https://i.ytimg.com/vi/cFabMOnJaq0/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,156 +28,213 @@ youtube_thumbnail="https://i.ytimg.com/vi/cFabMOnJaq0/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string num representing a non-negative integer and an integer k, remove k digits from num such that the remaining number is the smallest possible integer.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string num representing a non-negative integer and an integer k.
+- **Example:** `For num = "35241" and k = 2, the output should be "241".`
+- **Constraints:**
+	- 1 <= k <= num.length <= 10^5
+	- num consists of only digits.
+	- num does not contain leading zeros except for the zero itself.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string removeKdigits(string num, int k) {
-        string ans = "";
-        int n = num.size();
-        if(num.size() <= k) return "0";
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest number possible after removing k digits.
+- **Example:** `For num = "100005" and k = 3, the output should be "5".`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove k digits from num such that the remaining number is as small as possible.
+
+- 1. Initialize an empty stack to hold the digits of the resulting number.
+- 2. Iterate through the digits of num, comparing each digit with the top of the stack.
+- 3. If the current digit is smaller than the stack's top, pop digits from the stack until the current digit is no longer smaller or k removals are reached.
+- 4. After processing all digits, if any removals are left, pop the remaining digits from the stack.
+- 5. Convert the stack into the final number, ensuring no leading zeros remain.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always valid and the given k is not greater than the length of num.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For num = "35241" and k = 2, remove the digits '3' and '5' to get "241".`  \
+  **Explanation:** Removing digits from left to right ensures that we minimize the number by removing larger digits first.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a stack to keep track of the digits of the smallest number as we iterate through the string and remove digits as needed.
+
+### Initial Thoughts 💭
+- The problem requires finding the smallest number by removing digits in an optimal way.
+- We need to compare the current digit with the top of the stack and remove digits when necessary to form the smallest number.
+{{< dots >}}
+### Edge Cases 🌐
+- For large inputs, ensure the algorithm handles up to 10^5 digits efficiently.
+- If the entire number is removed (k equals the length of num), return "0".
+- Ensure no leading zeros in the final result, unless the result is zero itself.
+{{< dots >}}
+## Code 💻
+```cpp
+string removeKdigits(string num, int k) {
+    string ans = "";
+    int n = num.size();
+    if(num.size() <= k) return "0";
+    
+    for(char c : num) {
         
-        for(char c : num) {
-            
-            while(!ans.empty() && (ans.back() > c) && k) {
-                ans.pop_back();
-                k--;
-            }
-            
-            if(!ans.empty() || c != '0') {
-                ans.push_back(c);
-            }
-            
-        }
-        while(!ans.empty() && k--)
+        while(!ans.empty() && (ans.back() > c) && k) {
             ans.pop_back();
-        if (ans.empty()) return "0";
-        while (!ans.empty()) {
-            num[n - 1] = ans.back();
-            ans.pop_back(), n--;
+            k--;
         }
-        return num.substr(n);
+        
+        if(!ans.empty() || c != '0') {
+            ans.push_back(c);
+        }
         
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires removing `k` digits from a given string `num` (representing a non-negative integer) to create the smallest possible number. The number must not have leading zeros, and if removing `k` digits results in an empty string, the result should be "0". The task is to return this smallest number after the removal.
-
-### Approach
-
-To solve this problem, we need to efficiently remove `k` digits to minimize the number. A greedy approach is best suited for this task. Here's a step-by-step breakdown of the approach:
-
-1. **Iterate through the digits**:
-   We want to traverse the digits of the string `num` one by one and decide whether to include each digit in the final answer or remove it. The goal is to always keep the smallest possible digits in the answer by removing larger digits when needed.
-
-2. **Use a stack for digits**:
-   To efficiently determine which digits to keep, we can use a stack (represented by the string `ans` here). The stack will hold the digits in the current order, but we will pop larger digits from it when we encounter a smaller digit, since the smaller digit can potentially lead to a smaller number.
-
-3. **Ensure k digits are removed**:
-   We will perform this removal while ensuring exactly `k` digits are removed. After processing all the digits, if there are still any remaining digits to be removed (i.e., if `k > 0`), we can simply remove digits from the end of the stack.
-
-4. **Handle leading zeros**:
-   The problem explicitly asks for no leading zeros in the final result. To address this, we only push non-zero digits to the stack, unless the stack is empty.
-
-5. **Return the result**:
-   After processing all digits, if the stack is empty (i.e., all digits were removed), we return "0". Otherwise, the remaining digits in the stack represent the smallest possible number. The string is then formatted by trimming any remaining leading zeros.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Handle Edge Case
-
-```cpp
-if(num.size() <= k) return "0";
-```
-
-- If the length of the input string `num` is less than or equal to `k`, this means we would remove all digits, so the result should be "0".
-
-#### Step 2: Initialize Variables
-
-```cpp
-string ans = "";
-int n = num.size();
-```
-
-- `ans` is a string used as a stack to hold the digits of the final answer.
-- `n` stores the size of the input string `num`.
-
-#### Step 3: Traverse the Digits and Build the Answer
-
-```cpp
-for(char c : num) {
-    while(!ans.empty() && (ans.back() > c) && k) {
+    while(!ans.empty() && k--)
         ans.pop_back();
-        k--;
+    if (ans.empty()) return "0";
+    while (!ans.empty()) {
+        num[n - 1] = ans.back();
+        ans.pop_back(), n--;
     }
-    if(!ans.empty() || c != '0') {
-        ans.push_back(c);
-    }
+    return num.substr(n);
+    
 }
 ```
 
-- **Main loop**: We iterate over each digit `c` in the string `num`.
-- **Greedy removal**: The `while` loop checks if the last digit in the stack is larger than the current digit (`ans.back() > c`) and if we still have digits left to remove (`k`). If both conditions are true, we remove the last digit from the stack and decrement `k` by 1.
-- **Avoid leading zeros**: We only push the current digit `c` to the stack if it’s not leading zeros (`c != '0'`), except when the stack is empty, in which case leading zeros can be safely ignored.
+This function removes `k` digits from the string `num` to make the resulting number the smallest possible. It uses a stack (`ans`) to track the digits, popping elements to ensure the result is minimal. Finally, the remaining digits are arranged in the result string.
 
-#### Step 4: Remove Extra Digits (If Necessary)
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string removeKdigits(string num, int k) {
+	```
+	Define the function `removeKdigits`, which takes a string `num` and an integer `k` to remove `k` digits from `num` to form the smallest possible number.
 
-```cpp
-while(!ans.empty() && k--)
-    ans.pop_back();
-```
+2. **Variable Initialization**
+	```cpp
+	    string ans = "";
+	```
+	Initialize an empty string `ans` to store the digits of the result as we process each character from `num`.
 
-- After iterating through all the digits in `num`, if there are still digits left to remove (`k > 0`), we continue removing digits from the end of the stack.
+3. **Variable Initialization**
+	```cpp
+	    int n = num.size();
+	```
+	Store the length of the input string `num` in the variable `n`.
 
-#### Step 5: Handle the Case of an Empty Stack
+4. **Edge Case Handling**
+	```cpp
+	    if(num.size() <= k) return "0";
+	```
+	Handle the edge case where the length of `num` is less than or equal to `k`. In this case, removing all digits leaves no number, so return "0".
 
-```cpp
-if (ans.empty()) return "0";
-```
+5. **For Loop**
+	```cpp
+	    for(char c : num) {
+	```
+	Start a `for` loop to iterate over each character `c` in the string `num`.
 
-- If the stack is empty (i.e., we have removed all digits), we return "0" because the final number is zero.
+6. **Stack Manipulation**
+	```cpp
+	        while(!ans.empty() && (ans.back() > c) && k) {
+	```
+	Use a `while` loop to pop elements from the stack `ans` if the last element in `ans` is greater than the current character `c` and there are still digits left to remove (`k` > 0).
 
-#### Step 6: Construct the Final Answer
+7. **Stack Pop Operation**
+	```cpp
+	            ans.pop_back();
+	```
+	Pop the top element from the stack `ans` to remove a larger digit and decrease `k`.
 
-```cpp
-while (!ans.empty()) {
-    num[n - 1] = ans.back();
-    ans.pop_back(), n--;
-}
-```
+8. **Variable Decrement**
+	```cpp
+	            k--;
+	```
+	Decrement the counter `k` after removing a digit.
 
-- We then construct the final result by filling the string `num` with the digits from the stack `ans` in reverse order. This step is used to convert the stack to a string representation of the smallest possible number.
+9. **While Loop End**
+	```cpp
+	        }
+	```
+	End of the `while` loop that removes digits from the stack `ans`.
 
-#### Step 7: Return the Final Answer
+10. **Push Operation**
+	```cpp
+	        if(!ans.empty() || c != '0') {
+	```
+	Check if the stack is not empty or if the current character `c` is not '0'. This ensures that leading zeros are not added to the result.
 
-```cpp
-return num.substr(n);
-```
+11. **Stack Push Operation**
+	```cpp
+	            ans.push_back(c);
+	```
+	Push the current character `c` to the stack `ans`.
 
-- Finally, we return the substring of `num` starting from index `n` to remove any unused portion of the string, ensuring the result is correctly formatted.
+12. **While Loop**
+	```cpp
+	    while(!ans.empty() && k--)
+	```
+	After processing all characters, if there are still digits left to remove, pop elements from the stack until `k` reaches zero.
 
-### Complexity
+13. **Stack Pop Operation**
+	```cpp
+	        ans.pop_back();
+	```
+	Pop the top element from the stack `ans` to remove any remaining digits.
 
-#### Time Complexity:
+14. **Edge Case Handling**
+	```cpp
+	    if (ans.empty()) return "0";
+	```
+	If the stack is empty after removing digits, return "0" as the result, indicating no digits are left.
 
-- The algorithm processes each digit in the input string exactly once. Each digit is pushed to or popped from the stack at most once, leading to a total time complexity of **O(n)**, where `n` is the length of the input string `num`.
+15. **While Loop**
+	```cpp
+	    while (!ans.empty()) {
+	```
+	Use a `while` loop to process the digits stored in the stack and build the final result.
 
-#### Space Complexity:
+16. **Result Construction**
+	```cpp
+	        num[n - 1] = ans.back();
+	```
+	Assign the top element of the stack `ans` to the last position in the string `num`.
 
-- The space complexity is determined by the storage required for the stack (`ans`), which can hold up to `n` digits in the worst case. Therefore, the space complexity is **O(n)**.
+17. **Stack Pop Operation**
+	```cpp
+	        ans.pop_back(), n--;
+	```
+	Pop the top element from the stack and decrement `n` to move to the next position in the result.
 
-### Conclusion
+18. **Return Result**
+	```cpp
+	    return num.substr(n);
+	```
+	Return the substring of `num` starting from the position `n`, which contains the final smallest number.
 
-The provided solution effectively solves the problem of removing `k` digits to form the smallest possible number using a greedy approach with a stack. The algorithm efficiently removes digits and ensures the smallest number by always keeping the smallest available digits. It also handles edge cases like leading zeros and situations where `k` is greater than or equal to the length of the number.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This approach has a time complexity of **O(n)**, making it efficient for even large inputs. The use of a stack allows the algorithm to perform the necessary operations efficiently, ensuring that we can easily construct the desired smallest number. 
+The time complexity is O(n) because we process each digit at most once.
 
-In summary, the solution is both time-efficient and space-efficient, handling all possible edge cases and providing the correct result in optimal time.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the use of a stack to store the digits.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-k-digits/description/)
 

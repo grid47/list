@@ -14,139 +14,142 @@ img_src = ""
 youtube = "yTpRd3yvyz0"
 youtube_upload_date="2023-01-07"
 youtube_thumbnail="https://i.ytimg.com/vi/yTpRd3yvyz0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed circular array of strings `words` and a target string `target`. A circular array means that the last element connects to the first one. For any index `i`, the next element is `words[(i + 1) % n]` and the previous element is `words[(i - 1 + n) % n]`, where `n` is the length of the array. Starting at `startIndex`, you can move to either the next or previous word with one step at a time. Your goal is to find the minimum distance needed to reach the `target` string from the starting index. If `target` does not exist in the array, return `-1`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a circular string array `words` and a string `target`.
+- **Example:** `words = ["good", "morning", "world", "good"], target = "good", startIndex = 2`
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length <= 100
+	- words[i] and target consist of only lowercase English letters
+	- 0 <= startIndex < words.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int closetTarget(vector<string>& words, string target, int s) {
-        int n = words.size(), ans = INT_MAX;
-        
-        for(int i = 0; i < n; i++) 
-            if(words[i] == target) 
-                ans = min(ans, min(abs(s - i), abs(n - abs(s - i)))); 
-        
-        return ans == INT_MAX ? -1 : ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum distance to reach the target string, or -1 if the target is not found in the array.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- If the target does not exist in words, return -1.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to compute the shortest possible distance to the target string in the circular array starting from the given index.
 
-The task is to find the shortest distance from a given starting position `s` to a target word in a circular list of words. Given an array of words, a target word, and a starting index `s`, the goal is to find the minimum number of steps needed to reach the target word by either moving forward or backward in the list.
+- Iterate over the words array to find all indices where the target exists.
+- Calculate the distance from the startIndex to each of these indices.
+- Compute the shortest circular distance by considering both left and right movements.
+- Return the minimum distance, or -1 if the target is not found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The words array is non-empty and the target is always a lowercase string.
+- The input startIndex is always a valid index.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ["good", "morning", "world", "good"], target = "good", startIndex = 2`  \
+  **Explanation:** Starting from index 2, the closest 'good' can be found at index 3 by moving 1 step to the left, or at index 0 by moving 3 steps to the right. The shortest distance is 1.
 
-### Approach
+- **Input:** `words = ["apple", "banana", "cherry"], target = "banana", startIndex = 0`  \
+  **Explanation:** The target 'banana' is directly at index 1, so the shortest distance is 1.
 
-This problem can be visualized as a circular array, where after reaching the last element, you can wrap around and start from the first element again. The key idea here is to calculate the distance in both directions: moving forward and moving backward, and then select the smaller distance.
+{{< dots >}}
+## Approach 🚀
+The goal is to compute the minimum distance to the target string in the circular words array starting from the given index.
 
-1. **Iterate through the list of words**: 
-   - We will iterate through the list of words and check for occurrences of the target word. For each occurrence, we will calculate the distance from the current starting position `s` to that occurrence.
-   
-2. **Calculate both forward and backward distances**:
-   - The distance from the starting index `s` to a word at index `i` can be calculated in two ways:
-     - **Forward Distance**: This is the direct distance from `s` to `i`, which is `abs(s - i)`.
-     - **Backward Distance**: Since the list is circular, if moving forward goes beyond the end of the list, we can loop back to the start. The backward distance is calculated as `abs(n - abs(s - i))`, where `n` is the total number of words in the list.
-
-3. **Find the minimum distance**:
-   - For each occurrence of the target word, compute the distance in both directions and keep track of the minimum distance.
-   
-4. **Return the result**:
-   - If the target word is found in the list, return the minimum distance calculated. Otherwise, return `-1` indicating that the target word is not present in the list.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
+### Initial Thoughts 💭
+- The array is circular, which means that the distances should be calculated modulo the array size.
+- We can calculate distances by moving both left and right from the start index.
+- The key challenge is efficiently calculating the minimum distance in a circular array.
+{{< dots >}}
+### Edge Cases 🌐
+- The words array is non-empty by definition.
+- Handle cases where the words array is at its maximum length (100).
+- If the target string does not exist, return -1.
+- Ensure the startIndex is within the bounds of the array.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = words.size(), ans = INT_MAX;
-```
-- `n`: The size of the list `words` (i.e., the number of words in the circular list).
-- `ans`: This variable will store the minimum distance found. It is initialized to `INT_MAX` to ensure that any valid distance found will be smaller than this initial value.
-
-#### Step 2: Iterate through the Words Array
-```cpp
-for(int i = 0; i < n; i++)
-    if(words[i] == target)
-        ans = min(ans, min(abs(s - i), abs(n - abs(s - i))));
-```
-- We loop through the array `words` using a for-loop. For each word, we check if it matches the `target` word. If it does:
-  - We calculate the **forward distance** as `abs(s - i)`, where `s` is the starting index and `i` is the current index of the target word.
-  - We calculate the **backward distance** as `abs(n - abs(s - i))`, which ensures that the backward traversal takes into account the circular nature of the list.
-  - The minimum of these two distances is then taken using the `min()` function, and `ans` is updated with the smaller value.
-
-#### Step 3: Return the Result
-```cpp
-return ans == INT_MAX ? -1 : ans;
-```
-- After iterating through all the words, if no target word was found (`ans` is still `INT_MAX`), we return `-1` to indicate that the target does not exist in the list.
-- If the target word is found, the value of `ans` will contain the minimum distance, and we return that value.
-
-### Example Walkthrough
-
-#### Example 1:
-**Input**:
-```cpp
-vector<string> words = {"hello", "world", "target", "end"};
-string target = "target";
-int s = 1;
+int closetTarget(vector<string>& words, string target, int s) {
+    int n = words.size(), ans = INT_MAX;
+    
+    for(int i = 0; i < n; i++) 
+        if(words[i] == target) 
+            ans = min(ans, min(abs(s - i), abs(n - abs(s - i)))); 
+    
+    return ans == INT_MAX ? -1 : ans;
+}
 ```
 
-**Execution**:
-- We iterate over the list `words`:
-  - For `i = 0`, the word is "hello", which doesn't match the target.
-  - For `i = 1`, the word is "world", which doesn't match the target.
-  - For `i = 2`, the word is "target", which matches the target.
-    - Forward distance: `abs(1 - 2) = 1`.
-    - Backward distance: `abs(4 - abs(1 - 2)) = abs(4 - 1) = 3`.
-    - The minimum distance is `min(1, 3) = 1`.
-  - For `i = 3`, the word is "end", which doesn't match the target.
-- The result is `1`, as the target word is at index 2, which is 1 step away from the starting index 1.
+This function calculates the minimum distance to the target word from a starting index in a circular manner.
 
-**Output**:
-```cpp
-1
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int closetTarget(vector<string>& words, string target, int s) {
+	```
+	Define the function `closetTarget`, which takes a vector of words, a target string, and a starting index `s`.
 
-#### Example 2:
-**Input**:
-```cpp
-vector<string> words = {"hello", "world", "target", "end"};
-string target = "notfound";
-int s = 1;
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = words.size(), ans = INT_MAX;
+	```
+	Initialize the variable `n` to store the size of the words vector, and `ans` to store the minimum distance, initially set to the maximum integer value.
 
-**Execution**:
-- We iterate over the list `words`:
-  - For `i = 0`, the word is "hello", which doesn't match the target.
-  - For `i = 1`, the word is "world", which doesn't match the target.
-  - For `i = 2`, the word is "target", which doesn't match the target.
-  - For `i = 3`, the word is "end", which doesn't match the target.
-- The target word is not found in the list.
+3. **Loop**
+	```cpp
+	    
+	```
+	This space is for the loop that will iterate over the words array.
 
-**Output**:
-```cpp
--1
-```
+4. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < n; i++) 
+	```
+	A loop that iterates over each word in the `words` vector.
 
-### Complexity Analysis
+5. **Conditional Check**
+	```cpp
+	        if(words[i] == target) 
+	```
+	Check if the current word matches the target word.
 
-#### Time Complexity:
-- **Iterating over the words**: We loop over the list of words, which has a length of `n`. Thus, the time complexity for this loop is \(O(n)\).
-- **For each word, calculating distances**: The `abs()` function and the `min()` function both take constant time \(O(1)\).
-- **Overall Time Complexity**: The time complexity is \(O(n)\), where `n` is the number of words in the list.
+6. **Distance Calculation**
+	```cpp
+	            ans = min(ans, min(abs(s - i), abs(n - abs(s - i)))); 
+	```
+	Calculate the minimum of the current distance and the circular distance between the current index `i` and the starting index `s`, and update the result `ans`.
 
-#### Space Complexity:
-- **No additional space used**: We only use a few variables to store the result and intermediate calculations.
-- **Overall Space Complexity**: The space complexity is \(O(1)\), since we are using a constant amount of extra space.
+7. **Return Statement**
+	```cpp
+	    return ans == INT_MAX ? -1 : ans;
+	```
+	Return the minimum distance if a target word was found, otherwise return -1.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the number of words in the array.
+- **Average Case:** O(n) where n is the number of words in the array.
+- **Worst Case:** O(n) where n is the number of words in the array.
 
-This approach efficiently solves the problem of finding the shortest distance to a target word in a circular list by utilizing basic arithmetic operations. The key insight is using the circular nature of the list and calculating both forward and backward distances. The solution works in linear time \(O(n)\) and constant space \(O(1)\), making it highly efficient for large inputs.
+We iterate over the array to find the target and compute distances.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant because we only store a few variables during computation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/description/)
 

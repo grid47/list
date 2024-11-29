@@ -14,149 +14,228 @@ img_src = ""
 youtube = "3geaHSLu4PA"
 youtube_upload_date="2021-01-24"
 youtube_thumbnail="https://i.ytimg.com/vi/3geaHSLu4PA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D matrix of size `m x n`, consisting of non-negative integers. You are also given an integer `k`. The value of coordinate `(a, b)` in the matrix is the XOR of all the values from `matrix[0][0]` to `matrix[a][b]` (inclusive), where `0 <= a < m` and `0 <= b < n` (0-indexed). Your task is to find the `k`th largest value (1-indexed) among all the XOR values of matrix coordinates.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D matrix and an integer `k`.
+- **Example:** `Input: matrix = [[1, 3], [5, 7]], k = 2`
+- **Constraints:**
+	- 1 <= m, n <= 1000
+	- 0 <= matrix[i][j] <= 10^6
+	- 1 <= k <= m * n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int kthLargestValue(vector<vector<int>>& mtx, int k) {
-        int m = mtx.size(), n = mtx[0].size();
-        for(int i = 0; i < m; i++) {
-        for(int j = 1; j < n; j++) {
-            mtx[i][j] = mtx[i][j-1]^mtx[i][j];}
-        }
-        for(int i = 0; i < n; i++) {
-            for(int j = 1; j < m; j++) {
-                mtx[j][i] = mtx[j -1][i]^mtx[j][i]; }
-        }
-        
-        priority_queue<int, vector<int>, greater<int>> pq;
-        
-        for(int i = 0; i < m; i++) {
-            for(int j= 0; j < n; j++) {
-                if(pq.size() < k) {
-                    pq.push(mtx[i][j]); }
-        else {
-            
-            if(pq.top() < mtx[i][j]) {
-                pq.pop();
-                pq.push(mtx[i][j]);
-            }
-            
-            }
-                }
-            }
-        
-        return pq.top();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the `k`th largest value among all the XOR values of the coordinates in the matrix.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The value of `k` will always be valid for the given matrix.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the XOR of all coordinates in the matrix, store these values, and then return the `k`th largest value.
+
+- 1. For each row, calculate the XOR of all the elements up to that point (left to right).
+- 2. For each column, calculate the XOR of all the elements up to that point (top to bottom).
+- 3. Store all the XOR values in a list.
+- 4. Use a priority queue to find the `k`th largest value in the list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input matrix will always have at least one row and column.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: matrix = [[1, 3], [5, 7]], k = 2`  \
+  **Explanation:** The XOR values of all coordinates are: [1, 2, 7, 5]. The 2nd largest value is 7.
+
+- **Input:** `Input: matrix = [[1, 2, 3], [4, 5, 6]], k = 3`  \
+  **Explanation:** The XOR values of all coordinates are: [1, 3, 0, 4, 1, 7]. The 3rd largest value is 4.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves calculating the XOR of each matrix coordinate, then sorting these values to find the `k`th largest value.
+
+### Initial Thoughts 💭
+- The XOR operation combines elements in a way that is sensitive to the order of operations, so we need to compute the values step by step.
+- The XOR values are dependent on both the row and column, and we must consider both dimensions while calculating.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will always have at least one row and one column.
+- Ensure the solution handles the largest possible matrix sizes efficiently.
+- Consider cases where all matrix values are the same or the XOR results in repeating values.
+- The algorithm must handle matrices with dimensions up to 1000 x 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+int kthLargestValue(vector<vector<int>>& mtx, int k) {
+    int m = mtx.size(), n = mtx[0].size();
+    for(int i = 0; i < m; i++) {
+    for(int j = 1; j < n; j++) {
+        mtx[i][j] = mtx[i][j-1]^mtx[i][j];}
+    }
+    for(int i = 0; i < n; i++) {
+        for(int j = 1; j < m; j++) {
+            mtx[j][i] = mtx[j -1][i]^mtx[j][i]; }
     }
     
+    priority_queue<int, vector<int>, greater<int>> pq;
+    
+    for(int i = 0; i < m; i++) {
+        for(int j= 0; j < n; j++) {
+            if(pq.size() < k) {
+                pq.push(mtx[i][j]); }
+    else {
+        
+        if(pq.top() < mtx[i][j]) {
+            pq.pop();
+            pq.push(mtx[i][j]);
+        }
+        
+        }
+            }
+        }
+    
+    return pq.top();
+}
 
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+```
 
-The problem involves finding the k-th largest value in a 2D matrix after applying specific transformations. The transformation requires each element of the matrix to be replaced with the XOR of its corresponding row and column prefix values. The k-th largest value is then to be determined from the transformed matrix.
+This function calculates the kth largest value from a matrix using XOR-based prefix sums. It uses a priority queue (min-heap) to maintain the largest k values and returns the smallest value among those k values.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int kthLargestValue(vector<vector<int>>& mtx, int k) {
+	```
+	This is the function declaration for `kthLargestValue`, which takes a matrix `mtx` and an integer `k` as input, returning the kth largest value from the matrix.
 
-To solve the problem, the approach can be broken down into several key steps:
+2. **Variable Initialization**
+	```cpp
+	    int m = mtx.size(), n = mtx[0].size();
+	```
+	Here, the dimensions of the matrix `mtx` are stored in variables `m` (number of rows) and `n` (number of columns).
 
-1. **Transformation of the Matrix**: We need to modify the matrix such that each element at position `(i, j)` is the XOR of all elements in its row from the start to column `j` and all elements in its column from the start to row `i`.
+3. **Loop Start**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	This loop starts iterating through each row of the matrix.
 
-2. **Utilizing a Min-Heap**: To efficiently track the k largest values in the transformed matrix, we can use a min-heap (priority queue). This will allow us to maintain only the k largest values encountered during our traversal of the matrix.
+4. **Loop Start**
+	```cpp
+	    for(int j = 1; j < n; j++) {
+	```
+	This nested loop iterates through each column of the current row, starting from the second column.
 
-3. **Iterate and Update**: By iterating through the matrix after transformation, we will either add a new value to the heap or replace the smallest value in the heap if the current value is larger.
+5. **XOR Operation**
+	```cpp
+	        mtx[i][j] = mtx[i][j-1]^mtx[i][j];}
+	```
+	This line performs an XOR operation on the current element and the previous element in the row, updating the matrix with the result. It builds a running XOR prefix sum along each row.
 
-4. **Return the k-th Largest Value**: Finally, after processing the entire matrix, the top element of the min-heap will represent the k-th largest value.
+6. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This loop starts iterating through each column of the matrix.
 
-### Code Breakdown (Step by Step)
+7. **Loop Start**
+	```cpp
+	        for(int j = 1; j < m; j++) {
+	```
+	This nested loop iterates through each row of the current column, starting from the second row.
 
-Let's go through the code to understand each component in detail:
+8. **XOR Operation**
+	```cpp
+	            mtx[j][i] = mtx[j -1][i]^mtx[j][i]; }
+	```
+	This line performs an XOR operation on the current element and the previous element in the column, updating the matrix with the result. It builds a running XOR prefix sum along each column.
 
-1. **Class and Function Definition**: The `Solution` class contains the method `kthLargestValue`, which will be the entry point for our solution.
+9. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<int, vector<int>, greater<int>> pq;
+	```
+	This line declares a priority queue (min-heap) `pq` that will store integers and always keep the smallest value at the top.
 
-   ```cpp
-   class Solution {
-   public:
-       int kthLargestValue(vector<vector<int>>& mtx, int k) {
-   ```
+10. **Loop Start**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	This loop starts iterating through each row of the matrix to process the elements.
 
-2. **Matrix Dimensions**: We determine the dimensions of the matrix (number of rows `m` and number of columns `n`).
+11. **Loop Start**
+	```cpp
+	        for(int j= 0; j < n; j++) {
+	```
+	This nested loop iterates through each column in the current row.
 
-   ```cpp
-           int m = mtx.size(), n = mtx[0].size();
-   ```
+12. **Condition Check**
+	```cpp
+	            if(pq.size() < k) {
+	```
+	This condition checks if the priority queue contains fewer than `k` elements.
 
-3. **Transforming the Matrix (Row-wise)**: The first nested loop applies the XOR transformation on each row. Each element at `(i, j)` is replaced by the XOR of itself and the preceding element in the same row.
+13. **Queue Operation**
+	```cpp
+	                pq.push(mtx[i][j]); }
+	```
+	If the queue has fewer than `k` elements, the current matrix element is pushed into the priority queue.
 
-   ```cpp
-           for(int i = 0; i < m; i++) {
-               for(int j = 1; j < n; j++) {
-                   mtx[i][j] = mtx[i][j-1]^mtx[i][j];
-               }
-           }
-   ```
+14. **Else Block**
+	```cpp
+	    else {
+	```
+	If the queue already contains `k` elements, the program enters the `else` block to potentially replace the smallest element.
 
-4. **Transforming the Matrix (Column-wise)**: The second nested loop applies the XOR transformation on each column. Each element at `(j, i)` is replaced by the XOR of itself and the preceding element in the same column.
+15. **Condition Check**
+	```cpp
+	        if(pq.top() < mtx[i][j]) {
+	```
+	This condition checks if the smallest element in the queue is smaller than the current matrix element.
 
-   ```cpp
-           for(int i = 0; i < n; i++) {
-               for(int j = 1; j < m; j++) {
-                   mtx[j][i] = mtx[j -1][i]^mtx[j][i];
-               }
-           }
-   ```
+16. **Queue Operation**
+	```cpp
+	            pq.pop();
+	```
+	If the smallest element in the queue is smaller than the current element, it is removed from the queue.
 
-5. **Using a Min-Heap**: A min-heap (priority queue) is initialized to keep track of the k largest values. The type of the priority queue is defined as `greater<int>`, ensuring that the smallest element is at the top.
+17. **Queue Operation**
+	```cpp
+	            pq.push(mtx[i][j]);
+	```
+	The current matrix element is pushed into the queue.
 
-   ```cpp
-           priority_queue<int, vector<int>, greater<int>> pq;
-   ```
+18. **Return**
+	```cpp
+	    return pq.top();
+	```
+	This returns the top element of the priority queue, which is the kth largest element in the matrix.
 
-6. **Iterating through the Matrix**: We traverse the transformed matrix to populate the min-heap.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where `m` and `n` are the dimensions of the matrix.
+- **Average Case:** O(m * n log(m * n)), due to sorting or using a priority queue.
+- **Worst Case:** O(m * n log(m * n)), as we need to compute XOR for every coordinate and then find the `k`th largest value.
 
-   ```cpp
-           for(int i = 0; i < m; i++) {
-               for(int j= 0; j < n; j++) {
-                   if(pq.size() < k) {
-                       pq.push(mtx[i][j]);
-                   } else {
-                       if(pq.top() < mtx[i][j]) {
-                           pq.pop();
-                           pq.push(mtx[i][j]);
-                       }
-                   }
-               }
-           }
-   ```
+The time complexity is dominated by the computation of XOR values and the retrieval of the `k`th largest value.
 
-   - If the size of the heap is less than `k`, we push the current value onto the heap.
-   - If the heap already contains `k` elements, we check if the current value is greater than the smallest value in the heap. If it is, we replace the smallest value.
+### Space Complexity 💾
+- **Best Case:** O(m * n), as we need to store all the XOR values.
+- **Worst Case:** O(m * n), since we store the XOR values of all coordinates.
 
-7. **Returning the Result**: After all values are processed, we return the top value of the heap, which will be the k-th largest.
+The space complexity is proportional to the number of coordinates in the matrix.
 
-   ```cpp
-           return pq.top();
-       }
-   };
-   ```
+**Happy Coding! 🎉**
 
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \(O(m \times n + k \log k)\), where \(m\) and \(n\) are the dimensions of the matrix. The first part accounts for the time taken to transform the matrix, and the second part accounts for the time taken to maintain the min-heap.
-
-- **Space Complexity**: The space complexity is \(O(k)\) due to the storage of up to `k` elements in the min-heap.
-
-### Conclusion
-
-The solution efficiently determines the k-th largest value from a transformed 2D matrix by applying XOR operations and utilizing a min-heap for optimal performance. By processing the matrix in a systematic manner and leveraging data structures like priority queues, this approach provides a clear and effective solution to the problem. The method is both time-efficient and straightforward, making it suitable for competitive programming and practical applications in data analysis involving matrices. This algorithm exemplifies the power of combining mathematical transformations with efficient data structures to tackle complex problems in an elegant manner.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/description/)
 

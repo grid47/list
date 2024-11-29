@@ -14,177 +14,192 @@ img_src = ""
 youtube = "kLUgZzUKEK0"
 youtube_upload_date="2020-10-30"
 youtube_thumbnail="https://i.ytimg.com/vi/kLUgZzUKEK0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a set of stones placed on a 2D plane at various integer coordinate points. A stone can be removed if it shares the same row or column as another stone that has not been removed yet. Your task is to determine the maximum number of stones that can be removed from the plane by performing valid operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of stones, where each stone is represented by a pair of integers [xi, yi] indicating its coordinates on the 2D plane.
+- **Example:** `Input: stones = [[1, 2], [2, 3], [3, 4], [4, 5]]`
+- **Constraints:**
+	- 1 <= stones.length <= 1000
+	- 0 <= xi, yi <= 10^4
+	- No two stones have the same coordinates.
 
-{{< highlight cpp >}}
-class UF {
-public:
-    vector<int> chd;
-    int cnt;
-    
-    UF(int n) {
-        chd.resize(n, 0);
-        for(int i = 0; i < n; i++)
-            chd[i] = i;
-        cnt = n;
-    }
-    
-    bool uni(int x, int y) {
-        int i = find(x);
-        int j = find(y);
-        if(i != j) {
-            chd[i] = j;
-            cnt--;
-            return true;
-        } else return false;
-    }
-    
-    int find(int x) {
-        if(x == chd[x]) return x;
-        return chd[x] = find(chd[x]);
-    }
-};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of stones that can be removed by performing the valid operations as described.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result will always be a non-negative integer.
 
-class Solution {
-public:
-    int removeStones(vector<vector<int>>& stones) {
-        int n = stones.size();
-        UF* uf = new UF(n);
-        map<int, int> x, y;
-        for(int i = 0; i < n; i++) {
-            int p = stones[i][0];
-            int q = stones[i][1];
-            if(x.count(p)) {
-                uf->uni(x[p], i);
-            }
-            if(y.count(q)) {
-                uf->uni(y[q], i);
-            }
-            x[p] = i;
-            y[q] = i;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the maximum number of stones that can be removed from the plane by simulating the process of removal based on the given constraints.
+
+- 1. Use a union-find (disjoint-set) data structure to track connected stones in the same row or column.
+- 2. For each stone, check if it shares a row or column with any other stone that is still present on the plane.
+- 3. Union the stones that are in the same row or column, and count how many stones are connected.
+- 4. The maximum number of removable stones is the total number of stones minus the number of connected components (isolated stones).
+{{< dots >}}
+### Problem Assumptions ✅
+- All stones are placed at distinct positions.
+- The stones can be removed in any valid sequence where a stone shares a row or column with another stone.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: stones = [[0, 0], [0, 1], [1, 0], [1, 2], [2, 1], [2, 2]]`  \
+  **Explanation:** In this example, the maximum number of stones that can be removed is 5. The stones can be removed as follows: [2, 2] -> [2, 1] -> [1, 2] -> [1, 0] -> [0, 1]. The stone at [0, 0] cannot be removed because it does not share a row or column with any remaining stones.
+
+- **Input:** `Input: stones = [[0, 0], [0, 2], [1, 1], [2, 0], [2, 2]]`  \
+  **Explanation:** In this case, the maximum number of stones that can be removed is 3. The stones can be removed as follows: [2, 2] -> [2, 0] -> [0, 2]. The stones at [0, 0] and [1, 1] cannot be removed because they do not share rows or columns with any other stones.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a union-find data structure to group stones that share a row or column. The number of connected components determines the maximum number of stones that can be removed.
+
+### Initial Thoughts 💭
+- The problem can be modeled as a graph where stones are nodes, and edges exist between stones in the same row or column.
+- The union-find data structure can efficiently track the connected stones.
+- The core idea is to group stones that can be removed together and count how many isolated stones are left.
+{{< dots >}}
+### Edge Cases 🌐
+- If no stones are provided, the result is 0.
+- For large inputs with up to 1000 stones, ensure the union-find data structure performs efficiently.
+- If there is only one stone, no stones can be removed.
+- Ensure the union-find operations handle the maximum constraints of 1000 stones efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int removeStones(vector<vector<int>>& stones) {
+    int n = stones.size();
+    UF* uf = new UF(n);
+    map<int, int> x, y;
+    for(int i = 0; i < n; i++) {
+        int p = stones[i][0];
+        int q = stones[i][1];
+        if(x.count(p)) {
+            uf->uni(x[p], i);
         }
-        return n - uf->cnt;
+        if(y.count(q)) {
+            uf->uni(y[q], i);
+        }
+        x[p] = i;
+        y[q] = i;
     }
-};
-{{< /highlight >}}
----
+    return n - uf->cnt;
+}
+```
 
-### Problem Statement
+This function calculates the maximum number of stones that can be removed from the board, where each stone is represented by a pair of coordinates. It uses a union-find (disjoint-set) data structure to group stones that are connected either by the same x or y coordinates. The function returns the number of stones that can be removed, which is the total number of stones minus the number of distinct connected groups.
 
-The problem is to determine the maximum number of stones that can be removed from a grid, given that stones are positioned at specific coordinates. The removal condition is that two stones can be removed if they lie on the same row or the same column. The goal is to find the maximum number of stones that can be removed, leaving only the minimum number of stones behind.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int removeStones(vector<vector<int>>& stones) {
+	```
+	The function `removeStones` takes a 2D vector `stones` containing the coordinates of stones and returns an integer value representing the maximum number of stones that can be removed.
 
-### Approach
+2. **Size Calculation**
+	```cpp
+	    int n = stones.size();
+	```
+	Store the number of stones (the size of the `stones` vector) in the variable `n`.
 
-To solve this problem, we can model the situation as a graph where each stone is a node. There will be an edge between two stones if they share the same row or column. The problem then becomes one of finding connected components in this graph. Stones within the same connected component can all be removed, since they are either directly or indirectly connected through shared rows or columns.
+3. **Union-Find Initialization**
+	```cpp
+	    UF* uf = new UF(n);
+	```
+	Initialize a new Union-Find (disjoint-set) data structure to keep track of the connected components. `uf` will help manage the union and find operations for the stones.
 
-We can use the **Union-Find (UF)** data structure to efficiently handle the connected components. The steps involved are as follows:
+4. **Mapping Initialization**
+	```cpp
+	    map<int, int> x, y;
+	```
+	Create two maps `x` and `y` to store the indices of the last stone placed at each unique x and y coordinate.
 
-1. **Initialization**:
-   - For each stone, we associate it with its coordinates. Stones in the same row or column will be linked by a union operation.
+5. **Main Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop that iterates through all the stones (each stone is represented by its coordinates).
 
-2. **Union-Find Data Structure**:
-   - We will use the Union-Find data structure to group stones that can be connected through their rows and columns. The idea is that if two stones share the same row or column, they belong to the same connected component.
+6. **Extract Coordinates**
+	```cpp
+	        int p = stones[i][0];
+	```
+	Extract the x-coordinate `p` of the current stone.
 
-3. **Mapping Stones by Row and Column**:
-   - We create maps to track the most recent stone in each row and column. If a stone shares the same row or column with an already seen stone, we will perform a union operation between them, ensuring they are in the same connected component.
+7. **Extract Coordinates**
+	```cpp
+	        int q = stones[i][1];
+	```
+	Extract the y-coordinate `q` of the current stone.
 
-4. **Counting Components**:
-   - After processing all the stones, the number of connected components will be the number of stones that cannot be removed (i.e., the minimum stones left). The maximum number of stones that can be removed will be the total number of stones minus the number of connected components.
+8. **Union by X Coordinate**
+	```cpp
+	        if(x.count(p)) {
+	```
+	If a stone with the same x-coordinate `p` has been encountered before, union the current stone with the previous stone using their indices.
 
-### Code Breakdown (Step by Step)
+9. **Union Operation**
+	```cpp
+	            uf->uni(x[p], i);
+	```
+	Perform the union operation between the stone at index `x[p]` (the last stone at the same x-coordinate) and the current stone at index `i`.
 
-1. **Union-Find Class**:
-   ```cpp
-   class UF {
-   public:
-       vector<int> chd;
-       int cnt;
-   
-       UF(int n) {
-           chd.resize(n, 0);
-           for(int i = 0; i < n; i++)
-               chd[i] = i;
-           cnt = n;
-       }
-   
-       bool uni(int x, int y) {
-           int i = find(x);
-           int j = find(y);
-           if(i != j) {
-               chd[i] = j;
-               cnt--;
-               return true;
-           } else return false;
-       }
-   
-       int find(int x) {
-           if(x == chd[x]) return x;
-           return chd[x] = find(chd[x]);
-       }
-   };
-   ```
-   - This `UF` class manages the Union-Find data structure, with methods for finding the root of a node (`find`) and uniting two nodes (`uni`). The `cnt` variable tracks the number of connected components.
+10. **Union by Y Coordinate**
+	```cpp
+	        if(y.count(q)) {
+	```
+	If a stone with the same y-coordinate `q` has been encountered before, union the current stone with the previous stone using their indices.
 
-2. **Solution Class and the `removeStones` Function**:
-   ```cpp
-   class Solution {
-   public:
-       int removeStones(vector<vector<int>>& stones) {
-           int n = stones.size();
-           UF* uf = new UF(n);  // Initialize Union-Find with n stones
-           map<int, int> x, y;  // Maps to track the last stone in each row and column
-           
-           // Process each stone
-           for(int i = 0; i < n; i++) {
-               int p = stones[i][0];
-               int q = stones[i][1];
-               
-               // Union stones in the same row
-               if(x.count(p)) {
-                   uf->uni(x[p], i);
-               }
-               // Union stones in the same column
-               if(y.count(q)) {
-                   uf->uni(y[q], i);
-               }
-               
-               // Update the row and column mappings
-               x[p] = i;
-               y[q] = i;
-           }
-           
-           // The number of stones that cannot be removed is the number of components
-           return n - uf->cnt;  // The result is total stones minus the number of components
-       }
-   };
-   ```
-   - **Union and Mapping**:
-     - For each stone at position `(p, q)`, we check if there is a previously seen stone in the same row `p` or column `q`. If there is, we union the current stone with the previously seen stone, effectively marking them as part of the same connected component.
-   
-   - **Tracking Components**:
-     - The `x` and `y` maps help track the last seen stone for each row and column. If a stone shares a row or column with a previously processed stone, we perform the union operation to ensure they are part of the same component.
-   
-   - **Result Calculation**:
-     - The total number of stones minus the number of connected components (`uf->cnt`) gives the maximum number of stones that can be removed.
+11. **Union Operation**
+	```cpp
+	            uf->uni(y[q], i);
+	```
+	Perform the union operation between the stone at index `y[q]` (the last stone at the same y-coordinate) and the current stone at index `i`.
 
-### Complexity
+12. **Update Maps**
+	```cpp
+	        x[p] = i;
+	```
+	Update the map `x` to store the current stone's index for its x-coordinate `p`.
 
-1. **Time Complexity**:
-   - **Union-Find Operations**: The `find` and `union` operations take almost constant time due to path compression and union by rank. These operations are effectively O(α(n)), where α is the inverse Ackermann function, which grows very slowly.
-   - **Loop Over Stones**: We process each stone once, and for each stone, we perform constant-time operations (checking and updating the maps, performing union operations).
-   - Overall, the time complexity is O(n), where `n` is the number of stones.
+13. **Update Maps**
+	```cpp
+	        y[q] = i;
+	```
+	Update the map `y` to store the current stone's index for its y-coordinate `q`.
 
-2. **Space Complexity**:
-   - The space complexity is O(n) for storing the Union-Find data structure and the `x` and `y` maps.
+14. **Return Result**
+	```cpp
+	    return n - uf->cnt;
+	```
+	Return the number of stones that can be removed. This is calculated as the total number of stones minus the number of connected components (`uf->cnt`).
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n α(n))
+- **Worst Case:** O(n α(n))
 
-This solution efficiently solves the problem by modeling it as a graph problem and using the Union-Find data structure to handle connected components. By uniting stones that are in the same row or column, the algorithm effectively determines the number of connected components, and from that, computes the maximum number of stones that can be removed. The Union-Find operations ensure that the solution runs efficiently, even for large input sizes.
+The time complexity is O(n α(n)) where α(n) is the inverse Ackermann function, which grows very slowly.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the union-find structure and tracking stone coordinates.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/)
 

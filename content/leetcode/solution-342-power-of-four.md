@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "qEYZPwnlM0U"
 youtube_upload_date="2023-10-23"
 youtube_thumbnail="https://i.ytimg.com/vi/qEYZPwnlM0U/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,104 +28,97 @@ youtube_thumbnail="https://i.ytimg.com/vi/qEYZPwnlM0U/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer n, return true if it is a power of four. Otherwise, return false. An integer n is a power of four if there exists an integer x such that n == 4^x.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer n.
+- **Example:** `n = 64`
+- **Constraints:**
+	- -2^31 <= n <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPowerOfFour(int num) {
-        return num > 0 && (num & (num - 1)) == 0 && (num - 1) % 3 == 0;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean value indicating whether n is a power of four.
+- **Example:** `true`
+- **Constraints:**
+	- The result is true if n is a power of four, otherwise false.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if n is a power of four using efficient conditions.
 
-In this problem, we're asked to check if a given number `num` is a power of four. A number is considered a power of four if it can be expressed as `4^x` where `x` is a non-negative integer. Essentially, we need to determine if there exists an integer `x` such that `num == 4^x`.
+- Check if the number is greater than 0.
+- Ensure that the number is a power of 2 by using the bitwise AND operation.
+- Ensure that the number minus one is divisible by 3.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input integer n is within the valid range of 32-bit signed integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 64`  \
+  **Explanation:** 64 is a power of four, as 64 = 4^3.
 
-#### Example:
-- `16` is a power of four because it can be expressed as `4^2`.
-- `5` is **not** a power of four because no such integer `x` exists where `4^x == 5`.
+- **Input:** `n = 12`  \
+  **Explanation:** 12 is not a power of four, so the result is false.
 
----
+- **Input:** `n = 1`  \
+  **Explanation:** 1 is a power of four, as 4^0 = 1.
 
-### 🧠 Approach
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves using bitwise operations to check if the number is a power of four.
 
-We can solve this problem efficiently by leveraging two key properties of numbers:
-
-1. **Power of Two Property**:
-   - A power of four is always a power of two. This means that if a number is a power of four, it will have exactly one `1` bit set in its binary representation.
-   - You can check if a number is a power of two using the condition `num & (num - 1) == 0`, which works because numbers that are powers of two have only one `1` bit.
-
-2. **Divisibility by Three**:
-   - When you subtract 1 from a power of four, the result is always divisible by 3. For example:
-     - `4^1 = 4`, and `4 - 1 = 3`, which is divisible by 3.
-     - `4^2 = 16`, and `16 - 1 = 15`, which is divisible by 3.
-     - `4^3 = 64`, and `64 - 1 = 63`, which is divisible by 3.
-   - So, if `num - 1` is divisible by 3, it's a good indicator that `num` is a power of four.
-
-By combining these properties, we can check if a number is a power of four in a very efficient manner!
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s walk through the code that implements this solution:
-
+### Initial Thoughts 💭
+- A number is a power of four if it is greater than 0 and if only one bit is set to 1 in its binary representation.
+- We can use bitwise AND to check if a number is a power of two and verify divisibility by 3 for powers of four.
+{{< dots >}}
+### Edge Cases 🌐
+- If n is less than or equal to zero, it cannot be a power of four.
+- Large inputs within the valid range should be handled without overflow or errors.
+- The edge case where n = 1 should return true as 4^0 = 1.
+- The solution must run in constant time, O(1).
+{{< dots >}}
+## Code 💻
 ```cpp
 bool isPowerOfFour(int num) {
     return num > 0 && (num & (num - 1)) == 0 && (num - 1) % 3 == 0;
 }
 ```
 
-#### Step 1: Check if `num` is positive
-```cpp
-num > 0
-```
-- We first check if `num` is greater than zero. Powers of four are always positive, so if `num` is non-positive, we immediately return `false`.
+This function checks if a given integer `num` is a power of four. It first ensures the number is positive, then it checks if it is a power of two (using a bitwise AND), and finally verifies if it is a power of four by checking if `num - 1` is divisible by 3.
 
-#### Step 2: Check if `num` is a power of two
-```cpp
-(num & (num - 1)) == 0
-```
-- This bitwise operation checks if `num` is a power of two. It works because numbers that are powers of two have only one `1` bit in their binary representation.
-- For example, `16` (which is `10000` in binary) and `8` (which is `1000` in binary) will satisfy this condition because subtracting `1` from these numbers flips all the bits to the right of the highest `1` bit, leaving no common bits.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isPowerOfFour(int num) {
+	```
+	This is the function declaration. It takes an integer `num` and returns a boolean value indicating whether `num` is a power of four.
 
-#### Step 3: Check if `num - 1` is divisible by 3
-```cpp
-(num - 1) % 3 == 0
-```
-- This checks if the number `num - 1` is divisible by 3. As we mentioned earlier, subtracting 1 from a power of four always results in a number that is divisible by 3.
+2. **Return Statement**
+	```cpp
+	    return num > 0 && (num & (num - 1)) == 0 && (num - 1) % 3 == 0;
+	```
+	The return statement checks three conditions: first, that `num` is positive, second, that `num` is a power of two (by using the bitwise AND operation), and third, that `num - 1` is divisible by 3, ensuring that it is a power of four.
 
-#### Final Return Value:
-- The function will return `true` if all three conditions are satisfied:
-  1. `num` is positive.
-  2. `num` is a power of two.
-  3. `num - 1` is divisible by 3.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
----
+The time complexity is constant because the solution involves only bitwise operations.
 
-### 📈 Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Time Complexity:
-- **O(1)**: The function only performs a few simple operations—each of which runs in constant time. So, the overall time complexity is constant.
+The space complexity is constant because only a few variables are used.
 
-#### Space Complexity:
-- **O(1)**: We only use a few variables and a constant amount of space to perform the checks, so the space complexity is constant as well.
+**Happy Coding! 🎉**
 
----
-
-### 🏁 Conclusion
-
-We’ve successfully solved the problem using an efficient approach based on bitwise operations and modular arithmetic. Here’s a recap:
-
-#### Key Points:
-- **Power of Two**: A power of four is always a power of two. We can check if a number is a power of two using a simple bitwise operation.
-- **Divisibility by Three**: The difference between any power of four and one is divisible by 3, which helps us identify powers of four specifically.
-- **Efficiency**: The solution works in constant time and uses constant space, making it optimal.
-
-By mastering this approach, you'll be able to quickly determine if a number is a power of four—perfect for performance-critical applications or coding interviews! Keep practicing and improving your problem-solving skills! 💪🚀
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/power-of-four/description/)
 

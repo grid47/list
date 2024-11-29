@@ -14,81 +14,74 @@ img_src = ""
 youtube = "_al08ON26RA"
 youtube_upload_date="2023-07-09"
 youtube_thumbnail="https://i.ytimg.com/vi/_al08ON26RA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array nums of integers and a target value, find the maximum number of jumps needed to reach the last index. A jump from index i to index j is valid if j > i and the difference nums[j] - nums[i] lies within the range [-target, target]. If it is impossible to reach the last index, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums of size n and an integer target.
+- **Example:** `Input: nums = [2, 5, 9, 6, 2, 3], target = 3`
+- **Constraints:**
+	- 2 <= nums.length == n <= 1000
+	- -10^9 <= nums[i] <= 10^9
+	- 0 <= target <= 2 * 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    int target, n;
-    vector<int> memo, nums;
-    
-    int dp(int idx) {
-        
-        if(idx == n - 1) return 0;
-        
-        if(memo[idx] != INT_MIN) return memo[idx];
-        
-        int ans = INT_MIN;
-        for(int i = idx + 1; i < n; i++) {
-            if(abs(nums[i] - nums[idx]) <= target) {
-                ans = max(ans, dp(i) + 1);
-            }
-        }
-        // cout << idx << " " << ans << "\n";
-        return memo[idx] = ans;
-    }
-    
-    int maximumJumps(vector<int>& nums, int target) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum number of jumps to reach the last index, or -1 if it is not possible.
+- **Example:** `Output: 2 for nums = [2, 5, 9, 6, 2, 3], target = 3`
+- **Constraints:**
+	- Output should be -1 if no valid jumping sequence exists.
 
-        n = nums.size();
-        this->target = target;
-        this->nums = nums;
-        memo.resize(n, INT_MIN);
-        int ans = dp(0);
-        return ans <= 0? -1: ans;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the maximum number of valid jumps to reach the last index of nums.
 
-    }
-};
-{{< /highlight >}}
----
+- Use dynamic programming to calculate the maximum jumps starting from index 0.
+- For each index i, check all valid jumps to indices j > i where nums[j] - nums[i] lies within [-target, target].
+- Memoize results to optimize repeated calculations.
+{{< dots >}}
+### Problem Assumptions ✅
+- All input values are valid and within the given constraints.
+- The nums array is not empty, and target is a non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2, 5, 9, 6, 2, 3], target = 3`  \
+  **Explanation:** Jump from index 0 to index 2, then from index 2 to index 5. The total number of jumps is 2.
 
-### Problem Statement
+- **Input:** `Input: nums = [10, 15, 20, 25], target = 1`  \
+  **Explanation:** It is impossible to reach the last index, so the output is -1.
 
-The problem asks to find the maximum number of jumps you can make in a list of integers, `nums`, starting from the first element and following certain jump constraints. Specifically, for each jump from index `i` to `j`, the absolute difference between `nums[i]` and `nums[j]` must not exceed a given `target`. You need to return the maximum number of jumps possible or `-1` if no jumps can be made.
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using dynamic programming with memoization to explore all valid jumping paths efficiently.
 
-### Approach
-
-The solution to this problem can be broken down using dynamic programming (DP). The key idea is to maintain a `dp` array that tracks the maximum number of jumps starting from each index of the array. We'll attempt to jump from each index `i` to all subsequent indices `j` where the difference `|nums[i] - nums[j]|` is less than or equal to `target`. We compute the maximum number of jumps recursively, storing the results to avoid redundant computations.
-
-### Code Breakdown
-
-Let's break down the code to understand how the solution works.
-
-#### Class Definition and Member Variables
-
+### Initial Thoughts 💭
+- Each index can potentially jump to multiple future indices based on the target constraint.
+- Dynamic programming is suitable to optimize repeated subproblems.
+- Memoize the maximum jumps from each index to avoid redundant calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as nums always contains at least two elements.
+- Test with nums of size 1000 and large target values to ensure efficiency.
+- Test cases with nums having repeated values and small target values.
+- Ensure correctness for edge cases like nums = [1, 2], target = 0.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int target, n;
-    vector<int> memo, nums;
-```
 
-1. **target**: This variable holds the maximum allowed difference between consecutive elements for a valid jump.
-2. **n**: The number of elements in the `nums` array.
-3. **memo**: This vector will store the results of subproblems, i.e., the maximum number of jumps starting from each index. Initially, it is filled with `INT_MIN` to represent uncomputed states.
-4. **nums**: This vector holds the input list of integers.
+int target, n;
+vector<int> memo, nums;
 
-#### Dynamic Programming Helper Function
-
-```cpp
 int dp(int idx) {
+    
     if(idx == n - 1) return 0;
+    
     if(memo[idx] != INT_MIN) return memo[idx];
     
     int ans = INT_MIN;
@@ -97,56 +90,145 @@ int dp(int idx) {
             ans = max(ans, dp(i) + 1);
         }
     }
+    // cout << idx << " " << ans << "\n";
     return memo[idx] = ans;
 }
-```
 
-1. **Base Case**: If `idx == n - 1`, we return `0`, meaning we’ve reached the last index, so no more jumps can be made.
-   
-2. **Memoization**: Before performing any calculations, we check if the result for the current index `idx` has already been computed by checking if `memo[idx]` is not equal to `INT_MIN`. If it has been computed, we simply return that result, avoiding redundant calculations.
-
-3. **Recursion**: We loop through all indices `i` from `idx + 1` to `n - 1`, and for each index, check if the absolute difference between `nums[i]` and `nums[idx]` is less than or equal to `target`. If the difference is valid, we recursively compute the maximum jumps from index `i`, and update the result for `idx` as `max(ans, dp(i) + 1)`. The `+1` represents the jump we just made from `idx` to `i`.
-
-4. **Memoization Update**: After computing the result for `idx`, we store it in the `memo` vector so that it can be reused later.
-
-#### Main Function
-
-```cpp
 int maximumJumps(vector<int>& nums, int target) {
+
     n = nums.size();
     this->target = target;
     this->nums = nums;
     memo.resize(n, INT_MIN);
     int ans = dp(0);
     return ans <= 0? -1: ans;
+
 }
 ```
 
-1. **Initialization**: We initialize the size of the `nums` array (`n`), the `target` value, and the `nums` array. Then, we resize the `memo` array to the size of `nums` and fill it with `INT_MIN` to indicate uncalculated states.
+The code implements a dynamic programming solution to find the maximum number of valid jumps between elements in a list. The function `maximumJumps` returns the maximum number of valid jumps possible given a target difference. The helper function `dp` computes the number of jumps recursively with memoization.
 
-2. **Computing the Result**: We call the `dp` function starting from index `0` to compute the maximum number of jumps possible from the first index.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int target, n;
+	```
+	Declare the integer variables `target` to store the target value and `n` to store the number of elements in `nums`.
 
-3. **Final Decision**: If the result is `<= 0`, it means no valid jumps are possible, and we return `-1`. Otherwise, we return the computed result, which represents the maximum number of valid jumps.
+2. **Variable Declaration**
+	```cpp
+	vector<int> memo, nums;
+	```
+	Declare a vector `nums` to store the input numbers and a vector `memo` to store intermediate results for memoization.
 
-### Complexity
+3. **Base Case**
+	```cpp
+	int dp(int idx) {
+	```
+	Define the function `dp` that takes an index `idx` and returns the maximum jumps possible from that index.
 
-#### Time Complexity:
-The time complexity of this solution is \(O(n^2)\), where `n` is the size of the `nums` array. Here's why:
-1. For each index `idx`, we loop through all subsequent indices `i` to check if a valid jump can be made. This results in a loop within another loop, leading to \(O(n^2)\) comparisons in the worst case.
-2. The memoization reduces redundant recalculations by storing intermediate results, but the overall time complexity remains \(O(n^2)\) due to the nested loop structure.
+4. **Base Case Check**
+	```cpp
+	    if(idx == n - 1) return 0;
+	```
+	Check if we are at the last index; if so, return 0 because no further jumps are possible.
 
-#### Space Complexity:
-The space complexity is \(O(n)\), where `n` is the size of the `nums` array. The space is used for:
-1. The `memo` array, which stores the maximum number of jumps from each index.
-2. The function call stack for the recursion.
+5. **Memoization Check**
+	```cpp
+	    if(memo[idx] != INT_MIN) return memo[idx];
+	```
+	Check if the result for the current index is already computed (i.e., not `INT_MIN`). If so, return the stored result from `memo`.
 
-### Conclusion
+6. **Initialization**
+	```cpp
+	    int ans = INT_MIN;
+	```
+	Initialize the variable `ans` to `INT_MIN` to track the maximum number of jumps from the current index.
 
-This solution efficiently computes the maximum number of valid jumps that can be made, starting from the first index of the `nums` array and adhering to the jump constraint defined by the `target`. By utilizing dynamic programming with memoization, we avoid redundant calculations and make the solution scalable for larger inputs.
+7. **Loop Through Elements**
+	```cpp
+	    for(int i = idx + 1; i < n; i++) {
+	```
+	Start a loop from the next index (`idx + 1`) to the end of the list to explore potential valid jumps.
 
-The solution works by recursively calculating the maximum number of jumps for each index while storing intermediate results in the `memo` array. The time complexity of \(O(n^2)\) makes this approach efficient enough for reasonable input sizes.
+8. **Condition Check**
+	```cpp
+	        if(abs(nums[i] - nums[idx]) <= target) {
+	```
+	Check if the absolute difference between the current element and the element at index `idx` is less than or equal to the target value.
 
-In summary, this approach is a well-optimized dynamic programming solution that uses memoization to avoid recalculating the same subproblems. It provides a clear and efficient method to solve the problem of finding the maximum number of valid jumps in an array.
+9. **Recursive Call**
+	```cpp
+	            ans = max(ans, dp(i) + 1);
+	```
+	If the condition is satisfied, recursively call `dp(i)` to find the maximum jumps from index `i`, and add 1 for the current jump. Update `ans` with the maximum value.
+
+10. **Memoization**
+	```cpp
+	    return memo[idx] = ans;
+	```
+	Store the computed value of `ans` in `memo[idx]` for future use and return the value.
+
+11. **Initialization**
+	```cpp
+	int maximumJumps(vector<int>& nums, int target) {
+	```
+	Define the `maximumJumps` function and pass `nums` and `target` as parameters.
+
+12. **Variable Assignment**
+	```cpp
+	    n = nums.size();
+	```
+	Assign the size of the `nums` vector to `n`.
+
+13. **Variable Assignment**
+	```cpp
+	    this->target = target;
+	```
+	Assign the `target` parameter to the class-level `target` variable.
+
+14. **Variable Assignment**
+	```cpp
+	    this->nums = nums;
+	```
+	Assign the input `nums` vector to the class-level `nums` vector.
+
+15. **Initialization**
+	```cpp
+	    memo.resize(n, INT_MIN);
+	```
+	Resize the `memo` vector to the size of `n`, initializing all values to `INT_MIN` to indicate uncomputed values.
+
+16. **Call DP Function**
+	```cpp
+	    int ans = dp(0);
+	```
+	Call the `dp` function starting from index 0 and store the result in `ans`.
+
+17. **Return Statement**
+	```cpp
+	    return ans <= 0? -1: ans;
+	```
+	Return `-1` if `ans` is less than or equal to 0, indicating no valid jumps. Otherwise, return the computed number of jumps.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+For each index, up to n iterations are required to check all valid jumps.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+Space is used for memoization of size n.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-jumps-to-reach-the-last-index/description/)
 

@@ -14,135 +14,203 @@ img_src = ""
 youtube = "prcJMNtokGI"
 youtube_upload_date="2022-12-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/prcJMNtokGI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums. A subsequence of nums is called a square streak if its length is at least 2, and after sorting the subsequence, each element (except the first one) is the square of the previous number. Return the length of the longest square streak in nums, or -1 if no square streak exists.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array nums, where each element is a positive integer.
+- **Example:** `Input: nums = [9,3,16,2,4,81]`
+- **Constraints:**
+	- 2 <= nums.length <= 10^5
+	- 2 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestSquareStreak(vector<int>& nums) {
-        int n = nums.size();
-        sort(nums.begin(), nums.end());
-        vector<int> dp(n, 1);
-        int mx = 1;
-        for(int i= 0; i < n; i++) {
-            long long tmp = (long long) nums[i] * nums[i];
-            if(tmp > INT_MAX) break;
-            auto it = lower_bound(nums.begin(), nums.end(), tmp);
-            if(it == nums.end()) break;
-            int pos = it - nums.begin();
-            while(pos < n && nums[i] * nums[i] == nums[pos]) {
-                    dp[pos] = max(dp[pos], 1 + dp[i]);                
-                    mx = max(mx, dp[pos]);  
-                    pos++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest subsequence that forms a square streak. If no such subsequence exists, return -1.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- If no subsequence satisfies the conditions, return -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the longest subsequence where each element (except the first) is the square of the previous one.
+
+- 1. Sort the array to easily check the relationship between elements.
+- 2. Use dynamic programming to store the longest square streak for each element.
+- 3. Iterate over the array, check for the condition where an element is the square of the previous one.
+- 4. Keep track of the maximum length of any such subsequence.
+{{< dots >}}
+### Problem Assumptions ✅
+- There are no duplicate numbers in the array.
+- The array contains at least two elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [9, 3, 16, 2, 4, 81]`  \
+  **Explanation:** In this example, the subsequence [4, 16, 81] is a square streak. After sorting, it becomes [4, 16, 81], where 16 = 4 * 4 and 81 = 16 * 16. Therefore, the longest square streak has a length of 3.
+
+- **Input:** `Input: nums = [5, 2, 3, 7]`  \
+  **Explanation:** There is no subsequence that satisfies the square streak condition, so the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the array and using dynamic programming to find the longest subsequence where each number is the square of the previous one.
+
+### Initial Thoughts 💭
+- Sorting the array helps to easily identify potential square relationships between numbers.
+- Using dynamic programming ensures that we can efficiently calculate the longest square streak by considering each element as part of a subsequence.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least two elements, so this case is not applicable.
+- Ensure the solution handles large inputs efficiently, given the constraint of up to 10^5 elements.
+- Handle arrays where no subsequences form a square streak.
+- The solution must work efficiently within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestSquareStreak(vector<int>& nums) {
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    vector<int> dp(n, 1);
+    int mx = 1;
+    for(int i= 0; i < n; i++) {
+        long long tmp = (long long) nums[i] * nums[i];
+        if(tmp > INT_MAX) break;
+        auto it = lower_bound(nums.begin(), nums.end(), tmp);
+        if(it == nums.end()) break;
+        int pos = it - nums.begin();
+        while(pos < n && nums[i] * nums[i] == nums[pos]) {
+                dp[pos] = max(dp[pos], 1 + dp[i]);                
+                mx = max(mx, dp[pos]);  
+                pos++;
         }
-        return mx == 1? -1: mx;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the length of the longest streak of elements in an array such that each element is the square of the previous element in the streak. In other words, for each number `x`, we need to find a sequence where each subsequent number is `x^2`. If such a streak doesn't exist, return `-1`. If a streak exists, return the length of the longest streak.
-
-### Approach
-
-The approach for solving this problem involves:
-1. **Sorting the input array**: Sorting the array allows us to efficiently check for each number whether its square exists in the array.
-2. **Dynamic Programming**: Use dynamic programming (`dp`) to track the length of the longest streak ending at each element of the array.
-3. **Efficient Search with Binary Search**: To find the square of each number, we can use binary search (`lower_bound`) to quickly check if the square of the current element exists in the array.
-4. **Updating the Longest Streak**: As we go through the array, we update the longest streak (`mx`) whenever we find a valid streak.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sorting the Input Array
-
-```cpp
-int n = nums.size();
-sort(nums.begin(), nums.end());
-```
-
-The first step is to sort the array. Sorting helps us efficiently check if a number's square exists in the array, as the array is ordered.
-
-- Sorting ensures that when we look for the square of a number, it will be positioned in a way that allows binary search to work effectively. This reduces the complexity of checking for squares.
-
-#### Step 2: Initialize Dynamic Programming Array
-
-```cpp
-vector<int> dp(n, 1);
-int mx = 1;
-```
-
-- **dp**: This is a dynamic programming array that stores the length of the longest streak ending at each element of the array. Initially, each element has a streak of length 1 (itself).
-- **mx**: This variable tracks the maximum length of any streak found during the iteration.
-
-#### Step 3: Iterate Through the Array and Check for Squares
-
-```cpp
-for(int i = 0; i < n; i++) {
-    long long tmp = (long long) nums[i] * nums[i];
-    if(tmp > INT_MAX) break;
-    auto it = lower_bound(nums.begin(), nums.end(), tmp);
-    if(it == nums.end()) break;
-    int pos = it - nums.begin();
-    while(pos < n && nums[i] * nums[i] == nums[pos]) {
-        dp[pos] = max(dp[pos], 1 + dp[i]);                
-        mx = max(mx, dp[pos]);  
-        pos++;
-    }
+    return mx == 1? -1: mx;
 }
 ```
 
-- **Iterating over each element**: For each element `nums[i]`, we check whether its square exists in the array.
-  
-  1. **Calculate the square of the number**: We calculate the square of `nums[i]` and store it in `tmp`.
-  
-  2. **Check for overflow**: If the square of the number exceeds `INT_MAX`, we break out of the loop since squares larger than this would not be valid for a 32-bit integer range.
+The function `longestSquareStreak` finds the length of the longest streak of numbers in a sorted list such that the square of any number in the streak is also present in the list. If no streak is found, it returns -1.
 
-  3. **Find the position using binary search**: We use `lower_bound` to find the smallest position `it` in the array where `tmp` (the square of `nums[i]`) could be inserted. If `it == nums.end()`, it means the square does not exist in the array, so we exit the loop.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestSquareStreak(vector<int>& nums) {
+	```
+	Defines the function `longestSquareStreak` which takes a vector `nums` and returns an integer representing the longest streak of numbers whose squares also exist in the list.
 
-  4. **Updating the DP array**: We start from the position `pos` and check if the value at `pos` is equal to the square of the current number (`nums[i] * nums[i]`). If it is, we update the `dp` array to record the maximum streak length for that number. We update `mx` accordingly, keeping track of the longest streak found so far.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializes the variable `n` to the size of the vector `nums`.
 
-#### Step 4: Handle Edge Case and Return Result
+3. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the vector `nums` in ascending order.
 
-```cpp
-return mx == 1? -1: mx;
-```
+4. **Dynamic Programming Initialization**
+	```cpp
+	    vector<int> dp(n, 1);
+	```
+	Creates a vector `dp` initialized to 1, which will store the longest streak of numbers for each element.
 
-Once the loop completes, we check if the longest streak `mx` is still `1`. If it is, it means no valid streak of length greater than 1 was found, and we return `-1`. Otherwise, we return `mx`, the length of the longest streak found.
+5. **Variable Initialization**
+	```cpp
+	    int mx = 1;
+	```
+	Initializes the variable `mx` to 1 to store the maximum streak length.
 
-### Complexity Analysis
+6. **Looping**
+	```cpp
+	    for(int i= 0; i < n; i++) {
+	```
+	Starts a loop to iterate over each element `i` in the sorted vector `nums`.
 
-#### Time Complexity:
+7. **Mathematical Operations**
+	```cpp
+	        long long tmp = (long long) nums[i] * nums[i];
+	```
+	Calculates the square of the current element `nums[i]` and stores it in the variable `tmp`.
 
-- **Sorting the array**: The sorting step takes \(O(n \log n)\), where \(n\) is the number of elements in the input array.
-- **Binary search for each element**: For each element, we perform a binary search (`lower_bound`) to find the position of its square in the array. This binary search takes \(O(\log n)\).
-- **Updating the DP array**: The inner while loop runs once for each occurrence of the square of the current element, but at most it runs \(n\) times across all elements. In the worst case, the complexity of updating the `dp` array is \(O(n)\).
+8. **Conditionals**
+	```cpp
+	        if(tmp > INT_MAX) break;
+	```
+	Checks if the square of the number exceeds the maximum possible integer value, in which case the loop breaks.
 
-Thus, the overall time complexity is dominated by the sorting step, giving a total complexity of \(O(n \log n)\).
+9. **Binary Search**
+	```cpp
+	        auto it = lower_bound(nums.begin(), nums.end(), tmp);
+	```
+	Uses binary search (`lower_bound`) to find the position of `tmp` in the sorted vector `nums`.
 
-#### Space Complexity:
+10. **Conditionals**
+	```cpp
+	        if(it == nums.end()) break;
+	```
+	Checks if the position returned by `lower_bound` is at the end of the vector, meaning `tmp` is not found.
 
-- **Space for the `dp` array**: The `dp` array has a size of \(n\), so it requires \(O(n)\) space.
-- **Auxiliary space for the binary search**: The binary search uses \(O(1)\) extra space, so it doesn't contribute significantly to space complexity.
+11. **Pointer Operations**
+	```cpp
+	        int pos = it - nums.begin();
+	```
+	Calculates the index of the found element `tmp` in the vector `nums`.
 
-Therefore, the overall space complexity is \(O(n)\), where \(n\) is the number of elements in the array.
+12. **Looping**
+	```cpp
+	        while(pos < n && nums[i] * nums[i] == nums[pos]) {
+	```
+	Starts a nested loop to check for consecutive elements in `nums` that match the square of the current element.
 
-### Conclusion
+13. **Dynamic Programming Update**
+	```cpp
+	            dp[pos] = max(dp[pos], 1 + dp[i]);
+	```
+	Updates the value of `dp[pos]` to be the maximum of its current value or the streak length of `dp[i]` plus 1.
 
-In conclusion, this solution efficiently calculates the longest streak of elements where each element is the square of the previous element using sorting, binary search, and dynamic programming. The approach works in \(O(n \log n)\) time complexity, making it suitable for moderately large inputs. 
+14. **Result Calculation**
+	```cpp
+	            mx = max(mx, dp[pos]);
+	```
+	Updates the maximum streak length `mx` by comparing it with the current streak length `dp[pos]`.
 
-Key highlights:
-- **Time Complexity**: \(O(n \log n)\), due to sorting and binary search.
-- **Space Complexity**: \(O(n)\), due to the `dp` array.
+15. **Pointer Operations**
+	```cpp
+	            pos++;
+	```
+	Increments the position `pos` to check the next element in the streak.
 
-This solution is both time-efficient and space-efficient, providing an optimal approach to solving the problem.
+16. **Return Statement**
+	```cpp
+	    return mx == 1? -1: mx;
+	```
+	Returns the result: if no streaks were found (`mx == 1`), returns -1; otherwise, returns the length of the longest streak.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The sorting step takes O(n log n), and the dynamic programming step requires O(n) time, resulting in an overall time complexity of O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the dp array used for storing the longest square streaks for each element.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-square-streak-in-an-array/description/)
 

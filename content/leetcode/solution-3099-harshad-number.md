@@ -14,99 +14,135 @@ img_src = ""
 youtube = "QplrY0LW62M"
 youtube_upload_date="2024-03-31"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QplrY0LW62M/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+An integer is called a Harshad number if it is divisible by the sum of its digits. You are given an integer `x`. Your task is to return the sum of the digits of `x` if `x` is a Harshad number. Otherwise, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer `x` where `1 <= x <= 100`.
+- **Example:** `x = 36`
+- **Constraints:**
+	- 1 <= x <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sumOfTheDigitsOfHarshadNumber(int x) {
-        int sum = 0;
-        int tmp = x;
-        while(tmp > 0) {
-            sum += tmp % 10;
-            tmp /= 10;
-        }
-        return x % sum == 0? sum : -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of the digits of `x` if `x` is a Harshad number. Otherwise, return -1.
+- **Example:** `Output: 9`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if the number is divisible by the sum of its digits and return the appropriate result.
+
+- Calculate the sum of the digits of the number `x`.
+- Check if `x` is divisible by this sum.
+- If divisible, return the sum of the digits. Otherwise, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be a positive integer less than or equal to 100.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `x = 36`  \
+  **Explanation:** The sum of the digits of `x` is `9`, and since `36` is divisible by `9`, the result is `9`.
+
+- **Input:** `x = 25`  \
+  **Explanation:** The sum of the digits of `x` is `7`, and since `25` is not divisible by `7`, the result is `-1`.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to compute the sum of the digits of `x` and check if `x` is divisible by this sum.
+
+### Initial Thoughts 💭
+- We can easily calculate the sum of the digits by repeatedly extracting the last digit and adding it to the sum.
+- We need to check if the number is divisible by the sum of its digits and return the sum or -1 accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem does not have any empty inputs since `x` is always a positive integer.
+- The maximum value for `x` is 100, so performance will not be an issue.
+- If `x` is a single-digit number, it will always be divisible by the sum of its digits.
+- The solution should work efficiently for all integers in the range from 1 to 100.
+{{< dots >}}
+## Code 💻
+```cpp
+int sumOfTheDigitsOfHarshadNumber(int x) {
+    int sum = 0;
+    int tmp = x;
+    while(tmp > 0) {
+        sum += tmp % 10;
+        tmp /= 10;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given a positive integer `x`. The task is to determine if the number `x` is a Harshad number (or Niven number). A number is called a Harshad number if it is divisible by the sum of its digits. If `x` is a Harshad number, return the sum of its digits; otherwise, return `-1`.
-
-### Approach
-
-To solve this problem, we need to follow these steps:
-
-1. **Sum of Digits:** Calculate the sum of the digits of the given number `x`.
-2. **Check Divisibility:** Check if the number `x` is divisible by the sum of its digits.
-3. **Return the Result:** If `x` is divisible by the sum of its digits, return the sum. Otherwise, return `-1`.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the code to understand each part:
-
-#### Step 1: Initialize Variables
-
-```cpp
-int sum = 0;
-int tmp = x;
-```
-
-- Here, we initialize the `sum` variable to store the sum of the digits of `x`.
-- The variable `tmp` is initialized with the value of `x`. This is used for iterating over the digits of `x`.
-
-#### Step 2: Calculate the Sum of Digits
-
-```cpp
-while(tmp > 0) {
-    sum += tmp % 10;
-    tmp /= 10;
+    return x % sum == 0? sum : -1;
 }
 ```
 
-- In this part of the code, we use a `while` loop to iterate over each digit of the number `x`. The loop runs as long as `tmp` is greater than 0 (i.e., as long as there are digits left to process).
-- `tmp % 10` extracts the last digit of the number. This value is added to the `sum` variable.
-- `tmp /= 10` removes the last digit of `tmp` by performing an integer division by 10. This process continues until `tmp` becomes 0, at which point all digits of `x` have been processed.
+This function computes the sum of the digits of a number `x` and checks whether `x` is divisible by the sum. If it is, it returns the sum, otherwise it returns -1.
 
-#### Step 3: Check if `x` is Divisible by the Sum of its Digits
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sumOfTheDigitsOfHarshadNumber(int x) {
+	```
+	Defines the function `sumOfTheDigitsOfHarshadNumber`, which takes an integer `x` and returns the sum of its digits if `x` is divisible by this sum.
 
-```cpp
-return x % sum == 0 ? sum : -1;
-```
+2. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initializes a variable `sum` to 0, which will be used to store the sum of the digits of `x`.
 
-- After calculating the sum of digits, we check if the original number `x` is divisible by the sum (`sum`).
-- If `x % sum == 0`, it means `x` is divisible by the sum of its digits, so we return the sum of the digits.
-- If `x` is not divisible by the sum of its digits, we return `-1`.
+3. **Variable Initialization**
+	```cpp
+	    int tmp = x;
+	```
+	Copies the value of `x` into `tmp`. `tmp` will be used for manipulating the digits of `x` without modifying the original value.
 
-### Complexity
+4. **Loop Setup**
+	```cpp
+	    while(tmp > 0) {
+	```
+	Begins a `while` loop to process each digit of `tmp` by extracting and summing the digits until all digits are processed.
 
-#### Time Complexity:
+5. **Digit Extraction**
+	```cpp
+	        sum += tmp % 10;
+	```
+	Extracts the last digit of `tmp` using the modulo operator (`% 10`), adds it to `sum`, and prepares for the next iteration.
 
-- **O(d)** where `d` is the number of digits in `x`.
-  - The loop that calculates the sum of digits runs once for each digit in `x`. The number of digits in `x` is proportional to the logarithm of `x`, specifically `O(log(x))`. Therefore, the time complexity is linear in terms of the number of digits.
+6. **Digit Removal**
+	```cpp
+	        tmp /= 10;
+	```
+	Removes the last digit from `tmp` by performing integer division by 10.
 
-#### Space Complexity:
+7. **Harshad Check**
+	```cpp
+	    return x % sum == 0? sum : -1;
+	```
+	Checks if `x` is divisible by the sum of its digits. If true, returns the sum; otherwise, returns -1 to indicate that `x` is not a Harshad number.
 
-- **O(1)**: We are using only a constant amount of extra space (the integer variables `sum` and `tmp`). Thus, the space complexity is constant.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-### Conclusion
+The solution involves iterating through the digits of the number `x` once, which makes the time complexity O(1) for the given constraints.
 
-The problem is solved by following a simple algorithm where we calculate the sum of the digits of the number `x`, check if `x` is divisible by this sum, and return the result accordingly. 
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- If `x` is divisible by the sum of its digits, we return the sum.
-- If `x` is not divisible by the sum, we return `-1`.
+The space complexity is O(1) since we are only using a few variables for storing the sum of digits and the result.
 
-This approach is efficient with a time complexity of **O(d)** and space complexity of **O(1)**. It is an optimal solution for determining if a number is a Harshad number and returning the sum of its digits if it is.
+**Happy Coding! 🎉**
 
-The code efficiently calculates the sum of digits, performs the divisibility check, and returns the result in constant space. It’s a straightforward solution to the problem, and it works well for all positive integers `x`.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/harshad-number/description/)
 

@@ -14,111 +14,161 @@ img_src = ""
 youtube = "gJCrdytYtDY"
 youtube_upload_date="2023-11-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gJCrdytYtDY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You have n balls placed on a table, each either black or white, represented by a binary string s. In each move, you can swap two adjacent balls. Your task is to determine the minimum number of swaps required to move all black balls to the right side and all white balls to the left side.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a binary string s of length n where each character is either '1' (black ball) or '0' (white ball).
+- **Example:** `s = '110'`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- s[i] is either '0' or '1'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findWordsContaining(vector<string>& words, char x) {
-        vector<int> result;
-        for (int i = 0; i < words.size(); i++) {
-            if (check(words[i], x)) result.push_back(i);
-        }
-        return result;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of adjacent swaps required to group all black balls to the right and all white balls to the left.
+- **Example:** `For s = '110', the output is 1.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the minimum number of adjacent swaps required to arrange the balls such that all white balls are on the left and all black balls are on the right.
+
+- Iterate through the string while counting the number of white balls ('0') encountered.
+- For each black ball ('1'), count how many white balls are to the left of it, as this indicates how many swaps are needed to move the black ball to its correct position.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string contains at least one ball, and no more than 100,000 balls.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = '110'`  \
+  **Explanation:** One swap is needed to move the black ball at position 1 to the right.
+
+- **Input:** `s = '01010'`  \
+  **Explanation:** Four swaps are needed to move all black balls to the right.
+
+- **Input:** `s = '000111'`  \
+  **Explanation:** No swaps are needed because all black balls are already grouped to the right.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the string and counting how many white balls ('0') are encountered before each black ball ('1'). This helps determine how many swaps are needed to position the black balls correctly.
+
+### Initial Thoughts 💭
+- The problem is about counting the number of swaps required to move each black ball to the right side.
+- By iterating through the string and maintaining a count of white balls seen so far, we can efficiently calculate the swaps for each black ball.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input string is empty, return 0 as no swaps are needed.
+- The solution must efficiently handle strings with lengths up to 100,000.
+- If the string is already in the desired arrangement (all white balls on the left and black balls on the right), return 0.
+- The input string will not be empty.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> findWordsContaining(vector<string>& words, char x) {
+    vector<int> result;
+    for (int i = 0; i < words.size(); i++) {
+        if (check(words[i], x)) result.push_back(i);
     }
+    return result;
+}
 private:
-    bool check(string& word, char x) {
-        for (auto& c : word) {
-            if (c == x) return true;
-        }
-        return false;
+bool check(string& word, char x) {
+    for (auto& c : word) {
+        if (c == x) return true;
     }
-};
-{{< /highlight >}}
----
+    return false;
+}
+```
 
-### Problem Statement:
-Given a list of strings `words` and a character `x`, the task is to identify the indices of the words that contain the character `x`. You need to implement a function that returns a list of indices of all the words in the given list that contain the character `x`. If a word contains the character `x`, its index should be included in the result list.
+This function returns a list of indices of the words in the input list 'words' that contain the character 'x'. A helper function 'check' is used to check if a word contains the character 'x'.
 
-### Approach:
-The problem involves iterating through a list of strings, checking each word for the presence of the specified character `x`. If a word contains the character, we append its index to the result list.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findWordsContaining(vector<string>& words, char x) {
+	```
+	Defines the main function 'findWordsContaining' that takes a list of words and a character 'x', and returns a vector of indices of the words that contain 'x'.
 
-To solve the problem efficiently:
-1. We loop through the list of words.
-2. For each word, we check if the character `x` is present in that word.
-3. If the character is found, we store the index of the word in the result list.
-4. Finally, we return the result list containing the indices of the words that contain the character `x`.
+2. **Result Initialization**
+	```cpp
+	    vector<int> result;
+	```
+	Initializes an empty vector 'result' to store the indices of the words containing the character 'x'.
 
-To perform the check for the presence of the character `x` in a word, we define a helper function `check` that iterates through the characters of the word and checks if any character matches `x`. If we find a match, we return `true`; otherwise, we return `false`.
+3. **Loop Setup**
+	```cpp
+	    for (int i = 0; i < words.size(); i++) {
+	```
+	Starts a loop to iterate through each word in the 'words' vector using the index 'i'.
 
-### Code Breakdown (Step by Step):
+4. **Check for 'x' in Word**
+	```cpp
+	        if (check(words[i], x)) result.push_back(i);
+	```
+	Calls the helper function 'check' to determine if the current word contains the character 'x'. If true, it adds the current index 'i' to the 'result' vector.
 
-#### 1. **Function `findWordsContaining`**:
-This function is the main function of the solution. It takes two arguments:
-   - `words`: A vector of strings that represents the list of words.
-   - `x`: A character that we are looking for in each word.
+5. **Return Statement**
+	```cpp
+	    return result;
+	```
+	Returns the 'result' vector, which contains the indices of the words that contain the character 'x'.
 
-In this function:
-   - We initialize an empty result vector `result` to store the indices of the words that contain the character `x`.
-   - We loop through each word in the `words` list, checking if the character `x` is present in the word using the helper function `check`.
-   - If `check` returns `true`, indicating that the word contains `x`, we append the current index `i` to the `result` vector.
+6. **Private Section**
+	```cpp
+	private:
+	```
+	Indicates the start of the private section of the class, where helper functions are defined.
 
-   ```cpp
-   vector<int> findWordsContaining(vector<string>& words, char x) {
-       vector<int> result;
-       for (int i = 0; i < words.size(); i++) {
-           if (check(words[i], x)) result.push_back(i);
-       }
-       return result;
-   }
-   ```
+7. **Helper Function Definition**
+	```cpp
+	bool check(string& word, char x) {
+	```
+	Defines the helper function 'check' that takes a word and a character 'x', and returns true if the word contains the character 'x'.
 
-#### 2. **Helper Function `check`**:
-This helper function checks whether a given word contains the character `x`. It works as follows:
-   - It loops through each character `c` in the word.
-   - For each character, it compares `c` with `x`.
-   - If a match is found (i.e., `c == x`), the function immediately returns `true`, indicating that the character `x` is present in the word.
-   - If no match is found after checking all characters, the function returns `false`.
+8. **Loop Over Characters in Word**
+	```cpp
+	    for (auto& c : word) {
+	```
+	Starts a loop to iterate through each character 'c' in the given word.
 
-   ```cpp
-   bool check(string& word, char x) {
-       for (auto& c : word) {
-           if (c == x) return true;
-       }
-       return false;
-   }
-   ```
+9. **Character Comparison**
+	```cpp
+	        if (c == x) return true;
+	```
+	Compares the current character 'c' with the character 'x'. If they are equal, returns true indicating that 'x' is found in the word.
 
-### Complexity:
+10. **Return False**
+	```cpp
+	    return false;
+	```
+	If the loop completes without finding 'x', returns false, indicating that the word does not contain 'x'.
 
-#### Time Complexity:
-- **Outer Loop**: The `findWordsContaining` function iterates over each word in the list `words`, so it runs in \(O(n)\), where `n` is the number of words in the input list.
-- **Inner Loop**: For each word, we call the `check` function, which iterates through the characters of the word. If the average word length is \(m\), the inner loop runs in \(O(m)\) time for each word.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-Thus, the total time complexity is \(O(n \times m)\), where:
-   - `n` is the number of words in the list.
-   - `m` is the average length of the words.
+The solution requires a single pass over the string, which is O(n) in all cases.
 
-#### Space Complexity:
-- The space complexity is \(O(n)\) because the `result` vector stores the indices of the words that contain the character `x`, and in the worst case, all words may be included in the result. Additionally, the helper function `check` does not use any extra space, apart from the input word and the loop variables.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-Thus, the space complexity is \(O(n)\), where `n` is the number of words in the input list.
+The space complexity is constant since only a few variables are used to track the count of white balls and the swaps.
 
-### Conclusion:
-This solution is an efficient way to find the indices of words that contain a given character in a list of strings. The approach uses a straightforward iteration over the list of words, with each word being checked for the presence of the character `x` through a helper function.
+**Happy Coding! 🎉**
 
-#### Key Points:
-- The function `findWordsContaining` loops over all words in the input list and checks each word for the character `x`.
-- The helper function `check` checks whether a given word contains the character `x`.
-- The time complexity of the solution is \(O(n \times m)\), where `n` is the number of words and `m` is the average length of the words.
-- The space complexity is \(O(n)\), where `n` is the number of words, due to the storage of the result indices.
-
-This solution is efficient for typical use cases and works well when the size of the input is moderate. It allows us to quickly identify and return the indices of the words that contain the specified character.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-words-containing-character/description/)
 

@@ -14,115 +14,169 @@ img_src = ""
 youtube = "gdXkkmzvR3c"
 youtube_upload_date="2023-02-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gdXkkmzvR3c/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers representing the weights of stones. In each turn, you can select two stones, x and y, with x <= y, and smash them together. The result of the smash is as follows: if x equals y, both stones are destroyed, otherwise, the stone with weight x is destroyed, and the stone with weight y becomes y - x. The process continues until there is at most one stone left. Your task is to return the smallest possible weight of the remaining stone, or return 0 if no stones are left.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers representing the weight of each stone.
+- **Example:** `Input: stones = [3, 9, 6, 5, 8]`
+- **Constraints:**
+	- 1 <= stones.length <= 30
+	- 1 <= stones[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int lastStoneWeightII(vector<int>& stones) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest possible weight of the remaining stone after all possible smashes.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The result will be a non-negative integer.
 
-        int sum = 0;
-        for(int x: stones) sum += x;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the smallest possible remaining stone weight after all smashes.
 
-        int n = stones.size();
-        vector<vector<int>> dp(n + 1, vector<int>(sum / 2 + 1, 0));
+- 1. Calculate the total sum of the stones.
+- 2. Use dynamic programming to find the largest possible subset sum close to half of the total sum.
+- 3. The smallest remaining stone weight will be the difference between the total sum and twice the largest subset sum found.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each stone is represented by a positive integer weight.
+- The number of stones is relatively small, so an approach using dynamic programming is feasible.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: stones = [3, 9, 6, 5, 8]`  \
+  **Explanation:** In this example, the best we can achieve is a remaining stone with weight 2, after repeatedly smashing stones together and reducing the total weight progressively.
 
-        for (int i = 1; i < n + 1  ; i++)
-        for (int j = 0; j < sum / 2 + 1; j++) {
-            if(j >= stones[i - 1]) 
-                 dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stones[i - 1]] + stones[i - 1]);
-            else dp[i][j] = dp[i - 1][j];
-        }
+- **Input:** `Input: stones = [4, 6, 7, 2]`  \
+  **Explanation:** For these stones, the final remaining stone will have weight 1 after optimal smashes.
 
-        return sum - 2 * dp[n][sum / 2];
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we use dynamic programming to find a subset of stones that sums up to as close as possible to half of the total sum of the stones, which minimizes the remaining stone weight.
+
+### Initial Thoughts 💭
+- The game can be interpreted as a problem of partitioning the stones into two subsets such that the difference between the total weights of the two subsets is minimized.
+- This is a variation of the knapsack problem where we aim to maximize the subset sum close to half of the total weight of the stones.
+{{< dots >}}
+### Edge Cases 🌐
+- If no stones are provided, the result is 0.
+- The dynamic programming approach works within the problem's constraints of 30 stones and stone weights up to 100.
+- If all stones have the same weight, the remaining stone weight will be the absolute difference between any two stones.
+- The number of stones and their weights are guaranteed to be within the defined limits.
+{{< dots >}}
+## Code 💻
+```cpp
+int lastStoneWeightII(vector<int>& stones) {
+
+    int sum = 0;
+    for(int x: stones) sum += x;
+
+    int n = stones.size();
+    vector<vector<int>> dp(n + 1, vector<int>(sum / 2 + 1, 0));
+
+    for (int i = 1; i < n + 1  ; i++)
+    for (int j = 0; j < sum / 2 + 1; j++) {
+        if(j >= stones[i - 1]) 
+             dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stones[i - 1]] + stones[i - 1]);
+        else dp[i][j] = dp[i - 1][j];
     }
-};
-{{< /highlight >}}
----
 
+    return sum - 2 * dp[n][sum / 2];
+}
+```
 
-### Problem Statement
-The Last Stone Weight II problem involves a scenario where you have a set of stones, each with a positive integer weight. When two stones collide, the heavier stone's weight is reduced by the lighter stone's weight. If the weights are equal, both stones are destroyed. The challenge is to determine the minimum possible weight of the remaining stone after all possible collisions.
+This function solves the problem of the last stone weight after performing a series of stone collisions. It uses dynamic programming to compute the closest sum that can be achieved by dividing the stones into two groups.
 
-More formally, given an array of integers representing the weights of the stones, the goal is to find the smallest possible weight of a single stone that can remain after optimally performing all collisions.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int lastStoneWeightII(vector<int>& stones) {
+	```
+	Define the function 'lastStoneWeightII', which takes a vector of integers 'stones' as input and returns the final weight of the last stone after a series of collisions.
 
-### Approach
-To tackle this problem, we can utilize a dynamic programming approach similar to the "subset sum problem." The key idea is to find two subsets of stones such that their weights are as close as possible to each other. The difference in their weights will ultimately determine the minimum weight of the remaining stone.
+2. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initialize the variable 'sum' to 0, which will store the total sum of all stones.
 
-The approach can be broken down into the following steps:
-1. **Calculate the Total Weight**: First, compute the total weight of all stones.
-2. **Dynamic Programming Setup**: Use a 2D dynamic programming table to keep track of the maximum weight that can be achieved with subsets of the stones up to a certain weight.
-3. **Iterate Over Stones**: Fill the DP table by considering each stone and its possible contributions to the maximum weights of the subsets.
-4. **Compute Result**: The minimum remaining weight will be the difference between the total weight and twice the maximum weight of the closest subset to half of the total weight.
+3. **Summing Stones**
+	```cpp
+	    for(int x: stones) sum += x;
+	```
+	Loop through each stone in the 'stones' vector and add its value to 'sum'.
 
-### Code Breakdown (Step by Step)
+4. **Calculate Size**
+	```cpp
+	    int n = stones.size();
+	```
+	Determine the number of stones by calculating the size of the 'stones' vector and store it in 'n'.
 
-1. **Class Definition**: The code begins with the definition of the `Solution` class.
+5. **DP Table Initialization**
+	```cpp
+	    vector<vector<int>> dp(n + 1, vector<int>(sum / 2 + 1, 0));
+	```
+	Create a dynamic programming (DP) table 'dp' with dimensions (n + 1) x (sum / 2 + 1). Each cell will store the maximum sum achievable with a subset of the stones.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+6. **Outer Loop Setup**
+	```cpp
+	    for (int i = 1; i < n + 1  ; i++)
+	```
+	Start a loop that iterates through each stone, from the first stone to the nth stone.
 
-2. **Function Declaration**: The main function `lastStoneWeightII` takes a vector of integers `stones` as input, representing the weights of the stones.
+7. **Inner Loop Setup**
+	```cpp
+	    for (int j = 0; j < sum / 2 + 1; j++) {
+	```
+	Start a nested loop that iterates through possible weight values (from 0 to sum / 2). This loop considers all possible subsets of stones.
 
-   ```cpp
-   int lastStoneWeightII(vector<int>& stones) {
-   ```
+8. **Condition Check**
+	```cpp
+	        if(j >= stones[i - 1]) 
+	```
+	Check if the current weight 'j' is greater than or equal to the weight of the current stone. If it is, consider adding the stone to the current subset.
 
-3. **Calculating Total Weight**: The total weight of the stones is computed using a loop.
+9. **DP Table Update**
+	```cpp
+	             dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stones[i - 1]] + stones[i - 1]);
+	```
+	Update the DP table by taking the maximum value between not including the current stone or including it, adding its weight to the existing sum.
 
-   ```cpp
-   int sum = 0;
-   for(int x: stones) sum += x;
-   ```
+10. **DP Table Update (Else Case)**
+	```cpp
+	        else dp[i][j] = dp[i - 1][j];
+	```
+	If the current stone's weight is larger than the current weight 'j', simply carry over the previous value from the DP table.
 
-4. **Initializing the DP Table**: The size of the DP table is determined based on the number of stones and the maximum weight we need to consider, which is half of the total weight. The DP table is initialized with zeros.
+11. **Return Result**
+	```cpp
+	    return sum - 2 * dp[n][sum / 2];
+	```
+	Return the result, which is the difference between the total sum of stones and twice the value stored in dp[n][sum / 2]. This gives the minimum possible difference between the two groups of stones.
 
-   ```cpp
-   int n = stones.size();
-   vector<vector<int>> dp(n + 1, vector<int>(sum / 2 + 1, 0));
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * sum)
+- **Average Case:** O(n * sum)
+- **Worst Case:** O(n * sum)
 
-5. **Filling the DP Table**: Two nested loops iterate through the stones and potential weights to fill the DP table.
-   - The outer loop iterates over each stone.
-   - The inner loop checks each possible weight from 0 up to half of the total weight.
-   - If the current stone can be included in the subset (i.e., its weight is less than or equal to the current target weight), the DP value is updated to be the maximum of including the stone or excluding it.
+The time complexity is O(n * sum) where n is the number of stones and sum is the total sum of all stones. This is because we need to check all possible subset sums up to half of the total sum.
 
-   ```cpp
-   for (int i = 1; i < n + 1  ; i++)
-       for (int j = 0; j < sum / 2 + 1; j++) {
-           if(j >= stones[i - 1]) 
-                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stones[i - 1]] + stones[i - 1]);
-           else dp[i][j] = dp[i - 1][j];
-       }
-   ```
+### Space Complexity 💾
+- **Best Case:** O(sum)
+- **Worst Case:** O(sum)
 
-6. **Calculating the Result**: The final result is computed by subtracting twice the maximum weight achievable with the closest subset to half of the total weight from the total weight. This effectively gives the minimum weight of the remaining stone.
+The space complexity is O(sum) due to the dynamic programming table used to store the possible subset sums.
 
-   ```cpp
-   return sum - 2 * dp[n][sum / 2];
-   }
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of the solution is \(O(n \times \frac{\text{sum}}{2})\), where \(n\) is the number of stones, and \(\text{sum}\) is the total weight of the stones. This is due to the nested loops that fill the DP table based on the number of stones and the weight limits.
-  
-- **Space Complexity**: The space complexity is \(O(n \times \frac{\text{sum}}{2})\) as well, due to the storage used for the DP table. However, since we only need the previous row to compute the current row, this can be optimized to \(O(\frac{\text{sum}}{2})\) using a 1D array.
-
-### Conclusion
-The `lastStoneWeightII` function efficiently determines the minimum weight of the remaining stone after all possible collisions. By employing a dynamic programming approach, the solution balances between the weights of the stones in such a way that the difference between the two resulting subsets is minimized.
-
-This code exemplifies a practical application of dynamic programming in a combinatorial optimization problem, showcasing both the strategy of subset selection and the ability to navigate through weights effectively.
-
-The clarity and efficiency of this implementation make it suitable for competitive programming and interviews, demonstrating a solid understanding of dynamic programming techniques and problem-solving strategies.
-
-Overall, the solution not only solves the problem effectively but also illustrates fundamental concepts in algorithm design that are crucial for anyone aspiring to master coding interviews and algorithmic challenges.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/last-stone-weight-ii/description/)

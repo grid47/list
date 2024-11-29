@@ -14,125 +14,137 @@ img_src = ""
 youtube = "wdve85GSjO8"
 youtube_upload_date="2021-08-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/wdve85GSjO8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string s, you need to remove the minimum possible number of characters to ensure that no character appears three or more times consecutively in the resulting string. The output should be the final string after all necessary deletions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string s consisting of lowercase English letters.
+- **Example:** `s = "aaabbccaaa"`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string makeFancyString(string s) {
-        int j = 2;
-        for (int i = 2; i < s.size(); ++i)
-            if (s[i] != s[j - 1] || s[i] != s[j - 2])
-                s[j++] = s[i];
-        s.resize(min(j, (int)s.size()));
-        return s;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the final string after removing the minimum possible characters so that no character appears three or more times consecutively.
+- **Example:** `Output: "aabbcca"`
+- **Constraints:**
+	- The answer is guaranteed to be unique.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove characters in such a way that no character appears consecutively more than twice.
 
-The task is to transform a given string by removing consecutive duplicate characters such that no character appears more than twice in a row. For example, given the input string `"leeetcode"`, the output should be `"leetcode"` because the letter "e" appears consecutively more than twice. The goal is to implement a function that processes the string efficiently while maintaining its original order.
+- Step 1: Start iterating through the string from the third character onward.
+- Step 2: Keep track of the previous two characters, and ensure that the current character does not match both.
+- Step 3: If the current character matches both of the previous two characters, skip it (i.e., remove it). Otherwise, add it to the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string will contain only lowercase English letters.
+- The string may contain consecutive identical characters, which could require deletions.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "aaabbccaaa"`  \
+  **Explanation:** In this example, we start with the string "aaabbccaaa". We remove the third 'a' to get "aabbccaaa", then remove the third 'a' again to get "aabbcca". The output is "aabbcca".
 
-### Approach
+- **Input:** `Input: s = "abcde"`  \
+  **Explanation:** Since no character appears three times consecutively, the string remains unchanged and the output is "abcde".
 
-To solve this problem, we can utilize a two-pointer technique to build the modified string in-place. The idea is to use one pointer (`i`) to iterate through the input string and another pointer (`j`) to track the position in the modified string. The algorithm will check the last two characters added to the modified string to ensure that the next character to be added does not create a sequence of three consecutive identical characters.
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the string and remove characters that would cause three consecutive identical characters.
 
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
+### Initial Thoughts 💭
+- This is a greedy problem where we can remove characters as we traverse through the string.
+- We need to ensure that for any character, it doesn't appear three times in a row by checking the last two characters in the result.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always have at least one character, so this case doesn't need to be handled.
+- For large strings, the solution must efficiently handle strings up to the maximum length of 100,000.
+- If the string is already valid (i.e., no three consecutive identical characters), the solution should simply return the original string.
+- The solution must be optimized to handle the upper constraint of 100,000 characters.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-```
-The class `Solution` is defined, and the public member function `makeFancyString` is declared.
-
-```cpp
-    string makeFancyString(string s) {
-```
-The `makeFancyString` function takes a string `s` as input and will return a new string that meets the specified conditions.
-
-```cpp
-        int j = 2;
-```
-We initialize an integer variable `j` to `2`. This variable is used as an index to track the position in the modified string. The first two characters can always be added to the new string since they cannot form a triplet.
-
-```cpp
-        for (int i = 2; i < s.size(); ++i)
-```
-A `for` loop starts with `i` initialized to `2`. This loop will iterate through the characters of the string `s` starting from the third character.
-
-```cpp
-            if (s[i] != s[j - 1] || s[i] != s[j - 2])
-```
-Inside the loop, we check if the current character `s[i]` is different from the last two characters added to the modified string (`s[j - 1]` and `s[j - 2]`). If `s[i]` is not equal to either of the last two characters, it means adding `s[i]` will not create a triplet.
-
-```cpp
-                s[j++] = s[i];
-```
-If the condition is true, we assign `s[i]` to the `j`-th position in the string and increment `j`. This effectively adds the character to the modified string.
-
-```cpp
-        s.resize(min(j, (int)s.size()));
-```
-After the loop, we resize the string `s` to keep only the first `j` characters, which contain the modified content. The `min` function is used to ensure we do not exceed the original string's size.
-
-```cpp
-        return s;
-    }
-```
-Finally, we return the modified string.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \( O(n) \), where \( n \) is the length of the input string. This is because we only traverse the string once with the two-pointer technique.
-
-- **Space Complexity**: The space complexity is \( O(1) \) since we are modifying the string in-place without using any additional data structures that depend on the size of the input.
-
-### Conclusion
-
-The `makeFancyString` function efficiently transforms the input string by ensuring no character appears more than twice consecutively. The use of the two-pointer technique allows us to achieve this in a single pass, making the solution optimal in terms of both time and space complexity.
-
-### Key Features
-
-1. **In-Place Modification**: The algorithm modifies the input string directly, which saves memory and improves efficiency.
-  
-2. **Two-Pointer Technique**: This technique allows us to track the valid position for inserting characters while checking the last two added characters to prevent triplets.
-
-3. **Simple Logic**: The condition to check for duplicates is straightforward, making the code easy to understand and maintain.
-
-### Use Cases
-
-This function can be beneficial in various scenarios, including:
-- **Text Processing**: When formatting strings for display or storage where limits on consecutive characters are required.
-- **Data Cleaning**: Useful in preprocessing textual data to ensure consistency in formats.
-
-### Implementation Considerations
-
-When implementing this solution, consider the following:
-
-- **Edge Cases**: Handle edge cases where the input string may be empty or have fewer than three characters. The current implementation already accommodates these situations gracefully.
-
-- **Character Set**: The function is designed to work with ASCII characters but can be adjusted if needed to handle wider character sets, such as Unicode.
-
-### Example Usage
-
-To demonstrate how the function can be used, consider the following example:
-
-```cpp
-Solution sol;
-string result = sol.makeFancyString("aaaabaaaa");
-cout << result;  // Output: "aababaa"
+string makeFancyString(string s) {
+    int j = 2;
+    for (int i = 2; i < s.size(); ++i)
+        if (s[i] != s[j - 1] || s[i] != s[j - 2])
+            s[j++] = s[i];
+    s.resize(min(j, (int)s.size()));
+    return s;
+}
 ```
 
-This example shows how the function effectively removes the excessive consecutive characters while preserving the order of the remaining characters. By understanding this approach, one can easily adapt the logic for other string manipulation problems that involve constraints on character occurrences.
+This function modifies a string by removing consecutive characters that appear more than twice in a row, ensuring no character repeats more than twice consecutively.
+
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string makeFancyString(string s) {
+	```
+	This is the function header. It takes a string 's' and returns a modified version of 's' where no character appears more than twice consecutively.
+
+2. **Variable Initialization**
+	```cpp
+	    int j = 2;
+	```
+	The variable 'j' is initialized to 2. It keeps track of the position where the next valid character should be placed in the string.
+
+3. **Loop Initialization**
+	```cpp
+	    for (int i = 2; i < s.size(); ++i)
+	```
+	A loop starts at index 2 (since the first two characters are always valid). It iterates through the rest of the string.
+
+4. **Condition Check**
+	```cpp
+	        if (s[i] != s[j - 1] || s[i] != s[j - 2])
+	```
+	This condition checks if the current character 's[i]' is not the same as the previous two characters. If it isn't, it is considered valid and can be added to the modified string.
+
+5. **Character Assignment**
+	```cpp
+	            s[j++] = s[i];
+	```
+	If the character passes the condition, it is assigned to the position 'j', and 'j' is incremented.
+
+6. **Resize String**
+	```cpp
+	    s.resize(min(j, (int)s.size()));
+	```
+	The string is resized to ensure it doesn't contain any extra characters beyond the valid ones. The new size is the minimum of 'j' or the original size of the string.
+
+7. **Return Statement**
+	```cpp
+	    return s;
+	```
+	The modified string 's' is returned, now containing no consecutive characters that appear more than twice.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we only iterate through the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for the result string, which may be as large as the input string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-characters-to-make-fancy-string/description/)
 

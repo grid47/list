@@ -14,130 +14,221 @@ img_src = ""
 youtube = "EWCdm1cKtrA"
 youtube_upload_date="2024-07-02"
 youtube_thumbnail="https://i.ytimg.com/vi/EWCdm1cKtrA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers, determine the maximum sum of a non-empty contiguous subarray where you are allowed to optionally delete at most one element. The subarray must remain non-empty after any deletion.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array representing the values of elements.
+- **Example:** `Input: arr = [2, -4, 3, 7]`
+- **Constraints:**
+	- 1 <= arr.length <= 10^5
+	- -10^4 <= arr[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumSum(vector<int>& arr) {
-        int res = 0, n = arr.size();
-        int curr_mx = arr[0], overall_mx = arr[0];
-        vector<int> f(n), b(n);
-        f[0] = arr[0];
-        for(int i = 1; i < n; i++) {
-            curr_mx = max(arr[i], curr_mx + arr[i]);
-            overall_mx = max(curr_mx, overall_mx);
-            f[i] = curr_mx;
-        }
-        
-        curr_mx = overall_mx = b[n-1] = arr[n-1];
-        for(int i = n-2; i >= 0; i--){
-            curr_mx = max(arr[i], curr_mx + arr[i]);
-            overall_mx = max(overall_mx, curr_mx);
-            b[i] = curr_mx;
-        }
-        
-        res = overall_mx;
-        for(int i = 1; i < n-1; i++) {
-            res = max(res, f[i-1]+b[i+1]);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the maximum sum of the subarray with at most one optional deletion.
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The subarray must remain non-empty.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the maximum sum of a contiguous subarray with the option to delete one element.
+
+- Use dynamic programming to calculate forward maximum sums.
+- Compute backward maximum sums for the array.
+- Combine results to evaluate maximum sums with one deletion allowed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array always contains at least one element.
+- Subarray sums may be negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [3, -1, 5, -2]`  \
+  **Explanation:** You can choose [3, -1, 5] and optionally remove -1 to maximize the sum to 8.
+
+- **Input:** `Input: arr = [-3, -1, -4]`  \
+  **Explanation:** Since all elements are negative, the best subarray is [-1] for a maximum sum of -1.
+
+{{< dots >}}
+## Approach 🚀
+Use a dynamic programming approach to efficiently compute the maximum subarray sums with and without one deletion.
+
+### Initial Thoughts 💭
+- If no deletion is allowed, it reduces to the classic maximum subarray problem.
+- To handle one deletion, we need a way to evaluate the subarray sum excluding one element.
+- Using forward and backward maximum sums allows us to efficiently compute the result for each potential deletion point.
+{{< dots >}}
+### Edge Cases 🌐
+- N/A - The input is guaranteed to have at least one element.
+- An array of length 10^5 with alternating large positive and negative values.
+- An array of all negative values.
+- An array of all positive values.
+- Handling edge cases where the deletion might lead to the highest result.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumSum(vector<int>& arr) {
+    int res = 0, n = arr.size();
+    int curr_mx = arr[0], overall_mx = arr[0];
+    vector<int> f(n), b(n);
+    f[0] = arr[0];
+    for(int i = 1; i < n; i++) {
+        curr_mx = max(arr[i], curr_mx + arr[i]);
+        overall_mx = max(curr_mx, overall_mx);
+        f[i] = curr_mx;
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The goal is to find the maximum sum of a contiguous subarray in a given array of integers, with the added twist that you may delete at most one element from the array. If you decide to delete one element, the remaining subarrays can still be combined to maximize the overall sum.
-
-For example, given an array `[-1, -2, 0, 3]`, the maximum sum after possibly removing an element is `3` (removing `-1` or `-2`). The solution needs to efficiently handle both the case of deleting an element and not deleting any element.
-
-### Approach
-The solution utilizes a dynamic programming approach to keep track of two primary calculations:
-1. **Maximum Subarray Sum Ending at Each Index**: Calculate the maximum sum of subarrays ending at each index, using Kadane's algorithm.
-2. **Maximum Subarray Sum Starting from Each Index**: Calculate the maximum sum of subarrays starting from each index.
-
-By combining these two arrays, we can efficiently compute the maximum sum possible after removing at most one element.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int maximumSum(vector<int>& arr) {
-        int res = 0, n = arr.size();
-```
-- **Lines 1-3**: The `Solution` class contains the `maximumSum` method, which takes a vector of integers `arr` as input.
-- The variable `res` is initialized to hold the result, while `n` is the size of the array.
-
-```cpp
-        int curr_mx = arr[0], overall_mx = arr[0];
-        vector<int> f(n), b(n);
-        f[0] = arr[0];
-```
-- **Lines 4-7**: Two variables, `curr_mx` and `overall_mx`, are initialized to the first element of the array. 
-- Two vectors `f` and `b` are created to store the maximum subarray sums ending at and starting from each index, respectively.
-- `f[0]` is set to the first element since it is the only subarray possible at index 0.
-
-```cpp
-        for(int i = 1; i < n; i++) {
-            curr_mx = max(arr[i], curr_mx + arr[i]);
-            overall_mx = max(curr_mx, overall_mx);
-            f[i] = curr_mx;
-        }
-```
-- **Lines 8-12**: This loop iterates through the array from the second element onwards.
-- `curr_mx` is updated to be the maximum of either the current element alone (`arr[i]`) or the sum of the current element and the maximum subarray sum up to the previous element (`curr_mx + arr[i]`).
-- `overall_mx` is updated to track the maximum value found so far.
-- The maximum subarray sum ending at each index `i` is stored in `f[i]`.
-
-```cpp
-        curr_mx = overall_mx = b[n-1] = arr[n-1];
-```
-- **Line 13**: The variables `curr_mx` and `overall_mx` are reset for the next calculation. `b[n-1]` is initialized to the last element, as it's the only subarray at the last index.
-
-```cpp
-        for(int i = n-2; i >= 0; i--){
-            curr_mx = max(arr[i], curr_mx + arr[i]);
-            overall_mx = max(overall_mx, curr_mx);
-            b[i] = curr_mx;
-        }
-```
-- **Lines 14-18**: This loop iterates backward through the array, similar to the previous loop.
-- The maximum subarray sums starting from each index are calculated and stored in the vector `b`.
-
-```cpp
-        res = overall_mx;
-        for(int i = 1; i < n-1; i++) {
-            res = max(res, f[i-1]+b[i+1]);
-        }
-```
-- **Lines 19-22**: The variable `res` is first set to `overall_mx`, which represents the maximum sum without deleting any element.
-- A second loop iterates from the second to the second-to-last element of the array. For each index `i`, it calculates the sum of the maximum subarray sum ending just before `i` (`f[i-1]`) and the maximum subarray sum starting just after `i` (`b[i+1]`), which simulates the effect of deleting the element at index `i`.
-- The result is updated to the maximum of the current `res` and the combined sums.
-
-```cpp
-        return res;
+    
+    curr_mx = overall_mx = b[n-1] = arr[n-1];
+    for(int i = n-2; i >= 0; i--){
+        curr_mx = max(arr[i], curr_mx + arr[i]);
+        overall_mx = max(overall_mx, curr_mx);
+        b[i] = curr_mx;
     }
-};
+    
+    res = overall_mx;
+    for(int i = 1; i < n-1; i++) {
+        res = max(res, f[i-1]+b[i+1]);
+    }
+    return res;
+}
 ```
-- **Line 23**: Finally, the method returns the maximum sum found.
 
-### Complexity
-1. **Time Complexity**: 
-   - The algorithm consists of two linear passes through the array, resulting in a total time complexity of \(O(n)\).
-  
-2. **Space Complexity**: 
-   - The solution uses \(O(n)\) space for the two additional vectors `f` and `b` that store intermediate results.
+This function calculates the maximum sum of a subarray in the given array `arr` by considering at most one removal of an element. The approach uses dynamic programming to track the maximum sums from both ends of the array and combines them to find the optimal solution.
 
-### Conclusion
-The `maximumSum` function efficiently computes the maximum possible sum of a contiguous subarray, considering the option to remove at most one element. By utilizing dynamic programming techniques and Kadane's algorithm for tracking maximum sums, the solution is both optimal and straightforward. This approach provides a robust means of tackling the problem while maintaining clarity and efficiency, making it suitable for larger input sizes. The ability to handle both cases—removing an element or not—ensures that all potential solutions are considered, leading to the best possible outcome.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumSum(vector<int>& arr) {
+	```
+	Define the function `maximumSum` which takes an integer array `arr` as input and returns the maximum sum after removing one element, or keeping the array unchanged.
+
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, n = arr.size();
+	```
+	Initialize `res` to store the result and `n` to store the size of the array.
+
+3. **Variable Initialization**
+	```cpp
+	    int curr_mx = arr[0], overall_mx = arr[0];
+	```
+	Initialize `curr_mx` and `overall_mx` to the first element of the array. These will track the current and overall maximum sums, respectively.
+
+4. **Array Initialization**
+	```cpp
+	    vector<int> f(n), b(n);
+	```
+	Initialize two vectors `f` and `b` to store the maximum sums for each index from the left and right sides, respectively.
+
+5. **Array Assignment**
+	```cpp
+	    f[0] = arr[0];
+	```
+	Set the first element of `f` to be the same as the first element of the array `arr`.
+
+6. **Loop**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	Loop through the array starting from the second element to calculate the maximum subarray sum from the left.
+
+7. **Max Function**
+	```cpp
+	        curr_mx = max(arr[i], curr_mx + arr[i]);
+	```
+	Update `curr_mx` to be the maximum of the current element `arr[i]` and the sum of the current element with the previous subarray sum.
+
+8. **Max Function**
+	```cpp
+	        overall_mx = max(curr_mx, overall_mx);
+	```
+	Update `overall_mx` to be the maximum of the current subarray sum (`curr_mx`) and the overall maximum sum so far.
+
+9. **Array Assignment**
+	```cpp
+	        f[i] = curr_mx;
+	```
+	Assign the current maximum sum `curr_mx` to the `f` vector at index `i`.
+
+10. **Variable Assignment**
+	```cpp
+	    curr_mx = overall_mx = b[n-1] = arr[n-1];
+	```
+	Initialize `curr_mx`, `overall_mx`, and `b[n-1]` to the last element of the array `arr`.
+
+11. **Loop**
+	```cpp
+	    for(int i = n-2; i >= 0; i--){
+	```
+	Loop through the array starting from the second last element to calculate the maximum subarray sum from the right.
+
+12. **Max Function**
+	```cpp
+	        curr_mx = max(arr[i], curr_mx + arr[i]);
+	```
+	Update `curr_mx` to be the maximum of the current element `arr[i]` and the sum of the current element with the previous subarray sum.
+
+13. **Max Function**
+	```cpp
+	        overall_mx = max(overall_mx, curr_mx);
+	```
+	Update `overall_mx` to be the maximum of the current subarray sum (`curr_mx`) and the overall maximum sum so far.
+
+14. **Array Assignment**
+	```cpp
+	        b[i] = curr_mx;
+	```
+	Assign the current maximum sum `curr_mx` to the `b` vector at index `i`.
+
+15. **Variable Assignment**
+	```cpp
+	    res = overall_mx;
+	```
+	Assign the overall maximum sum to `res`.
+
+16. **Loop**
+	```cpp
+	    for(int i = 1; i < n-1; i++) {
+	```
+	Loop through the array, skipping the first and last element, to calculate the maximum possible sum by removing one element.
+
+17. **Max Function**
+	```cpp
+	        res = max(res, f[i-1]+b[i+1]);
+	```
+	Update `res` to the maximum of the current result and the sum of the left and right maximum sums from vectors `f` and `b`.
+
+18. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the maximum sum `res`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Iterating over the array multiple times for forward and backward passes.
+
+### Space Complexity 💾
+- **Best Case:** O(1) if the backward pass is combined with a single array.
+- **Worst Case:** O(n)
+
+Space can be reduced by combining computations in a single loop.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/description/)
 

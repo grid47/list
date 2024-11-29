@@ -14,157 +14,236 @@ img_src = ""
 youtube = "UFCF01O7Yxk"
 youtube_upload_date="2023-08-20"
 youtube_thumbnail="https://i.ytimg.com/vi/UFCF01O7Yxk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of integers nums and an integer k. Your task is to find the length of the longest subarray where all the elements are equal after you delete at most k elements.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer k.
+- **Example:** `nums = [1, 3, 2, 3, 1, 3], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= nums.length
+	- 0 <= k <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestEqualSubarray(vector<int>& nums, int k) {
-        
-        int n = nums.size();
-        vector<vector<int>> grid(n + 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest subarray where all the elements are equal after deleting at most k elements.
+- **Example:** `3`
+- **Constraints:**
+	- The output should be a single integer representing the length of the longest possible subarray.
 
-        int ans = 0;
-        for(int i = 0; i < n; i++) {
-            grid[nums[i]].push_back(i);
-        }
-                
-        for(int e = 1; e <= n; e++) {
-            
-            if(grid[e].size() == 0) continue;
-            
-            int left = 0, right = 1, rm = 0;
-            
-            while(left < grid[e].size() && right < grid[e].size()) {
-                rm += (grid[e][right] - grid[e][right - 1] - 1);
-                if (rm <= k) {
-                    ans = max(ans, 1 + (right - left));
-                    right++;
-                } else {
-                    right++;
-                    left++;
-                    if(left < grid[e].size())
-                    rm -= (grid[e][left] - grid[e][left - 1] - 1);
-                }
-            }
-        }
-        
-        return max(ans, 1);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the longest possible subarray of equal elements after deleting at most k elements.
 
-### Problem Statement
+- Group the indices of each element in nums.
+- For each element, use a sliding window to count how many elements can be deleted to form a subarray of equal elements.
+- Calculate the maximum length of such subarrays.
+{{< dots >}}
+### Problem Assumptions ✅
+- The elements of the nums array are between 1 and the length of the nums array.
+- You are allowed to delete at most k elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 3, 2, 3, 1, 3], k = 3`  \
+  **Explanation:** After deleting two elements at indices 2 and 4, the array becomes [1, 3, 3, 3], and the longest subarray of equal elements is [3, 3, 3] with a length of 3.
 
-The problem asks to find the longest subarray of equal elements in a given array `nums` such that you can modify the subarray with at most `k` operations. In each operation, you can change any element in the subarray to any other integer in the array. The goal is to return the length of the longest subarray of equal elements after at most `k` operations.
+- **Input:** `nums = [1, 1, 2, 2, 1, 1], k = 2`  \
+  **Explanation:** After deleting two elements at indices 2 and 3, the array becomes [1, 1, 1, 1], which is the longest subarray of equal elements with a length of 4.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using a sliding window approach, where we track the number of deletions needed to make a subarray of equal elements.
 
-To solve this problem, we can use a sliding window approach with the help of a grid to efficiently track the positions of the elements. The solution is as follows:
-
-1. **Grid Construction**: 
-   We first construct a grid (a list of lists) where each element in the grid corresponds to the indices in the array where a particular number appears. This allows us to track the positions of each number in the array easily.
-
-2. **Sliding Window Approach**: 
-   For each unique number in the array (tracked in the grid), we use a sliding window to determine the longest contiguous subarray where all elements are equal to that number, allowing for at most `k` modifications. The sliding window maintains the number of elements that can be modified to make all the numbers in the window equal to the current number.
-
-3. **Operations Count (rm)**: 
-   The variable `rm` tracks the number of elements that need to be modified to make all elements in the current window equal to the chosen number. If `rm` exceeds `k`, the window is adjusted by moving the left pointer forward to shrink the window.
-
-4. **Update Maximum Length**: 
-   For each number in the grid, we calculate the longest subarray where all elements can be made equal with at most `k` operations. We maintain the maximum length found across all numbers.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Function Definition and Initializations
-
+### Initial Thoughts 💭
+- We need to find subarrays where all the elements are the same after deleting at most k elements.
+- We can group the indices of each element and check which subarray can be made equal with minimal deletions.
+- Sliding window technique is ideal for problems involving subarrays where we need to calculate the longest valid segment.
+{{< dots >}}
+### Edge Cases 🌐
+- The array may be empty, in which case the result should be 0.
+- For large arrays, efficient handling of the sliding window and grouping is required.
+- If k is 0, no deletions are allowed, and the subarray must already be equal.
+- Ensure that the time complexity remains efficient, especially for large inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
 int longestEqualSubarray(vector<int>& nums, int k) {
+    
     int n = nums.size();
     vector<vector<int>> grid(n + 1);
+
     int ans = 0;
-```
-
-- The function `longestEqualSubarray` takes two arguments: the array `nums` and the integer `k`, which is the maximum number of operations allowed.
-- `n` is the size of the array `nums`.
-- `grid` is a 2D vector, where each index `e` holds the positions of number `e` in the array `nums`. This helps to quickly access the indices of each number.
-- `ans` stores the result, which is the length of the longest equal subarray found.
-
-#### 2. Building the Grid
-
-```cpp
-for(int i = 0; i < n; i++) {
-    grid[nums[i]].push_back(i);
-}
-```
-
-- In this loop, we traverse through the array `nums`, and for each number `nums[i]`, we store its index in the corresponding position in the `grid` array.
-
-#### 3. Sliding Window for Each Number
-
-```cpp
-for(int e = 1; e <= n; e++) {
-    if(grid[e].size() == 0) continue;
-    int left = 0, right = 1, rm = 0;
-```
-
-- We now iterate through each possible number `e` (from `1` to `n`).
-- If the number `e` is not present in the array (`grid[e].size() == 0`), we skip it.
-- `left` and `right` are the pointers representing the sliding window.
-- `rm` (remaining modifications) keeps track of how many modifications are needed to make all elements in the window equal to `e`.
-
-#### 4. Sliding Window Logic
-
-```cpp
-while(left < grid[e].size() && right < grid[e].size()) {
-    rm += (grid[e][right] - grid[e][right - 1] - 1);
-    if (rm <= k) {
-        ans = max(ans, 1 + (right - left));
-        right++;
-    } else {
-        right++;
-        left++;
-        if(left < grid[e].size())
-        rm -= (grid[e][left] - grid[e][left - 1] - 1);
+    for(int i = 0; i < n; i++) {
+        grid[nums[i]].push_back(i);
     }
+            
+    for(int e = 1; e <= n; e++) {
+        
+        if(grid[e].size() == 0) continue;
+        
+        int left = 0, right = 1, rm = 0;
+        
+        while(left < grid[e].size() && right < grid[e].size()) {
+            rm += (grid[e][right] - grid[e][right - 1] - 1);
+            if (rm <= k) {
+                ans = max(ans, 1 + (right - left));
+                right++;
+            } else {
+                right++;
+                left++;
+                if(left < grid[e].size())
+                rm -= (grid[e][left] - grid[e][left - 1] - 1);
+            }
+        }
+    }
+    
+    return max(ans, 1);
 }
 ```
 
-- Inside this while loop, we manage the sliding window:
-  - First, calculate how many elements need to be modified to make all the numbers in the window equal to `e`. This is done by subtracting the distance between two consecutive indices of `e`.
-  - If `rm <= k`, the window is valid, and we update the maximum length of the subarray (`ans`).
-  - If `rm > k`, we move the left pointer forward to reduce the size of the window, and adjust `rm` accordingly.
+This function aims to find the longest subarray of equal elements where the difference between the indices of the elements exceeds a threshold `k`. It uses a sliding window technique with a frequency map for efficient lookup.
 
-#### 5. Final Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestEqualSubarray(vector<int>& nums, int k) {
+	```
+	Define the function `longestEqualSubarray`, which takes a vector `nums` and an integer `k` as input.
 
-```cpp
-return max(ans, 1);
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initialize `n` to the size of the `nums` array.
 
-- After processing all possible numbers and their corresponding sliding windows, we return the maximum length of the equal subarray found.
-- The result is the maximum of `ans` and `1` since a subarray with a single element is always valid.
+3. **Grid Setup**
+	```cpp
+	    vector<vector<int>> grid(n + 1);
+	```
+	Create a 2D grid (vector of vectors) to store the indices of each element in `nums`.
 
-### Complexity
+4. **Answer Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize the variable `ans` to store the maximum length of the subarray found.
 
-1. **Time Complexity**:
-   - **O(n)** for building the `grid`, where `n` is the size of the array `nums`.
-   - For each number `e`, the sliding window process takes **O(m)**, where `m` is the number of occurrences of `e` in the array.
-   - Since we iterate over all the numbers and their occurrences, the time complexity for the sliding window part is **O(n)** in total.
-   - Thus, the overall time complexity is **O(n)**, where `n` is the size of the input array `nums`.
+5. **Iterating Over nums**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterate over each element `i` in `nums`.
 
-2. **Space Complexity**:
-   - The space complexity is primarily determined by the `grid`, which stores the indices of each number in `nums`. In the worst case, the space complexity is **O(n)** because there are `n` numbers, and each number can appear at most `n` times.
-   - Thus, the overall space complexity is **O(n)**.
+6. **Populating Grid**
+	```cpp
+	        grid[nums[i]].push_back(i);
+	```
+	For each element in `nums`, push its index into the corresponding grid slot based on the element's value.
 
-### Conclusion
+7. **Iterating Over Grid**
+	```cpp
+	    for(int e = 1; e <= n; e++) {
+	```
+	Iterate through the grid from index `1` to `n`.
 
-This solution uses a combination of **sliding window** and **grid-based indexing** to find the longest subarray where all elements can be made equal with at most `k` modifications. The solution efficiently processes the array in linear time **O(n)** and is optimal for handling large input sizes. The space complexity is also **O(n)**, making it space-efficient. This approach provides an effective and scalable way to solve the problem of finding the longest equal subarray with bounded modifications.
+8. **Skipping Empty Grids**
+	```cpp
+	        if(grid[e].size() == 0) continue;
+	```
+	If the grid at index `e` is empty, skip to the next iteration.
+
+9. **Sliding Window Initialization**
+	```cpp
+	        int left = 0, right = 1, rm = 0;
+	```
+	Initialize the sliding window pointers `left`, `right`, and the variable `rm` to keep track of the remaining space within the window.
+
+10. **Sliding Window Loop**
+	```cpp
+	        while(left < grid[e].size() && right < grid[e].size()) {
+	```
+	Start a `while` loop to manage the sliding window, adjusting the `left` and `right` pointers.
+
+11. **Updating Remaining Space**
+	```cpp
+	            rm += (grid[e][right] - grid[e][right - 1] - 1);
+	```
+	Update the remaining space `rm` by calculating the gaps between consecutive indices in the grid.
+
+12. **Checking Window Validity**
+	```cpp
+	            if (rm <= k) {
+	```
+	If the remaining space `rm` is within the allowed threshold `k`, update the answer.
+
+13. **Updating Answer**
+	```cpp
+	                ans = max(ans, 1 + (right - left));
+	```
+	Update the answer by taking the maximum of the current `ans` and the length of the window (right - left).
+
+14. **Incrementing Right Pointer**
+	```cpp
+	                right++;
+	```
+	Increment the `right` pointer to expand the window.
+
+15. **Else Condition**
+	```cpp
+	            } else {
+	```
+	If the `rm` exceeds `k`, reduce the window from the left.
+
+16. **Incrementing Right Pointer Again**
+	```cpp
+	                right++;
+	```
+	Increment the `right` pointer to expand the window.
+
+17. **Incrementing Left Pointer**
+	```cpp
+	                left++;
+	```
+	Increment the `left` pointer to shrink the window.
+
+18. **Updating Remaining Space After Shrinking**
+	```cpp
+	                if(left < grid[e].size())
+	                rm -= (grid[e][left] - grid[e][left - 1] - 1);
+	```
+	After adjusting the `left` pointer, update the remaining space `rm` by recalculating the gap.
+
+19. **Returning Result**
+	```cpp
+	    return max(ans, 1);
+	```
+	Return the maximum of `ans` and `1` as the result, ensuring at least a length of 1.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, as we iterate through the elements and use a sliding window approach.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is linear due to the storage of index groups for each element.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-longest-equal-subarray/description/)
 

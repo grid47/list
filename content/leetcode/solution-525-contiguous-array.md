@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "3dRoRxipjhY"
 youtube_upload_date="2020-04-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/3dRoRxipjhY/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,109 +28,172 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/3dRoRxipjhY/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary array of integers nums, where each element is either 0 or 1.
+- **Example:** `nums = [1, 0, 1, 0]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- nums[i] is either 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findMaxLength(vector<int>& nums) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum length of a contiguous subarray with an equal number of 0s and 1s.
+- **Example:** `4`
+- **Constraints:**
+	- The output is an integer.
 
-        int n = nums.size();
-        int score = 0, res = 0;
-        map<int, int> mp;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the length of the longest contiguous subarray that has an equal number of 0s and 1s.
 
-        for(int i = 0; i < n; i++) {
-            score += nums[i]? 1: -1;
+- 1. Use a score to track the difference between the count of 1s and 0s.
+- 2. If the score is zero at any point, it means that the subarray from the start to the current index has an equal number of 1s and 0s.
+- 3. Use a hash map to store the first occurrence of each score, and calculate the length of the subarray whenever the score is repeated.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array nums contains only 0s and 1s.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 0, 1, 0]`  \
+  **Explanation:** The entire array is a contiguous subarray with an equal number of 0s and 1s, so the answer is 4.
 
-            if(score == 0) res = i + 1;
-            else {
+- **Input:** `nums = [1, 1, 0, 0, 1, 0]`  \
+  **Explanation:** The longest contiguous subarray with an equal number of 0s and 1s is the entire array itself, so the answer is 6.
 
-                if(mp.count(score))
-                res = max(res, i - mp[score]);
+{{< dots >}}
+## Approach 🚀
+The approach involves using a score to track the difference between the counts of 1s and 0s in the array, and using a hash map to efficiently calculate the longest subarray with an equal number of 0s and 1s.
 
-                if(!mp.count(score)) mp[score] = i;
-            }
+### Initial Thoughts 💭
+- This problem can be solved using a technique based on prefix sums or difference arrays.
+- By treating 1 as +1 and 0 as -1, we can use a cumulative sum to track the difference.
+{{< dots >}}
+### Edge Cases 🌐
+- The solution should handle the edge case of an empty array.
+- The solution should efficiently handle large arrays with a length up to 10^5.
+- If the array contains only 0s or only 1s, the result should be 0 since no subarray with an equal number of 0s and 1s exists.
+- The solution must handle arrays of length up to 10^5 in O(n) time complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+int findMaxLength(vector<int>& nums) {
+
+    int n = nums.size();
+    int score = 0, res = 0;
+    map<int, int> mp;
+
+    for(int i = 0; i < n; i++) {
+        score += nums[i]? 1: -1;
+
+        if(score == 0) res = i + 1;
+        else {
+
+            if(mp.count(score))
+            res = max(res, i - mp[score]);
+
+            if(!mp.count(score)) mp[score] = i;
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function finds the maximum length of a contiguous subarray in which the number of 1s and 0s are equal. It uses a prefix sum technique with a hash map to track the balance of 1s and 0s as it iterates through the array.
 
-Given a binary array `nums` containing only 0s and 1s, find the maximum length of a contiguous subarray with an equal number of 0s and 1s.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findMaxLength(vector<int>& nums) {
+	```
+	Defines the function `findMaxLength` that takes a vector `nums` of 1s and 0s, and returns the maximum length of a contiguous subarray where the number of 1s equals the number of 0s.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializes the variable `n` to store the size of the input array `nums`.
 
-This solution leverages a cumulative "score" approach, where we treat each `0` as `-1` and each `1` as `+1`. By doing this, any subarray with an equal number of 0s and 1s will have a total score of `0`. 
+3. **Variable Initialization**
+	```cpp
+	    int score = 0, res = 0;
+	```
+	Initializes two variables: `score` to track the current balance of 1s and 0s, and `res` to store the maximum length of the valid subarray found so far.
 
-### Code Breakdown (Step by Step)
+4. **Hash Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a hash map `mp` that will store the first occurrence of each balance (`score`). This helps in finding the longest subarray with a sum of zero.
 
-1. **Initialize Variables**: 
+5. **Main Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through the array `nums`, updating the `score` and checking for the longest valid subarray.
 
-   ```cpp
-   int n = nums.size();
-   int score = 0, res = 0;
-   map<int, int> mp;
-   ```
+6. **Balance Calculation**
+	```cpp
+	        score += nums[i]? 1: -1;
+	```
+	Updates the `score` by adding 1 if `nums[i]` is 1, or subtracting 1 if it is 0. This represents the balance of 1s and 0s.
 
-   - `n` stores the size of `nums`.
-   - `score` keeps a running total based on the values in `nums` (adding `1` for `1`s and subtracting `1` for `0`s).
-   - `res` keeps track of the maximum length of a subarray with an equal number of `0`s and `1`s.
-   - `mp` is a map that tracks the first index where each cumulative score was seen.
+7. **Check for Zero Balance**
+	```cpp
+	        if(score == 0) res = i + 1;
+	```
+	Checks if the `score` is zero, which means the subarray from the beginning to the current index has an equal number of 1s and 0s. If so, it updates `res` to be the length of this subarray.
 
-2. **Iterate Through the Array**:
+8. **Handle Non-Zero Balance**
+	```cpp
+	        else {
+	```
+	If `score` is not zero, it checks the hash map `mp` to determine the longest valid subarray.
 
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       score += nums[i] ? 1 : -1;
-   ```
+9. **Check Map for Existing Balance**
+	```cpp
+	            if(mp.count(score))
+	```
+	Checks if the `score` has been encountered before in the hash map `mp`. If it has, it means there exists a subarray that sums to zero between the previous occurrence of this balance and the current index.
 
-   - Loop through `nums`. For each `1` encountered, increment `score` by `1`; for each `0`, decrement `score` by `1`.
-   - This cumulative score helps identify sections of the array where the count of 0s equals the count of 1s.
+10. **Update Result**
+	```cpp
+	            res = max(res, i - mp[score]);
+	```
+	Updates `res` to the maximum length of the subarray found so far. This is done by comparing the current length (`i - mp[score]`) with the previous maximum length stored in `res`.
 
-3. **Check for Balanced Subarrays**:
+11. **Insert Score into Map**
+	```cpp
+	            if(!mp.count(score)) mp[score] = i;
+	```
+	If the `score` has not been encountered before, it is added to the hash map `mp` with its index `i` as the value.
 
-   ```cpp
-   if(score == 0) res = i + 1;
-   ```
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the maximum length of a subarray with an equal number of 1s and 0s.
 
-   - If `score` is `0`, then from the start of the array to the current index `i`, we have an equal count of 0s and 1s. Update `res` to `i + 1` (the entire length so far).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Check Map for Previous Score Occurrences**:
+In all cases, the time complexity is O(n) since we traverse the array once.
 
-   ```cpp
-   if(mp.count(score))
-       res = max(res, i - mp[score]);
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1), if the score repeats immediately.
+- **Worst Case:** O(n), where n is the number of distinct scores encountered.
 
-   - If `score` has been seen before at a previous index, then the subarray between that index and the current index `i` has an equal count of 0s and 1s. We update `res` to the maximum length found.
+The space complexity is O(n) due to the hash map storing the first occurrence of each score.
 
-5. **Store First Occurrence of Each Score**:
+**Happy Coding! 🎉**
 
-   ```cpp
-   if(!mp.count(score)) mp[score] = i;
-   ```
-
-   - If `score` hasn’t been seen before, we store it in `mp` with the current index `i`. This ensures that only the first occurrence of each score is stored, which helps maximize the length of any valid subarray found later.
-
-6. **Return the Result**:
-
-   ```cpp
-   return res;
-   ```
-
-   - The result `res` contains the maximum length of a contiguous subarray with an equal count of 0s and 1s.
-
-### Complexity
-
-- **Time Complexity**: `O(n)`, as we only iterate through `nums` once.
-- **Space Complexity**: `O(n)`, due to the usage of the map `mp`, which can store up to `n` entries.
-
-### Conclusion
-
-This solution efficiently solves the problem by converting it into a cumulative score tracking problem. By mapping each score’s first occurrence, we quickly find the longest subarray with an equal number of 0s and 1s. The solution has optimal time and space complexity for handling large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/contiguous-array/description/)
 

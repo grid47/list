@@ -14,123 +14,177 @@ img_src = ""
 youtube = "v6On1TQfMTU"
 youtube_upload_date="2020-08-04"
 youtube_thumbnail="https://i.ytimg.com/vi/v6On1TQfMTU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of distinct integers and an integer k. The game is played between the first two elements of the array. In each round, the larger integer wins and remains at position 0, while the smaller integer moves to the end of the array. The game ends when one integer wins k consecutive rounds. Your task is to return the integer that wins the game.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array arr and an integer k.
+- **Example:** `arr = [4, 2, 6, 5, 3, 1], k = 3`
+- **Constraints:**
+	- 2 <= arr.length <= 10^5
+	- 1 <= arr[i] <= 10^6
+	- arr contains distinct integers.
+	- 1 <= k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getWinner(vector<int>& arr, int k) {
-        int n = arr.size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the integer that wins the game after winning k consecutive rounds.
+- **Example:** `For arr = [4, 2, 6, 5, 3, 1] and k = 3, the output is 6.`
+- **Constraints:**
+	- The output is the integer that wins after k consecutive wins.
 
-        int cnt = 0;
-        int j = 0;
-        for(int i = 1; i < n; i++) {
-            if(arr[i] < arr[j]) {
-                cnt++;
-            } else {
-                cnt = 1;
-                j = i;
-            }
-            if(cnt == k) return arr[j];            
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the integer that wins the game after k consecutive rounds.
+
+- Compare the first two elements of the array, move the smaller one to the end, and repeat the process until one integer wins k rounds consecutively.
+- Track the number of consecutive wins for each integer.
+- Return the integer that wins k consecutive rounds.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always have at least two elements.
+- There will always be a winner as guaranteed by the problem.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `arr = [4, 2, 6, 5, 3, 1], k = 3`  \
+  **Explanation:** The rounds play out as follows: 4 wins the first round, 6 wins the next two rounds, making it the winner after 3 consecutive wins.
+
+- **Input:** `arr = [9, 3, 2, 1, 7, 5], k = 2`  \
+  **Explanation:** The integer 9 wins the first two rounds consecutively and becomes the winner.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, simulate the rounds of the game and track the consecutive wins of each integer.
+
+### Initial Thoughts 💭
+- The game revolves around comparing the first two elements and shifting the smaller one to the end of the array.
+- By tracking consecutive wins, we can determine when an integer wins k rounds.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least two elements in the array.
+- Ensure that the solution handles large arrays efficiently (up to 10^5 elements).
+- Handle the case where one integer wins all rounds quickly.
+- Ensure the solution handles k values as large as 10^9.
+{{< dots >}}
+## Code 💻
+```cpp
+int getWinner(vector<int>& arr, int k) {
+    int n = arr.size();
+
+    int cnt = 0;
+    int j = 0;
+    for(int i = 1; i < n; i++) {
+        if(arr[i] < arr[j]) {
+            cnt++;
+        } else {
+            cnt = 1;
+            j = i;
         }
-        return arr[j];
+        if(cnt == k) return arr[j];            
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves determining the winner in a game based on a series of comparisons between elements in an array. Given an array of integers, we need to find the winning number after a sequence of comparisons defined by the following rules:
-
-1. Start with the first element as the current winner.
-2. Compare the current winner with the next element in the array.
-3. If the next element is greater than the current winner, the next element becomes the new winner, and the comparison count resets.
-4. If the next element is less than or equal to the current winner, the current winner remains the same, and the count of consecutive wins for the current winner increases.
-5. If the current winner wins `k` consecutive comparisons, that winner is declared the overall winner.
-6. If the loop completes and no one has won `k` consecutive comparisons, the last standing winner is declared the overall winner.
-
-### Approach
-
-To efficiently solve this problem, we will iterate through the array while maintaining a counter for consecutive wins. The strategy involves:
-
-- Initializing the first element of the array as the current winner.
-- Using a counter to track how many times the current winner has won consecutively against subsequent elements.
-- As we iterate through the array, we check each element against the current winner:
-  - If the next element is greater, we update the winner and reset the counter.
-  - If the next element is less than or equal, we increment the counter.
-- If the counter reaches `k`, we return the current winner immediately.
-- If we reach the end of the array without any winner achieving `k` consecutive wins, we return the last known winner.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int getWinner(vector<int>& arr, int k) {
-        int n = arr.size(); // Get the size of the array
+    return arr[j];
+}
 ```
-- We start by defining the class `Solution` and declaring the function `getWinner`, which takes in an array of integers `arr` and an integer `k`.
-- We retrieve the size of the array and store it in `n`.
 
-```cpp
-        int cnt = 0; // Counter for consecutive wins
-        int j = 0; // Index of the current winner
-```
-- We initialize `cnt` to count how many times the current winner has won consecutively.
-- We set `j` to the index of the current winner, initially starting with the first element at index `0`.
+This function determines the winner in a game where each element in the array is compared to the previous one, counting consecutive smaller elements. The winner is the element after `k` consecutive smaller elements.
 
-```cpp
-        for(int i = 1; i < n; i++) {
-            if(arr[i] < arr[j]) {
-                cnt++; // Increment the win count for the current winner
-            } else {
-                cnt = 1; // Reset count and update the winner index
-                j = i; // Update the winner to the current element
-            }
-```
-- We iterate through the array starting from the second element (index `1`).
-- If the current element is less than the current winner (`arr[j]`), we increment the win count for the current winner.
-- If the current element is greater than the current winner, we reset the count to `1` (indicating the new winner has won) and update the winner's index to the current element's index.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int getWinner(vector<int>& arr, int k) {
+	```
+	This is the function declaration. The function `getWinner` takes a vector of integers `arr` and an integer `k` as input, and it returns the integer representing the winner based on the conditions.
 
-```cpp
-            if(cnt == k) return arr[j]; // Return the winner if it wins k times
-        }
-```
-- After updating the counts, we check if the count of consecutive wins has reached `k`. If so, we return the current winner (`arr[j]`).
+2. **Variable Initialization**
+	```cpp
+	    int n = arr.size();
+	```
+	The variable `n` is initialized to the size of the input array `arr`. This represents the number of elements in the array.
 
-```cpp
-        return arr[j]; // If no winner achieved k wins, return the last known winner
-    }
-};
-```
-- If we finish the loop and no element has reached `k` wins, we return the last known winner, which is the element at `arr[j]`.
+3. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	The variable `cnt` is initialized to zero. It will keep track of how many consecutive elements are smaller than the current element.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int j = 0;
+	```
+	The variable `j` is initialized to zero. It will store the index of the current smallest element in the sequence.
 
-#### Time Complexity
-- The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of elements in the array. We traverse the array once, making a constant amount of work for each element.
+5. **For Loop**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	A for loop starts from the second element (index 1) and iterates through the array `arr`.
 
-#### Space Complexity
-- The space complexity is \(O(1)\) since we are using a fixed amount of additional space regardless of the input size (only a few integer variables are used).
+6. **Conditional Check**
+	```cpp
+	        if(arr[i] < arr[j]) {
+	```
+	This condition checks if the current element `arr[i]` is smaller than the element at index `j`.
 
-### Conclusion
+7. **Increment Operation**
+	```cpp
+	            cnt++;
+	```
+	If the current element is smaller, increment the `cnt` variable, which tracks the number of consecutive smaller elements.
 
-The solution to the problem efficiently determines the winner of the game based on the specified rules. By maintaining a simple count of consecutive wins and updating the current winner accordingly, we achieve an optimal solution.
+8. **Else Statement**
+	```cpp
+	        } else {
+	```
+	If the current element is not smaller than the element at index `j`, reset the count and update `j`.
 
-**Key Takeaways**:
-- **Iterative Comparison**: The algorithm leverages an iterative approach to handle comparisons and updates in a single pass through the array.
-- **Early Exit**: The early return mechanism allows for quick results as soon as a winner achieves the required number of consecutive wins.
-- **Simplicity and Efficiency**: The overall simplicity of the approach, combined with its efficiency, makes it a suitable solution for problems involving sequential comparisons in arrays.
+9. **Variable Reset**
+	```cpp
+	            cnt = 1;
+	```
+	The `cnt` variable is reset to 1 because the current element is smaller than the previous element.
 
-This method serves as an excellent example of applying straightforward logic to solve a competitive programming problem, showcasing the ability to track and compare values efficiently within a linear time frame.
+10. **Update Index**
+	```cpp
+	            j = i;
+	```
+	The index `j` is updated to the current index `i`, since we are now considering the current element as the smallest in the sequence.
+
+11. **Conditional Check**
+	```cpp
+	        if(cnt == k) return arr[j];            
+	```
+	This condition checks if the `cnt` reaches `k`. If so, the element at index `j` is returned as the winner.
+
+12. **Return Statement**
+	```cpp
+	    return arr[j];
+	```
+	If no element reaches the `k` consecutive smaller elements, the element at index `j` is returned as the winner.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the length of the array. The game ends as soon as a winner wins k consecutive rounds.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the input array size.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-winner-of-an-array-game/description/)
 

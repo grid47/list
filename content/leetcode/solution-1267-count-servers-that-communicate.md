@@ -14,129 +14,195 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D grid where each cell is either 1 (indicating a server) or 0 (no server). Two servers are said to communicate if they are in the same row or column. The task is to find the number of servers that can communicate with at least one other server.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A 2D grid of size m x n where each cell is either 1 (server) or 0 (no server).
+- **Example:** `grid = [[1,0],[0,1]]`
+- **Constraints:**
+	- 1 <= m <= 250
+	- 1 <= n <= 250
+	- grid[i][j] == 0 or 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countServers(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        vector<int> row(m, 0), col(n, 0);
-        
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                if(grid[i][j] == 1) {
-                    row[i]++;
-                    col[j]++;
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of servers that can communicate with at least one other server.
+- **Example:** `Output: 0`
+- **Constraints:**
+	- The returned number should be an integer representing the number of servers that can communicate with another server.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Count how many servers can communicate with at least one other server by checking the row and column of each server.
+
+- 1. Iterate through each row and column of the grid, counting the number of servers in each row and column.
+- 2. After counting, iterate again to check for servers that have more than one server in their row or column.
+- 3. Return the count of servers that can communicate with another server.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will contain only 0s and 1s.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[1,0],[0,1]]`  \
+  **Explanation:** This is a simple case with two servers that cannot communicate with each other because they are not in the same row or column.
+
+- **Input:** `grid = [[1,0],[1,1]]`  \
+  **Explanation:** In this case, all three servers can communicate with at least one other server.
+
+{{< dots >}}
+## Approach 🚀
+We need to count how many servers can communicate with other servers. The most efficient way is to check each server’s row and column to see if there are other servers present.
+
+### Initial Thoughts 💭
+- We need to check the row and column of each server to determine if it has another server it can communicate with.
+- The approach involves counting the number of servers in each row and each column. Then we can check for each server if it belongs to a row or column that has more than one server.
+{{< dots >}}
+### Edge Cases 🌐
+- If the grid has no servers (all 0s), the result will be 0.
+- The solution should be optimized to handle grids of size up to 250x250.
+- If a server is isolated (its row and column have no other servers), it cannot communicate with any other server.
+- The solution must handle grids up to the maximum constraint of 250x250 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int countServers(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    vector<int> row(m, 0), col(n, 0);
+    
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            if(grid[i][j] == 1) {
+                row[i]++;
+                col[j]++;
             }
         }
-
-        int res = 0;
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                if((grid[i][j] == 1) && ((row[i] > 1) || (col[j] > 1))) {
-                    res++;
-                }
-            }
-        }
-        
-        return res;
     }
-};
-{{< /highlight >}}
----
 
-
-
-### Problem Statement
-In a 2D grid representing a network of servers, a server is represented by a value of `1`, and an empty space is represented by a value of `0`. A server is considered "active" if it can communicate with at least one other server in the same row or column. The objective is to determine the total number of active servers in the grid.
-
-Given a grid of dimensions \( m \times n \), your task is to count the number of servers that can communicate with at least one other server. This involves examining each server and checking the count of servers in its corresponding row and column.
-
-### Approach
-To solve this problem efficiently, we can utilize the following approach:
-
-1. **Count Servers in Rows and Columns**: We traverse the grid to count the number of servers present in each row and each column.
-2. **Determine Active Servers**: In a second traversal of the grid, we check each server. A server is considered active if:
-   - It is present in a row that contains more than one server, or
-   - It is present in a column that contains more than one server.
-3. **Accumulate Results**: We maintain a counter to keep track of the total number of active servers.
-
-This approach allows us to reduce the complexity of checking for active servers significantly, making it more efficient than checking each server individually.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int countServers(vector<vector<int>>& grid) {
-```
-- **Line 1-3**: The `Solution` class is defined, containing the public member function `countServers`, which takes a 2D vector `grid` representing the network of servers.
-
-```cpp
-        int m = grid.size(), n = grid[0].size();
-        vector<int> row(m, 0), col(n, 0);
-```
-- **Line 4-5**: We first determine the number of rows (`m`) and columns (`n`) in the grid. Then, we initialize two vectors, `row` and `col`, to store the count of servers for each row and each column, respectively.
-
-```cpp
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                if(grid[i][j] == 1) {
-                    row[i]++;
-                    col[j]++;
-                }
+    int res = 0;
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            if((grid[i][j] == 1) && ((row[i] > 1) || (col[j] > 1))) {
+                res++;
             }
         }
-```
-- **Line 6-11**: We perform a nested loop through the grid to count the servers:
-  - The outer loop iterates through each row \(i\).
-  - The inner loop iterates through each column \(j\).
-  - If a cell contains a server (`grid[i][j] == 1`), we increment the respective counts in the `row` and `col` arrays.
-
-```cpp
-        int res = 0;
-```
-- **Line 12**: We initialize an integer variable `res` to zero. This variable will store the total count of active servers.
-
-```cpp
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                if((grid[i][j] == 1) && ((row[i] > 1) || (col[j] > 1))) {
-                    res++;
-                }
-            }
-        }
-```
-- **Line 13-19**: We conduct a second nested loop through the grid to determine which servers are active:
-  - For each cell, we check if it contains a server.
-  - We then check if either the count of servers in its row or the count in its column is greater than one.
-  - If either condition is true, we increment the `res` counter.
-
-```cpp
-        return res;
     }
-};
+    
+    return res;
+}
 ```
-- **Line 20**: Finally, we return the value of `res`, which represents the total number of active servers in the grid.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The time complexity of this solution is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. We make two complete passes over the grid: one for counting the servers and another for determining active servers.
+This code defines a function `countServers` that counts how many servers are in a grid where each server can communicate with at least one other server either in the same row or the same column.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(m + n)\) due to the use of two additional arrays (`row` and `col`) to store the counts of servers for each row and column.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countServers(vector<vector<int>>& grid) {
+	```
+	This defines the function `countServers` that takes a 2D grid `grid` of size `m x n`, where each element indicates whether there's a server (1) or not (0). The function returns the total number of servers that can communicate with at least one other server.
 
-### Conclusion
-The `countServers` function provides an efficient solution for determining the number of active servers in a given grid. By utilizing a two-pass approach, the function effectively counts the servers and evaluates their communication capabilities without redundant checks. This algorithm is particularly advantageous for larger grids, as it maintains a linear relationship between the input size and execution time.
+2. **Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	This line calculates the number of rows (`m`) and columns (`n`) in the grid.
 
-In summary, this solution illustrates the effectiveness of organizing data into counts for improved computational efficiency. By focusing on the relationships between the servers in the grid rather than individual comparisons, the function elegantly solves the problem with optimal performance. Such techniques can be applied to various grid-related problems, making them a valuable tool in algorithmic problem-solving.
+3. **Row and Column Tracking**
+	```cpp
+	    vector<int> row(m, 0), col(n, 0);
+	```
+	This initializes two vectors, `row` and `col`, to track the number of servers in each row and each column, respectively.
+
+4. **Nested Loops (Grid Iteration)**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	This outer loop iterates over each row in the grid.
+
+5. **Nested Loops (Inner Grid Iteration)**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	This inner loop iterates over each column in the current row of the grid.
+
+6. **Incrementing Row and Column Counts**
+	```cpp
+	            if(grid[i][j] == 1) {
+	```
+	This checks if there's a server at position (i, j) in the grid.
+
+7. **Update Row and Column Servers**
+	```cpp
+	                row[i]++;
+	```
+	If there is a server in the current cell, it increments the count of servers in the `i`-th row.
+
+8. **Update Row and Column Servers**
+	```cpp
+	                col[j]++;
+	```
+	It also increments the count of servers in the `j`-th column.
+
+9. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	This initializes a variable `res` to 0, which will store the count of servers that can communicate with at least one other server.
+
+10. **Nested Loops (Second Grid Iteration)**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	This loop iterates again over the rows of the grid.
+
+11. **Nested Loops (Inner Grid Iteration)**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	This inner loop iterates over each column in the current row again.
+
+12. **Check Communication Condition**
+	```cpp
+	            if((grid[i][j] == 1) && ((row[i] > 1) || (col[j] > 1))) {
+	```
+	This checks if there's a server at position (i, j) and if the server can communicate with another server in the same row or column.
+
+13. **Increment Result**
+	```cpp
+	                res++;
+	```
+	If the server can communicate with another, it increments the result `res`.
+
+14. **Return Statement**
+	```cpp
+	    return res;
+	```
+	This returns the total count of servers that can communicate with at least one other server.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n) because we iterate through the entire grid twice.
+
+### Space Complexity 💾
+- **Best Case:** O(m + n)
+- **Worst Case:** O(m + n)
+
+The space complexity is O(m + n) because we store counts for rows and columns.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-servers-that-communicate/description/)
 

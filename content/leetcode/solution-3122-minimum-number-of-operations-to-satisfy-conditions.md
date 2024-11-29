@@ -14,90 +14,70 @@ img_src = ""
 youtube = "LLDe54TfbMs"
 youtube_upload_date="2024-04-21"
 youtube_thumbnail="https://i.ytimg.com/vi/LLDe54TfbMs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D matrix `grid` of size `m x n`. In one operation, you can change the value of any cell to any non-negative number. Your task is to perform operations such that each cell is equal to the cell below it, and different from the cell to its right. Return the minimum number of operations needed to achieve these conditions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D matrix `grid` with `m` rows and `n` columns.
+- **Example:** `grid = [[2, 1, 3], [2, 0, 3]]`
+- **Constraints:**
+	- 1 <= n, m <= 1000
+	- 0 <= grid[i][j] <= 9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    int m, n;
-    vector<vector<int>> frq, mem;
-    
-    int dp(int i, int prv) {
-        if(i == frq.size()) return 0;
-        if(mem[i][prv + 1] != -1) return mem[i][prv + 1];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to make each cell equal to the cell below it and different from the cell to its right.
+- **Example:** `Output: 1`
+- **Constraints:**
 
-        int ans = INT_MAX;
-        for(int j = 0; j <= 9; j++) {
-            if(j == prv) continue;
-            ans = min(ans, m - frq[i][j] + dp(i + 1, j));
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum number of operations to make the grid satisfy the given conditions.
 
-        return mem[i][prv + 1] = ans;
-    }
-    
-    int minimumOperations(vector<vector<int>>& grid) {
-        
-        m = grid.size(), n = grid[0].size();
-        
-        frq.resize(n, vector<int>(10, 0));
-        mem.resize(n, vector<int>(11, -1));
-        
-        for(int i = 0; i < n; i++)
-        for(int j = 0; j < m; j++) {
-            frq[i][grid[j][i]]++;
-        }
-        
-        return dp(0, -1);
-    }
-};
-{{< /highlight >}}
----
+- 1. Initialize a frequency table to count the occurrences of each value in each column of the grid.
+- 2. Use dynamic programming to recursively calculate the minimum number of operations needed by considering each column and ensuring the constraints are met.
+- 3. Memoize the results of subproblems to avoid redundant calculations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix consists of non-negative integers between 0 and 9.
+- There will always be at least one row and one column in the matrix.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[2, 1, 3], [2, 0, 3]]`  \
+  **Explanation:** The matrix can be modified to [[2, 1, 3], [2, 1, 3]] with 1 operation, changing grid[1][1] to 1.
 
-### Problem Statement
+- **Input:** `grid = [[3, 3], [3, 3], [3, 3]]`  \
+  **Explanation:** The matrix already satisfies the conditions, so no operations are needed.
 
-The problem is to find the minimum number of operations required to change the numbers in a grid such that no two adjacent numbers (vertically or horizontally) are the same. In each operation, we can change any number in the grid to any digit from 0 to 9. Our goal is to determine the least number of operations needed to achieve this condition.
+- **Input:** `grid = [[1, 0], [1, 0], [1, 1]]`  \
+  **Explanation:** The matrix can be modified to [[1, 0], [1, 0], [1, 0]] with 1 operation, changing grid[2][1] to 0.
 
-Given a grid, the solution needs to compute how to transform it with the fewest changes such that no adjacent cells contain the same number.
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using dynamic programming. We will calculate the frequency of each value in every column and use recursion to calculate the minimum number of operations needed to satisfy the constraints.
 
-### Approach
-
-The approach used in the code is a **dynamic programming (DP)** approach, where the problem is broken down into smaller subproblems. We start by considering each column of the grid and the number of changes required for making the grid valid as we traverse row by row.
-
-The key idea behind the approach is:
-1. **Dynamic Programming to Minimize Changes**: We aim to minimize the number of changes required to transform the grid into a valid one, where adjacent cells do not contain the same digit.
-2. **Frequency Count for Each Column**: We maintain a frequency count of digits in each column of the grid. This helps us to compute the number of changes needed for each potential digit choice.
-3. **Memoization**: To avoid redundant calculations, we use a memoization table (`mem`) to store intermediate results. This table is used to record the minimum number of operations for a given state in the dynamic programming recursion.
-4. **Column-wise Optimization**: The algorithm optimizes the choice of digits for each column in a way that minimizes the total number of operations, ensuring that no two adjacent cells are the same digit.
-
-### Code Breakdown
-
-#### Step 1: Initialize Variables
+### Initial Thoughts 💭
+- The matrix needs to satisfy two conditions: matching values vertically and differing values horizontally.
+- We can optimize the solution by breaking the problem into subproblems and using memoization to avoid redundant calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- The grid will always contain at least one row and one column, as per the problem constraints.
+- The solution should handle large grids up to the maximum constraints efficiently.
+- If the grid already satisfies the conditions, the output should be 0.
+- The matrix will only contain non-negative integers between 0 and 9.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 int m, n;
 vector<vector<int>> frq, mem;
-```
-- `m`: The number of rows in the grid.
-- `n`: The number of columns in the grid.
-- `frq`: A 2D vector that stores the frequency of each digit (0-9) for each column.
-- `mem`: A 2D memoization table that stores the minimum number of operations needed to make the grid valid, starting from a given row and previous column's digit.
 
-#### Step 2: Frequency Counting
-```cpp
-for(int i = 0; i < n; i++)
-    for(int j = 0; j < m; j++) {
-        frq[i][grid[j][i]]++;
-    }
-```
-- We iterate over each cell in the grid and populate the `frq` array. This array keeps track of how many times each digit (0-9) appears in each column. This helps us determine the number of changes needed when choosing a particular digit for each column.
-
-#### Step 3: The Recursive `dp` Function
-```cpp
 int dp(int i, int prv) {
     if(i == frq.size()) return 0;
     if(mem[i][prv + 1] != -1) return mem[i][prv + 1];
@@ -110,53 +90,152 @@ int dp(int i, int prv) {
 
     return mem[i][prv + 1] = ans;
 }
-```
-- **Base Case**: If we have processed all columns (`i == frq.size()`), no more changes are needed, so return 0.
-- **Memoization**: Before performing any calculations, we check if the result for the current state (`i`, `prv`) has already been computed (i.e., if `mem[i][prv + 1] != -1`). If it has, we return the stored result to avoid redundant computation.
-- **Recursive Case**: For each column, we consider each possible digit (`j` from 0 to 9) and check if it is different from the previous digit (`prv`). If it is different, we calculate the number of changes required for that digit (`m - frq[i][j]`), which is the number of cells in the current column that need to be changed. We then recursively compute the minimum number of changes for the remaining columns, storing the result in `mem[i][prv + 1]`.
-- **Result**: We return the minimum number of changes required for the entire grid, starting from the first column with no previous digit (`-1`).
 
-#### Step 4: `minimumOperations` Function
-```cpp
 int minimumOperations(vector<vector<int>>& grid) {
+    
     m = grid.size(), n = grid[0].size();
     
     frq.resize(n, vector<int>(10, 0));
     mem.resize(n, vector<int>(11, -1));
     
     for(int i = 0; i < n; i++)
-        for(int j = 0; j < m; j++) {
-            frq[i][grid[j][i]]++;
-        }
+    for(int j = 0; j < m; j++) {
+        frq[i][grid[j][i]]++;
+    }
     
     return dp(0, -1);
 }
 ```
-- **Grid Size Initialization**: The dimensions of the grid (`m` and `n`) are initialized.
-- **Frequency and Memoization Initialization**: The `frq` array is resized to store the frequency of digits in each column, and the `mem` array is resized to store the memoized results for each state.
-- **Populate Frequency Array**: We loop through the grid to populate the `frq` array.
-- **Start DP Calculation**: We invoke the `dp` function, starting with the first column (`i = 0`) and no previous digit (`prv = -1`).
 
-#### Step 5: Final Output
-The result of the `dp` function is returned, which gives the minimum number of operations needed to make the grid valid.
+This code calculates the minimum number of operations required to make all the rows in a grid have distinct values. It uses dynamic programming to solve this problem efficiently.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int m, n;
+	```
+	Declare two integer variables 'm' and 'n' to store the number of rows and columns of the grid, respectively.
 
-#### Time Complexity:
-- **O(m * n * 10)**: 
-  - We are iterating through each column of the grid (`n` columns) and each possible digit (0-9). For each state, we calculate the minimum changes by checking each of the 10 possible digits for the current column.
-  - The memoization table has dimensions `n x 11`, so at most we perform `O(n * 11)` operations for memoization, and for each state, we check 10 digits.
+2. **Vector Initialization**
+	```cpp
+	vector<vector<int>> frq, mem;
+	```
+	Declare two 2D vectors: 'frq' to store frequency counts and 'mem' for memoization during dynamic programming.
 
-#### Space Complexity:
-- **O(n * 10)**: 
-  - The space complexity is driven by the `frq` and `mem` arrays, each of size `n x 10` for storing the frequency of digits and the memoized results for each state.
-  - The space complexity is proportional to the size of the grid and the number of possible digits (0-9).
+3. **Function Definition**
+	```cpp
+	int dp(int i, int prv) {
+	```
+	Define a recursive function 'dp' that takes the current row index 'i' and the previous row's column value 'prv' as parameters.
 
-### Conclusion
+4. **Base Case**
+	```cpp
+	    if(i == frq.size()) return 0;
+	```
+	Check if we've reached the end of the rows. If so, return 0 since no more operations are needed.
 
-The solution uses a dynamic programming approach to efficiently compute the minimum number of operations required to transform the grid such that no adjacent cells have the same digit. By leveraging memoization and tracking the frequency of digits in each column, the algorithm is able to minimize redundant calculations and achieve an optimal solution.
+5. **Memoization Check**
+	```cpp
+	    if(mem[i][prv + 1] != -1) return mem[i][prv + 1];
+	```
+	Check if the result for the current state has already been computed using memoization. If so, return the stored value.
 
-This approach ensures that the problem is solved in a time complexity that scales well with the grid size, and it efficiently handles the constraint of transforming the grid with the fewest operations. The use of dynamic programming is crucial in breaking down the problem into manageable subproblems, making it possible to compute the result in an optimal manner.
+6. **Variable Initialization**
+	```cpp
+	    int ans = INT_MAX;
+	```
+	Initialize a variable 'ans' to store the minimum number of operations, set to the maximum possible value initially.
+
+7. **Loop Through Digits**
+	```cpp
+	    for(int j = 0; j <= 9; j++) {
+	```
+	Iterate through the digits 0 to 9 and try to pick the optimal value for the current row.
+
+8. **Skip If Same As Previous**
+	```cpp
+	        if(j == prv) continue;
+	```
+	Skip this digit if it is the same as the digit from the previous row, as we want distinct values across rows.
+
+9. **Dynamic Programming Recursion**
+	```cpp
+	        ans = min(ans, m - frq[i][j] + dp(i + 1, j));
+	```
+	Recursively calculate the minimum number of operations for the next row, adjusting for the frequency of the current digit.
+
+10. **Memoization Store**
+	```cpp
+	    return mem[i][prv + 1] = ans;
+	```
+	Store the result in the memoization table for the current state and return the computed value.
+
+11. **Function Definition**
+	```cpp
+	int minimumOperations(vector<vector<int>>& grid) {
+	```
+	Define the main function 'minimumOperations' that takes the grid as input and calculates the minimum operations.
+
+12. **Matrix Size Calculation**
+	```cpp
+	    m = grid.size(), n = grid[0].size();
+	```
+	Calculate the number of rows ('m') and columns ('n') from the input grid.
+
+13. **Frequency Vector Initialization**
+	```cpp
+	    frq.resize(n, vector<int>(10, 0));
+	```
+	Resize the frequency table 'frq' to match the grid's dimensions, initializing all values to 0.
+
+14. **Memoization Vector Initialization**
+	```cpp
+	    mem.resize(n, vector<int>(11, -1));
+	```
+	Resize the memoization table 'mem' to store results for dynamic programming, initializing all values to -1 (indicating no result stored).
+
+15. **Frequency Table Filling**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loop through the columns of the grid.
+
+16. **Grid Iteration**
+	```cpp
+	    for(int j = 0; j < m; j++) {
+	```
+	Loop through the rows of the grid.
+
+17. **Frequency Count Update**
+	```cpp
+	        frq[i][grid[j][i]]++;
+	```
+	Update the frequency table by incrementing the count for the digit found at grid[j][i].
+
+18. **Return DP Result**
+	```cpp
+	    return dp(0, -1);
+	```
+	Call the dynamic programming function to compute the result starting from the first row and no previous value.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the grid. We process each cell once.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n), where we store the frequency table and memoization results for each column.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-satisfy-conditions/description/)
 

@@ -14,142 +14,196 @@ img_src = ""
 youtube = "uV_JsPPLK9o"
 youtube_upload_date="2020-07-17"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/uV_JsPPLK9o/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers arr and an integer target. You need to find two non-overlapping sub-arrays of arr each with a sum equal target. The goal is to minimize the sum of their lengths, and if no such sub-arrays exist, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array arr and an integer target.
+- **Example:** `[1, 1, 1, 2, 3], 2`
+- **Constraints:**
+	- 1 <= arr.length <= 10^5
+	- 1 <= arr[i] <= 1000
+	- 1 <= target <= 10^8
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minSumOfLengths(vector<int>& arr, int target) {
-        unordered_map<int, int> mp;
-        int sum = 0, lsize = INT_MAX, result = INT_MAX;
-        mp[0] = -1;
-        for(int i = 0; i < arr.size(); i++) {
-            sum += arr[i];
-            mp[sum] = i;
-        }
-        sum = 0;
-        for(int i = 0; i < arr.size(); i++) {
-            sum += arr[i];
-            if(mp.count(sum - target)) 
-            lsize = min(lsize, i - mp[sum-target]);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should return the minimum sum of the lengths of the two sub-arrays, or -1 if no such sub-arrays exist.
+- **Example:** `2`
+- **Constraints:**
+	- If no two sub-arrays with sum equal to target exist, return -1.
 
-            if(mp.count(sum + target) && lsize < INT_MAX)
-            result = min(result, mp[sum + target] -i +lsize);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to efficiently find two non-overlapping sub-arrays that sum to the target and minimize the sum of their lengths.
 
+- Use a sliding window approach to find all sub-arrays that sum to the target.
+- Store the lengths of valid sub-arrays and ensure they do not overlap.
+- Track the minimum sum of lengths for valid sub-arrays.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will contain at least one sub-array summing to the target.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[1, 1, 1, 2, 3], 2`  \
+  **Explanation:** Here, two sub-arrays sum to 2: [1, 1] and [2], and the sum of their lengths is 2.
 
-        }
+{{< dots >}}
+## Approach 🚀
+The approach uses a sliding window to efficiently find all sub-arrays that sum to the target and then minimizes the sum of the lengths of non-overlapping sub-arrays.
 
-        return result == INT_MAX ? -1: result;
+### Initial Thoughts 💭
+- We need to consider non-overlapping sub-arrays, so after finding one, we must avoid overlapping with the second.
+- Sliding window is an efficient way to find sub-arrays with a fixed sum.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty arrays should return -1.
+- For large arrays, the solution should be optimized for time efficiency.
+- Handle cases where no valid sub-arrays exist.
+- Ensure the solution handles arrays with up to 10^5 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+int minSumOfLengths(vector<int>& arr, int target) {
+    unordered_map<int, int> mp;
+    int sum = 0, lsize = INT_MAX, result = INT_MAX;
+    mp[0] = -1;
+    for(int i = 0; i < arr.size(); i++) {
+        sum += arr[i];
+        mp[sum] = i;
     }
-};
-{{< /highlight >}}
----
+    sum = 0;
+    for(int i = 0; i < arr.size(); i++) {
+        sum += arr[i];
+        if(mp.count(sum - target)) 
+        lsize = min(lsize, i - mp[sum-target]);
 
-### Problem Statement
+        if(mp.count(sum + target) && lsize < INT_MAX)
+        result = min(result, mp[sum + target] -i +lsize);
 
-The problem at hand is to find the minimum sum of the lengths of two non-overlapping subarrays in a given array `arr` such that the sum of each subarray equals a specified `target`. A subarray is defined as a contiguous portion of the array, and the lengths of the subarrays should not overlap.
 
-### Approach
+    }
 
-To solve this problem efficiently, we can use a combination of prefix sums and a hash map (unordered_map) to keep track of previously encountered sums. The overall approach can be broken down into the following key steps:
+    return result == INT_MAX ? -1: result;
+}
+```
 
-1. **Calculate Prefix Sums**: Traverse through the array while maintaining a cumulative sum, storing the last index where each cumulative sum is found in a hash map.
+This function `minSumOfLengths` solves the problem of finding the minimum sum of lengths of two non-overlapping subarrays that sum up to a given target. It uses a hash map to store the cumulative sums and the smallest possible subarray lengths to optimize the search.
 
-2. **Find Valid Subarrays**: For each index in the array, check if a subarray that sums to `target` can be formed using the previously stored sums in the hash map. This requires checking if the difference between the current sum and the `target` exists in the map.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method**
+	```cpp
+	int minSumOfLengths(vector<int>& arr, int target) {
+	```
+	This is the definition of the function `minSumOfLengths`, which takes an array `arr` and a target sum `target` as parameters.
 
-3. **Update Minimum Lengths**: Whenever a valid subarray that sums to `target` is found, update the minimum length of the previously found subarray if it allows for a non-overlapping combination.
+2. **Declaration**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	An unordered map `mp` is declared to store cumulative sums and their corresponding indices. This helps to efficiently find subarrays whose sum is equal to a given target.
 
-4. **Compute the Result**: Finally, compute the minimum sum of lengths of the two non-overlapping subarrays. If no valid combination is found, return -1.
+3. **Initialization**
+	```cpp
+	    int sum = 0, lsize = INT_MAX, result = INT_MAX;
+	```
+	The variables are initialized: `sum` stores the cumulative sum of the elements, `lsize` is used to track the smallest subarray length, and `result` will store the minimum sum of lengths of the valid subarrays.
 
-### Code Breakdown (Step by Step)
+4. **Initialization**
+	```cpp
+	    mp[0] = -1;
+	```
+	The hash map `mp` is initialized with a base case where the cumulative sum `0` is mapped to index `-1`. This helps handle edge cases like when a valid subarray starts at the beginning of the array.
 
-Let's break down the provided code in detail:
+5. **Loop**
+	```cpp
+	    for(int i = 0; i < arr.size(); i++) {
+	```
+	This is the start of the first loop, which iterates through the array `arr` to calculate cumulative sums.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - This starts the definition of the `Solution` class, which will contain our main logic.
+6. **Update**
+	```cpp
+	        sum += arr[i];
+	```
+	In this step, the current element `arr[i]` is added to the cumulative sum `sum`.
 
-2. **Method Declaration**:
-   ```cpp
-   int minSumOfLengths(vector<int>& arr, int target) {
-   ```
-   - The method `minSumOfLengths` is defined, which takes a vector of integers `arr` and an integer `target` as input parameters.
+7. **Update**
+	```cpp
+	        mp[sum] = i;
+	```
+	The current cumulative sum is stored in the map `mp`, with the index `i` as its value.
 
-3. **Variable Initialization**:
-   ```cpp
-   unordered_map<int, int> mp;
-   int sum = 0, lsize = INT_MAX, result = INT_MAX;
-   mp[0] = -1;
-   ```
-   - An unordered map `mp` is initialized to store cumulative sums and their corresponding indices.
-   - The variable `sum` is initialized to accumulate the sum as we iterate through the array.
-   - `lsize` keeps track of the length of the last found valid subarray that sums to `target`, initialized to a large value (`INT_MAX`).
-   - `result` will store the minimum sum of lengths of the two valid subarrays, also initialized to `INT_MAX`.
-   - The entry `mp[0] = -1` is set to handle cases where a valid subarray starts from index 0.
+8. **Initialization**
+	```cpp
+	    sum = 0;
+	```
+	The cumulative sum is reset to zero for the second loop to calculate possible valid subarrays.
 
-4. **First Pass - Populate Prefix Sums**:
-   ```cpp
-   for(int i = 0; i < arr.size(); i++) {
-       sum += arr[i];
-       mp[sum] = i;
-   }
-   ```
-   - This loop iterates over the `arr` array, updating the cumulative `sum` and storing it in the map `mp` with the current index `i`.
+9. **Loop**
+	```cpp
+	    for(int i = 0; i < arr.size(); i++) {
+	```
+	Start of the second loop, which processes the array again to check for subarrays that sum up to the target.
 
-5. **Second Pass - Find Valid Subarrays**:
-   ```cpp
-   sum = 0;
-   for(int i = 0; i < arr.size(); i++) {
-       sum += arr[i];
-       if(mp.count(sum - target)) 
-           lsize = min(lsize, i - mp[sum-target]);
-   ```
-   - Here, we reset `sum` and start a new loop through `arr`. We again accumulate the `sum` for each index.
-   - We check if the difference `sum - target` exists in the map `mp`. If it does, it means we have found a valid subarray, and we update `lsize` with the minimum length.
+10. **Update**
+	```cpp
+	        sum += arr[i];
+	```
+	The current element `arr[i]` is added to the cumulative sum again.
 
-6. **Update the Result**:
-   ```cpp
-       if(mp.count(sum + target) && lsize < INT_MAX)
-           result = min(result, mp[sum + target] -i + lsize);
-   ```
-   - Next, we check if `sum + target` exists in the map. If it does and `lsize` is valid (not `INT_MAX`), we update `result` with the minimum of the current `result` and the sum of the lengths of the two valid subarrays.
+11. **Condition**
+	```cpp
+	        if(mp.count(sum - target)) 
+	```
+	This condition checks if there is a subarray in `mp` whose sum is equal to `sum - target`, indicating a valid subarray.
 
-7. **Return the Result**:
-   ```cpp
-   return result == INT_MAX ? -1 : result;
-   }
-   ```
-   - Finally, we check if `result` is still `INT_MAX`. If it is, it indicates that no valid combination was found, so we return -1. Otherwise, we return the computed `result`.
+12. **Update**
+	```cpp
+	        lsize = min(lsize, i - mp[sum-target]);
+	```
+	If the condition is true, the length of the current subarray is calculated and the smallest subarray length (`lsize`) is updated.
 
-### Complexity
+13. **Condition**
+	```cpp
+	        if(mp.count(sum + target) && lsize < INT_MAX)
+	```
+	This condition checks if there is another subarray in `mp` whose sum is equal to `sum + target` and ensures that a valid subarray length (`lsize`) has been found.
 
-- **Time Complexity**:
-  - The overall time complexity is \(O(n)\), where \(n\) is the length of the input array `arr`. This is due to the fact that each pass through the array (two passes in total) takes linear time, and hash map operations (insert and lookup) average to \(O(1)\).
+14. **Update**
+	```cpp
+	        result = min(result, mp[sum + target] -i +lsize);
+	```
+	If both conditions are met, the `result` is updated with the minimum sum of lengths of the valid subarrays.
 
-- **Space Complexity**:
-  - The space complexity is \(O(n)\) due to the storage of the cumulative sums in the hash map. In the worst case, all sums could be unique and require space proportional to the length of the array.
+15. **Return**
+	```cpp
+	    return result == INT_MAX ? -1: result;
+	```
+	The function returns the minimum sum of lengths of the valid subarrays found. If no valid subarrays exist, `-1` is returned.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) for the sliding window approach if all sub-arrays are found early.
+- **Average Case:** O(n) for iterating through the array and checking sub-array sums.
+- **Worst Case:** O(n) in the worst case where we need to examine every element.
 
-The `minSumOfLengths` method efficiently finds the minimum sum of lengths of two non-overlapping subarrays that each sum to a given target. The use of prefix sums combined with a hash map allows for a linear time solution, making it suitable for larger inputs.
+Time complexity is linear with respect to the size of the array.
 
-Key takeaways from this implementation include:
+### Space Complexity 💾
+- **Best Case:** O(1) if we are able to immediately return the result.
+- **Worst Case:** O(n) if we need to store all sub-array sums and lengths.
 
-1. **Efficiency**: The use of a hash map for quick lookups drastically reduces the time complexity compared to a naive approach that might involve nested loops.
+Space complexity depends on the need to store sub-array lengths, which could scale with the size of the input.
 
-2. **Simplicity**: The code is structured in a way that is easy to follow, with clear variable naming and logical segmentation of the steps.
+**Happy Coding! 🎉**
 
-3. **Versatility**: The approach can be adapted for similar problems that involve subarray sums and constraints, showcasing the utility of prefix sums in competitive programming and algorithm design.
-
-In summary, this solution serves as an excellent example of optimizing problems involving sums of subarrays, demonstrating effective use of data structures for enhanced performance.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/description/)
 

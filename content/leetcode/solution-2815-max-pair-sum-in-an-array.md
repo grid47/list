@@ -14,127 +14,206 @@ img_src = ""
 youtube = "DUrmIZhrj4o"
 youtube_upload_date="2023-08-13"
 youtube_thumbnail="https://i.ytimg.com/vi/DUrmIZhrj4o/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums`, and you need to find the maximum sum of any two distinct numbers in the array such that the largest digit in both numbers is the same.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers `nums`.
+- **Example:** `nums = [2536, 1613, 3366, 162]`
+- **Constraints:**
+	- 2 <= nums.length <= 100
+	- 1 <= nums[i] <= 104
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxSum(vector<int>& nums) {
-        
-        vector<vector<int>> ids(10);
-        
-        for(int x: nums) {
-            int val = x;
-            int f = x % 10;
-            while(x > 0) {
-                f = max(f, x % 10);
-                x /= 10;
-            }
-            ids[f].push_back(val);            
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum of two numbers from the array where the largest digit in both numbers is the same. If no such pair exists, return -1.
+- **Example:** `5902`
+- **Constraints:**
+	- The answer will always be a valid integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the pair of numbers with the same largest digit and return their maximum sum.
+
+- 1. Identify the largest digit in each number.
+- 2. Group numbers by their largest digits.
+- 3. For each group, find the two largest numbers and return their sum.
+- 4. If no group has at least two numbers, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least two integers.
+- The numbers in the array are positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [2536, 1613, 3366, 162]`  \
+  **Explanation:** All numbers in the list have 6 as their largest digit. The sum of the two largest numbers, 2536 and 3366, gives the maximum sum of 5902.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can iterate through the numbers, extract their largest digit, and group numbers by this digit. Then, we can find the two largest numbers in each group and compute the maximum sum.
+
+### Initial Thoughts 💭
+- We need to efficiently find the largest digit in each number.
+- We need to group the numbers based on their largest digit.
+- We can use a dictionary to store numbers grouped by their largest digit.
+{{< dots >}}
+### Edge Cases 🌐
+- Input should always have at least two numbers.
+- The input size will not exceed 100 elements.
+- If no two numbers share the same largest digit, return -1.
+- The input size is manageable with respect to both time and space complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxSum(vector<int>& nums) {
+    
+    vector<vector<int>> ids(10);
+    
+    for(int x: nums) {
+        int val = x;
+        int f = x % 10;
+        while(x > 0) {
+            f = max(f, x % 10);
+            x /= 10;
         }
-        int ans = -1;
-        for(int i = 0; i < ids.size(); i++) {
-            sort(ids[i].begin(), ids[i].end());
-            int n = ids[i].size();
-            if(ids[i].size() >= 2) {
-                // cout << ids[i][n - 1] << " " << ids[i][n - 2] << " "<< ids[i][n - 1] + ids[i][n - 2] << "\n";
-                ans = max(ans, ids[i][n - 1] + ids[i][n - 2]);
-            }
-        }
-        return ans;
+        ids[f].push_back(val);            
     }
-};
-{{< /highlight >}}
----
+    int ans = -1;
+    for(int i = 0; i < ids.size(); i++) {
+        sort(ids[i].begin(), ids[i].end());
+        int n = ids[i].size();
+        if(ids[i].size() >= 2) {
+            // cout << ids[i][n - 1] << " " << ids[i][n - 2] << " "<< ids[i][n - 1] + ids[i][n - 2] << "\n";
+            ans = max(ans, ids[i][n - 1] + ids[i][n - 2]);
+        }
+    }
+    return ans;
+}
+```
 
-### Problem Statement
+This function calculates the maximum sum of two numbers from a list where both numbers share the same highest digit. It iterates through each number, extracts its highest digit, and adds the number to a bucket indexed by that digit. Then, it finds the two largest numbers in each bucket and returns the maximum sum found across all buckets.
 
-In this problem, you are given an array of integers `nums`, and you are tasked with finding the maximum sum of any two numbers from the array where both numbers share the same **maximum digit**. A "maximum digit" is the largest digit present in a number. For example, in the number `483`, the maximum digit is `8`. You need to return the maximum sum of two such numbers with the same maximum digit, or `-1` if no such pair exists.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxSum(vector<int>& nums) {
+	```
+	Declares the function `maxSum`, which takes a vector of integers `nums` and returns an integer value.
 
-### Approach
+2. **Vector Initialization**
+	```cpp
+	    vector<vector<int>> ids(10);
+	```
+	Initializes a 2D vector `ids` of size 10 to store numbers categorized by their highest digit.
 
-To solve this problem efficiently, we can follow a series of steps:
+3. **For Loop Start**
+	```cpp
+	    for(int x: nums) {
+	```
+	Starts a loop to iterate over each integer `x` in the input vector `nums`.
 
-1. **Extract Maximum Digits**: For each number in the list, we first determine its maximum digit.
-   
-2. **Grouping by Maximum Digit**: We then group the numbers by their maximum digit. For example, all numbers whose maximum digit is `9` are grouped together, and so on for other digits.
+4. **Assign Value**
+	```cpp
+	        int val = x;
+	```
+	Assigns the value of `x` to a new variable `val` to preserve the original number.
 
-3. **Finding Maximum Pair**: For each group (corresponding to a particular maximum digit), we check if the group contains at least two numbers. If so, we calculate the sum of the two largest numbers in that group and keep track of the maximum such sum across all groups.
+5. **Get Last Digit**
+	```cpp
+	        int f = x % 10;
+	```
+	Extracts the last digit of `x` by taking the modulus with 10 and stores it in `f`.
 
-4. **Return the Result**: If we find at least one valid pair, we return the maximum sum. If no such pair exists, we return `-1`.
+6. **While Loop Start**
+	```cpp
+	        while(x > 0) {
+	```
+	Begins a while loop to iterate through each digit of `x` to find the highest digit.
 
-### Code Breakdown (Step by Step)
+7. **Find Maximum Digit**
+	```cpp
+	            f = max(f, x % 10);
+	```
+	Updates `f` to store the maximum digit encountered during the iteration.
 
-1. **Initializing the Grouping Data Structure**:
-   ```cpp
-   vector<vector<int>> ids(10);
-   ```
-   - We use a vector of vectors `ids` to store numbers grouped by their maximum digit. There are 10 groups (one for each digit from 0 to 9), as the maximum digit of any number can only be in the range 0-9.
+8. **Remove Last Digit**
+	```cpp
+	            x /= 10;
+	```
+	Reduces `x` by removing its last digit.
 
-2. **Processing Each Number**:
-   ```cpp
-   for(int x: nums) {
-       int val = x;
-       int f = x % 10;
-       while(x > 0) {
-           f = max(f, x % 10);
-           x /= 10;
-       }
-       ids[f].push_back(val);
-   }
-   ```
-   - We loop through each number `x` in the input array `nums`.
-   - We start by assuming the last digit of `x` is the maximum digit (`f = x % 10`).
-   - We then iterate over the digits of the number by repeatedly dividing it by 10, updating `f` to hold the largest digit encountered.
-   - Once we find the maximum digit `f` for the number, we add it to the corresponding group in `ids[f]`.
+9. **Store Value in Bucket**
+	```cpp
+	        ids[f].push_back(val);            
+	```
+	Adds the value `val` to the bucket `ids[f]` corresponding to its highest digit `f`.
 
-3. **Finding the Two Largest Numbers for Each Group**:
-   ```cpp
-   int ans = -1;
-   for(int i = 0; i < ids.size(); i++) {
-       sort(ids[i].begin(), ids[i].end());
-       int n = ids[i].size();
-       if(ids[i].size() >= 2) {
-           ans = max(ans, ids[i][n - 1] + ids[i][n - 2]);
-       }
-   }
-   ```
-   - After grouping the numbers, we initialize `ans` to `-1`, which will be used to store the maximum sum of two numbers that share the same maximum digit.
-   - For each group `ids[i]`, we first sort the numbers in ascending order to easily find the two largest numbers.
-   - If the group contains at least two numbers, we compute the sum of the two largest numbers (`ids[i][n - 1]` and `ids[i][n - 2]`), and update `ans` to be the maximum of the current `ans` and this new sum.
+10. **Initialize Answer**
+	```cpp
+	    int ans = -1;
+	```
+	Initializes the variable `ans` to -1 to store the maximum sum found.
 
-4. **Return the Result**:
-   ```cpp
-   return ans;
-   ```
-   - Finally, after processing all groups, we return `ans`, which contains the maximum sum of two numbers with the same maximum digit. If no such pair exists, `ans` will remain `-1`, which is the correct output.
+11. **Bucket Processing Loop**
+	```cpp
+	    for(int i = 0; i < ids.size(); i++) {
+	```
+	Starts a loop to process each bucket in `ids`.
 
-### Complexity
+12. **Sort Bucket**
+	```cpp
+	        sort(ids[i].begin(), ids[i].end());
+	```
+	Sorts the numbers in bucket `ids[i]` in ascending order.
 
-1. **Time Complexity**:
-   - The main operations in the code are:
-     - Looping through each number in `nums` to determine its maximum digit, which takes `O(d)` time for each number, where `d` is the number of digits in the number. Since `d` is typically small (up to 10 for large numbers), this is approximately **O(n)** where `n` is the number of elements in `nums`.
-     - Sorting the numbers within each group. The worst-case scenario occurs when all numbers have the same maximum digit, in which case we sort the entire list. Sorting each group takes **O(m log m)**, where `m` is the number of elements in the group. In the worst case, the total time complexity for sorting across all groups is **O(n log n)**, where `n` is the total number of elements in the array.
-   
-   Therefore, the total time complexity of the solution is **O(n log n)**, where `n` is the number of elements in `nums`.
+13. **Bucket Size Check**
+	```cpp
+	        int n = ids[i].size();
+	```
+	Stores the size of bucket `ids[i]` in the variable `n`.
 
-2. **Space Complexity**:
-   - We use a vector `ids` of size 10 to store the numbers grouped by their maximum digit, which takes **O(n)** space.
-   - The sorting operations within each group do not require additional space beyond the input data.
-   - Thus, the space complexity is **O(n)**, where `n` is the number of elements in `nums`.
+14. **Check for Two Numbers**
+	```cpp
+	        if(ids[i].size() >= 2) {
+	```
+	Checks if there are at least two numbers in the bucket to calculate a sum.
 
-### Conclusion
+15. **Calculate Maximum Sum**
+	```cpp
+	            ans = max(ans, ids[i][n - 1] + ids[i][n - 2]);
+	```
+	Calculates the sum of the two largest numbers in the current bucket and updates `ans` if the sum is greater than the current value of `ans`.
 
-The algorithm efficiently solves the problem by utilizing a grouping strategy based on the maximum digit of each number. It first calculates the maximum digit for each number, groups the numbers by their maximum digit, and then sorts each group to find the two largest numbers to maximize their sum.
+16. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the maximum sum found, stored in `ans`.
 
-With a time complexity of **O(n log n)**, the solution is efficient enough for typical input sizes. The space complexity of **O(n)** is also optimal for this problem, as it only requires space to store the grouped numbers.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) where n is the length of the array.
+- **Average Case:** O(n log n).
+- **Worst Case:** O(n log n).
 
-This solution provides a straightforward and clear approach to solving the problem of finding the maximum sum of two numbers sharing the same maximum digit, ensuring both correctness and efficiency.
+The dominant factor is the sorting operation for each group of numbers.
+
+### Space Complexity 💾
+- **Best Case:** O(n) for storing the numbers in the dictionary.
+- **Worst Case:** O(n) for storing the numbers in the dictionary.
+
+The space complexity is proportional to the number of elements in the input array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-pair-sum-in-an-array/description/)
 

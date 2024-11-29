@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "6lJZ_xj1mEo"
 youtube_upload_date="2024-04-08"
 youtube_thumbnail="https://i.ytimg.com/vi/6lJZ_xj1mEo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,97 +28,63 @@ youtube_thumbnail="https://i.ytimg.com/vi/6lJZ_xj1mEo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, return the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes, which may or may not pass through the root.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary tree, where each node is represented by a value and pointers to its left and right child nodes.
+- **Example:** `Input: root = [1,2,3,4,5]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [1, 10^4].
+	- -100 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int diameterOfBinaryTree(TreeNode* root) {
-        int d = 0;
-        dep(d, root);
-        return d;
-    }
-    
-    int dep(int &d, TreeNode* node) {
-        if(node == NULL) return 0;
-        int l = dep(d, node->left);
-        int r = dep(d, node->right);
-        d = max(d, l + r);
-        return 1 + max(l, r);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest path between any two nodes in the tree. The path is measured by the number of edges between the nodes.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output will be an integer representing the length of the longest path.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the diameter of the binary tree efficiently.
 
-The problem asks us to calculate the **diameter** of a binary tree. The diameter of a binary tree is the length of the longest path between any two nodes in the tree. This path may or may not pass through the root of the tree. We are tasked with finding this diameter efficiently.
+- Perform a depth-first search (DFS) to traverse the tree.
+- For each node, compute the maximum depth of its left and right subtrees.
+- Track the maximum sum of the depths of the left and right subtrees, which gives the diameter.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a valid binary tree.
+- The input tree will contain at least one node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1,2,3,4,5]`  \
+  **Explanation:** In this example, the tree has a longest path between node 4 and node 3 through node 2 and node 1, which has a length of 3 edges.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We can compute the diameter of the binary tree using a depth-first search (DFS) traversal. For each node, we calculate the maximum depth of its left and right subtrees and update the diameter based on the sum of the depths.
 
-To solve this problem, we can utilize a **depth-first search (DFS)** approach that calculates the depth of each node while simultaneously updating the diameter. The key observation here is that the longest path between any two nodes in a binary tree can be represented as the sum of the depths of the left and right subtrees of a node.
-
-1. **Depth Calculation**: 
-   - The depth of a node is defined as the length of the longest path from that node to a leaf node.
-   - The depth of any node is `1 + max(left_depth, right_depth)`, where `left_depth` and `right_depth` represent the depths of the left and right subtrees, respectively.
-
-2. **Diameter Calculation**:
-   - The diameter of the tree at any node is defined as the sum of the depths of its left and right subtrees.
-   - The overall diameter of the tree will be the maximum diameter found at any node.
-
-By using a recursive function that calculates the depth of each node, we can simultaneously update the diameter by comparing the sum of the left and right subtree depths at each node.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Define the `TreeNode` structure
-
-The problem statement provides a definition of the `TreeNode` structure. Each node in the binary tree contains:
-- An integer value (`val`).
-- Pointers to the left and right child nodes (`left` and `right`).
-
-The constructor of the `TreeNode` structure allows for easy initialization of each node, with the option to set its value and child pointers.
-
-```cpp
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-```
-
-#### Step 2: Define the `diameterOfBinaryTree` function
-
+### Initial Thoughts 💭
+- This is a classic depth-first search problem where we need to compute the maximum depth of subtrees and track the longest path.
+- By using DFS, we can calculate the maximum depth from each node and compute the diameter by updating the result with the sum of the depths of the left and right subtrees.
+{{< dots >}}
+### Edge Cases 🌐
+- The tree will not be empty as per the problem constraints.
+- Ensure the solution works efficiently for trees with up to 10^4 nodes.
+- Handle cases with only one node in the tree, where the diameter will be 0.
+- The tree contains up to 10^4 nodes.
+{{< dots >}}
+## Code 💻
 ```cpp
 int diameterOfBinaryTree(TreeNode* root) {
     int d = 0;
     dep(d, root);
     return d;
 }
-```
 
-- This function is the main entry point for the solution. It takes the root of the binary tree as an argument and initializes the `d` variable to 0. The variable `d` will store the diameter of the tree.
-- The function then calls the helper function `dep(d, root)` to calculate the diameter and update the value of `d`.
-- Finally, the function returns the value of `d`, which represents the diameter of the binary tree.
-
-#### Step 3: Define the `dep` (depth) function
-
-```cpp
 int dep(int &d, TreeNode* node) {
-    if (node == NULL) return 0;
+    if(node == NULL) return 0;
     int l = dep(d, node->left);
     int r = dep(d, node->right);
     d = max(d, l + r);
@@ -125,37 +92,87 @@ int dep(int &d, TreeNode* node) {
 }
 ```
 
-- This is a helper function that calculates the depth of the current node while also updating the diameter of the tree.
-- **Base case**: If the current node is `NULL` (i.e., we have reached a leaf), the function returns 0, representing a depth of 0 for a non-existent node.
-- **Recursive case**:
-  - The function recursively calculates the depth of the left and right subtrees by calling `dep(d, node->left)` and `dep(d, node->right)`, respectively. These calls return the depths of the left and right subtrees.
-  - The diameter of the current node is calculated as the sum of the depths of the left and right subtrees (`l + r`). If this sum is greater than the current diameter `d`, we update `d` to reflect the new maximum.
-  - The function then returns the depth of the current node, which is `1 + max(l, r)`, where `l` and `r` are the depths of the left and right subtrees.
+This function calculates the diameter of a binary tree, which is the length of the longest path between any two nodes in the tree. The helper function `dep` computes the depth of each node recursively while updating the diameter.
 
-#### Step 4: Update the Diameter
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int diameterOfBinaryTree(TreeNode* root) {
+	```
+	Defines the `diameterOfBinaryTree` function, which takes the root of the binary tree as an argument and returns the diameter of the tree.
 
-```cpp
-d = max(d, l + r);
-```
+2. **Variable Initialization**
+	```cpp
+	    int d = 0;
+	```
+	Initializes a variable `d` to store the maximum diameter found during the traversal of the tree.
 
-- At each node, after calculating the depths of the left and right subtrees, we check if the sum of the two depths (`l + r`) is larger than the current `d`. If so, we update `d` to the new value.
-- This ensures that `d` always stores the diameter of the tree, which is the maximum path length between any two nodes.
+3. **Recursive Call**
+	```cpp
+	    dep(d, root);
+	```
+	Calls the helper function `dep` with `d` and the root of the tree to compute the depth of the tree and update the diameter.
 
-#### Step 5: Return the Result
+4. **Return Statement**
+	```cpp
+	    return d;
+	```
+	Returns the computed diameter `d` of the binary tree.
 
-The final result, the diameter of the binary tree, is stored in the variable `d`, which is returned after the DFS traversal is complete.
+5. **Function Definition**
+	```cpp
+	int dep(int &d, TreeNode* node) {
+	```
+	Defines the helper function `dep`, which calculates the depth of a node and updates the diameter based on the longest path from that node.
 
-### Complexity
+6. **Base Case**
+	```cpp
+	    if(node == NULL) return 0;
+	```
+	Base case for the recursion: if the node is `NULL`, return 0 as its depth.
 
-#### Time Complexity:
-- The time complexity of the algorithm is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we visit each node exactly once during the DFS traversal and compute the depth for each node in constant time.
+7. **Recursive Call (Left Subtree)**
+	```cpp
+	    int l = dep(d, node->left);
+	```
+	Recursively calls `dep` for the left child of the current node to compute the depth of the left subtree.
 
-#### Space Complexity:
-- The space complexity is **O(h)**, where `h` is the height of the binary tree. This is due to the recursive function call stack used during the DFS traversal. In the worst case, the height of the tree is equal to the number of nodes (`h = n`), so the space complexity can be up to **O(n)** for a skewed tree. For a balanced tree, the space complexity is **O(log n)**.
+8. **Recursive Call (Right Subtree)**
+	```cpp
+	    int r = dep(d, node->right);
+	```
+	Recursively calls `dep` for the right child of the current node to compute the depth of the right subtree.
 
-### Conclusion
+9. **Update Diameter**
+	```cpp
+	    d = max(d, l + r);
+	```
+	Updates the diameter `d` if the sum of the left and right subtree depths (`l + r`) is larger than the current diameter.
 
-The problem of finding the diameter of a binary tree is efficiently solved using a depth-first search (DFS) approach that computes the depth of each node and simultaneously updates the diameter of the tree. By leveraging recursion, we calculate the depth of both subtrees for each node, updating the diameter if a longer path is found. The solution has a time complexity of **O(n)**, making it suitable for large binary trees. The code is concise, easy to understand, and optimal in terms of both time and space complexity for the given problem.
+10. **Return Depth**
+	```cpp
+	    return 1 + max(l, r);
+	```
+	Returns the depth of the current node as `1 + max(l, r)`, where `l` and `r` are the depths of the left and right subtrees, respectively.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because each node is visited once.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
+
+The space complexity is O(h) due to the recursive call stack, where h is the height of the tree.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/diameter-of-binary-tree/description/)
 

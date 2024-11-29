@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Qk7_vGWUMMQ"
 youtube_upload_date="2022-06-28"
 youtube_thumbnail="https://i.ytimg.com/vi/Qk7_vGWUMMQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,104 +28,162 @@ youtube_thumbnail="https://i.ytimg.com/vi/Qk7_vGWUMMQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the roots of two binary trees, root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise. A subtree of a binary tree consists of a node in the tree and all of this node's descendants.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two binary trees, represented by their root nodes.
+- **Example:** `Input: root = [1, 2, 3, 4, 5], subRoot = [2, 4, 5]`
+- **Constraints:**
+	- 1 <= Number of nodes in root <= 2000
+	- 1 <= Number of nodes in subRoot <= 1000
+	- -10^4 <= node values <= 10^4
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        if(!root) return false;
-        if(match(root, subRoot)) return true;
-        return isSubtree(root->left, subRoot) ||
-                isSubtree(root->right, subRoot);
-    }
-    
-    bool match(TreeNode* r1, TreeNode* r2) {
-        if(!r1 && !r2) return true;
-        if(!r1 || !r2) return false;
-        if(r1->val != r2->val) return false;
-        return match(r1->left, r2->left) &&
-            match(r1->right, r2->right);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a boolean value: true if a subtree of root matches subRoot, false otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The result should be a boolean value.
 
-### Problem Statement:
-The problem asks us to determine whether a binary tree `subRoot` is a subtree of another binary tree `root`. A subtree of a binary tree is a tree that consists of a node in the original tree along with all of its descendants. The task is to check if there exists a node in `root` such that the subtree rooted at that node is identical to `subRoot`.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if any subtree in root matches subRoot in both structure and values.
 
-For example:
-- `root = [3, 4, 5, 1, 2]`
-- `subRoot = [4, 1, 2]`
+- Start by checking if the root node matches the subRoot tree using a helper function to compare the trees.
+- If the root node doesn't match, recursively check the left and right subtrees of root.
+- If a match is found, return true; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both root and subRoot are valid binary trees with integer values.
+- The function should handle large trees up to the input size limits efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1, 2, 3, 4, 5], subRoot = [2, 4, 5]`  \
+  **Explanation:** The subtree rooted at node 2 in root matches the structure and values of subRoot, so the output is true.
 
-The function should return `true` since the subtree rooted at node 4 in `root` is identical to `subRoot`.
+- **Input:** `Input: root = [1, 2, 3, 4, 5], subRoot = [2, 3, 5]`  \
+  **Explanation:** There is no subtree of root that matches subRoot exactly, so the output is false.
 
-### Approach:
-This problem can be solved using a **depth-first search (DFS)** approach. The basic idea is to traverse the tree `root` and, for each node, check whether the subtree rooted at that node is identical to `subRoot`. If we find a match, we return `true`. If no match is found after traversing the entire tree, we return `false`.
+{{< dots >}}
+## Approach 🚀
+The approach is to recursively traverse the root tree and for each node, check if it matches the structure and node values of subRoot.
 
-To check if two trees are identical, we can use a helper function that compares the two trees recursively. If both trees are empty, they are identical. If one is empty and the other is not, they are not identical. If the values of the current nodes are the same, we recursively compare the left and right subtrees.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Main Function (`isSubtree`)
-
+### Initial Thoughts 💭
+- To solve this, we need to check for every node in root if it is the root of a subtree that matches subRoot.
+- We will define a helper function to compare two trees. If the current node matches, we'll further check its left and right subtrees.
+{{< dots >}}
+### Edge Cases 🌐
+- The input trees will always have at least one node due to the problem constraints.
+- The function should efficiently handle large trees up to the input size limits.
+- Both root and subRoot might contain negative values, but this doesn't affect the logic.
+- The solution should be optimized for large input sizes.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-    if (!root) return false;  // If the main tree is empty, return false
-    if (match(root, subRoot)) return true;  // If the current node matches the subtree, return true
-    // Recursively check the left and right children of the current node
-    return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
+    if(!root) return false;
+    if(match(root, subRoot)) return true;
+    return isSubtree(root->left, subRoot) ||
+            isSubtree(root->right, subRoot);
 }
-```
 
-- The function `isSubtree` checks whether the subtree `subRoot` exists in the binary tree `root`.
-- If `root` is `nullptr`, it returns `false`, meaning there's no subtree in an empty tree.
-- We then check whether the subtree starting at the current node matches `subRoot` by calling the helper function `match`. If it matches, we return `true`.
-- If the current node does not match, we recursively check the left and right subtrees of `root` to see if `subRoot` exists in either.
-
-#### Step 2: Helper Function (`match`)
-
-```cpp
 bool match(TreeNode* r1, TreeNode* r2) {
-    if (!r1 && !r2) return true;  // Both nodes are null, so they match
-    if (!r1 || !r2) return false;  // One of the nodes is null, so they don't match
-    if (r1->val != r2->val) return false;  // The values of the nodes don't match
-    // Recursively check the left and right children
-    return match(r1->left, r2->left) && match(r1->right, r2->right);
+    if(!r1 && !r2) return true;
+    if(!r1 || !r2) return false;
+    if(r1->val != r2->val) return false;
+    return match(r1->left, r2->left) &&
+        match(r1->right, r2->right);
 }
 ```
 
-- The function `match` checks whether two binary trees rooted at `r1` and `r2` are identical.
-- If both trees are empty (`nullptr`), they are considered identical.
-- If one of the trees is empty but the other is not, they are not identical.
-- If the values of the current nodes `r1->val` and `r2->val` are different, we return `false` as the trees are not identical.
-- If the current nodes match, we recursively check their left and right children to see if the entire trees match.
+The `isSubtree` function checks if a binary tree `subRoot` is a subtree of another binary tree `root`. The helper function `match` checks whether two trees are identical, node by node.
 
-#### Step 3: Termination
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+	```
+	Defines the function `isSubtree` which checks if `subRoot` is a subtree of `root`. It returns `true` if `subRoot` is a subtree, otherwise `false`.
 
-After calling `isSubtree`, the recursion will eventually return `true` when it finds a subtree in `root` that matches `subRoot`. If no such match is found, the function will return `false` after traversing the entire tree.
+2. **Base Case - Null Root**
+	```cpp
+	    if(!root) return false;
+	```
+	Checks if the root of the tree is `null`. If it is, the function returns `false` because an empty tree can't contain any subtree.
 
-### Complexity:
+3. **Check for Match**
+	```cpp
+	    if(match(root, subRoot)) return true;
+	```
+	Calls the `match` function to check if the current node of `root` and `subRoot` match. If they do, the function returns `true`, indicating `subRoot` is a subtree starting at the current node.
 
-#### Time Complexity:
-- **O(n * m):** In the worst case, we need to check every node in `root` to see if it matches `subRoot`. For each node in `root`, we call the `match` function to check if the subtree rooted at that node matches `subRoot`. The time complexity of `match` is O(m), where `m` is the number of nodes in `subRoot` (since we might need to check all the nodes in `subRoot` for every node in `root`). Therefore, the overall time complexity is O(n * m), where `n` is the number of nodes in `root` and `m` is the number of nodes in `subRoot`.
+4. **Recursion - Check Left Subtree**
+	```cpp
+	    return isSubtree(root->left, subRoot) ||
+	```
+	Recursively checks if `subRoot` is a subtree of the left child of `root`. If the left subtree contains `subRoot`, the function will return `true`.
 
-#### Space Complexity:
-- **O(h):** The space complexity is determined by the recursion depth of the DFS traversal. In the worst case, the recursion depth is proportional to the height of the tree, which is O(h), where `h` is the height of the tree `root`. In a balanced binary tree, the height is O(log n), but in the worst case (e.g., a skewed tree), the height can be O(n).
+5. **Recursion - Check Right Subtree**
+	```cpp
+	            isSubtree(root->right, subRoot);
+	```
+	Recursively checks if `subRoot` is a subtree of the right child of `root`. If the right subtree contains `subRoot`, the function will return `true`.
 
-### Conclusion:
-This solution efficiently checks if a binary tree `subRoot` is a subtree of another binary tree `root` using a depth-first search (DFS) approach. The key idea is to recursively traverse `root` and compare each node with `subRoot` using the `match` helper function. The solution works in O(n * m) time, where `n` is the size of `root` and `m` is the size of `subRoot`, and it uses O(h) space for the recursion stack, where `h` is the height of the tree. This approach is optimal for problems involving subtree matching and provides an intuitive and efficient way to solve the problem.
+6. **Function Definition**
+	```cpp
+	bool match(TreeNode* r1, TreeNode* r2) {
+	```
+	Defines the helper function `match`, which checks if two binary trees `r1` and `r2` are identical.
+
+7. **Base Case - Both Null**
+	```cpp
+	    if(!r1 && !r2) return true;
+	```
+	Checks if both nodes `r1` and `r2` are `null`. If both are `null`, the trees are considered identical (both empty).
+
+8. **Base Case - One Null**
+	```cpp
+	    if(!r1 || !r2) return false;
+	```
+	Checks if only one of the nodes is `null`. If one node is `null` and the other is not, the trees are not identical.
+
+9. **Node Value Comparison**
+	```cpp
+	    if(r1->val != r2->val) return false;
+	```
+	Compares the values of the current nodes `r1` and `r2`. If the values are different, the trees are not identical.
+
+10. **Recursive Check for Left and Right Subtrees**
+	```cpp
+	    return match(r1->left, r2->left) &&
+	```
+	Recursively checks if the left children of `r1` and `r2` are identical. The function returns `true` if both left subtrees are identical.
+
+11. **Recursive Check for Right Subtrees**
+	```cpp
+	        match(r1->right, r2->right);
+	```
+	Recursively checks if the right children of `r1` and `r2` are identical. The function returns `true` if both right subtrees are identical.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n * m)
+
+In the worst case, we check every node in root, and for each node, we compare subRoot, resulting in a time complexity of O(n * m), where n is the number of nodes in root and m is the number of nodes in subRoot.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(h)
+
+The space complexity is O(h) due to the recursion stack, where h is the height of the tree.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subtree-of-another-tree/description/)
 

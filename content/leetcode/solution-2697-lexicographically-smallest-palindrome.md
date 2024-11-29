@@ -14,95 +14,155 @@ img_src = ""
 youtube = "EzAjKrEQLFs"
 youtube_upload_date="2023-05-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/EzAjKrEQLFs/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` consisting of lowercase English letters. You can perform operations on this string where in each operation, you replace a character in `s` with another lowercase English letter. The goal is to make `s` a palindrome using the minimum number of operations possible. If there are multiple ways to achieve the same minimum number of operations, return the lexicographically smallest palindrome string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` consisting only of lowercase English letters.
+- **Example:** `Input: s = 'hckvh'`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s consists only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string makeSmallestPalindrome(string s) {
-        int n = s.size();
-        int i = 0, j = n - 1;
-        
-        while(i < j) {
-            char tmp = min(s[i], s[j]);
-            s[i] = s[j] = tmp;
-            i++;
-            j--;
-        }
-        return s;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically smallest palindrome that can be obtained using the minimum number of operations.
+- **Example:** `Output: 'hvchv'`
+- **Constraints:**
+	- The output should be a palindrome string with the minimum number of character replacements.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to modify the string to be a palindrome with the fewest changes, while ensuring the result is lexicographically smallest.
+
+- Step 1: Initialize two pointers, one at the start (i) and one at the end (j) of the string.
+- Step 2: Compare the characters at positions i and j. If they are different, replace the character at the higher lexicographical position with the one at the lower position.
+- Step 3: Move the pointers inward and repeat until i >= j.
+- Step 4: Return the modified string as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string contains only lowercase English letters.
+- The string has a length between 1 and 1000, so the solution should be efficient.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'hckvh'`  \
+  **Explanation:** The string is 'hckvh'. By replacing 'k' with 'v' and 'c' with 'h', the resulting palindrome is 'hvchv', which is lexicographically smaller than any other palindrome obtained with 2 operations.
+
+- **Input:** `Input: s = 'abcda'`  \
+  **Explanation:** The string is 'abcda'. Replacing 'b' with 'a' and 'd' with 'a' results in the palindrome 'abcba', which is the smallest lexicographically possible palindrome with the minimum number of operations.
+
+{{< dots >}}
+## Approach 🚀
+The approach to solving the problem involves iterating through the string and ensuring that for each character pair (i, n-i-1), the smaller character is chosen to form a palindrome. This minimizes the number of operations and ensures lexicographical order.
+
+### Initial Thoughts 💭
+- The problem is straightforward if we consider each pair of characters from the start and end of the string.
+- For each character pair, we only need to make one change if they differ, and we aim for the lexicographically smaller character.
+- We can solve this problem efficiently in O(n) time by scanning the string from both ends.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty string is not possible based on constraints but if it were, the output would be an empty string.
+- For strings close to the upper limit of length 1000, ensure the solution is efficient and handles the maximum input size within time limits.
+- If the string is already a palindrome, the output will be the string itself without any modifications.
+- The string length is guaranteed to be between 1 and 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+string makeSmallestPalindrome(string s) {
+    int n = s.size();
+    int i = 0, j = n - 1;
+    
+    while(i < j) {
+        char tmp = min(s[i], s[j]);
+        s[i] = s[j] = tmp;
+        i++;
+        j--;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to convert a given string into its lexicographically smallest palindrome. A palindrome is a string that reads the same backward as forward. The task is to modify the string so that it is a palindrome, while ensuring that it is the smallest possible palindrome lexicographically.
-
-For each character in the string, if two characters (one from the beginning and one from the end) are different, we should replace both characters with the lexicographically smaller of the two. This operation is repeated until the entire string becomes a palindrome.
-
-### Approach
-
-To solve this problem efficiently, we can use the following approach:
-
-1. **Two-pointer approach**: Use two pointers, `i` and `j`, to traverse the string from both ends towards the middle.
-2. **Character comparison**: For each pair of characters (one from the beginning and one from the end), if they are not equal, replace both characters with the smaller one to ensure the smallest possible palindrome.
-3. **Termination**: The loop continues until the two pointers meet or cross each other, at which point we will have transformed the string into the smallest lexicographically palindrome possible.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int n = s.size();
-int i = 0, j = n - 1;
-```
-
-- `n` holds the size of the input string `s`.
-- `i` and `j` are the two pointers, initialized to the start (`i = 0`) and the end (`j = n - 1`) of the string, respectively. These pointers will help us compare characters from both ends of the string and modify them to form a palindrome.
-
-#### Step 2: While Loop for Comparison
-
-```cpp
-while(i < j) {
-    char tmp = min(s[i], s[j]);
-    s[i] = s[j] = tmp;
-    i++;
-    j--;
+    return s;
 }
 ```
 
-- The `while` loop runs as long as `i` is less than `j`. This ensures that we only need to compare each pair of characters once. The loop proceeds from the outermost characters towards the center of the string.
-- Inside the loop, we compare the characters at positions `i` and `j` (`s[i]` and `s[j]`). We use the `min` function to determine which of the two characters is lexicographically smaller.
-- Both characters are replaced with the smaller of the two. This ensures that the string is being transformed into the lexicographically smallest palindrome.
-- After replacing the characters, we increment `i` (move the left pointer) and decrement `j` (move the right pointer) to compare the next pair of characters.
+The function `makeSmallestPalindrome` takes a string `s` and returns the lexicographically smallest palindrome that can be formed by modifying the string.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string makeSmallestPalindrome(string s) {
+	```
+	This line defines the function `makeSmallestPalindrome`, which takes a string `s` as input and returns a new string that is the lexicographically smallest palindrome possible.
 
-```cpp
-return s;
-```
+2. **String Size Calculation**
+	```cpp
+	    int n = s.size();
+	```
+	The variable `n` stores the length of the string `s`.
 
-- After the loop terminates, we have transformed the string into the smallest palindrome possible. The modified string is returned as the result.
+3. **Pointer Initialization**
+	```cpp
+	    int i = 0, j = n - 1;
+	```
+	Two pointers `i` and `j` are initialized to the start and end of the string, respectively.
 
-### Complexity
+4. **While Loop**
+	```cpp
+	    while(i < j) {
+	```
+	A while loop is started, which continues as long as the pointers `i` and `j` do not cross each other.
 
-#### Time Complexity
+5. **Minimum Character Selection**
+	```cpp
+	        char tmp = min(s[i], s[j]);
+	```
+	The variable `tmp` is assigned the lexicographically smaller of the two characters at positions `i` and `j`.
 
-The time complexity of this solution is **O(n)**, where `n` is the length of the string `s`. This is because we only iterate through half of the string once. In each iteration, we perform a constant time operation of comparing two characters and replacing them. Since we only loop once from the beginning to the middle of the string, the time complexity is linear.
+6. **Character Replacement**
+	```cpp
+	        s[i] = s[j] = tmp;
+	```
+	The characters at positions `i` and `j` are replaced with the smaller character `tmp` to form the palindrome.
 
-#### Space Complexity
+7. **Pointer Update**
+	```cpp
+	        i++;
+	```
+	Pointer `i` is incremented to move towards the middle of the string.
 
-The space complexity of this solution is **O(1)**. We are modifying the string `s` in place without using any extra space (besides a few integer variables and a temporary variable `tmp`). Therefore, the space complexity is constant.
+8. **Pointer Update**
+	```cpp
+	        j--;
+	```
+	Pointer `j` is decremented to move towards the middle of the string.
 
-### Conclusion
+9. **Return Statement**
+	```cpp
+	    return s;
+	```
+	The modified string `s`, which is now the smallest lexicographically palindrome, is returned.
 
-This solution is optimal for the problem of converting a string into its lexicographically smallest palindrome. By using a two-pointer approach and replacing mismatched characters with the lexicographically smaller of the two, we efficiently modify the string in a single pass. The algorithm runs in linear time, making it suitable for large strings, and it does not require any extra space, making it very memory efficient.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) since we only need to iterate through the string once, comparing and possibly modifying each character pair.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we are modifying the string in-place, and the space required for the input string is proportional to its length.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lexicographically-smallest-palindrome/description/)
 

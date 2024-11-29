@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "XLvyInrFjm4"
 youtube_upload_date="2024-04-06"
 youtube_thumbnail="https://i.ytimg.com/vi/XLvyInrFjm4/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,153 +28,271 @@ youtube_thumbnail="https://i.ytimg.com/vi/XLvyInrFjm4/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two gene strings, `startGene` and `endGene`, both consisting of 8 characters. You also have a gene bank of valid gene strings that can be mutated into one another. A mutation is defined as changing one character at a time, and the mutated gene string must exist in the gene bank. Your task is to determine the minimum number of mutations needed to transform `startGene` into `endGene`. If transformation is impossible, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three inputs: `startGene` (an 8-character gene string), `endGene` (an 8-character gene string), and a `bank` (a list of valid gene strings).
+- **Example:** `startGene = 'AACCGGTT', endGene = 'AACCGGTA', bank = ['AACCGGTA']`
+- **Constraints:**
+	- 0 <= bank.length <= 10
+	- startGene.length == endGene.length == bank[i].length == 8
+	- startGene, endGene, and bank[i] consist of only the characters ['A', 'C', 'G', 'T']
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minMutation(string startGene, string endGene, vector<string>& bank) {
-        unordered_set<string> st{bank.begin(), bank.end()};
-        if(!st.count(endGene)) return -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of mutations needed to transform `startGene` to `endGene`. If it's not possible, return -1.
+- **Example:** `1`
+- **Constraints:**
+	- If no mutation path exists, return -1.
 
-        queue<string> q;
-        q.push(startGene);
-        int step = 0, s;
-        string cur, t;
-        while(!q.empty()) {
-            s = q.size();
-            while(s--) {
-                cur = q.front();
-                q.pop();
-                if(cur == endGene) return step;
-                st.erase(cur);
-                for(int i= 0; i < 8; i++) {
-                    t = cur;
-                    t[i] = 'A';
-                    if(st.count(t)) q.push(t);
-                    t[i] = 'T';
-                    if(st.count(t)) q.push(t);
-                    t[i] = 'G';
-                    if(st.count(t)) q.push(t);
-                    t[i] = 'C';
-                    if(st.count(t)) q.push(t);                    
-                }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the shortest path from `startGene` to `endGene` by performing valid mutations and using the gene bank.
+
+- 1. Check if `endGene` exists in the gene bank. If not, return -1.
+- 2. Use a breadth-first search (BFS) to explore all possible gene strings starting from `startGene`.
+- 3. For each gene string, generate all possible mutations by changing one character at a time.
+- 4. If a mutated gene string exists in the gene bank, add it to the BFS queue.
+- 5. Keep track of the number of mutations, and return the result when `endGene` is reached.
+{{< dots >}}
+### Problem Assumptions ✅
+- The startGene is always valid.
+- Mutations are only allowed if the resulting gene string exists in the bank.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: startGene = 'AACCGGTT', endGene = 'AACCGGTA', bank = ['AACCGGTA']`  \
+  **Explanation:** We mutate the last character from 'T' to 'A', which results in the endGene after one mutation.
+
+- **Input:** `Input: startGene = 'AACCGGTT', endGene = 'AAACGGTA', bank = ['AACCGGTA','AACCGCTA','AAACGGTA']`  \
+  **Explanation:** The solution involves two mutations: first from 'AACCGGTT' to 'AACCGGTA', and then from 'AACCGGTA' to 'AAACGGTA'.
+
+{{< dots >}}
+## Approach 🚀
+We will use a breadth-first search (BFS) approach to find the shortest path from `startGene` to `endGene` by exploring all possible valid mutations in the gene bank.
+
+### Initial Thoughts 💭
+- This is a shortest path problem, and BFS is ideal because it explores all nodes at the present depth level before moving to nodes at the next depth level.
+- We need to generate all possible gene strings from the current string by changing one character at a time, and check if the mutated string is in the gene bank.
+{{< dots >}}
+### Edge Cases 🌐
+- If the gene bank is empty, return -1 unless `startGene` is equal to `endGene`.
+- Ensure that the BFS approach handles up to 10 valid mutations efficiently.
+- If the `startGene` is equal to `endGene`, return 0 because no mutation is needed.
+- Handle cases where no valid mutations exist or where the gene bank is empty.
+{{< dots >}}
+## Code 💻
+```cpp
+int minMutation(string startGene, string endGene, vector<string>& bank) {
+    unordered_set<string> st{bank.begin(), bank.end()};
+    if(!st.count(endGene)) return -1;
+
+    queue<string> q;
+    q.push(startGene);
+    int step = 0, s;
+    string cur, t;
+    while(!q.empty()) {
+        s = q.size();
+        while(s--) {
+            cur = q.front();
+            q.pop();
+            if(cur == endGene) return step;
+            st.erase(cur);
+            for(int i= 0; i < 8; i++) {
+                t = cur;
+                t[i] = 'A';
+                if(st.count(t)) q.push(t);
+                t[i] = 'T';
+                if(st.count(t)) q.push(t);
+                t[i] = 'G';
+                if(st.count(t)) q.push(t);
+                t[i] = 'C';
+                if(st.count(t)) q.push(t);                    
             }
-            step++;
         }
-        return -1;
+        step++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to find the minimum number of mutations required to convert one DNA string into another, where the transformation can only be made by changing one character at a time, and each new string must be in a provided list of allowed genetic sequences (the bank). The goal is to determine the fewest transformations needed to convert the `startGene` into the `endGene`, if possible, using only the allowed mutations in the `bank`.
-
-### Approach
-
-The problem is essentially a shortest path problem where each gene sequence is a node, and each mutation (changing one character) is an edge connecting nodes. This can be solved efficiently using **Breadth-First Search (BFS)**, which explores all possible mutations level by level and guarantees the shortest path (i.e., the minimum number of mutations).
-
-### Key Concepts
-1. **Valid Mutation**: A valid mutation means changing exactly one character in the gene sequence, and the new gene sequence must exist in the provided `bank`.
-2. **BFS for Shortest Path**: BFS is ideal for this problem because it explores all sequences at the current mutation level before moving on to the next level, ensuring that the first time we reach the target `endGene`, we do so with the minimum number of mutations.
-
-### Steps:
-1. **Initial Checks**: If the `endGene` is not in the `bank`, it is impossible to transform the `startGene` into the `endGene`, so return `-1`.
-2. **BFS Setup**: Use a queue to keep track of the current gene sequence and the number of steps taken to reach it.
-3. **Queue Exploration**: For each sequence in the queue, try all possible mutations by changing one character at a time. If a mutation exists in the `bank`, enqueue the new sequence.
-4. **Terminate on Target**: If we reach the `endGene`, return the number of mutations (steps).
-5. **Return -1 if No Solution**: If BFS completes without reaching the target, return `-1`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Data Structures
-
-```cpp
-unordered_set<string> st{bank.begin(), bank.end()};
-if (!st.count(endGene)) return -1;
-```
-
-- We first convert the `bank` into an unordered set (`st`) for fast lookup. This allows us to quickly check if a mutated gene sequence exists in the `bank`. 
-- If the `endGene` is not in the `bank`, it's impossible to reach it, so we immediately return `-1`.
-
-#### Step 2: BFS Setup
-
-```cpp
-queue<string> q;
-q.push(startGene);
-int step = 0, s;
-string cur, t;
-```
-
-- We initialize a queue `q` and push the `startGene` into it. The queue will hold sequences that are currently being explored.
-- We also initialize a variable `step` to keep track of the number of mutations (steps) taken so far. The variable `s` stores the size of the current level in the queue, i.e., how many sequences we are currently exploring.
-- `cur` will store the current gene sequence being processed, and `t` will temporarily hold mutated sequences.
-
-#### Step 3: Explore All Mutations
-
-```cpp
-while (!q.empty()) {
-    s = q.size();
-    while (s--) {
-        cur = q.front();
-        q.pop();
-        if (cur == endGene) return step;
-        st.erase(cur);
-```
-
-- We begin processing the queue using a while loop. For each level of BFS, we process all sequences at that level (this ensures we are processing all mutations for the current number of steps).
-- If the current sequence `cur` is equal to `endGene`, we immediately return the current `step` as it represents the minimum number of mutations.
-- We then erase `cur` from the set `st` to avoid revisiting it.
-
-#### Step 4: Try All Possible Mutations
-
-```cpp
-for (int i = 0; i < 8; i++) {
-    t = cur;
-    t[i] = 'A';
-    if (st.count(t)) q.push(t);
-    t[i] = 'T';
-    if (st.count(t)) q.push(t);
-    t[i] = 'G';
-    if (st.count(t)) q.push(t);
-    t[i] = 'C';
-    if (st.count(t)) q.push(t);
+    return -1;
 }
 ```
 
-- For each position `i` in the gene sequence (the gene length is always 8), we try changing the character at position `i` to one of the four possible DNA bases: 'A', 'T', 'G', or 'C'.
-- If the mutated sequence `t` exists in the `bank` (i.e., it’s in the set `st`), we add it to the queue for further exploration.
+This function finds the minimum number of mutations required to transform the start gene into the end gene using BFS.
 
-#### Step 5: Increment Steps and Continue
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minMutation(string startGene, string endGene, vector<string>& bank) {
+	```
+	Declares the function to compute the minimum mutations required for gene transformation.
 
-```cpp
-step++;
-```
+2. **Set Initialization**
+	```cpp
+	    unordered_set<string> st{bank.begin(), bank.end()};
+	```
+	Initializes a set with the bank to allow O(1) lookups for gene sequences.
 
-- After processing all sequences at the current level (i.e., all mutations for the current number of steps), we increment the `step` counter and continue exploring the next level.
+3. **Base Condition**
+	```cpp
+	    if(!st.count(endGene)) return -1;
+	```
+	Checks if the end gene is in the bank; if not, returns -1 as transformation is impossible.
 
-#### Step 6: Return -1 if No Solution
+4. **Queue Initialization**
+	```cpp
+	    queue<string> q;
+	```
+	Declares a queue for BFS traversal of gene mutations.
 
-```cpp
-return -1;
-```
+5. **Enqueue**
+	```cpp
+	    q.push(startGene);
+	```
+	Adds the starting gene to the BFS queue.
 
-- If the queue becomes empty and we haven't found the `endGene`, it means there's no valid sequence of mutations that leads to the target, so we return `-1`.
+6. **Variable Initialization**
+	```cpp
+	    int step = 0, s;
+	```
+	Initializes variables for BFS steps and queue size.
 
-### Complexity
+7. **Variable Declaration**
+	```cpp
+	    string cur, t;
+	```
+	Declares strings to hold the current gene and temporary mutations.
 
-#### Time Complexity:
-- **Queue Processing**: We can potentially visit each sequence once. Since each sequence is 8 characters long and there are 4 possible mutations for each character, the number of possible mutations is small (4^8). However, we're constrained by the bank size.
-- The BFS will process each sequence at most once, and for each sequence, we try four possible mutations for each of the 8 characters, so the time complexity is approximately `O(4 * 8 * N)` where `N` is the number of sequences in the bank. This simplifies to `O(N)`.
+8. **While Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Iterates as long as the queue is not empty.
 
-#### Space Complexity:
-- **Queue and Set**: We need to store the set of sequences (`st`) and the queue. Both can store up to `N` sequences. Therefore, the space complexity is `O(N)`.
+9. **Queue Size**
+	```cpp
+	        s = q.size();
+	```
+	Stores the current queue size for level-wise processing.
 
-### Conclusion
+10. **For Each Level**
+	```cpp
+	        while(s--) {
+	```
+	Processes all nodes at the current level in the BFS.
 
-The solution efficiently finds the minimum number of mutations required to transform the `startGene` into the `endGene` using BFS. It leverages the power of BFS to guarantee the shortest path and utilizes an unordered set for efficient lookup of valid mutations. This approach ensures that we explore all possible transformations level by level and ensures optimal performance for reasonable input sizes.
+11. **Front Element**
+	```cpp
+	            cur = q.front();
+	```
+	Gets the current gene at the front of the queue.
+
+12. **Dequeue**
+	```cpp
+	            q.pop();
+	```
+	Removes the processed gene from the queue.
+
+13. **Check Goal**
+	```cpp
+	            if(cur == endGene) return step;
+	```
+	Returns the number of steps if the current gene matches the end gene.
+
+14. **Set Erase**
+	```cpp
+	            st.erase(cur);
+	```
+	Removes the current gene from the set to avoid revisiting.
+
+15. **Loop**
+	```cpp
+	            for(int i= 0; i < 8; i++) {
+	```
+	Iterates through each character of the current gene to mutate.
+
+16. **Copy String**
+	```cpp
+	                t = cur;
+	```
+	Creates a copy of the current gene for mutation.
+
+17. **Character Mutation**
+	```cpp
+	                t[i] = 'A';
+	```
+	Mutates the ith character of the gene to 'A'.
+
+18. **Conditional Insertions**
+	```cpp
+	                if(st.count(t)) q.push(t);
+	```
+	Checks if the mutated gene is in the set and enqueues it.
+
+19. **Character Mutation**
+	```cpp
+	                t[i] = 'T';
+	```
+	Mutates the ith character of the gene to 'T'.
+
+20. **Conditional Insertions**
+	```cpp
+	                if(st.count(t)) q.push(t);
+	```
+	Checks if the mutated gene is in the set and enqueues it.
+
+21. **Character Mutation**
+	```cpp
+	                t[i] = 'G';
+	```
+	Mutates the ith character of the gene to 'G'.
+
+22. **Conditional Insertions**
+	```cpp
+	                if(st.count(t)) q.push(t);
+	```
+	Checks if the mutated gene is in the set and enqueues it.
+
+23. **Character Mutation**
+	```cpp
+	                t[i] = 'C';
+	```
+	Mutates the ith character of the gene to 'C'.
+
+24. **Conditional Insertions**
+	```cpp
+	                if(st.count(t)) q.push(t);
+	```
+	Checks if the mutated gene is in the set and enqueues it.
+
+25. **Increment Step**
+	```cpp
+	        step++;
+	```
+	Increments the step counter for the next level of BFS.
+
+26. **Return Result**
+	```cpp
+	    return -1;
+	```
+	Returns -1 if the end gene is not reachable from the start gene.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), if startGene is equal to endGene.
+- **Average Case:** O(N * 8), where N is the number of gene strings in the bank and each mutation takes O(8) time (since the length of each gene string is 8).
+- **Worst Case:** O(N * 8), where N is the number of possible gene mutations.
+
+BFS explores each possible mutation in the gene bank.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no mutations are required.
+- **Worst Case:** O(N), where N is the number of gene strings stored in the queue and the bank.
+
+The space complexity depends on the number of nodes in the BFS queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-genetic-mutation/description/)
 

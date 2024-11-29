@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "q0s6m7AiM7o"
 youtube_upload_date="2021-08-31"
 youtube_thumbnail="https://i.ytimg.com/vi/q0s6m7AiM7o/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,154 +28,185 @@ youtube_thumbnail="https://i.ytimg.com/vi/q0s6m7AiM7o/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two integers `n` and `k`. Find all possible combinations of `k` numbers selected from the range [1, n], where the numbers are chosen without repetition. The answer should contain all possible combinations of `k` numbers in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, `n` and `k`. `n` represents the upper bound of the range of numbers, and `k` represents the number of numbers to be selected.
+- **Example:** `n = 5, k = 3`
+- **Constraints:**
+	- 1 <= n <= 20
+	- 1 <= k <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int n;
-    vector<vector<int>> combine(int n, int k) {
-        this->n = n;
-        vector<vector<int>> ans;
-        vector<int> tmp;
-        
-            bt(ans, 1, k, tmp);
-        return ans;
-    }
-    
-    void bt(vector<vector<int>> &ans, int i, int k, vector<int> &tmp) {
-        if(tmp.size() == k) {
-            ans.push_back(tmp);
-            return;
-        }
-        if(i == n + 1) return;
-        
-        for(int j = i; j <= n; j++) {
-            tmp.push_back(j);
-            bt(ans, j + 1, k, tmp);
-            tmp.pop_back();
-        }
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return all possible combinations of `k` numbers from the range [1, n], in any order.
+- **Example:** `[[1,2,3], [1,2,4], [1,2,5], [1,3,4], [1,3,5], [1,4,5], [2,3,4], [2,3,5], [2,4,5], [3,4,5]]`
+- **Constraints:**
+	- The output should be a list of combinations, each containing exactly `k` numbers from the range [1, n].
 
-### 🏷️ **Combinations of Size `k` from 1 to `n`**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate all possible combinations of `k` numbers from the range [1, n] using a backtracking approach.
 
-Given two integers `n` and `k`, the task is to generate all possible combinations of size `k` from the numbers 1 to `n`. A combination is a selection of items where the order does not matter.
+- Use a backtracking technique to explore all possible combinations by selecting a number from the range [1, n] and recursively adding it to the current combination.
+- If the current combination has `k` elements, add it to the result list.
+- Backtrack by removing the last selected element and exploring other possible combinations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input integers `n` and `k` are valid, with `k <= n`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 5, k = 3`  \
+  **Explanation:** The output consists of all possible combinations of 3 numbers selected from the range [1, 5]. There are a total of 10 combinations.
 
-#### Example:
-- **Input:** `n = 4, k = 2`
-- **Output:** `[[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]`
+- **Input:** `n = 3, k = 2`  \
+  **Explanation:** The output consists of all possible combinations of 2 numbers selected from the range [1, 3]. There are a total of 3 combinations.
 
-In this problem:
-- The numbers are selected from the range `1` to `n`.
-- Each combination contains exactly `k` numbers.
-- The order of numbers within a combination doesn't matter, i.e., `[1, 2]` is the same as `[2, 1]`.
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves using backtracking to generate all combinations of `k` numbers from the range [1, n].
 
----
-
-### 🧠 **Approach**
-
-To solve this problem efficiently, we can use the **Backtracking** approach. The core idea is to recursively explore all possible combinations and backtrack when a choice does not lead to a valid solution. Here's the step-by-step breakdown:
-
-1. **Recursive Backtracking:** We define a recursive function that explores all ways to form combinations of size `k` from the set `{1, 2, ..., n}`. When a valid combination is found (of size `k`), it is added to the result.
-
-2. **Base Case:** The recursion terminates when the size of the current combination reaches `k`. At this point, the combination is added to the result list.
-
-3. **Backtracking:** If the current combination is not of size `k`, we continue to build it by adding numbers starting from the current number. After exploring a possibility, we remove the last added element and backtrack.
-
-4. **Termination:** The recursion stops when it is impossible to form a combination of size `k` from the remaining numbers.
-
----
-
-### 📝 **Code Breakdown**
-
-#### Step 1: Define the `combine` Function
+### Initial Thoughts 💭
+- We need to generate combinations, not permutations, so order doesn't matter.
+- Backtracking is a natural fit for generating combinations, as it allows us to explore all possibilities and backtrack when we reach a valid combination.
+{{< dots >}}
+### Edge Cases 🌐
+- If `k` is greater than `n`, there are no valid combinations.
+- For the upper bound of `n = 20`, ensure the solution handles the large number of possible combinations efficiently.
+- If `k = 1`, the output will contain `n` combinations, each containing a single number from 1 to n.
+- Ensure that the solution efficiently handles the constraints of `1 <= n <= 20`.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> combine(int n, int k) {
-    this->n = n;
-    vector<vector<int>> ans;
-    vector<int> tmp;
-    
-    bt(ans, 1, k, tmp);
-    return ans;
+    vector<vector<int>> combinations;
+    vector<int> combination;
+    backtrack(combinations, combination, 1, n, k);
+    return combinations;
 }
-```
-- **Inputs:** The function takes `n` (the upper bound of numbers) and `k` (the size of the combinations).
-- Initialize the result container `ans` and the temporary vector `tmp` to store combinations.
-- Call the helper function `bt`, which will generate combinations starting from the number 1.
 
-#### Step 2: Define the Backtracking Function (`bt`)
-```cpp
-void bt(vector<vector<int>> &ans, int i, int k, vector<int> &tmp) {
-    if (tmp.size() == k) {
-        ans.push_back(tmp);
+void backtrack(vector<vector<int>>& combinations, vector<int>& combination, int start, int n, int k) {
+    if (combination.size() == k) {
+        combinations.push_back(combination);
         return;
     }
-    if (i == n + 1) return;
 
-    for (int j = i; j <= n; j++) {
-        tmp.push_back(j); // include number j in the combination
-        bt(ans, j + 1, k, tmp); // recurse with the next number
-        tmp.pop_back(); // backtrack, remove number j from the combination
+    for (int i = start; i <= n; ++i) {
+        combination.push_back(i);
+        backtrack(combinations, combination, i + 1, n, k);
+        combination.pop_back();
     }
 }
 ```
-- **Inputs:** 
-  - `ans`: Stores all valid combinations.
-  - `i`: Current number being considered.
-  - `k`: Target size of combinations.
-  - `tmp`: Current combination being built.
-  
-- **Base Case:** The recursion stops when `tmp` has reached the target size `k`. We then add `tmp` to `ans`.
 
-- **Termination:** If `i` exceeds `n`, there are no more numbers to consider, so the function returns.
+This code generates all possible combinations of `k` numbers from the range `[1, n]` using a backtracking approach.
 
-#### Step 3: Loop to Generate Combinations
-```cpp
-for (int j = i; j <= n; j++) {
-    tmp.push_back(j); // include number j in the current combination
-    bt(ans, j + 1, k, tmp); // recurse to build the next part of the combination
-    tmp.pop_back(); // backtrack by removing the last number
-}
-```
-- The inner loop iterates from `i` to `n`. For each number `j`, it adds `j` to the current combination and recursively generates the next combination. After exploring with `j`, the function backtracks by removing `j` from the combination.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> combine(int n, int k) {
+	```
+	Declares a function `combine` that takes two integers `n` and `k` as input and returns a vector of vectors representing all possible combinations.
 
-#### Step 4: Return the Result
-```cpp
-return ans;
-```
-- After all combinations are generated, return the `ans` vector containing the valid combinations.
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> combinations;
+	```
+	Initializes an empty vector `combinations` to store the generated combinations.
 
----
+3. **Variable Initialization**
+	```cpp
+	    vector<int> combination;
+	```
+	Initializes an empty vector `combination` to store the current combination being built.
 
-### 🧮 **Complexity Analysis**
+4. **Function Call**
+	```cpp
+	    backtrack(combinations, combination, 1, n, k);
+	
+	```
+	Calls the `backtrack` function to recursively generate combinations.
 
-#### Time Complexity:
-- The number of combinations of `k` elements from `n` elements is given by the combination formula `C(n, k) = n! / (k! * (n-k)!)`.
-- Generating each combination takes `O(k)` time to store and process.
-- Thus, the overall time complexity is **O(C(n, k) * k)**, where `C(n, k)` is the number of combinations.
+5. **Return**
+	```cpp
+	    return combinations;
+	```
+	Returns the `combinations` vector containing all the generated combinations.
 
-#### Space Complexity:
-- The space complexity is mainly due to the storage of combinations. Since we generate `C(n, k)` combinations, each of size `k`, the space complexity is **O(C(n, k) * k)**.
+6. **Function Declaration**
+	```cpp
+	void backtrack(vector<vector<int>>& combinations, vector<int>& combination, int start, int n, int k) {
+	```
+	Declares a recursive `backtrack` function to explore combinations.
 
----
+7. **Conditional**
+	```cpp
+	    if (combination.size() == k) {
+	```
+	Checks if the current `combination` has `k` elements.
 
-### 🎯 **Conclusion**
+8. **Vector Operation**
+	```cpp
+	        combinations.push_back(combination);
+	```
+	Adds the current `combination` to the `combinations` vector.
 
-The problem of generating all combinations of size `k` from a set of `n` elements is solved efficiently using **backtracking**. By recursively building combinations and backtracking when necessary, we systematically explore all possibilities. The time and space complexity depend on the number of combinations, which is optimal for this problem.
+9. **Return**
+	```cpp
+	        return;
+	```
+	Returns from the recursive call as a complete combination is found.
 
-This approach is elegant, simple, and effective for generating combinations of a given size from a range of numbers.
+10. **Conditional**
+	```cpp
+	    if (i > n) return;
+	```
+	Checks if the current index `i` has exceeded the maximum value `n`.
 
----
+11. **Loop Iteration**
+	```cpp
+	    for (int i = start; i <= n; ++i) {
+	```
+	Iterates from `start` to `n` to explore possible numbers for the current position in the combination.
 
-### ✨ **Key Takeaways**
-- **Backtracking** is a powerful technique for exploring all possible solutions systematically.
-- The algorithm runs in **O(C(n, k) * k)** time and **O(C(n, k) * k)** space, where `n` is the total number of elements and `k` is the combination size.
-- This solution is efficient and optimal for generating combinations.
+12. **Vector Operation**
+	```cpp
+	        combination.push_back(i);
+	```
+	Adds the current number `i` to the `combination`.
 
----
+13. **Recursive Call**
+	```cpp
+	        backtrack(combinations, combination, i + 1, n, k);
+	
+	```
+	Recursively calls the `backtrack` function with the updated `combination` and `start` index.
+
+14. **Vector Operation**
+	```cpp
+	        combination.pop_back();
+	```
+	Removes the last added number from the `combination` to explore other possibilities.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n choose k)
+- **Average Case:** O(n choose k)
+- **Worst Case:** O(n choose k)
+
+The time complexity is determined by the number of combinations that need to be generated, which is `n choose k`.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is O(k) due to the temporary storage used to hold the current combination during recursion.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/combinations/description/)
 

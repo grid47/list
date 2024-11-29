@@ -14,118 +14,178 @@ img_src = ""
 youtube = "x_y3nIsbENM"
 youtube_upload_date="2021-03-01"
 youtube_thumbnail="https://i.ytimg.com/vi/x_y3nIsbENM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of positive integers, return the lexicographically largest permutation that is smaller than the given array. This can be done by swapping exactly two elements. If no such swap is possible (i.e., the array is already the smallest permutation), return the same array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers arr where each element is a positive integer. You need to return the lexicographically largest permutation smaller than arr that can be made by swapping exactly two numbers in the array.
+- **Example:** `Input: arr = [5, 3, 4, 2, 1]`
+- **Constraints:**
+	- 1 <= arr.length <= 10^4
+	- 1 <= arr[i] <= 10^4
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the lexicographically largest permutation that is smaller than the given array, obtained by swapping exactly two elements. If no such swap exists, return the input array as is.
+- **Example:** `Output: [5, 4, 3, 2, 1]`
+- **Constraints:**
+	- The output is guaranteed to be a valid array of integers.
 
-class Solution {
-public:
-    vector<int> prevPermOpt1(vector<int>& arr) {
-        int idx = -1, n = arr.size();
-        for(int i = n - 1; i > 0; i--) {
-            // cout<< arr[i] << " " << arr[i - 1] << '\n';
-            if(arr[i] < arr[i - 1]) {
-                idx = i - 1;
-                break;
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the lexicographically largest permutation smaller than the given array by swapping two elements.
+
+- 1. Find the first pair of adjacent elements where arr[i] > arr[i+1] (this is where the lexicographical order breaks).
+- 2. Swap the first element arr[i] with the largest element in the suffix of the array that is smaller than arr[i].
+- 3. If no such pair exists, return the array as is, because it is already the smallest permutation.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains positive integers and the length of the array is between 1 and 10,000.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [5, 3, 4, 2, 1]`  \
+  **Explanation:** The largest permutation smaller than [5, 3, 4, 2, 1] is obtained by swapping 3 and 4, resulting in [5, 4, 3, 2, 1].
+
+- **Input:** `Input: arr = [1, 2, 3]`  \
+  **Explanation:** Since the array is already in ascending order, no swap can make a smaller permutation. Therefore, the output is the same as the input: [1, 2, 3].
+
+{{< dots >}}
+## Approach 🚀
+The approach involves finding the first pair of adjacent elements where the order breaks and then swapping the first element with the largest element from the suffix of the array that is smaller than the first element. This ensures that the resulting permutation is the largest possible smaller permutation.
+
+### Initial Thoughts 💭
+- We need to identify the point where the permutation can be swapped to form a smaller arrangement.
+- The array might already be in the smallest lexicographical order.
+- The key is to find where the array stops being in descending order and use that information to swap the necessary elements.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs because the array will always have at least one element.
+- The algorithm needs to efficiently handle inputs up to 10,000 elements in length.
+- If the array is already sorted in ascending order, no valid swap can be made.
+- The array will always have positive integers.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> prevPermOpt1(vector<int>& arr) {
+    int idx = -1, n = arr.size();
+    for(int i = n - 1; i > 0; i--) {
+        // cout<< arr[i] << " " << arr[i - 1] << '\n';
+        if(arr[i] < arr[i - 1]) {
+            idx = i - 1;
+            break;
         }
-        // cout << idx;
-        if(idx == -1) return arr;
-
-        for(int i = n - 1; i > idx; i--) {
-            if(arr[i] < arr[idx] && arr[i] != arr[i - 1]) {
-                swap(arr[i], arr[idx]);
-                break;
-            }
-        }
-        return arr;
     }
-};
-{{< /highlight >}}
----
+    // cout << idx;
+    if(idx == -1) return arr;
 
+    for(int i = n - 1; i > idx; i--) {
+        if(arr[i] < arr[idx] && arr[i] != arr[i - 1]) {
+            swap(arr[i], arr[idx]);
+            break;
+        }
+    }
+    return arr;
+}
+```
 
-### Problem Statement
-The task is to implement a function that returns the previous permutation of a given array of integers. A permutation is considered "previous" if it is the largest permutation that is smaller than the current one in lexicographical order. If the current permutation is the smallest, the function should return the same array as no previous permutation exists.
+The code provides a solution for finding the previous permutation of an array. It works by identifying the first decrease in the array from the right, then swapping it with a smaller element to get the largest permutation smaller than the current one.
 
-### Approach
-The approach to solve this problem involves the following steps:
-1. Traverse the array from right to left to find the first pair of indices where the left element is greater than the right element. This identifies the point at which the current permutation can be modified to create a smaller permutation.
-2. Once the point of modification is found, search again from the right end of the array to find the largest element that is smaller than the identified element at the left index. 
-3. Swap these two elements to create the previous permutation.
-4. Return the modified array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> prevPermOpt1(vector<int>& arr) {
+	```
+	This line defines the function `prevPermOpt1` which takes a reference to a vector of integers `arr` and returns a vector of integers. It aims to find the previous permutation of the array.
 
-### Code Breakdown (Step by Step)
+2. **Variable Initialization**
+	```cpp
+	    int idx = -1, n = arr.size();
+	```
+	Here, `idx` is initialized to -1 to track the position where a decrease is found, and `n` stores the size of the array.
 
-1. **Function Declaration**:
-   The function `prevPermOpt1` is defined to take a vector of integers `arr` and return a vector of integers.
+3. **Loop**
+	```cpp
+	    for(int i = n - 1; i > 0; i--) {
+	```
+	This loop iterates through the array in reverse order, starting from the second last element and going towards the first.
 
-   ```cpp
-   vector<int> prevPermOpt1(vector<int>& arr) {
-   ```
+4. **Condition**
+	```cpp
+	        if(arr[i] < arr[i - 1]) {
+	```
+	This condition checks if the current element is smaller than the previous element. If true, it indicates a possible swap location.
 
-2. **Variable Initialization**:
-   We initialize `idx` to `-1` to hold the index where we can make the swap and `n` to the size of the array.
+5. **Update Index**
+	```cpp
+	            idx = i - 1;
+	```
+	If a decrease is found, the index `idx` is set to `i - 1`, indicating the position where the swap needs to occur.
 
-   ```cpp
-   int idx = -1, n = arr.size();
-   ```
+6. **Break Statement**
+	```cpp
+	            break;
+	```
+	The loop breaks as soon as a decrease is found, as no further checking is needed.
 
-3. **Finding the Point of Modification**:
-   We iterate from the end of the array towards the start (excluding the first element). If we find an index `i` such that `arr[i] < arr[i - 1]`, we set `idx` to `i - 1` and break the loop.
+7. **Edge Case Handling**
+	```cpp
+	    if(idx == -1) return arr;
+	```
+	If no decrease is found (i.e., the array is sorted in ascending order), the function returns the original array, as no previous permutation exists.
 
-   ```cpp
-   for(int i = n - 1; i > 0; i--) {
-       if(arr[i] < arr[i - 1]) {
-           idx = i - 1;
-           break;
-       }
-   }
-   ```
+8. **Second Loop**
+	```cpp
+	    for(int i = n - 1; i > idx; i--) {
+	```
+	This second loop searches for the largest element smaller than `arr[idx]` to swap it with.
 
-4. **Checking if No Modification is Needed**:
-   If no index was found (i.e., `idx` remains `-1`), it means the array is sorted in non-increasing order, and we return the original array as there is no previous permutation.
+9. **Swap Condition**
+	```cpp
+	        if(arr[i] < arr[idx] && arr[i] != arr[i - 1]) {
+	```
+	This condition ensures that the element to swap is smaller than `arr[idx]` and is not equal to the previous element, preventing unnecessary swaps.
 
-   ```cpp
-   if(idx == -1) return arr;
-   ```
+10. **Swap Operation**
+	```cpp
+	            swap(arr[i], arr[idx]);
+	```
+	The two elements at indices `i` and `idx` are swapped, creating the next smaller permutation.
 
-5. **Finding the Largest Smaller Element**:
-   Next, we look for the largest element that is smaller than `arr[idx]` starting from the end of the array and moving left. We ensure that we do not swap with duplicates by checking if `arr[i]` is not equal to `arr[i - 1]`.
+11. **Break Statement**
+	```cpp
+	            break;
+	```
+	The loop breaks once the swap is made, as only one swap is needed.
 
-   ```cpp
-   for(int i = n - 1; i > idx; i--) {
-       if(arr[i] < arr[idx] && arr[i] != arr[i - 1]) {
-           swap(arr[i], arr[idx]);
-           break;
-       }
-   }
-   ```
+12. **Return Statement**
+	```cpp
+	    return arr;
+	```
+	The function returns the modified array after the swap.
 
-6. **Returning the Result**:
-   Finally, the modified array is returned.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-   ```cpp
-   return arr;
-   }
-   ```
+In all cases, we perform linear scans through the array, so the time complexity is O(n).
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input array. This is because we make a maximum of two passes through the array: one to find the index to modify and another to find the largest smaller element.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) as we are using a constant amount of extra space for variables, and we are modifying the array in place.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Conclusion
-The `prevPermOpt1` function effectively identifies and generates the previous permutation of the array in linear time. By systematically searching for the appropriate indices to swap, the function guarantees that the result is the largest permutation smaller than the input, adhering to the constraints of permutation ordering.
+The space complexity is O(1) because we only need a constant amount of extra space, aside from the input array.
 
-This solution is particularly useful in scenarios where permutations are critical, such as in combinatorial algorithms or problems involving sequences where the arrangement matters. The approach demonstrates how to manipulate array elements efficiently while maintaining optimal performance.
-
-Overall, this implementation provides a clear and effective method for achieving the desired outcome, making it a valuable addition to any algorithmic toolkit dealing with permutations and their properties.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/previous-permutation-with-one-swap/description/)

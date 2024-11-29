@@ -14,82 +14,145 @@ img_src = ""
 youtube = "4Qho-im90ew"
 youtube_upload_date="2020-11-05"
 youtube_thumbnail="https://i.ytimg.com/vi/4Qho-im90ew/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a set of video clips from a sporting event that lasts a specified duration in seconds. The clips may overlap and have varying lengths. The goal is to determine the minimum number of clips required to cover the entire event. If it's impossible to cover the entire event, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of clips, where each clip is represented by a pair of integers [start, end] indicating the start and end times of the clip. Additionally, a single integer, time, specifies the duration of the event to be covered.
+- **Example:** `clips = [[0, 3], [4, 7], [2, 5], [6, 8], [5, 9]], time = 9`
+- **Constraints:**
+	- 1 <= clips.length <= 100
+	- 0 <= starti <= endi <= 100
+	- 1 <= time <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int videoStitching(vector<vector<int>>& clips, int time) {
-        sort(clips.begin(), clips.end());
-        int res = 0;
-        for(auto i = 0, st = 0, end = 0; st < time; st=end, ++res){
-            for(; i < clips.size() && clips[i][0] <= st; ++i)
-                end = max(end, clips[i][1]);
-            if(st == end) return -1;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the minimum number of clips needed to cover the entire event. If it's impossible to cover the event, return -1.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- If the clips cannot cover the entire event, return -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The task is to determine the smallest number of clips that can be used to cover the entire duration of the sporting event. This is a greedy problem where we need to select the clips that maximize the coverage of the event, ensuring we cover the entire time range from 0 to time.
+
+- 1. Sort the clips based on their start times.
+- 2. Use a greedy approach to select clips, always choosing the one that extends the coverage the most without skipping any part of the event.
+- 3. If at any point the selected clips cannot extend the coverage, return -1.
+- 4. Otherwise, return the number of clips selected.
+{{< dots >}}
+### Problem Assumptions ✅
+- The clips array will be non-empty and the event duration will be positive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: clips = [[0, 3], [4, 7], [2, 5], [6, 8], [5, 9]], time = 9`  \
+  **Explanation:** In this case, we can take the clips [0, 3], [2, 5], and [5, 9], which cover the entire event from 0 to 9. So, the output is 3.
+
+- **Input:** `Input: clips = [[0, 1], [1, 2]], time = 5`  \
+  **Explanation:** In this case, it is impossible to cover the event duration from 0 to 5 using just the clips [0, 1] and [1, 2], so the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses a greedy strategy where we attempt to cover the event by iteratively selecting the clip that extends the current coverage the furthest.
+
+### Initial Thoughts 💭
+- Sorting the clips by start time allows us to systematically check which clips to select for covering the event.
+- By always picking the clip that extends the coverage the most, we can minimize the number of clips needed.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no clips, return -1 unless the event duration is 0.
+- The solution must efficiently handle inputs with up to 100 clips.
+- If a clip exactly matches the time, it should be counted as one clip.
+- Ensure that the solution handles cases where no set of clips can cover the entire event.
+{{< dots >}}
+## Code 💻
+```cpp
+int videoStitching(vector<vector<int>>& clips, int time) {
+    sort(clips.begin(), clips.end());
+    int res = 0;
+    for(auto i = 0, st = 0, end = 0; st < time; st=end, ++res){
+        for(; i < clips.size() && clips[i][0] <= st; ++i)
+            end = max(end, clips[i][1]);
+        if(st == end) return -1;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
+This function implements the video stitching problem, where it aims to find the minimum number of clips required to cover a time interval from 0 to `time`. It sorts the clips, and iterates through them to select the optimal clips that can cover the time interval. If it's not possible to cover the time interval, it returns -1.
 
-### Problem Statement
-The goal of the problem is to cover a specified duration of time using the minimum number of video clips. Each clip has a start time and an end time, and you need to determine how many clips you need to stitch together to cover the entire duration from 0 to the given time. If it is not possible to cover the entire duration, the function should return -1.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int videoStitching(vector<vector<int>>& clips, int time) {
+	```
+	Define the function `videoStitching`, which takes a list of clips and a target time interval to cover.
 
-For instance, given clips `[[0, 2], [2, 5], [5, 8]]` and `time = 8`, you can stitch together the clips `[0, 2]` and `[2, 5]` to cover up to 5, and then add the clip `[5, 8]` to cover the full duration. Therefore, the output would be 3 clips.
+2. **Sorting**
+	```cpp
+	    sort(clips.begin(), clips.end());
+	```
+	Sort the clips by their start times to make it easier to find overlapping intervals and select the optimal clips.
 
-### Approach
-To solve the video stitching problem, the following approach is adopted:
-1. **Sort the Clips**: First, sort the clips based on their start times. This ensures that we can process them in a sequential manner.
-2. **Iterate Over Time**: Use a loop to traverse the time intervals from `0` to `time`.
-3. **Track the Maximum End**: For each starting point, find the maximum end time of the clips that start at or before the current starting point.
-4. **Count the Clips**: Increment the count of clips each time a new segment is added. If at any point the start time equals the end time (meaning no further clips can extend the coverage), return -1.
-5. **Return the Result**: Finally, return the count of clips needed to cover the specified duration.
+3. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize the result variable `res` to 0, which will store the number of clips used to cover the time interval.
 
-### Code Breakdown (Step by Step)
+4. **Looping**
+	```cpp
+	    for(auto i = 0, st = 0, end = 0; st < time; st=end, ++res){
+	```
+	Start a loop where `i` is the index for iterating through the clips, `st` is the start of the current covered interval, and `end` is the end of the last selected clip.
 
-1. **Function Declaration**:
-   - The function `videoStitching` is defined within the `Solution` class, taking a reference to a 2D vector of integers `clips` and an integer `time` as its parameters.
+5. **Looping**
+	```cpp
+	        for(; i < clips.size() && clips[i][0] <= st; ++i)
+	```
+	Loop through the clips and find the clip whose start time is less than or equal to the current start time (`st`).
 
-2. **Sorting Clips**:
-   - The `sort` function is called to sort the `clips` vector in ascending order based on the starting times of the clips. This allows for efficient processing in sequential order.
+6. **Max Calculation**
+	```cpp
+	            end = max(end, clips[i][1]);
+	```
+	Update the `end` time by taking the maximum of the current `end` and the end time of the current clip, which extends the covered interval.
 
-3. **Initialization**:
-   - Variables `res` (to count the number of clips used), `st` (the starting time for the current segment), and `end` (the farthest point that can be reached) are initialized.
+7. **Condition Check**
+	```cpp
+	        if(st == end) return -1;
+	```
+	If the current start time `st` is the same as the end time `end`, it means no clip can extend the coverage. Return -1 to indicate it's impossible to cover the entire time interval.
 
-4. **Outer Loop**:
-   - A `for` loop runs until `st` is less than `time`, where `st` is updated to the value of `end` at the beginning of each iteration. The loop continues to increment `res` each time a new clip is added.
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the number of clips used to cover the time interval.
 
-5. **Inner Loop**:
-   - A nested `for` loop is used to check which clips can be used starting from the current `st`. This loop continues as long as:
-     - `i` is less than the size of the `clips` vector.
-     - The start time of the current clip is less than or equal to `st`.
-   - Inside this loop, the `end` variable is updated to the maximum of its current value and the end time of the clip being checked (`clips[i][1]`).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-6. **End Check**:
-   - After processing all applicable clips, the code checks if `st` is equal to `end`. If they are equal, it means no further progress can be made (i.e., no clip can extend the current coverage), and the function returns -1.
+The time complexity is dominated by the sorting step, which takes O(n log n), where n is the number of clips.
 
-7. **Return Statement**:
-   - If the loop completes successfully (indicating that the entire time interval has been covered), the function returns the value of `res`, which indicates the minimum number of clips required.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this algorithm is \(O(n \log n)\), where \(n\) is the number of clips. This complexity arises from the sorting step. The iteration through the clips occurs in linear time, which is \(O(n)\).
-- **Space Complexity**: The space complexity is \(O(1)\) for the auxiliary space, as we are using a fixed number of variables for counting and tracking indices. The input clips array is not counted towards space complexity since it is provided as input.
+The space complexity is O(n) due to the space required for sorting the clips.
 
-### Conclusion
-The `videoStitching` function provides an efficient solution to the problem of determining the minimum number of video clips needed to cover a specific duration of time. By sorting the clips and using a systematic approach to find the maximum coverage possible at each step, the algorithm efficiently calculates the required number of clips.
-
-This solution is practical for real-world scenarios where video segments may need to be stitched together, such as in video editing software, streaming services, and content creation applications. The ability to handle dynamic inputs and provide a quick response on the feasibility of covering a duration is crucial in these contexts.
-
-In summary, the function illustrates the effective use of sorting and greedy algorithms in solving problems related to interval coverage. By focusing on maintaining the maximum reach at each step, the solution ensures that the minimum number of clips is used while effectively handling edge cases where coverage may not be possible.
-
-Overall, this implementation serves as a valuable reference for solving similar problems in competitive programming and software development, showcasing the importance of structured approaches in algorithm design.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/video-stitching/description/)

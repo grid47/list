@@ -14,116 +14,161 @@ img_src = ""
 youtube = "2Y2a9VbqiC4"
 youtube_upload_date="2020-09-12"
 youtube_thumbnail="https://i.ytimg.com/vi/2Y2a9VbqiC4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix of integers and a threshold. Your goal is to find the maximum side length of a square where the sum of the elements inside the square is less than or equal to the threshold.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a matrix mat of size m x n, and an integer threshold.
+- **Example:** `Input: [[1,1,3,2,4,3,2], [1,1,3,2,4,3,2], [1,1,3,2,4,3,2]], threshold = 4`
+- **Constraints:**
+	- 1 <= m, n <= 300
+	- 0 <= mat[i][j] <= 10^4
+	- 0 <= threshold <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxSideLength(vector<vector<int>>& mat, int hit) {
-        int m = mat.size(), n = mat[0].size();
-        int res = 0, len = 1;
-        vector<vector<int>> sum(m + 1, vector<int> (n + 1));
-        
-        for(int i = 1; i <= m; i++) {
-            for(int j = 1; j <= n; j++) {
-                sum[i][j] = sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1] + mat[i - 1][j - 1];
-                if(i >= len && j >= len && sum[i][j] - sum[i - len][j] - sum[i][j - len] + sum[i - len][j - len] <= hit)
-                    res = len++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function should return the maximum side length of a square where the sum of the elements inside is less than or equal to the threshold, or 0 if no such square exists.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The matrix has dimensions m x n.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the maximum side length of a square where the sum of elements inside is less than or equal to the threshold.
+
+- Create a prefix sum matrix to efficiently calculate the sum of any submatrix.
+- Iterate through all possible side lengths from largest to smallest.
+- For each side length, check if there exists a square with that side length whose sum is less than or equal to the threshold.
+- Return the largest side length where the condition holds true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is non-empty.
+- Threshold is non-negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [[1,1,3,2,4,3,2], [1,1,3,2,4,3,2], [1,1,3,2,4,3,2]], threshold = 4`  \
+  **Explanation:** The maximum side length of a square with a sum of elements less than or equal to 4 is 2, as seen by the top-left 2x2 square.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves using a prefix sum matrix to efficiently compute the sum of any submatrix and checking all possible square sizes.
+
+### Initial Thoughts 💭
+- Brute force approach would involve checking all possible squares which can be slow. A prefix sum matrix optimizes the sum calculation for submatrices.
+- We can optimize by first constructing the prefix sum matrix, which will allow us to compute the sum of any submatrix in constant time.
+{{< dots >}}
+### Edge Cases 🌐
+- The input matrix is never empty according to the constraints.
+- The solution should be optimized to handle matrices as large as 300x300.
+- If the threshold is 0, no square will have a positive sum unless the matrix contains all zeros.
+- The solution should handle the largest possible matrix and the maximum element values efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxSideLength(vector<vector<int>>& mat, int hit) {
+    int m = mat.size(), n = mat[0].size();
+    int res = 0, len = 1;
+    vector<vector<int>> sum(m + 1, vector<int> (n + 1));
+    
+    for(int i = 1; i <= m; i++) {
+        for(int j = 1; j <= n; j++) {
+            sum[i][j] = sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1] + mat[i - 1][j - 1];
+            if(i >= len && j >= len && sum[i][j] - sum[i - len][j] - sum[i][j - len] + sum[i - len][j - len] <= hit)
+                res = len++;
         }
-        
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The task is to determine the maximum side length of a square submatrix within a given matrix of integers where the sum of the elements in the square submatrix does not exceed a specified value (`hit`). 
-
-For example, given the matrix:
-
+    
+    return res;
+}
 ```
-[
- [1, 1, 1],
- [1, 1, 1],
- [1, 1, 1]
-]
-```
-and `hit = 4`, the largest square submatrix would be of size `2`, as a `2x2` square can be formed, summing up to `4`.
 
-### Approach
-To solve this problem, we can use a technique involving prefix sums to efficiently calculate the sum of any square submatrix. The steps are as follows:
+This function finds the maximum side length of a square with a sum less than or equal to a given threshold in a 2D matrix.
 
-1. **Create a Prefix Sum Matrix**: Construct a 2D array `sum` where each element `sum[i][j]` contains the sum of all elements in the matrix from the top-left corner (0,0) to the position (i-1, j-1).
-   
-2. **Iterate through Possible Square Sizes**: Use two nested loops to iterate over each position in the matrix. For each position, check if it can serve as the bottom-right corner of a square submatrix of increasing sizes (starting from size 1).
-   
-3. **Check the Sum of the Square Submatrix**: For each possible square, calculate its sum using the prefix sum matrix and check if it is less than or equal to `hit`. Keep track of the maximum side length of all valid squares found.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxSideLength(vector<vector<int>>& mat, int hit) {
+	```
+	Defines a function to compute the largest side length of a square matrix with sum constraints.
 
-4. **Return the Result**: After examining all possible positions and square sizes, return the maximum side length found.
+2. **Variable Initialization**
+	```cpp
+	    int m = mat.size(), n = mat[0].size();
+	```
+	Initializes the dimensions of the matrix.
 
-### Code Breakdown (Step by Step)
+3. **Variable Initialization**
+	```cpp
+	    int res = 0, len = 1;
+	```
+	Initializes the result variable and the starting square side length.
 
-```cpp
-class Solution {
-public:
-    int maxSideLength(vector<vector<int>>& mat, int hit) {
-```
-- **Line 1-2**: The class `Solution` is defined, and the method `maxSideLength` begins, which takes a 2D vector `mat` and an integer `hit`.
+4. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> sum(m + 1, vector<int> (n + 1));
+	```
+	Creates a prefix sum matrix with one extra row and column for easier computation.
 
-```cpp
-        int m = mat.size(), n = mat[0].size();
-        int res = 0, len = 1;
-        vector<vector<int>> sum(m + 1, vector<int> (n + 1));
-```
-- **Lines 3-6**: The variables `m` and `n` store the dimensions of the input matrix. The variable `res` initializes the result for the maximum side length, while `len` is used to track the current side length being evaluated. A prefix sum matrix `sum` is initialized, with dimensions `(m+1) x (n+1)` to accommodate cumulative sums.
+5. **Outer Loop**
+	```cpp
+	    for(int i = 1; i <= m; i++) {
+	```
+	Iterates through each row of the matrix.
 
-```cpp
-        for(int i = 1; i <= m; i++) {
-            for(int j = 1; j <= n; j++) {
-```
-- **Lines 7-10**: Nested loops iterate over the dimensions of the matrix starting from `1`, allowing us to fill in the prefix sum matrix starting from the top-left corner.
+6. **Inner Loop**
+	```cpp
+	        for(int j = 1; j <= n; j++) {
+	```
+	Iterates through each column of the matrix.
 
-```cpp
-                sum[i][j] = sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1] + mat[i - 1][j - 1];
-```
-- **Line 11**: Here, we compute the prefix sum for the current cell `sum[i][j]` using the formula which accumulates the values from the left, above, subtracts the overlap, and adds the current matrix value.
+7. **Prefix Sum Update**
+	```cpp
+	            sum[i][j] = sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1] + mat[i - 1][j - 1];
+	```
+	Updates the prefix sum for the current cell in the matrix.
 
-```cpp
-                if(i >= len && j >= len && sum[i][j] - sum[i - len][j] - sum[i][j - len] + sum[i - len][j - len] <= hit)
-                    res = len++;
-```
-- **Lines 12-14**: We check if the current indices allow for a square of side length `len` (i.e., if the current position can serve as the bottom-right corner of such a square). We calculate the sum of the square submatrix using the prefix sums and check if it does not exceed `hit`. If valid, we update the result and increment the `len` for the next square size.
+8. **Condition Check**
+	```cpp
+	            if(i >= len && j >= len && sum[i][j] - sum[i - len][j] - sum[i][j - len] + sum[i - len][j - len] <= hit)
+	```
+	Checks if the current square's sum is within the allowed threshold.
 
-```cpp
-        }
-        return res;
-    }
-};
-```
-- **Lines 15-18**: After finishing the loops, the function returns the maximum side length of the square submatrix found.
+9. **Update Result**
+	```cpp
+	                res = len++;
+	```
+	Updates the result to the current square side length and increments the length.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The time complexity is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the matrix. Each cell of the matrix is visited once to compute the prefix sums.
+10. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the maximum side length of the square that satisfies the conditions.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(m \times n)\) due to the additional prefix sum matrix we create to store cumulative sums.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n) - The best case occurs when the prefix sum matrix is constructed in linear time.
+- **Average Case:** O(m * n) - The average case remains O(m * n) as the algorithm involves iterating through the matrix.
+- **Worst Case:** O(m * n) - The worst case involves checking all possible submatrices and square sizes.
 
-### Conclusion
-The `maxSideLength` function efficiently computes the maximum side length of square submatrices whose sum is within a specified threshold using a prefix sum technique. This approach ensures that the sum of any square can be calculated in constant time after an initial setup phase, which is critical for handling larger matrices.
+The time complexity is dominated by the construction of the prefix sum matrix and the iteration through all possible square sizes.
 
-By breaking down the problem systematically and employing an effective algorithm, this solution demonstrates the utility of prefix sums in optimizing 2D range sum queries. This makes the function suitable for competitive programming, coding interviews, and practical applications involving matrix manipulations. 
+### Space Complexity 💾
+- **Best Case:** O(m * n) - The space complexity is the same in the best case as the matrix needs to be stored.
+- **Worst Case:** O(m * n) - The space complexity comes from storing the prefix sum matrix.
 
-Overall, understanding and implementing this approach equips developers with powerful tools for tackling similar problems involving submatrices and constraints on their sums. This detailed analysis should serve as a valuable resource for anyone looking to deepen their understanding of matrix operations and algorithm design.
+The space complexity is O(m * n) due to the storage of the prefix sum matrix.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "VyBOaboQLGc"
 youtube_upload_date="2021-04-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/VyBOaboQLGc/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,117 +28,222 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/VyBOaboQLGc/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design a URL shortening system where you can encode a long URL into a shortened URL and decode it back to the original URL. The system should guarantee that the original URL can always be retrieved using the shortened version.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a valid long URL (string) that needs to be encoded into a shortened version. The input string will contain a valid URL of length between 1 and 10^4 characters.
+- **Example:** `Input: longUrl = "https://example.com/article/12345"`
+- **Constraints:**
+	- 1 <= longUrl.length <= 10^4
+	- The URL will be a valid string containing a valid URL.
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should return the encoded shortened URL, and when decoded, it should return the original URL.
+- **Example:** `Output: "http://tinyurl.com/4e9iAk"`
+- **Constraints:**
+	- The returned shortened URL should be valid and unique.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To design a system that can encode and decode URLs efficiently while ensuring uniqueness of the shortened URLs.
+
+- Use a random generation technique to create a unique short code for each long URL.
+- Store the mapping between the original URL and the generated short URL in a data structure (e.g., a map).
+- Use the short URL to look up and retrieve the corresponding original URL when decoding.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input URL is valid and properly formatted.
+- The solution does not need to handle invalid URLs or URLs that exceed the length limits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: longUrl = "https://example.com/article/12345"`  \
+  **Explanation:** The long URL "https://example.com/article/12345" is encoded into a shorter version, such as "http://tinyurl.com/4e9iAk", which can be decoded back to the original URL.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a hashmap to store the original URL and its corresponding shortened URL. A random string generator will be used to ensure uniqueness for the shortened URLs.
+
+### Initial Thoughts 💭
+- A unique identifier (short code) needs to be generated for each long URL to ensure that each encoded URL maps to a unique decoded URL.
+- Using a random character set will allow us to generate short and unique codes for each URL.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure that empty URLs are handled properly. However, in this problem, the input will always be a valid URL.
+- The system should handle long URLs up to 10^4 characters efficiently.
+- Consider the case where multiple URLs map to the same shortened URL. This should not happen due to the uniqueness of the generated short codes.
+- Make sure the system handles all edge cases, including valid URLs, large inputs, and properly handles the mappings.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    random_device rd;
-    map<string, string> url_code, code_url;
+const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+random_device rd;
+map<string, string> url_code, code_url;
 public:
 
-    // Encodes a URL to a shortened URL.
-    string encode(string longUrl) {
-        string code;
-        if(!url_code.count(longUrl)) {
-            for(int i = 0; i < 6; i++)
-                code.push_back(charset[rd()%charset.size()]);
-            url_code.insert(pair<string, string>(longUrl, code));
-            code_url.insert(pair<string, string>(code, longUrl));                
-        } else {
-            code = url_code[longUrl];
-        }
-        return "http://tinyurl.com/" + code;
+// Encodes a URL to a shortened URL.
+string encode(string longUrl) {
+    string code;
+    if(!url_code.count(longUrl)) {
+        for(int i = 0; i < 6; i++)
+            code.push_back(charset[rd()%charset.size()]);
+        url_code.insert(pair<string, string>(longUrl, code));
+        code_url.insert(pair<string, string>(code, longUrl));                
+    } else {
+        code = url_code[longUrl];
     }
+    return "http://tinyurl.com/" + code;
+}
 
-    // Decodes a shortened URL to its original URL.
-    string decode(string shortUrl) {
-        if(shortUrl.size() != 25 || !code_url.count(shortUrl.substr(19,6)))
-        return "";
-        return code_url[shortUrl.substr(19,6)];
-    }
+// Decodes a shortened URL to its original URL.
+string decode(string shortUrl) {
+    if(shortUrl.size() != 25 || !code_url.count(shortUrl.substr(19,6)))
+    return "";
+    return code_url[shortUrl.substr(19,6)];
+}
 };
 
 // Your Solution object will be instantiated and called as such:
 // Solution solution;
-// solution.decode(solution.encode(url));
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This class implements a URL shortener. It has two main methods: `encode` which takes a long URL and returns a shortened URL, and `decode` which takes a shortened URL and returns the original long URL. It uses a random string generation for encoding and a map for encoding-decoding operations.
 
-The problem is to design a URL shortening service similar to TinyURL. Given a long URL, we need to generate a unique, shortened URL that can be shared and accessed, redirecting users to the original URL. The system should also allow decoding the shortened URL back to the original long URL.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class which contains the encoding and decoding methods for URL shortening.
 
-### Approach
+2. **Charset Definition**
+	```cpp
+	const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	```
+	Defines a constant string `charset` that contains all possible characters that can be used to generate the shortened URL.
 
-This solution uses a randomized approach to generate a short code, ensuring it’s unique and provides an efficient encoding and decoding mechanism.
+3. **Random Device Initialization**
+	```cpp
+	random_device rd;
+	```
+	Declares a `random_device` object `rd` used for generating random numbers to ensure uniqueness in the encoded URL.
 
-1. **Encoding Process**:
-   - To encode a long URL into a shortened one, we generate a 6-character code using a character set that includes lowercase letters, uppercase letters, and digits.
-   - This 6-character code will serve as the unique identifier for the URL.
-   - If the long URL has already been encoded, we retrieve the existing code from the map instead of generating a new one.
-   
-2. **Decoding Process**:
-   - The decoding process extracts the unique 6-character code from the shortened URL and looks it up in a map to retrieve the corresponding original URL.
-   - If the code does not exist or is invalid, we return an empty string to indicate an error.
+4. **Map Initialization**
+	```cpp
+	map<string, string> url_code, code_url;
+	```
+	Declares two maps: `url_code` which maps long URLs to shortened codes, and `code_url` which maps shortened codes back to long URLs.
 
-### Code Breakdown (Step by Step)
+5. **Access Control**
+	```cpp
+	public:
+	```
+	Declares the public access scope for the encoding and decoding methods.
 
-#### Encoding the URL
+6. **Encode Method Definition**
+	```cpp
+	string encode(string longUrl) {
+	```
+	Defines the `encode` method which takes a long URL as input and returns a shortened version of that URL.
 
-1. **Charset Declaration**:
-   ```cpp
-   const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-   ```
-   - This character set of 62 characters is used to generate a random, unique code for each URL.
+7. **Variable Declaration**
+	```cpp
+	    string code;
+	```
+	Declares a string variable `code` to store the randomly generated shortened code for the long URL.
 
-2. **Generate Unique Code for URL**:
-   ```cpp
-   string code;
-   for(int i = 0; i < 6; i++)
-       code.push_back(charset[rd() % charset.size()]);
-   ```
-   - A loop generates a 6-character code by selecting random characters from `charset`.
-   - A map `url_code` stores each long URL and its corresponding short code, while `code_url` allows reverse lookup.
+8. **Check if URL Already Encoded**
+	```cpp
+	    if(!url_code.count(longUrl)) {
+	```
+	Checks if the long URL is already encoded. If not, it proceeds to generate a new shortened URL.
 
-3. **Returning Shortened URL**:
-   ```cpp
-   return "http://tinyurl.com/" + code;
-   ```
-   - After generating or retrieving a code, the shortened URL is returned by appending the code to the base URL.
+9. **Random Code Generation**
+	```cpp
+	        for(int i = 0; i < 6; i++)
+	```
+	Generates a random 6-character string by selecting random characters from the `charset` string.
 
-#### Decoding the URL
+10. **Push Back Character to Code**
+	```cpp
+	            code.push_back(charset[rd()%charset.size()]);
+	```
+	Appends a random character from the `charset` string to the `code` string.
 
-1. **Extract Code from Short URL**:
-   ```cpp
-   string code = shortUrl.substr(19, 6);
-   ```
-   - We extract the 6-character code from the short URL using `substr(19, 6)`.
+11. **Insert Long URL and Code**
+	```cpp
+	        url_code.insert(pair<string, string>(longUrl, code));
+	```
+	Inserts the pair of the long URL and its corresponding shortened code into the `url_code` map.
 
-2. **Retrieve Original URL**:
-   ```cpp
-   return code_url[code];
-   ```
-   - The code is looked up in `code_url` to retrieve the original URL.
-   - If the code doesn’t exist, an empty string is returned to indicate an invalid or non-existent URL.
+12. **Insert Code and Long URL**
+	```cpp
+	        code_url.insert(pair<string, string>(code, longUrl));                
+	```
+	Inserts the pair of the shortened code and the long URL into the `code_url` map.
 
-### Complexity
+13. **Else Case for Existing URL**
+	```cpp
+	    } else {
+	```
+	If the long URL is already encoded, the code simply retrieves the existing shortened code from the `url_code` map.
 
-#### Time Complexity
-- **Encoding**: Generating a 6-character code and inserting it into the map takes `O(1)` average time, assuming efficient hashing.
-- **Decoding**: Retrieving the original URL by looking up the code in `code_url` also takes `O(1)` time.
+14. **Retrieve Existing Code**
+	```cpp
+	        code = url_code[longUrl];
+	```
+	Retrieves the existing shortened code for the long URL from the `url_code` map.
 
-#### Space Complexity
-- **Maps `url_code` and `code_url`**: Both maps store URLs and codes, using `O(n)` space for `n` unique URLs.
+15. **Return Encoded URL**
+	```cpp
+	    return "http://tinyurl.com/" + code;
+	```
+	Returns the full shortened URL formed by concatenating the base URL with the generated shortened code.
 
-### Conclusion
+16. **Decode Method Definition**
+	```cpp
+	string decode(string shortUrl) {
+	```
+	Defines the `decode` method which takes a shortened URL as input and returns the corresponding original long URL.
 
-This code provides an efficient and scalable solution for URL shortening by:
-- Using randomized codes to prevent collisions and ensure uniqueness.
-- Leveraging maps to enable quick lookup for both encoding and decoding.
-- Maintaining a straightforward and user-friendly interface with a `6-character` code.
+17. **Check URL Length and Validity**
+	```cpp
+	    if(shortUrl.size() != 25 || !code_url.count(shortUrl.substr(19,6)))
+	```
+	Checks if the shortened URL has a valid length and if the map `code_url` contains the shortened code extracted from the URL.
 
-The solution is effective for creating unique short URLs while ensuring that each can be quickly and accurately decoded. This approach is practical for real-world URL shortening applications due to its time efficiency and simple code management.
+18. **Return Empty String for Invalid URL**
+	```cpp
+	    return "";
+	```
+	Returns an empty string if the shortened URL is invalid or if no matching code is found.
+
+19. **Retrieve Original URL**
+	```cpp
+	    return code_url[shortUrl.substr(19,6)];
+	```
+	Retrieves the original long URL from the `code_url` map using the shortened code extracted from the shortened URL.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+The time complexity for both encoding and decoding is O(1), as hashmaps allow constant time retrieval and insertion.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), where n is the number of unique URLs that have been encoded, as we need to store the mappings in hashmaps.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/encode-and-decode-tinyurl/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,86 +28,125 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two strings, `a` and `b`. You need to find the minimum number of times you should repeat string `a` so that string `b` becomes a substring of the repeated `a`. If it is impossible, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings `a` and `b` consisting of lowercase English letters.
+- **Example:** `a = 'xyz', b = 'yzxyz'`
+- **Constraints:**
+	- 1 <= a.length, b.length <= 10^4
+	- a and b consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int repeatedStringMatch(string a, string b) {
-        for(int i = 0, j = 0; i < a.size(); i++) {
-            for(j = 0; j < b.size() && a[(i + j) % a.size()] == b[j]; j++);
-            if(j == b.size())
-                return (j + i - 1)/ a.size() + 1;
-            
-        }
-        return -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of times string `a` should be repeated such that string `b` becomes a substring of it. If not possible, return -1.
+- **Example:** `For a = 'xyz' and b = 'yzxyz', the output is 2.`
+- **Constraints:**
+	- The output should be an integer representing the minimum number of times string `a` should be repeated.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the minimum number of repetitions of string `a` that contains string `b` as a substring.
+
+- 1. Start by iterating over string `a` and try matching its substring with string `b`.
+- 2. If the substring of repeated `a` matches `b`, return the number of repetitions.
+- 3. If no such match is found, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both strings are not empty and contain only lowercase letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `a = 'xyz', b = 'yzxyz'`  \
+  **Explanation:** Repeating string `a` two times gives 'xyzxyz', which contains 'yzxyz' as a substring.
+
+- **Input:** `a = 'ab', b = 'ababab'`  \
+  **Explanation:** Repeating string `a` three times gives 'ababab', which is exactly string `b`.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through possible repetitions of string `a` and check if string `b` is a substring of the repeated string.
+
+### Initial Thoughts 💭
+- We need to repeat string `a` multiple times to check if string `b` can fit within it as a substring.
+- We can start from the smallest repetition and gradually increase until we find a match or exhaust all possibilities.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be non-empty strings, so no need to handle empty strings.
+- The solution should handle large strings efficiently (up to length 10^4).
+- When `a` is exactly equal to `b`, the answer is 1.
+- The time complexity should be efficient enough to handle the largest inputs within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int repeatedStringMatch(string a, string b) {
+    for(int i = 0, j = 0; i < a.size(); i++) {
+        for(j = 0; j < b.size() && a[(i + j) % a.size()] == b[j]; j++);
+        if(j == b.size())
+            return (j + i - 1)/ a.size() + 1;
+        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-The problem at hand is to determine how many times a string `a` must be repeated to make it contain string `b` as a substring. If it is not possible for `b` to appear in the repeated version of `a`, the function should return `-1`. This type of problem is common when dealing with string matching and repeated patterns.
-
-Given two strings `a` and `b`, the objective is to find the minimum number of times string `a` needs to be repeated such that string `b` becomes a substring of the repeated string.
-
-### Approach:
-To solve the problem, we must check if the string `b` can be formed by repeating string `a`. The basic idea is to simulate the repeating process of string `a` and check if `b` can be matched within the repeated string.
-
-We will take a brute force approach where we:
-1. Iterate over each possible starting position of `b` within the repeated `a`.
-2. For each possible position, compare the characters of `a` with `b` while considering the wrapping effect due to repetition.
-3. Return the number of repetitions of `a` required for `b` to become a substring.
-
-### Key Observations:
-- The idea is to iterate through the string `a` in a circular manner (as it repeats).
-- We try to align string `b` starting from each index in `a` and check if the entire string `b` can be formed by wrapping around and repeating `a`.
-- If at any point string `b` is completely matched, we calculate how many repetitions of `a` are required and return that number.
-- If no valid alignment is found, we return `-1`.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Iterate over Each Character of `a`
-```cpp
-for(int i = 0, j = 0; i < a.size(); i++) {
+    return -1;
+}
 ```
-- We use two indices: `i` to iterate over each character in `a` and `j` to compare the corresponding characters of `a` and `b`. The outer loop tries starting at each index in `a` as a potential starting point for `b`.
 
-#### Step 2: Compare Characters of `a` and `b` in Circular Fashion
-```cpp
-for(j = 0; j < b.size() && a[(i + j) % a.size()] == b[j]; j++);
-```
-- This inner loop compares characters of `a` and `b` character by character. Since `a` repeats, we use the modulo operation `(i + j) % a.size()` to simulate the circular nature of string `a`.
-- If `a[(i + j) % a.size()] == b[j]` holds true, we continue comparing the next characters.
-- The loop continues until all characters of `b` are matched, or the characters in `a` and `b` do not match.
+This method checks if string 'b' can be obtained by repeatedly concatenating string 'a'. It finds the minimum number of repetitions needed for 'a' to contain 'b' as a substring. If it's not possible, it returns -1.
 
-#### Step 3: Check if Entire `b` is Matched
-```cpp
-if(j == b.size())
-    return (j + i - 1)/ a.size() + 1;
-```
-- If the inner loop completes successfully (i.e., `j == b.size()`), it means we have matched all characters of `b` with the corresponding characters in the repeated string `a`.
-- The formula `(j + i - 1)/ a.size() + 1` calculates how many repetitions of `a` are needed to cover the substring `b`. Here, `i` is the starting index in `a`, and `j` is the total number of characters matched.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int repeatedStringMatch(string a, string b) {
+	```
+	Define the method 'repeatedStringMatch' that takes two strings, 'a' and 'b', and returns the minimum number of times 'a' must be repeated to contain 'b' as a substring.
 
-#### Step 4: Return -1 if No Match is Found
-```cpp
-return -1;
-```
-- If no valid starting index in `a` leads to a match of `b`, we return `-1`, indicating that `b` cannot be formed by repeating `a`.
+2. **Loop Initialization**
+	```cpp
+	    for(int i = 0, j = 0; i < a.size(); i++) {
+	```
+	Start an outer loop to iterate through string 'a'. Initialize two indices, 'i' for 'a' and 'j' for 'b'.
 
-### Complexity:
+3. **Inner Loop**
+	```cpp
+	        for(j = 0; j < b.size() && a[(i + j) % a.size()] == b[j]; j++);
+	```
+	Start an inner loop to check if the substring of 'a' starting from index 'i' matches the string 'b'. The modulo operator ensures that the loop wraps around to the start of 'a' if necessary.
 
-#### Time Complexity:
-- **O(n * m)**, where `n` is the length of string `a` and `m` is the length of string `b`. In the worst case, we need to check each possible starting point in `a` and compare up to `m` characters of `b` at each step.
-- The time complexity arises from the nested loops where the outer loop runs `n` times and the inner loop runs at most `m` times.
+4. **Substring Match Check**
+	```cpp
+	        if(j == b.size())
+	```
+	If the entire string 'b' has been matched within 'a', the condition is true.
 
-#### Space Complexity:
-- **O(1)**. The algorithm uses a constant amount of extra space since we only use a few integer variables (`i` and `j`) for indexing and comparison. No additional space is required for storing the strings or intermediate results.
+5. **Return Calculation**
+	```cpp
+	            return (j + i - 1)/ a.size() + 1;
+	```
+	If a match is found, calculate the number of repetitions of 'a' needed to include 'b'. This is done by dividing the total length by the length of 'a' and adding 1.
 
-### Conclusion:
-This solution efficiently solves the problem of finding how many times a string `a` must be repeated to contain string `b` as a substring. It uses a brute force approach with a circular comparison of characters to simulate the repeated nature of string `a`. The time complexity is linear with respect to the product of the lengths of `a` and `b`, making it feasible for moderately sized strings.
+6. **Return -1**
+	```cpp
+	    return -1;
+	```
+	If no valid match is found after all iterations, return -1 to indicate that it's not possible to form 'b' by repeating 'a'.
 
-The use of modulo operations ensures that the comparison respects the repetition of string `a` without explicitly constructing the repeated string, which is both memory-efficient and easy to understand. The solution works for edge cases such as when `b` is already a substring of `a` or when `b` cannot be formed even with multiple repetitions of `a`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of string b
+- **Average Case:** O(n * m), where n is the length of string a and m is the length of string b
+- **Worst Case:** O(n * m), where n is the length of string a and m is the length of string b
+
+The time complexity depends on how many times we need to repeat string `a` and check if `b` is a substring.
+
+### Space Complexity 💾
+- **Best Case:** O(n), if we use efficient substring matching techniques.
+- **Worst Case:** O(n * m), where n is the length of string a and m is the length of string b
+
+The space complexity is dependent on the string storage and substring checking process.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/repeated-string-match/description/)
 

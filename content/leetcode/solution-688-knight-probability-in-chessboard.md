@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "hNovJsUbNjo"
 youtube_upload_date="2020-09-25"
 youtube_thumbnail="https://i.ytimg.com/vi/hNovJsUbNjo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,135 +28,226 @@ youtube_thumbnail="https://i.ytimg.com/vi/hNovJsUbNjo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an n x n chessboard and a knight that starts at a given position (row, column). The knight moves exactly k times and can randomly choose one of eight possible knight moves at each step. The task is to determine the probability that the knight remains on the board after completing all k moves.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of four integers: n (the size of the chessboard), k (the number of moves), row (the starting row), and column (the starting column).
+- **Example:** `n = 4, k = 3, row = 1, column = 1`
+- **Constraints:**
+	- 1 <= n <= 25
+	- 0 <= k <= 100
+	- 0 <= row, column <= n - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int n;
-    vector<vector<vector<double>>> memo;
-    double knightProbability(int n, int k, int row, int col) {
-        this->n = n;
-        memo.resize(k + 1, vector<vector<double>>(n, vector<double>(n, 0)));
-        return dfs(k, row, col);
-    }
-    
-    double dfs(int k, int i, int j) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a floating point number representing the probability that the knight remains on the chessboard after k moves.
+- **Example:** `0.1250`
+- **Constraints:**
 
-        if(i < 0 || j < 0 || i >= n || j >= n) return 0;
-        if(k == 0) return 1;
-        if(memo[k][i][j] != 0 ) return memo[k][i][j];
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the probability that after exactly k moves, the knight stays on the chessboard.
 
-        double res = 0;
+- Use a depth-first search (DFS) approach to explore all possible knight moves.
+- Memoize results to optimize redundant calculations.
+- At each step, check if the knight remains within the bounds of the chessboard.
+{{< dots >}}
+### Problem Assumptions ✅
+- The knight will always move randomly and uniformly at each step.
+- The chessboard is represented by a 2D grid with indices from 0 to n-1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: n = 4, k = 3, row = 1, column = 1`  \
+  **Explanation:** The knight has multiple possible moves, but only a subset of these will keep the knight on the board. After exploring all moves, the probability is 0.125.
 
-        res += 0.125 * dfs(k - 1, i + 1, j - 2);
-        res += 0.125 * dfs(k - 1, i + 1, j + 2);
-        res += 0.125 * dfs(k - 1, i + 2, j + 1);
-        res += 0.125 * dfs(k - 1, i + 2, j - 1);
-        res += 0.125 * dfs(k - 1, i - 1, j + 2);
-        res += 0.125 * dfs(k - 1, i - 1, j - 2);
-        res += 0.125 * dfs(k - 1, i - 2, j + 1);
-        res += 0.125 * dfs(k - 1, i - 2, j - 1);
+{{< dots >}}
+## Approach 🚀
+We will implement a recursive DFS approach to explore all possible knight movements, using memoization to optimize and prevent recalculating the same state multiple times.
 
-        return memo[k][i][j] = res;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-In this problem, we are tasked with finding the probability that a knight, starting from a given position on an `n x n` chessboard, remains on the board after making exactly `k` moves. The knight follows the typical movement rules, which means it can move in an "L" shape: two squares in one direction and one square in a perpendicular direction.
-
-The objective is to compute the probability that after `k` moves, the knight stays within the bounds of the board. The problem can be solved using a **dynamic programming (DP)** approach with **memoization** to efficiently calculate the probability of staying on the board after each move.
-
-### Approach:
-To solve this problem, we use a recursive approach with **memoization** to avoid redundant calculations. The recursion explores all possible moves the knight can make, and at each step, it calculates the probability of staying on the board.
-
-- **Recursive DFS**: We use Depth-First Search (DFS) to explore all possible knight moves recursively.
-- **Memoization**: The results of previously computed states are cached to avoid redundant calculations, making the solution efficient.
-- **Knight’s Movement**: From each position, the knight can move to eight possible new positions. For each of these positions, we recursively calculate the probability that the knight stays on the board after the remaining moves.
-
-### Code Breakdown (Step by Step):
-
-#### 1. **Class Definition**:
+### Initial Thoughts 💭
+- The knight has 8 possible moves from any given position.
+- The moves can go off the chessboard, so we must handle this case.
+- This problem can be solved using a depth-first search (DFS) with memoization to avoid redundant calculations.
+{{< dots >}}
+### Edge Cases 🌐
+- If k = 0, the knight stays at the starting position, so the probability is 1.
+- Ensure that the algorithm handles the maximum constraints efficiently.
+- If the knight starts at the edge of the board, fewer moves will keep it on the board.
+- The problem should handle up to 100 moves efficiently using memoization.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int n;
-    vector<vector<vector<double>>> memo;
-    double knightProbability(int n, int k, int row, int col) {
-        this->n = n;
-        memo.resize(k + 1, vector<vector<double>>(n, vector<double>(n, 0)));
-        return dfs(k, row, col);
-    }
+int n;
+vector<vector<vector<double>>> memo;
+double knightProbability(int n, int k, int row, int col) {
+    this->n = n;
+    memo.resize(k + 1, vector<vector<double>>(n, vector<double>(n, 0)));
+    return dfs(k, row, col);
+}
+
+double dfs(int k, int i, int j) {
+
+    if(i < 0 || j < 0 || i >= n || j >= n) return 0;
+    if(k == 0) return 1;
+    if(memo[k][i][j] != 0 ) return memo[k][i][j];
+
+    double res = 0;
+
+    res += 0.125 * dfs(k - 1, i + 1, j - 2);
+    res += 0.125 * dfs(k - 1, i + 1, j + 2);
+    res += 0.125 * dfs(k - 1, i + 2, j + 1);
+    res += 0.125 * dfs(k - 1, i + 2, j - 1);
+    res += 0.125 * dfs(k - 1, i - 1, j + 2);
+    res += 0.125 * dfs(k - 1, i - 1, j - 2);
+    res += 0.125 * dfs(k - 1, i - 2, j + 1);
+    res += 0.125 * dfs(k - 1, i - 2, j - 1);
+
+    return memo[k][i][j] = res;
+}
 ```
-The class `Solution` defines a method to calculate the probability. It first initializes the grid size `n` and the 3D vector `memo` that will store the results of subproblems.
 
-- **Parameters**:
-  - `n`: The size of the chessboard (an `n x n` grid).
-  - `k`: The number of moves the knight will make.
-  - `row` and `col`: The starting position of the knight on the chessboard.
-  
-The `memo` vector is a 3D matrix where:
-- The first dimension represents the number of moves left (`k`).
-- The second and third dimensions represent the rows and columns of the board, respectively.
+This code calculates the probability of a knight staying on a chessboard after k moves, starting from a given position. It uses dynamic programming with memoization to optimize repeated calculations.
 
-#### 2. **DFS Function**:
-```cpp
-    double dfs(int k, int i, int j) {
-        if (i < 0 || j < 0 || i >= n || j >= n) return 0;  // If out of bounds, return probability 0.
-        if (k == 0) return 1;  // If no moves left, return probability 1 (we are on the board).
-        if (memo[k][i][j] != 0) return memo[k][i][j];  // Return cached result if available.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int n;
+	```
+	This initializes the variable 'n', representing the size of the chessboard.
 
-        double res = 0;
-```
-- The `dfs` function is the recursive function that explores the knight's movements.
-- **Base Cases**:
-  - If the knight is out of bounds (`i < 0 || j < 0 || i >= n || j >= n`), it returns `0` because the knight has left the board.
-  - If there are no moves left (`k == 0`), it returns `1`, meaning the knight is still on the board.
-  - If the result has already been computed for the current state (`memo[k][i][j] != 0`), the cached value is returned to save computation time.
+2. **Variable Initialization**
+	```cpp
+	vector<vector<vector<double>>> memo;
+	```
+	This initializes the 'memo' 3D vector, which is used to store previously computed probabilities for specific knight positions and moves.
 
-#### 3. **Knight’s Movement and Recursive Calls**:
-```cpp
-        // Recursive calls for all 8 possible knight moves.
-        res += 0.125 * dfs(k - 1, i + 1, j - 2);  // Move 1
-        res += 0.125 * dfs(k - 1, i + 1, j + 2);  // Move 2
-        res += 0.125 * dfs(k - 1, i + 2, j + 1);  // Move 3
-        res += 0.125 * dfs(k - 1, i + 2, j - 1);  // Move 4
-        res += 0.125 * dfs(k - 1, i - 1, j + 2);  // Move 5
-        res += 0.125 * dfs(k - 1, i - 1, j - 2);  // Move 6
-        res += 0.125 * dfs(k - 1, i - 2, j + 1);  // Move 7
-        res += 0.125 * dfs(k - 1, i - 2, j - 1);  // Move 8
-```
-- The knight has 8 possible moves from any position, and the probability of each move is `1/8` (since the knight is equally likely to move to any of the 8 positions).
-- The `dfs(k - 1, i + dx, j + dy)` represents a recursive call for each possible move, where `dx` and `dy` are the changes in the row and column for each of the knight's moves.
+3. **Method Definition**
+	```cpp
+	double knightProbability(int n, int k, int row, int col) {
+	```
+	This defines the function 'knightProbability' which calculates the probability of the knight's survival after 'k' moves from a given position (row, col).
 
-#### 4. **Memoization**:
-```cpp
-        return memo[k][i][j] = res;  // Store the result in memoization table and return it.
-    }
-};
-```
-- After calculating the probability for all 8 possible moves, the result is stored in the `memo` table for the current state (`k` moves left, position `(i, j)`).
-- The function then returns the computed probability.
+4. **Variable Initialization**
+	```cpp
+	    this->n = n;
+	```
+	This sets the class variable 'n' to the size of the chessboard passed into the function.
 
-#### 5. **Main Function (`knightProbability`)**:
-The main function is the entry point for calculating the knight's probability. It initializes the `memo` table and starts the recursive process by calling `dfs(k, row, col)`.
+5. **Memoization Setup**
+	```cpp
+	    memo.resize(k + 1, vector<vector<double>>(n, vector<double>(n, 0)));
+	```
+	This resizes the 'memo' vector to accommodate all 'k' possible moves, with dimensions based on the size of the chessboard.
 
-### Complexity:
+6. **Recursive Call**
+	```cpp
+	    return dfs(k, row, col);
+	```
+	This calls the helper function 'dfs' (depth-first search) to recursively calculate the knight's survival probability, starting from the given position.
 
-#### Time Complexity:
-The time complexity of this approach is **O(k * n * n)**, where:
-- `k` is the number of moves the knight has to make.
-- `n * n` represents the size of the chessboard (since we may need to compute the result for every position on the board).
+7. **Method Definition**
+	```cpp
+	double dfs(int k, int i, int j) {
+	```
+	This defines the recursive 'dfs' function, which computes the probability of the knight surviving after 'k' moves from position (i, j).
 
-For each of the `k` moves, we explore 8 possible positions (8 recursive calls), and each of these recursive calls may potentially visit each cell on the board. Memoization ensures that each state is calculated only once, saving time in redundant calls.
+8. **Base Condition**
+	```cpp
+	    if(i < 0 || j < 0 || i >= n || j >= n) return 0;
+	```
+	This checks if the knight's position is out of bounds of the chessboard, in which case the probability is 0.
 
-#### Space Complexity:
-The space complexity is **O(k * n * n)** due to the 3D `memo` table. The depth of the recursion can be at most `k`, and at each recursive step, the board state `(i, j)` is stored for each move count `k`. Therefore, the overall space used is proportional to `k * n * n`.
+9. **Base Condition**
+	```cpp
+	    if(k == 0) return 1;
+	```
+	This checks if there are no remaining moves ('k == 0'), returning 1, as the knight is still on the board.
 
-### Conclusion:
-This solution efficiently calculates the probability that a knight stays on the board after `k` moves using a dynamic programming approach with memoization. By leveraging the recursive DFS traversal of all possible moves and storing intermediate results, the algorithm avoids redundant computations, making it efficient even for large values of `n` and `k`. The use of memoization ensures that the time complexity is kept manageable, while the space complexity is proportional to the number of states that need to be stored.
+10. **Memoization**
+	```cpp
+	    if(memo[k][i][j] != 0 ) return memo[k][i][j];
+	```
+	This checks if the probability has already been calculated for this state (position and remaining moves). If so, it returns the memoized result.
+
+11. **Variable Declaration**
+	```cpp
+	    double res = 0;
+	```
+	This initializes the variable 'res', which will accumulate the total probability for all possible moves.
+
+12. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i + 1, j - 2);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i + 1, j - 2), contributing 0.125 to the probability.
+
+13. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i + 1, j + 2);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i + 1, j + 2), contributing 0.125 to the probability.
+
+14. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i + 2, j + 1);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i + 2, j + 1), contributing 0.125 to the probability.
+
+15. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i + 2, j - 1);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i + 2, j - 1), contributing 0.125 to the probability.
+
+16. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i - 1, j + 2);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i - 1, j + 2), contributing 0.125 to the probability.
+
+17. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i - 1, j - 2);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i - 1, j - 2), contributing 0.125 to the probability.
+
+18. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i - 2, j + 1);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i - 2, j + 1), contributing 0.125 to the probability.
+
+19. **Recursive Call**
+	```cpp
+	    res += 0.125 * dfs(k - 1, i - 2, j - 1);
+	```
+	This recursively calls 'dfs' for the knight's move to position (i - 2, j - 1), contributing 0.125 to the probability.
+
+20. **Return Statement**
+	```cpp
+	    return memo[k][i][j] = res;
+	```
+	This stores the calculated probability in the 'memo' array and returns the result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k * n^2)
+- **Average Case:** O(k * n^2)
+- **Worst Case:** O(k * n^2)
+
+The time complexity is O(k * n^2) because we are recursively calculating for each position on the chessboard and each move.
+
+### Space Complexity 💾
+- **Best Case:** O(k * n^2)
+- **Worst Case:** O(k * n^2)
+
+The space complexity is O(k * n^2) due to memoization storage.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/knight-probability-in-chessboard/description/)
 

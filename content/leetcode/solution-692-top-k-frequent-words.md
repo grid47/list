@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "jEm_HfkIk9s"
 youtube_upload_date="2021-02-05"
 youtube_thumbnail="https://i.ytimg.com/vi/jEm_HfkIk9s/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,136 +28,185 @@ youtube_thumbnail="https://i.ytimg.com/vi/jEm_HfkIk9s/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a list of words and an integer k, return the k most frequent words in the list. The words should be sorted by their frequency in descending order. If two words have the same frequency, they should be sorted lexicographically.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of words and an integer k.
+- **Example:** `words = ["apple", "banana", "apple", "orange", "banana", "banana"], k = 2`
+- **Constraints:**
+	- 1 <= words.length <= 500
+	- 1 <= words[i].length <= 10
+	- words[i] consists of lowercase English letters.
+	- k is in the range [1, the number of unique words]
 
-{{< highlight cpp >}}
-using tup_t = tuple<int, string>;
-class cmp {
-public:
-    bool operator() (const tup_t &p1, const tup_t &p2) {
-        if(get<0>(p1) == get<0>(p2)) return get<1>(p1) > get<1>(p2);
-        else return get<0>(p1) < get<0>(p2);
-    }
-};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the k most frequent words sorted by frequency and lexicographical order.
+- **Example:** `["banana", "apple"]`
+- **Constraints:**
 
-class Solution {
-public:
-    vector<string> topKFrequent(vector<string>& words, int k) {
-        unordered_map<string, int> mp;
-        for(string str: words)
-            mp[str]++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the k most frequent words from the given list and sort them by their frequency and lexicographical order.
 
-        priority_queue<tup_t, vector<tup_t>, cmp> pq;
-        for(auto it: mp) {
-            auto tp = make_tuple(it.second, it.first);
-            pq.push(tp);
-        }
-        vector<string> ans;
-        while(k-- > 0) {
-            auto e = pq.top();
-            ans.push_back(get<1>(e));
-            pq.pop();
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+- Count the frequency of each word using a hash map.
+- Sort the words first by frequency (descending) and then lexicographically.
+- Return the first k words from the sorted list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is non-empty.
+- There is at least one unique word in the list.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: words = ["apple", "banana", "apple", "orange", "banana", "banana"], k = 2`  \
+  **Explanation:** The words 'banana' and 'apple' are the two most frequent words. 'banana' appears 3 times and 'apple' appears 2 times, so they are returned as the result.
 
-### Problem Statement:
-The task is to find the **k most frequent words** in a given list of words. If there are ties (i.e., multiple words have the same frequency), return them in **lexicographical order** (i.e., alphabetical order).
+- **Input:** `Example 2: words = ["cat", "dog", "bird", "dog", "dog", "bird", "bird"], k = 3`  \
+  **Explanation:** Both 'dog' and 'bird' appear 3 times, so they come first, followed by 'cat'. The result is ['dog', 'bird', 'cat'].
 
-To solve this, the function must efficiently track the frequency of each word in the list and then return the `k` most frequent ones in the correct order. The problem requires us to prioritize both the frequency of the words and lexicographical order when frequencies are equal.
+{{< dots >}}
+## Approach 🚀
+The solution involves counting the frequency of each word using a hash map and then sorting the words based on their frequency and lexicographical order.
 
-### Approach:
-To approach this problem, the following steps are executed:
-
-1. **Count the Frequency of Each Word**: 
-   Use an **unordered map (hashmap)** to count how often each word appears in the input list.
-
-2. **Use a Custom Comparator with a Priority Queue**:
-   - A **priority queue (max-heap)** is used to store words based on their frequencies.
-   - Since a max-heap prioritizes larger values, we need to invert this behavior for this problem using a custom comparator.
-   - The comparator ensures that the word with the highest frequency is always at the top. If two words have the same frequency, they are ordered lexicographically (alphabetically) in reverse.
-
-3. **Extract the k Most Frequent Words**:
-   - After building the heap, the top element of the heap is the most frequent word. We continue popping from the heap until we have extracted `k` words.
-
-4. **Return the Result**:
-   - The result is stored in a vector, which is returned at the end.
-
-### Code Breakdown (Step by Step):
-
-#### 1. **Counting Word Frequencies**:
+### Initial Thoughts 💭
+- We need to count the frequency of each word.
+- Sorting needs to be done based on frequency and lexicographical order for ties.
+- A priority queue or sorting could help in efficiently getting the top k frequent words.
+{{< dots >}}
+### Edge Cases 🌐
+- If words is an empty list, the result should be an empty list.
+- Ensure the solution works within time constraints for large input sizes.
+- If k equals the number of unique words, the function should return all the words.
+- Ensure the solution handles edge cases like all words having the same frequency.
+{{< dots >}}
+## Code 💻
 ```cpp
-unordered_map<string, int> mp;
-for(string str: words)
-    mp[str]++;
-```
-- An **unordered_map** is used to store the frequency of each word. The key is the word itself, and the value is the count of how many times the word appears in the input `words` vector.
-- As we iterate through each word in the `words` vector, we increase its corresponding frequency in the map.
+vector<string> topKFrequent(vector<string>& words, int k) {
+    unordered_map<string, int> mp;
+    for(string str: words)
+        mp[str]++;
 
-#### 2. **Custom Comparator for Priority Queue**:
-```cpp
-using tup_t = tuple<int, string>;
-
-class cmp {
-public:
-    bool operator() (const tup_t &p1, const tup_t &p2) {
-        if(get<0>(p1) == get<0>(p2)) return get<1>(p1) > get<1>(p2);
-        else return get<0>(p1) < get<0>(p2);
+    priority_queue<tup_t, vector<tup_t>, cmp> pq;
+    for(auto it: mp) {
+        auto tp = make_tuple(it.second, it.first);
+        pq.push(tp);
     }
-};
-```
-- We define a custom comparator class `cmp` that compares pairs of words and their frequencies.
-- **`tup_t`** is a tuple where the first element is the frequency (`int`) and the second is the word (`string`).
-- The comparator ensures:
-  - Words with **higher frequencies** are prioritized (if `get<0>(p1) < get<0>(p2)`).
-  - If two words have the **same frequency**, they are ordered in **lexicographical (alphabetical)** order by comparing their string values (`get<1>(p1) > get<1>(p2)`).
-
-#### 3. **Priority Queue Initialization and Population**:
-```cpp
-priority_queue<tup_t, vector<tup_t>, cmp> pq;
-for(auto it: mp) {
-    auto tp = make_tuple(it.second, it.first);
-    pq.push(tp);
+    vector<string> ans;
+    while(k-- > 0) {
+        auto e = pq.top();
+        ans.push_back(get<1>(e));
+        pq.pop();
+    }
+    return ans;
 }
 ```
-- We create a **priority queue** `pq` where the elements are tuples of (frequency, word).
-- We then iterate through the frequency map `mp` and push each word-frequency pair (tuple) into the priority queue. The priority queue is automatically ordered according to the custom comparator `cmp`, ensuring that the most frequent words appear at the top.
 
-#### 4. **Extracting the k Most Frequent Words**:
-```cpp
-vector<string> ans;
-while(k-- > 0) {
-    auto e = pq.top();
-    ans.push_back(get<1>(e));
-    pq.pop();
-}
-```
-- We initialize an empty vector `ans` to store the result.
-- We extract the top `k` elements from the priority queue, which are the most frequent words. Each time we pop an element, we get the word (using `get<1>(e)`) and push it into the `ans` vector.
-- The `pq.top()` function gives us the word with the highest frequency, and `pq.pop()` removes it from the queue.
+This code defines a function `topKFrequent` that returns the k most frequent words from a list of words. It first counts the frequency of each word using an unordered map, then stores the frequency and corresponding word in a priority queue, and finally pops the k most frequent words.
 
-#### 5. **Returning the Result**:
-```cpp
-return ans;
-```
-- After extracting the `k` most frequent words, we return the result stored in the vector `ans`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	vector<string> topKFrequent(vector<string>& words, int k) {
+	```
+	This defines the `topKFrequent` function, which takes a vector of words and an integer 'k', and returns the top k most frequent words.
 
-### Complexity:
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<string, int> mp;
+	```
+	This initializes an unordered map 'mp' to store the frequency of each word.
 
-#### Time Complexity:
-- **Counting Word Frequencies**: Iterating through the `words` array to populate the `unordered_map` takes **O(n)** time, where `n` is the number of words in the input.
-- **Building the Priority Queue**: Inserting `m` (number of unique words) elements into the priority queue takes **O(m log m)** time, where `m` is the number of unique words.
-- **Extracting k Words**: Extracting the top `k` words from the priority queue takes **O(k log m)** time, where `m` is the number of unique words.
-- Thus, the overall time complexity is **O(n + m log m + k log m)**. In the worst case, `m` can be as large as `n`, so the time complexity is approximately **O(n log n)**.
+3. **Looping**
+	```cpp
+	    for(string str: words)
+	```
+	This loop iterates over each word in the 'words' vector.
 
-#### Space Complexity:
-- The space complexity is **O(m)**, where `m` is the number of unique words in the input list. This is because the main space consumption comes from storing the frequency map and the priority queue, both of which store at most `m` elements.
+4. **Frequency Calculation**
+	```cpp
+	        mp[str]++;
+	```
+	This increments the count for each word in the unordered map.
 
-### Conclusion:
-This solution efficiently solves the problem of finding the `k` most frequent words in a list while handling ties using lexicographical ordering. The use of a custom comparator in a priority queue ensures that the solution is both time-efficient and correct, as it respects the required sorting criteria. The algorithm efficiently handles large inputs with a time complexity of **O(n log n)**, where `n` is the size of the input. Additionally, the solution makes use of auxiliary space proportional to the number of unique words in the input.
+5. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<tup_t, vector<tup_t>, cmp> pq;
+	```
+	This initializes a priority queue 'pq' to store words and their frequencies, sorted by frequency using a custom comparator.
+
+6. **Looping**
+	```cpp
+	    for(auto it: mp) {
+	```
+	This loop iterates over the entries in the unordered map 'mp' (word-frequency pairs).
+
+7. **Tuple Creation**
+	```cpp
+	        auto tp = make_tuple(it.second, it.first);
+	```
+	This creates a tuple 'tp' containing the word's frequency (it.second) and the word itself (it.first).
+
+8. **Priority Queue Insertion**
+	```cpp
+	        pq.push(tp);
+	```
+	This inserts the tuple 'tp' (word and its frequency) into the priority queue.
+
+9. **Vector Initialization**
+	```cpp
+	    vector<string> ans;
+	```
+	This initializes an empty vector 'ans' to store the top k most frequent words.
+
+10. **While Loop**
+	```cpp
+	    while(k-- > 0) {
+	```
+	This while loop runs until the top k frequent words are found (decrements k each time).
+
+11. **Priority Queue Access**
+	```cpp
+	        auto e = pq.top();
+	```
+	This retrieves the top element (highest frequency) from the priority queue.
+
+12. **Vector Insertion**
+	```cpp
+	        ans.push_back(get<1>(e));
+	```
+	This adds the word (second element of the tuple) to the 'ans' vector.
+
+13. **Priority Queue Pop**
+	```cpp
+	        pq.pop();
+	```
+	This removes the top element (highest frequency) from the priority queue.
+
+14. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	This returns the vector 'ans', which contains the top k most frequent words.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log k)
+- **Average Case:** O(n log k)
+- **Worst Case:** O(n log n)
+
+Sorting the words by frequency and lexicographical order takes O(n log n) time, but we are only interested in the top k words, so the best and average case is O(n log k).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use extra space to store the frequency of each word, which is O(n), where n is the number of unique words.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/top-k-frequent-words/description/)
 

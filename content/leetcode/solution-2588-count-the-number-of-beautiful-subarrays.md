@@ -14,149 +14,162 @@ img_src = ""
 youtube = "JokGqRfyMPU"
 youtube_upload_date="2023-03-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/JokGqRfyMPU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums`. In one operation, you can choose two indices and subtract a power of two from both elements at those indices. A subarray is considered beautiful if you can make all of its elements equal to zero by applying the operation any number of times. Your task is to return the number of beautiful subarrays in `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums`.
+- **Example:** `For example, `nums = [6, 4, 5, 3, 4]`.`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long beautifulSubarrays(vector<int>& nums) {
-        int n= nums.size();
-        long long cnt = 0;
-        map<int, int> mp;
-        mp[0] = 1;
-        int tmp = 0;
-        for(int i = 0; i < n; i++) {
-            tmp ^= nums[i];
-            if(mp.count(tmp)) cnt+= mp[tmp];
-            mp[tmp]++;
-        }
-        return cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer that represents the number of beautiful subarrays in the array `nums`.
+- **Example:** `For `nums = [6, 4, 5, 3, 4]`, the output is `3`.`
+- **Constraints:**
+	- The result will always be a valid integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the number of subarrays that can be made equal to 0 by applying the specified operations.
+
+- 1. Loop through all possible subarrays in `nums`.
+- 2. For each subarray, check if it can be transformed into an array of zeros by applying the operations.
+- 3. Count the number of such subarrays and return the count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains valid integers within the given range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `nums = [6, 4, 5, 3, 4]``  \
+  **Explanation:** The beautiful subarrays are `[6, 4]`, `[6, 4, 5, 3, 4]`, and `[4, 5, 3]` as each can become all zeros after applying the operations.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to find the subarrays where it is possible to make all elements equal to zero by applying the operation any number of times. A strategy would be to check each subarray and verify if it satisfies the condition for becoming a beautiful subarray.
+
+### Initial Thoughts 💭
+- For each subarray, check if it can be made to have all elements equal to zero using the given operations.
+- This problem seems to involve checking the binary representation of the numbers and ensuring we can make them equal.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the array will not be empty.
+- The solution should be optimized to handle large inputs up to 10^5 elements.
+- If all numbers are already zero, all subarrays are beautiful.
+- The length of the array is guaranteed to be within the specified limits.
+{{< dots >}}
+## Code 💻
+```cpp
+long long beautifulSubarrays(vector<int>& nums) {
+    int n= nums.size();
+    long long cnt = 0;
+    map<int, int> mp;
+    mp[0] = 1;
+    int tmp = 0;
+    for(int i = 0; i < n; i++) {
+        tmp ^= nums[i];
+        if(mp.count(tmp)) cnt+= mp[tmp];
+        mp[tmp]++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the number of "beautiful" subarrays in a given array `nums`. A subarray is considered "beautiful" if the XOR of all elements within the subarray is equal to 0. Our task is to efficiently compute the count of such subarrays in the given array.
-
-### Approach
-
-To solve this problem, we need to efficiently identify subarrays whose XOR results in 0. A brute force approach, where we check the XOR of every possible subarray, would be too slow for larger arrays due to its \(O(n^2)\) complexity. Instead, we can leverage a more efficient approach based on the **XOR property** and the concept of **prefix XOR**.
-
-#### Key Observations:
-1. **XOR of a Subarray**: The XOR of elements in a subarray can be computed using a prefix XOR array. The XOR of elements from index `i` to `j` in the array is given by:
-   \[
-   \text{XOR}(i, j) = \text{prefixXOR}[j] \oplus \text{prefixXOR}[i-1]
-   \]
-   where `prefixXOR[i]` represents the XOR of all elements from the beginning of the array to index `i`.
-
-2. **Zero XOR**: If the XOR of a subarray is 0, it means the XOR of elements between indices `i` and `j` is equal. This implies:
-   \[
-   \text{prefixXOR}[j] = \text{prefixXOR}[i-1]
-   \]
-   This observation allows us to track the frequency of each prefix XOR value encountered as we iterate through the array.
-
-#### Algorithm:
-- **Step 1**: Maintain a running XOR (`tmp`), which stores the XOR of all elements from the start of the array up to the current index.
-- **Step 2**: Use a `map` to store the frequency of each prefix XOR value encountered so far.
-- **Step 3**: For each element `nums[i]`, update the running XOR (`tmp`) and check if `tmp` has appeared before. If it has, it means there exists a subarray between the previous occurrence of `tmp` and the current index where the XOR of the subarray is 0.
-- **Step 4**: Keep a count of the number of such subarrays.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialization**:
-```cpp
-long long cnt = 0;
-map<int, int> mp;
-mp[0] = 1;
-int tmp = 0;
-```
-- **Explanation**: 
-  - We initialize `cnt` to 0, which will store the final count of beautiful subarrays.
-  - We use a `map` `mp` to store the frequency of each prefix XOR encountered. The key is the XOR value, and the value is the count of occurrences of that XOR. Initially, we set `mp[0] = 1` because a subarray starting from index 0 with XOR 0 is considered a valid subarray.
-  - `tmp` is the running XOR, initialized to 0.
-
-#### 2. **Iterating Through the Array**:
-```cpp
-for (int i = 0; i < n; i++) {
-    tmp ^= nums[i];
-    if (mp.count(tmp)) cnt += mp[tmp];
-    mp[tmp]++;
+    return cnt;
 }
 ```
-- **Explanation**:
-  - We loop through each element `nums[i]` in the array.
-  - For each element, we update `tmp` by performing an XOR with `nums[i]`. This updates `tmp` to be the XOR of all elements from the start of the array to the current element.
-  - We then check if `tmp` has appeared before in the `map`. If it has, it means there are `mp[tmp]` subarrays that have a XOR of 0. We add `mp[tmp]` to `cnt`, since each occurrence of `tmp` represents a potential subarray with XOR 0.
-  - We increment the count of `tmp` in the `map`, indicating that we have seen this XOR value again.
 
-#### 3. **Returning the Result**:
-```cpp
-return cnt;
-```
-- **Explanation**: After iterating through the entire array, `cnt` contains the total number of beautiful subarrays. We return `cnt` as the final result.
+The function 'beautifulSubarrays' calculates the number of beautiful subarrays in the input array 'nums'. A beautiful subarray is defined as a subarray where the XOR of all elements is zero at some point in the subarray. It uses a map to track XOR values and their frequencies to count the valid subarrays.
 
-### Time Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long beautifulSubarrays(vector<int>& nums) {
+	```
+	Defines the 'beautifulSubarrays' function, which takes a vector of integers as input and returns the count of beautiful subarrays.
 
-The time complexity of this solution can be analyzed as follows:
-1. **Iterating Over the Array**: We iterate through the array once, which takes \(O(n)\), where \(n\) is the length of the array.
-2. **Updating the Map**: For each element, we perform a constant-time operation to update and check the map. The operations on the map (insertion, lookup) are \(O(\log m)\), where \(m\) is the number of distinct prefix XOR values encountered. However, since there are at most \(n\) distinct prefix XOR values, we can approximate this operation as \(O(\log n)\).
-3. **Overall Complexity**: The total time complexity is \(O(n \log n)\), which is efficient enough for large inputs.
+2. **Variable Initialization**
+	```cpp
+	    int n= nums.size();
+	```
+	Initializes 'n' to the size of the 'nums' array.
 
-### Space Complexity
+3. **Variable Initialization**
+	```cpp
+	    long long cnt = 0;
+	```
+	Initializes the 'cnt' variable to store the count of beautiful subarrays.
 
-The space complexity is \(O(n)\) due to the space required to store the map `mp`, which can hold at most \(n\) distinct prefix XOR values. Additionally, the space used for the `tmp` variable is constant.
+4. **Data Structure Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Declares a map 'mp' to store the frequency of each XOR value encountered during the iteration.
 
-### Example Walkthrough
+5. **Data Structure Initialization**
+	```cpp
+	    mp[0] = 1;
+	```
+	Initializes the map with the value 0 mapped to 1, representing the XOR value of an empty subarray.
 
-#### Input:
-```cpp
-vector<int> nums = {4, 2, 2, 6, 4};
-```
+6. **Variable Initialization**
+	```cpp
+	    int tmp = 0;
+	```
+	Initializes 'tmp' to 0, which will be used to accumulate the XOR of the elements in the array.
 
-1. **Step 1**: Initialize `cnt = 0`, `mp = {0: 1}`, and `tmp = 0`.
-2. **Step 2**: Start iterating over `nums`.
-   - **First iteration** (i = 0): 
-     - `tmp ^= 4` → `tmp = 4`
-     - `mp.count(4)` is 0, so we don't increment `cnt`.
-     - `mp[4] = 1`
-   
-   - **Second iteration** (i = 1):
-     - `tmp ^= 2` → `tmp = 6`
-     - `mp.count(6)` is 0, so we don't increment `cnt`.
-     - `mp[6] = 1`
-   
-   - **Third iteration** (i = 2):
-     - `tmp ^= 2` → `tmp = 4`
-     - `mp.count(4)` is 1, so we increment `cnt` by 1 (`cnt = 1`).
-     - `mp[4] = 2`
-   
-   - **Fourth iteration** (i = 3):
-     - `tmp ^= 6` → `tmp = 2`
-     - `mp.count(2)` is 0, so we don't increment `cnt`.
-     - `mp[2] = 1`
-   
-   - **Fifth iteration** (i = 4):
-     - `tmp ^= 4` → `tmp = 6`
-     - `mp.count(6)` is 1, so we increment `cnt` by 1 (`cnt = 2`).
-     - `mp[6] = 2`
+7. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins a loop that iterates over the array 'nums'.
 
-3. **Step 3**: The final result is `cnt = 2`.
+8. **XOR Operation**
+	```cpp
+	        tmp ^= nums[i];
+	```
+	Applies the XOR operation on the current element of 'nums' with 'tmp', updating 'tmp' at each step.
 
-#### Output:
-```cpp
-2
-```
+9. **Condition Check**
+	```cpp
+	        if(mp.count(tmp)) cnt+= mp[tmp];
+	```
+	Checks if the current XOR value 'tmp' has been encountered before. If so, adds the frequency of 'tmp' from the map to 'cnt'.
 
-### Conclusion
+10. **Data Structure Update**
+	```cpp
+	        mp[tmp]++;
+	```
+	Increments the frequency of the current XOR value 'tmp' in the map.
 
-This solution efficiently counts the number of "beautiful" subarrays using the concept of prefix XOR and a hashmap to track the occurrences of each prefix XOR value. By leveraging the properties of XOR, we can solve the problem in \(O(n \log n)\) time, making it scalable for large inputs. This approach is both time-efficient and space-efficient, with a clear and concise implementation.
+11. **Return**
+	```cpp
+	    return cnt;
+	```
+	Returns the total count of beautiful subarrays found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^3)
+
+In the worst case, we may need to check each subarray, which can lead to a time complexity of O(n^3). Optimizing this solution is essential.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
+
+The space complexity depends on the storage of subarrays being checked.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-beautiful-subarrays/description/)
 

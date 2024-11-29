@@ -14,121 +14,154 @@ img_src = ""
 youtube = "HuCSgRBf-B8"
 youtube_upload_date="2023-08-06"
 youtube_thumbnail="https://i.ytimg.com/vi/HuCSgRBf-B8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s. On your faulty keyboard, whenever you press 'i', the string typed so far is reversed. Pressing any other character types it normally. Simulate typing the entire string and return the final string displayed on the screen.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string s consisting of lowercase English letters, where the first character is not 'i'.
+- **Example:** `Input: s = "hello"`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- s consists of lowercase English letters
+	- s[0] != 'i'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string finalString(string s) {
-        string res = "";
-        for(auto c : s){
-            if(c == 'i'){
-                if(res.size()){
-                    reverse(res.begin(), res.end());
-                }
-                
-            }else
-             res+=c;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the final string that will be displayed on the screen after typing all characters in the string s.
+- **Example:** `Output: "hll"`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Simulate the process of typing each character of the string on a faulty keyboard, where typing 'i' reverses the string.
+
+- 1. Initialize an empty string to simulate the screen content.
+- 2. For each character in the string s, add it to the string unless it is 'i'.
+- 3. If the character is 'i', reverse the string typed so far.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string length will not exceed 100 characters.
+- The input string will always begin with a character other than 'i'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "hello"`  \
+  **Explanation:** Typing the characters one by one and applying the reverse operation on encountering 'i' leads to the final string 'hll'.
+
+- **Input:** `Input: s = "worldi"`  \
+  **Explanation:** After typing 'world' and then encountering 'i', the string is reversed to 'dworl'.
+
+{{< dots >}}
+## Approach 🚀
+We will simulate the process of typing the string and apply the reverse operation when encountering 'i'.
+
+### Initial Thoughts 💭
+- We only need to reverse the string when 'i' is encountered, which makes the problem manageable.
+- We need to ensure that the string is updated after every character input, and we reverse only when needed.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one character in the string.
+- Ensure the solution works efficiently for strings of length up to 100.
+- If the string contains no 'i', the output will simply be the same as the input string.
+- The solution must handle the string reversal operation efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+string finalString(string s) {
+    string res = "";
+    for(auto c : s){
+        if(c == 'i'){
+            if(res.size()){
+                reverse(res.begin(), res.end());
+            }
+            
+        }else
+         res+=c;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function processes the input string 's'. It reverses the string 'res' whenever the character 'i' is encountered. The final string is returned after applying this operation.
 
-In this problem, you are given a string `s`, and you need to transform it based on specific rules. Whenever the character 'i' appears in the string, the string `res` (which is initially empty) should be reversed. For all other characters, append them to the string `res` as they are. Finally, return the modified string `res` after processing all characters in the input string.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string finalString(string s) {
+	```
+	The function 'finalString' takes a string 's' as input and returns a string as output after processing.
 
-The task is to process the string efficiently while handling the reverse operations triggered by the character 'i'. Understanding how to manage string reversals dynamically while iterating through the string is key to solving this problem.
+2. **Variable Initialization**
+	```cpp
+	    string res = "";
+	```
+	Initialize an empty string 'res' to store the modified characters of the input string.
 
-### Approach
+3. **Looping**
+	```cpp
+	    for(auto c : s){
+	```
+	Iterate through each character 'c' in the input string 's'.
 
-The problem requires us to dynamically update the string by reversing it when an 'i' is encountered, while appending other characters without any change. Here’s how we can approach it:
+4. **Condition Check**
+	```cpp
+	        if(c == 'i'){
+	```
+	Check if the current character 'c' is 'i'. If true, the string 'res' will be reversed.
 
-1. **Iterate Over the String**:
-   - We will iterate through each character of the input string `s`. For each character:
-     - If the character is 'i', we reverse the string `res`.
-     - Otherwise, we append the character to `res`.
+5. **Condition Check**
+	```cpp
+	            if(res.size()){
+	```
+	Check if the string 'res' is non-empty before attempting to reverse it.
 
-2. **Use a Temporary Result String (`res`)**:
-   - The result string `res` is built incrementally. For each character:
-     - If it is 'i', we reverse the current `res`.
-     - If it is not 'i', we simply append the character to `res`.
+6. **String Reversal**
+	```cpp
+	                reverse(res.begin(), res.end());
+	```
+	Reverse the contents of the string 'res' using the 'reverse' function from the C++ standard library.
 
-3. **Reversal Logic**:
-   - When encountering an 'i', we reverse the string using the built-in `reverse` function in C++ which operates in **O(n)** time, where `n` is the size of the string. 
-   - The reversal is done directly on `res`, and we continue appending characters to it after reversing.
+7. **Condition Check**
+	```cpp
+	        }else
+	```
+	If the character is not 'i', continue processing the character by adding it to 'res'.
 
-4. **Edge Cases**:
-   - If there are multiple consecutive 'i's, each one will reverse the string, and every second 'i' effectively cancels the previous reversal.
-   - If there are no 'i's in the string, the string will remain unchanged.
-   - If the string starts with 'i', the result will be an empty string initially, which will then be reversed upon encountering the first 'i'.
+8. **String Concatenation**
+	```cpp
+	         res+=c;
+	```
+	Append the current character 'c' to the string 'res'.
 
-### Code Breakdown (Step by Step)
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the modified string 'res' after all characters have been processed.
 
-1. **Function Definition**:
-   ```cpp
-   string finalString(string s) {
-   ```
-   - The function `finalString` takes a string `s` as input and returns the modified string after applying the rules described.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Initialize Result String**:
-   ```cpp
-   string res = "";
-   ```
-   - We initialize an empty string `res` that will be used to build the result step by step.
+In the worst case, we reverse the string on each 'i' encounter, leading to a linear time complexity.
 
-3. **Iterate Over the Input String**:
-   ```cpp
-   for(auto c : s) {
-   ```
-   - We iterate over each character `c` in the input string `s`.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Handle the Character 'i'**:
-   ```cpp
-   if(c == 'i') {
-       if(res.size()) {
-           reverse(res.begin(), res.end());
-       }
-   }
-   ```
-   - If the character `c` is 'i', we check if `res` has any content (i.e., its size is greater than 0).
-   - If `res` is not empty, we reverse it using `reverse(res.begin(), res.end())`. This is the built-in C++ function to reverse a string in place.
+We store the result string which can grow up to the size of the input string.
 
-5. **Append Other Characters**:
-   ```cpp
-   else
-       res += c;
-   ```
-   - If the character is not 'i', we simply append it to `res`.
+**Happy Coding! 🎉**
 
-6. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - After processing all characters in the string, we return the final string `res`, which contains the transformed string based on the 'i' reversal rule.
-
-### Complexity
-
-1. **Time Complexity**:
-   - **Iterating Through the String**: We iterate over all characters in the input string `s` once. This takes **O(n)** time, where `n` is the length of the string.
-   - **Reversal Operation**: Every time we encounter 'i', we reverse the string `res`. The reversal operation takes **O(k)** time, where `k` is the size of the current `res` string. In the worst case, `k` could be as large as `n`, leading to a time complexity of **O(n)** for each reversal.
-   - **Overall Time Complexity**: Since we iterate over the string once and each reversal operation could take up to **O(n)** time, the worst-case time complexity is **O(n^2)**, where `n` is the length of the input string.
-
-2. **Space Complexity**:
-   - We use a string `res` to store the result, and the space required for `res` is proportional to the size of the input string. Therefore, the space complexity is **O(n)**, where `n` is the length of the string.
-
-### Conclusion
-
-This solution efficiently handles the reversal of the string when the character 'i' appears. By using a simple loop and dynamically updating the string, we transform the string according to the given rules. The space complexity is linear, and the time complexity is quadratic in the worst case due to the frequent reversal of the result string. This approach is simple to implement and works for typical input sizes, but performance may degrade if the string is very large due to repeated reversals. 
-
-To optimize the solution for larger strings, additional techniques like counting reversals or using more efficient data structures could be explored. However, for most practical cases, this approach should work fine, as the task is inherently based on iterative string manipulation.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/faulty-keyboard/description/)
 

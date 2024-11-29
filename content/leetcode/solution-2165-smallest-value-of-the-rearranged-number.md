@@ -14,95 +14,137 @@ img_src = ""
 youtube = "fe3yn96MAoI"
 youtube_upload_date="2022-02-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/fe3yn96MAoI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer 'num'. Your task is to rearrange the digits of 'num' such that its value is minimized, with the constraint that the number must not contain any leading zeros. The sign of the number should not change after rearranging the digits.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer 'num'.
+- **Example:** `num = 210`
+- **Constraints:**
+	- -1015 <= num <= 1015
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long smallestNumber(long long num) {
-        auto s = to_string(abs(num));
-        sort(s.begin(), s.end(), [&](char a, char b){
-            return num > 0? a < b: b < a;
-        });
-        if(num > 0)
-        swap(s[0], s[s.find_first_not_of('0')]);
-        return stoll(s) * (num < 0? -1: 1);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number formed by rearranging the digits of 'num' to get the smallest possible value without leading zeros and keeping the sign unchanged.
+- **Example:** `102`
+- **Constraints:**
+	- The rearranged number must not contain leading zeros.
 
-### Problem Statement
-Given a long integer `num`, return the smallest possible integer that can be formed using the digits of `num`. If `num` is positive, the digits should be rearranged to form the smallest positive number. If `num` is negative, rearrange the digits (excluding the negative sign) to form the largest negative number. The output should retain the sign of the original `num`.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Rearrange the digits to form the smallest number while respecting the leading zero constraint.
 
-### Approach
-To solve the problem, the approach varies based on whether `num` is positive or negative:
-1. **For positive numbers**:
-   - Sort the digits in ascending order to create the smallest possible number.
-   - Ensure that any leading zero is moved to an appropriate position to avoid invalid results (e.g., "0123" should become "1023").
-2. **For negative numbers**:
-   - Sort the digits in descending order to create the numerically largest negative number.
-   - Maintain the negative sign while constructing the final result.
+- Convert the number to a string and extract the digits.
+- Sort the digits in non-decreasing order for positive numbers and non-increasing order for negative numbers.
+- Ensure no leading zeros by swapping the first non-zero digit to the front if the number is positive.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input number 'num' is always within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: num = 210`  \
+  **Explanation:** The digits [2, 1, 0] can be rearranged to form [1, 0, 2]. Since we cannot have leading zeros, the smallest possible value is 102.
 
-### Code Breakdown (Step by Step)
-1. **Convert the Number to a String**:
-   ```cpp
-   auto s = to_string(abs(num));
-   ```
-   - Convert the absolute value of `num` to a string for easy manipulation of its digits.
-   - `abs(num)` ensures the conversion works consistently whether `num` is positive or negative.
+- **Input:** `Example 2: num = -4306`  \
+  **Explanation:** The digits [4, 3, 0, 6] for the negative number can be rearranged to form -6430, which is the smallest value without leading zeros.
 
-2. **Sort the Digits**:
-   ```cpp
-   sort(s.begin(), s.end(), [&](char a, char b){
-       return num > 0 ? a < b : b < a;
-   });
-   ```
-   - Use the `sort` function with a custom comparator:
-     - If `num` is positive (`num > 0`), sort the digits in ascending order (`a < b`).
-     - If `num` is negative (`num < 0`), sort the digits in descending order (`b < a`) to maximize the magnitude when prefixed by a negative sign.
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the digits of the number based on whether it's positive or negative, and then ensuring the result has no leading zeros.
 
-3. **Handle Leading Zeros for Positive Numbers**:
-   ```cpp
-   if(num > 0)
-       swap(s[0], s[s.find_first_not_of('0')]);
-   ```
-   - For positive numbers, ensure that the first character is not a zero:
-     - `s.find_first_not_of('0')` finds the first non-zero digit in `s`.
-     - Swap this non-zero digit with the first digit to avoid leading zeros in the result.
+### Initial Thoughts 💭
+- For positive numbers, sorting the digits in non-decreasing order should yield the smallest number.
+- For negative numbers, sorting the digits in non-increasing order should yield the smallest value.
+- We must carefully handle the case where leading zeros could be produced.
+{{< dots >}}
+### Edge Cases 🌐
+- The number is never empty as it is always a valid integer within the constraints.
+- The solution must handle large numbers within the range of -1015 to 1015.
+- The input number may have a single digit or multiple identical digits.
+- The solution must work efficiently within the given constraints of -1015 <= num <= 1015.
+{{< dots >}}
+## Code 💻
+```cpp
+long long smallestNumber(long long num) {
+    auto s = to_string(abs(num));
+    sort(s.begin(), s.end(), [&](char a, char b){
+        return num > 0? a < b: b < a;
+    });
+    if(num > 0)
+    swap(s[0], s[s.find_first_not_of('0')]);
+    return stoll(s) * (num < 0? -1: 1);
+}
+```
 
-4. **Convert the String Back to a Long Integer**:
-   ```cpp
-   return stoll(s) * (num < 0 ? -1 : 1);
-   ```
-   - Convert the sorted string `s` back to a long integer using `stoll`.
-   - Multiply by `-1` if `num` was originally negative, ensuring the correct sign is retained.
+This function returns the smallest possible number that can be formed by the digits of the input number. It handles both positive and negative numbers, adjusting for zero-padding when needed.
 
-### Example Walkthroughs
-**Example 1**: `num = 310`
-- Convert `num` to a string: `"310"`.
-- Sort digits in ascending order for a positive number: `"013"`.
-- Swap leading zero with the first non-zero digit: `"103"`.
-- Convert back to integer: `103`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long smallestNumber(long long num) {
+	```
+	This is the function declaration where we define a function 'smallestNumber' that takes a long long integer as input and returns a long long integer.
 
-**Example 2**: `num = -7605`
-- Convert `num` to a string: `"7605"`.
-- Sort digits in descending order for a negative number: `"7650"`.
-- Convert back to integer and apply negative sign: `-7650`.
+2. **Variable Initialization**
+	```cpp
+	    auto s = to_string(abs(num));
+	```
+	The absolute value of the input number is converted to a string and stored in the variable 's'. This is to manipulate the digits of the number.
 
-### Complexity
-- **Time Complexity**:
-  - O(n log n), where `n` is the number of digits in `num`. This results from sorting the digits.
-- **Space Complexity**:
-  - O(n), for storing the string representation and the sorted result.
+3. **Sorting Logic**
+	```cpp
+	    sort(s.begin(), s.end(), [&](char a, char b){
+	```
+	The string 's' is sorted based on the value of the original number, in ascending order for positive numbers, and descending order for negative numbers.
 
-### Conclusion
-This solution is effective for rearranging the digits of a number to form the smallest positive or largest negative result based on the sign of the input. By using basic string manipulation and sorting, the approach remains straightforward and efficient. It ensures that leading zeros are handled correctly for positive numbers and that the sign of `num` is preserved in the final output. This method can be utilized in applications involving numerical digit rearrangement for optimization problems or formatting tasks.
+4. **Sorting Condition**
+	```cpp
+	        return num > 0? a < b: b < a;
+	```
+	If the number is positive, the digits are sorted in ascending order; otherwise, they are sorted in descending order.
+
+5. **Zero Handling**
+	```cpp
+	    if(num > 0)
+	```
+	If the number is positive, this block of code handles the case where the smallest non-zero digit needs to be swapped to the first position.
+
+6. **Zero Padding Fix**
+	```cpp
+	    swap(s[0], s[s.find_first_not_of('0')]);
+	```
+	This swaps the first digit of the string with the first non-zero digit to avoid leading zeros.
+
+7. **Final Conversion**
+	```cpp
+	    return stoll(s) * (num < 0? -1: 1);
+	```
+	The string is converted back to a long long integer, and the sign of the number is adjusted accordingly for negative inputs.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity of sorting the digits is O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We need O(n) space for storing the digits of the number.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-value-of-the-rearranged-number/description/)
 

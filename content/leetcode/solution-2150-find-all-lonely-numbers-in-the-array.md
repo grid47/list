@@ -14,81 +14,146 @@ img_src = ""
 youtube = "oX00CiVJ00Q"
 youtube_upload_date="2022-01-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/oX00CiVJ00Q/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums'. A number 'x' is lonely if it appears exactly once and neither 'x - 1' nor 'x + 1' exist in the array. Return all lonely numbers in the array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array 'nums'.
+- **Example:** `nums = [12, 6, 4, 8]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findLonely(vector<int>& nums) {
-        unordered_map<int, int> mp;
-        for(int num: nums) mp[num]++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return all the lonely numbers in 'nums'. The result can be returned in any order.
+- **Example:** `Output: [12, 8]`
+- **Constraints:**
+	- The array should contain numbers that are lonely by the definition provided.
 
-        vector<int> res;
-        for(auto [x, cnt]: mp) {
-            if(cnt == 1 && !mp.count(x - 1) && !mp.count(x +1))
-                res.push_back(x);
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify numbers that appear only once and do not have adjacent numbers in the array.
 
-        return res;
+- Count the frequency of each number in the array.
+- Check for each number if it appears exactly once and if its neighbors (x-1 and x+1) are not present in the array.
+- Return the numbers that meet these conditions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array may contain repeated numbers, but the goal is to identify the lonely numbers based on the conditions given.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [12, 6, 4, 8]`  \
+  **Explanation:** The lonely numbers are 12 and 8 because they appear exactly once, and their adjacent numbers (11, 13, 7, and 9) are not present in the array.
+
+- **Input:** `Example 2: nums = [2, 4, 6, 4]`  \
+  **Explanation:** The lonely numbers are 2 and 6. The number 4 is not lonely because it appears twice.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves counting the occurrences of each number and checking for adjacency conditions to identify lonely numbers.
+
+### Initial Thoughts 💭
+- To find lonely numbers, we need to consider both frequency and the presence of adjacent numbers.
+- A frequency map is useful to determine which numbers appear exactly once. Additionally, checking for adjacent numbers is crucial.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input is not valid according to the constraints.
+- The solution should handle large arrays up to the constraint of 10^5 elements efficiently.
+- If there are no lonely numbers, the function should return an empty array.
+- The input array contains valid integers within the given range.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> findLonely(vector<int>& nums) {
+    unordered_map<int, int> mp;
+    for(int num: nums) mp[num]++;
+
+    vector<int> res;
+    for(auto [x, cnt]: mp) {
+        if(cnt == 1 && !mp.count(x - 1) && !mp.count(x +1))
+            res.push_back(x);
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-Given an array of integers `nums`, a number is defined as *lonely* if it meets two conditions:
-1. The number appears exactly once in the array.
-2. Neither of its adjacent numbers (`x - 1` or `x + 1`) exist in the array.
+    return res;
+}
+```
 
-The goal is to return a list of all such lonely numbers in the input array.
+This function finds all numbers in the input array that are lonely, i.e., appear exactly once and do not have adjacent numbers in the array.
 
-### Approach
-The approach to solve this problem efficiently leverages a hash map to count occurrences of each number in the array. By counting the occurrences, we can identify numbers that only appear once. Additionally, using the map, we can check whether adjacent numbers (`x - 1` or `x + 1`) exist, ensuring that the number is truly *lonely*.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> findLonely(vector<int>& nums) {
+	```
+	Function declaration to find all lonely numbers in the given array. Lonely numbers appear exactly once and do not have adjacent numbers.
 
-### Code Breakdown (Step by Step)
-1. **Initialization of the Hash Map:**
-   ```cpp
-   unordered_map<int, int> mp;
-   ```
-   - This map, `mp`, will store each number as the key and its frequency as the value.
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	Create a hash map 'mp' to count the frequency of each number in the input 'nums' array.
 
-2. **Counting Frequencies:**
-   ```cpp
-   for(int num: nums) mp[num]++;
-   ```
-   - Loop through each number in `nums` and populate the map with the count of occurrences for each number.
+3. **Counting Frequencies**
+	```cpp
+	    for(int num: nums) mp[num]++;
+	```
+	Iterate through the 'nums' array and update the frequency count of each number in the 'mp' hash map.
 
-3. **Finding Lonely Numbers:**
-   ```cpp
-   vector<int> res;
-   for(auto [x, cnt]: mp) {
-       if(cnt == 1 && !mp.count(x - 1) && !mp.count(x + 1))
-           res.push_back(x);
-   }
-   ```
-   - Create a result vector `res` to store lonely numbers.
-   - Iterate over the map, checking each number (`x`) and its count (`cnt`).
-   - If `cnt` equals 1 (indicating the number appears exactly once), and neither `x - 1` nor `x + 1` exist in `mp`, add `x` to the result list.
+4. **Variable Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	Initialize an empty vector 'res' to store the lonely numbers that will be found.
 
-4. **Return Result:**
-   ```cpp
-   return res;
-   ```
-   - Return the `res` vector containing all lonely numbers.
+5. **Iteration**
+	```cpp
+	    for(auto [x, cnt]: mp) {
+	```
+	Iterate through each key-value pair in the 'mp' hash map, where 'x' is the number and 'cnt' is its frequency.
 
-### Complexity
-- **Time Complexity**: 
-  - The code runs in O(n) time, where `n` is the number of elements in the input array. This is because counting the elements and then checking conditions for each element both take O(n).
-- **Space Complexity**: 
-  - The space complexity is O(n) due to the hash map `mp` storing up to `n` keys and the result vector `res`.
+6. **Condition Check**
+	```cpp
+	        if(cnt == 1 && !mp.count(x - 1) && !mp.count(x +1))
+	```
+	Check if the current number 'x' appears exactly once ('cnt == 1') and does not have adjacent numbers ('x-1' and 'x+1') in the 'mp' map.
 
-### Conclusion
-The code provided is an efficient solution for finding lonely numbers in an array. It uses a hash map for quick lookups, ensuring that the solution runs in linear time. This makes the algorithm suitable for large input sizes where O(n) performance is required. The conditions for loneliness are thoroughly checked in one pass after counting the elements, striking an optimal balance between simplicity and performance.
+7. **Adding to Result**
+	```cpp
+	            res.push_back(x);
+	```
+	If the number 'x' is lonely, add it to the 'res' vector.
+
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the 'res' vector containing all the lonely numbers found in the array.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) since we iterate over the array to build the frequency map and check each element's neighbors.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the frequency map of the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-lonely-numbers-in-the-array/description/)
 

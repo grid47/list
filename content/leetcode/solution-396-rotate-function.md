@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "GzBK8dxblaw"
 youtube_upload_date="2024-03-21"
 youtube_thumbnail="https://i.ytimg.com/vi/GzBK8dxblaw/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,171 +28,199 @@ youtube_thumbnail="https://i.ytimg.com/vi/GzBK8dxblaw/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array `nums` of length `n`. For each rotation `k`, we define a function `F(k)` which is calculated as: F(k) = 0 * arrk[0] + 1 * arrk[1] + ... + (n-1) * arrk[n-1]. The goal is to return the maximum value of `F(k)` for all possible `k` in the range from `0` to `n-1`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers `nums` and an integer `n` representing the length of the array.
+- **Example:** `Input: nums = [1, 2, 3, 4]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- -100 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxRotateFunction(vector<int>& nums) {
-        long sum = 0, fn = 0;
-        int n = nums.size();
-        for(int i = 0; i < n; i++) {
-            sum += nums[i];
-            fn += i * nums[i];
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum value of F(k) for all possible values of `k`.
+- **Example:** `Output: 20`
+- **Constraints:**
+	- The solution must return the maximum value of F(k) among all rotations of the array.
 
-        long l = 1, r;
-        long newfn = fn;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute F(k) for all `k` and return the maximum value.
 
-        while(l < n) {
-            r = l + n - 1;
-            long removed = (l - 1) *nums[l -1];
-            long added = r * nums[r % n];
+- Compute the sum of the array and the initial value of F(0).
+- Use a rolling approach to compute subsequent F(k) values by adjusting the previous F(k-1).
+- Return the maximum value of F(k).
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array `nums` is a valid integer array of length `n`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 3, 4]`  \
+  **Explanation:** We calculate F(k) for all rotations: F(0), F(1), F(2), and F(3). The maximum value is 20.
 
-            newfn = newfn - removed + added - sum;
+- **Input:** `Input: nums = [100]`  \
+  **Explanation:** With a single element, there is only one possible rotation, and the value of F(k) is 0.
 
-            fn = max(fn, newfn);
-            l++;
-        }
-        return fn;
+{{< dots >}}
+## Approach 🚀
+The approach uses an efficient way to compute F(k) using a rolling sum, so that we do not need to recompute the entire sum for each rotation.
+
+### Initial Thoughts 💭
+- The problem involves rotating the array and computing a function based on the rotated array.
+- We need an optimized solution to avoid recalculating the entire function for every rotation.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array `nums` will not be empty as it has a minimum length of 1.
+- Ensure the solution handles input arrays with lengths up to 10^5 efficiently.
+- Handle cases where the array has only one element or all elements are the same.
+- Handle edge cases such as small or large values in the array and rotations for arrays of size 1.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxRotateFunction(vector<int>& nums) {
+    long sum = 0, fn = 0;
+    int n = nums.size();
+    for(int i = 0; i < n; i++) {
+        sum += nums[i];
+        fn += i * nums[i];
     }
-};
-{{< /highlight >}}
----
 
-### 🚀 Problem Statement
+    long l = 1, r;
+    long newfn = fn;
 
-In this problem, you are tasked with calculating the maximum possible value of a rotated function `F(k)` for a given array of integers `nums`. The function `F(k)` is defined as:
+    while(l < n) {
+        r = l + n - 1;
+        long removed = (l - 1) *nums[l -1];
+        long added = r * nums[r % n];
 
-\[
-F(k) = \sum_{i=0}^{n-1} (nums[i] \times (i + k) \mod n)
-\]
+        newfn = newfn - removed + added - sum;
 
-Where `n` is the length of the array, and `k` represents the number of rotations. Your goal is to find the maximum value of `F(k)` across all possible values of `k` from `0` to `n-1`.
-
-#### Example:
-- Given the array `[4, 3, 2, 6]`, the function `F(k)` calculates the sum of products of elements and their indices after rotating the array `k` times. The objective is to find the maximum value of `F(k)` for all rotations.
-
----
-
-### 🧠 Approach
-
-This problem involves efficiently computing the maximum value of `F(k)` without recalculating the function from scratch for each rotation. Instead, we use a clever technique where we build upon the previous function value (`F(k)`) to find the next one by adjusting for the rotations.
-
-#### Key Idea:
-- Instead of recalculating `F(k)` from scratch for every `k`, we can derive `F(k+1)` from `F(k)` by adjusting for the rotated elements. This allows us to optimize the calculation and avoid redundant computations.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code and logic to make it easier to understand:
-
-#### Step 1: Initialize `sum` and `fn`
-```cpp
-long sum = 0, fn = 0;
-int n = nums.size();
-for(int i = 0; i < n; i++) {
-    sum += nums[i];
-    fn += i * nums[i];
+        fn = max(fn, newfn);
+        l++;
+    }
+    return fn;
 }
 ```
-- **sum** is the sum of all elements in the `nums` array.
-- **fn** is the value of the function `F(0)`, which represents the function when no rotations have occurred. It is calculated as:
-  
-  \[
-  F(0) = \sum_{i=0}^{n-1} (i \times nums[i])
-  \]
 
-#### Step 2: Set up variables for rotation
-```cpp
-long l = 1, r;
-long newfn = fn;
-```
-- **l** is the current rotation index, starting at 1 (since `F(0)` is already computed).
-- **r** will represent the last index in the rotated array after each rotation.
-- **newfn** stores the current value of the function as we iterate through the rotations.
+The function `maxRotateFunction` calculates the maximum value of the rotate function for a given array `nums`. The approach calculates the initial sum and the first value of the function, then iteratively adjusts the value using an optimized method instead of recalculating the function for each rotation.
 
-#### Step 3: Perform rotations and update `F(k)`
-```cpp
-while(l < n) {
-    r = l + n - 1;
-    long removed = (l - 1) * nums[l - 1];
-    long added = r * nums[r % n];
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxRotateFunction(vector<int>& nums) {
+	```
+	The function `maxRotateFunction` takes a vector of integers `nums` and returns the maximum possible value of the rotate function.
 
-    newfn = newfn - removed + added - sum;
+2. **Variable Initialization**
+	```cpp
+	    long sum = 0, fn = 0;
+	```
+	Two variables are initialized: `sum` will store the sum of all elements in the array, and `fn` will store the initial value of the rotate function.
 
-    fn = max(fn, newfn);
-    l++;
-}
-```
-- The `while` loop iterates through each rotation, updating the function value for each step:
-  1. **Calculate `r`**: The last index after `l` rotations is `l + n - 1`.
-  2. **Calculate `removed`**: The contribution of the element at index `l-1` is removed from the function value.
-  3. **Calculate `added`**: The contribution of the new element at index `r` is added to the function value.
-  4. **Update `newfn`**: The value of `newfn` is updated by subtracting `removed` and adding `added`, while adjusting for the constant `sum`.
-  5. **Update `fn`**: We store the maximum value of `fn` between the current and new `newfn`.
-  6. **Increment `l`**: Move to the next rotation.
+3. **Array Length**
+	```cpp
+	    int n = nums.size();
+	```
+	The variable `n` stores the size of the `nums` array.
 
-#### Step 4: Return the result
-```cpp
-return fn;
-```
-- Once all rotations are processed, the function returns the maximum value of `F(k)`.
+4. **Initial Calculation**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop iterates over each element of the array to compute the initial `sum` and `fn`.
 
----
+5. **Sum Calculation**
+	```cpp
+	        sum += nums[i];
+	```
+	The sum of all elements in the array is computed.
 
-### 📊 Example Walkthrough
+6. **Initial Function Calculation**
+	```cpp
+	        fn += i * nums[i];
+	```
+	The initial value of the rotate function is calculated by multiplying each element by its index and adding it to `fn`.
 
-Let’s walk through an example to see how the algorithm works:
+7. **Variable Initialization**
+	```cpp
+	    long l = 1, r;
+	```
+	Two variables, `l` and `r`, are initialized. `l` will track the left index for the next rotation, and `r` will be used for the right index.
 
-**Example:**
-```cpp
-maxRotateFunction([4, 3, 2, 6]);
-```
+8. **Function Update**
+	```cpp
+	    long newfn = fn;
+	```
+	A new variable `newfn` is initialized to store the updated value of the rotate function during each iteration.
 
-1. **Initial Values:**
-   - `sum = 4 + 3 + 2 + 6 = 15`
-   - `fn = 0 * 4 + 1 * 3 + 2 * 2 + 3 * 6 = 0 + 3 + 4 + 18 = 25`
-   
-2. **First rotation (`k=1`):**
-   - `l = 1, r = 4`
-   - `removed = 0 * 4 = 0`
-   - `added = 4 * 6 = 24`
-   - `newfn = 25 - 0 + 24 - 15 = 34`
-   - `fn = max(25, 34) = 34`
+9. **Rotation Loop**
+	```cpp
+	    while(l < n) {
+	```
+	The loop continues as long as `l` is less than the size of the array, ensuring each rotation is processed.
 
-3. **Second rotation (`k=2`):**
-   - `l = 2, r = 5`
-   - `removed = 1 * 3 = 3`
-   - `added = 5 * 4 = 20`
-   - `newfn = 34 - 3 + 20 - 15 = 36`
-   - `fn = max(34, 36) = 36`
+10. **Right Index Calculation**
+	```cpp
+	        r = l + n - 1;
+	```
+	The right index `r` is calculated based on `l` and the size of the array.
 
-4. **Third rotation (`k=3`):**
-   - `l = 3, r = 6`
-   - `removed = 2 * 2 = 4`
-   - `added = 6 * 3 = 18`
-   - `newfn = 36 - 4 + 18 - 15 = 35`
-   - `fn = max(36, 35) = 36`
+11. **Element Removal**
+	```cpp
+	        long removed = (l - 1) *nums[l -1];
+	```
+	The value of the element at `l - 1` is removed from the calculation, as it is no longer part of the rotated array.
 
-- **Final result:** `36`.
+12. **Element Addition**
+	```cpp
+	        long added = r * nums[r % n];
+	```
+	The value of the element at index `r % n` is added to the calculation.
 
----
+13. **Function Update**
+	```cpp
+	        newfn = newfn - removed + added - sum;
+	```
+	The value of `newfn` is updated by removing the contribution of the previous element and adding the contribution of the new element.
 
-### 📈 Complexity Analysis
+14. **Max Function Update**
+	```cpp
+	        fn = max(fn, newfn);
+	```
+	The value of `fn` is updated to be the maximum of its current value and the updated `newfn`.
 
-- **Time Complexity**: `O(n)` where `n` is the length of the array. We only iterate over the array once to compute the initial values and then perform `n-1` rotations, each requiring constant time operations.
-  
-- **Space Complexity**: `O(1)`. We use a constant amount of space, as the solution does not require any additional data structures that scale with the input size.
+15. **Index Update**
+	```cpp
+	        l++;
+	```
+	The left index `l` is incremented to move to the next rotation.
 
----
+16. **Final Result**
+	```cpp
+	    return fn;
+	```
+	The function returns the maximum value of the rotate function after all rotations are processed.
 
-### 🏁 Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution efficiently calculates the maximum possible value of `F(k)` for an array of integers using a rotation-based approach. Instead of recalculating the function from scratch for each rotation, we incrementally adjust the value based on the previous rotation. With a linear time complexity of `O(n)` and constant space complexity of `O(1)`, this algorithm is both time and space efficient.
+The solution runs in linear time O(n) because we only need to compute the sum and adjust the function in each step.
 
-💡 **Takeaway:** This problem showcases the power of leveraging previous computations and building upon them, rather than recalculating everything from scratch. It’s a great example of optimizing performance while keeping things simple and clear.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only use a few variables to keep track of the sum and function values.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotate-function/description/)
 

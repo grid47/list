@@ -14,77 +14,100 @@ img_src = ""
 youtube = "oVvmwsm2dKY"
 youtube_upload_date="2023-03-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/oVvmwsm2dKY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary tree and a positive integer `k`. The level sum in the tree is the sum of the node values that lie at the same level. Return the `k`th largest level sum in the tree. If there are fewer than `k` levels, return -1. Nodes are on the same level if they are at the same distance from the root.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary tree and a positive integer `k`.
+- **Example:** `For example, `root = [5, 8, 9, 2, 1, 3, 7, 4, 6], k = 2`.`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- 1 <= Node.val <= 10^6
+	- 1 <= k <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-        int passThePillow(int n, int time) {
-            return n - abs(n - 1 - time % (n * 2 - 2));
-        }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the `k`th largest level sum in the tree, or -1 if there are fewer than `k` levels.
+- **Example:** `For input `root = [5, 8, 9, 2, 1, 3, 7, 4, 6], k = 2`, the output is `13`.`
+- **Constraints:**
+	- The result will always be a valid integer or -1.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the `k`th largest level sum in the tree. We need to traverse the tree, calculate the level sums, and then find the kth largest value.
 
-In this problem, we are given `n` people in a circle, and a pillow is passed around between them. Initially, the first person holds the pillow, and it is passed clockwise until it reaches the last person. Once it reaches the last person, the pillow is passed in the reverse direction (counterclockwise) back to the first person. This cycle continues indefinitely.
+- 1. Traverse the tree level by level using a breadth-first search (BFS).
+- 2. Calculate the sum of node values at each level.
+- 3. Sort the level sums in descending order.
+- 4. Return the `k`th largest level sum, or -1 if there are fewer than `k` levels.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is valid and contains no cycles.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `root = [5, 8, 9, 2, 1, 3, 7, 4, 6], k = 2``  \
+  **Explanation:** The level sums are [5, 17, 13, 10]. The 2nd largest sum is 13.
 
-The task is to determine which person will have the pillow after a given number of passes, `time`. The problem can be reduced to finding the position of the person who holds the pillow after `time` passes.
+{{< dots >}}
+## Approach 🚀
+The approach is to use a breadth-first search (BFS) to traverse the tree level by level and compute the sum of node values at each level. Once all level sums are calculated, we sort them and return the `k`th largest sum.
 
-### Approach
+### Initial Thoughts 💭
+- We need to process each level of the tree and calculate the sum of node values at that level.
+- Using BFS will allow us to traverse the tree level by level efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty tree inputs will be given.
+- The solution should handle large trees efficiently, with up to 100,000 nodes.
+- If `k` is larger than the number of levels, the solution should return -1.
+- The tree will have at least 2 nodes, and `k` will always be a valid integer between 1 and the number of levels.
+{{< dots >}}
+## Code 💻
+```cpp
+    int passThePillow(int n, int time) {
+        return n - abs(n - 1 - time % (n * 2 - 2));
+    }
+```
 
-To solve this problem, we need to simulate the passing of the pillow in a circular manner. However, instead of simulating each pass one-by-one, we can calculate the final position directly using the modulo operation, which helps us account for the circular nature of the passing.
+This function calculates the position of the person holding the pillow after a given amount of time in a game, considering the total number of participants `n`.
 
-1. **Circular Nature**:
-   - The pillow moves in a pattern that can be thought of as a cycle. Starting from person `1`, the pillow moves clockwise until it reaches person `n`, after which it moves counterclockwise back to person `1`.
-   - The cycle of the pillow movement is periodic with a length of `2n - 2` (since after `n - 1` steps, the pillow will have traveled a full circle, and then it moves back towards `1`).
-   - This periodic nature means that after `time` passes, the pillow's position can be determined by considering the remainder when `time` is divided by `2n - 2`. This is known as taking the modulo `2n - 2`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	    int passThePillow(int n, int time) {
+	```
+	Define the function `passThePillow`, which takes two arguments: `n` (the number of participants) and `time` (the number of seconds elapsed).
 
-2. **Mathematical Formulation**:
-   - The time passes around the cycle, so after `time % (2n - 2)` passes, we can determine the final position by observing if the pillow is being passed in the clockwise or counterclockwise direction.
-   - Specifically, the final position depends on whether the remainder after the modulo operation is less than `n` or greater than or equal to `n`.
+2. **Calculation**
+	```cpp
+	        return n - abs(n - 1 - time % (n * 2 - 2));
+	```
+	Return the position of the person holding the pillow after `time` seconds, adjusting for the cyclic nature of the game. The formula accounts for the alternating movement back and forth between participants.
 
-### Code Breakdown (Step by Step)
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-1. **Function Definition**:
-   ```cpp
-   int passThePillow(int n, int time) {
-   ```
-   The function `passThePillow` takes two arguments:
-   - `n`: The number of people in the circle.
-   - `time`: The number of passes of the pillow.
+The time complexity is O(n log n) due to the sorting step, where n is the number of levels in the tree.
 
-2. **Modular Arithmetic to Determine Position**:
-   ```cpp
-   return n - abs(n - 1 - time % (n * 2 - 2));
-   ```
-   - `time % (n * 2 - 2)`: First, we reduce the number of passes to a value within the range of one full cycle, which has a length of `2n - 2`. This ensures we are only considering the relevant portion of the cycle.
-   
-   - `n * 2 - 2`: This is the length of the cycle of passing the pillow. The pillow first moves from person `1` to person `n` (clockwise), and then moves from person `n` back to person `1` (counterclockwise), forming a periodic cycle of length `2n - 2`.
-   
-   - `time % (n * 2 - 2)`: The modulo operation gives the remainder after dividing `time` by `2n - 2`, effectively "wrapping" the number of passes back to the range of one full cycle.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-   - `abs(n - 1 - time % (n * 2 - 2))`: After obtaining the remainder, we calculate the difference from the position `n - 1` (which corresponds to the last person in the clockwise direction). The `abs` function ensures that the result is always positive, representing the correct position in the cycle.
-   
-   - `n - abs(n - 1 - time % (n * 2 - 2))`: Finally, we subtract the result from `n` to compute the actual position of the person who holds the pillow. This formula accounts for both the clockwise and counterclockwise directions in the circular passing.
+The space complexity is O(n) for storing the level sums.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-- **Time Complexity**:
-  The time complexity of this solution is \(O(1)\), as the computation involves a few arithmetic operations and a modulo operation, all of which are constant time operations.
-
-- **Space Complexity**:
-  The space complexity is also \(O(1)\), as the function only uses a constant amount of extra space for intermediate variables.
-
-### Conclusion
-
-This solution provides an efficient way to determine the position of the person holding the pillow after `time` passes, without the need to simulate each individual pass. By leveraging modular arithmetic, we efficiently compute the position based on the periodic nature of the pillow passing. The solution runs in constant time and uses constant space, making it optimal for large inputs. The formula effectively handles both the clockwise and counterclockwise movements in the circular pattern, ensuring that the correct result is returned for any number of passes.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pass-the-pillow/description/)
 

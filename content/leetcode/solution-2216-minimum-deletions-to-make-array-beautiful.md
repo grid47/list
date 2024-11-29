@@ -14,81 +14,122 @@ img_src = ""
 youtube = "VgyrTbLZie8"
 youtube_upload_date="2022-03-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/VgyrTbLZie8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array nums. The array is considered beautiful if it satisfies the following conditions: the length of nums is even, and for every index i that is even (i % 2 == 0), nums[i] should not be equal to nums[i + 1]. You can remove any number of elements from nums to make it beautiful. Your goal is to return the minimum number of elements that need to be removed to make the array beautiful.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 0-indexed integer array nums.
+- **Example:** `nums = [4, 4, 6, 7, 8, 9]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minDeletion(vector<int>& nums) {
-        int ans = 0;
-        for(int i = 0; i < nums.size() - 1; i++)
-            if(nums[i] == nums[i + 1] && (i - ans) % 2 == 0) ans++;
-        
-        return ans + (nums.size() - ans) % 2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of elements to delete from nums to make it beautiful.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The array may have duplicates that need to be removed.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum number of deletions required to make the array beautiful.
 
-The problem asks to minimize the number of deletions in an array `nums` so that the remaining array satisfies the following condition: every two consecutive elements in the array should not be the same, and the length of the remaining array should be even. Specifically, you are required to return the minimum number of deletions needed to make the array satisfy these conditions.
+- Iterate through the array and identify the elements that need to be removed.
+- Check for pairs of adjacent elements where nums[i] == nums[i + 1] and ensure the length remains even.
+- Count the number of deletions required and return the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array may contain duplicate elements.
+- The array must be modified by deletion of elements only.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [4, 4, 6, 7, 8, 9]`  \
+  **Explanation:** For this input, the first two elements are the same, so one of them must be deleted. The final beautiful array will be [4, 6, 7, 8, 9]. Hence, the minimum number of deletions required is 1.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to find and remove adjacent duplicate elements in the array while ensuring the final array length is even.
 
-To solve this problem efficiently, we need to iterate through the array and check for pairs of consecutive elements that are the same. If two consecutive elements are the same, we need to delete one of them. Additionally, we need to ensure that after all deletions, the remaining number of elements in the array is even.
-
-This problem can be broken down into two main tasks:
-1. **Handling consecutive duplicate elements**: Whenever two consecutive elements are the same, we need to delete one of them to ensure no two consecutive elements are equal.
-2. **Ensuring even length**: After deleting duplicates, we may be left with an odd number of elements. In that case, we need to delete one more element to make the length even.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
+### Initial Thoughts 💭
+- Adjacent duplicates should be deleted to meet the criteria of a beautiful array.
+- After deletion, the array should still maintain an even length.
+- We can use a greedy approach to iterate through the array, checking adjacent elements, and remove them when necessary.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array is considered beautiful by definition.
+- The solution should efficiently handle arrays with up to 100,000 elements.
+- The array may have all elements identical, or no duplicates at all.
+- Ensure that the input size is within the constraints and handle edge cases appropriately.
+{{< dots >}}
+## Code 💻
 ```cpp
-int ans = 0;
+int minDeletion(vector<int>& nums) {
+    int ans = 0;
+    for(int i = 0; i < nums.size() - 1; i++)
+        if(nums[i] == nums[i + 1] && (i - ans) % 2 == 0) ans++;
+    
+    return ans + (nums.size() - ans) % 2;
+}
 ```
-- `ans` will hold the count of deletions needed to remove consecutive duplicate elements.
 
-#### Step 2: Iterate Through the Array to Find Consecutive Duplicates
-```cpp
-for(int i = 0; i < nums.size() - 1; i++)
-    if(nums[i] == nums[i + 1] && (i - ans) % 2 == 0) ans++;
-```
-- This loop iterates through the array from index `0` to `nums.size() - 2`.
-- For each element, it checks whether the current element `nums[i]` is equal to the next element `nums[i + 1]`. If they are equal, it indicates that a deletion is required.
-- We also check the condition `(i - ans) % 2 == 0`. This ensures that we only count deletions for every second pair of consecutive duplicates, as we need the remaining array to have an even number of elements. The subtraction `i - ans` accounts for the deletions that have already been made, ensuring the correct indexing after deletions.
+This is the complete solution for finding the minimum number of deletions needed to make the elements of the array alternate. The function `minDeletion` loops through the array and checks for consecutive duplicate elements that would violate the alternating condition.
 
-#### Step 3: Handle the Even Length Condition
-```cpp
-return ans + (nums.size() - ans) % 2;
-```
-- After iterating through the array and counting the deletions needed to remove consecutive duplicates, the next task is to ensure the length of the remaining array is even.
-- The expression `(nums.size() - ans) % 2` calculates whether the number of remaining elements is even or odd. If it is odd, we need to delete one more element to make it even, so we add `1` to `ans` in this case.
-- The final result is returned as `ans + (nums.size() - ans) % 2`, which gives the total number of deletions needed to meet both conditions (removing consecutive duplicates and ensuring the array length is even).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minDeletion(vector<int>& nums) {
+	```
+	This is the function declaration for `minDeletion`, which takes a vector of integers `nums` and returns an integer representing the minimum deletions required.
 
-### Complexity Analysis
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	The variable `ans` is initialized to 0. This will keep track of the number of deletions made to ensure the array alternates.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the length of the array `nums`.
-  - The solution involves a single loop that iterates over the array once. Each comparison and calculation within the loop is O(1), making the total time complexity linear with respect to the size of the input array.
+3. **For Loop**
+	```cpp
+	    for(int i = 0; i < nums.size() - 1; i++)
+	```
+	This loop iterates through the array `nums`, stopping at the second-to-last element to compare each element with the next one.
 
-#### Space Complexity:
-- **O(1)**, constant space.
-  - The space complexity is constant because the solution only uses a few extra variables (`ans`), and the space used does not depend on the size of the input array. No additional data structures (such as arrays or hash maps) are used.
+4. **Conditional Check**
+	```cpp
+	        if(nums[i] == nums[i + 1] && (i - ans) % 2 == 0) ans++;
+	```
+	This conditional checks if two consecutive elements are equal and if the difference between the current index `i` and `ans` is even. If both conditions are true, it increments `ans` to indicate a necessary deletion.
 
-### Conclusion
+5. **Return Statement**
+	```cpp
+	    return ans + (nums.size() - ans) % 2;
+	```
+	Return the result by adding the number of deletions (`ans`) to the parity correction, which ensures the final array has an even number of elements after deletions.
 
-This solution efficiently solves the problem with a time complexity of O(n) and space complexity of O(1). The approach is straightforward and leverages a single pass through the array to identify consecutive duplicates and adjust the array's length to be even.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of the input array, as we only iterate through the array once.
+- **Average Case:** O(n) where n is the length of the input array.
+- **Worst Case:** O(n) where n is the length of the input array.
 
-By iterating through the array and counting the deletions needed for consecutive duplicates, and ensuring that the final array has an even length, the algorithm effectively minimizes the number of deletions required. The check for even-length arrays ensures that the solution accounts for edge cases where removing duplicates leaves an odd number of elements.
+The solution processes the array in a single pass.
 
-This method is optimal for large input sizes, as it processes the array in linear time, and the constant space usage makes it memory-efficient. Overall, this approach provides a clear, concise, and efficient solution to the problem.
+### Space Complexity 💾
+- **Best Case:** O(1) for the space used during the iteration.
+- **Worst Case:** O(1) for the space used during the iteration.
+
+The solution only uses a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/description/)
 

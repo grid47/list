@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "XVuQxVej6y8"
 youtube_upload_date="2020-12-29"
 youtube_thumbnail="https://i.ytimg.com/vi/XVuQxVej6y8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,153 +28,180 @@ youtube_thumbnail="https://i.ytimg.com/vi/XVuQxVej6y8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the head of a singly linked list. Your task is to remove the nth node from the end of the list and return the updated list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a singly linked list and an integer n.
+- **Example:** `head = [1, 2, 3, 4, 5], n = 2`
+- **Constraints:**
+	- 1 <= sz <= 30
+	- 0 <= Node.val <= 100
+	- 1 <= n <= sz
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* node = head;
-        int sz = 0;
-        while(node) {
-            node = node->next;
-            sz++;
-        }
-        node = head;
-        int tgt = sz - n;
-        if(sz == n) return head->next;
-        for(int i = 0; i < tgt-1; i++)
-            node = node->next;
-        if(node->next)
-        node->next = node->next->next;
-        
-        return head;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the updated list after removing the nth node from the end.
+- **Example:** `[1, 2, 3, 5]`
+- **Constraints:**
+	- The list will always have at least n nodes.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove the nth node from the end of the list by first calculating the size of the list and then locating the node to remove.
+
+- Calculate the length of the linked list.
+- Determine the target node to remove (n-th node from the end).
+- Traverse the list again to find the node just before the target node.
+- Update the next pointer of the previous node to skip the target node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The list is non-empty and contains at least one node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [1, 2, 3, 4, 5], n = 2`  \
+  **Explanation:** The list is [1, 2, 3, 4, 5]. Removing the 2nd node from the end (node 4) results in [1, 2, 3, 5].
+
+{{< dots >}}
+## Approach 🚀
+The approach involves first calculating the length of the list, then finding the target node and updating the list pointers to remove the desired node.
+
+### Initial Thoughts 💭
+- The key observation is that once we know the length of the list, we can easily identify the node to remove.
+- First, count the total number of nodes, then subtract n to get the target node's index from the start of the list. Traverse the list again to remove that node.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one node in the linked list.
+- The list size is small, so performance with large inputs is not a concern.
+- If the list contains only one node, removing it will leave the list empty.
+- The list will always contain at least n nodes.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* node = head;
+    int sz = 0;
+    while(node) {
+        node = node->next;
+        sz++;
     }
-};
-{{< /highlight >}}
----
-
-### 🎯 **Problem Statement: Remove the N-th Node from the End of a Linked List**
-
-You are given a singly linked list and an integer `n`. Your task is to remove the **n-th node from the end of the list** and return the updated list. The list will always have at least one node, and the value of `n` is guaranteed to be valid.
-
-#### Input:
-- A singly linked list with at least one node.
-- An integer `n`, which specifies the position of the node to remove, counted from the end of the list.
-
-#### Output:
-- A singly linked list with the `n-th` node removed.
-
-The goal is to solve this problem efficiently, ideally in linear time complexity.
-
----
-
-### 🧑‍💻 **Approach**
-
-There are two main methods to solve this problem:
-
-1. **Two-pass approach (Length-first)**:
-   - **First pass**: Traverse the linked list to compute its length (`sz`).
-   - **Second pass**: Traverse again to reach the node just before the one that needs to be removed (i.e., the `sz - n - 1` node), and adjust the `next` pointer to skip the target node.
-
-2. **One-pass approach (Two pointers)**:
-   - Use two pointers, `first` and `second`, such that the distance between them is always `n` nodes.
-   - Move the `first` pointer `n` steps ahead, then move both pointers forward simultaneously. When `first` reaches the end, `second` will point to the node just before the one to be removed.
-
-For simplicity, we will use the **two-pass approach**, which is more intuitive and easier to implement.
-
----
-
-### 🧑‍💻 **Code Breakdown (Step by Step)**
-
-```cpp
-class Solution {
-public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
+    node = head;
+    int tgt = sz - n;
+    if(sz == n) return head->next;
+    for(int i = 0; i < tgt-1; i++)
+        node = node->next;
+    if(node->next)
+    node->next = node->next->next;
+    
+    return head;
+}
 ```
-- The function `removeNthFromEnd` takes the head of the linked list (`ListNode* head`) and an integer `n`, which indicates the position of the node to remove (counted from the end of the list).
 
-```cpp
-        ListNode* node = head;
-        int sz = 0;
-```
-- `node` is a pointer to traverse the list, and `sz` stores the length of the list.
+This code implements the `removeNthFromEnd` function, which removes the nth node from the end of a linked list.
 
-```cpp
-        while(node) {
-            node = node->next;
-            sz++;
-        }
-```
-- The first `while` loop traverses the entire list, counting the number of nodes by incrementing `sz`. After the loop, `sz` holds the length of the list.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* removeNthFromEnd(ListNode* head, int n) {
+	```
+	Declare the `removeNthFromEnd` function, which takes a pointer to the head of a linked list `head` and an integer `n` as input and returns a pointer to the head of the modified linked list.
 
-```cpp
-        node = head;
-        int tgt = sz - n;
-```
-- We reset `node` to point back to the head. The target index (`tgt`) is calculated as `sz - n`, which points to the node just before the one we need to remove.
+2. **Variable Initialization**
+	```cpp
+	    ListNode* node = head;
+	```
+	Initialize a pointer `node` to the head of the linked list.
 
-```cpp
-        if(sz == n) return head->next;
-```
-- If `n` equals `sz`, this means the node to remove is the head of the list itself. In this case, we simply return `head->next`, effectively removing the head node.
+3. **Variable Initialization**
+	```cpp
+	    int sz = 0;
+	```
+	Initialize a variable `sz` to store the size of the linked list.
 
-```cpp
-        for(int i = 0; i < tgt-1; i++)
-            node = node->next;
-```
-- This loop moves `node` to the node just before the one we need to remove (i.e., `tgt - 1` steps).
+4. **Loop Iteration**
+	```cpp
+	    while(node) {
+	```
+	Start a loop to iterate through the linked list.
 
-```cpp
-        if(node->next)
-        node->next = node->next->next;
-```
-- After reaching the node just before the target, we update its `next` pointer to skip over the target node by linking to the node after it.
+5. **Pointer Manipulation**
+	```cpp
+	        node = node->next;
+	```
+	Move the `node` pointer to the next node in the linked list.
 
-```cpp
-        return head;
-    }
-};
-```
-- Finally, we return the updated head of the list. This might be the same as the original head if the target node was not the head, or a new head if the target node was the first one.
+6. **Increment**
+	```cpp
+	        sz++;
+	```
+	Increment the `sz` variable to count the number of nodes.
 
----
+7. **Variable Initialization**
+	```cpp
+	    node = head;
+	```
+	Reset the `node` pointer to the head of the linked list.
 
-### ⏱️ **Time and Space Complexity**
+8. **Calculations**
+	```cpp
+	    int tgt = sz - n;
+	```
+	Calculate the target index `tgt` of the node to be removed, which is the size of the list minus `n`.
 
-#### Time Complexity:
-- **First pass**: The first loop traverses the entire list to calculate the size, taking `O(N)` time, where `N` is the number of nodes in the list.
-- **Second pass**: The second loop moves `tgt-1` steps to reach the node just before the one to be removed. In the worst case, this also takes `O(N)` time.
+9. **Conditional Return**
+	```cpp
+	    if(sz == n) return head->next;
+	```
+	If `n` is equal to the size of the list, it means we need to remove the head node. Return the next node as the new head.
 
-Thus, the overall **time complexity** is **O(N)**, where `N` is the length of the list.
+10. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < tgt-1; i++)
+	```
+	Iterate `tgt-1` times to reach the node before the node to be removed.
 
-#### Space Complexity:
-- The space complexity is **O(1)** because the algorithm uses a constant amount of extra space for the `sz` variable and the `node` pointer. No additional data structures that grow with input size are used.
+11. **Pointer Manipulation**
+	```cpp
+	        node = node->next;
+	```
+	Move the `node` pointer to the next node in each iteration.
 
----
+12. **Conditional Update**
+	```cpp
+	    if(node->next)
+	```
+	Check if the next node exists.
 
-### 💡 **Conclusion**
+13. **Pointer Manipulation**
+	```cpp
+	    node->next = node->next->next;
+	```
+	If the next node exists, skip it by setting the `next` pointer of the current node to the node after the next node.
 
-This solution removes the `n-th` node from the end of a singly linked list in **O(N)** time and **O(1)** space. By calculating the list's length first and then finding the target node to remove, the algorithm is both simple and efficient. While the **one-pass approach** using two pointers can also be used, the two-pass approach is more intuitive and easier to implement.
+14. **Return Value**
+	```cpp
+	    return head;
+	```
+	Return the head of the modified linked list.
 
-**Key takeaways**:
-- The first pass computes the length of the list.
-- The second pass finds the node just before the one to be deleted and removes it.
-- The updated list is returned, with the target node removed.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution is effective for typical use cases and handles edge cases, such as removing the head node, without added complexity.
+In all cases, the solution involves two passes through the linked list, resulting in linear time complexity.
 
-Happy coding! 🚀
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only need a few extra variables for tracking the list size and current node.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
 

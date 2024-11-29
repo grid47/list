@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "t0svbzZ1PWM"
 youtube_upload_date="2021-04-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/t0svbzZ1PWM/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,66 +28,57 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/t0svbzZ1PWM/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string s and a dictionary of words wordDict, return true if s can be segmented into a space-separated sequence of one or more words from the dictionary. The same word in the dictionary can be reused multiple times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s and a list of words wordDict.
+- **Example:** `Input: s = 'applepie', wordDict = ['apple', 'pie']`
+- **Constraints:**
+	- 1 <= s.length <= 300
+	- 1 <= wordDict.length <= 1000
+	- 1 <= wordDict[i].length <= 20
+	- s and wordDict[i] consist of only lowercase English letters.
+	- All strings in wordDict are unique.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> memo;
-    bool wordBreak(string s, vector<string>& dict) {
-        map<string, bool> mp;
-        for(string d: dict)
-            mp[d] = true;
-        memo.resize(s.size(), -1);
-        return bt(s, 0, mp);
-    }
-    
-    bool bt(string s, int idx, map<string, bool> &mp) {
-        
-        if(idx == s.size()) return true;
-        
-        if(memo[idx] != -1) return memo[idx];
-        
-        for(int i = idx; i < s.size(); i++) {
-            if(mp.count(s.substr(idx, i - idx + 1)) && bt(s, i + 1, mp))
-                return memo[idx] = true;
-        }
-        
-        return memo[idx] = false;
-    }
-    
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean value indicating whether the string s can be segmented into words from the dictionary wordDict.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output is true if s can be segmented into valid words from wordDict, otherwise false.
 
-### 🧩 **Understanding the Problem: Word Break**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if the string s can be segmented into words from the dictionary wordDict.
 
-The problem asks us to determine if a string `s` can be segmented into valid words from a given dictionary `dict`. This means we need to break down the string into space-separated substrings that all exist in the dictionary.
+- 1. Use dynamic programming to check if the string can be segmented.
+- 2. Iterate through the string s and use a memoization technique to avoid redundant calculations.
+- 3. For each substring of s, check if it exists in the wordDict and recursively check if the rest of the string can be segmented.
+{{< dots >}}
+### Problem Assumptions ✅
+- The wordDict contains only lowercase English words.
+- The input string s and words in wordDict are non-empty and consist of lowercase letters only.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'applepie', wordDict = ['apple', 'pie']`  \
+  **Explanation:** The string 'applepie' can be split into 'apple' and 'pie', both of which are present in the dictionary, hence the answer is true.
 
-For example:
-- **Input**: `s = "leetcode"`, `dict = ["leet", "code"]`
-- **Output**: `true` because the string `"leetcode"` can be segmented into the words `"leet"` and `"code"`.
+{{< dots >}}
+## Approach 🚀
+The approach involves dynamic programming and memoization to determine if the string can be segmented into words from the dictionary.
 
----
-
-### 🔄 **Approach: Dynamic Programming with Memoization**
-
-We can approach this problem using **dynamic programming (DP)** and **memoization** to avoid redundant calculations. This technique will allow us to check all possible segmentations efficiently.
-
-Here’s how we can break it down:
-
-1. **Memoization**: We’ll use a `memo` array to store results for subproblems. If we’ve already computed whether a substring can be segmented, we’ll reuse the result to avoid recalculating.
-2. **Backtracking**: We will iterate through the string, trying to match a substring with any word in the dictionary. Once we find a match, we recursively check the remaining part of the string.
-3. **Dictionary Lookup**: We store the dictionary words in a **map** for constant-time lookup to check if a substring is a valid word.
-
-By combining memoization and backtracking, we can make this solution more efficient, avoiding redundant checks.
-
----
-
-### 🖥️ **Code Breakdown: Step-by-Step**
-
-#### 1️⃣ **Initialization of Memoization and Map**
-
+### Initial Thoughts 💭
+- This is a classical dynamic programming problem where we try to break the string down into smaller valid substrings.
+- We will need to track which parts of the string have already been checked to avoid redundant work.
+{{< dots >}}
+### Edge Cases 🌐
+- If s is an empty string, return true since it trivially satisfies the condition.
+- For large inputs, the solution must efficiently handle strings up to 300 characters and wordDict with up to 1000 entries.
+- Consider strings where no valid segmentation is possible, such as 'banana' with dictionary ['apple', 'pie'].
+- Ensure that the solution uses dynamic programming or other efficient methods to handle large inputs within the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<int> memo;
 bool wordBreak(string s, vector<string>& dict) {
@@ -96,83 +88,128 @@ bool wordBreak(string s, vector<string>& dict) {
     memo.resize(s.size(), -1);
     return bt(s, 0, mp);
 }
-```
 
-- **Memo Array**: We initialize a `memo` array of size `s.size()`, where each element is initially set to `-1`, meaning no substring has been processed yet. As we compute the results for each substring, we will update this array with `true` or `false` based on whether the substring can be segmented.
-- **Dictionary Map**: We convert the `dict` array into a `map` (`mp`), where each word from the dictionary is stored as a key for **constant-time lookup**.
-- **Backtracking**: We start the backtracking function `bt` from the first index of the string `s`.
-
-#### 2️⃣ **Backtracking Function (`bt`)**
-
-```cpp
 bool bt(string s, int idx, map<string, bool> &mp) {
-    if (idx == s.size()) return true;
-    if (memo[idx] != -1) return memo[idx];
     
-    for (int i = idx; i < s.size(); i++) {
-        if (mp.count(s.substr(idx, i - idx + 1)) && bt(s, i + 1, mp))
+    if(idx == s.size()) return true;
+    
+    if(memo[idx] != -1) return memo[idx];
+    
+    for(int i = idx; i < s.size(); i++) {
+        if(mp.count(s.substr(idx, i - idx + 1)) && bt(s, i + 1, mp))
             return memo[idx] = true;
     }
     
     return memo[idx] = false;
 }
+
 ```
 
-- **Base Case**: 
-   ```cpp
-   if (idx == s.size()) return true;
-   ```
-   If the index `idx` reaches the end of the string, it means we've successfully segmented the string, so we return `true`.
-   
-- **Memoization Lookup**:
-   ```cpp
-   if (memo[idx] != -1) return memo[idx];
-   ```
-   If we’ve already computed the result for this index, we return it to avoid redundant work.
+This code is an implementation of the Word Break problem, where a string is checked to see if it can be segmented into words from a given dictionary. It uses dynamic programming with memoization and recursion to optimize the process.
 
-- **Backtracking Loop**:
-   ```cpp
-   for (int i = idx; i < s.size(); i++) {
-       if (mp.count(s.substr(idx, i - idx + 1)) && bt(s, i + 1, mp))
-           return memo[idx] = true;
-   }
-   ```
-   We loop through all possible substrings starting from `idx` and check if it exists in the dictionary. If it does, we recursively call `bt` for the remaining part of the string starting at index `i + 1`. This process continues until the string is fully segmented.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<int> memo;
+	```
+	A vector `memo` is declared to store the results of subproblems for dynamic programming. It will store -1 for uncalculated indices and a boolean value for each index after it is processed.
 
-- **Return Result**:
-   ```cpp
-   return memo[idx] = false;
-   ```
-   If no valid segmentation is found from index `idx`, we mark this index as `false` in the `memo` array and return `false`.
+2. **Function Definition (wordBreak)**
+	```cpp
+	bool wordBreak(string s, vector<string>& dict) {
+	```
+	This is the main function `wordBreak`, which checks if the string `s` can be segmented using words from the dictionary `dict`.
 
-#### 3️⃣ **Final Result**
+3. **Dictionary Setup**
+	```cpp
+	    map<string, bool> mp;
+	```
+	A map `mp` is created to store the dictionary words as keys with their values set to `true`, for efficient look-up during segmentation.
 
-After backtracking completes, the result will be stored in `memo[0]`, indicating whether the string can be segmented starting from the first index.
+4. **Populate Dictionary Map**
+	```cpp
+	    for(string d: dict)
+	```
+	This loop iterates over the dictionary `dict` and adds each word to the map `mp`.
 
----
+5. **Set Map Values**
+	```cpp
+	        mp[d] = true;
+	```
+	The map `mp` is populated with each word from the dictionary as the key and `true` as the value to indicate that the word exists in the dictionary.
 
-### 🧮 **Time and Space Complexity**
+6. **Resize Memoization Vector**
+	```cpp
+	    memo.resize(s.size(), -1);
+	```
+	The `memo` vector is resized to the size of the string `s` and initialized with -1 to indicate that no positions have been processed yet.
 
-#### ⏱️ **Time Complexity**:
-- **O(n²)**: For each index `idx`, we try all possible substrings from `idx` to `i`. Each substring check takes `O(n)` time. Therefore, the total time complexity is \( O(n^2) \), where `n` is the length of the string.
+7. **Recursive Call (bt)**
+	```cpp
+	    return bt(s, 0, mp);
+	```
+	The `bt` function is called with the initial index `0` and the map `mp` to start checking if the string `s` can be segmented from the beginning.
 
-#### 🧳 **Space Complexity**:
-- **O(n)**: We use an array `memo` of size `n` to store results for each index. Additionally, the `map` for the dictionary takes space proportional to the number of words, but this doesn’t affect the overall complexity.
+8. **Helper Function Definition (bt)**
+	```cpp
+	bool bt(string s, int idx, map<string, bool> &mp) {
+	```
+	This is the definition of the helper function `bt`, which recursively checks if the string can be segmented from index `idx` onward.
 
----
+9. **Base Case (end of string)**
+	```cpp
+	    if(idx == s.size()) return true;
+	```
+	If the current index `idx` is equal to the length of the string `s`, it means the entire string has been successfully segmented, so return `true`.
 
-### 🎯 **Conclusion: Efficient Segmentation**
+10. **Check Memoization**
+	```cpp
+	    if(memo[idx] != -1) return memo[idx];
+	```
+	If the value at `memo[idx]` is not -1, it means this subproblem has already been solved, so return the stored result.
 
-This approach is a very efficient way to determine whether a string can be segmented into valid words from a dictionary. The solution employs:
-- **Backtracking** to explore all possible ways to segment the string.
-- **Memoization** to avoid redundant work by storing previously computed results.
+11. **Start Loop (check substrings)**
+	```cpp
+	    for(int i = idx; i < s.size(); i++) {
+	```
+	This loop checks all possible substrings starting from the current index `idx`.
 
-#### Key Insights:
-- **Memoization**: Avoids recalculating results for the same substring, optimizing the time complexity.
-- **Backtracking**: Explores all potential segmentations while pruning unnecessary computations.
-- **Constant-Time Dictionary Lookup**: Using a `map` ensures fast checks when looking for valid words in the dictionary.
+12. **Check Substring in Dictionary**
+	```cpp
+	        if(mp.count(s.substr(idx, i - idx + 1)) && bt(s, i + 1, mp))
+	```
+	If the substring from `idx` to `i` exists in the dictionary (checked via `mp.count`) and the remaining part of the string can be segmented (recursively checked using `bt`), proceed.
 
-This solution works efficiently for moderate-sized strings with a time complexity of \( O(n^2) \), making it suitable for most practical input sizes.
+13. **Memoize True**
+	```cpp
+	            return memo[idx] = true;
+	```
+	If a valid segmentation is found, store the result as `true` in `memo[idx]` and return `true`.
+
+14. **Memoize False**
+	```cpp
+	    return memo[idx] = false;
+	```
+	If no valid segmentation is found after checking all substrings, store the result as `false` in `memo[idx]` and return `false`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2), where n is the length of the string. This occurs when we have to check all substrings of the string.
+- **Average Case:** O(n^2) in most cases.
+- **Worst Case:** O(n^2) in the worst case, where n is the length of the string.
+
+In the worst case, each substring of s must be checked, leading to a time complexity of O(n^2).
+
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the length of the string.
+- **Worst Case:** O(n), where n is the length of the string. This is due to the space needed for memoization.
+
+The space complexity is O(n) due to the storage needed for the memoization array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/word-break/description/)
 

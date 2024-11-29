@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ovGnWmf2sew"
 youtube_upload_date="2021-04-14"
 youtube_thumbnail="https://i.ytimg.com/vi/ovGnWmf2sew/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,174 +28,277 @@ youtube_thumbnail="https://i.ytimg.com/vi/ovGnWmf2sew/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given two non-empty linked lists where each node contains a single digit representing a non-negative integer. Add the two numbers and return the sum as a linked list, ensuring the most significant digit is at the head of the list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Each linked list represents a number where each node contains a single digit. The lists do not have leading zeros, except for the number 0 itself.
+- **Example:** `[3,4,2], [6,5,7]`
+- **Constraints:**
+	- 1 <= Number of nodes in each linked list <= 100
+	- Node.val >= 0 and Node.val <= 9
+	- No leading zeros in the numbers except for 0 itself
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        stack<int> s1, s2;
-        
-        while(l1) {
-            s1.push(l1->val);
-            l1 = l1->next;
-        }
-        
-        while(l2) {
-            s2.push(l2->val);
-            l2 = l2->next;
-        }
-        
-        int cry = 0;
-        
-        ListNode* node = NULL, *prv = NULL;
-        
-        while(!s1.empty() || !s2.empty()) {
-            
-            if(!s1.empty()) {
-                cry += s1.top();
-                s1.pop();
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a linked list representing the sum of the two numbers with the most significant digit at the head.
+- **Example:** `[9,0,0,9]`
+- **Constraints:**
+	- The result linked list must be formatted in the same way as the input.
 
-            if(!s2.empty()) {
-                cry += s2.top();
-                s2.pop();
-            }
-            
-            node = new ListNode(cry % 10);
-            node->next = prv;
-            
-            prv = node;
-            cry /= 10;
-            
-        }
-        
-        if(cry != 0) {
-            node = new ListNode(cry %10);
-            node->next = prv;
-            
-        }
-        
-        return node;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Add two numbers represented by two linked lists and return the sum as a linked list.
+
+- 1. Use two stacks to store the digits of the linked lists as we traverse them.
+- 2. Pop the digits from the stacks, add them with the carry, and create new nodes to store the result.
+- 3. If a carry exists after processing both lists, create a new node for the carry.
+- 4. Ensure that the final linked list is built without reversing the input lists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The linked lists are not empty and contain valid digits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[3,4,2], [6,5,7]`  \
+  **Explanation:** The two numbers are 342 and 657. Their sum is 999, which is represented as [9, 0, 0, 9].
+
+- **Input:** `[1,2], [3,4,5]`  \
+  **Explanation:** The two numbers are 12 and 345. Their sum is 357, represented as [3, 5, 7].
+
+{{< dots >}}
+## Approach 🚀
+This problem can be solved by simulating the addition process using stacks to reverse the linked lists and adding corresponding digits along with a carry.
+
+### Initial Thoughts 💭
+- The problem asks to avoid reversing the linked lists, which suggests using a stack to reverse the order temporarily.
+- We can use two stacks to simulate the addition process from the most significant digit to the least significant digit.
+{{< dots >}}
+### Edge Cases 🌐
+- If any linked list is empty, it should be treated as 0.
+- For larger inputs (up to 100 nodes), ensure that the solution handles the carry correctly and efficiently.
+- Consider cases where the numbers involve carry overs, such as adding [9,9] and [1].
+- Ensure that the algorithm runs in O(n) time and uses O(n) space for stack operations.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    stack<int> s1, s2;
+    
+    while(l1) {
+        s1.push(l1->val);
+        l1 = l1->next;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to add two numbers that are represented as linked lists. Each node in the linked list represents a single digit of the number, where the digits are stored in reverse order (i.e., the least significant digit comes first). The goal is to add these two numbers and return the sum, also represented as a linked list in reverse order.
-
-For example:
-- Input: `l1 = [2,4,3]`, `l2 = [5,6,4]`
-- Output: `[7,0,8]`
-  
-This is because the numbers represented are `342` and `465`, and their sum is `807`, which is stored in reverse order.
-
-### Approach
-
-To solve this problem, we can follow the following steps:
-
-1. **Use Stacks to Reverse the Linked Lists**:
-   - Since the digits are stored in reverse order in the input lists, it makes sense to push each digit onto a stack. The stack allows us to pop the digits in reverse order, so we can simulate adding the numbers from the least significant digit to the most significant digit.
-
-2. **Add the Two Numbers Digit by Digit**:
-   - While there are digits left in either of the input lists, we pop the digits from the stacks, add them, and keep track of any carry from the addition.
-   - If the sum of the digits exceeds 9, we set a carry for the next addition.
-
-3. **Handle Carry**:
-   - After adding all digits, if there is any remaining carry (i.e., the sum of the last digits is greater than 9), we need to create a new node with the carry as the value.
-
-4. **Construct the Result Linked List**:
-   - Since we need to return the result in reverse order, we can maintain a linked list that is built from the last digit to the first. We start by creating new nodes and linking them together.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Push Digits to Stacks
-```cpp
-stack<int> s1, s2;
-while(l1) {
-    s1.push(l1->val);
-    l1 = l1->next;
-}
-while(l2) {
-    s2.push(l2->val);
-    l2 = l2->next;
-}
-```
-- First, we initialize two stacks `s1` and `s2` to store the digits of `l1` and `l2` respectively.
-- We iterate over the linked lists `l1` and `l2`, pushing the values of each node onto the respective stack until we reach the end of both lists.
-
-#### Step 2: Add Digits with Carry
-```cpp
-int cry = 0;
-ListNode* node = NULL, *prv = NULL;
-while(!s1.empty() || !s2.empty()) {
-    if(!s1.empty()) {
-        cry += s1.top();
-        s1.pop();
+    
+    while(l2) {
+        s2.push(l2->val);
+        l2 = l2->next;
     }
-    if(!s2.empty()) {
-        cry += s2.top();
-        s2.pop();
+    
+    int cry = 0;
+    
+    ListNode* node = NULL, *prv = NULL;
+    
+    while(!s1.empty() || !s2.empty()) {
+        
+        if(!s1.empty()) {
+            cry += s1.top();
+            s1.pop();
+        }
+
+        if(!s2.empty()) {
+            cry += s2.top();
+            s2.pop();
+        }
+        
+        node = new ListNode(cry % 10);
+        node->next = prv;
+        
+        prv = node;
+        cry /= 10;
+        
     }
-    node = new ListNode(cry % 10);
-    node->next = prv;
-    prv = node;
-    cry /= 10;
+    
+    if(cry != 0) {
+        node = new ListNode(cry %10);
+        node->next = prv;
+        
+    }
+    
+    return node;
 }
 ```
-- We initialize a variable `cry` to keep track of the carry, and pointers `node` and `prv` to build the new linked list.
-- We enter a loop that continues until both stacks are empty.
-  - Inside the loop, we check if the stacks `s1` and `s2` are non-empty. If they are, we pop the top element from each stack and add it to `cry`.
-  - We create a new node with the value `cry % 10` (the digit part of the sum) and update the `next` pointer of this new node to point to the previously created node (to reverse the order).
-  - After that, we update the carry (`cry`) to be the integer division of `cry` by 10, so we can carry over the value if the sum of digits was greater than 9.
 
-#### Step 3: Handle Remaining Carry
-```cpp
-if(cry != 0) {
-    node = new ListNode(cry % 10);
-    node->next = prv;
-}
-```
-- After the loop ends, if there is any leftover carry (`cry != 0`), we create a new node for it and link it to the result list.
+This function adds two numbers represented by two linked lists in reverse order. It utilizes stacks to reverse the linked lists and performs the addition step by step while carrying over the value. Finally, it returns the sum as a new linked list.
 
-#### Step 4: Return the Result
-```cpp
-return node;
-```
-- Finally, we return the head of the newly created linked list, which holds the sum of the two numbers.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+	```
+	This is the function definition where two linked lists (l1 and l2) are passed as arguments.
 
-### Complexity
+2. **Stack Initialization**
+	```cpp
+	    stack<int> s1, s2;
+	```
+	Two stacks are created to hold the digits of the two linked lists.
 
-#### Time Complexity:
-- **Pushing digits to stacks**: We iterate through the entire length of both input lists (`l1` and `l2`), which takes `O(n + m)` time where `n` is the length of `l1` and `m` is the length of `l2`.
-- **Adding digits**: In the second loop, we process the digits from the stacks and add them. Since we process each digit once, this also takes `O(n + m)` time.
-- **Overall Time Complexity**: The time complexity is `O(n + m)`, where `n` and `m` are the lengths of the two input lists.
+3. **Stack Population (L1)**
+	```cpp
+	    while(l1) {
+	```
+	Traverse the first linked list and push each node's value onto stack s1.
 
-#### Space Complexity:
-- We use two stacks to hold the digits of the input linked lists, which each take `O(n)` and `O(m)` space respectively.
-- Additionally, we create a new linked list to hold the result, which takes `O(n + m)` space.
-- **Overall Space Complexity**: The space complexity is `O(n + m)` due to the use of the stacks and the result list.
+4. **Push Operation**
+	```cpp
+	        s1.push(l1->val);
+	```
+	Push the current value of the node in l1 onto stack s1.
 
-### Conclusion
+5. **Linked List Traversal**
+	```cpp
+	        l1 = l1->next;
+	```
+	Move to the next node in the first linked list.
 
-This approach solves the problem efficiently by:
-- Reversing the linked lists using stacks.
-- Adding the digits from the least significant to the most significant, while handling carries.
-- Constructing the result linked list in the correct order by using a simple iterative process.
+6. **Stack Population (L2)**
+	```cpp
+	    while(l2) {
+	```
+	Traverse the second linked list and push each node's value onto stack s2.
 
-The algorithm is optimal with a time complexity of `O(n + m)` and space complexity of `O(n + m)`, making it suitable for large input sizes. The solution is simple, easy to understand, and leverages stack operations to reverse the digit order and handle carries effectively.
+7. **Push Operation**
+	```cpp
+	        s2.push(l2->val);
+	```
+	Push the current value of the node in l2 onto stack s2.
+
+8. **Linked List Traversal**
+	```cpp
+	        l2 = l2->next;
+	```
+	Move to the next node in the second linked list.
+
+9. **Carry Initialization**
+	```cpp
+	    int cry = 0;
+	```
+	Initialize a variable to store the carry during addition.
+
+10. **Node Initialization**
+	```cpp
+	    ListNode* node = NULL, *prv = NULL;
+	```
+	Initialize pointers for the result linked list: node for the current node and prv for the previous node.
+
+11. **Addition Loop**
+	```cpp
+	    while(!s1.empty() || !s2.empty()) {
+	```
+	Start the loop to add corresponding digits from the two stacks while there are still elements in either stack.
+
+12. **Addition from S1**
+	```cpp
+	        if(!s1.empty()) {
+	```
+	Check if stack s1 is not empty and add its top element to the carry.
+
+13. **Update Carry**
+	```cpp
+	            cry += s1.top();
+	```
+	Add the top element of stack s1 to the carry.
+
+14. **Pop Operation**
+	```cpp
+	            s1.pop();
+	```
+	Pop the top element of stack s1.
+
+15. **Addition from S2**
+	```cpp
+	        if(!s2.empty()) {
+	```
+	Check if stack s2 is not empty and add its top element to the carry.
+
+16. **Update Carry**
+	```cpp
+	            cry += s2.top();
+	```
+	Add the top element of stack s2 to the carry.
+
+17. **Pop Operation**
+	```cpp
+	            s2.pop();
+	```
+	Pop the top element of stack s2.
+
+18. **Create Node**
+	```cpp
+	        node = new ListNode(cry % 10);
+	```
+	Create a new node with the value of the current digit (cry % 10).
+
+19. **Update Node Links**
+	```cpp
+	        node->next = prv;
+	```
+	Link the newly created node to the previous node.
+
+20. **Update Previous Node**
+	```cpp
+	        prv = node;
+	```
+	Update the previous node pointer to the current node.
+
+21. **Update Carry**
+	```cpp
+	        cry /= 10;
+	```
+	Update the carry by dividing it by 10.
+
+22. **Create Final Node**
+	```cpp
+	    if(cry != 0) {
+	```
+	Check if there is a remaining carry to create a final node.
+
+23. **Final Carry Node**
+	```cpp
+	        node = new ListNode(cry %10);
+	```
+	Create a final node with the carry value.
+
+24. **Update Node Links**
+	```cpp
+	        node->next = prv;
+	```
+	Link the final node to the result list.
+
+25. **Return Final Node**
+	```cpp
+	    return node;
+	```
+	Return the head of the newly created linked list that represents the sum.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the longer linked list.
+- **Average Case:** O(n), as each node is processed once.
+- **Worst Case:** O(n), as we process both lists in full.
+
+The time complexity is linear because we traverse each list once.
+
+### Space Complexity 💾
+- **Best Case:** O(n), since we still need stacks for the input digits.
+- **Worst Case:** O(n), due to the use of two stacks for storing the digits of both lists.
+
+The space complexity is linear because we use stacks to hold the digits before performing the addition.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-two-numbers-ii/description/)
 

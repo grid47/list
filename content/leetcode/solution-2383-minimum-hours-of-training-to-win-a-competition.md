@@ -14,139 +14,186 @@ img_src = ""
 youtube = "ueU_i8H3-9g"
 youtube_upload_date="2022-08-21"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ueU_i8H3-9g/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are preparing for a competition where you will face a series of opponents. Each opponent has a specified energy and experience. To defeat an opponent, your energy and experience must both exceed theirs. Before entering the competition, you are allowed to train to improve your energy or experience. For every hour of training, you can either increase your energy or your experience by one. You need to determine the minimum number of training hours required to defeat all the opponents in order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, initialEnergy and initialExperience, representing your initial energy and experience, respectively. It also includes two arrays, energy and experience, where each element corresponds to an opponent's energy and experience.
+- **Example:** `initialEnergy = 5, initialExperience = 3, energy = [1, 4, 3, 2], experience = [2, 6, 3, 1]`
+- **Constraints:**
+	- n == energy.length == experience.length
+	- 1 <= n <= 100
+	- 1 <= initialEnergy, initialExperience, energy[i], experience[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minNumberOfHours(int ie, int ig, vector<int>& energy, vector<int>& experience) 
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of hours of training required to defeat all the opponents.
+- **Example:** `Output: 8`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To compute the minimum number of training hours, we need to ensure that after each training hour, either your energy or experience is increased to ensure you can defeat each opponent.
+
+- 1. Iterate through the opponents in order.
+- 2. For each opponent, check if you have enough energy and experience to defeat them.
+- 3. If not, determine the necessary amount of training required to surpass their energy and experience.
+- 4. Keep track of the total number of training hours spent and update your energy and experience as you defeat each opponent.
+{{< dots >}}
+### Problem Assumptions ✅
+- You will always be able to train enough to defeat all opponents.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: initialEnergy = 5, initialExperience = 3, energy = [1, 4, 3, 2], experience = [2, 6, 3, 1]`  \
+  **Explanation:** In this example, you need to train for 8 hours: 6 hours to increase your energy and 2 hours to increase your experience. After training, you'll be able to defeat all the opponents in order, reducing your energy and increasing your experience as you progress.
+
+- **Input:** `Input: initialEnergy = 2, initialExperience = 4, energy = [1], experience = [3]`  \
+  **Explanation:** In this case, you already have enough energy and experience to defeat the single opponent, so no training is required.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be approached by simulating the competition, calculating the necessary training hours before each opponent to ensure you have the required energy and experience.
+
+### Initial Thoughts 💭
+- You can train at any point, so it's important to train only as much as necessary.
+- By carefully selecting the most efficient use of training hours, we can minimize the total number of hours spent.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one opponent to face.
+- The solution must handle the maximum number of opponents (100) efficiently.
+- If your initial energy and experience are already sufficient, the result will be 0.
+- Ensure the solution works efficiently for the maximum possible input size.
+{{< dots >}}
+## Code 💻
+```cpp
+int minNumberOfHours(int ie, int ig, vector<int>& energy, vector<int>& experience) 
+{
+    int hours = 0;
+    for (int i = 0; i < energy.size(); i++)
     {
-        int hours = 0;
-        for (int i = 0; i < energy.size(); i++)
+        if (energy[i] >= ie)
         {
-            if (energy[i] >= ie)
-            {
-                hours += energy[i] - ie + 1;
-                ie += energy[i] - ie + 1;
-            }
-            if (experience[i] >= ig)
-            {
-                hours += experience[i] - ig + 1;
-                ig += experience[i] - ig + 1;
-            }
-			// At the end increase the experience by experience[i] and decrease the energy by energy[i].
-            ie -= energy[i];
-            ig += experience[i];
+            hours += energy[i] - ie + 1;
+            ie += energy[i] - ie + 1;
         }
-        return hours;
+        if (experience[i] >= ig)
+        {
+            hours += experience[i] - ig + 1;
+            ig += experience[i] - ig + 1;
+        }
+			// At the end increase the experience by experience[i] and decrease the energy by energy[i].
+        ie -= energy[i];
+        ig += experience[i];
     }
-};
-{{< /highlight >}}
----
+    return hours;
+}
+```
 
-### Problem Statement
+This function calculates the minimum number of hours needed to improve a person's energy and experience to meet the required thresholds, adjusting the values after each improvement.
 
-The problem asks to determine the minimum number of hours required for a character to reach a certain level of energy and experience by completing a series of tasks. Specifically:
-- We are given the initial energy `ie` and experience `ig` of the character.
-- There are multiple tasks to perform, where each task has an associated energy cost and experience gain.
-- For each task, the character needs to have more energy than the required energy of the task, and more experience than the required experience of the task. If the character does not have enough energy or experience, they will need to work on improving them.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minNumberOfHours(int ie, int ig, vector<int>& energy, vector<int>& experience) 
+	```
+	This line declares the function `minNumberOfHours` that accepts initial energy (`ie`), initial experience (`ig`), and vectors `energy` and `experience` to track improvements.
 
-The objective is to calculate the **minimum number of hours** required to increase the character's energy and experience enough to complete all tasks.
+2. **Variable Declaration**
+	```cpp
+	    int hours = 0;
+	```
+	A variable `hours` is initialized to 0 to track the total number of hours required for energy and experience adjustments.
 
-### Approach
+3. **For Loop**
+	```cpp
+	    for (int i = 0; i < energy.size(); i++)
+	```
+	A `for` loop that iterates through each energy and experience value.
 
-To solve this problem, we can break down the problem in terms of **two key components**:
-1. **Energy requirement**: For each task, if the character’s current energy is less than the energy required for the task, they will need to increase it. The required increase will be equal to the difference between the required energy and the current energy plus one (because they need more energy than the task requires).
-2. **Experience requirement**: Similarly, if the character’s experience is less than the experience required for the task, they will need to increase their experience. The required increase will be the difference between the required experience and the current experience plus one.
+4. **Condition Check**
+	```cpp
+	        if (energy[i] >= ie)
+	```
+	Check if the energy value at index `i` is greater than or equal to the initial energy `ie`.
 
-**Main Idea**:
-- We process each task and compare the current energy and experience with the required values.
-- If either energy or experience is insufficient, we calculate how many hours (i.e., units of increase) are needed to make them sufficient.
-- After each task, we update the energy and experience values accordingly, ensuring that the character is always ready for the next task.
+5. **Energy Adjustment**
+	```cpp
+	            hours += energy[i] - ie + 1;
+	```
+	If the energy at index `i` is sufficient, increase `hours` by the difference between energy and initial energy, plus one.
 
-### Code Breakdown (Step by Step)
+6. **Energy Update**
+	```cpp
+	            ie += energy[i] - ie + 1;
+	```
+	Update `ie` to the new value by adding the improvement in energy.
 
-1. **Function Definition**:
-   ```cpp
-   int minNumberOfHours(int ie, int ig, vector<int>& energy, vector<int>& experience) 
-   ```
-   The function `minNumberOfHours` takes the following parameters:
-   - `ie`: The initial energy of the character.
-   - `ig`: The initial experience of the character.
-   - `energy`: A vector representing the energy required for each task.
-   - `experience`: A vector representing the experience required for each task.
+7. **Condition Check**
+	```cpp
+	        if (experience[i] >= ig)
+	```
+	Check if the experience value at index `i` is greater than or equal to the initial experience `ig`.
 
-2. **Initialize the Total Hours**:
-   ```cpp
-   int hours = 0;
-   ```
-   - We start by initializing a variable `hours` to 0. This will keep track of the total number of hours the character spends improving their energy and experience.
+8. **Experience Adjustment**
+	```cpp
+	            hours += experience[i] - ig + 1;
+	```
+	If the experience at index `i` is sufficient, increase `hours` by the difference between experience and initial experience, plus one.
 
-3. **Iterate Over Each Task**:
-   ```cpp
-   for (int i = 0; i < energy.size(); i++)
-   ```
-   - We loop through each task, indexed by `i`, to evaluate if the character has enough energy and experience to complete the task.
+9. **Experience Update**
+	```cpp
+	            ig += experience[i] - ig + 1;
+	```
+	Update `ig` to the new value by adding the improvement in experience.
 
-4. **Check Energy Requirement**:
-   ```cpp
-   if (energy[i] >= ie)
-   {
-       hours += energy[i] - ie + 1;
-       ie += energy[i] - ie + 1;
-   }
-   ```
-   - For each task, if the energy required for the task `energy[i]` is greater than or equal to the current energy `ie`, we need to increase the character's energy.
-   - The number of hours needed to do this is `energy[i] - ie + 1` because the character needs at least one more energy unit than the task requires.
-   - After increasing the energy, we update the character’s current energy `ie`.
+10. **Comment**
+	```cpp
+				// At the end increase the experience by experience[i] and decrease the energy by energy[i].
+	```
+	This comment explains the final adjustment to `ie` and `ig` after processing each energy and experience value.
 
-5. **Check Experience Requirement**:
-   ```cpp
-   if (experience[i] >= ig)
-   {
-       hours += experience[i] - ig + 1;
-       ig += experience[i] - ig + 1;
-   }
-   ```
-   - Similarly, if the experience required for the task `experience[i]` is greater than or equal to the current experience `ig`, we need to increase the character's experience.
-   - The number of hours needed to do this is `experience[i] - ig + 1` because the character needs at least one more experience point than the task requires.
-   - After increasing the experience, we update the character’s current experience `ig`.
+11. **Energy Update**
+	```cpp
+	        ie -= energy[i];
+	```
+	Decrease `ie` by the energy value at index `i` to reflect the consumption of energy.
 
-6. **Update Energy and Experience After Task**:
-   ```cpp
-   ie -= energy[i];
-   ig += experience[i];
-   ```
-   - After completing the task, we adjust the character’s energy and experience:
-     - The energy `ie` is reduced by the energy cost `energy[i]` of the task.
-     - The experience `ig` is increased by the experience gained `experience[i]` from the task.
+12. **Experience Update**
+	```cpp
+	        ig += experience[i];
+	```
+	Increase `ig` by the experience value at index `i` to reflect the gain in experience.
 
-7. **Return the Total Hours**:
-   ```cpp
-   return hours;
-   ```
-   - Once we have processed all tasks, we return the total `hours` the character spent increasing their energy and experience.
+13. **Return Statement**
+	```cpp
+	    return hours;
+	```
+	Return the total number of hours calculated.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. **Time Complexity**:
-   - The time complexity of this solution is **O(n)**, where `n` is the number of tasks. We are simply iterating over the `energy` and `experience` vectors once, performing constant time operations in each iteration.
-   - Since there are no nested loops, the time complexity is linear in terms of the number of tasks.
+The time complexity is linear in relation to the number of opponents, as we process each opponent in sequence.
 
-2. **Space Complexity**:
-   - The space complexity is **O(1)** since we are only using a few variables (`hours`, `ie`, `ig`) to keep track of the state, and we do not use any additional data structures that grow with the input size.
-   - The space complexity is constant, independent of the number of tasks or the size of the input vectors.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Conclusion
+The space complexity is constant, as we only use a few variables to keep track of the energy, experience, and training hours.
 
-This solution efficiently calculates the minimum number of hours required to ensure that the character’s energy and experience are sufficient to complete all tasks. By processing each task in sequence and adjusting the character’s energy and experience as needed, we ensure that the solution is both time-efficient and space-efficient. The solution runs in **O(n)** time, making it suitable for large inputs with many tasks.
+**Happy Coding! 🎉**
 
-The problem is an example of how a simple greedy approach can be applied to problems involving increasing resources (like energy and experience) to meet certain thresholds. This type of problem is common in competitive programming and can often be solved with a direct simulation approach, as shown here. The solution also illustrates how efficient use of variables and conditional checks can minimize unnecessary computations, making it a clean and optimal approach to the problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-hours-of-training-to-win-a-competition/description/)
 

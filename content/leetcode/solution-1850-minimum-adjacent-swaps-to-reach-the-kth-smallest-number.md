@@ -14,126 +14,215 @@ img_src = ""
 youtube = "_83XSvgd_is"
 youtube_upload_date="2021-05-02"
 youtube_thumbnail="https://i.ytimg.com/vi/_83XSvgd_is/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `num`, representing a large integer, and an integer `k`. Return the minimum number of adjacent swaps required to transform `num` into the `k`-th smallest wonderful integer that is greater than `num` and is a permutation of its digits.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `num` which represents a large integer and an integer `k`.
+- **Example:** `"1234", 2`
+- **Constraints:**
+	- 2 <= num.length <= 1000
+	- 1 <= k <= 1000
+	- num consists only of digits
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int getMinSwaps(string num, int k) {
-        string og = num;
-        while(k--) {
-            next_permutation(num.begin(), num.end());
-        }
-        return steps(og, num);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of adjacent swaps required to transform `num` into the `k`-th smallest wonderful integer.
+- **Example:** `1`
+- **Constraints:**
 
-    int steps(string s1, string s2) {
-        int sz = s1.size();
-        int i = 0, j = 0;
-        int res = 0;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the `k`-th smallest wonderful integer and then compute the minimum number of adjacent swaps to transform the input `num` into that integer.
 
-        while(i < sz) {
-            j = i;
-            while(s1[i] != s2[j]) j++;
-            while(i < j) {
-                swap(s2[j], s2[j - 1]);
-                j--;
-                res++;
-            }
-            i++;
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+- Find the k-th smallest permutation of the digits of `num` that is greater than `num`.
+- Count the number of adjacent swaps required to transform `num` into this k-th smallest permutation.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always consist of at least two digits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"1234", 2`  \
+  **Explanation:** The second smallest wonderful number is '1243'. To transform '1234' to '1243', only one swap is needed: swap the last two digits.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to find the k-th smallest wonderful permutation of the string `num` and count how many adjacent swaps it takes to get from `num` to that permutation.
 
-The goal of the problem is to determine the minimum number of adjacent swaps required to transform a given number represented as a string into its k-th lexicographical permutation. For example, if the input number is "273" and \( k = 1 \), the next permutation of "273" is "327". The task is to find out how many adjacent swaps are needed to turn "273" into "327".
-
-### Approach
-
-To solve the problem, we can break the solution into two primary components:
-
-1. **Finding the k-th Permutation**: We will use the `next_permutation` function to generate the k-th lexicographical permutation of the number.
-
-2. **Calculating the Minimum Swaps**: We will then calculate the minimum number of adjacent swaps required to convert the original number into the k-th permutation. This involves finding the positions of the characters and counting how many swaps are needed to bring them into their correct order.
-
-### Code Breakdown (Step by Step)
-
-Here’s the implementation of the solution:
-
+### Initial Thoughts 💭
+- We need to generate the k-th smallest permutation greater than the original number.
+- Using a permutation generator to find the next permutations of the string `num` can help us reach the desired result.
+{{< dots >}}
+### Edge Cases 🌐
+- The string `num` is guaranteed to have a length of at least 2.
+- The input string can have up to 1000 digits, so efficient string manipulation is necessary.
+- Consider cases where the string `num` contains repeated digits or leading zeros.
+- The solution must handle strings with lengths from 2 to 1000 efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int getMinSwaps(string num, int k) {
-        string og = num;
-        while(k--) {
-            next_permutation(num.begin(), num.end());
-        }
-        return steps(og, num);
+int getMinSwaps(string num, int k) {
+    string og = num;
+    while(k--) {
+        next_permutation(num.begin(), num.end());
     }
-```
-- **Class Definition**: We define a class `Solution` that contains the method `getMinSwaps`.
-- **Input Parameters**: The method takes a string `num` representing the number and an integer `k` that indicates how many permutations to generate.
-- **Original Number Storage**: We store the original number in a variable `og` to compare later.
-- **Next Permutation Loop**: We call `next_permutation` \( k \) times on `num` to get the k-th permutation of the string.
-- **Return Swap Steps**: After obtaining the k-th permutation, we call the `steps` function to calculate the minimum swaps required and return the result.
+    return steps(og, num);
+}
 
-```cpp
-    int steps(string s1, string s2) {
-        int sz = s1.size();
-        int i = 0, j = 0;
-        int res = 0;
-```
-- **Steps Function**: We define a helper function `steps` that takes two strings: `s1` (original number) and `s2` (k-th permutation).
-- **Initialization**: We initialize variables `sz` to store the size of the strings, and `res` to keep track of the total number of swaps.
+int steps(string s1, string s2) {
+    int sz = s1.size();
+    int i = 0, j = 0;
+    int res = 0;
 
-```cpp
-        while(i < sz) {
-            j = i;
-            while(s1[i] != s2[j]) j++;
-```
-- **Outer While Loop**: We iterate through each character in `s1` with index `i`.
-- **Find Matching Character**: For each character in `s1`, we search for its matching character in `s2` starting from index `j`.
-
-```cpp
-            while(i < j) {
-                swap(s2[j], s2[j - 1]);
-                j--;
-                res++;
-            }
-            i++;
+    while(i < sz) {
+        j = i;
+        while(s1[i] != s2[j]) j++;
+        while(i < j) {
+            swap(s2[j], s2[j - 1]);
+            j--;
+            res++;
         }
-        return res;
+        i++;
     }
+    return res;
+}
 ```
-- **Inner While Loop**: If the character in `s1` at index `i` is not at the same position in `s2`, we perform adjacent swaps to bring it into position. Each swap increases the `res` counter.
-- **Return Swaps Count**: After processing all characters, we return the total count of swaps.
 
-### Complexity
+This is the complete solution for finding the minimum number of swaps needed to convert a string into its next permutation a given number of times (k). The function `steps` calculates the number of swaps required to rearrange one string into another.
 
-- **Time Complexity**: 
-  - The time complexity for finding the k-th permutation using `next_permutation` is \( O(n \cdot k) \), where \( n \) is the length of the string and \( k \) is the number of permutations we are generating. 
-  - The swap calculation in the `steps` function is \( O(n^2) \) in the worst case since each character might need to be swapped multiple times until it reaches its correct position. 
-  - Thus, the overall complexity can be approximated as \( O(n^2 + n \cdot k) \).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int getMinSwaps(string num, int k) {
+	```
+	Declares the function `getMinSwaps`, which takes a string `num` and an integer `k` to compute the minimum number of swaps.
 
-- **Space Complexity**: 
-  - The space complexity is \( O(n) \) for storing the original number and any additional space required for swap operations.
+2. **Variable Assignment**
+	```cpp
+	    string og = num;
+	```
+	Stores the original string `num` in a variable `og` to later compute the difference after permutations.
 
-### Conclusion
+3. **Looping**
+	```cpp
+	    while(k--) {
+	```
+	A loop that runs `k` times to generate the next permutation of the string.
 
-The provided solution efficiently computes the minimum number of adjacent swaps needed to achieve the k-th lexicographical permutation of a given number represented as a string. The use of `next_permutation` simplifies the task of generating permutations, while the `steps` function systematically counts the necessary swaps.
+4. **Library Functions**
+	```cpp
+	        next_permutation(num.begin(), num.end());
+	```
+	Uses the standard library function `next_permutation` to generate the next lexicographically greater permutation of the string `num`.
 
-This method illustrates an effective blend of combinatorial generation (via permutations) and localized sorting (via adjacent swaps). The approach is both straightforward and efficient for the problem constraints typically found in competitive programming and algorithmic challenges.
+5. **Function Call**
+	```cpp
+	    return steps(og, num);
+	```
+	Calls the `steps` function to calculate the number of swaps required to convert the original string `og` into the newly generated permutation `num`.
 
-Overall, the solution showcases essential programming techniques, such as string manipulation, the use of standard library functions like `next_permutation`, and efficient counting of operations, making it a robust method for solving the problem of transforming one string into another through minimum adjacent swaps.
+6. **Function Definition**
+	```cpp
+	int steps(string s1, string s2) {
+	```
+	Defines the helper function `steps`, which calculates the number of swaps needed to convert string `s1` into string `s2`.
+
+7. **Variable Initialization**
+	```cpp
+	    int sz = s1.size();
+	```
+	Stores the size of the string `s1` in variable `sz`.
+
+8. **Variable Initialization**
+	```cpp
+	    int i = 0, j = 0;
+	```
+	Initializes two indices, `i` and `j`, to iterate over the strings.
+
+9. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes `res` to store the count of swaps made during the conversion.
+
+10. **Looping**
+	```cpp
+	    while(i < sz) {
+	```
+	A loop that iterates over the string `s1`.
+
+11. **Variable Assignment**
+	```cpp
+	        j = i;
+	```
+	Sets `j` to `i`, which will help find the position of the character in `s2`.
+
+12. **Looping**
+	```cpp
+	        while(s1[i] != s2[j]) j++;
+	```
+	Finds the position of the character `s1[i]` in `s2` starting from index `i`.
+
+13. **Looping**
+	```cpp
+	        while(i < j) {
+	```
+	A nested loop that moves the found character in `s2` to its correct position by swapping.
+
+14. **Swap Operations**
+	```cpp
+	            swap(s2[j], s2[j - 1]);
+	```
+	Swaps the characters in `s2` to move the character at position `j` to position `j-1`.
+
+15. **Variable Update**
+	```cpp
+	            j--;
+	```
+	Decrements `j` to continue moving the character to the left.
+
+16. **Variable Update**
+	```cpp
+	            res++;
+	```
+	Increments the swap counter `res` for each swap made.
+
+17. **Variable Update**
+	```cpp
+	        i++;
+	```
+	Increments the outer loop index `i`.
+
+18. **Return**
+	```cpp
+	    return res;
+	```
+	Returns the total number of swaps made to convert `s1` into `s2`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity depends on finding the k-th smallest permutation and counting the swaps. The worst case occurs when the permutations are far apart.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for storing the string and its permutations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/description/)
 

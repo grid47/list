@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Pcd1ii9P9ZI"
 youtube_upload_date="2021-09-13"
 youtube_thumbnail="https://i.ytimg.com/vi/Pcd1ii9P9ZI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,110 +28,133 @@ youtube_thumbnail="https://i.ytimg.com/vi/Pcd1ii9P9ZI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val. Modify the array nums such that the first k elements contain the elements which are not equal to val, and the remaining elements of nums are not important. Return k.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer val.
+- **Example:** `For example, nums = [4, 1, 1, 4], val = 4.`
+- **Constraints:**
+	- 0 <= nums.length <= 100
+	- 0 <= nums[i] <= 50
+	- 0 <= val <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int removeElement(vector<int>& nums, int val) {
-        int i = 0;
-        
-        for(int node: nums)
-            if(node != val)
-            {
-                nums[i] = node;
-                i++;
-            }
-        
-        return i;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer k, the number of elements in nums which are not equal to val. The first k elements in the array nums must be the elements that are not equal to val, and the order of these elements can be altered.
+- **Example:** `For nums = [4, 1, 1, 4], val = 4, the output is 2, with nums = [1, 1, _, _].`
+- **Constraints:**
+	- The size of nums is at most 100.
+	- The value of val is between 0 and 100.
 
-### 🌟 **Removing All Occurrences of a Specific Value from a List**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to modify the array in-place such that all elements equal to val are removed, and return the number of remaining elements that are not equal to val.
 
-This problem asks you to remove all occurrences of a specific value from a list (in this case, a vector of integers), while maintaining the order of the remaining elements. The challenge is to perform this removal **in-place**, which means no extra space should be used for a new list.
+- 1. Initialize an index pointer i to 0.
+- 2. Traverse the array nums, and for each element not equal to val, place it in the position indicated by the index pointer i and increment i.
+- 3. Return i as the number of elements not equal to val.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [4, 1, 1, 4], val = 4, the output is 2, with nums = [1, 1, _, _].`  \
+  **Explanation:** We iterate over the array and shift the elements that are not equal to val to the front, resulting in the first two elements being [1, 1], and the rest of the array does not matter.
 
----
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the array and shifting elements that are not equal to val towards the front. This ensures that the first k elements contain the elements that are not equal to val.
 
-#### 🧠 **The Simple Idea**
+### Initial Thoughts 💭
+- We can modify the array in-place by maintaining an index pointer to place the non-val elements at the beginning.
+- By iterating over the array and copying non-val elements to the front, we can avoid using extra space.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the output will be 0.
+- Ensure the solution handles arrays with up to 100 elements efficiently.
+- If all elements are equal to val, the output will be 0, and the array will be unchanged.
+- The solution must modify the array in-place without allocating additional space.
+{{< dots >}}
+## Code 💻
+```cpp
+int removeElement(vector<int>& nums, int val) {
+    int i = 0;
+    
+    for(int node: nums)
+        if(node != val)
+        {
+            nums[i] = node;
+            i++;
+        }
+    
+    return i;
+}
+```
 
-The task is to "shift" all elements that aren't equal to the specified value (`val`) to the front of the list. This can be done efficiently with two pointers:
-1. **One pointer** will traverse the list.
-2. **The other pointer** will track the position of the next available slot for valid elements.
+This code removes all occurrences of a given value 'val' from a vector 'nums' and returns the new length of the vector.
 
-By the end of the traversal, you'll have the desired elements packed at the beginning of the list, and the final position of the second pointer will give the new length of the list.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int removeElement(vector<int>& nums, int val) {
+	```
+	This line declares a function named 'removeElement' that takes a vector of integers 'nums' and a target value 'val' as input and returns an integer representing the new length of the vector after removing the specified value.
 
----
+2. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	This line initializes an integer variable 'i' to 0. This variable will be used as an index to keep track of the position to insert elements that are not equal to 'val'.
 
-#### 👇 **Steps to Solve the Problem:**
+3. **Loop Iteration**
+	```cpp
+	    for(int node: nums)
+	```
+	This line starts a `for-each` loop to iterate through each element 'node' in the vector 'nums'.
 
-1. **Initialize a Pointer**  
-   Start with an index `i` that will keep track of the position for placing elements that are **not equal to** `val`.
+4. **Conditional Check**
+	```cpp
+	        if(node != val)
+	```
+	This line checks if the current element 'node' is not equal to the target value 'val'.
 
-2. **Iterate Through the List**  
-   Go through each element of the list. If the element is not `val`, place it in the position indicated by `i` and increment `i`.
+5. **Array Manipulation**
+	```cpp
+	            nums[i] = node;
+	```
+	If the current element is not equal to 'val', it's copied to the position 'i' in the vector, effectively overwriting the previous element at that index.
 
-3. **Return the New Length**  
-   At the end of the iteration, the value of `i` will represent the number of elements that are not equal to `val`. This is the length of the modified list.
+6. **Index Update**
+	```cpp
+	            i++;
+	```
+	The index 'i' is incremented to point to the next position where a non-matching element should be placed.
 
----
+7. **Return**
+	```cpp
+	    return i;
+	```
+	After the loop, the variable 'i' holds the new length of the vector, which is the number of elements that are not equal to 'val'. The function returns this value.
 
-#### 🛠 **Breaking Down the Code:**
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. **Initialize the Pointer**  
-   ```cpp
-   int i = 0;
-   ```
-   Here, `i` will act as the marker for where to place the next valid (non-`val`) element.
+The time complexity is O(n), where n is the length of the input array, as we only iterate over the array once.
 
-2. **Loop Through the List**  
-   ```cpp
-   for(int node: nums)
-   ```
-   This `for-each` loop iterates through each element in the `nums` vector. We check each element (`node`) to see if it should stay in the list.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-3. **Check and Shift Valid Elements**  
-   ```cpp
-   if(node != val)
-   {
-       nums[i] = node;
-       i++;
-   }
-   ```
-   If `node` is not equal to `val`, we place it at index `i` and then increment `i`. This ensures that all elements that should remain are moved to the front, and `i` keeps track of the new length of the list.
+The space complexity is O(1), as the array is modified in-place without using extra space.
 
-4. **Return the New Length**  
-   ```cpp
-   return i;
-   ```
-   At the end, `i` represents the number of elements in the list that are not equal to `val`. This is returned as the new length of the modified list.
+**Happy Coding! 🎉**
 
----
-
-#### ⏳ **Complexity Breakdown**
-
-- **Time Complexity: O(n)**  
-  The algorithm traverses the `nums` array exactly once. For each element, it either keeps or ignores it based on its value, making the time complexity linear in the number of elements (`n`).
-
-- **Space Complexity: O(1)**  
-  The algorithm uses only a constant amount of extra space. No additional data structures are used, and all modifications are done **in-place**.
-
----
-
-#### 💡 **Why This Approach Works**
-
-- **Efficient One-Pass Solution**: We only need a single traversal of the list to remove the elements. Each element is either retained or skipped based on its value, making this approach both time and space efficient. 🚀
-- **Minimal Space Usage**: By modifying the list in-place, we avoid using extra memory and achieve **O(1)** space complexity. 🌍
-
----
-
-#### 🚀 **Conclusion**
-
-The `removeElement` function is a highly efficient solution for removing all occurrences of a specific value from a list. It runs in **O(n)** time and uses **O(1)** space, making it optimal for large lists where minimizing memory usage is crucial. By using the two-pointer technique, this approach is simple, clear, and works perfectly within the problem constraints. 🎯
-
-Now you’re ready to remove elements from any list without needing extra space—just a little ingenuity with pointers! 💡 Happy coding! 🎉
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/remove-element/description/)
 

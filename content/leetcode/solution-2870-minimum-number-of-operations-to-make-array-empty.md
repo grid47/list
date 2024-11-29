@@ -14,167 +14,155 @@ img_src = ""
 youtube = "_AcO35R0fss"
 youtube_upload_date="2024-01-04"
 youtube_thumbnail="https://i.ytimg.com/vi/_AcO35R0fss/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array nums consisting of positive integers. You are allowed to perform two types of operations on the array any number of times: (1) Choose two elements that are the same and remove them from the array. (2) Choose three elements that are the same and remove them from the array. Your task is to return the minimum number of operations required to empty the array, or return -1 if it is not possible to empty the array using these operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of positive integers nums. You need to apply operations to empty the array.
+- **Example:** `nums = [3, 1, 3, 3, 2, 2, 1, 2, 1]`
+- **Constraints:**
+	- 2 <= nums.length <= 105
+	- 1 <= nums[i] <= 106
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minOperations(vector<int>& nums) {
-        unordered_map<int, int> m;
-        for (int n : nums)
-            ++m[n];
-        int res = 0;
-        for (auto [_, cnt] : m) {
-            if (cnt == 1)
-                return -1;
-            res += cnt / 3 + (cnt % 3 > 0);
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to empty the array, or return -1 if it is not possible to empty the array.
+- **Example:** `For input nums = [3, 1, 3, 3, 2, 2, 1, 2, 1], the output is 4.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of operations required to remove all elements from the array, using the two defined operations.
+
+- Count the frequency of each element in the array.
+- For each element, check if its count can be divided into valid pairs or triples for removal.
+- If any element has a count of 1, return -1 since it can't be removed.
+- For other elements, calculate the number of operations required by grouping them in pairs or triples.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty and contains only positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For input nums = [3, 1, 3, 3, 2, 2, 1, 2, 1], the output is 4.`  \
+  **Explanation:** We can apply the operations in sequence to remove the elements and make the array empty in 4 operations.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves counting the frequency of each element in the array and then applying the operations as efficiently as possible to minimize the number of operations.
+
+### Initial Thoughts 💭
+- We need to group elements in pairs or triples to remove them efficiently.
+- A simple approach is to count the frequency of each element and then determine how many operations are needed to remove all occurrences of that element.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least two elements.
+- The algorithm should handle large arrays efficiently (up to 100,000 elements).
+- If an element appears only once, it is impossible to remove it.
+- The solution must account for arrays containing large numbers of repeated elements.
+{{< dots >}}
+## Code 💻
+```cpp
+int minOperations(vector<int>& nums) {
+    unordered_map<int, int> m;
+    for (int n : nums)
+        ++m[n];
+    int res = 0;
+    for (auto [_, cnt] : m) {
+        if (cnt == 1)
+            return -1;
+        res += cnt / 3 + (cnt % 3 > 0);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to perform a certain number of operations on an array `nums` such that all elements in the array can be grouped into sets of 3. The goal is to determine the minimum number of operations required to achieve this. The operation consists of selecting three identical elements and grouping them together. If any number cannot be grouped into a set of three, we should return `-1`.
-
-For example, given the input array:
-```cpp
-nums = [1, 1, 1, 2, 2, 3]
-```
-We can form one group of three `1`s, and two groups of two `2`s and one `3`. Hence, the solution is to count how many operations (groupings of 3 identical elements) are required to make the array contain only complete groups.
-
-### Approach
-
-The approach to solving this problem revolves around counting how many times each element appears in the array. Using a frequency map (hashmap or `unordered_map`), we can track how many occurrences each number has. Based on these frequencies, we can determine how many complete groups of three can be formed and how many leftover elements remain after grouping.
-
-Key observations:
-1. If an element appears only once, it cannot be part of any group of three, so the result should immediately be `-1`.
-2. For each element, we can calculate the number of complete groups of three (`cnt / 3`) and any leftover elements (`cnt % 3 > 0`). 
-3. If there are leftover elements, we will need an additional operation to handle them.
-
-By iterating over the frequency map, we can compute the total number of required operations.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Count Element Frequencies
-
-```cpp
-unordered_map<int, int> m;
-for (int n : nums)
-    ++m[n];
-```
-
-- We first create an `unordered_map<int, int> m` to store the frequency of each number in the array `nums`.
-- The loop `for (int n : nums)` iterates over each element in the array `nums`, and `++m[n]` increments the count for each number in the map.
-
-#### Step 2: Initialize Result Variable
-
-```cpp
-int res = 0;
-```
-
-- The variable `res` is initialized to 0. This will store the total number of operations needed to group all elements into sets of three.
-
-#### Step 3: Process Each Element’s Frequency
-
-```cpp
-for (auto [_, cnt] : m) {
-    if (cnt == 1)
-        return -1;
-    res += cnt / 3 + (cnt % 3 > 0);
+    return res;
 }
 ```
 
-- We loop over the frequency map `m` using the `for (auto [_, cnt] : m)` syntax, which destructures the map into key-value pairs (`_` is used for the key because it's not needed).
-- If the count of any element is `1`, it is impossible to form a group of three with that element. In this case, the function returns `-1` immediately.
-- For elements that have a count greater than 1:
-  - We calculate `cnt / 3` to find how many complete sets of three can be made.
-  - We add `cnt % 3 > 0` to account for any leftover elements that would need one additional operation to form a group of three (even if it is not a complete group).
-- We accumulate this in `res`, which represents the total number of operations required.
+This function calculates the minimum number of operations required to group elements in the array into groups of 3, returning -1 if any element appears only once.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Code Declaration**
+	```cpp
+	int minOperations(vector<int>& nums) {
+	```
+	Function declaration that takes a vector of integers as input, returning an integer result.
 
-```cpp
-return res;
-```
+2. **Variable Initialization**
+	```cpp
+	    unordered_map<int, int> m;
+	```
+	Initialize an unordered map to store the frequency of each element in the nums vector.
 
-- After processing all elements in the frequency map, the function returns `res`, which is the total number of operations needed.
+3. **Loop Setup**
+	```cpp
+	    for (int n : nums)
+	```
+	Start a for-each loop to iterate over each element in the nums vector.
 
-### Example Walkthrough
+4. **Frequency Count**
+	```cpp
+	        ++m[n];
+	```
+	Increment the count for the current element in the unordered map m.
 
-#### Example 1:
+5. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize the result variable to 0, which will hold the total number of operations.
 
-**Input:**
-```cpp
-nums = [1, 1, 1, 2, 2, 3]
-```
+6. **Map Iteration**
+	```cpp
+	    for (auto [_, cnt] : m) {
+	```
+	Iterate through the unordered map, where _ represents the element (not used) and cnt represents its frequency.
 
-1. **Step 1: Count Frequencies**
-   - Frequency map: `m = {1: 3, 2: 2, 3: 1}`
-   
-2. **Step 2: Initialize Result**
-   - `res = 0`
+7. **Condition Check**
+	```cpp
+	        if (cnt == 1)
+	```
+	Check if the current frequency of the element is 1.
 
-3. **Step 3: Process Frequencies**
-   - For `1` (count 3): 
-     - `3 / 3 = 1` group, no remainder.
-     - `res += 1`
-   - For `2` (count 2):
-     - `2 / 3 = 0` complete groups, `2 % 3 = 2`, so one leftover group.
-     - `res += 1` (one additional operation for leftover)
-   - For `3` (count 1):
-     - Since count is `1`, it is impossible to form a group of three.
-     - `return -1`
+8. **Early Return**
+	```cpp
+	            return -1;
+	```
+	If an element appears only once, return -1, as grouping is not possible.
 
-**Output:**
-```cpp
--1
-```
+9. **Result Calculation**
+	```cpp
+	        res += cnt / 3 + (cnt % 3 > 0);
+	```
+	Calculate the number of operations for the current element by dividing its frequency by 3 and adding 1 if there is a remainder.
 
-#### Example 2:
+10. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the final result, which is the total number of operations.
 
-**Input:**
-```cpp
-nums = [1, 1, 1, 2, 2, 2]
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. **Step 1: Count Frequencies**
-   - Frequency map: `m = {1: 3, 2: 3}`
+The time complexity is O(n) because we only need to traverse the array once to count element frequencies.
 
-2. **Step 2: Initialize Result**
-   - `res = 0`
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-3. **Step 3: Process Frequencies**
-   - For `1` (count 3):
-     - `3 / 3 = 1` group, no remainder.
-     - `res += 1`
-   - For `2` (count 3):
-     - `3 / 3 = 1` group, no remainder.
-     - `res += 1`
-   
-**Output:**
-```cpp
-2
-```
+The space complexity is O(n) for storing the frequency counts of each element.
 
-### Time Complexity
+**Happy Coding! 🎉**
 
-The time complexity of this algorithm is **O(n)**, where `n` is the number of elements in the `nums` array. This is because we iterate over the array once to populate the frequency map and then iterate over the map to calculate the result. Since the number of distinct elements in the map is at most the size of the array, the overall complexity is linear.
-
-### Space Complexity
-
-The space complexity is **O(n)** in the worst case. This is due to the space used by the frequency map `m`, which stores the count of each element in the array. In the worst case, where all elements in the array are distinct, the space used by the map is proportional to the size of the input array.
-
-### Conclusion
-
-This solution is efficient and straightforward, utilizing a frequency map to count the occurrences of each element and determine how many complete groups of three can be formed. The greedy approach of counting leftover elements ensures that no unnecessary operations are performed. The algorithm runs in linear time, making it well-suited for large input sizes. The space complexity is also linear, making the solution both time and space efficient.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-make-array-empty/description/)
 

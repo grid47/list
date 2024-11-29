@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "RMkh4P4h7ek"
 youtube_upload_date="2019-11-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/RMkh4P4h7ek/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,135 +28,205 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/RMkh4P4h7ek/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are building a pyramid by stacking blocks, each represented by a color denoted by a letter. Each row above the bottom consists of one less block, centered on the row beneath. Only specific triangular patterns of blocks are allowed. A triangular pattern consists of three blocks: two at the bottom and one on top. Given the bottom row and allowed patterns, determine if it's possible to construct the pyramid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string representing the bottom row of blocks, and a list of strings representing the allowed triangular patterns.
+- **Example:** `bottom = 'XYZ', allowed = ['XZZ', 'XYZ', 'ZYY', 'YYY']`
+- **Constraints:**
+	- 2 <= bottom.length <= 6
+	- 0 <= allowed.length <= 216
+	- allowed[i].length == 3
+	- All input letters are from the set {'A', 'B', 'C', 'D', 'E', 'F'}
+	- All patterns in 'allowed' are unique
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    unordered_set<string> invalid;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to build the pyramid following the allowed patterns, or false otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The solution must be efficient for large inputs
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to recursively check if we can build each level of the pyramid using the allowed triangular patterns.
+
+- 1. Start with the bottom row of blocks.
+- 2. Try to form each level of the pyramid by checking the allowed patterns for every adjacent pair of blocks.
+- 3. If the level cannot be constructed using the allowed patterns, return false.
+- 4. Repeat the process until the pyramid is complete or return false if any level cannot be built.
+{{< dots >}}
+### Problem Assumptions ✅
+- There are no empty patterns in the allowed list.
+- All patterns in the allowed list are valid and distinct.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: bottom = 'XYZ', allowed = ['XZZ', 'XYZ', 'ZYY', 'YYY']`  \
+  **Explanation:** Start with 'XYZ'. Use 'XYZ' to form 'ZY' on the next level, then form 'Y' on the top level. All patterns are valid, so the pyramid can be built.
+
+- **Input:** `Example 2: bottom = 'AAA', allowed = ['AAB', 'ABB', 'AAB', 'BCC']`  \
+  **Explanation:** Start with 'AAA'. There are no valid patterns to form a level from 'AA', so the pyramid cannot be built.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to use a recursive function to check if the pyramid can be constructed level by level, verifying the allowed triangular patterns for each pair of adjacent blocks in the current row.
+
+### Initial Thoughts 💭
+- We need to recursively reduce the problem from bottom to top, checking the allowed patterns for each adjacent pair of blocks.
+- We can use a hash map to store the allowed patterns for efficient look-up during the recursive checks.
+{{< dots >}}
+### Edge Cases 🌐
+- The allowed list may be empty, in which case it's impossible to form the pyramid.
+- The solution must handle the upper limit of allowed patterns efficiently.
+- No special cases for the input constraints.
+- The solution must handle the bottom row's length ranging from 2 to 6 and up to 216 allowed patterns.
+{{< dots >}}
+## Code 💻
+```cpp
+
+unordered_set<string> invalid;
 
   bool pyramidTransition(string bottom, vector<string>& allowed) {
-      invalid.clear();
-    unordered_map<string, vector<char>> m;
-    for(auto& s:allowed) m[s.substr(0, 2)].push_back(s.back());
-    return helper(bottom, m, 0, "");
+  invalid.clear();
+unordered_map<string, vector<char>> m;
+for(auto& s:allowed) m[s.substr(0, 2)].push_back(s.back());
+return helper(bottom, m, 0, "");
   }
 
   bool helper(string bottom, unordered_map<string, vector<char>>& m, int start, string next){
 
-    if(bottom.size() == 1) return true;
-    else if(invalid.find(bottom) != invalid.end()) return false;
-    else if(start == (int)bottom.size() - 1) {
-           bool res = helper(next, m, 0, "");
-           if (!res) { invalid.insert(next); }
-           return res;
-       }
-    for(char c : m[bottom.substr(start, 2)])
-      if(helper(bottom, m, start+1, next+c)) return true;
+if(bottom.size() == 1) return true;
+else if(invalid.find(bottom) != invalid.end()) return false;
+else if(start == (int)bottom.size() - 1) {
+       bool res = helper(next, m, 0, "");
+       if (!res) { invalid.insert(next); }
+       return res;
+   }
+for(char c : m[bottom.substr(start, 2)])
+  if(helper(bottom, m, start+1, next+c)) return true;
 
-    return false;
+return false;
   }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves constructing a pyramid from a bottom row of blocks, where each block can have a certain type, and each block can only be placed on top of a pair of blocks that form a specific allowed transition. You are given a bottom row and a list of allowed transitions, and your task is to determine whether it is possible to form a valid pyramid by placing blocks above the current bottom row using these allowed transitions.
-
-Each block on the current row can only be stacked with blocks above it that follow one of the allowed transitions, and the next row must be shorter than the previous row. The goal is to check if it's possible to build a pyramid from the given bottom row using the allowed transitions.
-
-### Approach
-
-The approach to solve this problem can be broken down into recursive exploration with memoization and pruning to optimize the solution. The key idea is to simulate the pyramid-building process step by step, starting with the bottom row, and recursively attempting to build the next row based on the allowed transitions.
-
-To solve this, we use:
-1. **Recursive Search**: We attempt to recursively build the pyramid from the bottom row to the top row, where each step attempts to build the next row based on the allowed transitions.
-2. **Memoization**: We memoize the results for substrings of the bottom row that have been computed previously to avoid redundant work.
-3. **State Pruning**: We use an unordered set (`invalid`) to mark and store configurations of the bottom row that are impossible, thus preventing the exploration of invalid configurations in future recursive calls.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initial Setup
-
-```cpp
-unordered_set<string> invalid;
 ```
 
-Here, we define an unordered set `invalid` to store configurations of the bottom row that are deemed impossible. This allows us to avoid revisiting invalid states during the recursive calls.
+This code defines a function that checks if a pyramid can be built from a given bottom row of stones and a set of allowed stone transitions. The helper function recursively attempts to build the pyramid, verifying each transition and checking for invalid configurations.
 
-#### Step 2: Main Function to Start Pyramid Building
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Data Structures**
+	```cpp
+	unordered_set<string> invalid;
+	```
+	Creates an unordered set 'invalid' to keep track of previously visited bottom rows to avoid cycles or redundant checks.
 
-```cpp
-bool pyramidTransition(string bottom, vector<string>& allowed) {
-    invalid.clear();
-    unordered_map<string, vector<char>> m;
-    
-    // Mapping allowed transitions from pairs of blocks to the possible top block
-    for (auto& s : allowed) {
-        m[s.substr(0, 2)].push_back(s.back());
-    }
-    
-    return helper(bottom, m, 0, "");
-}
-```
+2. **Function Start**
+	```cpp
+	  bool pyramidTransition(string bottom, vector<string>& allowed) {
+	```
+	Begins the definition of the 'pyramidTransition' function. The function checks if a pyramid can be built based on the given bottom row and allowed stone transitions.
 
-- **`unordered_map<string, vector<char>> m;`**: This map stores the allowed transitions. The key is a string of two adjacent characters (representing a pair of blocks), and the value is a vector of characters representing the allowed blocks that can be placed on top of that pair.
-  
-- **`for (auto& s : allowed)`**: This loop iterates over the allowed transitions, and for each transition, it adds the allowed top block (last character of the string) to the vector corresponding to the pair of blocks represented by the first two characters of the string.
+3. **Clear Invalid Set**
+	```cpp
+	  invalid.clear();
+	```
+	Clears the 'invalid' set to ensure no old invalid configurations are present before checking the new pyramid bottom.
 
-- **`return helper(bottom, m, 0, "");`**: We start the recursive process by calling the `helper` function with the current `bottom` row, the `unordered_map` of allowed transitions (`m`), and an empty string `next` representing the next row to be constructed.
+4. **Mapping Transitions**
+	```cpp
+	unordered_map<string, vector<char>> m;
+	```
+	Defines an unordered map 'm' where the key is a pair of stones and the value is a list of possible stones that can be placed above the pair.
 
-#### Step 3: Recursive Helper Function
+5. **Transition Mapping**
+	```cpp
+	for(auto& s:allowed) m[s.substr(0, 2)].push_back(s.back());
+	```
+	Fills the map 'm' by iterating through the allowed transitions. For each transition, it maps the first two characters of the transition to the corresponding stone that can be placed above it.
 
-```cpp
-bool helper(string bottom, unordered_map<string, vector<char>>& m, int start, string next) {
-    if (bottom.size() == 1) return true;  // If we have reached a single block, the pyramid is complete.
-    else if (invalid.find(bottom) != invalid.end()) return false;  // If the bottom configuration is invalid, stop.
-    else if (start == (int)bottom.size() - 1) {  // When we reach the end of the bottom row, attempt to construct the next row.
-        bool res = helper(next, m, 0, "");
-        if (!res) { invalid.insert(next); }  // Mark the configuration as invalid if it cannot lead to a valid pyramid.
-        return res;
-    }
-    for (char c : m[bottom.substr(start, 2)]) {  // For the current pair of blocks, explore the allowed transitions.
-        if (helper(bottom, m, start + 1, next + c)) return true;  // Recursively try adding the next block to the next row.
-    }
-    return false;  // Return false if no valid configurations are found.
-}
-```
+6. **Recursion**
+	```cpp
+	return helper(bottom, m, 0, "");
+	```
+	Calls the helper function to start the process of attempting to build the pyramid, beginning from the bottom and using the transition map 'm'.
 
-- **Base Cases**:
-  - **`if (bottom.size() == 1)`**: When the `bottom` row has only one block left, the pyramid is successfully built, so we return `true`.
-  - **`else if (invalid.find(bottom) != invalid.end())`**: If the current configuration of the `bottom` row is already known to be invalid (stored in the `invalid` set), we return `false` to prevent further exploration of this path.
-  - **`else if (start == (int)bottom.size() - 1)`**: If we have reached the last block in the current `bottom` row, it is time to attempt constructing the next row (i.e., the row above the current one). We do this by calling `helper(next, m, 0, "")`, where `next` is the string representing the next row to be constructed.
+7. **Helper Function Start**
+	```cpp
+	  bool helper(string bottom, unordered_map<string, vector<char>>& m, int start, string next){
+	```
+	Starts the definition of the 'helper' function. This function handles the recursive process of trying to build the pyramid from the bottom upwards.
 
-- **Recursive Exploration**:
-  - **`for (char c : m[bottom.substr(start, 2)])`**: We iterate over all possible blocks (`c`) that can be placed on top of the current pair of blocks (`bottom.substr(start, 2)`) based on the transitions stored in `m`.
-  - **`helper(bottom, m, start + 1, next + c)`**: For each allowed block `c`, we recursively attempt to place it on the `next` row. We continue this process for each pair of blocks in the `bottom` row.
-  
-- **Failure Case**:
-  - If none of the recursive calls succeed, we return `false`, indicating that it is impossible to build a valid pyramid from the given bottom row.
+8. **Base Case - Single Stone**
+	```cpp
+	if(bottom.size() == 1) return true;
+	```
+	Base case of the recursion. If the bottom row has only one stone, the pyramid is successfully built.
 
-#### Step 4: Memoization
+9. **Cycle Check**
+	```cpp
+	else if(invalid.find(bottom) != invalid.end()) return false;
+	```
+	Checks if the current bottom row has been processed before. If it has, the function returns false to avoid infinite recursion or redundant calculations.
 
-- If the recursive call returns `false` for a given configuration of `next`, we mark that configuration as invalid by inserting it into the `invalid` set. This ensures that the next time the same configuration is encountered, it will be skipped, improving the efficiency of the algorithm by preventing redundant checks.
+10. **Recursive Step**
+	```cpp
+	else if(start == (int)bottom.size() - 1) {
+	```
+	If the current start index is the last stone in the bottom row, the function will attempt to build the next layer above it.
 
-#### Final Result
+11. **Recursive Call**
+	```cpp
+	       bool res = helper(next, m, 0, "");
+	```
+	Recursively calls the helper function with the newly formed next layer (the stones placed above the current bottom).
 
-- If we successfully build a pyramid, the function returns `true`, otherwise `false`.
+12. **Memoization**
+	```cpp
+	       if (!res) { invalid.insert(next); }
+	```
+	If the recursion fails, the next layer configuration is added to the 'invalid' set to avoid future redundant checks.
 
-### Complexity
+13. **Return Result**
+	```cpp
+	       return res;
+	```
+	Returns the result of the recursive call, indicating whether it was possible to build the pyramid from the current bottom layer.
 
-- **Time Complexity**:
-  - The time complexity is difficult to express in simple terms because of the recursive nature of the solution. However, the function explores possible transitions at each step, and due to memoization, it avoids redundant work. The complexity is roughly proportional to the number of possible pyramid configurations, which is exponential in the worst case, but greatly reduced by pruning invalid states early.
+14. **Character Iteration**
+	```cpp
+	for(char c : m[bottom.substr(start, 2)])
+	```
+	Iterates over all possible stone transitions that can be placed above the current two stones at the 'start' position of the bottom row.
 
-- **Space Complexity**:
-  - The space complexity is **O(n)**, where `n` is the number of blocks in the `bottom` row, because of the recursion stack and the `unordered_set` used for memoization.
+15. **Recursive Call with New Stone**
+	```cpp
+	  if(helper(bottom, m, start+1, next+c)) return true;
+	```
+	Recursively attempts to build the pyramid by adding each possible stone transition to the 'next' layer, checking if a valid configuration can be formed.
 
-### Conclusion
+16. **Return False**
+	```cpp
+	return false;
+	```
+	If no valid configuration is found after iterating through all possible stone transitions, the function returns false.
 
-The solution leverages a recursive approach with memoization to efficiently check whether it's possible to construct a pyramid from a given bottom row using allowed transitions. By storing invalid configurations and pruning redundant computations, the algorithm ensures optimal performance even for larger inputs. This approach avoids brute-forcing through every possible configuration, making it both time and space efficient for solving the pyramid transition problem.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The solution involves checking all possible pairs at each level, leading to a time complexity proportional to the size of the bottom row and the allowed patterns.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n^2)
+
+The space complexity is proportional to the number of levels in the pyramid and the number of allowed patterns.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pyramid-transition-matrix/description/)
 

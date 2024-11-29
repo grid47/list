@@ -14,95 +14,126 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given three stones located at different positions on the X-axis. The positions are represented by three distinct integers `a`, `b`, and `c`. In one move, you can pick a stone from either of the two endpoints (the smallest or the largest position) and move it to any unoccupied position between the two endpoints. The game ends when all three stones are positioned at three consecutive spots on the X-axis. Your task is to determine the minimum and maximum number of moves required to reach this configuration.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three distinct integers `a`, `b`, and `c` representing the positions of the stones.
+- **Example:** `a = 3, b = 6, c = 10`
+- **Constraints:**
+	- 1 <= a, b, c <= 100
+	- a, b, and c have different values.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> numMovesStones(int a, int b, int c) {
-        vector<int> s {a, b, c};
-        sort(s.begin(), s.end());
-        
-        if(s[2]-s[0] == 2) return {0, 0};
-        
-        
-        
-        return {min(s[1]- s[0], s[2]-s[1]) <= 2? 1 : 2, s[2] - s[0] - 2 };
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of length 2 where the first element represents the minimum number of moves and the second element represents the maximum number of moves required to make the stones occupy three consecutive positions.
+- **Example:** `Output: [1, 2]`
+- **Constraints:**
+	- The answer must include both the minimum and maximum number of moves.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the minimum and maximum number of moves to position the stones at three consecutive positions.
 
+- 1. Sort the positions of the stones to identify the smallest, middle, and largest values.
+- 2. If the difference between the largest and smallest values is 2, no moves are needed (i.e., the stones are already in consecutive positions).
+- 3. To find the minimum moves, check if the middle stone is already adjacent to one of the endpoints (this would require only one move). Otherwise, two moves are needed.
+- 4. To find the maximum moves, subtract 2 from the difference between the largest and smallest stone positions, as that will give the number of available positions between them.
+{{< dots >}}
+### Problem Assumptions ✅
+- The positions of the stones are provided in distinct integers and are guaranteed to be within the specified bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: a = 1, b = 3, c = 7`  \
+  **Explanation:** In this case, the stones are at positions 1, 3, and 7. The minimum number of moves is 1: move the stone from position 7 to 4. The maximum number of moves is 2: move the stone from position 7 to 5, then move the stone from position 5 to 4.
 
-### Problem Statement
-In this problem, we are given three distinct integers representing the positions of three stones placed on a number line. The task is to determine how many moves are needed to position these stones such that they are aligned with each other. A "move" is defined as moving a stone from its current position to an adjacent empty position (i.e., moving it to either the left or the right).
+- **Input:** `Input: a = 4, b = 5, c = 6`  \
+  **Explanation:** In this case, the stones are already at consecutive positions, so no moves are needed. The minimum and maximum number of moves are both 0.
 
-The output should consist of two numbers:
-1. The minimum number of moves required to align the stones.
-2. The maximum number of moves required to align the stones.
+{{< dots >}}
+## Approach 🚀
+The solution involves sorting the stone positions and then checking the differences between them to determine the possible moves.
 
-For example, if the positions of the stones are \(a = 1\), \(b = 2\), and \(c = 5\), the output should indicate how to achieve alignment in the minimum and maximum moves possible.
+### Initial Thoughts 💭
+- Sorting the positions of the stones is a good first step to simplify the calculation of the number of moves.
+- After sorting, we can quickly determine if the stones are already in consecutive positions or if any moves are necessary.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be three distinct positions given, so empty inputs are not possible.
+- The solution should handle the constraints efficiently, but the problem size is small (only 3 positions).
+- If the positions are already consecutive, the result will be [0, 0].
+- The problem guarantees distinct positions, so no need to handle repeated values.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> numMovesStones(int a, int b, int c) {
+    vector<int> s {a, b, c};
+    sort(s.begin(), s.end());
+    
+    if(s[2]-s[0] == 2) return {0, 0};
+    
+    
+    
+    return {min(s[1]- s[0], s[2]-s[1]) <= 2? 1 : 2, s[2] - s[0] - 2 };
+}
+```
 
-### Approach
-To solve this problem, the approach involves the following steps:
-1. **Sorting the Positions**: Since the stones can be in any order, sorting their positions helps in easily determining the gaps between them.
-2. **Analyzing Gaps**: After sorting, we can check the distances (or gaps) between the stones:
-   - If the distance between the stones is exactly 2, they are already aligned and no moves are required.
-   - Otherwise, we calculate the minimum and maximum number of moves based on the gaps between the stones.
-3. **Return the Result**: Based on the analysis of the gaps, we return the required moves.
+This function calculates the minimum and maximum number of moves required to make three stones consecutive when placed on a number line.
 
-### Code Breakdown (Step by Step)
-1. **Class Declaration**: The solution is encapsulated within a class named `Solution`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> numMovesStones(int a, int b, int c) {
+	```
+	Define the function `numMovesStones` that calculates the minimum and maximum moves to align stones.
 
-2. **Function Definition**: The function `numMovesStones` takes three integer parameters representing the positions of the stones.
-   ```cpp
-   vector<int> numMovesStones(int a, int b, int c) {
-   ```
+2. **Initialize Vector**
+	```cpp
+	    vector<int> s {a, b, c};
+	```
+	Initialize a vector `s` to store the stone positions.
 
-3. **Sorting the Positions**:
-   - A vector `s` is created and initialized with the positions of the stones. 
-   - The `sort` function is then used to arrange the positions in ascending order.
-   ```cpp
-   vector<int> s {a, b, c};
-   sort(s.begin(), s.end());
-   ```
+3. **Sort Vector**
+	```cpp
+	    sort(s.begin(), s.end());
+	```
+	Sort the vector `s` to arrange stone positions in ascending order.
 
-4. **Check for Immediate Alignment**:
-   - The first check is to see if the distance between the first and the last stone is exactly 2, which means they are adjacent.
-   - If true, return `{0, 0}` as no moves are needed.
-   ```cpp
-   if(s[2]-s[0] == 2) return {0, 0};
-   ```
+4. **Check Consecutive Case**
+	```cpp
+	    if(s[2]-s[0] == 2) return {0, 0};
+	```
+	Check if the stones are already consecutive. If so, return {0, 0} as no moves are needed.
 
-5. **Calculate Minimum Moves**:
-   - The minimum moves required to align the stones is determined by checking the smallest gap between adjacent stones.
-   - If the gap between the first and second stone or the second and third stone is less than or equal to 2, it means only one move is needed to bring the stones together.
-   - Otherwise, it takes two moves to align them.
-   ```cpp
-   return {min(s[1]- s[0], s[2]-s[1]) <= 2? 1 : 2, s[2] - s[0] - 2 };
-   ```
+5. **Calculate Moves**
+	```cpp
+	    return {min(s[1]- s[0], s[2]-s[1]) <= 2? 1 : 2, s[2] - s[0] - 2 };
+	```
+	Return the minimum and maximum moves required based on the distances between the stones.
 
-6. **Return Statement**:
-   - The function returns a vector containing two values:
-     - The minimum number of moves (calculated as explained above).
-     - The maximum number of moves, which is simply the total distance between the first and last stone minus 2 (to account for the stones themselves).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this solution is \(O(1)\) because we are performing a constant amount of work regardless of the input size. The only significant operation is sorting three numbers, which can be considered constant time.
-- **Space Complexity**: The space complexity is also \(O(1)\) since we are only using a fixed amount of additional space for the vector `s`.
+The time complexity is O(1) as sorting three elements is constant time.
 
-### Conclusion
-The provided code efficiently computes the minimum and maximum moves required to align three stones on a number line. By utilizing sorting and straightforward calculations of gaps between the stones, the solution elegantly determines the required values in constant time and space. 
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This approach is optimal for this problem due to the limited number of stones (three), which allows for rapid calculations and a clean implementation. Such a solution is particularly useful in scenarios where positional alignment or optimization of resources is required, making it relevant in various practical applications such as robotics, game development, and scheduling tasks.
+The space complexity is O(1) since we are only using a constant amount of extra space.
 
-In summary, the `numMovesStones` function provides a robust and efficient means of solving the problem of aligning stones with minimal moves while ensuring clarity and maintainability in the code structure.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/moving-stones-until-consecutive/description/)

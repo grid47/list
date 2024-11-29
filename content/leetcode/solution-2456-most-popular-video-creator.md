@@ -14,147 +14,231 @@ img_src = ""
 youtube = "2xvkEXjtmWE"
 youtube_upload_date="2022-10-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/2xvkEXjtmWE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given three arrays: 'creators', 'ids', and 'views'. Each index i corresponds to a video created by the creator 'creators[i]', with an id 'ids[i]', and a number of views 'views[i]'. The task is to find the most popular creators based on the sum of views of all their videos and identify the id of their most viewed video. If multiple creators have the same popularity, return all of them. For each creator, if they have multiple videos with the highest view count, return the lexicographically smallest id of their most viewed video.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three arrays: 'creators' (a list of strings), 'ids' (a list of strings), and 'views' (a list of integers). All arrays have the same length n, representing the number of videos.
+- **Example:** `creators = ['anna', 'bob', 'anna', 'chris'], ids = ['one', 'two', 'three', 'four'], views = [5, 10, 5, 4]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= creators[i].length, ids[i].length <= 5
+	- creators[i] and ids[i] consist of lowercase English letters only
+	- 0 <= views[i] <= 10^5
 
-{{< highlight cpp >}}
-#define ll long long
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a 2D array where each element is a pair of creator and their most popular video's id. If there are multiple creators with the highest popularity, include all of them. If a creator has multiple videos with the highest views, return the lexicographically smallest id.
+- **Example:** `[['anna', 'one'], ['bob', 'two']]`
+- **Constraints:**
+	- The answer can be in any order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the popularity of creators based on the sum of views of their videos and identify the id of their most popular video.
+
+- 1. Iterate through each video and accumulate views for each creator.
+- 2. Store the video details for each creator in a way that allows easy identification of the most viewed video.
+- 3. After processing all the videos, identify the creator(s) with the highest total views.
+- 4. For each of these creators, find their video with the highest views, and if there are ties, choose the lexicographically smallest video id.
+{{< dots >}}
+### Problem Assumptions ✅
+- The video ids are not necessarily unique across creators, but each video id is unique for each creator.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `creators = ['anna', 'bob', 'anna', 'chris'], ids = ['one', 'two', 'three', 'four'], views = [5, 10, 5, 4]`  \
+  **Explanation:** In this example, 'anna' has a total of 10 views (from videos 'one' and 'three'). 'bob' has 10 views (from video 'two'). 'chris' has 4 views. 'anna' and 'bob' are the most popular creators. For 'anna', the lexicographically smaller video id with the highest views is 'one'. For 'bob', the video id with the highest views is 'two'.
+
+- **Input:** `creators = ['anna', 'anna', 'anna'], ids = ['a', 'b', 'c'], views = [1, 2, 2]`  \
+  **Explanation:** Here, 'anna' is the only creator, and the most viewed video is 'b' because it has 2 views, which is lexicographically smaller than 'c'.
+
+{{< dots >}}
+## Approach 🚀
+We will first calculate the total views for each creator and track the most viewed video for each creator. After determining the creators with the highest popularity, we will select the lexicographically smallest video id for those creators.
+
+### Initial Thoughts 💭
+- We need to handle large inputs efficiently, so we should aim for a linear time complexity.
+- We can use a hash map to store the sum of views for each creator and a list of videos for each creator.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input arrays are empty, return an empty result.
+- For large inputs, ensure the solution can handle up to 100,000 videos efficiently.
+- If all videos have zero views, the result should be an empty list.
+- Ensure efficient handling of both the creators and video ids, as there can be many different creators and video ids.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
 
-    static bool cmp(pair<ll, string> p1, pair<ll, string> p2) {
-        if(p1.first == p2.first) return p1.second < p2.second;
-        else return p1.first > p2.first;
-    }
+static bool cmp(pair<ll, string> p1, pair<ll, string> p2) {
+    if(p1.first == p2.first) return p1.second < p2.second;
+    else return p1.first > p2.first;
+}
 
 public:
-    vector<vector<string>> mostPopularCreator(vector<string>& creators, vector<string>& ids, vector<int>& views) {
-        vector<vector<string>> ans;
-        long long n = creators.size(), maxi = INT_MIN;
-        map<string, ll> m1;
-        map<string, vector<pair<ll, string>>> m2;
+vector<vector<string>> mostPopularCreator(vector<string>& creators, vector<string>& ids, vector<int>& views) {
+    vector<vector<string>> ans;
+    long long n = creators.size(), maxi = INT_MIN;
+    map<string, ll> m1;
+    map<string, vector<pair<ll, string>>> m2;
 
-        for(int i = 0; i < n; i++) {
-            m1[creators[i]] += views[i];
-            m2[creators[i]].push_back(make_pair(views[i], ids[i]));
-            maxi = max(maxi, m1[creators[i]]);
-        }
-
-        for(auto &[l, r] : m1) {
-            if(r == maxi) {
-                sort(m2[l].begin(), m2[l].end(), cmp);
-                ans.push_back({l, m2[l].front().second});
-            }
-        }
-        return ans;
+    for(int i = 0; i < n; i++) {
+        m1[creators[i]] += views[i];
+        m2[creators[i]].push_back(make_pair(views[i], ids[i]));
+        maxi = max(maxi, m1[creators[i]]);
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement:
-In this problem, we are given a list of creators, their respective video IDs, and the number of views for each video. The goal is to identify the creators who have the highest total number of views and return the creator's name along with the ID of the video that has the highest views among their videos. If there are multiple videos with the same highest number of views, the video with the lexicographically smallest ID should be selected.
+    for(auto &[l, r] : m1) {
+        if(r == maxi) {
+            sort(m2[l].begin(), m2[l].end(), cmp);
+            ans.push_back({l, m2[l].front().second});
+        }
+    }
+    return ans;
+}
+```
 
-### Approach:
-The approach involves two main tasks:
-1. **Summing up the Views for Each Creator**: We first calculate the total views for each creator by summing the views for all of their videos.
-2. **Finding the Creator with the Maximum Views**: Once we know the total views for each creator, we identify the creator(s) with the highest total views.
-3. **Sorting Videos for Creators with the Maximum Views**: For the creators with the highest total views, we sort their videos based on the number of views in descending order. In case of a tie in views, we sort by the video ID in lexicographical order to choose the video with the smallest ID.
+This solution identifies the most popular creator based on views. It uses maps to track cumulative views and stores associated IDs in sorted order, returning the top creators with their most popular content.
 
-### Code Breakdown (Step by Step):
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class containing the required function.
 
-Let’s break down the solution code to understand it in detail:
+2. **Helper Function**
+	```cpp
+	static bool cmp(pair<ll, string> p1, pair<ll, string> p2) {
+	```
+	Defines a comparator function to sort pairs of view counts and IDs based on the view count and lexicographical order of IDs.
 
-1. **Define the Data Types and Comparator Function**:
-   ```cpp
-   #define ll long long
-   class Solution {
-       static bool cmp(pair<ll, string> p1, pair<ll, string> p2) {
-           if(p1.first == p2.first) return p1.second < p2.second;
-           else return p1.first > p2.first;
-       }
-   ```
-   - `#define ll long long`: This defines `ll` as a shorthand for `long long`, which is used to handle large integer values (such as total views).
-   - The `cmp` function is a static comparator used to sort pairs of views and video IDs. It sorts first by views in descending order, and if the views are the same, it sorts by video ID in lexicographical order (ascending).
+3. **Condition Check**
+	```cpp
+	    if(p1.first == p2.first) return p1.second < p2.second;
+	```
+	Checks if two elements have the same view count and compares their IDs lexicographically.
 
-2. **Function Declaration**:
-   ```cpp
-   vector<vector<string>> mostPopularCreator(vector<string>& creators, vector<string>& ids, vector<int>& views) {
-   ```
-   - The function `mostPopularCreator` takes three parameters:
-     - `creators`: A vector of strings representing the names of video creators.
-     - `ids`: A vector of strings representing the IDs of videos.
-     - `views`: A vector of integers representing the number of views for each corresponding video.
-   - The function returns a vector of vectors of strings, where each inner vector contains a creator’s name followed by the ID of their most popular video (the one with the highest views).
+4. **Condition Check**
+	```cpp
+	    else return p1.first > p2.first;
+	```
+	If view counts differ, sorts them in descending order of view count.
 
-3. **Initialize Variables**:
-   ```cpp
-   vector<vector<string>> ans;
-   long long n = creators.size(), maxi = INT_MIN;
-   map<string, ll> m1;
-   map<string, vector<pair<ll, string>>> m2;
-   ```
-   - `ans`: This will store the final result, a list of creators along with their most popular video ID.
-   - `n`: The size of the `creators` vector, representing the number of videos.
-   - `maxi`: Initialized to `INT_MIN`, this will keep track of the maximum total views for any creator.
-   - `m1`: A map that stores the total views for each creator. The key is the creator's name (a string), and the value is the total number of views (a long long integer).
-   - `m2`: A map that stores the list of videos (as pairs of views and video IDs) for each creator. The key is the creator’s name, and the value is a vector of pairs, where each pair contains the number of views and the video ID.
+5. **Function Definition**
+	```cpp
+	public:
+	```
+	Marks the start of the public section in the `Solution` class.
 
-4. **First Loop to Process the Creators, Video IDs, and Views**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       m1[creators[i]] += views[i];
-       m2[creators[i]].push_back(make_pair(views[i], ids[i]));
-       maxi = max(maxi, m1[creators[i]]);
-   }
-   ```
-   This loop iterates through each video (indexed by `i`):
-   - For each creator `creators[i]`, the corresponding number of views `views[i]` is added to their total views in `m1`.
-   - The video ID and views are stored as a pair `(views[i], ids[i])` in the `m2` map under the creator's name.
-   - The `maxi` variable is updated to track the maximum total views for any creator.
+6. **Function Definition**
+	```cpp
+	vector<vector<string>> mostPopularCreator(vector<string>& creators, vector<string>& ids, vector<int>& views) {
+	```
+	Defines the main function to calculate the most popular creators and their most viewed content.
 
-5. **Second Loop to Find the Creators with Maximum Views**:
-   ```cpp
-   for(auto &[l, r] : m1) {
-       if(r == maxi) {
-           sort(m2[l].begin(), m2[l].end(), cmp);
-           ans.push_back({l, m2[l].front().second});
-       }
-   }
-   ```
-   After collecting the total views and video details:
-   - This loop iterates over the `m1` map (which contains total views for each creator).
-   - For each creator `l` (with total views `r`), if their total views match the maximum `maxi`, the creator is considered a candidate.
-   - The videos for that creator are sorted using the `cmp` comparator. This ensures that the videos are sorted by views in descending order and, in case of a tie, by the video ID lexicographically.
-   - After sorting, the most popular video for that creator is the first element of the sorted list. The creator's name and the most popular video ID are added to the result `ans`.
+7. **Variable Initialization**
+	```cpp
+	    vector<vector<string>> ans;
+	```
+	Initializes the result container for the output.
 
-6. **Return the Result**:
-   ```cpp
-   return ans;
-   ```
-   After processing all creators, the function returns `ans`, which contains the list of creators and their most popular video ID.
+8. **Variable Initialization**
+	```cpp
+	    long long n = creators.size(), maxi = INT_MIN;
+	```
+	Stores the number of creators and initializes the maximum views variable.
 
-### Complexity:
+9. **Map Initialization**
+	```cpp
+	    map<string, ll> m1;
+	```
+	Initializes a map to store cumulative views for each creator.
 
-1. **Time Complexity**:
-   - The first loop iterates over the `creators` vector and processes each video, which takes \(O(N)\), where \(N\) is the number of videos (i.e., the size of `creators`).
-   - The second loop iterates over the `m1` map, which has at most \(C\) entries, where \(C\) is the number of unique creators. Sorting the videos for each creator in the `m2` map takes \(O(V \log V)\), where \(V\) is the number of videos for a creator.
-   - Thus, the time complexity can be expressed as:
-   \[
-   O(N + C \cdot V \log V)
-   \]
-   where \(N\) is the number of videos, \(C\) is the number of creators, and \(V\) is the average number of videos per creator.
+10. **Map Initialization**
+	```cpp
+	    map<string, vector<pair<ll, string>>> m2;
+	```
+	Initializes a map to store pairs of views and IDs for each creator.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(N + C \cdot V)\) because we store the total views and video details for each creator. The space is used by the `m1` and `m2` maps and the result vector `ans`.
+11. **Loop Through List**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Loops through all creators to populate the maps.
 
-### Conclusion:
-The `mostPopularCreator` function efficiently solves the problem of identifying creators with the highest total views and their most popular video. By using maps and sorting techniques, it ensures that the video with the maximum views (and smallest lexicographical ID in case of a tie) is selected for each creator with the highest total views.
+12. **Map Update**
+	```cpp
+	        m1[creators[i]] += views[i];
+	```
+	Updates the cumulative views for the current creator in the map.
 
-The time complexity of the solution is dominated by the sorting operation, which makes it efficient for typical input sizes. The space complexity is also manageable, considering the storage requirements for the video details and total views for each creator. This solution is optimal for handling large datasets with multiple creators and videos.
+13. **Map Update**
+	```cpp
+	        m2[creators[i]].push_back(make_pair(views[i], ids[i]));
+	```
+	Adds the view count and ID pair to the vector for the current creator.
+
+14. **Maximum Update**
+	```cpp
+	        maxi = max(maxi, m1[creators[i]]);
+	```
+	Updates the maximum views encountered so far.
+
+15. **Map Iteration**
+	```cpp
+	    for(auto &[l, r] : m1) {
+	```
+	Iterates through the map to identify creators with the maximum views.
+
+16. **Condition Check**
+	```cpp
+	        if(r == maxi) {
+	```
+	Checks if the current creator's total views match the maximum views.
+
+17. **Sorting**
+	```cpp
+	            sort(m2[l].begin(), m2[l].end(), cmp);
+	```
+	Sorts the content for the current creator using the comparator function.
+
+18. **Result Update**
+	```cpp
+	            ans.push_back({l, m2[l].front().second});
+	```
+	Adds the creator and their most popular content ID to the result.
+
+19. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the result containing the most popular creators and their top content.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We are only performing simple operations on each video and then sorting a small list of video ids for each creator.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We store video details and the popularity of each creator, which requires linear space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-popular-video-creator/description/)
 

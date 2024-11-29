@@ -14,156 +14,222 @@ img_src = ""
 youtube = "RR1n-d4oYqE"
 youtube_upload_date="2021-04-18"
 youtube_thumbnail="https://i.ytimg.com/vi/RR1n-d4oYqE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of tasks, where each task is represented by a pair of integers: [enqueueTime, processingTime]. The task can only be processed once its enqueueTime has passed. Your goal is to find the order in which tasks are processed by a single-threaded CPU that follows a specific processing strategy.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer n representing the number of tasks and a 2D array of integers tasks where each element tasks[i] = [enqueueTime[i], processingTime[i]].
+- **Example:** `tasks = [[1,2], [2,4], [3,2], [4,1]]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= enqueueTime[i], processingTime[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> getOrder(vector<vector<int>>& tasks) {
-        
-        for(int i = 0; i < tasks.size(); i++)
-            tasks[i].push_back(i);
-        
-        sort(tasks.begin(), tasks.end());
-        
-        vector<int> ans;
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an array of integers representing the order in which the CPU processes the tasks.
+- **Example:** `[0, 2, 3, 1]`
+- **Constraints:**
 
-        long i = 0, time = 0;
-        while(i < tasks.size() || pq.size()) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the order of task processing by the CPU based on the rules outlined.
 
-            if(pq.empty()) {
-                time = max(time, (long) tasks[i][0]);
-            }
-            
-            while(i < tasks.size() && tasks[i][0] <= time) {
-                pq.push({tasks[i][1], tasks[i][2]});
-                i++;
-            }
-            
-            auto [pro, idx] = pq.top();
-            pq.pop();
-            time += pro;
-            ans.push_back(idx);
+- Sort the tasks based on their enqueueTime to determine when each task is available.
+- Use a priority queue to store tasks based on their processing time and index.
+- At each time step, process the task with the shortest processing time, breaking ties with the smallest index.
+- Update the time as tasks are processed and track the order of processing.
+{{< dots >}}
+### Problem Assumptions ✅
+- The CPU processes one task at a time, and no task is preempted once started.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `tasks = [[1,2], [2,4], [3,2], [4,1]]`  \
+  **Explanation:** At time = 1, task 0 is available, and the CPU starts processing it. The CPU continues processing tasks in the order of their availability and processing times, resulting in the output [0, 2, 3, 1].
 
+{{< dots >}}
+## Approach 🚀
+We will use sorting and a priority queue to solve the problem efficiently. First, we sort the tasks by enqueueTime, and then use a priority queue to process the tasks with the shortest processing times first.
+
+### Initial Thoughts 💭
+- The CPU will process tasks based on their enqueueTime and processingTime.
+- We need to efficiently choose the next task to process at any given time. A priority queue will help us with this decision.
+{{< dots >}}
+### Edge Cases 🌐
+- No tasks are given.
+- When n is very large, the solution should handle it efficiently.
+- Tasks with the same enqueueTime but different processingTimes.
+- Ensure that tasks are processed in the correct order even when some tasks have the same enqueueTime.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> getOrder(vector<vector<int>>& tasks) {
+    
+    for(int i = 0; i < tasks.size(); i++)
+        tasks[i].push_back(i);
+    
+    sort(tasks.begin(), tasks.end());
+    
+    vector<int> ans;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+
+    long i = 0, time = 0;
+    while(i < tasks.size() || pq.size()) {
+
+        if(pq.empty()) {
+            time = max(time, (long) tasks[i][0]);
         }
+        
+        while(i < tasks.size() && tasks[i][0] <= time) {
+            pq.push({tasks[i][1], tasks[i][2]});
+            i++;
+        }
+        
+        auto [pro, idx] = pq.top();
+        pq.pop();
+        time += pro;
+        ans.push_back(idx);
 
-        return ans;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-The problem is to determine the order in which a series of tasks should be processed based on their start times and durations. Each task has a start time, a duration, and an index, and we need to return the order of indices in which the tasks will be executed. The tasks can only be started after their respective start times, and if multiple tasks are available at the same time, the one with the shorter duration should be executed first.
-
-### Approach
-
-To solve this problem efficiently, we can use a combination of sorting and a priority queue (min-heap) to ensure that tasks are processed in the correct order based on their availability and duration:
-
-1. **Augment the Task List**: For each task, append its index to keep track of the original position after sorting.
-
-2. **Sort the Tasks**: Sort the tasks primarily by their start time. If two tasks have the same start time, the task with the shorter duration will come first due to the way we organize the priority queue.
-
-3. **Use a Priority Queue**: Implement a priority queue (min-heap) to manage the tasks that are ready to be executed. The heap will allow us to efficiently retrieve the task with the smallest duration.
-
-4. **Simulate the Task Processing**:
-   - Initialize a `time` variable to track the current time.
-   - Iterate through the tasks and, if the priority queue is empty, set the current time to the start time of the next task.
-   - Push all tasks that can start at the current time into the priority queue.
-   - Pop the task with the smallest duration from the queue, update the current time, and record the task's index in the result.
-
-5. **Continue Until All Tasks Are Processed**: The loop continues until all tasks have been processed and the queue is empty.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<int> getOrder(vector<vector<int>>& tasks) {
+    return ans;
+}
 ```
-- We define a class `Solution` with a public method `getOrder` that takes a vector of tasks. Each task is represented as a vector containing its start time and duration.
 
-```cpp
-        for(int i = 0; i < tasks.size(); i++)
-            tasks[i].push_back(i);
-```
-- Here, we augment each task by appending its index. This way, after sorting and processing the tasks, we can easily retrieve the original index of each task.
+This function schedules tasks based on the available time, following a priority queue to process tasks in the correct order based on their processing time and arrival time.
 
-```cpp
-        sort(tasks.begin(), tasks.end());
-```
-- We sort the tasks based on their start times. The default behavior of `sort` sorts the tasks primarily by the first element (start time), and if there are ties, it sorts by duration next due to the priority queue logic that we will apply later.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> getOrder(vector<vector<int>>& tasks) {
+	```
+	Defines the `getOrder` function, which takes a vector of task details (`tasks`) and returns the order in which they should be processed.
 
-```cpp
-        vector<int> ans;
-```
-- We initialize a vector `ans` to store the order of task indices as they are processed.
+2. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < tasks.size(); i++)
+	```
+	Iterates over each task in the `tasks` vector to prepare the data for sorting and processing.
 
-```cpp
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-```
-- We define a priority queue `pq` to manage tasks based on their duration. The priority queue is set up to always pop the task with the smallest duration first.
+3. **Adding Index to Task**
+	```cpp
+	        tasks[i].push_back(i);
+	```
+	Appends the task index to each task, which helps in tracking the original task order after sorting.
 
-```cpp
-        long i = 0, time = 0;
-```
-- We initialize an index `i` to track the current task and a `time` variable to keep track of the current processing time.
+4. **Sorting**
+	```cpp
+	    sort(tasks.begin(), tasks.end());
+	```
+	Sorts the tasks based on their start time, which helps in processing them in the order of their arrival.
 
-```cpp
-        while(i < tasks.size() || pq.size()) {
-```
-- This loop continues until we have processed all tasks and the queue is empty.
+5. **Vector Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	Initializes the `ans` vector to store the order of task indices as they are processed.
 
-```cpp
-            if(pq.empty()) {
-                time = max(time, (long) tasks[i][0]);
-            }
-```
-- If the priority queue is empty, it means we need to wait for the next task to start. We set `time` to the maximum of the current time or the start time of the next task.
+6. **Priority Queue Initialization**
+	```cpp
+	    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+	```
+	Initializes a priority queue to store tasks based on their processing time, allowing the task with the smallest processing time to be processed first.
 
-```cpp
-            while(i < tasks.size() && tasks[i][0] <= time) {
-                pq.push({tasks[i][1], tasks[i][2]});
-                i++;
-            }
-```
-- We push all tasks that are available to start at the current time into the priority queue. Each task is pushed as a pair containing its duration and index.
+7. **Variable Initialization**
+	```cpp
+	    long i = 0, time = 0;
+	```
+	Initializes the `i` variable to keep track of the tasks being processed, and `time` to track the current time.
 
-```cpp
-            auto [pro, idx] = pq.top();
-            pq.pop();
-            time += pro;
-            ans.push_back(idx);
-```
-- We pop the task with the smallest duration from the queue and process it by adding its duration to the current time. We also record the task's index in the result vector `ans`.
+8. **While Loop**
+	```cpp
+	    while(i < tasks.size() || pq.size()) {
+	```
+	Starts a while loop that continues until all tasks are processed and the priority queue is empty.
 
-```cpp
-        return ans;
-    }
-};
-```
-- Finally, after all tasks have been processed, we return the order of indices stored in `ans`.
+9. **Empty Priority Queue Check**
+	```cpp
+	        if(pq.empty()) {
+	```
+	Checks if the priority queue is empty. If it is, the next task will be scheduled based on its start time.
 
-### Complexity
+10. **Time Adjustment**
+	```cpp
+	            time = max(time, (long) tasks[i][0]);
+	```
+	If the priority queue is empty, adjust the current time (`time`) to the start time of the next task if it is greater than the current time.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n \log n)\), where \(n\) is the number of tasks. This includes \(O(n \log n)\) for sorting the tasks and \(O(n \log n)\) for processing the tasks in the priority queue.
+11. **Processing Tasks within Time**
+	```cpp
+	        while(i < tasks.size() && tasks[i][0] <= time) {
+	```
+	Starts a while loop that adds tasks to the priority queue as long as their start time is less than or equal to the current time.
 
-- **Space Complexity**: The space complexity is \(O(n)\) for storing the augmented task list and the output vector, plus \(O(n)\) for the priority queue in the worst case.
+12. **Push Task to Priority Queue**
+	```cpp
+	            pq.push({tasks[i][1], tasks[i][2]});
+	```
+	Pushes the task's processing time and its original index into the priority queue for scheduling.
 
-### Conclusion
+13. **Increment Task Index**
+	```cpp
+	            i++;
+	```
+	Increments the task index to process the next task.
 
-The provided solution effectively computes the order in which tasks should be executed by using a combination of sorting and a priority queue. By prioritizing tasks based on their availability and duration, we ensure that the tasks are completed in the most efficient order.
+14. **Task Processing**
+	```cpp
+	        auto [pro, idx] = pq.top();
+	```
+	Extracts the task with the smallest processing time from the priority queue.
 
-This method highlights the power of greedy algorithms combined with data structures like heaps to solve scheduling problems efficiently. It is especially useful in scenarios where task scheduling and management are critical, such as in operating systems, job scheduling in computing environments, and project management. 
+15. **Pop Task from Priority Queue**
+	```cpp
+	        pq.pop();
+	```
+	Removes the processed task from the priority queue.
 
-Overall, this code serves as a solid example of how to handle complex scheduling scenarios, offering insights into efficient algorithm design and implementation. It is a valuable resource for developers and programmers looking to deepen their understanding of algorithmic problem-solving techniques.
+16. **Time Update**
+	```cpp
+	        time += pro;
+	```
+	Increments the current time (`time`) by the processing time of the task just completed.
+
+17. **Store Processed Task Index**
+	```cpp
+	        ans.push_back(idx);
+	```
+	Stores the index of the processed task in the `ans` vector, representing the order of completion.
+
+18. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans`, which contains the indices of the tasks in the order they were processed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting of the tasks and the operations on the priority queue.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of tasks and the priority queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/single-threaded-cpu/description/)
 

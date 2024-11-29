@@ -14,104 +14,126 @@ img_src = ""
 youtube = "ohl7rEwEI9A"
 youtube_upload_date="2023-09-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ohl7rEwEI9A/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array nums containing positive integers and an integer k. In each operation, you can remove the last element from the array and add it to your collection. Your task is to determine the minimum number of operations needed to collect all elements from 1 to k (inclusive).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of positive integers nums and an integer k. The goal is to collect elements from 1 to k in the minimum number of operations.
+- **Example:** `nums = [6, 3, 8, 5, 7, 1, 4, 2], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 50
+	- 1 <= nums[i] <= nums.length
+	- 1 <= k <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minOperations(vector<int>& nums, int k) {
-        int cnt[51] = {}, i = nums.size() - 1;
-        for (int found = 0; found < k; --i)
-            if (nums[i] <= k)
-                found += cnt[nums[i]]++ == 0;
-        return nums.size() - i - 1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to collect all elements from 1 to k in the collection.
+- **Example:** `For input nums = [6, 3, 8, 5, 7, 1, 4, 2], k = 3, the output is 6.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to collect all numbers from 1 to k in the least number of operations.
 
-The problem asks us to find the minimum number of operations required to remove elements from an array `nums` such that the remaining elements form a subsequence that contains all integers from 1 to `k`. Specifically, we need to find how many elements need to be removed from the array to achieve this. An operation consists of removing any element from the array. 
+- Start removing elements from the end of the array one by one.
+- Keep track of the elements you collect in your collection.
+- Stop when all elements from 1 to k are collected.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array nums contains all the elements from 1 to k at least once.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For input nums = [6, 3, 8, 5, 7, 1, 4, 2], k = 3, the output is 6.`  \
+  **Explanation:** After 6 operations, elements 1, 2, and 3 will be collected. Thus, the total number of operations is 6.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We will process the array from the last element towards the first, collecting elements until we have all the elements from 1 to k in our collection.
 
-The approach here is to efficiently count the operations needed by iterating over the array from right to left. The goal is to check for the presence of every number from `1` to `k` in the array and count how many elements need to be removed to ensure that these numbers remain. The key idea is to keep track of the numbers that have been encountered from `1` to `k` using a frequency array (`cnt`). We then compute how many elements we need to remove to make sure all numbers from `1` to `k` are in the remaining sequence.
-
-We utilize a greedy approach where we iterate over the array and try to find the smallest subsequence that contains all the numbers from `1` to `k`. To minimize the number of operations, we begin removing elements from the end of the array.
-
-### Code Breakdown
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- The challenge is to determine how many operations it takes to collect the elements from 1 to k, starting from the end of the array.
+- One efficient way to approach this is by using a set or array to keep track of the elements that have been collected.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always contain at least one element.
+- The solution must efficiently handle arrays of size up to 50 elements.
+- If all elements are in order or all elements from 1 to k are already in the array, fewer operations will be needed.
+- The solution must respect the constraints on the number of elements and the values of k.
+{{< dots >}}
+## Code 💻
 ```cpp
-int cnt[51] = {}, i = nums.size() - 1;
-```
-- `cnt`: This array is used to track the frequency of each number from `1` to `k` in the subsequence. The array has a size of 51 to accommodate all possible values of `nums[i]` (since `nums[i]` is bounded between 1 and 50).
-- `i`: This is the index from which we will start the iteration. We begin from the end of the array (`nums.size() - 1`) because we are looking for the minimum number of removals, and we want to process the elements in reverse order.
-
-#### Step 2: Loop to Find Numbers from `1` to `k`
-
-```cpp
-for (int found = 0; found < k; --i)
-    if (nums[i] <= k)
-        found += cnt[nums[i]]++ == 0;
-```
-- We iterate from the end of the array and look for the numbers `1` through `k`.
-- `found`: This variable keeps track of how many unique numbers from `1` to `k` we have encountered in the array so far. We stop once we have found all numbers from `1` to `k` in the sequence.
-- `nums[i] <= k`: We only care about numbers less than or equal to `k`. If `nums[i]` is greater than `k`, we ignore it, as it is irrelevant to our subsequence of interest.
-- `cnt[nums[i]]++ == 0`: This checks if the current number `nums[i]` is already present in the subsequence. If it is not present (i.e., its count is zero), we increment `found` by 1, meaning we've found another number from `1` to `k`.
-
-#### Step 3: Calculate Number of Removals
-
-```cpp
-return nums.size() - i - 1;
-```
-- Once we have found all the required numbers (`1` to `k`), the index `i` will point to the first number that we do not need to remove in order to form the desired subsequence.
-- The total number of elements that need to be removed is simply the total size of the array minus `i - 1` (since `i` is the index of the last number that must remain in the subsequence).
-- `nums.size() - i - 1` gives the count of the elements that need to be removed to form the subsequence.
-
-### Example Walkthrough
-
-Let's go through an example to understand how the code works.
-
-**Example 1**:
-
-Input:
-```cpp
-nums = [5, 3, 1, 4, 2], k = 3
+int minOperations(vector<int>& nums, int k) {
+    int cnt[51] = {}, i = nums.size() - 1;
+    for (int found = 0; found < k; --i)
+        if (nums[i] <= k)
+            found += cnt[nums[i]]++ == 0;
+    return nums.size() - i - 1;
+}
 ```
 
-**Step-by-Step Execution**:
-1. `cnt` is initialized to an array of zeros: `cnt[51] = {0, 0, 0, 0, ..., 0}`.
-2. We start iterating from the last element (index `4`), which is `2`. Since `2 <= k`, we increment `cnt[2]` and mark that we've found a valid number (2) from the subsequence `1` to `3`. The `found` counter becomes 1.
-3. Next, we move to `4` at index `3`. Since `4 > k`, we ignore this element.
-4. At index `2`, the number is `1`. We increment `cnt[1]`, and since this is the first occurrence of `1`, the `found` counter becomes 2.
-5. At index `1`, the number is `3`. We increment `cnt[3]`, and since this is the first occurrence of `3`, the `found` counter becomes 3.
-6. At index `0`, the number is `5`, which is greater than `k`, so we ignore this element.
+This function calculates the minimum number of operations required to perform an action on the given array, using a frequency count to track the required numbers.
 
-At this point, we have found all the numbers `1`, `2`, and `3`. The required subsequence is `[1, 2, 3]`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Code Declaration**
+	```cpp
+	int minOperations(vector<int>& nums, int k) {
+	```
+	Function declaration that takes a vector of integers and an integer k as input, returning an integer result.
 
-**Result**:
-- The number of elements that need to be removed is `nums.size() - i - 1 = 5 - 2 - 1 = 2`.
-- So, the answer is `2`.
+2. **Variable Initialization**
+	```cpp
+	    int cnt[51] = {}, i = nums.size() - 1;
+	```
+	Initialize an array to count occurrences of numbers up to 50 and set the index variable i to the last element of nums.
 
-### Time Complexity
+3. **Loop Setup**
+	```cpp
+	    for (int found = 0; found < k; --i)
+	```
+	Start a for loop that iterates backwards through the array, with a stopping condition based on found elements.
 
-- **O(n)**: The algorithm loops through the array once, processing each element in constant time. Since there are no nested loops, the time complexity is linear, i.e., O(n), where `n` is the size of the input array.
+4. **Condition Check**
+	```cpp
+	        if (nums[i] <= k)
+	```
+	Condition that checks if the current element is less than or equal to k.
 
-### Space Complexity
+5. **Frequency Count**
+	```cpp
+	            found += cnt[nums[i]]++ == 0;
+	```
+	Increment the 'found' variable if the current number has not been seen before, while updating its count in the cnt array.
 
-- **O(k)**: We use a frequency array (`cnt`) of size `k + 1` to keep track of the numbers from `1` to `k`. Since `k` is constant and at most 50, the space complexity is O(k), which is O(1) in practical terms.
+6. **Result Calculation**
+	```cpp
+	    return nums.size() - i - 1;
+	```
+	Return the difference between the size of the nums vector and the current index, minus one, which represents the result of the operation.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution efficiently solves the problem by iterating over the array from right to left and greedily keeping track of the numbers needed for the subsequence. The algorithm ensures that only the minimum number of elements are removed by stopping as soon as we have found all numbers from `1` to `k`. The solution is optimal with a linear time complexity of O(n) and a constant space complexity of O(k). This makes it well-suited for large inputs.
+The time complexity is O(n) because we only need to iterate through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is O(k) for storing the collected elements in the set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-collect-elements/description/)
 

@@ -14,130 +14,213 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 2D grid of 0s and 1s, return the number of elements in the largest square subgrid that has 1s on its border and 0s inside. If no such subgrid exists, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D grid, where each element is either 0 or 1.
+- **Example:** `Input: grid = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]`
+- **Constraints:**
+	- 1 <= grid.length <= 100
+	- 1 <= grid[0].length <= 100
+	- grid[i][j] is 0 or 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int largest1BorderedSquare(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        
-        vector<vector<int>> top(m, vector<int>(n, 0)), left(m, vector<int>(n, 0));
-        
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] > 0) {
-                top[i][j] = i > 0? 1 + top[i - 1][j]: 1;
-                left[i][j] = j > 0? 1 + left[i][j - 1]: 1;
-            }
-        
-        for(int l = min(m, n); l >= 1; l--) {
-            for(int i = 0; i < m - l + 1; i++)
-            for(int j = 0; j < n - l + 1; j++)
-                if(top[i + l - 1][j] >= l &&
-                   top[i + l - 1][j + l - 1] >= l &&
-                  left[i][j + l - 1] >= l &&
-                  left[i + l - 1][j + l - 1] >= l)
-                    return l * l;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of elements in the largest square subgrid with 1s on its border and 0s inside.
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The output will be an integer representing the area of the largest square subgrid.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the largest square subgrid with all 1s on its border and 0s inside.
+
+- 1. Use dynamic programming to calculate the largest possible square that can be formed at each point.
+- 2. Check the border elements of possible square subgrids to ensure they meet the condition of having 1s along the borders.
+- 3. Return the area of the largest valid square found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid contains only 0s and 1s.
+- We are looking for squares where the border consists of 1s and the inside is filled with 0s.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]`  \
+  **Explanation:** In this example, the largest square with all 1s on its border is the entire 3x3 grid, which has 9 elements.
+
+- **Input:** `Input: grid = [[1, 1, 0, 0]]`  \
+  **Explanation:** Here, the only valid square is the top-left corner, which is a 1x1 square with 1 on its border, giving an output of 1.
+
+{{< dots >}}
+## Approach 🚀
+The goal is to find the largest square subgrid with 1s on its border and 0s inside, using dynamic programming to check possible squares and validate their borders.
+
+### Initial Thoughts 💭
+- Dynamic programming can be used to store the size of the largest square that can end at each point.
+- We need to ensure the border of the square is composed of 1s and the inside is 0s.
+- The problem is a typical dynamic programming problem where we compute the largest square at each point and then check if it satisfies the condition of having 1s on the border and 0s inside.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty grid will not be given as per the constraints.
+- The solution should efficiently handle grids of size 100x100.
+- Grids where no valid square exists should return 0.
+- The solution must be efficient enough to handle the upper limits of grid size (100x100).
+{{< dots >}}
+## Code 💻
+```cpp
+int largest1BorderedSquare(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    
+    vector<vector<int>> top(m, vector<int>(n, 0)), left(m, vector<int>(n, 0));
+    
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] > 0) {
+            top[i][j] = i > 0? 1 + top[i - 1][j]: 1;
+            left[i][j] = j > 0? 1 + left[i][j - 1]: 1;
         }
-        return 0;
+    
+    for(int l = min(m, n); l >= 1; l--) {
+        for(int i = 0; i < m - l + 1; i++)
+        for(int j = 0; j < n - l + 1; j++)
+            if(top[i + l - 1][j] >= l &&
+               top[i + l - 1][j + l - 1] >= l &&
+              left[i][j + l - 1] >= l &&
+              left[i + l - 1][j + l - 1] >= l)
+                return l * l;
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The problem is to find the largest square sub-grid in a binary matrix (grid) that is fully bordered by 1s. A square is defined as having all four sides formed by 1s, meaning it must have a solid border around it. The function should return the area of the largest such square, which is calculated as the side length squared.
-
-### Approach
-To efficiently determine the largest bordered square, the algorithm uses dynamic programming (DP) to precompute the number of consecutive 1s in the top and left directions for each cell in the grid. By maintaining these counts, the algorithm can quickly verify whether a square of a given size can be formed with the required borders:
-
-1. **Dynamic Programming Tables**: Two tables are created:
-   - `top[i][j]`: Stores the number of consecutive 1s from the top to the cell `(i, j)`.
-   - `left[i][j]`: Stores the number of consecutive 1s from the left to the cell `(i, j)`.
-
-2. **Filling the Tables**: The tables are filled in a single pass over the grid, allowing for efficient computation of these values.
-
-3. **Finding the Largest Square**: The algorithm then iterates over possible square sizes, starting from the largest possible size down to 1. For each size, it checks if there exists a top-left corner such that a square of that size can be formed with the required border. The first valid square found will be the largest due to the order of iteration.
-
-### Code Breakdown (Step by Step)
-Here’s a detailed breakdown of the code:
-
-```cpp
-class Solution {
-public:
-    int largest1BorderedSquare(vector<vector<int>>& grid) {
+    return 0;
+}
 ```
-- **Line 1-2**: A class named `Solution` is defined, with a public member function `largest1BorderedSquare` that takes a 2D vector `grid` as input. This function calculates the area of the largest square bordered by 1s.
 
-```cpp
-        int m = grid.size(), n = grid[0].size();
-```
-- **Line 3**: The variables `m` and `n` are initialized to the number of rows and columns in the grid, respectively.
+This function finds the largest square that can be formed from '1's in a given 2D grid. It uses dynamic programming to calculate the size of potential squares by storing the maximum consecutive '1's found at each position in the 'top' and 'left' arrays.
 
-```cpp
-        vector<vector<int>> top(m, vector<int>(n, 0)), left(m, vector<int>(n, 0));
-```
-- **Line 4**: Two 2D vectors, `top` and `left`, are created and initialized to 0. These will store the number of consecutive 1s encountered from the top and left sides for each cell.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int largest1BorderedSquare(vector<vector<int>>& grid) {
+	```
+	This defines the function `largest1BorderedSquare`, which takes a reference to a 2D vector `grid` and returns an integer representing the area of the largest square with a border of '1's.
 
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] > 0) {
-                top[i][j] = i > 0? 1 + top[i - 1][j]: 1;
-                left[i][j] = j > 0? 1 + left[i][j - 1]: 1;
-            }
-```
-- **Lines 5-10**: This nested loop fills the `top` and `left` tables:
-  - For each cell in the grid, if the cell contains a 1, it updates the `top` table with the count of consecutive 1s from the top.
-  - It does the same for the `left` table, updating it with the count of consecutive 1s from the left.
-  - The conditions ensure that we are not accessing out-of-bounds indices.
+2. **Matrix Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	This line initializes two variables, `m` and `n`, to store the number of rows and columns in the input `grid` respectively.
 
-```cpp
-        for(int l = min(m, n); l >= 1; l--) {
-```
-- **Line 11**: This for loop starts at the minimum of the grid's dimensions (either rows or columns) and decrements down to 1. This means we are checking the largest possible square first.
+3. **DP Arrays Initialization**
+	```cpp
+	    vector<vector<int>> top(m, vector<int>(n, 0)), left(m, vector<int>(n, 0));
+	```
+	This line initializes two 2D vectors, `top` and `left`, both with dimensions `m` x `n`, and fills them with zeros. These vectors will store the length of consecutive '1's up to each position in the grid (vertically for `top`, and horizontally for `left`).
 
-```cpp
-            for(int i = 0; i < m - l + 1; i++)
-            for(int j = 0; j < n - l + 1; j++)
-```
-- **Lines 12-14**: These nested loops iterate over all potential top-left corners `(i, j)` for squares of size `l`.
+4. **Loop Through Grid**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	This starts a loop iterating over each row of the grid.
 
-```cpp
-                if(top[i + l - 1][j] >= l &&
-                   top[i + l - 1][j + l - 1] >= l &&
-                  left[i][j + l - 1] >= l &&
-                  left[i + l - 1][j + l - 1] >= l)
-```
-- **Lines 15-19**: This conditional checks if a square of size `l` can be formed with 1s as borders:
-  - It verifies that the bottom side (from top table) and right side (from left table) of the square meet the required length `l`.
-  - If all conditions are satisfied, a valid bordered square exists.
+5. **Loop Through Grid Columns**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	This nested loop iterates through each column of the grid in the current row.
 
-```cpp
-                    return l * l;
-```
-- **Line 20**: If a valid square is found, the area (which is \( l \times l \)) is returned immediately, ensuring that this is the largest square found due to the order of iteration.
+6. **Check for '1'**
+	```cpp
+	        if(grid[i][j] > 0) {
+	```
+	This `if` statement checks if the current cell in the grid contains a '1'. If so, it calculates the maximum length of consecutive '1's for this position.
 
-```cpp
-        return 0;
-    }
-};
-```
-- **Lines 21-22**: If no bordered square is found, the function returns 0, and the class definition is closed.
+7. **Top Array Update**
+	```cpp
+	            top[i][j] = i > 0? 1 + top[i - 1][j]: 1;
+	```
+	If the current cell contains a '1', this line updates the `top` array at position `(i, j)` to store the length of consecutive '1's in the column, including the current cell.
 
-### Complexity
-- **Time Complexity**: The time complexity of this algorithm is \( O(m \times n) \), as it involves a single pass through the grid to fill the `top` and `left` tables, followed by a nested iteration over potential squares.
-- **Space Complexity**: The space complexity is also \( O(m \times n) \) due to the additional storage for the `top` and `left` tables.
+8. **Left Array Update**
+	```cpp
+	            left[i][j] = j > 0? 1 + left[i][j - 1]: 1;
+	```
+	This line updates the `left` array at position `(i, j)` to store the length of consecutive '1's in the row, including the current cell.
 
-### Conclusion
-The provided C++ solution efficiently determines the area of the largest square bordered by 1s in a binary grid using dynamic programming. By precomputing the number of consecutive 1s from the top and left sides of each cell, the algorithm can quickly verify potential square borders. This method ensures that the solution is optimal for larger grids and maintains clarity in implementation, making it suitable for algorithmic challenges involving matrix manipulations.
+9. **Square Size Search**
+	```cpp
+	    for(int l = min(m, n); l >= 1; l--) {
+	```
+	This `for` loop searches for the largest possible square that can be formed. It starts with the largest possible square size `l` (which is the minimum of the grid's dimensions) and decrements until it finds a valid square.
+
+10. **Search Rows**
+	```cpp
+	        for(int i = 0; i < m - l + 1; i++)
+	```
+	This nested loop iterates through all possible starting positions for a square of size `l` in the rows.
+
+11. **Search Columns**
+	```cpp
+	        for(int j = 0; j < n - l + 1; j++)
+	```
+	This nested loop iterates through all possible starting positions for a square of size `l` in the columns.
+
+12. **Square Validity Check**
+	```cpp
+	            if(top[i + l - 1][j] >= l &&
+	```
+	This checks if the top row of the current square of size `l` contains enough consecutive '1's (using the `top` array).
+
+13. **Square Validity Check**
+	```cpp
+	               top[i + l - 1][j + l - 1] >= l &&
+	```
+	This checks if the top-right corner of the current square contains enough consecutive '1's.
+
+14. **Square Validity Check**
+	```cpp
+	              left[i][j + l - 1] >= l &&
+	```
+	This checks if the left column of the current square contains enough consecutive '1's (using the `left` array).
+
+15. **Square Validity Check**
+	```cpp
+	              left[i + l - 1][j + l - 1] >= l)
+	```
+	This checks if the bottom-left corner of the current square contains enough consecutive '1's.
+
+16. **Return Area of Largest Square**
+	```cpp
+	                return l * l;
+	```
+	If a valid square of size `l` is found, the function returns the area of the square (i.e., `l * l`).
+
+17. **Return 0**
+	```cpp
+	    return 0;
+	```
+	If no square is found, the function returns 0, indicating that no valid square exists in the grid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The algorithm checks each cell in the grid and performs a constant-time operation for each, leading to a time complexity of O(m * n), where m and n are the dimensions of the grid.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the storage of additional 2D arrays `top` and `left`.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-1-bordered-square/description/)

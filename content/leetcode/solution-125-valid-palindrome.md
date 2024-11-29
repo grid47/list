@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "jJXJ16kPFWg"
 youtube_upload_date="2021-10-11"
 youtube_thumbnail="https://i.ytimg.com/vi/jJXJ16kPFWg/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,180 +28,169 @@ youtube_thumbnail="https://i.ytimg.com/vi/jJXJ16kPFWg/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+A string is considered a palindrome if, after converting all uppercase letters to lowercase and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include both letters and numbers. Given a string s, return true if it is a palindrome, otherwise return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string s that consists of printable ASCII characters.
+- **Example:** `Input: s = 'Was it a car or a cat I saw?'`
+- **Constraints:**
+	- 1 <= s.length <= 2 * 10^5
+	- s consists only of printable ASCII characters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    bool isPalindrome(string s) {
-        int i = 0, j = s.size() - 1;
-        while(i <= j) {
-            if(!isalnum(s[i])) {
-                i++; continue;
-            }
-            if(!isalnum(s[j])) {
-                j--; continue;
-            }
-            if(tolower(s[i]) == tolower(s[j])) {
-                i++, j--;
-            } else return false;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean value, true if the string is a palindrome, otherwise false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The string is considered a palindrome if it reads the same when ignoring non-alphanumeric characters and case differences.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the given string is a palindrome after ignoring non-alphanumeric characters and converting all letters to lowercase.
+
+- Initialize two pointers, one at the start (i = 0) and one at the end (j = s.length() - 1).
+- While the two pointers have not crossed each other, check the characters at both pointers.
+- If the character at pointer i is not alphanumeric, move i forward.
+- If the character at pointer j is not alphanumeric, move j backward.
+- If the characters at i and j are equal (ignoring case), move both pointers inward.
+- If any character comparison fails, return false.
+- If the loop completes without finding any mismatches, return true.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string will always contain at least one character.
+- We will only work with printable ASCII characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'Was it a car or a cat I saw?'`  \
+  **Explanation:** After removing non-alphanumeric characters and converting to lowercase, the string becomes 'wasitacaroracatisaw', which is the same forward and backward, so the answer is true.
+
+- **Input:** `Input: s = 'race a car'`  \
+  **Explanation:** After removing non-alphanumeric characters and converting to lowercase, the string becomes 'raceacar', which is not the same forward and backward, so the answer is false.
+
+- **Input:** `Input: s = ' '`  \
+  **Explanation:** After removing non-alphanumeric characters, the string becomes an empty string, which is considered a palindrome, so the answer is true.
+
+{{< dots >}}
+## Approach 🚀
+We use two pointers to compare the characters of the string from both ends, ignoring non-alphanumeric characters and case differences. The process continues until we check all characters or find a mismatch.
+
+### Initial Thoughts 💭
+- Using two pointers is an efficient way to check for palindrome properties.
+- We need to account for both case insensitivity and ignoring non-alphanumeric characters.
+{{< dots >}}
+### Edge Cases 🌐
+- The input can be an empty string, which is considered a palindrome.
+- The solution must handle inputs with up to 200,000 characters efficiently.
+- Strings with only non-alphanumeric characters should be considered palindromes as they become empty after removal.
+- Ensure that the input string is within the specified length.
+{{< dots >}}
+## Code 💻
+```cpp
+
+bool isPalindrome(string s) {
+    int i = 0, j = s.size() - 1;
+    while(i <= j) {
+        if(!isalnum(s[i])) {
+            i++; continue;
         }
-        return true;
+        if(!isalnum(s[j])) {
+            j--; continue;
+        }
+        if(tolower(s[i]) == tolower(s[j])) {
+            i++, j--;
+        } else return false;
     }
-};
-{{< /highlight >}}
----
-
-### 💡 **Palindrome Checker: Is it a Palindrome? Let's Find Out!**
-
-The **Palindrome** problem challenges us to check if a given string is a palindrome, ignoring spaces, punctuation, and case sensitivity. A palindrome is a sequence that reads the same backward as forward.
-
-Let’s break down how we can solve this problem efficiently and elegantly. 🚀
-
----
-
-### 📝 **Problem Statement**
-
-Given a string `s`, determine whether it is a palindrome, considering only alphanumeric characters and ignoring case sensitivity.
-
-#### **Example 1**:
-- **Input**: `"A man, a plan, a canal: Panama"`
-- **Output**: `true`
-  - **Explanation**: After removing all non-alphanumeric characters and ignoring case, the string becomes `"amanaplanacanalpanama"`, which is a palindrome.
-
-#### **Example 2**:
-- **Input**: `"race a car"`
-- **Output**: `false`
-  - **Explanation**: After removing non-alphanumeric characters, the string becomes `"raceacar"`, which is not a palindrome.
-
----
-
-### 🛠️ **Approach: Two-Pointer Technique**
-
-To solve this problem, we’ll use a **two-pointer** approach:
-- One pointer (`i`) starts at the beginning of the string.
-- Another pointer (`j`) starts at the end of the string.
-
-We compare the characters at these two pointers and move them toward each other. If at any point the characters don’t match, we know the string is not a palindrome.
-
----
-
-### ✨ **Step-by-Step Solution**
-
-#### 1️⃣ **Function Definition**
-
-```cpp
-bool isPalindrome(string s)
-```
-The function `isPalindrome` takes a string `s` as input and returns `true` if it's a palindrome and `false` otherwise.
-
----
-
-#### 2️⃣ **Initialize Two Pointers**
-
-```cpp
-int i = 0, j = s.size() - 1;
-```
-- **`i`** starts at the beginning of the string.
-- **`j`** starts at the last character of the string (`s.size() - 1`).
-
----
-
-#### 3️⃣ **Main Loop: Compare Characters**
-
-```cpp
-while(i <= j) {
-```
-We continue looping as long as `i` is less than or equal to `j`. This means we haven’t yet checked all pairs of characters.
-
----
-
-#### 4️⃣ **Skip Non-Alphanumeric Characters**
-
-```cpp
-if(!isalnum(s[i])) {
-    i++; continue;
-}
-if(!isalnum(s[j])) {
-    j--; continue;
+    return true;
 }
 ```
-- We check if the character at position `i` is **not alphanumeric** (i.e., it's a space, punctuation, etc.). If it's not, we increment `i` and continue the loop.
-- Similarly, we check the character at position `j`. If it's not alphanumeric, we decrement `j` and continue.
 
----
+This function checks if a given string is a palindrome, ignoring non-alphanumeric characters and case sensitivity.
 
-#### 5️⃣ **Compare Characters Case-Insensitively**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isPalindrome(string s) {
+	```
+	Declare a function to determine if the input string is a valid palindrome.
 
-```cpp
-if(tolower(s[i]) == tolower(s[j])) {
-    i++, j--;
-} else {
-    return false;
-}
-```
-- Convert both characters to lowercase using `tolower()` to **ignore case**.
-- If the characters match, we move both pointers towards the center (`i++` and `j--`).
-- If they don’t match, return `false` immediately, since the string is not a palindrome.
+2. **Variable Initialization**
+	```cpp
+	    int i = 0, j = s.size() - 1;
+	```
+	Initialize two pointers: `i` at the start of the string and `j` at the end.
 
----
+3. **Loop Iteration**
+	```cpp
+	    while(i <= j) {
+	```
+	Start a loop to check characters from both ends of the string.
 
-#### 6️⃣ **Return Result**
+4. **Conditional Check**
+	```cpp
+	        if(!isalnum(s[i])) {
+	```
+	Check if the current character at the start pointer is non-alphanumeric.
 
-```cpp
-return true;
-```
-If we complete the loop without finding any mismatched characters, the string is a palindrome, and we return `true`.
+5. **Pointer Update**
+	```cpp
+	            i++; continue;
+	```
+	Move the start pointer forward and skip the current character if it's non-alphanumeric.
 
----
+6. **Conditional Check**
+	```cpp
+	        if(!isalnum(s[j])) {
+	```
+	Check if the current character at the end pointer is non-alphanumeric.
 
-### 🔍 **Time and Space Complexity**
+7. **Pointer Update**
+	```cpp
+	            j--; continue;
+	```
+	Move the end pointer backward and skip the current character if it's non-alphanumeric.
 
-- **Time Complexity**:  
-  **O(n)** — We traverse the string only once, with each character being processed in constant time.
+8. **Comparison**
+	```cpp
+	        if(tolower(s[i]) == tolower(s[j])) {
+	```
+	Compare the lowercase versions of the characters at both pointers.
 
-- **Space Complexity**:  
-  **O(1)** — We only use two extra variables (`i` and `j`), so the space complexity is constant.
+9. **Pointer Update**
+	```cpp
+	            i++, j--;
+	```
+	Move both pointers closer to the center if the characters match.
 
----
+10. **Return Statement**
+	```cpp
+	        } else return false;
+	```
+	Return false if the characters do not match.
 
-### 🧑‍💻 **Example Walkthrough**
+11. **Return Statement**
+	```cpp
+	    return true;
+	```
+	Return true if all character pairs matched, confirming the string is a palindrome.
 
-Let’s go through the example **`"A man, a plan, a canal: Panama"`**:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. **Initialization**:  
-   - `i = 0`, `j = 29`
+The time complexity is O(n) because we process each character of the string at most once.
 
-2. **First Iteration** (`i = 0`, `j = 29`):
-   - `s[i] = 'A'` and `s[j] = 'a'` → After converting to lowercase, they match.
-   - Move `i` to 1, `j` to 28.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-3. **Skip Non-Alphanumeric**:  
-   - `s[i] = ' '` (not alphanumeric), so move `i` to 2.
+The space complexity is O(1) because we only store a few variables (pointers) regardless of the input size.
 
-4. **Second Iteration** (`i = 2`, `j = 28`):
-   - `s[i] = 'm'` and `s[j] = 'm'` → They match, move `i` to 3, `j` to 27.
-
-5. **Continue Checking**:  
-   - As we move through the string, all corresponding characters match after ignoring non-alphanumeric characters.
-
-6. **Final Iteration** (`i = 14`, `j = 15`):
-   - No mismatches! The pointers meet, and the function returns `true`.
-
-**Output**: `true`
-
----
-
-### 🏁 **Conclusion: Mission Accomplished!**
-
-By using the **two-pointer approach**, we efficiently solved the palindrome problem while ignoring case and non-alphanumeric characters. 🎉 The solution is **time-efficient** (O(n)) and **space-efficient** (O(1)).
-
----
-
-### 🌱 **Keep Coding and Keep Improving!**
-
-Remember, each problem you solve makes you a stronger coder. Keep practicing, stay curious, and you’ll be solving even more complex problems soon! ✨
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/valid-palindrome/description/)

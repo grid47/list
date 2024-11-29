@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "mHsj83NoZDA"
 youtube_upload_date="2023-07-20"
 youtube_thumbnail="https://i.ytimg.com/vi/mHsj83NoZDA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,124 +28,181 @@ youtube_thumbnail="https://i.ytimg.com/vi/mHsj83NoZDA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of intervals, where each interval is represented by a pair of integers [start, end], the goal is to determine the minimum number of intervals to remove to make the rest non-overlapping. Intervals that only touch at a point are considered non-overlapping.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of intervals, where each interval is represented as an array of two integers: [start, end].
+- **Example:** `intervals = [[1, 2], [2, 3], [3, 4], [1, 3]]`
+- **Constraints:**
+	- 1 <= intervals.length <= 10^5
+	- -5 * 10^4 <= starti < endi <= 5 * 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int eraseOverlapIntervals(vector<vector<int>>& ivl) {
-        sort(ivl.begin(), ivl.end());
-        int ans = 0;
-        int n = ivl.size();
-        int prv = 0;
-        for(int cur = 1; cur < n; cur++) {
-            // [1, 5]. [3, 6]
-            // [2, 8]. [3, 5]
-            if(ivl[cur][0] < ivl[prv][1]) {
-                ans++;
-                if(ivl[cur][1] <= ivl[prv][1])
-                    prv = cur;
-            } else {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of intervals to remove to make the remaining intervals non-overlapping.
+- **Example:** `1`
+- **Constraints:**
+	- If all intervals are already non-overlapping, return 0.
+	- If no intervals can be removed to make them non-overlapping, return -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of intervals that must be removed to ensure the rest are non-overlapping.
+
+- 1. Sort the intervals by their start times.
+- 2. Use a greedy algorithm to keep the interval with the earliest end time, and remove intervals that overlap with it.
+- 3. Track the number of removed intervals and return that count.
+{{< dots >}}
+### Problem Assumptions ✅
+- Intervals are represented by pairs of integers, and each interval's start is less than its end.
+- The intervals array is not empty and contains at least one interval.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: intervals = [[1,2],[2,3],[3,4],[1,3]]`  \
+  **Explanation:** We remove the interval [1,3], and the remaining intervals are non-overlapping.
+
+- **Input:** `Input: intervals = [[1,2],[1,2],[1,2]]`  \
+  **Explanation:** We need to remove two of the [1,2] intervals to make the rest non-overlapping.
+
+- **Input:** `Input: intervals = [[1,2],[2,3]]`  \
+  **Explanation:** The intervals are already non-overlapping, so no removal is necessary.
+
+{{< dots >}}
+## Approach 🚀
+We will use a greedy algorithm to minimize the number of intervals removed. The idea is to always keep the interval with the smallest end time to reduce the chance of overlaps.
+
+### Initial Thoughts 💭
+- Sorting the intervals by their end times will help us efficiently select intervals that minimize overlaps.
+- By keeping intervals with the earliest end time, we can maximize the space available for future intervals, thereby minimizing the number of removed intervals.
+{{< dots >}}
+### Edge Cases 🌐
+- If the intervals array is empty, return 0 as there are no intervals to remove.
+- If the intervals array contains a large number of intervals, ensure the algorithm handles it efficiently.
+- If all intervals are already non-overlapping, return 0.
+- Handle cases where all intervals are identical, or where no intervals overlap.
+{{< dots >}}
+## Code 💻
+```cpp
+int eraseOverlapIntervals(vector<vector<int>>& ivl) {
+    sort(ivl.begin(), ivl.end());
+    int ans = 0;
+    int n = ivl.size();
+    int prv = 0;
+    for(int cur = 1; cur < n; cur++) {
+        // [1, 5]. [3, 6]
+        // [2, 8]. [3, 5]
+        if(ivl[cur][0] < ivl[prv][1]) {
+            ans++;
+            if(ivl[cur][1] <= ivl[prv][1])
                 prv = cur;
-            }
+        } else {
+            prv = cur;
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand requires us to remove the minimum number of intervals such that no intervals overlap. Given a collection of intervals where each interval is represented by a pair of integers [start, end], our goal is to find the minimum number of intervals to remove to ensure that no two intervals overlap. The intervals are provided as a 2D array, where each subarray contains the start and end time of an interval.
-
-### Approach
-
-To solve this problem efficiently, we can utilize a greedy algorithm approach. The idea is to always prioritize the intervals that end the earliest. By removing the intervals that overlap with others, we ensure that the remaining intervals are as non-overlapping as possible.
-
-#### Key Observations:
-1. **Sorting by End Time**: By sorting the intervals based on their end times, we are effectively selecting intervals that leave as much space as possible for subsequent intervals. This helps us minimize the number of removals.
-2. **Greedy Strategy**: Once sorted, we can iterate through the intervals and check if the current interval overlaps with the previously selected interval. If there is an overlap, we increment the count of intervals to remove. If there’s no overlap, we update the previous interval to the current one.
-
-#### Steps:
-1. **Sort the intervals**: Sort the intervals by their end time.
-2. **Iterate through the sorted intervals**: Start from the second interval and compare it with the first one.
-3. **Check for overlap**: If the start time of the current interval is less than the end time of the previous interval, there’s an overlap. Increment the removal counter.
-4. **Update the `prv` index**: If the current interval ends earlier than the previous interval, update the `prv` index to point to the current interval.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sorting the Intervals
-
-```cpp
-sort(ivl.begin(), ivl.end());
-```
-
-- We begin by sorting the intervals in increasing order of their end times. This helps in choosing the interval that finishes the earliest, ensuring that we leave room for as many intervals as possible.
-- The sorting step is crucial to the greedy strategy, allowing us to compare each interval with the one that finishes before it.
-
-#### Step 2: Initializing Variables
-
-```cpp
-int ans = 0;
-int n = ivl.size();
-int prv = 0;
-```
-
-- `ans` keeps track of the number of intervals we need to remove.
-- `n` is the total number of intervals.
-- `prv` is the index of the previously selected interval. We initialize it to 0, assuming that we start with the first interval in the sorted list.
-
-#### Step 3: Iterating Over the Intervals
-
-```cpp
-for(int cur = 1; cur < n; cur++) {
-```
-
-- We begin iterating from the second interval (`cur = 1`), as the first interval is always considered as selected initially.
-
-#### Step 4: Checking for Overlap
-
-```cpp
-if(ivl[cur][0] < ivl[prv][1]) {
-    ans++;
-    if(ivl[cur][1] <= ivl[prv][1])
-        prv = cur;
-}
-else {
-    prv = cur;
+    return ans;
 }
 ```
 
-- If the start time of the current interval (`ivl[cur][0]`) is less than the end time of the previous interval (`ivl[prv][1]`), it means the intervals overlap. In this case:
-  - We increment the `ans` variable, indicating that one interval needs to be removed to avoid the overlap.
-  - If the current interval ends earlier than or at the same time as the previous interval, we update the `prv` index to the current interval (`cur`). This ensures that the previous interval is replaced by the one that ends earlier, allowing more room for future intervals.
-- If there is no overlap (i.e., the start time of the current interval is greater than or equal to the end time of the previous interval), we update the `prv` index to point to the current interval.
+This function removes the minimum number of intervals to make the remaining intervals non-overlapping by applying a greedy strategy after sorting.
 
-#### Step 5: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declarations And Calls**
+	```cpp
+	int eraseOverlapIntervals(vector<vector<int>>& ivl) {
+	```
+	Defines the function to process a vector of intervals.
 
-```cpp
-return ans;
-```
+2. **Sorting**
+	```cpp
+	    sort(ivl.begin(), ivl.end());
+	```
+	Sorts the intervals based on their start times to simplify processing.
 
-- After processing all intervals, we return the `ans` variable, which contains the minimum number of intervals to remove to make the rest non-overlapping.
+3. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes a counter for tracking the number of intervals to remove.
 
-### Complexity
+4. **Length Of Collection**
+	```cpp
+	    int n = ivl.size();
+	```
+	Stores the size of the intervals vector for iteration.
 
-#### Time Complexity:
+5. **Variable Initialization**
+	```cpp
+	    int prv = 0;
+	```
+	Tracks the index of the last non-overlapping interval.
 
-- **Sorting**: The time complexity of sorting the intervals is `O(n log n)`, where `n` is the number of intervals.
-- **Iterating Through Intervals**: The iteration through the intervals takes `O(n)`.
-- Therefore, the overall time complexity of the solution is dominated by the sorting step, which is `O(n log n)`.
+6. **For Loops**
+	```cpp
+	    for(int cur = 1; cur < n; cur++) {
+	```
+	Iterates over the intervals starting from the second one.
 
-#### Space Complexity:
+7. **Conditional Checks**
+	```cpp
+	        if(ivl[cur][0] < ivl[prv][1]) {
+	```
+	Checks if the current interval overlaps with the previous one.
 
-- The algorithm uses `O(1)` extra space, as we only store a few variables (`ans`, `n`, `prv`), and the input intervals are modified in-place.
-- Therefore, the space complexity is `O(1)`.
+8. **Increment**
+	```cpp
+	            ans++;
+	```
+	Increments the removal counter for overlapping intervals.
 
-### Conclusion
+9. **Conditional Checks**
+	```cpp
+	            if(ivl[cur][1] <= ivl[prv][1])
+	```
+	Updates the reference to the current interval if it ends earlier.
 
-This problem is a classic example of a greedy algorithm. By sorting the intervals based on their end times, we ensure that we are selecting the maximum number of non-overlapping intervals. This approach is optimal, with a time complexity of `O(n log n)` due to the sorting step, and a space complexity of `O(1)` because we use only a constant amount of extra space. The solution is efficient and suitable for large inputs, making it a great fit for interval scheduling problems.
+10. **Assignment**
+	```cpp
+	                prv = cur;
+	```
+	Assigns the current interval index as the reference.
+
+11. **Else Condition**
+	```cpp
+	        } else {
+	```
+	Handles the case where intervals do not overlap.
+
+12. **Assignment**
+	```cpp
+	            prv = cur;
+	```
+	Updates the reference to the current non-overlapping interval.
+
+13. **Return At End**
+	```cpp
+	    return ans;
+	```
+	Returns the total number of intervals removed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N log N), where N is the number of intervals, due to the sorting step.
+- **Average Case:** O(N log N), due to the sorting step.
+- **Worst Case:** O(N log N), where N is the number of intervals, due to the sorting step.
+
+The main time complexity comes from sorting the intervals, and the subsequent iteration is O(N).
+
+### Space Complexity 💾
+- **Best Case:** O(N), for the space needed to store the intervals.
+- **Worst Case:** O(N), where N is the number of intervals, to store the sorted intervals.
+
+The space complexity is O(N) due to storing the intervals in memory and potentially the sorting operation.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/non-overlapping-intervals/description/)
 

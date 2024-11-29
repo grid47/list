@@ -14,184 +14,296 @@ img_src = ""
 youtube = "1RZijG2c1CA"
 youtube_upload_date="2024-04-06"
 youtube_thumbnail="https://i.ytimg.com/vi/1RZijG2c1CA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an n x n binary matrix where 1 represents land and 0 represents water. There are exactly two islands in the grid, and you need to connect them by flipping the smallest number of 0's to 1's. An island is a group of 1's that are connected horizontally or vertically. Your task is to find the minimum number of flips required to connect the two islands.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an n x n binary matrix, where each cell is either 0 or 1.
+- **Example:** `Input: grid = [[1,0],[0,1]]`
+- **Constraints:**
+	- 2 <= n <= 100
+	- grid[i][j] is either 0 or 1
+	- There are exactly two islands in the grid
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int shortestBridge(vector<vector<int>>& grid) {
-        queue<pair<int, int>> q;
-        bool flag = false;
-        int m = grid.size(), n = grid[0].size();
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
-                if (grid[i][j]) {
-                    dfs(i, j, q, grid);
-                    flag = true;
-                    break;
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest number of 0's that must be flipped to connect the two islands.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The grid will always contain exactly two islands.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To connect the two islands with the minimum number of flips, we first identify one island using depth-first search (DFS), then perform a breadth-first search (BFS) to find the shortest path to the other island by flipping the minimum number of 0's to 1's.
+
+- 1. Use DFS to find the first island and store its coordinates.
+- 2. Use BFS from the first island to find the shortest path to the second island, counting the number of 0's encountered along the way.
+- 3. Return the number of flips required to connect the two islands.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid will always contain exactly two islands, so no edge cases with more or fewer islands are possible.
+- The grid will not be empty and will always have a size of at least 2x2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[1,0],[0,1]]`  \
+  **Explanation:** In this example, there are two islands represented by 1's at positions (0,1) and (1,0). The minimum number of flips required to connect them is 1, flipping the 0 at position (0,0).
+
+- **Input:** `Input: grid = [[1,0,1],[0,0,0],[1,0,1]]`  \
+  **Explanation:** In this example, the two islands are at positions (0,0), (0,2), (2,0), and (2,2). The minimum number of flips required to connect them is 2, flipping the two 0's at positions (1,0) and (1,2).
+
+{{< dots >}}
+## Approach 🚀
+We solve this problem using depth-first search (DFS) and breadth-first search (BFS). First, we perform DFS to find and mark all the cells of one island, then use BFS to find the shortest path to the second island, flipping the minimum number of 0's along the way.
+
+### Initial Thoughts 💭
+- We can use DFS to mark all the cells of one island, then use BFS to find the shortest path to the second island, ensuring we flip the fewest number of 0's.
+- This approach effectively reduces the problem to a shortest path search, ensuring an optimal solution.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be exactly two islands, so no empty inputs are possible.
+- The solution should efficiently handle the largest grid sizes (up to 100x100).
+- The grid may contain only land (1's) or only water (0's), but there will always be two islands to connect.
+- The input grid will always contain exactly two islands, and no more.
+{{< dots >}}
+## Code 💻
+```cpp
+int shortestBridge(vector<vector<int>>& grid) {
+    queue<pair<int, int>> q;
+    bool flag = false;
+    int m = grid.size(), n = grid[0].size();
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            if (grid[i][j]) {
+                dfs(i, j, q, grid);
+                flag = true;
+                break;
             }
-            if (flag) break;
         }
-        
-        int step = 0;
-        int dir[5] = {0,1,0,-1,0};
-        while(!q.empty()) {
-            int sz = q.size();
-            for(int i = 0; i < sz; i++) {
-                pair<int, int> p = q.front();
-                q.pop();
-                for(int i = 0; i < 4; i++) {
-                    int x = p.first + dir[i], y = p.second + dir[i+1];
-                    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] == -1)
-                        continue;
-                    if(grid[x][y] == 1) return step;
-                    q.push({x, y});
-                    grid[x][y] = -1;
-                }
-            }
-            step++;
-        }
-        return -1;
+        if (flag) break;
     }
     
-    void dfs(int x, int y, queue<pair<int, int>> &q, vector<vector<int>> &grid) {
-        if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] != 1)
-            return;
-        q.push(make_pair(x, y));
-        grid[x][y] = -1;
-        dfs(x + 1, y, q, grid);
-        dfs(x - 1, y, q, grid);
-        dfs(x, y + 1, q, grid);
-        dfs(x, y - 1, q, grid);
+    int step = 0;
+    int dir[5] = {0,1,0,-1,0};
+    while(!q.empty()) {
+        int sz = q.size();
+        for(int i = 0; i < sz; i++) {
+            pair<int, int> p = q.front();
+            q.pop();
+            for(int i = 0; i < 4; i++) {
+                int x = p.first + dir[i], y = p.second + dir[i+1];
+                if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] == -1)
+                    continue;
+                if(grid[x][y] == 1) return step;
+                q.push({x, y});
+                grid[x][y] = -1;
+            }
+        }
+        step++;
     }
-};
-{{< /highlight >}}
----
+    return -1;
+}
 
-### Problem Statement
+void dfs(int x, int y, queue<pair<int, int>> &q, vector<vector<int>> &grid) {
+    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] != 1)
+        return;
+    q.push(make_pair(x, y));
+    grid[x][y] = -1;
+    dfs(x + 1, y, q, grid);
+    dfs(x - 1, y, q, grid);
+    dfs(x, y + 1, q, grid);
+    dfs(x, y - 1, q, grid);
+}
+```
 
-The problem involves finding the shortest bridge between two islands in a 2D grid. Each cell in the grid can be:
-- `1` representing land.
-- `0` representing water.
+This code solves the problem of finding the shortest bridge between two islands in a grid using a breadth-first search (BFS) algorithm after identifying one island with depth-first search (DFS).
 
-The grid contains two islands, and your task is to connect these islands by flipping the fewest number of `0`s to `1`s, i.e., build the shortest bridge. The bridge should connect the two islands through water cells, while the bridge itself is made of the water cells turned into land. You are required to return the minimum number of flips needed to connect the two islands.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int shortestBridge(vector<vector<int>>& grid) {
+	```
+	Start the function that accepts a 2D grid where 1 represents land and 0 represents water.
 
-### Approach
+2. **Queue Setup**
+	```cpp
+	    queue<pair<int, int>> q;
+	```
+	Initialize a queue to store the coordinates of the first island's land cells that will be explored.
 
-This problem is typically solved by employing a **Breadth-First Search (BFS)** algorithm in conjunction with **Depth-First Search (DFS)** to identify the two islands and find the shortest path to connect them.
+3. **Flag Setup**
+	```cpp
+	    bool flag = false;
+	```
+	Use a flag to indicate whether the first island has been found and DFS has been executed.
 
-#### Step-by-Step Explanation:
+4. **Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Get the dimensions of the grid (number of rows and columns).
 
-1. **Identifying the First Island using DFS**:
-   - First, we need to find one of the islands. We can do this by iterating through the grid and performing a DFS search from the first `1` we encounter. This will allow us to mark all the land cells of this island and store their coordinates in a queue for the next step.
-   - During the DFS traversal, we mark all the cells of the first island as `-1` to prevent visiting them again, and we store the coordinates of these cells in a queue. These coordinates will later serve as the starting points for the BFS.
+5. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++) {
+	```
+	Loop through each row of the grid.
 
-2. **Expanding the Search using BFS**:
-   - Once the first island is identified, the next step is to start the BFS from the coordinates of the first island's land cells. The BFS will explore the neighboring water cells (`0`s) and gradually expand the search in all four directions (up, down, left, right).
-   - The BFS continues until it encounters the second island's land cells. As soon as the second island is reached, the BFS will return the number of water cells (`0`s) traversed, which corresponds to the number of flips needed to connect the two islands.
+6. **Inner Loop**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	Loop through each column of the grid.
 
-3. **Return the Result**:
-   - The result is the number of steps taken by the BFS to connect the two islands, which is the minimal number of flips required to build the bridge.
+7. **Island Detection**
+	```cpp
+	            if (grid[i][j]) {
+	```
+	Check if a land cell is found, indicating the start of the first island.
 
-### Code Breakdown (Step by Step)
+8. **DFS Call**
+	```cpp
+	                dfs(i, j, q, grid);
+	```
+	Call the DFS function to explore the first island and fill the queue with its land cells.
 
-1. **DFS for the First Island**:
-   We start by using DFS to identify and mark the first island in the grid. The DFS function `dfs(x, y)` explores all connected `1`s (land cells) and marks them as `-1` to prevent revisiting them.
+9. **Set Flag**
+	```cpp
+	                flag = true;
+	```
+	Set the flag to true to mark that the first island has been processed.
 
-   ```cpp
-   void dfs(int x, int y, queue<pair<int, int>>& q, vector<vector<int>>& grid) {
-       if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] != 1)
-           return;
-       q.push(make_pair(x, y));  // Add land cell to the queue for BFS
-       grid[x][y] = -1;  // Mark the land cell as visited
-       dfs(x + 1, y, q, grid);  // Explore down
-       dfs(x - 1, y, q, grid);  // Explore up
-       dfs(x, y + 1, q, grid);  // Explore right
-       dfs(x, y - 1, q, grid);  // Explore left
-   }
-   ```
+10. **Break Outer Loop**
+	```cpp
+	                break;
+	```
+	Break the inner loop once the first island is found.
 
-   - This function is invoked when we first find a `1` (land) during the grid traversal.
-   - We then mark all land cells connected to this one, effectively identifying the first island and storing its cells in a queue.
+11. **Break Outer Loop**
+	```cpp
+	        if (flag) break;
+	```
+	Break the outer loop once the first island is fully processed.
 
-2. **BFS to Find the Shortest Bridge**:
-   After marking the first island, we use BFS to find the shortest path to the second island. BFS is particularly suited for finding the shortest path in an unweighted grid like this.
+12. **Step Initialization**
+	```cpp
+	    int step = 0;
+	```
+	Initialize a variable to count the number of steps to connect the two islands.
 
-   ```cpp
-   int step = 0;
-   int dir[5] = {0,1,0,-1,0};  // Direction vectors for up, right, down, and left
-   while(!q.empty()) {
-       int sz = q.size();  // Get the number of elements in the queue
-       for(int i = 0; i < sz; i++) {
-           pair<int, int> p = q.front();
-           q.pop();  // Get the next land cell from the queue
-           for(int i = 0; i < 4; i++) {
-               int x = p.first + dir[i], y = p.second + dir[i + 1];
-               // Check if the new position is valid and within bounds
-               if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] == -1)
-                   continue;  // Skip invalid positions or already visited cells
-               if(grid[x][y] == 1) return step;  // If we find land of the second island, return the step count
-               q.push({x, y});  // Add the water cell to the queue for further exploration
-               grid[x][y] = -1;  // Mark the water cell as visited
-           }
-       }
-       step++;  // Increase the number of steps after expanding one level
-   }
-   ```
+13. **Direction Array**
+	```cpp
+	    int dir[5] = {0,1,0,-1,0};
+	```
+	Set up an array to represent the four possible movement directions (up, right, down, left).
 
-   - The BFS starts by processing the first island’s land cells stored in the queue. For each cell, it explores the adjacent cells (up, down, left, right).
-   - If an adjacent cell is water (`0`), it is added to the queue, and its value is marked as visited by setting it to `-1`.
-   - If an adjacent cell is land (`1`), the BFS terminates, and the step count is returned.
+14. **BFS Loop**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start the BFS loop to expand from the first island's land cells.
 
-3. **Main Function**:
-   The `shortestBridge()` function initializes the BFS process after identifying the first island using DFS. It sets up the queue and handles the BFS iterations.
+15. **Queue Size**
+	```cpp
+	        int sz = q.size();
+	```
+	Get the current size of the queue to process all land cells of the island.
 
-   ```cpp
-   int shortestBridge(vector<vector<int>>& grid) {
-       queue<pair<int, int>> q;
-       bool flag = false;
-       int m = grid.size(), n = grid[0].size();
-       for(int i = 0; i < m; i++) {
-           for(int j = 0; j < n; j++) {
-               if (grid[i][j]) {
-                   dfs(i, j, q, grid);  // Find the first island and mark it
-                   flag = true;
-                   break;
-               }
-           }
-           if (flag) break;
-       }
+16. **BFS Inner Loop**
+	```cpp
+	        for(int i = 0; i < sz; i++) {
+	```
+	Loop through all elements in the queue.
 
-       return bfs(grid, q);  // Perform BFS to find the shortest bridge
-   }
-   ```
+17. **Pop Element**
+	```cpp
+	            pair<int, int> p = q.front();
+	```
+	Pop the front element from the queue (a land cell).
 
-   - The function starts by iterating over the grid to find the first `1` (land). Once found, DFS is invoked to mark all the land cells of the first island.
-   - After identifying the first island, BFS is used to find the shortest path to the second island, and the result is returned.
+18. **Queue Pop**
+	```cpp
+	            q.pop();
+	```
+	Remove the element from the queue.
 
-### Time Complexity
+19. **Direction Loop**
+	```cpp
+	            for(int i = 0; i < 4; i++) {
+	```
+	Loop through the four possible directions to expand from the current cell.
 
-- **DFS**: The DFS function visits every cell of the grid exactly once, so its time complexity is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the grid.
-- **BFS**: Similarly, the BFS function also processes each cell of the grid exactly once, making its time complexity **O(m * n)**.
+20. **Direction Calculations**
+	```cpp
+	                int x = p.first + dir[i], y = p.second + dir[i+1];
+	```
+	Calculate the new coordinates based on the current direction.
 
-Thus, the overall time complexity is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns in the grid.
+21. **Bounds Check**
+	```cpp
+	                if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] == -1)
+	```
+	Check if the new coordinates are within bounds and if the cell has already been visited.
 
-### Space Complexity
+22. **Skip Invalid Cells**
+	```cpp
+	                    continue;
+	```
+	Skip the current iteration if the cell is out of bounds or already visited.
 
-- The space complexity is **O(m * n)** because the space used by the queue in the BFS can grow to the size of the grid in the worst case.
-- Additionally, the DFS modifies the grid in place, which does not require extra space.
+23. **Island Found**
+	```cpp
+	                if(grid[x][y] == 1) return step;
+	```
+	If a land cell of the second island is found, return the current step count as the result.
 
-Therefore, the space complexity is **O(m * n)** due to the storage used by the grid and the queue.
+24. **Queue Push**
+	```cpp
+	                q.push({x, y});
+	```
+	Push the new valid cell into the queue for future processing.
 
-### Conclusion
+25. **Mark Visited**
+	```cpp
+	                grid[x][y] = -1;
+	```
+	Mark the current cell as visited by setting its value to -1.
 
-This solution efficiently solves the problem of finding the shortest bridge between two islands in a 2D grid using a combination of **DFS** to identify the first island and **BFS** to find the shortest path. The use of BFS ensures that the minimal number of flips is computed in optimal time, and by modifying the grid in place, we minimize space complexity. This approach ensures that the problem is solved efficiently, even for large grids.
+26. **Step Increment**
+	```cpp
+	        step++;
+	```
+	Increment the step counter after processing all cells in the current layer.
+
+27. **Return Result**
+	```cpp
+	    return -1;
+	```
+	Return -1 if no valid bridge is found (shouldn't happen for valid inputs).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+Both DFS and BFS operate in O(n^2) time, where n is the number of rows (or columns) in the grid.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the need to store the grid and the visited cells during the DFS and BFS.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-bridge/description/)
 

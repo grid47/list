@@ -14,97 +14,151 @@ img_src = ""
 youtube = "n4pxnAHTfeU"
 youtube_upload_date="2021-03-14"
 youtube_thumbnail="https://i.ytimg.com/vi/n4pxnAHTfeU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, s1 and s2, of equal length. A string swap is an operation where you choose two indices in a string (not necessarily different) and swap the characters at these indices. Return true if it is possible to make both strings equal by performing at most one string swap on exactly one of the strings. Otherwise, return false.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings, s1 and s2, both of equal length.
+- **Example:** `Input: s1 = "abc", s2 = "bca"`
+- **Constraints:**
+	- 1 <= s1.length, s2.length <= 100
+	- s1.length == s2.length
+	- s1 and s2 consist of only lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool areAlmostEqual(string s1, string s2) {
-        int chg = 0, cnt = 0;
-        vector<int> frq1(26, 0), frq2(26, 0);
-        for(int i = 0; i < s1.size(); i++) {
-            frq1[s1[i] - 'a']++;
-            frq2[s2[i] - 'a']++;
-            if(s1[i] != s2[i]) cnt++;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it is possible to make both strings equal with at most one swap, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-        return frq1 == frq2 && (cnt == 2 || cnt == 0);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to check if it's possible to make both strings equal by performing at most one swap on one of the strings.
+
+- First, check if both strings already match. If they do, return true.
+- If they do not match, check if exactly two characters are different between the strings.
+- Ensure that swapping the two different characters results in equal strings.
+{{< dots >}}
+### Problem Assumptions ✅
+- The strings are always of equal length.
+- Both strings consist of only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s1 = "abc", s2 = "bca"`  \
+  **Explanation:** By swapping the first and third characters of s2, we can make both strings equal.
+
+- **Input:** `s1 = "hello", s2 = "holle"`  \
+  **Explanation:** The strings can be made equal by swapping the second and fourth characters of s2.
+
+- **Input:** `s1 = "abc", s2 = "xyz"`  \
+  **Explanation:** It is impossible to make the strings equal with a single swap, so the result is false.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by first checking the difference between the two strings and evaluating if exactly one swap can make them equal.
+
+### Initial Thoughts 💭
+- The two strings must have exactly two different characters to be swappable into equality.
+- If they are already equal, no swap is needed.
+- Check if the strings already match. If they do, return true.
+- If not, check if exactly two characters are different and if swapping them would make the strings equal.
+{{< dots >}}
+### Edge Cases 🌐
+- There should not be any empty strings as per the constraints.
+- The solution should work efficiently for strings of length up to 100.
+- Both strings can be identical without requiring any swap.
+- Strings should only contain lowercase English letters.
+{{< dots >}}
+## Code 💻
+```cpp
+bool areAlmostEqual(string s1, string s2) {
+    int chg = 0, cnt = 0;
+    vector<int> frq1(26, 0), frq2(26, 0);
+    for(int i = 0; i < s1.size(); i++) {
+        frq1[s1[i] - 'a']++;
+        frq2[s2[i] - 'a']++;
+        if(s1[i] != s2[i]) cnt++;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-The problem requires us to determine whether two strings, `s1` and `s2`, can be considered "almost equal." Specifically, two strings are defined as almost equal if they can become identical by performing at most one swap of two characters in one of the strings. The goal is to implement a function that checks for this condition efficiently.
-
-### Approach
-
-To solve this problem, we can use the following approach:
-
-1. **Character Frequency Count**: We will first count the frequency of each character (a-z) in both strings. This helps in quickly determining if the two strings have the same set of characters.
-
-2. **Count Differences**: As we iterate through both strings, we will also count the number of positions where the characters in the two strings differ.
-
-3. **Condition Check**: For the strings to be almost equal:
-   - They must have the same frequency of characters.
-   - If there are no differences (`cnt == 0`), the strings are already equal.
-   - If there are exactly two differences (`cnt == 2`), we can potentially make them equal by swapping the two differing characters.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    bool areAlmostEqual(string s1, string s2) {
+    return frq1 == frq2 && (cnt == 2 || cnt == 0);
+}
 ```
-- We start by defining a class `Solution` with a public method `areAlmostEqual`, which takes two strings `s1` and `s2` as input parameters.
 
-```cpp
-        int chg = 0, cnt = 0;
-        vector<int> frq1(26, 0), frq2(26, 0);
-```
-- We initialize two integer counters: `chg` to count the number of changes (this variable is not used in the final logic) and `cnt` to count the number of positions where the characters of `s1` and `s2` differ.
-- We create two frequency vectors `frq1` and `frq2` of size 26 (for each letter in the alphabet) initialized to 0 to keep track of the frequency of characters in both strings.
+This function checks if two strings can be made equal by swapping exactly two characters. It counts the frequency of characters and the number of mismatches, then verifies if the strings have the same frequency distribution and two or zero mismatched characters.
 
-```cpp
-        for(int i = 0; i < s1.size(); i++) {
-            frq1[s1[i] - 'a']++;
-            frq2[s2[i] - 'a']++;
-            if(s1[i] != s2[i]) cnt++;
-        }
-```
-- We loop through each character of the strings `s1` and `s2` simultaneously.
-- For each character, we increment the corresponding index in the frequency vectors based on the ASCII value of the character (subtracting `'a'` converts a character to its respective index in the alphabet).
-- If the characters at the same position are different, we increment the `cnt` counter.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool areAlmostEqual(string s1, string s2) {
+	```
+	Define the function `areAlmostEqual`, which takes two strings `s1` and `s2` as input and returns a boolean indicating whether the two strings can be made equal by swapping exactly two characters.
 
-```cpp
-        return frq1 == frq2 && (cnt == 2 || cnt == 0);
-    }
-};
-```
-- Finally, we return the result of two conditions:
-  - The frequency vectors `frq1` and `frq2` must be equal, indicating that both strings contain the same characters in the same quantities.
-  - The count of differing positions must be either 0 (the strings are identical) or 2 (indicating that we can swap two characters to make them equal).
+2. **Variable Initialization**
+	```cpp
+	    int chg = 0, cnt = 0;
+	```
+	Initialize variables `chg` (to count the number of changes required) and `cnt` (to count the number of mismatched characters between `s1` and `s2`).
 
-### Complexity
+3. **Frequency Arrays**
+	```cpp
+	    vector<int> frq1(26, 0), frq2(26, 0);
+	```
+	Initialize two frequency arrays `frq1` and `frq2` to store the frequency of characters in `s1` and `s2`, respectively. Each array has 26 slots, corresponding to the 26 letters of the alphabet.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the strings. This is because we are iterating through each string once to compute character frequencies and count differences.
+4. **Loop through Strings**
+	```cpp
+	    for(int i = 0; i < s1.size(); i++) {
+	```
+	Iterate through each character in the strings `s1` and `s2`.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since the size of the frequency arrays is constant (26) and does not depend on the input size.
+5. **Frequency Count for s1**
+	```cpp
+	        frq1[s1[i] - 'a']++;
+	```
+	Increment the frequency count for the character in string `s1` at position `i`.
 
-### Conclusion
+6. **Frequency Count for s2**
+	```cpp
+	        frq2[s2[i] - 'a']++;
+	```
+	Increment the frequency count for the character in string `s2` at position `i`.
 
-The `areAlmostEqual` function provides an efficient way to determine if two strings can be made identical with at most one swap. By leveraging character frequency counts and a simple condition check, this solution effectively reduces the problem to linear time complexity, making it suitable for larger input sizes.
+7. **Mismatch Count**
+	```cpp
+	        if(s1[i] != s2[i]) cnt++;
+	```
+	If the characters at position `i` in `s1` and `s2` do not match, increment the `cnt` variable to track the number of mismatched characters.
 
-This algorithm is particularly useful in applications where string manipulations and comparisons are frequent, such as in text processing, data validation, and similarity detection tasks. Understanding this method can also enhance your skills in solving similar problems in coding interviews and competitive programming, where efficiency and correctness are key.
+8. **Return Result**
+	```cpp
+	    return frq1 == frq2 && (cnt == 2 || cnt == 0);
+	```
+	Return true if the frequency distributions of the characters in `s1` and `s2` are identical and there are exactly two or zero mismatched characters. Otherwise, return false.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), when the strings are already equal.
+- **Average Case:** O(n), where n is the length of the strings.
+- **Worst Case:** O(n), since we only need to compare the two strings once.
+
+The time complexity is linear as we just iterate over both strings once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), since no extra space is needed.
+- **Worst Case:** O(1), as no extra space is needed aside from a few variables.
+
+The space complexity is constant as we do not require additional space that grows with the input size.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-one-string-swap-can-make-strings-equal/description/)
 

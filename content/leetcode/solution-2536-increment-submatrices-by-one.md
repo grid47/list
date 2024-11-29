@@ -14,132 +14,180 @@ img_src = ""
 youtube = "K4SJb0I-_hw"
 youtube_upload_date="2023-01-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/K4SJb0I-_hw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a positive integer `n` representing the size of an `n x n` matrix initially filled with zeros, and a 2D integer array `queries`. Each query consists of four integers `[row1, col1, row2, col2]`. For each query, add `1` to every element in the submatrix from `(row1, col1)` to `(row2, col2)` in the matrix. Return the matrix after applying all queries.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `n` and a 2D integer array `queries` containing multiple submatrices to update.
+- **Example:** `n = 4, queries = [[0, 1, 2, 3], [1, 1, 3, 3]]`
+- **Constraints:**
+	- 1 <= n <= 500
+	- 1 <= queries.length <= 10^4
+	- 0 <= row1 <= row2 < n
+	- 0 <= col1 <= col2 < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> rangeAddQueries(int n, vector<vector<int>>& q) {
-        vector<vector<int>> ans(n, vector<int>(n, 0));
-        
-        for(int i = 0; i < q.size(); i++) {
-            auto it = q[i];
-            for(int j = q[i][0]; j <= q[i][2]; j++) {
-                ans[j][q[i][1]] += 1;
-                if(q[i][3] < n - 1)
-                    ans[j][q[i][3] + 1] -=1;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the matrix after applying all queries.
+- **Example:** `[[0, 1, 1, 1], [0, 2, 3, 3], [0, 1, 1, 1], [0, 0, 0, 0]]`
+- **Constraints:**
+	- The output is an `n x n` matrix.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Efficiently update the matrix for all the queries and return the final result.
+
+- Create a `n x n` matrix initialized with zeros.
+- For each query, update the matrix in the specified submatrix range by adding 1 to each element.
+- Optimize the solution by reducing redundant operations and updating the matrix in an efficient manner.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix size `n` is always valid and positive.
+- Each query specifies valid row and column indices within the matrix bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[0, 1, 2, 3], [1, 1, 3, 3]]`  \
+  **Explanation:** In the first query, elements in the submatrix (0,1) to (2,3) are incremented by 1. In the second query, elements in the submatrix (1,1) to (3,3) are also incremented by 1.
+
+- **Input:** `[[0, 0, 1, 1], [1, 1, 2, 2]]`  \
+  **Explanation:** In the first query, elements in the submatrix (0,0) to (1,1) are incremented by 1. In the second query, elements in the submatrix (1,1) to (2,2) are incremented by 1.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to efficiently apply each query to update the matrix and then return the final matrix.
+
+### Initial Thoughts 💭
+- We need to update a submatrix for each query efficiently.
+- We can use a differential approach to efficiently apply the updates.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will never be empty as `n >= 1`.
+- Handle large queries efficiently (up to 10^4 queries).
+- Handle cases where queries overlap or cover the entire matrix.
+- Ensure the solution works for all valid matrix sizes and queries within the provided constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> rangeAddQueries(int n, vector<vector<int>>& q) {
+    vector<vector<int>> ans(n, vector<int>(n, 0));
+    
+    for(int i = 0; i < q.size(); i++) {
+        auto it = q[i];
+        for(int j = q[i][0]; j <= q[i][2]; j++) {
+            ans[j][q[i][1]] += 1;
+            if(q[i][3] < n - 1)
+                ans[j][q[i][3] + 1] -=1;
         }
-        
-        for(int i = 0; i < n; i++)
-        for(int j = 1; j < n; j++)
-            ans[i][j] += ans[i][j - 1];
-        
-        return ans;
-        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to efficiently apply range addition queries to an `n x n` matrix. Given a set of queries, each specifying a rectangular submatrix (defined by the top-left and bottom-right corners), we are required to increment the elements in that submatrix. The task is to return the matrix after all queries have been applied.
-
-Each query is of the form:
-- `[row1, col1, row2, col2]`, where:
-  - `row1`, `col1` is the top-left corner of the submatrix.
-  - `row2`, `col2` is the bottom-right corner of the submatrix.
-  - The query adds `1` to all elements in the submatrix defined by these corners.
-
-### Approach
-
-To solve this problem efficiently, we can use the **prefix sum approach**. Instead of updating every element of the submatrix directly for each query, which would be inefficient, we can update a smaller range in the matrix and later accumulate the values.
-
-1. **Difference Array**: 
-   - The key idea here is to use a difference array to represent the increments. Instead of applying the increment to every element in the submatrix immediately, we only modify the boundaries of the submatrix.
-   
-   - For each query `[row1, col1, row2, col2]`, we:
-     - Increment `ans[row1][col1]` by `1` to indicate the start of an increment at this position.
-     - Decrement `ans[row1][col2 + 1]` by `1` if `col2 + 1 < n`, to cancel the increment beyond the end of the column range.
-     - Increment `ans[row2 + 1][col1]` by `1` if `row2 + 1 < n`, to cancel the increment beyond the end of the row range.
-     - Decrement `ans[row2 + 1][col2 + 1]` by `1` to ensure the area beyond the bottom-right corner is unaffected by the query.
-
-2. **Prefix Sum**: 
-   - After all queries have been applied in the difference matrix, we can compute the prefix sum of rows to obtain the final matrix. This step ensures that each element reflects the correct number of additions.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Matrix `ans`
-```cpp
-vector<vector<int>> ans(n, vector<int>(n, 0));
-```
-- We start by initializing an `n x n` matrix `ans` with all elements set to `0`. This matrix will store the intermediate results of the range additions.
-
-#### Step 2: Processing Each Query
-```cpp
-for(int i = 0; i < q.size(); i++) {
-    auto it = q[i];
-    for(int j = q[i][0]; j <= q[i][2]; j++) {
-        ans[j][q[i][1]] += 1;
-        if(q[i][3] < n - 1)
-            ans[j][q[i][3] + 1] -= 1;
-    }
-}
-```
-- We iterate over each query in `q`. Each query is a vector with the format `[row1, col1, row2, col2]`.
-- For each query, we loop through the rows from `row1` to `row2`. Within this range, we update the first column of the range (`col1`) by incrementing it by `1`.
-- We also perform a boundary check to ensure that we do not go out of bounds. If `col2 + 1` is within bounds, we decrement that cell to cancel the increment beyond the end of the column range.
-
-#### Step 3: Compute Prefix Sum for Columns
-```cpp
-for(int i = 0; i < n; i++)
+    
+    for(int i = 0; i < n; i++)
     for(int j = 1; j < n; j++)
         ans[i][j] += ans[i][j - 1];
+    
+    return ans;
+    
+}
 ```
-- After processing all queries, the matrix `ans` will have partial sums. Now, we need to compute the prefix sum for each row to propagate the effects of the range additions across the columns.
-- For each row `i`, starting from the second column `j = 1`, we update each `ans[i][j]` by adding the value of the previous column `ans[i][j - 1]`. This ensures that each element reflects the cumulative additions up to that point.
 
-#### Step 4: Return the Final Matrix
-```cpp
-return ans;
-```
-- Once the prefix sums are computed, the matrix `ans` contains the final values after all queries have been applied. This matrix is then returned.
+The function 'rangeAddQueries' performs range updates on a 2D matrix based on the given queries. Each query specifies a range and the function uses a prefix-sum technique to efficiently compute the result.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> rangeAddQueries(int n, vector<vector<int>>& q) {
+	```
+	The function 'rangeAddQueries' is defined. It takes an integer 'n' (the size of the 2D matrix) and a 2D vector 'q' (the list of queries) as input.
 
-#### Time Complexity
+2. **Matrix Initialization**
+	```cpp
+	    vector<vector<int>> ans(n, vector<int>(n, 0));
+	```
+	An 'n x n' matrix 'ans' is initialized with all values set to 0. This matrix will store the results after applying the range updates.
 
-1. **Processing Queries**:
-   - We iterate over each query in `q`, and for each query, we loop over the rows from `row1` to `row2`. For each row in the range, we perform a constant number of operations (incrementing and decrementing specific elements).
-   - In the worst case, for each query, we may have to process all `n` rows (if `row1 = 0` and `row2 = n-1`).
-   - Thus, the time complexity of processing the queries is \( O(q \cdot n) \), where `q` is the number of queries and `n` is the size of the matrix.
+3. **Loop Over Queries**
+	```cpp
+	    for(int i = 0; i < q.size(); i++) {
+	```
+	A loop starts to iterate over each query in the input vector 'q'. Each query is applied to the matrix 'ans'.
 
-2. **Computing Prefix Sum**:
-   - After processing all queries, we compute the prefix sum for each row. This step takes \( O(n^2) \) time, as we iterate over all the elements in the `n x n` matrix to compute the sums.
+4. **Query Extraction**
+	```cpp
+	        auto it = q[i];
+	```
+	The current query 'it' is extracted from the 'q' vector for processing.
 
-3. **Overall Time Complexity**:
-   - The total time complexity is \( O(q \cdot n + n^2) \), where `q` is the number of queries and `n` is the size of the matrix.
+5. **Inner Loop Over Rows**
+	```cpp
+	        for(int j = q[i][0]; j <= q[i][2]; j++) {
+	```
+	An inner loop starts to iterate over rows from the start index 'q[i][0]' to the end index 'q[i][2]' of the query.
 
-#### Space Complexity
+6. **Update Column**
+	```cpp
+	            ans[j][q[i][1]] += 1;
+	```
+	The value at 'ans[j][q[i][1]]' is incremented by 1, updating the specified column of the matrix for the current row 'j'.
 
-1. **Matrix Storage**:
-   - The matrix `ans` requires \( O(n^2) \) space, as it stores the values for each cell in the `n x n` matrix.
+7. **Boundary Check**
+	```cpp
+	            if(q[i][3] < n - 1)
+	```
+	A boundary check is performed to ensure that the column index does not exceed the matrix's bounds.
 
-2. **Query Storage**:
-   - The input `q` is a list of queries, and the space required to store this list is \( O(q) \).
+8. **Reverse Update**
+	```cpp
+	                ans[j][q[i][3] + 1] -= 1;
+	```
+	If the boundary condition is met, the value at 'ans[j][q[i][3] + 1]' is decremented by 1, effectively reversing the update beyond the end column.
 
-3. **Overall Space Complexity**:
-   - The overall space complexity is \( O(n^2) \), as this is the dominant factor due to the storage of the matrix `ans`.
+9. **Prefix Sum Calculation**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	A loop starts to iterate over the rows of the matrix to compute the prefix sums.
 
-### Conclusion
+10. **Prefix Sum Over Columns**
+	```cpp
+	    for(int j = 1; j < n; j++)
+	```
+	A nested loop starts to iterate over the columns, starting from the second column (index 1), to compute the prefix sum.
 
-This solution efficiently solves the problem of applying multiple range addition queries to an `n x n` matrix using the prefix sum technique. The use of the difference array ensures that each query is processed in a time-efficient manner, avoiding the need to iterate over the entire submatrix for each query. By leveraging the prefix sum computation, we efficiently accumulate the results and obtain the final matrix after all queries are applied. The time complexity of \( O(q \cdot n + n^2) \) and the space complexity of \( O(n^2) \) make this approach suitable for handling larger inputs within reasonable time and space limits.
+11. **Update Prefix Sum**
+	```cpp
+	        ans[i][j] += ans[i][j - 1];
+	```
+	The current column value 'ans[i][j]' is updated by adding the previous column value 'ans[i][j - 1]' to it, effectively computing the prefix sum.
+
+12. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The result matrix 'ans' is returned, now containing the updated values after applying all queries.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2 + q)
+- **Worst Case:** O(n^2 + q)
+
+The time complexity is O(n^2) for processing the final result, and O(q) for processing each query, where `q` is the number of queries.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) since we are storing an `n x n` matrix.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/increment-submatrices-by-one/description/)
 

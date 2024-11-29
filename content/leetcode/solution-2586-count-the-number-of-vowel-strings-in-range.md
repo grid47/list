@@ -14,138 +14,137 @@ img_src = ""
 youtube = "mHra3okBpdQ"
 youtube_upload_date="2023-03-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mHra3okBpdQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `nums`. You can rearrange the elements of `nums` to any order (including the given order). Define the prefix sum array of `nums` as `prefix[i] = sum(nums[0] to nums[i])` after rearranging. The score of `nums` is the number of positive integers in the `prefix` array. Return the maximum score you can achieve by rearranging the elements of `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums`.
+- **Example:** `For example, `nums = [3, -1, 4, 2, -3, 1, -2]`.`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^6 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool check(char s)
-    {
-        return (s=='a' || s=='e'|| s=='o'|| s=='i' || s=='u');
-    }
-    int vowelStrings(vector<string>& words, int left, int right) {
-        int ans=0;
-        for(int i=left;i<=right;i++)
-        {
-            if(check(words[i].front()) && check(words[i].back())) ans++;
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer that represents the maximum score achieved by rearranging the elements of `nums`.
+- **Example:** `For `nums = [3, -1, 4, 2, -3, 1, -2]`, the output is `5`.`
+- **Constraints:**
+	- The result will always be a valid integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to rearrange the array `nums` to maximize the number of positive integers in the prefix sum array.
 
-The problem asks us to find how many strings in a given range of indices (`left` to `right`) of an array `words` start and end with a vowel. A vowel is defined as one of the following characters: 'a', 'e', 'i', 'o', or 'u'. The goal is to return the count of such words in the given range.
+- 1. Rearrange the array `nums` to maximize positive prefix sums.
+- 2. Calculate the prefix sum array and count the number of positive values.
+- 3. Return the count as the maximum score.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains valid integers within the given range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `nums = [3, -1, 4, 2, -3, 1, -2]``  \
+  **Explanation:** The optimal rearrangement is `nums = [3, 4, 2, 1, -1, -2, -3]`. The prefix sum array becomes `prefix = [3, 7, 9, 10, 9, 7, 4]`, giving a score of 5.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to rearrange the array `nums` to maximize the number of positive prefix sums. A good strategy is to place the positive numbers at the beginning of the array and the negative numbers towards the end.
 
-To solve this problem, we can break it down into the following steps:
-
-1. **Iterate Over the Range**: We are given the range of indices from `left` to `right`. We need to iterate over each word in this range and check whether the word starts and ends with a vowel.
-  
-2. **Checking First and Last Character**: For each word, we check:
-   - If the first character is a vowel.
-   - If the last character is a vowel.
-   
-3. **Count the Words**: If both conditions are true (i.e., the word starts and ends with a vowel), we increase the count.
-
-4. **Return the Result**: Finally, after processing all words in the range, return the count of words that start and end with a vowel.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Helper Function to Check Vowel**:
+### Initial Thoughts 💭
+- By placing the positive numbers first, we maximize the possibility of obtaining positive prefix sums.
+- This approach helps ensure that the sum remains positive as we calculate the prefix sums.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the array will not be empty.
+- The solution should be efficient enough to handle up to 10^5 elements in the array.
+- If the array contains only negative values, the score will always be 0.
+- The length of the array is guaranteed to be within the specified limits.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool check(char s)
 {
-    return (s == 'a' || s == 'e' || s == 'o' || s == 'i' || s == 'u');
+    return (s=='a' || s=='e'|| s=='o'|| s=='i' || s=='u');
 }
-```
-- **Function Purpose**: The `check` function is a helper function that checks if a given character `s` is a vowel. It returns `true` if the character is one of the vowels ('a', 'e', 'i', 'o', 'u') and `false` otherwise.
-- **Efficiency**: This function is constant time, i.e., \(O(1)\), because it only compares the character with a fixed set of vowels.
-
-#### 2. **Main Function - `vowelStrings`**:
-```cpp
 int vowelStrings(vector<string>& words, int left, int right) {
-    int ans = 0;
-    for (int i = left; i <= right; i++) {
-        if (check(words[i].front()) && check(words[i].back())) ans++;
+    int ans=0;
+    for(int i=left;i<=right;i++)
+    {
+        if(check(words[i].front()) && check(words[i].back())) ans++;
     }
     return ans;
 }
 ```
-- **Function Purpose**: The `vowelStrings` function counts how many words in the given range of indices (`left` to `right`) in the `words` vector start and end with a vowel.
-  
-- **Step-by-Step Explanation**:
-    - **Initialization**: The integer `ans` is initialized to `0`. This variable will store the count of words that satisfy the condition of starting and ending with a vowel.
-    - **Loop Over Words**: The `for` loop runs from `left` to `right`, iterating over the specified range of words in the vector `words`.
-    - **Check Conditions**: For each word in the range, we check two conditions:
-      - The first character of the word is a vowel (`check(words[i].front())`).
-      - The last character of the word is a vowel (`check(words[i].back())`).
-    - **Count Valid Words**: If both conditions are true, we increment the counter `ans`.
-    - **Return Result**: After the loop completes, the function returns `ans`, which is the count of words that start and end with a vowel.
 
-#### 3. **Time Complexity Considerations**:
-- **Helper Function Complexity**: The `check` function operates in constant time, \(O(1)\), since it only compares a single character against a fixed set of vowels.
-- **Main Loop Complexity**: The main loop runs from `left` to `right`, meaning it processes `right - left + 1` words. For each word, the operations inside the loop (checking the first and last character) take constant time \(O(1)\). Therefore, the overall time complexity of the loop is \(O(n)\), where `n = right - left + 1` is the number of words processed.
+This code defines a function to count the number of words in the specified range of a list where both the first and last characters are vowels.
 
-#### 4. **Space Complexity**:
-- The space complexity of this function is \(O(1)\), as the space used is constant. The function uses a fixed amount of extra space (the `ans` counter and the `check` function), and does not depend on the size of the input `words` or the range `left` to `right`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool check(char s)
+	```
+	This function checks whether the given character 's' is a vowel (either 'a', 'e', 'i', 'o', or 'u').
 
-### Example Walkthrough
+2. **Return Statement**
+	```cpp
+	    return (s=='a' || s=='e'|| s=='o'|| s=='i' || s=='u');
+	```
+	This line returns true if the character 's' is a vowel; otherwise, false.
 
-Let's walk through an example to illustrate the logic.
+3. **Function Declaration**
+	```cpp
+	int vowelStrings(vector<string>& words, int left, int right) {
+	```
+	This function counts the number of words in the 'words' vector from index 'left' to 'right' where both the first and last characters are vowels.
 
-#### Input:
-```cpp
-vector<string> words = {"apple", "orange", "umbrella", "bat", "elephant"};
-int left = 1, right = 3;
-```
+4. **Variable Declaration**
+	```cpp
+	    int ans=0;
+	```
+	This declares and initializes a variable 'ans' to zero, which will be used to count the words with vowels at both ends.
 
-- **Words in the range [1, 3]**: `["orange", "umbrella", "bat"]`
-- **Check each word**:
-  - **"orange"**: Starts with 'o' (vowel) and ends with 'e' (vowel) → Count this word.
-  - **"umbrella"**: Starts with 'u' (vowel) and ends with 'a' (vowel) → Count this word.
-  - **"bat"**: Starts with 'b' (not a vowel) → Do not count this word.
-  
-- **Result**: Two words satisfy the condition, so the function will return `2`.
+5. **For Loop**
+	```cpp
+	    for(int i=left;i<=right;i++)
+	```
+	This loop iterates over the 'words' vector from index 'left' to 'right'.
 
-#### Output:
-```cpp
-2
-```
+6. **If Condition**
+	```cpp
+	        if(check(words[i].front()) && check(words[i].back())) ans++;
+	```
+	This condition checks if both the first and last characters of the current word are vowels. If true, it increments the 'ans' counter.
 
-### Edge Case Considerations
+7. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	This returns the count of words where both the first and last characters are vowels.
 
-1. **Empty Range**: If `left > right`, no words should be processed, and the function should return `0`.
-   
-   - Example: If `left = 3` and `right = 2`, the loop won't run and the function will return `0`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-2. **Words with Non-Vowel First and Last Characters**: If a word doesn't start and end with a vowel, it is simply skipped.
+The best case occurs when the array is already arranged optimally. The worst case is when we need to sort the array, which takes O(n log n).
 
-3. **Single Word Case**: If the range contains only one word, the function will still work as expected by checking that word's first and last characters.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **All Words Start and End with Vowels**: If all words in the range meet the criteria, the function will count all of them.
+The space complexity is O(n) due to the additional storage required for separating positive and negative numbers.
 
-5. **No Words Start or End with Vowels**: If no words in the range meet the criteria, the function will return `0`.
+**Happy Coding! 🎉**
 
-### Complexity Analysis
-
-#### Time Complexity:
-- The time complexity of the solution is \(O(n)\), where \(n = \text{right} - \text{left} + 1\) is the number of words we are checking. Each word involves two checks (the first and last character), which take constant time. Hence, the time complexity is linear in the number of words in the range.
-
-#### Space Complexity:
-- The space complexity is \(O(1)\), since we only use a few variables for counting and checking conditions. No extra space is required that grows with the input size.
-
-### Conclusion
-
-This solution efficiently counts the number of words in a given range that start and end with vowels. By leveraging a simple helper function to check for vowels and iterating over the words in the range, we achieve an optimal solution with linear time complexity. The approach is easy to understand and works efficiently within the problem constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-vowel-strings-in-range/description/)
 

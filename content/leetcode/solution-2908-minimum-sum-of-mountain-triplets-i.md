@@ -14,114 +14,145 @@ img_src = ""
 youtube = "GegaVi1CeUM"
 youtube_upload_date="2023-10-22"
 youtube_thumbnail="https://i.ytimg.com/vi/GegaVi1CeUM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers called nums. A mountain triplet consists of three indices (i, j, k) such that i < j < k, nums[i] < nums[j], and nums[k] < nums[j]. Your task is to return the minimum possible sum of any such mountain triplet. If no such triplet exists, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array nums of length n.
+- **Example:** `nums = [7, 4, 8, 5, 2]`
+- **Constraints:**
+	- 3 <= nums.length <= 50
+	- 1 <= nums[i] <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumSum(vector<int>& nums) {
-        int n=nums.size();
-        int ans=INT_MAX;
-        for(int i=0;i<n-2;i++){
-            for(int j=i+1;j<n-1;j++){
-                for(int k=j+1;k<n;k++){
-                    if(nums[i] < nums[j] && nums[k] < nums[j]) ans = min(ans,nums[i]+nums[j]+nums[k]);
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum sum of a valid mountain triplet (i, j, k), or -1 if no such triplet exists.
+- **Example:** `For the input [7, 4, 8, 5, 2], the output should be 14.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the minimum sum of a valid mountain triplet in the array.
+
+- Iterate through the array with three pointers: one for the left part (i), one for the peak (j), and one for the right part (k).
+- Check if the triplet formed by the indices (i, j, k) satisfies the mountain condition: nums[i] < nums[j] and nums[k] < nums[j].
+- If the condition holds, calculate the sum of nums[i] + nums[j] + nums[k], and track the minimum sum found.
+- Return the minimum sum if any valid triplet is found, or -1 if no such triplet exists.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always have at least three numbers.
+- The solution should work for all values within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [7, 4, 8, 5, 2]`  \
+  **Explanation:** In this case, the mountain triplet (1, 2, 3) is valid because 4 < 8 and 5 < 8. The sum of this triplet is 7 + 8 + 5 = 14, which is the minimum sum.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves brute force checking of all triplets (i, j, k) to find the smallest valid sum.
+
+### Initial Thoughts 💭
+- We need to check every combination of triplets that satisfy the mountain condition.
+- A brute-force solution will work within the problem's constraints since the array size is relatively small.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least three elements.
+- The solution should work efficiently within the given constraints, which are n <= 50.
+- Consider the case where no valid triplet exists in the array.
+- All values of nums will be between 1 and 50.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumSum(vector<int>& nums) {
+    int n=nums.size();
+    int ans=INT_MAX;
+    for(int i=0;i<n-2;i++){
+        for(int j=i+1;j<n-1;j++){
+            for(int k=j+1;k<n;k++){
+                if(nums[i] < nums[j] && nums[k] < nums[j]) ans = min(ans,nums[i]+nums[j]+nums[k]);
             }
         }
-        
-        return (ans==INT_MAX ? -1:ans);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the minimum sum of three numbers from a given list such that the selected numbers form a strictly increasing subsequence. If no such subsequence exists, the function should return `-1`. In essence, we need to identify three distinct numbers from the list such that their order is strictly increasing, and their sum is minimized.
-
-### Approach
-
-To solve this problem, we can iterate over all possible combinations of three distinct numbers from the given list of numbers. The core idea is to find such a combination where:
-1. The first number is smaller than the second number.
-2. The second number is smaller than the third number.
-
-Once we find such a combination, we compute the sum of these three numbers. We then track the minimum sum across all valid combinations.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int n = nums.size();
-int ans = INT_MAX;
-```
-
-- We start by determining the size of the `nums` array (`n`), which is the total number of elements in the list.
-- The `ans` variable is initialized to `INT_MAX`, which is a placeholder to track the minimum sum we find as we iterate over the possible combinations. By initializing it to `INT_MAX`, we ensure that any valid sum will be smaller than this initial value.
-
-#### Step 2: Iterate Over All Possible Triplets
-
-```cpp
-for(int i = 0; i < n - 2; i++) {
-    for(int j = i + 1; j < n - 1; j++) {
-        for(int k = j + 1; k < n; k++) {
-            if(nums[i] < nums[j] && nums[k] < nums[j]) 
-                ans = min(ans, nums[i] + nums[j] + nums[k]);
-        }
-    }
+    
+    return (ans==INT_MAX ? -1:ans);
 }
 ```
 
-- We use three nested loops to iterate over all possible triplets of distinct indices `(i, j, k)` in the `nums` array:
-  - The outer loop (`i`) iterates from 0 to `n - 3`, ensuring that there are at least two elements after `i` to form a triplet.
-  - The middle loop (`j`) iterates from `i + 1` to `n - 2`, ensuring that `j` is always greater than `i`.
-  - The inner loop (`k`) iterates from `j + 1` to `n - 1`, ensuring that `k` is greater than `j` and thus forming a valid triplet.
+The `minimumSum` function finds the minimum sum of three distinct elements from the vector `nums` where the first element is smaller than the second, and the third is smaller than the second. If no such triplet exists, it returns -1.
 
-- Inside the inner loop, we check if the triplet `(nums[i], nums[j], nums[k])` satisfies the strictly increasing condition:
-  - `nums[i] < nums[j]`: The first number is less than the second.
-  - `nums[k] < nums[j]`: The third number is less than the second.
-  - If both conditions are true, we calculate the sum of this triplet and update the `ans` variable if the sum is smaller than the current value of `ans`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumSum(vector<int>& nums) {
+	```
+	Defines the function `minimumSum` which takes a vector of integers `nums` and returns the minimum sum of three distinct elements satisfying the given conditions.
 
-#### Step 3: Return the Result
+2. **Variable Initialization**
+	```cpp
+	    int n=nums.size();
+	```
+	Initializes `n` with the size of the input vector `nums`.
 
-```cpp
-return (ans == INT_MAX ? -1 : ans);
-```
+3. **Variable Initialization**
+	```cpp
+	    int ans=INT_MAX;
+	```
+	Initializes `ans` to `INT_MAX` to represent the initial state where no valid triplet has been found.
 
-- After iterating through all possible triplets, we check if `ans` is still equal to `INT_MAX`. If it is, it means no valid triplet was found that satisfies the strictly increasing condition, so we return `-1`.
-- Otherwise, we return the minimum sum of the valid triplet that was found.
+4. **Triple Nested Loop**
+	```cpp
+	    for(int i=0;i<n-2;i++){
+	```
+	Starts the outer loop, iterating through each element of the vector except the last two.
 
-### Complexity
+5. **Triple Nested Loop**
+	```cpp
+	        for(int j=i+1;j<n-1;j++){
+	```
+	Starts the second loop, iterating through the elements of the vector starting from the element after `i`.
 
-#### Time Complexity:
+6. **Triple Nested Loop**
+	```cpp
+	            for(int k=j+1;k<n;k++){
+	```
+	Starts the third loop, iterating through the elements of the vector starting from the element after `j`.
 
-The solution uses three nested loops to explore all possible triplets in the `nums` array. For each combination of indices `(i, j, k)`, we perform a constant-time check to see if the triplet satisfies the strictly increasing condition and to update the `ans` variable.
+7. **Conditional Check**
+	```cpp
+	                if(nums[i] < nums[j] && nums[k] < nums[j]) ans = min(ans,nums[i]+nums[j]+nums[k]);
+	```
+	Checks if `nums[i]` is smaller than `nums[j]` and `nums[k]` is smaller than `nums[j]`, and if true, updates `ans` with the minimum sum of the triplet.
 
-- The outer loop runs `n - 2` times.
-- The middle loop runs `n - 1 - i` times.
-- The inner loop runs `n - k` times.
+8. **Return Statement**
+	```cpp
+	    return (ans==INT_MAX ? -1:ans);
+	```
+	Returns the value of `ans`, which is either the minimum sum found or `-1` if no valid triplet exists.
 
-In the worst case, the number of iterations will be the number of combinations of 3 elements from `n`, which is `C(n, 3)` and can be approximated as `O(n^3)`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^3)
+- **Average Case:** O(n^3)
+- **Worst Case:** O(n^3)
 
-Thus, the time complexity of the solution is **O(n^3)**.
+The algorithm checks every combination of triplets, which results in a cubic time complexity.
 
-#### Space Complexity:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The solution only uses a few variables (`n` and `ans`), and the input is modified in place. No additional data structures are used that grow with the size of the input.
+No additional space is required apart from a few variables to track the minimum sum.
 
-Thus, the space complexity is **O(1)**, as the space used does not depend on the size of the input list.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution solves the problem by brute force, iterating through all possible triplets in the `nums` array and checking if they satisfy the strictly increasing condition. The time complexity of the solution is **O(n^3)**, which makes it inefficient for large input sizes. For smaller inputs, this approach works as expected and finds the minimum sum of a valid triplet.
-
-If optimization is needed for larger inputs, more advanced techniques such as dynamic programming or sorting-based methods may be used to reduce the time complexity. However, for the given problem size, this straightforward approach is simple and easy to understand, making it a good starting point for learning how to work with triplet-based problems in arrays.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-sum-of-mountain-triplets-i/description/)
 

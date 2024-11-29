@@ -14,91 +14,126 @@ img_src = ""
 youtube = "tpgDi9Saq_s"
 youtube_upload_date="2022-06-25"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/tpgDi9Saq_s/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s, where every two consecutive vertical bars '|' form a pair. Count the number of '*' in s, excluding the '*' between each pair of '|'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s which contains lowercase English letters, vertical bars '|', and asterisks '*'.
+- **Example:** `s = '|*a|*b*|c*|'`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s contains only lowercase English letters, '|', and '*' characters.
+	- s contains an even number of vertical bars '|'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of '*' characters in the string, excluding those between the vertical bars '|'.
+- **Example:** `For s = '|*a|*b*|c*|', the output is 2.`
+- **Constraints:**
+	- Only '*' characters outside of the '|' pairs should be counted.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to iterate through the string and count the asterisks '*' outside the pairs of vertical bars '|'.
+
+- 1. Traverse the string and track when you encounter a vertical bar '|'.
+- 2. When a vertical bar is encountered, skip counting asterisks that appear between this bar and the next one.
+- 3. Count the asterisks that are outside these pairs.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string contains at least one vertical bar and may contain other characters, including asterisks.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = '|*a|*b*|c*|'`  \
+  **Explanation:** In this example, asterisks inside the vertical bars are excluded. The valid asterisks are those outside the bars, which are counted to give a result of 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves traversing the string and counting the asterisks that are outside the paired vertical bars '|'.
+
+### Initial Thoughts 💭
+- We need to iterate over the string and keep track of whether we are inside a pair of vertical bars '|'.
+- Each time we encounter a '|', we flip the sign to track whether we are inside a pair of bars, and count the asterisks outside.
+{{< dots >}}
+### Edge Cases 🌐
+- The string will not be empty as per the problem constraints.
+- Handle strings up to 1000 characters efficiently.
+- Consider strings where there are no asterisks or where all asterisks are inside vertical bars.
+- The string will always contain an even number of vertical bars.
+{{< dots >}}
+## Code 💻
+```cpp
 int countAsterisks(string s) {
-        int res = 0, sign = 1;
-        for (char& c : s)
-            if ((sign ^= c == '|') && c == '*')
-                res++;
-        return res;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given a string `s` that contains lowercase letters, asterisks `*`, and vertical bar characters `|`. Our goal is to count the number of asterisks `*` that are not enclosed between any vertical bars `|`.
-
-A pair of vertical bars `|` can enclose a section of the string. Any asterisk `*` found inside these vertical bars should be ignored. Only the asterisks outside of any enclosing bars should be counted.
-
-The string `s` can contain multiple `|` characters, and these bars can appear in any position in the string. We need to implement a function that counts the asterisks outside of these bars.
-
-### Approach
-
-To solve this problem efficiently, we will traverse the string while keeping track of whether we are inside or outside of any `|` delimiters. We will use a flag variable `sign` to track whether we are inside a pair of `|` characters. If we are inside, we ignore any `*` characters; if we are outside, we count the `*`.
-
-We need to consider the following:
-1. **Counting Asterisks Outside Bars**: We need to check if an asterisk is outside of vertical bars. This can be done by toggling a `sign` variable when we encounter a `|`.
-2. **Skipping Asterisks Inside Bars**: Asterisks inside the bars should not be counted. By toggling the `sign` variable at every `|`, we can determine when we are inside or outside the bars.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-```cpp
-int res = 0, sign = 1;
+    int res = 0, sign = 1;
+    for (char& c : s)
+        if ((sign ^= c == '|') && c == '*')
+            res++;
+    return res;
+}
 ```
-- **`res`**: This variable will store the final count of asterisks that are outside of any `|` characters.
-- **`sign`**: This flag is used to indicate whether we are inside or outside of a pair of vertical bars `|`. Initially, `sign` is set to `1`, which indicates that we are outside any `|` bars.
 
-#### Step 2: Loop Through the String
-```cpp
-for (char& c : s)
-```
-- We use a `for` loop to iterate through each character in the string `s`. The character `c` represents each individual character in the string.
+This function counts the number of asterisks '*' in a string `s` that are outside of vertical bars '|'. The function uses the XOR operator to toggle a 'sign' variable each time a vertical bar '|' is encountered, ensuring that asterisks are counted only when they are not enclosed by bars.
 
-#### Step 3: Handle `|` Characters
-```cpp
-if ((sign ^= c == '|') && c == '*')
-```
-- This conditional statement checks two things:
-  1. **Toggle `sign` When Encountering `|`**: The expression `(sign ^= c == '|')` uses the XOR (`^`) operator to toggle the value of `sign`. When a `|` character is encountered, the XOR operation toggles `sign` between `0` (inside bars) and `1` (outside bars).
-  2. **Check for `*` Outside Bars**: The condition `&& c == '*'` checks if the current character is an asterisk `*`. If `sign == 1` (i.e., we are outside the vertical bars), then the asterisk is counted, and we increment the result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int countAsterisks(string s) {
+	```
+	Define the function `countAsterisks` which takes a string `s` and returns an integer representing the number of asterisks '*' in the string that are outside of vertical bars '|'.
 
-#### Step 4: Increment the Result
-```cpp
-res++;
-```
-- If the character is an asterisk and we are outside the bars (i.e., `sign == 1`), we increment the `res` variable, which holds the count of valid asterisks.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, sign = 1;
+	```
+	Initialize two variables: `res` to store the count of asterisks and `sign` to track whether we are inside or outside a vertical bar. The `sign` is toggled each time a '|' character is encountered.
 
-#### Step 5: Return the Result
-```cpp
-return res;
-```
-- After completing the iteration through the string, the final count of asterisks outside the bars is returned.
+3. **For Loop**
+	```cpp
+	    for (char& c : s)
+	```
+	Iterate through each character `c` in the string `s` using a range-based for loop.
 
-### Complexity
+4. **If Condition Check**
+	```cpp
+	        if ((sign ^= c == '|') && c == '*')
+	```
+	Check if the current character is an asterisk '*' and if the `sign` is toggled by encountering a '|' character. The XOR operation toggles `sign` whenever a '|' is found. If the character is '*' and `sign` is correctly positioned, the asterisk is counted.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n)**, where `n` is the length of the string `s`. This is because we iterate through each character of the string exactly once, performing constant-time operations for each character.
+5. **Increment Count**
+	```cpp
+	            res++;
+	```
+	If the condition is met (the character is '*' and not inside '|'), increment the `res` counter by 1.
 
-#### Space Complexity:
-The space complexity is **O(1)**, since we only use a few integer variables (`res` and `sign`) to store intermediate results, regardless of the size of the input string. No additional data structures are used, so the space usage is constant.
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the total count of asterisks outside the vertical bars, stored in the `res` variable.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution effectively counts the number of asterisks outside of vertical bars in a string by maintaining a simple toggle flag (`sign`) that tracks whether we are inside or outside the bars. The key operations involve toggling the `sign` when encountering a `|` character and checking the position of a `*` to decide whether it should be counted. 
+The time complexity is O(n), where n is the length of the string, as we iterate through the string once.
 
-The algorithm runs in linear time **O(n)**, where `n` is the length of the string, making it efficient for even larger strings. The space complexity is constant, as it only uses a small, fixed amount of space for storing variables. This makes the solution both time and space efficient, suitable for solving the problem with minimal overhead.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we use a constant amount of extra space for tracking the result and sign.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-asterisks/description/)

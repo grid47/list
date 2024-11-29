@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "M_OB20n4hfo"
 youtube_upload_date="2024-06-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/M_OB20n4hfo/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,118 +28,135 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/M_OB20n4hfo/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two strings s and t, return true if s is a subsequence of t, or false otherwise. A subsequence is formed by deleting some characters of t while maintaining the relative order of the remaining characters.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings, s and t.
+- **Example:** `s = 'abc', t = 'ahbgdc'`
+- **Constraints:**
+	- 0 <= s.length <= 100
+	- 0 <= t.length <= 10^4
+	- s and t consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isSubsequence(string s, string t) {
-        if(s == "") return true;
-        int sdx = 0, tdx = 0;
-        // sdx is sub seq of tdx
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean indicating whether s is a subsequence of t.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be true if s is a subsequence of t, otherwise false.
 
-        for(; tdx < t.size(); tdx++) {
-            if(t[tdx] == s[sdx]) sdx++;
-            if(sdx == s.size()) return true;
-        }
-        return false;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if string s can be derived from string t by deleting characters while preserving the order of the remaining characters.
 
-### 🚀 Problem Statement
+- Use two pointers to traverse both strings.
+- Start with both pointers at the beginning of their respective strings.
+- Move through string t and match characters with string s one by one.
+- If all characters in s are matched in order, return true, otherwise return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both strings consist only of lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'abc', t = 'ahbgdc'`  \
+  **Explanation:** Starting with pointers at the beginning of both strings, 'a' matches, then 'b' matches, and finally 'c' matches in order, so 'abc' is a subsequence of 'ahbgdc'.
 
-We are tasked with checking whether a string `s` is a **subsequence** of another string `t`. A subsequence is a sequence derived from another sequence by deleting some or no characters without changing the order of the remaining characters. In this case, we want to determine if `s` can be formed as a subsequence of `t`. That means, all characters of `s` must appear in `t` in the same order, though not necessarily consecutively.
+- **Input:** `Input: s = 'axc', t = 'ahbgdc'`  \
+  **Explanation:** Starting from the first letter of both strings, 'a' matches, but 'x' does not appear in order in 'ahbgdc', so 'axc' is not a subsequence of 'ahbgdc'.
 
----
+{{< dots >}}
+## Approach 🚀
+The problem can be efficiently solved using a two-pointer technique to traverse both strings and check if all characters of s appear in t in the same order.
 
-### 🧠 Approach
-
-To solve this problem efficiently, we can utilize a **two-pointer technique**. The idea is simple: traverse through string `t` while trying to match each character of string `s` in order. The two pointers will help us track our position in both strings, allowing us to efficiently determine if `s` is a subsequence of `t`.
-
-#### Key Steps:
-1. **Initial Check for Empty String**: If string `s` is empty, it is trivially a subsequence of any string, so we return `true` immediately.
-   
-2. **Two-Pointer Technique**: We initialize two pointers:
-   - `sdx` for string `s` (starting at 0).
-   - `tdx` for string `t` (also starting at 0).
-   
-   We will iterate over `t` and try to match the characters of `s` one by one.
-
-3. **Matching Characters**: As we iterate through `t`, whenever we find a character in `t` that matches the current character in `s`, we move the pointer `sdx` forward (to match the next character in `s`).
-
-4. **Check Completion**: If we have matched all characters of `s` (i.e., `sdx` reaches the end of `s`), then `s` is a subsequence of `t`, and we return `true`.
-
-5. **Return False**: If we finish the loop without matching all characters of `s`, we return `false`.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Here’s the code implementing the approach:
-
+### Initial Thoughts 💭
+- We need to check whether every character in string s can be found in order in string t.
+- This problem can be solved efficiently with O(n) time complexity using two pointers to traverse both strings.
+{{< dots >}}
+### Edge Cases 🌐
+- When s is an empty string, it is always a subsequence of any string, so return true.
+- The solution should handle the case where t is large (up to 10^4 characters).
+- If s is longer than t, it is impossible for s to be a subsequence of t, so return false.
+- The solution should be optimized to handle t with lengths up to 10^4 efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool isSubsequence(string s, string t) {
-        if (s == "") return true;  // If s is empty, it's trivially a subsequence
+bool isSubsequence(string s, string t) {
+    if(s == "") return true;
+    int sdx = 0, tdx = 0;
+    // sdx is sub seq of tdx
 
-        int sdx = 0, tdx = 0;  // Pointers for s and t
-        while (tdx < t.size()) {
-            if (t[tdx] == s[sdx]) {  // If characters match
-                sdx++;  // Move to the next character in s
-            }
-            tdx++;  // Always move to the next character in t
-            if (sdx == s.size()) {  // If we've matched all characters of s
-                return true;
-            }
-        }
-        return false;  // If we couldn't match all characters of s
+    for(; tdx < t.size(); tdx++) {
+        if(t[tdx] == s[sdx]) sdx++;
+        if(sdx == s.size()) return true;
     }
-};
+    return false;
+}
 ```
 
-#### Explanation of Code:
-1. **Base Case for Empty String**:  
-   - If `s` is empty, we return `true` because an empty string is a subsequence of any string.
-   
-2. **Initialize Pointers**:  
-   - `sdx` tracks the current character of `s` we are trying to match.
-   - `tdx` tracks the current character of `t` we are comparing with.
+This function checks whether string 's' is a subsequence of string 't'. It iterates through 't' and compares characters with 's'. If all characters of 's' are found in 't' in the correct order, it returns true, otherwise false.
 
-3. **Loop through `t`**:
-   - We loop through `t` with `tdx`. If we find a character in `t` that matches the character in `s[sdx]`, we move `sdx` forward to check the next character in `s`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isSubsequence(string s, string t) {
+	```
+	Define the function 'isSubsequence' that takes two strings 's' and 't'. It will return a boolean value indicating whether 's' is a subsequence of 't'.
 
-4. **Match Completion**:
-   - If `sdx` reaches the length of `s`, it means we've found all characters of `s` in `t`, and we return `true`.
+2. **Edge Case Handling**
+	```cpp
+	    if(s == "") return true;
+	```
+	Handle the edge case where 's' is an empty string. An empty string is considered a subsequence of any string, so return true.
 
-5. **Return False**:  
-   - If we finish the loop and haven't matched all characters of `s`, we return `false`.
+3. **Variable Initialization**
+	```cpp
+	    int sdx = 0, tdx = 0;
+	```
+	Initialize two variables 'sdx' (for the index in string 's') and 'tdx' (for the index in string 't').
 
----
+4. **For Loop**
+	```cpp
+	    for(; tdx < t.size(); tdx++) {
+	```
+	Start a for loop that iterates through each character in string 't' using 'tdx' as the index.
 
-### 📈 Complexity Analysis
+5. **Character Comparison**
+	```cpp
+	        if(t[tdx] == s[sdx]) sdx++;
+	```
+	Check if the current character of 't' matches the current character of 's'. If they match, increment 'sdx' to move to the next character in 's'.
 
-#### Time Complexity:
-- **Best Case**: If `s` is empty, we return `true` immediately, which takes **O(1)** time.
-- **Worst Case**: In the worst case, we iterate over all characters in `t` once. Since we are only moving forward in both strings, the time complexity is **O(n)**, where `n` is the length of string `t`. This is the time it takes to check all characters of `t` and possibly match all characters of `s`.
+6. **Subsequence Check**
+	```cpp
+	        if(sdx == s.size()) return true;
+	```
+	If all characters of 's' are found in 't' (i.e., 'sdx' reaches the size of 's'), return true, indicating that 's' is a subsequence of 't'.
 
-#### Space Complexity:
-- The space complexity is **O(1)** since we only use a constant amount of space for the two pointers (`sdx` and `tdx`). No additional space is used regardless of the size of `s` or `t`.
+7. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If the loop completes and not all characters of 's' were found in 't', return false, indicating that 's' is not a subsequence of 't'.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### 🏁 Conclusion
+The time complexity is O(n) where n is the length of string t, since we only traverse the strings once.
 
-This solution efficiently checks whether string `s` is a subsequence of string `t` using the two-pointer technique. It runs in **O(n)** time where `n` is the length of `t` and uses **O(1)** space, making it highly efficient and scalable even for large input sizes.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### 🎯 Key Takeaways:
-- **Optimal Time Complexity**: The algorithm runs in linear time, **O(n)**, making it suitable for large strings.
-- **Constant Space**: The space complexity is constant (**O(1)**), which ensures minimal memory usage.
-- **Simple Logic**: The two-pointer approach is intuitive and efficient for solving the subsequence problem.
+The space complexity is O(1) because we only use a constant amount of extra space.
 
-Keep coding and optimizing! 🚀 You’ve got this!
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/is-subsequence/description/)
 

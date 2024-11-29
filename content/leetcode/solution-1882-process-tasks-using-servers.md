@@ -14,139 +14,219 @@ img_src = ""
 youtube = "XKA22PecuMQ"
 youtube_upload_date="2021-05-30"
 youtube_thumbnail="https://i.ytimg.com/vi/XKA22PecuMQ/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays, `servers` and `tasks`. The `servers` array represents the weights of the servers, and the `tasks` array represents the processing times of tasks. Tasks are assigned to servers based on the smallest server weight and index. If no server is available, tasks wait for a server to become free.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays: `servers` and `tasks`. The `servers` array is a list of integers representing the weight of each server. The `tasks` array contains integers representing the processing times for tasks. At each second, a new task enters the queue and is assigned to the server based on availability and weight priorities.
+- **Example:** `servers = [5, 1, 4, 3, 2], tasks = [2, 1, 2, 4, 5, 2, 1]`
+- **Constraints:**
+	- 1 <= n, m <= 2 * 10^5
+	- 1 <= servers[i], tasks[j] <= 2 * 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> assignTasks(vector<int>& servers, vector<int>& tasks) {
-        
-        priority_queue<array<long, 3>, vector<array<long, 3>>, greater<array<long, 3>>> avail, busy;
-        
-        int n = servers.size();
-        for(int i = 0; i < n; i++)
-            avail.push({0, servers[i], i});
-        
-        int m = tasks.size();
-        
-        vector<int> ans;        
-        
-        for(int t = 0; t < m; t++) {
-            
-            while(!busy.empty() && (busy.top()[0] <= t || avail.empty())) {
-                auto [time, w, idx] = busy.top();
-                busy.pop();
-                avail.push({time <= t? 0: time, w, idx});
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** You need to return an array of indices representing which server each task is assigned to. The output should follow the task queue order.
+- **Example:** `[1, 4, 1, 4, 1, 3, 2]`
+- **Constraints:**
+	- The output array will have the same length as the `tasks` array.
 
-            auto [time, w, idx] = avail.top();
-            avail.pop();
-            busy.push({ max(time, (long)t) + tasks[t], w, idx});
-            ans.push_back(idx);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To simulate task assignments to servers based on availability, weight, and index priority.
+
+- Initialize a priority queue for free servers based on their weights and indices.
+- For each task, check if there are any free servers available. If so, assign the task to the one with the smallest weight and index.
+- If no servers are available, check when the next server becomes free and assign tasks accordingly.
+- Keep track of task assignments and update the server statuses (free or busy).
+{{< dots >}}
+### Problem Assumptions ✅
+- Each server is initially free and available to process tasks.
+- Tasks are processed in the order they are added to the queue.
+- Servers will be used based on availability, weight, and index priority.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In the first example, we see that tasks are assigned based on server weights. Server 1 (weight 4) is assigned task 0, and the process continues in this manner for each task in the queue. Servers that become free are used for subsequent tasks.
+
+- **Input:** `Example 2`  \
+  **Explanation:** In this case, server 1 is used for task 1 because it has the smallest weight (4), and after task completion, it gets assigned additional tasks as servers become free.
+
+{{< dots >}}
+## Approach 🚀
+This approach simulates the task assignment process by tracking server availability and using a priority queue for efficient task allocation based on server weight and index.
+
+### Initial Thoughts 💭
+- Servers should be processed in order of their availability and weight.
+- Use a priority queue to efficiently assign tasks to the smallest available server.
+- The problem requires efficient simulation with a focus on managing availability and task queueing. A priority queue is ideal for maintaining the smallest available server.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no servers or no tasks, the result should be an empty array.
+- Make sure the algorithm can handle large numbers of servers and tasks efficiently.
+- If servers or tasks contain extreme values, ensure proper handling of edge cases.
+- The approach should work efficiently with the given constraints (up to 2 * 10^5 servers and tasks).
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> assignTasks(vector<int>& servers, vector<int>& tasks) {
+    
+    priority_queue<array<long, 3>, vector<array<long, 3>>, greater<array<long, 3>>> avail, busy;
+    
+    int n = servers.size();
+    for(int i = 0; i < n; i++)
+        avail.push({0, servers[i], i});
+    
+    int m = tasks.size();
+    
+    vector<int> ans;        
+    
+    for(int t = 0; t < m; t++) {
+        
+        while(!busy.empty() && (busy.top()[0] <= t || avail.empty())) {
+            auto [time, w, idx] = busy.top();
+            busy.pop();
+            avail.push({time <= t? 0: time, w, idx});
         }
-        return ans;
+
+        auto [time, w, idx] = avail.top();
+        avail.pop();
+        busy.push({ max(time, (long)t) + tasks[t], w, idx});
+        ans.push_back(idx);
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
+This is a function that assigns tasks to servers using a priority queue. The function efficiently assigns each task to the server that becomes available the earliest.
 
-The problem involves assigning tasks to a set of servers based on their availability and processing power. Each server can only handle one task at a time, and each task has a specific processing time. The goal is to determine which server is assigned to each task and in what order. When multiple servers are available, the server with the least processing power should be chosen. If a server is busy, tasks must wait until the server is available.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initial Setup**
+	```cpp
+	vector<int> assignTasks(vector<int>& servers, vector<int>& tasks) {
+	```
+	Defines the function `assignTasks` that takes in two vectors: `servers` representing the server capacities and `tasks` representing the tasks to be completed.
 
-### Approach
+2. **Queue Initialization**
+	```cpp
+	    priority_queue<array<long, 3>, vector<array<long, 3>>, greater<array<long, 3>>> avail, busy;
+	```
+	Declares two priority queues: `avail` for tracking available servers and `busy` for tracking servers that are currently occupied with tasks.
 
-The solution employs two priority queues: one for available servers and another for busy servers. This allows efficient management of task assignments based on server availability and processing capacity. The approach can be summarized as follows:
+3. **Server Assignment**
+	```cpp
+	    int n = servers.size();
+	```
+	Gets the number of servers by finding the size of the `servers` vector.
 
-1. **Initialization**: Create a priority queue for available servers and another for busy servers. Each server in the available queue is represented by an array containing the time it will be free, its processing power, and its index.
+4. **Queue Population**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loops through each server and pushes a tuple containing the initial time (0), the server's capacity, and the server index into the `avail` priority queue.
 
-2. **Processing Tasks**: For each task:
-   - If any servers are busy and their processing time is up, move them back to the available queue.
-   - Assign the next task to the available server with the least processing power.
-   - Update the busy queue with the server that is now handling the task.
+5. **Task Counting**
+	```cpp
+	        avail.push({0, servers[i], i});
+	```
+	Pushes each server into the `avail` queue with the initial time set to 0.
 
-3. **Result Collection**: Maintain a list to keep track of which server is assigned to which task.
+6. **Task Size Setup**
+	```cpp
+	    int m = tasks.size();
+	```
+	Stores the number of tasks by finding the size of the `tasks` vector.
 
-### Code Breakdown (Step by Step)
+7. **Answer Initialization**
+	```cpp
+	    vector<int> ans;        
+	```
+	Initializes a vector `ans` to store the indices of the servers assigned to each task.
 
-1. **Class Definition**: The solution is encapsulated in a class named `Solution`.
+8. **Task Assignment Loop**
+	```cpp
+	    for(int t = 0; t < m; t++) {
+	```
+	Loops through each task in the `tasks` vector.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+9. **Server Availability Check**
+	```cpp
+	        while(!busy.empty() && (busy.top()[0] <= t || avail.empty())) {
+	```
+	Checks if any server is free or if there are available servers that need to be assigned tasks.
 
-2. **Function Definition**: The function `assignTasks` takes two vectors as parameters: `servers` and `tasks`.
+10. **Pop Busy Server**
+	```cpp
+	            auto [time, w, idx] = busy.top();
+	```
+	Pops the top of the `busy` queue to get the earliest available server.
 
-   ```cpp
-       vector<int> assignTasks(vector<int>& servers, vector<int>& tasks) {
-   ```
+11. **Push to Available Queue**
+	```cpp
+	            busy.pop();
+	```
+	Removes the server from the `busy` queue as it becomes free.
 
-3. **Priority Queue Initialization**: Two priority queues are defined: `avail` for available servers and `busy` for busy servers. The available queue is populated with all servers initialized to be free at time 0.
+12. **Reassign Available Server**
+	```cpp
+	            avail.push({time <= t? 0: time, w, idx});
+	```
+	Pushes the server back into the `avail` queue with updated time.
 
-   ```cpp
-           priority_queue<array<long, 3>, vector<array<long, 3>>, greater<array<long, 3>>> avail, busy;
-           int n = servers.size();
-           for(int i = 0; i < n; i++)
-               avail.push({0, servers[i], i});
-   ```
+13. **Assign Task to Server**
+	```cpp
+	        auto [time, w, idx] = avail.top();
+	```
+	Assigns the task to the server at the top of the `avail` queue.
 
-4. **Task Processing**: Loop through each task to assign it to a server.
+14. **Update Available Queue**
+	```cpp
+	        avail.pop();
+	```
+	Removes the assigned server from the `avail` queue.
 
-   ```cpp
-           int m = tasks.size();
-           vector<int> ans;        
-           for(int t = 0; t < m; t++) {
-   ```
+15. **Server Occupy**
+	```cpp
+	        busy.push({ max(time, (long)t) + tasks[t], w, idx});
+	```
+	Pushes the server into the `busy` queue with the updated time when it will be free.
 
-5. **Handling Busy Servers**: While there are busy servers and the task time has exceeded their completion time, move these servers back to the available queue.
+16. **Log Task Assignment**
+	```cpp
+	        ans.push_back(idx);
+	```
+	Adds the server index to the `ans` vector, indicating that the task has been assigned to this server.
 
-   ```cpp
-               while(!busy.empty() && (busy.top()[0] <= t || avail.empty())) {
-                   auto [time, w, idx] = busy.top();
-                   busy.pop();
-                   avail.push({time <= t? 0: time, w, idx});
-               }
-   ```
+17. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the vector `ans` containing the indices of the servers to which tasks were assigned.
 
-6. **Assigning Tasks**: Extract the server with the least processing power from the available queue, and assign the task. Update the busy queue with the new busy status of the server.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m log n) where m is the number of tasks and n is the number of servers.
+- **Average Case:** O(m log n)
+- **Worst Case:** O(m log n)
 
-   ```cpp
-               auto [time, w, idx] = avail.top();
-               avail.pop();
-               busy.push({ max(time, (long)t) + tasks[t], w, idx});
-               ans.push_back(idx);
-           }
-   ```
+In the worst case, each task involves an insertion and extraction from the priority queue, leading to a time complexity of O(m log n).
 
-7. **Return Result**: Finally, return the list of server indices corresponding to the assigned tasks.
+### Space Complexity 💾
+- **Best Case:** O(n + m)
+- **Worst Case:** O(n + m) due to the space required for the priority queues and the task assignments.
 
-   ```cpp
-           return ans;
-       }
-   };
-   ```
+The space complexity is dominated by the need to store the server states and task assignments.
 
-### Complexity
+**Happy Coding! 🎉**
 
-- **Time Complexity**: The time complexity is \( O((m + n) \log n) \), where \( m \) is the number of tasks and \( n \) is the number of servers. Each task and server operation involves log operations due to the priority queue manipulations.
-
-- **Space Complexity**: The space complexity is \( O(n) \) for storing the servers in the priority queue.
-
-### Conclusion
-
-The `assignTasks` function provides an efficient solution to the problem of task assignment to servers based on their availability and processing power. By utilizing priority queues, the function ensures that servers are managed optimally, allowing for a quick assignment process.
-
-This approach not only effectively handles the task assignment but also accommodates the dynamic nature of server availability, enabling it to scale well with the input size. The structured method of handling available and busy servers illustrates a robust technique applicable to various scheduling problems in computer science.
-
-The implementation showcases the importance of understanding data structures like priority queues for efficiently managing dynamic sets of data, such as server workloads. Mastering such techniques is vital for solving complex problems related to task scheduling, resource allocation, and load balancing in computing systems.
-
-In summary, the `assignTasks` function exemplifies a clear and efficient algorithm for task assignment, reinforcing the significance of effective data management in algorithm design.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/process-tasks-using-servers/description/)
 

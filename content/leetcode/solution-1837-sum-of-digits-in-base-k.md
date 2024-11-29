@@ -14,104 +14,127 @@ img_src = ""
 youtube = "tPbypmspAi8"
 youtube_upload_date="2021-04-25"
 youtube_thumbnail="https://i.ytimg.com/vi/tPbypmspAi8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer n in base 10 and a base k, convert n to base k and return the sum of the digits in base 10.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer n (in base 10) and a base k (2 <= k <= 10).
+- **Example:** `n = 45, k = 7`
+- **Constraints:**
+	- 1 <= n <= 100
+	- 2 <= k <= 10
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sumBase(int n, int k) {
-        int res=0;
-        while(n!=0)
-        {
-            res+=(n%k);
-            n/=k;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the sum of the digits of n after converting it to base k, in base 10.
+- **Example:** `10`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the sum of the digits of a number after converting it from base 10 to base k.
+
+- Convert the number n from base 10 to base k.
+- Sum the digits of the resulting base k number.
+- Return the sum of the digits in base 10.
+{{< dots >}}
+### Problem Assumptions ✅
+- The base k will be a valid integer between 2 and 10.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 45, k = 7`  \
+  **Explanation:** We first convert 45 from base 10 to base 7, resulting in '63'. The sum of the digits is 6 + 3 = 10, which is the final answer.
+
+{{< dots >}}
+## Approach 🚀
+We will convert the number n from base 10 to base k and then sum the digits of the resulting base k number.
+
+### Initial Thoughts 💭
+- The conversion from base 10 to base k is straightforward using division and modulus operations.
+- We can convert n to base k by repeatedly dividing n by k and storing the remainders. These remainders represent the digits in base k.
+{{< dots >}}
+### Edge Cases 🌐
+- n should always be at least 1, so there are no empty inputs.
+- Ensure that the function handles values of n up to 100 efficiently.
+- Consider values of n that are already in base 10 or are powers of k.
+- Ensure that the number is correctly converted to base k and that the sum is calculated properly.
+{{< dots >}}
+## Code 💻
+```cpp
+int sumBase(int n, int k) {
+    int res=0;
+    while(n!=0)
+    {
+        res+=(n%k);
+        n/=k;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to calculate the sum of the digits of a given integer \( n \) when it is represented in base \( k \). For example, if \( n = 34 \) and \( k = 6 \), then the base \( k \) representation of \( n \) would be \( 34_{10} = 54_6 \) (5 * 6^1 + 4 * 6^0). The sum of the digits \( 5 + 4 = 9 \) would be the desired output. The solution should be efficient and straightforward, working well within the constraints typically associated with integer operations.
-
-### Approach
-
-The approach to solve this problem involves repeatedly dividing the number \( n \) by the base \( k \) while keeping track of the remainder at each step. The remainder represents the least significant digit (rightmost) of the number in base \( k \). By summing up these remainders, we can obtain the total sum of the digits of \( n \) in base \( k \). Here are the steps to achieve this:
-
-1. **Initialize a Result Variable**: Create a variable to accumulate the sum of the digits.
-  
-2. **Loop Until \( n \) Becomes Zero**: Use a while loop to repeatedly extract digits until \( n \) is reduced to zero.
-   
-3. **Calculate the Remainder**: In each iteration, calculate the remainder of \( n \) when divided by \( k \) (this gives the current least significant digit).
-   
-4. **Update the Sum**: Add the remainder to the result variable.
-  
-5. **Update \( n \)**: Update \( n \) by performing integer division by \( k \) to remove the least significant digit.
-  
-6. **Return the Result**: After exiting the loop, return the accumulated sum.
-
-This method efficiently computes the sum without requiring conversion of the entire number to its base \( k \) representation in a string or array format, thus minimizing space and time overhead.
-
-### Code Breakdown (Step by Step)
-
-Here is the breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int sumBase(int n, int k) {
+    return res;
+}
 ```
-- A class named `Solution` is defined, containing a public method `sumBase` which takes two integers \( n \) (the number) and \( k \) (the base).
 
-```cpp
-        int res=0;
-```
-- A variable `res` is initialized to zero. This variable will store the accumulated sum of the digits as we process the number.
+This function calculates the sum of the digits of a number `n` when represented in base `k`. It iterates through the digits of `n` in base `k` and adds them up.
 
-```cpp
-        while(n!=0)
-        {
-```
-- A while loop is initiated that will run as long as \( n \) is not zero. This ensures that we continue processing until all digits have been accounted for.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sumBase(int n, int k) {
+	```
+	Defines the function `sumBase` which takes two parameters, `n` (the number) and `k` (the base), and returns the sum of the digits of `n` in base `k`.
 
-```cpp
-            res+=(n%k);
-```
-- Inside the loop, the expression `n % k` calculates the remainder when \( n \) is divided by \( k \). This remainder corresponds to the least significant digit in the base \( k \) representation. The result is then added to `res`.
+2. **Variable Initialization**
+	```cpp
+	    int res=0;
+	```
+	Initializes the variable `res` to store the running sum of the digits in base `k`.
 
-```cpp
-            n/=k;
-```
-- The line `n /= k` updates \( n \) by performing integer division by \( k \). This operation effectively removes the least significant digit from \( n \) for the next iteration.
+3. **While Loop**
+	```cpp
+	    while(n!=0)
+	```
+	Starts a while loop that continues as long as `n` is not zero, processing each digit of `n` in base `k`.
 
-```cpp
-        }
-        return res;
-    }
-};
-```
-- After exiting the loop (when \( n \) becomes zero), the accumulated sum `res` is returned as the result. The method concludes here.
+4. **Digit Calculation**
+	```cpp
+	        res+=(n%k);
+	```
+	Calculates the current digit in base `k` by taking the remainder of `n` when divided by `k`, and adds it to `res`.
 
-### Complexity
+5. **Base Division**
+	```cpp
+	        n/=k;
+	```
+	Divides `n` by `k` to remove the current digit and move to the next one in the next iteration.
 
-- **Time Complexity**: The time complexity of this approach is \( O(\log_k n) \) because each division operation reduces the size of \( n \) significantly. Specifically, the number of iterations needed to reduce \( n \) to zero corresponds to the number of digits in \( n \) when expressed in base \( k \).
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the accumulated sum `res`, which is the sum of the digits of `n` in base `k`.
 
-- **Space Complexity**: The space complexity is \( O(1) \) since we are using a constant amount of space regardless of the input size. The calculations are performed in-place without requiring additional data structures.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-### Conclusion
+The time complexity is logarithmic in n, as we repeatedly divide n by k until it becomes 0.
 
-The provided solution efficiently calculates the sum of the digits of a number \( n \) when expressed in a specified base \( k \). By leveraging basic mathematical operations like division and modulus, the solution avoids unnecessary complexity associated with data structure manipulation or conversion processes.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(log n)
 
-This method is particularly beneficial in contexts where performance is critical, such as competitive programming or applications involving large numbers. The use of a simple loop to extract and sum the digits keeps the implementation clean and understandable.
+The space complexity is O(log n) due to the storage required for the digits of the base k representation.
 
-In conclusion, the `sumBase` function offers an optimal approach to solve the problem at hand, combining clarity with efficiency. It serves as a useful algorithm for programmers and developers looking to enhance their skills in numerical representations and manipulation in different bases.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-digits-in-base-k/description/)
 

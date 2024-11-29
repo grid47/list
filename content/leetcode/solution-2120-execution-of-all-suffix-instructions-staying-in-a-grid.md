@@ -14,119 +14,163 @@ img_src = ""
 youtube = "Xf_naKzI_ZI"
 youtube_upload_date="2021-12-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Xf_naKzI_ZI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an n x n grid, with the top-left cell at (0, 0) and the bottom-right cell at (n - 1, n - 1). A robot starts at a given position startPos = [startrow, startcol] on the grid, and a string s representing a sequence of movement instructions: 'L' (move left), 'R' (move right), 'U' (move up), and 'D' (move down). The robot can execute the instructions starting from any index i in s, but it stops if it moves off the grid or runs out of instructions. Your task is to return an array answer where answer[i] represents the number of instructions the robot can execute if it starts from the ith instruction.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the size of the grid n, the starting position startPos, and a string s of instructions.
+- **Example:** `n = 3, startPos = [0, 1], s = 'RRDDLU'`
+- **Constraints:**
+	- 1 <= n, m <= 500
+	- startPos.length == 2
+	- 0 <= startrow, startcol < n
+	- s consists of 'L', 'R', 'U', and 'D'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> executeInstructions(int n, vector<int>& st, string s) {
-        int m = s.size(), h = m + n, v = m + n;
-        vector<int> hor((h + m) * 2, m), ver((h +m) * 2, m), res(m);
-        for(int i = m - 1; i >= 0; i--) {
-            hor[h] = ver[v] = i;
-            h += s[i] == 'L' ? 1 : s[i] == 'R'? -1 : 0;
-            v += s[i] == 'U' ? 1 : s[i] == 'D'? -1 : 0;
-            res[i] = min({  m, hor[h - st[1] - 1], hor[h - st[1] + n],
-                               ver[v - st[0] - 1], ver[v - st[0] + n]  }) - i;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of integers where each element at index i represents the number of instructions that can be executed if the robot begins at the ith instruction in the sequence.
+- **Example:** `For n = 3, startPos = [0, 1], s = 'RRDDLU', the output is [1, 5, 4, 3, 1, 0].`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine how many instructions the robot can execute starting from each index in the instruction string while staying within the bounds of the grid.
+
+- For each instruction in the string s, simulate the robot's movement starting from that position, tracking the number of valid moves.
+- Stop the simulation if the robot moves off the grid or there are no more instructions to process.
+- Store the number of valid instructions the robot can execute starting from each index and return the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The robot will always start within the bounds of the grid.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: n = 3, startPos = [0, 1], s = 'RRDDLU'`  \
+  **Explanation:** Starting from the initial position (0, 1), the robot can execute the following instructions starting from each index: 1 move from index 0 ('R'), 5 moves from index 1 ('RDDLU'), and so on.
+
+- **Input:** `Example 2: n = 2, startPos = [1, 1], s = 'LURD'`  \
+  **Explanation:** From position (1, 1), the robot can execute the following instructions starting from each index: 4 moves from index 0 ('LURD'), 1 move from index 1 ('URD'), and so on.
+
+- **Input:** `Example 3: n = 1, startPos = [0, 0], s = 'LRUD'`  \
+  **Explanation:** Since the grid is of size 1x1, no moves can be executed, and the result is [0, 0, 0, 0].
+
+{{< dots >}}
+## Approach 🚀
+The approach is to simulate the robot's movement for each starting position and check how many valid moves it can make while staying within the grid.
+
+### Initial Thoughts 💭
+- We need to check each instruction starting from every index in the string s.
+- We need to track the robot's position and stop when it moves off the grid.
+- A simulation approach will work well here, ensuring that each instruction is processed for each possible starting point.
+{{< dots >}}
+### Edge Cases 🌐
+- If n is 1, no movement is possible, so the result for all indices in s will be 0.
+- Ensure that the solution works efficiently for n and m up to 500.
+- If all instructions would cause the robot to move off the grid, the result will be 0 for every index.
+- The solution should handle the largest grid size and instruction string length efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> executeInstructions(int n, vector<int>& st, string s) {
+    int m = s.size(), h = m + n, v = m + n;
+    vector<int> hor((h + m) * 2, m), ver((h +m) * 2, m), res(m);
+    for(int i = m - 1; i >= 0; i--) {
+        hor[h] = ver[v] = i;
+        h += s[i] == 'L' ? 1 : s[i] == 'R'? -1 : 0;
+        v += s[i] == 'U' ? 1 : s[i] == 'D'? -1 : 0;
+        res[i] = min({  m, hor[h - st[1] - 1], hor[h - st[1] + n],
+                           ver[v - st[0] - 1], ver[v - st[0] + n]  }) - i;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+The code provides an implementation of a function that computes the result of executed instructions on a grid, considering various movements in four directions (Left, Right, Up, Down) and their effects on horizontal and vertical positions.
 
-The problem involves simulating the movements of a robot on an \( n \times n \) grid based on a sequence of commands given in the string `s`. The robot starts at a specific position defined by the vector `st`, and the task is to determine how many valid instructions can be executed starting from that position for each command in `s`. The commands can instruct the robot to move left ('L'), right ('R'), up ('U'), or down ('D'). The robot must remain within the bounds of the grid throughout its movements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> executeInstructions(int n, vector<int>& st, string s) {
+	```
+	Function definition for 'executeInstructions' which takes an integer n, a vector of integers st, and a string s as input. It returns a vector of integers as the result.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int m = s.size(), h = m + n, v = m + n;
+	```
+	This line initializes variables m (size of the string), h (horizontal position), and v (vertical position), both starting from m + n.
 
-To solve this problem, we employ a method that utilizes two arrays to track the horizontal and vertical bounds for each command in `s`. The approach can be broken down into the following key steps:
+3. **Array Initialization**
+	```cpp
+	    vector<int> hor((h + m) * 2, m), ver((h +m) * 2, m), res(m);
+	```
+	Three vectors are initialized: hor (for horizontal positions), ver (for vertical positions), and res (for storing the result).
 
-1. **Initialization**:
-   - We define the size of the grid \( n \) and the length of the commands \( m \).
-   - We initialize two vectors, `hor` and `ver`, to keep track of the last valid positions on the horizontal and vertical axes, respectively. The size of these vectors is determined based on the maximum potential movements in both directions.
-   - We also create a result vector `res` to store the count of valid instructions for each command.
+4. **For Loop**
+	```cpp
+	    for(int i = m - 1; i >= 0; i--) {
+	```
+	A for loop that iterates through the string s in reverse order, starting from the last character.
 
-2. **Simulating Movements**:
-   - We iterate through the commands in reverse order. For each command:
-     - We update the current horizontal (`h`) and vertical (`v`) positions based on the command.
-     - We update the `hor` and `ver` arrays to reflect the latest valid positions for the current command.
-     - We calculate the number of valid movements that can still be made without going out of bounds, considering the current position and the initial starting position.
+5. **Position Update**
+	```cpp
+	        hor[h] = ver[v] = i;
+	```
+	Updates the hor and ver arrays at the current positions of h and v to the current index i.
 
-3. **Boundary Checking**:
-   - The calculation for valid moves takes into account the movements in both the positive and negative directions for both axes to ensure the robot remains within the grid boundaries.
+6. **Horizontal Movement**
+	```cpp
+	        h += s[i] == 'L' ? 1 : s[i] == 'R'? -1 : 0;
+	```
+	Adjusts the horizontal position (h) based on whether the current character in the string is 'L' (left), 'R' (right), or neither.
 
-### Code Breakdown (Step by Step)
+7. **Vertical Movement**
+	```cpp
+	        v += s[i] == 'U' ? 1 : s[i] == 'D'? -1 : 0;
+	```
+	Adjusts the vertical position (v) based on whether the current character in the string is 'U' (up), 'D' (down), or neither.
 
-Here’s a step-by-step explanation of the code:
+8. **Result Calculation**
+	```cpp
+	        res[i] = min({  m, hor[h - st[1] - 1], hor[h - st[1] + n],
+	```
+	Calculates the result for the current position by finding the minimum of various possible values based on horizontal movements.
 
-1. **Function Declaration**:
-   ```cpp
-   vector<int> executeInstructions(int n, vector<int>& st, string s) {
-   ```
-   - The function `executeInstructions` takes the grid size \( n \), the starting position `st`, and the command string `s` as inputs.
+9. **Result Calculation (cont.)**
+	```cpp
+	                           ver[v - st[0] - 1], ver[v - st[0] + n]  }) - i;
+	```
+	Continues the result calculation for vertical movements and subtracts the current index i.
 
-2. **Variable Initialization**:
-   ```cpp
-   int m = s.size(), h = m + n, v = m + n;
-   vector<int> hor((h + m) * 2, m), ver((h + m) * 2, m), res(m);
-   ```
-   - We initialize `m` to the size of the command string `s`.
-   - The variables `h` and `v` are set to an offset to allow easy indexing while considering movements.
-   - `hor` and `ver` vectors are initialized to keep track of valid horizontal and vertical positions, respectively, initialized with a default value of \( m \).
-   - The `res` vector is created to store the results for each command.
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the result vector containing the calculated values.
 
-3. **Reverse Iteration Over Commands**:
-   ```cpp
-   for(int i = m - 1; i >= 0; i--) {
-       hor[h] = ver[v] = i;
-   ```
-   - We iterate over the command string `s` from the last command to the first.
-   - For each command, we record the last valid position in `hor` and `ver`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m)
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
 
-4. **Updating Positions**:
-   ```cpp
-   h += s[i] == 'L' ? 1 : s[i] == 'R' ? -1 : 0;
-   v += s[i] == 'U' ? 1 : s[i] == 'D' ? -1 : 0;
-   ```
-   - We update the horizontal and vertical positions based on the command. Depending on whether the command is 'L', 'R', 'U', or 'D', we adjust `h` and `v` accordingly.
+The time complexity is O(n * m), where n is the grid size and m is the length of the instruction string.
 
-5. **Calculating Valid Moves**:
-   ```cpp
-   res[i] = min({
-       m, hor[h - st[1] - 1], hor[h - st[1] + n],
-       ver[v - st[0] - 1], ver[v - st[0] + n]
-   }) - i;
-   ```
-   - For each command, we calculate the minimum of:
-     - The total number of commands \( m \).
-     - The last valid horizontal positions adjusted for the starting column `st[1]`.
-     - The last valid vertical positions adjusted for the starting row `st[0]`.
-   - The result is the count of valid instructions for the command.
+### Space Complexity 💾
+- **Best Case:** O(m)
+- **Worst Case:** O(m)
 
-6. **Return Result**:
-   ```cpp
-   return res;
-   ```
-   - Finally, the function returns the `res` vector containing the number of valid instructions for each command in `s`.
+The space complexity is O(m), as we store the result array of length m.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-- **Time Complexity**: \(O(m)\)
-  - The algorithm iterates through the command string once, leading to a linear time complexity relative to the length of `s`.
-
-- **Space Complexity**: \(O(n)\)
-  - The space used for the `hor` and `ver` vectors scales with the grid size, resulting in a linear space complexity.
-
-### Conclusion
-
-This solution effectively simulates the robot's movements on a grid based on a sequence of commands while keeping track of valid positions. The use of two arrays to maintain horizontal and vertical boundaries allows for efficient calculation of valid movements for each command. With a time complexity of \(O(m)\) and space complexity of \(O(n)\), the solution is optimal for the given problem constraints, making it suitable for larger inputs while maintaining clarity and readability. The design demonstrates a thoughtful balance between performance and simplicity, ensuring that the logic can be easily understood and maintained.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/execution-of-all-suffix-instructions-staying-in-a-grid/description/)
 

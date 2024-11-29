@@ -14,123 +14,155 @@ img_src = ""
 youtube = "asI_UBkXI0M"
 youtube_upload_date="2021-03-29"
 youtube_thumbnail="https://i.ytimg.com/vi/asI_UBkXI0M/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of distinct positive integers `nums`. Your task is to count how many tuples `(a, b, c, d)` exist such that the product of `a * b` equals the product of `c * d`, where `a, b, c, d` are distinct elements of `nums` and `a != b != c != d`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array `nums` containing distinct positive integers.
+- **Example:** `Input: nums = [1, 2, 3, 4, 6]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- 1 <= nums[i] <= 10^4
+	- All elements in nums are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int tupleSameProduct(vector<int>& nums) {
-        map<int, int> mp;
-        
-        int n = nums.size(), res = 0;
-        
-        for(int i = 0; i < n; i++)
-        for(int j = i + 1; j < n; j++) {
-            int x = nums[i] * nums[j];
-            if(mp.count(x)) res+=mp[x];
-            mp[x]++;
-        }
-        return res * 8;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of valid tuples `(a, b, c, d)` such that `a * b = c * d` and `a != b != c != d`.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The output is an integer representing the number of valid tuples.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find pairs of tuples `(a, b)` and `(c, d)` such that the products `a * b` and `c * d` are equal, and then count how many such valid tuples exist.
+
+- 1. For each pair `(a, b)` in the array, compute the product `a * b`.
+- 2. Keep track of how many times each product appears using a map.
+- 3. For each new product, if it has appeared before, add the number of times it has appeared to the result.
+- 4. Since the tuples `(a, b)` and `(c, d)` are interchangeable, multiply the result by 8 to account for all possible orderings of the tuples.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in the array are distinct positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 3, 4, 6]`  \
+  **Explanation:** The valid tuples where `a * b = c * d` are (1,6,2,3), (1,6,3,2), (6,1,2,3), (6,1,3,2), (2,3,1,6), (3,2,1,6). Therefore, the output is 6.
+
+- **Input:** `Input: nums = [2, 4, 8, 16]`  \
+  **Explanation:** The valid tuples where `a * b = c * d` are (2,8,4,4), (8,2,4,4), and there are no other valid tuples. Hence, the output is 2.
+
+{{< dots >}}
+## Approach 🚀
+We can approach this problem by iterating over all unique pairs `(a, b)` in the array, computing the product `a * b`, and counting how many times each product appears. If a product appears more than once, we count all valid pairs formed by these occurrences.
+
+### Initial Thoughts 💭
+- The problem essentially asks for counting pairs of pairs that produce the same product.
+- Using a map to store the products of pairs is a good way to count and then use this information to compute the valid tuples.
+{{< dots >}}
+### Edge Cases 🌐
+- The array should not be empty as it is stated that the length of `nums` will be at least 1.
+- The solution should handle the case where `nums.length` is close to 1000 efficiently.
+- There will be no cases where `nums[i] == nums[j]` because all elements in `nums` are distinct.
+- The constraints suggest that the solution must efficiently compute the result even with the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+int tupleSameProduct(vector<int>& nums) {
+    map<int, int> mp;
+    
+    int n = nums.size(), res = 0;
+    
+    for(int i = 0; i < n; i++)
+    for(int j = i + 1; j < n; j++) {
+        int x = nums[i] * nums[j];
+        if(mp.count(x)) res+=mp[x];
+        mp[x]++;
     }
-};
-{{< /highlight >}}
----
+    return res * 8;
+}
+```
 
-### Problem Statement
+The `tupleSameProduct` function calculates how many distinct quadruples (a, b, c, d) can be formed such that the product of nums[a] * nums[b] is equal to the product of nums[c] * nums[d]. The algorithm uses a map to count pairs of products and efficiently computes the result.
 
-The goal is to count how many unique tuples \((a, b, c, d)\) exist such that the product of \(a\) and \(b\) is equal to the product of \(c\) and \(d\), where each tuple is formed from the elements of a given list of integers `nums`. The tuples must consist of distinct elements, and the order of elements within each tuple does not matter, meaning \((a, b, c, d)\) is considered the same as \((c, d, a, b)\). Each tuple can be derived from pairs of indices within the array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int tupleSameProduct(vector<int>& nums) {
+	```
+	The function `tupleSameProduct` is defined, taking a vector `nums` as input. The goal is to find how many quadruples (a, b, c, d) satisfy nums[a] * nums[b] == nums[c] * nums[d].
 
-### Approach
+2. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map `mp` is initialized to store the frequency of each product that can be formed by multiplying two numbers from the input list `nums`.
 
-To achieve this, the algorithm can be broken down into the following steps:
+3. **Variable Declaration**
+	```cpp
+	    int n = nums.size(), res = 0;
+	```
+	The variable `n` is initialized to the size of the input vector `nums`, and `res` is initialized to 0. `res` will store the total number of valid quadruples.
 
-1. **Create a Map**: Utilize a map to keep track of the products of pairs of numbers from the list. The keys in the map will be the products, and the values will be the count of how many times each product can be formed using pairs of indices.
+4. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	An outer loop is initiated to iterate over each element `nums[i]` in the input vector.
 
-2. **Nested Loops for Pair Generation**: Use two nested loops to generate all possible pairs of indices \( (i, j) \) where \( i < j \). Calculate the product for each pair.
+5. **Inner Loop**
+	```cpp
+	    for(int j = i + 1; j < n; j++) {
+	```
+	An inner loop is initiated to iterate over all elements `nums[j]` that come after `nums[i]` to form pairs of products.
 
-3. **Count Products**: For each product calculated, check if it already exists in the map. If it does, it means that there are previously counted pairs that form the same product. Add this count to the result.
+6. **Product Calculation**
+	```cpp
+	        int x = nums[i] * nums[j];
+	```
+	The product `x` is calculated by multiplying the values of `nums[i]` and `nums[j]`.
 
-4. **Store Product Count**: Increment the count of the product in the map after checking for existing pairs.
+7. **Count Check**
+	```cpp
+	        if(mp.count(x)) res+=mp[x];
+	```
+	The function checks if the product `x` already exists in the map `mp`. If it does, the value in `mp[x]` is added to `res`, indicating the number of valid quadruples that can be formed using this product.
 
-5. **Calculate the Result**: Since each product can form tuples in different combinations, multiply the final count by 8 (since each valid product contributes to 8 different tuples: \((a, b, c, d)\), \((a, c, b, d)\), \((a, d, b, c)\), etc.).
+8. **Map Update**
+	```cpp
+	        mp[x]++;
+	```
+	The map `mp` is updated by incrementing the count of the product `x`. This tracks how many times the product `x` has been encountered.
 
-### Code Breakdown (Step by Step)
+9. **Return Result**
+	```cpp
+	    return res * 8;
+	```
+	The result `res` is multiplied by 8 because each pair of products represents a combination of four distinct indices, and there are 8 permutations of four distinct indices that can form the same product.
 
-Here’s a breakdown of the code provided:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2), since we need to check every pair of numbers in the array.
+- **Average Case:** O(n^2), as each pair is checked independently.
+- **Worst Case:** O(n^2), the worst case is when we check all pairs.
 
-1. **Class Definition**: The solution is defined within the `Solution` class.
+The time complexity is quadratic due to the nested loops over all pairs in the array.
 
-   ```cpp
-   class Solution {
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n^2), as we store the products of all pairs.
+- **Worst Case:** O(n^2), to store the products of all pairs.
 
-2. **Public Method**: The `tupleSameProduct` method is defined, which takes a vector of integers as input and returns an integer.
+The space complexity is quadratic, as we store the frequency of products for each pair.
 
-   ```cpp
-   public:
-       int tupleSameProduct(vector<int>& nums) {
-   ```
+**Happy Coding! 🎉**
 
-3. **Map Initialization**: A map `mp` is initialized to keep track of the products and their corresponding counts.
-
-   ```cpp
-   map<int, int> mp;
-   ```
-
-4. **Variable Initialization**: The size of the input vector `n` is stored, and `res` is initialized to hold the result.
-
-   ```cpp
-   int n = nums.size(), res = 0;
-   ```
-
-5. **Nested Loop Structure**: Two nested loops are used to iterate through the vector to form pairs of indices \( (i, j) \).
-
-   ```cpp
-   for(int i = 0; i < n; i++)
-       for(int j = i + 1; j < n; j++) {
-   ```
-
-6. **Product Calculation**: Inside the inner loop, the product of the current pair is calculated.
-
-   ```cpp
-   int x = nums[i] * nums[j];
-   ```
-
-7. **Check and Count Existing Products**: If the product already exists in the map, it indicates that there are previously counted pairs that form the same product. Add the count of these pairs to the result.
-
-   ```cpp
-   if(mp.count(x)) res += mp[x];
-   ```
-
-8. **Update the Product Count**: Regardless of whether the product was previously found, increment the count for this product in the map.
-
-   ```cpp
-   mp[x]++;
-   ```
-
-9. **Return Result**: Finally, return the result multiplied by 8 to account for all unique combinations of the pairs.
-
-   ```cpp
-   return res * 8;
-   }
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \( O(n^2) \) because we are using two nested loops to generate all pairs of indices. For each pair, we perform constant-time operations (checking the map and incrementing counts).
-
-- **Space Complexity**: The space complexity is \( O(k) \), where \( k \) is the number of unique products generated from the pairs. In the worst case, this could also be \( O(n^2) \), but generally, it will be much smaller as not all products will be unique.
-
-### Conclusion
-
-In summary, this solution effectively counts the number of tuples that can be formed based on the given conditions by leveraging a map to store products of pairs of integers from the input list. The use of nested loops allows for generating all possible pairs efficiently, while the map helps in quickly determining if a product has been seen before, thus counting the valid tuples appropriately.
-
-This algorithm is optimal for the problem, running in quadratic time with respect to the size of the input array, making it suitable for moderate input sizes typically encountered in competitive programming. By multiplying the final count by 8, the solution correctly accounts for all unique arrangements of the indices forming the valid tuples. This method is clear and efficient, demonstrating an effective use of combinatorial counting and data structures in C++.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/tuple-with-same-product/description/)
 

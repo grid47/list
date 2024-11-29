@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "-Ehc8QF1eac"
 youtube_upload_date="2021-03-04"
 youtube_thumbnail="https://i.ytimg.com/vi/-Ehc8QF1eac/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,106 +28,116 @@ youtube_thumbnail="https://i.ytimg.com/vi/-Ehc8QF1eac/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a positive integer n, find the smallest integer which can be formed by rearranging the digits of n and is greater than n. If no such integer exists, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a positive integer n, which can be up to 2^31-1.
+- **Example:** `Input: n = 123`
+- **Constraints:**
+	- 1 <= n <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int nextGreaterElement(int n) {
-        auto digits = to_string(n);
-        next_permutation(begin(digits), end(digits));
-        auto res = stoll(digits);
-        return (res > INT_MAX || res <= n)? -1: res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the smallest integer greater than n formed by rearranging its digits, or -1 if no such integer exists.
+- **Example:** `Output: 132`
+- **Constraints:**
+	- The returned value should be within the 32-bit signed integer range.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the smallest integer greater than n that can be formed using the digits of n.
 
-The problem asks to find the next greater element with the same digits as the given number `n`. This involves rearranging the digits of `n` to find the next larger number that can be formed. If no such larger number exists (i.e., `n` is the largest possible number with those digits), the function should return `-1`. The output must be returned as an integer.
+- Convert n to a string of digits.
+- Find the next permutation of the digits that is greater than n.
+- If such a permutation exists and it fits within the 32-bit integer range, return it.
+- If no permutation is possible or the resulting number exceeds the 32-bit limit, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always be a valid positive integer within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 123`  \
+  **Explanation:** The next permutation of the digits of 123 is 132, which is the smallest number greater than 123 that can be formed.
 
-**Example 1:**
+- **Input:** `Input: n = 321`  \
+  **Explanation:** Since no larger number can be formed with the digits of 321, the answer is -1.
 
-Input: `12`  
-Output: `21`  
-Explanation: The next greater number with the same digits as `12` is `21`.
+{{< dots >}}
+## Approach 🚀
+The approach involves finding the next permutation of the digits of n that is greater than n. If no such permutation exists, return -1.
 
-**Example 2:**
-
-Input: `21`  
-Output: `-1`  
-Explanation: Since `21` is already the largest number that can be formed with its digits, the function returns `-1`.
-
-### Approach
-
-The goal is to find the next greater permutation of the digits of the given number `n`. To achieve this, we can leverage a well-known algorithm for finding the "next permutation" in an ordered set of numbers.
-
-Here are the steps to solve the problem:
-
-1. **Convert the Number to a String**: Since we are dealing with digits, it’s easier to manipulate the digits if they are treated as characters in a string.
-2. **Next Permutation Algorithm**: This algorithm helps us find the next lexicographically larger permutation of the digits:
-   - Traverse the string of digits from right to left and find the first digit that is smaller than the digit next to it.
-   - Swap this digit with the smallest digit that is larger than it, found to its right.
-   - Reverse the digits to the right of the swapped digit to get the smallest lexicographical order.
-3. **Check the Validity of the Result**: The result should be a valid integer that is greater than the original number. If the result exceeds the maximum value of an integer (`INT_MAX`), or if the result is smaller than or equal to the original number, return `-1`.
-4. **Return the Result**: Convert the digits back to an integer and return the result if it is valid, otherwise return `-1`.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Converting the Number to a String**
+### Initial Thoughts 💭
+- Finding the next permutation is a well-known algorithmic problem. It requires rearranging digits to find the smallest number greater than the current number.
+- The algorithm can be implemented using a series of steps that involve finding a digit that can be swapped to form the next greater number.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as n is always a valid positive integer.
+- The solution should handle the maximum value of n (2^31-1) without exceeding the 32-bit integer limit.
+- For values like 999, no next permutation is possible, and the result should be -1.
+- The algorithm must be efficient to handle large inputs within the problem constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-auto digits = to_string(n);
+int nextGreaterElement(int n) {
+    auto digits = to_string(n);
+    next_permutation(begin(digits), end(digits));
+    auto res = stoll(digits);
+    return (res > INT_MAX || res <= n)? -1: res;
+}
 ```
-- First, we convert the given number `n` to a string so that we can manipulate the digits more easily. This allows us to use string manipulation functions like `next_permutation` on the digits.
 
-#### 2. **Applying the Next Permutation**
-```cpp
-next_permutation(begin(digits), end(digits));
-```
-- The function `next_permutation` is a built-in function in C++ that rearranges the digits to the next lexicographical permutation.
-- It modifies the sequence of digits to the next greater permutation (if possible), otherwise, it rearranges the digits into the smallest possible order (if the input is already the largest permutation).
-- We call this function on the `digits` string, which rearranges the digits into the next permutation.
+This function finds the next greater number that can be formed by rearranging the digits of the input integer `n`. If no such number exists, it returns -1. It uses string manipulation and the next permutation algorithm to generate the next arrangement of digits.
 
-#### 3. **Converting Back to an Integer**
-```cpp
-auto res = stoll(digits);
-```
-- After the digits are rearranged, we convert the modified string back to an integer using `stoll` (which stands for "string to long long"), since the number could potentially be large and beyond the range of `int`.
-- `stoll` converts the string back into an integer type that can handle large numbers.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int nextGreaterElement(int n) {
+	```
+	Defines the function `nextGreaterElement`, which takes an integer `n` and returns the next greater integer that can be formed by rearranging its digits.
 
-#### 4. **Validating the Result**
-```cpp
-return (res > INT_MAX || res <= n)? -1: res;
-```
-- The final check ensures that the resulting number is valid:
-  - If the result exceeds `INT_MAX` (the maximum value an `int` can hold), the function returns `-1`, since the number would be out of the valid range for a 32-bit integer.
-  - If the result is less than or equal to the original number `n`, the function also returns `-1`, since we are looking for the next greater number, not the same or smaller number.
-- If both conditions are passed, the result `res` is returned as the next greater number.
+2. **String Conversion**
+	```cpp
+	    auto digits = to_string(n);
+	```
+	Converts the integer `n` into a string representation to easily manipulate its digits.
 
-### Complexity
+3. **Next Permutation**
+	```cpp
+	    next_permutation(begin(digits), end(digits));
+	```
+	Uses the `next_permutation` function to rearrange the digits of the string into the next lexicographically greater permutation.
 
-#### Time Complexity:
-- **O(d)**, where `d` is the number of digits in the given number `n`. The `next_permutation` function operates in linear time with respect to the number of digits, as it needs to examine and rearrange the digits once.
-- Converting the number to a string and back to an integer also takes linear time with respect to the number of digits. Therefore, the time complexity is **O(d)**.
+4. **String to Integer Conversion**
+	```cpp
+	    auto res = stoll(digits);
+	```
+	Converts the string `digits` back into an integer using `stoll` (string to long long). This represents the next greater permutation of digits.
 
-#### Space Complexity:
-- **O(d)**, where `d` is the number of digits in `n`. This space is required to store the string representation of the digits of `n` and the result. The space complexity comes from the need to store the digits as a string and the final rearranged string, making the space complexity linear with respect to the number of digits.
+5. **Edge Case Handling, Return Statement**
+	```cpp
+	    return (res > INT_MAX || res <= n)? -1: res;
+	```
+	Checks if the resulting number exceeds the maximum allowable integer value (`INT_MAX`) or if it's not greater than the original number. If either condition is true, it returns -1, otherwise it returns the next greater number.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(d)
+- **Average Case:** O(d)
+- **Worst Case:** O(d)
 
-This solution efficiently finds the next greater number that can be formed from the digits of a given number `n`. It uses the "next permutation" algorithm, which is a well-established algorithm for finding the next lexicographically greater permutation in an ordered set of numbers. 
+The time complexity is linear in terms of the number of digits, which is at most 10 for a 32-bit integer.
 
-**Key points:**
-- The algorithm finds the next permutation of digits in linear time.
-- It uses string manipulation to facilitate the rearrangement of digits.
-- It checks if the resulting number is within the valid range for integers and returns `-1` if not.
+### Space Complexity 💾
+- **Best Case:** O(d)
+- **Worst Case:** O(d)
 
-**Advantages:**
-- The solution is fast with a time complexity of **O(d)**, where `d` is the number of digits, making it suitable for large numbers.
-- The space complexity is also **O(d)**, as it uses only the necessary space to store the digits and the result.
+The space complexity is O(d) due to the storage of the digits of the integer.
 
-This approach is a simple yet effective way to solve the problem using the next permutation algorithm, ensuring correctness and efficiency.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/next-greater-element-iii/description/)
 

@@ -14,146 +14,267 @@ img_src = ""
 youtube = "TqKDnzkRsh0"
 youtube_upload_date="2020-11-30"
 youtube_thumbnail="https://i.ytimg.com/vi/TqKDnzkRsh0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of network towers, where each tower is represented by a list [xi, yi, qi] denoting its location (xi, yi) on the X-Y plane and its quality factor qi. You are also given a radius, and a tower is considered reachable if the distance between the tower and a coordinate is less than or equal to the radius. The signal quality of a tower at a coordinate (x, y) is calculated using the formula ⌊qi / (1 + d)⌋, where d is the Euclidean distance between the tower and the coordinate. The total network quality at a coordinate is the sum of the signal qualities from all the reachable towers. Your task is to find the coordinate with the maximum network quality. If multiple coordinates have the same network quality, return the lexicographically smallest coordinate.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of towers, where each tower is represented by [xi, yi, qi], and an integer radius.
+- **Example:** `towers = [[3, 4, 5], [7, 8, 9], [2, 1, 10]], radius = 3`
+- **Constraints:**
+	- 1 <= towers.length <= 50
+	- towers[i].length == 3
+	- 0 <= xi, yi, qi <= 50
+	- 1 <= radius <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> bestCoordinate(vector<vector<int>>& tow, int rad) {
-        
-        int n = tow.size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the coordinate [cx, cy] with the highest network quality. If there are multiple such coordinates, return the lexicographically smallest one.
+- **Example:** `For towers = [[3, 4, 5], [7, 8, 9], [2, 1, 10]] and radius = 3, the output would be [3, 4].`
+- **Constraints:**
+	- The result should be a valid coordinate in the form of an array with two integers [cx, cy].
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the network quality by evaluating all possible coordinates within the range and checking the signal strength from reachable towers.
+
+- For each possible coordinate (cx, cy) within a bounded grid (0 <= cx, cy <= 50), calculate the network quality by summing the signal strengths from all reachable towers.
+- A tower is reachable if its Euclidean distance to the coordinate is less than or equal to the given radius.
+- Compare the network quality for all coordinates and keep track of the maximum quality.
+- If multiple coordinates have the same quality, return the lexicographically smallest one.
+{{< dots >}}
+### Problem Assumptions ✅
+- Coordinates and tower data are provided within the given bounds.
+- Euclidean distance is used for determining the reachability of towers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: towers = [[3, 4, 5], [7, 8, 9], [2, 1, 10]], radius = 3`  \
+  **Explanation:** At coordinate (3, 4), the signal strengths from the reachable towers (those within the radius) are summed to give the network quality. This is compared with other coordinates to find the maximum network quality.
+
+- **Input:** `Input: towers = [[5, 7, 6], [1, 2, 8], [8, 3, 4]], radius = 4`  \
+  **Explanation:** The network quality is calculated for all possible coordinates within the given range, and the coordinate with the highest quality is selected.
+
+- **Input:** `Input: towers = [[1, 1, 5], [2, 2, 7], [3, 3, 9]], radius = 5`  \
+  **Explanation:** The signal strengths are evaluated at different coordinates, and the coordinate with the highest sum of signal qualities is returned.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over all possible coordinates and calculating the total network quality by checking the reachability of each tower based on the Euclidean distance.
+
+### Initial Thoughts 💭
+- We need to calculate the signal quality for each reachable tower and sum them for all potential coordinates.
+- We can brute-force all coordinates in the given range and evaluate the network quality for each, but care should be taken to handle the radius constraint efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- If no towers are provided, the result should be a default coordinate, e.g., [0, 0].
+- The algorithm should handle up to 50 towers efficiently.
+- The radius can be small (1), in which case only very nearby towers will contribute to the network quality.
+- Make sure to efficiently calculate the Euclidean distance to avoid excessive computation.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> bestCoordinate(vector<vector<int>>& tow, int rad) {
     
-        int mx = INT_MIN;
-        vector<vector<int>> res;
+    int n = tow.size();
+
+    int mx = INT_MIN;
+    vector<vector<int>> res;
+    
+    for(int i = 0; i <= 50; i++)
+    for(int j = 0; j <= 50; j++) {
         
-        for(int i = 0; i <= 50; i++)
-        for(int j = 0; j <= 50; j++) {
-            
-            int sum = 0;
-            for(int k = 0; k < n; k++) {
-                int x = tow[k][0], y = tow[k][1];
-                float r = sqrt((x - i) * (x - i) + (y - j) * (y - j));
-                int ss = 0;
-                if(r <= rad) {
-                    ss = tow[k][2]/(1 + r);
-                }
-                sum += ss;
+        int sum = 0;
+        for(int k = 0; k < n; k++) {
+            int x = tow[k][0], y = tow[k][1];
+            float r = sqrt((x - i) * (x - i) + (y - j) * (y - j));
+            int ss = 0;
+            if(r <= rad) {
+                ss = tow[k][2]/(1 + r);
             }
-            if(mx < sum) {
-                mx = sum;
-                res = {{i, j}};
-            } else if(mx == sum) {
-                res.push_back({i, j});
-            }
+            sum += ss;
         }
-        sort(res.begin(), res.end());
-        return res[0];
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves determining the best coordinate in a 2D grid (with dimensions ranging from \(0\) to \(50\) in both x and y directions) to maximize the sum of signals received from a set of towers located at given coordinates. Each tower has a specified signal strength, and the signal received from each tower decreases with distance, influenced by a given radius. Specifically, if a point is within the radius of a tower, the signal received is calculated based on the distance from the tower to the point. The goal is to find the coordinate that yields the highest total signal strength from all towers.
-
-### Approach
-
-To solve the problem, the algorithm follows these steps:
-
-1. **Initialize Variables**: We keep track of the maximum signal strength and the coordinates that produce this strength.
-
-2. **Iterate Over Possible Coordinates**: We loop through all possible coordinates in the grid from \((0, 0)\) to \((50, 50)\).
-
-3. **Calculate Signal Strength for Each Coordinate**:
-    - For each tower, calculate the distance to the current coordinate.
-    - If the distance is within the specified radius, compute the signal strength using the formula: \[ \text{signal} = \frac{\text{strength}}{1 + \text{distance}} \]
-    - Sum the signals from all towers for the current coordinate.
-
-4. **Track Maximum Signal Strength**: If the computed signal strength is greater than the previously recorded maximum, update the maximum and reset the list of best coordinates. If it equals the maximum, add the current coordinate to the list.
-
-5. **Return the Result**: After checking all coordinates, return the first coordinate from the list of best coordinates.
-
-### Code Breakdown (Step by Step)
-
-Here's the detailed breakdown of the code:
-
-```cpp
-class Solution {
-public:
-    vector<int> bestCoordinate(vector<vector<int>>& tow, int rad) {
-        int n = tow.size();
-        int mx = INT_MIN;
-        vector<vector<int>> res;
-```
-- The `bestCoordinate` function takes a list of towers and the radius as input.
-- We initialize `n` to hold the number of towers, `mx` to track the maximum signal strength, and `res` to hold the best coordinates.
-
-```cpp
-        for(int i = 0; i <= 50; i++)
-        for(int j = 0; j <= 50; j++) {
-```
-- We loop through all possible coordinates \( (i, j) \) from \( (0, 0) \) to \( (50, 50) \).
-
-```cpp
-            int sum = 0;
-            for(int k = 0; k < n; k++) {
-                int x = tow[k][0], y = tow[k][1];
-                float r = sqrt((x - i) * (x - i) + (y - j) * (y - j));
-                int ss = 0;
-```
-- For each coordinate \( (i, j) \), we initialize `sum` to accumulate the signal strength.
-- We iterate through each tower, extracting its coordinates \( (x, y) \) and calculating the Euclidean distance \( r \) to the current coordinate.
-
-```cpp
-                if(r <= rad) {
-                    ss = tow[k][2]/(1 + r);
-                }
-                sum += ss;
-            }
-```
-- If the distance \( r \) is within the specified radius, we compute the signal strength \( ss \) using the formula provided and add it to `sum`.
-
-```cpp
-            if(mx < sum) {
-                mx = sum;
-                res = {{i, j}};
-            } else if(mx == sum) {
-                res.push_back({i, j});
-            }
+        if(mx < sum) {
+            mx = sum;
+            res = {{i, j}};
+        } else if(mx == sum) {
+            res.push_back({i, j});
         }
-```
-- After calculating the total signal strength for the coordinate, we compare it to the current maximum. If it is greater, we update `mx` and reset `res` to only contain the current coordinate. If it matches the maximum, we append the current coordinate to `res`.
-
-```cpp
-        sort(res.begin(), res.end());
-        return res[0];
     }
-};
+    sort(res.begin(), res.end());
+    return res[0];
+}
 ```
-- Finally, we sort the list of best coordinates and return the first one.
 
-### Complexity
+This function determines the best coordinate from a set of coordinates, based on the maximum sum of contributions from nearby points within a specified radius. The best coordinate is the one that yields the highest score when considering all points within a distance determined by the radius.
 
-- **Time Complexity**: The time complexity of this algorithm is \( O(n \cdot (51^2)) \), where \( n \) is the number of towers. This is because we iterate over each tower for every coordinate in a \( 51 \times 51 \) grid, resulting in a significant number of calculations as the number of towers increases.
-  
-- **Space Complexity**: The space complexity is \( O(1) \) as we only use a fixed amount of additional space for variables and do not require data structures that grow with the input size. The output is stored in a fixed-size vector that will hold a maximum of two coordinates in the worst case.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> bestCoordinate(vector<vector<int>>& tow, int rad) {
+	```
+	Define the function `bestCoordinate` which takes a 2D vector of points `tow` and a radius `rad`. The function aims to return the best coordinate based on maximum weighted sum of nearby points within the radius.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	    int n = tow.size();
+	```
+	Initialize variable `n` to hold the size of the `tow` array, representing the number of points in the input.
 
-This solution efficiently finds the best coordinate in a specified grid to maximize the signal received from a set of towers. The algorithm's nested loop structure allows it to compute signal strengths for all possible coordinates, ensuring that the optimal solution is found.
+3. **Variable Initialization**
+	```cpp
+	    int mx = INT_MIN;
+	```
+	Initialize `mx` to hold the maximum score (initialized to the smallest integer value) to track the highest possible sum.
 
-**Key Takeaways**:
-1. **Signal Decay with Distance**: The approach demonstrates how to factor in the decay of signal strength with increasing distance, a common problem in fields like telecommunications.
-2. **Brute Force Feasibility**: Given the constraints (with a maximum grid size of \(51 \times 51\)), a brute force solution is feasible and effective for finding the optimal coordinate.
-3. **Sorting for Consistency**: Sorting the resulting coordinates ensures that in cases of ties, the smallest coordinate (in terms of x and y) is returned, which is a common requirement in programming challenges.
+4. **Vector Initialization**
+	```cpp
+	    vector<vector<int>> res;
+	```
+	Initialize an empty 2D vector `res` to store the coordinates with the best score.
 
-This algorithm can be applied in scenarios where optimizing reception or signal strength is crucial, such as in wireless networks, IoT device placement, and more. By systematically evaluating potential locations, it provides a clear path to identifying the best configuration.
+5. **For Loop**
+	```cpp
+	    for(int i = 0; i <= 50; i++)
+	```
+	Outer loop iterating over possible x-coordinates (ranging from 0 to 50).
+
+6. **For Loop**
+	```cpp
+	    for(int j = 0; j <= 50; j++) {
+	```
+	Inner loop iterating over possible y-coordinates (ranging from 0 to 50).
+
+7. **Variable Initialization**
+	```cpp
+	        int sum = 0;
+	```
+	Initialize the variable `sum` to store the cumulative score for the current coordinate (i, j).
+
+8. **For Loop**
+	```cpp
+	        for(int k = 0; k < n; k++) {
+	```
+	Loop through all points in the input `tow` array to calculate the contribution of each point to the score.
+
+9. **Variable Initialization**
+	```cpp
+	            int x = tow[k][0], y = tow[k][1];
+	```
+	Extract the x and y coordinates of the current point `k` from the `tow` array.
+
+10. **Distance Calculation**
+	```cpp
+	            float r = sqrt((x - i) * (x - i) + (y - j) * (y - j));
+	```
+	Calculate the Euclidean distance `r` from the current point `(x, y)` to the current coordinate `(i, j)`. This distance determines how much contribution the point will have based on its proximity.
+
+11. **Variable Initialization**
+	```cpp
+	            int ss = 0;
+	```
+	Initialize the variable `ss` to store the contribution of the current point to the score.
+
+12. **Conditional Statement**
+	```cpp
+	            if(r <= rad) {
+	```
+	Check if the point is within the given radius `rad`.
+
+13. **Score Calculation**
+	```cpp
+	                ss = tow[k][2]/(1 + r);
+	```
+	If the point is within radius, calculate its contribution to the score based on its value `tow[k][2]` divided by `(1 + r)` where `r` is the distance.
+
+14. **End Conditional Statement**
+	```cpp
+	            }
+	```
+	End the if-statement checking if the point is within radius.
+
+15. **Score Update**
+	```cpp
+	            sum += ss;
+	```
+	Add the contribution `ss` to the total score `sum`.
+
+16. **End For Loop**
+	```cpp
+	        }
+	```
+	End the loop over all points.
+
+17. **Conditional Statement**
+	```cpp
+	        if(mx < sum) {
+	```
+	Check if the current total score `sum` is greater than the maximum score `mx`.
+
+18. **Score Update**
+	```cpp
+	            mx = sum;
+	```
+	If the current score is higher, update the maximum score `mx`.
+
+19. **Best Coordinate Update**
+	```cpp
+	            res = {{i, j}};
+	```
+	Update the best coordinates `res` with the current coordinate `(i, j)`.
+
+20. **Conditional Statement**
+	```cpp
+	        } else if(mx == sum) {
+	```
+	If the current score equals the maximum score, add the current coordinate `(i, j)` to the list of best coordinates.
+
+21. **Best Coordinate Update**
+	```cpp
+	            res.push_back({i, j});
+	```
+	Add the current coordinate `(i, j)` to the `res` list of best coordinates.
+
+22. **End Conditional Statement**
+	```cpp
+	        }
+	```
+	End the conditional check for the maximum score.
+
+23. **Sorting**
+	```cpp
+	    sort(res.begin(), res.end());
+	```
+	Sort the list of best coordinates `res` in lexicographical order.
+
+24. **Return Statement**
+	```cpp
+	    return res[0];
+	```
+	Return the first coordinate in the sorted list as the best coordinate.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m^2)
+- **Average Case:** O(n * m^2)
+- **Worst Case:** O(n * m^2)
+
+Here, n is the number of towers (up to 50), and m is the maximum size of the coordinate grid (51).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(m^2)
+
+In the worst case, the space complexity is O(m^2) for storing the network quality calculations for each coordinate.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/coordinate-with-maximum-network-quality/description/)
 

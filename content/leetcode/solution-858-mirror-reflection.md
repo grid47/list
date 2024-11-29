@@ -14,94 +14,104 @@ img_src = ""
 youtube = "fUa0LRtSlz0"
 youtube_upload_date="2021-02-01"
 youtube_thumbnail="https://i.ytimg.com/vi/fUa0LRtSlz0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a special square room with mirrors on all four walls, except for the southwest corner, there are receptors at three other corners, numbered 0, 1, and 2. A laser ray is fired from the southwest corner and hits the east wall at a certain distance from the 0th receptor. Given the side length of the square room, p, and the distance q from the 0th receptor on the east wall where the laser ray meets, return the number of the receptor the ray hits first after bouncing around the room.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers: p, the length of the side of the square room, and q, the distance from the southwest corner to where the laser first meets the east wall.
+- **Example:** `Input: p = 4, q = 2`
+- **Constraints:**
+	- 1 <= q <= p <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mirrorReflection(int p, int q) {
-        while( p % 2 == 0 && q % 2 == 0) p >>= 1, q >>= 1;
-        return 1 - p%2 + q%2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function should return an integer representing the receptor number (0, 1, or 2) where the laser ray first reaches after bouncing off the walls.
+- **Example:** `Output: 1`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine which receptor the laser ray hits first, considering how it reflects off the walls of the square room.
 
-The problem at hand involves simulating the reflection of light in a room with a square shape. We are given a room with dimensions `p` by `q`, where the light starts at one of the corners. The goal is to determine which corner the light will eventually reach after bouncing off the walls of the room.
+- Step 1: Check the divisibility of both p and q by 2 and repeatedly divide them by 2 until one of them is odd.
+- Step 2: Use the formula `1 - p%2 + q%2` to determine the receptor number.
+- Step 3: Return the receptor number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The room is always square.
+- The input values p and q are valid and guarantee that the ray will eventually meet a receptor.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: p = 4, q = 2`  \
+  **Explanation:** In this example, the laser first meets the east wall at a distance of 2 from the 0th receptor. After bouncing, the ray reaches receptor 1, as it is reflected back towards the wall.
 
-The light beam will be reflected in a manner similar to how light behaves in a coordinate system. The corners are numbered as follows:
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we utilize a mathematical approach that simplifies the conditions for determining the receptor. By reducing the values of p and q iteratively through division, we arrive at a formula that can quickly calculate the receptor number.
 
-- Corner 0: The top-left corner of the room (starting point).
-- Corner 1: The top-right corner of the room.
-- Corner 2: The bottom-left corner of the room.
-- Corner 3: The bottom-right corner of the room.
-
-The light beam starts at the top-left corner and travels at a 45-degree angle, bouncing off the walls until it reaches one of the corners. We are tasked with determining which corner the light reaches first, given the dimensions of the room.
-
-### Approach
-
-The key observation here is that we can avoid simulating the light's path step-by-step by instead thinking in terms of how the light would behave if the walls of the room were "unfolded" and extended indefinitely. This way, the light's path forms a straight line through multiple rooms, instead of bouncing back and forth in a confined space.
-
-#### Key Insights:
-1. **Handling Even and Odd Values**:
-   - If both `p` (width) and `q` (height) are even, then the light will eventually reach the corner 0.
-   - If `p` is even and `q` is odd, the light will reach corner 2.
-   - If `p` is odd and `q` is even, the light will reach corner 1.
-   - If both `p` and `q` are odd, the light will reach corner 3.
-
-2. **Greatest Common Divisor (GCD)**:
-   - We could compute the GCD of `p` and `q`, and then look for how the light will "fold" back. But a more efficient way to solve this problem uses bit manipulation to repeatedly divide both `p` and `q` by 2 until at least one of them becomes odd.
-
-3. **Modulo Arithmetic**:
-   - Since we need to determine the behavior of the light when it bounces, we can use the modulo operator to help us figure out which corner the light reaches. The behavior of the light can be simplified into checking whether `p` and `q` are odd or even after some basic transformations.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Simplifying the Problem
-
-We begin by simplifying the problem using bitwise operations. Specifically, we use the `p >>= 1` and `q >>= 1` operations to divide both `p` and `q` by 2 (shift right) as long as they are both even. This reduces the problem to a case where either `p` or `q` is odd.
-
+### Initial Thoughts 💭
+- The problem can be reduced by dividing both p and q by 2 when they are even.
+- The solution involves manipulating the parity of p and q to deduce which receptor the ray meets.
+{{< dots >}}
+### Edge Cases 🌐
+- N/A: Inputs are guaranteed to meet the constraints.
+- For large values of p and q, the solution still works within time limits due to efficient reduction of the values.
+- When p equals q and both are odd, the ray will hit receptor 2.
+- The values of p and q will always satisfy the input constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-while( p % 2 == 0 && q % 2 == 0) p >>= 1, q >>= 1;
+int mirrorReflection(int p, int q) {
+    while( p % 2 == 0 && q % 2 == 0) p >>= 1, q >>= 1;
+    return 1 - p%2 + q%2;
+}
 ```
 
-- This loop ensures that we eliminate any factors of 2 from both `p` and `q`. By dividing by 2 repeatedly, we can reduce the problem to smaller values of `p` and `q` where at least one of them is odd.
+This function calculates the mirror reflection of two points `p` and `q` after repeatedly halving their values when both are even.
 
-#### Step 2: Determining the Corner
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int mirrorReflection(int p, int q) {
+	```
+	The function `mirrorReflection` takes two integers `p` and `q` as input and returns the mirror reflection based on the conditions in the while loop.
 
-Once we have reduced `p` and `q` such that at least one of them is odd, the next step is to determine which corner the light reaches. This can be done by examining the parity (odd or even) of `p` and `q`:
+2. **While Loop**
+	```cpp
+	    while( p % 2 == 0 && q % 2 == 0) p >>= 1, q >>= 1;
+	```
+	The `while` loop repeatedly halves both `p` and `q` (using right shift operator) as long as both are even. This effectively reduces the problem size until at least one of them becomes odd.
 
-```cpp
-return 1 - p % 2 + q % 2;
-```
+3. **Return Statement**
+	```cpp
+	    return 1 - p%2 + q%2;
+	```
+	After exiting the loop, the function returns a value based on the parity of `p` and `q`. It checks if `p` is odd and `q` is odd and returns an appropriate result based on the mirror reflection rules.
 
-- If both `p` and `q` are odd (`p % 2 == 1` and `q % 2 == 1`), the light reaches corner 3.
-- If `p` is even and `q` is odd, the light reaches corner 2.
-- If `p` is odd and `q` is even, the light reaches corner 1.
-- If both `p` and `q` are even, the light reaches corner 0.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log p), as the values of p and q are halved iteratively until one of them becomes odd.
+- **Average Case:** O(log p), due to the iterative halving process.
+- **Worst Case:** O(log p), because the division operation continues until one of p or q is odd.
 
-### Complexity Analysis
 
-#### Time Complexity:
 
-- The time complexity of this approach is **O(log p + log q)**, which is the time required to repeatedly divide `p` and `q` by 2 until at least one of them becomes odd. Since the number of divisions is proportional to the number of bits in the binary representation of `p` and `q`, the time complexity is logarithmic with respect to the size of the inputs.
+### Space Complexity 💾
+- **Best Case:** O(1), since no additional space is needed beyond the input values.
+- **Worst Case:** O(1), as only a few variables are used to calculate the result.
 
-#### Space Complexity:
 
-- The space complexity of this approach is **O(1)** since we are only using a few variables to store the values of `p`, `q`, and the result. No additional data structures are needed.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently determines the corner where the light will eventually reach by using bitwise operations and modulo arithmetic. By reducing the problem to simpler terms with repeated division by 2, we avoid the need for simulating the light's path and make the solution run in logarithmic time.
-
-The time complexity of **O(log p + log q)** ensures that this approach will run efficiently even for large values of `p` and `q`. The constant space complexity **O(1)** further contributes to the overall efficiency of the solution. This approach provides an optimal solution for the problem by leveraging simple and efficient bit manipulation techniques.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/mirror-reflection/description/)
 

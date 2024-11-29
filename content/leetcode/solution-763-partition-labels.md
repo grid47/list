@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "B7m8UmZE-vw"
 youtube_upload_date="2021-10-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/B7m8UmZE-vw/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,136 +28,166 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/B7m8UmZE-vw/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a string s. Your task is to divide the string into the maximum number of parts such that each letter appears in at most one part. The resulting parts, when concatenated in order, should form the original string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s.
+- **Example:** `Input: s = "abcacbadefgh"`
+- **Constraints:**
+	- 1 <= s.length <= 500
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> partitionLabels(string s) {
-        map<char, int> mp;
-        for(int i = 0; i < s.size(); i++)
-            mp[s[i]] = i;
-        
-        vector<int> res;
-        int prv = -1, mx = mp[s[0]];
-        for(int i = 0; i < s.size(); i++) {
-            mx = max(mx, mp[s[i]]);
-            if(i == mx || i == s.size() - 1) {
-                res.push_back(i - prv);
-                prv = mx;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of integers where each integer represents the length of one part after dividing the string.
+- **Example:** `Output: [6, 7]`
+- **Constraints:**
+	- The result list should contain the maximum number of partitions possible.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to divide the string into the maximum number of parts such that each letter appears in only one part.
+
+- First, find the last occurrence of each character in the string.
+- Then, iterate over the string, keeping track of the rightmost position where the current partition can end.
+- If the current position is equal to the last occurrence of any character in the current partition, finalize the current partition and start a new one.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string is non-empty and contains only lowercase letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: s = "abcacbadefgh"`  \
+  **Explanation:** In this example, the string is divided into two parts: "abcacb" and "adefgh", with no characters repeating across the parts.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by iterating through the string and keeping track of the last occurrence of each character. As we move through the string, we will try to form partitions based on these last occurrences.
+
+### Initial Thoughts 💭
+- We can use a map to store the last occurrence index of each character.
+- We can iterate through the string and dynamically adjust the end of the current partition.
+- The key to solving this problem is to recognize when to finalize a partition by checking the farthest position of the characters in the partition.
+{{< dots >}}
+### Edge Cases 🌐
+- The string is not empty, but if the length is 1, the output should be a single partition of length 1.
+- Ensure that the solution works efficiently even for the maximum string length of 500 characters.
+- Strings with no repeating characters will have one partition for the entire string.
+- Handle strings with repeated characters correctly, ensuring the partitioning respects the rule that each character appears in at most one part.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> partitionLabels(string s) {
+    map<char, int> mp;
+    for(int i = 0; i < s.size(); i++)
+        mp[s[i]] = i;
+    
+    vector<int> res;
+    int prv = -1, mx = mp[s[0]];
+    for(int i = 0; i < s.size(); i++) {
+        mx = max(mx, mp[s[i]]);
+        if(i == mx || i == s.size() - 1) {
+            res.push_back(i - prv);
+            prv = mx;
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to partition a string into as many parts as possible, such that each letter appears in at most one part. The goal is to return the sizes of these parts. The string consists of lowercase English letters.
-
-#### Example:
-For the string `s = "abac"`, the partition could be:
-- Part 1: "ab"
-- Part 2: "ac"
-
-For the string `s = "eccbbbbdec"`, the partitions would be:
-- Part 1: "e"
-- Part 2: "cc"
-- Part 3: "bb"
-- Part 4: "b"
-- Part 5: "dec"
-
-The objective is to compute the lengths of these partitions and return them.
-
-### Approach
-
-The problem requires us to partition the string such that each character only appears once within each partition. This means that once we have included a character in a partition, the rest of its occurrences must also appear within the same partition. The key insight here is to track the farthest position each character appears and adjust the partitions dynamically.
-
-#### Key Insights:
-
-1. **Tracking the Last Occurrence**: We need to know where the last occurrence of each character is. Once we know this, we can extend the partition to include all instances of the character.
-
-2. **Greedy Partitioning**: As we traverse the string, we need to keep track of the furthest index that any character has appeared up to that point. Once the current index reaches this maximum, we can create a partition.
-
-3. **Efficient Calculation**: The solution involves two passes over the string — one to determine the last occurrence of each character, and another to determine the partitions.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Mapping the Last Occurrence of Each Character
-
-```cpp
-map<char, int> mp;
-for(int i = 0; i < s.size(); i++)
-    mp[s[i]] = i;
-```
-
-- A `map` (or hash map) is used to store the last index of each character in the string. The key is the character, and the value is the last index where that character appears. We loop through the string and update the map for each character.
-  
-- This map will allow us to efficiently track the last occurrence of every character in the string.
-
-#### Step 2: Initializing Variables for Partitioning
-
-```cpp
-vector<int> res;
-int prv = -1, mx = mp[s[0]];
-```
-
-- `res`: A vector to store the size of each partition.
-- `prv`: This variable keeps track of the starting index of the current partition. Initially, it's set to `-1` because we haven't started the first partition yet.
-- `mx`: This variable holds the index of the furthest position that we've seen up to this point. Initially, it is set to the last occurrence of the first character `s[0]`.
-
-#### Step 3: Traversing the String to Form Partitions
-
-```cpp
-for(int i = 0; i < s.size(); i++) {
-    mx = max(mx, mp[s[i]]);
-    if(i == mx || i == s.size() - 1) {
-        res.push_back(i - prv);
-        prv = mx;
-    }
+    return res;
 }
 ```
 
-- The `for` loop traverses each character in the string.
-  
-- For each character at index `i`, we update `mx` to be the maximum of the current `mx` and the last occurrence of the character `s[i]`. This ensures that `mx` always represents the farthest index that we need to include in the current partition.
+This code defines a function that takes a string and partitions it into substrings such that no letter appears in more than one substring. It returns the sizes of those substrings.
 
-- The condition `if(i == mx || i == s.size() - 1)` checks if the current index `i` is equal to the last occurrence of the character (i.e., we have included all instances of this character in the current partition). If so, we:
-  - Push the size of the current partition (`i - prv`) into the `res` vector.
-  - Update `prv` to `mx`, marking the start of the next partition.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> partitionLabels(string s) {
+	```
+	This line defines the function 'partitionLabels' which takes a string 's' and returns a vector of integers representing the sizes of the partitions.
 
-- The partition ends when `i` reaches `mx` or when `i` is the last character in the string (`i == s.size() - 1`).
+2. **Map Initialization**
+	```cpp
+	    map<char, int> mp;
+	```
+	This initializes a map 'mp' where each character from the string will be mapped to its last occurrence index in the string.
 
-#### Step 4: Returning the Result
+3. **First Loop**
+	```cpp
+	    for(int i = 0; i < s.size(); i++)
+	```
+	This loop iterates over each character in the string 's' to record the last occurrence index of each character in the 'mp' map.
 
-```cpp
-return res;
-```
+4. **Map Population**
+	```cpp
+	        mp[s[i]] = i;
+	```
+	This updates the map 'mp' with the index of the current character 's[i]'. This ensures that the map stores the last occurrence of each character.
 
-- After the loop completes, `res` contains the sizes of the partitions, and the function returns this vector.
+5. **Result Vector Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	This initializes an empty vector 'res' which will store the sizes of the partitions created.
 
-### Complexity
+6. **Variables Initialization**
+	```cpp
+	    int prv = -1, mx = mp[s[0]];
+	```
+	This initializes two variables: 'prv' to -1 (the previous partition's end index) and 'mx' to the last occurrence index of the first character in the string.
 
-#### Time Complexity:
-- The time complexity of the solution is **O(n)**, where `n` is the length of the string `s`. This is because:
-  - The first loop (to build the map of last occurrences) iterates through the string once.
-  - The second loop (to form the partitions) also iterates through the string once.
-  
-- Each iteration performs constant-time operations (updating the map and comparing indices), so the total time complexity is linear.
+7. **Second Loop**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	This loop iterates over the string 's' again to determine the boundaries of the partitions.
 
-#### Space Complexity:
-- The space complexity is **O(n)**, where `n` is the number of unique characters in the string (which is at most 26 for lowercase English letters). The `map` stores the last index for each character, and the `res` vector stores the sizes of the partitions.
+8. **Maximum Index Update**
+	```cpp
+	        mx = max(mx, mp[s[i]]);
+	```
+	This updates the variable 'mx' to store the maximum index between the current 'mx' and the last occurrence index of the current character.
 
-### Conclusion
+9. **Partition Boundary Check**
+	```cpp
+	        if(i == mx || i == s.size() - 1) {
+	```
+	This checks if the current index 'i' has reached the end of a partition. A partition ends when 'i' equals 'mx' (the last occurrence of the current characters in the partition) or when 'i' is the last index in the string.
 
-This solution efficiently solves the problem of partitioning a string into parts where each letter appears in at most one part. By using a greedy approach to determine the furthest occurrence of each character, the algorithm ensures that each partition contains all instances of the characters it includes.
+10. **Push Partition Size**
+	```cpp
+	            res.push_back(i - prv);
+	```
+	If a partition boundary is found, this line adds the size of the partition (difference between the current index 'i' and the previous partition's end 'prv') to the result vector 'res'.
 
-- **Time Complexity**: **O(n)**, where `n` is the length of the string.
-- **Space Complexity**: **O(n)**, where `n` is the number of unique characters in the string.
+11. **Update Partition End**
+	```cpp
+	            prv = mx;
+	```
+	This updates 'prv' to 'mx', marking the end of the current partition.
 
-This solution is both time and space efficient, making it a good fit for large strings, and it ensures that we partition the string optimally. The use of a map to store the last occurrence of each character allows us to dynamically adjust the partition as we traverse the string, ensuring correctness.
+12. **Return Statement**
+	```cpp
+	    return res;
+	```
+	This returns the 'res' vector, which contains the sizes of the partitions.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) when the string is already partitioned optimally.
+- **Average Case:** O(n) where n is the length of the string, as we traverse the string twice.
+- **Worst Case:** O(n) as we traverse the string and map the last occurrence of each character.
+
+The time complexity is linear as we process each character of the string twice.
+
+### Space Complexity 💾
+- **Best Case:** O(1) for space used in the map.
+- **Worst Case:** O(1) for storing the last occurrences, as we only store information for 26 characters (lowercase English letters).
+
+The space complexity is constant as we only need to store a fixed number of characters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/partition-labels/description/)
 

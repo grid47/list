@@ -14,105 +14,169 @@ img_src = ""
 youtube = "FL972h3KqKA"
 youtube_upload_date="2020-12-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/FL972h3KqKA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string consisting of only '0's and '1's. You can perform two types of operations on this string any number of times:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string maximumBinaryString(string binary) {
-        int ones = 0, zeros = 0, n = binary.size();
-        for (auto &c: binary) {
-            if(c == '0')
-            zeros++;
-            else if (zeros == 0)
-            ones++;
-            c = '1';
-        }
-        if(ones < n)
-        binary[zeros + ones -1] = '0';
-        return binary;
-    }
-};
-{{< /highlight >}}
----
+- Operation 1: Replace any occurrence of the substring '00' with '10'.
+- Operation 2: Replace any occurrence of the substring '10' with '01'.
 
-### Problem Statement
+Your goal is to apply these operations and transform the binary string into the largest possible binary string in terms of its decimal value. A string 'x' is considered larger than string 'y' if the decimal value of 'x' is greater than that of 'y'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a binary string, 'binary', consisting of only '0's and '1's.
+- **Example:** `"001110"`
+- **Constraints:**
+	- 1 <= binary.length <= 10^5
+	- binary consists of only '0' and '1'.
 
-The goal is to transform a given binary string into its maximum possible value by performing a specific operation: we can flip any '0' to '1', but if we do this, we must ensure that all leading '1's are maintained in the string. The objective is to find the lexicographically largest binary string possible by strategically changing bits while following these rules.
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest binary string possible after applying the operations any number of times.
+- **Example:** `"111011"`
+- **Constraints:**
+	- The output should be a valid binary string.
 
-### Approach
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Transform the binary string into the largest possible binary string using the given operations.
 
-To achieve the maximum binary string, we need to count the number of '1's and '0's in the string. The strategy is straightforward: we will convert every bit to '1', maintaining the condition that we may only change a '0' to a '1' if there is at least one '0' left to keep. The plan can be summarized as follows:
+- 1. Traverse the binary string to count the number of '1's and '0's.
+- 2. For the string to be as large as possible, move all '1's to the leftmost positions and the remaining '0's to the right.
+- 3. If there are any remaining '0's after moving '1's, the last '0' will stay in its place, as we can't transform it further.
+- 4. Return the transformed string.
+{{< dots >}}
+### Problem Assumptions ✅
+- Binary string consists only of '0's and '1's.
+- The string may be of any length between 1 and 100,000.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"001110"`  \
+  **Explanation:** In this example, we can transform '001110' step by step: first '001101', then '010101', and finally '111011', yielding the largest possible binary string '111011'.
 
-1. Traverse the binary string and count the number of '1's and '0's.
-2. Change every character in the string to '1'.
-3. If there are any '0's present in the original string, replace the last '1' (which was originally '0') to '0'. This ensures we are keeping at least one '0' while maximizing the leading '1's.
+{{< dots >}}
+## Approach 🚀
+The approach is to count the '1's and '0's in the string and rearrange them such that all '1's come first, followed by all '0's, yielding the largest possible binary string.
 
-### Code Breakdown (Step by Step)
-
-Let’s break down the provided code to understand how this approach is implemented:
-
-1. **Class Definition**: We define a class named `Solution`, which contains our method.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Method Declaration**: The method `maximumBinaryString` takes a binary string as input and returns the modified string.
-
-    ```cpp
-    string maximumBinaryString(string binary) {
-    ```
-
-3. **Variable Initialization**: We initialize three variables: `ones` to count the '1's, `zeros` to count the '0's, and `n` to hold the size of the binary string.
-
-    ```cpp
+### Initial Thoughts 💭
+- The problem essentially involves sorting the string to place all '1's to the left.
+- By counting the number of '1's and '0's, we can create the largest string by placing all '1's first, followed by all '0's. This approach ensures we meet the problem's requirement.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input string is empty, return an empty string.
+- Ensure the solution can handle inputs with up to 100,000 characters efficiently.
+- If the string contains only '1's or only '0's, no transformations can be made, and the original string is the largest possible.
+- The string length must not exceed 100,000 characters, and the solution should run in linear time to handle this efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+string maximumBinaryString(string binary) {
     int ones = 0, zeros = 0, n = binary.size();
-    ```
-
-4. **Iterating Through the Binary String**: We loop through each character of the binary string using a range-based for loop.
-
-    ```cpp
     for (auto &c: binary) {
-    ```
-
-5. **Counting '1's and '0's**: Inside the loop, we check if the current character is '0'. If it is, we increment the `zeros` counter. If it is a '1' and there are no '0's counted yet, we increment the `ones` counter. Regardless of the character, we set the current character to '1' as our goal is to maximize the string.
-
-    ```cpp
-    if(c == '0')
+        if(c == '0')
         zeros++;
-    else if (zeros == 0)
+        else if (zeros == 0)
         ones++;
-    c = '1'; // Set current character to '1'
-    ```
-
-6. **Replacing the Last '1' with '0'**: After the loop, we check if the number of counted '1's is less than the length of the string. If true, it implies there were some '0's present in the original string. We then replace the last '1' in our modified string (which corresponds to the last counted '0') with a '0'.
-
-    ```cpp
-    if(ones < n)
-        binary[zeros + ones - 1] = '0'; // Replace the last '1' with '0'
-    ```
-
-7. **Returning the Result**: Finally, we return the modified binary string.
-
-    ```cpp
-    return binary;
+        c = '1';
     }
-    ```
+    if(ones < n)
+    binary[zeros + ones -1] = '0';
+    return binary;
+}
+```
 
-### Complexity
+This function transforms a binary string into the lexicographically largest possible binary string by shifting the zeros after all the ones, while keeping the number of zeros and ones the same.
 
-The time complexity of this solution is O(n), where n is the length of the input binary string. This is due to the single traversal of the string to count the bits and modify them. The space complexity is O(1) because we only use a few integer variables to keep track of counts and do not require any additional data structures that grow with input size.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string maximumBinaryString(string binary) {
+	```
+	Defines the function `maximumBinaryString`, which manipulates the given binary string to generate the lexicographically largest possible binary string.
 
-### Conclusion
+2. **Variable Initialization**
+	```cpp
+	    int ones = 0, zeros = 0, n = binary.size();
+	```
+	Initializes three variables: `ones` (counts the number of ones), `zeros` (counts the number of zeros), and `n` (stores the length of the binary string).
 
-In conclusion, the provided code effectively transforms a given binary string into its maximum lexicographical form while adhering to the constraints of only flipping '0's to '1's. By strategically counting the bits and replacing the appropriate character at the end, we ensure that the result is not only maximized but also meets the required conditions. This approach is efficient and straightforward, making it a suitable solution for problems involving binary strings and manipulations. By leveraging a simple counting mechanism and a direct string modification, the code achieves its goals with optimal performance, making it an excellent example of algorithmic efficiency.
+3. **Loop Through Binary String**
+	```cpp
+	    for (auto &c: binary) {
+	```
+	Iterates through each character of the `binary` string, updating `ones`, `zeros`, and modifying the string.
+
+4. **Check for Zero**
+	```cpp
+	        if(c == '0')
+	```
+	Checks if the current character is a zero. If true, increments the `zeros` counter.
+
+5. **Update Zero Counter**
+	```cpp
+	        zeros++;
+	```
+	Increments the `zeros` counter when the character is a zero.
+
+6. **Check for One Before Zero**
+	```cpp
+	        else if (zeros == 0)
+	```
+	Checks if the current character is a one and if no zeros have been encountered yet (so we can count ones before zeros).
+
+7. **Update One Counter**
+	```cpp
+	        ones++;
+	```
+	Increments the `ones` counter when a one is encountered before any zeros.
+
+8. **Modify Character to One**
+	```cpp
+	        c = '1';
+	```
+	Changes the current character to '1', ensuring that all ones appear before any zeros in the resulting string.
+
+9. **Condition Check for Ones Less than Total Length**
+	```cpp
+	    if(ones < n)
+	```
+	Checks if the number of ones is less than the length of the string. This means that there are still zeros left to place after the ones.
+
+10. **Modify Last Position**
+	```cpp
+	    binary[zeros + ones -1] = '0';
+	```
+	Sets the last zero position in the binary string by placing '0' at the calculated position to ensure the number of ones and zeros remains the same.
+
+11. **Return Result**
+	```cpp
+	    return binary;
+	```
+	Returns the modified binary string, which is now the lexicographically largest possible string.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string. This is the best case where the string is already in the desired form.
+- **Average Case:** O(n), where n is the length of the string. We need to scan through the string to count '1's and '0's.
+- **Worst Case:** O(n), where n is the length of the string. The solution involves iterating through the string to count the characters.
+
+The time complexity is linear in terms of the input size, making the solution efficient even for large inputs.
+
+### Space Complexity 💾
+- **Best Case:** O(1), since we only need a few variables for counting and constructing the output string.
+- **Worst Case:** O(n), where n is the length of the string, as we may need additional space to store the result.
+
+The space complexity is linear in the worst case, where we need to store the modified string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-binary-string-after-change/description/)
 

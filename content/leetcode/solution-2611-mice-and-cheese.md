@@ -14,138 +14,174 @@ img_src = ""
 youtube = "S_pCzVdQX9U"
 youtube_upload_date="2023-04-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/S_pCzVdQX9U/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You have two mice and a set of n different types of cheese. Each type of cheese has a different point value when eaten by either mouse. The first mouse must eat exactly k types of cheese, while the second mouse eats the remaining cheese types. Your task is to maximize the total points the two mice can achieve by distributing the cheese types between the mice.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays, reward1 and reward2, each of length n, where reward1[i] represents the points the first mouse gets from eating the ith cheese type, and reward2[i] represents the points the second mouse gets from eating the ith cheese type. Additionally, you are given a non-negative integer k, which represents the number of cheese types the first mouse should eat.
+- **Example:** `reward1 = [2, 5, 3, 4], reward2 = [1, 2, 6, 4], k = 3`
+- **Constraints:**
+	- 1 <= n == reward1.length == reward2.length <= 10^5
+	- 1 <= reward1[i], reward2[i] <= 1000
+	- 0 <= k <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum points that the two mice can achieve, considering that the first mouse eats exactly k types of cheese.
+- **Example:** `Output: 18`
+- **Constraints:**
+	- The output will be a single integer representing the maximum points the mice can achieve.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the total points by distributing the cheeses between the two mice, ensuring that the first mouse eats exactly k types of cheese.
+
+- Step 1: Calculate the difference in reward between reward1[i] and reward2[i] for each cheese.
+- Step 2: Sort the cheeses based on the difference in rewards, from largest to smallest.
+- Step 3: Assign the first mouse the k cheeses that provide the highest rewards for it, and assign the remaining cheeses to the second mouse.
+- Step 4: Calculate the total points and return it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The rewards are non-negative integers.
+- The first mouse is guaranteed to eat exactly k cheeses.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `reward1 = [2, 5, 3, 4], reward2 = [1, 2, 6, 4], k = 3`  \
+  **Explanation:** The first mouse eats the 2nd, 3rd, and 4th cheeses, giving points 5, 3, and 4. The second mouse eats the 1st cheese, giving 2 points. The total points are 5 + 3 + 4 + 2 = 18.
+
+- **Input:** `reward1 = [1, 1], reward2 = [1, 1], k = 1`  \
+  **Explanation:** In this case, the first mouse eats one cheese, and the second mouse eats the other. The total points will be 1 + 1 = 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach focuses on maximizing the reward for the first mouse by sorting the cheese types based on the difference between the rewards of the two mice and assigning the cheeses accordingly.
+
+### Initial Thoughts 💭
+- We need to maximize the reward for the first mouse by selecting k types of cheese that yield the highest reward for it.
+- It is important to prioritize the cheeses that give the first mouse the most points while considering the second mouse's reward for the remaining cheeses.
+{{< dots >}}
+### Edge Cases 🌐
+- If reward1 or reward2 is empty, return 0 as no points can be earned.
+- Ensure that the algorithm efficiently handles the maximum constraint of 10^5 cheese types.
+- If k is 0, the first mouse does not eat any cheese, and the second mouse eats all the cheeses.
+- Handle cases where all rewards are equal, where the two mice have identical reward values for each cheese.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int miceAndCheese(vector<int>& r1, vector<int>& r2, int k) {
     
-    int miceAndCheese(vector<int>& r1, vector<int>& r2, int k) {
-        
-        int n = r1.size();
+    int n = r1.size();
 
-        vector<vector<int>> ans;
-        
-        for(int i = 0; i < n; i++) {
-            ans.push_back({r1[i] - r2[i], r1[i], r2[i]});
-        }
-        sort(ans.begin(), ans.end(), greater<vector<int>>());
-        
-        int res = 0, i = 0;
-        while(k--) {
-            res += ans[i++][1];
-        }
-        while(i < n) res += ans[i++][2];
-        return res;
+    vector<vector<int>> ans;
+    
+    for(int i = 0; i < n; i++) {
+        ans.push_back({r1[i] - r2[i], r1[i], r2[i]});
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given two lists, `r1` and `r2`, each containing `n` integers. Each integer represents the reward associated with a task in two different reward categories:
-- `r1[i]` represents the reward for task `i` if you choose the first list.
-- `r2[i]` represents the reward for task `i` if you choose the second list.
-
-Additionally, you are given an integer `k`, which represents the number of tasks you are allowed to select from the first list (i.e., you can choose up to `k` tasks from `r1`).
-
-Your goal is to select tasks in such a way that you maximize the total reward. Specifically, you can select `k` tasks from the first list (`r1`) and the remaining tasks from the second list (`r2`). The total reward will be the sum of the rewards you get from the selected tasks in both lists.
-
-### Approach
-
-The problem can be broken down into a few key steps:
-
-1. **Calculate the Difference in Rewards**:
-   For each task, compute the difference between the rewards from the two lists: `r1[i] - r2[i]`. This will help determine which tasks provide a higher reward when selected from `r1` compared to when selected from `r2`. 
-
-2. **Sort the Tasks Based on the Difference**:
-   Once we calculate the difference for each task, the strategy is to select the tasks with the largest differences from the first list, as these will contribute more to the total reward when selected from `r1`.
-
-3. **Select Tasks**:
-   - First, select `k` tasks from the sorted list based on the largest differences. This ensures that we maximize the reward from selecting tasks from `r1`.
-   - For the remaining tasks, select them from the second list, as we have already maximized the reward from the first list tasks.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Calculate the Difference and Store Tasks
-
-```cpp
-for(int i = 0; i < n; i++) {
-    ans.push_back({r1[i] - r2[i], r1[i], r2[i]});
+    sort(ans.begin(), ans.end(), greater<vector<int>>());
+    
+    int res = 0, i = 0;
+    while(k--) {
+        res += ans[i++][1];
+    }
+    while(i < n) res += ans[i++][2];
+    return res;
 }
 ```
 
-- **Explanation**:
-  - We first calculate the difference between the rewards of the two lists `r1[i] - r2[i]` for each task `i`.
-  - We store each task as a vector of three integers:
-    - The first element `r1[i] - r2[i]` represents the difference in rewards.
-    - The second element `r1[i]` is the reward for the task from the first list.
-    - The third element `r2[i]` is the reward for the task from the second list.
-  - This data structure allows us to both compare the reward differences and access the rewards for each list efficiently.
+This function calculates the total maximum cheese mice can get by selecting `k` mice from `r1` and the rest from `r2`, sorting based on the difference between `r1[i]` and `r2[i]`.
 
-#### Step 2: Sort Tasks Based on Reward Differences
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int miceAndCheese(vector<int>& r1, vector<int>& r2, int k) {
+	```
+	Defines the function `miceAndCheese`, which takes two vectors `r1` and `r2` representing the number of cheeses for mice in two locations, and an integer `k` representing the number of mice to select from `r1`.
 
-```cpp
-sort(ans.begin(), ans.end(), greater<vector<int>>());
-```
+2. **Variable Declaration**
+	```cpp
+	    int n = r1.size();
+	```
+	Initializes variable `n` to the size of the input vector `r1`, representing the number of mice.
 
-- **Explanation**:
-  - We sort the tasks based on the first element of each task's vector (i.e., the difference `r1[i] - r2[i]`) in descending order. This ensures that the tasks which provide the greatest benefit when selected from the first list `r1` come first in the list.
-  - The `greater<vector<int>>` comparator sorts the tasks in descending order based on the first element of each vector (the reward difference).
+3. **Vector Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	Declares a 2D vector `ans` to store the difference between `r1[i]` and `r2[i]`, along with the values from `r1[i]` and `r2[i]`.
 
-#### Step 3: Select the Best Tasks from `r1` and `r2`
+4. **Loop - Calculation**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through each mouse and calculate the difference between the cheese values in `r1[i]` and `r2[i]`.
 
-```cpp
-int res = 0, i = 0;
-while(k--) {
-    res += ans[i++][1];
-}
-while(i < n) res += ans[i++][2];
-```
+5. **Push to Vector**
+	```cpp
+	        ans.push_back({r1[i] - r2[i], r1[i], r2[i]});
+	```
+	Adds a new element to the `ans` vector containing the difference `r1[i] - r2[i]`, followed by `r1[i]` and `r2[i]`.
 
-- **Explanation**:
-  - We initialize a variable `res` to store the total reward.
-  - The first `while(k--)` loop is used to select `k` tasks from `r1`. We add the reward from `r1` (i.e., `ans[i++][1]`) to `res` for the first `k` tasks. The loop runs for `k` iterations, and each time it selects the best task from `r1` based on the sorting.
-  - The second `while(i < n)` loop handles the remaining tasks. Since we have already selected `k` tasks from `r1`, we now add the reward from `r2` (i.e., `ans[i++][2]`) for the remaining tasks.
+6. **Sorting**
+	```cpp
+	    sort(ans.begin(), ans.end(), greater<vector<int>>());
+	```
+	Sorts the vector `ans` in descending order based on the first element of each sub-array (the difference `r1[i] - r2[i]`).
 
-#### Step 4: Return the Total Reward
+7. **Variable Initialization**
+	```cpp
+	    int res = 0, i = 0;
+	```
+	Initializes two variables: `res` to accumulate the total cheese and `i` to keep track of the index.
 
-```cpp
-return res;
-```
+8. **While Loop - Select `k` Mice**
+	```cpp
+	    while(k--) {
+	```
+	Starts a loop that runs `k` times to add the best `k` mice from `r1` to the result.
 
-- **Explanation**:
-  - Once we have selected the best `k` tasks from `r1` and the remaining tasks from `r2`, we return the total reward `res`.
+9. **Add Cheese from `r1`**
+	```cpp
+	        res += ans[i++][1];
+	```
+	Adds the cheese value from `r1[i]` to `res` for the current best selection, then increments `i`.
 
-### Complexity Analysis
+10. **While Loop - Add Remaining Mice**
+	```cpp
+	    while(i < n) res += ans[i++][2];
+	```
+	Adds the remaining cheese values from `r2[i]` to `res` for the remaining mice.
 
-#### Time Complexity:
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total amount of cheese accumulated after selecting `k` mice from `r1` and the rest from `r2`.
 
-1. **Building the `ans` Array**: We iterate over each task and store the difference and rewards in the `ans` array. This takes \(O(n)\) time, where \(n\) is the size of the input arrays `r1` and `r2`.
-   
-2. **Sorting the Tasks**: We sort the `ans` array, which contains `n` tasks. Sorting takes \(O(n \log n)\) time.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-3. **Selecting Tasks**: After sorting, we loop through the tasks twice: once to select `k` tasks from `r1`, and once to select the remaining tasks from `r2`. Both loops take \(O(n)\) time.
+The time complexity is dominated by the sorting step, which is O(n log n), where n is the number of cheese types.
 
-4. **Overall Time Complexity**: The overall time complexity is dominated by the sorting step, which is \(O(n \log n)\).
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
+The space complexity is O(n) because we store the differences in rewards for each cheese type.
 
-1. **Space for the `ans` Array**: We store `n` tasks in the `ans` array, which requires \(O(n)\) space.
-   
-2. **Other Variables**: The other variables used in the solution (like `res`, `i`, and `k`) require constant space \(O(1)\).
+**Happy Coding! 🎉**
 
-3. **Overall Space Complexity**: The overall space complexity is \(O(n)\), due to the space required for the `ans` array.
-
-### Conclusion
-
-This solution efficiently maximizes the total reward by selecting the best tasks from two lists. It works by calculating the difference in rewards between the two lists, sorting the tasks based on this difference, and selecting tasks from the sorted list to maximize the total reward. The algorithm runs in \(O(n \log n)\) time due to the sorting step, making it suitable for large inputs. The space complexity is \(O(n)\), which is also efficient. The solution ensures that the best `k` tasks are selected from `r1` while the remaining tasks are selected from `r2`.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/mice-and-cheese/description/)
 

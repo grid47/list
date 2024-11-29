@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "2cpihwDznaw"
 youtube_upload_date="2024-05-21"
 youtube_thumbnail="https://i.ytimg.com/vi/2cpihwDznaw/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,161 +28,232 @@ youtube_thumbnail="https://i.ytimg.com/vi/2cpihwDznaw/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a set of courses with prerequisites, and you need to find a valid order to take them, or return an empty array if no valid order exists.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a number of courses, `numCourses`, and a list of prerequisite pairs where each pair [ai, bi] indicates that you need to take course bi before course ai.
+- **Example:** `[numCourses = 3, prerequisites = [[1,0], [2,1]]]`
+- **Constraints:**
+	- 1 <= numCourses <= 2000
+	- 0 <= prerequisites.length <= numCourses * (numCourses - 1)
+	- prerequisites[i].length == 2
+	- 0 <= ai, bi < numCourses
+	- ai != bi
+	- All pairs [ai, bi] are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> findOrder(int n, vector<vector<int>>& pre) {
-        
-        vector<vector<int>> gph(n);
-        vector<int> incnt(n, 0);
-        for(int i = 0; i < pre.size(); i++) {
-            gph[pre[i][1]].push_back(pre[i][0]);
-            incnt[pre[i][0]]++;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a valid order in which to complete all the courses, or an empty array if no valid order exists.
+- **Example:** `For numCourses = 3 and prerequisites = [[1,0], [2,1]], the output is [0, 1, 2].`
+- **Constraints:**
 
-        queue<int> q;
-        for(int i = 0; i < n; i++)
-            if(incnt[i] == 0)
-                q.push(i);
-        vector<int> ans;
-        while(!q.empty()) {
-            int y = q.front();
-            ans.push_back(y);
-            q.pop();
-            for(auto x: gph[y]) {
-                incnt[x]--;
-                if(incnt[x] == 0)
-                    q.push(x);
-            }
-        }
-        return ans.size() == n? ans: vector<int>();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if it is possible to complete all the courses by sorting the courses in a valid order considering their prerequisites.
+
+- Represent the courses and their prerequisites as a directed graph.
+- Perform topological sorting on the graph using a queue to process nodes with no prerequisites.
+- Return the topologically sorted order if all courses can be taken, otherwise return an empty array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input courses and prerequisites form a directed graph, which may or may not have cycles.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** In this case, you need to take course 1 after course 0, and course 2 after course 1, so the valid order is [0, 1, 2].
+
+- **Input:** `Example 2`  \
+  **Explanation:** The courses form a directed graph with dependencies, and a valid order is [0, 2, 1, 3].
+
+- **Input:** `Example 3`  \
+  **Explanation:** The prerequisites form a cycle, making it impossible to complete the courses, so the output is an empty array.
+
+{{< dots >}}
+## Approach 🚀
+This problem can be solved using topological sorting on a directed graph representing course dependencies.
+
+### Initial Thoughts 💭
+- The problem involves checking if a directed graph is acyclic and finding a valid topological order.
+- A queue can be used to process nodes with no incoming edges (prerequisites), and we can iteratively build the valid order.
+{{< dots >}}
+### Edge Cases 🌐
+- If no prerequisites are given, the courses can be completed in any order.
+- The solution must handle up to 2000 courses efficiently.
+- If the prerequisites form a cycle, it is impossible to complete the courses.
+- Ensure that the solution works within the time limits for large arrays (O(n + m) time complexity).
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> findOrder(int n, vector<vector<int>>& pre) {
+    
+    vector<vector<int>> gph(n);
+    vector<int> incnt(n, 0);
+    for(int i = 0; i < pre.size(); i++) {
+        gph[pre[i][1]].push_back(pre[i][0]);
+        incnt[pre[i][0]]++;
     }
-};
-{{< /highlight >}}
----
 
-### 🚀 Problem Statement
-
-The challenge is to determine the order in which courses can be completed given a number of prerequisites. Each course may depend on other courses, and we need to find a valid sequence that respects these dependencies. If it's impossible to finish all courses due to a cycle in the prerequisites, we should return an empty list. If a valid order exists, return the sequence of courses.
-
----
-
-### 🧠 Approach
-
-To solve this problem, we will use **Topological Sorting** for a **Directed Acyclic Graph (DAG)**. In simpler terms:
-- Each course is a node.
-- A directed edge from course `u` to course `v` indicates that course `v` is a prerequisite for course `u`.
-
-Topological sorting arranges the courses such that for every directed edge `(u, v)`, course `u` appears before course `v`. If there’s a cycle in the graph, it means some courses depend on each other in a circular way, making it impossible to complete all courses. To handle this, we'll use **Kahn’s Algorithm** for topological sorting.
-
-### Kahn's Algorithm Steps:
-1. **Construct the graph** based on the prerequisite relationships.
-2. **Track in-degrees** (number of incoming edges) for each course.
-3. Use a **queue** to store courses with no prerequisites (in-degree = 0).
-4. Process the queue by removing courses, updating their neighbors’ in-degrees, and adding neighbors to the queue when their in-degree becomes 0.
-5. If we can process all courses, return the order; otherwise, return an empty list, indicating a cycle.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's break down the code to see how we can implement this approach:
-
-```cpp
-class Solution {
-public:
-    vector<int> findOrder(int n, vector<vector<int>>& pre) {
-        vector<vector<int>> gph(n);   // Graph represented as an adjacency list
-        vector<int> incnt(n, 0);       // Array to store in-degrees (prerequisite count)
-```
-- **gph**: A graph where each index `i` holds the list of courses that depend on course `i`.
-- **incnt**: An array to track how many prerequisites each course has (its in-degree).
-
----
-
-```cpp
-        for(int i = 0; i < pre.size(); i++) {
-            gph[pre[i][1]].push_back(pre[i][0]);  // Add directed edge from pre[i][1] to pre[i][0]
-            incnt[pre[i][0]]++;                   // Increment the in-degree of pre[i][0]
+    queue<int> q;
+    for(int i = 0; i < n; i++)
+        if(incnt[i] == 0)
+            q.push(i);
+    vector<int> ans;
+    while(!q.empty()) {
+        int y = q.front();
+        ans.push_back(y);
+        q.pop();
+        for(auto x: gph[y]) {
+            incnt[x]--;
+            if(incnt[x] == 0)
+                q.push(x);
         }
-```
-- We loop through the list of prerequisites and build the graph. For each prerequisite pair, we create a directed edge and update the in-degree of the dependent course.
-
----
-
-```cpp
-        queue<int> q;
-        for(int i = 0; i < n; i++) {
-            if(incnt[i] == 0)  // If a course has no prerequisites, it can be taken first
-                q.push(i);
-        }
-```
-- **Queue (q)**: Stores courses that can be taken right away (courses with zero in-degree).
-- We loop through all courses, adding those with zero prerequisites to the queue.
-
----
-
-```cpp
-        vector<int> ans;
-        while(!q.empty()) {
-            int y = q.front();  // Get the course from the front of the queue
-            ans.push_back(y);    // Add it to the result list
-            q.pop();
-```
-- **ans**: This vector will store the order in which courses can be taken.
-- We process each course by adding it to the result and removing it from the queue.
-
----
-
-```cpp
-            for(auto x: gph[y]) {
-                incnt[x]--;         // Decrease the in-degree of the dependent course
-                if(incnt[x] == 0)   // If a dependent course now has no prerequisites, add it to the queue
-                    q.push(x);
-            }
-        }
-```
-- For each course processed, we decrease the in-degree of its neighbors (dependent courses). If a neighbor's in-degree becomes zero, it’s added to the queue because it’s now available to be taken.
-
----
-
-```cpp
-        return ans.size() == n ? ans : vector<int>();  // If all courses are processed, return the result
     }
-};
+    return ans.size() == n? ans: vector<int>();
+}
 ```
-- Finally, we check if all courses have been processed. If the size of `ans` is equal to `n`, we return the order. If not, we return an empty list, indicating a cycle.
 
----
+This code implements the topological sorting algorithm using Kahn's Algorithm, which is a method of performing a topological sort on a directed graph using a queue. It returns the order of courses or nodes that respect all prerequisites, or an empty vector if it's not possible.
 
-### 📊 Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> findOrder(int n, vector<vector<int>>& pre) {
+	```
+	Define the function `findOrder`, which takes an integer `n` (number of courses/nodes) and a 2D vector `pre` (prerequisites), and returns the topological order of nodes.
 
-#### Time Complexity:
-- **O(V + E)**, where:
-  - `V` is the number of courses (`n`).
-  - `E` is the number of prerequisite pairs (edges in the graph).
-- Constructing the graph takes **O(E)** time. Processing each course and its dependencies in the queue takes **O(V + E)** time.
+2. **Graph Initialization**
+	```cpp
+	    vector<vector<int>> gph(n);
+	```
+	Initialize an adjacency list `gph` to represent the directed graph, where each node will store a list of its neighbors (nodes that depend on it).
 
-#### Space Complexity:
-- **O(V + E)**, where:
-  - `V` is the number of courses (`n`).
-  - `E` is the number of prerequisite pairs (edges in the graph).
-- The adjacency list and in-degree array take **O(E)** and **O(V)** space, respectively.
+3. **In-degree Initialization**
+	```cpp
+	    vector<int> incnt(n, 0);
+	```
+	Initialize a vector `incnt` to keep track of the in-degree (number of incoming edges) for each node. Set all in-degrees initially to 0.
 
----
+4. **Building Graph**
+	```cpp
+	    for(int i = 0; i < pre.size(); i++) {
+	```
+	Loop through the prerequisite pairs in `pre` to build the graph and update the in-degrees.
 
-### 🏁 Conclusion
+5. **Graph Population**
+	```cpp
+	        gph[pre[i][1]].push_back(pre[i][0]);
+	```
+	For each pair in `pre`, add the directed edge from `pre[i][1]` to `pre[i][0]` in the adjacency list `gph`.
 
-This solution efficiently solves the problem of determining the order in which courses can be completed while respecting prerequisites. By applying **Kahn’s Algorithm** for topological sorting, we ensure that the graph is processed in a valid order, and we can detect any cycles that would make completing all courses impossible.
+6. **In-degree Update**
+	```cpp
+	        incnt[pre[i][0]]++;
+	```
+	Increase the in-degree of the node `pre[i][0]`, indicating that it has one more prerequisite.
 
-#### Key Takeaways:
-- **Topological Sorting** allows us to order courses in a way that respects their prerequisites.
-- **Cycle Detection** ensures that if any courses are part of a circular dependency, we return an empty list.
-- The approach is **efficient** with a time complexity of **O(V + E)** and works well even for large input sizes.
+7. **Queue Initialization**
+	```cpp
+	    queue<int> q;
+	```
+	Initialize a queue `q` to keep track of nodes with no prerequisites (i.e., nodes with an in-degree of 0).
 
-Now, you're all set to tackle similar problems with confidence! 🌟 Keep practicing, and you'll master graph algorithms in no time! 💪📚
+8. **Queue Population**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loop through all nodes and add those with no incoming edges (in-degree of 0) to the queue.
+
+9. **In-degree Check**
+	```cpp
+	        if(incnt[i] == 0)
+	```
+	Check if the current node has no prerequisites (in-degree 0), indicating it can be processed.
+
+10. **Queue Push**
+	```cpp
+	            q.push(i);
+	```
+	Add the current node with no prerequisites to the queue.
+
+11. **Answer Initialization**
+	```cpp
+	    vector<int> ans;
+	```
+	Initialize an empty vector `ans` to store the topologically sorted nodes.
+
+12. **Processing Queue**
+	```cpp
+	    while(!q.empty()) {
+	```
+	While the queue is not empty, process each node in topological order.
+
+13. **Node Processing**
+	```cpp
+	        int y = q.front();
+	```
+	Get the front node from the queue to process.
+
+14. **Answer Update**
+	```cpp
+	        ans.push_back(y);
+	```
+	Add the current node `y` to the answer vector `ans` as part of the topological order.
+
+15. **Queue Pop**
+	```cpp
+	        q.pop();
+	```
+	Remove the processed node from the front of the queue.
+
+16. **Graph Traversal**
+	```cpp
+	        for(auto x: gph[y]) {
+	```
+	For each node `x` that depends on the current node `y`, reduce its in-degree by 1.
+
+17. **In-degree Decrement**
+	```cpp
+	            incnt[x]--;
+	```
+	Decrement the in-degree of node `x`, as one of its prerequisites (`y`) has been processed.
+
+18. **Queue Update**
+	```cpp
+	            if(incnt[x] == 0)
+	```
+	If node `x` now has no prerequisites left (in-degree 0), it can be added to the queue.
+
+19. **Queue Push Again**
+	```cpp
+	                q.push(x);
+	```
+	Add node `x` to the queue for processing.
+
+20. **Return Statement**
+	```cpp
+	    return ans.size() == n? ans: vector<int>();
+	```
+	If all nodes have been processed (i.e., the answer size equals `n`), return the topologically sorted order; otherwise, return an empty vector indicating a cycle or an impossible ordering.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m), where n is the number of courses and m is the number of prerequisites.
+- **Average Case:** O(n + m), since all nodes and edges must be processed.
+- **Worst Case:** O(n + m), in the worst case all courses and prerequisites must be processed.
+
+The time complexity is dominated by the graph traversal and topological sorting.
+
+### Space Complexity 💾
+- **Best Case:** O(n + m), since all the nodes and edges must be stored in memory.
+- **Worst Case:** O(n + m), to store the graph and incoming edges.
+
+The space complexity is proportional to the number of nodes (courses) and edges (prerequisites).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/course-schedule-ii/description/)
 

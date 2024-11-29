@@ -14,113 +14,143 @@ img_src = ""
 youtube = "I3XEMabQJxE"
 youtube_upload_date="2023-08-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/I3XEMabQJxE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You have a bank account with a balance of 100 dollars. You are given a purchase amount and need to round it to the nearest multiple of 10. Then, deduct the rounded amount from your account balance and return the remaining balance.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer 'purchaseAmount' representing the price of an item you wish to buy.
+- **Example:** `Input: purchaseAmount = 18`
+- **Constraints:**
+	- 0 <= purchaseAmount <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int accountBalanceAfterPurchase(int val) {
-        
-        if(val % 10 == 5) val += 5;
-        else if(val % 10 > 5) {
-            val = val / 10;
-            val = (val + 1) * 10;
-        } else {
-            val = (val / 10) * 10;
-        }
-        return 100 - val;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the bank account balance after the rounded amount has been deducted.
+- **Example:** `Output: 80`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the nearest multiple of 10 for the given purchase amount and update the bank balance.
+
+- 1. Round the 'purchaseAmount' to the nearest multiple of 10.
+- 2. Subtract the rounded amount from the initial balance of 100 dollars.
+- 3. Return the updated balance.
+{{< dots >}}
+### Problem Assumptions ✅
+- The purchase amount is always a non-negative integer and will be rounded to the nearest multiple of 10.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: purchaseAmount = 18`  \
+  **Explanation:** The nearest multiple of 10 to 18 is 20. So the account balance becomes 100 - 20 = 80.
+
+- **Input:** `Input: purchaseAmount = 8`  \
+  **Explanation:** The nearest multiple of 10 to 8 is 10. So the account balance becomes 100 - 10 = 90.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by determining the nearest multiple of 10 and then subtracting it from the initial balance.
+
+### Initial Thoughts 💭
+- The rounding rules for the purchase amount must be carefully followed to ensure the correct amount is deducted.
+- We need to handle both small values (e.g., 1) and large values (e.g., 100) correctly, ensuring rounding happens in all cases.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always be a valid integer within the given range, so empty inputs are not a concern.
+- The largest possible input (purchaseAmount = 100) will be handled by rounding it to 100.
+- When the purchaseAmount is 5, 15, 25, etc., it will be rounded up to the next multiple of 10.
+- The input will always be within the specified range and will not exceed the maximum value of 100.
+{{< dots >}}
+## Code 💻
+```cpp
+int accountBalanceAfterPurchase(int val) {
+    
+    if(val % 10 == 5) val += 5;
+    else if(val % 10 > 5) {
+        val = val / 10;
+        val = (val + 1) * 10;
+    } else {
+        val = (val / 10) * 10;
     }
-};
-{{< /highlight >}}
----
+    return 100 - val;
+}
+```
 
-### Problem Statement
+This code calculates the remaining balance after a purchase, adjusting the price based on the last digit of the value.
 
-The problem asks to determine the account balance after making a purchase, given an initial balance of **100**. The function takes an integer `val`, representing the cost of the purchase, and adjusts the account balance after making the purchase. The rules for the adjustment are based on the last digit of `val`:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **function**
+	```cpp
+	int accountBalanceAfterPurchase(int val) {
+	```
+	Start of the function definition to calculate the account balance after a purchase based on a given value.
 
-1. If the last digit of `val` is **5**, the balance is adjusted by adding 5 to the purchase amount.
-2. If the last digit of `val` is **greater than 5**, the value is rounded up to the next multiple of 10.
-3. If the last digit of `val` is **less than 5**, the value is rounded down to the nearest multiple of 10.
+2. **if_condition**
+	```cpp
+	    if(val % 10 == 5) val += 5;
+	```
+	Check if the last digit of the value is 5, and if so, increment the value by 5.
 
-The function then returns the balance after subtracting the adjusted purchase amount from the initial balance of 100.
+3. **else_if_condition**
+	```cpp
+	    else if(val % 10 > 5) {
+	```
+	If the last digit of the value is greater than 5, then adjust the value by dividing by 10 and rounding up.
 
-### Approach
+4. **operation**
+	```cpp
+	        val = val / 10;
+	```
+	Divide the value by 10 to remove the last digit.
 
-The goal is to calculate the account balance after a purchase, considering how the purchase amount is rounded based on its last digit. The main operations involve rounding the purchase value based on the last digit and subtracting this from the starting balance (100).
+5. **operation**
+	```cpp
+	        val = (val + 1) * 10;
+	```
+	Increase the value by 1 and multiply by 10 to round it to the next multiple of 10.
 
-1. **Identify the last digit**:
-   The last digit of the purchase value `val` will determine how the value should be rounded. This can be easily done by calculating `val % 10`.
+6. **else_condition**
+	```cpp
+	    } else {
+	```
+	If the last digit is less than 5, proceed with rounding down.
 
-2. **Round the value**:
-   - If the last digit is **5**, we add 5 to the value.
-   - If the last digit is **greater than 5**, we round the value down to the nearest multiple of 10, then add 10 to it (round up).
-   - If the last digit is **less than 5**, we round down to the nearest multiple of 10.
+7. **operation**
+	```cpp
+	        val = (val / 10) * 10;
+	```
+	Divide the value by 10 to remove the last digit and multiply by 10 to round it down.
 
-3. **Subtract from the starting balance**:
-   Once the value has been adjusted based on the last digit, subtract the adjusted purchase value from the initial balance of 100 to get the result.
+8. **return_statement**
+	```cpp
+	    return 100 - val;
+	```
+	Return the final value after subtracting from 100 to calculate the account balance after the purchase.
 
-4. **Return the result**:
-   Finally, the function returns the adjusted balance.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-### Code Breakdown (Step by Step)
+The time complexity is O(1) because the operations involved (rounding and subtraction) are constant time operations.
 
-1. **Function Definition**:
-   ```cpp
-   int accountBalanceAfterPurchase(int val) {
-   ```
-   - The function `accountBalanceAfterPurchase` takes an integer `val` (the value of the purchase) and returns the remaining balance after the purchase.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-2. **Handling the Last Digit Equal to 5**:
-   ```cpp
-   if(val % 10 == 5) val += 5;
-   ```
-   - The first `if` statement checks if the last digit of `val` is **5** (i.e., `val % 10 == 5`). 
-   - If true, the purchase value is adjusted by adding 5 to it, rounding the value to the nearest multiple of 10 (e.g., 15 becomes 20, 25 becomes 30, etc.).
+The space complexity is O(1) because only a constant amount of space is used for calculations.
 
-3. **Handling Last Digit Greater Than 5**:
-   ```cpp
-   else if(val % 10 > 5) {
-       val = val / 10;
-       val = (val + 1) * 10;
-   }
-   ```
-   - The second `else if` statement checks if the last digit of `val` is **greater than 5** (i.e., `val % 10 > 5`).
-   - If true, the value of `val` is first divided by 10 to remove the last digit, and then 1 is added to the result. This effectively rounds up to the next integer (e.g., 62 becomes 70, 83 becomes 90).
-   - The result is then multiplied by 10 to restore the last digit as 0 (i.e., rounding to the nearest higher multiple of 10).
+**Happy Coding! 🎉**
 
-4. **Handling Last Digit Less Than 5**:
-   ```cpp
-   else {
-       val = (val / 10) * 10;
-   }
-   ```
-   - The `else` block handles the case where the last digit of `val` is **less than 5**.
-   - The value is rounded down to the nearest multiple of 10 by dividing `val` by 10 (removing the last digit) and then multiplying by 10 (restoring the last digit as 0).
-
-5. **Return the Remaining Balance**:
-   ```cpp
-   return 100 - val;
-   ```
-   - After adjusting the purchase value, the function subtracts the adjusted value from 100 to calculate the remaining balance.
-   - The result is returned.
-
-### Complexity
-
-1. **Time Complexity**:
-   - The function performs constant-time operations (`%`, `/`, and `*`) on the integer `val` and only involves a few conditional checks. Therefore, the **time complexity** of the function is **O(1)**.
-   - This means the execution time remains constant regardless of the size of the input `val`.
-
-2. **Space Complexity**:
-   - The function only uses a few integer variables (i.e., `val`), and no additional data structures are used. Therefore, the **space complexity** of the function is **O(1)**, meaning it uses constant space.
-
-### Conclusion
-
-This solution efficiently calculates the account balance after a purchase, considering the last digit of the purchase value and adjusting the value accordingly. The function handles the three cases of rounding based on the last digit (5, greater than 5, or less than 5) and computes the final balance by subtracting the adjusted value from 100. With a time complexity of **O(1)** and space complexity of **O(1)**, this solution is optimal for this problem and can handle a large number of cases efficiently.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/account-balance-after-rounded-purchase/description/)
 

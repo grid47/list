@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "KeCWKJxsyxA"
 youtube_upload_date="2024-09-11"
 youtube_thumbnail="https://i.ytimg.com/vi/KeCWKJxsyxA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,104 +28,143 @@ youtube_thumbnail="https://i.ytimg.com/vi/KeCWKJxsyxA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given two integers left and right, return the count of numbers in the inclusive range [left, right] having a prime number of set bits in their binary representation. The number of set bits in a number is the count of 1's when the number is represented in binary. A prime number is a number greater than 1 that is divisible only by 1 and itself.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, left and right.
+- **Example:** `Input: left = 8, right = 15`
+- **Constraints:**
+	- 1 <= left <= right <= 10^6
+	- 0 <= right - left <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countPrimeSetBits(int left, int right) {
-        int prime[]={2, 3, 5, 7, 11, 13, 17, 19};
-        vector<bool> isPrime(21, 0);
-        for(int p: prime) isPrime[p]=1;
-        int sum=0;
-        for(int i=left; i<=right; i++){
-            int b=__builtin_popcount(i);
-            if (isPrime[b]) sum++;
-        }
-        return sum;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the count of numbers in the range [left, right] that have a prime number of set bits.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The answer is guaranteed to fit in a 32-bit integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find how many numbers in the range [left, right] have a prime number of set bits.
+
+- For each number in the range [left, right], calculate the number of set bits.
+- Check if the number of set bits is prime by using a pre-defined list of prime numbers.
+- Count how many numbers have a prime number of set bits.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input integers left and right are within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: left = 8, right = 15`  \
+  **Explanation:** In this example, the prime numbers of set bits are 2 and 3, and there are 4 numbers (9, 10, 11, 12) in the range [8, 15] that have a prime number of set bits.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by iterating through each number in the given range and checking if the number of set bits is prime.
+
+### Initial Thoughts 💭
+- We can use a helper function to count the number of set bits in a number.
+- We can precompute prime numbers up to 20 to efficiently check if a number of set bits is prime.
+- The most efficient way to count the number of set bits is to use the __builtin_popcount function.
+{{< dots >}}
+### Edge Cases 🌐
+- If the range is very small or has a width of 0, there may be no numbers to check.
+- The solution should efficiently handle the maximum possible input size (up to 10^6).
+- The number 1 should be handled correctly, as it is not prime.
+- Ensure the solution works for the maximum constraint where left and right can be as large as 10^6.
+{{< dots >}}
+## Code 💻
+```cpp
+int countPrimeSetBits(int left, int right) {
+    int prime[]={2, 3, 5, 7, 11, 13, 17, 19};
+    vector<bool> isPrime(21, 0);
+    for(int p: prime) isPrime[p]=1;
+    int sum=0;
+    for(int i=left; i<=right; i++){
+        int b=__builtin_popcount(i);
+        if (isPrime[b]) sum++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks you to count how many numbers between `left` and `right` (inclusive) have a number of set bits (1s in the binary representation) that is a prime number. The task is to calculate how many numbers in this range satisfy this condition.
-
-#### Key Concepts:
-1. **Binary Representation**: Every integer has a binary representation, consisting of 0s and 1s. The count of `1`s in the binary representation of a number is referred to as its "set bits."
-   
-2. **Prime Numbers**: Prime numbers are integers greater than 1 that have no positive divisors other than 1 and themselves. For this problem, we are interested in the number of set bits being a prime number.
-
-For instance, if a number has exactly 3 set bits, then since 3 is prime, it satisfies the condition. You will count how many numbers between `left` and `right` meet this condition.
-
-### Approach
-
-The algorithm can be broken down into the following steps:
-
-1. **Identify Prime Numbers**: We need to know which numbers are prime and we only care about the number of set bits (also called Hamming weight) in a number. The possible number of set bits in a number is limited because the largest number we deal with in this problem has a fixed number of bits (in the range of integers).
-
-2. **Count Set Bits**: For each number in the range `[left, right]`, we need to determine how many `1`s (set bits) are in the binary representation of that number.
-
-3. **Check if the Set Bits Count is Prime**: For each number, once we know the number of set bits, we check if that number of set bits is prime. We keep a tally of how many numbers meet the condition.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Define Prime Numbers
-
-```cpp
-int prime[]={2, 3, 5, 7, 11, 13, 17, 19};
-vector<bool> isPrime(21, 0);
-for(int p: prime) isPrime[p]=1;
-```
-
-- An array `prime[]` is defined to store prime numbers up to 19 (since a number cannot have more than 20 set bits in a typical 32-bit integer representation). This array is used to mark prime numbers.
-  
-- We then use a vector `isPrime` of size 21 to mark whether a number in the range `0-20` is prime. For each number in the `prime[]` array, the corresponding index in `isPrime` is marked as `1`, indicating that the number at that index is prime.
-
-#### Step 2: Initialize and Iterate Over the Range `[left, right]`
-
-```cpp
-int sum=0;
-for(int i=left; i<=right; i++){
-    int b=__builtin_popcount(i);
-    if (isPrime[b]) sum++;
+    return sum;
 }
 ```
 
-- We initialize a variable `sum` to keep track of how many numbers in the range `[left, right]` have a prime number of set bits.
-  
-- The loop iterates over all numbers in the range `[left, right]`. For each number `i`, we use `__builtin_popcount(i)` to count the number of set bits (1s) in the binary representation of `i`. The `__builtin_popcount()` function is a built-in GCC function that efficiently counts the number of `1`s in the binary representation of an integer.
-  
-- After counting the number of set bits `b`, we check if `b` is a prime number by using the `isPrime` array. If `b` is prime (i.e., `isPrime[b]` is `1`), we increment the `sum` counter.
+This code defines a function to count how many numbers between 'left' and 'right' have a prime number of set bits in their binary representation.
 
-#### Step 3: Return the Final Count
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countPrimeSetBits(int left, int right) {
+	```
+	This line defines the function 'countPrimeSetBits' which takes two integers 'left' and 'right' as input parameters and returns the count of numbers in the range [left, right] that have a prime number of set bits in their binary representation.
 
-```cpp
-return sum;
-```
+2. **Array Initialization**
+	```cpp
+	    int prime[]={2, 3, 5, 7, 11, 13, 17, 19};
+	```
+	This initializes an array 'prime' containing the first few prime numbers. These will be used to check if the count of set bits in a number is prime.
 
-- After iterating over all the numbers from `left` to `right`, the final count of numbers that have a prime number of set bits is stored in `sum`, which is then returned as the result.
+3. **Vector Initialization**
+	```cpp
+	    vector<bool> isPrime(21, 0);
+	```
+	This initializes a boolean vector 'isPrime' of size 21, all set to false. It will be used to track which numbers between 0 and 20 are prime.
 
-### Complexity
+4. **Prime Marking**
+	```cpp
+	    for(int p: prime) isPrime[p]=1;
+	```
+	This loop iterates over the 'prime' array and marks the corresponding positions in the 'isPrime' vector as true for prime numbers.
 
-#### Time Complexity:
-- **Precomputing primes**: The initialization of the `isPrime` vector takes constant time, i.e., **O(1)**.
-  
-- **Counting set bits**: For each number in the range `[left, right]`, the time complexity of the `__builtin_popcount(i)` operation is **O(log(i))** because it operates on the binary representation of the number. In the worst case, `log(i)` is proportional to the number of bits in the largest number in the range.
-  
-- If `n` is the number of integers in the range `[left, right]`, the total time complexity of the loop is **O(n * log(m))**, where `m` is the largest number in the range, because each `__builtin_popcount()` runs in `O(log(m))` time.
+5. **Variable Initialization**
+	```cpp
+	    int sum=0;
+	```
+	This initializes a variable 'sum' to zero. This will keep track of how many numbers in the range have a prime number of set bits.
 
-- **Final Complexity**: If `n` is the number of elements between `left` and `right`, the overall time complexity is **O(n * log(m))**.
+6. **Looping Over Range**
+	```cpp
+	    for(int i=left; i<=right; i++){
+	```
+	This loop iterates through all numbers between 'left' and 'right' inclusive.
 
-#### Space Complexity:
-- The space complexity of the solution is **O(1)**, as the space used for storing the prime numbers and the result is constant.
+7. **Set Bit Counting**
+	```cpp
+	        int b=__builtin_popcount(i);
+	```
+	This line calculates the number of set bits (1s) in the binary representation of 'i' using the '__builtin_popcount' function.
 
-### Conclusion
+8. **Prime Check**
+	```cpp
+	        if (isPrime[b]) sum++;
+	```
+	This checks if the count of set bits 'b' is a prime number by referring to the 'isPrime' vector. If it is, 'sum' is incremented.
 
-This solution efficiently counts how many numbers between `left` and `right` have a prime number of set bits in their binary representation. The algorithm leverages the built-in GCC function `__builtin_popcount()` to count set bits efficiently. By precomputing the prime numbers and using a simple array to mark them, the algorithm ensures that the problem is solved in an optimal manner.
+9. **Return Statement**
+	```cpp
+	    return sum;
+	```
+	This returns the final value of 'sum', which represents the count of numbers with a prime number of set bits in the range [left, right].
 
-The solution is highly efficient, with a time complexity of **O(n * log(m))** and a space complexity of **O(1)**, making it well-suited for handling large ranges. This approach ensures that we can quickly count numbers with prime set bits even for larger ranges of integers.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) when left == right.
+- **Average Case:** O(n) where n is the difference between right and left.
+- **Worst Case:** O(n) where n is the difference between right and left, with additional checks for set bits.
+
+The time complexity is mainly dependent on iterating over the range and checking the set bits for each number.
+
+### Space Complexity 💾
+- **Best Case:** O(1) for the space used.
+- **Worst Case:** O(1) for the space used by the prime list and the set bit calculation.
+
+The space complexity is minimal as we are only using a small list of primes and some basic variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,187 +28,339 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an equation with a variable 'x' and basic arithmetic operations ('+', '-'), find the value of 'x'. The equation might have a solution, no solution, or infinite solutions. Your task is to return the correct result in the form of a string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string representing an equation with the variable 'x', integers, and operations (+, -). The equation contains exactly one '=' symbol, and the equation consists of integer coefficients and variables.
+- **Example:** `"x+5-3+x=6+x-2"`
+- **Constraints:**
+	- 3 <= equation.length <= 1000
+	- equation has exactly one '='.
+	- equation contains integers with absolute values between 0 and 100, and the variable 'x'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string solveEquation(string eqn) {
-        int i = 0;
-        int para = 0, xpara = 0;
-        int flag = 1;
-        while(i < eqn.size()) {
-            int sgn = 1;
-            int tmp = 0;
-            if(eqn[i] == '=') {
-                flag = -1;
-                i++;
-            } 
-            if(eqn[i] == '-') {
-                sgn = -1;
-                i++;
-            }
-            if(eqn[i] == '+') {
-                sgn = 1;
-                i++;
-            }
-            if(isdigit(eqn[i])) {
-                while(i < eqn.size() && isdigit(eqn[i])) {
-                    tmp = tmp * 10 + eqn[i] - '0';
-                    i++;
-                }
-                if(i < eqn.size() && eqn[i] == 'x') {
-                    xpara += flag * sgn * tmp;
-                    i++;
-                }
-                else para += flag * sgn * tmp;
-            } else {
-                xpara += flag * sgn;
-                i++;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a string representing the result of the equation. If there is a solution, the format is 'x=#value'. If there is no solution, return 'No solution'. If the equation has infinite solutions, return 'Infinite solutions'.
+- **Example:** `"x=2"`
+- **Constraints:**
+	- The output is always in the form 'x=#value', 'No solution', or 'Infinite solutions'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To solve the equation for the value of 'x'. If there are multiple solutions or no solutions, return the appropriate message.
+
+- Parse the equation into two parts (before and after the equal sign).
+- Group terms with 'x' and constant terms separately.
+- Solve for 'x' by isolating it on one side of the equation.
+- Handle special cases such as infinite solutions or no solution.
+{{< dots >}}
+### Problem Assumptions ✅
+- The equation will always contain at least one 'x'.
+- There will always be exactly one '=' in the equation.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"x+5-3+x=6+x-2"`  \
+  **Explanation:** Simplifying the equation results in '2x+2=6+x-2'. After solving, we get 'x=2'.
+
+- **Input:** `"x=x"`  \
+  **Explanation:** This equation simplifies to '0=0', which is true for any value of x. Therefore, the solution is 'Infinite solutions'.
+
+{{< dots >}}
+## Approach 🚀
+The equation needs to be parsed, and terms involving 'x' should be grouped separately. After simplifying, if there are no 'x' terms, check if the constants are equal, which indicates infinite solutions or no solution. If there are 'x' terms, solve for 'x'.
+
+### Initial Thoughts 💭
+- The equation might contain positive and negative terms involving 'x'.
+- The variable 'x' can be isolated by grouping terms involving 'x' and constants separately.
+- We will need to carefully handle terms on both sides of the equation and consider edge cases like 'x=x'.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty equations are not allowed.
+- Equations with large strings can still be handled by parsing and evaluating the terms in a linear manner.
+- Special cases like 'x=x' should be handled separately to detect infinite solutions.
+- The equation will not contain leading zeros.
+{{< dots >}}
+## Code 💻
+```cpp
+string solveEquation(string eqn) {
+    int i = 0;
+    int para = 0, xpara = 0;
+    int flag = 1;
+    while(i < eqn.size()) {
+        int sgn = 1;
+        int tmp = 0;
+        if(eqn[i] == '=') {
+            flag = -1;
+            i++;
+        } 
+        if(eqn[i] == '-') {
+            sgn = -1;
+            i++;
         }
-
-        string res;
-        cout << para << '-'<< xpara;
-        if(para == 0 && xpara == 0)
-            res = "Infinite solutions";
-        else if (xpara == 0)
-            res = "No solution";
-        else res = "x=" + to_string(para/xpara*-1);
-
-        return res;
+        if(eqn[i] == '+') {
+            sgn = 1;
+            i++;
+        }
+        if(isdigit(eqn[i])) {
+            while(i < eqn.size() && isdigit(eqn[i])) {
+                tmp = tmp * 10 + eqn[i] - '0';
+                i++;
+            }
+            if(i < eqn.size() && eqn[i] == 'x') {
+                xpara += flag * sgn * tmp;
+                i++;
+            }
+            else para += flag * sgn * tmp;
+        } else {
+            xpara += flag * sgn;
+            i++;
+        }
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    string res;
+    cout << para << '-'<< xpara;
+    if(para == 0 && xpara == 0)
+        res = "Infinite solutions";
+    else if (xpara == 0)
+        res = "No solution";
+    else res = "x=" + to_string(para/xpara*-1);
 
-In this problem, we are asked to solve a linear equation of the form `ax + b = cx + d`, where `a`, `b`, `c`, and `d` are integers. The equation might contain one or more `x` terms, and the goal is to solve for `x`. The equation is given as a string, and we need to return the solution in the format `"x=solution"` or indicate that there are "Infinite solutions" or "No solution" based on the values of `a`, `b`, `c`, and `d`.
-
-### Approach
-
-The equation is of the form `ax + b = cx + d`, where the terms may contain variables and constants. Our task is to process the equation, extract the coefficients of `x` and constants, and then solve for `x`. The main steps of the approach are:
-
-1. **Divide the equation**: We can treat the equation as two parts—one before the `=` sign and one after it. The first part represents terms involving `x` and constants on the left-hand side, while the second part represents the right-hand side.
-
-2. **Identify terms**: Each side may have constants and terms involving `x`. The `x` terms will be grouped together on both sides of the equation, and the constants will be added separately.
-
-3. **Simplify the equation**: After identifying the coefficients of `x` and constants on both sides, move all `x` terms to one side and constants to the other side. This results in a simplified equation of the form:
-   
-   ```
-   (a - c) * x = (d - b)
-   ```
-   We can then solve for `x` using algebraic manipulations.
-
-4. **Handle edge cases**: There are three potential scenarios:
-   - If both the coefficients of `x` and constants on both sides are zero, the equation has "Infinite solutions".
-   - If the coefficient of `x` is zero but the constant term is not, the equation has "No solution".
-   - Otherwise, solve for `x` as `(d - b) / (a - c)`.
-
-### Code Breakdown (Step by Step)
-
-Let’s walk through the code step by step to understand how the solution is implemented.
-
-#### 1. **Initial Setup and Variable Declarations**
-```cpp
-class Solution {
-public:
-    string solveEquation(string eqn) {
-        int i = 0;
-        int para = 0, xpara = 0;
-        int flag = 1;
+    return res;
+}
 ```
-- We declare variables `i`, `para`, and `xpara`. `i` is used to iterate through the equation string, `para` stores the sum of constants, and `xpara` stores the sum of coefficients of `x`.
-- The variable `flag` is set to `1` initially to indicate the sign of the terms we are currently processing.
 
-#### 2. **Iterating Through the Equation String**
-```cpp
-        while(i < eqn.size()) {
-            int sgn = 1;
-            int tmp = 0;
-```
-- We use a while loop to process each character in the equation string `eqn`.
-- `sgn` is used to track the sign of the term (`1` for positive and `-1` for negative).
-- `tmp` is used to accumulate the value of numbers before encountering any operator or `x`.
+This is a function that solves linear equations involving the variable 'x'. It processes the equation by iterating over its characters, handling signs and coefficients, and returns the result as a string indicating either infinite solutions, no solution, or the value of 'x'.
 
-#### 3. **Handling the `=` Symbol**
-```cpp
-            if(eqn[i] == '=') {
-                flag = -1;
-                i++;
-            } 
-```
-- If the current character is `=`, it marks the separation between the left-hand side (LHS) and right-hand side (RHS) of the equation. 
-- We update `flag` to `-1`, which indicates that we are now processing terms on the RHS.
-- We increment `i` to move to the next character.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Helper Function**
+	```cpp
+	string solveEquation(string eqn) {
+	```
+	This is the main function which solves the equation represented as a string.
 
-#### 4. **Processing the Sign of Each Term**
-```cpp
-            if(eqn[i] == '-') {
-                sgn = -1;
-                i++;
-            }
-            if(eqn[i] == '+') {
-                sgn = 1;
-                i++;
-            }
-```
-- If the current character is `+` or `-`, we update `sgn` to reflect the sign of the current term.
-- We increment `i` to process the next character.
+2. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	Initializes the variable 'i' to track the index as we iterate over the equation.
 
-#### 5. **Processing Numbers and Terms Involving `x`**
-```cpp
-            if(isdigit(eqn[i])) {
-                while(i < eqn.size() && isdigit(eqn[i])) {
-                    tmp = tmp * 10 + eqn[i] - '0';
-                    i++;
-                }
-                if(i < eqn.size() && eqn[i] == 'x') {
-                    xpara += flag * sgn * tmp;
-                    i++;
-                }
-                else para += flag * sgn * tmp;
-            } else {
-                xpara += flag * sgn;
-                i++;
-            }
-```
-- If the current character is a digit, we accumulate the value of the number (`tmp`), which could be the coefficient of `x` or a constant.
-- If the next character is `x`, we update the coefficient of `x` (`xpara`) accordingly.
-- Otherwise, we add the constant term (`para`).
-- If the current character is not a digit, it must be `x` with an implicit coefficient of `1`. We directly add the coefficient of `x` to `xpara`.
+3. **Variable Initialization**
+	```cpp
+	    int para = 0, xpara = 0;
+	```
+	Initializes 'para' and 'xpara' to store the constants and coefficients of 'x' respectively.
 
-#### 6. **Solving the Equation**
-```cpp
-        string res;
-        cout << para << '-'<< xpara;
-        if(para == 0 && xpara == 0)
-            res = "Infinite solutions";
-        else if (xpara == 0)
-            res = "No solution";
-        else res = "x=" + to_string(para/xpara*-1);
+4. **Variable Initialization**
+	```cpp
+	    int flag = 1;
+	```
+	Initializes the 'flag' variable to keep track of the sign for each term.
 
-        return res;
-    }
-};
-```
-- After processing all terms in the equation, we check the values of `para` and `xpara` to determine the type of solution.
-  - If both `para` and `xpara` are zero, the equation has "Infinite solutions".
-  - If `xpara` is zero but `para` is not, the equation has "No solution".
-  - Otherwise, we solve for `x` using the equation `x = -para / xpara`.
+5. **Loop**
+	```cpp
+	    while(i < eqn.size()) {
+	```
+	Begins a loop that will iterate over the entire equation string.
 
-### Complexity
+6. **Variable Initialization**
+	```cpp
+	        int sgn = 1;
+	```
+	Initializes the 'sgn' variable to 1, representing a positive sign for the current term.
 
-#### Time Complexity:
-- **O(n)** where `n` is the length of the equation string. The algorithm processes each character in the string once, performing constant-time operations for each character.
+7. **Variable Initialization**
+	```cpp
+	        int tmp = 0;
+	```
+	Initializes 'tmp' to accumulate the value of the current number in the equation.
 
-#### Space Complexity:
-- **O(1)**. The space complexity is constant because we are using a fixed number of variables to store the coefficients and constants, and the space for the result is independent of the input size.
+8. **Conditional Check**
+	```cpp
+	        if(eqn[i] == '=') {
+	```
+	Checks if the current character is the equal sign, indicating the start of the second half of the equation.
 
-### Conclusion
+9. **Update Variables**
+	```cpp
+	            flag = -1;
+	```
+	Changes the flag to -1, indicating that the terms after the equal sign will have a negative sign.
 
-This solution efficiently solves the equation by breaking it down into terms, processing each term to extract coefficients of `x` and constants, and then solving the simplified equation. It handles edge cases such as missing coefficients for `x` and implicitly considers the sign of each term. By processing the string in a single pass, the solution is both time and space efficient.
+10. **Increment Index**
+	```cpp
+	            i++;
+	```
+	Increments the index to move past the '=' character.
+
+11. **Conditional Check**
+	```cpp
+	        if(eqn[i] == '-') {
+	```
+	Checks if the current character is a minus sign, indicating a negative term.
+
+12. **Update Variables**
+	```cpp
+	            sgn = -1;
+	```
+	Sets the 'sgn' variable to -1, indicating that the current term will be negative.
+
+13. **Increment Index**
+	```cpp
+	            i++;
+	```
+	Increments the index to move past the minus sign.
+
+14. **Conditional Check**
+	```cpp
+	        if(eqn[i] == '+') {
+	```
+	Checks if the current character is a plus sign, indicating a positive term.
+
+15. **Update Variables**
+	```cpp
+	            sgn = 1;
+	```
+	Sets the 'sgn' variable to 1, indicating that the current term will be positive.
+
+16. **Increment Index**
+	```cpp
+	            i++;
+	```
+	Increments the index to move past the plus sign.
+
+17. **Conditional Check**
+	```cpp
+	        if(isdigit(eqn[i])) {
+	```
+	Checks if the current character is a digit, indicating the start of a number.
+
+18. **Loop through Digits**
+	```cpp
+	            while(i < eqn.size() && isdigit(eqn[i])) {
+	```
+	Begins a loop to accumulate the digits of the current number.
+
+19. **Accumulate Number**
+	```cpp
+	                tmp = tmp * 10 + eqn[i] - '0';
+	```
+	Accumulates the current digit into the 'tmp' variable.
+
+20. **Increment Index**
+	```cpp
+	                i++;
+	```
+	Increments the index to move to the next character.
+
+21. **Conditional Check**
+	```cpp
+	            if(i < eqn.size() && eqn[i] == 'x') {
+	```
+	Checks if the next character is 'x', indicating that the current number is a coefficient of 'x'.
+
+22. **Update Coefficient**
+	```cpp
+	                xpara += flag * sgn * tmp;
+	```
+	Updates the coefficient of 'x' based on the current sign and flag.
+
+23. **Increment Index**
+	```cpp
+	                i++;
+	```
+	Increments the index to move past the 'x'.
+
+24. **Else Condition**
+	```cpp
+	            else para += flag * sgn * tmp;
+	```
+	If the number is not associated with 'x', it is added to the 'para' variable.
+
+25. **Else Condition**
+	```cpp
+	        } else {
+	```
+	Handles the case where the character is neither a digit nor 'x'.
+
+26. **Update Coefficient**
+	```cpp
+	            xpara += flag * sgn;
+	```
+	If the character is not a digit, it implies that 'x' has a coefficient of 1 (or -1).
+
+27. **Increment Index**
+	```cpp
+	            i++;
+	```
+	Increments the index to move past the current character.
+
+28. **Final Calculation**
+	```cpp
+	    string res;
+	```
+	Declares a string variable 'res' to store the result.
+
+29. **Print Debug Information**
+	```cpp
+	    cout << para << '-'<< xpara;
+	```
+	Prints the values of 'para' and 'xpara' for debugging purposes.
+
+30. **Conditional Check**
+	```cpp
+	    if(para == 0 && xpara == 0)
+	```
+	Checks if both 'para' and 'xpara' are zero, which indicates infinite solutions.
+
+31. **Assign Result**
+	```cpp
+	        res = "Infinite solutions";
+	```
+	Assigns the string 'Infinite solutions' to 'res'.
+
+32. **Conditional Check**
+	```cpp
+	    else if (xpara == 0)
+	```
+	Checks if 'xpara' is zero, which indicates no solution.
+
+33. **Assign Result**
+	```cpp
+	        res = "No solution";
+	```
+	Assigns the string 'No solution' to 'res'.
+
+34. **Assign Result**
+	```cpp
+	    else res = "x=" + to_string(para/xpara*-1);
+	```
+	If a solution exists, calculates and assigns the value of 'x' to 'res'.
+
+35. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the final result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the equation.
+- **Average Case:** O(n), as we parse through the equation only once.
+- **Worst Case:** O(n), where n is the length of the equation.
+
+The time complexity is linear since we only need to parse the equation once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if the equation is small.
+- **Worst Case:** O(1), as we do not need additional data structures to store intermediate results.
+
+The space complexity is constant since we are only using a few variables to store intermediate results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/solve-the-equation/description/)
 

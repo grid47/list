@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "rW4vm0-DLYc"
 youtube_upload_date="2021-11-23"
 youtube_thumbnail="https://i.ytimg.com/vi/rW4vm0-DLYc/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,37 +28,88 @@ youtube_thumbnail="https://i.ytimg.com/vi/rW4vm0-DLYc/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design a stack that supports LIFO (Last In First Out) operations using only one queue. Implement standard stack operations: push, pop, top, and empty.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a series of commands and their corresponding arguments for stack operations.
+- **Example:** `Input: ["MyStack", "push", "push", "top", "pop", "empty"], [[], [5], [7], [], [], []]`
+- **Constraints:**
+	- 1 <= x <= 9
+	- At most 100 operations will be performed.
+	- All pop and top operations will be valid (i.e., the stack will not be empty).
 
-{{< highlight cpp >}}
-class MyStack {
-public:
-    queue<int> que;
-    MyStack() {
-        
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array of results corresponding to the executed operations.
+- **Example:** `Output: [null, null, null, 7, 7, false]`
+- **Constraints:**
+	- The results must match the order of operations executed.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Simulate stack operations using only one queue and standard queue methods.
+
+- Use a single queue to store stack elements.
+- When pushing an element, enqueue it and then rotate the queue to maintain the LIFO order.
+- For pop and top operations, return or remove the front element of the queue.
+- Check if the queue is empty for the empty operation.
+{{< dots >}}
+### Problem Assumptions ✅
+- The queue supports all required operations natively or through simulation.
+- Input commands and arguments are always valid and within constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["MyStack", "push", "push", "top", "pop", "empty"], [[], [3], [8], [], [], []]`  \
+  **Explanation:** Commands initialize a stack, push 3 and 8, check the top element (8), pop the top (8), and check if the stack is empty (false). Output: [null, null, null, 8, 8, false]
+
+- **Input:** `Input: ["MyStack", "push", "top", "pop", "empty"], [[], [6], [], [], []]`  \
+  **Explanation:** Commands initialize a stack, push 6, check the top element (6), pop the top (6), and check if the stack is empty (true). Output: [null, null, 6, 6, true]
+
+{{< dots >}}
+## Approach 🚀
+Use a single queue to simulate stack behavior. Maintain LIFO order by rotating the queue after each push operation.
+
+### Initial Thoughts 💭
+- A queue follows FIFO order, while a stack requires LIFO order.
+- Rotating the queue ensures that the most recently added element is always at the front.
+- By rotating elements after every push, the front of the queue will behave as the top of the stack.
+- Pop and top operations can be handled directly via the queue's front method.
+{{< dots >}}
+### Edge Cases 🌐
+- Operations on an empty stack (e.g., calling pop or top).
+- Performing 100 operations (the maximum limit).
+- Pushing and popping the same element repeatedly.
+- Ensure the implementation works for all edge cases within the problem's constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+queue<int> que;
+MyStack() {
     
-    void push(int x) {
+}
+
+void push(int x) {
 		que.push(x);
 		for(int i=0;i<que.size()-1;++i){
 			que.push(que.front());
 			que.pop();
 		}        
-    }
-    
-    int pop() {
-        int x = que.front();
-        que.pop();
-        return x;
-    }
-    
-    int top() {
-        return que.front();
-    }
-    
-    bool empty() {
-        return que.empty();
-    }
+}
+
+int pop() {
+    int x = que.front();
+    que.pop();
+    return x;
+}
+
+int top() {
+    return que.front();
+}
+
+bool empty() {
+    return que.empty();
+}
 };
 
 /**
@@ -67,158 +119,119 @@ public:
  * int param_2 = obj->pop();
  * int param_3 = obj->top();
  * bool param_4 = obj->empty();
- */
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, we're tasked with implementing a **stack** data structure using only **queues**! 🧑‍💻 The stack should support the following operations:
-
-1. **push(x)**: Push element `x` onto the stack.
-2. **pop()**: Removes and returns the top element of the stack.
-3. **top()**: Returns the top element of the stack without removing it.
-4. **empty()**: Returns `true` if the stack is empty, otherwise `false`.
-
-A **stack** works on the **Last In, First Out (LIFO)** principle, where the last element added is the first one to be removed. However, queues follow the **First In, First Out (FIFO)** principle. So how do we simulate a stack using a queue? Let's dive in! 🔍
-
----
-
-### 🧠 Approach
-
-To simulate stack behavior with queues, we need to manipulate the queue operations smartly. Here’s how we can do it:
-
-- **Push operation**: When adding an element to the stack, we enqueue it. However, to ensure the most recent element is always at the front (top of the stack), we rotate the queue after every push. This will make the newly added element the front of the queue, simulating the "top" of the stack.
-  
-- **Pop operation**: Since the front element of the queue is always the top of the stack (due to the rotation), we can simply dequeue it.
-
-- **Top operation**: Just like with pop, the front element of the queue is the current top of the stack, so we can return it without removing it from the queue.
-
-- **Empty operation**: This is straightforward! We check if the queue is empty, which directly corresponds to the stack being empty.
-
-By rotating the queue during each push, we can mimic the LIFO behavior of a stack using only FIFO operations. Cool, right? 😎
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break this down with some code! 🛠️
-
-```cpp
-class MyStack {
-public:
-    queue<int> que;  // Step 1: Declare a queue to store the elements
-
-    // Constructor: Initializes the stack (queue in this case)
-    MyStack() {}
-
-    // Step 2: Push operation
-    void push(int x) {
-        que.push(x);  // Add the element to the queue
-        // Rotate the queue to make the new element at the front
-        for (int i = 0; i < que.size() - 1; ++i) {
-            que.push(que.front());  // Move the front element to the back of the queue
-            que.pop();  // Remove the front element after moving it to the back
-        }
-    }
-
-    // Step 3: Pop operation
-    int pop() {
-        int x = que.front();  // Get the front element (top of the stack)
-        que.pop();  // Remove the front element
-        return x;  // Return the popped element
-    }
-
-    // Step 4: Top operation
-    int top() {
-        return que.front();  // Return the front element (top of the stack)
-    }
-
-    // Step 5: Empty operation
-    bool empty() {
-        return que.empty();  // Check if the queue (stack) is empty
-    }
-};
 ```
 
-#### Step 1: Declare the Queue
-```cpp
-queue<int> que;
-```
-- Here, we declare a queue called `que` to hold the stack's elements. It’s the only container we’ll use to simulate the stack's behavior. 🎩✨
+This code defines a custom stack class `MyStack` using a queue. It implements stack operations such as push, pop, top, and empty using a queue, mimicking stack behavior.
 
-#### Step 2: Implement the `push` Operation
-```cpp
-void push(int x) {
-    que.push(x);  // Add the element to the queue
-    // Rotate the queue to make the new element at the front
-    for (int i = 0; i < que.size() - 1; ++i) {
-        que.push(que.front());  // Move the front element to the back of the queue
-        que.pop();  // Remove the front element after moving it to the back
-    }
-}
-```
-- In the `push` operation, we first add the element `x` to the queue. Then, we rotate the queue to make the newly added element the "top" of the stack (at the front of the queue). 🚀
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	queue<int> que;
+	```
+	Declares a queue of integers `que` to be used to store elements in the stack.
 
-#### Step 3: Implement the `pop` Operation
-```cpp
-int pop() {
-    int x = que.front();  // Get the front element (top of the stack)
-    que.pop();  // Remove the front element
-    return x;  // Return the popped element
-}
-```
-- The `pop` operation simply dequeues the element at the front of the queue, which corresponds to the "top" of the stack.
+2. **Constructor**
+	```cpp
+	MyStack() {
+	```
+	Defines the constructor of the `MyStack` class, initializing the stack object. Here, no additional initialization is done.
 
-#### Step 4: Implement the `top` Operation
-```cpp
-int top() {
-    return que.front();  // Return the front element (top of the stack)
-}
-```
-- The `top` operation returns the front element of the queue without removing it, which is equivalent to checking the top of the stack.
+3. **Push Method Start**
+	```cpp
+	void push(int x) {
+	```
+	Defines the `push` method, which inserts an element `x` onto the stack.
 
-#### Step 5: Implement the `empty` Operation
-```cpp
-bool empty() {
-    return que.empty();  // Check if the queue (stack) is empty
-}
-```
-- The `empty` operation checks if the queue is empty. If it is, the stack is empty too!
+4. **Queue Push**
+	```cpp
+			que.push(x);
+	```
+	Pushes the element `x` onto the queue.
 
----
+5. **Queue Rearrangement**
+	```cpp
+			for(int i=0;i<que.size()-1;++i){
+	```
+	This loop rearranges the queue so that the most recently added element appears at the front, mimicking stack behavior.
 
-### 📈 Complexity Analysis
+6. **Queue Rotation**
+	```cpp
+				que.push(que.front());
+	```
+	Moves the front element of the queue to the back.
 
-Let's analyze the time and space complexities of the operations. 📊
+7. **Queue Pop**
+	```cpp
+				que.pop();
+	```
+	Removes the front element from the queue, completing the rotation process.
 
-#### Time Complexity:
-- **Push operation**: The `push` operation involves adding an element to the queue (`O(1)`), and then rotating the queue by moving all elements to the back (`O(n)` where `n` is the number of elements in the queue). Therefore, the overall time complexity of `push` is **O(n)**.
-  
-- **Pop operation**: The `pop` operation simply removes an element from the front of the queue, which is an **O(1)** operation.
-  
-- **Top operation**: The `top` operation just returns the front element, which is an **O(1)** operation.
-  
-- **Empty operation**: The `empty` operation checks if the queue is empty, which is an **O(1)** operation.
+8. **Pop Method Start**
+	```cpp
+	int pop() {
+	```
+	Defines the `pop` method, which removes and returns the top element from the stack.
 
-#### Space Complexity:
-- We only use one queue to store the elements. So, the space complexity is **O(n)**, where `n` is the number of elements in the stack.
+9. **Pop Element**
+	```cpp
+	    int x = que.front();
+	```
+	Retrieves the front element of the queue, which corresponds to the top of the stack.
 
----
+10. **Pop Operation**
+	```cpp
+	    que.pop();
+	```
+	Removes the front element from the queue.
 
-### 🏁 Conclusion
+11. **Pop Method End**
+	```cpp
+	    return x;
+	```
+	Returns the element `x` that was popped from the stack.
 
-Congratulations! 🎉 You’ve successfully implemented a stack using only a queue. This approach leverages the unique behavior of the queue and simulates stack operations through smart rotations. While the `push` operation takes linear time due to the rotations, the `pop`, `top`, and `empty` operations are all constant time, making this a very efficient solution in practice.
+12. **Top Method Start**
+	```cpp
+	int top() {
+	```
+	Defines the `top` method, which returns the top element of the stack without removing it.
 
-- **Time Complexity**:
-  - `push`: **O(n)**
-  - `pop`: **O(1)**
-  - `top`: **O(1)**
-  - `empty`: **O(1)**
-  
-- **Space Complexity**: **O(n)** due to the storage of elements in the queue.
+13. **Top Element**
+	```cpp
+	    return que.front();
+	```
+	Returns the front element of the queue, which is the top element of the stack.
 
-This solution is a great way to think outside the box and use queues for stack-like behavior. Happy coding! 💻🎯
+14. **Empty Method Start**
+	```cpp
+	bool empty() {
+	```
+	Defines the `empty` method, which checks whether the stack is empty.
+
+15. **Empty Check**
+	```cpp
+	    return que.empty();
+	```
+	Returns true if the queue is empty, meaning the stack is also empty.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for pop, top, and empty; O(n) for push.
+- **Average Case:** O(n) for push due to rotation.
+- **Worst Case:** O(n) for push when the queue has many elements.
+
+Push operation requires rotating the queue, resulting in O(n) time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The queue stores all elements, requiring O(n) space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/implement-stack-using-queues/description/)
 

@@ -14,104 +14,121 @@ img_src = ""
 youtube = "PG9qfNf5vLw"
 youtube_upload_date="2021-07-24"
 youtube_thumbnail="https://i.ytimg.com/vi/PG9qfNf5vLw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string s, determine if it is a 'good' string. A string is considered good if every character in it appears the same number of times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A single string s containing lowercase English letters.
+- **Example:** `s = "abbcaa"`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool areOccurrencesEqual(string s) {
-        int cnt[26] = {}, m_cnt = 0;
-        for (auto ch : s)
-            m_cnt = max(m_cnt, ++cnt[ch - 'a']);
-        return all_of(begin(cnt), end(cnt), [&m_cnt](int t){ return t == 0 || t == m_cnt; });
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the string is good, or false otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- Output is a boolean value.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if all characters in the string have the same frequency.
 
-The goal of this problem is to determine whether all characters in a given string occur the same number of times. For example, in the string `"aabbcc"`, each character appears exactly twice, so the output would be `true`. However, in the string `"aaabb"`, the character `'a'` appears three times while `'b'` appears twice, resulting in a `false` output. 
+- Count the frequency of each character in the string.
+- Check if all the frequencies are the same.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string s is non-empty and consists of only lowercase letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: s = "abbcaa"`  \
+  **Explanation:** In this case, both 'a', 'b', and 'c' appear twice in the string. Hence, all characters have the same frequency, and the output is true.
 
-### Approach
+- **Input:** `Example 2: s = "aabbbcc"`  \
+  **Explanation:** In this case, 'a' appears twice, 'b' appears three times, and 'c' appears twice. The frequencies are not all the same, so the output is false.
 
-To solve this problem, we need to follow these steps:
+{{< dots >}}
+## Approach 🚀
+To solve the problem, the approach is to count the frequency of each character in the string and check if all characters have the same frequency.
 
-1. **Count Character Frequencies**: We will create an array to count the occurrences of each character in the string. Since the string consists of lowercase English letters only, we can use a fixed-size array of length 26 to represent the counts for each letter.
-
-2. **Identify Maximum Count**: As we count the characters, we will keep track of the maximum occurrence of any character found.
-
-3. **Check for Consistency**: Finally, we will verify if all non-zero counts are equal to this maximum count. If all characters that occur in the string appear the same number of times, we return `true`; otherwise, we return `false`.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the provided code step-by-step:
-
+### Initial Thoughts 💭
+- If all characters have the same frequency, the string is good.
+- We need to count character occurrences and compare them to determine if they are all the same.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string would trivially be a good string, but this case is not valid based on constraints.
+- Handle strings near the upper constraint limit (1000 characters).
+- Strings where all characters are the same will always return true.
+- Check for strings with a small number of characters to ensure the logic handles both small and large inputs efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool areOccurrencesEqual(string s) {
+bool areOccurrencesEqual(string s) {
+    int cnt[26] = {}, m_cnt = 0;
+    for (auto ch : s)
+        m_cnt = max(m_cnt, ++cnt[ch - 'a']);
+    return all_of(begin(cnt), end(cnt), [&m_cnt](int t){ return t == 0 || t == m_cnt; });
+}
 ```
-Here, we define a class named `Solution` and declare a public member function called `areOccurrencesEqual`, which takes a string `s` as its parameter.
 
-```cpp
-        int cnt[26] = {}, m_cnt = 0;
-```
-We initialize an array `cnt` of size 26 to store the count of each character, where the index corresponds to the letters `a` through `z` (with `a` at index 0, `b` at index 1, and so on). The variable `m_cnt` is initialized to zero and will keep track of the maximum count of any character.
+This code checks if all characters in the input string `s` have the same frequency.
 
-```cpp
-        for (auto ch : s)
-            m_cnt = max(m_cnt, ++cnt[ch - 'a']);
-```
-This loop iterates over each character `ch` in the string `s`. For each character, we increment its count in the `cnt` array. The expression `ch - 'a'` computes the index for the character (for example, `'a'` becomes 0, `'b'` becomes 1, etc.). We update `m_cnt` to be the maximum of its current value and the newly updated count of the character.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool areOccurrencesEqual(string s) {
+	```
+	Declare the function `areOccurrencesEqual` which takes a string `s` as input.
 
-```cpp
-        return all_of(begin(cnt), end(cnt), [&m_cnt](int t){ return t == 0 || t == m_cnt; });
-```
-Finally, we use the `all_of` function to check whether all the counts in the `cnt` array either equal zero (for characters not present in the string) or match the maximum count `m_cnt`. The lambda function takes each count `t` as an argument and checks if `t` is either zero or equal to `m_cnt`. If this condition holds for all elements in `cnt`, `all_of` returns `true`; otherwise, it returns `false`.
+2. **Variable Initialization**
+	```cpp
+	    int cnt[26] = {}, m_cnt = 0;
+	```
+	Initialize an array `cnt` of size 26 to store the frequency of each character in the string, and `m_cnt` to track the maximum frequency of any character.
 
-### Complexity
+3. **For Loop (Character Iteration)**
+	```cpp
+	    for (auto ch : s)
+	```
+	Iterate through each character `ch` in the string `s`.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the string `s`. This is because we traverse the string once to count the occurrences and then check the counts in a fixed-size array.
+4. **Max Frequency Update**
+	```cpp
+	        m_cnt = max(m_cnt, ++cnt[ch - 'a']);
+	```
+	Update `m_cnt` to the maximum of the current `m_cnt` and the updated count of the character `ch` in `cnt`.
 
-- **Space Complexity**: The space complexity is \(O(1)\) since we are using a fixed-size array of length 26 regardless of the input size. This means our space usage does not scale with the input size.
+5. **Final Check**
+	```cpp
+	    return all_of(begin(cnt), end(cnt), [&m_cnt](int t){ return t == 0 || t == m_cnt; });
+	```
+	Return `true` if all character counts are either 0 or equal to the maximum frequency `m_cnt`; otherwise, return `false`.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string.
+- **Average Case:** O(n), since we need to iterate through the string once to count frequencies.
+- **Worst Case:** O(n), since checking frequencies requires a single pass through the string.
 
-The provided solution efficiently determines if all characters in a string occur the same number of times by counting their occurrences and verifying consistency. The algorithm is both time-efficient and space-efficient, making it suitable for processing strings of varying lengths.
+The time complexity is linear in the length of the string due to the need to iterate over the string and count character occurrences.
 
-### Key Features
+### Space Complexity 💾
+- **Best Case:** O(26), as we only store the frequency counts of each character.
+- **Worst Case:** O(26), since there are at most 26 unique lowercase English letters.
 
-1. **Direct Character Counting**: The use of a simple array for counting character frequencies simplifies the logic and reduces the overhead compared to using a map or dictionary.
+The space complexity is constant because we only need to store the frequency of 26 characters.
 
-2. **Single Pass Calculation**: The solution counts character frequencies and identifies the maximum in a single pass over the string, followed by a quick check for uniformity.
+**Happy Coding! 🎉**
 
-3. **Lambda Functions**: Utilization of modern C++ features such as lambda functions enhances readability and conciseness.
-
-### Use Cases
-
-This function can be applied in various scenarios, such as:
-
-- **Data Validation**: Checking if input data has uniform distributions, which may be useful in scenarios like cryptographic analysis or game design where balanced character usage is crucial.
-  
-- **Statistical Analysis**: Validating datasets to ensure certain properties hold true, such as balanced occurrences in experimental results.
-
-### Implementation Considerations
-
-When implementing this function, consider:
-
-- **Input Validation**: Ensure that the input string is not null or empty before processing.
-
-- **Case Sensitivity**: The current implementation assumes that the input string only contains lowercase letters. If input can include uppercase letters or other characters, additional handling might be required.
-
-- **Performance Testing**: Test the performance with long strings, especially those with repeated characters to ensure the function handles large inputs gracefully.
-
-This breakdown not only explains how the code functions but also discusses its potential applications and considerations for real-world usage, making it an excellent resource for anyone looking to understand or implement this algorithm.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/description/)
 

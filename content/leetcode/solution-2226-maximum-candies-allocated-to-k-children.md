@@ -14,131 +14,239 @@ img_src = ""
 youtube = "Y2V4hLvjn10"
 youtube_upload_date="2022-04-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Y2V4hLvjn10/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array `candies`, where each element represents the number of candies in a pile. You also have an integer `k`, which is the number of children. You need to distribute the candies into `k` piles such that each child gets the same number of candies. Each child can receive at most one pile, and some piles may go unused. Your task is to return the maximum number of candies each child can receive.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `candies`, where each element is the size of a pile of candies, and an integer `k`, the number of children.
+- **Example:** `candies = [7, 4, 10], k = 3`
+- **Constraints:**
+	- 1 <= candies.length <= 10^5
+	- 1 <= candies[i] <= 10^7
+	- 1 <= k <= 10^12
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    bool can(vector<int>& candies, long long kids, int per) {
-        long long cnt = 0;
-        for(int i = 0; i < candies.size(); i++) {
-            if(candies[i] < per) continue;
-            
-            int tmp = candies[i];
-            cnt+= tmp/per;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of candies each child can receive, such that each child gets the same number of candies.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the maximum number of candies each child can get, ensuring that each child gets the same number of candies, by distributing the candies from the available piles.
+
+- First, calculate the total sum of all candies in the piles.
+- Check if the total candies are sufficient to satisfy `k` children.
+- Use binary search to find the maximum number of candies each child can get. For each mid value, check if it's possible to divide the piles such that at least `k` children get the same number of candies.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each child can receive at most one pile of candies.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: candies = [7, 4, 10], k = 3`  \
+  **Explanation:** In this case, we can divide the candies into piles of size 4 (from the 10 candy pile) and 3 (from the 7 candy pile), leaving one pile of size 4 unused. Each of the three children can then receive 4 candies.
+
+- **Input:** `Input: candies = [1, 2, 3], k = 4`  \
+  **Explanation:** There are only 6 candies, but 4 children need to be satisfied, so it's impossible to give each child at least one candy, and the answer is 0.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using binary search to find the maximum number of candies each child can get. We first calculate the total number of candies and use binary search to explore the possible values of the number of candies each child can get. For each value, we check if it's possible to divide the candies such that at least `k` children receive that number.
+
+### Initial Thoughts 💭
+- Binary search is useful for finding the maximum value in this type of optimization problem.
+- Start with the total sum of candies and search for the maximum possible number of candies each child can get using binary search.
+{{< dots >}}
+### Edge Cases 🌐
+- If the `candies` array is empty, the result is 0 since there are no candies to distribute.
+- The solution should handle cases where `candies.length` is large (up to 100,000) and `k` can be as large as 10^12 efficiently.
+- If the total number of candies is less than `k`, return 0 since it's impossible to satisfy all children.
+- The solution should optimize for time complexity to handle the large input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
+
+bool can(vector<int>& candies, long long kids, int per) {
+    long long cnt = 0;
+    for(int i = 0; i < candies.size(); i++) {
+        if(candies[i] < per) continue;
         
-        return cnt >= kids;
+        int tmp = candies[i];
+        cnt+= tmp/per;
     }
     
-    int maximumCandies(vector<int>& candies, long long k) {
-        
-        long long sum = accumulate(candies.begin(), candies.end(), 0L);
-        if(sum < k) return 0;
-        
-        int l = 1, r = *max_element(candies.begin(), candies.end());
-        int ans = 0;
-        
-        while(l <= r) {
-            int mid = l + (r - l + 1) / 2;
-            if(can(candies, k, mid)) {
-                ans = mid;
-                l = mid + 1;
-            } else {
-                r = mid - 1;
-            }
+    return cnt >= kids;
+}
+
+int maximumCandies(vector<int>& candies, long long k) {
+    
+    long long sum = accumulate(candies.begin(), candies.end(), 0L);
+    if(sum < k) return 0;
+    
+    int l = 1, r = *max_element(candies.begin(), candies.end());
+    int ans = 0;
+    
+    while(l <= r) {
+        int mid = l + (r - l + 1) / 2;
+        if(can(candies, k, mid)) {
+            ans = mid;
+            l = mid + 1;
+        } else {
+            r = mid - 1;
         }
-        return ans;
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
-You are given an array `candies` where each element represents the number of candies in a box. You also have an integer `k`, representing the number of kids. The task is to determine the maximum number of candies that can be evenly distributed among all `k` kids. Each kid should receive the same number of candies, and the number of candies given to each kid should be as large as possible. If it's not possible to distribute the candies such that each kid gets at least one candy, return `0`.
+This code contains two functions: 'can', which checks if it's possible to distribute candies equally among kids, and 'maximumCandies', which uses binary search to find the maximum number of candies each kid can get.
 
-### Approach
-To solve this problem, we need to determine the maximum possible number of candies each child can receive. The solution involves using a binary search strategy over the possible values of the maximum number of candies each kid can receive. The main idea is:
-1. We need to check if it's possible to distribute `x` candies to each of the `k` kids, where `x` is a candidate number of candies that could be given to each child.
-2. To check this, we iterate over the array of candies and count how many kids can be given at least `x` candies. If the total number of such kids is greater than or equal to `k`, then it's feasible to distribute `x` candies to each kid.
-3. Using binary search, we progressively narrow down the range of possible values for `x` to find the maximum possible value that allows a valid distribution.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool can(vector<int>& candies, long long kids, int per) {
+	```
+	The `can` function is declared, which checks whether it's possible to distribute `per` candies to `kids` based on the number of candies available.
 
-### Code Breakdown (Step by Step)
+2. **Variable Initialization**
+	```cpp
+	    long long cnt = 0;
+	```
+	A variable `cnt` is initialized to 0 to keep track of how many kids can receive at least `per` candies.
 
-1. **Helper Function: `can`**
-   ```cpp
-   bool can(vector<int>& candies, long long kids, int per) {
-       long long cnt = 0;
-       for(int i = 0; i < candies.size(); i++) {
-           if(candies[i] < per) continue;
-           int tmp = candies[i];
-           cnt += tmp / per;
-       }
-       return cnt >= kids;
-   }
-   ```
-   - The function `can` checks if it's possible to distribute `per` candies to each of the `kids` (i.e., check if it's feasible to distribute `per` candies to `k` kids).
-   - It iterates over the `candies` array. For each candy box, it calculates how many kids can receive `per` candies from that box (using integer division).
-   - It accumulates the total number of kids who can receive at least `per` candies, and if this number is greater than or equal to `k`, the function returns `true`.
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < candies.size(); i++) {
+	```
+	A loop iterates through each candy count in the `candies` vector to determine how many candies can be given to the kids.
 
-2. **Main Function: `maximumCandies`**
-   ```cpp
-   int maximumCandies(vector<int>& candies, long long k) {
-       long long sum = accumulate(candies.begin(), candies.end(), 0L);
-       if(sum < k) return 0;
-   ```
-   - First, it calculates the total number of candies using `accumulate` from the standard library. If the total number of candies is less than `k` (i.e., if there aren't enough candies to give at least one candy to each child), it returns `0`.
+4. **Condition Check**
+	```cpp
+	        if(candies[i] < per) continue;
+	```
+	If a particular candy count is less than `per`, the loop skips that entry as it cannot be used to distribute to a kid.
 
-3. **Binary Search Setup**
-   ```cpp
-       int l = 1, r = *max_element(candies.begin(), candies.end());
-       int ans = 0;
-   ```
-   - The binary search is set up with the left pointer `l` starting at `1` (because we can't give fewer than 1 candy to a kid), and the right pointer `r` set to the maximum number of candies in any single box (since that's the upper bound for the number of candies each kid can receive).
+5. **Variable Assignment**
+	```cpp
+	        int tmp = candies[i];
+	```
+	The number of candies available in the current iteration is assigned to the variable `tmp`.
 
-4. **Binary Search Logic**
-   ```cpp
-       while(l <= r) {
-           int mid = l + (r - l + 1) / 2;
-           if(can(candies, k, mid)) {
-               ans = mid;
-               l = mid + 1;
-           } else {
-               r = mid - 1;
-           }
-       }
-       return ans;
-   }
-   ```
-   - The binary search proceeds by calculating the middle point `mid` between `l` and `r`.
-   - If it's possible to distribute `mid` candies to each of the `k` kids (checked by calling the `can` function), then we try to see if a larger number of candies can also be distributed by setting `l = mid + 1` and updating `ans` to `mid` (because `mid` is a valid solution).
-   - If it's not possible, we search for smaller values by setting `r = mid - 1`.
-   - The loop continues until `l` exceeds `r`, and the largest valid value of `mid` is stored in `ans`.
+6. **Candy Distribution**
+	```cpp
+	        cnt+= tmp/per;
+	```
+	The number of kids that can receive `per` candies from the current candy count (`tmp`) is added to `cnt`.
 
-5. **Return Result**
-   ```cpp
-       return ans;
-   ```
-   - After the binary search finishes, the value of `ans` holds the maximum number of candies each kid can receive. This value is returned.
+7. **Return Statement**
+	```cpp
+	    return cnt >= kids;
+	```
+	The function returns `true` if the total number of kids that can receive at least `per` candies is greater than or equal to the number of kids (`k`). Otherwise, it returns `false`.
 
-### Complexity
+8. **Function Declaration**
+	```cpp
+	int maximumCandies(vector<int>& candies, long long k) {
+	```
+	The `maximumCandies` function is declared, which uses binary search to determine the maximum number of candies that can be distributed equally to the kids.
 
-- **Time Complexity:**
-  - **Binary Search:** The binary search runs in O(log(max(candies))) time, where `max(candies)` is the largest number in the `candies` array.
-  - **Counting Feasible Distribution:** The `can` function loops through all `candies` once to check if a valid distribution is possible for a given `mid` value. This takes O(n) time, where `n` is the length of the `candies` array.
-  - Therefore, the overall time complexity is O(n * log(max(candies))).
+9. **Variable Initialization**
+	```cpp
+	    long long sum = accumulate(candies.begin(), candies.end(), 0L);
+	```
+	The variable `sum` is initialized with the total sum of candies available by accumulating all elements in the `candies` vector.
 
-- **Space Complexity:**
-  - The space complexity is O(1) since the algorithm only uses a constant amount of extra space, excluding the input and output.
+10. **Condition Check**
+	```cpp
+	    if(sum < k) return 0;
+	```
+	If the total number of candies is less than the number of kids, the function returns 0 as it's impossible to distribute candies.
 
-### Conclusion
-This solution efficiently solves the problem of distributing candies to kids in a way that maximizes the number of candies each kid receives, using binary search to optimize the process. By leveraging the helper function `can` to check the feasibility of each potential number of candies a kid can receive, the algorithm narrows down the solution space to find the maximum possible number of candies. The solution's time complexity, which is O(n * log(max(candies))), is optimal for large inputs, making it suitable for scenarios where the number of candy boxes and kids is large. The space complexity remains O(1), ensuring efficient memory usage.
+11. **Variable Initialization**
+	```cpp
+	    int l = 1, r = *max_element(candies.begin(), candies.end());
+	```
+	Two variables `l` and `r` are initialized to represent the lower and upper bounds for binary search. `l` starts at 1, and `r` is set to the maximum value in the `candies` vector.
+
+12. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	The variable `ans` is initialized to 0 to store the maximum number of candies that can be distributed equally to all kids.
+
+13. **Binary Search Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	A while loop is used to perform binary search between the lower and upper bounds (`l` and `r`) to find the optimal number of candies per kid.
+
+14. **Binary Search Calculation**
+	```cpp
+	        int mid = l + (r - l + 1) / 2;
+	```
+	The midpoint `mid` is calculated to check how many candies can be distributed equally to all the kids.
+
+15. **Condition Check**
+	```cpp
+	        if(can(candies, k, mid)) {
+	```
+	If the `can` function returns `true` for the midpoint number of candies, it means it's possible to distribute candies equally to all the kids.
+
+16. **Update Result**
+	```cpp
+	            ans = mid;
+	```
+	If the distribution is possible, the `ans` variable is updated to store the current `mid` value, which represents the maximum candies that can be distributed to each kid.
+
+17. **Binary Search Update**
+	```cpp
+	            l = mid + 1;
+	```
+	The lower bound `l` is updated to `mid + 1` to search for larger values in the next iteration of the binary search.
+
+18. **Else Condition**
+	```cpp
+	        } else {
+	```
+	If the `can` function returns `false`, it means the current `mid` value is too large, and we need to search for smaller values.
+
+19. **Binary Search Update**
+	```cpp
+	            r = mid - 1;
+	```
+	The upper bound `r` is updated to `mid - 1` to search for smaller values in the next iteration of the binary search.
+
+20. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the maximum number of candies that can be distributed equally to the kids.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log(max(candies[i])))
+- **Average Case:** O(n log(max(candies[i])))
+- **Worst Case:** O(n log(max(candies[i])))
+
+The binary search process runs in `log(max(candies[i]))` time, and for each search step, we calculate the possible piles which takes linear time O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only use a few variables and do not require additional space proportional to the input size.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-candies-allocated-to-k-children/description/)
 

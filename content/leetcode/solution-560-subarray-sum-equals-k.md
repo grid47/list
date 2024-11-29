@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "fFVZt-6sgyo"
 youtube_upload_date="2021-06-16"
 youtube_thumbnail="https://i.ytimg.com/vi/fFVZt-6sgyo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,92 +28,160 @@ youtube_thumbnail="https://i.ytimg.com/vi/fFVZt-6sgyo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array nums of integers and an integer k, find the total number of contiguous subarrays whose sum equals k.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array nums containing integers and an integer k.
+- **Example:** `Input: nums = [2, 1, 3, 4, 1], k = 4`
+- **Constraints:**
+	- 1 <= nums.length <= 2 * 10^4
+	- -1000 <= nums[i] <= 1000
+	- -10^7 <= k <= 10^7
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int subarraySum(vector<int>& nums, int k) {
-        
-        int res = 0;
-        
-        unordered_map<int, int> mp;
-        mp[0] = 1;
-        int sum = 0, cnt = 0;
-        
-        for(int i = 0; i < nums.size(); i++) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the number of subarrays whose sum equals k.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result should be an integer representing the count of subarrays.
 
-            sum += nums[i];
-            if(mp.count(sum - k)) cnt += mp[sum - k];
-            mp[sum] += 1;
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find all subarrays whose sum equals k, we can maintain a running sum and use a hash map to track how many times each sum has occurred.
 
-        return cnt;
+- Initialize a hash map to store the frequency of sums and a variable to store the result.
+- Iterate through the array, updating the running sum.
+- Check if the difference between the current running sum and k exists in the hash map. If it does, increment the result by the frequency of that sum.
+- Update the hash map to reflect the new sum after processing each element.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty.
+- The integer k is within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [2, 1, 3, 4, 1], k = 4`  \
+  **Explanation:** The subarrays that sum to 4 are [2, 1, 3], [4], and [1, 3]. Therefore, the result is 3.
+
+- **Input:** `Input: nums = [1, -1, 2, 3, -2], k = 3`  \
+  **Explanation:** The subarrays that sum to 3 are [3] and [1, -1, 2, 3]. Hence, the result is 2.
+
+{{< dots >}}
+## Approach 🚀
+This problem can be solved efficiently using a prefix sum and a hash map to track the frequency of sums encountered during the iteration.
+
+### Initial Thoughts 💭
+- The sum of any subarray can be represented as a difference between two prefix sums.
+- By keeping track of prefix sums using a hash map, we can determine how many times the sum equals k without iterating over all possible subarrays.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will never be empty as per the problem constraints.
+- The solution should efficiently handle input sizes up to 20,000 elements.
+- If k is 0, the solution should handle subarrays that sum to zero.
+- The solution should work efficiently even when k is a large or small value within the allowed range.
+{{< dots >}}
+## Code 💻
+```cpp
+int subarraySum(vector<int>& nums, int k) {
+    
+    int res = 0;
+    
+    unordered_map<int, int> mp;
+    mp[0] = 1;
+    int sum = 0, cnt = 0;
+    
+    for(int i = 0; i < nums.size(); i++) {
+
+        sum += nums[i];
+        if(mp.count(sum - k)) cnt += mp[sum - k];
+        mp[sum] += 1;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement:
-The task is to find the number of subarrays in a given array of integers `nums` whose sum equals a given integer `k`. A subarray is any contiguous section of the array. This is a typical problem that can be solved efficiently using a combination of hashing and prefix sums.
-
-### Approach:
-This problem can be efficiently solved using a **prefix sum** approach combined with a **hash map** (unordered map). The idea is to maintain the sum of all elements from the beginning of the array up to each point, and store the number of times each sum occurs. If the difference between the current prefix sum and `k` has been seen before, it means there is a subarray whose sum equals `k`.
-
-#### Key Observations:
-- **Prefix Sum:** The sum of elements from the start of the array up to a particular index. 
-- **HashMap (unordered_map):** It helps to keep track of how many times each prefix sum has occurred.
-  
-The algorithm works by iterating through the array while maintaining a running sum (`sum`). If at any point the difference `sum - k` has appeared previously in the array, it means that there exists a subarray that sums to `k`. By counting how many times `sum - k` has appeared, we can determine how many subarrays end at the current index that sum to `k`.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: Initialize Result and Data Structures
-```cpp
-int res = 0;  // Variable to store the final count of subarrays
-unordered_map<int, int> mp;  // HashMap to store the count of prefix sums
-mp[0] = 1;  // We initialize with 0 to handle cases where a subarray starting from index 0 sums to k
-int sum = 0, cnt = 0;  // sum tracks the running sum of elements; cnt is for counting subarrays
-```
-Here, `res` is the variable that will store the final result. The map `mp` is initialized to store the frequency of prefix sums encountered during iteration. We start by assuming that the sum of 0 has occurred once, which is necessary for cases where a subarray itself directly sums to `k` from the beginning. `sum` holds the running total as we iterate through `nums`, and `cnt` tracks how many subarrays we've found.
-
-#### Step 2: Iterate Over the Array and Calculate Prefix Sums
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    sum += nums[i];  // Update the running sum with the current element
-```
-We start iterating through the array. At each step, we add the current element `nums[i]` to `sum`, which gives the prefix sum up to index `i`.
-
-#### Step 3: Check for Subarrays with Sum Equal to k
-```cpp
-    if(mp.count(sum - k)) cnt += mp[sum - k];  // If sum - k has been seen, it means we have a valid subarray
-```
-We check if `sum - k` is a key in the hash map `mp`. If it is, it means there exists a previous prefix sum such that the difference between the current sum and this previous sum equals `k`. This means we have found a subarray with sum `k`. We increment `cnt` by the frequency of `sum - k` in `mp` because each occurrence of `sum - k` represents a valid subarray that ends at the current index.
-
-#### Step 4: Update the HashMap with the Current Prefix Sum
-```cpp
-    mp[sum] += 1;  // Increment the count of the current prefix sum in the hash map
+    return cnt;
 }
 ```
-Finally, we update the hash map to record the occurrence of the current `sum`. This allows us to track how many times each prefix sum has appeared so far.
 
-#### Step 5: Return the Result
-```cpp
-return cnt;  // Return the total count of subarrays found
-```
-After processing all elements in the array, we return the value of `cnt`, which contains the total number of subarrays that sum to `k`.
+This function finds the number of subarrays in a given array `nums` whose sum equals `k`. It uses a hash map (`mp`) to store prefix sums, efficiently counting subarrays that meet the condition.
 
-### Complexity:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int subarraySum(vector<int>& nums, int k) {
+	```
+	Defines the function `subarraySum` which takes a vector of integers `nums` and an integer `k`, and returns the number of subarrays whose sum equals `k`.
 
-#### Time Complexity:
-- **O(n):** We iterate through the array exactly once, and for each element, we perform constant-time operations: updating the running sum and checking/updating the hash map. Since hash map operations (insertion, lookup) are on average O(1), the overall time complexity is O(n), where `n` is the size of the input array `nums`.
+2. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the result variable `res` to store the count of subarrays that sum to `k`.
 
-#### Space Complexity:
-- **O(n):** In the worst case, the hash map can store up to `n` different prefix sums (if every sum encountered is unique). Therefore, the space complexity is O(n).
+3. **Hash Map Initialization**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	Declares an unordered map `mp` to store prefix sums of the array. The key is the sum, and the value is its frequency of occurrence.
 
-### Conclusion:
+4. **Initialize Prefix Sum**
+	```cpp
+	    mp[0] = 1;
+	```
+	Initializes the hash map with the base case, where a prefix sum of `0` occurs once (for the case of an exact match of `k` from the start of the array).
 
-This approach leverages the efficiency of prefix sums and hash maps to solve the problem in linear time. By maintaining a cumulative sum and storing the frequency of each sum, we can quickly check for subarrays that sum to `k`. This technique is optimal and well-suited for solving problems involving subarrays and cumulative sums, providing both time and space efficiency.
+5. **Prefix Sum Initialization**
+	```cpp
+	    int sum = 0, cnt = 0;
+	```
+	Initializes `sum` to keep track of the running prefix sum and `cnt` to count the number of valid subarrays.
+
+6. **Iterate Through Array**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Begins a loop to iterate through the array `nums` to calculate prefix sums.
+
+7. **Prefix Sum Update**
+	```cpp
+	        sum += nums[i];
+	```
+	Adds the current element `nums[i]` to the running `sum`.
+
+8. **Check for Subarray Sum**
+	```cpp
+	        if(mp.count(sum - k)) cnt += mp[sum - k];
+	```
+	Checks if the prefix sum `sum - k` exists in the hash map. If it does, it means a subarray with sum `k` is found, so it adds the count of occurrences of `sum - k` to `cnt`.
+
+9. **Update Hash Map**
+	```cpp
+	        mp[sum] += 1;
+	```
+	Increments the frequency of the current prefix sum `sum` in the hash map `mp`.
+
+10. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	Returns the total count of subarrays that sum to `k`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in the size of the input array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of the prefix sums in the hash map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subarray-sum-equals-k/description/)
 

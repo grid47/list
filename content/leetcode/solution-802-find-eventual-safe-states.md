@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Re_v0j0CRsg"
 youtube_upload_date="2022-04-09"
 youtube_thumbnail="https://i.ytimg.com/vi/Re_v0j0CRsg/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,127 +28,203 @@ youtube_thumbnail="https://i.ytimg.com/vi/Re_v0j0CRsg/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a directed graph where each node represents a point, and edges represent possible transitions between nodes. A node is considered terminal if it has no outgoing edges. A node is deemed safe if every path starting from it leads either to a terminal node or another safe node. Your task is to identify all the safe nodes in the graph and return them in ascending order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a graph represented as a 2D array, where each node's adjacency list is provided, followed by the conditions of the graph's nodes.
+- **Example:** `Input: graph = [[1,2],[2,3],[5],[0],[5],[],[]]`
+- **Constraints:**
+	- n == graph.length
+	- 1 <= n <= 10^4
+	- 0 <= graph[i].length <= n
+	- 0 <= graph[i][j] <= n - 1
+	- graph[i] is sorted in a strictly increasing order
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of integers representing the safe nodes in the graph, sorted in ascending order.
+- **Example:** `Output: [2,4,5,6]`
+- **Constraints:**
+	- The returned array should be sorted in ascending order.
 
-        vector<int> res;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To identify and return the safe nodes in the graph by using depth-first search (DFS) to track nodes that lead to terminal or safe nodes.
 
-        int n = graph.size();
+- Perform a depth-first search (DFS) to determine which nodes are safe.
+- Track the visiting status of nodes (unvisited, visiting, or safe) to avoid cycles.
+- Return all nodes that are identified as safe, ensuring they are in ascending order.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph may contain self-loops or cycles, but the traversal will ensure safe nodes are correctly identified.
+- Each node is either part of a cycle or leads to a terminal node or a safe node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: graph = [[1,2],[2,3],[5],[0],[5],[],[]]`  \
+  **Explanation:** In this graph, nodes 5 and 6 are terminal nodes because they have no outgoing edges. Nodes 2, 4, 5, and 6 are safe since all paths starting from these nodes lead either to a terminal node or another safe node.
 
-        if(n == 0) return res;
+- **Input:** `Input: graph = [[1,2,3,4],[1,2],[3,4],[0,4],[]]`  \
+  **Explanation:** In this case, node 4 is the only terminal node, and it is safe. The paths starting at node 4 always lead to itself, making it a safe node.
 
-        vector<int> vis(n, 0);
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a depth-first search (DFS) approach to explore each node and determine if it is safe based on its outgoing edges and the nodes it leads to.
 
-        for(int i = 0; i < n; i++)
-            if(dfs(graph, i, vis)) res.push_back(i);
-
-        return res;
-    }
-
-    int dfs(vector<vector<int>>& graph, int cur, vector<int> &vis) {
-
-        if(vis[cur] != 0) return vis[cur] == 2;
-
-        vis[cur] = 1;
-        for(auto nxt: graph[cur])
-            if(!dfs(graph, nxt, vis)) return false;
-
-        vis[cur] = 2;
-
-        return true;
-    }
-
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-In this problem, we are given a directed graph, where each node represents a state, and each directed edge between nodes represents a possible transition from one state to another. The goal is to determine which nodes are "safe," meaning that starting from these nodes, you will eventually reach a terminal node or a node that has no outgoing edges. In other words, the task is to identify nodes from which no cycle can be reached, and if a cycle exists, the node is considered unsafe.
-
-### Approach
-To solve this problem, we need to determine which nodes are eventually safe. A node is considered safe if, starting from that node, the path eventually leads to a terminal node or a cycle-free path. In graph terms, we are looking for nodes that do not belong to any cycle.
-
-To identify the safe nodes, we can use **Depth-First Search (DFS)** combined with state tracking:
-
-1. **State Representation**:
-   - **0**: The node has not been visited yet.
-   - **1**: The node is currently in the DFS recursion stack (i.e., it is being explored).
-   - **2**: The node is safe, meaning no cycles were found starting from this node.
-
-2. **DFS Traversal**:
-   - Start from a node and recursively visit its neighbors.
-   - If a neighbor is part of the current DFS recursion (i.e., it is marked as **1**), a cycle is detected, and the node is unsafe.
-   - If all neighbors of a node lead to safe nodes or terminal nodes, mark this node as safe.
-
-3. **Result**:
-   - We perform DFS on each node. If the node is eventually safe, we add it to the result list.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initial Setup
+### Initial Thoughts 💭
+- Safe nodes can be identified by ensuring all paths from them eventually lead to terminal nodes or other safe nodes.
+- We will perform DFS from each node, tracking its status as either visiting, visited, or safe. Nodes that are part of cycles or lead to unsafe paths will not be marked as safe.
+{{< dots >}}
+### Edge Cases 🌐
+- If the graph has no nodes, there are no safe nodes to return.
+- For large inputs, ensure the DFS algorithm is optimized to handle up to 10^4 nodes efficiently.
+- If the graph contains self-loops, treat them carefully by marking the node as unsafe if it leads to itself in a cycle.
+- Ensure that the solution is efficient given the graph constraints, particularly the number of nodes and edges.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+
     vector<int> res;
+
     int n = graph.size();
-    if (n == 0) return res;
+
+    if(n == 0) return res;
+
     vector<int> vis(n, 0);
+
+    for(int i = 0; i < n; i++)
+        if(dfs(graph, i, vis)) res.push_back(i);
+
+    return res;
+}
+
+int dfs(vector<vector<int>>& graph, int cur, vector<int> &vis) {
+
+    if(vis[cur] != 0) return vis[cur] == 2;
+
+    vis[cur] = 1;
+    for(auto nxt: graph[cur])
+        if(!dfs(graph, nxt, vis)) return false;
+
+    vis[cur] = 2;
+
+    return true;
+}
+
 ```
-- **`res`**: This vector will store the eventual safe nodes.
-- **`n`**: This is the size of the graph (number of nodes).
-- **`vis`**: A vector used to track the state of each node. Initially, all nodes are unvisited (marked as 0).
 
-#### Step 2: DFS on Each Node
-```cpp
-    for (int i = 0; i < n; i++)
-        if (dfs(graph, i, vis)) res.push_back(i);
-```
-- We loop through each node in the graph. For each node, we perform a DFS to determine if it is eventually safe. If it is, we add it to the result vector `res`.
+This code finds all the eventual safe nodes in a directed graph represented as an adjacency list. A node is considered safe if there is no cycle that leads to it. The DFS approach is used to explore the graph, marking nodes as visited and checking for cycles.
 
-#### Step 3: DFS Helper Function
-```cpp
-    int dfs(vector<vector<int>>& graph, int cur, vector<int>& vis) {
-        if (vis[cur] != 0) return vis[cur] == 2;
-        vis[cur] = 1;
-        for (auto nxt : graph[cur])
-            if (!dfs(graph, nxt, vis)) return false;
-        vis[cur] = 2;
-        return true;
-    }
-```
-- **Base Case**: If a node has already been visited:
-  - If the node is marked **2** (safe), return `true`.
-  - If the node is marked **1** (in the current DFS stack), it means we've encountered a cycle, so we return `false`.
-  
-- **DFS Exploration**: Mark the current node as **1** (indicating it’s being visited). Then, recursively visit all its neighbors (outgoing edges). If any neighbor leads to an unsafe node (returning `false`), the current node is unsafe, and we return `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function**
+	```cpp
+	vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+	```
+	This is the function signature that defines the main function, `eventualSafeNodes`, which takes a graph (a vector of vectors of integers) as input and returns a vector of integers representing the safe nodes.
 
-- **Marking Safe Node**: Once all neighbors have been visited and are safe, mark the current node as **2** (safe) and return `true`.
+2. **Variable Declaration**
+	```cpp
+	    vector<int> res;
+	```
+	A vector `res` is declared to store the eventual safe nodes that will be found during the DFS traversal.
 
-#### Step 4: Return Result
-Once all nodes have been processed, the `res` vector will contain the list of safe nodes. We return this vector.
+3. **Variable Declaration**
+	```cpp
+	    int n = graph.size();
+	```
+	The variable `n` is initialized to store the size of the graph (i.e., the number of nodes).
 
-### Complexity
+4. **Condition**
+	```cpp
+	    if(n == 0) return res;
+	```
+	If the graph is empty (n == 0), an empty vector `res` is returned as there are no nodes to process.
 
-#### Time Complexity:
-The time complexity of this solution is **O(V + E)**, where:
-- **V** is the number of nodes in the graph.
-- **E** is the number of edges in the graph.
+5. **Variable Initialization**
+	```cpp
+	    vector<int> vis(n, 0);
+	```
+	A `vis` vector is initialized with zeroes, where each element represents the visitation state of a node (0 = not visited, 1 = visiting, 2 = visited).
 
-- **DFS Traversal**: Each node and edge is processed exactly once during the DFS traversal. Therefore, the overall time complexity is linear with respect to the number of nodes and edges in the graph.
+6. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	A for loop is used to iterate over all the nodes in the graph, starting from node 0 to node n-1.
 
-#### Space Complexity:
-The space complexity is **O(V)** because:
-- We maintain the `vis` vector to track the state of each node, which requires space proportional to the number of nodes.
-- The recursive call stack for DFS may also take up to **O(V)** space in the worst case.
+7. **Conditional**
+	```cpp
+	        if(dfs(graph, i, vis)) res.push_back(i);
+	```
+	For each node, the DFS function is called to check if it's an eventual safe node. If the node is safe (DFS returns true), it is added to the result vector `res`.
 
-### Conclusion
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the vector `res`, which contains all the safe nodes found during the DFS traversal.
 
-This solution efficiently identifies the eventual safe nodes in a directed graph using DFS. By maintaining a state for each node (unvisited, visiting, or safe), the algorithm ensures that each node is explored once, making the solution both time-efficient and space-efficient. The approach handles cycles in the graph by checking the DFS stack for back edges and ensures that only nodes that lead to safe states are considered safe.
+9. **Function**
+	```cpp
+	int dfs(vector<vector<int>>& graph, int cur, vector<int> &vis) {
+	```
+	This is the helper function `dfs` that performs depth-first search to explore the graph from a given node `cur`.
 
-This approach is optimal for this problem as it directly tracks the safety of nodes and leverages a standard graph traversal technique (DFS) to solve the problem in linear time with respect to the size of the graph. The overall design of the algorithm is simple, clean, and scalable, making it suitable for large graphs.
+10. **Condition**
+	```cpp
+	    if(vis[cur] != 0) return vis[cur] == 2;
+	```
+	If the node `cur` has already been visited (its state is not 0), the function returns whether the node is safe (state 2 means safe).
+
+11. **Mark Node as Visiting**
+	```cpp
+	    vis[cur] = 1;
+	```
+	The node `cur` is marked as visiting (state 1) to indicate that it's being explored.
+
+12. **Loop**
+	```cpp
+	    for(auto nxt: graph[cur])
+	```
+	The function iterates over all the neighboring nodes (`nxt`) of the current node `cur`.
+
+13. **Conditional**
+	```cpp
+	        if(!dfs(graph, nxt, vis)) return false;
+	```
+	For each neighboring node `nxt`, the DFS function is called recursively. If any neighbor leads to a cycle (DFS returns false), the current node is not safe, and the function returns false.
+
+14. **Mark Node as Safe**
+	```cpp
+	    vis[cur] = 2;
+	```
+	Once all the neighbors have been processed and no cycle is detected, the current node `cur` is marked as safe (state 2).
+
+15. **Return Statement**
+	```cpp
+	    return true;
+	```
+	The function returns true, indicating that the current node `cur` is safe.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + e), where n is the number of nodes and e is the number of edges in the graph.
+- **Average Case:** O(n + e), as DFS will visit each node and edge at most once.
+- **Worst Case:** O(n + e), since each node and edge must be processed during DFS traversal.
+
+The time complexity is linear in terms of the number of nodes and edges in the graph.
+
+### Space Complexity 💾
+- **Best Case:** O(n), since the space needed to store node status and recursion stack is proportional to the number of nodes.
+- **Worst Case:** O(n), as we need to store the status of each node during the DFS traversal.
+
+The space complexity is linear with respect to the number of nodes in the graph.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-eventual-safe-states/description/)
 

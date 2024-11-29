@@ -14,152 +14,201 @@ img_src = ""
 youtube = "6KKgxkXPtsQ"
 youtube_upload_date="2023-03-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/6KKgxkXPtsQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` consisting of positive integers. Starting with a `score = 0`, repeatedly select the smallest unmarked integer, add its value to the score, and mark it along with its adjacent elements (if any). Continue this until all elements are marked, then return the final score.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer array `nums` representing the array of positive integers.
+- **Example:** `For example, `nums = [3, 2, 5, 4, 1]`.`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long findScore(vector<int>& nums) {
-        long long score = 0;
-        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
-        int n = nums.size();
-        unordered_map<int, int> mp;
-        for(int i = 0; i < n; i++)
-            pq.push({nums[i], i});
-        
-        while(!pq.empty()) {
-            while(!pq.empty() && mp.count(pq.top()[1])) pq.pop();
-            if(!pq.empty()) {
-                score += pq.top()[0];
-                mp[pq.top()[1]] = true;
-                mp[pq.top()[1] + 1] = true;
-                mp[pq.top()[1] - 1] = true;                
-                pq.pop();
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the final score achieved after applying the algorithm.
+- **Example:** `For `nums = [3, 2, 5, 4, 1]`, the output is `6`.`
+- **Constraints:**
+	- The output is an integer representing the final score.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to choose the smallest unmarked element, add its value to the score, and mark it along with its adjacent elements until all elements are marked.
+
+- 1. Initialize a score variable to 0.
+- 2. Use a priority queue to efficiently find the smallest unmarked element.
+- 3. Add the value of the chosen element to the score.
+- 4. Mark the chosen element and its adjacent elements (if they exist).
+- 5. Repeat the process until all elements are marked.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least one integer, and each element will be between 1 and 10^6.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `nums = [3, 2, 5, 4, 1]``  \
+  **Explanation:** By following the algorithm, we first select `1`, then `2`, and finally `4`. The final score is `1 + 2 + 3 = 6`.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves selecting the smallest unmarked element using a priority queue and applying the algorithm to maximize the score.
+
+### Initial Thoughts 💭
+- We can use a priority queue (min-heap) to efficiently find the smallest unmarked element.
+- The greedy approach ensures we select the smallest element at each step to maximize the score.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always contain at least one element, so there will be no empty inputs.
+- The solution should handle large inputs efficiently with a time complexity of O(n log n).
+- If all elements in `nums` are the same, the algorithm should still function correctly.
+- The input array will always meet the specified constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+long long findScore(vector<int>& nums) {
+    long long score = 0;
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+    int n = nums.size();
+    unordered_map<int, int> mp;
+    for(int i = 0; i < n; i++)
+        pq.push({nums[i], i});
+    
+    while(!pq.empty()) {
+        while(!pq.empty() && mp.count(pq.top()[1])) pq.pop();
+        if(!pq.empty()) {
+            score += pq.top()[0];
+            mp[pq.top()[1]] = true;
+            mp[pq.top()[1] + 1] = true;
+            mp[pq.top()[1] - 1] = true;                
+            pq.pop();
         }
-        return score;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to calculate the score of selecting numbers from an array `nums` while adhering to specific constraints. The score starts at 0, and for each valid selection, you add the selected number to the score. Once a number is selected from index `i`, the indices `i-1` and `i+1` become unavailable for future selections. The objective is to maximize the total score by carefully selecting numbers from the array.
-
-### Approach
-
-The problem asks us to select numbers in such a way that the score is maximized, and at the same time, we need to ensure that no adjacent indices are selected. This is akin to a problem where we must greedily select the smallest unselected number from the array and then mark its neighbors as unavailable.
-
-The main idea is to use a **min-heap (priority queue)** to efficiently select the smallest available number from the array and manage the unavailability of adjacent indices. We also use a hash map (`unordered_map`) to track the indices that have been marked as unavailable.
-
-### Step-by-Step Breakdown
-
-#### Step 1: Initialize Priority Queue and Data Structures
-```cpp
-long long score = 0;
-priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
-int n = nums.size();
-unordered_map<int, int> mp;
-```
-- **score**: This variable will hold the total score as we progress.
-- **pq**: A priority queue is used to select the smallest unselected number at each step. The queue stores pairs of `(value, index)` where `value` is the number from the `nums` array, and `index` is its corresponding index.
-- **mp**: An unordered map is used to keep track of the indices that have already been marked as unavailable. Specifically, if `mp[i]` is true, it means the number at index `i` is unavailable due to being marked as selected or due to its neighboring index being selected.
-
-#### Step 2: Populate the Priority Queue
-```cpp
-for(int i = 0; i < n; i++)
-    pq.push({nums[i], i});
-```
-- Here, we iterate over the `nums` array and push each element along with its index into the priority queue. The priority queue is organized to always pop the smallest value first because we are using `greater<vector<int>>` to compare elements. The smallest number will always be at the top of the queue.
-
-#### Step 3: Greedily Select Numbers
-```cpp
-while(!pq.empty()) {
-    while(!pq.empty() && mp.count(pq.top()[1])) pq.pop();
-    if(!pq.empty()) {
-        score += pq.top()[0];
-        mp[pq.top()[1]] = true;
-        mp[pq.top()[1] + 1] = true;
-        mp[pq.top()[1] - 1] = true;
-        pq.pop();
-    }
+    return score;
 }
 ```
-- **Pop invalid elements**: The outer `while` loop ensures that we continue to pop from the priority queue until we find a valid element. The inner `while` loop checks if the index of the current element (`pq.top()[1]`) is already marked as unavailable. If it is, we pop the element and move to the next one.
-  
-- **Select the smallest available element**: Once we find a valid element (i.e., one whose index is not in the `mp` map), we add its value to the total score. We also mark the index of the selected element (`pq.top()[1]`), and its neighbors (`pq.top()[1] + 1` and `pq.top()[1] - 1`) as unavailable by setting `mp[pq.top()[1]]`, `mp[pq.top()[1] + 1]`, and `mp[pq.top()[1] - 1]` to `true`. This ensures that these indices cannot be selected in future iterations.
-  
-- **Pop the selected element**: After selecting the element and marking its neighbors as unavailable, we pop the element from the priority queue and proceed to the next iteration.
 
-#### Step 4: Return the Final Score
-```cpp
-return score;
-```
-- Once all valid elements have been selected, and the priority queue is empty, the final score is returned as the result.
+This function calculates the total score based on the values in the input vector 'nums', using a priority queue to manage the elements and their corresponding indices. The score is updated based on specific conditions involving adjacent elements.
 
-### Example Walkthrough
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long findScore(vector<int>& nums) {
+	```
+	This is the function definition where we declare 'findScore', which takes a vector of integers as input and returns a long long score.
 
-Let's walk through an example to better understand how the code works.
+2. **Variable Initialization**
+	```cpp
+	    long long score = 0;
+	```
+	We initialize the 'score' variable to 0, which will hold the total score.
 
-#### Input:
-```cpp
-vector<int> nums = {1, 3, 2, 4, 5};
-```
+3. **Priority Queue**
+	```cpp
+	    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+	```
+	We declare a priority queue 'pq' that will store vectors of integers, which will be sorted in increasing order based on the first element of the vectors.
 
-1. **Initialization**:
-   - The priority queue `pq` is populated with the elements and their indices: `{{1, 0}, {3, 1}, {2, 2}, {4, 3}, {5, 4}}`.
-   - The `mp` map starts as empty, and `score = 0`.
+4. **Size of Input**
+	```cpp
+	    int n = nums.size();
+	```
+	We store the size of the input vector 'nums' in the variable 'n'.
 
-2. **First Iteration**:
-   - The top of the priority queue is `{1, 0}` (value 1 at index 0).
-   - The index 0 is not marked as unavailable, so we add `1` to the score.
-   - We then mark index 0, and its neighbors (indices -1 and 1) as unavailable. In this case, we only mark index 1 (since index -1 is out of bounds).
-   - The score is now `1`, and `mp = {0: true, 1: true}`.
+5. **Hash Map**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	We declare an unordered map 'mp' to track which indices have already been processed.
 
-3. **Second Iteration**:
-   - The next valid element is `{2, 2}` (value 2 at index 2).
-   - The index 2 is not marked as unavailable, so we add `2` to the score.
-   - We mark index 2 and its neighbors (indices 1 and 3) as unavailable. Index 1 is already unavailable, so only index 3 is marked as unavailable.
-   - The score is now `3`, and `mp = {0: true, 1: true, 2: true, 3: true}`.
+6. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	This is a loop that iterates through each element of the input vector 'nums'.
 
-4. **Third Iteration**:
-   - The next valid element is `{4, 3}` (value 4 at index 3), but index 3 is already marked as unavailable, so we skip it.
+7. **Push to Priority Queue**
+	```cpp
+	        pq.push({nums[i], i});
+	```
+	We push a vector containing the current element 'nums[i]' and its index 'i' into the priority queue.
 
-5. **Fourth Iteration**:
-   - The next valid element is `{3, 1}` (value 3 at index 1), but index 1 is already marked as unavailable, so we skip it.
+8. **While Loop**
+	```cpp
+	    while(!pq.empty()) {
+	```
+	This is a while loop that continues until the priority queue is empty.
 
-6. **Fifth Iteration**:
-   - The next valid element is `{5, 4}` (value 5 at index 4).
-   - We add `5` to the score.
-   - We mark index 4 and its neighbors (indices 3 and 5) as unavailable.
-   - The score is now `8`, and `mp = {0: true, 1: true, 2: true, 3: true, 4: true}`.
+9. **Check Processed Indices**
+	```cpp
+	        while(!pq.empty() && mp.count(pq.top()[1])) pq.pop();
+	```
+	We check if the top element of the priority queue has already been processed. If it has, we pop it from the queue.
 
-#### Final Score:
-The total score after selecting all valid numbers is `8`.
+10. **If Not Empty**
+	```cpp
+	        if(!pq.empty()) {
+	```
+	We proceed if the priority queue is not empty after cleaning out the processed elements.
 
-#### Output:
-```cpp
-return 8;
-```
+11. **Add to Score**
+	```cpp
+	            score += pq.top()[0];
+	```
+	We add the value of the top element in the priority queue (which is the first element of the vector) to the score.
 
-### Time Complexity
+12. **Mark Current Index**
+	```cpp
+	            mp[pq.top()[1]] = true;
+	```
+	We mark the current index as processed in the 'mp' map.
 
-- **Time Complexity**: \(O(n \log n)\)
-  - The time complexity is dominated by the sorting of the elements in the priority queue and the operations on the queue itself.
-  - The priority queue supports `push` and `pop` operations that take \(O(\log n)\) time. Since we perform these operations for each element in the array, the total time complexity is \(O(n \log n)\).
-  
-- **Space Complexity**: \(O(n)\)
-  - The space complexity is primarily determined by the storage of the priority queue, the map `mp`, and the `nums` array. All these structures store data for each element in the array, resulting in an overall space complexity of \(O(n)\).
+13. **Mark Adjacent Indices**
+	```cpp
+	            mp[pq.top()[1] + 1] = true;
+	```
+	We mark the next index as processed.
 
-### Conclusion
+14. **Mark Adjacent Indices**
+	```cpp
+	            mp[pq.top()[1] - 1] = true;                
+	```
+	We mark the previous index as processed.
 
-This solution efficiently maximizes the score by greedily selecting the smallest available element from the array and marking its adjacent indices as unavailable. The use of a priority queue ensures that the smallest element is always selected, and the map keeps track of which indices are unavailable for future selections. This approach guarantees an optimal solution in \(O(n \log n)\) time and uses \(O(n)\) space, making it efficient and scalable for large input sizes.
+15. **Pop from Priority Queue**
+	```cpp
+	            pq.pop();
+	```
+	We remove the top element from the priority queue after processing it.
+
+16. **Return Score**
+	```cpp
+	    return score;
+	```
+	We return the calculated score after processing all elements.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) due to the use of a priority queue for selecting the smallest unmarked element.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we need extra space for the priority queue and marking elements.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/description/)
 

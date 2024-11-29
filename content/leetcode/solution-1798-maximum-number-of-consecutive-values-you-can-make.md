@@ -14,113 +14,141 @@ img_src = ""
 youtube = "3ONSGo28_Z0"
 youtube_upload_date="2021-03-20"
 youtube_thumbnail="https://i.ytimg.com/vi/3ONSGo28_Z0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'coins', where each element represents the value of a coin you own. You can use these coins to create sums of values starting from 0. Your task is to find the maximum number of consecutive integer values starting from 0 that you can make with your coins.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer array 'coins' where each coin is represented by an integer value. You must calculate the maximum consecutive sum of values that can be made using these coins.
+- **Example:** `coins = [2, 3]`
+- **Constraints:**
+	- 1 <= n <= 4 * 10^4
+	- 1 <= coins[i] <= 4 * 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of consecutive integer values starting from 0 that you can make using the given coins.
+- **Example:** `For coins = [2, 3], the output will be 4.`
+- **Constraints:**
 
-    int getMaximumConsecutive(vector<int>& coins) {
-        sort(coins.begin(), coins.end());
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the maximum consecutive integers starting from 0 that can be made by summing various combinations of coin values.
 
-        int res = 1;
-        for(int a: coins) {
-            if(a > res) break;
-            // with all the coins I have I can 
-            // create upto res - 1,
-            // with this a, I can make upto res + a - 1
-            // so next target is res += a
-            res += a;
-        }
+- 1. Sort the array of coins.
+- 2. Initialize a variable 'res' to 1, representing the initial sum 0.
+- 3. Loop through the sorted array of coins. For each coin, check if it can extend the consecutive sums. If so, add it to 'res'.
+{{< dots >}}
+### Problem Assumptions ✅
+- You can have multiple coins of the same value.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `coins = [2, 3]`  \
+  **Explanation:** The coins are sorted to [2, 3]. The values that can be made starting from 0 are 0, 2, 3, and 5, giving us 4 consecutive sums.
 
-        return res;
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we first sort the coins array and use a greedy approach to calculate the maximum number of consecutive sums.
+
+### Initial Thoughts 💭
+- Sorting the coins is essential for ensuring that we can always extend the range of consecutive sums.
+- The maximum consecutive sums will depend on whether the current coin value can fill in the gaps between the sums we can already form.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return 0.
+- For large inputs, ensure the algorithm runs efficiently with O(n log n) time complexity due to sorting.
+- If the coins have values that are too large to consecutively extend the sums, handle these cases appropriately.
+- Ensure that the solution works within the given constraints (up to 40,000 coins).
+{{< dots >}}
+## Code 💻
+```cpp
+
+int getMaximumConsecutive(vector<int>& coins) {
+    sort(coins.begin(), coins.end());
+
+    int res = 1;
+    for(int a: coins) {
+        if(a > res) break;
+        // with all the coins I have I can 
+        // create upto res - 1,
+        // with this a, I can make upto res + a - 1
+        // so next target is res += a
+        res += a;
     }
 
-};
-{{< /highlight >}}
----
+    return res;
+}
 
-### Problem Statement
-
-The problem at hand is to determine the maximum amount of consecutive integers that can be formed using a given list of coin denominations. This problem is common in algorithmic challenges where understanding how to sum combinations of integers to reach specific targets is required. Given a collection of coins, our goal is to find the largest integer value such that all integers from 1 to that value can be created using these coins.
-
-### Approach
-
-The solution approach utilizes a greedy algorithm combined with sorting. The idea is to incrementally build the maximum consecutive sum starting from 1. By sorting the coin denominations, we ensure that we can process smaller denominations first, allowing us to maximize our consecutive integer reach.
-
-1. **Sort the Coins**: By sorting the array of coins, we can ensure that we start with the smallest denomination, allowing us to construct the smallest sums first.
-  
-2. **Initialize a Result Variable**: We start with a result variable initialized to 1, indicating that we aim to create the integer value 1.
-
-3. **Iterate Through the Coins**:
-   - For each coin, we check if it is greater than the current value of `res`. If it is, we can no longer create the integer value `res`, so we break out of the loop.
-   - If the coin is less than or equal to `res`, we can update `res` by adding the value of the coin. This represents the new target that can be formed with the addition of the current coin.
-
-4. **Return the Result**: Finally, we return the value of `res`, which will be the maximum consecutive integer that can be formed.
-
-### Code Breakdown (Step by Step)
-
-Here’s the complete code for the `Solution` class:
-
-```cpp
-class Solution {
-public:
-    int getMaximumConsecutive(vector<int>& coins) {
-        sort(coins.begin(), coins.end());
 ```
-- The method `getMaximumConsecutive` begins by taking a vector of integers `coins` as an input, which represents the different coin denominations available.
-- We sort the coins in ascending order using `sort(coins.begin(), coins.end());`.
 
-```cpp
-        int res = 1;
-```
-- A variable `res` is initialized to 1. This variable will track the maximum consecutive integer that can be created starting from 1.
+The function `getMaximumConsecutive` calculates the maximum amount of consecutive integers that can be made from a given list of coin denominations.
 
-```cpp
-        for(int a: coins) {
-            if(a > res) break;
-```
-- We iterate through each coin in the sorted list. The variable `a` represents the current coin denomination.
-- If the current coin `a` is greater than `res`, it means we cannot create the integer value `res` with the available coins, and we exit the loop.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int getMaximumConsecutive(vector<int>& coins) {
+	```
+	This is the function definition. The input is a vector of integers representing the coin denominations, and the output is an integer representing the maximum number of consecutive values that can be formed.
 
-```cpp
-            // with all the coins I have I can 
-            // create upto res - 1,
-            // with this a, I can make upto res + a - 1
-            // so next target is res += a
-            res += a;
-        }
-```
-- If the coin is less than or equal to `res`, we can add this coin to our collection of coins used to reach consecutive sums.
-- The comment explains that with the current set of coins, we can form all sums up to `res - 1`. By adding coin `a`, we can now form sums up to `res + a - 1`. Thus, we update `res` to reflect this new maximum consecutive value by adding `a`.
+2. **Sorting**
+	```cpp
+	    sort(coins.begin(), coins.end());
+	```
+	Sort the coins array to ensure that smaller coin denominations are processed first, which helps in forming consecutive values more efficiently.
 
-```cpp
-        return res;
-    }
-};
-```
-- Finally, the method returns `res`, which represents the maximum integer value that can be formed using the provided coin denominations.
+3. **Variable Initialization**
+	```cpp
+	    int res = 1;
+	```
+	Initialize a variable `res` to 1, which represents the current target value that can be formed with the available coins.
 
-### Complexity
+4. **Iteration**
+	```cpp
+	    for(int a: coins) {
+	```
+	Start a loop to iterate over each coin denomination in the sorted list.
 
-- **Time Complexity**: \(O(n \log n)\), where \(n\) is the number of coins. The sorting step dominates the time complexity. The subsequent iteration through the sorted coins is \(O(n)\).
-  
-- **Space Complexity**: \(O(1)\) if we ignore the input space, as we are using only a constant amount of additional space for the variables.
+5. **Condition Check**
+	```cpp
+	        if(a > res) break;
+	```
+	If the current coin denomination is greater than the target `res`, it means we can't form the consecutive value `res`, so we exit the loop.
 
-### Conclusion
+6. **Variable Update**
+	```cpp
+	        res += a;
+	```
+	Update the `res` value by adding the current coin denomination `a`, extending the range of consecutive values we can form.
 
-The `getMaximumConsecutive` method effectively solves the problem of determining the maximum consecutive integers that can be formed from a given list of coin denominations through a greedy approach. The algorithm first sorts the list of coins to ensure that smaller denominations are processed first, maximizing the number of consecutive sums that can be formed.
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the final value of `res`, which represents the maximum number of consecutive integers that can be formed using the given coins.
 
-By incrementally building up the maximum consecutive integer starting from 1 and updating the target as each coin is processed, the algorithm efficiently calculates the desired result. This approach not only highlights the importance of sorting in greedy algorithms but also illustrates how small optimizations can lead to significant improvements in the problem-solving process.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-This solution is not only efficient but also elegant, showcasing how fundamental concepts in algorithms can be applied to solve real-world problems in finance, resource allocation, and combinatorial mathematics. The ability to understand and implement such algorithms is essential for software developers, particularly those working in fields related to finance, game development, and operations research.
+The time complexity is O(n log n) due to the sorting step.
 
-The effectiveness of this algorithm makes it a valuable addition to the toolkit of any developer facing similar challenges, reinforcing the significance of both theoretical knowledge and practical implementation in the field of computer science.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for storing the sorted array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-consecutive-values-you-can-make/description/)
 

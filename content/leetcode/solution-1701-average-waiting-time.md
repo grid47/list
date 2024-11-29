@@ -14,106 +14,167 @@ img_src = ""
 youtube = "2fN7uIgCIBA"
 youtube_upload_date="2024-07-09"
 youtube_thumbnail="https://i.ytimg.com/vi/2fN7uIgCIBA/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A restaurant with a single chef serves customers. Each customer arrives at a specific time and waits for the chef to prepare their order. The chef can only serve one customer at a time and prepares orders in the order they were received. The goal is to calculate the average waiting time of all customers. The waiting time of a customer is the time between their arrival and when they receive their order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D array where each entry represents a customer, with the first value indicating the arrival time and the second value indicating the time required to prepare the order.
+- **Example:** `[[1, 2], [3, 4], [6, 1]]`
+- **Constraints:**
+	- 1 <= customers.length <= 10^5
+	- 1 <= arrivali, timei <= 10^4
+	- arrivali <= arrivali+1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double averageWaitingTime(vector<vector<int>>& cust) {
-        
-        int cur = cust[0][0];
-        
-        double n = cust.size();
-        double sum = 0;
-        
-        for(int i = 0; i < n; i++) {
-            
-            if(cur > cust[i][0])
-            cur += cust[i][1];
-            else
-            cur = cust[i][0] + cust[i][1];
-            
-            sum += cur - cust[i][0];
-            
-        }
-        
-        return sum / n;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a floating-point number representing the average waiting time for all customers.
+- **Example:** `3.33333`
+- **Constraints:**
+	- The result must be accurate within 10^-5
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the average waiting time of all customers.
 
-The problem is to calculate the average waiting time for customers in a restaurant given their arrival and service times. Each customer arrives at a certain time and requires a specified duration for service. The challenge lies in handling the scheduling of customers in a way that minimizes their waiting time, particularly when some customers may arrive while others are still being served.
+- 1. Initialize the current time to the arrival time of the first customer.
+- 2. For each customer, check if the chef is idle or still working on a previous order.
+- 3. If the chef is idle, the chef starts preparing the order immediately; otherwise, the chef waits for the chef to finish the current order.
+- 4. Add the waiting time (current time - arrival time) to the total waiting time.
+- 5. After processing all customers, return the total waiting time divided by the number of customers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The customer arrival times are provided in non-decreasing order.
+- The chef serves customers in the order they arrive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1, 2], [2, 5], [4, 3]]`  \
+  **Explanation:** In this example, the first customer arrives at time 1 and waits 2 units of time, so their waiting time is 2. The second customer arrives at time 2 but waits until the chef is free at time 3, so their waiting time is 6. The third customer arrives at time 4 and waits until the chef is free at time 8, giving them a waiting time of 7. The average waiting time is (2 + 6 + 7) / 3 = 5.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution iterates through the customer list while managing the time taken for each customer’s order. We track when each customer starts and finishes their order to calculate their waiting time.
 
-To solve this problem, we need to simulate the service process based on customer arrival times and their corresponding service durations. We can maintain a variable that keeps track of the current time, which represents when the last customer finishes their service. As we iterate through the list of customers, we will:
-
-1. Check if the current time is greater than the arrival time of the next customer. If so, it means the previous customer has finished service and the next customer can start immediately.
-2. If the current time is less than or equal to the arrival time of the next customer, we set the current time to the arrival time of the next customer, indicating that we will wait for them.
-3. After determining when the next customer starts their service, we update the current time by adding the service duration.
-4. We keep a running total of waiting times for each customer, which is calculated as the difference between the current time and their arrival time.
-
-Finally, we compute the average waiting time by dividing the total waiting time by the number of customers.
-
-### Code Breakdown (Step by Step)
-
-Let's examine the code step-by-step:
-
-1. **Initialization**: We start by initializing `cur`, which will track the current time as we process each customer. It is initially set to the arrival time of the first customer. We also calculate the total number of customers `n` and initialize `sum`, which will accumulate the total waiting time.
-
-    ```cpp
-    int cur = cust[0][0]; // Start with the arrival time of the first customer
-    double n = cust.size(); // Total number of customers
-    double sum = 0; // Total waiting time initialized to 0
-    ```
-
-2. **Loop through each customer**: We loop through each customer using a for loop. For each iteration:
-
-    ```cpp
+### Initial Thoughts 💭
+- The chef prepares orders one at a time and cannot start a new order until the previous one is finished.
+- The problem requires managing the flow of customers and calculating each one's waiting time. The key observation is that the chef can only serve one customer at a time and must wait for previous orders to be completed.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no customers, return 0.
+- Ensure that the solution can handle inputs with 100,000 customers efficiently.
+- When all customers have the same arrival time and order time, the waiting time will be calculated sequentially based on the previous customer's finish time.
+- The input constraints should be respected to avoid performance issues with large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+double averageWaitingTime(vector<vector<int>>& cust) {
+    
+    int cur = cust[0][0];
+    
+    double n = cust.size();
+    double sum = 0;
+    
     for(int i = 0; i < n; i++) {
-    ```
+        
+        if(cur > cust[i][0])
+        cur += cust[i][1];
+        else
+        cur = cust[i][0] + cust[i][1];
+        
+        sum += cur - cust[i][0];
+        
+    }
+    
+    return sum / n;
+}
+```
 
-3. **Determine current time based on arrival**: Inside the loop, we check if the current time (`cur`) is greater than the arrival time of the current customer (`cust[i][0]`). If it is, we update the current time to include the service duration.
+This function calculates the average waiting time for a series of customers based on their arrival times and service durations.
 
-    ```cpp
-    if(cur > cust[i][0])
-        cur += cust[i][1]; // Customer starts service immediately
-    ```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	double averageWaitingTime(vector<vector<int>>& cust) {
+	```
+	Defines the function `averageWaitingTime`, which calculates the average waiting time for customers based on their arrival times and service durations.
 
-4. **Handle waiting customers**: If the current time is less than or equal to the customer's arrival time, we update `cur` to the arrival time plus the service duration.
+2. **Initial Setup**
+	```cpp
+	    int cur = cust[0][0];
+	```
+	Initializes the `cur` variable to represent the current time, starting with the arrival time of the first customer.
 
-    ```cpp
-    else
-        cur = cust[i][0] + cust[i][1]; // Wait for the customer to arrive
-    ```
+3. **Variable Initialization**
+	```cpp
+	    double n = cust.size();
+	```
+	Sets the variable `n` to the total number of customers in the `cust` array, which helps in calculating the average later.
 
-5. **Calculate waiting time**: After determining when the service for the current customer ends, we calculate their waiting time and add it to `sum`.
+4. **Variable Initialization**
+	```cpp
+	    double sum = 0;
+	```
+	Initializes a variable `sum` to 0, which will hold the total waiting time for all customers.
 
-    ```cpp
-    sum += cur - cust[i][0]; // Update total waiting time
-    ```
+5. **Loop Through Customers**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through all customers in the `cust` array.
 
-6. **Calculate average waiting time**: After processing all customers, we return the average waiting time by dividing the total waiting time by the number of customers.
+6. **Customer Time Check**
+	```cpp
+	        if(cur > cust[i][0])
+	```
+	Checks if the current time (`cur`) is greater than the arrival time of the current customer. If true, the customer can start being served immediately.
 
-    ```cpp
-    return sum / n; // Average waiting time
-    ```
+7. **Update Current Time**
+	```cpp
+	        cur += cust[i][1];
+	```
+	If the current customer can be served immediately, add their service duration to the current time (`cur`).
 
-### Complexity
+8. **Update Current Time**
+	```cpp
+	        cur = cust[i][0] + cust[i][1];
+	```
+	If the customer arrives after the current time, set the `cur` to their arrival time plus their service duration.
 
-The time complexity of this algorithm is O(n), where n is the number of customers. This is because we iterate through the list of customers exactly once, performing constant-time operations for each customer. The space complexity is O(1), as we only use a few variables for calculations and do not utilize any additional data structures that grow with input size.
+9. **Accumulate Waiting Time**
+	```cpp
+	        sum += cur - cust[i][0];
+	```
+	Adds the waiting time of the current customer to `sum`, which is the difference between the current time (`cur`) and their arrival time.
 
-### Conclusion
+10. **Return Average Waiting Time**
+	```cpp
+	    return sum / n;
+	```
+	Returns the average waiting time by dividing the total accumulated waiting time (`sum`) by the number of customers (`n`).
 
-In summary, this implementation efficiently calculates the average waiting time for customers at a restaurant based on their arrival and service durations. By simulating the service process and keeping track of the current time, we can accurately determine how long each customer has to wait. This approach not only provides the correct solution but does so in a manner that is optimal in terms of both time and space complexity, making it suitable for real-time applications where customer service efficiency is crucial.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of customers. The best case occurs when the chef is always idle and the customers are served immediately.
+- **Average Case:** O(n), where n is the number of customers. The average case assumes that customers arrive in a reasonable distribution.
+- **Worst Case:** O(n), where n is the number of customers. The worst case happens when each customer arrives after the previous one and needs to wait for their turn.
+
+The time complexity is linear because we iterate over the customers once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), since we only need a constant amount of space for variables like current time and total waiting time.
+- **Worst Case:** O(n), where n is the number of customers, due to the input size.
+
+The space complexity is linear because we are storing a list of customers and only require a small amount of additional space for tracking the time and sums.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/average-waiting-time/description/)
 

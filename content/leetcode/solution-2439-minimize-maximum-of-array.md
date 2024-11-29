@@ -14,102 +14,131 @@ img_src = ""
 youtube = "AeHMvcKuR0Y"
 youtube_upload_date="2023-04-05"
 youtube_thumbnail="https://i.ytimg.com/vi/AeHMvcKuR0Y/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array `nums` of length `n`, where each element represents the number of items in a container. In one operation, you can pick an index `i` such that 1 <= i < n and `nums[i] > 0`, and move one item from `nums[i]` to `nums[i-1]`. Your goal is to minimize the maximum value in the array `nums` after performing any number of operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` where `n` is the length of the array and `nums[i]` is the value at index `i`.
+- **Example:** `nums = [5, 10, 3, 8]`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- 0 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimizeArrayValue(vector<int>& nums) {
-        long sum = 0, res = 0;
-        for(int i = 0; i < nums.size(); i++) {
-            sum += nums[i];
-            res = max(res, (sum + i) / (i + 1));
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum possible value of the maximum integer in `nums` after performing any number of operations.
+- **Example:** `Output: 6`
+- **Constraints:**
+	- The final result must be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the maximum value in the `nums` array after redistributing the elements. This can be done by calculating the sum of the array and spreading the items evenly.
+
+- 1. Calculate the sum of the entire array `nums`.
+- 2. For each index `i`, calculate the maximum possible value that can be achieved in the array after redistributing the items.
+- 3. Return the minimized maximum value.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain at least two elements.
+- You are allowed to perform any number of operations to achieve the optimal result.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 7, 1, 6]`  \
+  **Explanation:** In this example, we can perform operations to redistribute the values in `nums`. Here’s one set of operations: 1. Move one item from `nums[1]` to `nums[0]`, resulting in [4, 6, 1, 6]; 2. Move one item from `nums[3]` to `nums[2]`, resulting in [4, 6, 2, 5]; 3. Move one item from `nums[1]` to `nums[0]`, resulting in [5, 5, 2, 5]; The maximum value in the array is now 5, and this is the minimal possible maximum value.
+
+- **Input:** `nums = [10, 1]`  \
+  **Explanation:** Here, the array is already optimal since 10 is the maximum value, and no operations are needed. The result is 10.
+
+{{< dots >}}
+## Approach 🚀
+The key idea is to minimize the maximum value by redistributing items from higher-valued elements to lower-valued ones. This can be done by calculating the cumulative sum and determining the point at which the values start to stabilize.
+
+### Initial Thoughts 💭
+- To minimize the maximum value, it's helpful to consider redistributing the values across the array rather than focusing on individual operations.
+- One approach is to calculate the cumulative sum while iterating through the array, and at each step, track the maximum value that could result from the redistribution of items.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least two elements in `nums`, so empty input is not a concern.
+- The solution must be able to handle up to 100,000 elements in the array, so time efficiency is important.
+- If the array is already sorted with all values equal, no operations are needed.
+- The array can have very large numbers, up to 10^9, so avoid overflow and ensure the solution handles such cases efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimizeArrayValue(vector<int>& nums) {
+    long sum = 0, res = 0;
+    for(int i = 0; i < nums.size(); i++) {
+        sum += nums[i];
+        res = max(res, (sum + i) / (i + 1));
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to minimize the maximum value of an array after performing some operations. Specifically, you are given an integer array `nums` and can perform the following operation:
-
-- You can increment or decrement any element of the array by 1.
-
-The goal is to minimize the maximum value of the array after performing any number of such operations. The output should be the smallest possible value of the largest element in the array that can be achieved by these operations.
-
-For example:
-- Input: `[3, 1, 5, 2, 4]`
-- Output: `3`
-
-Here, the minimum possible value for the maximum element is `3`. After performing the operations, the array becomes `[3, 3, 3, 3, 3]`, and the maximum value is `3`.
-
-### Approach
-
-To solve this problem efficiently, the key is to focus on minimizing the largest value in the array after performing the operations. This can be done by considering the average of the elements in the array at each step and gradually adjusting the array such that the difference between the maximum and minimum values is minimized.
-
-Here's the thought process behind the solution:
-
-1. **Calculate the Running Sum**: As we iterate through the array, we can maintain a running sum of the elements. This helps in understanding how the sum of the first `i` elements behaves and allows us to calculate the potential value for the maximum element at each index.
-
-2. **Calculate the Average at Each Step**: For any element `nums[i]`, the average of the elements up to that index is calculated by dividing the running sum by `(i + 1)`. The reasoning behind this is that the smallest possible value for the maximum element, if the values were distributed evenly, would be the average. By adjusting the elements towards this average, we can minimize the maximum value.
-
-3. **Update the Result**: The maximum value we want to minimize is the highest average seen up to any index. This is because the average gives us a threshold for balancing the array and minimizing the largest value. At each step, we update the result with the maximum of the current result and the average of the elements up to that index.
-
-4. **Final Result**: The final result will be the smallest value that represents the largest element after performing all possible operations.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-We start by initializing two variables:
-- `sum`: This variable will store the running sum of the elements as we iterate through the array.
-- `res`: This variable will store the result, which represents the smallest possible value of the largest element.
-
-```cpp
-long sum = 0, res = 0;
-```
-
-#### Step 2: Iterate Through the Array
-Next, we iterate through the array `nums` using a `for` loop. For each element `nums[i]`, we perform the following steps:
-- **Update the Running Sum**: Add the current element to the running sum (`sum`).
-- **Calculate the Current Average**: The average of the first `i+1` elements is `(sum + i) / (i + 1)`. This value represents the potential maximum element if we balance the array based on the current prefix.
-- **Update the Result**: We update the result `res` with the maximum of the current value of `res` and the calculated average. This ensures that we are keeping track of the minimum possible largest value.
-
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    sum += nums[i];
-    res = max(res, (sum + i) / (i + 1));
+    return res;
 }
 ```
 
-Here, `(sum + i)` accounts for the total sum of elements from `nums[0]` to `nums[i]`, and dividing it by `(i + 1)` gives the average. The `max` function ensures that we store the largest of the averages seen so far, which gives us the minimum possible maximum value after all operations.
+This code defines a function `minimizeArrayValue` that minimizes the maximum value of the array after making adjustments to the values. It does so by iterating through the array, maintaining a cumulative sum, and calculating the maximum average for each index.
 
-#### Step 3: Return the Result
-Once the loop completes, the result `res` will hold the smallest possible value for the largest element in the array after balancing the elements. We then return this value.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimizeArrayValue(vector<int>& nums) {
+	```
+	Defining the function `minimizeArrayValue`, which takes a vector `nums` and returns an integer. The function aims to minimize the maximum value in the array after adjusting the values.
 
-```cpp
-return res;
-```
+2. **Variable Initialization**
+	```cpp
+	    long sum = 0, res = 0;
+	```
+	Initializing two variables: `sum`, which stores the cumulative sum of the array, and `res`, which tracks the result—the minimum maximum value of the array.
 
-### Complexity
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	A for loop that iterates over each element in the `nums` array. It updates the sum and checks for the maximum value after adjusting the array.
 
-#### Time Complexity
-The time complexity of the solution is **O(n)**, where `n` is the size of the array `nums`. This is because we only iterate over the array once, and for each element, we perform constant-time operations (sum and max calculations).
+4. **Mathematical Operation**
+	```cpp
+	        sum += nums[i];
+	```
+	Adding the current element of the array `nums[i]` to the `sum` variable.
 
-#### Space Complexity
-The space complexity is **O(1)** because we are only using a fixed amount of extra space (`sum` and `res`), regardless of the size of the input array.
+5. **Mathematical Operation**
+	```cpp
+	        res = max(res, (sum + i) / (i + 1));
+	```
+	Calculating the average of the first `i+1` elements (considering the sum up to index `i`) and updating `res` to store the maximum average encountered so far.
 
-### Conclusion
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returning the result stored in `res`, which is the minimized maximum value of the array after adjustments.
 
-The solution efficiently computes the smallest possible maximum value in an array after performing any number of increment and decrement operations. By maintaining a running sum and calculating the average at each step, we can determine the minimum possible maximum value. The approach runs in **O(n)** time and uses **O(1)** space, making it well-suited for large input sizes.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This approach ensures that we find the optimal solution in a single pass through the array, making it both time-efficient and space-efficient. The key idea is to minimize the largest element by leveraging the concept of averages and balancing the array as we progress through it.
+The time complexity is O(n) because we only need to iterate over the array once to calculate the sum and the optimal maximum value.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we are only using a constant amount of extra space, aside from the input array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-maximum-of-array/description/)
 

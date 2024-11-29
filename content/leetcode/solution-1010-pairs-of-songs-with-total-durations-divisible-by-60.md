@@ -14,77 +14,136 @@ img_src = ""
 youtube = "gM5Wu42UTQk"
 youtube_upload_date="2021-02-05"
 youtube_thumbnail="https://i.ytimg.com/vi/gM5Wu42UTQk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array where each element represents the duration of a song in seconds. Your task is to count how many pairs of songs have a total duration that is divisible by 60. Specifically, you need to count how many pairs of songs, indexed as i and j (with i < j), satisfy the condition (time[i] + time[j]) % 60 == 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers where each integer represents the duration of a song in seconds.
+- **Example:** `time = [10, 50, 120, 80, 40]`
+- **Constraints:**
+	- 1 <= time.length <= 6 * 10^4
+	- 1 <= time[i] <= 500
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numPairsDivisibleBy60(vector<int>& time) {
-        vector<int> c(60, 0);
-        int res = 0;
-        for(int t: time) {
-            res += c[(600 - t)%60];
-            c[t%60] += 1;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the total number of valid pairs where the sum of the song durations is divisible by 60.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The result should be an integer representing the number of valid pairs.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to efficiently count the pairs of songs whose combined durations are divisible by 60.
+
+- For each song, find the remainder when the song's duration is divided by 60.
+- Count how many other songs, when paired with the current song, have a remainder that completes the sum to be divisible by 60.
+- Maintain a count of song durations modulo 60 to avoid recalculating the remainder each time.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each song duration is unique, and all are between 1 and 500 seconds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: time = [10, 50, 120, 80, 40]`  \
+  **Explanation:** In this case, two pairs of songs have durations that add up to a multiple of 60: (time[0] = 10, time[1] = 50) and (time[2] = 120, time[4] = 40). These pairs add up to 60 and 160, respectively, both of which are divisible by 60.
+
+- **Input:** `Input: time = [60, 60, 60]`  \
+  **Explanation:** For this input, all three pairs (time[0] = 60, time[1] = 60), (time[0] = 60, time[2] = 60), and (time[1] = 60, time[2] = 60) add up to 120, which is divisible by 60. Therefore, the output is 3.
+
+{{< dots >}}
+## Approach 🚀
+The strategy involves using modular arithmetic to find complementary pairs of song durations that sum to a multiple of 60. We use a hash map or array to track the number of song durations with specific remainders when divided by 60.
+
+### Initial Thoughts 💭
+- We need to track the remainder of each song's duration modulo 60 to find pairs that add up to multiples of 60.
+- A hash map or a fixed-size array can be used to efficiently count how many song durations correspond to each remainder modulo 60.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as per the problem constraints.
+- The solution should efficiently handle large inputs (up to 60,000 elements).
+- If all songs have durations that are multiples of 60, every pair will be valid.
+- The input array size and the song duration values should be within the specified constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int numPairsDivisibleBy60(vector<int>& time) {
+    vector<int> c(60, 0);
+    int res = 0;
+    for(int t: time) {
+        res += c[(600 - t)%60];
+        c[t%60] += 1;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
+This function calculates the number of pairs in the given list of time intervals where the sum of their moduli (with respect to 60) is divisible by 60. It uses a frequency array to efficiently track the counts of time values modulo 60.
 
-### Problem Statement
-The task is to find the number of pairs of time durations from a given list that, when summed together, yield a total that is divisible by 60 seconds. Each time duration is represented in seconds, and we need to count the pairs without concern for their order (i.e., the pair `(t1, t2)` is the same as `(t2, t1)`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numPairsDivisibleBy60(vector<int>& time) {
+	```
+	Declares the function `numPairsDivisibleBy60` which takes a vector of integers `time` representing the time intervals, and returns the number of valid pairs whose sum is divisible by 60.
 
-For example, if we have a list of times `[30, 30, 60, 90, 120]`, we want to determine how many pairs of these times can be summed to produce a number divisible by 60.
+2. **Array Initialization**
+	```cpp
+	    vector<int> c(60, 0);
+	```
+	Initializes a vector `c` of size 60 to count the occurrences of remainders when each time value is divided by 60.
 
-### Approach
-To efficiently solve this problem, we can utilize a frequency array that tracks the remainders of the time durations when divided by 60. The key steps in the approach are:
-1. Initialize an array to count occurrences of each possible remainder (0 through 59).
-2. For each time duration, calculate the required complement that would make the sum of the pair divisible by 60.
-3. Update the frequency array accordingly and count valid pairs based on previous entries in the array.
+3. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the result variable `res` to 0, which will store the number of valid pairs found.
 
-This method allows us to achieve the result in linear time complexity, which is optimal for this type of problem.
+4. **Loop Start**
+	```cpp
+	    for(int t: time) {
+	```
+	Starts a loop that iterates through each element `t` in the input `time` vector.
 
-### Code Breakdown (Step by Step)
+5. **Pair Calculation**
+	```cpp
+	        res += c[(600 - t)%60];
+	```
+	For each time value `t`, adds to `res` the count of previously seen time values that form a valid pair with `t` (i.e., their sum is divisible by 60). This is done using the frequency array `c`.
 
-1. **Function Declaration**:
-   - The function `numPairsDivisibleBy60` is declared as a public member of the `Solution` class. It accepts a vector of integers (`time`) representing the time durations.
+6. **Frequency Update**
+	```cpp
+	        c[t%60] += 1;
+	```
+	Increments the count of occurrences for the current remainder `t%60` in the frequency array `c`.
 
-2. **Variable Initialization**:
-   - We initialize a vector `c` of size 60 to keep track of how many times each remainder (when divided by 60) has been seen. All entries are initially set to zero.
-   - A variable `res` is initialized to zero, which will hold the count of valid pairs that meet the criteria.
+7. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total number of valid pairs found.
 
-3. **Iterating Through Time Durations**:
-   - A `for` loop iterates over each duration `t` in the `time` vector.
-   - For each duration, we calculate the complement required for it to form a pair that is divisible by 60. This is achieved using the formula `(600 - t) % 60`, which computes what remainder is needed to make the total sum of `t` and another time divisible by 60.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Counting Valid Pairs**:
-   - The expression `c[(600 - t) % 60]` retrieves the count of previously seen times that can pair with the current time `t` to produce a sum divisible by 60. We add this count to `res`, incrementing the total pairs found so far.
+The time complexity is O(n) because we iterate through the list of songs once, and each operation (remainder calculation and count update) takes constant time.
 
-5. **Updating the Remainder Count**:
-   - After checking for valid pairs, we update the count for the current time’s remainder by incrementing `c[t % 60]`. This step ensures that the next time we encounter a matching duration, it will be included in the count of pairs.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-6. **Returning the Result**:
-   - After processing all durations, the function returns the total count of valid pairs stored in `res`.
+The space complexity is O(1) because we use a fixed-size array of length 60 to store remainder counts.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this function is O(n), where `n` is the number of elements in the `time` vector. This efficiency arises because each duration is processed in a single pass through the array.
-- **Space Complexity**: The space complexity is O(1), as the size of the frequency array `c` is fixed at 60, regardless of the input size. Thus, the algorithm uses a constant amount of extra space.
-
-### Conclusion
-The `numPairsDivisibleBy60` function presents an efficient solution for counting pairs of time durations that sum to values divisible by 60. By employing a frequency array to track the occurrences of remainders, this approach effectively reduces the complexity of the problem from a naive O(n^2) method to a linear O(n) solution.
-
-This implementation exemplifies how modular arithmetic can simplify the detection of conditions involving divisibility and complements, making it a robust technique for similar problems. Understanding and mastering this approach can significantly enhance problem-solving skills in algorithmic challenges, especially those involving combinatorial counting and modular conditions.
-
-Moreover, the clarity and efficiency of this solution make it a valuable addition to any programmer's toolkit, particularly in contexts such as competitive programming and technical interviews where performance and correctness are critical. The method can be generalized to solve various problems involving summation conditions across diverse data sets.
-
-In summary, the `numPairsDivisibleBy60` function serves as an excellent illustration of using counting techniques and modular arithmetic to tackle combinatorial problems efficiently, showcasing the beauty of algorithmic thinking in practical scenarios.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/)

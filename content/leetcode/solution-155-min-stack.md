@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "RfMroCV17-4"
 youtube_upload_date="2024-02-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/RfMroCV17-4/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,47 +28,94 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/RfMroCV17-4/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sequence of operations performed on a MinStack object. Operations include push, pop, top, and getMin.
+- **Example:** `[[], [-2], [0], [-3], [], [], [], []]`
+- **Constraints:**
+	- -231 <= val <= 231 - 1
+	- pop, top, and getMin operations will always be called on non-empty stacks.
+	- At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
 
-{{< highlight cpp >}}
-class Node {
-    public:
-    int val;
-    int mn;
-    Node* node;
-    Node(int val, int mn, Node* node) {
-        this->val = val;
-        this->mn = mn;
-        this->node = node;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output will be the results of the getMin, top, and pop operations, in sequence, as requested in the input.
+- **Example:** `[null, null, null, null, -3, null, 0, -2]`
+- **Constraints:**
+	- The result of each method call will be part of the output sequence.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To implement the stack operations with constant time complexity.
+
+- Use a linked list node to store each element and the minimum element at that point in the stack.
+- Each node should hold the current element and the minimum value up to that element.
+- The push operation should update the minimum if the current element is smaller than the current minimum.
+- The pop operation should simply remove the top node from the stack.
+- The top operation should return the value of the top node.
+- The getMin operation should return the minimum value stored in the top node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The stack is non-empty when pop, top, and getMin are called.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[], [-2], [0], [-3], [], [], [], []]`  \
+  **Explanation:** This series of operations initializes the MinStack and performs various operations on it. The stack changes as elements are pushed and popped, and getMin returns the current minimum element after each operation.
+
+{{< dots >}}
+## Approach 🚀
+A linked list approach is used where each node holds the element and the minimum value up to that point in the stack. This allows constant-time retrieval of the minimum element.
+
+### Initial Thoughts 💭
+- The stack needs to support constant-time retrieval of the minimum element.
+- Each node should store the current minimum value to achieve O(1) retrieval time for getMin.
+{{< dots >}}
+### Edge Cases 🌐
+- The stack will never be empty when pop, top, or getMin are called.
+- The solution must efficiently handle up to 30,000 operations.
+- Handle large and negative values for stack elements.
+- Each operation must run in O(1) time.
+{{< dots >}}
+## Code 💻
+```cpp
+int val;
+int mn;
+Node* node;
+Node(int val, int mn, Node* node) {
+    this->val = val;
+    this->mn = mn;
+    this->node = node;
+}
 };
 
 class MinStack {
 public:
-    Node* head;
-    MinStack() {
-        head = NULL;
+Node* head;
+MinStack() {
+    head = NULL;
+}
+
+void push(int val) {
+    if(!head) {
+        head = new Node(val, val, NULL);
+    } else {
+        head = new Node(val, min(head->mn, val), head);
     }
-    
-    void push(int val) {
-        if(!head) {
-            head = new Node(val, val, NULL);
-        } else {
-            head = new Node(val, min(head->mn, val), head);
-        }
-    }
-    
-    void pop() {
-        head = head->node;
-    }
-    
-    int top() {
-        return head->val;
-    }
-    
-    int getMin() {
-        return head->mn;
-    }
+}
+
+void pop() {
+    head = head->node;
+}
+
+int top() {
+    return head->val;
+}
+
+int getMin() {
+    return head->mn;
+}
 };
 
 /**
@@ -77,139 +125,161 @@ public:
  * obj->pop();
  * int param_3 = obj->top();
  * int param_4 = obj->getMin();
- */
-{{< /highlight >}}
----
-
-### 🌐 Min Stack: A Stack with Constant Time Minimum Retrieval
-
-In this problem, we are tasked with implementing a **Min Stack** that supports four operations, each performed in constant time **O(1)**:
-
-1. **`push(x)`**: Push an integer `x` onto the stack.
-2. **`pop()`**: Remove the top element from the stack.
-3. **`top()`**: Retrieve the top element from the stack.
-4. **`getMin()`**: Retrieve the minimum element from the stack.
-
-The challenge is to ensure that **`getMin()`** is also executed in constant time, even as elements are added or removed from the stack.
-
----
-
-### 💡 Approach
-
-To solve this, we use a stack with an enhancement where each node contains:
-- The **value** of the element itself (`val`).
-- The **minimum value** encountered so far in the stack (`mn`).
-- A pointer to the **next node** in the stack (`node`), forming a linked list structure.
-
-By storing the minimum value at each level, we can access the minimum element in **O(1)** time without needing to traverse the entire stack every time.
-
----
-
-### 📝 Code Breakdown (Step-by-Step)
-
-#### 🔹 Step 1: Define the `Node` Class
-
-```cpp
-class Node {
-public:
-    int val;  // Value of the current element in the stack
-    int mn;   // Minimum value of the stack up to this point
-    Node* node;  // Reference to the next node in the stack
-
-    Node(int val, int mn, Node* node) {
-        this->val = val;
-        this->mn = mn;
-        this->node = node;
-    }
-};
 ```
-- The `Node` class represents each element in the stack.
-- Each node stores:
-  - `val`: The value of the current element.
-  - `mn`: The minimum value up to this point.
-  - `node`: A reference to the next node in the stack.
 
-#### 🔹 Step 2: Define the `MinStack` Class
+This code defines a class MinStack that supports operations to push, pop, retrieve the top element, and get the minimum element in a stack.
 
-```cpp
-class MinStack {
-public:
-    Node* head;  // Head of the stack (top of the stack)
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int val;
+	```
+	Declare an integer 'val' to store the current value pushed to the stack.
 
-    MinStack() {
-        head = NULL;  // Initially, the stack is empty
-    }
-```
-- The `MinStack` class contains a `head` pointer that refers to the top of the stack.
+2. **Variable Declaration**
+	```cpp
+	int mn;
+	```
+	Declare an integer 'mn' to store the minimum value in the stack at the current point.
 
-#### 🔹 Step 3: Implement the `push` Method
+3. **Pointer Declaration**
+	```cpp
+	Node* node;
+	```
+	Declare a pointer 'node' that will point to the next node in the linked list.
 
-```cpp
-    void push(int val) {
-        if (!head) {
-            head = new Node(val, val, NULL);  // If the stack is empty, create a new node with the value
-        } else {
-            head = new Node(val, min(head->mn, val), head);  // Create a new node with the current value and the minimum value so far
-        }
-    }
-```
-- If the stack is empty, create a new node with the value `val` and set the minimum value as `val` itself.
-- If the stack is not empty, create a new node where:
-  - `val` is the current value.
-  - `mn` is the smaller of the current minimum (`head->mn`) and the new value (`val`).
-  - The new node points to the current `head`, making it the new top of the stack.
+4. **Constructor**
+	```cpp
+	Node(int val, int mn, Node* node) {
+	```
+	Constructor for Node which initializes 'val', 'mn', and 'node' fields.
 
-#### 🔹 Step 4: Implement the `pop` Method
+5. **Constructor Initialization**
+	```cpp
+	    this->val = val;
+	```
+	Set the value 'val' of the current node.
 
-```cpp
-    void pop() {
-        head = head->node;  // Move the head pointer to the next node (pop the top element)
-    }
-```
-- The `pop` method removes the top element by updating the `head` pointer to the next node (`head->node`).
+6. **Constructor Initialization**
+	```cpp
+	    this->mn = mn;
+	```
+	Set the minimum value 'mn' of the current node.
 
-#### 🔹 Step 5: Implement the `top` Method
+7. **Constructor Initialization**
+	```cpp
+	    this->node = node;
+	```
+	Set the 'node' pointer to point to the next node in the stack.
 
-```cpp
-    int top() {
-        return head->val;  // Return the value of the current top element
-    }
-```
-- The `top` method simply returns the value stored in the `head` node.
+8. **Class Declaration**
+	```cpp
+	class MinStack {
+	```
+	Define the MinStack class, which represents the stack with operations to push, pop, and retrieve minimum values.
 
-#### 🔹 Step 6: Implement the `getMin` Method
+9. **Pointer Declaration**
+	```cpp
+	Node* head;
+	```
+	Declare a pointer 'head' to the top node of the stack.
 
-```cpp
-    int getMin() {
-        return head->mn;  // Return the minimum value stored at the top of the stack
-    }
-};
-```
-- The `getMin` method returns the minimum value stored in the `mn` field of the `head` node.
+10. **Constructor**
+	```cpp
+	MinStack() {
+	```
+	Constructor for MinStack class, initializing the stack.
 
----
+11. **Initialization**
+	```cpp
+	    head = NULL;
+	```
+	Initialize the 'head' pointer to NULL, indicating the stack is empty.
 
-### 🔎 Complexity
+12. **Function Definition**
+	```cpp
+	void push(int val) {
+	```
+	Define the push function to add a new element to the stack.
 
-#### Time Complexity:
-- **`push`**: **O(1)** – Each `push` operation involves creating a new node and setting the minimum value, both of which are constant-time operations.
-- **`pop`**: **O(1)** – The `pop` operation only updates the `head` pointer, which is done in constant time.
-- **`top`**: **O(1)** – The `top` operation simply returns the value of the top node, which is done in constant time.
-- **`getMin`**: **O(1)** – The `getMin` operation returns the minimum value stored at the top of the stack, which is done in constant time.
+13. **Conditional Check**
+	```cpp
+	    if(!head) {
+	```
+	Check if the stack is empty (head is NULL).
 
-#### Space Complexity:
-- **O(n)**, where `n` is the number of elements in the stack. Each element is stored in a `Node` object, which includes three fields (`val`, `mn`, `node`).
+14. **Node Creation**
+	```cpp
+	        head = new Node(val, val, NULL);
+	```
+	Create a new node with the value 'val', setting its minimum to 'val' and pointing to NULL.
 
-### ✅ Conclusion
+15. **Else Block**
+	```cpp
+	    } else {
+	```
+	Else block executed when the stack is not empty.
 
-This **Min Stack** solution ensures that all operations, including `push`, `pop`, `top`, and `getMin`, are executed in **constant time**. The key idea is storing the minimum value at each level in the stack, so it can be efficiently retrieved without traversing the entire stack.
+16. **Node Creation**
+	```cpp
+	        head = new Node(val, min(head->mn, val), head);
+	```
+	Create a new node with the value 'val', updating the minimum to be the smaller of the current minimum and 'val'.
 
-#### Key Insights:
-- Storing the minimum value at each level of the stack ensures that we can retrieve it in **O(1)** time.
-- This approach provides an optimal solution for problems that require frequent access to the minimum element in a stack.
-- The space complexity is linear in terms of the number of elements, as each element is stored in a node with additional metadata.
+17. **Function Definition**
+	```cpp
+	void pop() {
+	```
+	Define the pop function to remove the top element from the stack.
 
-This implementation is highly efficient and suitable for applications requiring constant-time minimum retrieval, such as dynamic programming problems or scenarios involving stack-based algorithms.
+18. **Pointer Update**
+	```cpp
+	    head = head->node;
+	```
+	Update the 'head' pointer to point to the next node in the stack, effectively removing the current top node.
+
+19. **Function Definition**
+	```cpp
+	int top() {
+	```
+	Define the top function to return the value of the current top element of the stack.
+
+20. **Return Statement**
+	```cpp
+	    return head->val;
+	```
+	Return the value of the top node in the stack.
+
+21. **Function Definition**
+	```cpp
+	int getMin() {
+	```
+	Define the getMin function to retrieve the minimum value in the stack.
+
+22. **Return Statement**
+	```cpp
+	    return head->mn;
+	```
+	Return the minimum value of the top node in the stack.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+Each operation (push, pop, top, getMin) runs in constant time.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+In the worst case, the space complexity is O(n) due to the linked list nodes storing each element in the stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/min-stack/description/)
 

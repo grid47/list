@@ -14,118 +14,181 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of integers `nums` and a positive integer `k`, check if it is possible to divide the array into sets of `k` consecutive numbers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums` and a positive integer `k`.
+- **Example:** `Input: nums = [5, 1, 2, 3, 4, 3, 6, 4], k = 4`
+- **Constraints:**
+	- 1 <= k <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPossibleDivide(vector<int>& nums, int k) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The function should return `true` if it's possible to divide the array into sets of `k` consecutive numbers, and `false` otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- Return a boolean value.
 
-        map<int, int> cnt;
-        int n = nums.size();
-        for(int num : nums)
-            cnt[num]++;
-        
-        for(auto it : cnt) {
-            int frq = it.second;
-            if(frq > 0)
-            for(int i = 0; i < k; i++) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if it is possible to divide the array into sets of `k` consecutive numbers.
 
-                  if(cnt[it.first + i] < frq) return false;
-                else cnt[it.first + i] -= frq;
+- Count the frequency of each number in the array using a map.
+- For each number, check if a consecutive sequence starting from that number can be formed by checking its next `k-1` consecutive elements.
+- If a number is used in a valid sequence, reduce its frequency in the map.
+- Return `true` if all numbers are successfully grouped into sets of `k` consecutive numbers, otherwise return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` contains integers and is not empty.
+- The value of `k` is positive and less than or equal to the size of the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [5, 1, 2, 3, 4, 3, 6, 4], k = 4`  \
+  **Explanation:** The array can be grouped into the sets [1, 2, 3, 4] and [3, 4, 5, 6], so the output is `true`.
 
-            }
+- **Input:** `Input: nums = [2, 3, 4, 1], k = 3`  \
+  **Explanation:** It's not possible to divide the array into sets of 3 consecutive numbers, so the output is `false`.
+
+{{< dots >}}
+## Approach 🚀
+This problem can be solved by using a frequency map and trying to form consecutive sequences starting from the smallest available number.
+
+### Initial Thoughts 💭
+- We need to efficiently count and group elements to form consecutive sequences.
+- Using a map to track element frequencies will help us in forming the sets.
+- By reducing the frequency of elements as we use them to form sets, we ensure that each number is part of exactly one set.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is never empty according to the constraints.
+- Ensure the solution is optimized for large arrays of size up to 10^5.
+- If the number of elements in the array is less than `k`, it's impossible to form a valid set.
+- The solution must handle large input sizes efficiently, with time complexity ideally around O(n log n).
+{{< dots >}}
+## Code 💻
+```cpp
+bool isPossibleDivide(vector<int>& nums, int k) {
+
+    map<int, int> cnt;
+    int n = nums.size();
+    for(int num : nums)
+        cnt[num]++;
+    
+    for(auto it : cnt) {
+        int frq = it.second;
+        if(frq > 0)
+        for(int i = 0; i < k; i++) {
+
+              if(cnt[it.first + i] < frq) return false;
+            else cnt[it.first + i] -= frq;
+
         }
-        
-        return true;
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The problem requires us to determine whether an array of integers can be divided into `n` groups of `k` consecutive integers each, where `n` is the total number of groups formed. Each group must contain consecutive numbers, meaning that if the smallest number in a group is `x`, then the group must include `x`, `x+1`, ..., `x+k-1`.
-
-For example, given an input array like `[1, 2, 3, 3, 4, 4, 5, 6]` and `k = 4`, it should return `true` because we can form the following groups:
-- Group 1: `[1, 2, 3, 4]`
-- Group 2: `[3, 4, 5, 6]`
-
-Conversely, an input like `[1, 2, 3, 4, 5]` with `k = 4` would return `false`, as it's impossible to form two groups of four consecutive integers from this array.
-
-### Approach
-To solve this problem, we can follow these steps:
-
-1. **Count Frequencies**: Use a map (or unordered_map) to count the frequency of each integer in the array. This helps us track how many times each number appears.
-
-2. **Iterate Through Unique Numbers**: Iterate through the sorted unique numbers in the map. For each number, check if we can form a group starting with that number.
-
-3. **Form Groups**: For each number that still has a positive frequency, attempt to form a complete group of `k` consecutive integers. If any of the required integers in the group is not available in sufficient frequency, return `false`.
-
-4. **Adjust Frequencies**: If a group is formed successfully, reduce the frequency counts of all integers in that group.
-
-5. **Return Result**: If we can form all required groups, return `true`; otherwise, return `false`.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool isPossibleDivide(vector<int>& nums, int k) {
+    
+    return true;
+}
 ```
-- **Line 1-2**: The `Solution` class is defined, and the `isPossibleDivide` function begins, taking a vector `nums` and an integer `k` as parameters.
 
-```cpp
-        map<int, int> cnt;
-        int n = nums.size();
-        for(int num : nums)
-            cnt[num]++;
-```
-- **Lines 3-6**: We create a map `cnt` to count the frequency of each number in `nums`. The variable `n` stores the size of the input array. The loop iterates through `nums`, incrementing the count for each integer.
+This function checks if the array can be divided into groups of consecutive numbers of size 'k' using a greedy approach.
 
-```cpp
-        for(auto it : cnt) {
-            int frq = it.second;
-            if(frq > 0)
-```
-- **Lines 7-9**: We iterate through each unique number in the frequency map. The variable `frq` stores the current number's frequency. We check if `frq` is greater than zero, meaning there are still numbers available to form groups.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isPossibleDivide(vector<int>& nums, int k) {
+	```
+	Defines a function that checks if it is possible to divide the input array into groups of 'k' consecutive integers.
 
-```cpp
-            for(int i = 0; i < k; i++) {
-                if(cnt[it.first + i] < frq) return false;
-```
-- **Lines 10-12**: We enter a loop that runs `k` times to check for all consecutive integers starting from `it.first`. If the count of any required consecutive integer (i.e., `it.first + i`) is less than the frequency of the starting integer, we return `false`, as we can't form a complete group.
+2. **Frequency Calculation**
+	```cpp
+	    map<int, int> cnt;
+	```
+	Creates a map to store the frequency of each integer in the array.
 
-```cpp
-                else cnt[it.first + i] -= frq;
-            }
-        }
-        
-        return true;
-    }
-};
-```
-- **Lines 13-16**: If the check passes, we reduce the count for each integer in the group by `frq`, indicating that we've used these integers to form a group. Finally, after checking all unique numbers, if no conditions for failure were triggered, we return `true`, indicating it's possible to divide the array into groups of consecutive integers.
+3. **Array Length**
+	```cpp
+	    int n = nums.size();
+	```
+	Stores the size of the input array.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The time complexity is \(O(n + m)\), where \(n\) is the number of elements in the `nums` array and \(m\) is the number of unique integers in `nums`. The loop for counting frequencies runs in \(O(n)\), and the loop for forming groups runs in \(O(m \cdot k)\).
+4. **For Each Element**
+	```cpp
+	    for(int num : nums)
+	```
+	Iterates through each element of the input array.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(m)\) due to the storage required for the frequency map, where \(m\) is the number of unique integers in the input array.
+5. **Frequency Update**
+	```cpp
+	        cnt[num]++;
+	```
+	Increments the frequency count for each number in the map.
 
-### Conclusion
-The `isPossibleDivide` function effectively checks if an array can be divided into groups of consecutive integers using a frequency counting approach. By leveraging a map to track the number of occurrences of each integer, the function ensures that all necessary conditions for forming the groups are met.
+6. **For Each Frequency**
+	```cpp
+	    for(auto it : cnt) {
+	```
+	Iterates through each number and its frequency in the map.
 
-This solution is efficient, clear, and well-suited for competitive programming scenarios and coding interviews where similar problems are commonly encountered. Understanding this approach enhances one's problem-solving skills, especially in dealing with collections of numbers and constraints regarding their arrangement or grouping.
+7. **Get Frequency**
+	```cpp
+	        int frq = it.second;
+	```
+	Extracts the frequency of the current number.
 
-In summary, this detailed breakdown not only explains how the code works but also provides insight into the underlying algorithmic principles, making it a valuable resource for anyone looking to deepen their knowledge of algorithms and data structures.
+8. **Check Frequency**
+	```cpp
+	        if(frq > 0)
+	```
+	Checks if the frequency of the current number is greater than zero.
+
+9. **Loop for Consecutive Numbers**
+	```cpp
+	        for(int i = 0; i < k; i++) {
+	```
+	Iterates through the next 'k' consecutive numbers.
+
+10. **Return False if Not Enough Numbers**
+	```cpp
+	              if(cnt[it.first + i] < frq) return false;
+	```
+	If the frequency of any consecutive number is less than the required, returns false.
+
+11. **Update Frequency**
+	```cpp
+	            else cnt[it.first + i] -= frq;
+	```
+	Decreases the frequency of the current consecutive number as it is used in the group.
+
+12. **Return True**
+	```cpp
+	    return true;
+	```
+	Returns true if it is possible to divide the numbers into consecutive groups of size 'k'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n) - The best case occurs when the elements are already in the correct order and can be grouped quickly.
+- **Average Case:** O(n log n) - Sorting and grouping elements dominate the time complexity.
+- **Worst Case:** O(n log n) - The worst case is when sorting and grouping take the longest time.
+
+The time complexity is O(n log n) due to sorting the keys of the frequency map.
+
+### Space Complexity 💾
+- **Best Case:** O(n) - The space complexity remains O(n) even in the best case.
+- **Worst Case:** O(n) - The space complexity is O(n) because of the frequency map storing all elements.
+
+The space complexity is O(n) due to the frequency map used to track the elements.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/description/)
 

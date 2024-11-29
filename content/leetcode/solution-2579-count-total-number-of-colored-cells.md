@@ -14,158 +14,267 @@ img_src = ""
 youtube = "Gso3ss4daQI"
 youtube_upload_date="2023-03-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Gso3ss4daQI/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D array `ranges`, where each entry `ranges[i] = [starti, endi]` denotes a range of integers between `starti` and `endi` (inclusive). You need to split the ranges into two groups, ensuring that overlapping ranges belong to the same group. Return the total number of ways to split the ranges into two groups modulo (10^9 + 7).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array `ranges`, where each element is a pair of integers [starti, endi].
+- **Example:** `For example, `ranges = [[3, 6], [1, 5]]`.`
+- **Constraints:**
+	- 1 <= ranges.length <= 10^5
+	- 0 <= starti <= endi <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long coloredCells(int n) {
-        long long x = 1;
-        long long y = 4;
-        while(--n) {
-            x += y;
-            y += 4;
-        }
-        // 0 4 8 12
-        return x;
-        
-        queue<pair<int, int>> q;
-        unordered_map<int, unordered_map<int, int>> mp;
-        long long cnt = 1;
-        q.push({0,0});
-        mp[0][0] = true;
-        int dir[] = {0,1,0,-1,0};
-        while(--n) {
-            int sz = q.size();
-            while(sz--) {
-                auto it = q.front();
-                q.pop();
-                // cout << it.first << " " << it.second << "\n";
-                for(int i = 0; i < 4; i++) {
-                    int x = it.first + dir[i], y = it.second + dir[i + 1];
-                    if(mp.count(x) && mp[x].count(y)) continue;
-                    mp[x][y] = true;
-                    cnt++;
-                    q.push({x, y});
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the total number of ways to split the ranges into two groups modulo (10^9 + 7).
+- **Example:** `For input `ranges = [[3, 6], [1, 5]]`, the output is `2`.`
+- **Constraints:**
+	- The output should be returned modulo (10^9 + 7).
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the total number of ways to split the given ranges into two groups, ensuring that overlapping ranges are in the same group.
+
+- 1. Sort the ranges based on the starting value.
+- 2. Use a union-find data structure to group overlapping ranges.
+- 3. For each group of connected ranges, calculate the possible splits.
+- 4. Return the total number of valid ways to split the groups.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number of ranges can be large, so the solution must be efficient.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For input `ranges = [[3, 6], [1, 5]]`.`  \
+  **Explanation:** Both ranges overlap, so there are only two possible ways to split them: both in group 1 or both in group 2.
+
+{{< dots >}}
+## Approach 🚀
+We will use a union-find (disjoint-set) data structure to identify groups of overlapping ranges and calculate the number of ways to split these groups.
+
+### Initial Thoughts 💭
+- We need to efficiently group overlapping ranges.
+- By sorting the ranges and using a union-find structure, we can determine the number of disjoint sets of overlapping ranges.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one range.
+- For large inputs, ensure the union-find operations are efficient to handle up to 10^5 ranges.
+- If all ranges are disjoint, there are multiple ways to split them.
+- Handle the case where all ranges overlap or none of them overlap.
+{{< dots >}}
+## Code 💻
+```cpp
+long long coloredCells(int n) {
+    long long x = 1;
+    long long y = 4;
+    while(--n) {
+        x += y;
+        y += 4;
+    }
+    // 0 4 8 12
+    return x;
+    
+    queue<pair<int, int>> q;
+    unordered_map<int, unordered_map<int, int>> mp;
+    long long cnt = 1;
+    q.push({0,0});
+    mp[0][0] = true;
+    int dir[] = {0,1,0,-1,0};
+    while(--n) {
+        int sz = q.size();
+        while(sz--) {
+            auto it = q.front();
+            q.pop();
+            // cout << it.first << " " << it.second << "\n";
+            for(int i = 0; i < 4; i++) {
+                int x = it.first + dir[i], y = it.second + dir[i + 1];
+                if(mp.count(x) && mp[x].count(y)) continue;
+                mp[x][y] = true;
+                cnt++;
+                q.push({x, y});
             }
         }
-        return cnt;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding the number of colored cells in a pattern of cells arranged in a square grid, where the coloring pattern follows a specific formula based on an input number `n`. The cells are added progressively, with each additional layer expanding the previous one. Specifically, for each increase in `n`, a new row and column are added, and the number of colored cells is determined by a simple arithmetic progression. The task is to determine the total number of colored cells after `n` steps.
-
-### Approach
-
-The solution has two main components:
-1. **Mathematical Formula Approach** (the primary method).
-2. **Breadth-First Search (BFS) Approach** (used for validation or understanding).
-
-The mathematical formula approach is efficient and solves the problem directly using an arithmetic series, which calculates the total number of colored cells without explicitly simulating the process of coloring. The BFS approach is an alternative and simulates the coloring process step by step, ensuring each step of coloring is counted as a unique action.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Mathematical Formula Approach**:
-```cpp
-long long x = 1;
-long long y = 4;
-while (--n) {
-    x += y;
-    y += 4;
+    return cnt;
 }
-return x;
 ```
-- **Initialization**: 
-  - `x = 1` represents the initial colored cell (the center or starting point). 
-  - `y = 4` represents the number of additional cells added for each successive layer (the cells in the first layer surrounding the initial cell).
-  
-- **Main Loop**: 
-  - The loop runs for `n-1` times (since we already count the first colored cell).
-  - For each iteration:
-    - `x += y`: This adds the number of cells in the current layer (`y`) to the total number of colored cells `x`.
-    - `y += 4`: The number of cells added in the next layer increases by 4. This follows the pattern where each subsequent layer adds 4 more cells than the previous one.
 
-- **Final Result**: 
-  - After `n` iterations, the total number of colored cells is stored in `x`. This is the answer returned.
+This function calculates the number of colored cells in a grid, first using a simple formula, then with a breadth-first search (BFS) approach for counting valid cells based on movement directions.
 
-#### 2. **Breadth-First Search (BFS) Approach** (Alternative Approach):
-```cpp
-queue<pair<int, int>> q;
-unordered_map<int, unordered_map<int, int>> mp;
-long long cnt = 1;
-q.push({0, 0});
-mp[0][0] = true;
-int dir[] = {0, 1, 0, -1, 0};
-while (--n) {
-    int sz = q.size();
-    while (sz--) {
-        auto it = q.front();
-        q.pop();
-        for (int i = 0; i < 4; i++) {
-            int x = it.first + dir[i], y = it.second + dir[i + 1];
-            if (mp.count(x) && mp[x].count(y)) continue;
-            mp[x][y] = true;
-            cnt++;
-            q.push({x, y});
-        }
-    }
-}
-return cnt;
-```
-- **Initialization**:
-  - A queue `q` is initialized, which will hold pairs of `(x, y)` coordinates representing the cells that are being colored.
-  - A map `mp` is used to track the visited cells. It ensures that a cell is colored only once. 
-  - The `cnt` variable tracks the number of colored cells, initialized to 1 (the starting cell).
-  - The queue is initialized with the starting point `(0, 0)`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long coloredCells(int n) {
+	```
+	Define a function to calculate the number of colored cells for a given value of n.
 
-- **Main BFS Loop**: 
-  - The outer `while` loop runs `n-1` times, corresponding to each step of the coloring process.
-  - Inside the loop:
-    - `sz = q.size()`: This represents the number of cells that will be colored in this step.
-    - A second `while` loop processes each cell in the current layer:
-      - For each cell, four possible directions are checked (up, down, left, and right).
-      - If a neighboring cell has already been visited (exists in `mp`), it's skipped to avoid re-coloring.
-      - If a neighboring cell hasn't been visited, it is added to the queue and marked as visited in the `mp` map.
-      - The `cnt` variable is incremented to count the newly colored cell.
+2. **Variable Initialization**
+	```cpp
+	    long long x = 1;
+	```
+	Initialize variable x to represent the initial colored cells count.
 
-- **Final Result**:
-  - The BFS approach ensures that after `n` steps, the total number of colored cells is tracked in `cnt`, which is returned as the result.
+3. **Variable Initialization**
+	```cpp
+	    long long y = 4;
+	```
+	Initialize variable y for the number of colored cells in subsequent rows.
 
-### Complexity Analysis
+4. **Looping**
+	```cpp
+	    while(--n) {
+	```
+	Start a loop that continues until n is reduced to zero.
 
-#### Time Complexity:
-- **Mathematical Formula Approach**:
-  - The time complexity is **O(n)** due to the loop that runs `n-1` times, where `n` is the input number. This is because we update the count of colored cells and the number of cells added for each layer in constant time.
+5. **Cell Calculation**
+	```cpp
+	        x += y;
+	```
+	Add the current value of y to x, incrementing the count of colored cells.
 
-- **BFS Approach**:
-  - The BFS approach processes each cell once. In the worst case, the queue will contain all the cells in the grid, and the program needs to check each neighboring cell for each step.
-  - Since we are using a grid-like structure, the BFS time complexity can be considered **O(n)**, where `n` represents the number of steps (each step corresponds to a layer of cells).
-  - The inner loops check each direction for each cell, but they operate in constant time, making the overall time complexity proportional to the number of colored cells.
+6. **Cell Calculation**
+	```cpp
+	        y += 4;
+	```
+	Increase y by 4 to account for the new number of cells in the next row.
 
-#### Space Complexity:
-- **Mathematical Formula Approach**:
-  - The space complexity is **O(1)** because no extra data structures are used. We are only storing a few variables for tracking the counts of cells and iterations.
+7. **Return Statement**
+	```cpp
+	    return x;
+	```
+	Return the final value of x, which represents the total number of colored cells.
 
-- **BFS Approach**:
-  - The space complexity is **O(m * m)**, where `m` is the maximum size of the grid that can be formed based on the value of `n`. The space complexity is due to the storage of visited cells in the `mp` map and the queue holding the cells that are currently being processed.
+8. **Queue Initialization**
+	```cpp
+	    queue<pair<int, int>> q;
+	```
+	Initialize a queue to store the coordinates of the cells to be processed.
 
-### Conclusion
+9. **Map Initialization**
+	```cpp
+	    unordered_map<int, unordered_map<int, int>> mp;
+	```
+	Initialize a map to track the visited cells, ensuring no repeats in processing.
 
-The problem can be efficiently solved using a mathematical formula, where the number of colored cells follows an arithmetic progression. This approach has a time complexity of **O(n)** and a space complexity of **O(1)**, making it highly efficient.
+10. **Counter Initialization**
+	```cpp
+	    long long cnt = 1;
+	```
+	Initialize the counter variable cnt to 1, accounting for the starting cell.
 
-Alternatively, the BFS approach can be used to simulate the coloring process step by step. This method, while valid, has a higher space complexity due to the need for additional data structures and has a time complexity of **O(n)**, where `n` is the number of layers.
+11. **Queue Push**
+	```cpp
+	    q.push({0,0});
+	```
+	Push the starting cell coordinates (0, 0) into the queue.
 
-The mathematical formula solution is preferable for large inputs due to its simplicity and efficiency. The BFS approach provides an alternative method that may be helpful for understanding the problem conceptually or when working with smaller grids.
+12. **Map Setup**
+	```cpp
+	    mp[0][0] = true;
+	```
+	Mark the starting cell (0, 0) as visited in the map.
+
+13. **Direction Setup**
+	```cpp
+	    int dir[] = {0,1,0,-1,0};
+	```
+	Define an array of directions to move in the grid (right, down, left, up).
+
+14. **Looping**
+	```cpp
+	    while(--n) {
+	```
+	Start a loop to process each level of BFS.
+
+15. **Queue Size**
+	```cpp
+	        int sz = q.size();
+	```
+	Store the current size of the queue to process each element at this level.
+
+16. **Inner Loop**
+	```cpp
+	        while(sz--) {
+	```
+	Loop through the current level of BFS by processing the elements in the queue.
+
+17. **Queue Processing**
+	```cpp
+	            auto it = q.front();
+	```
+	Get the front element from the queue for processing.
+
+18. **Queue Pop**
+	```cpp
+	            q.pop();
+	```
+	Remove the front element from the queue after processing it.
+
+19. **Direction Loop**
+	```cpp
+	            for(int i = 0; i < 4; i++) {
+	```
+	Loop through all four possible movement directions (right, down, left, up).
+
+20. **Coordinate Calculation**
+	```cpp
+	                int x = it.first + dir[i], y = it.second + dir[i + 1];
+	```
+	Calculate the new coordinates after moving in the current direction.
+
+21. **Map Check**
+	```cpp
+	                if(mp.count(x) && mp[x].count(y)) continue;
+	```
+	Check if the new coordinates have already been visited. If so, continue to the next direction.
+
+22. **Mark Visited**
+	```cpp
+	                mp[x][y] = true;
+	```
+	Mark the new coordinates as visited in the map.
+
+23. **Increment Counter**
+	```cpp
+	                cnt++;
+	```
+	Increment the counter to reflect the newly visited cell.
+
+24. **Queue Push**
+	```cpp
+	                q.push({x, y});
+	```
+	Push the new coordinates into the queue for further processing.
+
+25. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	Return the final count of the visited cells.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, where n is the number of ranges.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the ranges and union-find structures.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-total-number-of-colored-cells/description/)
 

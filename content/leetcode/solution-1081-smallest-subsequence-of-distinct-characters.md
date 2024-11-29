@@ -14,142 +14,211 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s, and your task is to return the lexicographically smallest subsequence of s that contains all the distinct characters of s exactly once. The subsequence must be in the same order as the original string, but the characters should not repeat.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s that contains lowercase English letters.
+- **Example:** `Input: s = "zabcde"`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- s consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string smallestSubsequence(string s) {
-        int n = s.size();
-        string res = "";
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the lexicographically smallest subsequence containing all the distinct characters of s exactly once.
+- **Example:** `Output: "abcde"`
+- **Constraints:**
+	- The subsequence should preserve the order of the original string.
 
-        vector<int> in(26, 0), seen(26, 0);
-        for (int i = 0; i < n; i++)
-            in[s[i] - 'a'] = i;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the lexicographically smallest subsequence of the string containing each distinct character exactly once while maintaining the order.
 
-        vector<int> stk;
-        for (int i = 0; i < n; i++) {
-            int c = s[i] - 'a';
-            if (seen[c]++ > 0) continue;
-            while (!stk.empty() && stk.back() > c && i < in[stk.back()]) {
-                seen[stk.back()] = 0;
-                stk.pop_back();
-            }
-            stk.push_back(c);
+- 1. Count the last occurrence index of each character in the string.
+- 2. Traverse the string and construct the result by considering whether to add each character based on its lexicographical order and ensuring that it doesn't repeat.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is non-empty and contains lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "bcabc"`  \
+  **Explanation:** In this example, the lexicographically smallest subsequence that contains all the distinct characters exactly once is "abc".
+
+- **Input:** `Input: s = "cbacdcbc"`  \
+  **Explanation:** In this case, the lexicographically smallest subsequence is "acdb".
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a greedy algorithm that ensures the lexicographically smallest subsequence. By keeping track of the characters we have seen and the last occurrence of each character, we can decide which character to add to the result at each step.
+
+### Initial Thoughts 💭
+- We need to ensure that each character appears only once in the subsequence and that the subsequence is the lexicographically smallest.
+- Using a stack can help us maintain the order and ensure the smallest lexicographical subsequence.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, return an empty string.
+- The solution must handle large strings (up to 1000 characters) efficiently.
+- If the string consists of the same repeated character, the result should be that character alone.
+- The solution should be optimized to handle the input string within the provided constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+string smallestSubsequence(string s) {
+    int n = s.size();
+    string res = "";
+
+    vector<int> in(26, 0), seen(26, 0);
+    for (int i = 0; i < n; i++)
+        in[s[i] - 'a'] = i;
+
+    vector<int> stk;
+    for (int i = 0; i < n; i++) {
+        int c = s[i] - 'a';
+        if (seen[c]++ > 0) continue;
+        while (!stk.empty() && stk.back() > c && i < in[stk.back()]) {
+            seen[stk.back()] = 0;
+            stk.pop_back();
         }
-
-        for (int i = 0; i < stk.size(); i++)
-            res += ('a' + stk[i]);
-
-        return res;
+        stk.push_back(c);
     }
+
+    for (int i = 0; i < stk.size(); i++)
+        res += ('a' + stk[i]);
+
+    return res;
+}
 };
+```
 
-// that problem was there were
-{{< /highlight >}}
----
+The `smallestSubsequence` function returns the lexicographically smallest subsequence of characters from the given string, ensuring that each character appears exactly once.
 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string smallestSubsequence(string s) {
+	```
+	This line defines the function `smallestSubsequence`, which takes a string `s` as input and will return the smallest subsequence of characters from `s`.
 
+2. **Variable Initialization**
+	```cpp
+	    int n = s.size();
+	```
+	The size of the string `s` is stored in the variable `n`.
 
-### Problem Statement
-The task is to find the smallest lexicographical subsequence of a string that contains all unique characters. A subsequence is defined as a sequence derived from another sequence where elements are deleted without changing the order of the remaining elements. The goal is to ensure that the resultant subsequence is as small as possible while including each character only once and maintaining the lexicographical order.
+3. **Result Initialization**
+	```cpp
+	    string res = "";
+	```
+	An empty string `res` is initialized to build the result subsequence.
 
-### Approach
-To solve this problem efficiently, we will use a greedy algorithm with the help of a stack. The basic idea is to iterate through the string while maintaining a stack that contains the characters of the smallest subsequence. We will also use two auxiliary arrays: one to track the last occurrence of each character and another to check if a character is already included in the stack.
+4. **Vector Initialization**
+	```cpp
+	    vector<int> in(26, 0), seen(26, 0);
+	```
+	Two vectors are initialized: `in` stores the last occurrence index of each character, and `seen` tracks whether a character is already in the result subsequence.
 
-1. **Track Last Occurrences**: First, we traverse the string to record the last index of each character.
-2. **Use a Stack**: We maintain a stack to build the smallest subsequence. As we iterate through the string:
-   - If the character is already in the stack, we skip it.
-   - If the current character is smaller than the character at the top of the stack, and if the character at the top of the stack appears later in the string, we pop the stack.
-   - Finally, we push the current character onto the stack.
-3. **Build Result**: After processing all characters, we convert the stack to a string, which represents the desired smallest subsequence.
+5. **Loop - Storing Last Occurrence**
+	```cpp
+	    for (int i = 0; i < n; i++)
+	```
+	This loop iterates over each character in the string `s`.
 
-### Code Breakdown (Step by Step)
+6. **Store Last Occurrence**
+	```cpp
+	        in[s[i] - 'a'] = i;
+	```
+	For each character in `s`, the index of its last occurrence is stored in the `in` vector.
 
-1. **Class Definition**: The class `Solution` contains the method `smallestSubsequence` that will implement the solution.
+7. **Vector Initialization - Stack**
+	```cpp
+	    vector<int> stk;
+	```
+	An empty vector `stk` is initialized to act as a stack for the characters that will form the smallest subsequence.
 
-   ```cpp
-   class Solution {
-   public:
-       string smallestSubsequence(string s) {
-   ```
+8. **Loop - Main Logic**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	This loop processes each character in the string `s`.
 
-2. **Initialization**: We declare a string `res` to hold the result and two vectors, `in` and `seen`, to track the last occurrence of each character and whether a character has been added to the stack, respectively.
+9. **Character Calculation**
+	```cpp
+	        int c = s[i] - 'a';
+	```
+	This line calculates the index `c` of the character `s[i]` relative to 'a', where 'a' corresponds to 0, 'b' to 1, and so on.
 
-   ```cpp
-           int n = s.size();
-           string res = "";
-           vector<int> in(26, 0), seen(26, 0);
-   ```
+10. **Skip Duplicates**
+	```cpp
+	        if (seen[c]++ > 0) continue;
+	```
+	This checks if the character `s[i]` has already been added to the result subsequence. If it has, it skips the current iteration.
 
-3. **Recording Last Occurrences**: We iterate through the string and record the last index for each character.
+11. **Remove Ineligible Characters**
+	```cpp
+	        while (!stk.empty() && stk.back() > c && i < in[stk.back()]) {
+	```
+	This while loop removes characters from the stack if they are lexicographically larger than the current character `c` and can still appear later in the string.
 
-   ```cpp
-           for (int i = 0; i < n; i++)
-               in[s[i] - 'a'] = i;
-   ```
+12. **Reset Seen for Popped Characters**
+	```cpp
+	            seen[stk.back()] = 0;
+	```
+	This resets the `seen` status for the character that is being removed from the stack.
 
-4. **Stack for Result**: We declare a vector `stk` to act as a stack for building our result.
+13. **Pop Character from Stack**
+	```cpp
+	            stk.pop_back();
+	```
+	This removes the character from the stack as it is no longer needed in the result subsequence.
 
-   ```cpp
-           vector<int> stk;
-   ```
+14. **Push Current Character**
+	```cpp
+	        stk.push_back(c);
+	```
+	The current character `c` is pushed onto the stack for inclusion in the subsequence.
 
-5. **Main Loop**: We iterate through each character in the string `s`.
+15. **Build Result Subsequence**
+	```cpp
+	    for (int i = 0; i < stk.size(); i++)
+	```
+	This loop iterates over the stack to build the result subsequence from the characters stored in the stack.
 
-   ```cpp
-           for (int i = 0; i < n; i++) {
-               int c = s[i] - 'a';
-   ```
+16. **Construct Result String**
+	```cpp
+	        res += ('a' + stk[i]);
+	```
+	For each character in the stack, its corresponding character (using the index) is added to the result string `res`.
 
-6. **Skip Seen Characters**: If the character has already been added to the stack (i.e., `seen[c]` is greater than zero), we skip it.
+17. **Return Result**
+	```cpp
+	    return res;
+	```
+	The resulting subsequence `res` is returned as the output.
 
-   ```cpp
-               if (seen[c]++ > 0) continue;
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-7. **Pop from Stack**: While the stack is not empty, and the top character of the stack is lexicographically larger than the current character, we check if the top character appears later in the string using the `in` array. If it does, we can safely pop it from the stack.
+The algorithm processes each character of the string once, making the time complexity linear in terms of the length of the string.
 
-   ```cpp
-               while (!stk.empty() && stk.back() > c && i < in[stk.back()]) {
-                   seen[stk.back()] = 0;
-                   stk.pop_back();
-               }
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(26)
 
-8. **Push Current Character**: We push the current character onto the stack.
+The space complexity is O(26) because the maximum number of distinct characters is 26, corresponding to the lowercase English alphabet.
 
-   ```cpp
-               stk.push_back(c);
-           }
-   ```
-
-9. **Build the Result String**: Finally, we convert the stack into a string `res` by appending the characters.
-
-   ```cpp
-           for (int i = 0; i < stk.size(); i++)
-               res += ('a' + stk[i]);
-           return res;
-       }
-   };
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of the algorithm is \(O(N)\), where \(N\) is the length of the input string. This is because we make a single pass through the string and each character is pushed and popped from the stack at most once.
-  
-- **Space Complexity**: The space complexity is \(O(1)\) in terms of the character set, as we are using fixed-size arrays of size 26 for the English alphabet. The stack can grow up to the size of the input string in the worst case, leading to a potential space complexity of \(O(N)\) for the stack itself.
-
-### Conclusion
-The provided C++ code efficiently solves the problem of finding the smallest lexicographical subsequence of a string containing all unique characters. By leveraging a greedy approach with a stack, the algorithm ensures that each character is included only once and that the order is maintained, resulting in an optimal solution.
-
-This algorithm is useful in various applications, such as text processing, data compression, and similar problems where maintaining unique characters in a specific order is essential. Its linear time complexity and minimal space usage make it a robust choice for efficiently handling this type of problem.
-
-In summary, the `smallestSubsequence` method demonstrates a clear and effective technique to achieve the desired result, showcasing the power of greedy algorithms and stack data structures in solving string-related challenges.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-subsequence-of-distinct-characters/description/)

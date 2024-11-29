@@ -14,121 +14,142 @@ img_src = ""
 youtube = "MAECrl0V0xs"
 youtube_upload_date="2022-02-13"
 youtube_thumbnail="https://i.ytimg.com/vi/MAECrl0V0xs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of positive integers representing the number of magic beans in each bag. Your task is to remove some beans (possibly none) from each bag so that the number of beans in each remaining non-empty bag is equal. You need to find the minimum number of beans to remove.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers, where each integer represents the number of beans in a particular magic bag.
+- **Example:** `[8, 3, 7, 5]`
+- **Constraints:**
+	- 1 <= beans.length <= 10^5
+	- 1 <= beans[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long minimumRemoval(vector<int>& beans) {
-        int n = beans.size();
-        long long sum = accumulate(begin(beans), end(beans), 0L);
-        sort(beans.begin(), beans.end());
-        long long res = LLONG_MAX;
-        for (int i = 0; i < n; i++)
-            res = min(res, sum - (long long) (n - i) * beans[i]);
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the minimum number of beans that need to be removed.
+- **Example:** `7`
+- **Constraints:**
+	- The output must be an integer value representing the minimum beans to be removed.
 
-### Problem Statement
-You are given an array `beans`, where each element represents the number of beans in a respective pile. The goal is to determine the minimum number of beans you need to remove such that the number of beans in all piles is equal. However, the removal should ensure that the remaining piles all have the same number of beans, and the number of beans removed should be minimized.
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to remove the minimum number of beans while ensuring that all remaining non-empty bags have the same number of beans.
 
-You need to return the minimum number of beans to remove to achieve this.
+- Calculate the sum of all beans in the array.
+- Sort the array to facilitate efficient calculation of removals.
+- For each possible number of beans to keep in each bag, compute the total removals required, and track the minimum removals.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number of bags (beans.length) is at least 1.
+- The integers representing the beans in each bag are positive.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[8, 3, 7, 5]`  \
+  **Explanation:** In this example, the optimal solution is to remove 7 beans in total by making the bags have 3 beans each.
 
-### Approach
-The problem can be broken down into the following steps:
-1. **Compute the Total Sum of Beans**:
-   - First, calculate the total number of beans in all piles. This helps in determining how many beans would be removed from each pile.
-   
-2. **Sort the Array**:
-   - To simplify the process of calculating the beans to remove, sort the array. This allows you to efficiently compute the number of beans left after removing piles.
+{{< dots >}}
+## Approach 🚀
+The approach is to calculate the total sum of beans and explore the different possible configurations of bags with equal numbers of beans.
 
-3. **Iterate through Sorted Array**:
-   - After sorting the array, the number of beans left in each pile (after removal) will be based on the size of the piles that remain. For each pile, compute the number of beans you would remove and keep track of the minimum result.
-
-4. **Calculation of Beans to Remove**:
-   - For each index in the sorted array, compute how many beans would be removed if all piles except for the current pile (and those smaller than it) were kept. This is done by subtracting the number of beans in the current pile from the total sum and adjusting it according to the number of piles that remain.
-
-5. **Return the Result**:
-   - The result will be the minimum number of beans that can be removed to make the piles equal in size.
-
-### Code Breakdown (Step by Step)
-1. **Compute the Total Sum of Beans**:
-   ```cpp
-   long long sum = accumulate(begin(beans), end(beans), 0L);
-   ```
-   - `accumulate` is a standard function from `<numeric>` that computes the sum of all elements in the `beans` array. The `0L` ensures that the sum is computed as a `long long` type to prevent overflow.
-
-2. **Sort the Array**:
-   ```cpp
-   sort(beans.begin(), beans.end());
-   ```
-   - Sorting the array simplifies the logic of figuring out how to minimize the beans to be removed. Sorting ensures that we can easily calculate how many beans remain in the piles that are left behind.
-
-3. **Iterate and Calculate the Minimum Removal**:
-   ```cpp
-   long long res = LLONG_MAX;
-   for (int i = 0; i < n; i++)
-       res = min(res, sum - (long long) (n - i) * beans[i]);
-   ```
-   - The variable `res` is initialized to `LLONG_MAX` (the largest possible value for a `long long`), which will store the minimum number of beans to be removed.
-   - The loop iterates through each pile, and for each iteration, the number of beans removed is computed as the total sum minus the number of beans left in the remaining piles (`(n - i) * beans[i]`).
-
-4. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - After iterating through all possible scenarios, the smallest value in `res` will be returned, representing the minimum number of beans that need to be removed to make the remaining piles equal.
-
-### Example Walkthrough
-Let's walk through an example with the array `beans = [4, 3, 2, 5]`:
-- **Step 1: Calculate the Total Sum of Beans**:
-  - Sum = `4 + 3 + 2 + 5 = 14`.
-
-- **Step 2: Sort the Array**:
-  - Sorted array = `[2, 3, 4, 5]`.
-
-- **Step 3: Iterate and Compute the Minimum Removal**:
-  - For each index `i` in the sorted array, calculate how many beans would remain if the piles from index `i` to the end are kept, and then determine how many beans need to be removed.
-
-  - **Iteration 1 (i = 0)**: Remove piles smaller than or equal to `beans[0] = 2`. 
-    - Remaining beans: `(4 - 0) * 2 = 8`.
-    - Beans to remove: `14 - 8 = 6`.
+### Initial Thoughts 💭
+- Sorting the array allows efficient calculation of the total number of beans to be removed.
+- The problem involves iterating over the bags to find the most efficient way of removing beans.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will not be empty as per the constraints.
+- Ensure the solution handles large arrays efficiently with lengths up to 10^5.
+- Consider cases where all the bags contain the same number of beans.
+- Ensure the solution works within the provided input constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+long long minimumRemoval(vector<int>& beans) {
+    int n = beans.size();
+    long long sum = accumulate(begin(beans), end(beans), 0L);
+    sort(beans.begin(), beans.end());
+    long long res = LLONG_MAX;
+    for (int i = 0; i < n; i++)
+        res = min(res, sum - (long long) (n - i) * beans[i]);
     
-  - **Iteration 2 (i = 1)**: Remove piles smaller than or equal to `beans[1] = 3`.
-    - Remaining beans: `(4 - 1) * 3 = 9`.
-    - Beans to remove: `14 - 9 = 5`.
-  
-  - **Iteration 3 (i = 2)**: Remove piles smaller than or equal to `beans[2] = 4`.
-    - Remaining beans: `(4 - 2) * 4 = 8`.
-    - Beans to remove: `14 - 8 = 6`.
-  
-  - **Iteration 4 (i = 3)**: Remove piles smaller than or equal to `beans[3] = 5`.
-    - Remaining beans: `(4 - 3) * 5 = 5`.
-    - Beans to remove: `14 - 5 = 9`.
+    return res;
+}
+```
 
-  - The minimum beans to remove is `5` (from iteration 2).
+This code defines a function `minimumRemoval` that minimizes the number of beans to be removed to balance the remaining beans. It calculates the minimal sum of removal by sorting the input and iterating over the array.
 
-- **Step 4: Return the Result**:
-  - The result is `5`, meaning 5 beans should be removed to make the remaining piles equal.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long minimumRemoval(vector<int>& beans) {
+	```
+	Define the function `minimumRemoval`, which takes a vector of integers `beans` and returns a long long integer. This function aims to calculate the minimum beans that need to be removed.
 
-### Complexity
-- **Time Complexity**:
-  - O(n log n) due to the sorting step, where `n` is the number of piles. The iteration through the sorted array takes O(n), and the sorting dominates the overall complexity.
+2. **Variable Initialization**
+	```cpp
+	    int n = beans.size();
+	```
+	Initialize the variable `n` to the size of the `beans` vector, representing the total number of elements in the vector.
 
-- **Space Complexity**:
-  - O(1) as the algorithm only uses a few additional variables for the calculations and does not require extra space proportional to the input size.
+3. **Sum Calculation**
+	```cpp
+	    long long sum = accumulate(begin(beans), end(beans), 0L);
+	```
+	Use the `accumulate` function to calculate the total sum of the `beans` vector. The initial value of the sum is 0L, and the result is stored in `sum`.
 
-### Conclusion
-The algorithm efficiently solves the problem by utilizing a combination of sorting and selection strategies to minimize the number of beans removed. The time complexity of O(n log n) ensures that the solution works well even for larger arrays. By breaking the problem into logical steps—sorting, calculating sums, and iterating for the minimum—this approach provides a clear, effective solution for the problem at hand.
+4. **Sorting**
+	```cpp
+	    sort(beans.begin(), beans.end());
+	```
+	Sort the `beans` vector in ascending order. Sorting helps in calculating the minimum removals efficiently.
+
+5. **Variable Initialization**
+	```cpp
+	    long long res = LLONG_MAX;
+	```
+	Initialize the variable `res` to `LLONG_MAX`, representing the minimum removal result, which will be updated during the iteration.
+
+6. **Loop Start**
+	```cpp
+	    for (int i = 0; i < n; i++)
+	```
+	Start a loop that iterates through each element in the `beans` vector. The variable `i` tracks the current index.
+
+7. **Update Minimum Removal**
+	```cpp
+	        res = min(res, sum - (long long) (n - i) * beans[i]);
+	```
+	For each iteration, update `res` with the minimum value between the current `res` and the difference between `sum` and the calculated removal cost for the current index `i`.
+
+8. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the final result, which is the minimum number of beans that need to be removed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which takes O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for sorting the array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/removing-minimum-number-of-magic-beans/description/)
 

@@ -14,159 +14,171 @@ img_src = ""
 youtube = "FygGZScawYs"
 youtube_upload_date="2023-04-03"
 youtube_thumbnail="https://i.ytimg.com/vi/FygGZScawYs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of people where each person has a certain weight, and a boat with a weight limit. Each boat can carry at most two people at the same time, as long as their combined weight does not exceed the boat's weight limit. Your task is to determine the minimum number of boats required to rescue everyone.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers where each integer represents the weight of a person. You are also given a weight limit that each boat can carry.
+- **Example:** `Input: people = [2, 3, 5, 8], limit = 8`
+- **Constraints:**
+	- 1 <= people.length <= 5 * 10^4
+	- 1 <= people[i] <= limit <= 3 * 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numRescueBoats(vector<int>& people, int limit) {
-        sort(people.begin(), people.end());
-        int lo = 0, hi = people.size() - 1;
-        int boats = 0;
-        while(lo <= hi) {
-            
-            if(people[lo] + people[hi] <= limit) {
-                lo += 1;
-                hi -= 1;
-            } else hi -= 1;
-            
-            boats++;
-        }
-        
-        return boats;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** You should return a single integer, which represents the minimum number of boats required to carry all the people.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output is a single integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of boats used while ensuring that no boat carries more than its weight limit.
 
-In this problem, we are tasked with determining the minimum number of boats required to rescue all people in a given list. Each person has a specific weight, and each boat has a weight limit. The key rule is that a boat can carry at most two people, and the combined weight of the two people cannot exceed the weight limit of the boat. Given an array `people` representing the weight of each person and an integer `limit` representing the maximum weight a boat can carry, we need to calculate the minimum number of boats required to rescue everyone.
+- Sort the list of people by their weight.
+- Use a two-pointer technique where one pointer starts at the lightest person and the other starts at the heaviest.
+- If the combined weight of the two people is within the limit, they can share a boat.
+- If not, the heavier person takes a boat alone.
+- Continue this process until all people have been assigned to a boat.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array contains weights of people that range between 1 and the boat's limit.
+- There are no edge cases where a person weighs more than the boat's limit, as this will never be the case based on the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: people = [2, 3, 5, 8], limit = 8`  \
+  **Explanation:** The sorted people array is [2, 3, 5, 8]. The heaviest person (8) takes a boat alone, the next pair (2, 5) can share a boat, leaving 3 to take a boat on their own. Hence, 3 boats are needed.
 
-For example, if the people are `[3, 2, 2, 1]` and the limit is `3`, the minimum number of boats needed would be `3`, as the optimal pairing would be:
-- Pair the two people with weight 1 and 2 (total weight 3),
-- Pair the two people with weight 2 and 3 (total weight 3).
+- **Input:** `Input: people = [4, 2, 6, 3], limit = 7`  \
+  **Explanation:** The sorted people array is [2, 3, 4, 6]. The pair (2, 6) shares a boat, and the pair (3, 4) shares a boat. Hence, 2 boats are needed.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution can be approached using a greedy strategy with a two-pointer technique. By sorting the array of people, we can try to pair the lightest and heaviest people to minimize the number of boats used.
 
-The problem involves finding an optimal way to pair people in a way that minimizes the number of boats required. The greedy approach is ideal for this type of problem, and the following approach can be used:
-
-1. **Sort the Array**: First, we sort the array of people by their weights. Sorting allows us to try pairing the lightest person with the heaviest person, which often leads to optimal groupings.
-
-2. **Two Pointers**: We use two pointers, one starting at the lightest person (beginning of the array) and the other at the heaviest person (end of the array). These two pointers will help us evaluate possible pairings:
-   - If the sum of the lightest and heaviest person (pointed by `lo` and `hi`) is less than or equal to the boat's weight limit, we pair them together and move both pointers inward.
-   - If they can't be paired (i.e., their combined weight exceeds the limit), we place the heaviest person alone on a boat and only move the `hi` pointer.
-
-3. **Greedy Strategy**: The greedy approach works here because, by sorting the people and always attempting to pair the lightest and heaviest person, we maximize the chance of fitting people within the weight limit, thus minimizing the number of boats.
-
-4. **Counting Boats**: Each time we successfully assign two people to a boat, we increment the boat count. If only one person is placed on the boat, we still count one boat for them.
-
-### Code Breakdown (Step by Step)
-
-Here’s a step-by-step breakdown of the code:
-
+### Initial Thoughts 💭
+- The lightest and heaviest people should ideally share a boat if their combined weight is within the limit.
+- By sorting the people by their weights and applying a two-pointer strategy, we can efficiently assign people to boats.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem constraints guarantee that there will be at least one person.
+- Ensure that the solution can handle up to 50,000 people efficiently.
+- When everyone is of the same weight, pairing them optimally will reduce the number of boats.
+- The input size can be large, so an efficient solution using sorting and two-pointer strategy is required.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int numRescueBoats(vector<int>& people, int limit) {
-        // Step 1: Sort the people array
-        sort(people.begin(), people.end());
-
-        // Step 2: Initialize two pointers and a counter for the boats
-        int lo = 0, hi = people.size() - 1;
-        int boats = 0;
-
-        // Step 3: Loop to pair people or place them individually on boats
-        while (lo <= hi) {
-
-            // Step 3.1: Check if the lightest and heaviest person can be paired
-            if (people[lo] + people[hi] <= limit) {
-                lo += 1;  // Move the lightest person pointer
-                hi -= 1;  // Move the heaviest person pointer
-            } else {
-                // Step 3.2: If they can't be paired, place the heaviest person alone on a boat
-                hi -= 1;
-            }
-
-            // Step 4: Increment the boat counter
-            boats++;
-        }
-
-        // Step 5: Return the total number of boats
-        return boats;
+int numRescueBoats(vector<int>& people, int limit) {
+    sort(people.begin(), people.end());
+    int lo = 0, hi = people.size() - 1;
+    int boats = 0;
+    while(lo <= hi) {
+        
+        if(people[lo] + people[hi] <= limit) {
+            lo += 1;
+            hi -= 1;
+        } else hi -= 1;
+        
+        boats++;
     }
-};
+    
+    return boats;
+}
 ```
 
-Let’s walk through the code in detail:
+This algorithm calculates the minimum number of boats required to rescue all the people. It sorts the people by weight and uses a two-pointer technique to pair the heaviest and lightest people that can fit into a boat together.
 
-1. **Sorting the Array**:
-   ```cpp
-   sort(people.begin(), people.end());
-   ```
-   The first step is to sort the `people` vector in ascending order. This allows us to pair the lightest person with the heaviest person, which is a typical greedy approach to maximize the space usage in each boat.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numRescueBoats(vector<int>& people, int limit) {
+	```
+	This line defines the function `numRescueBoats` that accepts a vector of people and a limit for the boat's weight capacity.
 
-2. **Two Pointers Setup**:
-   ```cpp
-   int lo = 0, hi = people.size() - 1;
-   int boats = 0;
-   ```
-   We initialize two pointers:
-   - `lo` starts at the first person (the lightest person in the sorted array),
-   - `hi` starts at the last person (the heaviest person).
-   We also initialize `boats` to zero, which will keep track of the total number of boats used.
+2. **Sorting**
+	```cpp
+	    sort(people.begin(), people.end());
+	```
+	The list of people is sorted in non-decreasing order to facilitate pairing the heaviest and lightest people.
 
-3. **Main Loop for Pairing or Assigning People to Boats**:
-   ```cpp
-   while(lo <= hi) {
-   ```
-   The loop continues as long as `lo` is less than or equal to `hi`, meaning there are still people who need to be placed on boats.
+3. **Initialization**
+	```cpp
+	    int lo = 0, hi = people.size() - 1;
+	```
+	Two pointers `lo` and `hi` are initialized, where `lo` points to the lightest person, and `hi` points to the heaviest.
 
-4. **Check if Pairing is Possible**:
-   ```cpp
-   if(people[lo] + people[hi] <= limit) {
-       lo += 1;
-       hi -= 1;
-   } else {
-       hi -= 1;
-   }
-   ```
-   Inside the loop, we check whether the lightest person (`people[lo]`) and the heaviest person (`people[hi]`) can fit together in one boat. If their combined weight is less than or equal to the boat’s weight limit, they are paired together, and both pointers are adjusted to reflect that these two people have been placed on a boat.
-   - If they can be paired, both `lo` and `hi` are incremented and decremented, respectively.
-   - If they cannot be paired (i.e., their combined weight exceeds the limit), only `hi` is decremented, meaning the heaviest person is placed on a separate boat.
+4. **Variable Setup**
+	```cpp
+	    int boats = 0;
+	```
+	A counter `boats` is initialized to track the number of boats needed.
 
-5. **Increment the Boat Counter**:
-   ```cpp
-   boats++;
-   ```
-   Each time the loop runs (whether pairing two people or placing one person on a boat), we increment the `boats` counter to track the total number of boats used.
+5. **Loop Setup**
+	```cpp
+	    while(lo <= hi) {
+	```
+	The loop continues as long as the `lo` pointer is less than or equal to the `hi` pointer, meaning there are people still unpaired.
 
-6. **Return the Total Boats Used**:
-   ```cpp
-   return boats;
-   ```
-   Finally, after all people have been assigned to boats, we return the total number of boats.
+6. **Condition Check**
+	```cpp
+	        if(people[lo] + people[hi] <= limit) {
+	```
+	The condition checks if the lightest (`lo`) and heaviest (`hi`) person can be paired together in one boat without exceeding the weight limit.
 
-### Complexity
+7. **Pointer Adjustment**
+	```cpp
+	            lo += 1;
+	```
+	If they can be paired, the `lo` pointer is moved right to consider the next lightest person.
 
-**Time Complexity**:
-- Sorting the array takes `O(n log n)`, where `n` is the number of people. 
-- The two-pointer traversal through the array takes `O(n)`. 
-Thus, the overall time complexity is dominated by the sorting step, giving a final complexity of **O(n log n)**.
+8. **Pointer Adjustment**
+	```cpp
+	            hi -= 1;
+	```
+	The `hi` pointer is moved left to consider the next heaviest person.
 
-**Space Complexity**:
-- The space complexity is **O(1)** because we are only using a constant amount of extra space for variables like `lo`, `hi`, and `boats`. The sorting operation is done in-place.
+9. **Condition Check (Else)**
+	```cpp
+	        } else hi -= 1;
+	```
+	If the lightest and heaviest people can't fit together, only the heaviest person (pointed by `hi`) is placed in a boat.
 
-### Conclusion
+10. **Boats Increment**
+	```cpp
+	        boats++;
+	```
+	Regardless of whether two people are paired or only one person is placed in the boat, the boat count is incremented.
 
-This solution efficiently solves the problem of determining the minimum number of boats required to rescue everyone. By sorting the array of people and utilizing a two-pointer approach, we can pair people optimally or assign them individually to boats. This greedy approach ensures that we use the least number of boats possible. The time complexity of **O(n log n)** is optimal for this problem, making it scalable for large inputs.
+11. **Return Statement**
+	```cpp
+	    return boats;
+	```
+	The function returns the total number of boats needed.
 
-This solution works well for scenarios where there are multiple people with varying weights and a boat with a fixed weight limit. By pairing the lightest and heaviest people first, we maximize the space utilization of each boat and minimize the total number of boats needed.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which is O(n log n), followed by a linear scan with two pointers.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for sorting the array, though this could be O(1) if sorting in place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/boats-to-save-people/description/)
 

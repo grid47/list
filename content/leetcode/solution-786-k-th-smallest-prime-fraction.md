@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "sJdJTXhxqjo"
 youtube_upload_date="2021-04-07"
 youtube_thumbnail="https://i.ytimg.com/vi/sJdJTXhxqjo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,103 +28,172 @@ youtube_thumbnail="https://i.ytimg.com/vi/sJdJTXhxqjo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a sorted array of prime numbers and the number 1. You need to find the k-th smallest fraction formed by considering all possible fractions arr[i] / arr[j] where i < j. Return the k-th smallest fraction as an array of two integers, where arr[i] is the numerator and arr[j] is the denominator.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sorted array arr containing prime numbers and the number 1. You are also given an integer k.
+- **Example:** `Input: arr = [1, 3, 5, 7], k = 4`
+- **Constraints:**
+	- 2 <= arr.length <= 1000
+	- 1 <= arr[i] <= 30,000
+	- arr[0] == 1
+	- arr[i] is a prime number for i > 0
+	- 1 <= k <= arr.length * (arr.length - 1) / 2
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
-        int n = arr.size();
-        priority_queue<pair<double, pair<int, int>>, vector<pair<double, pair<int, int>>>> pq;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the k-th smallest fraction as an array of two integers. The first integer is the numerator and the second is the denominator of the fraction.
+- **Example:** `Output: [3, 7]`
+- **Constraints:**
+	- The output should be an array of two integers representing the k-th smallest fraction.
 
-        for(int i = 0; i < n; i++)
-        pq.push(make_pair(-1.0*arr[i]/arr[n - 1], make_pair(i, n - 1)));
-        int i, j;        
-        while(k--) {
-            auto p = pq.top().second; pq.pop();
-            i = p.first;
-            j = p.second;
-            pq.push(make_pair(-1.0*arr[i]/arr[j-1], make_pair(i, j - 1)));
-        }
-        return vector<int>{arr[i], arr[j]};
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the k-th smallest fraction by considering all possible fractions in the form arr[i] / arr[j] where i < j.
+
+- Initialize a priority queue to store the fractions and their indices.
+- Push fractions formed by arr[i] and arr[j] into the priority queue.
+- Pop the fractions from the priority queue and keep track of the smallest fractions.
+- Repeat until the k-th smallest fraction is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array arr is sorted in strictly increasing order.
+- The number of fractions is bounded by n * (n - 1) / 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: arr = [1, 3, 5, 7], k = 4`  \
+  **Explanation:** The fractions to be considered in sorted order are: 1/7, 1/5, 1/3, 3/7, 5/7, and 3/5. The 4th smallest fraction is 3/7.
+
+- **Input:** `Example 2: Input: arr = [1, 2, 7], k = 2`  \
+  **Explanation:** The fractions to be considered are: 1/7, 1/2, and 2/7. The 2nd smallest fraction is 1/7.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we can use a priority queue to store fractions in ascending order and pop the smallest fraction until the k-th smallest is found.
+
+### Initial Thoughts 💭
+- The number of fractions grows quadratically with the size of the array, making an O(n^2) solution inefficient for large arrays.
+- We can optimize the process by using a priority queue to store fractions in sorted order and only keep track of the smallest fractions at each step.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least two elements.
+- Handle arrays with up to 1000 elements efficiently.
+- If arr contains only two elements, the answer is straightforward.
+- The value of k is always valid and within the bounds.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+    int n = arr.size();
+    priority_queue<pair<double, pair<int, int>>, vector<pair<double, pair<int, int>>>> pq;
+
+    for(int i = 0; i < n; i++)
+    pq.push(make_pair(-1.0*arr[i]/arr[n - 1], make_pair(i, n - 1)));
+    int i, j;        
+    while(k--) {
+        auto p = pq.top().second; pq.pop();
+        i = p.first;
+        j = p.second;
+        pq.push(make_pair(-1.0*arr[i]/arr[j-1], make_pair(i, j - 1)));
     }
-};
-{{< /highlight >}}
----
+    return vector<int>{arr[i], arr[j]};
+}
+```
 
-### Problem Statement
+This function finds the kth smallest prime fraction from an array of prime numbers using a priority queue.
 
-The task is to find the **k-th smallest fraction** that can be formed by taking two numbers from a sorted array `arr`. The numerator of the fraction is an element of the array, and the denominator is another element of the array, such that the numerator is less than the denominator. Given a sorted array `arr` of distinct integers, and an integer `k`, we are to return the **k-th smallest fraction** from all possible fractions that can be formed.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+	```
+	This defines the function `kthSmallestPrimeFraction`, which takes an array of integers `arr` and an integer `k` to return the kth smallest prime fraction.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int n = arr.size();
+	```
+	This line initializes the variable `n` to store the size of the input array `arr`.
 
-This problem requires us to identify and retrieve the k-th smallest fraction from all possible combinations of elements in the array. A brute-force approach where we generate all possible pairs of fractions and sort them would be inefficient, especially for larger arrays. Instead, we use a **priority queue (min-heap)** approach to efficiently keep track of the smallest fractions.
+3. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<pair<double, pair<int, int>>, vector<pair<double, pair<int, int>>>> pq;
+	```
+	This declares a priority queue `pq` to store pairs of fractions (in negative form for max-heap behavior) and their respective indices.
 
-The solution works by maintaining a priority queue (min-heap) that stores fractions along with the indices of the array elements involved in forming those fractions. The priority queue allows us to efficiently retrieve the smallest fraction at each step. After retrieving a fraction, the algorithm pushes the next fraction in sequence into the heap, ensuring that we keep track of only the next smallest fractions.
+4. **Loop Over Array**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	This starts a loop to iterate over the array `arr`, where `i` represents the index of the first element of the fraction.
 
-### Code Breakdown (Step by Step)
+5. **Push Fractions to Priority Queue**
+	```cpp
+	    pq.push(make_pair(-1.0*arr[i]/arr[n - 1], make_pair(i, n - 1)));
+	```
+	This pushes the fractions formed by the current element `arr[i]` and the last element `arr[n-1]` into the priority queue. Fractions are negated to use the max-heap behavior.
 
-Let's break down the code step by step to understand how it works:
+6. **Initialize Indices**
+	```cpp
+	    int i, j;        
+	```
+	This declares two integer variables `i` and `j`, which will be used to store the indices of the current pair of fractions being processed.
 
-1. **Initialization**:
-   - The function accepts two inputs: a sorted array `arr` and an integer `k`.
-   - `n` is set to the size of the array `arr`.
-   - We initialize a **priority queue** (`pq`) that will hold pairs of the form `(fraction value, (numerator index, denominator index))`. This queue is used to store fractions and allows us to always retrieve the smallest fraction efficiently.
+7. **Main Loop**
+	```cpp
+	    while(k--) {
+	```
+	This begins a while loop that runs `k` times, each time extracting the next smallest fraction from the priority queue.
 
-   ```cpp
-   int n = arr.size();
-   priority_queue<pair<double, pair<int, int>>, vector<pair<double, pair<int, int>>>> pq;
-   ```
+8. **Pop From Queue**
+	```cpp
+	        auto p = pq.top().second; pq.pop();
+	```
+	This pops the top fraction from the priority queue and retrieves the pair of indices `i` and `j` corresponding to the fraction.
 
-2. **Filling the Priority Queue**:
-   - We loop through the array to create an initial set of fractions where each fraction is formed by dividing the current element (`arr[i]`) by the last element (`arr[n - 1]`), ensuring that the fraction is of the form `arr[i] / arr[n-1]`.
-   - The priority queue is populated with these fractions, and each fraction is represented by the value of the fraction and the indices `(i, n-1)`. The priority queue is sorted in descending order, meaning the fraction with the smallest value will always be at the top.
-   
-   ```cpp
-   for (int i = 0; i < n; i++)
-       pq.push(make_pair(-1.0 * arr[i] / arr[n - 1], make_pair(i, n - 1)));
-   ```
+9. **Update Indices**
+	```cpp
+	        i = p.first;
+	```
+	This stores the first index `i` from the popped pair in the variable `i`.
 
-3. **Extracting k-th Smallest Fraction**:
-   - The main loop runs `k` times, each time extracting the fraction at the top of the priority queue (the smallest one), and then pushing the next fraction that can be formed by using the numerator at index `i` and the next possible denominator `arr[j-1]`, where `j` is the second element of the pair.
-   - The pair `(i, j)` represents the indices of the fraction. After extracting the smallest fraction, we push a new fraction formed by `arr[i]` and `arr[j-1]` into the priority queue.
-   - We continue this until we pop the k-th smallest fraction from the heap.
+10. **Update Second Index**
+	```cpp
+	        j = p.second;
+	```
+	This stores the second index `j` from the popped pair in the variable `j`.
 
-   ```cpp
-   int i, j;        
-   while(k--) {
-       auto p = pq.top().second; pq.pop();
-       i = p.first;
-       j = p.second;
-       pq.push(make_pair(-1.0 * arr[i] / arr[j - 1], make_pair(i, j - 1)));
-   }
-   ```
+11. **Push New Fraction to Queue**
+	```cpp
+	        pq.push(make_pair(-1.0*arr[i]/arr[j-1], make_pair(i, j - 1)));
+	```
+	This pushes the next fraction formed by `arr[i]` and `arr[j-1]` into the priority queue, decrementing `j` to explore the next smaller fraction.
 
-4. **Returning the Result**:
-   - After `k` iterations, the fraction at the top of the priority queue is the k-th smallest fraction.
-   - The result is a vector containing the two elements forming the k-th smallest fraction, i.e., the numerator `arr[i]` and the denominator `arr[j]`.
+12. **Return Result**
+	```cpp
+	    return vector<int>{arr[i], arr[j]};
+	```
+	After extracting the kth smallest fraction, this line returns the fraction as a pair of integers `arr[i]` and `arr[j]`.
 
-   ```cpp
-   return vector<int>{arr[i], arr[j]};
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k log k), since the heap stores and processes up to k fractions.
+- **Average Case:** O(k log k), as we process up to k elements.
+- **Worst Case:** O(k log k), since we always push and pop fractions from the heap.
 
-### Complexity Analysis
+The time complexity is dominated by the priority queue operations, which run in log k time.
 
-- **Time Complexity**:
-  - The main time complexity comes from maintaining and updating the priority queue. Inserting an element into a priority queue takes **O(log m)** time, where `m` is the number of elements in the priority queue.
-  - Initially, we insert `n` elements into the priority queue (one for each `i` from `0` to `n-1`). After that, we perform `k` pop and push operations. Each pop and push operation takes **O(log n)** time since there are at most `n` elements in the priority queue at any given time.
-  - Therefore, the time complexity is **O(n log n + k log n)**. The `n log n` term comes from the initial filling of the priority queue, and `k log n` comes from processing the top `k` smallest fractions.
+### Space Complexity 💾
+- **Best Case:** O(k), as the space used by the heap depends on k.
+- **Worst Case:** O(k), since the heap stores up to k fractions at any given time.
 
-- **Space Complexity**:
-  - The space complexity is **O(n)**, as we store at most `n` elements in the priority queue at any given time. The space required for the output vector is negligible in comparison to the priority queue.
+The space complexity is proportional to the number of fractions stored in the heap.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently finds the **k-th smallest fraction** using a **priority queue (min-heap)**. By leveraging the heap's properties, we can efficiently retrieve the smallest fractions without needing to sort all possible fractions, which makes this approach much more efficient than a brute-force method. The use of the priority queue ensures that we only need to keep track of the smallest fractions, reducing unnecessary computation and making the solution scalable for larger inputs.
-
-This algorithm is optimal for solving problems involving ordered or sorted data where we need to find specific elements in the sequence, such as the k-th smallest item. It's a perfect example of how data structures like priority queues can help us tackle problems efficiently, even when dealing with large datasets. The approach is both time and space efficient, making it well-suited for practical applications where performance is a priority.
-
-In summary, this approach provides a clean, optimal solution to the problem by making use of heap properties to keep track of the smallest fractions efficiently, offering a significant performance improvement over naive methods.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-th-smallest-prime-fraction/description/)
 

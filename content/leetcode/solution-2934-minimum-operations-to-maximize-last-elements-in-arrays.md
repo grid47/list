@@ -14,128 +14,157 @@ img_src = ""
 youtube = "5eDemRe02LM"
 youtube_upload_date="2023-11-14"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/5eDemRe02LM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays, nums1 and nums2, both having length n. You are allowed to perform a series of operations (possibly none). In each operation, you can select an index i in the range [0, n-1] and swap the values of nums1[i] and nums2[i]. The goal is to satisfy two conditions: the last element of nums1 is equal to the maximum value in nums1, and the last element of nums2 is equal to the maximum value in nums2. Return the minimum number of operations required, or -1 if it's impossible to satisfy both conditions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integer arrays nums1 and nums2, both having length n.
+- **Example:** `nums1 = [4, 2, 5], nums2 = [1, 3, 6]`
+- **Constraints:**
+	- 1 <= n == nums1.length == nums2.length <= 1000
+	- 1 <= nums1[i] <= 10^9
+	- 1 <= nums2[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minOperations(vector<int>& A, vector<int>& B) {
-        int dp1 = 0, dp2 = 0, n = A.size(), mi = min(A[n - 1], B[n - 1]), ma = max(A[n - 1], B[n - 1]);
-        for (int i = 0; i < n; i++) {
-            int a = A[i], b = B[i];
-            if (max(a, b) > ma) return -1;
-            if (min(a, b) > mi) return -1;
-            if (a > A[n - 1] || b > B[n - 1]) dp1++;
-            if (a > B[n - 1] || b > A[n - 1]) dp2++;
-        }
-        return min(dp1, dp2);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to meet both conditions or -1 if it is impossible.
+- **Example:** `1`
+- **Constraints:**
+	- If it's impossible, return -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the minimum number of swaps required to satisfy both conditions, or return -1 if it's not possible.
+
+- Iterate over the elements of nums1 and nums2 while checking the possible swaps.
+- Check the max elements of both arrays and adjust their last positions.
+- If no valid swap is found, return -1, else return the minimum number of swaps needed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays nums1 and nums2 are of equal length.
+- The arrays contain positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums1 = [4, 2, 5], nums2 = [1, 3, 6]`  \
+  **Explanation:** In this example, a single swap can make both arrays satisfy the condition.
+
+- **Input:** `nums1 = [7, 3, 5, 1], nums2 = [9, 2, 4, 6]`  \
+  **Explanation:** Two swaps are required to meet the conditions for both arrays.
+
+- **Input:** `nums1 = [4, 2, 5], nums2 = [1, 3, 6]`  \
+  **Explanation:** It's impossible to meet the conditions because one of the arrays is already invalid.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we need to iterate through both arrays and keep track of the swaps that would result in both conditions being satisfied.
+
+### Initial Thoughts 💭
+- The maximum elements of both arrays must be placed in the last index of their respective arrays.
+- Each swap must either help move the maximum element of nums1 or nums2 to the right place.
+- This problem requires comparing the max elements of both arrays and identifying when a swap would be beneficial.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input is not possible due to the constraint n >= 1.
+- When handling large arrays, ensure that the algorithm operates within time limits.
+- If arrays have all identical values, no swaps are needed.
+- Ensure that the solution works for both arrays containing large integers up to 10^9.
+{{< dots >}}
+## Code 💻
+```cpp
+int minOperations(vector<int>& A, vector<int>& B) {
+    int dp1 = 0, dp2 = 0, n = A.size(), mi = min(A[n - 1], B[n - 1]), ma = max(A[n - 1], B[n - 1]);
+    for (int i = 0; i < n; i++) {
+        int a = A[i], b = B[i];
+        if (max(a, b) > ma) return -1;
+        if (min(a, b) > mi) return -1;
+        if (a > A[n - 1] || b > B[n - 1]) dp1++;
+        if (a > B[n - 1] || b > A[n - 1]) dp2++;
     }
-};
-{{< /highlight >}}
----
+    return min(dp1, dp2);
+}
+```
 
-### Problem Statement:
-The problem asks us to determine the minimum number of operations required to transform two arrays `A` and `B` into the same array using a specific set of operations. The arrays `A` and `B` are of the same size `n`, and each element in both arrays can be swapped with the corresponding element in the other array. The transformation must satisfy the following conditions:
+The function calculates the minimum number of operations required to make two arrays, A and B, consistent with specific constraints. It compares values in each array and counts how many operations are needed to align them under the given rules.
 
-1. You can only swap elements that are greater than the last element in their respective arrays (i.e., `A[i]` must be smaller than or equal to `A[n-1]` and `B[i]` must be smaller than or equal to `B[n-1]`).
-2. You need to return the minimum number of such operations (or swaps). If it is not possible to perform the transformation, return -1.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minOperations(vector<int>& A, vector<int>& B) {
+	```
+	Defines the main function 'minOperations', which takes two integer vectors, A and B, and returns an integer representing the minimum number of operations required.
 
-The goal is to determine the minimum number of swaps or determine if it is impossible to transform the two arrays to meet the given constraints.
+2. **Variable Initialization**
+	```cpp
+	    int dp1 = 0, dp2 = 0, n = A.size(), mi = min(A[n - 1], B[n - 1]), ma = max(A[n - 1], B[n - 1]);
+	```
+	Initializes the variables: dp1 and dp2 to count operations, n for the size of arrays, mi for the minimum value between the last elements of A and B, and ma for the maximum value.
 
-### Approach:
-To solve the problem, we can follow these steps:
+3. **Loop Setup**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	Sets up a loop to iterate through each element of the arrays A and B.
 
-1. **Identify Constraints for Transformation**:
-   We first identify the largest and smallest elements from the two arrays, `A[n-1]` and `B[n-1]`, as the boundary for valid operations. Any element in `A` or `B` that exceeds these boundaries is not allowed to participate in a valid transformation. This ensures that we can only perform transformations where elements are within the allowed limits.
+4. **Element Assignment**
+	```cpp
+	        int a = A[i], b = B[i];
+	```
+	Assigns the current elements of arrays A and B to variables a and b respectively.
 
-2. **Loop Over the Arrays**:
-   - Iterate through each pair of corresponding elements `(A[i], B[i])` for all `i` from 0 to `n-1`.
-   - For each pair, check if both elements satisfy the boundary condition. Specifically, if both `A[i]` and `B[i]` are smaller than or equal to `A[n-1]` and `B[n-1]`, the transformation can proceed.
-   - If an element exceeds the boundary (i.e., it’s larger than the maximum element of `A[n-1]` or `B[n-1]`), we return `-1` as it is not possible to transform.
+5. **Check for Maximum Constraint**
+	```cpp
+	        if (max(a, b) > ma) return -1;
+	```
+	Checks if the maximum of a and b exceeds the maximum allowed value ma, returning -1 if the condition is met.
 
-3. **Count Valid Swaps**:
-   - For each pair of elements `(A[i], B[i])`, count how many swaps are needed. A swap is required if an element in `A` is larger than `A[n-1]` or an element in `B` is larger than `B[n-1]`.
-   - We keep two counters: `dp1` to count how many swaps are needed to make `A[i]` smaller or equal to `A[n-1]`, and `dp2` to count how many swaps are needed to make `B[i]` smaller or equal to `B[n-1]`.
+6. **Check for Minimum Constraint**
+	```cpp
+	        if (min(a, b) > mi) return -1;
+	```
+	Checks if the minimum of a and b exceeds the minimum allowed value mi, returning -1 if the condition is met.
 
-4. **Return the Minimum Number of Operations**:
-   After iterating through all the elements, return the minimum number of operations (swaps) required to achieve the transformation, which is the lesser of `dp1` and `dp2`. If no valid transformation is possible, return `-1`.
+7. **Increment dp1**
+	```cpp
+	        if (a > A[n - 1] || b > B[n - 1]) dp1++;
+	```
+	Increments dp1 if either a is greater than the last element of A or b is greater than the last element of B.
 
-### Code Breakdown (Step by Step):
+8. **Increment dp2**
+	```cpp
+	        if (a > B[n - 1] || b > A[n - 1]) dp2++;
+	```
+	Increments dp2 if either a is greater than the last element of B or b is greater than the last element of A.
 
-1. **Initialization**:
-   The function `minOperations` takes two input vectors `A` and `B` as arguments. We begin by initializing a few variables:
-   - `dp1`: Tracks the number of swaps required to ensure elements of `A` are valid.
-   - `dp2`: Tracks the number of swaps required to ensure elements of `B` are valid.
-   - `n`: The size of the input arrays `A` and `B`.
-   - `mi` and `ma`: The minimum and maximum of the last elements in `A` and `B`, which will act as boundaries for valid operations.
+9. **Return Statement**
+	```cpp
+	    return min(dp1, dp2);
+	```
+	Returns the minimum of dp1 and dp2, representing the minimal operations needed.
 
-   ```cpp
-   int dp1 = 0, dp2 = 0, n = A.size(), mi = min(A[n - 1], B[n - 1]), ma = max(A[n - 1], B[n - 1]);
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Iterating Over Each Pair of Elements**:
-   For each index `i`, we check the conditions for both `A[i]` and `B[i]`:
-   - If the maximum of `A[i]` and `B[i]` exceeds the maximum element (`ma`), return `-1`.
-   - If the minimum of `A[i]` and `B[i]` exceeds the minimum element (`mi`), return `-1`.
+The time complexity is linear in relation to the size of the input arrays.
 
-   ```cpp
-   for (int i = 0; i < n; i++) {
-       int a = A[i], b = B[i];
-       if (max(a, b) > ma) return -1;
-       if (min(a, b) > mi) return -1;
-   ```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-3. **Counting Swaps for Valid Pairs**:
-   We now count the number of swaps needed for each valid pair `(A[i], B[i])`:
-   - If `A[i]` is greater than `A[n-1]`, increment `dp1` because we need to swap it.
-   - If `B[i]` is greater than `B[n-1]`, increment `dp2` because we need to swap it.
+The space complexity is O(n) due to the need to store temporary results.
 
-   ```cpp
-       if (a > A[n - 1] || b > B[n - 1]) dp1++;
-       if (a > B[n - 1] || b > A[n - 1]) dp2++;
-   }
-   ```
+**Happy Coding! 🎉**
 
-4. **Returning the Result**:
-   After the loop finishes, we return the minimum of `dp1` and `dp2`, which gives the minimum number of swaps needed to transform the arrays. If no valid transformation is possible, we return `-1`.
-
-   ```cpp
-   return min(dp1, dp2);
-   }
-   ```
-
-### Complexity:
-
-1. **Time Complexity**:
-   - **Initialization**: The initialization of variables takes constant time, \(O(1)\).
-   - **Main Loop**: The loop iterates through all `n` elements in the arrays `A` and `B`. For each element, constant-time operations are performed (comparison, swapping count update). Hence, the time complexity is \(O(n)\), where `n` is the size of the input arrays.
-
-   Therefore, the overall time complexity is:
-   \[
-   O(n)
-   \]
-
-2. **Space Complexity**:
-   - The space complexity is \(O(1)\) since we only use a few integer variables (`dp1`, `dp2`, `mi`, `ma`, etc.), and no additional data structures are used that scale with the size of the input.
-
-   Hence, the space complexity is:
-   \[
-   O(1)
-   \]
-
-### Conclusion:
-This solution is efficient and provides the minimum number of swaps needed to transform arrays `A` and `B` into the same array, ensuring all constraints are met. The time complexity of \(O(n)\) makes it suitable for large inputs, and the space complexity of \(O(1)\) ensures that the solution uses minimal memory. 
-
-Key points to consider:
-- **Time Complexity**: \(O(n)\), where `n` is the number of elements in the input arrays `A` and `B`.
-- **Space Complexity**: \(O(1)\), since only a few variables are used.
-
-This solution is optimal for the problem and handles all edge cases, including scenarios where no valid transformations are possible.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-maximize-last-elements-in-arrays/description/)
 

@@ -14,197 +14,304 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with decoding a string that contains HTML entities. The HTML entities represent special characters like quotation marks, ampersands, greater-than signs, etc. You need to replace the HTML entities with their respective characters.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string with HTML entities.
+- **Example:** `text = "The &quot;HTML&quot; language is popular."`
+- **Constraints:**
+	- 1 <= text.length <= 105
+	- The string can contain any ASCII character.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string entityParser(string text) {
-        
-        map<string, string> mp;
-        mp["&quot;"] = "\"";
-        mp["&apos;"] = "\'";
-        mp["&amp;"] = "&";
-        mp["&gt;"] = ">";
-        mp["&lt;"] = "<";
-        mp["&frasl;"] = "/";
-        
-        string res = "";        
-        int i = 0;
-        while(i < text.size()) {
-            if(text[i] == '&') {
-                string tmp = "";
-                while(i < text.size() && text[i] != ';'){
-                    tmp += text[i++];
-                    if(i < text.size() && text[i] == '&') {
-                        res += tmp;
-                        tmp = "";
-                    }
-                } 
-                if(text[i] == ';') {
-                    i++;
-                    tmp += ';';
-                    if(mp.count(tmp)) {
-                        res += mp[tmp];
-                    } else {
-                        res += tmp;
-                    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the decoded string where all the HTML entities are replaced by their corresponding characters.
+- **Example:** `The output will be "The HTML language is popular."`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Replace HTML entities in the string with their corresponding characters.
+
+- Initialize a map with HTML entity to character mappings.
+- Iterate through the string, find any entity starting with '&' and ending with ';'.
+- Check if the found entity exists in the map and replace it.
+- Return the final decoded string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string contains valid HTML entities.
+- Entities are well-formed and properly enclosed in '&' and ';'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: text = "The &quot;HTML&quot; language is popular."`  \
+  **Explanation:** The parser will replace the entity &quot; with " to produce the decoded string: "The HTML language is popular."
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we'll map the HTML entities to their corresponding characters and then iterate over the string to replace any encountered entities.
+
+### Initial Thoughts 💭
+- HTML entities are enclosed by '&' and ';'.
+- Each entity corresponds to a special character.
+- We can use a map to store the mappings and process the string character by character.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle an empty string input.
+- Ensure that the solution handles strings near the upper constraint of length 105.
+- Consider cases where there are no entities in the input.
+- Ensure all HTML entities are valid and properly closed with ';'.
+{{< dots >}}
+## Code 💻
+```cpp
+string entityParser(string text) {
+    
+    map<string, string> mp;
+    mp["&quot;"] = "\"";
+    mp["&apos;"] = "\'";
+    mp["&amp;"] = "&";
+    mp["&gt;"] = ">";
+    mp["&lt;"] = "<";
+    mp["&frasl;"] = "/";
+    
+    string res = "";        
+    int i = 0;
+    while(i < text.size()) {
+        if(text[i] == '&') {
+            string tmp = "";
+            while(i < text.size() && text[i] != ';'){
+                tmp += text[i++];
+                if(i < text.size() && text[i] == '&') {
+                    res += tmp;
+                    tmp = "";
+                }
+            } 
+            if(text[i] == ';') {
+                i++;
+                tmp += ';';
+                if(mp.count(tmp)) {
+                    res += mp[tmp];
                 } else {
                     res += tmp;
                 }
             } else {
-                res += text[i++];
+                res += tmp;
             }
+        } else {
+            res += text[i++];
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+The function `entityParser` processes an input string `text` and replaces certain HTML entities like `&quot;`, `&amp;`, and others with their respective character representations.
 
-The task is to convert a string containing HTML entities into its corresponding characters. HTML entities are special character sequences that start with an ampersand (`&`) and end with a semicolon (`;`). For example, `&quot;` represents a double quote (`"`), `&apos;` represents an apostrophe (`'`), `&amp;` represents an ampersand (`&`), and so on. The challenge is to parse a given string, replace all HTML entities with their actual characters, and return the resulting string.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **String Manipulations**
+	```cpp
+	string entityParser(string text) {
+	```
+	This line defines the function `entityParser`, which takes a string `text` as input and returns a modified version of it.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    map<string, string> mp;
+	```
+	A map `mp` is initialized to store key-value pairs for replacing HTML entities with their corresponding characters.
 
-To solve this problem, we can follow a systematic approach:
+3. **Map Operations**
+	```cpp
+	    mp["&quot;"] = "\"";
+	```
+	Here, the `&quot;` HTML entity is mapped to the double quote `"` character.
 
-1. **Mapping HTML Entities**: Create a map (or dictionary) that associates each HTML entity with its corresponding character.
+4. **Map Operations**
+	```cpp
+	    mp["&apos;"] = "\'";
+	```
+	The `&apos;` entity is mapped to the single quote \'\' character.
 
-2. **Iterating Through the String**: Traverse the input string character by character:
-   - When an ampersand (`&`) is encountered, start building a potential HTML entity string.
-   - Continue appending characters until a semicolon (`;`) is found or another ampersand is detected.
-   - If a semicolon is reached, check if the collected string matches any key in the map.
-   - Replace the entity with the mapped character if it exists; otherwise, include it as is.
+5. **Map Operations**
+	```cpp
+	    mp["&amp;"] = "&";
+	```
+	The `&amp;` entity is mapped to the `&` character.
 
-3. **Building the Result**: Construct the result string by appending either the mapped character or the original sequence to it.
+6. **Map Operations**
+	```cpp
+	    mp["&gt;"] = ">";
+	```
+	The `&gt;` entity is mapped to the greater-than `>` character.
 
-### Code Breakdown (Step by Step)
+7. **Map Operations**
+	```cpp
+	    mp["&lt;"] = "<";
+	```
+	The `&lt;` entity is mapped to the less-than `<` character.
 
-Below is a detailed breakdown of the provided C++ code that implements the above approach:
+8. **Map Operations**
+	```cpp
+	    mp["&frasl;"] = "/";
+	```
+	The `&frasl;` entity is mapped to the forward slash `/` character.
 
-1. **Class Definition**:
-   ```cpp
-   class Solution {
-   public:
-   ```
+9. **Variable Initialization**
+	```cpp
+	    string res = "";        
+	```
+	The variable `res` is initialized as an empty string to accumulate the result.
 
-   - A class named `Solution` is defined, containing the method `entityParser`.
+10. **Variable Initialization**
+	```cpp
+	    int i = 0;
+	```
+	The variable `i` is initialized to 0 and will be used as the index to iterate through the input string `text`.
 
-2. **Function Declaration**:
-   ```cpp
-       string entityParser(string text) {
-   ```
+11. **Loop Constructs**
+	```cpp
+	    while(i < text.size()) {
+	```
+	A while loop is started to process each character in the input string `text`.
 
-   - The `entityParser` function takes a single parameter `text`, which is a string that may contain HTML entities.
+12. **Conditional Logic**
+	```cpp
+	        if(text[i] == '&') {
+	```
+	Checks if the current character is the `&` symbol, which indicates the start of an HTML entity.
 
-3. **Mapping HTML Entities**:
-   ```cpp
-           map<string, string> mp;
-           mp["&quot;"] = "\"";
-           mp["&apos;"] = "\'";
-           mp["&amp;"] = "&";
-           mp["&gt;"] = ">";
-           mp["&lt;"] = "<";
-           mp["&frasl;"] = "/";
-   ```
+13. **Variable Initialization**
+	```cpp
+	            string tmp = "";
+	```
+	A temporary string `tmp` is initialized to store potential HTML entities.
 
-   - A map named `mp` is created to store the mapping of HTML entities to their respective characters.
-   - Each entity is associated with its corresponding character.
+14. **Loop Constructs**
+	```cpp
+	            while(i < text.size() && text[i] != ';'){
+	```
+	A nested while loop is used to collect characters until a semicolon `;` (end of the entity) is found.
 
-4. **Result Initialization**:
-   ```cpp
-           string res = "";        
-           int i = 0;
-   ```
+15. **String Manipulations**
+	```cpp
+	                tmp += text[i++];
+	```
+	Appends the current character to `tmp` and increments `i`.
 
-   - An empty string `res` is initialized to build the final result.
-   - A variable `i` is initialized to iterate through the characters of the input string.
+16. **Conditional Logic**
+	```cpp
+	                if(i < text.size() && text[i] == '&') {
+	```
+	Checks if another `&` is encountered within the entity, in which case the current entity is complete.
 
-5. **Iterating Through the String**:
-   ```cpp
-           while(i < text.size()) {
-               if(text[i] == '&') {
-   ```
+17. **String Manipulations**
+	```cpp
+	                    res += tmp;
+	```
+	Appends the current entity in `tmp` to the result string `res`.
 
-   - A while loop is set up to traverse the string until all characters are processed.
-   - Inside the loop, a check is performed to see if the current character is an ampersand (`&`).
+18. **Variable Initialization**
+	```cpp
+	                    tmp = "";
+	```
+	Resets the temporary string `tmp` to collect a new entity.
 
-6. **Building the Entity String**:
-   ```cpp
-                   string tmp = "";
-                   while(i < text.size() && text[i] != ';'){
-                       tmp += text[i++];
-                       if(i < text.size() && text[i] == '&') {
-                           res += tmp;
-                           tmp = "";
-                       }
-                   }
-   ```
+19. **Conditional Logic**
+	```cpp
+	            if(text[i] == ';') {
+	```
+	Checks if the current character is a semicolon, signaling the end of an HTML entity.
 
-   - If an ampersand is found, a temporary string `tmp` is initialized to collect characters for the entity.
-   - A nested while loop collects characters until a semicolon (`;`) is reached or another ampersand is encountered.
-   - If another ampersand is detected before the semicolon, the collected characters are added to the result, and the temporary string is reset.
+20. **Variable Initialization**
+	```cpp
+	                i++;
+	```
+	Increments `i` to move past the semicolon.
 
-7. **Handling the Semicolon**:
-   ```cpp
-                   if(text[i] == ';') {
-                       i++;
-                       tmp += ';';
-                       if(mp.count(tmp)) {
-                           res += mp[tmp];
-                       } else {
-                           res += tmp;
-                       }
-                   } else {
-                       res += tmp;
-                   }
-               } else {
-                   res += text[i++];
-               }
-           }
-   ```
+21. **String Manipulations**
+	```cpp
+	                tmp += ';';
+	```
+	Appends the semicolon to `tmp` to finalize the entity.
 
-   - If a semicolon is reached, it is appended to `tmp`, and the program checks if `tmp` is a valid HTML entity in the map.
-   - If it is, the corresponding character is appended to `res`. If not, the original `tmp` (which contains the entity without translation) is added to the result.
-   - If the current character is not an ampersand, it is simply appended to the result.
+22. **Map Operations**
+	```cpp
+	                if(mp.count(tmp)) {
+	```
+	Checks if the entity `tmp` exists in the `mp` map.
 
-8. **Returning the Result**:
-   ```cpp
-           return res;
-       }
-   };
-   ```
+23. **String Manipulations**
+	```cpp
+	                    res += mp[tmp];
+	```
+	If the entity is found in the map, its corresponding character is appended to the result string.
 
-   - After processing the entire input string, the function returns the constructed result string `res`.
+24. **String Manipulations**
+	```cpp
+	                } else {
+	```
+	Handles the case where the entity is not in the map.
 
-### Complexity
+25. **String Manipulations**
+	```cpp
+	                    res += tmp;
+	```
+	If the entity is not in the map, the raw entity is appended to the result string.
 
-- **Time Complexity**:
-  - The time complexity of this solution is \( O(n) \), where \( n \) is the length of the input string. This is because we traverse the string character by character, processing each character in constant time.
+26. **Control Flow**
+	```cpp
+	            } else {
+	```
+	If the character is not `&`, append it to the result string.
 
-- **Space Complexity**:
-  - The space complexity is \( O(m) \), where \( m \) is the number of unique HTML entities stored in the map. Additionally, the space required for the output string `res` is also accounted for in this complexity.
+27. **String Manipulations**
+	```cpp
+	                res += tmp;
+	```
+	Appends the accumulated characters in `tmp` to `res`.
 
-### Conclusion
+28. **Loop Constructs**
+	```cpp
+	        } else {
+	```
+	If the character is not `&`, it is directly appended to the result.
 
-The implementation of the `entityParser` function effectively converts HTML entities into their respective characters using a straightforward mapping approach and string traversal. This solution is efficient and clean, demonstrating a solid understanding of string manipulation and the use of maps for quick lookups.
+29. **String Manipulations**
+	```cpp
+	            res += text[i++];
+	```
+	Appends the character to `res` and increments the index `i`.
 
-#### Key Takeaways:
+30. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the processed string `res`.
 
-- **String Processing**: This code exemplifies the importance of careful string manipulation, especially when dealing with special characters or encodings.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string.
+- **Average Case:** O(n), as we need to process each character in the string.
+- **Worst Case:** O(n), as we might encounter entities that require checking each character.
 
-- **Mapping for Efficiency**: Using a map to store the relationships between entities and characters allows for rapid lookups, making the parsing efficient.
+The time complexity is linear in relation to the length of the string.
 
-- **Robustness in Handling Input**: The algorithm is robust enough to handle cases where entities might be malformed or where there are adjacent ampersands, ensuring that the output remains consistent with the input requirements.
+### Space Complexity 💾
+- **Best Case:** O(n), as we need to store the result string.
+- **Worst Case:** O(n), where n is the length of the string.
 
-Overall, this solution serves as an excellent example of parsing problems in programming, offering insights into effective techniques for handling strings and special characters in a computational context.
+The space complexity is linear due to the additional space used to store the decoded string.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/html-entity-parser/description/)
 

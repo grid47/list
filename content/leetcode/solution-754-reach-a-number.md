@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "K8yXBn4cCQs"
 youtube_upload_date="2020-12-28"
 youtube_thumbnail="https://i.ytimg.com/vi/K8yXBn4cCQs/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,115 +28,138 @@ youtube_thumbnail="https://i.ytimg.com/vi/K8yXBn4cCQs/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are standing at position 0 on an infinite number line. There is a destination at position target. You can make some number of moves where, on the i-th move, you take exactly i steps either left or right. The goal is to determine the minimum number of moves required to reach the target.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer target, representing the position on the number line that you want to reach.
+- **Example:** `target = 4`
+- **Constraints:**
+	- -10^9 <= target <= 10^9
+	- target != 0
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int reachNumber(int target) {
-        target = abs(target);
-        long long n = ceil((-1.0 + sqrt(1+8.0*target)) / 2);
-        long long sum = n * (n + 1) / 2;
-        if (sum == target) return n;
-        long long res = sum - target;
-        if((res &1) == 0)   return n;
-        else                return n + ((n&1)? 2: 1);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of moves required to reach the target, or -1 if it's not possible.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The solution must be efficient for large inputs
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the minimum number of moves to reach the target by analyzing the required steps.
 
-The problem asks us to find the minimum number of moves required to reach a given target number starting from 0, where in each move, we can either increase or decrease the current number by a step size of 1. The task is to determine the minimum number of moves needed to exactly reach the target, given that each move is either +1 or -1.
+- 1. Convert the target to its absolute value to simplify the problem.
+- 2. Calculate the smallest number of moves needed to reach or exceed the target distance.
+- 3. Check if the difference between the total steps taken and the target is even, in which case the solution is valid.
+- 4. Return the number of moves required to reach the target.
+{{< dots >}}
+### Problem Assumptions ✅
+- The target value is always non-zero.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: target = 4`  \
+  **Explanation:** Start at position 0. Move 1 step to the right, then 2 steps to the left, and finally 3 steps to the right to reach position 4 in 3 moves.
 
-The catch here is that the target can be both positive and negative, and the solution should work efficiently without brute-forcing through each step, especially for large numbers.
+- **Input:** `Example 2: target = 5`  \
+  **Explanation:** Start at position 0. Move 1 step to the right, then 2 steps to the right, and finally 3 steps to the right to reach position 5 in 3 moves.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The goal is to compute the smallest number of moves that allow us to reach the target position, by carefully analyzing the total steps taken at each stage.
 
-To solve this problem, we can leverage **mathematical insights** rather than iterating step by step. The idea is to recognize that the total distance we cover in `n` steps is the sum of the first `n` natural numbers. This sum can be represented as:
+### Initial Thoughts 💭
+- We need to compute the minimum number of moves efficiently for large target values.
+- We can calculate the smallest n such that the sum of the first n natural numbers exceeds or equals the target distance.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the target is always non-zero.
+- Ensure that the solution handles cases where target is at the extreme ends of the range (-10^9 to 10^9).
+- No special cases besides the minimum and maximum target values.
+- The solution must handle large target values efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int reachNumber(int target) {
+    target = abs(target);
+    long long n = ceil((-1.0 + sqrt(1+8.0*target)) / 2);
+    long long sum = n * (n + 1) / 2;
+    if (sum == target) return n;
+    long long res = sum - target;
+    if((res &1) == 0)   return n;
+    else                return n + ((n&1)? 2: 1);
+}
+```
 
-\[
-S_n = \frac{n \times (n + 1)}{2}
-\]
+This function calculates the minimum number of steps required to reach a target number, starting from 0, where each step adds or subtracts a consecutive integer.
 
-Where:
-- `n` is the number of moves (steps).
-- `S_n` is the total distance covered after `n` steps.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int reachNumber(int target) {
+	```
+	Defines the function 'reachNumber', which takes the target number and calculates the minimum steps required to reach it starting from 0.
 
-Our goal is to find the smallest `n` such that the sum `S_n` is either equal to the target or can be adjusted (through +/- operations) to exactly match the target.
+2. **Absolute Value**
+	```cpp
+	    target = abs(target);
+	```
+	Ensures the target number is positive by converting it to its absolute value, as the problem is symmetric with respect to the direction of movement.
 
-### Key Observations:
-1. **Sum of First n Numbers**: The total sum of the first `n` numbers grows quadratically as `n` increases. This can help us estimate how far we need to go in terms of the number of steps required.
-  
-2. **Adjusting the sum to match the target**:
-   - Once we find the sum `S_n` for some `n`, we need to check if we can adjust it to match the target.
-   - If `S_n` is exactly equal to the target, we have found the solution.
-   - If `S_n` is greater than the target, the difference `S_n - target` must be adjusted. We can achieve this adjustment by flipping the sign of certain steps (i.e., using `-1` instead of `+1` for some of the moves). This difference must be even for such an adjustment to be possible.
+3. **Mathematical Calculation**
+	```cpp
+	    long long n = ceil((-1.0 + sqrt(1+8.0*target)) / 2);
+	```
+	Calculates the smallest integer 'n' such that the sum of the first 'n' integers is greater than or equal to the target using the formula derived from the quadratic equation.
 
-3. **Mathematical Derivation**:
-   - The formula used to compute `n` comes from solving for `n` in the quadratic equation derived from the sum of the first `n` integers.
-   - Once we find the nearest `n`, we compute whether the difference between `S_n` and the target is even or odd. If the difference is even, no further moves are required; otherwise, we need to adjust the number of moves.
+4. **Sum Calculation**
+	```cpp
+	    long long sum = n * (n + 1) / 2;
+	```
+	Calculates the sum of the first 'n' integers (i.e., 1 + 2 + ... + n). This represents the total distance after 'n' steps.
 
-### Code Breakdown (Step by Step)
+5. **Exact Match Check**
+	```cpp
+	    if (sum == target) return n;
+	```
+	Checks if the sum of the first 'n' integers equals the target. If they are equal, the function returns 'n' because the target is reached exactly after 'n' steps.
 
-1. **Transform Target to Positive**:
-   - First, we take the absolute value of the target. This simplifies the problem, as the behavior for positive and negative targets is symmetric. We don't need to consider the sign of the target in the subsequent calculations.
-   ```cpp
-   target = abs(target);
-   ```
+6. **Difference Calculation**
+	```cpp
+	    long long res = sum - target;
+	```
+	Calculates the difference between the sum of the first 'n' integers and the target, to determine how far the sum overshoots the target.
 
-2. **Finding the Minimum n**:
-   - We calculate the smallest `n` such that the sum of the first `n` numbers (`S_n`) is greater than or equal to the target. This is done by solving the quadratic equation:
-   \[
-   n = \lceil \frac{-1 + \sqrt{1 + 8 \times target}}{2} \rceil
-   \]
-   - The expression above is derived from the formula for the sum of the first `n` natural numbers. Using the `sqrt()` function ensures we are working with a floating-point approximation to get the smallest `n` that satisfies the condition.
-   ```cpp
-   long long n = ceil((-1.0 + sqrt(1 + 8.0 * target)) / 2);
-   ```
+7. **Parity Check**
+	```cpp
+	    if((res &1) == 0)   return n;
+	```
+	Checks if the difference 'res' is even. If it is, then it's possible to adjust the sum to match the target by flipping the direction of one of the steps, so the function returns 'n'.
 
-3. **Calculate Sum of First n Numbers**:
-   - Once we have `n`, we calculate the sum of the first `n` numbers using the formula:
-   \[
-   S_n = \frac{n \times (n + 1)}{2}
-   \]
-   - This sum is the total distance we can cover after `n` steps.
-   ```cpp
-   long long sum = n * (n + 1) / 2;
-   ```
+8. **Adjust for Odd Difference**
+	```cpp
+	    else                return n + ((n&1)? 2: 1);
+	```
+	If the difference 'res' is odd, it means an additional step is needed to make the sum match the target. If 'n' is odd, add 2 steps; otherwise, add 1 step.
 
-4. **Check if Sum Matches Target**:
-   - If the sum of the first `n` numbers exactly equals the target, we return `n` as the result because we’ve found the minimum number of moves needed to reach the target.
-   ```cpp
-   if (sum == target) return n;
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-5. **Handle Adjustment**:
-   - If `S_n` is greater than the target, we calculate the difference `res = sum - target`.
-   - If this difference is even (`res & 1 == 0`), we can achieve the target by adjusting the signs of the moves. In this case, we return `n`.
-   - If the difference is odd, we need one additional move to make the difference even, so we return `n + 1` or `n + 2` depending on whether `n` is odd or even:
-   ```cpp
-   long long res = sum - target;
-   if ((res & 1) == 0) return n;
-   else return n + ((n & 1) ? 2 : 1);
-   ```
+The solution involves simple mathematical calculations, which are constant time operations.
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Time Complexity**:
-   - The time complexity of the algorithm is **O(1)** since the number of operations involved (square root, division, and modulus checks) is constant. This is an optimal approach, as we don't need to perform iterative steps for large target values.
-  
-- **Space Complexity**:
-   - The space complexity is also **O(1)** because the algorithm uses a constant amount of space to store the variables `n`, `sum`, and `res`.
+The space complexity is constant as only a few variables are used to store intermediate values.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently solves the problem by using a mathematical approach rather than brute-forcing through every possible combination of moves. By leveraging the formula for the sum of the first `n` numbers and solving for the smallest `n`, we minimize the number of steps needed to reach the target.
-
-The key insight is that the total distance covered by the first `n` moves grows quadratically, and the target can be adjusted if the difference between the sum and the target is even. This approach is both time-efficient and space-efficient, with constant time and space complexity.
-
-This method ensures that even for large targets, the solution is computed quickly without the need for simulating each individual move. The algorithm effectively handles both positive and negative targets, making it robust and adaptable to various input cases.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/reach-a-number/description/)
 

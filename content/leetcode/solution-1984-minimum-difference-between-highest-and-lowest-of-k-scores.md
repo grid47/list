@@ -14,115 +14,129 @@ img_src = ""
 youtube = "JU5XdBZZtlk"
 youtube_upload_date="2021-08-29"
 youtube_thumbnail="https://i.ytimg.com/vi/JU5XdBZZtlk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array nums where each element represents the score of a student. You need to select the scores of exactly k students such that the difference between the highest and the lowest score of the selected students is minimized. Your task is to return the minimum possible difference.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with an integer array nums and an integer k.
+- **Example:** `nums = [1, 3, 8, 7, 9], k = 3`
+- **Constraints:**
+	- 1 <= k <= nums.length <= 1000
+	- 0 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum possible difference between the highest and the lowest score of the selected k students.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The returned value must be the smallest possible difference.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to select a subset of k students from the array such that the difference between the highest and the lowest score in that subset is minimized.
+
+- Sort the array to make the differences easier to calculate.
+- Iterate through the sorted array and consider every contiguous subsequence of length k.
+- For each subsequence, calculate the difference between the first and the last element, then track the minimum difference.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is not empty, and k is at least 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 8, 7, 9], k = 3`  \
+  **Explanation:** After sorting the array, we get [1, 3, 7, 8, 9]. Selecting the students with scores 3, 7, and 8 gives a difference of 8 - 3 = 5. The minimum possible difference is 2.
+
+- **Input:** `Input: nums = [5, 2, 9, 4], k = 2`  \
+  **Explanation:** The sorted array is [2, 4, 5, 9]. Choosing the students with scores 4 and 5 results in a difference of 5 - 4 = 1. This is the minimum possible difference.
+
+{{< dots >}}
+## Approach 🚀
+We will sort the array of student scores, and then use a sliding window technique to find the smallest possible difference between the highest and lowest scores in any subsequence of length k.
+
+### Initial Thoughts 💭
+- Sorting the array helps because it allows us to consider only consecutive elements for a valid subsequence.
+- By sliding a window of size k over the sorted array, we can easily compute the difference between the largest and smallest elements in each subsequence.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, return 0 since there are no students to choose.
+- For large arrays, ensure the algorithm runs in O(n log n) time due to sorting.
+- If k equals the length of the array, the only valid choice is the entire array.
+- The solution must handle large arrays and ensure that the minimum difference is computed efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
 int minimumDifference(vector<int>& nums, int k) {
-    int res = INT_MAX;
-    sort(begin(nums), end(nums));
-    for (int i = k - 1; i < nums.size(); ++i)
-        res = min(res, nums[i] - nums[i - k + 1]);
-    return res;
-}
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the minimum difference between the maximum and minimum elements in any subarray of size `k` from a given array of integers `nums`. The goal is to determine the smallest range that can be achieved by selecting `k` contiguous elements from the sorted version of the array.
-
-### Approach
-
-To achieve the solution, we will utilize the following approach:
-1. **Sorting**: First, sort the input array. This step is crucial because it allows us to efficiently find the minimum difference between the largest and smallest numbers in any group of `k` contiguous elements.
-2. **Sliding Window Technique**: After sorting, we will use a sliding window of size `k` to compute the difference between the maximum and minimum values within that window. The maximum value will be the last element of the current window, and the minimum value will be the first element.
-3. **Iterating**: By iterating through the sorted array and updating the minimum difference, we can derive the desired result.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-```
-The `Solution` class encapsulates the function that will solve the problem.
-
-```cpp
-int minimumDifference(vector<int>& nums, int k) {
-```
-The method `minimumDifference` is defined to take a vector of integers (`nums`) and an integer (`k`) representing the size of the subarrays.
-
-```cpp
-    int res = INT_MAX;
-```
-The variable `res` is initialized to `INT_MAX` to store the minimum difference found during the iterations.
-
-```cpp
-    sort(begin(nums), end(nums));
-```
-We sort the `nums` array in non-decreasing order. This enables easy access to the smallest and largest values in any contiguous subarray of size `k`.
-
-```cpp
-    for (int i = k - 1; i < nums.size(); ++i)
-```
-This loop iterates from the `k-1` index to the end of the sorted array. The `k-1` index represents the last index of the first valid subarray of size `k`.
-
-```cpp
-        res = min(res, nums[i] - nums[i - k + 1]);
-```
-In each iteration, the difference between the maximum element (`nums[i]`) and the minimum element (`nums[i - k + 1]`) of the current window is calculated. The `min` function is then used to update `res` if a smaller difference is found.
-
-```cpp
-    return res;
-}
-```
-Finally, the minimum difference found is returned.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of the algorithm is dominated by the sorting step, which is \(O(n \log n)\), where \(n\) is the number of elements in `nums`. The subsequent loop runs in \(O(n)\) time, leading to an overall time complexity of \(O(n \log n)\).
-
-- **Space Complexity**: The space complexity is \(O(1)\) if we consider the input array and only use a few additional variables, as sorting can be done in place.
-
-### Conclusion
-
-The solution efficiently finds the minimum difference between the maximum and minimum values in any contiguous subarray of size `k` by leveraging sorting and a sliding window approach. By sorting the array first, the problem is simplified to a linear pass to calculate differences, thus optimizing the overall complexity.
-
-### Example Usage
-
-Here’s an example of how you can utilize the `minimumDifference` method:
-
-```cpp
-#include <vector>
-#include <iostream>
-using namespace std;
-
-int main() {
-    Solution sol;
-    vector<int> nums = {1, 5, 9, 13, 15};
-    int k = 3;
-    int result = sol.minimumDifference(nums, k);
-    cout << "The minimum difference is: " << result << endl; // Example output
-    return 0;
+int res = INT_MAX;
+sort(begin(nums), end(nums));
+for (int i = k - 1; i < nums.size(); ++i)
+    res = min(res, nums[i] - nums[i - k + 1]);
+return res;
 }
 ```
 
-### Potential Improvements
+This function finds the minimum difference between any two elements in a subarray of size k from the sorted array.
 
-1. **Early Exit**: If `k` is greater than the number of elements in `nums`, an early exit could be implemented with a return statement indicating an error or invalid input.
-  
-2. **Handling Edge Cases**: Additional checks could be included to handle edge cases such as an empty array or when `k` is equal to 0.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int minimumDifference(vector<int>& nums, int k) {
+	```
+	Defines the function `minimumDifference` that takes a vector `nums` and an integer `k`, representing the array and the size of the subarray, respectively.
 
-3. **Optimize for Larger Inputs**: For very large inputs, considerations could be made regarding the efficiency of the sorting algorithm and potential parallelization.
+2. **Variable Initialization**
+	```cpp
+	int res = INT_MAX;
+	```
+	Initializes a variable `res` with the maximum possible integer value to keep track of the minimum difference.
 
-By combining sorting with a simple calculation, the solution maintains clarity and efficiency, making it suitable for competitive programming and real-world applications where performance matters.
+3. **Sorting**
+	```cpp
+	sort(begin(nums), end(nums));
+	```
+	Sorts the array `nums` in non-decreasing order, which is necessary for efficiently finding the minimum difference in subsequent steps.
+
+4. **Looping**
+	```cpp
+	for (int i = k - 1; i < nums.size(); ++i)
+	```
+	Starts a loop from the index `k-1` to iterate through the sorted array `nums` and compare elements that are part of a subarray of size `k`.
+
+5. **Mathematical Operations**
+	```cpp
+	    res = min(res, nums[i] - nums[i - k + 1]);
+	```
+	Updates the `res` variable by calculating the minimum difference between the current element `nums[i]` and the element `k` positions before it.
+
+6. **Return Statement**
+	```cpp
+	return res;
+	```
+	Returns the minimum difference found between the elements in any subarray of size `k`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+Sorting the array takes O(n log n) time, and iterating through it takes O(n) time.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for the sorted array, and O(1) if we are sorting in place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/description/)
 

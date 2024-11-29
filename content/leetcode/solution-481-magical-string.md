@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "-iFDu2kaCpY"
 youtube_upload_date="2024-02-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/-iFDu2kaCpY/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,78 +28,124 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/-iFDu2kaCpY/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+A magical string consists of only '1' and '2' and follows a special rule: the number of consecutive occurrences of characters '1' and '2' generates the string itself. Given an integer `n`, return the number of '1's in the first `n` characters of the magical string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `n`, the length of the desired substring of the magical string.
+- **Example:** `n = 7`
+- **Constraints:**
+	- 1 <= n <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int magicalString(int n) {
-        string s = "122";
-        int i = 2;
-        while(s.size() < n)
-        s += string(s[i++] - '0', s.back() ^ 3);
-        return count(s.begin(), s.begin() + n, '1');
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of '1's in the first `n` characters of the magical string.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The result will be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate the magical string up to `n` characters and count the number of '1's.
 
-The task is to generate a special sequence known as the "magical string" for a given integer `n`. The magical string is defined as follows:
-1. It begins with "122".
-2. The sequence continues by appending groups of '1's and '2's based on the values in the sequence itself. For example, if the sequence reaches a position with the value `1`, it appends a single character (`1` or `2`); if it reaches a position with the value `2`, it appends two characters.
-3. The sequence toggles between appending '1's and '2's to create a unique pattern.
+- 1. Start with the base string '122'.
+- 2. Generate the magical string by adding segments based on the number of previous occurrences.
+- 3. For each segment, append the opposite digit (either '1' or '2') based on the previous occurrence.
+- 4. Once the string is generated up to `n` characters, count the number of '1's in the substring.
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of `n` will always be within the given range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 7`  \
+  **Explanation:** The first 7 characters of the magical string are '1221121'. This string has four '1's, so the output is 4.
 
-The goal is to generate the first `n` characters of the magical string and count the number of '1's within this range.
+- **Input:** `n = 3`  \
+  **Explanation:** The first 3 characters of the magical string are '122'. This string has two '1's, so the output is 2.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves constructing the magical string by iterating through the number of occurrences of '1' and '2' and generating the corresponding sequence.
 
-To solve this problem efficiently, we use a dynamic approach with a few critical steps:
+### Initial Thoughts 💭
+- We can generate the magical string by appending based on the previous occurrences of '1' and '2'.
+- The string grows gradually, so we can stop once we have the first `n` elements.
+- We need to efficiently construct the magical string and keep track of the occurrences of '1's.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least 1 element (n >= 1).
+- For large values of `n`, the algorithm should handle constructing the string efficiently up to 10^5 characters.
+- When `n = 1`, the string is just '1', so the output will be 1.
+- The solution should be able to handle up to 10^5 elements in the magical string.
+{{< dots >}}
+## Code 💻
+```cpp
+int magicalString(int n) {
+    string s = "122";
+    int i = 2;
+    while(s.size() < n)
+    s += string(s[i++] - '0', s.back() ^ 3);
+    return count(s.begin(), s.begin() + n, '1');
+}
+```
 
-1. **Initialize the Magical String**: Begin with a string `s` initialized as "122", the base pattern.
-2. **Pointer and Toggle Mechanism**: Maintain a pointer `i` that starts at position 2 (since the first two values are fixed). This pointer helps determine how many characters should be added based on the value at each position in `s`. The toggle mechanism is handled by alternating between '1' and '2' using a bitwise XOR operation.
-3. **Dynamic Construction**: Using a while loop, extend the magical string until it reaches the required length `n`. For each step, we:
-   - Append a certain number of characters (`1` or `2`) based on the value at `s[i]`. 
-   - If the value is `1`, we add a single character (`1` or `2`), and if it's `2`, we add two characters of the alternating value.
-4. **Counting '1's**: After constructing enough of the sequence, we count the number of '1's within the first `n` characters.
+The `magicalString` function generates a magical string where each new number is derived by inverting the last number of the string, and it repeats based on the value of the preceding element. The function counts the number of '1's in the string up to the `n`th position.
 
-This approach allows the magical string to be generated in a memory-efficient manner, without predefining all elements, by dynamically growing the string as needed.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int magicalString(int n) {
+	```
+	Defines the `magicalString` function, which generates a magical string up to the `n`th character and counts the number of '1's.
 
-### Code Breakdown (Step by Step)
+2. **String Initialization**
+	```cpp
+	    string s = "122";
+	```
+	Initializes the string `s` with the value "122". This is the base case for the magical string.
 
-The solution code provided accomplishes these steps with simplicity:
+3. **Variable Initialization**
+	```cpp
+	    int i = 2;
+	```
+	Initializes the variable `i` to 2. This will be used to track the current index in the string while constructing new elements.
 
-1. **Initialization**:
-   ```cpp
-   string s = "122";
-   int i = 2;
-   ```
-   Here, we initialize `s` with the starting sequence "122" and set `i` to 2. The value at `s[i]` will be used to control the number of characters appended in each step.
+4. **Loop**
+	```cpp
+	    while(s.size() < n)
+	```
+	Starts a `while` loop that continues to run until the size of the string `s` reaches or exceeds the given number `n`.
 
-2. **Growing the Magical String**:
-   ```cpp
-   while(s.size() < n)
-       s += string(s[i++] - '0', s.back() ^ 3);
-   ```
-   - **Loop Condition**: The `while` loop runs until `s` contains at least `n` characters.
-   - **Appending Characters**: Inside the loop, `s[i++] - '0'` calculates the integer value at position `i`. The expression `s.back() ^ 3` toggles the character to be appended. This leverages the bitwise XOR operation, where `s.back()` gives the last character in `s` (either '1' or '2'), and XORing it with 3 toggles it ('1' to '2' or '2' to '1').
+5. **String Manipulation**
+	```cpp
+	    s += string(s[i++] - '0', s.back() ^ 3);
+	```
+	Appends new characters to the string `s`. The number of new characters is determined by the value of the current character at index `i`. The new characters are the inverse of the last character in the string.
 
-3. **Counting '1's**:
-   ```cpp
-   return count(s.begin(), s.begin() + n, '1');
-   ```
-   After constructing the string, we use `count` to determine the number of '1's within the first `n` characters.
+6. **Return Statement**
+	```cpp
+	    return count(s.begin(), s.begin() + n, '1');
+	```
+	Returns the count of '1's in the string `s` from the beginning up to the `n`th position.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The time complexity of this algorithm is approximately O(n), as we are dynamically constructing and growing the string to contain the first `n` characters. This approach ensures minimal operations by leveraging prefix addition, which results in a linear time complexity for appending characters.
+The time complexity is O(n) because we generate the magical string up to `n` characters and count the number of '1's in the first `n` elements.
 
-The space complexity is also O(n) since we are storing the first `n` characters in the string `s`. This space usage is necessary to achieve the desired solution within the specified constraints.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The space complexity is O(n) because we store the magical string up to `n` characters.
 
-In summary, this solution provides an efficient and elegant way to generate and analyze the magical string up to `n` characters. By using pointer-based dynamic construction and bitwise operations to toggle characters, we minimize both time and space complexity. The use of the magical string generation technique in this code demonstrates a novel approach to string manipulation and sequence construction, making it well-suited for problems involving dynamic pattern generation.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/magical-string/description/)
 

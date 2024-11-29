@@ -14,93 +14,76 @@ img_src = ""
 youtube = "g1R3yEtHT8E"
 youtube_upload_date="2021-02-02"
 youtube_thumbnail="https://i.ytimg.com/vi/g1R3yEtHT8E/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a binary tree, a target node within the tree, and a non-negative integer k, determine all the nodes that are exactly k edges away from the target node. Return these node values as a list in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input includes the root of a binary tree, a target node within the tree, and an integer k.
+- **Example:** `root = [1,2,3,4,5,null,6], target = 2, k = 1`
+- **Constraints:**
+	- The binary tree has between 1 and 500 nodes.
+	- All node values are unique and in the range [0, 500].
+	- The target node is guaranteed to exist in the tree.
+	- 0 <= k <= 1000.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-    map<TreeNode*, TreeNode*> mp;
-    set<TreeNode*> st;
-    vector<int> ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of all node values that are k edges away from the target node.
+- **Example:** `Output: [4, 5, 1]`
+- **Constraints:**
+	- Output can be in any order.
+	- If no nodes are at distance k, return an empty list.
 
-    void parents(TreeNode* node) {
-        if(!node) return;
-        if(node->left) {
-            mp[node->left] = node;
-            parents(node->left);
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify all nodes exactly k edges away from the given target node in the binary tree.
 
-        if(node->right) {
-            mp[node->right] = node;
-            parents(node->right);
-        }
-    }
-public:
-    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-        if(!root) return {};
-        parents(root);
+- Store parent-child relationships of all nodes using a map.
+- Perform a breadth-first search (BFS) or depth-first search (DFS) starting from the target node.
+- Track visited nodes to avoid revisiting and looping.
+- Stop the search when the depth equals k and collect the values of nodes at this depth.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree is finite with no cyclic references.
+- Node values are distinct.
+- The tree includes the specified target node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1,2,3,4,5,null,6], target = 2, k = 1`  \
+  **Explanation:** Nodes at distance 1 from target node 2 are nodes 4, 5, and 1. Output: [4, 5, 1].
 
-        dfs(target, k);
-        return ans;
-    }
+- **Input:** `Input: root = [7], target = 7, k = 3`  \
+  **Explanation:** The tree contains only one node, so no nodes are at distance 3. Output: [].
 
-    void dfs(TreeNode* node, int k) {
-        if(st.count(node)) return;
-        st.insert(node);
+{{< dots >}}
+## Approach 🚀
+Use a combination of DFS to track parent-child relationships and BFS to find nodes at a specified distance.
 
-        if(k == 0) {
-            ans.push_back(node->val);
-            return;
-        }
-
-        if(node->left) dfs(node->left, k - 1);
-        if(node->right) dfs(node->right, k - 1);
-        if(mp[node]) dfs(mp[node], k - 1);
-    }
-
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires finding all nodes that are at a distance `k` from a given target node in a binary tree. The binary tree is represented by a root node and has an arbitrary structure with child nodes connected by edges. A target node is provided, and you need to determine all the nodes that are exactly `k` edges away from the target. The nodes can be traversed by moving up or down the tree.
-
-For example:
-Given a binary tree and a target node, you are tasked with returning all nodes that are at a distance `k` from the target node.
-
-### Approach
-
-To solve this problem, we need to approach it in a systematic way that considers both the traversal of the tree and the relationship between nodes. We will break down the solution into several key components:
-
-1. **Parent Mapping**: Since the problem allows traversal in both directions (up and down), we need a way to navigate from any node to its parent. We can achieve this by creating a mapping from child nodes to their respective parents.
-
-2. **Depth-First Search (DFS)**: To find all nodes at a distance `k` from the target, we perform a DFS starting from the target node. We will visit nodes at increasing levels of depth while keeping track of the nodes we've already visited.
-
-3. **Set of Visited Nodes**: We must ensure that we do not revisit the same node while traversing the tree. For this purpose, we will use a set to store the nodes we have already visited.
-
-4. **Tracking Distance**: While performing DFS, we maintain the depth and stop when we reach a distance `k` from the target node.
-
-The approach is efficient and leverages both DFS and the parent-child relationship in the tree to solve the problem.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Parent Mapping
-
+### Initial Thoughts 💭
+- The problem requires traversing the tree in both directions: parent-to-child and child-to-parent.
+- Using BFS will efficiently find nodes at a specific distance.
+- Start by mapping parent relationships for all nodes.
+- Perform a level-order traversal (BFS) from the target node to collect nodes at the required depth.
+{{< dots >}}
+### Edge Cases 🌐
+- Tree is empty (should not occur per constraints).
+- Tree contains the maximum number of nodes, k is very large (e.g., k > tree height).
+- Tree has only one node, k > 0.
+- Ensure k = 0 returns the value of the target node.
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
+map<TreeNode*, TreeNode*> mp;
+set<TreeNode*> st;
+vector<int> ans;
+
 void parents(TreeNode* node) {
     if(!node) return;
     if(node->left) {
@@ -113,15 +96,15 @@ void parents(TreeNode* node) {
         parents(node->right);
     }
 }
-```
+public:
+vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+    if(!root) return {};
+    parents(root);
 
-- The `parents` function builds a mapping of each node to its parent. We traverse the tree starting from the root, and for every node that has a left or right child, we add an entry in the map `mp` where the child is the key and the parent is the value.
-  
-- This function ensures that we can traverse upwards in the tree, allowing us to move from a child node to its parent if needed during our search for nodes at distance `k`.
+    dfs(target, k);
+    return ans;
+}
 
-#### Step 2: Depth-First Search (DFS) Implementation
-
-```cpp
 void dfs(TreeNode* node, int k) {
     if(st.count(node)) return;
     st.insert(node);
@@ -135,53 +118,198 @@ void dfs(TreeNode* node, int k) {
     if(node->right) dfs(node->right, k - 1);
     if(mp[node]) dfs(mp[node], k - 1);
 }
+
 ```
 
-- The `dfs` function is a recursive helper function that performs a DFS to find all nodes at distance `k` from the target node.
-- We first check if the current node has been visited by checking if it exists in the set `st`. If it has, we return immediately to avoid revisiting nodes.
-  
-- If the distance `k` reaches 0, it means we have found a node that is exactly `k` steps away from the target. We add this node's value to the result vector `ans`.
+This code defines a class Solution that finds all nodes at a distance k from a target node in a binary tree. It utilizes depth-first search (DFS) and a helper function for tracking parent nodes to traverse the tree.
 
-- The DFS explores the left and right children of the current node. Additionally, it checks if the parent of the node (using the `mp` map) should be explored. This allows us to traverse both upwards and downwards in the tree.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Define the class 'Solution' to solve the problem of finding nodes at a distance 'k' from a target node in a binary tree.
 
-#### Step 3: Initializing the Process
+2. **Variable Declaration**
+	```cpp
+	map<TreeNode*, TreeNode*> mp;
+	```
+	Declare a map 'mp' to store each node's parent node.
 
-```cpp
-vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-    if(!root) return {};
-    parents(root);
+3. **Variable Declaration**
+	```cpp
+	set<TreeNode*> st;
+	```
+	Declare a set 'st' to track the visited nodes to avoid cycles.
 
-    dfs(target, k);
-    return ans;
-}
-```
+4. **Variable Declaration**
+	```cpp
+	vector<int> ans;
+	```
+	Declare a vector 'ans' to store the values of nodes that are at a distance 'k' from the target.
 
-- The `distanceK` function is the main function called to find all nodes at distance `k` from the target node.
-  
-- First, we build the parent-child mapping by calling `parents(root)`. This prepares the `mp` map so that each node is associated with its parent.
-  
-- Then, we start the DFS search from the target node, looking for nodes that are exactly `k` distance away. The result is stored in the `ans` vector, which is returned at the end.
+5. **Method Definition**
+	```cpp
+	void parents(TreeNode* node) {
+	```
+	Define a helper method to traverse the tree and record each node's parent in the 'mp' map.
 
-### Complexity
+6. **Conditional Check**
+	```cpp
+	    if(!node) return;
+	```
+	Check if the current node is null. If so, return to prevent further traversal.
 
-#### Time Complexity:
-- **O(N)** where `N` is the number of nodes in the tree.
-  - Building the parent map requires a traversal of the entire tree, which is O(N).
-  - The DFS traversal visits each node at most once, which is also O(N).
-  
-Thus, the total time complexity is **O(N)**, where `N` is the number of nodes in the tree.
+7. **Conditional Check**
+	```cpp
+	    if(node->left) {
+	```
+	Check if the current node has a left child.
 
-#### Space Complexity:
-- **O(N)** due to the following reasons:
-  - The parent map `mp` stores entries for each node, requiring O(N) space.
-  - The set `st` stores the nodes that have been visited during DFS, requiring O(N) space in the worst case.
-  - The result vector `ans` can also store up to O(N) elements if all nodes are at a distance `k` from the target.
-  
-Therefore, the space complexity is **O(N)**.
+8. **Map Operation**
+	```cpp
+	        mp[node->left] = node;
+	```
+	Store the left child and its parent in the 'mp' map.
 
-### Conclusion
+9. **Recursive Call**
+	```cpp
+	        parents(node->left);
+	```
+	Recursively call the 'parents' method on the left child.
 
-This solution efficiently solves the problem of finding all nodes at distance `k` from a target node in a binary tree. By using a parent-child mapping and performing a DFS traversal, we are able to navigate both upwards and downwards in the tree while keeping track of visited nodes to avoid revisits. The time and space complexities are both optimal, making this approach suitable for large trees.
+10. **Conditional Check**
+	```cpp
+	    if(node->right) {
+	```
+	Check if the current node has a right child.
+
+11. **Map Operation**
+	```cpp
+	        mp[node->right] = node;
+	```
+	Store the right child and its parent in the 'mp' map.
+
+12. **Recursive Call**
+	```cpp
+	        parents(node->right);
+	```
+	Recursively call the 'parents' method on the right child.
+
+13. **Public Method**
+	```cpp
+	public:
+	```
+	Declare the following methods as public members of the class.
+
+14. **Method Definition**
+	```cpp
+	vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+	```
+	Define the main method 'distanceK' that returns the values of nodes at a distance 'k' from the target.
+
+15. **Base Case Check**
+	```cpp
+	    if(!root) return {};
+	```
+	Check if the root node is null, and if so, return an empty vector.
+
+16. **Helper Method Call**
+	```cpp
+	    parents(root);
+	```
+	Call the 'parents' method to record the parent-child relationships.
+
+17. **DFS Call**
+	```cpp
+	    dfs(target, k);
+	```
+	Call the 'dfs' method to perform depth-first search and find all nodes at distance 'k' from the target.
+
+18. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the 'ans' vector containing the values of nodes at the specified distance.
+
+19. **Method Definition**
+	```cpp
+	void dfs(TreeNode* node, int k) {
+	```
+	Define the 'dfs' method to perform a depth-first search on the tree.
+
+20. **Set Check**
+	```cpp
+	    if(st.count(node)) return;
+	```
+	Check if the node has already been visited by checking the 'st' set. If yes, return to avoid processing it again.
+
+21. **Set Operation**
+	```cpp
+	    st.insert(node);
+	```
+	Add the node to the 'st' set to mark it as visited.
+
+22. **Base Case Check**
+	```cpp
+	    if(k == 0) {
+	```
+	Check if the current depth 'k' is zero.
+
+23. **Action on Base Case**
+	```cpp
+	        ans.push_back(node->val);
+	```
+	If 'k' is zero, add the node's value to the 'ans' vector.
+
+24. **Return Statement**
+	```cpp
+	        return;
+	```
+	Return to exit the current function call once the node's value is added to 'ans'.
+
+25. **Closing Brace**
+	```cpp
+	    }
+	```
+	End the block for the base case check.
+
+26. **Recursive DFS Calls**
+	```cpp
+	    if(node->left) dfs(node->left, k - 1);
+	```
+	If the node has a left child, recursively call 'dfs' on the left child with a reduced value of 'k'.
+
+27. **Recursive DFS Calls**
+	```cpp
+	    if(node->right) dfs(node->right, k - 1);
+	```
+	If the node has a right child, recursively call 'dfs' on the right child with a reduced value of 'k'.
+
+28. **Recursive DFS Call**
+	```cpp
+	    if(mp[node]) dfs(mp[node], k - 1);
+	```
+	If a parent node exists in the 'mp' map, recursively call 'dfs' on the parent with a reduced value of 'k'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N), where N is the number of nodes in the tree.
+- **Average Case:** O(N), since each node and edge is visited once.
+- **Worst Case:** O(N), if k equals the tree height or the tree is skewed.
+
+The complexity is dominated by traversing the tree and performing BFS.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if only the target node exists.
+- **Worst Case:** O(N), due to the parent map and BFS queue.
+
+Space usage depends on the map for parent references and BFS queue.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/)
 

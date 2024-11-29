@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "4IroNy8fmNA"
 youtube_upload_date="2022-06-25"
 youtube_thumbnail="https://i.ytimg.com/vi/4IroNy8fmNA/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,187 @@ youtube_thumbnail="https://i.ytimg.com/vi/4IroNy8fmNA/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+A happy number is a number that eventually reaches 1 when replaced by the sum of the squares of its digits. If the process results in an endless loop of numbers, the number is not happy. Your task is to determine whether a given number is a happy number.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a positive integer n, where 1 <= n <= 231 - 1.
+- **Example:** `n = 23`
+- **Constraints:**
+	- 1 <= n <= 231 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sqr(int n) {
-        int res = 0;
-        while(n) {
-            int tmp = n % 10;
-            res += tmp * tmp;
-            n = n / 10;
-        }
-        return res;
-    }
-    bool isHappy(int n) {
-        int slow = n;
-        int fast = n;
-        do {
-            slow = sqr(slow);
-            fast = sqr(sqr(fast));
-        } while(slow != fast);
-        return slow == 1;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the number n is a happy number, otherwise return false.
+- **Example:** `Output: false`
+- **Constraints:**
+	- The output should be a boolean value indicating whether the number is happy or not.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if the number n becomes 1 by repeatedly replacing it with the sum of the squares of its digits, or if it falls into an endless loop.
 
-We’re tackling the **happy number** problem! A **happy number** follows a unique process:
+- Create a helper function to calculate the sum of the squares of the digits of a number.
+- Use the Floyd's Cycle detection algorithm (also known as the slow and fast pointers technique) to detect if the number falls into a cycle. If the number becomes 1, it's happy, otherwise it's not.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input number is always a valid positive integer within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 19`  \
+  **Explanation:** In this case, the sum of the squares of digits is 12 + 92 = 82, then 82 + 22 = 68, then 62 + 82 = 100, and 12 + 02 + 02 = 1. Since the number eventually reaches 1, it's a happy number.
 
-1. Start with any positive integer `n`.
-2. Replace `n` with the sum of the squares of its digits.
-3. Repeat this until either:
-   - The number becomes `1` (indicating it’s a happy number!).
-   - Or the number falls into a never-ending cycle that doesn’t include `1` (in which case, it’s not a happy number).
+- **Input:** `n = 2`  \
+  **Explanation:** For n = 2, the sum of the squares of digits is 4, then 4 becomes 16, then 37, and so on. Since it falls into a cycle, it is not a happy number.
 
-For example:
-- **Input:** `19`
-- **Output:** `True` (because the sequence of squares eventually reaches `1`).
+{{< dots >}}
+## Approach 🚀
+To determine if a number is happy, we use the process of repeatedly replacing the number by the sum of the squares of its digits. If the number eventually reaches 1, it's happy. If it falls into a cycle, it's not.
 
----
-
-### 🧠 Approach
-
-To solve this problem, we need to determine if summing the squares of the digits of a number `n` leads to `1` or falls into a cycle. If we find a cycle, the number is not happy.
-
-To detect cycles, we’ll use **Floyd's Cycle-Finding Algorithm** (a.k.a. the **tortoise and hare** algorithm). This algorithm uses two pointers:
-- **Slow pointer** moves one step at a time.
-- **Fast pointer** moves two steps at a time.
-
-If the two pointers meet, a cycle is detected. If they meet at `1`, the number is happy!
-
-#### Key Steps:
-1. Create a helper function `sqr(int n)` to calculate the sum of the squares of the digits of `n`.
-2. Use two pointers (`slow` and `fast`) to repeatedly compute the sum of squares and check for a cycle.
-3. If the two pointers meet at `1`, the number is happy.
-4. If they meet at any other value, a cycle exists, and the number is not happy.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break it down step by step:
-
-#### Step 1: Helper Function `sqr(int n)`
+### Initial Thoughts 💭
+- A brute force approach of tracking the numbers could be inefficient due to the potential for cycles.
+- Using the Floyd's Cycle detection method is an optimal approach to detect cycles.
+- Using slow and fast pointers will allow us to detect a cycle in linear time, improving efficiency.
+{{< dots >}}
+### Edge Cases 🌐
+- Since n is always a positive integer, there will be no empty inputs.
+- For large values of n, the approach should work efficiently due to the cycle detection method.
+- The value n = 1 is trivially a happy number since it stays at 1.
+- The solution should handle all valid inputs efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
 int sqr(int n) {
     int res = 0;
     while(n) {
-        int tmp = n % 10;   // Get the last digit
-        res += tmp * tmp;    // Add the square of the digit
-        n = n / 10;          // Remove the last digit
+        int tmp = n % 10;
+        res += tmp * tmp;
+        n = n / 10;
     }
     return res;
 }
-```
-- **Purpose:** This function computes the sum of the squares of the digits of `n`.
-- **How it works:** 
-  - We loop through each digit of `n`, square it, and add it to the result.
-  - The last digit is removed after processing with `n = n / 10`.
-  - The function returns the sum of the squares.
-
-#### Step 2: Main Function `isHappy(int n)`
-```cpp
 bool isHappy(int n) {
     int slow = n;
     int fast = n;
     do {
-        slow = sqr(slow);   // Move slow pointer one step
-        fast = sqr(sqr(fast)); // Move fast pointer two steps
+        slow = sqr(slow);
+        fast = sqr(sqr(fast));
     } while(slow != fast);
-    return slow == 1;  // If slow reaches 1, it's a happy number
+    return slow == 1;
 }
 ```
-- **Purpose:** This function checks whether `n` is a happy number using Floyd’s Cycle-Finding Algorithm.
-- **How it works:**
-  - Both the slow and fast pointers start at `n`.
-  - The slow pointer moves one step at a time, while the fast pointer moves two steps at a time.
-  - We keep moving the pointers until they meet. If they meet at `1`, the number is happy, so we return `true`.
-  - If they meet at any other value, a cycle is detected, and we return `false`.
 
----
+This code solves the Happy Number problem by calculating the sum of squares of digits repeatedly. The function `sqr` calculates the sum of squares of digits for a number, while `isHappy` checks if a number is happy by using the Floyd's Cycle-Finding Algorithm (Tortoise and Hare) to detect cycles.
 
-### 📈 Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sqr(int n) {
+	```
+	Define the function `sqr` that calculates the sum of squares of digits for a given integer.
 
-#### Time Complexity:
-- **O(log n):** The `sqr` function runs in **O(log n)** because the number of digits in `n` is proportional to `log n`. The `do-while` loop runs until a cycle is detected or the slow pointer reaches `1`. In the worst case, the number of iterations is proportional to the number of distinct values that can be reached by summing the squares of the digits, which is small and bounded. So, the time complexity is **O(log n)**.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initialize a variable `res` to store the sum of the squares of the digits.
 
-#### Space Complexity:
-- **O(1):** We only use two pointers (`slow` and `fast`), so the space complexity is constant. No additional data structures are required.
+3. **While Loop Condition**
+	```cpp
+	    while(n) {
+	```
+	Start a while loop that continues until `n` becomes 0. This will process each digit of `n`.
 
----
+4. **Extract Last Digit**
+	```cpp
+	        int tmp = n % 10;
+	```
+	Extract the last digit of `n` using the modulus operator.
 
-### 🏁 Conclusion
+5. **Sum of Squares of Digits**
+	```cpp
+	        res += tmp * tmp;
+	```
+	Square the extracted digit and add it to `res`.
 
-We’ve successfully solved the happy number problem using **Floyd’s Cycle-Finding Algorithm**. This method is:
-1. **Efficient:** The algorithm runs in **O(log n)** time, making it optimal for large inputs.
-2. **Space Optimized:** The space complexity is **O(1)**, which means it uses minimal memory.
-3. **Clever:** By using the tortoise and hare approach, we can efficiently detect cycles without storing all previous values, making this solution both elegant and memory-friendly.
+6. **Remove Last Digit**
+	```cpp
+	        n = n / 10;
+	```
+	Remove the last digit of `n` by performing integer division by 10.
 
-### Key Takeaways:
-- **Cycle detection** ensures we don’t fall into infinite loops.
-- **Efficiency** is achieved with logarithmic time complexity.
-- **Space savings** make the solution ideal for memory-constrained environments.
+7. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the sum of the squares of the digits stored in `res`.
 
-So, next time you face a number and wonder whether it's happy, you’ve got a smooth, efficient solution ready to go! Keep coding and keep exploring! 🌟
+8. **Function Definition**
+	```cpp
+	bool isHappy(int n) {
+	```
+	Define the `isHappy` function which checks if a number `n` is a happy number by using the Tortoise and Hare algorithm.
+
+9. **Variable Initialization**
+	```cpp
+	    int slow = n;
+	```
+	Initialize `slow` pointer to `n`. It will move one step at a time.
+
+10. **Variable Initialization**
+	```cpp
+	    int fast = n;
+	```
+	Initialize `fast` pointer to `n`. It will move two steps at a time.
+
+11. **Do While Loop**
+	```cpp
+	    do {
+	```
+	Start a do-while loop to calculate the sum of squares of digits for `slow` and `fast` until they meet.
+
+12. **Slow Pointer Update**
+	```cpp
+	        slow = sqr(slow);
+	```
+	Move the `slow` pointer by calculating the sum of squares of its digits using the `sqr` function.
+
+13. **Fast Pointer Update**
+	```cpp
+	        fast = sqr(sqr(fast));
+	```
+	Move the `fast` pointer by calculating the sum of squares of its digits twice (two steps).
+
+14. **Loop Condition**
+	```cpp
+	    } while(slow != fast);
+	```
+	Repeat the loop until `slow` and `fast` pointers meet. If they meet at 1, the number is happy.
+
+15. **Check if Happy**
+	```cpp
+	    return slow == 1;
+	```
+	Return true if `slow` equals 1, indicating that `n` is a happy number. Otherwise, return false.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log(n))
+- **Average Case:** O(log(n))
+- **Worst Case:** O(log(n))
+
+The time complexity is logarithmic due to the number of digits in the number n and the cycle detection method.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we are only using a few variables for the pointers and digit calculations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/happy-number/description/)
 

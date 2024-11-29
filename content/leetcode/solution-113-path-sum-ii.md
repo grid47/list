@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "MwLDG-WNOjM"
 youtube_upload_date="2019-10-28"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/MwLDG-WNOjM/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,187 +28,180 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/MwLDG-WNOjM/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree and an integer targetSum, return all paths from the root to the leaf nodes where the sum of the node values along the path equals the targetSum. A root-to-leaf path is defined as any path that starts from the root and ends at a leaf node. A leaf node is a node that does not have any children.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by the root node and an integer targetSum. The binary tree is represented as an array where each node is given by its value. Null values represent missing nodes.
+- **Example:** `Input: root = [10,5,15,3,7,null,20], targetSum = 22`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [0, 5000].
+	- Each node value is between -1000 and 1000.
+	- The targetSum is between -1000 and 1000.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<vector<int> > paths;
-        vector<int> path;
-        findPaths(root, sum, path, paths);
-        return paths;  
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of all root-to-leaf paths, where each path is represented as a list of node values that sum up to the given targetSum.
+- **Example:** `Output: [[10,5,3], [10,15,20]]`
+- **Constraints:**
+	- Each path should be a valid root-to-leaf path with the sum of node values equal to targetSum.
 
-    void findPaths(TreeNode* node, int sum, vector<int>& path, vector<vector<int> >& paths) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to traverse the tree and accumulate the path sum from the root to the leaf nodes. If a path's sum matches the targetSum, it should be added to the result.
 
-        if (!node) return;
+- Traverse the tree using depth-first search (DFS).
+- At each node, subtract its value from targetSum and continue exploring both left and right children.
+- If a leaf node is reached and the remaining sum equals 0, add the current path to the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input tree is a valid binary tree, where nodes have either zero, one, or two children.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [10,5,15,3,7,null,20], targetSum = 22`  \
+  **Explanation:** Starting from the root (10), we explore the left child (5) and its left child (3), which gives the path [10,5,3] with sum 22. We also explore the right child (15) and its right child (20), which gives the path [10,15,20] with sum 22.
 
-        path.push_back(node -> val);
+- **Input:** `Input: root = [1,2,3], targetSum = 5`  \
+  **Explanation:** No path from root to leaf sums up to 5. Therefore, the output is an empty list.
 
-        if (!(node -> left) && !(node -> right) && sum == node -> val)
-            paths.push_back(path);
+{{< dots >}}
+## Approach 🚀
+The solution involves using depth-first search (DFS) to traverse the tree. At each node, we reduce the targetSum by the current node value. If we reach a leaf node with the remaining targetSum equal to 0, we add that path to the result.
 
-        findPaths(node -> left, sum - node -> val, path, paths);
-        findPaths(node -> right, sum - node -> val, path, paths);
-
-        path.pop_back();
-    }
-};
-{{< /highlight >}}
----
-
-### 🌲 **Problem Statement: Find All Root-to-Leaf Paths That Sum to a Target**
-
-We need to find all the paths in a binary tree where the sum of node values along each path equals a given target sum. The paths should start at the root and end at any leaf node. Each valid path should be returned as a list of integers.
-
-For example, consider the following binary tree:
-
-```
-          5
-         / \
-        4   8
-       /   / \
-      11  13  4
-     /  \      \
-    7    2      1
-```
-
-Given the target sum of 22, the solution should return:
-
-```
-[ [5, 4, 11, 2], [5, 8, 4, 1] ]
-```
-
----
-
-### 🧠 **Approach to Solve the Problem**
-
-To solve this, we will use a **Depth-First Search (DFS)** strategy. We traverse the tree recursively, accumulating the node values along the current path. At each step, we check if we’ve reached a leaf node with the target sum. If we have, we add that path to the result. Here’s a step-by-step breakdown:
-
-1. **Initialize Data Structures:**
-   - A `vector<vector<int>>` called `paths` to store all valid root-to-leaf paths.
-   - A `vector<int>` called `path` to keep track of the current path from the root to a leaf node.
-
-2. **DFS Traversal:**
-   - Start from the root and recursively traverse the tree.
-   - For each node, add its value to the `path`.
-   - When a leaf node is reached (i.e., both left and right children are `NULL`), check if the accumulated sum equals the target sum. If it does, add the current path to the result.
-   - After exploring the left and right subtrees, backtrack by removing the last node from the path.
-
-3. **Return the Result:**
-   - After exploring all paths, return the `paths` vector containing all valid paths.
-
----
-
-### 🔧 **Code Breakdown (Step by Step)**
-
-#### 1. `pathSum` Function:
-
+### Initial Thoughts 💭
+- DFS is ideal for exploring all possible root-to-leaf paths.
+- We need to ensure that when we reach a leaf node, we check if the path sum equals the targetSum.
+{{< dots >}}
+### Edge Cases 🌐
+- If the tree is empty (root is null), the output should be an empty list.
+- The solution should efficiently handle trees with up to 5000 nodes.
+- Handle negative targetSum and node values, ensuring the path sum calculation is correct even when values are negative.
+- The solution should operate within time and space limits for trees with up to 5000 nodes.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> pathSum(TreeNode* root, int sum) {
-    vector<vector<int>> paths;
+    vector<vector<int> > paths;
     vector<int> path;
     findPaths(root, sum, path, paths);
-    return paths;
+    return paths;  
 }
-```
 
-- This function is the main entry point. It initializes two vectors: `paths` for storing the valid paths and `path` for keeping track of the current path.
-- It calls the `findPaths` helper function to perform the DFS and populate the `paths` vector.
-- Finally, it returns the list of valid paths.
+void findPaths(TreeNode* node, int sum, vector<int>& path, vector<vector<int> >& paths) {
 
-#### 2. `findPaths` Helper Function:
-
-```cpp
-void findPaths(TreeNode* node, int sum, vector<int>& path, vector<vector<int>>& paths) {
     if (!node) return;
-    path.push_back(node->val);
 
-    if (!(node->left) && !(node->right) && sum == node->val)
+    path.push_back(node -> val);
+
+    if (!(node -> left) && !(node -> right) && sum == node -> val)
         paths.push_back(path);
 
-    findPaths(node->left, sum - node->val, path, paths);
-    findPaths(node->right, sum - node->val, path, paths);
+    findPaths(node -> left, sum - node -> val, path, paths);
+    findPaths(node -> right, sum - node -> val, path, paths);
 
     path.pop_back();
 }
 ```
 
-- This is the recursive function that traverses the binary tree.
-- First, we check if the current node is `NULL`. If it is, we return.
-- We add the current node's value to the `path`.
-- If the current node is a **leaf node** (both left and right children are `NULL`) and the remaining sum matches the target, we add the current `path` to the `paths` vector.
-- We then recursively explore both the left and right subtrees, adjusting the target sum by subtracting the node’s value.
-- Finally, we backtrack by removing the last node from the `path`, which allows us to explore other potential paths.
+This solution computes all root-to-leaf paths in a binary tree where the sum of node values equals the given target. It uses a backtracking approach to explore and record valid paths.
 
-#### 3. Backtracking:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> pathSum(TreeNode* root, int sum) {
+	```
+	Declare the main function to find all paths summing to a target value.
 
-The core idea here is **backtracking**. As we explore paths from the root to the leaves, we build up a path (from the root to the current node). Once we explore the left and right subtrees, we remove the last node from the path. This ensures that the `path` always reflects the current exploration.
+2. **Vector Initialization**
+	```cpp
+	    vector<vector<int> > paths;
+	```
+	Initialize a 2D vector to store all valid paths.
 
----
+3. **Vector Initialization**
+	```cpp
+	    vector<int> path;
+	```
+	Initialize a 1D vector to temporarily store the current path.
 
-### ⏱️ **Time and Space Complexity**
+4. **Recursive Call**
+	```cpp
+	    findPaths(root, sum, path, paths);
+	```
+	Invoke the helper function to find paths using backtracking.
 
-#### **Time Complexity: O(n)**
+5. **Return Statement**
+	```cpp
+	    return paths;  
+	```
+	Return the collection of all valid paths.
 
-- The time complexity is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we visit each node exactly once during the DFS traversal.
+6. **Function Declaration**
+	```cpp
+	void findPaths(TreeNode* node, int sum, vector<int>& path, vector<vector<int> >& paths) {
+	```
+	Declare the helper function for recursive backtracking.
 
-#### **Space Complexity: O(h)**
+7. **Base Case**
+	```cpp
+	    if (!node) return;
+	```
+	Base case: If the node is null, terminate the current recursive call.
 
-- The space complexity is **O(h)**, where `h` is the height of the tree. This accounts for the space used by the recursion stack.
-  - In the worst case (unbalanced tree), the recursion stack can have a depth of `h = n`, so the space complexity is **O(n)**.
-  - In the best case (balanced tree), the recursion stack depth will be **O(log n)**.
+8. **Push Operation**
+	```cpp
+	    path.push_back(node -> val);
+	```
+	Add the current node's value to the path.
 
----
+9. **Condition Evaluation**
+	```cpp
+	    if (!(node -> left) && !(node -> right) && sum == node -> val)
+	```
+	Check if the current node is a leaf and the remaining sum matches its value.
 
-### 🔍 **Example Walkthrough**
+10. **Vector Insertion**
+	```cpp
+	        paths.push_back(path);
+	```
+	Record the current path as a valid result.
 
-#### Example 1: A Balanced Binary Tree
+11. **Recursive Call**
+	```cpp
+	    findPaths(node -> left, sum - node -> val, path, paths);
+	```
+	Recursively explore the left subtree, updating the remaining sum.
 
-Consider the following tree:
+12. **Recursive Call**
+	```cpp
+	    findPaths(node -> right, sum - node -> val, path, paths);
+	```
+	Recursively explore the right subtree, updating the remaining sum.
 
-```
-        1
-       / \
-      2   3
-     / \
-    4   5
-```
+13. **Pop Operation**
+	```cpp
+	    path.pop_back();
+	```
+	Backtrack by removing the last node from the path.
 
-- Start from the root node `1`.
-- The left subtree (rooted at `2`) has valid paths: `1 → 2 → 4` and `1 → 2 → 5`.
-- The right subtree rooted at `3` does not contribute to valid paths (no leaf nodes that match the sum).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The valid paths are `[[1, 2, 4], [1, 2, 5]]`.
+In the worst case, we will traverse all nodes in the tree. Therefore, the time complexity is O(n), where n is the number of nodes in the tree.
 
-#### Example 2: An Unbalanced Binary Tree
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
 
-Consider this tree:
+The space complexity is O(h), where h is the height of the tree, due to the recursive call stack. In the worst case (unbalanced tree), h can be equal to n.
 
-```
-        1
-       /
-      2
-     /
-    3
-   /
-  4
-```
+**Happy Coding! 🎉**
 
-- Starting from the root node `1`, the only valid path is `1 → 2 → 3 → 4`.
-
-The valid path is `[[1, 2, 3, 4]]`.
-
----
-
-### 🚀 **Conclusion**
-
-This solution efficiently finds all root-to-leaf paths in a binary tree that sum to a given target using **Depth-First Search (DFS)**. The time complexity is **O(n)**, and the space complexity is **O(h)**, making it suitable for large binary trees. The recursive backtracking approach ensures that we correctly explore all possible paths while maintaining an efficient solution.
-
-This approach is both simple and powerful, providing a clean solution to the problem of finding all root-to-leaf paths that match a target sum.
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-sum-ii/description/)
 

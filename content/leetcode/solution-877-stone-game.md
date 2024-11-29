@@ -14,134 +14,174 @@ img_src = ""
 youtube = "jGmq8d4cIx0"
 youtube_upload_date="2023-09-21"
 youtube_thumbnail="https://i.ytimg.com/vi/jGmq8d4cIx0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Alice and Bob are playing a game with an array of piles of stones. Each pile contains a positive number of stones, and the game proceeds as follows: Alice and Bob take turns, with Alice starting first. On each turn, a player can choose the entire pile of stones either from the beginning or the end of the array. The player who ends up with the most stones wins. Given the piles array, return true if Alice wins the game, or false if Bob wins, assuming both players play optimally.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of integers representing piles of stones. The length of the array is even, and the sum of the stones in all piles is odd.
+- **Example:** `Input: piles = [4, 6, 2, 8]`
+- **Constraints:**
+	- 2 <= piles.length <= 500
+	- piles.length is even.
+	- 1 <= piles[i] <= 500
+	- sum(piles[i]) is odd.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> p;
-    int n;
-    
-    map<int, map<int,int>> memo;
-    
-    bool dp(int i, int j) {
-        if(i == j) return p[i];
-        
-        if(memo.count(i) && memo[i].count(j)) return memo[i][j];
-        
-        return memo[i][j] = max(p[i] - dp(i + 1, j), p[j] - dp(i, j - 1)) ;
-        
-    }
-    
-    bool stoneGame(vector<int>& piles) {
-        this->p = piles;
-        n = piles.size();
-        return dp(0, n - 1) >= 0;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if Alice wins, meaning she accumulates more stones than Bob. Otherwise, return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output is a boolean indicating if Alice wins the game.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if Alice, starting first, can win the game by optimally picking stones from the piles.
 
-The problem "Stone Game" is a two-player game where players take turns removing stones from piles. Given an array representing the number of stones in each pile, the goal is to determine whether the first player can always win, assuming both players play optimally.
+- Use dynamic programming to simulate both players' optimal moves.
+- Memoize the results to avoid recalculating the same state.
+- For each state, choose the pile from either the start or the end, and subtract the value of the opponent's optimal play.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both Alice and Bob play optimally, meaning they always make the best possible move.
+- The game is played to completion with no interruptions.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: piles = [4, 6, 2, 8]`  \
+  **Explanation:** In this example, Alice can start by taking the last pile (8), leaving Bob with the choice of taking 4 or 2. No matter what Bob does, Alice will win by selecting optimally.
 
-The players take turns removing stones from either the leftmost or the rightmost pile. The winner is determined by the total number of stones they collect. The task is to determine if the first player (starting first) can always win given the array of piles.
+- **Input:** `Input: piles = [3, 7, 2, 3]`  \
+  **Explanation:** Alice can start by taking the first pile (3), and based on Bob's choices, Alice will be able to win by making optimal selections.
 
-### Example:
+{{< dots >}}
+## Approach 🚀
+We use dynamic programming to solve this problem by simulating both Alice's and Bob's moves, taking into account all possible choices they can make. The solution involves recursion and memoization to optimize the state evaluations.
 
-- **Input**: `[5, 3, 4, 5]`
-- **Output**: `true` (The first player can always win.)
-
-In this example, the optimal play would be for the first player to select the pile with 5 stones on the left, leaving the opponent with piles `[3, 4, 5]`. The first player can then choose the next pile with 5 stones to guarantee a win.
-
-### Approach
-
-To solve this problem, we use a **dynamic programming** approach with **memoization** to avoid redundant computations. We will define a function `dp(i, j)` that computes the maximum difference in score the current player can achieve over the opponent, when considering piles from index `i` to `j` (both inclusive). The optimal strategy for the player is to maximize their score while minimizing the opponent's score.
-
-#### Key Insights:
-1. **Two Choices**: At any step, the player can pick either the leftmost pile (`piles[i]`) or the rightmost pile (`piles[j]`).
-2. **Recursion**: The recurrence is based on the fact that the current player’s score is the maximum of:
-   - Choosing the leftmost pile and then minimizing the opponent’s score from the remaining piles, or
-   - Choosing the rightmost pile and then minimizing the opponent’s score from the remaining piles.
-3. **Memoization**: We use memoization to store the results of previously computed subproblems (ranges `[i, j]`) to speed up the solution.
-
-#### Plan:
-1. Use recursion to compute the optimal score difference.
-2. Memoize the results to avoid recomputation.
-3. Return `true` if the first player's score difference is greater than or equal to zero (i.e., they can win).
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The optimal strategy for both players is to always choose the pile that maximizes their advantage, either from the start or the end.
+- Using memoization will help avoid redundant calculations and improve efficiency, especially given the problem constraints.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input should not occur as the problem guarantees an even number of piles.
+- The solution should efficiently handle the upper limit of 500 piles.
+- If the piles contain large numbers or small numbers, the solution should still be optimal, considering the memoization approach.
+- Ensure that the solution works within the provided constraints, including the odd sum condition.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    vector<int> p;
-    int n;
-    map<int, map<int,int>> memo;
+vector<int> p;
+int n;
 
-    // The dp function computes the maximum score difference.
-    bool dp(int i, int j) {
-        // Base case: when there's only one pile left.
-        if (i == j) return p[i];
-        
-        // Check if the result has been memoized.
-        if (memo.count(i) && memo[i].count(j)) return memo[i][j];
-        
-        // Recursive step: Player chooses between picking the i-th or j-th pile.
-        return memo[i][j] = max(p[i] - dp(i + 1, j), p[j] - dp(i, j - 1));
-    }
+map<int, map<int,int>> memo;
+
+bool dp(int i, int j) {
+    if(i == j) return p[i];
     
-    bool stoneGame(vector<int>& piles) {
-        this->p = piles;  // Store the piles array.
-        n = piles.size();  // Get the size of the piles array.
-        return dp(0, n - 1) >= 0;  // Check if the first player can win.
-    }
-};
+    if(memo.count(i) && memo[i].count(j)) return memo[i][j];
+    
+    return memo[i][j] = max(p[i] - dp(i + 1, j), p[j] - dp(i, j - 1)) ;
+    
+}
+
+bool stoneGame(vector<int>& piles) {
+    this->p = piles;
+    n = piles.size();
+    return dp(0, n - 1) >= 0;
+}
 ```
 
-#### Detailed Breakdown:
+This code implements a dynamic programming solution to the Stone Game problem. The goal is to determine if the first player can win by optimally picking stones from a pile, where each player can pick either the first or last stone in each turn. The `dp` function computes the maximum score difference between the two players from any subarray of piles, and `stoneGame` returns whether the first player can win.
 
-1. **Class and Variables**:
-   - We define the class `Solution` with a public method `stoneGame` that solves the problem.
-   - We declare a vector `p` to store the piles and an integer `n` to store the number of piles.
-   - We use a `map<int, map<int, int>>` called `memo` to store the results of subproblems. The first `int` represents the start index of the subproblem, and the second `int` represents the end index of the subproblem.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	vector<int> p;
+	```
+	This initializes a vector `p` to store the piles of stones.
 
-2. **dp Function**:
-   - The `dp(int i, int j)` function computes the maximum score difference (first player’s score minus the opponent’s score) for the subarray of piles from index `i` to index `j`.
-   - **Base Case**: When `i == j`, the subarray contains only one pile, and the current player can only take that pile, returning the value of `p[i]`.
-   - **Memoization Check**: Before computing the result, we check if the result for the subarray `[i, j]` has already been computed and stored in the `memo` map. If it exists, we return the cached result to avoid recomputation.
-   - **Recursive Step**: The recursive step tries both options: 
-     - Pick the pile at index `i` and subtract the result of the opponent's move from the range `[i+1, j]`.
-     - Pick the pile at index `j` and subtract the result of the opponent's move from the range `[i, j-1]`.
-     - The optimal choice is the one that maximizes the current player's score while minimizing the opponent's score.
+2. **Variable Initialization**
+	```cpp
+	int n;
+	```
+	This initializes an integer `n` to store the number of piles.
 
-3. **stoneGame Function**:
-   - The `stoneGame` function is the entry point. It initializes the `p` vector with the given piles and calls the `dp` function on the full range of piles `[0, n-1]`.
-   - The result of `dp(0, n - 1)` will be greater than or equal to 0 if the first player can win. If the score difference is non-negative, the first player wins, and we return `true`.
+3. **Memoization Map**
+	```cpp
+	map<int, map<int,int>> memo;
+	```
+	This initializes a memoization map `memo` to store previously computed results for subproblems in the dynamic programming solution.
 
-### Complexity Analysis
+4. **Function Definition**
+	```cpp
+	bool dp(int i, int j) {
+	```
+	This defines the recursive `dp` function that computes the maximum score difference from the subarray of piles between indices `i` and `j`.
 
-#### Time Complexity:
-- The time complexity of the solution is **O(n^2)**, where `n` is the number of piles. This is because for each pair of indices `(i, j)`, we are computing the result once, and there are `O(n^2)` such pairs.
-- Memoization ensures that we compute the result for each pair only once, avoiding redundant calculations.
+5. **Base Case**
+	```cpp
+	    if(i == j) return p[i];
+	```
+	This is the base case of the recursion. If there is only one pile left (i.e., `i == j`), return the value of that pile.
 
-#### Space Complexity:
-- The space complexity is **O(n^2)** due to the memoization map, which stores the results of all subproblems `(i, j)`.
+6. **Memoization Check**
+	```cpp
+	    if(memo.count(i) && memo[i].count(j)) return memo[i][j];
+	```
+	This checks if the result for the subarray between indices `i` and `j` has already been computed. If so, return the memoized result.
 
-### Conclusion
+7. **Recursive Calculation**
+	```cpp
+	    return memo[i][j] = max(p[i] - dp(i + 1, j), p[j] - dp(i, j - 1));
+	```
+	This calculates the result for the current subarray by recursively calling `dp` for the two possible choices: taking the first pile or taking the last pile, and storing the result in `memo[i][j]`.
 
-This solution effectively solves the problem using dynamic programming and memoization to avoid redundant calculations. By recursively calculating the optimal score difference for each subarray, we can determine if the first player can always win. The memoization map ensures that each subproblem is computed only once, improving efficiency.
+8. **Main Function**
+	```cpp
+	bool stoneGame(vector<int>& piles) {
+	```
+	This defines the main function `stoneGame` which initializes the vector `p` with the piles and calculates the number of piles `n`. It then calls the `dp` function to determine if the first player can win.
 
-- **Time Complexity**: O(n^2), where `n` is the number of piles.
-- **Space Complexity**: O(n^2) for storing the results of subproblems.
+9. **Variable Assignment**
+	```cpp
+	    this->p = piles;
+	```
+	This assigns the input vector `piles` to the class member `p`.
 
-This approach guarantees an optimal solution while minimizing the number of redundant computations.
+10. **Variable Assignment**
+	```cpp
+	    n = piles.size();
+	```
+	This assigns the size of the input vector `piles` to the integer `n`.
+
+11. **Return Statement**
+	```cpp
+	    return dp(0, n - 1) >= 0;
+	```
+	This calls the `dp` function with the full range of the array (from 0 to `n - 1`) and returns whether the first player can win (i.e., the score difference is greater than or equal to 0).
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) due to the memoized recursive calls for each subproblem, where n is the number of piles.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The space complexity is O(n^2) due to the memoization table used to store the results of subproblems.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/stone-game/description/)
 

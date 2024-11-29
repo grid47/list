@@ -14,146 +14,230 @@ img_src = ""
 youtube = "MoYeUVe-xPY"
 youtube_upload_date="2023-01-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/MoYeUVe-xPY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, `word1` and `word2`. In each move, you swap one character from `word1` with one from `word2`. Determine if it is possible to make the number of distinct characters in both strings equal with exactly one swap.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings `word1` and `word2`.
+- **Example:** `"abcc", "aab"`
+- **Constraints:**
+	- 1 <= word1.length, word2.length <= 10^5
+	- Both word1 and word2 consist of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isItPossible(string w1, string w2) {
-        
-        map<char, int> ma1, ma2;
-        for(int x: w1)
-            ma1[x]++;
-        for(int x: w2)
-            ma2[x]++;
-        
-        for(auto it1: ma1) {
-            for(auto it2: ma2) {
-                map<char, int> d1 = ma1, d2 = ma2;
-                d1[it2.first]++;
-                d2[it1.first]++;
-                
-                d1[it1.first]--;
-                d2[it2.first]--;
-                
-                if(d1[it1.first] == 0)
-                    d1.erase(it1.first);
-                if(d2[it2.first] == 0)
-                    d2.erase(it2.first);
-                
-                if(d1.size() == d2.size()) return true;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a boolean value indicating whether it is possible to make the number of distinct characters in both strings equal with exactly one swap.
+- **Example:** `true`
+- **Constraints:**
+	- The output will be either `true` or `false`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if it is possible to make the number of distinct characters in both strings equal with exactly one swap.
+
+- Count the distinct characters in both strings `word1` and `word2`.
+- For each character in `word1` and `word2`, attempt to swap characters and check if the number of distinct characters in both strings becomes equal.
+- Return `true` if a swap results in equal distinct character counts, otherwise return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- You are guaranteed that both strings contain only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `"ac", "b"`  \
+  **Explanation:** In this case, swapping any characters between the two strings will not make the number of distinct characters in both strings equal.
+
+- **Input:** `"abcc", "aab"`  \
+  **Explanation:** After swapping index 2 of `word1` with index 0 of `word2`, both strings will have 3 distinct characters.
+
+- **Input:** `"abcd", "efgh"`  \
+  **Explanation:** Both strings already have 4 distinct characters, so swapping any character will not affect the result.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves counting the distinct characters in both strings and then checking if swapping any characters can equalize the distinct character count.
+
+### Initial Thoughts 💭
+- We need to efficiently check the distinct characters in both strings.
+- The solution needs to handle large strings, so an O(n) solution for checking distinct characters is ideal.
+{{< dots >}}
+### Edge Cases 🌐
+- The strings will not be empty, as the length of both strings is at least 1.
+- Ensure that the solution handles strings with lengths up to 100,000 characters.
+- Handle cases where all characters in one or both strings are the same.
+- The solution should be optimized for time complexity, given the constraints of up to 100,000 characters.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isItPossible(string w1, string w2) {
+    
+    map<char, int> ma1, ma2;
+    for(int x: w1)
+        ma1[x]++;
+    for(int x: w2)
+        ma2[x]++;
+    
+    for(auto it1: ma1) {
+        for(auto it2: ma2) {
+            map<char, int> d1 = ma1, d2 = ma2;
+            d1[it2.first]++;
+            d2[it1.first]++;
+            
+            d1[it1.first]--;
+            d2[it2.first]--;
+            
+            if(d1[it1.first] == 0)
+                d1.erase(it1.first);
+            if(d2[it2.first] == 0)
+                d2.erase(it2.first);
+            
+            if(d1.size() == d2.size()) return true;
         }
-        return false;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to determine if it is possible to swap one character from string `w1` with one character from string `w2` such that the two strings become anagrams of each other. Specifically, after performing a single swap, the character frequencies of both strings should match. If such a swap is possible, return `true`; otherwise, return `false`.
-
-### Approach
-
-The key observation is that for two strings to become anagrams after swapping one character, they must:
-1. **Have the same character frequencies** after the swap.
-2. **Only require a swap of characters** between the two strings. This means that there is a way to make the frequencies of each character match by swapping one character from `w1` with one character from `w2`.
-
-#### Detailed Steps
-
-1. **Character Frequency Counting**: First, calculate the frequency of each character in both strings. If the strings have different lengths, we can immediately return `false` since a swap can't make the strings anagrams if their lengths differ.
-  
-2. **Simulate the Swap**: We will simulate all possible swaps between characters of `w1` and `w2`. For each possible swap, we adjust the frequency of characters in both strings accordingly and check if the two strings become anagrams (i.e., their frequency maps are identical).
-
-3. **Return the Result**: If any of the swaps result in the two strings having the same character frequencies, return `true`. If no such swap exists after iterating through all possibilities, return `false`.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialize Frequency Maps**
-
-```cpp
-map<char, int> ma1, ma2;
-for (int x : w1) ma1[x]++;
-for (int x : w2) ma2[x]++;
+    return false;
+}
 ```
 
-- First, we initialize two frequency maps, `ma1` and `ma2`, to store the counts of each character in strings `w1` and `w2`, respectively.
-- For each character `x` in `w1`, we increment its count in `ma1`. Similarly, we count characters for `w2` in `ma2`.
+The 'isItPossible' function checks if two strings 'w1' and 'w2' can be made anagrams by swapping characters between the two. It uses maps to count character occurrences and then attempts to match the counts.
 
-#### 2. **Iterate Through Each Character Pair**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isItPossible(string w1, string w2) {
+	```
+	The function 'isItPossible' is defined, accepting two strings 'w1' and 'w2'. It will return a boolean value indicating whether it's possible to make the strings anagrams by swapping characters.
 
-```cpp
-for (auto it1 : ma1) {
-    for (auto it2 : ma2) {
-```
+2. **Variable Initialization**
+	```cpp
+	    map<char, int> ma1, ma2;
+	```
+	Two maps, 'ma1' and 'ma2', are initialized to count the occurrences of characters in 'w1' and 'w2' respectively.
 
-- We iterate through all pairs of characters, one from `ma1` (the frequency map of `w1`) and one from `ma2` (the frequency map of `w2`).
-- The idea is to test if swapping these two characters from `w1` and `w2` will result in both maps becoming identical (i.e., both strings becoming anagrams).
+3. **Loop**
+	```cpp
+	    for(int x: w1)
+	```
+	A for loop begins to iterate over the characters of the string 'w1'.
 
-#### 3. **Simulate the Swap**
+4. **Map Operation**
+	```cpp
+	        ma1[x]++;
+	```
+	For each character in 'w1', the corresponding count is incremented in the map 'ma1'.
 
-```cpp
-map<char, int> d1 = ma1, d2 = ma2;
-d1[it2.first]++;
-d2[it1.first]++;
-d1[it1.first]--;
-d2[it2.first]--;
-```
+5. **Loop**
+	```cpp
+	    for(int x: w2)
+	```
+	A similar loop starts for the string 'w2', iterating over each character.
 
-- For each pair of characters, we create copies of the frequency maps `ma1` and `ma2` (stored in `d1` and `d2`).
-- We simulate the swap by:
-  - Incrementing the count of `it2.first` (the character from `w2`) in `d1` (since we're pretending to add it to `w1`).
-  - Similarly, incrementing the count of `it1.first` (the character from `w1`) in `d2` (since we're pretending to add it to `w2`).
-  - Decrementing the original characters in the respective maps (`d1[it1.first]--` and `d2[it2.first]--`).
+6. **Map Operation**
+	```cpp
+	        ma2[x]++;
+	```
+	For each character in 'w2', the corresponding count is incremented in the map 'ma2'.
 
-#### 4. **Remove Characters with Zero Frequency**
+7. **Loop**
+	```cpp
+	    for(auto it1: ma1) {
+	```
+	A for loop begins to iterate over each element of 'ma1' (character-frequency pair).
 
-```cpp
-if (d1[it1.first] == 0) d1.erase(it1.first);
-if (d2[it2.first] == 0) d2.erase(it2.first);
-```
+8. **Loop**
+	```cpp
+	        for(auto it2: ma2) {
+	```
+	A nested for loop begins to iterate over each element of 'ma2' (character-frequency pair).
 
-- After adjusting the character counts, we remove any characters from the frequency maps `d1` and `d2` that have a count of zero. This ensures that only characters with non-zero frequencies are present in the maps.
+9. **Variable Assignment**
+	```cpp
+	            map<char, int> d1 = ma1, d2 = ma2;
+	```
+	Two temporary maps 'd1' and 'd2' are created as copies of 'ma1' and 'ma2'. These will be modified during the comparison.
 
-#### 5. **Check if the Maps Are Equal**
+10. **Map Update**
+	```cpp
+	            d1[it2.first]++;
+	```
+	The count of the character from 'it2' in 'd1' is incremented.
 
-```cpp
-if (d1.size() == d2.size()) return true;
-```
+11. **Map Update**
+	```cpp
+	            d2[it1.first]++;
+	```
+	Similarly, the count of the character from 'it1' in 'd2' is incremented.
 
-- If the sizes of `d1` and `d2` (i.e., the number of unique characters in each string after the swap) are equal, this indicates that both maps have the same character frequencies. In this case, we return `true` because the strings can be made anagrams by swapping the current pair of characters.
+12. **Map Update**
+	```cpp
+	            d1[it1.first]--;
+	```
+	The count of the character from 'it1' in 'd1' is decremented.
 
-#### 6. **Return False if No Valid Swap Exists**
+13. **Map Update**
+	```cpp
+	            d2[it2.first]--;
+	```
+	Similarly, the count of the character from 'it2' in 'd2' is decremented.
 
-```cpp
-return false;
-```
+14. **Condition Check**
+	```cpp
+	            if(d1[it1.first] == 0)
+	```
+	A check is performed to see if the frequency of the character 'it1.first' in 'd1' is zero.
 
-- If no valid swap is found that results in the two strings becoming anagrams, we return `false` after checking all possible swaps.
+15. **Map Operation**
+	```cpp
+	                d1.erase(it1.first);
+	```
+	If the frequency is zero, the character 'it1.first' is removed from 'd1'.
 
-### Complexity Analysis
+16. **Condition Check**
+	```cpp
+	            if(d2[it2.first] == 0)
+	```
+	A similar check is performed for the character 'it2.first' in 'd2'.
 
-#### Time Complexity
+17. **Map Operation**
+	```cpp
+	                d2.erase(it2.first);
+	```
+	If the frequency is zero, the character 'it2.first' is removed from 'd2'.
 
-- **Building the Frequency Maps**: Both `w1` and `w2` are iterated through once to build the frequency maps. This takes \( O(n + m) \), where \( n \) is the length of `w1` and \( m \) is the length of `w2`.
-- **Simulating Swaps**: We iterate over all pairs of characters from the frequency maps of `w1` and `w2`. In the worst case, this can involve iterating over all unique characters in `w1` and `w2`, which takes \( O(c_1 \times c_2) \), where \( c_1 \) and \( c_2 \) are the number of unique characters in `w1` and `w2` respectively.
-- **Final Complexity**: Combining the above steps, the time complexity of the solution is \( O(n + m + c_1 \times c_2) \), where \( c_1 \) and \( c_2 \) represent the number of distinct characters in `w1` and `w2`.
+18. **Condition Check**
+	```cpp
+	            if(d1.size() == d2.size()) return true;
+	```
+	If the sizes of 'd1' and 'd2' are equal, it means the strings can be rearranged to form anagrams by swapping characters. The function returns true.
 
-#### Space Complexity
+19. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If no matching swaps were found after all iterations, the function returns false.
 
-- The space complexity is mainly determined by the storage of the frequency maps `ma1` and `ma2`, which are \( O(c_1 + c_2) \), where \( c_1 \) and \( c_2 \) are the number of distinct characters in `w1` and `w2`. The temporary maps `d1` and `d2` also take space proportional to the number of unique characters.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-Thus, the space complexity is \( O(c_1 + c_2) \).
+The time complexity is O(n) where n is the length of the strings since we perform operations that are linear in nature.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This approach efficiently solves the problem by simulating all possible swaps between characters from two strings `w1` and `w2`. By using frequency maps and testing the effects of each swap, we can determine if a valid swap exists that makes the two strings anagrams. This solution is efficient in terms of both time and space, particularly for cases with a large number of distinct characters in the strings.
+The space complexity is O(n) due to the use of maps for counting characters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-number-of-distinct-characters-equal/description/)
 

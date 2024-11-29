@@ -14,183 +14,241 @@ img_src = ""
 youtube = "y3r6o712auw"
 youtube_upload_date="2022-01-16"
 youtube_thumbnail="https://i.ytimg.com/vi/y3r6o712auw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You start with the integer 1, and you need to reach the target integer using the minimum number of moves. In one move, you can either increment the current integer by 1 or double it. The doubling operation can be used at most `maxDoubles` times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers: `target` (the target integer to reach) and `maxDoubles` (the maximum number of times the doubling operation can be used).
+- **Example:** `Input: target = 19, maxDoubles = 2`
+- **Constraints:**
+	- 1 <= target <= 10^9
+	- 0 <= maxDoubles <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    map<int, map<int, int>> mp;
-    int dp(int cur, int end, int dops) {
-        if(cur == end) return 0;
-        if(cur > end) return INT_MAX - 1;
-        
-        if(mp.count(cur) && mp[cur].count(dops)) return mp[cur][dops];
-        
-        int ans = 1 + dp(cur + 1, end, dops);
-        if(dops > 0)
-        ans = min(ans, 1 + dp(cur * 2, end, dops - 1));
-        
-        return mp[cur][dops] = ans;
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the minimum number of moves required to reach the target starting from 1.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The result should be a non-negative integer representing the minimum moves.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum number of moves to reach the target using increment and doubling operations.
+
+- Start at 1 and try to reach the target.
+- At each step, if the current integer is even and the doubling operation is available, try doubling it.
+- Otherwise, increment the integer by 1.
+- Repeat the process until the target is reached.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values for `target` and `maxDoubles` are valid.
+- The input `target` will always be greater than or equal to 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `target = 19, maxDoubles = 2`  \
+  **Explanation:** In this example, we can increment to 4, double to 8, increment to 9, double to 18, and finally increment to 19. This process takes 7 steps.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to simulate the process of reaching the target by using the operations optimally. If the target is divisible by 2 and we still have available doubles, we should perform the doubling operation to speed up reaching the target.
+
+### Initial Thoughts 💭
+- If `maxDoubles` is 0, we can only increment to reach the target.
+- If `maxDoubles` is large, using the doubling operation strategically can minimize the number of steps.
+- Use a greedy approach to either double the number or increment it based on the current situation.
+{{< dots >}}
+### Edge Cases 🌐
+- Since the input is always valid (1 <= target <= 10^9), there will never be empty inputs.
+- For large values of `target`, ensure that the approach handles numbers up to 10^9 efficiently.
+- When `target` is 1, no moves are needed, so the answer should be 0.
+- When `maxDoubles` is 0, the only option is to increment the number.
+- The approach must handle both large `target` values and small `maxDoubles` values efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+map<int, map<int, int>> mp;
+int dp(int cur, int end, int dops) {
+    if(cur == end) return 0;
+    if(cur > end) return INT_MAX - 1;
     
-    int minMoves(int end, int dops) {
-        
-        int cnt = 0;
-        
-        while(end > 1) {
-            if(end % 2) end -= 1;
-            else if(dops > 0) {
-                end /= 2;
-                dops--;
-            } else {
-                cnt += (end -1);
-                break;                
-            }
-            cnt++;
+    if(mp.count(cur) && mp[cur].count(dops)) return mp[cur][dops];
+    
+    int ans = 1 + dp(cur + 1, end, dops);
+    if(dops > 0)
+    ans = min(ans, 1 + dp(cur * 2, end, dops - 1));
+    
+    return mp[cur][dops] = ans;
+}
+
+int minMoves(int end, int dops) {
+    
+    int cnt = 0;
+    
+    while(end > 1) {
+        if(end % 2) end -= 1;
+        else if(dops > 0) {
+            end /= 2;
+            dops--;
+        } else {
+            cnt += (end -1);
+            break;                
         }
-        return cnt;
-        
-        // return dp(1, end, dops);
-        
+        cnt++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves finding the minimum number of moves required to reach a target number (`end`) starting from 1, with the option to double the current number a limited number of times (`dops`). Each move can either increment the current number by 1 or, if available, use a "double" operation to multiply the current number by 2, decreasing the allowed number of doubles (`dops`) by 1. The goal is to minimize the total number of moves to reach the target.
-
-### Approach
-
-The solution employs a combination of dynamic programming and greedy strategies. The main idea is to count how many moves are necessary to reach the target number, considering both the increment operations and the doubling operations allowed. The algorithm evaluates the steps required in two phases:
-
-1. **Greedy Approach**: Start from the target number and work backwards to determine how many steps it would take to reach 1. The operations considered include:
-   - If the current number is odd, subtract 1 (since odd numbers can't be halved).
-   - If the current number is even and we still have doubles available (`dops > 0`), halve the number and decrement `dops`.
-   - If the current number is even and no doubles are available, directly count the moves required to decrement down to 1.
-
-2. **Dynamic Programming (Commented Out)**: A recursive function with memoization could be employed to compute the minimum moves recursively, but in this implementation, it is replaced with the greedy method.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - This defines the `Solution` class, which contains methods for solving the problem.
-
-2. **Data Structure**:
-   ```cpp
-   map<int, map<int, int>> mp;
-   ```
-   - A nested map (`mp`) is used to store previously computed results for specific states defined by the current value and remaining doubles. This structure helps in memoization.
-
-3. **Dynamic Programming Function**:
-   ```cpp
-   int dp(int cur, int end, int dops) {
-   ```
-   - The `dp` function is defined to compute the minimum moves recursively. It takes three parameters:
-     - `cur`: The current value we are processing.
-     - `end`: The target value we want to reach.
-     - `dops`: The number of doubling operations left.
-
-4. **Base Cases**:
-   ```cpp
-   if(cur == end) return 0;
-   if(cur > end) return INT_MAX - 1;
-   ```
-   - If the current value equals the target, no more moves are needed, so return 0.
-   - If the current value exceeds the target, it is impossible to reach the target from this state, so return a large number to signify an invalid state.
-
-5. **Memoization Check**:
-   ```cpp
-   if(mp.count(cur) && mp[cur].count(dops)) return mp[cur][dops];
-   ```
-   - Before performing calculations, the function checks if the result for the current state has already been computed. If it has, it returns the stored result.
-
-6. **Recursive Calculation**:
-   ```cpp
-   int ans = 1 + dp(cur + 1, end, dops);
-   if(dops > 0)
-       ans = min(ans, 1 + dp(cur * 2, end, dops - 1));
-   ```
-   - The recursive relation calculates the minimum moves:
-     - First, it counts the moves required by incrementing the current value (`cur + 1`).
-     - If doubling is allowed (`dops > 0`), it also considers the option of doubling the current value (`cur * 2`).
-
-7. **Memoization Store**:
-   ```cpp
-   return mp[cur][dops] = ans;
-   ```
-   - The result is stored in the memoization map for future reference before returning the answer.
-
-8. **Main Function**:
-   ```cpp
-   int minMoves(int end, int dops) {
-   ```
-   - The `minMoves` function is defined to initiate the process. It sets up the variables needed for counting moves.
-
-9. **Counting Moves**:
-   ```cpp
-   int cnt = 0;
-   while(end > 1) {
-       if(end % 2) end -= 1;
-       else if(dops > 0) {
-           end /= 2;
-           dops--;
-       } else {
-           cnt += (end - 1);
-           break;                
-       }
-       cnt++;
-   }
-   return cnt;
-   ```
-   - The loop continues until `end` is greater than 1. The logic inside the loop uses the greedy approach as described:
-     - If `end` is odd, subtract 1.
-     - If `end` is even and we can still double, divide by 2 and decrement `dops`.
-     - If `end` is even but no doubles are left, directly subtract down to 1 and add the remaining moves to `cnt`.
-
-10. **Return Statement**:
-    ```cpp
     return cnt;
-    ```
-    - Finally, the function returns the total count of moves needed to reach the target.
-
-11. **Commented Out DP Approach**:
-    ```cpp
+    
     // return dp(1, end, dops);
-    ```
-    - This line suggests an alternative solution using the recursive approach but is commented out in this implementation.
+    
+}
+```
 
-12. **End of Class**:
-    ```cpp
-    };
-    ```
-    - This closing brace signifies the end of the `Solution` class.
+This code defines two functions to solve the problem of determining the minimum number of operations needed to transform a number `end` to 1. The operations allowed are decrementing by 1, dividing by 2, or using a limited number of operations `dops` to perform division by 2 more efficiently.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	map<int, map<int, int>> mp;
+	```
+	This line initializes a 2D map `mp` which will be used for memoization. It stores previously computed results for the dynamic programming function to avoid redundant calculations.
 
-- **Time Complexity**: \(O(\log(\text{end}))\)
-  - The while loop inside the `minMoves` function will iterate approximately logarithmically with respect to the value of `end` since every operation either halves the number or decrements it.
+2. **Function Definition**
+	```cpp
+	int dp(int cur, int end, int dops) {
+	```
+	This is the definition of the `dp` function, which recursively calculates the minimum number of steps required to transform the number `cur` to `end`, using `dops` remaining operations that allow division by 2.
 
-- **Space Complexity**: \(O(\log(\text{end}))\) (for the call stack in the recursive version)
-  - If the recursive approach is used, the space complexity would primarily come from the recursion stack.
+3. **Base Case 1**
+	```cpp
+	    if(cur == end) return 0;
+	```
+	If `cur` is equal to `end`, no more operations are needed, so the function returns 0.
 
-### Conclusion
+4. **Base Case 2**
+	```cpp
+	    if(cur > end) return INT_MAX - 1;
+	```
+	If `cur` exceeds `end`, it's not possible to reach `end`, so a large value (essentially infinity) is returned to signify an invalid path.
 
-The `minMoves` function effectively calculates the minimum number of moves required to reach a target number by combining both greedy and dynamic programming strategies. It efficiently counts the moves while considering the options available for incrementing or doubling the current number, making it a powerful solution to the problem.
+5. **Memoization Retrieval**
+	```cpp
+	    if(mp.count(cur) && mp[cur].count(dops)) return mp[cur][dops];
+	```
+	This checks whether the result for `dp(cur, dops)` is already computed and stored in the memoization table `mp`. If so, it returns the cached result.
 
-This implementation serves as an excellent example of optimizing solutions through both greedy and dynamic programming principles, showcasing the importance of understanding problem constraints and efficiently using available operations. This problem is common in algorithmic challenges and competitive programming, making it a useful example for aspiring programmers to learn from. 
+6. **Recursive Case 1**
+	```cpp
+	    int ans = 1 + dp(cur + 1, end, dops);
+	```
+	This line computes the result of performing a decrement operation (`cur + 1`) and recursively calls `dp` to calculate the remaining steps.
 
-By grasping the logic behind this solution, developers can enhance their problem-solving skills and apply similar strategies to other algorithmic challenges involving numeric operations and state transitions.
+7. **Conditional Division**
+	```cpp
+	    if(dops > 0)
+	```
+	This checks if there are remaining division operations (`dops > 0`) available to divide by 2.
+
+8. **Recursive Case 2**
+	```cpp
+	    ans = min(ans, 1 + dp(cur * 2, end, dops - 1));
+	```
+	If division by 2 is allowed (i.e., `dops > 0`), the function recursively tries the division operation and compares the result to the previously calculated value to find the minimum number of operations.
+
+9. **Memoization Save**
+	```cpp
+	    return mp[cur][dops] = ans;
+	```
+	This line stores the computed minimum number of operations for the current state `(cur, dops)` into the memoization table `mp` to avoid redundant calculations in future recursive calls.
+
+10. **Function Definition**
+	```cpp
+	int minMoves(int end, int dops) {
+	```
+	This defines the `minMoves` function, which calculates the minimum number of moves needed to transform `end` to 1, possibly using up to `dops` division operations.
+
+11. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	This initializes a counter `cnt` to track the number of operations performed.
+
+12. **While Loop**
+	```cpp
+	    while(end > 1) {
+	```
+	This while loop continues as long as `end` is greater than 1, repeatedly applying operations to reduce `end`.
+
+13. **Odd Number Check**
+	```cpp
+	        if(end % 2) end -= 1;
+	```
+	If `end` is odd, it is decremented by 1.
+
+14. **Even Number Check**
+	```cpp
+	        else if(dops > 0) {
+	```
+	If `end` is even and division by 2 is allowed (`dops > 0`), the function proceeds with division.
+
+15. **Division Operation**
+	```cpp
+	            end /= 2;
+	```
+	If division by 2 is allowed, `end` is halved.
+
+16. **Decrement dops**
+	```cpp
+	            dops--;
+	```
+	After performing a division by 2, the available division operations (`dops`) are decremented.
+
+17. **No Division Available**
+	```cpp
+	        } else {
+	```
+	If no division operation is available (i.e., `dops` is 0), the function enters the else block.
+
+18. **Final Adjustment**
+	```cpp
+	            cnt += (end -1);
+	```
+	If no division operations are left, the remaining difference between `end` and 1 is added to `cnt` to perform simple decrements until `end` becomes 1.
+
+19. **Break**
+	```cpp
+	            break;                
+	```
+	The loop breaks after performing the necessary decrements when no division operations are left.
+
+20. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	This returns the total count of operations performed to reduce `end` to 1.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log target)
+- **Average Case:** O(log target)
+- **Worst Case:** O(target)
+
+In the best and average cases, the time complexity is O(log target), as doubling reduces the target rapidly. In the worst case (when only incrementing is needed), the time complexity is O(target).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant (O(1)), as the algorithm only requires a few variables to track the current state.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-moves-to-reach-target-score/description/)
 

@@ -14,106 +14,139 @@ img_src = ""
 youtube = "d_cvtFwnOZg"
 youtube_upload_date="2024-04-08"
 youtube_thumbnail="https://i.ytimg.com/vi/d_cvtFwnOZg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+In a school cafeteria, sandwiches are placed in a stack and students queue up to get one. Each student has a preference for the type of sandwich, and they either take the sandwich from the stack or move to the back of the queue if the sandwich is not to their liking. The goal is to determine how many students are unable to get a sandwich.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: 'students' representing the preference of each student (0 for circular, 1 for square), and 'sandwiches' representing the stack of sandwiches (with 0 for circular, 1 for square).
+- **Example:** `[0, 1, 0, 1], [1, 0, 1, 0]`
+- **Constraints:**
+	- 1 <= students.length, sandwiches.length <= 100
+	- students.length == sandwiches.length
+	- students[i] and sandwiches[i] are either 0 or 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countStudents(vector<int>& A, vector<int>& B) {
-        int count[] = {0, 0}, n = A.size(), k;
-        for (int a : A)
-            count[a]++;
-        for (k = 0; k < n && count[B[k]] > 0; ++k)
-            count[B[k]]--;
-        return n - k;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the number of students who are unable to get a sandwich.
+- **Example:** `2`
+- **Constraints:**
+	- The returned integer should be between 0 and the total number of students.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine how many students are unable to eat based on their preferences and the order of the sandwiches.
 
-The problem requires counting the number of students who could not be matched with their preferred seats in a scenario where students have specific seating preferences. The input consists of two integer arrays:
-- **A**: An array representing the preferred seats for each student.
-- **B**: An array representing the actual seats available.
+- Initialize a count for each type of sandwich in the stack and for each student preference.
+- Iterate over the queue of students and check if the sandwich at the top of the stack matches the student's preference.
+- If the student prefers the sandwich, remove it from the stack and move the student out of the queue.
+- If the student does not want the sandwich, move them to the end of the queue.
+- Continue the process until no student at the front of the queue can take the sandwich at the top of the stack.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will always be enough sandwiches for each student at the start, but some may not get one by the end of the process.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[0, 1, 0, 1], [1, 0, 1, 0]`  \
+  **Explanation:** All students are able to take a sandwich after a few moves, resulting in no students left without food.
 
-The goal is to determine how many students end up without a matching seat based on their preferences.
+- **Input:** `[1, 0, 1, 0, 1, 1], [0, 1, 1, 1, 0, 0]`  \
+  **Explanation:** Two students are unable to get a sandwich by the end of the process due to mismatched preferences.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves simulating the sandwich distribution process, keeping track of which students are still waiting for a sandwich.
 
-To tackle this problem, we can adopt a straightforward approach:
-1. **Count the Preferences**: First, we will count the number of students who prefer each seat in array A.
-2. **Match Students to Seats**: Next, we will iterate through the available seats in array B and decrement the count for each seat that a student prefers.
-3. **Count Unmatched Students**: Finally, we can compute how many students were not able to find a matching seat based on their preferences by comparing the total number of students to the count of students matched.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the implementation:
-
+### Initial Thoughts 💭
+- The process involves moving students around the queue and keeping track of their preferences relative to the sandwiches on top of the stack.
+- We can optimize by using a simple queue to manage the students and a counter for the sandwich types to ensure we don't perform unnecessary operations.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as there is always at least one student and one sandwich.
+- The solution should efficiently handle arrays up to 100 elements in length.
+- If all students prefer the same type of sandwich, the outcome depends on the sandwiches available in the stack.
+- The solution must be able to handle up to 100 students and sandwiches efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int countStudents(vector<int>& A, vector<int>& B) {
-        // Initialize a count array to keep track of seat preferences.
-        int count[] = {0, 0}; // We assume two types of seats (0 and 1)
-        int n = A.size(); // Get the number of students
-        int k; // Variable to keep track of the number of students who found seats
-
-        // Count preferences for seats from array A
-        for (int a : A)
-            count[a]++; // Increment the count for each preferred seat
-
-        // Match students to their preferred seats from array B
-        for (k = 0; k < n && count[B[k]] > 0; ++k)
-            count[B[k]]--; // Decrease the count of preferred seats if matched
-
-        // Return the number of students who couldn't find a matching seat
-        return n - k; // Total students minus the number matched
-    }
-};
+int countStudents(vector<int>& A, vector<int>& B) {
+    int count[] = {0, 0}, n = A.size(), k;
+    for (int a : A)
+        count[a]++;
+    for (k = 0; k < n && count[B[k]] > 0; ++k)
+        count[B[k]]--;
+    return n - k;
+}
 ```
 
-#### Step-by-Step Explanation
+This function simulates a process where each student in array B is matched with a student from array A. It counts how many students in array B do not find a match in A, and returns the number of unmatched students.
 
-1. **Initialize Variables**:
-   - We declare an integer array `count` to track how many students prefer each type of seat. Here, we assume there are two types of seats (0 and 1). The array size can be adjusted depending on the actual problem constraints.
-   - We also initialize `n` to hold the size of array A, which represents the total number of students.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countStudents(vector<int>& A, vector<int>& B) {
+	```
+	Defines the function `countStudents` that takes two integer vectors, `A` and `B`, representing students and their preferences, and returns the number of students in `B` who cannot find a matching student in `A`.
 
-2. **Count Preferences**:
-   - We iterate through each element in array A, and for every student’s preferred seat (`a`), we increment the corresponding index in the `count` array. This gives us the total number of students preferring each seat type.
+2. **Variable Initialization**
+	```cpp
+	    int count[] = {0, 0}, n = A.size(), k;
+	```
+	Initializes an array `count` to count the occurrences of each student in array `A`, a variable `n` to store the size of array `A`, and a variable `k` for iteration.
 
-3. **Match Students to Seats**:
-   - We initialize `k` to zero and start iterating through array B, which represents the actual seats available.
-   - For each available seat `B[k]`, we check if there are any students preferring that seat by looking at the `count` array. If `count[B[k]]` is greater than zero, it means a student can be matched to that seat. We then decrement the count for that seat to signify that one student has taken that seat.
-   - We continue this process until either we have checked all seats in B or run out of students that can be matched (i.e., when `count[B[k]]` becomes zero).
+3. **Counting Students in A**
+	```cpp
+	    for (int a : A)
+	```
+	Iterates through each student in array `A` to count the occurrences of each student using the `count` array.
 
-4. **Return Unmatched Students**:
-   - Finally, we return the number of students who could not be matched to a seat. This is calculated as `n - k`, where `k` is the count of students that found seats.
+4. **Counting Students in A**
+	```cpp
+	        count[a]++;
+	```
+	For each student `a` in array `A`, increments the corresponding count in the `count` array.
 
-### Complexity
+5. **Matching Students**
+	```cpp
+	    for (k = 0; k < n && count[B[k]] > 0; ++k)
+	```
+	Iterates through each student in array `B` and checks if the student can be matched with a student in `A` based on the `count` array. Decreases the count if a match is found.
 
-- **Time Complexity**: 
-  - The time complexity is \(O(n)\), where \(n\) is the number of students. We traverse the preferences and the available seats in linear time.
+6. **Decreasing Count for Matches**
+	```cpp
+	        count[B[k]]--;
+	```
+	If a match is found, decreases the count for student `B[k]` in the `count` array.
 
-- **Space Complexity**: 
-  - The space complexity is \(O(1)\) as we only use a fixed-size array to count the preferences.
+7. **Return Unmatched Students**
+	```cpp
+	    return n - k;
+	```
+	Returns the number of unmatched students, which is the total number of students (`n`) minus the number of students that were matched (`k`).
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-The solution efficiently counts how many students cannot be seated according to their preferences using a linear time approach. Here are the key takeaways from this code:
+The algorithm processes each student and sandwich once, so the time complexity is O(n), where n is the number of students.
 
-1. **Efficient Counting**: The use of an integer array to count preferences allows for quick updates and checks, leading to an efficient solution.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-2. **Simple Logic**: The implementation relies on straightforward iteration and counting, making it easy to understand and maintain.
+The space complexity is O(n) for storing the queue of students, and O(1) if the queue is not explicitly stored.
 
-3. **Scalability**: The solution can be adapted to accommodate different types of seats or more complex matching rules by modifying the count logic.
+**Happy Coding! 🎉**
 
-In summary, this solution demonstrates how to efficiently manage matching problems using basic data structures and algorithms, providing a clear and effective way to handle student seating preferences.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/description/)
 

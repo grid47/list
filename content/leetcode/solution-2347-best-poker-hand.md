@@ -14,122 +14,203 @@ img_src = ""
 youtube = "6BijC5dBUOA"
 youtube_upload_date="2022-07-23"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/6BijC5dBUOA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `ranks` and a character array `suits`. These represent a set of 5 playing cards, where each card has a rank (from 1 to 13) and a suit (one of 'a', 'b', 'c', or 'd'). Determine the best possible poker hand you can make from the cards.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays, `ranks` and `suits`, both of length 5. `ranks[i]` is the rank of the ith card and `suits[i]` is the suit of the ith card.
+- **Example:** `ranks = [8, 3, 5, 12, 8], suits = ["a", "b", "a", "a", "a"]`
+- **Constraints:**
+	- ranks.length == 5
+	- suits.length == 5
+	- 1 <= ranks[i] <= 13
+	- 'a' <= suits[i] <= 'd'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string bestHand(vector<int>& ranks, vector<char>& suits) {
-        unordered_map<int,int> m1;
-        unordered_map<char,int> m2;
-        for(auto i:ranks) m1[i]++;
-        for(auto i:suits) m2[i]++;
-        string ans="";
-        for(auto i:m2){
-            if(i.second==5){
-                return "Flush";
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a string representing the best type of poker hand that can be made from the given cards.
+- **Example:** `"Flush"`
+- **Constraints:**
+	- The output must be one of the following: 'Flush', 'Three of a Kind', 'Pair', or 'High Card'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the best hand from the set of 5 cards.
+
+- Check if all cards have the same suit for a flush.
+- Check if there are three cards with the same rank for a 'Three of a Kind'.
+- Check if there are two cards with the same rank for a 'Pair'.
+- If none of the above, return 'High Card'.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input always contains exactly 5 cards.
+- Ranks and suits are valid according to the constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `ranks = [8, 3, 5, 12, 8], suits = ["a", "b", "a", "a", "a"]`  \
+  **Explanation:** All cards have the same suit 'a', so we have a Flush.
+
+- **Input:** `ranks = [11, 11, 9, 11, 5], suits = ["b", "b", "c", "d", "a"]`  \
+  **Explanation:** Three cards have the same rank (11), so we have a 'Three of a Kind'.
+
+- **Input:** `ranks = [7, 2, 7, 9, 6], suits = ["d", "d", "b", "a", "b"]`  \
+  **Explanation:** Two cards have the same rank (7), so we have a 'Pair'.
+
+{{< dots >}}
+## Approach 🚀
+The goal is to check for each type of hand in order of priority (flush, three of a kind, pair), and return the first matching hand.
+
+### Initial Thoughts 💭
+- We can use a hashmap to count the frequency of ranks and suits.
+- First, check if all cards are of the same suit for a Flush. Then check for Three of a Kind and Pair, and default to High Card.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the number of cards is always 5.
+- There are no large inputs, as the input size is fixed at 5.
+- Ensure that all cards are valid and adhere to the rank and suit constraints.
+- The input will always contain 5 cards with valid ranks and suits.
+{{< dots >}}
+## Code 💻
+```cpp
+string bestHand(vector<int>& ranks, vector<char>& suits) {
+    unordered_map<int,int> m1;
+    unordered_map<char,int> m2;
+    for(auto i:ranks) m1[i]++;
+    for(auto i:suits) m2[i]++;
+    string ans="";
+    for(auto i:m2){
+        if(i.second==5){
+            return "Flush";
         }
-        for(auto i:m1){
-            if(i.second>=3)
-            return "Three of a Kind";
-            else if(i.second==2)
-            ans="Pair";
-        }
-
-        return ans==""?"High Card":ans;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are given a hand of five playing cards, represented by two arrays: `ranks` and `suits`. Each element in `ranks` corresponds to the rank of a card (e.g., 2, 3, 4, ..., 10, J, Q, K, A), and each element in `suits` corresponds to the suit of the card (e.g., 'H' for hearts, 'D' for diamonds, 'C' for clubs, 'S' for spades). The task is to determine the best hand possible based on the rules of poker. The possible hands are:
-- **"Flush"**: All five cards have the same suit.
-- **"Three of a Kind"**: At least three cards have the same rank.
-- **"Pair"**: At least two cards have the same rank.
-- **"High Card"**: If none of the above hands are present, the hand is a "High Card".
-
-### Approach
-
-The solution works by evaluating the given hand of cards and checking for the highest-ranking poker hand it can form. The strategy is straightforward:
-1. **Count the Frequency of Ranks**: We first count how many times each rank appears in the `ranks` array.
-2. **Count the Frequency of Suits**: Similarly, we count how many times each suit appears in the `suits` array.
-3. **Check for Flush**: If any suit appears exactly five times, the hand is a "Flush".
-4. **Check for Three of a Kind**: If any rank appears at least three times, the hand is "Three of a Kind".
-5. **Check for Pair**: If any rank appears exactly twice, the hand is a "Pair".
-6. **Default to High Card**: If none of the above conditions are satisfied, the hand is a "High Card".
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initialize Maps to Track Ranks and Suits**
-```cpp
-unordered_map<int, int> m1;
-unordered_map<char, int> m2;
-```
-- We use `unordered_map` to store the frequency of each rank and each suit. The map `m1` will store the count of each rank, and the map `m2` will store the count of each suit.
-
-#### 2. **Populate Frequency Maps**
-```cpp
-for (auto i : ranks) m1[i]++;
-for (auto i : suits) m2[i]++;
-```
-- We loop through the `ranks` array and update the frequency map `m1`. Each rank's count is incremented by one every time it appears in the hand.
-- Similarly, we loop through the `suits` array and update the frequency map `m2`, incrementing the count of each suit.
-
-#### 3. **Check for Flush**
-```cpp
-for (auto i : m2) {
-    if (i.second == 5) {
-        return "Flush";
-    }
-}
-```
-- The first condition we check is for a "Flush". A "Flush" occurs if all five cards have the same suit. We check the `m2` map to see if any suit appears exactly five times. If this condition is met, we immediately return "Flush".
-
-#### 4. **Check for Three of a Kind**
-```cpp
-for (auto i : m1) {
-    if (i.second >= 3) {
+    for(auto i:m1){
+        if(i.second>=3)
         return "Three of a Kind";
+        else if(i.second==2)
+        ans="Pair";
     }
-```
-- If no "Flush" is found, we then check for "Three of a Kind". This occurs if at least three cards have the same rank. We check the `m1` map for any rank that appears three or more times. If such a rank exists, we immediately return "Three of a Kind".
 
-#### 5. **Check for Pair**
-```cpp
-else if (i.second == 2) {
-    ans = "Pair";
+    return ans==""?"High Card":ans;
 }
 ```
-- If neither a "Flush" nor "Three of a Kind" is found, we check for a "Pair". A "Pair" occurs if exactly two cards have the same rank. We look for any rank that appears exactly twice in the `m1` map. If such a rank is found, we update the variable `ans` to "Pair".
 
-#### 6. **Return the Result**
-```cpp
-return ans == "" ? "High Card" : ans;
-```
-- If no "Flush", "Three of a Kind", or "Pair" is found, we return "High Card" by default. If a "Pair" was found during the previous check, we return "Pair".
+This function evaluates a hand of cards, determining if it is a 'Flush', 'Three of a Kind', 'Pair', or 'High Card' based on the input card ranks and suits.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string bestHand(vector<int>& ranks, vector<char>& suits) {
+	```
+	This line defines the function 'bestHand', which takes two parameters: 'ranks' (card ranks) and 'suits' (card suits). It returns a string indicating the type of the hand.
 
-#### Time Complexity:
-- **O(n)**: We loop through the `ranks` and `suits` arrays once each, where `n` is the number of cards (which is fixed at 5). The time complexity is constant in this case, since we only have five cards.
-  - **O(n) for ranks**: We iterate through the `ranks` array to count the occurrences of each rank.
-  - **O(n) for suits**: We iterate through the `suits` array to count the occurrences of each suit.
-  - Sorting the maps is not necessary because we don't need to check for specific ranks or suits in any particular order.
+2. **Map Initialization**
+	```cpp
+	    unordered_map<int,int> m1;
+	```
+	An unordered map 'm1' is created to store the frequency of each card rank.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because we only store the counts of ranks (maximum 13 possible values for ranks) and suits (maximum 4 possible suits). Thus, we use a constant amount of extra space.
+3. **Map Initialization**
+	```cpp
+	    unordered_map<char,int> m2;
+	```
+	Another unordered map 'm2' is created to store the frequency of each card suit.
 
-### Conclusion
+4. **For Loop - Ranks**
+	```cpp
+	    for(auto i:ranks) m1[i]++;
+	```
+	This loop iterates through the 'ranks' vector and updates the frequency of each rank in the 'm1' map.
 
-This solution efficiently determines the best hand from a hand of cards by using frequency counting with hash maps (`unordered_map`). The approach is optimal for this problem since it handles small input sizes (a fixed number of 5 cards) in constant time. By checking for the highest-ranking poker hands (Flush, Three of a Kind, Pair, and High Card), the solution provides a clear and concise method for evaluating a poker hand. The space and time complexities are minimal, making this solution suitable for real-time applications where quick hand evaluations are needed.
+5. **For Loop - Suits**
+	```cpp
+	    for(auto i:suits) m2[i]++;
+	```
+	This loop iterates through the 'suits' vector and updates the frequency of each suit in the 'm2' map.
+
+6. **Variable Initialization**
+	```cpp
+	    string ans="";
+	```
+	Initialize an empty string 'ans', which will store the result of the hand type.
+
+7. **For Loop - Suits Check**
+	```cpp
+	    for(auto i:m2){
+	```
+	Loop through each suit and its frequency in the 'm2' map.
+
+8. **Flush Check**
+	```cpp
+	        if(i.second==5){
+	```
+	If a suit appears 5 times, the hand is a 'Flush'.
+
+9. **Flush Return**
+	```cpp
+	            return "Flush";
+	```
+	Return 'Flush' if all five cards have the same suit.
+
+10. **For Loop - Ranks Check**
+	```cpp
+	    for(auto i:m1){
+	```
+	Loop through each rank and its frequency in the 'm1' map.
+
+11. **Three of a Kind Check**
+	```cpp
+	        if(i.second>=3)
+	```
+	If any rank appears 3 or more times, the hand is 'Three of a Kind'.
+
+12. **Three of a Kind Return**
+	```cpp
+	        return "Three of a Kind";
+	```
+	Return 'Three of a Kind' if a rank appears 3 or more times.
+
+13. **Pair Check**
+	```cpp
+	        else if(i.second==2)
+	```
+	If a rank appears exactly 2 times, it is considered a 'Pair'.
+
+14. **Pair Assignment**
+	```cpp
+	        ans="Pair";
+	```
+	Set 'ans' to 'Pair' if a rank appears exactly 2 times.
+
+15. **Return Statement**
+	```cpp
+	    return ans==""?"High Card":ans;
+	```
+	If 'ans' is still empty (no pair or three of a kind), return 'High Card'. Otherwise, return the value of 'ans'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution runs in constant time since the input size is always fixed at 5.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant since we only use a small number of auxiliary variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/best-poker-hand/description/)
 

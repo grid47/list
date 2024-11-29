@@ -14,103 +14,159 @@ img_src = ""
 youtube = "p_hKOwJ7azU"
 youtube_upload_date="2021-12-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/p_hKOwJ7azU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array prices representing the daily price history of a stock, where prices[i] is the stock price on the ith day. A smooth descent period of a stock consists of contiguous days such that the price on each day decreases by exactly 1 from the previous day. The first day of the period can be a single-day smooth descent. Return the total number of smooth descent periods.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of integers representing the stock prices over multiple days.
+- **Example:** `prices = [5, 4, 3, 6]`
+- **Constraints:**
+	- 1 <= prices.length <= 10^5
+	- 1 <= prices[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long getDescentPeriods(vector<int>& prices) {
-        vector<int> dp(prices.size(), 0);
-        dp[0] = 1;
-        long long ans = 1;
-        for(int i = 1; i < prices.size(); i++) {
-            if(prices[i] == prices[i - 1] - 1)
-            dp[i] = dp[i - 1] + 1;
-            else dp[i] = 1;
-            ans += dp[i];
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of smooth descent periods where each period consists of one or more contiguous days where the price decreases by exactly 1 each day.
+- **Example:** `For prices = [5, 4, 3, 6], the output should be 6.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the number of smooth descent periods from the given stock price list.
+
+- Initialize a variable to keep track of the current descent period length.
+- Iterate through the prices list, and for each day, check if the price is exactly 1 less than the previous day's price.
+- For each valid descent period, increment the count of descent periods.
+{{< dots >}}
+### Problem Assumptions ✅
+- The list of prices contains only positive integers.
+- The stock price list can have both increasing and decreasing price sequences.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: prices = [5, 4, 3, 6]`  \
+  **Explanation:** The smooth descent periods are: [5], [4], [3], [6], [5,4], and [4,3], resulting in a total of 6 smooth descent periods.
+
+- **Input:** `Example 2: prices = [8, 6, 5, 7]`  \
+  **Explanation:** The smooth descent periods are: [8], [6], [5], and [7]. There are no multi-day descent periods here.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the list of stock prices and counting the smooth descent periods by checking the difference between consecutive days.
+
+### Initial Thoughts 💭
+- Each descent period consists of a sequence of days where the price decreases by exactly 1 from one day to the next.
+- For each contiguous sequence of days with this property, we can count the number of possible subarrays that form valid descent periods.
+- This can be done in a single pass over the input list to ensure efficient performance.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return 0.
+- Ensure the solution handles arrays of length up to 100,000 efficiently.
+- If the array contains only one price, there is exactly one smooth descent period.
+- The solution should process the input in linear time, O(n).
+{{< dots >}}
+## Code 💻
+```cpp
+long long getDescentPeriods(vector<int>& prices) {
+    vector<int> dp(prices.size(), 0);
+    dp[0] = 1;
+    long long ans = 1;
+    for(int i = 1; i < prices.size(); i++) {
+        if(prices[i] == prices[i - 1] - 1)
+        dp[i] = dp[i - 1] + 1;
+        else dp[i] = 1;
+        ans += dp[i];
     }
-};
-{{< /highlight >}}
----
+    return ans;
+}
+```
 
-### Problem Statement
+This function calculates the total number of descent periods in a list of prices, where each descent period is a contiguous subsequence where prices decrease by 1 each time.
 
-The problem is to calculate the total number of continuous descending periods in a given list of stock prices. A descending period is defined as a sequence of prices where each price is exactly one less than the previous price. The goal is to return the sum of all such descending periods, including each individual price as a valid period.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	long long getDescentPeriods(vector<int>& prices) {
+	```
+	Define the function `getDescentPeriods` that takes a vector of integers `prices` representing stock prices and returns the total number of descent periods.
 
-### Approach
+2. **Vector Initialization**
+	```cpp
+	    vector<int> dp(prices.size(), 0);
+	```
+	Initialize a vector `dp` of the same size as `prices` to store the length of the current descent period for each price. All values are initially set to 0.
 
-To solve this problem, we can use a dynamic programming approach. The idea is to keep track of the number of consecutive descending prices ending at each position in the list. Here’s how the approach works:
+3. **Initial Value Assignment**
+	```cpp
+	    dp[0] = 1;
+	```
+	Set the first element of `dp` to 1, representing that the first price is a valid descent period of length 1.
 
-1. **Dynamic Programming Array**: Create an array `dp` where `dp[i]` will store the number of descending periods ending at index `i`.
-2. **Initialization**: Initialize `dp[0]` to 1 since the first price itself counts as a descending period.
-3. **Iterate Through Prices**: For each price starting from the second one, check if it continues a descending sequence from the previous price.
-4. **Update Counts**: If it does, update `dp[i]` based on `dp[i-1]`. If it doesn't, reset `dp[i]` to 1 (the current price itself).
-5. **Accumulate Results**: Sum all values in the `dp` array to get the total number of descending periods.
+4. **Variable Initialization**
+	```cpp
+	    long long ans = 1;
+	```
+	Initialize the variable `ans` to 1 to track the total number of descent periods, starting with the first price.
 
-### Code Breakdown (Step by Step)
+5. **Loop Start**
+	```cpp
+	    for(int i = 1; i < prices.size(); i++) {
+	```
+	Start a loop from the second price in the list to check if it continues the descent from the previous price.
 
-1. **Initialization**:
-   ```cpp
-   vector<int> dp(prices.size(), 0);
-   dp[0] = 1;
-   long long ans = 1;
-   ```
-   - A vector `dp` is created with the same size as `prices` to store the count of descending periods.
-   - The first element `dp[0]` is initialized to 1 because the first price itself is a valid period.
-   - The variable `ans` is initialized to 1 to account for the first price.
+6. **Condition Check**
+	```cpp
+	        if(prices[i] == prices[i - 1] - 1)
+	```
+	Check if the current price `prices[i]` is exactly 1 less than the previous price, indicating a descent period.
 
-2. **Loop Through Prices**:
-   ```cpp
-   for(int i = 1; i < prices.size(); i++) {
-   ```
-   - Start a loop from the second price (index 1) to the last price in the `prices` vector.
+7. **Update Descent Length**
+	```cpp
+	        dp[i] = dp[i - 1] + 1;
+	```
+	If a descent is found, set `dp[i]` to the length of the previous descent period (`dp[i - 1]`) plus 1.
 
-3. **Check Descending Condition**:
-   ```cpp
-   if(prices[i] == prices[i - 1] - 1)
-   ```
-   - Check if the current price is exactly one less than the previous price.
+8. **Reset Descent Length**
+	```cpp
+	        else dp[i] = 1;
+	```
+	If the current price does not continue the descent, reset `dp[i]` to 1, indicating a new descent period.
 
-4. **Update Dynamic Programming Array**:
-   ```cpp
-   dp[i] = dp[i - 1] + 1;
-   ```
-   - If the condition is true, it means that the current price continues the descending sequence, so `dp[i]` is updated to the value of `dp[i-1]` plus one.
-   ```cpp
-   else dp[i] = 1;
-   ```
-   - If the condition is false, the current price starts a new descending period, hence `dp[i]` is set to 1.
+9. **Accumulate Total Descent Periods**
+	```cpp
+	        ans += dp[i];
+	```
+	Add the length of the current descent period (`dp[i]`) to the total count `ans`.
 
-5. **Accumulate Total Descending Periods**:
-   ```cpp
-   ans += dp[i];
-   ```
-   - Add the current value of `dp[i]` to `ans` to keep track of the total number of descending periods.
+10. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the total number of descent periods stored in `ans`.
 
-6. **Return the Result**:
-   ```cpp
-   return ans;
-   ```
-   - Finally, return the total count of descending periods stored in `ans`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity Analysis
+The time complexity is O(n), where n is the number of days (length of the prices array).
 
-- **Time Complexity**: \(O(n)\), where \(n\) is the number of prices in the `prices` array.
-  - The algorithm processes each price exactly once in a single loop.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-- **Space Complexity**: \(O(n)\) for the `dp` array.
-  - The space used is proportional to the input size since we store counts for each price.
+The space complexity is O(n) if a new array or counter is used, but could be O(1) with optimized space usage.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution effectively counts the total number of continuous descending periods in the prices using a dynamic programming approach. By leveraging a simple iterative method and maintaining a count of descending periods, the code efficiently calculates the desired result in linear time. This approach ensures that each price is only processed once, providing both clarity and performance. The dynamic programming technique allows for easy accumulation of results, making the solution both straightforward and efficient.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/description/)
 

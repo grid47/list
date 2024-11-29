@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "wiGpQwVHdE0"
 youtube_upload_date="2020-06-27"
 youtube_thumbnail="https://i.ytimg.com/vi/wiGpQwVHdE0/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,109 +28,154 @@ youtube_thumbnail="https://i.ytimg.com/vi/wiGpQwVHdE0/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string, determine the length of the longest substring that contains no repeating characters. The substring must consist of consecutive characters, and its length is to be returned as the output.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a single string 's'.
+- **Example:** `s = "abcdeabc"`
+- **Constraints:**
+	- 0 <= s.length <= 50,000
+	- s consists of English letters, digits, symbols, and spaces.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int lengthOfLongestSubstring(string s) {
-        int prv = -1, len = 0;
-        map<char, int> mp;
-        for(int i = 0; i < s.size(); i++) {
-            if(mp.count(s[i]))
-                prv = max(prv, mp[s[i]]);
-            mp[s[i]] = i;
-            len = max(len, i - prv);
-        }
-        return len;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the length of the longest substring without repeating characters.
+- **Example:** `5`
+- **Constraints:**
+	- The output must be a non-negative integer.
+	- If the string is empty, return 0.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the maximum length of a substring with unique characters from the given string.
+
+- Use a sliding window approach with two pointers to track the current substring.
+- Maintain a hash map to store the most recent index of each character.
+- Move the right pointer to include new characters and adjust the left pointer to avoid duplicates.
+- Keep track of the maximum length of the substring during the process.
+- Return the maximum length found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is a valid string.
+- Special characters, digits, and spaces are treated the same as letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "abcdefabc"`  \
+  **Explanation:** The longest substring without repeating characters is "abcdef" with a length of 6.
+
+- **Input:** `s = "aaaaaa"`  \
+  **Explanation:** The longest substring without repeating characters is "a" with a length of 1.
+
+- **Input:** `s = "dvdf"`  \
+  **Explanation:** The longest substring without repeating characters is "vdf" with a length of 3.
+
+{{< dots >}}
+## Approach 🚀
+A sliding window technique with a hash map to efficiently find the longest substring without repeating characters.
+
+### Initial Thoughts 💭
+- Using a brute force approach would result in a quadratic time complexity, which is not efficient for large strings.
+- A sliding window with a hash map can efficiently track the unique characters in the current substring.
+- Track the current substring using two pointers and maintain the last seen index of each character to avoid revisiting characters.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, the output should be 0.
+- The function should handle strings with the maximum length efficiently.
+- Strings with all unique characters should return the length of the string.
+- Strings with all identical characters should return 1.
+- Handles a mix of letters, digits, symbols, and spaces.
+{{< dots >}}
+## Code 💻
+```cpp
+int lengthOfLongestSubstring(string s) {
+    int prv = -1, len = 0;
+    map<char, int> mp;
+    for(int i = 0; i < s.size(); i++) {
+        if(mp.count(s[i]))
+            prv = max(prv, mp[s[i]]);
+        mp[s[i]] = i;
+        len = max(len, i - prv);
     }
-};
-{{< /highlight >}}
----
-
-### 🔍 **Longest Substring Without Repeating Characters** – Explained Simply!
-
-In the **Longest Substring Without Repeating Characters** problem, we are given a string `s`, and we need to determine the **length of the longest substring** that contains unique characters (no repeats). This problem is often encountered in algorithmic challenges and tests your ability to efficiently manage substring uniqueness.
-
-### 📝 **Problem Statement**
-
-**Input**: 
-- A string `s`, consisting of characters.
-
-**Output**: 
-- An integer representing the **length of the longest substring** of `s` with all unique characters.
-
-### 💡 **Key Idea: Sliding Window with Hashmap**
-
-To tackle this problem efficiently, we’ll use a **sliding window** approach combined with a **hashmap**. The sliding window helps manage the substring boundaries, while the hashmap enables us to quickly track characters and their most recent positions, allowing us to keep the substring unique.
-
-#### **Steps to Solve the Problem:**
-
-1. **Sliding Window**: Use a window that slides across the string. The window will expand as we move right and adjust (shrink from the left) when duplicate characters are found.
-   
-2. **Hashmap**: Use a hashmap to store each character's **latest index** in the string. This lets us know where to adjust the left boundary if a repeated character is encountered.
-
-3. **Calculate Length**: As we slide the window, we continuously calculate the length of the current valid substring and track the maximum length found.
-
-### Step-by-Step Solution
-
-#### Step 1: Initialize Variables
-
-```cpp
-int prv = -1, len = 0;  // Previous boundary index and max length
-map<char, int> mp;  // Map to store characters and their latest positions
-```
-
-- `prv`: Represents the **left boundary** of the window, initialized to `-1` (before the start of the string).
-- `len`: Stores the length of the **longest valid substring** found.
-- `mp`: A hashmap that stores the **latest index** of each character encountered, allowing quick access and efficient window adjustment.
-
-#### Step 2: Traverse the String
-
-```cpp
-for(int i = 0; i < s.size(); i++) {
-    if(mp.count(s[i])) 
-        prv = max(prv, mp[s[i]]);  // Update left boundary to avoid duplicate
-    mp[s[i]] = i;  // Update the latest index of the character
-    len = max(len, i - prv);  // Calculate length of current valid substring
+    return len;
 }
 ```
 
-- **Loop through each character** (`i` is the current index):
-  - **Check for duplicates**:
-    - If `s[i]` is already in `mp`, it means we’ve seen this character before.
-    - **Adjust left boundary**: `prv = max(prv, mp[s[i]])` ensures `prv` moves right to the latest occurrence of `s[i]`.
-  - **Update the hashmap**: Set `mp[s[i]] = i`, marking `s[i]`'s latest position.
-  - **Calculate the length**: `len = max(len, i - prv)` updates `len` if the current substring (from `prv` to `i`) is the longest so far.
+This code efficiently finds the length of the longest substring without repeating characters in a given string. It utilizes a sliding window approach with a hash map to keep track of character occurrences and their last indices.
 
-#### Step 3: Return the Maximum Length
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int lengthOfLongestSubstring(string s) {
+	```
+	Declares a function `lengthOfLongestSubstring` that takes a string `s` as input and returns the length of the longest substring without repeating characters.
 
-```cpp
-return len;
-```
+2. **Variable Initialization**
+	```cpp
+	    int prv = -1, len = 0;
+	```
+	Initializes two integer variables: `prv` to track the index of the last occurrence of a character, and `len` to store the length of the current longest substring.
 
-- After processing the string, `len` will hold the length of the longest substring without repeating characters, which we return as the result.
+3. **Map Initialization**
+	```cpp
+	    map<char, int> mp;
+	```
+	Initializes an empty hash map `mp` to store characters as keys and their corresponding indices as values.
 
-### ⏱️ **Time and Space Complexity Analysis**
+4. **Loop Initialization and Condition**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Starts a loop to iterate through each character in the string `s`.
 
-- **Time Complexity**: **O(n)**, where `n` is the length of the string `s`. We perform a single pass through `s`, with each operation inside the loop (hashmap access and updates) taking constant time.
-- **Space Complexity**: **O(min(n, m))**, where `n` is the length of the string, and `m` is the size of the character set. The hashmap `mp` stores at most one entry per unique character in `s`.
+5. **Character Check**
+	```cpp
+	        if(mp.count(s[i]))
+	```
+	Checks if the current character `s[i]` is already present in the hash map.
 
-### 🌟 **Why This Solution Works**
+6. **Update Previous Index**
+	```cpp
+	            prv = max(prv, mp[s[i]]);
+	```
+	If the character is found, updates `prv` to the maximum of its current value and the previous index of the character.
 
-This solution is efficient and intuitive:
-- **Single Pass (O(n) Time)**: The sliding window ensures each character is processed once.
-- **Efficient Window Adjustment**: The hashmap enables quick lookups to reposition the left boundary, maintaining uniqueness within the window.
+7. **Update Character Index**
+	```cpp
+	        mp[s[i]] = i;
+	```
+	Updates the index of the current character in the hash map.
 
-### 🏆 **In Summary**
+8. **Update Longest Substring Length**
+	```cpp
+	        len = max(len, i - prv);
+	```
+	Updates the `len` variable to the maximum of its current value and the length of the current substring, which is calculated as `i - prv`.
 
-This approach makes it easy to tackle the **Longest Substring Without Repeating Characters** by combining a sliding window with a hashmap. With this method, we can solve the problem in linear time, making it well-suited for large strings. This technique is useful not only for solving similar substring problems but also for real-world applications involving efficient string processing.
+9. **Return Result**
+	```cpp
+	    return len;
+	```
+	Returns the length of the longest substring without repeating characters.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### 🎉 **Practice Makes Perfect!**
+Each character is processed at most twice: once when moving the right pointer and once when adjusting the left pointer.
 
-With each problem you solve, you sharpen your coding skills and gain confidence. Keep coding, stay curious, and remember that every solved problem brings you closer to mastery. Good luck, and happy coding! 🚀
+### Space Complexity 💾
+- **Best Case:** O(m)
+- **Worst Case:** O(m)
+
+The space complexity depends on the size of the character set used in the string, where m is the maximum number of unique characters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/)
 

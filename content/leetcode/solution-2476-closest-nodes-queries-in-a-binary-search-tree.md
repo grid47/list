@@ -14,154 +14,221 @@ img_src = ""
 youtube = "KFYvX7u-Hs8"
 youtube_upload_date="2022-11-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/KFYvX7u-Hs8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given the root of a binary search tree (BST) and an array of queries. For each query, find the largest value smaller than or equal to the query value and the smallest value greater than or equal to the query value in the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the root of a binary search tree (BST) and an array of queries.
+- **Example:** `root = [10, 5, 20, 2, 7, 15, 30], queries = [6, 25, 5]`
+- **Constraints:**
+	- The number of nodes in the tree is between 2 and 10^5.
+	- 1 <= Node.val <= 10^6
+	- The length of queries is between 1 and 10^5.
+	- 1 <= queries[i] <= 10^6
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a 2D array where each element represents the answers to each query. The first element in the pair should be the largest value smaller than or equal to the query, and the second should be the smallest value greater than or equal to the query.
+- **Example:** `Output: [[5, 7], [20, 20], [5, 5]]`
+- **Constraints:**
+	- The output should be a 2D array of integers.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** For each query, find the largest value smaller than or equal to the query and the smallest value greater than or equal to the query.
+
+- Traverse the binary search tree (BST) and store the values in a sorted order.
+- For each query, find the largest number less than or equal to the query and the smallest number greater than or equal to the query using binary search techniques.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary search tree (BST) is a valid BST, and the input query array contains positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [10,5,20,2,7,15,30], queries = [6, 25, 5]`  \
+  **Explanation:** For the query 6, the largest number smaller or equal to 6 is 5, and the smallest number greater or equal to 6 is 7. For the query 25, the largest number smaller or equal to 25 is 20, and the smallest number greater or equal to 25 is 20. For the query 5, the largest number smaller or equal to 5 is 5, and the smallest number greater or equal to 5 is 5.
+
+{{< dots >}}
+## Approach 🚀
+We need to find the closest nodes in the BST for each query value by traversing the tree and using binary search techniques.
+
+### Initial Thoughts 💭
+- The problem can be solved efficiently by storing the tree's values in sorted order and using binary search for each query.
+- We can perform an in-order traversal of the tree to get a sorted list of values and then use binary search to find the closest nodes for each query.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least 2 nodes in the tree, so no empty inputs are possible.
+- Ensure the solution is efficient for large trees and large query arrays.
+- If no valid smaller or larger value exists, return -1.
+- The solution must be optimized for time complexity due to the input size constraints.
+{{< dots >}}
+## Code 💻
+```cpp
 class Solution {
-    vector<int> v;
-    void traverse(TreeNode* root) {
-        if(root != nullptr) {
-            traverse(root->left);
-            if(v.empty() || v.back() < root->val)
-                v.push_back(root->val);
-            traverse(root->right);
-        }
+vector<int> v;
+void traverse(TreeNode* root) {
+    if(root != nullptr) {
+        traverse(root->left);
+        if(v.empty() || v.back() < root->val)
+            v.push_back(root->val);
+        traverse(root->right);
     }
+}
 public:
-    vector<vector<int>> closestNodes(TreeNode* root, vector<int>& queries) {
-        traverse(root);
-        vector<vector<int>> res;
-        for(int q: queries) {
-            auto it = lower_bound(begin(v), end(v), q);
-            if(it != end(v) && *it==q)
-            res.push_back({q, q});
-            else
-            res.push_back({it == begin(v)? -1: *prev(it), it == end(v)? -1: *it});
-        }
-        return res;
+vector<vector<int>> closestNodes(TreeNode* root, vector<int>& queries) {
+    traverse(root);
+    vector<vector<int>> res;
+    for(int q: queries) {
+        auto it = lower_bound(begin(v), end(v), q);
+        if(it != end(v) && *it==q)
+        res.push_back({q, q});
+        else
+        res.push_back({it == begin(v)? -1: *prev(it), it == end(v)? -1: *it});
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement:
-The problem asks us to implement a function `closestNodes` that, given a binary search tree (BST) and a list of queries, returns the closest nodes to the given queries in the BST. For each query, we need to find two things:
-1. The largest node in the tree that is smaller than or equal to the query value.
-2. The smallest node in the tree that is greater than or equal to the query value.
+This solution defines a `Solution` class that includes a method `closestNodes` which takes in a binary search tree (`TreeNode* root`) and a list of query values. The method returns a list of closest nodes for each query, utilizing an in-order traversal to build a sorted list of node values.
 
-If there is no such node (either smaller or larger), we should return `-1` for that respective query.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	This is the declaration of the `Solution` class which contains the method `closestNodes` that solves the problem.
 
-### Approach:
-This problem requires efficient traversal of a binary search tree (BST) to answer each query in the most optimized way. A naive approach would involve searching the BST for each query, but that would be inefficient for large trees. Instead, we can exploit the properties of BSTs to perform a faster lookup.
+2. **Member Variable Declaration**
+	```cpp
+	vector<int> v;
+	```
+	A member variable `v` of type `vector<int>` is declared, which will store the values of the nodes in the tree in sorted order.
 
-#### Optimized Plan:
-1. **In-order Traversal of the BST**:
-   The key observation is that if we perform an **in-order traversal** on a BST, the values are sorted in ascending order. This sorted array will allow us to efficiently find the closest nodes to each query using binary search techniques.
+3. **Helper Function Declaration**
+	```cpp
+	void traverse(TreeNode* root) {
+	```
+	This is a helper function `traverse` that performs an in-order traversal of the binary search tree to collect the node values in sorted order.
 
-2. **Binary Search for Query Answers**:
-   Once we have the values of the nodes in a sorted list (from the in-order traversal), we can use **binary search** (specifically `lower_bound`) to find the closest node greater than or equal to the query value. Additionally, we can check the element just before this to find the closest node smaller than or equal to the query value.
+4. **Null Check**
+	```cpp
+	    if(root != nullptr) {
+	```
+	Checks if the current node is not null before proceeding with further traversal.
 
-3. **Efficient Query Answering**:
-   After obtaining the sorted list of node values from the BST, we can answer each query in logarithmic time using binary search. This makes the solution much faster than a brute-force approach.
+5. **Left Subtree Traversal**
+	```cpp
+	        traverse(root->left);
+	```
+	Recursively traverses the left subtree of the current node.
 
-### Code Breakdown (Step by Step):
-Now, let’s break down the code to understand how it works:
+6. **Value Insertion Check**
+	```cpp
+	        if(v.empty() || v.back() < root->val)
+	```
+	Checks if the `v` vector is empty or if the last element in `v` is smaller than the current node's value, ensuring values are inserted in increasing order.
 
-1. **TreeNode Definition**:
-   The problem provides the definition of a binary tree node:
-   ```cpp
-   struct TreeNode {
-       int val;
-       TreeNode *left;
-       TreeNode *right;
-       TreeNode() : val(0), left(nullptr), right(nullptr) {}
-       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-       TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-   };
-   ```
-   - `TreeNode` has three properties: `val` (the value of the node), `left` (pointer to the left child), and `right` (pointer to the right child).
-   - There are three constructors provided for initializing the node, either with a default value or with specific values for `val`, `left`, and `right`.
+7. **Push Value to Vector**
+	```cpp
+	            v.push_back(root->val);
+	```
+	Inserts the current node's value into the `v` vector if it satisfies the condition.
 
-2. **In-order Traversal**:
-   The `traverse` function performs an in-order traversal of the tree to collect all the node values in sorted order:
-   ```cpp
-   void traverse(TreeNode* root) {
-       if(root != nullptr) {
-           traverse(root->left);  // Traverse left subtree
-           if(v.empty() || v.back() < root->val)
-               v.push_back(root->val);  // Add the node value to the list if it's greater than the last one
-           traverse(root->right);  // Traverse right subtree
-       }
-   }
-   ```
-   - The function recursively traverses the tree in in-order (left, root, right).
-   - Each node's value is added to the vector `v`, but only if it is greater than the last added value. This ensures that we are collecting the values in strictly increasing order (since a BST's in-order traversal gives values in ascending order).
+8. **Right Subtree Traversal**
+	```cpp
+	        traverse(root->right);
+	```
+	Recursively traverses the right subtree of the current node.
 
-3. **Handling Queries**:
-   The main function `closestNodes` processes the list of queries and uses the sorted vector `v` to find the closest nodes for each query:
-   ```cpp
-   vector<vector<int>> closestNodes(TreeNode* root, vector<int>& queries) {
-       traverse(root);  // Perform in-order traversal to get sorted values
-       vector<vector<int>> res;  // Initialize result vector to store answers for queries
-       for (int q: queries) {
-           auto it = lower_bound(begin(v), end(v), q);  // Find the lower bound of the query in the sorted list
-           if (it != end(v) && *it == q)  // If the query value is found exactly in the list
-               res.push_back({q, q});
-           else
-               res.push_back({it == begin(v) ? -1 : *prev(it), it == end(v) ? -1 : *it});
-           // For each query:
-           // - If exact match, both closest values are the query itself
-           // - Otherwise, find the largest smaller value and the smallest larger value
-       }
-       return res;  // Return the result for all queries
-   }
-   ```
-   - **`traverse(root)`**: The function first calls `traverse` to fill the vector `v` with the sorted values from the BST.
-   - **Processing each query**: For each query in the `queries` vector:
-     - We use `lower_bound(begin(v), end(v), q)` to find the position in the sorted list where `q` would be inserted to maintain order. This gives us the smallest element that is greater than or equal to `q`.
-     - If the element at the iterator `it` matches the query (`*it == q`), both closest nodes are the query itself.
-     - Otherwise, we return two values:
-       - The largest number smaller than `q`, which is found using `prev(it)` (if `it` is not at the beginning of the vector).
-       - The smallest number greater than `q`, which is found at `it` (if `it` is not at the end of the vector).
-     - If no such smaller or larger element exists, we return `-1`.
+9. **Public Access Modifier**
+	```cpp
+	public:
+	```
+	The `public` access modifier, indicating that the methods following it are accessible from outside the class.
 
-4. **Return the Result**:
-   The function returns the list of results for all queries:
-   ```cpp
-   return res;
-   ```
+10. **Method Declaration**
+	```cpp
+	vector<vector<int>> closestNodes(TreeNode* root, vector<int>& queries) {
+	```
+	This is the main method `closestNodes`, which receives a tree root and a list of queries, and returns a list of vectors containing the closest nodes for each query.
 
-### Complexity:
-Let’s analyze the time and space complexity of this solution:
+11. **Inorder Traversal Call**
+	```cpp
+	    traverse(root);
+	```
+	Calls the `traverse` function to populate the vector `v` with the sorted node values from the tree.
 
-- **Time Complexity**:
-  - **In-order Traversal**: The in-order traversal of the tree takes \(O(n)\), where \(n\) is the number of nodes in the tree, as each node is visited exactly once.
-  - **Binary Search for Queries**: For each query, we perform a `lower_bound` search on the sorted list `v`, which takes \(O(\log n)\) time using binary search. If there are \(m\) queries, the total time for all queries is \(O(m \log n)\).
-  - **Overall Time Complexity**: The total time complexity is \(O(n + m \log n)\), where \(n\) is the number of nodes in the tree and \(m\) is the number of queries.
+12. **Result Vector Initialization**
+	```cpp
+	    vector<vector<int>> res;
+	```
+	Initializes a 2D vector `res` to store the results of closest nodes for each query.
 
-- **Space Complexity**:
-  - **Sorted List `v`**: The space complexity for storing the sorted list of node values is \(O(n)\), where \(n\) is the number of nodes in the tree.
-  - **Result List**: The result list stores the answers for each query, and its size is \(O(m)\), where \(m\) is the number of queries.
-  - **Overall Space Complexity**: The total space complexity is \(O(n + m)\), where \(n\) is the number of nodes in the tree and \(m\) is the number of queries.
+13. **Loop Over Queries**
+	```cpp
+	    for(int q: queries) {
+	```
+	Iterates over each query value `q` in the `queries` list.
 
-### Conclusion:
-This solution efficiently solves the problem of finding the closest nodes for each query in a binary search tree. By performing an in-order traversal to get the sorted list of node values and using binary search to answer each query, we achieve a time complexity of \(O(n + m \log n)\), which is optimal for large input sizes. The space complexity is \(O(n + m)\), which is also efficient. This approach is well-suited for handling large BSTs and query lists in competitive programming and real-world applications.
+14. **Lower Bound Search**
+	```cpp
+	        auto it = lower_bound(begin(v), end(v), q);
+	```
+	Uses the `lower_bound` function to find the first position in the sorted vector `v` where the value is greater than or equal to the query `q`.
+
+15. **Exact Match Check**
+	```cpp
+	        if(it != end(v) && *it==q)
+	```
+	Checks if the query `q` exactly matches an element in the sorted vector `v`.
+
+16. **Exact Match Result**
+	```cpp
+	        res.push_back({q, q});
+	```
+	If an exact match is found, it pushes a vector containing the query value `q` as both the lower and upper bound into the result vector `res`.
+
+17. **Otherwise Result**
+	```cpp
+	        else
+	```
+	Handles the case where the query does not have an exact match in the sorted vector `v`.
+
+18. **Result for No Exact Match**
+	```cpp
+	        res.push_back({it == begin(v)? -1: *prev(it), it == end(v)? -1: *it});
+	```
+	If there is no exact match, it pushes a pair of the closest smaller and larger values (or -1 if no such values exist) into the result vector `res`.
+
+19. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the result vector `res` containing the closest nodes for each query.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + q log n)
+- **Average Case:** O(n + q log n)
+- **Worst Case:** O(n + q log n)
+
+The time complexity for this solution is O(n + q log n), where n is the number of nodes and q is the number of queries.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the values of the BST in a sorted array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/description/)
 

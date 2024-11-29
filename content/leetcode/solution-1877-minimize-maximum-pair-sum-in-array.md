@@ -14,95 +14,132 @@ img_src = ""
 youtube = "gAzUiJ1ylQc"
 youtube_upload_date="2021-05-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gAzUiJ1ylQc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array `nums` of even length `n`, your task is to pair up the elements of the array into `n / 2` pairs such that the maximum pair sum is minimized. A pair sum is defined as the sum of two elements in a pair. The goal is to minimize the largest of these pair sums.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array `nums` consisting of `n` integers.
+- **Example:** `For nums = [1, 9, 2, 8].`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- n is even.
+	- 1 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minPairSum(vector<int>& A) {
-        sort(A.begin(), A.end());
-        int res = 0, n = A.size();
-        for (int i = 0; i < n / 2; ++i)
-            res = max(res, A[i] + A[n - i - 1]);
-        return res;        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimized maximum pair sum after optimally pairing up the elements.
+- **Example:** `For nums = [1, 9, 2, 8], the output is 9.`
+- **Constraints:**
+	- The output should be an integer representing the minimized maximum pair sum.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To minimize the maximum pair sum, the array should be sorted, and pairs should be formed from the smallest and largest elements.
 
-The task is to find the minimum pair sum from a given array of integers. The minimum pair sum is defined as the maximum sum of pairs formed from the elements of the array, where each pair consists of one element from the beginning of the sorted array and one element from the end. The goal is to form pairs such that the maximum of all pair sums is minimized.
+- Sort the array in non-decreasing order.
+- Pair the smallest element with the largest element, the second smallest with the second largest, and so on.
+- Compute the sum of each pair, and track the maximum sum.
+- Return the maximum pair sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least two elements.
+- The array length is even, and pairing is always possible.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [1, 9, 2, 8].`  \
+  **Explanation:** The sorted array is [1, 2, 8, 9]. The optimal pairings are (1, 9) and (2, 8), resulting in pair sums of 10 and 10. The minimized maximum pair sum is 9.
 
-### Approach
+- **Input:** `For nums = [3, 4, 6, 7, 2, 5].`  \
+  **Explanation:** The sorted array is [2, 3, 4, 5, 6, 7]. The optimal pairings are (2, 7), (3, 6), and (4, 5), resulting in pair sums of 9, 9, and 8. The minimized maximum pair sum is 8.
 
-To achieve this, the solution follows a systematic approach involving the following steps:
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we first sort the array in ascending order and then pair the smallest elements with the largest ones. This minimizes the maximum sum of any pair.
 
-1. **Sort the Array**: Start by sorting the input array. Sorting helps in easily pairing the smallest elements with the largest elements to minimize the maximum pair sum.
-
-2. **Initialize Variables**: Set up a variable `res` to keep track of the maximum sum found among all pairs, and a variable `n` to hold the size of the array.
-
-3. **Iterate to Form Pairs**: Use a loop to form pairs:
-   - Pair the smallest available element with the largest available element.
-   - Calculate the sum of each pair and update `res` to store the maximum of these sums.
-
-4. **Return the Result**: Finally, return the value of `res`, which represents the minimum pair sum after processing all possible pairs.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: The solution is encapsulated in a class named `Solution`, adhering to the common structure found in competitive programming challenges.
-
-    ```cpp
-    class Solution {
-    public:
-    ```
-
-2. **Function Declaration**: The function `minPairSum` is declared, taking a vector of integers \( A \) as input and returning an integer.
-
-    ```cpp
-    int minPairSum(vector<int>& A) {
-    ```
-
-3. **Sort the Array**: Inside the function, the first step is to sort the input array \( A \). This is essential for pairing elements effectively.
-
-    ```cpp
+### Initial Thoughts 💭
+- Sorting the array ensures that pairing the smallest and largest elements minimizes the maximum sum.
+- By pairing extreme values, we balance the sums to reduce the largest possible pair sum.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as the input array is guaranteed to have an even length and at least two elements.
+- The algorithm should efficiently handle arrays with up to 100,000 elements.
+- Arrays where all elements are the same value.
+- Ensure the array length is even.
+{{< dots >}}
+## Code 💻
+```cpp
+int minPairSum(vector<int>& A) {
     sort(A.begin(), A.end());
-    ```
-
-4. **Initialization**: Initialize the result variable `res` to zero and get the size of the array \( n \).
-
-    ```cpp
     int res = 0, n = A.size();
-    ```
-
-5. **Iterate to Form Pairs**: Set up a loop to iterate through the first half of the sorted array. For each index \( i \), compute the sum of the element at index \( i \) and the element at index \( n - i - 1 \) (the corresponding element from the end of the array).
-
-    ```cpp
     for (int i = 0; i < n / 2; ++i)
         res = max(res, A[i] + A[n - i - 1]);
-    ```
-
-6. **Return the Result**: After the loop completes, return the maximum sum stored in `res`.
-
-    ```cpp
     return res;        
-    }
-    ```
+}
+```
 
-### Complexity
+This code calculates the minimum possible value of the maximum pair sum for a vector of integers by sorting the array and pairing the smallest and largest elements.
 
-The time complexity of this solution is \( O(n \log n) \), where \( n \) is the number of elements in the input array. This is primarily due to the sorting step. The subsequent iteration to compute the pair sums runs in \( O(n) \), making the overall complexity dominated by the sorting operation. The space complexity is \( O(1) \) if we disregard the space used for input, as we only use a fixed number of extra variables.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minPairSum(vector<int>& A) {
+	```
+	Define a function to compute the minimum possible maximum pair sum of an array.
 
-### Conclusion
+2. **Sort**
+	```cpp
+	    sort(A.begin(), A.end());
+	```
+	Sort the array to enable pairing of smallest and largest elements.
 
-In summary, the `minPairSum` function effectively computes the minimum pair sum from an array of integers by sorting the array and pairing elements strategically. This method not only ensures the maximum of the sums is minimized but also provides a clear and efficient solution to the problem. The approach highlights the importance of sorting in optimization problems, particularly when dealing with pairs or combinations.
+3. **Initialization**
+	```cpp
+	    int res = 0, n = A.size();
+	```
+	Initialize the result variable and store the size of the array.
 
-This solution serves as an excellent example of how to tackle array-related challenges in competitive programming and algorithm design. By understanding the principles applied here, one can gain valuable insights into solving similar problems involving pairing and optimization strategies in various contexts. The clear and concise nature of the code also emphasizes best practices in coding, ensuring maintainability and readability. Overall, this problem exemplifies foundational concepts in algorithmic thinking, making it a beneficial exercise for programmers looking to enhance their skills.
+4. **Loop**
+	```cpp
+	    for (int i = 0; i < n / 2; ++i)
+	```
+	Iterate through the first half of the array to form pairs with elements from the end.
+
+5. **Update Result**
+	```cpp
+	        res = max(res, A[i] + A[n - i - 1]);
+	```
+	Calculate the pair sum and update the result with the maximum pair sum encountered so far.
+
+6. **Return**
+	```cpp
+	    return res;        
+	```
+	Return the minimum possible value of the maximum pair sum.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) due to the sorting step.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the sorted array, or O(1) if sorting in place.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/description/)
 

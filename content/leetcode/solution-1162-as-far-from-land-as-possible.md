@@ -14,143 +14,266 @@ img_src = ""
 youtube = "fjxb1hQfrZk"
 youtube_upload_date="2023-02-10"
 youtube_thumbnail="https://i.ytimg.com/vi/fjxb1hQfrZk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a square grid of size n x n containing only 0s (water) and 1s (land), find the water cell that is farthest from any land cell based on Manhattan distance, and return that distance. If the grid has no water or no land, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A 2D grid of size n x n where each cell contains either 0 (water) or 1 (land).
+- **Example:** `grid = [[1,0,1],[0,0,0],[1,0,1]]`
+- **Constraints:**
+	- n == grid.length
+	- n == grid[i].length
+	- 1 <= n <= 100
+	- grid[i][j] is either 0 or 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxDistance(vector<vector<int>>& grid) {
-        int n = grid.size();
-        queue<pair<int, int>> q;
-        for(int i = 0; i < n; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 1) {
-                q.push(make_pair(i, j));
-                grid[i][j] = 0;
-            } else grid[i][j] = -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** An integer representing the maximum Manhattan distance from a water cell to the nearest land cell. Return -1 if no valid configuration exists.
+- **Example:** `Output: 2`
+- **Constraints:**
 
-        if(q.empty() || q.size() == n * n) return -1;
-        
-        int dir[] = {0, 1, 0, -1, 0};
-        int mx = 1;
-        while(!q.empty()) {
-            pair<int, int> tmp = q.front();
-            q.pop();
-            for(int i = 0; i < 4; i++) {
-                int x = tmp.first + dir[i], y = tmp.second + dir[i + 1];
-                if(x < 0 || y < 0 || x == n || y == n || grid[x][y] != -1)
-                    continue;
-                cout << grid[tmp.first][tmp.second] << " ";
-                grid[x][y] = grid[tmp.first][tmp.second] + 1;
-                q.push(make_pair(x, y));
-                mx = max(mx, grid[x][y]);
-            }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the maximum Manhattan distance of a water cell to the nearest land cell.
+
+- Initialize a queue to store land cells' coordinates.
+- Mark water cells with -1 to differentiate unvisited cells.
+- Perform a breadth-first search (BFS) starting from all land cells simultaneously.
+- Update water cells with their distance to the nearest land cell.
+- Keep track of the maximum distance during the BFS.
+{{< dots >}}
+### Problem Assumptions ✅
+- Grid dimensions are always square.
+- Input grid contains at least one water or one land cell.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[1,0,0],[0,0,0],[0,0,0]]`  \
+  **Explanation:** The cell (2, 2) is the farthest from all land cells with a distance of 4.
+
+- **Input:** `grid = [[1,1,1],[1,1,1],[1,1,1]]`  \
+  **Explanation:** No water exists, so the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+Use BFS starting from all land cells to calculate the nearest distance for water cells.
+
+### Initial Thoughts 💭
+- Each water cell's distance depends on its proximity to land cells.
+- Simultaneous BFS from all land cells ensures optimal computation.
+- Iterate through the grid to initialize BFS queue with all land cells.
+- Use BFS to propagate distances to water cells.
+{{< dots >}}
+### Edge Cases 🌐
+- grid = [] -> Return -1
+- grid = [[0]*100 for _ in range(100)] -> Ensure no timeouts.
+- grid with all 1s -> Return -1
+- grid with all 0s -> Return -1
+- Ensure BFS handles edge cells correctly.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxDistance(vector<vector<int>>& grid) {
+    int n = grid.size();
+    queue<pair<int, int>> q;
+    for(int i = 0; i < n; i++)
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] == 1) {
+            q.push(make_pair(i, j));
+            grid[i][j] = 0;
+        } else grid[i][j] = -1;
+
+    if(q.empty() || q.size() == n * n) return -1;
+    
+    int dir[] = {0, 1, 0, -1, 0};
+    int mx = 1;
+    while(!q.empty()) {
+        pair<int, int> tmp = q.front();
+        q.pop();
+        for(int i = 0; i < 4; i++) {
+            int x = tmp.first + dir[i], y = tmp.second + dir[i + 1];
+            if(x < 0 || y < 0 || x == n || y == n || grid[x][y] != -1)
+                continue;
+            cout << grid[tmp.first][tmp.second] << " ";
+            grid[x][y] = grid[tmp.first][tmp.second] + 1;
+            q.push(make_pair(x, y));
+            mx = max(mx, grid[x][y]);
         }
-        return mx;
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The function `maxDistance` is designed to solve the "As Far from Land as Possible" problem. The input is an `n x n` grid, where each cell can either be land (`1`) or water (`0`). The goal is to find the cell that is the farthest distance from any land cell and return that distance. If no such water cell exists or if all cells are either land or water, return `-1`.
-
-### Approach
-The approach uses **Breadth-First Search (BFS)** starting from all land cells simultaneously. This is similar to a multi-source BFS, where every land cell is treated as a starting point. The BFS expands outward from each land cell, calculating the distance to each water cell, until all reachable cells are processed. The BFS guarantees that the first time a cell is reached, it is the shortest possible path to that cell.
-
-### Code Breakdown (Step by Step)
-
-Here’s a detailed breakdown of the function implementation:
-
-```cpp
-class Solution {
-public:
-    int maxDistance(vector<vector<int>>& grid) {
-        int n = grid.size();
-        queue<pair<int, int>> q;
+    return mx;
+}
 ```
 
-- **Line 2-4**: The function `maxDistance` begins by initializing `n` to store the size of the grid (which is square-shaped, so `n x n`).
-- `q` is a queue of pairs, used to hold the coordinates `(i, j)` of each land cell as BFS starting points.
+This code finds the maximum distance from any land cell (represented by 1) to the nearest water cell (represented by 0) in a grid. It uses a breadth-first search (BFS) approach to compute the distance from all land cells to the nearest water cell and returns the largest distance found.
 
-```cpp
-        for(int i = 0; i < n; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 1) {
-                q.push(make_pair(i, j));
-                grid[i][j] = 0;
-            } else grid[i][j] = -1;
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxDistance(vector<vector<int>>& grid) {
+	```
+	Define the function maxDistance that takes a 2D grid as input, where 1 represents land and 0 represents water.
 
-- **Lines 5-10**: A nested `for` loop iterates over each cell in the grid.
-    - If the cell is a land cell (`grid[i][j] == 1`), it is added to the queue `q`, and its value is set to `0` to mark it as processed.
-    - If the cell is water (`grid[i][j] == 0`), it is marked as `-1` to distinguish it from unvisited cells in the BFS.
+2. **Variable Initialization**
+	```cpp
+	    int n = grid.size();
+	```
+	Initialize the variable n to store the size of the grid, i.e., the number of rows (and columns, since the grid is square).
 
-```cpp
-        if(q.empty() || q.size() == n * n) return -1;
-```
+3. **Queue Initialization**
+	```cpp
+	    queue<pair<int, int>> q;
+	```
+	Initialize a queue of pairs to perform BFS. Each pair will represent a cell in the grid (row and column indices).
 
-- **Line 11**: This line checks if there are no land cells (`q.empty()`) or if the grid is filled only with land cells (`q.size() == n * n`). In either case, the function returns `-1` because there’s no valid water cell to calculate a distance.
+4. **Grid Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Loop through each row of the grid.
 
-```cpp
-        int dir[] = {0, 1, 0, -1, 0};
-        int mx = 1;
-```
+5. **Grid Traversal**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Loop through each column of the grid.
 
-- **Line 13-14**: An array `dir` defines the four possible directions (up, down, left, right) for movement. `mx` is initialized to 1 to keep track of the maximum distance found.
+6. **Land Cell Identification**
+	```cpp
+	        if(grid[i][j] == 1) {
+	```
+	Check if the current cell is land (represented by 1).
 
-```cpp
-        while(!q.empty()) {
-            pair<int, int> tmp = q.front();
-            q.pop();
-```
+7. **Queue Enqueue**
+	```cpp
+	            q.push(make_pair(i, j));
+	```
+	Push the coordinates of the land cell onto the queue for BFS.
 
-- **Lines 15-17**: A `while` loop processes each cell in the queue. `tmp` holds the coordinates of the current cell being processed, and it is then removed from the queue.
+8. **Grid Update**
+	```cpp
+	            grid[i][j] = 0;
+	```
+	Set the land cell to 0, marking it as visited.
 
-```cpp
-            for(int i = 0; i < 4; i++) {
-                int x = tmp.first + dir[i], y = tmp.second + dir[i + 1];
-                if(x < 0 || y < 0 || x == n || y == n || grid[x][y] != -1)
-                    continue;
-```
+9. **Water Cell Initialization**
+	```cpp
+	        } else grid[i][j] = -1;
+	```
+	Set all water cells (represented by 0) to -1, indicating they are unvisited.
 
-- **Lines 18-21**: This nested `for` loop iterates over the four possible movement directions. For each direction:
-    - New coordinates `(x, y)` are calculated based on `tmp`.
-    - If `(x, y)` is out of bounds or already visited (`grid[x][y] != -1`), it’s skipped.
+10. **Empty Queue Check**
+	```cpp
+	    if(q.empty() || q.size() == n * n) return -1;
+	```
+	If the queue is empty or if the grid is already fully land (no water cells), return -1.
 
-```cpp
-                cout << grid[tmp.first][tmp.second] << " ";
-                grid[x][y] = grid[tmp.first][tmp.second] + 1;
-                q.push(make_pair(x, y));
-                mx = max(mx, grid[x][y]);
-            }
-        }
-        return mx;
-    }
-};
-```
+11. **Direction Array Initialization**
+	```cpp
+	    int dir[] = {0, 1, 0, -1, 0};
+	```
+	Initialize an array representing the four possible directions (right, down, left, up) for BFS traversal.
 
-- **Lines 22-28**: For each valid cell `(x, y)`:
-    - The `cout` statement outputs the current value, helping track the BFS process during debugging.
-    - `grid[x][y]` is updated to `grid[tmp.first][tmp.second] + 1`, which represents the distance from the nearest land cell.
-    - `(x, y)` is added to the queue `q` for further exploration.
-    - `mx` is updated to track the maximum distance found.
-- Finally, `mx` is returned as the result.
+12. **Max Distance Initialization**
+	```cpp
+	    int mx = 1;
+	```
+	Initialize a variable mx to store the maximum distance encountered during BFS.
 
-### Complexity
-1. **Time Complexity**: \(O(n^2)\), where \(n\) is the grid’s dimension. Each cell is visited once during BFS, and the `for` loop checks each of the four directions per cell.
-2. **Space Complexity**: \(O(n^2)\), as the queue may store up to all water cells at the beginning.
+13. **BFS Traversal**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Begin a while loop that continues until the queue is empty, representing the BFS process.
 
-### Conclusion
-The `maxDistance` function is an efficient BFS-based solution that finds the farthest water cell from any land cell in a grid. It handles edge cases like grids with only land or only water and leverages multi-source BFS to avoid redundant distance calculations. This algorithm can be particularly useful in pathfinding applications in 2D grids where distance from a specific region is crucial, such as urban planning, environmental analysis, and game development.
+14. **Queue Dequeue**
+	```cpp
+	        pair<int, int> tmp = q.front();
+	```
+	Dequeue the front element of the queue to start the BFS from the current land cell.
 
-This function is optimized for performance and follows a clear, systematic BFS approach, making it a reliable choice for problems involving the shortest distance in grid structures.
+15. **Queue Pop**
+	```cpp
+	        q.pop();
+	```
+	Remove the processed cell from the queue.
+
+16. **Direction Loop**
+	```cpp
+	        for(int i = 0; i < 4; i++) {
+	```
+	Loop over the four possible directions (up, down, left, right) to explore neighboring cells.
+
+17. **Neighbor Calculation**
+	```cpp
+	            int x = tmp.first + dir[i], y = tmp.second + dir[i + 1];
+	```
+	Calculate the new coordinates (x, y) by adding the respective direction offsets.
+
+18. **Boundary Check**
+	```cpp
+	            if(x < 0 || y < 0 || x == n || y == n || grid[x][y] != -1)
+	```
+	Check if the new coordinates are out of bounds or if the neighboring cell is already visited or not water.
+
+19. **Skip Invalid Cell**
+	```cpp
+	                continue;
+	```
+	Skip the current neighbor if it's out of bounds or already processed.
+
+20. **Distance Output**
+	```cpp
+	            cout << grid[tmp.first][tmp.second] << " ";
+	```
+	Output the distance of the current cell (for debugging or visualization purposes).
+
+21. **Grid Update (Distance Increment)**
+	```cpp
+	            grid[x][y] = grid[tmp.first][tmp.second] + 1;
+	```
+	Update the neighboring cell's distance to be the current cell's distance + 1.
+
+22. **Queue Enqueue (Neighbor)**
+	```cpp
+	            q.push(make_pair(x, y));
+	```
+	Push the updated neighboring cell to the queue for further processing.
+
+23. **Max Distance Update**
+	```cpp
+	            mx = max(mx, grid[x][y]);
+	```
+	Update the maximum distance encountered so far.
+
+24. **Return Result**
+	```cpp
+	    return mx;
+	```
+	Return the maximum distance found from any land cell to the nearest water cell.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2) when grid contains mixed cells.
+- **Average Case:** O(n^2) due to full traversal during BFS.
+- **Worst Case:** O(n^2) for fully mixed grids.
+
+Each cell is visited once during BFS.
+
+### Space Complexity 💾
+- **Best Case:** O(1) for grids with uniform values.
+- **Worst Case:** O(n^2) for BFS queue.
+
+Queue size depends on the number of cells in the grid.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/as-far-from-land-as-possible/description/)
 

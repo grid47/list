@@ -14,94 +14,123 @@ img_src = ""
 youtube = "evs3Po8Km7c"
 youtube_upload_date="2020-07-15"
 youtube_thumbnail="https://i.ytimg.com/vi/evs3Po8Km7c/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an hour and minute value, return the smaller angle (in degrees) formed between the hour and minute hands of a clock.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers representing the hour (1 to 12) and the minute (0 to 59).
+- **Example:** `hour = 6, minutes = 45`
+- **Constraints:**
+	- 1 <= hour <= 12
+	- 0 <= minutes <= 59
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double angleClock(int h, int minutes) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smaller angle in degrees between the hour and minute hands of a clock.
+- **Example:** `For hour = 6, minutes = 45, the output will be 22.5.`
+- **Constraints:**
+	- The answer should be within 10^-5 of the actual value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the angle between the hour and minute hands of a clock and return the smaller angle.
+
+- 1. Calculate the angle of the minute hand based on the number of minutes.
+- 2. Calculate the angle of the hour hand, adjusting for the current minute.
+- 3. Find the absolute difference between the two angles.
+- 4. Return the smaller angle (either the absolute difference or 360 - difference).
+{{< dots >}}
+### Problem Assumptions ✅
+- The given time values are always valid.
+- The hour value is always between 1 and 12, and the minute value is between 0 and 59.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: hour = 6, minutes = 45`  \
+  **Explanation:** At 6:45, the minute hand is at the 9th hour mark, and the hour hand is at 6:45, creating an angle of 22.5 degrees.
+
+- **Input:** `Example 2: hour = 9, minutes = 15`  \
+  **Explanation:** At 9:15, the minute hand is at the 3rd hour mark, and the hour hand is at 9:15, forming an angle of 52.5 degrees.
+
+- **Input:** `Example 3: hour = 10, minutes = 0`  \
+  **Explanation:** At 10:00, the angle between the two hands is exactly 60 degrees, as the minute hand is at 12 and the hour hand is at 10.
+
+{{< dots >}}
+## Approach 🚀
+To find the smaller angle between the hour and minute hands, we calculate the positions of both hands and then compute the absolute difference between them.
+
+### Initial Thoughts 💭
+- The minute hand moves 6 degrees per minute, and the hour hand moves 30 degrees per hour, so we can use these values to calculate the angles.
+- The key challenge is to adjust for the fact that the hour hand also moves as the minutes progress. This needs to be factored into the calculation.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since hour and minute are always valid values.
+- There are no large inputs as the input values are bounded by 12 for the hour and 59 for the minutes.
+- When minutes = 0, the angle between the hands will be a multiple of 30 degrees.
+- Ensure that all calculations are performed correctly for boundary values like hour = 12 and minutes = 0.
+{{< dots >}}
+## Code 💻
+```cpp
+double angleClock(int h, int minutes) {
+    
+    double mn = 360 *(double)minutes/60;
+    
+    double hrs = 360 * ((double)(h == 12? 0: h) / 12) + 30* ((double)minutes/60);
+    cout << mn << " " << hrs;
         
-        double mn = 360 *(double)minutes/60;
-        
-        double hrs = 360 * ((double)(h == 12? 0: h) / 12) + 30* ((double)minutes/60);
-        cout << mn << " " << hrs;
-            
-        return min(abs(mn - hrs), 360 - (abs(mn - hrs)));
-    }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The task is to calculate the angle between the hour and minute hands of a clock given a specific hour (h) and minutes (minutes). The clock is circular, and the angle must be expressed in degrees. Since the clock face is 360 degrees, the challenge is to determine the smaller of the two angles formed by the hands.
-
-### Approach
-To solve this problem, we can break down the calculations as follows:
-
-1. **Calculate the Angle of the Minute Hand**:
-   - The minute hand completes a full circle (360 degrees) in 60 minutes. Therefore, for every minute, the minute hand moves \(6\) degrees (\(360 / 60\)).
-   - The angle of the minute hand can be calculated by multiplying the number of minutes by \(6\).
-
-2. **Calculate the Angle of the Hour Hand**:
-   - The hour hand completes a full circle (360 degrees) in 12 hours. This means it moves \(30\) degrees for every hour (\(360 / 12\)).
-   - Additionally, the hour hand also moves as the minutes progress. For each minute, it moves \(0.5\) degrees (\(30 / 60\)).
-   - Therefore, the angle of the hour hand can be calculated based on the given hour and minutes.
-
-3. **Calculate the Difference Between the Two Angles**:
-   - The absolute difference between the angles of the hour and minute hands gives one of the angles formed.
-   - Since there are two angles between the hands, we also need to calculate the supplementary angle (360 degrees minus the absolute difference) to find the smaller angle.
-
-4. **Return the Smaller Angle**:
-   - Finally, the smaller angle will be the minimum of the two calculated angles.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    double angleClock(int h, int minutes) {
+    return min(abs(mn - hrs), 360 - (abs(mn - hrs)));
+}
 ```
-- A class `Solution` is defined, and the method `angleClock` is declared to take two parameters: the hour (`h`) and the minutes (`minutes`).
 
-```cpp
-        double mn = 360 * (double)minutes / 60;
-```
-- The angle of the minute hand is calculated. Since the minute hand moves \(6\) degrees per minute, this line computes the angle based on the given minutes. Multiplying by \(360\) and dividing by \(60\) gives the correct angle in degrees.
+This function calculates the smaller angle formed between the hour and minute hands of a clock at a given time `h` and `minutes`. It handles conversions to degrees and adjusts for edge cases like `h == 12`.
 
-```cpp
-        double hrs = 360 * ((double)(h == 12 ? 0 : h) / 12) + 30 * ((double)minutes / 60);
-```
-- The angle of the hour hand is calculated in two parts:
-  - The first part calculates the position based on the hour. If \(h\) is \(12\), it is treated as \(0\) to avoid exceeding the hour range.
-  - The second part adds the contribution of the minutes, where the hour hand moves \(0.5\) degrees for every minute.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	double angleClock(int h, int minutes) {
+	```
+	Declares a function that calculates the angle between the hour and minute hands of a clock, given the hour and minute inputs.
 
-```cpp
-        cout << mn << " " << hrs;
-```
-- This line outputs the calculated angles of the minute and hour hands. This can be useful for debugging to verify that the angles are computed correctly.
+2. **Minute Calculation**
+	```cpp
+	    double mn = 360 *(double)minutes/60;
+	```
+	Calculates the angle of the minute hand relative to the 12 o'clock position. Each minute represents 6 degrees.
 
-```cpp
-        return min(abs(mn - hrs), 360 - (abs(mn - hrs)));
-```
-- The function calculates the absolute difference between the two angles and then computes the smaller angle by taking the minimum of the difference and its supplementary angle (360 degrees minus the difference). This is the final result which is returned.
+3. **Hour Calculation**
+	```cpp
+	    double hrs = 360 * ((double)(h == 12? 0: h) / 12) + 30* ((double)minutes/60);
+	```
+	Calculates the angle of the hour hand, considering both the hour and fractional contribution of the minutes. Accounts for `h == 12` by resetting to 0.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this solution is \(O(1)\) because the calculations performed do not depend on the size of any input but are based on simple arithmetic operations.
-  
-- **Space Complexity**: The space complexity is also \(O(1)\) as we are using a constant amount of space to store variables and perform calculations.
+4. **Angle Calculation**
+	```cpp
+	    return min(abs(mn - hrs), 360 - (abs(mn - hrs)));
+	```
+	Returns the smaller angle between the hour and minute hands by calculating both the direct and complementary angles.
 
-### Conclusion
-The provided code efficiently calculates the smaller angle between the hour and minute hands of a clock for given hour and minute values using straightforward arithmetic and logical reasoning. By employing basic principles of geometry related to the circular motion of the clock hands, it determines the result in constant time and space.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-Understanding the approach and logic behind this solution provides valuable insights into working with angles and modular arithmetic in circular systems, which can be applicable in various mathematical and programming scenarios. This problem exemplifies the intersection of geometry and algorithmic thinking, making it a useful exercise for enhancing problem-solving skills in computer science.
+The time complexity is constant since we only perform a few arithmetic operations.
 
-Overall, this solution is optimized for performance and clarity, making it suitable for both competitive programming and educational purposes.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only need a few variables to store intermediate results.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/angle-between-hands-of-a-clock/description/)

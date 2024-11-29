@@ -14,134 +14,211 @@ img_src = ""
 youtube = "XIFl0gXnq9s"
 youtube_upload_date="2020-12-20"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/XIFl0gXnq9s/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of positive integers. Your task is to erase a subarray containing only unique elements and return the maximum sum of the subarray you can erase.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array 'nums', which contains positive integers.
+- **Example:** `[7, 2, 1, 2, 7, 2, 3, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumUniqueSubarray(vector<int>& nums) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum sum of a subarray containing only unique elements.
+- **Example:** `13`
+- **Constraints:**
+	- The result is the sum of the elements in the optimal subarray.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the maximum sum of a subarray of unique elements.
+
+- Initialize a map to track the frequency of elements in the current subarray.
+- Iterate through the array and maintain a sliding window of unique elements.
+- Track the sum of elements in the current subarray and update the maximum sum whenever needed.
+- Return the maximum sum obtained from the sliding window.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will not be empty.
+- The array elements will always be positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[3, 1, 4, 5, 6]`  \
+  **Explanation:** After erasing the subarray [3], the remaining subarray [1, 4, 5, 6] has a sum of 15. This is the maximum sum.
+
+- **Input:** `[7, 2, 1, 2, 7, 2, 3, 5]`  \
+  **Explanation:** The subarray with the maximum sum is [2, 1, 2, 7, 2], with a sum of 13.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the array with a sliding window, adjusting the window to ensure only unique elements, and calculating the maximum sum during the process.
+
+### Initial Thoughts 💭
+- This problem involves sliding window and map usage to track frequencies of elements.
+- We need to ensure that the window only contains unique elements and adjust the window efficiently when duplicates are encountered.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will not be empty as the length of nums is at least 1.
+- For large inputs, ensure that the algorithm performs efficiently with a time complexity of O(n).
+- The array may contain repeated elements, but we only consider subarrays with unique elements.
+- The length of the array will not exceed 10^5.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumUniqueSubarray(vector<int>& nums) {
+    
+    int sum = 0, n = nums.size();
+    map<int, int> mp;
+    
+    int mx = 0;
+    int j = 0;
+    for(int i = 0; i < n; i++) {
+        mp[nums[i]]++;
+        sum += nums[i];
         
-        int sum = 0, n = nums.size();
-        map<int, int> mp;
-        
-        int mx = 0;
-        int j = 0;
-        for(int i = 0; i < n; i++) {
-            mp[nums[i]]++;
-            sum += nums[i];
-            
-            while(mp[nums[i]] > 1) {
-                mp[nums[j]]--;
-                sum -= nums[j];
-                j++;
-            }
-            
-            mx = max(mx, sum);
+        while(mp[nums[i]] > 1) {
+            mp[nums[j]]--;
+            sum -= nums[j];
+            j++;
         }
-        return mx;
+        
+        mx = max(mx, sum);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to find the maximum sum of a unique subarray from a given integer array `nums`. A unique subarray is defined as a contiguous segment of the array that contains no duplicate elements. Our goal is to identify such a subarray and return the highest possible sum of its elements.
-
-### Approach
-
-To tackle this problem, we can use a sliding window technique combined with a hash map (or dictionary) to keep track of the count of each element within the current window. The sliding window will allow us to expand and contract the range of the subarray as we iterate through the array. Here’s the general approach:
-
-1. **Initialize Variables**: We will maintain a sum of the current window, a maximum sum encountered so far, and a hash map to count occurrences of each element in the current window.
-
-2. **Expand the Window**: We will iterate through the array, adding elements to the current window while updating the sum and the count of elements in the hash map.
-
-3. **Contract the Window**: If we encounter a duplicate element (i.e., the count in the hash map exceeds 1), we will increment the start of the window to remove elements from the left until the subarray becomes unique again.
-
-4. **Update Maximum Sum**: After adjusting the window, we check if the current sum is greater than our previously recorded maximum sum and update accordingly.
-
-5. **Return the Result**: After processing all elements, we return the maximum sum of unique subarrays found.
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed breakdown of the code implementation:
-
-```cpp
-class Solution {
-public:
-    int maximumUniqueSubarray(vector<int>& nums) {
+    return mx;
+}
 ```
-- **Class Definition**: The `Solution` class contains the method `maximumUniqueSubarray`, which takes a vector of integers as input.
 
-```cpp
-        int sum = 0, n = nums.size();
-        map<int, int> mp;
-```
-- **Variable Initialization**: We initialize `sum` to keep track of the current sum of the unique subarray, `n` as the size of the input array, and a map `mp` to count occurrences of elements in the current window.
+This function finds the maximum sum of a subarray with unique elements in the given vector `nums`. It uses a sliding window approach with two pointers, a map to track the frequency of elements, and a running sum to track the current subarray's sum.
 
-```cpp
-        int mx = 0;
-        int j = 0;
-```
-- **Maximum Sum and Window Start Index**: We define `mx` to hold the maximum sum encountered and `j` as the start index of the sliding window.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumUniqueSubarray(vector<int>& nums) {
+	```
+	Defines the function `maximumUniqueSubarray` that takes a vector `nums` and returns the maximum sum of a subarray with unique elements.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-```
-- **Iterating Through the Array**: We start a loop to iterate over the elements of the array with index `i`.
+2. **Variable Initialization**
+	```cpp
+	    
+	```
+	Prepare for the following variable initializations.
 
-```cpp
-            mp[nums[i]]++;
-            sum += nums[i];
-```
-- **Add Current Element**: For each element at index `i`, we increment its count in the map and add its value to `sum`.
+3. **Variable Initialization**
+	```cpp
+	    int sum = 0, n = nums.size();
+	```
+	Initialize `sum` to 0 to track the current sum of the subarray and `n` to store the size of the input vector `nums`.
 
-```cpp
-            while(mp[nums[i]] > 1) {
-```
-- **Check for Duplicates**: We enter a while loop that checks if the current element is a duplicate (i.e., its count in the map is greater than 1).
+4. **Data Structure Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initialize a map `mp` to store the frequency of each element in the current window (subarray).
 
-```cpp
-                mp[nums[j]]--;
-                sum -= nums[j];
-                j++;
-```
-- **Contract the Window**: Inside the while loop, if a duplicate is found, we decrement the count of the element at index `j` in the map, subtract its value from `sum`, and increment `j` to effectively move the start of the window forward.
+5. **Variable Initialization**
+	```cpp
+	    
+	```
+	Prepare for the following variable initializations.
 
-```cpp
-            mx = max(mx, sum);
-```
-- **Update Maximum Sum**: After adjusting the window, we compare the current `sum` with `mx` and update `mx` if the current `sum` is greater.
+6. **Variable Initialization**
+	```cpp
+	    int mx = 0;
+	```
+	Initialize `mx` to 0, which will store the maximum sum encountered during the iteration over the subarray.
 
-```cpp
-        return mx;
-    }
-};
-```
-- **Return the Result**: After the loop finishes, we return the maximum sum of unique subarrays found.
+7. **Variable Initialization**
+	```cpp
+	    int j = 0;
+	```
+	Initialize `j` to 0, which will serve as the starting index for the sliding window of the subarray.
 
-### Complexity
+8. **Main Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop that iterates over each element `nums[i]` of the array `nums`.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(N)\), where \(N\) is the number of elements in the input array. Each element is processed at most twice (once when added and once when removed from the window).
+9. **Frequency Update**
+	```cpp
+	        mp[nums[i]]++;
+	```
+	Increment the frequency count of the current element `nums[i]` in the map `mp`.
 
-- **Space Complexity**: The space complexity is \(O(M)\), where \(M\) is the number of unique elements in the input array. This is due to the storage required for the hash map that tracks the count of elements in the current window.
+10. **Update Sum**
+	```cpp
+	        sum += nums[i];
+	```
+	Add the current element `nums[i]` to the running sum `sum`.
 
-### Conclusion
+11. **Check for Duplicates**
+	```cpp
+	        
+	```
+	Check and adjust the window if there are duplicate elements.
 
-The provided solution effectively utilizes the sliding window technique combined with a hash map to find the maximum sum of unique subarrays in linear time. Here are the key points to summarize:
+12. **Sliding Window Adjustment**
+	```cpp
+	        while(mp[nums[i]] > 1) {
+	```
+	If the current element `nums[i]` appears more than once in the window, enter a loop to shrink the window from the left.
 
-1. **Sliding Window Technique**: The sliding window allows for efficient tracking of the current subarray while maintaining uniqueness by dynamically adjusting the window size.
+13. **Remove Element from Window**
+	```cpp
+	            mp[nums[j]]--;
+	```
+	Decrement the frequency of the element `nums[j]` at the left of the window in the map `mp`.
 
-2. **Use of Hash Map**: The hash map provides an efficient way to check for duplicates and manage the counts of elements within the current window, enabling quick adjustments as the window moves.
+14. **Update Sum**
+	```cpp
+	            sum -= nums[j];
+	```
+	Subtract the element `nums[j]` from the running sum `sum` as it's being excluded from the window.
 
-3. **Dynamic Sum Calculation**: By maintaining a running sum, we can efficiently update the maximum sum without the need for nested loops, making the solution optimal.
+15. **Increment Left Pointer**
+	```cpp
+	            j++;
+	```
+	Increment the left pointer `j` to shrink the window from the left.
 
-This code can be applied in various scenarios where the maximum sum of distinct elements is desired, demonstrating a common pattern in competitive programming and algorithm design.
+16. **Update Maximum Sum**
+	```cpp
+	        mx = max(mx, sum);
+	```
+	Update the variable `mx` to store the maximum subarray sum found so far.
+
+17. **Return Result**
+	```cpp
+	    return mx;
+	```
+	Return the maximum sum `mx` of a subarray with unique elements.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The algorithm processes each element once, making the time complexity O(n), where n is the number of elements in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the usage of a map to track the frequencies of elements in the current subarray.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-erasure-value/description/)
 

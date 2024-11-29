@@ -14,149 +14,199 @@ img_src = ""
 youtube = "wcDDdRZH1Q0"
 youtube_upload_date="2020-08-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/wcDDdRZH1Q0/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an integer array nums and an integer target, return the maximum number of non-empty, non-overlapping subarrays that sum up to the target.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers nums and an integer target. The array nums contains the elements of the array, and target is the sum we want to find in non-overlapping subarrays.
+- **Example:** `nums = [1, 1, 1, 1, 1], target = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- -10^4 <= nums[i] <= 10^4
+	- 0 <= target <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxNonOverlapping(vector<int>& nums, int hit) {
-        map<int, int> mp;
-        
-        int n = nums.size(), sum = 0, right = -1, cnt = 0;
-        
-        //partial_sum(nums.begin(), nums.end(), nums.begin());
-        
-        
-        mp[0] = -1;
-        
-        
-        for(int i = 0; i < n;i++){
-            //cout<< nums[i] << " ";
-            sum += nums[i];
-            if(mp.count(sum - hit)) {
-                int left = mp[sum - hit];
-            //    cout << right << " " << left;
-                if (right <= left) {
-                    cnt++;
-                    right = i;
-                  }
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of non-overlapping subarrays where each subarray's sum equals the target.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The subarrays must be non-overlapping, and each must sum up to the target.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to efficiently find the maximum number of non-overlapping subarrays with a sum equal to the target.
 
-            mp[sum] = i;
-            // cout<< mp[sum] << endl;
-          }
-            
-            
+- 1. Track the sum of elements in the current subarray.
+- 2. When the sum equals the target, count the subarray and reset the sum to start a new subarray.
+- 3. Skip overlapping subarrays to ensure non-overlapping subarrays are counted.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is assumed that the input array nums is non-empty, and target is a valid integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 1, 1, 1, 1], target = 2`  \
+  **Explanation:** There are two non-overlapping subarrays that sum up to the target: [1, 1] and [1, 1].
 
-        
-        return cnt;
-            
-    }
-};
-{{< /highlight >}}
----
+- **Input:** `nums = [-1, 3, 5, 1, 4, 2, -9], target = 6`  \
+  **Explanation:** There are multiple subarrays that sum to 6, but only two non-overlapping subarrays count: [5, 1] and [4, 2].
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+We can approach this problem by iterating through the array while maintaining a running sum of elements. Whenever the sum matches the target, we count the subarray and reset the sum to start a new subarray.
 
-The problem involves finding the maximum number of non-overlapping subarrays in a given array of integers `nums`, such that the sum of elements in each subarray equals a specified value `hit`. The challenge is to efficiently count these subarrays while ensuring that no two counted subarrays overlap.
-
-### Approach
-
-To solve this problem, we will use a hash map to keep track of cumulative sums and their indices as we iterate through the array. The core idea is to use the prefix sum technique, which allows us to compute the sum of any subarray in constant time. Here’s a step-by-step breakdown of the approach:
-
-1. **Prefix Sum Calculation**: As we iterate through the array, we maintain a cumulative sum (`sum`). This sum represents the total of all elements encountered so far.
-
-2. **Hash Map for Indices**: We use a hash map (`mp`) to store the indices of previously seen cumulative sums. The key is the cumulative sum, and the value is the latest index where this sum occurs.
-
-3. **Finding Subarrays**: For each cumulative sum at index `i`, we check if there exists a prior sum that would lead to a subarray summing to `hit`. This is done by checking if `sum - hit` exists in the map. If it does, we retrieve the index of this sum.
-
-4. **Non-Overlapping Condition**: To ensure that the found subarrays are non-overlapping, we compare the index of the last counted subarray (`right`) with the index of the found subarray (`left`). If `right` is less than or equal to `left`, we can count this subarray, update `right`, and increment our count.
-
-5. **Update Hash Map**: Regardless of whether we found a valid subarray, we update the hash map with the current cumulative sum and its index.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- We need to avoid overlapping subarrays. Once we find a valid subarray, we should reset the sum and continue searching.
+- A greedy approach will work where we continuously look for subarrays with the sum equal to the target and ensure that they don't overlap.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is always non-empty according to the constraints.
+- For large inputs, ensure the solution handles the array efficiently in linear time.
+- If the target is 0, handle cases where the subarrays sum to zero, such as when the array contains consecutive zeros.
+- Ensure the solution runs within time limits for all values of n and target.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int maxNonOverlapping(vector<int>& nums, int hit) {
-        map<int, int> mp; // Step 1: Initialize a hash map to store cumulative sums and their latest indices
-        
-        int n = nums.size(), sum = 0, right = -1, cnt = 0; // Step 2: Initialize variables
-        
-        mp[0] = -1; // Step 3: Initialize the map with the base case
-        
-        for(int i = 0; i < n; i++) { // Step 4: Iterate through the array
-            sum += nums[i]; // Update the cumulative sum
-            
-            if(mp.count(sum - hit)) { // Step 5: Check if a valid subarray sum exists
-                int left = mp[sum - hit]; // Get the index of the previously found sum
-                
-                if (right <= left) { // Step 6: Ensure non-overlapping condition
-                    cnt++; // Increment count of valid subarrays
-                    right = i; // Update the right boundary
-                }
+int maxNonOverlapping(vector<int>& nums, int hit) {
+    map<int, int> mp;
+    
+    int n = nums.size(), sum = 0, right = -1, cnt = 0;
+    
+    //partial_sum(nums.begin(), nums.end(), nums.begin());
+    
+    
+    mp[0] = -1;
+    
+    
+    for(int i = 0; i < n;i++){
+        //cout<< nums[i] << " ";
+        sum += nums[i];
+        if(mp.count(sum - hit)) {
+            int left = mp[sum - hit];
+        //    cout << right << " " << left;
+            if (right <= left) {
+                cnt++;
+                right = i;
+              }
             }
 
-            mp[sum] = i; // Step 7: Update the map with the current cumulative sum
-        }
+
+        mp[sum] = i;
+        // cout<< mp[sum] << endl;
+      }
         
-        return cnt; // Step 8: Return the total count of non-overlapping subarrays
-    }
-};
+        
+
+    
+    return cnt;
+        
+}
 ```
 
-#### Step-by-Step Breakdown
+This function calculates the maximum number of non-overlapping subarrays whose sum equals to the target value `hit`. It uses a map to store cumulative sums and updates the result accordingly.
 
-1. **Initialize Data Structures**:
-   - A hash map `mp` is created to store cumulative sums and their last occurrence.
-   - Variables `n`, `sum`, `right`, and `cnt` are initialized to hold the size of the array, current cumulative sum, the rightmost index of the last counted subarray, and the count of valid subarrays, respectively.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maxNonOverlapping(vector<int>& nums, int hit) {
+	```
+	This is the function declaration where `maxNonOverlapping` is defined to take a vector of integers `nums` and an integer `hit` as input, and returns an integer representing the maximum number of non-overlapping subarrays whose sum equals `hit`.
 
-2. **Base Case**:
-   - The hash map is initialized with the entry `{0: -1}` to handle the case where a valid subarray starts from index `0`.
+2. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	A map `mp` is created to store cumulative sums as keys and their corresponding indices as values, which will help to track if a certain sum (sum - hit) exists to form non-overlapping subarrays.
 
-3. **Iterate through the Array**:
-   - For each element in `nums`, we add it to `sum`, which keeps a running total of the array elements.
+3. **Variable Initialization**
+	```cpp
+	    int n = nums.size(), sum = 0, right = -1, cnt = 0;
+	```
+	The variables are initialized: `n` stores the size of the `nums` vector, `sum` keeps track of the cumulative sum, `right` stores the index of the last valid subarray, and `cnt` tracks the number of valid subarrays.
 
-4. **Check for Subarray Sum**:
-   - The code checks if the difference `sum - hit` exists in the hash map. This condition checks if the current cumulative sum minus the target sum `hit` has been seen before.
+4. **Map Initialization**
+	```cpp
+	    mp[0] = -1;
+	```
+	Initialize the map with a key-value pair of `0: -1` to handle cases where a subarray starting from index 0 sums to `hit`.
 
-5. **Non-Overlapping Check**:
-   - If `sum - hit` is found in `mp`, we retrieve its index `left`. The non-overlapping condition is checked by comparing `right` and `left`. If the current subarray does not overlap with previously counted subarrays (i.e., `right` is less than or equal to `left`), we can count this subarray.
+5. **For Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A for loop that iterates over each element in the `nums` vector.
 
-6. **Increment Count and Update Right Index**:
-   - If the conditions are satisfied, we increment `cnt` and update `right` to the current index `i`.
+6. **Sum Update**
+	```cpp
+	        sum += nums[i];
+	```
+	Update the cumulative sum by adding the current element `nums[i]`.
 
-7. **Update Hash Map**:
-   - Regardless of whether a valid subarray was found, we update the map with the current cumulative sum `sum` and its corresponding index.
+7. **Condition Check**
+	```cpp
+	        if(mp.count(sum - hit)) {
+	```
+	Check if the map contains the key `sum - hit`, which would indicate that a subarray with sum `hit` exists.
 
-8. **Return Result**:
-   - After iterating through the array, the final count of non-overlapping subarrays is returned.
+8. **Map Lookup**
+	```cpp
+	            int left = mp[sum - hit];
+	```
+	If the condition is true, get the index of the subarray's left boundary from the map.
 
-### Complexity
+9. **Condition Check**
+	```cpp
+	            if (right <= left) {
+	```
+	Check if the current subarray is non-overlapping by ensuring that the `right` boundary is less than or equal to the `left` boundary.
 
-#### Time Complexity
-- The algorithm runs in \( O(n) \), where \( n \) is the size of the input array. This is because each element in `nums` is processed once, and operations on the hash map (insert and check for existence) are average \( O(1) \).
+10. **Count Update**
+	```cpp
+	                cnt++;
+	```
+	If the subarray is non-overlapping, increment the counter `cnt`.
 
-#### Space Complexity
-- The space complexity is \( O(n) \) in the worst case, due to the storage of cumulative sums in the hash map. However, in practice, it might be less depending on the number of unique cumulative sums.
+11. **Right Update**
+	```cpp
+	                right = i;
+	```
+	Update the `right` boundary to the current index `i` to mark the end of the last valid subarray.
 
-### Conclusion
+12. **Map Update**
+	```cpp
+	        mp[sum] = i;
+	```
+	Add or update the map with the current cumulative sum `sum` and its corresponding index `i`.
 
-The solution effectively counts the maximum number of non-overlapping subarrays that sum to a specified value by utilizing the prefix sum technique and a hash map for quick lookups. 
+13. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	Return the count of non-overlapping subarrays whose sum equals `hit`.
 
-**Key Takeaways**:
-- **Prefix Sum Technique**: This method allows for efficient subarray sum calculations.
-- **Non-Overlapping Condition**: Proper handling of indices ensures that counted subarrays do not overlap.
-- **Hash Map Utilization**: The use of a hash map provides an efficient way to keep track of previously encountered cumulative sums.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This implementation demonstrates a clean and efficient way to tackle problems involving subarray sums and conditions on overlapping, making it a valuable approach for similar problems.
+The solution iterates through the array once, making the time complexity O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only use a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-non-overlapping-subarrays-with-sum-equals-target/description/)
 

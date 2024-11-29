@@ -14,30 +14,80 @@ img_src = ""
 youtube = "cMBkZMNVDdE"
 youtube_upload_date="2020-06-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/cMBkZMNVDdE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are tasked with implementing the SubrectangleQueries class which operates on a matrix representing a rectangle with integer values. The class should support two key operations: updateSubrectangle and getValue.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of method calls on the SubrectangleQueries object, where each call represents an operation to be performed.
+- **Example:** `[[[1,2,3],[4,5,6],[7,8,9]]],[0,1],[1,1,2,2,10],[0,1],[1,2],[0,0,1,1,20],[1,0],[0,2]`
+- **Constraints:**
+	- 1 <= rows, cols <= 100
+	- 0 <= row1 <= row2 < rows
+	- 0 <= col1 <= col2 < cols
+	- 1 <= newValue <= 10^9
+	- 0 <= row < rows
+	- 0 <= col < cols
 
-{{< highlight cpp >}}
-class SubrectangleQueries {
-public:
-    vector<vector<int>> rec;
-    SubrectangleQueries(vector<vector<int>>& rectangle) {
-        rec = rectangle;
-    }
-    
-    void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
-        for(int i = row1; i <= row2; i++)
-        for(int j = col1; j <= col2; j++)
-            rec[i][j] = newValue;
-    }
-    
-    int getValue(int row, int col) {
-        return rec[row][col];
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output consists of the results of the method calls on the SubrectangleQueries object.
+- **Example:** `[null,2,null,10,6,null,20,3]`
+- **Constraints:**
+	- There will be at most 500 operations considering both methods.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to efficiently update a subrectangle and retrieve values at specified coordinates.
+
+- Store the initial matrix in the class.
+- For the updateSubrectangle operation, iterate over the specified subrectangle and update all its values.
+- For the getValue operation, simply retrieve the value from the matrix at the specified coordinates.
+{{< dots >}}
+### Problem Assumptions ✅
+- The rectangle is initially provided in the form of a 2D array.
+- All values within the specified subrectangle are updated to the newValue.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[[1,2,3],[4,5,6],[7,8,9]]],[0,1],[1,1,2,2,10],[0,1],[1,2],[0,0,1,1,20],[1,0],[0,2]`  \
+  **Explanation:** The provided example demonstrates how updates are made to specific subrectangles and how values are retrieved after those updates.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved with a straightforward approach that updates values directly in the matrix for the subrectangle and retrieves values using array indexing for the getValue operation.
+
+### Initial Thoughts 💭
+- The subrectangle update operation involves looping over a submatrix and updating values.
+- The getValue operation is efficient with direct access to the matrix.
+- Directly modifying the subrectangle will result in a time complexity of O(k), where k is the number of cells in the subrectangle.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty rectangle is not a valid input.
+- If the rectangle size is large, ensure the solution can handle large subrectangle updates efficiently.
+- Handling the upper bound values for newValue and matrix elements should be done without overflow.
+- Ensure that the row and column indices are within the valid bounds of the matrix.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> rec;
+SubrectangleQueries(vector<vector<int>>& rectangle) {
+    rec = rectangle;
+}
+
+void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
+    for(int i = row1; i <= row2; i++)
+    for(int j = col1; j <= col2; j++)
+        rec[i][j] = newValue;
+}
+
+int getValue(int row, int col) {
+    return rec[row][col];
+}
 };
 
 /**
@@ -45,100 +95,83 @@ public:
  * SubrectangleQueries* obj = new SubrectangleQueries(rectangle);
  * obj->updateSubrectangle(row1,col1,row2,col2,newValue);
  * int param_2 = obj->getValue(row,col);
- */
-{{< /highlight >}}
----
+```
 
-### Problem Statement
+This class `SubrectangleQueries` is designed to efficiently perform updates on subrectangles within a 2D matrix and retrieve values from it. The matrix is represented by a 2D vector (`rec`). The class includes methods to update a subrectangle's values and get a specific value from the matrix.
 
-The problem is to implement a class `SubrectangleQueries` that manages a rectangular grid of integers (a 2D array) with the ability to update values in a specific subrectangle and retrieve the value at any given cell. The operations include:
-1. **Updating a Subrectangle**: Changing all the values within a specified subrectangle to a new value.
-2. **Getting a Value**: Retrieving the value at a specific position in the rectangle.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Declaration**
+	```cpp
+	vector<vector<int>> rec;
+	```
+	This line declares a 2D vector `rec` that will hold the values of the subrectangle matrix. It is used to store the entire rectangle's data.
 
-### Approach
+2. **Constructor**
+	```cpp
+	SubrectangleQueries(vector<vector<int>>& rectangle) {
+	```
+	The constructor initializes the `SubrectangleQueries` object with an existing 2D matrix `rectangle` passed by reference. This matrix is then stored in the `rec` variable.
 
-To solve this problem, we can utilize a straightforward approach using a 2D vector to represent the rectangle. The core idea is to maintain the rectangle as a member variable and implement two primary methods:
+3. **Initialization**
+	```cpp
+	    rec = rectangle;
+	```
+	The matrix `rec` is initialized with the values from the provided `rectangle` matrix. This effectively stores the rectangle in the object for later updates and queries.
 
-1. **Update Method**: This method iterates over the specified subrectangle and updates all the elements to the new value.
-2. **Get Value Method**: This method directly accesses the rectangle to retrieve the value at the specified coordinates.
+4. **Method**
+	```cpp
+	void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
+	```
+	The `updateSubrectangle` method is used to update the values of a subrectangle in the matrix. The rectangle to be updated is defined by the top-left (`row1`, `col1`) and bottom-right (`row2`, `col2`) corners, and the new value `newValue` is applied to all elements within this subrectangle.
 
-Given that the updates can involve multiple elements, the update method operates in a nested loop, while the get value method directly accesses an element. This leads to an intuitive and simple implementation.
+5. **Loop**
+	```cpp
+	    for(int i = row1; i <= row2; i++)
+	```
+	The outer loop iterates through all rows of the subrectangle, starting from `row1` to `row2`.
 
-### Code Breakdown (Step by Step)
+6. **Loop**
+	```cpp
+	    for(int j = col1; j <= col2; j++)
+	```
+	The inner loop iterates through all columns of the subrectangle, starting from `col1` to `col2`.
 
-Here is the breakdown of the provided code:
+7. **Update**
+	```cpp
+	        rec[i][j] = newValue;
+	```
+	This line updates the value of each element in the subrectangle to the new value (`newValue`).
 
-1. **Class Declaration**:
-   ```cpp
-   class SubrectangleQueries {
-   public:
-   ```
-   - The `SubrectangleQueries` class is defined to encapsulate the functionality of managing the rectangular grid.
+8. **Method**
+	```cpp
+	int getValue(int row, int col) {
+	```
+	The `getValue` method returns the value of the matrix at the specified position (`row`, `col`). This method allows querying individual values from the rectangle.
 
-2. **Member Variables**:
-   ```cpp
-   vector<vector<int>> rec;
-   ```
-   - A 2D vector `rec` is declared to store the values of the rectangle.
+9. **Return**
+	```cpp
+	    return rec[row][col];
+	```
+	This line retrieves the value from the matrix at the given position and returns it.
 
-3. **Constructor**:
-   ```cpp
-   SubrectangleQueries(vector<vector<int>>& rectangle) {
-       rec = rectangle;
-   }
-   ```
-   - The constructor takes a 2D vector `rectangle` as an argument and initializes the member variable `rec` with this input. This sets up the initial state of the rectangle.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for getValue
+- **Average Case:** O(k) for updateSubrectangle, where k is the size of the subrectangle
+- **Worst Case:** O(k) for updateSubrectangle
 
-4. **Update Method**:
-   ```cpp
-   void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
-       for(int i = row1; i <= row2; i++)
-           for(int j = col1; j <= col2; j++)
-               rec[i][j] = newValue;
-   }
-   ```
-   - The `updateSubrectangle` method takes the corners of the subrectangle (defined by `(row1, col1)` and `(row2, col2)`) and the `newValue` to be assigned.
-   - It uses two nested loops to iterate through each cell in the specified subrectangle and updates the value at each position to `newValue`.
+The time complexity of getValue is constant, but updating the subrectangle requires iterating through the cells of the subrectangle.
 
-5. **Get Value Method**:
-   ```cpp
-   int getValue(int row, int col) {
-       return rec[row][col];
-   }
-   ```
-   - The `getValue` method retrieves and returns the value from the rectangle at the specified coordinates `(row, col)`.
+### Space Complexity 💾
+- **Best Case:** O(n * m)
+- **Worst Case:** O(n * m) where n is the number of rows and m is the number of columns in the rectangle.
 
-6. **Example Usage**:
-   ```cpp
-   /**
-    * Your SubrectangleQueries object will be instantiated and called as such:
-    * SubrectangleQueries* obj = new SubrectangleQueries(rectangle);
-    * obj->updateSubrectangle(row1,col1,row2,col2,newValue);
-    * int param_2 = obj->getValue(row,col);
-    */
-   ```
-   - This comment block illustrates how to instantiate the `SubrectangleQueries` object and use its methods. 
+The space complexity depends on the size of the matrix, as we store it in memory.
 
-### Complexity
+**Happy Coding! 🎉**
 
-- **Time Complexity**:
-  - The `updateSubrectangle` method runs in \(O((row2 - row1 + 1) \times (col2 - col1 + 1))\) time, as it iterates over every element in the specified subrectangle. In the worst case, this could cover all elements in the rectangle if the specified range encompasses the entire rectangle.
-  - The `getValue` method runs in \(O(1)\) time, as it directly accesses a specific element in the rectangle.
-
-- **Space Complexity**:
-  - The space complexity is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the rectangle, since we need to store the entire grid in the `rec` vector.
-
-### Conclusion
-
-The implementation of the `SubrectangleQueries` class effectively handles the required operations with a clear and intuitive approach. The use of a 2D vector to represent the rectangle allows for straightforward updates and retrievals of values. Key takeaways from this solution include:
-
-1. **Simplicity**: The implementation is easy to understand and follow, making it suitable for those new to data structures and algorithms.
-
-2. **Efficiency**: While the update operation may become costly for larger subrectangles, the overall design provides a good balance between functionality and complexity for typical use cases.
-
-3. **Flexibility**: The solution can be easily extended or modified to incorporate additional features, such as more complex querying operations or different update strategies.
-
-In conclusion, the `SubrectangleQueries` class serves as an excellent example of how to manage and manipulate a 2D data structure effectively, fulfilling the problem's requirements while maintaining clarity and efficiency.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/subrectangle-queries/description/)
 

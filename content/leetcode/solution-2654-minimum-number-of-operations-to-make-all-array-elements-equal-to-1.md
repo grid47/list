@@ -14,118 +14,184 @@ img_src = ""
 youtube = "9LOYxdctbs0"
 youtube_upload_date="2023-04-23"
 youtube_thumbnail="https://i.ytimg.com/vi/9LOYxdctbs0/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of positive integers 'nums'. You can perform an operation on this array where you select two consecutive elements and replace one of them with the gcd (greatest common divisor) of the two elements. The goal is to make all elements of the array equal to 1 using the minimum number of operations. If it's impossible to make all elements equal to 1, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of positive integers, nums, with a length between 2 and 50. The integers in nums can be as large as 10^6.
+- **Example:** `Input: nums = [3, 9, 6, 12]`
+- **Constraints:**
+	- 2 <= nums.length <= 50
+	- 1 <= nums[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to make all elements in the array equal to 1, or return -1 if it is impossible.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be an integer representing the minimum number of operations or -1 if it's impossible.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of operations to convert all elements of the array to 1 by using gcd operations on consecutive elements.
+
+- Step 1: Check if the array already contains 1. If so, return the number of operations required to change all elements to 1.
+- Step 2: For each subarray of consecutive elements, calculate their gcd and check if it's 1.
+- Step 3: Track the minimum number of steps needed to achieve an array of all ones by applying gcd operations iteratively on the elements.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums will always have at least two elements.
+- If it's possible to convert the entire array to 1, it can be done using a series of gcd operations on consecutive elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 9, 6, 12]`  \
+  **Explanation:** In this case, we can perform the following operations: 3 and 9 have gcd 3, then 9 and 6 have gcd 3, and finally 6 and 12 have gcd 6. Using gcd on consecutive elements, we eventually convert all elements to 1 after 3 operations.
+
+- **Input:** `Input: nums = [5, 15, 25]`  \
+  **Explanation:** For this case, we cannot reduce these elements to 1 since their gcd is greater than 1. Therefore, it is impossible to make all elements equal to 1, and the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+We approach this problem by using a sliding window technique, calculating the gcd of consecutive elements and updating the array progressively. The goal is to minimize the number of operations required to make all elements 1.
+
+### Initial Thoughts 💭
+- If the array already contains a 1, the solution is straightforward and involves replacing all other elements with 1.
+- If the gcd of the entire array is greater than 1, it is impossible to convert all elements to 1.
+- A brute force approach of checking every pair of consecutive elements might be inefficient, so we will focus on the gcd values to minimize operations.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is guaranteed to have at least two elements, so there will be no empty arrays.
+- The array can have up to 50 elements, and the values of nums[i] can go up to 10^6, so we need an efficient solution.
+- If the array contains multiple 1's, the answer should be 0 operations.
+- If all elements share a common factor greater than 1, the answer should be -1.
+- Ensure the solution works within time limits for the maximum array size of 50.
+{{< dots >}}
+## Code 💻
+```cpp
+
+int minOperations(vector<int>& nums) {
+
+
+    int cnt = 0;
     
-    int minOperations(vector<int>& nums) {
-
-
-        int cnt = 0;
-        
-        for(int x: nums) if (x == 1) cnt++;
-        if(cnt > 0) return nums.size() - cnt;
-        
-        int t = INT_MAX;
-        for(int i = 0; i < nums.size(); i++) {
-            int last = nums[i];
-            for(int j = i + 1; j < nums.size(); j++) {
-                last = __gcd(last, nums[j]);
-                if(last == 1) {
-                    t = min(t, j - i);
-                }
+    for(int x: nums) if (x == 1) cnt++;
+    if(cnt > 0) return nums.size() - cnt;
+    
+    int t = INT_MAX;
+    for(int i = 0; i < nums.size(); i++) {
+        int last = nums[i];
+        for(int j = i + 1; j < nums.size(); j++) {
+            last = __gcd(last, nums[j]);
+            if(last == 1) {
+                t = min(t, j - i);
             }
         }
-        
-        
-        return t == INT_MAX? -1: t + nums.size() - 1;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the minimum number of operations required to make all elements in the given integer array `nums` equal to `1`. The allowed operation is to select any two elements and replace them with their greatest common divisor (GCD). If the array already contains `1`, no operations are needed. Otherwise, we need to perform some number of GCD operations to transform the elements into `1`. The goal is to determine the minimum number of such operations, or return `-1` if it is impossible to transform all elements to `1`.
-
-### Approach
-
-To solve this problem, the key idea is to consider the following two observations:
-
-1. **Presence of `1`**: If the array already contains `1`, then no operations are needed. We can directly return the number of operations as the size of the array minus the count of `1`s, because the other elements can be reduced to `1` in one operation each.
-
-2. **Subarrays with GCD `1`**: If the array does not contain `1`, we need to find a subarray whose GCD is equal to `1`, because the GCD operation can only reduce two numbers to their greatest common divisor. Once we find such a subarray, the minimum number of operations will be the length of the subarray minus one, since that is the number of operations needed to reduce the entire subarray to `1`.
-
-3. **GCD Properties**: The GCD of multiple numbers is associative, meaning that the GCD of a range of numbers can be computed progressively. Therefore, we can explore each subarray and compute its GCD to see if we can find a valid subarray with a GCD of `1`. The smaller the length of this subarray, the fewer operations we will need.
-
-### Code Breakdown
-
-The solution can be divided into the following steps:
-
-#### 1. **Count the Occurrence of `1` in the Array**
-
-The first step is to count how many times the number `1` appears in the array. If the count is greater than `0`, we return `nums.size() - cnt` because that many elements are already `1`, and we do not need any more operations.
-
-```cpp
-int cnt = 0;
-for(int x: nums) if (x == 1) cnt++;
-if(cnt > 0) return nums.size() - cnt;
-```
-
-- We iterate through the `nums` array and count the number of `1`s.
-- If there is at least one `1`, the answer is simply the number of elements that are not `1`, because each non-`1` element can be replaced by `1` in one operation.
-
-#### 2. **Find the Subarray with GCD Equal to `1`**
-
-If there are no `1`s in the array, we need to search for a subarray with a GCD of `1`. To do this, we use a nested loop to check every possible subarray and compute the GCD progressively.
-
-```cpp
-int t = INT_MAX;
-for(int i = 0; i < nums.size(); i++) {
-    int last = nums[i];
-    for(int j = i + 1; j < nums.size(); j++) {
-        last = __gcd(last, nums[j]);
-        if(last == 1) {
-            t = min(t, j - i);
-        }
-    }
+    
+    
+    return t == INT_MAX? -1: t + nums.size() - 1;
 }
 ```
 
-- For each starting index `i`, we initialize `last` as `nums[i]` and compute the GCD progressively with the next elements.
-- If the GCD of the current subarray is `1`, we update the minimum length of such a subarray using the formula `t = min(t, j - i)`, where `j` is the end index of the subarray.
-- The inner loop computes the GCD for each subarray, and as soon as we find a subarray with a GCD of `1`, we check if it is the shortest one so far.
+This function calculates the minimum number of operations required to make all elements in the input array 'nums' equal to 1 by utilizing the greatest common divisor (GCD).
 
-#### 3. **Return the Minimum Operations**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minOperations(vector<int>& nums) {
+	```
+	The function `minOperations` takes a reference to a vector of integers `nums` and returns an integer representing the minimum number of operations.
 
-After finding the shortest subarray with a GCD of `1`, the minimum number of operations required is `t + nums.size() - 1`. This is because the length of the subarray with a GCD of `1` is `t + 1`, and it takes `t` operations to reduce the subarray to `1`. The remaining elements outside this subarray will require `nums.size() - 1 - t` operations to be reduced to `1`.
+2. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	A counter `cnt` is initialized to zero. This will keep track of how many times the value 1 appears in the input array.
 
-```cpp
-return t == INT_MAX ? -1 : t + nums.size() - 1;
-```
+3. **Loop: Counting Ones**
+	```cpp
+	    for(int x: nums) if (x == 1) cnt++;
+	```
+	A loop that iterates through the array and increments the `cnt` for every occurrence of the value 1.
 
-- If no subarray with a GCD of `1` is found (`t == INT_MAX`), it means it is impossible to reduce the array to `1`, and we return `-1`.
-- Otherwise, we return the number of operations needed, which is the length of the subarray with the GCD of `1` minus one (`t`) plus the number of remaining elements in the array.
+4. **Conditional Check**
+	```cpp
+	    if(cnt > 0) return nums.size() - cnt;
+	```
+	If `cnt` is greater than 0, meaning there are ones in the array, the function returns the size of the array minus the number of ones, representing the number of operations.
 
-### Complexity
+5. **Variable Declaration**
+	```cpp
+	    int t = INT_MAX;
+	```
+	A variable `t` is initialized to the maximum possible integer value, which will later store the minimum distance between indices where GCD of the subarray is 1.
 
-- **Time Complexity**:
-  - The algorithm iterates over all pairs of elements in the array, which requires **O(n^2)** time, where `n` is the length of the array.
-  - For each pair, it computes the GCD of two numbers, which takes **O(log(max(nums)))** time. However, since the nested loop runs at most **n^2** times, the overall time complexity is **O(n^2 log(max(nums)))**.
+6. **Nested Loop: GCD Calculation**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	A nested loop is used to find pairs of elements in the array where their GCD is 1.
 
-- **Space Complexity**:
-  - The space complexity is **O(1)** since we only use a few integer variables (`cnt`, `t`, etc.) for storing intermediate results. The space used for the input array is not considered in the complexity analysis.
+7. **Inner Loop: GCD Calculation**
+	```cpp
+	        int last = nums[i];
+	```
+	The variable `last` is initialized to the current element of the array `nums[i]`. It will be used to calculate the GCD of subsequent elements.
 
-### Conclusion
+8. **Inner Loop: GCD Calculation**
+	```cpp
+	        for(int j = i + 1; j < nums.size(); j++) {
+	```
+	This loop iterates through the array starting from index `i + 1` and calculates the GCD of the elements.
 
-The solution effectively computes the minimum number of operations needed to make all elements of the array equal to `1` using GCD operations. The approach utilizes a sliding window-like strategy to find subarrays with a GCD of `1` and keeps track of the smallest subarray length. While the algorithm has a time complexity of **O(n^2 log(max(nums)))**, it is an efficient way to solve the problem for moderately sized arrays. For larger arrays, optimization techniques such as more advanced GCD computation methods or dynamic programming could be considered to improve performance further.
+9. **GCD Calculation**
+	```cpp
+	            last = __gcd(last, nums[j]);
+	```
+	The GCD of the current value of `last` and the current element `nums[j]` is computed using the built-in `__gcd` function.
+
+10. **GCD Check**
+	```cpp
+	            if(last == 1) {
+	```
+	If the GCD between `last` and `nums[j]` is 1, the distance between indices `i` and `j` is a valid candidate.
+
+11. **Update Minimum Distance**
+	```cpp
+	                t = min(t, j - i);
+	```
+	The minimum distance `t` is updated to the smaller of its current value and the difference between indices `j` and `i`.
+
+12. **Final Calculation**
+	```cpp
+	    return t == INT_MAX? -1: t + nums.size() - 1;
+	```
+	If no valid subarray was found, the function returns -1; otherwise, it returns the minimum number of operations calculated.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The best case is when the gcd is 1 for all elements, and the worst case is when we have to check all consecutive pairs in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, as we only need a few variables to store temporary results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-make-all-array-elements-equal-to-1/description/)
 

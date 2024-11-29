@@ -14,122 +14,202 @@ img_src = ""
 youtube = "6IPtNE3fIew"
 youtube_upload_date="2023-09-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/6IPtNE3fIew/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a non-decreasing sorted integer array. Perform operations to remove pairs of elements where nums[i] < nums[j] and return the minimum length of the array after the operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sorted list of integers.
+- **Example:** `nums = [1, 2, 3, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- nums is sorted in non-decreasing order.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minLengthAfterRemovals(vector<int>& nums) {
-        int n = nums.size();
-        unordered_map<int, int> mp;
-        for(int i : nums){
-            mp[i]++;
-        }
-        int maxi = 0;
-        for(auto it : mp){
-            maxi = max(maxi, it.second);
-        }
-        if(maxi <= n/2){
-            if(n%2){
-                return 1;
-            }
-            else{
-                return 0;
-            }
-        }
-        return 2*maxi - n;
-        
-        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum length of the array after applying the operations.
+- **Example:** `Output: 0`
+- **Constraints:**
+	- The output is an integer, representing the remaining array length.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the minimum length of the array after applying zero or more operations to remove pairs.
+
+- Count the frequency of each element in the array.
+- Identify the largest frequency of any element.
+- Based on the frequency, determine how many elements can be removed.
+- Return the minimum remaining length based on the possible operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is sorted in non-decreasing order.
+- Only valid pairs can be removed (i.e., nums[i] < nums[j]).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3, 4]`  \
+  **Explanation:** All elements can be removed in pairs, leaving the array empty.
+
+- **Input:** `nums = [1, 1, 2, 2, 3, 3]`  \
+  **Explanation:** All elements can be removed in pairs, leaving the array empty.
+
+- **Input:** `nums = [1000000000, 1000000000]`  \
+  **Explanation:** Both elements are equal, so no pairs can be removed, and the array remains with 2 elements.
+
+- **Input:** `nums = [2, 3, 4, 4, 4]`  \
+  **Explanation:** One element can be removed (either 2 or 3), leaving one element.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to count the frequency of each element and decide how many pairs can be removed based on the largest frequencies.
+
+### Initial Thoughts 💭
+- The problem can be reduced to counting frequencies and checking how many pairs can be removed.
+- If no valid pairs exist (i.e., all elements are the same), the answer will be the size of the array.
+- The key insight is that elements with the same value cannot form a valid pair. The task is to find how many pairs can be removed by checking frequencies.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, the result is 0.
+- For large inputs, ensure that counting frequencies and removing elements is efficient.
+- If all elements are the same, no pairs can be removed, and the array will remain unchanged.
+- The array must contain distinct integers, sorted in non-decreasing order.
+{{< dots >}}
+## Code 💻
+```cpp
+int minLengthAfterRemovals(vector<int>& nums) {
+    int n = nums.size();
+    unordered_map<int, int> mp;
+    for(int i : nums){
+        mp[i]++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires you to find the minimum possible length of an array after performing a series of removals. In each removal, you can remove one element from the array, and the goal is to determine the smallest array length that can remain, given that each element can be removed multiple times. The key condition for removals is that at least one element must remain, and it should be the most frequent element in the array. If multiple elements are equally frequent, they all count toward the removal.
-
-The goal is to compute this minimum length after possible removals.
-
-### Approach
-
-The key observation here is that the problem hinges on the frequency of the elements. If any element occurs more than half the time in the array, the remaining array size will be determined by how many times that element appears. If no element occurs more than half the time, then the remaining array length depends on whether the number of elements is odd or even.
-
-#### Steps:
-
-1. **Count the frequency of each element**: 
-   - The first step is to compute the frequency of each element in the array. This can be easily achieved using a hash map (unordered_map) where the key is the element and the value is its frequency.
-
-2. **Find the most frequent element**:
-   - Once we have the frequency of all elements, the next step is to identify the most frequent element in the array. This will give us an idea of how many elements we can remove. The more frequent an element is, the fewer the remaining elements will be after removal.
-
-3. **Check if any element occurs more than half the time**:
-   - If the maximum frequency of any element is greater than half the size of the array, then the remaining length is determined by the most frequent element. Specifically, the result will be `2 * max_frequency - n`, where `n` is the size of the array.
-
-4. **Handle cases where no element occurs more than half the time**:
-   - If no element occurs more than half the time, the result depends on whether the array size is odd or even:
-     - If the size is odd, the minimum length will be `1`.
-     - If the size is even, the minimum length will be `0`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Count Frequency of Elements
-```cpp
-unordered_map<int, int> mp;
-for (int i : nums) {
-    mp[i]++;
-}
-```
-- We iterate over the array `nums`, and for each element, we increment its count in the map `mp`.
-- This step ensures we have the frequency of each element in the array.
-
-#### Step 2: Find Maximum Frequency
-```cpp
-int maxi = 0;
-for (auto it : mp) {
-    maxi = max(maxi, it.second);
-}
-```
-- We iterate over the map `mp` to find the maximum frequency (`maxi`), i.e., the highest count of any element.
-- This tells us the most frequent element in the array.
-
-#### Step 3: Case 1 – No Element Occurs More Than Half the Time
-```cpp
-if (maxi <= n / 2) {
-    if (n % 2) {
-        return 1;
-    } else {
-        return 0;
+    int maxi = 0;
+    for(auto it : mp){
+        maxi = max(maxi, it.second);
     }
+    if(maxi <= n/2){
+        if(n%2){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    return 2*maxi - n;
+    
+    
 }
 ```
-- If the maximum frequency (`maxi`) is less than or equal to half of the array size (`n / 2`), then no element dominates the array.
-- If the size of the array is odd (`n % 2 == 1`), then the minimum length after removal will be `1` (because we can only leave one element). 
-- If the size of the array is even (`n % 2 == 0`), then the minimum length after removal will be `0` (since we can remove all elements in pairs).
 
-#### Step 4: Case 2 – An Element Occurs More Than Half the Time
-```cpp
-return 2 * maxi - n;
-```
-- If the maximum frequency (`maxi`) of any element is greater than half the size of the array (`n / 2`), then the minimum length after removal is determined by how much of the array can be removed based on this most frequent element.
-- The minimum length left is calculated as `2 * max_frequency - n`. This is because the most frequent element can "dominate" and leave the rest to be removed.
+This function calculates the minimum length of a vector after removing elements based on their frequencies. The goal is to ensure that the frequency of the most frequent element does not exceed half the size of the array.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minLengthAfterRemovals(vector<int>& nums) {
+	```
+	The function definition starts here. It takes a vector of integers 'nums' and returns the minimum length after removals.
 
-#### Time Complexity:
-- **O(n)**: We iterate over the array once to compute the frequency of each element and once more to find the maximum frequency. So, the total time complexity is linear with respect to the number of elements in the input array, i.e., O(n), where `n` is the size of the array.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initialize the variable 'n' to the size of the input vector 'nums'.
 
-#### Space Complexity:
-- **O(n)**: We use an unordered map (`mp`) to store the frequency of each element. In the worst case, where all elements in the array are unique, the space complexity will be O(n), where `n` is the number of unique elements in the array.
+3. **Map Initialization**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	Initialize an unordered map 'mp' to store the frequency of each element in the vector.
 
-### Conclusion
+4. **Loop Start**
+	```cpp
+	    for(int i : nums){
+	```
+	Start a loop to iterate through each element 'i' in the vector 'nums'.
 
-This solution efficiently calculates the minimum length of the array after removals by leveraging the frequency of the elements in the array. The approach ensures that we can handle even large arrays in linear time, making it optimal for typical constraints in competitive programming or interview scenarios. The key idea is that if no element occurs more than half the time, the result depends on whether the array size is odd or even. If an element occurs more than half the time, the remaining length is determined by how many times the most frequent element appears. This solution is both time-efficient and space-efficient, with a complexity of O(n).
+5. **Frequency Count**
+	```cpp
+	        mp[i]++;
+	```
+	Increment the count for the current element 'i' in the map 'mp'.
+
+6. **Max Frequency Initialization**
+	```cpp
+	    int maxi = 0;
+	```
+	Initialize 'maxi' to store the maximum frequency found in the map.
+
+7. **Frequency Loop**
+	```cpp
+	    for(auto it : mp){
+	```
+	Start a loop to iterate through each element in the frequency map 'mp'.
+
+8. **Update Maximum Frequency**
+	```cpp
+	        maxi = max(maxi, it.second);
+	```
+	Update the 'maxi' variable with the maximum frequency found in the map.
+
+9. **Condition Check**
+	```cpp
+	    if(maxi <= n/2){
+	```
+	Check if the maximum frequency is less than or equal to half the size of the vector.
+
+10. **Odd Size Check**
+	```cpp
+	        if(n%2){
+	```
+	If the size of the vector 'n' is odd, return 1.
+
+11. **Return 1**
+	```cpp
+	            return 1;
+	```
+	Return 1 if the array size is odd and the maximum frequency is less than or equal to half the size.
+
+12. **Even Size Check**
+	```cpp
+	        else{
+	```
+	If the size of the vector 'n' is even, return 0.
+
+13. **Return 0**
+	```cpp
+	            return 0;
+	```
+	Return 0 if the array size is even and the maximum frequency is less than or equal to half the size.
+
+14. **Return Calculation**
+	```cpp
+	    return 2*maxi - n;
+	```
+	Return the result of '2*maxi - n', which is the minimum length after removals.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we iterate through the array once to count frequencies and check the conditions.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the frequency count stored in a hash map.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-array-length-after-pair-removals/description/)
 

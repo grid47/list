@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "tvaZ8-WobKE"
 youtube_upload_date="2019-10-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/tvaZ8-WobKE/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,113 +28,158 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/tvaZ8-WobKE/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a string s and a string array dictionary, return the longest string from the dictionary that can be formed by deleting some characters of s. If there are multiple valid words, return the longest word with the smallest lexicographical order. If no valid word exists, return an empty string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string s and an array of strings dictionary.
+- **Example:** `s = 'xyzzabca', dictionary = ['abc', 'xy', 'zz', 'xyz']`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- 1 <= dictionary.length <= 1000
+	- 1 <= dictionary[i].length <= 1000
+	- s and dictionary[i] consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string findLongestWord(string s, vector<string>& d) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the longest word in the dictionary that can be formed from the string s. If there are multiple such words, return the lexicographically smallest one. If no valid word can be formed, return an empty string.
+- **Example:** `'abc', 'c'`
+- **Constraints:**
+	- The output should be a string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check each word in the dictionary to see if it can be formed by deleting characters from s and then return the longest, lexicographically smallest one.
+
+- 1. Iterate through each word in the dictionary.
+- 2. For each word, check if it can be formed by deleting some characters from s by maintaining a pointer for both strings.
+- 3. Track the longest valid word found and update if a new word with a longer length or smaller lexicographical order is found.
+- 4. Return the valid word or an empty string if no valid word is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings are valid and consist of lowercase English letters only.
+- We assume that all words in the dictionary are distinct.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'xyzzabca', dictionary = ['abc', 'xy', 'zz', 'xyz']`  \
+  **Explanation:** The word 'abc' can be formed from s by deleting 'x', 'y', 'z', and 'z'. The other words cannot be formed.
+
+- **Input:** `s = 'abc', dictionary = ['a', 'b', 'c']`  \
+  **Explanation:** 'c' is the longest valid word that can be formed from s.
+
+- **Input:** `s = 'abcxyz', dictionary = ['ax', 'bc', 'xyz']`  \
+  **Explanation:** 'ax' can be formed from s and is the longest, lexicographically smallest word.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating over each word in the dictionary and checking if it can be formed from s by deleting characters. The key operation is maintaining a pointer for both the string and the word being checked.
+
+### Initial Thoughts 💭
+- The task is a typical string matching problem where we are allowed to delete characters from s.
+- The solution needs to efficiently check if a word can be formed from s and track the longest, lexicographically smallest result.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle empty string s or an empty dictionary.
+- The solution should efficiently handle the case where s and the dictionary contain the maximum number of elements (1000).
+- If no word can be formed, return an empty string.
+- The solution should run in O(n * m) time, where n is the length of s and m is the total length of all words in the dictionary.
+{{< dots >}}
+## Code 💻
+```cpp
+string findLongestWord(string s, vector<string>& d) {
+    
+    string ans;
+    for(int i = 0; i < d.size(); i++) {
         
-        string ans;
-        for(int i = 0; i < d.size(); i++) {
-            
-            int pi = 0, pj = 0;
-            
-            for(; pi < s.size() && pj < d[i].size(); pi++) {
-                pj += s[pi] == d[i][pj];
-            }
-            
-            if(pj == d[i].size() && (ans.size() < d[i].size() || (ans.size() == d[i].size() && ans > d[i])))
-                ans = d[i];
-            
+        int pi = 0, pj = 0;
+        
+        for(; pi < s.size() && pj < d[i].size(); pi++) {
+            pj += s[pi] == d[i][pj];
         }
-        return ans;
+        
+        if(pj == d[i].size() && (ans.size() < d[i].size() || (ans.size() == d[i].size() && ans > d[i])))
+            ans = d[i];
+        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the longest word in a given dictionary (`d`) that can be formed by deleting some characters from a given string `s` without rearranging the remaining characters. If multiple words can be formed with the same length, the lexicographically smallest word should be returned. The challenge is to efficiently check each word from the dictionary against `s` and determine which word is the longest and lexicographically smallest.
-
-### Approach
-
-1. **Iterate Through Each Word in the Dictionary**:
-   - For each word in the dictionary (`d`), check if it can be formed by deleting characters from the string `s` while preserving the order of characters.
-
-2. **Two-Pointer Technique**:
-   - Use two pointers to check each word:
-     - `pi`: A pointer for iterating over characters in `s`.
-     - `pj`: A pointer for iterating over characters in the current dictionary word `d[i]`.
-   - For each character in `s`, if it matches the current character in the dictionary word, move both pointers forward. Otherwise, just move the `pi` pointer forward in `s`.
-   - If `pj` reaches the end of `d[i]`, it means `d[i]` can be formed by deleting characters from `s`.
-
-3. **Update the Result Based on Conditions**:
-   - If the current dictionary word meets the criteria (either being longer than the current answer or lexicographically smaller in case of a tie), update `ans` to store the new word.
-
-4. **Return the Result**:
-   - Once all words in the dictionary have been checked, return `ans`, which will hold the longest lexicographically smallest word that can be formed.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize `ans` Variable
-
-```cpp
-string ans;
-```
-
-- The variable `ans` will store the longest and lexicographically smallest word found.
-
-#### Step 2: Iterate Through Each Word in the Dictionary
-
-```cpp
-for(int i = 0; i < d.size(); i++) {
-```
-
-- Loop through each word in the dictionary `d`.
-
-#### Step 3: Use Two Pointers to Check Subsequence Condition
-
-```cpp
-int pi = 0, pj = 0;
-for(; pi < s.size() && pj < d[i].size(); pi++) {
-    pj += s[pi] == d[i][pj];
+    return ans;
 }
 ```
 
-- Initialize `pi` and `pj` to 0. Use these pointers to check if `d[i]` can be formed from `s`.
-- For each character in `s`, if it matches the current character in `d[i]`, move both pointers forward.
-- If `pj` reaches the end of `d[i]`, it means `d[i]` can be created by deleting characters from `s`.
+This function finds the longest word in the dictionary `d` that can be formed by deleting some characters of the string `s`. If there are multiple words with the same length, it returns the lexicographically largest word.
 
-#### Step 4: Update the Result Based on Word Length and Lexicographical Order
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string findLongestWord(string s, vector<string>& d) {
+	```
+	Defines the function `findLongestWord` that takes a string `s` and a vector of strings `d`, and returns the longest word from `d` that can be formed by deleting some characters from `s`.
 
-```cpp
-if(pj == d[i].size() && (ans.size() < d[i].size() || (ans.size() == d[i].size() && ans > d[i])))
-    ans = d[i];
-```
+2. **Variable Initialization**
+	```cpp
+	    string ans;
+	```
+	Initializes the variable `ans` to store the result, which will be the longest word found from the dictionary `d`.
 
-- Check if the word is valid by verifying `pj` reached the end of `d[i]`.
-- If it’s valid and longer than `ans`, update `ans` to `d[i]`.
-- If `d[i]` and `ans` have the same length, update `ans` to the lexicographically smaller word.
+3. **Looping through Dictionary**
+	```cpp
+	    for(int i = 0; i < d.size(); i++) {
+	```
+	Starts a loop to iterate through each word in the dictionary `d`.
 
-#### Step 5: Return the Result
+4. **Variable Initialization**
+	```cpp
+	        int pi = 0, pj = 0;
+	```
+	Initializes two variables `pi` and `pj`, which represent the current indices in the string `s` and the current word `d[i]` being checked, respectively.
 
-```cpp
-return ans;
-```
+5. **Matching Loop**
+	```cpp
+	        for(; pi < s.size() && pj < d[i].size(); pi++) {
+	```
+	Starts a loop to iterate through the string `s` and the current word `d[i]` simultaneously. It continues as long as both indices are within the bounds of `s` and `d[i]`.
 
-- Finally, return `ans`, which will hold the longest word that can be formed by deleting characters from `s`.
+6. **Character Matching**
+	```cpp
+	            pj += s[pi] == d[i][pj];
+	```
+	Increments the index `pj` if the characters `s[pi]` and `d[i][pj]` match. This helps in checking if `d[i]` is a subsequence of `s`.
 
-### Complexity
+7. **Subsequence Validity and Lexicographical Check**
+	```cpp
+	        if(pj == d[i].size() && (ans.size() < d[i].size() || (ans.size() == d[i].size() && ans > d[i])))
+	```
+	Checks if `d[i]` is a subsequence of `s` (i.e., if `pj` equals the length of `d[i]`), and if it is, compares it with the current longest word `ans` to ensure that the longest and lexicographically largest word is selected.
 
-- **Time Complexity**: `O(n * m)`, where `n` is the number of words in the dictionary and `m` is the average length of each word. For each word in the dictionary, we check if it can be formed by deleting characters in `s` (up to `O(m)`).
-  
-- **Space Complexity**: `O(1)`, as we only store a few variables and the answer.
+8. **Assign Longest Word**
+	```cpp
+	            ans = d[i];
+	```
+	If the current word `d[i]` is a valid subsequence and is either longer or lexicographically larger than `ans`, it updates `ans` with `d[i]`.
 
-### Conclusion
+9. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Returns the longest word found from `d` that can be formed by deleting characters from `s`.
 
-The solution uses a straightforward approach of checking each word in the dictionary and employing a two-pointer technique to determine if the word can be formed by deleting characters from `s`. This approach is optimal for the problem and ensures that the longest and lexicographically smallest word is returned in an efficient manner.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m), where n is the length of s and m is the total length of all dictionary words.
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
+
+In the worst case, we check every word in the dictionary against the entire string s.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no valid word is found.
+- **Worst Case:** O(m), where m is the total length of all words in the dictionary.
+
+Space complexity is determined by the dictionary size and the string s, with no extra space used apart from variables for tracking results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/description/)
 

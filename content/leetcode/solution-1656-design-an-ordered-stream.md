@@ -14,25 +14,72 @@ img_src = ""
 youtube = "lL7_8Eg1Q1s"
 youtube_upload_date="2020-11-15"
 youtube_thumbnail="https://i.ytimg.com/vi/lL7_8Eg1Q1s/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a stream of `n` (id, value) pairs, where `id` is an integer between 1 and `n`, and `value` is a string. The task is to design a stream that returns the values in increasing order of their `id`. After each insertion, the stream should return the largest possible chunk of values that appear next in the order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a series of operations, where the first operation is to create an OrderedStream of size `n`. Subsequent operations insert `id` and `value` pairs into the stream.
+- **Example:** `Input: ["OrderedStream", "insert", "insert", "insert", "insert", "insert"] [[5], [3, "ccccc"], [1, "aaaaa"], [2, "bbbbb"], [5, "eeeee"], [4, "ddddd"]]`
+- **Constraints:**
+	- 1 <= n <= 1000
+	- 1 <= id <= n
+	- value.length == 5
+	- value consists only of lowercase letters
+	- Each call to insert will have a unique id
+	- Exactly n calls will be made to insert
 
-{{< highlight cpp >}}
-class OrderedStream {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of lists, where each list represents the chunk of values returned after each insertion.
+- **Example:** `Output: [null, [], ["aaaaa"], ["bbbbb", "ccccc"], [], ["ddddd", "eeeee"]]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to keep track of the inserted values and return the ordered chunks after each insertion.
+
+- Initialize a stream of size n.
+- For each insert operation, place the value at the appropriate index in the stream.
+- After each insertion, check the values in the stream from the current insertion point to the next possible value in the order and return the largest chunk.
+{{< dots >}}
+### Problem Assumptions ✅
+- The insertions will be done in arbitrary order, and each insertion will have a unique id.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: ["OrderedStream", "insert", "insert", "insert", "insert", "insert"] [[5], [3, "ccccc"], [1, "aaaaa"], [2, "bbbbb"], [5, "eeeee"], [4, "ddddd"]]`  \
+  **Explanation:** The insertions happen in an arbitrary order, but the values are returned in the order of their ids. Chunks are returned each time an insertion happens, and they contain the values in increasing id order.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves maintaining a stream of values and ensuring that after each insertion, the largest possible chunk of sorted values is returned.
+
+### Initial Thoughts 💭
+- The values must be inserted and then returned in sorted order based on their id. We need to track the next expected id in the stream.
+- Using a pointer to track the next expected id and dynamically creating chunks as values are inserted seems like an optimal approach.
+{{< dots >}}
+### Edge Cases 🌐
+- An edge case would be when the stream is initialized with `n = 1`.
+- Test the algorithm with the maximum possible size of `n = 1000`.
+- Consider inputs where values are inserted in reverse order and ensure the correct chunk is returned.
+- Ensure the solution works efficiently for the maximum constraint sizes.
+{{< dots >}}
+## Code 💻
+```cpp
 vector<string> s;
 int ptr = 1;
 OrderedStream(int n) : s(n + 1) {}
 vector<string> insert(int id, string value) {
-    s[id] = value;
-    vector<string> res;
-    while (ptr < s.size() && !s[ptr].empty())
-        res.push_back(s[ptr++]);
-    return res;
+s[id] = value;
+vector<string> res;
+while (ptr < s.size() && !s[ptr].empty())
+    res.push_back(s[ptr++]);
+return res;
 }
 };
 
@@ -40,93 +87,83 @@ vector<string> insert(int id, string value) {
  * Your OrderedStream object will be instantiated and called as such:
  * OrderedStream* obj = new OrderedStream(n);
  * vector<string> param_1 = obj->insert(idKey,value);
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand involves implementing an ordered stream of strings where each string can be inserted with a unique identifier. The objective is to create a data structure that allows inserting strings at specific identifiers and retrieving the ordered stream of strings starting from the last retrieved identifier. This data structure should efficiently handle the retrieval of strings in the order they were inserted.
-
-### Approach
-
-To solve this problem, we utilize a class called `OrderedStream` that manages a vector to hold the strings and a pointer to track the next expected identifier. The main operations include:
-
-1. **Initialization**: Create an internal storage for the strings using a vector.
-2. **Insertion**: Insert strings at specific identifiers while maintaining the order.
-3. **Retrieval**: Retrieve strings in order, starting from the last inserted position, until we reach an empty entry in the vector.
-
-This approach efficiently handles both insertions and retrievals, ensuring that strings can be accessed in the order they were expected.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class OrderedStream {
-public:
-    vector<string> s; // Vector to hold strings
-    int ptr = 1; // Pointer to track the next expected id
 ```
-- We define a class `OrderedStream` with a public section that contains:
-  - A vector `s` to store strings. It is initialized with a size of `n + 1` to accommodate identifiers starting from 1.
-  - An integer `ptr` initialized to 1 to keep track of the next expected identifier for retrieval.
 
-```cpp
-    OrderedStream(int n) : s(n + 1) {}
-```
-- The constructor takes an integer `n`, which defines the number of unique identifiers (from 1 to n). It initializes the vector `s` with a size of `n + 1` to simplify index management.
+This implementation creates an ordered stream that sequentially outputs values as they are inserted in order. It uses a vector to store the values and a pointer to track the next available value.
 
-```cpp
-    vector<string> insert(int id, string value) {
-        s[id] = value; // Insert the value at the specified id
-        vector<string> res; // Vector to hold results for retrieval
-```
-- The `insert` function is defined to take an integer `id` and a string `value`. It inserts the value into the vector `s` at the index corresponding to the identifier `id`.
-- A new vector `res` is initialized to hold the results of the retrieval process.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<string> s;
+	```
+	Declares a vector of strings to store the stream elements.
 
-```cpp
-        while (ptr < s.size() && !s[ptr].empty())
-            res.push_back(s[ptr++]); // Retrieve strings in order
-```
-- A `while` loop is used to retrieve strings in order. It continues as long as:
-  - `ptr` is within the bounds of the vector.
-  - The string at the current `ptr` index is not empty.
-- For each non-empty string, it is pushed into the results vector `res`, and `ptr` is incremented to move to the next index.
+2. **Pointer Initialization**
+	```cpp
+	int ptr = 1;
+	```
+	Initializes a pointer to track the next expected element in the ordered stream.
 
-```cpp
-        return res; // Return the retrieved strings
-    }
-};
-```
-- After retrieving all possible strings in order, the results vector `res` is returned.
+3. **Constructor**
+	```cpp
+	OrderedStream(int n) : s(n + 1) {}
+	```
+	Defines the constructor for the `OrderedStream` class, initializing the vector with a size of `n + 1`.
 
-```cpp
-/**
- * Your OrderedStream object will be instantiated and called as such:
- * OrderedStream* obj = new OrderedStream(n);
- * vector<string> param_1 = obj->insert(idKey,value);
- */
-```
-- This comment section illustrates how to instantiate the `OrderedStream` object and use its `insert` method.
+4. **Method Declaration**
+	```cpp
+	vector<string> insert(int id, string value) {
+	```
+	Begins the `insert` method, which inserts a value into the stream at the specified ID and returns all consecutive values starting from the pointer.
 
-### Complexity
+5. **Array Insertion**
+	```cpp
+	s[id] = value;
+	```
+	Inserts the given value into the stream at the specified index.
 
-- **Time Complexity**:
-  - The `insert` operation runs in \( O(1) \) time for inserting a string, and the retrieval portion may take up to \( O(n) \) in the worst case, where all subsequent strings are filled.
-  - Overall, the time complexity for an `insert` operation can be considered \( O(n) \) in the worst case when strings are continuously retrieved.
+6. **Variable Declaration**
+	```cpp
+	vector<string> res;
+	```
+	Declares a vector to store the result of consecutive values.
 
-- **Space Complexity**:
-  - The space complexity is \( O(n) \) as we store strings in a vector of size \( n + 1 \).
+7. **While Loop**
+	```cpp
+	while (ptr < s.size() && !s[ptr].empty())
+	```
+	Loops through the stream to collect consecutive values starting from the pointer.
 
-### Conclusion
+8. **Push Back**
+	```cpp
+	    res.push_back(s[ptr++]);
+	```
+	Adds the current value at the pointer to the result and increments the pointer.
 
-The `OrderedStream` class effectively manages the ordered insertion and retrieval of strings based on unique identifiers. This implementation leverages a vector for storage and a pointer to track the next expected string, facilitating efficient operations.
+9. **Return Statement**
+	```cpp
+	return res;
+	```
+	Returns the collected consecutive values as the result.
 
-**Key Takeaways**:
-1. **Efficiency**: The structure is efficient for both inserting and retrieving strings in the correct order, providing a straightforward interface for users.
-2. **Simplicity**: By using a vector and a simple pointer mechanism, the implementation is easy to understand and maintain.
-3. **Dynamic Handling**: The solution dynamically handles strings as they are inserted, allowing for a flexible and adaptive structure that can be used in various applications requiring ordered data handling.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-Overall, this implementation showcases a practical approach to managing ordered streams, emphasizing both efficiency and clarity in design. The use of standard data structures like vectors simplifies the code while ensuring that operations remain performant.
+The time complexity for each insert operation is O(n) in the worst case, as we may need to check all values to form the chunk.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of values in the stream.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-an-ordered-stream/description/)
 

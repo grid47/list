@@ -14,148 +14,201 @@ img_src = ""
 youtube = "GGdu6E9o7D4"
 youtube_upload_date="2021-02-23"
 youtube_thumbnail="https://i.ytimg.com/vi/GGdu6E9o7D4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of subarrays `groups` and a single array `nums`, your task is to determine whether it is possible to extract each subarray from `groups` as a contiguous segment from `nums`. The subarrays must appear in the same order as in `groups`, and they should be disjoint, meaning no element from `nums` can belong to more than one subarray. Return true if this is possible, and false otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D array `groups` where each subarray is a sequence of integers. Additionally, you are given an integer array `nums`.
+- **Example:** `Input: groups = [[2, 3], [1, 2, 3]], nums = [2, 3, 1, 2, 3, 4]`
+- **Constraints:**
+	- 1 <= groups.length <= 1000
+	- 1 <= groups[i].length <= 1000
+	- 1 <= sum(groups[i].length) <= 1000
+	- 1 <= nums.length <= 1000
+	- nums and group elements are between -10^7 and 10^7
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canChoose(vector<vector<int>>& group, vector<int>& nums) {
-        
-        int numsIdx = 0, grpIdx = 0;
-        
-        while(numsIdx < nums.size() && grpIdx < group.size()) {
-            
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if you can find each subarray from `groups` as disjoint subarrays within `nums` while maintaining the order, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-            int matchCnt = 0;
-            
-            while(numsIdx + matchCnt < nums.size() &&
-                 matchCnt < group[grpIdx].size() &&
-                 nums[numsIdx + matchCnt] == group[grpIdx][matchCnt])
-                    matchCnt++;
-            
-            if(matchCnt == group[grpIdx].size()) {
-                grpIdx++;
-                numsIdx += matchCnt;
-            } else numsIdx++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check whether each subarray from `groups` can be found in `nums` in the given order and that the subarrays are disjoint.
 
-        }
-                
-        return grpIdx == group.size();
+- 1. Start iterating through `nums` while keeping track of the current subarray being matched from `groups`.
+- 2. For each subarray, check if it appears in `nums` as a contiguous block.
+- 3. Once a match is found, ensure no elements from `nums` are reused for the next subarray by continuing the search beyond the matched segment.
+- 4. Return true if all subarrays are found, otherwise return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays `nums` and `groups` consist of integers only.
+- Subarrays in `groups` must appear in the same order in `nums`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: groups = [[2, 3], [1, 2, 3]], nums = [2, 3, 1, 2, 3, 4]`  \
+  **Explanation:** The first subarray [2, 3] can be found at the start of `nums`. The second subarray [1, 2, 3] follows immediately after the first. Thus, the answer is true.
+
+- **Input:** `Input: groups = [[10, -2], [1, 2, 3, 4]], nums = [1, 2, 3, 4, 10, -2]`  \
+  **Explanation:** The subarrays are not in the same order in `nums`. The second subarray [1, 2, 3, 4] appears before [10, -2], so the answer is false.
+
+- **Input:** `Input: groups = [[3, 4], [5, 6]], nums = [3, 5, 4, 6]`  \
+  **Explanation:** The subarrays are disjoint, but they do not appear in the same order. Therefore, the answer is false.
+
+{{< dots >}}
+## Approach 🚀
+The solution will iterate through `nums` and try to match each subarray from `groups` in sequence. We will attempt to find each subarray as a contiguous block, ensuring that no element is shared between subarrays.
+
+### Initial Thoughts 💭
+- The subarrays must be found in order, and no overlap should occur between the subarrays in `nums`.
+- An efficient approach is to use a greedy matching strategy to find each subarray and continue searching from the end of the last match.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` is empty or if the total sum of lengths of subarrays in `groups` exceeds the length of `nums`, return false.
+- The solution must handle cases where the length of `nums` and the total number of elements in `groups` are close to their upper limits efficiently.
+- If any group is empty or a group doesn't have a matching subsequence in `nums`, return false.
+- The solution should be optimized to handle up to 1000 subarrays in `groups` and 1000 elements in `nums`.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canChoose(vector<vector<int>>& group, vector<int>& nums) {
+    
+    int numsIdx = 0, grpIdx = 0;
+    
+    while(numsIdx < nums.size() && grpIdx < group.size()) {
         
+
+        int matchCnt = 0;
+        
+        while(numsIdx + matchCnt < nums.size() &&
+             matchCnt < group[grpIdx].size() &&
+             nums[numsIdx + matchCnt] == group[grpIdx][matchCnt])
+                matchCnt++;
+        
+        if(matchCnt == group[grpIdx].size()) {
+            grpIdx++;
+            numsIdx += matchCnt;
+        } else numsIdx++;
+
     }
-};
-{{< /highlight >}}
----
+            
+    return grpIdx == group.size();
+    
+}
+```
 
-### Problem Statement
+This function checks whether the groups of integers in `group` can be sequentially matched in the array `nums`. It uses indices and counts to track matches and ensures all groups are processed in order.
 
-The problem at hand requires us to determine whether we can sequentially choose groups of integers from a given list (`nums`) based on specified subarrays (groups). Each group must appear in the same order as they are defined in the `group` list, and all elements of a group must be contiguous within `nums`. The challenge is to implement an efficient solution that traverses both the `nums` and `group` arrays and verifies this condition.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool canChoose(vector<vector<int>>& group, vector<int>& nums) {
+	```
+	Declares the function for determining if groups can be matched in the given array `nums`.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int numsIdx = 0, grpIdx = 0;
+	```
+	Initializes indices for tracking the current position in `nums` and `group`.
 
-The algorithm employs a two-pointer technique to iterate through both the `nums` array and the `group` array. The main idea is to use one pointer (`numsIdx`) to traverse the `nums` array and another pointer (`grpIdx`) to traverse the `group` array. Here's how the algorithm is structured:
+3. **While Loop**
+	```cpp
+	    while(numsIdx < nums.size() && grpIdx < group.size()) {
+	```
+	Iterates over `nums` and `group` as long as indices are within bounds.
 
-1. **Initialization**: Start with both pointers at the beginning of their respective arrays.
+4. **Variable Initialization**
+	```cpp
+	        int matchCnt = 0;
+	```
+	Initializes a counter to track the number of matching elements for the current group.
 
-2. **Outer Loop**: The outer loop continues until all groups are checked or all elements in `nums` have been processed.
+5. **While Loop**
+	```cpp
+	        while(numsIdx + matchCnt < nums.size() &&
+	```
+	Checks for matching elements between the current group and the array `nums`.
 
-3. **Matching Elements**: For each group, an inner loop checks if the elements in `group[grpIdx]` match the current segment of `nums`, starting from `numsIdx`. Count the number of consecutive matching elements.
+6. **Condition Check**
+	```cpp
+	             matchCnt < group[grpIdx].size() &&
+	```
+	Ensures the match count does not exceed the size of the current group.
 
-4. **Advancing Pointers**: 
-   - If all elements in the current group are found in sequence in `nums`, advance both pointers to process the next group and the next part of `nums`.
-   - If a match is not found, increment `numsIdx` to check the next potential starting point in `nums`.
+7. **Condition Check**
+	```cpp
+	             nums[numsIdx + matchCnt] == group[grpIdx][matchCnt])
+	```
+	Checks if the current elements in `nums` and `group` match.
 
-5. **Final Check**: After processing, check if all groups were successfully matched. If so, return `true`; otherwise, return `false`.
+8. **Increment**
+	```cpp
+	                matchCnt++;
+	```
+	Increments the match count when elements match.
 
-### Code Breakdown (Step by Step)
+9. **Block End**
+	```cpp
+	        
+	```
+	Empty line for separating blocks for readability.
 
-The code is implemented in the `Solution` class and consists of a single public method, `canChoose`, which takes two parameters: `group` (a vector of integer vectors) and `nums` (a vector of integers).
+10. **Condition Check**
+	```cpp
+	        if(matchCnt == group[grpIdx].size()) {
+	```
+	Checks if all elements in the current group have been matched.
 
-1. **Class Definition**: The solution is encapsulated within the `Solution` class.
+11. **Index Update**
+	```cpp
+	            grpIdx++;
+	```
+	Moves to the next group after successfully matching the current group.
 
-   ```cpp
-   class Solution {
-   ```
+12. **Index Update**
+	```cpp
+	            numsIdx += matchCnt;
+	```
+	Skips past the matched elements in `nums`.
 
-2. **Method Signature**: The `canChoose` method takes two parameters: a reference to a vector of vectors (`group`) and a reference to a vector of integers (`nums`).
+13. **Else Block**
+	```cpp
+	        } else numsIdx++;
+	```
+	Moves to the next element in `nums` if the current group does not match.
 
-   ```cpp
-   public:
-       bool canChoose(vector<vector<int>>& group, vector<int>& nums) {
-   ```
+14. **Return Statement**
+	```cpp
+	    return grpIdx == group.size();
+	```
+	Returns `true` if all groups were matched successfully; otherwise, `false`.
 
-3. **Pointer Initialization**: Two integer variables are initialized to track the current index in `nums` (`numsIdx`) and the current index in `group` (`grpIdx`).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^3)
 
-   ```cpp
-   int numsIdx = 0, grpIdx = 0;
-   ```
+In the worst case, each subarray needs to be matched against a portion of `nums`, leading to a time complexity of O(n^3) when considering the sum of subarray lengths.
 
-4. **Outer While Loop**: This loop continues as long as there are remaining elements in `nums` and groups in `group`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-   ```cpp
-   while(numsIdx < nums.size() && grpIdx < group.size()) {
-   ```
+The space complexity is constant since we are only using a few integer variables to track indices and matches.
 
-5. **Matching Count**: A variable `matchCnt` is initialized to zero. This will count how many elements from the current group match the corresponding elements in `nums`.
+**Happy Coding! 🎉**
 
-   ```cpp
-   int matchCnt = 0;
-   ```
-
-6. **Inner While Loop**: This nested loop checks for consecutive matches between `group[grpIdx]` and the corresponding elements in `nums`, starting from `numsIdx`.
-
-   ```cpp
-   while(numsIdx + matchCnt < nums.size() &&
-         matchCnt < group[grpIdx].size() &&
-         nums[numsIdx + matchCnt] == group[grpIdx][matchCnt])
-       matchCnt++;
-   ```
-
-7. **Check for Full Match**: After the inner loop, the algorithm checks if the entire current group was matched.
-
-   ```cpp
-   if(matchCnt == group[grpIdx].size()) {
-   ```
-
-   - If matched, both pointers are advanced: `grpIdx` is incremented to check the next group, and `numsIdx` is updated to skip the matched elements in `nums`.
-
-   ```cpp
-       grpIdx++;
-       numsIdx += matchCnt;
-   ```
-
-   - If not matched, simply increment `numsIdx` to try the next potential starting point in `nums`.
-
-   ```cpp
-   } else numsIdx++;
-   ```
-
-8. **Final Result**: After completing the traversal, the function checks if all groups were matched and returns the result.
-
-   ```cpp
-   return grpIdx == group.size();
-   ```
-
-### Complexity
-
-- **Time Complexity**: The time complexity of the algorithm is \(O(n + m)\), where \(n\) is the length of `nums` and \(m\) is the total number of elements across all groups in `group`. This is efficient as we only make a single pass through both arrays.
-
-- **Space Complexity**: The space complexity is \(O(1)\) since no additional data structures are used that grow with the input size; only a few integer variables are utilized.
-
-### Conclusion
-
-The `canChoose` method is an effective solution to determine if a series of groups can be sequentially chosen from an integer array while preserving order and contiguity. Utilizing a two-pointer technique allows the algorithm to efficiently traverse the input data without requiring nested loops, leading to an optimal solution.
-
-This method demonstrates the power of iteration and matching algorithms in competitive programming. By structuring the algorithm to check for contiguous sequences, it achieves both clarity and performance. 
-
-In practical applications, this approach could be adapted for tasks such as substring matching, pattern recognition, or validating sequences in larger datasets, making it a versatile tool in the software developer's toolkit. 
-
-Overall, the `canChoose` function showcases essential algorithmic principles that can be applied to a wide array of programming challenges, encouraging best practices in code efficiency and readability.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/form-array-by-concatenating-subarrays-of-another-array/description/)
 

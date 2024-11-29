@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "zHz0Ut1r-_8"
 youtube_upload_date="2023-04-20"
 youtube_thumbnail="https://i.ytimg.com/vi/zHz0Ut1r-_8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,125 +28,203 @@ youtube_thumbnail="https://i.ytimg.com/vi/zHz0Ut1r-_8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the root of a binary tree. Determine the maximum width of the tree, which is defined as the maximum width among all levels. The width of a level is the distance between the leftmost and rightmost non-null nodes, including null nodes in between that would be present in a complete binary tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of a binary tree represented as an array of integers, where each integer is a node value or null if the node does not exist.
+- **Example:** `root = [1, 3, 2, 5, 3, null, 9]`
+- **Constraints:**
+	- 1 <= number of nodes <= 3000
+	- -100 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int widthOfBinaryTree(TreeNode* root) {
-        if(root == NULL) return 0;
-        queue<pair<TreeNode*, int>> q;
-        int width = 0;
-        q.push({root, 0});
-        while(!q.empty()) {
-            int f = q.front().second;
-            int b = q.back().second;
-            int cnt = q.size();
-            for(int i = 0; i < cnt; i++) {
-                TreeNode* elem = q.front().first;
-                int idx = q.front().second - b;
-                q.pop();
-                if(elem->left  != NULL) q.push({elem->left,  2 * idx + 1});
-                if(elem->right != NULL) q.push({elem->right, 2 * idx + 2});                
-            }
-            width = max(width, b - f + 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the maximum width of the binary tree.
+- **Example:** `4`
+- **Constraints:**
+	- The output is guaranteed to be within the range of a 32-bit signed integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the maximum width of the binary tree by finding the maximum width across all levels of the tree.
+
+- 1. Use a breadth-first search (BFS) approach to traverse the tree level by level.
+- 2. At each level, compute the width by calculating the difference between the positions of the leftmost and rightmost non-null nodes.
+- 3. Keep track of the maximum width encountered during the traversal.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree is represented as a complete binary tree with null values for missing nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [1, 3, 2, 5, 3, null, 9]`  \
+  **Explanation:** The maximum width is at level 3 with the nodes [5, 3, null, 9], which gives a width of 4.
+
+- **Input:** `root = [1, 3, 2, 5, null, null, 9, 6, null, 7]`  \
+  **Explanation:** The maximum width is at level 4 with the nodes [6, null, null, null, null, null, 7], which gives a width of 7.
+
+{{< dots >}}
+## Approach 🚀
+The approach for this problem uses a breadth-first search (BFS) to traverse the tree level by level, calculating the width at each level.
+
+### Initial Thoughts 💭
+- We can use BFS to explore each level of the tree.
+- To calculate the width, we need to track the positions of nodes at each level.
+- We should be able to find the width by using a queue to track the nodes and their positions in the tree.
+{{< dots >}}
+### Edge Cases 🌐
+- The tree will always have at least one node.
+- The algorithm needs to handle large trees with up to 3000 nodes efficiently.
+- If a tree contains null values at various positions, these should be counted when calculating the width of the tree.
+- Ensure that the width is calculated by including null nodes in the level width.
+{{< dots >}}
+## Code 💻
+```cpp
+int widthOfBinaryTree(TreeNode* root) {
+    if(root == NULL) return 0;
+    queue<pair<TreeNode*, int>> q;
+    int width = 0;
+    q.push({root, 0});
+    while(!q.empty()) {
+        int f = q.front().second;
+        int b = q.back().second;
+        int cnt = q.size();
+        for(int i = 0; i < cnt; i++) {
+            TreeNode* elem = q.front().first;
+            int idx = q.front().second - b;
+            q.pop();
+            if(elem->left  != NULL) q.push({elem->left,  2 * idx + 1});
+            if(elem->right != NULL) q.push({elem->right, 2 * idx + 2});                
         }
-        return width;
+        width = max(width, b - f + 1);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand requires determining the **maximum width of a binary tree**. The width of a binary tree is defined as the number of nodes on the **longest level** of the tree. To calculate this width efficiently, we need to consider both the **level structure** and the **position of nodes** at each level.
-
-- The binary tree nodes are given by the `TreeNode` struct, which contains three fields: `val` (the value of the node), `left` (pointer to the left child), and `right` (pointer to the right child).
-- The goal is to return the maximum width of the binary tree, which is the maximum number of nodes present at any level of the tree.
-
-### Approach
-
-To calculate the maximum width of a binary tree, we can take advantage of **level-order traversal** (also known as **breadth-first traversal**). The general approach is as follows:
-
-1. Use a **queue** to implement the level-order traversal of the binary tree.
-2. At each level, record the **position of the nodes**. The position can be calculated by assigning each node an index that reflects its relative position within the level.
-3. For each level, calculate the difference between the first and last node positions and update the width accordingly.
-4. Track the maximum width observed during the traversal.
-
-### Code Breakdown (Step by Step)
-
-The algorithm is implemented in the `Solution` class with the `widthOfBinaryTree` function. Let's break down the code step by step.
-
-#### 1. **Edge Case Handling (Empty Tree)**
-```cpp
-if(root == NULL) return 0;
-```
-- Before starting the main logic, we handle the edge case where the root is `NULL`. In this case, the width is obviously `0`, and we return `0`.
-
-#### 2. **Queue Initialization**
-```cpp
-queue<pair<TreeNode*, int>> q;
-int width = 0;
-q.push({root, 0});
-```
-- We declare a queue of pairs: each pair consists of a `TreeNode*` (the node) and an integer (its index at that level).
-- We initialize the queue by pushing the root node with an index of `0`. This index will represent the position of the root in the tree.
-
-#### 3. **Level-Order Traversal**
-```cpp
-while(!q.empty()) {
-    int f = q.front().second;
-    int b = q.back().second;
-    int cnt = q.size();
-    for(int i = 0; i < cnt; i++) {
-        TreeNode* elem = q.front().first;
-        int idx = q.front().second - b;
-        q.pop();
-        if(elem->left != NULL) q.push({elem->left, 2 * idx + 1});
-        if(elem->right != NULL) q.push({elem->right, 2 * idx + 2});
-    }
-    width = max(width, b - f + 1);
+    return width;
 }
 ```
-- **While loop**: We perform a level-order traversal using a `queue` that stores the nodes along with their respective indices. The traversal continues as long as the queue is not empty.
-- **f (front) and b (back)**: We extract the `front` and `back` elements of the queue to calculate the width at the current level. The index difference between the front and back elements represents the width at that level.
-- **cnt (count)**: The number of elements at the current level. This is equal to the size of the queue at the start of the loop.
-- **For loop**: For each element in the current level:
-  - We compute the relative index (`idx`) of the current node by subtracting the back element's index (`b`) from the current node's index (`q.front().second`).
-  - After processing the current node, we remove it from the queue (`q.pop()`).
-  - If the node has a left child, we add it to the queue with the calculated index `2 * idx + 1`.
-  - Similarly, if the node has a right child, we add it to the queue with the calculated index `2 * idx + 2`.
-  
-- **Width Update**: After processing all nodes at the current level, we calculate the width as `b - f + 1` (difference between the indices of the back and front nodes plus one), and update the `width` variable to store the maximum width encountered so far.
 
-#### 4. **Return the Result**
-```cpp
-return width;
-```
-- Once the level-order traversal is complete, we return the maximum width observed during the process.
+This function calculates the maximum width of a binary tree, which is defined as the maximum number of nodes present at any level of the tree.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int widthOfBinaryTree(TreeNode* root) {
+	```
+	This is the function definition for `widthOfBinaryTree`, which calculates the maximum width of a binary tree. It takes the root node of the tree as input and returns an integer value representing the width.
 
-#### Time Complexity:
-- **O(n)**: Each node is processed once in the `while` loop and within the inner `for` loop. Since each node is added and removed from the queue exactly once, the overall time complexity is linear with respect to the number of nodes, i.e., `O(n)`, where `n` is the number of nodes in the binary tree.
+2. **Base Case**
+	```cpp
+	    if(root == NULL) return 0;
+	```
+	If the tree is empty (root is NULL), return 0 as the width.
 
-#### Space Complexity:
-- **O(n)**: The queue can store up to `n` nodes in the worst case (if the tree is skewed, such as in a degenerate tree). Therefore, the space complexity is proportional to the number of nodes in the tree.
+3. **Queue Initialization**
+	```cpp
+	    queue<pair<TreeNode*, int>> q;
+	```
+	Initialize a queue `q` to store pairs of nodes and their corresponding indices in the tree. The index helps track the position of nodes at each level.
 
-### Conclusion
+4. **Width Initialization**
+	```cpp
+	    int width = 0;
+	```
+	Initialize a variable `width` to track the maximum width of the tree, starting with a value of 0.
 
-This algorithm efficiently calculates the maximum width of a binary tree using a level-order traversal (breadth-first search). By using the indices of the nodes, it effectively computes the width at each level without the need to explicitly store the positions of all nodes at each level. The algorithm handles all edge cases, such as trees with fewer nodes or skewed trees, and provides an optimal solution with a time complexity of `O(n)` and a space complexity of `O(n)`. This approach is well-suited for solving problems involving tree traversal and calculating properties related to the width or levels of binary trees.
+5. **Initial Node Push**
+	```cpp
+	    q.push({root, 0});
+	```
+	Push the root node into the queue with an index of 0.
+
+6. **While Loop Start**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Start a `while` loop that continues as long as the queue is not empty, processing each level of the tree.
+
+7. **Front Node Index**
+	```cpp
+	        int f = q.front().second;
+	```
+	Get the index of the first node in the queue. This index represents the position of the leftmost node at the current level.
+
+8. **Back Node Index**
+	```cpp
+	        int b = q.back().second;
+	```
+	Get the index of the last node in the queue. This index represents the position of the rightmost node at the current level.
+
+9. **Queue Size**
+	```cpp
+	        int cnt = q.size();
+	```
+	Get the number of nodes at the current level by checking the size of the queue.
+
+10. **Level Processing Loop**
+	```cpp
+	        for(int i = 0; i < cnt; i++) {
+	```
+	Start a loop to process each node at the current level.
+
+11. **Pop Front Node**
+	```cpp
+	            TreeNode* elem = q.front().first;
+	```
+	Pop the first node from the queue and retrieve the node itself (`elem`).
+
+12. **Calculate Node Index**
+	```cpp
+	            int idx = q.front().second - b;
+	```
+	Calculate the adjusted index for the current node by subtracting the index of the rightmost node (`b`). This helps to prevent overflow and handle large trees efficiently.
+
+13. **Pop Node from Queue**
+	```cpp
+	            q.pop();
+	```
+	Remove the processed node from the queue.
+
+14. **Push Left Child**
+	```cpp
+	            if(elem->left  != NULL) q.push({elem->left,  2 * idx + 1});
+	```
+	If the current node has a left child, push it to the queue with its new index calculated as `2 * idx + 1`.
+
+15. **Push Right Child**
+	```cpp
+	            if(elem->right != NULL) q.push({elem->right, 2 * idx + 2});
+	```
+	If the current node has a right child, push it to the queue with its new index calculated as `2 * idx + 2`.
+
+16. **Update Maximum Width**
+	```cpp
+	        width = max(width, b - f + 1);
+	```
+	Update the `width` variable with the maximum width of the current level, calculated as the difference between the indices of the last and first nodes, plus one.
+
+17. **Return Result**
+	```cpp
+	    return width;
+	```
+	Return the maximum width of the binary tree.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we process each node once during the BFS traversal.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we use a queue to store nodes during the BFS traversal.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-width-of-binary-tree/description/)
 

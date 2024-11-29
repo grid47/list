@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "OKcrLfR-8mE"
 youtube_upload_date="2022-03-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/OKcrLfR-8mE/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,118 +28,173 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/OKcrLfR-8mE/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array nums and an integer k, return true if there exists a good subarray, otherwise return false. A good subarray is defined as a subarray whose length is at least 2 and the sum of its elements is a multiple of k.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers nums and an integer k.
+- **Example:** `nums = [15, 5, 10, 20], k = 10`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 0 <= nums[i] <= 10^9
+	- 1 <= k <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkSubarraySum(vector<int>& nums, int k) {
-        map<int, int> mp;
-        mp[0] = -1;
-        int sum = 0;
-        for(int i = 0; i < nums.size(); i++) {
-            sum += nums[i];
-            sum %= k;
-            if (mp.count(sum))
-            {
-                if (i - mp[sum] > 1) 
-                    return true;
-            }
-            else mp[sum] = i;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if there exists a good subarray, otherwise return false.
+- **Example:** `true, false`
+- **Constraints:**
+	- The output is a boolean value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if there exists a subarray of length at least 2 whose sum is a multiple of k.
+
+- 1. Use a running sum of elements while iterating through the array.
+- 2. Compute the modulo of the sum with k at each step.
+- 3. If the same modulo is encountered at a later index, the sum of the subarray between those two indices is a multiple of k.
+- 4. Ensure that the length of the subarray is at least 2 before confirming it as a valid subarray.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always consist of valid integers and the array length will be within the given bounds.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [15, 5, 10, 20], k = 10`  \
+  **Explanation:** The subarray [5, 10] has a sum of 15, which is a multiple of 10.
+
+- **Input:** `nums = [5, 8, 3, 7], k = 7`  \
+  **Explanation:** No subarray has a sum that is a multiple of 7.
+
+- **Input:** `nums = [10, 5, 15, 10], k = 10`  \
+  **Explanation:** The subarray [10, 5, 15, 10] has a sum of 40, which is a multiple of 10.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses a running sum with modulo to track possible subarrays. By using a map to store previous sums and their corresponding indices, we can efficiently check if a valid subarray exists.
+
+### Initial Thoughts 💭
+- Using the modulo operation allows us to easily check if the sum of elements in a subarray is a multiple of k.
+- The solution can be optimized by keeping track of previous sums modulo k to avoid checking every possible subarray.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty or contains only one element, return false.
+- The algorithm should be optimized for large inputs, with a time complexity of O(n).
+- The value of k should be handled for large integers, especially when k is 1 or very large.
+- The solution should handle up to 10^5 elements in the array efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+bool checkSubarraySum(vector<int>& nums, int k) {
+    map<int, int> mp;
+    mp[0] = -1;
+    int sum = 0;
+    for(int i = 0; i < nums.size(); i++) {
+        sum += nums[i];
+        sum %= k;
+        if (mp.count(sum))
+        {
+            if (i - mp[sum] > 1) 
+                return true;
         }
-        return false;
+        else mp[sum] = i;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires checking if there exists a continuous subarray of length at least two within a given list of integers, `nums`, such that the sum of the subarray is a multiple of an integer `k`. In other words, we need to find out if any subarray's sum, divided by `k`, yields a remainder of zero.
-
-### Approach
-
-This problem can be efficiently solved using modular arithmetic and a hashmap (or dictionary). The approach hinges on understanding that if two cumulative sums at different indices leave the same remainder when divided by `k`, then the sum of the numbers between these indices is divisible by `k`. This technique allows us to track remainders of cumulative sums and determine if we encounter a repeated remainder in a non-overlapping subarray.
-
-Here’s the approach broken down:
-
-1. **Initialize Variables**:
-   - `sum` is used to accumulate the cumulative sum of `nums` as we iterate through the array.
-   - `mp` is a hashmap to store the remainders of `sum` modulo `k` and their corresponding indices, allowing us to detect cycles in remainders.
-   - Initialize `mp` with `{0: -1}` to handle cases where a valid subarray starts from the beginning of `nums`.
-
-2. **Iterate through the Array**:
-   - For each element in `nums`, add it to `sum` to get the cumulative sum up to that index.
-   - Calculate `sum % k` to get the remainder of the cumulative sum when divided by `k`.
-
-3. **Check for Repeated Remainders**:
-   - If this remainder has been seen before (exists in `mp`), it means there’s a subarray whose sum is divisible by `k`.
-   - Check the distance between the current index and the last index where this remainder was seen. If the distance is greater than 1, we found a valid subarray, so return `true`.
-   - If the remainder is new, store it in `mp` along with its index.
-
-4. **Return False if No Valid Subarray is Found**:
-   - If the loop completes without finding a valid subarray, return `false`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-map<int, int> mp;
-mp[0] = -1;
-int sum = 0;
-```
-
-- `mp` is initialized with `{0: -1}`. This handles cases where a valid subarray starts from the beginning of `nums`.
-- `sum` is initialized to 0 and will be used to calculate cumulative sums.
-
-#### Step 2: Loop Through the Array
-
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    sum += nums[i];
-    sum %= k;
-```
-
-- The `for` loop iterates through each element in `nums`.
-- For each element, `sum += nums[i]` updates the cumulative sum.
-- `sum %= k` takes the remainder of `sum` divided by `k`.
-
-#### Step 3: Check if the Remainder Exists in `mp`
-
-```cpp
-if (mp.count(sum)) {
-    if (i - mp[sum] > 1) 
-        return true;
-}
-else {
-    mp[sum] = i;
+    return false;
 }
 ```
 
-- If `sum` is already a key in `mp`, this indicates a possible subarray with a sum that’s divisible by `k`.
-- Check if `i - mp[sum] > 1` to ensure the subarray has a length of at least 2. If true, return `true`.
-- If `sum` isn’t in `mp`, store `sum` in `mp` with its corresponding index `i`.
+This function checks if there is a contiguous subarray whose sum is divisible by `k`. It uses a map to store the remainder of the cumulative sum and checks if the same remainder is seen again with a sufficient gap between indices.
 
-#### Step 4: Return False if No Valid Subarray Found
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool checkSubarraySum(vector<int>& nums, int k) {
+	```
+	Defines the function `checkSubarraySum`, which takes an array `nums` and an integer `k` as inputs and returns a boolean indicating if a subarray sum is divisible by `k`.
 
-```cpp
-return false;
-```
+2. **Variable Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a map `mp` to store the cumulative sum modulo `k` and the corresponding index.
 
-- If the function completes the loop without finding any valid subarray, it returns `false`.
+3. **Edge Case Initialization**
+	```cpp
+	    mp[0] = -1;
+	```
+	Adds a base case to the map, setting the value `-1` for the key `0` to handle edge cases where the subarray starts at index 0.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initializes the variable `sum` to 0, which will keep track of the cumulative sum of the elements in `nums`.
 
-#### Time Complexity
-- The time complexity is **O(n)**, where `n` is the length of `nums`, because we only iterate through `nums` once.
+5. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Starts a loop to iterate through each element of the array `nums`.
 
-#### Space Complexity
-- The space complexity is **O(min(k, n))**, as the hashmap `mp` stores at most `min(k, n)` keys due to the `sum % k` operation, where each unique remainder requires storage.
+6. **Cumulative Sum Calculation**
+	```cpp
+	        sum += nums[i];
+	```
+	Adds the current element `nums[i]` to the cumulative sum `sum`.
 
-### Conclusion
+7. **Modulo Operation**
+	```cpp
+	        sum %= k;
+	```
+	Takes the modulo of the cumulative sum with `k`, ensuring the sum remains within the bounds of `k`.
 
-This solution efficiently finds a continuous subarray with a sum that’s a multiple of `k` by leveraging modular arithmetic and a hashmap. Using modular properties to track remainders allows for a compact, optimized solution compared to traditional approaches that might involve nested loops or explicit subarray calculations. This approach is ideal for large datasets, providing a clear path to solving the problem in linear time.
+8. **Map Lookup**
+	```cpp
+	        if (mp.count(sum))
+	```
+	Checks if the cumulative sum modulo `k` has been seen before by looking it up in the map `mp`.
+
+9. **Subarray Check**
+	```cpp
+	            if (i - mp[sum] > 1) 
+	```
+	Checks if the difference between the current index `i` and the index stored in `mp[sum]` is greater than 1, which ensures there is a valid subarray.
+
+10. **Return True**
+	```cpp
+	                return true;
+	```
+	If a valid subarray is found, return `true` indicating the presence of a subarray whose sum is divisible by `k`.
+
+11. **Map Insertion**
+	```cpp
+	        else mp[sum] = i;
+	```
+	If the cumulative sum modulo `k` is not found in the map, insert it along with the current index `i` into `mp`.
+
+12. **Return False**
+	```cpp
+	    return false;
+	```
+	Returns `false` if no subarray whose sum is divisible by `k` is found.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n), where n is the length of the array.
+- **Worst Case:** O(n), where n is the length of the array.
+
+In the worst case, we check each element once, resulting in linear time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no valid subarray exists and no map entries are used.
+- **Worst Case:** O(n), where n is the number of elements in the array.
+
+The space complexity is linear with respect to the number of elements, due to the map storing intermediate sums.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/continuous-subarray-sum/description/)
 

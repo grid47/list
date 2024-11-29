@@ -14,129 +14,202 @@ img_src = ""
 youtube = "rHZD8NrMq5s"
 youtube_upload_date="2022-04-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/rHZD8NrMq5s/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `matches` where each element `matches[i] = [winneri, loseri]` indicates that player `winneri` defeated player `loseri` in a match. Your task is to return a list `answer` of size 2 where:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
-        unordered_set<int> u;
-        map<int, int> ff;
-        int n = matches.size();
-        for(int i = 0; i < n; i++) {
-            u.insert(matches[i][0]);
-            u.insert(matches[i][1]);
-            ff[matches[i][1]]++;
-        }
-        vector<vector<int>> arr(2);
-        for(auto it = u.begin(); it != u.end(); it++) {
-            if(!ff.count(*it)) arr[0].push_back(*it);
-            else if(ff[*it] == 1) arr[1].push_back(*it);
-        }
-        sort(arr[0].begin(), arr[0].end());
-        sort(arr[1].begin(), arr[1].end());
-        return arr;
+- `answer[0]` contains the list of players who have never lost a match.
+- `answer[1]` contains the list of players who have lost exactly one match.
+
+The players in both lists should be sorted in increasing order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of pairs `matches[i]` where each pair represents a match result. Each pair consists of two integers: the winner and the loser of the match.
+- **Example:** `matches = [[1, 3], [2, 3], [3, 6], [5, 6], [5, 7], [4, 5], [4, 8], [4, 9], [10, 4], [10, 9]]`
+- **Constraints:**
+	- 1 <= matches.length <= 10^5
+	- matches[i].length == 2
+	- 1 <= winneri, loseri <= 10^5
+	- winneri != loseri
+	- All matches[i] are unique.
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list `answer` with two elements: the first element is a list of players who have never lost a match, and the second element is a list of players who have lost exactly one match. Both lists should be sorted in increasing order.
+- **Example:** `Output: [[1, 2, 10], [4, 5, 7, 8]]`
+- **Constraints:**
+	- Both the lists `answer[0]` and `answer[1]` should be sorted in increasing order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the players who have lost no matches and exactly one match by tracking match results and counting losses for each player.
+
+- Create a set of all players who have participated in at least one match.
+- Create a map to count the number of losses for each player.
+- Iterate over the set of players and check how many times each player has lost. Players with no losses go into the first list, and players with exactly one loss go into the second list.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will be no players with both zero and exactly one loss.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: matches = [[1, 3], [2, 3], [3, 6], [5, 6], [5, 7], [4, 5], [4, 8], [4, 9], [10, 4], [10, 9]]`  \
+  **Explanation:** Players 1, 2, and 10 have never lost a match. Players 4, 5, 7, and 8 each lost exactly one match. Players 3, 6, and 9 have lost more than one match.
+
+- **Input:** `Input: matches = [[2, 3], [1, 3], [5, 4], [6, 4]]`  \
+  **Explanation:** Players 1, 2, 5, and 6 have never lost a match, while no player has lost exactly one match.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the `matches` array and tracking the number of losses for each player. Players who have no losses are added to the first list, while those with exactly one loss are added to the second list.
+
+### Initial Thoughts 💭
+- We need to process the match results efficiently to track losses for each player.
+- Using a map to count losses for each player should allow us to solve the problem in linear time.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty matches arrays are not allowed, as the constraints specify that `matches.length >= 1`.
+- The solution must handle up to 100,000 matches efficiently.
+- If a player has never lost any match, they should be included in the first list, and if a player lost exactly one match, they should be included in the second list.
+- The results must be sorted in increasing order.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+    unordered_set<int> u;
+    map<int, int> ff;
+    int n = matches.size();
+    for(int i = 0; i < n; i++) {
+        u.insert(matches[i][0]);
+        u.insert(matches[i][1]);
+        ff[matches[i][1]]++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the winners and the losers of a series of matches in a tournament. Each match has two players: one is the winner, and the other is the loser. The task is to return two lists:
-1. The first list should contain players who never lost any match (i.e., they won all their matches).
-2. The second list should contain players who lost exactly one match.
-
-We are given a list of `matches` where each match is represented as a pair of integers `[winner, loser]`. We need to efficiently calculate which players meet the criteria of never losing and losing exactly one match.
-
-### Approach
-
-To solve this problem, we can take the following approach:
-1. **Track All Players**: We need to keep track of all players involved in the matches (both winners and losers).
-2. **Track Losses**: For each player, track how many times they have lost. This will help us identify players who have lost exactly once and those who have never lost.
-3. **Organize Players into Groups**: Once the losses are counted, we can classify players into two categories:
-   - Players who have never lost a match.
-   - Players who have lost exactly one match.
-4. **Return the Results**: Sort both lists and return them in the required order.
-
-We will use an `unordered_set` to store all unique players and a `map` to count the number of losses for each player. Finally, we will iterate through the players, sorting them based on the criteria, and return the results as two lists.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Containers
-```cpp
-unordered_set<int> u;
-map<int, int> ff;
-int n = matches.size();
-```
-- `u` is an unordered set to store all unique players from the matches. This ensures we have a list of every player, whether they are a winner or a loser.
-- `ff` is a map that keeps track of the number of losses for each player. The key is the player ID, and the value is the number of losses that player has.
-- `n` stores the number of matches, which is the size of the `matches` vector.
-
-#### Step 2: Populate the Containers
-```cpp
-for(int i = 0; i < n; i++) {
-    u.insert(matches[i][0]);
-    u.insert(matches[i][1]);
-    ff[matches[i][1]]++;
+    vector<vector<int>> arr(2);
+    for(auto it = u.begin(); it != u.end(); it++) {
+        if(!ff.count(*it)) arr[0].push_back(*it);
+        else if(ff[*it] == 1) arr[1].push_back(*it);
+    }
+    sort(arr[0].begin(), arr[0].end());
+    sort(arr[1].begin(), arr[1].end());
+    return arr;
 }
 ```
-- The loop iterates over each match in the `matches` vector.
-- `matches[i][0]` is the winner, and `matches[i][1]` is the loser of the current match.
-- We insert both the winner and the loser into the `unordered_set` `u` to ensure all players are accounted for.
-- We increment the count of losses for the loser in the map `ff`.
 
-#### Step 3: Classify Players Based on Losses
-```cpp
-vector<vector<int>> arr(2);
-for(auto it = u.begin(); it != u.end(); it++) {
-    if(!ff.count(*it)) arr[0].push_back(*it);
-    else if(ff[*it] == 1) arr[1].push_back(*it);
-}
-```
-- `arr` is a 2D vector with two lists:
-  - `arr[0]` will store players who have never lost a match.
-  - `arr[1]` will store players who have lost exactly one match.
-- The loop iterates through all the players in `u`.
-  - If a player does not appear in the `ff` map, it means they have never lost a match, so we add them to `arr[0]`.
-  - If a player has exactly one loss (i.e., `ff[*it] == 1`), we add them to `arr[1]`.
+This code defines a solution for finding winners and losers from a list of match results. It stores the participants and counts their losses, sorting them into two categories: winners and losers. The result is returned as a 2D vector.
 
-#### Step 4: Sort the Results
-```cpp
-sort(arr[0].begin(), arr[0].end());
-sort(arr[1].begin(), arr[1].end());
-```
-- After categorizing the players, we sort both `arr[0]` and `arr[1]` in ascending order. This ensures that the players are listed in sorted order in the final result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+	```
+	The `findWinners` function is declared, which takes a vector of match results and returns a 2D vector containing winners and players with only one loss.
 
-#### Step 5: Return the Final Results
-```cpp
-return arr;
-```
-- Finally, we return the 2D vector `arr` containing the two lists: one for players who never lost and one for players who lost exactly once.
+2. **Variable Declaration**
+	```cpp
+	    unordered_set<int> u;
+	```
+	An unordered set `u` is declared to store all unique players who participated in the matches.
 
-### Complexity
+3. **Variable Declaration**
+	```cpp
+	    map<int, int> ff;
+	```
+	A map `ff` is declared to count the number of losses for each player.
 
-#### Time Complexity:
-- **O(n)** for iterating over the `matches` vector and populating the unordered set `u` and map `ff`. The time complexity for inserting into an unordered set or a map is on average O(1).
-- **O(m log m)** for sorting both `arr[0]` and `arr[1]`, where `m` is the total number of unique players (which is at most 2n, since each match involves two players).
-- Overall time complexity: **O(n + m log m)**, where `n` is the number of matches and `m` is the number of unique players involved in those matches.
+4. **Variable Initialization**
+	```cpp
+	    int n = matches.size();
+	```
+	The variable `n` is initialized to the size of the `matches` vector, representing the number of matches.
 
-#### Space Complexity:
-- **O(m)** for storing the unique players in the unordered set `u`.
-- **O(m)** for storing the loss count in the map `ff`.
-- **O(m)** for storing the two result lists in `arr`.
-- Overall space complexity: **O(m)**, where `m` is the number of unique players.
+5. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is started to iterate over each match in the `matches` vector.
 
-### Conclusion
+6. **Insert Operation**
+	```cpp
+	        u.insert(matches[i][0]);
+	```
+	The first player of each match is inserted into the set `u` to ensure they are tracked as participants.
 
-This solution efficiently solves the problem by using a combination of an unordered set and a map. It tracks all players and counts their losses to identify those who never lost and those who lost exactly once. The approach has an optimal time complexity of **O(n + m log m)**, where `n` is the number of matches and `m` is the number of unique players. The solution also ensures that the results are returned in sorted order, which is required by the problem statement.
+7. **Insert Operation**
+	```cpp
+	        u.insert(matches[i][1]);
+	```
+	The second player of each match is inserted into the set `u` to ensure they are also tracked as participants.
 
-The space complexity is **O(m)**, which is efficient for the problem, as it only stores the necessary information about players and their losses. This solution is well-suited for handling large input sizes and provides a clear, concise method for solving the problem.
+8. **Map Update**
+	```cpp
+	        ff[matches[i][1]]++;
+	```
+	The number of losses for the second player of the match is incremented in the map `ff`.
+
+9. **Vector Initialization**
+	```cpp
+	    vector<vector<int>> arr(2);
+	```
+	A 2D vector `arr` is initialized with two empty vectors to store the winners and players with exactly one loss.
+
+10. **Loop**
+	```cpp
+	    for(auto it = u.begin(); it != u.end(); it++) {
+	```
+	A loop is started to iterate over each player in the set `u`.
+
+11. **Condition Check**
+	```cpp
+	        if(!ff.count(*it)) arr[0].push_back(*it);
+	```
+	If the player has no losses (i.e., not in the `ff` map), they are added to the first subvector `arr[0]`, which tracks the winners.
+
+12. **Condition Check**
+	```cpp
+	        else if(ff[*it] == 1) arr[1].push_back(*it);
+	```
+	If the player has exactly one loss, they are added to the second subvector `arr[1]`, which tracks the players with one loss.
+
+13. **Sort Operation**
+	```cpp
+	    sort(arr[0].begin(), arr[0].end());
+	```
+	The first subvector of winners is sorted in ascending order.
+
+14. **Sort Operation**
+	```cpp
+	    sort(arr[1].begin(), arr[1].end());
+	```
+	The second subvector of players with exactly one loss is sorted in ascending order.
+
+15. **Return Statement**
+	```cpp
+	    return arr;
+	```
+	The 2D vector `arr` containing the winners and players with exactly one loss is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of matches.
+- **Average Case:** O(n), since we process each match and player in linear time.
+- **Worst Case:** O(n), as the input size can go up to 100,000 matches.
+
+The time complexity is linear in terms of the number of matches.
+
+### Space Complexity 💾
+- **Best Case:** O(n), since we need space for the players and their loss counts.
+- **Worst Case:** O(n), where n is the number of players in the worst case.
+
+The space complexity is linear in terms of the number of players, which is proportional to the number of matches.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-players-with-zero-or-one-losses/description/)
 

@@ -14,141 +14,235 @@ img_src = ""
 youtube = "AZA8orksO4w"
 youtube_upload_date="2023-01-25"
 youtube_thumbnail="https://i.ytimg.com/vi/AZA8orksO4w/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a directed graph with n nodes, where each node can have at most one outgoing edge. You are provided with an array `edges` representing the graph, where `edges[i]` indicates a directed edge from node `i` to node `edges[i]` (or -1 if there is no outgoing edge). You are also given two nodes `node1` and `node2`. The task is to return the node that is reachable from both `node1` and `node2`, such that the maximum of the distances from `node1` and `node2` to that node is minimized. If there are multiple such nodes, return the smallest index, or return `-1` if no such node exists.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the following elements: an array `edges` of size n (1 <= n <= 10^5) representing the graph, and two integers `node1` and `node2` (0 <= node1, node2 < n).
+- **Example:** `edges = [1, 2, -1], node1 = 0, node2 = 2`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- -1 <= edges[i] < n
+	- edges[i] != i
+	- 0 <= node1, node2 < n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    void dfs(int node, vector<int> &edge, vector<int> &vis, int x) {
-        vis[node] = x;
-        if(edge[node] != -1 && vis[edge[node]] == -1)
-            dfs(edge[node], edge, vis, x + 1);
-    }
-    
-    int closestMeetingNode(vector<int>& edges, int node1, int node2) {
-        int n = edges.size();
-        vector<int> dist1(n, -1);
-        dfs(node1, edges, dist1, 0);
-        vector<int> dist2(n, -1);
-        dfs(node2, edges, dist2, 0);
-        
-        int dist, ans = -1, sol = INT_MAX;
-        for(int i = 0; i < n; i++) {
-            if(dist1[i] == -1 || dist2[i] == -1)
-                continue;
-            else
-                dist = max(dist1[i], dist2[i]);
-            
-            if(dist < sol) {
-                sol = dist;
-                ans = i;
-            }
-        }
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the index of the node that can be reached from both `node1` and `node2` with the minimized maximum distance, or -1 if no such node exists.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- Return the node index with the smallest maximum distance.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the node that minimizes the maximum distance from both `node1` and `node2` to that node.
 
-Given a directed graph where each node points to exactly one other node or to no node at all, you are given two starting nodes. The task is to find the "closest meeting node" — the node that can be reached by both starting nodes such that the maximum distance traveled by either node is minimized. If there are multiple such nodes, the smallest index should be returned.
+- Perform Depth-First Search (DFS) to calculate the distance from `node1` and `node2` to all other nodes.
+- Iterate through all nodes, calculate the maximum distance for each node, and track the smallest such maximum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph may contain cycles, but each node has at most one outgoing edge.
+- There is no self-loop (edges[i] != i).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `edges = [2, 2, 3, -1], node1 = 0, node2 = 1`  \
+  **Explanation:** The possible distances to nodes from `node1` and `node2` are compared. The maximum of the distances to each node is calculated, and node 2 minimizes this value.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We can use DFS to calculate the distances from both `node1` and `node2` to all other nodes, and then find the node that minimizes the maximum distance.
 
-This problem is solved using Depth-First Search (DFS) to calculate distances from both starting nodes (`node1` and `node2`) to each other node. The idea is to determine the distance from each starting node to other nodes in the graph and then identify the node with the minimum "maximum" distance from both start points. Here’s a breakdown of how it works:
-
-1. **Using DFS to Track Distances:**
-   - We define a helper function `dfs()` that performs a depth-first traversal from a given node, calculating the distance to other reachable nodes.
-   - As it traverses, it records the distance to each node in a `vis` vector, which acts as a distance array.
-
-2. **Calculating Distances from Each Starting Node:**
-   - The main function initializes two vectors (`dist1` and `dist2`) for tracking distances from `node1` and `node2`, respectively.
-   - It calls `dfs()` twice, first with `node1` and `dist1`, and then with `node2` and `dist2`, to populate the distances from each node.
-
-3. **Finding the Closest Meeting Node:**
-   - After obtaining distances from both nodes, the algorithm iterates over all nodes.
-   - For each node reachable from both starting points, it calculates the maximum distance from either starting node (`dist1[i]` and `dist2[i]`).
-   - The node with the smallest "maximum distance" is selected as the closest meeting node. If there are multiple nodes with the same maximum distance, the one with the smallest index is chosen.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Define DFS to Calculate Distances
-
+### Initial Thoughts 💭
+- We need to calculate the distance from `node1` and `node2` to each other node in the graph.
+- The maximum of these two distances for each node should be minimized.
+- The distance for a node can be computed with a DFS traversal. By storing the distances from both `node1` and `node2`, we can easily compute the desired result.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty graph (n = 0) is not possible due to constraints.
+- Ensure the solution is efficient for large graphs with up to 10^5 nodes.
+- Cycles in the graph may cause nodes to be revisited multiple times.
+- Make sure to handle graphs with cycles and ensure that DFS terminates properly in such cases.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 void dfs(int node, vector<int> &edge, vector<int> &vis, int x) {
     vis[node] = x;
     if(edge[node] != -1 && vis[edge[node]] == -1)
         dfs(edge[node], edge, vis, x + 1);
 }
-```
 
-- The `dfs()` function recursively traverses the graph starting from `node`.
-- It marks each node with a distance `x`, representing the steps taken from the starting node.
-- If the current node points to another node (i.e., `edge[node] != -1`) and that node hasn’t been visited (`vis[edge[node]] == -1`), the function calls itself with the next node and increments the distance.
-
-#### Step 2: Calculate Distances from `node1` and `node2`
-
-```cpp
-int n = edges.size();
-vector<int> dist1(n, -1);
-dfs(node1, edges, dist1, 0);
-vector<int> dist2(n, -1);
-dfs(node2, edges, dist2, 0);
-```
-
-- We initialize two distance vectors (`dist1` and `dist2`) with `-1`, indicating that nodes haven’t been visited.
-- Using `dfs()`, we calculate distances from `node1` and `node2`, filling `dist1` and `dist2` with the shortest distances from each respective starting node to each reachable node.
-
-#### Step 3: Find the Closest Meeting Node
-
-```cpp
-int dist, ans = -1, sol = INT_MAX;
-for(int i = 0; i < n; i++) {
-    if(dist1[i] == -1 || dist2[i] == -1)
-        continue;
-    else
-        dist = max(dist1[i], dist2[i]);
+int closestMeetingNode(vector<int>& edges, int node1, int node2) {
+    int n = edges.size();
+    vector<int> dist1(n, -1);
+    dfs(node1, edges, dist1, 0);
+    vector<int> dist2(n, -1);
+    dfs(node2, edges, dist2, 0);
     
-    if(dist < sol) {
-        sol = dist;
-        ans = i;
+    int dist, ans = -1, sol = INT_MAX;
+    for(int i = 0; i < n; i++) {
+        if(dist1[i] == -1 || dist2[i] == -1)
+            continue;
+        else
+            dist = max(dist1[i], dist2[i]);
+        
+        if(dist < sol) {
+            sol = dist;
+            ans = i;
+        }
     }
+    
+    return ans;
 }
 ```
 
-- We iterate through each node to find the one that minimizes the maximum distance between `node1` and `node2`.
-- For each node `i`, if both `dist1[i]` and `dist2[i]` are reachable (`!= -1`), we calculate the maximum of the two distances.
-- If this maximum distance is less than the current `sol`, we update `sol` and set `ans` to the current node.
+The solution uses Depth-First Search (DFS) to calculate the shortest distance for both nodes to all other nodes in the graph. Then, it finds the closest meeting point between the two nodes by comparing their distances from each node.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	void dfs(int node, vector<int> &edge, vector<int> &vis, int x) {
+	```
+	This function performs a DFS traversal starting from the given node. It marks each node with a distance value 'x' to track the distance from the starting node.
 
-```cpp
-return ans;
-```
+2. **Action**
+	```cpp
+	    vis[node] = x;
+	```
+	Mark the current node with the distance 'x' in the visitation array.
 
-- Finally, the node `ans` represents the closest meeting node based on the criteria and is returned as the output.
+3. **Condition**
+	```cpp
+	    if(edge[node] != -1 && vis[edge[node]] == -1)
+	```
+	If the current node has a neighbor and the neighbor has not been visited yet, perform DFS on that neighbor.
 
-### Complexity
+4. **Recursive Call**
+	```cpp
+	        dfs(edge[node], edge, vis, x + 1);
+	```
+	Recursively call DFS for the neighbor node, incrementing the distance 'x' by 1.
 
-#### Time Complexity:
-- **DFS Traversal:** Each DFS call traverses the graph from a starting node, which takes \(O(n)\) time for `n` nodes.
-- **Distance Calculation:** We loop through all nodes once to determine the closest meeting node, which is also \(O(n)\).
-- Therefore, the overall time complexity is \(O(n)\).
+5. **Function Definition**
+	```cpp
+	int closestMeetingNode(vector<int>& edges, int node1, int node2) {
+	```
+	This function finds the closest node where both node1 and node2 can meet by calculating their respective distances from every other node.
 
-#### Space Complexity:
-- The space complexity is \(O(n)\) as we use two vectors (`dist1` and `dist2`) to store distances and additional stack space for recursion in DFS.
+6. **Variable Initialization**
+	```cpp
+	    int n = edges.size();
+	```
+	Store the size of the edges array, which represents the number of nodes in the graph.
 
-### Conclusion
+7. **Variable Initialization**
+	```cpp
+	    vector<int> dist1(n, -1);
+	```
+	Create an array to store the distances for node1, initializing all values to -1 (indicating that no nodes have been visited yet).
 
-This solution efficiently finds the closest meeting node by leveraging DFS to track distances from both starting nodes. It calculates the minimum maximum distance to ensure both nodes can reach the target with the least delay, while also accounting for multiple valid nodes by selecting the smallest index when distances are equal. The use of distance tracking vectors and recursive DFS traversal makes this approach both time-efficient and straightforward, providing an optimal solution to the problem.
+8. **Function Call**
+	```cpp
+	    dfs(node1, edges, dist1, 0);
+	```
+	Call the DFS function for node1 to calculate its distance to all other nodes.
+
+9. **Variable Initialization**
+	```cpp
+	    vector<int> dist2(n, -1);
+	```
+	Create an array to store the distances for node2, initializing all values to -1.
+
+10. **Function Call**
+	```cpp
+	    dfs(node2, edges, dist2, 0);
+	```
+	Call the DFS function for node2 to calculate its distance to all other nodes.
+
+11. **Variable Initialization**
+	```cpp
+	    int dist, ans = -1, sol = INT_MAX;
+	```
+	Initialize variables to store the maximum distance ('dist') and the node with the smallest distance ('ans').
+
+12. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterate over all nodes to find the closest meeting node.
+
+13. **Condition**
+	```cpp
+	        if(dist1[i] == -1 || dist2[i] == -1)
+	```
+	Skip nodes that are not reachable by either node1 or node2.
+
+14. **Action**
+	```cpp
+	            continue;
+	```
+	If a node is unreachable by either of the nodes, continue to the next iteration.
+
+15. **Else Block**
+	```cpp
+	        else
+	```
+	If the node is reachable by both node1 and node2.
+
+16. **Distance Calculation**
+	```cpp
+	            dist = max(dist1[i], dist2[i]);
+	```
+	Calculate the maximum of the two distances (the furthest distance for each node) to determine the meeting point.
+
+17. **Condition**
+	```cpp
+	        if(dist < sol) {
+	```
+	If the calculated distance is smaller than the previous solution, update the solution.
+
+18. **Action**
+	```cpp
+	            sol = dist;
+	```
+	Update the smallest distance.
+
+19. **Action**
+	```cpp
+	            ans = i;
+	```
+	Store the current node as the best meeting point.
+
+20. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the node with the smallest maximum distance, which is the closest meeting point.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+Each DFS traversal takes O(n), and iterating through the nodes also takes O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We need O(n) space to store the distances from both `node1` and `node2`.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/description/)
 

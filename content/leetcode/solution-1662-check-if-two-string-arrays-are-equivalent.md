@@ -14,104 +14,154 @@ img_src = ""
 youtube = "ejBwc2oE7ck"
 youtube_upload_date="2023-12-01"
 youtube_thumbnail="https://i.ytimg.com/vi/ejBwc2oE7ck/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two string arrays `word1` and `word2`. Return `true` if these two arrays represent the same string when their elements are concatenated in order, otherwise return `false`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two arrays of strings, `word1` and `word2`.
+- **Example:** `word1 = ["hello", "world"], word2 = ["hell", "oworld"]`
+- **Constraints:**
+	- 1 <= word1.length, word2.length <= 10^3
+	- 1 <= word1[i].length, word2[i].length <= 10^3
+	- 1 <= sum(word1[i].length), sum(word2[i].length) <= 10^3
+	- word1[i] and word2[i] consist of lowercase letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
-        string a,b;
-        for(auto x:word1)
-            a += x;
-        for(auto x:word2)
-            b += x;
-       
-        if(a == b)
-            return 1;
-        
-        return 0;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if the two arrays represent the same string, otherwise return `false`.
+- **Example:** `true`
+- **Constraints:**
+	- The output will be a boolean value.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if the concatenated strings from `word1` and `word2` are equal.
 
-The problem at hand is to determine whether two string arrays, `word1` and `word2`, can be considered equal by concatenating the strings in each array. Each array contains multiple strings, and the goal is to check if the concatenated string formed from the elements of `word1` is the same as the concatenated string formed from the elements of `word2`. The function should return `true` if they are equal and `false` otherwise.
+- Concatenate all strings in `word1` into a single string `str1`.
+- Concatenate all strings in `word2` into a single string `str2`.
+- Compare the two resulting strings and return `true` if they are equal, otherwise return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays `word1` and `word2` will only contain lowercase letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word1 = ["hello", "world"], word2 = ["hell", "oworld"]`  \
+  **Explanation:** Both `word1` and `word2` form the string "helloworld" when concatenated, so the answer is `true`.
 
-### Approach
+- **Input:** `word1 = ["abc", "def"], word2 = ["abcd", "ef"]`  \
+  **Explanation:** The strings formed by `word1` and `word2` are "abcdef" and "abcde", respectively, which are not equal. Therefore, return `false`.
 
-To solve this problem, we can follow a straightforward approach:
+{{< dots >}}
+## Approach 🚀
+We need to compare the concatenated strings from `word1` and `word2` and check if they are identical.
 
-1. **Initialize two strings**: Create two empty strings to hold the concatenated results of the string arrays `word1` and `word2`.
-2. **Concatenate elements**: Iterate through each array and concatenate its elements into the respective string.
-3. **Compare the strings**: After concatenating both arrays, compare the two strings.
-4. **Return the result**: Return `true` if the strings are equal; otherwise, return `false`.
-
-This approach is efficient and easy to understand, leveraging the string concatenation capabilities of the C++ Standard Library.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the implementation step by step:
-
+### Initial Thoughts 💭
+- We can solve this by converting both arrays into strings and then comparing them.
+- Iterate through both arrays, concatenate their elements into two separate strings, and compare the results.
+{{< dots >}}
+### Edge Cases 🌐
+- If either `word1` or `word2` is empty, return `false` if the other is not empty.
+- The solution should efficiently handle arrays with a total length of up to 1000 characters.
+- If the strings formed from both arrays are the same, return `true`.
+- The total length of the strings in both arrays will not exceed 1000 characters.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+    string a,b;
+    for(auto x:word1)
+        a += x;
+    for(auto x:word2)
+        b += x;
+   
+    if(a == b)
+        return 1;
+    
+    return 0;
+}
 ```
-- The `Solution` class defines a public method `arrayStringsAreEqual`, which takes two parameters: `word1` and `word2`, both of type `vector<string>`. These vectors represent the arrays of strings that we need to compare.
 
-```cpp
-        string a,b; // Initialize two empty strings
-```
-- We declare two empty strings `a` and `b`. These strings will be used to store the concatenated results of `word1` and `word2`, respectively.
+This function checks if two arrays of strings, when concatenated, form the same string. It constructs full strings for each array and compares them for equality.
 
-```cpp
-        for(auto x:word1) // Iterate through word1
-            a += x; // Concatenate elements into string a
-```
-- A range-based for loop iterates through each string `x` in `word1`. For each string, we append it to the string `a` using the `+=` operator. This results in `a` holding the complete concatenated string from `word1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+	```
+	Defines the function `arrayStringsAreEqual` that takes two arrays of strings and returns a boolean indicating if their concatenated forms are equal.
 
-```cpp
-        for(auto x:word2) // Iterate through word2
-            b += x; // Concatenate elements into string b
-```
-- Similarly, we iterate through each string `x` in `word2` and concatenate it to the string `b`, resulting in `b` holding the complete concatenated string from `word2`.
+2. **Variable Initialization**
+	```cpp
+	    string a,b;
+	```
+	Initializes two strings `a` and `b` to store concatenated results of the arrays `word1` and `word2`.
 
-```cpp
-        if(a == b) // Compare the two concatenated strings
-            return 1; // Return true if they are equal
-```
-- We compare the two concatenated strings `a` and `b`. If they are equal, we return `true` (represented as `1` in C++).
+3. **Looping**
+	```cpp
+	    for(auto x:word1)
+	```
+	Iterates through each string in `word1` to construct the concatenated string `a`.
 
-```cpp
-        return 0; // Return false if they are not equal
-    }
-};
-```
-- If the strings are not equal, we return `false` (represented as `0` in C++).
+4. **String Concatenation**
+	```cpp
+	        a += x;
+	```
+	Appends the current string `x` from `word1` to the concatenated string `a`.
 
-### Complexity
+5. **Looping**
+	```cpp
+	    for(auto x:word2)
+	```
+	Iterates through each string in `word2` to construct the concatenated string `b`.
 
-- **Time Complexity**: The time complexity of this solution is \(O(n + m)\), where \(n\) is the total number of characters in `word1`, and \(m\) is the total number of characters in `word2`. This is because we are traversing through each array once to concatenate the strings.
-  
-- **Space Complexity**: The space complexity is \(O(n + m)\) as well, due to the storage of the concatenated strings `a` and `b`. This space is needed to hold the final results before comparison.
+6. **String Concatenation**
+	```cpp
+	        b += x;
+	```
+	Appends the current string `x` from `word2` to the concatenated string `b`.
 
-### Conclusion
+7. **Condition Check**
+	```cpp
+	    if(a == b)
+	```
+	Checks if the concatenated strings `a` and `b` are equal.
 
-The `arrayStringsAreEqual` method efficiently determines whether two arrays of strings are equivalent by concatenating their elements and comparing the resulting strings. The approach is simple yet effective, utilizing the power of C++ string manipulation to achieve the goal with minimal overhead.
+8. **Return**
+	```cpp
+	        return 1;
+	```
+	Returns `true` (1) if the concatenated strings are equal.
 
-**Key Takeaways**:
-1. **Simplicity**: The solution's simplicity makes it easy to implement and understand, ideal for situations where readability is a priority.
-2. **Efficiency**: With linear time complexity, this approach is efficient for reasonably sized inputs, making it suitable for many practical scenarios.
-3. **C++ Features**: The use of range-based loops and string concatenation showcases some of the modern features of C++ that enhance code clarity and conciseness.
+9. **Return**
+	```cpp
+	    return 0;
+	```
+	Returns `false` (0) if the concatenated strings are not equal.
 
-Overall, this implementation is an excellent example of using basic data structures to solve a problem efficiently, demonstrating that sometimes the simplest solutions are the most effective. The logic is straightforward, allowing for quick debugging and potential extensions should the problem requirements evolve.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) since we concatenate and compare strings, where n is the total number of characters across both arrays.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of concatenated strings.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/description/)
 

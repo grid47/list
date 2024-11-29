@@ -14,135 +14,138 @@ img_src = ""
 youtube = "-VAEXKFWfXo"
 youtube_upload_date="2024-06-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/-VAEXKFWfXo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` representing a sequence of events where each character is either 'E' (a person enters the waiting room) or 'L' (a person leaves the waiting room). The waiting room starts empty. Simulate the events and determine the minimum number of chairs required to ensure there is always a chair available for every person who enters the room.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` containing the characters 'E' and 'L'.
+- **Example:** `Example 1:
+Input: s = "LLLEEEE"
+Output: 3`
+- **Constraints:**
+	- 1 <= s.length <= 50
+	- s consists only of the characters 'E' and 'L'.
+	- s represents a valid sequence of entries and exits.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumChairs(string s) {
-        int mx = 0, cnt = 0;
-        for(char x: s) {
-            cnt += (x == 'E'? 1: -1);
-            mx = max(mx, cnt);
-        }
-        return mx;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of chairs required to accommodate all the people entering the waiting room.
+- **Example:** `Example 1:
+Input: s = "LLLEEEE"
+Output: 3`
+- **Constraints:**
+	- The output will be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to track the number of people in the waiting room at any given time and determine the maximum number of chairs required at any point.
+
+- Initialize a counter to track the number of people in the waiting room.
+- Iterate over the events in the string `s`.
+- For each 'E', increment the counter (a person enters).
+- For each 'L', decrement the counter (a person leaves).
+- Keep track of the maximum value of the counter during the iteration. This represents the maximum number of people in the room at once, which is the minimum number of chairs needed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The sequence of entries and exits is valid (no 'L' without an 'E' before it).
+- The waiting room starts with 0 people and is initially empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** For `s = "LLLEEEE"`, at the start no one is in the room, then 3 people leave and 4 people enter, so the maximum number of people in the room at any time is 3. Therefore, the minimum number of chairs required is 3.
+
+- **Input:** `Example 2:`  \
+  **Explanation:** For `s = "ELELEEL"`, after each entry and exit, the number of people in the room fluctuates between 1 and 2. The maximum number of people in the room at any time is 2, so the minimum number of chairs needed is 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves iterating through the string `s` to simulate each event. We track the number of people in the waiting room at any point and compute the maximum number of people in the room, which gives the number of chairs needed.
+
+### Initial Thoughts 💭
+- We need to track the current number of people in the room and update it as we process each event.
+- The approach should efficiently handle the maximum input size (length up to 50). We will simply keep a counter and update it while tracking the maximum number of people in the room.
+{{< dots >}}
+### Edge Cases 🌐
+- There will never be an empty string as input.
+- The solution should handle strings with lengths up to 50 efficiently.
+- Ensure the solution works with edge cases such as all people leaving immediately or all people entering.
+- Ensure that the number of chairs is calculated accurately even with mixed events of entries and exits.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumChairs(string s) {
+    int mx = 0, cnt = 0;
+    for(char x: s) {
+        cnt += (x == 'E'? 1: -1);
+        mx = max(mx, cnt);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to determine the minimum number of chairs needed in a room where people enter and exit at specific times, represented by a string `s`. Each character in the string represents an event: 'E' for entering the room and 'X' for exiting. The goal is to find out how many chairs are needed to accommodate the maximum number of people in the room at any given time.
-
-### Approach
-
-To solve this problem, the approach revolves around simulating the entry and exit of people based on the sequence of events. The core idea is to track the number of people currently in the room, and at each step, update this number when a person enters or exits. By tracking the maximum number of people in the room at any given time, we can determine the minimum number of chairs required.
-
-The sequence of events (`s`) tells us when people enter ('E') and when they exit ('X'). We will maintain a count of how many people are in the room at each point. The maximum count during the simulation will indicate the peak number of people present in the room simultaneously, and this is the answer we are looking for.
-
-### Code Breakdown (Step by Step)
-
-1. **Initialization**:
-   - We initialize two variables:
-     - `mx`: This variable will store the maximum number of people in the room at any point.
-     - `cnt`: This variable tracks the current number of people in the room as we process the events in the string `s`.
-
-   ```cpp
-   int mx = 0, cnt = 0;
-   ```
-
-2. **Iterating Over the String**:
-   - We loop through each character of the string `s` using a `for` loop.
-   - For each character:
-     - If the character is `'E'`, a person enters the room, so we increment the `cnt` variable by 1.
-     - If the character is `'X'`, a person exits the room, so we decrement the `cnt` variable by 1.
-   - After updating `cnt`, we check whether it is greater than `mx`. If so, we update `mx` to be the new value of `cnt`.
-
-   ```cpp
-   for (char x: s) {
-       cnt += (x == 'E' ? 1 : -1);  // Increment for 'E', Decrement for 'X'
-       mx = max(mx, cnt);  // Update mx with the maximum number of people at any point
-   }
-   ```
-
-3. **Return the Result**:
-   - After processing all the events in the string, `mx` will hold the maximum number of people that were in the room at any time, which corresponds to the minimum number of chairs required. We then return the value of `mx` as the result.
-
-   ```cpp
-   return mx;
-   ```
-
-### Example Walkthrough
-
-Let’s walk through an example of how this function works:
-
-#### Input:
-```cpp
-string s = "EEXEXEEX";
+    return mx;
+}
 ```
 
-#### Process:
+This function 'minimumChairs' computes the minimum number of chairs required for a given string of events, where 'E' indicates a person enters and any other character indicates a person exits. The function tracks the maximum number of people present at any time.
 
-1. **Initialization**:
-   - `mx = 0`, `cnt = 0` (no one in the room initially).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumChairs(string s) {
+	```
+	Defines the function 'minimumChairs' that accepts a string 's', representing a series of events, and returns the minimum number of chairs needed.
 
-2. **First Event (`E`)**:
-   - A person enters the room, so `cnt = 1`.
-   - We update `mx = max(0, 1)` → `mx = 1`.
+2. **Variable Initialization**
+	```cpp
+	    int mx = 0, cnt = 0;
+	```
+	Initializes two integer variables: 'mx' to store the maximum number of people present at any point, and 'cnt' to keep track of the current number of people inside.
 
-3. **Second Event (`E`)**:
-   - Another person enters the room, so `cnt = 2`.
-   - We update `mx = max(1, 2)` → `mx = 2`.
+3. **For Loop**
+	```cpp
+	    for(char x: s) {
+	```
+	Begins a for loop that iterates through each character 'x' in the string 's'.
 
-4. **Third Event (`X`)**:
-   - A person exits the room, so `cnt = 1`.
-   - We update `mx = max(2, 1)` → `mx = 2`.
+4. **Condition Check**
+	```cpp
+	        cnt += (x == 'E'? 1: -1);
+	```
+	Checks if the character 'x' is 'E' (entry event), in which case it increments 'cnt' by 1. If 'x' is not 'E', it decrements 'cnt' by 1 (exit event).
 
-5. **Fourth Event (`E`)**:
-   - A person enters the room, so `cnt = 2`.
-   - We update `mx = max(2, 2)` → `mx = 2`.
+5. **Max Update**
+	```cpp
+	        mx = max(mx, cnt);
+	```
+	Updates the value of 'mx' to be the maximum of 'mx' and the current 'cnt', ensuring it tracks the peak number of people inside.
 
-6. **Fifth Event (`X`)**:
-   - A person exits the room, so `cnt = 1`.
-   - We update `mx = max(2, 1)` → `mx = 2`.
+6. **Return Statement**
+	```cpp
+	    return mx;
+	```
+	Returns the value of 'mx', which represents the maximum number of people inside at any point, i.e., the minimum number of chairs required.
 
-7. **Sixth Event (`E`)**:
-   - A person enters the room, so `cnt = 2`.
-   - We update `mx = max(2, 2)` → `mx = 2`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-8. **Seventh Event (`E`)**:
-   - Another person enters the room, so `cnt = 3`.
-   - We update `mx = max(2, 3)` → `mx = 3`.
+The time complexity is O(n), where n is the length of the string `s`. We only need to iterate through the string once.
 
-9. **Eighth Event (`X`)**:
-   - A person exits the room, so `cnt = 2`.
-   - We update `mx = max(3, 2)` → `mx = 3`.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-10. **Result**:
-   - After processing all events, the maximum number of people in the room at any time was `3`. Therefore, the minimum number of chairs required is `3`.
+The space complexity is O(1) because we are only using a constant amount of extra space for the counters.
 
-#### Output:
-```cpp
-3
-```
+**Happy Coding! 🎉**
 
-### Complexity
-
-#### Time Complexity:
-- **O(n)**: The time complexity is **O(n)**, where `n` is the length of the input string `s`. This is because we only need to iterate through the string once to process each event (either an entry or an exit). Each event takes constant time, so the total time complexity is linear with respect to the length of the string.
-
-#### Space Complexity:
-- **O(1)**: The space complexity is **O(1)** because we only use a few variables (`mx`, `cnt`), regardless of the size of the input string `s`. We do not need any additional data structures that depend on the input size, so the space usage is constant.
-
-### Conclusion
-
-This solution efficiently calculates the minimum number of chairs needed by simulating the entry and exit of people in a room. It tracks the number of people in the room at any given time and finds the maximum number, which corresponds to the minimum number of chairs required. The algorithm runs in linear time, making it efficient and scalable for large input sizes. The space complexity is constant, which makes this solution optimal in terms of space usage as well.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-chairs-in-a-waiting-room/description/)
 

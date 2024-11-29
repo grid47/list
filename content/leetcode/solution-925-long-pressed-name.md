@@ -14,94 +14,147 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Your friend is typing their name on a keyboard. Sometimes, while typing, a key might be long pressed, causing the character to be typed multiple times. Given the name and the typed string, determine if it is possible that the typed string could have been the result of long pressing some characters while typing the name.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings: 'name' representing your friend's name and 'typed' representing the characters typed on the keyboard.
+- **Example:** `Input: name = "emma", typed = "eemmaa"`
+- **Constraints:**
+	- 1 <= name.length, typed.length <= 1000
+	- Both 'name' and 'typed' consist of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-        bool isLongPressedName(string name, string typed) {
-        int i = 0, m = name.length(), n = typed.length();
-        for (int j = 0; j < n; ++j)
-            if (i < m && name[i] == typed[j])
-                ++i;
-            else if (!j || typed[j] != typed[j - 1])
-                return false;
-        return i == m;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return True if the 'typed' string could have been the result of long pressing characters from the 'name'. Otherwise, return False.
+- **Example:** `Output: True`
+- **Constraints:**
+	- The strings 'name' and 'typed' will always contain only lowercase letters.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if the typed string could be derived from the name with some characters possibly being long pressed.
 
-The task is to determine if a name can be considered validly "typed" by comparing it with a given typed string. In particular, the typed string might contain additional letters, which result from the key being "long-pressed," meaning some characters may appear consecutively more than once. To solve this, we check if the typed string can be produced by long-pressing characters from the name. If every character in the name matches with a character in the typed string, including possible repetitions in typed, we conclude it is a validly typed name.
+- Traverse both the 'name' and 'typed' strings simultaneously.
+- If characters in 'typed' match the current character in 'name', continue.
+- If a character in 'typed' matches the previous character, it can be considered a result of long pressing.
+- If there is a mismatch and the previous character in 'typed' isn't the same as the current character, return False.
+- At the end, check if all characters from 'name' have been matched correctly.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings contain only lowercase English letters.
+- The typed string is potentially longer than the name due to long presses.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: name = "alison", typed = "aalliiison"`  \
+  **Explanation:** The typed string has multiple instances of the 'l', 'i', and 's' characters, which could have been long pressed. Hence, the output is True.
 
-### Approach
+- **Input:** `Input: name = "joan", typed = "jooaann"`  \
+  **Explanation:** The second 'o' in the typed string doesn't match any subsequent character in the name, so the output is False.
 
-The problem is solved using two pointers: one iterating over `name` and the other iterating over `typed`. Here’s the approach:
+{{< dots >}}
+## Approach 🚀
+The approach involves scanning both strings character by character to ensure the typed string could match the name with possible long presses.
 
-1. **Pointer Setup**:
-   - Let `i` point to the current position in `name` and `j` point to the current position in `typed`.
-   - Both pointers start at the beginning of their respective strings.
-   - `m` is the length of `name` and `n` is the length of `typed`.
+### Initial Thoughts 💭
+- The 'typed' string may contain repeated characters which could indicate long presses.
+- We need to verify that characters in 'typed' are either exactly matching 'name' or are a result of long pressing.
+- Using two pointers to traverse 'name' and 'typed' should efficiently solve this problem in linear time.
+{{< dots >}}
+### Edge Cases 🌐
+- There will be no empty inputs for this problem since the input strings are guaranteed to have at least one character.
+- Ensure that the solution works efficiently for input sizes up to 1000 characters.
+- If 'name' is a prefix of 'typed', ensure that long presses of the last character in 'name' are correctly handled.
+- The 'typed' string can only contain repeated characters from the 'name'.
+{{< dots >}}
+## Code 💻
+```cpp
+    bool isLongPressedName(string name, string typed) {
+    int i = 0, m = name.length(), n = typed.length();
+    for (int j = 0; j < n; ++j)
+        if (i < m && name[i] == typed[j])
+            ++i;
+        else if (!j || typed[j] != typed[j - 1])
+            return false;
+    return i == m;
+}
+```
 
-2. **Traversing `typed`**:
-   - We iterate through `typed` with `j`, checking if each character matches the current character in `name` pointed by `i`.
-   - If `typed[j]` matches `name[i]`, it means this character is a valid character that can be part of the typed result, so we increment `i` to move to the next character in `name`.
-   - If `typed[j]` does not match `name[i]`:
-     - We check if it is the same as `typed[j - 1]`. If it is, then it’s a valid long-pressed character, and we continue to the next `j`.
-     - If `typed[j]` is not the same as `typed[j - 1]`, we return `false` since this indicates that `typed` includes an extra character that cannot be explained by long-pressing.
+The function 'isLongPressedName' checks if the typed string is a valid long-pressed version of the given name string. It does so by comparing characters in both strings and ensuring that extra characters in the typed string are valid repetitions of the previous character.
 
-3. **Final Check**:
-   - After the loop, we check if `i == m`. If `i` has reached the end of `name`, it means that all characters in `name` have been successfully matched in `typed`, possibly with some characters being long-pressed. If `i` has not reached the end of `name`, this means some characters in `name` were not matched, so we return `false`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	    bool isLongPressedName(string name, string typed) {
+	```
+	Define the function 'isLongPressedName' that takes two strings, 'name' and 'typed', and returns a boolean indicating whether 'typed' is a valid long-pressed version of 'name'.
 
-### Code Breakdown (Step by Step)
+2. **Variable Initialization**
+	```cpp
+	    int i = 0, m = name.length(), n = typed.length();
+	```
+	Initialize two integer variables, 'i' to track the index of 'name', and 'm' and 'n' to store the lengths of 'name' and 'typed', respectively.
 
-1. **Initialization**:
-   ```cpp
-   int i = 0, m = name.length(), n = typed.length();
-   ```
-   - `i` is initialized to 0 to iterate over `name`.
-   - `m` and `n` are initialized to store the lengths of `name` and `typed`, respectively.
+3. **For Loop**
+	```cpp
+	    for (int j = 0; j < n; ++j)
+	```
+	Start a loop to iterate through the characters of the 'typed' string using the index variable 'j'.
 
-2. **Traverse the Typed String**:
-   ```cpp
-   for (int j = 0; j < n; ++j) {
-       if (i < m && name[i] == typed[j])
-           ++i;
-       else if (!j || typed[j] != typed[j - 1])
-           return false;
-   }
-   ```
-   - `j` iterates through each character in `typed`.
-   - **Character Match**:
-     - If `name[i]` equals `typed[j]`, increment `i` to move to the next character in `name`.
-   - **Long-Press Validation**:
-     - If `typed[j]` doesn’t match `name[i]`, check if it matches `typed[j - 1]`. If it does, continue since it’s a valid long-press of the previous character.
-     - If it doesn’t, return `false` immediately as this extra character cannot be explained by long-pressing.
+4. **Character Comparison**
+	```cpp
+	        if (i < m && name[i] == typed[j])
+	```
+	Check if the current character in 'typed' matches the current character in 'name'. If it does, move to the next character in 'name' by incrementing 'i'.
 
-3. **Final Validation**:
-   ```cpp
-   return i == m;
-   ```
-   - Return `true` if `i` has reached the end of `name`, indicating that all characters in `name` have been matched correctly in `typed`. Otherwise, return `false`.
+5. **Increment Index**
+	```cpp
+	            ++i;
+	```
+	If the characters match, increment 'i' to move to the next character in 'name'.
 
-### Complexity
+6. **Long Press Validation**
+	```cpp
+	        else if (!j || typed[j] != typed[j - 1])
+	```
+	If the characters do not match, check if the current character in 'typed' is not the same as the previous one, or if it is the first character. If this condition is met, it means 'typed' contains an invalid sequence.
 
-1. **Time Complexity**:
-   - The time complexity is **O(n)**, where `n` is the length of `typed`. The algorithm iterates over `typed` and checks each character against the characters in `name`.
+7. **Return False**
+	```cpp
+	            return false;
+	```
+	If an invalid sequence is detected, return false immediately, as 'typed' cannot be a valid long-pressed version of 'name'.
 
-2. **Space Complexity**:
-   - The space complexity is **O(1)** since only a few variables are used to track the state, and no additional data structures are required for storage.
+8. **Final Validation**
+	```cpp
+	    return i == m;
+	```
+	After iterating through 'typed', return true if all characters in 'name' have been matched. If 'i' equals 'm', it means the entire 'name' string was successfully matched.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This solution effectively checks if `typed` is a valid representation of `name` when long-pressing is considered. By using a two-pointer approach, it ensures each character in `name` has a matching character in `typed`, including cases where characters are repeated due to long-pressing. This approach is efficient with a linear time complexity, making it suitable for handling long strings. The solution handles edge cases such as unmatched characters, initial characters without previous values, and complete matches, ensuring robust handling of various inputs.
+The time complexity is O(n), where n is the length of the 'typed' string, as we traverse 'typed' and 'name' only once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as we are only using a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/long-pressed-name/description/)
 

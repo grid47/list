@@ -14,168 +14,242 @@ img_src = ""
 youtube = "0d7ShRoOFVE"
 youtube_upload_date="2023-08-29"
 youtube_thumbnail="https://i.ytimg.com/vi/0d7ShRoOFVE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string representing the log of a shop's customer visits over a series of hours. Each character in the string is either 'Y' (customer visits) or 'N' (no customer visits). The shop can close at any given hour, and the penalty is determined by two factors: when the shop is open but no customers visit, and when the shop is closed but customers still arrive. You need to determine the earliest hour at which the shop should close to minimize the penalty.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string customers of length n, consisting of characters 'Y' and 'N', representing customer visits during each hour.
+- **Example:** `customers = "YYNY"`
+- **Constraints:**
+	- 1 <= customers.length <= 10^5
+	- customers consists only of characters 'Y' and 'N'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int bestClosingTime(string a) {
-        int s = a.size();
-        vector<int> y,n;
-        y.push_back(0);
-        n.push_back(0);
-        int cnt = 0;
-        for (int i = 0; i < s; i++) {
-            if(a[i] == 'N') cnt++;
-            n.push_back(cnt);
-        }
-        cnt = 0;
-        for (int i = s -1; i >= 0; i--) {
-            if(a[i] == 'Y') cnt++;
-            y.push_back(cnt);
-        }
-        
-        reverse (y.begin(), y.end());
-        int ans = INT_MAX, ind = 0;
-        for(int i = 0; i < s +1; i++) {
-            int h = n[i] + y[i];
-            if(h<ans) {
-                ans = h;
-                ind = i;
-            }
-        }
-        return ind;        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The earliest hour at which the shop should close to incur the minimum penalty.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The returned value will be an integer between 0 and the length of the customers string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the earliest hour to close the shop such that the penalty is minimized.
+
+- Count the number of 'N' characters (hours with no customers) and 'Y' characters (hours with customers).
+- Calculate the penalty for closing the shop at each hour, considering both the hours open without customers and the hours closed with customers.
+- Return the earliest hour that results in the least penalty.
+{{< dots >}}
+### Problem Assumptions ✅
+- The penalty is computed by considering both the shop's open and closed hours relative to customer visits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `customers = "YYNY"`  \
+  **Explanation:** When closing the shop at hour 0, the penalty is 3 (1 hour of no customers while open, 1 hour of customers while closed). Closing at hour 2 results in the lowest penalty of 1, which is the optimal time to close.
+
+- **Input:** `customers = "NNNNN"`  \
+  **Explanation:** Since no customers visit, the best time to close is immediately at hour 0 to avoid any penalties.
+
+- **Input:** `customers = "YYYY"`  \
+  **Explanation:** In this case, the best time to close the shop is at hour 4, since there are customers at every hour.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can simulate the shop closing at each possible hour and calculate the penalty for each case. We can then return the earliest hour with the least penalty.
+
+### Initial Thoughts 💭
+- We need to consider both customers arriving while the shop is closed and the shop being open without customers.
+- Using cumulative sums can help us efficiently calculate penalties without recalculating from scratch for each possible closing time.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string of customers is invalid based on the constraints.
+- For large inputs (up to 10^5 characters), the solution must efficiently handle the penalty calculations in linear time.
+- If all characters are 'Y' or all characters are 'N', the penalty calculation should still work as expected.
+- Ensure that the solution is optimized for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int bestClosingTime(string a) {
+    int s = a.size();
+    vector<int> y,n;
+    y.push_back(0);
+    n.push_back(0);
+    int cnt = 0;
+    for (int i = 0; i < s; i++) {
+        if(a[i] == 'N') cnt++;
+        n.push_back(cnt);
     }
-};
-{{< /highlight >}}
----
-
-The provided code is a solution to a problem where we are asked to determine the best time to close a shop, such that the total number of customers left outside the shop (in the "N" state) is minimized, given a string representing customer states during each hour of operation.
-
-Let’s break down the problem, approach, and the code step-by-step to understand how the solution works and how to derive its time and space complexities. This breakdown will be useful for any programmer aiming to optimize or understand such algorithms in a more structured manner.
-
-### Problem Statement
-
-Given a string `a` consisting of characters 'Y' and 'N', where each character represents the state of a customer at an hour of the day:
-- 'Y' means the customer has already entered the shop.
-- 'N' means the customer has not yet entered the shop.
-
-The goal is to determine the best hour to close the shop such that the total number of customers left outside (those in the 'N' state) is minimized. The shop can be closed at any hour, and we need to calculate how many customers would remain outside for each possible closing time.
-
-The solution must:
-- Account for how many customers are inside (`'Y'`).
-- Account for how many customers are outside (`'N'`).
-- Find the optimal closing time that minimizes the total number of customers left outside.
-
-### Approach
-
-To solve this problem efficiently, we can utilize the following strategy:
-
-1. **Count customers outside ('N') before closing time**: As we scan the string from left to right, we need to keep track of how many customers are still in the 'N' state. This will help us determine the number of customers left outside at any given closing time.
-  
-2. **Count customers inside ('Y') after closing time**: As we scan the string from right to left, we need to keep track of how many customers have entered the shop (the 'Y' state) after a given closing hour.
-
-3. **Combine the counts**: For each possible closing time, calculate the total number of customers left outside (those who are 'N' before the closing time and those who are 'Y' after the closing time).
-
-4. **Minimize the total**: The objective is to minimize the sum of customers left outside. Hence, we need to find the closing time that results in the minimum sum.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the solution code in more detail:
-
-#### 1. **Initialization and Variable Setup**
-
-```cpp
-int s = a.size();
-vector<int> y, n;
-y.push_back(0);
-n.push_back(0);
-int cnt = 0;
-```
-
-- `s` stores the size of the input string `a`, which represents the state of the customers at each hour.
-- Two vectors `y` and `n` are initialized to store the cumulative counts of customers who have entered (`'Y'`) and the cumulative counts of customers who have not entered (`'N'`).
-- The vector `y` keeps track of the count of 'Y' customers from right to left, and `n` tracks the count of 'N' customers from left to right.
-  
-#### 2. **Count the 'N' Customers from Left to Right**
-
-```cpp
-for (int i = 0; i < s; i++) {
-    if(a[i] == 'N') cnt++;
-    n.push_back(cnt);
-}
-```
-
-- We iterate over the string `a` from left to right.
-- Each time we encounter an 'N', we increment the `cnt` (counter for 'N' customers).
-- The cumulative count of 'N' customers is stored in the `n` vector, so `n[i]` represents the number of 'N' customers up to and including hour `i`.
-
-#### 3. **Count the 'Y' Customers from Right to Left**
-
-```cpp
-cnt = 0;
-for (int i = s - 1; i >= 0; i--) {
-    if(a[i] == 'Y') cnt++;
-    y.push_back(cnt);
-}
-```
-
-- After counting the 'N' customers, we reset the counter `cnt` to 0 and begin iterating over the string from right to left.
-- For each 'Y' encountered, we increment the `cnt` (counter for 'Y' customers).
-- The cumulative count of 'Y' customers is stored in the `y` vector, so `y[i]` represents the number of 'Y' customers from hour `i` onward.
-
-#### 4. **Reverse the 'Y' Vector**
-
-```cpp
-reverse (y.begin(), y.end());
-```
-
-- After the loop, the `y` vector contains the counts of 'Y' customers from right to left. To use it effectively in subsequent calculations, we reverse the vector so that it represents the count of 'Y' customers from left to right.
-
-#### 5. **Calculate the Best Closing Time**
-
-```cpp
-int ans = INT_MAX, ind = 0;
-for(int i = 0; i < s + 1; i++) {
-    int h = n[i] + y[i];
-    if(h < ans) {
-        ans = h;
-        ind = i;
+    cnt = 0;
+    for (int i = s -1; i >= 0; i--) {
+        if(a[i] == 'Y') cnt++;
+        y.push_back(cnt);
     }
+    
+    reverse (y.begin(), y.end());
+    int ans = INT_MAX, ind = 0;
+    for(int i = 0; i < s +1; i++) {
+        int h = n[i] + y[i];
+        if(h<ans) {
+            ans = h;
+            ind = i;
+        }
+    }
+    return ind;        
 }
-return ind;
 ```
 
-- We initialize `ans` to store the minimum number of customers left outside, and `ind` to store the index of the optimal closing time.
-- We iterate through each possible closing time (from hour 0 to hour `s`), where `i` represents the closing time index.
-- For each closing time `i`, the total number of customers left outside is the sum of:
-  - `n[i]`: the number of 'N' customers before hour `i`.
-  - `y[i]`: the number of 'Y' customers from hour `i` onward.
-- If the sum `h` is less than the current `ans`, we update `ans` and set `ind` to the current closing time `i`.
-- Finally, we return `ind`, which is the optimal closing time.
+This function calculates the best closing time by determining how many 'N' (No) and 'Y' (Yes) operations occur at each step. The goal is to find the time where the sum of 'N' before and 'Y' after the time is minimized, returning the index of that time.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int bestClosingTime(string a) {
+	```
+	This line defines the function `bestClosingTime`, which takes a string `a` as input representing the sequence of operations and returns an integer representing the best closing time.
 
-#### Time Complexity:
-- The time complexity of this solution is **O(s)**, where `s` is the length of the string `a`. This is because:
-  - We scan through the string once to count 'N' customers and once more to count 'Y' customers.
-  - The final loop over the closing times also runs `s + 1` times, which is still **O(s)**.
+2. **Variable Initialization**
+	```cpp
+	    int s = a.size();
+	```
+	The size of the string `a` is stored in the variable `s`, which represents the number of operations.
 
-Thus, the overall time complexity is **O(s)**.
+3. **Vector Initialization**
+	```cpp
+	    vector<int> y,n;
+	```
+	Two vectors, `y` and `n`, are initialized to store the counts of 'Y' and 'N' at each position in the string.
 
-#### Space Complexity:
-- The space complexity is **O(s)** because we use two vectors `y` and `n`, each of size `s + 1`, to store the cumulative counts.
+4. **Push Initialization**
+	```cpp
+	    y.push_back(0);
+	```
+	Initialize the `y` vector by adding 0 to represent the starting count of 'Y' operations.
 
-Thus, the overall space complexity is **O(s)**.
+5. **Push Initialization**
+	```cpp
+	    n.push_back(0);
+	```
+	Initialize the `n` vector by adding 0 to represent the starting count of 'N' operations.
 
-### Conclusion
+6. **Loop Setup**
+	```cpp
+	    int cnt = 0;
+	```
+	Initialize a counter variable `cnt` to keep track of the number of 'N' operations encountered so far.
 
-The given solution efficiently calculates the optimal closing time for the shop by utilizing two vectors to store the cumulative counts of 'N' and 'Y' customers. The code's time and space complexities are both linear, making it a scalable solution for large input sizes.
+7. **Forward Loop**
+	```cpp
+	    for (int i = 0; i < s; i++) {
+	```
+	Start a loop from the beginning of the string to count the 'N' operations.
+
+8. **Count 'N'**
+	```cpp
+	        if(a[i] == 'N') cnt++;
+	```
+	If the current character is 'N', increment the counter `cnt`.
+
+9. **Store 'N' Count**
+	```cpp
+	        n.push_back(cnt);
+	```
+	Store the current count of 'N' operations in the `n` vector at the corresponding index.
+
+10. **Reset Counter**
+	```cpp
+	    cnt = 0;
+	```
+	Reset the counter `cnt` to 0 for the reverse traversal of the string to count 'Y' operations.
+
+11. **Reverse Loop**
+	```cpp
+	    for (int i = s -1; i >= 0; i--) {
+	```
+	Start a loop from the end of the string to count the 'Y' operations.
+
+12. **Count 'Y'**
+	```cpp
+	        if(a[i] == 'Y') cnt++;
+	```
+	If the current character is 'Y', increment the counter `cnt`.
+
+13. **Store 'Y' Count**
+	```cpp
+	        y.push_back(cnt);
+	```
+	Store the current count of 'Y' operations in the `y` vector at the corresponding index.
+
+14. **Reverse 'Y' Vector**
+	```cpp
+	    reverse (y.begin(), y.end());
+	```
+	Reverse the `y` vector to align the counts with the positions of the string.
+
+15. **Initialize Answer**
+	```cpp
+	    int ans = INT_MAX, ind = 0;
+	```
+	Initialize `ans` to the maximum possible integer value and `ind` to 0. These will store the best closing time and its index.
+
+16. **Find Minimum Closing Time**
+	```cpp
+	    for(int i = 0; i < s +1; i++) {
+	```
+	Loop through all possible closing times to find the one that minimizes the sum of 'N' before and 'Y' after.
+
+17. **Calculate Time Sum**
+	```cpp
+	        int h = n[i] + y[i];
+	```
+	Calculate the sum `h` of 'N' operations before and 'Y' operations after the current time.
+
+18. **Update Best Time**
+	```cpp
+	        if(h<ans) {
+	```
+	If the calculated sum `h` is smaller than the current best answer `ans`, update `ans` and the index `ind`.
+
+19. **Store Best Time**
+	```cpp
+	            ans = h;
+	```
+	Store the new best sum `h` as the answer.
+
+20. **Store Index**
+	```cpp
+	            ind = i;
+	```
+	Store the index of the current best time.
+
+21. **Return Statement**
+	```cpp
+	    return ind;        
+	```
+	Return the index `ind` of the best closing time.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution involves a single pass through the input string and another pass to calculate penalties, resulting in a linear time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is linear due to the additional arrays used to store cumulative sums of 'Y' and 'N' counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-penalty-for-a-shop/description/)
 

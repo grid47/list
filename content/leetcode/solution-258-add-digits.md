@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "gPZvXaniFDQ"
 youtube_upload_date="2023-04-27"
 youtube_thumbnail="https://i.ytimg.com/vi/gPZvXaniFDQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,132 +28,143 @@ youtube_thumbnail="https://i.ytimg.com/vi/gPZvXaniFDQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a non-negative integer num, repeatedly add all of its digits until the result has only one digit, and return it.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a non-negative integer num.
+- **Example:** `For example, num = 56.`
+- **Constraints:**
+	- 0 <= num <= 231 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int addDigits(int num) {
-        int res = 0;
-        while(num > 9) {
-            while(num > 0) {
-                res += num % 10;
-                num /= 10;
-            }
-            
-            num = res;
-            res = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the resulting single-digit number after summing the digits of num repeatedly.
+- **Example:** `For num = 56, the output is 2.`
+- **Constraints:**
+	- The result should be a single-digit number.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to reduce the number num by repeatedly summing its digits until it becomes a single-digit number.
+
+- 1. Initialize a variable to hold the sum of digits.
+- 2. While the number has more than one digit, sum its digits and update the number.
+- 3. Once the number has only one digit, return it.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always a non-negative integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For num = 56, the output is 2.`  \
+  **Explanation:** We repeatedly sum the digits of 56: 5 + 6 = 11, and then 1 + 1 = 2, which is a single digit.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to repeatedly sum the digits of the number num until we get a result that is a single-digit number. This can be done by breaking the number down and summing the digits in each iteration.
+
+### Initial Thoughts 💭
+- We can repeatedly break the number down into its individual digits, sum them, and repeat the process until we get a single-digit result.
+- To achieve O(1) runtime, we can use properties of numbers in modular arithmetic to avoid loops or recursion.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the input num will always be a non-negative integer.
+- If the number is very large, the sum of its digits will eventually be reduced to a single-digit number.
+- If num is 0, the result will be 0.
+- The solution should work for numbers up to 231 - 1.
+{{< dots >}}
+## Code 💻
+```cpp
+int addDigits(int num) {
+    int res = 0;
+    while(num > 9) {
+        while(num > 0) {
+            res += num % 10;
+            num /= 10;
         }
-        return num;
+        
+        num = res;
+        res = 0;
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this challenge, we are tasked with implementing a function that repeatedly adds the digits of a given integer `num` until a single digit is obtained. This process is known as the **digit root**. ✨
-
-For example:
-- **Input**: `num = 38`
-- **Output**: `2`
-  - First, sum of digits: 3 + 8 = 11
-  - Second, sum of digits: 1 + 1 = 2
-
-Your goal is to create a function that efficiently computes this digit root! 🌟
-
----
-
-### 🧠 Approach
-
-To solve this problem, we need to repeatedly reduce the number by summing its digits until only a single digit remains. Here's how we can approach it:
-
-1. **Extract and Sum Digits**: We'll break the number down into its individual digits, sum them, and repeat the process until the result is a single-digit number.
-2. **Termination Condition**: The process stops as soon as the result is less than 10, meaning we have a single digit.
-
-Now, let's dive deeper into the steps needed to implement this solution in an efficient manner. 🧑‍💻
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's break down the code step by step to see how this process works! 🛠️
-
-```cpp
-class Solution {
-public:
-    int addDigits(int num) {
+    return num;
+}
 ```
-- Here, we define a function `addDigits` that takes an integer `num`. Our goal is to reduce this number to a single-digit number by summing its digits repeatedly.
 
-```cpp
-        int res = 0;
-```
-- We initialize a variable `res` to 0. This will temporarily store the sum of the digits in each iteration.
+This function reduces a number to a single digit by summing its digits repeatedly. It continues summing the digits of the number until the result is a single digit.
 
-```cpp
-        while(num > 9) {
-```
-- The `while` loop runs as long as `num` is greater than 9. This ensures we keep summing the digits until `num` is a single digit.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int addDigits(int num) {
+	```
+	Defines the function `addDigits`, which takes an integer `num` as input and returns the resulting single-digit sum after repeatedly summing the digits of the number.
 
-```cpp
-            while(num > 0) {
-                res += num % 10;
-                num /= 10;
-            }
-```
-- In the inner loop, we:
-  1. **Extract the Last Digit**: `num % 10` gives the last digit of the number. We add this digit to `res`.
-  2. **Remove the Last Digit**: `num /= 10` removes the last digit from `num`.
+2. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	Initializes the variable `res` to store the sum of digits during each iteration of the inner loop.
 
-- This ensures we sum all digits of `num` in each iteration.
+3. **Outer Loop Check**
+	```cpp
+	    while(num > 9) {
+	```
+	Checks if the number has more than one digit. If `num` is greater than 9, the process continues to sum the digits.
 
-```cpp
-            num = res;
-            res = 0;
-```
-- After summing the digits, we assign the sum (`res`) back to `num`, effectively reducing `num` to the sum of its digits. We reset `res` to 0 for the next iteration.
+4. **Inner Loop for Digit Summing**
+	```cpp
+	        while(num > 0) {
+	```
+	This inner loop processes each digit of `num` by extracting and adding them to `res`. It continues as long as `num` is greater than 0.
 
-```cpp
-        }
-        return num;
-    }
-};
-```
-- The loop continues until `num` is a single-digit number. Once that happens, we return `num` as the final digit root. 🏆
+5. **Add Current Digit to Result**
+	```cpp
+	            res += num % 10;
+	```
+	Adds the last digit of `num` (obtained using the modulo operation) to `res`.
 
----
+6. **Remove Last Digit**
+	```cpp
+	            num /= 10;
+	```
+	Removes the last digit of `num` by dividing it by 10.
 
-### 📈 Complexity Analysis
+7. **Reset and Repeat with Sum**
+	```cpp
+	        num = res;
+	```
+	Sets `num` to the value of `res` (the sum of digits) for the next iteration of the outer loop.
 
-Let's now analyze the performance of our solution! 🔍
+8. **Reset Result for Next Iteration**
+	```cpp
+	        res = 0;
+	```
+	Resets `res` to 0 for the next iteration, to start fresh for summing the digits of the next `num`.
 
-#### Time Complexity:
-- **O(d)**, where `d` is the number of digits in `num`. This is because, in the worst case, we need to sum the digits of `num` multiple times. Each time, the number of digits reduces by a factor of 10 (since the sum of digits is usually smaller than the original number). So, the loop runs a number of times proportional to the number of digits in `num`.
+9. **Return Result**
+	```cpp
+	    return num;
+	```
+	Returns the final result, which is the single digit obtained after repeatedly summing the digits of the original `num`.
 
-#### Space Complexity:
-- **O(1)**, constant space. We're only using a few variables (`num`, `res`), regardless of the size of the input number. This makes our solution highly space-efficient. 💡
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
----
+The solution can be optimized to O(1) using a mathematical trick based on the digital root.
 
-### 🏁 Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-In this solution, we efficiently compute the digit root of a number by repeatedly summing its digits until only one digit remains. Let's quickly recap the key points:
+The space complexity is O(1) as we only need a constant amount of space.
 
-#### Key Takeaways:
-1. **Efficient Calculation**: We use a simple iterative approach to sum digits and reduce the number to a single digit.
-2. **Time Complexity**: The time complexity is **O(d)**, where `d` is the number of digits in the input number. This makes the solution fast even for larger numbers.
-3. **Space Complexity**: Our solution is space-efficient with **O(1)** space complexity, as we only need a few variables.
-4. **Practical**: This method can be useful for problems involving checksums or reducing numbers to a simpler form. 🌱
+**Happy Coding! 🎉**
 
-By following this approach, you'll be able to quickly reduce any number to its digit root, making it a powerful tool for many number-based problems! 🎯
-
-### ✨ Quick Recap:
-- **Time**: O(d) ⏱️
-- **Space**: O(1) 💡
-- **Solution**: Repeated digit summing! 
-
-Keep practicing, and you'll become a pro at solving such number-based challenges! 💪🎉
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-digits/description/)
 

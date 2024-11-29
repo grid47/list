@@ -14,133 +14,139 @@ img_src = ""
 youtube = "S-Q4eFfzGNc"
 youtube_upload_date="2024-05-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/S-Q4eFfzGNc/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integer arrays `nums1` and `nums2` of lengths `n` and `m` respectively, and a positive integer `k`. A pair `(i, j)` is called good if `nums1[i]` is divisible by `nums2[j] * k` (0 <= i <= n - 1, 0 <= j <= m - 1). Your task is to return the total number of good pairs.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integer arrays `nums1` and `nums2`, and a positive integer `k`.
+- **Example:** `Example 1:
+Input: nums1 = [1,2,5], nums2 = [1,2,3], k = 2
+Output: 4`
+- **Constraints:**
+	- 1 <= n, m <= 50
+	- 1 <= nums1[i], nums2[j] <= 50
+	- 1 <= k <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
-        
-        int res = 0, m = nums1.size(), n = nums2.size();
-        
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(nums1[i] % (nums2[j] * k) == 0) res++;
-        return res;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the total number of good pairs, where each pair satisfies the divisibility condition.
+- **Example:** `Example 1:
+Input: nums1 = [1,2,5], nums2 = [1,2,3], k = 2
+Output: 4`
+- **Constraints:**
+	- The output should be an integer representing the count of good pairs.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify all pairs (i, j) where `nums1[i]` is divisible by `nums2[j] * k`.
 
-The problem asks us to find the **sum of the absolute differences** between the positions of identical characters in two strings, `s` and `t`. Specifically, for each character in string `s`, we need to check every character in string `t` and, if they match, calculate the absolute difference in their indices. The total sum of these absolute differences is the desired output.
+- Iterate through each element in `nums1`.
+- For each element in `nums1`, iterate through each element in `nums2`.
+- Check if `nums1[i] % (nums2[j] * k) == 0`.
+- Count each valid pair where the condition holds.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays `nums1` and `nums2` will always have values between 1 and 50.
+- The integer `k` will also be between 1 and 50.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** For `nums1 = [1, 2, 5]`, `nums2 = [1, 2, 3]`, and `k = 2`, we have the following good pairs:
+- (0, 0) because `1 % (1 * 2) == 0`
+- (0, 1) because `1 % (2 * 2) == 0`
+- (1, 0) because `2 % (1 * 2) == 0`
+- (2, 1) because `5 % (2 * 2) == 0`.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach is straightforward: iterate over both arrays, check the divisibility condition, and count how many pairs satisfy the condition.
 
-To solve the problem, we need to:
-1. **Iterate Over Both Strings**: For each character in the first string `s`, we need to compare it with every character in the second string `t` to see if they match.
-2. **Calculate Absolute Difference**: When we find a match, we calculate the absolute difference between the indices of the matching characters in the two strings.
-3. **Accumulate the Result**: Sum all the calculated absolute differences for every match found.
-
-The goal is to output this accumulated sum, which represents the total "permutation difference" between the two strings.
-
-### Code Breakdown (Step by Step)
-
-Let’s walk through the code, breaking it down step by step:
-
-1. **Initialization**:
-   - We begin by initializing a variable `sum` to zero. This variable will hold the sum of absolute differences between matching indices.
-   
-   ```cpp
-   int sum = 0;
-   ```
-
-2. **Outer Loop (Iterating over string `s`)**:
-   - We use a loop to iterate over each character in the string `s`. The loop runs from `i = 0` to `i < s.length()`. The variable `i` represents the index of the current character in string `s`.
-   
-   ```cpp
-   for (int i = 0; i < s.length(); i++) {
-   ```
-
-3. **Inner Loop (Iterating over string `t`)**:
-   - For every character `s[i]` in string `s`, we use another loop to iterate over each character in string `t`. This second loop runs from `j = 0` to `j < t.length()`. The variable `j` represents the index of the current character in string `t`.
-
-   ```cpp
-   for (int j = 0; j < t.length(); j++) {
-   ```
-
-4. **Matching Characters**:
-   - Inside the inner loop, we check if the characters at the current indices `i` and `j` from `s` and `t` respectively are equal:
-   
-   ```cpp
-   if (s[i] == t[j]) {
-   ```
-
-   - If they are equal, it means we have found a match. We then calculate the **absolute difference** between the indices `i` and `j`. This is done using the `abs` function, which returns the absolute value of the difference between `i` and `j`. This represents the "distance" between the two matching characters in the two strings.
-
-   ```cpp
-   sum += abs(i - j);
-   ```
-
-5. **Final Result**:
-   - Once all the characters in both strings have been processed, the `sum` variable will hold the total sum of absolute differences between matching character positions.
-   - The function then returns this sum as the final result.
-
-   ```cpp
-   return sum;
-   ```
-
-### Example Walkthrough
-
-Let’s walk through an example to better understand the code's behavior:
-
-#### Input:
+### Initial Thoughts 💭
+- The condition involves checking divisibility of each element in `nums1` by the corresponding element in `nums2` multiplied by `k`.
+- Since we are working with relatively small arrays (up to length 50), a double loop approach should be efficient enough.
+{{< dots >}}
+### Edge Cases 🌐
+- Both `nums1` and `nums2` will never be empty.
+- The solution should efficiently handle the maximum input size (n = 50, m = 50).
+- Ensure the solution works when `k` is 1 or when `nums1[i]` and `nums2[j]` have values that are close to the upper limit of 50.
+- Make sure the solution does not exceed the allowed time and space limits for the given constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
-string s = "abc";
-string t = "cba";
+int numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+    
+    int res = 0, m = nums1.size(), n = nums2.size();
+    
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(nums1[i] % (nums2[j] * k) == 0) res++;
+    return res;
+    
+}
 ```
 
-#### Process:
-1. The outer loop starts by considering the first character of `s`, which is `'a'`. We then compare it with every character in `t`:
-   - `s[0] == t[0]` → `'a' == 'c'` (not a match)
-   - `s[0] == t[1]` → `'a' == 'b'` (not a match)
-   - `s[0] == t[2]` → `'a' == 'a'` (match found at indices 0 and 2, absolute difference `abs(0 - 2) = 2`)
-   
-   The sum is now `2`.
+This code defines a function 'numberOfPairs' that calculates the number of pairs where the element in 'nums1' is divisible by the product of the corresponding element in 'nums2' and a constant 'k'.
 
-2. The outer loop moves to the second character of `s`, which is `'b'`, and compares it with every character in `t`:
-   - `s[1] == t[0]` → `'b' == 'c'` (not a match)
-   - `s[1] == t[1]` → `'b' == 'b'` (match found at indices 1 and 1, absolute difference `abs(1 - 1) = 0`)
-   
-   The sum remains `2` (no change).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+	```
+	Defines the function 'numberOfPairs' that takes two vectors, 'nums1' and 'nums2', and an integer 'k', and returns the count of valid pairs.
 
-3. Finally, the outer loop moves to the third character of `s`, which is `'c'`, and compares it with every character in `t`:
-   - `s[2] == t[0]` → `'c' == 'c'` (match found at indices 2 and 0, absolute difference `abs(2 - 0) = 2`)
-   
-   The sum is now `4`.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0, m = nums1.size(), n = nums2.size();
+	```
+	Initializes the result variable 'res' to 0 and calculates the sizes of 'nums1' and 'nums2', storing them in 'm' and 'n', respectively.
 
-#### Output:
-After the loops finish, the sum is `4`, which is returned as the final result.
+3. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Starts the outer loop that iterates over each element of the vector 'nums1'.
 
-### Complexity
+4. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	Starts the inner loop that iterates over each element of the vector 'nums2'.
 
-#### Time Complexity:
-- **O(m * n)**: The time complexity of the solution is **O(m * n)**, where `m` is the length of string `s` and `n` is the length of string `t`. This is because we iterate over every character in string `s` (outer loop), and for each character in `s`, we iterate over every character in string `t` (inner loop). Hence, we perform `m * n` comparisons in the worst case.
+5. **Condition Check**
+	```cpp
+	        if(nums1[i] % (nums2[j] * k) == 0) res++;
+	```
+	Checks if the element in 'nums1' at index 'i' is divisible by the product of the element in 'nums2' at index 'j' and 'k'. If true, increments the result counter 'res'.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is **O(1)** because we are only using a constant amount of extra space (the `sum` variable and the loop counters `i` and `j`).
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the value of 'res', which represents the total number of valid pairs found.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m)
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
 
-This solution provides an efficient way to compute the sum of absolute differences in positions of matching characters between two strings. The approach is simple yet effective, leveraging two nested loops to compare every character in `s` with every character in `t`. The solution has a linear time complexity proportional to the product of the lengths of the two strings, and it uses constant space. This makes the solution suitable for moderate-sized strings where computational efficiency is important.
+The time complexity is O(n * m), where `n` and `m` are the lengths of `nums1` and `nums2`, respectively.
 
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as no extra space is used other than the input arrays and a counter.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-number-of-good-pairs-i/description/)

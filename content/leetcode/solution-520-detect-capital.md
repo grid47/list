@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "TIJRBKK1gXE"
 youtube_upload_date="2023-01-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/TIJRBKK1gXE/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,91 +28,125 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/TIJRBKK1gXE/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+We define the correct usage of capital letters in a word as either all letters being capitalized, all letters being lowercase, or only the first letter being capitalized while the rest are lowercase. Given a string word, return true if the word follows one of these patterns, and false otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `word` which is composed of English alphabet letters.
+- **Example:** `word = 'HELLO'`
+- **Constraints:**
+	- 1 <= word.length <= 100
+	- The word contains only uppercase and lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool detectCapitalUse(string word) {
-        for(int i = 1; i < word.size(); i++) {
-            if(isupper(word[1]) != isupper(word[i]) ||
-              islower(word[0]) && isupper(word[i])) 
-                return false;
-        }
-        return true;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the capital usage in the word is correct, otherwise return false.
+- **Example:** `true, false`
+- **Constraints:**
+	- The output should be a boolean indicating whether the word follows the correct capitalization rules.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if the capitalization pattern of the word matches one of the valid patterns.
+
+- 1. Check if the word is completely uppercase.
+- 2. Check if the word is completely lowercase.
+- 3. Check if only the first letter is uppercase and the rest are lowercase.
+{{< dots >}}
+### Problem Assumptions ✅
+- The word contains only English alphabet characters.
+- The length of the word is between 1 and 100 characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `word = 'HELLO'`  \
+  **Explanation:** The word is all in uppercase, which is valid.
+
+- **Input:** `word = 'FlaG'`  \
+  **Explanation:** The word has an incorrect capitalization pattern (only the first letter is uppercase and the rest are lowercase), which is invalid.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to verify the capitalization pattern of the word by checking each of the possible valid patterns.
+
+### Initial Thoughts 💭
+- We need to check the word against the three valid capitalization patterns.
+- A simple check on the word can verify the capitalization pattern.
+{{< dots >}}
+### Edge Cases 🌐
+- If the word length is 1, it is always valid since a single character is either uppercase or lowercase.
+- The algorithm must handle words of length up to 100 efficiently.
+- All uppercase or all lowercase words should always return true.
+- Ensure the algorithm efficiently handles all inputs within the constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+bool detectCapitalUse(string word) {
+    for(int i = 1; i < word.size(); i++) {
+        if(isupper(word[1]) != isupper(word[i]) ||
+          islower(word[0]) && isupper(word[i])) 
+            return false;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine whether a given string `word` uses capitalization correctly. According to the problem, a word is considered to have "correct capital usage" if one of the following conditions holds:
-
-1. All letters in the word are capital letters (e.g., "USA").
-2. All letters in the word are lowercase letters (e.g., "leetcode").
-3. Only the first letter in the word is uppercase (e.g., "Google").
-
-Given a string `word`, we need to return `true` if it satisfies one of these three conditions, and `false` otherwise.
-
-### Approach
-
-To solve this problem, we can iterate through the string to check the capitalization usage. The code uses a straightforward logic to identify if the word violates any of the conditions. Here’s the plan:
-
-1. **Check the Capitalization Pattern**: Starting from the second character (index `1`), we check if all the following characters match the case of the second character. This ensures that if the word is in all uppercase or all lowercase, we don’t have mixed cases after the first character.
-2. **Verify the First Character Rule**: If the first character is lowercase, all subsequent characters must also be lowercase. If we encounter an uppercase letter in this scenario, it violates the capitalization rule, and we return `false`.
-
-The code utilizes these checks to verify the correctness of capitalization in a single pass.
-
-### Code Breakdown (Step by Step)
-
-Let’s break down the code step-by-step for a clearer understanding.
-
-#### Step 1: Initialize the Loop
-
-```cpp
-for (int i = 1; i < word.size(); i++) {
+    return true;
+}
 ```
 
-The loop starts from index `1` and iterates through each character in `word`. This is because the first character is handled separately, and we only need to check subsequent characters to verify capitalization consistency.
+This function checks whether a given word uses capital letters correctly based on certain capitalization rules.
 
-#### Step 2: Check Capitalization Consistency
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool detectCapitalUse(string word) {
+	```
+	This defines the `detectCapitalUse` function that checks the capitalization of a given word.
 
-```cpp
-if (isupper(word[1]) != isupper(word[i]) ||
-    islower(word[0]) && isupper(word[i])) 
-    return false;
-```
+2. **Loop**
+	```cpp
+	    for(int i = 1; i < word.size(); i++) {
+	```
+	A loop starts at index 1 to iterate through each character of the word, starting from the second character.
 
-The condition is designed to detect incorrect capitalization patterns in the word. Let’s analyze it part by part:
+3. **Condition Check**
+	```cpp
+	        if(isupper(word[1]) != isupper(word[i]) ||
+	```
+	Check if the current character's case (upper or lower) matches the second character's case. If not, or if it violates other capitalization rules, return false.
 
-- **`isupper(word[1]) != isupper(word[i])`**: This part checks if the case of the first character after the initial letter (i.e., `word[1]`) matches the case of the current character, `word[i]`. If they don’t match, it implies that the capitalization is inconsistent.
-  
-- **`islower(word[0]) && isupper(word[i])`**: This part checks if the first character is lowercase and any subsequent character is uppercase. If this is the case, the word doesn’t adhere to the rule where all characters should be lowercase when the first character is lowercase.
+4. **Condition Check**
+	```cpp
+	          islower(word[0]) && isupper(word[i])) 
+	```
+	Additionally, check if the first character is lowercase while a later character is uppercase, which would be an invalid capitalization pattern.
 
-If either of these two conditions is met, the function returns `false` as the capitalization usage is incorrect.
+5. **Return False**
+	```cpp
+	            return false;
+	```
+	If any capitalization rules are violated, return false immediately.
 
-#### Step 3: Return True for Valid Capitalization
+6. **Return True**
+	```cpp
+	    return true;
+	```
+	If all checks pass without returning false, return true, meaning the capitalization use is correct.
 
-```cpp
-return true;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) where n is the length of the word.
+- **Average Case:** O(n) where n is the length of the word.
+- **Worst Case:** O(n) where n is the length of the word.
 
-If the loop completes without triggering the `return false` condition, it means the word meets one of the required capitalization conditions, so the function returns `true`.
+The time complexity is O(n) because we only need to check the word once.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(1), no additional space required.
+- **Worst Case:** O(1), since we only need a constant amount of space.
 
-#### Time Complexity
-The time complexity of this function is **O(n)**, where `n` is the length of the input string `word`. This is because we perform a single pass over the string, checking each character’s case and comparing it with the expected pattern.
+The space complexity is O(1) because we do not need any additional space beyond the input.
 
-#### Space Complexity
-The space complexity is **O(1)**, as we only use a few variables for temporary storage and perform checks directly on the input string.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution provides an efficient way to validate the capitalization usage of a word according to the rules provided. By leveraging the `isupper()` and `islower()` functions, the code quickly identifies any deviation from the three acceptable capitalization patterns. The solution is both time-efficient, due to its single-pass approach, and space-efficient, as it requires only constant space.
-
-This approach is ideal for real-time applications where we need to validate capitalization quickly, especially when working with user-generated text inputs in forms or user interfaces. The solution is simple, efficient, and adheres to industry standards for checking case consistency in strings.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/detect-capital/description/)
 

@@ -14,108 +14,183 @@ img_src = ""
 youtube = "1ImaQNKTVnw"
 youtube_upload_date="2020-07-19"
 youtube_thumbnail="https://i.ytimg.com/vi/1ImaQNKTVnw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s consisting of only the characters 'a', 'b', and 'c'. A string is considered valid if it can be formed by repeatedly inserting the substring 'abc' into any position of an empty string. Your task is to determine if s can be a valid string after performing this operation any number of times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string s of length n (1 <= n <= 2 * 10^4), consisting of only the characters 'a', 'b', and 'c'.
+- **Example:** `s = 'abccba'`
+- **Constraints:**
+	- 1 <= s.length <= 2 * 10^4
+	- s consists of only the characters 'a', 'b', and 'c'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isValid(string s) {
-        vector<char> stk;
-        for(char c : s) {
-            if(c == 'c') {
-                int n = stk.size();
-                if(n < 2 ||
-                  stk[n - 1] != 'b' ||
-                  stk[n - 2] != 'a' ) 
-                    return false;
-                stk.pop_back();
-                stk.pop_back();
-            } else stk.push_back(c);
-        }
-        
-        return stk.size() == 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the string s is valid, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output will be a boolean value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine if a string can be formed by inserting 'abc' into an empty string any number of times.
+
+- Use a stack to track the characters 'a', 'b', and 'c'.
+- Iterate through the string. If a 'c' is encountered, check if the last two characters in the stack are 'b' and 'a', respectively.
+- If the stack is valid after processing all characters in s, return true. Otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string only contains 'a', 'b', and 'c'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = 'abcabc'`  \
+  **Explanation:** The string 'abcabc' is valid because it can be formed by repeatedly inserting 'abc' into an empty string: '' -> 'abc' -> 'abcabc'.
+
+- **Input:** `Input: s = 'aabcbc'`  \
+  **Explanation:** The string 'aabcbc' is valid because it can be formed by inserting 'abc' into the string: '' -> 'abc' -> 'aabcbc'.
+
+- **Input:** `Input: s = 'abccba'`  \
+  **Explanation:** The string 'abccba' is invalid because it is impossible to form it by inserting 'abc' into an empty string.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a stack-based approach where we check for the proper sequence of characters while iterating through the string.
+
+### Initial Thoughts 💭
+- The string must follow a strict 'abc' insertion pattern, meaning every 'c' must follow 'b' and 'a'.
+- Using a stack will help efficiently track the characters in the correct order.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string is empty, return false since no valid string can be formed.
+- Ensure the solution handles strings of maximum length (20,000 characters).
+- If the string contains characters other than 'a', 'b', or 'c', return false.
+- The solution must be efficient in both time and space to handle large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isValid(string s) {
+    vector<char> stk;
+    for(char c : s) {
+        if(c == 'c') {
+            int n = stk.size();
+            if(n < 2 ||
+              stk[n - 1] != 'b' ||
+              stk[n - 2] != 'a' ) 
+                return false;
+            stk.pop_back();
+            stk.pop_back();
+        } else stk.push_back(c);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine whether a given string `s` consisting of the characters 'a', 'b', and 'c' is valid based on specific rules. The string is valid if every substring "abc" can be removed. That means for every occurrence of 'c' in the string, it should have a preceding 'b' and an 'a' in that order. If the string can be entirely reduced by removing all such "abc" patterns, it is considered valid; otherwise, it is not.
-
-### Approach
-
-To solve this problem, we can utilize a stack-based approach. The idea is to iterate through each character of the string and maintain a stack to track the characters. When we encounter a 'c', we check if the last two characters in the stack are 'b' and 'a', respectively. If they are, we pop them from the stack; otherwise, we return false. After processing all characters, if the stack is empty, the string is valid.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool isValid(string s) {
-        vector<char> stk; // Create a vector to act as a stack to hold characters.
+    
+    return stk.size() == 0;
+}
 ```
-- We define a class `Solution` and within it, a public member function `isValid` that takes a string `s`.
-- A vector `stk` is initialized to store characters as we process the string. This acts as our stack.
 
-```cpp
-        for(char c : s) {
-```
-- A for-each loop iterates through each character `c` in the input string `s`.
+This function checks if the string `s` is valid according to the rule that 'c' must always follow 'a' and 'b' in sequence. It uses a stack to validate the sequence of characters.
 
-```cpp
-            if(c == 'c') {
-```
-- We check if the current character is 'c'. This is the key character for our validation logic.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool isValid(string s) {
+	```
+	Defines the function `isValid`, which checks whether the string `s` follows the specific sequence rule: 'a' -> 'b' -> 'c'.
 
-```cpp
-                int n = stk.size();
-                if(n < 2 ||
-                  stk[n - 1] != 'b' ||
-                  stk[n - 2] != 'a' ) 
-                    return false;
-```
-- If the character is 'c', we first get the current size of the stack `n`.
-- We then check three conditions:
-  - If the stack has less than 2 characters (`n < 2`), it is impossible to have the required 'a' and 'b' before 'c', so we return false.
-  - If the last character in the stack is not 'b' (`stk[n - 1] != 'b'`), we cannot form "abc", hence return false.
-  - If the second last character is not 'a' (`stk[n - 2] != 'a'`), again return false.
+2. **Stack Initialization**
+	```cpp
+	    vector<char> stk;
+	```
+	Initializes an empty stack `stk` to help track the sequence of characters in the string.
 
-```cpp
-                stk.pop_back(); // Pop 'b'
-                stk.pop_back(); // Pop 'a'
-```
-- If all conditions are satisfied, we pop the last two characters from the stack, which are 'b' and 'a', effectively removing the "abc" pattern.
+3. **Iterate Over String**
+	```cpp
+	    for(char c : s) {
+	```
+	Iterates through each character `c` in the input string `s`.
 
-```cpp
-            } else stk.push_back(c); // If not 'c', push current character to the stack.
-        }
-```
-- If the character is not 'c', it is pushed onto the stack for further evaluation.
+4. **Check for 'c'**
+	```cpp
+	        if(c == 'c') {
+	```
+	Checks if the current character `c` is 'c'. If it is, it will attempt to verify if it follows the 'a' and 'b' sequence.
 
-```cpp
-        return stk.size() == 0; // Check if the stack is empty.
-    }
-};
-```
-- After the loop completes, we return true if the stack is empty (indicating all characters formed valid "abc" patterns) or false otherwise.
+5. **Get Stack Size**
+	```cpp
+	            int n = stk.size();
+	```
+	Stores the current size of the stack in `n` to check if there are enough characters to form the required sequence.
 
-### Complexity Analysis
+6. **Check Sequence Validity**
+	```cpp
+	            if(n < 2 ||
+	```
+	Checks if the stack has fewer than two characters, which would make it impossible to form the 'a' -> 'b' sequence before 'c'.
 
-- **Time Complexity**: The function runs in O(n) time, where n is the length of the input string `s`. This is because we make a single pass through the string and perform constant-time operations (push/pop) on the stack.
-  
-- **Space Complexity**: The space complexity is O(n) in the worst case when all characters are pushed onto the stack without forming any "abc" sequences.
+7. **Validate Last Characters**
+	```cpp
+	              stk[n - 1] != 'b' ||
+	```
+	Ensures the last character in the stack is 'b', which must precede 'c'.
 
-### Conclusion
+8. **Validate Preceding Character**
+	```cpp
+	              stk[n - 2] != 'a' ) 
+	```
+	Ensures that the second-to-last character in the stack is 'a', which must precede 'b' and 'c'.
 
-The `isValid` function efficiently checks the validity of a string composed of the characters 'a', 'b', and 'c'. By leveraging a stack to track the necessary characters, it ensures that all "abc" sequences are effectively removed, validating the string in a linear time complexity. This approach is not only intuitive but also elegant, allowing for easy maintenance and readability in code. The algorithm can be particularly useful in scenarios such as parsing nested structures or validating sequences in various programming challenges.
+9. **Return False**
+	```cpp
+	                return false;
+	```
+	If the sequence is invalid (either there are not enough characters or the sequence is incorrect), return `false`.
 
-By understanding this method, programmers can enhance their problem-solving skills related to string manipulation and stack usage, making it a valuable addition to their coding toolkit.
+10. **Pop Elements**
+	```cpp
+	            stk.pop_back();
+	```
+	Pops the last character ('b') from the stack after confirming the sequence 'a' -> 'b' -> 'c'.
+
+11. **Pop 'a' from Stack**
+	```cpp
+	            stk.pop_back();
+	```
+	Pops the second-to-last character ('a') from the stack to complete the valid sequence.
+
+12. **Push Character to Stack**
+	```cpp
+	        } else stk.push_back(c);
+	```
+	If the character is not 'c', it is added to the stack for future validation.
+
+13. **Return Stack Validity**
+	```cpp
+	    return stk.size() == 0;
+	```
+	Checks if the stack is empty at the end, which would indicate that all characters were successfully processed according to the rule. If the stack is not empty, the sequence is invalid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because we iterate through the string once, where n is the length of the string.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the stack used to track the characters.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/description/)
 

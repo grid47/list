@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,76 +28,122 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design a data structure that simulates a circular double-ended queue (deque) with a fixed maximum size. Implement the MyCircularDeque class with methods for inserting, deleting, and accessing elements at both ends of the deque.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of multiple operations to be executed on the deque. Each operation is an array with the first element being the method name and the following elements representing the arguments.
+- **Example:** `["MyCircularDeque", "insertLast", "insertLast", "insertFront", "insertFront", "getRear", "isFull", "deleteLast", "insertFront", "getFront"]`
+- **Constraints:**
+	- 1 <= k <= 1000
+	- 0 <= value <= 1000
+	- At most 2000 calls will be made to the methods.
 
-{{< highlight cpp >}}
-class MyCircularDeque {
-    vector<int> buf;
-    int frd, bck;
-    int sz, cnt;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** For each method call, return the result of the operation. If the operation is successful, return a boolean value. For 'getFront' and 'getRear', return the respective item, or -1 if the deque is empty.
+- **Example:** `[null, true, true, true, false, 2, true, true, true, 4]`
+- **Constraints:**
+	- Each 'insert' and 'delete' operation is O(1).
+	- The deque will only store integer values.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To simulate the operations of a circular double-ended queue and ensure the correct results are returned for each operation.
+
+- Initialize the deque with a fixed size.
+- Use two pointers (front and back) to track the positions of the front and rear elements.
+- Ensure that operations like insertions, deletions, and retrievals are handled efficiently with modulo arithmetic to maintain the circular nature.
+{{< dots >}}
+### Problem Assumptions ✅
+- The deque will always handle the insert and delete operations correctly based on its current state.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["MyCircularDeque", "insertLast", "insertLast", "insertFront", "insertFront", "getRear", "isFull", "deleteLast", "insertFront", "getFront"]`  \
+  **Explanation:** This example shows the correct sequence of operations on a circular deque, handling insertion, deletion, and retrieval of elements with a fixed size.
+
+{{< dots >}}
+## Approach 🚀
+We can implement the circular deque using an array with two pointers (front and back), ensuring efficient insertions and deletions at both ends by updating the pointers using modulo arithmetic.
+
+### Initial Thoughts 💭
+- A circular array can efficiently handle the required operations.
+- The modulo operation helps to wrap around the array when inserting or deleting elements.
+- We can use a fixed-size array and two pointers to simulate the circular behavior.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure that operations like 'getFront' and 'getRear' handle an empty deque correctly by returning -1.
+- Ensure the solution works efficiently for the largest possible size of the deque and the maximum number of operations.
+- Consider cases where the deque is full or empty before performing operations.
+- The implementation should be able to handle up to 2000 operations efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int frd, bck;
+int sz, cnt;
 public:
-    MyCircularDeque(int k) : sz(k), buf(k, 0), bck(0), frd(k - 1), cnt(0) {
-        
-    }
+MyCircularDeque(int k) : sz(k), buf(k, 0), bck(0), frd(k - 1), cnt(0) {
     
-    bool insertFront(int value) {
-        if(isFull()) return false;
-        
-        buf[frd] = value;
-        frd = (frd -1 + sz) % sz;
-        
-        ++cnt;
-        return true;
-    }
+}
+
+bool insertFront(int value) {
+    if(isFull()) return false;
     
-    bool insertLast(int value) {
-        if(isFull()) return false;
-        
-        buf[bck] = value;        
-        bck = (bck + 1) % sz;
-        
-        ++cnt;
-        return true;        
-    }
+    buf[frd] = value;
+    frd = (frd -1 + sz) % sz;
     
-    bool deleteFront() {
-        if(isEmpty()) return false;
-        
-        frd = (frd + 1) % sz;
-        
-        --cnt;
-        return true;        
-    }
+    ++cnt;
+    return true;
+}
+
+bool insertLast(int value) {
+    if(isFull()) return false;
     
-    bool deleteLast() {
-        if(isEmpty()) return false;
-        
-        bck = (bck - 1 + sz) % sz;
-        
-        --cnt;
-        return true;        
-    }
+    buf[bck] = value;        
+    bck = (bck + 1) % sz;
     
-    int getFront() {
-        if(isEmpty()) return -1;
-        
-        return buf[(frd + 1) % sz];
-        
-    }
+    ++cnt;
+    return true;        
+}
+
+bool deleteFront() {
+    if(isEmpty()) return false;
     
-    int getRear() {
-        if(isEmpty()) return -1;
-        
-        return buf[(bck - 1 + sz) % sz];
-    }
+    frd = (frd + 1) % sz;
     
-    bool isEmpty() {
-        return cnt == 0;
-    }
+    --cnt;
+    return true;        
+}
+
+bool deleteLast() {
+    if(isEmpty()) return false;
     
-    bool isFull() {
-        return  cnt == sz;
-    }
+    bck = (bck - 1 + sz) % sz;
+    
+    --cnt;
+    return true;        
+}
+
+int getFront() {
+    if(isEmpty()) return -1;
+    
+    return buf[(frd + 1) % sz];
+    
+}
+
+int getRear() {
+    if(isEmpty()) return -1;
+    
+    return buf[(bck - 1 + sz) % sz];
+}
+
+bool isEmpty() {
+    return cnt == 0;
+}
+
+bool isFull() {
+    return  cnt == sz;
+}
 };
 
 /**
@@ -110,159 +157,245 @@ public:
  * int param_6 = obj->getRear();
  * bool param_7 = obj->isEmpty();
  * bool param_8 = obj->isFull();
- */
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires the implementation of a circular deque (double-ended queue), which allows insertion and deletion of elements from both the front and the rear of the deque. The deque must support the following operations:
-
-1. **insertFront(value)**: Inserts an element at the front of the deque. Returns `true` if the operation is successful, otherwise `false`.
-2. **insertLast(value)**: Inserts an element at the rear of the deque. Returns `true` if the operation is successful, otherwise `false`.
-3. **deleteFront()**: Removes an element from the front of the deque. Returns `true` if the operation is successful, otherwise `false`.
-4. **deleteLast()**: Removes an element from the rear of the deque. Returns `true` if the operation is successful, otherwise `false`.
-5. **getFront()**: Returns the front element of the deque. If the deque is empty, it should return `-1`.
-6. **getRear()**: Returns the rear element of the deque. If the deque is empty, it should return `-1`.
-7. **isEmpty()**: Returns `true` if the deque is empty, otherwise `false`.
-8. **isFull()**: Returns `true` if the deque is full, otherwise `false`.
-
-The deque should have a fixed size `k`, and all operations must be implemented in constant time (`O(1)`).
-
-### Approach
-
-To implement a circular deque efficiently, we need a fixed-size array (`vector`) that can store the elements. We will also need two pointers, one to keep track of the front of the deque (`frd`), and the other to keep track of the rear (`bck`). These pointers will allow us to efficiently add and remove elements at both ends, wrapping around when necessary. The approach can be broken down as follows:
-
-1. **Circular Buffer Mechanism**: The deque is implemented as a circular buffer, meaning that when the front or rear reaches the end of the array, it wraps around to the beginning. This can be achieved using modulo arithmetic to keep the indices within the bounds of the array.
-   
-2. **Tracking Size and Count**: We maintain a variable `cnt` to track the current number of elements in the deque, and a variable `sz` to store the size of the deque. This allows us to easily check if the deque is full or empty.
-
-3. **Operations**:
-   - For **insertFront** and **insertLast**, we check if the deque is full by comparing `cnt` to `sz`. If not full, we add the element at the corresponding index (front or rear), update the pointer (wrapping around using modulo), and increment the `cnt`.
-   - For **deleteFront** and **deleteLast**, we check if the deque is empty by checking if `cnt` is zero. If not empty, we update the pointer to remove an element from the corresponding index and decrement `cnt`.
-   - For **getFront** and **getRear**, we return the element at the front or rear index, respectively, considering the wrapping behavior.
-
-4. **Edge Cases**:
-   - The `getFront()` and `getRear()` methods handle the case where the deque is empty by returning `-1`.
-   - The `isEmpty()` and `isFull()` methods return `true` or `false` based on the current number of elements.
-
-### Code Breakdown (Step by Step)
-
-Let’s now break down the code step by step to understand the implementation:
-
-#### 1. **Class Initialization**:
-```cpp
-class MyCircularDeque {
-    vector<int> buf;
-    int frd, bck;
-    int sz, cnt;
-public:
-    MyCircularDeque(int k) : sz(k), buf(k, 0), bck(0), frd(k - 1), cnt(0) {}
 ```
-- The class `MyCircularDeque` uses a vector `buf` to store the elements of the deque.
-- `frd` and `bck` are the indices for the front and rear of the deque. Initially, `frd` is set to `k-1` (end of the buffer) and `bck` is set to `0` (beginning of the buffer).
-- `sz` is the size of the deque, and `cnt` is the current number of elements in the deque.
 
-#### 2. **Insert Front**:
-```cpp
-    bool insertFront(int value) {
-        if(isFull()) return false;
-        buf[frd] = value;
-        frd = (frd - 1 + sz) % sz;
-        ++cnt;
-        return true;
-    }
-```
-- The `insertFront` method first checks if the deque is full using `isFull()`. If full, it returns `false`.
-- If not full, the value is inserted at the current `frd` index.
-- The front pointer `frd` is then moved one step backward, using modulo arithmetic to wrap around if necessary.
-- The count `cnt` is incremented, and `true` is returned to indicate success.
+This is the complete code for implementing a circular deque, with functions to insert elements at the front and back, delete elements from the front and back, and check if the deque is empty or full.
 
-#### 3. **Insert Last**:
-```cpp
-    bool insertLast(int value) {
-        if(isFull()) return false;
-        buf[bck] = value;
-        bck = (bck + 1) % sz;
-        ++cnt;
-        return true;
-    }
-```
-- The `insertLast` method behaves similarly to `insertFront`, but it inserts the element at the `bck` index (the rear of the deque).
-- The rear pointer `bck` is then moved one step forward using modulo arithmetic.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int frd, bck;
+	```
+	Declares the front and back indices for the circular deque.
 
-#### 4. **Delete Front**:
-```cpp
-    bool deleteFront() {
-        if(isEmpty()) return false;
-        frd = (frd + 1) % sz;
-        --cnt;
-        return true;
-    }
-```
-- The `deleteFront` method first checks if the deque is empty using `isEmpty()`. If empty, it returns `false`.
-- If not empty, the front pointer `frd` is moved one step forward (deleting the front element).
-- The count `cnt` is decremented, and `true` is returned to indicate success.
+2. **Variable Declaration**
+	```cpp
+	int sz, cnt;
+	```
+	Declares the size of the deque and the count of elements in the deque.
 
-#### 5. **Delete Last**:
-```cpp
-    bool deleteLast() {
-        if(isEmpty()) return false;
-        bck = (bck - 1 + sz) % sz;
-        --cnt;
-        return true;
-    }
-```
-- The `deleteLast` method behaves similarly to `deleteFront`, but it moves the rear pointer `bck` one step backward.
+3. **Constructor**
+	```cpp
+	public:
+	```
+	Begins the public section of the class where methods and the constructor are defined.
 
-#### 6. **Get Front**:
-```cpp
-    int getFront() {
-        if(isEmpty()) return -1;
-        return buf[(frd + 1) % sz];
-    }
-```
-- The `getFront` method returns the element at the front of the deque. If the deque is empty, it returns `-1`. The front pointer is wrapped around using modulo arithmetic.
+4. **Constructor Initialization**
+	```cpp
+	MyCircularDeque(int k) : sz(k), buf(k, 0), bck(0), frd(k - 1), cnt(0) {
+	```
+	Constructor that initializes the circular deque with a given size 'k', setting the front and back indices, and initializing the count of elements to zero.
 
-#### 7. **Get Rear**:
-```cpp
-    int getRear() {
-        if(isEmpty()) return -1;
-        return buf[(bck - 1 + sz) % sz];
-    }
-```
-- The `getRear` method returns the element at the rear of the deque. If the deque is empty, it returns `-1`. The rear pointer is wrapped around using modulo arithmetic.
+5. **Insert Front Method**
+	```cpp
+	bool insertFront(int value) {
+	```
+	Defines the 'insertFront' method that inserts an element at the front of the deque.
 
-#### 8. **Is Empty**:
-```cpp
-    bool isEmpty() {
-        return cnt == 0;
-    }
-```
-- The `isEmpty` method returns `true` if the deque has no elements (`cnt == 0`), otherwise `false`.
+6. **Full Check**
+	```cpp
+	    if(isFull()) return false;
+	```
+	Checks if the deque is full before inserting a new element.
 
-#### 9. **Is Full**:
-```cpp
-    bool isFull() {
-        return cnt == sz;
-    }
-```
-- The `isFull` method returns `true` if the deque is full (`cnt == sz`), otherwise `false`.
+7. **Insert Element**
+	```cpp
+	    buf[frd] = value;
+	```
+	Inserts the value at the front of the deque.
 
-### Complexity
+8. **Update Front Index**
+	```cpp
+	    frd = (frd -1 + sz) % sz;
+	```
+	Updates the front index after inserting the element, wrapping it around if necessary.
 
-#### Time Complexity:
-- **Insertions**: Both `insertFront` and `insertLast` run in constant time, `O(1)`, as they only involve checking if the deque is full, adding an element, and updating the pointers.
-- **Deletions**: Both `deleteFront` and `deleteLast` run in constant time, `O(1)`, as they only involve checking if the deque is empty, removing an element, and updating the pointers.
-- **Get Operations**: Both `getFront` and `getRear` run in constant time, `O(1)`, as they directly access the elements in the deque using the current pointers.
-- **IsEmpty and IsFull**: Both operations run in constant time, `O(1)`, as they simply compare the count of elements with the size of the deque.
+9. **Increment Count**
+	```cpp
+	    ++cnt;
+	```
+	Increments the count of elements in the deque.
 
-#### Space Complexity:
-- The space complexity is `O(k)`, where `k` is the size of the deque, as we use a vector of size `k` to store the elements.
+10. **Return True**
+	```cpp
+	    return true;
+	```
+	Returns true indicating the insertion was successful.
 
-### Conclusion
+11. **Insert Last Method**
+	```cpp
+	bool insertLast(int value) {
+	```
+	Defines the 'insertLast' method that inserts an element at the back of the deque.
 
-This implementation of a circular deque provides efficient `O(1)` operations for insertion, deletion, and accessing elements from both ends of the deque. By utilizing a circular buffer and modulo arithmetic to handle wrapping around the array, the deque is able to make the most efficient use of the available space while maintaining constant-time operations. The space complexity is also optimal, using a fixed-size array to store the elements. This design ensures that all operations are performed efficiently, even as the size of the deque grows.
+12. **Full Check**
+	```cpp
+	    if(isFull()) return false;
+	```
+	Checks if the deque is full before inserting a new element.
+
+13. **Insert Element**
+	```cpp
+	    buf[bck] = value;
+	```
+	Inserts the value at the back of the deque.
+
+14. **Update Back Index**
+	```cpp
+	    bck = (bck + 1) % sz;
+	```
+	Updates the back index after inserting the element, wrapping it around if necessary.
+
+15. **Increment Count**
+	```cpp
+	    ++cnt;
+	```
+	Increments the count of elements in the deque.
+
+16. **Return True**
+	```cpp
+	    return true;
+	```
+	Returns true indicating the insertion was successful.
+
+17. **Delete Front Method**
+	```cpp
+	bool deleteFront() {
+	```
+	Defines the 'deleteFront' method that removes an element from the front of the deque.
+
+18. **Empty Check**
+	```cpp
+	    if(isEmpty()) return false;
+	```
+	Checks if the deque is empty before attempting to delete an element.
+
+19. **Update Front Index**
+	```cpp
+	    frd = (frd + 1) % sz;
+	```
+	Updates the front index after deleting the element, wrapping it around if necessary.
+
+20. **Decrement Count**
+	```cpp
+	    --cnt;
+	```
+	Decrements the count of elements in the deque.
+
+21. **Return True**
+	```cpp
+	    return true;
+	```
+	Returns true indicating the deletion was successful.
+
+22. **Delete Last Method**
+	```cpp
+	bool deleteLast() {
+	```
+	Defines the 'deleteLast' method that removes an element from the back of the deque.
+
+23. **Empty Check**
+	```cpp
+	    if(isEmpty()) return false;
+	```
+	Checks if the deque is empty before attempting to delete an element.
+
+24. **Update Back Index**
+	```cpp
+	    bck = (bck - 1 + sz) % sz;
+	```
+	Updates the back index after deleting the element, wrapping it around if necessary.
+
+25. **Decrement Count**
+	```cpp
+	    --cnt;
+	```
+	Decrements the count of elements in the deque.
+
+26. **Return True**
+	```cpp
+	    return true;
+	```
+	Returns true indicating the deletion was successful.
+
+27. **Get Front Method**
+	```cpp
+	int getFront() {
+	```
+	Defines the 'getFront' method that retrieves the element at the front of the deque.
+
+28. **Empty Check**
+	```cpp
+	    if(isEmpty()) return -1;
+	```
+	Checks if the deque is empty before attempting to get an element.
+
+29. **Return Front Element**
+	```cpp
+	    return buf[(frd + 1) % sz];
+	```
+	Returns the element at the front of the deque.
+
+30. **Get Rear Method**
+	```cpp
+	int getRear() {
+	```
+	Defines the 'getRear' method that retrieves the element at the back of the deque.
+
+31. **Empty Check**
+	```cpp
+	    if(isEmpty()) return -1;
+	```
+	Checks if the deque is empty before attempting to get an element.
+
+32. **Return Rear Element**
+	```cpp
+	    return buf[(bck - 1 + sz) % sz];
+	```
+	Returns the element at the back of the deque.
+
+33. **Is Empty Method**
+	```cpp
+	bool isEmpty() {
+	```
+	Defines the 'isEmpty' method that checks if the deque is empty.
+
+34. **Return Empty Status**
+	```cpp
+	    return cnt == 0;
+	```
+	Returns true if the deque is empty.
+
+35. **Is Full Method**
+	```cpp
+	bool isFull() {
+	```
+	Defines the 'isFull' method that checks if the deque is full.
+
+36. **Return Full Status**
+	```cpp
+	    return  cnt == sz;
+	```
+	Returns true if the deque is full.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
+
+Each operation (insert, delete, get) is performed in constant time due to the circular nature of the deque.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+The space complexity is O(k) where k is the maximum size of the deque, as we need to store up to k elements.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/design-circular-deque/description/)
 

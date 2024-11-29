@@ -14,125 +14,160 @@ img_src = ""
 youtube = "b-vIB0xikOw"
 youtube_upload_date="2022-08-14"
 youtube_thumbnail="https://i.ytimg.com/vi/b-vIB0xikOw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `pattern` consisting of the characters 'I' and 'D', where 'I' indicates that the next number in a sequence should be greater, and 'D' means the next number should be smaller. You need to construct the lexicographically smallest string `num` of length `n + 1` such that the digits in `num` follow the conditions set by the `pattern`. The digits in `num` must be distinct and range from '1' to '9'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `pattern` of length `n`, where each character is either 'I' or 'D'.
+- **Example:** `pattern = 'IIDID'`
+- **Constraints:**
+	- 1 <= pattern.length <= 8
+	- pattern consists only of 'I' and 'D'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string smallestNumber(string ptn) {
-        string res, stk;
-        int n = ptn.size();
-        for(int i = 0; i <= n; i++) {
-            stk.push_back(i + '1');
-            if(i == n || ptn[i] == 'I') {
-                while(!stk.empty()) {
-                    res.push_back(stk.back());
-                    stk.pop_back();
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically smallest string `num` that satisfies the pattern.
+- **Example:** `Output: '123549876'`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to construct the smallest lexicographical string `num` by following the constraints defined by the pattern.
+
+- 1. Traverse through the pattern and push the smallest available digits to a stack whenever encountering 'I'.
+- 2. When encountering 'D', push digits into the stack and reverse them once 'I' is encountered or the end of the string is reached.
+- 3. Append the digits from the stack to form the final number.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string `pattern` will always be valid, containing only 'I' and 'D'.
+- The length of the string `num` will be equal to the length of the pattern plus one.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: pattern = 'IIDID'`  \
+  **Explanation:** In this case, we need to create a string such that at positions with 'I', the next number is greater, and at positions with 'D', the next number is smaller. The smallest valid string satisfying the pattern is '123549876'.
+
+- **Input:** `Input: pattern = 'DIDI'`  \
+  **Explanation:** Here, the smallest number satisfying the conditions is '4321'.
+
+{{< dots >}}
+## Approach 🚀
+We can approach this problem by iterating through the `pattern` and using a stack to temporarily store numbers when encountering 'D'. When we encounter 'I', we pop from the stack to ensure the lexicographically smallest result.
+
+### Initial Thoughts 💭
+- We need to find a way to handle 'I' and 'D' constraints while maintaining the smallest lexicographical order.
+- A stack will help us manage the numbers and reverse them when encountering a 'D'.
+{{< dots >}}
+### Edge Cases 🌐
+- The pattern will always have at least one character.
+- The pattern length can go up to 8, and the solution must handle this efficiently.
+- If the pattern consists entirely of 'I's or 'D's, handle the sequence accordingly.
+- Ensure that the digits used in `num` are between '1' and '9' and are distinct.
+{{< dots >}}
+## Code 💻
+```cpp
+string smallestNumber(string ptn) {
+    string res, stk;
+    int n = ptn.size();
+    for(int i = 0; i <= n; i++) {
+        stk.push_back(i + '1');
+        if(i == n || ptn[i] == 'I') {
+            while(!stk.empty()) {
+                res.push_back(stk.back());
+                stk.pop_back();
             }
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function takes a pattern `ptn` consisting of characters 'I' (for increasing) and 'D' (for decreasing) and returns the smallest number that follows this pattern using a stack to handle the decreasing sequences.
 
-In this problem, we are given a string `ptn` that consists of the characters `'I'` (representing "increase") and `'D'` (representing "decrease"). Our goal is to return the smallest number that can be formed by the digits from `1` to `n + 1` (where `n` is the length of `ptn`), such that the sequence of digits satisfies the given pattern of increasing and decreasing orders.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string smallestNumber(string ptn) {
+	```
+	Defines the function `smallestNumber` that accepts a string `ptn` representing a pattern of 'I' (increasing) and 'D' (decreasing) and returns a string representing the smallest number that can be formed based on the pattern.
 
-For example:
-- If `ptn = "IDID"`, the output should be `"13254"`.
-- If `ptn = "III"`, the output should be `"1234"`.
+2. **Variable Initialization**
+	```cpp
+	    string res, stk;
+	```
+	Initializes two strings: `res` to store the result and `stk` to act as a stack to manage the number sequence.
 
-The approach is to treat the problem as a stack-based problem where we push digits into a stack when the pattern indicates a decrease (`'D'`) and pop digits from the stack when the pattern indicates an increase (`'I'`).
+3. **Size Calculation**
+	```cpp
+	    int n = ptn.size();
+	```
+	Calculates the length of the input pattern `ptn` and stores it in variable `n`.
 
-### Approach
+4. **Loop Start**
+	```cpp
+	    for(int i = 0; i <= n; i++) {
+	```
+	Starts a loop that iterates from `i = 0` to `i = n` to process each character in the pattern and the final number.
 
-The key observation is that we can use a stack to handle the "decreasing" segments of the pattern efficiently. Here’s how we can break down the approach:
+5. **Push to Stack**
+	```cpp
+	        stk.push_back(i + '1');
+	```
+	Pushes the next number (i + 1) as a character (i.e., '1', '2', etc.) onto the stack `stk`.
 
-1. **Initial Setup**:
-   - The sequence of digits we need to form ranges from `1` to `n + 1`, where `n` is the length of the given pattern string `ptn`.
-   - We will iterate through the pattern string and for each index, either push the current digit into the stack or pop it to form the correct number sequence.
+6. **Check Pattern**
+	```cpp
+	        if(i == n || ptn[i] == 'I') {
+	```
+	Checks if the end of the string has been reached (`i == n`) or if the current character in the pattern is 'I' (indicating an increasing sequence).
 
-2. **Stack Logic**:
-   - When the pattern character is `'I'` (increase), we know that the current digit should be smaller than the next digit. Therefore, we need to pop the digits from the stack to get the correct order for this increasing segment.
-   - When the pattern character is `'D'` (decrease), we push the current digit into the stack because the current digit is larger than the next digit, and we’ll deal with it later when the sequence needs to increase.
+7. **Pop from Stack**
+	```cpp
+	            while(!stk.empty()) {
+	```
+	Starts a while loop that runs as long as the stack is not empty, to pop elements from the stack in reverse order when a 'I' (increase) is encountered or when the end of the pattern is reached.
 
-3. **Handling Edge Cases**:
-   - After processing all characters in the pattern, there may still be numbers left in the stack. These should be popped and added to the result to complete the number sequence.
+8. **Store in Result**
+	```cpp
+	                res.push_back(stk.back());
+	```
+	Pops the top element from the stack and appends it to the result string `res`.
 
-4. **Final Result**:
-   - After going through the pattern and handling all increase and decrease operations, the result is a string representing the smallest number satisfying the given pattern.
+9. **Remove from Stack**
+	```cpp
+	                stk.pop_back();
+	```
+	Removes the top element from the stack after adding it to the result.
 
-### Code Breakdown (Step by Step)
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the resulting string `res`, which contains the smallest number formed according to the given pattern.
 
-1. **Class Definition**:
-    ```cpp
-    class Solution {
-    public:
-        string smallestNumber(string ptn) {
-    ```
-    The class `Solution` contains the method `smallestNumber` which takes the string `ptn` as input and returns the smallest number that satisfies the pattern.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Variable Initialization**:
-    ```cpp
-        string res, stk;
-        int n = ptn.size();
-    ```
-    - `res` will store the final result, which is the smallest number.
-    - `stk` is a string that simulates a stack. It will be used to temporarily store digits during the processing of decreasing sequences in the pattern.
-    - `n` is the length of the pattern string.
+The time complexity is O(n) as we iterate through the string once and perform constant time operations for each character.
 
-3. **Main Loop**:
-    ```cpp
-        for(int i = 0; i <= n; i++) {
-            stk.push_back(i + '1');
-    ```
-    - The loop iterates from `i = 0` to `i = n`. We iterate one extra time to handle the last digit. For each iteration, we push the current number (`i + 1`) into the stack (`stk`).
-    - The number `i + '1'` is added to the stack because the digits we are using range from `1` to `n + 1`. The expression `i + '1'` converts the integer `i + 1` to its corresponding character.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Handling the `'I'` Pattern**:
-    ```cpp
-            if(i == n || ptn[i] == 'I') {
-                while(!stk.empty()) {
-                    res.push_back(stk.back());
-                    stk.pop_back();
-                }
-            }
-    ```
-    - If the current character in the pattern is `'I'` (increase), or if we are at the end of the pattern (`i == n`), we pop all the elements from the stack and append them to the result string `res`.
-    - This ensures that when we encounter an increase, we have the digits in increasing order in the result.
+The space complexity is O(n) due to the stack used to hold intermediate values.
 
-5. **Return the Result**:
-    ```cpp
-        return res;
-    }
-    ```
-    After processing all the digits and handling the pattern, the result string `res` is returned, containing the smallest number that satisfies the given pattern.
+**Happy Coding! 🎉**
 
-### Complexity
-
-1. **Time Complexity**:
-    - The algorithm processes each character of the pattern string exactly once, and for each character, we either push or pop from the stack. Both pushing and popping operations on the stack are constant time operations.
-    - Therefore, the time complexity of this solution is **O(n)**, where `n` is the length of the pattern string. Since we only iterate through the pattern string once and the stack operations are done in constant time, the overall time complexity is linear.
-
-2. **Space Complexity**:
-    - We use a stack (implemented as a string `stk`) to temporarily store digits. The size of this stack is at most `n + 1`, as we push digits from `1` to `n + 1`.
-    - Therefore, the space complexity of this solution is **O(n)**, where `n` is the length of the pattern string. The space is required to store the digits temporarily and to hold the result string.
-
-### Conclusion
-
-The solution efficiently solves the problem by utilizing a stack to handle the decrease (`'D'`) segments of the pattern and ensuring that digits are popped in the correct order when the pattern requires an increase (`'I'`). The algorithm processes the pattern string in linear time and uses constant space for each operation, making it both time and space efficient.
-
-This approach works efficiently even for larger input sizes due to its **O(n)** time complexity. The logic behind using a stack to manage the ordering of digits based on the increase/decrease pattern is simple and elegant, ensuring that we always form the smallest possible number satisfying the given pattern. The implementation is concise, and the solution handles edge cases like consecutive increasing or decreasing patterns correctly.
-
-This method provides a fast and scalable solution to this problem, making it an excellent choice for solving such pattern-based number formation problems.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-smallest-number-from-di-string/description/)
 

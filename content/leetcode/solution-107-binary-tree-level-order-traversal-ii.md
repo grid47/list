@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "6e4pmYyr_1o"
 youtube_upload_date="2021-01-20"
 youtube_thumbnail="https://i.ytimg.com/vi/6e4pmYyr_1o/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,201 +28,245 @@ youtube_thumbnail="https://i.ytimg.com/vi/6e4pmYyr_1o/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. This means that for each level, starting from the leaf level and moving towards the root, you should collect the node values from left to right.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary tree represented by its root node.
+- **Example:** `root = [5,3,8,1,4,7,9]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [0, 2000].
+	- -1000 <= Node.val <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of lists representing the node values at each level from bottom to top.
+- **Example:** `[[1, 4], [3, 8], [5]]`
+- **Constraints:**
+	- The output should represent the nodes' values level by level from leaf to root.
 
-        vector<vector<int>> ans;        
-        queue<TreeNode*> q;
-        if(root == NULL) return ans;
-        
-        q.push(root);        
-        stack<vector<int>> stk;
-                
-        while(!q.empty())
-        {
-            vector<int> ans;
-            int sz = q.size();
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to perform a bottom-up level order traversal of the binary tree, ensuring each level is collected in the correct order, from leaf to root.
 
-            while(sz--) {
-                TreeNode* tmp = q.front();
-                q.pop();
-                ans.push_back(tmp->val);
+- Use a queue to perform a breadth-first traversal of the tree.
+- For each level, collect the values into a list and store it.
+- Since we need the levels from bottom to top, push each level's result onto a stack.
+- Finally, pop the elements from the stack to return the bottom-up level order.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree is non-empty, or it is an empty tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [3,9,20,null,null,15,7]`  \
+  **Explanation:** In this case, the binary tree can be visualized as:
 
-                if(tmp->left)   q.push(tmp->left);
-                if(tmp->right)  q.push(tmp->right);                
-            }
-            stk.push(ans);
-        }
-
-        while(!stk.empty())
-        {
-            ans.push_back(stk.top());
-            stk.pop();
-        }
-
-        return ans;      
-    }
-};
-{{< /highlight >}}
----
-
-### **🌲 Problem Overview: Reverse Level Order Traversal**
-
-The challenge is to perform a **level order traversal** of a binary tree, but with a twist: instead of going from top to bottom, we need to return the traversal in reverse order (from bottom to top). This means we visit the **bottommost level** first and work our way upwards.
-
----
-
-### **🚀 Approach: A Simple Twist with BFS**
-
-To solve this, we'll use **breadth-first search (BFS)** to explore the tree level by level. After gathering the levels in the usual order, we'll reverse them before returning the result. Let's break it down step by step!
-
----
-
-#### **1️⃣ Level Order Traversal Using a Queue**
-
-We start by performing a standard **level order traversal** using a queue. This lets us process each level one by one.
-
-```cpp
-queue<TreeNode*> q;
-if(root == NULL) return ans;
-q.push(root);
-```
-
-💡 **Quick Tip:** 
-- We use a queue to manage the nodes. The queue ensures that we process nodes in the right order: *root → left → right*. 🧩
-- If the tree is empty (i.e., `root == NULL`), we immediately return an empty result. 📅
-
----
-
-#### **2️⃣ Process Each Level**
-
-For each level, we need to capture all nodes before moving to the next level.
-
-```cpp
-while(!q.empty()) {
-    vector<int> ans;
-    int sz = q.size();  // Get number of nodes at this level
-```
-
-🌱 **Explain Simply:** 
-- We check how many nodes are at the current level using `q.size()`. This tells us how many nodes to process before moving to the next level.
-
----
-
-#### **3️⃣ Visit Each Node in the Level**
-
-For each node at the current level, we pop it from the queue, record its value, and enqueue its left and right children (if they exist).
-
-```cpp
-while(sz--) {
-    TreeNode* tmp = q.front();
-    q.pop();
-    ans.push_back(tmp->val);
-
-    if(tmp->left) q.push(tmp->left);  // Enqueue left child
-    if(tmp->right) q.push(tmp->right);  // Enqueue right child
-}
-```
-
-🔄 **In Action:**
-- We dequeue nodes one by one, push their values into a temporary `ans` vector, and enqueue their children (if they exist) to visit in the next cycle.
-
----
-
-#### **4️⃣ Store the Level in a Stack (Reversal Coming!)**
-
-Now, we store the nodes of the current level into a **stack**. The stack will help us reverse the order later. 📦
-
-```cpp
-stk.push(ans);  // Push the current level into the stack
-```
-
-💡 **Why a Stack?**
-- The stack lets us reverse the levels easily: the last level processed will be the first one popped out, achieving our bottom-up order.
-
----
-
-#### **5️⃣ Reverse the Level Order**
-
-Once all the levels are processed, we pop the stack to retrieve the levels in reverse order.
-
-```cpp
-while(!stk.empty()) {
-    ans.push_back(stk.top());  // Pop each level from the stack
-    stk.pop();
-}
-```
-
-🔄 **Reversal Magic:**
-- By popping from the stack, we get the levels from bottom to top, which is exactly what the problem asks for. 🎩✨
-
----
-
-### **⏱️ Time and Space Complexity**
-
-Let's analyze the efficiency of this approach:
-
-- **Time Complexity:** **O(n)**  
-  - We traverse each node exactly once during the BFS process.
-  - Reversing the levels (via popping from the stack) also takes **O(n)** time, since each level is popped once.  
-  Hence, the overall time complexity is **O(n)**.
-
-- **Space Complexity:** **O(n)**  
-  - We use a **queue** to store nodes during the BFS traversal. In the worst case, the queue will hold all the nodes at the bottommost level, which is about **O(n)** in space.
-  - The **stack** temporarily holds all levels before they are reversed, contributing **O(n)** space as well.
-  
-Thus, the overall space complexity is **O(n)**.
-
----
-
-### **🌳 Example Walkthrough**
-
-Let’s walk through an example to see this approach in action!
-
-Given this tree:
-
-```
         3
-       / \
-      9  20
-         /  \
-        15   7
+       /  \
+      9   20
+          /  \
+         15   7
+
+The bottom-up level order traversal is: [[15,7], [9,20], [3]].
+
+- **Input:** `Input: root = [1]`  \
+  **Explanation:** In this case, the binary tree consists of a single node 1. The bottom-up level order traversal is simply: [[1]].
+
+- **Input:** `Input: root = []`  \
+  **Explanation:** If the tree is empty, the bottom-up level order traversal should return an empty list: [].
+
+{{< dots >}}
+## Approach 🚀
+The approach for solving this problem involves using a breadth-first search (BFS) to explore the tree level by level. Since we need the result in bottom-up order, we can utilize a stack to reverse the order after performing the traversal.
+
+### Initial Thoughts 💭
+- A level order traversal typically uses a queue, but we need the result in reverse order (bottom-up).
+- We can store the level order results in a stack and then pop the stack to get the desired bottom-up order.
+{{< dots >}}
+### Edge Cases 🌐
+- If the root is null (empty tree), return an empty list.
+- The algorithm should be efficient enough to handle trees with up to 2000 nodes.
+- Handle trees where all nodes are on one side (skewed trees).
+- Ensure the solution works for both balanced and unbalanced trees.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> levelOrderBottom(TreeNode* root) {
+
+    vector<vector<int>> ans;        
+    queue<TreeNode*> q;
+    if(root == NULL) return ans;
+    
+    q.push(root);        
+    stack<vector<int>> stk;
+            
+    while(!q.empty())
+    {
+        vector<int> ans;
+        int sz = q.size();
+
+        while(sz--) {
+            TreeNode* tmp = q.front();
+            q.pop();
+            ans.push_back(tmp->val);
+
+            if(tmp->left)   q.push(tmp->left);
+            if(tmp->right)  q.push(tmp->right);                
+        }
+        stk.push(ans);
+    }
+
+    while(!stk.empty())
+    {
+        ans.push_back(stk.top());
+        stk.pop();
+    }
+
+    return ans;      
+}
 ```
 
-1. **Level 0:** The root node `3` is processed first. We enqueue its children `9` and `20`.
-2. **Level 1:** The nodes `9` and `20` are processed. We enqueue the children of `20`, which are `15` and `7`.
-3. **Level 2:** The nodes `15` and `7` are processed, both of which have no children.
+This function performs a level-order traversal of a binary tree from the bottom level to the top.
 
-The **standard order** of levels would be:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> levelOrderBottom(TreeNode* root) {
+	```
+	Define the function 'levelOrderBottom' to return the bottom-up level order traversal of the tree.
 
-```
-[[3], [9, 20], [15, 7]]
-```
+2. **Variable Declaration**
+	```cpp
+	    vector<vector<int>> ans;        
+	```
+	Declare a vector to store the final level-order traversal results.
 
-After reversing with the stack, the final result is:
+3. **Variable Declaration**
+	```cpp
+	    queue<TreeNode*> q;
+	```
+	Declare a queue to process tree nodes level by level.
 
-```
-[[15, 7], [9, 20], [3]]
-```
+4. **Base Case Check**
+	```cpp
+	    if(root == NULL) return ans;
+	```
+	Check if the tree is empty. If yes, return an empty result.
 
-🎉 Now we have the levels in **bottom-to-top** order as required!
+5. **Queue Operation**
+	```cpp
+	    q.push(root);        
+	```
+	Push the root node into the queue to begin the level-order traversal.
 
----
+6. **Variable Declaration**
+	```cpp
+	    stack<vector<int>> stk;
+	```
+	Declare a stack to store the levels temporarily in reverse order.
 
-### **🎯 Conclusion**
+7. **Loop Definition**
+	```cpp
+	    while(!q.empty())
+	```
+	Start a loop to process each level of the tree until the queue is empty.
 
-By using BFS and a stack, we efficiently traverse the tree level by level, and then reverse the levels to give the desired **bottom-to-top** order. 
+8. **Level Storage**
+	```cpp
+	        vector<int> ans;
+	```
+	Declare a vector to store values of the current level.
 
-This approach is **time-efficient** (**O(n)**) and **space-efficient** (**O(n)**), making it a solid solution for this problem. 🌟
+9. **Queue Size**
+	```cpp
+	        int sz = q.size();
+	```
+	Get the size of the current level by checking the number of nodes in the queue.
 
-### **💡 Harmonic Thought:**
-> *"Step by step, we build a tree that stands from bottom to top!"* 🌱
+10. **Loop Definition**
+	```cpp
+	        while(sz--) {
+	```
+	Loop through all nodes of the current level.
 
----
+11. **Queue Operation**
+	```cpp
+	            TreeNode* tmp = q.front();
+	```
+	Fetch the front node from the queue.
+
+12. **Queue Operation**
+	```cpp
+	            q.pop();
+	```
+	Remove the front node from the queue after processing.
+
+13. **Node Value Collection**
+	```cpp
+	            ans.push_back(tmp->val);
+	```
+	Add the value of the current node to the level vector.
+
+14. **Conditional Function Call**
+	```cpp
+	            if(tmp->left)   q.push(tmp->left);
+	```
+	If the current node has a left child, add it to the queue for processing.
+
+15. **Conditional Function Call**
+	```cpp
+	            if(tmp->right)  q.push(tmp->right);
+	```
+	If the current node has a right child, add it to the queue for processing.
+
+16. **Stack Operation**
+	```cpp
+	        stk.push(ans);
+	```
+	Push the current level vector onto the stack.
+
+17. **Loop Definition**
+	```cpp
+	    while(!stk.empty())
+	```
+	Start a loop to retrieve levels from the stack in reverse order.
+
+18. **Stack Operation**
+	```cpp
+	        ans.push_back(stk.top());
+	```
+	Add the top level vector from the stack to the result vector.
+
+19. **Stack Operation**
+	```cpp
+	        stk.pop();
+	```
+	Remove the top level from the stack after adding it to the result.
+
+20. **Return Value**
+	```cpp
+	    return ans;      
+	```
+	Return the final bottom-up level order traversal vector.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of nodes in the tree, since each node is processed exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space used by the queue and the stack to store the nodes and their values.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/)
 

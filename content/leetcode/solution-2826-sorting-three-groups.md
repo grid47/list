@@ -14,115 +14,133 @@ img_src = ""
 youtube = "Q3wrIhMmpfA"
 youtube_upload_date="2023-08-19"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Q3wrIhMmpfA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` containing elements that are either 1, 2, or 3. In each operation, you can remove an element from the array. The task is to return the minimum number of operations required to make the array non-decreasing.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array `nums` of integers, where each element is one of the values 1, 2, or 3.
+- **Example:** `For example, `nums = [3, 1, 2, 3, 1]``
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 3
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumOperations(vector<int>& A) {
-        int a = 0, b = 0, c = 0;
-        for (int x: A) {
-            a += x != 1;
-            b = min(a, b + (x != 2));
-            c = min(b, c + (x != 3));
-        }
-        return c;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to make the array `nums` non-decreasing.
+- **Example:** `For `nums = [2, 1, 3, 2, 3]`, the output is `2`.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum number of deletions to make the array non-decreasing.
 
-The problem requires determining the minimum number of operations required to convert a given array `A` into an array of only 1s, 2s, and 3s. In each operation, you can replace any element of the array with either 1, 2, or 3. The goal is to minimize the number of replacements.
+- Track how many operations are needed to make the array non-decreasing for each possible value (1, 2, 3).
+- Iterate through the array and compare each element with its previous value to determine if it should be removed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains only 1, 2, or 3 as its elements.
+- The array length is manageable (<= 100).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `nums = [3, 1, 2, 3, 1]``  \
+  **Explanation:** By removing the first, third, and fourth elements, we can make the array non-decreasing: `[1, 2, 3]`.
 
-- The given array `A` consists of integers, and we are allowed to replace elements with values `1`, `2`, or `3`.
-- We need to calculate the minimum number of changes needed to ensure that the entire array consists only of `1`s, `2`s, and `3`s.
+{{< dots >}}
+## Approach 🚀
+The solution involves calculating the minimum number of operations required to make the array non-decreasing by tracking the number of deletions for each element in `nums`.
 
-### Approach
-
-This problem can be approached using dynamic programming, where we track the minimum number of operations needed to transform the array step by step. The solution takes into account the following observations:
-
-- **State Variables**: We define three variables, `a`, `b`, and `c`, to represent the minimum number of operations required to transform the array into:
-  - `a`: An array consisting entirely of `1`s.
-  - `b`: An array consisting entirely of `1`s and `2`s.
-  - `c`: An array consisting entirely of `1`s, `2`s, and `3`s.
-  
-- **Transition Logic**:
-  - The variable `a` counts how many times a value in `A` is not equal to 1, and the number of operations increases as we move through the array.
-  - The variable `b` ensures that we can have the array consisting of `1`s and `2`s. If the value in the array is not `2`, we increment the operations.
-  - Similarly, the variable `c` ensures the array consists of `1`s, `2`s, and `3`s, where we increment the operations when the value is not `3`.
-  
-- **Dynamic Programming Transition**: As we traverse the array, at each step:
-  - We calculate the minimum operations needed to replace any element that is not `1`, `2`, or `3`, by using `min()` functions to propagate the optimal solution.
-
-By the end of the traversal, the variable `c` will hold the minimum number of operations required to transform the entire array into an array of only `1`s, `2`s, and `3`s.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The elements in `nums` are restricted to 1, 2, and 3, which simplifies the problem.
+- We need to track the number of removals for each value and minimize the number of deletions.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty (which won't happen according to constraints), no deletions are needed.
+- Handle inputs with the maximum length of 100 efficiently.
+- If all elements are already in non-decreasing order, no deletions are required.
+- Ensure the solution works within time limits for the maximum input size.
+{{< dots >}}
+## Code 💻
 ```cpp
 int minimumOperations(vector<int>& A) {
-```
-1. **Function Declaration**: The function `minimumOperations` takes a vector of integers `A` as input, representing the given array.
-
-```cpp
     int a = 0, b = 0, c = 0;
-```
-2. **Initialization**:
-   - `a`, `b`, and `c` are initialized to 0. These will track the minimum operations needed to transform the array to various forms as described earlier (i.e., `1`s, `1`s and `2`s, `1`s, `2`s, and `3`s).
-
-```cpp
     for (int x: A) {
-```
-3. **Iterating Over Array `A`**: A loop is used to iterate over each element `x` of the array `A`.
-
-```cpp
         a += x != 1;
-```
-4. **Updating `a`**:
-   - `a` is incremented whenever the current element `x` is not equal to 1. This operation tracks the minimum operations required to convert the array to an array of `1`s.
-
-```cpp
         b = min(a, b + (x != 2));
-```
-5. **Updating `b`**:
-   - `b` is updated to the minimum of `a` and `b + (x != 2)`. This means that if the current element `x` is not equal to 2, the number of operations needed to transform the array into `1`s and `2`s is incremented. The `min()` ensures we choose the fewer operations between keeping `b` as is or adding one more operation to transform `x` into `2`.
-
-```cpp
         c = min(b, c + (x != 3));
-```
-6. **Updating `c`**:
-   - Similarly, `c` is updated to the minimum of `b` and `c + (x != 3)`. If the current element `x` is not equal to 3, we increment the operation count for transforming the array into `1`s, `2`s, and `3`s.
-
-```cpp
     }
-```
-7. **Loop Completion**: The loop completes after iterating through all elements in the array.
-
-```cpp
     return c;
+}
 ```
-8. **Return Result**:
-   - The final result is the value of `c`, which represents the minimum number of operations needed to convert the entire array into an array consisting of only `1`s, `2`s, and `3`s.
 
-### Complexity
+This function calculates the minimum number of operations required to transform the elements of vector 'A' into the sequence [1, 2, 3], following a specific transformation order. Each operation involves changing an element in 'A' to match the desired sequence.
 
-1. **Time Complexity**:
-   - The time complexity of this solution is **O(n)**, where `n` is the length of the input array `A`. The algorithm iterates through the array once, making a constant-time check for each element and updating the variables `a`, `b`, and `c`. Therefore, the overall time complexity is linear in terms of the size of the input array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumOperations(vector<int>& A) {
+	```
+	The function 'minimumOperations' is defined, taking a vector of integers 'A' as input and returning the minimum number of operations needed to transform 'A' into the sequence [1, 2, 3].
 
-2. **Space Complexity**:
-   - The space complexity is **O(1)**, as the algorithm uses only a constant amount of extra space (three variables: `a`, `b`, and `c`) to store the intermediate results. The solution does not use any additional data structures whose size depends on the input, making it space-efficient.
+2. **Variable Initialization**
+	```cpp
+	    int a = 0, b = 0, c = 0;
+	```
+	Variables 'a', 'b', and 'c' are initialized to zero. These variables keep track of the number of operations required to transform elements into 1, 2, and 3, respectively.
 
-### Conclusion
+3. **Loop Start**
+	```cpp
+	    for (int x: A) {
+	```
+	A for loop is started, iterating through each element 'x' of the vector 'A'. This loop is used to process each element in 'A' and update the operation counts.
 
-The problem at hand is solved efficiently using dynamic programming principles. By keeping track of three variables (`a`, `b`, and `c`), the solution dynamically adjusts the minimum operations required as we traverse the array. The approach ensures that the solution is both time-efficient (with a linear time complexity) and space-efficient (constant space complexity).
+4. **Update a**
+	```cpp
+	        a += x != 1;
+	```
+	The variable 'a' is incremented if the current element 'x' is not equal to 1, indicating that an operation is needed to transform this element to 1.
 
-The solution essentially transforms the problem into a series of optimal subproblems that progressively build up the result, making it a perfect candidate for dynamic programming. The `min()` function is a key tool in ensuring that we always take the optimal number of operations at each step. This method is both simple and effective for transforming arrays with constraints on allowable values.
+5. **Update b**
+	```cpp
+	        b = min(a, b + (x != 2));
+	```
+	The variable 'b' is updated to the minimum of the current 'a' and 'b + 1' if the current element 'x' is not equal to 2. This step tracks the operations needed to transform elements into 2.
+
+6. **Update c**
+	```cpp
+	        c = min(b, c + (x != 3));
+	```
+	The variable 'c' is updated to the minimum of the current 'b' and 'c + 1' if the current element 'x' is not equal to 3. This step tracks the operations needed to transform elements into 3.
+
+7. **Return Statement**
+	```cpp
+	    return c;
+	```
+	The function returns the value of 'c', which represents the minimum number of operations needed to transform the entire sequence into [1, 2, 3].
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the `nums` array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1), as only a few variables are used.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sorting-three-groups/description/)
 

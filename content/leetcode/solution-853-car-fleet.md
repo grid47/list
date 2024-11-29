@@ -14,136 +14,158 @@ img_src = ""
 youtube = "Pr6T-3yB9RM"
 youtube_upload_date="2021-10-18"
 youtube_thumbnail="https://i.ytimg.com/vi/Pr6T-3yB9RM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given several cars starting at different positions along a road. Each car has a specific speed and is trying to reach a target destination. A car cannot pass another car, but it can catch up and travel at the speed of the slower car. Cars that travel together form a fleet. Your task is to determine the number of car fleets that will reach the target.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the target distance, an array of car positions, and an array of car speeds.
+- **Example:** `Input: target = 15, position = [12, 5, 2, 9], speed = [3, 4, 2, 5]`
+- **Constraints:**
+	- n == position.length == speed.length
+	- 1 <= n <= 10^5
+	- 0 < target <= 10^6
+	- 0 <= position[i] < target
+	- All the values of position are unique.
+	- 0 < speed[i] <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int carFleet(int target, vector<int>& pos, vector<int>& v) {
-        map<int, double> t;
-        for(int i = 0; i < pos.size(); i++) {
-            t[-pos[i]] = (double) (target-pos[i]) / v[i];
-        }
-        
-        int fleet = 0;
-        double cur = 0;
-        
-        for(auto it: t) {
-            if(it.second > cur) fleet++, cur = it.second;
-        }
-        return fleet;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of car fleets that will arrive at the target.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find how many fleets will form by considering each car's starting position and speed, and determining if it will catch up to others.
+
+- Step 1: Calculate the time it takes for each car to reach the target.
+- Step 2: Sort the cars by their starting position in descending order.
+- Step 3: Iterate through the sorted list of cars, comparing the time for each car to reach the target with the previous car's time.
+- Step 4: If a car reaches the target faster than the previous car, it forms a new fleet. Otherwise, it joins the previous fleet.
+{{< dots >}}
+### Problem Assumptions ✅
+- Cars with the same position cannot exist.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: target = 10, position = [7, 3, 0, 5], speed = [1, 2, 3, 4]`  \
+  **Explanation:** In this example, the car starting at position 0 (speed 3) reaches the target before the car starting at position 3 (speed 2), but after the car starting at position 7 (speed 1). The car starting at position 5 (speed 4) forms a fleet with the car starting at position 3 and moves at the same speed. Therefore, there are 2 fleets.
+
+- **Input:** `Input: target = 100, position = [0, 10, 20, 30], speed = [10, 5, 2, 1]`  \
+  **Explanation:** In this example, the car starting at position 0 (speed 10) forms a fleet by itself. The cars starting at positions 10, 20, and 30 form a single fleet because each catches up to the previous one.
+
+{{< dots >}}
+## Approach 🚀
+We solve this problem by first sorting the cars based on their starting positions and then determining how many distinct fleets will reach the target.
+
+### Initial Thoughts 💭
+- Cars that are farther ahead will likely have a smaller time to the target, so they may form a new fleet if they travel at a faster speed.
+- By calculating the time for each car to reach the target, we can decide if the car forms a new fleet or joins an existing one.
+{{< dots >}}
+### Edge Cases 🌐
+- N/A: The problem guarantees at least one car.
+- The solution must handle up to 10^5 cars efficiently.
+- If there is only one car, it will form one fleet.
+- All positions are unique, and the number of cars will not exceed the specified limit.
+{{< dots >}}
+## Code 💻
+```cpp
+int carFleet(int target, vector<int>& pos, vector<int>& v) {
+    map<int, double> t;
+    for(int i = 0; i < pos.size(); i++) {
+        t[-pos[i]] = (double) (target-pos[i]) / v[i];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are tasked with simulating car fleets traveling towards a target. Each car is at a certain position on a 1D line and is traveling at a constant speed. We need to determine how many fleets will reach the target, where a fleet is a group of cars that arrive at the target simultaneously.
-
-A fleet is formed when multiple cars are close enough to each other such that the lead car’s speed determines the speed of the whole group. If a faster car catches up to a slower car, they form a fleet, and both will reach the target at the same time.
-
-#### Input:
-- An integer `target` represents the target point on the 1D axis.
-- A vector `pos` of integers, where each value represents the position of a car.
-- A vector `v` of integers, where each value represents the speed of the corresponding car in the `pos` vector.
-
-#### Output:
-- The number of car fleets that will reach the target.
-
-**Example:**
-```cpp
-Input: target = 12, pos = [10, 8, 0, 5, 3], v = [2, 4, 1, 1, 3]
-Output: 3
-```
-
-### Approach
-
-To solve this problem efficiently, we can use a greedy approach combined with sorting. The key insight is that the slower cars will eventually "catch up" to the faster ones if they start behind and are not too far apart.
-
-1. **Understanding the Fleet Formation**:
-    - Cars that start behind and travel faster can eventually catch up to cars in front, forming a fleet.
-    - A fleet is formed when a slower car catches up with a faster car. Once a fleet forms, all cars in that fleet move as one, and they will reach the target at the same time.
-
-2. **Plan**:
-    - We will first calculate the time it takes for each car to reach the target.
-    - The time to reach the target for each car is calculated as:
-      \[
-      \text{time} = \frac{\text{target} - \text{position}}{\text{velocity}}
-      \]
-    - Sort the cars by their position in descending order (from the furthest car to the nearest car).
-    - Then, we will simulate the formation of fleets by iterating over the cars. For each car, if it takes longer to reach the target than the car ahead of it, it will form a new fleet. Otherwise, it will join the fleet of the car ahead.
-
-3. **Efficiency**:
-    - Sorting the cars by their position ensures that we process them from the car that is farthest away from the target to the one closest.
-    - We track the lead car’s time for each fleet, and if a car behind has a longer or equal time, it joins the fleet.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Store Time to Reach Target
-
-```cpp
-map<int, double> t;
-for(int i = 0; i < pos.size(); i++) {
-    t[-pos[i]] = (double) (target - pos[i]) / v[i];
+    
+    int fleet = 0;
+    double cur = 0;
+    
+    for(auto it: t) {
+        if(it.second > cur) fleet++, cur = it.second;
+    }
+    return fleet;
 }
 ```
 
-- We create a `map` `t` to store the time it takes for each car to reach the target. The key of the map is the negative of the car's position (`-pos[i]`) to ensure cars are processed in descending order of their position (furthest first).
-- The value in the map is the time it will take for the car at position `pos[i]` to reach the target, which is calculated using the formula:
-  \[
-  \text{time} = \frac{\text{target} - \text{position}}{\text{velocity}}
-  \]
-  
-#### Step 2: Process Cars to Form Fleets
+This function calculates the number of car fleets reaching a target. The fleet is determined based on the positions and speeds of the cars.
 
-```cpp
-int fleet = 0;
-double cur = 0;
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int carFleet(int target, vector<int>& pos, vector<int>& v) {
+	```
+	Define the main function, taking target position, car positions, and car speeds as input.
 
-for (auto it: t) {
-    if (it.second > cur) fleet++, cur = it.second;
-}
-```
+2. **Data Structure**
+	```cpp
+	    map<int, double> t;
+	```
+	Initialize a map to store the time taken for each car to reach the target, using the negative of the position as the key.
 
-- We initialize `fleet` to 0 to count the number of fleets, and `cur` to 0 to keep track of the current lead car’s time.
-- We iterate over the `map` to process each car starting from the furthest car:
-  - If the current car’s time (`it.second`) is greater than the time of the car ahead (`cur`), it means this car cannot catch up to the car ahead, so it forms a new fleet. We increment the fleet count and update `cur` to the current car's time.
-  - If the current car’s time is less than or equal to `cur`, it means this car will catch up with the car ahead, so it does not form a new fleet, and it joins the existing fleet.
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < pos.size(); i++) {
+	```
+	Start a loop to calculate the time for each car to reach the target.
 
-#### Step 3: Return Result
+4. **Calculation**
+	```cpp
+	        t[-pos[i]] = (double) (target-pos[i]) / v[i];
+	```
+	For each car, calculate the time it will take to reach the target by using the formula: time = (target - position) / speed.
 
-```cpp
-return fleet;
-```
+5. **Variable Initialization**
+	```cpp
+	    int fleet = 0;
+	```
+	Initialize the fleet counter to 0.
 
-- Finally, we return the total number of fleets.
+6. **Variable Initialization**
+	```cpp
+	    double cur = 0;
+	```
+	Initialize the variable 'cur' to track the current maximum time seen among the fleets.
 
-### Complexity
+7. **Loop**
+	```cpp
+	    for(auto it: t) {
+	```
+	Start a loop to process each car's time to reach the target in descending order of positions.
 
-#### Time Complexity:
-- Sorting the cars by position takes **O(n log n)**, where `n` is the number of cars (i.e., the size of the `pos` vector).
-- Iterating over the cars and processing them takes **O(n)** time.
-- Therefore, the overall time complexity is **O(n log n)** due to the sorting step.
+8. **Fleet Calculation**
+	```cpp
+	        if(it.second > cur) fleet++, cur = it.second;
+	```
+	If the current car takes more time than the previous one, it forms a new fleet. Update the current time.
 
-#### Space Complexity:
-- The space complexity is **O(n)** due to the storage of the `map` which holds the time for each car.
+9. **Return**
+	```cpp
+	    return fleet;
+	```
+	Return the total number of fleets.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-This solution efficiently solves the problem by leveraging the properties of sorting and greedy algorithms. By calculating the time to reach the target for each car and processing them from the furthest car to the nearest, we can easily determine the number of fleets that will reach the target. The use of sorting and a greedy approach ensures that we achieve the solution in **O(n log n)** time, making it suitable for large inputs.
+The time complexity is dominated by the sorting of the positions of the cars, which takes O(n log n).
 
-Key points:
-- **Sorting** helps us process the cars from the farthest to the nearest.
-- **Greedy approach** ensures that we minimize the number of fleets by merging cars that can catch up with each other.
-- The solution is efficient both in terms of time and space, making it a robust solution for the problem.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-This method is a great example of applying a greedy approach to a real-world problem involving cars moving toward a target, and it showcases how sorting and optimal traversal can solve such problems efficiently.
+The space complexity is O(n) due to the storage required for the times of the cars.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/car-fleet/description/)
 

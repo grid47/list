@@ -14,94 +14,134 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two integers a and b, generate a string of length a + b such that the string contains exactly a 'a' letters and exactly b 'b' letters, while ensuring the substring 'aaa' and 'bbb' do not appear.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers a and b, representing the number of occurrences of 'a' and 'b' in the desired string.
+- **Example:** `a = 2, b = 3`
+- **Constraints:**
+	- 0 <= a, b <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string strWithout3a3b(int A, int B, char a = 'a', char b = 'b', string res = "") {
-        if(B > A) return strWithout3a3b(B, A, b, a);
-        while(A-- > 0) {
-            res += a;
-            if(A > B) res += a, A--;
-            if(B-->0) res += b;
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string s that satisfies the conditions outlined in the problem statement.
+- **Example:** `Output: 'abbab'`
+- **Constraints:**
+	- The output string should have exactly a 'a' letters and b 'b' letters.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to construct a string that follows the specified conditions without violating the 'aaa' and 'bbb' substrings constraint.
 
-The problem asks to generate a string consisting of characters `'a'` and `'b'`, where the number of `'a'` characters is `A` and the number of `'b'` characters is `B`. The string should be generated such that there are no three consecutive characters that are the same. In other words, the string should not contain three consecutive `'a'` or three consecutive `'b'`.
+- Start by adding 'a' characters in a balanced way with 'b' characters to avoid consecutive 'a' or 'b' characters.
+- Ensure that at no point do the number of 'a' characters exceed those of 'b' by more than 2 or vice versa.
+- Interleave 'a' and 'b' characters as needed, making sure that the string does not contain 'aaa' or 'bbb'.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string must be constructed in such a way that it adheres to the rules of avoiding 'aaa' and 'bbb'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `a = 2, b = 3`  \
+  **Explanation:** In this case, a valid output is 'abbab', which avoids 'aaa' and 'bbb' while ensuring the correct number of 'a' and 'b' characters.
 
-The task is to return a valid string satisfying the constraints, or an empty string if no such string can be formed.
+{{< dots >}}
+## Approach 🚀
+The solution involves constructing a string by alternating between 'a' and 'b' while ensuring the constraints on consecutive occurrences of 'a' and 'b' are met.
 
-### Approach
-
-To solve this problem, the main challenge is ensuring that no three consecutive characters of the same type appear in the resulting string. To achieve this, we can adopt a greedy approach:
-
-1. **Greedy Strategy**: 
-   - We always aim to add the character with the higher count first to the string. This ensures that we prioritize the character that still has more occurrences to be placed.
-   - After placing the first character, if the count of the first character is still higher than the second, we add the same character again.
-   - Finally, we add the other character (if any is left) to maintain the balance between the two characters, ensuring that neither `'a'` nor `'b'` appears three times consecutively.
-
-2. **Base Case Handling**:
-   - If `A` (the count of `'a'`) is greater than `B` (the count of `'b'`), we simply swap the values of `A` and `B` and swap the characters `'a'` and `'b'` accordingly.
-   - This guarantees that the character with the higher count will always be processed first, regardless of whether it's `'a'` or `'b'`.
-
-3. **Greedy Placement**:
-   - For each iteration, the logic tries to place two occurrences of the character that appears more frequently (if doing so doesn’t violate the three-consecutive rule), followed by one occurrence of the character that appears less frequently.
-
-4. **Termination**:
-   - The loop continues until all occurrences of both characters have been placed in the result string.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Initial Setup**:
+### Initial Thoughts 💭
+- We need to construct the string without causing the substring 'aaa' or 'bbb' to appear.
+- We can start by interleaving 'a' and 'b', and then adjust the string as necessary to ensure the constraints are maintained.
+- A greedy approach can work well, ensuring that we alternate between 'a' and 'b' without violating the constraints.
+{{< dots >}}
+### Edge Cases 🌐
+- If a or b is 0, the string should just consist of the remaining characters.
+- If a and b are large (close to 100), the approach should still ensure that no 'aaa' or 'bbb' substrings appear.
+- Consider cases where a and b are equal, or where one is much larger than the other.
+- Ensure the solution handles cases with both small and large values of a and b.
+{{< dots >}}
+## Code 💻
 ```cpp
 string strWithout3a3b(int A, int B, char a = 'a', char b = 'b', string res = "") {
     if(B > A) return strWithout3a3b(B, A, b, a);
-```
-- The function `strWithout3a3b` takes in four parameters: `A`, `B`, the counts of characters `'a'` and `'b'`, and two additional default parameters for the characters `a` and `b`. The result string `res` is initialized as an empty string.
-- If `B > A` (i.e., there are more `'b'` characters than `'a'`), we swap the roles of `'a'` and `'b'` by calling the function recursively. This simplifies the logic, as it ensures that the character with the higher count is always processed first.
-
-#### 2. **Adding Characters**:
-```cpp
-while(A-- > 0) {
-    res += a;
-    if(A > B) res += a, A--;
-    if(B-->0) res += b;
+    while(A-- > 0) {
+        res += a;
+        if(A > B) res += a, A--;
+        if(B-->0) res += b;
+    }
+    return res;
 }
 ```
-- We start a `while` loop that continues until all characters are placed in the result string. For each iteration, we first add the character `a` to the result string.
-- If the remaining count of `a` is still greater than the remaining count of `b` (i.e., `A > B`), we add another `a` to avoid breaking the rule of not having more than two consecutive `a` characters.
-- Finally, if there are any remaining `b` characters (i.e., `B > 0`), we add a `b` to the result string.
-- The logic ensures that the string is built progressively without exceeding the allowed repetition of characters.
 
-#### 3. **Returning the Result**:
-```cpp
-return res;
-```
-- Once the loop finishes, all characters have been placed in the result string, and it is returned as the solution.
+This code defines a function `strWithout3a3b` that generates a string of `a`s and `b`s such that there are no three consecutive occurrences of either character. It balances the characters to prevent three consecutive identical ones.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string strWithout3a3b(int A, int B, char a = 'a', char b = 'b', string res = "") {
+	```
+	Defines the function `strWithout3a3b`, which takes two integers `A` and `B`, representing the counts of characters `a` and `b`, respectively, and ensures no three consecutive `a`s or `b`s in the result string.
 
-#### Time Complexity:
-- **Time Complexity**: The function operates in **O(A + B)** time because we loop through all the `A` and `B` characters exactly once, placing them into the result string. Each step involves constant-time operations (adding characters and adjusting counters).
-  
-#### Space Complexity:
-- **Space Complexity**: The space complexity is **O(A + B)** since we are constructing the result string `res`, which holds a total of `A + B` characters. The extra space used by the function is negligible, as we only use a few extra variables for the characters and counts.
+2. **Recursive Call for Swapping**
+	```cpp
+	    if(B > A) return strWithout3a3b(B, A, b, a);
+	```
+	If `B` is greater than `A`, the function swaps the roles of `a` and `b` (and their counts) to ensure the function always processes the character with the larger count first.
 
-### Conclusion
+3. **Main Loop Start**
+	```cpp
+	    while(A-- > 0) {
+	```
+	A loop that runs while there are still `a`s to add to the result string. It decreases the count of `a` with each iteration.
 
-This solution efficiently solves the problem by using a greedy approach to build the string step by step. It ensures that the string is constructed in a valid manner by avoiding three consecutive identical characters. The function operates in linear time relative to the total number of characters to be placed (`A + B`), making it scalable for larger inputs. The approach is both time and space efficient, offering a simple yet effective solution to the problem.
+4. **Add Character A**
+	```cpp
+	        res += a;
+	```
+	Appends the character `a` to the result string `res`.
+
+5. **Check If More A's Should Be Added**
+	```cpp
+	        if(A > B) res += a, A--;
+	```
+	If there are more `a`s remaining than `b`s, the function appends one more `a` to the result and decrements `A`.
+
+6. **Add Character B**
+	```cpp
+	        if(B-->0) res += b;
+	```
+	If `B` (count of `b`s) is greater than 0, append a `b` to the result string and decrement `B`.
+
+7. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the final result string `res` that contains no more than two consecutive `a`s or `b`s.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(a + b)
+- **Average Case:** O(a + b)
+- **Worst Case:** O(a + b)
+
+The time complexity is linear in the total number of 'a' and 'b' characters, which is the length of the resulting string.
+
+### Space Complexity 💾
+- **Best Case:** O(a + b)
+- **Worst Case:** O(a + b)
+
+The space complexity is O(a + b), as we need to store the result string of length a + b.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/string-without-aaa-or-bbb/description/)
 

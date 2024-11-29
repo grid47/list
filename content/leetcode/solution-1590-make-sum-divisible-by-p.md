@@ -14,129 +14,199 @@ img_src = ""
 youtube = "tZXsLAyE0SE"
 youtube_upload_date="2024-10-03"
 youtube_thumbnail="https://i.ytimg.com/vi/tZXsLAyE0SE/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of positive integers nums and an integer p, your task is to remove the smallest subarray (contiguous elements) such that the sum of the remaining elements is divisible by p. If it's impossible, return -1. Note that the entire array cannot be removed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a positive integer array nums and an integer p. The length of nums is between 1 and 10^5, and each element of nums is between 1 and 10^9. The value of p is also between 1 and 10^9.
+- **Example:** `Input: nums = [4, 2, 3, 5], p = 8`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 1 <= p <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minSubarray(vector<int>& nums, int p) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the smallest subarray that you need to remove so that the sum of the remaining elements is divisible by p. If no such subarray exists, return -1.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- If the whole array cannot be removed and no solution exists, return -1.
 
-        map<int, int> mp;
-        mp[0] = -1;
-        int n = nums.size(), res = n, cur = 0, need = 0, want = 0;   
-        
-        for(int a : nums)
-            need = (need + a) % p;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the smallest subarray that, when removed, ensures the sum of the remaining elements is divisible by p. This involves checking the remainders when elements are added up and removing the minimum contiguous subarray that achieves the result.
 
-        for(int i = 0; i < n; i++) {
+- 1. Calculate the total sum of the array.
+- 2. If the total sum is already divisible by p, no removal is needed, and the answer is 0.
+- 3. Compute the remainder when the sum of the array is divided by p.
+- 4. Traverse the array, maintaining a running sum modulo p, and check if a valid subarray exists whose removal makes the total sum divisible by p.
+- 5. Keep track of the minimum length of such a subarray and return the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums contains only positive integers.
+- It's guaranteed that the array is non-empty and contains at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [4, 2, 3, 5], p = 8`  \
+  **Explanation:** The sum of the array is 14. To make it divisible by 8, we need to remove the subarray [2, 3] (which has sum 5). The remaining sum is 9, which is divisible by 8. Hence, the smallest subarray to remove is of length 2.
 
-            cur = (cur + nums[i]) % p;
-            mp[cur] = i;
-            want = (cur - need + p) % p;
+- **Input:** `Input: nums = [5, 5, 5, 5], p = 7`  \
+  **Explanation:** The sum of the array is 20. We cannot remove any single element or any subarray to get a sum divisible by 7. Hence, the result is -1.
 
-            if (mp.count(want))
-            res = min(res, i - mp[want]);
+{{< dots >}}
+## Approach 🚀
+The approach is to find the minimum subarray that can be removed by tracking the remainders of the running sum and identifying when a valid removal is possible. This allows us to minimize the length of the subarray removed.
 
-        }
+### Initial Thoughts 💭
+- We need to work with running sums and modulo operations to efficiently check the divisibility condition.
+- The challenge is to minimize the length of the subarray that needs to be removed.
+- The problem can be solved by efficiently maintaining the prefix sum and searching for the smallest valid subarray using a hash map to store the remainders.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle the case where nums has only one element, which cannot be removed completely.
+- Ensure the solution handles large arrays efficiently.
+- Handle cases where the sum of the array is already divisible by p (in which case no removal is needed).
+- Handle cases where no subarray removal can make the sum divisible by p.
+- Make sure the solution works within the given time and space constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int minSubarray(vector<int>& nums, int p) {
 
-        return res < n? res : -1;
+    map<int, int> mp;
+    mp[0] = -1;
+    int n = nums.size(), res = n, cur = 0, need = 0, want = 0;   
+    
+    for(int a : nums)
+        need = (need + a) % p;
+
+    for(int i = 0; i < n; i++) {
+
+        cur = (cur + nums[i]) % p;
+        mp[cur] = i;
+        want = (cur - need + p) % p;
+
+        if (mp.count(want))
+        res = min(res, i - mp[want]);
+
     }
 
-};
-{{< /highlight >}}
----
+    return res < n? res : -1;
+}
 
-### Problem Statement
-
-The problem involves finding the minimum length of a subarray in an array `nums` such that when the sum of its elements is removed from the array, the remaining elements' sum is divisible by a given integer `p`. If no such subarray exists, we should return -1.
-
-### Approach
-
-To solve this problem efficiently, we will utilize the concept of prefix sums and hash maps. The steps are as follows:
-
-1. **Calculate the Total Remainder**: First, we compute the total sum of the array `nums` modulo `p`. This will give us the remainder that needs to be compensated by removing a subarray.
-
-2. **Use a Hash Map to Track Prefix Remainders**: As we iterate through the array, we will maintain a running sum and track the indices of the remainders we encounter. This will allow us to find subarrays that can adjust the total sum to be divisible by `p`.
-
-3. **Calculate the Required Remainder**: For each element in the array, we calculate what the required remainder would be if we were to remove the current subarray. If this required remainder has been seen before, we can determine the length of the subarray to remove.
-
-4. **Find the Minimum Length**: Throughout the iteration, we will keep track of the minimum length of valid subarrays that can be removed.
-
-5. **Return the Result**: If we found valid subarrays, we return the minimum length; otherwise, we return -1.
-
-### Code Breakdown (Step by Step)
-
-Let’s delve into the code to understand its workings in detail:
-
-```cpp
-class Solution {
-public:
-    int minSubarray(vector<int>& nums, int p) {
 ```
 
-- **Class and Method Declaration**: We define the `Solution` class and the method `minSubarray`, which takes a vector of integers `nums` and an integer `p`.
+This function finds the minimum length of a contiguous subarray whose sum is divisible by a given integer `p`. The function uses a prefix sum approach with modulo operations to efficiently track potential subarrays.
 
-```cpp
-        map<int, int> mp; // Map to store the last occurrence of each prefix sum remainder
-        mp[0] = -1; // Initialize with the case where the prefix sum is zero
-        int n = nums.size(), res = n, cur = 0, need = 0, want = 0;   
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minSubarray(vector<int>& nums, int p) {
+	```
+	This is the function declaration for `minSubarray`, which takes a vector of integers `nums` and an integer `p` as parameters.
 
-- **Initialization**: We initialize a hash map `mp` to track the indices of the last occurrences of each remainder. We set `mp[0]` to -1 to handle cases where removing a prefix subarray is possible. We also define variables for the size of the array `n`, the result `res` initialized to `n`, and variables for the current prefix sum `cur`, the total remainder needed `need`, and the desired remainder `want`.
+2. **Variable Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	This initializes a map `mp` to store the remainders of prefix sums, with the index of their last occurrence.
 
-```cpp
-        for(int a : nums)
-            need = (need + a) % p; // Calculate the total remainder needed from the full array
-```
+3. **Variable Initialization**
+	```cpp
+	    mp[0] = -1;
+	```
+	We initialize the map `mp` with an entry for remainder 0 at index -1, which helps handle cases where the subarray starts from the beginning.
 
-- **Calculating Total Remainder**: We iterate through the `nums` array and accumulate the total sum modulo `p` to determine the remainder `need`.
+4. **Variable Initialization**
+	```cpp
+	    int n = nums.size(), res = n, cur = 0, need = 0, want = 0;   
+	```
+	Here we initialize the variables: `n` for the size of `nums`, `res` for tracking the minimum length of the subarray, `cur` for the current prefix sum modulo `p`, `need` for the target remainder, and `want` for the desired remainder.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-            cur = (cur + nums[i]) % p; // Update the current prefix sum remainder
-            mp[cur] = i; // Store the current index of this remainder
-            want = (cur - need + p) % p; // Calculate the required remainder to adjust the sum
-```
+5. **Prefix Sum Calculation**
+	```cpp
+	    for(int a : nums)
+	```
+	This loop iterates over each element `a` in the `nums` array.
 
-- **Iterating Through the Array**: We loop through the `nums` array. In each iteration, we update the current prefix sum `cur`, store its last occurrence in the map, and compute the required remainder `want`.
+6. **Prefix Sum Calculation**
+	```cpp
+	        need = (need + a) % p;
+	```
+	This line computes the cumulative sum modulo `p`, storing the result in `need`, which represents the target remainder for the subarray.
 
-```cpp
-            if (mp.count(want))
-                res = min(res, i - mp[want]); // If the required remainder exists, calculate the minimum length
-```
+7. **Loop (Main)**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This loop iterates over each index `i` of the `nums` array to compute the current prefix sum and check if a valid subarray exists.
 
-- **Checking for Valid Subarrays**: We check if the `want` remainder exists in our map. If it does, we calculate the length of the subarray from the last occurrence of `want` to the current index `i`, and we update `res` if this length is smaller than the previous minimum.
+8. **Prefix Sum Update**
+	```cpp
+	
+	```
+	Within this loop, we update the current prefix sum and check for previously seen remainders.
 
-```cpp
-        return res < n ? res : -1; // Return the minimum length found, or -1 if no valid subarray exists
-    }
-};
-```
+9. **Prefix Sum Update**
+	```cpp
+	        cur = (cur + nums[i]) % p;
+	```
+	We update the current prefix sum `cur` with the value of `nums[i]` modulo `p`.
 
-- **Final Return Statement**: After iterating through the array, we check if a valid subarray length was found. If `res` is less than `n`, it indicates that we found a valid subarray, so we return its length; otherwise, we return -1.
+10. **Map Update**
+	```cpp
+	        mp[cur] = i;
+	```
+	This stores the index `i` for the current remainder `cur` in the map `mp`.
 
-### Complexity
+11. **Target Remainder Calculation**
+	```cpp
+	        want = (cur - need + p) % p;
+	```
+	This calculates the remainder `want` which is the target remainder we need to find in the map to form a valid subarray.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of elements in the `nums` array. This is due to the single pass through the array and the average constant time complexity of operations on the hash map.
+12. **Subarray Search**
+	```cpp
+	        if (mp.count(want))
+	```
+	This checks if the map contains the target remainder `want`. If it does, we can potentially form a valid subarray.
 
-- **Space Complexity**: The space complexity is \(O(p)\), where \(p\) is the modulus value. This space is required to store the remainder indices in the hash map.
+13. **Result Update**
+	```cpp
+	        res = min(res, i - mp[want]);
+	```
+	If a valid subarray is found, this updates the result `res` with the minimum length of the subarray.
 
-### Conclusion
+14. **Return Statement**
+	```cpp
+	    return res < n? res : -1;
+	```
+	This checks if a valid subarray was found. If the result `res` is less than the size of `nums`, it returns `res`; otherwise, it returns -1 to indicate no valid subarray was found.
 
-This solution efficiently finds the minimum length of a subarray whose removal allows the sum of the remaining elements to be divisible by a specified integer `p`. 
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - If the total sum is divisible by p, no subarray needs to be removed.
+- **Average Case:** O(n) - We iterate over the array once to compute the prefix sums and check for the valid subarrays.
+- **Worst Case:** O(n) - The algorithm runs in linear time with respect to the number of elements.
 
-Key takeaways from this solution include:
+The time complexity is linear due to the single traversal of the array.
 
-- **Utilization of Prefix Sums**: By maintaining a running total and its remainder, we can dynamically adjust our search for valid subarrays.
-- **Hash Map for Quick Lookups**: The use of a hash map allows for quick access to previously encountered remainders, making it easy to compute the necessary lengths of potential subarrays to remove.
-- **Modular Arithmetic**: The problem leverages modular arithmetic to handle the condition of divisibility efficiently.
+### Space Complexity 💾
+- **Best Case:** O(n) - The space complexity remains linear due to the use of a hash map to track the remainder indices.
+- **Worst Case:** O(n) - We store the prefix sums and their corresponding indices in a hash map.
 
-This algorithm is both efficient and elegant, making it well-suited for scenarios requiring quick calculations involving subarrays and conditions on their sums. The clear structure and logic provide a robust framework for tackling similar problems in array manipulation and mathematical constraints.
+The space complexity is linear in the worst case, depending on the number of unique remainders.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-sum-divisible-by-p/description/)
 

@@ -14,70 +14,129 @@ img_src = ""
 youtube = "0KHTVvSX7CE"
 youtube_upload_date="2022-03-05"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/0KHTVvSX7CE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums' and an integer 'key', which is present in 'nums'. Your task is to find the integer that most frequently appears immediately after an occurrence of 'key' in the array. In other words, count how many times each integer follows 'key' and return the integer that appears the most.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array 'nums' and an integer 'key'.
+- **Example:** `Input: nums = [3,1,2,3,4,3,5], key = 3`
+- **Constraints:**
+	- 2 <= nums.length <= 1000
+	- 1 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the integer that follows 'key' the most times in the array. The answer will be unique.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The test cases will be generated such that the answer is unique.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the integer that follows 'key' the most times in the array.
+
+- Iterate through the array and count how many times each integer appears immediately after an occurrence of 'key'.
+- Keep track of the integer that has the highest count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least one occurrence of 'key'.
+- The solution must find the target with the maximum frequency efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3,1,2,3,4,3,5], key = 3`  \
+  **Explanation:** In the array, '3' is followed by '1' at index 1, by '4' at index 3, and by '5' at index 5. '3' appears 3 times, while no other integer follows 'key' as frequently. Thus, the output is 3.
+
+- **Input:** `Input: nums = [2,5,2,3,5,2], key = 2`  \
+  **Explanation:** In the array, '2' is followed by '5' at index 1, '3' at index 3, and another '5' at index 4. '5' follows '2' twice, while no other integer follows 'key' as frequently. Hence, the output is 5.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will iterate through the array and count how often each integer follows an occurrence of 'key', then return the integer with the maximum count.
+
+### Initial Thoughts 💭
+- This problem can be solved by iterating through the array and maintaining a count of the occurrences of each integer that follows 'key'.
+- We can use a hash map or array to store the frequency of each integer following 'key' and then find the integer with the highest frequency.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one element after 'key', so empty inputs are not a concern.
+- Ensure the solution works for arrays of size 1000.
+- All elements in the array could be the same, or 'key' might be the last element, in which case no other element can follow it.
+- The solution should be efficient and work within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
   int mostFrequent(vector<int>& nums, int key) {
-    int cnt[1001] = {}, res = 0;
-    for (int i = 1; i < nums.size(); ++i)
-        if (nums[i - 1] == key && ++cnt[nums[i]] > cnt[res])
-            res = nums[i];
-    return res;
+int cnt[1001] = {}, res = 0;
+for (int i = 1; i < nums.size(); ++i)
+    if (nums[i - 1] == key && ++cnt[nums[i]] > cnt[res])
+        res = nums[i];
+return res;
   }
-};
-{{< /highlight >}}
----
+```
 
-### Problem Statement
-Given an integer array `nums` and a key integer `key`, the task is to find the most frequent integer in `nums` that appears immediately after an occurrence of `key`. The solution must return the integer that has the highest frequency of occurrence following `key` in the array.
+This function finds the most frequent number in the list 'nums' that appears immediately after a given 'key'. It uses a counting array to track the frequency of each number.
 
-### Approach
-The problem is solved efficiently using a counting technique. The solution involves iterating through the array, checking if the previous number is equal to `key`, and then counting the occurrences of numbers that follow `key`. The number with the highest count is the answer.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	  int mostFrequent(vector<int>& nums, int key) {
+	```
+	Defines the function 'mostFrequent' which takes a vector of integers 'nums' and an integer 'key' as inputs, and returns the most frequent number after occurrences of 'key'.
 
-### Code Breakdown (Step by Step)
-1. **Initialization of Counting Array:**
-   ```cpp
-   int cnt[1001] = {}, res = 0;
-   ```
-   - The array `cnt` of size 1001 is used to count the frequency of each number that follows `key` in the array. The size of 1001 ensures that all possible numbers (from 0 to 1000) can be accounted for. 
-   - `res` is initialized to 0 and will store the most frequent number after `key`.
+2. **Variable Initialization**
+	```cpp
+	int cnt[1001] = {}, res = 0;
+	```
+	Initializes an array 'cnt' to store frequencies of numbers, and a variable 'res' to track the most frequent number.
 
-2. **Iterating Through the Array:**
-   ```cpp
-   for (int i = 1; i < nums.size(); ++i)
-   ```
-   - A `for` loop is used to traverse the array `nums` starting from the second element (index 1), as we need to compare each element with its previous one.
+3. **Loop**
+	```cpp
+	for (int i = 1; i < nums.size(); ++i)
+	```
+	Starts a loop from the second element of the vector 'nums' to check each number and count its occurrences after the key.
 
-3. **Checking for the Key and Counting Frequencies:**
-   ```cpp
-   if (nums[i - 1] == key && ++cnt[nums[i]] > cnt[res])
-       res = nums[i];
-   ```
-   - The condition `nums[i - 1] == key` checks if the previous element is equal to `key`. If this condition is true, the current element `nums[i]` is the candidate for counting.
-   - The expression `++cnt[nums[i]]` increments the count of `nums[i]` in the `cnt` array.
-   - The comparison `cnt[nums[i]] > cnt[res]` checks if the current number has a higher frequency than the previously stored result. If so, `res` is updated to store the current number.
+4. **Condition Check**
+	```cpp
+	    if (nums[i - 1] == key && ++cnt[nums[i]] > cnt[res])
+	```
+	Checks if the previous element in the array is equal to 'key' and if the frequency of the current element is greater than the current 'res'. If true, update 'res'.
 
-4. **Return Result:**
-   ```cpp
-   return res;
-   ```
-   - After the loop completes, `res` holds the most frequent number that appears after `key` in the array. This is returned as the result.
+5. **Update Result**
+	```cpp
+	        res = nums[i];
+	```
+	Updates the result 'res' to the current number 'nums[i]' if it appears more frequently after 'key'.
 
-### Complexity
-- **Time Complexity**: 
-  - The time complexity of this solution is O(n), where `n` is the size of the input array `nums`. This is because the solution iterates through the array once and performs constant-time operations inside the loop.
-- **Space Complexity**: 
-  - The space complexity is O(1), or constant space, since the only additional space used is the fixed-size array `cnt` of 1001 elements.
+6. **Return Statement**
+	```cpp
+	return res;
+	```
+	Returns the most frequent number after occurrences of 'key' from the vector 'nums'.
 
-### Conclusion
-The code provides an efficient solution to the problem of finding the most frequent integer that appears after a specified key in an array. By using a frequency count array, the algorithm ensures that each number is processed in constant time, making the solution optimal for large arrays. The linear time complexity ensures that the solution can scale well even for large input sizes, and the space complexity remains minimal, using only a fixed amount of additional space for counting occurrences. This approach strikes an ideal balance between simplicity and performance, making it suitable for real-world applications where finding frequent patterns in arrays is a common task.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the input array, because we only need to iterate through the array once.
+
+### Space Complexity 💾
+- **Best Case:** O(m)
+- **Worst Case:** O(m)
+
+The space complexity is O(m), where m is the number of distinct integers that follow 'key'. This is the space used for counting occurrences.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/most-frequent-number-following-key-in-an-array/description/)
 

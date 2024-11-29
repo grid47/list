@@ -14,129 +14,148 @@ img_src = ""
 youtube = "3THUt0vAFLU"
 youtube_upload_date="2021-07-11"
 youtube_thumbnail="https://i.ytimg.com/vi/3THUt0vAFLU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s, and you need to return the number of unique palindromic subsequences of length 3 that are subsequences of s.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single string s of length n.
+- **Example:** `s = "aabca"`
+- **Constraints:**
+	- 3 <= s.length <= 10^5
+	- s consists of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countPalindromicSubsequence(string num) {
-        int n = num.size(), res = 0;        
-        vector<int> fst(26,n), lst(26,0);
-        for(int i = 0; i < n; i++) {
-            fst[num[i]-'a']= min(fst[num[i]-'a'], i);
-            lst[num[i]-'a'] = i;
-        }
-        for(int i = 0; i < 26; i++) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of unique palindromic subsequences of length 3 that appear in s.
+- **Example:** `3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To efficiently count all unique palindromic subsequences of length 3.
+
+- Use a frequency map to track the first and last occurrences of each character in the string.
+- For each character, check if it forms a palindromic subsequence with other characters in between.
+{{< dots >}}
+### Problem Assumptions ✅
+- All characters in the string are lowercase English letters.
+- The string will always have at least 3 characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "aabca"`  \
+  **Explanation:** The three unique palindromic subsequences are 'aba', 'aaa', and 'aca', so the output is 3.
+
+{{< dots >}}
+## Approach 🚀
+To count the palindromic subsequences, we can use a strategy that involves tracking first and last occurrences of characters and counting the valid subsequences.
+
+### Initial Thoughts 💭
+- The string can be very large, so an efficient solution is needed.
+- We need to find a way to count palindromic subsequences without generating all possible subsequences.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string has fewer than 3 characters, the result should be 0.
+- The solution should handle strings up to length 100,000 efficiently.
+- If the string consists of only one character repeated, the number of palindromic subsequences could be larger.
+- Consider the time complexity to be linear in the size of the string.
+{{< dots >}}
+## Code 💻
+```cpp
+int countPalindromicSubsequence(string num) {
+    int n = num.size(), res = 0;        
+    vector<int> fst(26,n), lst(26,0);
+    for(int i = 0; i < n; i++) {
+        fst[num[i]-'a']= min(fst[num[i]-'a'], i);
+        lst[num[i]-'a'] = i;
+    }
+    for(int i = 0; i < 26; i++) {
 if(fst[i] < lst[i]) res += unordered_set<char>(num.begin() + fst[i] + 1, num.begin() + lst[i]).size();
-        }
-        return res;        
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to count the number of distinct palindromic subsequences in a given string of lowercase English letters. A palindromic subsequence is a sequence that reads the same backward as forward and can be derived from the original string by deleting some characters without changing the order of the remaining characters.
-
-For example, in the string "abca", the palindromic subsequences include "a", "b", "c", "aa", "aca", and "aba". The objective is to implement an efficient solution that can handle this counting in a way that optimally processes the string and identifies the required subsequences.
-
-### Approach
-
-To solve this problem efficiently, we can follow these steps:
-
-1. **Identify First and Last Occurrences**: Create two arrays, `fst` and `lst`, to store the first and last occurrences of each character in the input string. The `fst` array keeps track of the first index where each character appears, and the `lst` array keeps track of the last index for each character.
-
-2. **Iterate Through Characters**: For each character in the alphabet, if the first occurrence index is less than the last occurrence index, we identify that the character appears at least twice. We then look for distinct characters that appear between these two indices.
-
-3. **Count Distinct Characters**: Use an unordered set to gather distinct characters between the first and last indices of each character that can form palindromic subsequences. The size of this set will contribute to the count of distinct palindromic subsequences.
-
-4. **Return the Result**: Sum up all distinct characters found in the sets and return the final count.
-
-### Code Breakdown (Step by Step)
-
-Here’s a step-by-step breakdown of the provided code:
-
-```cpp
-class Solution {
-public:
-    int countPalindromicSubsequence(string num) {
+    return res;        
+}
 ```
-In this part of the code, we define a class named `Solution` and declare a public method `countPalindromicSubsequence`, which takes a string `num` as input.
 
-```cpp
-        int n = num.size(), res = 0;        
-        vector<int> fst(26, n), lst(26, 0);
-```
-We initialize an integer `n` to hold the size of the input string and an integer `res` to count the distinct palindromic subsequences. We also create two vectors `fst` and `lst`, both of size 26 (for each letter of the alphabet). `fst` is initialized to `n` (to represent that no character has been found yet), and `lst` is initialized to 0.
+This function computes the count of distinct palindromic subsequences in a given string `num`.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-            fst[num[i] - 'a'] = min(fst[num[i] - 'a'], i);
-            lst[num[i] - 'a'] = i;
-        }
-```
-We loop through the string `num` using a for loop, where `i` ranges from `0` to `n - 1`. During each iteration, we update the first occurrence of each character by taking the minimum index. Simultaneously, we set the last occurrence index to the current index.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Header**
+	```cpp
+	int countPalindromicSubsequence(string num) {
+	```
+	Defines the function `countPalindromicSubsequence`, which takes a string `num` and returns an integer representing the count of distinct palindromic subsequences.
 
-```cpp
-        for(int i = 0; i < 26; i++) {
-            if(fst[i] < lst[i]) 
-                res += unordered_set<char>(num.begin() + fst[i] + 1, num.begin() + lst[i]).size();
-        }
-```
-Next, we iterate through the `fst` and `lst` arrays. If the first occurrence is less than the last occurrence (indicating the character appears at least twice), we create an unordered set of characters that appear between the first and last indices of this character. The size of this set, which represents distinct characters between these indices, is added to `res`.
+2. **Variable Initialization**
+	```cpp
+	    int n = num.size(), res = 0;        
+	```
+	Initializes `n` to the length of the string `num` and `res` to store the count of palindromic subsequences.
 
-```cpp
-        return res;        
-    }
-};
-```
-Finally, the method returns the accumulated count of distinct palindromic subsequences stored in `res`.
+3. **Vector Initialization**
+	```cpp
+	    vector<int> fst(26,n), lst(26,0);
+	```
+	Declares two vectors `fst` and `lst` to store the first and last occurrence indices of each character in the string `num`.
 
-### Complexity
+4. **For Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop that iterates through each character in the string `num`.
 
-- **Time Complexity**: The overall time complexity is \(O(n + 26 \cdot m)\), where \(n\) is the length of the string and \(m\) is the average number of distinct characters between occurrences. The first loop runs in linear time, and the second loop iterates over 26 characters, with the unordered set operation being average \(O(1)\) for each insert.
+5. **First Occurrence Update**
+	```cpp
+	        fst[num[i]-'a']= min(fst[num[i]-'a'], i);
+	```
+	Updates the first occurrence of the character `num[i]` in the `fst` vector, ensuring it holds the smallest index.
 
-- **Space Complexity**: The space complexity is \(O(26)\) for the two arrays used to track first and last occurrences, and \(O(m)\) for the unordered sets created during processing. In the worst case, the space used by the set could be up to the size of the alphabet (constant).
+6. **Last Occurrence Update**
+	```cpp
+	        lst[num[i]-'a'] = i;
+	```
+	Updates the last occurrence of the character `num[i]` in the `lst` vector with the current index.
 
-### Conclusion
+7. **Second For Loop Start**
+	```cpp
+	    for(int i = 0; i < 26; i++) {
+	```
+	Starts a second loop that iterates over all possible characters (from 'a' to 'z').
 
-The `countPalindromicSubsequence` method provides an efficient way to count distinct palindromic subsequences in a given string. By utilizing the properties of character indices and unordered sets, the implementation is optimized for both time and space, making it suitable for larger inputs. 
+8. **Palindrome Count Calculation**
+	```cpp
+	if(fst[i] < lst[i]) res += unordered_set<char>(num.begin() + fst[i] + 1, num.begin() + lst[i]).size();
+	```
+	For each character, if it appears more than once, calculates the number of distinct characters between its first and last occurrences, adding this count to `res`.
 
-### Key Features
+9. **Return Statement**
+	```cpp
+	    return res;        
+	```
+	Returns the total count of distinct palindromic subsequences.
 
-1. **First and Last Occurrences**: The algorithm effectively uses the indices of characters to track their positions, minimizing redundant checks.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-2. **Distinct Character Tracking**: Utilizing unordered sets allows the algorithm to quickly count distinct characters, which is crucial for identifying valid palindromic subsequences.
+The time complexity is O(n) because we iterate over the string once to compute the first and last occurrences.
 
-3. **Efficiency**: The method is designed to handle larger strings efficiently, thanks to its linear complexity concerning the size of the input.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### Use Cases
+The space complexity is O(1) because we only use constant space to store the first and last occurrences of characters.
 
-1. **Text Analysis**: This technique can be applied in natural language processing tasks where palindromic patterns may need to be identified within strings.
+**Happy Coding! 🎉**
 
-2. **DNA Sequence Analysis**: In bioinformatics, finding palindromic sequences in DNA strands can help identify important biological markers.
-
-3. **Data Compression**: Algorithms that rely on recognizing patterns might use palindromic subsequences to enhance compression ratios.
-
-4. **Cryptography**: Identifying palindromic patterns can play a role in analyzing certain cryptographic sequences for vulnerabilities.
-
-### Implementation Considerations
-
-When implementing this method, it is essential to consider:
-
-- **Input Constraints**: Ensure the input string adheres to specified constraints to avoid excessive memory use or time delays.
-
-- **Character Set**: The algorithm currently assumes only lowercase English letters; adjustments may be necessary for broader character sets.
-
-- **Performance Testing**: It’s recommended to conduct performance tests with varying input sizes and character distributions to ensure optimal functionality.
-
-By mastering the approach presented in this solution, developers can effectively address similar string processing challenges, harnessing the power of algorithmic design to efficiently manage and manipulate character data.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/unique-length-3-palindromic-subsequences/description/)
 

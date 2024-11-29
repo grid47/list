@@ -14,114 +14,177 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string containing only four kinds of characters: 'Q', 'W', 'E', and 'R'. The string is balanced if each character appears exactly n/4 times, where n is the length of the string. The task is to find the minimum length of a substring that can be replaced to make the string balanced.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string 's' of length n (where n is a multiple of 4) containing only characters 'Q', 'W', 'E', and 'R'.
+- **Example:** `s = 'QQWE'`
+- **Constraints:**
+	- 4 <= n <= 10^5
+	- n is a multiple of 4
+	- s contains only 'Q', 'W', 'E', and 'R'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int balancedString(string s) {
-        map<char, int> ma;
-        for(int i = 0; i < s.size(); i++) {
-            ma[s[i]]++;
-        }
-        int k = s.size() / 4, j = 0, res = s.size();
-        for(int i = 0; i < s.size(); i++) {
-            ma[s[i]]--;
-        while(j < s.size() && ma['Q'] <= k && ma['W'] <= k && ma['E'] <= k && ma['R'] <= k) {
-                ma[s[j]]++;
-                res = min(res, i - j + 1);
-                j++;
-            }
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the minimum length of the substring that can be replaced to make the string balanced.
+- **Example:** `1`
+- **Constraints:**
+	- The output should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the minimum length of a substring that can be replaced to balance the string.
+
+- Count the occurrences of each character in the string.
+- If the string is already balanced, return 0.
+- Use a sliding window to find the smallest substring that, when replaced, will balance the string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is always valid, containing only 'Q', 'W', 'E', and 'R'.
+- The length of the string is a multiple of 4.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'QQWE'`  \
+  **Explanation:** The string has 2 'Q's and 1 each of 'W' and 'E'. To balance the string, we can replace one 'Q' with 'R'. The result is 1.
+
+- **Input:** `s = 'QQQW'`  \
+  **Explanation:** The string has 3 'Q's and 1 'W'. To balance the string, we can replace two 'Q's with 'E' and 'R'. The result is 2.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves counting the occurrences of each character and then using a sliding window to find the smallest substring that can be replaced to balance the string.
+
+### Initial Thoughts 💭
+- The string should be balanced when each character appears exactly n/4 times.
+- We can use a sliding window approach to efficiently solve the problem.
+- We should track the number of each character and adjust the window until the string becomes balanced.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as the input will always have at least 4 characters.
+- Ensure that the solution works efficiently with strings of length up to 10^5.
+- Consider cases where the string is already balanced.
+- The string is guaranteed to be of length a multiple of 4.
+{{< dots >}}
+## Code 💻
+```cpp
+int balancedString(string s) {
+    map<char, int> ma;
+    for(int i = 0; i < s.size(); i++) {
+        ma[s[i]]++;
     }
-};
-{{< /highlight >}}
----
-
-
-
-### Problem Statement
-The problem requires determining the minimum number of characters that need to be replaced in a given string, `s`, composed of the characters 'Q', 'W', 'E', and 'R', to make the string "balanced." A balanced string has an equal number of each character, which means that in a string of length `n`, each character should appear exactly `n/4` times. The goal is to find the minimum substring length that can be replaced to achieve this balance.
-
-### Approach
-To solve the problem efficiently, we can utilize the sliding window technique along with a frequency map to keep track of character counts. The steps involved in the approach are as follows:
-
-1. **Count Frequencies**: First, we count the frequency of each character in the string using a map (or dictionary). This helps in determining how many of each character exist in the string.
-
-2. **Determine Required Count**: We calculate the desired count of each character for the string to be balanced, which is given by `k = s.size() / 4`.
-
-3. **Use Sliding Window Technique**: We then use two pointers (a sliding window) to find the smallest substring that can be replaced to achieve balance:
-   - Expand the right pointer to include characters until the substring becomes unbalanced.
-   - Once it becomes unbalanced, increment the left pointer to shrink the window while checking if the substring can still maintain balance.
-   - Throughout this process, keep track of the minimum length of the valid substring.
-
-4. **Return the Result**: The minimum length of the substring found during the sliding window traversal is returned as the result.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int balancedString(string s) {
-```
-- **Lines 1-2**: We define the `Solution` class and start the `balancedString` method, which takes a string `s` as input.
-
-```cpp
-        map<char, int> ma;
-        for(int i = 0; i < s.size(); i++) {
-            ma[s[i]]++;
+    int k = s.size() / 4, j = 0, res = s.size();
+    for(int i = 0; i < s.size(); i++) {
+        ma[s[i]]--;
+    while(j < s.size() && ma['Q'] <= k && ma['W'] <= k && ma['E'] <= k && ma['R'] <= k) {
+            ma[s[j]]++;
+            res = min(res, i - j + 1);
+            j++;
         }
-```
-- **Lines 3-6**: We initialize a frequency map `ma` to count occurrences of each character in the string. The loop iterates through each character in `s`, incrementing the count for that character in the map.
-
-```cpp
-        int k = s.size() / 4, j = 0, res = s.size();
-```
-- **Line 7**: We calculate `k`, which represents the required frequency of each character in a balanced string. We also initialize `j` as the left pointer for our sliding window and `res` to hold the result, initialized to the maximum possible length of the substring (the entire string).
-
-```cpp
-        for(int i = 0; i < s.size(); i++) {
-            ma[s[i]]--;
-```
-- **Lines 8-9**: We start iterating with the right pointer `i`. For each character at position `i`, we decrement its count in the frequency map, simulating the addition of that character into our current window.
-
-```cpp
-            while(j < s.size() && ma['Q'] <= k && ma['W'] <= k && ma['E'] <= k && ma['R'] <= k) {
-```
-- **Line 10**: We enter a while loop that checks if all characters 'Q', 'W', 'E', and 'R' are within the required frequency limit (less than or equal to `k`). This means the substring from `j` to `i` is balanced or can potentially be balanced by replacing characters.
-
-```cpp
-                ma[s[j]]++;
-                res = min(res, i - j + 1);
-                j++;
-            }
-        }
-```
-- **Lines 11-15**: Inside the while loop:
-  - We increment the count of the character at position `j` (the left end of the window), effectively removing it from the current window.
-  - We update `res` with the minimum of its current value and the length of the current window (`i - j + 1`).
-  - Finally, we increment `j` to potentially narrow down the window for the next iteration.
-
-```cpp
-        return res;
     }
-};
+    return res;
+}
 ```
-- **Lines 16-19**: After completing the loop through all characters, we return the value of `res`, which now contains the length of the minimum substring that can be replaced to achieve balance.
 
-### Complexity
-1. **Time Complexity**: The time complexity of the solution is \( O(n) \), where \( n \) is the length of the string `s`. This is because both pointers (`i` and `j`) traverse the string at most once, leading to a linear pass through the data.
+This function aims to find the length of the minimum substring that needs to be replaced to balance the frequencies of 'Q', 'W', 'E', and 'R' in the given string `s`.
 
-2. **Space Complexity**: The space complexity is \( O(1) \), since the frequency map only needs to store a fixed number of characters ('Q', 'W', 'E', 'R') regardless of the input size. The size of the frequency map is constant (4 characters), so it does not grow with the input size.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int balancedString(string s) {
+	```
+	This is the function definition for `balancedString`, which takes a string `s` and returns the length of the minimum substring that must be replaced to balance the characters 'Q', 'W', 'E', and 'R'.
 
-### Conclusion
-The `balancedString` function efficiently determines the minimum number of characters that need to be replaced in a string to make it balanced using a sliding window approach. By utilizing a frequency map to track character counts and dynamically adjusting the window size, the solution finds the optimal result in linear time. This method is effective for solving problems related to string manipulation and balancing character frequencies, making it a valuable technique in competitive programming and algorithm design.
+2. **Variable Initialization**
+	```cpp
+	    map<char, int> ma;
+	```
+	A map `ma` is initialized to store the frequency of each character in the string `s`.
+
+3. **Character Frequency Count**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	A loop is started to iterate through the string `s`.
+
+4. **Updating Character Count**
+	```cpp
+	        ma[s[i]]++;
+	```
+	For each character in the string `s`, its frequency is incremented in the map `ma`.
+
+5. **Calculation of Target Frequency**
+	```cpp
+	    int k = s.size() / 4, j = 0, res = s.size();
+	```
+	The target frequency for each character is calculated as `k = s.size() / 4`, assuming the balanced string will have equal frequencies for 'Q', 'W', 'E', and 'R'. The variables `j` (start of the sliding window) and `res` (minimum length of substring) are also initialized.
+
+6. **Iterating Over String**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	A loop is started to iterate through the string `s` again, this time for checking the sliding window of characters.
+
+7. **Decreasing Character Count**
+	```cpp
+	        ma[s[i]]--;
+	```
+	The frequency of the character at position `i` in the string is decremented in the map `ma` as part of the sliding window process.
+
+8. **Sliding Window Check**
+	```cpp
+	    while(j < s.size() && ma['Q'] <= k && ma['W'] <= k && ma['E'] <= k && ma['R'] <= k) {
+	```
+	A while loop is used to check if all character frequencies ('Q', 'W', 'E', 'R') are less than or equal to the target frequency `k`. If true, the window is valid.
+
+9. **Updating Frequency and Result**
+	```cpp
+	            ma[s[j]]++;
+	```
+	The character at position `j` is added back to the map `ma` as part of the sliding window.
+
+10. **Updating Minimum Result**
+	```cpp
+	            res = min(res, i - j + 1);
+	```
+	The variable `res` is updated to the minimum of its current value and the length of the current valid window `i - j + 1`.
+
+11. **Incrementing Window Start**
+	```cpp
+	            j++;
+	```
+	The starting point of the sliding window, `j`, is incremented to shrink the window.
+
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the value of `res`, which is the length of the minimum substring that needs to be replaced to balance the characters 'Q', 'W', 'E', and 'R'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution iterates through the string a few times, making it linear in complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, as we only need a few variables to track character counts.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/replace-the-substring-for-balanced-string/description/)
 

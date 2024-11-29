@@ -14,120 +14,242 @@ img_src = ""
 youtube = "74-V6AjJ4wg"
 youtube_upload_date="2022-06-12"
 youtube_thumbnail="https://i.ytimg.com/vi/74-V6AjJ4wg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array cookies, where each element represents the number of cookies in a particular bag. You are also given an integer k, which denotes the number of children to distribute these bags of cookies to. Each bag must go to exactly one child, and cookies cannot be split between children. The unfairness of a distribution is defined as the maximum number of cookies any single child receives. Your goal is to return the minimum unfairness across all possible distributions.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two parameters: cookies, an integer array representing the number of cookies in each bag, and an integer k, the number of children.
+- **Example:** `cookies = [10, 20, 15, 30], k = 3`
+- **Constraints:**
+	- 2 <= cookies.length <= 8
+	- 1 <= cookies[i] <= 10^5
+	- 2 <= k <= cookies.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int k, ans = INT_MAX;
-    vector<int> cook, dist;
-    
-    int dp(int idx) {
-        if(idx == cook.size()) {            
-            int sol = dist[0];
-            for(int i = 0; i < k; i++) {
-                sol = max(sol, dist[i]);
-            }
-            ans = min(ans, sol);
-            return sol;
-        }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum unfairness of all possible distributions, defined as the maximum number of cookies any single child receives.
+- **Example:** `For cookies = [10, 20, 15, 30] and k = 3, the output is 35.`
+- **Constraints:**
+	- The distribution should minimize the maximum number of cookies assigned to any child.
 
-        int ans = INT_MAX;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to distribute the cookies in such a way that the maximum number of cookies any child receives is minimized.
+
+- Sort the cookies array for easier distribution.
+- Use backtracking to try distributing cookies to each child, keeping track of the total cookies each child receives.
+- Recursively explore all possible distributions and calculate the maximum unfairness for each combination.
+- Return the minimum unfairness across all distributions.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each bag of cookies must go to exactly one child.
+- All cookies in a bag must be distributed together; they cannot be split.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `cookies = [10, 20, 15, 30], k = 3`  \
+  **Explanation:** An optimal distribution could be: [10, 20] to child 1, [15] to child 2, and [30] to child 3. The maximum number of cookies any child gets is 35.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will use backtracking to explore all possible distributions of cookies, minimizing the unfairness.
+
+### Initial Thoughts 💭
+- We need to divide the cookies into k groups such that the group with the maximum sum of cookies has the smallest possible value.
+- Using backtracking, we can try every distribution and calculate the maximum cookies any child receives. We need to minimize this maximum.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty arrays or k greater than cookies.length should not occur as per the problem constraints.
+- The solution should handle the maximum input size efficiently.
+- If all cookies are the same, the unfairness will be minimized.
+- Make sure the number of cookies is always greater than or equal to k.
+{{< dots >}}
+## Code 💻
+```cpp
+int k, ans = INT_MAX;
+vector<int> cook, dist;
+
+int dp(int idx) {
+    if(idx == cook.size()) {            
+        int sol = dist[0];
         for(int i = 0; i < k; i++) {
-            dist[i] += cook[idx];
-            ans = min(ans, dp(idx + 1));
-            dist[i] -= cook[idx];
+            sol = max(sol, dist[i]);
         }
-
-        return ans;
+        ans = min(ans, sol);
+        return sol;
     }
-    
-    int distributeCookies(vector<int>& cook, int k) {
-        this->k = k;
-        dist.resize(k, 0);
-        this->cook = cook;
-        dp(0);
-        return ans;
+
+    int ans = INT_MAX;
+    for(int i = 0; i < k; i++) {
+        dist[i] += cook[idx];
+        ans = min(ans, dp(idx + 1));
+        dist[i] -= cook[idx];
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-Given an array `cookies` where each element represents the number of cookies assigned to a person, and an integer `k` representing the number of people, the task is to distribute the cookies in a way that minimizes the maximum number of cookies assigned to any person. The objective is to return the minimum possible value of the maximum number of cookies that any person receives after distributing all the cookies.
+    return ans;
+}
 
-### Approach
-This problem is a classic example of load balancing, where we need to distribute items (cookies) to groups (people) such that the load (maximum cookies) is minimized. The approach to solve this problem efficiently is using a backtracking algorithm combined with dynamic programming (DP). This solution involves recursive exploration of all possible ways to distribute the cookies and keeping track of the optimal (minimal) maximum load.
+int distributeCookies(vector<int>& cook, int k) {
+    this->k = k;
+    dist.resize(k, 0);
+    this->cook = cook;
+    dp(0);
+    return ans;
+}
+```
 
-### Key Observations:
-1. **Base Case**: Once all cookies are distributed, calculate the maximum load (max of cookies distributed to any person).
-2. **Recursive Exploration**: Distribute cookies recursively by trying to assign each cookie to each person. After distributing a cookie, move on to the next one and continue exploring the possibilities.
-3. **Optimal Substructure**: The problem can be broken down into subproblems where each decision (distributing a cookie to a person) affects the result of subsequent decisions.
+This code defines a dynamic programming solution for distributing cookies to k children while minimizing the maximum number of cookies a child receives. The function `distributeCookies` sets up the problem, and the helper function `dp` recursively explores all possible distributions to find the optimal solution.
 
-### Code Breakdown (Step by Step)
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int k, ans = INT_MAX;
+	```
+	Declare two integer variables: `k` for the number of children, and `ans` for storing the minimum maximum number of cookies any child receives, initialized to `INT_MAX`.
 
-1. **Initialization**:
-   - `k`: This stores the number of people.
-   - `ans`: This variable keeps track of the minimum possible maximum cookies a person can receive. It starts with `INT_MAX` to ensure that any valid solution will be smaller.
-   - `cook`: The array of cookies that need to be distributed.
-   - `dist`: A vector that stores the current distribution of cookies among the `k` people.
+2. **Vector Initialization**
+	```cpp
+	vector<int> cook, dist;
+	```
+	Declare two vectors: `cook`, which will store the number of cookies, and `dist`, which tracks the current distribution of cookies to the children.
 
-2. **Recursive Function `dp(idx)`**:
-   ```cpp
-   int dp(int idx) {
-       if(idx == cook.size()) {
-           int sol = dist[0];
-           for(int i = 0; i < k; i++) {
-               sol = max(sol, dist[i]);
-           }
-           ans = min(ans, sol);
-           return sol;
-       }
+3. **Function Declaration**
+	```cpp
+	int dp(int idx) {
+	```
+	Declare the recursive function `dp` that takes an integer `idx` representing the current index in the `cook` array. This function explores different ways to distribute cookies.
 
-       int ans = INT_MAX;
-       for(int i = 0; i < k; i++) {
-           dist[i] += cook[idx];
-           ans = min(ans, dp(idx + 1));
-           dist[i] -= cook[idx];
-       }
+4. **Base Case**
+	```cpp
+	    if(idx == cook.size()) {
+	```
+	Base case for recursion: if the index `idx` equals the size of the `cook` array, meaning all cookies have been distributed, calculate the maximum number of cookies a child has received.
 
-       return ans;
-   }
-   ```
-   - The function `dp(idx)` is called recursively, where `idx` represents the index of the cookie being distributed.
-   - **Base Case**: If `idx == cook.size()`, it means all cookies have been distributed. Now, calculate the maximum load on any person and update the `ans` to the minimum of its current value and this calculated maximum.
-   - **Recursive Case**: For each person (from 0 to `k-1`), assign the current cookie (`cook[idx]`) to that person, update the distribution (`dist`), and then recurse by calling `dp(idx + 1)`. After recursion, backtrack by undoing the change (`dist[i] -= cook[idx]`), which allows for exploring other possibilities of cookie distribution.
+5. **Max Distribution Calculation**
+	```cpp
+	        int sol = dist[0];
+	```
+	Initialize `sol` to the number of cookies received by the first child. This will be used to track the maximum number of cookies any child has received.
 
-3. **Main Function `distributeCookies()`**:
-   ```cpp
-   int distributeCookies(vector<int>& cook, int k) {
-       this->k = k;
-       dist.resize(k, 0);
-       this->cook = cook;
-       dp(0);
-       return ans;
-   }
-   ```
-   - The `distributeCookies()` function is the main function that initializes the required parameters and calls the recursive `dp()` function to start the distribution from the first cookie (`idx = 0`).
-   - It sets up the `dist` vector to store the current load on each person, initially all set to zero.
-   - Finally, it returns the value of `ans`, which contains the minimum possible maximum cookies any person can receive after all cookies are distributed.
+6. **Loop Through Children**
+	```cpp
+	        for(int i = 0; i < k; i++) {
+	```
+	Loop through each child (from `i = 0` to `i = k-1`) to find the child with the maximum number of cookies.
 
-### Complexity
+7. **Update Maximum**
+	```cpp
+	            sol = max(sol, dist[i]);
+	```
+	Update `sol` to the maximum value between `sol` and `dist[i]`, which is the number of cookies received by the current child.
 
-#### Time Complexity:
-- The time complexity of this solution is exponential, specifically `O(k^n)`, where `n` is the number of cookies, and `k` is the number of people. This is because for each cookie (`n` cookies), we try assigning it to each of the `k` people. In the worst case, the algorithm explores all possible distributions of cookies.
-- However, this solution benefits from pruning (through the recursive calls), which helps to minimize the search space and avoid redundant calculations.
+8. **Update Global Result**
+	```cpp
+	        ans = min(ans, sol);
+	```
+	Update the global `ans` with the minimum of the current `ans` and `sol` to track the optimal solution (the least worst case of cookie distribution).
 
-#### Space Complexity:
-- The space complexity is `O(k)`, where `k` is the number of people. This is because the `dist` array has `k` elements, and it is the main data structure used in the recursive function to keep track of the current distribution of cookies.
+9. **Return Maximum Distribution**
+	```cpp
+	        return sol;
+	```
+	Return the maximum number of cookies received by any child for the current distribution.
 
-### Conclusion
-This algorithm efficiently solves the problem of distributing cookies to minimize the maximum number of cookies assigned to any person by leveraging recursion and dynamic programming. While the time complexity is exponential due to the need to explore all possible cookie distributions, it is made efficient by carefully updating and backtracking the cookie assignments. This ensures that the solution is optimal for smaller problem sizes. For large inputs, further optimization techniques, such as memoization or dynamic programming, could be considered to reduce the computation time.
+10. **Recursive Exploration**
+	```cpp
+	    int ans = INT_MAX;
+	```
+	Initialize `ans` to `INT_MAX` to store the minimum value of the maximum cookies a child receives, across all possible distributions.
+
+11. **Loop Through Children**
+	```cpp
+	    for(int i = 0; i < k; i++) {
+	```
+	Loop through each child to explore different ways of distributing cookies.
+
+12. **Update Distribution**
+	```cpp
+	        dist[i] += cook[idx];
+	```
+	Add the number of cookies from `cook[idx]` to the `i`-th child's current total in `dist[i]`.
+
+13. **Recursive Call**
+	```cpp
+	        ans = min(ans, dp(idx + 1));
+	```
+	Recursively call `dp` with the next index `idx + 1`, updating `ans` with the minimum value between the current `ans` and the result of the recursive call.
+
+14. **Undo Distribution**
+	```cpp
+	        dist[i] -= cook[idx];
+	```
+	Backtrack by subtracting `cook[idx]` from `dist[i]` to undo the distribution for the current child before trying the next one.
+
+15. **Return Minimum Maximum Distribution**
+	```cpp
+	    return ans;
+	```
+	Return the minimum of the maximum distributions, which is the optimal solution for the problem.
+
+16. **Main Function Declaration**
+	```cpp
+	int distributeCookies(vector<int>& cook, int k) {
+	```
+	Declare the main function `distributeCookies`, which takes a vector `cook` representing the number of cookies and an integer `k` for the number of children.
+
+17. **Initialize k**
+	```cpp
+	    this->k = k;
+	```
+	Assign the value of `k` to the class member variable `k`.
+
+18. **Resize Distribution Array**
+	```cpp
+	    dist.resize(k, 0);
+	```
+	Resize the `dist` array to have `k` elements, initializing all elements to 0.
+
+19. **Initialize Cook Array**
+	```cpp
+	    this->cook = cook;
+	```
+	Assign the `cook` vector to the class member variable `cook`.
+
+20. **Call dp Function**
+	```cpp
+	    dp(0);
+	```
+	Start the recursive `dp` function with index `0` to begin the distribution of cookies.
+
+21. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the optimal result stored in `ans`, which is the minimum maximum distribution of cookies.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k^n)
+- **Average Case:** O(k^n)
+- **Worst Case:** O(k^n)
+
+Since we explore all possible distributions of the cookies to k children, the time complexity depends on the number of possible assignments.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(k)
+
+We need space for the current distribution of cookies to the k children, which takes O(k) space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/fair-distribution-of-cookies/description/)
 

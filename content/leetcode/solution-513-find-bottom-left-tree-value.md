@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "u_by_cTsNJA"
 youtube_upload_date="2021-11-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/u_by_cTsNJA/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,140 +28,178 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/u_by_cTsNJA/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary tree, return the leftmost value in the last row of the tree.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root of a binary tree, represented as an array in level order.
+- **Example:** `root = [1, 2, 3]`
+- **Constraints:**
+	- The number of nodes in the tree is in the range [1, 10^4].
+	- Node values range from -231 to 231 - 1.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int findBottomLeftValue(TreeNode* root) {
-        queue<TreeNode*> q;
-        q.push(root);
-        int res = q.front()->val;
-        while(!q.empty()) {
-            int sz = q.size();
-            res = q.front()->val;
-            while(sz-- > 0) {
-                root = q.front();
-                q.pop();
-                if(root->left)  q.push(root->left);
-                if(root->right) q.push(root->right);                
-            }
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the leftmost value in the last row of the tree.
+- **Example:** `7`
+- **Constraints:**
+	- The output should be an integer, representing the leftmost value at the deepest level.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the leftmost value in the last row of the tree by traversing the tree level by level.
 
-The problem asks us to find the bottom-left value in a binary tree. More specifically, we need to find the leftmost node at the deepest level of the tree. The bottom-left value is the first node encountered when performing a level-order traversal (BFS) from left to right, starting from the deepest level.
+- 1. Initialize a queue for level order traversal.
+- 2. Traverse the tree level by level using the queue.
+- 3. For each level, update the result to the value of the first node in that level.
+- 4. Continue until all levels have been processed.
+- 5. Return the value of the first node of the last level.
+{{< dots >}}
+### Problem Assumptions ✅
+- The binary tree will be represented as an array using level order traversal.
+- There will always be at least one node in the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `root = [1, 2, 3]`  \
+  **Explanation:** For the tree [1, 2, 3], the last row is at the second level, and the leftmost value is 2.
 
-### Approach
+- **Input:** `root = [1, 2, 3, 4, null, 5, 6, null, null, 7]`  \
+  **Explanation:** For the tree [1, 2, 3, 4, null, 5, 6, null, null, 7], the last row is at the fourth level, and the leftmost value is 7.
 
-To solve this problem, we will use a **Breadth-First Search (BFS)** approach, which is typically used to traverse a tree level by level. The BFS approach uses a queue to explore all nodes at a given level before moving on to the next level.
+{{< dots >}}
+## Approach 🚀
+The approach is to use level order traversal (breadth-first search) to traverse the tree and capture the leftmost value in the last row.
 
-The algorithm follows these key steps:
-
-1. **Initialize a Queue**: A queue is used to store the nodes at each level of the tree. We begin by enqueueing the root node of the tree.
-  
-2. **Level-order Traversal**: Process the tree level by level. For each level, we store the leftmost node of that level.
-  
-3. **Update the Result**: Each time we process a new level, we update the result with the value of the leftmost node in the current level. Since the BFS explores the tree from left to right, the first node processed at each level will always be the leftmost node.
-  
-4. **Termination**: The process continues until all levels of the tree are processed. By the end of the BFS, the result will hold the value of the leftmost node at the deepest level of the tree.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Level order traversal is ideal for this problem, as it processes nodes row by row.
+- We can use a queue to manage the nodes at each level.
+- The leftmost value in the last row is always the first node encountered at the deepest level.
+{{< dots >}}
+### Edge Cases 🌐
+- The tree will not be empty, as the problem guarantees at least one node.
+- The approach efficiently handles up to 10^4 nodes with a time complexity of O(n).
+- A tree with only one node should return that node's value.
+- Ensure the tree is traversed level by level without skipping any levels.
+{{< dots >}}
+## Code 💻
 ```cpp
 int findBottomLeftValue(TreeNode* root) {
-    queue<TreeNode*> q;      // Initialize a queue to store nodes for BFS
-    q.push(root);            // Enqueue the root node
-    int res = q.front()->val; // Initialize result with the root's value
-    
-    while(!q.empty()) {        // Start level-order traversal
-        int sz = q.size();     // Get the number of nodes at the current level
-        res = q.front()->val;  // The leftmost node at the current level is the first node in the queue
-        
-        while(sz-- > 0) {      // Process all nodes at the current level
-            root = q.front();  // Get the front node from the queue
-            q.pop();            // Dequeue the node
-            if(root->left)  q.push(root->left);   // Enqueue left child, if exists
-            if(root->right) q.push(root->right);  // Enqueue right child, if exists
+    queue<TreeNode*> q;
+    q.push(root);
+    int res = q.front()->val;
+    while(!q.empty()) {
+        int sz = q.size();
+        res = q.front()->val;
+        while(sz-- > 0) {
+            root = q.front();
+            q.pop();
+            if(root->left)  q.push(root->left);
+            if(root->right) q.push(root->right);                
         }
     }
-    return res;                 // Return the leftmost value at the deepest level
+    return res;
 }
 ```
 
-#### Step 1: Initialize a Queue
-```cpp
-queue<TreeNode*> q;
-q.push(root);
-```
-- A queue `q` is used to store nodes as they are processed in BFS. Initially, the root of the tree is added to the queue.
+This solution uses a breadth-first search (BFS) approach to traverse the binary tree level by level, from left to right. It identifies the bottom-leftmost value of the tree by updating the result at each level.
 
-#### Step 2: Track Leftmost Node
-```cpp
-int res = q.front()->val;
-```
-- The variable `res` will store the leftmost node value at the deepest level. Initially, it is set to the value of the root node.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findBottomLeftValue(TreeNode* root) {
+	```
+	Defines the `findBottomLeftValue` function that takes a pointer to the root of a binary tree and returns the bottom-leftmost value.
 
-#### Step 3: Process the Tree Level by Level
-```cpp
-while(!q.empty()) {
-    int sz = q.size();
-    res = q.front()->val;
-    while(sz-- > 0) {
-        root = q.front();
-        q.pop();
-        if(root->left)  q.push(root->left);
-        if(root->right) q.push(root->right);
-    }
-}
-```
-- We use a `while` loop to process each level of the tree.
-- At the start of each level, we update `res` to store the value of the leftmost node at that level (`q.front()->val`).
-- We then process each node at the current level. If the node has a left child, it is added to the queue, followed by the right child if it exists.
-- This ensures that nodes are processed level by level, and the leftmost node at each level is always processed first.
+2. **Queue Initialization**
+	```cpp
+	    queue<TreeNode*> q;
+	```
+	Declares a queue `q` to perform a breadth-first traversal of the tree.
 
-#### Step 4: Return the Bottom-Left Value
-```cpp
-return res;
-```
-- After processing all levels of the tree, the variable `res` will contain the value of the leftmost node at the deepest level of the tree, which is our desired result.
+3. **Push Root to Queue**
+	```cpp
+	    q.push(root);
+	```
+	Pushes the root node of the tree into the queue to start the BFS.
 
-### Complexity
+4. **Initialize Result**
+	```cpp
+	    int res = q.front()->val;
+	```
+	Initializes `res` to store the value of the first node in the queue (i.e., the root node's value). This will be updated as we traverse the tree.
 
-#### Time Complexity:
-- **BFS Traversal**: Each node in the tree is processed exactly once, and each operation inside the loop is constant time (O(1)). Therefore, the overall time complexity is `O(N)`, where `N` is the number of nodes in the binary tree.
+5. **BFS Loop Start**
+	```cpp
+	    while(!q.empty()) {
+	```
+	Starts a while loop that continues as long as the queue is not empty, ensuring all tree nodes are processed.
 
-#### Space Complexity:
-- **Queue**: The space complexity is determined by the maximum number of nodes that can be stored in the queue at any given time. In the worst case, this is the number of nodes at the last level of the tree. For a complete binary tree, the maximum number of nodes in the queue will be `O(N / 2)`, which simplifies to `O(N)`.
-  
-Thus, the space complexity is `O(N)` due to the space needed to store the nodes in the queue.
+6. **Queue Size Calculation**
+	```cpp
+	        int sz = q.size();
+	```
+	Calculates the number of nodes at the current level by checking the size of the queue.
 
-### Conclusion
+7. **Update Result**
+	```cpp
+	        res = q.front()->val;
+	```
+	Updates `res` to the value of the leftmost node at the current level.
 
-In conclusion, the **BFS approach** efficiently solves the problem of finding the bottom-left value in a binary tree. By performing a level-order traversal and always tracking the leftmost node at each level, we ensure that the final result corresponds to the leftmost node at the deepest level of the tree.
+8. **Level Traversal Loop**
+	```cpp
+	        while(sz-- > 0) {
+	```
+	Begins an inner loop to process all nodes at the current level.
 
-This solution has optimal time and space complexity, both of which are linear with respect to the number of nodes in the tree (`O(N)`), making it suitable for large trees.
+9. **Process Current Node**
+	```cpp
+	            root = q.front();
+	```
+	Assigns the front node of the queue to `root` for further processing.
 
-Key Points:
-- **Time Complexity**: `O(N)`
-- **Space Complexity**: `O(N)`
-- **Approach**: Breadth-First Search (BFS) with a queue
+10. **Pop Node from Queue**
+	```cpp
+	            q.pop();
+	```
+	Removes the front node from the queue after processing it.
+
+11. **Push Left Child**
+	```cpp
+	            if(root->left)  q.push(root->left);
+	```
+	Pushes the left child of the current node to the queue if it exists.
+
+12. **Push Right Child**
+	```cpp
+	            if(root->right) q.push(root->right);
+	```
+	Pushes the right child of the current node to the queue if it exists.
+
+13. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the value stored in `res`, which is the bottom-leftmost node's value.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the number of nodes in the tree, as we traverse each node exactly once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case due to the queue storing nodes at the current level. In the best case (a skewed tree), the space complexity is O(1).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-bottom-left-tree-value/description/)
 

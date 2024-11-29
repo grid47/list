@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,90 +28,151 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an array of words, you are to return the length of the shortest reference string that can encode these words. The reference string consists of the words concatenated with a '#' character at the end, and indices are used to encode the words by identifying their position in the reference string. Each word is encoded by the substring in the reference string that starts at its position and ends at the next '#'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of words, where each word is a string of lowercase letters. Each word in the array has a length between 1 and 7 characters.
+- **Example:** `Input: words = ["apple", "ple", "le"]`
+- **Constraints:**
+	- 1 <= words.length <= 2000
+	- 1 <= words[i].length <= 7
+	- words[i] consists of only lowercase letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumLengthEncoding(vector<string>& words) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the shortest reference string that can encode the given words.
+- **Example:** `Output: 9`
+- **Constraints:**
+	- The output should be an integer representing the length of the shortest reference string.
 
-        unordered_set<string> s(words.begin(), words.end());
-        
-        for(string w: words)
-        for(int i = 1; i < w.size(); i++)
-            s.erase(w.substr(i));
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the shortest encoding of the words using a reference string. To do this, we can eliminate words that are suffixes of other words, and concatenate only the distinct prefixes of the words to form the reference string.
 
-        int res = 0;        
-        for(string sk: s)
-        res += (sk.size() + 1);
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+- Create a set of words to store unique words.
+- For each word, check all possible suffixes and remove them from the set if they are also present.
+- Finally, concatenate the remaining words, adding 1 for each '#' delimiter, and return the length of the concatenated string.
+{{< dots >}}
+### Problem Assumptions ✅
+- All words are lowercase and have lengths between 1 and 7 characters.
+- Words in the array are unique.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: words = ["apple", "ple", "le"]`  \
+  **Explanation:** The word 'ple' is a suffix of 'apple', and 'le' is a suffix of 'ple'. So, we can encode the words with 'apple#', which results in a total length of 9.
 
-### Problem Statement
+- **Input:** `Input: words = ["orange", "or", "ange"]`  \
+  **Explanation:** Here, 'or' is a prefix of 'orange', and 'ange' is a suffix of 'orange'. The shortest encoding would be 'orange#', resulting in a total length of 7.
 
-The task is to find the minimum length of an encoded string that includes all the words in a given list. Each word can be a suffix of another, meaning it may be part of the encoding if another word already contains it as an ending substring. The encoded string should represent each word uniquely, and each word should be followed by a `#` to distinguish where it ends. 
+{{< dots >}}
+## Approach 🚀
+The key to solving this problem efficiently is to first remove suffixes that are redundant. If one word is a suffix of another, the shorter word does not need to be included in the final encoding.
 
-For example, given the words `["time", "me", "bell"]`, the minimum encoding is `"time#bell#"` with a length of 10, as "me" is already a suffix of "time".
+### Initial Thoughts 💭
+- Suffixes that are part of longer words don't need to be included separately.
+- The reference string must end with a '#' character, so we need to account for that when calculating the total length.
+- We should identify all words that are not suffixes of other words, as these will contribute to the final reference string.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input is an empty array, return 0 since there are no words to encode.
+- For large arrays (up to 2000 words), the solution should handle them efficiently.
+- Ensure that cases where all words are prefixes or suffixes of one another are handled correctly.
+- The solution must handle arrays of up to 2000 words efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumLengthEncoding(vector<string>& words) {
 
-### Approach
+    unordered_set<string> s(words.begin(), words.end());
+    
+    for(string w: words)
+    for(int i = 1; i < w.size(); i++)
+        s.erase(w.substr(i));
 
-This problem can be solved efficiently by leveraging an unordered set and a few key insights regarding suffixes:
+    int res = 0;        
+    for(string sk: s)
+    res += (sk.size() + 1);
+    
+    return res;
+}
+```
 
-1. **Eliminate Redundant Suffixes**:
-   - First, store each word in an unordered set. This set will help us keep track of which words need to be included in the final encoding.
-   - Then, iterate through each word and attempt to remove all its suffixes from the set. This removal ensures that if one word is a suffix of another, it will not contribute to the final encoding length because it's already covered by the longer word.
+This function calculates the minimum length encoding for a set of words by removing the suffixes of each word that appear in other words.
 
-2. **Calculate Encoding Length**:
-   - After the set has been reduced to only the longest words (those that are not suffixes of any other words), we calculate the length of the encoded string.
-   - For each remaining word in the set, we add its length plus one (`+1` for the `#` character) to represent the encoded format.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumLengthEncoding(vector<string>& words) {
+	```
+	The function `minimumLengthEncoding` is defined, which takes a vector of strings `words` as input and returns an integer representing the minimum length encoding.
 
-### Code Breakdown (Step by Step)
+2. **Set Initialization**
+	```cpp
+	    unordered_set<string> s(words.begin(), words.end());
+	```
+	An unordered set `s` is initialized with the elements from the `words` vector, ensuring all words are stored without duplicates.
 
-The code follows this approach to efficiently compute the minimum encoding length:
+3. **Outer Loop**
+	```cpp
+	    for(string w: words)
+	```
+	The outer loop iterates over each word `w` in the `words` vector.
 
-1. **Initialize Unordered Set**:
-   ```cpp
-   unordered_set<string> s(words.begin(), words.end());
-   ```
-   This line constructs an unordered set `s` containing all words from the input `words` list. This set allows for efficient O(1) average time complexity for insertions and lookups, essential for managing word suffixes.
+4. **Inner Loop**
+	```cpp
+	    for(int i = 1; i < w.size(); i++)
+	```
+	The inner loop iterates over the characters in each word starting from index 1, essentially looking at suffixes of the word.
 
-2. **Eliminate Suffixes**:
-   ```cpp
-   for(string w: words)
-       for(int i = 1; i < w.size(); i++)
-           s.erase(w.substr(i));
-   ```
-   - This nested loop iterates over each word `w` in the list `words`. For each word, it generates all possible suffixes starting from index `1` (ignoring the entire word itself) and removes each suffix from the set `s`.
-   - For instance, if `w = "time"`, this loop will generate `"ime"`, `"me"`, and `"e"` as suffixes and attempt to remove them from `s`.
-   - By erasing all possible suffixes, we ensure only the longest necessary words remain in `s`.
+5. **Erase Suffix**
+	```cpp
+	        s.erase(w.substr(i));
+	```
+	The substring of `w` starting from index `i` is removed from the set `s`. This ensures that any word that is a suffix of another word is excluded from the encoding.
 
-3. **Calculate Encoding Length**:
-   ```cpp
-   int res = 0;
-   for(string sk: s)
-       res += (sk.size() + 1);
-   ```
-   - After the set is reduced to only non-suffix words, the loop calculates the minimum encoding length.
-   - For each word `sk` in the set `s`, it adds `sk.size() + 1` to the result (`res`), accounting for the word length and the additional `#`.
+6. **Result Initialization**
+	```cpp
+	    int res = 0;        
+	```
+	The variable `res` is initialized to 0, which will be used to store the total length of the encoded string.
 
-4. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - Finally, the function returns `res`, representing the minimum length of the encoded string that uniquely represents all words.
+7. **Summing Lengths**
+	```cpp
+	    for(string sk: s)
+	```
+	The loop iterates over each string `sk` remaining in the set `s`.
 
-### Complexity
+8. **Calculate Encoding Length**
+	```cpp
+	    res += (sk.size() + 1);
+	```
+	For each string `sk`, its length is added to `res`, along with an additional 1 to account for the '#' character that separates each word in the encoding.
 
-- **Time Complexity**: O(n * k^2), where `n` is the number of words, and `k` is the average length of the words. Generating each suffix of a word takes O(k^2) time, and for each word, we check or erase the suffixes in the set, which has O(1) average complexity due to the unordered set.
-- **Space Complexity**: O(n * k) for storing the words and their suffixes in the unordered set `s`.
+9. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the total length of the encoded string, which is the sum of the lengths of all the strings in the set `s`.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of words.
+- **Average Case:** O(n * m), where n is the number of words and m is the average length of the words.
+- **Worst Case:** O(n * m), where n is the number of words and m is the average length of the words.
 
-This solution effectively reduces redundant suffixes and uses an unordered set to achieve an optimal encoding length. By eliminating words that are suffixes of other words, the algorithm minimizes the size of the encoded string. This approach is efficient and well-suited for handling large lists of words with varying lengths, demonstrating a practical use of hash sets to solve string encoding problems with suffix elimination.
+The time complexity is linear with respect to the number of words and the length of each word due to the need to check suffixes.
+
+### Space Complexity 💾
+- **Best Case:** O(n), where n is the number of words, when no suffixes need to be stored.
+- **Worst Case:** O(n * m), where n is the number of words and m is the average length of the words, for storing the word set.
+
+The space complexity is primarily determined by the size of the word set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/short-encoding-of-words/description/)
 

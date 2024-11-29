@@ -14,214 +14,305 @@ img_src = ""
 youtube = "ik1y7fz8AOc"
 youtube_upload_date="2024-08-17"
 youtube_thumbnail="https://i.ytimg.com/vi/ik1y7fz8AOc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a matrix of integers `points` with dimensions `m x n` (0-indexed). Initially, you are at score 0, and your goal is to maximize the score by selecting one cell in each row. To gain points, you can select a cell `(r, c)` from each row. The value at `points[r][c]` will add to your score. However, if you choose cells from different columns in adjacent rows, the difference between their column indices will subtract from your score. Specifically, if you select a cell at `(r, c1)` in row `r` and a cell at `(r + 1, c2)` in row `r + 1`, the penalty is `abs(c1 - c2)`. Your task is to return the maximum score you can achieve by choosing cells from each row.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer matrix `points` of size `m x n`.
+- **Example:** `points = [[3, 1, 4], [1, 2, 5], [2, 6, 7]]`
+- **Constraints:**
+	- 1 <= m, n <= 10^5
+	- 1 <= m * n <= 10^5
+	- 0 <= points[r][c] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> pts;
-    map<int, map<int, long long>> mp;
-    long long dp(int idx, int prv) {
-        if(idx == pts.size()) return 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the maximum score you can achieve by selecting cells from each row.
+- **Example:** `Output: 15`
+- **Constraints:**
+	- The output is an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the score by selecting cells in each row while minimizing the penalty caused by column differences in adjacent rows.
+
+- Start from the first row and select the cell with the maximum value.
+- For each subsequent row, select the cell that maximizes the score while minimizing the column difference penalty with the cell selected in the previous row.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is non-empty and contains only non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [[3, 1, 4], [1, 2, 5], [2, 6, 7]]`  \
+  **Explanation:** Select the cell at (0, 2), (1, 2), and (2, 1) for the optimal score of 15. The penalty for column difference is 1.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using dynamic programming. We calculate the maximum points from each row by considering both the selection of cells and the penalty for column difference between adjacent rows.
+
+### Initial Thoughts 💭
+- Each row must be processed independently, with the maximum points calculated by considering the previous row's selected cell.
+- The key is to track the maximum score as we process each row while keeping track of the column indices selected in the previous row.
+{{< dots >}}
+### Edge Cases 🌐
+- Ensure that the matrix has at least one row and one column.
+- Ensure that the solution can handle matrices with up to 100,000 rows and columns.
+- Consider matrices with all elements being the same value.
+- Handle the upper bound of matrix size efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> pts;
+map<int, map<int, long long>> mp;
+long long dp(int idx, int prv) {
+    if(idx == pts.size()) return 0;
+    
+    if(mp.count(idx) && mp[idx].count(prv)) return mp[idx][prv];
+    
+    long long ans = LLONG_MIN;
+    if(prv == -1) {
+        for(int i = 0; i < pts[0].size(); i++)
+            ans = max(ans, pts[idx][i] + dp(idx + 1, i));
+    } else {
+        for(int i = 0; i < pts[0].size(); i++)
+            ans = max(ans, pts[idx][i] - abs(i - prv) + dp(idx + 1, i));
+    }
+    return mp[idx][prv] = ans;
+}
+
+long long maxPoints(vector<vector<int>>& points) {
+    pts = points;
+    int m = pts.size(), n = pts[0].size();
+    
+    vector<long long> prv(n);
+    for(int i = 0; i < n; i++) prv[i] = pts[0][i];
+    
+    for(int j = 0; j < m - 1; j++) {
+        vector<long long> left(n, 0), right(n, 0), cur(n, 0);
         
-        if(mp.count(idx) && mp[idx].count(prv)) return mp[idx][prv];
+        left[0] = prv[0];
+        right[n - 1] = prv[n - 1];
         
-        long long ans = LLONG_MIN;
-        if(prv == -1) {
-            for(int i = 0; i < pts[0].size(); i++)
-                ans = max(ans, pts[idx][i] + dp(idx + 1, i));
-        } else {
-            for(int i = 0; i < pts[0].size(); i++)
-                ans = max(ans, pts[idx][i] - abs(i - prv) + dp(idx + 1, i));
-        }
-        return mp[idx][prv] = ans;
+        for(int i = 1; i < n; i++)
+            left[i] = max(left[i - 1] - 1, prv[i]);
+        
+        for(int i = n - 2; i >= 0; i--)
+            right[i] = max(right[i + 1] - 1, prv[i]);
+        
+        for(int i = 0; i < n; i++)
+            cur[i] = max(left[i], right[i]) + pts[j + 1][i];
+        
+        prv = cur;
     }
     
-    long long maxPoints(vector<vector<int>>& points) {
-        pts = points;
-        int m = pts.size(), n = pts[0].size();
-        
-        vector<long long> prv(n);
-        for(int i = 0; i < n; i++) prv[i] = pts[0][i];
-        
-        for(int j = 0; j < m - 1; j++) {
-            vector<long long> left(n, 0), right(n, 0), cur(n, 0);
-            
-            left[0] = prv[0];
-            right[n - 1] = prv[n - 1];
-            
-            for(int i = 1; i < n; i++)
-                left[i] = max(left[i - 1] - 1, prv[i]);
-            
-            for(int i = n - 2; i >= 0; i--)
-                right[i] = max(right[i + 1] - 1, prv[i]);
-            
-            for(int i = 0; i < n; i++)
-                cur[i] = max(left[i], right[i]) + pts[j + 1][i];
-            
-            prv = cur;
-        }
-        
-        long long ans = LLONG_MIN;
-        for(int i = 0; i < n; i++)
-            ans = max(ans, prv[i]);
+    long long ans = LLONG_MIN;
+    for(int i = 0; i < n; i++)
+        ans = max(ans, prv[i]);
 
-        return ans;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to maximize the points collected while traversing a grid of points. Each point in the grid has a certain score, and the traversal must follow specific rules regarding movement between points. The primary objective is to navigate through this grid in such a way that the total points accumulated are maximized.
-
-### Approach
-
-To tackle this problem, we utilize a dynamic programming strategy that allows us to efficiently compute the maximum points that can be obtained by traversing the grid while adhering to the given movement constraints. The approach can be broken down into several key steps:
-
-1. **Dynamic Programming Initialization**: We initialize a memoization structure to store previously computed values, which helps avoid redundant calculations.
-
-2. **Iterate Over Rows**: We iterate through each row of points in the grid, calculating the maximum possible scores for each position based on the scores of the previous row.
-
-3. **Two-Pass Calculation**: For each row, we perform two passes—one from left to right to compute scores influenced by the left side, and another from right to left for the right side. This ensures we accurately consider the impact of the distance from the previous point.
-
-4. **Final Calculation**: After processing all rows, we determine the maximum score achievable from the last row of computed values.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> pts;
-    map<int, map<int, long long>> mp;
+    return ans;
+}
 ```
-In the above code snippet, we define a class `Solution` with two member variables: `pts` to store the points grid, and `mp` to serve as our memoization map for dynamic programming.
 
-```cpp
-    long long dp(int idx, int prv) {
-        if(idx == pts.size()) return 0;
-```
-The `dp` function is defined to calculate the maximum points recursively. It takes the current index (`idx`) and the previous column index (`prv`). If we reach the end of the points array, we return 0, indicating no more points can be collected.
+The function calculates the maximum points that can be obtained by traversing through a series of points with given constraints.
 
-```cpp
-        if(mp.count(idx) && mp[idx].count(prv)) return mp[idx][prv];
-```
-This line checks if the result for the current index and previous column is already computed and stored in the memoization map. If it is, we return the stored value to avoid recalculating.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	vector<vector<int>> pts;
+	```
+	Declare a 2D vector `pts` to store the grid of points.
 
-```cpp
-        long long ans = LLONG_MIN;
-```
-We initialize `ans` to the minimum possible long long value to ensure any score calculated is larger.
+2. **Variable Declaration**
+	```cpp
+	map<int, map<int, long long>> mp;
+	```
+	Declare a memoization map `mp` to store previously computed results for subproblems.
 
-```cpp
-        if(prv == -1) {
-            for(int i = 0; i < pts[0].size(); i++)
-                ans = max(ans, pts[idx][i] + dp(idx + 1, i));
-        } else {
-            for(int i = 0; i < pts[0].size(); i++)
-                ans = max(ans, pts[idx][i] - abs(i - prv) + dp(idx + 1, i));
-        }
-```
-The core logic for calculating the maximum points is divided based on whether there is a previous column (`prv`). If `prv` is -1 (indicating the start), we simply add the point value of the current position. Otherwise, we adjust the score based on the distance from the previous position using the formula `pts[idx][i] - abs(i - prv)`.
+3. **Function Declaration**
+	```cpp
+	long long dp(int idx, int prv) {
+	```
+	Define the `dp` function that calculates the maximum score from index `idx` with the previous index `prv`.
 
-```cpp
-        return mp[idx][prv] = ans;
-    }
-```
-Finally, we store the computed maximum points for the current index and previous position in the memoization map before returning the result.
+4. **Base Case**
+	```cpp
+	    if(idx == pts.size()) return 0;
+	```
+	Base case: If the index exceeds the size of points, return 0 (no more points to score).
 
-```cpp
-    long long maxPoints(vector<vector<int>>& points) {
-        pts = points;
-        int m = pts.size(), n = pts[0].size();
-        
-        vector<long long> prv(n);
-        for(int i = 0; i < n; i++) prv[i] = pts[0][i];
-```
-In the `maxPoints` function, we initialize the grid of points and compute the dimensions (`m` for rows and `n` for columns). We also set up an array `prv` to store the maximum points collected from the previous row.
+5. **Memoization Check**
+	```cpp
+	    if(mp.count(idx) && mp[idx].count(prv)) return mp[idx][prv];
+	```
+	Check if the result for the current subproblem is already computed and stored in the `mp` map.
 
-```cpp
-        for(int j = 0; j < m - 1; j++) {
-            vector<long long> left(n, 0), right(n, 0), cur(n, 0);
-            
-            left[0] = prv[0];
-            right[n - 1] = prv[n - 1];
-```
-We begin iterating over each row, creating three temporary arrays—`left`, `right`, and `cur`—to hold computed values. We initialize the first and last elements of `left` and `right` to the respective values from the previous row.
+6. **Variable Initialization**
+	```cpp
+	    long long ans = LLONG_MIN;
+	```
+	Initialize `ans` to a very small value to track the best possible score for the current subproblem.
 
-```cpp
-            for(int i = 1; i < n; i++)
-                left[i] = max(left[i - 1] - 1, prv[i]);
-```
-In the left pass, we compute the maximum score attainable for each position considering scores from the left side. We ensure to reduce the potential score by 1 for each step to account for distance constraints.
+7. **Decision Making**
+	```cpp
+	    if(prv == -1) {
+	```
+	If this is the first index (prv == -1), calculate the maximum score by adding the value at the current index.
 
-```cpp
-            for(int i = n - 2; i >= 0; i--)
-                right[i] = max(right[i + 1] - 1, prv[i]);
-```
-Similarly, in the right pass, we compute scores from the right side.
+8. **Looping Over Columns**
+	```cpp
+	        for(int i = 0; i < pts[0].size(); i++)
+	```
+	Loop through all columns for the current row and calculate the best score.
 
-```cpp
-            for(int i = 0; i < n; i++)
-                cur[i] = max(left[i], right[i]) + pts[j + 1][i];
-            
-            prv = cur;
-        }
-```
-After both passes, we compute the maximum score for the current row by taking the maximum value from the left and right arrays and adding the current point value. The results are stored back into `prv` for the next iteration.
+9. **Recursive Call**
+	```cpp
+	            ans = max(ans, pts[idx][i] + dp(idx + 1, i));
+	```
+	For each column, recursively compute the score for the next index and keep track of the maximum score.
 
-```cpp
-        long long ans = LLONG_MIN;
-        for(int i = 0; i < n; i++)
-            ans = max(ans, prv[i]);
+10. **Else Condition**
+	```cpp
+	    } else {
+	```
+	Else condition for handling cases where previous index `prv` is valid (not -1).
 
-        return ans;
-    }
-};
-```
-Finally, we compute the overall maximum score from the last processed row and return it.
+11. **Looping Over Columns**
+	```cpp
+	        for(int i = 0; i < pts[0].size(); i++)
+	```
+	Loop through the columns for the current row, similar to the previous case.
 
-### Complexity
+12. **Recursive Call with Absence Penalty**
+	```cpp
+	            ans = max(ans, pts[idx][i] - abs(i - prv) + dp(idx + 1, i));
+	```
+	For each column, compute the score considering the penalty for the difference between the current and previous column.
 
-- **Time Complexity**: The time complexity of this solution is \(O(m \cdot n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the points grid. Each cell is processed a limited number of times.
+13. **Memoization**
+	```cpp
+	    return mp[idx][prv] = ans;
+	```
+	Store the computed result for the current subproblem in the `mp` map to avoid redundant calculations.
 
-- **Space Complexity**: The space complexity is also \(O(n)\) due to the temporary arrays used to hold intermediate results during computation.
+14. **Function Declaration**
+	```cpp
+	long long maxPoints(vector<vector<int>>& points) {
+	```
+	Define the `maxPoints` function that initializes necessary variables and invokes `dp` for the solution.
 
-### Conclusion
+15. **Initialization**
+	```cpp
+	    pts = points;
+	```
+	Initialize the global variable `pts` with the input points.
 
-This solution efficiently calculates the maximum points achievable in a grid by employing dynamic programming techniques. The memoization strategy avoids redundant computations, significantly improving the performance for larger grids. The method handles the distance constraints effectively through systematic left and right evaluations, ensuring that the optimal path is followed to accumulate the highest score possible.
+16. **Variable Initialization**
+	```cpp
+	    int m = pts.size(), n = pts[0].size();
+	```
+	Initialize `m` and `n` with the number of rows and columns in the `pts` grid.
 
-### Key Features
+17. **Variable Initialization**
+	```cpp
+	    vector<long long> prv(n);
+	```
+	Initialize a vector `prv` to store the previous row's maximum values.
 
-1. **Dynamic Programming**: Utilizes dynamic programming for efficient computation of maximum scores while keeping track of past results to avoid recalculations.
+18. **Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++) prv[i] = pts[0][i];
+	```
+	Initialize the `prv` vector with values from the first row of `pts`.
 
-2. **Two-Pass Evaluation**: The left and right passes allow for comprehensive consideration of potential scores based on the movement rules.
+19. **Main Loop**
+	```cpp
+	    for(int j = 0; j < m - 1; j++) {
+	```
+	Iterate through the rows (except the last one) and calculate the new row's maximum values.
 
-3. **Scalability**: The approach scales well with larger input sizes due to its linear time complexity.
+20. **Variable Initialization**
+	```cpp
+	        vector<long long> left(n, 0), right(n, 0), cur(n, 0);
+	```
+	Declare and initialize vectors `left`, `right`, and `cur` to store intermediate values for each row.
 
-### Use Cases
+21. **Boundary Initialization**
+	```cpp
+	        left[0] = prv[0];
+	        right[n - 1] = prv[n - 1];
+	```
+	Initialize boundary conditions for the left and right vectors.
 
-This function can be applied in various scenarios, such as:
+22. **Left Vector Update**
+	```cpp
+	        for(int i = 1; i < n; i++)
+	            left[i] = max(left[i - 1] - 1, prv[i]);
+	```
+	Update the `left` vector by computing the maximum value considering the left boundary.
 
-- **Game Development**: Maximizing scores in point collection games based on player movement.
-- **Pathfinding Algorithms**: Adapting the logic to find optimal paths in weighted graphs or grids.
-- **Resource Allocation**: Allocating resources in grids where rewards vary based on location.
+23. **Right Vector Update**
+	```cpp
+	        for(int i = n - 2; i >= 0; i--)
+	            right[i] = max(right[i + 1] - 1, prv[i]);
+	```
+	Update the `right` vector by computing the maximum value considering the right boundary.
 
-### Implementation Considerations
+24. **Current Row Update**
+	```cpp
+	        for(int i = 0; i < n; i++)
+	            cur[i] = max(left[i], right[i]) + pts[j + 1][i];
+	```
+	Update the `cur` vector by considering both the left and right boundary values.
 
-When implementing this function, consider:
+25. **Updating Previous Row**
+	```cpp
+	        prv = cur;
+	```
+	Update the `prv` vector with the new calculated values from `cur`.
 
-- **Input Validation**: Ensure that the input grid is properly formatted and non-empty.
-- **Edge Cases**: Test scenarios where the grid has a single row or column, or where all points have the same value.
-- **Performance Testing**: Evaluate performance under extreme cases with large grids to confirm efficiency and correctness.
+26. **Finding the Maximum Value**
+	```cpp
+	    long long ans = LLONG_MIN;
+	```
+	Initialize `ans` to store the final maximum score.
 
-This detailed breakdown and explanation should provide a clear understanding of the approach used in this solution while also highlighting its relevance and applicability across different programming challenges.
+27. **Final Loop**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	        ans = max(ans, prv[i]);
+	```
+	Iterate through the last row and find the maximum score.
+
+28. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the maximum score as the result.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The time complexity is linear in the number of rows and columns in the matrix.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the need to store the maximum scores for each column.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-points-with-cost/description/)
 

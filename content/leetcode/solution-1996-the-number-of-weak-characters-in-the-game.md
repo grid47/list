@@ -14,127 +14,188 @@ img_src = ""
 youtube = "DFqwkF9a6KI"
 youtube_upload_date="2021-09-05"
 youtube_thumbnail="https://i.ytimg.com/vi/DFqwkF9a6KI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of characters' properties, where each character has two main attributes: attack and defense. A character is weak if another character exists with both greater attack and defense values. Return the number of weak characters in the list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array 'properties' of length n (2 <= n <= 100,000), where each element is an array [attack_i, defense_i] representing the attack and defense values of the ith character.
+- **Example:** `properties = [[1, 2], [2, 1], [3, 4]]`
+- **Constraints:**
+	- 2 <= properties.length <= 10^5
+	- 1 <= attack_i, defense_i <= 10^5
 
-{{< highlight cpp >}}
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of weak characters in the list.
+- **Example:** `1`
+- **Constraints:**
 
-class Solution {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to find the weak characters by comparing each character with others to check if there exists a character with strictly greater attack and defense values.
 
-    public:
-    static bool comp(vector<int> &a, vector<int> &b) {
-        if(a[0] == b[0]) {
-            return a[1] > b[1];
-        } else return a[0] < b[0];
-    }
-    
-    int numberOfWeakCharacters(vector<vector<int>>& prpt) {
-        sort(prpt.begin(), prpt.end(), comp);
-        
-        int mn = INT_MIN;
-        int ans = 0;
-        
-        for(int i = prpt.size() - 1; i >= 0; i--) {
-            if(prpt[i][1] < mn) ans++;
-            mn = max(mn, prpt[i][1]);
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+- 1. Sort the characters by their attack value in ascending order. If two characters have the same attack value, sort them by their defense value in descending order.
+- 2. Traverse through the sorted list and keep track of the highest defense value encountered.
+- 3. If a character's defense value is smaller than the highest defense value encountered so far, it is a weak character.
+- 4. Count and return the number of weak characters.
+{{< dots >}}
+### Problem Assumptions ✅
+- All characters have distinct attack and defense values.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `properties = [[3, 5], [6, 3], [7, 8], [4, 7]]`  \
+  **Explanation:** Here, the character [3, 5] is weak because there exists a character [6, 3] with strictly greater attack and defense values.
 
-### Problem Statement
+{{< dots >}}
+## Approach 🚀
+We can approach this problem by sorting the characters based on attack and using a greedy strategy to keep track of the maximum defense value seen so far.
 
-The problem involves finding the number of "weak characters" in a game setting where each character is represented by their attack and defense values. A character is considered weak if there exists another character with both higher attack and higher defense values. Given a list of characters, each represented by a vector containing their attack and defense values, the task is to determine how many characters are weak according to this definition.
-
-### Approach
-
-The approach to solving this problem involves sorting the characters based on their attack and defense values and then iterating through the sorted list to count the weak characters. The key steps in the approach are:
-
-1. **Sorting the Characters**: The characters are sorted primarily by their attack value in ascending order. If two characters have the same attack value, the one with a higher defense value comes first. This sorting helps in efficiently identifying the weak characters.
-
-2. **Tracking the Maximum Defense**: As we iterate through the sorted characters from right to left, we maintain a variable to track the maximum defense value encountered so far. This helps in determining whether a character is weak compared to those that have already been processed.
-
-3. **Counting Weak Characters**: For each character, if its defense value is less than the maximum defense seen so far, it is counted as weak. If not, we update the maximum defense value accordingly.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the provided code step by step to understand how the solution works:
-
+### Initial Thoughts 💭
+- The problem boils down to comparing each character with others to see if it's dominated by another one.
+- Sorting the array and using a greedy approach allows us to efficiently identify weak characters.
+{{< dots >}}
+### Edge Cases 🌐
+- This problem assumes that the input array will always contain at least two characters.
+- The algorithm should be efficient enough to handle the largest input sizes within time limits.
+- Ensure that the sorting order works correctly when two characters have the same attack value but different defense values.
+- The constraints ensure that the input will always be valid and the solution will work within the given limits.
+{{< dots >}}
+## Code 💻
 ```cpp
 class Solution {
+
 public:
-    static bool comp(vector<int> &a, vector<int> &b) {
-        if(a[0] == b[0]) {
-            return a[1] > b[1]; // Sort by defense in descending order if attack values are equal
-        } else return a[0] < b[0]; // Sort by attack in ascending order
+static bool comp(vector<int> &a, vector<int> &b) {
+    if(a[0] == b[0]) {
+        return a[1] > b[1];
+    } else return a[0] < b[0];
+}
+
+int numberOfWeakCharacters(vector<vector<int>>& prpt) {
+    sort(prpt.begin(), prpt.end(), comp);
+    
+    int mn = INT_MIN;
+    int ans = 0;
+    
+    for(int i = prpt.size() - 1; i >= 0; i--) {
+        if(prpt[i][1] < mn) ans++;
+        mn = max(mn, prpt[i][1]);
     }
-```
-- We define a class `Solution` with a static comparison function `comp` that takes two vectors `a` and `b` (representing characters).
-- The comparison function sorts characters by their attack value in ascending order. If two characters have the same attack value, it sorts them by their defense value in descending order. This sorting is crucial for efficiently identifying weak characters in the next steps.
-
-```cpp
-    int numberOfWeakCharacters(vector<vector<int>>& prpt) {
-        sort(prpt.begin(), prpt.end(), comp); // Sort the characters using the comparison function
-        
-        int mn = INT_MIN; // Initialize the minimum defense seen so far
-        int ans = 0; // Initialize the count of weak characters
-```
-- The `numberOfWeakCharacters` function takes a vector of vectors `prpt`, where each inner vector represents a character with attack and defense values.
-- We sort the characters using the previously defined `comp` function.
-- `mn` is initialized to `INT_MIN` to represent the minimum defense value seen so far as we traverse the sorted characters.
-- `ans` is initialized to zero to keep track of the number of weak characters.
-
-```cpp
-        for(int i = prpt.size() - 1; i >= 0; i--) { // Iterate through the sorted characters from right to left
-            if(prpt[i][1] < mn) ans++; // If the current character's defense is less than the max defense, it's weak
-            mn = max(mn, prpt[i][1]); // Update the maximum defense seen so far
-        }
-        return ans; // Return the total count of weak characters
-    }
-};
-```
-- The loop iterates through the sorted list of characters from the last character to the first.
-- For each character, if its defense value (`prpt[i][1]`) is less than `mn` (the maximum defense seen so far), we increment the `ans` counter.
-- The variable `mn` is then updated to be the maximum of its current value and the current character's defense value.
-- After finishing the iteration, the function returns the total count of weak characters.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this algorithm is \(O(n \log n)\), where \(n\) is the number of characters. This complexity arises from the sorting step, which is the most computationally expensive operation in this approach. The subsequent linear scan through the characters is \(O(n)\), but this is dominated by the sorting step.
-
-- **Space Complexity**: The space complexity is \(O(1)\) if we consider only the space used by the algorithm (excluding the input storage). The algorithm does not use any additional data structures that grow with input size, aside from a few variables for counting and tracking maximum values.
-
-### Conclusion
-
-The provided solution effectively counts the number of weak characters in a given list by utilizing sorting and a single pass through the sorted list to track maximum defense values. By sorting the characters based on attack and defense values, the solution efficiently identifies weak characters without needing to compare every character against every other character directly. 
-
-This method demonstrates an efficient way to handle the problem of counting weak characters in a competitive programming or algorithmic context. The approach is clear, concise, and leverages sorting and linear traversal to achieve the desired outcome efficiently.
-
-### Example Usage
-
-Here’s an example of how to use the `Solution` class to count the number of weak characters:
-
-```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
-
-int main() {
-    Solution sol;
-    vector<vector<int>> characters = {{5, 5}, {6, 3}, {3, 6}}; // Example input
-    int result = sol.numberOfWeakCharacters(characters);
-    cout << "Number of weak characters: " << result << endl; // Should print the count of weak characters
-    return 0;
+    return ans;
 }
 ```
 
-This example initializes a `Solution` object and passes a vector of characters to count the weak characters, demonstrating practical usage of the method.
+This function determines the number of 'weak' characters from a given 2D vector `prpt` by sorting the characters and comparing their strengths to find those that are weaker than a previously encountered one.
+
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	Defines the `Solution` class that contains the function `numberOfWeakCharacters` and the comparator function `comp`.
+
+2. **Access Modifier**
+	```cpp
+	public:
+	```
+	Indicates the public section of the class where the methods are accessible.
+
+3. **Comparator Function**
+	```cpp
+	static bool comp(vector<int> &a, vector<int> &b) {
+	```
+	Defines a static comparator function `comp` that is used to sort the characters in descending order of their second element and ascending order of their first element.
+
+4. **Comparator Logic**
+	```cpp
+	    if(a[0] == b[0]) {
+	```
+	Checks if the first elements of both vectors are equal.
+
+5. **Comparator Logic**
+	```cpp
+	        return a[1] > b[1];
+	```
+	If the first elements are equal, sorts based on the second element in descending order.
+
+6. **Comparator Logic**
+	```cpp
+	    } else return a[0] < b[0];
+	```
+	If the first elements are different, sorts based on the first element in ascending order.
+
+7. **Main Function Definition**
+	```cpp
+	int numberOfWeakCharacters(vector<vector<int>>& prpt) {
+	```
+	Defines the function `numberOfWeakCharacters` which accepts a 2D vector `prpt` representing the characters and returns the number of weak characters.
+
+8. **Sorting**
+	```cpp
+	    sort(prpt.begin(), prpt.end(), comp);
+	```
+	Sorts the 2D vector `prpt` using the custom comparator `comp` to arrange the characters in the desired order.
+
+9. **Variable Initialization**
+	```cpp
+	    int mn = INT_MIN;
+	```
+	Initializes the variable `mn` to `INT_MIN` to store the maximum second element encountered during the iteration.
+
+10. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes the variable `ans` to 0 to keep track of the count of weak characters.
+
+11. **Loop Start**
+	```cpp
+	    for(int i = prpt.size() - 1; i >= 0; i--) {
+	```
+	Starts a loop from the last element of the sorted `prpt` vector and iterates backwards.
+
+12. **Condition Check**
+	```cpp
+	        if(prpt[i][1] < mn) ans++;
+	```
+	If the second element of the current vector is less than `mn`, it means the current character is weak, and the count `ans` is incremented.
+
+13. **Update Max Value**
+	```cpp
+	        mn = max(mn, prpt[i][1]);
+	```
+	Updates `mn` to be the maximum of `mn` and the second element of the current vector, ensuring that only characters weaker than the current maximum are counted.
+
+14. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the final count of weak characters.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which takes O(n log n) time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for sorting the input array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/description/)
 

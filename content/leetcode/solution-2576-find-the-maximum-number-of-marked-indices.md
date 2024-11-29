@@ -14,67 +14,61 @@ img_src = ""
 youtube = "NlsyXR7GOJE"
 youtube_upload_date="2023-02-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/NlsyXR7GOJE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array nums. Initially, all indices are unmarked. You are allowed to perform the following operation any number of times: Pick two different unmarked indices i and j such that 2 * nums[i] <= nums[j], then mark both indices i and j. Return the maximum possible number of marked indices after performing this operation multiple times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums of size n.
+- **Example:** `For example, nums = [4, 6, 2, 5].`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    bool can(int k, vector<int> &nums) {
-        int ridx = k - 1;
-        int lidx = nums.size() - k;
-        
-        for(int i = 0; i < k; i++)
-            if(nums[i] * 2 > nums[nums.size() - k + i]) return false;
-        
-        return true;
-        
-    }
-    
-    int maxNumOfMarkedIndices(vector<int>& nums) {
-        int n = nums.size();
-        sort(nums.begin(), nums.end());
-        int l = 1, r = n/2, ans = 0;
-        while(l <= r) {
-            
-            int mid = l + (r - l + 1) / 2;
-            if(can(mid, nums)) {
-                ans = mid;
-                l = mid + 1;
-            } else r = mid - 1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer, the maximum possible number of marked indices.
+- **Example:** `For nums = [10, 2, 3, 6], the output is 4.`
+- **Constraints:**
+	- The output is an integer representing the maximum number of marked indices.
 
-        }
-        return ans * 2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the maximum number of indices that can be marked by performing the operation any number of times.
 
-### Problem Statement
+- 1. Sort the array nums.
+- 2. Use a greedy approach to find valid pairs: For each unmarked index i, try to find a valid index j such that 2 * nums[i] <= nums[j].
+- 3. Mark both indices i and j if the condition is met and repeat the process.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums is non-empty and contains only positive integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [10, 2, 3, 6], the output is 4.`  \
+  **Explanation:** First, pair index 3 with 0 (6 and 10), then pair index 1 with 2 (2 and 3), and all indices are marked.
 
-In this problem, we are given an array `nums` of integers, and our goal is to find the maximum number of indices that can be marked such that for every marked index `i` from the first `k` elements, the following condition holds: `nums[i] * 2 <= nums[nums.size() - k + i]`. Here, `k` is the number of marked indices. We are asked to return the maximum number of indices that can be marked in this way.
+{{< dots >}}
+## Approach 🚀
+The approach leverages sorting and a greedy matching strategy to find the maximum number of valid index pairs.
 
-### Approach
-
-The problem can be reduced to finding the maximum value of `k` such that there exist `k` indices from the first `k` elements and the last `k` elements of the array, satisfying the condition that `nums[i] * 2 <= nums[nums.size() - k + i]` for all `i` from `0` to `k-1`.
-
-The main idea is to first sort the array, then use binary search to find the largest possible value of `k` that satisfies the condition. Once the largest value of `k` is determined, the result will be `2 * k` because the problem asks for the total number of indices that can be marked (both the first `k` and the last `k` indices).
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Sorting the Array**:
+### Initial Thoughts 💭
+- A greedy approach will be useful to maximize the number of valid pairs.
+- We need to first sort the array and then iterate over it to check for valid pairs where 2 * nums[i] <= nums[j].
+{{< dots >}}
+### Edge Cases 🌐
+- The array nums will always have at least one element.
+- For large inputs (nums.length up to 10^5), ensure the algorithm runs efficiently with time complexity of O(n log n).
+- If all elements in nums are the same, there may be no valid pairs to mark.
+- Handle edge cases where no valid pair can be formed.
+{{< dots >}}
+## Code 💻
 ```cpp
-sort(nums.begin(), nums.end());
-```
-- We begin by sorting the array `nums` in ascending order. Sorting ensures that we can efficiently check the condition for the smallest and largest elements in the array. By having the array sorted, we can compare elements from the beginning and the end, which simplifies the logic and ensures correctness.
 
-#### 2. **Helper Function `can(int k, vector<int>& nums)`**:
-```cpp
 bool can(int k, vector<int> &nums) {
     int ridx = k - 1;
     int lidx = nums.size() - k;
@@ -83,56 +77,149 @@ bool can(int k, vector<int> &nums) {
         if(nums[i] * 2 > nums[nums.size() - k + i]) return false;
     
     return true;
+    
 }
-```
-- The function `can(int k, vector<int>& nums)` checks whether it is possible to mark `k` indices. It compares the first `k` elements of the sorted array (`nums[i]`) with the last `k` elements (`nums[nums.size() - k + i]`) to ensure that the condition `nums[i] * 2 <= nums[nums.size() - k + i]` holds for all `i`.
-- If the condition holds for all `k` indices, it returns `true`; otherwise, it returns `false`.
-- The `for` loop iterates over the first `k` elements of the array, and for each element `nums[i]`, it checks if it satisfies the condition when compared to `nums[nums.size() - k + i]` from the second half of the array.
 
-#### 3. **Binary Search for the Maximum `k`**:
-```cpp
-int l = 1, r = n / 2, ans = 0;
-while (l <= r) {
-    int mid = l + (r - l + 1) / 2;
-    if (can(mid, nums)) {
-        ans = mid;
-        l = mid + 1;
-    } else {
-        r = mid - 1;
+int maxNumOfMarkedIndices(vector<int>& nums) {
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    int l = 1, r = n/2, ans = 0;
+    while(l <= r) {
+        
+        int mid = l + (r - l + 1) / 2;
+        if(can(mid, nums)) {
+            ans = mid;
+            l = mid + 1;
+        } else r = mid - 1;
+
     }
+    return ans * 2;
 }
 ```
-- We perform a binary search on the value of `k` ranging from `1` to `n / 2` (since `k` represents the number of indices, it cannot exceed half the size of the array).
-- The binary search proceeds by checking if a mid value `mid` of `k` satisfies the condition using the `can` function. If `can(mid, nums)` returns `true`, it means that it is possible to mark `mid` indices, so we update the answer `ans` and try to find a larger value by adjusting the search range.
-- If `can(mid, nums)` returns `false`, it means `mid` indices cannot be marked, so we decrease the search range to try smaller values of `k`.
 
-#### 4. **Returning the Result**:
-```cpp
-return ans * 2;
-```
-- After the binary search completes, the value of `ans` will contain the maximum possible value of `k`. Since we are asked to return the total number of marked indices (both the first and last `k` indices), the result is `ans * 2`.
+This code identifies the maximum number of marked indices based on constraints and binary search logic.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool can(int k, vector<int> &nums) {
+	```
+	Defines a helper function to validate whether a specific number of indices can be marked.
 
-#### Time Complexity:
+2. **Variable Declaration**
+	```cpp
+	    int ridx = k - 1;
+	```
+	Declares the right index variable to track the midpoint of the array.
 
-1. **Sorting**:
-   - Sorting the array `nums` takes O(n log n) time, where `n` is the size of the array. This is the most time-consuming part of the solution.
+3. **Variable Declaration**
+	```cpp
+	    int lidx = nums.size() - k;
+	```
+	Declares the left index variable based on the array size.
 
-2. **Binary Search**:
-   - The binary search runs for at most `log(n / 2)` iterations (which is approximately `log n`). In each iteration, we call the `can` function.
+4. **Loop Start**
+	```cpp
+	    for(int i = 0; i < k; i++)
+	```
+	Starts a loop to check if the conditions are satisfied for the current subset of indices.
 
-3. **Helper Function `can`**:
-   - The `can` function performs a linear scan of the first `k` elements, where `k` can be at most `n / 2`. Thus, the time complexity of the `can` function is O(n / 2) in the worst case.
+5. **Condition Check**
+	```cpp
+	        if(nums[i] * 2 > nums[nums.size() - k + i]) return false;
+	```
+	Validates the condition for marking indices; returns false if it fails.
 
-Combining these, the overall time complexity of the solution is dominated by the sorting step and the binary search, resulting in a time complexity of **O(n log n)**.
+6. **Return Statement**
+	```cpp
+	    return true;
+	```
+	Returns true if all conditions for marking indices are satisfied.
 
-#### Space Complexity:
-- We use `O(1)` extra space besides the input and output storage. The `can` function does not use any additional space besides the parameters, and the binary search does not require extra storage, so the space complexity is **O(1)**.
+7. **Main Function Definition**
+	```cpp
+	int maxNumOfMarkedIndices(vector<int>& nums) {
+	```
+	Defines the main function to find the maximum number of marked indices.
 
-### Conclusion
+8. **Variable Declaration**
+	```cpp
+	    int n = nums.size();
+	```
+	Declares the size of the input array `nums`.
 
-The solution effectively solves the problem using a combination of sorting and binary search. By leveraging the sorted array and binary search, we efficiently find the maximum number of indices that can be marked such that the divisibility condition holds. The time complexity of O(n log n) ensures that the solution performs well even for large inputs, making it an optimal solution for this problem. The space complexity of O(1) ensures that the solution uses minimal additional memory.
+9. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the array to facilitate binary search logic.
+
+10. **Binary Search Initialization**
+	```cpp
+	    int l = 1, r = n/2, ans = 0;
+	```
+	Initializes variables for binary search.
+
+11. **Binary Search Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	Starts the binary search loop to find the maximum valid subset.
+
+12. **Midpoint Calculation**
+	```cpp
+	        int mid = l + (r - l + 1) / 2;
+	```
+	Calculates the midpoint of the current binary search range.
+
+13. **Condition Check**
+	```cpp
+	        if(can(mid, nums)) {
+	```
+	Checks if the current midpoint is valid using the helper function.
+
+14. **Update Answer**
+	```cpp
+	            ans = mid;
+	```
+	Updates the answer if the condition is satisfied.
+
+15. **Adjust Range**
+	```cpp
+	            l = mid + 1;
+	```
+	Narrows the binary search range by increasing the lower bound.
+
+16. **Adjust Range**
+	```cpp
+	        } else r = mid - 1;
+	```
+	Narrows the binary search range by decreasing the upper bound.
+
+17. **Final Calculation**
+	```cpp
+	    return ans * 2;
+	```
+	Calculates the final result by doubling the valid subset size.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting step, which is O(n log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space used for the sorted array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/)
 

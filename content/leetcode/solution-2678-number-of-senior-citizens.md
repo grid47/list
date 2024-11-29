@@ -14,93 +14,131 @@ img_src = ""
 youtube = "l6_wwKzFmVo"
 youtube_upload_date="2024-08-01"
 youtube_thumbnail="https://i.ytimg.com/vi/l6_wwKzFmVo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a perfect binary tree with `n` nodes, where each node has a cost associated with it. The tree is numbered from 1 to n, with node 1 as the root. For each node `i`, its left child is `2*i` and its right child is `2*i + 1`. You are allowed to increment the cost of any node by 1 any number of times. Your task is to return the minimum number of increments required to make the total cost of the path from the root to each leaf node equal.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `n` representing the number of nodes in a perfect binary tree, followed by a list of integers `cost`, where `cost[i]` is the cost of node `i+1`.
+- **Example:** `Input: n = 5, cost = [2, 4, 3, 2, 5]`
+- **Constraints:**
+	- 3 <= n <= 10^5
+	- n + 1 is a power of 2
+	- cost.length == n
+	- 1 <= cost[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countSeniors(vector<string>& details) {
-        int count = 0;
-        for(auto i : details) {
-            if(i[11] - '0' > 6) count++;
-            else if (i[11] - '0' == 6 && i[12] - '0' > 0) count++;
-        }
-        return count;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer, which represents the minimum number of increments required to make the cost of all root-to-leaf paths equal.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The result should be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of increments required to equalize the path costs.
+
+- Step 1: Starting from the leaf nodes, propagate the required increments up to the root node, ensuring each path has the same total cost.
+- Step 2: For each non-leaf node, compare the costs of its left and right children. Increment the smaller one to match the larger one and count the number of increments.
+- Step 3: Repeat the process until you reach the root node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a perfect binary tree, meaning every non-leaf node has exactly two children.
+- All nodes have a non-negative cost value.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 5, cost = [2, 4, 3, 2, 5]`  \
+  **Explanation:** In this case, the two paths from root to leaves are [2, 4, 5] and [2, 3, 5]. To equalize the path costs, we increment the cost of node 2 to match node 3's cost. This requires 4 increments, so the total increments required are 4.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will work our way from the leaf nodes upwards to the root, balancing the path costs by making necessary increments.
+
+### Initial Thoughts 💭
+- We need to ensure that the cost of each root-to-leaf path is the same.
+- This requires comparing the costs of left and right children of every node and balancing them.
+- Starting from the leaf nodes and adjusting the internal nodes' costs seems to be an efficient way to solve this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least 3 nodes, ensuring a valid binary tree structure.
+- The solution must handle up to 10^5 nodes efficiently.
+- If the tree already has equal costs for all root-to-leaf paths, the result should be 0 increments.
+- Ensure the solution runs in O(n) time complexity to handle the largest inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int countSeniors(vector<string>& details) {
+    int count = 0;
+    for(auto i : details) {
+        if(i[11] - '0' > 6) count++;
+        else if (i[11] - '0' == 6 && i[12] - '0' > 0) count++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given a list of details, where each detail represents information about an individual, specifically their age. Each string in the list consists of 14 characters, and the 12th and 13th characters of the string represent the age of the individual, encoded as a two-digit number. Your task is to count how many people in the list are considered "seniors," which is defined as individuals who are at least 60 years old.
-
-The input is a vector of strings called `details`, where each string represents the details of a person, and you are asked to return the number of people who are seniors based on their age.
-
-### Approach
-
-To solve this problem, we need to check the age of each individual in the list `details` and determine if their age is 60 or greater. The age is given by two digits: the 12th and 13th characters of the string. If the first digit (the 12th character) is greater than or equal to `6`, the person is at least 60 years old, and they are considered a senior. If the first digit is `6`, we need to check the second digit (the 13th character) to ensure it is greater than `0` to be considered a senior.
-
-We can iterate through each string in the list, extract the relevant characters that represent the age, convert them into an integer, and check if the individual qualifies as a senior. If they do, we increment the count.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Count Variable
-
-```cpp
-int count = 0;
+    return count;
+}
 ```
 
-- **Line 1**: We initialize a counter `count` to keep track of how many seniors (people aged 60 or older) we encounter in the list.
+The function 'countSeniors' counts the number of seniors from a list of age details. It examines the date of birth of each individual (formatted as a string) and increments the count if the age is greater than or equal to 60.
 
-#### Step 2: Iterate Through the Details List
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countSeniors(vector<string>& details) {
+	```
+	The function 'countSeniors' is defined with a parameter 'details', which is a vector of strings. Each string represents an individual's details, including their date of birth.
 
-```cpp
-for(auto i : details) {
-```
+2. **Variable Initialization**
+	```cpp
+	    int count = 0;
+	```
+	A variable 'count' is initialized to 0, which will be used to keep track of the number of seniors in the 'details' vector.
 
-- **Line 2**: We start iterating over the list `details` where each element `i` is a string that contains information about an individual, including their age.
+3. **Iteration Over Details**
+	```cpp
+	    for(auto i : details) {
+	```
+	We loop through each element 'i' in the 'details' vector, where each element is a string containing personal details of an individual.
 
-#### Step 3: Check the Age of the Individual
+4. **Check for Senior 1**
+	```cpp
+	        if(i[11] - '0' > 6) count++;
+	```
+	The if condition checks if the month of birth (extracted from the string at index 11) is greater than 6 (i.e., born after June), which indicates the person is a senior (60+ years old). If true, 'count' is incremented.
 
-```cpp
-if(i[11] - '0' > 6) count++;
-```
+5. **Check for Senior 2**
+	```cpp
+	        else if (i[11] - '0' == 6 && i[12] - '0' > 0) count++;
+	```
+	The else-if condition checks if the month is exactly June (index 11), and if the day of the month (index 12) is greater than 0, indicating the person is also a senior. In this case, 'count' is incremented.
 
-- **Line 3**: For each string `i`, we extract the 12th character (`i[11]`), which corresponds to the tens place of the age. We subtract `'0'` (the character representing zero) to convert this character into its numeric value. If the numeric value of the tens place is greater than 6 (i.e., the individual’s age is 70 or greater), we increment the `count` variable, as they are a senior.
+6. **Return Result**
+	```cpp
+	    return count;
+	```
+	After the loop completes, the function returns the total count of seniors found in the 'details' vector.
 
-#### Step 4: Handle the Case for Ages Between 60 and 69
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-```cpp
-else if (i[11] - '0' == 6 && i[12] - '0' > 0) count++;
-```
+The time complexity is O(n) as we only need to traverse the tree once, adjusting costs from the leaves to the root.
 
-- **Line 4**: If the tens place of the age is exactly 6 (i.e., the individual is between 60 and 69 years old), we need to check the ones place of the age (the 13th character, `i[12]`). If this value is greater than `0` (i.e., the age is between 61 and 69), we increment the `count` variable, as they are still considered seniors.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Step 5: Return the Count of Seniors
+The space complexity is O(n) due to the space needed for the cost array.
 
-```cpp
-return count;
-```
+**Happy Coding! 🎉**
 
-- **Line 5**: After iterating through all the elements in the `details` list, we return the `count` of seniors. This represents the total number of people who are aged 60 or older.
-
-### Complexity
-
-#### Time Complexity:
-- **O(n)**: The algorithm iterates through each string in the `details` list exactly once, where `n` is the number of strings (people). For each string, we perform constant time operations (checking the characters representing the age and performing basic comparisons). Therefore, the time complexity is **O(n)**, where `n` is the size of the input vector.
-
-#### Space Complexity:
-- **O(1)**: The space complexity of this solution is constant, as we are only using a few extra variables (`count`, `i`) that do not depend on the size of the input. Thus, the space complexity is **O(1)**.
-
-### Conclusion
-
-This solution efficiently counts the number of senior individuals (age 60 or older) from a list of detail strings. By checking the relevant characters that represent the age, we are able to determine if a person is a senior in constant time. The approach works in linear time with respect to the number of people in the list, making it suitable for large inputs. The space complexity is constant, as we only require a small number of extra variables, ensuring the solution is both time and space efficient. This makes it a scalable solution for real-world use cases where the list of people may be large.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-senior-citizens/description/)
 

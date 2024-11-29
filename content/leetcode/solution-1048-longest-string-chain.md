@@ -14,136 +14,190 @@ img_src = ""
 youtube = "mB13CkhSe3A"
 youtube_upload_date="2020-02-18"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/mB13CkhSe3A/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of words, where each word consists of lowercase English letters. A wordA is considered a predecessor of wordB if you can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB. A word chain is a sequence of words such that each word is a predecessor of the next one. Your task is to find the length of the longest word chain that can be formed from the given list of words.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of words, each consisting of lowercase English letters.
+- **Example:** `Input: words = ["a", "ab", "abc", "abcd"]`
+- **Constraints:**
+	- 1 <= words.length <= 1000
+	- 1 <= words[i].length <= 16
+	- words[i] only consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    static bool cmp(string &a, string &b) {
-        return a.size() < b.size();
-    }
-    
-    int longestStrChain(vector<string>& words) {
-        sort(words.begin(), words.end(), cmp);
-        
-        map<string, int> dp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest possible word chain that can be formed from the list of words.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The answer will always be a positive integer.
 
-        int mx = 1;
-        
-        for(int i = 0; i < words.size(); i++) {
-            string w = words[i];
-            for(int j = 0; j < w.size(); j++) {
-                string w1 = w.substr(0, j) + w.substr(j + 1);
-                dp[w] = max(dp[w], dp.count(w1)? dp[w1] + 1: 1);
-            }
-            mx = max(mx, dp[w]);
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the longest word chain by checking if a word can be a predecessor of another.
+
+- 1. Sort the words based on their lengths.
+- 2. Use dynamic programming to track the longest chain ending at each word.
+- 3. For each word, try to form a predecessor by removing one character at a time and check if the resulting word exists in the previous words of the list.
+- 4. The result is the maximum length of all possible word chains.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each word consists of lowercase English letters only.
+- The words are provided in an array, and their lengths vary.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: words = ["a", "ab", "abc", "abcd"]`  \
+  **Explanation:** In this example, we can form the word chain ["a", "ab", "abc", "abcd"]. Each word is a predecessor of the next, resulting in a chain length of 4.
+
+- **Input:** `Input: words = ["xbc", "pcxbcf", "xb", "cxbc", "pcxbc"]`  \
+  **Explanation:** In this example, all words can be arranged into the word chain ["xb", "xbc", "cxbc", "pcxbc", "pcxbcf"], resulting in a chain length of 5.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we can use dynamic programming and sorting to form the longest word chain.
+
+### Initial Thoughts 💭
+- The problem involves finding the longest sequence of words where each word can be transformed into the next by adding one character.
+- Sorting the words by length allows us to progressively check possible predecessors for each word.
+- A dynamic programming approach is well-suited to track the longest chain ending at each word.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no words, the longest word chain length is 0.
+- For large inputs, the algorithm will efficiently compute the longest word chain due to the dynamic programming approach.
+- If all words are of the same length, no word can be a predecessor of another, and the longest chain length is 1.
+- The number of words is guaranteed to be at most 1000, and each word has a length of at most 16 characters.
+{{< dots >}}
+## Code 💻
+```cpp
+
+static bool cmp(string &a, string &b) {
+    return a.size() < b.size();
+}
+
+int longestStrChain(vector<string>& words) {
+    sort(words.begin(), words.end(), cmp);
+    
+    map<string, int> dp;
+
+    int mx = 1;
+    
+    for(int i = 0; i < words.size(); i++) {
+        string w = words[i];
+        for(int j = 0; j < w.size(); j++) {
+            string w1 = w.substr(0, j) + w.substr(j + 1);
+            dp[w] = max(dp[w], dp.count(w1)? dp[w1] + 1: 1);
         }
-        
-        return mx;
+        mx = max(mx, dp[w]);
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The problem is to determine the longest possible string chain that can be formed from a list of words. A string chain is defined such that each word in the chain can be formed by removing exactly one letter from the previous word. For example, if "a" can be extended to "ab", and "ab" can be extended to "abc", then the chain "a" -> "ab" -> "abc" is valid.
-
-### Approach
-The approach to solving this problem involves:
-1. **Sorting the Words**: First, we sort the words by their lengths. This ensures that when we process each word, we have already considered all shorter words that can form a chain with it.
-2. **Dynamic Programming**: We use a dynamic programming (DP) strategy to keep track of the longest chain that ends with each word.
-3. **Building Chains**: For each word, we generate all possible predecessor words by removing one letter at a time. If a predecessor exists in our DP map, we update the current word's chain length accordingly.
-4. **Tracking the Maximum Chain Length**: Throughout this process, we keep track of the maximum chain length encountered.
-
-### Code Breakdown (Step by Step)
-
-1. **Class Definition**: The code begins with the definition of a class named `Solution`.
-
-   ```cpp
-   class Solution {
-   public:
-   ```
-
-2. **Custom Comparator**: A static method `cmp` is defined to sort the words based on their lengths.
-
-   ```cpp
-   static bool cmp(string &a, string &b) {
-       return a.size() < b.size();
-   }
-   ```
-
-3. **Main Function**: The function `longestStrChain` takes a vector of strings, `words`, as input.
-
-   ```cpp
-   int longestStrChain(vector<string>& words) {
-   ```
-
-4. **Sorting the Words**: The words are sorted using the previously defined comparator. This allows us to ensure that we only look at shorter words when processing a longer word.
-
-   ```cpp
-   sort(words.begin(), words.end(), cmp);
-   ```
-
-5. **Dynamic Programming Map**: A map `dp` is initialized to store the longest chain length for each word, with `mx` initialized to track the maximum chain length found.
-
-   ```cpp
-   map<string, int> dp;
-   int mx = 1;
-   ```
-
-6. **Processing Each Word**: A loop iterates through each word in the sorted list.
-
-   ```cpp
-   for(int i = 0; i < words.size(); i++) {
-       string w = words[i];
-   ```
-
-7. **Generating Predecessor Words**: For each character in the word, we create a predecessor by removing that character. The new string `w1` is formed using the `substr` method.
-
-   ```cpp
-   for(int j = 0; j < w.size(); j++) {
-       string w1 = w.substr(0, j) + w.substr(j + 1);
-   ```
-
-8. **Updating DP Values**: If the predecessor `w1` exists in the `dp` map, we update the current word's chain length by comparing it with the existing value and the predecessor's value incremented by one. If `w1` does not exist, we initialize the chain length for `w` to 1.
-
-   ```cpp
-   dp[w] = max(dp[w], dp.count(w1) ? dp[w1] + 1 : 1);
-   ```
-
-9. **Updating Maximum Length**: After processing each word, we check if the current word's chain length exceeds the maximum found so far and update `mx` accordingly.
-
-   ```cpp
-   mx = max(mx, dp[w]);
-   ```
-
-10. **Returning the Result**: Finally, the function returns the maximum length of the chain found.
-
-    ```cpp
+    
     return mx;
-    }
-    ```
+}
+```
 
-### Complexity Analysis
-- **Time Complexity**: The overall time complexity of the algorithm is \(O(n \cdot m^2)\), where \(n\) is the number of words and \(m\) is the average length of the words. This complexity arises from the fact that for each word, we potentially generate \(m\) predecessors, and each predecessor generation involves string operations.
-  
-- **Space Complexity**: The space complexity is \(O(n)\) due to the storage of the longest chain lengths for each word in the map `dp`.
+This function finds the longest string chain in a list of words, where each word in the chain can be formed by removing one character from the previous word. It uses dynamic programming and sorting to efficiently find the solution.
 
-### Conclusion
-The `longestStrChain` function effectively finds the longest string chain by utilizing sorting and dynamic programming. By processing the words in order of length, the algorithm ensures that all possible predecessor relationships are considered, enabling accurate computation of chain lengths.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	static bool cmp(string &a, string &b) {
+	```
+	Define a static comparison function 'cmp' that compares the size of two strings. This function is used for sorting the words in increasing order of their lengths.
 
-This solution is an excellent example of applying dynamic programming principles to string manipulation problems. It highlights the importance of efficiently checking for possible predecessors and updating results in a systematic manner.
+2. **Comparison Logic**
+	```cpp
+	    return a.size() < b.size();
+	```
+	Return true if the size of string 'a' is smaller than that of string 'b', otherwise return false. This is used to sort the words in ascending order of their lengths.
 
-The clarity and efficiency of this implementation make it a strong candidate for interviews and competitive programming contexts, demonstrating a solid understanding of both algorithm design and data structure utilization.
+3. **Function Definition**
+	```cpp
+	int longestStrChain(vector<string>& words) {
+	```
+	Define the function 'longestStrChain' which takes a vector of strings 'words' and returns the length of the longest string chain.
 
-This code is a practical demonstration of how to solve complex problems with a structured approach, making it an essential study point for anyone looking to deepen their knowledge in algorithms and problem-solving techniques.
+4. **Sorting**
+	```cpp
+	    sort(words.begin(), words.end(), cmp);
+	```
+	Sort the 'words' vector in increasing order of word length using the comparison function 'cmp'.
+
+5. **Variable Declaration**
+	```cpp
+	    map<string, int> dp;
+	```
+	Declare a map 'dp' where each key is a word, and the value is the length of the longest chain ending with that word.
+
+6. **Variable Initialization**
+	```cpp
+	    int mx = 1;
+	```
+	Initialize 'mx' to 1, which will store the length of the longest string chain found so far.
+
+7. **Loop Through Words**
+	```cpp
+	    for(int i = 0; i < words.size(); i++) {
+	```
+	Start a for loop that iterates through each word in the sorted 'words' vector.
+
+8. **Assign Word**
+	```cpp
+	        string w = words[i];
+	```
+	Assign the current word in the iteration to the variable 'w'.
+
+9. **Loop Through Word Characters**
+	```cpp
+	        for(int j = 0; j < w.size(); j++) {
+	```
+	Start an inner loop that iterates through each character of the current word 'w'.
+
+10. **Create Substring**
+	```cpp
+	            string w1 = w.substr(0, j) + w.substr(j + 1);
+	```
+	Create a new string 'w1' by removing the character at index 'j' from the string 'w'. This helps in checking if the current word can form a chain with a previous word.
+
+11. **Update DP Map**
+	```cpp
+	            dp[w] = max(dp[w], dp.count(w1)? dp[w1] + 1: 1);
+	```
+	Update the value of 'dp[w]' by checking if a smaller word 'w1' exists in the map 'dp'. If it does, the chain length is increased by 1. Otherwise, it starts a new chain with length 1.
+
+12. **Update Maximum Chain Length**
+	```cpp
+	        mx = max(mx, dp[w]);
+	```
+	Update the maximum chain length 'mx' by comparing it with the current chain length stored in 'dp[w]'.
+
+13. **Return Result**
+	```cpp
+	    return mx;
+	```
+	Return the value of 'mx', which is the length of the longest string chain.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+In the worst case, we check all possible predecessors for each word, leading to a time complexity of O(n^2) where n is the number of words.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required to store the map of longest chain lengths.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-string-chain/description/)

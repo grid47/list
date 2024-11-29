@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "3eqwUW6_cx4"
 youtube_upload_date="2023-02-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/3eqwUW6_cx4/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,80 +28,69 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/3eqwUW6_cx4/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array 'nums' and an integer 'k'. You can partition the array into at most 'k' non-empty adjacent subarrays. The score of a partition is defined as the sum of the averages of each subarray. Your goal is to return the maximum score that can be achieved by partitioning the array in any possible way, with each partition's score calculated as the sum of averages of its subarrays.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are provided with an array 'nums' of integers and an integer 'k', where 'nums' represents the array to be partitioned and 'k' is the maximum number of partitions allowed.
+- **Example:** `Input: nums = [4, 6, 2, 8, 3], k = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 10^4
+	- 1 <= k <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    double memo[200][200];
-    double largestSumOfAverages(vector<int>& nums, int k) {
-        memset(memo, 0, sizeof(memo));
-        int n = nums.size();
-        double cur = 0;
-        for(int i = 0; i < n; i++) {
-            cur += nums[i];
-            memo[i + 1][1] = cur / (i+ 1);
-        }
-        return search(n, k, nums);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a floating-point number representing the maximum score that can be achieved by partitioning the array into at most 'k' subarrays.
+- **Example:** `Output: 16.5`
+- **Constraints:**
+	- The answer should be accurate within a relative or absolute error of 10^-6.
 
-    double search(int n, int k, vector<int> &nums) {
-        if(memo[n][k] > 0) return memo[n][k];
-        double cur = 0;
-        for(int i = n - 1; i > 0; i--) {
-            cur += nums[i];
-            memo[n][k] = max(memo[n][k], search(i, k - 1, nums) + cur / (n - i));
-        }
-        return memo[n][k];
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the sum of averages of all subarrays created by partitioning the given array.
 
-### Problem Statement
+- Precompute the prefix sums of the array to allow quick calculations of subarray sums.
+- Use dynamic programming to find the maximum score, where the score is the sum of averages for each subarray formed.
+- Implement a memoization technique to avoid redundant calculations of overlapping subproblems.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array 'nums' and the integer 'k' are valid as per the constraints.
+- Each partition must use all elements of the array without any element being left out.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [4, 6, 2, 8, 3], k = 2`  \
+  **Explanation:** The best partition for this example is [4, 6], [2, 8, 3]. The average of [4, 6] is (4 + 6)/2 = 5, and the average of [2, 8, 3] is (2 + 8 + 3)/3 = 4.33. The total score is 5 + 4.33 = 9.33.
 
-In this problem, we are tasked with dividing an array of integers into `k` non-empty contiguous subarrays, such that the sum of the averages of the subarrays is maximized. Given an array of integers `nums` and an integer `k`, we need to determine the largest possible sum of the averages of these subarrays. 
+{{< dots >}}
+## Approach 🚀
+The approach involves using dynamic programming to solve the problem optimally. We will memoize the results of subproblems to avoid redundant calculations and maximize the partition score.
 
-The problem requires us to partition the array optimally so that each subarray's average contributes to the total sum, and we maximize the sum. The division of the array into subarrays can be tricky because of how averages work, so a strategic approach is necessary.
-
-### Approach
-
-To solve this problem optimally, we can use **Dynamic Programming (DP)** with **Memoization**. The main idea is to compute the maximum sum of averages by considering all possible partitions of the array.
-
-Here's a step-by-step breakdown of the approach:
-
-1. **Dynamic Programming**: We maintain a DP table where `memo[i][j]` represents the maximum sum of averages we can achieve by partitioning the first `i` elements of the array into `j` subarrays.
-   
-2. **Precompute Prefix Sums**: Before starting the DP, we precompute the prefix sums of the array so that we can quickly compute the average of any subarray. The prefix sum at index `i` gives the sum of all elements in `nums[0..i-1]`. Using this, the average of a subarray from index `i` to `j` can be computed as `(prefix[j+1] - prefix[i]) / (j - i + 1)`.
-
-3. **Recursive Search with Memoization**: The solution uses recursion to explore all possible ways to partition the array into `k` subarrays. Each recursion tries to partition the array by considering the last partition to be a subarray from some index `i` to `n`, and the rest is handled by the DP table. This allows us to break the problem into subproblems and store results to avoid redundant computations.
-
-4. **Base Case**: The base case is when we have exactly `1` subarray, in which case the average of the entire array is used as the only element. 
-
-5. **Transition**: The state transition is based on splitting the array into smaller subarrays, and for each subarray, we compute its average and combine it with the results from previous subarrays.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initializing the Memoization Table
+### Initial Thoughts 💭
+- Each partition can be represented by a subarray, and we need to compute the sum of averages for each partition.
+- We need to maximize the sum of averages, which means distributing the array elements across subarrays efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array should not be a valid test case based on the problem's constraints.
+- The solution should handle the largest inputs efficiently, where the array length is at its maximum and k is large.
+- Consider cases where k equals the array length, meaning each element will be its own subarray.
+- Ensure the algorithm handles arrays of different sizes and large values of k within the given time limits.
+{{< dots >}}
+## Code 💻
 ```cpp
-memset(memo, 0, sizeof(memo));
-```
-- We initialize the `memo` table to store the results of subproblems. The size of the table is `[200][200]` since the problem constraints suggest that the number of elements in `nums` is manageable, and `k` is at most 200. This memoization ensures we don’t compute the same subproblem multiple times, making the solution efficient.
-
-#### Step 2: Calculating the Prefix Sums and Initializing the First Subarray
-```cpp
-int n = nums.size();
-double cur = 0;
-for(int i = 0; i < n; i++) {
-    cur += nums[i];
-    memo[i + 1][1] = cur / (i + 1);
+double memo[200][200];
+double largestSumOfAverages(vector<int>& nums, int k) {
+    memset(memo, 0, sizeof(memo));
+    int n = nums.size();
+    double cur = 0;
+    for(int i = 0; i < n; i++) {
+        cur += nums[i];
+        memo[i + 1][1] = cur / (i+ 1);
+    }
+    return search(n, k, nums);
 }
-```
-- We iterate through the array and compute the prefix sums (`cur`). For each prefix sum, we store the average of the first `i+1` elements in `memo[i+1][1]`, since this is the maximum sum we can get by using only one subarray from the start of the array to index `i`.
 
-#### Step 3: Recursive Search Function
-```cpp
-double search(int n, int k, vector<int>& nums) {
+double search(int n, int k, vector<int> &nums) {
     if(memo[n][k] > 0) return memo[n][k];
     double cur = 0;
     for(int i = n - 1; i > 0; i--) {
@@ -110,33 +100,124 @@ double search(int n, int k, vector<int>& nums) {
     return memo[n][k];
 }
 ```
-- This is the core recursive function. It computes the maximum sum of averages for `n` elements and `k` subarrays.
-- First, it checks if the result is already memoized (`memo[n][k] > 0`), and if so, returns the value.
-- It then computes the sum of elements from index `i` to `n` (which is part of the last subarray) and recursively calls the `search` function for the remaining elements (`i` to `n-1`) with `k-1` subarrays.
-- The function keeps track of the maximum possible sum by considering all possible ways of splitting the last subarray, and the result is memoized for future use.
 
-#### Step 4: Final Result
-```cpp
-return search(n, k, nums);
-```
-- After initializing the first subarray averages, we call the `search` function to compute the maximum sum of averages for the entire array with `k` subarrays.
+This code implements a dynamic programming solution to find the largest sum of averages after dividing a list of numbers into k parts. It uses memoization to store intermediate results for efficient computation.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	double memo[200][200];
+	```
+	Initializes a memoization table `memo` to store the maximum averages for each possible subarray division.
 
-#### Time Complexity:
-- **O(n * k)**: 
-   - We have `n` elements and at most `k` subarrays. For each state `memo[n][k]`, we try every possible split of the array into two subarrays, which results in `O(n)` recursive calls per state.
-   - Thus, the time complexity is proportional to the number of states (`n * k`), and each state takes linear time (`O(n)`) to compute due to the recursive exploration.
+2. **Function Definition**
+	```cpp
+	double largestSumOfAverages(vector<int>& nums, int k) {
+	```
+	Defines the main function `largestSumOfAverages`, which takes a list of integers `nums` and the number of divisions `k`.
 
-#### Space Complexity:
-- **O(n * k)**:
-   - We are using a memoization table of size `n * k` to store the results for each subproblem, so the space complexity is directly proportional to the number of subproblems (`n * k`).
+3. **Initialization**
+	```cpp
+	    memset(memo, 0, sizeof(memo));
+	```
+	Initializes the memoization table `memo` with zeros using `memset` to ensure no residual values.
 
-### Conclusion
+4. **Variable Assignment**
+	```cpp
+	    int n = nums.size();
+	```
+	Stores the size of the `nums` array in the variable `n`.
 
-This solution effectively solves the problem of partitioning the array into `k` subarrays by using dynamic programming with memoization. By breaking the problem into smaller subproblems and storing intermediate results, we avoid redundant calculations and optimize the solution. The recursive approach, combined with efficient memoization, ensures that the solution is computed in a reasonable amount of time, even for larger input sizes.
+5. **Variable Initialization**
+	```cpp
+	    double cur = 0;
+	```
+	Initializes the variable `cur` to accumulate the sum of elements as we process them.
 
-In essence, this solution balances both time and space complexities to handle a variety of input sizes while providing an optimal solution to the problem. The approach is elegant, efficient, and applicable to similar problems involving partitioning or dynamic array processing.
+6. **Looping through Array**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins a loop to iterate through each element of the `nums` array.
+
+7. **Accumulate Sum**
+	```cpp
+	        cur += nums[i];
+	```
+	Adds the current element of `nums` to the `cur` variable, updating the accumulated sum.
+
+8. **Memoization Update**
+	```cpp
+	        memo[i + 1][1] = cur / (i+ 1);
+	```
+	Calculates the average of the elements from index 0 to i and stores it in the memoization table `memo`.
+
+9. **Return Statement**
+	```cpp
+	    return search(n, k, nums);
+	```
+	Calls the recursive `search` function to calculate the largest sum of averages and returns its result.
+
+10. **Function Definition**
+	```cpp
+	double search(int n, int k, vector<int> &nums) {
+	```
+	Defines the recursive helper function `search`, which computes the largest possible sum of averages for given indices.
+
+11. **Memoization Check**
+	```cpp
+	    if(memo[n][k] > 0) return memo[n][k];
+	```
+	Checks if the result for the current state (n, k) is already computed and returns it if available.
+
+12. **Variable Initialization**
+	```cpp
+	    double cur = 0;
+	```
+	Initializes a variable `cur` to accumulate the sum for the current subarray.
+
+13. **Looping through Array**
+	```cpp
+	    for(int i = n - 1; i > 0; i--) {
+	```
+	Starts a loop to iterate through the array elements from index `n - 1` to 1 in reverse order.
+
+14. **Accumulate Sum**
+	```cpp
+	        cur += nums[i];
+	```
+	Adds the current element `nums[i]` to `cur` for the current subarray.
+
+15. **Memoization Update**
+	```cpp
+	        memo[n][k] = max(memo[n][k], search(i, k - 1, nums) + cur / (n - i));
+	```
+	Updates the memoization table with the maximum average found for the current subarray division.
+
+16. **Return Statement**
+	```cpp
+	    return memo[n][k];
+	```
+	Returns the computed result for the current subarray division (n, k) from the memoization table.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * k) where n is the length of the array and k is the number of partitions.
+- **Average Case:** O(n * k) as the solution requires evaluating all subarray partitions.
+- **Worst Case:** O(n * k) as the solution depends on iterating over the entire array and considering all possible partitions.
+
+The complexity arises from computing the sum of averages for each subarray and storing the results in a dynamic programming table.
+
+### Space Complexity 💾
+- **Best Case:** O(n * k) in the best case scenario where all subproblems are distinct and memoization is used optimally.
+- **Worst Case:** O(n * k) where n is the length of the array and k is the number of partitions, due to memoization.
+
+The space complexity comes from storing intermediate results in the memoization table.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-sum-of-averages/description/)
 

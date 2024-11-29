@@ -14,90 +14,122 @@ img_src = ""
 youtube = "jqcmjnXmCaw"
 youtube_upload_date="2020-06-13"
 youtube_thumbnail="https://i.ytimg.com/vi/jqcmjnXmCaw/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of points with integer coordinates. Calculate the minimum time to visit all points in the given order using vertical, horizontal, or diagonal movements.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of points, where each point is represented by a pair of integers [x, y].
+- **Example:** `[[2, 2], [5, 5], [1, 3]]`
+- **Constraints:**
+	- 1 <= points.length <= 100
+	- -1000 <= points[i][0], points[i][1] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minTimeToVisitAllPoints(vector<vector<int>>& points) {
-        int ans = 0;
-        for(int i = 1; i < points.size(); i++) {
-            ans += max(abs(points[i][1] - points[i - 1][1]), abs(points[i][0] - points[i - 1][0]));
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the minimum time in seconds to visit all points in the given order.
+- **Example:** `6`
+- **Constraints:**
+	- The time is measured in seconds, considering the movement options.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the minimum time to visit all points in the given order.
+
+- 1. Calculate the time to move from the current point to the next using the maximum of the differences in x and y coordinates (taking diagonal moves into account).
+- 2. Add the time for each pair of consecutive points to the total time.
+- 3. Return the total time after visiting all points.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least one point.
+- The input points are valid and within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[2, 2], [5, 5], [1, 3]]`  \
+  **Explanation:** The total time to visit all points is 6 seconds: 3 seconds to go from [2, 2] to [5, 5] and 3 seconds to go from [5, 5] to [1, 3].
+
+{{< dots >}}
+## Approach 🚀
+Use the concept of Manhattan distance but consider diagonal movements to minimize the time.
+
+### Initial Thoughts 💭
+- We can calculate the time for each move between points by considering the largest difference in coordinates (either horizontally or vertically).
+- Diagonal moves can be used to reduce the total time.
+- To find the minimum time, calculate the maximum of the horizontal and vertical distances between two consecutive points.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always contain at least one point as per the constraints.
+- Ensure that the solution handles the maximum number of points efficiently.
+- All points may be located at the same position, which would result in zero time.
+- The input is valid and within the problem's constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+    int ans = 0;
+    for(int i = 1; i < points.size(); i++) {
+        ans += max(abs(points[i][1] - points[i - 1][1]), abs(points[i][0] - points[i - 1][0]));
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The goal of this problem is to determine the minimum time required for a person to visit all specified points on a 2D plane. The person can move from one point to another in a way that allows for diagonal movements. Thus, the time it takes to travel from point A at coordinates \((x_1, y_1)\) to point B at coordinates \((x_2, y_2)\) is determined by the maximum of the absolute differences in the x-coordinates and y-coordinates. Formally, the time \(T\) to move from point A to point B can be calculated using:
-
-\[ 
-T = \max(|x_2 - x_1|, |y_2 - y_1|) 
-\]
-
-Given an array of points, the task is to compute the total time required to visit all the points in the order they are provided.
-
-### Approach
-The approach to solving this problem involves iterating through the list of points and calculating the time taken to move from each point to the next. By accumulating the time required for each pair of consecutive points, we can arrive at the total minimum time required to visit all points. The key steps in the approach are as follows:
-
-1. Initialize a variable to keep track of the total time.
-2. Loop through the list of points, starting from the second point.
-3. For each point, compute the time to reach it from the previous point using the maximum of the absolute differences in their x and y coordinates.
-4. Sum all these times to get the final result.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+    return ans;
+}
 ```
-- **Line 1-3**: The `Solution` class is defined, containing the public member function `minTimeToVisitAllPoints`, which takes a 2D vector `points` representing the coordinates of the points to visit.
 
-```cpp
-        int ans = 0;
-```
-- **Line 4**: We initialize an integer variable `ans` to zero. This variable will accumulate the total time needed to visit all points.
+This code calculates the minimum time required to visit all the given points in a 2D plane. It computes the time between consecutive points by calculating the maximum of the horizontal and vertical distance between them.
 
-```cpp
-        for(int i = 1; i < points.size(); i++) {
-```
-- **Line 5**: We begin a loop that starts from the second point (index `1`) and continues until the last point in the `points` array.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+	```
+	This defines the function `minTimeToVisitAllPoints`, which takes a 2D vector `points` representing a list of coordinates and returns the minimum time required to visit all points.
 
-```cpp
-            ans += max(abs(points[i][1] - points[i - 1][1]), abs(points[i][0] - points[i - 1][0]));
-```
-- **Line 6**: For each point at index `i`, we calculate the time taken to move from the previous point at index `i-1`. The time is computed using the formula discussed earlier:
-  - `abs(points[i][1] - points[i - 1][1])` computes the absolute difference in the y-coordinates.
-  - `abs(points[i][0] - points[i - 1][0])` computes the absolute difference in the x-coordinates.
-  - `max(...)` returns the greater of these two differences, which gives the time required to travel between the two points. This value is then added to `ans`.
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	This initializes an integer variable `ans` to 0, which will accumulate the total time needed to visit all the points.
 
-```cpp
-        return ans;
-    }
-};
-```
-- **Line 7**: After completing the loop for all points, we return the accumulated time stored in `ans`, which represents the minimum time to visit all points.
+3. **Loop (Iterate Through Points)**
+	```cpp
+	    for(int i = 1; i < points.size(); i++) {
+	```
+	This loop iterates through the points starting from the second point (index 1) and compares each point with the previous one.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The time complexity of this solution is \(O(n)\), where \(n\) is the number of points in the `points` array. This is because we iterate through the list of points exactly once.
+4. **Distance Calculation**
+	```cpp
+	        ans += max(abs(points[i][1] - points[i - 1][1]), abs(points[i][0] - points[i - 1][0]));
+	```
+	This calculates the time it takes to move from the previous point to the current point. The time is the maximum of the vertical and horizontal distance between the points.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(1)\), as we are using only a fixed number of variables (i.e., `ans` and `i`) regardless of the size of the input.
+5. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	This returns the total accumulated time `ans`, which represents the minimum time required to visit all points.
 
-### Conclusion
-The `minTimeToVisitAllPoints` function efficiently calculates the minimum time required to visit all specified points on a 2D plane using a straightforward iterative approach. By leveraging the properties of absolute differences and diagonal movement, this solution effectively computes the necessary travel time in linear time complexity, making it suitable for large datasets.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of points.
+- **Average Case:** O(n) for each iteration over the points.
+- **Worst Case:** O(n), where n is the number of points.
 
-In summary, the function highlights the elegance of mathematical operations in algorithm design, demonstrating how simple computations can lead to efficient and effective solutions to geometric and spatial problems. This technique can be applied to various problems involving movement in multidimensional spaces, making it a valuable addition to an algorithmic toolkit.
+The time complexity is linear because we iterate over the list of points once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as no additional space is used other than for variables.
+- **Worst Case:** O(1), since only a constant amount of extra space is needed.
+
+The space complexity is constant since only a few variables are used to calculate the total time.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-visiting-all-points/description/)
 

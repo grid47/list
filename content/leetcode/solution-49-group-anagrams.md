@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "eDmxPfVa81k"
 youtube_upload_date="2023-12-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/eDmxPfVa81k/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,144 +28,216 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/eDmxPfVa81k/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an array of strings. Group the strings that are anagrams of each other together and return them as a list of lists. An anagram is a word or phrase formed by rearranging the letters of another word or phrase.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an array of strings, where each string is a lowercase English word.
+- **Example:** `["listen", "silent", "enlist", "rat", "tar", "art"]`
+- **Constraints:**
+	- 1 <= strs.length <= 10^4
+	- 0 <= strs[i].length <= 100
+	- Each string in strs consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    string code(string x) {
-        vector<int> q(26, 0);
-        for(int i = 0; i < x.size(); i++) {
-            q[x[i] - 'a']++;
-        }
-        stringstream ss;
-        for(int i = 0; i < 26; i++) {
-            if(i != 0) ss << ',';
-            ss << q[i];
-        }
-        return ss.str();
-    }
-    
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        map<string, vector<string>> ma;
-        for(string x: strs) {
-            string mask = code(x);
-            ma[mask].push_back(x);
-        }
-        vector<vector<string>> ans;
-        for(auto [key, val]: ma)
-            ans.push_back(val);
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of lists, where each inner list contains strings that are anagrams of each other.
+- **Example:** `[["listen", "silent", "enlist"], ["rat", "tar", "art"]]`
+- **Constraints:**
+	- The output should contain all anagram groups.
 
-### 🔄 **Group Anagrams**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to group the strings that are anagrams of each other and return them in a list of lists.
 
-The task is to group anagrams from a given list of strings. An **anagram** is a word or phrase formed by rearranging the letters of another word or phrase, using all the original letters exactly once. The goal is to return a list of lists, where each list contains words that are anagrams of each other.
+- 1. Create a map to store groups of anagrams.
+- 2. For each string, generate a signature (like a sorted version or a character count).
+- 3. Use this signature as the key in the map and add the string to the corresponding list.
+- 4. After processing all strings, return the list of values from the map.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will be no empty strings in the input unless explicitly stated (e.g., in Example 3).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["listen", "silent", "enlist", "rat", "tar", "art"]`  \
+  **Explanation:** In this example, the strings "listen", "silent", and "enlist" form one group of anagrams, while "rat", "tar", and "art" form another group.
 
-### 📊 **Example**
+- **Input:** `["cat", "dog", "god", "act"]`  \
+  **Explanation:** Here, "cat" and "act" are anagrams of each other, while "dog" and "god" form a separate group.
 
-Given the input list of strings:
+{{< dots >}}
+## Approach 🚀
+The approach involves using a map to group the strings that are anagrams of each other based on a unique signature (e.g., sorted characters or character count).
 
-```plaintext
-["eat", "tea", "tan", "ate", "nat", "bat"]
-```
-
-The output should be:
-
-```plaintext
-[["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
-```
-
-### 🧠 **Approach**
-
-To solve this problem efficiently, we will use the following approach:
-
-1. **Generate a Signature (Mask) for Each Word**:
-   Two words are anagrams if they have the exact same frequency of characters. Therefore, we can represent each word with a frequency distribution (a "mask"), which allows us to group words that share the same distribution.
-
-2. **Use a Map to Group Words**:
-   We use a map to store words, where the key is the "mask" and the value is a list of words that share the same mask. If two words have the same mask, they are anagrams.
-
-3. **Return the Grouped Anagrams**:
-   After processing all words, the map will contain the anagram groups. We return these groups as a list of lists.
-
-### 💻 **Code Breakdown (Step by Step)**
-
-#### Step 1: **Creating the Mask for a Word**
-
-We create a mask for each word based on the frequency of its characters:
-
+### Initial Thoughts 💭
+- Anagrams can be identified by sorting the characters in the string or by using a frequency count of characters.
+- Using a frequency count or sorted string as a key in a map can efficiently group the anagrams.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input contains an empty string, it should be grouped separately.
+- For larger inputs, the algorithm should still efficiently group anagrams within the constraints.
+- Anagrams with only one character should be grouped together.
+- The input strings contain only lowercase letters and have lengths between 0 and 100.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 string code(string x) {
-    vector<int> q(26, 0);  // Initialize a vector to store the frequency of each letter in the word.
+    vector<int> q(26, 0);
     for(int i = 0; i < x.size(); i++) {
-        q[x[i] - 'a']++;  // Increment the count of the character.
+        q[x[i] - 'a']++;
     }
-    stringstream ss;  // Use a stringstream to construct the string representation of the frequency array.
+    stringstream ss;
     for(int i = 0; i < 26; i++) {
-        if(i != 0) ss << ',';  // Separate counts by commas.
-        ss << q[i];  // Append the count of the current character to the stringstream.
+        if(i != 0) ss << ',';
+        ss << q[i];
     }
-    return ss.str();  // Return the generated mask as a string.
+    return ss.str();
 }
-```
 
-1. **Frequency Array**: We use an array `q` of size 26 (one for each letter of the alphabet) initialized to zero, which stores the frequency of each character in the word.
-2. **Counting Characters**: For each character in the word, we increment the corresponding index in the array `q`.
-3. **Build the Mask**: We use a `stringstream` to create a string that represents the frequency of each character, separated by commas.
-4. **Return Mask**: The final string represents the word's frequency distribution and serves as its signature.
-
-#### Step 2: **Group Words by Their Masks**
-
-We group words by their corresponding masks in a map:
-
-```cpp
 vector<vector<string>> groupAnagrams(vector<string>& strs) {
-    map<string, vector<string>> ma;  // Map to store groups of anagrams, using the mask as the key.
+    map<string, vector<string>> ma;
     for(string x: strs) {
-        string mask = code(x);  // Get the mask for the current word.
-        ma[mask].push_back(x);  // Group the word by its mask.
+        string mask = code(x);
+        ma[mask].push_back(x);
     }
-    vector<vector<string>> ans;  // Vector to store the final result.
+    vector<vector<string>> ans;
     for(auto [key, val]: ma)
-        ans.push_back(val);  // Add all groups of anagrams to the result vector.
+        ans.push_back(val);
     
-    return ans;  // Return the list of anagram groups.
+    return ans;
 }
 ```
 
-1. **Initialize the Map**: We initialize a map `ma` where the key is the mask, and the value is a vector of words sharing the same mask (i.e., anagrams).
-2. **Process Each Word**: For each word, we calculate its mask using the `code` function and insert it into the corresponding vector in the map.
-3. **Build Final Result**: After processing all words, the map contains the anagram groups. We iterate through the map and add each group of anagrams to the result vector `ans`.
-4. **Return Result**: We return the list of anagram groups.
+This code groups anagrams in a given list of strings.
 
-### ⏱️ **Time and Space Complexity**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string code(string x) {
+	```
+	This line declares a function named `code` that takes a string `x` as input and returns a string representing the character frequency of the input string.
 
-#### Time Complexity
+2. **Array Initialization**
+	```cpp
+	    vector<int> q(26, 0);
+	```
+	This line initializes a vector `q` of size 26 to store the frequency of each lowercase letter.
 
-- **Generating the Mask**: The time to generate the mask for each word is proportional to the length of the word. If the total number of characters in all words is `n`, the time for generating masks is `O(n)`.
-- **Grouping Words**: Inserting a word into the map takes `O(log m)` time, where `m` is the number of distinct masks. The total time for this step is `O(n log m)`, where `n` is the number of words and `m` is the number of distinct masks.
-- **Final Grouping**: The final step, iterating through the map and collecting the results, takes `O(n)` time.
+3. **Character Frequency Calculation**
+	```cpp
+	    for(int i = 0; i < x.size(); i++) {
+	```
+	This loop iterates over each character in the input string `x`.
 
-Thus, the overall time complexity is `O(n log m)` where `n` is the number of words and `m` is the number of distinct masks (which in the worst case could be `n`), resulting in a time complexity of `O(n log n)`.
+4. **Character Frequency Calculation**
+	```cpp
+	        q[x[i] - 'a']++;
+	```
+	The frequency of the current character `x[i]` is incremented in the corresponding index of the `q` vector.
 
-#### Space Complexity
+5. **String Stream Initialization**
+	```cpp
+	    stringstream ss;
+	```
+	A string stream `ss` is initialized to construct the character frequency string.
 
-- **Space for Masks**: We need `O(n)` space to store the frequency masks for each word.
-- **Space for Map and Result**: The map stores the words grouped by their masks, and the result stores all words. Therefore, the total space complexity is `O(n)`.
+6. **String Stream Manipulation**
+	```cpp
+	    for(int i = 0; i < 26; i++) {
+	```
+	This loop iterates over the frequency array `q`.
 
-### 🎯 **Conclusion**
+7. **String Stream Manipulation**
+	```cpp
+	        if(i != 0) ss << ',';
+	```
+	If it's not the first iteration, a comma is added to the string stream as a separator.
 
-This approach efficiently groups anagrams by leveraging a frequency-based mask for each word. Using a map to store words with the same mask allows us to group anagrams in a time-efficient manner. The algorithm has a **time complexity of O(n log n)** and a **space complexity of O(n)**, making it suitable for large inputs.
+8. **String Stream Manipulation**
+	```cpp
+	        ss << q[i];
+	```
+	The frequency of the current character is appended to the string stream.
 
----
+9. **Return Frequency String**
+	```cpp
+	    return ss.str();
+	```
+	The final string representation of the character frequencies is returned.
 
-Happy coding! Keep grouping those anagrams efficiently! 🎉
+10. **Main Function**
+	```cpp
+	vector<vector<string>> groupAnagrams(vector<string>& strs) {
+	```
+	This line declares the main function `groupAnagrams` that takes a vector of strings `strs` as input and returns a vector of vectors containing grouped anagrams.
+
+11. **Map Initialization**
+	```cpp
+	    map<string, vector<string>> ma;
+	```
+	A map `ma` is initialized to store the character frequency string as the key and a vector of anagrams as the value.
+
+12. **Iterate Over Strings**
+	```cpp
+	    for(string x: strs) {
+	```
+	This loop iterates over each string `x` in the input vector `strs`.
+
+13. **Generate Character Frequency String**
+	```cpp
+	        string mask = code(x);
+	```
+	The `code` function is called to generate the character frequency string `mask` for the current string `x`.
+
+14. **Group Anagrams**
+	```cpp
+	        ma[mask].push_back(x);
+	```
+	The current string `x` is added to the vector of anagrams associated with the `mask` key in the `ma` map.
+
+15. **Result Vector Initialization**
+	```cpp
+	    vector<vector<string>> ans;
+	```
+	A 2D vector `ans` is initialized to store the grouped anagrams.
+
+16. **Populate Result Vector**
+	```cpp
+	    for(auto [key, val]: ma)
+	```
+	This loop iterates over the key-value pairs in the `ma` map.
+
+17. **Populate Result Vector**
+	```cpp
+	        ans.push_back(val);
+	```
+	The vector of anagrams associated with the current key is added to the `ans` vector.
+
+18. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The `ans` vector containing the grouped anagrams is returned.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * k log k)
+- **Average Case:** O(n * k log k)
+- **Worst Case:** O(n * k log k)
+
+The time complexity is O(n * k log k), where n is the number of strings and k is the length of the longest string. Sorting each string takes O(k log k) time.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n * k)
+
+The space complexity is O(n * k) where n is the number of strings and k is the average length of the strings, due to the space used by the map to store the anagram groups.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/group-anagrams/description/)
 

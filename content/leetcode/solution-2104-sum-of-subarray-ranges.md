@@ -14,105 +14,158 @@ img_src = ""
 youtube = "sMFAjHe3kkw"
 youtube_upload_date="2021-12-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/sMFAjHe3kkw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array `nums`. A subarray of `nums` is a contiguous sequence of elements. The *range* of a subarray is defined as the difference between the maximum and minimum elements within that subarray.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long subArrayRanges(vector<int>& nums) {
+Your task is to calculate the sum of the ranges for all possible subarrays in the given array `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 1D array of integers `nums` of length n, where each element nums[i] represents an integer in the array.
+- **Example:** `nums = [1, 2, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- -10^9 <= nums[i] <= 10^9
+
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of all subarray ranges of `nums`.
+- **Example:** `Output: 4`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the sum of all subarray ranges efficiently.
+
+- Iterate over each subarray of nums.
+- For each subarray, find the minimum and maximum values.
+- Calculate the range of the subarray as the difference between the maximum and minimum values.
+- Sum up the ranges for all subarrays.
+{{< dots >}}
+### Problem Assumptions ✅
+- You are given a valid array nums.
+- The input is non-empty.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 3]`  \
+  **Explanation:** The subarrays are [1], [2], [3], [1, 2], [2, 3], and [1, 2, 3]. The ranges of these subarrays are 0, 0, 0, 1, 1, and 2, respectively. The sum of these ranges is 0 + 0 + 0 + 1 + 1 + 2 = 4.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem efficiently, we will calculate the range for each subarray and sum them up. An optimal approach may involve iterating over each subarray in a nested loop and calculating its range.
+
+### Initial Thoughts 💭
+- The brute-force solution is to find the range for every subarray by iterating through the entire array for each subarray, which is O(n^2).
+- We should try to optimize this solution, possibly using a sliding window or other techniques to calculate the range more efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one element.
+- The approach should be efficient enough to handle arrays up to the maximum length of 1000.
+- Arrays with all identical elements will have zero range for all subarrays.
+- The algorithm should work within the time limit for n up to 1000.
+{{< dots >}}
+## Code 💻
+```cpp
+long long subArrayRanges(vector<int>& nums) {
+    
+    long long res = 0, n = nums.size();
+    
+    for(int i = 0; i < n - 1; i++) {
         
-        long long res = 0, n = nums.size();
+        int mini = nums[i], maxi = nums[i];
         
-        for(int i = 0; i < n - 1; i++) {
+        for(int j = i + 1; j < n; j++) {
             
-            int mini = nums[i], maxi = nums[i];
-            
-            for(int j = i + 1; j < n; j++) {
-                
-                if(nums[j] < mini) mini = nums[j];
-                if(nums[j] > maxi) maxi = nums[j];
-                res += maxi - mini;
-            }
+            if(nums[j] < mini) mini = nums[j];
+            if(nums[j] > maxi) maxi = nums[j];
+            res += maxi - mini;
         }
-        
-        return res;
     }
-};
-{{< /highlight >}}
----
+    
+    return res;
+}
+```
 
-### Problem Statement
+This is a function that computes the sum of the differences between the maximum and minimum elements in all subarrays of a given array.
 
-This code calculates the sum of the ranges for all possible subarrays of an input array `nums`. In a subarray, the range is defined as the difference between the maximum and minimum values in that subarray. The task is to calculate this range for every possible subarray and sum them up to get the final result.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long subArrayRanges(vector<int>& nums) {
+	```
+	Declares the function that computes the sum of the ranges (max - min) of all subarrays.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    long long res = 0, n = nums.size();
+	```
+	Initializes `res` to store the result and `n` to store the size of the array.
 
-The approach here involves a nested loop strategy. For each element in the array, the algorithm identifies all subarrays starting at that element. It tracks the minimum and maximum values within each subarray as it iterates and calculates the range. By summing these ranges, it accumulates the total range for all subarrays in the variable `res`.
+3. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < n - 1; i++) {
+	```
+	Starts a loop that iterates over each element of the array, except the last one.
 
-### Code Breakdown (Step by Step)
+4. **Variable Initialization**
+	```cpp
+	        int mini = nums[i], maxi = nums[i];
+	```
+	Sets the initial values of mini and maxi to the current element in the outer loop.
 
-1. **Initialization**:
-   ```cpp
-   long long res = 0, n = nums.size();
-   ```
-   - `res`: Stores the cumulative sum of all subarray ranges.
-   - `n`: Stores the size of the input array `nums`.
+5. **Inner Loop**
+	```cpp
+	        for(int j = i + 1; j < n; j++) {
+	```
+	Starts the inner loop that iterates over all elements after the current outer loop element.
 
-2. **Outer Loop**:
-   ```cpp
-   for(int i = 0; i < n - 1; i++) {
-   ```
-   - The outer loop iterates over each starting position `i` of potential subarrays in `nums`. This allows us to calculate the range for all subarrays beginning with `nums[i]`.
+6. **Condition for Mini Update**
+	```cpp
+	            if(nums[j] < mini) mini = nums[j];
+	```
+	If the current element is smaller than mini, it updates mini.
 
-3. **Initialize `mini` and `maxi`**:
-   ```cpp
-   int mini = nums[i], maxi = nums[i];
-   ```
-   - `mini`: Tracks the minimum value within the current subarray.
-   - `maxi`: Tracks the maximum value within the current subarray.
-   - Both `mini` and `maxi` start with the first element of the subarray, `nums[i]`.
+7. **Condition for Maxi Update**
+	```cpp
+	            if(nums[j] > maxi) maxi = nums[j];
+	```
+	If the current element is larger than maxi, it updates maxi.
 
-4. **Inner Loop**:
-   ```cpp
-   for(int j = i + 1; j < n; j++) {
-   ```
-   - The inner loop extends the current subarray by one element each time, starting from `i + 1` up to `n-1`.
+8. **Result Calculation**
+	```cpp
+	            res += maxi - mini;
+	```
+	Calculates the range (maxi - mini) for the current subarray and adds it to the result.
 
-5. **Update `mini` and `maxi`**:
-   ```cpp
-   if(nums[j] < mini) mini = nums[j];
-   if(nums[j] > maxi) maxi = nums[j];
-   ```
-   - As each new element is added to the subarray, `mini` and `maxi` are updated if the new element is smaller or larger, respectively. This helps keep track of the minimum and maximum values in the current subarray range.
+9. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the accumulated result from the sum of ranges.
 
-6. **Calculate Range and Update Result**:
-   ```cpp
-   res += maxi - mini;
-   ```
-   - The difference between `maxi` and `mini` gives the range of the current subarray. This range is added to the cumulative result, `res`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-7. **Return Result**:
-   ```cpp
-   return res;
-   ```
-   - Once all possible subarrays have been processed, `res` contains the sum of ranges for every subarray in `nums`.
+The worst case time complexity occurs when the array length is at its maximum.
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Time Complexity**: \(O(n^2)\)
-   - The outer loop runs `n` times, and for each `i`, the inner loop can run up to `n - i - 1` times, resulting in an overall quadratic time complexity.
-   
-- **Space Complexity**: \(O(1)\)
-   - Only a few extra variables (`mini`, `maxi`, and `res`) are used, so the space complexity is constant.
+The space complexity is constant, as we are only storing a few variables for calculation.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently calculates the sum of subarray ranges using a nested loop structure, ideal for cases where input arrays are small to moderately sized. The algorithm’s nested structure ensures that every possible subarray is considered, and the approach of updating minimum and maximum values on each inner loop iteration provides an effective way to compute ranges dynamically. This code is straightforward, leveraging a brute-force approach that provides accurate results for the sum of all subarray ranges without requiring additional data structures.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-subarray-ranges/description/)
 

@@ -14,109 +14,172 @@ img_src = ""
 youtube = "k3uIpQ54LVY"
 youtube_upload_date="2023-09-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/k3uIpQ54LVY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a list of distinct positive integers. Your task is to determine the minimum number of right shifts needed to sort the list in ascending order, or return -1 if it is not possible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of distinct positive integers.
+- **Example:** `nums = [4, 5, 6, 1, 2, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
+	- nums contains distinct integers.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumRightShifts(vector<int>& nums) {
-        int  n = nums.size(),ind = -1,cnt = 0;
-        for(int i=0;i<n-1;i++){
-            if(nums[i]>nums[i+1]){
-                if(cnt==0){
-                ind = i+1;
-                cnt++;
-                }else return -1;
-            }
-        }
-        if(ind==-1) return 0;
-        if(nums[n-1]>nums[0]) return -1;
-        return n-ind;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of right shifts required to sort the list in ascending order, or -1 if it is not possible.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output is an integer, either the number of shifts or -1 if it's impossible.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine if it's possible to sort the list with right shifts and calculate the minimum number of shifts.
 
-The task requires determining the minimum number of right shifts needed to make a rotated sorted array into a sorted array. In a sorted array, the elements are arranged in increasing order. A right shift involves moving the last element of the array to the front. If the array is already sorted or can be made sorted by a single right shift, return the number of right shifts required; otherwise, return `-1` if no such shift exists.
+- Check if the list is already sorted. If it is, return 0.
+- If the list is not sorted, check if it can be sorted by performing right shifts. If so, return the number of shifts required.
+- If it is not possible to sort the list, return -1.
+{{< dots >}}
+### Problem Assumptions ✅
+- The list contains distinct positive integers.
+- The list is cyclic, meaning shifts wrap around the end of the list.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 5, 6, 1, 2, 3]`  \
+  **Explanation:** After 3 right shifts, the list becomes sorted as [1, 2, 3, 4, 5, 6].
 
-### Approach
+- **Input:** `nums = [1, 2, 3]`  \
+  **Explanation:** The list is already sorted, so no right shifts are needed.
 
-The problem can be approached by checking the array for a point where the order breaks, i.e., where a number is greater than the number that follows it. If there is more than one such break, the array cannot be sorted by a single right shift, and the answer should be `-1`. However, if there is exactly one break point, we check whether the last element of the array is greater than the first element, which would prevent the array from being properly sorted with a right shift. If this condition is satisfied, the answer will be the number of shifts needed to make the array sorted.
+- **Input:** `nums = [3, 1, 2]`  \
+  **Explanation:** It's impossible to sort the list with right shifts because no number of right shifts will sort it.
 
-Here is a step-by-step breakdown of how to solve the problem:
+{{< dots >}}
+## Approach 🚀
+The approach involves checking if the list is already sorted or if it can be sorted by performing right shifts. The key idea is to track how the elements shift cyclically.
 
-1. **Iterate Over Array Elements**: Start by iterating over the array to find if there is a point where the array stops being sorted in increasing order. 
-   
-2. **Check for One Break Point**: If the array is already sorted, return `0`. If there is exactly one break point where `nums[i] > nums[i+1]`, store this index and continue.
-
-3. **Check Validity for Shift**: If there is one break point, check if shifting the array after that point will make the array sorted. This is done by comparing the last element (`nums[n-1]`) with the first element (`nums[0]`). If `nums[n-1] > nums[0]`, return `-1` because this condition implies the array cannot be sorted by a right shift.
-
-4. **Calculate Number of Shifts**: If the above conditions are met, calculate the number of right shifts needed to move the elements after the break point to the front. This is done by subtracting the break index from the size of the array (`n - ind`).
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
+### Initial Thoughts 💭
+- The list may already be sorted, in which case no shifts are needed.
+- If the list is not sorted, check if the elements can be sorted by performing right shifts.
+- The main challenge is to identify if the list can be sorted by right shifts, and if so, calculate the minimum number of shifts.
+{{< dots >}}
+### Edge Cases 🌐
+- If the list has a single element, it is trivially sorted.
+- For larger inputs, the list should still be checked for the possibility of sorting with right shifts.
+- If the list is already sorted, no shifts are required.
+- The input list contains distinct integers between 1 and 100.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = nums.size(), ind = -1, cnt = 0;
-```
-- `n` stores the size of the array.
-- `ind` stores the index of the point where the array breaks (i.e., where the order is no longer increasing).
-- `cnt` is used to ensure that there is at most one break point. If more than one break is found, the array cannot be sorted with a single right shift.
-
-#### Step 2: Iterate Over the Array to Find the Break Point
-```cpp
-for(int i = 0; i < n - 1; i++) {
-    if (nums[i] > nums[i + 1]) {
-        if (cnt == 0) {
-            ind = i + 1;
+int minimumRightShifts(vector<int>& nums) {
+    int  n = nums.size(),ind = -1,cnt = 0;
+    for(int i=0;i<n-1;i++){
+        if(nums[i]>nums[i+1]){
+            if(cnt==0){
+            ind = i+1;
             cnt++;
-        } else {
-            return -1; // More than one break point found
+            }else return -1;
         }
     }
+    if(ind==-1) return 0;
+    if(nums[n-1]>nums[0]) return -1;
+    return n-ind;
 }
 ```
-- The loop iterates through the array from index `0` to `n-2`, comparing each element with the next one.
-- If `nums[i] > nums[i+1]`, it marks this as a break in the sorted order.
-- If a break is found for the first time, the index `ind` is set to `i + 1` (the point where the break occurs), and `cnt` is incremented to ensure that only one break is allowed. If another break is found, the function returns `-1`.
 
-#### Step 3: Check if the Array is Already Sorted
-```cpp
-if (ind == -1) return 0;
-```
-- If no break point is found (`ind == -1`), the array is already sorted, so the function returns `0`, indicating that no shifts are needed.
+This function calculates the minimum number of right shifts needed to make a given vector sorted. If the array is already sorted or can be sorted by a single rotation, it returns the minimum number of shifts. Otherwise, it returns -1.
 
-#### Step 4: Check if a Right Shift is Possible
-```cpp
-if (nums[n - 1] > nums[0]) return -1;
-```
-- If a break point is found, the function checks if shifting the array to make it sorted is possible by comparing the last element (`nums[n - 1]`) with the first element (`nums[0]`).
-- If the last element is greater than the first element, it means that a right shift cannot make the array sorted, and the function returns `-1`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minimumRightShifts(vector<int>& nums) {
+	```
+	The function definition begins here. It takes a vector of integers 'nums' as input and returns an integer representing the minimum right shifts.
 
-#### Step 5: Return the Number of Shifts
-```cpp
-return n - ind;
-```
-- If the array can be sorted with a right shift, the number of shifts required is `n - ind`. This is the number of elements that need to be moved from the end of the array to the front.
+2. **Variable Initialization**
+	```cpp
+	    int  n = nums.size(),ind = -1,cnt = 0;
+	```
+	Initialize variables: 'n' is the size of the array, 'ind' is used to store the index where the first decrease is found, and 'cnt' counts the number of decreases.
 
-### Complexity
+3. **Loop Start**
+	```cpp
+	    for(int i=0;i<n-1;i++){
+	```
+	Start a loop to iterate through the array from the first element to the second-to-last element.
 
-#### Time Complexity:
-The time complexity of the solution is O(n), where `n` is the size of the input array. The algorithm iterates over the array once to find the break point and check if the array can be sorted with a single right shift. Since there is a single iteration over the array, the time complexity is linear.
+4. **Condition Check**
+	```cpp
+	        if(nums[i]>nums[i+1]){
+	```
+	Check if the current element is greater than the next element, indicating a decrease in the array.
 
-#### Space Complexity:
-The space complexity is O(1), as the algorithm only uses a constant amount of extra space for variables (`n`, `ind`, and `cnt`), regardless of the size of the input array. There are no additional data structures used that grow with the input size, making the space complexity constant.
+5. **Inner Condition Check**
+	```cpp
+	            if(cnt==0){
+	```
+	Check if this is the first decrease found. If yes, the 'ind' is set to the index of the decrease, and the decrease count 'cnt' is incremented.
 
-### Conclusion
+6. **Set Index**
+	```cpp
+	            ind = i+1;
+	```
+	Set 'ind' to the index of the first decrease (i+1) in the array.
 
-The problem can be solved efficiently with a time complexity of O(n) using a simple iterative approach. The solution checks if the array is sorted, finds the break point (if any), and then determines if a right shift can sort the array. If it can, the solution returns the number of shifts required; otherwise, it returns `-1` if the array cannot be sorted with a right shift. This approach is both time-efficient and space-efficient, making it suitable for solving the problem within the given constraints.
+7. **Increment Counter**
+	```cpp
+	            cnt++;
+	```
+	Increment the 'cnt' variable, indicating that a decrease has been found.
+
+8. **Else Return**
+	```cpp
+	            }else return -1;
+	```
+	If a second decrease is found, return -1, indicating that it's not possible to sort the array by a single right shift.
+
+9. **Condition Check**
+	```cpp
+	    if(ind==-1) return 0;
+	```
+	Check if no decrease was found ('ind' is still -1), indicating that the array is already sorted. In this case, return 0.
+
+10. **Condition Check**
+	```cpp
+	    if(nums[n-1]>nums[0]) return -1;
+	```
+	Check if the last element is greater than the first element. If so, it means the array cannot be rotated to a sorted order, so return -1.
+
+11. **Return Statement**
+	```cpp
+	    return n-ind;
+	```
+	Return the number of shifts needed to sort the array, which is the difference between the array size 'n' and the index of the first decrease 'ind'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) where n is the length of the list, as we only need to check the list once for sorting and shifts.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we do not use any extra space except for a few variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-right-shifts-to-sort-the-array/description/)
 

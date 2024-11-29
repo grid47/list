@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "b3Mf8c7hKjk"
 youtube_upload_date="2024-02-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/b3Mf8c7hKjk/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,116 +28,137 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/b3Mf8c7hKjk/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array arr of length n, where the array is a permutation of integers in the range [0, n - 1]. Your task is to split this array into as many chunks (or partitions) as possible, where each chunk can be individually sorted. After sorting each chunk, when concatenated, the result should be the same as the fully sorted array. Return the largest number of chunks that you can create to achieve the sorted array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array arr, which represents a permutation of integers in the range [0, n - 1].
+- **Example:** `Input: arr = [5, 3, 2, 1, 4]`
+- **Constraints:**
+	- 1 <= arr.length <= 10
+	- arr is a permutation of integers in the range [0, arr.length - 1].
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxChunksToSorted(vector<int>& arr) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest number of chunks that can be created such that after sorting each chunk individually, the resulting concatenated array is sorted.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The array should be partitioned in such a way that the sorted chunks, when concatenated, form the fully sorted array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to partition the array into the maximum number of chunks such that after sorting each chunk, the concatenated result is sorted.
+
+- Iterate through the array and track the maximum value encountered so far.
+- At each index, if the maximum value is equal to the current index, increment the chunk count.
+- Return the total number of chunks.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always be a valid permutation of integers from 0 to n-1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: Input: arr = [5, 3, 2, 1, 4]`  \
+  **Explanation:** In this case, the array is not easily separable into smaller chunks that would result in the sorted array, so the maximum number of chunks is 1.
+
+- **Input:** `Example 2: Input: arr = [1, 0, 2, 3, 4]`  \
+  **Explanation:** In this case, the array can be split into 4 chunks: [1, 0], [2], [3], [4], all of which are sorted when processed separately.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can iterate through the array while keeping track of the maximum value encountered so far. When the maximum value equals the current index, it indicates a valid chunk boundary. We can increment the chunk count and continue.
+
+### Initial Thoughts 💭
+- We need to partition the array into chunks where each chunk can be sorted independently and when combined, it forms the fully sorted array.
+- Tracking the maximum value up to each index helps in determining the correct chunk boundaries.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have at least one element, as n >= 1.
+- Ensure the solution handles the maximum constraint, where the array size is 10.
+- If the array is already sorted, each element can be its own chunk.
+- The array is a permutation of integers from 0 to n-1.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxChunksToSorted(vector<int>& arr) {
+    
+    int n = arr.size();
+
+    int res = 0, mx = arr[0];
+
+    for(int i = 0; i < n; i++) {
         
-        int n = arr.size();
-
-        int res = 0, mx = arr[0];
-
-        for(int i = 0; i < n; i++) {
-            
-            mx = max(mx, arr[i]);
-            res += (mx == i);
-            
-        }
+        mx = max(mx, arr[i]);
+        res += (mx == i);
         
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine the maximum number of chunks (subarrays) that we can split the given array into such that, when each chunk is sorted independently, the entire array becomes sorted. In other words, we need to find out how many partitions we can make in the array where each partition can be independently sorted to contribute to a globally sorted array.
-
-**Example 1:**
-
-- Input: `[4, 3, 2, 1, 0]`
-- Output: `1`
-  
-  Here, the entire array is in reverse order, so only one chunk is needed to sort the entire array.
-
-**Example 2:**
-
-- Input: `[1, 0, 2, 3, 4]`
-- Output: `4`
-  
-  The array can be split into four chunks: `[1]`, `[0]`, `[2, 3, 4]`. Sorting each of these chunks independently results in the sorted array `[0, 1, 2, 3, 4]`.
-
-### Approach
-
-This problem is a variation of partitioning the array based on certain conditions. The main idea is to determine the number of chunks by tracking the largest value encountered up to each index in the array. If at any index, the largest value encountered is equal to the current index, it indicates that we can form a valid partition up to that index.
-
-We use the following approach:
-
-1. **Track Maximum Value Up to Each Index**: As we iterate through the array, we keep track of the maximum value encountered so far. The logic is simple: for each index `i`, if the maximum value encountered up to `i` is equal to `i`, this means that we can partition the array up to this index and sort each partition independently.
-
-2. **Count the Valid Partitions**: Each time the condition `mx == i` (where `mx` is the maximum value encountered so far) is met, it means we have found a valid partition where all elements up to index `i` can be sorted into a chunk. We increment the chunk count every time this condition holds true.
-
-3. **Return the Number of Chunks**: After iterating through the entire array, the final count of partitions will be the number of chunks.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int n = arr.size();
-int res = 0, mx = arr[0];
-```
-
-- We first initialize the length of the array `n` and the result variable `res` to zero, which will keep track of the number of valid chunks.
-- We also initialize `mx`, which tracks the maximum value encountered so far in the array. It is initially set to the first element of the array `arr[0]`.
-
-#### Step 2: Iterate Over the Array
-
-```cpp
-for(int i = 0; i < n; i++) {
-    mx = max(mx, arr[i]);
-    res += (mx == i);
+    
+    return res;
 }
 ```
 
-- We loop through each element of the array using the index `i`.
-- At each step, we update `mx` to be the maximum value between the current maximum (`mx`) and the current element `arr[i]`. This ensures that `mx` always holds the largest value encountered up to index `i`.
-- Then, we check if `mx == i`. This condition means that the maximum value encountered up to index `i` is exactly `i`. In this case, we know that all elements up to this index can be sorted independently in a valid chunk. If the condition holds true, we increment the chunk count `res` by 1.
+This function takes a vector of integers as input and returns the maximum number of chunks (subarrays) that can be sorted independently to form the entire sorted array.
 
-#### Step 3: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxChunksToSorted(vector<int>& arr) {
+	```
+	Define the function that takes a vector of integers as input.
 
-```cpp
-return res;
-```
+2. **Variable Declaration**
+	```cpp
+	    int n = arr.size();
+	```
+	Initialize the variable 'n' to store the size of the input array.
 
-- After the loop finishes, we return the value of `res`, which represents the maximum number of chunks that the array can be split into such that each chunk can be sorted independently to form a globally sorted array.
+3. **Variable Initialization**
+	```cpp
+	    int res = 0, mx = arr[0];
+	```
+	Initialize 'res' (the result variable) to 0 and 'mx' (the maximum value seen so far) to the first element of the array.
 
-### Complexity
+4. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start iterating through the array from the first element.
 
-#### Time Complexity:
-- **O(n)**: The time complexity of this solution is linear because we only iterate through the array once. The `max()` function takes constant time for each element, and we are only updating the value of `mx` and checking the condition `mx == i` at each step. Therefore, the time complexity is **O(n)**, where `n` is the length of the array.
+5. **Max Update**
+	```cpp
+	        mx = max(mx, arr[i]);
+	```
+	Update the maximum value 'mx' by comparing it with the current element 'arr[i]'.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant because we are only using a few integer variables (`mx`, `res`, and `n`) to store intermediate results. We do not use any extra data structures that grow with the size of the input array. Therefore, the space complexity is **O(1)**.
+6. **Result Update**
+	```cpp
+	        res += (mx == i);
+	```
+	Increment 'res' by 1 if the maximum value matches the current index 'i'. This checks if the current subarray can be sorted independently.
 
-### Conclusion
+7. **Return Value**
+	```cpp
+	    return res;
+	```
+	Return the final result, which is the number of chunks.
 
-This solution efficiently solves the problem of determining the maximum number of chunks into which an array can be split and still result in a globally sorted array when each chunk is sorted independently. The approach relies on tracking the maximum value encountered up to each index in the array and counting the number of times this maximum value matches the index itself, indicating a valid partition. 
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the array.
+- **Average Case:** O(n), since we iterate over the array once.
+- **Worst Case:** O(n), as we only perform one pass through the array.
 
-#### Key Observations:
-- The array can be partitioned whenever the maximum value up to that index is equal to the index.
-- The time complexity is **O(n)**, making the solution efficient for large arrays.
+The time complexity is linear because we only iterate through the array once.
 
-#### Time Complexity:
-- **O(n)** because we iterate through the array once.
+### Space Complexity 💾
+- **Best Case:** O(1), since we only need constant space to track the maximum value and chunk count.
+- **Worst Case:** O(1), as no additional space is required except for the variables used in the logic.
 
-#### Space Complexity:
-- **O(1)** due to the use of a few integer variables.
+The space complexity is constant because we only use a few variables for tracking.
 
-This approach is optimal in terms of both time and space, making it suitable for handling large inputs efficiently.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-chunks-to-make-sorted/description/)
 

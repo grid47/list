@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "61kuCyvWWhI"
 youtube_upload_date="2023-07-09"
 youtube_thumbnail="https://i.ytimg.com/vi/61kuCyvWWhI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,137 +28,144 @@ youtube_thumbnail="https://i.ytimg.com/vi/61kuCyvWWhI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer n. Your task is to break it into a sum of at least two positive integers such that the product of these integers is maximized. Return the maximum product that can be obtained.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer n.
+- **Example:** `n = 3`
+- **Constraints:**
+	- 2 <= n <= 58
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int integerBreak(int n) {
-        if(n == 2) return 1;
-        if(n == 3) return 2;
-        int product = 1;
-        while(n > 4) {
-            product *= 3;
-            n -= 3;
-        }
-        product *= n;
-        return product;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the maximum product that can be achieved by breaking n into the sum of positive integers.
+- **Example:** `2`
+- **Constraints:**
+	- The result is the maximum product of integers summing to n.
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find an optimal way to break down n such that the product of the parts is maximized.
 
-In this problem, you're tasked with breaking a positive integer `n` into at least two positive integers such that the product of those integers is maximized. Your goal is to return the maximum product that can be obtained by breaking `n` into a sum of at least two integers.
+- If n is 2 or 3, return the corresponding product values directly.
+- For larger values of n, repeatedly subtract 3 from n and multiply by 3 until n becomes less than or equal to 4.
+- Finally, multiply the remaining value of n with the accumulated product.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input n is a valid positive integer greater than or equal to 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 3`  \
+  **Explanation:** Breaking 3 into 2 + 1 yields a product of 2.
 
-#### Example:
-- For `n = 10`, the maximum product we can achieve by breaking it into integers is `36` because `10 = 3 + 3 + 4`, and `3 * 3 * 4 = 36`.
-- For `n = 2`, the only valid split is `1 + 1`, and the product is `1`.
+- **Input:** `n = 12`  \
+  **Explanation:** Breaking 12 into 3 + 3 + 3 + 3 yields a product of 81.
 
----
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we aim to break down the integer into parts where the product is maximized, using a greedy approach.
 
-### 🧠 Approach
-
-To solve this problem, we need to break the integer `n` in such a way that maximizes the product. Here are the insights:
-
-1. **Breaking the number into 3’s maximizes the product**:
-   - Breaking the number into as many `3`s as possible gives the highest product. This is because 3 is the largest number that can be split into smaller parts while still resulting in a higher product.
-   - For example, splitting `5` into `2 + 3` is better than `1 + 1 + 1 + 2` since `2 * 3 > 1 * 1 * 1 * 2`.
-
-2. **Special Cases**:
-   - When `n` is equal to `2` or `3`, there are very specific, non-redundant ways to break the number:
-     - `n = 2` can only be split into `1 + 1`, and the product is `1`.
-     - `n = 3` can only be split into `1 + 2`, and the product is `2`.
-
-3. **Greedy Approach**:
-   - Start by maximizing the number of `3`s you can take from `n`. Once that’s done, handle the remainder (which will be `1`, `2`, or `3`) to maximize the product.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Here’s a breakdown of the code:
-
+### Initial Thoughts 💭
+- The maximum product can be achieved by breaking n into as many 3's as possible.
+- The product of 3's is optimal, so we should subtract 3 from n repeatedly until n becomes smaller than or equal to 4.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always be a valid positive integer, so no need to handle empty inputs.
+- The solution must handle n values up to 58 efficiently.
+- When n equals 2 or 3, the result is directly 1 and 2 respectively.
+- The solution must be optimized for n values within the given range.
+{{< dots >}}
+## Code 💻
 ```cpp
 int integerBreak(int n) {
-    if (n == 2) return 1;  // Base case: n = 2
-    if (n == 3) return 2;  // Base case: n = 3
-
-    int product = 1;  // Variable to store the result
-
-    // Step 1: While n is greater than 4, keep subtracting 3 and multiplying the result by 3
-    while (n > 4) {
-        product *= 3;  // Multiply the product by 3
-        n -= 3;  // Subtract 3 from n
+    if(n == 2) return 1;
+    if(n == 3) return 2;
+    int product = 1;
+    while(n > 4) {
+        product *= 3;
+        n -= 3;
     }
-
-    // Step 2: Multiply the remaining n with the product
-    product *= n;  // For the last piece, multiply by the remaining n (which will be 2, 3, or 4)
-    
-    return product;  // Return the final product
+    product *= n;
+    return product;
 }
 ```
 
-#### Step 1: Handle Special Cases
+This function solves the Integer Break problem by breaking the integer `n` into the sum of at least two positive integers, and returning the maximum product of these integers. The function optimally breaks the number using 3s and handles edge cases for small values of `n`.
 
-```cpp
-if (n == 2) return 1;
-if (n == 3) return 2;
-```
-- If `n` is 2, the only split is `1 + 1`, yielding a product of `1`.
-- If `n` is 3, the best split is `1 + 2`, yielding a product of `2`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int integerBreak(int n) {
+	```
+	Define the function `integerBreak` which takes an integer `n` and returns the maximum product of integers that sum up to `n`.
 
-#### Step 2: Use Greedy Approach for Larger `n`
+2. **Base Case**
+	```cpp
+	    if(n == 2) return 1;
+	```
+	If `n` is 2, the only possible integer break is 1 + 1, and the maximum product is 1.
 
-```cpp
-int product = 1;
-while (n > 4) {
-    product *= 3;
-    n -= 3;
-}
-```
-- While `n > 4`, subtract `3` from `n` and multiply the product by `3`. This is the greedy approach to maximize the product by using as many `3`s as possible.
+3. **Base Case**
+	```cpp
+	    if(n == 3) return 2;
+	```
+	If `n` is 3, the only possible integer break is 2 + 1, and the maximum product is 2.
 
-  For example:
-  - For `n = 10`, subtract `3` twice, leaving `4`. Multiply the product (`9 * 4 = 36`).
+4. **Variable Initialization**
+	```cpp
+	    int product = 1;
+	```
+	Initialize a variable `product` to 1, which will store the product of the integers as the function progresses.
 
-#### Step 3: Handle the Remainder
+5. **Looping**
+	```cpp
+	    while(n > 4) {
+	```
+	Start a loop that continues as long as `n` is greater than 4, ensuring that the remaining number can be divided into parts of 3.
 
-```cpp
-product *= n;
-```
-- When `n` is reduced to 4 or less, multiply the product by the remaining value of `n`.
-- The remainder will always be one of the following:
-  - If `n = 4`, multiply the product by `4`.
-  - If `n = 3`, multiply the product by `3`.
-  - If `n = 2`, multiply the product by `2`.
+6. **Multiplication**
+	```cpp
+	        product *= 3;
+	```
+	Multiply the current `product` by 3, as breaking the number into parts of 3 maximizes the product.
 
-For example:
-- If `n = 10`, subtract `3` twice (product = `9`), leaving `n = 4`, so the final product is `9 * 4 = 36`.
+7. **Subtraction**
+	```cpp
+	        n -= 3;
+	```
+	Subtract 3 from `n` since we are using 3s to maximize the product.
 
----
+8. **Final Multiplication**
+	```cpp
+	    product *= n;
+	```
+	If `n` is now less than or equal to 4, multiply the remaining value of `n` with `product` to complete the integer break.
 
-### 📈 Complexity Analysis
+9. **Return Statement**
+	```cpp
+	    return product;
+	```
+	Return the final computed `product` which is the maximum product for the integer break of `n`.
 
-#### Time Complexity:
-- **O(n)**: The time complexity is proportional to how many times we subtract `3` from `n`. In the worst case, we subtract `3` until `n` becomes `4`, which happens roughly `n / 3` times. So, the time complexity is **O(n)**.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
-- **O(1)**: We only use a fixed amount of extra space (the `product` variable), so the space complexity is constant.
+The time complexity is constant since the solution involves simple arithmetic operations.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-### 🏁 Conclusion
+The space complexity is constant as we only use a few variables.
 
-This solution efficiently computes the maximum product by using a greedy approach to break the number `n` into as many `3`s as possible. Here's a recap:
+**Happy Coding! 🎉**
 
-#### Key Points:
-- **Greedy Approach**: Breaking `n` into as many `3`s as possible maximizes the product.
-- **Handling Special Cases**: For `n = 2` and `n = 3`, specific splits are handled to ensure correctness.
-- **Efficiency**: The algorithm runs in linear time, and the space complexity is constant.
-
-This approach is ideal for problems requiring efficient computation of maximum products, especially when `n` is large. Keep practicing and you'll master these optimization techniques! 💡💪
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/integer-break/description/)
 

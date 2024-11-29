@@ -14,91 +14,132 @@ img_src = ""
 youtube = "jGLLCLtNDbQ"
 youtube_upload_date="2022-03-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/jGLLCLtNDbQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a range of cells in an Excel sheet, represented by two cell positions in the format '<col1><row1>:<col2><row2>', where `<col1>` and `<col2>` represent the starting and ending column letters, and `<row1>` and `<row2>` represent the starting and ending row numbers. Your task is to return all the cells within the specified range, sorted first by column and then by row.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` representing a range of cells in the format '<col1><row1>:<col2><row2>', where `<col1>`, `<row1>`, `<col2>`, and `<row2>` are uppercase letters and digits.
+- **Example:** `s = 'C2:D4'`
+- **Constraints:**
+	- The input string is exactly 5 characters long.
+	- The column letters are between 'A' and 'Z'.
+	- The row numbers are between 1 and 9.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> cellsInRange(string s) {
-    vector<string> res;
-    for (char c = s[0]; c <= s[3]; ++c)
-        for (char r = s[1]; r <= s[4]; ++r)
-            res.push_back({c, r});
-    return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of strings, each representing a cell in the range, sorted first by column and then by row.
+- **Example:** `["C2", "C3", "C4", "D2", "D3", "D4"]`
+- **Constraints:**
+	- The output should list the cells in lexicographically sorted order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate all the cells within the given range in lexicographical order.
+
+- 1. Extract the starting and ending columns and rows from the input string.
+- 2. Iterate over the columns and rows within the specified range.
+- 3. Format each cell as a string and add it to the result list.
+- 4. Return the sorted list of cells.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is guaranteed to be formatted correctly.
+- The range is guaranteed to be valid with `r1 <= r2` and `c1 <= c2`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'C2:D4'`  \
+  **Explanation:** In this example, we need to generate all cells starting from column 'C' row 2 to column 'D' row 4. This includes cells 'C2', 'C3', 'C4', 'D2', 'D3', and 'D4'.
+
+- **Input:** `s = 'A1:E2'`  \
+  **Explanation:** In this example, we need to generate all cells from 'A1' to 'E2', which includes cells in a 2-row by 5-column grid.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will extract the start and end columns and rows, iterate over them, and generate the corresponding cells. Then, we will return the list of cells sorted first by column and then by row.
+
+### Initial Thoughts 💭
+- We need to handle both the column and row ranges and generate all combinations of them.
+- A nested loop over columns and rows will give us all the cells in the specified range.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always represent a valid range, so no need to handle empty ranges.
+- There are no cases with large inputs as the range is limited to a small grid (only 9 rows and 26 columns).
+- If the input range includes only a single cell (like 'A1:A1'), the output should just be that one cell.
+- Ensure that the input string is properly parsed and interpreted.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> cellsInRange(string s) {
+vector<string> res;
+for (char c = s[0]; c <= s[3]; ++c)
+    for (char r = s[1]; r <= s[4]; ++r)
+        res.push_back({c, r});
+return res;
 }
-};
-{{< /highlight >}}
----
+```
 
-### Problem Statement
-The problem asks to generate all the cells in a spreadsheet-like grid defined by two corner cells. These cells are provided in the input string `s`, where `s[0]` and `s[3]` represent the column range (from `s[0]` to `s[3]`), and `s[1]` and `s[4]` represent the row range (from `s[1]` to `s[4]`). The task is to return a list of all the cell coordinates (in the form of strings) that lie within the defined rectangular range.
+This function generates all the cell addresses within a given range in a spreadsheet-like format, where the input string `s` specifies the top-left and bottom-right corners of the range.
 
-For example, if the input string is `"A1:C3"`, the solution should return the cells: `"A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> cellsInRange(string s) {
+	```
+	This is the definition of the function `cellsInRange` which takes a string `s` as input. The function generates the range of cells in a grid between two given coordinates.
 
-### Approach
-The task can be approached by iterating over the columns and rows defined by the string `s` and collecting the corresponding cells. Specifically, we need to:
-1. Extract the column range from `s[0]` to `s[3]`.
-2. Extract the row range from `s[1]` to `s[4]`.
-3. Iterate over the columns and rows and construct each cell address by concatenating the column letter and row number.
-4. Collect all the cell addresses and return them as the result.
+2. **Variable Declaration**
+	```cpp
+	vector<string> res;
+	```
+	A vector `res` is declared to store the resulting list of cells within the specified range.
 
-The approach efficiently generates all the cells by leveraging the simple properties of characters for columns (since columns are represented by letters) and numerical values for rows.
+3. **Loop Initialization**
+	```cpp
+	for (char c = s[0]; c <= s[3]; ++c)
+	```
+	This loop initializes the variable `c` to iterate over the characters from the starting column (s[0]) to the ending column (s[3]).
 
-### Code Breakdown (Step by Step)
-1. **Function Declaration**:
-   ```cpp
-   vector<string> cellsInRange(string s) {
-   ```
-   - The function `cellsInRange` takes a single string `s` as input and returns a vector of strings, where each string represents a cell in the given range.
+4. **Looping**
+	```cpp
+	    for (char r = s[1]; r <= s[4]; ++r)
+	```
+	This inner loop iterates through the rows (from s[1] to s[4]) for each column `c` in the outer loop.
 
-2. **Initialize Result Vector**:
-   ```cpp
-   vector<string> res;
-   ```
-   - We initialize an empty vector `res` that will hold the resulting cell addresses.
+5. **Result Construction**
+	```cpp
+	        res.push_back({c, r});
+	```
+	This line constructs a cell string by combining the current column and row characters and adds it to the result vector `res`.
 
-3. **Iterate Over Columns**:
-   ```cpp
-   for (char c = s[0]; c <= s[3]; ++c)
-   ```
-   - The first `for` loop iterates over the columns, which are represented by the characters `s[0]` and `s[3]`. Here, `s[0]` is the starting column, and `s[3]` is the ending column. The loop variable `c` represents the current column letter, starting from `s[0]` and incrementing until `s[3]`.
+6. **Return Statement**
+	```cpp
+	return res;
+	```
+	This returns the list of cells (`res`) that were generated by the function.
 
-4. **Iterate Over Rows**:
-   ```cpp
-   for (char r = s[1]; r <= s[4]; ++r)
-   ```
-   - The second `for` loop iterates over the rows, represented by the characters `s[1]` and `s[4]`. Similarly, `s[1]` is the starting row, and `s[4]` is the ending row. The loop variable `r` represents the current row number, starting from `s[1]` and incrementing until `s[4]`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) for a single cell range.
+- **Average Case:** O(m * n), where m is the number of rows and n is the number of columns in the range.
+- **Worst Case:** O(m * n), where m is the number of rows and n is the number of columns in the range.
 
-5. **Construct the Cell Address**:
-   ```cpp
-   res.push_back({c, r});
-   ```
-   - For each combination of column `c` and row `r`, we create a string in the form of a cell address (e.g., "A1", "B2", etc.) and add it to the result vector `res`. The cell is formed by concatenating the column character `c` and the row character `r`.
+The time complexity is linear in terms of the number of cells in the specified range.
 
-6. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - After completing the iteration over all columns and rows, the vector `res`, which now contains all the cell addresses in the defined range, is returned.
+### Space Complexity 💾
+- **Best Case:** O(1) for a single cell range.
+- **Worst Case:** O(m * n), where m is the number of rows and n is the number of columns in the range.
 
-### Complexity
-- **Time Complexity**:
-  - The time complexity is O(n * m), where `n` is the number of columns in the range, and `m` is the number of rows in the range.
-  - Specifically, we iterate over all columns between `s[0]` and `s[3]` (which corresponds to `O(n)` where `n` is the number of columns) and for each column, we iterate over all rows between `s[1]` and `s[4]` (which corresponds to `O(m)` where `m` is the number of rows).
-  - Thus, the overall time complexity is O(n * m), where `n` is `s[3] - s[0] + 1` and `m` is `s[4] - s[1] + 1`.
+The space complexity depends on the number of cells in the range, as we store each cell in the result list.
 
-- **Space Complexity**:
-  - The space complexity is O(n * m), as we are storing all the generated cell addresses in the result vector `res`.
+**Happy Coding! 🎉**
 
-### Conclusion
-This solution is an efficient and straightforward way to generate all cell addresses in a given range defined by a string input. The approach leverages simple iteration over columns and rows, making it easy to understand and implement. The time complexity is linear with respect to the number of cells in the range, and the space complexity is also linear with respect to the number of cells in the result.
-
-The code has been optimized to use `char` values for both columns and rows, simplifying the handling of ranges and providing an intuitive solution. This solution should perform well for most practical input sizes, and its time and space complexity ensure that it scales efficiently. Whether you're working with small or large grid sizes, this approach ensures correctness and optimal performance.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/description/)
 

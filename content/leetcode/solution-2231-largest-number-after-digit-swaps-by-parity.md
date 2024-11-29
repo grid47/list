@@ -14,135 +14,223 @@ img_src = ""
 youtube = "UNbggCsJ6LE"
 youtube_upload_date="2022-04-10"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/UNbggCsJ6LE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a positive integer `num`. You are allowed to swap any two digits of `num` that have the same parity (i.e., both digits are either odd or both even). The goal is to return the largest possible value of `num` after any number of swaps.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a positive integer `num`.
+- **Example:** `num = 8235`
+- **Constraints:**
+	- 1 <= num <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int largestInteger(int num) {
-        priority_queue<int> p; // priority queue to store odd digits in descending order
-        priority_queue<int> q; // priority queue to store even digits in descending order
-        string nums=to_string(num); // converting num to a string for easy access of the digits
-        int n=nums.size(); // n stores the number of digits in num
-        
-        for(int i=0;i<n;i++){
-            int digit=nums[i]-'0'; 
-            if((digit)%2) // if digit is odd, push it into priority queue p
-                p.push(digit);
-            else
-                q.push(digit); // if digit is even, push it into priority queue q
-        }
-        
-        int answer=0;
-        for(int i=0; i<n; i++){
-            answer=answer*10;
-            if((nums[i]-'0')%2) // if the digit is odd, add the largest odd digit of p into the answer
-                {answer+=p.top();p.pop();}
-            else
-                {answer+=q.top();q.pop();} // if the digit is even, add the largest even digit of q into the answer
-        }
-        return answer;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the largest possible value of `num` after performing any number of valid swaps.
+- **Example:** `Output: 8532`
+- **Constraints:**
+	- The result will be a positive integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to maximize the number by swapping digits of the same parity. To achieve this, we will use priority queues to store the odd and even digits in descending order and then place the largest possible digits at their respective positions.
+
+- 1. Convert the number into a string to easily access each digit.
+- 2. Separate the odd and even digits into two different priority queues, ensuring the digits are stored in descending order.
+- 3. For each digit in the original number, replace it with the largest available odd or even digit from the respective priority queue, depending on its parity.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input is always a valid positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num = 8235`  \
+  **Explanation:** In this case, we have two even digits (8, 2) and two odd digits (3, 5). After sorting both even and odd digits in descending order, we get 8, 2 for evens and 5, 3 for odds. Swapping the digits gives the largest possible number: 8532.
+
+- **Input:** `Input: num = 4321`  \
+  **Explanation:** Here, we have two even digits (4, 2) and two odd digits (3, 1). After sorting, we get 4, 2 for evens and 3, 1 for odds. Swapping the digits to maximize the value results in 4321, which is already the largest possible number.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using priority queues (heaps) to rearrange the digits in such a way that maximizes the number. We separate the even and odd digits, store them in descending order, and then reconstruct the number by assigning the largest available digits to each place.
+
+### Initial Thoughts 💭
+- Sorting the digits by parity allows us to focus on the largest possible number for each set of digits.
+- The problem can be solved by treating it as a sorting problem for two distinct groups of digits: even and odd.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as the problem guarantees that `num` is always a positive integer.
+- The input will not exceed 9 digits, so the solution should efficiently handle the maximum size.
+- If `num` consists of only even or only odd digits, the number is already the largest possible number.
+- The solution must handle cases where all digits have the same parity.
+{{< dots >}}
+## Code 💻
+```cpp
+int largestInteger(int num) {
+    priority_queue<int> p; // priority queue to store odd digits in descending order
+    priority_queue<int> q; // priority queue to store even digits in descending order
+    string nums=to_string(num); // converting num to a string for easy access of the digits
+    int n=nums.size(); // n stores the number of digits in num
+    
+    for(int i=0;i<n;i++){
+        int digit=nums[i]-'0'; 
+        if((digit)%2) // if digit is odd, push it into priority queue p
+            p.push(digit);
+        else
+            q.push(digit); // if digit is even, push it into priority queue q
     }
-};
-{{< /highlight >}}
----
+    
+    int answer=0;
+    for(int i=0; i<n; i++){
+        answer=answer*10;
+        if((nums[i]-'0')%2) // if the digit is odd, add the largest odd digit of p into the answer
+            {answer+=p.top();p.pop();}
+        else
+            {answer+=q.top();q.pop();} // if the digit is even, add the largest even digit of q into the answer
+    }
+    return answer;
+}
+```
 
-### Problem Statement
-Given an integer `num`, the task is to rearrange its digits in such a way that the result is the largest possible number that can be formed by using the same digits. The rearrangement must follow the constraint that all odd digits should retain their relative positions, and the same applies to the even digits. This means that the odd digits in the result must still be in the same places where odd digits originally appeared in the number, and similarly for even digits.
+This code aims to rearrange the digits of a number such that the largest odd digits are placed in odd positions, and the largest even digits are placed in even positions.
 
-For example:
-- Input: `65893`
-- Output: `96583`
-  - Odd digits: `5, 9, 3`
-  - Even digits: `6, 8`
-  - Result: The odd digits are rearranged as `9, 5, 3` and the even digits as `8, 6`, while preserving their relative positions.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int largestInteger(int num) {
+	```
+	The function `largestInteger` is declared, taking an integer `num` as input and returning an integer as the output.
 
-### Approach
-The approach to solving this problem is as follows:
-1. **Separation of Odd and Even Digits**:
-   - First, we need to identify and separate the odd and even digits in the number.
-   - We can achieve this by converting the number to a string, which allows us to access each digit and check whether it is odd or even.
-   
-2. **Sorting the Odd and Even Digits**:
-   - The goal is to rearrange the odd and even digits in descending order, so we use two max-heaps (priority queues) to store the odd and even digits separately.
-   - By using a max-heap, we ensure that when extracting digits from these heaps, we always get the largest available digit.
-   
-3. **Reconstruction of the Result**:
-   - After sorting the digits into two heaps, we reconstruct the result by iterating through the string representation of the number.
-   - If the digit at the current position is odd, we replace it with the largest available odd digit from the heap.
-   - Similarly, if the digit is even, we replace it with the largest available even digit from the heap.
-   
-4. **Final Answer**:
-   - Once all digits have been replaced in this way, we return the newly constructed number.
+2. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<int> p; // priority queue to store odd digits in descending order
+	```
+	A priority queue `p` is declared to store the odd digits from `num` in descending order.
 
-### Code Breakdown (Step by Step)
+3. **Priority Queue Declaration**
+	```cpp
+	    priority_queue<int> q; // priority queue to store even digits in descending order
+	```
+	Another priority queue `q` is declared to store the even digits from `num` in descending order.
 
-1. **Initial Setup**:
-   ```cpp
-   priority_queue<int> p; // Max-heap for odd digits
-   priority_queue<int> q; // Max-heap for even digits
-   string nums = to_string(num); // Convert the integer to a string for easy digit access
-   int n = nums.size(); // Store the number of digits in the number
-   ```
-   - Here, we create two priority queues (`p` and `q`) to store odd and even digits respectively. We also convert the number `num` into a string `nums` to easily access individual digits.
+4. **String Conversion**
+	```cpp
+	    string nums=to_string(num); // converting num to a string for easy access of the digits
+	```
+	The integer `num` is converted into a string `nums` for easier access to its individual digits.
 
-2. **Separation of Odd and Even Digits**:
-   ```cpp
-   for (int i = 0; i < n; i++) {
-       int digit = nums[i] - '0'; // Convert char to integer digit
-       if (digit % 2) // If the digit is odd, add to the odd heap
-           p.push(digit);
-       else // If the digit is even, add to the even heap
-           q.push(digit);
-   }
-   ```
-   - We iterate through each digit of `nums`. If the digit is odd, it is pushed into the max-heap `p`; if the digit is even, it is pushed into the max-heap `q`.
+5. **Variable Initialization**
+	```cpp
+	    int n=nums.size(); // n stores the number of digits in num
+	```
+	The variable `n` is initialized to the size of the string `nums`, representing the number of digits in the input number.
 
-3. **Reconstruction of the Result**:
-   ```cpp
-   int answer = 0; // Variable to store the result
-   for (int i = 0; i < n; i++) {
-       answer = answer * 10; // Shift left (multiply by 10) to prepare for the next digit
-       int digit = nums[i] - '0'; // Get the current digit
+6. **For Loop**
+	```cpp
+	    for(int i=0;i<n;i++){
+	```
+	A `for` loop is initiated to iterate through each character (digit) of the string `nums`.
 
-       if (digit % 2) { // If the digit is odd, extract the largest odd digit
-           answer += p.top(); // Add the largest odd digit to the result
-           p.pop(); // Remove the digit from the heap
-       } else { // If the digit is even, extract the largest even digit
-           answer += q.top(); // Add the largest even digit to the result
-           q.pop(); // Remove the digit from the heap
-       }
-   }
-   ```
-   - We initialize the result variable `answer` to zero. Then, we iterate through each digit in the original string `nums`.
-   - For each digit, we shift the current `answer` to the left by multiplying it by 10 (to make room for the next digit).
-   - Depending on whether the digit is odd or even, we pop the largest available digit from the respective heap (`p` for odd digits and `q` for even digits) and add it to the `answer`.
+7. **Digit Extraction**
+	```cpp
+	        int digit=nums[i]-'0'; 
+	```
+	Each character in the string `nums` is converted back to an integer `digit`.
 
-4. **Return the Final Answer**:
-   ```cpp
-   return answer; // Return the final reconstructed number
-   ```
-   - After all digits are processed and the `answer` has been reconstructed with the largest possible digits in the correct positions, we return the `answer`.
+8. **Condition Check**
+	```cpp
+	        if((digit)%2) // if digit is odd, push it into priority queue p
+	```
+	A condition checks if the current digit is odd by checking if the digit modulo 2 is non-zero.
 
-### Complexity
+9. **Priority Queue Insert**
+	```cpp
+	            p.push(digit);
+	```
+	If the digit is odd, it is pushed into the priority queue `p`.
 
-- **Time Complexity**:
-  - **Converting the Number to a String**: This step takes O(d), where `d` is the number of digits in the number.
-  - **Inserting Digits into Heaps**: Inserting `n` digits into the two heaps takes O(n log n) time because each insertion operation into a heap has a logarithmic time complexity.
-  - **Reconstructing the Result**: This step involves iterating over all the digits once, and each operation inside the loop is constant time. So, this step takes O(n).
-  - Overall, the time complexity is dominated by the heap operations, so the time complexity is O(n log n).
+10. **Else Statement**
+	```cpp
+	        else
+	```
+	If the digit is not odd (i.e., it is even), the following code block will execute.
 
-- **Space Complexity**:
-  - The space complexity is O(n) due to the two heaps (`p` and `q`), each storing up to `n` digits in the worst case.
+11. **Priority Queue Insert**
+	```cpp
+	            q.push(digit); // if digit is even, push it into priority queue q
+	```
+	If the digit is even, it is pushed into the priority queue `q`.
 
-### Conclusion
+12. **Variable Initialization**
+	```cpp
+	    int answer=0;
+	```
+	A variable `answer` is initialized to 0, which will store the final rearranged number.
 
-This solution efficiently solves the problem by using priority queues (max-heaps) to handle the sorting of odd and even digits independently. The use of heaps ensures that the largest available digits are always chosen first, which guarantees that the resulting number is the largest possible one with the same digits. By keeping the relative positions of odd and even digits intact, the algorithm achieves the desired result while maintaining a time complexity of O(n log n), making it efficient for large inputs.
+13. **For Loop**
+	```cpp
+	    for(int i=0; i<n; i++){
+	```
+	A second `for` loop is initiated to reconstruct the number based on the priority queues.
+
+14. **Answer Calculation**
+	```cpp
+	        answer=answer*10;
+	```
+	The variable `answer` is updated by multiplying the current value by 10, making space for the next digit.
+
+15. **Condition Check**
+	```cpp
+	        if((nums[i]-'0')%2) // if the digit is odd, add the largest odd digit of p into the answer
+	```
+	A condition checks if the current digit in `nums` is odd. If it is, the largest odd digit from `p` will be added to `answer`.
+
+16. **Priority Queue Pop**
+	```cpp
+	            {answer+=p.top();p.pop();}
+	```
+	If the digit is odd, the top element from priority queue `p` (largest odd digit) is added to `answer` and popped from the queue.
+
+17. **Else Statement**
+	```cpp
+	        else
+	```
+	If the digit is even, the following code block will execute.
+
+18. **Priority Queue Pop**
+	```cpp
+	            {answer+=q.top();q.pop();} // if the digit is even, add the largest even digit of q into the answer
+	```
+	If the digit is even, the top element from priority queue `q` (largest even digit) is added to `answer` and popped from the queue.
+
+19. **Return Statement**
+	```cpp
+	    return answer;
+	```
+	The function returns the final rearranged number `answer`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The sorting of digits in the priority queues dominates the time complexity, where `n` is the number of digits in `num`.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use space for storing the even and odd digits, which requires O(n) space where `n` is the number of digits in `num`.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/description/)
 

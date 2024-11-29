@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "rowp_Frq_eI"
 youtube_upload_date="2024-05-07"
 youtube_thumbnail="https://i.ytimg.com/vi/rowp_Frq_eI/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,112 +28,220 @@ youtube_thumbnail="https://i.ytimg.com/vi/rowp_Frq_eI/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a binary matrix of size m x n, where 1 represents land and 0 represents water. An island is a group of 1's connected horizontally or vertically. Return the area of the largest island. If there are no islands, return 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary matrix of size m x n.
+- **Example:** `grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],...]`
+- **Constraints:**
+	- 1 <= m, n <= 50
+	- grid[i][j] is either 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxAreaOfIsland(vector<vector<int>>& grid) {
-        int mx = 0;
-        int m = grid.size(), n = grid[0].size();
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 1)
-                mx = max(mx, dfs(grid, i, j));
-        return mx;
-    }
-    
-    int dfs(vector<vector<int>>& grid, int i, int j) {
-        int m = grid.size(), n = grid[0].size();
-        if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != 1)
-            return 0;
-        int ans = 1;
-        grid[i][j] = 2;
-        ans += dfs(grid, i + 1, j);
-        ans += dfs(grid, i, j + 1);
-        ans += dfs(grid, i - 1, j);
-        ans += dfs(grid, i, j - 1);
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the area of the largest island. If no island exists, return 0.
+- **Example:** `6`
+- **Constraints:**
 
-### Problem Statement:
-In this problem, we are given a 2D grid representing a map of water and land. The grid contains values `1` representing land and `0` representing water. The task is to find the **maximum area of an island**. An island is defined as a group of connected `1`s (land), where land pieces are connected either horizontally or vertically (not diagonally).
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the area of the largest island by performing a depth-first search (DFS) to count the number of connected land cells for each island.
 
-We need to return the area of the largest island in the grid, where the area is defined as the total number of `1`s in the island.
+- Loop through the grid and find the first land cell (1).
+- Start a DFS from that cell to explore the entire island.
+- Keep track of the size of the current island during the DFS.
+- Update the maximum area whenever a larger island is found.
+- Repeat this process until all cells have been explored.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is non-empty.
+- The values in the grid are either 0 or 1, representing water or land, respectively.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],...]`  \
+  **Explanation:** In this example, the largest island has 6 cells. The DFS explores each land cell and counts the connected land cells to determine the island's size.
 
-### Approach:
+- **Input:** `Example 2: grid = [[0,0,0,0,0,0,0,0]]`  \
+  **Explanation:** Since there are no land cells in this grid, the result is 0.
 
-This problem is essentially asking us to identify the largest connected component in the grid. We can break down the task using the following steps:
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using a depth-first search (DFS) approach. The idea is to traverse the grid and perform DFS for each unvisited land cell, counting the area of each island.
 
-1. **Iterate Over the Grid**:
-   We will iterate over each cell in the grid to check if the cell is land (`1`). If a land cell is found, it will be the starting point for a Depth-First Search (DFS) to explore the entire island (all connected `1`s).
-
-2. **Depth-First Search (DFS)**:
-   From each land cell, we will perform DFS to explore the connected land cells. The DFS will explore all four directions: up, down, left, and right. For each connected land cell found, we mark it as visited (by changing the cell’s value from `1` to `2`) to avoid revisiting it in future searches.
-
-3. **Track the Maximum Island Size**:
-   For each DFS traversal, we calculate the area of the island (i.e., the number of connected land cells). The maximum area encountered during all DFS searches will be our result.
-
-4. **Return the Largest Area**:
-   After completing the DFS for all land cells in the grid, the maximum area found will be the size of the largest island.
-
-### Code Breakdown (Step by Step):
-
-#### 1. **Main Function (`maxAreaOfIsland`)**:
+### Initial Thoughts 💭
+- DFS is well-suited for exploring connected components (islands).
+- We need to keep track of the largest area found.
+- For each unvisited land cell, we'll use DFS to find the area of the island it belongs to.
+{{< dots >}}
+### Edge Cases 🌐
+- If the grid is empty, return 0.
+- Ensure the solution works efficiently for grids with the maximum size.
+- If all cells are water, return 0.
+- If all cells are land, return the total number of cells.
+- Handle cases where the grid contains isolated islands of varying sizes.
+{{< dots >}}
+## Code 💻
 ```cpp
-int mx = 0;
-int m = grid.size(), n = grid[0].size();
-for(int i = 0; i < m; i++)
+int maxAreaOfIsland(vector<vector<int>>& grid) {
+    int mx = 0;
+    int m = grid.size(), n = grid[0].size();
+    for(int i = 0; i < m; i++)
     for(int j = 0; j < n; j++)
         if(grid[i][j] == 1)
             mx = max(mx, dfs(grid, i, j));
-return mx;
-```
-- **`mx`** is initialized to `0` to store the maximum area of any island found.
-- **`m` and `n`** are the dimensions of the grid (number of rows and columns).
-- We iterate through every cell in the grid:
-  - If a cell contains `1` (representing land), we start a DFS from that cell to find the size of the connected island.
-  - We then compare the area of the island found with the current maximum (`mx`) and update it if necessary.
-- Finally, we return the maximum area found.
+    return mx;
+}
 
-#### 2. **Depth-First Search Function (`dfs`)**:
-```cpp
 int dfs(vector<vector<int>>& grid, int i, int j) {
     int m = grid.size(), n = grid[0].size();
     if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != 1)
         return 0;
     int ans = 1;
-    grid[i][j] = 2; // mark the current cell as visited
-    ans += dfs(grid, i + 1, j); // explore down
-    ans += dfs(grid, i, j + 1); // explore right
-    ans += dfs(grid, i - 1, j); // explore up
-    ans += dfs(grid, i, j - 1); // explore left
+    grid[i][j] = 2;
+    ans += dfs(grid, i + 1, j);
+    ans += dfs(grid, i, j + 1);
+    ans += dfs(grid, i - 1, j);
+    ans += dfs(grid, i, j - 1);
     return ans;
 }
 ```
-- The DFS function starts from the cell `(i, j)` and recursively explores all connected land cells.
-- **Base Case**: If the current cell is out of bounds or is water (`0`), we return `0`, indicating no area can be added from this cell.
-- We initialize **`ans`** to `1`, as we start with the current land cell.
-- **Mark the cell as visited** by setting `grid[i][j] = 2` to ensure it is not revisited.
-- The DFS then proceeds to explore in all four directions (down, right, up, left), adding the areas of all connected cells to `ans`.
-- Finally, we return the total area of the island starting from `(i, j)`.
 
-### Complexity:
+This code defines a function to calculate the maximum area of an island in a 2D grid. It uses a depth-first search (DFS) approach to explore all connected land cells (represented by 1s) and calculates the area of the island by recursively marking visited cells. The outer function iterates over the grid and calls the DFS for each unvisited land cell, updating the maximum area found.
 
-#### Time Complexity:
-- **Grid Traversal**: The main function iterates over each cell in the grid. This is an **O(m * n)** operation, where `m` is the number of rows and `n` is the number of columns in the grid.
-- **DFS Traversal**: In the worst case, every cell is visited exactly once. Since every DFS call explores a connected island and marks visited cells, the total time spent in DFS is also **O(m * n)**.
-- The overall time complexity is **O(m * n)** because we traverse all cells in the grid and perform DFS for each unvisited land cell.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int maxAreaOfIsland(vector<vector<int>>& grid) {
+	```
+	This defines the `maxAreaOfIsland` function, which takes a 2D grid representing the island and returns the area of the largest island (connected land cells).
 
-#### Space Complexity:
-- **Space for Grid**: The grid is modified in place by marking visited cells, so no additional space is required for storing the grid.
-- **Recursive Call Stack**: In the worst case, the entire grid might be part of a single island, and the DFS recursion could go as deep as `O(m * n)` (for a very large island). Thus, the space complexity is **O(m * n)** due to the recursive stack used by the DFS function.
+2. **Variable Initialization**
+	```cpp
+	    int mx = 0;
+	```
+	This initializes a variable `mx` to store the maximum area of the island found so far.
 
-### Conclusion:
-This solution effectively uses **Depth-First Search (DFS)** to explore the connected components (islands) in the grid and calculate their areas. By marking visited cells and recursively exploring all neighboring cells of land, we efficiently calculate the largest island area. The time complexity is **O(m * n)**, which ensures that the solution works efficiently even for large grids. The space complexity is **O(m * n)** due to the recursive stack, which is manageable for most inputs.
+3. **Grid Dimensions**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	This retrieves the number of rows (`m`) and columns (`n`) in the grid.
+
+4. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	This outer loop iterates through each row in the grid.
+
+5. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	This inner loop iterates through each column in the current row.
+
+6. **Condition Check**
+	```cpp
+	        if(grid[i][j] == 1)
+	```
+	This condition checks if the current cell is land (represented by 1).
+
+7. **DFS Call**
+	```cpp
+	            mx = max(mx, dfs(grid, i, j));
+	```
+	If the current cell is land, it calls the `dfs` function to calculate the area of the island starting from this cell, and updates `mx` with the maximum area found.
+
+8. **Return Statement**
+	```cpp
+	    return mx;
+	```
+	After checking all the cells in the grid, this returns the maximum area of the island found.
+
+9. **DFS Method Definition**
+	```cpp
+	int dfs(vector<vector<int>>& grid, int i, int j) {
+	```
+	This defines the `dfs` function, which explores all connected land cells and calculates the area of the island starting from the given coordinates.
+
+10. **Grid Dimensions (DFS)**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	This retrieves the number of rows (`m`) and columns (`n`) in the grid for the DFS function.
+
+11. **Base Case Check**
+	```cpp
+	    if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != 1)
+	```
+	This checks if the current coordinates are out of bounds or if the current cell is not land. If so, the DFS returns 0 (no area).
+
+12. **Return Zero**
+	```cpp
+	        return 0;
+	```
+	If the base case is met (out of bounds or water), the DFS returns 0.
+
+13. **Initialize Area**
+	```cpp
+	    int ans = 1;
+	```
+	This initializes the area for the current island to 1 (the current cell itself).
+
+14. **Mark Visited**
+	```cpp
+	    grid[i][j] = 2;
+	```
+	This marks the current cell as visited by changing its value to 2 (from land to water).
+
+15. **Recursive DFS**
+	```cpp
+	    ans += dfs(grid, i + 1, j);
+	```
+	This recursively calls `dfs` to explore the cell below the current cell.
+
+16. **Recursive DFS**
+	```cpp
+	    ans += dfs(grid, i, j + 1);
+	```
+	This recursively calls `dfs` to explore the cell to the right of the current cell.
+
+17. **Recursive DFS**
+	```cpp
+	    ans += dfs(grid, i - 1, j);
+	```
+	This recursively calls `dfs` to explore the cell above the current cell.
+
+18. **Recursive DFS**
+	```cpp
+	    ans += dfs(grid, i, j - 1);
+	```
+	This recursively calls `dfs` to explore the cell to the left of the current cell.
+
+19. **Return Area**
+	```cpp
+	    return ans;
+	```
+	This returns the total area of the island found by the DFS function.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+In the worst case, we may need to visit every cell in the grid, hence the time complexity is O(m * n).
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the DFS recursion stack, which could potentially explore all cells in the grid.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-area-of-island/description/)
 

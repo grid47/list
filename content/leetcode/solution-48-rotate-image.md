@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "fMSJSS7eO1w"
 youtube_upload_date="2021-01-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/fMSJSS7eO1w/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,140 +28,130 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/fMSJSS7eO1w/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an n x n 2D matrix representing an image, rotate the image by 90 degrees clockwise. The rotation should be done in-place, meaning you cannot allocate another 2D matrix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 2D matrix representing an image. The matrix is of size n x n, where n is between 1 and 20.
+- **Example:** `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`
+- **Constraints:**
+	- 1 <= n <= 20
+	- Each element of the matrix is an integer between -1000 and 1000.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    void rotate(vector<vector<int>>& mtx) {
-        int i = 0, j = mtx.size() - 1;
-        while(i <= j)
-            swap(mtx[i++], mtx[j--]);
-        
-        for(int i = 0; i < mtx.size(); i++)
-        for(int j = i+1; j< mtx.size(); j++)
-            swap(mtx[i][j], mtx[j][i]);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the matrix after rotating it by 90 degrees clockwise.
+- **Example:** `[[7, 4, 1], [8, 5, 2], [9, 6, 3]]`
+- **Constraints:**
+	- The result should be the rotated matrix, achieved in-place.
 
-### 🔄 **Rotate Matrix by 90 Degrees Clockwise**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to rotate the matrix 90 degrees clockwise in-place without using extra space for another matrix.
 
-The problem asks us to rotate a given `n x n` matrix (2D square matrix) by 90 degrees in a **clockwise direction**. The key challenge is to perform this rotation **in-place**, meaning we modify the original matrix without using extra space for a new one. The elements should be rearranged so that:
+- 1. Reverse the rows of the matrix.
+- 2. Transpose the matrix by swapping the elements along the diagonal.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix will always be a square matrix with the same number of rows and columns.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`  \
+  **Explanation:** In this example, after reversing the rows and transposing, the final result is [[7, 4, 1], [8, 5, 2], [9, 6, 3]].
 
-- The first row becomes the last column.
-- The second row becomes the second-last column.
-- The third row becomes the third-last column, and so on.
+- **Input:** `[[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]]`  \
+  **Explanation:** In this example, after rotating the matrix 90 degrees clockwise, the final result is [[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]].
 
-### 📊 **Example**
+{{< dots >}}
+## Approach 🚀
+The approach involves reversing the rows of the matrix and then transposing the matrix to achieve a 90-degree rotation.
 
-For instance, if the input matrix is:
-
-```
-1 2 3
-4 5 6
-7 8 9
-```
-
-After rotating it by 90 degrees clockwise, it should look like:
-
-```
-7 4 1
-8 5 2
-9 6 3
-```
-
-### 🧠 **Approach**
-
-To achieve this, we can break the process into two key steps:
-
-1. **Transpose the matrix**: This operation swaps the rows with columns. Specifically, we swap the element at position `(i, j)` with the element at position `(j, i)` for all `i` and `j` where `i < j`.
-   
-2. **Reverse the rows**: After transposing, we reverse the rows of the matrix. This operation swaps the first row with the last row, the second row with the second-last row, and so on.
-
-By performing these two steps — **transposing** and **reversing the rows** — we can rotate the matrix 90 degrees clockwise in-place.
-
-### 💻 **Code Breakdown (Step by Step)**
-
-#### Step 1: **Reverse the Rows**
-
-We start by reversing the rows of the matrix:
-
+### Initial Thoughts 💭
+- Reversing the rows and transposing the matrix will effectively rotate it by 90 degrees clockwise.
+- This approach is efficient as it modifies the matrix in place, without requiring additional space.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will never be empty since n >= 1.
+- The maximum size for n is 20, so the matrix size is at most 20 x 20, which is manageable.
+- Handle matrices with negative values or zeros, as these are valid elements in the matrix.
+- The matrix will always be square, and its elements will be integers in the range [-1000, 1000].
+{{< dots >}}
+## Code 💻
 ```cpp
-int i = 0, j = mtx.size() - 1;
-while (i <= j) {
-    swap(mtx[i++], mtx[j--]);
-}
-```
-
-- **Explanation**:
-    - Two pointers, `i` and `j`, are initialized. `i` starts at the first row, and `j` starts at the last row.
-    - The `swap(mtx[i++], mtx[j--])` operation swaps the rows at indices `i` and `j`, while incrementing `i` and decrementing `j`. This effectively reverses the rows.
-    - The loop continues until all rows have been swapped.
-
-#### Step 2: **Transpose the Matrix**
-
-Next, we transpose the matrix by swapping elements at positions `(i, j)` and `(j, i)` for all `i < j`:
-
-```cpp
-for (int i = 0; i < mtx.size(); i++) {
-    for (int j = i + 1; j < mtx.size(); j++) {
+void rotate(vector<vector<int>>& mtx) {
+    int i = 0, j = mtx.size() - 1;
+    while(i <= j)
+        swap(mtx[i++], mtx[j--]);
+    
+    for(int i = 0; i < mtx.size(); i++)
+    for(int j = i+1; j< mtx.size(); j++)
         swap(mtx[i][j], mtx[j][i]);
-    }
 }
 ```
 
-- **Explanation**:
-    - The outer loop iterates over the rows of the matrix.
-    - The inner loop iterates over the columns, starting from `i + 1` to avoid swapping the same element.
-    - The `swap(mtx[i][j], mtx[j][i])` operation transposes the matrix by swapping the elements at positions `(i, j)` and `(j, i)`.
+This code rotates a square matrix by 90 degrees clockwise.
 
-After this operation, the matrix becomes:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	void rotate(vector<vector<int>>& mtx) {
+	```
+	This line declares a function named `rotate` that takes a 2D vector `mtx` representing the matrix as input and rotates it in-place.
 
-```
-1 4 7
-2 5 8
-3 6 9
-```
+2. **Index Initialization**
+	```cpp
+	    int i = 0, j = mtx.size() - 1;
+	```
+	This line initializes two index variables `i` and `j` to represent the start and end indices of the matrix.
 
-#### Final Result
+3. **Matrix Transposition**
+	```cpp
+	    while(i <= j)
+	```
+	This line starts a `while` loop to iterate through the matrix diagonally, swapping elements to transpose the matrix.
 
-After both steps (reversing the rows and transposing), the matrix is rotated 90 degrees clockwise:
+4. **Matrix Transposition**
+	```cpp
+	        swap(mtx[i++], mtx[j--]);
+	```
+	Inside the loop, the elements at indices `i` and `j` are swapped. The `i` and `j` indices are then incremented and decremented, respectively, to move to the next diagonal pair.
 
-```
-7 4 1
-8 5 2
-9 6 3
-```
+5. **Matrix Reflection**
+	```cpp
+	    for(int i = 0; i < mtx.size(); i++)
+	```
+	This line starts a nested `for` loop to iterate through the upper triangular part of the matrix.
 
-### ⏱️ **Time and Space Complexity**
+6. **Matrix Reflection**
+	```cpp
+	    for(int j = i+1; j< mtx.size(); j++)
+	```
+	The inner loop iterates through the elements to the right of the current row.
 
-#### Time Complexity
+7. **Matrix Reflection**
+	```cpp
+	        swap(mtx[i][j], mtx[j][i]);
+	```
+	The elements at indices `(i, j)` and `(j, i)` are swapped to reflect the matrix along the main diagonal, completing the 90-degree rotation.
 
-1. **Reversing the Rows**: The time complexity for reversing the rows is proportional to the number of rows in the matrix. This operation takes `O(n)` time, where `n` is the number of rows (or columns) in the matrix.
-   
-2. **Transposing the Matrix**: The time complexity for transposing the matrix is `O(n^2)`, as we need to process all pairs of elements in the upper triangle of the matrix (excluding the diagonal).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-Thus, the overall **time complexity** is `O(n^2)`.
+The time complexity is O(n^2) because we need to iterate through all the elements of the matrix for the reverse and transpose operations.
 
-#### Space Complexity
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- The algorithm rotates the matrix **in-place**, so no extra space is used for a new matrix. The only extra space used is for the loop variables and the temporary swap during transposition.
-- Therefore, the **space complexity** is `O(1)`.
+The space complexity is O(1) as the matrix is modified in-place without using extra space.
 
-### 🎯 **Conclusion**
+**Happy Coding! 🎉**
 
-This approach efficiently rotates an `n x n` matrix by 90 degrees clockwise using two simple operations: reversing the rows and transposing the matrix. Both operations are performed **in-place**, meaning no extra space is used. The time complexity is **O(n²)**, and the space complexity is **O(1)**.
-
-- **Time Complexity**: `O(n²)`, where `n` is the size of the matrix.
-- **Space Complexity**: `O(1)`, as the rotation is performed in-place.
-
-This method is optimal for rotating matrices in competitive programming and real-world applications that require in-place modifications.
-
----
-
-Happy coding, and keep rotating those matrices! 🎉
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/rotate-image/description/)
 

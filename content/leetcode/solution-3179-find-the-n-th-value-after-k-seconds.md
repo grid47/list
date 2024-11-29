@@ -14,159 +14,146 @@ img_src = ""
 youtube = "4sO18TX7Qzw"
 youtube_upload_date="2024-06-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/4sO18TX7Qzw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integers, `n` and `k`. Initially, you have an array `a` of size `n`, where each element is initialized to 1. After each second, every element in the array is updated to be the sum of all preceding elements plus the element itself. The process repeats for `k` seconds. You need to return the value of the last element of the array, `a[n - 1]`, after `k` seconds. Since the result may be very large, return it modulo (10^9 + 7).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers: `n` (the number of elements in the array) and `k` (the number of seconds the array undergoes updates).
+- **Example:** `Example 1:
+Input: n = 4, k = 3
+Output: 20
+Explanation: After 3 seconds, the last element becomes 20.`
+- **Constraints:**
+	- 1 <= n, k <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mod = (int) 1e9 + 7;
-    int valueAfterKSeconds(int n, int k) {
-        vector<vector<long>> mtx(k + 1, vector<long>(n, 1));
-        for(int i = 1; i <= k; i++) {
-            for(int j = 1; j < n; j++) {
-                mtx[i][j] = (mtx[i - 1][j] + mtx[i][j - 1]) % mod;   
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the value of the last element of the array after `k` seconds, modulo (10^9 + 7).
+- **Example:** `Example 2:
+Input: n = 5, k = 4
+Output: 35
+Explanation: After 4 seconds, the last element becomes 35.`
+- **Constraints:**
+	- The output will be an integer modulo (10^9 + 7).
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Simulate the update of the array for `k` seconds and compute the value of the last element modulo (10^9 + 7).
+
+- Initialize an array `a` of size `n` with all elements set to 1.
+- For each second, update each element of the array such that each element becomes the sum of all preceding elements plus the element itself.
+- Repeat this for `k` seconds.
+- Return the value of the last element modulo (10^9 + 7).
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements in the array are initially set to 1.
+- The number of seconds is limited to 1000, making an iterative approach feasible.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** For `n = 4` and `k = 3`, the array starts as [1, 1, 1, 1]. After 1 second, the array becomes [1, 2, 3, 4]. After 2 seconds, it becomes [1, 3, 6, 10], and after 3 seconds, it becomes [1, 4, 10, 20]. Therefore, the last element after 3 seconds is 20.
+
+- **Input:** `Example 2:`  \
+  **Explanation:** For `n = 5` and `k = 4`, the array starts as [1, 1, 1, 1, 1]. After 1 second, the array becomes [1, 2, 3, 4, 5], after 2 seconds it becomes [1, 3, 6, 10, 15], after 3 seconds it becomes [1, 4, 10, 20, 35], and after 4 seconds, the array becomes [1, 5, 15, 35, 70]. Thus, the last element after 4 seconds is 35.
+
+{{< dots >}}
+## Approach 🚀
+We will simulate the array updates for `k` seconds. After each second, every element of the array is updated based on the sum of all previous elements. This can be efficiently implemented using dynamic programming.
+
+### Initial Thoughts 💭
+- The problem can be solved through dynamic programming by iterating over the seconds and updating the array in-place.
+- The last element after `k` seconds is influenced by all the previous elements.
+- We need to be mindful of performance given that both `n` and `k` can go up to 1000. Using dynamic programming with a 2D array should work efficiently within these limits.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs since the problem always provides values for `n` and `k`.
+- The approach should handle the maximum values of `n = 1000` and `k = 1000` efficiently, using dynamic programming.
+- For `n = 1` and `k = 1`, the result is trivially 1 because the array does not change.
+- The solution should be able to handle the constraints up to `n = 1000` and `k = 1000` efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int mod = (int) 1e9 + 7;
+int valueAfterKSeconds(int n, int k) {
+    vector<vector<long>> mtx(k + 1, vector<long>(n, 1));
+    for(int i = 1; i <= k; i++) {
+        for(int j = 1; j < n; j++) {
+            mtx[i][j] = (mtx[i - 1][j] + mtx[i][j - 1]) % mod;   
         }
-        return mtx[k][n - 1];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are asked to compute the value of a system after `k` seconds. The system has `n` distinct states, and each second, the state of the system can evolve depending on the previous states. The challenge is to determine the state of the system after `k` seconds given the rules of evolution.
-
-### Approach
-
-The approach to solving this problem leverages dynamic programming (DP) to iteratively compute the possible values at each second and for each state. This approach is efficient and ensures that we can solve the problem within time constraints.
-
-To explain this approach in detail:
-
-1. **Dynamic Programming Table (`mtx`)**:
-   We use a dynamic programming table, `mtx[i][j]`, where `i` represents the time step and `j` represents the state. The value stored in `mtx[i][j]` represents the value of the system at time `i` in state `j`.
-
-2. **Base Case Initialization**:
-   Initially, at time `0` (`i = 0`), the system starts in state `j = 0`, meaning all states are initialized to 1 at time `0`. This is done by initializing the first row of the matrix with `1` values.
-
-3. **Filling the DP Table**:
-   For each time step `i` from `1` to `k`, and for each state `j` from `1` to `n-1`, we compute the value of `mtx[i][j]` as the sum of the value from the previous time step `mtx[i-1][j]` (the same state at the previous time) and the value from the same time step but the previous state `mtx[i][j-1]`. This is the recursive relation that allows the system to evolve over time.
-
-4. **Modulo Operation**:
-   As the value of the system can grow large, every computed value is taken modulo `10^9 + 7` (denoted by `mod`). This ensures that the values stay within a manageable range.
-
-5. **Result**:
-   After iterating through all the time steps and states, the value at `mtx[k][n-1]` gives the final result, which is the value of the system after `k` seconds in the last state.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int mod = (int) 1e9 + 7;  // The modulus value to ensure the result remains manageable
-    
-    // Function to calculate the value of the system after k seconds
-    int valueAfterKSeconds(int n, int k) {
-        // Create a DP table with (k+1) rows and n columns, initialized to 1
-        vector<vector<long>> mtx(k + 1, vector<long>(n, 1));
-
-        // Fill the DP table row by row for each second
-        for(int i = 1; i <= k; i++) {
-            for(int j = 1; j < n; j++) {
-                // The value of the system at time i, state j
-                // Is the sum of the value at the same time at the previous state and the previous time at the same state
-                mtx[i][j] = (mtx[i - 1][j] + mtx[i][j - 1]) % mod;   
-            }
-        }
-
-        // Return the value at time k in the last state (n-1)
-        return mtx[k][n - 1];
-    }
-};
+    return mtx[k][n - 1];
+}
 ```
 
-#### Detailed Breakdown of Each Step:
+This function calculates the value after `k` seconds using a dynamic programming approach with a 2D matrix, where the value is computed based on the sum of previous states modulo `1e9 + 7`.
 
-1. **Initialization of Modulo**:
-   ```cpp
-   int mod = (int) 1e9 + 7;
-   ```
-   This line initializes the modulo value to \(10^9 + 7\). This value is used to prevent integer overflow during calculations, as the result may grow large with each second. The modulo operation ensures that the values are always within the bounds of a standard 32-bit integer.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Modulo Initialization**
+	```cpp
+	int mod = (int) 1e9 + 7;
+	```
+	The modulo value `mod` is initialized to `1e9 + 7`, a common modulus used to prevent overflow in large numbers.
 
-2. **DP Table Setup**:
-   ```cpp
-   vector<vector<long>> mtx(k + 1, vector<long>(n, 1));
-   ```
-   Here, we create a 2D vector `mtx` to represent the DP table. The table has `k+1` rows (for each second from `0` to `k`) and `n` columns (for each state from `0` to `n-1`). All values are initialized to `1` initially, as each state starts with a value of 1 at the start.
+2. **Function Definition**
+	```cpp
+	int valueAfterKSeconds(int n, int k) {
+	```
+	The function `valueAfterKSeconds` is defined, taking two parameters: `n` (the number of positions) and `k` (the number of seconds).
 
-3. **Filling the DP Table**:
-   ```cpp
-   for(int i = 1; i <= k; i++) {
-       for(int j = 1; j < n; j++) {
-           mtx[i][j] = (mtx[i - 1][j] + mtx[i][j - 1]) % mod;
-       }
-   }
-   ```
-   This double loop iterates over each time step from `1` to `k` and each state from `1` to `n-1`. The value at `mtx[i][j]` is computed by adding the value from the previous time step at the same state (`mtx[i-1][j]`) and the value from the same time step at the previous state (`mtx[i][j-1]`). The sum is then taken modulo `10^9 + 7`.
+3. **Matrix Initialization**
+	```cpp
+	    vector<vector<long>> mtx(k + 1, vector<long>(n, 1));
+	```
+	A 2D matrix `mtx` is initialized with dimensions `(k + 1) x n`, and all elements are set to `1`.
 
-4. **Returning the Final Result**:
-   ```cpp
-   return mtx[k][n - 1];
-   ```
-   After all `k` seconds have been simulated, the result of the system at time `k` in the last state (`n-1`) is returned.
+4. **Outer Loop Start**
+	```cpp
+	    for(int i = 1; i <= k; i++) {
+	```
+	The outer loop begins, iterating over `k` seconds (from `1` to `k`).
 
-### Example Walkthrough
+5. **Inner Loop Start**
+	```cpp
+	        for(int j = 1; j < n; j++) {
+	```
+	The inner loop starts, iterating over `n` positions (from `1` to `n-1`).
 
-Let’s walk through an example to understand how this code works.
+6. **Matrix Update**
+	```cpp
+	            mtx[i][j] = (mtx[i - 1][j] + mtx[i][j - 1]) % mod;   
+	```
+	The current matrix element `mtx[i][j]` is updated by adding the values from the previous row and the previous column, and then applying the modulo operation to avoid overflow.
 
-#### Input 1:
-```cpp
-n = 5, k = 3
-```
-We are interested in the value of the system after 3 seconds with 5 possible states. The table `mtx` starts as:
+7. **Return Statement**
+	```cpp
+	    return mtx[k][n - 1];
+	```
+	The function returns the final value located at the `k`-th row and the `n-1`-th column of the matrix.
 
-```
-Initial mtx:
-[
-  [1, 1, 1, 1, 1],   // At time 0, all states are 1
-  [1, 1, 1, 1, 1],   // At time 1, still 1
-  [1, 1, 1, 1, 1],   // At time 2, still 1
-  [1, 1, 1, 1, 1]    // At time 3, still 1
-]
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k * n)
+- **Average Case:** O(k * n)
+- **Worst Case:** O(k * n)
 
-Now, we proceed with the iterations:
-- At `i = 1`, `mtx[1][j]` values are updated based on the values from time 0.
-- Similarly, for `i = 2` and `i = 3`, each value is updated using the recursive relation.
+The time complexity is O(k * n) because we update the array for each second, and each element takes constant time to update.
 
-The final result is the value in `mtx[3][4]`.
+### Space Complexity 💾
+- **Best Case:** O(k * n)
+- **Worst Case:** O(k * n)
 
-#### Input 2:
-```cpp
-n = 3, k = 2
-```
-For `n = 3` and `k = 2`, the table `mtx` evolves step by step, and the result will be stored in `mtx[2][2]`.
+The space complexity is O(k * n) due to the storage of the 2D array `mtx` used for dynamic programming.
 
-### Complexity Analysis
+**Happy Coding! 🎉**
 
-#### Time Complexity:
-The time complexity of this solution is **O(k * n)** because we iterate over the `k` time steps and for each time step, we iterate over the `n` states.
-
-- The outer loop runs for `k` iterations.
-- The inner loop runs for `n` iterations.
-Thus, the total time complexity is **O(k * n)**.
-
-#### Space Complexity:
-The space complexity is **O(k * n)** because we maintain a DP table `mtx` of size `(k+1) x n`.
-
-### Conclusion
-
-This solution efficiently calculates the value of the system after `k` seconds using dynamic programming. By filling a table iteratively, each state at each second is computed based on previous states and seconds, ensuring that we can solve the problem in linear time relative to the number of states and seconds. The use of modulo `10^9 + 7` ensures that the values remain manageable, and the solution works efficiently even for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-n-th-value-after-k-seconds/description/)
 

@@ -14,97 +14,146 @@ img_src = ""
 youtube = "KHRfRTVqpVc"
 youtube_upload_date="2023-09-03"
 youtube_thumbnail="https://i.ytimg.com/vi/KHRfRTVqpVc/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two integers low and high. Return the number of symmetric integers in the range [low, high]. A symmetric integer has an even number of digits, and the sum of the first half of its digits equals the sum of the second half. Numbers with an odd number of digits are never symmetric.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, low and high, representing the range of numbers to check for symmetry.
+- **Example:** `low = 1, high = 50`
+- **Constraints:**
+	- 1 <= low <= high <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countSymmetricIntegers(int low, int high) {
-        int ans = 0;
-        for(int i = low; i <= high; ++i) {
-            string s = to_string(i);
-            int t = 0, n = s.size();
-            for(int j = 0; j < n/2; ++j) { t += s[j] - s[n - j - 1]; }
-            if(n%2 == 0 && t == 0) ans++;
-        }
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of symmetric integers within the range [low, high].
+- **Example:** `4`
+- **Constraints:**
+	- The output should be a single integer indicating the number of symmetric numbers in the range.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the count of symmetric integers in the given range [low, high].
+
+- Loop through all integers in the range [low, high].
+- Convert each integer to a string to check its symmetry.
+- Check if the number has an even number of digits.
+- For numbers with an even number of digits, check if the sum of the first half of digits equals the sum of the second half.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always contain valid positive integers.
+- The number of digits for each number is not too large, ensuring the solution can run efficiently.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `low = 1, high = 50`  \
+  **Explanation:** The symmetric numbers between 1 and 50 are: 11, 22, 33, and 44. These numbers have an even number of digits, and the sum of the digits in the first half is equal to the sum of the digits in the second half.
+
+- **Input:** `low = 800, high = 850`  \
+  **Explanation:** The symmetric numbers between 800 and 850 are: 808, 818. These numbers are symmetric because they have an even number of digits, and the sum of the first half equals the sum of the second half.
+
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by iterating through each number in the range [low, high], converting it to a string, and checking if it is symmetric. If a number has an even number of digits and the sum of the first half of its digits equals the sum of the second half, we count it as symmetric.
+
+### Initial Thoughts 💭
+- The range can be as large as 10^4, so a direct solution iterating through all numbers will work within the time limits.
+- The key observation is that symmetric numbers must have an even number of digits.
+- We can use string manipulation to extract the digits and check if the sums of the halves are equal.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as low and high are always valid positive integers.
+- The input range can be as large as 10^4, but this is manageable with the approach.
+- Consider cases where low equals high, or the range contains only a few numbers.
+- Ensure that we check the number of digits in each number and avoid counting odd-digit numbers.
+{{< dots >}}
+## Code 💻
+```cpp
+int countSymmetricIntegers(int low, int high) {
+    int ans = 0;
+    for(int i = low; i <= high; ++i) {
+        string s = to_string(i);
+        int t = 0, n = s.size();
+        for(int j = 0; j < n/2; ++j) { t += s[j] - s[n - j - 1]; }
+        if(n%2 == 0 && t == 0) ans++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to count the number of symmetric integers within a given range `[low, high]`. A number is symmetric if the sum of the first half of its digits equals the sum of the second half of its digits. For example, `123321` is symmetric because the sum of the first three digits (`1+2+3 = 6`) equals the sum of the last three digits (`3+2+1 = 6`).
-
-We are given two integers, `low` and `high`, and we need to determine how many numbers within this range are symmetric integers.
-
-### Approach
-
-The solution involves checking each number in the given range to determine if it is symmetric. We can approach this problem by converting each number to a string, then splitting the string into two halves. The digits of the first half are compared with the digits of the second half, and if the sum of the digits in both halves is equal, the number is symmetric.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Loop Through the Range
-```cpp
-for(int i = low; i <= high; ++i) {
-```
-- We loop through each integer in the range `[low, high]`. For each integer, we will check if it is symmetric.
-
-#### Step 2: Convert the Integer to a String
-```cpp
-string s = to_string(i);
-```
-- The number `i` is converted into a string `s` for easier manipulation of individual digits. This allows us to directly access each digit by its index.
-
-#### Step 3: Initialize Variables for the Sum of Digits
-```cpp
-int t = 0, n = s.size();
-```
-- We initialize `t` to 0, which will be used to store the difference between the corresponding digits from the first and second halves of the number. 
-- `n` is the size of the string, which represents the number of digits in the current number.
-
-#### Step 4: Compare the First and Second Halves
-```cpp
-for(int j = 0; j < n/2; ++j) {
-    t += s[j] - s[n - j - 1];
+    return ans;
 }
 ```
-- We loop over the first half of the digits (up to `n/2`). For each index `j`, we subtract the value of the digit at position `n - j - 1` (which corresponds to the digits from the second half of the number) from the digit at position `j` (the first half of the number).
-- The idea is to compare corresponding digits from the start and end. If the sums of corresponding digits from both halves match, then `t` should equal 0 at the end of this loop.
 
-#### Step 5: Check for Even-Length Numbers and Update the Count
-```cpp
-if(n % 2 == 0 && t == 0) ans++;
-```
-- After the loop, we check if the number of digits `n` is even (`n % 2 == 0`). Symmetric numbers must have an even number of digits to split them into two equal halves.
-- If the number of digits is even and the sum of the digit differences (`t`) equals 0, then the number is symmetric, and we increment the answer `ans`.
+This code counts the number of symmetric integers between the given low and high range, where a symmetric integer is one whose digits form a palindrome.
 
-#### Step 6: Return the Final Count
-```cpp
-return ans;
-```
-- After iterating through all numbers in the given range, we return the count of symmetric integers, stored in `ans`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Prototype**
+	```cpp
+	int countSymmetricIntegers(int low, int high) {
+	```
+	Define the function `countSymmetricIntegers` that takes a range of integers (`low` to `high`) and returns the count of symmetric integers within that range.
 
-### Complexity
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initialize a variable `ans` to store the count of symmetric integers.
 
-#### Time Complexity:
-- **O(N * D)**, where `N` is the number of integers in the range `[low, high]`, and `D` is the maximum number of digits in any number in this range.
-  - The outer loop runs for each number between `low` and `high`, so it runs `N` times.
-  - For each number, we convert it into a string and check if it is symmetric. This involves checking `n/2` pairs of digits, where `n` is the number of digits in the number. In the worst case, this is proportional to `D`, the number of digits in the largest number in the range.
-  - Thus, the time complexity is O(N * D).
+3. **Loop Setup**
+	```cpp
+	    for(int i = low; i <= high; ++i) {
+	```
+	Loop through each integer from `low` to `high`.
 
-#### Space Complexity:
-- **O(D)**, where `D` is the number of digits in the current number. We use a string `s` to store the digits of the current number, which has a space complexity of O(D) for each number. In practice, this space is reused for each iteration of the loop.
+4. **String Conversion**
+	```cpp
+	        string s = to_string(i);
+	```
+	Convert the current integer `i` to a string `s` for easy manipulation of digits.
 
-### Conclusion
+5. **Variable Initialization**
+	```cpp
+	        int t = 0, n = s.size();
+	```
+	Initialize two variables: `t` for storing the sum of differences between mirrored digits, and `n` for storing the length of the string `s`.
 
-This solution uses a simple approach to solve the problem by iterating through the numbers in the range and checking whether each number is symmetric. It leverages string manipulation to check the sum of digits in the first and second halves of each number. This solution works efficiently for a reasonable range of numbers, and the time complexity is directly related to the number of integers and their length in the range `[low, high]`. The solution is easy to understand and implement, making it a good fit for problems involving digit-based comparisons.
+6. **Digit Comparison**
+	```cpp
+	        for(int j = 0; j < n/2; ++j) { t += s[j] - s[n - j - 1]; }
+	```
+	Loop through the first half of the digits and calculate the difference between mirrored digits.
+
+7. **Palindrome Check**
+	```cpp
+	        if(n%2 == 0 && t == 0) ans++;
+	```
+	Check if the number of digits `n` is even and if the sum of differences `t` is zero (indicating a palindrome). If so, increment the `ans` counter.
+
+8. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the final count of symmetric integers.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, O(n), where n is the size of the range [low, high]. We iterate over each number and check its symmetry.
+
+### Space Complexity 💾
+- **Best Case:** O(d)
+- **Worst Case:** O(d)
+
+The space complexity is O(d), where d is the number of digits in the largest number (at most 4).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-symmetric-integers/description/)
 

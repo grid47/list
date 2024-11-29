@@ -14,86 +14,81 @@ img_src = ""
 youtube = "1Zx7gEznzfI"
 youtube_upload_date="2023-04-04"
 youtube_thumbnail="https://i.ytimg.com/vi/1Zx7gEznzfI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s`. Your task is to partition this string into the fewest number of substrings such that no character appears more than once in each substring. Each character must belong to exactly one substring in the partition.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` made up of only lowercase English letters.
+- **Example:** `s = 'abcabc'`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists only of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkBit(int &flag, int &n) {
-        return flag & (1<< n);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of substrings in such a partition.
+- **Example:** `Output: 2`
+- **Constraints:**
 
-    void setBit(int &flag, int & n) {
-        flag |= (1<<n);
-    }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of substrings in the partition while ensuring each substring contains only unique characters.
 
-    int partitionString(string s) {
-        int flag = 0, ans = 1;
-        for(auto c: s) {
-            int n = c - 'a';
-            if(checkBit(flag, n)) {
-                flag = 0;
-                ans++;
-            }
-            setBit(flag, n);
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+- 1. Use a bitmask to track characters that have appeared in the current substring.
+- 2. Iterate through the string and check if the current character is already in the current substring (tracked by the bitmask).
+- 3. If a character repeats, start a new substring and reset the bitmask.
+- 4. Count the number of substrings formed during the process.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string contains only lowercase English letters.
+- The input string is non-empty, with a length between 1 and 10^5.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abacaba'`  \
+  **Explanation:** The partition could be ['a', 'ba', 'cab', 'a'], forming 4 substrings. The character 'a' repeats, so we need to partition it into multiple substrings.
 
-### Problem Statement
+- **Input:** `s = 'ssssss'`  \
+  **Explanation:** The only valid partition is ['s', 's', 's', 's', 's', 's'], where each 's' is in a separate substring due to its repetition.
 
-The problem asks us to divide the given string `s` into the minimum number of substrings such that no character is repeated in any substring. In other words, we want to partition the string into parts where each part contains only unique characters. The task is to return the minimum number of such partitions.
+- **Input:** `s = 'abcabc'`  \
+  **Explanation:** The optimal partition is ['abc', 'abc'], forming 2 substrings, where all characters in each substring are unique.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+We use a bitmask to efficiently track characters that have been included in the current substring. By resetting the bitmask whenever we encounter a duplicate character, we can minimize the number of substrings.
 
-The approach to solve this problem efficiently involves utilizing a **bitmasking** technique, which allows us to track the characters we've seen in the current partition in an efficient manner.
-
-#### Key Insights:
-1. **Bitmasking**: Each character of the string can be mapped to a unique bit in an integer (for example, 'a' maps to the least significant bit, 'b' to the second least significant bit, and so on). Using this bitmask representation, we can efficiently check if a character has been seen before in the current partition and add it if it's not already present.
-   
-2. **Greedy Partitioning**: We can process the string character by character and partition the string as we go. Every time we encounter a character that has already been seen in the current partition, we increment the partition count and start a new partition.
-
-3. **Efficiency**: Bitmasking operations like checking a bit and setting a bit are constant time operations, which makes this approach efficient. The overall time complexity is linear with respect to the size of the string.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Helper Functions to Manage Bitmask
-The solution makes use of two helper functions: `checkBit` and `setBit`.
-
+### Initial Thoughts 💭
+- We need to keep track of characters seen so far in the current substring.
+- Using a bitmask allows us to track up to 26 characters efficiently.
+- A bitmask allows for quick checks and resets without the need for additional data structures like sets or arrays.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty inputs as per the problem constraints, but an empty string would theoretically result in 0 substrings.
+- For large inputs up to 10^5 characters, the solution should run efficiently in O(n) time.
+- If the string contains only one unique character (e.g., 'aaaa'), the result will be the length of the string, as each character must be in a separate substring.
+- The solution must handle inputs up to 10^5 characters efficiently with O(n) time complexity.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool checkBit(int &flag, int &n) {
-    return flag & (1 << n);
+    return flag & (1<< n);
 }
 
-void setBit(int &flag, int &n) {
-    flag |= (1 << n);
+void setBit(int &flag, int & n) {
+    flag |= (1<<n);
 }
-```
 
-- **`checkBit(int &flag, int &n)`**:
-  - This function checks if the `n`-th bit in the `flag` is set to `1`. If the bit is set, it indicates that the character corresponding to this bit has already been seen in the current partition.
-  - It uses the bitwise AND operation `&` to check if the bit is set: `flag & (1 << n)`. This operation shifts `1` to the `n`-th position and performs the AND operation with `flag`. If the result is non-zero, the bit is set, and we return `true`.
-
-- **`setBit(int &flag, int &n)`**:
-  - This function sets the `n`-th bit in the `flag` to `1`. It uses the bitwise OR operation `|= (1 << n)` to set the `n`-th bit.
-  - The bitwise OR operation ensures that the corresponding bit in `flag` is set to `1` without affecting other bits.
-
-#### Step 2: Main Logic in `partitionString`
-
-```cpp
 int partitionString(string s) {
     int flag = 0, ans = 1;
-    for (auto c: s) {
+    for(auto c: s) {
         int n = c - 'a';
-        if (checkBit(flag, n)) {
+        if(checkBit(flag, n)) {
             flag = 0;
             ans++;
         }
@@ -103,47 +98,105 @@ int partitionString(string s) {
 }
 ```
 
-- **`int flag = 0, ans = 1;`**: 
-  - The `flag` variable is used to track which characters have been seen in the current partition. It is initially set to `0`, meaning no characters have been seen.
-  - The `ans` variable tracks the number of partitions. It starts at `1` because we always have at least one partition.
+This code defines a method to partition a string into the least number of substrings where each substring contains unique characters. It uses bitwise operations to track character occurrences.
 
-- **`for (auto c: s)`**:
-  - This loop iterates over every character `c` in the string `s`.
-  
-- **`int n = c - 'a';`**:
-  - We convert the character `c` to an integer `n` representing its position in the alphabet. For example, for the character 'a', `n` will be `0`, for 'b' it will be `1`, and so on.
-  
-- **`if (checkBit(flag, n)) {`**:
-  - This checks if the character corresponding to `n` has already been seen in the current partition. If it has, it means we need to start a new partition.
-  - We reset `flag` to `0`, which means the new partition doesn't contain any previously encountered characters.
-  - We increment the partition count `ans` to reflect the start of a new partition.
-  
-- **`setBit(flag, n);`**:
-  - After checking if the character has already been seen in the current partition, we set the corresponding bit for the character `n` in `flag`. This marks the character as seen in the current partition.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool checkBit(int &flag, int &n) {
+	```
+	This function checks if the nth bit in `flag` is set. It returns true if the bit is set, indicating that the character corresponding to `n` has already appeared.
 
-- **`return ans;`**:
-  - Finally, after processing all characters in the string, we return the value of `ans`, which represents the minimum number of partitions.
+2. **Bitwise Check**
+	```cpp
+	    return flag & (1<< n);
+	```
+	Performs a bitwise AND operation to check if the nth bit of `flag` is set. If the bit is set, it means that the character has been encountered before.
 
-### Complexity
+3. **Function Declaration**
+	```cpp
+	void setBit(int &flag, int & n) {
+	```
+	This function sets the nth bit of `flag` to 1, marking the character corresponding to `n` as encountered.
 
-#### Time Complexity:
-- **O(n)**: 
-  - The loop processes each character in the string `s` exactly once. Each operation inside the loop (checking and setting bits) is constant time due to the efficient bitwise operations. Therefore, the overall time complexity is **O(n)**, where `n` is the length of the string `s`.
+4. **Bitwise Set**
+	```cpp
+	    flag |= (1<<n);
+	```
+	Performs a bitwise OR operation to set the nth bit of `flag`. This indicates that the character corresponding to `n` has been seen.
 
-#### Space Complexity:
-- **O(1)**: 
-  - The space complexity is constant because we only use a fixed amount of space regardless of the input size. Specifically, the `flag` variable uses a fixed amount of space (a 32-bit integer), and there is no need for extra space that grows with the input size.
+5. **Function Declaration**
+	```cpp
+	int partitionString(string s) {
+	```
+	This function partitions the string `s` into the least number of substrings where each substring contains unique characters.
 
-### Conclusion
+6. **Variable Initialization**
+	```cpp
+	    int flag = 0, ans = 1;
+	```
+	Initialize `flag` to 0 (to track which characters have been encountered) and `ans` to 1 (to start the count of substrings).
 
-This solution provides an efficient way to partition a string into the minimum number of substrings where each substring contains unique characters. By leveraging **bitmasking** for constant-time checks and updates, the solution achieves optimal time complexity of **O(n)**. 
+7. **Loop Through String**
+	```cpp
+	    for(auto c: s) {
+	```
+	Loop through each character in the string `s`.
 
-#### Key Points:
-- **Bitmasking** is a powerful technique to track character occurrences efficiently.
-- The solution works by greedily partitioning the string whenever a repeated character is found.
-- The overall time complexity is linear with respect to the size of the string, making the solution scalable for large inputs.
+8. **Character Mapping**
+	```cpp
+	        int n = c - 'a';
+	```
+	Convert the character `c` to an integer `n` representing its position in the alphabet, where 'a' corresponds to 0, 'b' to 1, and so on.
 
-This approach ensures that we solve the problem efficiently while using minimal space, making it ideal for competitive programming or real-world applications where performance is crucial.
+9. **Check for Duplicate Character**
+	```cpp
+	        if(checkBit(flag, n)) {
+	```
+	Check if the character corresponding to `n` has been encountered previously by calling the `checkBit` function.
+
+10. **Reset and Increment Substring Count**
+	```cpp
+	            flag = 0;
+	```
+	Reset the `flag` to 0, starting a new substring as a duplicate character was found.
+
+11. **Increment Substring Count**
+	```cpp
+	            ans++;
+	```
+	Increment the substring count `ans` as a new substring is started.
+
+12. **Set Current Character Bit**
+	```cpp
+	        setBit(flag, n);
+	```
+	Mark the current character `n` as encountered by calling the `setBit` function.
+
+13. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Return the count of substrings `ans`, which is the minimum number of substrings where each substring contains unique characters.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the string, as we only need to process each character once.
+- **Average Case:** O(n), since we process every character in the string in linear time.
+- **Worst Case:** O(n), where the worst case is when no characters repeat and each character requires a separate substring.
+
+The solution is linear in time complexity, making it efficient for input strings up to the maximum length.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as the space required does not depend on the input size but rather on the number of characters (26 for English letters).
+- **Worst Case:** O(1), since we only use a constant amount of space to track characters with the bitmask.
+
+The space complexity is constant, as we only use a bitmask to track characters in the substring.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/optimal-partition-of-string/description/)
 

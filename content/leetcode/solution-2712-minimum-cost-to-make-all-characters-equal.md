@@ -14,167 +14,280 @@ img_src = ""
 youtube = "8MHnlNroHaU"
 youtube_upload_date="2023-05-28"
 youtube_thumbnail="https://i.ytimg.com/vi/8MHnlNroHaU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string `s` of length `n`. You can perform two types of operations: (1) Flip all characters from index `0` to `i` (inclusive), with a cost of `i + 1`. (2) Flip all characters from index `i` to `n - 1` (inclusive), with a cost of `n - i`. The goal is to return the minimum cost required to make all the characters in the string equal (either all `0`s or all `1`s).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A binary string `s` of length `n`.
+- **Example:** `s = "1101"`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s[i] is either '0' or '1'
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    long long minimumCost(string s) {
-        /*
-        
-        0100111
-        
-        0000000 3 + 2 + 1        
-        
-        1011111 4 + 2 + 1   if odd len choose middle
-        
-        0101000
-        1011111 3 + 3 + 2 + 1         
-        0100000 4 + 3 + 2 + 1 if odd len choose middle
-        
-        010111
-        
-        011011
-        
-        011011  0/ 2 + 3 + 1
-                1/ 3 + 2 + 1
-        
-        010011
-        
-        010000  2 + 2 + 1
-        
-        101111  3
-        011111  3 + 2
-        111111  3 + 2 + 1 = 6
-        
-        010000  3 = 3
-        100000  3 + 2 = 5
-        000000  3 + 2 + 1 = 6
-        
-        */
-        
-        int n = s.size();
-        
-        if(n == 1) return 0;
-        long long res = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum cost to make all characters equal in the string.
+- **Example:** `3`
+- **Constraints:**
+	- The output should be a non-negative integer.
 
-        char k = s[n / 2];
-        
-        int i, j;
-        
-        if(n % 2)
-            i = n/2 + 1, j = n/2 - 1;
-        else i = n/2, j = n / 2 - 1;
-            bool ltog = true, rtog = true;
-            while(i < n && j >= 0) {
-                if(s[i] == k && rtog || s[i] != k && !rtog) {
-                } else {
-                    rtog = !rtog;
-                    res += n - i;
-                }
-                i++;
-                if((s[j] == k && ltog) || (s[j] != k && !ltog)) {
-                } else {
-                    ltog = !ltog;
-                    res += j + 1;
-                }
-                j--;                
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the minimum cost by applying the two types of operations on the string `s`.
+
+- Iterate over the string to determine the best points to apply the flip operations.
+- Apply the operations considering the costs and track the minimum cost.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is non-empty and contains only '0' and '1' characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** To make the string '1101' all '0's or all '1's, apply the first operation with `i = 1` (cost 2) and the second operation with `i = 2` (cost 1), giving a minimum total cost of 3.
+
+- **Input:** `Example 2`  \
+  **Explanation:** For the string '111000', applying the first operation with `i = 3` (cost 4) results in '111111', which is the minimum cost to make all characters equal.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves checking where to apply flip operations and computing the minimum cost for each scenario.
+
+### Initial Thoughts 💭
+- The operations can only flip from the beginning or from the end of the string.
+- We need to identify points where flipping operations can be applied with minimum cost to make all characters equal.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string is not a valid input.
+- For large strings (near the upper constraint), the solution should be efficient (O(n) or O(n log n) time complexity).
+- The string can already be uniform (all '0's or all '1's), in which case no operations are needed.
+- The solution should handle up to 100,000 characters efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+long long minimumCost(string s) {
+    /*
+    
+    0100111
+    
+    0000000 3 + 2 + 1        
+    
+    1011111 4 + 2 + 1   if odd len choose middle
+    
+    0101000
+    1011111 3 + 3 + 2 + 1         
+    0100000 4 + 3 + 2 + 1 if odd len choose middle
+    
+    010111
+    
+    011011
+    
+    011011  0/ 2 + 3 + 1
+            1/ 3 + 2 + 1
+    
+    010011
+    
+    010000  2 + 2 + 1
+    
+    101111  3
+    011111  3 + 2
+    111111  3 + 2 + 1 = 6
+    
+    010000  3 = 3
+    100000  3 + 2 = 5
+    000000  3 + 2 + 1 = 6
+    
+    */
+    
+    int n = s.size();
+    
+    if(n == 1) return 0;
+    long long res = 0;
+
+    char k = s[n / 2];
+    
+    int i, j;
+    
+    if(n % 2)
+        i = n/2 + 1, j = n/2 - 1;
+    else i = n/2, j = n / 2 - 1;
+        bool ltog = true, rtog = true;
+        while(i < n && j >= 0) {
+            if(s[i] == k && rtog || s[i] != k && !rtog) {
+            } else {
+                rtog = !rtog;
+                res += n - i;
             }
-            return res;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires calculating the minimum cost to change a given binary string to a string with alternating 0s and 1s. The string should have an alternating pattern of "010101..." or "101010...", and we need to compute how much it would cost to convert the given string into one of these patterns. The cost is measured as the total number of changes required. The goal is to determine the minimum number of changes necessary to convert the string into a valid alternating pattern.
-
-### Approach
-
-The main challenge here is to calculate the minimum cost efficiently by finding an alternating pattern for the given string. There are two possible alternating patterns:
-1. "010101..." (starts with '0')
-2. "101010..." (starts with '1')
-
-To solve this problem, we can approach it by splitting the string into two halves and checking each half against the two alternating patterns. Specifically:
-- If the string length is odd, we focus on the middle element to decide which pattern to use.
-- We then check each half of the string, comparing it to the corresponding half of each alternating pattern.
-- The idea is to count how many changes are required for each half to match the two alternating patterns and then return the minimum cost.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Handle special case where the string has length 1
-```cpp
-if(n == 1) return 0;
-```
-- If the string has only one character, there is no need for any changes, so the cost is `0`.
-
-#### Step 2: Initialize variables
-```cpp
-long long res = 0;
-char k = s[n / 2];
-int i, j;
-```
-- `res` stores the total cost for converting the string into an alternating pattern.
-- `k` represents the middle character of the string. This will help determine which pattern to choose.
-- `i` and `j` are pointers used to traverse the string from the middle outward, with `i` starting from the middle moving right and `j` starting from the middle moving left.
-
-#### Step 3: Determine starting points for pointers based on string length (even or odd)
-```cpp
-if(n % 2)
-    i = n/2 + 1, j = n/2 - 1;
-else
-    i = n/2, j = n / 2 - 1;
-```
-- If the string length `n` is odd, the pointers are set so that they start one step away from the middle.
-- If the string length `n` is even, the pointers start exactly at the middle and its left neighbor.
-
-#### Step 4: Traverse the string from the middle and compare it with the alternating patterns
-```cpp
-bool ltog = true, rtog = true;
-while(i < n && j >= 0) {
-    if(s[i] == k && rtog || s[i] != k && !rtog) {
-    } else {
-        rtog = !rtog;
-        res += n - i;
-    }
-    i++;
-    if((s[j] == k && ltog) || (s[j] != k && !ltog)) {
-    } else {
-        ltog = !ltog;
-        res += j + 1;
-    }
-    j--;
+            i++;
+            if((s[j] == k && ltog) || (s[j] != k && !ltog)) {
+            } else {
+                ltog = !ltog;
+                res += j + 1;
+            }
+            j--;                
+        }
+        return res;
 }
 ```
-- We use two flags, `ltog` and `rtog`, to track whether we are currently comparing the left half of the string (`ltog`) or the right half (`rtog`) against the alternating patterns.
-- As we traverse the string from the middle towards both ends:
-  - If the current character `s[i]` matches the corresponding alternating pattern for the right half (i.e., `k` for the starting character), we do nothing.
-  - If it doesn't match, we flip the direction (i.e., change `rtog` or `ltog`) and add to the result the number of changes needed to flip the section.
-- This process effectively counts how many changes are required to match the alternating patterns on both the left and right sides of the string.
 
-#### Step 5: Return the result
-```cpp
-return res;
-```
-- After the loop finishes, the variable `res` contains the total number of changes required to convert the string into an alternating binary string with the minimum cost. The function then returns this result.
+The function calculates the minimum cost of converting a binary string into a specific target format by flipping characters in the most cost-effective manner.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **String Manipulations**
+	```cpp
+	long long minimumCost(string s) {
+	```
+	Defines the function to calculate the minimum cost of a string transformation.
 
-#### Time Complexity
-- **O(n)**: The solution only requires a single pass over the string, where `n` is the length of the string. Each character is processed once, and the traversal happens from the center of the string outward.
+2. **String Operations**
+	```cpp
+	    int n = s.size();
+	```
+	Finds the size of the input string `s`.
 
-#### Space Complexity
-- **O(1)**: The space complexity is constant because we only use a few integer variables (`res`, `k`, `i`, `j`, `ltog`, `rtog`) and do not require any additional data structures that grow with the size of the input string. The algorithm operates in-place.
+3. **Conditional Checks**
+	```cpp
+	    if(n == 1) return 0;
+	```
+	Handles the edge case where the string has only one character.
 
-### Conclusion
+4. **Variable Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Initializes the result variable `res` to store the cost.
 
-This solution efficiently computes the minimum cost to transform a binary string into one of the two possible alternating patterns "010101..." or "101010...". By leveraging the middle element to guide the transformation and using two pointers to traverse the string, we minimize the number of changes required. The solution operates in linear time and constant space, making it scalable for large input sizes.
+5. **Character Operations**
+	```cpp
+	    char k = s[n / 2];
+	```
+	Determines the target character from the middle of the string.
+
+6. **Variable Initialization**
+	```cpp
+	    int i, j;
+	```
+	Declares indices for traversal from the middle outwards.
+
+7. **Conditional Checks**
+	```cpp
+	    if(n % 2)
+	```
+	Checks whether the length of the string is odd.
+
+8. **Index Calculation**
+	```cpp
+	        i = n/2 + 1, j = n/2 - 1;
+	```
+	Initializes traversal indices for an odd-length string.
+
+9. **Index Calculation**
+	```cpp
+	    else i = n/2, j = n / 2 - 1;
+	```
+	Initializes traversal indices for an even-length string.
+
+10. **Boolean Variables**
+	```cpp
+	        bool ltog = true, rtog = true;
+	```
+	Initializes toggle variables for tracking left and right flips.
+
+11. **Loop Constructs**
+	```cpp
+	        while(i < n && j >= 0) {
+	```
+	Iterates over the string from the middle to the edges.
+
+12. **Conditional Checks**
+	```cpp
+	            if(s[i] == k && rtog || s[i] != k && !rtog) {
+	```
+	Checks whether the current right character matches the target.
+
+13. **No Operation**
+	```cpp
+	            } else {
+	```
+	Handles cases where no action is required.
+
+14. **Boolean Operations**
+	```cpp
+	                rtog = !rtog;
+	```
+	Toggles the right flip state.
+
+15. **Sum Calculation**
+	```cpp
+	                res += n - i;
+	```
+	Adds the cost of flipping the right character.
+
+16. **Index Update**
+	```cpp
+	            i++;
+	```
+	Moves to the next right character.
+
+17. **Conditional Checks**
+	```cpp
+	            if((s[j] == k && ltog) || (s[j] != k && !ltog)) {
+	```
+	Checks whether the current left character matches the target.
+
+18. **No Operation**
+	```cpp
+	            } else {
+	```
+	Handles cases where no action is required.
+
+19. **Boolean Operations**
+	```cpp
+	                ltog = !ltog;
+	```
+	Toggles the left flip state.
+
+20. **Sum Calculation**
+	```cpp
+	                res += j + 1;
+	```
+	Adds the cost of flipping the left character.
+
+21. **Index Update**
+	```cpp
+	            j--;                
+	```
+	Moves to the next left character.
+
+22. **Return Statement**
+	```cpp
+	        return res;
+	```
+	Returns the total calculated cost.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution runs in linear time since we need to check each character at most once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution uses constant space as we only store a few variables to track the current state.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/description/)
 

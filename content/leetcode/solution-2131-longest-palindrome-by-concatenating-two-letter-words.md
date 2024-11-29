@@ -14,156 +14,250 @@ img_src = ""
 youtube = "kBMf-m5we-8"
 youtube_upload_date="2022-01-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/kBMf-m5we-8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of strings, where each string consists of two lowercase English letters. The task is to create the longest possible palindrome by selecting some of these strings and concatenating them in any order. Each string can be used at most once. A palindrome is a string that reads the same forward and backward. Return the length of the longest palindrome that can be created, or 0 if it's not possible to create any palindrome.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array of strings where each string has exactly two lowercase English letters.
+- **Example:** `words = ['ab', 'ba', 'aa', 'bb']`
+- **Constraints:**
+	- 1 <= words.length <= 10^5
+	- words[i].length == 2
+	- words[i] consists of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestPalindrome(vector<string>& words) {
-        int ans = 0;
-        int unpaired = 0;
-        unordered_map<string, int> mp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the length of the longest palindrome that can be formed using the given strings.
+- **Example:** `Input: words = ['ab', 'ba', 'aa', 'bb'] Output: 8`
+- **Constraints:**
+	- The solution must return the length of the longest possible palindrome.
 
-        for(string w: words) {
-            if(w[0] == w[1]) {
-                if(mp[w] > 0) {
-                    unpaired--;
-                    ans += 4;
-                    mp[w]--;
-                } else {
-                    unpaired++;
-                    mp[w]++;
-                }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find pairs of words and possibly one central word to form the longest palindrome.
+
+- 1. Iterate through the array of words and count how many of each word exist.
+- 2. Look for pairs of words (e.g., 'ab' and 'ba') that can form palindromes when combined.
+- 3. If a word consists of identical letters (e.g., 'aa'), count them for potential center placement in the palindrome.
+- 4. Return the length of the longest palindrome formed.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will always be a valid input of at least one word.
+- The number of words will always be even or odd as per the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: words = ['ab', 'ba', 'aa', 'bb']`  \
+  **Explanation:** In this case, 'ab' and 'ba' can form a palindrome pair, and 'aa' and 'bb' can form another. The longest palindrome formed is 'ab' + 'aa' + 'bb' = 'abbbba', which has a length of 8.
+
+- **Input:** `Input: words = ['xx', 'yy', 'zz']`  \
+  **Explanation:** Here, 'xx' can form a palindrome on its own, but 'yy' and 'zz' don't have pairs to form a larger palindrome. The longest palindrome formed is 'xx', which has a length of 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to count pairs of words that can form palindromes and find a potential central word for the palindrome.
+
+### Initial Thoughts 💭
+- We can pair words that are reverse of each other to form the largest possible palindrome.
+- We need to track word frequencies and identify pairs and possible center words that can maximize the palindrome length.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty input arrays should not be allowed, as the problem guarantees that there will always be words in the list.
+- Ensure the solution is efficient for the upper limit of the input size (10^5 words).
+- When all words are the same (e.g., ['aa', 'aa', 'aa']), only one word can form the center of the palindrome.
+- The solution must be efficient in both time and space to handle large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestPalindrome(vector<string>& words) {
+    int ans = 0;
+    int unpaired = 0;
+    unordered_map<string, int> mp;
+
+    for(string w: words) {
+        if(w[0] == w[1]) {
+            if(mp[w] > 0) {
+                unpaired--;
+                ans += 4;
+                mp[w]--;
             } else {
-                string rev = w;
-                reverse(rev.begin(), rev.end());
-                if(mp[rev] > 0) {
-                    ans += 4;
-                    mp[rev]--;
-                } else mp[w]++;
+                unpaired++;
+                mp[w]++;
             }
+        } else {
+            string rev = w;
+            reverse(rev.begin(), rev.end());
+            if(mp[rev] > 0) {
+                ans += 4;
+                mp[rev]--;
+            } else mp[w]++;
         }
-
-
-        if (unpaired > 0) ans += 2;
-        return ans;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
 
-The problem is to find the length of the longest palindrome that can be formed by concatenating a list of words. A palindrome reads the same forward and backward. In this case, we are given an array of strings where each string consists of two lowercase letters. The goal is to maximize the length of the palindrome that can be constructed using these words, taking into account that some words can contribute to the palindrome both directly and indirectly through their reverse pairs.
+    if (unpaired > 0) ans += 2;
+    return ans;
+}
+```
 
-### Approach
+This function takes a vector of strings, where each string consists of two characters. It calculates the longest palindrome that can be formed by pairing words and their reverse counterparts.
 
-To solve this problem, we can use the following approach:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestPalindrome(vector<string>& words) {
+	```
+	Function definition that initializes the longestPalindrome function which takes a vector of words as input.
 
-1. **Count Words**: Use a hash map (or unordered map) to keep track of the counts of each word.
-2. **Check for Pairs**: For each word, check if it can form a palindrome by pairing with its reverse. 
-3. **Handle Unpaired Words**: If there are words that are palindromes themselves (like "aa" or "bb"), keep track of them separately, as they can contribute to the center of the palindrome.
-4. **Calculate Total Length**: The total length of the palindrome will be computed by counting the lengths contributed by pairs of words, while ensuring that unpaired words are counted appropriately.
+2. **Variable Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	Initializes a variable 'ans' to 0, which will hold the total length of the longest palindrome.
 
-### Code Breakdown (Step by Step)
+3. **Variable Initialization**
+	```cpp
+	    int unpaired = 0;
+	```
+	Initializes a counter 'unpaired' to track words that cannot be paired with their reverse.
 
-Here's a detailed breakdown of the implementation:
+4. **Data Structure Initialization**
+	```cpp
+	    unordered_map<string, int> mp;
+	```
+	Declares an unordered map 'mp' to store the frequency of each word.
 
-1. **Class Declaration**:
-   ```cpp
-   class Solution {
-   public:
-   ```
-   - The `Solution` class is defined, encapsulating the method that will solve the problem.
+5. **Loop**
+	```cpp
+	    for(string w: words) {
+	```
+	Begins a loop to iterate over each word in the input vector.
 
-2. **Function Definition**:
-   ```cpp
-   int longestPalindrome(vector<string>& words) {
-   ```
-   - The public member function `longestPalindrome` takes a vector of strings as input and will return an integer representing the maximum length of the palindrome.
+6. **Condition**
+	```cpp
+	        if(w[0] == w[1]) {
+	```
+	Checks if the current word consists of two identical characters.
 
-3. **Initialization**:
-   ```cpp
-   int ans = 0;
-   int unpaired = 0;
-   unordered_map<string, int> mp;
-   ```
-   - `ans` will store the total length of the palindrome.
-   - `unpaired` keeps track of how many unpaired palindromic words we have encountered.
-   - `mp` is a hash map that stores the frequency of each word.
+7. **Condition**
+	```cpp
+	            if(mp[w] > 0) {
+	```
+	If a pair of the same word exists in the map, decrease unpaired count and add 4 to the result.
 
-4. **Iterate Through Words**:
-   ```cpp
-   for(string w: words) {
-   ```
-   - This loop iterates through each word in the input vector.
+8. **Action**
+	```cpp
+	                unpaired--;
+	```
+	Decreases the unpaired count when a matching pair is found.
 
-5. **Check for Self-Palindromes**:
-   ```cpp
-   if(w[0] == w[1]) {
-       if(mp[w] > 0) {
-           unpaired--;
-           ans += 4;
-           mp[w]--;
-       } else {
-           unpaired++;
-           mp[w]++;
-       }
-   }
-   ```
-   - If the word is a palindrome (e.g., "aa", "bb"), we check if we have previously encountered it.
-   - If yes, we decrement the count of unpaired palindromic words and add 4 to the total length since each palindrome contributes twice its length.
-   - If no, we increment the count of unpaired palindromic words and store it in the hash map.
+9. **Action**
+	```cpp
+	                ans += 4;
+	```
+	Adds 4 to the answer since each word pair contributes 4 to the palindrome.
 
-6. **Check for Reversible Pairs**:
-   ```cpp
-   else {
-       string rev = w;
-       reverse(rev.begin(), rev.end());
-       if(mp[rev] > 0) {
-           ans += 4;
-           mp[rev]--;
-       } else mp[w]++;
-   }
-   ```
-   - For words that are not self-palindromes, we check if their reverse exists in the hash map.
-   - If the reverse is found, we add 4 to the total length for the pair and decrement the count of that reverse word in the hash map.
-   - If the reverse is not found, we add the current word to the hash map.
+10. **Action**
+	```cpp
+	                mp[w]--;
+	```
+	Decreases the frequency of the current word in the map.
 
-7. **Handle Remaining Unpaired Words**:
-   ```cpp
-   if (unpaired > 0) ans += 2;
-   return ans;
-   ```
-   - After processing all words, if there are any unpaired palindromic words left, we can place one in the center of the palindrome, contributing 2 to the total length.
-   - Finally, we return the computed length stored in `ans`.
+11. **Action**
+	```cpp
+	            } else {
+	```
+	If no pair is found for the word, increase the unpaired count.
 
-8. **End of Class**:
-   ```cpp
-   };
-   ```
-   - This curly brace marks the end of the `Solution` class definition.
+12. **Action**
+	```cpp
+	                unpaired++;
+	```
+	Increases the unpaired count when no matching pair exists.
 
-### Complexity Analysis
+13. **Action**
+	```cpp
+	                mp[w]++;
+	```
+	Increases the frequency of the current word in the map.
 
-- **Time Complexity**: \(O(n)\)
-  - The time complexity is \(O(n)\) where \(n\) is the number of words in the input vector. We make a single pass through the list of words, and operations on the unordered map (insertion and lookup) take average \(O(1)\) time.
+14. **Condition**
+	```cpp
+	        } else {
+	```
+	Checks if the current word consists of two different characters.
 
-- **Space Complexity**: \(O(n)\)
-  - The space complexity is \(O(n)\) as we might store every unique word in the hash map.
+15. **Action**
+	```cpp
+	            string rev = w;
+	```
+	Stores the reverse of the current word in the variable 'rev'.
 
-### Conclusion
+16. **Action**
+	```cpp
+	            reverse(rev.begin(), rev.end());
+	```
+	Reverses the string 'rev' to check for palindrome matches.
 
-The `longestPalindrome` function effectively calculates the maximum length of a palindrome that can be constructed from a list of words by utilizing pairs and self-palindromic words. The efficient use of a hash map allows us to track the counts of words and their reverses, while the method handles both the pairing of words and the potential inclusion of unpaired palindromes systematically.
+17. **Condition**
+	```cpp
+	            if(mp[rev] > 0) {
+	```
+	Checks if a reverse pair for the current word exists in the map.
 
-This approach demonstrates a keen understanding of both string manipulation and hash maps in C++. The solution is not only efficient but also elegantly handles the requirements of the problem, providing a clear path to achieving the desired outcome.
+18. **Action**
+	```cpp
+	                ans += 4;
+	```
+	Adds 4 to the answer when a reverse pair is found.
 
-In summary, this implementation is a strong example of solving a combinatorial problem using data structures efficiently, making it applicable in various contexts where palindrome formation and word pairing are relevant. The code is clear, concise, and structured in a way that makes it easy to follow, ensuring maintainability and readability.
+19. **Action**
+	```cpp
+	                mp[rev]--;
+	```
+	Decreases the frequency of the reversed word in the map.
+
+20. **Action**
+	```cpp
+	            } else mp[w]++;
+	```
+	If no reverse pair is found, increase the frequency of the current word in the map.
+
+21. **Final Check**
+	```cpp
+	    if (unpaired > 0) ans += 2;
+	```
+	If there are any unpaired words left, add 2 to the result to account for one word in the middle of the palindrome.
+
+22. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the final length of the longest palindrome that can be formed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of words, as we only need to iterate through the list and check frequencies.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n), as we store the frequency of each word in a hashmap.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/description/)
 

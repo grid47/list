@@ -14,136 +14,132 @@ img_src = ""
 youtube = "_gGX_2ZNa2E"
 youtube_upload_date="2022-07-10"
 youtube_thumbnail="https://i.ytimg.com/vi/_gGX_2ZNa2E/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You have a set containing all positive integers starting from 1. You need to implement a class SmallestInfiniteSet that has the following methods: 
 
-{{< highlight cpp >}}
-class SmallestInfiniteSet {
-public:
-    int cnt = 1;
-    set<int> s;
-    SmallestInfiniteSet() {
-        s.clear();
-        cnt = 1;
-    }
-    
-    int popSmallest() {
-        if(!s.empty()) {
-            int tmp = *s.begin() ;
-                s.erase(tmp);
-            return tmp;            
-        }
-        return cnt++;
-    }
-    
-    void addBack(int num) {
-        if(num < cnt)
-        s.insert(num);
-    }
-};
+- SmallestInfiniteSet() Initializes the set to contain all positive integers starting from 1.
+- popSmallest() Removes and returns the smallest integer in the set.
+- addBack(int num) Adds a positive integer num back into the set, if it’s not already present in the set.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of method calls on the SmallestInfiniteSet class.
+- **Example:** `Input: ["SmallestInfiniteSet", "addBack", "popSmallest", "popSmallest", "popSmallest"] 
+Output: [null, null, 1, 2, 3]`
+- **Constraints:**
+	- 1 <= num <= 1000
+	- At most 1000 calls will be made in total to popSmallest and addBack.
 
-/**
- * Your SmallestInfiniteSet object will be instantiated and called as such:
- * SmallestInfiniteSet* obj = new SmallestInfiniteSet();
- * int param_1 = obj->popSmallest();
- * obj->addBack(num);
- */
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output consists of the return values of the method calls in the input sequence.
+- **Example:** `[null, null, 1, 2, 3]`
+- **Constraints:**
+	- The output list will contain the return values of each operation in the order they were executed.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to design a set data structure that efficiently supports removing the smallest element and adding an element back into the set if it's not already there.
 
-The problem asks us to implement a class `SmallestInfiniteSet` that simulates an infinite set of positive integers, starting from 1. We need to be able to perform two operations on this set:
-1. **popSmallest**: Return and remove the smallest integer from the set.
-2. **addBack**: Add a previously removed integer back to the set if it’s less than the current largest number in the set.
+- Initialize an empty set and maintain a counter to track the smallest number.
+- For each popSmallest operation, check if the set is non-empty and pop the smallest number from the set.
+- For each addBack operation, ensure the number is less than the current counter and not already in the set before adding it back.
+{{< dots >}}
+### Problem Assumptions ✅
+- The smallest number in the set is always the first positive integer not yet removed or added back.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["SmallestInfiniteSet", "addBack", "popSmallest", "popSmallest", "popSmallest"]`  \
+  **Explanation:** The sequence of operations ensures that the smallest integers are popped and numbers can be re-added as needed.
 
-The primary challenge lies in maintaining an efficient way to find and remove the smallest integer, while also being able to add back integers in a way that preserves the smallest set order.
+{{< dots >}}
+## Approach 🚀
+To solve the problem, maintain an ongoing counter to track the smallest number not yet popped. Use a set to store numbers that are added back to the infinite set.
 
-### Approach
-
-We are asked to create a class that efficiently manages two key operations:
-1. **Popping the smallest element**: In an infinite set, the smallest element can always be defined as the smallest integer not yet removed.
-2. **Adding an element back**: Once an integer has been popped from the set, it may be added back to the set in the future, but only if it’s smaller than the current "largest" number in the set (tracked by the `cnt` variable).
-
-We will use two core components to solve this:
-- **A set**: The set will be used to store numbers that have been removed (i.e., popped) from the smallest infinite set. This allows for efficient operations to check and remove the smallest element.
-- **A counter `cnt`**: This counter keeps track of the next integer to be returned when the set is empty, ensuring we always return the smallest possible integer when the set is empty.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Class Initialization**
+### Initial Thoughts 💭
+- The set should handle duplicate insertions gracefully and should always prioritize the smallest available number.
+- We can use a counter variable that tracks the smallest number, along with a set to track any numbers that are added back to the infinite set.
+{{< dots >}}
+### Edge Cases 🌐
+- No edge cases related to empty inputs, as the set is always initialized and can be called multiple times.
+- The problem must handle up to 1000 operations efficiently.
+- Handle the case where a number is added back multiple times or when the set has large numbers.
+- Ensure the solution works with at most 1000 operations.
+{{< dots >}}
+## Code 💻
 ```cpp
-class SmallestInfiniteSet {
-public:
-    int cnt = 1;
-    set<int> s;
-    SmallestInfiniteSet() {
-        s.clear();
-        cnt = 1;
+int fillCups(vector<int>& A) {
+    int mx = 0, sum = 0;
+    for(int& a: A) {
+        mx = max(a, mx);
+        sum += a;
     }
+    return max(mx, (sum + 1) / 2); 
+}
 ```
-- **`cnt`**: This integer is initialized to 1 and tracks the next smallest integer to be returned if the set is empty. Each time we call `popSmallest()`, if the set `s` is empty, the value of `cnt` is returned, and `cnt` is incremented.
-- **`s`**: A set data structure is used to hold the numbers that were added back into the set. Sets provide efficient insertion and removal, and they keep the elements sorted, so we can easily access the smallest element.
 
-#### 2. **`popSmallest` Method**
-```cpp
-    int popSmallest() {
-        if(!s.empty()) {
-            int tmp = *s.begin();
-            s.erase(tmp);
-            return tmp;            
-        }
-        return cnt++;
-    }
-```
-- The `popSmallest()` method returns the smallest integer in the set and removes it.
-- **`if(!s.empty())`**: If the set `s` is not empty, the smallest integer is obtained using `*s.begin()`, and then it is removed from the set using `s.erase(tmp)`.
-- **`return cnt++`**: If the set is empty, we return the current value of `cnt` and then increment `cnt` by 1. This ensures that we are always returning the smallest possible number when the set is empty.
+This is the complete implementation of the function 'fillCups', which calculates the minimum number of moves required to fill cups with water based on given constraints.
 
-#### 3. **`addBack` Method**
-```cpp
-    void addBack(int num) {
-        if(num < cnt)
-            s.insert(num);
-    }
-};
-```
-- **`addBack(int num)`**: This method is used to add an integer back to the set. The integer can only be added back if it is less than the current `cnt`, ensuring that we are not re-adding numbers that have already been "used" (i.e., numbers greater than or equal to `cnt`).
-- **`s.insert(num)`**: If the integer is less than `cnt`, it is inserted back into the set `s`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Code Block**
+	```cpp
+	int fillCups(vector<int>& A) {
+	```
+	Define the function 'fillCups' that takes a vector of integers A, representing the number of cups of each type.
 
-#### 4. **Usage Example**
-```cpp
-/**
- * Your SmallestInfiniteSet object will be instantiated and called as such:
- * SmallestInfiniteSet* obj = new SmallestInfiniteSet();
- * int param_1 = obj->popSmallest();
- * obj->addBack(num);
- */
-```
-- We instantiate the `SmallestInfiniteSet` object, then use the `popSmallest()` method to get the smallest number from the set and the `addBack()` method to return numbers back into the set.
+2. **Variable Initialization**
+	```cpp
+	    int mx = 0, sum = 0;
+	```
+	Initialize variables: 'mx' to store the maximum cup count, and 'sum' to store the total sum of all cups.
 
-### Complexity
+3. **Loop**
+	```cpp
+	    for(int& a: A) {
+	```
+	Iterate over each element in the vector 'A', which represents the cup counts.
 
-#### Time Complexity:
-- **`popSmallest()`**: The time complexity is **O(log N)**, where N is the number of elements in the set `s`. This is because finding and removing the smallest element from a set requires logarithmic time.
-- **`addBack()`**: The time complexity for adding an element back is **O(log N)**, since inserting into a set also requires logarithmic time to maintain the sorted order of the elements.
+4. **Update Maximum**
+	```cpp
+	        mx = max(a, mx);
+	```
+	Update the maximum cup count 'mx' with the current value 'a' if it is greater than the current maximum.
 
-Thus, both methods are efficient, with logarithmic time complexity relative to the number of elements in the set.
+5. **Accumulate Sum**
+	```cpp
+	        sum += a;
+	```
+	Add the current cup count 'a' to the total sum.
 
-#### Space Complexity:
-- The space complexity is **O(N)**, where N is the number of elements in the set `s`. The space is used to store the numbers that have been added back into the set.
+6. **Return Result**
+	```cpp
+	    return max(mx, (sum + 1) / 2);
+	```
+	Return the maximum of the 'mx' (maximum cup count) or half of the total cups, rounded up, representing the minimum number of moves required.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) when the set is empty and we simply pop the counter value.
+- **Average Case:** O(1) for both popSmallest and addBack operations as they involve constant time checks.
+- **Worst Case:** O(log n) when adding back numbers to the set and when removing from the set.
 
-The `SmallestInfiniteSet` class offers an efficient way to manage an infinite set of numbers, where we can:
-1. Return the smallest available number (`popSmallest`).
-2. Add previously popped numbers back into the set (`addBack`).
+The time complexity is constant for most operations, but adding numbers back involves managing the set.
 
-By utilizing a set to store removed elements and a counter to track the smallest possible number when the set is empty, we can efficiently handle both operations. The time complexity of both operations is logarithmic with respect to the number of elements in the set, ensuring that the solution is scalable for large numbers of operations.
+### Space Complexity 💾
+- **Best Case:** O(1) if no numbers are added back.
+- **Worst Case:** O(n) where n is the number of numbers added back to the set.
+
+Space complexity depends on the number of elements in the set.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/smallest-number-in-infinite-set/description/)
 

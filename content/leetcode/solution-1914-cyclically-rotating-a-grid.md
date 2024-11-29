@@ -14,191 +14,240 @@ img_src = ""
 youtube = "3dCs1ZHDNjM"
 youtube_upload_date="2021-06-27"
 youtube_thumbnail="https://i.ytimg.com/vi/3dCs1ZHDNjM/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n integer matrix grid, where both m and n are even integers, and an integer k. The matrix consists of several concentric layers, and each layer can be thought of as a circular band of numbers. A cyclic rotation of a layer is done by shifting all its elements counter-clockwise by one position. You are asked to return the matrix after applying k cyclic rotations to each of its layers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an m x n matrix grid and an integer k representing the number of rotations to be performed on each layer of the matrix.
+- **Example:** `grid = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], k = 2`
+- **Constraints:**
+	- 2 <= m, n <= 50
+	- m and n are even integers
+	- 1 <= grid[i][j] <= 5000
+	- 1 <= k <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> rotateGrid(vector<vector<int>>& grid, int k) {
-        int m = grid.size(), n = grid[0].size();
-        // cout << m << " " << n;
-        // k = k % (m * n);
-        for(int i = 0; i < min(m, n) / 2; i++) {            
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the matrix after applying k cyclic rotations to its layers.
+- **Example:** `[[3, 4, 8, 12], [2, 11, 10, 16], [1, 7, 6, 15], [5, 9, 13, 14]]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To perform k cyclic rotations on each layer of the matrix.
+
+- Divide the matrix into concentric layers.
+- For each layer, apply k cyclic rotations, adjusting for the layer's length.
+- After applying the rotations, update the matrix with the new values.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix will always have even dimensions for both m and n, ensuring that every matrix has complete layers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `grid = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], k = 2`  \
+  **Explanation:** The grid is divided into concentric layers. After 2 counter-clockwise rotations, the elements shift as shown in the output.
+
+{{< dots >}}
+## Approach 🚀
+We need to cyclically rotate the elements in each layer by k positions. This requires extracting each layer, performing the rotation, and then placing the rotated layer back into the matrix.
+
+### Initial Thoughts 💭
+- We need to break the grid into its concentric layers and perform the rotation on each layer independently.
+- The rotation can be optimized by reducing the number of unnecessary rotations using modulo arithmetic on the length of the layer.
+{{< dots >}}
+### Edge Cases 🌐
+- The matrix will never be empty based on problem constraints.
+- Ensure that the solution handles large values for k efficiently by using modulo arithmetic.
+- If k is larger than the length of the layer, use modulo to reduce the number of rotations.
+- The number of rows and columns are always even and between 2 and 50.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> rotateGrid(vector<vector<int>>& grid, int k) {
+    int m = grid.size(), n = grid[0].size();
+    // cout << m << " " << n;
+    // k = k % (m * n);
+    for(int i = 0; i < min(m, n) / 2; i++) {            
 
 
-            int l = i + 0, r = n - 1 - i;
-            int t = i + 0, b = m - 1 - i;
+        int l = i + 0, r = n - 1 - i;
+        int t = i + 0, b = m - 1 - i;
 
-            int total = 2 * (r - l) + 2 * (b - t);
-            int rot = k % total;
-            if(l < r && t < b) {
+        int total = 2 * (r - l) + 2 * (b - t);
+        int rot = k % total;
+        if(l < r && t < b) {
 
-                for(int j = 0; j < rot; j++) {
+            for(int j = 0; j < rot; j++) {
 
-                    int tmp = grid[t][l];
-                    for(int p = l; p < r; p++)
-                        grid[t][p] = grid[t][p + 1];
+                int tmp = grid[t][l];
+                for(int p = l; p < r; p++)
+                    grid[t][p] = grid[t][p + 1];
 
-                    for(int p = t; p < b; p++)
-                        grid[p][r] = grid[p + 1][r];
+                for(int p = t; p < b; p++)
+                    grid[p][r] = grid[p + 1][r];
 
-                    for(int p = r; p > l; p--)
-                        grid[b][p] = grid[b][p-1];
+                for(int p = r; p > l; p--)
+                    grid[b][p] = grid[b][p-1];
 
-                    for(int p = b; p > t; p--)
-                        grid[p][l] = grid[p-1][l];
+                for(int p = b; p > t; p--)
+                    grid[p][l] = grid[p-1][l];
 
-                    grid[t + 1][l] = tmp;
-                }
-
+                grid[t + 1][l] = tmp;
             }
+
         }
-        return grid;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to rotate a given 2D grid (matrix) by `k` positions in a circular manner. This rotation must be performed layer by layer, starting from the outermost layer of the grid and moving inward. Each layer of the grid can be thought of as a ring, and the goal is to shift the elements in these rings to the right by `k` positions.
-
-### Approach
-
-To achieve the desired rotation, the algorithm follows these steps:
-
-1. **Layer Identification**: The grid is processed layer by layer, where each layer can be defined by its boundaries (left, right, top, and bottom). The number of layers is determined by the smaller dimension of the grid divided by two.
-
-2. **Layer Length Calculation**: For each layer, calculate the number of elements in the layer (total perimeter length) using the formula:
-   \[
-   \text{total} = 2 \times (r - l) + 2 \times (b - t)
-   \]
-   where `l`, `r`, `t`, and `b` are the left, right, top, and bottom indices of the current layer.
-
-3. **Effective Rotations**: The effective number of rotations needed is determined by taking `k` modulo the perimeter length (`total`). This accounts for cases where `k` is larger than the number of elements in the layer.
-
-4. **Performing Rotations**: The elements of the layer are rotated in a circular manner. This involves:
-   - Saving the top left element temporarily.
-   - Shifting elements in a clockwise direction, i.e., moving elements from the top row to the right column, from the right column to the bottom row, from the bottom row to the left column, and from the left column back to the top row.
-
-5. **Return the Rotated Grid**: After processing all layers, the modified grid is returned.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> rotateGrid(vector<vector<int>>& grid, int k) {
+    return grid;
+}
 ```
-This line defines the `rotateGrid` function, which takes a 2D vector `grid` and an integer `k`.
 
-```cpp
-        int m = grid.size(), n = grid[0].size();
-```
-Here, we retrieve the dimensions of the grid, with `m` representing the number of rows and `n` representing the number of columns.
+This function rotates a grid of integers by a given number of positions, k, in a clockwise direction.
 
-```cpp
-        for(int i = 0; i < min(m, n) / 2; i++) {
-```
-The loop iterates over each layer of the grid. The number of layers is determined by half the minimum dimension of the grid.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> rotateGrid(vector<vector<int>>& grid, int k) {
+	```
+	Defines the function 'rotateGrid' that takes a 2D vector (grid) and an integer (k) as input.
 
-```cpp
-            int l = i + 0, r = n - 1 - i;
-            int t = i + 0, b = m - 1 - i;
-```
-We define the boundaries of the current layer:
-- `l`: left boundary
-- `r`: right boundary
-- `t`: top boundary
-- `b`: bottom boundary
+2. **Variable Declaration**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	Declares two variables 'm' and 'n' to store the dimensions (rows and columns) of the grid.
 
-```cpp
-            int total = 2 * (r - l) + 2 * (b - t);
-            int rot = k % total;
-```
-Calculate the total number of elements in the layer and determine the effective number of rotations needed.
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < min(m, n) / 2; i++) {
+	```
+	Starts a loop that iterates over the layers of the grid, from outermost to innermost.
 
-```cpp
-            if(l < r && t < b) {
-```
-Check if the current layer contains more than one element to ensure that we only rotate valid layers.
+4. **Variable Initialization**
+	```cpp
+	        int l = i + 0, r = n - 1 - i;
+	```
+	Initializes 'l' (left index) and 'r' (right index) for the current layer.
 
-```cpp
-                for(int j = 0; j < rot; j++) {
-```
-This loop performs the rotation `rot` times.
+5. **Variable Initialization**
+	```cpp
+	        int t = i + 0, b = m - 1 - i;
+	```
+	Initializes 't' (top index) and 'b' (bottom index) for the current layer.
 
-```cpp
-                    int tmp = grid[t][l];
-```
-Store the top left element of the layer temporarily.
+6. **Computation**
+	```cpp
+	        int total = 2 * (r - l) + 2 * (b - t);
+	```
+	Calculates the total number of elements in the current layer of the grid.
 
-```cpp
-                    for(int p = l; p < r; p++)
-                        grid[t][p] = grid[t][p + 1];
-```
-Shift elements from the top row to the right by one position.
+7. **Computation**
+	```cpp
+	        int rot = k % total;
+	```
+	Calculates the effective number of rotations needed for the current layer.
 
-```cpp
-                    for(int p = t; p < b; p++)
-                        grid[p][r] = grid[p + 1][r];
-```
-Shift elements from the right column down by one position.
+8. **Condition Check**
+	```cpp
+	        if(l < r && t < b) {
+	```
+	Checks if the current layer is a valid rectangle (ensuring there are more than one row and column).
 
-```cpp
-                    for(int p = r; p > l; p--)
-                        grid[b][p] = grid[b][p-1];
-```
-Shift elements from the bottom row to the left by one position.
+9. **Loop**
+	```cpp
+	            for(int j = 0; j < rot; j++) {
+	```
+	Loops to rotate the elements in the current layer 'rot' times.
 
-```cpp
-                    for(int p = b; p > t; p--)
-                        grid[p][l] = grid[p-1][l];
-```
-Shift elements from the left column up by one position.
+10. **Variable Assignment**
+	```cpp
+	                int tmp = grid[t][l];
+	```
+	Saves the value of the top-left element of the layer into 'tmp'.
 
-```cpp
-                    grid[t + 1][l] = tmp;
-```
-Place the temporarily stored element back into the grid.
+11. **Inner Loop**
+	```cpp
+	                for(int p = l; p < r; p++)
+	```
+	Loops through the top row of the current layer, shifting elements to the right.
 
-```cpp
-            }
-        }
-        return grid;
-    }
-};
-```
-After all layers have been processed, the modified grid is returned.
+12. **Element Shifting**
+	```cpp
+	                    grid[t][p] = grid[t][p + 1];
+	```
+	Shifts the element at 'p' to the right by one position.
 
-### Complexity
+13. **Inner Loop**
+	```cpp
+	                for(int p = t; p < b; p++)
+	```
+	Loops through the right column of the current layer, shifting elements downward.
 
-- **Time Complexity**: The time complexity of this algorithm is O(m * n), where m is the number of rows and n is the number of columns. Each element in the grid is processed once during the rotations.
+14. **Element Shifting**
+	```cpp
+	                    grid[p][r] = grid[p + 1][r];
+	```
+	Shifts the element at 'p' downward by one position.
 
-- **Space Complexity**: The space complexity is O(1), as we are only using a fixed number of variables for computations without any additional data structures that grow with input size.
+15. **Inner Loop**
+	```cpp
+	                for(int p = r; p > l; p--)
+	```
+	Loops through the bottom row of the current layer, shifting elements to the left.
 
-### Conclusion
+16. **Element Shifting**
+	```cpp
+	                    grid[b][p] = grid[b][p-1];
+	```
+	Shifts the element at 'p' to the left by one position.
 
-The `rotateGrid` function efficiently rotates the layers of a grid based on the specified number of positions `k`. By treating each layer as a separate entity and performing rotations layer by layer, the solution is both straightforward and efficient. This method ensures that the algorithm runs in linear time relative to the number of elements in the grid, making it suitable for large matrices.
+17. **Inner Loop**
+	```cpp
+	                for(int p = b; p > t; p--)
+	```
+	Loops through the left column of the current layer, shifting elements upward.
 
-### Use Cases
+18. **Element Shifting**
+	```cpp
+	                    grid[p][l] = grid[p-1][l];
+	```
+	Shifts the element at 'p' upward by one position.
 
-1. **Image Processing**: This algorithm can be applied in image manipulation tasks, such as rotating borders of an image represented as a matrix of pixels.
+19. **Element Assignment**
+	```cpp
+	                grid[t + 1][l] = tmp;
+	```
+	Assigns the saved value 'tmp' to the position that was vacated during the shift.
 
-2. **Game Development**: In grid-based games, layer rotations can be used to create interesting visual effects or transformations of the game board.
+20. **Return**
+	```cpp
+	    return grid;
+	```
+	Returns the rotated grid after all layers have been processed.
 
-3. **Data Representation**: The concept of rotating layers can also be applied in scenarios where data needs to be rearranged in a structured format, such as matrices used in simulations.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-4. **Competitive Programming**: The algorithm serves as an example of how to manipulate 2D arrays effectively, making it a great addition to competitive programming skills.
+We iterate through each element in each layer once to apply rotations.
 
-5. **Mathematical Puzzles**: Rotating grid layers can be part of larger mathematical puzzles or challenges that involve spatial reasoning and manipulation.
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-By following this structured approach, developers can efficiently handle tasks related to grid manipulation and optimize their algorithms for performance and clarity. The use of clear variable naming and logical structuring makes the code easy to read and maintain, ensuring long-term usability.
+We store the elements of the layer in a temporary list, so the space complexity is proportional to the size of the matrix.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/cyclically-rotating-a-grid/description/)
 

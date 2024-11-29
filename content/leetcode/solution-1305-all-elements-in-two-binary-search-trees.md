@@ -14,144 +14,238 @@ img_src = ""
 youtube = "B97Hk1H2x2s"
 youtube_upload_date="2020-09-05"
 youtube_thumbnail="https://i.ytimg.com/vi/B97Hk1H2x2s/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGDMgRih_MA8=&rs=AOn4CLC03GCnDEem80J52_RuXkBdpkuQfA"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two binary search trees, root1 and root2, return a list containing all the integers from both trees, sorted in ascending order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Each tree is represented by its root node, and the nodes of the tree follow the binary search tree property where left child < parent node < right child.
+- **Example:** `Input: root1 = [3, 1, 4], root2 = [2, 0, 5]`
+- **Constraints:**
+	- The number of nodes in each tree is in the range [0, 5000].
+	- -105 <= Node.val <= 105
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
-        stack<TreeNode*> st1, st2;
-        vector<int> res;
-        while(root1 || root2 || !st1.empty() || !st2.empty()) {
-            while(root1) {
-                st1.push(root1);
-                root1 = root1->left;
-            }
-            while(root2) {
-                st2.push(root2);
-                root2 = root2->left;
-            }
-            if(st2.empty() || (!st1.empty() && st1.top()->val < st2.top()->val)) {
-                root1 = st1.top();
-                st1.pop();
-                res.push_back(root1->val);
-                root1 = root1->right;
-            } else {
-                root2 = st2.top();
-                st2.pop();
-                res.push_back(root2->val);
-                root2 = root2->right;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a sorted list containing all the integers from both trees.
+- **Example:** `Output: [0, 1, 2, 3, 4, 5]`
+- **Constraints:**
+	- The output list will contain the sorted integers from both input trees.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To merge the two binary search trees and return the merged list of elements sorted in ascending order.
+
+- Use a two-pointer or stack-based approach to traverse both trees in in-order (left, root, right) fashion.
+- Merge the results of both traversals and return the combined sorted list.
+{{< dots >}}
+### Problem Assumptions ✅
+- Both trees are valid binary search trees.
+- The solution should be efficient enough to handle trees with up to 5000 nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root1 = [3, 1, 4], root2 = [2, 0, 5]`  \
+  **Explanation:** The combined elements from both trees are [3, 1, 4] and [2, 0, 5]. Sorting these values gives [0, 1, 2, 3, 4, 5].
+
+- **Input:** `Input: root1 = [6, null, 10], root2 = [5, 2, 7]`  \
+  **Explanation:** The combined elements from both trees are [6, 10] and [5, 2, 7]. Sorting these values gives [2, 5, 6, 7, 10].
+
+{{< dots >}}
+## Approach 🚀
+The best approach is to perform an in-order traversal of both trees and merge the results as they are traversed in sorted order.
+
+### Initial Thoughts 💭
+- Binary search trees store elements in sorted order. This allows us to merge the trees efficiently using in-order traversal.
+- We can use stacks to simulate the in-order traversal of both trees, which will allow us to process both trees simultaneously.
+{{< dots >}}
+### Edge Cases 🌐
+- If one of the trees is empty, the solution should simply return the in-order traversal of the other tree.
+- For very large trees, the solution should efficiently merge and sort the trees in linear time.
+- If the trees contain duplicate values, the duplicates should appear in the result list in sorted order.
+- The solution should operate within O(n) time complexity, where n is the total number of nodes across both trees.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+    stack<TreeNode*> st1, st2;
+    vector<int> res;
+    while(root1 || root2 || !st1.empty() || !st2.empty()) {
+        while(root1) {
+            st1.push(root1);
+            root1 = root1->left;
         }
-        return res;
+        while(root2) {
+            st2.push(root2);
+            root2 = root2->left;
+        }
+        if(st2.empty() || (!st1.empty() && st1.top()->val < st2.top()->val)) {
+            root1 = st1.top();
+            st1.pop();
+            res.push_back(root1->val);
+            root1 = root1->right;
+        } else {
+            root2 = st2.top();
+            st2.pop();
+            res.push_back(root2->val);
+            root2 = root2->right;
+        }
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
+This function combines the elements from two binary search trees (BSTs) into a single sorted vector using an in-order traversal approach. It uses two stacks to traverse both trees in parallel and ensures that elements are added to the result vector in ascending order.
 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+	```
+	Defines the function 'getAllElements' that takes two root nodes of binary search trees (root1 and root2) as input and returns a vector of integers containing all elements from both trees, sorted in ascending order.
 
-### Problem Statement
-Given two binary search trees (BSTs), the task is to merge all of their elements into a single sorted list. This requires performing an in-order traversal on both trees to access their elements in ascending order, and then merging the results. The solution should have a time complexity close to \(O(m + n)\), where \(m\) and \(n\) are the number of nodes in each tree, and it should avoid using extra space beyond the necessary output list.
+2. **Stack Initialization**
+	```cpp
+	    stack<TreeNode*> st1, st2;
+	```
+	Declares two stacks, st1 and st2, to store nodes of both trees during the in-order traversal.
 
-### Approach
-This solution uses **in-order traversal** and **two stacks** to simulate iterators for each BST:
-1. **In-Order Traversal**: Since BSTs have elements in sorted order when traversed in-order, this traversal helps us access each tree’s elements in ascending order.
-2. **Stack-Based Iterative In-Order Traversal**: Instead of recursive traversal, this approach uses stacks to store nodes from each tree, simulating an in-order traversal. Each time the traversal visits a node, it either processes the node if it’s the smallest available node or goes to the next node’s right child.
-3. **Simultaneous Traversal and Merge**: By pushing nodes from both trees onto their respective stacks, we can compare the current smallest elements of each tree. The smaller value is added to the result list, and the corresponding traversal continues.
+3. **Result Vector Initialization**
+	```cpp
+	    vector<int> res;
+	```
+	Declares an empty vector 'res' that will hold the elements from both trees in sorted order.
 
-### Code Breakdown (Step by Step)
+4. **Main Loop**
+	```cpp
+	    while(root1 || root2 || !st1.empty() || !st2.empty()) {
+	```
+	The while loop continues until both trees are fully traversed and both stacks are empty.
 
-1. **Class and Method Definition**:
-   - We define a class `Solution` with a public method `getAllElements` that takes pointers to two tree roots, `root1` and `root2`, as input and returns a sorted list of all elements from both trees.
+5. **Left Subtree Traversal - Root1**
+	```cpp
+	        while(root1) {
+	```
+	Traverses the left subtree of tree 1, pushing all nodes onto the stack st1 until a NULL node is encountered.
 
-   ```cpp
-   class Solution {
-   public:
-       vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
-   ```
+6. **Push Root1 to Stack**
+	```cpp
+	            st1.push(root1);
+	```
+	Pushes the current node (root1) onto the stack st1.
 
-2. **Initialize Stacks and Result Vector**:
-   - Two stacks, `st1` and `st2`, are initialized to store nodes for in-order traversal. A vector `res` is also initialized to store the sorted result.
+7. **Move to Left Child**
+	```cpp
+	            root1 = root1->left;
+	```
+	Moves to the left child of the current node in tree 1.
 
-   ```cpp
-           stack<TreeNode*> st1, st2;
-           vector<int> res;
-   ```
+8. **Left Subtree Traversal - Root2**
+	```cpp
+	        while(root2) {
+	```
+	Traverses the left subtree of tree 2, pushing all nodes onto the stack st2 until a NULL node is encountered.
 
-3. **Loop until Traversal is Complete**:
-   - The main `while` loop continues until both trees are completely traversed, which occurs when both `root1` and `root2` are `NULL` and both stacks are empty.
+9. **Push Root2 to Stack**
+	```cpp
+	            st2.push(root2);
+	```
+	Pushes the current node (root2) onto the stack st2.
 
-   ```cpp
-           while(root1 || root2 || !st1.empty() || !st2.empty()) {
-   ```
+10. **Move to Left Child**
+	```cpp
+	            root2 = root2->left;
+	```
+	Moves to the left child of the current node in tree 2.
 
-4. **Push All Left Children to Stack**:
-   - For both `root1` and `root2`, a nested `while` loop pushes all left children onto their respective stacks. This simulates moving to the smallest element in each tree.
+11. **Comparison and Node Selection**
+	```cpp
+	        if(st2.empty() || (!st1.empty() && st1.top()->val < st2.top()->val)) {
+	```
+	Compares the top nodes of the stacks to decide which node to pop. If stack st2 is empty or the top node of st1 is smaller than the top node of st2, it selects the node from tree 1.
 
-   ```cpp
-               while(root1) {
-                   st1.push(root1);
-                   root1 = root1->left;
-               }
-               while(root2) {
-                   st2.push(root2);
-                   root2 = root2->left;
-               }
-   ```
+12. **Pop and Process Node from St1**
+	```cpp
+	            root1 = st1.top();
+	```
+	Pops the top node from stack st1 and processes it.
 
-5. **Merge Elements from Stacks**:
-   - After both stacks are set up with left children, the code compares the top elements of each stack (the smallest unprocessed elements in each tree):
-     - If `st2` is empty or `st1` has a smaller value than `st2`, the top element of `st1` is added to the result, and traversal continues to the right child of that element in `root1`.
-     - Otherwise, the top element of `st2` is processed, added to the result, and traversal moves to its right child in `root2`.
+13. **Pop from St1**
+	```cpp
+	            st1.pop();
+	```
+	Removes the processed node from stack st1.
 
-   ```cpp
-               if(st2.empty() || (!st1.empty() && st1.top()->val < st2.top()->val)) {
-                   root1 = st1.top();
-                   st1.pop();
-                   res.push_back(root1->val);
-                   root1 = root1->right;
-               } else {
-                   root2 = st2.top();
-                   st2.pop();
-                   res.push_back(root2->val);
-                   root2 = root2->right;
-               }
-           }
-   ```
+14. **Add Value to Result**
+	```cpp
+	            res.push_back(root1->val);
+	```
+	Adds the value of the current node from tree 1 to the result vector.
 
-6. **Return the Result**:
-   - After processing all nodes, the result vector `res` contains all elements from both trees in sorted order.
+15. **Move to Right Child - Root1**
+	```cpp
+	            root1 = root1->right;
+	```
+	Moves to the right child of the current node in tree 1.
 
-   ```cpp
-           return res;
-       }
-   };
-   ```
+16. **Else Clause - Node Selection from St2**
+	```cpp
+	        } else {
+	```
+	If the condition is false, it selects the node from tree 2 (either st2 is not empty or the top node of st2 is smaller).
 
-### Complexity Analysis
+17. **Pop and Process Node from St2**
+	```cpp
+	            root2 = st2.top();
+	```
+	Pops the top node from stack st2 and processes it.
 
-- **Time Complexity**: \(O(m + n)\), where \(m\) and \(n\) are the number of nodes in `root1` and `root2`, respectively. Each node is visited exactly once, and the operations performed at each node are constant time.
-- **Space Complexity**: \(O(h1 + h2)\), where \(h1\) and \(h2\) are the heights of the two trees. The stacks store at most `h1` and `h2` nodes, respectively, which is the space needed for a complete in-order traversal.
+18. **Pop from St2**
+	```cpp
+	            st2.pop();
+	```
+	Removes the processed node from stack st2.
 
-### Conclusion
-This solution provides an efficient and scalable way to merge elements from two BSTs into a sorted list by simulating in-order traversal iteratively with two stacks. By managing left children and comparisons iteratively, the approach avoids recursion and minimizes space usage beyond the necessary result list. This algorithm is particularly effective for balanced BSTs, where the time complexity is close to linear, and is adaptable for trees with varying structures or heights.
+19. **Add Value to Result**
+	```cpp
+	            res.push_back(root2->val);
+	```
+	Adds the value of the current node from tree 2 to the result vector.
+
+20. **Move to Right Child - Root2**
+	```cpp
+	            root2 = root2->right;
+	```
+	Moves to the right child of the current node in tree 2.
+
+21. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the sorted result vector containing all elements from both trees.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n) - If both trees are balanced, the traversal and merging will take linear time.
+- **Average Case:** O(n) - The traversal and merging will always take linear time relative to the total number of nodes.
+- **Worst Case:** O(n) - The worst case occurs when the trees are skewed, but the time complexity remains linear in terms of node count.
+
+The time complexity is O(n), where n is the total number of nodes in both trees.
+
+### Space Complexity 💾
+- **Best Case:** O(h) - Even in the best case, the space complexity is determined by the height of the trees.
+- **Worst Case:** O(h) - The space complexity is O(h) where h is the height of the taller tree due to the stack space used during traversal.
+
+The space complexity is O(h), where h is the height of the taller tree.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/all-elements-in-two-binary-search-trees/description/)
 

@@ -14,97 +14,150 @@ img_src = ""
 youtube = "yc9CXLWctOU"
 youtube_upload_date="2023-09-02"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/yc9CXLWctOU/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings s1 and s2, both of length n, consisting of lowercase English letters. You can perform the following operation on any of the two strings: choose any two indices i and j such that i < j and the difference j - i is even, then swap the two characters at those indices in the string. Return true if you can make s1 and s2 equal, and false otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two strings, s1 and s2, each containing n lowercase English letters.
+- **Example:** `s1 = 'aceb', s2 = 'caeb'`
+- **Constraints:**
+	- s1 and s2 have the same length n.
+	- 1 <= n <= 10^5.
+	- s1 and s2 consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkStrings(string s1, string s2) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it's possible to make the two strings equal using the described operations, otherwise return false.
+- **Example:** `true`
+- **Constraints:**
+	- The output should be a boolean value indicating whether the strings can be made equal or not.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine if s1 can be transformed into s2 using the allowed swap operations.
+
+- For each character in s1 and s2, group them by their positions modulo 2 (even or odd indexed positions).
+- Compare the counts of characters in corresponding groups for s1 and s2.
+- If the counts match for both even and odd indexed positions, return true; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The problem assumes that swapping characters is the only allowed operation.
+- The strings can have repeated characters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s1 = 'aceb', s2 = 'caeb'`  \
+  **Explanation:** We can swap characters at indices 0 and 2 and then swap characters at indices 1 and 3 to make s1 equal to s2.
+
+- **Input:** `s1 = 'abe', s2 = 'bea'`  \
+  **Explanation:** It's not possible to transform s1 into s2 since there is no valid swap that can achieve this.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves checking if we can group characters of s1 and s2 based on their even and odd indexed positions, and verify that the counts of each character match.
+
+### Initial Thoughts 💭
+- The problem involves swapping characters at specific indices, so checking the counts of characters in different indexed groups is key.
+- By comparing character frequencies in the even and odd indexed groups of both strings, we can determine if it's possible to make the strings equal.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty strings are not allowed since the minimum length is 1.
+- The solution should efficiently handle large strings with up to 10^5 characters.
+- The strings may consist of identical characters or all distinct characters.
+- Ensure the solution works efficiently within the given constraint of 1 <= n <= 10^5.
+{{< dots >}}
+## Code 💻
+```cpp
+bool checkStrings(string s1, string s2) {
 
 int map[2][26] = {0}; // Initialize a 2D array with all elements set to 0
 
 for (int i = 0; i < s1.length(); i++) {
-    map[i % 2][s1[i] - 'a']++;
-    map[i % 2][s2[i] - 'a']--;
+map[i % 2][s1[i] - 'a']++;
+map[i % 2][s2[i] - 'a']--;
 }
 
 for (int i = 0; i < 26; i++) {
-    if (map[0][i] != 0 || map[1][i] != 0) return false;
+if (map[0][i] != 0 || map[1][i] != 0) return false;
 }
 
 return true;}
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to determine if two strings `s1` and `s2` can be made equivalent by swapping adjacent characters within each string. The characters in `s1` and `s2` can only be swapped if they share the same parity (i.e., they are either both in even positions or both in odd positions). This means the even indexed characters of `s1` can only be swapped with other even indexed characters, and the odd indexed characters of `s1` can only be swapped with other odd indexed characters, with the same rule applying to `s2`.
-
-The goal is to check whether, after performing all possible swaps within each string, both strings can become identical.
-
-### Approach
-
-The solution to this problem relies on two key observations:
-1. **Character Frequency Matching:** After performing all possible adjacent swaps, the characters in even-indexed positions in `s1` must match the characters in even-indexed positions in `s2`. Similarly, the characters in odd-indexed positions in `s1` must match the characters in odd-indexed positions in `s2`.
-2. **Sorting Mechanism:** Instead of directly performing the swaps, we can think of the problem as verifying whether the sorted even-indexed and odd-indexed characters of both strings are the same. If they are, then the strings can be made equivalent through swaps.
-
-To implement this approach:
-- We keep track of the counts of characters in both the even and odd positions for `s1` and `s2`.
-- We use a 2D array, `map[2][26]`, to store the frequency of each character for the even and odd positions separately for both strings.
-- If the character frequencies for the even positions of `s1` match the frequencies for the even positions of `s2`, and similarly for the odd positions, then we can conclude that the strings can be made equivalent by swaps.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize a Frequency Map
-
-```cpp
-int map[2][26] = {0};
 ```
-- We initialize a 2D array `map` with dimensions `[2][26]` where the first dimension represents the even and odd positions, and the second dimension holds the count of each character from 'a' to 'z'. The 2D array is initialized to zero.
 
-#### Step 2: Count Characters for Even and Odd Positions
-```cpp
-for (int i = 0; i < s1.length(); i++) {
-    map[i % 2][s1[i] - 'a']++;     // Increment the count for the character in s1
-    map[i % 2][s2[i] - 'a']--;     // Decrement the count for the character in s2
-}
-```
-- We loop through each index `i` of both `s1` and `s2`. For each index `i`:
-  - If `i` is even (`i % 2 == 0`), the character in `s1[i]` is counted as part of the even-position characters, and the character in `s2[i]` is counted for the odd-position characters, or vice versa for odd indices.
-  - This will allow us to track the frequency of characters in both the even and odd positions of `s1` and `s2` separately.
+This code checks if two strings can be made identical by swapping characters. It uses a 2D array to track character frequencies in both strings.
 
-#### Step 3: Check Character Frequencies for Match
-```cpp
-for (int i = 0; i < 26; i++) {
-    if (map[0][i] != 0 || map[1][i] != 0) return false;
-}
-```
-- After processing all the characters, we need to verify that the frequency of characters in both strings is the same for both even and odd indexed positions.
-- The `map[0][i]` holds the count of characters in the even positions, and `map[1][i]` holds the count for the odd positions. If there are any non-zero values in either of these arrays, it indicates that the character counts don't match, so we return `false` to indicate that the strings cannot be made equivalent by swaps.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	bool checkStrings(string s1, string s2) {
+	```
+	Start of the function to check if two strings are identical by swapping characters.
 
-#### Step 4: Return `true` if Strings Match
-```cpp
-return true;
-```
-- If all checks pass, meaning the frequency of characters in the even and odd positions match for both `s1` and `s2`, we return `true`, indicating that the two strings can be made equal through the allowed swaps.
+2. **Array Setup**
+	```cpp
+	int map[2][26] = {0}; // Initialize a 2D array with all elements set to 0
+	```
+	Creates a 2D array to track character frequencies for both strings (two rows, 26 columns for each alphabet letter).
 
-### Complexity
+3. **Loop Through Strings**
+	```cpp
+	for (int i = 0; i < s1.length(); i++) {
+	```
+	Iterates through the characters of both strings simultaneously.
 
-#### Time Complexity:
-- **O(n)**: The algorithm loops through each character of `s1` and `s2` once (where `n` is the length of the strings). Each operation inside the loop is constant time, so the overall time complexity is O(n).
+4. **Increment First String Frequency**
+	```cpp
+	map[i % 2][s1[i] - 'a']++;
+	```
+	Increments the frequency of the character in the first string (mapped to one of the rows in the array).
 
-#### Space Complexity:
-- **O(1)**: The space complexity is constant, as the `map` array size is fixed at `[2][26]`, which represents the 26 characters of the alphabet for the even and odd positions. No additional space is used that scales with the input size.
+5. **Decrement Second String Frequency**
+	```cpp
+	map[i % 2][s2[i] - 'a']--;
+	```
+	Decrements the frequency of the character in the second string (mapped to the other row in the array).
 
-### Conclusion
+6. **Final Check**
+	```cpp
+	for (int i = 0; i < 26; i++) {
+	```
+	Iterates through all the alphabet letters to check if the frequencies match.
 
-This solution efficiently checks whether two strings can be made equal through allowed swaps by focusing on character frequency matching in the even and odd indexed positions. It uses a simple frequency counting technique, which is both time-efficient and space-efficient. By utilizing the modulo operation to separate the even and odd indexed characters, the algorithm avoids the need for complex swap operations and directly compares character frequencies, making the solution optimal for large inputs.
+7. **Check Frequency**
+	```cpp
+	if (map[0][i] != 0 || map[1][i] != 0) return false;
+	```
+	If any character's frequency is non-zero in either row, return false, meaning the strings cannot be made equal.
+
+8. **End Function**
+	```cpp
+	return true;}
+	```
+	Returns true if all character frequencies match, meaning the strings can be made equal by swapping characters.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, as we are processing the string once to count the character frequencies.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is linear, as we need to store the character frequencies for even and odd indexed positions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-ii/description/)
 

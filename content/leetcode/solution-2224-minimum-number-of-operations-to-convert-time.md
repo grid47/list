@@ -14,101 +14,159 @@ img_src = ""
 youtube = "N_iV4VXnq6g"
 youtube_upload_date="2022-04-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/N_iV4VXnq6g/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two 24-hour formatted times, `current` and `correct`. Each time is represented in the format 'HH:MM', where HH is the hour (00 to 23) and MM is the minutes (00 to 59). In one operation, you can increase the current time by 1, 5, 15, or 60 minutes. Your task is to determine the minimum number of operations required to convert the `current` time to the `correct` time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two strings `current` and `correct`, both in the format 'HH:MM', where the time is represented as a 24-hour clock.
+- **Example:** `current = '08:30', correct = '09:20'`
+- **Constraints:**
+	- current and correct are in the format 'HH:MM'
+	- current <= correct
 
-{{< highlight cpp >}}
-class Solution {
-    int getTime(string &s) {
-        return stoi(s.substr(0, 2)) * 60 + stoi(s.substr(3));
-    }
-public:
-    int convertTime(string current, string correct) {
-        int diff = getTime(correct) - getTime(current), ops[4] = {60,15,5,1}, ans = 0;
-        for (int op : ops) {
-            ans += diff / op;
-            diff %= op;
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to convert the `current` time to the `correct` time.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The input strings `current` and `correct` will always be valid 24-hour time strings.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the difference in minutes between `current` and `correct`, then apply the largest operations first (60 minutes, 15 minutes, 5 minutes, and 1 minute) to minimize the number of operations.
 
-The problem asks to convert a given `current` time to a `correct` time by applying a series of time adjustments. The allowed operations are:
-- Add 60 minutes
-- Add 15 minutes
-- Add 5 minutes
-- Add 1 minute
+- Convert the current and correct times to minutes.
+- Calculate the difference between the two times in minutes.
+- Iterate over the available operations (60, 15, 5, and 1 minute) to minimize the number of operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The time difference will always be positive or zero.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: current = '08:30', correct = '09:20'`  \
+  **Explanation:** The difference is 50 minutes. We can first add 60 minutes (to make it 09:30), and then subtract 10 minutes to reach 09:20. This requires 2 operations.
 
-The goal is to determine the minimum number of operations required to convert the `current` time to the `correct` time. 
+- **Input:** `Input: current = '06:10', correct = '07:05'`  \
+  **Explanation:** The difference is 55 minutes. First, add 60 minutes (to make it 07:10), then subtract 5 minutes to reach 07:05. This requires 2 operations.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach involves converting both times into minutes, finding the difference, and applying the largest possible operations to minimize the number of steps required.
 
-To solve this problem, we can break it down into a few simple steps:
-1. **Calculate the Time Difference**: The first step is to find the difference in minutes between the `current` time and the `correct` time.
-2. **Apply Operations**: We then use the available operations (60, 15, 5, and 1 minute) to reduce the time difference to zero, while minimizing the number of operations.
-3. **Count the Operations**: For each available operation, divide the remaining time difference by the operation value to determine how many times that operation can be performed, and then update the remaining time difference.
-
-By starting with the largest operation (60 minutes) and working our way down to the smallest (1 minute), we ensure that the number of operations is minimized.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Convert Time String to Minutes
+### Initial Thoughts 💭
+- The time difference is key to solving this problem.
+- Using the largest increments (60 minutes) first can quickly reduce the time difference.
+{{< dots >}}
+### Edge Cases 🌐
+- The input is guaranteed to be valid and will always contain two time strings.
+- The time difference between `current` and `correct` is manageable, as no time will exceed 1440 minutes (24 hours).
+- When `current` is equal to `correct`, the output should be 0 operations.
+- current <= correct.
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
 int getTime(string &s) {
     return stoi(s.substr(0, 2)) * 60 + stoi(s.substr(3));
 }
-```
-- This helper function `getTime` converts the time string `s` in the format `"hh:mm"` into the total number of minutes since midnight. 
-- `stoi(s.substr(0, 2))` extracts the hour part of the time string, and `stoi(s.substr(3))` extracts the minute part. 
-- The total time is calculated by multiplying the hours by 60 (to convert hours into minutes) and adding the minutes.
-
-#### Step 2: Calculate the Difference Between Times
-```cpp
-int diff = getTime(correct) - getTime(current), ops[4] = {60, 15, 5, 1}, ans = 0;
-```
-- The variable `diff` represents the difference in minutes between `correct` and `current` times, calculated by calling `getTime` on both `correct` and `current`.
-- The array `ops` contains the allowed operations: 60 minutes, 15 minutes, 5 minutes, and 1 minute.
-- `ans` is initialized to 0 and will store the total number of operations needed.
-
-#### Step 3: Apply Operations to Minimize the Difference
-```cpp
-for (int op : ops) {
-    ans += diff / op;
-    diff %= op;
+public:
+int convertTime(string current, string correct) {
+    int diff = getTime(correct) - getTime(current), ops[4] = {60,15,5,1}, ans = 0;
+    for (int op : ops) {
+        ans += diff / op;
+        diff %= op;
+    }
+    return ans;
 }
 ```
-- The loop iterates through each operation in the `ops` array.
-  - For each operation `op`, we calculate how many times that operation can be applied to the remaining `diff` by performing integer division (`diff / op`).
-  - The result is added to `ans`, which keeps track of the total number of operations.
-  - After applying the operation, the remaining difference is updated using the modulus operation (`diff %= op`), which calculates the remainder after applying that operation.
 
-#### Step 4: Return the Result
-```cpp
-return ans;
-```
-- Finally, we return `ans`, which contains the total number of operations required to convert `current` to `correct` using the available operations.
+This code defines a solution class with a method `convertTime`, which calculates the number of operations required to convert one time string to another, using operations of 60, 15, 5, and 1 minute.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Declaration**
+	```cpp
+	class Solution {
+	```
+	This is the declaration of the class `Solution`, which contains the methods to solve the problem.
 
-#### Time Complexity:
-- **O(1)**: The time complexity of this solution is constant. 
-  - The helper function `getTime` takes constant time (as it only processes the time string), and the loop iterates through a fixed number of operations (4 operations: 60, 15, 5, and 1).
-  - Therefore, the overall time complexity is **O(1)**, which means it runs in constant time regardless of the input size.
+2. **Function Declaration**
+	```cpp
+	int getTime(string &s) {
+	```
+	The function `getTime` is defined to convert a time string `s` into an integer representing the total minutes.
 
-#### Space Complexity:
-- **O(1)**: The space complexity is also constant, **O(1)**, because the solution uses only a fixed amount of extra space: a few integer variables and an array of size 4 to store the operations.
+3. **Return Statement**
+	```cpp
+	    return stoi(s.substr(0, 2)) * 60 + stoi(s.substr(3));
+	```
+	This line of code converts the given time string `s` (in HH:MM format) into total minutes by extracting the hours and minutes separately.
 
-### Conclusion
+4. **Access Modifier**
+	```cpp
+	public:
+	```
+	This marks the beginning of the public section, where methods accessible outside the class will be defined.
 
-This solution is both time-efficient and space-efficient, with constant time and space complexity. The key idea is to reduce the time difference between the `current` and `correct` times by applying the largest possible operations first. By iterating through the available operations (60, 15, 5, 1), we minimize the number of operations needed to reach the correct time. The solution is optimal for this problem, ensuring that we efficiently calculate the required number of operations in a minimal amount of time and space.
+5. **Function Declaration**
+	```cpp
+	int convertTime(string current, string correct) {
+	```
+	The `convertTime` function is defined, which takes two time strings, `current` and `correct`, and calculates the number of operations to convert one into the other.
+
+6. **Variable Initialization**
+	```cpp
+	    int diff = getTime(correct) - getTime(current), ops[4] = {60,15,5,1}, ans = 0;
+	```
+	The difference in minutes between the correct and current times is calculated. The array `ops` contains the available operation durations (60, 15, 5, and 1 minute). The variable `ans` is initialized to 0 to keep track of the number of operations.
+
+7. **Loop**
+	```cpp
+	    for (int op : ops) {
+	```
+	A for loop iterates over each operation in `ops` to calculate how many times each operation can be performed.
+
+8. **Update Answer**
+	```cpp
+	        ans += diff / op;
+	```
+	For each operation `op`, the number of times it can be applied is added to `ans`, and the difference `diff` is reduced accordingly.
+
+9. **Update Difference**
+	```cpp
+	        diff %= op;
+	```
+	After performing the division, the remainder (`diff`) is updated to reflect the remaining time that couldn't be covered by the current operation.
+
+10. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	The function returns the total number of operations needed to convert the `current` time to the `correct` time.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), as only a constant number of operations are needed regardless of the time difference.
+- **Average Case:** O(1), since the number of available operations is fixed.
+- **Worst Case:** O(1), the operations do not depend on the size of the input times.
+
+The time complexity is constant because the solution always involves a fixed number of operations.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as no additional space is required.
+- **Worst Case:** O(1), since only a few variables are used.
+
+The space complexity is constant since the solution only uses a few variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/description/)
 

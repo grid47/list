@@ -14,123 +14,167 @@ img_src = ""
 youtube = "zhvKbUSFzQ8"
 youtube_upload_date="2022-10-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/zhvKbUSFzQ8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array 'nums', where each element represents a target on a number line, and an integer 'space'. A machine is available that can destroy all targets that can be represented by the formula nums[i] + c * space, where c is a non-negative integer. You need to choose an element from 'nums' to seed the machine such that it destroys the maximum number of targets. Return the minimum value from 'nums' that can seed the machine to destroy the most targets.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array 'nums' of positive integers and an integer 'space'.
+- **Example:** `nums = [4, 8, 10, 2, 3, 6], space = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^9
+	- 1 <= space <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int destroyTargets(vector<int>& nums, int space) {
-        int ans = INT_MAX;
-        unordered_map<int, int> mp;
-        int mx = INT_MIN;
-        for(int n: nums) {
-            int r = n % space;
-            mp[r]++;
-            if(mx < mp[r]) mx = mp[r];
-        }
-        for(int n : nums)
-        if(mx == mp[n %space]) ans = min(ans, n);
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum value from 'nums' that can be used to seed the machine and destroy the maximum number of targets.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- Return the smallest seed value in case of a tie.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum seed value from 'nums' that can destroy the maximum number of targets by utilizing the 'space' parameter.
+
+- 1. For each target in 'nums', calculate the remainder when divided by 'space'.
+- 2. Track the frequency of each remainder using a hash map.
+- 3. Identify the remainder with the highest frequency, which corresponds to the seed value that can destroy the most targets.
+- 4. In case of a tie (multiple remainders with the same frequency), return the smallest value that can seed the machine.
+{{< dots >}}
+### Problem Assumptions ✅
+- The 'nums' array will always contain positive integers and there will be at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 8, 10, 2, 3, 6], space = 3`  \
+  **Explanation:** The remainder when each element in 'nums' is divided by 3 is: [4 % 3 = 1, 8 % 3 = 2, 10 % 3 = 1, 2 % 3 = 2, 3 % 3 = 0, 6 % 3 = 0]. The frequency of remainders is: {1: 2, 2: 2, 0: 2}. In this case, there is a tie. The smallest value with the highest frequency is 2. Thus, the answer is 2.
+
+- **Input:** `nums = [5, 10, 15, 3, 8], space = 4`  \
+  **Explanation:** The remainder when each element in 'nums' is divided by 4 is: [5 % 4 = 1, 10 % 4 = 2, 15 % 4 = 3, 3 % 4 = 3, 8 % 4 = 0]. The frequency of remainders is: {1: 1, 2: 1, 3: 2, 0: 1}. The value with the highest frequency is 3, so the answer is 3.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will use a hash map to store the frequency of remainders when elements in 'nums' are divided by 'space'. The goal is to find the most frequent remainder and select the smallest number associated with it.
+
+### Initial Thoughts 💭
+- We need to count how often each remainder occurs when we divide each number in 'nums' by 'space'.
+- The key insight is that numbers with the same remainder when divided by 'space' can destroy similar targets, so we focus on maximizing the frequency of remainders.
+{{< dots >}}
+### Edge Cases 🌐
+- If 'nums' is empty, return an error or handle the case as appropriate.
+- The solution should handle up to 10^5 elements efficiently.
+- If all elements in 'nums' have the same value, the solution should return that value.
+- The solution should work efficiently with the maximum possible values for 'nums' and 'space'.
+{{< dots >}}
+## Code 💻
+```cpp
+int destroyTargets(vector<int>& nums, int space) {
+    int ans = INT_MAX;
+    unordered_map<int, int> mp;
+    int mx = INT_MIN;
+    for(int n: nums) {
+        int r = n % space;
+        mp[r]++;
+        if(mx < mp[r]) mx = mp[r];
     }
-};
-{{< /highlight >}}
----
+    for(int n : nums)
+    if(mx == mp[n %space]) ans = min(ans, n);
+    return ans;
+}
+```
 
-### Problem Statement:
-In this problem, we are given an array of integers `nums` and a positive integer `space`. The task is to find the smallest number in the array that can be divided by the largest frequency of remainders when divided by `space`. In other words, we want to find the number that, when divided by `space`, yields the most common remainder, and if there are multiple such numbers, we return the smallest one.
+This function finds the smallest number from the `nums` list that has the highest frequency of remainders when divided by `space`. The number is selected based on the condition that its remainder occurs the most frequently in the list.
 
-### Approach:
-The approach involves two main steps:
-1. **Finding the Most Frequent Remainder**:
-   We need to find the remainder when each number in `nums` is divided by `space`. Using a hash map (unordered_map in C++), we count the occurrences of each remainder. The remainder with the highest frequency is our target remainder.
-   
-2. **Finding the Smallest Number with the Most Frequent Remainder**:
-   After determining the most frequent remainder, we then iterate through the numbers in the array again. For each number, we calculate its remainder when divided by `space` and check if it matches the most frequent remainder. Among the numbers that match this remainder, we choose the smallest.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int destroyTargets(vector<int>& nums, int space) {
+	```
+	Defines the function `destroyTargets` that takes a vector of integers `nums` and an integer `space`, and returns the smallest integer from `nums` that satisfies the problem condition.
 
-### Code Breakdown (Step by Step):
+2. **Variable Initialization**
+	```cpp
+	    int ans = INT_MAX;
+	```
+	Initializes `ans` to the maximum possible value (INT_MAX) to later find the minimum value that satisfies the condition.
 
-Let’s break down the code into parts for better understanding:
+3. **Data Structure Initialization**
+	```cpp
+	    unordered_map<int, int> mp;
+	```
+	Initializes an unordered map `mp` to store the count of occurrences of each remainder when the elements of `nums` are divided by `space`.
 
-1. **Function Declaration**:
-   ```cpp
-   int destroyTargets(vector<int>& nums, int space)
-   ```
-   This function `destroyTargets` takes two parameters:
-   - `nums`: A vector of integers representing the array of numbers.
-   - `space`: A positive integer used to calculate remainders.
-   
-   It returns an integer — the smallest number in `nums` that can be divided by the most frequent remainder.
+4. **Variable Initialization**
+	```cpp
+	    int mx = INT_MIN;
+	```
+	Initializes `mx` to the smallest possible integer value (INT_MIN) to keep track of the maximum frequency of any remainder.
 
-2. **Variable Initialization**:
-   ```cpp
-   int ans = INT_MAX;
-   unordered_map<int, int> mp;
-   int mx = INT_MIN;
-   ```
-   - `ans`: Initialized to `INT_MAX`, which will eventually store the smallest number that meets the criteria.
-   - `mp`: An unordered map (`unordered_map<int, int>`) to store the frequency of each remainder when numbers are divided by `space`.
-   - `mx`: Initialized to `INT_MIN`, which will keep track of the maximum frequency of any remainder.
+5. **First Loop (Counting Remainders)**
+	```cpp
+	    for(int n: nums) {
+	```
+	Starts a loop to iterate through each element `n` in the `nums` list.
 
-3. **First Loop to Calculate Remainders and Their Frequencies**:
-   ```cpp
-   for(int n: nums) {
-       int r = n % space;
-       mp[r]++;
-       if(mx < mp[r]) mx = mp[r];
-   }
-   ```
-   This loop iterates through each number in the `nums` array:
-   - For each number `n`, we calculate the remainder `r = n % space` — this gives the remainder when `n` is divided by `space`.
-   - We then increment the count for this remainder in the map `mp[r]`.
-   - If the frequency of this remainder exceeds the current maximum frequency (`mx`), we update `mx` to this new higher frequency.
+6. **Remainder Calculation**
+	```cpp
+	        int r = n % space;
+	```
+	Calculates the remainder `r` when the element `n` is divided by `space`.
 
-   After this loop, the `mp` map contains the frequencies of all remainders, and `mx` contains the highest frequency.
+7. **Map Update**
+	```cpp
+	        mp[r]++;
+	```
+	Increments the count of the remainder `r` in the map `mp`.
 
-4. **Second Loop to Find the Smallest Number with the Most Frequent Remainder**:
-   ```cpp
-   for(int n : nums)
-       if(mx == mp[n %space]) ans = min(ans, n);
-   ```
-   This second loop iterates through the numbers in the `nums` array again:
-   - For each number `n`, we calculate the remainder `n % space`.
-   - If the frequency of this remainder matches the maximum frequency (`mx`), we update `ans` with the minimum of `ans` and `n`. This ensures that `ans` holds the smallest number that has the most frequent remainder.
+8. **Frequency Update**
+	```cpp
+	        if(mx < mp[r]) mx = mp[r];
+	```
+	Updates the value of `mx` if the frequency of remainder `r` exceeds the current maximum frequency.
 
-5. **Return the Result**:
-   ```cpp
-   return ans;
-   ```
-   Finally, the function returns `ans`, which holds the smallest number from `nums` that has the most frequent remainder when divided by `space`.
+9. **Second Loop (Finding the Minimum)**
+	```cpp
+	    for(int n : nums)
+	```
+	Starts a second loop to iterate over the `nums` list again to find the smallest number that satisfies the condition.
 
-### Complexity:
+10. **Condition Check**
+	```cpp
+	    if(mx == mp[n %space]) ans = min(ans, n);
+	```
+	If the frequency of the remainder of `n` matches the maximum frequency `mx`, updates `ans` to the smaller of its current value or `n`.
 
-1. **Time Complexity**:
-   - The time complexity of the first loop is \(O(N)\), where \(N\) is the size of the `nums` array. This loop iterates through all the numbers to calculate the remainders and their frequencies.
-   - The time complexity of the second loop is also \(O(N)\), as it iterates through the array again to find the smallest number with the most frequent remainder.
-   
-   Thus, the overall time complexity is:
-   \[
-   O(N)
-   \]
-   where \(N\) is the number of elements in `nums`.
+11. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the smallest number `ans` that satisfies the condition.
 
-2. **Space Complexity**:
-   - The space complexity is \(O(K)\), where \(K\) is the number of distinct remainders. In the worst case, the number of distinct remainders can be at most `space` (since remainders are values from 0 to `space-1`).
-   
-   Therefore, the space complexity is:
-   \[
-   O(S)
-   \]
-   where \(S\) is the value of `space`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion:
-The `destroyTargets` function efficiently solves the problem by calculating the remainders of all the numbers when divided by `space` and counting their frequencies using a hash map. By tracking the maximum frequency of any remainder, the algorithm identifies the remainder that occurs most frequently. Then, by iterating through the `nums` array again, it finds the smallest number corresponding to the most frequent remainder.
+We only need to loop through the array once to calculate remainders and update the hash map.
 
-The time complexity of the solution is linear with respect to the size of the input array, making it efficient for large inputs. The space complexity is dependent on the value of `space`, but it remains manageable for typical inputs. This solution is optimal for the problem and provides a clear, concise approach to finding the desired result.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We use additional space for the hash map to store remainders, which is proportional to the size of the input.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/destroy-sequential-targets/description/)
 

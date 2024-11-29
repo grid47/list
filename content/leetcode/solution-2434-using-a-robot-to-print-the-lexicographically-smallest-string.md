@@ -14,157 +14,216 @@ img_src = ""
 youtube = "-8gRuQFSuX8"
 youtube_upload_date="2022-10-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/-8gRuQFSuX8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` and a robot that starts with an empty string `t`. The robot can perform two operations: one, it can remove the first character of string `s` and append it to `t`, and two, it can remove the last character of string `t` and write it down. The goal is to return the lexicographically smallest string that can be written on paper using these operations.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string `s` consisting of lowercase English letters.
+- **Example:** `s = "hello"`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- s consists of only lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    char low(vector<int> &frq) {
-        for(int i = 0; i < 26; i++)
-            if(frq[i] != 0) return 'a'+i;
-        return 'z';
-    }
-    
-    string robotWithString(string s) {
-        
-        vector<int> frq(26, 0);
-        for(char c: s)
-            frq[c - 'a']++;
-        
-        stack<int> t;
-        string ans = "";
-        
-        for(char c : s) {
-            t.push(c);
-            frq[c - 'a']--;
-            while(!t.empty() && t.top() <= low(frq)) {
-                ans += t.top();
-                t.pop();
-            }
-        }
-        
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically smallest string that can be written on paper.
+- **Example:** `Output: "ehllo"`
+- **Constraints:**
+	- The string must be lexicographically smallest.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** We need to determine the lexicographically smallest string that can be obtained by performing the allowed operations on `s` and `t`.
 
-The problem asks you to design a solution that simulates a robot processing a string `s` using a stack. The robot processes the string from left to right, and at each step, it can either push the current character into the stack or pop the stack if it satisfies a specific condition. After processing the entire string, the robot must return a lexicographically smallest string that can be formed by performing the push and pop operations on the stack.
+- 1. Traverse through the string `s` and push its characters onto the stack `t`.
+- 2. After each push, check if the top character of `t` is lexicographically smaller than any remaining character in `s` and pop the character from `t` if it is.
+- 3. Keep a record of the characters written down on paper to form the result string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `s` contains only lowercase English letters.
+- The solution must efficiently handle input strings up to the maximum length of 10^5.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "hello"`  \
+  **Explanation:** In this example, the robot will push the characters from `s` onto `t` and pop the smallest character to write down on paper. The smallest lexicographical string that can be written down is "ehllo".
 
-Specifically, you are given a string `s`, and you need to determine the lexicographically smallest string that can be obtained by the following operations:
-1. The robot processes the string `s` left to right.
-2. The robot can push the current character into a stack.
-3. At any point, the robot can pop from the stack and add the character to the result string, but it can only pop a character if it is lexicographically smaller than or equal to all the remaining characters in the string that have not yet been processed.
+- **Input:** `s = "abc"`  \
+  **Explanation:** For the string `s = 'abc'`, the robot can directly pop all the characters from `t` to get the string "abc" written on paper.
 
-The goal is to return the resulting string after applying these operations optimally.
+{{< dots >}}
+## Approach 🚀
+The solution relies on using a stack to simulate the operations of the robot. By comparing characters in `s` and keeping track of the smallest lexicographical order, we can determine the correct sequence of characters to write down.
 
-### Approach
-
-To solve this problem optimally, we need to simulate the robot's behavior using a stack while ensuring that the resulting string is the lexicographically smallest string that can be formed.
-
-Key observations to consider:
-- The robot can only pop characters from the stack when the character at the top of the stack is lexicographically smaller than or equal to the smallest remaining character in the string that has not yet been processed.
-- To efficiently track the smallest remaining character, we maintain the frequency of each character that remains to be processed.
-- The robot should pop from the stack only when it can guarantee that doing so does not prevent it from forming the smallest possible result.
-
-The approach consists of the following steps:
-1. **Frequency Calculation**: We start by calculating the frequency of each character in the string, as this will help us determine the smallest remaining character.
-2. **Simulate Stack Operations**: As we process the string from left to right, we push characters onto the stack and pop them when necessary to form the lexicographically smallest result.
-3. **Pop Condition**: We will pop from the stack if the top character of the stack is lexicographically smaller than or equal to the smallest character that remains in the string.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Frequency Array
-
+### Initial Thoughts 💭
+- We need to ensure that the robot writes the lexicographically smallest string by carefully selecting which characters to pop from `t`.
+- We can leverage a stack to store characters and write them down when the smallest available option is at the top of the stack.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string `s` will never be empty, as the length constraint ensures at least one character.
+- The solution must efficiently handle strings with a length of up to 10^5.
+- Consider the case when `s` is already sorted lexicographically.
+- Ensure the solution handles strings where multiple operations might occur simultaneously.
+{{< dots >}}
+## Code 💻
 ```cpp
-vector<int> frq(26, 0);
-for(char c: s)
-    frq[c - 'a']++;
-```
 
-- We initialize an array `frq` of size 26 to store the frequency of each character in the input string `s`.
-- We iterate through the string `s`, and for each character `c`, we increment the corresponding frequency in `frq`. The character `c` is converted to an index by subtracting `'a'` from it (since `'a'` has ASCII value 97 and we need indices 0 to 25 for the 26 letters).
-
-#### Step 2: Initialize Stack and Result String
-
-```cpp
-stack<int> t;
-string ans = "";
-```
-
-- We initialize an empty stack `t` to simulate the robot's stack operations.
-- We also initialize an empty string `ans` to store the final result after processing the string.
-
-#### Step 3: Iterate Through the String and Process Each Character
-
-```cpp
-for(char c : s) {
-    t.push(c);
-    frq[c - 'a']--;
-```
-
-- We iterate through the string `s` character by character.
-- For each character `c`, we push it onto the stack `t`.
-- We decrement the frequency of the current character `c` because it has been processed.
-
-#### Step 4: Check and Pop Characters from the Stack
-
-```cpp
-while(!t.empty() && t.top() <= low(frq)) {
-    ans += t.top();
-    t.pop();
-}
-```
-
-- After pushing the character onto the stack, we enter a while loop where we check if we can pop characters from the stack.
-- The condition for popping is that the character at the top of the stack must be lexicographically smaller than or equal to the smallest character that remains in the string (which is determined by the `low(frq)` function).
-- If this condition is met, we pop the character from the stack and add it to the result string `ans`.
-
-#### Step 5: Determine the Smallest Remaining Character
-
-```cpp
 char low(vector<int> &frq) {
     for(int i = 0; i < 26; i++)
-        if(frq[i] != 0) return 'a' + i;
+        if(frq[i] != 0) return 'a'+i;
     return 'z';
+}
+
+string robotWithString(string s) {
+    
+    vector<int> frq(26, 0);
+    for(char c: s)
+        frq[c - 'a']++;
+    
+    stack<int> t;
+    string ans = "";
+    
+    for(char c : s) {
+        t.push(c);
+        frq[c - 'a']--;
+        while(!t.empty() && t.top() <= low(frq)) {
+            ans += t.top();
+            t.pop();
+        }
+    }
+    
+    return ans;
 }
 ```
 
-- The `low` function determines the smallest character that remains in the string by checking the frequency array `frq`. It iterates over the array, and the first character with a non-zero frequency is the smallest remaining character.
-- This function helps us decide when we can safely pop from the stack to ensure the result is lexicographically smallest.
+The function 'robotWithString' generates a string by using a stack to manage character frequencies and ensures the characters are placed in lexicographical order using a helper function 'low'. It iterates through the input string 's', adjusting the stack and frequency count, and builds the resulting string.
 
-#### Step 6: Return the Final Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	char low(vector<int> &frq) {
+	```
+	The function 'low' is defined to find the lexicographically smallest character from the remaining available characters based on their frequencies.
 
-```cpp
-return ans;
-```
+2. **Loop**
+	```cpp
+	    for(int i = 0; i < 26; i++)
+	```
+	A loop is initiated to iterate through each character of the English alphabet (26 letters).
 
-- After processing the entire string, we return the final result string `ans` which contains the lexicographically smallest string that can be formed by the robot’s stack operations.
+3. **Frequency Check**
+	```cpp
+	        if(frq[i] != 0) return 'a'+i;
+	```
+	The first character with a non-zero frequency is returned as the smallest remaining character.
 
-### Complexity
+4. **Return**
+	```cpp
+	    return 'z';
+	```
+	If no remaining characters are found, return 'z' as a default.
 
-#### Time Complexity:
-The time complexity of this solution is **O(n)**, where `n` is the length of the string `s`. This is because:
-- We process each character of the string exactly once.
-- Each character is pushed and popped from the stack at most once, and both operations take constant time.
-- The `low` function runs in constant time **O(26)**, which is effectively constant since the number of characters is fixed at 26 (corresponding to the lowercase English alphabet).
+5. **Function Definition**
+	```cpp
+	string robotWithString(string s) {
+	```
+	The 'robotWithString' function is defined to transform the input string 's' using a stack to build a lexicographically ordered string.
 
-#### Space Complexity:
-The space complexity is **O(1)** (constant space) with respect to the size of the input string, because:
-- We use a fixed-size frequency array of size 26.
-- We use a stack and a result string, both of which are dependent on the input size `n`, but the space used does not grow beyond **O(n)**.
+6. **Vector Initialization**
+	```cpp
+	    vector<int> frq(26, 0);
+	```
+	Initialize a vector 'frq' to track the frequency of each letter in the input string 's'.
 
-### Conclusion
+7. **Frequency Calculation**
+	```cpp
+	    for(char c: s)
+	```
+	A loop is initiated to calculate the frequency of each character in the string 's'.
 
-This solution efficiently simulates the robot's stack operations while ensuring that the result string is lexicographically smallest. The approach utilizes a stack data structure, frequency tracking, and a greedy strategy to decide when to pop from the stack. The overall time complexity of **O(n)** and space complexity of **O(1)** (excluding the input/output) makes this solution optimal and scalable for large input sizes. The key insight is recognizing the importance of the frequency of remaining characters to make decisions about when to pop from the stack.
+8. **Frequency Increment**
+	```cpp
+	        frq[c - 'a']++;
+	```
+	For each character 'c' in the string, increment the frequency count in the 'frq' vector.
+
+9. **Stack Initialization**
+	```cpp
+	    stack<int> t;
+	```
+	Initialize an empty stack 't' to temporarily hold characters for the result string.
+
+10. **Result Initialization**
+	```cpp
+	    string ans = "";
+	```
+	Initialize an empty string 'ans' to store the final lexicographically ordered string.
+
+11. **Loop**
+	```cpp
+	    for(char c : s) {
+	```
+	A loop is started to iterate over each character 'c' in the string 's'.
+
+12. **Push to Stack**
+	```cpp
+	        t.push(c);
+	```
+	Push the current character 'c' onto the stack 't'.
+
+13. **Update Frequency**
+	```cpp
+	        frq[c - 'a']--;
+	```
+	Decrement the frequency of the character 'c' in the 'frq' vector, as it's been processed.
+
+14. **Check Stack**
+	```cpp
+	        while(!t.empty() && t.top() <= low(frq)) {
+	```
+	Check if the top of the stack contains a character that can be added to the result string based on the 'low' function.
+
+15. **Add to Result**
+	```cpp
+	            ans += t.top();
+	```
+	Add the character from the top of the stack to the result string 'ans'.
+
+16. **Pop from Stack**
+	```cpp
+	            t.pop();
+	```
+	Pop the character from the stack after it has been added to the result string.
+
+17. **Return Result**
+	```cpp
+	    return ans;
+	```
+	Return the final lexicographically ordered string 'ans'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where `n` is the length of the string `s`. We traverse the string once and perform constant-time operations for each character.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the use of a stack to store the characters of `s`.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/description/)
 

@@ -14,89 +14,110 @@ img_src = ""
 youtube = "lA9B6M4E_BQ"
 youtube_upload_date="2023-04-29"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/lA9B6M4E_BQ/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed array of positive integers 'nums' and an integer 'k'. You need to perform the following operation exactly k times to maximize your score: Select an element from nums, remove it from the array, and add a new element with a value one greater than the selected element. The score is increased by the value of the selected element. Your task is to return the maximum score you can achieve after performing the operation exactly k times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of positive integers nums and an integer k.
+- **Example:** `Input: nums = [3, 8, 5, 1], k = 4`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
+	- 1 <= k <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximizeSum(vector<int>& nums, int k) {
-        int i = *max_element(nums.begin(), nums.end());
-        return i * k + k * (k - 1) / 2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum score you can achieve after performing the operation exactly k times.
+- **Example:** `Output: 29`
+- **Constraints:**
+	- The output should be an integer representing the maximum score achievable.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the score by selecting the largest possible number from the array at each step and incrementing it.
 
-In this problem, you are given an integer array `nums` and an integer `k`. You need to calculate the maximum possible sum you can get after performing the following operation exactly `k` times:
+- Step 1: Find the largest number in the array.
+- Step 2: Perform the operation on this number, adding it to the score, and increment the number.
+- Step 3: Repeat the operation exactly k times, always selecting the largest number available.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array nums is non-empty, with at least one element.
+- It is guaranteed that the operation can be performed exactly k times.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [3, 8, 5, 1], k = 4`  \
+  **Explanation:** In this case, to maximize the score, we select the elements in the following order: 8, 9, 9, 10. The resulting score is 8 + 9 + 9 + 10 = 29.
 
-1. Choose any element from the array `nums`.
-2. Add that element's value to the sum.
-3. After selecting an element, increment it by `1` for the next operation.
+- **Input:** `Input: nums = [1, 1, 1], k = 2`  \
+  **Explanation:** Here, we choose the element 1 in the first operation, resulting in nums = [1, 1, 2]. In the second operation, we choose 2, resulting in nums = [1, 3, 2]. The score is 1 + 2 = 3.
 
-The challenge is to maximize the sum obtained by repeating the above operation `k` times.
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a greedy approach. In each step, we select the largest element from the array, add it to the score, and increment the value of that element.
 
-### Approach
-
-To solve this problem efficiently, let's break down the problem and consider the following steps:
-
-1. **Key Insight – Maximizing the Sum**:
-   - The problem asks us to perform `k` operations and each time, select an element from the array to add to the total sum.
-   - Each time we pick an element, we can increment it by `1` for the next operation. Hence, the first element selected will contribute its original value to the sum, the second will contribute its value incremented by `1`, the third will contribute its value incremented by `2`, and so on.
-   - In order to maximize the sum, we should always pick the largest element from the array. This is because the larger the starting number, the more it will contribute over multiple increments.
-   - Thus, the optimal approach is to find the maximum element in the array, then select it `k` times, incrementing it each time. This guarantees the largest possible sum.
-
-2. **Formula for Sum Calculation**:
-   - Let the maximum element in the array be `max_num`. The first time we pick this element, it contributes `max_num` to the sum.
-   - The second time, we pick the same element but incremented by `1`, so it contributes `max_num + 1`.
-   - The third time, it contributes `max_num + 2`, and so on until we have picked the element `k` times.
-   - This means the sum we want to compute can be represented by the following formula:
-     \[
-     \text{sum} = \text{max\_num} \times k + \frac{k \times (k-1)}{2}
-     \]
-     where `max_num * k` is the sum of the `k` selections of the maximum element, and `k * (k - 1) / 2` is the sum of the incremental values added to the maximum element in each subsequent pick.
-
-3. **Final Steps**:
-   - Find the maximum element in the array.
-   - Calculate the sum using the formula mentioned above.
-   - Return the result.
-
-### Code Breakdown
-
-Let’s go step by step through the implementation:
-
+### Initial Thoughts 💭
+- We need to maximize the score by selecting the largest element at each step, which can be efficiently done using a priority queue or sorting.
+- The largest element will always provide the highest score when selected, so the approach should focus on efficiently retrieving and updating the largest element.
+{{< dots >}}
+### Edge Cases 🌐
+- There will be no empty arrays as per the constraints.
+- The input size can be up to 100, so the solution should work efficiently for up to 100 elements.
+- If all elements are the same, we should select the largest element repeatedly, as incrementing the same number will maximize the score.
+- Ensure the solution works within the time limits for the maximum input size.
+{{< dots >}}
+## Code 💻
 ```cpp
-int i = *max_element(nums.begin(), nums.end());
+int maximizeSum(vector<int>& nums, int k) {
+    int i = *max_element(nums.begin(), nums.end());
+    return i * k + k * (k - 1) / 2;
+}
 ```
-- This line uses the C++ standard library function `max_element` to find the maximum element in the array `nums`. The `max_element` function returns an iterator pointing to the largest element in the range `[nums.begin(), nums.end()]`. We dereference this iterator to obtain the value of the maximum element and assign it to the variable `i`.
 
-```cpp
-return i * k + k * (k - 1) / 2;
-```
-- This line calculates and returns the maximum possible sum. The first part of the equation, `i * k`, represents the sum of `k` selections of the maximum element.
-- The second part, `k * (k - 1) / 2`, calculates the sum of the incremental values for each subsequent selection. This sum is derived from the arithmetic progression: `0 + 1 + 2 + ... + (k-1)`, which can be simplified using the formula for the sum of the first `n` integers: \( \frac{n \times (n - 1)}{2} \).
-- The sum of these two parts is then returned as the result.
+This function calculates the maximum sum of the sequence generated by adding k to the maximum element of the input array, followed by the sum of integers from 0 to (k-1). The code utilizes a simple formula to compute the result.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int maximizeSum(vector<int>& nums, int k) {
+	```
+	This line defines the function maximizeSum, which takes in a vector of integers (nums) and an integer k as inputs. The goal is to maximize the sum of the sequence derived from these inputs.
 
-- **Time Complexity**: 
-   - The most computationally expensive part of this solution is finding the maximum element in the array. This is done using the `max_element` function, which has a time complexity of **O(n)**, where `n` is the number of elements in the array `nums`.
-   - The rest of the operations, including calculating the sum, are constant time operations. Hence, the overall time complexity is **O(n)**.
+2. **Function Call**
+	```cpp
+	    int i = *max_element(nums.begin(), nums.end());
+	```
+	Here, we find the maximum element in the input vector using the max_element function. The result is stored in the variable 'i'. This step ensures we are working with the largest number in the sequence.
 
-- **Space Complexity**:
-   - The space complexity is **O(1)**, since we are only using a few variables to store intermediate values (e.g., `i` for the maximum element and the result of the sum calculation). There are no additional data structures that grow with the size of the input, making the space complexity constant.
+3. **Mathematical Operations**
+	```cpp
+	    return i * k + k * (k - 1) / 2;
+	```
+	This line calculates the final result. The first part, i * k, gives the sum of the largest element (i) repeated k times. The second part, k * (k - 1) / 2, is the sum of the integers from 0 to (k-1), which is added to the result.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-The solution efficiently calculates the maximum sum that can be obtained by performing `k` operations, selecting the maximum element from the array `k` times and adding the incremental values. By leveraging the properties of arithmetic progressions and utilizing the built-in `max_element` function, the solution achieves an optimal time complexity of **O(n)**, which is efficient for the problem at hand.
+Sorting the array takes O(n log n) time, and each operation after sorting takes constant time, so the overall complexity is dominated by the sorting step.
 
-The solution is simple and concise, with constant space complexity, making it both time and space-efficient.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for the array or a max-heap.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-with-exactly-k-elements/description/)
 

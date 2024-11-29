@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "gRHnWbKiUIE"
 youtube_upload_date="2021-01-23"
 youtube_thumbnail="https://i.ytimg.com/vi/gRHnWbKiUIE/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,133 +28,122 @@ youtube_thumbnail="https://i.ytimg.com/vi/gRHnWbKiUIE/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes. The lowest common ancestor is defined as the lowest node that is an ancestor of both nodes p and q. A node can be a descendant of itself.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root of the binary tree and two nodes, p and q, whose lowest common ancestor is to be found.
+- **Example:** `Input: root = [4, 2, 6, 1, 3, 5, 7], p = 2, q = 6`
+- **Constraints:**
+	- The number of nodes in the tree is between 2 and 10^5.
+	- Node values are unique.
+	- Both p and q exist in the tree.
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(!root || root == p || root == q) return root;
-        TreeNode* left = lowestCommonAncestor(root->left, p, q);
-        TreeNode* right = lowestCommonAncestor(root->right, p, q);
-        
-        return !left? right: !right? left : root;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the node that represents the lowest common ancestor of nodes p and q.
+- **Example:** `Output: 4`
+- **Constraints:**
 
-### 🚀 Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the lowest common ancestor (LCA) of nodes p and q in the binary tree using a recursive approach.
 
-In this problem, we need to find the **Lowest Common Ancestor (LCA)** of two nodes in a **Binary Tree**. The LCA is the deepest node in the tree that is an ancestor of both nodes `p` and `q`. 
+- Start from the root node.
+- If the current node is null, return null.
+- If the current node is equal to either p or q, return that node.
+- Recursively search the left and right subtrees for p and q.
+- If both left and right subtrees return non-null values, the current node is the LCA.
+- If only one of the subtrees returns a non-null value, return that node.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a valid binary tree.
+- The nodes p and q are distinct and exist in the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [4, 2, 6, 1, 3, 5, 7], p = 2, q = 6`  \
+  **Explanation:** In this tree, the LCA of nodes 2 and 6 is 4, as 4 is the ancestor of both nodes.
 
-A binary tree is made up of nodes where each node has:
-- A value (`val`)
-- A left child (`left`)
-- A right child (`right`)
+- **Input:** `Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4`  \
+  **Explanation:** In this tree, the LCA of nodes 5 and 4 is 5, as 5 is the ancestor of node 4.
 
-Your task is to identify and return the **Lowest Common Ancestor** of nodes `p` and `q`.
+{{< dots >}}
+## Approach 🚀
+The problem can be solved using a recursive approach to find the lowest common ancestor in a binary tree by checking the presence of nodes p and q in the left and right subtrees.
 
----
-
-### 🧠 Approach
-
-This problem is a great opportunity to apply **recursion** in a **post-order traversal** style! Here's how we can approach the solution:
-
-1. **Base Case**: 
-   - If the current node is `NULL`, or if it matches either `p` or `q`, we return the current node.
-   - This base case is crucial because it tells us when to stop the recursion and start returning nodes.
-
-2. **Recursive Case**:
-   - Search the left and right subtrees of the current node for `p` and `q`.
-   - If one of `p` or `q` is found in both subtrees, the current node is their **Lowest Common Ancestor**.
-   - If one subtree returns a non-`NULL` node, that node must be the **LCA**.
-
-3. **Decision Making**:
-   - If the left and right recursive calls both return a non-`NULL` node, it means one node was found in the left and the other in the right, so the current node is the **LCA**.
-   - If only one of the recursive calls returns a non-`NULL` node, that node must be the **LCA**.
-
-It's like a treasure hunt in the tree, where we're trying to find the deepest common node between the paths from the root to `p` and `q`. 🌳✨
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let's break the code into smaller chunks to understand it clearly:
-
+### Initial Thoughts 💭
+- The binary tree structure allows us to search in both the left and right subtrees for the target nodes.
+- We can use recursion to traverse the tree and identify the common ancestor.
+- The key observation is that the LCA is found where one node is in the left subtree, and the other is in the right subtree, or when one of the nodes is the current node.
+{{< dots >}}
+### Edge Cases 🌐
+- The tree cannot be empty, as both p and q must exist in the tree.
+- Ensure that the solution can handle trees with up to 10^5 nodes efficiently.
+- If one of the nodes is the root node, the root itself is the LCA if the other node is in its subtree.
+- The solution should be efficient and handle the recursion stack well for large inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if(!root || root == p || root == q) return root;
+    TreeNode* left = lowestCommonAncestor(root->left, p, q);
+    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+    
+    return !left? right: !right? left : root;
+}
 ```
-- We define the `lowestCommonAncestor` function within a `Solution` class. The function accepts three parameters: the `root` of the tree, and the two nodes `p` and `q`.
 
-```cpp
-        if(!root || root == p || root == q) return root;
-```
-- **Base case**: If the `root` is `NULL` (no node to check) or if the `root` matches either `p` or `q`, we return the `root`. This means we've either reached a leaf node or found one of the nodes we are searching for.
+This recursive function finds the lowest common ancestor of two nodes `p` and `q` in a binary tree. It traverses the tree and returns the common ancestor when the nodes are found. The function checks for the base cases first, and then recursively searches in the left and right subtrees.
 
-```cpp
-        TreeNode* left = lowestCommonAncestor(root->left, p, q);
-        TreeNode* right = lowestCommonAncestor(root->right, p, q);
-```
-- We recursively search for `p` and `q` in the left and right subtrees. 
-- The result from the left subtree is stored in `left`, and the result from the right subtree is stored in `right`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+	```
+	Defines the `lowestCommonAncestor` function, which takes the root of the tree and two target nodes (`p` and `q`) as input and returns their lowest common ancestor.
 
-```cpp
-        return !left ? right : !right ? left : root;
-```
-- **Decision making**: Here's how we decide where the **LCA** is:
-  - If `left` is `NULL`, it means `p` and `q` aren't found in the left subtree, so we return `right`.
-  - If `right` is `NULL`, it means `p` and `q` aren't found in the right subtree, so we return `left`.
-  - If both `left` and `right` are non-`NULL`, it means `p` and `q` were found in both subtrees. Therefore, the current `root` must be the **Lowest Common Ancestor**.
+2. **Base Case Check**
+	```cpp
+	    if(!root || root == p || root == q) return root;
+	```
+	Checks for the base case: if the root is `null`, or if the root is one of the target nodes (`p` or `q`), then it returns the root as the lowest common ancestor.
 
----
+3. **Left Subtree Search**
+	```cpp
+	    TreeNode* left = lowestCommonAncestor(root->left, p, q);
+	```
+	Recursively calls `lowestCommonAncestor` on the left subtree of the current root. It searches for the common ancestor in the left subtree.
 
-### 📊 Complexity Analysis
+4. **Right Subtree Search**
+	```cpp
+	    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+	```
+	Recursively calls `lowestCommonAncestor` on the right subtree of the current root. It searches for the common ancestor in the right subtree.
 
-Now let's analyze the efficiency of our solution:
+5. **Return Result**
+	```cpp
+	    return !left? right: !right? left : root;
+	```
+	If one of the subtrees is `null`, it returns the non-null subtree (either `left` or `right`). If both subtrees are non-null, it means the current root is the lowest common ancestor, so it returns `root`.
 
-#### ⏱️ Time Complexity:
-- **O(n)**, where `n` is the number of nodes in the tree.
-  - In the worst case, we may need to visit every single node to find the **LCA**, especially in unbalanced trees.
-  - In a balanced tree, the time complexity would still be **O(n)**, because we still explore all nodes, but the depth is more manageable.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n) for a balanced tree, where n is the number of nodes.
+- **Average Case:** O(log n) assuming the tree is balanced.
+- **Worst Case:** O(n) for a skewed tree, where n is the number of nodes.
 
-#### 💾 Space Complexity:
-- **O(h)**, where `h` is the height of the tree.
-  - This is the space needed for the recursive call stack.
-  - In the worst case (unbalanced tree), the height `h` is **O(n)**, so the space complexity would be **O(n)**.
-  - In the best case (balanced tree), the height `h` is **O(log n)**, so the space complexity would be **O(log n)**.
+The time complexity is determined by the depth of the tree, which can be log n for a balanced tree or n for a skewed tree.
 
----
+### Space Complexity 💾
+- **Best Case:** O(1) if we use an iterative approach.
+- **Worst Case:** O(h), where h is the height of the tree (due to recursion stack).
 
-### 🏁 Conclusion
+The space complexity depends on the height of the tree because of the recursion stack.
 
-By leveraging recursion, we can efficiently find the **Lowest Common Ancestor (LCA)** of two nodes in a **Binary Tree**. Here's what we've learned:
+**Happy Coding! 🎉**
 
-- **Base Case**: If we reach `NULL` or find `p` or `q`, we return the current node.
-- **Recursive Search**: We search both the left and right subtrees.
-- **Decision Making**: The node where the paths to `p` and `q` split is the **LCA**.
-
-This approach is not only intuitive but also powerful, as it works well for both balanced and unbalanced trees. Plus, the time complexity of **O(n)** and space complexity of **O(h)** ensures that it handles even large trees efficiently.
-
-#### Key Takeaways:
-- The recursive approach is simple and effective.
-- The space complexity is manageable, and the time complexity is linear with respect to the number of nodes in the tree.
-- This solution is commonly used in interviews and competitive programming due to its clarity and efficiency.
-
----
-
-Ready to tackle the problem yourself? 🧑‍💻 Try implementing it, and don't forget to test it with different tree shapes! 🌟
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)
 

@@ -14,109 +14,145 @@ img_src = ""
 youtube = "n6Wg_vntUAA"
 youtube_upload_date="2023-06-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/n6Wg_vntUAA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array `nums` containing distinct positive integers. Your task is to find and return any number from the array that is neither the smallest nor the largest number, or return -1 if no such number exists.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single array `nums` of integers.
+- **Example:** `nums = [4, 2, 1, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
+	- All values in nums are distinct.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findNonMinOrMax(vector<int>& A) {
-        if (A.size() < 3)
-            return -1;
-        int mx = max(A[0], max(A[1], A[2])), mn = min(A[0], min(A[1], A[2]));
-        for (int i = 0; i < 3; ++i)
-            if (mn < A[i] && A[i] < mx)
-                return A[i];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return any integer from the array that is neither the minimum nor the maximum value, or return -1 if no such number exists.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find an integer from the array that is neither the smallest nor the largest number.
+
+- Check if the array has less than 3 elements. If true, return -1.
+- Find the minimum and maximum values in the array.
+- Loop through the array and return any number that is not the minimum or maximum.
+{{< dots >}}
+### Problem Assumptions ✅
+- All integers in the array are distinct.
+- The array length is at least 2.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [4, 2, 1, 3]`  \
+  **Explanation:** In this example, the minimum value is 1 and the maximum value is 4. Therefore, 2 or 3 can be valid answers.
+
+- **Input:** `nums = [1, 2]`  \
+  **Explanation:** Since the array has only two elements, no element is both non-minimal and non-maximal. Therefore, the output is -1.
+
+{{< dots >}}
+## Approach 🚀
+The problem is solved by finding the minimum and maximum values, then checking for any element that lies between them.
+
+### Initial Thoughts 💭
+- We can solve the problem by simply finding the min and max values in the array.
+- The problem is straightforward with a time complexity of O(n).
+- If the array has less than 3 elements, return -1 immediately.
+{{< dots >}}
+### Edge Cases 🌐
+- The array has less than 3 elements.
+- Consider testing with arrays of size 100.
+- The array has only two distinct values.
+- All values are distinct, so the result is deterministic.
+{{< dots >}}
+## Code 💻
+```cpp
+int findNonMinOrMax(vector<int>& A) {
+    if (A.size() < 3)
         return -1;
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to find an element in an array that is neither the minimum nor the maximum. If such an element exists, return it; otherwise, return -1. However, there is a constraint that the size of the array is at least 3. If the size of the array is less than 3, the solution must return -1 as it's impossible to find a middle element.
-
-The challenge becomes simpler when we focus on the first three elements of the array because in any array of at least 3 elements, if a non-minimum or non-maximum element exists, it must be one of the first three elements. This insight helps in optimizing the problem.
-
-### Approach
-
-To solve the problem efficiently, we can break it down into the following steps:
-
-1. **Initial Check for Size**: If the array has fewer than 3 elements, return -1 right away because we cannot have a middle element to compare.
-  
-2. **Find the Maximum and Minimum of the First Three Elements**: Since we are interested in finding an element that is neither the maximum nor the minimum, the first logical step is to examine the first three elements of the array. In any array of size 3 or more, the answer (if it exists) must be one of the first three elements. Therefore, we calculate the minimum and maximum of the first three elements to narrow down our search.
-
-3. **Check the Middle Element**: After identifying the minimum and maximum of the first three elements, iterate through these three elements and check if any of them lie between the minimum and maximum (i.e., they are not the minimum or maximum). This element will be the one that is neither the smallest nor the largest.
-
-4. **Return the Result**: If an element is found that is neither the minimum nor the maximum, return that element. If no such element exists, return -1.
-
-### Code Breakdown (Step by Step)
-
-Let’s break the code into its key steps to understand the logic more clearly.
-
-#### Step 1: Initial Size Check
-
-```cpp
-if (A.size() < 3)
+    int mx = max(A[0], max(A[1], A[2])), mn = min(A[0], min(A[1], A[2]));
+    for (int i = 0; i < 3; ++i)
+        if (mn < A[i] && A[i] < mx)
+            return A[i];
     return -1;
+}
 ```
 
-- The first check in the code is to determine whether the size of the array is less than 3. If so, there is no way to find a middle element, as an array of less than 3 elements cannot have both a minimum and a maximum and still leave room for a non-minimum, non-maximum element. Hence, if the size is less than 3, the function returns -1 immediately.
+This function finds a number in the array `A` that is neither the minimum nor the maximum value in the first three elements. If such a number is found, it is returned. Otherwise, -1 is returned.
 
-#### Step 2: Find Maximum and Minimum of the First Three Elements
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findNonMinOrMax(vector<int>& A) {
+	```
+	The function `findNonMinOrMax` is defined to take a reference to a vector of integers `A` as input and return an integer.
 
-```cpp
-int mx = max(A[0], max(A[1], A[2])), mn = min(A[0], min(A[1], A[2]));
-```
+2. **Condition Check**
+	```cpp
+	    if (A.size() < 3)
+	```
+	The function checks if the size of the vector `A` is less than 3. If true, it returns -1 as a result, since it requires at least 3 elements to find a non-minimum and non-maximum value.
 
-- Here, we compute the maximum and minimum of the first three elements in the array. The reason we focus on just the first three elements is based on the realization that in any array of size 3 or greater, the element that is neither the minimum nor the maximum will be one of the first three elements. 
+3. **Return Statement**
+	```cpp
+	        return -1;
+	```
+	If the size of the vector `A` is less than 3, the function immediately returns -1.
 
-- We use the `max` and `min` functions to calculate the largest (`mx`) and smallest (`mn`) values among the first three elements.
+4. **Variable Initialization**
+	```cpp
+	    int mx = max(A[0], max(A[1], A[2])), mn = min(A[0], min(A[1], A[2]));
+	```
+	The variables `mx` and `mn` are initialized to store the maximum and minimum values among the first three elements of the vector `A`.
 
-#### Step 3: Iterate Through the First Three Elements to Find the Middle Element
+5. **Loop Start**
+	```cpp
+	    for (int i = 0; i < 3; ++i)
+	```
+	A for-loop is initiated to iterate over the first three elements of the vector `A`.
 
-```cpp
-for (int i = 0; i < 3; ++i)
-    if (mn < A[i] && A[i] < mx)
-        return A[i];
-```
+6. **Conditional Check**
+	```cpp
+	        if (mn < A[i] && A[i] < mx)
+	```
+	Inside the loop, the function checks if the current element `A[i]` is greater than the minimum value `mn` and less than the maximum value `mx`. If true, this element is returned as the result.
 
-- In this loop, we check each of the first three elements (`A[0]`, `A[1]`, `A[2]`). If an element is strictly greater than the minimum and strictly less than the maximum (i.e., it lies between the two), we return it immediately as the result.
-  
-- The condition `mn < A[i] && A[i] < mx` checks if the element is not the smallest or the largest, which means it is neither the minimum nor the maximum in the set of the first three elements. If such an element exists, we return it right away.
+7. **Return Statement**
+	```cpp
+	            return A[i];
+	```
+	If the current element satisfies the condition of being neither the minimum nor the maximum, it is returned as the result.
 
-#### Step 4: Return -1 If No Valid Element is Found
+8. **Return Statement**
+	```cpp
+	    return -1;
+	```
+	If no element satisfies the condition within the loop, the function returns -1, indicating no such element exists.
 
-```cpp
-return -1;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) when there are only two elements.
+- **Average Case:** O(n) where n is the number of elements in the array.
+- **Worst Case:** O(n) because we need to find the minimum and maximum of the array.
 
-- If none of the first three elements satisfy the condition (i.e., they are either the minimum or the maximum), we return -1, indicating that there is no non-minimum or non-maximum element in the first three elements.
+Finding the minimum and maximum takes linear time.
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1) when the array has minimal elements.
+- **Worst Case:** O(1) because we only store a few extra variables.
 
-#### Time Complexity
+The space complexity is constant as no additional space is required.
 
-- **Initial Size Check**: The first step, checking whether the array size is less than 3, is done in constant time, \(O(1)\).
-  
-- **Finding Maximum and Minimum**: The calculation of the maximum and minimum of the first three elements also takes constant time, \(O(1)\), because we only need to compare three values.
+**Happy Coding! 🎉**
 
-- **Iteration Through First Three Elements**: The loop that checks each of the first three elements also runs in constant time, \(O(1)\).
-
-Thus, the overall time complexity is \(O(1)\), which means that the function operates in constant time regardless of the size of the input array.
-
-#### Space Complexity
-
-- The space complexity is \(O(1)\) because we are only using a few variables (`mx`, `mn`, and the loop variable `i`) to store intermediate values. No extra space is used that grows with the size of the input array.
-
-### Conclusion
-
-The solution is optimal and runs in constant time, \(O(1)\), due to the use of simple comparisons and direct access to the first three elements of the array. It efficiently solves the problem by only focusing on the first three elements, where any element that is neither the minimum nor the maximum must exist. The code is easy to understand, concise, and works in constant time, making it suitable for large arrays as well. This is a perfect example of how recognizing problem constraints can lead to an efficient solution.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/neither-minimum-nor-maximum/description/)
 

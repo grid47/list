@@ -14,126 +14,174 @@ img_src = ""
 youtube = "VWRJBNP7uH8"
 youtube_upload_date="2023-12-23"
 youtube_thumbnail="https://i.ytimg.com/vi/VWRJBNP7uH8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string path where each character represents a movement direction ('N' for north, 'S' for south, 'E' for east, 'W' for west). Starting from the origin (0, 0), follow the path and check if you cross your own path at any point, meaning visiting a location more than once. Return true if the path crosses itself, and false otherwise.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string path consisting of 'N', 'S', 'E', and 'W', where each character represents a movement direction.
+- **Example:** `path = "NEWS"`
+- **Constraints:**
+	- 1 <= path.length <= 10^4
+	- path[i] is one of 'N', 'S', 'E', 'W'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool isPathCrossing(string path) {
-        int x = 0,y=0;
-        set<pair<int,int>>s;
-        s.insert({0,0});
-        for(char p: path){
-            if(p == 'N') y++;
-            else if(p == 'S')y--;
-            else if(p == 'E') x++;
-            else x--;
-            
-            if(s.find({x,y}) != s.end()) return true;
-            else s.insert({x,y});
-        }
-        return false;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the path crosses itself, meaning you visit a location you have already been to. Otherwise, return false.
+- **Example:** `Output: false`
+- **Constraints:**
+	- The path will contain at least one character.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to track the movements and check if any position is visited more than once using a set data structure.
+
+- Initialize a set to store visited coordinates.
+- Iterate through the characters in the path, updating the current position based on the direction.
+- If the current position has been visited before, return true.
+- If the loop finishes without revisiting a position, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The path consists of valid directions only.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `path = "NEWS"`  \
+  **Explanation:** The path starts at the origin, moves north, then east, then west, and finally south, visiting no location twice, so it does not cross itself.
+
+- **Input:** `path = "NESWN"`  \
+  **Explanation:** After moving north, east, south, west, and then north again, the path revisits the origin, so it crosses itself.
+
+{{< dots >}}
+## Approach 🚀
+We can efficiently determine if the path crosses by keeping track of each position we visit using a set. If we ever encounter a position that we have already visited, we know the path crosses.
+
+### Initial Thoughts 💭
+- A set is ideal for this problem since it allows constant time lookups to check if a location has been visited.
+- By iterating over the path and updating our current position, we can easily check if any position has been revisited.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input path is not valid since the constraints ensure at least one move.
+- The solution must handle path lengths up to 10^4 efficiently.
+- If the path moves in a complete loop, it will return true since the origin will be revisited.
+- The solution must be efficient enough to handle paths with lengths up to 10^4.
+{{< dots >}}
+## Code 💻
+```cpp
+bool isPathCrossing(string path) {
+    int x = 0,y=0;
+    set<pair<int,int>>s;
+    s.insert({0,0});
+    for(char p: path){
+        if(p == 'N') y++;
+        else if(p == 'S')y--;
+        else if(p == 'E') x++;
+        else x--;
+        
+        if(s.find({x,y}) != s.end()) return true;
+        else s.insert({x,y});
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine if a path crosses itself given a sequence of movements in a 2D plane. The path is described by a string consisting of the characters 'N', 'S', 'E', and 'W', representing movements in the north, south, east, and west directions, respectively. The goal is to return `true` if the path crosses itself at any point and `false` otherwise.
-
-### Approach
-
-To solve this problem, we can use a set to track the coordinates of all the points visited during the traversal of the path. Each time we move in a given direction, we will check if we have already visited the new coordinates. If we find that a coordinate has been visited before, it indicates that the path has crossed itself.
-
-1. **Initialize Coordinates**: Start at the origin `(0, 0)`, which will be our initial position.
-2. **Track Visited Positions**: Use a set to keep track of all visited coordinates, starting with the origin.
-3. **Iterate Over Movements**: For each character in the input string, update the current position based on the movement indicated by the character.
-4. **Check for Crossings**: After each movement, check if the new position already exists in the set of visited positions.
-5. **Return Result**: If a crossing is detected, return `true`. If no crossings are found after processing all movements, return `false`.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    bool isPathCrossing(string path) {
+    return false;
+}
 ```
-This line declares a class `Solution` with a public member function `isPathCrossing`, which takes a string `path` as an argument.
 
-#### Step 1: Initialize Variables
+The `isPathCrossing` function checks if a given path crosses itself. It simulates the movement along the path and keeps track of visited coordinates using a set. If a coordinate is revisited, it returns `true`; otherwise, it returns `false`.
 
-```cpp
-        int x = 0, y = 0;
-        set<pair<int, int>> s;
-        s.insert({0, 0});
-```
-- `x` and `y` are initialized to `0`, representing the starting point `(0, 0)`.
-- A set `s` of pairs is used to store the coordinates of all visited points. The initial position `(0, 0)` is inserted into the set.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	bool isPathCrossing(string path) {
+	```
+	The function `isPathCrossing` takes a string `path` as input and returns a boolean indicating whether the path crosses itself.
 
-#### Step 2: Iterate Over Each Character
+2. **Variable Initialization**
+	```cpp
+	    int x = 0, y = 0;
+	```
+	Initialize `x` and `y` to 0. These variables represent the current position along the path on a 2D grid, starting at the origin (0,0).
 
-```cpp
-        for(char p: path) {
-```
-This for loop iterates through each character `p` in the `path` string.
+3. **Set Initialization**
+	```cpp
+	    set<pair<int, int>> s;
+	```
+	Initialize a set `s` to store the visited coordinates as pairs of integers. This will help track previously visited positions.
 
-#### Step 3: Update Coordinates Based on Direction
+4. **Set Insertion**
+	```cpp
+	    s.insert({0, 0});
+	```
+	Insert the starting coordinate (0,0) into the set `s` as the initial position.
 
-```cpp
-            if(p == 'N') y++;
-            else if(p == 'S') y--;
-            else if(p == 'E') x++;
-            else x--;
-```
-- The coordinates are updated based on the direction indicated by the character:
-  - 'N' (north) increases the `y` coordinate.
-  - 'S' (south) decreases the `y` coordinate.
-  - 'E' (east) increases the `x` coordinate.
-  - 'W' (west) decreases the `x` coordinate.
+5. **Loop**
+	```cpp
+	    for(char p: path){
+	```
+	Start a loop to iterate over each character in the `path` string. Each character represents a direction to move.
 
-#### Step 4: Check for Crossing
+6. **Movement**
+	```cpp
+	        if(p == 'N') y++;
+	```
+	If the character is 'N' (North), increment `y` to move one unit up along the y-axis.
 
-```cpp
-            if(s.find({x, y}) != s.end()) return true;
-            else s.insert({x, y});
-```
-- After updating the coordinates, the code checks if the new position `(x, y)` is already in the set `s`.
-- If it is found, the function immediately returns `true`, indicating that the path crosses itself.
-- If not found, the new position is added to the set of visited coordinates.
+7. **Movement**
+	```cpp
+	        else if(p == 'S') y--;
+	```
+	If the character is 'S' (South), decrement `y` to move one unit down along the y-axis.
 
-#### Step 5: Return False if No Crossing Found
+8. **Movement**
+	```cpp
+	        else if(p == 'E') x++;
+	```
+	If the character is 'E' (East), increment `x` to move one unit to the right along the x-axis.
 
-```cpp
-        return false;
-    }
-};
-```
-- If the loop completes without finding a crossing, the function returns `false`, indicating that the path does not cross itself.
+9. **Movement**
+	```cpp
+	        else x--;
+	```
+	If the character is 'W' (West), decrement `x` to move one unit to the left along the x-axis.
 
-### Complexity
+10. **Position Check**
+	```cpp
+	        if(s.find({x, y}) != s.end()) return true;
+	```
+	Check if the current position (x, y) has been visited before by searching the set `s`. If the position is found, it means the path crosses itself, so return `true`.
 
-#### Time Complexity
-- The time complexity of this algorithm is **O(n)**, where `n` is the length of the input string `path`. Each character is processed exactly once, and set operations (insert and find) are average **O(1)** due to the underlying hash table implementation.
+11. **Set Update**
+	```cpp
+	        else s.insert({x, y});
+	```
+	If the current position has not been visited before, insert it into the set `s` to mark it as visited.
 
-#### Space Complexity
-- The space complexity is also **O(n)** in the worst case, where all coordinates in the path are unique and stored in the set.
+12. **Return Statement**
+	```cpp
+	    return false;
+	```
+	If no crossing was detected after checking all directions in the path, return `false`.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This implementation efficiently determines whether a path crosses itself using a simple set-based approach to track visited coordinates. The sliding window concept of checking and updating coordinates allows for straightforward logic without needing complex data structures or algorithms.
+The time complexity is O(n), where n is the length of the path, since we only need to iterate over the path once and check each position in the set.
 
-**Key Points**:
-- **Efficiency**: The O(n) time complexity ensures that the solution is efficient for long paths.
-- **Simplicity**: Using a set for tracking visited positions simplifies the logic and makes the code easy to understand.
-- **Robustness**: The code handles all movement directions and checks for crossings effectively.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-In summary, this solution is an excellent example of using a set data structure to keep track of visited locations in a grid, allowing for quick detection of revisited points, thereby solving the path crossing problem efficiently and elegantly.
+The space complexity is O(n) due to the storage required for the set of visited positions.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/path-crossing/description/)
 

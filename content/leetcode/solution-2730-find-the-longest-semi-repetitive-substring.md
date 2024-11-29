@@ -14,119 +14,201 @@ img_src = ""
 youtube = "x_tHB_M7a_g"
 youtube_upload_date="2023-06-10"
 youtube_thumbnail="https://i.ytimg.com/vi/x_tHB_M7a_g/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s consisting of digits from '0' to '9'. A string is called semi-repetitive if there is at most one pair of adjacent identical digits. Your task is to return the length of the longest semi-repetitive substring of s.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A string s consisting of digits from 0 to 9.
+- **Example:** `s = '33342'`
+- **Constraints:**
+	- 1 <= s.length <= 50
+	- Each character of s is a digit from '0' to '9'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int longestSemiRepetitiveSubstring(string s) {
-        
-        vector<int> sem(10, 0);
-        int cnt = 0;
-        
-        int j = 0, len = 1;        
-        for(int i = 1; i < s.size(); i++) {
-            if(s[i] == s[i - 1]) {
-                cnt++;
-                sem[s[i] - '0']++;
-            }
-            while(cnt > 1 && j < i) {
-                if(s[j] == s[j + 1]) {
-                    sem[s[j] - '0']--;
-                    cnt--;
-                }
-                j++;
-            }
-            len = max(len, i - j + 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the length of the longest semi-repetitive substring of s.
+- **Example:** `4`
+- **Constraints:**
+	- The result will be an integer value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the longest semi-repetitive substring by ensuring there is at most one adjacent pair of identical digits.
+
+- Traverse the string and track adjacent identical digits.
+- If more than one adjacent identical pair is found, adjust the substring to remove excess pairs.
+- Keep track of the maximum length of the semi-repetitive substrings.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is always a valid sequence of digits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1`  \
+  **Explanation:** For s = '33342', the longest semi-repetitive substring is '3334' since it contains only one adjacent same digit pair (33).
+
+- **Input:** `Example 2`  \
+  **Explanation:** For s = '1223', the longest semi-repetitive substring is '1223' as there is at most one adjacent same digit pair.
+
+- **Input:** `Example 3`  \
+  **Explanation:** For s = '11122233', the longest semi-repetitive substring is '111', which only contains one adjacent same digit pair.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the string and check for adjacent pairs of identical digits. Adjust the window size to maintain at most one such pair.
+
+### Initial Thoughts 💭
+- We can use a sliding window approach to track the longest substring with at most one adjacent identical digit pair.
+- The sliding window approach will allow us to efficiently track and adjust the substring as we traverse the string.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no empty strings since the string length is always at least 1.
+- Strings near the upper limit (length 50) should be handled efficiently.
+- Consider strings that are already semi-repetitive or contain repeated digits like '111'.
+- The string length is bounded between 1 and 50, which allows for linear time solutions.
+{{< dots >}}
+## Code 💻
+```cpp
+int longestSemiRepetitiveSubstring(string s) {
+    
+    vector<int> sem(10, 0);
+    int cnt = 0;
+    
+    int j = 0, len = 1;        
+    for(int i = 1; i < s.size(); i++) {
+        if(s[i] == s[i - 1]) {
+            cnt++;
+            sem[s[i] - '0']++;
         }
-        return len;
+        while(cnt > 1 && j < i) {
+            if(s[j] == s[j + 1]) {
+                sem[s[j] - '0']--;
+                cnt--;
+            }
+            j++;
+        }
+        len = max(len, i - j + 1);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks to find the length of the longest semi-repetitive substring in a given string `s`. A semi-repetitive substring is defined as a substring that contains at most one pair of consecutive repeating characters. This means that the substring can contain one occurrence of two consecutive characters being the same, but no more. 
-
-### Approach
-
-To solve this problem, we need to find the longest possible substring such that there is at most one pair of consecutive repeating characters. To efficiently handle this, we can use the sliding window technique, where we maintain a dynamic window of characters and adjust its size based on the number of consecutive repeating characters within it.
-
-The sliding window technique allows us to maintain a substring and gradually expand or contract the window based on certain conditions, helping us to find the longest substring that satisfies the condition of having at most one pair of consecutive repeating characters.
-
-### Step-by-Step Explanation
-
-#### Step 1: Initialize Variables
-```cpp
-vector<int> sem(10, 0);
-int cnt = 0;
-int j = 0, len = 1;
-```
-- `sem` is an array that tracks the frequency of each digit (0-9) within the current sliding window.
-- `cnt` is a counter that tracks the number of consecutive repeating characters in the current window.
-- `j` is the left pointer of the sliding window, which moves when we encounter more than one pair of consecutive repeating characters.
-- `len` is the variable that keeps track of the length of the longest valid semi-repetitive substring found so far.
-
-#### Step 2: Traverse the String with the Right Pointer
-```cpp
-for(int i = 1; i < s.size(); i++) {
-    if(s[i] == s[i - 1]) {
-        cnt++;
-        sem[s[i] - '0']++;
-    }
-```
-- We iterate through the string using a loop starting from the second character (`i = 1`). 
-- For each character at index `i`, we compare it with the previous character (`s[i - 1]`).
-- If the current character is equal to the previous one (`s[i] == s[i - 1]`), it means we have encountered a consecutive repeating character. 
-- We increment the `cnt` variable to keep track of how many such consecutive pairs are in the current window.
-- Additionally, we update the `sem` array for the digit that repeats, to keep track of the frequency of each digit in the current window.
-
-#### Step 3: Adjust the Window to Satisfy the Condition
-```cpp
-while(cnt > 1 && j < i) {
-    if(s[j] == s[j + 1]) {
-        sem[s[j] - '0']--;
-        cnt--;
-    }
-    j++;
+    return len;
 }
 ```
-- If at any point `cnt` exceeds 1, it means we have encountered more than one pair of consecutive repeating characters in the window.
-- To correct this, we start moving the left pointer (`j`) to the right to reduce the window size, effectively removing characters from the start of the window.
-- For each character removed from the window, if it forms a consecutive pair with the next character (`s[j] == s[j + 1]`), we decrement the `sem` count for that digit and decrease `cnt` by 1.
-- This ensures that we always maintain a window with at most one pair of consecutive repeating characters.
 
-#### Step 4: Update the Maximum Length
-```cpp
-len = max(len, i - j + 1);
-```
-- After adjusting the window to satisfy the condition, we compute the current window length as `i - j + 1` and update the `len` variable to keep track of the maximum length of valid semi-repetitive substrings found so far.
+This function finds the length of the longest semi-repetitive substring in a given string `s`. A semi-repetitive substring is a substring that contains at most one pair of consecutive identical characters.
 
-#### Step 5: Return the Result
-```cpp
-return len;
-```
-- Finally, once we have iterated through the entire string, we return the maximum length of the semi-repetitive substring found.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int longestSemiRepetitiveSubstring(string s) {
+	```
+	The function `longestSemiRepetitiveSubstring` is defined, taking a string `s` and returning the length of the longest semi-repetitive substring.
 
-### Complexity Analysis
+2. **Array Initialization**
+	```cpp
+	    vector<int> sem(10, 0);
+	```
+	An array `sem` is initialized with 10 elements, all set to 0. This array tracks the count of each digit (0-9) in the current substring.
 
-#### Time Complexity
-The time complexity of this solution is **O(n)**, where `n` is the length of the input string `s`. This is because the sliding window technique ensures that each character is processed at most twice: once when expanding the window with the right pointer (`i`) and once when contracting the window with the left pointer (`j`). Therefore, the algorithm runs in linear time relative to the size of the input string.
+3. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	The variable `cnt` is initialized to 0. It counts the number of consecutive characters in the substring that are identical.
 
-#### Space Complexity
-The space complexity is **O(1)**, as the algorithm only uses a fixed-size array `sem` of length 10 to store the frequency of digits and a few integer variables (`cnt`, `j`, and `len`). The space required does not depend on the size of the input string, so it is constant.
+4. **Variable Initialization**
+	```cpp
+	    int j = 0, len = 1;        
+	```
+	Two variables are initialized: `j`, the starting index of the current substring, and `len`, the length of the longest semi-repetitive substring, initially set to 1.
 
-### Conclusion
+5. **Loop Start**
+	```cpp
+	    for(int i = 1; i < s.size(); i++) {
+	```
+	A loop starts, iterating through the string `s` from index 1 to the end.
 
-The problem of finding the longest semi-repetitive substring in a string can be efficiently solved using the sliding window technique. The sliding window approach ensures that we examine each character only a limited number of times, making the solution optimal with a time complexity of **O(n)**. This approach also uses constant space, which makes it very space-efficient.
+6. **Condition Check**
+	```cpp
+	        if(s[i] == s[i - 1]) {
+	```
+	If the current character is the same as the previous character, the substring may have a duplicate character.
 
-The key insight in solving this problem is to track the number of consecutive repeating characters in the current window and adjust the window size to ensure that there is at most one such pair. By using this approach, we can find the longest valid semi-repetitive substring in linear time.
+7. **Counter Update**
+	```cpp
+	            cnt++;
+	```
+	The `cnt` variable is incremented to indicate that a consecutive duplicate character has been found.
+
+8. **Array Update**
+	```cpp
+	            sem[s[i] - '0']++;
+	```
+	The corresponding digit in the `sem` array is incremented to track the number of occurrences of that digit in the current substring.
+
+9. **While Loop Start**
+	```cpp
+	        while(cnt > 1 && j < i) {
+	```
+	A while loop starts, ensuring that only one pair of consecutive identical characters is allowed. If more than one is found, the substring needs to be adjusted by moving the starting index `j`.
+
+10. **Condition Check**
+	```cpp
+	            if(s[j] == s[j + 1]) {
+	```
+	If the characters at positions `j` and `j + 1` are identical, the substring has more than one consecutive identical character.
+
+11. **Array Update**
+	```cpp
+	                sem[s[j] - '0']--;
+	```
+	The corresponding digit count in the `sem` array is decreased as the character at index `j` is excluded from the substring.
+
+12. **Counter Update**
+	```cpp
+	                cnt--;
+	```
+	The `cnt` variable is decremented as one of the duplicate characters is removed.
+
+13. **Variable Update**
+	```cpp
+	            j++;
+	```
+	The starting index `j` is incremented to shrink the current window and continue checking for valid substrings.
+
+14. **Length Update**
+	```cpp
+	        len = max(len, i - j + 1);
+	```
+	The length of the current valid substring is calculated and compared to the previous maximum length. The longest length is stored in `len`.
+
+15. **Return Statement**
+	```cpp
+	    return len;
+	```
+	The function returns the length of the longest semi-repetitive substring.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear because we only traverse the string once with two pointers.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant as we only use a few integer variables and no additional data structures.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-longest-semi-repetitive-substring/description/)
 

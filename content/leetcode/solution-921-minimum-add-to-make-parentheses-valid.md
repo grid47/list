@@ -14,115 +14,184 @@ img_src = ""
 youtube = "EPr9X0Y3vmo"
 youtube_upload_date="2021-02-19"
 youtube_thumbnail="https://i.ytimg.com/vi/EPr9X0Y3vmo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string consisting of parentheses. In one move, you can insert a parenthesis (either '(' or ')') at any position in the string. Your task is to return the minimum number of moves required to make the string valid, meaning all parentheses are properly balanced.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string of parentheses, with each character being either '(' or ')'.
+- **Example:** `Input: s = "(()))"`
+- **Constraints:**
+	- 1 <= s.length <= 1000
+	- Each character in s is either '(' or ')'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minAddToMakeValid(string s) {
-        int res = 0;
-        stack<int> stk;
-        for(char &a : s) {
-            if(a == '(') {
-                stk.push(a);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the minimum number of moves required to make the parentheses string valid.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The string will contain only '(' and ')'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate how many parentheses need to be added in order to balance the string.
+
+- Traverse through the string character by character.
+- Use a stack to keep track of unmatched opening parentheses '('.
+- For each closing parenthesis ')', pop from the stack if there is a matching opening parenthesis, otherwise count it as a required move.
+- At the end, the stack will contain unmatched opening parentheses, and the number of required moves will be equal to the size of the stack.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string contains only parentheses.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "())"`  \
+  **Explanation:** The string has one unmatched closing parenthesis. To balance it, we need to insert one opening parenthesis at the beginning. So, the answer is 1.
+
+- **Input:** `Input: s = "((("`  \
+  **Explanation:** The string has three unmatched opening parentheses. To balance it, we need to insert three closing parentheses at the end. So, the answer is 3.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves using a stack to keep track of unmatched parentheses while traversing the string. We also count the required moves for unmatched closing parentheses and opening parentheses.
+
+### Initial Thoughts 💭
+- We can use a stack to efficiently manage unmatched parentheses.
+- By traversing the string once, we can determine the minimum moves needed.
+- A stack is a good choice for tracking unmatched opening parentheses. For unmatched closing parentheses, we can simply count the number of insertions needed.
+{{< dots >}}
+### Edge Cases 🌐
+- The input string will always have at least one character, so we don't need to handle empty strings.
+- The algorithm should handle up to 1000 characters efficiently.
+- If the string contains only one unmatched opening or closing parenthesis, it will need one move to balance.
+- The input string will only contain parentheses, and we will always need to insert parentheses to balance it.
+{{< dots >}}
+## Code 💻
+```cpp
+int minAddToMakeValid(string s) {
+    int res = 0;
+    stack<int> stk;
+    for(char &a : s) {
+        if(a == '(') {
+            stk.push(a);
+        } else {
+            if(stk.empty()) {
+                res++;
             } else {
-                if(stk.empty()) {
-                    res++;
-                } else {
-                    stk.pop();
-                }
+                stk.pop();
             }
         }
-        
-        res += stk.size();
-        return res;
     }
-};
-{{< /highlight >}}
----
+    
+    res += stk.size();
+    return res;
+}
+```
 
-### Problem Statement
+The function 'minAddToMakeValid' calculates the minimum number of parentheses to add in order to make the given string 's' valid. It uses a stack to track open parentheses and ensures the balance is maintained by counting unmatched parentheses.
 
-The problem involves ensuring that a given string of parentheses `s` is valid by determining the minimum number of parentheses to add. A string is considered valid if every opening parenthesis has a matching closing parenthesis in the correct order. The task is to calculate the minimum additions needed to make the string valid.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minAddToMakeValid(string s) {
+	```
+	Define the function 'minAddToMakeValid', which takes a string 's' and returns an integer representing the number of parentheses needed to balance the string.
 
-### Approach
+2. **Variable Declaration**
+	```cpp
+	    int res = 0;
+	```
+	Declare an integer variable 'res' to keep track of the number of parentheses to be added for balancing the string.
 
-To solve this problem, we use a **stack-based approach** to manage the balancing of parentheses as we traverse through the string. Here’s the strategy:
+3. **Stack Declaration**
+	```cpp
+	    stack<int> stk;
+	```
+	Declare a stack 'stk' to help track the open parentheses.
 
-1. **Using a Stack to Track Opening Parentheses**:
-   - We iterate over each character in the string.
-   - For every opening parenthesis `'('`, we push it onto the stack, indicating a need for a closing parenthesis in the future.
-   - For every closing parenthesis `')'`, we check if the stack has an unbalanced opening parenthesis.
-     - If the stack is not empty, we pop an element (indicating that one opening parenthesis has found a match).
-     - If the stack is empty, we increment a counter `res`, as this closing parenthesis doesn’t have an opening match, so it will require an additional `'('` to make it valid.
+4. **Loop**
+	```cpp
+	    for(char &a : s) {
+	```
+	Iterate through each character 'a' in the input string 's'.
 
-2. **Counting Remaining Unmatched Opening Parentheses**:
-   - After traversing the entire string, any remaining items in the stack represent unmatched opening parentheses that will require a corresponding number of `')'` additions.
+5. **Condition**
+	```cpp
+	        if(a == '(') {
+	```
+	Check if the current character is an opening parenthesis '('.
 
-3. **Calculating the Total Number of Additions**:
-   - The result `res` is incremented by the number of items left in the stack, representing the additional closing parentheses needed for balance.
-   - Finally, `res` gives us the minimum number of parentheses required to make the string valid.
+6. **Stack Operation**
+	```cpp
+	            stk.push(a);
+	```
+	If the character is an opening parenthesis, push it onto the stack.
 
-### Code Breakdown (Step by Step)
+7. **Else Condition**
+	```cpp
+	        } else {
+	```
+	If the current character is not an opening parenthesis, proceed with the else block.
 
-1. **Initialize Result Counter and Stack**:
-   ```cpp
-   int res = 0;
-   stack<int> stk;
-   ```
-   - `res` is initialized to zero to store the count of additional parentheses needed.
-   - `stk` is a stack that will be used to keep track of unmatched opening parentheses.
+8. **Empty Stack Check**
+	```cpp
+	            if(stk.empty()) {
+	```
+	Check if the stack is empty, indicating there is no matching opening parenthesis for the closing parenthesis.
 
-2. **Traverse the String**:
-   ```cpp
-   for(char &a : s) {
-       if(a == '(') {
-           stk.push(a);
-       } else {
-           if(stk.empty()) {
-               res++;
-           } else {
-               stk.pop();
-           }
-       }
-   }
-   ```
-   - We loop through each character in the string `s`.
-   - If the character is `'('`, we push it onto the stack, signifying an unmatched opening parenthesis.
-   - If the character is `')'`:
-     - We check if `stk` is empty:
-       - If yes, it means there is no matching `'('` for this `')'`, so we increment `res` to count an additional `'('`.
-       - If no, we pop an item from `stk`, balancing one opening parenthesis with this closing parenthesis.
+9. **Increment Result**
+	```cpp
+	                res++;
+	```
+	If the stack is empty (no matching opening parenthesis), increment 'res' as one more parenthesis is needed to balance.
 
-3. **Count Remaining Items in Stack**:
-   ```cpp
-   res += stk.size();
-   ```
-   - After finishing the loop, any unmatched opening parentheses are still in `stk`.
-   - We add the size of `stk` to `res` to account for the necessary closing parentheses to balance these.
+10. **Stack Pop**
+	```cpp
+	            } else {
+	```
+	If the stack is not empty, it means there is a matching opening parenthesis for the closing parenthesis.
 
-4. **Return Result**:
-   ```cpp
-   return res;
-   ```
-   - `res` now contains the minimum number of parentheses required to make the input string valid.
+11. **Pop Stack**
+	```cpp
+	                stk.pop();
+	```
+	Pop the matching opening parenthesis from the stack, as the pair is balanced.
 
-### Complexity
+12. **Stack Size Addition**
+	```cpp
+	    res += stk.size();
+	```
+	After processing all characters, add the number of unmatched opening parentheses left in the stack to 'res'.
 
-1. **Time Complexity**:
-   - The time complexity is **O(n)**, where `n` is the length of the string `s`. Each character is processed once, either being pushed onto the stack or checked against it.
+13. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the final count of parentheses that need to be added to make the string valid.
 
-2. **Space Complexity**:
-   - The space complexity is **O(n)** as well, in the worst case where all characters are `'('`, requiring each to be stored in the stack.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Conclusion
+The time complexity is O(n) because we only need to traverse the string once.
 
-This solution efficiently finds the minimum number of parentheses required to make the string valid by leveraging a stack-based approach to track unmatched opening parentheses and directly counting unmatched closing parentheses. This approach offers an optimal **O(n)** time complexity, making it suitable for larger strings while maintaining simplicity and readability in code structure. The solution effectively handles various cases, including fully balanced strings, unbalanced strings with excess opening or closing parentheses, and empty strings. By directly managing mismatched parentheses, this method ensures that the string becomes valid with the minimum number of additions.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+In the worst case, we may need to store up to n unmatched parentheses in the stack. Hence, the space complexity is O(n).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/)
 

@@ -14,105 +14,150 @@ img_src = ""
 youtube = "lHzdbjyqBG4"
 youtube_upload_date="2024-05-13"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/lHzdbjyqBG4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A string consisting of only '(' and ')' characters is considered a valid parentheses string (VPS) if it satisfies the following conditions: it is empty, can be split into two valid VPS's, or can be written in the form of '(A)' where A is a VPS. You are given a VPS string `seq`. The task is to split it into two subsequences, A and B, such that both A and B are valid parentheses strings. The goal is to minimize the maximum nesting depth between A and B, and you need to return an array where each element is 0 if the character is part of A, and 1 if it's part of B.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string `seq` consisting only of '(' and ')' characters representing a valid parentheses string.
+- **Example:** `Input: seq = '(())(())'`
+- **Constraints:**
+	- 1 <= seq.size <= 10000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> maxDepthAfterSplit(string seq) {
-        vector<int> groups;
-        int d = 0;
-        for(char c: seq) {
-            bool open = c == '(';
-            if(open) d++;
-            groups.push_back(d%2);
-            if(!open) d--;
-        }
-        return groups;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array of length `seq.length`, where each element is 0 if the character at that index is part of subsequence A, and 1 if it is part of subsequence B.
+- **Example:** `Output: [0, 1, 0, 0, 1, 1, 0, 1]`
+- **Constraints:**
+	- The array should satisfy the condition that both subsequences are valid parentheses strings.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to split the given VPS string into two subsequences, A and B, while minimizing the maximum depth of the subsequences.
+
+- Initialize a variable `d` to track the current depth of parentheses.
+- Iterate through the string and for each character, increment or decrement `d` based on whether the character is '(' or ')'.
+- For each character, assign it to subsequence A (0) or B (1) based on the parity of the current depth.
+- Return the array representing the split subsequences.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is guaranteed to be a valid parentheses string.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: seq = '(())(())'`  \
+  **Explanation:** The optimal split would be into subsequences A = '(())' and B = '(())', where the resulting depths are both 1. The answer array could be [0, 1, 0, 0, 1, 1, 0, 1].
+
+- **Input:** `Input: seq = '(()())()'`  \
+  **Explanation:** An optimal split would be into subsequences A = '(())' and B = '()()', where the depths are 1 and 1, respectively. The answer array could be [0, 1, 1, 0, 0, 1, 1, 1].
+
+{{< dots >}}
+## Approach 🚀
+We will split the string into two subsequences by iterating through it and assigning characters to subsequences A and B based on their nesting depth. This will minimize the maximum depth of both subsequences.
+
+### Initial Thoughts 💭
+- We can use a greedy approach to assign characters to subsequences while keeping track of the nesting depth.
+- The depth of a parentheses string can be tracked as we traverse it, and we can alternate between subsequences based on this depth.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty because it is guaranteed to be a valid parentheses string.
+- The solution should efficiently handle inputs up to the size limit of 10,000 characters.
+- A string with alternating parentheses like '()()()' will split evenly between A and B, maintaining the balance.
+- Ensure that the solution adheres to the problem constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> maxDepthAfterSplit(string seq) {
+    vector<int> groups;
+    int d = 0;
+    for(char c: seq) {
+        bool open = c == '(';
+        if(open) d++;
+        groups.push_back(d%2);
+        if(!open) d--;
     }
-};
-{{< /highlight >}}
----
+    return groups;
+}
+```
 
+This function determines the maximum depth of a sequence of parentheses and returns an array where each position corresponds to the depth of the parentheses in a balanced manner (alternating between two groups).
 
-### Problem Statement
-The task is to split a sequence of parentheses into two groups such that the maximum depth of nesting in each group is minimized. The input is a string consisting of only '(' and ')', representing open and close parentheses, respectively. The goal is to return a vector where each position indicates the group to which the corresponding parenthesis belongs. The splitting should be done in a way that allows for balanced nesting of parentheses.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> maxDepthAfterSplit(string seq) {
+	```
+	The function `maxDepthAfterSplit` is defined, taking a string `seq` representing a sequence of parentheses. It returns a vector of integers representing the depth of each parenthesis in two alternating groups.
 
-**Input:**
-- A string `seq` representing the parentheses sequence.
+2. **Variable Declaration**
+	```cpp
+	    vector<int> groups;
+	```
+	A vector `groups` is declared to store the resulting depth group (0 or 1) for each parenthesis in the sequence.
 
-**Output:**
-- A vector of integers (0 or 1) indicating the group assignment for each parenthesis in the sequence.
+3. **Variable Declaration**
+	```cpp
+	    int d = 0;
+	```
+	An integer `d` is initialized to 0, which will track the current depth of the parentheses during traversal.
 
-### Approach
-To solve this problem, we can utilize a simple iteration technique:
-1. Initialize a depth counter that tracks the current level of nesting in the parentheses.
-2. Traverse through each character in the string:
-   - Increment the depth counter for an opening parenthesis '('.
-   - Record the group for each parenthesis based on whether the current depth is odd or even:
-     - If the depth is even, assign it to group 0.
-     - If the depth is odd, assign it to group 1.
-   - Decrement the depth counter for a closing parenthesis ')'.
-3. Return the vector of group assignments.
+4. **Loop**
+	```cpp
+	    for(char c: seq) {
+	```
+	A `for` loop begins to iterate over each character `c` in the input string `seq`.
 
-This method ensures that the parentheses are divided into two groups while maintaining the nesting structure, effectively minimizing the maximum depth after the split.
+5. **Boolean Check**
+	```cpp
+	        bool open = c == '(';
+	```
+	A boolean variable `open` is set to `true` if the character `c` is an opening parenthesis ('('), otherwise it is `false`.
 
-### Code Breakdown (Step by Step)
+6. **Condition Check**
+	```cpp
+	        if(open) d++;
+	```
+	If the current character is an opening parenthesis, the depth `d` is incremented.
 
-1. **Class Definition**: The `Solution` class encapsulates the function for processing the parentheses.
+7. **Vector Operation**
+	```cpp
+	        groups.push_back(d%2);
+	```
+	The current depth modulo 2 (`d%2`) is added to the `groups` vector, ensuring alternating group assignment (0 or 1) for each level of depth.
 
-   ```cpp
-   class Solution {
-   public:
-       vector<int> maxDepthAfterSplit(string seq) {
-   ```
+8. **Condition Check**
+	```cpp
+	        if(!open) d--;
+	```
+	If the current character is a closing parenthesis, the depth `d` is decremented.
 
-2. **Variable Initialization**: We define a vector `groups` to hold the group assignments and an integer `d` to keep track of the current depth.
+9. **Return Statement**
+	```cpp
+	    return groups;
+	```
+	The function returns the `groups` vector, which contains the alternating depth groups (0 or 1) for each parenthesis in the sequence.
 
-   ```cpp
-           vector<int> groups;  // Vector to store the group assignment for each parenthesis
-           int d = 0;  // Current depth of nesting
-   ```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-3. **Iteration through the Sequence**: We iterate through each character in the input string.
+The time complexity is O(n) because we traverse the string exactly once.
 
-   ```cpp
-           for(char c: seq) {
-               bool open = c == '(';  // Check if the current character is an opening parenthesis
-   ```
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-4. **Updating Depth**: For each opening parenthesis, we increment the depth counter. For a closing parenthesis, we decrement it after processing.
+The space complexity is O(n) because we store the result array of the same length as the input string.
 
-   ```cpp
-               if(open) d++;  // Increment depth for '('
-               groups.push_back(d % 2);  // Assign group based on current depth (0 for even, 1 for odd)
-               if(!open) d--;  // Decrement depth for ')'
-           }
-   ```
-
-5. **Return the Result**: Finally, we return the vector containing the group assignments for each parenthesis.
-
-   ```cpp
-           return groups;  // Return the vector of group assignments
-       }
-   };
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of the algorithm is \(O(n)\), where \(n\) is the length of the input string. This is because we traverse each character exactly once.
-- **Space Complexity**: The space complexity is \(O(n)\) as well, since we are storing the group assignments for each character in a vector.
-
-### Conclusion
-The provided C++ code efficiently solves the problem of splitting a sequence of parentheses into two groups while minimizing the maximum depth of nesting in each group. By utilizing a straightforward iteration and a depth counter, the algorithm maintains clarity and efficiency, making it an excellent solution for this type of problem.
-
-This solution is an excellent example of how to handle nested structures using depth tracking, which can be applied to various problems involving balanced parentheses or nested data structures. 
-
-Overall, this implementation serves as a valuable reference for those looking to understand algorithms related to parentheses grouping and nesting, showcasing a practical approach to solving a common algorithmic challenge.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-nesting-depth-of-two-valid-parentheses-strings/description/)

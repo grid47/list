@@ -14,188 +14,205 @@ img_src = ""
 youtube = "72-mDiuXbLk"
 youtube_upload_date="2024-06-02"
 youtube_thumbnail="https://i.ytimg.com/vi/72-mDiuXbLk/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a positive integer `days` representing the total number of days an employee is available for work (starting from day 1). Additionally, you are given a 2D array `meetings`, where `meetings[i] = [start_i, end_i]` represents the start and end days (inclusive) of the ith meeting. Your task is to determine the number of days when the employee is available for work, but no meetings are scheduled.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `days`, representing the total number of days the employee is available for work, and a 2D array `meetings` where each element contains two integers, `start_i` and `end_i`, representing the start and end days of each meeting.
+- **Example:** `Example 1:
+Input: days = 10, meetings = [[5,7],[1,3],[9,10]]
+Output: 2
+Explanation: The employee has no meetings scheduled on days 4 and 8.`
+- **Constraints:**
+	- 1 <= days <= 10^9
+	- 1 <= meetings.length <= 10^5
+	- 1 <= meetings[i][0] <= meetings[i][1] <= days
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countDays(int days, vector<vector<int>>& mt) {
-        int net = days;
-        int n = mt.size();
-        sort(mt.begin(), mt.end());
-        vector<int> tuned;
-        vector<int> pt = mt[0];
-        if(n == 1) return net - (pt[1] - pt[0] + 1);
-        for(int i = 1; i < n; i++) {
-            if (mt[i][0] <= pt[1])
-                pt[1] = max(pt[1], mt[i][1]);
-            else {
-                net -= pt[1] - pt[0] + 1;
-                pt = mt[i];
-            }
-            if(i + 1 == n) net -= pt[1] - pt[0] + 1;
-        }
-        return net;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an integer representing the number of days the employee is available for work, with no meetings scheduled.
+- **Example:** `Example 1:
+Input: days = 10, meetings = [[5,7],[1,3],[9,10]]
+Output: 2`
+- **Constraints:**
+	- The output will be a non-negative integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to calculate the number of days where the employee is available for work, excluding the days with scheduled meetings.
 
-Given a list of intervals, each representing a range of days, and a total number of days, the task is to determine the number of days that are **not covered** by any of the intervals. Each interval represents a range of days where certain events happen. The intervals can overlap, and the goal is to calculate the number of days outside the coverage of these intervals.
+- Sort the meeting intervals based on the start day.
+- Iterate through the meetings and merge overlapping or adjacent meetings.
+- Calculate the total number of days occupied by meetings.
+- Subtract the total number of days occupied by meetings from the total available days to find the number of days the employee is free.
+{{< dots >}}
+### Problem Assumptions ✅
+- The meetings may overlap, so they need to be merged.
+- The meetings are scheduled between day 1 and the given number of days.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1:`  \
+  **Explanation:** For `days = 10` and `meetings = [[5,7], [1,3], [9,10]]`, after merging the meetings, the days occupied are from day 1 to day 3 and day 5 to day 7, and day 9 to day 10. The employee is available on days 4 and 8, so the output is 2.
 
-### Approach
+- **Input:** `Example 2:`  \
+  **Explanation:** For `days = 5` and `meetings = [[2,4], [1,3]]`, after merging the meetings, the days occupied are from day 1 to day 4. The employee is available on day 5, so the output is 1.
 
-To solve this problem, we need to process the intervals, merge overlapping ones, and compute the number of uncovered days.
+- **Input:** `Example 3:`  \
+  **Explanation:** For `days = 6` and `meetings = [[1,6]]`, the meeting occupies all 6 days. Therefore, the employee is not available on any day, so the output is 0.
 
-### Key Steps:
+{{< dots >}}
+## Approach 🚀
+We need to calculate the total number of days the employee is free by finding out the days that are not covered by any meetings. To do this, we first merge overlapping or adjacent meetings and then subtract the occupied days from the total available days.
 
-1. **Sort the Intervals**: We start by sorting the intervals by their start day. This helps in efficiently merging overlapping intervals.
-  
-2. **Track Covered and Uncovered Days**: As we process the intervals, we need to track the days that are covered by one or more intervals. If two intervals overlap, we merge them and continue to the next interval. If an interval doesn't overlap with the current one, we subtract the number of days covered by the previous interval from the total number of days.
-
-3. **Final Calculation**: After processing all intervals, we subtract the total number of covered days from the total days available (`days`).
-
-### Code Breakdown (Step by Step)
-
-The function `countDays` computes the number of days not covered by any of the intervals.
-
+### Initial Thoughts 💭
+- We need to efficiently merge overlapping meetings and then calculate the free days.
+- Sorting the meetings and merging overlapping ones will allow us to calculate the total number of occupied days. Subtracting that from the total available days will give us the answer.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no edge cases related to empty inputs as the number of meetings is always at least 1.
+- For large inputs, ensure that the sorting and merging of meetings is efficient to handle up to 10^5 meetings.
+- When all days are occupied by meetings, the result should be 0.
+- The solution should efficiently handle large inputs, with up to 10^5 meetings.
+{{< dots >}}
+## Code 💻
 ```cpp
 int countDays(int days, vector<vector<int>>& mt) {
-    int net = days; // Start by assuming all days are uncovered.
-    int n = mt.size(); // Number of intervals.
-
-    // Sort intervals based on their start day.
+    int net = days;
+    int n = mt.size();
     sort(mt.begin(), mt.end());
-
-    vector<int> pt = mt[0]; // Track the current interval being processed.
-    if (n == 1) return net - (pt[1] - pt[0] + 1); // If there's only one interval, return the uncovered days.
-
-    for (int i = 1; i < n; i++) {
-        // If the current interval overlaps with the previous, merge them.
-        if (mt[i][0] <= pt[1]) {
-            pt[1] = max(pt[1], mt[i][1]); // Extend the end of the merged interval.
-        } else {
-            // No overlap, subtract the covered days of the previous interval.
+    vector<int> tuned;
+    vector<int> pt = mt[0];
+    if(n == 1) return net - (pt[1] - pt[0] + 1);
+    for(int i = 1; i < n; i++) {
+        if (mt[i][0] <= pt[1])
+            pt[1] = max(pt[1], mt[i][1]);
+        else {
             net -= pt[1] - pt[0] + 1;
-            pt = mt[i]; // Update to the current interval.
+            pt = mt[i];
         }
-        // If it's the last interval, subtract its covered days.
-        if (i + 1 == n) net -= pt[1] - pt[0] + 1;
+        if(i + 1 == n) net -= pt[1] - pt[0] + 1;
     }
-
-    return net; // Return the total uncovered days.
+    return net;
 }
 ```
 
-### Detailed Breakdown of the Code:
+This function calculates the number of days left after subtracting days covered by intervals. Each interval represents a period of time, and the function handles overlaps by adjusting the count of days accordingly.
 
-1. **Initialization**:  
-   ```cpp
-   int net = days;
-   int n = mt.size();
-   ```
-   - `net`: This variable tracks the total number of uncovered days, which initially equals the total number of days (`days`).
-   - `n`: The number of intervals in the input vector `mt`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countDays(int days, vector<vector<int>>& mt) {
+	```
+	Defines the function 'countDays' that takes an integer 'days' representing the total number of days and a vector of vectors 'mt' representing time intervals, and returns the adjusted number of days.
 
-2. **Sorting the Intervals**:  
-   ```cpp
-   sort(mt.begin(), mt.end());
-   ```
-   - We sort the intervals in ascending order of their start day. Sorting ensures that we can easily merge overlapping intervals in the subsequent steps.
+2. **Variable Initialization**
+	```cpp
+	    int net = days;
+	```
+	Initializes the variable 'net' with the value of 'days', which will later hold the result after subtracting the number of days covered by the intervals.
 
-3. **Handling Special Case (Single Interval)**:  
-   ```cpp
-   if (n == 1) return net - (pt[1] - pt[0] + 1);
-   ```
-   - If there is only one interval, we can directly compute the number of uncovered days by subtracting the length of that interval (`pt[1] - pt[0] + 1`) from the total number of days (`days`).
+3. **Vector Size Calculation**
+	```cpp
+	    int n = mt.size();
+	```
+	Calculates the number of intervals in the input vector 'mt' and stores it in 'n'.
 
-4. **Iterating Over the Intervals**:  
-   ```cpp
-   for (int i = 1; i < n; i++) {
-       if (mt[i][0] <= pt[1]) {
-           pt[1] = max(pt[1], mt[i][1]);
-       } else {
-           net -= pt[1] - pt[0] + 1;
-           pt = mt[i];
-       }
-       if (i + 1 == n) net -= pt[1] - pt[0] + 1;
-   }
-   ```
-   - **Merging Overlapping Intervals**: If the start of the current interval (`mt[i][0]`) is less than or equal to the end of the previous interval (`pt[1]`), it means the two intervals overlap. In this case, we extend the end of the current merged interval to cover the maximum end day between the two intervals.
-   
-   - **Handling Non-overlapping Intervals**: If the current interval does not overlap with the previous one, we subtract the length of the previous interval from the `net` (which tracks uncovered days). Then, we update the `pt` variable to the current interval, which becomes the new active interval.
+4. **Sorting Intervals**
+	```cpp
+	    sort(mt.begin(), mt.end());
+	```
+	Sorts the intervals in 'mt' based on the start time, ensuring that overlapping intervals are processed in the correct order.
 
-5. **Final Adjustment**:  
-   ```cpp
-   if (i + 1 == n) net -= pt[1] - pt[0] + 1;
-   ```
-   - After processing all intervals, we check if we are at the last interval. If so, we subtract the number of days covered by this last interval from `net`.
+5. **Vector Initialization**
+	```cpp
+	    vector<int> tuned;
+	```
+	Initializes an empty vector 'tuned', though it is not used in the subsequent code and can likely be removed.
 
-6. **Return the Result**:  
-   ```cpp
-   return net;
-   ```
-   - Finally, we return the `net` value, which contains the number of uncovered days after processing all the intervals.
+6. **Initial Interval Setup**
+	```cpp
+	    vector<int> pt = mt[0];
+	```
+	Sets the first interval as the starting reference point 'pt' for the comparisons in the following steps.
 
-### Example Walkthrough
+7. **Single Interval Case**
+	```cpp
+	    if(n == 1) return net - (pt[1] - pt[0] + 1);
+	```
+	Handles the special case where there is only one interval, subtracting the length of that interval from 'net' to account for covered days.
 
-Let's walk through an example to better understand the code.
+8. **For Loop**
+	```cpp
+	    for(int i = 1; i < n; i++) {
+	```
+	Begins a loop that iterates through the remaining intervals (starting from index 1) to check for overlaps.
 
-#### Input:
-```cpp
-int days = 10;
-vector<vector<int>> mt = {{1, 3}, {2, 5}, {6, 8}};
-```
+9. **Overlap Check**
+	```cpp
+	        if (mt[i][0] <= pt[1])
+	```
+	Checks if the start time of the current interval (mt[i][0]) overlaps with the end time of the previous interval (pt[1]).
 
-- Total days (`days`) = 10.
-- Intervals (`mt`) = `{{1, 3}, {2, 5}, {6, 8}}`.
+10. **Update Interval**
+	```cpp
+	            pt[1] = max(pt[1], mt[i][1]);
+	```
+	If the intervals overlap, extends the 'pt' interval by updating the end time to the maximum of the current end time and the new interval's end time.
 
-#### Processing:
-1. **Sort the intervals**:  
-   After sorting, `mt = {{1, 3}, {2, 5}, {6, 8}}` remains unchanged as it is already sorted.
+11. **Non-Overlapping Interval**
+	```cpp
+	        else {
+	```
+	Handles the case where the current interval does not overlap with the previous one.
 
-2. **First Interval (`{1, 3}`)**:  
-   - We initialize `pt = {1, 3}`.
-   - Subtracting the length of this interval: `net = 10 - (3 - 1 + 1) = 6`.
+12. **Subtract Covered Days**
+	```cpp
+	            net -= pt[1] - pt[0] + 1;
+	```
+	Subtracts the number of days covered by the current 'pt' interval from 'net' to account for the covered time.
 
-3. **Second Interval (`{2, 5}`)**:  
-   - The start of the current interval (2) is within the previous interval (ends at 3), so we merge the intervals.
-   - Now, `pt = {1, 5}`.
-   - No subtraction yet because the intervals are merged.
+13. **Update Reference Interval**
+	```cpp
+	            pt = mt[i];
+	```
+	Sets 'pt' to the current interval 'mt[i]' to continue processing.
 
-4. **Third Interval (`{6, 8}`)**:  
-   - The start of the current interval (6) does not overlap with the merged interval (`{1, 5}`), so we subtract the length of the previous merged interval:  
-   `net = 6 - (5 - 1 + 1) = 1`.
-   - Now, `pt = {6, 8}`.
+14. **Final Adjustment**
+	```cpp
+	        if(i + 1 == n) net -= pt[1] - pt[0] + 1;
+	```
+	At the end of the loop, subtracts the number of days covered by the last interval from 'net', as the loop may not account for it.
 
-5. **Final Adjustment**:  
-   - Subtracting the length of the last interval:  
-   `net = 1 - (8 - 6 + 1) = 0`.
+15. **Return Result**
+	```cpp
+	    return net;
+	```
+	Returns the final value of 'net', which represents the remaining number of uncovered days after adjusting for all the intervals.
 
-#### Output:
-```cpp
-0
-```
-The result is `0`, which means there are no uncovered days.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-### Complexity
+The time complexity is O(n log n) due to sorting the meetings.
 
-#### Time Complexity:
-- **O(n log n)**: Sorting the intervals takes **O(n log n)** time, where `n` is the number of intervals. The iteration through the intervals after sorting takes **O(n)** time. Hence, the overall time complexity is dominated by the sorting step, resulting in **O(n log n)**.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
 
-#### Space Complexity:
-- **O(n)**: The space complexity is **O(n)** due to the space used by the `mt` vector and additional variables used for storing the intervals and tracking the covered days.
+The space complexity is O(n) for storing the meetings and the merged intervals.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-The solution efficiently calculates the number of uncovered days by sorting the intervals, merging overlapping intervals, and subtracting the covered days from the total days. The algorithm runs in **O(n log n)** time, making it optimal for large inputs. The space complexity is **O(n)**, which is also efficient given the problem constraints.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-days-without-meetings/description/)
 

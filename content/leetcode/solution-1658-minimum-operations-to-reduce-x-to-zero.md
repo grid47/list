@@ -14,126 +14,200 @@ img_src = ""
 youtube = "iPqrN6Bb-NI"
 youtube_upload_date="2023-09-21"
 youtube_thumbnail="https://i.ytimg.com/vi/iPqrN6Bb-NI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers `nums` and an integer `x`. In each operation, you can either remove the leftmost or rightmost element from the array and subtract its value from `x`. The task is to determine the minimum number of operations required to reduce `x` to exactly 0, or return -1 if it's not possible.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two inputs: an integer array `nums` and an integer `x`.
+- **Example:** `nums = [2, 3, 1, 4, 1], x = 5`
+- **Constraints:**
+	- 1 <= nums.length <= 10^5
+	- 1 <= nums[i] <= 10^4
+	- 1 <= x <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minOperations(vector<int>& nums, int x) {
-        int res = -1;
-        long sum = -x;
-        for(int y: nums) sum += y;
-        int n = nums.size();
-        if (sum == 0) return n;
-        
-        map<int, int> mp;
-        mp[0] = -1;
-        int s = 0;
-        for(int i = 0; i < n; i++) {
-            s += nums[i];
-            if(mp.count(s - sum)) {
-                res = max(res, i - mp[s - sum]);
-            }
-            mp[s] = i;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations needed to reduce `x` to 0, or -1 if it's not possible.
+- **Example:** `2`
+- **Constraints:**
+	- The output will be a single integer: either the minimum number of operations or -1.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine the minimum number of operations to reduce `x` to 0, by removing elements from either end of the array and subtracting their value from `x`.
+
+- Calculate the total sum of elements in `nums`. If the sum is smaller than `x`, return -1 immediately.
+- Use a sliding window approach to check the sum of subarrays of `nums` that can contribute to reducing `x` to 0.
+- Keep track of the longest subarray that matches the condition of reducing `x` to 0, and calculate the number of operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `nums` contains only positive integers.
+- The array has a length between 1 and 100,000, and `x` can be as large as 1 billion.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [2, 3, 1, 4, 1], x = 5`  \
+  **Explanation:** In this case, we can remove the last two elements (4 + 1 = 5) to reduce `x` to 0, requiring exactly 2 operations.
+
+- **Input:** `nums = [4, 5, 6, 7, 8], x = 3`  \
+  **Explanation:** In this case, it’s impossible to remove elements from the array to sum to `x = 3`. Hence, the answer is -1.
+
+{{< dots >}}
+## Approach 🚀
+We will use a sliding window approach to find the longest subarray that can reduce `x` to 0 by removing elements from the array.
+
+### Initial Thoughts 💭
+- The problem can be reduced to finding a subarray whose sum is equal to `sum(nums) - x`.
+- Using a sliding window or prefix sum technique will help optimize the solution for large inputs.
+- Start by checking if the sum of all elements in `nums` is smaller than `x`. If it is, return -1 immediately.
+- Otherwise, calculate the difference between the sum of the array and `x`.
+{{< dots >}}
+### Edge Cases 🌐
+- If `nums` is empty, return -1 immediately.
+- For large arrays, ensure that the algorithm handles the input within acceptable time limits.
+- If `x` is greater than the sum of all elements in `nums`, return -1.
+- Ensure that the solution works efficiently with up to 100,000 elements.
+{{< dots >}}
+## Code 💻
+```cpp
+int minOperations(vector<int>& nums, int x) {
+    int res = -1;
+    long sum = -x;
+    for(int y: nums) sum += y;
+    int n = nums.size();
+    if (sum == 0) return n;
+    
+    map<int, int> mp;
+    mp[0] = -1;
+    int s = 0;
+    for(int i = 0; i < n; i++) {
+        s += nums[i];
+        if(mp.count(s - sum)) {
+            res = max(res, i - mp[s - sum]);
         }
-        
-        return res == -1? res :n - res;        
+        mp[s] = i;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task is to find the minimum number of operations to reduce the value of a given array `nums` to a specific integer `x` by performing operations that remove elements from either the beginning or the end of the array. Each operation allows you to remove an element from either end, and the goal is to determine how many elements need to be removed to achieve this result.
-
-### Approach
-
-To solve the problem, we can utilize a two-pointer technique combined with prefix sums. The main idea is to compute the total sum of the array and then determine if there is a contiguous subarray that can be removed to result in the desired sum of `x`. The solution can be broken down into the following steps:
-
-1. **Calculate the Total Sum**: Compute the total sum of the array and determine the difference that needs to be removed to achieve the desired target.
-2. **Use a Hash Map**: Create a hash map to track the prefix sums as we iterate through the array.
-3. **Find the Contiguous Subarray**: Check if there exists a contiguous subarray that, when removed, results in the required sum by checking the prefix sums in the hash map.
-4. **Calculate the Result**: The final result is calculated based on the length of the contiguous subarray found.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int minOperations(vector<int>& nums, int x) {
-        int res = -1; // Initialize result
-        long sum = -x; // Initialize sum with -x to find target sum
+    
+    return res == -1? res :n - res;        
+}
 ```
-- The class `Solution` contains a public method `minOperations` which takes in a vector of integers `nums` and an integer `x`.
-- The variable `res` is initialized to -1, which will store the maximum length of the contiguous subarray found that meets the criteria.
-- The total `sum` is computed by subtracting `x` from zero. This sum will be used to find the target contiguous subarray sum.
 
-```cpp
-        for(int y: nums) sum += y; // Calculate the total sum of the array
-        int n = nums.size(); // Store the size of the array
-        if (sum == 0) return n; // If the total sum equals 0, all elements must be removed
-```
-- A loop iterates through each element of `nums` to compute the total sum.
-- The size of the array `n` is stored.
-- If the computed `sum` equals 0, it indicates that removing all elements achieves the target, and we can return `n` as the result.
+This function computes the minimum number of operations to reduce the sum of a given array to a target value `x` by removing elements from either end. It uses a prefix sum approach with a map for optimization.
 
-```cpp
-        map<int, int> mp; // Create a map to store prefix sums
-        mp[0] = -1; // Initialize the map with a prefix sum of 0 at index -1
-```
-- A map `mp` is declared to store prefix sums and their corresponding indices.
-- The prefix sum of 0 is added to the map with an index of -1 to handle edge cases.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minOperations(vector<int>& nums, int x) {
+	```
+	Defines the function `minOperations` which takes an array and a target value as inputs.
 
-```cpp
-        int s = 0; // Initialize prefix sum variable
-        for(int i = 0; i < n; i++) {
-            s += nums[i]; // Incrementally compute the prefix sum
-```
-- The variable `s` is initialized to zero. It will be used to track the prefix sum as we iterate through `nums`.
-- A loop iterates through the indices of the array, updating the prefix sum `s` with each element.
+2. **Variable Initialization**
+	```cpp
+	    int res = -1;
+	```
+	Initializes the result variable `res` to -1 to track the maximum subarray length.
 
-```cpp
-            if(mp.count(s - sum)) {
-                res = max(res, i - mp[s - sum]); // Check if the required prefix exists
-            }
-            mp[s] = i; // Update the map with the current prefix sum and index
-        }
-```
-- Inside the loop, we check if there exists a prefix sum in the map that, when subtracted from the current prefix sum `s`, equals the `sum`. 
-- If such a prefix sum exists, it indicates that removing the subarray between the two prefix sums can yield the desired result, and `res` is updated with the maximum length found.
-- The current prefix sum `s` and its index `i` are then added to the map.
+3. **Variable Initialization**
+	```cpp
+	    long sum = -x;
+	```
+	Initializes `sum` to -x to adjust the target for finding a subarray with a specific sum.
 
-```cpp
-        return res == -1? res :n - res; // Calculate the final result
-    }
-};
-```
-- The final result is calculated. If `res` remains -1, it means no valid subarray was found, and we return -1. Otherwise, we return `n - res`, which indicates the number of operations needed to achieve the target.
+4. **Looping**
+	```cpp
+	    for(int y: nums) sum += y;
+	```
+	Calculates the total sum of the array and adjusts `sum` for further processing.
 
-### Complexity
+5. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Stores the size of the array in `n` for use in subsequent logic.
 
-- **Time Complexity**:
-  - The algorithm runs in \( O(n) \) time, where \( n \) is the length of the input array `nums`. This is because we make a single pass through the array to compute prefix sums and update the hash map.
+6. **Condition Check**
+	```cpp
+	    if (sum == 0) return n;
+	```
+	Checks if the total sum equals `x`. If true, the entire array is the solution.
 
-- **Space Complexity**:
-  - The space complexity is \( O(n) \) in the worst case, due to the storage of prefix sums in the hash map.
+7. **Map Initialization**
+	```cpp
+	    map<int, int> mp;
+	```
+	Initializes a map to store prefix sums and their corresponding indices.
 
-### Conclusion
+8. **Map Update**
+	```cpp
+	    mp[0] = -1;
+	```
+	Adds an initial entry to the map for handling prefix sums starting from the beginning.
 
-The `minOperations` method effectively finds the minimum number of operations required to reduce the array to the specified integer `x`. By employing a hash map to store prefix sums and a single pass through the array, the solution is efficient and straightforward.
+9. **Variable Initialization**
+	```cpp
+	    int s = 0;
+	```
+	Initializes the prefix sum variable `s` to zero.
 
-**Key Takeaways**:
-1. **Optimality**: The approach achieves the desired result in linear time, making it suitable for larger inputs.
-2. **Hash Map Usage**: Utilizing a hash map to store prefix sums allows for quick lookups and efficient subarray detection.
-3. **Prefix Sum Technique**: The use of prefix sums is a common strategy in problems involving sums of contiguous subarrays and can often simplify complex iterations.
+10. **Looping**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterates through the array to compute prefix sums and check for subarray matches.
 
-Overall, this solution demonstrates a powerful method to address the problem of minimizing operations through efficient data structures and algorithms. The implementation is clear and concise, making it easy to understand and maintain.
+11. **Sum Update**
+	```cpp
+	        s += nums[i];
+	```
+	Updates the prefix sum `s` with the current element.
+
+12. **Condition Check**
+	```cpp
+	        if(mp.count(s - sum)) {
+	```
+	Checks if there exists a prefix sum in the map such that the difference equals the target sum.
+
+13. **Update Result**
+	```cpp
+	            res = max(res, i - mp[s - sum]);
+	```
+	Updates `res` to the maximum length of a valid subarray found so far.
+
+14. **Map Update**
+	```cpp
+	        mp[s] = i;
+	```
+	Adds the current prefix sum and its index to the map for future reference.
+
+15. **Return**
+	```cpp
+	    return res == -1? res :n - res;        
+	```
+	Returns the minimum operations needed by converting the subarray length to elements removed.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear because we scan the array once using the sliding window technique.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage of intermediate results like prefix sums or hash maps.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/description/)
 

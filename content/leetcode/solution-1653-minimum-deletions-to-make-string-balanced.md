@@ -14,120 +14,162 @@ img_src = ""
 youtube = "WDStNufBUQ8"
 youtube_upload_date="2024-07-30"
 youtube_thumbnail="https://i.ytimg.com/vi/WDStNufBUQ8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s consisting of the characters 'a' and 'b'. The goal is to delete the minimum number of characters from s to make it balanced. A string is balanced if no 'b' precedes an 'a'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string s, consisting only of the characters 'a' and 'b'.
+- **Example:** `s = "abbbba"`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- Each character in s is either 'a' or 'b'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minimumDeletions(string s) {
-        int n = s.size(), bcnt = 0;
-        vector<int> dp(n + 1, 0);
-        for(int i = 0; i < n; i++) {
-            char a = s[i];
-            if(a == 'a') {                
-                dp[i + 1] = min(dp[i] + 1, bcnt);
-            } else {
-                bcnt++;
-                dp[i + 1] = dp[i];
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer representing the minimum number of deletions required to make the string balanced.
+- **Example:** `Output: 2`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of deletions required to make the string balanced.
+
+- Iterate through the string and track the number of 'b' characters.
+- For each 'a' encountered, determine the minimum deletions by comparing the current state with the previous state where 'b' characters are deleted.
+- Return the minimum deletions found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The string will always contain valid characters 'a' and 'b'.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "abbbba"`  \
+  **Explanation:** We need to ensure that no 'b' appears before 'a'. By deleting the minimum number of characters, we can balance the string.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves tracking the number of 'b' characters and minimizing deletions based on the appearance of 'a' characters.
+
+### Initial Thoughts 💭
+- We need to carefully handle 'b' characters and count the necessary deletions to make the string balanced.
+- This problem can be solved by using dynamic programming to track the minimum deletions required for each position in the string.
+{{< dots >}}
+### Edge Cases 🌐
+- Consider the case where the string has only one character.
+- Ensure that the solution works efficiently with strings of length up to 100,000.
+- Handle cases where the string is already balanced, such as a string with only 'a's or only 'b's.
+- The solution must handle both small and large input sizes efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int minimumDeletions(string s) {
+    int n = s.size(), bcnt = 0;
+    vector<int> dp(n + 1, 0);
+    for(int i = 0; i < n; i++) {
+        char a = s[i];
+        if(a == 'a') {                
+            dp[i + 1] = min(dp[i] + 1, bcnt);
+        } else {
+            bcnt++;
+            dp[i + 1] = dp[i];
         }
-        return dp[n];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem involves determining the minimum number of deletions required to ensure that all characters in a given string `s` are of the same type, specifically the character 'a'. In the string, each character is either 'a' or 'b'. The goal is to compute the minimum deletions necessary to convert the string into one consisting entirely of 'a's. 
-
-### Approach
-
-To solve this problem, we can utilize a dynamic programming approach. The idea is to maintain a dynamic programming array `dp`, where `dp[i]` represents the minimum number of deletions required to make the substring `s[0:i]` consist only of 'a's. Additionally, we track the count of 'b's encountered so far with a variable `bcnt`.
-
-The main steps of the approach are as follows:
-
-1. **Initialize Variables**:
-   - `n` to store the length of the string.
-   - `bcnt` to keep track of the number of 'b's encountered so far.
-   - A dynamic programming array `dp` initialized with zeros to store intermediate results.
-
-2. **Iterate Through the String**:
-   - For each character in the string, update the `dp` array based on whether the character is 'a' or 'b':
-     - If the character is 'a', it can either be counted as a deletion (incrementing `dp[i]`) or we can keep the current count of 'b's.
-     - If the character is 'b', we increment the `bcnt` and carry forward the previous deletion count.
-
-3. **Return the Result**:
-   - The value at `dp[n]` will provide the minimum number of deletions needed to convert the entire string into 'a's.
-
-### Code Breakdown (Step by Step)
-
-Let's break down the provided code:
-
-```cpp
-class Solution {
-public:
-    int minimumDeletions(string s) {
+    return dp[n];
+}
 ```
-- We define a class `Solution` and a public method `minimumDeletions` that takes a string `s` as input.
 
-```cpp
-        int n = s.size(), bcnt = 0;
-        vector<int> dp(n + 1, 0);
-```
-- We compute the length of the string `s` and initialize `bcnt` to zero. The dynamic programming array `dp` is created with a size of `n + 1`, initialized to zeros.
+This function calculates the minimum deletions required to make the string 's' valid by removing 'a' or 'b' to ensure all 'a's appear before all 'b's.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-            char a = s[i];
-```
-- We start a loop to iterate over each character of the string `s`. The variable `a` holds the current character.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int minimumDeletions(string s) {
+	```
+	Defines the function that calculates the minimum deletions needed to make the string valid.
 
-```cpp
-            if(a == 'a') {                
-                dp[i + 1] = min(dp[i] + 1, bcnt);
-            } else {
-                bcnt++;
-                dp[i + 1] = dp[i];
-            }
-```
-- **Condition for 'a'**: If the current character `a` is 'a', we update `dp[i + 1]` to the minimum of either:
-  - `dp[i] + 1`: Incrementing the deletion count by 1 (deleting the current 'a').
-  - `bcnt`: The count of 'b's encountered so far, representing the deletions required to remove all 'b's before this point.
-  
-- **Condition for 'b'**: If `a` is 'b', we increment `bcnt` and set `dp[i + 1]` to `dp[i]`, effectively carrying forward the previous deletion count without adding any new deletions.
+2. **Variable Initialization**
+	```cpp
+	    int n = s.size(), bcnt = 0;
+	```
+	Initializes the string size and a counter for the number of 'b's encountered.
 
-```cpp
-        }
-        return dp[n];
-    }
-};
-```
-- After iterating through the string, we return `dp[n]`, which holds the minimum deletions required to make the entire string consist of 'a's.
+3. **Array Initialization**
+	```cpp
+	    vector<int> dp(n + 1, 0);
+	```
+	Creates a dynamic programming array to store intermediate results.
 
-### Complexity
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterates through each character in the string.
 
-- **Time Complexity**:
-  - The algorithm runs in \( O(n) \), where \( n \) is the length of the input string `s`. This is due to the single loop that iterates through the string once.
-  
-- **Space Complexity**:
-  - The space complexity is \( O(n) \) because we use a dynamic programming array of size \( n + 1 \) to store intermediate results.
+5. **Variable Initialization**
+	```cpp
+	        char a = s[i];
+	```
+	Stores the current character for processing.
 
-### Conclusion
+6. **Conditional Statement**
+	```cpp
+	        if(a == 'a') {                
+	```
+	Checks if the current character is 'a'.
 
-The `minimumDeletions` method provides an efficient way to determine the minimum number of deletions needed to transform a string composed of 'a's and 'b's into a string of only 'a's. By using dynamic programming, the solution effectively tracks the count of 'b's and evaluates the necessary deletions in a single pass through the string.
+7. **Dynamic Programming**
+	```cpp
+	            dp[i + 1] = min(dp[i] + 1, bcnt);
+	```
+	Updates the dp array for 'a' by choosing the minimum deletions needed.
 
-**Key Takeaways**:
-1. **Dynamic Programming**: This solution demonstrates the use of dynamic programming to solve optimization problems by breaking them down into subproblems and reusing results.
-2. **Efficiency**: With a linear time complexity, this algorithm is efficient for long strings, making it suitable for competitive programming and other applications.
-3. **Space Utilization**: The use of a single array to track the minimum deletions reduces the need for complex data structures, making the implementation straightforward.
+8. **Conditional Statement**
+	```cpp
+	        } else {
+	```
+	Handles the case where the current character is 'b'.
 
-This approach can be extended to similar problems involving character transformations and constraints, showcasing the versatility of dynamic programming in solving string manipulation tasks.
+9. **Counter Increment**
+	```cpp
+	            bcnt++;
+	```
+	Increments the count of 'b' characters encountered.
+
+10. **Dynamic Programming**
+	```cpp
+	            dp[i + 1] = dp[i];
+	```
+	Carries forward the dp value for 'b', as no deletion is required.
+
+11. **Return Statement**
+	```cpp
+	    return dp[n];
+	```
+	Returns the minimum deletions needed to make the string valid.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the string, since we iterate through the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the dynamic programming array used to store the minimum deletions at each step.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/)
 

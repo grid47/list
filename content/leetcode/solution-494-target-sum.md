@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Rdie0uPp7e8"
 youtube_upload_date="2023-07-19"
 youtube_thumbnail="https://i.ytimg.com/vi/Rdie0uPp7e8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,113 +28,173 @@ youtube_thumbnail="https://i.ytimg.com/vi/Rdie0uPp7e8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array nums and an integer target. You must build an expression by adding '+' or '-' before each element in nums and concatenate them to form an expression. Return the number of different expressions that result in the target value.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer target.
+- **Example:** `nums = [1, 2, 3, 4, 5], target = 7`
+- **Constraints:**
+	- 1 <= nums.length <= 20
+	- 0 <= nums[i] <= 1000
+	- 0 <= sum(nums[i]) <= 1000
+	- -1000 <= target <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    map<int, map<int, int>> mp;
-    vector<int> nums;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct expressions that can be formed, which evaluate to the target value.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The result will be an integer representing the number of expressions.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the number of expressions whose evaluated result matches the target value.
+
+- 1. Use dynamic programming or memoization to track the number of ways to achieve each sum with the given operations.
+- 2. Use recursion to consider both adding and subtracting each number at every step.
+- 3. Use a memoization table to store intermediate results for efficient computation.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always have at least one element.
+- Both operations '+' and '-' can be applied to any element in nums.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3, 4, 5], target = 7`  \
+  **Explanation:** There are 3 ways to form an expression that evaluates to 7: +1 +2 +3 -4 +5, +1 +2 -3 +4 +5, and +1 -2 +3 +4 +5.
+
+- **Input:** `nums = [10, 2, 3], target = 5`  \
+  **Explanation:** There is only 1 way to form an expression that evaluates to 5: +10 -2 -3.
+
+{{< dots >}}
+## Approach 🚀
+The solution involves dynamic programming and memoization to recursively find the number of ways to form the target sum by applying the '+' and '-' operations to each element of nums.
+
+### Initial Thoughts 💭
+- The problem can be solved by exploring all possible combinations of '+' and '-' for each element.
+- Dynamic programming with memoization should be used to efficiently calculate the number of ways to reach the target sum.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that nums will always contain at least one element.
+- The solution must be optimized to handle larger inputs efficiently, up to the constraint limits.
+- If the target is 0, we need to count the number of ways to make the sum 0.
+- Ensure that the algorithm handles both small and large arrays as specified in the constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+map<int, map<int, int>> mp;
+vector<int> nums;
+
+int dp(int target, int idx) {
+    if(idx == nums.size()) return target == 0;
     
-    int dp(int target, int idx) {
-        if(idx == nums.size()) return target == 0;
-        
-        if(mp.count(target))
-            if(mp[target].count(idx)) return mp[target][idx];
-        
-        int res = dp(target - nums[idx], idx + 1);
-        res += dp(target + nums[idx], idx + 1);
-        
-        return mp[target][idx] = res;
-    }
-    int findTargetSumWays(vector<int>& nums, int target) {
-        this->nums = nums;
-        return dp(target, 0);
-    }
-};
-{{< /highlight >}}
----
+    if(mp.count(target))
+        if(mp[target].count(idx)) return mp[target][idx];
+    
+    int res = dp(target - nums[idx], idx + 1);
+    res += dp(target + nums[idx], idx + 1);
+    
+    return mp[target][idx] = res;
+}
+int findTargetSumWays(vector<int>& nums, int target) {
+    this->nums = nums;
+    return dp(target, 0);
+}
+```
 
-### Problem Statement
+This solution uses dynamic programming and memoization to calculate the number of ways to assign '+' and '-' signs to each element in the array to reach the target sum.
 
-The problem is to find the number of ways to assign symbols (either `+` or `-`) to each number in a given array `nums` so that the resulting sum equals a target value. This is known as the "Target Sum" problem. Given an array `nums` of positive integers and an integer `target`, the task is to compute how many different ways you can achieve `target` by assigning either `+` or `-` to each element of `nums`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Memoization Structure**
+	```cpp
+	map<int, map<int, int>> mp;
+	```
+	Declares a map `mp` which stores the number of ways to achieve a specific target using a given index, enabling memoization for efficient calculation.
 
-For instance, if `nums = [1, 1, 1, 1, 1]` and `target = 3`, then there are 5 different ways to assign symbols to reach the target of 3.
+2. **Variable Declaration**
+	```cpp
+	vector<int> nums;
+	```
+	Declares a vector `nums` to store the input numbers that will be used in the calculations.
 
-### Approach
+3. **Function Definition**
+	```cpp
+	int dp(int target, int idx) {
+	```
+	Defines the `dp` function, which is a recursive function that calculates the number of ways to reach a specific target sum starting from a given index.
 
-The solution uses a recursive dynamic programming (DP) approach with memoization. The main idea is to use recursion to try all possible combinations of `+` and `-` signs for each element in the array and count the ways that reach the `target`. By storing previously computed results in a memoization table, we avoid redundant calculations and significantly improve efficiency.
+4. **Base Case**
+	```cpp
+	    if(idx == nums.size()) return target == 0;
+	```
+	Base case: If all elements have been processed (i.e., `idx` equals the size of `nums`), return 1 if the target is 0 (meaning we’ve successfully formed the target sum), otherwise return 0.
 
-Here’s a breakdown of the approach:
+5. **Memoization Check**
+	```cpp
+	    if(mp.count(target))
+	```
+	Checks if the result for the current target has already been calculated for the given index using memoization.
 
-1. **Recursive Decision-Making**:
-   - For each number in `nums`, we make two recursive calls: one that subtracts the current number from the target and another that adds it to the target.
-   - This generates all possible sums using the numbers in `nums`, with each call exploring a different combination of `+` and `-` symbols for each number.
+6. **Memoization Lookup**
+	```cpp
+	        if(mp[target].count(idx)) return mp[target][idx];
+	```
+	If the result for the current target and index is already stored, return the memoized value to avoid redundant calculations.
 
-2. **Memoization to Avoid Redundant Calculations**:
-   - A `map<int, map<int, int>>` structure, `mp`, is used to store intermediate results. Here, `mp[target][idx]` represents the number of ways to reach the `target` with elements starting from the index `idx` in `nums`.
-   - If we encounter a subproblem (defined by a specific `target` and `idx`) that has already been solved, we retrieve the result from `mp` instead of recalculating it, reducing the time complexity.
+7. **Recursive Calls**
+	```cpp
+	    int res = dp(target - nums[idx], idx + 1);
+	```
+	Recursively calls `dp` by subtracting the current number (`nums[idx]`) from the target and moving to the next index.
 
-3. **Base Case**:
-   - When we reach the end of the array (`idx == nums.size()`), we check if the `target` is zero. If it is, we have found a valid combination, so we return `1`. Otherwise, we return `0` to indicate an invalid combination.
+8. **Recursive Calls**
+	```cpp
+	    res += dp(target + nums[idx], idx + 1);
+	```
+	Recursively calls `dp` again, but this time by adding the current number (`nums[idx]`) to the target and moving to the next index. Both results are added to account for both possibilities.
 
-4. **Count the Number of Ways**:
-   - The recursive calls accumulate the count of valid combinations that result in the `target`, and this count is stored in `mp[target][idx]` for later use.
+9. **Memoization**
+	```cpp
+	    return mp[target][idx] = res;
+	```
+	Stores the computed result in the memoization table `mp` for future use, associating it with the current target and index.
 
-### Code Breakdown (Step by Step)
+10. **Function Definition**
+	```cpp
+	int findTargetSumWays(vector<int>& nums, int target) {
+	```
+	Defines the `findTargetSumWays` function, which initializes the memoization structure and calls the recursive `dp` function to calculate the result.
 
-The solution code is implemented with a recursive helper function `dp` and a main function `findTargetSumWays` that initializes the process.
+11. **Input Assignment**
+	```cpp
+	    this->nums = nums;
+	```
+	Assigns the input vector `nums` to the class-level `nums` variable, so it can be used in the `dp` function.
 
-1. **Member Variables**:
-   ```cpp
-   map<int, map<int, int>> mp;
-   vector<int> nums;
-   ```
-   - `mp` serves as the memoization table, where each `target` and `idx` pair stores the computed result for that subproblem.
-   - `nums` stores the input array, allowing it to be accessible in the `dp` function.
+12. **Return Statement**
+	```cpp
+	    return dp(target, 0);
+	```
+	Calls the `dp` function starting from index 0 and the target value, and returns the result, which is the number of ways to achieve the target sum.
 
-2. **Recursive Function (`dp`)**:
-   ```cpp
-   int dp(int target, int idx) {
-       if(idx == nums.size()) return target == 0;
-       
-       if(mp.count(target))
-           if(mp[target].count(idx)) return mp[target][idx];
-       
-       int res = dp(target - nums[idx], idx + 1);
-       res += dp(target + nums[idx], idx + 1);
-       
-       return mp[target][idx] = res;
-   }
-   ```
-   - **Base Case**: If `idx` equals the size of `nums`, we’ve reached the end of the array. We return `1` if `target` is `0`, indicating a valid combination, and `0` otherwise.
-   - **Memoization Check**: Before performing the recursive calls, we check if `mp` already contains the result for `target` and `idx`. If it does, we return that result directly.
-   - **Recursive Calls**: We make two recursive calls:
-     - One where the current element is subtracted from `target`.
-     - Another where the current element is added to `target`.
-   - **Memoization Storage**: The result of both recursive calls is stored in `mp[target][idx]`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * target)
+- **Average Case:** O(n * target)
+- **Worst Case:** O(n * target)
 
-3. **Main Function (`findTargetSumWays`)**:
-   ```cpp
-   int findTargetSumWays(vector<int>& nums, int target) {
-       this->nums = nums;
-       return dp(target, 0);
-   }
-   ```
-   - **Initialization**: `nums` is assigned to the class variable, making it accessible within the `dp` function.
-   - **Recursive Call**: The main function starts the recursion by calling `dp` with the initial `target` and `idx = 0`, representing the full array.
+The time complexity is O(n * target) because each subproblem is computed once and memoized.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(n * target)
+- **Worst Case:** O(n * target)
 
-1. **Time Complexity**:
-   - The time complexity is approximately `O(n * T)`, where `n` is the size of `nums` and `T` is the range of possible values for `target`. The memoization table limits the number of recursive calls, as we reuse results for previously computed subproblems.
+The space complexity is O(n * target) due to the memoization table storing results for each target and index combination.
 
-2. **Space Complexity**:
-   - The space complexity is also `O(n * T)`, accounting for the memoization table that stores intermediate results.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This solution efficiently solves the "Target Sum" problem by combining recursion with memoization. The approach leverages dynamic programming to avoid redundant calculations, which is particularly useful for problems involving combinatorial choices, as we have here with the `+` and `-` signs. This recursive strategy provides an optimal and reliable solution for computing the number of ways to achieve the target sum, demonstrating the power of memoization in reducing the time complexity of recursive solutions.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/target-sum/description/)
 

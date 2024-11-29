@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Gi-FQM3Ez84"
 youtube_upload_date="2021-03-28"
 youtube_thumbnail="https://i.ytimg.com/vi/Gi-FQM3Ez84/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,135 +28,183 @@ youtube_thumbnail="https://i.ytimg.com/vi/Gi-FQM3Ez84/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+In this game, you must guess a number between 1 and n. Each wrong guess costs you the amount of the guessed number. Your goal is to minimize the total cost while guaranteeing a win. If you run out of money, you lose the game.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single integer n, which represents the maximum number in the guessing range.
+- **Example:** `Input: n = 8`
+- **Constraints:**
+	- 1 <= n <= 200
 
-{{< highlight cpp >}}
-class Solution {
-    vector<vector<int>> table;
-public:
-    int getMoneyAmount(int n) {
-        table.resize(n + 1, vector<int>(n + 1));
-        return dpf(table, 1, n);
-    }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum amount of money you need to guarantee a win, regardless of what number is picked.
+- **Example:** `Output: 12`
+- **Constraints:**
+	- The solution should minimize the total cost of guesses while guaranteeing a win.
 
-    int dpf(vector<vector<int>> &dp, int s, int e) {
-        if(s >= e) return 0;
-        if(dp[s][e] > 0) return dp[s][e];
-        int res = INT_MAX;
-        for(int x = s; x <= e; x++) {
-            int tmp = (x + max(dpf(dp, s, x-1), dpf(dp, x + 1, e)));
-            res = min(res, tmp);
-        }
-        return dp[s][e] = res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the minimum cost by choosing optimal guesses and minimizing the maximum cost in the worst case.
 
-### 🚀 Problem Statement
+- 1. Use dynamic programming to calculate the minimum cost for each possible range of numbers.
+- 2. For each number, calculate the maximum cost of guessing that number and continue with the next number based on whether the actual number is higher or lower.
+- 3. Memoize the results to avoid redundant calculations and improve efficiency.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number picked will always be between 1 and n.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 8
+Output: 12`  \
+  **Explanation:** The optimal strategy involves guessing numbers in such a way that minimizes the worst-case cost, ensuring that you can win without spending too much.
 
-Imagine you're playing a guessing game where you need to determine the minimum cost to guess a number correctly within a given range `[1, n]`. Each guess has a cost, and the goal is to minimize the total cost in the worst-case scenario.
+- **Input:** `Input: n = 3
+Output: 2`  \
+  **Explanation:** With only three numbers, guessing 2 minimizes the maximum cost, which is 2.
 
-For every guess you make:
-- If it's too high, you narrow the range to `[s, guess - 1]`.
-- If it's too low, you narrow the range to `[guess + 1, e]`.
+{{< dots >}}
+## Approach 🚀
+We use dynamic programming to find the minimum cost for each range of numbers from 1 to n. The key is to calculate the cost for each possible number as a guess and then find the optimal strategy.
 
-The challenge here is to make guesses efficiently so that you minimize the cost of reaching the correct number in the worst case.
-
----
-
-### 🧠 Approach
-
-This problem is best solved using **Dynamic Programming (DP)**, a technique where we break the problem into smaller subproblems and build up the solution step by step.
-
-#### Key Insight 💡
-We can visualize this problem as a decision tree. Each guess splits the current range into two smaller subranges:
-1. One where the number is too high.
-2. One where the number is too low.
-
-The strategy is to minimize the **worst-case cost**. For each range `[s, e]`, we try every possible guess `x` and calculate the total cost, which is:
-- The cost of guessing `x`, which is just `x` itself.
-- Plus the maximum cost of the two subranges formed after the guess.
-
-The goal is to choose the guess that minimizes the total cost in the worst-case scenario.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s walk through the code and break it down into bite-sized steps:
-
-#### 1. **Initialization of the DP Table** 🛠️
-
+### Initial Thoughts 💭
+- The game is a classic example of decision-making under uncertainty, where we aim to minimize the worst-case outcome.
+- Using dynamic programming, we can break the problem into smaller subproblems, ensuring that we compute the optimal cost efficiently.
+{{< dots >}}
+### Edge Cases 🌐
+- n is always between 1 and 200, so there are no cases with empty inputs.
+- The algorithm needs to efficiently handle cases where n is large, up to 200.
+- If n = 1, the result is 0 because no guessing is needed.
+- The solution must work within the constraints of n <= 200.
+{{< dots >}}
+## Code 💻
 ```cpp
+class Solution {
 vector<vector<int>> table;
 public:
 int getMoneyAmount(int n) {
-    table.resize(n + 1, vector<int>(n + 1)); // Initialize the DP table.
-    return dpf(table, 1, n);  // Call the recursive function to solve the problem.
+    table.resize(n + 1, vector<int>(n + 1));
+    return dpf(table, 1, n);
 }
-```
 
-- We start by defining a table (`table`) to store the minimum cost for each subproblem (range `[s, e]`).
-- The `getMoneyAmount` function initializes the table and then calls the `dpf` function to compute the result for the range `[1, n]`.
-
-#### 2. **The Recursive DP Function** 🔄
-
-```cpp
 int dpf(vector<vector<int>> &dp, int s, int e) {
-    if(s >= e) return 0;  // No cost for invalid or single-number ranges.
-    if(dp[s][e] > 0) return dp[s][e];  // If the result is already computed, return it.
-    
-    int res = INT_MAX;  // Initialize the result to a very large value.
-    
+    if(s >= e) return 0;
+    if(dp[s][e] > 0) return dp[s][e];
+    int res = INT_MAX;
     for(int x = s; x <= e; x++) {
         int tmp = (x + max(dpf(dp, s, x-1), dpf(dp, x + 1, e)));
-        res = min(res, tmp);  // Minimize the worst-case cost.
+        res = min(res, tmp);
     }
-    
-    return dp[s][e] = res;  // Store the result in the DP table.
+    return dp[s][e] = res;
 }
 ```
 
-- The `dpf` function is where the magic happens. It computes the minimum cost to guess a number within a given range `[s, e]`.
-- If the range is invalid (`s >= e`), the cost is zero (no guesses needed).
-- If we’ve already computed the cost for the range `[s, e]`, we return it (memoization).
-- We then iterate through all possible guesses `x` and calculate the cost for each guess.
-- The result is stored in the DP table to avoid recalculating the same subproblem multiple times.
+This code defines a solution to the problem of finding the minimum amount of money needed to guarantee a win in a guessing game. It uses dynamic programming to recursively calculate the minimum cost of guessing each number between `s` and `e`.
 
-#### 3. **Main Function** 🏁
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Class Definition**
+	```cpp
+	class Solution {
+	```
+	This line begins the definition of the `Solution` class, which will contain the methods needed to solve the problem.
 
-```cpp
-int getMoneyAmount(int n) {
-    table.resize(n + 1, vector<int>(n + 1));  // Initialize the DP table.
-    return dpf(table, 1, n);  // Compute and return the result.
-}
-```
+2. **Variable Declaration**
+	```cpp
+	vector<vector<int>> table;
+	```
+	This declares a 2D vector `table` which will be used to store the intermediate results of the dynamic programming computation.
 
-- The `getMoneyAmount` function initializes the DP table and calls `dpf` to compute the minimum cost to guess a number within the range `[1, n]`.
+3. **Access Specifier**
+	```cpp
+	public:
+	```
+	The `public` access specifier marks the methods and variables that follow as accessible from outside the class.
 
----
+4. **Function Declaration**
+	```cpp
+	int getMoneyAmount(int n) {
+	```
+	This is the function declaration for `getMoneyAmount`, which computes the minimum money required to guarantee a win in a guessing game, taking `n` (the maximum number) as input.
 
-### 📈 Complexity Analysis
+5. **Dynamic Programming Table Initialization**
+	```cpp
+	    table.resize(n + 1, vector<int>(n + 1));
+	```
+	The dynamic programming table `table` is resized to store values for all ranges of numbers from 1 to `n`, with each element initialized to 0.
 
-#### Time Complexity ⏱️
-- The time complexity is **O(n³)**. This comes from the fact that we compute the result for every pair of subproblems `[s, e]` (which gives us `O(n²)` subproblems), and for each subproblem, we try every possible guess `x` (which gives us `O(n)` iterations per subproblem).
-- Thus, the overall time complexity is **O(n³)**.
+6. **Function Call**
+	```cpp
+	    return dpf(table, 1, n);
+	```
+	The function `dpf` is called with the parameters `table`, `1`, and `n` to compute the minimum cost of the game for the range `[1, n]`.
 
-#### Space Complexity 💾
-- The space complexity is **O(n²)**, as we store the results for each subproblem in a DP table of size `(n+1) x (n+1)`.
+7. **Function Declaration**
+	```cpp
+	int dpf(vector<vector<int>> &dp, int s, int e) {
+	```
+	This is the declaration of the `dpf` function, which takes the dynamic programming table and the range `[s, e]` to compute the minimum money needed to guess within that range.
 
----
+8. **Base Case**
+	```cpp
+	    if(s >= e) return 0;
+	```
+	The base case: if the start value `s` is greater than or equal to the end value `e`, no more guesses are needed, so the cost is 0.
 
-### 🏁 Conclusion
+9. **Memoization Check**
+	```cpp
+	    if(dp[s][e] > 0) return dp[s][e];
+	```
+	If the result for the range `[s, e]` has already been computed and stored in `dp`, it is returned to avoid redundant calculations (memoization).
 
-This dynamic programming solution is an efficient way to solve the problem of determining the minimum cost to guess a number correctly. By breaking the problem into smaller subproblems and using memoization, we avoid redundant calculations and can solve even moderately large inputs.
+10. **Variable Initialization**
+	```cpp
+	    int res = INT_MAX;
+	```
+	A variable `res` is initialized to the maximum integer value, representing the minimum cost to guess for the range `[s, e]`.
 
-Although the time complexity is cubic, it’s still feasible for a range of sizes that are typically encountered in competitive programming or real-world applications.
+11. **Loop Iteration**
+	```cpp
+	    for(int x = s; x <= e; x++) {
+	```
+	This loop iterates over each possible guess `x` within the range `[s, e]`.
 
-Remember: This approach ensures that we always choose the best possible guess at each step, minimizing the worst-case cost.
+12. **Recursive Function Call**
+	```cpp
+	        int tmp = (x + max(dpf(dp, s, x-1), dpf(dp, x + 1, e)));
+	```
+	For each guess `x`, the function `dpf` is recursively called to compute the maximum cost for the left and right subranges (`[s, x-1]` and `[x+1, e]`). The result is the sum of `x` and the maximum of the two subranges.
 
-Keep practicing, and you’ll soon feel comfortable with dynamic programming problems like this one! 🌟
+13. **Result Update**
+	```cpp
+	        res = min(res, tmp);
+	```
+	The variable `res` is updated to store the minimum result across all possible guesses `x`.
+
+14. **Memoization Update**
+	```cpp
+	    return dp[s][e] = res;
+	```
+	The computed minimum result for the range `[s, e]` is stored in the dynamic programming table `dp` for future use.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^3)
+
+In the worst case, we perform calculations for each pair of numbers and then evaluate each guess within the range, leading to a cubic time complexity.
+
+### Space Complexity 💾
+- **Best Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+We use a 2D table to store the results for each pair of numbers, resulting in a space complexity of O(n^2).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)
 

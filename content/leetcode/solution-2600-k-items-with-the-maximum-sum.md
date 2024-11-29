@@ -14,107 +14,161 @@ img_src = ""
 youtube = "HmEYKbfjCLA"
 youtube_upload_date="2023-03-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/HmEYKbfjCLA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a bag with items, where each item has a number written on it, which could be 1, 0, or -1. You are also given the counts of items with 1s, 0s, and -1s, as well as a positive integer k. Your task is to pick exactly k items from the bag, maximizing the sum of the numbers written on the selected items.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of four non-negative integers: numOnes, numZeros, numNegOnes, and an integer k.
+- **Example:** `For numOnes = 5, numZeros = 3, numNegOnes = 2, k = 4.`
+- **Constraints:**
+	- 0 <= numOnes, numZeros, numNegOnes <= 50
+	- 0 <= k <= numOnes + numZeros + numNegOnes
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int kItemsWithMaximumSum(int one, int zero, int neg, int k) {
-        int sum = 0;
-        sum += min(one, k);
-        k -= min(one, k);
-        if(k > 0) {
-            k -= min(zero, k);
-        }
-        if(k > 0) {
-            sum -= min(neg, k);
-            k -= min(neg, k);
-        }
-        return sum;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum possible sum of the k selected items.
+- **Example:** `For numOnes = 5, numZeros = 3, numNegOnes = 2, k = 4, the output is 5.`
+- **Constraints:**
+	- The sum will be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the sum of selected items by picking the most valuable items, prioritizing 1s first, then 0s, and finally -1s.
+
+- 1. First, pick as many 1s as possible from the bag until reaching k items.
+- 2. If k items are still not picked, choose 0s next (as they do not affect the sum).
+- 3. If k items are still left, select -1s (which decrease the sum).
+{{< dots >}}
+### Problem Assumptions ✅
+- The array size is manageable, as the maximum sum of numOnes, numZeros, and numNegOnes is 150.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For numOnes = 5, numZeros = 3, numNegOnes = 2, k = 4`  \
+  **Explanation:** Select 4 items with 1s to maximize the sum, which gives a total sum of 5.
+
+- **Input:** `For numOnes = 4, numZeros = 2, numNegOnes = 1, k = 3`  \
+  **Explanation:** Select 3 items with 1s to maximize the sum, which gives a total sum of 3.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to select items with the highest possible values (1s first), followed by zeros, and finally, -1s, ensuring that exactly k items are selected.
+
+### Initial Thoughts 💭
+- Selecting 1s first is optimal as they contribute the most to the sum.
+- Zeros do not affect the sum, so we can use them as fillers if needed.
+- Negatives should be avoided if possible, as they reduce the sum.
+- We need to carefully prioritize the selection to maximize the sum.
+{{< dots >}}
+### Edge Cases 🌐
+- If k is 0, the sum will always be 0, regardless of the contents of the bag.
+- For large inputs, the solution should ensure that the selection logic is efficient to handle up to 150 items.
+- If k is exactly the sum of available 1s and 0s, no negative numbers will be selected.
+- Handle cases where there are no 1s or no -1s efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int kItemsWithMaximumSum(int one, int zero, int neg, int k) {
+    int sum = 0;
+    sum += min(one, k);
+    k -= min(one, k);
+    if(k > 0) {
+        k -= min(zero, k);
     }
-};
-{{< /highlight >}}
----
+    if(k > 0) {
+        sum -= min(neg, k);
+        k -= min(neg, k);
+    }
+    return sum;
+}
+```
 
-### Problem Statement
+This function calculates the maximum sum achievable by selecting 'k' items from three categories: positive, zero, and negative. It adds positive values, subtracts negative values, and takes zeros into account to maximize the sum.
 
-Given three integers, `one`, `zero`, and `neg`, and an integer `k`, the task is to calculate the maximum possible sum of selecting `k` items from a list of `one` positive ones, `zero` zeroes, and `neg` negative ones. The goal is to select `k` items in such a way that their sum is as large as possible.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int kItemsWithMaximumSum(int one, int zero, int neg, int k) {
+	```
+	Defines the function 'kItemsWithMaximumSum' that takes four arguments: 'one', 'zero', 'neg' representing counts of 1s, 0s, and negative numbers, and 'k' representing the number of items to select.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	    int sum = 0;
+	```
+	Initializes the variable 'sum' to 0, which will accumulate the maximum sum by selecting the appropriate number of items.
 
-To solve this problem, the key observation is to prioritize selecting the positive ones first, as they contribute the most to the sum. After that, we can consider the zeroes, which do not affect the sum at all. Finally, if there are still remaining selections to be made, we must choose the negative ones, which will reduce the sum.
+3. **Add Positive Items**
+	```cpp
+	    sum += min(one, k);
+	```
+	Adds the minimum of 'one' and 'k' to 'sum', representing the positive numbers that can be selected.
 
-The strategy for solving this problem involves:
+4. **Update Remaining Selection**
+	```cpp
+	    k -= min(one, k);
+	```
+	Decreases 'k' by the number of positive items selected, to track the remaining items to select.
 
-1. **Prioritize Positive Numbers**: Since we want to maximize the sum, we select the positive ones first. The maximum number of positive ones we can select is the minimum of `one` and `k`, because we can only pick up to `k` items in total.
-   
-2. **Zero Contribution**: After selecting the positive ones, if we still have remaining selections (i.e., if `k` is still greater than zero), we pick zeroes next. Zeroes do not affect the sum, so selecting them does not change the total sum.
+5. **Check for Zero Items**
+	```cpp
+	    if(k > 0) {
+	```
+	Checks if there are still items left to select (if 'k' is greater than 0).
 
-3. **Negative Numbers**: After selecting all positive ones and zeroes, if there are still remaining selections to be made, we must pick negative numbers. Since negative numbers decrease the sum, we select as many as needed to fill the remaining quota, adjusting the sum accordingly by subtracting the appropriate number of negative values.
+6. **Add Zero Items**
+	```cpp
+	        k -= min(zero, k);
+	```
+	Subtracts the minimum of 'zero' and 'k' from 'k', selecting zeros if any remaining items are left to choose.
 
-### Code Breakdown (Step by Step)
+7. **Check for Negative Items**
+	```cpp
+	    if(k > 0) {
+	```
+	Checks if there are still items to be selected after choosing positive and zero items.
 
-#### 1. **Function Definition**:
-   ```cpp
-   int kItemsWithMaximumSum(int one, int zero, int neg, int k) {
-       int sum = 0;
-   ```
-   - The function `kItemsWithMaximumSum` takes four parameters: `one`, `zero`, `neg`, and `k`.
-     - `one`: The number of positive ones.
-     - `zero`: The number of zeroes.
-     - `neg`: The number of negative ones.
-     - `k`: The number of items to select from these categories to maximize the sum.
+8. **Subtract Negative Items**
+	```cpp
+	        sum -= min(neg, k);
+	```
+	Subtracts the minimum of 'neg' and 'k' from 'sum', selecting negative values if necessary.
 
-#### 2. **Select Positive Numbers**:
-   ```cpp
-   sum += min(one, k);
-   k -= min(one, k);
-   ```
-   - First, we select as many positive ones as possible. The number of positive ones we can select is the minimum between `one` (the number of positive ones available) and `k` (the number of items we still need to select).
-   - We then subtract the number of positive ones selected from `k` to keep track of how many items are left to choose from.
+9. **Update Remaining Negative Selection**
+	```cpp
+	        k -= min(neg, k);
+	```
+	Decreases 'k' by the number of negative items selected.
 
-#### 3. **Select Zeroes**:
-   ```cpp
-   if(k > 0) {
-       k -= min(zero, k);
-   }
-   ```
-   - Next, we select zeroes. Since zeroes do not affect the sum, we select as many as possible, but we are limited by the number of zeroes available and the remaining value of `k`.
-   - We subtract the number of zeroes selected from `k` to keep track of how many items are left to select.
+10. **Return Result**
+	```cpp
+	    return sum;
+	```
+	Returns the accumulated 'sum' as the result, which represents the maximum sum achievable by selecting 'k' items.
 
-#### 4. **Select Negative Numbers**:
-   ```cpp
-   if(k > 0) {
-       sum -= min(neg, k);
-       k -= min(neg, k);
-   }
-   ```
-   - Finally, if there are still items left to select, we must select negative ones. The maximum number of negative ones we can select is the minimum between `neg` (the number of negative ones available) and the remaining value of `k`.
-   - Since negative ones decrease the sum, we subtract the selected number of negative ones from the `sum`.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-#### 5. **Return the Final Result**:
-   ```cpp
-   return sum;
-   }
-   ```
-   - After selecting the positive ones, zeroes, and negative ones, we return the total sum. This sum represents the maximum sum possible by selecting `k` items from the given categories.
+The time complexity is constant as the number of operations is minimal for each input set.
 
-### Complexity Analysis
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Time Complexity**:
-  The solution makes a constant number of operations for each step (selecting positive ones, zeroes, and negative ones). Each of these operations takes constant time, i.e., \(O(1)\). Therefore, the overall time complexity is \(O(1)\).
+The space complexity is constant as no extra space is needed beyond the input values.
 
-- **Space Complexity**:
-  The solution uses only a few integer variables (`sum`, `k`, and temporary variables for the calculations), so the space complexity is \(O(1)\) as well.
+**Happy Coding! 🎉**
 
-### Conclusion
-
-This problem is solved efficiently by strategically selecting the items that contribute the most to the sum. By focusing on selecting positive ones first, zeroes second (which do not affect the sum), and negative ones last (which reduce the sum), we can calculate the maximum sum in constant time. The solution runs in constant time and space, making it optimal for this problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/k-items-with-the-maximum-sum/description/)
 

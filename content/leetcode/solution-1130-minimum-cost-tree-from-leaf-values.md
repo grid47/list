@@ -14,95 +14,179 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array arr of positive integers. Consider all binary trees such that each node has either 0 or 2 children, the values of arr correspond to the values of each leaf in an in-order traversal of the tree, and the value of each non-leaf node is equal to the product of the largest leaf values in its left and right subtrees. Return the smallest possible sum of the values of the non-leaf nodes among all possible binary trees.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array arr of integers where each integer represents a leaf node value in a binary tree.
+- **Example:** `Input: arr = [5,3,8]`
+- **Constraints:**
+	- 2 <= arr.length <= 40
+	- 1 <= arr[i] <= 15
+	- The answer fits into a 32-bit signed integer.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int mctFromLeafValues(vector<int>& arr) {
-        
-        int res = 0;
-        
-        vector<int> stk = { INT_MAX };
-        for(int a : arr) {
-            while(stk.back() <= a) {
-                int mid = stk.back();
-                stk.pop_back();
-                res += mid * min(stk.back(), a);
-            }
-            stk.push_back(a);
-        }
-        
-        for(int i = 2; i < stk.size(); i++) {
-            res += stk[i] * stk[i - 1];
-        }
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the smallest possible sum of the values of each non-leaf node in the tree.
+- **Example:** `Output: 75`
+- **Constraints:**
+	- The sum of non-leaf node values should fit in a 32-bit signed integer.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the binary tree that minimizes the sum of non-leaf node values, considering all possible binary trees that can be formed from the given leaf values.
 
-### Problem Statement
-The problem of constructing a Minimum Cost Tree from Leaf Values involves building a binary tree from an array of integers such that each internal node in the tree represents the product of the two leaf values beneath it. The goal is to minimize the total cost of the tree, which is the sum of all products calculated for each internal node. Given an array of leaf values, the challenge is to determine the minimum possible cost of such a binary tree.
+- Initialize a stack with a value greater than any leaf node.
+- Iterate through the array of leaf values, and for each value, check if it can form a valid tree node by combining with the previous elements in the stack.
+- For each valid combination, compute the product of the current non-leaf node values and accumulate the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree will be a full binary tree with 0 or 2 children per node.
+- It is assumed that the values in the array will always be valid positive integers within the specified range.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [5,3,8]`  \
+  **Explanation:** The goal is to arrange the leaf nodes in such a way that the sum of non-leaf nodes is minimized. The smallest possible non-leaf node sum is 75, as calculated by the optimal tree structure.
 
-### Approach
-To tackle the MCT problem, a greedy algorithm utilizing a stack is employed. The idea is to maintain a monotonic stack of leaf values, ensuring that we can efficiently compute the cost of merging leaf values into internal nodes while keeping track of the minimum cost at each step. 
+- **Input:** `Input: arr = [10,15,12]`  \
+  **Explanation:** The optimal binary tree for this set of leaf nodes produces the minimum sum of non-leaf node values, which is 330.
 
-The algorithm can be summarized in the following steps:
-1. **Initialization**: Start by initializing the result (`res`) to 0 and create a stack with a single value of `INT_MAX` to handle edge cases effectively.
-2. **Iterate through the array**: For each value in the array:
-   - While the top of the stack is less than or equal to the current value, pop the stack and compute the cost using the popped value and the minimum of the current value and the next top of the stack.
-   - Push the current value onto the stack.
-3. **Final pass**: After processing all values in the array, there may still be elements in the stack. Perform a final pass to compute the remaining products of the leaf values to finalize the cost.
-4. **Return the result**: The final computed value is returned as the minimum cost.
+{{< dots >}}
+## Approach 🚀
+The solution involves using a stack to help compute the smallest sum by simulating the process of building a binary tree and evaluating the cost for each non-leaf node.
 
-### Code Breakdown (Step by Step)
+### Initial Thoughts 💭
+- We need to optimize the tree structure such that the non-leaf node values are minimized.
+- Using a stack allows us to easily manage and combine leaf nodes while maintaining an efficient calculation of the product of the largest values from each subtree.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the input will have at least 2 elements, so no need to handle empty arrays.
+- The algorithm should handle inputs with up to 40 leaf nodes efficiently.
+- Consider cases where all elements in the array are equal, as this might affect the structure of the binary tree.
+- Ensure that the solution runs within the time limits for the largest input sizes.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int mctFromLeafValues(vector<int>& arr) {
-        int res = 0; // Initialize the result to 0
-        
-        vector<int> stk = { INT_MAX }; // Create a stack initialized with INT_MAX
-        for(int a : arr) { // Iterate over each leaf value in the input array
-            while(stk.back() <= a) { // While the top of the stack is less than or equal to the current value
-                int mid = stk.back(); // Store the top value
-                stk.pop_back(); // Pop the top value off the stack
-                // Calculate the cost using the product of mid and the minimum of the new top of the stack and current value
-                res += mid * min(stk.back(), a);
-            }
-            stk.push_back(a); // Push the current value onto the stack
+int mctFromLeafValues(vector<int>& arr) {
+    
+    int res = 0;
+    
+    vector<int> stk = { INT_MAX };
+    for(int a : arr) {
+        while(stk.back() <= a) {
+            int mid = stk.back();
+            stk.pop_back();
+            res += mid * min(stk.back(), a);
         }
-        
-        // Final pass to calculate the remaining products for values left in the stack
-        for(int i = 2; i < stk.size(); i++) {
-            res += stk[i] * stk[i - 1];
-        }
-        
-        return res; // Return the total minimum cost
+        stk.push_back(a);
     }
-};
+    
+    for(int i = 2; i < stk.size(); i++) {
+        res += stk[i] * stk[i - 1];
+    }
+    
+    return res;
+}
 ```
 
-- **Line 2-3**: Define the function `mctFromLeafValues` that takes a vector of integers as input. Initialize the result variable to zero and create a stack initialized with `INT_MAX`.
-- **Line 4-14**: The main logic that processes each element in the array:
-  - If the current value is greater than the top of the stack, pop the stack and calculate the cost, updating `res`.
-  - Push the current value onto the stack for further processing.
-- **Line 16-18**: After processing all values, handle any remaining values in the stack by computing their products and adding them to the result.
-- **Line 20**: Return the final minimum cost.
+This function calculates the minimum cost tree from leaf values by simulating a greedy approach using a stack to maintain the current minimum values while traversing the input array.
 
-### Complexity
-The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of elements in the input array. Each element is pushed and popped from the stack at most once, leading to a linear traversal of the array. The space complexity is \(O(n)\) in the worst case due to the stack storing the elements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int mctFromLeafValues(vector<int>& arr) {
+	```
+	This function definition begins the implementation of the `mctFromLeafValues` function, which takes a vector of integers `arr` and returns an integer.
 
-### Conclusion
-This implementation of the MCT problem provides an efficient way to calculate the minimum cost of merging leaf values into a binary tree. By utilizing a greedy approach with a monotonic stack, the algorithm ensures that the cost is minimized at every step of merging. The method is both optimal and straightforward, making it a robust solution for similar problems involving tree constructions and cost minimization in computational scenarios.
+2. **Variable Initialization**
+	```cpp
+	    int res = 0;
+	```
+	This line initializes the result variable `res`, which will store the total cost of the minimum cost tree.
+
+3. **Stack Initialization**
+	```cpp
+	    vector<int> stk = { INT_MAX };
+	```
+	A stack `stk` is initialized with the maximum possible integer (`INT_MAX`) as a sentinel value to handle edge cases when processing the tree structure.
+
+4. **Loop Setup**
+	```cpp
+	    for(int a : arr) {
+	```
+	This `for` loop iterates through the elements in the input vector `arr`.
+
+5. **Loop Condition**
+	```cpp
+	        while(stk.back() <= a) {
+	```
+	This `while` loop checks if the current stack's top value is less than or equal to the current element `a`. If true, it processes the current stack element.
+
+6. **Stack Manipulation**
+	```cpp
+	            int mid = stk.back();
+	```
+	The top value of the stack is stored in `mid` for further calculations.
+
+7. **Stack Pop**
+	```cpp
+	            stk.pop_back();
+	```
+	This line removes the top element from the stack after processing it.
+
+8. **Cost Calculation**
+	```cpp
+	            res += mid * min(stk.back(), a);
+	```
+	The result variable `res` is updated by adding the product of the `mid` value and the minimum of the stack's new top value and the current element `a`.
+
+9. **Stack Push**
+	```cpp
+	        stk.push_back(a);
+	```
+	After the inner `while` loop, the current element `a` is pushed onto the stack.
+
+10. **Additional Processing**
+	```cpp
+	    for(int i = 2; i < stk.size(); i++) {
+	```
+	A second `for` loop starts at index 2 to process the remaining stack elements after the main loop finishes.
+
+11. **Cost Calculation**
+	```cpp
+	        res += stk[i] * stk[i - 1];
+	```
+	This line adds the product of each adjacent pair of stack elements to the result `res`.
+
+12. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The final result `res` is returned, which contains the minimum cost of the tree.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in terms of the number of leaf nodes due to the stack-based approach.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for the stack.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/description/)

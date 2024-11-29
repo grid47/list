@@ -14,91 +14,142 @@ img_src = ""
 youtube = "RrnhHjJmzj8"
 youtube_upload_date="2023-09-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/RrnhHjJmzj8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array where each element represents the required size of the group for each person, group the people accordingly and return the groups. Each person must be in exactly one group.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array where each element represents the group size that each person is assigned to.
+- **Example:** `Input: groupSizes = [3,3,3,3,3,1,3]`
+- **Constraints:**
+	- 1 <= n <= 500
+	- 1 <= groupSizes[i] <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> groupThePeople(vector<int>& gz) {
-        vector<vector<int>> res, gzs(gz.size() + 1);
-        for(auto i = 0; i < gz.size(); i++) {
-            gzs[gz[i]].push_back(i);
-            if(gzs[gz[i]].size() == gz[i]) {
-                res.push_back({});
-                swap(res.back(), gzs[gz[i]]);
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of lists, where each list represents a group containing the people who belong to that group.
+- **Example:** `Output: [[5], [0,1,2], [3,4,6]]`
+- **Constraints:**
+	- Each person should appear in exactly one group.
+	- The number of people in each group must match the values in the input array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To group people based on the sizes specified in the input array.
+
+- Iterate through the input array and maintain a list of people for each group size.
+- Once a group reaches the required size, add it to the result and start a new group for the next people.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain valid values and have a valid solution.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: groupSizes = [3,3,3,3,3,1,3]`  \
+  **Explanation:** In this example, we must group people such that the sizes of the groups correspond to the values in the groupSizes array. For example, the first three people (0, 1, and 2) must form a group of size 3, while the last person (5) must be in a group of size 1.
+
+{{< dots >}}
+## Approach 🚀
+The solution uses a greedy approach where people are grouped in batches according to the specified group sizes.
+
+### Initial Thoughts 💭
+- We need to keep track of people who are yet to be grouped based on their required group size.
+- Iterate through the groupSizes array, and as each person is processed, maintain a list of current groups. Once a group reaches its specified size, move on to the next group.
+{{< dots >}}
+### Edge Cases 🌐
+- If the groupSizes array is empty, there should be no groups formed.
+- Ensure that the solution efficiently handles input sizes up to the maximum allowed (500).
+- If all people are required to be in groups of size 1, each person will form their own group.
+- Each group will always have the correct number of people as per the input constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> groupThePeople(vector<int>& gz) {
+    vector<vector<int>> res, gzs(gz.size() + 1);
+    for(auto i = 0; i < gz.size(); i++) {
+        gzs[gz[i]].push_back(i);
+        if(gzs[gz[i]].size() == gz[i]) {
+            res.push_back({});
+            swap(res.back(), gzs[gz[i]]);
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The problem requires grouping people based on their group sizes. You are given an array `gz` where each element `gz[i]` represents the size of the group that the `i-th` person belongs to. The goal is to form groups where each group contains exactly the number of people specified by their corresponding sizes in the array.
-
-For example, if `gz = [3, 3, 3, 3, 3, 1, 3]`, this indicates that there are five people who want to be in groups of size 3 and one person who wants to be in a group of size 1. The output should then be groups of the correct sizes, like `[[0, 1, 2], [3, 4], [5]]`.
-
-### Approach
-To solve this problem efficiently, we can utilize a hashmap (or an array of vectors in this case) to keep track of the indices of people that belong to each group size. The idea is to iterate through the `gz` array, and for each person, we add their index to the corresponding group size in our helper structure. Once we have a complete group (i.e., the number of people in the list equals the group size), we can transfer this list to our results and reset the group for potential future groups of the same size.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    vector<vector<int>> groupThePeople(vector<int>& gz) {
+    return res;
+}
 ```
-- **Line 1-2**: We define the class `Solution` and start the method `groupThePeople`, which takes a reference to a vector `gz` (group sizes) as input and returns a vector of vectors containing grouped people.
 
-```cpp
-        vector<vector<int>> res, gzs(gz.size() + 1);
-```
-- **Line 3**: We initialize two vectors:
-  - `res`: This will store the final result containing the groups.
-  - `gzs`: This is a vector of vectors that will temporarily hold the indices of people based on their group sizes. The size is `gz.size() + 1` to accommodate all possible group sizes, including `0`.
+This function groups individuals into subgroups based on their group size preferences, using a dynamic grouping mechanism.
 
-```cpp
-        for(auto i = 0; i < gz.size(); i++) {
-            gzs[gz[i]].push_back(i);
-```
-- **Line 4-5**: We iterate through each person's index `i` in `gz`. For each person, we push their index `i` into the corresponding vector in `gzs` based on their group size `gz[i]`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> groupThePeople(vector<int>& gz) {
+	```
+	Defines a function that takes a vector of group sizes as input and returns grouped indices.
 
-```cpp
-            if(gzs[gz[i]].size() == gz[i]) {
-                res.push_back({});
-                swap(res.back(), gzs[gz[i]]);
-            }
-```
-- **Line 6-9**: After adding the index to the group, we check if the size of that group has reached the required size (`gz[i]`). If it has, we:
-  - Add a new empty vector to `res`.
-  - Use `swap` to move the contents of `gzs[gz[i]]` (the group of indices) into the newly created group in `res`. This effectively transfers the group to the results and resets `gzs[gz[i]]` for further use.
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> res, gzs(gz.size() + 1);
+	```
+	Initializes a result vector and an auxiliary grouping vector for grouping based on sizes.
 
-```cpp
-        }
-        return res;
-    }
-};
-```
-- **Line 10-12**: We complete the loop and return the result `res`, which now contains all the groups of people formed according to their specified sizes.
+3. **Loop Setup**
+	```cpp
+	    for(auto i = 0; i < gz.size(); i++) {
+	```
+	Loops through each index in the group size vector.
 
-### Complexity Analysis
-1. **Time Complexity**:
-   - The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of people in the input array `gz`. This is because we iterate through the `gz` array exactly once, performing constant-time operations for each person.
+4. **Group Assignment**
+	```cpp
+	        gzs[gz[i]].push_back(i);
+	```
+	Assigns the current index to the group corresponding to its size.
 
-2. **Space Complexity**:
-   - The space complexity is also \(O(n)\). In the worst case, all people could belong to the same group size, leading to a scenario where we store all indices in `gzs`. The output `res` also takes up space proportional to \(n\) in the worst case, where every person forms a group by themselves.
+5. **Conditional Check**
+	```cpp
+	        if(gzs[gz[i]].size() == gz[i]) {
+	```
+	Checks if the current group has reached the required size.
 
-### Conclusion
-The `groupThePeople` function efficiently groups people based on their specified group sizes using a straightforward approach that utilizes a vector of vectors to organize indices. By iterating through the input array and maintaining a temporary structure for groups, we can ensure that each group is formed exactly as specified. The overall time and space efficiency make this solution suitable for larger inputs, maintaining a linear complexity.
+6. **Add Group to Result**
+	```cpp
+	            res.push_back({});
+	```
+	Creates a new subgroup in the result vector.
 
-This explanation serves to clarify the functionality and efficiency of the code, providing insights into how group formation can be handled programmatically using basic data structures in C++. Readers will benefit from understanding both the specific implementation details and the broader context of the problem, enhancing their programming skills in algorithms and data structures.
+7. **Swap Operation**
+	```cpp
+	            swap(res.back(), gzs[gz[i]]);
+	```
+	Swaps the last group in the result vector with the filled group.
+
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the final grouped result vector.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The algorithm processes each person once, so the time complexity is O(n), where n is the number of people.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the groups in a result list.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/description/)
 

@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "ZHJDwbfqoa8"
 youtube_upload_date="2024-06-24"
 youtube_thumbnail="https://i.ytimg.com/vi/ZHJDwbfqoa8/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,142 +28,170 @@ youtube_thumbnail="https://i.ytimg.com/vi/ZHJDwbfqoa8/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a sorted array of unique integers. Your task is to group consecutive numbers into ranges and return a sorted list of these ranges. A range [a,b] includes all integers from a to b (inclusive). Each range should be represented as 'a->b' if a != b or 'a' if a == b.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A sorted array of unique integers.
+- **Example:** `Input: nums = [-3,-2,-1,1,2,5]`
+- **Constraints:**
+	- The array length is in the range [0, 20].
+	- All values in the array are unique.
+	- The values are sorted in ascending order.
+	- Each integer lies in the range [-2^31, 2^31 - 1].
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> summaryRanges(vector<int>& nums) {
-        
-        const int size_n = nums.size();
-        vector<string> res;
-        if ( 0 == size_n) return res;
-        for (int i = 0; i < size_n;) {
-            int start = i, end = i;
-            while (end + 1 < size_n && nums[end+1] == nums[end] + 1) end++;
-            if (end > start) res.push_back(to_string(nums[start]) + "->" + to_string(nums[end]));
-            else res.push_back(to_string(nums[start]));
-            i = end+1;
-        }
-        return res;
-        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** A sorted list of ranges that cover all the numbers in the array exactly, with each range formatted as 'a->b' or 'a'.
+- **Example:** `Output: ['-3->-1','1->2','5']`
+- **Constraints:**
+	- Each number in the input array must be included in exactly one range.
+	- Ranges must not include any integers outside the input array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Identify consecutive sequences of numbers and group them into ranges.
+
+- Initialize a pointer to traverse the array.
+- For each element, determine the start of a range.
+- Continue iterating until the end of the current range is reached (next number is not consecutive).
+- Add the range to the result list in the appropriate format ('a->b' or 'a').
+- Repeat until all elements are processed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-null and adheres to the constraints.
+- Consecutive values are integers differing by exactly 1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1,2,3,5,7,8,10]`  \
+  **Explanation:** The ranges are: [1,3] -> '1->3', [5,5] -> '5', [7,8] -> '7->8', [10,10] -> '10'. Output: ['1->3','5','7->8','10'].
+
+- **Input:** `Input: nums = [0,2,3,6]`  \
+  **Explanation:** The ranges are: [0,0] -> '0', [2,3] -> '2->3', [6,6] -> '6'. Output: ['0','2->3','6'].
+
+{{< dots >}}
+## Approach 🚀
+The solution involves iterating through the array to identify consecutive sequences and recording them as ranges. A two-pointer technique can be used to determine the start and end of each range.
+
+### Initial Thoughts 💭
+- Consecutive numbers can be identified when the difference between adjacent elements is 1.
+- A range can be represented compactly as 'a->b' or just 'a' if it contains a single number.
+- Iterate through the array while tracking the start of each range.
+- When a non-consecutive number is encountered, finalize the current range.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input array should return an empty result.
+- The largest possible array of size 20 with mixed consecutive and non-consecutive elements.
+- An array with all consecutive numbers.
+- An array where no two numbers are consecutive.
+- Ensure no ranges extend beyond the given numbers.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> summaryRanges(vector<int>& nums) {
+    
+    const int size_n = nums.size();
+    vector<string> res;
+    if ( 0 == size_n) return res;
+    for (int i = 0; i < size_n;) {
+        int start = i, end = i;
+        while (end + 1 < size_n && nums[end+1] == nums[end] + 1) end++;
+        if (end > start) res.push_back(to_string(nums[start]) + "->" + to_string(nums[end]));
+        else res.push_back(to_string(nums[start]));
+        i = end+1;
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-The problem asks us to return the summary of a given list of sorted integers as ranges. A range is a sequence of consecutive integers. The goal is to group consecutive integers together and represent them as a range, such as `"1->5"` instead of listing all the integers individually (`"1", "2", "3", "4", "5"`). If the integers are not consecutive, they should be listed individually.
-
----
-
-### 🧠 Approach
-
-To solve this problem, we will iterate through the sorted list of integers and group consecutive numbers together as ranges. For any number that is not part of a range, we will list it as an individual number.
-
-Here's the strategy:
-
-1. **Edge Case Handling:**
-   - If the input list is empty, we return an empty result immediately.
-   
-2. **Iterate Through the List:**
-   - We initialize a pointer `i` to iterate through the list, identifying consecutive sequences and representing them as ranges.
-   
-3. **Range Construction:**
-   - When we detect consecutive integers, we will create a range in the format `"start->end"`. For isolated numbers, we’ll simply list the number.
-   
-4. **Update Pointer:**
-   - After processing a range or a number, we update the pointer to continue from the next element.
-
-5. **Return Result:**
-   - Finally, we return the summarized list of ranges or individual numbers.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-#### Step 1: Handle Edge Case for Empty Input
-
-```cpp
-const int size_n = nums.size();
-vector<string> res;
-if (0 == size_n) return res;
+    return res;
+    
+}
 ```
 
-- First, we check if the input list `nums` is empty. If so, we return an empty result (`res`). This is important to avoid unnecessary processing for an empty list.
+This function takes a sorted array of integers and returns a summary of ranges where consecutive numbers appear, using the format 'start->end'.
 
-#### Step 2: Initialize the Iteration Variables
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> summaryRanges(vector<int>& nums) {
+	```
+	Defines the function `summaryRanges` that takes a reference to a vector of integers and returns a vector of strings representing consecutive ranges.
 
-```cpp
-for (int i = 0; i < size_n;) {
-    int start = i, end = i;
-```
+2. **Variable Initialization**
+	```cpp
+	    const int size_n = nums.size();
+	```
+	Gets the size of the input vector `nums` and stores it in `size_n` for later use.
 
-- We begin iterating through the list, where `i` keeps track of the current position. The `start` and `end` variables mark the beginning and end of a potential range.
+3. **Result Container**
+	```cpp
+	    vector<string> res;
+	```
+	Initializes an empty vector `res` to store the resulting summary ranges.
 
-#### Step 3: Find Consecutive Numbers in the List
+4. **Edge Case Check**
+	```cpp
+	    if ( 0 == size_n) return res;
+	```
+	Checks if the input vector is empty; if so, returns an empty result vector.
 
-```cpp
-while (end + 1 < size_n && nums[end + 1] == nums[end] + 1) end++;
-```
+5. **Main Loop**
+	```cpp
+	    for (int i = 0; i < size_n;) {
+	```
+	Starts a loop to iterate over the elements of `nums`.
 
-- Inside the `while` loop, we check if the current number is consecutive to the next. If so, we move the `end` pointer forward to extend the range. The condition ensures that we don’t go out of bounds and that the numbers are consecutive.
+6. **Range Initialization**
+	```cpp
+	        int start = i, end = i;
+	```
+	Initializes two variables `start` and `end` to the current index `i`. These will track the beginning and end of a consecutive range.
 
-#### Step 4: Construct the Range
+7. **Range Expansion**
+	```cpp
+	        while (end + 1 < size_n && nums[end+1] == nums[end] + 1) end++;
+	```
+	Expands the `end` pointer to include consecutive numbers in the range.
 
-```cpp
-if (end > start) res.push_back(to_string(nums[start]) + "->" + to_string(nums[end]));
-else res.push_back(to_string(nums[start]));
-```
+8. **Range Formatting**
+	```cpp
+	        if (end > start) res.push_back(to_string(nums[start]) + "->" + to_string(nums[end]));
+	```
+	If a range of consecutive numbers is found, adds the formatted range (e.g., 'start->end') to the result vector.
 
-- After identifying the range, we check if it contains more than one number. If so, we create a range in the format `"start->end"`. If the range consists of just one number, we add the number itself.
+9. **Single Number Case**
+	```cpp
+	        else res.push_back(to_string(nums[start]));
+	```
+	If no range is found (i.e., the number is isolated), adds the number as a single element string to the result.
 
-#### Step 5: Move to the Next Range or Number
+10. **Advance Index**
+	```cpp
+	        i = end+1;
+	```
+	Moves the index `i` to the next number after the current range.
 
-```cpp
-i = end + 1;
-```
+11. **Return Result**
+	```cpp
+	    return res;
+	```
+	Returns the vector `res`, which contains the summary of ranges as strings.
 
-- Once a range or number is processed, we update `i` to `end + 1`, which moves the pointer past the current range to continue processing the next sequence.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-#### Step 6: Return the Result
+Each element is visited exactly once.
 
-```cpp
-return res;
-```
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- Finally, after processing all elements, we return the `res` vector containing the summarized ranges or individual numbers.
+No additional space is required beyond the result list.
 
----
+**Happy Coding! 🎉**
 
-### 📈 Complexity Analysis
-
-#### Time Complexity:
-The time complexity is **O(n)**, where `n` is the number of elements in the input list. 
-
-- The main loop iterates through each element exactly once, and the inner `while` loop only iterates for consecutive numbers. Therefore, every element is visited once, resulting in a linear time complexity.
-
-#### Space Complexity:
-The space complexity is **O(n)**, as the result list `res` can contain up to `n` elements, where `n` is the number of integers in the input list.
-
----
-
-### 🏁 Conclusion
-
-In this solution, we efficiently summarize ranges of consecutive integers in a sorted list. By iterating through the list and checking for consecutive numbers, we can group them into ranges or list individual numbers as needed.
-
-This algorithm is optimal with a time complexity of **O(n)** and a space complexity of **O(n)**, making it well-suited for large lists of integers. The edge case handling for empty inputs also ensures the solution is robust and ready for all scenarios.
-
----
-
-### ✨ Quick Recap
-
-- The algorithm iterates through the list to identify and group consecutive numbers into ranges.
-- Each range is represented as `"start->end"`, and isolated numbers are listed individually.
-- The solution has a linear time complexity, making it both efficient and scalable!
-
-Let’s keep practicing and mastering these problem-solving techniques! 💪
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/summary-ranges/description/)
 

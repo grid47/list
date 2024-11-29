@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "6aEyTjOwlJU"
 youtube_upload_date="2021-07-08"
 youtube_thumbnail="https://i.ytimg.com/vi/6aEyTjOwlJU/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,137 +28,178 @@ youtube_thumbnail="https://i.ytimg.com/vi/6aEyTjOwlJU/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You have intercepted a string of numbers that encodes a message. The message is decoded using the following mapping:
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> memo;
-    int numDecodings(string s) {
-        
-        memo.resize(s.size(), -1);
-        return !s.size()? 0: ways(0, s);
-    }
-    
-    int ways(int i, string s) {
-        if(i == s.size()) return 1;
-        if(s[i] == '0') return 0;
-        if(memo[i] > -1) return memo[i];
-        int res = ways(i + 1, s);
-        
-        if(i < s.size() - 1 && (s[i] == '1' || (s[i] == '2' && s[i+1] < '7')))
-            res += ways(i + 2, s);
-        
-        return memo[i] = res;
-    }
-};
-{{< /highlight >}}
----
+"1" -> 'A',
+"2" -> 'B',
+...
+"26" -> 'Z'.
 
-### 🔐 **Decode Ways** – Unravel the Mystery of Decoding!
+However, there are multiple ways to decode the string, as some numbers can represent a single letter (e.g., '1' for 'A', '12' for 'L'). Your task is to return the number of possible ways to decode the string. Note that strings containing invalid encodings (e.g., starting with zero or having codes larger than 26) should not be considered valid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string s consisting only of digits, representing the encoded message.
+- **Example:** `Input: s = "1234"`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- s contains only digits
 
-The **Decode Ways** problem is a fascinating challenge, where you’re tasked with decoding a string of digits into alphabetic characters. Each digit or pair of digits represents a letter in the alphabet ('A' = 1, 'B' = 2, ..., 'Z' = 26). Your goal is to determine the number of distinct ways the string can be decoded.
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an integer, representing the number of valid ways to decode the string.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should fit within a 32-bit integer.
 
-#### Example Walkthrough:
-- **Input**: `"12"`  
-  - Decodings: "AB" (1 → A, 2 → B) or "L" (12 → L)  
-  - **Output**: `2`
-  
-- **Input**: `"226"`  
-  - Decodings: "BBF", "BZ", "VF"  
-  - **Output**: `3`
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of ways the string can be decoded, by considering all possible valid groupings of numbers into letters and ensuring no invalid decodings (such as those starting with 0).
 
-We also need to handle edge cases like leading zeros or numbers greater than 26, which represent invalid decodings.
+- Check if the first character is '0', which would make the string invalid.
+- Use dynamic programming or memoization to store the number of ways to decode the string from each position.
+- At each step, consider both single-digit and two-digit numbers (if valid), and recursively calculate the number of decodings for the remaining substring.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string is guaranteed to be non-empty and contain only digits.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = "1234"`  \
+  **Explanation:** "1234" can be decoded in three ways: as 'ABCD' (1 2 3 4), 'LCD' (12 3 4), or 'AWD' (1 23 4).
 
-### 🛠️ **Approach**
+- **Input:** `Input: s = "226"`  \
+  **Explanation:** "226" can be decoded as: 'BBF' (2 2 6), 'VF' (22 6), or 'BZ' (2 26).
 
-The problem is solved efficiently using **dynamic programming (DP)** with **memoization**. The idea is to break down the problem into smaller subproblems, storing intermediate results to avoid redundant calculations. Here's a step-by-step breakdown:
+- **Input:** `Input: s = "06"`  \
+  **Explanation:** "06" cannot be decoded because '06' is not a valid encoding, so the output is 0.
 
-1. **Base Case**:  
-   If we reach the end of the string, we return 1 because it means the string is fully decoded.
+{{< dots >}}
+## Approach 🚀
+We can solve this problem using dynamic programming. We will keep track of the number of ways to decode the string up to each position, considering both single-digit and two-digit numbers where valid.
 
-2. **Invalid Cases**:  
-   If the current digit is '0', it’s an invalid character (since no letter corresponds to '0'). We return 0 for this case.
-
-3. **Memoization**:  
-   We use a `memo` array to store the results of subproblems. This ensures that we don’t recompute the number of decodings for the same index multiple times.
-
-4. **Recursive Case**:  
-   - Recursively calculate the number of ways to decode starting from the next index (`i + 1`).
-   - If the current and next characters form a valid two-digit number (between 10 and 26), recursively calculate the number of ways to decode starting from `i + 2`.
-
-### 📜 **Code Breakdown**
-
-#### Step 1: Memoization Setup
-
-```cpp
-vector<int> memo;
-```
-
-- We declare a vector `memo` that will store the number of decodings for each index in the string. Initially, it is empty and will be resized according to the size of the input string `s`.
-
-#### Step 2: Main Function to Call the Helper
-
+### Initial Thoughts 💭
+- This problem can be solved using dynamic programming or memoization to store intermediate results and avoid recalculating the same subproblems.
+- The key observation is that valid encodings are formed by single digits ('1' to '9') and valid two-digit combinations ('10' to '26').
+- The presence of '0' as a standalone digit or paired with another number (e.g., '10') requires careful handling to avoid invalid decodings.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input string should return 0, as there are no ways to decode an empty string.
+- For large input strings, the solution should still be efficient and handle up to 100 characters.
+- Strings that start with '0' or contain invalid two-digit combinations (e.g., '30', '40') should return 0.
+- Ensure that the solution works within the given constraint of a string length of up to 100 characters.
+{{< dots >}}
+## Code 💻
 ```cpp
 int numDecodings(string s) {
-    memo.resize(s.size(), -1); // Initialize memoization array
-    return !s.size()? 0 : ways(0, s);
-}
-```
-
-- The `memo` array is resized to match the length of the input string `s`, with all elements initialized to `-1` (indicating that no subproblem has been solved yet).
-- The function checks if the string is empty. If so, it returns 0 because an empty string cannot be decoded.
-
-#### Step 3: Helper Function for Recursion
-
-```cpp
-int ways(int i, string s) {
-    if(i == s.size()) return 1;  // Base case: reached the end of the string
-    if(s[i] == '0') return 0;    // Invalid character ('0' cannot be decoded)
-    if(memo[i] > -1) return memo[i];  // Return memoized result if already computed
-
-    int res = ways(i + 1, s);  // Decode the current character as a single digit
-
-    // If current and next character together form a valid two-digit number (10-26)
-    if(i < s.size() - 1 && (s[i] == '1' || (s[i] == '2' && s[i + 1] < '7'))) {
-        res += ways(i + 2, s);  // Decode the pair of digits as a two-digit number
+    if (s.empty() || s[0] == '0') return 0;
+    vector<int> dp(s.size() + 1, 0);
+    dp[0] = 1;
+    dp[1] = s[0] == '0' ? 0 : 1;
+    for (int i = 2; i <= s.size(); i++) {
+        int one_digit = stoi(s.substr(i - 1, 1));
+        int two_digit = stoi(s.substr(i - 2, 2));
+        if (one_digit >= 1) {
+            dp[i] += dp[i - 1];
+        }
+        if (two_digit >= 10 && two_digit <= 26) {
+            dp[i] += dp[i - 2];
+        }
     }
-
-    return memo[i] = res;  // Store the result in the memoization array
+    return dp[s.size()];
 }
 ```
 
-- **Base Case 1**: If `i` reaches the end of the string (`i == s.size()`), return 1 because we've successfully decoded the entire string.
-- **Base Case 2**: If the current character is `'0'`, return 0 since it cannot be decoded into any letter.
-- **Memoization Check**: If the result for the current index `i` is already calculated (`memo[i] > -1`), simply return the stored value.
-- We recursively calculate the number of decodings starting from index `i + 1` (for single-digit decoding).
-- If the current and next character together form a valid two-digit number between 10 and 26, we also calculate the number of decodings starting from `i + 2` (for two-digit decoding).
+This code calculates the number of ways to decode a string of digits into letters.
 
-#### Step 4: Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int numDecodings(string s) {
+	```
+	Declares a function `numDecodings` that takes a string `s` of digits as input and returns the number of ways to decode it.
 
-The result is stored in the `memo` array and returned to avoid redundant calculations.
+2. **Edge Case Check**
+	```cpp
+	    if (s.empty() || s[0] == '0') return 0;
+	```
+	Checks for edge cases: if the string is empty or starts with '0', there are no valid decodings.
 
-### 📈 **Time and Space Complexity**
+3. **Array Initialization**
+	```cpp
+	    vector<int> dp(s.size() + 1, 0);
+	```
+	Initializes a dynamic programming array `dp` of size `s.size() + 1` to store the number of decodings for substrings ending at each index.
 
-#### Time Complexity:
-- The time complexity of the solution is **O(n)**, where `n` is the length of the input string `s`. This is because each index is processed only once due to memoization.
+4. **Base Case Initialization**
+	```cpp
+	    dp[0] = 1;
+	```
+	Sets the base case: there is one way to decode an empty string.
 
-#### Space Complexity:
-- The space complexity is **O(n)** because we use a memoization array of size `n` and recursion depth can also reach `n` in the worst case.
+5. **Base Case Initialization**
+	```cpp
+	    dp[1] = s[0] == '0' ? 0 : 1;
+	```
+	Sets the base case for the first character: if it's '0', there are no decodings; otherwise, there's one.
 
-### 🏁 **Conclusion**
+6. **Loop Iteration**
+	```cpp
+	    for (int i = 2; i <= s.size(); i++) {
+	```
+	Iterates through the string, starting from the second character.
 
-The **dynamic programming** approach with **memoization** efficiently counts the number of decodings of a string. By breaking the problem into subproblems and reusing previously computed results, the algorithm achieves a time complexity of **O(n)**. This approach ensures that we avoid redundant calculations and scale well for large inputs.
+7. **Substring Extraction, String to Integer Conversion**
+	```cpp
+	        int one_digit = stoi(s.substr(i - 1, 1));
+	```
+	Extracts the current digit and converts it to an integer.
 
-This solution is **optimal** for this problem, making it perfect for scenarios where you need to decode strings of significant length efficiently.
+8. **Substring Extraction, String to Integer Conversion**
+	```cpp
+	        int two_digit = stoi(s.substr(i - 2, 2));
+	```
+	Extracts the two-digit number formed by the current and previous digits and converts it to an integer.
 
-### 🌟 **Final Thoughts**
+9. **Conditional Update**
+	```cpp
+	        if (one_digit >= 1) {
+	            dp[i] += dp[i - 1];
+	        }
+	```
+	If the current digit is valid (1-9), adds the number of decodings for the substring ending at the previous index to the current `dp[i]`. This corresponds to decoding the current digit as a single-digit letter.
 
-This problem is a great example of how **dynamic programming** and **memoization** can transform a seemingly complex recursive problem into an efficient one. Understanding this technique will help you tackle many similar challenges in coding interviews and competitive programming.
+10. **Conditional Update**
+	```cpp
+	        if (two_digit >= 10 && two_digit <= 26) {
+	            dp[i] += dp[i - 2];
+	        }
+	```
+	If the two-digit number is valid (10-26), adds the number of decodings for the substring ending at the index two positions before to the current `dp[i]`. This corresponds to decoding the current two digits as a single letter.
 
-Keep practicing and decoding more problems! 🚀 Happy coding! ✨
+11. **Return**
+	```cpp
+	    return dp[s.size()];
+	```
+	Returns the final value in the `dp` array, which represents the total number of decodings for the entire string.
 
----
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the length of the input string.
+- **Average Case:** O(n)
+- **Worst Case:** O(n), since we only need to process each character of the string once.
+
+The time complexity is linear because each character is processed once.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if no storage is required.
+- **Worst Case:** O(n), where n is the length of the input string, for storing the dynamic programming or memoization array.
+
+The space complexity is linear due to the storage requirements for the dynamic programming array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/decode-ways/description/)
 

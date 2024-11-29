@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "GwiKly7UJbQ"
 youtube_upload_date="2020-06-20"
 youtube_thumbnail="https://i.ytimg.com/vi/GwiKly7UJbQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,63 +28,111 @@ youtube_thumbnail="https://i.ytimg.com/vi/GwiKly7UJbQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Design a map-like data structure that supports key-value insertion and sum queries for keys starting with a specific prefix.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a series of operations on the MapSum object. You will be given a list of operations, where each operation can either insert a key-value pair into the map or request the sum of values for a given prefix.
+- **Example:** `["apple", 3], ["ap"]`
+- **Constraints:**
+	- 1 <= key.length, prefix.length <= 50
+	- key and prefix consist only of lowercase English letters.
+	- 1 <= val <= 1000
+	- At most 50 calls will be made to insert and sum.
 
-{{< highlight cpp >}}
-class TrieNode {
-    vector<TrieNode*> next;
-    int sum = 0;
-    string s;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output for each operation will be either null (for insert operations) or the result of a sum operation.
+- **Example:** `3, 5`
+- **Constraints:**
+	- The output for insert operations is always null.
+	- The sum operation returns an integer value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Efficiently handle insertions and prefix sum queries by storing keys and their corresponding values.
+
+- 1. For insertions, store key-value pairs in a map-like structure.
+- 2. For sum queries, efficiently search for all keys starting with the given prefix and sum their values.
+{{< dots >}}
+### Problem Assumptions ✅
+- The map structure will be used efficiently with respect to the number of insertions and sum queries.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["apple", 3], ["ap"]`  \
+  **Explanation:** In this example, the sum of keys starting with 'ap' is just 3 because 'apple' is the only key in the map that starts with 'ap'.
+
+- **Input:** `["apple", 3], ["app", 2], ["ap"]`  \
+  **Explanation:** After inserting 'app' with value 2, the sum of keys starting with 'ap' is 5, which is the sum of 'apple' (3) and 'app' (2).
+
+{{< dots >}}
+## Approach 🚀
+To implement this map-like structure, we will use a trie to store keys and their cumulative values. This allows us to efficiently compute the sum of all values with a given prefix.
+
+### Initial Thoughts 💭
+- Trie structures are well-suited for operations involving prefixes.
+- We can store each key in the trie, while maintaining cumulative sums along each path to efficiently compute prefix sums.
+{{< dots >}}
+### Edge Cases 🌐
+- If there are no insertions, a sum query should return 0.
+- With a large number of insertions and sum queries, the trie structure will help ensure that the operations remain efficient.
+- Handle the case where multiple insertions for the same key should overwrite the previous value.
+- Ensure that the trie is efficiently implemented to handle up to 50 insert and sum operations.
+{{< dots >}}
+## Code 💻
+```cpp
+int sum = 0;
+string s;
 public:
-    TrieNode() {
-        s = "";
-        sum = 0;
-        next.resize(26, NULL);
+TrieNode() {
+    s = "";
+    sum = 0;
+    next.resize(26, NULL);
+}
+void add(string key, int val) {
+    TrieNode* root = this;
+    for(int i = 0; i < key.size(); i++) {
+        int idx = key[i] - 'a';
+        if(root->next[idx] == NULL)
+            root->next[idx] = new TrieNode();
+        root = root->next[idx];
+        root->sum += val;
     }
-    void add(string key, int val) {
-        TrieNode* root = this;
-        for(int i = 0; i < key.size(); i++) {
-            int idx = key[i] - 'a';
-            if(root->next[idx] == NULL)
-                root->next[idx] = new TrieNode();
-            root = root->next[idx];
-            root->sum += val;
-        }
-        root->s = key;
-    }
-    
-    int val(string key) {
-        TrieNode* root = this;
-        for(int i = 0; i < key.size(); i++) {
-            int idx = key[i] - 'a';
-            if(root->next[idx] == NULL)
-                return 0;
-            root = root->next[idx];
-        }        
-        return root->sum;
-    }
+    root->s = key;
+}
+
+int val(string key) {
+    TrieNode* root = this;
+    for(int i = 0; i < key.size(); i++) {
+        int idx = key[i] - 'a';
+        if(root->next[idx] == NULL)
+            return 0;
+        root = root->next[idx];
+    }        
+    return root->sum;
+}
 };
 
 class MapSum {
-    TrieNode* root;
-    map<string, int> store;
+TrieNode* root;
+map<string, int> store;
 public:
-    MapSum() {
-        root = new TrieNode();
-    }
-    
-    void insert(string key, int val) {
-        int x = val;
-        if(store[key] > 0)
-            val = val - store[key];
-            
-        root->add(key, val);
-        store[key] = x;
-    }
-    
-    int sum(string prefix) {
-        return root->val(prefix);
-    }
+MapSum() {
+    root = new TrieNode();
+}
+
+void insert(string key, int val) {
+    int x = val;
+    if(store[key] > 0)
+        val = val - store[key];
+        
+    root->add(key, val);
+    store[key] = x;
+}
+
+int sum(string prefix) {
+    return root->val(prefix);
+}
 };
 
 /**
@@ -91,134 +140,252 @@ public:
  * MapSum* obj = new MapSum();
  * obj->insert(key,val);
  * int param_2 = obj->sum(prefix);
- */
-{{< /highlight >}}
----
-
-### Problem Statement:
-
-The problem involves implementing a class `MapSum` which supports two operations efficiently:
-1. **`insert(key, value)`**: Inserts a key-value pair into the map. If the key already exists, the new value should replace the old one.
-2. **`sum(prefix)`**: Returns the sum of all values associated with keys that start with the given prefix.
-
-The challenge is to provide a solution where both operations are handled in an efficient manner, especially when dealing with large numbers of keys.
-
-### Approach:
-
-To solve this problem efficiently, we need to handle both operations—insert and sum—optimally. A good approach is to use a **Trie (prefix tree)** to store the keys and their associated values. The trie will allow efficient insertion and prefix-based sum calculation. Here's the detailed approach:
-
-1. **Trie Data Structure**: 
-   - A **Trie** is a tree-like data structure where each node represents a character in a word. The structure enables fast retrieval of words with common prefixes and allows for efficient insertions.
-   - Each node in the Trie will store:
-     - A list of child nodes for each character (26 children, one for each lowercase letter).
-     - A `sum` field that tracks the sum of all values associated with the keys that pass through or end at this node.
-     - A string `s` to keep track of the word associated with the node, which is useful to avoid redundant inserts in case a key is modified.
-
-2. **Insert Operation**:
-   - For each key-value pair, insert the key into the Trie character by character. For each character of the key, if the node corresponding to that character does not exist, create a new node. As you traverse the trie, update the `sum` field of each node to reflect the running sum of values for keys that pass through that node.
-
-3. **Sum Operation**:
-   - For a given prefix, simply traverse the trie following the characters of the prefix. Once the traversal is complete, the `sum` field of the last node will contain the sum of values for all keys that share this prefix.
-
-4. **Handling Updates (Replacement)**:
-   - If a key already exists, subtract the old value from all nodes along its path in the trie and then add the new value. This ensures that the map is updated correctly without needing a full re-insertion.
-
-By using a Trie, we can achieve efficient insertions and prefix sum calculations, both of which are critical for solving the problem within time limits.
-
-### Code Breakdown (Step by Step):
-
-#### Step 1: `TrieNode` Class
-```cpp
-class TrieNode {
-    vector<TrieNode*> next;
-    int sum = 0;
-    string s;
-public:
-    TrieNode() {
-        s = "";
-        sum = 0;
-        next.resize(26, NULL);  // Initialize the next vector for 26 characters (a-z)
-    }
-    void add(string key, int val) {
-        TrieNode* root = this;
-        for (int i = 0; i < key.size(); i++) {
-            int idx = key[i] - 'a';  // Convert char to index (0 for 'a', 1 for 'b', etc.)
-            if (root->next[idx] == NULL)
-                root->next[idx] = new TrieNode();  // Create a new node if it doesn't exist
-            root = root->next[idx];  // Move to the next node
-            root->sum += val;  // Update the sum for the current node
-        }
-        root->s = key;  // Store the key in the leaf node
-    }
-    
-    int val(string key) {
-        TrieNode* root = this;
-        for (int i = 0; i < key.size(); i++) {
-            int idx = key[i] - 'a';  // Convert char to index
-            if (root->next[idx] == NULL)
-                return 0;  // Return 0 if no prefix is found
-            root = root->next[idx];  // Move to the next node
-        }
-        return root->sum;  // Return the sum at the node corresponding to the prefix
-    }
-};
-```
-- The `TrieNode` class represents each node in the Trie.
-- It contains a vector of 26 pointers (`next`), representing child nodes for each letter of the alphabet.
-- The `sum` field tracks the sum of values for all keys that pass through or end at this node.
-- The `add` method inserts a key into the Trie, updating the `sum` values along the path.
-- The `val` method calculates the sum of values for all keys starting with the given prefix.
-
-#### Step 2: `MapSum` Class
-```cpp
-class MapSum {
-    TrieNode* root;
-    map<string, int> store;  // Stores key-value pairs to track value updates
-public:
-    MapSum() {
-        root = new TrieNode();  // Initialize the root of the Trie
-    }
-    
-    void insert(string key, int val) {
-        int x = val;
-        if (store[key] > 0)
-            val = val - store[key];  // Subtract the old value to ensure correct sum
-        root->add(key, val);  // Add the key with the new value to the Trie
-        store[key] = x;  // Store the new value in the map
-    }
-    
-    int sum(string prefix) {
-        return root->val(prefix);  // Return the sum of values for the given prefix
-    }
-};
-```
-- The `MapSum` class manages the Trie (`root`) and a map (`store`) that tracks the most recent value for each key.
-- The `insert` method handles inserting a new key-value pair, updating the Trie and the map. If the key already exists, the old value is subtracted before adding the new value to ensure correctness.
-- The `sum` method calculates the sum of all values for keys that begin with the given prefix by querying the Trie.
-
-#### Example Usage:
-```cpp
-MapSum* obj = new MapSum();
-obj->insert("apple", 3);  // Insert key "apple" with value 3
-int sum1 = obj->sum("ap");  // Query the sum of values for keys starting with "ap" (should return 3)
-obj->insert("apple", 2);  // Update key "apple" with value 2
-int sum2 = obj->sum("ap");  // Query the sum again after the update (should return 2)
-obj->insert("app", 5);  // Insert key "app" with value 5
-int sum3 = obj->sum("ap");  // Query the sum (should return 7)
 ```
 
-### Complexity:
+This code defines a TrieNode structure and a MapSum class that supports inserting key-value pairs and calculating the sum of values for a given prefix.
 
-#### Time Complexity:
-- **`insert(key, value)`**: The time complexity is `O(L)` where `L` is the length of the key. This is because we traverse each character of the key once to insert it into the Trie and update the sums.
-- **`sum(prefix)`**: The time complexity is `O(L)` where `L` is the length of the prefix. We only need to traverse the nodes corresponding to the prefix to get the sum.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int sum = 0;
+	```
+	Initialize a variable to store the sum of values for keys stored in the trie.
 
-#### Space Complexity:
-- **`O(N * L)`** where `N` is the number of keys and `L` is the average length of the keys. Each key potentially adds `L` nodes to the Trie, and the map stores `N` key-value pairs.
+2. **Variable Initialization**
+	```cpp
+	string s;
+	```
+	Initialize a string variable to store the key in the TrieNode.
 
-### Conclusion:
+3. **Access Control**
+	```cpp
+	public:
+	```
+	This section defines public methods for the class.
 
-The solution efficiently handles the `insert` and `sum` operations using a Trie data structure. By using the Trie to store prefixes and associated sums, we achieve fast lookups for prefix-based sum queries. The addition of the `store` map ensures that we correctly handle key updates by adjusting the Trie sums when values change. This approach provides optimal time and space complexity for the given problem, making it suitable for large datasets.
+4. **Constructor**
+	```cpp
+	TrieNode() {
+	```
+	Constructor to initialize a TrieNode with default values: an empty string and sum set to zero.
+
+5. **Assignment**
+	```cpp
+	    s = "";
+	```
+	Assign an empty string to the string variable s in the TrieNode.
+
+6. **Assignment**
+	```cpp
+	    sum = 0;
+	```
+	Assign zero to the sum variable to initialize it.
+
+7. **Container Initialization**
+	```cpp
+	    next.resize(26, NULL);
+	```
+	Resize the next container (a vector of TrieNode pointers) to hold 26 elements, each initialized to NULL, representing the 26 letters of the alphabet.
+
+8. **Method Definition**
+	```cpp
+	void add(string key, int val) {
+	```
+	Define the 'add' method to insert a key and its associated value into the trie.
+
+9. **Pointer Initialization**
+	```cpp
+	    TrieNode* root = this;
+	```
+	Initialize a pointer root to point to the current TrieNode instance.
+
+10. **Loop**
+	```cpp
+	    for(int i = 0; i < key.size(); i++) {
+	```
+	Iterate over each character in the given key.
+
+11. **Index Calculation**
+	```cpp
+	        int idx = key[i] - 'a';
+	```
+	Calculate the index corresponding to the current character in the key.
+
+12. **Condition**
+	```cpp
+	        if(root->next[idx] == NULL)
+	```
+	Check if the trie node corresponding to the current character does not exist.
+
+13. **Pointer Initialization**
+	```cpp
+	            root->next[idx] = new TrieNode();
+	```
+	If the trie node does not exist, create a new TrieNode and assign it to the corresponding position in the next array.
+
+14. **Pointer Update**
+	```cpp
+	        root = root->next[idx];
+	```
+	Move the root pointer to the next trie node.
+
+15. **Sum Update**
+	```cpp
+	        root->sum += val;
+	```
+	Add the value to the sum of the current trie node.
+
+16. **Assignment**
+	```cpp
+	    root->s = key;
+	```
+	Assign the key to the string variable s in the final trie node.
+
+17. **Method Definition**
+	```cpp
+	int val(string key) {
+	```
+	Define the 'val' method to retrieve the sum of values for the given key.
+
+18. **Pointer Initialization**
+	```cpp
+	    TrieNode* root = this;
+	```
+	Initialize a pointer root to point to the current TrieNode instance.
+
+19. **Loop**
+	```cpp
+	    for(int i = 0; i < key.size(); i++) {
+	```
+	Iterate over each character in the given key.
+
+20. **Index Calculation**
+	```cpp
+	        int idx = key[i] - 'a';
+	```
+	Calculate the index corresponding to the current character in the key.
+
+21. **Condition**
+	```cpp
+	        if(root->next[idx] == NULL)
+	```
+	Check if the trie node corresponding to the current character does not exist.
+
+22. **Return**
+	```cpp
+	            return 0;
+	```
+	Return 0 if the trie node does not exist, meaning the key is not in the trie.
+
+23. **Pointer Update**
+	```cpp
+	        root = root->next[idx];
+	```
+	Move the root pointer to the next trie node.
+
+24. **Return**
+	```cpp
+	    return root->sum;
+	```
+	Return the sum of values for the given key.
+
+25. **Class Definition**
+	```cpp
+	class MapSum {
+	```
+	Define the MapSum class, which uses a TrieNode to implement the insert and sum operations.
+
+26. **Pointer Initialization**
+	```cpp
+	TrieNode* root;
+	```
+	Initialize a pointer root to point to a TrieNode.
+
+27. **Container Initialization**
+	```cpp
+	map<string, int> store;
+	```
+	Initialize a map to store the key-value pairs.
+
+28. **Constructor**
+	```cpp
+	public:
+	MapSum() {
+	```
+	Define the constructor for MapSum, which initializes the root pointer to a new TrieNode.
+
+29. **Pointer Initialization**
+	```cpp
+	    root = new TrieNode();
+	```
+	Initialize the root pointer to a new TrieNode.
+
+30. **Method Definition**
+	```cpp
+	void insert(string key, int val) {
+	```
+	Define the 'insert' method to insert a key-value pair into the map and trie.
+
+31. **Value Adjustment**
+	```cpp
+	    int x = val;
+	```
+	Store the current value of the key.
+
+32. **Condition**
+	```cpp
+	    if(store[key] > 0)
+	```
+	Check if the key is already in the map and adjust the value.
+
+33. **Value Update**
+	```cpp
+	        val = val - store[key];
+	```
+	Adjust the new value by subtracting the old value.
+
+34. **Method Call**
+	```cpp
+	    root->add(key, val);
+	```
+	Call the 'add' method of TrieNode to insert the key-value pair into the trie.
+
+35. **Map Update**
+	```cpp
+	    store[key] = x;
+	```
+	Update the map with the new value for the key.
+
+36. **Method Definition**
+	```cpp
+	int sum(string prefix) {
+	```
+	Define the 'sum' method to calculate the sum of values for all keys starting with the given prefix.
+
+37. **Method Call**
+	```cpp
+	    return root->val(prefix);
+	```
+	Call the 'val' method of TrieNode to get the sum for the given prefix.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k) where k is the length of the key or prefix.
+- **Average Case:** O(k) where k is the length of the key or prefix.
+- **Worst Case:** O(k) where k is the length of the key or prefix.
+
+Both insert and sum operations take O(k) time, where k is the length of the key or prefix.
+
+### Space Complexity 💾
+- **Best Case:** O(n * k) where n is the number of keys and k is the length of the keys.
+- **Worst Case:** O(n * k) where n is the number of keys and k is the length of the keys.
+
+The space complexity depends on the number of keys and their lengths, as each key and its associated value are stored in the trie.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/map-sum-pairs/description/)
 

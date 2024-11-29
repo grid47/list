@@ -14,99 +14,161 @@ img_src = ""
 youtube = "xpjC9rt9xsM"
 youtube_upload_date="2023-07-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/xpjC9rt9xsM/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array nums and a positive integer k. You can repeatedly select a contiguous subarray of size k and decrease all its elements by 1. Determine if it is possible to make all elements in nums equal to 0 using this operation.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** A 0-indexed integer array nums and an integer k.
+- **Example:** `nums = [3,3,2,1,0], k = 2`
+- **Constraints:**
+	- 1 <= k <= nums.length <= 100,000
+	- 0 <= nums[i] <= 1,000,000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool checkArray(vector<int>& A, int k) {
-        int cur = 0, n = A.size();
-        for (int i = 0; i < n; ++i) {
-            if (cur > A[i])
-                return false;
-            A[i] -= cur;
-            cur += A[i];
-            if (i >= k - 1)
-                cur -= A[i - k + 1];
-        }
-        return cur == 0;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a boolean value: true if all elements can be made 0, and false otherwise.
+- **Example:** `Output: true`
+- **Constraints:**
+	- Output is either true or false.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Check if all elements in the array can be reduced to 0 using the specified operation.
 
-The problem asks to check whether it is possible to transform an array `A` into an array where all elements are zero using the following operation multiple times:
-1. For any index `i`, you can subtract a value `x` (which is positive) from `A[i]`.
-2. For each operation at index `i`, you need to ensure that the value subtracted from index `i` also affects the next `k` elements of the array, i.e., each subsequent element from `i` to `i + k - 1` gets the value `x` subtracted from it.
+- Iterate through the array while keeping track of the cumulative decrease required to meet the operation conditions.
+- At each index, ensure the required decrease does not exceed the current element.
+- Adjust the cumulative decrease using a sliding window technique to manage subarrays of size k.
+- Return true if all elements can be made 0; otherwise, return false.
+{{< dots >}}
+### Problem Assumptions ✅
+- The operation can be performed any number of times.
+- The array elements are non-negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3,2,1,0], k = 2`  \
+  **Explanation:** Select the subarray [3,2] to reduce it by 1. Repeat until all elements are 0. The output is true.
 
-The task is to determine if, by applying such operations, we can make all elements of the array `A` zero.
+- **Input:** `nums = [1,3,1,1], k = 3`  \
+  **Explanation:** It is not possible to reduce all elements to 0. The output is false.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+Use a greedy algorithm combined with a sliding window to manage the operations efficiently.
 
-The approach to solving this problem involves iterating over the array and maintaining a cumulative "current sum" (`cur`) that represents the ongoing effect of the operations. The key challenge is to ensure that at each step:
-1. The current element can be transformed to zero by subtracting the cumulative value (`cur`).
-2. If it's possible, the cumulative effect of the transformation must be tracked for the next `k` elements, so we know how much more is subtracted from each subsequent element.
-
-To do this efficiently, we use a sliding window technique where the effect of the previous operations is stored and updated as we move through the array. This allows us to perform the operation in a linear scan without repeatedly modifying the entire array.
-
-### Code Breakdown
-
-#### Function: `checkArray`
-
+### Initial Thoughts 💭
+- At each step, only subarrays of size k can be reduced.
+- The operation is cumulative and impacts the next elements.
+- Keep track of the cumulative decrease to efficiently determine if the operation is valid for each index.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array is invalid as per constraints.
+- Test arrays with the maximum size (100,000) and values to ensure efficiency.
+- Test arrays with all elements as 0, which should immediately return true.
+- Ensure k is less than or equal to the array size.
+{{< dots >}}
+## Code 💻
 ```cpp
 bool checkArray(vector<int>& A, int k) {
     int cur = 0, n = A.size();
-```
-- **`cur`**: Keeps track of the cumulative effect of all the previous operations. It starts as 0, meaning no operations have been applied yet.
-- **`n`**: The length of the array `A`. This helps with iterating through the array.
-
-```cpp
     for (int i = 0; i < n; ++i) {
         if (cur > A[i])
             return false;
-```
-- **Main loop**: The loop iterates over each element of the array `A`. At each step, we check if the current value of `cur` exceeds `A[i]`. If `cur` is greater than `A[i]`, it means the cumulative effect from previous operations has already made the value too small to make it zero, and thus it's impossible to proceed further. In this case, the function returns `false` immediately.
-
-```cpp
         A[i] -= cur;
         cur += A[i];
-```
-- **Transform the current element**: Subtract the cumulative effect `cur` from the current element `A[i]`. This represents applying the operation at index `i`. The new value of `A[i]` is the result after subtracting `cur`.
-- **Update `cur`**: Add the newly transformed value of `A[i]` to `cur`. This reflects that starting from index `i + 1`, the next elements will have this new value subtracted from them (i.e., the effect of the operation propagates).
-
-```cpp
         if (i >= k - 1)
             cur -= A[i - k + 1];
-```
-- **Sliding window**: For indices `i` greater than or equal to `k - 1`, we subtract the value of `A[i - k + 1]` from `cur`. This is because the effect of the operation will no longer affect the element at index `i - k + 1` (the element that was initially within the window of length `k`). By subtracting this value from `cur`, we ensure the correct adjustment of the cumulative effect for the remaining elements.
-
-```cpp
     }
     return cur == 0;
 }
 ```
-- **Return condition**: After processing all elements of the array, if `cur` equals 0, it means we were able to make all elements zero using valid operations, and the function returns `true`. If `cur` is not zero, it indicates there are still some leftover effects that couldn't be neutralized, so the function returns `false`.
 
-### Complexity
+The function `checkArray` checks if it is possible to split the given array into subarrays of size `k` such that the sum of elements in each subarray is the same. It uses a greedy approach to check if the transformation is possible by iterating over the array and adjusting the current value by subtracting and adding the elements in a sliding window manner.
 
-#### Time Complexity:
-- **O(n)**: The algorithm processes each element of the array exactly once in a single loop, performing constant-time operations at each step. Therefore, the time complexity is linear, i.e., **O(n)**, where `n` is the size of the array `A`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	bool checkArray(vector<int>& A, int k) {
+	```
+	This line declares the function `checkArray` that accepts a reference to an integer vector `A` and an integer `k`, which represents the size of the subarrays we are considering.
 
-#### Space Complexity:
-- **O(1)**: The algorithm uses a constant amount of extra space. The variables `cur` and `n` take constant space, and no additional data structures are required beyond the input array `A`. Therefore, the space complexity is **O(1)**.
+2. **Variable Initialization**
+	```cpp
+	    int cur = 0, n = A.size();
+	```
+	The variable `cur` is initialized to 0, which will be used to keep track of the sum of the elements in the sliding window. `n` stores the size of the array `A`.
 
-### Conclusion
+3. **Looping**
+	```cpp
+	    for (int i = 0; i < n; ++i) {
+	```
+	A loop is initiated to iterate through the elements of the array `A` from index `0` to `n-1`.
 
-This solution efficiently checks whether it is possible to transform an array into a zero array using a sliding window technique. By keeping track of the cumulative effects of the transformations (the variable `cur`), we avoid the need to repeatedly update the entire array, which would be computationally expensive. The time complexity of **O(n)** ensures that this approach is scalable even for larger arrays, and the space complexity of **O(1)** guarantees minimal memory usage.
+4. **Conditional Function Call**
+	```cpp
+	        if (cur > A[i])
+	```
+	This condition checks if the current value `cur` exceeds the current element `A[i]`. If true, it means the transformation is not possible, so the function returns `false`.
 
-By using this approach, we can solve the problem optimally, making it suitable for large inputs while maintaining simplicity and clarity in the code. The sliding window mechanism allows us to efficiently manage the cumulative effects of operations, ensuring that we can determine whether the transformation is possible without unnecessary recalculations.
+5. **Return Statement**
+	```cpp
+	            return false;
+	```
+	If the condition `cur > A[i]` is met, the function immediately returns `false`, indicating that the desired transformation is not possible.
+
+6. **Variable Manipulation**
+	```cpp
+	        A[i] -= cur;
+	```
+	The current element `A[i]` is adjusted by subtracting the value of `cur`, essentially modifying the array during the iteration.
+
+7. **Variable Manipulation**
+	```cpp
+	        cur += A[i];
+	```
+	The modified value of `A[i]` is added to `cur`, updating the sum of the current window.
+
+8. **Conditional Function Call**
+	```cpp
+	        if (i >= k - 1)
+	```
+	This condition checks if the index `i` has reached or exceeded `k - 1`, which marks the point where we begin reducing the window size.
+
+9. **Variable Manipulation**
+	```cpp
+	            cur -= A[i - k + 1];
+	```
+	When the condition `i >= k - 1` is true, the value at `A[i - k + 1]` is subtracted from `cur` to shrink the sliding window by removing the effect of the element that has moved out of the window.
+
+10. **Return Statement**
+	```cpp
+	    return cur == 0;
+	```
+	After completing the loop, the function returns `true` if `cur` is equal to 0, indicating that the transformation is possible, otherwise `false`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The solution involves a single pass through the array, with constant-time operations per index.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The solution uses a constant amount of extra space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/apply-operations-to-make-all-array-elements-equal-to-zero/description/)
 

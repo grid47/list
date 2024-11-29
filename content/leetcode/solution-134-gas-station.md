@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "xmJZSYSvgfE"
 youtube_upload_date="2020-09-24"
 youtube_thumbnail="https://i.ytimg.com/vi/xmJZSYSvgfE/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGEsgWShlMA8=&rs=AOn4CLCL_g_r-FNtZHH0a4JeTSLZuNdQig"
+comments = true
 +++
 
 
@@ -27,150 +28,207 @@ youtube_thumbnail="https://i.ytimg.com/vi/xmJZSYSvgfE/hqdefault.jpg?sqp=-oaymwEm
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given 'n' gas stations along a circular route, where each station has a certain amount of gas and a cost associated with traveling to the next station. The goal is to find the starting station from where you can complete a full circle. If no such starting station exists, return -1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integer arrays, gas and cost, where gas[i] represents the gas available at the ith station and cost[i] represents the cost of gas to travel from the ith station to the next.
+- **Example:** `gas = [1,2,3,4,5], cost = [3,4,5,1,2]`
+- **Constraints:**
+	- n == gas.length == cost.length
+	- 1 <= n <= 10^5
+	- 0 <= gas[i], cost[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        int tank = 0;
-        int net = 0;
-        
-        for(int i = 0; i < gas.size(); i++) {
-            tank += gas[i];
-            net += cost[i];
-        }
-        if (net > tank) return -1;
-        
-        tank = 0;
-        int res = -1;
-        
-        for(int i = 0; i < gas.size(); i++) {
-            tank += gas[i];
-            tank -= cost[i];
-            if(tank < 0) {
-                tank = 0;
-                res = i;
-            }
-        }
-        return res + 1;
-        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the index of the station where the journey can be completed successfully. If no such index exists, return -1.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be -1 if no valid starting station is found.
 
-### 🛣️ **The Problem:**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the starting station index where the gas in the car is enough to travel around the circuit.
 
-You are given two lists:
-- **gas[i]**: the amount of gas available at the i-th gas station.
-- **cost[i]**: the amount of gas required to travel from the i-th gas station to the next one.
+- 1. First, check if the total gas is greater than or equal to the total cost. If not, return -1.
+- 2. Traverse through the stations and simulate the journey. If the gas in the tank goes negative, reset the tank and set the next station as the potential starting station.
+- 3. If you complete the journey, return the index of the starting station.
+{{< dots >}}
+### Problem Assumptions ✅
+- It is guaranteed that if a solution exists, it will be unique.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `gas = [1,2,3,4,5], cost = [3,4,5,1,2]`  \
+  **Explanation:** In this case, you start at station 3. Traveling from station 3, you will be able to make the full journey and return to station 3.
 
-We need to figure out:
-1. **Is it possible to complete a circular route starting from one of the stations?**
-2. If it is possible, **which station should we start at?**
+- **Input:** `gas = [2,3,4], cost = [3,4,3]`  \
+  **Explanation:** In this case, there is no starting station from where the journey can be completed successfully.
 
-Your task is to determine the **index of the starting station** such that the car can travel around the entire circle of gas stations without running out of gas. If it's not possible, return `-1`.
+{{< dots >}}
+## Approach 🚀
+The approach for solving the problem involves checking if the total gas is greater than or equal to the total cost and then simulating the journey to find the valid starting point.
 
----
-
-### 🚗 **Let's Solve It Step by Step:**
-
-#### Step 1: **Check the Feasibility of Completing the Circuit**
-
-Before diving into finding the right starting station, we need to check if completing the circuit is even possible.
-
-1️⃣ **Total Gas vs Total Cost**  
-   First, we calculate the total gas available (`total_gas`) and the total cost to travel (`total_cost`). If at any point, the total gas is less than the total cost, it is impossible to complete the journey, and we should return `-1`.
-
-Let’s calculate these sums:
-
+### Initial Thoughts 💭
+- We need to find if there exists a starting station from where the journey can be completed.
+- First, we check if the total gas is enough to cover the total cost of the journey. If not, return -1.
+{{< dots >}}
+### Edge Cases 🌐
+- If gas and cost are empty arrays, return -1.
+- Handle large inputs efficiently within the constraints.
+- Check for cases where gas[i] = 0 or cost[i] = 0.
+- Ensure that the solution works for both small and large inputs efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-int total_gas = 0;
-int total_cost = 0;
-
-for (int i = 0; i < gas.size(); i++) {
-    total_gas += gas[i];    // Total gas available at all stations
-    total_cost += cost[i];  // Total cost to travel between all stations
-}
-```
-
-- **If `total_gas < total_cost`**, it’s impossible to complete the journey. We can safely return `-1` at this point:
-  
-```cpp
-if (total_gas < total_cost) return -1;
-```
-
-#### Step 2: **Start Simulating the Journey**
-
-If completing the journey is possible, we need to figure out from **which station** we should start.
-
-2️⃣ **Greedy Approach**  
-   We’ll use a greedy approach to simulate the journey. The idea is to start from each station and see if we can complete the trip. If at any point we run out of gas, we reset our journey and start from the next station.
-
-We’ll keep track of:
-- The current fuel in the tank (`current_gas`).
-- The total remaining fuel (`total_gas_so_far`).
-
-For each station:
-1. Add the gas available at the station to the current fuel.
-2. Subtract the cost required to travel to the next station.
-3. If at any point the `current_gas` becomes negative, reset the journey and consider the next station as the new potential starting point.
-
-Here’s how we can simulate this:
-
-```cpp
-int current_gas = 0; // Tracks current fuel
-int start_station = 0; // Candidate for the start station
-
-for (int i = 0; i < gas.size(); i++) {
-    current_gas += gas[i];    // Add gas from current station
-    current_gas -= cost[i];   // Subtract the cost to travel to next station
+int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+    int tank = 0;
+    int net = 0;
     
-    if (current_gas < 0) {    // If we run out of gas, reset journey
-        current_gas = 0;      // Reset the tank
-        start_station = i + 1; // Consider the next station as the new start
+    for(int i = 0; i < gas.size(); i++) {
+        tank += gas[i];
+        net += cost[i];
     }
+    if (net > tank) return -1;
+    
+    tank = 0;
+    int res = -1;
+    
+    for(int i = 0; i < gas.size(); i++) {
+        tank += gas[i];
+        tank -= cost[i];
+        if(tank < 0) {
+            tank = 0;
+            res = i;
+        }
+    }
+    return res + 1;
+    
 }
 ```
 
-- **Why do we reset?**  
-  If at station `i` the current gas drops below zero, it means that we cannot start from station `i` or any previous station. Hence, we reset and try starting from the next station (`i + 1`).
+The code `canCompleteCircuit` determines whether a circular tour of a gas station can be completed, given the amount of gas available at each station and the cost of traveling to the next station.
 
-#### Step 3: **Return the Starting Station**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+	```
+	The function definition for `canCompleteCircuit` takes two vectors, `gas` and `cost`, representing the gas available at each station and the cost to travel to the next station, respectively.
 
-After simulating the journey, the `start_station` will be the index of the last station where the circuit can successfully be completed.
+2. **Variable Initialization**
+	```cpp
+	    int tank = 0;
+	```
+	Initialize a variable `tank` to track the gas in the vehicle's tank as we progress through the stations.
 
-To account for the **1-indexed** return value, we will return the result as:
+3. **Variable Initialization**
+	```cpp
+	    int net = 0;
+	```
+	Initialize `net` to store the total difference between gas available and the cost of traveling to the next station.
 
-```cpp
-return start_station;
-```
+4. **Loop Iteration**
+	```cpp
+	    
+	```
+	Start a loop to iterate through the gas stations.
 
----
+5. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < gas.size(); i++) {
+	```
+	Iterate through each gas station from index 0 to the last index.
 
-### 📈 **Time and Space Complexity**
+6. **Variable Manipulation**
+	```cpp
+	        tank += gas[i];
+	```
+	Add the gas available at the current station to `tank`.
 
-- **Time Complexity**:  
-  The approach involves a single pass through the stations, making it **O(n)** where `n` is the number of stations.
+7. **Variable Manipulation**
+	```cpp
+	        net += cost[i];
+	```
+	Add the cost to travel to the next station to `net`.
 
-- **Space Complexity**:  
-  We only use a few variables to track the gas and current station index, so the space complexity is **O(1)**.
+8. **Condition Check**
+	```cpp
+	    if (net > tank) return -1;
+	```
+	If the total gas is less than the total cost, return -1 indicating that completing the circuit is not possible.
 
----
+9. **Variable Initialization**
+	```cpp
+	    tank = 0;
+	```
+	Reset `tank` to 0 for the second loop to evaluate the starting station.
 
-### 🚀 **Summary**
+10. **Variable Initialization**
+	```cpp
+	    int res = -1;
+	```
+	Initialize `res` as -1 to keep track of the station index where the journey can start.
 
-By following these steps:
-1. We first check if completing the journey is possible by comparing the total gas and total cost.
-2. If it's feasible, we simulate the journey with a greedy approach, resetting the journey whenever we run out of gas and moving to the next station.
-3. The final result will give us the station index from which we can start to complete the circular journey without running out of gas.
+11. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < gas.size(); i++) {
+	```
+	Start another loop to iterate over the stations again to find the valid starting station.
 
-If it's not possible to complete the journey, we return `-1`.
+12. **Variable Manipulation**
+	```cpp
+	        tank += gas[i];
+	```
+	Add the gas from the current station to `tank`.
 
-This approach ensures that we efficiently find the right station in linear time, making it optimal for large inputs.
+13. **Variable Manipulation**
+	```cpp
+	        tank -= cost[i];
+	```
+	Subtract the cost to travel to the next station from `tank`.
 
----
+14. **Condition Check**
+	```cpp
+	        if(tank < 0) {
+	```
+	If the `tank` drops below 0, the current station is not a valid starting point.
+
+15. **Variable Reset**
+	```cpp
+	            tank = 0;
+	```
+	Reset `tank` to 0 to start from the next station.
+
+16. **Variable Update**
+	```cpp
+	            res = i;
+	```
+	Update `res` to the current station index as a potential starting point.
+
+17. **Return Statement**
+	```cpp
+	    return res + 1;
+	```
+	Return the index of the valid starting station, adjusting for 1-based indexing.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) as we traverse the list of stations twice.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) as we are using only a few extra variables for calculations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/gas-station/description/)
 

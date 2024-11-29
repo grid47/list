@@ -14,131 +14,139 @@ img_src = ""
 youtube = "3YDBT9ZrfaU"
 youtube_upload_date="2021-08-08"
 youtube_thumbnail="https://i.ytimg.com/vi/3YDBT9ZrfaU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string `s` of even length `n`. The string contains exactly `n/2` opening brackets `[` and `n/2` closing brackets `]`. A string is called balanced if for every opening bracket there exists a corresponding closing bracket, with each closing bracket having a matching opening bracket before it. Your task is to return the minimum number of swaps needed to make the string balanced.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string `s` of even length `n` consisting only of the characters `[` and `]`.
+- **Example:** `s = "][]["`
+- **Constraints:**
+	- 2 <= n <= 10^6
+	- s[i] is either '[' or ']'
+	- The number of opening brackets '[' equals n / 2, and the number of closing brackets ']' equals n / 2.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minSwaps(string s) {
-        stack<char> stk;
-        int n = s.length();
-        for(int i = 0; i < n; i++) {
-            if(s[i] == '[') stk.push(i);
-            else if(!stk.empty()) stk.pop();
-        }
-        
-        return (stk.size() + 1) / 2;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of swaps required to make the string balanced.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The output must be a single integer representing the minimum number of swaps.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to minimize the number of swaps by calculating how many unbalanced opening and closing brackets there are in the string.
+
+- Step 1: Iterate through the string and use a stack to track unmatched opening brackets.
+- Step 2: Whenever a closing bracket is found, check if there is an unmatched opening bracket to pair it with.
+- Step 3: Count the number of unmatched opening brackets and compute the necessary swaps.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string will always contain an equal number of opening and closing brackets.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: s = '][][', Output: 1`  \
+  **Explanation:** In this example, the first closing bracket `]` needs to be swapped with the last opening bracket `[`. After the swap, the string becomes balanced.
+
+- **Input:** `Input: s = ']]][[[', Output: 2`  \
+  **Explanation:** In this case, we need two swaps to balance the string. First, swap the 1st and 4th brackets, then swap the 2nd and 5th.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by using a stack to manage unmatched opening brackets and keeping track of the number of swaps required.
+
+### Initial Thoughts 💭
+- We only need to handle unmatched brackets. Each unmatched closing bracket requires a corresponding opening bracket before it.
+- Using a stack to simulate the process of pairing opening and closing brackets will allow us to efficiently compute the number of necessary swaps.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least two brackets in the input string.
+- Ensure that the solution handles the upper constraint of up to 10^6 brackets efficiently.
+- If the string is already balanced, no swaps are needed.
+- Handle all valid input cases where the string contains exactly equal numbers of opening and closing brackets.
+{{< dots >}}
+## Code 💻
+```cpp
+int minSwaps(string s) {
+    stack<char> stk;
+    int n = s.length();
+    for(int i = 0; i < n; i++) {
+        if(s[i] == '[') stk.push(i);
+        else if(!stk.empty()) stk.pop();
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to determine the minimum number of swaps needed to make a given string of brackets valid. A valid string consists of matching pairs of brackets, where every opening bracket `[` must have a corresponding closing bracket `]`. The goal is to find the fewest number of adjacent swaps needed to convert the input string into a valid configuration.
-
-### Approach
-
-To solve this problem, we can use a stack to keep track of the unmatched opening brackets. The main idea is to iterate through the string and, for each opening bracket, push its index onto the stack. For each closing bracket, if there is an unmatched opening bracket in the stack, we pop it from the stack, indicating a matched pair. The size of the stack at the end of this process will give us the number of unmatched opening brackets. 
-
-The number of swaps required to balance these unmatched brackets can be calculated as half the size of the stack because each swap can address two unmatched brackets.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-```
-This starts the definition of the `Solution` class that will contain our method for solving the problem.
-
-```cpp
-    int minSwaps(string s) {
-```
-The method `minSwaps` takes a single parameter:
-- `s`: a string consisting of `[` and `]` brackets.
-
-```cpp
-        stack<char> stk;
-```
-We declare a stack to keep track of the indices of unmatched opening brackets. This stack will help us identify how many opening brackets are left unpaired by the end of our iteration.
-
-```cpp
-        int n = s.length();
-```
-We calculate the length of the input string `s` and store it in variable `n`.
-
-```cpp
-        for(int i = 0; i < n; i++) {
-```
-We initiate a loop that will iterate through each character in the string.
-
-```cpp
-            if(s[i] == '[') stk.push(i);
-```
-If the current character is an opening bracket `[`, we push its index onto the stack.
-
-```cpp
-            else if(!stk.empty()) stk.pop();
-```
-If the current character is a closing bracket `]` and the stack is not empty, we pop the top index from the stack, indicating that we have found a match for an unmatched opening bracket.
-
-```cpp
-        }
-```
-This ends the for-loop, after which we will have processed the entire string.
-
-```cpp
-        return (stk.size() + 1) / 2;
-```
-Finally, we return the result. The size of the stack represents the number of unmatched opening brackets. Since each swap can fix two unmatched brackets, we divide the stack size by 2 to get the minimum number of swaps needed. Adding 1 before division handles cases where there's an odd number of unmatched brackets, ensuring we round up correctly.
-
-```cpp
-    }
-};
-```
-This closes the method and the class.
-
-### Complexity
-
-- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input string. We iterate through the string once and perform constant time operations for each character.
-
-- **Space Complexity**: The space complexity is \(O(n)\) in the worst case, which occurs if all brackets are opening brackets and stored in the stack.
-
-### Conclusion
-
-The `minSwaps` function effectively determines the minimum number of adjacent swaps required to balance a string of brackets using a stack-based approach. By leveraging the properties of stacks to track unmatched opening brackets, we can efficiently compute the result in linear time.
-
-### Key Features
-
-1. **Stack Utilization**: The use of a stack allows us to easily manage and track unmatched opening brackets, making the solution straightforward and efficient.
-
-2. **Linear Time Complexity**: The algorithm runs in linear time, making it suitable for large inputs.
-
-3. **Robust Handling of Edge Cases**: The method effectively handles various edge cases, including strings that are already balanced, completely unbalanced strings, and strings of varying lengths.
-
-### Example Usage
-
-Here's how you can use the `minSwaps` function:
-
-```cpp
-Solution sol;
-string s = "]]][[[";
-int result = sol.minSwaps(s);
-cout << "Minimum swaps needed: " << result << endl; // Output: Minimum swaps needed: 2
+    
+    return (stk.size() + 1) / 2;
+}
 ```
 
-In this example, we create an instance of the `Solution` class, define a string `s` with unbalanced brackets, and call the `minSwaps` method. The result is printed, showing the minimum number of swaps required to balance the string.
+This function calculates the minimum number of swaps required to balance a string containing only the characters '[' and '].
 
-### Potential Improvements and Variations
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minSwaps(string s) {
+	```
+	The function `minSwaps` is defined, which takes a string `s` containing only '[' and ']' and calculates the minimum number of swaps to balance the string.
 
-While the current solution is efficient for the problem as stated, variations could include handling additional characters or different types of brackets. Future improvements might focus on optimizing space usage, especially in cases where the input is very large and stack usage could lead to significant memory consumption.
+2. **Stack Initialization**
+	```cpp
+	    stack<char> stk;
+	```
+	A stack `stk` is initialized to help track unmatched '[' characters.
 
-This approach is particularly useful in competitive programming and coding interviews where efficient and clear solutions to problems involving data structures are evaluated.
+3. **String Length Calculation**
+	```cpp
+	    int n = s.length();
+	```
+	The length of the string `s` is stored in the variable `n`.
+
+4. **Loop Through String**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop begins to iterate through the string `s` from index 0 to `n-1`.
+
+5. **Push to Stack**
+	```cpp
+	        if(s[i] == '[') stk.push(i);
+	```
+	If the current character is '[', its index is pushed onto the stack.
+
+6. **Pop from Stack**
+	```cpp
+	        else if(!stk.empty()) stk.pop();
+	```
+	If the current character is ']' and the stack is not empty, the most recent unmatched '[' character is popped from the stack.
+
+7. **Final Calculation**
+	```cpp
+	    return (stk.size() + 1) / 2;
+	```
+	The number of unmatched '[' characters left in the stack is used to calculate the minimum number of swaps. The formula `(stk.size() + 1) / 2` computes this.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We process each character in the string exactly once, so the time complexity is linear in the size of the input string.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+In the worst case, the stack will store all unmatched opening brackets, resulting in linear space complexity.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/description/)
 

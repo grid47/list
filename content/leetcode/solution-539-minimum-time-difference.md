@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "LVBDzeUmNIQ"
 youtube_upload_date="2024-09-16"
 youtube_thumbnail="https://i.ytimg.com/vi/LVBDzeUmNIQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,95 +28,74 @@ youtube_thumbnail="https://i.ytimg.com/vi/LVBDzeUmNIQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given a list of time points in 'HH:MM' format, return the minimum time difference between any two distinct time points in the list.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of time points in 'HH:MM' format.
+- **Example:** `Input: timePoints = ['23:58', '00:05']`
+- **Constraints:**
+	- 2 <= timePoints.length <= 2 * 10^4
+	- timePoints[i] is in 'HH:MM' format
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findMinDifference(vector<string>& time) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum time difference between any two time points in minutes.
+- **Example:** `Output: 7`
+- **Constraints:**
+	- The returned value is the smallest time difference between any two distinct time points in the list.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum time difference between any two distinct time points in the list.
+
+- Sort the list of time points in ascending order.
+- Calculate the differences between consecutive time points.
+- Also calculate the difference between the first and last time points, as the time range is circular.
+- Return the minimum of all differences.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list contains at least two time points.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: timePoints = ['23:58', '00:05']`  \
+  **Explanation:** The minimum time difference between 23:58 and 00:05 is 7 minutes.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to find the minimum difference in minutes between two time points in the list. Sorting the time points makes it easier to calculate the differences between consecutive points and handle the circular nature of the 24-hour clock.
+
+### Initial Thoughts 💭
+- Sorting the list of time points allows us to compare consecutive points to find the minimum difference.
+- We must also consider the circular nature of the clock, where the earliest time and the latest time might have the smallest difference.
+{{< dots >}}
+### Edge Cases 🌐
+- The input list will always contain at least two time points, so there are no empty inputs.
+- Ensure that the solution efficiently handles lists with up to 2 * 10^4 time points.
+- Handle time points close to midnight (e.g., '23:59' and '00:00').
+- The input list contains valid time points in 'HH:MM' format.
+{{< dots >}}
+## Code 💻
+```cpp
+int findMinDifference(vector<string>& time) {
+    
+    sort(time.begin(), time.end());
+    
+    int n = time.size(), mindiff = INT_MAX;
+    
+    for(int i = 0; i < n; i++) {
         
-        sort(time.begin(), time.end());
+        int diff = abs(timeDiff(time[(i - 1 +n)%n], time[i]));
         
-        int n = time.size(), mindiff = INT_MAX;
-        
-        for(int i = 0; i < n; i++) {
-            
-            int diff = abs(timeDiff(time[(i - 1 +n)%n], time[i]));
-            
-            diff = min(diff, 1440 - diff); // 1440 = 24h in minutes
-            mindiff = min(mindiff, diff);
-        }
-        
-        return mindiff;
+        diff = min(diff, 1440 - diff); // 1440 = 24h in minutes
+        mindiff = min(mindiff, diff);
     }
     
-    int timeDiff(string t1, string t2) {
-        // cout << t1 << t2;
-        int h1 = stoi(t1.substr(0, 2));
-        int m1 = stoi(t1.substr(3, 2));
-        int h2 = stoi(t2.substr(0, 2));
-        int m2 = stoi(t2.substr(3, 2));
-        return (h2 - h1) * 60 + (m2 - m1);
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-Given a list of time points in "HH:MM" format, the task is to find the minimum difference in minutes between any two time points. A time difference can wrap around midnight, so the smallest time difference might involve one time point being close to midnight and another just after midnight.
-
-### Approach
-
-The problem asks us to calculate the smallest time difference between any two time points, considering the possibility of the time wrapping around midnight. To solve this efficiently, the approach involves sorting the time points, calculating the differences between adjacent times, and considering the wraparound from the last time point back to the first one.
-
-#### Key Observations:
-1. **Sorting Time Points**: By sorting the time points, the problem reduces to finding the minimum time difference between adjacent time points in the sorted list.
-2. **Time Difference Calculation**: The time difference between two times can be computed using their hours and minutes, and we should also account for the case where the times wrap around midnight.
-3. **Circular Wraparound**: The circular nature of time (where after 23:59, the next time is 00:00) is handled by calculating the difference between the last time point and the first one in the sorted list.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sorting the Time Points
-
-```cpp
-sort(time.begin(), time.end());
-```
-- We start by sorting the vector `time`, which holds the list of time points. Sorting helps because once the time points are in order, the minimum difference will be between consecutive time points, including a special case for the difference between the last and first time point.
-
-#### Step 2: Initializing Variables
-
-```cpp
-int n = time.size(), mindiff = INT_MAX;
-```
-- `n` stores the number of time points in the list.
-- `mindiff` is initialized to the maximum possible integer value (`INT_MAX`). This will be used to store the smallest time difference as we iterate through the time points.
-
-#### Step 3: Calculating Differences Between Adjacent Time Points
-
-```cpp
-for (int i = 0; i < n; i++) {
-    int diff = abs(timeDiff(time[(i - 1 +n)%n], time[i]));
-    diff = min(diff, 1440 - diff); // 1440 = 24h in minutes
-    mindiff = min(mindiff, diff);
+    return mindiff;
 }
-```
-- We iterate over each time point in the sorted list. For each time point, we calculate the time difference with the previous one (using modulo arithmetic to handle the circular nature of time).
-- The `timeDiff` function calculates the absolute difference between two time points in minutes.
-- After calculating the difference, we consider the wraparound case by calculating `1440 - diff`, where `1440` is the total number of minutes in one day (24 hours * 60 minutes). This is done because the time difference might be smaller if we wrap around midnight.
-- We then update the `mindiff` variable to hold the smallest difference found so far.
 
-#### Step 4: Returning the Result
-
-```cpp
-return mindiff;
-```
-- Finally, we return `mindiff`, which holds the smallest time difference found between any two time points, accounting for the possible wraparound.
-
-#### Step 5: Time Difference Calculation
-
-```cpp
 int timeDiff(string t1, string t2) {
+    // cout << t1 << t2;
     int h1 = stoi(t1.substr(0, 2));
     int m1 = stoi(t1.substr(3, 2));
     int h2 = stoi(t2.substr(0, 2));
@@ -123,23 +103,112 @@ int timeDiff(string t1, string t2) {
     return (h2 - h1) * 60 + (m2 - m1);
 }
 ```
-- The `timeDiff` function takes two time strings `t1` and `t2` and calculates the difference in minutes between them.
-- We extract the hours and minutes from both times using `substr` and convert them into integers using `stoi`.
-- The function then calculates the total difference in minutes by converting both hours and minutes into minutes and subtracting them.
 
-### Complexity
+This code computes the minimum difference in minutes between any two times from a list of time strings. It sorts the times and calculates the minimum time difference in a circular manner, using 1440 (the total number of minutes in a day) to account for the wrap-around difference.
 
-#### Time Complexity:
-- **Sorting the Time Points**: The sorting step takes `O(n log n)` time, where `n` is the number of time points in the list.
-- **Iterating Over Time Points**: After sorting, we iterate over each time point to compute the differences. This takes `O(n)` time.
-- **Total Time Complexity**: The overall time complexity is dominated by the sorting step, so it is `O(n log n)`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findMinDifference(vector<string>& time) {
+	```
+	Defines the `findMinDifference` function which takes a vector of time strings as input and returns the minimum difference between any two times in minutes.
 
-#### Space Complexity:
-- **Auxiliary Space**: We use a constant amount of extra space (besides the input and output), so the space complexity is `O(1)`.
+2. **Sort Operation**
+	```cpp
+	    sort(time.begin(), time.end());
+	```
+	Sorts the time strings in lexicographical order, ensuring that time differences are calculated in a sequential manner.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    int n = time.size(), mindiff = INT_MAX;
+	```
+	Initializes variables: `n` holds the size of the `time` vector, and `mindiff` is set to the maximum integer value to track the minimum difference.
 
-This solution efficiently solves the problem of finding the smallest time difference between any two time points, considering the possibility of time wrapping around midnight. The approach involves sorting the time points, calculating the differences between adjacent points, and handling the circular nature of time. The algorithm runs in `O(n log n)` time due to the sorting step, and the space complexity is constant, making it both time and space efficient for this problem.
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Begins a loop that iterates over all time strings, comparing adjacent times to calculate their differences.
+
+5. **Time Difference Calculation**
+	```cpp
+	        int diff = abs(timeDiff(time[(i - 1 +n)%n], time[i]));
+	```
+	Calculates the absolute time difference between the current time and the previous time (using modulo for circular indexing).
+
+6. **Min Time Difference Adjustment**
+	```cpp
+	        diff = min(diff, 1440 - diff); // 1440 = 24h in minutes
+	```
+	Adjusts the time difference to account for the wrap-around of the day, ensuring that the minimum difference is correctly calculated, even across midnight.
+
+7. **Min Difference Update**
+	```cpp
+	        mindiff = min(mindiff, diff);
+	```
+	Updates the `mindiff` variable to store the smallest time difference encountered during the loop.
+
+8. **Return Statement**
+	```cpp
+	    return mindiff;
+	```
+	Returns the minimum time difference found during the loop.
+
+9. **Helper Function Definition**
+	```cpp
+	int timeDiff(string t1, string t2) {
+	```
+	Defines the helper function `timeDiff`, which calculates the time difference in minutes between two time strings.
+
+10. **Time Parsing**
+	```cpp
+	    int h1 = stoi(t1.substr(0, 2));
+	```
+	Extracts the hour component from the first time string `t1` and converts it to an integer.
+
+11. **Time Parsing**
+	```cpp
+	    int m1 = stoi(t1.substr(3, 2));
+	```
+	Extracts the minute component from the first time string `t1` and converts it to an integer.
+
+12. **Time Parsing**
+	```cpp
+	    int h2 = stoi(t2.substr(0, 2));
+	```
+	Extracts the hour component from the second time string `t2` and converts it to an integer.
+
+13. **Time Parsing**
+	```cpp
+	    int m2 = stoi(t2.substr(3, 2));
+	```
+	Extracts the minute component from the second time string `t2` and converts it to an integer.
+
+14. **Time Difference Calculation**
+	```cpp
+	    return (h2 - h1) * 60 + (m2 - m1);
+	```
+	Calculates and returns the time difference in minutes between the two time strings `t1` and `t2`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) due to the sorting step, where n is the number of time points.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the sorted list of time points.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-difference/description/)
 

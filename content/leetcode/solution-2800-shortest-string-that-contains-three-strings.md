@@ -14,140 +14,227 @@ img_src = ""
 youtube = "920NY6GKUEk"
 youtube_upload_date="2023-07-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/920NY6GKUEk/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given three strings 'a', 'b', and 'c', find a string that contains all three of these strings as substrings and has the minimum possible length. If there are multiple such strings, return the lexicographically smallest one.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given three strings, 'a', 'b', and 'c'. Each string consists of lowercase English letters.
+- **Example:** `Input: a = 'apple', b = 'banana', c = 'orange'`
+- **Constraints:**
+	- 1 <= a.length, b.length, c.length <= 100
+	- a, b, c consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string that contains all three strings 'a', 'b', and 'c' as substrings and has the minimum length. If there are multiple valid answers, return the lexicographically smallest one.
+- **Example:** `Output: 'bananaorange'`
+- **Constraints:**
 
-    string mn(string a, string b) {
-        return (a.size() < b.size() || (a.size() == b.size() && a < b))? a: b;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the shortest string that contains all three given strings as substrings.
+
+- 1. Identify the possible overlapping parts of the strings to minimize the total length.
+- 2. Try all permutations of the strings to find the lexicographically smallest solution.
+- 3. Combine the strings efficiently using the overlap method and return the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input strings are non-empty and consist only of lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: a = 'apple', b = 'banana', c = 'orange'`  \
+  **Explanation:** The lexicographically smallest string that contains all three strings as substrings is 'bananaorange'.
+
+- **Input:** `Input: a = 'cat', b = 'bat', c = 'rat'`  \
+  **Explanation:** The shortest and lexicographically smallest string that contains all three strings as substrings is 'catbat'.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by finding the minimal overlap between each pair of strings and combining them efficiently.
+
+### Initial Thoughts 💭
+- Finding the minimal overlap between strings will allow us to reduce the length of the combined string.
+- We need to explore permutations of the three strings to ensure we get the lexicographically smallest result.
+{{< dots >}}
+### Edge Cases 🌐
+- The input strings will never be empty based on the problem constraints.
+- The algorithm should be optimized to handle strings up to 100 characters long.
+- If all strings are identical, the output will be the same string.
+- The solution must handle strings of length up to 100 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+
+string mn(string a, string b) {
+    return (a.size() < b.size() || (a.size() == b.size() && a < b))? a: b;
+}
+
+string attach(string a, string b) {
+    if(a.find(b) != string::npos) return a;
+    for(int i = 0; i < a.size(); i++) {
+        string t1 = a.substr(i), t2 = b.substr(0, t1.size());
+        if(t1 == t2) return a + b.substr(t1.size());
     }
+    return a + b;
+}
+
+string solve(string a, string b, string c) {
+    string t1 = attach(a, b);
+    string t2 = attach(b, a);
     
-    string attach(string a, string b) {
-        if(a.find(b) != string::npos) return a;
-        for(int i = 0; i < a.size(); i++) {
-            string t1 = a.substr(i), t2 = b.substr(0, t1.size());
-            if(t1 == t2) return a + b.substr(t1.size());
-        }
-        return a + b;
-    }
-    
-    string solve(string a, string b, string c) {
-        string t1 = attach(a, b);
-        string t2 = attach(b, a);
-        
-        string ret1 = attach(t1, c);
-        string ret2 = attach(c, t1);
-        string ret3 = attach(t2, c);
-        string ret4 = attach(c, t2);        
-        return mn(mn(ret1, ret2), mn(ret3, ret4));
-    }
-    
-    string minimumString(string a, string b, string c) {
-        return mn(mn(solve(a, b, c), solve(a, c, b)), solve(b, c, a));
-    }
-};
-{{< /highlight >}}
----
+    string ret1 = attach(t1, c);
+    string ret2 = attach(c, t1);
+    string ret3 = attach(t2, c);
+    string ret4 = attach(c, t2);        
+    return mn(mn(ret1, ret2), mn(ret3, ret4));
+}
 
-### Problem Statement
+string minimumString(string a, string b, string c) {
+    return mn(mn(solve(a, b, c), solve(a, c, b)), solve(b, c, a));
+}
+```
 
-The task is to find the **minimum string** that contains all three given strings `a`, `b`, and `c` as substrings. The minimum string is the lexicographically smallest string that contains each of the given strings as a part of it. To achieve this, the solution must find the best way to combine the three strings in order to minimize the resulting string in terms of length and lexicographical order.
+This code defines several string manipulation functions, including `mn` for finding the lexicographically smaller string, `attach` to concatenate strings with specific matching conditions, and `solve` to combine strings in a minimum way. The function `minimumString` computes the smallest string by considering all possible combinations of input strings.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	
+	```
+	This section initializes the necessary functions that will be used to solve the problem.
 
-The problem can be solved using a string concatenation approach, where we attempt to attach the strings in all possible orders while considering the overlaps between them. The goal is to minimize the final string length by leveraging overlaps. Here’s a breakdown of how to approach the problem:
+2. **Define Mn Function**
+	```cpp
+	string mn(string a, string b) {
+	```
+	The `mn` function returns the lexicographically smaller of two strings. It compares the sizes of the strings and, if they are equal, compares them lexicographically.
 
-1. **Overlapping Strings**: 
-   - We need to efficiently combine two strings while maximizing their overlap. If one string ends in a way that the beginning of the next string matches, we can reduce the total length of the combined string by not repeating the overlapping portion.
-   - The function `attach` is used to achieve this overlap, where we try to find the longest suffix of the first string that is a prefix of the second string.
+3. **Mn Comparison Logic**
+	```cpp
+	    return (a.size() < b.size() || (a.size() == b.size() && a < b))? a: b;
+	```
+	This line performs the comparison between the two strings `a` and `b`. It first checks their lengths and, if they are equal, it checks which string is lexicographically smaller.
 
-2. **Lexicographical Order**:
-   - In cases where two different combinations of strings result in the same length, we must choose the lexicographically smaller one. This is handled by the `mn` function, which compares the two strings and returns the lexicographically smaller one.
+4. **Define Attach Function**
+	```cpp
+	string attach(string a, string b) {
+	```
+	The `attach` function concatenates two strings, ensuring that no duplicate parts are added if they already match.
 
-3. **Combinations of Strings**:
-   - Since there are three strings and each pair can be attached in different orders, we need to consider all six permutations of the three strings to find the optimal combination. The solution uses the `solve` function to compute the result for each combination.
+5. **Attach Function Logic**
+	```cpp
+	    if(a.find(b) != string::npos) return a;
+	```
+	If string `b` is already a part of string `a`, the function directly returns `a` without modification.
 
-### Code Breakdown (Step by Step)
+6. **Attach Loop**
+	```cpp
+	    for(int i = 0; i < a.size(); i++) {
+	```
+	This loop checks the various substrings of `a` to find a match with the beginning of `b`.
 
-1. **`mn` function**: 
-   This function compares two strings and returns the lexicographically smaller one.
-   ```cpp
-   string mn(string a, string b) {
-       return (a.size() < b.size() || (a.size() == b.size() && a < b)) ? a : b;
-   }
-   ```
-   - The function returns `a` if `a` is smaller than `b` either by size or lexicographically.
-   - Otherwise, it returns `b`.
+7. **Attach Substring Check**
+	```cpp
+	        string t1 = a.substr(i), t2 = b.substr(0, t1.size());
+	```
+	For each substring of `a`, it compares it with the beginning part of `b`.
 
-2. **`attach` function**: 
-   This function attaches string `b` to string `a` with the maximum possible overlap.
-   ```cpp
-   string attach(string a, string b) {
-       if(a.find(b) != string::npos) return a;
-       for(int i = 0; i < a.size(); i++) {
-           string t1 = a.substr(i), t2 = b.substr(0, t1.size());
-           if(t1 == t2) return a + b.substr(t1.size());
-       }
-       return a + b;
-   }
-   ```
-   - If `b` is already a substring of `a`, we simply return `a` (no need for concatenation).
-   - Otherwise, we check all possible suffixes of `a` and prefixes of `b` to find the maximum overlap.
-   - We start by extracting substrings of `a` starting from different positions and checking if the corresponding prefix of `b` matches the suffix of `a`. When we find the maximum match, we return the concatenation of `a` and the remaining part of `b` (after removing the matched portion).
-   - If no overlap is found, the function simply returns the concatenation of `a` and `b`.
+8. **Attach Match Found**
+	```cpp
+	        if(t1 == t2) return a + b.substr(t1.size());
+	```
+	If a matching substring is found, the function returns `a` with the remaining part of `b` concatenated to it.
 
-3. **`solve` function**:
-   This function finds the smallest string that contains `a`, `b`, and `c` as substrings.
-   ```cpp
-   string solve(string a, string b, string c) {
-       string t1 = attach(a, b);
-       string t2 = attach(b, a);
-       
-       string ret1 = attach(t1, c);
-       string ret2 = attach(c, t1);
-       string ret3 = attach(t2, c);
-       string ret4 = attach(c, t2);        
-       return mn(mn(ret1, ret2), mn(ret3, ret4));
-   }
-   ```
-   - The function computes all possible combinations of attaching the strings `a`, `b`, and `c` in different orders. It does this by first trying to attach `a` to `b` and `b` to `a` (i.e., `t1` and `t2`), and then attempting to attach `c` to the results.
-   - It then compares the four possible resulting strings and returns the lexicographically smallest one.
+9. **Attach Return**
+	```cpp
+	    return a + b;
+	```
+	If no matching substring was found, the function simply concatenates `a` and `b`.
 
-4. **`minimumString` function**:
-   The main function that calls `solve` for all six permutations of the strings and returns the smallest string.
-   ```cpp
-   string minimumString(string a, string b, string c) {
-       return mn(mn(solve(a, b, c), solve(a, c, b)), solve(b, c, a));
-   }
-   ```
-   - The `solve` function is called for all permutations of `a`, `b`, and `c`:
-     - `solve(a, b, c)`
-     - `solve(a, c, b)`
-     - `solve(b, c, a)`
-   - The results are compared using the `mn` function to find the smallest lexicographical string.
-   - The final result is returned as the minimum string that contains `a`, `b`, and `c` as substrings.
+10. **Define Solve Function**
+	```cpp
+	string solve(string a, string b, string c) {
+	```
+	The `solve` function takes three strings and combines them using the `attach` function to generate possible combinations.
 
-### Complexity
+11. **Solve Function Attachments**
+	```cpp
+	    string t1 = attach(a, b);
+	```
+	The first combination of `a` and `b` is created and stored in `t1`.
 
-1. **Time Complexity**:
-   - The time complexity of the `attach` function is **O(n*m)**, where `n` and `m` are the lengths of the two strings being compared. This is because we iterate through the characters of both strings to find the maximum overlap.
-   - The `solve` function involves calling the `attach` function multiple times (4 calls), so its complexity is proportional to the length of the strings involved.
-   - Since we call `solve` for all six permutations of the three strings, the overall time complexity is **O(6 * (n*m))**, where `n` and `m` are the maximum lengths of the strings.
-   - The complexity can be simplified to **O(n * m)**, where `n` and `m` are the average lengths of the strings.
+12. **Solve Function Reverse Attachment**
+	```cpp
+	    string t2 = attach(b, a);
+	```
+	The second combination of `b` and `a` is created and stored in `t2`.
 
-2. **Space Complexity**:
-   - The space complexity is dominated by the space needed to store the strings during the concatenation process. Each string and substring is stored in memory as we perform operations on them. Therefore, the space complexity is **O(n + m)**, where `n` and `m` are the lengths of the strings involved in the operations.
+13. **Solve Function Further Attachments**
+	```cpp
+	    string ret1 = attach(t1, c);
+	```
+	The result of combining `t1` with `c` is stored in `ret1`.
 
-### Conclusion
+14. **Solve Function More Attachments**
+	```cpp
+	    string ret2 = attach(c, t1);
+	```
+	The result of combining `c` with `t1` is stored in `ret2`.
 
-This solution effectively finds the minimum string that contains all three input strings as substrings. It leverages the concept of string overlap to minimize the total length of the resulting string and ensures that the final string is lexicographically the smallest among all possible combinations. With a time complexity of **O(n * m)**, the approach efficiently handles the problem within reasonable input sizes. By using a systematic exploration of all possible combinations and overlaps, this solution is optimal and scalable.
+15. **Solve Function Attach Remaining**
+	```cpp
+	    string ret3 = attach(t2, c);
+	```
+	The result of combining `t2` with `c` is stored in `ret3`.
+
+16. **Solve Function Final Attachment**
+	```cpp
+	    string ret4 = attach(c, t2);        
+	```
+	The result of combining `c` with `t2` is stored in `ret4`.
+
+17. **Solve Function Return**
+	```cpp
+	    return mn(mn(ret1, ret2), mn(ret3, ret4));
+	```
+	The function returns the smallest of the four possible combinations using the `mn` function.
+
+18. **Define MinimumString Function**
+	```cpp
+	string minimumString(string a, string b, string c) {
+	```
+	The `minimumString` function computes the minimum string formed by all possible combinations of the input strings `a`, `b`, and `c`.
+
+19. **MinimumString Logic**
+	```cpp
+	    return mn(mn(solve(a, b, c), solve(a, c, b)), solve(b, c, a));
+	```
+	The function returns the smallest string from all the combinations generated by calling the `solve` function with different orderings of `a`, `b`, and `c`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n!)
+- **Average Case:** O(n!)
+- **Worst Case:** O(n!)
+
+The time complexity is dominated by the permutations of the three strings (3! = 6 permutations). For each permutation, the overlap checking requires linear time, so the overall complexity is O(6n), which simplifies to O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we only store the intermediate results of string combinations.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/)
 

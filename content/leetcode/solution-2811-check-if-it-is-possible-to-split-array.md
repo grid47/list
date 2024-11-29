@@ -14,94 +14,126 @@ img_src = ""
 youtube = "BVkYLy-gzcg"
 youtube_upload_date="2023-08-06"
 youtube_thumbnail="https://i.ytimg.com/vi/BVkYLy-gzcg/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array nums and an integer m. You need to determine if it's possible to split the array into n subarrays of size 1, following the rules that each subarray must either have length 1 or have a sum of elements greater than or equal to m.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array nums of length n and an integer m.
+- **Example:** `Input: nums = [1, 3, 2], m = 5`
+- **Constraints:**
+	- 1 <= n == nums.length <= 100
+	- 1 <= nums[i] <= 100
+	- 1 <= m <= 200
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool canSplitArray(vector<int>& nums, int m) {
-        for (int i = 0; i < nums.size() - 1; ++i)
-            if (nums[i] + nums[i + 1] >= m)
-                return true;
-        return nums.size() < 3;        
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if it's possible to split the array into n good arrays, otherwise return false.
+- **Example:** `Output: true`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine whether it's possible to split the array into n good arrays based on the described rules.
 
-In this problem, you are given an array `nums` of integers and an integer `m`. The task is to determine if it is possible to split the array into two non-empty subarrays such that the sum of the two consecutive elements at any position is greater than or equal to `m`. 
+- 1. Start with the entire array.
+- 2. Check if it's possible to split the array into two smaller subarrays, where both subarrays are good.
+- 3. If a valid split is found, continue the process with the smaller subarrays.
+- 4. Return true if it's possible to break down the array into n good subarrays.
+{{< dots >}}
+### Problem Assumptions ✅
+- The length of the array is at least 1 and no more than 100.
+- Each element of the array is between 1 and 100.
+- The value of m is between 1 and 200.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 3, 2], m = 5`  \
+  **Explanation:** By splitting the array into subarrays of length 1, we can achieve a valid result, making the output true.
 
-The array `nums` must be split such that at least one pair of consecutive elements in the array has a sum greater than or equal to `m`. Additionally, the array should have at least 2 elements to form a valid split.
+- **Input:** `Input: nums = [1, 2, 3], m = 7`  \
+  **Explanation:** The array cannot be split into good arrays since no valid subarrays meet the sum >= m condition, so the output is false.
 
-Your goal is to return `true` if such a split is possible, otherwise return `false`.
+{{< dots >}}
+## Approach 🚀
+We need to find a way to split the array into subarrays that meet the good array criteria.
 
-### Approach
+### Initial Thoughts 💭
+- The sum of elements in a subarray plays a crucial role in determining if it's a good array.
+- We need to try all possible splits to ensure the array can be divided into valid subarrays.
+- We can iterate through the array and look for points where the sum of a split subarray meets the required criteria.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one element in the input array.
+- Ensure the solution works efficiently for arrays with lengths up to 100.
+- If m is large, it may be impossible to split the array in a valid way.
+- The solution must be efficient enough to handle the upper limit of input sizes.
+{{< dots >}}
+## Code 💻
+```cpp
+bool canSplitArray(vector<int>& nums, int m) {
+    for (int i = 0; i < nums.size() - 1; ++i)
+        if (nums[i] + nums[i + 1] >= m)
+            return true;
+    return nums.size() < 3;        
+}
+```
 
-To solve the problem, we need to verify whether there exists any pair of consecutive elements in the array `nums` such that their sum is greater than or equal to `m`. If we find such a pair, we can immediately conclude that a valid split is possible, and we return `true`.
+This function checks whether an array can be split into two parts with a sum greater than or equal to a given value 'm'. It returns 'true' if any two consecutive elements meet this condition, or if the array has fewer than three elements.
 
-We can break down the approach as follows:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool canSplitArray(vector<int>& nums, int m) {
+	```
+	The function 'canSplitArray' takes a reference to a vector of integers 'nums' and an integer 'm' as input, and returns a boolean value indicating whether the array can be split based on the condition.
 
-1. **Check Consecutive Elements**:
-   - Start iterating over the array from the first element.
-   - For each pair of consecutive elements `nums[i]` and `nums[i + 1]`, check if their sum is greater than or equal to `m`.
-   - If any such pair is found, we can return `true` immediately, because we have found a valid split.
-   
-2. **Edge Case**:
-   - If the array has fewer than 3 elements, it is always possible to split it (since there are not enough elements to make a meaningful split), so we directly return `true` in this case.
+2. **Loop Setup**
+	```cpp
+	    for (int i = 0; i < nums.size() - 1; ++i)
+	```
+	A loop is initialized to iterate over the elements of the array, from the first element to the second-to-last element, ensuring each pair of consecutive elements is checked.
 
-3. **Return False if No Valid Pair is Found**:
-   - If no pair of consecutive elements has a sum greater than or equal to `m`, and the array contains 3 or more elements, we return `false`.
+3. **Condition Check**
+	```cpp
+	        if (nums[i] + nums[i + 1] >= m)
+	```
+	Within the loop, check if the sum of the current element and the next element in the array is greater than or equal to the given value 'm'.
 
-### Code Breakdown (Step by Step)
+4. **Return Statement**
+	```cpp
+	            return true;
+	```
+	If the sum of two consecutive elements meets or exceeds 'm', return 'true' immediately, indicating that the array can be split.
 
-1. **Function Definition**:
-   ```cpp
-   bool canSplitArray(vector<int>& nums, int m) {
-   ```
-   - This function `canSplitArray` takes a vector `nums` (the input array) and an integer `m` as input, and it returns a boolean value indicating whether a valid split is possible.
+5. **Final Return**
+	```cpp
+	    return nums.size() < 3;        
+	```
+	If no such pair is found, return 'true' if the array contains fewer than 3 elements (since a split is trivially possible with a small array).
 
-2. **Iterate Through the Array**:
-   ```cpp
-   for (int i = 0; i < nums.size() - 1; ++i)
-   ```
-   - We loop through the array starting from the first element, checking each pair of consecutive elements. The loop runs from `i = 0` to `i = nums.size() - 2` (because we're comparing `nums[i]` with `nums[i + 1]`).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
-3. **Check if Pair Sum is Greater Than or Equal to `m`**:
-   ```cpp
-   if (nums[i] + nums[i + 1] >= m)
-       return true;
-   ```
-   - For each consecutive pair, we check if their sum is greater than or equal to `m`. If the condition is satisfied, we immediately return `true`, indicating that the array can be split at that point.
+In the worst case, we may need to check multiple possible splits for each element in the array.
 
-4. **Handle Small Arrays**:
-   ```cpp
-   return nums.size() < 3;
-   ```
-   - If no valid split was found during the loop, we check if the array has fewer than 3 elements. In such cases, we return `true`, because arrays with fewer than 3 elements can always be trivially split.
-   
-5. **Return False**:
-   - If no consecutive pair sums to a value greater than or equal to `m`, and the array has 3 or more elements, we return `false`.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity
+We are storing the intermediate states of the array while attempting to split it into subarrays.
 
-1. **Time Complexity**:
-   - The time complexity is **O(n)**, where `n` is the size of the input array `nums`. We only need to iterate over the array once to check the consecutive pairs. Each iteration involves a constant-time sum and comparison operation, which means the overall time complexity is linear in the size of the input.
+**Happy Coding! 🎉**
 
-2. **Space Complexity**:
-   - The space complexity is **O(1)**, because the algorithm uses only a fixed amount of additional space (for variables like `i` and `m`). The input array `nums` is processed in-place, and we do not use any extra data structures that depend on the size of the input.
-
-### Conclusion
-
-The solution to this problem is straightforward and efficient. By iterating through the array and checking consecutive pairs, we can determine if there is a valid split based on the sum of adjacent elements. If no such pair exists and the array has more than 2 elements, the answer is `false`. However, if the array has fewer than 3 elements or if a valid pair is found, the answer is `true`.
-
-The time complexity of **O(n)** ensures that this approach is scalable even for large arrays, and the space complexity of **O(1)** makes the solution very efficient in terms of memory usage. This solution is optimal for solving the problem within the given constraints and ensures that we do not perform unnecessary computations.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-it-is-possible-to-split-array/description/)
 

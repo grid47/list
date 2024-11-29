@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "uVPkYy5jzRo"
 youtube_upload_date="2023-02-06"
 youtube_thumbnail="https://i.ytimg.com/vi/uVPkYy5jzRo/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,119 +28,167 @@ youtube_thumbnail="https://i.ytimg.com/vi/uVPkYy5jzRo/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+In a city grid, buildings are represented by an n x n matrix where each element corresponds to the height of a building at a specific location. You can increase the height of any building in the city grid, but the increased height should not alter the skyline of the city when viewed from any of the four cardinal directions (north, south, east, and west). Your task is to calculate the maximum sum of the heights that can be added to the buildings without changing the skyline.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an n x n grid where each grid[i][j] represents the height of a building at row i and column j.
+- **Example:** `Input: grid = [[1, 3, 2],[4, 1, 5],[6, 3, 4]]`
+- **Constraints:**
+	- n == grid.length
+	- n == grid[r].length
+	- 2 <= n <= 50
+	- 0 <= grid[r][c] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
-        int n = grid.size();
-        vector<int> row(n, 0), col(n, 0);
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                row[i] = max(row[i], grid[i][j]);
-                col[j] = max(col[j], grid[i][j]);
-            }
-        }
-        int res = 0;
-        for(int i = 0; i < n; i++)
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum sum that the heights of the buildings can be increased by without affecting the skyline.
+- **Example:** `Output: 10`
+- **Constraints:**
+	- The sum must be calculated based on the heights of the buildings without affecting the skyline from any direction.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To maximize the height of buildings without altering the skyline, we need to calculate the maximum possible height increase for each building by comparing it to the skyline views from each direction.
+
+- Find the maximum building heights for each row and column (north-south and west-east).
+- For each building, calculate the maximum height it can reach based on the minimum of the corresponding row and column maximums.
+- Sum up the differences between the calculated maximum heights and the original building heights to get the total increase in height.
+{{< dots >}}
+### Problem Assumptions ✅
+- The height of any building can be increased, but the changes must respect the skyline constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: grid = [[1, 3, 2],[4, 1, 5],[6, 3, 4]]`  \
+  **Explanation:** In this grid, the maximum sum that the heights of buildings can be increased by is 10. The calculated skyline views from all four directions (north, south, east, and west) are taken into account to ensure that increasing the height of any building does not alter the skyline.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we will compute the maximum possible height for each building that maintains the city's skyline from all four cardinal directions. This involves finding the maximum building heights for each row and column, then using these to determine the permissible increase for each building.
+
+### Initial Thoughts 💭
+- We can maintain the skyline by respecting the maximum height from each direction.
+- The problem requires iterating over the rows and columns to calculate the maximum heights from each direction and then determining the feasible height increase for each building.
+{{< dots >}}
+### Edge Cases 🌐
+- If the grid has no buildings (n=0), the result will be 0.
+- For large grids (n=50), ensure that the solution efficiently handles the size and performs within time limits.
+- If all buildings are at the maximum possible height, no increase can be made.
+- The solution must account for the constraints of grid size and building heights.
+{{< dots >}}
+## Code 💻
+```cpp
+int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
+    int n = grid.size();
+    vector<int> row(n, 0), col(n, 0);
+    for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            res += min(row[i], col[j]) - grid[i][j];
+            row[i] = max(row[i], grid[i][j]);
+            col[j] = max(col[j], grid[i][j]);
         }
-        return res;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-In this problem, you are given a 2D grid representing a cityscape, where each value in the grid represents the height of a building at a particular position. Your task is to find the maximum total increase in the height of the buildings such that the skyline (viewed from the top, in both the horizontal and vertical directions) remains the same.
-
-The **skyline** of a city refers to the highest building visible from any row or column. This problem asks for the maximum possible increase in building heights that can occur without changing the skyline.
-
-### Approach
-To solve this problem, the key idea is that the height of each building can be increased only to the minimum of the maximum height in its row and the maximum height in its column. By iterating through the grid and determining the highest possible building height for each cell based on these constraints, we can compute the total increase in building heights.
-
-The approach can be broken down into the following steps:
-
-1. **Compute Maximum Heights**:
-   - First, for each row and column, we need to find the maximum building height. This is necessary because the maximum height for a building in any given row or column cannot exceed the maximum height in that row or column when considering the skyline.
-
-2. **Calculate Possible Increase**:
-   - For each building, the new possible height is the minimum of the maximum height in the corresponding row and column.
-   - The difference between this new height and the current height of the building will give the increase in height for that building.
-
-3. **Accumulate the Increase**:
-   - Sum all the increases for all buildings to get the total increase in the height of the buildings while maintaining the same skyline.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialization
-```cpp
-int n = grid.size();
-vector<int> row(n, 0), col(n, 0);
-```
-- **`n`**: This variable represents the size of the grid (i.e., the number of rows and columns in the square grid).
-- **`row`**: This vector will store the maximum height for each row.
-- **`col`**: This vector will store the maximum height for each column.
-
-#### Step 2: Find Maximum Heights for Each Row and Column
-```cpp
-for(int i = 0; i < n; i++) {
-    for(int j = 0; j < n; j++) {
-        row[i] = max(row[i], grid[i][j]);
-        col[j] = max(col[j], grid[i][j]);
-    }
-}
-```
-- This nested loop iterates over the entire grid. For each cell `(i, j)`:
-  - **`row[i] = max(row[i], grid[i][j])`**: Updates the maximum building height for row `i`.
-  - **`col[j] = max(col[j], grid[i][j])`**: Updates the maximum building height for column `j`.
-
-At the end of these loops, `row[i]` contains the maximum height of the buildings in row `i`, and `col[j]` contains the maximum height of the buildings in column `j`.
-
-#### Step 3: Calculate the Maximum Possible Increase
-```cpp
-int res = 0;
-for(int i = 0; i < n; i++)
+    int res = 0;
+    for(int i = 0; i < n; i++)
     for(int j = 0; j < n; j++) {
         res += min(row[i], col[j]) - grid[i][j];
     }
+    return res;
+}
 ```
-- We initialize the variable `res` to store the total increase in height.
-- This double loop iterates over every building in the grid. For each building at position `(i, j)`:
-  - **`min(row[i], col[j])`**: This determines the maximum possible height for the building at `(i, j)` without altering the skyline. It ensures that the building's new height will not exceed the maximum height in either its row or column.
-  - **`min(row[i], col[j]) - grid[i][j]`**: This calculates the increase in height for the building by subtracting the current height from the maximum allowable height.
-  - We accumulate this increase in the variable `res`.
 
-#### Step 4: Return the Total Increase
-```cpp
-return res;
-```
-- Finally, after summing up the increases for all the buildings, we return the result, which represents the total increase in height that can be made without altering the skyline.
+This function computes the maximum possible increase in the grid heights while maintaining the skyline view. It iterates over the grid to determine the maximum heights of each row and column and then computes the total increase for each element in the grid.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
+	```
+	This defines the function `maxIncreaseKeepingSkyline` which takes a 2D vector `grid` as input and returns an integer. The function aims to calculate the maximum increase in grid height while keeping the skyline unchanged.
 
-#### Time Complexity:
-The time complexity of the solution is **O(n^2)**, where:
-- **`n`** is the number of rows (or columns) in the grid (since the grid is square).
-- **First Loop**: The first loop calculates the maximum heights for each row and column, which takes **O(n^2)** time as it iterates over every cell in the grid.
-- **Second Loop**: The second loop calculates the total increase, which also involves iterating over every cell in the grid, contributing another **O(n^2)** time.
+2. **Variable Initialization**
+	```cpp
+	    int n = grid.size();
+	```
+	Here, we initialize the variable `n` which stores the size of the grid (i.e., the number of rows or columns, assuming the grid is square).
 
-Thus, the overall time complexity is **O(n^2)**, which is efficient for grid sizes typically encountered in problems of this type.
+3. **Array Initialization**
+	```cpp
+	    vector<int> row(n, 0), col(n, 0);
+	```
+	We create two vectors `row` and `col`, both of size `n`, initialized to 0. These will store the maximum values for each row and column in the grid, respectively.
 
-#### Space Complexity:
-The space complexity is **O(n)**, where:
-- **`row`** and **`col`** are both vectors of size `n`, each requiring **O(n)** space.
-- The space used for storing the grid itself is not included in the space complexity, as it is assumed to be provided as input.
+4. **Outer Loop - Rows**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	We start an outer loop that iterates over each row of the grid.
 
-Therefore, the space complexity is linear in terms of the size of the grid, i.e., **O(n)**.
+5. **Inner Loop - Columns**
+	```cpp
+	        for(int j = 0; j < n; j++) {
+	```
+	This inner loop iterates over each column in the current row.
 
-### Conclusion
+6. **Row Maximum Calculation**
+	```cpp
+	            row[i] = max(row[i], grid[i][j]);
+	```
+	This line updates the maximum value for the current row `i` by comparing the current element `grid[i][j]` with the existing value stored in `row[i]`.
 
-This solution efficiently computes the maximum increase in building heights while maintaining the skyline, using a straightforward approach involving two passes over the grid. The first pass calculates the maximum heights for each row and column, and the second pass computes the total increase in height by ensuring that each building's new height does not violate the skyline constraints.
+7. **Column Maximum Calculation**
+	```cpp
+	            col[j] = max(col[j], grid[i][j]);
+	```
+	Similarly, this line updates the maximum value for the current column `j` by comparing the current element `grid[i][j]` with the existing value stored in `col[j]`.
 
-The algorithm runs in **O(n^2)** time, making it efficient for typical grid sizes, and requires **O(n)** space for storing the row and column maximums. This approach is optimal for solving the problem within the constraints of typical input sizes, and it provides a clean, easy-to-understand solution for maximizing the building heights while keeping the skyline intact.
+8. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	We initialize a variable `res` to store the result, which will accumulate the total increase in height for the grid.
+
+9. **Nested Loop for Calculation**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	We start a loop to iterate over each row again to calculate the increase for each element.
+
+10. **Inner Loop for Calculation**
+	```cpp
+	    for(int j = 0; j < n; j++) {
+	```
+	An inner loop is used to process each element in the grid for a given row.
+
+11. **Grid Height Increase Calculation**
+	```cpp
+	        res += min(row[i], col[j]) - grid[i][j];
+	```
+	For each element in the grid, we compute the maximum possible increase in height by subtracting the current value from the minimum of the maximum row and column heights.
+
+12. **Return Result**
+	```cpp
+	    return res;
+	```
+	Return the total calculated increase in grid heights.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2), where n is the size of the grid.
+- **Average Case:** O(n^2), as each building must be processed individually.
+- **Worst Case:** O(n^2), since the grid size is bounded by n = 50, leading to a manageable number of operations.
+
+The time complexity is quadratic in the size of the grid due to the need to process both rows and columns.
+
+### Space Complexity 💾
+- **Best Case:** O(n), since we only need additional space for row and column maximums.
+- **Worst Case:** O(n), as space is needed to store the row and column maximums.
+
+The space complexity is linear with respect to the grid size, as we only need to store the row and column maximum heights.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/max-increase-to-keep-city-skyline/description/)
 

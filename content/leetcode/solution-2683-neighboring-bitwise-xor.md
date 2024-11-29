@@ -14,125 +14,150 @@ img_src = ""
 youtube = "DDQR_mDTTFI"
 youtube_upload_date="2023-05-14"
 youtube_thumbnail="https://i.ytimg.com/vi/DDQR_mDTTFI/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary array `derived` of length `n`. The `derived` array is obtained by computing the bitwise XOR of adjacent values in an original binary array. Specifically, for each index `i`, if `i` is the last index, `derived[i] = original[i] ⊕ original[0]`, otherwise, `derived[i] = original[i] ⊕ original[i + 1]`. The task is to determine if there exists a valid binary array `original` that could have formed the given `derived` array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a binary array `derived`, where each value is either 0 or 1. You need to determine if there exists a binary array `original` such that applying the XOR operation on adjacent values produces `derived`.
+- **Example:** `Input: derived = [0, 1, 1]`
+- **Constraints:**
+	- 1 <= derived.length <= 10^5
+	- The values in the derived array are either 0 or 1.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool doesValidArrayExist(vector<int>& nums) {
-        int n = nums.size();
-        // same 0 0
-        
-        int fst = 0, scd = 1;
-        for(int i = 0; i < n; i++) {
-            fst ^= nums[i];
-            scd ^= nums[i];
-        }
-        if(fst == 0 || scd == 1) return true;
-        return false;
-        // same 1 1
-        // different 1 0
-        // different 0 1        
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if a valid binary array `original` exists, otherwise return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The output should be a boolean value.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to check if there exists a valid `original` array that could have been transformed into the `derived` array using the bitwise XOR operation.
+
+- Step 1: For the given array `derived`, initialize two variables to track the XOR of elements.
+- Step 2: Iterate through the `derived` array and compute the cumulative XOR to check if a valid `original` exists.
+- Step 3: Return `true` if the cumulative XOR values meet the conditions for a valid `original` array, otherwise return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The derived array will always be valid (it will not contain values outside the range of 0 and 1).
+- The problem will be solved by checking the XOR conditions across the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: derived = [0, 1, 1]`  \
+  **Explanation:** The `derived` array is obtained by XORing adjacent values of the `original` array. A valid `original` array that satisfies this condition is [0, 1, 0]. Therefore, the output is true.
+
+- **Input:** `Input: derived = [1, 0]`  \
+  **Explanation:** It is not possible to create a valid `original` array from this `derived` array using the XOR operation, so the output is false.
+
+{{< dots >}}
+## Approach 🚀
+We can determine if a valid `original` array exists by computing the XOR of elements in `derived` and checking if the cumulative XOR satisfies certain conditions.
+
+### Initial Thoughts 💭
+- The XOR operation is reversible, so we can check the feasibility of creating the `original` array by comparing the XOR values across adjacent elements.
+- By using XOR properties, we can efficiently determine if a valid `original` exists without explicitly constructing it.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array is always non-empty as per the constraints.
+- The solution needs to be efficient enough to handle arrays with up to 100,000 elements.
+- The solution should handle cases where the `derived` array contains all 0's or all 1's.
+- The values in `derived` are either 0 or 1, and the length of the array is within the specified constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+bool doesValidArrayExist(vector<int>& nums) {
+    int n = nums.size();
+    // same 0 0
+    
+    int fst = 0, scd = 1;
+    for(int i = 0; i < n; i++) {
+        fst ^= nums[i];
+        scd ^= nums[i];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The task requires us to determine if a valid array exists based on the given list of integers, `nums`. The array must follow certain conditions that depend on whether the XOR operation applied on certain parts of the array satisfies specific conditions.
-
-To be precise:
-- An array is considered valid if applying the XOR operation on the entire array leads to certain predictable results, given the conditions outlined in the problem. 
-- The problem is reduced to determining if the XOR of elements in the array meets specific conditions. 
-
-The function should return `true` if such a valid array can exist; otherwise, it should return `false`.
-
-### Approach
-
-To approach the problem, we need to understand how XOR works. The XOR operation has these important properties:
-- **`a ^ a = 0`**: XORing a number with itself results in zero.
-- **`a ^ 0 = a`**: XORing a number with zero results in the number itself.
-- **Commutativity and Associativity**: XOR is both commutative and associative, meaning the order of operations doesn’t matter.
-
-For the problem at hand, we need to evaluate whether applying XOR to the array’s elements can result in a valid condition.
-
-The solution will:
-1. Initialize two variables, `fst` and `scd`, to track the XOR results of the elements as we go through the array.
-2. Apply XOR across all the elements of the `nums` array.
-3. After processing the entire array, check the final XOR results against the given conditions.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize the XOR Variables
-
-```cpp
-int fst = 0, scd = 1;
-```
-
-- **`fst`**: This variable will hold the cumulative XOR result as we traverse through the array.
-- **`scd`**: This is another variable to track the XOR result based on an alternative approach.
-  
-Both are initialized to different values to keep track of separate results during the process.
-
-#### Step 2: XOR all Array Elements
-
-```cpp
-for (int i = 0; i < n; i++) {
-    fst ^= nums[i];
-    scd ^= nums[i];
+    if(fst == 0 || scd == 1) return true;
+    return false;
+    // same 1 1
+    // different 1 0
+    // different 0 1        
 }
 ```
 
-- The loop iterates through each element of the array `nums`.
-- For each element, we apply XOR between `fst` and the current element `nums[i]`. Similarly, we apply XOR between `scd` and the current element.
-- This operation effectively accumulates the XOR results as we process each number in the array.
+The function 'doesValidArrayExist' checks if a valid array exists based on a given condition involving XOR operations. The function iterates through the array and applies XOR on two variables, 'fst' and 'scd', and then checks if either of them satisfies certain conditions to return true or false.
 
-#### Step 3: Check the Conditions for Validity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool doesValidArrayExist(vector<int>& nums) {
+	```
+	The function 'doesValidArrayExist' takes a reference to a vector 'nums' and returns a boolean indicating whether a valid array exists based on the XOR conditions.
 
-```cpp
-if (fst == 0 || scd == 1) return true;
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	The variable 'n' is initialized to the size of the 'nums' vector, representing the number of elements in the array.
 
-- **`fst == 0`**: If the result of XORing all elements (`fst`) equals zero, it satisfies one of the conditions that the array is valid.
-- **`scd == 1`**: If the result of XORing all elements (`scd`) equals one, it satisfies another valid condition.
+3. **Variable Initialization**
+	```cpp
+	    int fst = 0, scd = 1;
+	```
+	Two variables, 'fst' and 'scd', are initialized to 0 and 1 respectively. These variables will be used to accumulate the XOR results as the loop iterates through 'nums'.
 
-If either of these conditions is met, the function immediately returns `true`, meaning that a valid array configuration exists.
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A for loop is initiated to iterate through the elements of the 'nums' array from index 0 to 'n-1'.
 
-#### Step 4: Return False if Conditions Are Not Met
+5. **XOR Operation**
+	```cpp
+	        fst ^= nums[i];
+	```
+	The variable 'fst' is updated by applying the XOR operation between its current value and the current element of 'nums'. This operation will accumulate the XOR of all elements.
 
-```cpp
-return false;
-```
+6. **XOR Operation**
+	```cpp
+	        scd ^= nums[i];
+	```
+	The variable 'scd' is updated by applying the XOR operation between its current value and the current element of 'nums'. This will accumulate a separate XOR of all elements.
 
-- If neither of the conditions (`fst == 0` or `scd == 1`) is satisfied, the function returns `false`, meaning that a valid configuration is not possible.
+7. **Condition Check**
+	```cpp
+	    if(fst == 0 || scd == 1) return true;
+	```
+	The function checks if either 'fst' is 0 or 'scd' is 1. If this condition is satisfied, it returns true, indicating that a valid array exists.
 
-#### Explanation of the Logical Flow
+8. **Return**
+	```cpp
+	    return false;
+	```
+	If the condition is not met, the function returns false, indicating that no valid array exists.
 
-The core idea of this solution is that XORing all the elements in the array should satisfy either the condition where the result is `0` or the result is `1`. The array will be valid if one of these conditions hold after performing the XOR operations across all the elements.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-This implementation performs an efficient check using XOR in linear time, making it an optimal solution for the problem.
+We iterate through the array once to check the XOR conditions, which gives a linear time complexity.
 
-### Complexity
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Time Complexity
+The space complexity is constant as we only need a few variables to track the XOR results.
 
-- **`O(n)`**: The main computational step is the loop that iterates through the array `nums`. In this loop, we apply the XOR operation on each element, which takes constant time for each element.
-- Therefore, the time complexity of the function is **O(n)**, where `n` is the size of the input array `nums`.
+**Happy Coding! 🎉**
 
-#### Space Complexity
-
-- **`O(1)`**: We only use a constant amount of extra space for the variables `fst`, `scd`, and the loop index. No additional data structures are used.
-- Thus, the space complexity is **O(1)**.
-
-### Conclusion
-
-This solution efficiently solves the problem by leveraging the properties of the XOR operation. By accumulating the XOR results as we iterate through the array, we can check the necessary conditions in a single pass. The time complexity is linear, and the space complexity is constant, making this solution both time and space efficient. The solution ensures that the array configuration is valid based on the XOR results, which leads to an optimal and easy-to-understand approach to the problem.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/neighboring-bitwise-xor/description/)
 

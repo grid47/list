@@ -14,147 +14,190 @@ img_src = ""
 youtube = "7IAA0sdeACw"
 youtube_upload_date="2023-04-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/7IAA0sdeACw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a string 'word' consisting of letters 'a', 'b', and 'c', you can insert letters 'a', 'b', or 'c' anywhere and as many times as needed. Your task is to determine the minimum number of insertions required to transform 'word' into a valid string. A string is considered valid if it can be formed by repeatedly concatenating the string 'abc'.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a single string 'word' containing only the characters 'a', 'b', and 'c'.
+- **Example:** `word = 'ab'`
+- **Constraints:**
+	- 1 <= word.length <= 50
+	- word consists of only the characters 'a', 'b', and 'c'.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int addMinimum(string word) {
-        int exp = 0, res = 0;
-        int n = word.size();
-        for(int i = 0; i < n; i++) {
-            if(exp == (word[i] - 'a')) {
-                exp = (exp + 1) % 3;
-                continue;
-            }
-            while(exp != (word[i] - 'a')) {
-                res++;
-                exp = (exp + 1) % 3;
-            }
-            exp = (exp + 1) % 3;            
-            // cout << i << " " << res << " " << exp << "\n";
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of insertions required to make the string valid, i.e., form 'abc' repeatedly.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The output should be a non-negative integer representing the minimum number of insertions needed.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine the number of insertions needed to convert the input string into a valid 'abc' repeated string.
+
+- Step 1: Track the expected character sequence ('a', 'b', 'c') as you iterate through the string.
+- Step 2: If the character in the string does not match the expected one, count the number of insertions required and update the expected character.
+- Step 3: After processing the string, handle any remaining expected characters by inserting them.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each string will only contain 'a', 'b', and 'c'.
+- The string may not initially form a valid 'abc' repeated pattern.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: word = 'ab'`  \
+  **Explanation:** The string 'ab' is missing 'c' to form 'abc'. So, we need 1 insertion (add 'c') to make the string valid.
+
+- **Input:** `Input: word = 'aab'`  \
+  **Explanation:** The string 'aab' is missing 'c' after the first 'a'. We need to insert 'c' after the second 'a' to make it valid, resulting in 1 insertion.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to iterate through the string while keeping track of the expected character ('a', 'b', or 'c'). If the current character does not match the expected one, we insert the required characters to complete the 'abc' pattern.
+
+### Initial Thoughts 💭
+- The string should follow the 'abc' pattern, so we need to ensure the correct sequence of characters is maintained.
+- We need to count how many characters need to be inserted to make the string valid.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty strings are not allowed as per the problem constraints.
+- Ensure the solution handles strings close to the upper limit of length 50 efficiently.
+- Consider cases where the string is already valid (e.g., 'abc').
+- The solution should work efficiently for strings of length up to 50.
+{{< dots >}}
+## Code 💻
+```cpp
+int addMinimum(string word) {
+    int exp = 0, res = 0;
+    int n = word.size();
+    for(int i = 0; i < n; i++) {
+        if(exp == (word[i] - 'a')) {
+            exp = (exp + 1) % 3;
+            continue;
         }
-        if(word[n - 1] == 'a') res += 2;
-        if(word[n - 1] == 'b') res += 1;
-        return res;
+        while(exp != (word[i] - 'a')) {
+            res++;
+            exp = (exp + 1) % 3;
+        }
+        exp = (exp + 1) % 3;            
+        // cout << i << " " << res << " " << exp << "\n";
     }
-};
-{{< /highlight >}}
----
+    if(word[n - 1] == 'a') res += 2;
+    if(word[n - 1] == 'b') res += 1;
+    return res;
+}
+```
 
-### Problem Statement
+This function calculates the minimum number of insertions required to make a string alternating between 'a' and 'b'.
 
-The problem asks us to add the minimum number of characters to a given string `word` such that the string alternates between the letters `'a'`, `'b'`, and `'c'` in that order (i.e., `'a' -> 'b' -> 'c' -> 'a' -> 'b' ...`). The string may contain any of the letters `'a'`, `'b'`, and `'c'`, and we are allowed to add extra characters to make the sequence follow the repeating pattern of 'abc'. The task is to determine the minimum number of characters that must be added to `word` to make it match this pattern.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int addMinimum(string word) {
+	```
+	This line defines the function 'addMinimum', which takes a string 'word' as input and returns an integer value.
 
-### Approach
+2. **Variable Declaration**
+	```cpp
+	    int exp = 0, res = 0;
+	```
+	Here, 'exp' tracks the expected character ('a' or 'b'), and 'res' counts the number of insertions needed.
 
-To solve this problem, we need to follow these steps:
+3. **Length Calculation**
+	```cpp
+	    int n = word.size();
+	```
+	This line calculates the length of the input string 'word' and stores it in the variable 'n'.
 
-1. **Initialize the state**:
-   - We will start by keeping track of the current expected character (either `'a'`, `'b'`, or `'c'`) as we process each character in `word`.
-   - We maintain a counter `res` that counts how many characters need to be added to achieve the desired pattern.
+4. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is initiated to iterate through each character in the string 'word'.
 
-2. **Iterate through the string**:
-   - We will loop through each character in `word`, and for each character:
-     - Check if it matches the expected character.
-     - If it does match, we update the expected character (since the next character in the pattern should follow the repeating sequence 'abc').
-     - If it doesn't match the expected character, we add characters until we match the expected character and update the counter.
+5. **Check Expected Character**
+	```cpp
+	        if(exp == (word[i] - 'a')) {
+	```
+	This conditional checks if the current character matches the expected character ('a' or 'b').
 
-3. **Edge Handling**:
-   - If the last character in the string `word` is `'a'` or `'b'`, we need to account for additional characters that should come after it to complete the repeating pattern.
+6. **Update Expected Character**
+	```cpp
+	            exp = (exp + 1) % 3;
+	```
+	If the character matches, 'exp' is updated to the next expected character in a cyclic manner (0 -> 1 -> 2 -> 0).
 
-4. **Final result**:
-   - The result will be the total number of characters we added to the string.
+7. **Continue to Next Iteration**
+	```cpp
+	            continue;
+	```
+	If the character matches, the loop moves to the next iteration without performing further actions.
 
-### Code Breakdown
+8. **While Loop for Insertions**
+	```cpp
+	        while(exp != (word[i] - 'a')) {
+	```
+	This 'while' loop runs when the current character does not match the expected character.
 
-Let's break down the code step-by-step:
+9. **Increment Insertions**
+	```cpp
+	            res++;
+	```
+	If the character doesn't match the expected one, an insertion is counted, and 'res' is incremented.
 
-1. **Variable Initialization**:
-   ```cpp
-   int exp = 0, res = 0;
-   int n = word.size();
-   ```
-   - `exp` keeps track of the expected character in the pattern (`0` for `'a'`, `1` for `'b'`, and `2` for `'c'`).
-   - `res` is the variable that counts the number of characters we need to add to make the string match the pattern.
-   - `n` is the size of the input string `word`.
+10. **Update Expected Character Inside While Loop**
+	```cpp
+	            exp = (exp + 1) % 3;
+	```
+	The expected character is updated after each insertion, cycling through 'a' and 'b'.
 
-2. **Main Loop to Process Each Character**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       if(exp == (word[i] - 'a')) {
-           exp = (exp + 1) % 3;
-           continue;
-       }
-       while(exp != (word[i] - 'a')) {
-           res++;
-           exp = (exp + 1) % 3;
-       }
-       exp = (exp + 1) % 3;
-   }
-   ```
-   - The loop iterates through each character in the string `word`.
-   - The condition `if(exp == (word[i] - 'a'))` checks if the current character matches the expected character:
-     - If it matches, we move on to the next expected character in the cycle (`'a' -> 'b' -> 'c' -> 'a'`).
-   - If it doesn't match, the `while(exp != (word[i] - 'a'))` loop adds the required characters to match the expected character. After adding each character, the expected character is updated.
+11. **Update Expected Character**
+	```cpp
+	        exp = (exp + 1) % 3;            
+	```
+	This updates the expected character after processing each character in the string.
 
-3. **Handling Edge Cases (Final Character)**:
-   ```cpp
-   if(word[n - 1] == 'a') res += 2;
-   if(word[n - 1] == 'b') res += 1;
-   return res;
-   ```
-   - After processing all characters in `word`, we check the last character of the string:
-     - If the last character is `'a'`, we need two additional characters (`'b'` and `'c'`) to complete the repeating sequence.
-     - If the last character is `'b'`, we need one additional character (`'c'`) to complete the pattern.
-   - The final value of `res` is returned, which represents the total number of characters added.
+12. **Check Last Character for Insertions**
+	```cpp
+	    if(word[n - 1] == 'a') res += 2;
+	```
+	If the last character of the string is 'a', two insertions are needed to make the string alternating.
 
-### Example Walkthrough
+13. **Check Last Character for Insertions**
+	```cpp
+	    if(word[n - 1] == 'b') res += 1;
+	```
+	If the last character of the string is 'b', one insertion is needed to make the string alternating.
 
-#### Example 1:
+14. **Return Result**
+	```cpp
+	    return res;
+	```
+	Finally, the function returns the total number of insertions required.
 
-Let’s consider the input `word = "ab"`:
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-1. Initially, `exp = 0` (expecting `'a'`) and `res = 0`.
-2. We start with the first character `'a'`:
-   - Since `exp = 0` (expecting `'a'`), it matches, so we move to the next expected character, `'b'` (`exp = 1`).
-3. The second character is `'b'`:
-   - Since `exp = 1` (expecting `'b'`), it matches, so we move to the next expected character, `'c'` (`exp = 2`).
-4. Now, the string ends, and the last character is `'b'`. We need to add 1 character (`'c'`) to complete the sequence.
-5. The final result is `res = 1`.
+The time complexity remains linear in all cases, as we simply iterate through the string once.
 
-#### Example 2:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-Let’s consider the input `word = "abc"`:
+The space complexity is constant, as we only need a few variables to track the state of the expected character and the insertion count.
 
-1. Initially, `exp = 0` (expecting `'a'`) and `res = 0`.
-2. The first character is `'a'`:
-   - Since `exp = 0` (expecting `'a'`), it matches, so we move to the next expected character, `'b'` (`exp = 1`).
-3. The second character is `'b'`:
-   - Since `exp = 1` (expecting `'b'`), it matches, so we move to the next expected character, `'c'` (`exp = 2`).
-4. The third character is `'c'`:
-   - Since `exp = 2` (expecting `'c'`), it matches, so we move back to the next expected character, `'a'` (`exp = 0`).
-5. Now, the string ends, and no extra characters are needed.
-6. The final result is `res = 0`.
+**Happy Coding! 🎉**
 
-### Time Complexity
-
-The time complexity of this solution is **O(n)**, where `n` is the length of the string `word`.
-
-- The solution involves a single pass through the string, with constant-time operations for each character (checking conditions and updating the expected character). Therefore, the overall time complexity is linear in terms of the size of the input string.
-
-### Space Complexity
-
-The space complexity is **O(1)**, as we are only using a few integer variables (`exp`, `res`, `n`), and no additional data structures proportional to the input size are used.
-
-### Conclusion
-
-The algorithm efficiently solves the problem by iterating over the string `word` and counting how many characters need to be added to match the expected repeating pattern `'abc'`. By maintaining the expected character in the cycle and using a counter to track how many characters are added, the algorithm ensures that we add the minimum number of characters to achieve the desired pattern. The approach is optimal with a time complexity of **O(n)** and a space complexity of **O(1)**, making it suitable for large inputs.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-additions-to-make-valid-string/description/)
 

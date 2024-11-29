@@ -14,118 +14,182 @@ img_src = ""
 youtube = "2W2yijatcTY"
 youtube_upload_date="2021-05-09"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/2W2yijatcTY/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D array `logs` where each entry represents the birth and death years of a person. You need to determine the earliest year that has the maximum population, where population is defined as the number of people alive in a given year.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D array `logs` where each element is a list `[birthi, deathi]`, representing the birth and death years of a person.
+- **Example:** `[[1980, 1990], [1985, 1995], [1990, 2000]]`
+- **Constraints:**
+	- 1 <= logs.length <= 100
+	- 1950 <= birthi < deathi <= 2050
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumPopulation(vector<vector<int>>& logs) {
-        vector<int> sum(102, 0);
-        
-        for(auto v: logs) {
-            sum[v[1] - 1950]--;
-            sum[v[0] - 1950]++;
-        }
-        
-        for(int i = 1; i < 102; i++) {
-            sum[i] += sum[i - 1];
-            cout << sum[i] << " ";
-        }
-        
-        int mx = 0, yr = 2050;
-        for(int i = 101; i >= 0; i--) {
-            if(sum[i] >= mx) {
-                yr = i + 1950;
-                mx = sum[i];
-            }
-        }
-        return yr;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the earliest year with the maximum population.
+- **Example:** `1990`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the earliest year where the population is maximized. This involves counting the number of people alive in each year and finding the year with the highest population.
+
+- Use an array to track population changes by year. Increase the population at birth years and decrease it at death years.
+- Accumulate population over the years and find the year with the maximum population.
+- If there are multiple years with the same population, return the earliest year.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array `logs` will always contain valid birth and death years.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[[1980,1990], [1985,1995], [1990,2000]]`  \
+  **Explanation:** In this example, the population is maximized in the year 1990, as all three people are alive during that year. Hence, the earliest year with the maximum population is 1990.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, track population changes over time by incrementing the population at birth years and decrementing it at death years. Then, accumulate the population for each year and return the earliest year with the highest population.
+
+### Initial Thoughts 💭
+- We need to calculate population changes for each year and determine the year with the highest population.
+- A simple way to approach this is by using an array to track changes in population by year.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one entry in the input array `logs`.
+- The input array can have up to 100 entries, so the algorithm should handle this efficiently.
+- Consider cases where multiple years have the same maximum population.
+- Ensure that the solution can handle the range of years from 1950 to 2050 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumPopulation(vector<vector<int>>& logs) {
+    vector<int> sum(102, 0);
+    
+    for(auto v: logs) {
+        sum[v[1] - 1950]--;
+        sum[v[0] - 1950]++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem at hand is to determine the year with the maximum population based on birth and death logs provided for a range of years. Each log entry contains a birth year and a death year for a person. The objective is to find the year during which the population was at its peak, given that the logs span from 1950 to 2050.
-
-### Approach
-
-To tackle this problem, we will use a counting array to track the population changes over the years. We will implement the following steps:
-
-1. **Initialize a Counting Array**: Create an array that will represent population changes from 1950 to 2050.
-2. **Process Each Log Entry**: For each log entry, increment the count at the birth year and decrement the count at the death year.
-3. **Calculate the Population Over the Years**: Iterate through the counting array to calculate the cumulative population for each year.
-4. **Determine the Year with Maximum Population**: Identify the year with the highest population, returning that year.
-
-### Code Breakdown (Step by Step)
-
-Here’s the complete implementation of the solution:
-
-```cpp
-class Solution {
-public:
-    int maximumPopulation(vector<vector<int>>& logs) {
-        vector<int> sum(102, 0);
-        
-        for(auto v: logs) {
-            sum[v[1] - 1950]--;   // Decrease population count at death year
-            sum[v[0] - 1950]++;   // Increase population count at birth year
-        }
-```
-- **Class Declaration**: The solution is encapsulated in a class named `Solution`.
-- **Function Definition**: The function `maximumPopulation` takes a vector of vectors (`logs`) where each inner vector represents the birth and death years.
-- **Counting Array Initialization**: A vector `sum` of size 102 (to cover years from 1950 to 2050) is initialized to zero. This array will be used to track population changes over time.
-- **Population Change Updates**: For each log entry:
-  - The death year (indicated by `v[1]`) results in a decrease in population, hence `sum[v[1] - 1950]--`.
-  - The birth year (indicated by `v[0]`) results in an increase in population, hence `sum[v[0] - 1950]++`.
-
-```cpp
-        for(int i = 1; i < 102; i++) {
-            sum[i] += sum[i - 1];  // Cumulative population count
-            cout << sum[i] << " ";  // Debug output of the cumulative sums
-        }
-```
-- **Cumulative Population Calculation**: We iterate from index 1 to 101, updating the `sum` array to reflect the cumulative population. This means that each entry now represents the population at the end of that year.
-- **Debugging Output**: A debugging statement (`cout << sum[i] << " ";`) is included to print the population for each year. This can help in tracing the internal state of the program during execution.
-
-```cpp
-        int mx = 0, yr = 2050;
-        for(int i = 101; i >= 0; i--) {
-            if(sum[i] >= mx) {  // Track the maximum population
-                yr = i + 1950;  // Calculate the actual year
-                mx = sum[i];    // Update maximum population
-            }
-        }
-        return yr;  // Return the year with maximum population
+    
+    for(int i = 1; i < 102; i++) {
+        sum[i] += sum[i - 1];
+        cout << sum[i] << " ";
     }
-};
+    
+    int mx = 0, yr = 2050;
+    for(int i = 101; i >= 0; i--) {
+        if(sum[i] >= mx) {
+            yr = i + 1950;
+            mx = sum[i];
+        }
+    }
+    return yr;
+}
 ```
-- **Find Year with Maximum Population**: We initialize `mx` to track the maximum population encountered and `yr` to store the year corresponding to that population.
-- **Backward Looping**: We loop backward through the `sum` array (from index 101 to 0) to find the maximum population year. This ensures that in case of ties, we prefer the latest year.
-- **Return Statement**: Finally, we return the year that has the maximum population.
 
-### Complexity
+This code calculates the year with the maximum population, given a list of birth and death years in the format of `logs`. It computes population changes over the years using a difference array and then calculates the cumulative population at each year to determine the year with the maximum population.
 
-- **Time Complexity**: 
-  - The time complexity for processing the logs is \( O(n) \), where \( n \) is the number of log entries. Each log entry requires constant time operations to update the counting array.
-  - The time complexity for computing the cumulative population and finding the maximum is \( O(1) \) since it iterates through a fixed-size array of 102 elements.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumPopulation(vector<vector<int>>& logs) {
+	```
+	Defines the `maximumPopulation` function that takes a 2D vector `logs` representing the birth and death years of individuals.
 
-- **Space Complexity**: 
-  - The space complexity is \( O(1) \) in terms of extra space used since we are only utilizing the counting array of size 102 and a few integer variables for computation.
+2. **Variable Initialization**
+	```cpp
+	    vector<int> sum(102, 0);
+	```
+	Initializes a vector `sum` of size 102 (for years 1950 to 2050) to track the population changes, with all values initially set to 0.
 
-### Conclusion
+3. **Looping**
+	```cpp
+	    for(auto v: logs) {
+	```
+	Iterates through each element `v` in the `logs` vector, where each element represents a pair of birth and death years.
 
-The provided solution efficiently determines the year with the maximum population based on the given birth and death logs. By utilizing a counting array and performing cumulative calculations, the implementation achieves optimal time and space complexity.
+4. **Array Manipulation**
+	```cpp
+	        sum[v[1] - 1950]--;
+	```
+	Decreases the population at the death year (adjusted for the base year 1950).
 
-This solution highlights effective programming techniques, including the use of arrays for counting, cumulative sums for population tracking, and efficient loop structures to find the desired result. It is well-suited for competitive programming and real-world applications where such demographic analysis might be necessary. 
+5. **Array Manipulation**
+	```cpp
+	        sum[v[0] - 1950]++;
+	```
+	Increases the population at the birth year (adjusted for the base year 1950).
 
-In summary, the algorithm can handle a variety of scenarios involving demographic logs, making it versatile and efficient for population analysis over a specified time range.
+6. **Looping**
+	```cpp
+	    for(int i = 1; i < 102; i++) {
+	```
+	A loop that calculates the cumulative population for each year by adding the current value of `sum[i]` to `sum[i - 1]`.
+
+7. **Array Manipulation**
+	```cpp
+	        sum[i] += sum[i - 1];
+	```
+	Adds the population change at year `i` to the cumulative population up to that year.
+
+8. **Variable Initialization**
+	```cpp
+	    int mx = 0, yr = 2050;
+	```
+	Initializes `mx` to track the maximum population and `yr` to store the year with the maximum population, initially set to 2050.
+
+9. **Looping**
+	```cpp
+	    for(int i = 101; i >= 0; i--) {
+	```
+	Starts a loop that runs backward from year 2050 (index 101) to 1950 (index 0) to find the year with the maximum population.
+
+10. **Conditional Check**
+	```cpp
+	        if(sum[i] >= mx) {
+	```
+	Checks if the population at the current year `i` is greater than or equal to the current maximum population `mx`.
+
+11. **Variable Update**
+	```cpp
+	            yr = i + 1950;
+	```
+	Updates the year `yr` to the current year (adjusted back to the actual year) when a new maximum population is found.
+
+12. **Variable Update**
+	```cpp
+	            mx = sum[i];
+	```
+	Updates the maximum population `mx` to the current population at year `i`.
+
+13. **Return**
+	```cpp
+	    return yr;
+	```
+	Returns the year `yr` that has the maximum population.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(N)
+- **Average Case:** O(N)
+- **Worst Case:** O(N)
+
+The time complexity is O(N), where N is the number of people in the `logs` array, as we are iterating over each person's birth and death year.
+
+### Space Complexity 💾
+- **Best Case:** O(102)
+- **Worst Case:** O(102)
+
+The space complexity is O(102), as we use an array of fixed size to track population changes over the years.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-population-year/description/)
 

@@ -14,150 +14,203 @@ img_src = ""
 youtube = "FhAuoztsceo"
 youtube_upload_date="2023-10-15"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/FhAuoztsceo/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary string `s` and a positive integer `k`. A substring of `s` is considered 'beautiful' if it contains exactly `k` occurrences of '1'. Your task is to return the lexicographically smallest substring of the shortest length that has exactly `k` '1's. If no such substring exists, return an empty string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a binary string `s` and a positive integer `k`. The length of the string `s` is at least 1 and at most 100, and `k` is a positive integer such that `1 <= k <= s.length`.
+- **Example:** `s = '11010101', k = 3`
+- **Constraints:**
+	- 1 <= s.length <= 100
+	- 1 <= k <= s.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string shortestBeautifulSubstring(string s, int k) {
-        
-        int n = s.size();
-        string ans = "";
-        int j = 0, cnt = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the lexicographically smallest beautiful substring of the shortest length that contains exactly `k` '1's, or an empty string if no such substring exists.
+- **Example:** `'10101'`
+- **Constraints:**
+	- If no beautiful substring exists, return an empty string.
 
-        for(int i = 0; i < n; i++)
-        {
-            if(s[i] == '1') cnt++;
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the lexicographically smallest substring that contains exactly `k` '1's.
 
-            while( j < n && cnt == k )
-            {
-                string tmp = s.substr(j, i - j + 1);
+- 1. Iterate through the binary string `s` while maintaining a count of '1's.
+- 2. Whenever the count reaches `k`, check if the current substring is valid and potentially update the result if it is the shortest or lexicographically smaller than any previous valid substring.
+- 3. Return the lexicographically smallest substring with the minimum length, or an empty string if no such substring is found.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input string `s` contains only '0's and '1's.
+- The integer `k` is valid, i.e., `1 <= k <= s.length`.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: '11010101', k = 3`  \
+  **Explanation:** In this case, the valid substrings with exactly 3 '1's are ['11010101', '1010101', '010101', '10101']. The shortest substring is '10101', which is also the lexicographically smallest substring.
 
-                if(ans.size()==0 || tmp.size() < ans.size()) ans = tmp;
-                else if(tmp.size() == ans.size()) ans = min(ans, tmp);
+- **Input:** `Input: '11100', k = 2`  \
+  **Explanation:** Here, the valid substrings with exactly 2 '1's are ['11100', '110', '11']. The shortest valid substring is '11'.
 
-                if(s[j] == '1') cnt--;
+{{< dots >}}
+## Approach 🚀
+To solve the problem, iterate through the string `s` while counting the occurrences of '1'. Each time the count reaches `k`, check for a valid substring and compare it with previous substrings to keep track of the shortest and lexicographically smallest one.
 
-                j++;
-            }
-        }
-
-        return ans;        
-        
-    }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to find the shortest substring in a given string `s` that contains exactly `k` occurrences of the character '1'. If multiple substrings of the same length are found, the lexicographically smallest one should be returned.
-
-### Approach
-
-To solve this problem efficiently, we need to find substrings of the string `s` that contain exactly `k` occurrences of the character '1'. To achieve this, we can use a sliding window approach with two pointers (`i` and `j`) and a counter (`cnt`) to track the number of '1's in the current window. We aim to expand the window to include the required number of '1's and then contract it to find the smallest possible valid substring. 
-
-1. **Sliding Window**: We will iterate over the string using two pointers, `i` (to expand the window) and `j` (to contract the window). The goal is to adjust the window to contain exactly `k` '1's at each step.
-   
-2. **Tracking the '1's Count**: As we move the right pointer (`i`), we increment the counter `cnt` whenever we encounter a '1'. When `cnt` reaches `k`, we check if the current window is the shortest possible substring that satisfies the condition. If it is, we update the result.
-
-3. **Optimizing the Result**: If multiple valid substrings of the same length are found, we will compare them lexicographically to ensure that the smallest one is chosen.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Initialization
-
+### Initial Thoughts 💭
+- We need to keep track of the position of the '1's in the string and check substrings whenever the count of '1's reaches `k`.
+- We can use a sliding window approach to find substrings efficiently by expanding and contracting the window while maintaining the count of '1's.
+{{< dots >}}
+### Edge Cases 🌐
+- If the string `s` contains no '1's and `k` > 0, return an empty string.
+- Handle strings up to the maximum length of 100 efficiently.
+- Consider the case where `k` is equal to the length of `s`.
+- Ensure that the algorithm works within the given constraints and edge cases.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = s.size();
-string ans = "";
-int j = 0, cnt = 0;
-```
+string shortestBeautifulSubstring(string s, int k) {
+    
+    int n = s.size();
+    string ans = "";
+    int j = 0, cnt = 0;
 
-- `n`: Stores the size of the input string `s`.
-- `ans`: A string variable to store the shortest valid substring.
-- `j`: Left pointer of the sliding window, initialized to 0.
-- `cnt`: Counter to keep track of the number of '1's in the current window.
-
-#### 2. Expanding the Window
-
-```cpp
-for(int i = 0; i < n; i++)
-{
-    if(s[i] == '1') cnt++;
-```
-
-- The outer loop (`for(int i = 0; i < n; i++)`) iterates through the string with the right pointer `i`.
-- Whenever we encounter a '1' in the string (`if(s[i] == '1')`), we increment the counter `cnt` to keep track of how many '1's are in the current window.
-
-#### 3. Contracting the Window When `cnt == k`
-
-```cpp
-    while(j < n && cnt == k)
+    for(int i = 0; i < n; i++)
     {
-        string tmp = s.substr(j, i - j + 1);
-```
+        if(s[i] == '1') cnt++;
 
-- Once `cnt` reaches `k`, we enter the inner `while` loop, which will contract the window from the left to minimize the substring.
-- `s.substr(j, i - j + 1)` extracts the substring starting at index `j` and ending at index `i`. This substring contains exactly `k` '1's.
+        while( j < n && cnt == k )
+        {
+            string tmp = s.substr(j, i - j + 1);
 
-#### 4. Update the Result
+            if(ans.size()==0 || tmp.size() < ans.size()) ans = tmp;
+            else if(tmp.size() == ans.size()) ans = min(ans, tmp);
 
-```cpp
-        if(ans.size() == 0 || tmp.size() < ans.size()) ans = tmp;
-        else if(tmp.size() == ans.size()) ans = min(ans, tmp);
-```
+            if(s[j] == '1') cnt--;
 
-- If the `ans` string is empty or the current substring `tmp` is smaller than `ans`, we update `ans` to the current substring.
-- If the lengths of `tmp` and `ans` are equal, we choose the lexicographically smaller substring by comparing them using `min()`.
-
-#### 5. Move the Left Pointer `j`
-
-```cpp
-        if(s[j] == '1') cnt--;
-        j++;
+            j++;
+        }
     }
+
+    return ans;        
+    
 }
 ```
 
-- To try and find a smaller valid substring, we move the left pointer `j` to the right.
-- If the character at position `j` is '1', we decrement the counter `cnt` since we are removing a '1' from the window.
-- We then increment `j` to shift the window.
+This function returns the shortest substring that contains exactly `k` occurrences of the character '1'. It uses a sliding window approach to find the optimal solution.
 
-#### 6. Return the Result
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string shortestBeautifulSubstring(string s, int k) {
+	```
+	Defines the function `shortestBeautifulSubstring` which takes a string `s` and an integer `k`, and returns the shortest substring containing exactly `k` occurrences of the character '1'.
 
-```cpp
-return ans;
-```
+2. **Variable Initialization**
+	```cpp
+	    int n = s.size();
+	```
+	Initializes variable `n` to store the size of the input string `s`.
 
-- After the loop finishes, the result `ans` holds the shortest valid substring that contains exactly `k` occurrences of '1'. If no valid substring is found, `ans` will remain an empty string.
+3. **String Initialization**
+	```cpp
+	    string ans = "";
+	```
+	Initializes an empty string `ans` to store the result of the shortest beautiful substring.
 
-### Complexity
+4. **Variable Initialization**
+	```cpp
+	    int j = 0, cnt = 0;
+	```
+	Initializes two variables: `j` as the starting index for the sliding window and `cnt` to count the number of '1's in the current window.
 
-#### Time Complexity
+5. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts a loop to iterate through the string `s` from index 0 to `n - 1`.
 
-- **Outer Loop**: The outer loop runs from `0` to `n-1`, where `n` is the size of the string `s`. Therefore, the outer loop has a time complexity of `O(n)`.
-  
-- **Inner Loop**: The inner loop's condition depends on the counter `cnt`. For every valid window where `cnt == k`, we increment `j` to shrink the window. In the worst case, each index is visited only once by `j` for each index visited by `i`. Thus, the time complexity of the inner loop is also `O(n)` in total.
+6. **Count '1's**
+	```cpp
+	        if(s[i] == '1') cnt++;
+	```
+	Increments the count `cnt` each time the character '1' is encountered in the string.
 
-- **Substring Extraction**: The call to `s.substr(j, i - j + 1)` extracts a substring of length `i - j + 1`. In the worst case, this operation is called `O(n)` times, and each substring extraction takes `O(n)` time.
+7. **Sliding Window**
+	```cpp
+	        while( j < n && cnt == k )
+	```
+	Checks if the current window contains exactly `k` occurrences of '1'. If true, proceeds to the next step to evaluate the substring.
 
-Thus, the overall time complexity is dominated by the two nested loops, and the substring extraction, leading to an **O(n^2)** time complexity.
+8. **Sliding Window Body**
+	```cpp
+	        {
+	```
+	Begins the inner loop to handle the case when there are exactly `k` '1's in the current window.
 
-#### Space Complexity
+9. **Substring Extraction**
+	```cpp
+	            string tmp = s.substr(j, i - j + 1);
+	```
+	Extracts the current substring from index `j` to `i`.
 
-- We are using a constant amount of extra space (apart from the input string) to store variables such as `ans`, `tmp`, `cnt`, and `j`. The space complexity for these variables is **O(1)**.
-- The space required for storing substrings temporarily in the `tmp` variable can be up to `O(n)` in the worst case.
+10. **Shortest Substring Update**
+	```cpp
+	            if(ans.size()==0 || tmp.size() < ans.size()) ans = tmp;
+	```
+	If `ans` is empty or the length of `tmp` is smaller than the length of `ans`, update `ans` to the value of `tmp`.
 
-Therefore, the overall space complexity is **O(n)**.
+11. **Substring Comparison**
+	```cpp
+	            else if(tmp.size() == ans.size()) ans = min(ans, tmp);
+	```
+	If the length of `tmp` is equal to the length of `ans`, select the lexicographically smallest string between `ans` and `tmp`.
 
-### Conclusion
+12. **Count Update**
+	```cpp
+	            if(s[j] == '1') cnt--;
+	```
+	Decrements the count `cnt` when the character at index `j` is '1', as it will be excluded from the window when `j` is incremented.
 
-The solution efficiently finds the shortest substring containing exactly `k` '1's using a sliding window approach. The use of two pointers (`i` and `j`) and a counter (`cnt`) allows us to expand and contract the window dynamically to find the required substrings. The algorithm guarantees an optimal result by comparing substrings lexicographically when necessary and by minimizing the window size to ensure the shortest valid substring. Although the time complexity is `O(n^2)` due to the substring extraction, this solution is still feasible for moderately sized strings and provides a clear, concise way to tackle the problem.
+13. **Window Slide**
+	```cpp
+	            j++;
+	```
+	Increments `j` to shrink the window from the left side.
+
+14. **Sliding Window End**
+	```cpp
+	        }
+	```
+	Ends the inner `while` loop after adjusting the sliding window.
+
+15. **Return Result**
+	```cpp
+	    return ans;        
+	```
+	Returns the shortest beautiful substring stored in `ans`.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), as we iterate through the string once, checking substrings efficiently.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case when storing substrings and results.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-and-lexicographically-smallest-beautiful-string/description/)
 

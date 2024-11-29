@@ -14,93 +14,104 @@ img_src = ""
 youtube = "Qubhoqoks6I"
 youtube_upload_date="2023-01-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Qubhoqoks6I/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two integers, calculate and return their sum.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers num1 and num2.
+- **Example:** `num1 = 8, num2 = -3`
+- **Constraints:**
+	- -100 <= num1, num2 <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int sum(int num1, int num2) {
-        return num1 + num2;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of num1 and num2 as an integer.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The result will always be within the range of a 32-bit signed integer.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Compute the sum of two integers using basic arithmetic.
 
-The task is to create a simple function that takes two integers as input and returns their sum. This is a basic operation commonly encountered in programming and serves as an introduction to working with functions and arithmetic operations in any programming language.
+- 1. Take the two input integers, num1 and num2.
+- 2. Compute their sum using the addition operator.
+- 3. Return the resulting sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input will always consist of two valid integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: num1 = 8, num2 = -3`  \
+  **Explanation:** The sum of 8 and -3 is 5, so the output is 5.
 
-### Approach
+- **Input:** `Input: num1 = 20, num2 = 15`  \
+  **Explanation:** The sum of 20 and 15 is 35, so the output is 35.
 
-The approach to solving this problem is straightforward:
-1. We need a function that will accept two integers as input.
-2. The function will compute the sum of these two integers.
-3. The result will be returned to the calling code.
+- **Input:** `Input: num1 = -50, num2 = -25`  \
+  **Explanation:** The sum of -50 and -25 is -75, so the output is -75.
 
-This problem requires understanding how functions are declared, how parameters are passed, and how the return value is handled in C++. 
+{{< dots >}}
+## Approach 🚀
+A straightforward approach involves using the addition operator to compute the sum of the two integers.
 
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int sum(int num1, int num2) {
-        return num1 + num2;
-    }
-};
-```
-
-#### 1. **Class Declaration**:
-```cpp
-class Solution {
-```
-- We begin by declaring a class named `Solution`. In C++, a class is used to group together related functions (also called methods) and data. In this case, we are creating a class to encapsulate our solution.
-
-- The `public` keyword specifies that the function `sum` is accessible from outside the class, meaning other parts of the code can call this function.
-
-#### 2. **Function Declaration**:
+### Initial Thoughts 💭
+- The problem requires basic arithmetic.
+- The constraints ensure the input values are manageable.
+- A simple addition operation is sufficient to solve this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- Not applicable, as input is guaranteed to include two integers.
+- Not applicable, as the input range is limited to -100 to 100.
+- Input values at the edge of the range, e.g., -100 and 100.
+- Ensure the solution works for both positive and negative integers.
+{{< dots >}}
+## Code 💻
 ```cpp
 int sum(int num1, int num2) {
+    return num1 + num2;
+}
 ```
-- We define a member function `sum` inside the class `Solution`.
-- The function takes two integer parameters, `num1` and `num2`, which represent the two numbers whose sum we want to compute.
-- The function's return type is `int`, indicating that it will return an integer value.
 
-#### 3. **Sum Operation**:
-```cpp
-return num1 + num2;
-```
-- This line performs the arithmetic operation of adding `num1` and `num2` together.
-- The result is then returned to the calling code.
-- Since `num1` and `num2` are both integers, their sum will also be an integer.
+This function takes two integer inputs, 'num1' and 'num2', and returns their sum. It demonstrates a simple arithmetic operation in C++.
 
-#### 4. **Class Closing**:
-```cpp
-};
-```
-- This closes the class `Solution`, indicating that the definition of the class is complete.
-- The class contains a single function, `sum`, which performs the operation of adding two numbers.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int sum(int num1, int num2) {
+	```
+	Defines the function 'sum' that takes two integer parameters, 'num1' and 'num2', and will return their sum.
 
-### Complexity
+2. **Return Statement**
+	```cpp
+	    return num1 + num2;
+	```
+	Returns the sum of 'num1' and 'num2' as the result of the function.
 
-#### Time Complexity:
-- The time complexity of the `sum` function is **O(1)**. This is because the addition operation and returning the result are performed in constant time, regardless of the size of the input numbers.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Space Complexity:
-- The space complexity of the `sum` function is **O(1)**. The function only requires space for the two input parameters and the return value, which are all of constant size. The space used by the function does not depend on the size of the input numbers or any other variables, making it a constant-space solution.
+The addition operation has constant time complexity.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This code provides a basic implementation of a function that adds two integers. The `sum` function is simple yet demonstrates key programming concepts such as function definition, input/output handling, and basic arithmetic operations. It has constant time and space complexity, making it highly efficient for this specific problem.
+The space complexity is constant, as no additional memory is used apart from the input and output.
 
-In real-world applications, you might use similar functions when performing a variety of basic operations like addition, subtraction, multiplication, etc. The simplicity of this function makes it an excellent starting point for beginners to understand how to define and use functions in C++.
+**Happy Coding! 🎉**
 
-The solution is extremely efficient and straightforward, ensuring that any operation involving adding two integers can be done quickly and without any unnecessary overhead.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/add-two-integers/description/)
 

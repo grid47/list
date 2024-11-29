@@ -14,121 +14,212 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a class `FooBar` with two methods: `foo()` and `bar()`. These methods are called concurrently by two threads. One thread calls `foo()` while the other calls `bar()`. You need to modify the program to ensure that the output alternates between 'foo' and 'bar', and 'foobar' is printed exactly `n` times. The threads should alternate their execution such that `foo()` is printed first, followed by `bar()`, and this pattern should continue for `n` times.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `n` representing the number of times the pattern 'foobar' should be printed.
+- **Example:** `Input: n = 3`
+- **Constraints:**
+	- 1 <= n <= 1000
 
-{{< highlight cpp >}}
-class FooBar {
-private:
-    int n;
-    mutex mtx1, mtx2;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the string 'foobar' repeated `n` times, with each 'foo' and 'bar' printed by different threads in alternating order.
+- **Example:** `Output: 'foobarfoobarfoobar'`
+- **Constraints:**
+	- The two threads should print 'foo' and 'bar' in alternating order, starting with 'foo'.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Ensure that the two threads alternate between printing 'foo' and 'bar', starting with 'foo', for `n` times.
+
+- Use two mutexes to control the execution order of the threads.
+- Thread A prints 'foo', and thread B prints 'bar'. Thread A should print first, then thread B, and the alternation continues for `n` times.
+{{< dots >}}
+### Problem Assumptions ✅
+- Threads are scheduled asynchronously, so thread A and thread B may not execute in any specific order without synchronization.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 1`  \
+  **Explanation:** In this case, thread A calls `foo()` and thread B calls `bar()`. The expected output is 'foobar' because thread A prints 'foo' first, followed by thread B printing 'bar'.
+
+- **Input:** `Input: n = 2`  \
+  **Explanation:** Here, the expected output is 'foobarfoobar' because the pattern 'foo' followed by 'bar' should repeat twice.
+
+{{< dots >}}
+## Approach 🚀
+The approach uses two mutexes to synchronize the threads. The first mutex ensures that 'foo' is printed first by thread A, and the second mutex controls the execution of thread B, ensuring 'bar' is printed after 'foo'.
+
+### Initial Thoughts 💭
+- We need to manage the execution order of two threads to ensure they print in the correct sequence.
+- Using two mutexes allows us to control which thread prints at any given time, ensuring they alternate in the desired order.
+{{< dots >}}
+### Edge Cases 🌐
+- Since n is guaranteed to be at least 1, there will always be at least one 'foobar' printed.
+- For large values of `n`, the solution should handle multiple thread executions efficiently.
+- When `n` is 1, the output is simply 'foobar'.
+- The solution must handle both small and large values of `n` efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int n;
+mutex mtx1, mtx2;
 public:
-    FooBar(int n) {
+FooBar(int n) {
+    mtx2.lock();
+    this->n = n;
+}
+
+void foo(function<void()> printFoo) {
+    
+    for (int i = 0; i < n; i++) {
+        mtx1.lock();
+    	// printFoo() outputs "foo". Do not change or remove this line.
+    	printFoo();
+        mtx2.unlock();
+    }
+}
+
+void bar(function<void()> printBar) {
+    
+    for (int i = 0; i < n; i++) {
         mtx2.lock();
-        this->n = n;
+    	// printBar() outputs "bar". Do not change or remove this line.
+    	printBar();
+        mtx1.unlock();
     }
+}
+```
 
-    void foo(function<void()> printFoo) {
-        
-        for (int i = 0; i < n; i++) {
-            mtx1.lock();
-        	// printFoo() outputs "foo". Do not change or remove this line.
-        	printFoo();
-            mtx2.unlock();
-        }
-    }
+This code defines a class `FooBar` where two tasks, `foo` and `bar`, alternate printing the strings 'foo' and 'bar' respectively. The synchronization between the tasks is achieved using two mutexes, `mtx1` and `mtx2`, to control the execution order.
 
-    void bar(function<void()> printBar) {
-        
-        for (int i = 0; i < n; i++) {
-            mtx2.lock();
-        	// printBar() outputs "bar". Do not change or remove this line.
-        	printBar();
-            mtx1.unlock();
-        }
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Declaration**
+	```cpp
+	int n;
+	```
+	The variable `n` is declared to store the number of iterations for the tasks.
 
+2. **Mutex Declaration**
+	```cpp
+	mutex mtx1, mtx2;
+	```
+	Two mutexes, `mtx1` and `mtx2`, are declared to synchronize the `foo` and `bar` functions and control the task execution order.
 
-### Problem Statement
-The task is to implement a class `FooBar` that can synchronize the execution of two methods: `foo` and `bar`. The goal is to ensure that:
-1. The `foo` method prints "foo".
-2. The `bar` method prints "bar".
+3. **Access Modifier**
+	```cpp
+	public:
+	```
+	Access modifier to define that the following functions can be accessed from outside the class.
 
-The challenge is to ensure that these methods are called in the correct order: `foo` must be called before `bar`, and this must happen alternately for a specified number of times. If `n` is the number of times the printing should occur, then the expected output sequence is: `foo`, `bar`, `foo`, `bar`, ..., continuing until both functions have printed `n` times.
+4. **Constructor**
+	```cpp
+	FooBar(int n) {
+	```
+	The constructor `FooBar(int n)` is defined to initialize the variable `n` and lock `mtx2`.
 
-### Approach
-To solve this problem, we can use two mutexes to manage synchronization between the `foo` and `bar` methods. The main steps involved in the implementation are:
-1. **Initialization**: Two mutexes are declared: `mtx1` for controlling access to the `foo` method and `mtx2` for controlling access to the `bar` method. Initially, `mtx2` is locked to prevent `bar` from executing until `foo` has run at least once.
-2. **Method Implementations**:
-   - In the `foo` method, the thread locks `mtx1`, prints "foo", and then unlocks `mtx2` to allow the `bar` method to execute.
-   - In the `bar` method, the thread locks `mtx2`, prints "bar", and then unlocks `mtx1` to allow the `foo` method to execute.
-3. **Thread Safety**: The use of mutexes ensures that only one thread can execute its respective function at a time, enforcing the correct order of execution.
+5. **Locking Mutex**
+	```cpp
+	    mtx2.lock();
+	```
+	The mutex `mtx2` is locked in the constructor to prevent `bar` from starting before `foo`.
 
-### Code Breakdown (Step by Step)
+6. **Assigning Value**
+	```cpp
+	    this->n = n;
+	```
+	The constructor assigns the value of `n` to the class's `n` variable.
 
-1. **Class Definition**: The `FooBar` class is defined with private members for synchronization and tracking the number of iterations.
+7. **Function Definition**
+	```cpp
+	void foo(function<void()> printFoo) {
+	```
+	The `foo` method is defined, where it will print 'foo' repeatedly for `n` times.
 
-   ```cpp
-   class FooBar {
-   private:
-       int n;                    // Number of times to print "foo" and "bar"
-       mutex mtx1, mtx2;        // Mutexes for synchronization
-   ```
+8. **For Loop**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	A `for` loop is used to execute the task `n` times.
 
-2. **Constructor**: The constructor initializes `n` and locks `mtx2`, ensuring that `bar` cannot be executed until after `foo`.
+9. **Locking Mutex**
+	```cpp
+	        mtx1.lock();
+	```
+	The mutex `mtx1` is locked to ensure that `foo` can execute before `bar`.
 
-   ```cpp
-       public:
-           FooBar(int n) {
-               mtx2.lock();      // Lock mtx2 to block bar initially
-               this->n = n;      // Set the number of iterations
-           }
-   ```
+10. **Function Call**
+	```cpp
+	    	printFoo();
+	```
+	The function `printFoo()` is called to output 'foo'.
 
-3. **Foo Method**: The `foo` method loops `n` times, locking `mtx1` before printing "foo" and unlocking `mtx2` afterward.
+11. **Unlocking Mutex**
+	```cpp
+	        mtx2.unlock();
+	```
+	The mutex `mtx2` is unlocked, allowing `bar` to execute.
 
-   ```cpp
-           void foo(function<void()> printFoo) {
-               for (int i = 0; i < n; i++) {
-                   mtx1.lock();                  // Lock for foo
-                   printFoo();                    // Print "foo"
-                   mtx2.unlock();                 // Unlock for bar
-               }
-           }
-   ```
+12. **Function Definition**
+	```cpp
+	void bar(function<void()> printBar) {
+	```
+	The `bar` method is defined, where it will print 'bar' repeatedly for `n` times.
 
-4. **Bar Method**: The `bar` method also loops `n` times, locking `mtx2` before printing "bar" and unlocking `mtx1` afterward.
+13. **For Loop**
+	```cpp
+	    for (int i = 0; i < n; i++) {
+	```
+	A `for` loop is used to execute the task `n` times.
 
-   ```cpp
-           void bar(function<void()> printBar) {
-               for (int i = 0; i < n; i++) {
-                   mtx2.lock();                  // Lock for bar
-                   printBar();                   // Print "bar"
-                   mtx1.unlock();                // Unlock for foo
-               }
-           }
-   };
-   ```
+14. **Locking Mutex**
+	```cpp
+	        mtx2.lock();
+	```
+	The mutex `mtx2` is locked to ensure that `bar` can execute after `foo`.
 
-### Complexity Analysis
-- **Time Complexity**: The time complexity of each method is \(O(n)\), where \(n\) is the number of times the printing occurs. Each method will run exactly \(n\) iterations, performing constant-time operations (locking, printing, unlocking).
-- **Space Complexity**: The space complexity is \(O(1)\) since the space used is constant and does not grow with the input size. We only use a fixed number of variables (e.g., `n`, mutexes).
+15. **Print Bar**
+	```cpp
+	    	// printBar() outputs "bar". Do not change or remove this line.
+	```
+	A comment indicating that `printBar()` will output 'bar'. It should not be changed.
 
-### Conclusion
-The provided C++ code successfully implements a solution for synchronizing the printing of two functions, `foo` and `bar`, in the specified alternating order. By leveraging two mutexes, the solution effectively manages access to shared resources, ensuring thread-safe execution and the correct sequence of function calls.
+16. **Function Call**
+	```cpp
+	    	printBar();
+	```
+	The function `printBar()` is called to output 'bar'.
 
-This implementation serves as an excellent example of how to handle synchronization in multithreaded programming. The use of mutexes and careful management of thread execution order are critical concepts in concurrent programming, making this code a valuable reference for developers working on similar synchronization challenges.
+17. **Unlocking Mutex**
+	```cpp
+	        mtx1.unlock();
+	```
+	The mutex `mtx1` is unlocked, allowing `foo` to execute again.
 
-The simplicity of the design, combined with the effectiveness of mutexes, makes this code both efficient and easy to understand. It provides a clear approach to ensuring that two methods can be executed in an alternating fashion while maintaining the integrity of shared resources.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-Overall, the `FooBar` class provides a practical solution to a common problem in concurrent programming, demonstrating important techniques in synchronization and thread management. Readers interested in these concepts will find this example informative and applicable to their own programming tasks.
+The time complexity is O(n) since each thread executes `n` times, and there are no nested iterations.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because only a fixed number of variables are used to control the thread synchronization.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/print-foobar-alternately/description/)

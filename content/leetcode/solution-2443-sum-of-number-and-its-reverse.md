@@ -14,145 +14,170 @@ img_src = ""
 youtube = "ESqVFCHtAGg"
 youtube_upload_date="2022-10-16"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ESqVFCHtAGg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a non-negative integer `num`, determine if `num` can be expressed as the sum of a non-negative integer and its reverse. If so, return `true`, otherwise return `false`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a non-negative integer `num`.
+- **Example:** `num = 527`
+- **Constraints:**
+	- 0 <= num <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int rev(int num) {
-        int tmp = 0;
-        while(num) {
-            tmp = tmp * 10 + num % 10;
-            num /= 10;
-        }
-        return tmp;
-    }
-    
-    bool sumOfNumberAndReverse(int num) {
-        
-        for(int i = 0; i <= num; i++) {
-            if((i + rev(i) )== num) {
-                return true;
-            }
-        }
-        return false;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return `true` if there exists a non-negative integer `x` such that `x + reverse(x) = num`. Otherwise, return `false`.
+- **Example:** `Output: true`
+- **Constraints:**
+	- The solution must be efficient enough to handle values of `num` up to 10^5.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find whether a number can be represented as the sum of a number and its reverse.
 
-The problem asks to determine if a given number `num` can be represented as the sum of some integer `i` and its reversed version. Specifically, for a given integer `num`, we need to check whether there exists an integer `i` such that:
+- 1. Reverse a number using a helper function.
+- 2. Check for each number `i` from 0 to `num` if `i + reverse(i)` equals `num`.
+- 3. If a valid number `i` is found, return `true`. Otherwise, return `false`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The number `num` is always non-negative and lies within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `num = 443`  \
+  **Explanation:** We check for integers `i` such that `i + reverse(i)` equals 443. For `i = 172`, the reverse of 172 is 271, and `172 + 271 = 443`, so the answer is `true`.
 
-\[ i + \text{rev}(i) = \text{num} \]
+- **Input:** `num = 63`  \
+  **Explanation:** No number `i` exists such that `i + reverse(i)` equals 63, so the answer is `false`.
 
-Where `rev(i)` represents the reverse of the integer `i`.
+{{< dots >}}
+## Approach 🚀
+The approach involves checking if for any number `i` between 0 and `num`, the sum of `i` and its reverse equals `num`.
 
-For example:
-- Input: `num = 443`
-- Output: `true`
-
-Explanation: The number `i = 440` and its reverse `rev(440) = 44`, and indeed:
-
-\[ 440 + 44 = 443 \]
-
-Thus, the function should return `true`.
-
-### Approach
-
-To solve this problem, we need to follow a brute-force approach by checking each integer `i` from `0` to `num`. For each `i`, we compute its reverse using the helper function `rev(i)` and check if the sum of `i` and `rev(i)` equals `num`. If we find such a pair, we return `true`, otherwise, we return `false`.
-
-The algorithm proceeds with the following steps:
-1. **Reverse the Numbers**: For each number `i`, reverse its digits and check if the sum of `i` and `rev(i)` equals `num`.
-2. **Brute-Force Search**: Iterate through all values of `i` starting from `0` to `num`. For each number, calculate `rev(i)` and check if the sum equals `num`.
-3. **Return the Result**: If any such pair is found, return `true`, otherwise return `false`.
-
-This approach guarantees that we explore all possible integer values that could sum up with their reversed form to give the number `num`.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Helper Function `rev`
-
-The first part of the code is the helper function `rev(int num)` that calculates the reverse of the integer `num`.
-
+### Initial Thoughts 💭
+- We need a function to reverse the digits of a number.
+- We will check all numbers from 0 to `num` to see if the sum of a number and its reverse equals `num`.
+- By reversing a number and adding it to the original number, we can check if it equals the target number.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will never be empty as per the constraints.
+- The algorithm should efficiently handle `num` values up to 10^5.
+- When `num = 0`, it should correctly return `true` as `0 + reverse(0) = 0`.
+- Ensure the algorithm works within the time limits for `num` values up to 10^5.
+{{< dots >}}
+## Code 💻
 ```cpp
 int rev(int num) {
     int tmp = 0;
     while(num) {
-        tmp = tmp * 10 + num % 10;  // Extract the last digit and add it to tmp
-        num /= 10;  // Remove the last digit from num
+        tmp = tmp * 10 + num % 10;
+        num /= 10;
     }
     return tmp;
 }
-```
 
-- `tmp = tmp * 10 + num % 10`: This operation extracts the last digit of `num` (i.e., `num % 10`) and appends it to the reversed number `tmp`. Initially, `tmp` is `0`, and each subsequent operation shifts `tmp` one place to the left (multiplying by 10) and adds the last digit of `num`.
-- `num /= 10`: This operation removes the last digit from `num`, so that we can process the next digit.
-
-For example, if `num = 123`, the function will reverse it to `321`.
-
-#### Step 2: Main Function `sumOfNumberAndReverse`
-
-Now, let's look at the main function `sumOfNumberAndReverse(int num)` which performs the check for all possible values of `i` from `0` to `num`.
-
-```cpp
 bool sumOfNumberAndReverse(int num) {
+    
     for(int i = 0; i <= num; i++) {
-        if((i + rev(i)) == num) {  // Check if i + rev(i) equals num
+        if((i + rev(i) )== num) {
             return true;
         }
     }
-    return false;  // Return false if no such pair is found
+    return false;
 }
 ```
 
-- **For Loop**: The loop iterates over all integers from `0` to `num`. For each integer `i`, the reversed version of `i` is calculated using the helper function `rev(i)`.
-- **Condition Check**: If the sum of `i` and its reverse `rev(i)` equals `num`, the function returns `true`.
-- **Return `false`**: If the loop finishes without finding any such pair, the function returns `false`.
+This code contains two functions: `rev`, which reverses a given number, and `sumOfNumberAndReverse`, which checks if there exists a number `i` such that `i + rev(i) == num`.
 
-For example, for `num = 443`, the loop will check:
-- For `i = 0`, `rev(0) = 0`, `0 + 0 = 0`.
-- For `i = 1`, `rev(1) = 1`, `1 + 1 = 2`.
-- ...
-- For `i = 440`, `rev(440) = 44`, `440 + 44 = 443`. The function returns `true` here.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int rev(int num) {
+	```
+	Defining the `rev` function, which takes an integer `num` and returns its reversed value.
 
-#### Step 3: Return the Result
+2. **Variable Initialization**
+	```cpp
+	    int tmp = 0;
+	```
+	Initializing `tmp` to store the reversed number, starting with a value of 0.
 
-After the loop completes, if no such pair is found, the function returns `false`. This ensures that we return the correct result based on whether or not a valid pair was found.
+3. **Loop**
+	```cpp
+	    while(num) {
+	```
+	A loop that continues as long as `num` is greater than 0, reversing the digits of `num`.
 
-```cpp
-return false;
-```
+4. **Mathematical Operation**
+	```cpp
+	        tmp = tmp * 10 + num % 10;
+	```
+	Extracting the last digit of `num` and adding it to `tmp` after shifting `tmp` one place to the left.
 
-### Complexity
+5. **Integer Update**
+	```cpp
+	        num /= 10;
+	```
+	Removing the last digit from `num` by dividing it by 10.
 
-#### Time Complexity
+6. **Return Statement**
+	```cpp
+	    return tmp;
+	```
+	Returning the reversed integer `tmp`.
 
-The time complexity of this solution is **O(n * m)**, where `n` is the value of the input number `num` and `m` is the average number of digits in the numbers from `0` to `num`.
+7. **Function Definition**
+	```cpp
+	bool sumOfNumberAndReverse(int num) {
+	```
+	Defining the `sumOfNumberAndReverse` function, which takes an integer `num` and checks if there exists an integer `i` such that `i + rev(i) == num`.
 
-1. **Loop Iterations**: We loop through all integers `i` from `0` to `num`, which gives `num` iterations.
-2. **Reversing the Number**: For each iteration, we reverse the number `i`. The reverse operation takes time proportional to the number of digits in `i`. The number of digits in `i` is proportional to `log(i)` (i.e., **O(m)**, where `m` is the number of digits in `i`).
+8. **Loop**
+	```cpp
+	    for(int i = 0; i <= num; i++) {
+	```
+	A loop that iterates through integers `i` from 0 to `num` to check if `i + rev(i) == num`.
 
-Thus, the total time complexity is **O(n * m)**, where `n` is the input number and `m` is the average number of digits in the numbers from `0` to `num`.
+9. **Condition Check**
+	```cpp
+	        if((i + rev(i) )== num) {
+	```
+	Checking if the sum of `i` and its reverse equals `num`.
 
-#### Space Complexity
+10. **Return Statement**
+	```cpp
+	            return true;
+	```
+	Returning `true` if there exists an integer `i` such that `i + rev(i) == num`.
 
-The space complexity of the solution is **O(1)**. We are only using a few variables to store intermediate results (like `tmp` for the reversed number and `i` for the loop), so no additional space is needed apart from the input.
+11. **Return Statement**
+	```cpp
+	    return false;
+	```
+	Returning `false` if no integer `i` satisfies the condition `i + rev(i) == num`.
 
-### Conclusion
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(num)
+- **Average Case:** O(num)
+- **Worst Case:** O(num)
 
-This approach provides a simple and direct solution to check if a number `num` can be expressed as the sum of an integer `i` and its reverse. The solution uses a brute-force approach, iterating over all possible values of `i` from `0` to `num` and checking if their sum with the reverse of `i` equals `num`. 
+The time complexity is O(num), as we are iterating through all numbers from 0 to `num` and performing constant-time operations (reversing a number).
 
-- **Time Complexity**: **O(n * m)**, where `n` is the input number and `m` is the average number of digits in the numbers.
-- **Space Complexity**: **O(1)**, as we use constant extra space.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution works efficiently for smaller numbers but may not be optimal for larger inputs, where more sophisticated approaches may be required. However, it guarantees correctness by checking all possible numbers and their reversals systematically.
+The space complexity is O(1) as we are not using any additional space that scales with the input size.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-number-and-its-reverse/description/)
 

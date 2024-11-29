@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,107 +28,141 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+The Hamming distance between two integers is the number of positions at which the corresponding bits differ. Given an integer array `nums`, return the sum of Hamming distances between all pairs of integers in `nums`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array `nums`.
+- **Example:** `nums = [3, 10, 5]`
+- **Constraints:**
+	- 1 <= nums.length <= 10^4
+	- 0 <= nums[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int totalHammingDistance(vector<int>& nums) {
-        int total = 0, n = nums.size();
-        for(int i = 0; i < 32; i++) {
-            int bitCnt = 0;
-            for(int j = 0; j < nums.size(); j++)
-                bitCnt += (nums[j] >> i) & 1;
-            
-            total += bitCnt * (n - bitCnt);
-        }
-        return total;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of Hamming distances between all pairs of integers in `nums`.
+- **Example:** `Output: 8`
+- **Constraints:**
+	- The answer will fit in a 32-bit integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Calculate the total Hamming distance between all pairs of integers in the array.
+
+- 1. Loop through each bit position (from 0 to 31, as numbers are within the 32-bit range).
+- 2. For each bit position, count how many numbers have that bit set (1).
+- 3. For each bit position, the total number of differing bits is `bitCount * (n - bitCount)`, where `n` is the size of the array and `bitCount` is the number of 1s in the current bit position.
+- 4. Sum up the contributions from all bit positions.
+{{< dots >}}
+### Problem Assumptions ✅
+- The values in `nums` are non-negative integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [3, 10, 5]`  \
+  **Explanation:** The binary representations of 3, 10, and 5 are compared bit by bit to calculate the Hamming distances between all pairs.
+
+- **Input:** `nums = [2, 3, 2]`  \
+  **Explanation:** In this case, the binary representations of 2, 3, and 2 are used to calculate the Hamming distances.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the Hamming distance by iterating through each bit position and counting how many numbers have a 1 at each position.
+
+### Initial Thoughts 💭
+- The problem is a bitwise problem, which makes it suitable for bit manipulation techniques.
+- By considering each bit position separately, we can efficiently calculate the total Hamming distance.
+- We can process each bit independently to determine how many numbers have differing bits in that position.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one element in the array, as per the constraints.
+- The solution needs to handle large arrays of size up to 10^4 efficiently.
+- If all numbers in `nums` are the same, the Hamming distance between any pair will be 0.
+- The solution must work within the constraints, where the array size is up to 10^4 and the numbers can be as large as 10^9.
+{{< dots >}}
+## Code 💻
+```cpp
+int totalHammingDistance(vector<int>& nums) {
+    int total = 0, n = nums.size();
+    for(int i = 0; i < 32; i++) {
+        int bitCnt = 0;
+        for(int j = 0; j < nums.size(); j++)
+            bitCnt += (nums[j] >> i) & 1;
+        
+        total += bitCnt * (n - bitCnt);
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem is to calculate the **total Hamming distance** between all pairs of integers in a given list of integers. The Hamming distance between two numbers is the number of positions at which the corresponding bits are different. For a list of integers, we need to find the sum of Hamming distances between all possible pairs of numbers.
-
-For example, given the input array `nums = [4, 14, 2]`, the goal is to compute the total Hamming distance for all pairs of integers from the list. The output would be the sum of individual Hamming distances between each pair of integers.
-
-### Approach
-
-To solve this problem efficiently, we can break down the task as follows:
-
-1. **Understanding the Hamming Distance**:
-   - The Hamming distance between two numbers is the count of bit positions where the two numbers differ. For example:
-     - The binary representation of `4` is `100`.
-     - The binary representation of `14` is `1110`.
-     - The Hamming distance between `4` and `14` is 3 because their binary forms differ at 3 positions.
-
-2. **Efficiently Calculating Hamming Distance for All Pairs**:
-   - Instead of calculating the Hamming distance between every possible pair of numbers in the list (which could be computationally expensive), we can optimize the process by considering each bit position (0 through 31 for a 32-bit integer).
-   - For each bit position `i`, count how many numbers have a `1` at that bit position, and how many have a `0`. The total number of differing pairs for that bit position will be the product of the count of `1`s and the count of `0`s.
-   - This is because each `1` in a particular bit position will form a differing pair with each `0` in the same bit position.
-
-3. **Summing Up the Hamming Distances**:
-   - For each of the 32 bit positions (assuming 32-bit integers), we count how many numbers have `1` in that position and how many have `0`. The number of differing pairs for that position is given by multiplying these counts. The total Hamming distance is the sum of such products over all bit positions.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-```cpp
-int total = 0, n = nums.size();
+    return total;
+}
 ```
 
-- `total`: This will store the cumulative total Hamming distance.
-- `n`: This stores the number of integers in the `nums` array.
+The `totalHammingDistance` function computes the total Hamming distance between all pairs of integers in the input vector `nums`. The Hamming distance is calculated by comparing the bits of the integers. The function iterates through all 32 bits of each number and calculates how many times the bits differ across all integers.
 
-#### Step 2: Iterate Over Each Bit Position
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int totalHammingDistance(vector<int>& nums) {
+	```
+	Defines the `totalHammingDistance` function that takes a vector of integers `nums` and calculates the total Hamming distance between all pairs of integers.
 
-```cpp
-for (int i = 0; i < 32; i++) {
-    int bitCnt = 0;
-    for (int j = 0; j < nums.size(); j++)
-        bitCnt += (nums[j] >> i) & 1;
-```
+2. **Variable Initialization**
+	```cpp
+	    int total = 0, n = nums.size();
+	```
+	Initializes two variables: `total` to accumulate the total Hamming distance, and `n` to store the size of the `nums` vector.
 
-- We loop over each bit position `i` from 0 to 31 (since we are assuming a 32-bit integer).
-- `bitCnt`: This variable counts how many numbers in the list have a `1` in the `i`th bit position.
-- The expression `(nums[j] >> i) & 1` shifts the `j`th number right by `i` bits and checks if the least significant bit is 1 (i.e., checks if the `i`th bit is 1). If it is, we increment `bitCnt`.
+3. **Bit Manipulation**
+	```cpp
+	    for(int i = 0; i < 32; i++) {
+	```
+	Begins a loop that iterates over all 32 bits (assuming 32-bit integers) to calculate the Hamming distance for each bit position.
 
-#### Step 3: Calculate Contribution of the Current Bit Position
+4. **Variable Initialization**
+	```cpp
+	        int bitCnt = 0;
+	```
+	Initializes the `bitCnt` variable to count how many numbers have a `1` at the current bit position `i`.
 
-```cpp
-total += bitCnt * (n - bitCnt);
-```
+5. **Bitwise Operation**
+	```cpp
+	        for(int j = 0; j < nums.size(); j++)
+	```
+	Begins a loop that iterates through each number in the `nums` vector.
 
-- For each bit position `i`, the number of differing pairs is the product of the count of `1`s (`bitCnt`) and the count of `0`s (`n - bitCnt`). This is because each `1` in that bit position forms a differing pair with each `0` at that position.
-- We add this contribution to the `total`.
+6. **Bitwise Operation**
+	```cpp
+	            bitCnt += (nums[j] >> i) & 1;
+	```
+	Performs a bitwise right shift on `nums[j]` to examine the `i`th bit. If the bit is `1`, increments `bitCnt`.
 
-#### Step 4: Return the Result
+7. **Accumulation**
+	```cpp
+	        total += bitCnt * (n - bitCnt);
+	```
+	Updates the `total` by adding the number of differing bits between pairs. For each bit, the number of differing bits is the product of `bitCnt` and `(n - bitCnt)`.
 
-```cpp
-return total;
-```
+8. **Return Statement**
+	```cpp
+	    return total;
+	```
+	Returns the total Hamming distance.
 
-- After processing all 32 bit positions, the `total` will contain the sum of Hamming distances for all pairs of integers in the list.
-- We return the `total` as the result.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * 32)
+- **Average Case:** O(n * 32)
+- **Worst Case:** O(n * 32)
 
-### Complexity
+The time complexity is O(n * 32), where n is the size of the `nums` array, and 32 is the number of bits to consider.
 
-#### Time Complexity:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Outer Loop**: The outer loop runs for each of the 32 bit positions, so it iterates 32 times.
-- **Inner Loop**: The inner loop iterates over all `n` numbers in the `nums` array to count the number of `1`s in each bit position.
-- **Overall Time Complexity**: The total time complexity is `O(32 * n)`, which simplifies to `O(n)`, since the constant factor 32 is ignored in Big O notation.
+The space complexity is O(1) since the solution uses only a few variables to track the bit counts.
 
-#### Space Complexity:
+**Happy Coding! 🎉**
 
-- The space complexity is `O(1)` because the algorithm uses only a constant amount of extra space for variables like `total`, `bitCnt`, and `n`. No additional data structures are used that depend on the input size.
-
-### Conclusion
-
-This solution efficiently calculates the total Hamming distance between all pairs of integers in the list by leveraging bitwise operations and the observation that the total number of differing pairs for each bit position is the product of the count of `1`s and the count of `0`s at that position. The approach significantly reduces the time complexity compared to a naive solution, making it feasible for larger input sizes. The time complexity of `O(n)` and space complexity of `O(1)` ensure that the solution is both time-efficient and space-efficient, which is ideal for handling large datasets.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/total-hamming-distance/description/)
 

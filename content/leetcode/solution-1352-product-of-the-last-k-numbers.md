@@ -14,34 +14,84 @@ img_src = ""
 youtube = "fH1WYQCcMd8"
 youtube_upload_date="2021-02-26"
 youtube_thumbnail="https://i.ytimg.com/vi/fH1WYQCcMd8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Design an algorithm that accepts a stream of integers and retrieves the product of the last k integers in the stream.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a sequence of operations: initialize the object, add numbers to the stream, and get the product of the last k numbers.
+- **Example:** `For example, ['ProductOfNumbers', 'add', 'add', 'add', 'getProduct'] with input [[], [3], [0], [2], 2].`
+- **Constraints:**
+	- 0 <= num <= 100
+	- 1 <= k <= 4 * 10^4
+	- At most 4 * 10^4 calls to add and getProduct.
 
-{{< highlight cpp >}}
-class ProductOfNumbers {
-    vector<long long> p;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a list of integers where each element is the result of the respective 'getProduct' operation.
+- **Example:** `For example, ['getProduct(2)', 'getProduct(3)'] could return 20 and 40, respectively.`
+- **Constraints:**
+	- The result will always fit in a 32-bit integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Design an efficient system to keep track of the last k numbers and compute their product.
+
+- 1. Use a list to keep track of the products of the numbers in the stream.
+- 2. If a zero is encountered, reset the product history.
+- 3. For each getProduct query, compute the product of the last k numbers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list has at least k numbers when calling 'getProduct'.
+- Any sequence of numbers in the list fits within the range of a 32-bit integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: ['ProductOfNumbers', 'add', 'add', 'add', 'add', 'add', 'getProduct(2)', 'getProduct(3)', 'getProduct(4)', 'add', 'getProduct(2)']`  \
+  **Explanation:** The operations add numbers to the stream, and getProduct computes the product of the last k numbers.
+
+- **Input:** `Example 2: ['ProductOfNumbers', 'add', 'add', 'add', 'getProduct(3)']`  \
+  **Explanation:** After adding numbers [1, 2, 3], the product of the last 3 numbers is 6.
+
+{{< dots >}}
+## Approach 🚀
+The solution should efficiently store the running product and handle reset conditions when a zero is encountered.
+
+### Initial Thoughts 💭
+- A running product can be stored in a list where each index represents the product of numbers up to that point.
+- A zero encountered resets the running product.
+- We can track the product of the numbers in the stream in a way that allows us to compute the product of any k consecutive numbers.
+{{< dots >}}
+### Edge Cases 🌐
+- No numbers added yet: Ensure no product is returned until numbers are added.
+- Handling up to 4 * 10^4 operations efficiently without performance degradation.
+- Zero in the stream: Reset the product list.
+- Ensure that the product of the stream at any point in time fits within a 32-bit integer.
+{{< dots >}}
+## Code 💻
+```cpp
 public:
-    ProductOfNumbers() {
-        p = {1};
-    }
-    
-    void add(int num) {
-        if(num > 0) {
-            p.push_back(p.back() * num);
-        } else {
-            p = {1};            
-        }
+ProductOfNumbers() {
+    p = {1};
+}
 
+void add(int num) {
+    if(num > 0) {
+        p.push_back(p.back() * num);
+    } else {
+        p = {1};            
     }
-    
-    int getProduct(int k) {
-        int n = p.size();
-        return k < n ? p[n - 1] / p[n - k - 1]: 0;
-    }
+
+}
+
+int getProduct(int k) {
+    int n = p.size();
+    return k < n ? p[n - 1] / p[n - k - 1]: 0;
+}
 };
 
 /**
@@ -49,77 +99,94 @@ public:
  * ProductOfNumbers* obj = new ProductOfNumbers();
  * obj->add(num);
  * int param_2 = obj->getProduct(k);
- */
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The goal of this class, `ProductOfNumbers`, is to manage a sequence of positive integers while allowing for two main operations:
-
-1. **Adding a Number**: You can add a positive integer to the sequence. If the number is zero, the product history should reset, as multiplying by zero results in zero.
-2. **Getting the Product**: You can retrieve the product of the last `k` numbers added to the sequence. If `k` exceeds the current number of elements or if there has been a zero added, the product should be returned as zero.
-
-### Approach
-To achieve the functionality required, we use the following approach:
-
-- Maintain a vector `p` where each entry at index `i` holds the product of all numbers from the start up to the `i`-th number.
-- When a number is added:
-  - If the number is positive, update the product vector with the new product.
-  - If the number is zero, reset the product vector since all subsequent products would be zero.
-- For retrieving the product of the last `k` numbers, we can compute it using the formula:
-  - If `k` is less than the length of the product vector, the product of the last `k` numbers can be obtained by dividing the last product by the product at the position `n - k - 1`, where `n` is the current size of the vector.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class ProductOfNumbers {
-    vector<long long> p; // Vector to store cumulative product
-public:
-    ProductOfNumbers() {
-        p = {1}; // Initialize with a product of 1
-    }
 ```
-- The `ProductOfNumbers` class begins with a private vector `p`, which will store the cumulative product of the numbers added.
-- The constructor initializes `p` with `1`, as it serves as the multiplicative identity.
 
-```cpp
-    void add(int num) {
-        if(num > 0) {
-            p.push_back(p.back() * num); // Update product
-        } else {
-            p = {1}; // Reset on zero
-        }
-    }
-```
-- The `add` method checks if the incoming number `num` is greater than `0`. 
-  - If it is, it calculates the new product as the product of the last number in `p` multiplied by `num` and appends this value to `p`.
-  - If `num` is `0`, it resets `p` to contain only `1` since any subsequent product would involve multiplication by `0`.
+This class implements a product manager for numbers. The `add` method appends a number while maintaining a cumulative product list, and `getProduct` computes the product of the last k numbers efficiently using division.
 
-```cpp
-    int getProduct(int k) {
-        int n = p.size(); // Get current size of product vector
-        return k < n ? p[n - 1] / p[n - k - 1] : 0; // Calculate product of last k numbers
-    }
-};
-```
-- The `getProduct` method retrieves the product of the last `k` numbers added to the sequence.
-  - It first determines the size of `p`.
-  - If `k` is less than the size of `p`, it returns the product of the last `k` numbers by dividing the last product by the product at the index corresponding to `n - k - 1`.
-  - If `k` exceeds the size of `p`, it returns `0`, indicating that the product cannot be computed due to insufficient numbers.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Access Modifier**
+	```cpp
+	public:
+	```
+	Declares the public access modifier for the class members.
 
-### Complexity Analysis
-- **Time Complexity**:
-  - The `add` method runs in \(O(1)\) time, as it performs a constant-time operation for both updating the product and resetting the vector.
-  - The `getProduct` method also runs in \(O(1)\) time due to direct index accesses and arithmetic operations.
+2. **Constructor**
+	```cpp
+	ProductOfNumbers() {
+	```
+	Defines the constructor for the `ProductOfNumbers` class, initializing the cumulative product list.
 
-- **Space Complexity**:
-  - The space complexity is \(O(n)\), where \(n\) is the number of positive integers added to the `ProductOfNumbers` instance. In the worst case, every number added is positive, leading to a linear growth of the `p` vector.
+3. **Initialization**
+	```cpp
+	    p = {1};
+	```
+	Initializes the product list with 1 to handle cumulative product calculations.
 
-### Conclusion
-The `ProductOfNumbers` class provides a highly efficient way to manage the product of a sequence of integers with the ability to handle zeroes gracefully. By leveraging cumulative products stored in a vector, it allows for quick calculations of the product over the last `k` entries. This class is particularly useful in scenarios where tracking multiplicative values is necessary, such as in financial applications, analytics, or any domain where product history matters.
+4. **Method Declaration**
+	```cpp
+	void add(int num) {
+	```
+	Begins the declaration of the `add` method to handle new number additions.
 
-In coding interviews and competitive programming, understanding how to maintain and manipulate sequences efficiently is crucial. This implementation showcases a clear grasp of data structures and algorithms, emphasizing optimal performance for both operations while also managing edge cases effectively. The techniques demonstrated here can serve as a foundation for more complex data management tasks, reinforcing the importance of strategic thinking in software development.
+5. **Condition Check**
+	```cpp
+	    if(num > 0) {
+	```
+	Checks if the added number is positive to update the cumulative product list.
+
+6. **Update Product**
+	```cpp
+	        p.push_back(p.back() * num);
+	```
+	Appends the product of the last cumulative product and the new number to the list.
+
+7. **Reset List**
+	```cpp
+	    } else {
+	```
+	Handles the case where the added number is zero or negative by resetting the list.
+
+8. **Reset Product**
+	```cpp
+	        p = {1};
+	```
+	Resets the cumulative product list to its initial state.
+
+9. **Method Declaration**
+	```cpp
+	int getProduct(int k) {
+	```
+	Begins the declaration of the `getProduct` method to compute the product of the last k numbers.
+
+10. **Size Calculation**
+	```cpp
+	    int n = p.size();
+	```
+	Calculates the size of the cumulative product list.
+
+11. **Return Value**
+	```cpp
+	    return k < n ? p[n - 1] / p[n - k - 1]: 0;
+	```
+	Returns the product of the last k numbers if valid; otherwise, returns 0.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1) when adding a number.
+- **Average Case:** O(1) for each operation.
+- **Worst Case:** O(k) when computing the product of the last k numbers.
+
+The time complexity is dominated by the 'getProduct' operation, which is O(k) in the worst case.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n) where n is the number of elements in the stream.
+
+The space complexity is O(n) as we need to store the product for each element in the stream.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/product-of-the-last-k-numbers/description/)

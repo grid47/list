@@ -14,125 +14,135 @@ img_src = ""
 youtube = "4uhvXmOp5Do"
 youtube_upload_date="2023-01-08"
 youtube_thumbnail="https://i.ytimg.com/vi/4uhvXmOp5Do/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers sorted in non-decreasing order. Your task is to determine the maximum count between the number of positive integers and the number of negative integers in the array. Zero is not considered positive or negative.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers `nums` which is sorted in non-decreasing order.
+- **Example:** `[-3, -2, -1, 1, 2, 3]`
+- **Constraints:**
+	- 1 <= nums.length <= 2000
+	- -2000 <= nums[i] <= 2000
+	- nums is sorted in non-decreasing order.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumCount(vector<int>& nums) {
-        int pos = 0, neg = 0;
-        for(int i = 0; i < nums.size(); i++)
-            if(nums[i] > 0) pos++;
-            else if(nums[i] < 0) neg++;
-        return max(pos, neg);
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum of the count of positive integers and the count of negative integers in the array.
+- **Example:** `3`
+- **Constraints:**
+	- The output will be a single integer representing the maximum count of positive or negative integers.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the count of positive and negative integers in the array and return the maximum of the two.
 
-The problem asks to compute the maximum count of either positive or negative numbers in a given array `nums`. Specifically:
+- Initialize counters for positive and negative integers.
+- Iterate through the array and count the positive and negative integers.
+- Return the maximum of the two counts.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is sorted in non-decreasing order.
+- Zero (0) is neither positive nor negative.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[-3, -2, -1, 1, 2, 3]`  \
+  **Explanation:** In this example, there are 3 positive integers and 3 negative integers. The maximum count between them is 3.
 
-- You are provided with an integer array `nums`, and your task is to determine the maximum count between the number of positive integers and negative integers in the array.
-- Positive integers are those greater than 0, and negative integers are those less than 0. If the number is zero, it should be ignored.
+- **Input:** `[-5, -3, -1, 0, 2, 4, 6]`  \
+  **Explanation:** In this example, there are 3 positive integers and 3 negative integers. The maximum count between them is 4.
 
-The function should return the maximum count of positive or negative integers present in the array.
+- **Input:** `[0, 2, 4, 8, 10]`  \
+  **Explanation:** In this example, there are 5 positive integers and 0 negative integers. The maximum count between them is 5.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The solution involves counting the number of positive and negative integers in the array and returning the maximum of the two. The input is already sorted, which helps us efficiently determine the counts.
 
-To solve this problem, the approach involves iterating through the array and counting how many positive and negative integers are present. Once we have the counts of positive and negative integers, we simply return the larger of the two counts.
-
-#### Key Observations:
-- We need to count positive numbers and negative numbers separately.
-- We do not need to worry about zeroes in the array, as they do not contribute to either count.
-- At the end of the loop, the result will be the larger of the two counts.
-
-### Code Breakdown (Step by Step)
-
-#### 1. Function Definition
-
+### Initial Thoughts 💭
+- The array is sorted, which means the negative integers will be at the beginning and positive integers will be at the end.
+- Counting positive and negative integers separately is the most straightforward approach.
+- The problem could potentially be optimized further if we use binary search to quickly find the boundary between negative and positive numbers, reducing the time complexity.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least one element, as per the constraints.
+- Ensure that the solution efficiently handles arrays of size up to 2000 elements.
+- Arrays with zero values should be handled correctly, as zero is neither positive nor negative.
+- The array is sorted, so you can exploit this property for more efficient solutions.
+{{< dots >}}
+## Code 💻
 ```cpp
 int maximumCount(vector<int>& nums) {
+    int pos = 0, neg = 0;
+    for(int i = 0; i < nums.size(); i++)
+        if(nums[i] > 0) pos++;
+        else if(nums[i] < 0) neg++;
+    return max(pos, neg);
+}
 ```
 
-- The function `maximumCount` is defined to take a vector `nums` as input.
-- The return type of the function is an integer, which will represent the maximum count of either positive or negative numbers in the array.
+The 'maximumCount' function calculates and returns the larger of the count of positive or negative numbers in the given vector 'nums'.
 
-#### 2. Initialize Counters
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int maximumCount(vector<int>& nums) {
+	```
+	This is the function definition for 'maximumCount', which takes a reference to a vector of integers 'nums' and returns an integer value.
 
-```cpp
-int pos = 0, neg = 0;
-```
+2. **Variable Initialization**
+	```cpp
+	    int pos = 0, neg = 0;
+	```
+	Two integer variables, 'pos' and 'neg', are initialized to 0. 'pos' will track the count of positive numbers, and 'neg' will track the count of negative numbers.
 
-- We initialize two integer variables: `pos` for counting positive numbers and `neg` for counting negative numbers.
-- Both `pos` and `neg` are initialized to 0, as we have not processed any elements yet.
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++)
+	```
+	This for loop iterates through each element in the 'nums' vector, with 'i' as the loop index.
 
-#### 3. Iterate Through the Array
+4. **Conditional Statement**
+	```cpp
+	        if(nums[i] > 0) pos++;
+	```
+	If the current element is positive, the 'pos' counter is incremented.
 
-```cpp
-for(int i = 0; i < nums.size(); i++)
-```
+5. **Conditional Statement**
+	```cpp
+	        else if(nums[i] < 0) neg++;
+	```
+	If the current element is negative, the 'neg' counter is incremented.
 
-- We start a `for` loop that will iterate through each element `nums[i]` in the array `nums`.
+6. **Return Statement**
+	```cpp
+	    return max(pos, neg);
+	```
+	After completing the loop, the function returns the maximum of 'pos' and 'neg', which represents the greater count between positive and negative numbers.
 
-#### 4. Count Positive Numbers
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-```cpp
-if(nums[i] > 0) pos++;
-```
+The time complexity is O(n) because we need to count the number of positive and negative integers by iterating through the entire array.
 
-- If the current element `nums[i]` is greater than 0 (i.e., a positive number), we increment the `pos` counter by 1.
-- This ensures that `pos` holds the total count of positive numbers in the array by the end of the loop.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### 5. Count Negative Numbers
+The space complexity is O(1) because we only need a constant amount of space for the counters.
 
-```cpp
-else if(nums[i] < 0) neg++;
-```
+**Happy Coding! 🎉**
 
-- If the current element `nums[i]` is less than 0 (i.e., a negative number), we increment the `neg` counter by 1.
-- This ensures that `neg` holds the total count of negative numbers in the array by the end of the loop.
-
-#### 6. Return the Maximum Count
-
-```cpp
-return max(pos, neg);
-```
-
-- After the loop completes, we return the maximum of the two counters (`pos` and `neg`), which represents the larger count between positive and negative numbers in the array.
-- The function `max(pos, neg)` is used to determine which count is greater and returns the result.
-
-### Complexity Analysis
-
-#### Time Complexity
-
-The time complexity is determined by the number of elements in the array. Specifically:
-
-- We loop through all `n` elements of the array once, and for each element, we perform constant-time operations to check if it's positive or negative and update the corresponding counter.
-- Therefore, the time complexity is \( O(n) \), where `n` is the number of elements in the array.
-
-#### Space Complexity
-
-The space complexity is determined by the amount of extra memory used by the algorithm:
-
-- We only use two integer variables (`pos` and `neg`) to store the counts, regardless of the size of the input array.
-- Therefore, the space complexity is \( O(1) \), which means the algorithm uses constant space.
-
-### Conclusion
-
-This solution provides an efficient way to solve the problem of finding the maximum count of positive or negative numbers in an array. By simply iterating through the array and keeping track of two counters, we can solve the problem in linear time with constant space.
-
-This approach is optimal because:
-- It processes each element exactly once, ensuring \( O(n) \) time complexity.
-- It only requires a fixed amount of additional space, making the space complexity \( O(1) \).
-
-Thus, this solution is both time-efficient and space-efficient, and it works well even for large arrays.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/description/)
 

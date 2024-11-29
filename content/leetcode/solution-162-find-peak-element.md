@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "31foR5tJapQ"
 youtube_upload_date="2021-02-22"
 youtube_thumbnail="https://i.ytimg.com/vi/31foR5tJapQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,128 +28,171 @@ youtube_thumbnail="https://i.ytimg.com/vi/31foR5tJapQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given a list of integers, nums. A peak element is an element that is strictly greater than its neighbors. You need to find and return the index of any peak element in the list. The algorithm should run in O(log n) time.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers, nums. The list has at least one element.
+- **Example:** `[1, 3, 2, 1]`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- -231 <= nums[i] <= 231 - 1
+	- nums[i] != nums[i + 1] for all valid i.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findPeakElement(vector<int>& arr) {
-        int n = arr.size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the index of any peak element in the list.
+- **Example:** `1`
+- **Constraints:**
+	- There will always be at least one peak element in the array.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the peak element index in O(log n) time.
+
+- Perform a binary search to find the peak element.
+- Check if the middle element is greater than its neighbors.
+- If the middle element is a peak, return its index.
+- If the left neighbor is greater, search the left half of the array.
+- If the right neighbor is greater, search the right half of the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array will always contain at least one peak element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `[1, 3, 2, 1]`  \
+  **Explanation:** In this example, the element 3 is the peak element as it is greater than its neighbors 1 and 2. Therefore, the function returns index 1.
+
+{{< dots >}}
+## Approach 🚀
+We will use binary search to find a peak element in the array. Binary search will allow us to find the peak in O(log n) time.
+
+### Initial Thoughts 💭
+- A peak is an element greater than its neighbors.
+- Binary search can help us efficiently narrow down the peak element.
+- Since we are only asked to find any peak, binary search will efficiently locate one in O(log n) time.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always have at least one element.
+- The solution should work efficiently for arrays of up to 1000 elements.
+- Handle arrays where elements are strictly increasing or strictly decreasing.
+- Ensure the algorithm runs in O(log n) time.
+{{< dots >}}
+## Code 💻
+```cpp
+int findPeakElement(vector<int>& arr) {
+    int n = arr.size();
+    
+    int l = 0, r = n - 1;
+    
+    while(l <= r) {
+        int mid = l + (r - l) / 2;
         
-        int l = 0, r = n - 1;
+        bool x = mid > 0? arr[mid - 1] < arr[mid] : true;
+        bool y = mid < n -1 ? arr[mid + 1] < arr[mid] : true;
         
-        while(l <= r) {
-            int mid = l + (r - l) / 2;
-            
-            bool x = mid > 0? arr[mid - 1] < arr[mid] : true;
-            bool y = mid < n -1 ? arr[mid + 1] < arr[mid] : true;
-            
-            if(x && y) return mid;
-            if(!x && y) r = mid - 1;
-            else if(x && !y) l = mid + 1;
-            else r = mid - 1;            
-        }
-        return l;
+        if(x && y) return mid;
+        if(!x && y) r = mid - 1;
+        else if(x && !y) l = mid + 1;
+        else r = mid - 1;            
     }
-};
-{{< /highlight >}}
----
-
-### 🌐 Peak Element: Finding the Local Maximum Efficiently
-
-In this problem, we are tasked with finding a **peak element** in an array. A peak element is defined as an element that is greater than or equal to its neighbors. Specifically:
-- The first element is a peak if it is greater than or equal to the second element.
-- The last element is a peak if it is greater than or equal to the second-last element.
-- Any other element is a peak if it is greater than or equal to both its neighbors.
-
-The challenge is to find a peak element using a **binary search approach**, which will give us a **O(log n)** time complexity.
-
----
-
-### 💡 Approach
-
-To solve this problem efficiently, we can use a **binary search** strategy. The key observation is that we can reduce the search space at each step based on the properties of a peak:
-- If the middle element is greater than or equal to both its neighbors, it is a peak element.
-- If the middle element is smaller than the next element, then there is a peak element on the right side.
-- If the middle element is smaller than the previous element, then there is a peak element on the left side.
-
-By halving the search space at each step, we can find a peak element in **O(log n)** time.
-
----
-
-### 📝 Code Breakdown (Step-by-Step)
-
-#### 🔹 Step 1: Initial Setup
-
-```cpp
-int n = arr.size();
-int l = 0, r = n - 1;
+    return l;
+}
 ```
-- First, the size of the array `arr` is calculated and stored in `n`.
-- `l` and `r` represent the left and right bounds of the search space. Initially, `l` is set to 0 (the first index) and `r` is set to `n - 1` (the last index).
 
-#### 🔹 Step 2: Binary Search Loop
+This function finds the peak element in an array, where a peak element is defined as an element that is greater than or equal to its neighbors.
 
-```cpp
-while(l <= r) {
-    int mid = l + (r - l) / 2;
-```
-- The loop continues as long as `l` is less than or equal to `r`. We calculate the middle index `mid` using the formula `l + (r - l) / 2` to avoid overflow.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findPeakElement(vector<int>& arr) {
+	```
+	Define the function 'findPeakElement' which takes a vector of integers as input and returns the index of a peak element.
 
-#### 🔹 Step 3: Check if Middle Element is a Peak
+2. **Variable Declaration**
+	```cpp
+	    int n = arr.size();
+	```
+	Declare and initialize 'n' to store the size of the input array 'arr'.
 
-```cpp
-bool x = mid > 0 ? arr[mid - 1] < arr[mid] : true;
-bool y = mid < n - 1 ? arr[mid + 1] < arr[mid] : true;
-```
-- The conditions `x` and `y` check whether the current element at index `mid` is greater than or equal to its neighbors:
-  - `x` checks if `arr[mid]` is greater than or equal to the previous element (`arr[mid - 1]`), unless `mid` is the first element (`mid == 0`).
-  - `y` checks if `arr[mid]` is greater than or equal to the next element (`arr[mid + 1]`), unless `mid` is the last element (`mid == n - 1`).
+3. **Variable Initialization**
+	```cpp
+	    int l = 0, r = n - 1;
+	```
+	Initialize two variables 'l' and 'r' to represent the left and right boundaries of the search space.
 
-#### 🔹 Step 4: Check for Peak Element
+4. **Loop**
+	```cpp
+	    while(l <= r) {
+	```
+	Start a while loop to perform binary search, continuing as long as the left boundary is less than or equal to the right boundary.
 
-```cpp
-if(x && y) return mid;
-```
-- If both `x` and `y` are true, then `arr[mid]` is a peak element. We return the index `mid` as the result.
+5. **Variable Calculation**
+	```cpp
+	        int mid = l + (r - l) / 2;
+	```
+	Calculate the middle index 'mid' using the formula to avoid overflow.
 
-#### 🔹 Step 5: Narrow Search Space Based on Comparisons
+6. **Boolean Expression**
+	```cpp
+	        bool x = mid > 0? arr[mid - 1] < arr[mid] : true;
+	```
+	Check if the current element is greater than its left neighbor, or if it's the first element (in which case it is treated as a peak).
 
-```cpp
-if(!x && y) r = mid - 1;
-else if(x && !y) l = mid + 1;
-else r = mid - 1;
-```
-- If the middle element is not greater than its left neighbor (`!x`), then there must be a peak on the left side, so we update `r` to `mid - 1` to search in the left half.
-- If the middle element is not greater than its right neighbor (`!y`), then there must be a peak on the right side, so we update `l` to `mid + 1` to search in the right half.
+7. **Boolean Expression**
+	```cpp
+	        bool y = mid < n -1 ? arr[mid + 1] < arr[mid] : true;
+	```
+	Check if the current element is greater than its right neighbor, or if it's the last element (in which case it is treated as a peak).
 
-#### 🔹 Step 6: Return the Peak Element Index
+8. **Conditional Check**
+	```cpp
+	        if(x && y) return mid;
+	```
+	If both 'x' and 'y' are true, the current element is a peak, so return the index 'mid'.
 
-```cpp
-return l;
-```
-- Once the loop terminates, the index `l` will be the index of the peak element. Since the loop ensures that either `arr[l]` or `arr[r]` is a peak, returning `l` guarantees we always find a peak.
+9. **Conditional Check**
+	```cpp
+	        if(!x && y) r = mid - 1;
+	```
+	If the current element is smaller than its left neighbor, move the right boundary 'r' to 'mid - 1' to search the left half.
 
----
+10. **Conditional Check**
+	```cpp
+	        else if(x && !y) l = mid + 1;
+	```
+	If the current element is greater than its left neighbor but smaller than its right neighbor, move the left boundary 'l' to 'mid + 1' to search the right half.
 
-### 🔎 Complexity
+11. **Conditional Check**
+	```cpp
+	        else r = mid - 1;            
+	```
+	If neither of the above conditions is met, adjust the right boundary 'r' to search the left half.
 
-#### Time Complexity:
-- **O(log n)**: The binary search approach ensures that the search space is halved at each step, leading to a logarithmic time complexity.
+12. **Return Statement**
+	```cpp
+	    return l;
+	```
+	If no peak is found during the binary search, return the left boundary 'l', which will point to the index of the peak element.
 
-#### Space Complexity:
-- **O(1)**: The algorithm uses a constant amount of extra space (just a few integer variables to track the bounds `l`, `r`, and `mid`), making the space complexity **O(1)**.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(log n)
+- **Average Case:** O(log n)
+- **Worst Case:** O(log n)
 
-### ✅ Conclusion
+Each binary search step reduces the search space by half, resulting in O(log n) time complexity.
 
-This solution uses a **binary search** approach to efficiently find a peak element in an array. By narrowing down the search space based on the comparison of middle elements with their neighbors, we achieve an optimal time complexity of **O(log n)**, while using **O(1)** extra space.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-#### Key Insights:
-- A peak element is guaranteed to exist, but it is not necessarily unique.
-- The binary search approach reduces the complexity from **O(n)** (linear search) to **O(log n)**, making it ideal for large input sizes.
-- Edge cases such as the first or last element being a peak are handled with conditional checks.
+The space complexity is O(1) as we only use a few variables for indexing and comparisons.
 
-This approach is particularly useful when dealing with large arrays, as it allows us to find a peak element without scanning the entire array.
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-peak-element/description/)
 

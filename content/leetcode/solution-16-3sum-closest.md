@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "PXWT4wzkA6M"
 youtube_upload_date="2024-07-29"
 youtube_thumbnail="https://i.ytimg.com/vi/PXWT4wzkA6M/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,183 +28,193 @@ youtube_thumbnail="https://i.ytimg.com/vi/PXWT4wzkA6M/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array nums and an integer target. Find three integers in nums such that the sum is closest to the target. Return the sum of those three integers.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array nums and an integer target.
+- **Example:** `nums = [1, 2, 3, -4], target = 3`
+- **Constraints:**
+	- 3 <= nums.length <= 500
+	- -1000 <= nums[i] <= 1000
+	- -10^4 <= target <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int threeSumClosest(vector<int>& nums, int target) {
-        sort(nums.begin(),nums.end());
-        int front;
-        int sum = nums[0] + nums[1] + nums[2], sum1 = 0;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the sum of the three integers whose sum is closest to the target.
+- **Example:** `3`
+- **Constraints:**
+	- The sum should be the closest to the target.
 
-        for(int i = 0; i < nums.size(); i++) {
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find three integers in the array whose sum is closest to the given target.
 
-            front = i + 1;
+- Sort the input array.
+- Iterate through the array, fixing one element and using a two-pointer technique to find the other two elements.
+- Track the sum of the triplet and check how close it is to the target.
+- Return the closest sum.
+{{< dots >}}
+### Problem Assumptions ✅
+- There is exactly one solution, so there is no need to check for multiple solutions.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 2, 3, -4], target = 3`  \
+  **Explanation:** The closest sum to the target is 3. (1 + 2 + 3 = 3).
 
-            int back = nums.size() - 1;
+- **Input:** `nums = [0, 0, 0], target = 5`  \
+  **Explanation:** The closest sum to the target 5 is 0. (0 + 0 + 0 = 0).
 
-            while( front < back ) {
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves sorting the array first and then using the two-pointer technique to find the closest sum.
 
-                sum1 = nums[front] + nums[back] + nums[i];
+### Initial Thoughts 💭
+- Sorting helps in finding the closest sum using the two-pointer technique efficiently.
+- The problem requires comparing the sum of different triplets and finding the one closest to the target.
+- We need to iterate through the array, fixing one element and using two pointers to explore potential sums.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least 3 elements.
+- The solution should be efficient for arrays up to 500 elements.
+- The array may contain both negative and positive numbers, which should be handled correctly.
+- The solution should handle negative, zero, and positive numbers efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int threeSumClosest(vector<int>& nums, int target) {
+    sort(nums.begin(),nums.end());
+    int front;
+    int sum = nums[0] + nums[1] + nums[2], sum1 = 0;
 
-                if (abs(sum1-target) <= abs(sum-target)) sum = sum1;
+    for(int i = 0; i < nums.size(); i++) {
 
-                     if(sum1 > target) back--;
-                else if(sum1 < target) front++;
-                else return sum1;
+        front = i + 1;
 
-            }
+        int back = nums.size() - 1;
+
+        while( front < back ) {
+
+            sum1 = nums[front] + nums[back] + nums[i];
+
+            if (abs(sum1-target) <= abs(sum-target)) sum = sum1;
+
+                 if(sum1 > target) back--;
+            else if(sum1 < target) front++;
+            else return sum1;
+
         }
-
-        return sum;
     }
-};
-{{< /highlight >}}
----
 
-### 💡 **Closest Three Sum Problem** – Let’s Solve It Together!
-
-The **Closest Three Sum** problem is a popular coding challenge. The goal is to **find the sum of three integers in an array** that is closest to a given target value. Let’s dive into the steps and approach that make this problem solvable efficiently!
-
-### 📝 **What’s the Problem?**
-
-You are given:
-- An integer **target** — the value we want to get as close as possible to by summing three numbers.
-- An array of integers **nums** — a collection of numbers where we need to find the three numbers whose sum is closest to the target.
-
-Your task is to **return the sum of the three integers** that is closest to the target.
-
-#### Example:
-
-For the array `nums = [-1, 2, 1, -4]` and target `1`, the closest sum is `2` since the sum of `-1`, `2`, and `1` is closest to `1`.
-
----
-
-### 🔍 **Approach: How We’ll Solve It**
-
-This problem is a variation of the popular **3-sum** problem, but instead of finding an exact match for the sum, we need to find the sum that is closest to the target. Let’s break down the approach!
-
-#### Key Steps:
-
-1. **Sort the Input Array**  
-   - Sorting helps us use a **two-pointer technique**, which is essential for efficiently finding the closest sum. Sorting simplifies the problem and reduces unnecessary comparisons.
-
-2. **Iterate Through the Array**  
-   - We iterate through the array and treat each element as one of the three numbers in the sum. For each element, we use two pointers to find the other two numbers that make the sum closest to the target.
-
-3. **Two-Pointer Technique**  
-   - For each element `i`, maintain two pointers:
-     - **`front`**: Starts at the element immediately after `i` (`i+1`).
-     - **`back`**: Starts at the last element of the array.
-   
-   - The pointers will move toward each other to find the sum closest to the target.
-
-4. **Calculate the Sum**  
-   - For each iteration, calculate the sum of the three numbers:  
-     `sum1 = nums[i] + nums[front] + nums[back]`.
-
-5. **Update Closest Sum**  
-   - If the absolute difference between `sum1` and the target is smaller than the current closest sum, update the closest sum.
-
-6. **Adjust Pointers**  
-   - Depending on whether `sum1` is greater than or less than the target:
-     - If `sum1 > target`, move the `back` pointer left to reduce the sum.
-     - If `sum1 < target`, move the `front` pointer right to increase the sum.
-     - If `sum1 == target`, return the sum immediately since it’s the best possible match.
-
-7. **Repeat Until Completion**  
-   - Continue this process for all elements in the array, and the result will be the closest sum to the target.
-
----
-
-### 🧑‍💻 **Code Breakdown (Step-by-Step)**
-
-#### Step 1: Sort the Array
-
-```cpp
-sort(nums.begin(), nums.end());
+    return sum;
+}
 ```
-- Sorting the array enables the two-pointer technique to work efficiently. Sorting takes **O(n log n)** time.
 
-#### Step 2: Initialize Variables
+This code implements the `threeSumClosest` function, which finds the triplet in the array `nums` that has the sum closest to the target value.
 
-```cpp
-int front;
-int sum = nums[0] + nums[1] + nums[2], sum1 = 0;
-```
-- `sum` stores the sum of the first three elements of the sorted array, which serves as the initial closest sum.
-- `sum1` will store the sum of three integers in each iteration.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int threeSumClosest(vector<int>& nums, int target) {
+	```
+	Declare the `threeSumClosest` function, which takes a vector of integers `nums` and a target integer `target` as input and returns the closest sum to the target.
 
-#### Step 3: Iterate Through the Array
+2. **Sorting Operations**
+	```cpp
+	    sort(nums.begin(),nums.end());
+	```
+	Sort the `nums` vector in ascending order.
 
-```cpp
-for(int i = 0; i < nums.size(); i++) {
-    front = i + 1;
-    int back = nums.size() - 1;
-```
-- The outer loop iterates through each element in the array, treating it as one of the three integers in the sum.
-- `front` points to the element right after `i`, and `back` points to the last element in the array.
+3. **Variable Initialization**
+	```cpp
+	    int front;
+	```
+	Declare a variable `front` to be used as a pointer in the two-pointer approach.
 
-#### Step 4: Two-Pointer Approach
+4. **Variable Initialization**
+	```cpp
+	    int sum = nums[0] + nums[1] + nums[2], sum1 = 0;
+	```
+	Initialize `sum` with the sum of the first three elements as an initial closest sum. Initialize `sum1` to store the current sum of three elements.
 
-```cpp
-while(front < back) {
-    sum1 = nums[front] + nums[back] + nums[i];
-```
-- The inner while loop ensures `front` is less than `back`, meaning we haven’t compared the same element twice.
-- Calculate `sum1` as the sum of `nums[i]`, `nums[front]`, and `nums[back]`.
+5. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Start a loop to iterate through each element `nums[i]` in the sorted array.
 
-#### Step 5: Check for Closest Sum
+6. **Variable Initialization**
+	```cpp
+	        front = i + 1;
+	```
+	Initialize `front` to point to the element after `nums[i]`. This will be the left pointer in the two-pointer approach.
 
-```cpp
-if(abs(sum1 - target) <= abs(sum - target)) sum = sum1;
-```
-- If the absolute difference between `sum1` and the target is smaller or equal to the current closest sum, update `sum`.
+7. **Variable Initialization**
+	```cpp
+	        int back = nums.size() - 1;
+	```
+	Initialize `back` to point to the last element of the array. This will be the right pointer in the two-pointer approach.
 
-#### Step 6: Move Pointers Based on Comparison
+8. **Loop Iteration**
+	```cpp
+	        while( front < back ) {
+	```
+	Start a two-pointer loop to find the closest sum to the target.
 
-```cpp
-if(sum1 > target) back--;
-else if(sum1 < target) front++;
-else return sum1;
-```
-- If `sum1` is greater than the target, move `back` left to reduce the sum.
-- If `sum1` is less than the target, move `front` right to increase the sum.
-- If `sum1` equals the target, return `sum1` immediately since we’ve found the closest possible sum.
+9. **Calculations**
+	```cpp
+	            sum1 = nums[front] + nums[back] + nums[i];
+	```
+	Calculate the sum of the current three elements `nums[i]`, `nums[front]`, and `nums[back]`.
 
-#### Step 7: Return the Closest Sum
+10. **Conditional Update**
+	```cpp
+	            if (abs(sum1-target) <= abs(sum-target)) sum = sum1;
+	```
+	Check if the absolute difference between the current sum `sum1` and the target is less than or equal to the current minimum difference. If so, update `sum` to the current `sum1`.
 
-```cpp
-return sum;
-```
-- Once the loop completes, return the closest sum found.
+11. **Conditional Update**
+	```cpp
+	                 if(sum1 > target) back--;
+	```
+	If the current sum `sum1` is greater than the target, move the `back` pointer to the left to decrease the sum.
 
----
+12. **Conditional Update**
+	```cpp
+	            else if(sum1 < target) front++;
+	```
+	If the current sum `sum1` is less than the target, move the `front` pointer to the right to increase the sum.
 
-### 🧠 **Time and Space Complexity**
+13. **Return Value**
+	```cpp
+	            else return sum1;
+	```
+	If the current sum `sum1` is exactly equal to the target, return it as the closest sum.
 
-- **Time Complexity**:  
-  Sorting the array takes **O(n log n)**. The two-pointer technique processes each element in the array once, which is **O(n)** for each outer loop iteration. So, the overall time complexity is **O(n log n)**.
+14. **Return Value**
+	```cpp
+	    return sum;
+	```
+	Return the closest sum `sum` found after iterating through all possible triplets.
 
-- **Space Complexity**:  
-  The space complexity is **O(1)** since we use only a constant amount of extra space, aside from the input and output.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
 
----
+The time complexity is O(n^2) because we iterate over the array and use two pointers to find the closest sum.
 
-### 🎯 **Why This Approach Works Well**
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-- Sorting the array simplifies the two-pointer technique, making it easy to adjust the pointers based on whether the sum is above or below the target.
-- This approach guarantees that we only traverse the array once per element, making it efficient.
-- It also handles edge cases, such as when no exact sum matches the target, by finding the closest sum in linear time after sorting.
+The space complexity is O(1) because no additional space is used except for a few variables.
 
----
+**Happy Coding! 🎉**
 
-### 🏁 **Conclusion**
-
-This solution efficiently solves the problem of finding the closest sum of three integers to a given target. By using sorting and the two-pointer approach, we ensure the solution runs in **O(n log n)** time, making it optimal for this kind of problem. With the combination of simplicity and efficiency, this approach is a great example of how to solve coding problems with minimal complexity.
-
-Happy coding, and keep pushing the boundaries! 🚀
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/3sum-closest/description/)
 

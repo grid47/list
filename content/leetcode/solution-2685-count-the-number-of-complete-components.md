@@ -14,195 +14,189 @@ img_src = ""
 youtube = "J43LjwWYch4"
 youtube_upload_date="2023-05-14"
 youtube_thumbnail="https://i.ytimg.com/vi/J43LjwWYch4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a graph with `n` vertices, numbered from `0` to `n-1`. The graph contains undirected edges described in a 2D array `edges`, where each element `edges[i] = [ai, bi]` indicates that there is an undirected edge between vertices `ai` and `bi`. A connected component is a subgraph in which there is a path between any two vertices, and no vertex is connected to vertices outside of the subgraph. A connected component is said to be complete if there is an edge between every pair of vertices in that component. Your task is to return the number of complete connected components in the graph.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an integer `n`, representing the number of vertices in the graph, and a list `edges` where each element is an edge connecting two vertices.
+- **Example:** `Input: n = 6, edges = [[0,1], [0,2], [1,2], [3,4]]`
+- **Constraints:**
+	- 1 <= n <= 50
+	- 0 <= edges.length <= n * (n - 1) / 2
+	- edges[i].length == 2
+	- 0 <= ai, bi <= n - 1
+	- ai != bi
+	- There are no repeated edges.
 
-{{< highlight cpp >}}
-class UF {
-    public:
-    vector<int> par, edge, rnk;
-    UF(int n) {
-        par.resize(n, 0);
-        iota(par.begin(), par.end(), 0);
-        edge.resize(n, 0);
-        rnk.resize(n, 1);
-    }
-    
-    bool join(int i, int j) {
-        int p = find(i);
-        int q = find(j);
-        if(p != q) {
-            if(rnk[p] > rnk[q]) {
-                rnk[p]+=rnk[q];
-                par[q] = p;
-            } else {
-                rnk[q]+=rnk[p];
-                par[p] = q;         
-            }
-            int e = edge[p]+edge[q] + 1;
-            edge[p] =e; // dge[q] + 1;
-            edge[q] =e; // dge[p] + 1;            
-            return true;
-        }
-        edge[q]++;
-        return false;
-    }
-    int find(int p) {
-        if(p == par[p]) return p;
-        return par[p] = find(par[p]);
-    }
-};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of complete connected components in the graph.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be a single integer representing the number of complete connected components.
 
-class Solution {
-public:
-    int countCompleteComponents(int n, vector<vector<int>>& edges) {
-        UF uf = UF(n);
-        for(auto e: edges) {
-            uf.join(e[0], e[1]);
-        }
-        set<int> pk;
-        int res = 0;
-            // cout << "edges membercnt edgescal \n";         
-        for(int i = 0; i < n; i++) {
-            int par = uf.find(i);
-            if(pk.count(par)) continue;
-            pk.insert(par);
-            int cnt = uf.edge[par];
-            // cout << cnt << " " << uf.rnk[par] << " " << uf.rnk[par] * (uf.rnk[par] - 1) / 2 << "\n";
-            if(uf.rnk[par] * (uf.rnk[par] - 1) / 2 == cnt) res++;
-        }
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of complete connected components in the graph, where each component must have an edge between every pair of its vertices.
 
-### Problem Statement
+- Step 1: Initialize a Union-Find (disjoint-set) data structure to track the connected components in the graph.
+- Step 2: Process each edge and union the vertices that are connected by that edge.
+- Step 3: For each connected component, check if it is complete by comparing the number of edges in the component with the expected number of edges for a complete graph (n*(n-1)/2).
+- Step 4: Count how many of the connected components are complete and return that count.
+{{< dots >}}
+### Problem Assumptions ✅
+- The graph may have disconnected components.
+- The graph may have some incomplete components where not every pair of vertices is connected by an edge.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 6, edges = [[0,1], [0,2], [1,2], [3,4]]`  \
+  **Explanation:** In this graph, there are 3 connected components. The first component, consisting of vertices 0, 1, and 2, is complete because there are edges between every pair. The second component, consisting of vertex 3 and 4, is also complete. The third component is just a single vertex, which is trivially complete. Thus, the output is 3.
 
-The problem asks us to find the number of "complete components" in a graph, where a complete component is a connected component where the number of edges is exactly equal to the number of vertices minus one (i.e., the graph is a tree). A tree with `k` nodes always has `k-1` edges, so this is the key property for determining whether a component is a tree.
+- **Input:** `Input: n = 6, edges = [[0,1], [0,2], [1,2], [3,4], [3,5]]`  \
+  **Explanation:** The first component, consisting of vertices 0, 1, and 2, is complete. However, the second component, consisting of vertices 3, 4, and 5, is not complete because there is no edge between vertices 4 and 5. Thus, the output is 1.
 
-Given an undirected graph with `n` vertices and a list of `edges` that connect pairs of vertices, the task is to count how many connected components in the graph are "complete," meaning they form a tree.
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves using the Union-Find data structure to efficiently group connected vertices, and then checking if each component forms a complete graph.
 
-### Approach
-
-To solve this problem, we use the **Union-Find (Disjoint Set Union)** data structure, which helps efficiently manage and merge connected components in the graph. We extend this data structure to track the number of edges in each component, which is critical for determining whether a component is a tree. The approach can be broken down as follows:
-
-1. **Union-Find Data Structure**: We need to efficiently find the parent of each node and merge two nodes into the same component. The union-find data structure supports two operations:
-   - **Find**: To find the representative (or parent) of a node.
-   - **Union**: To merge two components into one if they are not already connected.
-
-2. **Tracking Edges**: Along with the parent, we also track the number of edges in each component, which is updated during the union operations.
-
-3. **Checking for Complete Components**: After processing all the edges and merging components, we can check if each component is complete by verifying that the number of edges is exactly equal to the number of nodes in that component minus one.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Union-Find (UF) Class Definition
-
-```cpp
-class UF {
-public:
-    vector<int> par, edge, rnk;
-    UF(int n) {
-        par.resize(n, 0);
-        iota(par.begin(), par.end(), 0);
-        edge.resize(n, 0);
-        rnk.resize(n, 1);
-    }
-};
-```
-
-- The `UF` class represents the Union-Find data structure.
-- `par` is a vector that stores the parent of each node. Initially, each node is its own parent.
-- `edge` tracks the number of edges in each component.
-- `rnk` is used for **union by rank**, which helps optimize the union operation by attaching the smaller tree to the root of the larger tree.
-
-#### Step 2: The `join` Operation (Union)
-
-```cpp
-bool join(int i, int j) {
-    int p = find(i);
-    int q = find(j);
-    if (p != q) {
-        if (rnk[p] > rnk[q]) {
-            rnk[p] += rnk[q];
-            par[q] = p;
-        } else {
-            rnk[q] += rnk[p];
-            par[p] = q;
-        }
-        int e = edge[p] + edge[q] + 1;
-        edge[p] = e;
-        edge[q] = e;
-        return true;
-    }
-    edge[q]++;
-    return false;
-}
-```
-
-- The `join` method performs the union of two components `i` and `j`. If they are in different components, it merges them.
-- **Union by rank**: The component with the higher rank becomes the parent of the other component. This helps keep the tree shallow, improving the efficiency of future operations.
-- We also update the edge count for the merged components. If the components were already connected, we just increment the edge count of the parent.
-
-#### Step 3: The `find` Operation (Find the Root of a Component)
-
-```cpp
-int find(int p) {
-    if (p == par[p]) return p;
-    return par[p] = find(par[p]);
-}
-```
-
-- The `find` method uses path compression to find the representative (or root) of a component.
-- Path compression ensures that all nodes directly point to the root, optimizing future find operations.
-
-#### Step 4: The `countCompleteComponents` Method
-
+### Initial Thoughts 💭
+- We need to process the edges to group the vertices into connected components.
+- For each component, we need to verify if it's complete by checking if it has the correct number of edges.
+- Union-Find with path compression and union by rank is a good choice for efficiently managing the connected components.
+{{< dots >}}
+### Edge Cases 🌐
+- If the graph has no edges, each vertex is its own component, and all components are trivially complete.
+- For larger graphs with a large number of edges, the algorithm should efficiently handle them within the time limits.
+- If the graph contains only one vertex, it is trivially a complete component.
+- Ensure the solution works for the upper limits of the constraints, with n up to 50.
+{{< dots >}}
+## Code 💻
 ```cpp
 int countCompleteComponents(int n, vector<vector<int>>& edges) {
     UF uf = UF(n);
-    for (auto e : edges) {
+    for(auto e: edges) {
         uf.join(e[0], e[1]);
     }
     set<int> pk;
     int res = 0;
-    for (int i = 0; i < n; i++) {
+        // cout << "edges membercnt edgescal \n";         
+    for(int i = 0; i < n; i++) {
         int par = uf.find(i);
-        if (pk.count(par)) continue;
+        if(pk.count(par)) continue;
         pk.insert(par);
         int cnt = uf.edge[par];
-        if (uf.rnk[par] * (uf.rnk[par] - 1) / 2 == cnt) res++;
+        // cout << cnt << " " << uf.rnk[par] << " " << uf.rnk[par] * (uf.rnk[par] - 1) / 2 << "\n";
+        if(uf.rnk[par] * (uf.rnk[par] - 1) / 2 == cnt) res++;
     }
     return res;
 }
 ```
 
-- The `countCompleteComponents` method initializes the Union-Find structure with `n` vertices.
-- For each edge in the input, the `join` method is called to connect the vertices, updating the components' edge counts.
-- We then check each component to see if it forms a complete tree:
-  - A component is complete if the number of edges is equal to the number of vertices minus one. This condition is checked using the formula `rnk[par] * (rnk[par] - 1) / 2 == cnt`, where `rnk[par]` is the size of the component and `cnt` is the number of edges.
-- If a component satisfies this condition, it is considered a complete component, and we increment the result counter.
-- Finally, the method returns the count of complete components.
+The code defines a function `countCompleteComponents` that calculates the number of complete components in an undirected graph, represented by `n` nodes and an edge list `edges`. The function uses a Union-Find data structure to group connected nodes and checks whether each component satisfies the conditions of being complete.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	int countCompleteComponents(int n, vector<vector<int>>& edges) {
+	```
+	This line declares the function `countCompleteComponents`, which takes in an integer `n` (number of nodes) and a reference to a 2D vector `edges` (edge list).
 
-#### Time Complexity
+2. **Union-Find Setup**
+	```cpp
+	    UF uf = UF(n);
+	```
+	An instance of the Union-Find (UF) class is created with `n` elements. The UF class helps in efficiently managing the merging of nodes and finding their representative leaders.
 
-- The time complexity of the Union-Find operations is nearly constant, thanks to the **union by rank** and **path compression** optimizations. The amortized time complexity for each `find` and `join` operation is **O(α(n))**, where α is the **inverse Ackermann function**, which grows very slowly.
-- For `m` edges and `n` vertices, the overall time complexity is **O(m * α(n))**.
+3. **Edge Processing**
+	```cpp
+	    for(auto e: edges) {
+	```
+	A loop is initiated to iterate through each edge in the `edges` list.
 
-#### Space Complexity
+4. **Union Operation**
+	```cpp
+	        uf.join(e[0], e[1]);
+	```
+	The `join` method of the Union-Find structure is called to merge the two nodes `e[0]` and `e[1]` of the current edge.
 
-- The space complexity is **O(n)**, as we store the parent (`par`), edge count (`edge`), and rank (`rnk`) arrays, each of size `n`.
+5. **Set Initialization**
+	```cpp
+	    set<int> pk;
+	```
+	A set `pk` is initialized to store unique parent nodes that are found during the traversal of the graph.
 
-### Conclusion
+6. **Result Initialization**
+	```cpp
+	    int res = 0;
+	```
+	A variable `res` is initialized to 0. It will hold the count of complete components.
 
-This solution efficiently solves the problem using the Union-Find data structure, which allows us to handle the merging and checking of connected components in near constant time. By tracking both the parent and the number of edges in each component, we can easily determine whether a component is a tree (i.e., has exactly `n-1` edges). The approach is optimized with **union by rank** and **path compression**, ensuring that the solution scales well even for large graphs. The complexity of the solution is manageable and performs well within the problem's constraints.
+7. **Loop Through Nodes**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	A loop is initiated to traverse all `n` nodes.
+
+8. **Find Operation**
+	```cpp
+	        int par = uf.find(i);
+	```
+	The `find` method is called on the Union-Find instance to get the parent of node `i`.
+
+9. **Skip Already Processed Parents**
+	```cpp
+	        if(pk.count(par)) continue;
+	```
+	If the parent `par` has already been processed (i.e., it's in the set `pk`), the loop skips to the next node.
+
+10. **Insert Parent**
+	```cpp
+	        pk.insert(par);
+	```
+	The parent `par` is inserted into the set `pk` to mark it as processed.
+
+11. **Edge Count Retrieval**
+	```cpp
+	        int cnt = uf.edge[par];
+	```
+	The number of edges in the component represented by `par` is retrieved from the `edge` array of the Union-Find structure.
+
+12. **Complete Component Check**
+	```cpp
+	        if(uf.rnk[par] * (uf.rnk[par] - 1) / 2 == cnt) res++;
+	```
+	This condition checks if the component represented by `par` is complete. If it is, the result `res` is incremented.
+
+13. **Return Result**
+	```cpp
+	    return res;
+	```
+	The function returns the final count of complete components.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n + m)
+- **Average Case:** O(n + m)
+- **Worst Case:** O(n + m)
+
+The time complexity is linear in terms of the number of vertices `n` and edges `m` due to the Union-Find operations and the edge processing.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the Union-Find structure.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-complete-components/description/)
 

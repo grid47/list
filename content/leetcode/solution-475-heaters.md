@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
@@ -27,123 +28,201 @@ youtube_thumbnail=""
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given the positions of houses and heaters along a horizontal line. Your task is to find the minimum radius required for the heaters so that all houses are within the heater's warm radius.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two arrays: `houses` representing the positions of the houses and `heaters` representing the positions of the heaters.
+- **Example:** `houses = [2, 5, 7, 10], heaters = [1, 8]`
+- **Constraints:**
+	- 1 <= houses.length, heaters.length <= 3 * 10^4
+	- 1 <= houses[i], heaters[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findRadius(vector<int>& home, vector<int>& warm) {
-        sort(home.begin(), home.end());
-        sort(warm.begin(), warm.end());
-        int m = home.size(), n = warm.size();
-        
-        vector<int> res(m, INT_MAX);
-        
-        for(int h = 0, w = 0; h < m && w < n; ) {
-            if (home[h] <= warm[w]) {
-                res[h] = warm[w] - home[h];
-                h++;
-            } else w++;
-        }
-        
-        for(int h = m - 1, w = n - 1; h >= 0 && w >= 0; ) {
-            if (home[h] >= warm[w]) {
-                res[h] = min(res[h], home[h] - warm[w]);
-                h--;
-            } else w--;
-        }
-        
-        return *max_element(res.begin(), res.end());
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum radius required for the heaters to cover all houses.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be an integer representing the minimum radius for heaters.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum radius required for heaters to ensure all houses are covered.
+
+- 1. Sort the positions of both the houses and the heaters.
+- 2. For each house, calculate the nearest heater and determine the distance between them.
+- 3. The largest distance across all houses will determine the required radius of the heaters.
+{{< dots >}}
+### Problem Assumptions ✅
+- The heaters can be placed at any position along the horizontal line.
+- There is no overlap in the positions of houses and heaters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `houses = [2, 5, 7, 10], heaters = [1, 8]`  \
+  **Explanation:** Heaters at positions 1 and 8 with a radius of 3 can cover all the houses.
+
+- **Input:** `houses = [5, 10], heaters = [6]`  \
+  **Explanation:** A heater at position 6 with a radius of 4 can cover both houses at positions 5 and 10.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting the house and heater positions, then calculating the minimum required radius by comparing distances.
+
+### Initial Thoughts 💭
+- Sorting the houses and heaters simplifies the task of finding the nearest heater for each house.
+- A greedy approach that evaluates the closest heater to each house would be efficient.
+- By calculating the distance from each house to its nearest heater, we can determine the minimum radius required for coverage.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one house and one heater, as per the constraints.
+- Handle cases where the number of houses or heaters is large (up to 30,000).
+- Consider cases where all heaters are clustered in one area or spread across a wide range.
+- Ensure the solution works efficiently within the constraints of up to 30,000 houses and heaters.
+{{< dots >}}
+## Code 💻
+```cpp
+int findRadius(vector<int>& home, vector<int>& warm) {
+    sort(home.begin(), home.end());
+    sort(warm.begin(), warm.end());
+    int m = home.size(), n = warm.size();
+    
+    vector<int> res(m, INT_MAX);
+    
+    for(int h = 0, w = 0; h < m && w < n; ) {
+        if (home[h] <= warm[w]) {
+            res[h] = warm[w] - home[h];
+            h++;
+        } else w++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are tasked with determining the minimum radius needed for heaters to cover all the houses on a 1D line. Specifically, we are given two arrays:
-- **home**: A list of positions of houses on a 1D axis.
-- **warm**: A list of positions of heaters on the same axis.
-
-The goal is to find the smallest radius such that every house is within the radius of at least one heater. The radius of a heater is defined as the distance between the heater's position and the farthest house it can cover.
-
-### Approach
-
-To solve this problem, we need to minimize the maximum distance from each house to the closest heater. The strategy involves:
-1. **Sorting the Arrays**: By sorting the `home` and `warm` arrays, we can ensure that we compare houses and heaters in order, which helps in efficiently finding the closest heater for each house.
-2. **Two-Pass Approach**: 
-   - In the first pass, we iterate through the homes from left to right, finding the nearest heater that is to the right or equal to the current house.
-   - In the second pass, we iterate through the homes from right to left, finding the nearest heater that is to the left or equal to the current house.
-3. **Final Result**: For each house, the final radius required is the minimum of the distances to the closest heater from the left and right directions. We then return the largest radius among all houses to ensure that all houses are covered.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Sort the Home and Warm Arrays
-```cpp
-sort(home.begin(), home.end());
-sort(warm.begin(), warm.end());
-```
-- We begin by sorting both the `home` and `warm` arrays. Sorting ensures that we can process the houses and heaters in an ordered manner, which simplifies the process of finding the nearest heater to each house.
-
-#### Step 2: Initialize a Result Array
-```cpp
-int m = home.size(), n = warm.size();
-vector<int> res(m, INT_MAX);
-```
-- We initialize a result array `res` of size `m` (number of houses) where each element represents the minimum distance from a house to the nearest heater. Initially, we set all elements to `INT_MAX`, indicating that we have not yet computed the distance for each house.
-
-#### Step 3: First Pass - Left to Right
-```cpp
-for(int h = 0, w = 0; h < m && w < n; ) {
-    if (home[h] <= warm[w]) {
-        res[h] = warm[w] - home[h];
-        h++;
-    } else w++;
+    
+    for(int h = m - 1, w = n - 1; h >= 0 && w >= 0; ) {
+        if (home[h] >= warm[w]) {
+            res[h] = min(res[h], home[h] - warm[w]);
+            h--;
+        } else w--;
+    }
+    
+    return *max_element(res.begin(), res.end());
 }
 ```
-- This loop iterates over the houses (`h` index) and heaters (`w` index) from left to right.
-- For each house, we check if the current heater is positioned at or before the house (`home[h] <= warm[w]`).
-  - If the heater is positioned before or at the house, we compute the distance from this house to the heater and update the `res[h]` with this distance.
-  - We then move to the next house (`h++`).
-  - If the heater is farther from the house, we move to the next heater (`w++`) to find the closest one.
 
-#### Step 4: Second Pass - Right to Left
-```cpp
-for(int h = m - 1, w = n - 1; h >= 0 && w >= 0; ) {
-    if (home[h] >= warm[w]) {
-        res[h] = min(res[h], home[h] - warm[w]);
-        h--;
-    } else w--;
-}
-```
-- This loop works similarly to the first pass, but in this case, we iterate from right to left.
-- For each house, we check if the current heater is positioned at or after the house (`home[h] >= warm[w]`).
-  - If the heater is positioned after or at the house, we compute the distance from this house to the heater.
-  - We then update the `res[h]` array with the minimum of the existing value in `res[h]` and the new computed distance to the current heater. This ensures we get the minimum distance to a heater from either direction.
-  - We then move to the next house (`h--`) or the next heater (`w--`) based on the comparison.
+The `findRadius` function calculates the minimum radius for which all homes can be covered by warm heaters. The algorithm sorts both home and heater positions and uses two sweeps, from left to right and right to left, to find the closest heater for each home. Finally, the function returns the largest of these minimum distances.
 
-#### Step 5: Return the Maximum Radius
-```cpp
-return *max_element(res.begin(), res.end());
-```
-- After processing all the houses, we take the maximum value in the `res` array, which represents the minimum radius required to cover all the houses. This is the largest distance from any house to its closest heater.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findRadius(vector<int>& home, vector<int>& warm) {
+	```
+	Defines the `findRadius` function, which takes two vectors, `home` and `warm`, representing the positions of homes and warm heaters, and returns the minimum radius required to ensure every home is covered.
 
-### Complexity
+2. **Sorting**
+	```cpp
+	    sort(home.begin(), home.end());
+	```
+	Sorts the `home` vector to facilitate the process of finding the closest heater for each home.
 
-#### Time Complexity:
-- **Sorting**: Sorting both the `home` and `warm` arrays takes `O(m log m + n log n)`, where `m` is the number of houses and `n` is the number of heaters.
-- **First Pass**: The first pass involves iterating over both the `home` and `warm` arrays, which takes `O(m + n)` time.
-- **Second Pass**: The second pass also involves iterating over both the `home` and `warm` arrays, which takes `O(m + n)` time.
-- **Final Calculation**: The final step of finding the maximum value in the `res` array takes `O(m)` time.
-- **Overall Time Complexity**: The overall time complexity is dominated by the sorting step, which gives us `O(m log m + n log n)`.
+3. **Sorting**
+	```cpp
+	    sort(warm.begin(), warm.end());
+	```
+	Sorts the `warm` vector to make it easier to check the closest heater to a given home.
 
-#### Space Complexity:
-- We use a result array `res` of size `m` to store the minimum distance for each house, which requires `O(m)` space.
-- We do not use any additional data structures that grow with the input size, so the overall space complexity is `O(m)`.
+4. **Variable Initialization**
+	```cpp
+	    int m = home.size(), n = warm.size();
+	```
+	Initializes `m` as the number of homes and `n` as the number of heaters.
 
-### Conclusion
+5. **Vector Initialization**
+	```cpp
+	    vector<int> res(m, INT_MAX);
+	```
+	Initializes a vector `res` of size `m` (the number of homes), setting each element to `INT_MAX` as an initial placeholder for the minimum distances to the closest heater.
 
-This solution efficiently computes the minimum radius required to cover all houses with heaters by using a two-pass approach: one from left to right and the other from right to left. By sorting both the `home` and `warm` arrays, we can easily compute the closest heater for each house in both directions and find the minimum radius. The algorithm runs in `O(m log m + n log n)` time and uses `O(m)` space, making it optimal for this problem. This approach guarantees that every house is covered by the nearest heater while minimizing the maximum radius.
+6. **Left to Right Sweep**
+	```cpp
+	    for(int h = 0, w = 0; h < m && w < n; ) {
+	```
+	Begins a loop that iterates over both homes (`h`) and heaters (`w`) from left to right to compute the closest heater to each home.
+
+7. **Condition Check**
+	```cpp
+	        if (home[h] <= warm[w]) {
+	```
+	Checks if the current home is to the left of or at the current heater position.
+
+8. **Update Distance**
+	```cpp
+	            res[h] = warm[w] - home[h];
+	```
+	Updates the minimum distance for home `h` to the current heater `w`.
+
+9. **Increment Home Pointer**
+	```cpp
+	            h++;
+	```
+	Increments the home pointer `h` to consider the next home.
+
+10. **Increment Heater Pointer**
+	```cpp
+	        } else w++;
+	```
+	If the current home is not covered by the current heater, increments the heater pointer `w` to check the next heater.
+
+11. **Right to Left Sweep**
+	```cpp
+	    for(int h = m - 1, w = n - 1; h >= 0 && w >= 0; ) {
+	```
+	Begins a loop that iterates over both homes (`h`) and heaters (`w`) from right to left to compute the closest heater to each home in the reverse direction.
+
+12. **Condition Check**
+	```cpp
+	        if (home[h] >= warm[w]) {
+	```
+	Checks if the current home is to the right of or at the current heater position.
+
+13. **Update Distance**
+	```cpp
+	            res[h] = min(res[h], home[h] - warm[w]);
+	```
+	Updates the minimum distance for home `h` by considering the current heater `w` and taking the minimum between the previous calculated distance and the new one.
+
+14. **Decrement Home Pointer**
+	```cpp
+	            h--;
+	```
+	Decrements the home pointer `h` to consider the next home in the reverse direction.
+
+15. **Decrement Heater Pointer**
+	```cpp
+	        } else w--;
+	```
+	If the current home is not covered by the current heater, decrements the heater pointer `w` to check the next heater in the reverse direction.
+
+16. **Final Calculation**
+	```cpp
+	    return *max_element(res.begin(), res.end());
+	```
+	Returns the maximum value from the `res` vector, which represents the largest of the minimum distances to the closest heater for all homes.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+Sorting the houses and heaters requires O(n log n) time, where n is the number of houses or heaters.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for sorting the arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/heaters/description/)
 

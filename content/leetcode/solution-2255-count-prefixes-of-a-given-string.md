@@ -14,135 +14,171 @@ img_src = ""
 youtube = "ctp3MD4jiGg"
 youtube_upload_date="2022-04-30"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/ctp3MD4jiGg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a list of strings `words` and a target string `s`, count how many strings in `words` are prefixes of `s`. A prefix is defined as a substring starting from the beginning of a string and extending up to a given length. Note that duplicate strings in `words` should be counted separately.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a string array `words` and a single string `s`.
+- **Example:** `words = ["cat", "ca", "dog", "c"], s = "catapult"`
+- **Constraints:**
+	- 1 <= words.length <= 1000
+	- 1 <= words[i].length, s.length <= 10
+	- All strings in `words` and `s` consist of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countPrefixes(vector<string>& words, string s) {
-        int cnt = 0;
-        for(string x: words) {
-            if(x.size() > s.size()) continue;
-            bool flag = true;
-            for(int i = 0; i < x.size(); i++) {
-                if(x[i] != s[i]) {
-                    flag = false;
-                    break;
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the count of strings in `words` that are prefixes of the string `s`.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Determine how many strings in `words` match the prefix of `s` up to their length.
+
+- Iterate through each string in `words`.
+- Check if the length of the current string is less than or equal to `s`.
+- Compare each character of the string with the corresponding character in `s`.
+- If all characters match, increment the count.
+- Return the total count of matches.
+{{< dots >}}
+### Problem Assumptions ✅
+- Strings in `words` and `s` are non-empty.
+- Duplicate strings in `words` contribute to the count separately.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `words = ["car", "ca", "dog", "c"], s = "caravan"`  \
+  **Explanation:** The strings in `words` which are prefixes of `s` are "car", "ca", and "c". Thus, the result is 3.
+
+- **Input:** `words = ["x", "xy", "xyz"], s = "abcdef"`  \
+  **Explanation:** None of the strings in `words` are prefixes of `s`. Thus, the result is 0.
+
+{{< dots >}}
+## Approach 🚀
+Iteratively compare each string in `words` with the prefix of `s` up to its length, ensuring efficient substring matching.
+
+### Initial Thoughts 💭
+- Prefix checking can be done by comparing the substring of `s` with the current word.
+- The lengths of the words in `words` are relatively small, so the operations are manageable.
+- A simple comparison using substring or a character-by-character match is sufficient for this problem.
+{{< dots >}}
+### Edge Cases 🌐
+- If `words` is empty, return 0.
+- Handle up to 1000 strings in `words` with maximum length 10 efficiently.
+- If all strings in `words` are equal and match the prefix of `s`, count them all.
+- Ensure that partial matches beyond the prefix length are not counted.
+{{< dots >}}
+## Code 💻
+```cpp
+int countPrefixes(vector<string>& words, string s) {
+    int cnt = 0;
+    for(string x: words) {
+        if(x.size() > s.size()) continue;
+        bool flag = true;
+        for(int i = 0; i < x.size(); i++) {
+            if(x[i] != s[i]) {
+                flag = false;
+                break;
             }
-            if(flag) cnt++;
         }
-        return cnt;
+        if(flag) cnt++;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem asks us to count how many strings in a given list of words are prefixes of a string `s`. A prefix is defined as a substring at the beginning of the string that matches exactly with the start of `s`. The goal is to efficiently count the number of strings in the `words` list that are prefixes of `s`.
-
-### Approach
-
-To solve this problem, we will iterate through each word in the `words` list and check if it is a prefix of the string `s`. A prefix is defined as a substring starting at index `0` and having a length equal to or less than the length of `s`. For each word, we will compare its characters to the corresponding characters of `s`. If all characters match, we will count that word as a prefix.
-
-#### Steps:
-
-1. **Initialize a Counter**: We'll start by initializing a counter `cnt` to zero. This will keep track of the number of prefixes found.
-
-2. **Iterate Through the Words**: For each word in the list `words`, check if it is a prefix of the string `s`.
-
-3. **Check Length Condition**: If a word is longer than `s`, it cannot be a prefix of `s`. We can skip these words immediately.
-
-4. **Character-by-Character Comparison**: For words that are shorter than or equal to the length of `s`, we compare each character of the word with the corresponding character in `s`. If all characters match, it means the word is a prefix.
-
-5. **Count the Prefixes**: If the word matches the prefix condition, we increment the counter `cnt`.
-
-6. **Return the Count**: After processing all the words, we return the count of prefixes.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Counter
-
-```cpp
-int cnt = 0;
-```
-
-- We start by initializing a variable `cnt` to `0`. This variable will store the number of valid prefixes found during the iteration over the `words` list.
-
-#### Step 2: Iterate Over Each Word
-
-```cpp
-for(string x: words) {
-```
-
-- We loop over each string `x` in the `words` vector. The goal is to check whether each word `x` is a prefix of the string `s`.
-
-#### Step 3: Check Length Condition
-
-```cpp
-if(x.size() > s.size()) continue;
-```
-
-- Before comparing the characters of `x` with `s`, we first check if the length of the current word `x` is greater than the length of `s`. If `x` is longer than `s`, it cannot be a prefix, and we continue with the next word in the list.
-
-#### Step 4: Compare Characters
-
-```cpp
-bool flag = true;
-for(int i = 0; i < x.size(); i++) {
-    if(x[i] != s[i]) {
-        flag = false;
-        break;
-    }
+    return cnt;
 }
 ```
 
-- We use a `for` loop to compare each character of the word `x` with the corresponding character of `s`.
-- If any character doesn't match, we set `flag` to `false` and break the loop early because we know `x` is not a prefix.
-- If all characters match, `flag` remains `true`, indicating that `x` is a valid prefix of `s`.
+This function counts how many words in the 'words' list are prefixes of the string 's'. It checks each word and compares it with the beginning of 's'. If a word matches the prefix of 's', the count is incremented.
 
-#### Step 5: Count the Prefixes
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countPrefixes(vector<string>& words, string s) {
+	```
+	This defines the 'countPrefixes' function that takes a list of words and a string 's', and returns the number of words in 'words' that are prefixes of 's'.
 
-```cpp
-if(flag) cnt++;
-```
+2. **Variable Initialization**
+	```cpp
+	    int cnt = 0;
+	```
+	Here, 'cnt' is initialized to zero, and it will store the number of words that are prefixes of the string 's'.
 
-- If `flag` is `true`, meaning all characters of `x` matched the corresponding characters in `s`, we increment the counter `cnt`.
+3. **Loop Through Words**
+	```cpp
+	    for(string x: words) {
+	```
+	This loop iterates over each word 'x' in the 'words' vector to check if it is a prefix of the string 's'.
 
-#### Step 6: Return the Result
+4. **Skip Long Words**
+	```cpp
+	        if(x.size() > s.size()) continue;
+	```
+	This condition skips words that are longer than the string 's', as they cannot be prefixes of 's'.
 
-```cpp
-return cnt;
-```
+5. **Flag Initialization**
+	```cpp
+	        bool flag = true;
+	```
+	A boolean flag 'flag' is initialized to true. This flag will track whether the word 'x' is a valid prefix of 's'.
 
-- After processing all the words, we return the value of `cnt`, which now holds the number of words that are prefixes of `s`.
+6. **Loop Through Characters**
+	```cpp
+	        for(int i = 0; i < x.size(); i++) {
+	```
+	This inner loop iterates through the characters of the word 'x' to compare each character with the corresponding character of the string 's'.
 
-### Complexity
+7. **Check Prefix Match**
+	```cpp
+	            if(x[i] != s[i]) {
+	```
+	This condition checks if the character at position 'i' of the word 'x' matches the corresponding character in 's'. If they don't match, 'flag' will be set to false.
 
-#### Time Complexity
+8. **Flag Update**
+	```cpp
+	                flag = false;
+	```
+	If the characters don't match, 'flag' is set to false, indicating that 'x' is not a prefix of 's'.
 
-1. **Iterating Through Words**: We loop through all the words in the `words` vector. The number of words is `n`, so this part takes \( O(n) \), where `n` is the number of words.
-2. **Character-by-Character Comparison**: For each word `x`, we compare each of its characters with the corresponding characters in `s`. The length of the word is at most \( m \) (the length of `s`), so the comparison for each word takes \( O(m) \).
+9. **Break Loop**
+	```cpp
+	                break;
+	```
+	If a mismatch is found, the inner loop breaks early, as further checks are unnecessary for this word.
 
-Thus, the overall time complexity is \( O(n \times m) \), where:
-- `n` is the number of words in the list `words`,
-- `m` is the length of the string `s`.
+10. **Increment Count**
+	```cpp
+	        if(flag) cnt++;
+	```
+	If 'flag' remains true, meaning the word 'x' is a prefix of 's', the count 'cnt' is incremented.
 
-#### Space Complexity
+11. **Return Result**
+	```cpp
+	    return cnt;
+	```
+	The function returns the final count 'cnt', which represents the number of words in 'words' that are prefixes of the string 's'.
 
-The space complexity is \( O(1) \) since we are using only a constant amount of extra space aside from the input vectors.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n * l)
+- **Worst Case:** O(n * l)
 
-### Conclusion
+n = number of strings in `words`, l = average length of strings in `words`.
 
-This solution efficiently counts how many words in the `words` list are prefixes of the string `s`. The approach involves iterating over each word, checking its length, and then performing a character-by-character comparison to determine if the word is a prefix of `s`. By leveraging simple string comparisons and early exits when the word is too long to be a prefix, the solution efficiently handles the task.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The time complexity of \( O(n \times m) \) is acceptable for typical problem constraints, where `n` is the number of words and `m` is the length of the string `s`. The space complexity of \( O(1) \) makes this solution very space-efficient. Overall, this approach provides a simple yet effective way to solve the problem.
+No additional space is used apart from the counter.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-prefixes-of-a-given-string/description/)
 

@@ -14,160 +14,200 @@ img_src = ""
 youtube = "scBL7uQiPMg"
 youtube_upload_date="2022-09-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/scBL7uQiPMg/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a binary matrix `matrix` of size m x n and an integer `numSelect`. Your goal is to select exactly `numSelect` distinct columns from the matrix such that you cover as many rows as possible. A row is considered covered if all the 1's in that row are included in the selected columns. If a row has no 1's, it is also considered covered.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an m x n binary matrix `matrix` and an integer `numSelect` representing the number of columns to select.
+- **Example:** `matrix = [[0, 0, 0], [1, 0, 1], [0, 1, 1], [0, 0, 1]], numSelect = 2`
+- **Constraints:**
+	- 1 <= m, n <= 12
+	- 1 <= numSelect <= n
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumRows(vector<vector<int>>& mtx, int sel) {
-        int m = mtx.size(), n = mtx[0].size();
-        
-        int ans = 0;
-        for(int msk = 0; msk < (1 << n); msk++) {
-            if(__builtin_popcount(msk) != sel) continue;
-            int res = 0;
-            for(int i = 0; i < m; i++) {
-                bool take = true;
-                for(int j = 0; j < n; j++)
-                    if(mtx[i][j] && (((msk >> j) & 1) == 0)) {
-                        take = false;
-                        break;
-                    }
-                if(take) res++;
-            }
-            ans = max(ans, res);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of rows that can be covered by selecting `numSelect` columns.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to select `numSelect` columns such that the maximum number of rows are covered. A row is covered if all its 1's appear in the selected columns.
+
+- 1. Iterate through all possible selections of `numSelect` columns.
+- 2. For each selection, check if the columns cover the rows based on the presence of 1's in the selected columns.
+- 3. Count the number of rows that are covered.
+- 4. Keep track of the maximum number of rows covered across all column selections.
+{{< dots >}}
+### Problem Assumptions ✅
+- Matrix entries are either 0 or 1.
+- numSelect is at most n, the number of columns in the matrix.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `matrix = [[1, 0], [0, 0], [1, 1]], numSelect = 1`  \
+  **Explanation:** Selecting column 1 will cover both rows with 1's. Therefore, the answer is 3, as all rows are covered.
+
+- **Input:** `matrix = [[0, 0, 0], [1, 0, 1], [0, 1, 1], [0, 0, 1]], numSelect = 2`  \
+  **Explanation:** Selecting columns 0 and 2 will cover 3 rows because: Row 1 is covered as both columns 0 and 2 are selected, Row 0 is covered as it has no 1's, Row 3 is covered as column 2 is selected. The maximum rows covered is 3.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to try selecting different combinations of `numSelect` columns and check how many rows can be covered. We can iterate over all possible column selections, check coverage for each row, and return the maximum count.
+
+### Initial Thoughts 💭
+- The problem is combinatorial in nature, and since the matrix size is small, we can afford to check all column combinations.
+- Efficient iteration over column selections can help us determine the maximum number of rows covered.
+{{< dots >}}
+### Edge Cases 🌐
+- Handle matrices where all elements are 0, as all rows will be covered.
+- Even though m, n <= 12, the solution should handle the largest matrix sizes efficiently.
+- If `numSelect` equals `n`, all columns must be selected, so all rows with 1's will be covered.
+- The solution needs to handle combinations of columns efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumRows(vector<vector<int>>& mtx, int sel) {
+    int m = mtx.size(), n = mtx[0].size();
+    
+    int ans = 0;
+    for(int msk = 0; msk < (1 << n); msk++) {
+        if(__builtin_popcount(msk) != sel) continue;
+        int res = 0;
+        for(int i = 0; i < m; i++) {
+            bool take = true;
+            for(int j = 0; j < n; j++)
+                if(mtx[i][j] && (((msk >> j) & 1) == 0)) {
+                    take = false;
+                    break;
+                }
+            if(take) res++;
         }
-        
-        
-        return ans;
+        ans = max(ans, res);
     }
-
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-You are given a matrix `mtx` with dimensions `m x n` (m rows and n columns) containing binary values (0s and 1s). You are also given an integer `sel` which indicates how many columns you can select from the matrix. The task is to find the maximum number of rows that can be "covered" or selected, where a row is considered covered if all the selected columns have `1` in that row.
-
-In simpler terms, you need to select exactly `sel` columns such that, for the chosen columns, you can maximize the number of rows where all of the selected columns have the value `1`.
-
-For example:
-- Input: 
-  - `mtx = [[1,0,1],[1,1,1],[1,1,0]]`
-  - `sel = 2`
-- Output: `2`
-  - Explanation: You can select columns 0 and 2, which will cover two rows (`[1,0,1]` and `[1,1,1]`), as they both have `1` in these columns.
-
-### Approach
-
-The problem is about selecting columns and checking how many rows can be fully covered by those columns. The key challenge is to optimize the selection of columns to maximize the number of rows that can be fully covered. Here's how we approach solving this problem:
-
-1. **Understanding the Problem:**
-   - We need to select exactly `sel` columns from the matrix.
-   - For each selection of columns, we need to count how many rows are covered (i.e., have `1` in all the selected columns).
-   - The objective is to maximize the number of covered rows.
-
-2. **Brute Force Strategy:**
-   - The number of possible column selections is `C(n, sel)`, where `n` is the number of columns in the matrix. This could potentially be a large number when `n` is big.
-   - For each possible selection of columns, we check how many rows are fully covered by these columns. This involves iterating over all the rows and checking if the values in the selected columns are all `1`.
-
-3. **Optimized Search Using Bitmasking:**
-   - Instead of checking each selection of columns one by one, we can use bitmasking to represent each column selection.
-   - A bitmask is a binary number where each bit represents whether a particular column is selected or not.
-   - For example, if `n = 3` (3 columns), a bitmask `101` would represent selecting columns 0 and 2.
-   - We can iterate over all possible bitmasks and for each bitmask, check which rows are fully covered by the selected columns.
-
-4. **Efficient Row Checking:**
-   - For each bitmask, we need to check each row to see if it is covered by the selected columns. We iterate over each row and ensure that for every selected column (where the bit in the bitmask is 1), the corresponding value in that row is also `1`.
-
-5. **Maximization:**
-   - For each bitmask, we count how many rows are covered and update the result with the maximum number of covered rows.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
-We start by initializing some key variables:
-- `m` and `n` represent the number of rows and columns in the matrix, respectively.
-- `ans` will hold the final result — the maximum number of rows that can be covered by exactly `sel` selected columns.
-
-```cpp
-int m = mtx.size(), n = mtx[0].size();
-int ans = 0;
-```
-
-#### Step 2: Iterate Over All Possible Column Selections Using Bitmasking
-
-We use a bitmask `msk` to represent each possible selection of columns. The total number of possible column selections is `2^n`, where `n` is the number of columns. The bitmask `msk` will range from `0` to `2^n - 1`. 
-
-For each bitmask, we check if it contains exactly `sel` columns (i.e., the number of `1`s in the bitmask must be equal to `sel`).
-
-```cpp
-for(int msk = 0; msk < (1 << n); msk++) {
-    if(__builtin_popcount(msk) != sel) continue;
-```
-
-The function `__builtin_popcount(msk)` counts the number of `1`s in the binary representation of `msk`. If this count is not equal to `sel`, we skip that bitmask.
-
-#### Step 3: Check Row Coverage for the Current Column Selection
-
-For each valid column selection (bitmask `msk`), we check how many rows are covered. We initialize a variable `res` to count the number of rows that are covered by the selected columns.
-
-```cpp
-int res = 0;
-```
-
-We then iterate over each row in the matrix to check if it is covered by the selected columns. For each row, we check if the columns selected in the bitmask all have a `1` in that row. If so, we increment the count of covered rows (`res`).
-
-```cpp
-for(int i = 0; i < m; i++) {
-    bool take = true;
-    for(int j = 0; j < n; j++)
-        if(mtx[i][j] && (((msk >> j) & 1) == 0)) {
-            take = false;
-            break;
-        }
-    if(take) res++;
+    
+    
+    return ans;
 }
+
 ```
 
-- We iterate over each row and each column. If a column is selected (its corresponding bit in `msk` is `1`), we check if the value in the row for that column is `1`. If any selected column has a `0` in the current row, we set `take` to `false` and stop checking that row.
+The function `maximumRows` calculates the maximum number of rows from a matrix `mtx` that can be selected, with a given number of selected columns `sel`, where each selected row must satisfy specific conditions based on the selected columns.
 
-#### Step 4: Update the Maximum Covered Rows
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int maximumRows(vector<vector<int>>& mtx, int sel) {
+	```
+	The function `maximumRows` is declared, which takes a reference to a 2D vector `mtx` and an integer `sel` as input. It is designed to find the maximum number of rows that can be selected with specific conditions.
 
-After checking all the rows for the current bitmask, we update the `ans` with the maximum value between the current `ans` and `res`.
+2. **Matrix Size Calculation**
+	```cpp
+	    int m = mtx.size(), n = mtx[0].size();
+	```
+	The number of rows `m` and the number of columns `n` of the matrix `mtx` are calculated.
 
-```cpp
-ans = max(ans, res);
-```
+3. **Initialization**
+	```cpp
+	    int ans = 0;
+	```
+	The variable `ans` is initialized to 0, which will hold the final result—the maximum number of rows that can be selected.
 
-#### Step 5: Return the Final Result
+4. **Bit Masking Loop**
+	```cpp
+	    for(int msk = 0; msk < (1 << n); msk++) {
+	```
+	A loop iterates over all possible bitmasks for selecting columns from the matrix, where `msk` is a bitmask representing a selection of columns.
 
-Once we have iterated through all possible column selections and counted the maximum number of rows covered, we return the result.
+5. **Bitmask Column Selection**
+	```cpp
+	        if(__builtin_popcount(msk) != sel) continue;
+	```
+	The condition checks if the number of selected columns in the current bitmask (`__builtin_popcount(msk)`) is equal to `sel`. If not, it continues to the next bitmask.
 
-```cpp
-return ans;
-```
+6. **Result Initialization**
+	```cpp
+	        int res = 0;
+	```
+	The variable `res` is initialized to 0. This will count how many rows can be selected for the current bitmask.
 
-### Complexity
+7. **Row Loop**
+	```cpp
+	        for(int i = 0; i < m; i++) {
+	```
+	A loop iterates through each row of the matrix `mtx`.
 
-#### Time Complexity
-- The number of possible column selections is `2^n` where `n` is the number of columns in the matrix.
-- For each bitmask, we check all `m` rows and `n` columns.
-- Thus, the overall time complexity is **O(m * n * 2^n)**.
+8. **Row Selection Check**
+	```cpp
+	            bool take = true;
+	```
+	A boolean variable `take` is initialized to `true`, which will track whether the current row can be selected based on the current bitmask.
 
-#### Space Complexity
-- The space complexity is **O(1)** because we only use a few variables for tracking the result and do not use additional data structures that depend on the size of the input.
+9. **Column Loop**
+	```cpp
+	            for(int j = 0; j < n; j++)
+	```
+	A nested loop iterates through each column of the current row.
 
-### Conclusion
+10. **Column Validation**
+	```cpp
+	                if(mtx[i][j] && (((msk >> j) & 1) == 0)) {
+	```
+	This condition checks if a cell in the matrix `mtx[i][j]` is non-zero (indicating that it is part of the selection) and if the corresponding column is not selected in the bitmask.
 
-This solution efficiently solves the problem using bitmasking to represent all possible column selections and checks how many rows are covered by each selection. By iterating over all possible selections of columns, we maximize the number of rows that are covered. The approach ensures that all possibilities are checked, and the use of bitmasking reduces the complexity of column selection. Although the time complexity is exponential, this method is optimal for the problem at hand and can handle relatively smaller values of `n`.
+11. **Row Dismissal**
+	```cpp
+	                    take = false;
+	```
+	If the condition above is true, the row `i` is dismissed by setting `take` to `false`, meaning this row cannot be selected with the current bitmask.
+
+12. **Exit Column Loop**
+	```cpp
+	                    break;
+	```
+	If a column is not selected in the bitmask while it should be, the inner loop breaks, and the row is dismissed.
+
+13. **Row Count Update**
+	```cpp
+	            if(take) res++;
+	```
+	If the row can be selected (`take` is `true`), the `res` counter is incremented.
+
+14. **Result Update**
+	```cpp
+	        ans = max(ans, res);
+	```
+	The result `ans` is updated to hold the maximum value between its current value and the value of `res` for the current bitmask.
+
+15. **Return Result**
+	```cpp
+	    return ans;
+	```
+	The function returns the value of `ans`, which is the maximum number of rows that can be selected based on the given conditions.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n), where m is the number of rows and n is the number of columns.
+- **Average Case:** O(m * n * C(n, numSelect))
+- **Worst Case:** O(m * n * C(n, numSelect))
+
+The worst-case time complexity is dependent on the number of column combinations, which is O(C(n, numSelect)), where C is the combination function.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if using constant space for calculations.
+- **Worst Case:** O(n), where n is the number of columns, to store combinations of columns.
+
+Space complexity is mainly dependent on the space used for storing combinations and the matrix itself.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-rows-covered-by-columns/description/)
 

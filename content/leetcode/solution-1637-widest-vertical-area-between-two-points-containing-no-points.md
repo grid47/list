@@ -14,100 +14,128 @@ img_src = ""
 youtube = "6XnvNCTyJP4"
 youtube_upload_date="2023-12-21"
 youtube_thumbnail="https://i.ytimg.com/vi/6XnvNCTyJP4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given n points on a 2D plane, where points[i] = [xi, yi], return the widest vertical area between two points such that no points are inside the area. A vertical area is defined as a fixed-width region that extends infinitely along the y-axis. The widest vertical area is the one with the maximum width. Note that points on the edge of the vertical area are not considered inside.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of n points on a 2D plane, each represented as a pair of integers, [xi, yi], where xi and yi are the coordinates of the points.
+- **Example:** `points = [[1, 4], [3, 1], [9, 0], [4, 6], [7, 2]]`
+- **Constraints:**
+	- 2 <= n <= 10^5
+	- 0 <= xi, yi <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maxWidthOfVerticalArea(vector<vector<int>>& pts) {
-        sort(pts.begin(), pts.end());
-        int res =0;
-        for(int i = 1; i < pts.size(); i++)
-            res = max(res, pts[i][0] - pts[i - 1][0]);
-        
-        return res;
-    }
-};
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is the width of the widest vertical area between two points such that no points lie within the area.
+- **Example:** `Output: 5`
+- **Constraints:**
+	- The width will be a non-negative integer.
 
-{{< /highlight >}}
----
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the widest vertical area between two points where no points are inside the area.
 
-### Problem Statement
+- Sort the points based on their x-coordinates.
+- Compute the horizontal distance between consecutive points in the sorted list.
+- Return the maximum distance between consecutive points as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- There will always be at least two points in the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `points = [[12, 5], [8, 7], [15, 10], [9, 6]]`  \
+  **Explanation:** The points are first sorted by their x-coordinate: [[8, 7], [9, 6], [12, 5], [15, 10]]. The distances between consecutive points are 1, 3, and 3, so the maximum width of the vertical area is 7.
 
-The task is to find the maximum width of vertical areas formed by a set of points in a 2D plane. Each point is represented by its coordinates \((x, y)\). The width of a vertical area is defined as the horizontal distance between two consecutive points when sorted by their x-coordinates. The goal is to identify the maximum distance between any two adjacent points along the x-axis.
+{{< dots >}}
+## Approach 🚀
+We will approach this problem by sorting the points based on their x-coordinates and then calculating the horizontal distances between consecutive points. The maximum distance will be the answer.
 
-### Approach
-
-To solve the problem, we can use the following approach:
-
-1. **Sorting the Points**: First, we sort the points based on their x-coordinates. This will allow us to easily compute the distances between consecutive points.
-2. **Calculating Distances**: After sorting, we iterate through the sorted list and calculate the difference between the x-coordinates of each consecutive pair of points.
-3. **Finding the Maximum Width**: As we calculate these distances, we keep track of the maximum width encountered.
-
-This algorithm relies on the properties of sorting to efficiently find the maximum width of vertical areas without needing to check every possible pair of points.
-
-### Code Breakdown (Step by Step)
-
-Here is a detailed explanation of the provided code:
-
+### Initial Thoughts 💭
+- Sorting the points by their x-coordinate will allow us to easily compute the distances between adjacent points.
+- Sorting the points first is the key step, as it ensures we are considering the widest possible vertical area between points.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that there will always be at least two points, so there is no need to handle empty inputs.
+- For large inputs, the solution should still be efficient with time complexity O(n log n) due to the sorting step.
+- The points may have large coordinates up to 10^9, but the solution will handle this without issue as long as the points are sorted first.
+- The solution needs to handle arrays with up to 100,000 points efficiently.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int maxWidthOfVerticalArea(vector<vector<int>>& pts) {
-```
-- This line defines the `Solution` class and the method `maxWidthOfVerticalArea`, which takes a vector of points as input. Each point is represented as a vector of integers containing its x and y coordinates.
-
-```cpp
-        sort(pts.begin(), pts.end());
-```
-- The first step in the method is to sort the `pts` vector. The default sorting behavior for a vector of vectors will sort primarily by the first element (the x-coordinate). If two points have the same x-coordinate, they will be sorted by their y-coordinates as a secondary criterion. However, since we are only interested in the x-coordinates for this problem, this is sufficient.
-
-```cpp
-        int res = 0;
-```
-- We initialize a variable `res` to keep track of the maximum width found. It starts at 0 because, initially, we haven't calculated any distances.
-
-```cpp
-        for(int i = 1; i < pts.size(); i++)
-```
-- This line begins a loop that iterates through the sorted points, starting from the second point (index 1) and going to the last point.
-
-```cpp
-            res = max(res, pts[i][0] - pts[i - 1][0]);
-```
-- Inside the loop, we compute the width of the vertical area between the current point `pts[i]` and the previous point `pts[i - 1]`. The width is calculated by taking the difference of their x-coordinates (`pts[i][0] - pts[i - 1][0]`). 
-- We then update `res` to be the maximum of its current value and the newly computed width. This ensures that by the end of the loop, `res` will hold the maximum width encountered.
-
-```cpp
-        return res;
-    }
+int maxWidthOfVerticalArea(vector<vector<int>>& pts) {
+    sort(pts.begin(), pts.end());
+    int res =0;
+    for(int i = 1; i < pts.size(); i++)
+        res = max(res, pts[i][0] - pts[i - 1][0]);
+    
+    return res;
+}
 };
 ```
-- After the loop completes, the method returns the maximum width found, which is stored in `res`.
 
-### Complexity
+This function calculates the maximum width of vertical areas between consecutive points in a sorted 2D grid, focusing on the x-coordinate values.
 
-- **Time Complexity**:
-    - The sorting step takes \(O(n \log n)\), where \(n\) is the number of points. The loop to calculate the maximum width runs in \(O(n)\). Therefore, the overall time complexity of the algorithm is \(O(n \log n)\) due to the sorting step.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Method Definition**
+	```cpp
+	int maxWidthOfVerticalArea(vector<vector<int>>& pts) {
+	```
+	Define the method 'maxWidthOfVerticalArea' that takes a 2D vector of points 'pts' as input.
 
-- **Space Complexity**:
-    - The space complexity is \(O(1)\) beyond the input size since we are only using a fixed amount of additional space for variables (`res` and loop counters).
+2. **Sorting**
+	```cpp
+	    sort(pts.begin(), pts.end());
+	```
+	Sort the points based on their x-coordinates to prepare for calculating the maximum vertical width.
 
-### Conclusion
+3. **Variable Initialization**
+	```cpp
+	    int res =0;
+	```
+	Initialize the variable 'res' to store the maximum vertical width found during the iteration.
 
-The `maxWidthOfVerticalArea` function effectively computes the maximum width of vertical areas formed by a set of points in a 2D plane using a simple and efficient algorithm based on sorting. 
+4. **Loop Constructs**
+	```cpp
+	    for(int i = 1; i < pts.size(); i++)
+	```
+	Start a loop that iterates over the points from the second element to the last.
 
-**Key Takeaways**:
-1. **Sorting for Efficiency**: Sorting the points simplifies the problem by allowing us to focus only on adjacent points, significantly reducing the complexity of the solution.
-2. **Linear Scanning**: Once sorted, a single pass through the points is sufficient to find the maximum width, demonstrating the power of combining sorting with linear traversal.
-3. **Practical Application**: This type of problem can be applied in various scenarios, such as finding gaps between buildings or measuring distances in geographical data.
+5. **Mathematical Operations**
+	```cpp
+	        res = max(res, pts[i][0] - pts[i - 1][0]);
+	```
+	For each pair of consecutive points, calculate the width (difference between the x-coordinates) and update 'res' if a larger width is found.
 
-Overall, this solution is a clean and efficient approach to solving the problem of finding the maximum width of vertical areas, leveraging sorting and a simple loop to achieve the desired result.
+6. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the maximum width found during the loop.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is O(n log n) due to the sorting step.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the sorted list of points.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points/description/)
 

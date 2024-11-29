@@ -14,98 +14,157 @@ img_src = ""
 youtube = "2sWoLnBzuKw"
 youtube_upload_date="2022-11-12"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/2sWoLnBzuKw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of even length containing integers. In each step, repeatedly remove the smallest and the largest numbers from the array, calculate their average, and continue until the array is empty. The goal is to find how many distinct averages were calculated during this process.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a list of integers called 'nums', where the length of 'nums' is always even.
+- **Example:** `nums = [3, 8, 1, 6, 5, 7]`
+- **Constraints:**
+	- 2 <= nums.length <= 100
+	- nums.length is even.
+	- 0 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int distinctAverages(vector<int>& nums) {
-        map<long, int> mp;
-        sort(nums.begin(), nums.end());
-        int i = 0, j = nums.size() - 1;
-        while(i < j){
-            int a = nums[j--];
-            int b = nums[i++];
-            long c = a + b;
-            mp[c] = 1;
-        }
-        return mp.size();
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of distinct averages calculated as per the process described.
+- **Example:** `For nums = [3, 8, 1, 6, 5, 7], the output is 3.`
+- **Constraints:**
+	- The result should be an integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the number of distinct averages by following the rule of removing the smallest and largest elements, calculating their average, and repeating until the list is empty.
+
+- Sort the array to easily access the minimum and maximum values.
+- Remove the smallest and largest values from the array, calculate their average, and store the average in a set to ensure uniqueness.
+- Repeat the process until the array is empty.
+- Return the size of the set containing distinct averages.
+{{< dots >}}
+### Problem Assumptions ✅
+- The length of the array is always even, so there will always be an even number of elements to pair up.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [3, 8, 1, 6, 5, 7]`  \
+  **Explanation:** In the first step, we remove 1 (min) and 8 (max), calculating their average 4.5. In the second step, we remove 3 (min) and 7 (max), calculating 5. Then, we remove 5 (min) and 6 (max), calculating 5.5. There are 3 distinct averages: 4.5, 5, and 5.5.
+
+{{< dots >}}
+## Approach 🚀
+Sort the array and repeatedly remove the smallest and largest elements to compute the averages. Use a set to store the averages and return the size of the set.
+
+### Initial Thoughts 💭
+- Sorting the array simplifies accessing the minimum and maximum values.
+- Using a set is crucial for ensuring uniqueness of averages.
+{{< dots >}}
+### Edge Cases 🌐
+- The array will always have an even length and at least two elements.
+- Ensure the solution can handle arrays of length up to 100.
+- When all elements in the array are the same, all averages will be the same.
+- The array will always have an even length.
+{{< dots >}}
+## Code 💻
+```cpp
+int distinctAverages(vector<int>& nums) {
+    map<long, int> mp;
+    sort(nums.begin(), nums.end());
+    int i = 0, j = nums.size() - 1;
+    while(i < j){
+        int a = nums[j--];
+        int b = nums[i++];
+        long c = a + b;
+        mp[c] = 1;
     }
-};
-{{< /highlight >}}
----
+    return mp.size();
+}
+```
 
-### Problem Statement:
+This function calculates the number of distinct averages of pairs formed by summing the largest and smallest numbers in a sorted array. It uses a map to track unique sums and returns the map size as the result.
 
-The problem asks us to calculate the number of distinct averages that can be formed from pairs of elements in the array `nums`. The number of distinct averages is determined by pairing the largest element with the smallest, the second largest with the second smallest, and so on, and then calculating the sum of each pair. The result should be the number of distinct values obtained by these sums.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int distinctAverages(vector<int>& nums) {
+	```
+	Defines a function to calculate distinct averages from the input vector `nums`.
 
-Given an array `nums` of `n` integers, the task is to find the number of distinct sums that can be made by pairing one element from the left side of the sorted array with one element from the right side.
+2. **Map Initialization**
+	```cpp
+	    map<long, int> mp;
+	```
+	Initializes a map to store unique sums of pairs.
 
-### Approach:
+3. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the input array in ascending order to easily pair smallest and largest numbers.
 
-To solve the problem, we need to perform the following steps:
+4. **Variable Initialization**
+	```cpp
+	    int i = 0, j = nums.size() - 1;
+	```
+	Initializes two pointers `i` and `j` to point to the smallest and largest elements in the array.
 
-1. **Sort the Array**: Start by sorting the array `nums`. Sorting is important because it allows us to pair the smallest element with the largest, the second smallest with the second largest, and so on.
+5. **Loop**
+	```cpp
+	    while(i < j){
+	```
+	Begins a loop to pair the smallest and largest elements until the pointers meet.
 
-2. **Pairing Elements**: After sorting the array, pair the first element with the last element, the second element with the second last element, and so on. Each pair will produce a sum.
+6. **Element Access**
+	```cpp
+	        int a = nums[j--];
+	```
+	Retrieves the largest element and decrements the pointer `j`.
 
-3. **Store Distinct Sums**: Use a data structure that allows storing distinct sums, such as a `map` (or `unordered_set` in some cases). We will store the sums of each pair of elements.
+7. **Element Access**
+	```cpp
+	        int b = nums[i++];
+	```
+	Retrieves the smallest element and increments the pointer `i`.
 
-4. **Return the Count of Distinct Sums**: The size of the data structure will represent the number of distinct averages or sums that have been computed.
+8. **Sum Calculation**
+	```cpp
+	        long c = a + b;
+	```
+	Calculates the sum of the smallest and largest elements.
 
-### Code Breakdown (Step by Step):
+9. **Map Insertion**
+	```cpp
+	        mp[c] = 1;
+	```
+	Stores the sum in the map, ensuring uniqueness.
 
-1. **Initial Setup**:
-   ```cpp
-   map<long, int> mp;
-   sort(nums.begin(), nums.end());
-   int i = 0, j = nums.size() - 1;
-   ```
-   - **map<long, int> mp**: A map (or hash table) is used to store the sums of pairs. The key is the sum of the pair, and the value is set to `1` (though the value is not used here, it's a standard way to represent stored keys).
-   - **sort(nums.begin(), nums.end())**: The array is sorted to facilitate pairing the smallest and largest elements.
-   - **int i = 0, j = nums.size() - 1**: Two pointers, `i` and `j`, are initialized to point to the beginning and the end of the sorted array, respectively.
+10. **Result**
+	```cpp
+	    return mp.size();
+	```
+	Returns the number of unique sums stored in the map.
 
-2. **Pairing the Elements**:
-   ```cpp
-   while(i < j){
-       int a = nums[j--];
-       int b = nums[i++];
-       long c = a + b;
-       mp[c] = 1;
-   }
-   ```
-   - **while(i < j)**: The loop continues as long as the two pointers `i` and `j` do not meet.
-   - **int a = nums[j--]**: `a` is set to the element at the end of the array (`nums[j]`), and `j` is decremented.
-   - **int b = nums[i++]**: `b` is set to the element at the beginning of the array (`nums[i]`), and `i` is incremented.
-   - **long c = a + b**: The sum of the pair `(a, b)` is computed and stored in `c`.
-   - **mp[c] = 1**: The sum `c` is inserted into the map `mp`. If the sum `c` already exists, the map does not store it again, ensuring that only distinct sums are stored.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-3. **Return the Count of Distinct Averages**:
-   ```cpp
-   return mp.size();
-   ```
-   - After all pairs are processed, the number of distinct sums (or averages) is simply the size of the map `mp`. This is returned as the final result.
+Sorting the array takes O(n log n) time, and the subsequent process of removing elements and calculating averages is O(n).
 
-### Complexity:
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
 
-1. **Time Complexity**:
-   - Sorting the array `nums` takes \(O(n \log n)\), where `n` is the size of the array.
-   - Iterating through the array with two pointers takes \(O(n)\) because we are processing each element once.
-   - Inserting the sums into the map takes \(O(\log k)\) for each insertion, where `k` is the number of distinct sums. In the worst case, this is \(O(n \log n)\) because in the worst case, all pairs may have distinct sums.
-   - Therefore, the overall time complexity is dominated by the sorting step, which is \(O(n \log n)\).
+The space complexity is O(n) due to the storage required for the set of averages.
 
-2. **Space Complexity**:
-   - We are using a map to store the distinct sums. In the worst case, all sums might be distinct, requiring \(O(n)\) space to store the sums.
-   - Therefore, the space complexity is \(O(n)\).
+**Happy Coding! 🎉**
 
-### Conclusion:
-
-The solution efficiently calculates the number of distinct sums that can be formed by pairing the smallest and largest elements, the second smallest and second largest, and so on. The sorting of the array ensures that we can pair the elements in the required manner, and the use of a map ensures that we only count distinct sums. With a time complexity of \(O(n \log n)\) and a space complexity of \(O(n)\), this approach is optimal for handling large input sizes.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-distinct-averages/description/)
 

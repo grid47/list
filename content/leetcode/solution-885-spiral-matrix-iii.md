@@ -14,104 +14,162 @@ img_src = ""
 youtube = "0qep3f9cqVs"
 youtube_upload_date="2019-12-27"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/0qep3f9cqVs/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a grid of size rows x cols, where each cell represents a coordinate. You start at a given coordinate (rStart, cStart), facing east, and your goal is to walk in a clockwise spiral through the grid. As you walk, you must visit each cell exactly once. Once you reach the boundary of the grid, continue walking outside the grid, but you may return to the grid later. Return a list of the coordinates you visit in the order you encounter them.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the dimensions of the grid (rows, cols) and your starting position (rStart, cStart).
+- **Example:** `Input: rows = 3, cols = 3, rStart = 1, cStart = 1`
+- **Constraints:**
+	- 1 <= rows, cols <= 100
+	- 0 <= rStart < rows
+	- 0 <= cStart < cols
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
-        vector<vector<int>> res = {{rStart, cStart}};
-        int dx = 0, dy = 1, tmp;
-        for(int n = 0; res.size() < rows* cols; n++) {
-            for(int i = 0; i < n / 2 + 1; i++) {
-                rStart += dx, cStart += dy;
-                if(rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
-                    res.push_back({rStart, cStart});
-                
-            }
-            tmp = dx, dx = dy, dy = -tmp;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** You should return a list of coordinates, where each coordinate is represented as an array [r, c], in the order they were visited.
+- **Example:** `Output: [[1,1],[1,2],[0,2],[0,1],[0,0],[1,0],[2,0],[2,1],[2,2]]`
+- **Constraints:**
+	- The output should contain all coordinates visited in the spiral traversal.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to simulate the spiral traversal, carefully switching directions and ensuring no cell is skipped.
+
+- Start from the given position and begin moving east.
+- Continue spiraling in clockwise direction, changing direction after hitting a boundary or previously visited cell.
+- Use a list to keep track of the coordinates you visit.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid has at least one cell.
+- You can go outside the grid and return later when needed.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: rows = 3, cols = 3, rStart = 1, cStart = 1`  \
+  **Explanation:** The grid is 3x3 with the start position at (1,1). The spiral traversal starts at (1,1), moves east to (1,2), then north to (0,2), then west to (0,1), then south to (1,0), and continues until all cells are visited. The output is the list of coordinates visited in this order.
+
+- **Input:** `Input: rows = 2, cols = 2, rStart = 0, cStart = 0`  \
+  **Explanation:** The grid is 2x2 with the start position at (0,0). The spiral traversal visits (0,0), moves east to (0,1), then south to (1,1), and finally west to (1,0).
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by simulating the spiral movement using direction changes. The directions follow a clockwise pattern: east -> south -> west -> north. After each move, check if the new position is within the grid's bounds. If it is, add the position to the result. If not, change direction.
+
+### Initial Thoughts 💭
+- The movement follows a strict clockwise pattern and will continue until all cells are visited.
+- The algorithm should efficiently track the positions visited while respecting the boundaries and changing directions accordingly.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem constraints guarantee that there will always be at least one row and one column.
+- The algorithm must handle grids as large as 100x100 efficiently.
+- The starting point could be in any cell within the grid.
+- The grid size and position constraints are relatively small, so a direct simulation approach will work efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<vector<int>> spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
+    vector<vector<int>> res = {{rStart, cStart}};
+    int dx = 0, dy = 1, tmp;
+    for(int n = 0; res.size() < rows* cols; n++) {
+        for(int i = 0; i < n / 2 + 1; i++) {
+            rStart += dx, cStart += dy;
+            if(rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
+                res.push_back({rStart, cStart});
+            
         }
-        return res;
+        tmp = dx, dx = dy, dy = -tmp;
     }
-};
-{{< /highlight >}}
----
+    return res;
+}
+```
 
-### Problem Statement
+This function generates a spiral matrix starting from a specific point in the grid. It iteratively moves in a spiral pattern while ensuring that all positions are within the bounds of the grid and adds them to the result.
 
-The problem requires generating a list of coordinates representing a spiral path starting from a given point `(rStart, cStart)` in a matrix of size `rows x cols`. The spiral traversal should visit each cell in the matrix exactly once, and the movement should continue until all cells are covered. The challenge is to implement the traversal in such a way that the program can efficiently and correctly handle the specified conditions. The solution should keep track of all visited coordinates and return them in the order they are visited.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<vector<int>> spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
+	```
+	This line defines the function `spiralMatrixIII` which takes the grid dimensions (`rows`, `cols`) and the starting position (`rStart`, `cStart`) as parameters.
 
-### Approach
+2. **Initialization**
+	```cpp
+	    vector<vector<int>> res = {{rStart, cStart}};
+	```
+	A result vector `res` is initialized with the starting position (`rStart`, `cStart`). This will store the coordinates as the spiral is generated.
 
-The solution to this problem can be broken down into the following steps:
+3. **Variable Setup**
+	```cpp
+	    int dx = 0, dy = 1, tmp;
+	```
+	Two variables `dx` and `dy` are initialized to control the movement direction in the grid. `dx` controls row movement (initially 0), and `dy` controls column movement (initially 1). `tmp` is used for swapping direction.
 
-1. **Initialization**: Start by defining the direction of movement (right, down, left, up) and initializing a result array that will store all visited coordinates.
+4. **Loop Setup**
+	```cpp
+	    for(int n = 0; res.size() < rows* cols; n++) {
+	```
+	The loop continues until all positions in the grid are covered, and `res.size()` is less than the total number of cells (`rows * cols`).
 
-2. **Spiral Traversal**: The key idea is to iterate over the matrix in a spiral pattern, adjusting the direction of movement after each complete loop around the matrix. We achieve this by using a series of directional changes:
-   - Initially, we start by moving right, then down, left, and up in a repeating pattern.
-   - Each time the movement completes a full side of the spiral, the direction is updated by rotating the direction vector (dx, dy).
-   - The traversal continues until all cells in the matrix are visited.
+5. **Inner Loop Setup**
+	```cpp
+	        for(int i = 0; i < n / 2 + 1; i++) {
+	```
+	The inner loop iterates through each direction step (n / 2 + 1 times). This determines how far to move in the current direction.
 
-3. **Boundary Checking**: As we traverse the matrix, we need to ensure that we stay within the matrix boundaries. If the next step goes out of bounds, we skip that movement and continue in the current direction. 
+6. **Position Update**
+	```cpp
+	            rStart += dx, cStart += dy;
+	```
+	The current position (`rStart`, `cStart`) is updated by adding `dx` to `rStart` and `dy` to `cStart` to move in the current direction.
 
-4. **Stopping Condition**: The process continues until all cells in the matrix are visited. This is ensured by checking that the size of the result array is equal to `rows * cols`.
+7. **Boundary Check**
+	```cpp
+	            if(rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
+	```
+	The function checks if the new position is within the bounds of the grid. If valid, it proceeds to add the new position to the result.
 
-5. **Result**: Once all the coordinates are visited, the result array is returned, which contains the list of coordinates in the order they were traversed.
+8. **Position Add to Result**
+	```cpp
+	                res.push_back({rStart, cStart});
+	```
+	If the new position is valid, it is added to the result vector `res`.
 
-This approach leverages the simplicity of direction vectors to manage the traversal efficiently, ensuring a smooth spiral motion around the matrix.
+9. **Direction Update**
+	```cpp
+	        tmp = dx, dx = dy, dy = -tmp;
+	```
+	This line swaps the direction of movement by rotating `dx` and `dy`. This ensures the spiral continues in the correct order (right, down, left, up).
 
-### Code Breakdown (Step by Step)
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	The function returns the `res` vector containing all coordinates in the spiral order.
 
-1. **Function Signature and Initial Setup**:
-   ```cpp
-   vector<vector<int>> spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
-       vector<vector<int>> res = {{rStart, cStart}};
-       int dx = 0, dy = 1, tmp;
-   ```
-   The function `spiralMatrixIII` takes the number of rows and columns, along with the starting position `(rStart, cStart)`. We initialize a result vector `res` to store the coordinates starting with the given starting position. The variables `dx` and `dy` represent the direction of movement in the x (row) and y (column) axes, respectively. Initially, the direction is set to move right (dx = 0, dy = 1).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m)
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
 
-2. **Outer Loop for Spiral Expansion**:
-   ```cpp
-   for(int n = 0; res.size() < rows * cols; n++) {
-   ```
-   The outer loop runs until all cells in the matrix are visited, i.e., until the size of the result vector equals `rows * cols`. The variable `n` is used to control the number of steps taken in each direction, increasing as the spiral expands.
+In the worst case, the algorithm needs to visit all cells in the grid, which takes O(n * m) time where n is the number of rows and m is the number of columns.
 
-3. **Inner Loop for Directional Movement**:
-   ```cpp
-   for(int i = 0; i < n / 2 + 1; i++) {
-       rStart += dx, cStart += dy;
-       if(rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
-           res.push_back({rStart, cStart});
-   }
-   ```
-   The inner loop iterates `n / 2 + 1` times, which corresponds to the number of steps to take in the current direction. We update the `rStart` and `cStart` coordinates by adding the directional values `dx` and `dy`. After updating the coordinates, we check if the new position is within the matrix bounds. If it is, we add the position to the result array `res`.
+### Space Complexity 💾
+- **Best Case:** O(n * m)
+- **Worst Case:** O(n * m)
 
-4. **Updating Direction**:
-   ```cpp
-   tmp = dx, dx = dy, dy = -tmp;
-   ```
-   After completing the steps in one direction, we update the direction by rotating the direction vector `(dx, dy)`. The vector `(dx, dy)` is rotated in the order right → down → left → up, ensuring that the traversal continues spirally.
+The space complexity is O(n * m) because we need to store all the visited coordinates.
 
-5. **Returning the Result**:
-   ```cpp
-   return res;
-   ```
-   Once all cells are visited, the result vector `res` is returned, containing the list of coordinates in the order they were visited.
+**Happy Coding! 🎉**
 
-### Complexity
-
-The time complexity of this algorithm is **O(rows * cols)**. The reason for this is that every cell in the matrix is visited exactly once, and each visit involves only a constant amount of work (i.e., checking bounds and adding a coordinate to the result list). Therefore, the total time spent is proportional to the number of cells in the matrix.
-
-The space complexity is also **O(rows * cols)** because we store the coordinates of all the cells in the result array `res`.
-
-### Conclusion
-
-In conclusion, this solution efficiently computes the spiral traversal of a matrix starting from a given position, ensuring all cells are visited once. The use of direction vectors and boundary checks makes the algorithm both simple and effective. The approach guarantees that the traversal continues until all cells in the matrix are covered, and the solution efficiently handles matrices of varying sizes. The time and space complexity of O(rows * cols) make it suitable for large matrices, while the implementation remains straightforward and easy to understand.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix-iii/description/)
 

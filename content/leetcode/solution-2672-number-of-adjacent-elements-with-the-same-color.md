@@ -14,136 +14,168 @@ img_src = ""
 youtube = "w3L3-aRiNXE"
 youtube_upload_date="2023-05-07"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/w3L3-aRiNXE/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer `n`, representing an array of `n` elements where all elements are initially set to 0 (uncolored). You are also given a 2D integer array `queries`, where each query specifies an index and a color. For each query, set the element at the specified index to the given color and then count the number of adjacent pairs of elements in the array that have the same color. Return an array `answer` where each element corresponds to the number of adjacent pairs with the same color after applying the corresponding query.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer `n` representing the size of the array and a 2D array `queries` where each query is a pair of integers: the index of the element to color and the color to set.
+- **Example:** `Input: n = 5, queries = [[0,3],[1,2],[2,2],[3,1],[4,3]]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= queries.length <= 10^5
+	- queries[i].length == 2
+	- 0 <= index_i <= n - 1
+	- 1 <= color_i <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> colorTheArray(int n, vector<vector<int>>& queries) {
-    int c[100003] = {}, adj = 0;
-    vector<int> res;
-    for (const auto &q : queries) {
-        int i = q[0] + 1, color_i = q[1];
-        if (c[i])
-            adj -= (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
-        c[i] = color_i;
-        adj += (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
-        res.push_back(adj);
-    }
-    return res;
-}
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an array `answer` of the same length as `queries`, where `answer[i]` is the number of adjacent pairs with the same color after applying the `i`-th query.
+- **Example:** `Output: [0,1,2,2,3]`
+- **Constraints:**
+	- Each element in the `answer` array represents the number of adjacent pairs with the same color after each query.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To efficiently count the number of adjacent pairs with the same color after applying each query.
 
-The problem asks to color an array where each element represents a position in the array, and we are given multiple queries to color the elements at different positions. After each query, we need to compute and return the number of adjacent elements with the same color. The task is to perform these operations efficiently for large inputs.
+- Step 1: Initialize an array `colors` of size `n` where all elements are initially set to 0 (uncolored).
+- Step 2: Initialize a variable `adj` to keep track of the current number of adjacent pairs with the same color.
+- Step 3: For each query, update the color of the specified index and adjust the `adj` count based on the adjacent elements' colors.
+- Step 4: After each query, store the current count of adjacent pairs with the same color in the result array `answer`.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array `colors` is initially uncolored (all elements set to 0).
+- Each query updates the color of exactly one element in the array.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 5, queries = [[0,3],[1,2],[2,2],[3,1],[4,3]]`  \
+  **Explanation:** After the first query, the array becomes [3,0,0,0,0], with 0 adjacent pairs having the same color. After the second query, the array becomes [3,2,0,0,0], and there is 1 adjacent pair with the same color. After the third query, the array becomes [3,2,2,0,0], and there are 2 adjacent pairs with the same color, and so on.
 
-### Approach
+{{< dots >}}
+## Approach 🚀
+The approach uses an array to represent the colors and a variable to keep track of the number of adjacent pairs with the same color. After each query, the colors are updated and the number of adjacent pairs is recalculated efficiently.
 
-To solve this problem, we will simulate the coloring process and compute the number of adjacent pairs of elements with the same color for each query. We can utilize an array `c` to track the color of each element and a variable `adj` to track the number of adjacent pairs with the same color at any point in time. Here’s the step-by-step approach:
-
-1. **Initialization**: 
-   - Use an array `c` of size `n + 1` to track the color of each position. This allows us to handle the 1-based indexing of the queries easily.
-   - Initialize a variable `adj` to keep track of the number of adjacent elements with the same color.
-   - Initialize an empty vector `res` to store the result after each query.
-
-2. **Processing Queries**:
-   - For each query:
-     - Get the position `i` (adjusted by +1 to fit the 1-based index).
-     - Get the new color `color_i` for position `i`.
-     - If the current color at `i` is not zero, update the adjacency count by checking whether its neighbors (`i-1` and `i+1`) have the same color. We subtract this from `adj` because the previous color no longer contributes to the adjacency count.
-     - Update the color of position `i` to `color_i`.
-     - Add to `adj` if the new color of position `i` matches the color of its neighbors (`i-1` and `i+1`).
-   - After each query, append the current value of `adj` to the result vector `res`.
-
-3. **Final Output**:
-   - After processing all queries, return the vector `res` containing the results of each query.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Variables
-
+### Initial Thoughts 💭
+- We need to maintain an efficient way of counting adjacent pairs with the same color after each query.
+- It is important to only update the counts when a query changes the color of a specific index.
+- Using an array to store colors and a variable for the count of adjacent pairs will allow us to efficiently track changes with each query.
+{{< dots >}}
+### Edge Cases 🌐
+- There will always be at least one query since queries.length >= 1.
+- The solution must handle up to 10^5 queries efficiently.
+- If an index is updated to the same color as before, the adjacent pairs count should not change.
+- Ensure the solution is efficient enough to handle the largest inputs.
+{{< dots >}}
+## Code 💻
 ```cpp
+vector<int> colorTheArray(int n, vector<vector<int>>& queries) {
 int c[100003] = {}, adj = 0;
 vector<int> res;
-```
-
-- **Line 1**: We define an array `c` of size `100003` to track the colors of elements in the array. The array is initialized to zero, representing that initially, no element is colored.
-- **Line 2**: We define the variable `adj`, initialized to `0`, to track the number of adjacent elements that have the same color.
-- **Line 3**: We define a vector `res` to store the result after processing each query.
-
-#### Step 2: Process Each Query
-
-```cpp
 for (const auto &q : queries) {
     int i = q[0] + 1, color_i = q[1];
-```
-
-- **Line 4**: We iterate over each query `q` in the `queries` array. Each query is a pair, where the first element is the index `i` (0-based in `queries` but will be adjusted to 1-based), and the second element is the color `color_i` for that index.
-- **Line 5**: Adjust the index `i` by adding `1` to make it 1-based (to fit the problem description).
-
-#### Step 3: Adjust Adjacency Count Before Updating the Color
-
-```cpp
-if (c[i])
-    adj -= (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
-```
-
-- **Line 6**: If the position `i` is already colored (i.e., `c[i]` is non-zero), we decrement the adjacency count `adj`. This is because the current color at position `i` will no longer contribute to the adjacency count.
-- **Line 7**: We check the two adjacent elements of `i` (i.e., `i-1` and `i+1`):
-  - `(c[i - 1] == c[i])`: Checks if the element to the left has the same color.
-  - `(c[i + 1] == c[i])`: Checks if the element to the right has the same color.
-  - We subtract the result of these conditions from `adj` to remove the previous adjacency count.
-
-#### Step 4: Update the Color and Adjacency Count
-
-```cpp
-c[i] = color_i;
-adj += (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
-```
-
-- **Line 8**: We update the color of position `i` in the array `c` to `color_i`.
-- **Line 9**: We then check the new adjacencies after coloring `i`:
-  - `(c[i - 1] == c[i])`: Checks if the element to the left now has the same color.
-  - `(c[i + 1] == c[i])`: Checks if the element to the right now has the same color.
-  - We add the result of these conditions to `adj`, which increases the adjacency count.
-
-#### Step 5: Store the Result for the Query
-
-```cpp
-res.push_back(adj);
-```
-
-- **Line 10**: After processing the current query, we append the current value of `adj` (the number of adjacent pairs with the same color) to the result vector `res`.
-
-#### Step 6: Return the Final Result
-
-```cpp
+    if (c[i])
+        adj -= (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
+    c[i] = color_i;
+    adj += (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
+    res.push_back(adj);
+}
 return res;
+}
 ```
 
-- **Line 11**: Once all the queries are processed, we return the `res` vector containing the results of each query.
+The function 'colorTheArray' processes a series of coloring queries on an array and tracks the number of adjacent elements with the same color after each query.
 
-### Complexity
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> colorTheArray(int n, vector<vector<int>>& queries) {
+	```
+	The function 'colorTheArray' accepts an integer 'n' (the size of the array) and a list of queries to update the colors of the array.
 
-#### Time Complexity:
-- For each query, we perform constant-time operations to update the adjacency count and color array. Thus, processing each query takes **O(1)** time.
-- Since we process `q` queries, the total time complexity is **O(q)**, where `q` is the number of queries.
+2. **Array Initialization**
+	```cpp
+	int c[100003] = {}, adj = 0;
+	```
+	We initialize an array 'c' of size 100003 to store the color of each element, and an integer 'adj' to track the number of adjacent elements with the same color.
 
-#### Space Complexity:
-- We use an array `c` of size `100003` to track the colors of the elements, and a result vector `res` to store the results. Thus, the space complexity is **O(n)**, where `n` is the size of the input array.
-- The auxiliary space used is constant apart from the space used for input and output, making the space complexity **O(n)**.
+3. **Result Initialization**
+	```cpp
+	vector<int> res;
+	```
+	We initialize a vector 'res' to store the result of each query, which is the number of adjacent pairs with the same color.
 
-### Conclusion
+4. **Query Loop Start**
+	```cpp
+	for (const auto &q : queries) {
+	```
+	We start a loop to process each query in the 'queries' vector. Each query contains the index to update and the color to apply.
 
-This solution efficiently handles the problem of coloring the array and counting adjacent pairs with the same color after each query. By using a simple array `c` to track colors and a variable `adj` to maintain the adjacency count, the solution ensures that each query is processed in constant time, resulting in an overall time complexity of **O(q)**. This approach is efficient and scalable for large inputs, making it suitable for competitive programming and real-world applications where performance is crucial.
+5. **Query Variables**
+	```cpp
+	    int i = q[0] + 1, color_i = q[1];
+	```
+	We extract the index and color from the current query. The index is adjusted by adding 1 to match the array's 1-based indexing, and we store the color to apply.
+
+6. **Condition Check for Existing Color**
+	```cpp
+	    if (c[i])
+	```
+	We check if the current position 'i' has a previously assigned color.
+
+7. **Adjust Adjacent Pair Count Before Update**
+	```cpp
+	        adj -= (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
+	```
+	If the position already has a color, we decrement the 'adj' count based on whether the adjacent elements have the same color.
+
+8. **Update Color**
+	```cpp
+	    c[i] = color_i;
+	```
+	We assign the new color to the current position 'i' in the array.
+
+9. **Adjust Adjacent Pair Count After Update**
+	```cpp
+	    adj += (c[i - 1] == c[i]) + (c[i + 1] == c[i]);
+	```
+	After updating the color, we increment the 'adj' count if the adjacent elements now match the new color.
+
+10. **Store Result for Current Query**
+	```cpp
+	    res.push_back(adj);
+	```
+	We push the current value of 'adj' to the result vector 'res', representing the number of adjacent pairs with the same color after this query.
+
+11. **Return Result**
+	```cpp
+	return res;
+	```
+	After processing all queries, we return the result vector 'res' containing the number of adjacent pairs with the same color after each query.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) per query because we only need to check adjacent elements when updating the color.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the storage required for the `colors` array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-adjacent-elements-with-the-same-color/description/)
 

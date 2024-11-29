@@ -14,93 +14,141 @@ img_src = ""
 youtube = "7RGWUCc5IHw"
 youtube_upload_date="2023-11-26"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/7RGWUCc5IHw/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an m x n matrix 'mat' and an integer 'k'. The rows of the matrix undergo cyclic shifts: even-indexed rows shift left, and odd-indexed rows shift right. After performing these k shifts, determine if the matrix is identical to its original form.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D matrix 'mat' and an integer 'k', where 'mat[i][j]' represents the element in the ith row and jth column.
+- **Example:** `mat = [[1,2,3],[4,5,6],[7,8,9]], k = 4`
+- **Constraints:**
+	- 1 <= mat.length <= 25
+	- 1 <= mat[i].length <= 25
+	- 1 <= mat[i][j] <= 25
+	- 1 <= k <= 50
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool areSimilar(vector<vector<int>>& mat, int k) {
-        for (const auto& l : mat) {
-            int n = l.size();
-            for (int i = 0; i < n; ++i) {
-                if (l[i] != l[(i + k) % n]) {
-                    return false;
-                }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return true if the matrix is identical to its original after k shifts, otherwise return false.
+- **Example:** `For mat = [[1,2,3],[4,5,6],[7,8,9]] and k = 4, the output is false.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to determine whether, after k cyclic shifts on the matrix, the matrix will match its original configuration.
+
+- For each row in the matrix, determine whether performing cyclic shifts k times results in the same row.
+- For even-indexed rows, perform a left cyclic shift; for odd-indexed rows, perform a right cyclic shift.
+{{< dots >}}
+### Problem Assumptions ✅
+- Matrix rows can have different lengths but will be bounded by the constraints.
+- Cyclic shifts are defined as moving elements in a row from one end to the other, wrapping around.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `mat = [[1,2,3],[4,5,6],[7,8,9]], k = 4`  \
+  **Explanation:** After performing 4 shifts, the matrix is no longer identical to the original one, so the result is false.
+
+- **Input:** `mat = [[1,2,1,2],[5,5,5,5],[6,3,6,3]], k = 2`  \
+  **Explanation:** After performing 2 shifts, the matrix becomes identical to its original form, so the result is true.
+
+{{< dots >}}
+## Approach 🚀
+To solve the problem, we perform k cyclic shifts on the matrix and compare the result with the original matrix.
+
+### Initial Thoughts 💭
+- Cyclic shifts can be easily simulated for each row by shifting elements accordingly.
+- After applying the shifts, comparing the modified matrix with the original will give the desired result.
+- We need to ensure that the shifting operation is applied to each row correctly, alternating between left and right shifts for even and odd rows, respectively.
+{{< dots >}}
+### Edge Cases 🌐
+- The input matrix will always have at least one element, so there will be no empty matrices.
+- Even though the matrix size can be large (up to 25x25), the complexity of the problem remains manageable due to the constraints.
+- If all elements in the matrix are the same, any cyclic shifts will not alter the matrix.
+- The constraints ensure that the size of the matrix is small enough to perform the cyclic shifts efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+bool areSimilar(vector<vector<int>>& mat, int k) {
+    for (const auto& l : mat) {
+        int n = l.size();
+        for (int i = 0; i < n; ++i) {
+            if (l[i] != l[(i + k) % n]) {
+                return false;
             }
         }
-        return true;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-The task is to determine if each row in a given matrix is similar to the others based on a circular shift operation. A row is considered similar to another if it can be transformed into the other by rotating it `k` positions to the right.
-
-Given a matrix `mat` and an integer `k`, you need to check if all rows in the matrix can be made similar to each other by shifting each row by `k` positions.
-
-### Approach:
-The key observation in solving this problem is recognizing that the similarity condition relies on a circular shift of the elements in each row. When we shift a row to the right by `k` positions, the element at index `i` in the original row moves to index `(i + k) % n` in the shifted row, where `n` is the length of the row.
-
-For each row, we will check whether it is similar to itself when shifted by `k` positions. Specifically, for each element in the row, we check if it matches the element at the corresponding shifted index. If this condition holds for all elements in all rows, we return `true`. Otherwise, we return `false`.
-
-### Code Breakdown (Step by Step):
-
-#### 1. **Loop Through Each Row**:
-We start by iterating over each row in the matrix. The matrix `mat` consists of rows, and for each row, we check if it satisfies the similarity condition by shifting the elements by `k` positions.
-
-```cpp
-for (const auto& l : mat) {
-    int n = l.size();  // Get the number of elements in the current row
-```
-The variable `l` represents the current row. `n` is the length of the row, which we will use to determine the shifted indices.
-
-#### 2. **Check for Similarity by Shifting**:
-For each row, we iterate over each element at index `i` and compare it with the element at the shifted position `(i + k) % n`. The `% n` ensures that the shifting operation wraps around circularly. If any element does not match its corresponding shifted element, the row is not similar, and we immediately return `false`.
-
-```cpp
-for (int i = 0; i < n; ++i) {
-    if (l[i] != l[(i + k) % n]) {
-        return false;  // If elements do not match, the row is not similar
-    }
+    return true;
 }
 ```
 
-#### 3. **Return True if All Rows are Similar**:
-After checking all elements in all rows, if no discrepancies were found, we return `true`, indicating that all rows are similar based on the circular shift.
+This function checks if every row in a 2D matrix can be rotated by a specified number of positions 'k' to match itself. It iterates over each row, comparing elements based on the rotation condition. If any element doesn't match the rotated position, it returns 'false', indicating the matrix cannot be similar by the given rotation. If all rows satisfy the condition, it returns 'true'.
 
-```cpp
-return true;  // All rows are similar by shifting by k positions
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	bool areSimilar(vector<vector<int>>& mat, int k) {
+	```
+	Defines the function 'areSimilar' which checks if a 2D matrix can be rotated by 'k' positions to match its original configuration in every row.
 
-### Complexity:
+2. **Outer Loop**
+	```cpp
+	    for (const auto& l : mat) {
+	```
+	Starts iterating through each row 'l' of the matrix 'mat'. The variable 'l' represents a row in the matrix.
 
-#### Time Complexity:
-- We iterate through each row and each element within the row.
-- For each row, checking if the elements match their circularly shifted positions takes `O(n)` time, where `n` is the length of the row.
-- The number of rows in the matrix is `m`. Therefore, the overall time complexity is:
-\[
-O(m \cdot n)
-\]
-where `m` is the number of rows, and `n` is the number of columns in each row.
+3. **Row Size**
+	```cpp
+	        int n = l.size();
+	```
+	Calculates the number of elements in the current row 'l' by storing the size of the row in the variable 'n'.
 
-#### Space Complexity:
-- The space complexity is `O(1)` because we only use a few additional variables to perform the computation and do not require any additional data structures that scale with input size.
+4. **Inner Loop**
+	```cpp
+	        for (int i = 0; i < n; ++i) {
+	```
+	Starts an inner loop to iterate over each element 'i' in the current row 'l'.
 
-### Conclusion:
-This solution efficiently checks whether all rows in the matrix are similar by performing circular shifts. The use of modulus (`%`) to handle the circular nature of the shift ensures correctness while keeping the code simple. Given the problem's constraints, the solution's time complexity of `O(m * n)` is optimal, where `m` is the number of rows and `n` is the number of columns.
+5. **Rotation Check**
+	```cpp
+	            if (l[i] != l[(i + k) % n]) {
+	```
+	Checks if the current element 'l[i]' matches the element at the rotated position '(i + k) % n'. The modulo ensures the index wraps around when it exceeds the size of the row.
 
-#### Key Insights:
-- **Circular Shift**: The core idea is recognizing that a circular shift can be handled with the modulus operation, which allows elements to wrap around.
-- **Efficient Comparison**: By checking each row individually and stopping early if a mismatch is found, we avoid unnecessary computations.
-- **Optimal Complexity**: The solution runs in linear time relative to the number of elements in the matrix, making it efficient for large inputs.
+6. **Return False**
+	```cpp
+	                return false;
+	```
+	If the elements do not match after the rotation, it returns 'false' immediately, indicating the rows are not similar after rotation.
 
-In summary, the algorithm efficiently checks for similarity between rows in the matrix by comparing elements with their circularly shifted counterparts, making it a good fit for this type of problem.
+7. **Return True**
+	```cpp
+	    return true;
+	```
+	If all rows pass the rotation check, it returns 'true', indicating that the matrix can be rotated to match itself for all rows.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(k * m * n)
+- **Average Case:** O(k * m * n)
+- **Worst Case:** O(k * m * n)
+
+The time complexity is O(k * m * n) because for each row, we perform a shift k times, and we need to compare each element in the matrix.
+
+### Space Complexity 💾
+- **Best Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+The space complexity is O(m * n) due to the storage needed for the matrix.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/matrix-similarity-after-cyclic-shifts/description/)
 

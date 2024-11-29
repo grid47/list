@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "b1WpYxnuebQ"
 youtube_upload_date="2022-09-07"
 youtube_thumbnail="https://i.ytimg.com/vi/b1WpYxnuebQ/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,115 +28,136 @@ youtube_thumbnail="https://i.ytimg.com/vi/b1WpYxnuebQ/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root node of a binary tree, generate a string representation of the tree following specific formatting rules based on a preorder traversal.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is the root node of a binary tree, where each node is represented by its integer value. The tree can have any configuration of left and right children.
+- **Example:** `Input: root = [1, 2, 3, null, 4]`
+- **Constraints:**
+	- The binary tree has at least one node.
+	- Node values are integers in the range [-1000, 1000].
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    string tree2str(TreeNode* root) {
-        if(root == NULL) return "";
-        string left  = tree2str(root->left);
-        if(left!= "") left = '(' + left + ')';
-        string right = tree2str(root->right);
-        if(right != "") right = '(' + right + ')';
-        if(left == "" && right != "") left = "()";
-        // if(left != "" && right == "") right = "()";        
-        return to_string(root->val)+left+right;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string representing the binary tree following a preorder traversal, with proper parentheses indicating child nodes.
+- **Example:** `Output: '1(2()(4))(3)'`
+- **Constraints:**
+	- The output is a string representation of the tree.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To convert a binary tree into a string format by recursively visiting each node in preorder and formatting it with parentheses for children.
 
-Given the root node of a binary tree, the task is to generate a string representation of the tree following a specific format. The string should represent the binary tree in the following way:
+- Perform a preorder traversal of the binary tree.
+- For each node, if it has a left child, include it in parentheses.
+- If the node has a right child but no left child, include empty parentheses '()' before the right child.
+- Concatenate the node's value and the formatted strings of its children.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a valid binary tree with a single root node.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [1, 2, 3, null, 4]`  \
+  **Explanation:** In this case, node 1 has two children, node 2 and node 3. Node 2 itself has a right child (node 4), and node 3 has no children. The string representation is '1(2()(4))(3)' to reflect the structure.
 
-- The root node is represented by its value.
-- Left and right subtrees are enclosed in parentheses.
-- If the left child is `null`, it is represented as an empty pair of parentheses `()` and must be included even if the right child exists.
-- If a node has only a right child, then the left child must still be represented by an empty pair of parentheses.
+{{< dots >}}
+## Approach 🚀
+The solution involves recursively traversing the binary tree in preorder and building the string representation based on the specified format.
 
-### Approach
-
-The key observation in solving this problem is that the binary tree needs to be represented in a depth-first traversal manner, where the root node is processed first, followed by its left subtree and then its right subtree.
-
-1. **Recursive Approach**: The problem can be solved efficiently using recursion, starting from the root node. At each step:
-   - If the node is `null`, return an empty string.
-   - Otherwise, convert the current node value to a string.
-   - Recursively process the left and right subtrees.
-   - If the left child exists, enclose it in parentheses. If the right child exists, do the same.
-   
-2. **Edge Cases**:
-   - If the left child is `null` and the right child exists, the left child must still be represented as an empty pair of parentheses `()`.
-   - If both children are `null`, the node itself should only be represented by its value.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Check for `null` root
+### Initial Thoughts 💭
+- Each node needs to be represented by its value, followed by parentheses enclosing its children (if any).
+- Start with the root and recursively build the string for its left and right children. Ensure that empty parentheses are only added when necessary.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one node, so empty inputs are not an issue.
+- The solution should handle up to 10,000 nodes efficiently.
+- Ensure proper handling of trees with only left children, only right children, or no children at all.
+- All nodes in the binary tree are valid integers within the specified range.
+{{< dots >}}
+## Code 💻
 ```cpp
-if (root == NULL) return "";
+string tree2str(TreeNode* root) {
+    if(root == NULL) return "";
+    string left  = tree2str(root->left);
+    if(left!= "") left = '(' + left + ')';
+    string right = tree2str(root->right);
+    if(right != "") right = '(' + right + ')';
+    if(left == "" && right != "") left = "()";
+    // if(left != "" && right == "") right = "()";        
+    return to_string(root->val)+left+right;
+}
 ```
-- If the root node is `null`, return an empty string. This handles the base case of the recursion when we reach the end of a branch in the tree.
 
-#### Step 2: Recursively process the left child
-```cpp
-string left = tree2str(root->left);
-if (left != "") left = '(' + left + ')';
-```
-- We recursively call the `tree2str` function on the left child. If the left child exists, the resulting string is wrapped in parentheses.
-- If the left child is `null`, the recursive call will return an empty string, and no parentheses will be added.
+This code defines a recursive function `tree2str` that takes the root of a binary tree and returns its string representation. The function traverses the tree in pre-order and constructs the string by adding the value of the node along with its left and right children in parentheses.
 
-#### Step 3: Recursively process the right child
-```cpp
-string right = tree2str(root->right);
-if (right != "") right = '(' + right + ')';
-```
-- Similarly, we recursively process the right child of the current node. If the right child exists, we wrap the resulting string in parentheses.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string tree2str(TreeNode* root) {
+	```
+	Defines the function `tree2str` which takes a pointer to a TreeNode as input and returns a string representing the tree structure.
 
-#### Step 4: Handle the case where the left child is `null` and the right child exists
-```cpp
-if (left == "" && right != "") left = "()";
-```
-- If the left child is `null` and the right child exists, we add an empty pair of parentheses for the left child. This ensures that the tree string is formatted correctly, showing the absence of a left child.
+2. **Base Case**
+	```cpp
+	    if(root == NULL) return "";
+	```
+	Handles the base case of the recursion: if the current node is NULL, it returns an empty string.
 
-#### Step 5: Combine the results
-```cpp
-return to_string(root->val) + left + right;
-```
-- Finally, we return the string representation of the current node. This consists of:
-  - The root node value as a string (`to_string(root->val)`).
-  - The string representing the left child (if it exists).
-  - The string representing the right child (if it exists).
-  
-The result is a string representing the tree in the required format.
+3. **Recursive Call (Left Subtree)**
+	```cpp
+	    string left  = tree2str(root->left);
+	```
+	Recursively calls `tree2str` on the left child of the current node to get the string representation of the left subtree.
 
-### Complexity
+4. **Left Subtree Formatting**
+	```cpp
+	    if(left!= "") left = '(' + left + ')';
+	```
+	If the left subtree is not empty, formats it by surrounding the result with parentheses.
 
-#### Time Complexity:
-- **O(N)**: The time complexity is linear with respect to the number of nodes in the tree. Each node is visited exactly once, and at each node, the string operations (concatenation) are performed in constant time, assuming that the length of the strings representing the left and right children are bounded by the tree height.
+5. **Recursive Call (Right Subtree)**
+	```cpp
+	    string right = tree2str(root->right);
+	```
+	Recursively calls `tree2str` on the right child of the current node to get the string representation of the right subtree.
 
-#### Space Complexity:
-- **O(H)**: The space complexity is dominated by the recursion stack, which in the worst case (for a skewed tree) can be as deep as the height of the tree (`H`). In a balanced tree, the height would be logarithmic relative to the number of nodes (`O(log N)`).
+6. **Right Subtree Formatting**
+	```cpp
+	    if(right != "") right = '(' + right + ')';
+	```
+	If the right subtree is not empty, formats it by surrounding the result with parentheses.
 
-### Conclusion
+7. **Handle Empty Left Subtree**
+	```cpp
+	    if(left == "" && right != "") left = "()";
+	```
+	If the left subtree is empty but the right subtree is not, adds `()` to represent the missing left child.
 
-This solution efficiently converts a binary tree into its string representation following the required format using a recursive approach. The approach:
-1. Uses depth-first traversal to process each node.
-2. Handles edge cases, such as missing left or right children.
-3. Ensures that the final string correctly represents the structure of the tree.
+8. **Return Statement**
+	```cpp
+	    return to_string(root->val)+left+right;
+	```
+	Constructs the final string by concatenating the root's value with the string representations of the left and right subtrees.
 
-The solution provides an optimal time complexity of **O(N)** and a space complexity of **O(H)**, making it well-suited for trees of varying sizes, from balanced trees to skewed trees.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the number of nodes in the binary tree, since we perform a preorder traversal of all nodes.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) because we store the string representation of the tree, which can be proportional to the number of nodes in the tree.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/construct-string-from-binary-tree/description/)
 

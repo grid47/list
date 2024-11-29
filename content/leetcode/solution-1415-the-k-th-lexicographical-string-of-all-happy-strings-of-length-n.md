@@ -14,163 +14,269 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+A happy string consists of only the letters 'a', 'b', and 'c', and no two consecutive characters in the string are the same. Given two integers n and k, return the kth happy string of length n sorted in lexicographical order, or an empty string if there are fewer than k happy strings of length n.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers n and k.
+- **Example:** `n = 2, k = 4`
+- **Constraints:**
+	- 1 <= n <= 10
+	- 1 <= k <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string ans = "";
-    int cnt = 0;
-    int k, n;
-    
-    string getHappyString(int n, int k) {
-        this->k = k;
-        this->n = n;
-        string tmp = "";
-        bt(-1, tmp);
-        return ans;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the kth happy string of length n or an empty string if there are fewer than k happy strings of length n.
+- **Example:** `For n = 2, k = 4, the output is 'ba'.`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Generate all happy strings of length n in lexicographical order and return the kth string.
+
+- Use backtracking to generate all possible happy strings.
+- Sort the strings lexicographically.
+- Return the kth string, or an empty string if there are fewer than k happy strings.
+{{< dots >}}
+### Problem Assumptions ✅
+- The value of k will always be within the range for the given n.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: n = 2, k = 4`  \
+  **Explanation:** The list of happy strings of length 2 is ['ab', 'ac', 'ba', 'bc', 'ca', 'cb']. The 4th string is 'ba'.
+
+- **Input:** `Input: n = 3, k = 6`  \
+  **Explanation:** The list of happy strings of length 3 is ['aba', 'abc', 'aca', 'acb', 'bab', 'bac', 'bca', 'bcb', 'cab', 'cac', 'cba', 'cbc']. The 6th string is 'bca'.
+
+{{< dots >}}
+## Approach 🚀
+Generate all happy strings of length n using a backtracking approach and return the kth string.
+
+### Initial Thoughts 💭
+- The backtracking approach can be used to construct the strings while ensuring the condition of no two consecutive characters being the same.
+- Backtracking allows us to efficiently explore all possible combinations of characters while checking for the happy string conditions.
+{{< dots >}}
+### Edge Cases 🌐
+- k is larger than the number of possible happy strings of length n.
+- For n = 10, handle cases where the number of strings is large.
+- If k exceeds the number of possible happy strings of length n, return an empty string.
+- Ensure the function works efficiently within the given bounds for both n and k.
+{{< dots >}}
+## Code 💻
+```cpp
+string ans = "";
+int cnt = 0;
+int k, n;
+
+string getHappyString(int n, int k) {
+    this->k = k;
+    this->n = n;
+    string tmp = "";
+    bt(-1, tmp);
+    return ans;
+}
+
+void bt(int prv, string &tmp) {
+    if(tmp.size() == n) {
+        cnt++;
+        if(cnt == k){
+          ans = tmp;  
+        } 
+        return;
     }
-    
-    void bt(int prv, string &tmp) {
-        if(tmp.size() == n) {
-            cnt++;
-            if(cnt == k){
-              ans = tmp;  
-            } 
-            return;
-        }
 
-        for(int i = 0; i < 3; i++) {
-            if(prv == i) continue;
-            if(i == 0) {
-                tmp += 'a';
-            } else if(i == 1) {
-                tmp += 'b';
-            } else if(i == 2) {
-                tmp += 'c';
-            }
-            bt(i, tmp);
-            tmp.pop_back();
+    for(int i = 0; i < 3; i++) {
+        if(prv == i) continue;
+        if(i == 0) {
+            tmp += 'a';
+        } else if(i == 1) {
+            tmp += 'b';
+        } else if(i == 2) {
+            tmp += 'c';
         }
+        bt(i, tmp);
+        tmp.pop_back();
     }
-};
-{{< /highlight >}}
----
+}
+```
 
-### Problem Statement
+The function `getHappyString` finds the `k`-th lexicographically smallest happy string of length `n`. A happy string contains only the characters 'a', 'b', and 'c', and no two adjacent characters are the same. The recursive function `bt` is used to generate all happy strings and return the `k`-th one.
 
-The task is to generate the k-th lexicographically smallest "happy string" of length \( n \). A "happy string" is defined as a string composed of the letters 'a', 'b', and 'c', where no three consecutive characters are the same. For example, "abc", "aab", and "abbc" are happy strings, while "aaa" and "abca" are not. Given \( n \) and \( k \), the function should return the k-th happy string in the lexicographical order.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	string ans = "";
+	```
+	Initializes an empty string `ans` to store the final happy string when found.
 
-### Approach
+2. **Variable Initialization**
+	```cpp
+	int cnt = 0;
+	```
+	Initializes a counter `cnt` to keep track of how many happy strings have been generated.
 
-To solve this problem, we can use a backtracking approach. The algorithm generates all possible happy strings of length \( n \) and keeps track of their lexicographical order until it reaches the k-th happy string. Here’s how the approach works:
+3. **Variable Declaration**
+	```cpp
+	int k, n;
+	```
+	Declares two integer variables `k` (the index of the desired happy string) and `n` (the length of the happy string).
 
-1. **Backtracking**: We will recursively build the happy strings by appending characters 'a', 'b', or 'c' while ensuring that we do not create three consecutive characters that are the same.
+4. **Function Definition**
+	```cpp
+	string getHappyString(int n, int k) {
+	```
+	Defines the function `getHappyString`, which takes two integers `n` (length of the string) and `k` (the desired string's lexicographical index).
 
-2. **Lexicographical Order**: The backtracking will inherently generate strings in lexicographical order due to the way characters are added ('a', 'b', 'c').
+5. **Assignment**
+	```cpp
+	    this->k = k;
+	```
+	Assigns the value of `k` to the member variable `k` to be used by the recursive function.
 
-3. **Counting**: As we generate each happy string, we will count how many valid happy strings have been generated so far. When we reach the k-th happy string, we will store that result and stop further generation.
+6. **Assignment**
+	```cpp
+	    this->n = n;
+	```
+	Assigns the value of `n` to the member variable `n` for later use in the recursive function.
 
-### Code Breakdown (Step by Step)
+7. **Variable Initialization**
+	```cpp
+	    string tmp = "";
+	```
+	Initializes an empty string `tmp` that will be used to build potential happy strings.
 
-Let's break down the provided C++ code for the solution:
+8. **Function Call**
+	```cpp
+	    bt(-1, tmp);
+	```
+	Calls the recursive function `bt` with the initial previous character index `-1` and the empty string `tmp`.
 
-1. **Class and Member Variables**:
-   ```cpp
-   class Solution {
-   public:
-       string ans = "";
-       int cnt = 0;
-       int k, n;
-   ```
+9. **Return Statement**
+	```cpp
+	    return ans;
+	```
+	Returns the happy string `ans` once the `k`-th string has been found by the recursive function.
 
-   - A class named `Solution` is defined. It contains member variables to store the resulting happy string (`ans`), a count of generated happy strings (`cnt`), and the input values `k` and `n`.
+10. **Function Definition**
+	```cpp
+	void bt(int prv, string &tmp) {
+	```
+	Defines the recursive helper function `bt`, which generates all possible happy strings and checks if the `k`-th string is reached.
 
-2. **Main Function**:
-   ```cpp
-       string getHappyString(int n, int k) {
-           this->k = k;
-           this->n = n;
-           string tmp = "";
-           bt(-1, tmp);
-           return ans;
-       }
-   ```
+11. **Base Case**
+	```cpp
+	    if(tmp.size() == n) {
+	```
+	Checks if the current string `tmp` has reached the desired length `n`. If so, it proceeds to count it.
 
-   - The method `getHappyString` takes two integers, \( n \) and \( k \), as input.
-   - It initializes the member variables `k` and `n` and creates a temporary string `tmp` to build the happy strings.
-   - It then calls the recursive function `bt` to start generating happy strings.
-   - Finally, it returns the k-th happy string stored in `ans`.
+12. **Increment Operation**
+	```cpp
+	        cnt++;
+	```
+	Increments the counter `cnt` each time a string of length `n` is generated.
 
-3. **Backtracking Function**:
-   ```cpp
-       void bt(int prv, string &tmp) {
-           if(tmp.size() == n) {
-               cnt++;
-               if(cnt == k) {
-                   ans = tmp;  
-               } 
-               return;
-           }
-   ```
+13. **Conditional Statement**
+	```cpp
+	        if(cnt == k){
+	```
+	Checks if the counter `cnt` has reached the desired `k`-th happy string. If so, it stores the string in `ans`.
 
-   - The method `bt` is defined for backtracking. It takes the index of the last character added (`prv`) and the temporary string (`tmp`) as parameters.
-   - If the length of `tmp` equals \( n \), it means a complete happy string has been generated. The count is incremented, and if it matches \( k \), the string is stored in `ans`.
-   - The function returns to stop further exploration for that branch.
+14. **Assignment**
+	```cpp
+	          ans = tmp;  
+	```
+	Assigns the current string `tmp` to the variable `ans` when the `k`-th happy string is found.
 
-4. **Character Addition Loop**:
-   ```cpp
-           for(int i = 0; i < 3; i++) {
-               if(prv == i) continue;
-               if(i == 0) {
-                   tmp += 'a';
-               } else if(i == 1) {
-                   tmp += 'b';
-               } else if(i == 2) {
-                   tmp += 'c';
-               }
-               bt(i, tmp);
-               tmp.pop_back();
-           }
-   ```
+15. **Return Statement**
+	```cpp
+	        return;
+	```
+	Returns from the recursive function once the desired string has been found or the base case is reached.
 
-   - A loop iterates over the three possible characters (0 for 'a', 1 for 'b', 2 for 'c').
-   - The condition `if(prv == i) continue;` ensures that we do not add the same character consecutively more than twice.
-   - Depending on the value of `i`, the corresponding character is added to `tmp`.
-   - The backtracking function `bt` is called recursively with the new last character index (`i`) and the updated string `tmp`.
-   - After returning from recursion, the last character is removed from `tmp` using `tmp.pop_back()` to backtrack and explore other combinations.
+16. **Loop Constructs**
+	```cpp
+	    for(int i = 0; i < 3; i++) {
+	```
+	Begins a for loop that iterates over the three possible characters ('a', 'b', 'c') to add to the string `tmp`.
 
-5. **End of Class**:
-   ```cpp
-   };
-   ```
+17. **Control Flow**
+	```cpp
+	        if(prv == i) continue;
+	```
+	Skips the current iteration if the character `i` is the same as the previous character (`prv`), ensuring no two adjacent characters are the same.
 
-   - The class definition ends here.
+18. **String Manipulation**
+	```cpp
+	        if(i == 0) {
+	```
+	Checks if the current iteration is for the character 'a'.
 
-### Complexity
+19. **String Manipulation**
+	```cpp
+	            tmp += 'a';
+	```
+	Adds the character 'a' to the string `tmp`.
 
-- **Time Complexity**:
-  - The worst-case time complexity can be approximated as \( O(3^n) \) in generating all potential happy strings of length \( n \). However, since we are counting until the k-th string, in practice, the function will terminate early once it finds the k-th string, which optimizes the process significantly.
+20. **Conditional Statement**
+	```cpp
+	        } else if(i == 1) {
+	```
+	Checks if the current iteration is for the character 'b'.
 
-- **Space Complexity**:
-  - The space complexity is \( O(n) \) due to the recursion stack and the temporary string `tmp` used in the backtracking process.
+21. **String Manipulation**
+	```cpp
+	            tmp += 'b';
+	```
+	Adds the character 'b' to the string `tmp`.
 
-### Conclusion
+22. **Conditional Statement**
+	```cpp
+	        } else if(i == 2) {
+	```
+	Checks if the current iteration is for the character 'c'.
 
-The `getHappyString` function effectively generates and counts happy strings of a specified length \( n \) and retrieves the k-th such string using a backtracking approach. This solution not only leverages the properties of happy strings to enforce the constraints on character repetition but also ensures that strings are generated in lexicographical order. 
+23. **String Manipulation**
+	```cpp
+	            tmp += 'c';
+	```
+	Adds the character 'c' to the string `tmp`.
 
-#### Key Takeaways:
+24. **Function Call**
+	```cpp
+	        bt(i, tmp);
+	```
+	Recursively calls the function `bt` with the new character added to `tmp` and the current character `i` as `prv`.
 
-- **Backtracking Techniques**: This problem showcases the power of backtracking in generating combinatorial solutions, where constraints need to be adhered to dynamically.
-- **String Manipulation**: The method emphasizes how string construction and manipulation can be efficiently handled within recursive functions.
-- **Performance Optimization**: The early termination upon reaching the k-th string provides an efficient solution to potentially large input sizes, making the function robust and performant.
+25. **String Manipulation**
+	```cpp
+	        tmp.pop_back();
+	```
+	Removes the last character added to `tmp` in preparation for the next iteration of the loop.
 
-Overall, this solution provides a clean and elegant approach to solving the problem while adhering to the constraints of happy strings.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1), if k is very small.
+- **Average Case:** O(3^n), as we need to consider all possible combinations of characters.
+- **Worst Case:** O(3^n), since we may have to generate all possible strings.
+
+The time complexity grows exponentially with n due to the 3 choices at each step.
+
+### Space Complexity 💾
+- **Best Case:** O(1), if we are only generating a few strings.
+- **Worst Case:** O(3^n), to store the strings generated.
+
+The space complexity is proportional to the number of strings generated.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/description/)
 

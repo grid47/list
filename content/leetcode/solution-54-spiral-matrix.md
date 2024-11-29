@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "fcn8qkRcFVM"
 youtube_upload_date="2024-06-14"
 youtube_thumbnail="https://i.ytimg.com/vi/fcn8qkRcFVM/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,174 +28,224 @@ youtube_thumbnail="https://i.ytimg.com/vi/fcn8qkRcFVM/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an m x n matrix, return all the elements of the matrix in spiral order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a 2D matrix with m rows and n columns.
+- **Example:** `["matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]"]`
+- **Constraints:**
+	- 1 <= m, n <= 10
+	- -100 <= matrix[i][j] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> spiralOrder(vector<vector<int>>& mtx) {
-        int cBgn = 0, cEnd = mtx[0].size()  - 1;
-        int rBgn = 0, rEnd = mtx.size() - 1;
-        vector<int> ans;
-        while(cBgn <= cEnd && rBgn <= rEnd) {
-            for(int i = cBgn; i <= cEnd; i++)
-                ans.push_back(mtx[rBgn][i]);
-            rBgn++;
-            for(int i = rBgn; i <= rEnd; i++)
-                ans.push_back(mtx[i][cEnd]);
-            cEnd--;
-            if(rBgn <= rEnd)
-            for(int i = cEnd; i >= cBgn; i--)
-                ans.push_back(mtx[rEnd][i]);
-            rEnd--;
-            if(cBgn <= cEnd)            
-            for(int i = rEnd; i >= rBgn; i--)
-                ans.push_back(mtx[i][cBgn]);
-            cBgn++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of integers that represents the elements of the matrix in spiral order.
+- **Example:** `["[1, 2, 3, 6, 9, 8, 7, 4, 5]"]`
+- **Constraints:**
+	- The output should be a list containing all the elements in spiral order.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To traverse the matrix in a spiral order and collect the elements.
+
+- 1. Initialize variables to track the boundaries of the matrix: top, bottom, left, and right.
+- 2. Use a while loop to traverse in the spiral order until all boundaries are processed.
+- 3. Traverse from left to right along the top row, then top to bottom along the right column.
+- 4. Traverse from right to left along the bottom row, then bottom to top along the left column.
+- 5. Continue adjusting the boundaries inward and repeat the traversal until all elements are collected.
+{{< dots >}}
+### Problem Assumptions ✅
+- The matrix is guaranteed to have at least one row and one column.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `["matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]"]`  \
+  **Explanation:** The elements are traversed in a spiral order, starting from the top-left corner and moving right, down, left, and up, until all elements are visited.
+
+- **Input:** `["matrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]"]`  \
+  **Explanation:** The elements are collected in a spiral order: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7].
+
+{{< dots >}}
+## Approach 🚀
+The approach uses a systematic way to traverse the matrix in a spiral order by adjusting boundaries after processing each row and column.
+
+### Initial Thoughts 💭
+- We need to handle four directions: left to right, top to bottom, right to left, and bottom to top.
+- As we traverse the matrix, the boundaries (top, bottom, left, right) will be reduced progressively.
+- This problem can be solved in linear time by maintaining and updating boundaries during the traversal.
+{{< dots >}}
+### Edge Cases 🌐
+- The problem guarantees that the matrix will have at least one row and one column.
+- The solution must handle the maximum matrix size (10x10) efficiently.
+- If the matrix contains negative values or zeros, the traversal should still proceed in the same spiral order.
+- The solution must be efficient in terms of time and space complexity.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+    int rows = matrix.size(), cols = matrix[0].size();
+    int top = 0, bottom = rows - 1, left = 0, right = cols - 1;
+    vector<int> result;
+    
+    while (top <= bottom && left <= right) {
+        // Traverse Right
+        for (int i = left; i <= right; i++) {
+            result.push_back(matrix[top][i]);
         }
-        return ans;
+        top++;
+
+        // Traverse Down
+        for (int i = top; i <= bottom; i++) {
+            result.push_back(matrix[i][right]);
+        }
+        right--;
+
+        // Traverse Left
+        if (top <= bottom) {
+            for (int i = right; i >= left; i--) {
+                result.push_back(matrix[bottom][i]);
+            }
+            bottom--;
+        }
+
+        // Traverse Up
+        if (left <= right) {
+            for (int i = bottom; i >= top; i--) {
+                result.push_back(matrix[i][left]);
+            }
+            left++;
+        }
     }
-};
-{{< /highlight >}}
----
 
-### 🔄 **Spiral Matrix Traversal**
-
-The problem asks to return the elements of a given **2D matrix** in a **spiral order**. The traversal begins at the top-left corner of the matrix, moving right across the top row, down the rightmost column, left across the bottom row, and up the leftmost column. This process continues for the inner submatrix until all elements are visited.
-
-For example, given the matrix:
-
-```
-[
- [ 1, 2, 3 ],
- [ 4, 5, 6 ],
- [ 7, 8, 9 ]
-]
+    return result;
+}
 ```
 
-The expected output in spiral order would be:
+This code efficiently traverses a matrix in a spiral order and returns the elements in a vector.
 
-```
-[1, 2, 3, 6, 9, 8, 7, 4, 5]
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<int> spiralOrder(vector<vector<int>>& matrix) {
+	```
+	This line declares a function named `spiralOrder` that takes a 2D vector `matrix` as input and returns a vector containing the elements in spiral order.
 
-### 🧑‍💻 **Approach**
+2. **Variable Initialization**
+	```cpp
+	    int rows = matrix.size(), cols = matrix[0].size();
+	```
+	This line initializes variables `rows` and `cols` to store the number of rows and columns in the matrix, respectively.
 
-We solve this efficiently using a **four-pointer approach**. The key idea is to maintain four boundaries that track the current submatrix:
-- **`rBgn` (row beginning)**: The first row to be considered.
-- **`rEnd` (row end)**: The last row to be considered.
-- **`cBgn` (column beginning)**: The first column to be considered.
-- **`cEnd` (column end)**: The last column to be considered.
+3. **Boundary Initialization**
+	```cpp
+	    int top = 0, bottom = rows - 1, left = 0, right = cols - 1;
+	```
+	This line initializes variables to track the boundaries of the current spiral traversal: `top`, `bottom`, `left`, and `right`.
 
-The traversal follows these steps:
-1. Traverse from left to right across the topmost row.
-2. Traverse from top to bottom down the rightmost column.
-3. Traverse from right to left across the bottommost row.
-4. Traverse from bottom to top up the leftmost column.
+4. **Result Vector Initialization**
+	```cpp
+	    vector<int> result;
+	```
+	This line initializes an empty vector `result` to store the spiral order elements.
 
-After completing each step, we update the respective boundary and repeat until all elements are visited.
+5. **Spiral Traversal Loop**
+	```cpp
+	    while (top <= bottom && left <= right) {
+	```
+	This loop continues as long as there are elements to be traversed in the spiral.
 
-### 📝 **Code Breakdown**
+6. **Traverse Right**
+	```cpp
+	        for (int i = left; i <= right; i++) {
+	            result.push_back(matrix[top][i]);
+	        }
+	```
+	This loop traverses the top row from left to right, adding elements to the `result` vector.
 
-#### Step 1: Initialize Boundary Variables
+7. **Update Top Boundary**
+	```cpp
+	        top++;
+	```
+	After traversing the top row, the `top` boundary is incremented to exclude the processed row.
 
-```cpp
-int cBgn = 0, cEnd = mtx[0].size() - 1;
-int rBgn = 0, rEnd = mtx.size() - 1;
-```
+8. **Traverse Down**
+	```cpp
+	        for (int i = top; i <= bottom; i++) {
+	            result.push_back(matrix[i][right]);
+	        }
+	```
+	This loop traverses the rightmost column from top to bottom, adding elements to the `result` vector.
 
-- **`cBgn` (column beginning)** is set to 0, the first column.
-- **`cEnd` (column end)** is set to `mtx[0].size() - 1`, which is the index of the last column.
-- **`rBgn` (row beginning)** is set to 0, the first row.
-- **`rEnd` (row end)** is set to `mtx.size() - 1`, which is the index of the last row.
+9. **Update Right Boundary**
+	```cpp
+	        right--;
+	```
+	After traversing the right column, the `right` boundary is decremented to exclude the processed column.
 
-These boundaries define the current submatrix to be processed. The algorithm shrinks these boundaries after each pass.
+10. **Traverse Left (Conditional)**
+	```cpp
+	        if (top <= bottom) {
+	```
+	This conditional check ensures that there's still a row to traverse from right to left.
 
-#### Step 2: Initialize the Result Array
+11. **Traverse Left**
+	```cpp
+	            for (int i = right; i >= left; i--) {
+	                result.push_back(matrix[bottom][i]);
+	            }
+	```
+	This loop traverses the bottom row from right to left, adding elements to the `result` vector.
 
-```cpp
-vector<int> ans;
-```
+12. **Update Bottom Boundary**
+	```cpp
+	            bottom--;
+	```
+	After traversing the bottom row, the `bottom` boundary is decremented to exclude the processed row.
 
-- **`ans`** is a vector to store the elements of the matrix in spiral order.
+13. **Traverse Up (Conditional)**
+	```cpp
+	        if (left <= right) {
+	```
+	This conditional check ensures that there's still a column to traverse from bottom to top.
 
-#### Step 3: Loop Until All Elements Are Traversed
+14. **Traverse Up**
+	```cpp
+	            for (int i = bottom; i >= top; i--) {
+	                result.push_back(matrix[i][left]);
+	            }
+	```
+	This loop traverses the leftmost column from bottom to top, adding elements to the `result` vector.
 
-```cpp
-while(cBgn <= cEnd && rBgn <= rEnd) {
-```
+15. **Update Left Boundary**
+	```cpp
+	            left++;
+	```
+	After traversing the left column, the `left` boundary is incremented to exclude the processed column.
 
-- The loop continues as long as the column and row beginning pointers (`cBgn`, `rBgn`) do not surpass their respective ending pointers (`cEnd`, `rEnd`). This ensures the entire matrix is traversed.
+16. **Return Result**
+	```cpp
+	    return result;
+	```
+	The function returns the `result` vector containing the elements in spiral order.
 
-#### Step 4: Traverse from Left to Right across the Top Row
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n)
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
 
-```cpp
-for(int i = cBgn; i <= cEnd; i++)
-    ans.push_back(mtx[rBgn][i]);
-rBgn++;
-```
+The algorithm processes every element of the matrix exactly once, so the time complexity is O(m * n).
 
-- Traverse from `cBgn` to `cEnd` (the entire top row) and append each element to `ans`.
-- After processing the top row, increment `rBgn` to exclude this row from future iterations.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(m * n)
 
-#### Step 5: Traverse from Top to Bottom down the Right Column
+The space complexity is O(m * n) for storing the result, but the in-place traversal itself requires O(1) space.
 
-```cpp
-for(int i = rBgn; i <= rEnd; i++)
-    ans.push_back(mtx[i][cEnd]);
-cEnd--;
-```
+**Happy Coding! 🎉**
 
-- Traverse from `rBgn` to `rEnd` (the entire right column) and append each element to `ans`.
-- After processing the right column, decrement `cEnd` to exclude this column in future iterations.
-
-#### Step 6: Traverse from Right to Left across the Bottom Row (If Valid)
-
-```cpp
-if(rBgn <= rEnd)
-    for(int i = cEnd; i >= cBgn; i--)
-        ans.push_back(mtx[rEnd][i]);
-rEnd--;
-```
-
-- If `rBgn` is still less than or equal to `rEnd`, traverse from `cEnd` to `cBgn` (the entire bottom row) and append each element to `ans`.
-- After processing the bottom row, decrement `rEnd`.
-
-#### Step 7: Traverse from Bottom to Top up the Left Column (If Valid)
-
-```cpp
-if(cBgn <= cEnd)            
-    for(int i = rEnd; i >= rBgn; i--)
-        ans.push_back(mtx[i][cBgn]);
-cBgn++;
-```
-
-- If `cBgn` is still less than or equal to `cEnd`, traverse from `rEnd` to `rBgn` (the entire left column) and append each element to `ans`.
-- After processing the left column, increment `cBgn`.
-
-#### Step 8: Return the Result
-
-```cpp
-return ans;
-```
-
-- Once all elements are traversed, return `ans`, which contains the elements in spiral order.
-
-### 📊 **Complexity Analysis**
-
-#### Time Complexity:
-- **O(n * m):** The algorithm visits each element of the matrix exactly once, where `n` is the number of rows and `m` is the number of columns. Therefore, the time complexity is O(n * m).
-
-#### Space Complexity:
-- **O(n * m):** The space complexity is due to storing the result vector `ans`, which holds all the elements of the matrix. Thus, the space complexity is O(n * m).
-
-### 🌟 **Conclusion**
-
-The solution uses an efficient **four-pointer approach** to solve the **spiral matrix traversal** problem. The algorithm traverses the matrix layer by layer, updating the boundaries as it goes. With a time complexity of **O(n * m)** and space complexity of **O(n * m)**, this solution is optimal for large matrices, ensuring a single pass through the matrix while minimizing the use of additional space.
-
-This approach is widely applicable for problems involving spiral traversals or grid-based navigation, making it a valuable tool in algorithmic problem-solving.
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix/description/)
 

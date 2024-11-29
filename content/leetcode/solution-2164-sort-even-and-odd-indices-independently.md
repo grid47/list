@@ -14,121 +14,209 @@ img_src = ""
 youtube = "h7GOQPBZNv4"
 youtube_upload_date="2022-02-06"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/h7GOQPBZNv4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 0-indexed integer array 'nums'. Your task is to rearrange the elements of 'nums' by sorting the values at odd indices in non-increasing order and the values at even indices in non-decreasing order. Return the rearranged array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an integer array 'nums'.
+- **Example:** `nums = [5, 2, 8, 1]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- 1 <= nums[i] <= 100
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> sortEvenOdd(vector<int>& nums) {
-        int minIndex;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the array 'nums' after rearranging it according to the given sorting rules.
+- **Example:** `[2, 8, 5, 1]`
+- **Constraints:**
+	- The output must preserve the rearrangement order for odd and even indices as described.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Sort elements at odd indices in non-increasing order and elements at even indices in non-decreasing order.
+
+- Iterate through the array and sort the elements at even indices in non-decreasing order.
+- Iterate through the array and sort the elements at odd indices in non-increasing order.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array will always contain between 1 and 100 elements.
+- Elements are integers in the range 1 to 100.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [5, 2, 8, 1]`  \
+  **Explanation:** First, the elements at odd indices [2, 1] are sorted in non-increasing order to become [8, 1]. Then, the elements at even indices [5, 8] are sorted in non-decreasing order to become [2, 5]. The final array is [2, 8, 5, 1].
+
+- **Input:** `Example 2: nums = [9, 7]`  \
+  **Explanation:** There is only one element at an odd index and one at an even index, so the array remains [7, 9].
+
+{{< dots >}}
+## Approach 🚀
+The approach involves sorting elements at odd and even indices separately while preserving their relative order.
+
+### Initial Thoughts 💭
+- Sorting odd and even indices separately ensures that the required order is maintained.
+- The solution involves simple sorting and iterating through the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The array must have at least one element.
+- The solution should handle arrays with up to 100 elements.
+- Arrays with all elements equal should still return the same array.
+- The solution must handle arrays with lengths between 1 and 100 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> sortEvenOdd(vector<int>& nums) {
+    int minIndex;
 // Here in this nested loop , we are sorting the elements at even indices in non-decreasing order.
-        for(int i=0;i<nums.size();i+=2)
+    for(int i=0;i<nums.size();i+=2)
+    {
+        minIndex=i;
+        for(int j=i+2;j<nums.size();j+=2)
         {
-            minIndex=i;
-            for(int j=i+2;j<nums.size();j+=2)
-            {
-                if(nums[j]<nums[minIndex])
-                    minIndex=j;
-            }
-            swap(nums[i],nums[minIndex]);
+            if(nums[j]<nums[minIndex])
+                minIndex=j;
         }
-// Here , we are trying to sort the elements at odd indices in non-increasing order. 
-        for(int i=1;i<nums.size();i+=2)
-        {
-            minIndex=i;
-            for(int j=i+2;j<nums.size();j+=2)
-            {
-                if(nums[j]>nums[minIndex])
-                    minIndex=j;
-            }
-            swap(nums[i],nums[minIndex]);
-        }
-        
-        return nums;
+        swap(nums[i],nums[minIndex]);
     }
-};
-{{< /highlight >}}
----
+// Here , we are trying to sort the elements at odd indices in non-increasing order. 
+    for(int i=1;i<nums.size();i+=2)
+    {
+        minIndex=i;
+        for(int j=i+2;j<nums.size();j+=2)
+        {
+            if(nums[j]>nums[minIndex])
+                minIndex=j;
+        }
+        swap(nums[i],nums[minIndex]);
+    }
+    
+    return nums;
+}
+```
 
-### Problem Statement
-Given an integer array `nums`, the task is to reorder the array so that:
-- Elements at even indices are sorted in non-decreasing (ascending) order.
-- Elements at odd indices are sorted in non-increasing (descending) order.
+This function sorts elements at even indices in non-decreasing order and elements at odd indices in non-increasing order.
 
-The output should be the modified array `nums` after sorting the elements at even and odd indices separately.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> sortEvenOdd(vector<int>& nums) {
+	```
+	Defines the function that takes a vector of integers as input and returns a vector of integers.
 
-### Approach
-The approach involves a custom sorting technique:
-1. Use selection sort to sort elements at even indices in non-decreasing order.
-2. Use selection sort again to sort elements at odd indices in non-increasing order.
-3. Maintain the original relative order for both even and odd indexed elements, ensuring stability within their groups.
+2. **Variable Initialization**
+	```cpp
+	    int minIndex;
+	```
+	Initializes the variable 'minIndex' to store the index of the minimum element during the sorting process.
 
-### Code Breakdown (Step by Step)
-1. **Sorting Even Indices in Ascending Order:**
-   ```cpp
-   for(int i = 0; i < nums.size(); i += 2) {
-       minIndex = i;
-       for(int j = i + 2; j < nums.size(); j += 2) {
-           if(nums[j] < nums[minIndex])
-               minIndex = j;
-       }
-       swap(nums[i], nums[minIndex]);
-   }
-   ```
-   - This loop iterates through `nums` starting from index `0` (even) and increments by `2` to visit every even-indexed element.
-   - For each even-indexed element, find the smallest value among the remaining even-indexed elements (`j` starts from `i + 2` and increments by `2`).
-   - Swap the current element at `i` with the minimum value found at `minIndex`.
+3. **For Loop**
+	```cpp
+	    for(int i=0;i<nums.size();i+=2)
+	```
+	Loop iterates through the elements at even indices in the vector 'nums'.
 
-2. **Sorting Odd Indices in Descending Order:**
-   ```cpp
-   for(int i = 1; i < nums.size(); i += 2) {
-       minIndex = i;
-       for(int j = i + 2; j < nums.size(); j += 2) {
-           if(nums[j] > nums[minIndex])
-               minIndex = j;
-       }
-       swap(nums[i], nums[minIndex]);
-   }
-   ```
-   - This loop iterates through `nums` starting from index `1` (odd) and increments by `2` to visit every odd-indexed element.
-   - For each odd-indexed element, find the largest value among the remaining odd-indexed elements (`j` starts from `i + 2`).
-   - Swap the current element at `i` with the maximum value found at `minIndex`.
+4. **Assignment**
+	```cpp
+	        minIndex=i;
+	```
+	Sets 'minIndex' to the current index to track the minimum element.
 
-3. **Return the Modified Array:**
-   ```cpp
-   return nums;
-   ```
-   - After sorting both even and odd indices as described, the array `nums` is returned.
+5. **Nested For Loop**
+	```cpp
+	        for(int j=i+2;j<nums.size();j+=2)
+	```
+	Nested loop iterates over the remaining even indices starting from the next index.
 
-### Example Walkthrough
-Suppose `nums = [4, 1, 2, 3, 7, 5, 8]`:
-- **Even-indexed elements** are `[4, 2, 7, 8]`.
-- **Odd-indexed elements** are `[1, 3, 5]`.
+6. **Comparison**
+	```cpp
+	            if(nums[j]<nums[minIndex])
+	```
+	Compares the current element with the element at 'minIndex' to find the smallest element.
 
-**Sorting Even Indices in Ascending Order:**
-- The sorted even indices: `[2, 4, 7, 8]`.
+7. **Index Update**
+	```cpp
+	                minIndex=j;
+	```
+	Updates 'minIndex' to the new index if a smaller element is found.
 
-**Sorting Odd Indices in Descending Order:**
-- The sorted odd indices: `[5, 3, 1]`.
+8. **Swap**
+	```cpp
+	        swap(nums[i],nums[minIndex]);
+	```
+	Swaps the elements at index 'i' and 'minIndex' to place the smallest element at index 'i'.
 
-**Reconstruct the Array:**
-- Final `nums` becomes `[2, 5, 4, 3, 7, 1, 8]`.
+9. **For Loop**
+	```cpp
+	    for(int i=1;i<nums.size();i+=2)
+	```
+	Loop iterates through the elements at odd indices in the vector 'nums'.
 
-### Complexity
-- **Time Complexity**:
-  - O(n^2), due to the use of selection sort for both even and odd index sorting.
-  - Each loop runs in O(n) time, and the nested structure of selection sort results in O(n^2) in the worst case.
+10. **Block Start**
+	```cpp
+	    {
+	```
+	Begins the block for the loop processing odd indices.
 
-- **Space Complexity**:
-  - O(1), as sorting is done in place with no extra space used apart from a few auxiliary variables.
+11. **Assignment**
+	```cpp
+	        minIndex=i;
+	```
+	Sets 'minIndex' to the current index to track the maximum element during the sorting process.
 
-### Conclusion
-This solution ensures that the even and odd indices of the array `nums` are sorted as per the given conditions. While the use of selection sort results in a higher time complexity of O(n^2), the approach is simple, easy to implement, and demonstrates how in-place sorting can be managed without additional data structures. For larger arrays or performance-sensitive applications, more optimized sorting algorithms such as a custom merge sort or partitioning method could be considered.
+12. **Nested For Loop**
+	```cpp
+	        for(int j=i+2;j<nums.size();j+=2)
+	```
+	Nested loop iterates over the remaining odd indices starting from the next index.
+
+13. **Comparison**
+	```cpp
+	            if(nums[j]>nums[minIndex])
+	```
+	Compares the current element with the element at 'minIndex' to find the largest element.
+
+14. **Index Update**
+	```cpp
+	                minIndex=j;
+	```
+	Updates 'minIndex' to the new index if a larger element is found.
+
+15. **Swap**
+	```cpp
+	        swap(nums[i],nums[minIndex]);
+	```
+	Swaps the elements at index 'i' and 'minIndex' to place the largest element at index 'i'.
+
+16. **Return**
+	```cpp
+	    return nums;
+	```
+	Returns the sorted vector 'nums'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity for sorting each set of indices is O(n^2).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+We use constant extra space apart from the input array.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/sort-even-and-odd-indices-independently/description/)
 

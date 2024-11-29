@@ -14,95 +14,128 @@ img_src = ""
 youtube = "gKDmO8ZLRD8"
 youtube_upload_date="2024-06-03"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/gKDmO8ZLRD8/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two strings, s and t, consisting only of lowercase English letters. Your task is to determine the minimum number of characters that need to be appended to the end of string s so that string t becomes a subsequence of s. A subsequence is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** Two strings s and t consisting only of lowercase English letters.
+- **Example:** `s = "hello", t = "world"`
+- **Constraints:**
+	- 1 <= s.length, t.length <= 10^5
+	- Both s and t consist only of lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int appendCharacters(string s, string t) {
-        int j = 0;
-        for(int i = 0; i < s.size() && j < t.size(); i++) {
-            j += s[i] == t[j];
-        }
-        return t.size()-j;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of characters that need to be appended to the end of string s so that t becomes a subsequence of s.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The returned value will be a non-negative integer.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the minimum number of characters to append to make t a subsequence of s.
+
+- 1. Initialize a pointer to iterate through string t.
+- 2. Iterate through string s, and whenever a character in s matches the current character in t, move the pointer of t forward.
+- 3. At the end, if all characters of t are found in s, return the difference between the length of t and the number of matched characters.
+- 4. If not all characters of t are found in s, return the difference between the length of t and the number of matched characters.
+{{< dots >}}
+### Problem Assumptions ✅
+- The solution assumes that both strings s and t contain only lowercase English letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = "hello", t = "world"`  \
+  **Explanation:** For s = "hello" and t = "world", we need to append 'w', 'o', 'r', 'l', 'd' to the end of s to make t a subsequence of s.
+
+- **Input:** `s = "abcdef", t = "ace"`  \
+  **Explanation:** For s = "abcdef" and t = "ace", no characters need to be appended since t is already a subsequence of s.
+
+- **Input:** `s = "a", t = "abc"`  \
+  **Explanation:** For s = "a" and t = "abc", we need to append 'b', 'c' to the end of s to make t a subsequence of s.
+
+{{< dots >}}
+## Approach 🚀
+We will use a two-pointer approach to efficiently find the subsequence. One pointer will iterate through string s, and the other pointer will iterate through string t. As we go through s, we will try to match characters from t.
+
+### Initial Thoughts 💭
+- We need to find how much of t is already a subsequence of s.
+- If we can match all characters of t in s, we won't need to append anything.
+- The key idea is to use the fact that matching characters in s with t can be tracked using a pointer on t. If the pointer reaches the end of t, it means t is already a subsequence of s.
+{{< dots >}}
+### Edge Cases 🌐
+- If t is empty, no characters need to be appended to s.
+- For large strings (length up to 10^5), the solution must run in linear time O(n).
+- If t is longer than s, all characters of t must be appended.
+- The solution must handle inputs of size up to 10^5 efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int appendCharacters(string s, string t) {
+    int j = 0;
+    for(int i = 0; i < s.size() && j < t.size(); i++) {
+        j += s[i] == t[j];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, you are given two strings `s` and `t`. Your task is to determine how many characters you need to append to the end of `s` to make `s` contain all the characters of `t` in the same order (a subsequence of `t`). The characters in `s` are already in order, and we want to append the minimum number of characters from `t` to `s` to make `s` a subsequence of `t`.
-
-For example:
-- Given `s = "abc"` and `t = "acdbc"`, we can see that the characters 'a' and 'c' are already in the correct order in `s`, so we need to append 'd' and 'b' from `t` to make `s` a subsequence of `t`.
-
-The task is to compute how many characters need to be appended to the end of `s` for it to become a subsequence of `t`.
-
-### Approach
-
-The main idea behind solving this problem efficiently is by utilizing the concept of subsequence matching. A subsequence is a sequence that appears in the same relative order, but not necessarily consecutively. The goal is to traverse through both strings and check how much of `t` is already matched in `s`. Once we know how much of `t` is matched in `s`, the number of characters that need to be appended will simply be the difference between the length of `t` and the number of matched characters.
-
-The approach is as follows:
-1. **Two-pointer technique**: Use two pointers, one for string `s` and another for string `t`.
-2. Traverse string `s` from left to right and try to match characters in `t`. Each time a character in `s` matches a character in `t`, move the pointer for `t` to the next character.
-3. The goal is to count how many characters from `t` can be matched in `s`. The number of characters we need to append to `s` will be the number of characters in `t` that we were unable to match.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Variable Initialization**
-
-```cpp
-int j = 0;
-```
-
-- Here, `j` is initialized to `0` and will be used as the pointer to traverse through the string `t`.
-
-#### 2. **Iterating Through String `s`**
-
-```cpp
-for(int i = 0; i < s.size() && j < t.size(); i++) {
-    j += s[i] == t[j];
+    return t.size()-j;
 }
 ```
 
-- This loop iterates through the string `s` with index `i`.
-- The loop runs as long as `i` is less than the size of `s` and `j` is less than the size of `t`.
-- In each iteration, the condition `s[i] == t[j]` checks if the current character in `s` matches the current character in `t`.
-- If the characters match, `j` is incremented by 1. This means we successfully matched the `j`-th character of `t` with a character in `s`.
+This function returns the minimum number of characters that need to be appended to string `s` to make it equal to string `t`. It checks the longest prefix of `t` that matches a suffix of `s`.
 
-#### 3. **Calculating the Result**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	int appendCharacters(string s, string t) {
+	```
+	This line defines the function `appendCharacters`, which takes two strings `s` and `t`, and returns an integer representing the number of characters to be appended to `s` to form `t.
 
-```cpp
-return t.size() - j;
-```
+2. **Variable Initialization**
+	```cpp
+	    int j = 0;
+	```
+	Here, we initialize the variable `j` to 0. This will be used to track how many characters of `t` match the suffix of `s`.
 
-- Once the loop finishes, `j` will represent the number of characters from `t` that have been matched with characters from `s`.
-- The difference `t.size() - j` gives the number of characters from `t` that were not matched and need to be appended to `s`.
-- We return this difference as the result, which is the minimum number of characters that need to be appended to `s` to make it a subsequence of `t`.
+3. **Loop for Matching Characters**
+	```cpp
+	    for(int i = 0; i < s.size() && j < t.size(); i++) {
+	```
+	This `for` loop iterates through each character of string `s`, while `j` is less than the length of string `t`. It tries to find a matching suffix of `s` that corresponds to a prefix of `t`.
 
-### Complexity Analysis
+4. **Character Comparison**
+	```cpp
+	        j += s[i] == t[j];
+	```
+	This line compares the characters at the current position in both strings `s` and `t`. If they match, `j` is incremented. `j` thus keeps track of the length of the matching prefix of `t`.
 
-#### Time Complexity:
+5. **Return Statement**
+	```cpp
+	    return t.size()-j;
+	```
+	After the loop ends, we return the difference between the size of `t` and `j`. This represents the number of characters that need to be appended to `s` to make it equal to `t`.
 
-The time complexity of the algorithm is **O(n)**, where `n` is the length of the string `s`. This is because we are iterating through the string `s` exactly once, performing constant-time operations in each iteration (comparing characters and updating the pointer `j`).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-- The loop runs for at most `min(s.size(), t.size())` iterations, but since we are only traversing through `s`, the complexity is determined by the length of `s`.
+The time complexity is O(n) where n is the length of string s, as we only need to iterate through s once.
 
-#### Space Complexity:
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-The space complexity is **O(1)**. This is because the algorithm uses only a fixed number of variables (`j` and `i`), regardless of the size of the input strings `s` and `t`. There is no additional space used for data structures that grow with the input size.
+The space complexity is O(1) as we only use a few variables for tracking pointers.
 
-### Conclusion
+**Happy Coding! 🎉**
 
-This solution efficiently solves the problem using the two-pointer technique to match characters from string `s` to string `t`. The main idea is to check how much of `t` is already matched by `s`, and then calculate how many characters need to be appended to make `s` a subsequence of `t`. The time complexity of this solution is linear in terms of the length of `s`, making it highly efficient. The space complexity is constant, as no extra space is needed except for a few variables.
-
-This approach ensures that the problem is solved in the optimal time and space, which is important when dealing with large strings.
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/description/)
 

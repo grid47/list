@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "PwjF3RO9djY"
 youtube_upload_date="2024-06-23"
 youtube_thumbnail="https://i.ytimg.com/vi/PwjF3RO9djY/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,138 +28,182 @@ youtube_thumbnail="https://i.ytimg.com/vi/PwjF3RO9djY/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given the root of a binary search tree and an integer k, your task is to return the kth smallest value in the tree (1-indexed).
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the root node of a binary search tree (BST), represented as a tree structure. The second input is an integer k (1 <= k <= n), where n is the number of nodes in the tree.
+- **Example:** `Input: root = [7, 3, 10, 2, 5, null, 15], k = 2`
+- **Constraints:**
+	- 1 <= k <= n <= 10^4
+	- 0 <= Node.val <= 10^4
 
-{{< highlight cpp >}}
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    int kthSmallest(TreeNode* root, int k) {
-        stack<TreeNode*> stk;
-        // stk.push(root);
-        TreeNode* node= root;
-        while(!stk.empty() || node) {
-            if(node) {
-                stk.push(node);
-                node = node->left;
-            } else {
-                node = stk.top();
-                stk.pop();
-                k--;
-                if(k == 0) return node->val;
-                node = node->right;
-            }
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be a single integer representing the kth smallest value in the binary search tree.
+- **Example:** `Output: 3`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the kth smallest element in the binary search tree by leveraging the properties of the binary search tree and performing an in-order traversal.
+
+- Perform an in-order traversal of the binary search tree.
+- Keep track of the number of nodes visited during the traversal.
+- Return the value of the kth node when the counter reaches k.
+{{< dots >}}
+### Problem Assumptions ✅
+- The tree is a valid binary search tree.
+- There are no duplicate values in the tree.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: root = [7, 3, 10, 2, 5, null, 15], k = 2`  \
+  **Explanation:** In this tree, the inorder traversal would give the sequence: [2, 3, 5, 7, 10, 15]. The second smallest value is 3, so the output is 3.
+
+- **Input:** `Input: root = [4, 2, 6, 1, 3, 5, 7], k = 3`  \
+  **Explanation:** The inorder traversal of the tree gives: [1, 2, 3, 4, 5, 6, 7]. The third smallest value is 3, so the output is 3.
+
+{{< dots >}}
+## Approach 🚀
+To find the kth smallest value in a binary search tree, an in-order traversal can be used since it visits nodes in ascending order for a BST.
+
+### Initial Thoughts 💭
+- In-order traversal of a BST gives the values in sorted order.
+- By counting the nodes during the traversal, we can identify when we reach the kth smallest element.
+{{< dots >}}
+### Edge Cases 🌐
+- If the root is null, there are no elements to traverse, and the problem should return an error or invalid result.
+- For large trees, ensure the solution can handle up to 10^4 nodes without performance degradation.
+- If the tree has a single node, that node will be the kth smallest for any k = 1.
+- The solution must work within time limits for up to 10^4 nodes.
+{{< dots >}}
+## Code 💻
+```cpp
+int kthSmallest(TreeNode* root, int k) {
+    stack<TreeNode*> stk;
+    // stk.push(root);
+    TreeNode* node= root;
+    while(!stk.empty() || node) {
+        if(node) {
+            stk.push(node);
+            node = node->left;
+        } else {
+            node = stk.top();
+            stk.pop();
+            k--;
+            if(k == 0) return node->val;
+            node = node->right;
         }
-        return NULL;
     }
-};
-{{< /highlight >}}
----
-
-### 🚀 Problem Statement
-
-In this problem, we are tasked with finding the `k`th smallest element in a **binary search tree (BST)**. Given the root of the tree and an integer `k`, we need to return the `k`th smallest element in the BST. The BST property ensures that for any node, the left subtree contains values smaller than the node, and the right subtree contains values larger. This structure allows us to search and traverse the tree efficiently.
-
----
-
-### 🧠 Approach
-
-To find the kth smallest element efficiently, we can take advantage of an **in-order traversal** of the BST. In-order traversal visits the nodes of a BST in ascending order, making it perfect for this problem. By counting the number of nodes visited during the traversal, we can stop as soon as we reach the `k`th smallest element.
-
-To avoid the overhead of recursion, we'll implement this traversal iteratively using a **stack**. Here’s how we can break down the approach:
-
-1. **In-order Traversal Using Stack**:
-   - Start by pushing the leftmost nodes of the tree onto the stack.
-   - Pop nodes from the stack, count them, and then move to the right children.
-   - The moment we pop the `k`th node, we return its value because it's the `k`th smallest element in the tree.
-
-2. **Edge Case Handling**:
-   - No need to handle cases where `k` is invalid or out of bounds, as per problem constraints. We can assume that `k` is always valid and the tree is never empty.
-
----
-
-### 🔨 Step-by-Step Code Breakdown
-
-Let’s break down the code step-by-step for a better understanding:
-
-```cpp
-class Solution {
-public:
-    int kthSmallest(TreeNode* root, int k) {
-        stack<TreeNode*> stk;
-        TreeNode* node = root;
+    return NULL;
+}
 ```
 
-- We start by declaring a stack (`stk`) to assist with the iterative traversal. The variable `node` is initially set to the root of the tree.
+This function finds the k-th smallest element in a binary search tree (BST) by performing an in-order traversal using a stack.
 
-```cpp
-        while(!stk.empty() || node) {
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int kthSmallest(TreeNode* root, int k) {
+	```
+	Defines the function `kthSmallest` that takes the root of a binary tree and the value `k`, and returns the k-th smallest element in the BST.
 
-- The loop runs as long as there are nodes in the stack or nodes left to visit. This ensures we keep traversing until we reach the kth smallest node.
+2. **Variable Initialization**
+	```cpp
+	    stack<TreeNode*> stk;
+	```
+	Initializes a stack `stk` to assist with the in-order traversal of the tree.
 
-```cpp
-            if(node) {
-                stk.push(node);
-                node = node->left;
-            } else {
-                node = stk.top();
-                stk.pop();
-                k--;
-                if(k == 0) return node->val;
-                node = node->right;
-            }
-```
+3. **Variable Initialization**
+	```cpp
+	    TreeNode* node= root;
+	```
+	Assigns the root of the tree to the `node` pointer for traversal.
 
-- **Traverse left**: If the current node exists, we push it onto the stack and move to its left child.
-- **Process current node**: When there are no more left children (`node == NULL`), we pop a node from the stack, decrement `k`, and check if `k` has reached 0. If `k` is 0, we return the current node’s value as the `k`th smallest element.
-- **Move right**: If the node has a right child, we move to the right and continue the process.
+4. **Loop Control**
+	```cpp
+	    while(!stk.empty() || node) {
+	```
+	Begins a `while` loop that runs until both the stack is empty and there are no more nodes to visit.
 
-```cpp
-        return NULL;
-    }
-};
-```
+5. **Condition Check**
+	```cpp
+	        if(node) {
+	```
+	Checks if the current `node` is not null, meaning there is still a node to visit.
 
-- The function returns once the `k`th smallest element is found. The `return NULL` is a fallback but will never be reached as the problem guarantees the `k`th smallest element will always exist.
+6. **Push Node**
+	```cpp
+	            stk.push(node);
+	```
+	Pushes the current node onto the stack to process it later.
 
----
+7. **Traverse Left**
+	```cpp
+	            node = node->left;
+	```
+	Moves to the left child of the current node for further traversal.
 
-### 📈 Complexity Analysis
+8. **Else Condition**
+	```cpp
+	        } else {
+	```
+	If the current node is null, it means we've reached the leftmost node and can start processing nodes from the stack.
 
-#### Time Complexity:
-- **In-order Traversal**: We may need to visit every node in the tree to find the kth smallest element. Each node is pushed and popped from the stack once. The time complexity is proportional to the number of nodes in the tree.
-  
-  - **Time Complexity**: `O(N)` where `N` is the number of nodes in the tree. However, since we stop as soon as we find the `k`th element, the time complexity is actually `O(k)` in the best case.
+9. **Pop Node**
+	```cpp
+	            node = stk.top();
+	```
+	Pops the top node from the stack, which is the next node in the in-order traversal.
 
-#### Space Complexity:
-- **Stack Space**: The space used by the stack depends on the height of the tree. In the worst case, if the tree is unbalanced (like a linked list), the stack could hold all the nodes in the tree.
-  
-  - **Space Complexity**: `O(H)`, where `H` is the height of the tree. In the worst case (unbalanced tree), `H` could be equal to `N`. In the best case (balanced tree), `H` would be `O(log N)`.
+10. **Pop Node**
+	```cpp
+	            stk.pop();
+	```
+	Removes the node from the stack after it has been processed.
 
----
+11. **Decrement k**
+	```cpp
+	            k--;
+	```
+	Decrements the value of `k` as we move closer to finding the k-th smallest element.
 
-### 🏁 Conclusion
+12. **Kth Element Check**
+	```cpp
+	            if(k == 0) return node->val;
+	```
+	Checks if the current node is the k-th smallest element. If so, returns its value.
 
-This approach efficiently finds the `k`th smallest element in a BST using an **iterative in-order traversal with a stack**. By leveraging the BST’s properties, we can visit nodes in ascending order and stop as soon as we reach the desired element. This solution is optimal with a time complexity of `O(N)` and space complexity of `O(H)`, where `H` is the height of the tree.
+13. **Traverse Right**
+	```cpp
+	            node = node->right;
+	```
+	Moves to the right child of the current node to continue the in-order traversal.
 
-#### Key Takeaways:
-- **In-order Traversal** ensures nodes are visited in sorted order.
-- **Iterative Solution** avoids recursion, making it suitable for large trees.
-- **Time Complexity**: `O(N)` in the worst case, but can be `O(k)` if `k` is small.
-- **Space Complexity**: `O(H)`, where `H` is the tree height.
+14. **Return Null**
+	```cpp
+	    return NULL;
+	```
+	Returns `NULL` if no k-th smallest element is found, which should never happen for a valid input.
 
-This method is both time and space efficient and provides a reliable way to solve the problem for any given BST!
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n) because the traversal must visit every node in the tree at least once.
+
+### Space Complexity 💾
+- **Best Case:** O(h)
+- **Worst Case:** O(h)
+
+The space complexity is O(h), where h is the height of the tree, due to the stack used in the traversal (for the recursive solution, it depends on the tree's height).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/)
 

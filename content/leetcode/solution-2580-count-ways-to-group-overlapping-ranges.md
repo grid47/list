@@ -14,118 +14,179 @@ img_src = ""
 youtube = "5-8-2mDdoGs"
 youtube_upload_date="2023-03-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/5-8-2mDdoGs/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+There are `n` people standing in a line labeled from 1 to `n`. The first person starts with a pillow. Every second, the person holding the pillow passes it to the next person in line. Once the pillow reaches the last person in the line, it starts moving back in the opposite direction, passing towards the first person. Given `n` and `time`, return the index of the person holding the pillow after `time` seconds.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers, `n` (number of people in the line) and `time` (the time in seconds after which we want to determine who holds the pillow).
+- **Example:** `For example, `n = 4`, `time = 5`.`
+- **Constraints:**
+	- 2 <= n <= 1000
+	- 1 <= time <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int countWays(vector<vector<int>>& range) {
-        sort(range.begin(), range.end());
-        int n = range.size();
-        
-        int mod = (int) 1e9 + 7;        
-        int next = range[0][1];
-        long cnt = 2;
-        for(int i = 0; i < n; i++) {
-            if(range[i][0] <= next) {
-                next = max(next, range[i][1]);
-                continue;
-            }
-            cnt = (cnt * 2) % mod;
-            next = range[i][1];
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the index of the person holding the pillow after `time` seconds.
+- **Example:** `For input `n = 4, time = 5`, the output is `2`.`
+- **Constraints:**
+	- The result will always be a valid person index in the range from 1 to `n`.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to compute the index of the person holding the pillow after `time` seconds, considering the back-and-forth passing mechanism.
+
+- 1. Determine the cycle length: the pillow will move back and forth through all the people, so the cycle is `2 * (n - 1)` seconds.
+- 2. If the time is less than the cycle length, determine if it's in the forward or backward direction.
+- 3. Calculate the index of the person holding the pillow by simulating the movement through the cycle.
+{{< dots >}}
+### Problem Assumptions ✅
+- The time will always be a positive integer.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For `n = 5, time = 7``  \
+  **Explanation:** The pillow passes from person 1 to person 5, then back to person 4, and stops at person 4 after 7 seconds.
+
+{{< dots >}}
+## Approach 🚀
+The approach is to determine the cycle of pillow passing, and based on the time value, compute the position of the pillow. We use a modulo operation to determine the effective time within the cycle.
+
+### Initial Thoughts 💭
+- The pillow follows a repeating back-and-forth pattern.
+- Since the cycle is fixed, we can reduce the time into a manageable range using modulo operation.
+{{< dots >}}
+### Edge Cases 🌐
+- No empty inputs are expected; `n` and `time` will always be positive.
+- The solution should handle large values for `n` and `time` efficiently.
+- If `n` is the smallest value (2), the solution should handle it correctly.
+- Ensure that `n` and `time` are within the constraints and that the result is correctly calculated.
+{{< dots >}}
+## Code 💻
+```cpp
+int countWays(vector<vector<int>>& range) {
+    sort(range.begin(), range.end());
+    int n = range.size();
+    
+    int mod = (int) 1e9 + 7;        
+    int next = range[0][1];
+    long cnt = 2;
+    for(int i = 0; i < n; i++) {
+        if(range[i][0] <= next) {
+            next = max(next, range[i][1]);
+            continue;
         }
-
-        return cnt;
+        cnt = (cnt * 2) % mod;
+        next = range[i][1];
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
+    return cnt;
+}
+```
 
-Given a list of intervals in the form of a 2D vector `range`, the task is to calculate the number of distinct ways to pick non-overlapping intervals. Each interval is represented by two integers: the start and end points. The goal is to find how many distinct sets of non-overlapping intervals can be formed such that no intervals overlap in any chosen set. The answer should be returned modulo \(10^9 + 7\).
+This is the full implementation of the function `countWays`, which calculates the number of possible ways to arrange intervals based on the given ranges.
 
-### Approach
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int countWays(vector<vector<int>>& range) {
+	```
+	Define the function `countWays`, which takes a vector of integer vectors `range` as input.
 
-To solve this problem, we need to count the number of ways to choose non-overlapping intervals. This is a dynamic programming or greedy problem, but the approach here leverages sorting and a greedy strategy:
+2. **Sorting**
+	```cpp
+	    sort(range.begin(), range.end());
+	```
+	Sort the `range` vector in ascending order based on the first element of each sub-vector.
 
-1. **Sort the Intervals by Start Point**:  
-   First, we sort the intervals based on their start point. Sorting allows us to process the intervals in order and compare their end points efficiently.
+3. **Size Initialization**
+	```cpp
+	    int n = range.size();
+	```
+	Store the size of the `range` vector in the variable `n`.
 
-2. **Initialize Counters**:  
-   We initialize a counter `cnt` that starts at 2. This is because, in the beginning, we have two possibilities for the first interval:
-   - Select the first interval.
-   - Skip the first interval.
+4. **Modulo Constant**
+	```cpp
+	    int mod = (int) 1e9 + 7;        
+	```
+	Define a constant `mod` with the value `1e9 + 7`, used for modular arithmetic to prevent overflow.
 
-   We also initialize a variable `next` to track the end point of the most recent non-overlapping interval. This ensures that we don't select overlapping intervals.
+5. **Initialization**
+	```cpp
+	    int next = range[0][1];
+	```
+	Initialize the `next` variable with the second value of the first range, representing the end of the current interval.
 
-3. **Greedy Interval Selection**:  
-   We loop through the sorted intervals:
-   - If the current interval starts before or at the same time as the `next` interval, we update `next` to the maximum of `next` and the current interval's end. This means we are extending the current non-overlapping set.
-   - If the current interval starts after `next`, it means the intervals are no longer overlapping. We can now form two choices:
-     - Include the current interval in the set.
-     - Skip the current interval.
-     
-   For each non-overlapping transition, we multiply the number of ways by 2 (because we now have two choices: to include or exclude the interval). The result is taken modulo \(10^9 + 7\).
+6. **Initialization**
+	```cpp
+	    long cnt = 2;
+	```
+	Initialize `cnt` to 2, representing the initial number of ways to arrange intervals.
 
-4. **Return the Result**:  
-   Finally, after processing all intervals, the total number of ways is stored in `cnt`. This is the final result.
+7. **Loop Start**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop to iterate over each interval in the `range` vector.
 
-### Code Breakdown (Step by Step)
+8. **Condition Check**
+	```cpp
+	        if(range[i][0] <= next) {
+	```
+	Check if the start of the current interval is less than or equal to `next`, indicating overlap or continuity.
 
-1. **Sort the Intervals**:  
-   ```cpp
-   sort(range.begin(), range.end());
-   ```
-   Sorting the intervals by their starting point ensures that we process them in the correct order. This helps in efficiently checking if the intervals overlap and helps to decide whether to include them in the current non-overlapping set.
+9. **Interval Update**
+	```cpp
+	            next = max(next, range[i][1]);
+	```
+	Update the `next` value to the maximum of the current `next` and the end of the current interval.
 
-2. **Initialize Variables**:
-   ```cpp
-   int mod = (int) 1e9 + 7;
-   int next = range[0][1];
-   long cnt = 2;
-   ```
-   - `mod` is the modulus value used to ensure that the result fits within the specified range.
-   - `next` holds the end point of the most recent non-overlapping interval. Initially, it is set to the end point of the first interval.
-   - `cnt` starts at 2, because there are two possible choices for the first interval: either we include it or we skip it.
+10. **Continue**
+	```cpp
+	            continue;
+	```
+	If the current interval overlaps with the previous one, continue to the next iteration.
 
-3. **Iterate Through Each Interval**:
-   ```cpp
-   for(int i = 0; i < n; i++) {
-       if(range[i][0] <= next) {
-           next = max(next, range[i][1]);
-           continue;
-       }
-       cnt = (cnt * 2) % mod;
-       next = range[i][1];
-   }
-   ```
-   - We loop through each interval:
-     - If the start of the current interval is less than or equal to `next` (the end of the last selected non-overlapping interval), we simply extend the current non-overlapping set by updating `next` to be the maximum of its current value and the end of the current interval. We continue to the next interval without changing the number of ways.
-     - If the current interval starts after `next`, it means we can form a new non-overlapping set, so we multiply the number of ways by 2 (because we now have two choices: include or exclude the interval).
+11. **Counting**
+	```cpp
+	        cnt = (cnt * 2) % mod;
+	```
+	If no overlap, multiply the current number of ways `cnt` by 2 and take modulo `mod` to avoid overflow.
 
-4. **Return the Result**:
-   ```cpp
-   return cnt;
-   ```
-   The final result is the number of ways to form non-overlapping intervals, modulo \(10^9 + 7\).
+12. **Interval Update**
+	```cpp
+	        next = range[i][1];
+	```
+	Update `next` to the end of the current interval.
 
-### Complexity Analysis
+13. **Return**
+	```cpp
+	    return cnt;
+	```
+	Return the final result, which is the number of ways to arrange intervals.
 
-- **Time Complexity**:  
-  The time complexity is dominated by the sorting step, which is \(O(n \log n)\), where `n` is the number of intervals. The subsequent loop through the intervals takes \(O(n)\). Hence, the overall time complexity is \(O(n \log n)\).
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(1)
+- **Worst Case:** O(1)
 
-- **Space Complexity**:  
-  The space complexity is \(O(1)\) for the algorithm, as we are only using a few variables to store the count and the end point of the last selected interval. The space for storing the intervals themselves is not considered here as it's part of the input.
+The solution operates in constant time as it only requires modulo and basic arithmetic operations.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution efficiently counts the number of ways to select non-overlapping intervals by leveraging a greedy approach. Sorting the intervals helps ensure that we can easily check if they overlap or not, and the use of a dynamic counting mechanism allows us to account for the two possible choices at each step: include or exclude an interval. This approach is optimal for this problem and runs in \(O(n \log n)\) time, which is suitable for large inputs. The result is returned modulo \(10^9 + 7\), ensuring that we do not run into overflow issues.
+The space complexity is constant as we only use a few variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/)
 

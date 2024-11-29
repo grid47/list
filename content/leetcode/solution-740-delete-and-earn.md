@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "MnbTKT4-KLc"
 youtube_upload_date="2023-07-05"
 youtube_thumbnail="https://i.ytimg.com/vi/MnbTKT4-KLc/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,111 +28,158 @@ youtube_thumbnail="https://i.ytimg.com/vi/MnbTKT4-KLc/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array nums. You want to maximize the number of points you can earn by performing the following operation any number of times: Pick any nums[i] and delete it to earn nums[i] points. Afterwards, you must delete every element equal to nums[i] - 1 and every element equal to nums[i] + 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is an integer array representing the numbers from which you will be selecting elements to delete and earn points.
+- **Example:** `nums = [5, 6, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 2 * 10^4
+	- 1 <= nums[i] <= 10^4
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int deleteAndEarn(vector<int>& nums) {
-        int n = 10001;
-        vector<int> val(n + 1, 0);
-        vector<int> dp (n + 1, 0);
-        
-        for(int num : nums)
-          val[num] += num;
-        
-        dp[0] = 0;
-        dp[1] = val[0];
-        for(int i = 1; i < n; i++)
-        dp[i + 1] = max(dp[i], dp[i - 1] + val[i]);
-        
-        return dp[n];
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum number of points you can earn by performing the operation some number of times.
+- **Example:** `For nums = [5, 6, 4], the output should be 8.`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Maximize the total points earned from deleting elements and ensuring no adjacent elements (nums[i] - 1 or nums[i] + 1) are left.
 
-The problem asks us to find the maximum points we can earn from a list of integers by performing the following operations:
-- If we select an integer `num`, we earn `num * frequency of num` points and must delete all instances of `num` and `num+1` from the list.
-- We need to maximize the total points we can earn by performing this operation.
+- Count the occurrences of each number in the array.
+- Create a dynamic programming array where dp[i] stores the maximum points obtainable by considering numbers from 1 to i.
+- For each number, either choose to delete it and earn points or skip it and carry forward the previous maximum.
+- Return the final value from the dynamic programming array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array nums will always contain at least one element.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `For nums = [5, 6, 4], the output is 8.`  \
+  **Explanation:** By deleting the number 6 and 4, we maximize our points by choosing the best elements to remove.
 
-For example, if `nums = [3, 4, 2]`, we can select `3`, earn `3 * 1 = 3` points, then delete all instances of `3` and `4`. The remaining number is `2`, so the total points we would earn would be `3 + 2 = 5`.
+{{< dots >}}
+## Approach 🚀
+A dynamic programming approach to maximize the total points by efficiently handling adjacent numbers.
 
-### Approach
-
-To solve this problem efficiently, we can use a dynamic programming approach. The solution can be broken down into these key steps:
-
-1. **Frequency Calculation**: First, calculate the total value we can earn by selecting each number from the input array. This can be done by creating an array `val` where `val[i]` represents the total value (sum of all `i`'s) for the number `i`.
-
-2. **Dynamic Programming Array (dp)**: After calculating the values, we define a dynamic programming (DP) array `dp` where `dp[i]` represents the maximum points we can earn from the subarray of numbers from `0` to `i`. The idea is to either:
-   - **Skip** the current number `i`, in which case the maximum points would be the same as `dp[i-1]`.
-   - **Select** the current number `i`, in which case we add `val[i]` (points earned from `i`) to the maximum points from `dp[i-2]` (because selecting `i` means we must skip `i-1`).
-
-3. **Recursive Transition**: The recurrence relation to fill the DP array is:
-   - `dp[i] = max(dp[i-1], dp[i-2] + val[i])`
-   This means for each number `i`, we either skip it or select it.
-
-4. **Final Result**: After filling the DP array, the last element `dp[n]` will contain the maximum points that can be earned.
-
-### Code Breakdown (Step by Step)
-
-#### Step 1: Initialize Arrays
-We initialize two arrays:
-- `val`: to store the total value for each number in the range `[0, 10000]`. The index `i` in this array will store the sum of all occurrences of the number `i` in the input list.
-- `dp`: to store the maximum points that can be earned up to the number `i`. The size of `dp` is `10001`, corresponding to all possible values from `0` to `10000`.
-
+### Initial Thoughts 💭
+- This problem can be reduced to a dynamic programming problem where the state depends on whether we take the current element or skip it.
+- We can optimize our solution by keeping track of maximum points for each number up to the largest value in the array.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one element, so no empty array cases will exist.
+- For large inputs (up to 20,000 elements), the algorithm should efficiently handle the array within the time limits.
+- If the array contains only one unique number, the algorithm should return the total points earned by deleting all occurrences of that number.
+- The solution must efficiently handle inputs up to the largest constraint.
+{{< dots >}}
+## Code 💻
 ```cpp
-int n = 10001;
-vector<int> val(n + 1, 0);  // To store total value for each number
-vector<int> dp(n + 1, 0);   // To store maximum points up to each number
+int deleteAndEarn(vector<int>& nums) {
+    int n = 10001;
+    vector<int> val(n + 1, 0);
+    vector<int> dp (n + 1, 0);
+    
+    for(int num : nums)
+      val[num] += num;
+    
+    dp[0] = 0;
+    dp[1] = val[0];
+    for(int i = 1; i < n; i++)
+    dp[i + 1] = max(dp[i], dp[i - 1] + val[i]);
+    
+    return dp[n];
+}
 ```
 
-#### Step 2: Populate `val` Array
-We loop through the input array `nums` and add the values to the `val` array. This way, `val[i]` will hold the total sum of points we can earn by selecting the number `i` (i.e., `i * frequency of i`).
+This code solves the 'Delete and Earn' problem using dynamic programming. The problem asks to delete a number from an array and earn points equal to that number. If you delete a number, you cannot delete adjacent numbers.
 
-```cpp
-for(int num : nums)
-  val[num] += num;
-```
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int deleteAndEarn(vector<int>& nums) {
+	```
+	Defines the function that solves the problem. It takes an array of integers as input.
 
-#### Step 3: Base Cases for DP
-We set up the base cases for the dynamic programming array `dp`:
-- `dp[0] = 0`: No points can be earned from number `0`.
-- `dp[1] = val[1]`: The only option is to pick number `1` if it exists in the input.
+2. **Variable Initialization**
+	```cpp
+	    int n = 10001;
+	```
+	Initializes a variable `n` to store the size of the `val` and `dp` vectors, based on the maximum possible value in `nums`.
 
-```cpp
-dp[0] = 0;
-dp[1] = val[0];
-```
+3. **Vector Initialization**
+	```cpp
+	    vector<int> val(n + 1, 0);
+	```
+	Creates a vector `val` to store the total points earned for each number.
 
-#### Step 4: Fill DP Array
-Next, we use a loop to fill the DP array using the recurrence relation. For each number `i` from `2` to `10000`, we either skip it or select it. We update `dp[i]` to the maximum of skipping `i` (i.e., `dp[i-1]`) or selecting `i` (i.e., `dp[i-2] + val[i]`).
+4. **Vector Initialization**
+	```cpp
+	    vector<int> dp (n + 1, 0);
+	```
+	Creates a vector `dp` to store the maximum points that can be earned up to each number.
 
-```cpp
-for(int i = 1; i < n; i++)
-  dp[i + 1] = max(dp[i], dp[i - 1] + val[i]);
-```
+5. **Loop: Populating `val` vector**
+	```cpp
+	    for(int num : nums)
+	```
+	Iterates over each number in `nums` and updates the `val` vector.
 
-#### Step 5: Return the Final Result
-Finally, we return `dp[n]`, which contains the maximum points we can earn.
+6. **Update Operation**
+	```cpp
+	      val[num] += num;
+	```
+	Updates the `val` vector by adding the current number to its corresponding index.
 
-```cpp
-return dp[n];
-```
+7. **Base Case Setup**
+	```cpp
+	    dp[0] = 0;
+	```
+	Sets the base case for `dp[0]`, which is 0, representing that no points are earned when no numbers are considered.
 
-### Complexity
+8. **Base Case Setup**
+	```cpp
+	    dp[1] = val[0];
+	```
+	Sets the base case for `dp[1]` to be the value of `val[0]`, representing that the first number's point value is considered.
 
-#### Time Complexity:
-- **O(n)**, where `n` is the size of the input array `nums`. We traverse through the `nums` array to calculate the values and then compute the DP array in a single pass.
+9. **Dynamic Programming Iteration**
+	```cpp
+	    for(int i = 1; i < n; i++)
+	```
+	Starts the dynamic programming loop to calculate the maximum points that can be earned up to each number.
 
-#### Space Complexity:
-- **O(n)**, where `n` is the size of the range of numbers. We use two arrays, `val` and `dp`, both of size `10001` (due to the range of possible values). Therefore, the space complexity is linear with respect to the range of numbers in the input.
+10. **Dynamic Programming Transition**
+	```cpp
+	    dp[i + 1] = max(dp[i], dp[i - 1] + val[i]);
+	```
+	For each number `i`, calculates the maximum points by either taking the points up to `i` or including the points from `i` and skipping `i - 1`.
 
-### Conclusion
+11. **Return Statement**
+	```cpp
+	    return dp[n];
+	```
+	Returns the maximum points that can be earned by considering all numbers.
 
-The problem of maximizing the points in the "delete and earn" scenario can be efficiently solved using a dynamic programming approach. By calculating the total value for each number and using a DP array to track the maximum points that can be earned, we can ensure that we maximize the score while adhering to the deletion constraints. The approach leverages recurrence relations to decide whether to skip or select a number, ultimately providing an optimal solution with a time complexity of **O(n)**.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of elements in the array.
+- **Average Case:** O(n), as the algorithm only processes each element once.
+- **Worst Case:** O(n), as each element is processed only once in a linear scan.
+
+The time complexity is O(n), as we perform a constant amount of work for each element in the array.
+
+### Space Complexity 💾
+- **Best Case:** O(n), as we may need space for both the dynamic programming array and frequency counts.
+- **Worst Case:** O(n), due to the space used by the dynamic programming array and frequency count array.
+
+The space complexity is O(n) due to the space needed for the dynamic programming and frequency count arrays.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/delete-and-earn/description/)
 

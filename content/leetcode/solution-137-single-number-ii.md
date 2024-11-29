@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "cOFAmaMBVps"
 youtube_upload_date="2020-06-22"
 youtube_thumbnail="https://i.ytimg.com/vi/cOFAmaMBVps/maxresdefault.jpg"
+comments = true
 +++
 
 
@@ -27,108 +28,132 @@ youtube_thumbnail="https://i.ytimg.com/vi/cOFAmaMBVps/maxresdefault.jpg"
     captionColor="#555"
 >}}
 ---
-**Code:**
+You are given an integer array where every element appears exactly three times, except for one element which appears only once. Find the element that appears only once and return it. The solution must run in linear time complexity and use constant extra space.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** An array of integers where each element except for one appears three times. The array will contain at least one element.
+- **Example:** `nums = [1, 1, 2, 1, 2, 2, 4]`
+- **Constraints:**
+	- 1 <= nums.length <= 30,000
+	- -2^31 <= nums[i] <= 2^31 - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int singleNumber(vector<int>& nums) {
-        int n = nums.size();
-        
-        int ones = 0, twos = 0;
-        for(int i = 0; i < n; i++) {
-            ones = (ones ^ nums[i]) & ~twos;
-            twos = (twos ^ nums[i]) & ~ones;            
-        }
-        return ones;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the element that appears only once in the array.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The array contains exactly one element that appears once.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the unique element that appears only once by using bitwise operations.
+
+- 1. Use two variables (`ones` and `twos`) to track the bits that appear once and twice, respectively.
+- 2. Iterate through the array, updating the `ones` and `twos` variables using XOR and bitwise AND operations.
+- 3. After completing the iteration, `ones` will contain the unique element that appears only once.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array is non-empty and contains exactly one element that appears only once, while all other elements appear exactly three times.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 1, 2, 1, 2, 2, 4]`  \
+  **Explanation:** In this case, the numbers `1` and `2` appear three times, and `4` appears only once. The result is 4.
+
+- **Input:** `nums = [8, 8, 8, 5]`  \
+  **Explanation:** Here, `8` appears three times, while `5` appears only once, so the result is 5.
+
+{{< dots >}}
+## Approach 🚀
+We can use bitwise operations to solve this problem in linear time with constant space. The key idea is to maintain two variables to track the bits that appear once and twice.
+
+### Initial Thoughts 💭
+- Using bitwise XOR and AND operations can efficiently track occurrences of numbers.
+- We need to process each element once and use only a constant amount of space.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, return an error or handle it as a constraint violation.
+- The solution must handle arrays up to 30,000 elements efficiently.
+- Ensure the solution works for both large and small integer values in the array.
+- The algorithm must maintain linear time complexity and constant space complexity even for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+int singleNumber(vector<int>& nums) {
+    int n = nums.size();
+    
+    int ones = 0, twos = 0;
+    for(int i = 0; i < n; i++) {
+        ones = (ones ^ nums[i]) & ~twos;
+        twos = (twos ^ nums[i]) & ~ones;            
     }
-};
-{{< /highlight >}}
----
-
-### 🧩 Problem Statement
-
-Imagine an array where every element appears exactly **three times**, except for **one special number** that appears only once. Your task is to find that unique number hiding among all the others! Sounds tricky, but with a clever approach, we can pinpoint that one number in a flash! ✨
-
----
-
-### 🔍 Approach
-
-To tackle this problem efficiently, we use **bitwise manipulation**—a powerful tool that allows us to track bits and uncover the number that shows up only once. With two simple variables, `ones` and `twos`, we can cleverly monitor the bits that appear **once** and **twice** throughout the array. By the end, the number that appears only once will be standing tall while the others get reset! 
-
-The trick is to manage these two variables while keeping track of the bits that show up once and twice, and discarding the ones that appear **three times**.
-
----
-
-### 💡 Step-by-Step Code Breakdown
-
-#### 1️⃣ **Initialize `ones` and `twos`**
-
-```cpp
-int ones = 0, twos = 0;
-```
-Here, we set up two variables, `ones` and `twos`, both starting at zero. These will help us track which bits have appeared once and twice, respectively, as we loop through the array. Simple, right? 💪
-
----
-
-#### 2️⃣ **Iterate Over the Array and Update `ones` and `twos`**
-
-```cpp
-for(int i = 0; i < n; i++) {
-    ones = (ones ^ nums[i]) & ~twos;
-    twos = (twos ^ nums[i]) & ~ones; 
+    return ones;
 }
 ```
-This is where the magic happens! ✨ Here's what each line does:
-- **Update `ones`**:
-  ```cpp
-  ones = (ones ^ nums[i]) & ~twos;
-  ```
-  - The XOR (`^`) operation toggles the bits in `ones` with those in the current number (`nums[i]`).
-  - The `& ~twos` part ensures that if a bit has already appeared twice, we don't include it again in `ones`. This helps us focus on bits that appear **once**.
 
-- **Update `twos`**:
-  ```cpp
-  twos = (twos ^ nums[i]) & ~ones;
-  ```
-  - Similarly, XOR is used to update `twos`, keeping track of bits that have appeared **twice**.
-  - The `& ~ones` part ensures that bits already marked as "once" aren’t counted again in `twos`.
+The `singleNumber` function uses bit manipulation to find the number that appears only once in an array where every other number appears exactly twice. It uses two variables `ones` and `twos` to track the bits that appear once and twice, respectively.
 
-These steps efficiently track which bits appear once and twice, while any bits appearing three times are wiped out automatically! 🔄
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int singleNumber(vector<int>& nums) {
+	```
+	The function `singleNumber` is defined to take a vector of integers `nums` as input and returns the integer that appears only once.
 
----
+2. **Size Calculation**
+	```cpp
+	    int n = nums.size();
+	```
+	The size of the input vector `nums` is stored in the variable `n` to control the iteration.
 
-#### 3️⃣ **Return the Unique Number**
+3. **Variable Initialization**
+	```cpp
+	    int ones = 0, twos = 0;
+	```
+	Initialize two variables, `ones` and `twos`, to zero. These variables will keep track of the bits that appear once and twice in the input array.
 
-```cpp
-return ones;
-```
-By the time we’ve finished looping through the array, `ones` will hold the number that appears only **once**. Why? Because all bits that appeared three times get erased in both `ones` and `twos`, leaving only the unique number in `ones`. 🎯
+4. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Start a loop to iterate through the `nums` array. This loop will process each element to update the `ones` and `twos` variables.
 
----
+5. **Bitwise Operation (ones)**
+	```cpp
+	        ones = (ones ^ nums[i]) & ~twos;
+	```
+	The bitwise XOR operation between `ones` and `nums[i]` flips the bits in `ones`. The result is then ANDed with the negation of `twos` to ensure that a bit that appears twice doesn't get set in `ones`.
 
-### 🧠 Time and Space Complexity
+6. **Bitwise Operation (twos)**
+	```cpp
+	        twos = (twos ^ nums[i]) & ~ones;            
+	```
+	The bitwise XOR operation between `twos` and `nums[i]` flips the bits in `twos`. The result is ANDed with the negation of `ones` to ensure that a bit that appears once doesn't get set in `twos`.
 
-#### ⏱️ Time Complexity:
-- **O(n)**: We loop through the array once, where `n` is the number of elements. Each iteration involves constant-time operations with bitwise operations. So, this is as efficient as it gets! 🚀
+7. **Return Statement**
+	```cpp
+	    return ones;
+	```
+	Return the value of `ones`, which contains the number that appears only once after all iterations.
 
-#### 🧳 Space Complexity:
-- **O(1)**: We only need two integer variables, `ones` and `twos`, to track the state. No extra space required! This makes the space complexity constant and optimal. 💡
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
----
+The time complexity is O(n) because we iterate through the array once.
 
-### 🏁 Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-With the **bitwise approach**, we’ve crafted a solution that finds the unique number in an array where every other number appears exactly three times. Thanks to bit manipulation, this algorithm runs in **O(n)** time and uses only **O(1)** space, making it highly efficient and perfect for large datasets. 🌟
+The space complexity is O(1) as we use only two variables to store intermediate results.
 
-Here’s a quick recap:
-- **Time Complexity**: O(n) — We pass through the array once, performing constant-time operations!
-- **Space Complexity**: O(1) — Only two variables needed to track the state, no extra space required!
-- **Bitwise Magic**: With XOR and AND operations, we cleverly keep track of numbers appearing once and twice while ignoring the ones that appear three times.
+**Happy Coding! 🎉**
 
-This solution demonstrates how bitwise tricks can solve problems in an elegant and efficient way. It’s a fantastic technique to master, especially if you’re preparing for coding interviews! Keep practicing, and soon these tricks will feel like second nature. 💪 You’ve got this! Keep up the great work! 🌟
-
----
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/single-number-ii/description/)
 

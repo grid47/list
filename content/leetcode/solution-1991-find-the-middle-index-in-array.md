@@ -14,132 +14,152 @@ img_src = ""
 youtube = "C9PhqirC9vs"
 youtube_upload_date="2021-09-04"
 youtube_thumbnail="https://i.ytimg.com/vi/C9PhqirC9vs/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 0-indexed integer array 'nums', find the leftmost index where the sum of elements to the left of that index is equal to the sum of elements to the right of that index. If such an index exists, return the smallest such index, otherwise return -1. The sum of the elements before the first index is considered 0, and similarly, the sum of elements after the last index is also 0.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array 'nums' where each element represents an integer.
+- **Example:** `nums = [1, 2, 3, -1, 2]`
+- **Constraints:**
+	- 1 <= nums.length <= 100
+	- -1000 <= nums[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int findMiddleIndex(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> sum(n + 1, 0);
-        for(int i = 0; i < n; i++)
-            sum[i + 1] = nums[i] + sum[i];
-        
-        int net = sum[n];
-        
-        for(int i = 0; i < n; i++) {
-            if(net - sum[i + 1] == sum[i]) return i;
-        }
-        return -1;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the leftmost index where the sum of elements to the left equals the sum of elements to the right. If no such index exists, return -1.
+- **Example:** `Output: 3`
+- **Constraints:**
+	- The output should be an integer representing the leftmost index or -1 if no such index exists.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find the leftmost index where the sum of elements to the left is equal to the sum of elements to the right.
+
+- Calculate the prefix sum for the input array, which is the cumulative sum of elements from the start up to each index.
+- Compare the prefix sum at each index with the total sum to find the middle index where the two sides are balanced.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input array is non-empty, and its length will be between 1 and 100.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: nums = [1, 2, 3, -1, 2]`  \
+  **Explanation:** The sum of elements to the left of index 3 is 1 + 2 + 3 = 6, and the sum of elements to the right is -1 + 2 = 6. Hence, index 3 is the middle index.
+
+- **Input:** `Input: nums = [1, 2, 3]`  \
+  **Explanation:** There is no index where the sum of elements to the left equals the sum of elements to the right, so the result is -1.
+
+{{< dots >}}
+## Approach 🚀
+The approach involves calculating the prefix sums of the array, and then checking if there exists an index where the sum of elements to the left equals the sum to the right. This can be achieved in linear time.
+
+### Initial Thoughts 💭
+- The problem requires comparing the sum of elements on both sides of each index in the array.
+- A prefix sum approach is optimal for this problem since it allows us to efficiently check each index with a running sum calculation.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one element, so no need to handle an empty array.
+- The algorithm is efficient enough for arrays of length up to 100.
+- The solution should handle arrays with negative numbers and arrays where all elements are the same.
+- Ensure the solution runs efficiently for the maximum input size.
+{{< dots >}}
+## Code 💻
+```cpp
+int findMiddleIndex(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> sum(n + 1, 0);
+    for(int i = 0; i < n; i++)
+        sum[i + 1] = nums[i] + sum[i];
+    
+    int net = sum[n];
+    
+    for(int i = 0; i < n; i++) {
+        if(net - sum[i + 1] == sum[i]) return i;
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-The problem requires us to find the **middle index** of an integer array `nums`. The middle index is defined as an index `i` such that the sum of the elements on the left of `i` is equal to the sum of the elements on the right of `i`. If no such index exists, we should return -1. For example, given the array `[2, 3, -1, 8, 4]`, the middle index is `3` because `2 + 3 + -1` equals `4`.
-
-### Approach
-
-To efficiently find the middle index, we can utilize a **prefix sum** approach. Here are the main steps of the approach:
-
-1. **Calculate Total Sum**: First, compute the total sum of the array. This will help us determine the right sum when we check for the middle index.
-
-2. **Prefix Sum Array**: Create a prefix sum array where each element at index `i` represents the sum of all elements in the input array from the beginning up to index `i`. This allows us to easily access the left sum of any index.
-
-3. **Check Middle Index Condition**: For each index, check if the sum of the elements on the left (using the prefix sum array) is equal to the sum of the elements on the right (which can be derived from the total sum).
-
-### Code Breakdown (Step by Step)
-
-Here’s a breakdown of the code and its functionality:
-
-```cpp
-class Solution {
-public:
-    int findMiddleIndex(vector<int>& nums) {
-```
-We define a class `Solution` with a public method `findMiddleIndex` that takes a vector of integers `nums` as input.
-
-```cpp
-        int n = nums.size();
-        vector<int> sum(n + 1, 0);
-```
-We get the size of the input array `n` and create a prefix sum array `sum` of size `n + 1`. This extra space at the beginning (index 0) helps simplify our calculations for the left sums.
-
-```cpp
-        for(int i = 0; i < n; i++)
-            sum[i + 1] = nums[i] + sum[i];
-```
-We populate the prefix sum array. For each element in `nums`, we add it to the cumulative sum from the previous index. This means `sum[i + 1]` will hold the sum of all elements from `nums[0]` to `nums[i]`.
-
-```cpp
-        int net = sum[n];
-```
-The variable `net` holds the total sum of the array, which is found at `sum[n]`.
-
-```cpp
-        for(int i = 0; i < n; i++) {
-            if(net - sum[i + 1] == sum[i]) return i;
-        }
-```
-We iterate through each index `i`. The left sum for index `i` can be accessed as `sum[i]`, while the right sum can be calculated as `net - sum[i + 1]`. If these two sums are equal, we have found our middle index and return `i`.
-
-```cpp
-        return -1;
-    }
-};
-```
-If no such index is found after checking all possible indices, we return -1, indicating that no middle index exists.
-
-### Complexity
-
-- **Time Complexity**: The overall time complexity of this solution is \(O(n)\), where \(n\) is the number of elements in the input array `nums`. This is due to the single pass required to calculate the prefix sums and another pass to check for the middle index condition.
-
-- **Space Complexity**: The space complexity is \(O(n)\) because of the prefix sum array we created to store cumulative sums.
-
-### Conclusion
-
-The provided solution effectively finds the middle index of an array by utilizing the prefix sum technique. This approach is efficient and straightforward, allowing us to determine if an index satisfies the condition of equal sums on both sides. The use of a prefix sum array simplifies the logic required to compare sums, leading to an optimal solution.
-
-### Example Usage
-
-Here’s an example of how to use the `findMiddleIndex` method:
-
-```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
-
-int main() {
-    Solution sol;
-    vector<int> nums = {2, 3, -1, 8, 4};
-    int index = sol.findMiddleIndex(nums);
-    cout << "The middle index is: " << index << endl; // Output: The middle index is: 3
-    return 0;
+    return -1;
 }
 ```
 
-### Edge Cases to Consider
+This solution calculates the middle index in a list of numbers where the sum of elements to the left is equal to the sum of elements to the right. The function uses a cumulative sum array to track the sums efficiently.
 
-1. **Empty Array**: If the input array is empty, the output should be -1, as there are no elements to balance.
-  
-2. **Single Element**: If the input contains only one element, it should also return -1 since there are no elements on either side.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int findMiddleIndex(vector<int>& nums) {
+	```
+	Defines the function `findMiddleIndex`, which calculates the index where the sum of elements to the left equals the sum of elements to the right.
 
-3. **Multiple Equal Elements**: Cases where all elements are the same could lead to confusion but will be handled correctly by the logic.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums.size();
+	```
+	Initializes the variable `n` to store the size of the input vector `nums`.
 
-### Potential Improvements
+3. **Array Initialization**
+	```cpp
+	    vector<int> sum(n + 1, 0);
+	```
+	Creates a cumulative sum array `sum` initialized to zeros, where `sum[i]` will store the sum of the first `i` elements of `nums`.
 
-1. **Memory Optimization**: If we wanted to reduce space complexity, we could keep track of the left sum directly without using an entire prefix sum array.
+4. **Loop Initialization**
+	```cpp
+	    for(int i = 0; i < n; i++)
+	```
+	Starts a loop to iterate through the input vector `nums`.
 
-2. **Additional Information**: The method could be enhanced to return both the index and the sums on either side for debugging or analysis.
+5. **Cumulative Sum Calculation**
+	```cpp
+	        sum[i + 1] = nums[i] + sum[i];
+	```
+	Calculates the cumulative sum by adding the current element `nums[i]` to the sum of all previous elements stored in `sum[i]`.
 
-This approach and implementation are robust and can handle a variety of input scenarios effectively.
+6. **Net Sum Calculation**
+	```cpp
+	    int net = sum[n];
+	```
+	Calculates the total sum of all elements in the array `nums` by using `sum[n]`, where `n` is the size of the array.
+
+7. **Loop Through Elements**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Starts a loop to iterate through each index `i` of the input vector `nums`.
+
+8. **Condition Check**
+	```cpp
+	        if(net - sum[i + 1] == sum[i]) return i;
+	```
+	Checks if the sum of elements to the left of index `i` equals the sum of elements to the right. If so, returns the index `i`.
+
+9. **Return Statement**
+	```cpp
+	    return -1;
+	```
+	If no middle index is found, returns `-1` to indicate that no such index exists.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+We only need to make a single pass through the array to compute the sums and compare each index.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is constant if we calculate the sum in place and only store the running sum.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-middle-index-in-array/description/)
 

@@ -14,99 +14,160 @@ img_src = ""
 youtube = "QXvaOym_Awk"
 youtube_upload_date="2021-12-11"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/QXvaOym_Awk/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an integer array 'nums' and an integer 'k'. You need to find a subsequence of 'nums' of length 'k' such that the sum of its elements is maximized. A subsequence is a sequence that can be derived from another array by deleting some or no elements without changing the order of the remaining elements. Return any subsequence with the largest sum.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of the array 'nums' and an integer 'k' representing the desired subsequence length.
+- **Example:** `nums = [4, 1, 3, 2], k = 2`
+- **Constraints:**
+	- 1 <= nums.length <= 1000
+	- -10^5 <= nums[i] <= 10^5
+	- 1 <= k <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<int> maxSubsequence(vector<int>& nums, int k) {
-        vector<int> v(nums.begin(), nums.end());
-        nth_element(v.begin(), v.begin() + k - 1, v.end(), greater<int>());
-        int cnt = count(v.begin(), v.begin() + k, v[k - 1]);
-        
-        vector<int> res;
-        for(int i = 0; i < nums.size(); i++)
-            if((nums[i] > v[k - 1]) ||
-               (nums[i] == v[k - 1] && (cnt-- > 0)))
-                res.push_back(nums[i]);
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a subsequence of length 'k' with the largest sum.
+- **Example:** `Output: [3, 4]`
+- **Constraints:**
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find a subsequence of length 'k' that has the largest possible sum of elements.
 
-The task is to find a subsequence of length `k` from an integer array `nums` that has the highest possible sum. A subsequence is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements. The output should maintain the relative order of the elements in `nums`.
+- Identify the 'k' largest elements in 'nums'.
+- Keep their relative order from the original array.
+- Return the subsequence formed by these elements.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is not empty.
+- The value of 'k' is valid (1 <= k <= nums.length).
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Example 1: nums = [4, 1, 3, 2], k = 2`  \
+  **Explanation:** The subsequence of length 2 with the largest sum is [3, 4], as it has the sum of 7.
 
-### Approach
+- **Input:** `Example 2: nums = [2, -1, 5, 3], k = 2`  \
+  **Explanation:** The subsequence with the largest sum is [5, 3], as it gives the highest sum of 8.
 
-To solve this problem efficiently, we can leverage the following approach:
+{{< dots >}}
+## Approach 🚀
+The approach to solve the problem involves selecting the largest 'k' elements and maintaining their order in the original array.
 
-1. **Clone and Partially Sort the Array**: To find the `k` largest elements, we start by creating a copy of the `nums` array. This allows us to work with the values without modifying the original array’s structure.
+### Initial Thoughts 💭
+- We need to ensure that we select the largest elements while maintaining the order of the original array.
+- A simple solution would involve sorting, but we need to track the indices of the selected elements to maintain their original order.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no edge cases for empty inputs as the problem guarantees that nums has at least 'k' elements.
+- The algorithm should handle arrays of length up to 1000 efficiently.
+- Handle cases where all elements are negative or where the largest values are repeated.
+- The values of 'k' and the elements in 'nums' are guaranteed to be within the specified constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<int> maxSubsequence(vector<int>& nums, int k) {
+    vector<int> v(nums.begin(), nums.end());
+    nth_element(v.begin(), v.begin() + k - 1, v.end(), greater<int>());
+    int cnt = count(v.begin(), v.begin() + k, v[k - 1]);
+    
+    vector<int> res;
+    for(int i = 0; i < nums.size(); i++)
+        if((nums[i] > v[k - 1]) ||
+           (nums[i] == v[k - 1] && (cnt-- > 0)))
+            res.push_back(nums[i]);
+    
+    return res;
+}
+```
 
-2. **Use `nth_element` for Efficient Partial Sorting**: We use `nth_element` on the copied array to ensure that the `k` largest elements are positioned in the first `k` places, sorted in descending order. The function `nth_element` achieves this with average-case O(n) complexity. This helps us quickly find the k largest elements without fully sorting the array, which would take O(n log n) time.
+This code defines a function to find the maximum subsequence of length k from an array of integers, where elements are selected based on their values and their occurrence in the original array.
 
-3. **Handle Duplicates Carefully**: The `nth_element` function sorts the `k` largest elements but may include duplicate values around the boundary between the k-th and (k+1)-th elements. We handle this by counting the number of times the k-th largest value appears within the selected range.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<int> maxSubsequence(vector<int>& nums, int k) {
+	```
+	This is the function signature for the maxSubsequence function, which takes an array 'nums' and an integer 'k' as parameters and returns a vector of integers.
 
-4. **Collect the Elements in Original Order**: After identifying the `k` largest values, we iterate through the original array to select elements for the final result. For each element in `nums`:
-   - If it is larger than the k-th largest value in our partial array, it is included in the result.
-   - If it equals the k-th largest value and the count has not been fully used, we also include it.
+2. **Initialization**
+	```cpp
+	    vector<int> v(nums.begin(), nums.end());
+	```
+	Creates a copy of the 'nums' vector to allow manipulation without affecting the original array.
 
-5. **Return the Result**: The result array is built in the same order as `nums`, containing the `k` largest elements with maximum sum and correct relative order.
+3. **Sorting**
+	```cpp
+	    nth_element(v.begin(), v.begin() + k - 1, v.end(), greater<int>());
+	```
+	Rearranges the elements in 'v' such that the element at position 'k-1' is the largest element, ensuring the top k elements are correctly ordered.
 
-This approach is optimal for efficiently finding and arranging the desired subsequence while maintaining the necessary order.
+4. **Counting**
+	```cpp
+	    int cnt = count(v.begin(), v.begin() + k, v[k - 1]);
+	```
+	Counts how many times the k-th largest element appears in the first k elements of the vector 'v'. This count helps in handling ties during subsequence selection.
 
-### Code Breakdown (Step by Step)
+5. **Subsequence Construction**
+	```cpp
+	    vector<int> res;
+	```
+	Initializes an empty vector 'res' to store the final subsequence.
 
-Let’s walk through the code to see how each part works in detail.
+6. **Iterating Over Elements**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++)
+	```
+	Starts a loop to iterate through all elements in the original 'nums' array to determine which elements belong in the subsequence.
 
-1. **Clone and Partially Sort the Array**:
-   ```cpp
-   vector<int> v(nums.begin(), nums.end());
-   nth_element(v.begin(), v.begin() + k - 1, v.end(), greater<int>());
-   ```
-   - Here, we create a copy of `nums` called `v` to hold the elements that we want to partially sort.
-   - Using `nth_element`, we position the `k` largest elements at the beginning of `v`, with `v[k - 1]` representing the k-th largest value. The `greater<int>()` comparator ensures that the elements are arranged in descending order for the first `k` elements.
+7. **Condition Check 1**
+	```cpp
+	        if((nums[i] > v[k - 1]) ||
+	```
+	Checks if the current element in 'nums' is greater than the k-th largest element from 'v', ensuring the largest elements are selected.
 
-2. **Count Occurrences of the k-th Largest Value**:
-   ```cpp
-   int cnt = count(v.begin(), v.begin() + k, v[k - 1]);
-   ```
-   - Here, we count how many times the k-th largest value (`v[k - 1]`) appears in the first `k` elements of `v`. This is necessary to manage duplicates correctly when we later select elements from `nums`.
+8. **Condition Check 2**
+	```cpp
+	           (nums[i] == v[k - 1] && (cnt-- > 0)))
+	```
+	Handles cases where the current element equals the k-th largest element, ensuring that only the necessary number of such elements are selected.
 
-3. **Collect Elements in the Original Order**:
-   ```cpp
-   vector<int> res;
-   for(int i = 0; i < nums.size(); i++)
-       if((nums[i] > v[k - 1]) || (nums[i] == v[k - 1] && (cnt-- > 0)))
-           res.push_back(nums[i]);
-   ```
-   - We initialize an empty vector `res` to store the final result.
-   - We iterate over `nums`, checking each element to see if it should be included in `res`:
-     - If `nums[i]` is greater than the k-th largest value, it is included in `res`.
-     - If `nums[i]` equals the k-th largest value, we include it only if our `cnt` variable indicates that we still need this value (by checking if `cnt-- > 0`).
+9. **Subsequence Update**
+	```cpp
+	            res.push_back(nums[i]);
+	```
+	Adds the current element to the subsequence if it meets the selection criteria.
 
-4. **Return the Result**:
-   ```cpp
-   return res;
-   ```
-   - After collecting the required elements in the correct order, we return `res`, which now contains the `k` largest elements with maximum sum from `nums`, maintaining their original order.
+10. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the resulting subsequence as the output of the function.
 
-### Complexity
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-- **Time Complexity**: The algorithm has an average time complexity of O(n), where `n` is the number of elements in `nums`. This is due to the `nth_element` function, which operates in O(n) on average. The subsequent loop to collect the result has O(n) complexity as well.
-- **Space Complexity**: The algorithm uses O(n) additional space, as we create a copy of `nums` and store the result in `res`.
+The time complexity is dominated by the sorting step, which takes O(n log n).
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(n)
 
-This solution leverages efficient sorting techniques and a careful selection process to find a subsequence with maximum sum in optimal time. The use of `nth_element` allows us to quickly obtain the `k` largest elements without fully sorting the array, and the counting mechanism ensures that duplicates are handled accurately. This approach highlights the importance of balancing efficiency and correctness in algorithm design, especially in competitive programming and interview settings where both optimal time complexity and precise output are essential.
+The space complexity is O(n) due to storing the indices of the elements and the subsequence.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/description/)
 

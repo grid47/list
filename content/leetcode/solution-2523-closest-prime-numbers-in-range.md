@@ -14,84 +14,69 @@ img_src = ""
 youtube = "HqSBI1RVM8c"
 youtube_upload_date="2023-01-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/HqSBI1RVM8c/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two integers `left` and `right`, find the two prime numbers `num1` and `num2` such that: `left <= num1 < num2 <= right`, both are prime numbers, and the difference `num2 - num1` is the smallest among all valid pairs. If multiple pairs have the same smallest difference, return the pair with the smallest `num1`. If no such pair exists, return `[-1, -1]`.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given two integers `left` and `right`. Find the pair of prime numbers `num1` and `num2` where `left <= num1 < num2 <= right`.
+- **Example:** `left = 15, right = 30`
+- **Constraints:**
+	- 1 <= left <= right <= 10^6
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    bool seive[1000001] = {};
-    vector<int> p = {2};
-    vector<int> closestPrimes(int left, int right) {
-        
-        for(int i = 3; i < 1000001; i += 2) {
-            if(!seive[i]) {
-                p.push_back(i);
-                for (long long j = (long long) i * i; j < 1000001; j += i) {
-                    seive[j] = true;
-                }
-            }
-        }
-        
-        int n1 = -1, n2 = -1, i = lower_bound(p.begin(), p.end(), left) - p.begin();
-        
-        for(; i + 1 < p.size() && p[i + 1] <= right; i++) {
-            if(n1 == -1 || n2 - n1 > p[i + 1] - p[i]) {
-                n1 = p[i];
-                n2 = p[i + 1];
-                if(n2 - n1 < 3) break;
-            }
-        }
-        return {n1, n2};
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the pair `[num1, num2]` where `num1` and `num2` are prime numbers and the difference `num2 - num1` is the smallest. If no such pair exists, return `[-1, -1]`.
+- **Example:** `Output: [17, 19]`
+- **Constraints:**
+	- The output must be a list of two integers representing the prime numbers, or [-1, -1] if no such pair exists.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the pair of prime numbers `num1` and `num2` such that the difference between them is minimized, while satisfying the constraints.
 
-The task is to find the closest pair of prime numbers in a given range `[left, right]` where the difference between the primes is at least 2 but as small as possible. If no such pair exists, the function should return `[-1, -1]`. The given range is inclusive of both `left` and `right`.
+- Generate all prime numbers up to the value of `right` using the Sieve of Eratosthenes.
+- Find all prime numbers between `left` and `right`.
+- Iterate through the primes to find the pair with the smallest difference.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input values `left` and `right` are within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `left = 15, right = 30`  \
+  **Explanation:** The prime numbers between 15 and 30 are [17, 19, 23, 29]. The smallest difference is 2, which occurs between 17 and 19.
 
-### Approach
+- **Input:** `left = 50, right = 60`  \
+  **Explanation:** The prime numbers between 50 and 60 are [53, 59], with a difference of 6.
 
-To solve this problem, the algorithm can be divided into the following steps:
+- **Input:** `left = 8, right = 10`  \
+  **Explanation:** There are no prime numbers between 8 and 10, so the output is `[-1, -1]`.
 
-1. **Sieve of Eratosthenes**:
-   We will first use the **Sieve of Eratosthenes** to generate all prime numbers up to `1,000,000`. This sieve will help us identify all the primes efficiently.
+{{< dots >}}
+## Approach 🚀
+We can solve this problem by generating prime numbers up to `right` using the Sieve of Eratosthenes, then finding the pair of primes within the range `[left, right]` with the smallest difference.
 
-2. **Prime Number Collection**:
-   After marking all the primes using the sieve, we store the prime numbers in a vector for quick access.
-
-3. **Finding the Closest Primes**:
-   The algorithm then proceeds to find the closest primes in the given range `[left, right]`. We do this by:
-   - Searching for the smallest prime number that is greater than or equal to `left`.
-   - Then, checking the next prime to see if it is less than or equal to `right`.
-   - Keeping track of the smallest difference between consecutive primes in the range.
-
-4. **Edge Case Handling**:
-   If there are no two primes found within the given range that satisfy the condition (i.e., the difference is at least 2), we return `[-1, -1]`.
-
-### Code Breakdown (Step by Step)
-
-#### Class Definition and Member Variables:
-
+### Initial Thoughts 💭
+- We need to efficiently find prime numbers within a given range.
+- The Sieve of Eratosthenes is a good approach to generate prime numbers efficiently up to `right`.
+{{< dots >}}
+### Edge Cases 🌐
+- There are no cases with empty inputs since `left` and `right` are always positive integers.
+- The algorithm should be efficient enough to handle inputs where `right` can be as large as 10^6.
+- If there are no primes between `left` and `right`, return `[-1, -1]`.
+- The solution must handle input ranges efficiently using the Sieve of Eratosthenes.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    bool seive[1000001] = {};
-    vector<int> p = {2};
-```
-
-- The `seive` array is used to mark non-prime numbers. It is initialized with `false` to represent all numbers as prime initially.
-- The `p` vector stores the prime numbers. The prime `2` is added initially because `2` is the smallest prime number.
-
-#### Sieve of Eratosthenes:
-
-```cpp
+bool seive[1000001] = {};
+vector<int> p = {2};
+vector<int> closestPrimes(int left, int right) {
+    
     for(int i = 3; i < 1000001; i += 2) {
         if(!seive[i]) {
             p.push_back(i);
@@ -100,22 +85,9 @@ public:
             }
         }
     }
-```
-
-- The loop iterates through all numbers starting from `3` up to `1,000,000`. It only checks odd numbers (`i += 2`), since even numbers greater than `2` are not prime.
-- For each number `i` that is still marked as prime (i.e., `seive[i] == false`), it adds `i` to the list of primes `p`.
-- The inner loop marks all multiples of `i` as non-prime (i.e., it marks all `j = i * i, i * i + i, ...` as `true` in the `seive` array).
-
-#### Finding the Closest Primes:
-
-```cpp
+    
     int n1 = -1, n2 = -1, i = lower_bound(p.begin(), p.end(), left) - p.begin();
-```
-
-- `n1` and `n2` are initialized to `-1`, representing the closest primes found so far.
-- The variable `i` is initialized to the index of the first prime number in the `p` vector that is greater than or equal to `left`. This is done using the `lower_bound` function, which efficiently finds the index of the first element that is not less than `left`.
-
-```cpp
+    
     for(; i + 1 < p.size() && p[i + 1] <= right; i++) {
         if(n1 == -1 || n2 - n1 > p[i + 1] - p[i]) {
             n1 = p[i];
@@ -123,44 +95,121 @@ public:
             if(n2 - n1 < 3) break;
         }
     }
-```
-
-- The loop iterates through the prime numbers in the `p` vector starting from index `i` and checks for consecutive primes `p[i]` and `p[i + 1]`.
-- If the difference between the two primes is smaller than the previous closest pair, it updates `n1` and `n2` to store the current closest primes.
-- If the difference between the primes is less than `3`, the loop breaks, as we are only interested in pairs of primes with a difference of at least 2.
-
-#### Return the Result:
-
-```cpp
     return {n1, n2};
 }
 ```
 
-- After the loop, the closest pair of primes `n1` and `n2` is returned. If no such pair was found, `n1` and `n2` will remain `-1`, and the function will return `[-1, -1]`.
+This code defines a function to find the closest prime numbers within a given range, using the Sieve of Eratosthenes to generate prime numbers up to a large limit. It returns the closest primes within the given range where the difference between them is at least 3.
 
-### Time Complexity:
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Variable Initialization**
+	```cpp
+	bool seive[1000001] = {};
+	```
+	This initializes a sieve array to mark non-prime numbers. The array size is 1000001, which is large enough for the range we're dealing with.
 
-1. **Sieve of Eratosthenes**:
-   - The sieve runs in \( O(n \log(\log(n))) \) time, where `n = 1,000,000`. This is because the sieve algorithm involves iterating over all numbers up to `n`, and for each prime `i`, it marks all of its multiples as non-prime.
-   - The sieve is efficient and works in nearly linear time with respect to the size of the range, making it feasible for `n = 1,000,000`.
+2. **Vector Initialization**
+	```cpp
+	vector<int> p = {2};
+	```
+	This initializes a vector 'p' with the first prime number (2) to start the prime search.
 
-2. **Prime Search Using Binary Search**:
-   - After generating the list of primes, we use `lower_bound` to find the first prime greater than or equal to `left`. The `lower_bound` operation runs in \( O(\log(p)) \), where `p` is the number of primes found up to `1,000,000`. Since there are approximately `78,498` primes up to `1,000,000`, this operation runs in logarithmic time with respect to the number of primes.
-   - The subsequent loop also runs in \( O(p) \), where `p` is the number of primes in the range `[left, right]`. This loop checks each pair of consecutive primes in the range, making it linear in terms of the number of primes between `left` and `right`.
+3. **Function Definition**
+	```cpp
+	vector<int> closestPrimes(int left, int right) {
+	```
+	This defines the function 'closestPrimes' which takes two integers, 'left' and 'right', representing the range in which to find the closest primes.
 
-3. **Overall Time Complexity**:
-   - The total time complexity is dominated by the sieve, which is \( O(n \log(\log(n))) \), and the prime search using binary search, which is \( O(p) \), where `n = 1,000,000` and `p` is the number of primes between `left` and `right`. Thus, the overall complexity is \( O(n \log(\log(n))) \), which is efficient for the input limits.
+4. **Prime Sieve Loop**
+	```cpp
+	for(int i = 3; i < 1000001; i += 2) {
+	```
+	This loop iterates over odd numbers starting from 3 up to 1000001 to find primes. Even numbers (except 2) are skipped.
 
-### Space Complexity:
+5. **Prime Check**
+	```cpp
+	if(!seive[i]) {
+	```
+	This checks if 'i' is a prime number by verifying if it has been marked as non-prime in the sieve.
 
-- The space complexity is primarily determined by the space used to store the sieve array and the list of primes.
-- The sieve array takes \( O(n) \) space, where `n = 1,000,000`.
-- The list of primes `p` takes \( O(p) \) space, where `p` is the number of primes up to `1,000,000`. This is approximately `78,498`.
-- Therefore, the total space complexity is \( O(n) \), which is \( O(1,000,000) \).
+6. **Prime Addition**
+	```cpp
+	p.push_back(i);
+	```
+	If 'i' is a prime, it is added to the vector 'p' of prime numbers.
 
-### Conclusion
+7. **Sieve Update**
+	```cpp
+	for (long long j = (long long) i * i; j < 1000001; j += i) {
+	```
+	This inner loop marks all multiples of 'i' as non-prime in the sieve, starting from 'i*i' to optimize the sieve process.
 
-This solution efficiently solves the problem of finding the closest pair of primes in a given range `[left, right]` using the **Sieve of Eratosthenes** to precompute the primes up to `1,000,000`. The solution uses a combination of binary search (`lower_bound`) and linear iteration through primes to find the closest pair of primes within the range. The approach is optimal with respect to both time and space complexity, handling the constraints effectively.
+8. **Mark Non-Primes**
+	```cpp
+	seive[j] = true;
+	```
+	This marks 'j' as a non-prime number in the sieve.
+
+9. **Variable Initialization**
+	```cpp
+	int n1 = -1, n2 = -1, i = lower_bound(p.begin(), p.end(), left) - p.begin();
+	```
+	This initializes variables 'n1' and 'n2' to store the closest primes, and 'i' to find the first prime number greater than or equal to 'left' using binary search.
+
+10. **Prime Pair Search**
+	```cpp
+	for(; i + 1 < p.size() && p[i + 1] <= right; i++) {
+	```
+	This loop iterates through the vector of primes, starting from the first prime greater than or equal to 'left', and checks if the next prime is within the range 'right'.
+
+11. **Update Closest Primes**
+	```cpp
+	if(n1 == -1 || n2 - n1 > p[i + 1] - p[i]) {
+	```
+	This condition checks if the current pair of primes has a smaller difference than the previously found pair. If so, it updates 'n1' and 'n2'.
+
+12. **Assign Closest Primes**
+	```cpp
+	n1 = p[i];
+	```
+	This assigns the current prime to 'n1'.
+
+13. **Assign Closest Primes**
+	```cpp
+	n2 = p[i + 1];
+	```
+	This assigns the next prime to 'n2'.
+
+14. **Early Termination**
+	```cpp
+	if(n2 - n1 < 3) break;
+	```
+	If the difference between 'n2' and 'n1' is less than 3, the loop breaks as no closer primes can be found.
+
+15. **Return Result**
+	```cpp
+	return {n1, n2};
+	```
+	This returns a vector containing the two closest primes 'n1' and 'n2'.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log log n)
+- **Average Case:** O(n log log n)
+- **Worst Case:** O(n log log n)
+
+The time complexity is dominated by the Sieve of Eratosthenes, which runs in O(n log log n).
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+Space complexity is O(n) due to storing prime numbers up to `right`.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/closest-prime-numbers-in-range/description/)
 

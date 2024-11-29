@@ -14,129 +14,169 @@ img_src = ""
 youtube = "rk-aB4rEOyU"
 youtube_upload_date="2020-12-20"
 youtube_thumbnail="https://i.ytimg.com/vi/rk-aB4rEOyU/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an alphabet board. Starting at position (0, 0), you need to move around the board to form the target string using the minimum number of moves. The allowed moves are 'U', 'D', 'L', 'R', and '!' to select the character at the current position.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string target that consists of lowercase English letters.
+- **Example:** `Input: target = 'hello'`
+- **Constraints:**
+	- 1 <= target.length <= 100
+	- The target string consists of only lowercase English letters.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string alphabetBoardPath(string target) {
-        string res;
-        int x = 0, y = 0;
-        for(auto ch: target) {
-            int x1 = (ch - 'a') %5, y1 = (ch - 'a') / 5;
-            res +=  string(max(0, y-y1), 'U') +
-                    string(max(0, x1-x), 'R') +
-                    string(max(0, x-x1), 'L') +
-                    string(max(0, y1-y), 'D') + '!';
-            x = x1, y = y1;
-        }
-        return res;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a string representing the sequence of moves that spell out the target string, using the minimum number of steps.
+- **Example:** `Output: 'RR!DDDLL!RR!D!'`
+- **Constraints:**
+	- The output string will contain a valid sequence of moves, including '!' for each character in the target string.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the minimum number of moves that will result in the target string being spelled out.
+
+- Start at position (0, 0).
+- For each character in the target string, find the corresponding position on the board.
+- Calculate the number of moves required to go from the current position to the target character's position.
+- Move accordingly using 'U', 'D', 'L', 'R'.
+- Add '!' to the result after each character.
+- Update the current position and repeat for the next character.
+{{< dots >}}
+### Problem Assumptions ✅
+- The board layout is fixed and the starting position is always (0, 0).
+- The target string is always valid with lowercase letters.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: target = 'hello'`  \
+  **Explanation:** To spell 'hello', we start at 'a' and make the following moves: 'RR!' to get to 'h', 'DDDLL!' to get to 'e', then 'RR!' for 'l', and so on.
+
+- **Input:** `Input: target = 'world'`  \
+  **Explanation:** For 'world', we make similar moves starting from 'a' to spell out each letter in the target.
+
+{{< dots >}}
+## Approach 🚀
+We need to calculate the optimal sequence of moves to reach each character in the target string, moving from the current position to the target position on the alphabet board.
+
+### Initial Thoughts 💭
+- The board is fixed and letters are positioned in a grid pattern.
+- The position of each letter is predictable based on its index in the alphabet.
+- We can use simple logic to calculate how many steps to move in each direction (up, down, left, right).
+{{< dots >}}
+### Edge Cases 🌐
+- An empty input will not be given as per the constraints.
+- The solution should handle inputs with target.length up to 100 efficiently.
+- The board has only lowercase letters, so no edge cases related to non-alphabet characters are expected.
+- The result will always fit within the constraints since the maximum number of moves required is limited by the size of the alphabet board.
+{{< dots >}}
+## Code 💻
+```cpp
+string alphabetBoardPath(string target) {
+    string res;
+    int x = 0, y = 0;
+    for(auto ch: target) {
+        int x1 = (ch - 'a') %5, y1 = (ch - 'a') / 5;
+        res +=  string(max(0, y-y1), 'U') +
+                string(max(0, x1-x), 'R') +
+                string(max(0, x-x1), 'L') +
+                string(max(0, y1-y), 'D') + '!';
+        x = x1, y = y1;
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The problem involves navigating through a 5x5 grid representing the English alphabet, arranged in the following manner:
-
-```
-a b c d e
-f g h i j
-k l m n o
-p q r s t
-u v w x y
-z
+    return res;
+}
 ```
 
-The task is to find a sequence of moves that spell out a given target string, `target`. The allowed moves are:
-- **U** (up)
-- **D** (down)
-- **L** (left)
-- **R** (right)
+This function calculates the path to spell a target string on a 5x5 alphabet board by moving in the directions 'U', 'R', 'L', 'D' (up, right, left, down). The string is constructed by calculating the necessary movements from the current position to the next letter in the target string.
 
-The string must be constructed by moving from one character to the next, starting at the top left corner (position `(0, 0)` which corresponds to character 'a'). After reaching each character, the algorithm must record the path taken using the specified directional commands and append an exclamation mark (`!`) after each character.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	string alphabetBoardPath(string target) {
+	```
+	This line defines the function `alphabetBoardPath`, which takes a string `target` as an argument and returns a string representing the sequence of movements on the board.
 
-### Approach
-To solve this problem, the algorithm:
-1. Initializes the starting position at the top left corner of the board.
-2. Iterates through each character of the target string to determine the necessary moves to reach that character from the current position.
-3. Computes the required vertical and horizontal moves and appends the respective directions to the result string.
-4. Updates the current position after each character.
+2. **Variable Initialization**
+	```cpp
+	    string res;
+	```
+	This line initializes the result string `res`, which will store the sequence of movements generated during the traversal of the alphabet board.
 
-The algorithm efficiently computes the path using simple arithmetic to derive the coordinates of each character based on its position in the alphabet.
+3. **Coordinate Initialization**
+	```cpp
+	    int x = 0, y = 0;
+	```
+	This initializes the starting coordinates `x` and `y` to 0, representing the top-left corner of the board where the traversal begins.
 
-### Code Breakdown (Step by Step)
-Here’s a detailed breakdown of the code:
+4. **Main Loop**
+	```cpp
+	    for(auto ch: target) {
+	```
+	This `for` loop iterates through each character `ch` in the input string `target` to determine the movements required to reach each letter on the board.
 
-```cpp
-class Solution {
-public:
-    string alphabetBoardPath(string target) {
-```
-- **Line 1-2**: A class named `Solution` is defined, with a public member function `alphabetBoardPath` that takes a string `target` as input. This function is responsible for generating the path to spell out the target string.
+5. **Letter Position Calculation**
+	```cpp
+	        int x1 = (ch - 'a') %5, y1 = (ch - 'a') / 5;
+	```
+	This line calculates the coordinates `(x1, y1)` of the current letter `ch` on the 5x5 alphabet board, where `x1` is the column index and `y1` is the row index.
 
-```cpp
-        string res;
-        int x = 0, y = 0;
-```
-- **Line 3-4**: 
-  - `res`: A string variable initialized to store the resultant path.
-  - `x` and `y`: Two integer variables initialized to `0`, representing the current position on the board, starting at `(0, 0)`.
+6. **Vertical Movement Calculation**
+	```cpp
+	        res +=  string(max(0, y-y1), 'U') +
+	```
+	This line calculates and appends the vertical movements (up or down) required to reach the row `y1` from the current row `y`. The `max(0, y-y1)` ensures that no negative values are passed to `string`, as movement in the opposite direction isn't needed.
 
-```cpp
-        for(auto ch: target) {
-```
-- **Line 5**: A for loop iterates over each character (`ch`) in the target string.
+7. **Horizontal Movement (Right) Calculation**
+	```cpp
+	                string(max(0, x1-x), 'R') +
+	```
+	This line calculates and appends the rightward movements required to reach column `x1` from the current column `x`. It uses `max(0, x1-x)` to ensure no negative values are used.
 
-```cpp
-            int x1 = (ch - 'a') % 5, y1 = (ch - 'a') / 5;
-```
-- **Line 6**: 
-  - `x1` is calculated as the column index of the character on the board by taking the modulo of the character's position in the alphabet (`ch - 'a'`) with 5.
-  - `y1` is calculated as the row index by performing integer division of the character's position by 5.
+8. **Horizontal Movement (Left) Calculation**
+	```cpp
+	                string(max(0, x-x1), 'L') +
+	```
+	This line calculates and appends the leftward movements required to reach column `x1` from the current column `x`, using `max(0, x-x1)` for non-negative movement values.
 
-```cpp
-            res +=  string(max(0, y - y1), 'U') +
-                    string(max(0, x1 - x), 'R') +
-                    string(max(0, x - x1), 'L') +
-                    string(max(0, y1 - y), 'D') + '!';
-```
-- **Line 7**: This line constructs the path to the next character:
-  - `string(max(0, y - y1), 'U')`: Adds 'U' for each unit moved up if `y` (current row) is greater than `y1` (target row).
-  - `string(max(0, x1 - x), 'R')`: Adds 'R' for each unit moved right if `x1` (target column) is greater than `x` (current column).
-  - `string(max(0, x - x1), 'L')`: Adds 'L' for each unit moved left if `x` (current column) is greater than `x1`.
-  - `string(max(0, y1 - y), 'D')`: Adds 'D' for each unit moved down if `y1` (target row) is greater than `y` (current row).
-  - The exclamation mark `!` is appended after reaching the character.
+9. **Vertical Movement (Down) Calculation**
+	```cpp
+	                string(max(0, y1-y), 'D') + '!';
+	```
+	This line calculates and appends the downward movements required to reach row `y1` from the current row `y`, and adds the exclamation mark (`'!'`) to signify the end of the current letter movement.
 
-```cpp
-            x = x1, y = y1;
-```
-- **Line 8**: Updates the current position to the new coordinates `(x1, y1)` after reaching the character.
+10. **Update Coordinates**
+	```cpp
+	        x = x1, y = y1;
+	```
+	After the current movement sequence is appended to `res`, the coordinates `x` and `y` are updated to the new position `(x1, y1)` for the next iteration.
 
-```cpp
-        }
-```
-- **Line 9**: This closes the for loop.
+11. **Return Statement**
+	```cpp
+	    return res;
+	```
+	This line returns the final result string `res`, which contains the entire sequence of movements needed to spell the target string on the alphabet board.
 
-```cpp
-        return res;
-    }
-};
-```
-- **Line 10-11**: The function returns the complete path string stored in `res`, and the class definition is closed.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-### Complexity
-- **Time Complexity**: The time complexity of this algorithm is \( O(m) \), where \( m \) is the length of the target string. Each character requires a constant amount of work to calculate moves and update the result.
-- **Space Complexity**: The space complexity is \( O(m) \) as well, due to the storage of the resultant string that can potentially be proportional to the number of characters in the target string.
+Since we calculate the position and move direction for each character in the target, the time complexity is linear with respect to the length of the target string.
 
-### Conclusion
-The provided C++ solution effectively computes the path to spell out a target string on a 5x5 alphabet board. By efficiently calculating the necessary movements based on the current and target positions, the algorithm ensures that the resulting path is generated with optimal time and space complexity. This approach is both intuitive and efficient, making it suitable for similar grid-based pathfinding problems.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+We need space to store the result string, which is proportional to the length of the target string.
+
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/alphabet-board-path/description/)

@@ -14,129 +14,175 @@ img_src = ""
 youtube = "PlenJ9Ny45s"
 youtube_upload_date="2021-04-04"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/PlenJ9Ny45s/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given two positive integer arrays nums1 and nums2 of the same length n. You are allowed to change at most one element of nums1 to any other value from nums1 to minimize the total absolute sum difference between nums1 and nums2. Return the minimum absolute sum difference after making the replacement. Since the answer may be large, return it modulo 10^9 + 7.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integer arrays nums1 and nums2, both of length n.
+- **Example:** `nums1 = [3, 7, 6], nums2 = [4, 2, 6]`
+- **Constraints:**
+	- 1 <= n <= 10^5
+	- 1 <= nums1[i], nums2[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum absolute sum difference after making the replacement, modulo 10^9 + 7.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The answer should be returned modulo 10^9 + 7.
 
-        int n = nums1.size();
-        set<int> sel(begin(nums1), end(nums1));
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Minimize the absolute sum difference by changing one element in nums1.
 
-        long gain = 0, res = 0;
-        for(int i = 0; i < n; i++) {
-            long og = abs(nums1[i] - nums2[i]);
-            res += og;
-            if (gain < og) {
-                auto num = sel.lower_bound(nums2[i]);
-                if (num !=   end(sel)) gain = max(gain, og - abs(*num       - nums2[i]));
-                if (num != begin(sel)) gain = max(gain, og - abs(*prev(num) - nums2[i]));
-            }
+- Calculate the initial absolute sum difference between nums1 and nums2.
+- Try replacing one element in nums1 and compute the new sum difference.
+- Keep track of the maximum gain (reduction in sum) and compute the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- The arrays nums1 and nums2 are non-empty.
+- You can only replace one element in nums1.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums1 = [3, 7, 6], nums2 = [4, 2, 6]`  \
+  **Explanation:** By replacing one element of nums1 with another from nums1, we minimize the absolute sum difference.
+
+{{< dots >}}
+## Approach 🚀
+We aim to minimize the absolute sum difference by trying different replacements in nums1 and comparing the results.
+
+### Initial Thoughts 💭
+- The initial absolute sum difference is computed for the given nums1 and nums2.
+- For each element in nums1, we check the possible replacements to minimize the sum.
+- Efficiently search for the best replacement by using binary search or sorted data structures.
+{{< dots >}}
+### Edge Cases 🌐
+- n = 1, nums1 and nums2 are the smallest possible arrays.
+- The arrays nums1 and nums2 have lengths near the upper limit, n = 10^5.
+- All elements in nums1 and nums2 are identical, leading to an absolute sum difference of 0.
+- The algorithm should work efficiently for large inputs within the given constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) {
+
+    int n = nums1.size();
+    set<int> sel(begin(nums1), end(nums1));
+
+    long gain = 0, res = 0;
+    for(int i = 0; i < n; i++) {
+        long og = abs(nums1[i] - nums2[i]);
+        res += og;
+        if (gain < og) {
+            auto num = sel.lower_bound(nums2[i]);
+            if (num !=   end(sel)) gain = max(gain, og - abs(*num       - nums2[i]));
+            if (num != begin(sel)) gain = max(gain, og - abs(*prev(num) - nums2[i]));
         }
-
-        return (res - gain) % 1000000007;
     }
-};
-{{< /highlight >}}
----
 
-### Problem Statement
-
-The problem is to find the minimum possible sum of absolute differences between two arrays, `nums1` and `nums2`, after making at most one replacement in `nums1`. Specifically, for each pair of elements at the same index `i`, we want to compute `|nums1[i] - nums2[i]|` and minimize the total sum. We can replace an element in `nums1` with any other element from `nums1` to achieve this.
-
-### Approach
-
-To solve this problem, we need to follow these steps:
-
-1. **Calculate Initial Differences**: First, we will calculate the absolute differences between corresponding elements of `nums1` and `nums2`.
-
-2. **Determine Total Sum**: Next, we will compute the total sum of these absolute differences.
-
-3. **Evaluate Potential Gains**: For each element in `nums2`, we will find the closest element in `nums1` (either less than or equal to or greater than the current element) to see if we can reduce the absolute difference by making a replacement.
-
-4. **Calculate Maximum Gain**: By checking the potential replacements, we can determine the maximum possible reduction in the total sum of absolute differences.
-
-5. **Return the Result**: Finally, subtract the maximum gain from the initial total sum to get the minimized sum, taking care to return the result modulo \(10^9 + 7\).
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) {
+    return (res - gain) % 1000000007;
+}
 ```
-- We define the `Solution` class and declare the method `minAbsoluteSumDiff`, which takes two integer vectors as input.
 
-```cpp
-        int n = nums1.size();
-        set<int> sel(begin(nums1), end(nums1));
-```
-- We store the size of `nums1` in `n`. We also create a set `sel` that contains all the elements of `nums1`. Using a set allows us to efficiently find the closest elements later.
+The function `minAbsoluteSumDiff` calculates the minimum absolute sum of differences between two arrays `nums1` and `nums2`, and tries to maximize the gain by minimizing the differences through element substitution. It returns the result modulo 1000000007.
 
-```cpp
-        long gain = 0, res = 0;
-```
-- We initialize two variables: `gain`, which will track the maximum gain from making a replacement, and `res`, which will store the total sum of absolute differences.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) {
+	```
+	This is the function definition of `minAbsoluteSumDiff`, which takes two integer vectors `nums1` and `nums2` and returns the minimum possible sum of absolute differences between the two arrays, considering optimal substitutions.
 
-```cpp
-        for(int i = 0; i < n; i++) {
-            long og = abs(nums1[i] - nums2[i]);
-            res += og;
-```
-- We iterate through the elements of the arrays. For each index `i`, we calculate the original absolute difference `og` and add it to `res`.
+2. **Variable Initialization**
+	```cpp
+	    int n = nums1.size();
+	```
+	The variable `n` stores the size of the input arrays `nums1` (and `nums2`), assuming both arrays are of the same size.
 
-```cpp
-            if (gain < og) {
-```
-- We check if the current original difference `og` is greater than the current `gain`. If so, we proceed to check for possible replacements.
+3. **Set Initialization**
+	```cpp
+	    set<int> sel(begin(nums1), end(nums1));
+	```
+	A set `sel` is initialized with the elements of `nums1` to allow efficient lookup of elements for calculating the minimum absolute difference.
 
-```cpp
-                auto num = sel.lower_bound(nums2[i]);
-```
-- We use `lower_bound` to find the smallest element in `sel` that is greater than or equal to `nums2[i]`. This helps us identify potential candidates for replacement.
+4. **Variable Initialization**
+	```cpp
+	    long gain = 0, res = 0;
+	```
+	The variables `gain` and `res` are initialized to 0. `gain` will store the maximum gain that can be achieved by replacing an element, and `res` will accumulate the original sum of absolute differences.
 
-```cpp
-                if (num !=   end(sel)) gain = max(gain, og - abs(*num       - nums2[i]));
-```
-- If `num` is valid (not at the end of the set), we calculate the potential gain from replacing `nums1[i]` with `*num` and update `gain` accordingly.
+5. **Loop Over Arrays**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	This loop iterates through each index `i` of the arrays `nums1` and `nums2`.
 
-```cpp
-                if (num != begin(sel)) gain = max(gain, og - abs(*prev(num) - nums2[i]));
-```
-- We also check if there is a valid predecessor to `num` (the largest element less than `nums2[i]`). If so, we calculate the gain from this replacement as well.
+6. **Calculate Original Difference**
+	```cpp
+	        long og = abs(nums1[i] - nums2[i]);
+	```
+	The variable `og` stores the absolute difference between the elements `nums1[i]` and `nums2[i]` for the current index `i`.
 
-```cpp
-            }
-        }
-```
-- We continue the loop until all elements are processed.
+7. **Accumulate Original Sum**
+	```cpp
+	        res += og;
+	```
+	The absolute difference `og` is added to the `res` variable, which accumulates the total sum of absolute differences between the two arrays.
 
-```cpp
-        return (res - gain) % 1000000007;
-    }
-};
-```
-- Finally, we return the minimized total sum after applying the maximum gain, ensuring that we take the result modulo \(10^9 + 7\).
+8. **Gain Calculation**
+	```cpp
+	        if (gain < og) {
+	```
+	This conditional checks if the current difference `og` is greater than the previously calculated `gain`. If true, it attempts to minimize the difference by checking nearby elements.
 
-### Complexity
+9. **Set Lookup**
+	```cpp
+	            auto num = sel.lower_bound(nums2[i]);
+	```
+	The `lower_bound` function is used to find the smallest element in the set `sel` that is greater than or equal to `nums2[i]`. This helps in finding the best possible replacement to minimize the absolute difference.
 
-- **Time Complexity**: The time complexity of this algorithm is \(O(n \log n)\) due to the need to process each element in `nums1` and the logarithmic time complexity associated with the operations on the set.
+10. **Gain Update**
+	```cpp
+	            if (num !=   end(sel)) gain = max(gain, og - abs(*num       - nums2[i]));
+	```
+	If a valid element `num` is found in the set `sel`, the potential gain is calculated as the difference between the original difference `og` and the new difference after replacing `nums1[i]` with `num`.
 
-- **Space Complexity**: The space complexity is \(O(n)\) for storing the elements of `nums1` in the set.
+11. **Gain Update**
+	```cpp
+	            if (num != begin(sel)) gain = max(gain, og - abs(*prev(num) - nums2[i]));
+	```
+	This line checks if there is a valid element before `num` in the set `sel` and calculates the potential gain by considering that element as a replacement for `nums1[i]`.
 
-### Conclusion
+12. **Return Result**
+	```cpp
+	    return (res - gain) % 1000000007;
+	```
+	The final result is returned as the total sum of absolute differences, reduced by the maximum gain, and taken modulo 1000000007.
 
-The `minAbsoluteSumDiff` function effectively minimizes the total sum of absolute differences between two arrays by strategically replacing one element from `nums1` with another. By using a sorted data structure (set), the algorithm efficiently finds the closest values for potential replacements, maximizing the reduction in the total difference.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
 
-This solution is a prime example of how to leverage data structures for efficient lookups and optimizations in computational problems. By breaking down the problem into manageable parts—calculating initial differences, evaluating potential replacements, and computing the maximum possible gain—we ensure that the solution is both clear and effective.
+The algorithm requires sorting or binary search, making the time complexity O(n log n).
 
-In summary, this implementation is not only a solution to the problem but also an illustration of best practices in algorithm design, particularly in optimizing problems involving arrays and numerical calculations. It showcases the importance of selecting appropriate data structures and techniques to achieve efficiency and clarity in code.
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) due to the space required for sorting or storing elements.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-sum-difference/description/)
 

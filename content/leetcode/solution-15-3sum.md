@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "8IjCNFIo8YI"
 youtube_upload_date="2024-01-24"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/8IjCNFIo8YI/maxresdefault.webp"
+comments = true
 +++
 
 
@@ -27,194 +28,221 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/8IjCNFIo8YI/maxresdefault.webp"
     captionColor="#555"
 >}}
 ---
-**Code:**
+Given an integer array nums, find all unique triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0. The solution set must not contain duplicate triplets.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a list of integers nums.
+- **Example:** `nums = [-2, 0, 2, 1, -1, -3]`
+- **Constraints:**
+	- 3 <= nums.length <= 3000
+	- -10^5 <= nums[i] <= 10^5
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans;
-        sort(nums.begin(), nums.end());
-        for(int i = 0; i < nums.size(); i++) {
-            int target = -nums[i];
-            int s = i + 1;
-            int e = nums.size() - 1;
-            while(s < e) {
-                if(nums[s] + nums[e] < target) {
-                   s++;
-                } else if (nums[s] + nums[e] > target) {
-                    e--;
-                } else {
-                    vector<int> res = {nums[i], nums[s], nums[e]};
-                    ans.push_back(res);
-                    while(s < e && nums[s] == res[1]) s++;
-                    while(s < e && res[2] == nums[e]) e--;                    
-                }
-            }
-            while(i + 1 < nums.size() && nums[i] == nums[i + 1]) i++;
-        }
-        return ans;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return a list of all unique triplets such that their sum is zero.
+- **Example:** `[[-3, 1, 2], [-2, 0, 2]]`
+- **Constraints:**
+	- The triplets should be unique and not repeated in any order.
 
-### 🧩 **3Sum Problem: Finding Unique Triplets That Sum to Zero**
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find all unique triplets that sum to zero.
 
-The task at hand is to find all unique triplets in an array of integers that sum up to zero. This is a classical problem often referred to as the "3Sum" problem. Here's a breakdown of how to efficiently solve it.
+- Sort the input array.
+- Iterate over the array using the first element as the fixed one and use a two-pointer technique for the remaining part of the array.
+- Avoid duplicates by skipping the same elements while iterating over the array.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array contains at least three elements.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [-2, 0, 2, 1, -1, -3]`  \
+  **Explanation:** The valid triplets are [-3, 1, 2] and [-2, 0, 2], as both sum to zero.
 
----
+- **Input:** `nums = [0, 2, 3, 1]`  \
+  **Explanation:** No valid triplets exist as no combination sums to zero.
 
-### 🔍 **Problem Understanding**
+- **Input:** `nums = [-1, 0, 1, -1, 2, 0]`  \
+  **Explanation:** The valid triplets are [-1, 0, 1], [-1, -1, 2], and [0, 0, 0], all of which sum to zero.
 
-Given an array of integers `nums`, we need to return all unique triplets `[nums[i], nums[j], nums[k]]` such that:
-```
-nums[i] + nums[j] + nums[k] == 0
-```
-**Important Notes:**
-- The triplets should be unique.
-- We must avoid a brute-force approach of checking all possible triplets.
+{{< dots >}}
+## Approach 🚀
+The approach to solving this problem involves sorting the array first and then using a two-pointer technique to find triplets that sum to zero.
 
----
-
-### ⚙️ **Efficient Approach: Sorting and Two-Pointer Technique**
-
-To solve the problem efficiently, we can use a combination of sorting and a two-pointer technique. Here's how:
-
-#### 1. **Sort the Array**
-Sorting helps us easily identify duplicate triplets and also allows us to use a two-pointer approach to find pairs that sum to a specific target.
-
-#### 2. **Fix One Element**
-We start by fixing one element of the triplet (let’s call it `nums[i]`). For each fixed element, the problem reduces to finding two other elements that sum up to `-nums[i]`.
-
-#### 3. **Use Two Pointers**
-Once we fix `nums[i]`, use two pointers to find the other two numbers:
-- The left pointer (`s`) starts right after `i`.
-- The right pointer (`e`) starts from the end of the array.
-- Adjust the pointers to find the valid triplet:
-  - If the sum is smaller than the target, move the left pointer to the right.
-  - If the sum is larger than the target, move the right pointer to the left.
-  - If the sum equals the target, we have a valid triplet.
-
-#### 4. **Skip Duplicates**
-- After finding a valid triplet, skip over any duplicate values to avoid adding the same triplet multiple times.
-
-#### 5. **Skip Duplicates for the Fixed Element**
-- If the current element `nums[i]` is the same as the previous one, skip it to avoid duplicate triplets.
-
----
-
-### 📝 **Code Explanation**
-
+### Initial Thoughts 💭
+- Sorting helps in efficiently finding the triplets using the two-pointer technique.
+- Duplicates can be avoided by skipping over equal elements while iterating.
+- The problem is a variation of the 3-sum problem that can be solved in O(n^2) time.
+{{< dots >}}
+### Edge Cases 🌐
+- The input array will always have at least 3 elements, as stated in the problem constraints.
+- The solution should efficiently handle up to 3000 elements in the input array.
+- The array may contain duplicate elements, which should be handled to ensure unique triplets.
+- The solution should avoid adding duplicate triplets.
+{{< dots >}}
+## Code 💻
 ```cpp
 vector<vector<int>> threeSum(vector<int>& nums) {
-    vector<vector<int>> ans;  // Result array to store unique triplets.
-    sort(nums.begin(), nums.end());  // Sort the array to enable two-pointer technique.
-    
+    vector<vector<int>> ans;
+    sort(nums.begin(), nums.end());
     for(int i = 0; i < nums.size(); i++) {
-        int target = -nums[i];  // We need the sum of the other two elements to be -nums[i].
-        int s = i + 1;  // Left pointer starts just after the fixed element.
-        int e = nums.size() - 1;  // Right pointer starts at the end of the array.
-        
-        while(s < e) {  // Loop until the left and right pointers meet.
+        int target = -nums[i];
+        int s = i + 1;
+        int e = nums.size() - 1;
+        while(s < e) {
             if(nums[s] + nums[e] < target) {
-                s++;  // If the sum is smaller than the target, move the left pointer to the right.
+               s++;
             } else if (nums[s] + nums[e] > target) {
-                e--;  // If the sum is larger than the target, move the right pointer to the left.
+                e--;
             } else {
-                // A valid triplet is found: [nums[i], nums[s], nums[e]].
                 vector<int> res = {nums[i], nums[s], nums[e]};
-                ans.push_back(res);  // Add the triplet to the result.
-                
-                // Skip duplicates for the left pointer.
+                ans.push_back(res);
                 while(s < e && nums[s] == res[1]) s++;
-                // Skip duplicates for the right pointer.
-                while(s < e && res[2] == nums[e]) e--;
+                while(s < e && res[2] == nums[e]) e--;                    
             }
         }
-        
-        // Skip duplicates for the fixed element nums[i].
         while(i + 1 < nums.size() && nums[i] == nums[i + 1]) i++;
     }
-    
-    return ans;  // Return the list of unique triplets.
+    return ans;
 }
 ```
 
----
+This code implements the `threeSum` function, which finds all unique triplets in the array `nums` that add up to zero.
 
-### 🚀 **Code Walkthrough**
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	vector<vector<int>> threeSum(vector<int>& nums) {
+	```
+	Declare the `threeSum` function, which takes a vector of integers `nums` as input and returns a vector of vectors representing the unique triplets.
 
-1. **Sorting the Array**: 
-   ```cpp
-   sort(nums.begin(), nums.end());
-   ```
-   - This step allows us to efficiently find triplets and avoid duplicates.
+2. **Variable Initialization**
+	```cpp
+	    vector<vector<int>> ans;
+	```
+	Initialize an empty vector `ans` to store the triplets.
 
-2. **Iterate through the Array**:
-   ```cpp
-   for(int i = 0; i < nums.size(); i++) {
-       int target = -nums[i];
-       int s = i + 1;
-       int e = nums.size() - 1;
-   ```
-   - We fix the element `nums[i]` and calculate the target (`-nums[i]`). The goal is to find two other elements that sum up to the target.
+3. **Sorting Operations**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sort the `nums` vector in ascending order.
 
-3. **Two-Pointer Technique**:
-   ```cpp
-   while(s < e) {
-       if(nums[s] + nums[e] < target) {
-           s++;
-       } else if (nums[s] + nums[e] > target) {
-           e--;
-       } else {
-           vector<int> res = {nums[i], nums[s], nums[e]};
-           ans.push_back(res);
-           while(s < e && nums[s] == res[1]) s++;
-           while(s < e && res[2] == nums[e]) e--;
-       }
-   }
-   ```
-   - We adjust the left and right pointers based on the sum of the values at `s` and `e`.
-   - If a valid triplet is found, it is added to the result list, and we skip over any duplicates for the `s` and `e` pointers.
+4. **Loop Iteration**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	Start a loop to iterate through each element `nums[i]` in the sorted array.
 
-4. **Skipping Duplicates**:
-   ```cpp
-   while(i + 1 < nums.size() && nums[i] == nums[i + 1]) i++;
-   ```
-   - After finding a triplet, we skip the duplicate values of `nums[i]` to ensure unique triplets.
+5. **Variable Initialization**
+	```cpp
+	        int target = -nums[i];
+	```
+	Calculate the target sum for the remaining two numbers: `target = -nums[i]`.
 
----
+6. **Variable Initialization**
+	```cpp
+	        int s = i + 1;
+	```
+	Initialize two pointers `s` and `e` to point to the elements after `nums[i]`. `s` will move from the left, and `e` will move from the right.
 
-### 📊 **Time and Space Complexity**
+7. **Variable Initialization**
+	```cpp
+	        int e = nums.size() - 1;
+	```
+	Initialize `e` to point to the last element of the array.
 
-- **Time Complexity**: **O(n²)**. 
-  - Sorting the array takes **O(n log n)**.
-  - The two-pointer loop runs **O(n)** times for each element, making the overall time complexity **O(n²)**.
+8. **Loop Iteration**
+	```cpp
+	        while(s < e) {
+	```
+	Start a two-pointer loop to find pairs of numbers that add up to the `target`.
 
-- **Space Complexity**: **O(n)**. 
-  - The space complexity is primarily used for storing the result list, which in the worst case could contain up to **O(n)** triplets.
+9. **Conditional Check**
+	```cpp
+	            if(nums[s] + nums[e] < target) {
+	```
+	If the sum of `nums[s]` and `nums[e]` is less than the `target`, move `s` to the right to increase the sum.
 
----
+10. **Index Update**
+	```cpp
+	               s++;
+	```
+	Increment `s` to consider the next larger number.
 
-### 🎯 **Key Takeaways**
+11. **Conditional Check**
+	```cpp
+	            } else if (nums[s] + nums[e] > target) {
+	```
+	If the sum of `nums[s]` and `nums[e]` is greater than the `target`, move `e` to the left to decrease the sum.
 
-- **Efficiency**: The time complexity of O(n²) is much better than brute-force methods.
-- **Two-pointer technique**: A very common and effective approach for problems like 3Sum.
-- **Avoiding Duplicates**: Sorting the array and skipping duplicate values ensure that we only store unique triplets.
+12. **Index Update**
+	```cpp
+	                e--;
+	```
+	Decrement `e` to consider the next smaller number.
 
-#### **Advantages**:
-- Fast and intuitive using sorting and two pointers.
-- Handles duplicate elements gracefully.
-  
-#### **Limitations**:
-- Assumes the input array has a reasonable size (works well up to a few thousand elements).
+13. **Conditional Check**
+	```cpp
+	            } else {
+	```
+	If the sum is equal to the `target`, a triplet is found.
 
----
+14. **Array Manipulation**
+	```cpp
+	                vector<int> res = {nums[i], nums[s], nums[e]};
+	```
+	Create a new vector `res` to store the triplet.
 
-### 🏁 **Conclusion**
+15. **Array Manipulation**
+	```cpp
+	                ans.push_back(res);
+	```
+	Add the triplet `res` to the `ans` vector.
 
-The 3Sum problem can be efficiently solved by sorting the array and using the two-pointer technique to find pairs that sum up to the negative of the fixed element. By carefully skipping duplicates, we ensure that only unique triplets are returned. This approach is optimal for this problem, with a time complexity of O(n²) and a space complexity of O(n).
+16. **Loop Iteration**
+	```cpp
+	                while(s < e && nums[s] == res[1]) s++;
+	```
+	Skip duplicate elements at `s` to avoid redundant triplets.
+
+17. **Loop Iteration**
+	```cpp
+	                while(s < e && res[2] == nums[e]) e--;                    
+	```
+	Skip duplicate elements at `e` to avoid redundant triplets.
+
+18. **Loop Iteration**
+	```cpp
+	        while(i + 1 < nums.size() && nums[i] == nums[i + 1]) i++;
+	```
+	Skip duplicate elements at the current position `i` to avoid redundant triplets.
+
+19. **Return Value**
+	```cpp
+	    return ans;
+	```
+	Return the vector `ans` containing all unique triplets.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n^2)
+- **Average Case:** O(n^2)
+- **Worst Case:** O(n^2)
+
+The time complexity is O(n^2) because we iterate through the array and use a two-pointer technique to find valid triplets.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is O(1) because we only need a few pointers and do not use any additional data structures.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/3sum/description/)
 

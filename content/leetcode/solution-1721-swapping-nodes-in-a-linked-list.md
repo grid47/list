@@ -14,138 +14,153 @@ img_src = ""
 youtube = "KUTRaNOzmoo"
 youtube_upload_date="2023-05-15"
 youtube_thumbnail="https://i.ytimg.com/vi/KUTRaNOzmoo/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a singly linked list and an integer k. The task is to swap the values of the kth node from the beginning of the list with the kth node from the end of the list. The list is 1-indexed.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given the head of a singly linked list and an integer k.
+- **Example:** `Input: head = [1,2,3,4,5], k = 2`
+- **Constraints:**
+	- 1 <= k <= n <= 10^5
+	- 0 <= Node.val <= 100
 
-{{< highlight cpp >}}
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* swapNodes(ListNode* head, int k) {
-        ListNode* n1 = nullptr, *n2 = nullptr;
-        for(ListNode *p = head; p != nullptr; p = p->next) {
-            n2 = n2 == nullptr? nullptr: n2->next;
-            if(--k == 0) {
-                n1 = p;
-                n2 = head;
-            }
-        }
-        swap(n2->val, n1->val);
-        return head;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the modified linked list after swapping the kth node from the beginning with the kth node from the end.
+- **Example:** `Output: [1,4,3,2,5]`
+- **Constraints:**
+	- The list will contain at least k nodes.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to swap the values of the kth node from the beginning and the kth node from the end using two pointers.
 
-The problem involves swapping the values of the k-th node from the beginning and the k-th node from the end in a singly-linked list. Given the head of the list and an integer k, our task is to modify the list such that these two nodes are swapped, and then return the modified list. 
+- 1. Initialize two pointers: one starting from the head of the list and the other starting from the end of the list.
+- 2. Traverse the list to locate the kth node from the beginning and the kth node from the end.
+- 3. Swap the values of these two nodes.
+- 4. Return the head of the modified list.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list is non-empty and contains at least `k` nodes.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: head = [1, 2, 3, 4, 5], k = 2`  \
+  **Explanation:** The kth node from the beginning is 2 and the kth node from the end is 4. Swapping their values results in the list [1, 4, 3, 2, 5].
 
-### Approach
+- **Input:** `Input: head = [7, 9, 6, 6, 7, 8, 3, 0, 9, 5], k = 5`  \
+  **Explanation:** The kth node from the beginning is 7 and the kth node from the end is also 7. Swapping their values does not change the list, so the output is [7, 9, 6, 6, 8, 7, 3, 0, 9, 5].
 
-To solve this problem, we can utilize a single pass through the linked list while keeping track of the k-th node from the beginning and the k-th node from the end. The steps involved in the approach are as follows:
+{{< dots >}}
+## Approach 🚀
+The approach involves using two pointers to locate the kth node from both the start and the end of the list. After locating both nodes, their values are swapped.
 
-1. **Traverse the List**: As we traverse the linked list, we will keep a pointer `n1` for the k-th node from the start and another pointer `n2` for the k-th node from the end.
-
-2. **Determine the Length**: While traversing, we can also determine the length of the linked list. Knowing the length will allow us to identify the k-th node from the end.
-
-3. **Swap Values**: Once we identify both nodes, we can simply swap their values.
-
-4. **Return the Modified List**: Finally, we return the head of the modified linked list.
-
-### Code Breakdown (Step by Step)
-
-The provided code implements the above approach effectively. Below is a breakdown of the code:
-
-1. **Struct Definition**: The `ListNode` struct defines the basic structure of a node in the singly-linked list.
-
-    ```cpp
-    struct ListNode {
-        int val;
-        ListNode *next;
-        ListNode() : val(0), next(nullptr) {}
-        ListNode(int x) : val(x), next(nullptr) {}
-        ListNode(int x, ListNode *next) : val(x), next(next) {}
-    };
-    ```
-
-2. **Class Declaration**: The solution is encapsulated within the `Solution` class.
-
-    ```cpp
-    class Solution {
-    ```
-
-3. **Public Method**: The public method `swapNodes` takes two parameters: a pointer to the head of the linked list and an integer `k`.
-
-    ```cpp
-    public:
-    ListNode* swapNodes(ListNode* head, int k) {
-    ```
-
-4. **Pointer Initialization**: Two pointers `n1` and `n2` are initialized to keep track of the k-th node from the start and the end, respectively.
-
-    ```cpp
+### Initial Thoughts 💭
+- This problem can be solved by finding the kth node from the start and the kth node from the end in a single traversal of the list.
+- To find the kth node from the end, we need to traverse the list from the beginning and find the kth node from the start, then use the length of the list to locate the kth node from the end.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty linked list is not a valid input for this problem as it will not contain any nodes.
+- The solution should be efficient enough to handle lists with up to 10^5 nodes.
+- If `k` is equal to the length of the list, the kth node from the beginning is the last node in the list, and the kth node from the end is the first node.
+- The linked list will always contain at least `k` nodes.
+{{< dots >}}
+## Code 💻
+```cpp
+ListNode* swapNodes(ListNode* head, int k) {
     ListNode* n1 = nullptr, *n2 = nullptr;
-    ```
-
-5. **Traversal of the List**: A for loop iterates through the linked list using a pointer `p`.
-
-    ```cpp
     for(ListNode *p = head; p != nullptr; p = p->next) {
-    ```
-
-    - Within the loop:
-      - `n2` is moved forward only after the k-th node has been identified, ensuring that it eventually points to the k-th node from the end.
-      - The k-th node from the beginning (`n1`) is identified when the counter `k` reaches zero.
-
-6. **Decrementing k**: The counter `k` is decremented in each iteration to determine when to set `n1` to the current node `p`.
-
-    ```cpp
-    if(--k == 0) {
-        n1 = p;
-        n2 = head;
+        n2 = n2 == nullptr? nullptr: n2->next;
+        if(--k == 0) {
+            n1 = p;
+            n2 = head;
+        }
     }
-    ```
-
-7. **Swapping the Values**: Once both nodes are identified, their values are swapped using the `swap` function.
-
-    ```cpp
     swap(n2->val, n1->val);
-    ```
-
-8. **Returning the Head**: Finally, the modified linked list head is returned.
-
-    ```cpp
     return head;
-    }
-    ```
+}
+```
 
-### Complexity
+This function `swapNodes` swaps the values of the k-th node from the beginning and the k-th node from the end of a singly linked list. It uses two pointers to find the nodes and then swaps their values.
 
-- **Time Complexity**: The time complexity of this solution is \( O(n) \), where \( n \) is the number of nodes in the linked list. This is because we traverse the list only once.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	ListNode* swapNodes(ListNode* head, int k) {
+	```
+	The function `swapNodes` is declared, which takes a pointer to the head of the linked list (`head`) and an integer `k` representing the position of the node to swap.
 
-- **Space Complexity**: The space complexity is \( O(1) \) since we are only using a constant amount of extra space for the pointers `n1` and `n2`.
+2. **Pointer Initialization**
+	```cpp
+	    ListNode* n1 = nullptr, *n2 = nullptr;
+	```
+	Two pointers `n1` and `n2` are initialized to `nullptr`. `n1` will point to the k-th node from the beginning, and `n2` will eventually point to the k-th node from the end.
 
-### Conclusion
+3. **Traversal Loop**
+	```cpp
+	    for(ListNode *p = head; p != nullptr; p = p->next) {
+	```
+	A loop is started to traverse the entire linked list using the pointer `p`, starting from the head.
 
-In conclusion, the provided code efficiently swaps the values of the k-th node from the beginning and the k-th node from the end of a singly-linked list. The approach utilizes a single traversal to identify both nodes and performs the swap in constant space.
+4. **Move `n2` Pointer**
+	```cpp
+	        n2 = n2 == nullptr? nullptr: n2->next;
+	```
+	If `n2` is not yet initialized (i.e., `n2` is `nullptr`), it remains `nullptr`. Once `n2` is initialized, it moves one node forward in each iteration.
 
-The implementation is clear, concise, and leverages the properties of linked lists effectively. This method is suitable for scenarios where linked list manipulation is necessary, such as in competitive programming or data structure courses.
+5. **Condition Check**
+	```cpp
+	        if(--k == 0) {
+	```
+	The integer `k` is decremented, and when it becomes zero, the pointer `n1` points to the k-th node from the beginning of the list. The pointer `n2` is also set to the head of the list to start its traversal.
 
-The code demonstrates a good understanding of pointer manipulation in linked lists, and its efficiency in both time and space makes it a robust solution to the problem. By maintaining clarity and simplicity, it is easy to follow and adaptable to similar problems involving linked list node manipulation.
+6. **Assign `n1` Node**
+	```cpp
+	            n1 = p;
+	```
+	Once `k` reaches zero, the pointer `n1` is assigned to the current node `p`, which is the k-th node from the beginning.
+
+7. **Initialize `n2` to Head**
+	```cpp
+	            n2 = head;
+	```
+	The pointer `n2` is reset to point to the head of the linked list to start searching for the k-th node from the end.
+
+8. **Swap Node Values**
+	```cpp
+	    swap(n2->val, n1->val);
+	```
+	The values of the nodes pointed to by `n2` and `n1` are swapped using the `swap` function.
+
+9. **Return Statement**
+	```cpp
+	    return head;
+	```
+	The function returns the head of the modified linked list, with the values of the k-th nodes swapped.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n), where n is the number of nodes in the list.
+- **Average Case:** O(n), as we traverse the list once to determine the length and perform the swap.
+- **Worst Case:** O(n), as the solution requires a single traversal of the list.
+
+The time complexity is linear in the size of the linked list.
+
+### Space Complexity 💾
+- **Best Case:** O(1), as the space usage does not depend on the size of the list.
+- **Worst Case:** O(1), as no additional space is required other than for the pointers and swapping the values.
+
+The space complexity is constant, as the solution only uses a fixed amount of space.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/swapping-nodes-in-a-linked-list/description/)
 

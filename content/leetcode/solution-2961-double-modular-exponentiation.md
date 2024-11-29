@@ -14,102 +14,188 @@ img_src = ""
 youtube = "I0NpbqgISas"
 youtube_upload_date="2023-12-11"
 youtube_thumbnail="https://i.ytimg.com/vi/I0NpbqgISas/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a 2D array `variables` where each element is a list of integers `[a, b, c, m]`, and an integer `target`, find the indices where the formula `(a * b % 10) ^ c % m` equals the `target`. Return a list of these indices.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a 2D array `variables` and an integer `target`. Each element of the array represents a group of four integers `[a, b, c, m]`.
+- **Example:** `variables = [[4, 2, 3, 5], [7, 2, 2, 4], [6, 1, 1, 10]], target = 3`
+- **Constraints:**
+	- 1 <= variables.length <= 100
+	- 1 <= a, b, c, m <= 103
+	- 0 <= target <= 103
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int power(long long b, long long p, int m){
-    if(p <= 0) return 1;
-    long long t = power(b, p/2, m);
-    t = ((t * t)%m);
-    return (p%2)?(t * b)%m : t;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return an array of indices where the result of the formula equals `target`.
+- **Example:** `[0, 2]`
+- **Constraints:**
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To identify which indices satisfy the condition `(a * b % 10) ^ c % m == target`.
+
+- Iterate over the array `variables`.
+- For each element `[a, b, c, m]`, compute `(a * b % 10) ^ c % m` and compare it with `target`.
+- If they are equal, add the index to the result array.
+- Return the result array.
+{{< dots >}}
+### Problem Assumptions ✅
+- All elements of the input are within the given constraints.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: variables = [[4, 2, 3, 5], [7, 2, 2, 4], [6, 1, 1, 10]], target = 3`  \
+  **Explanation:** For index 0: (4 * 2 % 10)^3 % 5 = 3, for index 1: (7 * 2 % 10)^2 % 4 = 0, for index 2: (6 * 1 % 10)^1 % 10 = 6. Thus, the good indices are [0, 2].
+
+- **Input:** `Input: variables = [[5, 5, 3, 10]], target = 7`  \
+  **Explanation:** For index 0: (5 * 5 % 10)^3 % 10 = 5. No indices match the target.
+
+{{< dots >}}
+## Approach 🚀
+We iterate through each element in the `variables` array, compute the formula, and check if it matches the target.
+
+### Initial Thoughts 💭
+- We can use modular arithmetic to simplify the computation.
+- A helper function for exponentiation modulo m can be used to avoid overflow and ensure efficiency.
+{{< dots >}}
+### Edge Cases 🌐
+- The input will always contain at least one element.
+- Ensure that the solution handles inputs where `variables.length` is close to 100.
+- Handle cases where `target` is 0 or the result of the formula is 0.
+- The time complexity should be efficient enough to handle inputs at the upper bound of constraints.
+{{< dots >}}
+## Code 💻
+```cpp
+int power(long long b, long long p, int m){
+if(p <= 0) return 1;
+long long t = power(b, p/2, m);
+t = ((t * t)%m);
+return (p%2)?(t * b)%m : t;
 }
 
 vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
-    vector<int> ans;
-    for(int i = 0; i < v.size(); ++i){
-        long long a = v[i][0]%10, b = v[i][1], c = v[i][2], m = v[i][3], t = 1;
-        t = power(a, b, 10);
-        t = power(t, c, m);
-        if(t == target) ans.push_back(i);
-    }
-    return ans;
+vector<int> ans;
+for(int i = 0; i < v.size(); ++i){
+    long long a = v[i][0]%10, b = v[i][1], c = v[i][2], m = v[i][3], t = 1;
+    t = power(a, b, 10);
+    t = power(t, c, m);
+    if(t == target) ans.push_back(i);
 }
-};
-{{< /highlight >}}
----
-
-### Problem Statement:
-Given a matrix `v` where each row contains four integers `[a, b, c, m]`, the goal is to compute a value for each row using a modular exponentiation technique and check if the result equals a given `target`. If the result matches the target, the index of that row should be added to the result list. The computation involves two stages of exponentiation. The challenge lies in efficiently calculating large powers modulo `m` and ensuring that the results are correct without causing overflow or performance issues.
-
-### Approach:
-The problem involves calculating large powers using the modular exponentiation technique, which is a method to compute powers efficiently without directly multiplying the base multiple times. The key to solving this problem is the application of **modular exponentiation** to avoid overflow and compute the values in an efficient manner.
-
-**Modular exponentiation** is essential for this task because the numbers involved in exponentiation can grow very large, but we only need the result modulo `m`.
-
-### Code Breakdown (Step by Step):
-Let's break down the code and its parts for a deeper understanding:
-
-#### 1. **Modular Exponentiation Function (`power`)**:
-```cpp
-int power(long long b, long long p, int m) {
-    if (p <= 0) return 1;
-    long long t = power(b, p / 2, m);
-    t = ((t * t) % m);
-    return (p % 2) ? (t * b) % m : t;
+return ans;
 }
 ```
-- This function calculates `b^p % m` using **recursive modular exponentiation**.
-- **Base Case**: If `p <= 0`, return `1`. This handles the case when the exponent is zero or negative (in some contexts, negative exponents are defined as reciprocal).
-- **Recursive Step**: We first recursively calculate `b^(p/2) % m` to reduce the problem size (using the divide-and-conquer approach). We then square the result to get `b^p % m`, and finally, we handle the case when `p` is odd by multiplying the result by `b` again.
-- **Efficiency**: This method reduces the time complexity to **O(log(p))** instead of **O(p)**, which is a significant improvement when dealing with large exponents.
 
-#### 2. **Main Logic (Loop through `v`)**:
-```cpp
-vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
-    vector<int> ans;
-    for(int i = 0; i < v.size(); ++i) {
-        long long a = v[i][0] % 10, b = v[i][1], c = v[i][2], m = v[i][3], t = 1;
-        t = power(a, b, 10);
-        t = power(t, c, m);
-        if(t == target) ans.push_back(i);
-    }
-    return ans;
-}
-```
-- **Iteration over Rows**: We iterate over each row of the input matrix `v`, where each row contains four elements `[a, b, c, m]`. These elements represent the base `a`, exponent `b`, the second exponent `c`, and modulus `m`, respectively.
-  
-  - `a % 10` ensures that we only consider the last digit of `a`, as the final result is only dependent on the last digit of the base `a` for the initial modular exponentiation.
-  
-  - **First Power Calculation**: We calculate `a^b % 10` using the `power` function to find the result of raising `a` to the power `b` and taking the result modulo `10`. This step is equivalent to reducing the base `a` to a smaller value modulo `10` before moving on to the next stage.
+This code defines two functions: 'power' to compute modular exponentiation and 'getGoodIndices' to find indices in a list where the computed value matches a target.
 
-  - **Second Power Calculation**: The result of the first exponentiation, stored in `t`, is then raised to the power `c` modulo `m`. This is the second stage of exponentiation, which involves applying modular exponentiation to the result of the previous step.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int power(long long b, long long p, int m){
+	```
+	Defines the function 'power' that computes b raised to the power p modulo m using recursion.
 
-- **Condition Check**: After calculating `t`, the value is compared to the target. If they are equal, we add the current index `i` to the `ans` vector. This means that the index `i` corresponds to a row that produces the required result.
-  
-- **Return Result**: Once all rows are processed, the function returns the list of indices `ans` that satisfy the condition.
+2. **Base Case**
+	```cpp
+	if(p <= 0) return 1;
+	```
+	Base case for the recursion: if p is 0 or less, the result is 1 (since any number raised to the power of 0 is 1).
 
-### Complexity Analysis:
+3. **Recursive Case**
+	```cpp
+	long long t = power(b, p/2, m);
+	```
+	Recursively calls the power function with half the exponent (p/2).
 
-#### Time Complexity:
-- **Modular Exponentiation**: The `power` function performs logarithmic work in terms of the exponent `p` (i.e., **O(log p)**), which ensures that the large exponents in the matrix `v` are handled efficiently.
-- **Iterating Over Rows**: We iterate over each row in the matrix `v`, and for each row, we perform two modular exponentiations. Therefore, the total time complexity is the number of rows `n` times the complexity of calculating the powers, which is **O(n * log p)**, where `p` is the maximum exponent encountered in the input.
-- **Final Complexity**: Assuming that the largest exponents `b` and `c` are bounded by some constant, the complexity can be simplified to **O(n)**, where `n` is the number of rows in `v`.
+4. **Square the Result**
+	```cpp
+	t = ((t * t)%m);
+	```
+	Squares the result of the recursive call and takes the modulo m.
 
-#### Space Complexity:
-- The space complexity of this solution is **O(n)** due to the storage required for the result vector `ans`, which stores the indices of the rows that produce the desired result.
-- The auxiliary space for the recursive calls in the `power` function is **O(log p)** due to the recursive depth required for modular exponentiation.
+5. **Final Result**
+	```cpp
+	return (p%2)?(t * b)%m : t;
+	```
+	If p is odd, multiplies the result by b and takes the modulo m. Otherwise, just returns the squared result.
 
-### Conclusion:
-This solution efficiently computes the required modular exponentiation and checks if the computed result matches the target. By using recursive modular exponentiation, the solution avoids overflow and provides a highly efficient method for handling large numbers. The time complexity is linear with respect to the number of rows, with logarithmic time complexity for each exponentiation, making the solution scalable for large inputs.
+6. **Function End**
+	```cpp
+	}
+	```
+	Marks the end of the 'power' function.
 
-By following this approach, we achieve an optimized solution for computing powers modulo `m` and checking the results against a target, while keeping both time and space complexities in check.
+7. **Function Definition**
+	```cpp
+	vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
+	```
+	Defines the function 'getGoodIndices' that takes a 2D vector 'v' and an integer 'target', returning indices where a certain computed value matches the target.
+
+8. **Variable Initialization**
+	```cpp
+	vector<int> ans;
+	```
+	Initializes an empty vector 'ans' to store the indices of the elements that match the target.
+
+9. **For Loop Start**
+	```cpp
+	for(int i = 0; i < v.size(); ++i){
+	```
+	Starts a for loop that iterates through each row in the 2D vector 'v'.
+
+10. **Variable Setup**
+	```cpp
+	    long long a = v[i][0]%10, b = v[i][1], c = v[i][2], m = v[i][3], t = 1;
+	```
+	Extracts values from the current row 'v[i]' and performs modulo 10 on 'a'. Initializes t to 1.
+
+11. **First Power Calculation**
+	```cpp
+	    t = power(a, b, 10);
+	```
+	Calculates the value of 'a' raised to the power of 'b' modulo 10 by calling the 'power' function.
+
+12. **Second Power Calculation**
+	```cpp
+	    t = power(t, c, m);
+	```
+	Calculates the value of 't' raised to the power of 'c' modulo m using the 'power' function.
+
+13. **Condition Check**
+	```cpp
+	    if(t == target) ans.push_back(i);
+	```
+	If the computed value 't' matches the target, adds the index 'i' to the result vector 'ans'.
+
+14. **Return Result**
+	```cpp
+	return ans;
+	```
+	Returns the vector 'ans' containing the indices where the computed value matches the target.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is O(n), where n is the length of the `variables` array.
+
+### Space Complexity 💾
+- **Best Case:** O(n)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) for storing the result indices.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/double-modular-exponentiation/description/)
 

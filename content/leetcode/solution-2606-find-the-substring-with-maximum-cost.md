@@ -14,122 +14,202 @@ img_src = ""
 youtube = "EwSIfXGq2B4"
 youtube_upload_date="2023-04-01"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/EwSIfXGq2B4/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string s, a string chars of distinct characters, and an integer array vals of the same length as chars. The value of each character is determined by either its position in the alphabet or a corresponding value in the vals array if it is present in chars. The cost of a substring is the sum of the values of each character in that substring. Your goal is to find the maximum cost of any substring of s.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a string s consisting of lowercase English letters, a string chars with distinct lowercase letters, and an integer array vals with values corresponding to each character in chars.
+- **Example:** `s = 'xyz', chars = 'xy', vals = [10, 20]`
+- **Constraints:**
+	- 1 <= s.length <= 10^5
+	- 1 <= chars.length <= 26
+	- chars consists of distinct lowercase English letters
+	- vals.length == chars.length
+	- -1000 <= vals[i] <= 1000
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int maximumCostSubstring(string s, string chars, vector<int>& vals) {
-        map<char, int> mp;
-        for(int i = 0; i < chars.size(); i++) {
-            mp[chars[i]] = vals[i];
-        }
-        for(int i = 0; i < 26; i++) {
-            char x = 'a' + i;
-            if(mp.count(x)) continue;
-            mp[x] = i + 1;
-        }
-        
-        int lmax = 0, gmax = 0;
-        for(int i = 0; i < s.size(); i++) {
-            if(mp[s[i]] < lmax + mp[s[i]]) {
-                lmax = lmax + mp[s[i]];
-            } else lmax = mp[s[i]];
-            
-            gmax = max(gmax, lmax);
-        }
-        return gmax;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the maximum cost among all substrings of the string s, where the cost of a substring is the sum of the values of its characters.
+- **Example:** `Output: 30`
+- **Constraints:**
+	- The output is a single integer representing the maximum cost of any substring.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To determine the maximum cost among all substrings by efficiently calculating the value of each substring.
+
+- First, create a map where each character in the string s gets a corresponding value based on chars and vals.
+- For characters not present in chars, assign them their position in the alphabet.
+- Use a sliding window or dynamic programming approach to calculate the maximum possible sum of character values in any substring.
+{{< dots >}}
+### Problem Assumptions ✅
+- The characters in s are all lowercase English letters.
+- The vals array corresponds to the characters in chars.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `s = 'abc', chars = 'abc', vals = [-1, -1, -1]`  \
+  **Explanation:** In this case, each character in 'abc' has a value of -1, so the best substring with the maximum cost is the empty string, with a cost of 0.
+
+- **Input:** `s = 'adaa', chars = 'd', vals = [-1000]`  \
+  **Explanation:** In this example, the value of 'a' is 1 and 'd' is -1000. The maximum cost comes from the substring 'aa', with a total cost of 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we need to calculate the cost of every possible substring of s and track the maximum cost found.
+
+### Initial Thoughts 💭
+- The maximum cost could come from a single character or from a longer substring.
+- We need to efficiently compute the cost of each substring and avoid recalculating values multiple times.
+- By assigning each character a value based on its presence in chars, we can calculate the cost of any substring as the sum of the values of its characters.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty string s should return a maximum cost of 0.
+- The string s can have up to 100,000 characters, so the solution must handle large inputs efficiently.
+- Negative values in vals could affect the maximum cost, especially when characters in s have low or negative values.
+- Ensure that the solution works in O(n) time to handle the large input size of s.
+{{< dots >}}
+## Code 💻
+```cpp
+int maximumCostSubstring(string s, string chars, vector<int>& vals) {
+    map<char, int> mp;
+    for(int i = 0; i < chars.size(); i++) {
+        mp[chars[i]] = vals[i];
     }
-};
-{{< /highlight >}}
----
-
-### Problem Statement
-
-In this problem, we are tasked with finding the maximum possible cost of a substring in a given string `s`. The cost of each character in `s` is determined by a list of values given in the array `vals` corresponding to a set of characters in the string `chars`. For the characters in `chars`, we use the provided values in `vals`, and for characters that are not in `chars`, we assign a default value based on their alphabetical position. The goal is to calculate the maximum cost of a substring of `s`, where the cost of the substring is defined as the sum of the values of its characters.
-
-### Approach
-
-The solution employs the following approach:
-
-1. **Mapping character values**: First, create a map that stores the value for each character in `chars`. If a character in `s` is not in `chars`, its value is assigned based on its position in the alphabet.
-   
-2. **Kadane’s Algorithm for Maximum Subarray Sum**: Once the values for each character in `s` are determined, the problem reduces to finding the maximum sum of any contiguous subarray of these values. This is a classic problem solved using Kadane’s algorithm, which keeps track of the running sum and updates the maximum sum encountered.
-
-3. **Iterating through the string**: For each character in `s`, its corresponding value (from the map) is added to the running sum (`lmax`). If this value decreases the sum (i.e., if the sum becomes negative), we reset the running sum to the value of the current character. The global maximum (`gmax`) is updated accordingly to track the highest sum seen so far.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Map the values for characters**:
-```cpp
-map<char, int> mp;
-for(int i = 0; i < chars.size(); i++) {
-    mp[chars[i]] = vals[i];
+    for(int i = 0; i < 26; i++) {
+        char x = 'a' + i;
+        if(mp.count(x)) continue;
+        mp[x] = i + 1;
+    }
+    
+    int lmax = 0, gmax = 0;
+    for(int i = 0; i < s.size(); i++) {
+        if(mp[s[i]] < lmax + mp[s[i]]) {
+            lmax = lmax + mp[s[i]];
+        } else lmax = mp[s[i]];
+        
+        gmax = max(gmax, lmax);
+    }
+    return gmax;
 }
 ```
-- Here, we create a map `mp` where each character in the `chars` string is mapped to its corresponding value from `vals`.
-- This allows us to easily look up the value for each character in the string `s`.
 
-#### 2. **Assign default values to missing characters**:
-```cpp
-for(int i = 0; i < 26; i++) {
-    char x = 'a' + i;
-    if(mp.count(x)) continue;
-    mp[x] = i + 1;
-}
-```
-- This loop checks for characters in the alphabet that are not present in the `chars` string. 
-- For those characters, we assign a default value, which is their alphabetical position. For example, 'a' gets a value of 1, 'b' gets a value of 2, and so on.
+This code calculates the maximum cost of a substring from string `s` where each character has a cost defined in `chars` and `vals`.
 
-#### 3. **Initialize variables for Kadane's algorithm**:
-```cpp
-int lmax = 0, gmax = 0;
-```
-- `lmax` keeps track of the current running sum of the substring. It is initialized to 0 because we start with no elements selected.
-- `gmax` stores the global maximum sum encountered during the iteration through the string `s`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Initialization**
+	```cpp
+	int maximumCostSubstring(string s, string chars, vector<int>& vals) {
+	```
+	Start by declaring the function that takes the string `s`, a string `chars`, and a vector `vals` which maps characters in `chars` to their respective costs.
 
-#### 4. **Iterate through the string to compute the maximum sum**:
-```cpp
-for(int i = 0; i < s.size(); i++) {
-    if(mp[s[i]] < lmax + mp[s[i]]) {
-        lmax = lmax + mp[s[i]];
-    } else lmax = mp[s[i]];
+2. **Data Structures**
+	```cpp
+	    map<char, int> mp;
+	```
+	Initialize a map `mp` to store the cost for each character in the string `chars`.
 
-    gmax = max(gmax, lmax);
-}
-```
-- The loop iterates through each character in the string `s` and uses the previously created map `mp` to get the corresponding value of the character.
-- If adding the current character’s value to the running sum (`lmax`) results in a higher value than just using the current character’s value alone, the running sum is updated to include the current character’s value.
-- If adding the character’s value results in a smaller sum (i.e., the running sum would be negative), the running sum is reset to the value of the current character.
-- At each step, `gmax` is updated to keep track of the highest sum encountered.
+3. **Loop**
+	```cpp
+	    for(int i = 0; i < chars.size(); i++) {
+	```
+	Loop through each character in the `chars` string.
 
-#### 5. **Return the result**:
-```cpp
-return gmax;
-```
-- After iterating through the string, the function returns `gmax`, which contains the maximum sum of the substring.
+4. **Mapping**
+	```cpp
+	        mp[chars[i]] = vals[i];
+	```
+	For each character in `chars`, map it to its corresponding value from `vals`.
 
-### Complexity Analysis
+5. **Character Initialization**
+	```cpp
+	    for(int i = 0; i < 26; i++) {
+	```
+	Start a loop for all lowercase English letters (26 total).
 
-#### Time Complexity:
-- **Mapping the character values**: Creating the map from `chars` to `vals` takes \(O(c)\), where \(c\) is the size of `chars`.
-- **Assigning default values**: The loop that assigns default values to characters takes \(O(26)\), which is constant and can be ignored.
-- **Kadane’s algorithm**: The iteration over the string `s` takes \(O(n)\), where \(n\) is the length of `s`.
-- **Overall Time Complexity**: The overall time complexity is \(O(n + c)\), where \(n\) is the length of `s` and \(c\) is the length of `chars`. Since \(c\) is typically much smaller than \(n\), we can approximate the time complexity as \(O(n)\).
+6. **Character Processing**
+	```cpp
+	        char x = 'a' + i;
+	```
+	Assign each letter of the alphabet to `x` by adding the loop index `i` to the character 'a'.
 
-#### Space Complexity:
-- **Map storage**: The map `mp` stores up to 26 characters (one for each letter of the alphabet), so it uses \(O(26)\) space, which is constant.
-- **Other variables**: The other variables (`lmax`, `gmax`) take constant space.
-- **Overall Space Complexity**: The space complexity is \(O(1)\), as the map size is bounded by the number of letters in the alphabet (26).
+7. **Check for Missing Characters**
+	```cpp
+	        if(mp.count(x)) continue;
+	```
+	Check if the character `x` is already in the map. If it is, skip to the next character.
 
-### Conclusion
+8. **Character Assignment**
+	```cpp
+	        mp[x] = i + 1;
+	```
+	If the character `x` is not in the map, assign it a cost of `i + 1`.
 
-This solution efficiently calculates the maximum cost of any substring of `s` by first mapping the values of the characters and then applying Kadane’s algorithm to find the maximum sum subarray. The algorithm operates in linear time with respect to the size of the string, making it optimal for large inputs. The approach is both time and space efficient, using a map to store character values and applying a standard algorithm for maximum subarray sum to solve the problem.
+9. **Initialization**
+	```cpp
+	    int lmax = 0, gmax = 0;
+	```
+	Initialize two variables: `lmax` to track the local maximum substring sum and `gmax` to track the global maximum.
+
+10. **Iterate Through String**
+	```cpp
+	    for(int i = 0; i < s.size(); i++) {
+	```
+	Iterate through each character in the string `s`.
+
+11. **Compare with Local Max**
+	```cpp
+	        if(mp[s[i]] < lmax + mp[s[i]]) {
+	```
+	Check if adding the current character's cost to `lmax` gives a larger sum.
+
+12. **Update Local Max**
+	```cpp
+	            lmax = lmax + mp[s[i]];
+	```
+	If the local sum is larger, update `lmax`.
+
+13. **Else Condition**
+	```cpp
+	        } else lmax = mp[s[i]];
+	```
+	Otherwise, reset `lmax` to the cost of the current character.
+
+14. **Update Global Max**
+	```cpp
+	        gmax = max(gmax, lmax);
+	```
+	Update the global maximum `gmax` to be the maximum of `gmax` and `lmax`.
+
+15. **Return Result**
+	```cpp
+	    return gmax;
+	```
+	Return the global maximum sum of the substring.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear in the length of the string s, as we process each character in the string once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case due to the need to store the values of characters in the string s.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-substring-with-maximum-cost/description/)
 

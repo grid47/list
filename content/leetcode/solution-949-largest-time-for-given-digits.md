@@ -14,90 +14,132 @@ img_src = ""
 youtube = "sn6r0ZV_2y4"
 youtube_upload_date="2020-09-01"
 youtube_thumbnail="https://i.ytimg.com/vi/sn6r0ZV_2y4/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGEgZShHMA8=&rs=AOn4CLCRrVpzGGgx18QwTzZjGamfSnIVlw"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given an array of 4 digits, your task is to form the latest possible 24-hour time using each digit exactly once. The time is represented in the format 'HH:MM' where 'HH' is between 00 and 23, and 'MM' is between 00 and 59. If no valid time can be formed, return an empty string.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of an array of integers representing 4 digits.
+- **Example:** `Input: arr = [9, 1, 2, 4]`
+- **Constraints:**
+	- The array will always have exactly 4 digits.
+	- Each digit will be between 0 and 9.
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    string largestTimeFromDigits(vector<int>& A) {
-        sort(begin(A), end(A), greater<int>());
-        do if ((A[0] < 2 || (A[0] == 2 && A[1] < 4)) && A[2] < 6)
-            return to_string(A[0]) + to_string(A[1]) + ":" + to_string(A[2]) + to_string(A[3]);
-        while(prev_permutation(begin(A), end(A)));
-            
-        return "";
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be the latest valid time in the format 'HH:MM'. If no valid time can be formed, return an empty string.
+- **Example:** `Output: '21:49'`
+- **Constraints:**
+	- The returned string should be in the format 'HH:MM'.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to generate all possible times using the given digits and return the latest valid time.
 
-The problem asks to create the largest possible time (in the format "HH:MM") using four digits provided in an array `A`. The digits must be rearranged to form a valid time, where:
-- The first two digits represent the hour (00 to 23).
-- The last two digits represent the minutes (00 to 59).
-If it's not possible to form a valid time, return an empty string.
+- 1. Sort the digits in descending order to try the largest possible times first.
+- 2. Try all permutations of the digits to form potential times.
+- 3. For each permutation, check if the resulting time is valid (HH:MM format).
+- 4. Return the latest valid time, or an empty string if none can be formed.
+{{< dots >}}
+### Problem Assumptions ✅
+- The digits provided are valid integers between 0 and 9.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: arr = [9, 1, 2, 4]`  \
+  **Explanation:** The largest valid time possible from these digits is '21:49'. The other permutations are not valid 24-hour times.
 
-### Approach
+- **Input:** `Input: arr = [3, 3, 3, 2]`  \
+  **Explanation:** The largest valid time possible is '23:33'.
 
-To solve the problem, we need to generate the largest possible valid time from the given digits. We can break down the solution into the following key steps:
+{{< dots >}}
+## Approach 🚀
+The approach involves generating all permutations of the digits and checking each one for validity in a 24-hour time format.
 
-1. **Sorting the Digits**: 
-   We start by sorting the digits in descending order. This is because we want to try and form the largest valid time, starting with the largest possible hour and minute digits.
+### Initial Thoughts 💭
+- Since there are only 4 digits, the problem is manageable by checking all permutations.
+- Sorting the digits in descending order first helps in quickly finding the largest valid time.
+- The key observation is that only a few permutations need to be checked to find the largest valid time.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input array is empty, return an empty string.
+- This problem always assumes exactly 4 digits, so there are no cases for large inputs.
+- If all the digits are the same, the approach still works as we generate permutations of identical digits.
+- The solution must efficiently handle checking up to 24 permutations (4!) of the digits.
+{{< dots >}}
+## Code 💻
+```cpp
+string largestTimeFromDigits(vector<int>& A) {
+    sort(begin(A), end(A), greater<int>());
+    do if ((A[0] < 2 || (A[0] == 2 && A[1] < 4)) && A[2] < 6)
+        return to_string(A[0]) + to_string(A[1]) + ":" + to_string(A[2]) + to_string(A[3]);
+    while(prev_permutation(begin(A), end(A)));
+        
+    return "";
+}
+```
 
-2. **Checking Validity**:
-   After sorting, we generate permutations of the digits to check all possible ways to form a valid time. We use the `prev_permutation` function to generate permutations in descending order, starting with the largest possible arrangement. For each permutation, we check if the resulting time is valid:
-   - The first digit (hour’s tens place) must be less than or equal to `2` (to make the hour valid).
-   - If the first digit is `2`, the second digit (hour’s ones place) must be less than `4` (to ensure the hour is between 00 and 23).
-   - The third digit (minute’s tens place) must be less than `6` (to ensure the minutes are between 00 and 59).
+This function returns the largest possible time that can be formed from the digits in the given vector `A`. The function sorts the digits in descending order, checks if a valid time can be formed, and then iterates through all permutations to find the largest valid time.
 
-3. **Constructing the Time**:
-   Once a valid permutation is found, we construct the time string in the "HH:MM" format and return it. If no valid permutation is found after checking all possible ones, we return an empty string.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	string largestTimeFromDigits(vector<int>& A) {
+	```
+	The function `largestTimeFromDigits` takes a vector of integers representing the digits of a time and returns the largest valid time as a string, or an empty string if no valid time can be formed.
 
-### Code Breakdown (Step by Step)
+2. **Sorting Digits**
+	```cpp
+	    sort(begin(A), end(A), greater<int>());
+	```
+	Sort the digits in descending order to maximize the first digits of the time and try to form the largest possible valid time.
 
-1. **Sorting the Digits in Descending Order**:
-   ```cpp
-   sort(begin(A), end(A), greater<int>());
-   ```
-   - We begin by sorting the digits in descending order using `sort` and the `greater<int>` comparator. This allows us to try the largest possible combinations first.
+3. **Check Valid Time**
+	```cpp
+	    do if ((A[0] < 2 || (A[0] == 2 && A[1] < 4)) && A[2] < 6)
+	```
+	Check if the current permutation of digits forms a valid time. A valid time must have the first two digits as a number less than 24 and the last two digits as a number less than 60.
 
-2. **Generating Permutations**:
-   ```cpp
-   do if ((A[0] < 2 || (A[0] == 2 && A[1] < 4)) && A[2] < 6)
-       return to_string(A[0]) + to_string(A[1]) + ":" + to_string(A[2]) + to_string(A[3]);
-   while(prev_permutation(begin(A), end(A)));
-   ```
-   - We then use the `do-while` loop and `prev_permutation` to generate all permutations of the digits in descending order.
-   - For each permutation, we check if the arrangement forms a valid time:
-     - The first digit `A[0]` must be less than `2`, or if it's `2`, the second digit `A[1]` must be less than `4` to ensure the hour is between 00 and 23.
-     - The third digit `A[2]` must be less than `6` to ensure the minutes are between 00 and 59.
-   - If a valid time is found, we format the digits into a string "HH:MM" using `to_string` and return the result immediately.
+4. **Form Time String**
+	```cpp
+	        return to_string(A[0]) + to_string(A[1]) + ":" + to_string(A[2]) + to_string(A[3]);
+	```
+	If the current permutation forms a valid time, convert the digits into a string in the format `HH:MM` and return it.
 
-3. **Returning an Empty String**:
-   ```cpp
-   return "";
-   ```
-   - If no valid time is found after checking all permutations, the function returns an empty string.
+5. **Generate Previous Permutation**
+	```cpp
+	    while(prev_permutation(begin(A), end(A)));
+	```
+	If no valid time has been found, generate the next permutation of the digits in descending order and check again.
 
-### Complexity
+6. **Return Empty String**
+	```cpp
+	    return "";
+	```
+	If no valid time can be formed from the digits, return an empty string.
 
-1. **Time Complexity**:
-   - Sorting the array of digits takes \(O(4 \log 4) = O(1)\), since the array always contains exactly 4 elements.
-   - The `prev_permutation` function generates all permutations of the 4 digits. Since there are 4 digits, the total number of permutations is \(4! = 24\). For each permutation, we perform constant-time checks to validate the time format.
-   - Hence, the overall time complexity is \(O(24) = O(1)\), because the number of permutations is constant.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(1)
+- **Average Case:** O(24)
+- **Worst Case:** O(24)
 
-2. **Space Complexity**:
-   - The space complexity is \(O(1)\) because we are only using a constant amount of extra space, namely the `A` array and a few integer variables for processing.
+Generating permutations of 4 digits results in at most 24 permutations. Checking each one takes constant time.
 
-### Conclusion
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
 
-This solution efficiently generates the largest possible valid time from four digits by sorting the digits in descending order and checking all permutations for validity. The use of `prev_permutation` ensures that we explore the largest possible time combinations first, which allows us to quickly find the largest valid time or determine that it's impossible to form a valid time. The solution has constant time and space complexity, making it optimal for the given problem.
+The space complexity is O(1) since we are only storing a few permutations at a time.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/largest-time-for-given-digits/description/)
 

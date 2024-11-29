@@ -14,148 +14,176 @@ img_src = ""
 youtube = "QEESBA2Q_88"
 youtube_upload_date="2024-06-05"
 youtube_thumbnail="https://i.ytimg.com/vi/QEESBA2Q_88/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given a list of words, return an array of characters that appear in all words. The output should include duplicates of characters as they appear in each word, and the answer can be returned in any order.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a list of words where each word is a string of lowercase English letters.
+- **Example:** `words = ['apple', 'grape', 'maple']`
+- **Constraints:**
+	- 1 <= words.length <= 100
+	- 1 <= words[i].length <= 100
+	- words[i] consists of lowercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    vector<string> commonChars(vector<string>& words) {
-        vector<int> frq(26, INT_MAX);
-        for(string& s: words) {
-            vector<int> cnt(26, 0);
-            for(char x: s) cnt[x - 'a']++;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is an array of characters that appear in all words of the list. The characters should appear as many times as they appear in each word, and can be in any order.
+- **Example:** `['p', 'e', 'l']`
+- **Constraints:**
+	- The output array will only contain lowercase English letters.
 
-            for(int i = 0; i < 26; i++)
-            frq[i] = min(frq[i], cnt[i]);
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to identify the characters that appear in all words, taking into account their frequency in each word.
 
-        vector<string> res;
+- Create a frequency array to track the minimum number of occurrences of each character across all words.
+- Iterate through each word, updating the frequency array to reflect the minimum occurrences of each character.
+- Generate the result by adding characters to the output list according to their minimum frequency.
+{{< dots >}}
+### Problem Assumptions ✅
+- The input list contains valid words with lowercase English letters only.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: words = ['hello', 'cello', 'mellow']`  \
+  **Explanation:** The common characters between all words are 'e', 'l', and 'l', which appear at least once in each word.
+
+- **Input:** `Input: words = ['blue', 'clue', 'glue']`  \
+  **Explanation:** The common characters are 'l', 'u', and 'e', appearing at least once in each word.
+
+{{< dots >}}
+## Approach 🚀
+The problem can be solved by using frequency counts for each character in every word and comparing them to find the minimum occurrences for each character across all words.
+
+### Initial Thoughts 💭
+- We need to track the occurrences of each character in every word and update the result accordingly.
+- This problem can be tackled by using a frequency array and iterating over the words to find common characters.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input is an empty list, return an empty result array.
+- The solution should efficiently handle the maximum input size with up to 100 words and 100 characters per word.
+- If there are no common characters between the words, return an empty result.
+- The solution should avoid unnecessary complexity and optimize for large inputs.
+{{< dots >}}
+## Code 💻
+```cpp
+vector<string> commonChars(vector<string>& words) {
+    vector<int> frq(26, INT_MAX);
+    for(string& s: words) {
+        vector<int> cnt(26, 0);
+        for(char x: s) cnt[x - 'a']++;
+
         for(int i = 0; i < 26; i++)
-        for(int j = 0; j < frq[i]; j++)
-            res.push_back(string(1, 'a' + i));
-
-        return res;
+        frq[i] = min(frq[i], cnt[i]);
     }
-};
-{{< /highlight >}}
----
 
+    vector<string> res;
+    for(int i = 0; i < 26; i++)
+    for(int j = 0; j < frq[i]; j++)
+        res.push_back(string(1, 'a' + i));
 
-### Problem Overview
-
-The objective is to identify characters that are common to all strings in a given list. For instance, if we have the input `["bella", "label", "roller"]`, the expected output should be the characters `["e", "l", "l"]`. The characters 'e' and 'l' appear in every string, and our solution must efficiently determine this.
-
-### Code Explanation
-
-Let's analyze the provided C++ code. The code employs a systematic approach to find the common characters, leveraging arrays to count occurrences and maintain minimum frequencies.
-
-### Step 1: Class Definition
-
-The code starts with defining a class named `Solution`. This class encapsulates the method we will use to find the common characters.
-
-```cpp
-class Solution {
-public:
+    return res;
+}
 ```
 
-### Step 2: Method Declaration
+This function finds common characters among multiple strings in a list. It counts the occurrences of each character in every word and updates the frequency array to keep track of the minimum count of each character across all strings.
 
-Within the class, we declare a public method named `commonChars`, which takes a vector of strings as input and returns a vector of strings representing the common characters.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	vector<string> commonChars(vector<string>& words) {
+	```
+	Defines the function `commonChars` which takes a vector of strings and returns a vector of strings containing the common characters among them.
 
-```cpp
-    vector<string> commonChars(vector<string>& words) {
-```
+2. **Frequency Initialization**
+	```cpp
+	    vector<int> frq(26, INT_MAX);
+	```
+	Initializes a frequency vector `frq` of size 26, where each element represents the maximum possible count of each character ('a' to 'z'). The frequency is set to `INT_MAX` to ensure that the first comparison will set the correct minimum frequency.
 
-### Step 3: Initializing Frequency Array
+3. **Loop Over Words**
+	```cpp
+	    for(string& s: words) {
+	```
+	Iterates over each word in the input list `words`.
 
-Inside the method, we first create a frequency array `frq` of size 26 (for each letter of the English alphabet) initialized to `INT_MAX`. This array will help us track the minimum frequency of each character found across all input strings.
+4. **Count Frequency in Word**
+	```cpp
+	        vector<int> cnt(26, 0);
+	```
+	For each word, a `cnt` vector is initialized to count the occurrences of each character in the word.
 
-```cpp
-        vector<int> frq(26, INT_MAX);
-```
+5. **Character Counting**
+	```cpp
+	        for(char x: s) cnt[x - 'a']++;
+	```
+	Iterates over each character in the current word and updates the corresponding count in the `cnt` vector based on the character's position in the alphabet.
 
-### Step 4: Iterating Through Words
+6. **Frequency Update**
+	```cpp
+	        for(int i = 0; i < 26; i++)
+	```
+	Loops through all 26 characters of the alphabet.
 
-Next, we iterate over each string in the input vector `words`. For each string, we will count the occurrences of each character.
+7. **Min Frequency Update**
+	```cpp
+	        frq[i] = min(frq[i], cnt[i]);
+	```
+	For each character, updates the frequency vector `frq` by taking the minimum count of the character between the current word and the previous words.
 
-```cpp
-        for(string& s: words) {
-```
+8. **Result Initialization**
+	```cpp
+	    vector<string> res;
+	```
+	Initializes an empty vector `res` to store the result, which will be the common characters.
 
-### Step 5: Counting Characters
+9. **Loop Over Characters**
+	```cpp
+	    for(int i = 0; i < 26; i++)
+	```
+	Iterates over each character (from 'a' to 'z').
 
-For counting, we initialize a temporary array `cnt` of size 26 to zero. This array will hold the count of characters for the current string being processed.
+10. **Add Common Characters**
+	```cpp
+	    for(int j = 0; j < frq[i]; j++)
+	```
+	For each character, adds the character to the result vector `res` based on its minimum frequency (how many times it appears in all the words).
 
-```cpp
-            vector<int> cnt(26, 0);
-```
+11. **Push Character to Result**
+	```cpp
+	        res.push_back(string(1, 'a' + i));
+	```
+	Creates a string from the character (using its ASCII value) and adds it to the result vector `res`.
 
-We then loop through each character in the string `s`, updating the count in the `cnt` array. The character's corresponding index in the `cnt` array is calculated by subtracting the ASCII value of 'a' from the character.
+12. **Result Return**
+	```cpp
+	    return res;
+	```
+	Returns the vector `res`, which contains all the common characters.
 
-```cpp
-            for(char x: s) cnt[x - 'a']++;
-```
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n * m)
+- **Average Case:** O(n * m)
+- **Worst Case:** O(n * m)
 
-### Step 6: Updating Minimum Frequencies
+The time complexity is O(n * m), where n is the number of words and m is the maximum length of a word, since we process each character in each word.
 
-After counting the characters in the current string, we need to update our `frq` array. This is done by comparing the current counts in `cnt` with the existing values in `frq`. We take the minimum of the current frequency and the counted frequency for each character.
+### Space Complexity 💾
+- **Best Case:** O(26)
+- **Worst Case:** O(26)
 
-```cpp
-            for(int i = 0; i < 26; i++)
-                frq[i] = min(frq[i], cnt[i]);
-```
+The space complexity is O(26) for the frequency arrays used to track the minimum counts of characters, as there are only 26 possible lowercase English letters.
 
-This ensures that `frq` retains the minimum count of each character that has been encountered so far across all strings.
+**Happy Coding! 🎉**
 
-### Step 7: Collecting Results
-
-After processing all words, we initialize an empty vector `res` to store the results.
-
-```cpp
-        vector<string> res;
-```
-
-We then loop through the `frq` array to construct the result vector. For each character index that has a non-zero count, we append that character to `res` as many times as it appears in common.
-
-```cpp
-        for(int i = 0; i < 26; i++)
-            for(int j = 0; j < frq[i]; j++)
-                res.push_back(string(1, 'a' + i));
-```
-
-### Step 8: Returning the Result
-
-Finally, the method returns the result vector containing all the common characters.
-
-```cpp
-        return res;
-    }
-};
-```
-
-### Complexity Analysis
-
-### Time Complexity
-
-The time complexity of this solution is O(N * M), where N is the number of strings and M is the average length of the strings. This is because we iterate through each string and count characters.
-
-### Space Complexity
-
-The space complexity is O(1) since the frequency array `frq` and count array `cnt` are of fixed size (26). Thus, regardless of the number of strings or their lengths, the space usage remains constant.
-
-### Conclusion
-
-This C++ solution is a clear and efficient approach to finding common characters in a list of strings. By using frequency arrays and simple loops, we can achieve the desired results with minimal overhead. Understanding this algorithm not only helps in this particular problem but also enhances one's overall programming and problem-solving skills.
-
-Whether you are preparing for coding interviews, working on competitive programming problems, or simply looking to improve your coding proficiency, grasping the nuances of such algorithms is invaluable. The presented solution exemplifies clarity, efficiency, and effectiveness in tackling a common problem in string manipulation.
-
-If you found this breakdown helpful, consider exploring more algorithmic challenges and solutions that deepen your understanding of data structures and algorithms.
-```
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-common-characters/description/)
 

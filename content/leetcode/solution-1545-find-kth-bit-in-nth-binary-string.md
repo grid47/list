@@ -14,113 +14,150 @@ img_src = ""
 youtube = "34QYE5HAFy4"
 youtube_upload_date="2020-10-12"
 youtube_thumbnail="https://i.ytimg.com/vi/34QYE5HAFy4/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+Given two positive integers n and k, the binary string Sn is formed recursively. The task is to return the kth bit in the string Sn.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of two integers n and k. The integer n represents the index of the string Sn and k represents the position of the bit we need to return.
+- **Example:** `n = 3, k = 2`
+- **Constraints:**
+	- 1 <= n <= 20
+	- 1 <= k <= 2^n - 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    char findKthBit(int n, int k) {
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the kth bit of the string Sn.
+- **Example:** `Output: 1`
+- **Constraints:**
+	- The string Sn is formed recursively, and the kth bit must be accessed in constant time.
 
-        string s = "0";
-        
-        for(int i = 2; i <= n; i++) {
-            string tmp = s;
-            s += '1';
-            for(int j = tmp.size() - 1; j >= 0; j--) {
-                
-                s += (tmp[j] == '0') ? '1':'0';
-                
-            }
-        }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to find an efficient way to compute the kth bit of the string Sn without constructing the entire string.
 
-        return s[k-1];
-    }
-};
-{{< /highlight >}}
----
+- 1. The recursive construction of the string leads to exponential growth in length. Instead of constructing the full string, we need to deduce the position of the kth bit.
+- 2. Utilize the recursive structure of the string to find a method that tracks the bit without constructing the entire string.
+{{< dots >}}
+### Problem Assumptions ✅
+- The problem guarantees that k will be a valid index for the given n.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `n = 3, k = 2`  \
+  **Explanation:** For n = 3, we know S3 = '0111001'. The 2nd bit is '1'.
 
-### Problem Statement
+- **Input:** `n = 4, k = 7`  \
+  **Explanation:** For n = 4, we know S4 = '011100110110001'. The 7th bit is '0'.
 
-The problem requires us to find the k-th bit in a binary string constructed in a specific way. The binary string for a given integer \( n \) is constructed recursively as follows:
+{{< dots >}}
+## Approach 🚀
+We need to leverage the recursive nature of the sequence to compute the kth bit without constructing the full sequence.
 
-1. The base string for \( n = 1 \) is "0".
-2. For any \( n > 1 \), the string for \( n \) is formed by concatenating three parts:
-   - The previous string for \( n - 1 \).
-   - The character '1'.
-   - The reverse of the previous string for \( n - 1 \) with all bits flipped (i.e., '0' becomes '1' and '1' becomes '0').
-
-The goal is to return the k-th character in this binary string for a given \( n \).
-
-### Approach
-
-The approach involves constructing the binary string iteratively, starting from the base case, and progressively building it up to the desired \( n \). The construction method takes advantage of string concatenation and bit manipulation to ensure that the string is built correctly. Here’s a step-by-step explanation of the code:
-
-1. **Initialization**: Start with the base string "0".
-2. **Iterative Construction**:
-   - For each level from 2 to \( n \), create a new string by taking the previous string, appending '1', and then appending the flipped and reversed version of the previous string.
-3. **Retrieval**: Finally, access the k-th character in the constructed string.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- The length of Sn grows exponentially with n. Thus, constructing the entire string is inefficient.
+- We can trace the position of k within the recursive structure of Sn.
+- We will work backwards to deduce the bit's value using the recursive properties of the sequence.
+{{< dots >}}
+### Edge Cases 🌐
+- The string Sn is never empty, as n >= 1.
+- For large values of n (close to 20), ensure the solution efficiently handles the exponential growth of the string.
+- When k equals the maximum possible value (2^n - 1), ensure the solution handles boundary conditions correctly.
+- Ensure the solution runs within time limits for all values of n and k.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    char findKthBit(int n, int k) {
-        string s = "0"; // Step 1: Initialize the base string
-        
-        for(int i = 2; i <= n; i++) { // Step 2: Iterate to construct the string for n
-            string tmp = s; // Store the current string for modification
-            s += '1'; // Append '1' to the current string
-            for(int j = tmp.size() - 1; j >= 0; j--) { // Step 3: Reverse and flip the string
-                s += (tmp[j] == '0') ? '1':'0'; // Append flipped characters
-            }
+char findKthBit(int n, int k) {
+
+    string s = "0";
+    
+    for(int i = 2; i <= n; i++) {
+        string tmp = s;
+        s += '1';
+        for(int j = tmp.size() - 1; j >= 0; j--) {
+            
+            s += (tmp[j] == '0') ? '1':'0';
+            
         }
-        
-        return s[k-1]; // Step 4: Return the k-th character (1-based index)
     }
-};
+
+    return s[k-1];
+}
 ```
 
-#### Step-by-Step Breakdown
+This code generates a string based on the pattern and returns the k-th bit of the string for a given n. The string is built iteratively by flipping bits and appending a '1'.
 
-1. **Initialization**:
-   - The string `s` is initialized to "0", which represents the string for \( n = 1 \).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	char findKthBit(int n, int k) {
+	```
+	This line declares the function `findKthBit`, which takes two integers `n` and `k` as input and returns a character (either '0' or '1') representing the k-th bit of the binary string for the given value of n.
 
-2. **String Construction**:
-   - A loop iterates from 2 to \( n \). For each iteration, the following occurs:
-     - The variable `tmp` holds the current version of `s` before modifications.
-     - The character '1' is appended to `s`.
-     - A nested loop iterates through `tmp` in reverse order. For each character in `tmp`, it appends the flipped version to `s`:
-       - If the character is '0', append '1'.
-       - If the character is '1', append '0'.
-     - This effectively builds the new string for the next level.
+2. **String Initialization**
+	```cpp
+	    string s = "0";
+	```
+	The string `s` is initialized to "0". This will be used to store the binary sequence that will be modified iteratively.
 
-3. **Character Retrieval**:
-   - After constructing the full string for the specified \( n \), the function returns the character at index \( k-1 \). This is because the problem specifies a 1-based index, while C++ uses a 0-based index.
+3. **Loop**
+	```cpp
+	    for(int i = 2; i <= n; i++) {
+	```
+	A for loop starts from i = 2 and runs until i = n, progressively building the binary string `s` by following the given pattern.
 
-### Complexity
+4. **String Copy**
+	```cpp
+	        string tmp = s;
+	```
+	Create a copy of the current string `s` into the variable `tmp`, which will be used for further manipulation.
 
-#### Time Complexity
-- The time complexity of constructing the string is exponential in terms of its length. Specifically, the length of the string doubles and grows by an additional character for each increase in \( n \). The final length of the string is approximately \( 2^n - 1 \). Thus, the construction takes \( O(2^n) \) time, as each level \( i \) produces a string of length \( 2^i - 1 \).
+5. **String Update**
+	```cpp
+	        s += '1';
+	```
+	Add a '1' to the string `s`. This is part of the pattern where each iteration appends a '1' to the string.
 
-#### Space Complexity
-- The space complexity is also \( O(2^n) \) due to storing the constructed string. Each string generated at each level takes up space proportional to its length, and thus, the space requirement grows significantly with increasing \( n \).
+6. **Inner Loop**
+	```cpp
+	        for(int j = tmp.size() - 1; j >= 0; j--) {
+	```
+	A for loop starts from the last character of `tmp` and iterates backward, flipping the bits of the string to form the new pattern.
 
-### Conclusion
+7. **Bit Flipping**
+	```cpp
+	            s += (tmp[j] == '0') ? '1' : '0';
+	```
+	For each character in `tmp`, append the flipped bit to `s`. If the character is '0', append '1', otherwise append '0'.
 
-The solution effectively constructs a binary string according to the specified recursive rules and retrieves the k-th character. While the approach is straightforward, it becomes inefficient for larger values of \( n \) due to the exponential growth of the string length. 
+8. **Return Statement**
+	```cpp
+	    return s[k-1];
+	```
+	Return the k-th character from the string `s`. Since indexing starts at 0, we subtract 1 from `k` to get the correct index.
 
-**Key Takeaways**:
-- **Recursive String Construction**: The method used to construct the string is a direct implementation of the problem's requirements.
-- **Bit Flipping and Reversal**: This showcases how bit manipulation can be applied in string construction to derive a new state from a previous one.
-- **Complexity Awareness**: It is essential to note that while the algorithm works for small \( n \), its efficiency decreases rapidly as \( n \) increases due to the exponential nature of the string's growth.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
 
-In summary, this solution is an interesting example of string manipulation combined with bitwise operations, although its practical applicability is limited by its time and space complexity.
+Since we work recursively with the structure of Sn, the time complexity depends on the recursion depth, which is O(n).
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+We only store a few variables to track the recursive steps, so the space complexity is O(1).
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/description/)
 

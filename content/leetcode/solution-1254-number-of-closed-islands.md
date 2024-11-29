@@ -14,147 +14,251 @@ img_src = ""
 youtube = "ZH8TeWFYpx8"
 youtube_upload_date="2023-04-06"
 youtube_thumbnail="https://i.ytimg.com/vi/ZH8TeWFYpx8/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a 2D grid with 0s (land) and 1s (water). An island is a group of 0s connected 4-directionally, and a closed island is a group of 0s completely surrounded by 1s. Your task is to count how many closed islands are present in the grid.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input consists of a 2D grid with 0s and 1s.
+- **Example:** `grid = [[1,1,1,1,1,1,1,0], [1,0,0,0,0,1,1,0], [1,0,1,0,1,1,1,0], [1,0,0,0,0,1,0,1], [1,1,1,1,1,1,1,0]]`
+- **Constraints:**
+	- 1 <= grid.length, grid[0].length <= 100
+	- 0 <= grid[i][j] <= 1
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int closedIsland(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
-                if(grid[i][j] == 0)
-                    dfs(grid, i, j, 0, 1);
-        int cnt = 0;
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 0) {
-                dfs(grid, i, j, 0, cnt + 2);
-                    cnt++;
-            }
-        return cnt;
-    }
-    
-    void dfs(vector<vector<int>>& grid, int i, int j, int cur, int tgt) {
-        int m = grid.size(), n = grid[0].size();
-        if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != cur)
-            return;
-        grid[i][j] = tgt;
-        dfs(grid, i + 1, j, cur, tgt);
-        dfs(grid, i, j + 1, cur, tgt);
-        dfs(grid, i - 1, j, cur, tgt);
-        dfs(grid, i, j - 1, cur, tgt);
-    }
-    
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output is a single integer representing the number of closed islands.
+- **Example:** `Output: 2`
+- **Constraints:**
+	- The number of closed islands can be at least 0.
 
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** The goal is to count the number of closed islands in the grid.
 
-### Problem Statement
-The objective of the problem is to determine the number of closed islands in a given 2D binary grid. In this grid, `0`s represent water and `1`s represent land. A closed island is defined as an island that is entirely surrounded by water (i.e., `0`s) and does not touch the grid's borders. Your task is to count the total number of closed islands in the grid.
+- Loop through the grid, marking water cells connected to the boundary.
+- Perform a depth-first search (DFS) to explore each closed island.
+- Count each closed island and ensure no boundary cell is part of a closed island.
+{{< dots >}}
+### Problem Assumptions ✅
+- The grid is composed of only 0s and 1s.
+- Boundary cells are considered to be part of the outer boundary.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: [[1,1,1,1,1,1,1,0], [1,0,0,0,0,1,1,0], [1,0,1,0,1,1,1,0], [1,0,0,0,0,1,0,1], [1,1,1,1,1,1,1,0]]`  \
+  **Explanation:** The grid contains two closed islands, both of which are surrounded by water.
 
-### Approach
-To solve this problem, we will use a depth-first search (DFS) approach. The main steps of the solution are as follows:
+{{< dots >}}
+## Approach 🚀
+The approach involves marking and counting the closed islands in the grid using a depth-first search (DFS).
 
-1. **Identify and Fill Border Islands**: First, traverse the border of the grid. For any `0` found on the border, perform a DFS to mark all connected `0`s. This effectively removes all open islands connected to the borders.
-
-2. **Count Closed Islands**: After marking border-connected islands, iterate through the grid again. For each unvisited `0`, perform a DFS to mark it and its connected `0`s, incrementing the closed island count.
-
-3. **DFS Implementation**: The DFS function will be responsible for traversing the grid recursively, marking visited cells to avoid counting them again.
-
-### Code Breakdown (Step by Step)
-
+### Initial Thoughts 💭
+- Boundary cells cannot be part of a closed island.
+- Each land cell that is connected to the boundary must be marked as water to avoid counting non-closed islands.
+- DFS is a suitable technique to explore all connected land cells of an island.
+{{< dots >}}
+### Edge Cases 🌐
+- Empty grids should return 0.
+- Grids with the maximum size (100x100) should be handled efficiently.
+- Grids with no water cells should return 0.
+- Ensure that the grid size is within the specified limits.
+{{< dots >}}
+## Code 💻
 ```cpp
-class Solution {
-public:
-    int closedIsland(vector<vector<int>>& grid) {
-```
-- **Line 1-2**: The class `Solution` is defined, containing the public method `closedIsland`, which takes a 2D vector of integers (`grid`) and returns the number of closed islands as an integer.
-
-```cpp
-        int m = grid.size(), n = grid[0].size();
-```
-- **Line 3**: Variables `m` and `n` are initialized to represent the number of rows and columns in the grid, respectively.
-
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
-                if(grid[i][j] == 0)
-                    dfs(grid, i, j, 0, 1);
-```
-- **Line 4-10**: This nested loop iterates through every cell in the grid. If a cell is on the border (first or last row/column) and is water (`0`), the DFS function is called to mark all connected water cells, preventing them from being counted as closed islands later.
-
-```cpp
-        int cnt = 0;
-```
-- **Line 11**: A counter `cnt` is initialized to keep track of the number of closed islands found.
-
-```cpp
-        for(int i = 0; i < m; i++)
-        for(int j = 0; j < n; j++)
-            if(grid[i][j] == 0) {
-                dfs(grid, i, j, 0, cnt + 2);
+int closedIsland(vector<vector<int>>& grid) {
+    int m = grid.size(), n = grid[0].size();
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
+            if(grid[i][j] == 0)
+                dfs(grid, i, j, 0, 1);
+    int cnt = 0;
+    for(int i = 0; i < m; i++)
+    for(int j = 0; j < n; j++)
+        if(grid[i][j] == 0) {
+            dfs(grid, i, j, 0, cnt + 2);
                 cnt++;
-            }
+        }
+    return cnt;
+}
+
+void dfs(vector<vector<int>>& grid, int i, int j, int cur, int tgt) {
+    int m = grid.size(), n = grid[0].size();
+    if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != cur)
+        return;
+    grid[i][j] = tgt;
+    dfs(grid, i + 1, j, cur, tgt);
+    dfs(grid, i, j + 1, cur, tgt);
+    dfs(grid, i - 1, j, cur, tgt);
+    dfs(grid, i, j - 1, cur, tgt);
+}
+
 ```
-- **Line 12-18**: A second nested loop traverses the grid again. For each unvisited water cell (`0`), the DFS function is invoked to mark the closed island, and the counter `cnt` is incremented.
 
-```cpp
-        return cnt;
-    }
-```
-- **Line 19-20**: Finally, the function returns the total count of closed islands.
+The `closedIsland` function counts the number of closed islands in a given 2D grid, where '0' represents water and '1' represents land. It uses Depth First Search (DFS) to mark the boundary-connected land and then counts isolated areas of land (closed islands). The helper `dfs` function is used to traverse and mark all connected land cells.
 
-```cpp
-    void dfs(vector<vector<int>>& grid, int i, int j, int cur, int tgt) {
-```
-- **Line 21**: The `dfs` function is defined. It takes the grid, current cell indices (`i`, `j`), the current value to match (`cur`), and the target value to mark visited cells (`tgt`).
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int closedIsland(vector<vector<int>>& grid) {
+	```
+	The function `closedIsland` is defined to take a 2D grid as input, where each cell is either land (1) or water (0). The goal is to find the number of closed islands (i.e., islands surrounded by water).
 
-```cpp
-        int m = grid.size(), n = grid[0].size();
-        if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != cur)
-            return;
-```
-- **Line 22-25**: Within the DFS function, the dimensions of the grid are fetched. The first condition checks if the current indices are out of bounds or if the current cell does not match the `cur` value. If any condition is met, the function returns, effectively stopping the recursion.
+2. **Variable Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	The variables `m` and `n` are initialized to the number of rows and columns of the grid, respectively.
 
-```cpp
-        grid[i][j] = tgt;
-```
-- **Line 26**: If the cell is valid, it is marked as visited by assigning it the `tgt` value.
+3. **Outer Loop**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	An outer loop starts that iterates over the rows of the grid.
 
-```cpp
-        dfs(grid, i + 1, j, cur, tgt);
-        dfs(grid, i, j + 1, cur, tgt);
-        dfs(grid, i - 1, j, cur, tgt);
-        dfs(grid, i, j - 1, cur, tgt);
-```
-- **Line 27-30**: The DFS function calls itself recursively for all four possible directions (down, right, up, left) to mark all connected `0`s.
+4. **Inner Loop**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	An inner loop iterates over the columns of the grid for each row.
 
-```cpp
-    }
-};
-```
-- **Line 31-32**: The closing brackets for the `dfs` function and the `Solution` class.
+5. **Boundary Check**
+	```cpp
+	        if(i == 0 || j == 0 || i == m - 1 || j == n - 1)
+	```
+	This checks if the current cell is at the boundary of the grid. The boundary cells are treated differently since they cannot be part of a closed island.
 
-### Complexity Analysis
-1. **Time Complexity**: The overall time complexity of this solution is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. Each cell is visited at most once during the two DFS traversals.
+6. **Water Cell Check**
+	```cpp
+	            if(grid[i][j] == 0)
+	```
+	If the current cell is a water cell (`0`), the Depth First Search (DFS) function is called to mark all connected water cells along the boundary.
 
-2. **Space Complexity**: The space complexity is \(O(m \times n)\) in the worst case due to the recursion stack space used by DFS in the case of a fully connected grid of `0`s.
+7. **DFS Boundary Marking**
+	```cpp
+	                dfs(grid, i, j, 0, 1);
+	```
+	The DFS function is called to mark all water cells connected to the boundary (changing the water cells to a different value to avoid revisiting).
 
-### Conclusion
-The `closedIsland` function effectively identifies the number of closed islands within a 2D grid using a depth-first search algorithm. The combination of marking border islands and counting closed islands allows the function to efficiently navigate through the grid while avoiding redundant checks.
+8. **Closed Island Counter**
+	```cpp
+	    int cnt = 0;
+	```
+	A counter `cnt` is initialized to keep track of the number of closed islands found in the grid.
 
-This approach showcases the power of DFS in graph traversal and the utility of marking visited nodes to prevent multiple counts. The time and space complexities are optimal for this problem, ensuring that even larger grids can be processed within reasonable limits.
+9. **Outer Loop (Closed Islands)**
+	```cpp
+	    for(int i = 0; i < m; i++)
+	```
+	Another outer loop starts to iterate over the rows of the grid to find closed islands.
 
-In conclusion, the solution is both robust and efficient, making it a solid example of how to handle similar problems in competitive programming or algorithm design. It emphasizes the importance of understanding the grid's structure and applying systematic techniques to solve complex spatial problems.
+10. **Inner Loop (Closed Islands)**
+	```cpp
+	    for(int j = 0; j < n; j++)
+	```
+	An inner loop starts to iterate over the columns of the grid for each row.
+
+11. **Closed Island Detection**
+	```cpp
+	        if(grid[i][j] == 0) {
+	```
+	If a water cell is found that has not been marked during the boundary DFS, it indicates a closed island. The DFS function is called to mark the whole island.
+
+12. **DFS Closed Island Marking**
+	```cpp
+	            dfs(grid, i, j, 0, cnt + 2);
+	```
+	The DFS function is called to mark all cells of the current closed island by changing the water cells to a unique value (`cnt + 2`). This also avoids revisiting the same island.
+
+13. **Island Count Increment**
+	```cpp
+	                cnt++;
+	```
+	The closed island counter `cnt` is incremented after finding and marking the current island.
+
+14. **Return Statement**
+	```cpp
+	    return cnt;
+	```
+	The function returns the total count of closed islands found in the grid.
+
+15. **DFS Function Definition**
+	```cpp
+	void dfs(vector<vector<int>>& grid, int i, int j, int cur, int tgt) {
+	```
+	The helper function `dfs` is defined to traverse and mark connected cells of the grid using Depth First Search. It takes the grid, current position (`i`, `j`), the current value to look for (`cur`), and the target value to mark (`tgt`).
+
+16. **DFS Variable Initialization**
+	```cpp
+	    int m = grid.size(), n = grid[0].size();
+	```
+	The dimensions of the grid (`m` and `n`) are stored in local variables to simplify the condition checks within the DFS function.
+
+17. **DFS Base Condition**
+	```cpp
+	    if(i < 0 || j < 0 || i == m || j == n || grid[i][j] != cur)
+	```
+	The base case for the DFS function is defined. If the current cell is out of bounds or does not have the expected value (`cur`), the function terminates the search.
+
+18. **DFS Marking**
+	```cpp
+	        return;
+	```
+	The DFS function returns if the current cell is out of bounds or not a match for the expected value.
+
+19. **DFS Mark Target**
+	```cpp
+	    grid[i][j] = tgt;
+	```
+	The current cell is marked with the target value (`tgt`) to indicate it has been visited or processed.
+
+20. **DFS Recursive Calls**
+	```cpp
+	    dfs(grid, i + 1, j, cur, tgt);
+	```
+	The DFS function is called recursively on the cell below the current one.
+
+21. **DFS Recursive Calls**
+	```cpp
+	    dfs(grid, i, j + 1, cur, tgt);
+	```
+	The DFS function is called recursively on the cell to the right of the current one.
+
+22. **DFS Recursive Calls**
+	```cpp
+	    dfs(grid, i - 1, j, cur, tgt);
+	```
+	The DFS function is called recursively on the cell above the current one.
+
+23. **DFS Recursive Calls**
+	```cpp
+	    dfs(grid, i, j - 1, cur, tgt);
+	```
+	The DFS function is called recursively on the cell to the left of the current one.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(m * n) where m and n are the dimensions of the grid.
+- **Average Case:** O(m * n)
+- **Worst Case:** O(m * n)
+
+We need to visit every cell in the grid at least once.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(m * n)
+
+In the worst case, we may need additional space for DFS recursion stack.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-closed-islands/description/)
 

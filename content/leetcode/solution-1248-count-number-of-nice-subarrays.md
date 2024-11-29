@@ -14,108 +14,172 @@ img_src = ""
 youtube = "4zNK0rhFfcA"
 youtube_upload_date="2024-06-22"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/4zNK0rhFfcA/maxresdefault.webp"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given an array of integers nums and an integer k. A subarray is considered 'nice' if it contains exactly k odd numbers. Your task is to return the number of nice subarrays in the given array.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given an array nums of integers and an integer k.
+- **Example:** `nums = [1, 1, 2, 1, 1], k = 3`
+- **Constraints:**
+	- 1 <= nums.length <= 50000
+	- 1 <= nums[i] <= 10^5
+	- 1 <= k <= nums.length
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numberOfSubarrays(vector<int>& nums, int k) {
-        return atmost(nums, k) - atmost(nums, k - 1);
-    }
-    
-    int atmost(vector<int> &nums, int k) {
-        int cnt[2] = {};
-        int res = 0, j = 0;
-        for(int i = 0; i < nums.size(); i++) {
-            cnt[nums[i]%2]++;
-            while(cnt[1] > k) {
-                cnt[nums[j]%2]--;
-                j++;
-            }
-            res += (i - j + 1);
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the number of nice subarrays that contain exactly k odd numbers.
+- **Example:** `2`
+- **Constraints:**
+	- Return 0 if no nice subarrays exist.
+
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** Find the number of subarrays with exactly k odd numbers.
+
+- Use a sliding window technique to count the number of subarrays with at most k odd numbers.
+- The result is the difference between the number of subarrays with at most k odd numbers and those with at most k-1 odd numbers.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array has at least 1 element and contains only integers.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `nums = [1, 1, 2, 1, 1], k = 3`  \
+  **Explanation:** The subarrays with exactly 3 odd numbers are [1, 1, 2, 1] and [1, 2, 1, 1], so the result is 2.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem efficiently, we use a sliding window approach to count the number of subarrays with exactly k odd numbers.
+
+### Initial Thoughts 💭
+- The problem can be broken down into counting subarrays with at most k odd numbers and using this to calculate the result.
+- We can calculate the number of subarrays with at most k odd numbers by maintaining a window and counting the odd numbers in the window.
+{{< dots >}}
+### Edge Cases 🌐
+- If the array is empty, return 0.
+- The solution should efficiently handle arrays of size up to 50,000.
+- If k is larger than the number of odd numbers in the array, return 0.
+- Ensure the solution works for large inputs and edge cases such as all numbers being even or odd.
+{{< dots >}}
+## Code 💻
+```cpp
+int numberOfSubarrays(vector<int>& nums, int k) {
+    return atmost(nums, k) - atmost(nums, k - 1);
+}
+
+int atmost(vector<int> &nums, int k) {
+    int cnt[2] = {};
+    int res = 0, j = 0;
+    for(int i = 0; i < nums.size(); i++) {
+        cnt[nums[i]%2]++;
+        while(cnt[1] > k) {
+            cnt[nums[j]%2]--;
+            j++;
         }
-        return res;
+        res += (i - j + 1);
     }
-};
-{{< /highlight >}}
----
-
-
-### Problem Statement
-The task is to find the number of contiguous subarrays in a given integer array `nums` that contain exactly `k` odd numbers. A subarray is defined as a contiguous section of the array. The challenge is to do this efficiently without generating all possible subarrays explicitly.
-
-### Approach
-To solve this problem, we can utilize a technique called the **two-pointer approach** or **sliding window**, combined with the concept of counting subarrays with at most `k` odd numbers. The overall strategy can be broken down into the following steps:
-
-1. **Subarrays with At Most k Odd Numbers**: First, we define a helper function, `atmost`, that calculates the number of contiguous subarrays containing at most `k` odd numbers. This function will be used to derive the number of subarrays with exactly `k` odd numbers.
-  
-2. **Calculate the Result**: To find the number of subarrays containing exactly `k` odd numbers, we can calculate:
-   - The total number of subarrays with at most `k` odd numbers.
-   - The total number of subarrays with at most `k - 1` odd numbers.
-   The result will be the difference between these two counts.
-
-### Code Breakdown (Step by Step)
-
-```cpp
-class Solution {
-public:
-    int numberOfSubarrays(vector<int>& nums, int k) {
-        return atmost(nums, k) - atmost(nums, k - 1);
-    }
+    return res;
+}
 ```
-- **Lines 1-3**: The class `Solution` is defined, containing the public method `numberOfSubarrays`. This method takes an integer vector `nums` and an integer `k` as input parameters. It calls the helper function `atmost` twice:
-  - First with `k` to count subarrays with at most `k` odd numbers.
-  - Second with `k - 1` to count subarrays with at most `k - 1` odd numbers.
-- The method returns the difference of the two results, which gives the number of subarrays containing exactly `k` odd numbers.
 
-```cpp
-    int atmost(vector<int> &nums, int k) {
-        int cnt[2] = {};
-        int res = 0, j = 0;
-```
-- **Lines 5-8**: We define the `atmost` function, which takes a reference to a vector of integers `nums` and an integer `k`. Here:
-  - `cnt[2]` is an array that will count the number of odd and even numbers encountered in the current window. `cnt[0]` will track even counts, and `cnt[1]` will track odd counts.
-  - `res` is initialized to zero and will accumulate the number of valid subarrays.
-  - `j` is the starting index of the sliding window.
+The function `numberOfSubarrays` calculates the number of subarrays with at most `k` odd numbers by calling the helper function `atmost` twice and calculating the difference. The helper function `atmost` counts subarrays with at most `k` odd numbers using a sliding window approach.
 
-```cpp
-        for(int i = 0; i < nums.size(); i++) {
-            cnt[nums[i] % 2]++;
-```
-- **Line 9**: We loop through the `nums` array with index `i`. For each number, we determine if it is odd or even using the modulus operator `%`. We increment the appropriate count in `cnt`.
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numberOfSubarrays(vector<int>& nums, int k) {
+	```
+	This function is defined to count the number of subarrays with at most `k` odd numbers. It takes a vector `nums` and an integer `k` as inputs.
 
-```cpp
-            while(cnt[1] > k) {
-                cnt[nums[j] % 2]--;
-                j++;
-            }
-```
-- **Lines 10-13**: This while loop checks if the count of odd numbers exceeds `k`. If it does, we move the start of the window (`j`) to the right:
-  - We decrement the count for the number at index `j` (which is moving out of the window).
-  - We then increment `j` to consider the next number as the new start of the window.
+2. **Return Statement**
+	```cpp
+	    return atmost(nums, k) - atmost(nums, k - 1);
+	```
+	The result is calculated by subtracting the result of calling `atmost(nums, k-1)` from `atmost(nums, k)`. This gives the number of subarrays with exactly `k` odd numbers.
 
-```cpp
-            res += (i - j + 1);
-        }
-        return res;
-    }
-};
-```
-- **Lines 14-16**: After adjusting the window, we calculate the number of valid subarrays ending at index `i` by adding `(i - j + 1)` to `res`. This expression accounts for all subarrays that can be formed with the current ending index `i` and starting index `j`.
-- Finally, the function returns the total count of valid subarrays.
+3. **Helper Function Definition**
+	```cpp
+	int atmost(vector<int> &nums, int k) {
+	```
+	This helper function counts the number of subarrays with at most `k` odd numbers using a sliding window technique.
 
-### Complexity
-1. **Time Complexity**: The time complexity for the solution is \( O(n) \), where \( n \) is the length of the `nums` array. Each number is processed at most twice (once when expanding the window and once when contracting it).
+4. **Variable Initialization**
+	```cpp
+	    int cnt[2] = {};
+	```
+	The `cnt` array is initialized to track the counts of even and odd numbers in the current sliding window. `cnt[0]` tracks even numbers and `cnt[1]` tracks odd numbers.
 
-2. **Space Complexity**: The space complexity is \( O(1) \) because we are using a fixed-size array (`cnt`) and a few integer variables, regardless of the size of the input.
+5. **Variable Initialization**
+	```cpp
+	    int res = 0, j = 0;
+	```
+	The variable `res` is initialized to count the total number of subarrays, and `j` is the left pointer for the sliding window.
 
-### Conclusion
-The `numberOfSubarrays` function efficiently computes the number of contiguous subarrays containing exactly `k` odd numbers by leveraging the sliding window technique. By separating the counting of subarrays with at most `k` and `k - 1` odd numbers, we avoid the need for nested loops or generating all possible subarrays explicitly. This method is optimal, achieving a linear time complexity and constant space usage, making it suitable for large input sizes. The solution exemplifies a powerful strategy for tackling problems involving subarray counting and conditions based on element properties.
+6. **Loop Through Array**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++) {
+	```
+	A loop is used to iterate through the elements of `nums` using the index `i` as the right pointer of the sliding window.
+
+7. **Update Count**
+	```cpp
+	        cnt[nums[i]%2]++;
+	```
+	The count of either even or odd numbers is updated in the `cnt` array based on the current element in `nums`. If `nums[i]` is odd, `cnt[1]` is incremented.
+
+8. **Adjust Sliding Window**
+	```cpp
+	        while(cnt[1] > k) {
+	```
+	If the number of odd numbers in the current window exceeds `k`, the left pointer `j` is moved to the right to shrink the window until there are at most `k` odd numbers.
+
+9. **Adjust Sliding Window**
+	```cpp
+	            cnt[nums[j]%2]--;
+	```
+	The count of the element at the left pointer `j` is decremented, and the window is adjusted by moving `j` to the right.
+
+10. **Adjust Sliding Window**
+	```cpp
+	            j++;
+	```
+	Increment the left pointer `j` to shrink the window from the left side.
+
+11. **Update Result**
+	```cpp
+	        res += (i - j + 1);
+	```
+	Add the number of subarrays with at most `k` odd numbers in the current window to the result. The number of such subarrays is `(i - j + 1)`.
+
+12. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Return the total number of subarrays with at most `k` odd numbers.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n)
+- **Average Case:** O(n)
+- **Worst Case:** O(n)
+
+The time complexity is linear, O(n), where n is the length of the array.
+
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(1)
+
+The space complexity is constant, O(1), as we only use a few extra variables.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-nice-subarrays/description/)
 

@@ -14,151 +14,184 @@ img_src = ""
 youtube = ""
 youtube_upload_date=""
 youtube_thumbnail=""
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a string tiles containing uppercase English letters, where each letter represents a tile. You need to return the number of distinct non-empty sequences of letters that can be formed by selecting tiles from the string. A sequence can be formed by selecting tiles in any order and any number of times, but no tile can be used more than once in a sequence.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** The input is a string tiles, consisting of uppercase English letters.
+- **Example:** `Input: tiles = "ABAC"`
+- **Constraints:**
+	- 1 <= tiles.length <= 7
+	- tiles consists of uppercase English letters
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    int numTilePossibilities(string tiles) {
-        set<string> ans;
-        set<int> seen;
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** The output should be an integer representing the number of distinct non-empty sequences that can be formed from the tiles.
+- **Example:** `Output: 12`
+- **Constraints:**
+	- The number of possible distinct sequences should be computed.
 
-        gen(tiles, 0, "", ans, seen);
-        return ans.size();
-    }
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To find the number of distinct non-empty sequences that can be formed from the given string of tiles.
 
-    void gen(string tiles, int idx, string res, set<string> &ans, set<int> &vis ) {
-        if(idx == tiles.size()) return;
-        for(int i = 0; i < tiles.size(); i++) {
-            if(!vis.count(i)) {
-                vis.insert(i);
-                ans.insert(res + tiles[i]);
-    gen(tiles, idx + 1, res + tiles[i], ans, vis);
-                vis.erase(i);
-            }
+- 1. Generate all possible non-empty subsequences of the input string.
+- 2. Use a set to keep track of distinct sequences.
+- 3. Ensure no tile is used more than once in any sequence.
+- 4. Return the size of the set as the result.
+{{< dots >}}
+### Problem Assumptions ✅
+- Each letter in the input string tiles can be used in any sequence, but no letter can be used more than once.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `Input: tiles = "ABAC"`  \
+  **Explanation:** The distinct sequences that can be formed are: "A", "B", "C", "AB", "AC", "BA", "BC", "AA", "ABAC", "ACA", "BCA", and "AAB". So, the output is 12.
+
+- **Input:** `Input: tiles = "ABC"`  \
+  **Explanation:** The distinct sequences that can be formed are: "A", "B", "C", "AB", "AC", "BC", and "ABC", resulting in 7 distinct sequences.
+
+{{< dots >}}
+## Approach 🚀
+To solve this problem, we can use a backtracking approach to generate all possible subsequences of the given string and count the distinct ones. We use a set to ensure all subsequences are unique.
+
+### Initial Thoughts 💭
+- We can treat this as a combination problem where each letter can either be included or excluded from the subsequence.
+- A set can be used to automatically handle duplicate subsequences.
+- The solution will involve recursively generating subsequences and using a set to avoid counting duplicates.
+{{< dots >}}
+### Edge Cases 🌐
+- If the input string is empty, return 0, as no sequences can be formed.
+- The input string will not exceed 7 characters, so the solution should handle small inputs efficiently.
+- If the input string consists of only one letter, the output should be 1, as there is only one possible sequence.
+- The solution should work for inputs with repeated letters and handle small input sizes efficiently.
+{{< dots >}}
+## Code 💻
+```cpp
+int numTilePossibilities(string tiles) {
+    set<string> ans;
+    set<int> seen;
+
+    gen(tiles, 0, "", ans, seen);
+    return ans.size();
+}
+
+void gen(string tiles, int idx, string res, set<string> &ans, set<int> &vis ) {
+    if(idx == tiles.size()) return;
+    for(int i = 0; i < tiles.size(); i++) {
+        if(!vis.count(i)) {
+            vis.insert(i);
+            ans.insert(res + tiles[i]);
+gen(tiles, idx + 1, res + tiles[i], ans, vis);
+            vis.erase(i);
         }
     }
-};
-{{< /highlight >}}
----
+}
+```
 
+This code defines two functions: `numTilePossibilities` calculates the number of possible distinct sequences that can be made from the tiles, and `gen` is a recursive helper function that generates these sequences.
 
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Definition**
+	```cpp
+	int numTilePossibilities(string tiles) {
+	```
+	This line defines the function `numTilePossibilities`, which takes a string `tiles` as input and returns an integer representing the number of distinct tile sequences that can be formed.
 
-### Problem Statement
-The problem involves finding the number of distinct combinations that can be formed from a given string of tiles, where each tile can be used only once in each combination. For example, given the string "AAB", we can form combinations such as "A", "AA", "AB", "B", and "AAB". The task is to return the total number of unique combinations that can be created using the tiles, including all possible lengths.
+2. **Variable Initialization**
+	```cpp
+	    set<string> ans;
+	```
+	This initializes the set `ans`, which will store all distinct tile sequences generated.
 
-### Approach
-The approach to solve this problem employs a backtracking technique. We recursively generate all possible combinations of tiles by choosing each tile and generating new combinations without repeating the same tile. The key steps in the approach are:
+3. **Set Initialization**
+	```cpp
+	    set<int> seen;
+	```
+	This initializes the set `seen`, which will keep track of which tiles have been used during the sequence generation to avoid duplicates.
 
-1. Use a set to store unique combinations of tile arrangements.
-2. Use a helper function to explore all possible combinations recursively.
-3. Keep track of which tiles have been used in the current combination to avoid duplicates.
-4. Generate combinations of varying lengths by continuously adding tiles to the current result until all possibilities are explored.
+4. **Call to gen Function**
+	```cpp
+	    gen(tiles, 0, "", ans, seen);
+	```
+	This calls the recursive function `gen`, passing the initial state of the variables: the tiles string, an index starting from 0, an empty string for the current sequence, the `ans` set to store results, and the `seen` set to track used tiles.
 
-### Code Breakdown (Step by Step)
+5. **Return Statement**
+	```cpp
+	    return ans.size();
+	```
+	This returns the size of the set `ans`, which contains all distinct sequences generated.
 
-1. **Class Definition**:
-   The `Solution` class encapsulates the method for finding the number of tile possibilities.
+6. **Recursive Function Definition**
+	```cpp
+	void gen(string tiles, int idx, string res, set<string> &ans, set<int> &vis ) {
+	```
+	This line defines the recursive function `gen`, which takes the current state of the tiles, the index, the current sequence, the set of results `ans`, and the set of visited tiles `vis`.
 
-   ```cpp
-   class Solution {
-   public:
-   ```
+7. **Base Case**
+	```cpp
+	    if(idx == tiles.size()) return;
+	```
+	This is the base case of the recursion. If the index `idx` reaches the size of `tiles`, the function returns without doing anything further.
 
-2. **Main Function**:
-   The method `numTilePossibilities` takes a string `tiles` as input and initializes the process to find all unique combinations.
+8. **Loop Over Tiles**
+	```cpp
+	    for(int i = 0; i < tiles.size(); i++) {
+	```
+	This loop iterates over each tile in the `tiles` string.
 
-   ```cpp
-   int numTilePossibilities(string tiles) {
-       set<string> ans;
-       set<int> seen;
-   ```
+9. **Check if Tile is Used**
+	```cpp
+	        if(!vis.count(i)) {
+	```
+	This checks if the tile at index `i` has already been used in the current sequence by checking the `vis` set.
 
-3. **Generating Combinations**:
-   A set called `ans` is created to store unique combinations, and another set `seen` is created to track the indices of tiles used in the current combination. The function `gen` is called to start generating combinations.
+10. **Mark Tile as Used**
+	```cpp
+	            vis.insert(i);
+	```
+	This marks the tile at index `i` as used by inserting it into the `vis` set.
 
-   ```cpp
-       gen(tiles, 0, "", ans, seen);
-       return ans.size();
-   ```
+11. **Add Sequence to Result Set**
+	```cpp
+	            ans.insert(res + tiles[i]);
+	```
+	This adds the new sequence, formed by appending the current tile to the current result string `res`, to the `ans` set.
 
-4. **Recursive Function Definition**:
-   The `gen` function is defined to recursively explore combinations of tiles.
+12. **Recursive Call**
+	```cpp
+	gen(tiles, idx + 1, res + tiles[i], ans, vis);
+	```
+	This makes the recursive call to generate further sequences, incrementing the index `idx` and appending the current tile to the sequence.
 
-   ```cpp
-   void gen(string tiles, int idx, string res, set<string> &ans, set<int> &vis ) {
-   ```
+13. **Unmark Tile as Used**
+	```cpp
+	            vis.erase(i);
+	```
+	This unmarks the tile at index `i` as used by removing it from the `vis` set, allowing it to be reused in other branches of the recursion.
 
-5. **Base Case**:
-   The base case for the recursion checks if the index `idx` equals the size of the string. If true, the function simply returns, as there are no more tiles to process.
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n!)
+- **Average Case:** O(n!)
+- **Worst Case:** O(n!)
 
-   ```cpp
-       if(idx == tiles.size()) return;
-   ```
+The time complexity is dominated by the need to generate all possible subsequences, where n is the length of the input string.
 
-6. **Exploring Tile Combinations**:
-   A loop iterates through each tile in the `tiles` string. If a tile at index `i` has not been visited (`!vis.count(i)`), we proceed to include it in the current combination.
+### Space Complexity 💾
+- **Best Case:** O(1)
+- **Worst Case:** O(2^n)
 
-   ```cpp
-       for(int i = 0; i < tiles.size(); i++) {
-           if(!vis.count(i)) {
-   ```
+The space complexity is O(2^n) due to the set storing all distinct subsequences. The worst case occurs when all subsequences are distinct.
 
-7. **Marking Tiles as Used**:
-   The current tile index `i` is added to the `vis` set to indicate that this tile is currently being used in the combination.
-
-   ```cpp
-               vis.insert(i);
-   ```
-
-8. **Storing the Combination**:
-   The combination formed by appending the current tile to `res` is inserted into the `ans` set to ensure uniqueness.
-
-   ```cpp
-               ans.insert(res + tiles[i]);
-   ```
-
-9. **Recursive Call**:
-   The `gen` function is called recursively, incrementing the index to explore further combinations that include the current tile.
-
-   ```cpp
-               gen(tiles, idx + 1, res + tiles[i], ans, vis);
-   ```
-
-10. **Backtracking**:
-   After exploring combinations with the current tile, we remove the index from `vis`, allowing the tile to be used in other combinations.
-
-   ```cpp
-               vis.erase(i);
-           }
-       }
-   }
-   ```
-
-11. **Return Statement**:
-   The `numTilePossibilities` function returns the size of the `ans` set, which represents the total number of unique tile arrangements.
-
-   ```cpp
-   return ans.size();
-   }
-   ```
-
-### Complexity Analysis
-- **Time Complexity**: The time complexity of this algorithm can be estimated as \(O(N!)\), where \(N\) is the length of the `tiles` string. This is because we are generating all possible permutations of the string, which grows factorially as the number of tiles increases. The set operations (insertion and lookup) are average \(O(1)\) time, but due to the recursive nature, the depth can lead to exponential growth in combinations.
-  
-- **Space Complexity**: The space complexity is \(O(N)\) due to the space used by the recursion stack in the backtracking approach and the space used to store unique combinations in the set. In the worst case, the set can hold up to \(N!\) combinations, depending on the tiles provided.
-
-### Conclusion
-The provided C++ code efficiently calculates the number of distinct combinations that can be formed using a given set of tiles. By leveraging backtracking and a set to store unique combinations, the solution systematically explores all possible arrangements, ensuring no duplicates. This approach is particularly effective for generating combinations from a collection with potentially repeating elements.
-
-This implementation highlights the power of recursion in solving combinatorial problems and showcases efficient handling of unique data using sets. For larger strings of tiles, the performance may vary, but the algorithm remains an excellent approach for understanding the fundamentals of combinatorial generation and backtracking techniques.
-
-In summary, this solution provides a robust and efficient way to count unique tile arrangements, making it suitable for various applications, including games and puzzles that involve string manipulations.
+**Happy Coding! 🎉**
 
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/letter-tile-possibilities/description/)

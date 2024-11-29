@@ -14,108 +14,88 @@ img_src = ""
 youtube = "aBMFrPs2I5c"
 youtube_upload_date="2023-04-01"
 youtube_thumbnail="https://i.ytimg.com/vi/aBMFrPs2I5c/maxresdefault.jpg"
+comments = true
 +++
 
 
 
 ---
-**Code:**
+You are given a circular integer array arr and an integer k. In this circular array, the first element follows after the last one, and the last element precedes the first one. Your task is to determine the minimum number of operations required to make the sum of every subarray of length k equal. In each operation, you can pick any element in the array and either increase or decrease it by 1.
+<!--more-->
+{{< dots >}}
+### Input Representations 📥
+- **Input:** You are given a circular integer array arr and an integer k, which is the length of the subarrays to be considered. The array arr contains integers, and the subarray length k determines how the sum of elements is evaluated.
+- **Example:** `arr = [3, 8, 4, 6], k = 3`
+- **Constraints:**
+	- 1 <= k <= arr.length <= 10^5
+	- 1 <= arr[i] <= 10^9
 
-{{< highlight cpp >}}
-class Solution {
-public:
-    
-    long long solve(vector<int> nums) {
-        if(nums.size() == 0) return 0;
-        sort(nums.begin(), nums.end());
-        int hit = nums[nums.size() / 2];
-        long long res = 0;
-        for(int i = 0; i < nums.size(); i++)
-            res += abs(hit - nums[i]);
-        return res;
-    }
-    
-    long long makeSubKSumEqual(vector<int>& arr, int k) {
-        int n = arr.size();
-        set<int> cnt;
-        long long res = 0;
-        for(int i = 0; i < n; i++) {
-            
-            int j = i;
-            vector<int> nums;
-            while(!cnt.count(j)) {
-                cnt.insert(j);
-                nums.push_back(arr[j]);
-                j = (j + k) % n;
-            }
-            res += solve(nums);
-        }
-        
-        return res;
-    }
-};
-{{< /highlight >}}
----
+{{< dots >}}
+### Output Specifications 📤
+- **Output:** Return the minimum number of operations required to make the sum of each subarray of length k equal.
+- **Example:** `Output: 4`
+- **Constraints:**
+	- The output is a single integer representing the minimum number of operations.
 
-### Problem Statement
+{{< dots >}}
+### Core Logic 🔍
+**Goal:** To calculate the minimum number of operations needed to equalize the sum of all subarrays of length k.
 
-The task is to modify an array `arr` such that elements at every `k`-th position are equal by performing a series of operations. The operation is to make all elements in each cycle of `k`-th positions equal by minimizing the total cost. The cost is defined as the sum of absolute differences between the elements in the cycle and the median element of that cycle.
+- For each possible subarray, group the elements based on their relative positions, taking the circular nature into account.
+- For each group of elements, find the median value and calculate the cost of transforming the group to have all elements equal to the median.
+- Sum up the costs for all groups to determine the minimum number of operations.
+{{< dots >}}
+### Problem Assumptions ✅
+- The array arr is circular, meaning the end wraps around to the beginning.
+{{< dots >}}
+## Examples 🧩
+- **Input:** `arr = [1, 4, 1, 3], k = 2`  \
+  **Explanation:** In this case, we need to ensure that every subarray of length 2 has the same sum. After performing one operation on index 1 (changing its value to 3), all subarrays will have a sum of 4, and the result is 1 operation.
 
-### Approach
+- **Input:** `arr = [2, 5, 5, 7], k = 3`  \
+  **Explanation:** In this case, we need to perform three operations on index 0 to make it equal to 5 and two operations on index 3 to make it equal to 5. After these operations, every subarray of length 3 will sum to 15, and the result is 5 operations.
 
-To solve the problem, we can break the task into the following steps:
+{{< dots >}}
+## Approach 🚀
+The goal is to compute the minimal number of operations needed to equalize the sum of all subarrays of length k. This is done by grouping elements based on their position within subarrays, adjusting them to minimize the overall cost.
 
-1. **Grouping Elements Based on Indices Modulo k**: 
-   The first observation is that the elements that need to be made equal are grouped by their indices modulo `k`. This means that we can treat the array as having `k` separate groups. The elements in the group with indices `i, i+k, i+2k, ...` form a cycle and should be adjusted to the same value.
-
-2. **Finding the Minimum Cost to Equalize a Group**: 
-   To minimize the cost of equalizing a group, we should convert all elements in the group to the median of the group. The reason for this is that the median minimizes the sum of absolute differences. This is a well-known property of the median in statistics. So, for each cycle, we find the median and compute the cost to convert every element to the median.
-
-3. **Computing the Result**: 
-   For each cycle, we compute the total cost of making all elements equal to the median and sum up these costs to get the final result.
-
-### Code Breakdown (Step by Step)
-
-#### 1. **Helper Function to Compute the Cost for a Group**:
-
+### Initial Thoughts 💭
+- The array is circular, meaning indices must be treated modulo the array length.
+- The sum of each subarray of length k must be equalized by modifying individual elements.
+- One potential approach is to find the median value of each group of elements that appear at the same relative position in the subarrays and then adjust all the elements to this median.
+{{< dots >}}
+### Edge Cases 🌐
+- An empty array should return 0 operations.
+- The array can have up to 100,000 elements, so the solution must scale efficiently with the input size.
+- Arrays with all identical values should require 0 operations.
+- Make sure the algorithm handles large integers and computes the result within the given time constraints.
+{{< dots >}}
+## Code 💻
 ```cpp
+
 long long solve(vector<int> nums) {
     if(nums.size() == 0) return 0;
     sort(nums.begin(), nums.end());
-    int hit = nums[nums.size() / 2];  // The median of the sorted group
+    int hit = nums[nums.size() / 2];
     long long res = 0;
     for(int i = 0; i < nums.size(); i++)
-        res += abs(hit - nums[i]);  // Sum of absolute differences
+        res += abs(hit - nums[i]);
     return res;
 }
-```
 
-- **Purpose**: This function computes the total cost of making all elements in a given group equal to the median of the group.
-- **Steps**:
-  - First, we sort the array of elements. This allows us to easily find the median element, which is the middle element in a sorted array.
-  - We then calculate the sum of absolute differences between each element and the median.
-  - Finally, we return the total cost.
-
-#### 2. **Main Function to Solve the Problem**:
-
-```cpp
 long long makeSubKSumEqual(vector<int>& arr, int k) {
     int n = arr.size();
-    set<int> cnt;  // Set to track visited elements
-    long long res = 0;  // Final result
-    
+    set<int> cnt;
+    long long res = 0;
     for(int i = 0; i < n; i++) {
+        
         int j = i;
         vector<int> nums;
-        
-        // Grouping elements based on their indices modulo k
         while(!cnt.count(j)) {
-            cnt.insert(j);  // Mark this element as visited
-            nums.push_back(arr[j]);  // Add the element to the current group
-            j = (j + k) % n;  // Move to the next index in the cycle
+            cnt.insert(j);
+            nums.push_back(arr[j]);
+            j = (j + k) % n;
         }
-        
-        // Calculate the cost for this group
         res += solve(nums);
     }
     
@@ -123,40 +103,153 @@ long long makeSubKSumEqual(vector<int>& arr, int k) {
 }
 ```
 
-- **Purpose**: This function calculates the minimum cost required to make all elements at each `k`-th position equal.
-- **Steps**:
-  - **Initialize Variables**:
-    - `n` is the size of the array `arr`.
-    - `cnt` is a set used to keep track of the elements we've already processed to avoid redundant work.
-    - `res` is the variable that accumulates the total cost.
-  
-  - **Iterating Through the Array**:
-    - For each index `i` in the array, we form a cycle of indices by repeatedly adding `k` to `i` and taking the modulo `n` to wrap around the array. This forms the cycle of indices that need to be equalized.
-    - `nums` is a vector that stores the elements in the current cycle.
-    - We use a `while` loop to keep adding elements to `nums` until we've visited all elements in the current cycle, and mark the indices as visited by adding them to the `cnt` set.
-  
-  - **Calculate Cost for Each Group**:
-    - Once a cycle is formed, we call the `solve` function to compute the cost of making all elements in this group equal to the median.
-    - We accumulate this cost in `res`.
-  
-  - **Return the Final Result**: After processing all cycles, we return the accumulated cost `res`.
+This is a solution for the problem of making subarrays with a given length k have equal sum. It first solves each subarray and then adds up the results.
 
-### Complexity Analysis
+{{< dots >}}
+### Step-by-Step Breakdown 🛠️
+1. **Function Declaration**
+	```cpp
+	long long solve(vector<int> nums) {
+	```
+	The function 'solve' takes a vector of integers and calculates the minimum cost of making all elements equal by using the median.
 
-#### Time Complexity:
-- **Sorting**: Sorting the elements in each group takes \(O(m \log m)\), where \(m\) is the size of the group. Since there are at most \(k\) different groups, the total sorting cost for all groups is \(O(n \log n)\), where \(n\) is the size of the array.
-- **Cycle Construction and Cost Calculation**: For each element in the array, we process it exactly once. Constructing the cycles and calculating the cost for each group both take linear time relative to the size of the array. Hence, this step takes \(O(n)\).
-  
-- **Overall Time Complexity**: The overall time complexity is dominated by the sorting step, which is \(O(n \log n)\).
+2. **Condition Check**
+	```cpp
+	    if(nums.size() == 0) return 0;
+	```
+	Checks if the input vector is empty. If it is, the function returns 0.
 
-#### Space Complexity:
-- **Auxiliary Space**: The space used by the `cnt` set and the `nums` vector is proportional to the number of elements in the array, so the space complexity is \(O(n)\).
-  
-- **Overall Space Complexity**: The overall space complexity is \(O(n)\), as we only need space for storing the elements of the current cycle and tracking the visited elements.
+3. **Sorting**
+	```cpp
+	    sort(nums.begin(), nums.end());
+	```
+	Sorts the input vector 'nums' to make it easier to find the median.
 
-### Conclusion
+4. **Median Calculation**
+	```cpp
+	    int hit = nums[nums.size() / 2];
+	```
+	Finds the median element in the sorted vector. This will be the target value for all elements.
 
-This solution efficiently calculates the minimum cost required to make elements at each `k`-th index equal by grouping elements based on their indices modulo `k` and minimizing the cost within each group. The algorithm leverages sorting and Kadane's-like logic for calculating the cost in each cycle. The overall time complexity is \(O(n \log n)\), which makes it feasible for large inputs. This approach is optimal in terms of both time and space, providing a solution to the problem in a systematic and efficient manner.
+5. **Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Initializes the result variable 'res' to accumulate the total cost.
+
+6. **Loop**
+	```cpp
+	    for(int i = 0; i < nums.size(); i++)
+	```
+	Iterates over each element of the sorted vector to calculate the cost of converting each element to the median.
+
+7. **Cost Calculation**
+	```cpp
+	        res += abs(hit - nums[i]);
+	```
+	Adds the absolute difference between the median and the current element to the result.
+
+8. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the final accumulated cost.
+
+9. **Function Declaration**
+	```cpp
+	long long makeSubKSumEqual(vector<int>& arr, int k) {
+	```
+	The function 'makeSubKSumEqual' calculates the total cost of making all subarrays of length k equal using the 'solve' function.
+
+10. **Size Calculation**
+	```cpp
+	    int n = arr.size();
+	```
+	Gets the size of the input array 'arr'.
+
+11. **Set Initialization**
+	```cpp
+	    set<int> cnt;
+	```
+	Initializes a set 'cnt' to keep track of the indices that have already been processed.
+
+12. **Result Initialization**
+	```cpp
+	    long long res = 0;
+	```
+	Initializes the result variable 'res' to accumulate the total cost.
+
+13. **Loop**
+	```cpp
+	    for(int i = 0; i < n; i++) {
+	```
+	Iterates over each element of the input array.
+
+14. **Inner Loop Initialization**
+	```cpp
+	        int j = i;
+	```
+	Sets up the inner loop to track the indices of the subarray.
+
+15. **Vector Initialization**
+	```cpp
+	        vector<int> nums;
+	```
+	Initializes an empty vector 'nums' to store the elements of the current subarray.
+
+16. **Subarray Formation**
+	```cpp
+	        while(!cnt.count(j)) {
+	```
+	Processes the current element of the subarray if it hasn't been processed before.
+
+17. **Mark Element Processed**
+	```cpp
+	            cnt.insert(j);
+	```
+	Marks the current index as processed by inserting it into the set.
+
+18. **Push Element to Subarray**
+	```cpp
+	            nums.push_back(arr[j]);
+	```
+	Adds the element at the current index to the subarray vector.
+
+19. **Next Index Calculation**
+	```cpp
+	            j = (j + k) % n;
+	```
+	Calculates the next index in the subarray by adding k and applying modulo to wrap around the array.
+
+20. **Subarray Cost Calculation**
+	```cpp
+	        res += solve(nums);
+	```
+	Calculates the cost of making the current subarray equal using the 'solve' function and adds it to the result.
+
+21. **Return Statement**
+	```cpp
+	    return res;
+	```
+	Returns the total accumulated cost of making all subarrays equal.
+
+{{< dots >}}
+## Complexity Analysis 📊
+### Time Complexity ⏳
+- **Best Case:** O(n log n)
+- **Average Case:** O(n log n)
+- **Worst Case:** O(n log n)
+
+The time complexity is dominated by the sorting operation when finding the median of each group, which takes O(n log n) time.
+
+### Space Complexity 💾
+- **Best Case:** O(k)
+- **Worst Case:** O(n)
+
+The space complexity is O(n) in the worst case due to the need to store groupings and calculate costs.
+
+**Happy Coding! 🎉**
+
 
 [`Link to LeetCode Lab`](https://leetcode.com/problems/make-k-subarray-sums-equal/description/)
 
